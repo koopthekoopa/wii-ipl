@@ -1,0 +1,7 @@
+/*
+    *** STUB ***
+*/
+void PPCHalt() {
+}
+
+

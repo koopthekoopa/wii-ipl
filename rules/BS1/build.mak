@@ -1,0 +1,4 @@
+BS1_OBJ = $(OBJECT_ROOT)/$(BS1_ASM:.s=.o)
+
+$(BS1_OBJ): $(ASSEMBLY_ROOT)/$(BS1_ASM)
+	$(call BuildMWCCASMSources,$(INCLUDE_ROOT),$(CW_GC_30A3))

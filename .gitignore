@@ -1,0 +1,54 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.dol
+*.elf
+
+# Exclusive for decomp
+.private/*
+.web_branch/*
+tools/GC/*
+tools/Wii/*
+tools/src/*
+tools/powerpc-eabi-embedspu
+tools/*.exe
+tools/info.txt
+.vscode/settings.json
+*.bat
+*.img
+*.bin
+*.map
+*.log
+READMEcomp.md
+objdiff.json
+*.lnk
+

@@ -1,0 +1,20 @@
+#ifndef MSL_CSTRING_H
+#define MSL_CSTRING_H
+
+#include <string.h>
+
+#ifdef __cplusplus
+
+namespace std {
+    // MSL/memory.h
+    using ::memcpy;
+    using ::memset;
+    
+    using ::strlen;
+} // namespace std
+
+#endif
+
+#endif // MSL_CSTRING_H
+
+

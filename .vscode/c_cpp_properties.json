@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "includePath": [
+                "${workspaceFolder}/include/**",
+                "${workspaceFolder}/libs/MSL/include/**",
+                "${workspaceFolder}/libs/MetroTRK/include/**",
+                "${workspaceFolder}/libs/Runtime/include/**",
+                "${workspaceFolder}/libs/RVL_SDK/include/**",
+                "${workspaceFolder}/libs/RevoEX/include/**"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++03"
+        }
+    ],
+    "version": 4
+}
