@@ -71,9 +71,6 @@ If you have not got Wine installed, You will need to follow [this guide](https:/
 |`ipl.43U.app` (Version 4.3U)|`26116613f624061ba99c8d1a299aaa6efa85670d`|
 |`ipl.43E.app` (Version 4.3E)|`2ebea6ed22473857ed64b12daa71ae2d1ed61708`|
 
-# Contributing?
-After I have splitted every unit, I will plan to allow contributions. But for now I haven't finished splitting the units soooo...
-
 # Credits
 [decomp-toolkit](https://www.github.com/encounter/decomp-toolkit) - A tool that can do a lot and will make decompiling GameCube/Wii games easier and better. Special thanks to the every contributer :D   
 [objdiff](https://www.github.com/encounter/objdiff) - Used to check whenever if the compiled object is matching or not.   

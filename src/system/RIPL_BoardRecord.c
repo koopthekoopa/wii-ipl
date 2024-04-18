@@ -5,7 +5,6 @@
 #define RBR_HEADER_SIZE     0x0140
 #define RBR_UNK_TYPE        1
 
-// this ain't right... wtf
 u32 dataLoc1 = 'txt\0';
 u32* RBRFileType_Txt = &dataLoc1;
 u32 dataLoc2 = 'odh\0';
@@ -42,7 +41,6 @@ u8* RBRGetPicture(u32* rbrData, s32* unkData) {
 
     return ret;
 }
-
 
 /*
     @Address 0x81332BE0
