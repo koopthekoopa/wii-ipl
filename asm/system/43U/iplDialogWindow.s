@@ -4148,7 +4148,7 @@
 	.4byte 0x70000000
 .endobj lbl_81696190
 
-# 0x816986C0 - 0x816986D0
+# 0x816986C0 - 0x816986D8
 .section .sbss, "wa", @nobits
 .balign 8
 
@@ -4159,3 +4159,7 @@
 .obj lbl_816986C8, global
 	.skip 0x8
 .endobj lbl_816986C8
+
+.obj lbl_816986D0, global
+	.skip 0x8
+.endobj lbl_816986D0

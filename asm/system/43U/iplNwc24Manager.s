@@ -1,6 +1,15 @@
 .include "macros.inc"
 .file "iplNwc24Manager.cpp"
 
+# 0x81089620 - 0x81089720
+.section .bss, "wa", @nobits
+.balign 8
+
+# ipl::nwc24::Manager::smArg
+.obj smArg__Q33ipl5nwc247Manager, global
+	.skip 0x100
+.endobj smArg__Q33ipl5nwc247Manager
+
 # 0x8134197C - 0x81344188
 .text
 .balign 4
@@ -28,8 +37,8 @@
 /* 813419C4 0000FDC4  38 A0 00 20 */	li r5, 0x20
 /* 813419C8 0000FDC8  48 2B 67 0D */	bl fn_815F80D4
 /* 813419CC 0000FDCC  90 7E 09 FC */	stw r3, 0x9fc(r30)
-/* 813419D0 0000FDD0  3C 60 81 09 */	lis r3, mMac__Q33ipl6socket13SocketSetting@ha
-/* 813419D4 0000FDD4  38 63 96 20 */	addi r3, r3, mMac__Q33ipl6socket13SocketSetting@l
+/* 813419D0 0000FDD0  3C 60 81 09 */	lis r3, smArg__Q33ipl5nwc247Manager@ha
+/* 813419D4 0000FDD4  38 63 96 20 */	addi r3, r3, smArg__Q33ipl5nwc247Manager@l
 /* 813419D8 0000FDD8  38 80 00 00 */	li r4, 0x0
 /* 813419DC 0000FDDC  38 A0 01 00 */	li r5, 0x100
 /* 813419E0 0000FDE0  4B FE E9 55 */	bl memset
@@ -1040,11 +1049,11 @@
 /* 813426CC 00010ACC  38 79 00 00 */	addi r3, r25, 0x0
 /* 813426D0 00010AD0  4C C6 31 82 */	crclr cr1eq
 /* 813426D4 00010AD4  48 1E BF CD */	bl OSReport
-/* 813426D8 00010AD8  3D C0 81 09 */	lis r14, mMac__Q33ipl6socket13SocketSetting@ha
+/* 813426D8 00010AD8  3D C0 81 09 */	lis r14, smArg__Q33ipl5nwc247Manager@ha
 /* 813426DC 00010ADC  38 80 01 00 */	li r4, 0x100
-/* 813426E0 00010AE0  38 6E 96 20 */	addi r3, r14, mMac__Q33ipl6socket13SocketSetting@l
+/* 813426E0 00010AE0  38 6E 96 20 */	addi r3, r14, smArg__Q33ipl5nwc247Manager@l
 /* 813426E4 00010AE4  48 16 88 15 */	bl fn_814AAEF8
-/* 813426E8 00010AE8  39 CE 96 20 */	addi r14, r14, mMac__Q33ipl6socket13SocketSetting@l
+/* 813426E8 00010AE8  39 CE 96 20 */	addi r14, r14, smArg__Q33ipl5nwc247Manager@l
 /* 813426EC 00010AEC  38 79 00 1D */	addi r3, r25, 0x1d
 /* 813426F0 00010AF0  80 8E 00 04 */	lwz r4, 0x4(r14)
 /* 813426F4 00010AF4  4C C6 31 82 */	crclr cr1eq

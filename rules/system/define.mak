@@ -21,4 +21,5 @@ SYSTEM_SOURCES =	$(VERSION)/rvl_dec.s \
 					$(VERSION)/iplPointer.s \
 					$(VERSION)/iplPointerCore.s \
 					$(VERSION)/iplDialogWindow.s \
-					$(VERSION)/iplHomeButtonMenu.s
+					$(VERSION)/iplHomeButtonMenu.s \
+					$(VERSION)/iplNandSDWorker.s
