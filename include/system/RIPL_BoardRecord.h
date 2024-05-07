@@ -14,10 +14,10 @@ typedef struct RBRUnkStruct {
     s32 unk;
 } RBRUnkStruct;
 
-extern u32* RBRFileType_Txt;
-extern u32* RBRFileType_Odh;
-extern u32* RBRFileType_Dat;
-extern u32* RBRFileType_Log;
+extern u32 RBRFileType_Txt;
+extern u32 RBRFileType_Odh;
+extern u32 RBRFileType_Dat;
+extern u32 RBRFileType_Log;
 
 extern u8* RBRGetPicture(u32* rbrData, s32* unkData);
 extern void RBRGetPosRect(f32* left, f32* right, f32* top, f32* bottom);

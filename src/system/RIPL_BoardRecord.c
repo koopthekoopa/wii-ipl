@@ -5,20 +5,15 @@
 #define RBR_HEADER_SIZE     0x0140
 #define RBR_UNK_TYPE        1
 
-u32 dataLoc1 = 'txt\0';
-u32* RBRFileType_Txt = &dataLoc1;
-u32 dataLoc2 = 'odh\0';
-u32* RBRFileType_Odh = &dataLoc2;
-u32 dataLoc3 = 'dat\0';
-u32* RBRFileType_Dat = &dataLoc3;
-u32 dataLoc4 = 'log\0';
-u32* RBRFileType_Log = &dataLoc4;
+u32 RBRFileType_Txt = 'txt\0';
+u32 RBRFileType_Odh = 'odh\0';
+u32 RBRFileType_Dat = 'dat\0';
+u32 RBRFileType_Log = 'log\0';
 
 /*
     @Address 0x81332B48
     @Size 0x98
 */
-// it has to be a structure instead of an array,,,
 u8* RBRGetPicture(u32* rbrData, s32* unkData) {
     u8* ret = NULL;
 
