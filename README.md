@@ -30,7 +30,7 @@ For people using WSL should follow the [Linux](#linux) section.
 If you do not have either MSYS2 or WSL then make sure that GCC and Make are in PATH environment variable.   
 You will also need to install Python 3 yourself [here](https://www.python.org/downloads/) (make sure that python.exe is in your PATH variable).
 
-### Linux (only tested on Ubuntu 23.04)
+### Linux   
 
 For linux users, you will need to type this in:
 ```
