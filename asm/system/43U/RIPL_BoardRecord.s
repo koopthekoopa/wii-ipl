@@ -96,34 +96,34 @@
 .section .sdata, "wa"
 .balign 8
 
-.obj lbl_81696040, global
+.obj RBRFileType_Txt, global
 	.string "txt"
-.endobj lbl_81696040
+.endobj RBRFileType_Txt
 
-.obj lbl_81696044, global
-	.4byte lbl_81696040
-.endobj lbl_81696044
+.obj RBRFileType_Txt_Ptr, global
+	.4byte RBRFileType_Txt
+.endobj RBRFileType_Txt_Ptr
 
-.obj lbl_81696048, global
+.obj RBRFileType_Odh, global
 	.string "odh"
-.endobj lbl_81696048
+.endobj RBRFileType_Odh
 
-.obj lbl_8169604C, global
-	.4byte lbl_81696048
-.endobj lbl_8169604C
+.obj RBRFileType_Odh_Ptr, global
+	.4byte RBRFileType_Odh
+.endobj RBRFileType_Odh_Ptr
 
-.obj lbl_81696050, global
+.obj RBRFileType_Dat, global
 	.string "dat"
-.endobj lbl_81696050
+.endobj RBRFileType_Dat
 
-.obj lbl_81696054, global
-	.4byte lbl_81696050
-.endobj lbl_81696054
+.obj RBRFileType_Dat_Ptr, global
+	.4byte RBRFileType_Dat
+.endobj RBRFileType_Dat_Ptr
 
-.obj lbl_81696058, global
+.obj RBRFileType_Log, global
 	.string "log"
-.endobj lbl_81696058
+.endobj RBRFileType_Log
 
-.obj lbl_8169605C, global
-	.4byte lbl_81696058
-.endobj lbl_8169605C
+.obj RBRFileType_Log_Ptr, global
+	.4byte RBRFileType_Log
+.endobj RBRFileType_Log_Ptr

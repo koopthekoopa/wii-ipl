@@ -35,7 +35,7 @@
 
 # Exclusive for decomp
 .private/*
-.web_branch/*
+.web/*
 tools/GC/*
 tools/Wii/*
 tools/src/*

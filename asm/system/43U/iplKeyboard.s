@@ -714,7 +714,7 @@
 /* 81355660 00023A60  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
 /* 81355664 00023A64  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
 /* 81355668 00023A68  80 63 00 94 */	lwz r3, 0x94(r3)
-/* 8135566C 00023A6C  48 00 28 71 */	bl fn_81357EDC
+/* 8135566C 00023A6C  48 00 28 71 */	bl isFinished__Q33ipl8savedata7ManagerFPQ33ipl4nand4File
 /* 81355670 00023A70  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81355674 00023A74  41 82 00 2C */	beq .L_813556A0
 /* 81355678 00023A78  80 7B 00 38 */	lwz r3, 0x38(r27)
@@ -1652,10 +1652,10 @@
 /* 81356330 00024730  38 9F 00 2E */	addi r4, r31, 0x2e
 /* 81356334 00024734  3B DE 90 08 */	addi r30, r30, smArg__Q23ipl6System@l
 /* 81356338 00024738  80 7E 00 94 */	lwz r3, 0x94(r30)
-/* 8135633C 0002473C  48 00 1A B5 */	bl fn_81357DF0
+/* 8135633C 0002473C  48 00 1A B5 */	bl setMemoSetting__Q33ipl8savedata7ManagerFRCQ49textinput6extend8savedata11MemoSetting
 /* 81356340 00024740  80 7E 00 94 */	lwz r3, 0x94(r30)
 /* 81356344 00024744  80 9E 00 28 */	lwz r4, 0x28(r30)
-/* 81356348 00024748  48 00 1A ED */	bl fn_81357E34
+/* 81356348 00024748  48 00 1A ED */	bl flushAsync__Q33ipl8savedata7ManagerFPQ23EGG4Heap
 /* 8135634C 0002474C  90 7F 00 38 */	stw r3, 0x38(r31)
 .L_81356350:
 /* 81356350 00024750  80 01 00 34 */	lwz r0, 0x34(r1)

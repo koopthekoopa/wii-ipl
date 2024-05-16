@@ -1,8 +1,10 @@
 #include "ipl.h"
 
-extern u32 lbl_816986DC;
-
 namespace ipl {
+    /*
+        @Address 0x81350EB4
+        @Size 0xAC
+    */
     BOOL NandSDWorker::check_header_base(const u8 *bnrData, u32 *hashOut) {
     #define IMET_HDR_HASH *(u32 *)(bnrData + 4) 
     #define IMET_HDR_VERSION *(u32 *)(bnrData + 8)

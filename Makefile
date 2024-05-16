@@ -14,6 +14,7 @@ endif
 
 ### Directory defines
 BUILD_ROOT		= build/$(VERSION)
+CONFIG_ROOT		= config/$(VERSION)
 OBJECT_ROOT		= $(BUILD_ROOT)/obj
 ASSEMBLY_ROOT	= asm
 SOURCE_ROOT		= src

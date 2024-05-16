@@ -321,9 +321,9 @@
 /* 8133AEB8 000092B8  3C 80 81 34 */	lis r4, calcCSThread__Q33ipl7channel20ChannelScriptManagerFv@ha
 /* 8133AEBC 000092BC  80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
 /* 8133AEC0 000092C0  38 84 B1 30 */	addi r4, r4, calcCSThread__Q33ipl7channel20ChannelScriptManagerFv@l
-/* 8133AEC4 000092C4  48 01 EB 99 */	bl fn_81359A5C
+/* 8133AEC4 000092C4  48 01 EB 99 */	bl setCalcFunc__Q33ipl7channel9RsoThreadFPFv_v
 /* 8133AEC8 000092C8  80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
-/* 8133AECC 000092CC  48 01 EB 15 */	bl fn_813599E0
+/* 8133AECC 000092CC  48 01 EB 15 */	bl start__Q33ipl7channel9RsoThreadFv
 /* 8133AED0 000092D0  38 00 00 01 */	li r0, 0x1
 /* 8133AED4 000092D4  38 60 00 01 */	li r3, 0x1
 /* 8133AED8 000092D8  90 0D A6 6C */	stw r0, lbl_816986AC@sda21(r0)
@@ -424,7 +424,7 @@
 .fn finish__Q33ipl7channel20ChannelScriptManagerFv, global
 /* 8133B024 00009424  80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
 /* 8133B028 00009428  38 80 00 00 */	li r4, 0x0
-/* 8133B02C 0000942C  48 01 EA 30 */	b fn_81359A5C
+/* 8133B02C 0000942C  48 01 EA 30 */	b setCalcFunc__Q33ipl7channel9RsoThreadFPFv_v
 .endfn finish__Q33ipl7channel20ChannelScriptManagerFv
 
 # ipl::channel::ChannelScriptManager::destroy()

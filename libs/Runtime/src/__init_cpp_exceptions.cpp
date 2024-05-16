@@ -17,10 +17,10 @@ extern void __fini_cpp_exceptions();
 #endif
 
 static inline void __exception_info_constants(__eti_init_info* info, char** R2) {
-	register char* temp;
-	asm { mr temp, r2; }
-	*R2 = temp;
-	info = _eti_init_info;
+    register char* temp;
+    asm { mr temp, r2; }
+    *R2 = temp;
+    info = _eti_init_info;
 }
 
 /*
@@ -30,7 +30,7 @@ static inline void __exception_info_constants(__eti_init_info* info, char** R2) 
 extern void __init_cpp_exceptions() {
     if (fragmentID == -2) {
         char* R2;
-	    __eti_init_info* info;
+        __eti_init_info* info;
         __exception_info_constants(_eti_init_info, &R2);
         fragmentID = __register_fragment(_eti_init_info, R2);
     }
@@ -42,9 +42,9 @@ extern void __init_cpp_exceptions() {
 */
 extern void __fini_cpp_exceptions() {
     if (fragmentID != -2) {
-		__unregister_fragment(fragmentID);
-		fragmentID = -2;
-	}
+        __unregister_fragment(fragmentID);
+        fragmentID = -2;
+    }
 }
 
 #pragma force_active on

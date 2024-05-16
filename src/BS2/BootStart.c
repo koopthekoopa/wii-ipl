@@ -141,9 +141,6 @@ static asm void __init_registers() {
     blr
 }
 
-/*
-
-*/
 static void copy_rom_section(void* dest, void* source, unsigned int size) {
     if (size != 0 && dest != source) {
         memcpy(dest, source, size);
