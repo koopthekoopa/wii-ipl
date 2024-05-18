@@ -1,0 +1,889 @@
+.include "macros.inc"
+.file "iplNandWrapper.cpp"
+
+# 0x8135FC1C - 0x81360764
+.text
+.balign 4
+
+# ipl::nand::wrapper::Create(const char*, unsigned char, unsigned char)
+.fn Create__Q33ipl4nand7wrapperFPCcUcUc, global
+/* 8135FC1C 0002E01C  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8135FC20 0002E020  7C 08 02 A6 */	mflr r0
+/* 8135FC24 0002E024  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8135FC28 0002E028  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FC2C 0002E02C  48 29 98 95 */	bl _savegpr_27
+/* 8135FC30 0002E030  7C 7B 1B 78 */	mr r27, r3
+/* 8135FC34 0002E034  7C 9C 23 78 */	mr r28, r4
+/* 8135FC38 0002E038  7C BD 2B 78 */	mr r29, r5
+/* 8135FC3C 0002E03C  3B E0 00 00 */	li r31, 0x0
+.L_8135FC40:
+/* 8135FC40 0002E040  7F 63 DB 78 */	mr r3, r27
+/* 8135FC44 0002E044  7F 84 E3 78 */	mr r4, r28
+/* 8135FC48 0002E048  7F A5 EB 78 */	mr r5, r29
+/* 8135FC4C 0002E04C  48 20 40 4D */	bl fn_81563C98
+/* 8135FC50 0002E050  3B FF 00 01 */	addi r31, r31, 0x1
+/* 8135FC54 0002E054  7C 7E 1B 78 */	mr r30, r3
+/* 8135FC58 0002E058  7F E4 FB 78 */	mr r4, r31
+/* 8135FC5C 0002E05C  48 00 0A 89 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 8135FC60 0002E060  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8135FC64 0002E064  40 82 FF DC */	bne .L_8135FC40
+/* 8135FC68 0002E068  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 8135FC6C 0002E06C  40 82 00 08 */	bne .L_8135FC74
+/* 8135FC70 0002E070  3B C0 FF 80 */	li r30, -0x80
+.L_8135FC74:
+/* 8135FC74 0002E074  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FC78 0002E078  7F C3 F3 78 */	mr r3, r30
+/* 8135FC7C 0002E07C  48 29 98 91 */	bl _restgpr_27
+/* 8135FC80 0002E080  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8135FC84 0002E084  7C 08 03 A6 */	mtlr r0
+/* 8135FC88 0002E088  38 21 00 20 */	addi r1, r1, 0x20
+/* 8135FC8C 0002E08C  4E 80 00 20 */	blr
+.endfn Create__Q33ipl4nand7wrapperFPCcUcUc
+
+# ipl::nand::wrapper::Open(const char*, NANDFileInfo*, unsigned char)
+.fn Open__Q33ipl4nand7wrapperFPCcP12NANDFileInfoUc, global
+/* 8135FC90 0002E090  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8135FC94 0002E094  7C 08 02 A6 */	mflr r0
+/* 8135FC98 0002E098  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8135FC9C 0002E09C  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FCA0 0002E0A0  48 29 98 21 */	bl _savegpr_27
+/* 8135FCA4 0002E0A4  7C 7B 1B 78 */	mr r27, r3
+/* 8135FCA8 0002E0A8  7C 9C 23 78 */	mr r28, r4
+/* 8135FCAC 0002E0AC  7C BD 2B 78 */	mr r29, r5
+/* 8135FCB0 0002E0B0  3B E0 00 00 */	li r31, 0x0
+.L_8135FCB4:
+/* 8135FCB4 0002E0B4  7F 63 DB 78 */	mr r3, r27
+/* 8135FCB8 0002E0B8  7F 84 E3 78 */	mr r4, r28
+/* 8135FCBC 0002E0BC  7F A5 EB 78 */	mr r5, r29
+/* 8135FCC0 0002E0C0  48 20 55 AD */	bl fn_8156526C
+/* 8135FCC4 0002E0C4  3B FF 00 01 */	addi r31, r31, 0x1
+/* 8135FCC8 0002E0C8  7C 7E 1B 78 */	mr r30, r3
+/* 8135FCCC 0002E0CC  7F E4 FB 78 */	mr r4, r31
+/* 8135FCD0 0002E0D0  48 00 0A 15 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 8135FCD4 0002E0D4  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8135FCD8 0002E0D8  40 82 FF DC */	bne .L_8135FCB4
+/* 8135FCDC 0002E0DC  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 8135FCE0 0002E0E0  40 82 00 08 */	bne .L_8135FCE8
+/* 8135FCE4 0002E0E4  3B C0 FF 80 */	li r30, -0x80
+.L_8135FCE8:
+/* 8135FCE8 0002E0E8  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FCEC 0002E0EC  7F C3 F3 78 */	mr r3, r30
+/* 8135FCF0 0002E0F0  48 29 98 1D */	bl _restgpr_27
+/* 8135FCF4 0002E0F4  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8135FCF8 0002E0F8  7C 08 03 A6 */	mtlr r0
+/* 8135FCFC 0002E0FC  38 21 00 20 */	addi r1, r1, 0x20
+/* 8135FD00 0002E100  4E 80 00 20 */	blr
+.endfn Open__Q33ipl4nand7wrapperFPCcP12NANDFileInfoUc
+
+# ipl::nand::wrapper::Close(NANDFileInfo*)
+.fn Close__Q33ipl4nand7wrapperFP12NANDFileInfo, global
+/* 8135FD04 0002E104  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8135FD08 0002E108  7C 08 02 A6 */	mflr r0
+/* 8135FD0C 0002E10C  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8135FD10 0002E110  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FD14 0002E114  48 29 97 B5 */	bl _savegpr_29
+/* 8135FD18 0002E118  7C 7D 1B 78 */	mr r29, r3
+/* 8135FD1C 0002E11C  3B E0 00 00 */	li r31, 0x0
+.L_8135FD20:
+/* 8135FD20 0002E120  7F A3 EB 78 */	mr r3, r29
+/* 8135FD24 0002E124  48 20 57 C9 */	bl fn_815654EC
+/* 8135FD28 0002E128  3B FF 00 01 */	addi r31, r31, 0x1
+/* 8135FD2C 0002E12C  7C 7E 1B 78 */	mr r30, r3
+/* 8135FD30 0002E130  7F E4 FB 78 */	mr r4, r31
+/* 8135FD34 0002E134  48 00 09 B1 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 8135FD38 0002E138  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8135FD3C 0002E13C  40 82 FF E4 */	bne .L_8135FD20
+/* 8135FD40 0002E140  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 8135FD44 0002E144  40 82 00 08 */	bne .L_8135FD4C
+/* 8135FD48 0002E148  3B C0 FF 80 */	li r30, -0x80
+.L_8135FD4C:
+/* 8135FD4C 0002E14C  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FD50 0002E150  7F C3 F3 78 */	mr r3, r30
+/* 8135FD54 0002E154  48 29 97 C1 */	bl _restgpr_29
+/* 8135FD58 0002E158  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8135FD5C 0002E15C  7C 08 03 A6 */	mtlr r0
+/* 8135FD60 0002E160  38 21 00 20 */	addi r1, r1, 0x20
+/* 8135FD64 0002E164  4E 80 00 20 */	blr
+.endfn Close__Q33ipl4nand7wrapperFP12NANDFileInfo
+
+# ipl::nand::wrapper::Read(NANDFileInfo*, void*, unsigned long)
+.fn Read__Q33ipl4nand7wrapperFP12NANDFileInfoPvUl, global
+/* 8135FD68 0002E168  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8135FD6C 0002E16C  7C 08 02 A6 */	mflr r0
+/* 8135FD70 0002E170  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8135FD74 0002E174  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FD78 0002E178  48 29 97 49 */	bl _savegpr_27
+/* 8135FD7C 0002E17C  7C 7B 1B 78 */	mr r27, r3
+/* 8135FD80 0002E180  7C 9C 23 78 */	mr r28, r4
+/* 8135FD84 0002E184  7C BD 2B 78 */	mr r29, r5
+/* 8135FD88 0002E188  3B E0 00 00 */	li r31, 0x0
+.L_8135FD8C:
+/* 8135FD8C 0002E18C  7F 63 DB 78 */	mr r3, r27
+/* 8135FD90 0002E190  7F 84 E3 78 */	mr r4, r28
+/* 8135FD94 0002E194  7F A5 EB 78 */	mr r5, r29
+/* 8135FD98 0002E198  48 20 42 69 */	bl fn_81564000
+/* 8135FD9C 0002E19C  3B FF 00 01 */	addi r31, r31, 0x1
+/* 8135FDA0 0002E1A0  7C 7E 1B 78 */	mr r30, r3
+/* 8135FDA4 0002E1A4  7F E4 FB 78 */	mr r4, r31
+/* 8135FDA8 0002E1A8  48 00 09 3D */	bl _condition__Q33ipl4nand7wrapperFii
+/* 8135FDAC 0002E1AC  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8135FDB0 0002E1B0  40 82 FF DC */	bne .L_8135FD8C
+/* 8135FDB4 0002E1B4  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 8135FDB8 0002E1B8  40 82 00 08 */	bne .L_8135FDC0
+/* 8135FDBC 0002E1BC  3B C0 FF 80 */	li r30, -0x80
+.L_8135FDC0:
+/* 8135FDC0 0002E1C0  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FDC4 0002E1C4  7F C3 F3 78 */	mr r3, r30
+/* 8135FDC8 0002E1C8  48 29 97 45 */	bl _restgpr_27
+/* 8135FDCC 0002E1CC  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8135FDD0 0002E1D0  7C 08 03 A6 */	mtlr r0
+/* 8135FDD4 0002E1D4  38 21 00 20 */	addi r1, r1, 0x20
+/* 8135FDD8 0002E1D8  4E 80 00 20 */	blr
+.endfn Read__Q33ipl4nand7wrapperFP12NANDFileInfoPvUl
+
+# ipl::nand::wrapper::Write(NANDFileInfo*, const void*, unsigned long)
+.fn Write__Q33ipl4nand7wrapperFP12NANDFileInfoPCvUl, global
+/* 8135FDDC 0002E1DC  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8135FDE0 0002E1E0  7C 08 02 A6 */	mflr r0
+/* 8135FDE4 0002E1E4  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8135FDE8 0002E1E8  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FDEC 0002E1EC  48 29 96 D5 */	bl _savegpr_27
+/* 8135FDF0 0002E1F0  7C 7B 1B 78 */	mr r27, r3
+/* 8135FDF4 0002E1F4  7C 9C 23 78 */	mr r28, r4
+/* 8135FDF8 0002E1F8  7C BD 2B 78 */	mr r29, r5
+/* 8135FDFC 0002E1FC  3B E0 00 00 */	li r31, 0x0
+.L_8135FE00:
+/* 8135FE00 0002E200  7F 63 DB 78 */	mr r3, r27
+/* 8135FE04 0002E204  7F 84 E3 78 */	mr r4, r28
+/* 8135FE08 0002E208  7F A5 EB 78 */	mr r5, r29
+/* 8135FE0C 0002E20C  48 20 42 D5 */	bl fn_815640E0
+/* 8135FE10 0002E210  3B FF 00 01 */	addi r31, r31, 0x1
+/* 8135FE14 0002E214  7C 7E 1B 78 */	mr r30, r3
+/* 8135FE18 0002E218  7F E4 FB 78 */	mr r4, r31
+/* 8135FE1C 0002E21C  48 00 08 C9 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 8135FE20 0002E220  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8135FE24 0002E224  40 82 FF DC */	bne .L_8135FE00
+/* 8135FE28 0002E228  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 8135FE2C 0002E22C  40 82 00 08 */	bne .L_8135FE34
+/* 8135FE30 0002E230  3B C0 FF 80 */	li r30, -0x80
+.L_8135FE34:
+/* 8135FE34 0002E234  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FE38 0002E238  7F C3 F3 78 */	mr r3, r30
+/* 8135FE3C 0002E23C  48 29 96 D1 */	bl _restgpr_27
+/* 8135FE40 0002E240  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8135FE44 0002E244  7C 08 03 A6 */	mtlr r0
+/* 8135FE48 0002E248  38 21 00 20 */	addi r1, r1, 0x20
+/* 8135FE4C 0002E24C  4E 80 00 20 */	blr
+.endfn Write__Q33ipl4nand7wrapperFP12NANDFileInfoPCvUl
+
+# ipl::nand::wrapper::Seek(NANDFileInfo*, long, long)
+.fn Seek__Q33ipl4nand7wrapperFP12NANDFileInfoll, global
+/* 8135FE50 0002E250  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8135FE54 0002E254  7C 08 02 A6 */	mflr r0
+/* 8135FE58 0002E258  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8135FE5C 0002E25C  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FE60 0002E260  48 29 96 61 */	bl _savegpr_27
+/* 8135FE64 0002E264  7C 7B 1B 78 */	mr r27, r3
+/* 8135FE68 0002E268  7C 9C 23 78 */	mr r28, r4
+/* 8135FE6C 0002E26C  7C BD 2B 78 */	mr r29, r5
+/* 8135FE70 0002E270  3B E0 00 00 */	li r31, 0x0
+.L_8135FE74:
+/* 8135FE74 0002E274  7F 63 DB 78 */	mr r3, r27
+/* 8135FE78 0002E278  7F 84 E3 78 */	mr r4, r28
+/* 8135FE7C 0002E27C  7F A5 EB 78 */	mr r5, r29
+/* 8135FE80 0002E280  48 20 43 41 */	bl fn_815641C0
+/* 8135FE84 0002E284  3B FF 00 01 */	addi r31, r31, 0x1
+/* 8135FE88 0002E288  7C 7E 1B 78 */	mr r30, r3
+/* 8135FE8C 0002E28C  7F E4 FB 78 */	mr r4, r31
+/* 8135FE90 0002E290  48 00 08 55 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 8135FE94 0002E294  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8135FE98 0002E298  40 82 FF DC */	bne .L_8135FE74
+/* 8135FE9C 0002E29C  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 8135FEA0 0002E2A0  40 82 00 08 */	bne .L_8135FEA8
+/* 8135FEA4 0002E2A4  3B C0 FF 80 */	li r30, -0x80
+.L_8135FEA8:
+/* 8135FEA8 0002E2A8  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FEAC 0002E2AC  7F C3 F3 78 */	mr r3, r30
+/* 8135FEB0 0002E2B0  48 29 96 5D */	bl _restgpr_27
+/* 8135FEB4 0002E2B4  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8135FEB8 0002E2B8  7C 08 03 A6 */	mtlr r0
+/* 8135FEBC 0002E2BC  38 21 00 20 */	addi r1, r1, 0x20
+/* 8135FEC0 0002E2C0  4E 80 00 20 */	blr
+.endfn Seek__Q33ipl4nand7wrapperFP12NANDFileInfoll
+
+# ipl::nand::wrapper::GetLength(NANDFileInfo*, unsigned long*)
+.fn GetLength__Q33ipl4nand7wrapperFP12NANDFileInfoPUl, global
+/* 8135FEC4 0002E2C4  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8135FEC8 0002E2C8  7C 08 02 A6 */	mflr r0
+/* 8135FECC 0002E2CC  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8135FED0 0002E2D0  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FED4 0002E2D4  48 29 95 F1 */	bl _savegpr_28
+/* 8135FED8 0002E2D8  7C 7C 1B 78 */	mr r28, r3
+/* 8135FEDC 0002E2DC  7C 9D 23 78 */	mr r29, r4
+/* 8135FEE0 0002E2E0  3B E0 00 00 */	li r31, 0x0
+.L_8135FEE4:
+/* 8135FEE4 0002E2E4  7F 83 E3 78 */	mr r3, r28
+/* 8135FEE8 0002E2E8  7F A4 EB 78 */	mr r4, r29
+/* 8135FEEC 0002E2EC  48 20 4A 45 */	bl fn_81564930
+/* 8135FEF0 0002E2F0  3B FF 00 01 */	addi r31, r31, 0x1
+/* 8135FEF4 0002E2F4  7C 7E 1B 78 */	mr r30, r3
+/* 8135FEF8 0002E2F8  7F E4 FB 78 */	mr r4, r31
+/* 8135FEFC 0002E2FC  48 00 07 E9 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 8135FF00 0002E300  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8135FF04 0002E304  40 82 FF E0 */	bne .L_8135FEE4
+/* 8135FF08 0002E308  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 8135FF0C 0002E30C  40 82 00 08 */	bne .L_8135FF14
+/* 8135FF10 0002E310  3B C0 FF 80 */	li r30, -0x80
+.L_8135FF14:
+/* 8135FF14 0002E314  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FF18 0002E318  7F C3 F3 78 */	mr r3, r30
+/* 8135FF1C 0002E31C  48 29 95 F5 */	bl _restgpr_28
+/* 8135FF20 0002E320  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8135FF24 0002E324  7C 08 03 A6 */	mtlr r0
+/* 8135FF28 0002E328  38 21 00 20 */	addi r1, r1, 0x20
+/* 8135FF2C 0002E32C  4E 80 00 20 */	blr
+.endfn GetLength__Q33ipl4nand7wrapperFP12NANDFileInfoPUl
+
+# ipl::nand::wrapper::SafeClose(NANDFileInfo*)
+.fn SafeClose__Q33ipl4nand7wrapperFP12NANDFileInfo, global
+/* 8135FF30 0002E330  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8135FF34 0002E334  7C 08 02 A6 */	mflr r0
+/* 8135FF38 0002E338  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8135FF3C 0002E33C  48 20 5A 65 */	bl fn_815659A0
+/* 8135FF40 0002E340  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8135FF44 0002E344  41 82 00 08 */	beq .L_8135FF4C
+/* 8135FF48 0002E348  38 60 FF 80 */	li r3, -0x80
+.L_8135FF4C:
+/* 8135FF4C 0002E34C  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8135FF50 0002E350  7C 08 03 A6 */	mtlr r0
+/* 8135FF54 0002E354  38 21 00 10 */	addi r1, r1, 0x10
+/* 8135FF58 0002E358  4E 80 00 20 */	blr
+.endfn SafeClose__Q33ipl4nand7wrapperFP12NANDFileInfo
+
+# ipl::nand::wrapper::ReadDir(const char*, char*, unsigned long*)
+.fn ReadDir__Q33ipl4nand7wrapperFPCcPcPUl, global
+/* 8135FF5C 0002E35C  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8135FF60 0002E360  7C 08 02 A6 */	mflr r0
+/* 8135FF64 0002E364  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8135FF68 0002E368  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FF6C 0002E36C  48 29 95 55 */	bl _savegpr_27
+/* 8135FF70 0002E370  7C 7B 1B 78 */	mr r27, r3
+/* 8135FF74 0002E374  7C 9C 23 78 */	mr r28, r4
+/* 8135FF78 0002E378  7C BD 2B 78 */	mr r29, r5
+/* 8135FF7C 0002E37C  3B E0 00 00 */	li r31, 0x0
+.L_8135FF80:
+/* 8135FF80 0002E380  7F 63 DB 78 */	mr r3, r27
+/* 8135FF84 0002E384  7F 84 E3 78 */	mr r4, r28
+/* 8135FF88 0002E388  7F A5 EB 78 */	mr r5, r29
+/* 8135FF8C 0002E38C  48 20 43 85 */	bl fn_81564310
+/* 8135FF90 0002E390  3B FF 00 01 */	addi r31, r31, 0x1
+/* 8135FF94 0002E394  7C 7E 1B 78 */	mr r30, r3
+/* 8135FF98 0002E398  7F E4 FB 78 */	mr r4, r31
+/* 8135FF9C 0002E39C  48 00 07 49 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 8135FFA0 0002E3A0  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8135FFA4 0002E3A4  40 82 FF DC */	bne .L_8135FF80
+/* 8135FFA8 0002E3A8  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 8135FFAC 0002E3AC  40 82 00 08 */	bne .L_8135FFB4
+/* 8135FFB0 0002E3B0  3B C0 FF 80 */	li r30, -0x80
+.L_8135FFB4:
+/* 8135FFB4 0002E3B4  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FFB8 0002E3B8  7F C3 F3 78 */	mr r3, r30
+/* 8135FFBC 0002E3BC  48 29 95 51 */	bl _restgpr_27
+/* 8135FFC0 0002E3C0  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8135FFC4 0002E3C4  7C 08 03 A6 */	mtlr r0
+/* 8135FFC8 0002E3C8  38 21 00 20 */	addi r1, r1, 0x20
+/* 8135FFCC 0002E3CC  4E 80 00 20 */	blr
+.endfn ReadDir__Q33ipl4nand7wrapperFPCcPcPUl
+
+# ipl::nand::wrapper::CreateDir(const char*, unsigned char, unsigned char)
+.fn CreateDir__Q33ipl4nand7wrapperFPCcUcUc, global
+/* 8135FFD0 0002E3D0  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8135FFD4 0002E3D4  7C 08 02 A6 */	mflr r0
+/* 8135FFD8 0002E3D8  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8135FFDC 0002E3DC  39 61 00 20 */	addi r11, r1, 0x20
+/* 8135FFE0 0002E3E0  48 29 94 E1 */	bl _savegpr_27
+/* 8135FFE4 0002E3E4  7C 7B 1B 78 */	mr r27, r3
+/* 8135FFE8 0002E3E8  7C 9C 23 78 */	mr r28, r4
+/* 8135FFEC 0002E3EC  7C BD 2B 78 */	mr r29, r5
+/* 8135FFF0 0002E3F0  3B E0 00 00 */	li r31, 0x0
+.L_8135FFF4:
+/* 8135FFF4 0002E3F4  7F 63 DB 78 */	mr r3, r27
+/* 8135FFF8 0002E3F8  7F 84 E3 78 */	mr r4, r28
+/* 8135FFFC 0002E3FC  7F A5 EB 78 */	mr r5, r29
+/* 81360000 0002E400  48 20 45 C5 */	bl fn_815645C4
+/* 81360004 0002E404  3B FF 00 01 */	addi r31, r31, 0x1
+/* 81360008 0002E408  7C 7E 1B 78 */	mr r30, r3
+/* 8136000C 0002E40C  7F E4 FB 78 */	mr r4, r31
+/* 81360010 0002E410  48 00 06 D5 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 81360014 0002E414  2C 03 00 00 */	cmpwi r3, 0x0
+/* 81360018 0002E418  40 82 FF DC */	bne .L_8135FFF4
+/* 8136001C 0002E41C  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 81360020 0002E420  40 82 00 08 */	bne .L_81360028
+/* 81360024 0002E424  3B C0 FF 80 */	li r30, -0x80
+.L_81360028:
+/* 81360028 0002E428  39 61 00 20 */	addi r11, r1, 0x20
+/* 8136002C 0002E42C  7F C3 F3 78 */	mr r3, r30
+/* 81360030 0002E430  48 29 94 DD */	bl _restgpr_27
+/* 81360034 0002E434  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81360038 0002E438  7C 08 03 A6 */	mtlr r0
+/* 8136003C 0002E43C  38 21 00 20 */	addi r1, r1, 0x20
+/* 81360040 0002E440  4E 80 00 20 */	blr
+.endfn CreateDir__Q33ipl4nand7wrapperFPCcUcUc
+
+# ipl::nand::wrapper::ChangeDir(const char*)
+.fn ChangeDir__Q33ipl4nand7wrapperFPCc, global
+/* 81360044 0002E444  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81360048 0002E448  7C 08 02 A6 */	mflr r0
+/* 8136004C 0002E44C  90 01 00 24 */	stw r0, 0x24(r1)
+/* 81360050 0002E450  39 61 00 20 */	addi r11, r1, 0x20
+/* 81360054 0002E454  48 29 94 75 */	bl _savegpr_29
+/* 81360058 0002E458  7C 7D 1B 78 */	mr r29, r3
+/* 8136005C 0002E45C  3B E0 00 00 */	li r31, 0x0
+.L_81360060:
+/* 81360060 0002E460  7F A3 EB 78 */	mr r3, r29
+/* 81360064 0002E464  48 20 70 39 */	bl fn_8156709C
+/* 81360068 0002E468  3B FF 00 01 */	addi r31, r31, 0x1
+/* 8136006C 0002E46C  7C 7E 1B 78 */	mr r30, r3
+/* 81360070 0002E470  7F E4 FB 78 */	mr r4, r31
+/* 81360074 0002E474  48 00 06 71 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 81360078 0002E478  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8136007C 0002E47C  40 82 FF E4 */	bne .L_81360060
+/* 81360080 0002E480  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 81360084 0002E484  40 82 00 08 */	bne .L_8136008C
+/* 81360088 0002E488  3B C0 FF 80 */	li r30, -0x80
+.L_8136008C:
+/* 8136008C 0002E48C  39 61 00 20 */	addi r11, r1, 0x20
+/* 81360090 0002E490  7F C3 F3 78 */	mr r3, r30
+/* 81360094 0002E494  48 29 94 81 */	bl _restgpr_29
+/* 81360098 0002E498  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8136009C 0002E49C  7C 08 03 A6 */	mtlr r0
+/* 813600A0 0002E4A0  38 21 00 20 */	addi r1, r1, 0x20
+/* 813600A4 0002E4A4  4E 80 00 20 */	blr
+.endfn ChangeDir__Q33ipl4nand7wrapperFPCc
+
+# ipl::nand::wrapper::Delete(const char*)
+.fn Delete__Q33ipl4nand7wrapperFPCc, global
+/* 813600A8 0002E4A8  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 813600AC 0002E4AC  7C 08 02 A6 */	mflr r0
+/* 813600B0 0002E4B0  90 01 00 24 */	stw r0, 0x24(r1)
+/* 813600B4 0002E4B4  39 61 00 20 */	addi r11, r1, 0x20
+/* 813600B8 0002E4B8  48 29 94 11 */	bl _savegpr_29
+/* 813600BC 0002E4BC  7C 7D 1B 78 */	mr r29, r3
+/* 813600C0 0002E4C0  3B E0 00 00 */	li r31, 0x0
+.L_813600C4:
+/* 813600C4 0002E4C4  7F A3 EB 78 */	mr r3, r29
+/* 813600C8 0002E4C8  48 20 3D 31 */	bl fn_81563DF8
+/* 813600CC 0002E4CC  3B FF 00 01 */	addi r31, r31, 0x1
+/* 813600D0 0002E4D0  7C 7E 1B 78 */	mr r30, r3
+/* 813600D4 0002E4D4  7F E4 FB 78 */	mr r4, r31
+/* 813600D8 0002E4D8  48 00 06 0D */	bl _condition__Q33ipl4nand7wrapperFii
+/* 813600DC 0002E4DC  2C 03 00 00 */	cmpwi r3, 0x0
+/* 813600E0 0002E4E0  40 82 FF E4 */	bne .L_813600C4
+/* 813600E4 0002E4E4  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 813600E8 0002E4E8  40 82 00 08 */	bne .L_813600F0
+/* 813600EC 0002E4EC  3B C0 FF 80 */	li r30, -0x80
+.L_813600F0:
+/* 813600F0 0002E4F0  39 61 00 20 */	addi r11, r1, 0x20
+/* 813600F4 0002E4F4  7F C3 F3 78 */	mr r3, r30
+/* 813600F8 0002E4F8  48 29 94 1D */	bl _restgpr_29
+/* 813600FC 0002E4FC  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81360100 0002E500  7C 08 03 A6 */	mtlr r0
+/* 81360104 0002E504  38 21 00 20 */	addi r1, r1, 0x20
+/* 81360108 0002E508  4E 80 00 20 */	blr
+.endfn Delete__Q33ipl4nand7wrapperFPCc
+
+# ipl::nand::wrapper::GetStatus(const char*, NANDStatus*)
+.fn GetStatus__Q33ipl4nand7wrapperFPCcP10NANDStatus, global
+/* 8136010C 0002E50C  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81360110 0002E510  7C 08 02 A6 */	mflr r0
+/* 81360114 0002E514  90 01 00 24 */	stw r0, 0x24(r1)
+/* 81360118 0002E518  39 61 00 20 */	addi r11, r1, 0x20
+/* 8136011C 0002E51C  48 29 93 A9 */	bl _savegpr_28
+/* 81360120 0002E520  7C 7C 1B 78 */	mr r28, r3
+/* 81360124 0002E524  7C 9D 23 78 */	mr r29, r4
+/* 81360128 0002E528  3B E0 00 00 */	li r31, 0x0
+.L_8136012C:
+/* 8136012C 0002E52C  7F 83 E3 78 */	mr r3, r28
+/* 81360130 0002E530  7F A4 EB 78 */	mr r4, r29
+/* 81360134 0002E534  48 20 4C B9 */	bl fn_81564DEC
+/* 81360138 0002E538  3B FF 00 01 */	addi r31, r31, 0x1
+/* 8136013C 0002E53C  7C 7E 1B 78 */	mr r30, r3
+/* 81360140 0002E540  7F E4 FB 78 */	mr r4, r31
+/* 81360144 0002E544  48 00 05 A1 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 81360148 0002E548  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8136014C 0002E54C  40 82 FF E0 */	bne .L_8136012C
+/* 81360150 0002E550  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 81360154 0002E554  40 82 00 08 */	bne .L_8136015C
+/* 81360158 0002E558  3B C0 FF 80 */	li r30, -0x80
+.L_8136015C:
+/* 8136015C 0002E55C  39 61 00 20 */	addi r11, r1, 0x20
+/* 81360160 0002E560  7F C3 F3 78 */	mr r3, r30
+/* 81360164 0002E564  48 29 93 AD */	bl _restgpr_28
+/* 81360168 0002E568  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8136016C 0002E56C  7C 08 03 A6 */	mtlr r0
+/* 81360170 0002E570  38 21 00 20 */	addi r1, r1, 0x20
+/* 81360174 0002E574  4E 80 00 20 */	blr
+.endfn GetStatus__Q33ipl4nand7wrapperFPCcP10NANDStatus
+
+# ipl::nand::wrapper::GetType(const char*, unsigned char*)
+.fn GetType__Q33ipl4nand7wrapperFPCcPUc, global
+/* 81360178 0002E578  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8136017C 0002E57C  7C 08 02 A6 */	mflr r0
+/* 81360180 0002E580  90 01 00 24 */	stw r0, 0x24(r1)
+/* 81360184 0002E584  39 61 00 20 */	addi r11, r1, 0x20
+/* 81360188 0002E588  48 29 93 3D */	bl _savegpr_28
+/* 8136018C 0002E58C  7C 7C 1B 78 */	mr r28, r3
+/* 81360190 0002E590  7C 9D 23 78 */	mr r29, r4
+/* 81360194 0002E594  3B E0 00 00 */	li r31, 0x0
+.L_81360198:
+/* 81360198 0002E598  7F 83 E3 78 */	mr r3, r28
+/* 8136019C 0002E59C  7F A4 EB 78 */	mr r4, r29
+/* 813601A0 0002E5A0  48 20 73 9D */	bl fn_8156753C
+/* 813601A4 0002E5A4  3B FF 00 01 */	addi r31, r31, 0x1
+/* 813601A8 0002E5A8  7C 7E 1B 78 */	mr r30, r3
+/* 813601AC 0002E5AC  7F E4 FB 78 */	mr r4, r31
+/* 813601B0 0002E5B0  48 00 05 35 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 813601B4 0002E5B4  2C 03 00 00 */	cmpwi r3, 0x0
+/* 813601B8 0002E5B8  40 82 FF E0 */	bne .L_81360198
+/* 813601BC 0002E5BC  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 813601C0 0002E5C0  40 82 00 08 */	bne .L_813601C8
+/* 813601C4 0002E5C4  3B C0 FF 80 */	li r30, -0x80
+.L_813601C8:
+/* 813601C8 0002E5C8  39 61 00 20 */	addi r11, r1, 0x20
+/* 813601CC 0002E5CC  7F C3 F3 78 */	mr r3, r30
+/* 813601D0 0002E5D0  48 29 93 41 */	bl _restgpr_28
+/* 813601D4 0002E5D4  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 813601D8 0002E5D8  7C 08 03 A6 */	mtlr r0
+/* 813601DC 0002E5DC  38 21 00 20 */	addi r1, r1, 0x20
+/* 813601E0 0002E5E0  4E 80 00 20 */	blr
+.endfn GetType__Q33ipl4nand7wrapperFPCcPUc
+
+# ipl::nand::wrapper::PrivateCreate(const char*, unsigned char, unsigned char)
+.fn PrivateCreate__Q33ipl4nand7wrapperFPCcUcUc, global
+/* 813601E4 0002E5E4  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 813601E8 0002E5E8  7C 08 02 A6 */	mflr r0
+/* 813601EC 0002E5EC  90 01 00 24 */	stw r0, 0x24(r1)
+/* 813601F0 0002E5F0  39 61 00 20 */	addi r11, r1, 0x20
+/* 813601F4 0002E5F4  48 29 92 CD */	bl _savegpr_27
+/* 813601F8 0002E5F8  7C 7B 1B 78 */	mr r27, r3
+/* 813601FC 0002E5FC  7C 9C 23 78 */	mr r28, r4
+/* 81360200 0002E600  7C BD 2B 78 */	mr r29, r5
+/* 81360204 0002E604  3B E0 00 00 */	li r31, 0x0
+.L_81360208:
+/* 81360208 0002E608  7F 63 DB 78 */	mr r3, r27
+/* 8136020C 0002E60C  7F 84 E3 78 */	mr r4, r28
+/* 81360210 0002E610  7F A5 EB 78 */	mr r5, r29
+/* 81360214 0002E614  48 20 3A F9 */	bl fn_81563D0C
+/* 81360218 0002E618  3B FF 00 01 */	addi r31, r31, 0x1
+/* 8136021C 0002E61C  7C 7E 1B 78 */	mr r30, r3
+/* 81360220 0002E620  7F E4 FB 78 */	mr r4, r31
+/* 81360224 0002E624  48 00 04 C1 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 81360228 0002E628  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8136022C 0002E62C  40 82 FF DC */	bne .L_81360208
+/* 81360230 0002E630  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 81360234 0002E634  40 82 00 08 */	bne .L_8136023C
+/* 81360238 0002E638  3B C0 FF 80 */	li r30, -0x80
+.L_8136023C:
+/* 8136023C 0002E63C  39 61 00 20 */	addi r11, r1, 0x20
+/* 81360240 0002E640  7F C3 F3 78 */	mr r3, r30
+/* 81360244 0002E644  48 29 92 C9 */	bl _restgpr_27
+/* 81360248 0002E648  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8136024C 0002E64C  7C 08 03 A6 */	mtlr r0
+/* 81360250 0002E650  38 21 00 20 */	addi r1, r1, 0x20
+/* 81360254 0002E654  4E 80 00 20 */	blr
+.endfn PrivateCreate__Q33ipl4nand7wrapperFPCcUcUc
+
+# ipl::nand::wrapper::PrivateOpen(const char*, NANDFileInfo*, unsigned char)
+.fn PrivateOpen__Q33ipl4nand7wrapperFPCcP12NANDFileInfoUc, global
+/* 81360258 0002E658  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8136025C 0002E65C  7C 08 02 A6 */	mflr r0
+/* 81360260 0002E660  90 01 00 24 */	stw r0, 0x24(r1)
+/* 81360264 0002E664  39 61 00 20 */	addi r11, r1, 0x20
+/* 81360268 0002E668  48 29 92 59 */	bl _savegpr_27
+/* 8136026C 0002E66C  7C 7B 1B 78 */	mr r27, r3
+/* 81360270 0002E670  7C 9C 23 78 */	mr r28, r4
+/* 81360274 0002E674  7C BD 2B 78 */	mr r29, r5
+/* 81360278 0002E678  3B E0 00 00 */	li r31, 0x0
+.L_8136027C:
+/* 8136027C 0002E67C  7F 63 DB 78 */	mr r3, r27
+/* 81360280 0002E680  7F 84 E3 78 */	mr r4, r28
+/* 81360284 0002E684  7F A5 EB 78 */	mr r5, r29
+/* 81360288 0002E688  48 20 50 71 */	bl fn_815652F8
+/* 8136028C 0002E68C  3B FF 00 01 */	addi r31, r31, 0x1
+/* 81360290 0002E690  7C 7E 1B 78 */	mr r30, r3
+/* 81360294 0002E694  7F E4 FB 78 */	mr r4, r31
+/* 81360298 0002E698  48 00 04 4D */	bl _condition__Q33ipl4nand7wrapperFii
+/* 8136029C 0002E69C  2C 03 00 00 */	cmpwi r3, 0x0
+/* 813602A0 0002E6A0  40 82 FF DC */	bne .L_8136027C
+/* 813602A4 0002E6A4  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 813602A8 0002E6A8  40 82 00 08 */	bne .L_813602B0
+/* 813602AC 0002E6AC  3B C0 FF 80 */	li r30, -0x80
+.L_813602B0:
+/* 813602B0 0002E6B0  39 61 00 20 */	addi r11, r1, 0x20
+/* 813602B4 0002E6B4  7F C3 F3 78 */	mr r3, r30
+/* 813602B8 0002E6B8  48 29 92 55 */	bl _restgpr_27
+/* 813602BC 0002E6BC  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 813602C0 0002E6C0  7C 08 03 A6 */	mtlr r0
+/* 813602C4 0002E6C4  38 21 00 20 */	addi r1, r1, 0x20
+/* 813602C8 0002E6C8  4E 80 00 20 */	blr
+.endfn PrivateOpen__Q33ipl4nand7wrapperFPCcP12NANDFileInfoUc
+
+# ipl::nand::wrapper::PrivateSafeOpen(const char*, NANDFileInfo*, unsigned char, void*, unsigned long)
+.fn PrivateSafeOpen__Q33ipl4nand7wrapperFPCcP12NANDFileInfoUcPvUl, global
+/* 813602CC 0002E6CC  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813602D0 0002E6D0  7C 08 02 A6 */	mflr r0
+/* 813602D4 0002E6D4  90 01 00 14 */	stw r0, 0x14(r1)
+/* 813602D8 0002E6D8  48 20 53 15 */	bl fn_815655EC
+/* 813602DC 0002E6DC  2C 03 00 00 */	cmpwi r3, 0x0
+/* 813602E0 0002E6E0  41 82 00 08 */	beq .L_813602E8
+/* 813602E4 0002E6E4  38 60 FF 80 */	li r3, -0x80
+.L_813602E8:
+/* 813602E8 0002E6E8  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813602EC 0002E6EC  7C 08 03 A6 */	mtlr r0
+/* 813602F0 0002E6F0  38 21 00 10 */	addi r1, r1, 0x10
+/* 813602F4 0002E6F4  4E 80 00 20 */	blr
+.endfn PrivateSafeOpen__Q33ipl4nand7wrapperFPCcP12NANDFileInfoUcPvUl
+
+# ipl::nand::wrapper::PrivateReadDir(const char*, char*, unsigned long*)
+.fn PrivateReadDir__Q33ipl4nand7wrapperFPCcPcPUl, global
+/* 813602F8 0002E6F8  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 813602FC 0002E6FC  7C 08 02 A6 */	mflr r0
+/* 81360300 0002E700  90 01 00 24 */	stw r0, 0x24(r1)
+/* 81360304 0002E704  39 61 00 20 */	addi r11, r1, 0x20
+/* 81360308 0002E708  48 29 91 B9 */	bl _savegpr_27
+/* 8136030C 0002E70C  7C 7B 1B 78 */	mr r27, r3
+/* 81360310 0002E710  7C 9C 23 78 */	mr r28, r4
+/* 81360314 0002E714  7C BD 2B 78 */	mr r29, r5
+/* 81360318 0002E718  3B E0 00 00 */	li r31, 0x0
+.L_8136031C:
+/* 8136031C 0002E71C  7F 63 DB 78 */	mr r3, r27
+/* 81360320 0002E720  7F 84 E3 78 */	mr r4, r28
+/* 81360324 0002E724  7F A5 EB 78 */	mr r5, r29
+/* 81360328 0002E728  48 20 40 B9 */	bl fn_815643E0
+/* 8136032C 0002E72C  3B FF 00 01 */	addi r31, r31, 0x1
+/* 81360330 0002E730  7C 7E 1B 78 */	mr r30, r3
+/* 81360334 0002E734  7F E4 FB 78 */	mr r4, r31
+/* 81360338 0002E738  48 00 03 AD */	bl _condition__Q33ipl4nand7wrapperFii
+/* 8136033C 0002E73C  2C 03 00 00 */	cmpwi r3, 0x0
+/* 81360340 0002E740  40 82 FF DC */	bne .L_8136031C
+/* 81360344 0002E744  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 81360348 0002E748  40 82 00 08 */	bne .L_81360350
+/* 8136034C 0002E74C  3B C0 FF 80 */	li r30, -0x80
+.L_81360350:
+/* 81360350 0002E750  39 61 00 20 */	addi r11, r1, 0x20
+/* 81360354 0002E754  7F C3 F3 78 */	mr r3, r30
+/* 81360358 0002E758  48 29 91 B5 */	bl _restgpr_27
+/* 8136035C 0002E75C  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81360360 0002E760  7C 08 03 A6 */	mtlr r0
+/* 81360364 0002E764  38 21 00 20 */	addi r1, r1, 0x20
+/* 81360368 0002E768  4E 80 00 20 */	blr
+.endfn PrivateReadDir__Q33ipl4nand7wrapperFPCcPcPUl
+
+# ipl::nand::wrapper::PrivateCreateDir(const char*, unsigned char, unsigned char)
+.fn PrivateCreateDir__Q33ipl4nand7wrapperFPCcUcUc, global
+/* 8136036C 0002E76C  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81360370 0002E770  7C 08 02 A6 */	mflr r0
+/* 81360374 0002E774  90 01 00 24 */	stw r0, 0x24(r1)
+/* 81360378 0002E778  39 61 00 20 */	addi r11, r1, 0x20
+/* 8136037C 0002E77C  48 29 91 45 */	bl _savegpr_27
+/* 81360380 0002E780  7C 7B 1B 78 */	mr r27, r3
+/* 81360384 0002E784  7C 9C 23 78 */	mr r28, r4
+/* 81360388 0002E788  7C BD 2B 78 */	mr r29, r5
+/* 8136038C 0002E78C  3B E0 00 00 */	li r31, 0x0
+.L_81360390:
+/* 81360390 0002E790  7F 63 DB 78 */	mr r3, r27
+/* 81360394 0002E794  7F 84 E3 78 */	mr r4, r28
+/* 81360398 0002E798  7F A5 EB 78 */	mr r5, r29
+/* 8136039C 0002E79C  48 20 42 9D */	bl fn_81564638
+/* 813603A0 0002E7A0  3B FF 00 01 */	addi r31, r31, 0x1
+/* 813603A4 0002E7A4  7C 7E 1B 78 */	mr r30, r3
+/* 813603A8 0002E7A8  7F E4 FB 78 */	mr r4, r31
+/* 813603AC 0002E7AC  48 00 03 39 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 813603B0 0002E7B0  2C 03 00 00 */	cmpwi r3, 0x0
+/* 813603B4 0002E7B4  40 82 FF DC */	bne .L_81360390
+/* 813603B8 0002E7B8  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 813603BC 0002E7BC  40 82 00 08 */	bne .L_813603C4
+/* 813603C0 0002E7C0  3B C0 FF 80 */	li r30, -0x80
+.L_813603C4:
+/* 813603C4 0002E7C4  39 61 00 20 */	addi r11, r1, 0x20
+/* 813603C8 0002E7C8  7F C3 F3 78 */	mr r3, r30
+/* 813603CC 0002E7CC  48 29 91 41 */	bl _restgpr_27
+/* 813603D0 0002E7D0  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 813603D4 0002E7D4  7C 08 03 A6 */	mtlr r0
+/* 813603D8 0002E7D8  38 21 00 20 */	addi r1, r1, 0x20
+/* 813603DC 0002E7DC  4E 80 00 20 */	blr
+.endfn PrivateCreateDir__Q33ipl4nand7wrapperFPCcUcUc
+
+# ipl::nand::wrapper::PrivateDelete(const char*)
+.fn PrivateDelete__Q33ipl4nand7wrapperFPCc, global
+/* 813603E0 0002E7E0  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 813603E4 0002E7E4  7C 08 02 A6 */	mflr r0
+/* 813603E8 0002E7E8  90 01 00 24 */	stw r0, 0x24(r1)
+/* 813603EC 0002E7EC  39 61 00 20 */	addi r11, r1, 0x20
+/* 813603F0 0002E7F0  48 29 90 D9 */	bl _savegpr_29
+/* 813603F4 0002E7F4  7C 7D 1B 78 */	mr r29, r3
+/* 813603F8 0002E7F8  3B E0 00 00 */	li r31, 0x0
+.L_813603FC:
+/* 813603FC 0002E7FC  7F A3 EB 78 */	mr r3, r29
+/* 81360400 0002E800  48 20 3A A9 */	bl fn_81563EA8
+/* 81360404 0002E804  3B FF 00 01 */	addi r31, r31, 0x1
+/* 81360408 0002E808  7C 7E 1B 78 */	mr r30, r3
+/* 8136040C 0002E80C  7F E4 FB 78 */	mr r4, r31
+/* 81360410 0002E810  48 00 02 D5 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 81360414 0002E814  2C 03 00 00 */	cmpwi r3, 0x0
+/* 81360418 0002E818  40 82 FF E4 */	bne .L_813603FC
+/* 8136041C 0002E81C  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 81360420 0002E820  40 82 00 08 */	bne .L_81360428
+/* 81360424 0002E824  3B C0 FF 80 */	li r30, -0x80
+.L_81360428:
+/* 81360428 0002E828  39 61 00 20 */	addi r11, r1, 0x20
+/* 8136042C 0002E82C  7F C3 F3 78 */	mr r3, r30
+/* 81360430 0002E830  48 29 90 E5 */	bl _restgpr_29
+/* 81360434 0002E834  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81360438 0002E838  7C 08 03 A6 */	mtlr r0
+/* 8136043C 0002E83C  38 21 00 20 */	addi r1, r1, 0x20
+/* 81360440 0002E840  4E 80 00 20 */	blr
+.endfn PrivateDelete__Q33ipl4nand7wrapperFPCc
+
+# ipl::nand::wrapper::PrivateMove(const char*, const char*)
+.fn PrivateMove__Q33ipl4nand7wrapperFPCcPCc, global
+/* 81360444 0002E844  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81360448 0002E848  7C 08 02 A6 */	mflr r0
+/* 8136044C 0002E84C  90 01 00 24 */	stw r0, 0x24(r1)
+/* 81360450 0002E850  39 61 00 20 */	addi r11, r1, 0x20
+/* 81360454 0002E854  48 29 90 71 */	bl _savegpr_28
+/* 81360458 0002E858  7C 7C 1B 78 */	mr r28, r3
+/* 8136045C 0002E85C  7C 9D 23 78 */	mr r29, r4
+/* 81360460 0002E860  3B E0 00 00 */	li r31, 0x0
+.L_81360464:
+/* 81360464 0002E864  7F 83 E3 78 */	mr r3, r28
+/* 81360468 0002E868  7F A4 EB 78 */	mr r4, r29
+/* 8136046C 0002E86C  48 20 44 61 */	bl fn_815648CC
+/* 81360470 0002E870  3B FF 00 01 */	addi r31, r31, 0x1
+/* 81360474 0002E874  7C 7E 1B 78 */	mr r30, r3
+/* 81360478 0002E878  7F E4 FB 78 */	mr r4, r31
+/* 8136047C 0002E87C  48 00 02 69 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 81360480 0002E880  2C 03 00 00 */	cmpwi r3, 0x0
+/* 81360484 0002E884  40 82 FF E0 */	bne .L_81360464
+/* 81360488 0002E888  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 8136048C 0002E88C  40 82 00 08 */	bne .L_81360494
+/* 81360490 0002E890  3B C0 FF 80 */	li r30, -0x80
+.L_81360494:
+/* 81360494 0002E894  39 61 00 20 */	addi r11, r1, 0x20
+/* 81360498 0002E898  7F C3 F3 78 */	mr r3, r30
+/* 8136049C 0002E89C  48 29 90 75 */	bl _restgpr_28
+/* 813604A0 0002E8A0  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 813604A4 0002E8A4  7C 08 03 A6 */	mtlr r0
+/* 813604A8 0002E8A8  38 21 00 20 */	addi r1, r1, 0x20
+/* 813604AC 0002E8AC  4E 80 00 20 */	blr
+.endfn PrivateMove__Q33ipl4nand7wrapperFPCcPCc
+
+# ipl::nand::wrapper::PrivateGetType(const char*, unsigned char*)
+.fn PrivateGetType__Q33ipl4nand7wrapperFPCcPUc, global
+/* 813604B0 0002E8B0  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 813604B4 0002E8B4  7C 08 02 A6 */	mflr r0
+/* 813604B8 0002E8B8  90 01 00 24 */	stw r0, 0x24(r1)
+/* 813604BC 0002E8BC  39 61 00 20 */	addi r11, r1, 0x20
+/* 813604C0 0002E8C0  48 29 90 05 */	bl _savegpr_28
+/* 813604C4 0002E8C4  7C 7C 1B 78 */	mr r28, r3
+/* 813604C8 0002E8C8  7C 9D 23 78 */	mr r29, r4
+/* 813604CC 0002E8CC  3B E0 00 00 */	li r31, 0x0
+.L_813604D0:
+/* 813604D0 0002E8D0  7F 83 E3 78 */	mr r3, r28
+/* 813604D4 0002E8D4  7F A4 EB 78 */	mr r4, r29
+/* 813604D8 0002E8D8  48 20 70 A9 */	bl fn_81567580
+/* 813604DC 0002E8DC  3B FF 00 01 */	addi r31, r31, 0x1
+/* 813604E0 0002E8E0  7C 7E 1B 78 */	mr r30, r3
+/* 813604E4 0002E8E4  7F E4 FB 78 */	mr r4, r31
+/* 813604E8 0002E8E8  48 00 01 FD */	bl _condition__Q33ipl4nand7wrapperFii
+/* 813604EC 0002E8EC  2C 03 00 00 */	cmpwi r3, 0x0
+/* 813604F0 0002E8F0  40 82 FF E0 */	bne .L_813604D0
+/* 813604F4 0002E8F4  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 813604F8 0002E8F8  40 82 00 08 */	bne .L_81360500
+/* 813604FC 0002E8FC  3B C0 FF 80 */	li r30, -0x80
+.L_81360500:
+/* 81360500 0002E900  39 61 00 20 */	addi r11, r1, 0x20
+/* 81360504 0002E904  7F C3 F3 78 */	mr r3, r30
+/* 81360508 0002E908  48 29 90 09 */	bl _restgpr_28
+/* 8136050C 0002E90C  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81360510 0002E910  7C 08 03 A6 */	mtlr r0
+/* 81360514 0002E914  38 21 00 20 */	addi r1, r1, 0x20
+/* 81360518 0002E918  4E 80 00 20 */	blr
+.endfn PrivateGetType__Q33ipl4nand7wrapperFPCcPUc
+
+# ipl::nand::wrapper::SecretGetUsage(const char*, unsigned long*, unsigned long*)
+.fn SecretGetUsage__Q33ipl4nand7wrapperFPCcPUlPUl, global
+/* 8136051C 0002E91C  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81360520 0002E920  7C 08 02 A6 */	mflr r0
+/* 81360524 0002E924  90 01 00 24 */	stw r0, 0x24(r1)
+/* 81360528 0002E928  39 61 00 20 */	addi r11, r1, 0x20
+/* 8136052C 0002E92C  48 29 8F 95 */	bl _savegpr_27
+/* 81360530 0002E930  7C 7B 1B 78 */	mr r27, r3
+/* 81360534 0002E934  7C 9C 23 78 */	mr r28, r4
+/* 81360538 0002E938  7C BD 2B 78 */	mr r29, r5
+/* 8136053C 0002E93C  3B E0 00 00 */	li r31, 0x0
+.L_81360540:
+/* 81360540 0002E940  7F 63 DB 78 */	mr r3, r27
+/* 81360544 0002E944  7F 84 E3 78 */	mr r4, r28
+/* 81360548 0002E948  7F A5 EB 78 */	mr r5, r29
+/* 8136054C 0002E94C  48 20 71 45 */	bl fn_81567690
+/* 81360550 0002E950  3B FF 00 01 */	addi r31, r31, 0x1
+/* 81360554 0002E954  7C 7E 1B 78 */	mr r30, r3
+/* 81360558 0002E958  7F E4 FB 78 */	mr r4, r31
+/* 8136055C 0002E95C  48 00 01 89 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 81360560 0002E960  2C 03 00 00 */	cmpwi r3, 0x0
+/* 81360564 0002E964  40 82 FF DC */	bne .L_81360540
+/* 81360568 0002E968  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 8136056C 0002E96C  40 82 00 08 */	bne .L_81360574
+/* 81360570 0002E970  3B C0 FF 80 */	li r30, -0x80
+.L_81360574:
+/* 81360574 0002E974  39 61 00 20 */	addi r11, r1, 0x20
+/* 81360578 0002E978  7F C3 F3 78 */	mr r3, r30
+/* 8136057C 0002E97C  48 29 8F 91 */	bl _restgpr_27
+/* 81360580 0002E980  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81360584 0002E984  7C 08 03 A6 */	mtlr r0
+/* 81360588 0002E988  38 21 00 20 */	addi r1, r1, 0x20
+/* 8136058C 0002E98C  4E 80 00 20 */	blr
+.endfn SecretGetUsage__Q33ipl4nand7wrapperFPCcPUlPUl
+
+# ipl::nand::wrapper::SecretGetUserUsage(unsigned long*, unsigned long*)
+.fn SecretGetUserUsage__Q33ipl4nand7wrapperFPUlPUl, global
+/* 81360590 0002E990  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81360594 0002E994  7C 08 02 A6 */	mflr r0
+/* 81360598 0002E998  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8136059C 0002E99C  39 61 00 20 */	addi r11, r1, 0x20
+/* 813605A0 0002E9A0  48 29 8F 25 */	bl _savegpr_28
+/* 813605A4 0002E9A4  7C 7C 1B 78 */	mr r28, r3
+/* 813605A8 0002E9A8  7C 9D 23 78 */	mr r29, r4
+/* 813605AC 0002E9AC  3B E0 00 00 */	li r31, 0x0
+.L_813605B0:
+/* 813605B0 0002E9B0  7F 83 E3 78 */	mr r3, r28
+/* 813605B4 0002E9B4  7F A4 EB 78 */	mr r4, r29
+/* 813605B8 0002E9B8  48 20 73 D9 */	bl fn_81567990
+/* 813605BC 0002E9BC  3B FF 00 01 */	addi r31, r31, 0x1
+/* 813605C0 0002E9C0  7C 7E 1B 78 */	mr r30, r3
+/* 813605C4 0002E9C4  7F E4 FB 78 */	mr r4, r31
+/* 813605C8 0002E9C8  48 00 01 1D */	bl _condition__Q33ipl4nand7wrapperFii
+/* 813605CC 0002E9CC  2C 03 00 00 */	cmpwi r3, 0x0
+/* 813605D0 0002E9D0  40 82 FF E0 */	bne .L_813605B0
+/* 813605D4 0002E9D4  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 813605D8 0002E9D8  40 82 00 08 */	bne .L_813605E0
+/* 813605DC 0002E9DC  3B C0 FF 80 */	li r30, -0x80
+.L_813605E0:
+/* 813605E0 0002E9E0  39 61 00 20 */	addi r11, r1, 0x20
+/* 813605E4 0002E9E4  7F C3 F3 78 */	mr r3, r30
+/* 813605E8 0002E9E8  48 29 8F 29 */	bl _restgpr_28
+/* 813605EC 0002E9EC  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 813605F0 0002E9F0  7C 08 03 A6 */	mtlr r0
+/* 813605F4 0002E9F4  38 21 00 20 */	addi r1, r1, 0x20
+/* 813605F8 0002E9F8  4E 80 00 20 */	blr
+.endfn SecretGetUserUsage__Q33ipl4nand7wrapperFPUlPUl
+
+# ipl::nand::wrapper::SecretGetSystemAvailableArea(const NANDFileSystemStatus*, unsigned long, unsigned long, unsigned long*, unsigned long*)
+.fn SecretGetSystemAvailableArea__Q33ipl4nand7wrapperFPC20NANDFileSystemStatusUlUlPUlPUl, global
+/* 813605FC 0002E9FC  94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 81360600 0002EA00  7C 08 02 A6 */	mflr r0
+/* 81360604 0002EA04  90 01 00 34 */	stw r0, 0x34(r1)
+/* 81360608 0002EA08  39 61 00 30 */	addi r11, r1, 0x30
+/* 8136060C 0002EA0C  48 29 8E AD */	bl _savegpr_25
+/* 81360610 0002EA10  7C 79 1B 78 */	mr r25, r3
+/* 81360614 0002EA14  7C 9A 23 78 */	mr r26, r4
+/* 81360618 0002EA18  7C BB 2B 78 */	mr r27, r5
+/* 8136061C 0002EA1C  7C DC 33 78 */	mr r28, r6
+/* 81360620 0002EA20  7C FD 3B 78 */	mr r29, r7
+/* 81360624 0002EA24  3B E0 00 00 */	li r31, 0x0
+.L_81360628:
+/* 81360628 0002EA28  7F 23 CB 78 */	mr r3, r25
+/* 8136062C 0002EA2C  7F 44 D3 78 */	mr r4, r26
+/* 81360630 0002EA30  7F 65 DB 78 */	mr r5, r27
+/* 81360634 0002EA34  7F 86 E3 78 */	mr r6, r28
+/* 81360638 0002EA38  7F A7 EB 78 */	mr r7, r29
+/* 8136063C 0002EA3C  48 20 71 95 */	bl fn_815677D0
+/* 81360640 0002EA40  3B FF 00 01 */	addi r31, r31, 0x1
+/* 81360644 0002EA44  7C 7E 1B 78 */	mr r30, r3
+/* 81360648 0002EA48  7F E4 FB 78 */	mr r4, r31
+/* 8136064C 0002EA4C  48 00 00 99 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 81360650 0002EA50  2C 03 00 00 */	cmpwi r3, 0x0
+/* 81360654 0002EA54  40 82 FF D4 */	bne .L_81360628
+/* 81360658 0002EA58  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 8136065C 0002EA5C  40 82 00 08 */	bne .L_81360664
+/* 81360660 0002EA60  3B C0 FF 80 */	li r30, -0x80
+.L_81360664:
+/* 81360664 0002EA64  39 61 00 30 */	addi r11, r1, 0x30
+/* 81360668 0002EA68  7F C3 F3 78 */	mr r3, r30
+/* 8136066C 0002EA6C  48 29 8E 99 */	bl _restgpr_25
+/* 81360670 0002EA70  80 01 00 34 */	lwz r0, 0x34(r1)
+/* 81360674 0002EA74  7C 08 03 A6 */	mtlr r0
+/* 81360678 0002EA78  38 21 00 30 */	addi r1, r1, 0x30
+/* 8136067C 0002EA7C  4E 80 00 20 */	blr
+.endfn SecretGetSystemAvailableArea__Q33ipl4nand7wrapperFPC20NANDFileSystemStatusUlUlPUlPUl
+
+# ipl::nand::wrapper::SecretGetFileSystemStatus(NANDFileSystemStatus*)
+.fn SecretGetFileSystemStatus__Q33ipl4nand7wrapperFP20NANDFileSystemStatus, global
+/* 81360680 0002EA80  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81360684 0002EA84  7C 08 02 A6 */	mflr r0
+/* 81360688 0002EA88  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8136068C 0002EA8C  39 61 00 20 */	addi r11, r1, 0x20
+/* 81360690 0002EA90  48 29 8E 39 */	bl _savegpr_29
+/* 81360694 0002EA94  7C 7D 1B 78 */	mr r29, r3
+/* 81360698 0002EA98  3B E0 00 00 */	li r31, 0x0
+.L_8136069C:
+/* 8136069C 0002EA9C  7F A3 EB 78 */	mr r3, r29
+/* 813606A0 0002EAA0  48 20 70 A9 */	bl fn_81567748
+/* 813606A4 0002EAA4  3B FF 00 01 */	addi r31, r31, 0x1
+/* 813606A8 0002EAA8  7C 7E 1B 78 */	mr r30, r3
+/* 813606AC 0002EAAC  7F E4 FB 78 */	mr r4, r31
+/* 813606B0 0002EAB0  48 00 00 35 */	bl _condition__Q33ipl4nand7wrapperFii
+/* 813606B4 0002EAB4  2C 03 00 00 */	cmpwi r3, 0x0
+/* 813606B8 0002EAB8  40 82 FF E4 */	bne .L_8136069C
+/* 813606BC 0002EABC  2C 1F 00 0A */	cmpwi r31, 0xa
+/* 813606C0 0002EAC0  40 82 00 08 */	bne .L_813606C8
+/* 813606C4 0002EAC4  3B C0 FF 80 */	li r30, -0x80
+.L_813606C8:
+/* 813606C8 0002EAC8  39 61 00 20 */	addi r11, r1, 0x20
+/* 813606CC 0002EACC  7F C3 F3 78 */	mr r3, r30
+/* 813606D0 0002EAD0  48 29 8E 45 */	bl _restgpr_29
+/* 813606D4 0002EAD4  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 813606D8 0002EAD8  7C 08 03 A6 */	mtlr r0
+/* 813606DC 0002EADC  38 21 00 20 */	addi r1, r1, 0x20
+/* 813606E0 0002EAE0  4E 80 00 20 */	blr
+.endfn SecretGetFileSystemStatus__Q33ipl4nand7wrapperFP20NANDFileSystemStatus
+
+# ipl::nand::wrapper::_condition(int, int)
+.fn _condition__Q33ipl4nand7wrapperFii, global
+/* 813606E4 0002EAE4  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813606E8 0002EAE8  7C 08 02 A6 */	mflr r0
+/* 813606EC 0002EAEC  2C 03 FF FD */	cmpwi r3, -0x3
+/* 813606F0 0002EAF0  90 01 00 14 */	stw r0, 0x14(r1)
+/* 813606F4 0002EAF4  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 813606F8 0002EAF8  3B E0 00 00 */	li r31, 0x0
+/* 813606FC 0002EAFC  41 82 00 0C */	beq .L_81360708
+/* 81360700 0002EB00  2C 03 FF FE */	cmpwi r3, -0x2
+/* 81360704 0002EB04  40 82 00 10 */	bne .L_81360714
+.L_81360708:
+/* 81360708 0002EB08  2C 04 00 0A */	cmpwi r4, 0xa
+/* 8136070C 0002EB0C  40 80 00 08 */	bge .L_81360714
+/* 81360710 0002EB10  3B E0 00 01 */	li r31, 0x1
+.L_81360714:
+/* 81360714 0002EB14  2C 1F 00 00 */	cmpwi r31, 0x0
+/* 81360718 0002EB18  41 82 00 34 */	beq .L_8136074C
+/* 8136071C 0002EB1C  3C 60 80 00 */	lis r3, 0x8000
+/* 81360720 0002EB20  38 00 03 E8 */	li r0, 0x3e8
+/* 81360724 0002EB24  80 A3 00 F8 */	lwz r5, 0xf8(r3)
+/* 81360728 0002EB28  38 60 00 32 */	li r3, 0x32
+/* 8136072C 0002EB2C  38 80 00 00 */	li r4, 0x0
+/* 81360730 0002EB30  54 A5 F0 BE */	srwi r5, r5, 2
+/* 81360734 0002EB34  7C A5 03 96 */	divwu r5, r5, r0
+/* 81360738 0002EB38  7C 05 18 16 */	mulhwu r0, r5, r3
+/* 8136073C 0002EB3C  7C 64 19 D6 */	mullw r3, r4, r3
+/* 81360740 0002EB40  1C 85 00 32 */	mulli r4, r5, 0x32
+/* 81360744 0002EB44  7C 60 1A 14 */	add r3, r0, r3
+/* 81360748 0002EB48  48 1D 54 85 */	bl fn_81535BCC
+.L_8136074C:
+/* 8136074C 0002EB4C  7F E3 FB 78 */	mr r3, r31
+/* 81360750 0002EB50  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 81360754 0002EB54  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 81360758 0002EB58  7C 08 03 A6 */	mtlr r0
+/* 8136075C 0002EB5C  38 21 00 10 */	addi r1, r1, 0x10
+/* 81360760 0002EB60  4E 80 00 20 */	blr
+.endfn _condition__Q33ipl4nand7wrapperFii

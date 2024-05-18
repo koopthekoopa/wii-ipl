@@ -5,7 +5,7 @@
 
 namespace ipl {
     namespace System {
-        static u8 smArg[0x02D8];
+        extern u8 smArg[0x02D8];
         
         class Arg {
             public:
@@ -16,6 +16,9 @@ namespace ipl {
                 
                 OSAlarm unkAlarm; // 0x01E0
         };
+        
+        void init(int argc, char** argv);
+        void run();
     }
 }
 

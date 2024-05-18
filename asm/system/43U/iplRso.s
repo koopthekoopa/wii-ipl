@@ -1,5 +1,5 @@
 .include "macros.inc"
-.file "iplRsoManager.cpp"
+.file "iplRso.cpp"
 
 # 0x81359A70 - 0x8135A590
 .text

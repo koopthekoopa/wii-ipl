@@ -95,7 +95,7 @@
 /* 8133CD64 0000B164  38 61 00 08 */	addi r3, r1, 0x8
 /* 8133CD68 0000B168  38 9F 00 F8 */	addi r4, r31, 0xf8
 /* 8133CD6C 0000B16C  38 A0 00 01 */	li r5, 0x1
-/* 8133CD70 0000B170  48 02 34 E9 */	bl fn_81360258
+/* 8133CD70 0000B170  48 02 34 E9 */	bl PrivateOpen__Q33ipl4nand7wrapperFPCcP12NANDFileInfoUc
 /* 8133CD74 0000B174  7C 64 1B 78 */	mr r4, r3
 /* 8133CD78 0000B178  7F E3 FB 78 */	mr r3, r31
 /* 8133CD7C 0000B17C  4B FF F6 39 */	bl nand_error_handling__Q33ipl4nand4FileFi
@@ -117,7 +117,7 @@
 /* 8133CDB0 0000B1B0  38 61 00 08 */	addi r3, r1, 0x8
 /* 8133CDB4 0000B1B4  38 9F 00 F8 */	addi r4, r31, 0xf8
 /* 8133CDB8 0000B1B8  38 A0 00 01 */	li r5, 0x1
-/* 8133CDBC 0000B1BC  48 02 34 9D */	bl fn_81360258
+/* 8133CDBC 0000B1BC  48 02 34 9D */	bl PrivateOpen__Q33ipl4nand7wrapperFPCcP12NANDFileInfoUc
 /* 8133CDC0 0000B1C0  7C 64 1B 78 */	mr r4, r3
 /* 8133CDC4 0000B1C4  7F E3 FB 78 */	mr r3, r31
 /* 8133CDC8 0000B1C8  4B FF F5 ED */	bl nand_error_handling__Q33ipl4nand4FileFi
@@ -150,7 +150,7 @@
 /* 8133CE20 0000B220  38 7C 00 F8 */	addi r3, r28, 0xf8
 /* 8133CE24 0000B224  38 A0 00 00 */	li r5, 0x0
 /* 8133CE28 0000B228  7C 84 02 14 */	add r4, r4, r0
-/* 8133CE2C 0000B22C  48 02 30 25 */	bl fn_8135FE50
+/* 8133CE2C 0000B22C  48 02 30 25 */	bl Seek__Q33ipl4nand7wrapperFP12NANDFileInfoll
 /* 8133CE30 0000B230  7C 64 1B 78 */	mr r4, r3
 /* 8133CE34 0000B234  7F 83 E3 78 */	mr r3, r28
 /* 8133CE38 0000B238  4B FF F5 7D */	bl nand_error_handling__Q33ipl4nand4FileFi
@@ -160,7 +160,7 @@
 /* 8133CE44 0000B244  38 A0 00 00 */	li r5, 0x0
 /* 8133CE48 0000B248  38 63 00 F8 */	addi r3, r3, 0xf8
 /* 8133CE4C 0000B24C  7C 80 32 14 */	add r4, r0, r6
-/* 8133CE50 0000B250  48 02 30 01 */	bl fn_8135FE50
+/* 8133CE50 0000B250  48 02 30 01 */	bl Seek__Q33ipl4nand7wrapperFP12NANDFileInfoll
 /* 8133CE54 0000B254  7C 64 1B 78 */	mr r4, r3
 /* 8133CE58 0000B258  7F 83 E3 78 */	mr r3, r28
 /* 8133CE5C 0000B25C  4B FF F5 59 */	bl nand_error_handling__Q33ipl4nand4FileFi
@@ -168,7 +168,7 @@
 /* 8133CE60 0000B260  7F A4 EB 78 */	mr r4, r29
 /* 8133CE64 0000B264  7F C5 F3 78 */	mr r5, r30
 /* 8133CE68 0000B268  38 7C 00 F8 */	addi r3, r28, 0xf8
-/* 8133CE6C 0000B26C  48 02 2E FD */	bl fn_8135FD68
+/* 8133CE6C 0000B26C  48 02 2E FD */	bl Read__Q33ipl4nand7wrapperFP12NANDFileInfoPvUl
 /* 8133CE70 0000B270  7C 64 1B 78 */	mr r4, r3
 /* 8133CE74 0000B274  7F 83 E3 78 */	mr r3, r28
 /* 8133CE78 0000B278  4B FF F5 3D */	bl nand_error_handling__Q33ipl4nand4FileFi
@@ -199,7 +199,7 @@
 /* 8133CECC 0000B2CC  4E 80 04 21 */	bctrl
 .L_8133CED0:
 /* 8133CED0 0000B2D0  38 7F 00 F8 */	addi r3, r31, 0xf8
-/* 8133CED4 0000B2D4  48 02 2E 31 */	bl fn_8135FD04
+/* 8133CED4 0000B2D4  48 02 2E 31 */	bl Close__Q33ipl4nand7wrapperFP12NANDFileInfo
 /* 8133CED8 0000B2D8  7C 64 1B 78 */	mr r4, r3
 /* 8133CEDC 0000B2DC  7F E3 FB 78 */	mr r3, r31
 /* 8133CEE0 0000B2E0  4B FF F4 D5 */	bl nand_error_handling__Q33ipl4nand4FileFi

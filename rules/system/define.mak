@@ -31,6 +31,12 @@ SYSTEM_SOURCES =	$(VERSION)/rvl_dec.s \
 					$(VERSION)/iplPostmanManager.s \
 					$(VERSION)/iplSaveDataManager.s \
 					$(VERSION)/iplChannelRsoThread.s \
-					$(VERSION)/iplRsoManager.s \
+					$(VERSION)/iplRso.s \
 					$(VERSION)/iplCdbBackup.s \
-					$(VERSION)/odh.s
+					$(VERSION)/odh.s \
+					$(VERSION)/iplSDVFWorker.s \
+					$(VERSION)/iplNandWrapper.s \
+					main.cpp \
+					$(VERSION)/iplBs2Manager.s \
+					$(VERSION)/iplTVRC.s \
+					$(VERSION)/iplTVRCManager.s

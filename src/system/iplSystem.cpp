@@ -3,6 +3,8 @@
 
 namespace ipl {
     namespace System {
+        u8 smArg[0x02D8];
+    
         /*
             @Address 0x81332C24
             @Size 0x48
