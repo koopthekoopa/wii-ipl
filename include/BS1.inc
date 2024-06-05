@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*
                          Wii Menu Boot Sequence 1
                     Disassembled from Version 4.3 (PAL)
-              but they are effectively the same in every version
+                but they are the exact same in every version
 *---------------------------------------------------------------------------*/
 
 HID0_DEFAULT        .set    0x00110C64
@@ -34,5 +34,3 @@ BS1_ALIGN           .set    0x00000100
 BS2_ENTRY           .set    0x81330000
 BS2_ENTRY_OFFSET    .set    0x000037FC
 BS2_ENTRY_PAD       .set    (BS2_ENTRY_OFFSET - 0x00003600)
-
-

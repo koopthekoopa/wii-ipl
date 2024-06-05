@@ -1,0 +1,20 @@
+BS2_LIBNAME =	BS2
+BS2_CFLAGS =	-O4,s -ipa file $(COMMON_CCFLAGS)
+BS2_CCPATH =	$(CW_GC_30A52)
+BS2_OBJECTS =	BootStart.o \
+				BS2.o
+
+$(BS2_OBJ_PATH)/$(BS2_LIBNAME)/%.o: $(BS2_SRC_PATH)/$(BS2_LIBNAME)/%.c
+	$(call BuildCSources,$(BS2_CCPATH),$(BS2_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))
+
+$(BS2_OBJ_PATH)/$(BS2_LIBNAME)/%.o: $(BS2_SRC_PATH)/$(BS2_LIBNAME)/%.cpp
+	$(call BuildCPPSources,$(BS2_CCPATH),$(BS2_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))
+
+$(BS2_OBJ_PATH)/$(BS2_LIBNAME)/$(ASSEMBLY_ROOT)/%.o: $(BS2_ASM_PATH)/$(BS2_LIBNAME)/%.s
+	$(call BuildASMSources,$(INCLUDE_ROOT))
+
+$(BS2_BLD_PATH)/$(BS2_LIBNAME).a: $(foreach OBJ,$(BS2_OBJECTS:.s=.o),$(BS2_OBJ_PATH)/$(BS2_LIBNAME)/$(OBJ))
+	$(call LinkLibrary,$(BS2_CCPATH),$?,$@)
+
+
+

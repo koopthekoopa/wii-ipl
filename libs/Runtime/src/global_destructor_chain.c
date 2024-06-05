@@ -4,7 +4,7 @@
 DtorChain* __global_destructor_chain;
 
 /*
-    @Address: 0x815F8FE0
+    @note Address: 0x815F8FE0
     @Size 0x18
 */
 void __register_global_object(void* object, void* dtor, DtorChain* chain) {
@@ -15,7 +15,7 @@ void __register_global_object(void* object, void* dtor, DtorChain* chain) {
 }
 
 /*
-    @Address: 0x815F8FF8
+    @note Address: 0x815F8FF8
     @Size 0x48
 */
 void __destroy_global_chain() {

@@ -311,8 +311,8 @@ static asm void __restore_gpr() {
 }
 
 /*
-    @Address: 0x815F9524
-    @Size: 0xEC
+    @note Address: 0x815F9524
+    @note Size: 0xEC
 */
 asm void __div2u() {
 /* 815F9524 002C7924  2C 03 00 00 */    cmpwi r3, 0x0
@@ -386,8 +386,8 @@ L_815F9604:
 }
 
 /*
-    @Address: 0x815F9610
-    @Size: 0x138
+    @note Address: 0x815F9610
+    @note Size: 0x138
 */
 asm void __div2i() {
 /* 815F9610 002C7A10  94 21 FF F0 */    stwu r1, -0x10(r1)
@@ -484,8 +484,8 @@ L_815F9740:
 }
 
 /*
-    @Address: 0x815F9748
-    @Size: 0xE4
+    @note Address: 0x815F9748
+    @note Size: 0xE4
 */
 asm void __mod2u() {
 /* 815F9748 002C7B48  2C 03 00 00 */    cmpwi r3, 0x0
@@ -557,8 +557,8 @@ L_815F9828:
 }
 
 /*
-    @Address: 0x815F982C
-    @Size: 0x10C
+    @note Address: 0x815F982C
+    @note Size: 0x10C
 */
 asm void __mod2i() {
 /* 815F982C 002C7C2C  2F 83 00 00 */    cmpwi cr7, r3, 0x0
@@ -643,8 +643,8 @@ L_815F9934:
 }
 
 /*
-    @Address: 0x815F9938
-    @Size: 0x24
+    @note Address: 0x815F9938
+    @note Size: 0x24
 */
 asm void __shl2i() {
 /* 815F9938 002C7D38  21 05 00 20 */    subfic r8, r5, 0x20
@@ -659,8 +659,8 @@ asm void __shl2i() {
 }
 
 /*
-    @Address: 0x815F995C
-    @Size: 0x24
+    @note Address: 0x815F995C
+    @note Size: 0x24
 */
 asm void __shr2u() {
 /* 815F995C 002C7D5C  21 05 00 20 */    subfic r8, r5, 0x20
@@ -675,8 +675,8 @@ asm void __shr2u() {
 }
 
 /*
-    @Address: 0x815F9980
-    @Size: 0x28
+    @note Address: 0x815F9980
+    @note Size: 0x28
 */
 asm void __shr2i() {
 /* 815F9980 002C7D80  21 05 00 20 */    subfic r8, r5, 0x20
@@ -693,8 +693,8 @@ L_815F99A0:
 }
 
 /*
-    @Address: 0x815F99A8
-    @Size: 0xB0
+    @note Address: 0x815F99A8
+    @note Size: 0xB0
 */
 asm void __cvt_sll_dbl() {
 /* 815F99A8 002C7DA8  94 21 FF F0 */    stwu r1, -0x10(r1)
@@ -748,8 +748,8 @@ L_815F9A44:
 }
 
 /*
-    @Address: 0x815F9A58
-    @Size: 0x9C
+    @note Address: 0x815F9A58
+    @note Size: 0x9C
 */
 asm void __cvt_ull_dbl() {
 /* 815F9A58 002C7E58  94 21 FF F0 */    stwu r1, -0x10(r1)
@@ -797,8 +797,8 @@ L_815F9AE0:
 }
 
 /*
-    @Address: 0x815F9AF4
-    @Size: 0xA0
+    @note Address: 0x815F9AF4
+    @note Size: 0xA0
 */
 asm void __cvt_ull_flt() {
 /* 815F9AF4 002C7EF4  94 21 FF F0 */    stwu r1, -0x10(r1)
@@ -847,8 +847,8 @@ L_815F9B7C:
 }
 
 /*
-    @Address: 0x815F9B94
-    @Size: 0xCC
+    @note Address: 0x815F9B94
+    @note Size: 0xCC
 */
 asm void __cvt_dbl_usll() {
 /* 815F9B94 002C7F94  94 21 FF F0 */    stwu r1, -0x10(r1)
@@ -911,8 +911,8 @@ L_815F9C58:
 }
 
 /*
-    @Address: 0x815F9C60
-    @Size: 0xAB
+    @note Address: 0x815F9C60
+    @note Size: 0xAB
 */
 asm void __cvt_dbl_ull() {
 /* 815F9C60 002C8060  94 21 FF F0 */    stwu r1, -0x10(r1)

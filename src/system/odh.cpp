@@ -1,8 +1,8 @@
 #include "system/odh.h"
 
 /*
-    @Address: 0x8135DDB0
-    @Size: 0x24
+    @note Address: 0x8135DDB0
+    @note Size: 0x24
 */
 s32 CArGBAOdh::ScaleLimit(s32 scale) {
     s32 newScale = scale;

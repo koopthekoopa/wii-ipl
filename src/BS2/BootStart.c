@@ -25,8 +25,8 @@ extern void exit();
 extern void __start();
 
 /*
-    @Address: 0x81330000
-    @Size: 0xA8
+    @note Address: 0x81330000
+    @note Size: 0xA8
 */
 __declspec(weak) asm void __start() {
     nofralloc
@@ -93,8 +93,8 @@ bi2_end_arg_parse:
 }
 
 /*
-    @Address: 0x813300A8
-    @Size: 0x90
+    @note Address: 0x813300A8
+    @note Size: 0x90
 */
 static asm void __init_registers() {
     nofralloc
@@ -155,8 +155,8 @@ static void init_bss_section(void* dest, unsigned int size) {
 }
 
 /*
-    @Address: 0x81330138
-    @Size: 0xA0
+    @note Address: 0x81330138
+    @note Size: 0xA0
 */
 static void __init_data() {
     __rom_copy_info* rci;

@@ -48,7 +48,8 @@ tools/info.txt
 *.bin
 *.map
 *.log
-READMEcomp.md
-objdiff.json
+*.elf
+*.dol
+objdiff.json.old
 *.lnk
 

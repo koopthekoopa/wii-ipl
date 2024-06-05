@@ -21,7 +21,7 @@ def extractZIPURL(url):
 
 def main():
     print("Downloading MWCC...")
-    extractZIPURL("https://files.decomp.dev/compilers_20231018.zip")
+    extractZIPURL("https://files.decomp.dev/compilers_latest.zip")
     
     print("Downloading PowerPC BinUtils...")
 

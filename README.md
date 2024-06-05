@@ -47,11 +47,6 @@ If you have not got Wine installed, You will need to follow [this guide](https:/
   ```
   - Otherwise download the repository by clicking on **Code** then **Download ZIP** then extract the .zip contents
 - You will need to prepare for compiling. To do that you need to type in
-  On Windows:
-  ```
-  python prepare.py
-  ```
-  On Linux:
   ```
   python3 prepare.py
   ```
@@ -72,9 +67,9 @@ If you have not got Wine installed, You will need to follow [this guide](https:/
 |`ipl.43E.app` (Version 4.3E)|`2ebea6ed22473857ed64b12daa71ae2d1ed61708`|
 
 # Credits
-[decomp-toolkit](https://www.github.com/encounter/decomp-toolkit) - A tool that can do a lot and will make decompiling GameCube/Wii games easier and better. Special thanks to the every contributer :D   
+[decomp-toolkit](https://www.github.com/encounter/decomp-toolkit) - A tool that can do a lot and will make decompiling GameCube/Wii games easier and better. Seriously thanks to the people who worked on this.   
 [objdiff](https://www.github.com/encounter/objdiff) - Used to check whenever if the compiled object is matching or not.   
-[Ghidra](https://www.github.com/NationalSecurityAgency/ghidra) - Used to load executables and output an approximate decompilaton of a function.   
+[Ghidra](https://www.github.com/NationalSecurityAgency/ghidra) - Used to load executables and output a rough decompilaton of a function.   
 [WiiBrew](https://www.wiibrew.org) - A website that contains dozens of documentation about the Wii.   
 [Gamecube/Wii Decompilation Discord](https://discord.gg/hKx3FJJgrV) - Contains helpful resources for decompiling.   
 

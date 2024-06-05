@@ -1,5 +1,0 @@
-REVO_EXT_COMMON_INC = $(COMMON_INCLUDES)
-
-include $(REVOLUTION_EXT_ROOT)/$(RULES_ROOT)/net/define.mak
-
-

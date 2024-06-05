@@ -129,5 +129,3 @@ __BS1_entry:
 
 /* At the end of BS1 */
 .long BS2_ENTRY
-
-

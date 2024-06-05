@@ -24,8 +24,8 @@ static inline void __exception_info_constants(__eti_init_info* info, char** R2) 
 }
 
 /*
-    @Address: 0x815F9D08
-    @Size: 0x3C
+    @note Address: 0x815F9D08
+    @note Size: 0x3C
 */
 extern void __init_cpp_exceptions() {
     if (fragmentID == -2) {
@@ -37,8 +37,8 @@ extern void __init_cpp_exceptions() {
 }
 
 /*
-    @Address: 0x815F9D44
-    @Size: 0x34
+    @note Address: 0x815F9D44
+    @note Size: 0x34
 */
 extern void __fini_cpp_exceptions() {
     if (fragmentID != -2) {

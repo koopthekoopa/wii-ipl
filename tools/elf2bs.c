@@ -43,9 +43,9 @@ typedef struct {
     uint32_t pad4[6];
     uint32_t bs2Size;
     uint32_t pad5[10];
-    uint32_t unkAddress;        //
-    uint32_t unkSize;           // Help
-    uint32_t bs1RelatedPerhaps; //
+    uint32_t unkAddress;
+    uint32_t unkSize;
+    uint32_t someVirtualOffset;
     uint32_t pad6[7];
 } BSHead;
 
