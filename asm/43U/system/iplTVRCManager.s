@@ -1,7 +1,7 @@
 .include "macros.inc"
 .file "iplTVRCManager.cpp"
 
-# 0x81361950 - 0x8136270C
+# 0x81361950 - 0x813626EC
 .text
 .balign 4
 
@@ -91,7 +91,7 @@
 /* 81361A80 0002FE80  2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81361A84 0002FE84  40 81 00 0C */	ble .L_81361A90
 /* 81361A88 0002FE88  7F C3 F3 78 */	mr r3, r30
-/* 81361A8C 0002FE8C  48 29 66 59 */	bl fn_815F80E4
+/* 81361A8C 0002FE8C  48 29 66 59 */	bl __dl__FPv
 .L_81361A90:
 /* 81361A90 0002FE90  7F C3 F3 78 */	mr r3, r30
 /* 81361A94 0002FE94  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -989,19 +989,6 @@
 /* 813626E4 00030AE4  54 03 D9 7E */	srwi r3, r0, 5
 /* 813626E8 00030AE8  4E 80 00 20 */	blr
 .endfn isTVRCChannel__Q23ipl11TVRCManagerFUl
-
-# ipl::utility::RangeCheckGELTS32(long, long, long)
-.fn RangeCheckGELTS32__Q23ipl7utilityFlll, global
-/* 813626EC 00030AEC  7C 03 20 00 */	cmpw r3, r4
-/* 813626F0 00030AF0  38 00 00 00 */	li r0, 0x0
-/* 813626F4 00030AF4  41 80 00 10 */	blt .L_81362704
-/* 813626F8 00030AF8  7C 03 28 00 */	cmpw r3, r5
-/* 813626FC 00030AFC  40 80 00 08 */	bge .L_81362704
-/* 81362700 00030B00  38 00 00 01 */	li r0, 0x1
-.L_81362704:
-/* 81362704 00030B04  7C 03 03 78 */	mr r3, r0
-/* 81362708 00030B08  4E 80 00 20 */	blr
-.endfn RangeCheckGELTS32__Q23ipl7utilityFlll
 
 # 0x81639890 - 0x81639900
 .data

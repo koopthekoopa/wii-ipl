@@ -616,7 +616,7 @@
 /* 81345138 00013538  41 82 00 10 */	beq .L_81345148
 /* 8134513C 0001353C  2C 04 00 00 */	cmpwi r4, 0x0
 /* 81345140 00013540  40 81 00 08 */	ble .L_81345148
-/* 81345144 00013544  48 2B 2F A1 */	bl fn_815F80E4
+/* 81345144 00013544  48 2B 2F A1 */	bl __dl__FPv
 .L_81345148:
 /* 81345148 00013548  7F E3 FB 78 */	mr r3, r31
 /* 8134514C 0001354C  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -673,7 +673,7 @@
 /* 813451F4 000135F4  80 63 00 00 */	lwz r3, 0x0(r3)
 /* 813451F8 000135F8  38 63 02 8C */	addi r3, r3, 0x28c
 /* 813451FC 000135FC  48 1C D1 1D */	bl fn_81512318
-/* 81345200 00013600  48 02 4A 25 */	bl fn_81369C24
+/* 81345200 00013600  48 02 4A 25 */	bl initAnmFrame__Q33ipl6layout8AnimatorFv
 .L_81345204:
 /* 81345204 00013604  80 7F 00 78 */	lwz r3, 0x78(r31)
 /* 81345208 00013608  38 80 00 05 */	li r4, 0x5
@@ -687,7 +687,7 @@
 /* 81345228 00013628  80 63 00 00 */	lwz r3, 0x0(r3)
 /* 8134522C 0001362C  38 63 02 8C */	addi r3, r3, 0x28c
 /* 81345230 00013630  48 1C D0 E9 */	bl fn_81512318
-/* 81345234 00013634  48 02 49 F1 */	bl fn_81369C24
+/* 81345234 00013634  48 02 49 F1 */	bl initAnmFrame__Q33ipl6layout8AnimatorFv
 .L_81345238:
 /* 81345238 00013638  80 7F 00 78 */	lwz r3, 0x78(r31)
 /* 8134523C 0001363C  80 63 00 04 */	lwz r3, 0x4(r3)
@@ -742,10 +742,10 @@
 /* 813452D8 000136D8  48 00 03 81 */	bl stt_fadeout__Q23ipl12DialogWindowFv
 /* 813452DC 000136DC  48 00 00 10 */	b .L_813452EC
 .L_813452E0:
-/* 813452E0 000136E0  48 00 05 A1 */	bl fn_81345880
+/* 813452E0 000136E0  48 00 05 A1 */	bl iplDialogWindow_81345880
 /* 813452E4 000136E4  48 00 00 08 */	b .L_813452EC
 .L_813452E8:
-/* 813452E8 000136E8  48 00 04 91 */	bl fn_81345778
+/* 813452E8 000136E8  48 00 04 91 */	bl iplDialogWindow_81345778
 .L_813452EC:
 /* 813452EC 000136EC  80 7F 00 78 */	lwz r3, 0x78(r31)
 /* 813452F0 000136F0  2C 03 00 00 */	cmpwi r3, 0x0
@@ -889,7 +889,7 @@
 /* 813454D8 000138D8  90 01 00 0C */	stw r0, 0xc(r1)
 /* 813454DC 000138DC  C8 01 00 08 */	lfd f0, 0x8(r1)
 /* 813454E0 000138E0  EC 20 08 28 */	fsubs f1, f0, f1
-/* 813454E4 000138E4  48 02 47 7D */	bl fn_81369C60
+/* 813454E4 000138E4  48 02 47 7D */	bl initAnmFrame__Q33ipl6layout8AnimatorFf
 /* 813454E8 000138E8  80 1F 00 40 */	lwz r0, 0x40(r31)
 /* 813454EC 000138EC  2C 00 00 64 */	cmpwi r0, 0x64
 /* 813454F0 000138F0  40 82 00 5C */	bne .L_8134554C
@@ -1057,7 +1057,7 @@
 /* 81345714 00013B14  4E 80 00 20 */	blr
 .endfn setEventHandler__Q23gui7ManagerFPQ23gui12EventHandler
 
-.fn fn_81345718, global
+.fn iplDialogWindow_81345718, global
 /* 81345718 00013B18  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8134571C 00013B1C  7C 08 02 A6 */	mflr r0
 /* 81345720 00013B20  90 01 00 24 */	stw r0, 0x24(r1)
@@ -1073,7 +1073,7 @@
 /* 81345744 00013B44  38 9F FF FC */	subi r4, r31, 0x4
 /* 81345748 00013B48  7F 83 E3 78 */	mr r3, r28
 /* 8134574C 00013B4C  7F A5 EB 78 */	mr r5, r29
-/* 81345750 00013B50  4B FF FF C9 */	bl fn_81345718
+/* 81345750 00013B50  4B FF FF C9 */	bl iplDialogWindow_81345718
 /* 81345754 00013B54  83 FF 00 00 */	lwz r31, 0x0(r31)
 .L_81345758:
 /* 81345758 00013B58  7C 1F F0 40 */	cmplw r31, r30
@@ -1084,9 +1084,9 @@
 /* 8134576C 00013B6C  7C 08 03 A6 */	mtlr r0
 /* 81345770 00013B70  38 21 00 20 */	addi r1, r1, 0x20
 /* 81345774 00013B74  4E 80 00 20 */	blr
-.endfn fn_81345718
+.endfn iplDialogWindow_81345718
 
-.fn fn_81345778, global
+.fn iplDialogWindow_81345778, global
 /* 81345778 00013B78  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8134577C 00013B7C  7C 08 02 A6 */	mflr r0
 /* 81345780 00013B80  90 01 00 14 */	stw r0, 0x14(r1)
@@ -1157,9 +1157,9 @@
 /* 81345874 00013C74  7C 08 03 A6 */	mtlr r0
 /* 81345878 00013C78  38 21 00 10 */	addi r1, r1, 0x10
 /* 8134587C 00013C7C  4E 80 00 20 */	blr
-.endfn fn_81345778
+.endfn iplDialogWindow_81345778
 
-.fn fn_81345880, global
+.fn iplDialogWindow_81345880, global
 /* 81345880 00013C80  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 81345884 00013C84  7C 08 02 A6 */	mflr r0
 /* 81345888 00013C88  90 01 00 34 */	stw r0, 0x34(r1)
@@ -1244,7 +1244,7 @@
 /* 813459B8 00013DB8  41 82 00 40 */	beq .L_813459F8
 /* 813459BC 00013DBC  7F E3 FB 78 */	mr r3, r31
 /* 813459C0 00013DC0  54 05 06 3E */	clrlwi r5, r0, 24
-/* 813459C4 00013DC4  4B FF FD 55 */	bl fn_81345718
+/* 813459C4 00013DC4  4B FF FD 55 */	bl iplDialogWindow_81345718
 /* 813459C8 00013DC8  80 1F 00 44 */	lwz r0, 0x44(r31)
 /* 813459CC 00013DCC  2C 00 00 FF */	cmpwi r0, 0xff
 /* 813459D0 00013DD0  40 82 00 84 */	bne .L_81345A54
@@ -1255,12 +1255,12 @@
 /* 813459E4 00013DE4  80 63 00 00 */	lwz r3, 0x0(r3)
 /* 813459E8 00013DE8  38 63 02 8C */	addi r3, r3, 0x28c
 /* 813459EC 00013DEC  48 1C C9 2D */	bl fn_81512318
-/* 813459F0 00013DF0  48 02 42 35 */	bl fn_81369C24
+/* 813459F0 00013DF0  48 02 42 35 */	bl initAnmFrame__Q33ipl6layout8AnimatorFv
 /* 813459F4 00013DF4  48 00 00 60 */	b .L_81345A54
 .L_813459F8:
 /* 813459F8 00013DF8  7F E3 FB 78 */	mr r3, r31
 /* 813459FC 00013DFC  38 A0 00 FF */	li r5, 0xff
-/* 81345A00 00013E00  4B FF FD 19 */	bl fn_81345718
+/* 81345A00 00013E00  4B FF FD 19 */	bl iplDialogWindow_81345718
 /* 81345A04 00013E04  7F C3 F3 78 */	mr r3, r30
 /* 81345A08 00013E08  38 80 00 00 */	li r4, 0x0
 /* 81345A0C 00013E0C  4B FF EA 09 */	bl SetVisible__Q34nw4r3lyt4PaneFb
@@ -1321,7 +1321,7 @@
 /* 81345ADC 00013EDC  7F E3 FB 78 */	mr r3, r31
 /* 81345AE0 00013EE0  80 85 00 14 */	lwz r4, 0x14(r5)
 /* 81345AE4 00013EE4  54 05 06 3E */	clrlwi r5, r0, 24
-/* 81345AE8 00013EE8  4B FF FC 31 */	bl fn_81345718
+/* 81345AE8 00013EE8  4B FF FC 31 */	bl iplDialogWindow_81345718
 /* 81345AEC 00013EEC  80 1F 00 90 */	lwz r0, 0x90(r31)
 /* 81345AF0 00013EF0  80 7F 00 88 */	lwz r3, 0x88(r31)
 /* 81345AF4 00013EF4  1C 00 00 1C */	mulli r0, r0, 0x1c
@@ -1419,12 +1419,12 @@
 /* 81345C58 00014058  41 82 00 14 */	beq .L_81345C6C
 /* 81345C5C 0001405C  7F E3 FB 78 */	mr r3, r31
 /* 81345C60 00014060  54 A5 06 3E */	clrlwi r5, r5, 24
-/* 81345C64 00014064  4B FF FA B5 */	bl fn_81345718
+/* 81345C64 00014064  4B FF FA B5 */	bl iplDialogWindow_81345718
 /* 81345C68 00014068  48 00 00 80 */	b .L_81345CE8
 .L_81345C6C:
 /* 81345C6C 0001406C  7F E3 FB 78 */	mr r3, r31
 /* 81345C70 00014070  38 A0 00 FF */	li r5, 0xff
-/* 81345C74 00014074  4B FF FA A5 */	bl fn_81345718
+/* 81345C74 00014074  4B FF FA A5 */	bl iplDialogWindow_81345718
 /* 81345C78 00014078  7F C3 F3 78 */	mr r3, r30
 /* 81345C7C 0001407C  38 80 00 00 */	li r4, 0x0
 /* 81345C80 00014080  4B FF E7 95 */	bl SetVisible__Q34nw4r3lyt4PaneFb
@@ -1435,7 +1435,7 @@
 /* 81345C94 00014094  80 63 00 00 */	lwz r3, 0x0(r3)
 /* 81345C98 00014098  38 63 02 8C */	addi r3, r3, 0x28c
 /* 81345C9C 0001409C  48 1C C6 7D */	bl fn_81512318
-/* 81345CA0 000140A0  48 02 3F 85 */	bl fn_81369C24
+/* 81345CA0 000140A0  48 02 3F 85 */	bl initAnmFrame__Q33ipl6layout8AnimatorFv
 /* 81345CA4 000140A4  48 00 00 44 */	b .L_81345CE8
 .L_81345CA8:
 /* 81345CA8 000140A8  38 A7 00 08 */	addi r5, r7, 0x8
@@ -1496,7 +1496,7 @@
 /* 81345D7C 0001417C  7F E3 FB 78 */	mr r3, r31
 /* 81345D80 00014180  7F C4 F3 78 */	mr r4, r30
 /* 81345D84 00014184  54 05 06 3E */	clrlwi r5, r0, 24
-/* 81345D88 00014188  4B FF F9 91 */	bl fn_81345718
+/* 81345D88 00014188  4B FF F9 91 */	bl iplDialogWindow_81345718
 /* 81345D8C 0001418C  48 00 00 34 */	b .L_81345DC0
 .L_81345D90:
 /* 81345D90 00014190  7C 64 2A 14 */	add r3, r4, r5
@@ -1506,12 +1506,12 @@
 /* 81345DA0 000141A0  38 66 02 8C */	addi r3, r6, 0x28c
 /* 81345DA4 000141A4  38 80 00 00 */	li r4, 0x0
 /* 81345DA8 000141A8  48 1C C5 71 */	bl fn_81512318
-/* 81345DAC 000141AC  48 02 3E 79 */	bl fn_81369C24
+/* 81345DAC 000141AC  48 02 3E 79 */	bl initAnmFrame__Q33ipl6layout8AnimatorFv
 .L_81345DB0:
 /* 81345DB0 000141B0  7F E3 FB 78 */	mr r3, r31
 /* 81345DB4 000141B4  7F C4 F3 78 */	mr r4, r30
 /* 81345DB8 000141B8  38 A0 00 FF */	li r5, 0xff
-/* 81345DBC 000141BC  4B FF F9 5D */	bl fn_81345718
+/* 81345DBC 000141BC  4B FF F9 5D */	bl iplDialogWindow_81345718
 .L_81345DC0:
 /* 81345DC0 000141C0  80 1F 00 44 */	lwz r0, 0x44(r31)
 /* 81345DC4 000141C4  2C 00 00 00 */	cmpwi r0, 0x0
@@ -1555,7 +1555,7 @@
 /* 81345E58 00014258  7C 08 03 A6 */	mtlr r0
 /* 81345E5C 0001425C  38 21 00 30 */	addi r1, r1, 0x30
 /* 81345E60 00014260  4E 80 00 20 */	blr
-.endfn fn_81345880
+.endfn iplDialogWindow_81345880
 
 # nw4r::lyt::TextBox* nw4r::ut::DynamicCast<nw4r::lyt::TextBox*, nw4r::lyt::Pane>(nw4r::lyt::Pane*)
 .fn "DynamicCast<PQ34nw4r3lyt7TextBox,Q34nw4r3lyt4Pane>__Q24nw4r2utFPQ34nw4r3lyt4Pane_PQ34nw4r3lyt7TextBox", global
@@ -2350,7 +2350,7 @@
 /* 81346934 00014D34  4E 80 00 20 */	blr
 .endfn callBtn1__Q23ipl12DialogWindowFPCwUl
 
-.fn fn_81346938, global
+.fn iplDialogWindow_81346938, global
 /* 81346938 00014D38  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8134693C 00014D3C  7C 08 02 A6 */	mflr r0
 /* 81346940 00014D40  90 01 00 34 */	stw r0, 0x34(r1)
@@ -2403,15 +2403,15 @@
 /* 813469F8 00014DF8  7C 08 03 A6 */	mtlr r0
 /* 813469FC 00014DFC  38 21 00 30 */	addi r1, r1, 0x30
 /* 81346A00 00014E00  4E 80 00 20 */	blr
-.endfn fn_81346938
+.endfn iplDialogWindow_81346938
 
-.fn fn_81346A04, global
+.fn iplDialogWindow_81346A04, global
 /* 81346A04 00014E04  D0 23 00 00 */	stfs f1, 0x0(r3)
 /* 81346A08 00014E08  D0 43 00 04 */	stfs f2, 0x4(r3)
 /* 81346A0C 00014E0C  4E 80 00 20 */	blr
-.endfn fn_81346A04
+.endfn iplDialogWindow_81346A04
 
-.fn fn_81346A10, global
+.fn iplDialogWindow_81346A10, global
 /* 81346A10 00014E10  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 81346A14 00014E14  7C 08 02 A6 */	mflr r0
 /* 81346A18 00014E18  90 01 00 34 */	stw r0, 0x34(r1)
@@ -2462,7 +2462,7 @@
 /* 81346AC8 00014EC8  7C 08 03 A6 */	mtlr r0
 /* 81346ACC 00014ECC  38 21 00 30 */	addi r1, r1, 0x30
 /* 81346AD0 00014ED0  4E 80 00 20 */	blr
-.endfn fn_81346A10
+.endfn iplDialogWindow_81346A10
 
 # ipl::DialogWindow::callBtn2(unsigned long, unsigned long, unsigned long, bool)
 .fn callBtn2__Q23ipl12DialogWindowFUlUlUlb, global
@@ -2507,7 +2507,7 @@
 /* 81346B68 00014F68  4E 80 00 20 */	blr
 .endfn callBtn2__Q23ipl12DialogWindowFUlUlUlb
 
-.fn fn_81346B6C, global
+.fn iplDialogWindow_81346B6C, global
 /* 81346B6C 00014F6C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81346B70 00014F70  7C 08 02 A6 */	mflr r0
 /* 81346B74 00014F74  90 01 00 24 */	stw r0, 0x24(r1)
@@ -2551,9 +2551,9 @@
 /* 81346C08 00015008  7C 08 03 A6 */	mtlr r0
 /* 81346C0C 0001500C  38 21 00 20 */	addi r1, r1, 0x20
 /* 81346C10 00015010  4E 80 00 20 */	blr
-.endfn fn_81346B6C
+.endfn iplDialogWindow_81346B6C
 
-.fn fn_81346C14, global
+.fn iplDialogWindow_81346C14, global
 /* 81346C14 00015014  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 81346C18 00015018  7C 08 02 A6 */	mflr r0
 /* 81346C1C 0001501C  90 01 00 44 */	stw r0, 0x44(r1)
@@ -2651,7 +2651,7 @@
 /* 81346D7C 0001517C  7C 08 03 A6 */	mtlr r0
 /* 81346D80 00015180  38 21 00 40 */	addi r1, r1, 0x40
 /* 81346D84 00015184  4E 80 00 20 */	blr
-.endfn fn_81346C14
+.endfn iplDialogWindow_81346C14
 
 # ipl::DialogWindow::callBtn2(const wchar_t*, unsigned long, unsigned long, bool)
 .fn callBtn2__Q23ipl12DialogWindowFPCwUlUlb, global
@@ -2906,7 +2906,7 @@
 /* 81347118 00015518  80 63 00 00 */	lwz r3, 0x0(r3)
 /* 8134711C 0001551C  38 63 02 8C */	addi r3, r3, 0x28c
 /* 81347120 00015520  48 1C B1 F9 */	bl fn_81512318
-/* 81347124 00015524  48 02 2B 01 */	bl fn_81369C24
+/* 81347124 00015524  48 02 2B 01 */	bl initAnmFrame__Q33ipl6layout8AnimatorFv
 /* 81347128 00015528  3C 60 81 09 */	lis r3, lbl_8108992C@ha
 /* 8134712C 0001552C  3C 80 81 63 */	lis r4, lbl_8163596B@ha
 /* 81347130 00015530  38 63 99 2C */	addi r3, r3, lbl_8108992C@l
@@ -2923,7 +2923,7 @@
 /* 81347158 00015558  4E 80 00 20 */	blr
 .endfn callBtnPrg__Q23ipl12DialogWindowFUl
 
-.fn fn_8134715C, global
+.fn iplDialogWindow_8134715C, global
 /* 8134715C 0001555C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81347160 00015560  7C 08 02 A6 */	mflr r0
 /* 81347164 00015564  90 01 00 24 */	stw r0, 0x24(r1)
@@ -2984,7 +2984,7 @@
 /* 81347240 00015640  80 63 00 00 */	lwz r3, 0x0(r3)
 /* 81347244 00015644  38 63 02 8C */	addi r3, r3, 0x28c
 /* 81347248 00015648  48 1C B0 D1 */	bl fn_81512318
-/* 8134724C 0001564C  48 02 29 D9 */	bl fn_81369C24
+/* 8134724C 0001564C  48 02 29 D9 */	bl initAnmFrame__Q33ipl6layout8AnimatorFv
 /* 81347250 00015650  3C 60 81 09 */	lis r3, lbl_8108992C@ha
 /* 81347254 00015654  3C 80 81 63 */	lis r4, lbl_8163596B@ha
 /* 81347258 00015658  38 63 99 2C */	addi r3, r3, lbl_8108992C@l
@@ -2999,7 +2999,7 @@
 /* 81347278 00015678  7C 08 03 A6 */	mtlr r0
 /* 8134727C 0001567C  38 21 00 20 */	addi r1, r1, 0x20
 /* 81347280 00015680  4E 80 00 20 */	blr
-.endfn fn_8134715C
+.endfn iplDialogWindow_8134715C
 
 # ipl::DialogWindow::start_point_event(const char*, ipl::controller::Interface*)
 .fn start_point_event__Q23ipl12DialogWindowFPCcPQ33ipl10controller9Interface, global
@@ -3617,11 +3617,11 @@
 /* 81347A44 00015E44  7C 7E 1B 78 */	mr r30, r3
 /* 81347A48 00015E48  41 82 00 1C */	beq .L_81347A64
 /* 81347A4C 00015E4C  38 80 00 00 */	li r4, 0x0
-/* 81347A50 00015E50  48 02 18 19 */	bl fn_81369268
+/* 81347A50 00015E50  48 02 18 19 */	bl __dt__Q23gui11PaneManagerFv
 /* 81347A54 00015E54  2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81347A58 00015E58  40 81 00 0C */	ble .L_81347A64
 /* 81347A5C 00015E5C  7F C3 F3 78 */	mr r3, r30
-/* 81347A60 00015E60  48 2B 06 85 */	bl fn_815F80E4
+/* 81347A60 00015E60  48 2B 06 85 */	bl __dl__FPv
 .L_81347A64:
 /* 81347A64 00015E64  7F C3 F3 78 */	mr r3, r30
 /* 81347A68 00015E68  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -3653,28 +3653,28 @@
 /* 81347A90 00015E90  4E 80 00 20 */	blr
 .endfn init__Q23gui9InterfaceFv
 
-.fn fn_81347A94, global
+.fn iplPaneMgr_81347A94, global
 /* 81347A94 00015E94  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81347A98 00015E98  7C 08 02 A6 */	mflr r0
 /* 81347A9C 00015E9C  C0 22 81 2C */	lfs f1, lbl_8169452C@sda21(r0)
 /* 81347AA0 00015EA0  38 6D A6 80 */	li r3, lbl_816986C0@sda21
 /* 81347AA4 00015EA4  90 01 00 14 */	stw r0, 0x14(r1)
 /* 81347AA8 00015EA8  C0 42 81 30 */	lfs f2, lbl_81694530@sda21(r0)
-/* 81347AAC 00015EAC  4B FF EF 59 */	bl fn_81346A04
+/* 81347AAC 00015EAC  4B FF EF 59 */	bl iplDialogWindow_81346A04
 /* 81347AB0 00015EB0  C0 22 81 34 */	lfs f1, lbl_81694534@sda21(r0)
 /* 81347AB4 00015EB4  38 6D A6 88 */	li r3, lbl_816986C8@sda21
 /* 81347AB8 00015EB8  C0 42 81 38 */	lfs f2, lbl_81694538@sda21(r0)
-/* 81347ABC 00015EBC  4B FF EF 49 */	bl fn_81346A04
+/* 81347ABC 00015EBC  4B FF EF 49 */	bl iplDialogWindow_81346A04
 /* 81347AC0 00015EC0  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 81347AC4 00015EC4  7C 08 03 A6 */	mtlr r0
 /* 81347AC8 00015EC8  38 21 00 10 */	addi r1, r1, 0x10
 /* 81347ACC 00015ECC  4E 80 00 20 */	blr
-.endfn fn_81347A94
+.endfn iplPaneMgr_81347A94
 
 # 0x8160D1CC - 0x8160D1D0
 .section .ctors, "a"
 .balign 4
-	.4byte fn_81347A94
+	.4byte iplPaneMgr_81347A94
 
 # 0x81635510 - 0x81635A70
 .data
@@ -3993,26 +3993,26 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte create__Q23gui9InterfaceFv
-	.4byte fn_81368CF8
-	.4byte fn_813690A8
+	.4byte init__Q23gui7ManagerFv
+	.4byte calc__Q23gui7ManagerFv
 	.4byte draw__Q23gui9InterfaceFRA3_A4_f
-	.4byte fn_81369110
+	.4byte draw__Q23gui7ManagerFv
 	.4byte __dt__Q33ipl3gui11PaneManagerFv
-	.4byte fn_81368DB4
-	.4byte fn_81368E78
+	.4byte addComponent__Q23gui7ManagerFPQ23gui9Component
+	.4byte getComponent__Q23gui7ManagerFUl
 	.4byte update__Q23gui7ManagerFiPC10KPADStatusffPv
-	.4byte fn_81368EA4
+	.4byte update__Q23gui7ManagerFiffUlUlUlPv
 	.4byte onEvent__Q23gui7ManagerFUlUliPv
-	.4byte fn_81369178
+	.4byte setAllComponentTriggerTarget__Q23gui7ManagerFb
 	.4byte setEventHandler__Q23gui7ManagerFPQ23gui12EventHandler
 	.4byte changeEventHandler__Q23gui7ManagerFPQ23gui12EventHandler
-	.4byte fn_813691F0
-	.4byte fn_813693D4
-	.4byte fn_81369680
+	.4byte setDraggingButton__Q23gui7ManagerFUl
+	.4byte createLayoutScene__Q23gui11PaneManagerFRCQ34nw4r3lyt6Layout
+	.4byte getPaneComponentByPane__Q23gui11PaneManagerFPQ34nw4r3lyt4Pane
 	.4byte getDrawInfo__Q23gui11PaneManagerFv
 	.4byte setDrawInfo__Q23gui11PaneManagerFPCQ34nw4r3lyt8DrawInfo
-	.4byte fn_813696F0
-	.4byte fn_813693F4
+	.4byte setAllBoundingBoxComponentTriggerTarget__Q23gui11PaneManagerFb
+	.4byte "walkInChildren__Q23gui11PaneManagerFRQ34nw4r2ut28LinkList<Q34nw4r3lyt4Pane,4>"
 .endobj lbl_816359C4
 
 .obj lbl_81635A20, global

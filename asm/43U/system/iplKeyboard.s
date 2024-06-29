@@ -5,7 +5,7 @@
 .text
 .balign 4
 
-.fn fn_81354CD0, global
+.fn iplKeyboardMgr_81354CD0, global
 /* 81354CD0 000230D0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81354CD4 000230D4  7C 08 02 A6 */	mflr r0
 /* 81354CD8 000230D8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -29,7 +29,7 @@
 /* 81354D14 00023114  7C 08 03 A6 */	mtlr r0
 /* 81354D18 00023118  38 21 00 10 */	addi r1, r1, 0x10
 /* 81354D1C 0002311C  4E 80 00 20 */	blr
-.endfn fn_81354CD0
+.endfn iplKeyboardMgr_81354CD0
 
 # ipl::keyboard::EventObserver::onCommand(textinput::CommandReceiver::INPUT_COMMAND, void*)
 .fn onCommand__Q33ipl8keyboard13EventObserverFQ39textinput15CommandReceiver13INPUT_COMMANDPv, global
@@ -609,7 +609,7 @@
 /* 813554F8 000238F8  41 82 00 10 */	beq .L_81355508
 /* 813554FC 000238FC  2C 04 00 00 */	cmpwi r4, 0x0
 /* 81355500 00023900  40 81 00 08 */	ble .L_81355508
-/* 81355504 00023904  48 2A 2B E1 */	bl fn_815F80E4
+/* 81355504 00023904  48 2A 2B E1 */	bl __dl__FPv
 .L_81355508:
 /* 81355508 00023908  7F E3 FB 78 */	mr r3, r31
 /* 8135550C 0002390C  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -805,7 +805,7 @@
 /* 813557B0 00023BB0  81 8C 00 20 */	lwz r12, 0x20(r12)
 /* 813557B4 00023BB4  7D 89 03 A6 */	mtctr r12
 /* 813557B8 00023BB8  4E 80 04 21 */	bctrl
-/* 813557BC 00023BBC  4B FF F5 15 */	bl fn_81354CD0
+/* 813557BC 00023BBC  4B FF F5 15 */	bl iplKeyboardMgr_81354CD0
 /* 813557C0 00023BC0  90 7B 00 20 */	stw r3, 0x20(r27)
 /* 813557C4 00023BC4  4B FE 02 05 */	bl getController__Q23ipl6SystemFi
 /* 813557C8 00023BC8  2C 03 00 00 */	cmpwi r3, 0x0
@@ -1082,7 +1082,7 @@
 /* 81355B88 00023F88  38 60 00 01 */	li r3, 0x1
 /* 81355B8C 00023F8C  38 80 00 07 */	li r4, 0x7
 /* 81355B90 00023F90  38 A0 00 01 */	li r5, 0x1
-/* 81355B94 00023F94  48 1F 1C 7D */	bl fn_81547810
+/* 81355B94 00023F94  48 1F 1C 7D */	bl GXSetZMode
 /* 81355B98 00023F98  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 81355B9C 00023F9C  7C 08 03 A6 */	mtlr r0
 /* 81355BA0 00023FA0  38 21 00 10 */	addi r1, r1, 0x10
@@ -1108,7 +1108,7 @@
 /* 81355BD0 00023FD0  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 81355BD4 00023FD4  7C 7E 1B 78 */	mr r30, r3
 /* 81355BD8 00023FD8  90 83 00 20 */	stw r4, 0x20(r3)
-/* 81355BDC 00023FDC  4B FF F0 F5 */	bl fn_81354CD0
+/* 81355BDC 00023FDC  4B FF F0 F5 */	bl iplKeyboardMgr_81354CD0
 /* 81355BE0 00023FE0  90 7E 00 20 */	stw r3, 0x20(r30)
 /* 81355BE4 00023FE4  7F C3 F3 78 */	mr r3, r30
 /* 81355BE8 00023FE8  7F E4 FB 78 */	mr r4, r31

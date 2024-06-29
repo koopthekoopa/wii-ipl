@@ -15,11 +15,11 @@ endif
 ### Directory defines
 BUILD_ROOT				= build/$(VERSION)
 CONFIG_ROOT				= config/$(VERSION)
-OBJECT_ROOT				= $(BUILD_ROOT)/obj
 ASSEMBLY_ROOT			= asm
 VER_ASSEMBLY_ROOT		= $(ASSEMBLY_ROOT)/$(VERSION)
 SOURCE_ROOT				= src
 INCLUDE_ROOT			= include
+OBJECT_ROOT				= $(BUILD_ROOT)/obj
 RULES_ROOT				= rules
 TOOLS_ROOT				= tools
 LIBRARIES_ROOT			= libs

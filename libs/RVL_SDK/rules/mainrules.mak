@@ -8,7 +8,9 @@ SDK_INC_PATHS	= $(COMMON_INCLUDES)
 include $(REVOLUTION_SDK_ROOT)/$(RULES_ROOT)/RVLSDKLibs/base.mak
 include $(REVOLUTION_SDK_ROOT)/$(RULES_ROOT)/RVLSDKLibs/os.mak
 
-RVL_SDK: $(SDK_BLD_PATH)/$(BASE_LIBNAME).a $(SDK_BLD_PATH)/$(OS_LIBNAME).a
+RVL_SDK:	$(SDK_BLD_PATH)/base.a \
+			$(SDK_BLD_PATH)/os.a
+
 clean_RVL_SDK:
 	@echo Cleaning RVL_SDK...
 	@rm -rf $(SDK_BLD_PATH)

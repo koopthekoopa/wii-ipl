@@ -4,7 +4,7 @@ BS1_OBJ_PATH		= $(BS1_BLD_PATH)/obj
 
 # stuff for linking the elf
 BS1_ELF_NAME		= BS1
-BS1_ELF_CC			= $(CW_GC_30A52)
+BS1_ELF_CC			= $(CW_GC_30A3)
 BS1_ELF_ADDRESS		= 0x80003400
 
 # only one little object

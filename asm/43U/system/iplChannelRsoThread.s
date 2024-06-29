@@ -14,7 +14,7 @@
 /* 813598CC 00027CCC  7C 9F 23 78 */	mr r31, r4
 /* 813598D0 00027CD0  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813598D4 00027CD4  7C 7E 1B 78 */	mr r30, r3
-/* 813598D8 00027CD8  48 00 B2 F9 */	bl fn_81364BD0
+/* 813598D8 00027CD8  48 00 B2 F9 */	bl __ct__Q33ipl7utility9ut_threadFv
 /* 813598DC 00027CDC  3C 80 81 64 */	lis r4, lbl_81639200@ha
 /* 813598E0 00027CE0  38 00 00 00 */	li r0, 0x0
 /* 813598E4 00027CE4  38 84 92 00 */	addi r4, r4, lbl_81639200@l
@@ -25,7 +25,7 @@
 /* 813598F8 00027CF8  38 A0 00 20 */	li r5, 0x20
 /* 813598FC 00027CFC  98 1E 03 30 */	stb r0, 0x330(r30)
 /* 81359900 00027D00  90 1E 03 34 */	stw r0, 0x334(r30)
-/* 81359904 00027D04  48 29 E7 D1 */	bl fn_815F80D4
+/* 81359904 00027D04  48 29 E7 D1 */	bl __nwa__FUlPQ23EGG4Heapi
 /* 81359908 00027D08  90 7E 03 2C */	stw r3, 0x32c(r30)
 /* 8135990C 00027D0C  7F C3 F3 78 */	mr r3, r30
 /* 81359910 00027D10  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -51,14 +51,14 @@
 /* 81359950 00027D50  38 84 92 00 */	addi r4, r4, lbl_81639200@l
 /* 81359954 00027D54  90 83 00 00 */	stw r4, 0x0(r3)
 /* 81359958 00027D58  80 63 03 2C */	lwz r3, 0x32c(r3)
-/* 8135995C 00027D5C  48 29 E7 91 */	bl fn_815F80EC
+/* 8135995C 00027D5C  48 29 E7 91 */	bl __dla__FPv
 /* 81359960 00027D60  7F C3 F3 78 */	mr r3, r30
 /* 81359964 00027D64  38 80 00 00 */	li r4, 0x0
-/* 81359968 00027D68  48 00 B2 8D */	bl fn_81364BF4
+/* 81359968 00027D68  48 00 B2 8D */	bl __dt__Q33ipl7utility9ut_threadFv
 /* 8135996C 00027D6C  2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81359970 00027D70  40 81 00 0C */	ble .L_8135997C
 /* 81359974 00027D74  7F C3 F3 78 */	mr r3, r30
-/* 81359978 00027D78  48 29 E7 6D */	bl fn_815F80E4
+/* 81359978 00027D78  48 29 E7 6D */	bl __dl__FPv
 .L_8135997C:
 /* 8135997C 00027D7C  7F C3 F3 78 */	mr r3, r30
 /* 81359980 00027D80  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -146,12 +146,12 @@
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl7channel9RsoThreadFv
 	.4byte Run__Q33ipl7channel9RsoThreadFv
-	.4byte fn_81364C34
-	.4byte fn_81364CB0
-	.4byte fn_81364CB8
-	.4byte fn_81364CC0
-	.4byte fn_81364CF4
-	.4byte fn_81364D20
-	.4byte fn_81364D4C
+	.4byte Create__Q33ipl7utility9ut_threadFPvUlib
+	.4byte Resume__Q33ipl7utility9ut_threadFv
+	.4byte Suspend__Q33ipl7utility9ut_threadFv
+	.4byte WaitForThreadExit__Q33ipl7utility9ut_threadFv
+	.4byte IsThreadTerminated__Q33ipl7utility9ut_threadFv
+	.4byte IsThreadSuspended__Q33ipl7utility9ut_threadFv
+	.4byte SetThreadPriority__Q33ipl7utility9ut_threadFi
 	.4byte 0x00000000
 .endobj lbl_81639200

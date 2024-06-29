@@ -1,5 +1,5 @@
-#ifndef IPL_SYSTEM_RIPL_BOARDRECORD_H
-#define IPL_SYSTEM_RIPL_BOARDRECORD_H
+#ifndef RIPL_BOARDRECORD_H
+#define RIPL_BOARDRECORD_H
 
 #include <revolution/types.h>
 
@@ -8,16 +8,16 @@ extern "C" {
 #endif
 
 typedef struct RBRUnkStruct {
-    u32 unkpad[0x4A];
+    u32 unk[0x4A];
     s32 type;
-    u32 imgOffset;
-    s32 unk;
-} RBRUnkStruct;
+    u32 dataOffset;
+    s32 maybeSize;
+} RBRAttachment;
 
-extern u32 RBRFileType_Txt;
-extern u32 RBRFileType_Odh;
-extern u32 RBRFileType_Dat;
-extern u32 RBRFileType_Log;
+extern const char* RBRFileType_Txt;
+extern const char* RBRFileType_Odh;
+extern const char* RBRFileType_Dat;
+extern const char* RBRFileType_Log;
 
 extern u8* RBRGetPicture(u32* rbrData, s32* unkData);
 extern void RBRGetPosRect(f32* left, f32* right, f32* top, f32* bottom);
@@ -26,6 +26,6 @@ extern void RBRGetPosRect(f32* left, f32* right, f32* top, f32* bottom);
 }
 #endif
 
-#endif // IPL_SYSTEM_RIPL_BOARDRECORD_H
+#endif // RIPL_BOARDRECORD_H
 
 

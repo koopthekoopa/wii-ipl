@@ -1,5 +1,5 @@
 .include "macros.inc"
-.file "iplRso.cpp"
+.file "IplRsoSystem.cpp"
 
 # 0x81359A70 - 0x8135A590
 .text
@@ -310,7 +310,7 @@
 /* 81359E3C 0002823C  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81359E40 00028240  41 82 00 0C */	beq .L_81359E4C
 /* 81359E44 00028244  FC 20 F8 90 */	fmr f1, f31
-/* 81359E48 00028248  48 00 FE 19 */	bl fn_81369C60
+/* 81359E48 00028248  48 00 FE 19 */	bl initAnmFrame__Q33ipl6layout8AnimatorFf
 .L_81359E4C:
 /* 81359E4C 0002824C  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 81359E50 00028250  CB E1 00 08 */	lfd f31, 0x8(r1)
@@ -650,7 +650,7 @@
 /* 8135A2AC 000286AC  38 61 00 08 */	addi r3, r1, 0x8
 /* 8135A2B0 000286B0  38 81 00 58 */	addi r4, r1, 0x58
 /* 8135A2B4 000286B4  38 A0 00 00 */	li r5, 0x0
-/* 8135A2B8 000286B8  48 00 02 09 */	bl fn_8135A4C0
+/* 8135A2B8 000286B8  48 00 02 09 */	bl IplRso_8135A4C0
 /* 8135A2BC 000286BC  38 61 00 58 */	addi r3, r1, 0x58
 /* 8135A2C0 000286C0  38 80 00 00 */	li r4, 0x0
 /* 8135A2C4 000286C4  48 1C 86 AD */	bl fn_81522970
@@ -783,7 +783,7 @@
 /* 8135A4BC 000288BC  4E 80 00 20 */	blr
 .endfn GetTextColor__Q34nw4r3lyt7TextBoxCFUl
 
-.fn fn_8135A4C0, global
+.fn IplRso_8135A4C0, global
 /* 8135A4C0 000288C0  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8135A4C4 000288C4  7C 08 02 A6 */	mflr r0
 /* 8135A4C8 000288C8  90 01 00 34 */	stw r0, 0x34(r1)
@@ -837,7 +837,7 @@
 /* 8135A584 00028984  7C 08 03 A6 */	mtlr r0
 /* 8135A588 00028988  38 21 00 30 */	addi r1, r1, 0x30
 /* 8135A58C 0002898C  4E 80 00 20 */	blr
-.endfn fn_8135A4C0
+.endfn IplRso_8135A4C0
 
 # 0x81639230 - 0x81639278
 .data

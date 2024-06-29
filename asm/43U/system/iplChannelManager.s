@@ -33,17 +33,17 @@
 /* 813379D4 00005DD4  80 9E 00 04 */	lwz r4, 0x4(r30)
 /* 813379D8 00005DD8  38 63 90 00 */	subi r3, r3, 0x7000
 /* 813379DC 00005DDC  38 A0 00 20 */	li r5, 0x20
-/* 813379E0 00005DE0  48 2C 06 F5 */	bl fn_815F80D4
+/* 813379E0 00005DE0  48 2C 06 F5 */	bl __nwa__FUlPQ23EGG4Heapi
 /* 813379E4 00005DE4  90 7E 1B 84 */	stw r3, 0x1b84(r30)
 /* 813379E8 00005DE8  3C 60 00 08 */	lis r3, 0x8
 /* 813379EC 00005DEC  80 9E 00 04 */	lwz r4, 0x4(r30)
 /* 813379F0 00005DF0  38 A0 00 20 */	li r5, 0x20
-/* 813379F4 00005DF4  48 2C 06 E1 */	bl fn_815F80D4
+/* 813379F4 00005DF4  48 2C 06 E1 */	bl __nwa__FUlPQ23EGG4Heapi
 /* 813379F8 00005DF8  90 7E 1B 88 */	stw r3, 0x1b88(r30)
 /* 813379FC 00005DFC  3C 60 00 08 */	lis r3, 0x8
 /* 81337A00 00005E00  80 9E 00 04 */	lwz r4, 0x4(r30)
 /* 81337A04 00005E04  38 A0 00 20 */	li r5, 0x20
-/* 81337A08 00005E08  48 2C 06 CD */	bl fn_815F80D4
+/* 81337A08 00005E08  48 2C 06 CD */	bl __nwa__FUlPQ23EGG4Heapi
 /* 81337A0C 00005E0C  90 7E 1B 8C */	stw r3, 0x1b8c(r30)
 /* 81337A10 00005E10  38 E0 00 00 */	li r7, 0x0
 /* 81337A14 00005E14  38 60 00 00 */	li r3, 0x0
@@ -114,11 +114,11 @@
 /* 81337B00 00005F00  90 C3 00 00 */	stw r6, 0x0(r3)
 /* 81337B04 00005F04  48 00 13 4D */	bl getDiskChannelLocation__Q33ipl7channel7ManagerFPiPi
 /* 81337B08 00005F08  80 79 1B 84 */	lwz r3, 0x1b84(r25)
-/* 81337B0C 00005F0C  48 2C 05 E1 */	bl fn_815F80EC
+/* 81337B0C 00005F0C  48 2C 05 E1 */	bl __dla__FPv
 /* 81337B10 00005F10  80 79 1B 88 */	lwz r3, 0x1b88(r25)
-/* 81337B14 00005F14  48 2C 05 D9 */	bl fn_815F80EC
+/* 81337B14 00005F14  48 2C 05 D9 */	bl __dla__FPv
 /* 81337B18 00005F18  80 79 1B 8C */	lwz r3, 0x1b8c(r25)
-/* 81337B1C 00005F1C  48 2C 05 D1 */	bl fn_815F80EC
+/* 81337B1C 00005F1C  48 2C 05 D1 */	bl __dla__FPv
 /* 81337B20 00005F20  3B 80 00 00 */	li r28, 0x0
 /* 81337B24 00005F24  3B E0 00 00 */	li r31, 0x0
 .L_81337B28:
@@ -153,7 +153,7 @@
 /* 81337B90 00005F90  2C 1A 00 00 */	cmpwi r26, 0x0
 /* 81337B94 00005F94  40 81 00 0C */	ble .L_81337BA0
 /* 81337B98 00005F98  7F 23 CB 78 */	mr r3, r25
-/* 81337B9C 00005F9C  48 2C 05 49 */	bl fn_815F80E4
+/* 81337B9C 00005F9C  48 2C 05 49 */	bl __dl__FPv
 .L_81337BA0:
 /* 81337BA0 00005FA0  39 61 00 30 */	addi r11, r1, 0x30
 /* 81337BA4 00005FA4  7F 23 CB 78 */	mr r3, r25
@@ -378,13 +378,13 @@
 /* 81337E60 00006260  4E 80 00 20 */	blr
 .endfn isLoaded__Q33ipl7channel7ManagerCFii
 
-.fn fn_81337E64, global
+.fn iplChannelManager_81337E64, global
 /* 81337E64 00006264  80 63 15 58 */	lwz r3, 0x1558(r3)
 /* 81337E68 00006268  38 03 FF FE */	subi r0, r3, 0x2
 /* 81337E6C 0000626C  7C 00 00 34 */	cntlzw r0, r0
 /* 81337E70 00006270  54 03 D9 7E */	srwi r3, r0, 5
 /* 81337E74 00006274  4E 80 00 20 */	blr
-.endfn fn_81337E64
+.endfn iplChannelManager_81337E64
 
 # ipl::channel::Manager::hasChannel(unsigned long long, int*, int*) const
 .fn hasChannel__Q33ipl7channel7ManagerCFUxPiPi, global
@@ -1817,7 +1817,7 @@
 /* 81339160 00007560  7F A3 EB 78 */	mr r3, r29
 /* 81339164 00007564  7C 86 23 78 */	mr r6, r4
 /* 81339168 00007568  90 9D 15 50 */	stw r4, 0x1550(r29)
-/* 8133916C 0000756C  48 00 00 91 */	bl fn_813391FC
+/* 8133916C 0000756C  48 00 00 91 */	bl iplChannelManager_813391FC
 /* 81339170 00007570  48 00 00 38 */	b .L_813391A8
 .L_81339174:
 /* 81339174 00007574  80 7D 15 54 */	lwz r3, 0x1554(r29)
@@ -1843,28 +1843,28 @@
 /* 813391BC 000075BC  4E 80 00 20 */	blr
 .endfn initManagerTask__Q33ipl7channel7ManagerFPv
 
-.fn fn_813391C0, global
+.fn iplChannelManager_813391C0, global
 /* 813391C0 000075C0  38 00 00 00 */	li r0, 0x0
 /* 813391C4 000075C4  90 C3 15 50 */	stw r6, 0x1550(r3)
 /* 813391C8 000075C8  3C E0 81 09 */	lis r7, smArg__Q23ipl6System@ha
-/* 813391CC 000075CC  3C 80 81 34 */	lis r4, fn_813391F0@ha
+/* 813391CC 000075CC  3C 80 81 34 */	lis r4, iplChannelManager_813391F0@ha
 /* 813391D0 000075D0  90 A3 15 4C */	stw r5, 0x154c(r3)
 /* 813391D4 000075D4  38 E7 90 08 */	addi r7, r7, smArg__Q23ipl6System@l
 /* 813391D8 000075D8  7C 65 1B 78 */	mr r5, r3
-/* 813391DC 000075DC  38 84 91 F0 */	addi r4, r4, fn_813391F0@l
+/* 813391DC 000075DC  38 84 91 F0 */	addi r4, r4, iplChannelManager_813391F0@l
 /* 813391E0 000075E0  90 03 15 58 */	stw r0, 0x1558(r3)
 /* 813391E4 000075E4  38 C0 00 00 */	li r6, 0x0
 /* 813391E8 000075E8  80 67 00 D8 */	lwz r3, 0xd8(r7)
 /* 813391EC 000075EC  48 2B F0 5C */	b fn_815F8248
-.endfn fn_813391C0
+.endfn iplChannelManager_813391C0
 
-.fn fn_813391F0, global
+.fn iplChannelManager_813391F0, global
 /* 813391F0 000075F0  80 A3 15 4C */	lwz r5, 0x154c(r3)
 /* 813391F4 000075F4  80 C3 15 50 */	lwz r6, 0x1550(r3)
-/* 813391F8 000075F8  48 00 00 04 */	b fn_813391FC
-.endfn fn_813391F0
+/* 813391F8 000075F8  48 00 00 04 */	b iplChannelManager_813391FC
+.endfn iplChannelManager_813391F0
 
-.fn fn_813391FC, global
+.fn iplChannelManager_813391FC, global
 /* 813391FC 000075FC  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 81339200 00007600  7C 08 02 A6 */	mflr r0
 /* 81339204 00007604  90 01 00 34 */	stw r0, 0x34(r1)
@@ -1885,7 +1885,7 @@
 /* 81339240 00007640  90 03 15 48 */	stw r0, 0x1548(r3)
 /* 81339244 00007644  39 00 00 00 */	li r8, 0x0
 /* 81339248 00007648  80 64 00 0C */	lwz r3, 0xc(r4)
-/* 8133924C 0000764C  48 02 CC 91 */	bl fn_81365EDC
+/* 8133924C 0000764C  48 02 CC 91 */	bl GetValidTicketIndex__Q33ipl7utility6ESMiscFPQ23EGG4HeapUxP12ESTicketViewUl
 /* 81339250 00007650  2C 03 FF FF */	cmpwi r3, -0x1
 /* 81339254 00007654  40 82 00 10 */	bne .L_81339264
 /* 81339258 00007658  38 00 00 01 */	li r0, 0x1
@@ -1901,7 +1901,7 @@
 /* 8133927C 0000767C  80 7F 00 0C */	lwz r3, 0xc(r31)
 /* 81339280 00007680  7F C5 F3 78 */	mr r5, r30
 /* 81339284 00007684  38 E1 00 10 */	addi r7, r1, 0x10
-/* 81339288 00007688  48 02 C4 7D */	bl fn_81365704
+/* 81339288 00007688  48 02 C4 7D */	bl GetTmdView__Q33ipl7utility6ESMiscFPQ23EGG4HeapUxPP9ESTmdView
 /* 8133928C 0000768C  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81339290 00007690  7C 65 1B 78 */	mr r5, r3
 /* 81339294 00007694  41 82 00 38 */	beq .L_813392CC
@@ -1945,12 +1945,12 @@
 .L_81339324:
 /* 81339324 00007724  80 1C 15 20 */	lwz r0, 0x1520(r28)
 /* 81339328 00007728  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
-/* 8133932C 0000772C  3D 20 81 34 */	lis r9, fn_81339380@ha
+/* 8133932C 0000772C  3D 20 81 34 */	lis r9, iplChannelManager_81339380@ha
 /* 81339330 00007730  7F A6 EB 78 */	mr r6, r29
 /* 81339334 00007734  90 01 00 08 */	stw r0, 0x8(r1)
 /* 81339338 00007738  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
 /* 8133933C 0000773C  7F C5 F3 78 */	mr r5, r30
-/* 81339340 00007740  39 29 93 80 */	addi r9, r9, fn_81339380@l
+/* 81339340 00007740  39 29 93 80 */	addi r9, r9, iplChannelManager_81339380@l
 /* 81339344 00007744  80 63 00 6C */	lwz r3, 0x6c(r3)
 /* 81339348 00007748  39 5C 15 0C */	addi r10, r28, 0x150c
 /* 8133934C 0000774C  80 9C 00 04 */	lwz r4, 0x4(r28)
@@ -1967,9 +1967,9 @@
 /* 81339374 00007774  7C 08 03 A6 */	mtlr r0
 /* 81339378 00007778  38 21 00 30 */	addi r1, r1, 0x30
 /* 8133937C 0000777C  4E 80 00 20 */	blr
-.endfn fn_813391FC
+.endfn iplChannelManager_813391FC
 
-.fn fn_81339380, global
+.fn iplChannelManager_81339380, global
 /* 81339380 00007780  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81339384 00007784  7C 08 02 A6 */	mflr r0
 /* 81339388 00007788  90 01 00 14 */	stw r0, 0x14(r1)
@@ -2099,7 +2099,7 @@
 /* 81339550 00007950  7C 08 03 A6 */	mtlr r0
 /* 81339554 00007954  38 21 00 10 */	addi r1, r1, 0x10
 /* 81339558 00007958  4E 80 00 20 */	blr
-.endfn fn_81339380
+.endfn iplChannelManager_81339380
 
 # ipl::channel::Manager::loadMetaHeaderAsync(int, int)
 .fn loadMetaHeaderAsync__Q33ipl7channel7ManagerFii, global
@@ -2198,7 +2198,7 @@
 /* 813396BC 00007ABC  80 6B 00 0C */	lwz r3, 0xc(r11)
 /* 813396C0 00007AC0  7F E5 FB 78 */	mr r5, r31
 /* 813396C4 00007AC4  7F C6 F3 78 */	mr r6, r30
-/* 813396C8 00007AC8  48 02 C8 15 */	bl fn_81365EDC
+/* 813396C8 00007AC8  48 02 C8 15 */	bl GetValidTicketIndex__Q33ipl7utility6ESMiscFPQ23EGG4HeapUxP12ESTicketViewUl
 /* 813396CC 00007ACC  2C 03 FF FF */	cmpwi r3, -0x1
 /* 813396D0 00007AD0  40 82 00 20 */	bne .L_813396F0
 /* 813396D4 00007AD4  1C 9C 05 40 */	mulli r4, r28, 0x540
@@ -2222,7 +2222,7 @@
 /* 81339718 00007B18  90 64 00 20 */	stw r3, 0x20(r4)
 /* 8133971C 00007B1C  90 01 00 10 */	stw r0, 0x10(r1)
 /* 81339720 00007B20  80 7A 00 0C */	lwz r3, 0xc(r26)
-/* 81339724 00007B24  48 02 BF E1 */	bl fn_81365704
+/* 81339724 00007B24  48 02 BF E1 */	bl GetTmdView__Q33ipl7utility6ESMiscFPQ23EGG4HeapUxPP9ESTmdView
 /* 81339728 00007B28  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8133972C 00007B2C  7C 65 1B 78 */	mr r5, r3
 /* 81339730 00007B30  41 82 00 38 */	beq .L_81339768
@@ -3050,7 +3050,7 @@
 .L_8133A294:
 /* 8133A294 00008694  80 7F 00 00 */	lwz r3, 0x0(r31)
 /* 8133A298 00008698  7F C4 F3 78 */	mr r4, r30
-/* 8133A29C 0000869C  48 1F 36 C9 */	bl fn_8152D964
+/* 8133A29C 0000869C  48 1F 36 C9 */	bl DCStoreRange
 /* 8133A2A0 000086A0  80 7F 00 00 */	lwz r3, 0x0(r31)
 .L_8133A2A4:
 /* 8133A2A4 000086A4  39 61 00 50 */	addi r11, r1, 0x50
@@ -3225,7 +3225,7 @@
 /* 8133A4DC 000088DC  4E 80 00 20 */	blr
 .endfn nand_error_handling__Q33ipl7channel7ManagerFi
 
-.fn fn_8133A4E0, global
+.fn iplChannelManager_8133A4E0, global
 /* 8133A4E0 000088E0  39 80 00 00 */	li r12, 0x0
 /* 8133A4E4 000088E4  38 80 00 00 */	li r4, 0x0
 /* 8133A4E8 000088E8  38 00 00 0C */	li r0, 0xc
@@ -3269,13 +3269,13 @@
 .L_8133A574:
 /* 8133A574 00008974  38 60 00 00 */	li r3, 0x0
 /* 8133A578 00008978  4E 80 00 20 */	blr
-.endfn fn_8133A4E0
+.endfn iplChannelManager_8133A4E0
 
-.fn fn_8133A57C, global
+.fn iplChannelManager_8133A57C, global
 /* 8133A57C 0000897C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133A580 00008980  7C 08 02 A6 */	mflr r0
 /* 8133A584 00008984  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8133A588 00008988  4B FF FF 59 */	bl fn_8133A4E0
+/* 8133A588 00008988  4B FF FF 59 */	bl iplChannelManager_8133A4E0
 /* 8133A58C 0000898C  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8133A590 00008990  41 82 00 14 */	beq .L_8133A5A4
 /* 8133A594 00008994  80 63 00 04 */	lwz r3, 0x4(r3)
@@ -3289,13 +3289,13 @@
 /* 8133A5AC 000089AC  7C 08 03 A6 */	mtlr r0
 /* 8133A5B0 000089B0  38 21 00 10 */	addi r1, r1, 0x10
 /* 8133A5B4 000089B4  4E 80 00 20 */	blr
-.endfn fn_8133A57C
+.endfn iplChannelManager_8133A57C
 
-.fn fn_8133A5B8, global
+.fn iplChannelManager_8133A5B8, global
 /* 8133A5B8 000089B8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133A5BC 000089BC  7C 08 02 A6 */	mflr r0
 /* 8133A5C0 000089C0  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8133A5C4 000089C4  4B FF FF 1D */	bl fn_8133A4E0
+/* 8133A5C4 000089C4  4B FF FF 1D */	bl iplChannelManager_8133A4E0
 /* 8133A5C8 000089C8  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8133A5CC 000089CC  41 82 00 10 */	beq .L_8133A5DC
 /* 8133A5D0 000089D0  80 63 00 04 */	lwz r3, 0x4(r3)
@@ -3308,13 +3308,13 @@
 /* 8133A5E4 000089E4  7C 08 03 A6 */	mtlr r0
 /* 8133A5E8 000089E8  38 21 00 10 */	addi r1, r1, 0x10
 /* 8133A5EC 000089EC  4E 80 00 20 */	blr
-.endfn fn_8133A5B8
+.endfn iplChannelManager_8133A5B8
 
-.fn fn_8133A5F0, global
+.fn iplChannelManager_8133A5F0, global
 /* 8133A5F0 000089F0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133A5F4 000089F4  7C 08 02 A6 */	mflr r0
 /* 8133A5F8 000089F8  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8133A5FC 000089FC  4B FF FE E5 */	bl fn_8133A4E0
+/* 8133A5FC 000089FC  4B FF FE E5 */	bl iplChannelManager_8133A4E0
 /* 8133A600 00008A00  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8133A604 00008A04  41 82 00 1C */	beq .L_8133A620
 /* 8133A608 00008A08  80 63 00 04 */	lwz r3, 0x4(r3)
@@ -3330,13 +3330,13 @@
 /* 8133A628 00008A28  7C 08 03 A6 */	mtlr r0
 /* 8133A62C 00008A2C  38 21 00 10 */	addi r1, r1, 0x10
 /* 8133A630 00008A30  4E 80 00 20 */	blr
-.endfn fn_8133A5F0
+.endfn iplChannelManager_8133A5F0
 
-.fn fn_8133A634, global
+.fn iplChannelManager_8133A634, global
 /* 8133A634 00008A34  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133A638 00008A38  7C 08 02 A6 */	mflr r0
 /* 8133A63C 00008A3C  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8133A640 00008A40  4B FF FE A1 */	bl fn_8133A4E0
+/* 8133A640 00008A40  4B FF FE A1 */	bl iplChannelManager_8133A4E0
 /* 8133A644 00008A44  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8133A648 00008A48  41 82 00 1C */	beq .L_8133A664
 /* 8133A64C 00008A4C  80 63 00 04 */	lwz r3, 0x4(r3)
@@ -3352,13 +3352,13 @@
 /* 8133A66C 00008A6C  7C 08 03 A6 */	mtlr r0
 /* 8133A670 00008A70  38 21 00 10 */	addi r1, r1, 0x10
 /* 8133A674 00008A74  4E 80 00 20 */	blr
-.endfn fn_8133A634
+.endfn iplChannelManager_8133A634
 
-.fn fn_8133A678, global
+.fn iplChannelManager_8133A678, global
 /* 8133A678 00008A78  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133A67C 00008A7C  7C 08 02 A6 */	mflr r0
 /* 8133A680 00008A80  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8133A684 00008A84  4B FF FE 5D */	bl fn_8133A4E0
+/* 8133A684 00008A84  4B FF FE 5D */	bl iplChannelManager_8133A4E0
 /* 8133A688 00008A88  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8133A68C 00008A8C  41 82 00 18 */	beq .L_8133A6A4
 /* 8133A690 00008A90  A0 03 00 0A */	lhz r0, 0xa(r3)
@@ -3373,13 +3373,13 @@
 /* 8133A6AC 00008AAC  7C 08 03 A6 */	mtlr r0
 /* 8133A6B0 00008AB0  38 21 00 10 */	addi r1, r1, 0x10
 /* 8133A6B4 00008AB4  4E 80 00 20 */	blr
-.endfn fn_8133A678
+.endfn iplChannelManager_8133A678
 
-.fn fn_8133A6B8, global
+.fn iplChannelManager_8133A6B8, global
 /* 8133A6B8 00008AB8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133A6BC 00008ABC  7C 08 02 A6 */	mflr r0
 /* 8133A6C0 00008AC0  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8133A6C4 00008AC4  4B FF FE 1D */	bl fn_8133A4E0
+/* 8133A6C4 00008AC4  4B FF FE 1D */	bl iplChannelManager_8133A4E0
 /* 8133A6C8 00008AC8  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8133A6CC 00008ACC  40 82 00 0C */	bne .L_8133A6D8
 /* 8133A6D0 00008AD0  38 60 00 00 */	li r3, 0x0
@@ -3412,13 +3412,13 @@
 /* 8133A730 00008B30  7C 08 03 A6 */	mtlr r0
 /* 8133A734 00008B34  38 21 00 10 */	addi r1, r1, 0x10
 /* 8133A738 00008B38  4E 80 00 20 */	blr
-.endfn fn_8133A6B8
+.endfn iplChannelManager_8133A6B8
 
-.fn fn_8133A73C, global
+.fn iplChannelManager_8133A73C, global
 /* 8133A73C 00008B3C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133A740 00008B40  7C 08 02 A6 */	mflr r0
 /* 8133A744 00008B44  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8133A748 00008B48  4B FF FD 99 */	bl fn_8133A4E0
+/* 8133A748 00008B48  4B FF FD 99 */	bl iplChannelManager_8133A4E0
 /* 8133A74C 00008B4C  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8133A750 00008B50  40 82 00 0C */	bne .L_8133A75C
 /* 8133A754 00008B54  38 60 00 00 */	li r3, 0x0
@@ -3444,9 +3444,9 @@
 /* 8133A798 00008B98  7C 08 03 A6 */	mtlr r0
 /* 8133A79C 00008B9C  38 21 00 10 */	addi r1, r1, 0x10
 /* 8133A7A0 00008BA0  4E 80 00 20 */	blr
-.endfn fn_8133A73C
+.endfn iplChannelManager_8133A73C
 
-.fn fn_8133A7A4, global
+.fn iplChannelManager_8133A7A4, global
 /* 8133A7A4 00008BA4  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8133A7A8 00008BA8  7C 08 02 A6 */	mflr r0
 /* 8133A7AC 00008BAC  90 01 00 34 */	stw r0, 0x34(r1)
@@ -3455,7 +3455,7 @@
 /* 8133A7B8 00008BB8  7C 9D 23 78 */	mr r29, r4
 /* 8133A7BC 00008BBC  7C BF 2B 78 */	mr r31, r5
 /* 8133A7C0 00008BC0  7C DE 33 78 */	mr r30, r6
-/* 8133A7C4 00008BC4  4B FF FD 1D */	bl fn_8133A4E0
+/* 8133A7C4 00008BC4  4B FF FD 1D */	bl iplChannelManager_8133A4E0
 /* 8133A7C8 00008BC8  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8133A7CC 00008BCC  40 82 00 0C */	bne .L_8133A7D8
 /* 8133A7D0 00008BD0  38 60 00 00 */	li r3, 0x0
@@ -3497,9 +3497,9 @@
 /* 8133A850 00008C50  7C 08 03 A6 */	mtlr r0
 /* 8133A854 00008C54  38 21 00 30 */	addi r1, r1, 0x30
 /* 8133A858 00008C58  4E 80 00 20 */	blr
-.endfn fn_8133A7A4
+.endfn iplChannelManager_8133A7A4
 
-.fn fn_8133A85C, global
+.fn iplChannelManager_8133A85C, global
 /* 8133A85C 00008C5C  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8133A860 00008C60  7C 08 02 A6 */	mflr r0
 /* 8133A864 00008C64  90 01 00 34 */	stw r0, 0x34(r1)
@@ -3508,7 +3508,7 @@
 /* 8133A870 00008C70  7C 9D 23 78 */	mr r29, r4
 /* 8133A874 00008C74  7C BF 2B 78 */	mr r31, r5
 /* 8133A878 00008C78  7C DE 33 78 */	mr r30, r6
-/* 8133A87C 00008C7C  4B FF FC 65 */	bl fn_8133A4E0
+/* 8133A87C 00008C7C  4B FF FC 65 */	bl iplChannelManager_8133A4E0
 /* 8133A880 00008C80  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8133A884 00008C84  40 82 00 0C */	bne .L_8133A890
 /* 8133A888 00008C88  38 60 00 00 */	li r3, 0x0
@@ -3554,9 +3554,9 @@
 /* 8133A918 00008D18  7C 08 03 A6 */	mtlr r0
 /* 8133A91C 00008D1C  38 21 00 30 */	addi r1, r1, 0x30
 /* 8133A920 00008D20  4E 80 00 20 */	blr
-.endfn fn_8133A85C
+.endfn iplChannelManager_8133A85C
 
-.fn fn_8133A924, global
+.fn iplChannelManager_8133A924, global
 /* 8133A924 00008D24  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8133A928 00008D28  7C 08 02 A6 */	mflr r0
 /* 8133A92C 00008D2C  90 01 00 34 */	stw r0, 0x34(r1)
@@ -3566,7 +3566,7 @@
 /* 8133A93C 00008D3C  7C 9C 23 78 */	mr r28, r4
 /* 8133A940 00008D40  7C BE 2B 78 */	mr r30, r5
 /* 8133A944 00008D44  7C DD 33 78 */	mr r29, r6
-/* 8133A948 00008D48  4B FF FB 99 */	bl fn_8133A4E0
+/* 8133A948 00008D48  4B FF FB 99 */	bl iplChannelManager_8133A4E0
 /* 8133A94C 00008D4C  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8133A950 00008D50  7C 7F 1B 78 */	mr r31, r3
 /* 8133A954 00008D54  40 82 00 0C */	bne .L_8133A960
@@ -3586,7 +3586,7 @@
 /* 8133A980 00008D80  7F 63 DB 78 */	mr r3, r27
 /* 8133A984 00008D84  7F A6 EB 78 */	mr r6, r29
 /* 8133A988 00008D88  7F C5 F3 78 */	mr r5, r30
-/* 8133A98C 00008D8C  4B FF FB F1 */	bl fn_8133A57C
+/* 8133A98C 00008D8C  4B FF FB F1 */	bl iplChannelManager_8133A57C
 /* 8133A990 00008D90  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8133A994 00008D94  40 82 00 0C */	bne .L_8133A9A0
 /* 8133A998 00008D98  38 60 00 00 */	li r3, 0x0
@@ -3613,9 +3613,9 @@
 /* 8133A9E4 00008DE4  7C 08 03 A6 */	mtlr r0
 /* 8133A9E8 00008DE8  38 21 00 30 */	addi r1, r1, 0x30
 /* 8133A9EC 00008DEC  4E 80 00 20 */	blr
-.endfn fn_8133A924
+.endfn iplChannelManager_8133A924
 
-.fn fn_8133A9F0, global
+.fn iplChannelManager_8133A9F0, global
 /* 8133A9F0 00008DF0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133A9F4 00008DF4  7C 08 02 A6 */	mflr r0
 /* 8133A9F8 00008DF8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -3641,13 +3641,13 @@
 /* 8133AA44 00008E44  7C 08 03 A6 */	mtlr r0
 /* 8133AA48 00008E48  38 21 00 10 */	addi r1, r1, 0x10
 /* 8133AA4C 00008E4C  4E 80 00 20 */	blr
-.endfn fn_8133A9F0
+.endfn iplChannelManager_8133A9F0
 
-.fn fn_8133AA50, global
+.fn iplChannelManager_8133AA50, global
 /* 8133AA50 00008E50  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133AA54 00008E54  7C 08 02 A6 */	mflr r0
 /* 8133AA58 00008E58  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8133AA5C 00008E5C  4B FF FA 85 */	bl fn_8133A4E0
+/* 8133AA5C 00008E5C  4B FF FA 85 */	bl iplChannelManager_8133A4E0
 /* 8133AA60 00008E60  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8133AA64 00008E64  41 82 00 0C */	beq .L_8133AA70
 /* 8133AA68 00008E68  38 00 00 00 */	li r0, 0x0
@@ -3657,7 +3657,7 @@
 /* 8133AA74 00008E74  7C 08 03 A6 */	mtlr r0
 /* 8133AA78 00008E78  38 21 00 10 */	addi r1, r1, 0x10
 /* 8133AA7C 00008E7C  4E 80 00 20 */	blr
-.endfn fn_8133AA50
+.endfn iplChannelManager_8133AA50
 
 # 0x8160D2D0 - 0x8160D600
 .rodata

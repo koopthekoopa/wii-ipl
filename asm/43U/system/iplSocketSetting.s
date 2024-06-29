@@ -128,7 +128,7 @@
 /* 81356FB0 000253B0  4E 80 00 20 */	blr
 .endfn freefunc__Q33ipl6socket13SocketSettingFUlPvl
 
-.fn fn_81356FB4, global
+.fn iplSocket_81356FB4, global
 /* 81356FB4 000253B4  39 4D A6 A8 */	li r10, lbl_816986E8@sda21
 /* 81356FB8 000253B8  3C 60 81 09 */	lis r3, mMac__Q33ipl6socket13SocketSetting@ha
 /* 81356FBC 000253BC  3C 80 81 64 */	lis r4, lbl_81638EEA@ha
@@ -142,7 +142,7 @@
 /* 81356FDC 000253DC  89 4A 00 05 */	lbz r10, 0x5(r10)
 /* 81356FE0 000253E0  4C C6 31 82 */	crclr cr1eq
 /* 81356FE4 000253E4  48 2A 9A 9C */	b fn_81600A80
-.endfn fn_81356FB4
+.endfn iplSocket_81356FB4
 
 # ipl::socket::SocketSetting::obtainLANMacAddr(void*)
 .fn obtainLANMacAddr__Q33ipl6socket13SocketSettingFPv, global
@@ -159,7 +159,7 @@
 /* 81357010 00025410  38 80 00 00 */	li r4, 0x0
 /* 81357014 00025414  38 A0 00 06 */	li r5, 0x6
 /* 81357018 00025418  4B FD 93 1D */	bl memset
-/* 8135701C 0002541C  4B FF FF 99 */	bl fn_81356FB4
+/* 8135701C 0002541C  4B FF FF 99 */	bl iplSocket_81356FB4
 /* 81357020 00025420  7F 83 E3 78 */	mr r3, r28
 /* 81357024 00025424  4B FF FE 6D */	bl init__Q33ipl6socket13SocketSettingFPv
 /* 81357028 00025428  2C 03 00 00 */	cmpwi r3, 0x0
@@ -237,7 +237,7 @@
 /* 81357134 00025534  38 A0 00 06 */	li r5, 0x6
 /* 81357138 00025538  4B FD 91 FD */	bl memset
 .L_8135713C:
-/* 8135713C 0002553C  4B FF FE 79 */	bl fn_81356FB4
+/* 8135713C 0002553C  4B FF FE 79 */	bl iplSocket_81356FB4
 /* 81357140 00025540  4B FF FD E5 */	bl finish__Q33ipl6socket13SocketSettingFv
 .L_81357144:
 /* 81357144 00025544  38 00 00 01 */	li r0, 0x1

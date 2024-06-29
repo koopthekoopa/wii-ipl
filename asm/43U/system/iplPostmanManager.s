@@ -14,7 +14,7 @@
 /* 813571B8 000255B8  7C 9F 23 78 */	mr r31, r4
 /* 813571BC 000255BC  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813571C0 000255C0  7C 7E 1B 78 */	mr r30, r3
-/* 813571C4 000255C4  48 00 DA 0D */	bl fn_81364BD0
+/* 813571C4 000255C4  48 00 DA 0D */	bl __ct__Q33ipl7utility9ut_threadFv
 /* 813571C8 000255C8  3C 80 81 64 */	lis r4, __vt__Q33ipl7postman7Manager@ha
 /* 813571CC 000255CC  3C C0 81 64 */	lis r6, "__vt__Q33ipl7utility14ut_message<32>"@ha
 /* 813571D0 000255D0  38 00 00 00 */	li r0, 0x0
@@ -54,7 +54,7 @@
 /* 81357248 00025648  41 82 00 10 */	beq .L_81357258
 /* 8135724C 0002564C  2C 04 00 00 */	cmpwi r4, 0x0
 /* 81357250 00025650  40 81 00 08 */	ble .L_81357258
-/* 81357254 00025654  48 2A 0E 91 */	bl fn_815F80E4
+/* 81357254 00025654  48 2A 0E 91 */	bl __dl__FPv
 .L_81357258:
 /* 81357258 00025658  7F E3 FB 78 */	mr r3, r31
 /* 8135725C 0002565C  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -858,11 +858,11 @@
 /* 81357C7C 0002607C  4B FF F5 B5 */	bl "__dt__Q33ipl7utility14ut_message<32>Fv"
 /* 81357C80 00026080  7F C3 F3 78 */	mr r3, r30
 /* 81357C84 00026084  38 80 00 00 */	li r4, 0x0
-/* 81357C88 00026088  48 00 CF 6D */	bl fn_81364BF4
+/* 81357C88 00026088  48 00 CF 6D */	bl __dt__Q33ipl7utility9ut_threadFv
 /* 81357C8C 0002608C  2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81357C90 00026090  40 81 00 0C */	ble .L_81357C9C
 /* 81357C94 00026094  7F C3 F3 78 */	mr r3, r30
-/* 81357C98 00026098  48 2A 04 4D */	bl fn_815F80E4
+/* 81357C98 00026098  48 2A 04 4D */	bl __dl__FPv
 .L_81357C9C:
 /* 81357C9C 0002609C  7F C3 F3 78 */	mr r3, r30
 /* 81357CA0 000260A0  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -1015,13 +1015,13 @@
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl7postman7ManagerFv
 	.4byte Run__Q33ipl7postman7ManagerFv
-	.4byte fn_81364C34
-	.4byte fn_81364CB0
-	.4byte fn_81364CB8
-	.4byte fn_81364CC0
-	.4byte fn_81364CF4
-	.4byte fn_81364D20
-	.4byte fn_81364D4C
+	.4byte Create__Q33ipl7utility9ut_threadFPvUlib
+	.4byte Resume__Q33ipl7utility9ut_threadFv
+	.4byte Suspend__Q33ipl7utility9ut_threadFv
+	.4byte WaitForThreadExit__Q33ipl7utility9ut_threadFv
+	.4byte IsThreadTerminated__Q33ipl7utility9ut_threadFv
+	.4byte IsThreadSuspended__Q33ipl7utility9ut_threadFv
+	.4byte SetThreadPriority__Q33ipl7utility9ut_threadFi
 .endobj __vt__Q33ipl7postman7Manager
 
 # ipl::utility::ut_message<32>::__vtable
@@ -1029,10 +1029,10 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte "__dt__Q33ipl7utility14ut_message<32>Fv"
-	.4byte fn_81364D78
-	.4byte fn_81364DA4
-	.4byte fn_81364DD0
-	.4byte fn_81364DFC
+	.4byte SendMessage__Q33ipl7utility15ut_message_baseFPvl
+	.4byte JamMessage__Q33ipl7utility15ut_message_baseFPvl
+	.4byte ReceiveMessage__Q33ipl7utility15ut_message_baseFPPvl
+	.4byte InitMessageQueue__Q33ipl7utility15ut_message_baseFPPvl
 .endobj "__vt__Q33ipl7utility14ut_message<32>"
 
 # 0x81696208 - 0x81696210

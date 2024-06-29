@@ -1,6 +1,6 @@
 BS2_LIBNAME =	BS2
 BS2_CFLAGS =	-O4,s -ipa file $(COMMON_CCFLAGS)
-BS2_CCPATH =	$(CW_GC_30A52)
+BS2_CCPATH =	$(CW_GC_30A3)
 BS2_OBJECTS =	BootStart.o \
 				BS2.o
 

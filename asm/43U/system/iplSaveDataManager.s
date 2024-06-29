@@ -51,7 +51,7 @@
 /* 81357D48 00026148  2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81357D4C 0002614C  40 81 00 0C */	ble .L_81357D58
 /* 81357D50 00026150  7F C3 F3 78 */	mr r3, r30
-/* 81357D54 00026154  48 2A 03 91 */	bl fn_815F80E4
+/* 81357D54 00026154  48 2A 03 91 */	bl __dl__FPv
 .L_81357D58:
 /* 81357D58 00026158  7F C3 F3 78 */	mr r3, r30
 /* 81357D5C 0002615C  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -634,7 +634,7 @@
 /* 81358514 00026914  7F E3 FB 78 */	mr r3, r31
 /* 81358518 00026918  48 00 00 D1 */	bl setDefaultTVRC__Q33ipl8savedata7ManagerFv
 /* 8135851C 0002691C  7F E3 FB 78 */	mr r3, r31
-/* 81358520 00026920  48 00 11 51 */	bl fn_81359670
+/* 81358520 00026920  48 00 11 51 */	bl iplSavedata_81359670
 /* 81358524 00026924  38 00 00 0C */	li r0, 0xc
 /* 81358528 00026928  38 A0 00 00 */	li r5, 0x0
 /* 8135852C 0002692C  38 80 00 00 */	li r4, 0x0
@@ -720,7 +720,7 @@
 /* 81358628 00026A28  38 A0 FF E0 */	li r5, -0x20
 /* 8135862C 00026A2C  80 9D 00 04 */	lwz r4, 0x4(r29)
 /* 81358630 00026A30  54 03 18 38 */	slwi r3, r0, 3
-/* 81358634 00026A34  48 29 FA A1 */	bl fn_815F80D4
+/* 81358634 00026A34  48 29 FA A1 */	bl __nwa__FUlPQ23EGG4Heapi
 /* 81358638 00026A38  7C 7E 1B 78 */	mr r30, r3
 /* 8135863C 00026A3C  38 81 00 08 */	addi r4, r1, 0x8
 /* 81358640 00026A40  48 26 5E A5 */	bl fn_815BE4E4
@@ -764,7 +764,7 @@
 /* 813586D4 00026AD4  80 A1 00 08 */	lwz r5, 0x8(r1)
 /* 813586D8 00026AD8  7F A3 EB 78 */	mr r3, r29
 /* 813586DC 00026ADC  7F C4 F3 78 */	mr r4, r30
-/* 813586E0 00026AE0  48 00 04 F9 */	bl fn_81358BD8
+/* 813586E0 00026AE0  48 00 04 F9 */	bl iplSavedata_81358BD8
 /* 813586E4 00026AE4  38 00 00 30 */	li r0, 0x30
 /* 813586E8 00026AE8  38 61 00 0C */	addi r3, r1, 0xc
 /* 813586EC 00026AEC  7C 09 03 A6 */	mtctr r0
@@ -783,7 +783,7 @@
 /* 8135871C 00026B1C  38 81 00 10 */	addi r4, r1, 0x10
 /* 81358720 00026B20  48 00 07 9D */	bl integrateTitleIDList__Q33ipl8savedata7ManagerFPUxPUxUl
 /* 81358724 00026B24  7F C3 F3 78 */	mr r3, r30
-/* 81358728 00026B28  48 29 F9 C5 */	bl fn_815F80EC
+/* 81358728 00026B28  48 29 F9 C5 */	bl __dla__FPv
 /* 8135872C 00026B2C  7F A3 EB 78 */	mr r3, r29
 /* 81358730 00026B30  38 81 00 10 */	addi r4, r1, 0x10
 /* 81358734 00026B34  48 00 0A 31 */	bl doUpdateChanInfos__Q33ipl8savedata7ManagerFPUx
@@ -843,7 +843,7 @@
 /* 813587F4 00026BF4  80 72 00 04 */	lwz r3, 0x4(r18)
 /* 813587F8 00026BF8  80 B6 00 00 */	lwz r5, 0x0(r22)
 /* 813587FC 00026BFC  80 D6 00 04 */	lwz r6, 0x4(r22)
-/* 81358800 00026C00  48 00 CF 05 */	bl fn_81365704
+/* 81358800 00026C00  48 00 CF 05 */	bl GetTmdView__Q33ipl7utility6ESMiscFPQ23EGG4HeapUxPP9ESTmdView
 /* 81358804 00026C04  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81358808 00026C08  40 82 00 4C */	bne .L_81358854
 /* 8135880C 00026C0C  80 61 00 0C */	lwz r3, 0xc(r1)
@@ -889,7 +889,7 @@
 /* 813588A4 00026CA4  80 72 00 04 */	lwz r3, 0x4(r18)
 /* 813588A8 00026CA8  80 B6 00 00 */	lwz r5, 0x0(r22)
 /* 813588AC 00026CAC  80 D6 00 04 */	lwz r6, 0x4(r22)
-/* 813588B0 00026CB0  48 00 CE 55 */	bl fn_81365704
+/* 813588B0 00026CB0  48 00 CE 55 */	bl GetTmdView__Q33ipl7utility6ESMiscFPQ23EGG4HeapUxPP9ESTmdView
 /* 813588B4 00026CB4  2C 03 00 00 */	cmpwi r3, 0x0
 /* 813588B8 00026CB8  40 82 00 18 */	bne .L_813588D0
 /* 813588BC 00026CBC  80 61 00 08 */	lwz r3, 0x8(r1)
@@ -1114,7 +1114,7 @@
 /* 81358BD4 00026FD4  4E 80 00 20 */	blr
 .endfn checkSpecialTitles__Q33ipl8savedata7ManagerFPUxUl
 
-.fn fn_81358BD8, global
+.fn iplSavedata_81358BD8, global
 /* 81358BD8 00026FD8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81358BDC 00026FDC  7C 08 02 A6 */	mflr r0
 /* 81358BE0 00026FE0  90 01 00 24 */	stw r0, 0x24(r1)
@@ -1172,7 +1172,7 @@
 /* 81358C9C 0002709C  7C 08 03 A6 */	mtlr r0
 /* 81358CA0 000270A0  38 21 00 20 */	addi r1, r1, 0x20
 /* 81358CA4 000270A4  4E 80 00 20 */	blr
-.endfn fn_81358BD8
+.endfn iplSavedata_81358BD8
 
 # ipl::savedata::Manager::makePriorTitleIDList(unsigned long long*, unsigned long long*, unsigned long)
 .fn makePriorTitleIDList__Q33ipl8savedata7ManagerFPUxPUxUl, global
@@ -1628,7 +1628,7 @@
 .L_813592CC:
 /* 813592CC 000276CC  7F 64 DB 78 */	mr r4, r27
 /* 813592D0 000276D0  7F 83 E3 78 */	mr r3, r28
-/* 813592D4 000276D4  48 00 C7 35 */	bl fn_81365A08
+/* 813592D4 000276D4  48 00 C7 35 */	bl PrivateContentsExist__Q33ipl7utility6ESMiscFUx
 /* 813592D8 000276D8  2C 03 00 00 */	cmpwi r3, 0x0
 /* 813592DC 000276DC  40 82 00 0C */	bne .L_813592E8
 /* 813592E0 000276E0  38 60 00 00 */	li r3, 0x0
@@ -1639,7 +1639,7 @@
 /* 813592F0 000276F0  7F 85 E3 78 */	mr r5, r28
 /* 813592F4 000276F4  38 E1 00 08 */	addi r7, r1, 0x8
 /* 813592F8 000276F8  80 7A 00 04 */	lwz r3, 0x4(r26)
-/* 813592FC 000276FC  48 00 C4 09 */	bl fn_81365704
+/* 813592FC 000276FC  48 00 C4 09 */	bl GetTmdView__Q33ipl7utility6ESMiscFPQ23EGG4HeapUxPP9ESTmdView
 /* 81359300 00027700  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81359304 00027704  7C 7E 1B 78 */	mr r30, r3
 /* 81359308 00027708  41 82 00 4C */	beq .L_81359354
@@ -1667,7 +1667,7 @@
 /* 8135935C 0002775C  80 A1 00 08 */	lwz r5, 0x8(r1)
 /* 81359360 00027760  7F 64 DB 78 */	mr r4, r27
 /* 81359364 00027764  7F 83 E3 78 */	mr r3, r28
-/* 81359368 00027768  48 00 C8 D9 */	bl fn_81365C40
+/* 81359368 00027768  48 00 C8 D9 */	bl checkContentsNum__Q33ipl7utility6ESMiscFUxP9ESTmdView
 /* 8135936C 0002776C  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81359370 00027770  41 82 00 58 */	beq .L_813593C8
 .L_81359374:
@@ -1896,7 +1896,7 @@
 /* 8135964C 00027A4C  4B FF EF 49 */	bl setDefaultKeyboard__Q33ipl8savedata7ManagerFv
 .L_81359650:
 /* 81359650 00027A50  7F A3 EB 78 */	mr r3, r29
-/* 81359654 00027A54  48 00 00 1D */	bl fn_81359670
+/* 81359654 00027A54  48 00 00 1D */	bl iplSavedata_81359670
 .L_81359658:
 /* 81359658 00027A58  39 61 00 20 */	addi r11, r1, 0x20
 /* 8135965C 00027A5C  48 29 FE B9 */	bl _restgpr_29
@@ -1906,7 +1906,7 @@
 /* 8135966C 00027A6C  4E 80 00 20 */	blr
 .endfn updateVersion__Q33ipl8savedata7ManagerFUlUl
 
-.fn fn_81359670, global
+.fn iplSavedata_81359670, global
 /* 81359670 00027A70  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359674 00027A74  7C 08 02 A6 */	mflr r0
 /* 81359678 00027A78  38 80 00 00 */	li r4, 0x0
@@ -1925,9 +1925,9 @@
 /* 813596AC 00027AAC  7C 08 03 A6 */	mtlr r0
 /* 813596B0 00027AB0  38 21 00 10 */	addi r1, r1, 0x10
 /* 813596B4 00027AB4  4E 80 00 20 */	blr
-.endfn fn_81359670
+.endfn iplSavedata_81359670
 
-.fn fn_813596B8, global
+.fn iplSavedata_813596B8, global
 /* 813596B8 00027AB8  3C E0 48 41 */	lis r7, 0x4841
 /* 813596BC 00027ABC  3C 80 00 01 */	lis r4, 0x1
 /* 813596C0 00027AC0  38 07 54 45 */	addi r0, r7, 0x5445
@@ -1993,9 +1993,9 @@
 /* 81359794 00027B94  90 C3 03 44 */	stw r6, 0x344(r3)
 /* 81359798 00027B98  90 A3 03 40 */	stw r5, 0x340(r3)
 /* 8135979C 00027B9C  4E 80 00 20 */	blr
-.endfn fn_813596B8
+.endfn iplSavedata_813596B8
 
-.fn fn_813597A0, global
+.fn iplSavedata_813597A0, global
 /* 813597A0 00027BA0  38 00 00 30 */	li r0, 0x30
 /* 813597A4 00027BA4  38 80 00 00 */	li r4, 0x0
 /* 813597A8 00027BA8  7C 09 03 A6 */	mtctr r0
@@ -2014,7 +2014,7 @@
 /* 813597D4 00027BD4  42 00 FF D8 */	bdnz .L_813597AC
 /* 813597D8 00027BD8  38 60 00 00 */	li r3, 0x0
 /* 813597DC 00027BDC  4E 80 00 20 */	blr
-.endfn fn_813597A0
+.endfn iplSavedata_813597A0
 
 # ipl::savedata::Manager::nand_error_handling(int)
 .fn nand_error_handling__Q33ipl8savedata7ManagerFi, global

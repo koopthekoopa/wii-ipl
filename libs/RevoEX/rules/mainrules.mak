@@ -7,7 +7,8 @@ REVOEX_INC_PATHS		= $(COMMON_INCLUDES)
 
 include $(REVOLUTION_EXT_ROOT)/$(RULES_ROOT)/RevoEXLibs/net.mak
 
-RevoEX: $(REVOEX_BLD_PATH)/$(NET_LIBNAME).a
+RevoEX:	$(REVOEX_BLD_PATH)/net.a
+		
 clean_RevoEX:
 	@echo Cleaning RevoEX...
 	@rm -rf $(REVOEX_BLD_PATH)
