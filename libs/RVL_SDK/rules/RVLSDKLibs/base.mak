@@ -1,5 +1,5 @@
 BASE_CFLAGS		= -O4,s -ipa file $(COMMON_CCFLAGS)
-BASE_CCPATH		= $(CW_GC_30A52)
+BASE_CCPATH		= $(CW_GC_30A3)
 BASE_OBJECTS	= PPCArch.o
 
 $(SDK_OBJ_PATH)/base/%.o: $(SDK_SRC_PATH)/base/%.c

@@ -12,13 +12,15 @@ namespace ipl {
                 Arg();
             
             private:
-                u8 unkData[0x01E0]; // 0x0000
+                u8 unkData[0x01E0];     // 0x0000
                 
-                OSAlarm unkAlarm; // 0x01E0
+                OSAlarm unkAlarm;       // 0x01E0
         };
         
         void init(int argc, char** argv);
         void run();
+        
+        GXRenderModeObj* getRenderModeObj(); // STUB
     }
 }
 

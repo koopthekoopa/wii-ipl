@@ -12,7 +12,7 @@ SYSTEM_OBJECTS	=	$(ASSEMBLY_ROOT)/rvl_dec.o \
 					$(ASSEMBLY_ROOT)/iplMessage.o \
 					$(ASSEMBLY_ROOT)/iplMessageManager.o \
 					$(ASSEMBLY_ROOT)/iplNigaoeManager.o \
-					$(ASSEMBLY_ROOT)/iplNigaoe.o \
+					iplNigaoe.o \
 					$(ASSEMBLY_ROOT)/iplCdbManager.o \
 					$(ASSEMBLY_ROOT)/iplCdbWrapper.o \
 					$(ASSEMBLY_ROOT)/iplPlayTimeLog.o \

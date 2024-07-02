@@ -7,7 +7,10 @@
                 "${workspaceFolder}/libs/MetroTRK/include/**",
                 "${workspaceFolder}/libs/Runtime/include/**",
                 "${workspaceFolder}/libs/RVL_SDK/include/**",
-                "${workspaceFolder}/libs/RevoEX/include/**"
+                "${workspaceFolder}/libs/RevoEX/include/**",
+                "${workspaceFolder}/libs/NW4R/include/**",
+                "${workspaceFolder}/libs/EGG/include/**",
+                "${workspaceFolder}/libs/RVLFaceLib/include/**"
             ],
             "cStandard": "c11",
             "cppStandard": "c++03"

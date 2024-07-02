@@ -5,7 +5,6 @@
 #define RBR_HEADER_SIZE     0x0140
 #define RBR_IMAGE_TYPE      1
 
-// son of a bitch
 const char* RBRFileType_Txt = "txt";
 const char* RBRFileType_Odh = "odh";
 const char* RBRFileType_Dat = "dat";

@@ -134,7 +134,7 @@
 /* 81359A60 00027E60  38 83 03 58 */	addi r4, r3, 0x358
 /* 81359A64 00027E64  38 A0 00 01 */	li r5, 0x1
 /* 81359A68 00027E68  38 63 03 38 */	addi r3, r3, 0x338
-/* 81359A6C 00027E6C  48 1D 75 B4 */	b fn_81531020
+/* 81359A6C 00027E6C  48 1D 75 B4 */	b OSInitMessageQueue
 .endfn setCalcFunc__Q33ipl7channel9RsoThreadFPFv_v
 
 # 0x81639200 - 0x81639230

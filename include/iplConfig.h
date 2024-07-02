@@ -1,11 +1,11 @@
-#ifndef IPLCONFIG_H
-#define IPLCONFIG_H
+#ifndef IPL_CONFIG_H
+#define IPL_CONFIG_H
 
 /*
     @Description Unblocks the Twilight Hack and Bannerbomb exploits.
 */
 // #define UNBLOCK_HOMEBREW_EXPLOITS
 
-#endif // IPLCONFIG_H
+#endif // IPL_CONFIG_H
 
 

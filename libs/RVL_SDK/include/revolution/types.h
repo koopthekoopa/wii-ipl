@@ -36,6 +36,8 @@ typedef int                 BOOL;
 #define NULL                ((void *)0)
 #endif  // __cplusplus
 
+#define DOLPHIN_ALIGNMENT   0x20
+
 #endif // REVOLUTION_TYPES_H
 
 

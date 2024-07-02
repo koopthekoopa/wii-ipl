@@ -1195,9 +1195,9 @@
 /* 81338928 00006D28  4E 80 04 20 */	bctr
 .endfn isLoadedLockedMsg__Q33ipl7channel7ManagerFv
 
-.fn UNUSED_8133892C, global
+.fn iplChannelMgr_UNUSED_8133892C, global
 /* 8133892C 00006D2C  4E 80 00 20 */	blr
-.endfn UNUSED_8133892C
+.endfn iplChannelMgr_UNUSED_8133892C
 
 # ipl::nand::File::isFinished()
 .fn isFinished__Q33ipl4nand4FileFv, global
