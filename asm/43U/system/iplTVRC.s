@@ -1,6 +1,25 @@
 .include "macros.inc"
 .file "iplTVRC.cpp"
 
+# 0x81089760 - 0x810897C0
+.section .bss, "wa", @nobits
+.balign 8
+
+# LibTVRC::_database
+.obj _database__7LibTVRC, global
+	.skip 0x20
+.endobj _database__7LibTVRC
+
+# LibTVRC::_alarm
+.obj _alarm__7LibTVRC, global
+	.skip 0x30
+.endobj _alarm__7LibTVRC
+
+# LibTVRC::_tickWait
+.obj _tickWait__7LibTVRC, global
+	.skip 0x10
+.endobj _tickWait__7LibTVRC
+
 # 0x81361048 - 0x81361950
 .text
 .balign 4

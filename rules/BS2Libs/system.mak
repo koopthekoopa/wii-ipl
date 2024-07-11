@@ -38,7 +38,17 @@ SYSTEM_OBJECTS	=	$(ASSEMBLY_ROOT)/rvl_dec.o \
 					main.o \
 					$(ASSEMBLY_ROOT)/iplBs2Manager.o \
 					$(ASSEMBLY_ROOT)/iplTVRC.o \
-					$(ASSEMBLY_ROOT)/iplTVRCManager.o
+					$(ASSEMBLY_ROOT)/iplTVRCManager.o \
+					$(ASSEMBLY_ROOT)/data/iplEngErrorBmg.o \
+					$(ASSEMBLY_ROOT)/data/iplFraErrorBmg.o \
+					$(ASSEMBLY_ROOT)/data/iplGerErrorBmg.o \
+					$(ASSEMBLY_ROOT)/data/iplItaErrorBmg.o \
+					$(ASSEMBLY_ROOT)/data/iplJpnErrorBmg.o \
+					$(ASSEMBLY_ROOT)/data/iplDutErrorBmg.o \
+					$(ASSEMBLY_ROOT)/data/iplSpaErrorBmg.o \
+					$(ASSEMBLY_ROOT)/data/iplKorErrorBmg.o \
+					$(ASSEMBLY_ROOT)/data/iplChnErrorBmg.o \
+					$(ASSEMBLY_ROOT)/data/UnkErrorAshFile.o
 
 $(BS2_OBJ_PATH)/$(SYSTEM_LIBNAME)/%.o: $(BS2_SRC_PATH)/$(SYSTEM_LIBNAME)/%.c
 	$(call BuildCSources,$(SYSTEM_CCPATH),$(SYSTEM_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

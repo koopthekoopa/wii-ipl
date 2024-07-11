@@ -1,7 +1,7 @@
 .include "macros.inc"
 .file "iplCdbWrapper.cpp"
 
-# 0x81340584 - 0x81340684
+# 0x81340584 - 0x81340688
 .text
 .balign 4
 
@@ -81,3 +81,8 @@
 /* 8134067C 0000EA7C  38 21 00 10 */	addi r1, r1, 0x10
 /* 81340680 0000EA80  4E 80 00 20 */	blr
 .endfn _condition__Q33ipl3cdb7wrapperF6CDBErri
+
+# ipl::search_cb_(void*, _CDBRecord*)
+.fn search_cb___3iplFPvP10_CDBRecord, global
+/* 81340684 0000EA84  48 00 03 B8 */	b check__Q23ipl11PlayTimeLogFP10_CDBRecord
+.endfn search_cb___3iplFPvP10_CDBRecord
