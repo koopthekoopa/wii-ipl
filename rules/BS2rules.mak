@@ -15,9 +15,11 @@ BS2_ELF_LINKSCRIPT	= ldscript_ipl2.lcf
 
 # libraries
 include $(RULES_ROOT)/BS2Libs/system.mak
+include $(RULES_ROOT)/BS2Libs/utility.mak
 include $(RULES_ROOT)/BS2Libs/BS2.mak
 
 BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
+						$(BS2_BLD_PATH)/utility.a \
 						$(BS2_BLD_PATH)/BS2.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/base.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/os.a \
