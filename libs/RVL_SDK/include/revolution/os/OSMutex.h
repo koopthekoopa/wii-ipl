@@ -7,14 +7,14 @@ extern "C" {
 
 #include <revolution/os/OSThread.h>
 
-typedef struct OSMutex {
+struct OSMutex {
     OSThreadQueue   queue;
     OSThread*       thread;
     s32             count;
     OSMutexLink     link;
 };
 
-typedef struct OSCond {
+struct OSCond {
     OSThreadQueue   queue;
 };
 

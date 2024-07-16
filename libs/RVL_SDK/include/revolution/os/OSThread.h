@@ -1,8 +1,8 @@
 #ifndef REVOLUTION_OS_THREAD_H
 #define REVOLUTION_OS_THREAD_H
 
+#include <revolution/types.h>
 #include <revolution/os/OSContext.h>
-#include <revolution/os/OSMutex.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -12,27 +12,30 @@ typedef s32 OSPriority;
 
 #define OS_THREAD_SPECIFIC_MAX  2
 
-typedef struct OSThreadQueue {
+typedef struct OSThread OSThread;
+typedef struct OSMutex OSMutex;
+
+typedef struct {
     OSThread*  head;
     OSThread*  tail;
-};
+} OSThreadQueue;
 
-typedef struct OSThreadLink {
+typedef struct {
     OSThread*  next;
     OSThread*  prev;
-};
+} OSThreadLink;
 
-typedef struct OSMutexQueue {
+typedef struct {
     OSMutex*   head;
     OSMutex*   tail;
-};
+} OSMutexQueue;
 
-typedef struct OSMutexLink {
+typedef struct {
     OSMutex*   next;
     OSMutex*   prev;
-};
+} OSMutexLink;
 
-typedef struct OSThread {
+struct OSThread{
     OSContext       context;
 
     u16             state;

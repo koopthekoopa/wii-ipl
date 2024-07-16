@@ -11,6 +11,9 @@ typedef u32 OSTick;
 #include <revolution/os/OSAlarm.h>
 #include <revolution/os/OSContext.h>
 #include <revolution/os/OSCache.h>
+#include <revolution/os/OSMutex.h>
+#include <revolution/os/OSThread.h>
+#include <revolution/os/OSMessage.h>
 
 void OSReport(const char* msg, ...);
 

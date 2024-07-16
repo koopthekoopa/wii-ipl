@@ -8,22 +8,26 @@
 extern "C" {
 #endif
 
-typedef struct OSMessageQueue   OSMessageQueue;
-typedef void*                   OSMessage;
+typedef void*   OSMessage;
 
-struct OSMessageQueue {
+typedef struct {
     OSThreadQueue   queueSend;
     OSThreadQueue   queueReceive;
     OSMessage*      msgArray;
     s32             msgCount;
     s32             firstIndex;
     s32             usedCount;
-};
+} OSMessageQueue;
+
+void OSInitMessageQueue(OSMessageQueue* pMsgQueue, OSMessage* pMsg, s32 msgCount);
+BOOL OSSendMessage(OSMessageQueue* pMsgQueue, OSMessage pMsg, s32 flags);
+BOOL OSJamMessage(OSMessageQueue* pMsgQueue, OSMessage pMsg, s32 flags);
+BOOL OSReceiveMessage(OSMessageQueue* pMsgQueue, OSMessage* pMsg, s32 flags);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // REVOLUTION_OS_OSMESSAGE_H
+#endif // REVOLUTION_OS_MESSAGE_H
 
 

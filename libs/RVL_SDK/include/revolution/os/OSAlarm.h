@@ -1,5 +1,5 @@
-#ifndef REVOLUTION_OS_OSALARM_H
-#define REVOLUTION_OS_OSALARM_H
+#ifndef REVOLUTION_OS_ALARM_H
+#define REVOLUTION_OS_ALARM_H
 
 #include <revolution/types.h>
 #include <revolution/os/OSContext.h>
@@ -31,6 +31,6 @@ void OSCreateAlarm(OSAlarm* alarm);
 }
 #endif
 
-#endif // REVOLUTION_OS_OSALARM_H
+#endif // REVOLUTION_OS_ALARM_H
 
 

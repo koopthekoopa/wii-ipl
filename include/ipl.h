@@ -3,12 +3,10 @@
 
 #include "iplConfig.h"
 
-#include "system/rvl_dec.h"
-#include "system/RIPL_BoardRecord.h"
-#include "system/iplSystem.h"
-#include "system/iplNandSDWorker.h"
-#include "system/iplNigaoe.h"
-#include "system/odh.h"
+#include <revolution.h>
+
+#include "system.h"
+#include "utility.h"
 
 #endif // IPL_H
 
