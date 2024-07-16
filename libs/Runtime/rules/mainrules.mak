@@ -6,7 +6,7 @@ RUNTIME_OBJ_PATH		= $(RUNTIME_BLD_PATH)/obj
 RUNTIME_INC_PATHS		= $(COMMON_INCLUDES)
 
 RUNTIME_CFLAGS      =	-O4,p $(COMMON_CCFLAGS)
-RUNTIME_CCPATH      =	$(CW_GC_30A3)
+RUNTIME_CCPATH      =	$(CW_GC_30A52)
 RUNTIME_OBJECTS     =	__mem.o \
                         __va_arg.o \
                         global_destructor_chain.o \

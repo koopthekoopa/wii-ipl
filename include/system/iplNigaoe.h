@@ -3,7 +3,7 @@
 
 #include <decomp_types.h>
 #include <revolution.h>
-#include <egg/core/eggHeap.h>
+#include <egg/core.h>
 #include <RVLFaceLibPrivate.h>
 
 namespace ipl {

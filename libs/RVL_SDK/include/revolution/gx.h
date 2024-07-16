@@ -12,6 +12,7 @@ extern "C" {
 #include <revolution/gx/GXFrameBuffer.h>
 #include <revolution/gx/GXTexture.h>
 #include <revolution/gx/GXPixel.h>
+#include <revolution/gx/GXManage.h>
 
 #ifdef __cplusplus
 }

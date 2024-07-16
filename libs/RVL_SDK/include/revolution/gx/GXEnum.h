@@ -15,7 +15,7 @@ typedef u8 GXBool;
 #define _GX_TF_ZTF     0x10 /* Z Texture format */
 #define _GX_TF_CTF     0x20 /* Copy texture format */
 
-typedef enum {
+typedef enum _GXTexFmt {
     GX_TF_I4     = 0x00,
     GX_TF_I8     = 0x01,
     GX_TF_IA4    = 0x02,

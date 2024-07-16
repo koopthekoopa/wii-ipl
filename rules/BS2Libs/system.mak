@@ -1,6 +1,6 @@
 SYSTEM_LIBNAME	=	system
 SYSTEM_CFLAGS	=	-O4,s -ipa file $(COMMON_CCFLAGS)
-SYSTEM_CCPATH	=	$(CW_GC_30A3)
+SYSTEM_CCPATH	=	$(CW_GC_30A52)
 SYSTEM_OBJECTS	=	$(ASSEMBLY_ROOT)/rvl_dec.o \
 					RIPL_BoardRecord.o \
 					$(ASSEMBLY_ROOT)/iplSystem.o \

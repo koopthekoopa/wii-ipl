@@ -34,8 +34,8 @@
 *.elf
 
 # Exclusive for decomp
+ctx.c
 .private/*
-.web/*
 tools/GC/*
 tools/Wii/*
 tools/src/*
@@ -53,3 +53,5 @@ tools/info.txt
 objdiff.json.old
 *.lnk
 
+# Scrapped :(
+.web/*

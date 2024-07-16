@@ -338,7 +338,7 @@
 /* 813652C8 000336C8  4B FF DC F5 */	bl drawTexture__Q33ipl7utility8GraphicsFRCQ34nw4r2ut4RectRC9_GXTexObj8_GXColorUcQ43ipl7utility8Graphics11Orientation
 /* 813652CC 000336CC  80 7F 00 20 */	lwz r3, 0x20(r31)
 /* 813652D0 000336D0  38 80 00 01 */	li r4, 0x1
-/* 813652D4 000336D4  4B FF E0 C9 */	bl capture__Q33ipl7utility7CaptureFv
+/* 813652D4 000336D4  4B FF E0 C9 */	bl capture__Q33ipl7utility7CaptureFi
 /* 813652D8 000336D8  88 01 00 13 */	lbz r0, 0x13(r1)
 /* 813652DC 000336DC  3B C0 00 00 */	li r30, 0x0
 /* 813652E0 000336E0  9B C1 00 12 */	stb r30, 0x12(r1)

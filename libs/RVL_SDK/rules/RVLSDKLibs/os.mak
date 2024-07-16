@@ -1,6 +1,6 @@
 OS_LIBNAME  =   os
 OS_CFLAGS   =   -O4,s -ipa file $(COMMON_CCFLAGS)
-OS_CCPATH   =   $(CW_GC_30A3)
+OS_CCPATH   =   $(CW_GC_30A52)
 OS_OBJECTS  =   OSAlarm.o \
                 stubs.o \
                 __ppc_eabi_init.o

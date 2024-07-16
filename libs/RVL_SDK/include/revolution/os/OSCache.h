@@ -8,6 +8,7 @@ extern "C" {
 #endif
 
 void DCStoreRange(void* addr, u32 size);
+void DCInvalidateRange(void* addr, u32 size);
 
 #ifdef __cplusplus
 }

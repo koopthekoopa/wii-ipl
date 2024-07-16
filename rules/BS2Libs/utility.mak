@@ -1,10 +1,10 @@
 UTILITY_LIBNAME	=	utility
 UTILITY_CFLAGS	=	-O4,s -ipa file $(COMMON_CCFLAGS)
-UTILITY_CCPATH	=	$(CW_GC_30A3)
+UTILITY_CCPATH	=	$(CW_GC_30A52)
 UTILITY_OBJECTS	=	$(ASSEMBLY_ROOT)/iplTree.o \
 					$(ASSEMBLY_ROOT)/iplFrameController.o \
 					$(ASSEMBLY_ROOT)/iplGraphics.o \
-					$(ASSEMBLY_ROOT)/iplCapture.o \
+					iplCapture.o \
 					$(ASSEMBLY_ROOT)/iplUtility.o \
 					$(ASSEMBLY_ROOT)/iplThread.o \
 					iplMessageManager.o \
