@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "IplRsoSystem.cpp"
 
-# 0x81359A70 - 0x8135A590
+# 0x81359A70..0x8135A590 | size: 0xB20
 .text
 .balign 4
 
+# .text:0x0 | 0x81359A70 | size: 0x58
 .fn IplRso_IsFirstCall, global
 /* 81359A70 00027E70  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359A74 00027E74  7C 08 02 A6 */	mflr r0
@@ -32,6 +33,7 @@
 /* 81359AC4 00027EC4  4E 80 00 20 */	blr
 .endfn IplRso_IsFirstCall
 
+# .text:0x58 | 0x81359AC8 | size: 0x6C
 .fn IplRso_GetExBufData, global
 /* 81359AC8 00027EC8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359ACC 00027ECC  7C 08 02 A6 */	mflr r0
@@ -64,6 +66,7 @@
 /* 81359B30 00027F30  4E 80 00 20 */	blr
 .endfn IplRso_GetExBufData
 
+# .text:0xC4 | 0x81359B34 | size: 0x6C
 .fn IplRso_SetExBufData, global
 /* 81359B34 00027F34  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359B38 00027F38  7C 08 02 A6 */	mflr r0
@@ -96,6 +99,7 @@
 /* 81359B9C 00027F9C  4E 80 00 20 */	blr
 .endfn IplRso_SetExBufData
 
+# .text:0x130 | 0x81359BA0 | size: 0x6C
 .fn IplRso_GetTitleDataPath, global
 /* 81359BA0 00027FA0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359BA4 00027FA4  7C 08 02 A6 */	mflr r0
@@ -128,6 +132,7 @@
 /* 81359C08 00028008  4E 80 00 20 */	blr
 .endfn IplRso_GetTitleDataPath
 
+# .text:0x19C | 0x81359C0C | size: 0x58
 .fn IplRso_IsStartAnimFinished, global
 /* 81359C0C 0002800C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359C10 00028010  7C 08 02 A6 */	mflr r0
@@ -155,6 +160,7 @@
 /* 81359C60 00028060  4E 80 00 20 */	blr
 .endfn IplRso_IsStartAnimFinished
 
+# .text:0x1F4 | 0x81359C64 | size: 0x40
 .fn IplRso_AnimStart, global
 /* 81359C64 00028064  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359C68 00028068  7C 08 02 A6 */	mflr r0
@@ -175,6 +181,7 @@
 /* 81359CA0 000280A0  4E 80 00 20 */	blr
 .endfn IplRso_AnimStart
 
+# .text:0x234 | 0x81359CA4 | size: 0x30
 .fn IplRso_AnimRestart, global
 /* 81359CA4 000280A4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359CA8 000280A8  7C 08 02 A6 */	mflr r0
@@ -191,6 +198,7 @@
 /* 81359CD0 000280D0  4E 80 00 20 */	blr
 .endfn IplRso_AnimRestart
 
+# .text:0x264 | 0x81359CD4 | size: 0x30
 .fn IplRso_AnimStop, global
 /* 81359CD4 000280D4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359CD8 000280D8  7C 08 02 A6 */	mflr r0
@@ -207,6 +215,7 @@
 /* 81359D00 00028100  4E 80 00 20 */	blr
 .endfn IplRso_AnimStop
 
+# .text:0x294 | 0x81359D04 | size: 0x40
 .fn IplRso_AnimIsPlaying, global
 /* 81359D04 00028104  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359D08 00028108  7C 08 02 A6 */	mflr r0
@@ -228,6 +237,7 @@
 /* 81359D40 00028140  4E 80 00 20 */	blr
 .endfn IplRso_AnimIsPlaying
 
+# .text:0x2D4 | 0x81359D44 | size: 0x38
 .fn IplRso_AnimSetMaxFrame, global
 /* 81359D44 00028144  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359D48 00028148  7C 08 02 A6 */	mflr r0
@@ -246,6 +256,7 @@
 /* 81359D78 00028178  4E 80 00 20 */	blr
 .endfn IplRso_AnimSetMaxFrame
 
+# .text:0x30C | 0x81359D7C | size: 0x38
 .fn IplRso_AnimSetMinFrame, global
 /* 81359D7C 0002817C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359D80 00028180  7C 08 02 A6 */	mflr r0
@@ -264,6 +275,7 @@
 /* 81359DB0 000281B0  4E 80 00 20 */	blr
 .endfn IplRso_AnimSetMinFrame
 
+# .text:0x344 | 0x81359DB4 | size: 0x38
 .fn IplRso_AnimSetCurrentFrame, global
 /* 81359DB4 000281B4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359DB8 000281B8  7C 08 02 A6 */	mflr r0
@@ -282,6 +294,7 @@
 /* 81359DE8 000281E8  4E 80 00 20 */	blr
 .endfn IplRso_AnimSetCurrentFrame
 
+# .text:0x37C | 0x81359DEC | size: 0x38
 .fn IplRso_AnimSetType, global
 /* 81359DEC 000281EC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359DF0 000281F0  7C 08 02 A6 */	mflr r0
@@ -300,6 +313,7 @@
 /* 81359E20 00028220  4E 80 00 20 */	blr
 .endfn IplRso_AnimSetType
 
+# .text:0x3B4 | 0x81359E24 | size: 0x3C
 .fn IplRso_AnimInitFrame, global
 /* 81359E24 00028224  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359E28 00028228  7C 08 02 A6 */	mflr r0
@@ -319,6 +333,7 @@
 /* 81359E5C 0002825C  4E 80 00 20 */	blr
 .endfn IplRso_AnimInitFrame
 
+# .text:0x3F0 | 0x81359E60 | size: 0x34
 .fn IplRso_AnimGetMaxFrame, global
 /* 81359E60 00028260  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359E64 00028264  7C 08 02 A6 */	mflr r0
@@ -337,6 +352,7 @@
 /* 81359E90 00028290  4E 80 00 20 */	blr
 .endfn IplRso_AnimGetMaxFrame
 
+# .text:0x424 | 0x81359E94 | size: 0x34
 .fn IplRso_AnimGetMinFrame, global
 /* 81359E94 00028294  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359E98 00028298  7C 08 02 A6 */	mflr r0
@@ -355,6 +371,7 @@
 /* 81359EC4 000282C4  4E 80 00 20 */	blr
 .endfn IplRso_AnimGetMinFrame
 
+# .text:0x458 | 0x81359EC8 | size: 0x34
 .fn IplRso_AnimGetCurrentFrame, global
 /* 81359EC8 000282C8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359ECC 000282CC  7C 08 02 A6 */	mflr r0
@@ -373,6 +390,7 @@
 /* 81359EF8 000282F8  4E 80 00 20 */	blr
 .endfn IplRso_AnimGetCurrentFrame
 
+# .text:0x48C | 0x81359EFC | size: 0x34
 .fn IplRso_AnimGetType, global
 /* 81359EFC 000282FC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359F00 00028300  7C 08 02 A6 */	mflr r0
@@ -391,6 +409,7 @@
 /* 81359F2C 0002832C  4E 80 00 20 */	blr
 .endfn IplRso_AnimGetType
 
+# .text:0x4C0 | 0x81359F30 | size: 0x88
 .fn IplRso_AllocFromExHeap, global
 /* 81359F30 00028330  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81359F34 00028334  7C 08 02 A6 */	mflr r0
@@ -431,6 +450,7 @@
 /* 81359FB4 000283B4  4E 80 00 20 */	blr
 .endfn IplRso_AllocFromExHeap
 
+# .text:0x548 | 0x81359FB8 | size: 0x74
 .fn IplRso_FreeToExHeap, global
 /* 81359FB8 000283B8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359FBC 000283BC  7C 08 02 A6 */	mflr r0
@@ -465,6 +485,7 @@
 /* 8135A028 00028428  4E 80 00 20 */	blr
 .endfn IplRso_FreeToExHeap
 
+# .text:0x5BC | 0x8135A02C | size: 0x68
 .fn IplRso_GetAllocatableSizeForExHeap, global
 /* 8135A02C 0002842C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8135A030 00028430  7C 08 02 A6 */	mflr r0
@@ -497,6 +518,7 @@
 /* 8135A090 00028490  4E 80 00 20 */	blr
 .endfn IplRso_GetAllocatableSizeForExHeap
 
+# .text:0x624 | 0x8135A094 | size: 0x74
 .fn IplRso_DebugSetPollInterval, global
 /* 8135A094 00028494  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8135A098 00028498  7C 08 02 A6 */	mflr r0
@@ -531,6 +553,7 @@
 /* 8135A104 00028504  4E 80 00 20 */	blr
 .endfn IplRso_DebugSetPollInterval
 
+# .text:0x698 | 0x8135A108 | size: 0x94
 # IplRso_symbolMaker()
 .fn IplRso_symbolMaker__Fv, global
 /* 8135A108 00028508  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -577,6 +600,7 @@
 /* 8135A198 00028598  4E 80 00 20 */	blr
 .endfn IplRso_symbolMaker__Fv
 
+# .text:0x72C | 0x8135A19C | size: 0x324
 # nw4r::lyt::TextBox::GetTextColor(unsigned long) const
 .fn GetTextColor__Q34nw4r3lyt7TextBoxCFUl, global
 /* 8135A19C 0002859C  94 21 FB E0 */	stwu r1, -0x420(r1)
@@ -783,6 +807,7 @@
 /* 8135A4BC 000288BC  4E 80 00 20 */	blr
 .endfn GetTextColor__Q34nw4r3lyt7TextBoxCFUl
 
+# .text:0xA50 | 0x8135A4C0 | size: 0xD0
 .fn IplRso_8135A4C0, global
 /* 8135A4C0 000288C0  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8135A4C4 000288C4  7C 08 02 A6 */	mflr r0
@@ -839,10 +864,11 @@
 /* 8135A58C 0002898C  4E 80 00 20 */	blr
 .endfn IplRso_8135A4C0
 
-# 0x81639230 - 0x81639278
+# 0x81639230..0x81639278 | size: 0x48
 .data
 .balign 8
 
+# .data:0x0 | 0x81639230 | size: 0x48
 .obj lbl_81639230, global
 	.4byte 0x4572726F
 	.4byte 0x72233030
@@ -864,47 +890,56 @@
 	.4byte 0x00000000
 .endobj lbl_81639230
 
-# 0x81694598 - 0x816945A0
+# 0x81694598..0x816945A0 | size: 0x8
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x81694598 | size: 0x8
 .obj lbl_81694598, global
 	.float 0
 	.float 0
 .endobj lbl_81694598
 
-# 0x81696220 - 0x81696230
+# 0x81696220..0x81696230 | size: 0x10
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x81696220 | size: 0x2
 .obj lbl_81696220, global
 	.string "A"
 .endobj lbl_81696220
 
+# .sdata:0x2 | 0x81696222 | size: 0x2
 .obj lbl_81696222, global
 	.2byte 0x0000
 .endobj lbl_81696222
 
+# .sdata:0x4 | 0x81696224 | size: 0x6
 .obj lbl_81696224, global
 	.string16 "%d"
 .endobj lbl_81696224
 
+# .sdata:0xA | 0x8169622A | size: 0x2
 .obj lbl_8169622A, global
 	.2byte 0x0000
 .endobj lbl_8169622A
 
+# .sdata:0xC | 0x8169622C | size: 0x1
 .obj lbl_8169622C, global
 	.byte 0xFF
 .endobj lbl_8169622C
 
+# .sdata:0xD | 0x8169622D | size: 0x1
 .obj lbl_8169622D, global
 	.byte 0xFF
 .endobj lbl_8169622D
 
+# .sdata:0xE | 0x8169622E | size: 0x1
 .obj lbl_8169622E, global
 	.byte 0xFF
 .endobj lbl_8169622E
 
+# .sdata:0xF | 0x8169622F | size: 0x1
 .obj lbl_8169622F, global
 	.byte 0x00
 .endobj lbl_8169622F

@@ -1,19 +1,21 @@
 .include "macros.inc"
 .file "iplNwc24Manager.cpp"
 
-# 0x81089620 - 0x81089720
+# 0x81089620..0x81089720 | size: 0x100
 .section .bss, "wa", @nobits
 .balign 8
 
+# .bss:0x0 | 0x81089620 | size: 0x100
 # ipl::nwc24::Manager::smArg
 .obj smArg__Q33ipl5nwc247Manager, global
 	.skip 0x100
 .endobj smArg__Q33ipl5nwc247Manager
 
-# 0x8134197C - 0x81344188
+# 0x8134197C..0x81344188 | size: 0x280C
 .text
 .balign 4
 
+# .text:0x0 | 0x8134197C | size: 0xC4
 # ipl::nwc24::Manager::Manager(EGG::Heap*)
 .fn __ct__Q33ipl5nwc247ManagerFPQ23EGG4Heap, global
 /* 8134197C 0000FD7C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -67,6 +69,7 @@
 /* 81341A3C 0000FE3C  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl5nwc247ManagerFPQ23EGG4Heap
 
+# .text:0xC4 | 0x81341A40 | size: 0x74
 # ipl::nwc24::Manager::open()
 .fn open__Q33ipl5nwc247ManagerFv, global
 /* 81341A40 0000FE40  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -101,6 +104,7 @@
 /* 81341AB0 0000FEB0  4E 80 00 20 */	blr
 .endfn open__Q33ipl5nwc247ManagerFv
 
+# .text:0x138 | 0x81341AB4 | size: 0x54
 # ipl::nwc24::Manager::close()
 .fn close__Q33ipl5nwc247ManagerFv, global
 /* 81341AB4 0000FEB4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -126,6 +130,7 @@
 /* 81341B04 0000FF04  4E 80 00 20 */	blr
 .endfn close__Q33ipl5nwc247ManagerFv
 
+# .text:0x18C | 0x81341B08 | size: 0x44
 # ipl::nwc24::Manager::initMsgObj(NWC24MsgObj*, NWC24MsgType)
 .fn initMsgObj__Q33ipl5nwc247ManagerFP11NWC24MsgObj12NWC24MsgType, global
 /* 81341B08 0000FF08  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -147,6 +152,7 @@
 /* 81341B48 0000FF48  4E 80 00 20 */	blr
 .endfn initMsgObj__Q33ipl5nwc247ManagerFP11NWC24MsgObj12NWC24MsgType
 
+# .text:0x1D0 | 0x81341B4C | size: 0x40
 # ipl::nwc24::Manager::setMsgToId(NWC24MsgObj*, unsigned long long)
 .fn setMsgToId__Q33ipl5nwc247ManagerFP11NWC24MsgObjUx, global
 /* 81341B4C 0000FF4C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -167,6 +173,7 @@
 /* 81341B88 0000FF88  4E 80 00 20 */	blr
 .endfn setMsgToId__Q33ipl5nwc247ManagerFP11NWC24MsgObjUx
 
+# .text:0x210 | 0x81341B8C | size: 0x48
 # ipl::nwc24::Manager::setMsgToAddr(NWC24MsgObj*, const char*, unsigned long)
 .fn setMsgToAddr__Q33ipl5nwc247ManagerFP11NWC24MsgObjPCcUl, global
 /* 81341B8C 0000FF8C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -189,6 +196,7 @@
 /* 81341BD0 0000FFD0  4E 80 00 20 */	blr
 .endfn setMsgToAddr__Q33ipl5nwc247ManagerFP11NWC24MsgObjPCcUl
 
+# .text:0x258 | 0x81341BD4 | size: 0x50
 # ipl::nwc24::Manager::setMsgText(NWC24MsgObj*, const char*, unsigned long, NWC24Charset, NWC24Encoding)
 .fn setMsgText__Q33ipl5nwc247ManagerFP11NWC24MsgObjPCcUl12NWC24Charset13NWC24Encoding, global
 /* 81341BD4 0000FFD4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -213,6 +221,7 @@
 /* 81341C20 00010020  4E 80 00 20 */	blr
 .endfn setMsgText__Q33ipl5nwc247ManagerFP11NWC24MsgObjPCcUl12NWC24Charset13NWC24Encoding
 
+# .text:0x2A8 | 0x81341C24 | size: 0x68
 # ipl::nwc24::Manager::setMsgSubjectAndTextPublic(NWC24MsgObj*, const unsigned short*, unsigned long, const unsigned short*, unsigned long, unsigned char*, unsigned long)
 .fn setMsgSubjectAndTextPublic__Q33ipl5nwc247ManagerFP11NWC24MsgObjPCUsUlPCUsUlPUcUl, global
 /* 81341C24 00010024  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -243,6 +252,7 @@
 /* 81341C88 00010088  4E 80 00 20 */	blr
 .endfn setMsgSubjectAndTextPublic__Q33ipl5nwc247ManagerFP11NWC24MsgObjPCUsUlPCUsUlPUcUl
 
+# .text:0x310 | 0x81341C8C | size: 0x44
 # ipl::nwc24::Manager::setMsgMBNoReply(NWC24MsgObj*, int)
 .fn setMsgMBNoReply__Q33ipl5nwc247ManagerFP11NWC24MsgObji, global
 /* 81341C8C 0001008C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -264,6 +274,7 @@
 /* 81341CCC 000100CC  4E 80 00 20 */	blr
 .endfn setMsgMBNoReply__Q33ipl5nwc247ManagerFP11NWC24MsgObji
 
+# .text:0x354 | 0x81341CD0 | size: 0x4C
 # ipl::nwc24::Manager::setMsgMBRegDate(NWC24MsgObj*, unsigned short, unsigned char, unsigned char)
 .fn setMsgMBRegDate__Q33ipl5nwc247ManagerFP11NWC24MsgObjUsUcUc, global
 /* 81341CD0 000100D0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -287,6 +298,7 @@
 /* 81341D18 00010118  4E 80 00 20 */	blr
 .endfn setMsgMBRegDate__Q33ipl5nwc247ManagerFP11NWC24MsgObjUsUcUc
 
+# .text:0x3A0 | 0x81341D1C | size: 0x44
 # ipl::nwc24::Manager::setMsgAppId(NWC24MsgObj*, unsigned long)
 .fn setMsgAppId__Q33ipl5nwc247ManagerFP11NWC24MsgObjUl, global
 /* 81341D1C 0001011C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -308,6 +320,7 @@
 /* 81341D5C 0001015C  4E 80 00 20 */	blr
 .endfn setMsgAppId__Q33ipl5nwc247ManagerFP11NWC24MsgObjUl
 
+# .text:0x3E4 | 0x81341D60 | size: 0x40
 # ipl::nwc24::Manager::commitMsg(NWC24MsgObj*)
 .fn commitMsg__Q33ipl5nwc247ManagerFP11NWC24MsgObj, global
 /* 81341D60 00010160  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -328,6 +341,7 @@
 /* 81341D9C 0001019C  4E 80 00 20 */	blr
 .endfn commitMsg__Q33ipl5nwc247ManagerFP11NWC24MsgObj
 
+# .text:0x424 | 0x81341DA0 | size: 0x40
 # ipl::nwc24::Manager::getMyUserId(unsigned long long*)
 .fn getMyUserId__Q33ipl5nwc247ManagerFPUx, global
 /* 81341DA0 000101A0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -348,6 +362,7 @@
 /* 81341DDC 000101DC  4E 80 00 20 */	blr
 .endfn getMyUserId__Q33ipl5nwc247ManagerFPUx
 
+# .text:0x464 | 0x81341DE0 | size: 0x60
 # ipl::nwc24::Manager::isFriendInfoThere(unsigned long)
 .fn isFriendInfoThere__Q33ipl5nwc247ManagerFUl, global
 /* 81341DE0 000101E0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -379,6 +394,7 @@
 /* 81341E3C 0001023C  4E 80 00 20 */	blr
 .endfn isFriendInfoThere__Q33ipl5nwc247ManagerFUl
 
+# .text:0x4C4 | 0x81341E40 | size: 0x44
 # ipl::nwc24::Manager::searchFriendInfo(const NWC24FriendAddr*, unsigned long*)
 .fn searchFriendInfo__Q33ipl5nwc247ManagerFPC15NWC24FriendAddrPUl, global
 /* 81341E40 00010240  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -400,6 +416,7 @@
 /* 81341E80 00010280  4E 80 00 20 */	blr
 .endfn searchFriendInfo__Q33ipl5nwc247ManagerFPC15NWC24FriendAddrPUl
 
+# .text:0x508 | 0x81341E84 | size: 0x48
 # ipl::nwc24::Manager::searchFriendInfo(unsigned long long, unsigned long*)
 .fn searchFriendInfo__Q33ipl5nwc247ManagerFUxPUl, global
 /* 81341E84 00010284  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -422,6 +439,7 @@
 /* 81341EC8 000102C8  4E 80 00 20 */	blr
 .endfn searchFriendInfo__Q33ipl5nwc247ManagerFUxPUl
 
+# .text:0x550 | 0x81341ECC | size: 0x44
 # ipl::nwc24::Manager::readFriendInfo(NWC24FriendInfo*, unsigned long)
 .fn readFriendInfo__Q33ipl5nwc247ManagerFP15NWC24FriendInfoUl, global
 /* 81341ECC 000102CC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -443,6 +461,7 @@
 /* 81341F0C 0001030C  4E 80 00 20 */	blr
 .endfn readFriendInfo__Q33ipl5nwc247ManagerFP15NWC24FriendInfoUl
 
+# .text:0x594 | 0x81341F10 | size: 0x44
 # ipl::nwc24::Manager::writeFriendInfo(const NWC24FriendInfo*, unsigned long)
 .fn writeFriendInfo__Q33ipl5nwc247ManagerFPC15NWC24FriendInfoUl, global
 /* 81341F10 00010310  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -464,6 +483,7 @@
 /* 81341F50 00010350  4E 80 00 20 */	blr
 .endfn writeFriendInfo__Q33ipl5nwc247ManagerFPC15NWC24FriendInfoUl
 
+# .text:0x5D8 | 0x81341F54 | size: 0x44
 # ipl::nwc24::Manager::updateFriendInfo(const NWC24FriendInfo*, unsigned long)
 .fn updateFriendInfo__Q33ipl5nwc247ManagerFPC15NWC24FriendInfoUl, global
 /* 81341F54 00010354  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -485,6 +505,7 @@
 /* 81341F94 00010394  4E 80 00 20 */	blr
 .endfn updateFriendInfo__Q33ipl5nwc247ManagerFPC15NWC24FriendInfoUl
 
+# .text:0x61C | 0x81341F98 | size: 0x40
 # ipl::nwc24::Manager::deleteFriendInfo(unsigned long)
 .fn deleteFriendInfo__Q33ipl5nwc247ManagerFUl, global
 /* 81341F98 00010398  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -505,6 +526,7 @@
 /* 81341FD4 000103D4  4E 80 00 20 */	blr
 .endfn deleteFriendInfo__Q33ipl5nwc247ManagerFUl
 
+# .text:0x65C | 0x81341FD8 | size: 0x44
 # ipl::nwc24::Manager::swapFriendInfo(unsigned long, unsigned long)
 .fn swapFriendInfo__Q33ipl5nwc247ManagerFUlUl, global
 /* 81341FD8 000103D8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -526,6 +548,7 @@
 /* 81342018 00010418  4E 80 00 20 */	blr
 .endfn swapFriendInfo__Q33ipl5nwc247ManagerFUlUl
 
+# .text:0x6A0 | 0x8134201C | size: 0x40
 # ipl::nwc24::Manager::getNumRegFriendInfos(unsigned long*)
 .fn getNumRegFriendInfos__Q33ipl5nwc247ManagerFPUl, global
 /* 8134201C 0001041C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -546,6 +569,7 @@
 /* 81342058 00010458  4E 80 00 20 */	blr
 .endfn getNumRegFriendInfos__Q33ipl5nwc247ManagerFPUl
 
+# .text:0x6E0 | 0x8134205C | size: 0x40
 # ipl::nwc24::Manager::getNumFriendInfos(unsigned long*)
 .fn getNumFriendInfos__Q33ipl5nwc247ManagerFPUl, global
 /* 8134205C 0001045C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -566,6 +590,7 @@
 /* 81342098 00010498  4E 80 00 20 */	blr
 .endfn getNumFriendInfos__Q33ipl5nwc247ManagerFPUl
 
+# .text:0x720 | 0x8134209C | size: 0x70
 # ipl::nwc24::Manager::checkUserId(unsigned long long)
 .fn checkUserId__Q33ipl5nwc247ManagerFUx, global
 /* 8134209C 0001049C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -602,6 +627,7 @@
 /* 81342108 00010508  4E 80 00 20 */	blr
 .endfn checkUserId__Q33ipl5nwc247ManagerFUx
 
+# .text:0x790 | 0x8134210C | size: 0x44
 # ipl::nwc24::Manager::getDlTask(NWC24DlTask*, unsigned short)
 .fn getDlTask__Q33ipl5nwc247ManagerFP11NWC24DlTaskUs, global
 /* 8134210C 0001050C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -623,6 +649,7 @@
 /* 8134214C 0001054C  4E 80 00 20 */	blr
 .endfn getDlTask__Q33ipl5nwc247ManagerFP11NWC24DlTaskUs
 
+# .text:0x7D4 | 0x81342150 | size: 0x44
 # ipl::nwc24::Manager::getDlAppId(const NWC24DlTask*, unsigned long*)
 .fn getDlAppId__Q33ipl5nwc247ManagerFPC11NWC24DlTaskPUl, global
 /* 81342150 00010550  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -644,6 +671,7 @@
 /* 81342190 00010590  4E 80 00 20 */	blr
 .endfn getDlAppId__Q33ipl5nwc247ManagerFPC11NWC24DlTaskPUl
 
+# .text:0x818 | 0x81342194 | size: 0x44
 # ipl::nwc24::Manager::getDlOptOutFlags(NWC24DlTask*, unsigned char*)
 .fn getDlOptOutFlags__Q33ipl5nwc247ManagerFP11NWC24DlTaskPUc, global
 /* 81342194 00010594  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -665,6 +693,7 @@
 /* 813421D4 000105D4  4E 80 00 20 */	blr
 .endfn getDlOptOutFlags__Q33ipl5nwc247ManagerFP11NWC24DlTaskPUc
 
+# .text:0x85C | 0x813421D8 | size: 0x40
 # ipl::nwc24::Manager::deleteDlTask(NWC24DlTask*)
 .fn deleteDlTask__Q33ipl5nwc247ManagerFP11NWC24DlTask, global
 /* 813421D8 000105D8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -685,6 +714,7 @@
 /* 81342214 00010614  4E 80 00 20 */	blr
 .endfn deleteDlTask__Q33ipl5nwc247ManagerFP11NWC24DlTask
 
+# .text:0x89C | 0x81342218 | size: 0x6C
 # ipl::nwc24::Manager::setDlTableFirst()
 .fn setDlTableFirst__Q33ipl5nwc247ManagerFv, global
 /* 81342218 00010618  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -717,6 +747,7 @@
 /* 81342280 00010680  4E 80 00 20 */	blr
 .endfn setDlTableFirst__Q33ipl5nwc247ManagerFv
 
+# .text:0x908 | 0x81342284 | size: 0xF0
 # ipl::nwc24::Manager::setDlTable()
 .fn setDlTable__Q33ipl5nwc247ManagerFv, global
 /* 81342284 00010684  94 21 FD D0 */	stwu r1, -0x230(r1)
@@ -784,6 +815,7 @@
 /* 81342370 00010770  4E 80 00 20 */	blr
 .endfn setDlTable__Q33ipl5nwc247ManagerFv
 
+# .text:0x9F8 | 0x81342374 | size: 0x34
 # ipl::nwc24::Manager::isAppDlEnable(unsigned long) const
 .fn isAppDlEnable__Q33ipl5nwc247ManagerCFUl, global
 /* 81342374 00010774  38 00 00 78 */	li r0, 0x78
@@ -803,6 +835,7 @@
 /* 813423A4 000107A4  4E 80 00 20 */	blr
 .endfn isAppDlEnable__Q33ipl5nwc247ManagerCFUl
 
+# .text:0xA2C | 0x813423A8 | size: 0x40
 # ipl::nwc24::Manager::doDailyTasks()
 .fn doDailyTasks__Q33ipl5nwc247ManagerFv, global
 /* 813423A8 000107A8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -823,6 +856,7 @@
 /* 813423E4 000107E4  4E 80 00 20 */	blr
 .endfn doDailyTasks__Q33ipl5nwc247ManagerFv
 
+# .text:0xA6C | 0x813423E8 | size: 0x3C
 # ipl::nwc24::Manager::manageDlTaskListForMenu()
 .fn manageDlTaskListForMenu__Q33ipl5nwc247ManagerFv, global
 /* 813423E8 000107E8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -842,6 +876,7 @@
 /* 81342420 00010820  4E 80 00 20 */	blr
 .endfn manageDlTaskListForMenu__Q33ipl5nwc247ManagerFv
 
+# .text:0xAA8 | 0x81342424 | size: 0x44
 # ipl::nwc24::Manager::setLedPattern(NWC24MsgObj*)
 .fn setLedPattern__Q33ipl5nwc247ManagerFP11NWC24MsgObj, global
 /* 81342424 00010824  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -863,6 +898,7 @@
 /* 81342464 00010864  4E 80 00 20 */	blr
 .endfn setLedPattern__Q33ipl5nwc247ManagerFP11NWC24MsgObj
 
+# .text:0xAEC | 0x81342468 | size: 0x40
 # ipl::nwc24::Manager::enableLedNotification(int)
 .fn enableLedNotification__Q33ipl5nwc247ManagerFi, global
 /* 81342468 00010868  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -883,6 +919,7 @@
 /* 813424A4 000108A4  4E 80 00 20 */	blr
 .endfn enableLedNotification__Q33ipl5nwc247ManagerFi
 
+# .text:0xB2C | 0x813424A8 | size: 0x44
 # ipl::nwc24::Manager::checkCHJumpObj(const NWC24CHJumpObj*, unsigned long)
 .fn checkCHJumpObj__Q33ipl5nwc247ManagerFPC14NWC24CHJumpObjUl, global
 /* 813424A8 000108A8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -904,6 +941,7 @@
 /* 813424E8 000108E8  4E 80 00 20 */	blr
 .endfn checkCHJumpObj__Q33ipl5nwc247ManagerFPC14NWC24CHJumpObjUl
 
+# .text:0xB70 | 0x813424EC | size: 0x44
 # ipl::nwc24::Manager::getCHJumpTitleId(const NWC24CHJumpObj*, unsigned long long*)
 .fn getCHJumpTitleId__Q33ipl5nwc247ManagerFPC14NWC24CHJumpObjPUx, global
 /* 813424EC 000108EC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -925,6 +963,7 @@
 /* 8134252C 0001092C  4E 80 00 20 */	blr
 .endfn getCHJumpTitleId__Q33ipl5nwc247ManagerFPC14NWC24CHJumpObjPUx
 
+# .text:0xBB4 | 0x81342530 | size: 0x48
 # ipl::nwc24::Manager::getCHJumpBlockSize(const NWC24CHJumpObj*, unsigned long*, unsigned long)
 .fn getCHJumpBlockSize__Q33ipl5nwc247ManagerFPC14NWC24CHJumpObjPUlUl, global
 /* 81342530 00010930  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -947,6 +986,7 @@
 /* 81342574 00010974  4E 80 00 20 */	blr
 .endfn getCHJumpBlockSize__Q33ipl5nwc247ManagerFPC14NWC24CHJumpObjPUlUl
 
+# .text:0xBFC | 0x81342578 | size: 0x4C
 # ipl::nwc24::Manager::getCHJumpBlockData(const NWC24CHJumpObj*, char*, unsigned long, unsigned long)
 .fn getCHJumpBlockData__Q33ipl5nwc247ManagerFPC14NWC24CHJumpObjPcUlUl, global
 /* 81342578 00010978  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -970,6 +1010,7 @@
 /* 813425C0 000109C0  4E 80 00 20 */	blr
 .endfn getCHJumpBlockData__Q33ipl5nwc247ManagerFPC14NWC24CHJumpObjPcUlUl
 
+# .text:0xC48 | 0x813425C4 | size: 0x5C
 # ipl::nwc24::Manager::saveMailNow()
 .fn saveMailNow__Q33ipl5nwc247ManagerFv, global
 /* 813425C4 000109C4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -997,6 +1038,7 @@
 /* 8134261C 00010A1C  4E 80 00 20 */	blr
 .endfn saveMailNow__Q33ipl5nwc247ManagerFv
 
+# .text:0xCA4 | 0x81342620 | size: 0x50
 # ipl::nwc24::Manager::check(unsigned long)
 .fn check__Q33ipl5nwc247ManagerFUl, global
 /* 81342620 00010A20  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1021,6 +1063,7 @@
 /* 8134266C 00010A6C  4E 80 00 20 */	blr
 .endfn check__Q33ipl5nwc247ManagerFUl
 
+# .text:0xCF4 | 0x81342670 | size: 0xFB4
 # ipl::nwc24::Manager::receive()
 .fn receive__Q33ipl5nwc247ManagerFv, global
 /* 81342670 00010A70  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -1032,7 +1075,7 @@
 /* 81342688 00010A88  DB EC FF F0 */	stfd f31, -0x10(r12)
 /* 8134268C 00010A8C  F3 EC 0F F8 */	psq_st f31, -0x8(r12), 0, qr0
 /* 81342690 00010A90  39 6C FF F0 */	subi r11, r12, 0x10
-/* 81342694 00010A94  48 2B 6D F9 */	bl __save_gpr
+/* 81342694 00010A94  48 2B 6D F9 */	bl _savegpr_14
 /* 81342698 00010A98  3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
 /* 8134269C 00010A9C  3F 20 81 63 */	lis r25, lbl_81635218@ha
 /* 813426A0 00010AA0  3B 44 90 08 */	addi r26, r4, smArg__Q23ipl6System@l
@@ -1912,7 +1955,7 @@
 /* 81343378 00011778  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8134337C 0001177C  EC 02 00 2A */	fadds f0, f2, f0
 /* 81343380 00011780  D0 01 00 8C */	stfs f0, 0x8c(r1)
-/* 81343384 00011784  48 1E D5 01 */	bl fn_81530884
+/* 81343384 00011784  48 1E D5 01 */	bl OSDisableInterrupts
 /* 81343388 00011788  38 00 00 05 */	li r0, 0x5
 /* 8134338C 0001178C  38 C1 00 C4 */	addi r6, r1, 0xc4
 /* 81343390 00011790  38 BA 00 38 */	addi r5, r26, 0x38
@@ -1923,7 +1966,7 @@
 /* 813433A0 000117A0  90 86 00 04 */	stw r4, 0x4(r6)
 /* 813433A4 000117A4  94 06 00 08 */	stwu r0, 0x8(r6)
 /* 813433A8 000117A8  42 00 FF F0 */	bdnz .L_81343398
-/* 813433AC 000117AC  48 1E D5 01 */	bl fn_815308AC
+/* 813433AC 000117AC  48 1E D5 01 */	bl OSRestoreInterrupts
 /* 813433B0 000117B0  80 01 06 E8 */	lwz r0, 0x6e8(r1)
 /* 813433B4 000117B4  93 81 00 50 */	stw r28, 0x50(r1)
 /* 813433B8 000117B8  2C 00 00 00 */	cmpwi r0, 0x0
@@ -2104,13 +2147,14 @@
 /* 81343604 00011A04  13 EA 00 0C */	psq_lx f31, r10, r0, 0, qr0
 /* 81343608 00011A08  39 6A FF F0 */	subi r11, r10, 0x10
 /* 8134360C 00011A0C  CB EA FF F0 */	lfd f31, -0x10(r10)
-/* 81343610 00011A10  48 2B 5E C9 */	bl __restore_gpr
+/* 81343610 00011A10  48 2B 5E C9 */	bl _restgpr_14
 /* 81343614 00011A14  80 0A 00 04 */	lwz r0, 0x4(r10)
 /* 81343618 00011A18  7C 08 03 A6 */	mtlr r0
 /* 8134361C 00011A1C  7D 41 53 78 */	mr r1, r10
 /* 81343620 00011A20  4E 80 00 20 */	blr
 .endfn receive__Q33ipl5nwc247ManagerFv
 
+# .text:0x1CA8 | 0x81343624 | size: 0x48
 # ipl::math::Random::get_f01()
 .fn get_f01__Q33ipl4math6RandomFv, global
 /* 81343624 00011A24  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -2133,6 +2177,7 @@
 /* 81343668 00011A68  4E 80 00 20 */	blr
 .endfn get_f01__Q33ipl4math6RandomFv
 
+# .text:0x1CF0 | 0x8134366C | size: 0x188
 # ipl::nwc24::Manager::addDlTask()
 .fn addDlTask__Q33ipl5nwc247ManagerFv, global
 /* 8134366C 00011A6C  94 21 EF 70 */	stwu r1, -0x1090(r1)
@@ -2239,6 +2284,7 @@
 /* 813437F0 00011BF0  4E 80 00 20 */	blr
 .endfn addDlTask__Q33ipl5nwc247ManagerFv
 
+# .text:0x1E78 | 0x813437F4 | size: 0x168
 # ipl::nwc24::Manager::add_dl_task(unsigned short, const char*, unsigned short, unsigned char)
 .fn add_dl_task__Q33ipl5nwc247ManagerFUsPCcUsUc, global
 /* 813437F4 00011BF4  94 21 FD E0 */	stwu r1, -0x220(r1)
@@ -2337,6 +2383,7 @@
 /* 81343958 00011D58  4E 80 00 20 */	blr
 .endfn add_dl_task__Q33ipl5nwc247ManagerFUsPCcUsUc
 
+# .text:0x1FE0 | 0x8134395C | size: 0x74
 # ipl::nwc24::Manager::getNewTitleTbl(unsigned long*) const
 .fn getNewTitleTbl__Q33ipl5nwc247ManagerCFPUl, global
 /* 8134395C 00011D5C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2354,14 +2401,14 @@
 .L_8134398C:
 /* 8134398C 00011D8C  2C 04 00 00 */	cmpwi r4, 0x0
 /* 81343990 00011D90  41 82 00 24 */	beq .L_813439B4
-/* 81343994 00011D94  48 1E CE F1 */	bl fn_81530884
+/* 81343994 00011D94  48 1E CE F1 */	bl OSDisableInterrupts
 /* 81343998 00011D98  7C 7F 1B 78 */	mr r31, r3
 /* 8134399C 00011D9C  7F C3 F3 78 */	mr r3, r30
 /* 813439A0 00011DA0  38 9D 04 18 */	addi r4, r29, 0x418
 /* 813439A4 00011DA4  38 A0 04 00 */	li r5, 0x400
 /* 813439A8 00011DA8  4B FE C8 89 */	bl memcpy
 /* 813439AC 00011DAC  7F E3 FB 78 */	mr r3, r31
-/* 813439B0 00011DB0  48 1E CE FD */	bl fn_815308AC
+/* 813439B0 00011DB0  48 1E CE FD */	bl OSRestoreInterrupts
 .L_813439B4:
 /* 813439B4 00011DB4  38 60 00 01 */	li r3, 0x1
 .L_813439B8:
@@ -2373,6 +2420,7 @@
 /* 813439CC 00011DCC  4E 80 00 20 */	blr
 .endfn getNewTitleTbl__Q33ipl5nwc247ManagerCFPUl
 
+# .text:0x2054 | 0x813439D0 | size: 0x80
 # ipl::nwc24::Manager::isNewMessageThere(unsigned long) const
 .fn isNewMessageThere__Q33ipl5nwc247ManagerCFUl, global
 /* 813439D0 00011DD0  94 21 FB F0 */	stwu r1, -0x410(r1)
@@ -2415,6 +2463,7 @@
 /* 81343A4C 00011E4C  4E 80 00 20 */	blr
 .endfn isNewMessageThere__Q33ipl5nwc247ManagerCFUl
 
+# .text:0x20D4 | 0x81343A50 | size: 0x134
 # ipl::nwc24::Manager::encode_odh(EGG::Heap*, unsigned long)
 .fn encode_odh__Q33ipl5nwc247ManagerFPQ23EGG4HeapUl, global
 /* 81343A50 00011E50  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -2501,6 +2550,7 @@
 /* 81343B80 00011F80  4E 80 00 20 */	blr
 .endfn encode_odh__Q33ipl5nwc247ManagerFPQ23EGG4HeapUl
 
+# .text:0x2208 | 0x81343B84 | size: 0x3F4
 # ipl::nwc24::Manager::make_text(EGG::Heap*, const NWC24MsgObj*, bool, unsigned long*)
 .fn make_text__Q33ipl5nwc247ManagerFPQ23EGG4HeapPC11NWC24MsgObjbPUl, global
 /* 81343B84 00011F84  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -2774,6 +2824,7 @@
 /* 81343F74 00012374  4E 80 00 20 */	blr
 .endfn make_text__Q33ipl5nwc247ManagerFPQ23EGG4HeapPC11NWC24MsgObjbPUl
 
+# .text:0x25FC | 0x81343F78 | size: 0xB4
 # ipl::nwc24::Manager::is_valid_app_id(unsigned long, unsigned short) const
 .fn is_valid_app_id__Q33ipl5nwc247ManagerCFUlUs, global
 /* 81343F78 00012378  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2794,7 +2845,7 @@
 /* 81343FB0 000123B0  38 61 00 0E */	addi r3, r1, 0xe
 /* 81343FB4 000123B4  38 81 00 08 */	addi r4, r1, 0x8
 /* 81343FB8 000123B8  38 A0 00 04 */	li r5, 0x4
-/* 81343FBC 000123BC  48 2B E4 09 */	bl fn_816023C4
+/* 81343FBC 000123BC  48 2B E4 09 */	bl strncpy
 /* 81343FC0 000123C0  38 61 00 0E */	addi r3, r1, 0xe
 /* 81343FC4 000123C4  38 81 00 0C */	addi r4, r1, 0xc
 /* 81343FC8 000123C8  38 A0 00 02 */	li r5, 0x2
@@ -2829,6 +2880,7 @@
 /* 81344028 00012428  4E 80 00 20 */	blr
 .endfn is_valid_app_id__Q33ipl5nwc247ManagerCFUlUs
 
+# .text:0x26B0 | 0x8134402C | size: 0x24
 # ipl::nwc24::Manager::getErrCode()
 .fn getErrCode__Q33ipl5nwc247ManagerFv, global
 /* 8134402C 0001242C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -2842,6 +2894,7 @@
 /* 8134404C 0001244C  4E 80 00 20 */	blr
 .endfn getErrCode__Q33ipl5nwc247ManagerFv
 
+# .text:0x26D4 | 0x81344050 | size: 0xF4
 # ipl::nwc24::Manager::error_handling(NWC24Err, int)
 .fn error_handling__Q33ipl5nwc247ManagerF8NWC24Erri, global
 /* 81344050 00012450  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2911,6 +2964,7 @@
 /* 81344140 00012540  4E 80 00 20 */	blr
 .endfn error_handling__Q33ipl5nwc247ManagerF8NWC24Erri
 
+# .text:0x27C8 | 0x81344144 | size: 0x44
 # ipl::nwc24::Manager::error_handling_ignore_file(NWC24Err, int)
 .fn error_handling_ignore_file__Q33ipl5nwc247ManagerF8NWC24Erri, global
 /* 81344144 00012544  2C 04 FF F0 */	cmpwi r4, -0x10
@@ -2935,10 +2989,11 @@
 /* 81344184 00012584  4E 80 00 20 */	blr
 .endfn error_handling_ignore_file__Q33ipl5nwc247ManagerF8NWC24Erri
 
-# 0x81635218 - 0x81635458
+# 0x81635218..0x81635458 | size: 0x240
 .data
 .balign 8
 
+# .data:0x0 | 0x81635218 | size: 0x15E
 .obj lbl_81635218, global
 	.4byte 0x6D61696C
 	.4byte 0x20776F72
@@ -3030,10 +3085,12 @@
 	.2byte 0x6400
 .endobj lbl_81635218
 
+# .data:0x15E | 0x81635376 | size: 0x30
 .obj lbl_81635376, global
 	.string "http://cfh.wapp.wii.com/announce/%03d/%d/%d.bin"
 .endobj lbl_81635376
 
+# .data:0x18E | 0x816353A6 | size: 0x16
 .obj lbl_816353A6, global
 	.4byte 0x69706C4E
 	.4byte 0x77633234
@@ -3043,6 +3100,7 @@
 	.2byte 0x0000
 .endobj lbl_816353A6
 
+# .data:0x1A4 | 0x816353BC | size: 0x9C
 .obj jumptable_816353BC, local
 	.rel error_handling__Q33ipl5nwc247ManagerF8NWC24Erri, .L_81344104
 	.rel error_handling__Q33ipl5nwc247ManagerF8NWC24Erri, .L_81344128
@@ -3085,79 +3143,96 @@
 	.rel error_handling__Q33ipl5nwc247ManagerF8NWC24Erri, .L_8134409C
 .endobj jumptable_816353BC
 
-# 0x816944C8 - 0x816944F0
+# 0x816944C8..0x816944F0 | size: 0x28
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x816944C8 | size: 0x4
 .obj lbl_816944C8, global
 	.float 4294967300
 .endobj lbl_816944C8
 
+# .sdata2:0x4 | 0x816944CC | size: 0x4
 .obj gap_09_816944CC_sdata2, global
 .hidden gap_09_816944CC_sdata2
 	.4byte 0x00000000
 .endobj gap_09_816944CC_sdata2
 
+# .sdata2:0x8 | 0x816944D0 | size: 0x8
 .obj lbl_816944D0, global
 	.double 4503599627370496
 .endobj lbl_816944D0
 
+# .sdata2:0x10 | 0x816944D8 | size: 0x2
 .obj lbl_816944D8, global
 	.2byte 0x0000
 .endobj lbl_816944D8
 
+# .sdata2:0x12 | 0x816944DA | size: 0x2
 .obj lbl_816944DA, global
 	.2byte 0x0001
 .endobj lbl_816944DA
 
+# .sdata2:0x14 | 0x816944DC | size: 0x2
 .obj lbl_816944DC, global
 	.2byte 0x0005
 .endobj lbl_816944DC
 
+# .sdata2:0x16 | 0x816944DE | size: 0x2
 .obj lbl_816944DE, global
 	.2byte 0x0006
 .endobj lbl_816944DE
 
+# .sdata2:0x18 | 0x816944E0 | size: 0x2
 .obj lbl_816944E0, global
 	.2byte 0x00F0
 .endobj lbl_816944E0
 
+# .sdata2:0x1A | 0x816944E2 | size: 0x2
 .obj lbl_816944E2, global
 	.2byte 0x00F0
 .endobj lbl_816944E2
 
+# .sdata2:0x1C | 0x816944E4 | size: 0x2
 .obj lbl_816944E4, global
 	.2byte 0x00F0
 .endobj lbl_816944E4
 
+# .sdata2:0x1E | 0x816944E6 | size: 0x2
 .obj lbl_816944E6, global
 	.2byte 0x00F0
 .endobj lbl_816944E6
 
+# .sdata2:0x20 | 0x816944E8 | size: 0x1
 .obj lbl_816944E8, global
 	.byte 0x80
 .endobj lbl_816944E8
 
+# .sdata2:0x21 | 0x816944E9 | size: 0x1
 .obj lbl_816944E9, global
 	.byte 0xA0
 .endobj lbl_816944E9
 
+# .sdata2:0x22 | 0x816944EA | size: 0x1
 .obj lbl_816944EA, global
 	.byte 0xC8
 .endobj lbl_816944EA
 
+# .sdata2:0x23 | 0x816944EB | size: 0x5
 .obj lbl_816944EB, global
 	.byte 0xF0, 0x00, 0x00, 0x00, 0x00
 .endobj lbl_816944EB
 
-# 0x816960F0 - 0x81696100
+# 0x816960F0..0x81696100 | size: 0x10
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x816960F0 | size: 0x6
 .obj lbl_816960F0, global
 	.string16 "\n\n"
 .endobj lbl_816960F0
 
+# .sdata:0x6 | 0x816960F6 | size: 0xA
 .obj lbl_816960F6, global
 	.4byte 0x4E574332
 	.4byte 0x34000000

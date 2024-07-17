@@ -7,7 +7,7 @@ UTILITY_OBJECTS	=	$(ASSEMBLY_ROOT)/iplTree.o \
 					iplCapture.o \
 					$(ASSEMBLY_ROOT)/iplUtility.o \
 					$(ASSEMBLY_ROOT)/iplThread.o \
-					iplMessageManager.o \
+					iplMessageBase.o \
 					$(ASSEMBLY_ROOT)/iplJpegDecoder.o \
 					$(ASSEMBLY_ROOT)/iplESMisc.o \
 					$(ASSEMBLY_ROOT)/iplCSFlags.o

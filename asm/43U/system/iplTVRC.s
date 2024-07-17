@@ -1,29 +1,33 @@
 .include "macros.inc"
 .file "iplTVRC.cpp"
 
-# 0x81089760 - 0x810897C0
+# 0x81089760..0x810897C0 | size: 0x60
 .section .bss, "wa", @nobits
 .balign 8
 
+# .bss:0x0 | 0x81089760 | size: 0x20
 # LibTVRC::_database
 .obj _database__7LibTVRC, global
 	.skip 0x20
 .endobj _database__7LibTVRC
 
+# .bss:0x20 | 0x81089780 | size: 0x30
 # LibTVRC::_alarm
 .obj _alarm__7LibTVRC, global
 	.skip 0x30
 .endobj _alarm__7LibTVRC
 
+# .bss:0x50 | 0x810897B0 | size: 0x10
 # LibTVRC::_tickWait
 .obj _tickWait__7LibTVRC, global
 	.skip 0x10
 .endobj _tickWait__7LibTVRC
 
-# 0x81361048 - 0x81361950
+# 0x81361048..0x81361950 | size: 0x908
 .text
 .balign 4
 
+# .text:0x0 | 0x81361048 | size: 0x8C
 .fn TVRCInit, global
 /* 81361048 0002F448  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8136104C 0002F44C  7C 08 02 A6 */	mflr r0
@@ -65,6 +69,7 @@
 /* 813610D0 0002F4D0  4E 80 00 20 */	blr
 .endfn TVRCInit
 
+# .text:0x8C | 0x813610D4 | size: 0x184
 .fn TVRCSetModelType, global
 /* 813610D4 0002F4D4  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 813610D8 0002F4D8  7C 08 02 A6 */	mflr r0
@@ -106,7 +111,7 @@
 /* 81361158 0002F558  38 61 00 14 */	addi r3, r1, 0x14
 /* 8136115C 0002F55C  38 8D 82 04 */	li r4, lbl_81696244@sda21
 /* 81361160 0002F560  4C C6 31 82 */	crclr cr1eq
-/* 81361164 0002F564  48 29 F9 1D */	bl fn_81600A80
+/* 81361164 0002F564  48 29 F9 1D */	bl sprintf
 /* 81361168 0002F568  3C 60 81 09 */	lis r3, _database__7LibTVRC@ha
 /* 8136116C 0002F56C  38 81 00 14 */	addi r4, r1, 0x14
 /* 81361170 0002F570  38 63 97 60 */	addi r3, r3, _database__7LibTVRC@l
@@ -176,11 +181,13 @@
 /* 81361254 0002F654  4E 80 00 20 */	blr
 .endfn TVRCSetModelType
 
+# .text:0x210 | 0x81361258 | size: 0x8
 .fn TVRCSetRepeatTimeout, global
 /* 81361258 0002F658  90 6D 82 00 */	stw r3, lbl_81696240@sda21(r0)
 /* 8136125C 0002F65C  4E 80 00 20 */	blr
 .endfn TVRCSetRepeatTimeout
 
+# .text:0x218 | 0x81361260 | size: 0x30
 .fn TVRCSendStopAsync, global
 /* 81361260 0002F660  80 0D A6 E4 */	lwz r0, lbl_81698724@sda21(r0)
 /* 81361264 0002F664  2C 00 00 00 */	cmpwi r0, 0x0
@@ -198,11 +205,13 @@
 /* 8136128C 0002F68C  4E 80 00 20 */	blr
 .endfn TVRCSendStopAsync
 
+# .text:0x248 | 0x81361290 | size: 0x8
 .fn TVRCIsActive, global
 /* 81361290 0002F690  80 6D A6 E8 */	lwz r3, lbl_81698728@sda21(r0)
 /* 81361294 0002F694  4E 80 00 20 */	blr
 .endfn TVRCIsActive
 
+# .text:0x250 | 0x81361298 | size: 0x44
 .fn TVRCIsValidCommand, global
 /* 81361298 0002F698  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8136129C 0002F69C  38 A0 00 00 */	li r5, 0x0
@@ -224,6 +233,7 @@
 /* 813612D8 0002F6D8  4E 80 00 20 */	blr
 .endfn TVRCIsValidCommand
 
+# .text:0x294 | 0x813612DC | size: 0x318
 .fn TVRCSendStartAsync, global
 /* 813612DC 0002F6DC  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 813612E0 0002F6E0  7C 08 02 A6 */	mflr r0
@@ -252,7 +262,7 @@
 /* 81361334 0002F734  38 60 00 00 */	li r3, 0x0
 /* 81361338 0002F738  48 00 02 A4 */	b .L_813615DC
 .L_8136133C:
-/* 8136133C 0002F73C  48 1C F5 49 */	bl fn_81530884
+/* 8136133C 0002F73C  48 1C F5 49 */	bl OSDisableInterrupts
 /* 81361340 0002F740  83 ED A6 CC */	lwz r31, lbl_8169870C@sda21(r0)
 /* 81361344 0002F744  7C 7E 1B 78 */	mr r30, r3
 /* 81361348 0002F748  80 8D 81 F8 */	lwz r4, lbl_81696238@sda21(r0)
@@ -424,7 +434,7 @@
 /* 813615CC 0002F9CC  48 1C B5 79 */	bl fn_8152CB44
 .L_813615D0:
 /* 813615D0 0002F9D0  7F C3 F3 78 */	mr r3, r30
-/* 813615D4 0002F9D4  48 1C F2 D9 */	bl fn_815308AC
+/* 813615D4 0002F9D4  48 1C F2 D9 */	bl OSRestoreInterrupts
 /* 813615D8 0002F9D8  38 60 00 01 */	li r3, 0x1
 .L_813615DC:
 /* 813615DC 0002F9DC  39 61 00 40 */	addi r11, r1, 0x40
@@ -435,6 +445,7 @@
 /* 813615F0 0002F9F0  4E 80 00 20 */	blr
 .endfn TVRCSendStartAsync
 
+# .text:0x5AC | 0x813615F4 | size: 0x1E0
 # LibTVRC::__FTVRCLoop0Handler(OSAlarm*, OSContext*)
 .fn __FTVRCLoop0Handler__7LibTVRCFP7OSAlarmP9OSContext, global
 /* 813615F4 0002F9F4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -569,6 +580,7 @@
 /* 813617D0 0002FBD0  4E 80 00 20 */	blr
 .endfn __FTVRCLoop0Handler__7LibTVRCFP7OSAlarmP9OSContext
 
+# .text:0x78C | 0x813617D4 | size: 0x17C
 # LibTVRC::__FTVRCLoop1Handler(OSAlarm*, OSContext*)
 .fn __FTVRCLoop1Handler__7LibTVRCFP7OSAlarmP9OSContext, global
 /* 813617D4 0002FBD4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -673,174 +685,213 @@
 /* 8136194C 0002FD4C  4E 80 00 20 */	blr
 .endfn __FTVRCLoop1Handler__7LibTVRCFP7OSAlarmP9OSContext
 
-# 0x816945C8 - 0x816945E8
+# 0x816945C8..0x816945E8 | size: 0x20
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x816945C8 | size: 0x4
 .obj lbl_816945C8, global
 	.float 1000
 .endobj lbl_816945C8
 
+# .sdata2:0x4 | 0x816945CC | size: 0x4
 .obj gap_09_816945CC_sdata2, global
 .hidden gap_09_816945CC_sdata2
 	.4byte 0x00000000
 .endobj gap_09_816945CC_sdata2
 
+# .sdata2:0x8 | 0x816945D0 | size: 0x8
 .obj lbl_816945D0, global
 	.double 1000000000
 .endobj lbl_816945D0
 
+# .sdata2:0x10 | 0x816945D8 | size: 0x8
 .obj lbl_816945D8, global
 	.double 1
 .endobj lbl_816945D8
 
+# .sdata2:0x18 | 0x816945E0 | size: 0x8
 .obj lbl_816945E0, global
 	.double 4503599627370496
 .endobj lbl_816945E0
 
-# 0x81696230 - 0x81696250
+# 0x81696230..0x81696250 | size: 0x20
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x81696230 | size: 0x8
 .obj lbl_81696230, global
 	.4byte 0x54565230
 	.4byte 0x00000000
 .endobj lbl_81696230
 
+# .sdata:0x8 | 0x81696238 | size: 0x4
 .obj lbl_81696238, global
 	.4byte lbl_81696230
 .endobj lbl_81696238
 
+# .sdata:0xC | 0x8169623C | size: 0x4
 .obj lbl_8169623C, global
 	.4byte 0x0000044C
 .endobj lbl_8169623C
 
+# .sdata:0x10 | 0x81696240 | size: 0x4
 .obj lbl_81696240, global
 	.4byte 0x00000190
 .endobj lbl_81696240
 
+# .sdata:0x14 | 0x81696244 | size: 0xC
 .obj lbl_81696244, global
 	.4byte 0x2F253034
 	.4byte 0x64000000
 	.4byte 0x00000000
 .endobj lbl_81696244
 
-# 0x81698700 - 0x81698778
+# 0x81698700..0x81698778 | size: 0x78
 .section .sbss, "wa", @nobits
 .balign 8
 
+# .sbss:0x0 | 0x81698700 | size: 0x4
 .obj lbl_81698700, global
 	.skip 0x4
 .endobj lbl_81698700
 
+# .sbss:0x4 | 0x81698704 | size: 0x4
 .obj lbl_81698704, global
 	.skip 0x4
 .endobj lbl_81698704
 
+# .sbss:0x8 | 0x81698708 | size: 0x4
 .obj lbl_81698708, global
 	.skip 0x4
 .endobj lbl_81698708
 
+# .sbss:0xC | 0x8169870C | size: 0x4
 .obj lbl_8169870C, global
 	.skip 0x4
 .endobj lbl_8169870C
 
+# .sbss:0x10 | 0x81698710 | size: 0x4
 .obj lbl_81698710, global
 	.skip 0x4
 .endobj lbl_81698710
 
+# .sbss:0x14 | 0x81698714 | size: 0x4
 .obj lbl_81698714, global
 	.skip 0x4
 .endobj lbl_81698714
 
+# .sbss:0x18 | 0x81698718 | size: 0x4
 .obj lbl_81698718, global
 	.skip 0x4
 .endobj lbl_81698718
 
+# .sbss:0x1C | 0x8169871C | size: 0x4
 .obj lbl_8169871C, global
 	.skip 0x4
 .endobj lbl_8169871C
 
+# .sbss:0x20 | 0x81698720 | size: 0x4
 .obj lbl_81698720, global
 	.skip 0x4
 .endobj lbl_81698720
 
+# .sbss:0x24 | 0x81698724 | size: 0x4
 .obj lbl_81698724, global
 	.skip 0x4
 .endobj lbl_81698724
 
+# .sbss:0x28 | 0x81698728 | size: 0x4
 .obj lbl_81698728, global
 	.skip 0x4
 .endobj lbl_81698728
 
+# .sbss:0x2C | 0x8169872C | size: 0x4
 .obj lbl_8169872C, global
 	.skip 0x4
 .endobj lbl_8169872C
 
+# .sbss:0x30 | 0x81698730 | size: 0x4
 .obj lbl_81698730, global
 	.skip 0x4
 .endobj lbl_81698730
 
+# .sbss:0x34 | 0x81698734 | size: 0x4
 .obj lbl_81698734, global
 	.skip 0x4
 .endobj lbl_81698734
 
+# .sbss:0x38 | 0x81698738 | size: 0x4
 .obj lbl_81698738, global
 	.skip 0x4
 .endobj lbl_81698738
 
+# .sbss:0x3C | 0x8169873C | size: 0x4
 .obj lbl_8169873C, global
 	.skip 0x4
 .endobj lbl_8169873C
 
+# .sbss:0x40 | 0x81698740 | size: 0x4
 .obj lbl_81698740, global
 	.skip 0x4
 .endobj lbl_81698740
 
+# .sbss:0x44 | 0x81698744 | size: 0x4
 .obj lbl_81698744, global
 	.skip 0x4
 .endobj lbl_81698744
 
+# .sbss:0x48 | 0x81698748 | size: 0x4
 .obj lbl_81698748, global
 	.skip 0x4
 .endobj lbl_81698748
 
+# .sbss:0x4C | 0x8169874C | size: 0x4
 .obj lbl_8169874C, global
 	.skip 0x4
 .endobj lbl_8169874C
 
+# .sbss:0x50 | 0x81698750 | size: 0x4
 .obj lbl_81698750, global
 	.skip 0x4
 .endobj lbl_81698750
 
+# .sbss:0x54 | 0x81698754 | size: 0x4
 .obj lbl_81698754, global
 	.skip 0x4
 .endobj lbl_81698754
 
+# .sbss:0x58 | 0x81698758 | size: 0x4
 .obj lbl_81698758, global
 	.skip 0x4
 .endobj lbl_81698758
 
+# .sbss:0x5C | 0x8169875C | size: 0x4
 .obj lbl_8169875C, global
 	.skip 0x4
 .endobj lbl_8169875C
 
+# .sbss:0x60 | 0x81698760 | size: 0x4
 .obj lbl_81698760, global
 	.skip 0x4
 .endobj lbl_81698760
 
+# .sbss:0x64 | 0x81698764 | size: 0x4
 .obj lbl_81698764, global
 	.skip 0x4
 .endobj lbl_81698764
 
+# .sbss:0x68 | 0x81698768 | size: 0x4
 .obj lbl_81698768, global
 	.skip 0x4
 .endobj lbl_81698768
 
+# .sbss:0x6C | 0x8169876C | size: 0x4
 .obj lbl_8169876C, global
 	.skip 0x4
 .endobj lbl_8169876C
 
+# .sbss:0x70 | 0x81698770 | size: 0x8
 .obj lbl_81698770, global
 	.skip 0x8
 .endobj lbl_81698770

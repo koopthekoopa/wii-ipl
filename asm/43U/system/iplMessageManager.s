@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplMessageManager.cpp"
 
-# 0x8133E7D4 - 0x8133E984
+# 0x8133E7D4..0x8133E984 | size: 0x1B0
 .text
 .balign 4
 
+# .text:0x0 | 0x8133E7D4 | size: 0x50
 # ipl::message::Manager::Manager(EGG::Heap*)
 .fn __ct__Q33ipl7message7ManagerFPQ23EGG4Heap, global
 /* 8133E7D4 0000CBD4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -30,6 +31,7 @@
 /* 8133E820 0000CC20  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl7message7ManagerFPQ23EGG4Heap
 
+# .text:0x50 | 0x8133E824 | size: 0x160
 # ipl::message::Manager::initMessage()
 .fn initMessage__Q33ipl7message7ManagerFv, global
 /* 8133E824 0000CC24  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -133,10 +135,11 @@
 /* 8133E980 0000CD80  4E 80 00 20 */	blr
 .endfn initMessage__Q33ipl7message7ManagerFv
 
-# 0x816350D8 - 0x81635100
+# 0x816350D8..0x81635100 | size: 0x28
 .data
 .balign 8
 
+# .data:0x0 | 0x816350D8 | size: 0x28
 .obj jumptable_816350D8, local
 	.rel initMessage__Q33ipl7message7ManagerFv, .L_8133E8CC
 	.rel initMessage__Q33ipl7message7ManagerFv, .L_8133E85C

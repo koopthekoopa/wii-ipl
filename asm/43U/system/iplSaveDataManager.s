@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplSaveDataManager.cpp"
 
-# 0x81357CB8 - 0x813598BC
+# 0x81357CB8..0x813598BC | size: 0x1C04
 .text
 .balign 4
 
+# .text:0x0 | 0x81357CB8 | size: 0x38
 # ipl::savedata::Manager::Manager(EGG::Heap*)
 .fn __ct__Q33ipl8savedata7ManagerFPQ23EGG4Heap, global
 /* 81357CB8 000260B8  3C C0 81 64 */	lis r6, lbl_816391F4@ha
@@ -23,6 +24,7 @@
 /* 81357CEC 000260EC  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl8savedata7ManagerFPQ23EGG4Heap
 
+# .text:0x38 | 0x81357CF0 | size: 0x84
 # ipl::savedata::Manager::~Manager()
 .fn __dt__Q33ipl8savedata7ManagerFv, global
 /* 81357CF0 000260F0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -62,6 +64,7 @@
 /* 81357D70 00026170  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl8savedata7ManagerFv
 
+# .text:0xBC | 0x81357D74 | size: 0x28
 # ipl::savedata::Manager::initManager()
 .fn initManager__Q33ipl8savedata7ManagerFv, global
 /* 81357D74 00026174  38 00 00 00 */	li r0, 0x0
@@ -76,12 +79,14 @@
 /* 81357D98 00026198  48 2A 04 B0 */	b fn_815F8248
 .endfn initManager__Q33ipl8savedata7ManagerFv
 
+# .text:0xE4 | 0x81357D9C | size: 0x8
 # ipl::savedata::Manager::setPrevPage(int)
 .fn setPrevPage__Q33ipl8savedata7ManagerFi, global
 /* 81357D9C 0002619C  90 83 00 2C */	stw r4, 0x2c(r3)
 /* 81357DA0 000261A0  4E 80 00 20 */	blr
 .endfn setPrevPage__Q33ipl8savedata7ManagerFi
 
+# .text:0xEC | 0x81357DA4 | size: 0x4C
 # ipl::savedata::Manager::setChanInfo(int, int, const ipl::channel::SChannelInfo&)
 .fn setChanInfo__Q33ipl8savedata7ManagerFiiRCQ33ipl7channel12SChannelInfo, global
 /* 81357DA4 000261A4  1C 04 00 C0 */	mulli r0, r4, 0xc0
@@ -105,6 +110,7 @@
 /* 81357DEC 000261EC  4E 80 00 20 */	blr
 .endfn setChanInfo__Q33ipl8savedata7ManagerFiiRCQ33ipl7channel12SChannelInfo
 
+# .text:0x138 | 0x81357DF0 | size: 0x44
 # ipl::savedata::Manager::setMemoSetting(const textinput::extend::savedata::MemoSetting&)
 .fn setMemoSetting__Q33ipl8savedata7ManagerFRCQ49textinput6extend8savedata11MemoSetting, global
 /* 81357DF0 000261F0  89 64 00 00 */	lbz r11, 0x0(r4)
@@ -126,6 +132,7 @@
 /* 81357E30 00026230  4E 80 00 20 */	blr
 .endfn setMemoSetting__Q33ipl8savedata7ManagerFRCQ49textinput6extend8savedata11MemoSetting
 
+# .text:0x17C | 0x81357E34 | size: 0xA8
 # ipl::savedata::Manager::flushAsync(EGG::Heap*)
 .fn flushAsync__Q33ipl8savedata7ManagerFPQ23EGG4Heap, global
 /* 81357E34 00026234  94 21 FF 80 */	stwu r1, -0x80(r1)
@@ -135,7 +142,7 @@
 /* 81357E44 00026244  48 2A 16 85 */	bl _savegpr_29
 /* 81357E48 00026248  7C 7D 1B 78 */	mr r29, r3
 /* 81357E4C 0002624C  7C 9E 23 78 */	mr r30, r4
-/* 81357E50 00026250  48 1D 8A 35 */	bl fn_81530884
+/* 81357E50 00026250  48 1D 8A 35 */	bl OSDisableInterrupts
 /* 81357E54 00026254  7C 7F 1B 78 */	mr r31, r3
 /* 81357E58 00026258  38 61 00 18 */	addi r3, r1, 0x18
 /* 81357E5C 0002625C  48 13 B9 99 */	bl fn_814937F4
@@ -162,7 +169,7 @@
 /* 81357EB0 000262B0  90 7D 04 EC */	stw r3, 0x4ec(r29)
 /* 81357EB4 000262B4  7C 7E 1B 78 */	mr r30, r3
 /* 81357EB8 000262B8  7F E3 FB 78 */	mr r3, r31
-/* 81357EBC 000262BC  48 1D 89 F1 */	bl fn_815308AC
+/* 81357EBC 000262BC  48 1D 89 F1 */	bl OSRestoreInterrupts
 /* 81357EC0 000262C0  39 61 00 80 */	addi r11, r1, 0x80
 /* 81357EC4 000262C4  7F C3 F3 78 */	mr r3, r30
 /* 81357EC8 000262C8  48 2A 16 4D */	bl _restgpr_29
@@ -172,6 +179,7 @@
 /* 81357ED8 000262D8  4E 80 00 20 */	blr
 .endfn flushAsync__Q33ipl8savedata7ManagerFPQ23EGG4Heap
 
+# .text:0x224 | 0x81357EDC | size: 0x88
 # ipl::savedata::Manager::isFinished(ipl::nand::File*)
 .fn isFinished__Q33ipl8savedata7ManagerFPQ33ipl4nand4File, global
 /* 81357EDC 000262DC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -212,6 +220,7 @@
 /* 81357F60 00026360  4E 80 00 20 */	blr
 .endfn isFinished__Q33ipl8savedata7ManagerFPQ33ipl4nand4File
 
+# .text:0x2AC | 0x81357F64 | size: 0x11C
 # ipl::savedata::Manager::hasChannel(unsigned long long, int*, int*) const
 .fn hasChannel__Q33ipl8savedata7ManagerCFUxPiPi, global
 /* 81357F64 00026364  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -296,6 +305,7 @@
 /* 8135807C 0002647C  4E 80 00 20 */	blr
 .endfn hasChannel__Q33ipl8savedata7ManagerCFUxPiPi
 
+# .text:0x3C8 | 0x81358080 | size: 0x5C
 # ipl::savedata::Manager::getNumValidChannel() const
 .fn getNumValidChannel__Q33ipl8savedata7ManagerCFv, global
 /* 81358080 00026480  39 20 00 00 */	li r9, 0x0
@@ -326,6 +336,7 @@
 /* 813580D8 000264D8  4E 80 00 20 */	blr
 .endfn getNumValidChannel__Q33ipl8savedata7ManagerCFv
 
+# .text:0x424 | 0x813580DC | size: 0x78
 # ipl::savedata::Manager::isResetAcceptable()
 .fn isResetAcceptable__Q33ipl8savedata7ManagerFv, global
 /* 813580DC 000264DC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -363,6 +374,7 @@
 /* 81358150 00026550  4E 80 00 20 */	blr
 .endfn isResetAcceptable__Q33ipl8savedata7ManagerFv
 
+# .text:0x49C | 0x81358154 | size: 0x38C
 # ipl::savedata::Manager::initManagerTask(void*)
 .fn initManagerTask__Q33ipl8savedata7ManagerFPv, global
 /* 81358154 00026554  94 21 FE E0 */	stwu r1, -0x120(r1)
@@ -616,6 +628,7 @@
 /* 813584DC 000268DC  4E 80 00 20 */	blr
 .endfn initManagerTask__Q33ipl8savedata7ManagerFPv
 
+# .text:0x828 | 0x813584E0 | size: 0x78
 # ipl::savedata::Manager::setDefaultSaveData()
 .fn setDefaultSaveData__Q33ipl8savedata7ManagerFv, global
 /* 813584E0 000268E0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -651,6 +664,7 @@
 /* 81358554 00026954  4E 80 00 20 */	blr
 .endfn setDefaultSaveData__Q33ipl8savedata7ManagerFv
 
+# .text:0x8A0 | 0x81358558 | size: 0x3C
 # ipl::savedata::Manager::setDefaultHeader()
 .fn setDefaultHeader__Q33ipl8savedata7ManagerFv, global
 /* 81358558 00026958  39 20 00 52 */	li r9, 0x52
@@ -670,6 +684,7 @@
 /* 81358590 00026990  4E 80 00 20 */	blr
 .endfn setDefaultHeader__Q33ipl8savedata7ManagerFv
 
+# .text:0x8DC | 0x81358594 | size: 0x54
 # ipl::savedata::Manager::setDefaultKeyboard()
 .fn setDefaultKeyboard__Q33ipl8savedata7ManagerFv, global
 /* 81358594 00026994  88 A3 03 34 */	lbz r5, 0x334(r3)
@@ -695,6 +710,7 @@
 /* 813585E4 000269E4  4E 80 00 20 */	blr
 .endfn setDefaultKeyboard__Q33ipl8savedata7ManagerFv
 
+# .text:0x930 | 0x813585E8 | size: 0x18
 # ipl::savedata::Manager::setDefaultTVRC()
 .fn setDefaultTVRC__Q33ipl8savedata7ManagerFv, global
 /* 813585E8 000269E8  38 00 00 00 */	li r0, 0x0
@@ -705,6 +721,7 @@
 /* 813585FC 000269FC  4E 80 00 20 */	blr
 .endfn setDefaultTVRC__Q33ipl8savedata7ManagerFv
 
+# .text:0x948 | 0x81358600 | size: 0x150
 # ipl::savedata::Manager::updateChanInfos()
 .fn updateChanInfos__Q33ipl8savedata7ManagerFv, global
 /* 81358600 00026A00  94 21 FE 60 */	stwu r1, -0x1a0(r1)
@@ -795,6 +812,7 @@
 /* 8135874C 00026B4C  4E 80 00 20 */	blr
 .endfn updateChanInfos__Q33ipl8savedata7ManagerFv
 
+# .text:0xA98 | 0x81358750 | size: 0x220
 # ipl::savedata::Manager::deleteInvalidTitle(unsigned long long*, unsigned long)
 .fn deleteInvalidTitle__Q33ipl8savedata7ManagerFPUxUl, global
 /* 81358750 00026B50  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -944,6 +962,7 @@
 /* 8135896C 00026D6C  4E 80 00 20 */	blr
 .endfn deleteInvalidTitle__Q33ipl8savedata7ManagerFPUxUl
 
+# .text:0xCB8 | 0x81358970 | size: 0x268
 # ipl::savedata::Manager::checkSpecialTitles(unsigned long long*, unsigned long)
 .fn checkSpecialTitles__Q33ipl8savedata7ManagerFPUxUl, global
 /* 81358970 00026D70  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1114,6 +1133,7 @@
 /* 81358BD4 00026FD4  4E 80 00 20 */	blr
 .endfn checkSpecialTitles__Q33ipl8savedata7ManagerFPUxUl
 
+# .text:0xF20 | 0x81358BD8 | size: 0xD0
 .fn iplSavedata_81358BD8, global
 /* 81358BD8 00026FD8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81358BDC 00026FDC  7C 08 02 A6 */	mflr r0
@@ -1174,13 +1194,14 @@
 /* 81358CA4 000270A4  4E 80 00 20 */	blr
 .endfn iplSavedata_81358BD8
 
+# .text:0xFF0 | 0x81358CA8 | size: 0x214
 # ipl::savedata::Manager::makePriorTitleIDList(unsigned long long*, unsigned long long*, unsigned long)
 .fn makePriorTitleIDList__Q33ipl8savedata7ManagerFPUxPUxUl, global
 /* 81358CA8 000270A8  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 81358CAC 000270AC  7C 08 02 A6 */	mflr r0
 /* 81358CB0 000270B0  90 01 00 54 */	stw r0, 0x54(r1)
 /* 81358CB4 000270B4  39 61 00 50 */	addi r11, r1, 0x50
-/* 81358CB8 000270B8  48 2A 07 D5 */	bl __save_gpr
+/* 81358CB8 000270B8  48 2A 07 D5 */	bl _savegpr_14
 /* 81358CBC 000270BC  7C 6F 1B 78 */	mr r15, r3
 /* 81358CC0 000270C0  7C 90 23 78 */	mr r16, r4
 /* 81358CC4 000270C4  7C B1 2B 78 */	mr r17, r5
@@ -1317,13 +1338,14 @@
 /* 81358E9C 0002729C  3B FF 00 C0 */	addi r31, r31, 0xc0
 /* 81358EA0 000272A0  41 80 FE 44 */	blt .L_81358CE4
 /* 81358EA4 000272A4  39 61 00 50 */	addi r11, r1, 0x50
-/* 81358EA8 000272A8  48 2A 06 31 */	bl __restore_gpr
+/* 81358EA8 000272A8  48 2A 06 31 */	bl _restgpr_14
 /* 81358EAC 000272AC  80 01 00 54 */	lwz r0, 0x54(r1)
 /* 81358EB0 000272B0  7C 08 03 A6 */	mtlr r0
 /* 81358EB4 000272B4  38 21 00 50 */	addi r1, r1, 0x50
 /* 81358EB8 000272B8  4E 80 00 20 */	blr
 .endfn makePriorTitleIDList__Q33ipl8savedata7ManagerFPUxPUxUl
 
+# .text:0x1204 | 0x81358EBC | size: 0x98
 # ipl::savedata::Manager::integrateTitleIDList(unsigned long long*, unsigned long long*, unsigned long)
 .fn integrateTitleIDList__Q33ipl8savedata7ManagerFPUxPUxUl, global
 /* 81358EBC 000272BC  94 21 FE 30 */	stwu r1, -0x1d0(r1)
@@ -1368,6 +1390,7 @@
 /* 81358F50 00027350  4E 80 00 20 */	blr
 .endfn integrateTitleIDList__Q33ipl8savedata7ManagerFPUxPUxUl
 
+# .text:0x129C | 0x81358F54 | size: 0x17C
 # ipl::savedata::Manager::makeTmpList(unsigned long long*, unsigned long, unsigned long long*, unsigned long)
 .fn makeTmpList__Q33ipl8savedata7ManagerFPUxUlPUxUl, global
 /* 81358F54 00027354  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -1479,6 +1502,7 @@
 /* 813590CC 000274CC  4E 80 00 20 */	blr
 .endfn makeTmpList__Q33ipl8savedata7ManagerFPUxUlPUxUl
 
+# .text:0x1418 | 0x813590D0 | size: 0x94
 # ipl::savedata::Manager::moveTitleTmpToPrior(unsigned long long*, const unsigned long long*)
 .fn moveTitleTmpToPrior__Q33ipl8savedata7ManagerFPUxPCUx, global
 /* 813590D0 000274D0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1523,6 +1547,7 @@
 /* 81359160 00027560  4E 80 00 20 */	blr
 .endfn moveTitleTmpToPrior__Q33ipl8savedata7ManagerFPUxPCUx
 
+# .text:0x14AC | 0x81359164 | size: 0x10C
 # ipl::savedata::Manager::doUpdateChanInfos(unsigned long long*)
 .fn doUpdateChanInfos__Q33ipl8savedata7ManagerFPUx, global
 /* 81359164 00027564  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -1599,6 +1624,7 @@
 /* 8135926C 0002766C  4E 80 00 20 */	blr
 .endfn doUpdateChanInfos__Q33ipl8savedata7ManagerFPUx
 
+# .text:0x15B8 | 0x81359270 | size: 0x194
 # ipl::savedata::Manager::checkValidApp(unsigned long long)
 .fn checkValidApp__Q33ipl8savedata7ManagerFUx, global
 /* 81359270 00027670  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1713,6 +1739,7 @@
 /* 81359400 00027800  4E 80 00 20 */	blr
 .endfn checkValidApp__Q33ipl8savedata7ManagerFUx
 
+# .text:0x174C | 0x81359404 | size: 0x3C
 # ipl::savedata::Manager::getAvailableNumInList(const unsigned long long*, unsigned long)
 .fn getAvailableNumInList__Q33ipl8savedata7ManagerFPCUxUl, global
 /* 81359404 00027804  38 C0 00 00 */	li r6, 0x0
@@ -1735,6 +1762,7 @@
 /* 8135943C 0002783C  4E 80 00 20 */	blr
 .endfn getAvailableNumInList__Q33ipl8savedata7ManagerFPCUxUl
 
+# .text:0x1788 | 0x81359440 | size: 0x70
 # ipl::savedata::Manager::getAvailableInList(const unsigned long long*, unsigned long)
 .fn getAvailableInList__Q33ipl8savedata7ManagerFPCUxUl, global
 /* 81359440 00027840  39 00 00 00 */	li r8, 0x0
@@ -1770,6 +1798,7 @@
 /* 813594AC 000278AC  4E 80 00 20 */	blr
 .endfn getAvailableInList__Q33ipl8savedata7ManagerFPCUxUl
 
+# .text:0x17F8 | 0x813594B0 | size: 0x9C
 # ipl::savedata::Manager::isEqualChannel(unsigned long long, unsigned long long)
 .fn isEqualChannel__Q33ipl8savedata7ManagerFUxUx, global
 /* 813594B0 000278B0  7C C3 42 78 */	xor r3, r6, r8
@@ -1817,6 +1846,7 @@
 /* 81359548 00027948  4E 80 00 20 */	blr
 .endfn isEqualChannel__Q33ipl8savedata7ManagerFUxUx
 
+# .text:0x1894 | 0x8135954C | size: 0x50
 # ipl::savedata::Manager::isDefaultChannel(unsigned long, unsigned long)
 .fn isDefaultChannel__Q33ipl8savedata7ManagerFUlUl, global
 /* 8135954C 0002794C  3C C0 81 61 */	lis r6, lbl_8160D668@ha
@@ -1843,6 +1873,7 @@
 /* 81359598 00027998  4E 80 00 20 */	blr
 .endfn isDefaultChannel__Q33ipl8savedata7ManagerFUlUl
 
+# .text:0x18E4 | 0x8135959C | size: 0xD4
 # ipl::savedata::Manager::updateVersion(unsigned long, unsigned long)
 .fn updateVersion__Q33ipl8savedata7ManagerFUlUl, global
 /* 8135959C 0002799C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1906,6 +1937,7 @@
 /* 8135966C 00027A6C  4E 80 00 20 */	blr
 .endfn updateVersion__Q33ipl8savedata7ManagerFUlUl
 
+# .text:0x19B8 | 0x81359670 | size: 0x48
 .fn iplSavedata_81359670, global
 /* 81359670 00027A70  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359674 00027A74  7C 08 02 A6 */	mflr r0
@@ -1927,6 +1959,7 @@
 /* 813596B4 00027AB4  4E 80 00 20 */	blr
 .endfn iplSavedata_81359670
 
+# .text:0x1A00 | 0x813596B8 | size: 0xE8
 .fn iplSavedata_813596B8, global
 /* 813596B8 00027AB8  3C E0 48 41 */	lis r7, 0x4841
 /* 813596BC 00027ABC  3C 80 00 01 */	lis r4, 0x1
@@ -1995,6 +2028,7 @@
 /* 8135979C 00027B9C  4E 80 00 20 */	blr
 .endfn iplSavedata_813596B8
 
+# .text:0x1AE8 | 0x813597A0 | size: 0x40
 .fn iplSavedata_813597A0, global
 /* 813597A0 00027BA0  38 00 00 30 */	li r0, 0x30
 /* 813597A4 00027BA4  38 80 00 00 */	li r4, 0x0
@@ -2016,6 +2050,7 @@
 /* 813597DC 00027BDC  4E 80 00 20 */	blr
 .endfn iplSavedata_813597A0
 
+# .text:0x1B28 | 0x813597E0 | size: 0xDC
 # ipl::savedata::Manager::nand_error_handling(int)
 .fn nand_error_handling__Q33ipl8savedata7ManagerFi, global
 /* 813597E0 00027BE0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -2081,10 +2116,11 @@
 /* 813598B8 00027CB8  4E 80 00 20 */	blr
 .endfn nand_error_handling__Q33ipl8savedata7ManagerFi
 
-# 0x8160D668 - 0x8160D968
+# 0x8160D668..0x8160D968 | size: 0x300
 .rodata
 .balign 8
 
+# .rodata:0x0 | 0x8160D668 | size: 0x300
 .obj lbl_8160D668, global
 	.4byte 0x01010000
 	.4byte 0x0000000F
@@ -2280,18 +2316,21 @@
 	.4byte 0x00000000
 .endobj lbl_8160D668
 
-# 0x81639148 - 0x81639200
+# 0x81639148..0x81639200 | size: 0xB8
 .data
 .balign 8
 
+# .data:0x0 | 0x81639148 | size: 0x2A
 .obj lbl_81639148, global
 	.string "/title/00000001/00000002/data/iplsave.bin"
 .endobj lbl_81639148
 
+# .data:0x2A | 0x81639172 | size: 0x17
 .obj lbl_81639172, global
 	.string "iplSaveDataManager.cpp"
 .endobj lbl_81639172
 
+# .data:0x41 | 0x81639189 | size: 0x3B
 .obj lbl_81639189, global
 	.4byte 0x5B536176
 	.4byte 0x65446174
@@ -2310,6 +2349,7 @@
 	.byte 0x00, 0x00, 0x00
 .endobj lbl_81639189
 
+# .data:0x7C | 0x816391C4 | size: 0x30
 .obj jumptable_816391C4, local
 	.rel nand_error_handling__Q33ipl8savedata7ManagerFi, .L_813598A0
 	.rel nand_error_handling__Q33ipl8savedata7ManagerFi, .L_81359860
@@ -2325,28 +2365,33 @@
 	.rel nand_error_handling__Q33ipl8savedata7ManagerFi, .L_81359838
 .endobj jumptable_816391C4
 
+# .data:0xAC | 0x816391F4 | size: 0xC
 .obj lbl_816391F4, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl8savedata7ManagerFv
 .endobj lbl_816391F4
 
-# 0x81696210 - 0x81696220
+# 0x81696210..0x81696220 | size: 0x10
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x81696210 | size: 0x4
 .obj lbl_81696210, global
 	.4byte lbl_81639148
 .endobj lbl_81696210
 
+# .sdata:0x4 | 0x81696214 | size: 0x5
 .obj lbl_81696214, global
 	.string "NAND"
 .endobj lbl_81696214
 
+# .sdata:0x9 | 0x81696219 | size: 0x3
 .obj lbl_81696219, global
 	.string "ES"
 .endobj lbl_81696219
 
+# .sdata:0xC | 0x8169621C | size: 0x4
 .obj lbl_8169621C, global
 	.4byte 0x00000000
 .endobj lbl_8169621C

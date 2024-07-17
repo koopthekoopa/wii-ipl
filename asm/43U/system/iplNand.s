@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplNand.cpp"
 
-# 0x8133B2E4 - 0x8133C6D8
+# 0x8133B2E4..0x8133C6D8 | size: 0x13F4
 .text
 .balign 4
 
+# .text:0x0 | 0x8133B2E4 | size: 0x10
 # ipl::nand::Base::Base()
 .fn __ct__Q33ipl4nand4BaseFv, global
 /* 8133B2E4 000096E4  3C 80 81 63 */	lis r4, lbl_81634D6C@ha
@@ -13,6 +14,7 @@
 /* 8133B2F0 000096F0  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl4nand4BaseFv
 
+# .text:0x10 | 0x8133B2F4 | size: 0x40
 # ipl::nand::Base::~Base()
 .fn __dt__Q33ipl4nand4BaseFv, global
 /* 8133B2F4 000096F4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -34,6 +36,7 @@
 /* 8133B330 00009730  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl4nand4BaseFv
 
+# .text:0x50 | 0x8133B334 | size: 0xC0
 # ipl::nand::File::File(EGG::Heap*, const char*, ARCHandle*, const char*, int, unsigned long, bool)
 .fn __ct__Q33ipl4nand4FileFPQ23EGG4HeapPCcP9ARCHandlePCciUlb, global
 /* 8133B334 00009734  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -66,13 +69,13 @@
 /* 8133B3A0 000097A0  98 03 01 89 */	stb r0, 0x189(r3)
 /* 8133B3A4 000097A4  91 43 01 8C */	stw r10, 0x18c(r3)
 /* 8133B3A8 000097A8  38 63 00 08 */	addi r3, r3, 0x8
-/* 8133B3AC 000097AC  48 2C 70 19 */	bl fn_816023C4
+/* 8133B3AC 000097AC  48 2C 70 19 */	bl strncpy
 /* 8133B3B0 000097B0  2C 1F 00 00 */	cmpwi r31, 0x0
 /* 8133B3B4 000097B4  41 82 00 14 */	beq .L_8133B3C8
 /* 8133B3B8 000097B8  7F E4 FB 78 */	mr r4, r31
 /* 8133B3BC 000097BC  38 7D 00 50 */	addi r3, r29, 0x50
 /* 8133B3C0 000097C0  38 A0 00 41 */	li r5, 0x41
-/* 8133B3C4 000097C4  48 2C 70 01 */	bl fn_816023C4
+/* 8133B3C4 000097C4  48 2C 70 01 */	bl strncpy
 .L_8133B3C8:
 /* 8133B3C8 000097C8  38 7D 00 F8 */	addi r3, r29, 0xf8
 /* 8133B3CC 000097CC  38 80 00 00 */	li r4, 0x0
@@ -87,6 +90,7 @@
 /* 8133B3F0 000097F0  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl4nand4FileFPQ23EGG4HeapPCcP9ARCHandlePCciUlb
 
+# .text:0x110 | 0x8133B3F4 | size: 0xC0
 # ipl::nand::File::File(EGG::Heap*, const char*, unsigned char*, unsigned long, unsigned char)
 .fn __ct__Q33ipl4nand4FileFPQ23EGG4HeapPCcPUcUlUc, global
 /* 8133B3F4 000097F4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -118,7 +122,7 @@
 /* 8133B45C 0000985C  99 43 01 89 */	stb r10, 0x189(r3)
 /* 8133B460 00009860  90 03 01 8C */	stw r0, 0x18c(r3)
 /* 8133B464 00009864  38 63 00 08 */	addi r3, r3, 0x8
-/* 8133B468 00009868  48 2C 6F 5D */	bl fn_816023C4
+/* 8133B468 00009868  48 2C 6F 5D */	bl strncpy
 /* 8133B46C 0000986C  80 7F 00 98 */	lwz r3, 0x98(r31)
 /* 8133B470 00009870  38 A0 FF E0 */	li r5, -0x20
 /* 8133B474 00009874  80 9F 00 04 */	lwz r4, 0x4(r31)
@@ -139,6 +143,7 @@
 /* 8133B4B0 000098B0  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl4nand4FileFPQ23EGG4HeapPCcPUcUlUc
 
+# .text:0x1D0 | 0x8133B4B4 | size: 0x78
 # ipl::nand::File::~File()
 .fn __dt__Q33ipl4nand4FileFv, global
 /* 8133B4B4 000098B4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -175,6 +180,7 @@
 /* 8133B528 00009928  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl4nand4FileFv
 
+# .text:0x248 | 0x8133B52C | size: 0xF0
 # ipl::nand::File::open_(unsigned char)
 .fn open___Q33ipl4nand4FileFUc, global
 /* 8133B52C 0000992C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -245,6 +251,7 @@
 /* 8133B618 00009A18  4E 80 00 20 */	blr
 .endfn open___Q33ipl4nand4FileFUc
 
+# .text:0x338 | 0x8133B61C | size: 0x1B4
 # ipl::nand::File::readBlock_(void*, int, int)
 .fn readBlock___Q33ipl4nand4FileFPvii, global
 /* 8133B61C 00009A1C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -362,6 +369,7 @@
 /* 8133B7CC 00009BCC  4E 80 00 20 */	blr
 .endfn readBlock___Q33ipl4nand4FileFPvii
 
+# .text:0x4EC | 0x8133B7D0 | size: 0xBC
 # ipl::nand::File::getDecodeSize_(const unsigned char*)
 .fn getDecodeSize___Q33ipl4nand4FileFPCUc, global
 /* 8133B7D0 00009BD0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -417,6 +425,7 @@
 /* 8133B888 00009C88  4E 80 00 20 */	blr
 .endfn getDecodeSize___Q33ipl4nand4FileFPCUc
 
+# .text:0x5A8 | 0x8133B88C | size: 0x84
 # ipl::nand::File::getRawSize_()
 .fn getRawSize___Q33ipl4nand4FileFv, global
 /* 8133B88C 00009C8C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -457,6 +466,7 @@
 /* 8133B90C 00009D0C  4E 80 00 20 */	blr
 .endfn getRawSize___Q33ipl4nand4FileFv
 
+# .text:0x62C | 0x8133B910 | size: 0x30
 # ipl::nand::File::isSliCompressed(const unsigned char*)
 .fn isSliCompressed__Q33ipl4nand4FileFPCUc, global
 /* 8133B910 00009D10  88 04 00 00 */	lbz r0, 0x0(r4)
@@ -473,6 +483,7 @@
 /* 8133B93C 00009D3C  4E 80 00 20 */	blr
 .endfn isSliCompressed__Q33ipl4nand4FileFPCUc
 
+# .text:0x65C | 0x8133B940 | size: 0x30
 # ipl::nand::File::isAsrCompressed(const unsigned char*)
 .fn isAsrCompressed__Q33ipl4nand4FileFPCUc, global
 /* 8133B940 00009D40  88 04 00 00 */	lbz r0, 0x0(r4)
@@ -489,6 +500,7 @@
 /* 8133B96C 00009D6C  4E 80 00 20 */	blr
 .endfn isAsrCompressed__Q33ipl4nand4FileFPCUc
 
+# .text:0x68C | 0x8133B970 | size: 0x30
 # ipl::nand::File::isAshCompressed(const unsigned char*)
 .fn isAshCompressed__Q33ipl4nand4FileFPCUc, global
 /* 8133B970 00009D70  88 04 00 00 */	lbz r0, 0x0(r4)
@@ -505,6 +517,7 @@
 /* 8133B99C 00009D9C  4E 80 00 20 */	blr
 .endfn isAshCompressed__Q33ipl4nand4FileFPCUc
 
+# .text:0x6BC | 0x8133B9A0 | size: 0x94
 # ipl::nand::File::isLz7Compressed(const unsigned char*)
 .fn isLz7Compressed__Q33ipl4nand4FileFPCUc, global
 /* 8133B9A0 00009DA0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -548,6 +561,7 @@
 /* 8133BA30 00009E30  4E 80 00 20 */	blr
 .endfn isLz7Compressed__Q33ipl4nand4FileFPCUc
 
+# .text:0x750 | 0x8133BA34 | size: 0xB8
 # ipl::nand::File::isCompressed(const unsigned char*)
 .fn isCompressed__Q33ipl4nand4FileFPCUc, global
 /* 8133BA34 00009E34  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -601,6 +615,7 @@
 /* 8133BAE8 00009EE8  4E 80 00 20 */	blr
 .endfn isCompressed__Q33ipl4nand4FileFPCUc
 
+# .text:0x808 | 0x8133BAEC | size: 0x74
 # ipl::nand::File::uncompressLz7(const unsigned char*, unsigned char*)
 .fn uncompressLz7__Q33ipl4nand4FileFPCUcPUc, global
 /* 8133BAEC 00009EEC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -636,6 +651,7 @@
 /* 8133BB5C 00009F5C  4E 80 00 20 */	blr
 .endfn uncompressLz7__Q33ipl4nand4FileFPCUcPUc
 
+# .text:0x87C | 0x8133BB60 | size: 0x300
 # ipl::nand::File::read()
 .fn read__Q33ipl4nand4FileFv, global
 /* 8133BB60 00009F60  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -842,11 +858,13 @@
 /* 8133BE5C 0000A25C  4E 80 00 20 */	blr
 .endfn read__Q33ipl4nand4FileFv
 
+# .text:0xB7C | 0x8133BE60 | size: 0x4
 # ipl::nand::File::callback_()
 .fn callback___Q33ipl4nand4FileFv, global
 /* 8133BE60 0000A260  4E 80 00 20 */	blr
 .endfn callback___Q33ipl4nand4FileFv
 
+# .text:0xB80 | 0x8133BE64 | size: 0x90
 # ipl::nand::File::calcMD5_(const unsigned char*, const unsigned char*, unsigned long) const
 .fn calcMD5___Q33ipl4nand4FileCFPCUcPCUcUl, global
 /* 8133BE64 0000A264  94 21 FF 80 */	stwu r1, -0x80(r1)
@@ -890,6 +908,7 @@
 /* 8133BEF0 0000A2F0  4E 80 00 20 */	blr
 .endfn calcMD5___Q33ipl4nand4FileCFPCUcPCUcUl
 
+# .text:0xC10 | 0x8133BEF4 | size: 0xA8
 # ipl::nand::File::close_()
 .fn close___Q33ipl4nand4FileFv, global
 /* 8133BEF4 0000A2F4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -940,6 +959,7 @@
 /* 8133BF98 0000A398  4E 80 00 20 */	blr
 .endfn close___Q33ipl4nand4FileFv
 
+# .text:0xCB8 | 0x8133BF9C | size: 0x14
 # ipl::nand::File::getBuffer_(unsigned long)
 .fn getBuffer___Q33ipl4nand4FileFUl, global
 /* 8133BF9C 0000A39C  7C 65 1B 78 */	mr r5, r3
@@ -949,6 +969,7 @@
 /* 8133BFAC 0000A3AC  48 2B C1 28 */	b __nwa__FUlPQ23EGG4Heapi
 .endfn getBuffer___Q33ipl4nand4FileFUl
 
+# .text:0xCCC | 0x8133BFB0 | size: 0x194
 # ipl::nand::LangFile::LangFile(EGG::Heap*, const char*, const char*, ARCHandle*, bool)
 .fn __ct__Q33ipl4nand8LangFileFPQ23EGG4HeapPCcPCcP9ARCHandleb, global
 /* 8133BFB0 0000A3B0  94 21 FF 90 */	stwu r1, -0x70(r1)
@@ -971,7 +992,7 @@
 /* 8133BFF4 0000A3F4  90 03 00 08 */	stw r0, 0x8(r3)
 /* 8133BFF8 0000A3F8  38 61 00 08 */	addi r3, r1, 0x8
 /* 8133BFFC 0000A3FC  38 A0 00 41 */	li r5, 0x41
-/* 8133C000 0000A400  48 2C 63 C5 */	bl fn_816023C4
+/* 8133C000 0000A400  48 2C 63 C5 */	bl strncpy
 /* 8133C004 0000A404  38 61 00 08 */	addi r3, r1, 0x8
 /* 8133C008 0000A408  48 2B CE F5 */	bl strlen
 /* 8133C00C 0000A40C  3C 80 81 63 */	lis r4, lbl_81634C9C@ha
@@ -1006,7 +1027,7 @@
 /* 8133C07C 0000A47C  7F 64 DB 78 */	mr r4, r27
 /* 8133C080 0000A480  38 61 00 08 */	addi r3, r1, 0x8
 /* 8133C084 0000A484  38 A0 00 41 */	li r5, 0x41
-/* 8133C088 0000A488  48 2C 63 3D */	bl fn_816023C4
+/* 8133C088 0000A488  48 2C 63 3D */	bl strncpy
 /* 8133C08C 0000A48C  38 61 00 08 */	addi r3, r1, 0x8
 /* 8133C090 0000A490  48 2B CE 6D */	bl strlen
 /* 8133C094 0000A494  20 A3 00 41 */	subfic r5, r3, 0x41
@@ -1056,6 +1077,7 @@
 /* 8133C140 0000A540  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl4nand8LangFileFPQ23EGG4HeapPCcPCcP9ARCHandleb
 
+# .text:0xE60 | 0x8133C144 | size: 0xA8
 # ipl::nand::LangFile::~LangFile()
 .fn __dt__Q33ipl4nand8LangFileFv, global
 /* 8133C144 0000A544  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1105,6 +1127,7 @@
 /* 8133C1E8 0000A5E8  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl4nand8LangFileFv
 
+# .text:0xF08 | 0x8133C1EC | size: 0x64
 # ipl::nand::LangFile::read()
 .fn read__Q33ipl4nand8LangFileFv, global
 /* 8133C1EC 0000A5EC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1136,6 +1159,7 @@
 /* 8133C24C 0000A64C  4E 80 00 20 */	blr
 .endfn read__Q33ipl4nand8LangFileFv
 
+# .text:0xF6C | 0x8133C250 | size: 0x3C
 # ipl::nand::LayoutFile::LayoutFile(EGG::Heap*, const char*, const char*, ARCHandle*, bool)
 .fn __ct__Q33ipl4nand10LayoutFileFPQ23EGG4HeapPCcPCcP9ARCHandleb, global
 /* 8133C250 0000A650  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1155,6 +1179,7 @@
 /* 8133C288 0000A688  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl4nand10LayoutFileFPQ23EGG4HeapPCcPCcP9ARCHandleb
 
+# .text:0xFA8 | 0x8133C28C | size: 0x128
 # ipl::nand::File::write()
 .fn write__Q33ipl4nand4FileFv, global
 /* 8133C28C 0000A68C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1236,6 +1261,7 @@
 /* 8133C3B0 0000A7B0  4E 80 00 20 */	blr
 .endfn write__Q33ipl4nand4FileFv
 
+# .text:0x10D0 | 0x8133C3B4 | size: 0x110
 # ipl::nand::File::nand_error_handling(int)
 .fn nand_error_handling__Q33ipl4nand4FileFi, global
 /* 8133C3B4 0000A7B4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1312,11 +1338,13 @@
 /* 8133C4C0 0000A8C0  4E 80 00 20 */	blr
 .endfn nand_error_handling__Q33ipl4nand4FileFi
 
+# .text:0x11E0 | 0x8133C4C4 | size: 0x4
 # ipl::nand::Base::write()
 .fn write__Q33ipl4nand4BaseFv, global
 /* 8133C4C4 0000A8C4  4E 80 00 20 */	blr
 .endfn write__Q33ipl4nand4BaseFv
 
+# .text:0x11E4 | 0x8133C4C8 | size: 0xA8
 # ipl::nand::LangFile::isFatalError()
 .fn isFatalError__Q33ipl4nand8LangFileFv, global
 /* 8133C4C8 0000A8C8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1366,12 +1394,14 @@
 /* 8133C56C 0000A96C  4E 80 00 20 */	blr
 .endfn isFatalError__Q33ipl4nand8LangFileFv
 
+# .text:0x128C | 0x8133C570 | size: 0x8
 # ipl::nand::File::isFatalError()
 .fn isFatalError__Q33ipl4nand4FileFv, global
 /* 8133C570 0000A970  88 63 01 88 */	lbz r3, 0x188(r3)
 /* 8133C574 0000A974  4E 80 00 20 */	blr
 .endfn isFatalError__Q33ipl4nand4FileFv
 
+# .text:0x1294 | 0x8133C578 | size: 0x44
 # ipl::nand::LangFile::checkData()
 .fn checkData__Q33ipl4nand8LangFileFv, global
 /* 8133C578 0000A978  80 03 00 08 */	lwz r0, 0x8(r3)
@@ -1395,6 +1425,7 @@
 /* 8133C5B8 0000A9B8  4E 80 00 20 */	blr
 .endfn checkData__Q33ipl4nand8LangFileFv
 
+# .text:0x12D8 | 0x8133C5BC | size: 0xA8
 # ipl::nand::LangFile::isFinished()
 .fn isFinished__Q33ipl4nand8LangFileFv, global
 /* 8133C5BC 0000A9BC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1444,29 +1475,34 @@
 /* 8133C660 0000AA60  4E 80 00 20 */	blr
 .endfn isFinished__Q33ipl4nand8LangFileFv
 
+# .text:0x1380 | 0x8133C664 | size: 0x8
 # ipl::nand::Base::isFatalError()
 .fn isFatalError__Q33ipl4nand4BaseFv, global
 /* 8133C664 0000AA64  38 60 00 00 */	li r3, 0x0
 /* 8133C668 0000AA68  4E 80 00 20 */	blr
 .endfn isFatalError__Q33ipl4nand4BaseFv
 
+# .text:0x1388 | 0x8133C66C | size: 0x8
 # ipl::nand::Base::checkData()
 .fn checkData__Q33ipl4nand4BaseFv, global
 /* 8133C66C 0000AA6C  38 60 00 00 */	li r3, 0x0
 /* 8133C670 0000AA70  4E 80 00 20 */	blr
 .endfn checkData__Q33ipl4nand4BaseFv
 
+# .text:0x1390 | 0x8133C674 | size: 0x8
 # ipl::nand::Base::isFinished()
 .fn isFinished__Q33ipl4nand4BaseFv, global
 /* 8133C674 0000AA74  38 60 00 00 */	li r3, 0x0
 /* 8133C678 0000AA78  4E 80 00 20 */	blr
 .endfn isFinished__Q33ipl4nand4BaseFv
 
+# .text:0x1398 | 0x8133C67C | size: 0x4
 # ipl::nand::Base::read()
 .fn read__Q33ipl4nand4BaseFv, global
 /* 8133C67C 0000AA7C  4E 80 00 20 */	blr
 .endfn read__Q33ipl4nand4BaseFv
 
+# .text:0x139C | 0x8133C680 | size: 0x58
 # ipl::nand::LayoutFile::~LayoutFile()
 .fn __dt__Q33ipl4nand10LayoutFileFv, global
 /* 8133C680 0000AA80  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1494,10 +1530,11 @@
 /* 8133C6D4 0000AAD4  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl4nand10LayoutFileFv
 
-# 0x81634CD8 - 0x81634D90
+# 0x81634CD8..0x81634D90 | size: 0xB8
 .data
 .balign 8
 
+# .data:0x0 | 0x81634CD8 | size: 0x20
 .obj lbl_81634CD8, global
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -1509,6 +1546,7 @@
 	.4byte isFatalError__Q33ipl4nand8LangFileFv
 .endobj lbl_81634CD8
 
+# .data:0x20 | 0x81634CF8 | size: 0x20
 .obj lbl_81634CF8, global
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -1520,6 +1558,7 @@
 	.4byte isFatalError__Q33ipl4nand8LangFileFv
 .endobj lbl_81634CF8
 
+# .data:0x40 | 0x81634D18 | size: 0x54
 .obj lbl_81634D18, global
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -1544,6 +1583,7 @@
 	.4byte callback___Q33ipl4nand4FileFv
 .endobj lbl_81634D18
 
+# .data:0x94 | 0x81634D6C | size: 0x24
 .obj lbl_81634D6C, global
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -1556,22 +1596,26 @@
 	.4byte 0x00000000
 .endobj lbl_81634D6C
 
-# 0x81696098 - 0x816960A8
+# 0x81696098..0x816960A8 | size: 0x10
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x81696098 | size: 0x3
 .obj lbl_81696098, global
 	.string "ES"
 .endobj lbl_81696098
 
+# .sdata:0x3 | 0x8169609B | size: 0x5
 .obj lbl_8169609B, global
 	.string ".lz7"
 .endobj lbl_8169609B
 
+# .sdata:0x8 | 0x816960A0 | size: 0x2
 .obj lbl_816960A0, global
 	.string "/"
 .endobj lbl_816960A0
 
+# .sdata:0xA | 0x816960A2 | size: 0x6
 .obj lbl_816960A2, global
 	.4byte 0x4E414E44
 	.2byte 0x0000

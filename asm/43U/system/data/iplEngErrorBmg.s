@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplEngErrorBmg.s"
 
-# 0x81639900 - 0x81639CE0
+# 0x81639900..0x81639CE0 | size: 0x3E0
 .data
 .balign 8
 
+# .data:0x0 | 0x81639900 | size: 0x3E0
 .obj lbl_81639900, global
 	.4byte 0x4D455347
 	.4byte 0x626D6731

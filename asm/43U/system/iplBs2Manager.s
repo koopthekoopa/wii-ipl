@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplBS2Manager.cpp"
 
-# 0x813607A0 - 0x81361048
+# 0x813607A0..0x81361048 | size: 0x8A8
 .text
 .balign 4
 
+# .text:0x0 | 0x813607A0 | size: 0x94
 # ipl::bs2::Manager::Manager(EGG::Heap*)
 .fn __ct__Q33ipl3bs27ManagerFPQ23EGG4Heap, global
 /* 813607A0 0002EBA0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -46,6 +47,7 @@
 /* 81360830 0002EC30  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl3bs27ManagerFPQ23EGG4Heap
 
+# .text:0x94 | 0x81360834 | size: 0x64
 # ipl::bs2::Manager::~Manager()
 .fn __dt__Q33ipl3bs27ManagerFv, global
 /* 81360834 0002EC34  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -76,6 +78,7 @@
 /* 81360894 0002EC94  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl3bs27ManagerFv
 
+# .text:0xF8 | 0x81360898 | size: 0x10C
 # ipl::bs2::Manager::update()
 .fn update__Q33ipl3bs27ManagerFv, global
 /* 81360898 0002EC98  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -110,7 +113,7 @@
 /* 81360904 0002ED04  88 03 00 0C */	lbz r0, 0xc(r3)
 /* 81360908 0002ED08  2C 00 00 00 */	cmpwi r0, 0x0
 /* 8136090C 0002ED0C  41 82 00 7C */	beq .L_81360988
-/* 81360910 0002ED10  48 1C FF 75 */	bl fn_81530884
+/* 81360910 0002ED10  48 1C FF 75 */	bl OSDisableInterrupts
 /* 81360914 0002ED14  7C 7F 1B 78 */	mr r31, r3
 /* 81360918 0002ED18  48 01 CA A1 */	bl fn_8137D3B8
 /* 8136091C 0002ED1C  90 7E 00 08 */	stw r3, 0x8(r30)
@@ -125,7 +128,7 @@
 /* 81360940 0002ED40  7F C3 F3 78 */	mr r3, r30
 /* 81360944 0002ED44  48 00 03 FD */	bl execTick__Q33ipl3bs27ManagerF8BS2State
 /* 81360948 0002ED48  7F E3 FB 78 */	mr r3, r31
-/* 8136094C 0002ED4C  48 1C FF 61 */	bl fn_815308AC
+/* 8136094C 0002ED4C  48 1C FF 61 */	bl OSRestoreInterrupts
 /* 81360950 0002ED50  7F C3 F3 78 */	mr r3, r30
 /* 81360954 0002ED54  48 00 04 B1 */	bl updateTick__Q33ipl3bs27ManagerFv
 /* 81360958 0002ED58  88 1E 00 10 */	lbz r0, 0x10(r30)
@@ -151,6 +154,7 @@
 /* 813609A0 0002EDA0  4E 80 00 20 */	blr
 .endfn update__Q33ipl3bs27ManagerFv
 
+# .text:0x204 | 0x813609A4 | size: 0x44
 # ipl::System::isRsrcLoaded()
 .fn isRsrcLoaded__Q23ipl6SystemFv, global
 /* 813609A4 0002EDA4  3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
@@ -172,6 +176,7 @@
 /* 813609E4 0002EDE4  4E 80 00 20 */	blr
 .endfn isRsrcLoaded__Q23ipl6SystemFv
 
+# .text:0x248 | 0x813609E8 | size: 0x34
 # ipl::bs2::Manager::getDiskBannerBuffer(void**)
 .fn getDiskBannerBuffer__Q33ipl3bs27ManagerFPPv, global
 /* 813609E8 0002EDE8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -189,6 +194,7 @@
 /* 81360A18 0002EE18  4E 80 00 20 */	blr
 .endfn getDiskBannerBuffer__Q33ipl3bs27ManagerFPPv
 
+# .text:0x27C | 0x81360A1C | size: 0x9C
 # ipl::bs2::Manager::startUpdate()
 .fn startUpdate__Q33ipl3bs27ManagerFv, global
 /* 81360A1C 0002EE1C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -235,6 +241,7 @@
 /* 81360AB4 0002EEB4  4E 80 00 20 */	blr
 .endfn startUpdate__Q33ipl3bs27ManagerFv
 
+# .text:0x318 | 0x81360AB8 | size: 0xC
 # ipl::bs2::Manager::reserveRVLGame()
 .fn reserveRVLGame__Q33ipl3bs27ManagerFv, global
 /* 81360AB8 0002EEB8  38 00 00 00 */	li r0, 0x0
@@ -242,6 +249,7 @@
 /* 81360AC0 0002EEC0  4E 80 00 20 */	blr
 .endfn reserveRVLGame__Q33ipl3bs27ManagerFv
 
+# .text:0x324 | 0x81360AC4 | size: 0xC
 # ipl::bs2::Manager::reserveGCGame()
 .fn reserveGCGame__Q33ipl3bs27ManagerFv, global
 /* 81360AC4 0002EEC4  38 00 00 00 */	li r0, 0x0
@@ -249,16 +257,19 @@
 /* 81360ACC 0002EECC  4E 80 00 20 */	blr
 .endfn reserveGCGame__Q33ipl3bs27ManagerFv
 
+# .text:0x330 | 0x81360AD0 | size: 0x4
 # ipl::bs2::Manager::startRVLGame()
 .fn startRVLGame__Q33ipl3bs27ManagerFv, global
 /* 81360AD0 0002EED0  48 00 04 80 */	b bootNewSystem__Q33ipl3bs27ManagerFv
 .endfn startRVLGame__Q33ipl3bs27ManagerFv
 
+# .text:0x334 | 0x81360AD4 | size: 0x4
 # ipl::bs2::Manager::startGCGame()
 .fn startGCGame__Q33ipl3bs27ManagerFv, global
 /* 81360AD4 0002EED4  48 00 04 7C */	b bootNewSystem__Q33ipl3bs27ManagerFv
 .endfn startGCGame__Q33ipl3bs27ManagerFv
 
+# .text:0x338 | 0x81360AD8 | size: 0x14
 # ipl::bs2::Manager::abort()
 .fn abort__Q33ipl3bs27ManagerFv, global
 /* 81360AD8 0002EED8  38 80 00 01 */	li r4, 0x1
@@ -268,6 +279,7 @@
 /* 81360AE8 0002EEE8  4E 80 00 20 */	blr
 .endfn abort__Q33ipl3bs27ManagerFv
 
+# .text:0x34C | 0x81360AEC | size: 0x14
 # ipl::bs2::Manager::restart()
 .fn restart__Q33ipl3bs27ManagerFv, global
 /* 81360AEC 0002EEEC  38 80 00 00 */	li r4, 0x0
@@ -277,6 +289,7 @@
 /* 81360AFC 0002EEFC  4B FD 33 E4 */	b checkNandOverFlowFlagAsync__Q23ipl6SystemFv
 .endfn restart__Q33ipl3bs27ManagerFv
 
+# .text:0x360 | 0x81360B00 | size: 0x28
 # ipl::bs2::Manager::checkParentalControl()
 .fn checkParentalControl__Q33ipl3bs27ManagerFv, global
 /* 81360B00 0002EF00  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -291,6 +304,7 @@
 /* 81360B24 0002EF24  4E 80 00 20 */	blr
 .endfn checkParentalControl__Q33ipl3bs27ManagerFv
 
+# .text:0x388 | 0x81360B28 | size: 0x28
 # ipl::bs2::Manager::getDiskInfo(char**, char**)
 .fn getDiskInfo__Q33ipl3bs27ManagerFPPcPPc, global
 /* 81360B28 0002EF28  2C 04 00 00 */	cmpwi r4, 0x0
@@ -306,6 +320,7 @@
 /* 81360B4C 0002EF4C  4E 80 00 20 */	blr
 .endfn getDiskInfo__Q33ipl3bs27ManagerFPPcPPc
 
+# .text:0x3B0 | 0x81360B50 | size: 0x74
 # ipl::bs2::Manager::isTitleAvailable(unsigned long long) const
 .fn isTitleAvailable__Q33ipl3bs27ManagerCFUx, global
 /* 81360B50 0002EF50  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -341,6 +356,7 @@
 /* 81360BC0 0002EFC0  4E 80 00 20 */	blr
 .endfn isTitleAvailable__Q33ipl3bs27ManagerCFUx
 
+# .text:0x424 | 0x81360BC4 | size: 0x10
 # ipl::bs2::Manager::getTicketFromNand(unsigned long long, ESTicketView*) const
 .fn getTicketFromNand__Q33ipl3bs27ManagerCFUxP12ESTicketView, global
 /* 81360BC4 0002EFC4  7C A3 2B 78 */	mr r3, r5
@@ -349,6 +365,7 @@
 /* 81360BD0 0002EFD0  48 01 AB D4 */	b fn_8137B7A4
 .endfn getTicketFromNand__Q33ipl3bs27ManagerCFUxP12ESTicketView
 
+# .text:0x434 | 0x81360BD4 | size: 0x48
 # ipl::bs2::Manager::loadLockedTitleAsync(unsigned long long, ESTicketView&)
 .fn loadLockedTitleAsync__Q33ipl3bs27ManagerFUxR12ESTicketView, global
 /* 81360BD4 0002EFD4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -372,6 +389,7 @@
 /* 81360C18 0002F018  4E 80 00 20 */	blr
 .endfn loadLockedTitleAsync__Q33ipl3bs27ManagerFUxR12ESTicketView
 
+# .text:0x47C | 0x81360C1C | size: 0x124
 # ipl::bs2::Manager::splashTick(BS2State)
 .fn splashTick__Q33ipl3bs27ManagerF8BS2State, global
 /* 81360C1C 0002F01C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -462,6 +480,7 @@
 /* 81360D3C 0002F13C  4E 80 00 20 */	blr
 .endfn splashTick__Q33ipl3bs27ManagerF8BS2State
 
+# .text:0x5A0 | 0x81360D40 | size: 0xC4
 # ipl::bs2::Manager::execTick(BS2State)
 .fn execTick__Q33ipl3bs27ManagerF8BS2State, global
 /* 81360D40 0002F140  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -520,6 +539,7 @@
 /* 81360E00 0002F200  4E 80 00 20 */	blr
 .endfn execTick__Q33ipl3bs27ManagerF8BS2State
 
+# .text:0x664 | 0x81360E04 | size: 0x14C
 # ipl::bs2::Manager::updateTick()
 .fn updateTick__Q33ipl3bs27ManagerFv, global
 /* 81360E04 0002F204  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -615,6 +635,7 @@
 /* 81360F4C 0002F34C  4E 80 00 20 */	blr
 .endfn updateTick__Q33ipl3bs27ManagerFv
 
+# .text:0x7B0 | 0x81360F50 | size: 0xF8
 # ipl::bs2::Manager::bootNewSystem()
 .fn bootNewSystem__Q33ipl3bs27ManagerFv, global
 /* 81360F50 0002F350  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -689,10 +710,11 @@
 /* 81361044 0002F444  4E 80 00 20 */	blr
 .endfn bootNewSystem__Q33ipl3bs27ManagerFv
 
-# 0x816397E0 - 0x81639890
+# 0x816397E0..0x81639890 | size: 0xB0
 .data
 .balign 8
 
+# .data:0x0 | 0x816397E0 | size: 0xA0
 .obj jumptable_816397E0, local
 	.rel splashTick__Q33ipl3bs27ManagerF8BS2State, .L_81360CD8
 	.rel splashTick__Q33ipl3bs27ManagerF8BS2State, .L_81360D24
@@ -736,6 +758,7 @@
 	.rel splashTick__Q33ipl3bs27ManagerF8BS2State, .L_81360CB8
 .endobj jumptable_816397E0
 
+# .data:0xA0 | 0x81639880 | size: 0x10
 .obj lbl_81639880, global
 	.4byte 0x00000000
 	.4byte 0x00000000

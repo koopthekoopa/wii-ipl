@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplKeyboard.cpp"
 
-# 0x81354CD0 - 0x81356458
+# 0x81354CD0..0x81356458 | size: 0x1788
 .text
 .balign 4
 
+# .text:0x0 | 0x81354CD0 | size: 0x50
 .fn iplKeyboardMgr_81354CD0, global
 /* 81354CD0 000230D0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81354CD4 000230D4  7C 08 02 A6 */	mflr r0
@@ -31,6 +32,7 @@
 /* 81354D1C 0002311C  4E 80 00 20 */	blr
 .endfn iplKeyboardMgr_81354CD0
 
+# .text:0x50 | 0x81354D20 | size: 0x34
 # ipl::keyboard::EventObserver::onCommand(textinput::CommandReceiver::INPUT_COMMAND, void*)
 .fn onCommand__Q33ipl8keyboard13EventObserverFQ39textinput15CommandReceiver13INPUT_COMMANDPv, global
 /* 81354D20 00023120  2C 04 00 25 */	cmpwi r4, 0x25
@@ -48,6 +50,7 @@
 /* 81354D50 00023150  4E 80 00 20 */	blr
 .endfn onCommand__Q33ipl8keyboard13EventObserverFQ39textinput15CommandReceiver13INPUT_COMMANDPv
 
+# .text:0x84 | 0x81354D54 | size: 0x218
 # ipl::keyboard::EventObserver::onSE(textinput::sound::SE)
 .fn onSE__Q33ipl8keyboard13EventObserverFQ39textinput5sound2SE, global
 /* 81354D54 00023154  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -208,6 +211,7 @@
 /* 81354F68 00023368  4E 80 00 20 */	blr
 .endfn onSE__Q33ipl8keyboard13EventObserverFQ39textinput5sound2SE
 
+# .text:0x29C | 0x81354F6C | size: 0x14
 # ipl::keyboard::EventObserver::onOK()
 .fn onOK__Q33ipl8keyboard13EventObserverFv, global
 /* 81354F6C 0002336C  80 63 00 04 */	lwz r3, 0x4(r3)
@@ -217,6 +221,7 @@
 /* 81354F7C 0002337C  4E 80 04 20 */	bctr
 .endfn onOK__Q33ipl8keyboard13EventObserverFv
 
+# .text:0x2B0 | 0x81354F80 | size: 0x14
 # ipl::keyboard::EventObserver::onCancel()
 .fn onCancel__Q33ipl8keyboard13EventObserverFv, global
 /* 81354F80 00023380  80 63 00 04 */	lwz r3, 0x4(r3)
@@ -226,6 +231,7 @@
 /* 81354F90 00023390  4E 80 04 20 */	bctr
 .endfn onCancel__Q33ipl8keyboard13EventObserverFv
 
+# .text:0x2C4 | 0x81354F94 | size: 0x4F8
 # ipl::keyboard::Manager::create(ipl::nand::File*, EGG::Heap*)
 .fn create__Q33ipl8keyboard7ManagerFPQ33ipl4nand4FilePQ23EGG4Heap, global
 /* 81354F94 00023394  94 21 FD 90 */	stwu r1, -0x270(r1)
@@ -565,6 +571,7 @@
 /* 81355488 00023888  4E 80 00 20 */	blr
 .endfn create__Q33ipl8keyboard7ManagerFPQ33ipl4nand4FilePQ23EGG4Heap
 
+# .text:0x7BC | 0x8135548C | size: 0x44
 # textinput::extend::savedata::MemoSetting::operator=(const textinput::extend::savedata::MemoSetting&)
 .fn __as__Q49textinput6extend8savedata11MemoSettingFRCQ49textinput6extend8savedata11MemoSetting, global
 /* 8135548C 0002388C  89 64 00 00 */	lbz r11, 0x0(r4)
@@ -586,18 +593,21 @@
 /* 813554CC 000238CC  4E 80 00 20 */	blr
 .endfn __as__Q49textinput6extend8savedata11MemoSettingFRCQ49textinput6extend8savedata11MemoSetting
 
+# .text:0x800 | 0x813554D0 | size: 0x8
 # textinput::extend::memo::Manager::setSaveData(textinput::extend::savedata::MemoSetting)
 .fn setSaveData__Q49textinput6extend4memo7ManagerFQ49textinput6extend8savedata11MemoSetting, global
 /* 813554D0 000238D0  38 63 00 48 */	addi r3, r3, 0x48
 /* 813554D4 000238D4  4B FF FF B8 */	b __as__Q49textinput6extend8savedata11MemoSettingFRCQ49textinput6extend8savedata11MemoSetting
 .endfn setSaveData__Q49textinput6extend4memo7ManagerFQ49textinput6extend8savedata11MemoSetting
 
+# .text:0x808 | 0x813554D8 | size: 0x8
 # ipl::keyboard::EventObserver::setManager(ipl::keyboard::Manager*)
 .fn setManager__Q33ipl8keyboard13EventObserverFPQ33ipl8keyboard7Manager, global
 /* 813554D8 000238D8  90 83 00 04 */	stw r4, 0x4(r3)
 /* 813554DC 000238DC  4E 80 00 20 */	blr
 .endfn setManager__Q33ipl8keyboard13EventObserverFPQ33ipl8keyboard7Manager
 
+# .text:0x810 | 0x813554E0 | size: 0x40
 # nw4r::lyt::FontRefLink::~FontRefLink()
 .fn __dt__Q34nw4r3lyt11FontRefLinkFv, global
 /* 813554E0 000238E0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -619,6 +629,7 @@
 /* 8135551C 0002391C  4E 80 00 20 */	blr
 .endfn __dt__Q34nw4r3lyt11FontRefLinkFv
 
+# .text:0x850 | 0x81355520 | size: 0x6C
 # ipl::keyboard::Manager::init()
 .fn init__Q33ipl8keyboard7ManagerFv, global
 /* 81355520 00023920  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -650,6 +661,7 @@
 /* 81355588 00023988  4E 80 00 20 */	blr
 .endfn init__Q33ipl8keyboard7ManagerFv
 
+# .text:0x8BC | 0x8135558C | size: 0xB0
 # ipl::keyboard::Manager::changeAspectRatio()
 .fn changeAspectRatio__Q33ipl8keyboard7ManagerFv, global
 /* 8135558C 0002398C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -700,6 +712,7 @@
 /* 81355638 00023A38  4E 80 00 20 */	blr
 .endfn changeAspectRatio__Q33ipl8keyboard7ManagerFv
 
+# .text:0x96C | 0x8135563C | size: 0x524
 # ipl::keyboard::Manager::calc()
 .fn calc__Q33ipl8keyboard7ManagerFv, global
 /* 8135563C 00023A3C  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -1063,12 +1076,14 @@
 /* 81355B5C 00023F5C  4E 80 00 20 */	blr
 .endfn calc__Q33ipl8keyboard7ManagerFv
 
+# .text:0xE90 | 0x81355B60 | size: 0x8
 # textinput::extend::memo::Manager::getState()
 .fn getState__Q49textinput6extend4memo7ManagerFv, global
 /* 81355B60 00023F60  80 63 00 40 */	lwz r3, 0x40(r3)
 /* 81355B64 00023F64  4E 80 00 20 */	blr
 .endfn getState__Q49textinput6extend4memo7ManagerFv
 
+# .text:0xE98 | 0x81355B68 | size: 0x40
 # ipl::keyboard::Manager::draw()
 .fn draw__Q33ipl8keyboard7ManagerFv, global
 /* 81355B68 00023F68  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1089,6 +1104,7 @@
 /* 81355BA4 00023FA4  4E 80 00 20 */	blr
 .endfn draw__Q33ipl8keyboard7ManagerFv
 
+# .text:0xED8 | 0x81355BA8 | size: 0x14
 # ipl::keyboard::Manager::memoDraw()
 .fn memoDraw__Q33ipl8keyboard7ManagerFv, global
 /* 81355BA8 00023FA8  80 63 00 04 */	lwz r3, 0x4(r3)
@@ -1098,6 +1114,7 @@
 /* 81355BB8 00023FB8  4E 80 04 20 */	bctr
 .endfn memoDraw__Q33ipl8keyboard7ManagerFv
 
+# .text:0xEEC | 0x81355BBC | size: 0x58
 # ipl::keyboard::Manager::setKeyboardType(int, ipl::keyboard::Manager::KeyboardType)
 .fn setKeyboardType__Q33ipl8keyboard7ManagerFiQ43ipl8keyboard7Manager12KeyboardType, global
 /* 81355BBC 00023FBC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1124,6 +1141,7 @@
 /* 81355C10 00024010  4E 80 00 20 */	blr
 .endfn setKeyboardType__Q33ipl8keyboard7ManagerFiQ43ipl8keyboard7Manager12KeyboardType
 
+# .text:0xF44 | 0x81355C14 | size: 0x100
 # ipl::keyboard::Manager::start(int, const ipl::keyboard::Manager::KeyboardSetting&)
 .fn start__Q33ipl8keyboard7ManagerFiRCQ43ipl8keyboard7Manager15KeyboardSetting, global
 /* 81355C14 00024014  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1194,6 +1212,7 @@
 /* 81355D10 00024110  4E 80 00 20 */	blr
 .endfn start__Q33ipl8keyboard7ManagerFiRCQ43ipl8keyboard7Manager15KeyboardSetting
 
+# .text:0x1044 | 0x81355D14 | size: 0xA8
 # ipl::keyboard::Manager::ok()
 .fn ok__Q33ipl8keyboard7ManagerFv, global
 /* 81355D14 00024114  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1242,12 +1261,14 @@
 /* 81355DB8 000241B8  4E 80 00 20 */	blr
 .endfn ok__Q33ipl8keyboard7ManagerFv
 
+# .text:0x10EC | 0x81355DBC | size: 0x8
 # textinput::extend::memo::Manager::getConfigType()
 .fn getConfigType__Q49textinput6extend4memo7ManagerFv, global
 /* 81355DBC 000241BC  80 63 00 44 */	lwz r3, 0x44(r3)
 /* 81355DC0 000241C0  4E 80 00 20 */	blr
 .endfn getConfigType__Q49textinput6extend4memo7ManagerFv
 
+# .text:0x10F4 | 0x81355DC4 | size: 0xA8
 # ipl::keyboard::Manager::cancel()
 .fn cancel__Q33ipl8keyboard7ManagerFv, global
 /* 81355DC4 000241C4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1296,6 +1317,7 @@
 /* 81355E68 00024268  4E 80 00 20 */	blr
 .endfn cancel__Q33ipl8keyboard7ManagerFv
 
+# .text:0x119C | 0x81355E6C | size: 0x40
 # ipl::keyboard::Manager::doRumble()
 .fn doRumble__Q33ipl8keyboard7ManagerFv, global
 /* 81355E6C 0002426C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1317,6 +1339,7 @@
 /* 81355EA8 000242A8  4E 80 00 20 */	blr
 .endfn doRumble__Q33ipl8keyboard7ManagerFv
 
+# .text:0x11DC | 0x81355EAC | size: 0x20
 # ipl::keyboard::Manager::setWCString(const wchar_t*)
 .fn setWCString__Q33ipl8keyboard7ManagerFPCw, global
 /* 81355EAC 000242AC  2C 04 00 00 */	cmpwi r4, 0x0
@@ -1329,6 +1352,7 @@
 /* 81355EC8 000242C8  4E 80 00 20 */	blr
 .endfn setWCString__Q33ipl8keyboard7ManagerFPCw
 
+# .text:0x11FC | 0x81355ECC | size: 0x184
 # ipl::keyboard::Manager::setLanguage(unsigned long)
 .fn setLanguage__Q33ipl8keyboard7ManagerFUl, global
 /* 81355ECC 000242CC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1442,6 +1466,7 @@
 /* 8135604C 0002444C  4E 80 00 20 */	blr
 .endfn setLanguage__Q33ipl8keyboard7ManagerFUl
 
+# .text:0x1380 | 0x81356050 | size: 0x1C4
 # ipl::keyboard::Manager::setConfigure(ipl::keyboard::Manager::KeyboardType)
 .fn setConfigure__Q33ipl8keyboard7ManagerFQ43ipl8keyboard7Manager12KeyboardType, global
 /* 81356050 00024450  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1575,6 +1600,7 @@
 /* 81356210 00024610  4E 80 00 20 */	blr
 .endfn setConfigure__Q33ipl8keyboard7ManagerFQ43ipl8keyboard7Manager12KeyboardType
 
+# .text:0x1544 | 0x81356214 | size: 0x154
 # ipl::keyboard::Manager::doSave()
 .fn doSave__Q33ipl8keyboard7ManagerFv, global
 /* 81356214 00024614  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1666,6 +1692,7 @@
 /* 81356364 00024764  4E 80 00 20 */	blr
 .endfn doSave__Q33ipl8keyboard7ManagerFv
 
+# .text:0x1698 | 0x81356368 | size: 0x48
 # textinput::extend::memo::Manager::getSaveData()
 .fn getSaveData__Q49textinput6extend4memo7ManagerFv, global
 /* 81356368 00024768  88 03 00 4C */	lbz r0, 0x4c(r3)
@@ -1688,6 +1715,7 @@
 /* 813563AC 000247AC  4E 80 00 20 */	blr
 .endfn getSaveData__Q49textinput6extend4memo7ManagerFv
 
+# .text:0x16E0 | 0x813563B0 | size: 0x5C
 # ipl::keyboard::Manager::touchFormInDisp(int)
 .fn touchFormInDisp__Q33ipl8keyboard7ManagerFi, global
 /* 813563B0 000247B0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1715,6 +1743,7 @@
 /* 81356408 00024808  4E 80 00 20 */	blr
 .endfn touchFormInDisp__Q33ipl8keyboard7ManagerFi
 
+# .text:0x173C | 0x8135640C | size: 0x2C
 # ipl::keyboard::Manager::sendRelease()
 .fn sendRelease__Q33ipl8keyboard7ManagerFv, global
 /* 8135640C 0002480C  80 63 00 04 */	lwz r3, 0x4(r3)
@@ -1730,6 +1759,7 @@
 /* 81356434 00024834  4E 80 04 20 */	bctr
 .endfn sendRelease__Q33ipl8keyboard7ManagerFv
 
+# .text:0x1768 | 0x81356438 | size: 0xC
 # ipl::keyboard::Manager::getZiSystemDic()
 .fn getZiSystemDic__Q33ipl8keyboard7ManagerFv, global
 /* 81356438 00024838  3C 60 81 64 */	lis r3, lbl_816389E8@ha
@@ -1737,6 +1767,7 @@
 /* 81356440 00024840  4E 80 00 20 */	blr
 .endfn getZiSystemDic__Q33ipl8keyboard7ManagerFv
 
+# .text:0x1774 | 0x81356444 | size: 0xC
 # ipl::keyboard::Manager::getZiOemDic()
 .fn getZiOemDic__Q33ipl8keyboard7ManagerFv, global
 /* 81356444 00024844  3C 60 81 64 */	lis r3, lbl_81638A40@ha
@@ -1744,16 +1775,18 @@
 /* 8135644C 0002484C  4E 80 00 20 */	blr
 .endfn getZiOemDic__Q33ipl8keyboard7ManagerFv
 
+# .text:0x1780 | 0x81356450 | size: 0x8
 # ipl::keyboard::Manager::getState()
 .fn getState__Q33ipl8keyboard7ManagerFv, global
 /* 81356450 00024850  38 63 00 10 */	addi r3, r3, 0x10
 /* 81356454 00024854  4E 80 00 20 */	blr
 .endfn getState__Q33ipl8keyboard7ManagerFv
 
-# 0x816389E8 - 0x81638E78
+# 0x816389E8..0x81638E78 | size: 0x490
 .data
 .balign 8
 
+# .data:0x0 | 0x816389E8 | size: 0x58
 .obj lbl_816389E8, global
 	.4byte 0x3B000000
 	.4byte 0x00000000
@@ -1779,6 +1812,7 @@
 	.4byte 0x00000000
 .endobj lbl_816389E8
 
+# .data:0x58 | 0x81638A40 | size: 0x172
 .obj lbl_81638A40, global
 	.4byte 0x3B000000
 	.4byte 0x00000000
@@ -1875,6 +1909,7 @@
 	.2byte 0x5F43
 .endobj lbl_81638A40
 
+# .data:0x1CA | 0x81638BB2 | size: 0x8E
 .obj lbl_81638BB2, global
 	.4byte 0x4841525F
 	.4byte 0x4C415247
@@ -1914,6 +1949,7 @@
 	.2byte 0x0000
 .endobj lbl_81638BB2
 
+# .data:0x258 | 0x81638C40 | size: 0x60
 .obj jumptable_81638C40, local
 	.rel onSE__Q33ipl8keyboard13EventObserverFQ39textinput5sound2SE, .L_81354D90
 	.rel onSE__Q33ipl8keyboard13EventObserverFQ39textinput5sound2SE, .L_81354DA4
@@ -1941,6 +1977,7 @@
 	.rel onSE__Q33ipl8keyboard13EventObserverFQ39textinput5sound2SE, .L_81354F48
 .endobj jumptable_81638C40
 
+# .data:0x2B8 | 0x81638CA0 | size: 0x80
 .obj gap_08_81638CA0_data, global
 .hidden gap_08_81638CA0_data
 	.4byte 0x57696942
@@ -1977,6 +2014,7 @@
 	.4byte 0x6E740000
 .endobj gap_08_81638CA0_data
 
+# .data:0x338 | 0x81638D20 | size: 0x30
 .obj jumptable_81638D20, local
 	.rel create__Q33ipl8keyboard7ManagerFPQ33ipl4nand4FilePQ23EGG4Heap, .L_81355384
 	.rel create__Q33ipl8keyboard7ManagerFPQ33ipl4nand4FilePQ23EGG4Heap, .L_813553A0
@@ -1992,18 +2030,22 @@
 	.rel create__Q33ipl8keyboard7ManagerFPQ33ipl4nand4FilePQ23EGG4Heap, .L_813553D8
 .endobj jumptable_81638D20
 
+# .data:0x368 | 0x81638D50 | size: 0x10
 .obj lbl_81638D50, global
 	.string "WIPL_SE_SK_OPEN"
 .endobj lbl_81638D50
 
+# .data:0x378 | 0x81638D60 | size: 0x18
 .obj lbl_81638D60, global
 	.string "WIPL_SE_SK_DECIDE_CLOSE"
 .endobj lbl_81638D60
 
+# .data:0x390 | 0x81638D78 | size: 0x18
 .obj lbl_81638D78, global
 	.string "WIPL_SE_SK_CANCEL_CLOSE"
 .endobj lbl_81638D78
 
+# .data:0x3A8 | 0x81638D90 | size: 0x28
 .obj jumptable_81638D90, local
 	.rel setLanguage__Q33ipl8keyboard7ManagerFUl, .L_81355F00
 	.rel setLanguage__Q33ipl8keyboard7ManagerFUl, .L_81355FE0
@@ -2017,6 +2059,7 @@
 	.rel setLanguage__Q33ipl8keyboard7ManagerFUl, .L_81355FC4
 .endobj jumptable_81638D90
 
+# .data:0x3D0 | 0x81638DB8 | size: 0x38
 .obj jumptable_81638DB8, local
 	.rel setConfigure__Q33ipl8keyboard7ManagerFQ43ipl8keyboard7Manager12KeyboardType, .L_81356098
 	.rel setConfigure__Q33ipl8keyboard7ManagerFQ43ipl8keyboard7Manager12KeyboardType, .L_813560B0
@@ -2034,6 +2077,7 @@
 	.rel setConfigure__Q33ipl8keyboard7ManagerFQ43ipl8keyboard7Manager12KeyboardType, .L_813561D0
 .endobj jumptable_81638DB8
 
+# .data:0x408 | 0x81638DF0 | size: 0x4C
 .obj lbl_81638DF0, global
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -2056,6 +2100,7 @@
 	.4byte doSave__Q33ipl8keyboard7ManagerFv
 .endobj lbl_81638DF0
 
+# .data:0x454 | 0x81638E3C | size: 0x3C
 .obj lbl_81638E3C, global
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -2074,26 +2119,30 @@
 	.4byte 0x00000000
 .endobj lbl_81638E3C
 
-# 0x81694590 - 0x81694598
+# 0x81694590..0x81694598 | size: 0x8
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x81694590 | size: 0x4
 .obj lbl_81694590, global
 	.float 0.5
 .endobj lbl_81694590
 
+# .sdata2:0x4 | 0x81694594 | size: 0x4
 .obj lbl_81694594, global
 	.float inf
 .endobj lbl_81694594
 
-# 0x816961F8 - 0x81696200
+# 0x816961F8..0x81696200 | size: 0x8
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x816961F8 | size: 0x4
 .obj lbl_816961F8, global
 	.string "arc"
 .endobj lbl_816961F8
 
+# .sdata:0x4 | 0x816961FC | size: 0x4
 .obj lbl_816961FC, global
 	.4byte 0x00000000
 .endobj lbl_816961FC

@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplNigaoeManager.cpp"
 
-# 0x8133E984 - 0x8133EE00
+# 0x8133E984..0x8133EE00 | size: 0x47C
 .text
 .balign 4
 
+# .text:0x0 | 0x8133E984 | size: 0x110
 # ipl::nigaoe::Manager::Manager(EGG::Heap*)
 .fn __ct__Q33ipl6nigaoe7ManagerFPQ23EGG4Heap, global
 /* 8133E984 0000CD84  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -78,6 +79,7 @@
 /* 8133EA90 0000CE90  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl6nigaoe7ManagerFPQ23EGG4Heap
 
+# .text:0x110 | 0x8133EA94 | size: 0x90
 # ipl::nigaoe::Manager::create(EGG::Heap*, int, int, int, void (*)(ipl::nigaoe::Object*, void*), void*)
 .fn create__Q33ipl6nigaoe7ManagerFPQ23EGG4HeapiiiPFPQ33ipl6nigaoe6ObjectPv_vPv, global
 /* 8133EA94 0000CE94  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -119,6 +121,7 @@
 /* 8133EB20 0000CF20  4E 80 00 20 */	blr
 .endfn create__Q33ipl6nigaoe7ManagerFPQ23EGG4HeapiiiPFPQ33ipl6nigaoe6ObjectPv_vPv
 
+# .text:0x1A0 | 0x8133EB24 | size: 0x90
 # ipl::nigaoe::Manager::create(EGG::Heap*, int, int, RFLiCharData*, void (*)(ipl::nigaoe::Object*, void*), void*)
 .fn create__Q33ipl6nigaoe7ManagerFPQ23EGG4HeapiiP12RFLiCharDataPFPQ33ipl6nigaoe6ObjectPv_vPv, global
 /* 8133EB24 0000CF24  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -160,6 +163,7 @@
 /* 8133EBB0 0000CFB0  4E 80 00 20 */	blr
 .endfn create__Q33ipl6nigaoe7ManagerFPQ23EGG4HeapiiP12RFLiCharDataPFPQ33ipl6nigaoe6ObjectPv_vPv
 
+# .text:0x230 | 0x8133EBB4 | size: 0x7C
 # ipl::nigaoe::Manager::makeIcon()
 .fn makeIcon__Q33ipl6nigaoe7ManagerFv, global
 /* 8133EBB4 0000CFB4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -198,6 +202,7 @@
 /* 8133EC2C 0000D02C  4E 80 00 20 */	blr
 .endfn makeIcon__Q33ipl6nigaoe7ManagerFv
 
+# .text:0x2AC | 0x8133EC30 | size: 0x74
 # ipl::nigaoe::Manager::detach(ipl::nigaoe::Object*)
 .fn detach__Q33ipl6nigaoe7ManagerFPQ33ipl6nigaoe6Object, global
 /* 8133EC30 0000D030  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -235,6 +240,7 @@
 /* 8133ECA0 0000D0A0  4E 80 00 20 */	blr
 .endfn detach__Q33ipl6nigaoe7ManagerFPQ33ipl6nigaoe6Object
 
+# .text:0x320 | 0x8133ECA4 | size: 0x1C
 # ipl::nigaoe::Manager::isAvalable(unsigned short)
 .fn isAvalable__Q33ipl6nigaoe7ManagerFUs, global
 /* 8133ECA4 0000D0A4  80 03 00 04 */	lwz r0, 0x4(r3)
@@ -246,6 +252,7 @@
 /* 8133ECBC 0000D0BC  4E 80 00 20 */	blr
 .endfn isAvalable__Q33ipl6nigaoe7ManagerFUs
 
+# .text:0x33C | 0x8133ECC0 | size: 0x60
 # ipl::nigaoe::Manager::isValid(const RFLiCharData*) const
 .fn isValid__Q33ipl6nigaoe7ManagerCFPC12RFLiCharData, global
 /* 8133ECC0 0000D0C0  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -276,6 +283,7 @@
 /* 8133ED1C 0000D11C  4E 80 00 20 */	blr
 .endfn isValid__Q33ipl6nigaoe7ManagerCFPC12RFLiCharData
 
+# .text:0x39C | 0x8133ED20 | size: 0x48
 # ipl::nigaoe::Manager::addHiddenDB(const NWC24MsgObj*)
 .fn addHiddenDB__Q33ipl6nigaoe7ManagerFPC11NWC24MsgObj, global
 /* 8133ED20 0000D120  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -298,6 +306,7 @@
 /* 8133ED64 0000D164  4E 80 00 20 */	blr
 .endfn addHiddenDB__Q33ipl6nigaoe7ManagerFPC11NWC24MsgObj
 
+# .text:0x3E4 | 0x8133ED68 | size: 0x98
 # ipl::nigaoe::Manager::commitHiddenDB()
 .fn commitHiddenDB__Q33ipl6nigaoe7ManagerFv, global
 /* 8133ED68 0000D168  94 21 FE A0 */	stwu r1, -0x160(r1)
@@ -344,10 +353,11 @@
 /* 8133EDFC 0000D1FC  4E 80 00 20 */	blr
 .endfn commitHiddenDB__Q33ipl6nigaoe7ManagerFv
 
-# 0x81635100 - 0x81635118
+# 0x81635100..0x81635118 | size: 0x18
 .data
 .balign 8
 
+# .data:0x0 | 0x81635100 | size: 0x18
 .obj lbl_81635100, global
 	.4byte 0x77616974
 	.4byte 0x20617379

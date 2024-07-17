@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplTVRCManager.cpp"
 
-# 0x81361950 - 0x813626EC
+# 0x81361950..0x813626EC | size: 0xD9C
 .text
 .balign 4
 
+# .text:0x0 | 0x81361950 | size: 0xF4
 # ipl::TVRCManager::TVRCManager(EGG::Heap*)
 .fn __ct__Q23ipl11TVRCManagerFPQ23EGG4Heap, global
 /* 81361950 0002FD50  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -71,6 +72,7 @@
 /* 81361A40 0002FE40  4E 80 00 20 */	blr
 .endfn __ct__Q23ipl11TVRCManagerFPQ23EGG4Heap
 
+# .text:0xF4 | 0x81361A44 | size: 0x68
 # ipl::TVRCManager::~TVRCManager()
 .fn __dt__Q23ipl11TVRCManagerFv, global
 /* 81361A44 0002FE44  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -102,6 +104,7 @@
 /* 81361AA8 0002FEA8  4E 80 00 20 */	blr
 .endfn __dt__Q23ipl11TVRCManagerFv
 
+# .text:0x15C | 0x81361AAC | size: 0x230
 # ipl::TVRCManager::loadResources_(EGG::Heap*)
 .fn loadResources___Q23ipl11TVRCManagerFPQ23EGG4Heap, global
 /* 81361AAC 0002FEAC  94 21 FF 10 */	stwu r1, -0xf0(r1)
@@ -122,7 +125,7 @@
 /* 81361AE8 0002FEE8  38 C6 4F 45 */	addi r6, r6, 0x4f45
 /* 81361AEC 0002FEEC  3B 80 00 00 */	li r28, 0x0
 /* 81361AF0 0002FEF0  4C C6 31 82 */	crclr cr1eq
-/* 81361AF4 0002FEF4  48 29 EF 8D */	bl fn_81600A80
+/* 81361AF4 0002FEF4  48 29 EF 8D */	bl sprintf
 /* 81361AF8 0002FEF8  38 61 00 14 */	addi r3, r1, 0x14
 /* 81361AFC 0002FEFC  38 81 00 54 */	addi r4, r1, 0x54
 /* 81361B00 0002FF00  38 A0 00 01 */	li r5, 0x1
@@ -259,6 +262,7 @@
 /* 81361CD8 000300D8  4E 80 00 20 */	blr
 .endfn loadResources___Q23ipl11TVRCManagerFPQ23EGG4Heap
 
+# .text:0x38C | 0x81361CDC | size: 0x124
 # ipl::TVRCManager::initManagerTask(void*)
 .fn initManagerTask__Q23ipl11TVRCManagerFPv, global
 /* 81361CDC 000300DC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -342,6 +346,7 @@
 /* 81361DFC 000301FC  4E 80 00 20 */	blr
 .endfn initManagerTask__Q23ipl11TVRCManagerFPv
 
+# .text:0x4B0 | 0x81361E00 | size: 0x20
 # ipl::TVRCManager::loadDatabase()
 .fn loadDatabase__Q23ipl11TVRCManagerFv, global
 /* 81361E00 00030200  3C C0 81 09 */	lis r6, smArg__Q23ipl6System@ha
@@ -354,6 +359,7 @@
 /* 81361E1C 0003021C  48 29 64 2C */	b fn_815F8248
 .endfn loadDatabase__Q23ipl11TVRCManagerFv
 
+# .text:0x4D0 | 0x81361E20 | size: 0x10
 # ipl::TVRCManager::setEnable(int)
 .fn setEnable__Q23ipl11TVRCManagerFi, global
 /* 81361E20 00030220  7C 80 00 34 */	cntlzw r0, r4
@@ -362,6 +368,7 @@
 /* 81361E2C 0003022C  4E 80 00 20 */	blr
 .endfn setEnable__Q23ipl11TVRCManagerFi
 
+# .text:0x4E0 | 0x81361E30 | size: 0x2D0
 # ipl::TVRCManager::getTrigger()
 .fn getTrigger__Q23ipl11TVRCManagerFv, global
 /* 81361E30 00030230  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -561,6 +568,7 @@
 /* 813620FC 000304FC  4E 80 00 20 */	blr
 .endfn getTrigger__Q23ipl11TVRCManagerFv
 
+# .text:0x7B0 | 0x81362100 | size: 0xA0
 # ipl::TVRCManager::snd_shutup(int)
 .fn snd_shutup__Q23ipl11TVRCManagerFi, global
 /* 81362100 00030500  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -608,6 +616,7 @@
 /* 8136219C 0003059C  4E 80 00 20 */	blr
 .endfn snd_shutup__Q23ipl11TVRCManagerFi
 
+# .text:0x850 | 0x813621A0 | size: 0x60
 # ipl::TVRCManager::trans_cmd(long)
 .fn trans_cmd__Q23ipl11TVRCManagerFl, global
 /* 813621A0 000305A0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -639,6 +648,7 @@
 /* 813621FC 000305FC  4E 80 00 20 */	blr
 .endfn trans_cmd__Q23ipl11TVRCManagerFl
 
+# .text:0x8B0 | 0x81362200 | size: 0x4BC
 # ipl::TVRCManager::update()
 .fn update__Q23ipl11TVRCManagerFv, global
 /* 81362200 00030600  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -966,12 +976,14 @@
 /* 813626B8 00030AB8  4E 80 00 20 */	blr
 .endfn update__Q23ipl11TVRCManagerFv
 
+# .text:0xD6C | 0x813626BC | size: 0x8
 # ipl::TVRCManager::resetProcessAsync(int)
 .fn resetProcessAsync__Q23ipl11TVRCManagerFi, global
 /* 813626BC 00030ABC  90 83 00 10 */	stw r4, 0x10(r3)
 /* 813626C0 00030AC0  4E 80 00 20 */	blr
 .endfn resetProcessAsync__Q23ipl11TVRCManagerFi
 
+# .text:0xD74 | 0x813626C4 | size: 0x10
 # ipl::TVRCManager::waitResetProcessCompleted()
 .fn waitResetProcessCompleted__Q23ipl11TVRCManagerFv, global
 /* 813626C4 00030AC4  80 03 00 70 */	lwz r0, 0x70(r3)
@@ -980,6 +992,7 @@
 /* 813626D0 00030AD0  4E 80 00 20 */	blr
 .endfn waitResetProcessCompleted__Q23ipl11TVRCManagerFv
 
+# .text:0xD84 | 0x813626D4 | size: 0x18
 # ipl::TVRCManager::isTVRCChannel(unsigned long)
 .fn isTVRCChannel__Q23ipl11TVRCManagerFUl, global
 /* 813626D4 00030AD4  3C 60 48 41 */	lis r3, 0x4841
@@ -990,14 +1003,16 @@
 /* 813626E8 00030AE8  4E 80 00 20 */	blr
 .endfn isTVRCChannel__Q23ipl11TVRCManagerFUl
 
-# 0x81639890 - 0x81639900
+# 0x81639890..0x81639900 | size: 0x70
 .data
 .balign 8
 
+# .data:0x0 | 0x81639890 | size: 0x23
 .obj lbl_81639890, global
 	.string "/title/%08x/%08x/data/settings.sav"
 .endobj lbl_81639890
 
+# .data:0x23 | 0x816398B3 | size: 0xD
 .obj lbl_816398B3, global
 	.4byte 0x74767263
 	.4byte 0x5F44422E
@@ -1005,6 +1020,7 @@
 	.byte 0x00
 .endobj lbl_816398B3
 
+# .data:0x30 | 0x816398C0 | size: 0x34
 .obj jumptable_816398C0, local
 	.rel update__Q23ipl11TVRCManagerFv, .L_813622E8
 	.rel update__Q23ipl11TVRCManagerFv, .L_81362320
@@ -1021,20 +1037,23 @@
 	.rel update__Q23ipl11TVRCManagerFv, .L_813625C4
 .endobj jumptable_816398C0
 
+# .data:0x64 | 0x816398F4 | size: 0xC
 .obj lbl_816398F4, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q23ipl11TVRCManagerFv
 .endobj lbl_816398F4
 
-# 0x81698778 - 0x81698780
+# 0x81698778..0x81698780 | size: 0x8
 .section .sbss, "wa", @nobits
 .balign 8
 
+# .sbss:0x0 | 0x81698778 | size: 0x4
 .obj lbl_81698778, global
 	.skip 0x4
 .endobj lbl_81698778
 
+# .sbss:0x4 | 0x8169877C | size: 0x4
 .obj lbl_8169877C, global
 	.skip 0x4
 .endobj lbl_8169877C

@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplCdbWrapper.cpp"
 
-# 0x81340584 - 0x81340688
+# 0x81340584..0x81340688 | size: 0x104
 .text
 .balign 4
 
+# .text:0x0 | 0x81340584 | size: 0x64
 # ipl::cdb::wrapper::init(void*)
 .fn init__Q33ipl3cdb7wrapperFPv, global
 /* 81340584 0000E984  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -36,6 +37,7 @@
 /* 813405E4 0000E9E4  4E 80 00 20 */	blr
 .endfn init__Q33ipl3cdb7wrapperFPv
 
+# .text:0x64 | 0x813405E8 | size: 0x9C
 # ipl::cdb::wrapper::_condition(CDBErr, int)
 .fn _condition__Q33ipl3cdb7wrapperF6CDBErri, global
 /* 813405E8 0000E9E8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -82,6 +84,7 @@
 /* 81340680 0000EA80  4E 80 00 20 */	blr
 .endfn _condition__Q33ipl3cdb7wrapperF6CDBErri
 
+# .text:0x100 | 0x81340684 | size: 0x4
 # ipl::search_cb_(void*, _CDBRecord*)
 .fn search_cb___3iplFPvP10_CDBRecord, global
 /* 81340684 0000EA84  48 00 03 B8 */	b check__Q23ipl11PlayTimeLogFP10_CDBRecord

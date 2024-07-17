@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplFrameController.cpp"
 
-# 0x81362850 - 0x81362A00
+# 0x81362850..0x81362A00 | size: 0x1B0
 .text
 .balign 4
 
+# .text:0x0 | 0x81362850 | size: 0x20
 # ipl::utility::FrameController::init(int, float, float, float)
 .fn init__Q33ipl7utility15FrameControllerFifff, global
 /* 81362850 00030C50  38 00 00 00 */	li r0, 0x0
@@ -17,6 +18,7 @@
 /* 8136286C 00030C6C  48 00 00 04 */	b initFrame__Q33ipl7utility15FrameControllerFv
 .endfn init__Q33ipl7utility15FrameControllerFifff
 
+# .text:0x20 | 0x81362870 | size: 0x20
 # ipl::utility::FrameController::initFrame()
 .fn initFrame__Q33ipl7utility15FrameControllerFv, global
 /* 81362870 00030C70  80 03 00 18 */	lwz r0, 0x18(r3)
@@ -31,6 +33,7 @@
 /* 8136288C 00030C8C  4E 80 00 20 */	blr
 .endfn initFrame__Q33ipl7utility15FrameControllerFv
 
+# .text:0x40 | 0x81362890 | size: 0x170
 # ipl::utility::FrameController::calc()
 .fn calc__Q33ipl7utility15FrameControllerFv, global
 /* 81362890 00030C90  3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha

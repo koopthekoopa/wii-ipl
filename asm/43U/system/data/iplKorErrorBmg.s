@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplKorErrorBmg.s"
 
-# 0x8163B400 - 0x8163B620
+# 0x8163B400..0x8163B620 | size: 0x220
 .data
 .balign 8
 
+# .data:0x0 | 0x8163B400 | size: 0x220
 .obj lbl_8163B400, global
 	.4byte 0x4D455347
 	.4byte 0x626D6731

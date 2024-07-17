@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplNandManager.cpp"
 
-# 0x8133D234 - 0x8133DC0C
+# 0x8133D234..0x8133DC0C | size: 0x9D8
 .text
 .balign 4
 
+# .text:0x0 | 0x8133D234 | size: 0x228
 # ipl::nand::Manager::Manager(EGG::Heap*)
 .fn __ct__Q33ipl4nand7ManagerFPQ23EGG4Heap, global
 /* 8133D234 0000B634  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -36,7 +37,7 @@
 /* 8133D29C 0000B69C  38 8D 80 78 */	li r4, lbl_816960B8@sda21
 /* 8133D2A0 0000B6A0  90 05 00 50 */	stw r0, 0x50(r5)
 /* 8133D2A4 0000B6A4  38 A0 00 41 */	li r5, 0x41
-/* 8133D2A8 0000B6A8  48 2C 51 1D */	bl fn_816023C4
+/* 8133D2A8 0000B6A8  48 2C 51 1D */	bl strncpy
 /* 8133D2AC 0000B6AC  38 80 00 02 */	li r4, 0x2
 /* 8133D2B0 0000B6B0  38 60 00 01 */	li r3, 0x1
 /* 8133D2B4 0000B6B4  48 28 1C 05 */	bl fn_815BEEB8
@@ -151,11 +152,13 @@
 /* 8133D458 0000B858  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl4nand7ManagerFPQ23EGG4Heap
 
+# .text:0x228 | 0x8133D45C | size: 0x4
 # ipl::nand::Manager::openContentsAll()
 .fn openContentsAll__Q33ipl4nand7ManagerFv, global
 /* 8133D45C 0000B85C  4E 80 00 20 */	blr
 .endfn openContentsAll__Q33ipl4nand7ManagerFv
 
+# .text:0x22C | 0x8133D460 | size: 0x88
 # ipl::nand::Manager::closeContentsAll()
 .fn closeContentsAll__Q33ipl4nand7ManagerFv, global
 /* 8133D460 0000B860  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -195,6 +198,7 @@
 /* 8133D4E4 0000B8E4  4E 80 00 20 */	blr
 .endfn closeContentsAll__Q33ipl4nand7ManagerFv
 
+# .text:0x2B4 | 0x8133D4E8 | size: 0xEC
 # ipl::nand::Manager::readAsync(EGG::Heap*, const char*, int, unsigned long, bool)
 .fn readAsync__Q33ipl4nand7ManagerFPQ23EGG4HeapPCciUlb, global
 /* 8133D4E8 0000B8E8  94 21 FF 90 */	stwu r1, -0x70(r1)
@@ -211,7 +215,7 @@
 /* 8133D514 0000B914  38 61 00 08 */	addi r3, r1, 0x8
 /* 8133D518 0000B918  38 9A 02 24 */	addi r4, r26, 0x224
 /* 8133D51C 0000B91C  38 A0 00 41 */	li r5, 0x41
-/* 8133D520 0000B920  48 2C 4E A5 */	bl fn_816023C4
+/* 8133D520 0000B920  48 2C 4E A5 */	bl strncpy
 /* 8133D524 0000B924  38 61 00 08 */	addi r3, r1, 0x8
 /* 8133D528 0000B928  48 2B B9 D5 */	bl strlen
 /* 8133D52C 0000B92C  20 A3 00 41 */	subfic r5, r3, 0x41
@@ -261,6 +265,7 @@
 /* 8133D5D0 0000B9D0  4E 80 00 20 */	blr
 .endfn readAsync__Q33ipl4nand7ManagerFPQ23EGG4HeapPCciUlb
 
+# .text:0x3A0 | 0x8133D5D4 | size: 0xC0
 # ipl::nand::Manager::read(EGG::Heap*, const char*, int, unsigned long, bool)
 .fn read__Q33ipl4nand7ManagerFPQ23EGG4HeapPCciUlb, global
 /* 8133D5D4 0000B9D4  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -276,7 +281,7 @@
 /* 8133D5FC 0000B9FC  38 61 00 08 */	addi r3, r1, 0x8
 /* 8133D600 0000BA00  38 88 02 24 */	addi r4, r8, 0x224
 /* 8133D604 0000BA04  38 A0 00 41 */	li r5, 0x41
-/* 8133D608 0000BA08  48 2C 4D BD */	bl fn_816023C4
+/* 8133D608 0000BA08  48 2C 4D BD */	bl strncpy
 /* 8133D60C 0000BA0C  38 61 00 08 */	addi r3, r1, 0x8
 /* 8133D610 0000BA10  48 2B B8 ED */	bl strlen
 /* 8133D614 0000BA14  20 A3 00 41 */	subfic r5, r3, 0x41
@@ -314,6 +319,7 @@
 /* 8133D690 0000BA90  4E 80 00 20 */	blr
 .endfn read__Q33ipl4nand7ManagerFPQ23EGG4HeapPCciUlb
 
+# .text:0x460 | 0x8133D694 | size: 0xAC
 # ipl::nand::Manager::readSharedAsync(EGG::Heap*, const char*, int, int, unsigned long, unsigned long long, int)
 .fn readSharedAsync__Q33ipl4nand7ManagerFPQ23EGG4HeapPCciiUlUxi, global
 /* 8133D694 0000BA94  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -362,6 +368,7 @@
 /* 8133D73C 0000BB3C  4E 80 00 20 */	blr
 .endfn readSharedAsync__Q33ipl4nand7ManagerFPQ23EGG4HeapPCciiUlUxi
 
+# .text:0x50C | 0x8133D740 | size: 0xB8
 # ipl::nand::Manager::readMetaHeaderAsync(EGG::Heap*, unsigned long long, int, unsigned long, void (*)(void*), void*, int)
 .fn readMetaHeaderAsync__Q33ipl4nand7ManagerFPQ23EGG4HeapUxiUlPFPv_vPvi, global
 /* 8133D740 0000BB40  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -413,6 +420,7 @@
 /* 8133D7F4 0000BBF4  4E 80 00 20 */	blr
 .endfn readMetaHeaderAsync__Q33ipl4nand7ManagerFPQ23EGG4HeapUxiUlPFPv_vPvi
 
+# .text:0x5C4 | 0x8133D7F8 | size: 0xBC
 # ipl::nand::Manager::readMetaBodyAsync(EGG::Heap*, const char*, ARCHandle*, unsigned long long, int, unsigned long, void (*)(void*), void*, int)
 .fn readMetaBodyAsync__Q33ipl4nand7ManagerFPQ23EGG4HeapPCcP9ARCHandleUxiUlPFPv_vPvi, global
 /* 8133D7F8 0000BBF8  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -465,6 +473,7 @@
 /* 8133D8B0 0000BCB0  4E 80 00 20 */	blr
 .endfn readMetaBodyAsync__Q33ipl4nand7ManagerFPQ23EGG4HeapPCcP9ARCHandleUxiUlPFPv_vPvi
 
+# .text:0x680 | 0x8133D8B4 | size: 0x94
 # ipl::nand::Manager::readLayoutAsync(EGG::Heap*, const char*, bool)
 .fn readLayoutAsync__Q33ipl4nand7ManagerFPQ23EGG4HeapPCcb, global
 /* 8133D8B4 0000BCB4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -508,6 +517,7 @@
 /* 8133D944 0000BD44  4E 80 00 20 */	blr
 .endfn readLayoutAsync__Q33ipl4nand7ManagerFPQ23EGG4HeapPCcb
 
+# .text:0x714 | 0x8133D948 | size: 0x48
 # ipl::nand::Manager::readLayout(EGG::Heap*, const char*, bool)
 .fn readLayout__Q33ipl4nand7ManagerFPQ23EGG4HeapPCcb, global
 /* 8133D948 0000BD48  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -530,6 +540,7 @@
 /* 8133D98C 0000BD8C  4E 80 00 20 */	blr
 .endfn readLayout__Q33ipl4nand7ManagerFPQ23EGG4HeapPCcb
 
+# .text:0x75C | 0x8133D990 | size: 0x98
 # ipl::nand::Manager::readLayout_(EGG::Heap*, const char*, ARCHandle*, bool)
 .fn readLayout___Q33ipl4nand7ManagerFPQ23EGG4HeapPCcP9ARCHandleb, global
 /* 8133D990 0000BD90  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -545,7 +556,7 @@
 /* 8133D9B8 0000BDB8  38 61 00 08 */	addi r3, r1, 0x8
 /* 8133D9BC 0000BDBC  38 88 02 24 */	addi r4, r8, 0x224
 /* 8133D9C0 0000BDC0  38 A0 00 41 */	li r5, 0x41
-/* 8133D9C4 0000BDC4  48 2C 4A 01 */	bl fn_816023C4
+/* 8133D9C4 0000BDC4  48 2C 4A 01 */	bl strncpy
 /* 8133D9C8 0000BDC8  38 61 00 08 */	addi r3, r1, 0x8
 /* 8133D9CC 0000BDCC  48 2B B5 31 */	bl strlen
 /* 8133D9D0 0000BDD0  20 A3 00 41 */	subfic r5, r3, 0x41
@@ -573,6 +584,7 @@
 /* 8133DA24 0000BE24  4E 80 00 20 */	blr
 .endfn readLayout___Q33ipl4nand7ManagerFPQ23EGG4HeapPCcP9ARCHandleb
 
+# .text:0x7F4 | 0x8133DA28 | size: 0x10
 # ipl::nand::Manager::doReadTask(void*)
 .fn doReadTask__Q33ipl4nand7ManagerFPv, global
 /* 8133DA28 0000BE28  81 83 00 00 */	lwz r12, 0x0(r3)
@@ -581,6 +593,7 @@
 /* 8133DA34 0000BE34  4E 80 04 20 */	bctr
 .endfn doReadTask__Q33ipl4nand7ManagerFPv
 
+# .text:0x804 | 0x8133DA38 | size: 0x54
 # ipl::nand::Manager::writeAsync(EGG::Heap*, const char*, void*, unsigned long, unsigned char)
 .fn writeAsync__Q33ipl4nand7ManagerFPQ23EGG4HeapPCcPvUlUc, global
 /* 8133DA38 0000BE38  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -606,6 +619,7 @@
 /* 8133DA88 0000BE88  4E 80 00 20 */	blr
 .endfn writeAsync__Q33ipl4nand7ManagerFPQ23EGG4HeapPCcPvUlUc
 
+# .text:0x858 | 0x8133DA8C | size: 0x40
 # ipl::nand::Manager::write(EGG::Heap*, const char*, void*, unsigned long, unsigned char)
 .fn write__Q33ipl4nand7ManagerFPQ23EGG4HeapPCcPvUlUc, global
 /* 8133DA8C 0000BE8C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -626,6 +640,7 @@
 /* 8133DAC8 0000BEC8  4E 80 00 20 */	blr
 .endfn write__Q33ipl4nand7ManagerFPQ23EGG4HeapPCcPvUlUc
 
+# .text:0x898 | 0x8133DACC | size: 0x9C
 # ipl::nand::Manager::write_(EGG::Heap*, const char*, void*, unsigned long, unsigned char)
 .fn write___Q33ipl4nand7ManagerFPQ23EGG4HeapPCcPvUlUc, global
 /* 8133DACC 0000BECC  94 21 FF 90 */	stwu r1, -0x70(r1)
@@ -642,7 +657,7 @@
 /* 8133DAF8 0000BEF8  38 61 00 08 */	addi r3, r1, 0x8
 /* 8133DAFC 0000BEFC  38 89 02 24 */	addi r4, r9, 0x224
 /* 8133DB00 0000BF00  38 A0 00 41 */	li r5, 0x41
-/* 8133DB04 0000BF04  48 2C 48 C1 */	bl fn_816023C4
+/* 8133DB04 0000BF04  48 2C 48 C1 */	bl strncpy
 /* 8133DB08 0000BF08  38 61 00 08 */	addi r3, r1, 0x8
 /* 8133DB0C 0000BF0C  48 2B B3 F1 */	bl strlen
 /* 8133DB10 0000BF10  20 A3 00 41 */	subfic r5, r3, 0x41
@@ -670,6 +685,7 @@
 /* 8133DB64 0000BF64  4E 80 00 20 */	blr
 .endfn write___Q33ipl4nand7ManagerFPQ23EGG4HeapPCcPvUlUc
 
+# .text:0x934 | 0x8133DB68 | size: 0x10
 # ipl::nand::Manager::doWriteTask(void*)
 .fn doWriteTask__Q33ipl4nand7ManagerFPv, global
 /* 8133DB68 0000BF68  81 83 00 00 */	lwz r12, 0x0(r3)
@@ -678,6 +694,7 @@
 /* 8133DB74 0000BF74  4E 80 04 20 */	bctr
 .endfn doWriteTask__Q33ipl4nand7ManagerFPv
 
+# .text:0x944 | 0x8133DB78 | size: 0x18
 # ipl::nand::Manager::sendToken(int)
 .fn sendToken__Q33ipl4nand7ManagerFi, global
 /* 8133DB78 0000BF78  80 63 00 00 */	lwz r3, 0x0(r3)
@@ -688,11 +705,13 @@
 /* 8133DB8C 0000BF8C  48 2B A6 BC */	b fn_815F8248
 .endfn sendToken__Q33ipl4nand7ManagerFi
 
+# .text:0x95C | 0x8133DB90 | size: 0x4
 # ipl::nand::Manager::doSendTokenTask(void*)
 .fn doSendTokenTask__Q33ipl4nand7ManagerFPv, global
 /* 8133DB90 0000BF90  4E 80 00 20 */	blr
 .endfn doSendTokenTask__Q33ipl4nand7ManagerFPv
 
+# .text:0x960 | 0x8133DB94 | size: 0x78
 # ipl::nand::Manager::receiveToken(int*)
 .fn receiveToken__Q33ipl4nand7ManagerFPi, global
 /* 8133DB94 0000BF94  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -729,14 +748,16 @@
 /* 8133DC08 0000C008  4E 80 00 20 */	blr
 .endfn receiveToken__Q33ipl4nand7ManagerFPi
 
-# 0x81634E90 - 0x81634EF8
+# 0x81634E90..0x81634EF8 | size: 0x68
 .data
 .balign 8
 
+# .data:0x0 | 0x81634E90 | size: 0x13
 .obj lbl_81634E90, global
 	.string "iplNandManager.cpp"
 .endobj lbl_81634E90
 
+# .data:0x13 | 0x81634EA3 | size: 0x55
 .obj lbl_81634EA3, global
 	.4byte 0x4A616D20
 	.4byte 0x52657175
@@ -762,18 +783,21 @@
 	.byte 0x00
 .endobj lbl_81634EA3
 
-# 0x816960B8 - 0x816960C8
+# 0x816960B8..0x816960C8 | size: 0x10
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x816960B8 | size: 0x1
 .obj lbl_816960B8, global
 	.byte 0x00
 .endobj lbl_816960B8
 
+# .sdata:0x1 | 0x816960B9 | size: 0x3
 .obj lbl_816960B9, global
 	.string "ES"
 .endobj lbl_816960B9
 
+# .sdata:0x4 | 0x816960BC | size: 0xC
 .obj lbl_816960BC, global
 	.4byte 0x2F6C6179
 	.4byte 0x6F757400

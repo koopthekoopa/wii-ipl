@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplCSFlags.cpp"
 
-# 0x813682C4 - 0x81368918
+# 0x813682C4..0x81368918 | size: 0x654
 .text
 .balign 4
 
+# .text:0x0 | 0x813682C4 | size: 0x1A4
 # ipl::utility::CSFlags::CreateFlagsFile()
 .fn CreateFlagsFile__Q33ipl7utility7CSFlagsFv, global
 /* 813682C4 000366C4  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -20,7 +21,7 @@
 /* 813682EC 000366EC  3B FF 23 E0 */	addi r31, r31, lbl_816423E0@l
 /* 813682F0 000366F0  3B C0 00 00 */	li r30, 0x0
 /* 813682F4 000366F4  38 7F 00 00 */	addi r3, r31, 0x0
-/* 813682F8 000366F8  48 1F F2 89 */	bl fn_81567580
+/* 813682F8 000366F8  48 1F F2 89 */	bl NANDPrivateGetType
 /* 813682FC 000366FC  2C 03 FF F4 */	cmpwi r3, -0xc
 /* 81368300 00036700  7C 7D 1B 78 */	mr r29, r3
 /* 81368304 00036704  40 82 00 0C */	bne .L_81368310
@@ -34,7 +35,7 @@
 /* 81368320 00036720  4C C6 31 82 */	crclr cr1eq
 /* 81368324 00036724  48 1C 63 7D */	bl OSReport
 /* 81368328 00036728  38 7F 00 00 */	addi r3, r31, 0x0
-/* 8136832C 0003672C  48 1F BB 7D */	bl fn_81563EA8
+/* 8136832C 0003672C  48 1F BB 7D */	bl NANDPrivateDelete
 /* 81368330 00036730  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81368334 00036734  7C 7D 1B 78 */	mr r29, r3
 /* 81368338 00036738  41 82 00 18 */	beq .L_81368350
@@ -54,7 +55,7 @@
 /* 81368368 00036768  38 7F 00 00 */	addi r3, r31, 0x0
 /* 8136836C 0003676C  38 80 00 35 */	li r4, 0x35
 /* 81368370 00036770  38 A0 00 00 */	li r5, 0x0
-/* 81368374 00036774  48 1F B9 99 */	bl fn_81563D0C
+/* 81368374 00036774  48 1F B9 99 */	bl NANDPrivateCreate
 /* 81368378 00036778  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8136837C 0003677C  7C 7D 1B 78 */	mr r29, r3
 /* 81368380 00036780  41 82 00 1C */	beq .L_8136839C
@@ -68,7 +69,7 @@
 /* 8136839C 0003679C  38 7F 00 00 */	addi r3, r31, 0x0
 /* 813683A0 000367A0  38 81 00 60 */	addi r4, r1, 0x60
 /* 813683A4 000367A4  38 A0 00 02 */	li r5, 0x2
-/* 813683A8 000367A8  48 1F CF 51 */	bl fn_815652F8
+/* 813683A8 000367A8  48 1F CF 51 */	bl NANDPrivateOpen
 /* 813683AC 000367AC  2C 03 00 00 */	cmpwi r3, 0x0
 /* 813683B0 000367B0  7C 7D 1B 78 */	mr r29, r3
 /* 813683B4 000367B4  41 82 00 1C */	beq .L_813683D0
@@ -86,7 +87,7 @@
 /* 813683E0 000367E0  38 61 00 60 */	addi r3, r1, 0x60
 /* 813683E4 000367E4  38 81 00 40 */	addi r4, r1, 0x40
 /* 813683E8 000367E8  38 A0 00 20 */	li r5, 0x20
-/* 813683EC 000367EC  48 1F BC F5 */	bl fn_815640E0
+/* 813683EC 000367EC  48 1F BC F5 */	bl NANDWrite
 /* 813683F0 000367F0  28 03 00 20 */	cmplwi r3, 0x20
 /* 813683F4 000367F4  7C 7D 1B 78 */	mr r29, r3
 /* 813683F8 000367F8  41 82 00 24 */	beq .L_8136841C
@@ -95,12 +96,12 @@
 /* 81368404 00036804  4C C6 31 82 */	crclr cr1eq
 /* 81368408 00036808  48 1C 62 99 */	bl OSReport
 /* 8136840C 0003680C  38 61 00 60 */	addi r3, r1, 0x60
-/* 81368410 00036810  48 1F D0 DD */	bl fn_815654EC
+/* 81368410 00036810  48 1F D0 DD */	bl NANDClose
 /* 81368414 00036814  7F A3 EB 78 */	mr r3, r29
 /* 81368418 00036818  48 00 00 34 */	b .L_8136844C
 .L_8136841C:
 /* 8136841C 0003681C  38 61 00 60 */	addi r3, r1, 0x60
-/* 81368420 00036820  48 1F D0 CD */	bl fn_815654EC
+/* 81368420 00036820  48 1F D0 CD */	bl NANDClose
 /* 81368424 00036824  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81368428 00036828  7C 7D 1B 78 */	mr r29, r3
 /* 8136842C 0003682C  41 82 00 1C */	beq .L_81368448
@@ -122,6 +123,7 @@
 /* 81368464 00036864  4E 80 00 20 */	blr
 .endfn CreateFlagsFile__Q33ipl7utility7CSFlagsFv
 
+# .text:0x1A4 | 0x81368468 | size: 0xF8
 # ipl::utility::CSFlags::ReadFlags(ipl::utility::CSFlagsData*)
 .fn ReadFlags__Q33ipl7utility7CSFlagsFPQ33ipl7utility11CSFlagsData, global
 /* 81368468 00036868  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -138,7 +140,7 @@
 /* 81368494 00036894  38 81 00 40 */	addi r4, r1, 0x40
 /* 81368498 00036898  38 7F 00 00 */	addi r3, r31, 0x0
 /* 8136849C 0003689C  38 A0 00 01 */	li r5, 0x1
-/* 813684A0 000368A0  48 1F CE 59 */	bl fn_815652F8
+/* 813684A0 000368A0  48 1F CE 59 */	bl NANDPrivateOpen
 /* 813684A4 000368A4  2C 03 00 00 */	cmpwi r3, 0x0
 /* 813684A8 000368A8  7C 7E 1B 78 */	mr r30, r3
 /* 813684AC 000368AC  41 82 00 1C */	beq .L_813684C8
@@ -152,7 +154,7 @@
 /* 813684C8 000368C8  38 61 00 40 */	addi r3, r1, 0x40
 /* 813684CC 000368CC  38 81 00 20 */	addi r4, r1, 0x20
 /* 813684D0 000368D0  38 A0 00 20 */	li r5, 0x20
-/* 813684D4 000368D4  48 1F BB 2D */	bl fn_81564000
+/* 813684D4 000368D4  48 1F BB 2D */	bl NANDRead
 /* 813684D8 000368D8  28 03 00 20 */	cmplwi r3, 0x20
 /* 813684DC 000368DC  7C 7E 1B 78 */	mr r30, r3
 /* 813684E0 000368E0  41 82 00 24 */	beq .L_81368504
@@ -161,12 +163,12 @@
 /* 813684EC 000368EC  4C C6 31 82 */	crclr cr1eq
 /* 813684F0 000368F0  48 1C 61 B1 */	bl OSReport
 /* 813684F4 000368F4  38 61 00 40 */	addi r3, r1, 0x40
-/* 813684F8 000368F8  48 1F CF F5 */	bl fn_815654EC
+/* 813684F8 000368F8  48 1F CF F5 */	bl NANDClose
 /* 813684FC 000368FC  7F C3 F3 78 */	mr r3, r30
 /* 81368500 00036900  48 00 00 44 */	b .L_81368544
 .L_81368504:
 /* 81368504 00036904  38 61 00 40 */	addi r3, r1, 0x40
-/* 81368508 00036908  48 1F CF E5 */	bl fn_815654EC
+/* 81368508 00036908  48 1F CF E5 */	bl NANDClose
 /* 8136850C 0003690C  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81368510 00036910  7C 7E 1B 78 */	mr r30, r3
 /* 81368514 00036914  41 82 00 1C */	beq .L_81368530
@@ -192,6 +194,7 @@
 /* 8136855C 0003695C  4E 80 00 20 */	blr
 .endfn ReadFlags__Q33ipl7utility7CSFlagsFPQ33ipl7utility11CSFlagsData
 
+# .text:0x29C | 0x81368560 | size: 0xF0
 # ipl::utility::CSFlags::WriteFlags(ipl::utility::CSFlagsData*)
 .fn WriteFlags__Q33ipl7utility7CSFlagsFPQ33ipl7utility11CSFlagsData, global
 /* 81368560 00036960  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -208,7 +211,7 @@
 /* 8136858C 0003698C  38 81 00 40 */	addi r4, r1, 0x40
 /* 81368590 00036990  38 7F 00 00 */	addi r3, r31, 0x0
 /* 81368594 00036994  38 A0 00 02 */	li r5, 0x2
-/* 81368598 00036998  48 1F CD 61 */	bl fn_815652F8
+/* 81368598 00036998  48 1F CD 61 */	bl NANDPrivateOpen
 /* 8136859C 0003699C  2C 03 00 00 */	cmpwi r3, 0x0
 /* 813685A0 000369A0  7C 7E 1B 78 */	mr r30, r3
 /* 813685A4 000369A4  41 82 00 1C */	beq .L_813685C0
@@ -226,7 +229,7 @@
 /* 813685D0 000369D0  38 61 00 40 */	addi r3, r1, 0x40
 /* 813685D4 000369D4  38 81 00 20 */	addi r4, r1, 0x20
 /* 813685D8 000369D8  38 A0 00 20 */	li r5, 0x20
-/* 813685DC 000369DC  48 1F BB 05 */	bl fn_815640E0
+/* 813685DC 000369DC  48 1F BB 05 */	bl NANDWrite
 /* 813685E0 000369E0  28 03 00 20 */	cmplwi r3, 0x20
 /* 813685E4 000369E4  7C 7E 1B 78 */	mr r30, r3
 /* 813685E8 000369E8  41 82 00 24 */	beq .L_8136860C
@@ -235,12 +238,12 @@
 /* 813685F4 000369F4  4C C6 31 82 */	crclr cr1eq
 /* 813685F8 000369F8  48 1C 60 A9 */	bl OSReport
 /* 813685FC 000369FC  38 61 00 40 */	addi r3, r1, 0x40
-/* 81368600 00036A00  48 1F CE ED */	bl fn_815654EC
+/* 81368600 00036A00  48 1F CE ED */	bl NANDClose
 /* 81368604 00036A04  7F C3 F3 78 */	mr r3, r30
 /* 81368608 00036A08  48 00 00 2C */	b .L_81368634
 .L_8136860C:
 /* 8136860C 00036A0C  38 61 00 40 */	addi r3, r1, 0x40
-/* 81368610 00036A10  48 1F CE DD */	bl fn_815654EC
+/* 81368610 00036A10  48 1F CE DD */	bl NANDClose
 /* 81368614 00036A14  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81368618 00036A18  7C 7E 1B 78 */	mr r30, r3
 /* 8136861C 00036A1C  41 82 00 18 */	beq .L_81368634
@@ -259,6 +262,7 @@
 /* 8136864C 00036A4C  4E 80 00 20 */	blr
 .endfn WriteFlags__Q33ipl7utility7CSFlagsFPQ33ipl7utility11CSFlagsData
 
+# .text:0x38C | 0x81368650 | size: 0xB8
 # ipl::utility::CSFlags::UpdateFlagsFile()
 .fn UpdateFlagsFile__Q33ipl7utility7CSFlagsFv, global
 /* 81368650 00036A50  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -312,6 +316,7 @@
 /* 81368704 00036B04  4E 80 00 20 */	blr
 .endfn UpdateFlagsFile__Q33ipl7utility7CSFlagsFv
 
+# .text:0x444 | 0x81368708 | size: 0x50
 # ipl::utility::CSFlags::SetEULAFlag(ipl::utility::CSFlagsData*)
 .fn SetEULAFlag__Q33ipl7utility7CSFlagsFPQ33ipl7utility11CSFlagsData, global
 /* 81368708 00036B08  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -338,6 +343,7 @@
 /* 81368754 00036B54  4E 80 00 20 */	blr
 .endfn SetEULAFlag__Q33ipl7utility7CSFlagsFPQ33ipl7utility11CSFlagsData
 
+# .text:0x494 | 0x81368758 | size: 0x1C0
 .fn iplCSFlags_81368758, global
 /* 81368758 00036B58  94 21 FF 70 */	stwu r1, -0x90(r1)
 /* 8136875C 00036B5C  7C 08 02 A6 */	mflr r0
@@ -453,10 +459,11 @@
 /* 81368914 00036D14  4E 80 00 20 */	blr
 .endfn iplCSFlags_81368758
 
-# 0x816423E0 - 0x81642710
+# 0x816423E0..0x81642710 | size: 0x330
 .data
 .balign 8
 
+# .data:0x0 | 0x816423E0 | size: 0x330
 .obj lbl_816423E0, global
 	.4byte 0x2F736861
 	.4byte 0x72656432

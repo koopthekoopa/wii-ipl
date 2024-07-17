@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplThread.cpp"
 
-# 0x81364B88 - 0x81364D78
+# 0x81364B88..0x81364D78 | size: 0x1F0
 .text
 .balign 4
 
+# .text:0x0 | 0x81364B88 | size: 0x48
 # ipl::utility::ut_thread::ThreadMain_(void*)
 .fn ThreadMain___Q33ipl7utility9ut_threadFPv, global
 /* 81364B88 00032F88  7C 60 1B 78 */	mr r0, r3
@@ -27,6 +28,7 @@
 /* 81364BCC 00032FCC  4E 80 04 20 */	bctr
 .endfn ThreadMain___Q33ipl7utility9ut_threadFPv
 
+# .text:0x48 | 0x81364BD0 | size: 0x24
 # ipl::utility::ut_thread::ut_thread()
 .fn __ct__Q33ipl7utility9ut_threadFv, global
 /* 81364BD0 00032FD0  3C A0 81 64 */	lis r5, lbl_81641290@ha
@@ -40,6 +42,7 @@
 /* 81364BF0 00032FF0  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl7utility9ut_threadFv
 
+# .text:0x6C | 0x81364BF4 | size: 0x40
 # ipl::utility::ut_thread::~ut_thread()
 .fn __dt__Q33ipl7utility9ut_threadFv, global
 /* 81364BF4 00032FF4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -61,6 +64,7 @@
 /* 81364C30 00033030  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl7utility9ut_threadFv
 
+# .text:0xAC | 0x81364C34 | size: 0x7C
 # ipl::utility::ut_thread::Create(void*, unsigned long, int, bool)
 .fn Create__Q33ipl7utility9ut_threadFPvUlib, global
 /* 81364C34 00033034  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -97,18 +101,21 @@
 /* 81364CAC 000330AC  4E 80 00 20 */	blr
 .endfn Create__Q33ipl7utility9ut_threadFPvUlib
 
+# .text:0x128 | 0x81364CB0 | size: 0x8
 # ipl::utility::ut_thread::Resume()
 .fn Resume__Q33ipl7utility9ut_threadFv, global
 /* 81364CB0 000330B0  38 63 00 08 */	addi r3, r3, 0x8
 /* 81364CB4 000330B4  48 1C FF 9C */	b fn_81534C50
 .endfn Resume__Q33ipl7utility9ut_threadFv
 
+# .text:0x130 | 0x81364CB8 | size: 0x8
 # ipl::utility::ut_thread::Suspend()
 .fn Suspend__Q33ipl7utility9ut_threadFv, global
 /* 81364CB8 000330B8  38 63 00 08 */	addi r3, r3, 0x8
 /* 81364CBC 000330BC  48 1D 02 2C */	b fn_81534EE8
 .endfn Suspend__Q33ipl7utility9ut_threadFv
 
+# .text:0x138 | 0x81364CC0 | size: 0x34
 # ipl::utility::ut_thread::WaitForThreadExit()
 .fn WaitForThreadExit__Q33ipl7utility9ut_threadFv, global
 /* 81364CC0 000330C0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -126,6 +133,7 @@
 /* 81364CF0 000330F0  4E 80 00 20 */	blr
 .endfn WaitForThreadExit__Q33ipl7utility9ut_threadFv
 
+# .text:0x16C | 0x81364CF4 | size: 0x2C
 # ipl::utility::ut_thread::IsThreadTerminated()
 .fn IsThreadTerminated__Q33ipl7utility9ut_threadFv, global
 /* 81364CF4 000330F4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -141,6 +149,7 @@
 /* 81364D1C 0003311C  4E 80 00 20 */	blr
 .endfn IsThreadTerminated__Q33ipl7utility9ut_threadFv
 
+# .text:0x198 | 0x81364D20 | size: 0x2C
 # ipl::utility::ut_thread::IsThreadSuspended()
 .fn IsThreadSuspended__Q33ipl7utility9ut_threadFv, global
 /* 81364D20 00033120  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -156,6 +165,7 @@
 /* 81364D48 00033148  4E 80 00 20 */	blr
 .endfn IsThreadSuspended__Q33ipl7utility9ut_threadFv
 
+# .text:0x1C4 | 0x81364D4C | size: 0x2C
 # ipl::utility::ut_thread::SetThreadPriority(int)
 .fn SetThreadPriority__Q33ipl7utility9ut_threadFi, global
 /* 81364D4C 0003314C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -171,10 +181,11 @@
 /* 81364D74 00033174  4E 80 00 20 */	blr
 .endfn SetThreadPriority__Q33ipl7utility9ut_threadFi
 
-# 0x81641290 - 0x816412C0
+# 0x81641290..0x816412C0 | size: 0x30
 .data
 .balign 8
 
+# .data:0x0 | 0x81641290 | size: 0x30
 .obj lbl_81641290, global
 	.4byte 0x00000000
 	.4byte 0x00000000

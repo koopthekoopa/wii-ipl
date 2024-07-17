@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplFraErrorBmg.s"
 
-# 0x81639CE0 - 0x8163A100
+# 0x81639CE0..0x8163A100 | size: 0x420
 .data
 .balign 8
 
+# .data:0x0 | 0x81639CE0 | size: 0x420
 .obj lbl_81639CE0, global
 	.4byte 0x4D455347
 	.4byte 0x626D6731

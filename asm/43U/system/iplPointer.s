@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplPointer.cpp"
 
-# 0x81344188 - 0x813444C4
+# 0x81344188..0x813444C4 | size: 0x33C
 .text
 .balign 4
 
+# .text:0x0 | 0x81344188 | size: 0xE8
 # ipl::Pointer::Pointer(EGG::Heap*)
 .fn __ct__Q23ipl7PointerFPQ23EGG4Heap, global
 /* 81344188 00012588  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -69,6 +70,7 @@
 /* 8134426C 0001266C  4E 80 00 20 */	blr
 .endfn __ct__Q23ipl7PointerFPQ23EGG4Heap
 
+# .text:0xE8 | 0x81344270 | size: 0x174
 # ipl::Pointer::calc()
 .fn calc__Q23ipl7PointerFv, global
 /* 81344270 00012670  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -172,6 +174,7 @@
 /* 813443E0 000127E0  4E 80 00 20 */	blr
 .endfn calc__Q23ipl7PointerFv
 
+# .text:0x25C | 0x813443E4 | size: 0x30
 # nw4r::lyt::Pane::SetTranslate(const nw4r::math::VEC2&)
 .fn SetTranslate__Q34nw4r3lyt4PaneFRCQ34nw4r4math4VEC2, global
 /* 813443E4 000127E4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -188,6 +191,7 @@
 /* 81344410 00012810  4E 80 00 20 */	blr
 .endfn SetTranslate__Q34nw4r3lyt4PaneFRCQ34nw4r4math4VEC2
 
+# .text:0x28C | 0x81344414 | size: 0x14
 # nw4r::lyt::Pane::SetVisible(bool)
 .fn SetVisible__Q34nw4r3lyt4PaneFb, global
 /* 81344414 00012814  88 03 00 CF */	lbz r0, 0xcf(r3)
@@ -197,6 +201,7 @@
 /* 81344424 00012824  4E 80 00 20 */	blr
 .endfn SetVisible__Q34nw4r3lyt4PaneFb
 
+# .text:0x2A0 | 0x81344428 | size: 0x50
 # ipl::Pointer::draw()
 .fn draw__Q23ipl7PointerFv, global
 /* 81344428 00012828  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -222,18 +227,21 @@
 /* 81344474 00012874  4E 80 00 20 */	blr
 .endfn draw__Q23ipl7PointerFv
 
+# .text:0x2F0 | 0x81344478 | size: 0x8
 # ipl::Pointer::setState(int, int)
 .fn setState__Q23ipl7PointerFii, global
 /* 81344478 00012878  38 63 00 40 */	addi r3, r3, 0x40
 /* 8134447C 0001287C  48 00 02 C4 */	b setState__Q23ipl11PointerCoreFii
 .endfn setState__Q23ipl7PointerFii
 
+# .text:0x2F8 | 0x81344480 | size: 0x8
 # ipl::Pointer::changeType(int, int)
 .fn changeType__Q23ipl7PointerFii, global
 /* 81344480 00012880  38 63 00 40 */	addi r3, r3, 0x40
 /* 81344484 00012884  48 00 03 84 */	b changeType__Q23ipl11PointerCoreFii
 .endfn changeType__Q23ipl7PointerFii
 
+# .text:0x300 | 0x81344488 | size: 0x3C
 # ipl::Pointer::get_layout(int, int)
 .fn get_layout__Q23ipl7PointerFii, global
 /* 81344488 00012888  2C 05 00 01 */	cmpwi r5, 0x1
@@ -256,42 +264,51 @@
 /* 813444C0 000128C0  4E 80 00 20 */	blr
 .endfn get_layout__Q23ipl7PointerFii
 
-# 0x81635458 - 0x81635510
+# 0x81635458..0x81635510 | size: 0xB8
 .data
 .balign 8
 
+# .data:0x0 | 0x81635458 | size: 0xD
 .obj lbl_81635458, global
 	.string "P1_Def.brlyt"
 .endobj lbl_81635458
 
+# .data:0xD | 0x81635465 | size: 0xD
 .obj lbl_81635465, global
 	.string "P2_Def.brlyt"
 .endobj lbl_81635465
 
+# .data:0x1A | 0x81635472 | size: 0xD
 .obj lbl_81635472, global
 	.string "P3_Def.brlyt"
 .endobj lbl_81635472
 
+# .data:0x27 | 0x8163547F | size: 0xD
 .obj lbl_8163547F, global
 	.string "P4_Def.brlyt"
 .endobj lbl_8163547F
 
+# .data:0x34 | 0x8163548C | size: 0xD
 .obj lbl_8163548C, global
 	.string "P1_Cat.brlyt"
 .endobj lbl_8163548C
 
+# .data:0x41 | 0x81635499 | size: 0xD
 .obj lbl_81635499, global
 	.string "P2_Cat.brlyt"
 .endobj lbl_81635499
 
+# .data:0x4E | 0x816354A6 | size: 0xD
 .obj lbl_816354A6, global
 	.string "P3_Cat.brlyt"
 .endobj lbl_816354A6
 
+# .data:0x5B | 0x816354B3 | size: 0xD
 .obj lbl_816354B3, global
 	.string "P4_Cat.brlyt"
 .endobj lbl_816354B3
 
+# .data:0x68 | 0x816354C0 | size: 0x14
 .obj lbl_816354C0, global
 	.4byte 0x6D795F42
 	.4byte 0x5363726F
@@ -300,6 +317,7 @@
 	.4byte 0x79740000
 .endobj lbl_816354C0
 
+# .data:0x7C | 0x816354D4 | size: 0x24
 .obj lbl_816354D4, global
 	.4byte lbl_81635458
 	.4byte lbl_81635465
@@ -312,10 +330,12 @@
 	.4byte lbl_816354C0
 .endobj lbl_816354D4
 
+# .data:0xA0 | 0x816354F8 | size: 0xB
 .obj lbl_816354F8, global
 	.string "cursor.ash"
 .endobj lbl_816354F8
 
+# .data:0xAB | 0x81635503 | size: 0xD
 .obj lbl_81635503, global
 	.4byte 0x42417277
 	.4byte 0x42617365
@@ -323,43 +343,51 @@
 	.byte 0x00
 .endobj lbl_81635503
 
-# 0x816944F0 - 0x81694508
+# 0x816944F0..0x81694508 | size: 0x18
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x816944F0 | size: 0x4
 .obj lbl_816944F0, global
 	.float 0
 .endobj lbl_816944F0
 
+# .sdata2:0x4 | 0x816944F4 | size: 0x4
 .obj lbl_816944F4, global
 	.float 32
 .endobj lbl_816944F4
 
+# .sdata2:0x8 | 0x816944F8 | size: 0x4
 .obj lbl_816944F8, global
 	.float 128
 .endobj lbl_816944F8
 
+# .sdata2:0xC | 0x816944FC | size: 0x4
 .obj lbl_816944FC, global
 	.float 1
 .endobj lbl_816944FC
 
+# .sdata2:0x10 | 0x81694500 | size: 0x8
 .obj lbl_81694500, global
 	.float -1
 	.float 0
 .endobj lbl_81694500
 
-# 0x81696100 - 0x81696118
+# 0x81696100..0x81696118 | size: 0x18
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x81696100 | size: 0x4
 .obj lbl_81696100, global
 	.string "arc"
 .endobj lbl_81696100
 
+# .sdata:0x4 | 0x81696104 | size: 0x7
 .obj lbl_81696104, global
 	.string "N_BArw"
 .endobj lbl_81696104
 
+# .sdata:0xB | 0x8169610B | size: 0xD
 .obj lbl_8169610B, global
 	.4byte 0x575F4241
 	.4byte 0x72770000

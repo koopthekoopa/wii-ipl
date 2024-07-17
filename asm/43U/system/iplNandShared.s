@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplNandShared.cpp"
 
-# 0x8133C6D8 - 0x8133CC34
+# 0x8133C6D8..0x8133CC34 | size: 0x55C
 .text
 .balign 4
 
+# .text:0x0 | 0x8133C6D8 | size: 0x90
 # ipl::nand::SharedFile::SharedFile(EGG::Heap*, const char*, unsigned long, int, unsigned long, unsigned long long, int)
 .fn __ct__Q33ipl4nand10SharedFileFPQ23EGG4HeapPCcUliUlUxi, global
 /* 8133C6D8 0000AAD8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -45,6 +46,7 @@
 /* 8133C764 0000AB64  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl4nand10SharedFileFPQ23EGG4HeapPCcUliUlUxi
 
+# .text:0x90 | 0x8133C768 | size: 0x58
 # ipl::nand::SharedFile::~SharedFile()
 .fn __dt__Q33ipl4nand10SharedFileFv, global
 /* 8133C768 0000AB68  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -72,6 +74,7 @@
 /* 8133C7BC 0000ABBC  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl4nand10SharedFileFv
 
+# .text:0xE8 | 0x8133C7C0 | size: 0x2D0
 # ipl::nand::SharedFile::openTicketFile_()
 .fn openTicketFile___Q33ipl4nand10SharedFileFv, global
 /* 8133C7C0 0000ABC0  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -240,7 +243,7 @@
 /* 8133CA20 0000AE20  38 61 00 60 */	addi r3, r1, 0x60
 /* 8133CA24 0000AE24  38 84 4D 90 */	addi r4, r4, lbl_81634D90@l
 /* 8133CA28 0000AE28  4C C6 31 82 */	crclr cr1eq
-/* 8133CA2C 0000AE2C  48 2C 40 55 */	bl fn_81600A80
+/* 8133CA2C 0000AE2C  48 2C 40 55 */	bl sprintf
 /* 8133CA30 0000AE30  3F E0 81 09 */	lis r31, smArg__Q23ipl6System@ha
 /* 8133CA34 0000AE34  3C C0 81 63 */	lis r6, lbl_81634DA6@ha
 /* 8133CA38 0000AE38  3B FF 90 08 */	addi r31, r31, smArg__Q23ipl6System@l
@@ -268,6 +271,7 @@
 /* 8133CA8C 0000AE8C  4E 80 00 20 */	blr
 .endfn openTicketFile___Q33ipl4nand10SharedFileFv
 
+# .text:0x3B8 | 0x8133CA90 | size: 0xDC
 # ipl::nand::SharedFile::closeTicketFile_()
 .fn closeTicketFile___Q33ipl4nand10SharedFileFv, global
 /* 8133CA90 0000AE90  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -331,22 +335,26 @@
 /* 8133CB68 0000AF68  4E 80 00 20 */	blr
 .endfn closeTicketFile___Q33ipl4nand10SharedFileFv
 
+# .text:0x494 | 0x8133CB6C | size: 0x4
 # ipl::nand::SharedFile::open_(unsigned char)
 .fn open___Q33ipl4nand10SharedFileFUc, global
 /* 8133CB6C 0000AF6C  4B FF FC 54 */	b openTicketFile___Q33ipl4nand10SharedFileFv
 .endfn open___Q33ipl4nand10SharedFileFUc
 
+# .text:0x498 | 0x8133CB70 | size: 0x4
 # ipl::nand::SharedFile::close_()
 .fn close___Q33ipl4nand10SharedFileFv, global
 /* 8133CB70 0000AF70  4B FF FF 20 */	b closeTicketFile___Q33ipl4nand10SharedFileFv
 .endfn close___Q33ipl4nand10SharedFileFv
 
+# .text:0x49C | 0x8133CB74 | size: 0x8
 # ipl::nand::SharedFile::getRawSize_()
 .fn getRawSize___Q33ipl4nand10SharedFileFv, global
 /* 8133CB74 0000AF74  38 63 00 B0 */	addi r3, r3, 0xb0
 /* 8133CB78 0000AF78  48 23 4A 24 */	b fn_8157159C
 .endfn getRawSize___Q33ipl4nand10SharedFileFv
 
+# .text:0x4A4 | 0x8133CB7C | size: 0xB8
 # ipl::nand::SharedFile::readBlock_(void*, int, int)
 .fn readBlock___Q33ipl4nand10SharedFileFPvii, global
 /* 8133CB7C 0000AF7C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -399,18 +407,21 @@
 /* 8133CC30 0000B030  4E 80 00 20 */	blr
 .endfn readBlock___Q33ipl4nand10SharedFileFPvii
 
-# 0x81634D90 - 0x81634E10
+# 0x81634D90..0x81634E10 | size: 0x80
 .data
 .balign 8
 
+# .data:0x0 | 0x81634D90 | size: 0x16
 .obj lbl_81634D90, global
 	.string "ES %d, %llx, %llx, %x"
 .endobj lbl_81634D90
 
+# .data:0x16 | 0x81634DA6 | size: 0x12
 .obj lbl_81634DA6, global
 	.string "iplNandShared.cpp"
 .endobj lbl_81634DA6
 
+# .data:0x28 | 0x81634DB8 | size: 0x58
 .obj lbl_81634DB8, global
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -436,10 +447,11 @@
 	.4byte 0x00000000
 .endobj lbl_81634DB8
 
-# 0x816960A8 - 0x816960B0
+# 0x816960A8..0x816960B0 | size: 0x8
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x816960A8 | size: 0x8
 .obj lbl_816960A8, global
 	.4byte 0x45530000
 	.4byte 0x00000000

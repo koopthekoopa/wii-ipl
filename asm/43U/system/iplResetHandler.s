@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplResetHandler.cpp"
 
-# 0x813567FC - 0x81356D4C
+# 0x813567FC..0x81356D4C | size: 0x550
 .text
 .balign 4
 
+# .text:0x0 | 0x813567FC | size: 0x94
 # ipl::ResetHandler::ResetHandler(EGG::Heap*)
 .fn __ct__Q23ipl12ResetHandlerFPQ23EGG4Heap, global
 /* 813567FC 00024BFC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -46,6 +47,7 @@
 /* 8135688C 00024C8C  4E 80 00 20 */	blr
 .endfn __ct__Q23ipl12ResetHandlerFPQ23EGG4Heap
 
+# .text:0x94 | 0x81356890 | size: 0x24
 # ipl::ResetHandler::cbReset()
 .fn cbReset__Q23ipl12ResetHandlerFv, global
 /* 81356890 00024C90  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -59,6 +61,7 @@
 /* 813568B0 00024CB0  4E 80 00 20 */	blr
 .endfn cbReset__Q23ipl12ResetHandlerFv
 
+# .text:0xB8 | 0x813568B4 | size: 0x24
 # ipl::ResetHandler::cbPowerOff()
 .fn cbPowerOff__Q23ipl12ResetHandlerFv, global
 /* 813568B4 00024CB4  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -72,6 +75,7 @@
 /* 813568D4 00024CD4  4E 80 00 20 */	blr
 .endfn cbPowerOff__Q23ipl12ResetHandlerFv
 
+# .text:0xDC | 0x813568D8 | size: 0x18
 # ipl::ResetHandler::reset()
 .fn reset__Q23ipl12ResetHandlerFv, global
 /* 813568D8 00024CD8  80 03 00 04 */	lwz r0, 0x4(r3)
@@ -82,6 +86,7 @@
 /* 813568EC 00024CEC  4E 80 00 20 */	blr
 .endfn reset__Q23ipl12ResetHandlerFv
 
+# .text:0xF4 | 0x813568F0 | size: 0x14
 # ipl::ResetHandler::check()
 .fn check__Q23ipl12ResetHandlerFv, global
 /* 813568F0 00024CF0  80 03 00 04 */	lwz r0, 0x4(r3)
@@ -91,6 +96,7 @@
 /* 81356900 00024D00  4E 80 00 20 */	blr
 .endfn check__Q23ipl12ResetHandlerFv
 
+# .text:0x108 | 0x81356904 | size: 0x2FC
 # ipl::ResetHandler::update()
 .fn update__Q23ipl12ResetHandlerFv, global
 /* 81356904 00024D04  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -309,11 +315,13 @@
 /* 81356BFC 00024FFC  4E 80 00 20 */	blr
 .endfn update__Q23ipl12ResetHandlerFv
 
+# .text:0x404 | 0x81356C00 | size: 0x4
 # ipl::ResetHandler::cbFatalReset()
 .fn cbFatalReset__Q23ipl12ResetHandlerFv, global
 /* 81356C00 00025000  4E 80 00 20 */	blr
 .endfn cbFatalReset__Q23ipl12ResetHandlerFv
 
+# .text:0x408 | 0x81356C04 | size: 0x24
 # ipl::ResetHandler::cbFatalPowerOff()
 .fn cbFatalPowerOff__Q23ipl12ResetHandlerFv, global
 /* 81356C04 00025004  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -327,6 +335,7 @@
 /* 81356C24 00025024  4E 80 00 20 */	blr
 .endfn cbFatalPowerOff__Q23ipl12ResetHandlerFv
 
+# .text:0x42C | 0x81356C28 | size: 0x34
 # ipl::ResetHandler::setFatalResetCallback()
 .fn setFatalResetCallback__Q23ipl12ResetHandlerFv, global
 /* 81356C28 00025028  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -344,6 +353,7 @@
 /* 81356C58 00025058  4E 80 00 20 */	blr
 .endfn setFatalResetCallback__Q23ipl12ResetHandlerFv
 
+# .text:0x460 | 0x81356C5C | size: 0xF0
 # ipl::ResetHandler::fatalUpdate()
 .fn fatalUpdate__Q23ipl12ResetHandlerFv, global
 /* 81356C5C 0002505C  94 21 FF F0 */	stwu r1, -0x10(r1)

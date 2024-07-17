@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplCdbManager.cpp"
 
-# 0x8133F068 - 0x81340584
+# 0x8133F068..0x81340584 | size: 0x151C
 .text
 .balign 4
 
+# .text:0x0 | 0x8133F068 | size: 0xC4
 # ipl::cdb::Manager::Manager(EGG::Heap*)
 .fn __ct__Q33ipl3cdb7ManagerFPQ23EGG4Heap, global
 /* 8133F068 0000D468  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -58,6 +59,7 @@
 /* 8133F128 0000D528  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl3cdb7ManagerFPQ23EGG4Heap
 
+# .text:0xC4 | 0x8133F12C | size: 0x40
 # ipl::cdb::Manager::closeDatabase()
 .fn closeDatabase__Q33ipl3cdb7ManagerFv, global
 /* 8133F12C 0000D52C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -78,6 +80,7 @@
 /* 8133F168 0000D568  4E 80 00 20 */	blr
 .endfn closeDatabase__Q33ipl3cdb7ManagerFv
 
+# .text:0x104 | 0x8133F16C | size: 0xE8
 # ipl::cdb::Manager::createNewRecord(const char*, const char*, const OSCalendarTime*, unsigned long*, unsigned short*, const ipl::math::VEC2&, unsigned long, const NWC24FriendAddr&, unsigned short, unsigned short, const wchar_t*, const wchar_t*, const void*, const void**, unsigned long*, RBRAttachmentType*)
 .fn createNewRecord__Q33ipl3cdb7ManagerFPCcPCcPC14OSCalendarTimePUlPUsRCQ33ipl4math4VEC2UlRC15NWC24FriendAddrUsUsPCwPCwPCvPPCvPUlP17RBRAttachmentType, global
 /* 8133F16C 0000D56C  94 21 FF 70 */	stwu r1, -0x90(r1)
@@ -141,6 +144,7 @@
 /* 8133F250 0000D650  4E 80 00 20 */	blr
 .endfn createNewRecord__Q33ipl3cdb7ManagerFPCcPCcPC14OSCalendarTimePUlPUsRCQ33ipl4math4VEC2UlRC15NWC24FriendAddrUsUsPCwPCwPCvPPCvPUlP17RBRAttachmentType
 
+# .text:0x1EC | 0x8133F254 | size: 0x30C
 # ipl::cdb::Manager::writeRecord(_CDBRecord*, const ipl::math::VEC2&, unsigned long, const NWC24FriendAddr&, unsigned short, unsigned short, const wchar_t*, const wchar_t*, const void*, const void**, unsigned long*, RBRAttachmentType*)
 .fn writeRecord__Q33ipl3cdb7ManagerFP10_CDBRecordRCQ33ipl4math4VEC2UlRC15NWC24FriendAddrUsUsPCwPCwPCvPPCvPUlP17RBRAttachmentType, global
 /* 8133F254 0000D654  94 21 FE 70 */	stwu r1, -0x190(r1)
@@ -361,6 +365,7 @@
 /* 8133F55C 0000D95C  4E 80 00 20 */	blr
 .endfn writeRecord__Q33ipl3cdb7ManagerFP10_CDBRecordRCQ33ipl4math4VEC2UlRC15NWC24FriendAddrUsUsPCwPCwPCvPPCvPUlP17RBRAttachmentType
 
+# .text:0x4F8 | 0x8133F560 | size: 0x2D0
 # ipl::cdb::Manager::makeBuffer(const ipl::math::VEC2&, unsigned long, const NWC24FriendAddr&, unsigned short, unsigned short, const wchar_t*, const wchar_t*, const void*, const void**, unsigned long*, RBRAttachmentType*, unsigned long*)
 .fn makeBuffer__Q33ipl3cdb7ManagerFRCQ33ipl4math4VEC2UlRC15NWC24FriendAddrUsUsPCwPCwPCvPPCvPUlP17RBRAttachmentTypePUl, global
 /* 8133F560 0000D960  94 21 FE 70 */	stwu r1, -0x190(r1)
@@ -566,6 +571,7 @@
 /* 8133F82C 0000DC2C  4E 80 00 20 */	blr
 .endfn makeBuffer__Q33ipl3cdb7ManagerFRCQ33ipl4math4VEC2UlRC15NWC24FriendAddrUsUsPCwPCwPCvPPCvPUlP17RBRAttachmentTypePUl
 
+# .text:0x7C8 | 0x8133F830 | size: 0x80
 # ipl::cdb::Manager::deleteRecord(_CDBRecordKey*)
 .fn deleteRecord__Q33ipl3cdb7ManagerFP13_CDBRecordKey, global
 /* 8133F830 0000DC30  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -603,6 +609,7 @@
 /* 8133F8AC 0000DCAC  4E 80 00 20 */	blr
 .endfn deleteRecord__Q33ipl3cdb7ManagerFP13_CDBRecordKey
 
+# .text:0x848 | 0x8133F8B0 | size: 0x3C
 # ipl::cdb::Manager::isValidHeader(const RBRHeader*)
 .fn isValidHeader__Q33ipl3cdb7ManagerFPC9RBRHeader, global
 /* 8133F8B0 0000DCB0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -622,6 +629,7 @@
 /* 8133F8E8 0000DCE8  4E 80 00 20 */	blr
 .endfn isValidHeader__Q33ipl3cdb7ManagerFPC9RBRHeader
 
+# .text:0x884 | 0x8133F8EC | size: 0x9C
 # ipl::cdb::Manager::isValidType(const char*)
 .fn isValidType__Q33ipl3cdb7ManagerFPCc, global
 /* 8133F8EC 0000DCEC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -667,6 +675,7 @@
 /* 8133F984 0000DD84  4E 80 00 20 */	blr
 .endfn isValidType__Q33ipl3cdb7ManagerFPCc
 
+# .text:0x920 | 0x8133F988 | size: 0x84
 # ipl::cdb::Manager::isTxtValidType(const char*)
 .fn isTxtValidType__Q33ipl3cdb7ManagerFPCc, global
 /* 8133F988 0000DD88  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -706,6 +715,7 @@
 /* 8133FA08 0000DE08  4E 80 00 20 */	blr
 .endfn isTxtValidType__Q33ipl3cdb7ManagerFPCc
 
+# .text:0x9A4 | 0x8133FA0C | size: 0x58
 # ipl::cdb::Manager::calcCRC(const RBRHeader*)
 .fn calcCRC__Q33ipl3cdb7ManagerFPC9RBRHeader, global
 /* 8133FA0C 0000DE0C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -732,6 +742,7 @@
 /* 8133FA60 0000DE60  4E 80 00 20 */	blr
 .endfn calcCRC__Q33ipl3cdb7ManagerFPC9RBRHeader
 
+# .text:0x9FC | 0x8133FA64 | size: 0x28
 # ipl::cdb::Manager::isOverFlow() const
 .fn isOverFlow__Q33ipl3cdb7ManagerCFv, global
 /* 8133FA64 0000DE64  80 63 00 00 */	lwz r3, 0x0(r3)
@@ -746,6 +757,7 @@
 /* 8133FA88 0000DE88  4E 80 00 20 */	blr
 .endfn isOverFlow__Q33ipl3cdb7ManagerCFv
 
+# .text:0xA24 | 0x8133FA8C | size: 0x28
 # ipl::cdb::Manager::isUnderFlow() const
 .fn isUnderFlow__Q33ipl3cdb7ManagerCFv, global
 /* 8133FA8C 0000DE8C  80 63 00 00 */	lwz r3, 0x0(r3)
@@ -760,6 +772,7 @@
 /* 8133FAB0 0000DEB0  4E 80 00 20 */	blr
 .endfn isUnderFlow__Q33ipl3cdb7ManagerCFv
 
+# .text:0xA4C | 0x8133FAB4 | size: 0x238
 # ipl::cdb::Manager::createAtOnce(_CDBRecord*, const char*, const char*, unsigned long*, unsigned short*, const OSCalendarTime*, unsigned char*, unsigned long)
 .fn createAtOnce__Q33ipl3cdb7ManagerFP10_CDBRecordPCcPCcPUlPUsPC14OSCalendarTimePUcUl, global
 /* 8133FAB4 0000DEB4  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -915,6 +928,7 @@
 /* 8133FCE8 0000E0E8  4E 80 00 20 */	blr
 .endfn createAtOnce__Q33ipl3cdb7ManagerFP10_CDBRecordPCcPCcPUlPUsPC14OSCalendarTimePUcUl
 
+# .text:0xC84 | 0x8133FCEC | size: 0x74
 # ipl::cdb::Manager::findByKey(_CDBRecord*, _CDBRecordKey*)
 .fn findByKey__Q33ipl3cdb7ManagerFP10_CDBRecordP13_CDBRecordKey, global
 /* 8133FCEC 0000E0EC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -948,6 +962,7 @@
 /* 8133FD5C 0000E15C  4E 80 00 20 */	blr
 .endfn findByKey__Q33ipl3cdb7ManagerFP10_CDBRecordP13_CDBRecordKey
 
+# .text:0xCF8 | 0x8133FD60 | size: 0xA8
 # ipl::cdb::Manager::search(const unsigned long&, const unsigned long&, CDBSearchDirection, CDBRecordLocation, int, int (*)(void*, _CDBRecord*), void*)
 .fn search__Q33ipl3cdb7ManagerFRCUlRCUl18CDBSearchDirection17CDBRecordLocationiPFPvP10_CDBRecord_iPv, global
 /* 8133FD60 0000E160  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -994,6 +1009,7 @@
 /* 8133FE04 0000E204  4E 80 00 20 */	blr
 .endfn search__Q33ipl3cdb7ManagerFRCUlRCUl18CDBSearchDirection17CDBRecordLocationiPFPvP10_CDBRecord_iPv
 
+# .text:0xDA0 | 0x8133FE08 | size: 0x70
 # ipl::cdb::Manager::getDataSize(_CDBRecord*, unsigned long*)
 .fn getDataSize__Q33ipl3cdb7ManagerFP10_CDBRecordPUl, global
 /* 8133FE08 0000E208  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1026,6 +1042,7 @@
 /* 8133FE74 0000E274  4E 80 00 20 */	blr
 .endfn getDataSize__Q33ipl3cdb7ManagerFP10_CDBRecordPUl
 
+# .text:0xE10 | 0x8133FE78 | size: 0x70
 # ipl::cdb::Manager::getCDBId(_CDBRecord*, _CDBId*)
 .fn getCDBId__Q33ipl3cdb7ManagerFP10_CDBRecordP6_CDBId, global
 /* 8133FE78 0000E278  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1058,6 +1075,7 @@
 /* 8133FEE4 0000E2E4  4E 80 00 20 */	blr
 .endfn getCDBId__Q33ipl3cdb7ManagerFP10_CDBRecordP6_CDBId
 
+# .text:0xE80 | 0x8133FEE8 | size: 0x68
 # ipl::cdb::Manager::remove(_CDBRecord*)
 .fn remove__Q33ipl3cdb7ManagerFP10_CDBRecord, global
 /* 8133FEE8 0000E2E8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1088,6 +1106,7 @@
 /* 8133FF4C 0000E34C  4E 80 00 20 */	blr
 .endfn remove__Q33ipl3cdb7ManagerFP10_CDBRecord
 
+# .text:0xEE8 | 0x8133FF50 | size: 0x68
 # ipl::cdb::Manager::open(_CDBRecord*)
 .fn open__Q33ipl3cdb7ManagerFP10_CDBRecord, global
 /* 8133FF50 0000E350  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1118,6 +1137,7 @@
 /* 8133FFB4 0000E3B4  4E 80 00 20 */	blr
 .endfn open__Q33ipl3cdb7ManagerFP10_CDBRecord
 
+# .text:0xF50 | 0x8133FFB8 | size: 0x7C
 # ipl::cdb::Manager::read(_CDBRecord*, void*, unsigned long)
 .fn read__Q33ipl3cdb7ManagerFP10_CDBRecordPvUl, global
 /* 8133FFB8 0000E3B8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1153,6 +1173,7 @@
 /* 81340030 0000E430  4E 80 00 20 */	blr
 .endfn read__Q33ipl3cdb7ManagerFP10_CDBRecordPvUl
 
+# .text:0xFCC | 0x81340034 | size: 0x78
 # ipl::cdb::Manager::write(_CDBRecord*, void*, unsigned long)
 .fn write__Q33ipl3cdb7ManagerFP10_CDBRecordPvUl, global
 /* 81340034 0000E434  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1187,6 +1208,7 @@
 /* 813400A8 0000E4A8  4E 80 00 20 */	blr
 .endfn write__Q33ipl3cdb7ManagerFP10_CDBRecordPvUl
 
+# .text:0x1044 | 0x813400AC | size: 0x78
 # ipl::cdb::Manager::seek(_CDBRecord*, long, CDBSeek)
 .fn seek__Q33ipl3cdb7ManagerFP10_CDBRecordl7CDBSeek, global
 /* 813400AC 0000E4AC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1221,6 +1243,7 @@
 /* 81340120 0000E520  4E 80 00 20 */	blr
 .endfn seek__Q33ipl3cdb7ManagerFP10_CDBRecordl7CDBSeek
 
+# .text:0x10BC | 0x81340124 | size: 0x68
 # ipl::cdb::Manager::close(_CDBRecord*)
 .fn close__Q33ipl3cdb7ManagerFP10_CDBRecord, global
 /* 81340124 0000E524  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1251,6 +1274,7 @@
 /* 81340188 0000E588  4E 80 00 20 */	blr
 .endfn close__Q33ipl3cdb7ManagerFP10_CDBRecord
 
+# .text:0x1124 | 0x8134018C | size: 0x10
 # ipl::cdb::Manager::startSDProc()
 .fn startSDProc__Q33ipl3cdb7ManagerFv, global
 /* 8134018C 0000E58C  80 83 00 1C */	lwz r4, 0x1c(r3)
@@ -1259,12 +1283,14 @@
 /* 81340198 0000E598  48 01 ED 0C */	b create__Q23ipl10SDVFWorkerFPvi
 .endfn startSDProc__Q33ipl3cdb7ManagerFv
 
+# .text:0x1134 | 0x8134019C | size: 0x8
 # ipl::cdb::Manager::terminateSDProc()
 .fn terminateSDProc__Q33ipl3cdb7ManagerFv, global
 /* 8134019C 0000E59C  38 63 00 18 */	addi r3, r3, 0x18
 /* 813401A0 0000E5A0  48 01 EE F4 */	b terminate_async__Q23ipl10SDVFWorkerFv
 .endfn terminateSDProc__Q33ipl3cdb7ManagerFv
 
+# .text:0x113C | 0x813401A4 | size: 0x70
 # ipl::cdb::Manager::mountSD()
 .fn mountSD__Q33ipl3cdb7ManagerFv, global
 /* 813401A4 0000E5A4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1298,6 +1324,7 @@
 /* 81340210 0000E610  4E 80 00 20 */	blr
 .endfn mountSD__Q33ipl3cdb7ManagerFv
 
+# .text:0x11AC | 0x81340214 | size: 0x70
 # ipl::cdb::Manager::unmountSD()
 .fn unmountSD__Q33ipl3cdb7ManagerFv, global
 /* 81340214 0000E614  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1331,6 +1358,7 @@
 /* 81340280 0000E680  4E 80 00 20 */	blr
 .endfn unmountSD__Q33ipl3cdb7ManagerFv
 
+# .text:0x121C | 0x81340284 | size: 0x68
 # ipl::cdb::Manager::backupToSD(_CDBRecord*)
 .fn backupToSD__Q33ipl3cdb7ManagerFP10_CDBRecord, global
 /* 81340284 0000E684  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1361,6 +1389,7 @@
 /* 813402E8 0000E6E8  4E 80 00 20 */	blr
 .endfn backupToSD__Q33ipl3cdb7ManagerFP10_CDBRecord
 
+# .text:0x1284 | 0x813402EC | size: 0x6C
 # ipl::cdb::Manager::cleanUpEmptyDirectories(CDBRecordLocation)
 .fn cleanUpEmptyDirectories__Q33ipl3cdb7ManagerF17CDBRecordLocation, global
 /* 813402EC 0000E6EC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1392,6 +1421,7 @@
 /* 81340354 0000E754  4E 80 00 20 */	blr
 .endfn cleanUpEmptyDirectories__Q33ipl3cdb7ManagerF17CDBRecordLocation
 
+# .text:0x12F0 | 0x81340358 | size: 0xA4
 # ipl::cdb::Manager::getFreeSize()
 .fn getFreeSize__Q33ipl3cdb7ManagerFv, global
 /* 81340358 0000E758  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1439,6 +1469,7 @@
 /* 813403F8 0000E7F8  4E 80 00 20 */	blr
 .endfn getFreeSize__Q33ipl3cdb7ManagerFv
 
+# .text:0x1394 | 0x813403FC | size: 0x188
 # ipl::cdb::Manager::error_handling(CDBErr, int)
 .fn error_handling__Q33ipl3cdb7ManagerF6CDBErri, global
 /* 813403FC 0000E7FC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1548,10 +1579,11 @@
 /* 81340580 0000E980  4E 80 00 20 */	blr
 .endfn error_handling__Q33ipl3cdb7ManagerF6CDBErri
 
-# 0x81635118 - 0x816351C0
+# 0x81635118..0x816351C0 | size: 0xA8
 .data
 .balign 8
 
+# .data:0x0 | 0x81635118 | size: 0x14
 .obj lbl_81635118, global
 	.4byte 0x69706C43
 	.4byte 0x64624D61
@@ -1560,6 +1592,7 @@
 	.4byte 0x70000000
 .endobj lbl_81635118
 
+# .data:0x14 | 0x8163512C | size: 0x94
 .obj jumptable_8163512C, local
 	.rel error_handling__Q33ipl3cdb7ManagerF6CDBErri, .L_81340440
 	.rel error_handling__Q33ipl3cdb7ManagerF6CDBErri, .L_81340568
@@ -1600,23 +1633,26 @@
 	.rel error_handling__Q33ipl3cdb7ManagerF6CDBErri, .L_81340498
 .endobj jumptable_8163512C
 
-# 0x81694498 - 0x816944A0
+# 0x81694498..0x816944A0 | size: 0x8
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x81694498 | size: 0x8
 .obj lbl_81694498, global
 	.4byte 0x00000032
 	.4byte 0x00000000
 .endobj lbl_81694498
 
-# 0x816960D0 - 0x816960D8
+# 0x816960D0..0x816960D8 | size: 0x8
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x816960D0 | size: 0x4
 .obj lbl_816960D0, global
 	.string "CDB"
 .endobj lbl_816960D0
 
+# .sdata:0x4 | 0x816960D4 | size: 0x4
 .obj lbl_816960D4, global
 	.string "cdb"
 .endobj lbl_816960D4

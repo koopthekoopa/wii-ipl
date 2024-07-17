@@ -1,18 +1,20 @@
 .include "macros.inc"
 .file "rvl_dec.c"
 
-# 0x81080000 - 0x81089008
+# 0x81080000..0x81089008 | size: 0x9008
 .section .bss, "wa", @nobits
 .balign 8
 
+# .bss:0x0 | 0x81080000 | size: 0x9008
 .obj rvlDecWork, global
 	.skip 0x9008
 .endobj rvlDecWork
 
-# 0x81332120 - 0x81332B48
+# 0x81332120..0x81332B48 | size: 0xA28
 .text
 .balign 4
 
+# .text:0x0 | 0x81332120 | size: 0x40
 .fn Rvl_decode, global
 /* 81332120 00000520  80 A4 00 00 */	lwz r5, 0x0(r4)
 /* 81332124 00000524  3C C0 00 59 */	lis r6, 0x59
@@ -32,6 +34,7 @@
 /* 8133215C 0000055C  4E 80 00 20 */	blr
 .endfn Rvl_decode
 
+# .text:0x40 | 0x81332160 | size: 0x114
 .fn Rvl_decode_szs, global
 /* 81332160 00000560  80 A4 00 04 */	lwz r5, 0x4(r4)
 /* 81332164 00000564  38 C0 00 00 */	li r6, 0x0
@@ -113,6 +116,7 @@
 /* 81332270 00000670  4E 80 00 20 */	blr
 .endfn Rvl_decode_szs
 
+# .text:0x154 | 0x81332274 | size: 0x370
 .fn Rvl_decode_ash, global
 /* 81332274 00000674  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 81332278 00000678  BE A1 00 10 */	stmw r21, 0x10(r1)
@@ -371,6 +375,7 @@
 /* 813325E0 000009E0  4E 80 00 20 */	blr
 .endfn Rvl_decode_ash
 
+# .text:0x4C4 | 0x813325E4 | size: 0x564
 .fn Rvl_decode_asr, global
 /* 813325E4 000009E4  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 813325E8 000009E8  BE A1 00 10 */	stmw r21, 0x10(r1)

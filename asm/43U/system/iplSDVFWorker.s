@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplSDVFWorker.cpp"
 
-# 0x8135EE98 - 0x8135FC1C
+# 0x8135EE98..0x8135FC1C | size: 0xD84
 .text
 .balign 4
 
+# .text:0x0 | 0x8135EE98 | size: 0xC
 # ipl::SDVFWorker::SDVFWorker()
 .fn __ct__Q23ipl10SDVFWorkerFv, global
 /* 8135EE98 0002D298  38 00 00 00 */	li r0, 0x0
@@ -12,6 +13,7 @@
 /* 8135EEA0 0002D2A0  4E 80 00 20 */	blr
 .endfn __ct__Q23ipl10SDVFWorkerFv
 
+# .text:0xC | 0x8135EEA4 | size: 0x138
 # ipl::SDVFWorker::create(void*, int)
 .fn create__Q23ipl10SDVFWorkerFPvi, global
 /* 8135EEA4 0002D2A4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -94,6 +96,7 @@
 /* 8135EFD8 0002D3D8  4E 80 00 20 */	blr
 .endfn create__Q23ipl10SDVFWorkerFPvi
 
+# .text:0x144 | 0x8135EFDC | size: 0x10
 # ipl::SDVFWorker::is_terminated()
 .fn is_terminated__Q23ipl10SDVFWorkerFv, global
 /* 8135EFDC 0002D3DC  80 03 00 00 */	lwz r0, 0x0(r3)
@@ -102,6 +105,7 @@
 /* 8135EFE8 0002D3E8  4E 80 00 20 */	blr
 .endfn is_terminated__Q23ipl10SDVFWorkerFv
 
+# .text:0x154 | 0x8135EFEC | size: 0x2C
 # ipl::SDVFWorker::is_working()
 .fn is_working__Q23ipl10SDVFWorkerFv, global
 /* 8135EFEC 0002D3EC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -117,6 +121,7 @@
 /* 8135F014 0002D414  4E 80 00 20 */	blr
 .endfn is_working__Q23ipl10SDVFWorkerFv
 
+# .text:0x180 | 0x8135F018 | size: 0x50
 # ipl::SDVFWorker::get_async_result()
 .fn get_async_result__Q23ipl10SDVFWorkerFv, global
 /* 8135F018 0002D418  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -143,12 +148,14 @@
 /* 8135F064 0002D464  4E 80 00 20 */	blr
 .endfn get_async_result__Q23ipl10SDVFWorkerFv
 
+# .text:0x1D0 | 0x8135F068 | size: 0x8
 # ipl::SDVFWorker::get_sd_state()
 .fn get_sd_state__Q23ipl10SDVFWorkerFv, global
 /* 8135F068 0002D468  80 6D A6 B8 */	lwz r3, lbl_816986F8@sda21(r0)
 /* 8135F06C 0002D46C  4E 80 00 20 */	blr
 .endfn get_sd_state__Q23ipl10SDVFWorkerFv
 
+# .text:0x1D8 | 0x8135F070 | size: 0x24
 # ipl::SDVFWorker::is_sd_write_protected()
 .fn is_sd_write_protected__Q23ipl10SDVFWorkerFv, global
 /* 8135F070 0002D470  80 0D A6 B8 */	lwz r0, lbl_816986F8@sda21(r0)
@@ -163,6 +170,7 @@
 /* 8135F090 0002D490  4E 80 00 20 */	blr
 .endfn is_sd_write_protected__Q23ipl10SDVFWorkerFv
 
+# .text:0x1FC | 0x8135F094 | size: 0x48
 # ipl::SDVFWorker::terminate_async()
 .fn terminate_async__Q23ipl10SDVFWorkerFv, global
 /* 8135F094 0002D494  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -186,24 +194,28 @@
 /* 8135F0D8 0002D4D8  4E 80 00 20 */	blr
 .endfn terminate_async__Q23ipl10SDVFWorkerFv
 
+# .text:0x244 | 0x8135F0DC | size: 0x8
 # ipl::SDVFWorker::mount_sd_async()
 .fn mount_sd_async__Q23ipl10SDVFWorkerFv, global
 /* 8135F0DC 0002D4DC  38 80 00 02 */	li r4, 0x2
 /* 8135F0E0 0002D4E0  48 00 07 E0 */	b send_work__Q23ipl10SDVFWorkerFQ33ipl10SDVFWorker11WorkMessage
 .endfn mount_sd_async__Q23ipl10SDVFWorkerFv
 
+# .text:0x24C | 0x8135F0E4 | size: 0x8
 # ipl::SDVFWorker::prepare_cdb_backup_to_sd_async()
 .fn prepare_cdb_backup_to_sd_async__Q23ipl10SDVFWorkerFv, global
 /* 8135F0E4 0002D4E4  38 80 00 05 */	li r4, 0x5
 /* 8135F0E8 0002D4E8  48 00 07 D8 */	b send_work__Q23ipl10SDVFWorkerFQ33ipl10SDVFWorker11WorkMessage
 .endfn prepare_cdb_backup_to_sd_async__Q23ipl10SDVFWorkerFv
 
+# .text:0x254 | 0x8135F0EC | size: 0x8
 # ipl::SDVFWorker::cleanup_cdb_backup_to_sd_async()
 .fn cleanup_cdb_backup_to_sd_async__Q23ipl10SDVFWorkerFv, global
 /* 8135F0EC 0002D4EC  38 80 00 06 */	li r4, 0x6
 /* 8135F0F0 0002D4F0  48 00 07 D0 */	b send_work__Q23ipl10SDVFWorkerFQ33ipl10SDVFWorker11WorkMessage
 .endfn cleanup_cdb_backup_to_sd_async__Q23ipl10SDVFWorkerFv
 
+# .text:0x25C | 0x8135F0F4 | size: 0x3C
 # ipl::SDVFWorker::thread_main(void*)
 .fn thread_main__Q23ipl10SDVFWorkerFPv, global
 /* 8135F0F4 0002D4F4  7C 60 1B 78 */	mr r0, r3
@@ -223,6 +235,7 @@
 /* 8135F12C 0002D52C  48 00 00 04 */	b run__Q23ipl10SDVFWorkerFv
 .endfn thread_main__Q23ipl10SDVFWorkerFPv
 
+# .text:0x298 | 0x8135F130 | size: 0x2C0
 # ipl::SDVFWorker::run()
 .fn run__Q23ipl10SDVFWorkerFv, global
 /* 8135F130 0002D530  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -429,6 +442,7 @@
 /* 8135F3EC 0002D7EC  4E 80 00 20 */	blr
 .endfn run__Q23ipl10SDVFWorkerFv
 
+# .text:0x558 | 0x8135F3F0 | size: 0x1EC
 # ipl::SDVFWorker::do_mount_sd()
 .fn do_mount_sd__Q23ipl10SDVFWorkerFv, global
 /* 8135F3F0 0002D7F0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -572,6 +586,7 @@
 /* 8135F5D8 0002D9D8  4E 80 00 20 */	blr
 .endfn do_mount_sd__Q23ipl10SDVFWorkerFv
 
+# .text:0x744 | 0x8135F5DC | size: 0x1E0
 # ipl::SDVFWorker::call_fa_mount()
 .fn call_fa_mount__Q23ipl10SDVFWorkerFv, global
 /* 8135F5DC 0002D9DC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -705,6 +720,7 @@
 /* 8135F7B8 0002DBB8  4E 80 00 20 */	blr
 .endfn call_fa_mount__Q23ipl10SDVFWorkerFv
 
+# .text:0x924 | 0x8135F7BC | size: 0x104
 # ipl::SDVFWorker::do_format_sd()
 .fn do_format_sd__Q23ipl10SDVFWorkerFv, global
 /* 8135F7BC 0002DBBC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -778,6 +794,7 @@
 /* 8135F8BC 0002DCBC  4E 80 00 20 */	blr
 .endfn do_format_sd__Q23ipl10SDVFWorkerFv
 
+# .text:0xA28 | 0x8135F8C0 | size: 0x6C
 # ipl::SDVFWorker::send_work(ipl::SDVFWorker::WorkMessage)
 .fn send_work__Q23ipl10SDVFWorkerFQ33ipl10SDVFWorker11WorkMessage, global
 /* 8135F8C0 0002DCC0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -810,6 +827,7 @@
 /* 8135F928 0002DD28  4E 80 00 20 */	blr
 .endfn send_work__Q23ipl10SDVFWorkerFQ33ipl10SDVFWorker11WorkMessage
 
+# .text:0xA94 | 0x8135F92C | size: 0x54
 # ipl::SDVFWorker::wait_work()
 .fn wait_work__Q23ipl10SDVFWorkerFv, global
 /* 8135F92C 0002DD2C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -835,6 +853,7 @@
 /* 8135F97C 0002DD7C  4E 80 00 20 */	blr
 .endfn wait_work__Q23ipl10SDVFWorkerFv
 
+# .text:0xAE8 | 0x8135F980 | size: 0x50
 # ipl::SDVFWorker::get_state()
 .fn get_state__Q23ipl10SDVFWorkerFv, global
 /* 8135F980 0002DD80  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -859,6 +878,7 @@
 /* 8135F9CC 0002DDCC  4E 80 00 20 */	blr
 .endfn get_state__Q23ipl10SDVFWorkerFv
 
+# .text:0xB38 | 0x8135F9D0 | size: 0x60
 # ipl::SDVFWorker::set_state(ipl::SDVFWorker::WorkState)
 .fn set_state__Q23ipl10SDVFWorkerFQ33ipl10SDVFWorker9WorkState, global
 /* 8135F9D0 0002DDD0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -887,6 +907,7 @@
 /* 8135FA2C 0002DE2C  4E 80 00 20 */	blr
 .endfn set_state__Q23ipl10SDVFWorkerFQ33ipl10SDVFWorker9WorkState
 
+# .text:0xB98 | 0x8135FA30 | size: 0x50
 # ipl::SDVFWorker::sd_insert_callback(signed char)
 .fn sd_insert_callback__Q23ipl10SDVFWorkerFSc, global
 /* 8135FA30 0002DE30  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -912,6 +933,7 @@
 /* 8135FA7C 0002DE7C  4E 80 00 20 */	blr
 .endfn sd_insert_callback__Q23ipl10SDVFWorkerFSc
 
+# .text:0xBE8 | 0x8135FA80 | size: 0x50
 # ipl::SDVFWorker::sd_eject_callback(signed char)
 .fn sd_eject_callback__Q23ipl10SDVFWorkerFSc, global
 /* 8135FA80 0002DE80  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -937,6 +959,7 @@
 /* 8135FACC 0002DECC  4E 80 00 20 */	blr
 .endfn sd_eject_callback__Q23ipl10SDVFWorkerFSc
 
+# .text:0xC38 | 0x8135FAD0 | size: 0x14C
 # ipl::SDVFWorker::handle_sd_error(long, long*)
 .fn handle_sd_error__Q23ipl10SDVFWorkerFlPl, global
 /* 8135FAD0 0002DED0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1038,10 +1061,11 @@
 /* 8135FC18 0002E018  4E 80 00 20 */	blr
 .endfn handle_sd_error__Q23ipl10SDVFWorkerFlPl
 
-# 0x816394A8 - 0x816397E0
+# 0x816394A8..0x816397E0 | size: 0x338
 .data
 .balign 8
 
+# .data:0x0 | 0x816394A8 | size: 0xB0
 .obj lbl_816394A8, global
 	.4byte 0x53445646
 	.4byte 0x576F726B
@@ -1089,6 +1113,7 @@
 	.4byte 0x0A000000
 .endobj lbl_816394A8
 
+# .data:0xB0 | 0x81639558 | size: 0x1C
 .obj jumptable_81639558, local
 	.rel run__Q23ipl10SDVFWorkerFv, .L_8135F380
 	.rel run__Q23ipl10SDVFWorkerFv, .L_8135F190
@@ -1099,10 +1124,12 @@
 	.rel run__Q23ipl10SDVFWorkerFv, .L_8135F304
 .endobj jumptable_81639558
 
+# .data:0xCC | 0x81639574 | size: 0x27
 .obj lbl_81639574, global
 	.string "SDVFWorker: attach SD card drive = %c\n"
 .endobj lbl_81639574
 
+# .data:0xF3 | 0x8163959B | size: 0x1A1
 .obj lbl_8163959B, global
 	.4byte 0x53445646
 	.4byte 0x576F726B
@@ -1211,18 +1238,22 @@
 	.byte 0x00
 .endobj lbl_8163959B
 
+# .data:0x294 | 0x8163973C | size: 0x22
 .obj lbl_8163973C, global
 	.string "SDVFWorker: recieve message = %d\n"
 .endobj lbl_8163973C
 
+# .data:0x2B6 | 0x8163975E | size: 0x2C
 .obj lbl_8163975E, global
 	.string "SDVFWorker: SD card inserted !!   %c drive\n"
 .endobj lbl_8163975E
 
+# .data:0x2E2 | 0x8163978A | size: 0x2C
 .obj lbl_8163978A, global
 	.string "SDVFWorker: SD card ejected  !!   %c drive\n"
 .endobj lbl_8163978A
 
+# .data:0x30E | 0x816397B6 | size: 0x2A
 .obj lbl_816397B6, global
 	.4byte 0x53445646
 	.4byte 0x576F726B
@@ -1237,18 +1268,21 @@
 	.2byte 0x0000
 .endobj lbl_816397B6
 
-# 0x816986F8 - 0x81698700
+# 0x816986F8..0x81698700 | size: 0x8
 .section .sbss, "wa", @nobits
 .balign 8
 
+# .sbss:0x0 | 0x816986F8 | size: 0x4
 .obj lbl_816986F8, global
 	.skip 0x4
 .endobj lbl_816986F8
 
+# .sbss:0x4 | 0x816986FC | size: 0x1
 .obj lbl_816986FC, global
 	.skip 0x1
 .endobj lbl_816986FC
 
+# .sbss:0x5 | 0x816986FD | size: 0x3
 .obj gap_12_816986FD_sbss, global
 .hidden gap_12_816986FD_sbss
 	.skip 0x3

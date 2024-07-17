@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplPointerCore.cpp"
 
-# 0x813444C4 - 0x81344818
+# 0x813444C4..0x81344818 | size: 0x354
 .text
 .balign 4
 
+# .text:0x0 | 0x813444C4 | size: 0x24
 # ipl::PointerCoreObject::PointerCoreObject()
 .fn __ct__Q23ipl17PointerCoreObjectFv, global
 /* 813444C4 000128C4  C0 02 81 08 */	lfs f0, lbl_81694508@sda21(r0)
@@ -18,6 +19,7 @@
 /* 813444E4 000128E4  4E 80 00 20 */	blr
 .endfn __ct__Q23ipl17PointerCoreObjectFv
 
+# .text:0x24 | 0x813444E8 | size: 0x19C
 # ipl::PointerCoreObject::calc(ipl::Pointer*, const ipl::controller::Interface*)
 .fn calc__Q23ipl17PointerCoreObjectFPQ23ipl7PointerPCQ33ipl10controller9Interface, global
 /* 813444E8 000128E8  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -126,6 +128,7 @@
 /* 81344680 00012A80  4E 80 00 20 */	blr
 .endfn calc__Q23ipl17PointerCoreObjectFPQ23ipl7PointerPCQ33ipl10controller9Interface
 
+# .text:0x1C0 | 0x81344684 | size: 0x1C
 # nw4r::math::VEC3::operator=(const nw4r::math::VEC3&)
 .fn __as__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3, global
 /* 81344684 00012A84  C0 44 00 00 */	lfs f2, 0x0(r4)
@@ -137,6 +140,7 @@
 /* 8134469C 00012A9C  4E 80 00 20 */	blr
 .endfn __as__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3
 
+# .text:0x1DC | 0x813446A0 | size: 0x24
 # ipl::PointerCoreObject::draw()
 .fn draw__Q23ipl17PointerCoreObjectFv, global
 /* 813446A0 00012AA0  80 83 00 00 */	lwz r4, 0x0(r3)
@@ -150,6 +154,7 @@
 /* 813446C0 00012AC0  4E 80 00 20 */	blr
 .endfn draw__Q23ipl17PointerCoreObjectFv
 
+# .text:0x200 | 0x813446C4 | size: 0x7C
 # ipl::PointerCore::PointerCore()
 .fn __ct__Q23ipl11PointerCoreFv, global
 /* 813446C4 00012AC4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -187,6 +192,7 @@
 /* 8134473C 00012B3C  4E 80 00 20 */	blr
 .endfn __ct__Q23ipl11PointerCoreFv
 
+# .text:0x27C | 0x81344740 | size: 0x10
 # ipl::PointerCore::setState(int, int)
 .fn setState__Q23ipl11PointerCoreFii, global
 /* 81344740 00012B40  1C 04 00 14 */	mulli r0, r4, 0x14
@@ -195,6 +201,7 @@
 /* 8134474C 00012B4C  4E 80 00 20 */	blr
 .endfn setState__Q23ipl11PointerCoreFii
 
+# .text:0x28C | 0x81344750 | size: 0x64
 # ipl::PointerCore::calc(ipl::Pointer*)
 .fn calc__Q23ipl11PointerCoreFPQ23ipl7Pointer, global
 /* 81344750 00012B50  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -225,6 +232,7 @@
 /* 813447B0 00012BB0  4E 80 00 20 */	blr
 .endfn calc__Q23ipl11PointerCoreFPQ23ipl7Pointer
 
+# .text:0x2F0 | 0x813447B4 | size: 0x54
 # ipl::PointerCore::draw()
 .fn draw__Q23ipl11PointerCoreFv, global
 /* 813447B4 00012BB4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -251,6 +259,7 @@
 /* 81344804 00012C04  4E 80 00 20 */	blr
 .endfn draw__Q23ipl11PointerCoreFv
 
+# .text:0x344 | 0x81344808 | size: 0x10
 # ipl::PointerCore::changeType(int, int)
 .fn changeType__Q23ipl11PointerCoreFii, global
 /* 81344808 00012C08  1C 04 00 14 */	mulli r0, r4, 0x14
@@ -259,30 +268,35 @@
 /* 81344814 00012C14  4E 80 00 20 */	blr
 .endfn changeType__Q23ipl11PointerCoreFii
 
-# 0x81694508 - 0x81694510
+# 0x81694508..0x81694510 | size: 0x8
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x81694508 | size: 0x4
 .obj lbl_81694508, global
 	.float 0
 .endobj lbl_81694508
 
+# .sdata2:0x4 | 0x8169450C | size: 0x4
 .obj lbl_8169450C, global
 	.float 1.40625
 .endobj lbl_8169450C
 
-# 0x81696118 - 0x81696130
+# 0x81696118..0x81696130 | size: 0x18
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x81696118 | size: 0x8
 .obj lbl_81696118, global
 	.string "N_Trans"
 .endobj lbl_81696118
 
+# .sdata:0x8 | 0x81696120 | size: 0x6
 .obj lbl_81696120, global
 	.string "N_Rot"
 .endobj lbl_81696120
 
+# .sdata:0xE | 0x81696126 | size: 0xA
 .obj lbl_81696126, global
 	.4byte 0x4E5F5352
 	.4byte 0x6F740000

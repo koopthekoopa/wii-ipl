@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplNandMeta.cpp"
 
-# 0x8133CC34 - 0x8133D234
+# 0x8133CC34..0x8133D234 | size: 0x600
 .text
 .balign 4
 
+# .text:0x0 | 0x8133CC34 | size: 0x90
 # ipl::nand::MetaFile::MetaFile(EGG::Heap*, const char*, ARCHandle*, unsigned long long, int, unsigned long, void (*)(void*), void*, int)
 .fn __ct__Q33ipl4nand8MetaFileFPQ23EGG4HeapPCcP9ARCHandleUxiUlPFPv_vPvi, global
 /* 8133CC34 0000B034  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -45,6 +46,7 @@
 /* 8133CCC0 0000B0C0  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl4nand8MetaFileFPQ23EGG4HeapPCcP9ARCHandleUxiUlPFPv_vPvi
 
+# .text:0x90 | 0x8133CCC4 | size: 0x58
 # ipl::nand::MetaFile::~MetaFile()
 .fn __dt__Q33ipl4nand8MetaFileFv, global
 /* 8133CCC4 0000B0C4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -72,6 +74,7 @@
 /* 8133CD18 0000B118  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl4nand8MetaFileFv
 
+# .text:0xE8 | 0x8133CD1C | size: 0xC4
 # ipl::nand::MetaFile::openNandFile_()
 .fn openNandFile___Q33ipl4nand8MetaFileFv, global
 /* 8133CD1C 0000B11C  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -88,7 +91,7 @@
 /* 8133CD48 0000B148  7C A5 00 38 */	and r5, r5, r0
 /* 8133CD4C 0000B14C  7C C6 00 38 */	and r6, r6, r0
 /* 8133CD50 0000B150  4C C6 31 82 */	crclr cr1eq
-/* 8133CD54 0000B154  48 2C 3D 2D */	bl fn_81600A80
+/* 8133CD54 0000B154  48 2C 3D 2D */	bl sprintf
 /* 8133CD58 0000B158  80 1F 00 4C */	lwz r0, 0x4c(r31)
 /* 8133CD5C 0000B15C  2C 00 00 00 */	cmpwi r0, 0x0
 /* 8133CD60 0000B160  41 82 00 50 */	beq .L_8133CDB0
@@ -129,6 +132,7 @@
 /* 8133CDDC 0000B1DC  4E 80 00 20 */	blr
 .endfn openNandFile___Q33ipl4nand8MetaFileFv
 
+# .text:0x1AC | 0x8133CDE0 | size: 0xB4
 # ipl::nand::MetaFile::readNandBlock_(void*, int, int)
 .fn readNandBlock___Q33ipl4nand8MetaFileFPvii, global
 /* 8133CDE0 0000B1E0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -180,6 +184,7 @@
 /* 8133CE90 0000B290  4E 80 00 20 */	blr
 .endfn readNandBlock___Q33ipl4nand8MetaFileFPvii
 
+# .text:0x260 | 0x8133CE94 | size: 0x64
 # ipl::nand::MetaFile::closeNandFile_()
 .fn closeNandFile___Q33ipl4nand8MetaFileFv, global
 /* 8133CE94 0000B294  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -210,6 +215,7 @@
 /* 8133CEF4 0000B2F4  4E 80 00 20 */	blr
 .endfn closeNandFile___Q33ipl4nand8MetaFileFv
 
+# .text:0x2C4 | 0x8133CEF8 | size: 0x158
 # ipl::nand::MetaFile::openTicketFile_()
 .fn openTicketFile___Q33ipl4nand8MetaFileFv, global
 /* 8133CEF8 0000B2F8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -307,6 +313,7 @@
 /* 8133D04C 0000B44C  4E 80 00 20 */	blr
 .endfn openTicketFile___Q33ipl4nand8MetaFileFv
 
+# .text:0x41C | 0x8133D050 | size: 0xE8
 # ipl::nand::MetaFile::readTicketBlock_(void*, int, int)
 .fn readTicketBlock___Q33ipl4nand8MetaFileFPvii, global
 /* 8133D050 0000B450  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -373,6 +380,7 @@
 /* 8133D134 0000B534  4E 80 00 20 */	blr
 .endfn readTicketBlock___Q33ipl4nand8MetaFileFPvii
 
+# .text:0x504 | 0x8133D138 | size: 0xAC
 # ipl::nand::MetaFile::closeTicketFile_()
 .fn closeTicketFile___Q33ipl4nand8MetaFileFv, global
 /* 8133D138 0000B538  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -423,11 +431,13 @@
 /* 8133D1E0 0000B5E0  4E 80 00 20 */	blr
 .endfn closeTicketFile___Q33ipl4nand8MetaFileFv
 
+# .text:0x5B0 | 0x8133D1E4 | size: 0x4
 # ipl::nand::MetaFile::open_(unsigned char)
 .fn open___Q33ipl4nand8MetaFileFUc, global
 /* 8133D1E4 0000B5E4  4B FF FD 14 */	b openTicketFile___Q33ipl4nand8MetaFileFv
 .endfn open___Q33ipl4nand8MetaFileFUc
 
+# .text:0x5B4 | 0x8133D1E8 | size: 0x14
 # ipl::nand::MetaFile::close_()
 .fn close___Q33ipl4nand8MetaFileFv, global
 /* 8133D1E8 0000B5E8  88 03 01 A8 */	lbz r0, 0x1a8(r3)
@@ -438,12 +448,14 @@
 /* 8133D1F8 0000B5F8  4B FF FF 40 */	b closeTicketFile___Q33ipl4nand8MetaFileFv
 .endfn close___Q33ipl4nand8MetaFileFv
 
+# .text:0x5C8 | 0x8133D1FC | size: 0x8
 # ipl::nand::MetaFile::getRawSize_()
 .fn getRawSize___Q33ipl4nand8MetaFileFv, global
 /* 8133D1FC 0000B5FC  38 63 00 B0 */	addi r3, r3, 0xb0
 /* 8133D200 0000B600  48 23 43 9C */	b fn_8157159C
 .endfn getRawSize___Q33ipl4nand8MetaFileFv
 
+# .text:0x5D0 | 0x8133D204 | size: 0x14
 # ipl::nand::MetaFile::readBlock_(void*, int, int)
 .fn readBlock___Q33ipl4nand8MetaFileFPvii, global
 /* 8133D204 0000B604  88 03 01 A8 */	lbz r0, 0x1a8(r3)
@@ -454,6 +466,7 @@
 /* 8133D214 0000B614  4B FF FE 3C */	b readTicketBlock___Q33ipl4nand8MetaFileFPvii
 .endfn readBlock___Q33ipl4nand8MetaFileFPvii
 
+# .text:0x5E4 | 0x8133D218 | size: 0x1C
 # ipl::nand::MetaFile::callback_()
 .fn callback___Q33ipl4nand8MetaFileFv, global
 /* 8133D218 0000B618  81 83 01 AC */	lwz r12, 0x1ac(r3)
@@ -465,14 +478,16 @@
 /* 8133D230 0000B630  4E 80 00 20 */	blr
 .endfn callback___Q33ipl4nand8MetaFileFv
 
-# 0x81634E10 - 0x81634E90
+# 0x81634E10..0x81634E90 | size: 0x80
 .data
 .balign 8
 
+# .data:0x0 | 0x81634E10 | size: 0x1A
 .obj lbl_81634E10, global
 	.string "/meta/%08x/%08x/title.met"
 .endobj lbl_81634E10
 
+# .data:0x1A | 0x81634E2A | size: 0x12
 .obj lbl_81634E2A, global
 	.4byte 0x69706C4E
 	.4byte 0x616E644D
@@ -481,6 +496,7 @@
 	.2byte 0x0000
 .endobj lbl_81634E2A
 
+# .data:0x2C | 0x81634E3C | size: 0x54
 .obj lbl_81634E3C, global
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -505,10 +521,11 @@
 	.4byte callback___Q33ipl4nand8MetaFileFv
 .endobj lbl_81634E3C
 
-# 0x816960B0 - 0x816960B8
+# 0x816960B0..0x816960B8 | size: 0x8
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x816960B0 | size: 0x8
 .obj lbl_816960B0, global
 	.4byte 0x45530000
 	.4byte 0x00000000

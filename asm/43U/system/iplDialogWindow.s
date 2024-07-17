@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplDialogWindow.cpp"
 
-# 0x81344818 - 0x81347B6C
+# 0x81344818..0x81347B6C | size: 0x3354
 .text
 .balign 4
 
+# .text:0x0 | 0x81344818 | size: 0x858
 # ipl::DialogWindow::DialogWindow(EGG::Heap*)
 .fn __ct__Q23ipl12DialogWindowFPQ23EGG4Heap, global
 /* 81344818 00012C18  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -556,6 +557,7 @@
 /* 8134506C 0001346C  4E 80 00 20 */	blr
 .endfn __ct__Q23ipl12DialogWindowFPQ23EGG4Heap
 
+# .text:0x858 | 0x81345070 | size: 0xB0
 # ipl::gui::PaneManager::PaneManager(gui::EventHandler*, const nw4r::lyt::DrawInfo*, EGG::Heap*, EGG::Allocator*, bool)
 .fn __ct__Q33ipl3gui11PaneManagerFPQ23gui12EventHandlerPCQ34nw4r3lyt8DrawInfoPQ23EGG4HeapPQ23EGG9Allocatorb, global
 /* 81345070 00013470  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -605,6 +607,7 @@
 /* 8134511C 0001351C  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl3gui11PaneManagerFPQ23gui12EventHandlerPCQ34nw4r3lyt8DrawInfoPQ23EGG4HeapPQ23EGG9Allocatorb
 
+# .text:0x908 | 0x81345120 | size: 0x40
 # gui::Interface::~Interface()
 .fn __dt__Q23gui9InterfaceFv, global
 /* 81345120 00013520  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -626,12 +629,14 @@
 /* 8134515C 0001355C  4E 80 00 20 */	blr
 .endfn __dt__Q23gui9InterfaceFv
 
+# .text:0x948 | 0x81345160 | size: 0x8
 # gui::EventHandler::setManager(gui::Manager*)
 .fn setManager__Q23gui12EventHandlerFPQ23gui7Manager, global
 /* 81345160 00013560  90 83 00 04 */	stw r4, 0x4(r3)
 /* 81345164 00013564  4E 80 00 20 */	blr
 .endfn setManager__Q23gui12EventHandlerFPQ23gui7Manager
 
+# .text:0x950 | 0x81345168 | size: 0x104
 # ipl::DialogWindow::init()
 .fn init__Q23ipl12DialogWindowFv, global
 /* 81345168 00013568  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -705,6 +710,7 @@
 /* 81345268 00013668  4E 80 00 20 */	blr
 .endfn init__Q23ipl12DialogWindowFv
 
+# .text:0xA54 | 0x8134526C | size: 0xA8
 # ipl::DialogWindow::calc()
 .fn calc__Q23ipl12DialogWindowFv, global
 /* 8134526C 0001366C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -760,6 +766,7 @@
 /* 81345310 00013710  4E 80 00 20 */	blr
 .endfn calc__Q23ipl12DialogWindowFv
 
+# .text:0xAFC | 0x81345314 | size: 0x50
 # ipl::DialogWindow::stt_fadein()
 .fn stt_fadein__Q23ipl12DialogWindowFv, global
 /* 81345314 00013714  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -785,6 +792,7 @@
 /* 81345360 00013760  4E 80 00 20 */	blr
 .endfn stt_fadein__Q23ipl12DialogWindowFv
 
+# .text:0xB4C | 0x81345364 | size: 0x200
 # ipl::DialogWindow::stt_normal()
 .fn stt_normal__Q23ipl12DialogWindowFv, global
 /* 81345364 00013764  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -925,6 +933,7 @@
 /* 81345560 00013960  4E 80 00 20 */	blr
 .endfn stt_normal__Q23ipl12DialogWindowFv
 
+# .text:0xD4C | 0x81345564 | size: 0xF4
 # ipl::DialogWindow::stt_select()
 .fn stt_select__Q23ipl12DialogWindowFv, global
 /* 81345564 00013964  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -999,6 +1008,7 @@
 /* 81345654 00013A54  4E 80 00 20 */	blr
 .endfn stt_select__Q23ipl12DialogWindowFv
 
+# .text:0xE40 | 0x81345658 | size: 0x94
 # ipl::DialogWindow::stt_fadeout()
 .fn stt_fadeout__Q23ipl12DialogWindowFv, global
 /* 81345658 00013A58  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1042,6 +1052,7 @@
 /* 813456E8 00013AE8  4E 80 00 20 */	blr
 .endfn stt_fadeout__Q23ipl12DialogWindowFv
 
+# .text:0xED4 | 0x813456EC | size: 0x2C
 # gui::Manager::setEventHandler(gui::EventHandler*)
 .fn setEventHandler__Q23gui7ManagerFPQ23gui12EventHandler, global
 /* 813456EC 00013AEC  2C 04 00 00 */	cmpwi r4, 0x0
@@ -1057,6 +1068,7 @@
 /* 81345714 00013B14  4E 80 00 20 */	blr
 .endfn setEventHandler__Q23gui7ManagerFPQ23gui12EventHandler
 
+# .text:0xF00 | 0x81345718 | size: 0x60
 .fn iplDialogWindow_81345718, global
 /* 81345718 00013B18  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8134571C 00013B1C  7C 08 02 A6 */	mflr r0
@@ -1086,6 +1098,7 @@
 /* 81345774 00013B74  4E 80 00 20 */	blr
 .endfn iplDialogWindow_81345718
 
+# .text:0xF60 | 0x81345778 | size: 0x108
 .fn iplDialogWindow_81345778, global
 /* 81345778 00013B78  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8134577C 00013B7C  7C 08 02 A6 */	mflr r0
@@ -1159,6 +1172,7 @@
 /* 8134587C 00013C7C  4E 80 00 20 */	blr
 .endfn iplDialogWindow_81345778
 
+# .text:0x1068 | 0x81345880 | size: 0x5E4
 .fn iplDialogWindow_81345880, global
 /* 81345880 00013C80  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 81345884 00013C84  7C 08 02 A6 */	mflr r0
@@ -1557,6 +1571,7 @@
 /* 81345E60 00014260  4E 80 00 20 */	blr
 .endfn iplDialogWindow_81345880
 
+# .text:0x164C | 0x81345E64 | size: 0x7C
 # nw4r::lyt::TextBox* nw4r::ut::DynamicCast<nw4r::lyt::TextBox*, nw4r::lyt::Pane>(nw4r::lyt::Pane*)
 .fn "DynamicCast<PQ34nw4r3lyt7TextBox,Q34nw4r3lyt4Pane>__Q24nw4r2utFPQ34nw4r3lyt4Pane_PQ34nw4r3lyt7TextBox", global
 /* 81345E64 00014264  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1598,12 +1613,14 @@
 /* 81345EDC 000142DC  4E 80 00 20 */	blr
 .endfn "DynamicCast<PQ34nw4r3lyt7TextBox,Q34nw4r3lyt4Pane>__Q24nw4r2utFPQ34nw4r3lyt4Pane_PQ34nw4r3lyt7TextBox"
 
+# .text:0x16C8 | 0x81345EE0 | size: 0x8
 # nw4r::lyt::Pane::GetRuntimeTypeInfo() const
 .fn GetRuntimeTypeInfo__Q34nw4r3lyt4PaneCFv, global
 /* 81345EE0 000142E0  38 6D AF 60 */	li r3, lbl_81698FA0@sda21
 /* 81345EE4 000142E4  4E 80 00 20 */	blr
 .endfn GetRuntimeTypeInfo__Q34nw4r3lyt4PaneCFv
 
+# .text:0x16D0 | 0x81345EE8 | size: 0x108
 # ipl::DialogWindow::draw()
 .fn draw__Q23ipl12DialogWindowFv, global
 /* 81345EE8 000142E8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1676,6 +1693,7 @@
 /* 81345FEC 000143EC  4E 80 00 20 */	blr
 .endfn draw__Q23ipl12DialogWindowFv
 
+# .text:0x17D8 | 0x81345FF0 | size: 0x64
 # ipl::DialogWindow::set_text(const char*, const wchar_t*)
 .fn set_text__Q23ipl12DialogWindowFPCcPCw, global
 /* 81345FF0 000143F0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1705,6 +1723,7 @@
 /* 81346050 00014450  4E 80 00 20 */	blr
 .endfn set_text__Q23ipl12DialogWindowFPCcPCw
 
+# .text:0x183C | 0x81346054 | size: 0x5C
 # ipl::DialogWindow::set_message(unsigned long)
 .fn set_message__Q23ipl12DialogWindowFUl, global
 /* 81346054 00014454  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1732,6 +1751,7 @@
 /* 813460AC 000144AC  4E 80 00 20 */	blr
 .endfn set_message__Q23ipl12DialogWindowFUl
 
+# .text:0x1898 | 0x813460B0 | size: 0x10
 # ipl::DialogWindow::set_title(const wchar_t*)
 .fn set_title__Q23ipl12DialogWindowFPCw, global
 /* 813460B0 000144B0  3C C0 81 63 */	lis r6, lbl_8163594E@ha
@@ -1740,6 +1760,7 @@
 /* 813460BC 000144BC  4B FF FF 34 */	b set_text__Q23ipl12DialogWindowFPCcPCw
 .endfn set_title__Q23ipl12DialogWindowFPCw
 
+# .text:0x18A8 | 0x813460C0 | size: 0x58
 # ipl::DialogWindow::set_rbtn_text(unsigned long)
 .fn set_rbtn_text__Q23ipl12DialogWindowFUl, global
 /* 813460C0 000144C0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1766,6 +1787,7 @@
 /* 81346114 00014514  4E 80 00 20 */	blr
 .endfn set_rbtn_text__Q23ipl12DialogWindowFUl
 
+# .text:0x1900 | 0x81346118 | size: 0x58
 # ipl::DialogWindow::set_lbtn_text(unsigned long)
 .fn set_lbtn_text__Q23ipl12DialogWindowFUl, global
 /* 81346118 00014518  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1792,6 +1814,7 @@
 /* 8134616C 0001456C  4E 80 00 20 */	blr
 .endfn set_lbtn_text__Q23ipl12DialogWindowFUl
 
+# .text:0x1958 | 0x81346170 | size: 0x58
 # ipl::DialogWindow::set_tbtn_text(unsigned long)
 .fn set_tbtn_text__Q23ipl12DialogWindowFUl, global
 /* 81346170 00014570  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1818,6 +1841,7 @@
 /* 813461C4 000145C4  4E 80 00 20 */	blr
 .endfn set_tbtn_text__Q23ipl12DialogWindowFUl
 
+# .text:0x19B0 | 0x813461C8 | size: 0x58
 # ipl::DialogWindow::set_cbtn_text(unsigned long)
 .fn set_cbtn_text__Q23ipl12DialogWindowFUl, global
 /* 813461C8 000145C8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1844,6 +1868,7 @@
 /* 8134621C 0001461C  4E 80 00 20 */	blr
 .endfn set_cbtn_text__Q23ipl12DialogWindowFUl
 
+# .text:0x1A08 | 0x81346220 | size: 0x58
 # ipl::DialogWindow::set_bbtn_text(unsigned long)
 .fn set_bbtn_text__Q23ipl12DialogWindowFUl, global
 /* 81346220 00014620  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1870,6 +1895,7 @@
 /* 81346274 00014674  4E 80 00 20 */	blr
 .endfn set_bbtn_text__Q23ipl12DialogWindowFUl
 
+# .text:0x1A60 | 0x81346278 | size: 0x64
 # ipl::DialogWindow::set_dialog_size(const nw4r::lyt::Size&)
 .fn set_dialog_size__Q23ipl12DialogWindowFRCQ34nw4r3lyt4Size, global
 /* 81346278 00014678  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1899,6 +1925,7 @@
 /* 813462D8 000146D8  4E 80 00 20 */	blr
 .endfn set_dialog_size__Q23ipl12DialogWindowFRCQ34nw4r3lyt4Size
 
+# .text:0x1AC4 | 0x813462DC | size: 0x170
 # ipl::DialogWindow::call(int)
 .fn call__Q23ipl12DialogWindowFi, global
 /* 813462DC 000146DC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -2001,6 +2028,7 @@
 /* 81346448 00014848  4E 80 00 20 */	blr
 .endfn call__Q23ipl12DialogWindowFi
 
+# .text:0x1C34 | 0x8134644C | size: 0x154
 # ipl::DialogWindow::callBtn0(unsigned long, unsigned long, bool)
 .fn callBtn0__Q23ipl12DialogWindowFUlUlb, global
 /* 8134644C 0001484C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2093,6 +2121,7 @@
 /* 8134659C 0001499C  4E 80 00 20 */	blr
 .endfn callBtn0__Q23ipl12DialogWindowFUlUlb
 
+# .text:0x1D88 | 0x813465A0 | size: 0x158
 # ipl::DialogWindow::callBtn0SDRelated(unsigned long, unsigned long, bool)
 .fn callBtn0SDRelated__Q23ipl12DialogWindowFUlUlb, global
 /* 813465A0 000149A0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2186,6 +2215,7 @@
 /* 813466F4 00014AF4  4E 80 00 20 */	blr
 .endfn callBtn0SDRelated__Q23ipl12DialogWindowFUlUlb
 
+# .text:0x1EE0 | 0x813466F8 | size: 0x8C
 # ipl::DialogWindow::callBtn1(unsigned long, unsigned long)
 .fn callBtn1__Q23ipl12DialogWindowFUlUl, global
 /* 813466F8 00014AF8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2226,6 +2256,7 @@
 /* 81346780 00014B80  4E 80 00 20 */	blr
 .endfn callBtn1__Q23ipl12DialogWindowFUlUl
 
+# .text:0x1F6C | 0x81346784 | size: 0x94
 # ipl::DialogWindow::callBtn1SDRelated(unsigned long, unsigned long)
 .fn callBtn1SDRelated__Q23ipl12DialogWindowFUlUl, global
 /* 81346784 00014B84  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2268,6 +2299,7 @@
 /* 81346814 00014C14  4E 80 00 20 */	blr
 .endfn callBtn1SDRelated__Q23ipl12DialogWindowFUlUl
 
+# .text:0x2000 | 0x81346818 | size: 0x8C
 # ipl::DialogWindow::callBtn1Sml(unsigned long, unsigned long)
 .fn callBtn1Sml__Q23ipl12DialogWindowFUlUl, global
 /* 81346818 00014C18  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2308,6 +2340,7 @@
 /* 813468A0 00014CA0  4E 80 00 20 */	blr
 .endfn callBtn1Sml__Q23ipl12DialogWindowFUlUl
 
+# .text:0x208C | 0x813468A4 | size: 0x94
 # ipl::DialogWindow::callBtn1(const wchar_t*, unsigned long)
 .fn callBtn1__Q23ipl12DialogWindowFPCwUl, global
 /* 813468A4 00014CA4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2350,6 +2383,7 @@
 /* 81346934 00014D34  4E 80 00 20 */	blr
 .endfn callBtn1__Q23ipl12DialogWindowFPCwUl
 
+# .text:0x2120 | 0x81346938 | size: 0xCC
 .fn iplDialogWindow_81346938, global
 /* 81346938 00014D38  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8134693C 00014D3C  7C 08 02 A6 */	mflr r0
@@ -2405,12 +2439,14 @@
 /* 81346A00 00014E00  4E 80 00 20 */	blr
 .endfn iplDialogWindow_81346938
 
+# .text:0x21EC | 0x81346A04 | size: 0xC
 .fn iplDialogWindow_81346A04, global
 /* 81346A04 00014E04  D0 23 00 00 */	stfs f1, 0x0(r3)
 /* 81346A08 00014E08  D0 43 00 04 */	stfs f2, 0x4(r3)
 /* 81346A0C 00014E0C  4E 80 00 20 */	blr
 .endfn iplDialogWindow_81346A04
 
+# .text:0x21F8 | 0x81346A10 | size: 0xC4
 .fn iplDialogWindow_81346A10, global
 /* 81346A10 00014E10  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 81346A14 00014E14  7C 08 02 A6 */	mflr r0
@@ -2464,6 +2500,7 @@
 /* 81346AD0 00014ED0  4E 80 00 20 */	blr
 .endfn iplDialogWindow_81346A10
 
+# .text:0x22BC | 0x81346AD4 | size: 0x98
 # ipl::DialogWindow::callBtn2(unsigned long, unsigned long, unsigned long, bool)
 .fn callBtn2__Q23ipl12DialogWindowFUlUlUlb, global
 /* 81346AD4 00014ED4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2507,6 +2544,7 @@
 /* 81346B68 00014F68  4E 80 00 20 */	blr
 .endfn callBtn2__Q23ipl12DialogWindowFUlUlUlb
 
+# .text:0x2354 | 0x81346B6C | size: 0xA8
 .fn iplDialogWindow_81346B6C, global
 /* 81346B6C 00014F6C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81346B70 00014F70  7C 08 02 A6 */	mflr r0
@@ -2553,6 +2591,7 @@
 /* 81346C10 00015010  4E 80 00 20 */	blr
 .endfn iplDialogWindow_81346B6C
 
+# .text:0x23FC | 0x81346C14 | size: 0x174
 .fn iplDialogWindow_81346C14, global
 /* 81346C14 00015014  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 81346C18 00015018  7C 08 02 A6 */	mflr r0
@@ -2653,6 +2692,7 @@
 /* 81346D84 00015184  4E 80 00 20 */	blr
 .endfn iplDialogWindow_81346C14
 
+# .text:0x2570 | 0x81346D88 | size: 0xA0
 # ipl::DialogWindow::callBtn2(const wchar_t*, unsigned long, unsigned long, bool)
 .fn callBtn2__Q23ipl12DialogWindowFPCwUlUlb, global
 /* 81346D88 00015188  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2698,6 +2738,7 @@
 /* 81346E24 00015224  4E 80 00 20 */	blr
 .endfn callBtn2__Q23ipl12DialogWindowFPCwUlUlb
 
+# .text:0x2610 | 0x81346E28 | size: 0xA0
 # ipl::DialogWindow::callBtn3(unsigned long, unsigned long, unsigned long, unsigned long)
 .fn callBtn3__Q23ipl12DialogWindowFUlUlUlUl, global
 /* 81346E28 00015228  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2743,6 +2784,7 @@
 /* 81346EC4 000152C4  4E 80 00 20 */	blr
 .endfn callBtn3__Q23ipl12DialogWindowFUlUlUlUl
 
+# .text:0x26B0 | 0x81346EC8 | size: 0xC4
 # ipl::DialogWindow::callSBtn2(unsigned long, unsigned long, unsigned long, bool)
 .fn callSBtn2__Q23ipl12DialogWindowFUlUlUlb, global
 /* 81346EC8 000152C8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2797,6 +2839,7 @@
 /* 81346F88 00015388  4E 80 00 20 */	blr
 .endfn callSBtn2__Q23ipl12DialogWindowFUlUlUlb
 
+# .text:0x2774 | 0x81346F8C | size: 0xB4
 # ipl::DialogWindow::callS2Btn2(unsigned long, unsigned long, bool)
 .fn callS2Btn2__Q23ipl12DialogWindowFUlUlb, global
 /* 81346F8C 0001538C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2847,6 +2890,7 @@
 /* 8134703C 0001543C  4E 80 00 20 */	blr
 .endfn callS2Btn2__Q23ipl12DialogWindowFUlUlb
 
+# .text:0x2828 | 0x81347040 | size: 0x11C
 # ipl::DialogWindow::callBtnPrg(unsigned long)
 .fn callBtnPrg__Q23ipl12DialogWindowFUl, global
 /* 81347040 00015440  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2923,6 +2967,7 @@
 /* 81347158 00015558  4E 80 00 20 */	blr
 .endfn callBtnPrg__Q23ipl12DialogWindowFUl
 
+# .text:0x2944 | 0x8134715C | size: 0x128
 .fn iplDialogWindow_8134715C, global
 /* 8134715C 0001555C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81347160 00015560  7C 08 02 A6 */	mflr r0
@@ -3001,6 +3046,7 @@
 /* 81347280 00015680  4E 80 00 20 */	blr
 .endfn iplDialogWindow_8134715C
 
+# .text:0x2A6C | 0x81347284 | size: 0x174
 # ipl::DialogWindow::start_point_event(const char*, ipl::controller::Interface*)
 .fn start_point_event__Q23ipl12DialogWindowFPCcPQ33ipl10controller9Interface, global
 /* 81347284 00015684  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -3110,6 +3156,7 @@
 /* 813473F4 000157F4  4E 80 00 20 */	blr
 .endfn start_point_event__Q23ipl12DialogWindowFPCcPQ33ipl10controller9Interface
 
+# .text:0x2BE0 | 0x813473F8 | size: 0x144
 # ipl::DialogWindow::start_left_event(const char*)
 .fn start_left_event__Q23ipl12DialogWindowFPCc, global
 /* 813473F8 000157F8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -3206,6 +3253,7 @@
 /* 81347538 00015938  4E 80 00 20 */	blr
 .endfn start_left_event__Q23ipl12DialogWindowFPCc
 
+# .text:0x2D24 | 0x8134753C | size: 0x264
 # ipl::DialogWindow::start_trig_event(const char*)
 .fn start_trig_event__Q23ipl12DialogWindowFPCc, global
 /* 8134753C 0001593C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -3380,6 +3428,7 @@
 /* 8134779C 00015B9C  4E 80 00 20 */	blr
 .endfn start_trig_event__Q23ipl12DialogWindowFPCc
 
+# .text:0x2F88 | 0x813477A0 | size: 0x78
 # ipl::DialogWindow::get_button_no(const char*)
 .fn get_button_no__Q23ipl12DialogWindowFPCc, global
 /* 813477A0 00015BA0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -3417,6 +3466,7 @@
 /* 81347814 00015C14  4E 80 00 20 */	blr
 .endfn get_button_no__Q23ipl12DialogWindowFPCc
 
+# .text:0x3000 | 0x81347818 | size: 0xE4
 # ipl::DialogWindow::onEvent(unsigned long, unsigned long, void*)
 .fn onEvent__Q23ipl12DialogWindowFUlUlPv, global
 /* 81347818 00015C18  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -3483,12 +3533,14 @@
 /* 813478F8 00015CF8  4E 80 00 20 */	blr
 .endfn onEvent__Q23ipl12DialogWindowFUlUlPv
 
+# .text:0x30E4 | 0x813478FC | size: 0x8
 # gui::PaneComponent::getPane()
 .fn getPane__Q23gui13PaneComponentFv, global
 /* 813478FC 00015CFC  80 63 00 94 */	lwz r3, 0x94(r3)
 /* 81347900 00015D00  4E 80 00 20 */	blr
 .endfn getPane__Q23gui13PaneComponentFv
 
+# .text:0x30EC | 0x81347904 | size: 0x24
 # ipl::DialogWindow::terminate()
 .fn terminate__Q23ipl12DialogWindowFv, global
 /* 81347904 00015D04  80 03 00 78 */	lwz r0, 0x78(r3)
@@ -3503,16 +3555,19 @@
 /* 81347924 00015D24  4E 80 00 20 */	blr
 .endfn terminate__Q23ipl12DialogWindowFv
 
+# .text:0x3110 | 0x81347928 | size: 0x4
 # gui::Interface::draw(float(&)[3][4])
 .fn draw__Q23gui9InterfaceFRA3_A4_f, global
 /* 81347928 00015D28  4E 80 00 20 */	blr
 .endfn draw__Q23gui9InterfaceFRA3_A4_f
 
+# .text:0x3114 | 0x8134792C | size: 0x4
 # gui::Interface::create()
 .fn create__Q23gui9InterfaceFv, global
 /* 8134792C 00015D2C  4E 80 00 20 */	blr
 .endfn create__Q23gui9InterfaceFv
 
+# .text:0x3118 | 0x81347930 | size: 0x54
 # gui::Manager::changeEventHandler(gui::EventHandler*)
 .fn changeEventHandler__Q23gui7ManagerFPQ23gui12EventHandler, global
 /* 81347930 00015D30  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -3539,6 +3594,7 @@
 /* 81347980 00015D80  4E 80 00 20 */	blr
 .endfn changeEventHandler__Q23gui7ManagerFPQ23gui12EventHandler
 
+# .text:0x316C | 0x81347984 | size: 0x80
 # gui::Manager::onEvent(unsigned long, unsigned long, int, void*)
 .fn onEvent__Q23gui7ManagerFUlUliPv, global
 /* 81347984 00015D84  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -3576,35 +3632,41 @@
 /* 81347A00 00015E00  4E 80 00 20 */	blr
 .endfn onEvent__Q23gui7ManagerFUlUliPv
 
+# .text:0x31EC | 0x81347A04 | size: 0x8
 # gui::EventHandler::setLatestEventCtrlNo(int)
 .fn setLatestEventCtrlNo__Q23gui12EventHandlerFi, global
 /* 81347A04 00015E04  90 83 00 08 */	stw r4, 0x8(r3)
 /* 81347A08 00015E08  4E 80 00 20 */	blr
 .endfn setLatestEventCtrlNo__Q23gui12EventHandlerFi
 
+# .text:0x31F4 | 0x81347A0C | size: 0x4
 # gui::EventHandler::onEvent(unsigned long, unsigned long, void*)
 .fn onEvent__Q23gui12EventHandlerFUlUlPv, global
 /* 81347A0C 00015E0C  4E 80 00 20 */	blr
 .endfn onEvent__Q23gui12EventHandlerFUlUlPv
 
+# .text:0x31F8 | 0x81347A10 | size: 0x8
 # gui::Manager::update(int, const KPADStatus*, float, float, void*)
 .fn update__Q23gui7ManagerFiPC10KPADStatusffPv, global
 /* 81347A10 00015E10  38 60 00 00 */	li r3, 0x0
 /* 81347A14 00015E14  4E 80 00 20 */	blr
 .endfn update__Q23gui7ManagerFiPC10KPADStatusffPv
 
+# .text:0x3200 | 0x81347A18 | size: 0x8
 # gui::PaneManager::setDrawInfo(const nw4r::lyt::DrawInfo*)
 .fn setDrawInfo__Q23gui11PaneManagerFPCQ34nw4r3lyt8DrawInfo, global
 /* 81347A18 00015E18  90 83 00 24 */	stw r4, 0x24(r3)
 /* 81347A1C 00015E1C  4E 80 00 20 */	blr
 .endfn setDrawInfo__Q23gui11PaneManagerFPCQ34nw4r3lyt8DrawInfo
 
+# .text:0x3208 | 0x81347A20 | size: 0x8
 # gui::PaneManager::getDrawInfo()
 .fn getDrawInfo__Q23gui11PaneManagerFv, global
 /* 81347A20 00015E20  80 63 00 24 */	lwz r3, 0x24(r3)
 /* 81347A24 00015E24  4E 80 00 20 */	blr
 .endfn getDrawInfo__Q23gui11PaneManagerFv
 
+# .text:0x3210 | 0x81347A28 | size: 0x58
 # ipl::gui::PaneManager::~PaneManager()
 .fn __dt__Q33ipl3gui11PaneManagerFv, global
 /* 81347A28 00015E28  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -3632,27 +3694,32 @@
 /* 81347A7C 00015E7C  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl3gui11PaneManagerFv
 
+# .text:0x3268 | 0x81347A80 | size: 0x8
 # gui::EventHandler::getLatestEventCtrlNo()
 .fn getLatestEventCtrlNo__Q23gui12EventHandlerFv, global
 /* 81347A80 00015E80  80 63 00 08 */	lwz r3, 0x8(r3)
 /* 81347A84 00015E84  4E 80 00 20 */	blr
 .endfn getLatestEventCtrlNo__Q23gui12EventHandlerFv
 
+# .text:0x3270 | 0x81347A88 | size: 0x4
 # gui::Interface::draw()
 .fn draw__Q23gui9InterfaceFv, global
 /* 81347A88 00015E88  4E 80 00 20 */	blr
 .endfn draw__Q23gui9InterfaceFv
 
+# .text:0x3274 | 0x81347A8C | size: 0x4
 # gui::Interface::calc()
 .fn calc__Q23gui9InterfaceFv, global
 /* 81347A8C 00015E8C  4E 80 00 20 */	blr
 .endfn calc__Q23gui9InterfaceFv
 
+# .text:0x3278 | 0x81347A90 | size: 0x4
 # gui::Interface::init()
 .fn init__Q23gui9InterfaceFv, global
 /* 81347A90 00015E90  4E 80 00 20 */	blr
 .endfn init__Q23gui9InterfaceFv
 
+# .text:0x327C | 0x81347A94 | size: 0x3C
 .fn iplPaneMgr_81347A94, global
 /* 81347A94 00015E94  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81347A98 00015E98  7C 08 02 A6 */	mflr r0
@@ -3671,6 +3738,7 @@
 /* 81347ACC 00015ECC  4E 80 00 20 */	blr
 .endfn iplPaneMgr_81347A94
 
+# .text:0x32B8 | 0x81347AD0 | size: 0x9C
 .fn iplPaneMgr_81347AD0, global
 /* 81347AD0 00015ED0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81347AD4 00015ED4  7C 08 02 A6 */	mflr r0
@@ -3720,15 +3788,16 @@
 /* 81347B68 00015F68  4E 80 00 20 */	blr
 .endfn iplPaneMgr_81347AD0
 
-# 0x8160D1CC - 0x8160D1D0
+# 0x8160D1CC..0x8160D1D0 | size: 0x4
 .section .ctors, "a"
 .balign 4
 	.4byte iplPaneMgr_81347A94
 
-# 0x81635510 - 0x81635A70
+# 0x81635510..0x81635A70 | size: 0x560
 .data
 .balign 8
 
+# .data:0x0 | 0x81635510 | size: 0x42A
 .obj lbl_81635510, global
 	.4byte lbl_81696130
 	.4byte lbl_81696137
@@ -3999,38 +4068,47 @@
 	.2byte 0x6E00
 .endobj lbl_81635510
 
+# .data:0x42A | 0x8163593A | size: 0x14
 .obj lbl_8163593A, global
 	.string "WIPL_SE_COPY_FINISH"
 .endobj lbl_8163593A
 
+# .data:0x43E | 0x8163594E | size: 0x9
 .obj lbl_8163594E, global
 	.string "T_Dialog"
 .endobj lbl_8163594E
 
+# .data:0x447 | 0x81635957 | size: 0xB
 .obj lbl_81635957, global
 	.string "N_BtnA_Pic"
 .endobj lbl_81635957
 
+# .data:0x452 | 0x81635962 | size: 0x9
 .obj lbl_81635962, global
 	.string "N_Dialog"
 .endobj lbl_81635962
 
+# .data:0x45B | 0x8163596B | size: 0x10
 .obj lbl_8163596B, global
 	.string "WIPL_SE_COPYING"
 .endobj lbl_8163596B
 
+# .data:0x46B | 0x8163597B | size: 0x14
 .obj lbl_8163597B, global
 	.string "WIPL_SE_INFO_WINDOW"
 .endobj lbl_8163597B
 
+# .data:0x47F | 0x8163598F | size: 0x16
 .obj lbl_8163598F, global
 	.string "WIPL_SE_BT_TARGETTING"
 .endobj lbl_8163598F
 
+# .data:0x495 | 0x816359A5 | size: 0xF
 .obj lbl_816359A5, global
 	.string "WIPL_SE_DECIDE"
 .endobj lbl_816359A5
 
+# .data:0x4A4 | 0x816359B4 | size: 0x10
 .obj lbl_816359B4, global
 	.4byte 0x5749504C
 	.4byte 0x5F53455F
@@ -4038,6 +4116,7 @@
 	.4byte 0x454C0000
 .endobj lbl_816359B4
 
+# .data:0x4B4 | 0x816359C4 | size: 0x5C
 .obj lbl_816359C4, global
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -4064,6 +4143,7 @@
 	.4byte "walkInChildren__Q23gui11PaneManagerFRQ34nw4r2ut28LinkList<Q34nw4r3lyt4Pane,4>"
 .endobj lbl_816359C4
 
+# .data:0x510 | 0x81635A20 | size: 0x50
 .obj lbl_81635A20, global
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -4087,128 +4167,156 @@
 	.4byte __dt__Q23gui9InterfaceFv
 .endobj lbl_81635A20
 
-# 0x81694510 - 0x81694540
+# 0x81694510..0x81694540 | size: 0x30
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x81694510 | size: 0x8
 .obj lbl_81694510, global
 	.double 4503601774854144
 .endobj lbl_81694510
 
+# .sdata2:0x8 | 0x81694518 | size: 0x4
 .obj lbl_81694518, global
 	.float 255
 .endobj lbl_81694518
 
+# .sdata2:0xC | 0x8169451C | size: 0x4
 .obj lbl_8169451C, global
 	.float 0
 .endobj lbl_8169451C
 
+# .sdata2:0x10 | 0x81694520 | size: 0x4
 .obj lbl_81694520, global
 	.float 34
 .endobj lbl_81694520
 
+# .sdata2:0x14 | 0x81694524 | size: 0x4
 .obj lbl_81694524, global
 	.float 100
 .endobj lbl_81694524
 
+# .sdata2:0x18 | 0x81694528 | size: 0x4
 .obj lbl_81694528, global
 	.float 37
 .endobj lbl_81694528
 
+# .sdata2:0x1C | 0x8169452C | size: 0x4
 .obj lbl_8169452C, global
 	.float 27.2
 .endobj lbl_8169452C
 
+# .sdata2:0x20 | 0x81694530 | size: 0x4
 .obj lbl_81694530, global
 	.float 31.45
 .endobj lbl_81694530
 
+# .sdata2:0x24 | 0x81694534 | size: 0x4
 .obj lbl_81694534, global
 	.float 22.1
 .endobj lbl_81694534
 
+# .sdata2:0x28 | 0x81694538 | size: 0x8
 .obj lbl_81694538, global
 	.float 25.9
 	.float 0
 .endobj lbl_81694538
 
-# 0x81696130 - 0x81696198
+# 0x81696130..0x81696198 | size: 0x68
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x81696130 | size: 0x7
 .obj lbl_81696130, global
 	.string "B_BtnB"
 .endobj lbl_81696130
 
+# .sdata:0x7 | 0x81696137 | size: 0x7
 .obj lbl_81696137, global
 	.string "B_BtnA"
 .endobj lbl_81696137
 
+# .sdata:0xE | 0x8169613E | size: 0x7
 .obj lbl_8169613E, global
 	.string "B_BtnC"
 .endobj lbl_8169613E
 
+# .sdata:0x15 | 0x81696145 | size: 0x4
 .obj lbl_81696145, global
 	.string "arc"
 .endobj lbl_81696145
 
+# .sdata:0x19 | 0x81696149 | size: 0x8
 .obj lbl_81696149, global
 	.string "G_InOut"
 .endobj lbl_81696149
 
+# .sdata:0x21 | 0x81696151 | size: 0x7
 .obj lbl_81696151, global
 	.string "G_Wait"
 .endobj lbl_81696151
 
+# .sdata:0x28 | 0x81696158 | size: 0x7
 .obj lbl_81696158, global
 	.string "G_Prog"
 .endobj lbl_81696158
 
+# .sdata:0x2F | 0x8169615F | size: 0x8
 .obj lbl_8169615F, global
 	.string "Wait_00"
 .endobj lbl_8169615F
 
+# .sdata:0x37 | 0x81696167 | size: 0x7
 .obj lbl_81696167, global
 	.string "N_Prog"
 .endobj lbl_81696167
 
+# .sdata:0x3E | 0x8169616E | size: 0x7
 .obj lbl_8169616E, global
 	.string "N_BtnA"
 .endobj lbl_8169616E
 
+# .sdata:0x45 | 0x81696175 | size: 0x7
 .obj lbl_81696175, global
 	.string "T_BtnA"
 .endobj lbl_81696175
 
+# .sdata:0x4C | 0x8169617C | size: 0x7
 .obj lbl_8169617C, global
 	.string "T_BtnB"
 .endobj lbl_8169617C
 
+# .sdata:0x53 | 0x81696183 | size: 0x7
 .obj lbl_81696183, global
 	.string "T_BtnC"
 .endobj lbl_81696183
 
+# .sdata:0x5A | 0x8169618A | size: 0x6
 .obj lbl_8169618A, global
 	.string "Shade"
 .endobj lbl_8169618A
 
+# .sdata:0x60 | 0x81696190 | size: 0x8
 .obj lbl_81696190, global
 	.4byte 0x4E5F546F
 	.4byte 0x70000000
 .endobj lbl_81696190
 
-# 0x816986C0 - 0x816986D8
+# 0x816986C0..0x816986D8 | size: 0x18
 .section .sbss, "wa", @nobits
 .balign 8
 
+# .sbss:0x0 | 0x816986C0 | size: 0x8
 .obj lbl_816986C0, global
 	.skip 0x8
 .endobj lbl_816986C0
 
+# .sbss:0x8 | 0x816986C8 | size: 0x8
 .obj lbl_816986C8, global
 	.skip 0x8
 .endobj lbl_816986C8
 
+# .sbss:0x10 | 0x816986D0 | size: 0x8
 .obj lbl_816986D0, global
 	.skip 0x8
 .endobj lbl_816986D0

@@ -1,19 +1,21 @@
 .include "macros.inc"
 .file "iplPlayTimeLog.cpp"
 
-# 0x81089550 - 0x81089620
+# 0x81089550..0x81089620 | size: 0xD0
 .section .bss, "wa", @nobits
 .balign 8
 
+# .bss:0x0 | 0x81089550 | size: 0xD0
 # ipl::PlayTimeLog::smArg
 .obj smArg__Q23ipl11PlayTimeLog, global
 	.skip 0xD0
 .endobj smArg__Q23ipl11PlayTimeLog
 
-# 0x81340688 - 0x8134197C
+# 0x81340688..0x8134197C | size: 0x12F4
 .text
 .balign 4
 
+# .text:0x0 | 0x81340688 | size: 0x44
 # ipl::PlayTimeLog::PlayTimeLog()
 .fn __ct__Q23ipl11PlayTimeLogFv, global
 /* 81340688 0000EA88  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -35,6 +37,7 @@
 /* 813406C8 0000EAC8  4E 80 00 20 */	blr
 .endfn __ct__Q23ipl11PlayTimeLogFv
 
+# .text:0x44 | 0x813406CC | size: 0x210
 # ipl::PlayTimeLog::log()
 .fn log__Q23ipl11PlayTimeLogFv, global
 /* 813406CC 0000EACC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -180,6 +183,7 @@
 /* 813408D8 0000ECD8  4E 80 00 20 */	blr
 .endfn log__Q23ipl11PlayTimeLogFv
 
+# .text:0x254 | 0x813408DC | size: 0x160
 # ipl::PlayTimeLog::sendMsgLog(const wchar_t*)
 .fn sendMsgLog__Q23ipl11PlayTimeLogFPCw, global
 /* 813408DC 0000ECDC  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -275,6 +279,7 @@
 /* 81340A38 0000EE38  4E 80 00 20 */	blr
 .endfn sendMsgLog__Q23ipl11PlayTimeLogFPCw
 
+# .text:0x3B4 | 0x81340A3C | size: 0xDC
 # ipl::PlayTimeLog::check(_CDBRecord*)
 .fn check__Q23ipl11PlayTimeLogFP10_CDBRecord, global
 /* 81340A3C 0000EE3C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -338,6 +343,7 @@
 /* 81340B14 0000EF14  4E 80 00 20 */	blr
 .endfn check__Q23ipl11PlayTimeLogFP10_CDBRecord
 
+# .text:0x490 | 0x81340B18 | size: 0x104
 # ipl::PlayTimeLog::set_time_str(wchar_t*, unsigned long)
 .fn set_time_str__Q23ipl11PlayTimeLogFPwUl, global
 /* 81340B18 0000EF18  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -407,6 +413,7 @@
 /* 81340C18 0000F018  4E 80 00 20 */	blr
 .endfn set_time_str__Q23ipl11PlayTimeLogFPwUl
 
+# .text:0x594 | 0x81340C1C | size: 0xE0
 # ipl::PlayTimeLog::set_num_str(wchar_t*, unsigned long)
 .fn set_num_str__Q23ipl11PlayTimeLogFPwUl, global
 /* 81340C1C 0000F01C  38 00 03 E8 */	li r0, 0x3e8
@@ -470,6 +477,7 @@
 /* 81340CF8 0000F0F8  4E 80 00 20 */	blr
 .endfn set_num_str__Q23ipl11PlayTimeLogFPwUl
 
+# .text:0x674 | 0x81340CFC | size: 0xF0
 # ipl::PlayTimeLog::create_text(const ipl::EventBuffer*)
 .fn create_text__Q23ipl11PlayTimeLogFPCQ23ipl11EventBuffer, global
 /* 81340CFC 0000F0FC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -538,6 +546,7 @@
 /* 81340DE8 0000F1E8  4E 80 00 20 */	blr
 .endfn create_text__Q23ipl11PlayTimeLogFPCQ23ipl11EventBuffer
 
+# .text:0x764 | 0x81340DEC | size: 0x308
 # ipl::PlayTimeLog::create_playlog_text(const ipl::LogBuffer*, wchar_t*, int)
 .fn create_playlog_text__Q23ipl11PlayTimeLogFPCQ23ipl9LogBufferPwi, global
 /* 81340DEC 0000F1EC  94 21 FF 80 */	stwu r1, -0x80(r1)
@@ -743,6 +752,7 @@
 /* 813410F0 0000F4F0  4E 80 00 20 */	blr
 .endfn create_playlog_text__Q23ipl11PlayTimeLogFPCQ23ipl9LogBufferPwi
 
+# .text:0xA6C | 0x813410F4 | size: 0x208
 # ipl::PlayTimeLog::create_sendmsg_text(const ipl::SendMsgBuffer*, wchar_t*, int)
 .fn create_sendmsg_text__Q23ipl11PlayTimeLogFPCQ23ipl13SendMsgBufferPwi, global
 /* 813410F4 0000F4F4  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -882,6 +892,7 @@
 /* 813412F8 0000F6F8  4E 80 00 20 */	blr
 .endfn create_sendmsg_text__Q23ipl11PlayTimeLogFPCQ23ipl13SendMsgBufferPwi
 
+# .text:0xC74 | 0x813412FC | size: 0x84
 # ipl::PlayTimeLog::create_new_playlog(const OSPlayRecord*)
 .fn create_new_playlog__Q23ipl11PlayTimeLogFPC12OSPlayRecord, global
 /* 813412FC 0000F6FC  94 21 F9 80 */	stwu r1, -0x680(r1)
@@ -919,6 +930,7 @@
 /* 8134137C 0000F77C  4E 80 00 20 */	blr
 .endfn create_new_playlog__Q23ipl11PlayTimeLogFPC12OSPlayRecord
 
+# .text:0xCF8 | 0x81341380 | size: 0x94
 # ipl::PlayTimeLog::create_new_sendmsglog(const wchar_t*)
 .fn create_new_sendmsglog__Q23ipl11PlayTimeLogFPCw, global
 /* 81341380 0000F780  94 21 F9 80 */	stwu r1, -0x680(r1)
@@ -960,6 +972,7 @@
 /* 81341410 0000F810  4E 80 00 20 */	blr
 .endfn create_new_sendmsglog__Q23ipl11PlayTimeLogFPCw
 
+# .text:0xD8C | 0x81341414 | size: 0x13C
 # ipl::PlayTimeLog::create_new_record(const ipl::EventBuffer*)
 .fn create_new_record__Q23ipl11PlayTimeLogFPCQ23ipl11EventBuffer, global
 /* 81341414 0000F814  94 21 FE 90 */	stwu r1, -0x170(r1)
@@ -1045,6 +1058,7 @@
 /* 8134154C 0000F94C  4E 80 00 20 */	blr
 .endfn create_new_record__Q23ipl11PlayTimeLogFPCQ23ipl11EventBuffer
 
+# .text:0xEC8 | 0x81341550 | size: 0x11C
 # ipl::PlayTimeLog::add_playlog(const OSPlayRecord*, _CDBRecord*)
 .fn add_playlog__Q23ipl11PlayTimeLogFPC12OSPlayRecordP10_CDBRecord, global
 /* 81341550 0000F950  94 21 F9 70 */	stwu r1, -0x690(r1)
@@ -1125,6 +1139,7 @@
 /* 81341668 0000FA68  4E 80 00 20 */	blr
 .endfn add_playlog__Q23ipl11PlayTimeLogFPC12OSPlayRecordP10_CDBRecord
 
+# .text:0xFE4 | 0x8134166C | size: 0x10C
 # ipl::PlayTimeLog::add_sendmsglog(const wchar_t*, _CDBRecord*)
 .fn add_sendmsglog__Q23ipl11PlayTimeLogFPCwP10_CDBRecord, global
 /* 8134166C 0000FA6C  94 21 F9 70 */	stwu r1, -0x690(r1)
@@ -1201,6 +1216,7 @@
 /* 81341774 0000FB74  4E 80 00 20 */	blr
 .endfn add_sendmsglog__Q23ipl11PlayTimeLogFPCwP10_CDBRecord
 
+# .text:0x10F0 | 0x81341778 | size: 0xE0
 # ipl::PlayTimeLog::read_record(_CDBRecord*, ipl::EventBuffer*)
 .fn read_record__Q23ipl11PlayTimeLogFP10_CDBRecordPQ23ipl11EventBuffer, global
 /* 81341778 0000FB78  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1265,6 +1281,7 @@
 /* 81341854 0000FC54  4E 80 00 20 */	blr
 .endfn read_record__Q23ipl11PlayTimeLogFP10_CDBRecordPQ23ipl11EventBuffer
 
+# .text:0x11D0 | 0x81341858 | size: 0x118
 # ipl::PlayTimeLog::write_record(_CDBRecord*, ipl::EventBuffer*, unsigned char*)
 .fn write_record__Q23ipl11PlayTimeLogFP10_CDBRecordPQ23ipl11EventBufferPUc, global
 /* 81341858 0000FC58  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -1341,6 +1358,7 @@
 /* 8134196C 0000FD6C  4E 80 00 20 */	blr
 .endfn write_record__Q23ipl11PlayTimeLogFP10_CDBRecordPQ23ipl11EventBufferPUc
 
+# .text:0x12E8 | 0x81341970 | size: 0xC
 # ipl::PlayTimeLog::createInstance()
 .fn createInstance__Q23ipl11PlayTimeLogFv, global
 /* 81341970 0000FD70  3C 60 81 09 */	lis r3, smArg__Q23ipl11PlayTimeLog@ha
@@ -1348,15 +1366,16 @@
 /* 81341978 0000FD78  4B FF ED 10 */	b __ct__Q23ipl11PlayTimeLogFv
 .endfn createInstance__Q23ipl11PlayTimeLogFv
 
-# 0x8160D1C8 - 0x8160D1CC
+# 0x8160D1C8..0x8160D1CC | size: 0x4
 .section .ctors, "a"
 .balign 4
 	.4byte createInstance__Q23ipl11PlayTimeLogFv
 
-# 0x8160D620 - 0x8160D638
+# 0x8160D620..0x8160D638 | size: 0x18
 .rodata
 .balign 8
 
+# .rodata:0x0 | 0x8160D620 | size: 0x18
 .obj lbl_8160D620, global
 	.4byte 0x00300031
 	.4byte 0x00320033
@@ -1366,22 +1385,26 @@
 	.4byte 0x00000000
 .endobj lbl_8160D620
 
-# 0x816351C0 - 0x81635218
+# 0x816351C0..0x81635218 | size: 0x58
 .data
 .balign 8
 
+# .data:0x0 | 0x816351C0 | size: 0xD
 .obj lbl_816351C0, global
 	.string "play_rec.dat"
 .endobj lbl_816351C0
 
+# .data:0xD | 0x816351CD | size: 0x13
 .obj lbl_816351CD, global
 	.string "iplPlayTimeLog.cpp"
 .endobj lbl_816351CD
 
+# .data:0x20 | 0x816351E0 | size: 0xE
 .obj lbl_816351E0, global
 	.string16 "\n     "
 .endobj lbl_816351E0
 
+# .data:0x2E | 0x816351EE | size: 0x18
 .obj lbl_816351EE, global
 	.4byte 0x26060020
 	.4byte 0x26060020
@@ -1391,6 +1414,7 @@
 	.4byte 0x000A0000
 .endobj lbl_816351EE
 
+# .data:0x46 | 0x81635206 | size: 0x12
 .obj lbl_81635206, global
 	.4byte 0x706C6179
 	.4byte 0x74696D65
@@ -1399,64 +1423,77 @@
 	.2byte 0x0000
 .endobj lbl_81635206
 
-# 0x816944A0 - 0x816944C8
+# 0x816944A0..0x816944C8 | size: 0x28
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x816944A0 | size: 0x4
 .obj lbl_816944A0, global
 	.4byte 0x00000668
 .endobj lbl_816944A0
 
+# .sdata2:0x4 | 0x816944A4 | size: 0x4
 .obj lbl_816944A4, global
 	.4byte 0x00000000
 .endobj lbl_816944A4
 
+# .sdata2:0x8 | 0x816944A8 | size: 0x4
 .obj lbl_816944A8, global
 	.4byte 0x00000003
 .endobj lbl_816944A8
 
+# .sdata2:0xC | 0x816944AC | size: 0x4
 .obj lbl_816944AC, global
 	.4byte 0x00000000
 .endobj lbl_816944AC
 
+# .sdata2:0x10 | 0x816944B0 | size: 0x4
 .obj lbl_816944B0, global
 	.float 0
 .endobj lbl_816944B0
 
+# .sdata2:0x14 | 0x816944B4 | size: 0x4
 .obj lbl_816944B4, global
 	.4byte 0x00000668
 .endobj lbl_816944B4
 
+# .sdata2:0x18 | 0x816944B8 | size: 0x4
 .obj lbl_816944B8, global
 	.4byte 0x00000000
 .endobj lbl_816944B8
 
+# .sdata2:0x1C | 0x816944BC | size: 0x4
 .obj lbl_816944BC, global
 	.4byte 0x00000003
 .endobj lbl_816944BC
 
+# .sdata2:0x20 | 0x816944C0 | size: 0x8
 .obj lbl_816944C0, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 .endobj lbl_816944C0
 
-# 0x816960D8 - 0x816960F0
+# 0x816960D8..0x816960F0 | size: 0x18
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x816960D8 | size: 0x6
 .obj lbl_816960D8, global
 	.4byte 0x4E414E44
 	.2byte 0x0000
 .endobj lbl_816960D8
 
+# .sdata:0x6 | 0x816960DE | size: 0x6
 .obj lbl_816960DE, global
 	.string16 "\n\n"
 .endobj lbl_816960DE
 
+# .sdata:0xC | 0x816960E4 | size: 0x4
 .obj lbl_816960E4, global
 	.string16 "\n"
 .endobj lbl_816960E4
 
+# .sdata:0x10 | 0x816960E8 | size: 0x8
 .obj lbl_816960E8, global
 	.4byte 0x00200000
 	.4byte 0x00000000

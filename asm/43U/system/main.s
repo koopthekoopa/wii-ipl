@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "main.cpp"
 
-# 0x81360764 - 0x813607A0
+# 0x81360764..0x813607A0 | size: 0x3C
 .text
 .balign 4
 
+# .text:0x0 | 0x81360764 | size: 0x2C
 .fn mainmenu, global
 /* 81360764 0002EB64  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81360768 0002EB68  7C 08 02 A6 */	mflr r0
@@ -19,6 +20,7 @@
 /* 8136078C 0002EB8C  4E 80 00 20 */	blr
 .endfn mainmenu
 
+# .text:0x2C | 0x81360790 | size: 0x10
 .fn NANDCheck, global
 /* 81360790 0002EB90  38 00 00 00 */	li r0, 0x0
 /* 81360794 0002EB94  38 60 00 00 */	li r3, 0x0

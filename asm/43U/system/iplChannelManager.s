@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplChannelManager.cpp"
 
-# 0x81337978 - 0x8133AA80
+# 0x81337978..0x8133AA80 | size: 0x3108
 .text
 .balign 4
 
+# .text:0x0 | 0x81337978 | size: 0x154
 # ipl::channel::Manager::Manager(EGG::Heap*)
 .fn __ct__Q33ipl7channel7ManagerFPQ23EGG4Heap, global
 /* 81337978 00005D78  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -96,6 +97,7 @@
 /* 81337AC8 00005EC8  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl7channel7ManagerFPQ23EGG4Heap
 
+# .text:0x154 | 0x81337ACC | size: 0xF0
 # ipl::channel::Manager::~Manager()
 .fn __dt__Q33ipl7channel7ManagerFv, global
 /* 81337ACC 00005ECC  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -164,6 +166,7 @@
 /* 81337BB8 00005FB8  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl7channel7ManagerFv
 
+# .text:0x244 | 0x81337BBC | size: 0x20
 # ipl::channel::Manager::initManager()
 .fn initManager__Q33ipl7channel7ManagerFv, global
 /* 81337BBC 00005FBC  3C C0 81 09 */	lis r6, smArg__Q23ipl6System@ha
@@ -176,6 +179,7 @@
 /* 81337BD8 00005FD8  48 2C 06 70 */	b fn_815F8248
 .endfn initManager__Q33ipl7channel7ManagerFv
 
+# .text:0x264 | 0x81337BDC | size: 0x70
 # ipl::channel::Manager::update()
 .fn update__Q33ipl7channel7ManagerFv, global
 /* 81337BDC 00005FDC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -212,6 +216,7 @@
 /* 81337C48 00006048  4E 80 00 20 */	blr
 .endfn update__Q33ipl7channel7ManagerFv
 
+# .text:0x2D4 | 0x81337C4C | size: 0x18
 # ipl::channel::Manager::reserveRefresh()
 .fn reserveRefresh__Q33ipl7channel7ManagerFv, global
 /* 81337C4C 0000604C  80 0D A6 50 */	lwz r0, lbl_81698690@sda21(r0)
@@ -222,6 +227,7 @@
 /* 81337C60 00006060  4E 80 00 20 */	blr
 .endfn reserveRefresh__Q33ipl7channel7ManagerFv
 
+# .text:0x2EC | 0x81337C64 | size: 0xB8
 # ipl::channel::Manager::refreshAsync()
 .fn refreshAsync__Q33ipl7channel7ManagerFv, global
 /* 81337C64 00006064  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -275,6 +281,7 @@
 /* 81337D18 00006118  4E 80 00 20 */	blr
 .endfn refreshAsync__Q33ipl7channel7ManagerFv
 
+# .text:0x3A4 | 0x81337D1C | size: 0x14
 # ipl::channel::Manager::isInitialized() const
 .fn isInitialized__Q33ipl7channel7ManagerCFv, global
 /* 81337D1C 0000611C  3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
@@ -284,6 +291,7 @@
 /* 81337D2C 0000612C  48 00 00 04 */	b isLoadedPage__Q33ipl7channel7ManagerCFi
 .endfn isInitialized__Q33ipl7channel7ManagerCFv
 
+# .text:0x3B8 | 0x81337D30 | size: 0x110
 # ipl::channel::Manager::isLoadedPage(int) const
 .fn isLoadedPage__Q33ipl7channel7ManagerCFi, global
 /* 81337D30 00006130  1C C4 05 40 */	mulli r6, r4, 0x540
@@ -365,6 +373,7 @@
 /* 81337E3C 0000623C  4E 80 00 20 */	blr
 .endfn isLoadedPage__Q33ipl7channel7ManagerCFi
 
+# .text:0x4C8 | 0x81337E40 | size: 0x24
 # ipl::channel::Manager::isLoaded(int, int) const
 .fn isLoaded__Q33ipl7channel7ManagerCFii, global
 /* 81337E40 00006240  1C 84 05 40 */	mulli r4, r4, 0x540
@@ -378,6 +387,7 @@
 /* 81337E60 00006260  4E 80 00 20 */	blr
 .endfn isLoaded__Q33ipl7channel7ManagerCFii
 
+# .text:0x4EC | 0x81337E64 | size: 0x14
 .fn iplChannelManager_81337E64, global
 /* 81337E64 00006264  80 63 15 58 */	lwz r3, 0x1558(r3)
 /* 81337E68 00006268  38 03 FF FE */	subi r0, r3, 0x2
@@ -386,6 +396,7 @@
 /* 81337E74 00006274  4E 80 00 20 */	blr
 .endfn iplChannelManager_81337E64
 
+# .text:0x500 | 0x81337E78 | size: 0x128
 # ipl::channel::Manager::hasChannel(unsigned long long, int*, int*) const
 .fn hasChannel__Q33ipl7channel7ManagerCFUxPiPi, global
 /* 81337E78 00006278  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -473,6 +484,7 @@
 /* 81337F9C 0000639C  4E 80 00 20 */	blr
 .endfn hasChannel__Q33ipl7channel7ManagerCFUxPiPi
 
+# .text:0x628 | 0x81337FA0 | size: 0xA0
 # ipl::channel::Manager::isEnableUrlJump()
 .fn isEnableUrlJump__Q33ipl7channel7ManagerFv, global
 /* 81337FA0 000063A0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -519,6 +531,7 @@
 /* 8133803C 0000643C  4E 80 00 20 */	blr
 .endfn isEnableUrlJump__Q33ipl7channel7ManagerFv
 
+# .text:0x6C8 | 0x81338040 | size: 0x60
 # ipl::channel::Manager::setupUrlJump(const char*)
 .fn setupUrlJump__Q33ipl7channel7ManagerFPCc, global
 /* 81338040 00006440  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -549,6 +562,7 @@
 /* 8133809C 0000649C  4E 80 00 20 */	blr
 .endfn setupUrlJump__Q33ipl7channel7ManagerFPCc
 
+# .text:0x728 | 0x813380A0 | size: 0xA8
 # ipl::channel::Manager::setupChannelJump(unsigned long long, const char*)
 .fn setupChannelJump__Q33ipl7channel7ManagerFUxPCc, global
 /* 813380A0 000064A0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -579,7 +593,7 @@
 /* 81338100 00006500  7F E4 FB 78 */	mr r4, r31
 /* 81338104 00006504  38 7E 1B A0 */	addi r3, r30, 0x1ba0
 /* 81338108 00006508  38 A0 02 00 */	li r5, 0x200
-/* 8133810C 0000650C  48 2C A2 B9 */	bl fn_816023C4
+/* 8133810C 0000650C  48 2C A2 B9 */	bl strncpy
 /* 81338110 00006510  38 60 00 00 */	li r3, 0x0
 /* 81338114 00006514  38 00 00 01 */	li r0, 0x1
 /* 81338118 00006518  98 7E 1D 9F */	stb r3, 0x1d9f(r30)
@@ -599,6 +613,7 @@
 /* 81338144 00006544  4E 80 00 20 */	blr
 .endfn setupChannelJump__Q33ipl7channel7ManagerFUxPCc
 
+# .text:0x7D0 | 0x81338148 | size: 0xC
 # ipl::channel::Manager::getDiskThumbnail(bool)
 .fn getDiskThumbnail__Q33ipl7channel7ManagerFb, global
 /* 81338148 00006548  7C 85 23 78 */	mr r5, r4
@@ -606,6 +621,7 @@
 /* 81338150 00006550  48 00 1E 60 */	b getDiskBannerData__Q33ipl7channel7ManagerFib
 .endfn getDiskThumbnail__Q33ipl7channel7ManagerFb
 
+# .text:0x7DC | 0x81338154 | size: 0xC
 # ipl::channel::Manager::getDiskBanner(bool)
 .fn getDiskBanner__Q33ipl7channel7ManagerFb, global
 /* 81338154 00006554  7C 85 23 78 */	mr r5, r4
@@ -613,6 +629,7 @@
 /* 8133815C 0000655C  48 00 1E 54 */	b getDiskBannerData__Q33ipl7channel7ManagerFib
 .endfn getDiskBanner__Q33ipl7channel7ManagerFb
 
+# .text:0x7E8 | 0x81338160 | size: 0x80
 # ipl::channel::Manager::getDiskSound(bool)
 .fn getDiskSound__Q33ipl7channel7ManagerFb, global
 /* 81338160 00006560  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -651,6 +668,7 @@
 /* 813381DC 000065DC  4E 80 00 20 */	blr
 .endfn getDiskSound__Q33ipl7channel7ManagerFb
 
+# .text:0x868 | 0x813381E0 | size: 0xC8
 # ipl::channel::Manager::loadThumbnailAsync(EGG::Heap*, int, int)
 .fn loadThumbnailAsync__Q33ipl7channel7ManagerFPQ23EGG4Heapii, global
 /* 813381E0 000065E0  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -708,6 +726,7 @@
 /* 813382A4 000066A4  4E 80 00 20 */	blr
 .endfn loadThumbnailAsync__Q33ipl7channel7ManagerFPQ23EGG4Heapii
 
+# .text:0x930 | 0x813382A8 | size: 0x34
 # ipl::channel::Manager::getTitleID(int, int) const
 .fn getTitleID__Q33ipl7channel7ManagerCFii, global
 /* 813382A8 000066A8  1C 04 05 40 */	mulli r0, r4, 0x540
@@ -726,6 +745,7 @@
 /* 813382D8 000066D8  4E 80 00 20 */	blr
 .endfn getTitleID__Q33ipl7channel7ManagerCFii
 
+# .text:0x964 | 0x813382DC | size: 0xC8
 # ipl::channel::Manager::loadBannerAsync(EGG::Heap*, int, int)
 .fn loadBannerAsync__Q33ipl7channel7ManagerFPQ23EGG4Heapii, global
 /* 813382DC 000066DC  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -783,6 +803,7 @@
 /* 813383A0 000067A0  4E 80 00 20 */	blr
 .endfn loadBannerAsync__Q33ipl7channel7ManagerFPQ23EGG4Heapii
 
+# .text:0xA2C | 0x813383A4 | size: 0xD8
 # ipl::channel::Manager::loadSoundAsync(EGG::Heap*, int, int)
 .fn loadSoundAsync__Q33ipl7channel7ManagerFPQ23EGG4Heapii, global
 /* 813383A4 000067A4  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -844,6 +865,7 @@
 /* 81338478 00006878  4E 80 00 20 */	blr
 .endfn loadSoundAsync__Q33ipl7channel7ManagerFPQ23EGG4Heapii
 
+# .text:0xB04 | 0x8133847C | size: 0xEC
 # ipl::channel::Manager::loadThumbnailRsoAsync(EGG::Heap*, int, int)
 .fn loadThumbnailRsoAsync__Q33ipl7channel7ManagerFPQ23EGG4Heapii, global
 /* 8133847C 0000687C  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -913,6 +935,7 @@
 /* 81338564 00006964  4E 80 00 20 */	blr
 .endfn loadThumbnailRsoAsync__Q33ipl7channel7ManagerFPQ23EGG4Heapii
 
+# .text:0xBF0 | 0x81338568 | size: 0xEC
 # ipl::channel::Manager::loadBannerRsoAsync(EGG::Heap*, int, int)
 .fn loadBannerRsoAsync__Q33ipl7channel7ManagerFPQ23EGG4Heapii, global
 /* 81338568 00006968  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -982,6 +1005,7 @@
 /* 81338650 00006A50  4E 80 00 20 */	blr
 .endfn loadBannerRsoAsync__Q33ipl7channel7ManagerFPQ23EGG4Heapii
 
+# .text:0xCDC | 0x81338654 | size: 0xEC
 # ipl::channel::Manager::loadThumbnailCSAsync(EGG::Heap*, int, int)
 .fn loadThumbnailCSAsync__Q33ipl7channel7ManagerFPQ23EGG4Heapii, global
 /* 81338654 00006A54  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1051,6 +1075,7 @@
 /* 8133873C 00006B3C  4E 80 00 20 */	blr
 .endfn loadThumbnailCSAsync__Q33ipl7channel7ManagerFPQ23EGG4Heapii
 
+# .text:0xDC8 | 0x81338740 | size: 0xEC
 # ipl::channel::Manager::loadBannerCSAsync(EGG::Heap*, int, int)
 .fn loadBannerCSAsync__Q33ipl7channel7ManagerFPQ23EGG4Heapii, global
 /* 81338740 00006B40  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1120,6 +1145,7 @@
 /* 81338828 00006C28  4E 80 00 20 */	blr
 .endfn loadBannerCSAsync__Q33ipl7channel7ManagerFPQ23EGG4Heapii
 
+# .text:0xEB4 | 0x8133882C | size: 0xDC
 # ipl::channel::Manager::loadLockedMsgAsync(int, int)
 .fn loadLockedMsgAsync__Q33ipl7channel7ManagerFii, global
 /* 8133882C 00006C2C  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1181,6 +1207,7 @@
 /* 81338904 00006D04  4E 80 00 20 */	blr
 .endfn loadLockedMsgAsync__Q33ipl7channel7ManagerFii
 
+# .text:0xF90 | 0x81338908 | size: 0x24
 # ipl::channel::Manager::isLoadedLockedMsg()
 .fn isLoadedLockedMsg__Q33ipl7channel7ManagerFv, global
 /* 81338908 00006D08  80 63 1D A4 */	lwz r3, 0x1da4(r3)
@@ -1195,10 +1222,12 @@
 /* 81338928 00006D28  4E 80 04 20 */	bctr
 .endfn isLoadedLockedMsg__Q33ipl7channel7ManagerFv
 
+# .text:0xFB4 | 0x8133892C | size: 0x4
 .fn iplChannelMgr_UNUSED_8133892C, global
 /* 8133892C 00006D2C  4E 80 00 20 */	blr
 .endfn iplChannelMgr_UNUSED_8133892C
 
+# .text:0xFB8 | 0x81338930 | size: 0x10
 # ipl::nand::File::isFinished()
 .fn isFinished__Q33ipl4nand4FileFv, global
 /* 81338930 00006D30  80 63 00 AC */	lwz r3, 0xac(r3)
@@ -1207,6 +1236,7 @@
 /* 8133893C 00006D3C  4E 80 00 20 */	blr
 .endfn isFinished__Q33ipl4nand4FileFv
 
+# .text:0xFC8 | 0x81338940 | size: 0x5C
 # ipl::channel::Manager::getLockedMsg()
 .fn getLockedMsg__Q33ipl7channel7ManagerFv, global
 /* 81338940 00006D40  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1236,12 +1266,14 @@
 /* 81338998 00006D98  4E 80 00 20 */	blr
 .endfn getLockedMsg__Q33ipl7channel7ManagerFv
 
+# .text:0x1024 | 0x8133899C | size: 0x8
 # ipl::nand::File::checkData()
 .fn checkData__Q33ipl4nand4FileFv, global
 /* 8133899C 00006D9C  80 63 00 A8 */	lwz r3, 0xa8(r3)
 /* 813389A0 00006DA0  4E 80 00 20 */	blr
 .endfn checkData__Q33ipl4nand4FileFv
 
+# .text:0x102C | 0x813389A4 | size: 0x1B8
 # ipl::channel::Manager::moveChannelInfo(int, int, int, int)
 .fn moveChannelInfo__Q33ipl7channel7ManagerFiiii, global
 /* 813389A4 00006DA4  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -1358,6 +1390,7 @@
 /* 81338B58 00006F58  4E 80 00 20 */	blr
 .endfn moveChannelInfo__Q33ipl7channel7ManagerFiiii
 
+# .text:0x11E4 | 0x81338B5C | size: 0x11C
 # ipl::channel::Manager::getTitleName(int, int, int) const
 .fn getTitleName__Q33ipl7channel7ManagerCFiii, global
 /* 81338B5C 00006F5C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1439,6 +1472,7 @@
 /* 81338C74 00007074  4E 80 00 20 */	blr
 .endfn getTitleName__Q33ipl7channel7ManagerCFiii
 
+# .text:0x1300 | 0x81338C78 | size: 0x98
 # ipl::channel::Manager::checkNeedUpdate(int, int) const
 .fn checkNeedUpdate__Q33ipl7channel7ManagerCFii, global
 /* 81338C78 00007078  1C E4 05 40 */	mulli r7, r4, 0x540
@@ -1485,6 +1519,7 @@
 /* 81338D0C 0000710C  4E 80 00 20 */	blr
 .endfn checkNeedUpdate__Q33ipl7channel7ManagerCFii
 
+# .text:0x1398 | 0x81338D10 | size: 0x68
 # ipl::channel::Manager::isParentalRestricted(int, int) const
 .fn isParentalRestricted__Q33ipl7channel7ManagerCFii, global
 /* 81338D10 00007110  1C 04 05 40 */	mulli r0, r4, 0x540
@@ -1516,6 +1551,7 @@
 /* 81338D74 00007174  4E 80 00 20 */	blr
 .endfn isParentalRestricted__Q33ipl7channel7ManagerCFii
 
+# .text:0x1400 | 0x81338D78 | size: 0x4C
 # ipl::channel::Manager::isInternetChannel(int, int) const
 .fn isInternetChannel__Q33ipl7channel7ManagerCFii, global
 /* 81338D78 00007178  1C 04 05 40 */	mulli r0, r4, 0x540
@@ -1540,6 +1576,7 @@
 /* 81338DC0 000071C0  4E 80 00 20 */	blr
 .endfn isInternetChannel__Q33ipl7channel7ManagerCFii
 
+# .text:0x144C | 0x81338DC4 | size: 0x8C
 # ipl::channel::Manager::setDiskChannelName()
 .fn setDiskChannelName__Q33ipl7channel7ManagerFv, global
 /* 81338DC4 000071C4  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1580,6 +1617,7 @@
 /* 81338E4C 0000724C  4E 80 00 20 */	blr
 .endfn setDiskChannelName__Q33ipl7channel7ManagerFv
 
+# .text:0x14D8 | 0x81338E50 | size: 0x64
 # ipl::channel::Manager::getDiskChannelLocation(int*, int*)
 .fn getDiskChannelLocation__Q33ipl7channel7ManagerFPiPi, global
 /* 81338E50 00007250  38 E0 00 00 */	li r7, 0x0
@@ -1612,6 +1650,7 @@
 /* 81338EB0 000072B0  4E 80 00 20 */	blr
 .endfn getDiskChannelLocation__Q33ipl7channel7ManagerFPiPi
 
+# .text:0x153C | 0x81338EB4 | size: 0xC4
 # ipl::channel::Manager::getUnlockChannelState(int, int) const
 .fn getUnlockChannelState__Q33ipl7channel7ManagerCFii, global
 /* 81338EB4 000072B4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1672,6 +1711,7 @@
 /* 81338F74 00007374  4E 80 00 20 */	blr
 .endfn getUnlockChannelState__Q33ipl7channel7ManagerCFii
 
+# .text:0x1600 | 0x81338F78 | size: 0x54
 # ipl::channel::Manager::getUnlockTicket(int, int, ESTicketView*) const
 .fn getUnlockTicket__Q33ipl7channel7ManagerCFiiP12ESTicketView, global
 /* 81338F78 00007378  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1697,6 +1737,7 @@
 /* 81338FC8 000073C8  4E 80 00 20 */	blr
 .endfn getUnlockTicket__Q33ipl7channel7ManagerCFiiP12ESTicketView
 
+# .text:0x1654 | 0x81338FCC | size: 0x54
 # ipl::channel::Manager::loadLockedTitleAsync(int, int, ESTicketView&) const
 .fn loadLockedTitleAsync__Q33ipl7channel7ManagerCFiiR12ESTicketView, global
 /* 81338FCC 000073CC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1722,6 +1763,7 @@
 /* 8133901C 0000741C  4E 80 00 20 */	blr
 .endfn loadLockedTitleAsync__Q33ipl7channel7ManagerCFiiR12ESTicketView
 
+# .text:0x16A8 | 0x81339020 | size: 0x20
 # ipl::channel::Manager::clearRsoExBuf(int, int)
 .fn clearRsoExBuf__Q33ipl7channel7ManagerFii, global
 /* 81339020 00007420  1C C4 05 40 */	mulli r6, r4, 0x540
@@ -1734,6 +1776,7 @@
 /* 8133903C 0000743C  4B FF 72 F8 */	b memset
 .endfn clearRsoExBuf__Q33ipl7channel7ManagerFii
 
+# .text:0x16C8 | 0x81339040 | size: 0x180
 # ipl::channel::Manager::initManagerTask(void*)
 .fn initManagerTask__Q33ipl7channel7ManagerFPv, global
 /* 81339040 00007440  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -1843,6 +1886,7 @@
 /* 813391BC 000075BC  4E 80 00 20 */	blr
 .endfn initManagerTask__Q33ipl7channel7ManagerFPv
 
+# .text:0x1848 | 0x813391C0 | size: 0x30
 .fn iplChannelManager_813391C0, global
 /* 813391C0 000075C0  38 00 00 00 */	li r0, 0x0
 /* 813391C4 000075C4  90 C3 15 50 */	stw r6, 0x1550(r3)
@@ -1858,12 +1902,14 @@
 /* 813391EC 000075EC  48 2B F0 5C */	b fn_815F8248
 .endfn iplChannelManager_813391C0
 
+# .text:0x1878 | 0x813391F0 | size: 0xC
 .fn iplChannelManager_813391F0, global
 /* 813391F0 000075F0  80 A3 15 4C */	lwz r5, 0x154c(r3)
 /* 813391F4 000075F4  80 C3 15 50 */	lwz r6, 0x1550(r3)
 /* 813391F8 000075F8  48 00 00 04 */	b iplChannelManager_813391FC
 .endfn iplChannelManager_813391F0
 
+# .text:0x1884 | 0x813391FC | size: 0x184
 .fn iplChannelManager_813391FC, global
 /* 813391FC 000075FC  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 81339200 00007600  7C 08 02 A6 */	mflr r0
@@ -1969,6 +2015,7 @@
 /* 8133937C 0000777C  4E 80 00 20 */	blr
 .endfn iplChannelManager_813391FC
 
+# .text:0x1A08 | 0x81339380 | size: 0x1DC
 .fn iplChannelManager_81339380, global
 /* 81339380 00007780  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81339384 00007784  7C 08 02 A6 */	mflr r0
@@ -2101,6 +2148,7 @@
 /* 81339558 00007958  4E 80 00 20 */	blr
 .endfn iplChannelManager_81339380
 
+# .text:0x1BE4 | 0x8133955C | size: 0x300
 # ipl::channel::Manager::loadMetaHeaderAsync(int, int)
 .fn loadMetaHeaderAsync__Q33ipl7channel7ManagerFii, global
 /* 8133955C 0000795C  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -2306,6 +2354,7 @@
 /* 81339858 00007C58  4E 80 00 20 */	blr
 .endfn loadMetaHeaderAsync__Q33ipl7channel7ManagerFii
 
+# .text:0x1EE4 | 0x8133985C | size: 0x1F4
 # ipl::channel::Manager::cbReadMetaHeader(void*)
 .fn cbReadMetaHeader__Q33ipl7channel7ManagerFPv, global
 /* 8133985C 00007C5C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -2445,6 +2494,7 @@
 /* 81339A4C 00007E4C  4E 80 00 20 */	blr
 .endfn cbReadMetaHeader__Q33ipl7channel7ManagerFPv
 
+# .text:0x20D8 | 0x81339A50 | size: 0x6C
 # ipl::channel::Manager::makeLoadOrderList(int*) const
 .fn makeLoadOrderList__Q33ipl7channel7ManagerCFPi, global
 /* 81339A50 00007E50  3C A0 81 09 */	lis r5, smArg__Q23ipl6System@ha
@@ -2481,6 +2531,7 @@
 /* 81339AB8 00007EB8  4E 80 00 20 */	blr
 .endfn makeLoadOrderList__Q33ipl7channel7ManagerCFPi
 
+# .text:0x2144 | 0x81339ABC | size: 0x68
 # ipl::channel::Manager::updateInitState()
 .fn updateInitState__Q33ipl7channel7ManagerFv, global
 /* 81339ABC 00007EBC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -2513,6 +2564,7 @@
 /* 81339B20 00007F20  4E 80 00 20 */	blr
 .endfn updateInitState__Q33ipl7channel7ManagerFv
 
+# .text:0x21AC | 0x81339B24 | size: 0x5C
 # ipl::channel::Manager::updateWaitSCFlush()
 .fn updateWaitSCFlush__Q33ipl7channel7ManagerFv, global
 /* 81339B24 00007F24  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -2521,7 +2573,7 @@
 /* 81339B30 00007F30  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 81339B34 00007F34  3B E0 00 01 */	li r31, 0x1
 /* 81339B38 00007F38  93 C1 00 08 */	stw r30, 0x8(r1)
-/* 81339B3C 00007F3C  48 1F 6D 49 */	bl fn_81530884
+/* 81339B3C 00007F3C  48 1F 6D 49 */	bl OSDisableInterrupts
 /* 81339B40 00007F40  7C 7E 1B 78 */	mr r30, r3
 /* 81339B44 00007F44  48 22 E8 01 */	bl fn_81568344
 /* 81339B48 00007F48  28 03 00 01 */	cmplwi r3, 0x1
@@ -2531,7 +2583,7 @@
 /* 81339B58 00007F58  3B E0 00 02 */	li r31, 0x2
 .L_81339B5C:
 /* 81339B5C 00007F5C  7F C3 F3 78 */	mr r3, r30
-/* 81339B60 00007F60  48 1F 6D 4D */	bl fn_815308AC
+/* 81339B60 00007F60  48 1F 6D 4D */	bl OSRestoreInterrupts
 /* 81339B64 00007F64  7F E3 FB 78 */	mr r3, r31
 /* 81339B68 00007F68  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 81339B6C 00007F6C  83 C1 00 08 */	lwz r30, 0x8(r1)
@@ -2541,6 +2593,7 @@
 /* 81339B7C 00007F7C  4E 80 00 20 */	blr
 .endfn updateWaitSCFlush__Q33ipl7channel7ManagerFv
 
+# .text:0x2208 | 0x81339B80 | size: 0x90
 # ipl::channel::Manager::updateDiskState()
 .fn updateDiskState__Q33ipl7channel7ManagerFv, global
 /* 81339B80 00007F80  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -2583,6 +2636,7 @@
 /* 81339C0C 0000800C  4E 80 00 20 */	blr
 .endfn updateDiskState__Q33ipl7channel7ManagerFv
 
+# .text:0x2298 | 0x81339C10 | size: 0x54
 # ipl::channel::Manager::searchMetaHeader(const unsigned char*)
 .fn searchMetaHeader__Q33ipl7channel7ManagerFPCUc, global
 /* 81339C10 00008010  38 00 00 A0 */	li r0, 0xa0
@@ -2611,6 +2665,7 @@
 /* 81339C60 00008060  4E 80 00 20 */	blr
 .endfn searchMetaHeader__Q33ipl7channel7ManagerFPCUc
 
+# .text:0x22EC | 0x81339C64 | size: 0x6C
 # ipl::channel::Manager::checkHeaderBase(const unsigned char*, unsigned long*)
 .fn checkHeaderBase__Q33ipl7channel7ManagerFPCUcPUl, global
 /* 81339C64 00008064  2C 05 00 00 */	cmpwi r5, 0x0
@@ -2645,6 +2700,7 @@
 /* 81339CCC 000080CC  4E 80 00 20 */	blr
 .endfn checkHeaderBase__Q33ipl7channel7ManagerFPCUcPUl
 
+# .text:0x2358 | 0x81339CD0 | size: 0x9C
 # ipl::channel::Manager::checkHeaderMD5(unsigned char*)
 .fn checkHeaderMD5__Q33ipl7channel7ManagerFPUc, global
 /* 81339CD0 000080D0  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -2689,6 +2745,7 @@
 /* 81339D68 00008168  4E 80 00 20 */	blr
 .endfn checkHeaderMD5__Q33ipl7channel7ManagerFPUc
 
+# .text:0x23F4 | 0x81339D6C | size: 0x90
 # ipl::channel::Manager::calcMD5(const unsigned char*, const unsigned char*, unsigned long) const
 .fn calcMD5__Q33ipl7channel7ManagerCFPCUcPCUcUl, global
 /* 81339D6C 0000816C  94 21 FF 80 */	stwu r1, -0x80(r1)
@@ -2732,6 +2789,7 @@
 /* 81339DF8 000081F8  4E 80 00 20 */	blr
 .endfn calcMD5__Q33ipl7channel7ManagerCFPCUcPCUcUl
 
+# .text:0x2484 | 0x81339DFC | size: 0x1B4
 # ipl::channel::Manager::setDiskBannerInfo(bool)
 .fn setDiskBannerInfo__Q33ipl7channel7ManagerFb, global
 /* 81339DFC 000081FC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2851,6 +2909,7 @@
 /* 81339FAC 000083AC  4E 80 00 20 */	blr
 .endfn setDiskBannerInfo__Q33ipl7channel7ManagerFb
 
+# .text:0x2638 | 0x81339FB0 | size: 0x30C
 # ipl::channel::Manager::getDiskBannerData(int, bool)
 .fn getDiskBannerData__Q33ipl7channel7ManagerFib, global
 /* 81339FB0 000083B0  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -3061,6 +3120,7 @@
 /* 8133A2B8 000086B8  4E 80 00 20 */	blr
 .endfn getDiskBannerData__Q33ipl7channel7ManagerFib
 
+# .text:0x2944 | 0x8133A2BC | size: 0xA0
 # ipl::channel::Manager::titleIDtoPageIndex(unsigned long long, int*, int*) const
 .fn titleIDtoPageIndex__Q33ipl7channel7ManagerCFUxPiPi, global
 /* 8133A2BC 000086BC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -3109,6 +3169,7 @@
 /* 8133A358 00008758  4E 80 00 20 */	blr
 .endfn titleIDtoPageIndex__Q33ipl7channel7ManagerCFUxPiPi
 
+# .text:0x29E4 | 0x8133A35C | size: 0xA8
 # ipl::channel::Manager::getLockedMsgFromBuf(const ipl::channel::SChanMgrDiskInMessages*) const
 .fn getLockedMsgFromBuf__Q33ipl7channel7ManagerCFPCQ33ipl7channel22SChanMgrDiskInMessages, global
 /* 8133A35C 0000875C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -3160,6 +3221,7 @@
 /* 8133A400 00008800  4E 80 00 20 */	blr
 .endfn getLockedMsgFromBuf__Q33ipl7channel7ManagerCFPCQ33ipl7channel22SChanMgrDiskInMessages
 
+# .text:0x2A8C | 0x8133A404 | size: 0xDC
 # ipl::channel::Manager::nand_error_handling(int)
 .fn nand_error_handling__Q33ipl7channel7ManagerFi, global
 /* 8133A404 00008804  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -3225,6 +3287,7 @@
 /* 8133A4DC 000088DC  4E 80 00 20 */	blr
 .endfn nand_error_handling__Q33ipl7channel7ManagerFi
 
+# .text:0x2B68 | 0x8133A4E0 | size: 0x9C
 .fn iplChannelManager_8133A4E0, global
 /* 8133A4E0 000088E0  39 80 00 00 */	li r12, 0x0
 /* 8133A4E4 000088E4  38 80 00 00 */	li r4, 0x0
@@ -3271,6 +3334,7 @@
 /* 8133A578 00008978  4E 80 00 20 */	blr
 .endfn iplChannelManager_8133A4E0
 
+# .text:0x2C04 | 0x8133A57C | size: 0x3C
 .fn iplChannelManager_8133A57C, global
 /* 8133A57C 0000897C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133A580 00008980  7C 08 02 A6 */	mflr r0
@@ -3291,6 +3355,7 @@
 /* 8133A5B4 000089B4  4E 80 00 20 */	blr
 .endfn iplChannelManager_8133A57C
 
+# .text:0x2C40 | 0x8133A5B8 | size: 0x38
 .fn iplChannelManager_8133A5B8, global
 /* 8133A5B8 000089B8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133A5BC 000089BC  7C 08 02 A6 */	mflr r0
@@ -3310,6 +3375,7 @@
 /* 8133A5EC 000089EC  4E 80 00 20 */	blr
 .endfn iplChannelManager_8133A5B8
 
+# .text:0x2C78 | 0x8133A5F0 | size: 0x44
 .fn iplChannelManager_8133A5F0, global
 /* 8133A5F0 000089F0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133A5F4 000089F4  7C 08 02 A6 */	mflr r0
@@ -3332,6 +3398,7 @@
 /* 8133A630 00008A30  4E 80 00 20 */	blr
 .endfn iplChannelManager_8133A5F0
 
+# .text:0x2CBC | 0x8133A634 | size: 0x44
 .fn iplChannelManager_8133A634, global
 /* 8133A634 00008A34  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133A638 00008A38  7C 08 02 A6 */	mflr r0
@@ -3354,6 +3421,7 @@
 /* 8133A674 00008A74  4E 80 00 20 */	blr
 .endfn iplChannelManager_8133A634
 
+# .text:0x2D00 | 0x8133A678 | size: 0x40
 .fn iplChannelManager_8133A678, global
 /* 8133A678 00008A78  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133A67C 00008A7C  7C 08 02 A6 */	mflr r0
@@ -3375,6 +3443,7 @@
 /* 8133A6B4 00008AB4  4E 80 00 20 */	blr
 .endfn iplChannelManager_8133A678
 
+# .text:0x2D40 | 0x8133A6B8 | size: 0x84
 .fn iplChannelManager_8133A6B8, global
 /* 8133A6B8 00008AB8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133A6BC 00008ABC  7C 08 02 A6 */	mflr r0
@@ -3414,6 +3483,7 @@
 /* 8133A738 00008B38  4E 80 00 20 */	blr
 .endfn iplChannelManager_8133A6B8
 
+# .text:0x2DC4 | 0x8133A73C | size: 0x68
 .fn iplChannelManager_8133A73C, global
 /* 8133A73C 00008B3C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133A740 00008B40  7C 08 02 A6 */	mflr r0
@@ -3446,6 +3516,7 @@
 /* 8133A7A0 00008BA0  4E 80 00 20 */	blr
 .endfn iplChannelManager_8133A73C
 
+# .text:0x2E2C | 0x8133A7A4 | size: 0xB8
 .fn iplChannelManager_8133A7A4, global
 /* 8133A7A4 00008BA4  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8133A7A8 00008BA8  7C 08 02 A6 */	mflr r0
@@ -3499,6 +3570,7 @@
 /* 8133A858 00008C58  4E 80 00 20 */	blr
 .endfn iplChannelManager_8133A7A4
 
+# .text:0x2EE4 | 0x8133A85C | size: 0xC8
 .fn iplChannelManager_8133A85C, global
 /* 8133A85C 00008C5C  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8133A860 00008C60  7C 08 02 A6 */	mflr r0
@@ -3556,6 +3628,7 @@
 /* 8133A920 00008D20  4E 80 00 20 */	blr
 .endfn iplChannelManager_8133A85C
 
+# .text:0x2FAC | 0x8133A924 | size: 0xCC
 .fn iplChannelManager_8133A924, global
 /* 8133A924 00008D24  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8133A928 00008D28  7C 08 02 A6 */	mflr r0
@@ -3615,6 +3688,7 @@
 /* 8133A9EC 00008DEC  4E 80 00 20 */	blr
 .endfn iplChannelManager_8133A924
 
+# .text:0x3078 | 0x8133A9F0 | size: 0x60
 .fn iplChannelManager_8133A9F0, global
 /* 8133A9F0 00008DF0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133A9F4 00008DF4  7C 08 02 A6 */	mflr r0
@@ -3643,6 +3717,7 @@
 /* 8133AA4C 00008E4C  4E 80 00 20 */	blr
 .endfn iplChannelManager_8133A9F0
 
+# .text:0x30D8 | 0x8133AA50 | size: 0x30
 .fn iplChannelManager_8133AA50, global
 /* 8133AA50 00008E50  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133AA54 00008E54  7C 08 02 A6 */	mflr r0
@@ -3659,10 +3734,11 @@
 /* 8133AA7C 00008E7C  4E 80 00 20 */	blr
 .endfn iplChannelManager_8133AA50
 
-# 0x8160D2D0 - 0x8160D600
+# 0x8160D2D0..0x8160D600 | size: 0x330
 .rodata
 .balign 8
 
+# .rodata:0x0 | 0x8160D2D0 | size: 0x300
 .obj lbl_8160D2D0, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
@@ -3858,70 +3934,84 @@
 	.4byte 0x00000000
 .endobj lbl_8160D2D0
 
+# .rodata:0x300 | 0x8160D5D0 | size: 0xC
 .obj lbl_8160D5D0, global
 	.4byte 0x00000003
 	.4byte 0x00000007
 	.4byte 0x0000000B
 .endobj lbl_8160D5D0
 
+# .rodata:0x30C | 0x8160D5DC | size: 0xC
 .obj lbl_8160D5DC, global
 	.4byte 0x00000000
 	.4byte 0x00000004
 	.4byte 0x00000008
 .endobj lbl_8160D5DC
 
+# .rodata:0x318 | 0x8160D5E8 | size: 0xC
 .obj lbl_8160D5E8, global
 	.4byte 0x00000003
 	.4byte 0x00000007
 	.4byte 0x0000000B
 .endobj lbl_8160D5E8
 
+# .rodata:0x324 | 0x8160D5F4 | size: 0xC
 .obj lbl_8160D5F4, global
 	.4byte 0x00000000
 	.4byte 0x00000004
 	.4byte 0x00000008
 .endobj lbl_8160D5F4
 
-# 0x81634A28 - 0x81634B08
+# 0x81634A28..0x81634B08 | size: 0xE0
 .data
 .balign 8
 
+# .data:0x0 | 0x81634A28 | size: 0xF
 .obj lbl_81634A28, global
 	.string "/meta/icon.bin"
 .endobj lbl_81634A28
 
+# .data:0xF | 0x81634A37 | size: 0x11
 .obj lbl_81634A37, global
 	.string "/meta/banner.bin"
 .endobj lbl_81634A37
 
+# .data:0x20 | 0x81634A48 | size: 0x10
 .obj lbl_81634A48, global
 	.string "/meta/sound.bin"
 .endobj lbl_81634A48
 
+# .data:0x30 | 0x81634A58 | size: 0x12
 .obj lbl_81634A58, global
 	.string "/arc/icon.rso.lz7"
 .endobj lbl_81634A58
 
+# .data:0x42 | 0x81634A6A | size: 0x14
 .obj lbl_81634A6A, global
 	.string "/arc/banner.rso.lz7"
 .endobj lbl_81634A6A
 
+# .data:0x56 | 0x81634A7E | size: 0x11
 .obj lbl_81634A7E, global
 	.string "/arc/icon.cs.lz7"
 .endobj lbl_81634A7E
 
+# .data:0x67 | 0x81634A8F | size: 0x13
 .obj lbl_81634A8F, global
 	.string "/arc/banner.cs.lz7"
 .endobj lbl_81634A8F
 
+# .data:0x7A | 0x81634AA2 | size: 0x14
 .obj lbl_81634AA2, global
 	.string "/meta/diskInMsg.bin"
 .endobj lbl_81634AA2
 
+# .data:0x8E | 0x81634AB6 | size: 0x16
 .obj lbl_81634AB6, global
 	.string "iplChannelManager.cpp"
 .endobj lbl_81634AB6
 
+# .data:0xA4 | 0x81634ACC | size: 0x30
 .obj jumptable_81634ACC, local
 	.rel nand_error_handling__Q33ipl7channel7ManagerFi, .L_8133A4C4
 	.rel nand_error_handling__Q33ipl7channel7ManagerFi, .L_8133A484
@@ -3937,54 +4027,64 @@
 	.rel nand_error_handling__Q33ipl7channel7ManagerFi, .L_8133A45C
 .endobj jumptable_81634ACC
 
+# .data:0xD4 | 0x81634AFC | size: 0xC
 .obj lbl_81634AFC, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl7channel7ManagerFv
 .endobj lbl_81634AFC
 
-# 0x81696088 - 0x81696098
+# 0x81696088..0x81696098 | size: 0x10
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x81696088 | size: 0x3
 .obj lbl_81696088, global
 	.string "ES"
 .endobj lbl_81696088
 
+# .sdata:0x3 | 0x8169608B | size: 0x5
 .obj lbl_8169608B, global
 	.string "IMET"
 .endobj lbl_8169608B
 
+# .sdata:0x8 | 0x81696090 | size: 0x8
 .obj lbl_81696090, global
 	.4byte 0x4E414E44
 	.4byte 0x00000000
 .endobj lbl_81696090
 
-# 0x81698690 - 0x816986A8
+# 0x81698690..0x816986A8 | size: 0x18
 .section .sbss, "wa", @nobits
 .balign 8
 
+# .sbss:0x0 | 0x81698690 | size: 0x4
 .obj lbl_81698690, global
 	.skip 0x4
 .endobj lbl_81698690
 
+# .sbss:0x4 | 0x81698694 | size: 0x4
 .obj lbl_81698694, global
 	.skip 0x4
 .endobj lbl_81698694
 
+# .sbss:0x8 | 0x81698698 | size: 0x1
 .obj lbl_81698698, global
 	.skip 0x1
 .endobj lbl_81698698
 
+# .sbss:0x9 | 0x81698699 | size: 0x3
 .obj gap_12_81698699_sbss, global
 .hidden gap_12_81698699_sbss
 	.skip 0x3
 .endobj gap_12_81698699_sbss
 
+# .sbss:0xC | 0x8169869C | size: 0x4
 .obj lbl_8169869C, global
 	.skip 0x4
 .endobj lbl_8169869C
 
+# .sbss:0x10 | 0x816986A0 | size: 0x8
 .obj lbl_816986A0, global
 	.skip 0x8
 .endobj lbl_816986A0

@@ -1,19 +1,21 @@
 .include "macros.inc"
 .file "iplSystem.cpp"
 
-# 0x81089008 - 0x810892E0
+# 0x81089008..0x810892E0 | size: 0x2D8
 .section .bss, "wa", @nobits
 .balign 8
 
+# .bss:0x0 | 0x81089008 | size: 0x2D8
 # ipl::System::smArg
 .obj smArg__Q23ipl6System, global
 	.skip 0x2D8
 .endobj smArg__Q23ipl6System
 
-# 0x81332C24 - 0x81335CCC
+# 0x81332C24..0x81335CCC | size: 0x30A8
 .text
 .balign 4
 
+# .text:0x0 | 0x81332C24 | size: 0x48
 # ipl::System::Arg::Arg()
 .fn __ct__Q33ipl6System3ArgFv, global
 /* 81332C24 00001024  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -36,6 +38,7 @@
 /* 81332C68 00001068  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl6System3ArgFv
 
+# .text:0x48 | 0x81332C6C | size: 0x1C8
 # ipl::System::createRootHeap_()
 .fn createRootHeap___Q23ipl6SystemFv, global
 /* 81332C6C 0000106C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -157,6 +160,7 @@
 /* 81332E30 00001230  4E 80 00 20 */	blr
 .endfn createRootHeap___Q23ipl6SystemFv
 
+# .text:0x210 | 0x81332E34 | size: 0x64
 # ipl::System::createMem1AppHeap()
 .fn createMem1AppHeap__Q23ipl6SystemFv, global
 /* 81332E34 00001234  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -187,6 +191,7 @@
 /* 81332E94 00001294  4E 80 00 20 */	blr
 .endfn createMem1AppHeap__Q23ipl6SystemFv
 
+# .text:0x274 | 0x81332E98 | size: 0x64
 # ipl::System::destroyMem1AppHeap()
 .fn destroyMem1AppHeap__Q23ipl6SystemFv, global
 /* 81332E98 00001298  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -217,6 +222,7 @@
 /* 81332EF8 000012F8  4E 80 00 20 */	blr
 .endfn destroyMem1AppHeap__Q23ipl6SystemFv
 
+# .text:0x2D8 | 0x81332EFC | size: 0x134
 # ipl::System::createAppHeap_()
 .fn createAppHeap___Q23ipl6SystemFv, global
 /* 81332EFC 000012FC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -298,6 +304,7 @@
 /* 8133302C 0000142C  4E 80 00 20 */	blr
 .endfn createAppHeap___Q23ipl6SystemFv
 
+# .text:0x40C | 0x81333030 | size: 0x9C
 # ipl::System::constructFontSub_(void*)
 .fn constructFontSub___Q23ipl6SystemFPv, global
 /* 81333030 00001430  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -342,6 +349,7 @@
 /* 813330C8 000014C8  4E 80 00 20 */	blr
 .endfn constructFontSub___Q23ipl6SystemFPv
 
+# .text:0x4A8 | 0x813330CC | size: 0xE8
 # ipl::System::loadFont_()
 .fn loadFont___Q23ipl6SystemFv, global
 /* 813330CC 000014CC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -404,6 +412,7 @@
 /* 813331B0 000015B0  4E 80 00 20 */	blr
 .endfn loadFont___Q23ipl6SystemFv
 
+# .text:0x590 | 0x813331B4 | size: 0x84
 # ipl::System::constructFont_(void*)
 .fn constructFont___Q23ipl6SystemFPv, global
 /* 813331B4 000015B4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -441,6 +450,7 @@
 /* 81333234 00001634  4E 80 00 20 */	blr
 .endfn constructFont___Q23ipl6SystemFPv
 
+# .text:0x614 | 0x81333238 | size: 0x74
 # ipl::System::constructSND_(void*)
 .fn constructSND___Q23ipl6SystemFPv, global
 /* 81333238 00001638  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -474,6 +484,7 @@
 /* 813332A8 000016A8  4E 80 00 20 */	blr
 .endfn constructSND___Q23ipl6SystemFPv
 
+# .text:0x688 | 0x813332AC | size: 0x6C
 .fn iplSystem_813332AC, local
 /* 813332AC 000016AC  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 813332B0 000016B0  7C 08 02 A6 */	mflr r0
@@ -505,6 +516,7 @@
 /* 81333314 00001714  4E 80 00 20 */	blr
 .endfn iplSystem_813332AC
 
+# .text:0x6F4 | 0x81333318 | size: 0xBC
 # ipl::System::constructZiDIC_(void*)
 .fn constructZiDIC___Q23ipl6SystemFPv, global
 /* 81333318 00001718  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -556,40 +568,43 @@
 /* 813333D0 000017D0  4E 80 00 20 */	blr
 .endfn constructZiDIC___Q23ipl6SystemFPv
 
+# .text:0x7B0 | 0x813333D4 | size: 0x34
 # ipl::System::resourceLoaded_(void*)
 .fn resourceLoaded___Q23ipl6SystemFPv, global
 /* 813333D4 000017D4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 813333D8 000017D8  7C 08 02 A6 */	mflr r0
 /* 813333DC 000017DC  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813333E0 000017E0  48 1F D4 A5 */	bl fn_81530884
+/* 813333E0 000017E0  48 1F D4 A5 */	bl OSDisableInterrupts
 /* 813333E4 000017E4  3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
 /* 813333E8 000017E8  38 00 00 01 */	li r0, 0x1
 /* 813333EC 000017EC  38 84 90 08 */	addi r4, r4, smArg__Q23ipl6System@l
 /* 813333F0 000017F0  98 04 02 B0 */	stb r0, 0x2b0(r4)
-/* 813333F4 000017F4  48 1F D4 B9 */	bl fn_815308AC
+/* 813333F4 000017F4  48 1F D4 B9 */	bl OSRestoreInterrupts
 /* 813333F8 000017F8  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813333FC 000017FC  7C 08 03 A6 */	mtlr r0
 /* 81333400 00001800  38 21 00 10 */	addi r1, r1, 0x10
 /* 81333404 00001804  4E 80 00 20 */	blr
 .endfn resourceLoaded___Q23ipl6SystemFPv
 
+# .text:0x7E4 | 0x81333408 | size: 0x34
 # ipl::System::libraryInitialized_(void*)
 .fn libraryInitialized___Q23ipl6SystemFPv, global
 /* 81333408 00001808  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133340C 0000180C  7C 08 02 A6 */	mflr r0
 /* 81333410 00001810  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81333414 00001814  48 1F D4 71 */	bl fn_81530884
+/* 81333414 00001814  48 1F D4 71 */	bl OSDisableInterrupts
 /* 81333418 00001818  3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
 /* 8133341C 0000181C  38 00 00 01 */	li r0, 0x1
 /* 81333420 00001820  38 84 90 08 */	addi r4, r4, smArg__Q23ipl6System@l
 /* 81333424 00001824  98 04 02 B3 */	stb r0, 0x2b3(r4)
-/* 81333428 00001828  48 1F D4 85 */	bl fn_815308AC
+/* 81333428 00001828  48 1F D4 85 */	bl OSRestoreInterrupts
 /* 8133342C 0000182C  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 81333430 00001830  7C 08 03 A6 */	mtlr r0
 /* 81333434 00001834  38 21 00 10 */	addi r1, r1, 0x10
 /* 81333438 00001838  4E 80 00 20 */	blr
 .endfn libraryInitialized___Q23ipl6SystemFPv
 
+# .text:0x818 | 0x8133343C | size: 0x178
 # ipl::System::createFolders_(void*)
 .fn createFolders___Q23ipl6SystemFPv, global
 /* 8133343C 0000183C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -693,6 +708,7 @@
 /* 813335B0 000019B0  4E 80 00 20 */	blr
 .endfn createFolders___Q23ipl6SystemFPv
 
+# .text:0x990 | 0x813335B4 | size: 0x1C
 # ipl::System::requestCreateInstance(void*)
 .fn requestCreateInstance__Q23ipl6SystemFPv, global
 /* 813335B4 000019B4  3C C0 81 09 */	lis r6, smArg__Q23ipl6System@ha
@@ -704,6 +720,7 @@
 /* 813335CC 000019CC  48 2C 4C 7C */	b fn_815F8248
 .endfn requestCreateInstance__Q23ipl6SystemFPv
 
+# .text:0x9AC | 0x813335D0 | size: 0x3DC
 # ipl::System::loadResource_(void*)
 .fn loadResource___Q23ipl6SystemFPv, global
 /* 813335D0 000019D0  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -716,7 +733,7 @@
 /* 813335EC 000019EC  3B BD 90 08 */	addi r29, r29, smArg__Q23ipl6System@l
 /* 813335F0 000019F0  83 DD 00 08 */	lwz r30, 0x8(r29)
 /* 813335F4 000019F4  3B 9C 41 20 */	addi r28, r28, _f_data@l
-/* 813335F8 000019F8  48 1F D2 8D */	bl fn_81530884
+/* 813335F8 000019F8  48 1F D2 8D */	bl OSDisableInterrupts
 /* 813335FC 000019FC  7C 7F 1B 78 */	mr r31, r3
 /* 81333600 00001A00  7F C3 F3 78 */	mr r3, r30
 /* 81333604 00001A04  48 2C 4A 89 */	bl fn_815F808C
@@ -724,7 +741,7 @@
 /* 8133360C 00001A0C  38 60 00 00 */	li r3, 0x0
 /* 81333610 00001A10  48 20 25 31 */	bl fn_81535B40
 /* 81333614 00001A14  7F E3 FB 78 */	mr r3, r31
-/* 81333618 00001A18  48 1F D2 95 */	bl fn_815308AC
+/* 81333618 00001A18  48 1F D2 95 */	bl OSRestoreInterrupts
 /* 8133361C 00001A1C  4B FF FA B1 */	bl loadFont___Q23ipl6SystemFv
 /* 81333620 00001A20  80 7D 00 6C */	lwz r3, 0x6c(r29)
 /* 81333624 00001A24  3F C0 81 33 */	lis r30, requestCreateInstance__Q23ipl6SystemFPv@ha
@@ -955,6 +972,7 @@
 /* 813339A8 00001DA8  4E 80 00 20 */	blr
 .endfn loadResource___Q23ipl6SystemFPv
 
+# .text:0xD88 | 0x813339AC | size: 0x1E8
 # ipl::System::createAfter_(void*)
 .fn createAfter___Q23ipl6SystemFPv, global
 /* 813339AC 00001DAC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -968,7 +986,7 @@
 /* 813339CC 00001DCC  7C 7C 1B 78 */	mr r28, r3
 /* 813339D0 00001DD0  3B FF 90 08 */	addi r31, r31, smArg__Q23ipl6System@l
 /* 813339D4 00001DD4  83 DF 00 08 */	lwz r30, 0x8(r31)
-/* 813339D8 00001DD8  48 1F CE AD */	bl fn_81530884
+/* 813339D8 00001DD8  48 1F CE AD */	bl OSDisableInterrupts
 /* 813339DC 00001DDC  7C 7D 1B 78 */	mr r29, r3
 /* 813339E0 00001DE0  7F C3 F3 78 */	mr r3, r30
 /* 813339E4 00001DE4  48 2C 46 A9 */	bl fn_815F808C
@@ -976,7 +994,7 @@
 /* 813339EC 00001DEC  38 60 00 00 */	li r3, 0x0
 /* 813339F0 00001DF0  48 20 21 51 */	bl fn_81535B40
 /* 813339F4 00001DF4  7F A3 EB 78 */	mr r3, r29
-/* 813339F8 00001DF8  48 1F CE B5 */	bl fn_815308AC
+/* 813339F8 00001DF8  48 1F CE B5 */	bl OSRestoreInterrupts
 /* 813339FC 00001DFC  80 9F 00 08 */	lwz r4, 0x8(r31)
 /* 81333A00 00001E00  38 60 00 9C */	li r3, 0x9c
 /* 81333A04 00001E04  38 A0 00 04 */	li r5, 0x4
@@ -1065,7 +1083,7 @@
 /* 81333B3C 00001F3C  38 84 90 08 */	addi r4, r4, smArg__Q23ipl6System@l
 /* 81333B40 00001F40  90 64 00 B4 */	stw r3, 0xb4(r4)
 /* 81333B44 00001F44  41 82 00 28 */	beq .L_81333B6C
-/* 81333B48 00001F48  48 1F CD 3D */	bl fn_81530884
+/* 81333B48 00001F48  48 1F CD 3D */	bl OSDisableInterrupts
 /* 81333B4C 00001F4C  7C 7D 1B 78 */	mr r29, r3
 /* 81333B50 00001F50  7F 83 E3 78 */	mr r3, r28
 /* 81333B54 00001F54  48 2C 45 39 */	bl fn_815F808C
@@ -1073,7 +1091,7 @@
 /* 81333B5C 00001F5C  38 60 00 00 */	li r3, 0x0
 /* 81333B60 00001F60  48 20 1F E1 */	bl fn_81535B40
 /* 81333B64 00001F64  7F A3 EB 78 */	mr r3, r29
-/* 81333B68 00001F68  48 1F CD 45 */	bl fn_815308AC
+/* 81333B68 00001F68  48 1F CD 45 */	bl OSRestoreInterrupts
 .L_81333B6C:
 /* 81333B6C 00001F6C  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
 /* 81333B70 00001F70  38 00 00 01 */	li r0, 0x1
@@ -1087,6 +1105,7 @@
 /* 81333B90 00001F90  4E 80 00 20 */	blr
 .endfn createAfter___Q23ipl6SystemFPv
 
+# .text:0xF70 | 0x81333B94 | size: 0xF4
 # ipl::System::createLibManager_()
 .fn createLibManager___Q23ipl6SystemFv, global
 /* 81333B94 00001F94  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1100,7 +1119,7 @@
 /* 81333BB4 00001FB4  7C 7C 1B 78 */	mr r28, r3
 /* 81333BB8 00001FB8  3B FF 90 08 */	addi r31, r31, smArg__Q23ipl6System@l
 /* 81333BBC 00001FBC  83 DF 00 08 */	lwz r30, 0x8(r31)
-/* 81333BC0 00001FC0  48 1F CC C5 */	bl fn_81530884
+/* 81333BC0 00001FC0  48 1F CC C5 */	bl OSDisableInterrupts
 /* 81333BC4 00001FC4  7C 7D 1B 78 */	mr r29, r3
 /* 81333BC8 00001FC8  7F C3 F3 78 */	mr r3, r30
 /* 81333BCC 00001FCC  48 2C 44 C1 */	bl fn_815F808C
@@ -1108,7 +1127,7 @@
 /* 81333BD4 00001FD4  38 60 00 00 */	li r3, 0x0
 /* 81333BD8 00001FD8  48 20 1F 69 */	bl fn_81535B40
 /* 81333BDC 00001FDC  7F A3 EB 78 */	mr r3, r29
-/* 81333BE0 00001FE0  48 1F CC CD */	bl fn_815308AC
+/* 81333BE0 00001FE0  48 1F CC CD */	bl OSRestoreInterrupts
 /* 81333BE4 00001FE4  80 9F 00 08 */	lwz r4, 0x8(r31)
 /* 81333BE8 00001FE8  38 60 00 3C */	li r3, 0x3c
 /* 81333BEC 00001FEC  38 A0 00 04 */	li r5, 0x4
@@ -1137,7 +1156,7 @@
 /* 81333C40 00002040  90 64 00 8C */	stw r3, 0x8c(r4)
 /* 81333C44 00002044  80 64 00 70 */	lwz r3, 0x70(r4)
 /* 81333C48 00002048  48 00 B1 21 */	bl commitHiddenDB__Q33ipl6nigaoe7ManagerFv
-/* 81333C4C 0000204C  48 1F CC 39 */	bl fn_81530884
+/* 81333C4C 0000204C  48 1F CC 39 */	bl OSDisableInterrupts
 /* 81333C50 00002050  7C 7D 1B 78 */	mr r29, r3
 /* 81333C54 00002054  7F 83 E3 78 */	mr r3, r28
 /* 81333C58 00002058  48 2C 44 35 */	bl fn_815F808C
@@ -1145,7 +1164,7 @@
 /* 81333C60 00002060  38 60 00 00 */	li r3, 0x0
 /* 81333C64 00002064  48 20 1E DD */	bl fn_81535B40
 /* 81333C68 00002068  7F A3 EB 78 */	mr r3, r29
-/* 81333C6C 0000206C  48 1F CC 41 */	bl fn_815308AC
+/* 81333C6C 0000206C  48 1F CC 41 */	bl OSRestoreInterrupts
 /* 81333C70 00002070  39 61 00 20 */	addi r11, r1, 0x20
 /* 81333C74 00002074  48 2C 58 9D */	bl _restgpr_28
 /* 81333C78 00002078  80 01 00 24 */	lwz r0, 0x24(r1)
@@ -1154,6 +1173,7 @@
 /* 81333C84 00002084  4E 80 00 20 */	blr
 .endfn createLibManager___Q23ipl6SystemFv
 
+# .text:0x1064 | 0x81333C88 | size: 0x38
 # ipl::System::stopReceiveSchedule()
 .fn stopReceiveSchedule__Q23ipl6SystemFv, global
 /* 81333C88 00002088  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1173,6 +1193,7 @@
 /* 81333CBC 000020BC  4E 80 00 20 */	blr
 .endfn stopReceiveSchedule__Q23ipl6SystemFv
 
+# .text:0x109C | 0x81333CC0 | size: 0x2C
 # ipl::System::isPostmanResumed()
 .fn isPostmanResumed__Q23ipl6SystemFv, global
 /* 81333CC0 000020C0  3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
@@ -1188,6 +1209,7 @@
 /* 81333CE8 000020E8  4E 80 00 20 */	blr
 .endfn isPostmanResumed__Q23ipl6SystemFv
 
+# .text:0x10C8 | 0x81333CEC | size: 0x38
 # ipl::System::startReceiveSchedule()
 .fn startReceiveSchedule__Q23ipl6SystemFv, global
 /* 81333CEC 000020EC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1207,6 +1229,7 @@
 /* 81333D20 00002120  4E 80 00 20 */	blr
 .endfn startReceiveSchedule__Q23ipl6SystemFv
 
+# .text:0x1100 | 0x81333D24 | size: 0x38
 # ipl::System::getUsbEtherMacAddr()
 .fn getUsbEtherMacAddr__Q23ipl6SystemFv, global
 /* 81333D24 00002124  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1226,6 +1249,7 @@
 /* 81333D58 00002158  4E 80 00 20 */	blr
 .endfn getUsbEtherMacAddr__Q23ipl6SystemFv
 
+# .text:0x1138 | 0x81333D5C | size: 0x38
 # ipl::System::reloadDownloadTask()
 .fn reloadDownloadTask__Q23ipl6SystemFv, global
 /* 81333D5C 0000215C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1245,6 +1269,7 @@
 /* 81333D90 00002190  4E 80 00 20 */	blr
 .endfn reloadDownloadTask__Q23ipl6SystemFv
 
+# .text:0x1170 | 0x81333D94 | size: 0x38
 # ipl::System::receiveImmediately()
 .fn receiveImmediately__Q23ipl6SystemFv, global
 /* 81333D94 00002194  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1264,6 +1289,7 @@
 /* 81333DC8 000021C8  4E 80 00 20 */	blr
 .endfn receiveImmediately__Q23ipl6SystemFv
 
+# .text:0x11A8 | 0x81333DCC | size: 0x5C
 # ipl::System::isReceiveScheduleStopped()
 .fn isReceiveScheduleStopped__Q23ipl6SystemFv, global
 /* 81333DCC 000021CC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1292,6 +1318,7 @@
 /* 81333E24 00002224  4E 80 00 20 */	blr
 .endfn isReceiveScheduleStopped__Q23ipl6SystemFv
 
+# .text:0x1204 | 0x81333E28 | size: 0x54
 # ipl::System::setCurrentHeap(EGG::Heap*)
 .fn setCurrentHeap__Q23ipl6SystemFPQ23EGG4Heap, global
 /* 81333E28 00002228  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1300,7 +1327,7 @@
 /* 81333E34 00002234  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 81333E38 00002238  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 81333E3C 0000223C  7C 7E 1B 78 */	mr r30, r3
-/* 81333E40 00002240  48 1F CA 45 */	bl fn_81530884
+/* 81333E40 00002240  48 1F CA 45 */	bl OSDisableInterrupts
 /* 81333E44 00002244  7C 7F 1B 78 */	mr r31, r3
 /* 81333E48 00002248  7F C3 F3 78 */	mr r3, r30
 /* 81333E4C 0000224C  48 2C 42 41 */	bl fn_815F808C
@@ -1308,7 +1335,7 @@
 /* 81333E54 00002254  38 60 00 00 */	li r3, 0x0
 /* 81333E58 00002258  48 20 1C E9 */	bl fn_81535B40
 /* 81333E5C 0000225C  7F E3 FB 78 */	mr r3, r31
-/* 81333E60 00002260  48 1F CA 4D */	bl fn_815308AC
+/* 81333E60 00002260  48 1F CA 4D */	bl OSRestoreInterrupts
 /* 81333E64 00002264  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 81333E68 00002268  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 81333E6C 0000226C  83 C1 00 08 */	lwz r30, 0x8(r1)
@@ -1317,6 +1344,7 @@
 /* 81333E78 00002278  4E 80 00 20 */	blr
 .endfn setCurrentHeap__Q23ipl6SystemFPQ23EGG4Heap
 
+# .text:0x1258 | 0x81333E7C | size: 0x1C
 # ipl::System::cbThreadSwitch(OSThread*, OSThread*)
 .fn cbThreadSwitch__Q23ipl6SystemFP8OSThreadP8OSThread, global
 /* 81333E7C 0000227C  2C 04 00 00 */	cmpwi r4, 0x0
@@ -1328,6 +1356,7 @@
 /* 81333E94 00002294  4E 80 00 20 */	blr
 .endfn cbThreadSwitch__Q23ipl6SystemFP8OSThreadP8OSThread
 
+# .text:0x1274 | 0x81333E98 | size: 0x48
 .fn iplSystem_81333E98, local
 /* 81333E98 00002298  94 21 EF E0 */	stwu r1, -0x1020(r1)
 /* 81333E9C 0000229C  7C 08 02 A6 */	mflr r0
@@ -1349,6 +1378,7 @@
 /* 81333EDC 000022DC  4E 80 00 20 */	blr
 .endfn iplSystem_81333E98
 
+# .text:0x12BC | 0x81333EE0 | size: 0x20
 # ipl::System::checkNandOverFlowFlagAsync()
 .fn checkNandOverFlowFlagAsync__Q23ipl6SystemFv, global
 /* 81333EE0 000022E0  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -1361,6 +1391,7 @@
 /* 81333EFC 000022FC  48 2C 43 4C */	b fn_815F8248
 .endfn checkNandOverFlowFlagAsync__Q23ipl6SystemFv
 
+# .text:0x12DC | 0x81333F00 | size: 0x44
 # ipl::System::setNWC24RegistEnd(long)
 .fn setNWC24RegistEnd__Q23ipl6SystemFl, global
 /* 81333F00 00002300  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1368,13 +1399,13 @@
 /* 81333F08 00002308  90 01 00 14 */	stw r0, 0x14(r1)
 /* 81333F0C 0000230C  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 81333F10 00002310  7C 7F 1B 78 */	mr r31, r3
-/* 81333F14 00002314  48 1F C9 71 */	bl fn_81530884
+/* 81333F14 00002314  48 1F C9 71 */	bl OSDisableInterrupts
 /* 81333F18 00002318  3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
 /* 81333F1C 0000231C  38 00 00 02 */	li r0, 0x2
 /* 81333F20 00002320  38 84 90 08 */	addi r4, r4, smArg__Q23ipl6System@l
 /* 81333F24 00002324  90 04 02 C0 */	stw r0, 0x2c0(r4)
 /* 81333F28 00002328  93 E4 02 C4 */	stw r31, 0x2c4(r4)
-/* 81333F2C 0000232C  48 1F C9 81 */	bl fn_815308AC
+/* 81333F2C 0000232C  48 1F C9 81 */	bl OSRestoreInterrupts
 /* 81333F30 00002330  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 81333F34 00002334  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 81333F38 00002338  7C 08 03 A6 */	mtlr r0
@@ -1382,6 +1413,7 @@
 /* 81333F40 00002340  4E 80 00 20 */	blr
 .endfn setNWC24RegistEnd__Q23ipl6SystemFl
 
+# .text:0x1320 | 0x81333F44 | size: 0x18
 # ipl::System::resetNWC24Regist()
 .fn resetNWC24Regist__Q23ipl6SystemFv, global
 /* 81333F44 00002344  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -1392,6 +1424,7 @@
 /* 81333F58 00002358  4E 80 00 20 */	blr
 .endfn resetNWC24Regist__Q23ipl6SystemFv
 
+# .text:0x1338 | 0x81333F5C | size: 0xB0
 # ipl::System::processNWC24Regist()
 .fn processNWC24Regist__Q23ipl6SystemFv, global
 /* 81333F5C 0000235C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1445,6 +1478,7 @@
 /* 81334008 00002408  4E 80 00 20 */	blr
 .endfn processNWC24Regist__Q23ipl6SystemFv
 
+# .text:0x13E8 | 0x8133400C | size: 0xAC4
 # ipl::System::init(int, char**)
 .fn init__Q23ipl6SystemFiPPc, global
 /* 8133400C 0000240C  94 21 FA 90 */	stwu r1, -0x570(r1)
@@ -1472,7 +1506,7 @@
 /* 81334064 00002464  40 82 00 4C */	bne .L_813340B0
 /* 81334068 00002468  38 7F 03 23 */	addi r3, r31, 0x323
 /* 8133406C 0000246C  48 02 C3 75 */	bl PrivateDelete__Q33ipl4nand7wrapperFPCc
-/* 81334070 00002470  48 1F C8 15 */	bl fn_81530884
+/* 81334070 00002470  48 1F C8 15 */	bl OSDisableInterrupts
 /* 81334074 00002474  7C 7B 1B 78 */	mr r27, r3
 /* 81334078 00002478  38 61 00 DE */	addi r3, r1, 0xde
 /* 8133407C 0000247C  38 80 00 00 */	li r4, 0x0
@@ -1488,7 +1522,7 @@
 /* 813340A4 000024A4  48 23 62 65 */	bl fn_8156A308
 .L_813340A8:
 /* 813340A8 000024A8  7F 63 DB 78 */	mr r3, r27
-/* 813340AC 000024AC  48 1F C8 01 */	bl fn_815308AC
+/* 813340AC 000024AC  48 1F C8 01 */	bl OSRestoreInterrupts
 .L_813340B0:
 /* 813340B0 000024B0  48 23 62 7D */	bl fn_8156A32C
 /* 813340B4 000024B4  48 23 62 E1 */	bl fn_8156A394
@@ -1650,7 +1684,7 @@
 /* 813342E4 000026E4  38 63 3E 7C */	addi r3, r3, cbThreadSwitch__Q23ipl6SystemFP8OSThreadP8OSThread@l
 /* 813342E8 000026E8  48 1F F9 75 */	bl fn_81533C5C
 /* 813342EC 000026EC  83 7C 00 08 */	lwz r27, 0x8(r28)
-/* 813342F0 000026F0  48 1F C5 95 */	bl fn_81530884
+/* 813342F0 000026F0  48 1F C5 95 */	bl OSDisableInterrupts
 /* 813342F4 000026F4  7C 7A 1B 78 */	mr r26, r3
 /* 813342F8 000026F8  7F 63 DB 78 */	mr r3, r27
 /* 813342FC 000026FC  48 2C 3D 91 */	bl fn_815F808C
@@ -1658,7 +1692,7 @@
 /* 81334304 00002704  38 60 00 00 */	li r3, 0x0
 /* 81334308 00002708  48 20 18 39 */	bl fn_81535B40
 /* 8133430C 0000270C  7F 43 D3 78 */	mr r3, r26
-/* 81334310 00002710  48 1F C5 9D */	bl fn_815308AC
+/* 81334310 00002710  48 1F C5 9D */	bl OSRestoreInterrupts
 /* 81334314 00002714  3C 60 00 04 */	lis r3, 0x4
 /* 81334318 00002718  38 80 00 00 */	li r4, 0x0
 /* 8133431C 0000271C  48 2C 38 49 */	bl fn_815F7B64
@@ -2181,6 +2215,7 @@
 /* 81334ACC 00002ECC  4E 80 00 20 */	blr
 .endfn init__Q23ipl6SystemFiPPc
 
+# .text:0x1EAC | 0x81334AD0 | size: 0x40
 # nw4r::ut::Color::~Color()
 .fn __dt__Q34nw4r2ut5ColorFv, global
 /* 81334AD0 00002ED0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -2202,6 +2237,7 @@
 /* 81334B0C 00002F0C  4E 80 00 20 */	blr
 .endfn __dt__Q34nw4r2ut5ColorFv
 
+# .text:0x1EEC | 0x81334B10 | size: 0x18
 # ipl::System::isResetAcceptable()
 .fn isResetAcceptable__Q23ipl6SystemFv, global
 /* 81334B10 00002F10  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -2212,6 +2248,7 @@
 /* 81334B24 00002F24  4E 80 00 20 */	blr
 .endfn isResetAcceptable__Q23ipl6SystemFv
 
+# .text:0x1F04 | 0x81334B28 | size: 0x3E4
 # ipl::System::run()
 .fn run__Q23ipl6SystemFv, global
 /* 81334B28 00002F28  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -2481,6 +2518,7 @@
 /* 81334F08 00003308  4B FF FC 60 */	b .L_81334B68
 .endfn run__Q23ipl6SystemFv
 
+# .text:0x22E8 | 0x81334F0C | size: 0x244
 # ipl::System::err_run()
 .fn err_run__Q23ipl6SystemFv, global
 /* 81334F0C 0000330C  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -2641,6 +2679,7 @@
 /* 8133514C 0000354C  4E 80 00 20 */	blr
 .endfn err_run__Q23ipl6SystemFv
 
+# .text:0x252C | 0x81335150 | size: 0x1F8
 # ipl::System::backup_run()
 .fn backup_run__Q23ipl6SystemFv, global
 /* 81335150 00003550  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -2774,6 +2813,7 @@
 /* 81335344 00003744  4E 80 00 20 */	blr
 .endfn backup_run__Q23ipl6SystemFv
 
+# .text:0x2724 | 0x81335348 | size: 0x218
 # ipl::System::reset_run()
 .fn reset_run__Q23ipl6SystemFv, global
 /* 81335348 00003748  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -2924,6 +2964,7 @@
 /* 8133555C 0000395C  4B FF FE 2C */	b .L_81335388
 .endfn reset_run__Q23ipl6SystemFv
 
+# .text:0x293C | 0x81335560 | size: 0x2C0
 # ipl::System::warning_run()
 .fn warning_run__Q23ipl6SystemFv, global
 /* 81335560 00003960  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -3116,6 +3157,7 @@
 /* 8133581C 00003C1C  4E 80 00 20 */	blr
 .endfn warning_run__Q23ipl6SystemFv
 
+# .text:0x2BFC | 0x81335820 | size: 0x10
 # ipl::System::reinit()
 .fn reinit__Q23ipl6SystemFv, global
 /* 81335820 00003C20  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -3124,6 +3166,7 @@
 /* 8133582C 00003C2C  48 2C 28 0C */	b fn_815F8038
 .endfn reinit__Q23ipl6SystemFv
 
+# .text:0x2C0C | 0x81335830 | size: 0xE8
 # ipl::System::cancelThread()
 .fn cancelThread__Q23ipl6SystemFv, global
 /* 81335830 00003C30  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -3190,6 +3233,7 @@
 /* 81335914 00003D14  4E 80 00 20 */	blr
 .endfn cancelThread__Q23ipl6SystemFv
 
+# .text:0x2CF4 | 0x81335918 | size: 0x34
 # ipl::System::getProjectionRect(nw4r::ut::Rect*)
 .fn getProjectionRect__Q23ipl6SystemFPQ34nw4r2ut4Rect, global
 /* 81335918 00003D18  3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
@@ -3209,6 +3253,7 @@
 /* 81335948 00003D48  4E 80 00 20 */	blr
 .endfn getProjectionRect__Q23ipl6SystemFPQ34nw4r2ut4Rect
 
+# .text:0x2D28 | 0x8133594C | size: 0x24
 # ipl::System::getProjectionRect4x3(nw4r::ut::Rect*)
 .fn getProjectionRect4x3__Q23ipl6SystemFPQ34nw4r2ut4Rect, global
 /* 8133594C 00003D4C  C0 62 80 24 */	lfs f3, lbl_81694424@sda21(r0)
@@ -3222,6 +3267,7 @@
 /* 8133596C 00003D6C  4E 80 00 20 */	blr
 .endfn getProjectionRect4x3__Q23ipl6SystemFPQ34nw4r2ut4Rect
 
+# .text:0x2D4C | 0x81335970 | size: 0x24
 # ipl::System::getProjectionRect16x9(nw4r::ut::Rect*)
 .fn getProjectionRect16x9__Q23ipl6SystemFPQ34nw4r2ut4Rect, global
 /* 81335970 00003D70  C0 62 80 34 */	lfs f3, lbl_81694434@sda21(r0)
@@ -3235,6 +3281,7 @@
 /* 81335990 00003D90  4E 80 00 20 */	blr
 .endfn getProjectionRect16x9__Q23ipl6SystemFPQ34nw4r2ut4Rect
 
+# .text:0x2D70 | 0x81335994 | size: 0x14
 # ipl::System::getRenderModeObj()
 .fn getRenderModeObj__Q23ipl6SystemFv, global
 /* 81335994 00003D94  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -3244,6 +3291,7 @@
 /* 813359A4 00003DA4  4E 80 00 20 */	blr
 .endfn getRenderModeObj__Q23ipl6SystemFv
 
+# .text:0x2D84 | 0x813359A8 | size: 0x10
 # ipl::System::getMasterController()
 .fn getMasterController__Q23ipl6SystemFv, global
 /* 813359A8 00003DA8  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -3252,6 +3300,7 @@
 /* 813359B4 00003DB4  48 00 1E CC */	b getMasterController__Q33ipl10controller7ManagerFv
 .endfn getMasterController__Q23ipl6SystemFv
 
+# .text:0x2D94 | 0x813359B8 | size: 0x10
 # ipl::System::getYoungController()
 .fn getYoungController__Q23ipl6SystemFv, global
 /* 813359B8 00003DB8  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -3260,6 +3309,7 @@
 /* 813359C4 00003DC4  48 00 1E D0 */	b getYoungController__Q33ipl10controller7ManagerFv
 .endfn getYoungController__Q23ipl6SystemFv
 
+# .text:0x2DA4 | 0x813359C8 | size: 0x14
 # ipl::System::getController(int)
 .fn getController__Q23ipl6SystemFi, global
 /* 813359C8 00003DC8  3C A0 81 09 */	lis r5, smArg__Q23ipl6System@ha
@@ -3269,6 +3319,7 @@
 /* 813359D8 00003DD8  48 00 1E B0 */	b getController__Q33ipl10controller7ManagerFi
 .endfn getController__Q23ipl6SystemFi
 
+# .text:0x2DB8 | 0x813359DC | size: 0x10
 # ipl::System::getRndm()
 .fn getRndm__Q23ipl6SystemFv, global
 /* 813359DC 00003DDC  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -3277,6 +3328,7 @@
 /* 813359E8 00003DE8  4E 80 00 20 */	blr
 .endfn getRndm__Q23ipl6SystemFv
 
+# .text:0x2DC8 | 0x813359EC | size: 0xA0
 # ipl::System::getLanguage()
 .fn getLanguage__Q23ipl6SystemFv, global
 /* 813359EC 00003DEC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -3330,6 +3382,7 @@
 /* 81335A88 00003E88  4E 80 00 20 */	blr
 .endfn getLanguage__Q23ipl6SystemFv
 
+# .text:0x2E68 | 0x81335A8C | size: 0x68
 # ipl::System::getRegion()
 .fn getRegion__Q23ipl6SystemFv, global
 /* 81335A8C 00003E8C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -3366,6 +3419,7 @@
 /* 81335AF0 00003EF0  4E 80 00 20 */	blr
 .endfn getRegion__Q23ipl6SystemFv
 
+# .text:0x2ED0 | 0x81335AF4 | size: 0x24
 # ipl::System::getFont()
 .fn getFont__Q23ipl6SystemFv, global
 /* 81335AF4 00003EF4  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -3380,6 +3434,7 @@
 /* 81335B14 00003F14  4E 80 00 20 */	blr
 .endfn getFont__Q23ipl6SystemFv
 
+# .text:0x2EF4 | 0x81335B18 | size: 0x6C
 # ipl::System::setToday_()
 .fn setToday___Q23ipl6SystemFv, global
 /* 81335B18 00003F18  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -3412,6 +3467,7 @@
 /* 81335B80 00003F80  4E 80 00 20 */	blr
 .endfn setToday___Q23ipl6SystemFv
 
+# .text:0x2F60 | 0x81335B84 | size: 0x100
 # ipl::System::getBootArg(int, char**)
 .fn getBootArg__Q23ipl6SystemFiPPc, global
 /* 81335B84 00003F84  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -3444,7 +3500,7 @@
 /* 81335BF0 00003FF0  38 7F 02 30 */	addi r3, r31, 0x230
 /* 81335BF4 00003FF4  80 84 00 04 */	lwz r4, 0x4(r4)
 /* 81335BF8 00003FF8  38 A0 00 80 */	li r5, 0x80
-/* 81335BFC 00003FFC  48 2C C7 C9 */	bl fn_816023C4
+/* 81335BFC 00003FFC  48 2C C7 C9 */	bl strncpy
 /* 81335C00 00004000  38 1F 02 30 */	addi r0, r31, 0x230
 /* 81335C04 00004004  9B DF 02 AF */	stb r30, 0x2af(r31)
 /* 81335C08 00004008  90 1F 02 28 */	stw r0, 0x228(r31)
@@ -3463,7 +3519,7 @@
 /* 81335C38 00004038  38 7F 02 30 */	addi r3, r31, 0x230
 /* 81335C3C 0000403C  80 84 00 04 */	lwz r4, 0x4(r4)
 /* 81335C40 00004040  38 A0 00 80 */	li r5, 0x80
-/* 81335C44 00004044  48 2C C7 81 */	bl fn_816023C4
+/* 81335C44 00004044  48 2C C7 81 */	bl strncpy
 /* 81335C48 00004048  38 7F 02 30 */	addi r3, r31, 0x230
 /* 81335C4C 0000404C  38 80 00 00 */	li r4, 0x0
 /* 81335C50 00004050  38 00 00 01 */	li r0, 0x1
@@ -3482,6 +3538,7 @@
 /* 81335C80 00004080  4E 80 00 20 */	blr
 .endfn getBootArg__Q23ipl6SystemFiPPc
 
+# .text:0x3060 | 0x81335C84 | size: 0x10
 # textinput::EventObserver::onOutOfLength()
 .fn onOutOfLength__Q29textinput13EventObserverFv, global
 /* 81335C84 00004084  3C 60 81 63 */	lis r3, lbl_81634699_onOutOfLength__Q29textinput13EventObserver@ha
@@ -3490,6 +3547,7 @@
 /* 81335C90 00004090  48 2C AA 10 */	b fn_816006A0
 .endfn onOutOfLength__Q29textinput13EventObserverFv
 
+# .text:0x3070 | 0x81335C94 | size: 0x10
 # textinput::EventObserver::onCancel()
 .fn onCancel__Q29textinput13EventObserverFv, global
 /* 81335C94 00004094  3C 60 81 63 */	lis r3, lbl_81634690_onCancel__Q29textinput13EventObserver@ha
@@ -3498,6 +3556,7 @@
 /* 81335CA0 000040A0  48 2C AA 00 */	b fn_816006A0
 .endfn onCancel__Q29textinput13EventObserverFv
 
+# .text:0x3080 | 0x81335CA4 | size: 0xC
 # textinput::EventObserver::onOK()
 .fn onOK__Q29textinput13EventObserverFv, global
 /* 81335CA4 000040A4  38 6D 80 35 */	li r3, lbl_81696075@sda21
@@ -3505,41 +3564,47 @@
 /* 81335CAC 000040AC  48 2C A9 F4 */	b fn_816006A0
 .endfn onOK__Q29textinput13EventObserverFv
 
+# .text:0x308C | 0x81335CB0 | size: 0x4
 # textinput::EventObserver::onSE(textinput::sound::SE)
 .fn onSE__Q29textinput13EventObserverFQ39textinput5sound2SE, global
 /* 81335CB0 000040B0  4E 80 00 20 */	blr
 .endfn onSE__Q29textinput13EventObserverFQ39textinput5sound2SE
 
+# .text:0x3090 | 0x81335CB4 | size: 0x4
 # textinput::EventObserver::onEvent(nw4r::lyt::Pane*, unsigned long)
 .fn onEvent__Q29textinput13EventObserverFPQ34nw4r3lyt4PaneUl, global
 /* 81335CB4 000040B4  4E 80 00 20 */	blr
 .endfn onEvent__Q29textinput13EventObserverFPQ34nw4r3lyt4PaneUl
 
+# .text:0x3094 | 0x81335CB8 | size: 0x4
 # textinput::EventObserver::onCommand(textinput::CommandReceiver::INPUT_COMMAND, void*)
 .fn onCommand__Q29textinput13EventObserverFQ39textinput15CommandReceiver13INPUT_COMMANDPv, global
 /* 81335CB8 000040B8  4E 80 00 20 */	blr
 .endfn onCommand__Q29textinput13EventObserverFQ39textinput15CommandReceiver13INPUT_COMMANDPv
 
+# .text:0x3098 | 0x81335CBC | size: 0x4
 # textinput::EventObserver::onInput(textinput::CommandReceiver::INPUT_COMMAND, void*)
 .fn onInput__Q29textinput13EventObserverFQ39textinput15CommandReceiver13INPUT_COMMANDPv, global
 /* 81335CBC 000040BC  4E 80 00 20 */	blr
 .endfn onInput__Q29textinput13EventObserverFQ39textinput15CommandReceiver13INPUT_COMMANDPv
 
+# .text:0x309C | 0x81335CC0 | size: 0xC
 .fn iplKeyboard_81335CC0, local
 /* 81335CC0 000040C0  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
 /* 81335CC4 000040C4  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
 /* 81335CC8 000040C8  4B FF CF 5C */	b __ct__Q33ipl6System3ArgFv
 .endfn iplKeyboard_81335CC0
 
-# 0x8160D1C4 - 0x8160D1C8
+# 0x8160D1C4..0x8160D1C8 | size: 0x4
 .section .ctors, "a"
 .balign 4
 	.4byte iplKeyboard_81335CC0
 
-# 0x81634120 - 0x816346A8
+# 0x81634120..0x816346A8 | size: 0x588
 .data
 .balign 8
 
+# .data:0x0 | 0x81634120 | size: 0x13
 .obj pad_08_81634120_data, local
 	.4byte 0x6172656E
 	.4byte 0x61206C6F
@@ -3548,26 +3613,32 @@
 	.byte 0x78, 0x0A, 0x00
 .endobj pad_08_81634120_data
 
+# .data:0x13 | 0x81634133 | size: 0x3A
 .obj lbl_81634133, global
 	.string "*****************************\n\000TREASURE HEAP: %p SIZE:%d\n"
 .endobj lbl_81634133
 
+# .data:0x4D | 0x8163416D | size: 0xB1
 .obj lbl_8163416D, global
 	.string "MEM1SYS HEAP: %p SIZE:%d\n\000/font/font.ash\000wbf1.brfna\000wbf2.brfna\000eZTSystemENAM.zsd\000eZTSystemFRCA.zsd\000eZTSystemESSA.zsd\000eZTNintendoENAM.znd\000eZTNintendoFRCA.znd\000eZTNintendoESSA.znd"
 .endobj lbl_8163416D
 
+# .data:0xFE | 0x8163421E | size: 0x1EE
 .obj lbl_8163421E, global
 	.string "MEM1SYS Free:%d NWC24 Need %d\n\000/sound/iplSound.brsar\000/layout/common/sofkeybd.ash\000/layout/common/homeBtn1.ash\000/layout/jpn/homeBtn1.ash\000/layout/eng/homeBtn1.ash\000/layout/ger/homeBtn1.ash\000/layout/fra/homeBtn1.ash\000/layout/spa/homeBtn1.ash\000/layout/ita/homeBtn1.ash\000/layout/ned/homeBtn1.ash\000/layout/kor/homeBtn1.ash\000/layout/chn/homeBtn1.ash\000/homebutton/home.csv\000/homebutton/config.txt\000/homebutton/SpeakerSe.arc\000/homebutton/homeBtnIcon.tpl\000dlgWdw.ash\000/my_question.jpg\000eZTSystemNA.arc\000eZTNintendoNA.arc"
 .endobj lbl_8163421E
 
+# .data:0x2EC | 0x8163440C | size: 0x1C
 .obj lbl_8163440C, global
 	.string "Start: Process NWC24 WiiID\n"
 .endobj lbl_8163440C
 
+# .data:0x308 | 0x81634428 | size: 0x174
 .obj lbl_81634428, global
 	.string "Done: Process NWC24 WiiID\n\000/shared2/sys/SYSCONF\000iplSystem.cpp\000/title/00000001/00000002/data/tmds.sys\000/%s/%s/main.sel\000/message/eng/ipl_common.bmg\000/message/fra/ipl_common.bmg\000/message/ger/ipl_common.bmg\000/message/ita/ipl_common.bmg\000/message/jpn/ipl_common.bmg\000/message/ned/ipl_common.bmg\000/message/spa/ipl_common.bmg\000/message/kor/ipl_common.bmg\000/message/chn/ipl_common.bmg\000\000\000"
 .endobj lbl_81634428
 
+# .data:0x47C | 0x8163459C | size: 0x30
 .obj jumptable_8163459C, local
 	.rel init__Q23ipl6SystemFiPPc, .L_8133425C
 	.rel init__Q23ipl6SystemFiPPc, .L_81334268
@@ -3583,6 +3654,7 @@
 	.rel init__Q23ipl6SystemFiPPc, .L_81334284
 .endobj jumptable_8163459C
 
+# .data:0x4AC | 0x816345CC | size: 0x30
 .obj jumptable_816345CC, local
 	.rel init__Q23ipl6SystemFiPPc, .L_8133413C
 	.rel init__Q23ipl6SystemFiPPc, .L_81334150
@@ -3598,10 +3670,12 @@
 	.rel init__Q23ipl6SystemFiPPc, .L_813341A0
 .endobj jumptable_816345CC
 
+# .data:0x4DC | 0x816345FC | size: 0x10
 .obj lbl_816345FC, global
 	.string "START reset_run"
 .endobj lbl_816345FC
 
+# .data:0x4EC | 0x8163460C | size: 0x30
 .obj jumptable_8163460C, local
 	.rel getLanguage__Q23ipl6SystemFv, .L_81335A40
 	.rel getLanguage__Q23ipl6SystemFv, .L_81335A28
@@ -3617,6 +3691,7 @@
 	.rel getLanguage__Q23ipl6SystemFv, .L_81335A68
 .endobj jumptable_8163460C
 
+# .data:0x51C | 0x8163463C | size: 0x30
 .obj jumptable_8163463C, local
 	.rel getRegion__Q23ipl6SystemFv, .L_81335AC0
 	.rel getRegion__Q23ipl6SystemFv, .L_81335AE0
@@ -3632,6 +3707,7 @@
 	.rel getRegion__Q23ipl6SystemFv, .L_81335AD8
 .endobj jumptable_8163463C
 
+# .data:0x54C | 0x8163466C | size: 0x24
 # textinput::EventObserver::__vtable
 .obj __vt__Q29textinput13EventObserver, global
 	.4byte 0x00000000
@@ -3645,11 +3721,13 @@
 	.4byte onOutOfLength__Q29textinput13EventObserverFv
 .endobj __vt__Q29textinput13EventObserver
 
+# .data:0x570 | 0x81634690 | size: 0x9
 # textinput::EventObserver::lbl_81634690_onCancel
 .obj lbl_81634690_onCancel__Q29textinput13EventObserver, global
 	.string "Cancel!\n"
 .endobj lbl_81634690_onCancel__Q29textinput13EventObserver
 
+# .data:0x579 | 0x81634699 | size: 0xF
 # textinput::EventObserver::lbl_81634699_onOutOfLength
 .obj lbl_81634699_onOutOfLength__Q29textinput13EventObserver, global
 	.4byte 0x4F75744F
@@ -3658,72 +3736,87 @@
 	.byte 0x00, 0x00, 0x00
 .endobj lbl_81634699_onOutOfLength__Q29textinput13EventObserver
 
-# 0x81694410 - 0x81694440
+# 0x81694410..0x81694440 | size: 0x30
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x81694410 | size: 0x4
 .obj lbl_81694410, global
 	.float 0
 .endobj lbl_81694410
 
+# .sdata2:0x4 | 0x81694414 | size: 0x4
 .obj gap_09_81694414_sdata2, global
 .hidden gap_09_81694414_sdata2
 	.4byte 0x00000000
 .endobj gap_09_81694414_sdata2
 
+# .sdata2:0x8 | 0x81694418 | size: 0x8
 .obj lbl_81694418, global
 	.double 4503599627370496
 .endobj lbl_81694418
 
+# .sdata2:0x10 | 0x81694420 | size: 0x4
 .obj lbl_81694420, global
 	.float 1
 .endobj lbl_81694420
 
+# .sdata2:0x14 | 0x81694424 | size: 0x4
 .obj lbl_81694424, global
 	.float -304
 .endobj lbl_81694424
 
+# .sdata2:0x18 | 0x81694428 | size: 0x4
 .obj lbl_81694428, global
 	.float 304
 .endobj lbl_81694428
 
+# .sdata2:0x1C | 0x8169442C | size: 0x4
 .obj lbl_8169442C, global
 	.float 228
 .endobj lbl_8169442C
 
+# .sdata2:0x20 | 0x81694430 | size: 0x4
 .obj lbl_81694430, global
 	.float -228
 .endobj lbl_81694430
 
+# .sdata2:0x24 | 0x81694434 | size: 0x4
 .obj lbl_81694434, global
 	.float -416
 .endobj lbl_81694434
 
+# .sdata2:0x28 | 0x81694438 | size: 0x8
 .obj lbl_81694438, global
 	.float 416
 	.float 0
 .endobj lbl_81694438
 
-# 0x81696060 - 0x81696080
+# 0x81696060..0x81696080 | size: 0x20
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x81696060 | size: 0x8
 .obj lbl_81696060, global
 	.string "cdb.vff"
 .endobj lbl_81696060
 
+# .sdata:0x8 | 0x81696068 | size: 0x3
 .obj lbl_81696068, global
 	.string "ES"
 .endobj lbl_81696068
 
+# .sdata:0xB | 0x8169606B | size: 0x6
 .obj lbl_8169606B, global
 	.string "FINAL"
 .endobj lbl_8169606B
 
+# .sdata:0x11 | 0x81696071 | size: 0x4
 .obj lbl_81696071, global
 	.string "US2"
 .endobj lbl_81696071
 
+# .sdata:0x15 | 0x81696075 | size: 0xB
 .obj lbl_81696075, global
 	.4byte 0x4F4B210A
 	.4byte 0x00000000

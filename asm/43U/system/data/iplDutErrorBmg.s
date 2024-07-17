@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplDutErrorBmg.s"
 
-# 0x8163AC40 - 0x8163AFE0
+# 0x8163AC40..0x8163AFE0 | size: 0x3A0
 .data
 .balign 8
 
+# .data:0x0 | 0x8163AC40 | size: 0x3A0
 .obj lbl_8163AC40, global
 	.4byte 0x4D455347
 	.4byte 0x626D6731

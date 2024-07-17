@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplChannelRsoThread.cpp"
 
-# 0x813598BC - 0x81359A70
+# 0x813598BC..0x81359A70 | size: 0x1B4
 .text
 .balign 4
 
+# .text:0x0 | 0x813598BC | size: 0x6C
 # ipl::channel::RsoThread::RsoThread(EGG::Heap*)
 .fn __ct__Q33ipl7channel9RsoThreadFPQ23EGG4Heap, global
 /* 813598BC 00027CBC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -36,6 +37,7 @@
 /* 81359924 00027D24  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl7channel9RsoThreadFPQ23EGG4Heap
 
+# .text:0x6C | 0x81359928 | size: 0x70
 # ipl::channel::RsoThread::~RsoThread()
 .fn __dt__Q33ipl7channel9RsoThreadFv, global
 /* 81359928 00027D28  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -69,6 +71,7 @@
 /* 81359994 00027D94  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl7channel9RsoThreadFv
 
+# .text:0xDC | 0x81359998 | size: 0x48
 # ipl::channel::RsoThread::Run()
 .fn Run__Q33ipl7channel9RsoThreadFv, global
 /* 81359998 00027D98  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -92,6 +95,7 @@
 /* 813599DC 00027DDC  4E 80 00 20 */	blr
 .endfn Run__Q33ipl7channel9RsoThreadFv
 
+# .text:0x124 | 0x813599E0 | size: 0x7C
 # ipl::channel::RsoThread::start()
 .fn start__Q33ipl7channel9RsoThreadFv, global
 /* 813599E0 00027DE0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -128,6 +132,7 @@
 /* 81359A58 00027E58  4E 80 00 20 */	blr
 .endfn start__Q33ipl7channel9RsoThreadFv
 
+# .text:0x1A0 | 0x81359A5C | size: 0x14
 # ipl::channel::RsoThread::setCalcFunc(void (*)(void))
 .fn setCalcFunc__Q33ipl7channel9RsoThreadFPFv_v, global
 /* 81359A5C 00027E5C  90 83 03 34 */	stw r4, 0x334(r3)
@@ -137,10 +142,11 @@
 /* 81359A6C 00027E6C  48 1D 75 B4 */	b OSInitMessageQueue
 .endfn setCalcFunc__Q33ipl7channel9RsoThreadFPFv_v
 
-# 0x81639200 - 0x81639230
+# 0x81639200..0x81639230 | size: 0x30
 .data
 .balign 8
 
+# .data:0x0 | 0x81639200 | size: 0x30
 .obj lbl_81639200, global
 	.4byte 0x00000000
 	.4byte 0x00000000

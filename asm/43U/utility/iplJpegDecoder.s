@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplJpegDecoder.cpp"
 
-# 0x81364E04 - 0x81365704
+# 0x81364E04..0x81365704 | size: 0x900
 .text
 .balign 4
 
+# .text:0x0 | 0x81364E04 | size: 0x90
 # ipl::utility::JpegDecoder::JpegDecoder(EGG::Heap*)
 .fn __ct__Q33ipl7utility11JpegDecoderFPQ23EGG4Heap, global
 /* 81364E04 00033204  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -45,6 +46,7 @@
 /* 81364E90 00033290  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl7utility11JpegDecoderFPQ23EGG4Heap
 
+# .text:0x90 | 0x81364E94 | size: 0x1E0
 # ipl::utility::JpegDecoder::decodeJpg(EGG::Heap*, unsigned char*, unsigned long)
 .fn decodeJpg__Q33ipl7utility11JpegDecoderFPQ23EGG4HeapPUcUl, global
 /* 81364E94 00033294  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -175,6 +177,7 @@
 /* 81365070 00033470  4E 80 00 20 */	blr
 .endfn decodeJpg__Q33ipl7utility11JpegDecoderFPQ23EGG4HeapPUcUl
 
+# .text:0x270 | 0x81365074 | size: 0x9C
 # ipl::utility::JpegDecoder::encodeOdh(EGG::Heap*, unsigned char*, unsigned long)
 .fn encodeOdh__Q33ipl7utility11JpegDecoderFPQ23EGG4HeapPUcUl, global
 /* 81365074 00033474  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -220,6 +223,7 @@
 /* 8136510C 0003350C  4E 80 00 20 */	blr
 .endfn encodeOdh__Q33ipl7utility11JpegDecoderFPQ23EGG4HeapPUcUl
 
+# .text:0x30C | 0x81365110 | size: 0x24C
 # ipl::utility::JpegDecoder::makeRawData()
 .fn makeRawData__Q33ipl7utility11JpegDecoderFv, global
 /* 81365110 00033510  94 21 FF 30 */	stwu r1, -0xd0(r1)
@@ -375,6 +379,7 @@
 /* 81365358 00033758  4E 80 00 20 */	blr
 .endfn makeRawData__Q33ipl7utility11JpegDecoderFv
 
+# .text:0x558 | 0x8136535C | size: 0x40
 # ipl::utility::JpegDecoder::waitCaptured()
 .fn waitCaptured__Q33ipl7utility11JpegDecoderFv, global
 /* 8136535C 0003375C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -395,6 +400,7 @@
 /* 81365398 00033798  4E 80 00 20 */	blr
 .endfn waitCaptured__Q33ipl7utility11JpegDecoderFv
 
+# .text:0x598 | 0x8136539C | size: 0x88
 # ipl::utility::JpegDecoder::clear()
 .fn clear__Q33ipl7utility11JpegDecoderFv, global
 /* 8136539C 0003379C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -434,6 +440,7 @@
 /* 81365420 00033820  4E 80 00 20 */	blr
 .endfn clear__Q33ipl7utility11JpegDecoderFv
 
+# .text:0x620 | 0x81365424 | size: 0x58
 # ipl::utility::JpegDecoder::readStreamCallback(void*, unsigned char*, unsigned int)
 .fn readStreamCallback__Q33ipl7utility11JpegDecoderFPvPUcUi, global
 /* 81365424 00033824  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -460,6 +467,7 @@
 /* 81365478 00033878  4E 80 00 20 */	blr
 .endfn readStreamCallback__Q33ipl7utility11JpegDecoderFPvPUcUi
 
+# .text:0x678 | 0x8136547C | size: 0x114
 # ipl::utility::JpegDecoder::get_orientation()
 .fn get_orientation__Q33ipl7utility11JpegDecoderFv, global
 /* 8136547C 0003387C  94 21 F8 E0 */	stwu r1, -0x720(r1)
@@ -537,6 +545,7 @@
 /* 8136558C 0003398C  4E 80 00 20 */	blr
 .endfn get_orientation__Q33ipl7utility11JpegDecoderFv
 
+# .text:0x78C | 0x81365590 | size: 0x90
 # ipl::utility::JpegDecoder::get_resolution(int, int)
 .fn get_resolution__Q33ipl7utility11JpegDecoderFii, global
 /* 81365590 00033990  2C 04 19 00 */	cmpwi r4, 0x1900
@@ -585,6 +594,7 @@
 /* 8136561C 00033A1C  4E 80 00 20 */	blr
 .endfn get_resolution__Q33ipl7utility11JpegDecoderFii
 
+# .text:0x81C | 0x81365620 | size: 0xE4
 # ipl::utility::JpegDecoder::calc_capture_size(int, int)
 .fn calc_capture_size__Q33ipl7utility11JpegDecoderFii, global
 /* 81365620 00033A20  80 03 07 0C */	lwz r0, 0x70c(r3)
@@ -652,47 +662,57 @@
 /* 81365700 00033B00  4E 80 00 20 */	blr
 .endfn calc_capture_size__Q33ipl7utility11JpegDecoderFii
 
-# 0x81694658 - 0x81694678
+# 0x81694658..0x81694678 | size: 0x20
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x81694658 | size: 0x1
 .obj lbl_81694658, global
 	.byte 0xFF
 .endobj lbl_81694658
 
+# .sdata2:0x1 | 0x81694659 | size: 0x1
 .obj lbl_81694659, global
 	.byte 0xFF
 .endobj lbl_81694659
 
+# .sdata2:0x2 | 0x8169465A | size: 0x1
 .obj lbl_8169465A, global
 	.byte 0xFF
 .endobj lbl_8169465A
 
+# .sdata2:0x3 | 0x8169465B | size: 0x1
 .obj lbl_8169465B, global
 	.byte 0xFF
 .endobj lbl_8169465B
 
+# .sdata2:0x4 | 0x8169465C | size: 0x4
 .obj lbl_8169465C, global
 	.float 0
 .endobj lbl_8169465C
 
+# .sdata2:0x8 | 0x81694660 | size: 0x4
 .obj lbl_81694660, global
 	.float 1
 .endobj lbl_81694660
 
+# .sdata2:0xC | 0x81694664 | size: 0x4
 .obj lbl_81694664, global
 	.float -100
 .endobj lbl_81694664
 
+# .sdata2:0x10 | 0x81694668 | size: 0x4
 .obj lbl_81694668, global
 	.float 100
 .endobj lbl_81694668
 
+# .sdata2:0x14 | 0x8169466C | size: 0x4
 .obj gap_09_8169466C_sdata2, global
 .hidden gap_09_8169466C_sdata2
 	.4byte 0x00000000
 .endobj gap_09_8169466C_sdata2
 
+# .sdata2:0x18 | 0x81694670 | size: 0x8
 .obj lbl_81694670, global
 	.double 4503599627370496
 .endobj lbl_81694670

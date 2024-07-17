@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplException.cpp"
 
-# 0x8133E310 - 0x8133E6FC
+# 0x8133E310..0x8133E6FC | size: 0x3EC
 .text
 .balign 4
 
+# .text:0x0 | 0x8133E310 | size: 0x10
 # ipl::exception_callback_(nw4r::db::detail::ConsoleHead*, void*)
 .fn exception_callback___3iplFPQ44nw4r2db6detail11ConsoleHeadPv, global
 /* 8133E310 0000C710  7C 60 1B 78 */	mr r0, r3
@@ -13,6 +14,7 @@
 /* 8133E31C 0000C71C  48 00 01 D4 */	b exception_callback__Q23ipl9ExceptionFPQ44nw4r2db6detail11ConsoleHead
 .endfn exception_callback___3iplFPQ44nw4r2db6detail11ConsoleHeadPv
 
+# .text:0x10 | 0x8133E320 | size: 0xA4
 # ipl::Exception::Exception(EGG::Heap*, const _GXRenderModeObj&)
 .fn __ct__Q23ipl9ExceptionFPQ23EGG4HeapRC16_GXRenderModeObj, global
 /* 8133E320 0000C720  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -58,6 +60,7 @@
 /* 8133E3C0 0000C7C0  4E 80 00 20 */	blr
 .endfn __ct__Q23ipl9ExceptionFPQ23EGG4HeapRC16_GXRenderModeObj
 
+# .text:0xB4 | 0x8133E3C4 | size: 0x50
 # ipl::Exception::setConsole(const _GXRenderModeObj&)
 .fn setConsole__Q23ipl9ExceptionFRC16_GXRenderModeObj, global
 /* 8133E3C4 0000C7C4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -82,6 +85,7 @@
 /* 8133E410 0000C810  4E 80 00 20 */	blr
 .endfn setConsole__Q23ipl9ExceptionFRC16_GXRenderModeObj
 
+# .text:0x104 | 0x8133E414 | size: 0xDC
 # ipl::Exception::key_input()
 .fn key_input__Q23ipl9ExceptionFv, global
 /* 8133E414 0000C814  94 21 FD C0 */	stwu r1, -0x240(r1)
@@ -147,6 +151,7 @@
 /* 8133E4EC 0000C8EC  4E 80 00 20 */	blr
 .endfn key_input__Q23ipl9ExceptionFv
 
+# .text:0x1E0 | 0x8133E4F0 | size: 0x188
 # ipl::Exception::exception_callback(nw4r::db::detail::ConsoleHead*)
 .fn exception_callback__Q23ipl9ExceptionFPQ44nw4r2db6detail11ConsoleHead, global
 /* 8133E4F0 0000C8F0  94 21 FD C0 */	stwu r1, -0x240(r1)
@@ -259,6 +264,7 @@
 /* 8133E674 0000CA74  4B FF FF 0C */	b .L_8133E580
 .endfn exception_callback__Q23ipl9ExceptionFPQ44nw4r2db6detail11ConsoleHead
 
+# .text:0x368 | 0x8133E678 | size: 0x60
 # ipl::Exception::wait(unsigned long)
 .fn wait__Q23ipl9ExceptionFUl, global
 /* 8133E678 0000CA78  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -288,6 +294,7 @@
 /* 8133E6D4 0000CAD4  4E 80 00 20 */	blr
 .endfn wait__Q23ipl9ExceptionFUl
 
+# .text:0x3C8 | 0x8133E6D8 | size: 0x24
 # nw4r::ut::Color::operator=(const nw4r::ut::Color&)
 .fn __as__Q34nw4r2ut5ColorFRCQ34nw4r2ut5Color_8133E6D8, global
 /* 8133E6D8 0000CAD8  88 E4 00 00 */	lbz r7, 0x0(r4)
@@ -301,10 +308,11 @@
 /* 8133E6F8 0000CAF8  4E 80 00 20 */	blr
 .endfn __as__Q34nw4r2ut5ColorFRCQ34nw4r2ut5Color_8133E6D8
 
-# 0x8160D600 - 0x8160D620
+# 0x8160D600..0x8160D620 | size: 0x20
 .rodata
 .balign 8
 
+# .rodata:0x0 | 0x8160D600 | size: 0x20
 .obj lbl_8160D600, global
 	.4byte 0x00000001
 	.4byte 0x00000004

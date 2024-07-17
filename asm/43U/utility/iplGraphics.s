@@ -1,19 +1,21 @@
 .include "macros.inc"
 .file "iplGraphics.cpp"
 
-# 0x810897C0 - 0x81089848
+# 0x810897C0..0x81089848 | size: 0x88
 .section .bss, "wa", @nobits
 .balign 8
 
+# .bss:0x0 | 0x810897C0 | size: 0x88
 # ipl::utility::Graphics::mArg
 .obj mArg__Q33ipl7utility8Graphics, global
 	.skip 0x88
 .endobj mArg__Q33ipl7utility8Graphics
 
-# 0x81362A00 - 0x813632A8
+# 0x81362A00..0x813632A8 | size: 0x8A8
 .text
 .balign 4
 
+# .text:0x0 | 0x81362A00 | size: 0x5C
 # ipl::utility::Graphics::Arg::Arg()
 .fn __ct__Q43ipl7utility8Graphics3ArgFv, global
 /* 81362A00 00030E00  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -41,6 +43,7 @@
 /* 81362A58 00030E58  4E 80 00 20 */	blr
 .endfn __ct__Q43ipl7utility8Graphics3ArgFv
 
+# .text:0x5C | 0x81362A5C | size: 0x10
 # ipl::math::VEC3::VEC3(float, float, float)
 .fn __ct__Q33ipl4math4VEC3Ffff, global
 /* 81362A5C 00030E5C  D0 23 00 00 */	stfs f1, 0x0(r3)
@@ -49,6 +52,7 @@
 /* 81362A68 00030E68  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl4math4VEC3Ffff
 
+# .text:0x6C | 0x81362A6C | size: 0x60
 # ipl::utility::Graphics::setOrtho(unsigned long)
 .fn setOrtho__Q33ipl7utility8GraphicsFUl, global
 /* 81362A6C 00030E6C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -77,6 +81,7 @@
 /* 81362AC8 00030EC8  4E 80 00 20 */	blr
 .endfn setOrtho__Q33ipl7utility8GraphicsFUl
 
+# .text:0xCC | 0x81362ACC | size: 0x80
 # ipl::utility::Graphics::setDefaultOrtho(unsigned long)
 .fn setDefaultOrtho__Q33ipl7utility8GraphicsFUl, global
 /* 81362ACC 00030ECC  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -113,6 +118,7 @@
 /* 81362B48 00030F48  4E 80 00 20 */	blr
 .endfn setDefaultOrtho__Q33ipl7utility8GraphicsFUl
 
+# .text:0x14C | 0x81362B4C | size: 0xB0
 # ipl::utility::Graphics::setOrthoProjection(const ipl::math::VEC3&, const ipl::math::VEC2&)
 .fn setOrthoProjection__Q33ipl7utility8GraphicsFRCQ33ipl4math4VEC3RCQ33ipl4math4VEC2, global
 /* 81362B4C 00030F4C  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -161,6 +167,7 @@
 /* 81362BF8 00030FF8  4E 80 00 20 */	blr
 .endfn setOrthoProjection__Q33ipl7utility8GraphicsFRCQ33ipl4math4VEC3RCQ33ipl4math4VEC2
 
+# .text:0x1FC | 0x81362BFC | size: 0xEC
 .fn iplGraphics_81362BFC, global
 /* 81362BFC 00030FFC  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81362C00 00031000  7C 08 02 A6 */	mflr r0
@@ -223,6 +230,7 @@
 /* 81362CE4 000310E4  4E 80 00 20 */	blr
 .endfn iplGraphics_81362BFC
 
+# .text:0x2E8 | 0x81362CE8 | size: 0x10
 # ipl::utility::Graphics::calcOrthoCamera()
 .fn calcOrthoCamera__Q33ipl7utility8GraphicsFv, global
 /* 81362CE8 000310E8  3C 60 81 09 */	lis r3, mArg__Q33ipl7utility8Graphics@ha
@@ -231,6 +239,7 @@
 /* 81362CF4 000310F4  48 1D E1 3C */	b fn_81540E30
 .endfn calcOrthoCamera__Q33ipl7utility8GraphicsFv
 
+# .text:0x2F8 | 0x81362CF8 | size: 0x44
 # ipl::utility::Graphics::setCamera(unsigned long)
 .fn setCamera__Q33ipl7utility8GraphicsFUl, global
 /* 81362CF8 000310F8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -252,6 +261,7 @@
 /* 81362D38 00031138  4E 80 00 20 */	blr
 .endfn setCamera__Q33ipl7utility8GraphicsFUl
 
+# .text:0x33C | 0x81362D3C | size: 0x26C
 # ipl::utility::Graphics::drawPolygon(const nw4r::ut::Rect&, _GXColor)
 .fn drawPolygon__Q33ipl7utility8GraphicsFRCQ34nw4r2ut4Rect8_GXColor, global
 /* 81362D3C 0003113C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -411,6 +421,7 @@
 /* 81362FA4 000313A4  4E 80 00 20 */	blr
 .endfn drawPolygon__Q33ipl7utility8GraphicsFRCQ34nw4r2ut4Rect8_GXColor
 
+# .text:0x5A8 | 0x81362FA8 | size: 0x14
 .fn iplGraphics_81362FA8, global
 /* 81362FA8 000313A8  3C 60 CC 01 */	lis r3, 0xcc01
 /* 81362FAC 000313AC  D0 23 80 00 */	stfs f1, -0x8000(r3)
@@ -419,6 +430,7 @@
 /* 81362FB8 000313B8  4E 80 00 20 */	blr
 .endfn iplGraphics_81362FA8
 
+# .text:0x5BC | 0x81362FBC | size: 0x2E0
 # ipl::utility::Graphics::drawTexture(const nw4r::ut::Rect&, const _GXTexObj&, _GXColor, unsigned char, ipl::utility::Graphics::Orientation)
 .fn drawTexture__Q33ipl7utility8GraphicsFRCQ34nw4r2ut4RectRC9_GXTexObj8_GXColorUcQ43ipl7utility8Graphics11Orientation, global
 /* 81362FBC 000313BC  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -612,37 +624,43 @@
 /* 81363298 00031698  4E 80 00 20 */	blr
 .endfn drawTexture__Q33ipl7utility8GraphicsFRCQ34nw4r2ut4RectRC9_GXTexObj8_GXColorUcQ43ipl7utility8Graphics11Orientation
 
+# .text:0x89C | 0x8136329C | size: 0xC
 .fn iplGraphics_8136329C, global
 /* 8136329C 0003169C  3C 60 81 09 */	lis r3, mArg__Q33ipl7utility8Graphics@ha
 /* 813632A0 000316A0  38 63 97 C0 */	addi r3, r3, mArg__Q33ipl7utility8Graphics@l
 /* 813632A4 000316A4  4B FF F7 5C */	b __ct__Q43ipl7utility8Graphics3ArgFv
 .endfn iplGraphics_8136329C
 
-# 0x8160D1D4 - 0x8160D1D8
+# 0x8160D1D4..0x8160D1D8 | size: 0x4
 .section .ctors, "a"
 .balign 4
 	.4byte iplGraphics_8136329C
 
-# 0x816945E8 - 0x81694600
+# 0x816945E8..0x81694600 | size: 0x18
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x816945E8 | size: 0x4
 .obj lbl_816945E8, global
 	.float 0
 .endobj lbl_816945E8
 
+# .sdata2:0x4 | 0x816945EC | size: 0x4
 .obj lbl_816945EC, global
 	.float 1
 .endobj lbl_816945EC
 
+# .sdata2:0x8 | 0x816945F0 | size: 0x4
 .obj lbl_816945F0, global
 	.float -100
 .endobj lbl_816945F0
 
+# .sdata2:0xC | 0x816945F4 | size: 0x4
 .obj lbl_816945F4, global
 	.float 100
 .endobj lbl_816945F4
 
+# .sdata2:0x10 | 0x816945F8 | size: 0x8
 .obj lbl_816945F8, global
 	.double 4503601774854144
 .endobj lbl_816945F8

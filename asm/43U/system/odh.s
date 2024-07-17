@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "odh.cpp"
 
-# 0x8135B53C - 0x8135EE98
+# 0x8135B53C..0x8135EE98 | size: 0x395C
 .text
 .balign 4
 
+# .text:0x0 | 0x8135B53C | size: 0x64
 .fn ODHEncodeRGB565, global
 /* 8135B53C 0002993C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8135B540 00029940  7C 08 02 A6 */	mflr r0
@@ -33,6 +34,7 @@
 /* 8135B59C 0002999C  4E 80 00 20 */	blr
 .endfn ODHEncodeRGB565
 
+# .text:0x64 | 0x8135B5A0 | size: 0x50
 .fn ODHDecodeRGB565, global
 /* 8135B5A0 000299A0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8135B5A4 000299A4  7C 08 02 A6 */	mflr r0
@@ -56,6 +58,7 @@
 /* 8135B5EC 000299EC  4E 80 00 20 */	blr
 .endfn ODHDecodeRGB565
 
+# .text:0xB4 | 0x8135B5F0 | size: 0x50
 .fn ODHDecodeRGBA8, global
 /* 8135B5F0 000299F0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8135B5F4 000299F4  7C 08 02 A6 */	mflr r0
@@ -79,6 +82,7 @@
 /* 8135B63C 00029A3C  4E 80 00 20 */	blr
 .endfn ODHDecodeRGBA8
 
+# .text:0x104 | 0x8135B640 | size: 0x14
 .fn ODHGetWidth, global
 /* 8135B640 00029A40  80 03 00 04 */	lwz r0, 0x4(r3)
 /* 8135B644 00029A44  54 03 05 7E */	clrlwi r3, r0, 21
@@ -87,6 +91,7 @@
 /* 8135B650 00029A50  4E 80 00 20 */	blr
 .endfn ODHGetWidth
 
+# .text:0x118 | 0x8135B654 | size: 0x14
 .fn ODHGetHeight, global
 /* 8135B654 00029A54  80 03 00 04 */	lwz r0, 0x4(r3)
 /* 8135B658 00029A58  54 03 AD 7E */	extrwi r3, r0, 11, 10
@@ -95,6 +100,7 @@
 /* 8135B664 00029A64  4E 80 00 20 */	blr
 .endfn ODHGetHeight
 
+# .text:0x12C | 0x8135B668 | size: 0x188
 # CArGBAOdh::decompressGbaOdh(unsigned char*, int, unsigned char*, int, unsigned char*, int, int)
 .fn decompressGbaOdh__9CArGBAOdhFPUciPUciPUcii, global
 /* 8135B668 00029A68  94 21 FB 50 */	stwu r1, -0x4b0(r1)
@@ -208,6 +214,7 @@
 /* 8135B7EC 00029BEC  4E 80 00 20 */	blr
 .endfn decompressGbaOdh__9CArGBAOdhFPUciPUciPUcii
 
+# .text:0x2B4 | 0x8135B7F0 | size: 0x194
 # CArGBAOdh::compressGbaOdh(unsigned char*, unsigned char*, int, int, int, unsigned long, unsigned char*, int)
 .fn compressGbaOdh__9CArGBAOdhFPUcPUciiiUlPUci, global
 /* 8135B7F0 00029BF0  94 21 FB 50 */	stwu r1, -0x4b0(r1)
@@ -321,6 +328,7 @@
 /* 8135B980 00029D80  4E 80 00 20 */	blr
 .endfn compressGbaOdh__9CArGBAOdhFPUcPUciiiUlPUci
 
+# .text:0x448 | 0x8135B984 | size: 0x19C
 # CArGBAOdh::cdj_c_initializeCompressOdh(SArCDJ_OdhMaster*, unsigned short*, unsigned char, unsigned char*, unsigned char*, unsigned long)
 .fn cdj_c_initializeCompressOdh__9CArGBAOdhFP16SArCDJ_OdhMasterPUsUcPUcPUcUl, global
 /* 8135B984 00029D84  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -435,6 +443,7 @@
 /* 8135BB1C 00029F1C  4E 80 00 20 */	blr
 .endfn cdj_c_initializeCompressOdh__9CArGBAOdhFP16SArCDJ_OdhMasterPUsUcPUcPUcUl
 
+# .text:0x5E4 | 0x8135BB20 | size: 0x284
 # CArGBAOdh::cdj_c_compressLoop(SArCDJ_OdhMaster*)
 .fn cdj_c_compressLoop__9CArGBAOdhFP16SArCDJ_OdhMaster, global
 /* 8135BB20 00029F20  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -609,6 +618,7 @@
 /* 8135BDA0 0002A1A0  4E 80 00 20 */	blr
 .endfn cdj_c_compressLoop__9CArGBAOdhFP16SArCDJ_OdhMaster
 
+# .text:0x868 | 0x8135BDA4 | size: 0xBC
 # CArGBAOdh::cdj_c_flashBuffer(SArCDJ_OdhMaster*)
 .fn cdj_c_flashBuffer__9CArGBAOdhFP16SArCDJ_OdhMaster, global
 /* 8135BDA4 0002A1A4  80 64 00 14 */	lwz r3, 0x14(r4)
@@ -665,6 +675,7 @@
 /* 8135BE5C 0002A25C  4E 80 00 20 */	blr
 .endfn cdj_c_flashBuffer__9CArGBAOdhFP16SArCDJ_OdhMaster
 
+# .text:0x924 | 0x8135BE60 | size: 0x118
 # CArGBAOdh::cdj_c_setQuantizationTable(SArCDJ_OdhMaster*, unsigned long)
 .fn cdj_c_setQuantizationTable__9CArGBAOdhFP16SArCDJ_OdhMasterUl, global
 /* 8135BE60 0002A260  94 21 FF 60 */	stwu r1, -0xa0(r1)
@@ -745,6 +756,7 @@
 /* 8135BF74 0002A374  4E 80 00 20 */	blr
 .endfn cdj_c_setQuantizationTable__9CArGBAOdhFP16SArCDJ_OdhMasterUl
 
+# .text:0xA3C | 0x8135BF78 | size: 0x6C
 # CArGBAOdh::cdj_c_makeHeader(SArCDJ_OdhMaster*, unsigned long)
 .fn cdj_c_makeHeader__9CArGBAOdhFP16SArCDJ_OdhMasterUl, global
 /* 8135BF78 0002A378  80 64 02 30 */	lwz r3, 0x230(r4)
@@ -776,6 +788,7 @@
 /* 8135BFE0 0002A3E0  4E 80 00 20 */	blr
 .endfn cdj_c_makeHeader__9CArGBAOdhFP16SArCDJ_OdhMasterUl
 
+# .text:0xAA8 | 0x8135BFE4 | size: 0x134
 # CArGBAOdh::cdj_c_colorConv(SArCDJ_OdhMaster*, unsigned char*, int)
 .fn cdj_c_colorConv__9CArGBAOdhFP16SArCDJ_OdhMasterPUci, global
 /* 8135BFE4 0002A3E4  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -867,6 +880,7 @@
 /* 8135C114 0002A514  4E 80 00 20 */	blr
 .endfn cdj_c_colorConv__9CArGBAOdhFP16SArCDJ_OdhMasterPUci
 
+# .text:0xBDC | 0x8135C118 | size: 0x248
 # CArGBAOdh::LineConv11(unsigned char*, unsigned char*, unsigned char*, unsigned char*, unsigned short, unsigned short, const long*, int)
 .fn LineConv11__9CArGBAOdhFPUcPUcPUcPUcUsUsPCli, global
 /* 8135C118 0002A518  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -1028,6 +1042,7 @@
 /* 8135C35C 0002A75C  4E 80 00 20 */	blr
 .endfn LineConv11__9CArGBAOdhFPUcPUcPUcPUcUsUsPCli
 
+# .text:0xE24 | 0x8135C360 | size: 0x2A4
 # CArGBAOdh::fdct_fast(unsigned long*, unsigned char*, unsigned long, unsigned long*)
 .fn fdct_fast__9CArGBAOdhFPUlPUcUlPUl, global
 /* 8135C360 0002A760  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1207,6 +1222,7 @@
 /* 8135C600 0002AA00  4E 80 00 20 */	blr
 .endfn fdct_fast__9CArGBAOdhFPUlPUcUlPUl
 
+# .text:0x10C8 | 0x8135C604 | size: 0x28C
 # CArGBAOdh::huffmanCoder(unsigned short*, SArCDJ_HuffmanRequest*)
 .fn huffmanCoder__9CArGBAOdhFPUsP21SArCDJ_HuffmanRequest, global
 /* 8135C604 0002AA04  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1399,6 +1415,7 @@
 /* 8135C88C 0002AC8C  4E 80 00 20 */	blr
 .endfn huffmanCoder__9CArGBAOdhFPUsP21SArCDJ_HuffmanRequest
 
+# .text:0x1354 | 0x8135C890 | size: 0xB8
 # CArGBAOdh::EmitBit(long, long, SArCDJ_HuffmanRequest*)
 .fn EmitBit__9CArGBAOdhFllP21SArCDJ_HuffmanRequest, global
 /* 8135C890 0002AC90  80 E6 00 1C */	lwz r7, 0x1c(r6)
@@ -1452,6 +1469,7 @@
 /* 8135C944 0002AD44  4E 80 00 20 */	blr
 .endfn EmitBit__9CArGBAOdhFllP21SArCDJ_HuffmanRequest
 
+# .text:0x140C | 0x8135C948 | size: 0x19C
 # CArGBAOdh::cdj_d_initializeDecompressOdh(SArCDJ_OdhMaster*, unsigned char*, unsigned char*)
 .fn cdj_d_initializeDecompressOdh__9CArGBAOdhFP16SArCDJ_OdhMasterPUcPUc, global
 /* 8135C948 0002AD48  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1568,13 +1586,14 @@
 /* 8135CAE0 0002AEE0  4E 80 00 20 */	blr
 .endfn cdj_d_initializeDecompressOdh__9CArGBAOdhFP16SArCDJ_OdhMasterPUcPUc
 
+# .text:0x15A8 | 0x8135CAE4 | size: 0xE0C
 # CArGBAOdh::cdj_d_decompressLoop(SArCDJ_OdhMaster*, int, int)
 .fn cdj_d_decompressLoop__9CArGBAOdhFP16SArCDJ_OdhMasterii, global
 /* 8135CAE4 0002AEE4  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 8135CAE8 0002AEE8  7C 08 02 A6 */	mflr r0
 /* 8135CAEC 0002AEEC  90 01 00 54 */	stw r0, 0x54(r1)
 /* 8135CAF0 0002AEF0  39 61 00 50 */	addi r11, r1, 0x50
-/* 8135CAF4 0002AEF4  48 29 C9 99 */	bl __save_gpr
+/* 8135CAF4 0002AEF4  48 29 C9 99 */	bl _savegpr_14
 /* 8135CAF8 0002AEF8  A0 04 00 06 */	lhz r0, 0x6(r4)
 /* 8135CAFC 0002AEFC  3E 80 81 61 */	lis r20, lbl_8160D9A8@ha
 /* 8135CB00 0002AF00  3E 60 81 64 */	lis r19, lbl_816392D8@ha
@@ -2522,13 +2541,14 @@
 /* 8135D8D4 0002BCD4  38 60 00 00 */	li r3, 0x0
 .L_8135D8D8:
 /* 8135D8D8 0002BCD8  39 61 00 50 */	addi r11, r1, 0x50
-/* 8135D8DC 0002BCDC  48 29 BB FD */	bl __restore_gpr
+/* 8135D8DC 0002BCDC  48 29 BB FD */	bl _restgpr_14
 /* 8135D8E0 0002BCE0  80 01 00 54 */	lwz r0, 0x54(r1)
 /* 8135D8E4 0002BCE4  7C 08 03 A6 */	mtlr r0
 /* 8135D8E8 0002BCE8  38 21 00 50 */	addi r1, r1, 0x50
 /* 8135D8EC 0002BCEC  4E 80 00 20 */	blr
 .endfn cdj_d_decompressLoop__9CArGBAOdhFP16SArCDJ_OdhMasterii
 
+# .text:0x23B4 | 0x8135D8F0 | size: 0xCC
 # CArGBAOdh::cdj_d_setDequantizationTable(SArCDJ_OdhMaster*, unsigned long)
 .fn cdj_d_setDequantizationTable__9CArGBAOdhFP16SArCDJ_OdhMasterUl, global
 /* 8135D8F0 0002BCF0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2588,6 +2608,7 @@
 /* 8135D9B8 0002BDB8  4E 80 00 20 */	blr
 .endfn cdj_d_setDequantizationTable__9CArGBAOdhFP16SArCDJ_OdhMasterUl
 
+# .text:0x2480 | 0x8135D9BC | size: 0x290
 # CArGBAOdh::cdj_d_colorDeconv(SArCDJ_OdhMaster*, unsigned char*, int)
 .fn cdj_d_colorDeconv__9CArGBAOdhFP16SArCDJ_OdhMasterPUci, global
 /* 8135D9BC 0002BDBC  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -2773,6 +2794,7 @@
 /* 8135DC48 0002C048  4E 80 00 20 */	blr
 .endfn cdj_d_colorDeconv__9CArGBAOdhFP16SArCDJ_OdhMasterPUci
 
+# .text:0x2710 | 0x8135DC4C | size: 0x164
 # CArGBAOdh::LineDeconv11(unsigned char*, unsigned char*, unsigned char*, unsigned char*, unsigned short, unsigned short, const SArDeconvTbl*, int)
 .fn LineDeconv11__9CArGBAOdhFPUcPUcPUcPUcUsUsPC12SArDeconvTbli, global
 /* 8135DC4C 0002C04C  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -2871,6 +2893,7 @@
 /* 8135DDAC 0002C1AC  4E 80 00 20 */	blr
 .endfn LineDeconv11__9CArGBAOdhFPUcPUcPUcPUcUsUsPC12SArDeconvTbli
 
+# .text:0x2874 | 0x8135DDB0 | size: 0x24
 # CArGBAOdh::ScaleLimit(long)
 .fn ScaleLimit__9CArGBAOdhFl, global
 /* 8135DDB0 0002C1B0  2C 04 00 00 */	cmpwi r4, 0x0
@@ -2886,13 +2909,14 @@
 /* 8135DDD0 0002C1D0  4E 80 00 20 */	blr
 .endfn ScaleLimit__9CArGBAOdhFl
 
+# .text:0x2898 | 0x8135DDD4 | size: 0x230
 # CArGBAOdh::LineDeconv21(unsigned char*, unsigned char*, unsigned char*, unsigned char*, unsigned short, unsigned short, const SArDeconvTbl*, int)
 .fn LineDeconv21__9CArGBAOdhFPUcPUcPUcPUcUsUsPC12SArDeconvTbli, global
 /* 8135DDD4 0002C1D4  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 8135DDD8 0002C1D8  7C 08 02 A6 */	mflr r0
 /* 8135DDDC 0002C1DC  90 01 00 64 */	stw r0, 0x64(r1)
 /* 8135DDE0 0002C1E0  39 61 00 60 */	addi r11, r1, 0x60
-/* 8135DDE4 0002C1E4  48 29 B6 A9 */	bl __save_gpr
+/* 8135DDE4 0002C1E4  48 29 B6 A9 */	bl _savegpr_14
 /* 8135DDE8 0002C1E8  7C 08 49 D6 */	mullw r0, r8, r9
 /* 8135DDEC 0002C1EC  7C 6F 1B 78 */	mr r15, r3
 /* 8135DDF0 0002C1F0  82 A1 00 68 */	lwz r21, 0x68(r1)
@@ -3031,20 +3055,21 @@
 /* 8135DFE4 0002C3E4  7C 17 00 00 */	cmpw r23, r0
 /* 8135DFE8 0002C3E8  41 80 FE 3C */	blt .L_8135DE24
 /* 8135DFEC 0002C3EC  39 61 00 60 */	addi r11, r1, 0x60
-/* 8135DFF0 0002C3F0  48 29 B4 E9 */	bl __restore_gpr
+/* 8135DFF0 0002C3F0  48 29 B4 E9 */	bl _restgpr_14
 /* 8135DFF4 0002C3F4  80 01 00 64 */	lwz r0, 0x64(r1)
 /* 8135DFF8 0002C3F8  7C 08 03 A6 */	mtlr r0
 /* 8135DFFC 0002C3FC  38 21 00 60 */	addi r1, r1, 0x60
 /* 8135E000 0002C400  4E 80 00 20 */	blr
 .endfn LineDeconv21__9CArGBAOdhFPUcPUcPUcPUcUsUsPC12SArDeconvTbli
 
+# .text:0x2AC8 | 0x8135E004 | size: 0x248
 # CArGBAOdh::LineDeconv12(unsigned char*, unsigned char*, unsigned char*, unsigned char*, unsigned short, unsigned short, const SArDeconvTbl*, int)
 .fn LineDeconv12__9CArGBAOdhFPUcPUcPUcPUcUsUsPC12SArDeconvTbli, global
 /* 8135E004 0002C404  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 8135E008 0002C408  7C 08 02 A6 */	mflr r0
 /* 8135E00C 0002C40C  90 01 00 64 */	stw r0, 0x64(r1)
 /* 8135E010 0002C410  39 61 00 60 */	addi r11, r1, 0x60
-/* 8135E014 0002C414  48 29 B4 79 */	bl __save_gpr
+/* 8135E014 0002C414  48 29 B4 79 */	bl _savegpr_14
 /* 8135E018 0002C418  7C 08 49 D6 */	mullw r0, r8, r9
 /* 8135E01C 0002C41C  7C 6F 1B 78 */	mr r15, r3
 /* 8135E020 0002C420  82 A1 00 68 */	lwz r21, 0x68(r1)
@@ -3189,20 +3214,21 @@
 /* 8135E22C 0002C62C  7C 16 00 00 */	cmpw r22, r0
 /* 8135E230 0002C630  41 80 FE 28 */	blt .L_8135E058
 /* 8135E234 0002C634  39 61 00 60 */	addi r11, r1, 0x60
-/* 8135E238 0002C638  48 29 B2 A1 */	bl __restore_gpr
+/* 8135E238 0002C638  48 29 B2 A1 */	bl _restgpr_14
 /* 8135E23C 0002C63C  80 01 00 64 */	lwz r0, 0x64(r1)
 /* 8135E240 0002C640  7C 08 03 A6 */	mtlr r0
 /* 8135E244 0002C644  38 21 00 60 */	addi r1, r1, 0x60
 /* 8135E248 0002C648  4E 80 00 20 */	blr
 .endfn LineDeconv12__9CArGBAOdhFPUcPUcPUcPUcUsUsPC12SArDeconvTbli
 
+# .text:0x2D10 | 0x8135E24C | size: 0x3D0
 # CArGBAOdh::LineDeconv22(unsigned char*, unsigned char*, unsigned char*, unsigned char*, unsigned short, unsigned short, const SArDeconvTbl*, int)
 .fn LineDeconv22__9CArGBAOdhFPUcPUcPUcPUcUsUsPC12SArDeconvTbli, global
 /* 8135E24C 0002C64C  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 8135E250 0002C650  7C 08 02 A6 */	mflr r0
 /* 8135E254 0002C654  90 01 00 74 */	stw r0, 0x74(r1)
 /* 8135E258 0002C658  39 61 00 70 */	addi r11, r1, 0x70
-/* 8135E25C 0002C65C  48 29 B2 31 */	bl __save_gpr
+/* 8135E25C 0002C65C  48 29 B2 31 */	bl _savegpr_14
 /* 8135E260 0002C660  7D 28 49 D6 */	mullw r9, r8, r9
 /* 8135E264 0002C664  83 81 00 78 */	lwz r28, 0x78(r1)
 /* 8135E268 0002C668  B1 01 00 08 */	sth r8, 0x8(r1)
@@ -3451,13 +3477,14 @@
 /* 8135E5FC 0002C9FC  7C 1D 00 00 */	cmpw r29, r0
 /* 8135E600 0002CA00  41 80 FC 98 */	blt .L_8135E298
 /* 8135E604 0002CA04  39 61 00 70 */	addi r11, r1, 0x70
-/* 8135E608 0002CA08  48 29 AE D1 */	bl __restore_gpr
+/* 8135E608 0002CA08  48 29 AE D1 */	bl _restgpr_14
 /* 8135E60C 0002CA0C  80 01 00 74 */	lwz r0, 0x74(r1)
 /* 8135E610 0002CA10  7C 08 03 A6 */	mtlr r0
 /* 8135E614 0002CA14  38 21 00 70 */	addi r1, r1, 0x70
 /* 8135E618 0002CA18  4E 80 00 20 */	blr
 .endfn LineDeconv22__9CArGBAOdhFPUcPUcPUcPUcUsUsPC12SArDeconvTbli
 
+# .text:0x30E0 | 0x8135E61C | size: 0x4C8
 # CArGBAOdh::huffmanDecoder(unsigned long*, SArCDJ_HuffmanRequest*, unsigned short**, int, unsigned long)
 .fn huffmanDecoder__9CArGBAOdhFPUlP21SArCDJ_HuffmanRequestPPUsiUl, global
 /* 8135E61C 0002CA1C  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -3815,6 +3842,7 @@
 /* 8135EAE0 0002CEE0  4E 80 00 20 */	blr
 .endfn huffmanDecoder__9CArGBAOdhFPUlP21SArCDJ_HuffmanRequestPPUsiUl
 
+# .text:0x35A8 | 0x8135EAE4 | size: 0x3B4
 # CArGBAOdh::idct_fast(const unsigned char*, unsigned long*, unsigned long*, unsigned char*, unsigned long)
 .fn idct_fast__9CArGBAOdhFPCUcPUlPUlPUcUl, global
 /* 8135EAE4 0002CEE4  94 21 FE D0 */	stwu r1, -0x130(r1)
@@ -4062,10 +4090,11 @@
 /* 8135EE94 0002D294  4E 80 00 20 */	blr
 .endfn idct_fast__9CArGBAOdhFPCUcPUlPUlPUcUl
 
-# 0x8160D968 - 0x8160F048
+# 0x8160D968..0x8160F048 | size: 0x16E0
 .rodata
 .balign 8
 
+# .rodata:0x0 | 0x8160D968 | size: 0x40
 .obj lbl_8160D968, global
 	.byte 0x00, 0x01, 0x05, 0x06, 0x0E, 0x0F, 0x1B, 0x1C
 	.byte 0x02, 0x04, 0x07, 0x0D, 0x10, 0x1A, 0x1D, 0x2A
@@ -4077,6 +4106,7 @@
 	.byte 0x23, 0x24, 0x30, 0x31, 0x39, 0x3A, 0x3E, 0x3F
 .endobj lbl_8160D968
 
+# .rodata:0x40 | 0x8160D9A8 | size: 0x40
 .obj lbl_8160D9A8, global
 	.byte 0x00, 0x01, 0x08, 0x10, 0x09, 0x02, 0x03, 0x0A
 	.byte 0x11, 0x18, 0x20, 0x19, 0x12, 0x0B, 0x04, 0x05
@@ -4088,6 +4118,7 @@
 	.byte 0x35, 0x3C, 0x3D, 0x36, 0x2F, 0x37, 0x3E, 0x3F
 .endobj lbl_8160D9A8
 
+# .rodata:0x80 | 0x8160D9E8 | size: 0x400
 .obj lbl_8160D9E8, global
 	.4byte 0x80818283
 	.4byte 0x84858687
@@ -4347,6 +4378,7 @@
 	.4byte 0x7C7D7E7F
 .endobj lbl_8160D9E8
 
+# .rodata:0x480 | 0x8160DDE8 | size: 0x80
 .obj lbl_8160DDE8, global
 	.byte 0x10, 0x0B, 0x0A, 0x10, 0x18, 0x28, 0x33, 0x3D
 	.byte 0x0C, 0x0C, 0x0E, 0x13, 0x1A, 0x3A, 0x3C, 0x37
@@ -4366,6 +4398,7 @@
 	.byte 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63
 .endobj lbl_8160DDE8
 
+# .rodata:0x500 | 0x8160DE68 | size: 0x80
 .obj lbl_8160DE68, global
 	.4byte 0x400058C5
 	.4byte 0x539F4B42
@@ -4401,6 +4434,7 @@
 	.4byte 0x098E04DF
 .endobj lbl_8160DE68
 
+# .rodata:0x580 | 0x8160DEE8 | size: 0x40
 .obj lbl_8160DEE8, global
 	.4byte 0x02000000
 	.4byte 0x03000002
@@ -4420,6 +4454,7 @@
 	.4byte 0x00000000
 .endobj lbl_8160DEE8
 
+# .rodata:0x5C0 | 0x8160DF28 | size: 0x40
 .obj lbl_8160DF28, global
 	.4byte 0x02000000
 	.4byte 0x02000001
@@ -4439,6 +4474,7 @@
 	.4byte 0x00000000
 .endobj lbl_8160DF28
 
+# .rodata:0x600 | 0x8160DF68 | size: 0x480
 .obj lbl_8160DF68, global
 	.4byte 0x00000000
 	.4byte 0x00026458
@@ -4730,6 +4766,7 @@
 	.4byte 0xFFEBD588
 .endobj lbl_8160DF68
 
+# .rodata:0xA80 | 0x8160E3E8 | size: 0xC00
 .obj lbl_8160E3E8, global
 	.4byte 0xFF4DFF4E
 	.4byte 0xFF4FFF51
@@ -5501,6 +5538,7 @@
 	.4byte 0x00DF00E1
 .endobj lbl_8160E3E8
 
+# .rodata:0x1680 | 0x8160EFE8 | size: 0x30
 .obj lbl_8160EFE8, global
 	.4byte 0x00018002
 	.4byte 0x00030000
@@ -5516,6 +5554,7 @@
 	.4byte 0x8001000B
 .endobj lbl_8160EFE8
 
+# .rodata:0x16B0 | 0x8160F018 | size: 0x30
 .obj lbl_8160F018, global
 	.4byte 0x0001C002
 	.4byte 0x80030000
@@ -5531,10 +5570,11 @@
 	.4byte 0x8001000B
 .endobj lbl_8160F018
 
-# 0x816392D8 - 0x816394A8
+# 0x816392D8..0x816394A8 | size: 0x1D0
 .data
 .balign 8
 
+# .data:0x0 | 0x816392D8 | size: 0x1D0
 .obj lbl_816392D8, global
 	.4byte lbl_8160EFE8
 	.4byte lbl_8160EFE8
@@ -5654,38 +5694,46 @@
 	.4byte 0x00000000
 .endobj lbl_816392D8
 
-# 0x816945A0 - 0x816945C8
+# 0x816945A0..0x816945C8 | size: 0x28
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x816945A0 | size: 0x4
 .obj lbl_816945A0, global
 	.float 16
 .endobj lbl_816945A0
 
+# .sdata2:0x4 | 0x816945A4 | size: 0x4
 .obj lbl_816945A4, global
 	.float 128
 .endobj lbl_816945A4
 
+# .sdata2:0x8 | 0x816945A8 | size: 0x4
 .obj lbl_816945A8, global
 	.float 1.1643835
 .endobj lbl_816945A8
 
+# .sdata2:0xC | 0x816945AC | size: 0x4
 .obj lbl_816945AC, global
 	.float 1.5960271
 .endobj lbl_816945AC
 
+# .sdata2:0x10 | 0x816945B0 | size: 0x4
 .obj lbl_816945B0, global
 	.float 0.3917616
 .endobj lbl_816945B0
 
+# .sdata2:0x14 | 0x816945B4 | size: 0x4
 .obj lbl_816945B4, global
 	.float 0.8129681
 .endobj lbl_816945B4
 
+# .sdata2:0x18 | 0x816945B8 | size: 0x8
 .obj lbl_816945B8, global
 	.double 2.01723105
 .endobj lbl_816945B8
 
+# .sdata2:0x20 | 0x816945C0 | size: 0x8
 .obj lbl_816945C0, global
 	.double 4503599627370496
 .endobj lbl_816945C0

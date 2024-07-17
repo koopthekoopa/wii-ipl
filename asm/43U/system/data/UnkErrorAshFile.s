@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "UnkErrorAshFile.s"
 
-# 0x8163B7E0 - 0x816411E8
+# 0x8163B7E0..0x816411E8 | size: 0x5A08
 .data
 .balign 8
 
+# .data:0x0 | 0x8163B7E0 | size: 0x5A08
 .obj lbl_8163B7E0, global
 	.4byte 0x41534830
 	.4byte 0x000211D4

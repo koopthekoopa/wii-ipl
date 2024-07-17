@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplPostmanManager.cpp"
 
-# 0x813571A8 - 0x81357CB8
+# 0x813571A8..0x81357CB8 | size: 0xB10
 .text
 .balign 4
 
+# .text:0x0 | 0x813571A8 | size: 0x88
 # ipl::postman::Manager::Manager(EGG::Heap*)
 .fn __ct__Q33ipl7postman7ManagerFPQ23EGG4Heap, global
 /* 813571A8 000255A8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -43,6 +44,7 @@
 /* 8135722C 0002562C  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl7postman7ManagerFPQ23EGG4Heap
 
+# .text:0x88 | 0x81357230 | size: 0x40
 # ipl::utility::ut_message<32>::~ut_message()
 .fn "__dt__Q33ipl7utility14ut_message<32>Fv", global
 /* 81357230 00025630  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -64,6 +66,7 @@
 /* 8135726C 0002566C  4E 80 00 20 */	blr
 .endfn "__dt__Q33ipl7utility14ut_message<32>Fv"
 
+# .text:0xC8 | 0x81357270 | size: 0x78
 # ipl::postman::Manager::InitManager()
 .fn InitManager__Q33ipl7postman7ManagerFv, global
 /* 81357270 00025670  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -98,6 +101,7 @@
 /* 813572E4 000256E4  4E 80 00 20 */	blr
 .endfn InitManager__Q33ipl7postman7ManagerFv
 
+# .text:0x140 | 0x813572E8 | size: 0x18
 # ipl::postman::Manager::Send_ReceiveImmediately()
 .fn Send_ReceiveImmediately__Q33ipl7postman7ManagerFv, global
 /* 813572E8 000256E8  85 83 03 68 */	lwzu r12, 0x368(r3)
@@ -108,6 +112,7 @@
 /* 813572FC 000256FC  4E 80 04 20 */	bctr
 .endfn Send_ReceiveImmediately__Q33ipl7postman7ManagerFv
 
+# .text:0x158 | 0x81357300 | size: 0x68
 # ipl::postman::Manager::Send_Pause()
 .fn Send_Pause__Q33ipl7postman7ManagerFv, global
 /* 81357300 00025700  3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
@@ -143,6 +148,7 @@
 /* 81357364 00025764  4E 80 04 20 */	bctr
 .endfn Send_Pause__Q33ipl7postman7ManagerFv
 
+# .text:0x1C0 | 0x81357368 | size: 0x68
 # ipl::postman::Manager::Send_Start()
 .fn Send_Start__Q33ipl7postman7ManagerFv, global
 /* 81357368 00025768  3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
@@ -178,6 +184,7 @@
 /* 813573CC 000257CC  4E 80 04 20 */	bctr
 .endfn Send_Start__Q33ipl7postman7ManagerFv
 
+# .text:0x228 | 0x813573D0 | size: 0x18
 # ipl::postman::Manager::Send_GetUsbEtherMacAddr()
 .fn Send_GetUsbEtherMacAddr__Q33ipl7postman7ManagerFv, global
 /* 813573D0 000257D0  85 83 03 68 */	lwzu r12, 0x368(r3)
@@ -188,6 +195,7 @@
 /* 813573E4 000257E4  4E 80 04 20 */	bctr
 .endfn Send_GetUsbEtherMacAddr__Q33ipl7postman7ManagerFv
 
+# .text:0x240 | 0x813573E8 | size: 0x18
 # ipl::postman::Manager::Send_DownloadTaskReload()
 .fn Send_DownloadTaskReload__Q33ipl7postman7ManagerFv, global
 /* 813573E8 000257E8  85 83 03 68 */	lwzu r12, 0x368(r3)
@@ -198,6 +206,7 @@
 /* 813573FC 000257FC  4E 80 04 20 */	bctr
 .endfn Send_DownloadTaskReload__Q33ipl7postman7ManagerFv
 
+# .text:0x258 | 0x81357400 | size: 0x38
 # ipl::postman::Manager::alarm_handler_(OSAlarm*, OSContext*)
 .fn alarm_handler___Q33ipl7postman7ManagerFP7OSAlarmP9OSContext, global
 /* 81357400 00025800  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -216,6 +225,7 @@
 /* 81357434 00025834  4E 80 00 20 */	blr
 .endfn alarm_handler___Q33ipl7postman7ManagerFP7OSAlarmP9OSContext
 
+# .text:0x290 | 0x81357438 | size: 0x218
 # ipl::postman::Manager::Run()
 .fn Run__Q33ipl7postman7ManagerFv, global
 /* 81357438 00025838  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -364,6 +374,7 @@
 /* 8135764C 00025A4C  4E 80 00 20 */	blr
 .endfn Run__Q33ipl7postman7ManagerFv
 
+# .text:0x4A8 | 0x81357650 | size: 0xB0
 # ipl::postman::Manager::update_playlog_()
 .fn update_playlog___Q33ipl7postman7ManagerFv, global
 /* 81357650 00025A50  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -420,6 +431,7 @@
 /* 813576FC 00025AFC  4E 80 00 20 */	blr
 .endfn update_playlog___Q33ipl7postman7ManagerFv
 
+# .text:0x558 | 0x81357700 | size: 0x50
 # ipl::postman::Manager::add_dl_task_()
 .fn add_dl_task___Q33ipl7postman7ManagerFv, global
 /* 81357700 00025B00  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -448,6 +460,7 @@
 /* 8135774C 00025B4C  4E 80 00 20 */	blr
 .endfn add_dl_task___Q33ipl7postman7ManagerFv
 
+# .text:0x5A8 | 0x81357750 | size: 0x50
 # ipl::postman::Manager::save_mail_now_()
 .fn save_mail_now___Q33ipl7postman7ManagerFv, global
 /* 81357750 00025B50  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -476,6 +489,7 @@
 /* 8135779C 00025B9C  4E 80 00 20 */	blr
 .endfn save_mail_now___Q33ipl7postman7ManagerFv
 
+# .text:0x5F8 | 0x813577A0 | size: 0x50
 # ipl::postman::Manager::do_daily_tasks_()
 .fn do_daily_tasks___Q33ipl7postman7ManagerFv, global
 /* 813577A0 00025BA0  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -504,6 +518,7 @@
 /* 813577EC 00025BEC  4E 80 00 20 */	blr
 .endfn do_daily_tasks___Q33ipl7postman7ManagerFv
 
+# .text:0x648 | 0x813577F0 | size: 0xB8
 # ipl::postman::Manager::manage_dltasklist_for_menu_()
 .fn manage_dltasklist_for_menu___Q33ipl7postman7ManagerFv, global
 /* 813577F0 00025BF0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -563,6 +578,7 @@
 /* 813578A4 00025CA4  4E 80 00 20 */	blr
 .endfn manage_dltasklist_for_menu___Q33ipl7postman7ManagerFv
 
+# .text:0x700 | 0x813578A8 | size: 0x108
 # ipl::postman::Manager::receive_immediately_()
 .fn receive_immediately___Q33ipl7postman7ManagerFv, global
 /* 813578A8 00025CA8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -645,6 +661,7 @@
 /* 813579AC 00025DAC  4E 80 00 20 */	blr
 .endfn receive_immediately___Q33ipl7postman7ManagerFv
 
+# .text:0x808 | 0x813579B0 | size: 0x58
 # ipl::postman::Manager::set_alarm_()
 .fn set_alarm___Q33ipl7postman7ManagerFv, global
 /* 813579B0 00025DB0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -671,6 +688,7 @@
 /* 81357A04 00025E04  4E 80 00 20 */	blr
 .endfn set_alarm___Q33ipl7postman7ManagerFv
 
+# .text:0x860 | 0x81357A08 | size: 0x78
 # ipl::postman::Manager::get_usb_ether_macaddr_()
 .fn get_usb_ether_macaddr___Q33ipl7postman7ManagerFv, global
 /* 81357A08 00025E08  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -707,6 +725,7 @@
 /* 81357A7C 00025E7C  4E 80 00 20 */	blr
 .endfn get_usb_ether_macaddr___Q33ipl7postman7ManagerFv
 
+# .text:0x8D8 | 0x81357A80 | size: 0x118
 # ipl::postman::Manager::set_nwc24_permission_()
 .fn set_nwc24_permission___Q33ipl7postman7ManagerFv, global
 /* 81357A80 00025E80  94 21 E4 40 */	stwu r1, -0x1bc0(r1)
@@ -787,6 +806,7 @@
 /* 81357B94 00025F94  4E 80 00 20 */	blr
 .endfn set_nwc24_permission___Q33ipl7postman7ManagerFv
 
+# .text:0x9F0 | 0x81357B98 | size: 0x94
 # ipl::postman::Manager::register_nwc24(void*)
 .fn register_nwc24__Q33ipl7postman7ManagerFPv, global
 /* 81357B98 00025F98  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -829,6 +849,7 @@
 /* 81357C28 00026028  4E 80 00 20 */	blr
 .endfn register_nwc24__Q33ipl7postman7ManagerFPv
 
+# .text:0xA84 | 0x81357C2C | size: 0x24
 # ipl::postman::Manager::ncd_debug_print_(bool)
 .fn ncd_debug_print___Q33ipl7postman7ManagerFb, global
 /* 81357C2C 0002602C  94 21 E4 90 */	stwu r1, -0x1b70(r1)
@@ -842,6 +863,7 @@
 /* 81357C4C 0002604C  4E 80 00 20 */	blr
 .endfn ncd_debug_print___Q33ipl7postman7ManagerFb
 
+# .text:0xAA8 | 0x81357C50 | size: 0x68
 # ipl::postman::Manager::~Manager()
 .fn __dt__Q33ipl7postman7ManagerFv, global
 /* 81357C50 00026050  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -873,10 +895,11 @@
 /* 81357CB4 000260B4  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl7postman7ManagerFv
 
-# 0x81638F08 - 0x81639148
+# 0x81638F08..0x81639148 | size: 0x240
 .data
 .balign 8
 
+# .data:0x0 | 0x81638F08 | size: 0x56
 .obj lbl_81638F08, global
 	.4byte 0x4E574332
 	.4byte 0x34205363
@@ -902,6 +925,7 @@
 	.2byte 0x0A00
 .endobj lbl_81638F08
 
+# .data:0x56 | 0x81638F5E | size: 0x40
 .obj lbl_81638F5E, global
 	.4byte 0x4E574332
 	.4byte 0x34205363
@@ -921,10 +945,12 @@
 	.4byte 0x652E0A00
 .endobj lbl_81638F5E
 
+# .data:0x96 | 0x81638F9E | size: 0x20
 .obj lbl_81638F9E, global
 	.string "[POSTMAN] receive_immediately_\n"
 .endobj lbl_81638F9E
 
+# .data:0xB6 | 0x81638FBE | size: 0x142
 .obj lbl_81638FBE, global
 	.4byte 0x5B504F53
 	.4byte 0x544D414E
@@ -1009,6 +1035,7 @@
 	.2byte 0x0000
 .endobj lbl_81638FBE
 
+# .data:0x1F8 | 0x81639100 | size: 0x2C
 # ipl::postman::Manager::__vtable
 .obj __vt__Q33ipl7postman7Manager, global
 	.4byte 0x00000000
@@ -1024,6 +1051,7 @@
 	.4byte SetThreadPriority__Q33ipl7utility9ut_threadFi
 .endobj __vt__Q33ipl7postman7Manager
 
+# .data:0x224 | 0x8163912C | size: 0x1C
 # ipl::utility::ut_message<32>::__vtable
 .obj "__vt__Q33ipl7utility14ut_message<32>", global
 	.4byte 0x00000000
@@ -1035,10 +1063,11 @@
 	.4byte InitMessageQueue__Q33ipl7utility15ut_message_baseFPPvl
 .endobj "__vt__Q33ipl7utility14ut_message<32>"
 
-# 0x81696208 - 0x81696210
+# 0x81696208..0x81696210 | size: 0x8
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x81696208 | size: 0x8
 .obj lbl_81696208, global
 	.4byte 0x444F4E45
 	.4byte 0x0A000000

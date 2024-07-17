@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplMessage.cpp"
 
-# 0x8133E6FC - 0x8133E7D4
+# 0x8133E6FC..0x8133E7D4 | size: 0xD8
 .text
 .balign 4
 
+# .text:0x0 | 0x8133E6FC | size: 0x14
 # ipl::message::Message::Message()
 .fn __ct__Q33ipl7message7MessageFv, global
 /* 8133E6FC 0000CAFC  38 00 00 00 */	li r0, 0x0
@@ -14,6 +15,7 @@
 /* 8133E70C 0000CB0C  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl7message7MessageFv
 
+# .text:0x14 | 0x8133E710 | size: 0x40
 # ipl::message::Message::~Message()
 .fn __dt__Q33ipl7message7MessageFv, global
 /* 8133E710 0000CB10  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -35,6 +37,7 @@
 /* 8133E74C 0000CB4C  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl7message7MessageFv
 
+# .text:0x54 | 0x8133E750 | size: 0x6C
 # ipl::message::Message::setResource(unsigned char*)
 .fn setResource__Q33ipl7message7MessageFPUc, global
 /* 8133E750 0000CB50  3C C0 49 4E */	lis r6, 0x494e
@@ -71,6 +74,7 @@
 /* 8133E7B8 0000CBB8  4E 80 00 20 */	blr
 .endfn setResource__Q33ipl7message7MessageFPUc
 
+# .text:0xC0 | 0x8133E7BC | size: 0x18
 # ipl::message::Message::getMessage(unsigned long) const
 .fn getMessage__Q33ipl7message7MessageCFUl, global
 /* 8133E7BC 0000CBBC  80 A3 00 04 */	lwz r5, 0x4(r3)

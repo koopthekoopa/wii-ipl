@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplTree.cpp"
 
-# 0x813626EC - 0x81362850
+# 0x813626EC..0x81362850 | size: 0x164
 .text
 .balign 4
 
+# .text:0x0 | 0x813626EC | size: 0x20
 # ipl::utility::RangeCheckGELTS32(long, long, long)
 .fn RangeCheckGELTS32__Q23ipl7utilityFlll, global
 /* 813626EC 00030AEC  7C 03 20 00 */	cmpw r3, r4
@@ -18,6 +19,7 @@
 /* 81362708 00030B08  4E 80 00 20 */	blr
 .endfn RangeCheckGELTS32__Q23ipl7utilityFlll
 
+# .text:0x20 | 0x8136270C | size: 0x24
 # ipl::utility::Tree::Tree()
 .fn __ct__Q33ipl7utility4TreeFv, global
 /* 8136270C 00030B0C  3C 80 81 64 */	lis r4, lbl_816411E8@ha
@@ -31,6 +33,7 @@
 /* 8136272C 00030B2C  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl7utility4TreeFv
 
+# .text:0x44 | 0x81362730 | size: 0x3C
 # ipl::utility::Tree::attach(ipl::utility::Tree*)
 .fn attach__Q33ipl7utility4TreeFPQ33ipl7utility4Tree, global
 /* 81362730 00030B30  80 A3 00 08 */	lwz r5, 0x8(r3)
@@ -52,6 +55,7 @@
 /* 81362768 00030B68  4E 80 00 20 */	blr
 .endfn attach__Q33ipl7utility4TreeFPQ33ipl7utility4Tree
 
+# .text:0x80 | 0x8136276C | size: 0x38
 # ipl::utility::Tree::insert(ipl::utility::Tree*, ipl::utility::Tree*)
 .fn insert__Q33ipl7utility4TreeFPQ33ipl7utility4TreePQ33ipl7utility4Tree, global
 /* 8136276C 00030B6C  90 64 00 04 */	stw r3, 0x4(r4)
@@ -71,6 +75,7 @@
 /* 813627A0 00030BA0  4E 80 00 20 */	blr
 .endfn insert__Q33ipl7utility4TreeFPQ33ipl7utility4TreePQ33ipl7utility4Tree
 
+# .text:0xB8 | 0x813627A4 | size: 0x4C
 # ipl::utility::Tree::detach()
 .fn detach__Q33ipl7utility4TreeFv, global
 /* 813627A4 00030BA4  80 83 00 04 */	lwz r4, 0x4(r3)
@@ -96,30 +101,35 @@
 /* 813627EC 00030BEC  4E 80 00 20 */	blr
 .endfn detach__Q33ipl7utility4TreeFv
 
+# .text:0x104 | 0x813627F0 | size: 0x8
 # ipl::utility::Tree::getPrev()
 .fn getPrev__Q33ipl7utility4TreeFv, global
 /* 813627F0 00030BF0  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 813627F4 00030BF4  4E 80 00 20 */	blr
 .endfn getPrev__Q33ipl7utility4TreeFv
 
+# .text:0x10C | 0x813627F8 | size: 0x8
 # ipl::utility::Tree::getNext()
 .fn getNext__Q33ipl7utility4TreeFv, global
 /* 813627F8 00030BF8  80 63 00 0C */	lwz r3, 0xc(r3)
 /* 813627FC 00030BFC  4E 80 00 20 */	blr
 .endfn getNext__Q33ipl7utility4TreeFv
 
+# .text:0x114 | 0x81362800 | size: 0x8
 # ipl::utility::Tree::getChild()
 .fn getChild__Q33ipl7utility4TreeFv, global
 /* 81362800 00030C00  80 63 00 08 */	lwz r3, 0x8(r3)
 /* 81362804 00030C04  4E 80 00 20 */	blr
 .endfn getChild__Q33ipl7utility4TreeFv
 
+# .text:0x11C | 0x81362808 | size: 0x8
 # ipl::utility::Tree::getParent()
 .fn getParent__Q33ipl7utility4TreeFv, global
 /* 81362808 00030C08  80 63 00 04 */	lwz r3, 0x4(r3)
 /* 8136280C 00030C0C  4E 80 00 20 */	blr
 .endfn getParent__Q33ipl7utility4TreeFv
 
+# .text:0x124 | 0x81362810 | size: 0x40
 # ipl::utility::Tree::~Tree()
 .fn __dt__Q33ipl7utility4TreeFv, global
 /* 81362810 00030C10  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -141,10 +151,11 @@
 /* 8136284C 00030C4C  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl7utility4TreeFv
 
-# 0x816411E8 - 0x81641208
+# 0x816411E8..0x81641208 | size: 0x20
 .data
 .balign 8
 
+# .data:0x0 | 0x816411E8 | size: 0x20
 .obj lbl_816411E8, global
 	.4byte 0x00000000
 	.4byte 0x00000000

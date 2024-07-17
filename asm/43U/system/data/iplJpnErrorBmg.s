@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplJpnErrorBmg.s"
 
-# 0x8163A9C0 - 0x8163AC40
+# 0x8163A9C0..0x8163AC40 | size: 0x280
 .data
 .balign 8
 
+# .data:0x0 | 0x8163A9C0 | size: 0x280
 .obj lbl_8163A9C0, global
 	.4byte 0x4D455347
 	.4byte 0x626D6731

@@ -1,19 +1,21 @@
 .include "macros.inc"
 .file "iplSocketSetting.cpp"
 
-# 0x81089720 - 0x81089760
+# 0x81089720..0x81089760 | size: 0x40
 .section .bss, "wa", @nobits
 .balign 8
 
+# .bss:0x0 | 0x81089720 | size: 0x40
 # ipl::socket::SocketSetting::mMac
 .obj mMac__Q33ipl6socket13SocketSetting, global
 	.skip 0x40
 .endobj mMac__Q33ipl6socket13SocketSetting
 
-# 0x81356E48 - 0x813571A8
+# 0x81356E48..0x813571A8 | size: 0x360
 .text
 .balign 4
 
+# .text:0x0 | 0x81356E48 | size: 0x48
 # ipl::socket::SocketSetting::getLANMacAddrUtf8()
 .fn getLANMacAddrUtf8__Q33ipl6socket13SocketSettingFv, global
 /* 81356E48 00025248  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -27,7 +29,7 @@
 /* 81356E68 00025268  38 63 97 20 */	addi r3, r3, mMac__Q33ipl6socket13SocketSetting@l
 /* 81356E6C 0002526C  38 84 8E D8 */	addi r4, r4, lbl_81638ED8@l
 /* 81356E70 00025270  4C C6 31 82 */	crclr cr1eq
-/* 81356E74 00025274  48 2A 9C 0D */	bl fn_81600A80
+/* 81356E74 00025274  48 2A 9C 0D */	bl sprintf
 .L_81356E78:
 /* 81356E78 00025278  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 81356E7C 0002527C  3C 60 81 09 */	lis r3, mMac__Q33ipl6socket13SocketSetting@ha
@@ -37,6 +39,7 @@
 /* 81356E8C 0002528C  4E 80 00 20 */	blr
 .endfn getLANMacAddrUtf8__Q33ipl6socket13SocketSettingFv
 
+# .text:0x48 | 0x81356E90 | size: 0x94
 # ipl::socket::SocketSetting::init(void*)
 .fn init__Q33ipl6socket13SocketSettingFPv, global
 /* 81356E90 00025290  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -79,6 +82,7 @@
 /* 81356F20 00025320  4E 80 00 20 */	blr
 .endfn init__Q33ipl6socket13SocketSettingFPv
 
+# .text:0xDC | 0x81356F24 | size: 0x60
 # ipl::socket::SocketSetting::finish()
 .fn finish__Q33ipl6socket13SocketSettingFv, global
 /* 81356F24 00025324  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -108,6 +112,7 @@
 /* 81356F80 00025380  4E 80 00 20 */	blr
 .endfn finish__Q33ipl6socket13SocketSettingFv
 
+# .text:0x13C | 0x81356F84 | size: 0x1C
 # ipl::socket::SocketSetting::allocfunc(unsigned long, long)
 .fn allocfunc__Q33ipl6socket13SocketSettingFUll, global
 /* 81356F84 00025384  2C 04 00 00 */	cmpwi r4, 0x0
@@ -119,6 +124,7 @@
 /* 81356F9C 0002539C  4E 80 00 20 */	blr
 .endfn allocfunc__Q33ipl6socket13SocketSettingFUll
 
+# .text:0x158 | 0x81356FA0 | size: 0x14
 # ipl::socket::SocketSetting::freefunc(unsigned long, void*, long)
 .fn freefunc__Q33ipl6socket13SocketSettingFUlPvl, global
 /* 81356FA0 000253A0  2C 04 00 00 */	cmpwi r4, 0x0
@@ -128,6 +134,7 @@
 /* 81356FB0 000253B0  4E 80 00 20 */	blr
 .endfn freefunc__Q33ipl6socket13SocketSettingFUlPvl
 
+# .text:0x16C | 0x81356FB4 | size: 0x34
 .fn iplSocket_81356FB4, global
 /* 81356FB4 000253B4  39 4D A6 A8 */	li r10, lbl_816986E8@sda21
 /* 81356FB8 000253B8  3C 60 81 09 */	lis r3, mMac__Q33ipl6socket13SocketSetting@ha
@@ -141,9 +148,10 @@
 /* 81356FD8 000253D8  89 2A 00 04 */	lbz r9, 0x4(r10)
 /* 81356FDC 000253DC  89 4A 00 05 */	lbz r10, 0x5(r10)
 /* 81356FE0 000253E0  4C C6 31 82 */	crclr cr1eq
-/* 81356FE4 000253E4  48 2A 9A 9C */	b fn_81600A80
+/* 81356FE4 000253E4  48 2A 9A 9C */	b sprintf
 .endfn iplSocket_81356FB4
 
+# .text:0x1A0 | 0x81356FE8 | size: 0x17C
 # ipl::socket::SocketSetting::obtainLANMacAddr(void*)
 .fn obtainLANMacAddr__Q33ipl6socket13SocketSettingFPv, global
 /* 81356FE8 000253E8  94 21 F6 C0 */	stwu r1, -0x940(r1)
@@ -251,6 +259,7 @@
 /* 81357160 00025560  4E 80 00 20 */	blr
 .endfn obtainLANMacAddr__Q33ipl6socket13SocketSettingFPv
 
+# .text:0x31C | 0x81357164 | size: 0x44
 # ipl::socket::SocketSetting::checkLANMacAddrAvailable()
 .fn checkLANMacAddrAvailable__Q33ipl6socket13SocketSettingFv, global
 /* 81357164 00025564  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -272,38 +281,45 @@
 /* 813571A4 000255A4  4E 80 00 20 */	blr
 .endfn checkLANMacAddrAvailable__Q33ipl6socket13SocketSettingFv
 
-# 0x81638ED8 - 0x81638F08
+# 0x81638ED8..0x81638F08 | size: 0x30
 .data
 .balign 8
 
+# .data:0x0 | 0x81638ED8 | size: 0x12
 .obj lbl_81638ED8, global
 	.string "00-00-00-00-00-00"
 .endobj lbl_81638ED8
 
+# .data:0x12 | 0x81638EEA | size: 0x1E
 .obj lbl_81638EEA, global
 	.string "%02x-%02x-%02x-%02x-%02x-%02x"
 .endobj lbl_81638EEA
 
-# 0x816986E0 - 0x816986F0
+# 0x816986E0..0x816986F0 | size: 0x10
 .section .sbss, "wa", @nobits
 .balign 8
 
+# .sbss:0x0 | 0x816986E0 | size: 0x4
 .obj lbl_816986E0, global
 	.skip 0x4
 .endobj lbl_816986E0
 
+# .sbss:0x4 | 0x816986E4 | size: 0x4
 .obj lbl_816986E4, global
 	.skip 0x4
 .endobj lbl_816986E4
 
+# .sbss:0x8 | 0x816986E8 | size: 0x6
 .obj lbl_816986E8, global
 	.skip 0x6
 .endobj lbl_816986E8
 
+# .sbss:0xE | 0x816986EE | size: 0x1
 .obj lbl_816986EE, global
 	.skip 0x1
 .endobj lbl_816986EE
 
+# .sbss:0xF | 0x816986EF | size: 0x1
 .obj gap_12_816986EF_sbss, global
 .hidden gap_12_816986EF_sbss
 	.skip 0x1

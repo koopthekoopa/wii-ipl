@@ -1,5 +1,5 @@
-#ifndef IPL_MESSAGE_MANAGER_H
-#define IPL_MESSAGE_MANAGER_H
+#ifndef IPL_MESSAGE_BASE_H
+#define IPL_MESSAGE_BASE_H
 
 #include <decomp_types.h>
 #include <revolution.h>
@@ -21,6 +21,6 @@ namespace ipl {
     }
 }
 
-#endif // IPL_MESSAGE_MANAGER_H
+#endif // IPL_MESSAGE_BASE_H
 
 

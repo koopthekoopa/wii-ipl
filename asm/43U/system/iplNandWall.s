@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplNandWall.cpp"
 
-# 0x8133DC0C - 0x8133DE08
+# 0x8133DC0C..0x8133DE08 | size: 0x1FC
 .text
 .balign 4
 
+# .text:0x0 | 0x8133DC0C | size: 0xDC
 # ipl::nandwall::throwNandCheckCommand(void*)
 .fn throwNandCheckCommand__Q23ipl8nandwallFPv, global
 /* 8133DC0C 0000C00C  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -66,6 +67,7 @@
 /* 8133DCE4 0000C0E4  4E 80 00 20 */	blr
 .endfn throwNandCheckCommand__Q23ipl8nandwallFPv
 
+# .text:0xDC | 0x8133DCE8 | size: 0x40
 # ipl::nandwall::isNandCapacity()
 .fn isNandCapacity__Q23ipl8nandwallFv, global
 /* 8133DCE8 0000C0E8  80 0D A6 70 */	lwz r0, lbl_816986B0@sda21(r0)
@@ -87,6 +89,7 @@
 /* 8133DD24 0000C124  4E 80 00 20 */	blr
 .endfn isNandCapacity__Q23ipl8nandwallFv
 
+# .text:0x11C | 0x8133DD28 | size: 0x38
 # ipl::nandwall::calcGlobalUsage_(unsigned long*, unsigned long*, NANDFileSystemStatus*)
 .fn calcGlobalUsage___Q23ipl8nandwallFPUlPUlP20NANDFileSystemStatus, global
 /* 8133DD28 0000C128  80 E5 00 18 */	lwz r7, 0x18(r5)
@@ -105,6 +108,7 @@
 /* 8133DD5C 0000C15C  4E 80 00 20 */	blr
 .endfn calcGlobalUsage___Q23ipl8nandwallFPUlPUlP20NANDFileSystemStatus
 
+# .text:0x154 | 0x8133DD60 | size: 0xA8
 # ipl::nandwall::checkNandCapacityAppBootable()
 .fn checkNandCapacityAppBootable__Q23ipl8nandwallFv, global
 /* 8133DD60 0000C160  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -153,10 +157,11 @@
 /* 8133DE04 0000C204  4E 80 00 20 */	blr
 .endfn checkNandCapacityAppBootable__Q23ipl8nandwallFv
 
-# 0x81634EF8 - 0x81634FA8
+# 0x81634EF8..0x81634FA8 | size: 0xB0
 .data
 .balign 8
 
+# .data:0x0 | 0x81634EF8 | size: 0xB0
 .obj lbl_81634EF8, global
 	.4byte 0x2A2A2A2A
 	.4byte 0x2A2A2A2A
@@ -204,31 +209,36 @@
 	.4byte 0x0A000000
 .endobj lbl_81634EF8
 
-# 0x816960C8 - 0x816960D0
+# 0x816960C8..0x816960D0 | size: 0x8
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x816960C8 | size: 0x8
 .obj lbl_816960C8, global
 	.4byte 0x2F746D70
 	.4byte 0x00000000
 .endobj lbl_816960C8
 
-# 0x816986B0 - 0x816986C0
+# 0x816986B0..0x816986C0 | size: 0x10
 .section .sbss, "wa", @nobits
 .balign 8
 
+# .sbss:0x0 | 0x816986B0 | size: 0x4
 .obj lbl_816986B0, global
 	.skip 0x4
 .endobj lbl_816986B0
 
+# .sbss:0x4 | 0x816986B4 | size: 0x4
 .obj lbl_816986B4, global
 	.skip 0x4
 .endobj lbl_816986B4
 
+# .sbss:0x8 | 0x816986B8 | size: 0x4
 .obj lbl_816986B8, global
 	.skip 0x4
 .endobj lbl_816986B8
 
+# .sbss:0xC | 0x816986BC | size: 0x4
 .obj lbl_816986BC, global
 	.skip 0x4
 .endobj lbl_816986BC

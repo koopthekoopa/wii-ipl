@@ -1,19 +1,21 @@
 .include "macros.inc"
 .file "iplChannelScriptManager.cpp"
 
-# 0x810892E0 - 0x81089550
+# 0x810892E0..0x81089550 | size: 0x270
 .section .bss, "wa", @nobits
 .balign 8
 
+# .bss:0x0 | 0x810892E0 | size: 0x270
 # ipl::channel::ChannelScriptManager::smCSVm
 .obj smCSVm__Q33ipl7channel20ChannelScriptManager, global
 	.skip 0x270
 .endobj smCSVm__Q33ipl7channel20ChannelScriptManager
 
-# 0x8133AA80 - 0x8133B2E4
+# 0x8133AA80..0x8133B2E4 | size: 0x864
 .text
 .balign 4
 
+# .text:0x0 | 0x8133AA80 | size: 0x10
 # ipl::channel::ChannelScriptManager::ChannelScriptManager()
 .fn __ct__Q33ipl7channel20ChannelScriptManagerFv, global
 /* 8133AA80 00008E80  38 00 00 00 */	li r0, 0x0
@@ -22,6 +24,7 @@
 /* 8133AA8C 00008E8C  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl7channel20ChannelScriptManagerFv
 
+# .text:0x10 | 0x8133AA90 | size: 0x90
 # ipl::channel::ChannelScriptManager::create(EGG::ExpHeap*)
 .fn create__Q33ipl7channel20ChannelScriptManagerFPQ23EGG7ExpHeap, global
 /* 8133AA90 00008E90  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -64,6 +67,7 @@
 /* 8133AB1C 00008F1C  4E 80 00 20 */	blr
 .endfn create__Q33ipl7channel20ChannelScriptManagerFPQ23EGG7ExpHeap
 
+# .text:0xA0 | 0x8133AB20 | size: 0x3D4
 # ipl::channel::ChannelScriptManager::init(ipl::nand::File*, ipl::channel::RsoThread*)
 .fn init__Q33ipl7channel20ChannelScriptManagerFPQ33ipl4nand4FilePQ33ipl7channel9RsoThread, global
 /* 8133AB20 00008F20  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -336,6 +340,7 @@
 /* 8133AEF0 000092F0  4E 80 00 20 */	blr
 .endfn init__Q33ipl7channel20ChannelScriptManagerFPQ33ipl4nand4FilePQ33ipl7channel9RsoThread
 
+# .text:0x474 | 0x8133AEF4 | size: 0x130
 # ipl::channel::ChannelScriptManager::calc()
 .fn calc__Q33ipl7channel20ChannelScriptManagerFv, global
 /* 8133AEF4 000092F4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -420,6 +425,7 @@
 /* 8133B020 00009420  4E 80 00 20 */	blr
 .endfn calc__Q33ipl7channel20ChannelScriptManagerFv
 
+# .text:0x5A4 | 0x8133B024 | size: 0xC
 # ipl::channel::ChannelScriptManager::finish()
 .fn finish__Q33ipl7channel20ChannelScriptManagerFv, global
 /* 8133B024 00009424  80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
@@ -427,6 +433,7 @@
 /* 8133B02C 0000942C  48 01 EA 30 */	b setCalcFunc__Q33ipl7channel9RsoThreadFPFv_v
 .endfn finish__Q33ipl7channel20ChannelScriptManagerFv
 
+# .text:0x5B0 | 0x8133B030 | size: 0x58
 # ipl::channel::ChannelScriptManager::destroy()
 .fn destroy__Q33ipl7channel20ChannelScriptManagerFv, global
 /* 8133B030 00009430  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -455,6 +462,7 @@
 /* 8133B084 00009484  4E 80 00 20 */	blr
 .endfn destroy__Q33ipl7channel20ChannelScriptManagerFv
 
+# .text:0x608 | 0x8133B088 | size: 0x44
 # ipl::channel::ChannelScriptManager::setData(const ipl::channel::ChannelScriptManager::CSData&)
 .fn setData__Q33ipl7channel20ChannelScriptManagerFRCQ43ipl7channel20ChannelScriptManager6CSData, global
 /* 8133B088 00009488  81 64 00 00 */	lwz r11, 0x0(r4)
@@ -476,6 +484,7 @@
 /* 8133B0C8 000094C8  4E 80 00 20 */	blr
 .endfn setData__Q33ipl7channel20ChannelScriptManagerFRCQ43ipl7channel20ChannelScriptManager6CSData
 
+# .text:0x64C | 0x8133B0CC | size: 0x1C
 # ipl::channel::ChannelScriptManager::setAltBannerSound(void*, unsigned long)
 .fn setAltBannerSound__Q33ipl7channel20ChannelScriptManagerFPvUl, global
 /* 8133B0CC 000094CC  2C 04 00 00 */	cmpwi r4, 0x0
@@ -487,6 +496,7 @@
 /* 8133B0E4 000094E4  4E 80 00 20 */	blr
 .endfn setAltBannerSound__Q33ipl7channel20ChannelScriptManagerFPvUl
 
+# .text:0x668 | 0x8133B0E8 | size: 0x48
 # ipl::channel::ChannelScriptManager::isValidAddr(void*)
 .fn isValidAddr__Q33ipl7channel20ChannelScriptManagerFPv, global
 /* 8133B0E8 000094E8  80 C3 00 04 */	lwz r6, 0x4(r3)
@@ -512,6 +522,7 @@
 /* 8133B12C 0000952C  4E 80 00 20 */	blr
 .endfn isValidAddr__Q33ipl7channel20ChannelScriptManagerFPv
 
+# .text:0x6B0 | 0x8133B130 | size: 0x1B4
 # ipl::channel::ChannelScriptManager::calcCSThread()
 .fn calcCSThread__Q33ipl7channel20ChannelScriptManagerFv, global
 /* 8133B130 00009530  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -555,7 +566,7 @@
 .L_8133B1C4:
 /* 8133B1C4 000095C4  3B 80 00 04 */	li r28, 0x4
 /* 8133B1C8 000095C8  93 81 00 08 */	stw r28, 0x8(r1)
-/* 8133B1CC 000095CC  48 1F 56 B9 */	bl fn_81530884
+/* 8133B1CC 000095CC  48 1F 56 B9 */	bl OSDisableInterrupts
 /* 8133B1D0 000095D0  80 AD A6 68 */	lwz r5, lbl_816986A8@sda21(r0)
 /* 8133B1D4 000095D4  30 03 FF FF */	subic r0, r3, 0x1
 /* 8133B1D8 000095D8  7F 40 19 10 */	subfe r26, r0, r3
@@ -565,7 +576,7 @@
 /* 8133B1E8 000095E8  48 1F 5E 99 */	bl OSSendMessage
 /* 8133B1EC 000095EC  93 8D A6 6C */	stw r28, lbl_816986AC@sda21(r0)
 /* 8133B1F0 000095F0  7F 43 D3 78 */	mr r3, r26
-/* 8133B1F4 000095F4  48 1F 56 B9 */	bl fn_815308AC
+/* 8133B1F4 000095F4  48 1F 56 B9 */	bl OSRestoreInterrupts
 /* 8133B1F8 000095F8  48 00 00 D4 */	b .L_8133B2CC
 .L_8133B1FC:
 /* 8133B1FC 000095FC  2C 03 FC 50 */	cmpwi r3, -0x3b0
@@ -591,7 +602,7 @@
 .L_8133B24C:
 /* 8133B24C 0000964C  3B E0 00 04 */	li r31, 0x4
 /* 8133B250 00009650  93 E1 00 08 */	stw r31, 0x8(r1)
-/* 8133B254 00009654  48 1F 56 31 */	bl fn_81530884
+/* 8133B254 00009654  48 1F 56 31 */	bl OSDisableInterrupts
 /* 8133B258 00009658  80 AD A6 68 */	lwz r5, lbl_816986A8@sda21(r0)
 /* 8133B25C 0000965C  30 03 FF FF */	subic r0, r3, 0x1
 /* 8133B260 00009660  7F 40 19 10 */	subfe r26, r0, r3
@@ -601,7 +612,7 @@
 /* 8133B270 00009670  48 1F 5E 11 */	bl OSSendMessage
 /* 8133B274 00009674  93 ED A6 6C */	stw r31, lbl_816986AC@sda21(r0)
 /* 8133B278 00009678  7F 43 D3 78 */	mr r3, r26
-/* 8133B27C 0000967C  48 1F 56 31 */	bl fn_815308AC
+/* 8133B27C 0000967C  48 1F 56 31 */	bl OSRestoreInterrupts
 /* 8133B280 00009680  48 00 00 4C */	b .L_8133B2CC
 .L_8133B284:
 /* 8133B284 00009684  2C 03 FC 19 */	cmpwi r3, -0x3e7
@@ -612,7 +623,7 @@
 .L_8133B298:
 /* 8133B298 00009698  3B E0 00 04 */	li r31, 0x4
 /* 8133B29C 0000969C  93 E1 00 08 */	stw r31, 0x8(r1)
-/* 8133B2A0 000096A0  48 1F 55 E5 */	bl fn_81530884
+/* 8133B2A0 000096A0  48 1F 55 E5 */	bl OSDisableInterrupts
 /* 8133B2A4 000096A4  80 AD A6 68 */	lwz r5, lbl_816986A8@sda21(r0)
 /* 8133B2A8 000096A8  30 03 FF FF */	subic r0, r3, 0x1
 /* 8133B2AC 000096AC  7F 40 19 10 */	subfe r26, r0, r3
@@ -622,7 +633,7 @@
 /* 8133B2BC 000096BC  48 1F 5D C5 */	bl OSSendMessage
 /* 8133B2C0 000096C0  93 ED A6 6C */	stw r31, lbl_816986AC@sda21(r0)
 /* 8133B2C4 000096C4  7F 43 D3 78 */	mr r3, r26
-/* 8133B2C8 000096C8  48 1F 55 E5 */	bl fn_815308AC
+/* 8133B2C8 000096C8  48 1F 55 E5 */	bl OSRestoreInterrupts
 .L_8133B2CC:
 /* 8133B2CC 000096CC  39 61 00 30 */	addi r11, r1, 0x30
 /* 8133B2D0 000096D0  48 2B E2 39 */	bl _restgpr_26
@@ -632,10 +643,11 @@
 /* 8133B2E0 000096E0  4E 80 00 20 */	blr
 .endfn calcCSThread__Q33ipl7channel20ChannelScriptManagerFv
 
-# 0x81634B08 - 0x81634CD8
+# 0x81634B08..0x81634CD8 | size: 0x1D0
 .data
 .balign 8
 
+# .data:0x0 | 0x81634B08 | size: 0x188
 .obj lbl_81634B08, global
 	.4byte 0x69706C43
 	.4byte 0x68616E6E
@@ -737,16 +749,19 @@
 	.4byte 0x720A0000
 .endobj lbl_81634B08
 
+# .data:0x188 | 0x81634C90 | size: 0xC
 .obj lbl_81634C90, global
 	.string "iplNand.cpp"
 .endobj lbl_81634C90
 
+# .data:0x194 | 0x81634C9C | size: 0xC
 .obj lbl_81634C9C, global
 	.4byte 0x2F636F6D
 	.4byte 0x6D6F6E2F
 	.4byte 0x00000000
 .endobj lbl_81634C9C
 
+# .data:0x1A0 | 0x81634CA8 | size: 0x30
 .obj jumptable_81634CA8, global
 	.4byte nand_error_handling__Q33ipl4nand4FileFi+0x70
 	.4byte nand_error_handling__Q33ipl4nand4FileFi+0xAC
@@ -762,14 +777,16 @@
 	.4byte nand_error_handling__Q33ipl4nand4FileFi+0x7C
 .endobj jumptable_81634CA8
 
-# 0x816986A8 - 0x816986B0
+# 0x816986A8..0x816986B0 | size: 0x8
 .section .sbss, "wa", @nobits
 .balign 8
 
+# .sbss:0x0 | 0x816986A8 | size: 0x4
 .obj lbl_816986A8, global
 	.skip 0x4
 .endobj lbl_816986A8
 
+# .sbss:0x4 | 0x816986AC | size: 0x4
 .obj lbl_816986AC, global
 	.skip 0x4
 .endobj lbl_816986AC

@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplChnErrorBmg.s"
 
-# 0x8163B620 - 0x8163B7E0
+# 0x8163B620..0x8163B7E0 | size: 0x1C0
 .data
 .balign 8
 
+# .data:0x0 | 0x8163B620 | size: 0x1C0
 .obj lbl_8163B620, global
 	.4byte 0x4D455347
 	.4byte 0x626D6731

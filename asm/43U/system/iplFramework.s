@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplFramework.cpp"
 
-# 0x8133DE08 - 0x8133E310
+# 0x8133DE08..0x8133E310 | size: 0x508
 .text
 .balign 4
 
+# .text:0x0 | 0x8133DE08 | size: 0x58
 # ipl::Framework::Framework(EGG::Heap*)
 .fn __ct__Q23ipl9FrameworkFPQ23EGG4Heap, global
 /* 8133DE08 0000C208  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -31,6 +32,7 @@
 /* 8133DE5C 0000C25C  4E 80 00 20 */	blr
 .endfn __ct__Q23ipl9FrameworkFPQ23EGG4Heap
 
+# .text:0x58 | 0x8133DE60 | size: 0x14
 # ipl::Framework::beginFrame()
 .fn beginFrame__Q23ipl9FrameworkFv, global
 /* 8133DE60 0000C260  80 03 00 04 */	lwz r0, 0x4(r3)
@@ -40,11 +42,13 @@
 /* 8133DE70 0000C270  4E 80 00 20 */	blr
 .endfn beginFrame__Q23ipl9FrameworkFv
 
+# .text:0x6C | 0x8133DE74 | size: 0x4
 # ipl::Framework::beginRender()
 .fn beginRender__Q23ipl9FrameworkFv, global
 /* 8133DE74 0000C274  48 20 85 1C */	b GXInvalidateTexAll
 .endfn beginRender__Q23ipl9FrameworkFv
 
+# .text:0x70 | 0x8133DE78 | size: 0x98
 # ipl::Framework::endRender()
 .fn endRender__Q23ipl9FrameworkFv, global
 /* 8133DE78 0000C278  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -87,6 +91,7 @@
 /* 8133DF0C 0000C30C  4E 80 00 20 */	blr
 .endfn endRender__Q23ipl9FrameworkFv
 
+# .text:0x108 | 0x8133DF10 | size: 0x48
 # ipl::Framework::endFrame()
 .fn endFrame__Q23ipl9FrameworkFv, global
 /* 8133DF10 0000C310  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -109,6 +114,7 @@
 /* 8133DF54 0000C354  4E 80 00 20 */	blr
 .endfn endFrame__Q23ipl9FrameworkFv
 
+# .text:0x150 | 0x8133DF58 | size: 0xB4
 # ipl::Framework::resetRenderMode()
 .fn resetRenderMode__Q23ipl9FrameworkFv, global
 /* 8133DF58 0000C358  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -158,6 +164,7 @@
 /* 8133E008 0000C408  4E 80 00 20 */	blr
 .endfn resetRenderMode__Q23ipl9FrameworkFv
 
+# .text:0x204 | 0x8133E00C | size: 0x1D8
 # ipl::Framework::reset_render_mode()
 .fn reset_render_mode__Q23ipl9FrameworkFv, global
 /* 8133E00C 0000C40C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -296,6 +303,7 @@
 /* 8133E1E0 0000C5E0  4E 80 00 20 */	blr
 .endfn reset_render_mode__Q23ipl9FrameworkFv
 
+# .text:0x3DC | 0x8133E1E4 | size: 0xA4
 # ipl::Framework::init_vi()
 .fn init_vi__Q23ipl9FrameworkFv, global
 /* 8133E1E4 0000C5E4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -341,6 +349,7 @@
 /* 8133E284 0000C684  4E 80 00 20 */	blr
 .endfn init_vi__Q23ipl9FrameworkFv
 
+# .text:0x480 | 0x8133E288 | size: 0x88
 # ipl::Framework::init_xfb(EGG::Heap*)
 .fn init_xfb__Q23ipl9FrameworkFPQ23EGG4Heap, global
 /* 8133E288 0000C688  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -380,10 +389,11 @@
 /* 8133E30C 0000C70C  4E 80 00 20 */	blr
 .endfn init_xfb__Q23ipl9FrameworkFPQ23EGG4Heap
 
-# 0x81634FA8 - 0x816350D8
+# 0x81634FA8..0x816350D8 | size: 0x130
 .data
 .balign 8
 
+# .data:0x0 | 0x81634FA8 | size: 0x130
 .obj lbl_81634FA8, global
 	.4byte 0x00000000
 	.4byte 0x028001C8
@@ -463,14 +473,16 @@
 	.4byte 0x00000000
 .endobj lbl_81634FA8
 
-# 0x81694490 - 0x81694498
+# 0x81694490..0x81694498 | size: 0x8
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x81694490 | size: 0x4
 .obj lbl_81694490, global
 	.float 1
 .endobj lbl_81694490
 
+# .sdata2:0x4 | 0x81694494 | size: 0x4
 .obj lbl_81694494, global
 	.float 1.2
 .endobj lbl_81694494

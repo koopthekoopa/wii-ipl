@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplNandSDWorker.cpp"
 
-# 0x813483EC - 0x81354CD0
+# 0x813483EC..0x81354CD0 | size: 0xC8E4
 .text
 .balign 4
 
+# .text:0x0 | 0x813483EC | size: 0xC
 # ipl::NandSDWorker::NandSDWorker()
 .fn __ct__Q23ipl12NandSDWorkerFv, global
 /* 813483EC 000167EC  38 00 00 00 */	li r0, 0x0
@@ -12,6 +13,7 @@
 /* 813483F4 000167F4  4E 80 00 20 */	blr
 .endfn __ct__Q23ipl12NandSDWorkerFv
 
+# .text:0xC | 0x813483F8 | size: 0x40
 # ipl::NandSDWorker::~NandSDWorker()
 .fn __dt__Q23ipl12NandSDWorkerFv, global
 /* 813483F8 000167F8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -33,6 +35,7 @@
 /* 81348434 00016834  4E 80 00 20 */	blr
 .endfn __dt__Q23ipl12NandSDWorkerFv
 
+# .text:0x4C | 0x81348438 | size: 0x3C0
 # ipl::NandSDWorker::create(void*, void*, void*, int)
 .fn create__Q23ipl12NandSDWorkerFPvPvPvi, global
 /* 81348438 00016838  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -281,6 +284,7 @@
 /* 813487F4 00016BF4  4E 80 00 20 */	blr
 .endfn create__Q23ipl12NandSDWorkerFPvPvPvi
 
+# .text:0x40C | 0x813487F8 | size: 0x10
 # ipl::NandSDWorker::is_terminated()
 .fn is_terminated__Q23ipl12NandSDWorkerFv, global
 /* 813487F8 00016BF8  80 03 00 00 */	lwz r0, 0x0(r3)
@@ -289,6 +293,7 @@
 /* 81348804 00016C04  4E 80 00 20 */	blr
 .endfn is_terminated__Q23ipl12NandSDWorkerFv
 
+# .text:0x41C | 0x81348808 | size: 0x2C
 # ipl::NandSDWorker::is_working()
 .fn is_working__Q23ipl12NandSDWorkerFv, global
 /* 81348808 00016C08  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -304,6 +309,7 @@
 /* 81348830 00016C30  4E 80 00 20 */	blr
 .endfn is_working__Q23ipl12NandSDWorkerFv
 
+# .text:0x448 | 0x81348834 | size: 0x50
 # ipl::NandSDWorker::get_async_result()
 .fn get_async_result__Q23ipl12NandSDWorkerFv, global
 /* 81348834 00016C34  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -330,12 +336,14 @@
 /* 81348880 00016C80  4E 80 00 20 */	blr
 .endfn get_async_result__Q23ipl12NandSDWorkerFv
 
+# .text:0x498 | 0x81348884 | size: 0x8
 # ipl::NandSDWorker::get_sd_state()
 .fn get_sd_state__Q23ipl12NandSDWorkerFv, global
 /* 81348884 00016C84  80 6D A6 98 */	lwz r3, lbl_816986D8@sda21(r0)
 /* 81348888 00016C88  4E 80 00 20 */	blr
 .endfn get_sd_state__Q23ipl12NandSDWorkerFv
 
+# .text:0x4A0 | 0x8134888C | size: 0x10
 # ipl::NandSDWorker::get_nand_save_num()
 .fn get_nand_save_num__Q23ipl12NandSDWorkerFv, global
 /* 8134888C 00016C8C  80 63 00 00 */	lwz r3, 0x0(r3)
@@ -344,6 +352,7 @@
 /* 81348898 00016C98  4E 80 00 20 */	blr
 .endfn get_nand_save_num__Q23ipl12NandSDWorkerFv
 
+# .text:0x4B0 | 0x8134889C | size: 0x10
 # ipl::NandSDWorker::get_nand_app_num()
 .fn get_nand_app_num__Q23ipl12NandSDWorkerFv, global
 /* 8134889C 00016C9C  80 63 00 00 */	lwz r3, 0x0(r3)
@@ -352,6 +361,7 @@
 /* 813488A8 00016CA8  4E 80 00 20 */	blr
 .endfn get_nand_app_num__Q23ipl12NandSDWorkerFv
 
+# .text:0x4C0 | 0x813488AC | size: 0x48
 # ipl::NandSDWorker::get_cached_nand_save_banner(unsigned long long)
 .fn get_cached_nand_save_banner__Q23ipl12NandSDWorkerFUx, global
 /* 813488AC 00016CAC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -376,6 +386,7 @@
 /* 813488F0 00016CF0  4E 80 00 20 */	blr
 .endfn get_cached_nand_save_banner__Q23ipl12NandSDWorkerFUx
 
+# .text:0x508 | 0x813488F4 | size: 0x64
 # ipl::NandSDWorker::get_cached_nand_app_thumbnail(unsigned long long, unsigned long*)
 .fn get_cached_nand_app_thumbnail__Q23ipl12NandSDWorkerFUxPUl, global
 /* 813488F4 00016CF4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -408,6 +419,7 @@
 /* 81348954 00016D54  4E 80 00 20 */	blr
 .endfn get_cached_nand_app_thumbnail__Q23ipl12NandSDWorkerFUxPUl
 
+# .text:0x56C | 0x81348958 | size: 0x50
 # ipl::NandSDWorker::get_cached_nand_app_meta_header(unsigned long long)
 .fn get_cached_nand_app_meta_header__Q23ipl12NandSDWorkerFUx, global
 /* 81348958 00016D58  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -434,6 +446,7 @@
 /* 813489A4 00016DA4  4E 80 00 20 */	blr
 .endfn get_cached_nand_app_meta_header__Q23ipl12NandSDWorkerFUx
 
+# .text:0x5BC | 0x813489A8 | size: 0x6C
 # ipl::NandSDWorker::get_cached_sd_app_meta_header(unsigned long)
 .fn get_cached_sd_app_meta_header__Q23ipl12NandSDWorkerFUl, global
 /* 813489A8 00016DA8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -468,6 +481,7 @@
 /* 81348A10 00016E10  4E 80 00 20 */	blr
 .endfn get_cached_sd_app_meta_header__Q23ipl12NandSDWorkerFUl
 
+# .text:0x628 | 0x81348A14 | size: 0x4C
 # ipl::NandSDWorker::get_cached_nand_save_size(unsigned long long)
 .fn get_cached_nand_save_size__Q23ipl12NandSDWorkerFUx, global
 /* 81348A14 00016E14  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -493,6 +507,7 @@
 /* 81348A5C 00016E5C  4E 80 00 20 */	blr
 .endfn get_cached_nand_save_size__Q23ipl12NandSDWorkerFUx
 
+# .text:0x674 | 0x81348A60 | size: 0x48
 # ipl::NandSDWorker::get_cached_nand_app_size(unsigned long long)
 .fn get_cached_nand_app_size__Q23ipl12NandSDWorkerFUx, global
 /* 81348A60 00016E60  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -517,6 +532,7 @@
 /* 81348AA4 00016EA4  4E 80 00 20 */	blr
 .endfn get_cached_nand_app_size__Q23ipl12NandSDWorkerFUx
 
+# .text:0x6BC | 0x81348AA8 | size: 0x24
 # ipl::NandSDWorker::get_sd_save_num()
 .fn get_sd_save_num__Q23ipl12NandSDWorkerFv, global
 /* 81348AA8 00016EA8  80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
@@ -531,6 +547,7 @@
 /* 81348AC8 00016EC8  4E 80 00 20 */	blr
 .endfn get_sd_save_num__Q23ipl12NandSDWorkerFv
 
+# .text:0x6E0 | 0x81348ACC | size: 0x24
 # ipl::NandSDWorker::get_sd_app_num()
 .fn get_sd_app_num__Q23ipl12NandSDWorkerFv, global
 /* 81348ACC 00016ECC  80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
@@ -545,6 +562,7 @@
 /* 81348AEC 00016EEC  4E 80 00 20 */	blr
 .endfn get_sd_app_num__Q23ipl12NandSDWorkerFv
 
+# .text:0x704 | 0x81348AF0 | size: 0x64
 # ipl::NandSDWorker::get_cached_sd_save_banner(unsigned long)
 .fn get_cached_sd_save_banner__Q23ipl12NandSDWorkerFUl, global
 /* 81348AF0 00016EF0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -577,6 +595,7 @@
 /* 81348B50 00016F50  4E 80 00 20 */	blr
 .endfn get_cached_sd_save_banner__Q23ipl12NandSDWorkerFUl
 
+# .text:0x768 | 0x81348B54 | size: 0x80
 # ipl::NandSDWorker::get_cached_sd_app_thumbnail(unsigned long, unsigned long*)
 .fn get_cached_sd_app_thumbnail__Q23ipl12NandSDWorkerFUlPUl, global
 /* 81348B54 00016F54  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -617,6 +636,7 @@
 /* 81348BD0 00016FD0  4E 80 00 20 */	blr
 .endfn get_cached_sd_app_thumbnail__Q23ipl12NandSDWorkerFUlPUl
 
+# .text:0x7E8 | 0x81348BD4 | size: 0x68
 # ipl::NandSDWorker::get_cached_sd_save_size(unsigned long)
 .fn get_cached_sd_save_size__Q23ipl12NandSDWorkerFUl, global
 /* 81348BD4 00016FD4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -650,6 +670,7 @@
 /* 81348C38 00017038  4E 80 00 20 */	blr
 .endfn get_cached_sd_save_size__Q23ipl12NandSDWorkerFUl
 
+# .text:0x850 | 0x81348C3C | size: 0x64
 # ipl::NandSDWorker::get_cached_sd_app_size(unsigned long)
 .fn get_cached_sd_app_size__Q23ipl12NandSDWorkerFUl, global
 /* 81348C3C 0001703C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -682,6 +703,7 @@
 /* 81348C9C 0001709C  4E 80 00 20 */	blr
 .endfn get_cached_sd_app_size__Q23ipl12NandSDWorkerFUl
 
+# .text:0x8B4 | 0x81348CA0 | size: 0x24
 # ipl::NandSDWorker::is_sd_write_protected()
 .fn is_sd_write_protected__Q23ipl12NandSDWorkerFv, global
 /* 81348CA0 000170A0  80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
@@ -696,6 +718,7 @@
 /* 81348CC0 000170C0  4E 80 00 20 */	blr
 .endfn is_sd_write_protected__Q23ipl12NandSDWorkerFv
 
+# .text:0x8D8 | 0x81348CC4 | size: 0x24
 # ipl::NandSDWorker::get_sd_drive_letter()
 .fn get_sd_drive_letter__Q23ipl12NandSDWorkerFv, global
 /* 81348CC4 000170C4  80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
@@ -710,12 +733,14 @@
 /* 81348CE4 000170E4  4E 80 00 20 */	blr
 .endfn get_sd_drive_letter__Q23ipl12NandSDWorkerFv
 
+# .text:0x8FC | 0x81348CE8 | size: 0x8
 # ipl::NandSDWorker::startup_async()
 .fn startup_async__Q23ipl12NandSDWorkerFv, global
 /* 81348CE8 000170E8  38 80 00 02 */	li r4, 0x2
 /* 81348CEC 000170EC  48 00 9A 0C */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn startup_async__Q23ipl12NandSDWorkerFv
 
+# .text:0x904 | 0x81348CF0 | size: 0x48
 # ipl::NandSDWorker::terminate_async()
 .fn terminate_async__Q23ipl12NandSDWorkerFv, global
 /* 81348CF0 000170F0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -739,12 +764,14 @@
 /* 81348D34 00017134  4E 80 00 20 */	blr
 .endfn terminate_async__Q23ipl12NandSDWorkerFv
 
+# .text:0x94C | 0x81348D38 | size: 0x8
 # ipl::NandSDWorker::mount_sd_async()
 .fn mount_sd_async__Q23ipl12NandSDWorkerFv, global
 /* 81348D38 00017138  38 80 00 03 */	li r4, 0x3
 /* 81348D3C 0001713C  48 00 99 BC */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn mount_sd_async__Q23ipl12NandSDWorkerFv
 
+# .text:0x954 | 0x81348D40 | size: 0x14
 # ipl::NandSDWorker::list_nand_save_async(unsigned long long*)
 .fn list_nand_save_async__Q23ipl12NandSDWorkerFPUx, global
 /* 81348D40 00017140  80 A3 00 00 */	lwz r5, 0x0(r3)
@@ -754,6 +781,7 @@
 /* 81348D50 00017150  48 00 99 A8 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn list_nand_save_async__Q23ipl12NandSDWorkerFPUx
 
+# .text:0x968 | 0x81348D54 | size: 0x24
 # ipl::NandSDWorker::get_nand_save_banner_async(unsigned long long, WIISaveBannerFile*)
 .fn get_nand_save_banner_async__Q23ipl12NandSDWorkerFUxP17WIISaveBannerFile, global
 /* 81348D54 00017154  81 03 00 00 */	lwz r8, 0x0(r3)
@@ -767,6 +795,7 @@
 /* 81348D74 00017174  48 00 99 84 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn get_nand_save_banner_async__Q23ipl12NandSDWorkerFUxP17WIISaveBannerFile
 
+# .text:0x98C | 0x81348D78 | size: 0x14
 # ipl::NandSDWorker::list_sd_save_async(unsigned long*)
 .fn list_sd_save_async__Q23ipl12NandSDWorkerFPUl, global
 /* 81348D78 00017178  80 A3 00 00 */	lwz r5, 0x0(r3)
@@ -776,6 +805,7 @@
 /* 81348D88 00017188  48 00 99 70 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn list_sd_save_async__Q23ipl12NandSDWorkerFPUl
 
+# .text:0x9A0 | 0x81348D8C | size: 0x14
 # ipl::NandSDWorker::list_sd_app_async(unsigned long*)
 .fn list_sd_app_async__Q23ipl12NandSDWorkerFPUl, global
 /* 81348D8C 0001718C  80 A3 00 00 */	lwz r5, 0x0(r3)
@@ -785,6 +815,7 @@
 /* 81348D9C 0001719C  48 00 99 5C */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn list_sd_app_async__Q23ipl12NandSDWorkerFPUl
 
+# .text:0x9B4 | 0x81348DA0 | size: 0x28
 # ipl::NandSDWorker::get_sd_save_banner_async(unsigned long, WIISaveBannerFile*)
 .fn get_sd_save_banner_async__Q23ipl12NandSDWorkerFUlP17WIISaveBannerFile, global
 /* 81348DA0 000171A0  80 C3 00 00 */	lwz r6, 0x0(r3)
@@ -799,6 +830,7 @@
 /* 81348DC4 000171C4  48 00 99 34 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn get_sd_save_banner_async__Q23ipl12NandSDWorkerFUlP17WIISaveBannerFile
 
+# .text:0x9DC | 0x81348DC8 | size: 0x34
 # ipl::NandSDWorker::get_sd_app_thumbnail_async(unsigned long, unsigned char*, ipl::channel::SChanMgrMetaHeader*)
 .fn get_sd_app_thumbnail_async__Q23ipl12NandSDWorkerFUlPUcPQ33ipl7channel18SChanMgrMetaHeader, global
 /* 81348DC8 000171C8  80 E3 00 00 */	lwz r7, 0x0(r3)
@@ -816,6 +848,7 @@
 /* 81348DF8 000171F8  48 00 99 00 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn get_sd_app_thumbnail_async__Q23ipl12NandSDWorkerFUlPUcPQ33ipl7channel18SChanMgrMetaHeader
 
+# .text:0xA10 | 0x81348DFC | size: 0x34
 .fn iplNandSD_81348DFC, global
 /* 81348DFC 000171FC  80 E3 00 00 */	lwz r7, 0x0(r3)
 /* 81348E00 00017200  38 00 00 00 */	li r0, 0x0
@@ -832,6 +865,7 @@
 /* 81348E2C 0001722C  48 00 98 CC */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn iplNandSD_81348DFC
 
+# .text:0xA44 | 0x81348E30 | size: 0x14
 .fn iplNandSD_81348E30, global
 /* 81348E30 00017230  80 A3 00 00 */	lwz r5, 0x0(r3)
 /* 81348E34 00017234  3C A5 00 04 */	addis r5, r5, 0x4
@@ -840,6 +874,7 @@
 /* 81348E40 00017240  48 00 98 B8 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn iplNandSD_81348E30
 
+# .text:0xA58 | 0x81348E44 | size: 0x14
 .fn iplNandSD_81348E44, global
 /* 81348E44 00017244  80 A3 00 00 */	lwz r5, 0x0(r3)
 /* 81348E48 00017248  3C A5 00 04 */	addis r5, r5, 0x4
@@ -848,6 +883,7 @@
 /* 81348E54 00017254  48 00 98 A4 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn iplNandSD_81348E44
 
+# .text:0xA6C | 0x81348E58 | size: 0x30
 .fn iplNandSD_81348E58, global
 /* 81348E58 00017258  81 23 00 00 */	lwz r9, 0x0(r3)
 /* 81348E5C 0001725C  38 80 00 2C */	li r4, 0x2c
@@ -863,6 +899,7 @@
 /* 81348E84 00017284  48 00 98 74 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn iplNandSD_81348E58
 
+# .text:0xA9C | 0x81348E88 | size: 0x20
 .fn iplNandSD_81348E88, global
 /* 81348E88 00017288  80 C3 00 00 */	lwz r6, 0x0(r3)
 /* 81348E8C 0001728C  3C C6 00 04 */	addis r6, r6, 0x4
@@ -874,6 +911,7 @@
 /* 81348EA4 000172A4  48 00 98 54 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn iplNandSD_81348E88
 
+# .text:0xABC | 0x81348EA8 | size: 0x2C
 .fn iplNandSD_81348EA8, global
 /* 81348EA8 000172A8  80 E3 00 00 */	lwz r7, 0x0(r3)
 /* 81348EAC 000172AC  3C E7 00 04 */	addis r7, r7, 0x4
@@ -888,6 +926,7 @@
 /* 81348ED0 000172D0  48 00 98 28 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn iplNandSD_81348EA8
 
+# .text:0xAE8 | 0x81348ED4 | size: 0x18
 # ipl::NandSDWorker::get_nand_save_size_async(unsigned long long)
 .fn get_nand_save_size_async__Q23ipl12NandSDWorkerFUx, global
 /* 81348ED4 000172D4  80 E3 00 00 */	lwz r7, 0x0(r3)
@@ -898,6 +937,7 @@
 /* 81348EE8 000172E8  48 00 98 10 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn get_nand_save_size_async__Q23ipl12NandSDWorkerFUx
 
+# .text:0xB00 | 0x81348EEC | size: 0x18
 # ipl::NandSDWorker::get_nand_app_size_async(unsigned long long)
 .fn get_nand_app_size_async__Q23ipl12NandSDWorkerFUx, global
 /* 81348EEC 000172EC  80 E3 00 00 */	lwz r7, 0x0(r3)
@@ -908,6 +948,7 @@
 /* 81348F00 00017300  48 00 97 F8 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn get_nand_app_size_async__Q23ipl12NandSDWorkerFUx
 
+# .text:0xB18 | 0x81348F04 | size: 0x18
 # ipl::NandSDWorker::delete_nand_save_async(unsigned long long)
 .fn delete_nand_save_async__Q23ipl12NandSDWorkerFUx, global
 /* 81348F04 00017304  80 E3 00 00 */	lwz r7, 0x0(r3)
@@ -918,6 +959,7 @@
 /* 81348F18 00017318  48 00 97 E0 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn delete_nand_save_async__Q23ipl12NandSDWorkerFUx
 
+# .text:0xB30 | 0x81348F1C | size: 0x1C
 # ipl::NandSDWorker::get_sd_save_size_async(unsigned long)
 .fn get_sd_save_size_async__Q23ipl12NandSDWorkerFUl, global
 /* 81348F1C 0001731C  80 A3 00 00 */	lwz r5, 0x0(r3)
@@ -929,6 +971,7 @@
 /* 81348F34 00017334  48 00 97 C4 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn get_sd_save_size_async__Q23ipl12NandSDWorkerFUl
 
+# .text:0xB4C | 0x81348F38 | size: 0x1C
 # ipl::NandSDWorker::get_sd_app_size_async(unsigned long)
 .fn get_sd_app_size_async__Q23ipl12NandSDWorkerFUl, global
 /* 81348F38 00017338  80 A3 00 00 */	lwz r5, 0x0(r3)
@@ -940,6 +983,7 @@
 /* 81348F50 00017350  48 00 97 A8 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn get_sd_app_size_async__Q23ipl12NandSDWorkerFUl
 
+# .text:0xB68 | 0x81348F54 | size: 0x1C
 # ipl::NandSDWorker::delete_sd_save_async(unsigned long)
 .fn delete_sd_save_async__Q23ipl12NandSDWorkerFUl, global
 /* 81348F54 00017354  80 A3 00 00 */	lwz r5, 0x0(r3)
@@ -951,6 +995,7 @@
 /* 81348F6C 0001736C  48 00 97 8C */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn delete_sd_save_async__Q23ipl12NandSDWorkerFUl
 
+# .text:0xB84 | 0x81348F70 | size: 0x1C
 # ipl::NandSDWorker::delete_sd_app_async(unsigned long)
 .fn delete_sd_app_async__Q23ipl12NandSDWorkerFUl, global
 /* 81348F70 00017370  80 A3 00 00 */	lwz r5, 0x0(r3)
@@ -962,18 +1007,21 @@
 /* 81348F88 00017388  48 00 97 70 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn delete_sd_app_async__Q23ipl12NandSDWorkerFUl
 
+# .text:0xBA0 | 0x81348F8C | size: 0x8
 # ipl::NandSDWorker::initialize_nand_async()
 .fn initialize_nand_async__Q23ipl12NandSDWorkerFv, global
 /* 81348F8C 0001738C  38 80 00 0C */	li r4, 0xc
 /* 81348F90 00017390  48 00 97 68 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn initialize_nand_async__Q23ipl12NandSDWorkerFv
 
+# .text:0xBA8 | 0x81348F94 | size: 0x8
 # ipl::NandSDWorker::get_nand_user_free_area_async()
 .fn get_nand_user_free_area_async__Q23ipl12NandSDWorkerFv, global
 /* 81348F94 00017394  38 80 00 0D */	li r4, 0xd
 /* 81348F98 00017398  48 00 97 60 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn get_nand_user_free_area_async__Q23ipl12NandSDWorkerFv
 
+# .text:0xBB0 | 0x81348F9C | size: 0x18
 # ipl::NandSDWorker::copy_nand_save_to_sd_async(unsigned long long)
 .fn copy_nand_save_to_sd_async__Q23ipl12NandSDWorkerFUx, global
 /* 81348F9C 0001739C  80 E3 00 00 */	lwz r7, 0x0(r3)
@@ -984,6 +1032,7 @@
 /* 81348FB0 000173B0  48 00 97 48 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn copy_nand_save_to_sd_async__Q23ipl12NandSDWorkerFUx
 
+# .text:0xBC8 | 0x81348FB4 | size: 0x1C
 # ipl::NandSDWorker::copy_sd_save_to_nand_async(unsigned long)
 .fn copy_sd_save_to_nand_async__Q23ipl12NandSDWorkerFUl, global
 /* 81348FB4 000173B4  80 A3 00 00 */	lwz r5, 0x0(r3)
@@ -995,12 +1044,14 @@
 /* 81348FCC 000173CC  48 00 97 2C */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn copy_sd_save_to_nand_async__Q23ipl12NandSDWorkerFUl
 
+# .text:0xBE4 | 0x81348FD0 | size: 0x8
 # ipl::NandSDWorker::format_sd_async()
 .fn format_sd_async__Q23ipl12NandSDWorkerFv, global
 /* 81348FD0 000173D0  38 80 00 10 */	li r4, 0x10
 /* 81348FD4 000173D4  48 00 97 24 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn format_sd_async__Q23ipl12NandSDWorkerFv
 
+# .text:0xBEC | 0x81348FD8 | size: 0x14
 # ipl::NandSDWorker::get_sd_free_area_async()
 .fn get_sd_free_area_async__Q23ipl12NandSDWorkerFv, global
 /* 81348FD8 000173D8  80 A3 00 00 */	lwz r5, 0x0(r3)
@@ -1010,6 +1061,7 @@
 /* 81348FE8 000173E8  48 00 97 10 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn get_sd_free_area_async__Q23ipl12NandSDWorkerFv
 
+# .text:0xC00 | 0x81348FEC | size: 0x14
 # ipl::NandSDWorker::list_nand_app_async(unsigned long long*)
 .fn list_nand_app_async__Q23ipl12NandSDWorkerFPUx, global
 /* 81348FEC 000173EC  80 A3 00 00 */	lwz r5, 0x0(r3)
@@ -1019,6 +1071,7 @@
 /* 81348FFC 000173FC  48 00 96 FC */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn list_nand_app_async__Q23ipl12NandSDWorkerFPUx
 
+# .text:0xC14 | 0x81349000 | size: 0x20
 .fn iplNandSD_81349000, global
 /* 81349000 00017400  80 C3 00 00 */	lwz r6, 0x0(r3)
 /* 81349004 00017404  3C C6 00 04 */	addis r6, r6, 0x4
@@ -1030,6 +1083,7 @@
 /* 8134901C 0001741C  48 00 96 DC */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn iplNandSD_81349000
 
+# .text:0xC34 | 0x81349020 | size: 0x30
 # ipl::NandSDWorker::get_nand_app_thumbnail_async(unsigned long long, void*, ipl::channel::SChanMgrMetaHeader*)
 .fn get_nand_app_thumbnail_async__Q23ipl12NandSDWorkerFUxPvPQ33ipl7channel18SChanMgrMetaHeader, global
 /* 81349020 00017420  81 23 00 00 */	lwz r9, 0x0(r3)
@@ -1046,6 +1100,7 @@
 /* 8134904C 0001744C  48 00 96 AC */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn get_nand_app_thumbnail_async__Q23ipl12NandSDWorkerFUxPvPQ33ipl7channel18SChanMgrMetaHeader
 
+# .text:0xC64 | 0x81349050 | size: 0x28
 # ipl::NandSDWorker::delete_nand_app_async(unsigned long long)
 .fn delete_nand_app_async__Q23ipl12NandSDWorkerFUx, global
 /* 81349050 00017450  80 83 00 00 */	lwz r4, 0x0(r3)
@@ -1061,6 +1116,7 @@
 /* 81349074 00017474  48 00 96 84 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn delete_nand_app_async__Q23ipl12NandSDWorkerFUx
 
+# .text:0xC8C | 0x81349078 | size: 0x20
 # ipl::NandSDWorker::copy_nand_app_to_sd_async(unsigned long long)
 .fn copy_nand_app_to_sd_async__Q23ipl12NandSDWorkerFUx, global
 /* 81349078 00017478  80 E3 00 00 */	lwz r7, 0x0(r3)
@@ -1073,6 +1129,7 @@
 /* 81349094 00017494  48 00 96 64 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn copy_nand_app_to_sd_async__Q23ipl12NandSDWorkerFUx
 
+# .text:0xCAC | 0x81349098 | size: 0x30
 # ipl::NandSDWorker::copy_sd_app_to_nand_async(unsigned long)
 .fn copy_sd_app_to_nand_async__Q23ipl12NandSDWorkerFUl, global
 /* 81349098 00017498  80 C3 00 00 */	lwz r6, 0x0(r3)
@@ -1090,6 +1147,7 @@
 /* 813490C4 000174C4  48 00 96 34 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn copy_sd_app_to_nand_async__Q23ipl12NandSDWorkerFUl
 
+# .text:0xCDC | 0x813490C8 | size: 0x18
 # ipl::NandSDWorker::nocopy_exist_nand_save_async(unsigned long long)
 .fn nocopy_exist_nand_save_async__Q23ipl12NandSDWorkerFUx, global
 /* 813490C8 000174C8  80 E3 00 00 */	lwz r7, 0x0(r3)
@@ -1100,6 +1158,7 @@
 /* 813490DC 000174DC  48 00 96 1C */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn nocopy_exist_nand_save_async__Q23ipl12NandSDWorkerFUx
 
+# .text:0xCF4 | 0x813490E0 | size: 0x18
 # ipl::NandSDWorker::nand_save_exist_async(unsigned long long)
 .fn nand_save_exist_async__Q23ipl12NandSDWorkerFUx, global
 /* 813490E0 000174E0  80 E3 00 00 */	lwz r7, 0x0(r3)
@@ -1110,6 +1169,7 @@
 /* 813490F4 000174F4  48 00 96 04 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn nand_save_exist_async__Q23ipl12NandSDWorkerFUx
 
+# .text:0xD0C | 0x813490F8 | size: 0x1C
 # ipl::NandSDWorker::nand_save_exist_lo_async(unsigned long)
 .fn nand_save_exist_lo_async__Q23ipl12NandSDWorkerFUl, global
 /* 813490F8 000174F8  80 A3 00 00 */	lwz r5, 0x0(r3)
@@ -1121,6 +1181,7 @@
 /* 81349110 00017510  48 00 95 E8 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn nand_save_exist_lo_async__Q23ipl12NandSDWorkerFUl
 
+# .text:0xD28 | 0x81349114 | size: 0x18
 # ipl::NandSDWorker::nand_app_exist_async(unsigned long long)
 .fn nand_app_exist_async__Q23ipl12NandSDWorkerFUx, global
 /* 81349114 00017514  80 E3 00 00 */	lwz r7, 0x0(r3)
@@ -1131,6 +1192,7 @@
 /* 81349128 00017528  48 00 95 D0 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn nand_app_exist_async__Q23ipl12NandSDWorkerFUx
 
+# .text:0xD40 | 0x8134912C | size: 0x1C
 # ipl::NandSDWorker::sd_save_exist_async(unsigned long)
 .fn sd_save_exist_async__Q23ipl12NandSDWorkerFUl, global
 /* 8134912C 0001752C  80 A3 00 00 */	lwz r5, 0x0(r3)
@@ -1142,6 +1204,7 @@
 /* 81349144 00017544  48 00 95 B4 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn sd_save_exist_async__Q23ipl12NandSDWorkerFUl
 
+# .text:0xD5C | 0x81349148 | size: 0x1C
 # ipl::NandSDWorker::sd_app_exist_async(unsigned long)
 .fn sd_app_exist_async__Q23ipl12NandSDWorkerFUl, global
 /* 81349148 00017548  80 A3 00 00 */	lwz r5, 0x0(r3)
@@ -1153,6 +1216,7 @@
 /* 81349160 00017560  48 00 95 98 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn sd_app_exist_async__Q23ipl12NandSDWorkerFUl
 
+# .text:0xD78 | 0x81349164 | size: 0x1C
 .fn iplNandSD_81349164, global
 /* 81349164 00017564  80 A3 00 00 */	lwz r5, 0x0(r3)
 /* 81349168 00017568  38 00 00 00 */	li r0, 0x0
@@ -1163,6 +1227,7 @@
 /* 8134917C 0001757C  48 00 95 7C */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn iplNandSD_81349164
 
+# .text:0xD94 | 0x81349180 | size: 0x18
 .fn iplNandSD_81349180, global
 /* 81349180 00017580  80 E3 00 00 */	lwz r7, 0x0(r3)
 /* 81349184 00017584  38 80 00 23 */	li r4, 0x23
@@ -1172,6 +1237,7 @@
 /* 81349194 00017594  48 00 95 64 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn iplNandSD_81349180
 
+# .text:0xDAC | 0x81349198 | size: 0x1C
 .fn iplNandSD_81349198, global
 /* 81349198 00017598  80 A3 00 00 */	lwz r5, 0x0(r3)
 /* 8134919C 0001759C  38 00 00 00 */	li r0, 0x0
@@ -1182,6 +1248,7 @@
 /* 813491B0 000175B0  48 00 95 48 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn iplNandSD_81349198
 
+# .text:0xDC8 | 0x813491B4 | size: 0x18
 .fn iplNandSD_813491B4, global
 /* 813491B4 000175B4  80 E3 00 00 */	lwz r7, 0x0(r3)
 /* 813491B8 000175B8  38 80 00 27 */	li r4, 0x27
@@ -1191,6 +1258,7 @@
 /* 813491C8 000175C8  48 00 95 30 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn iplNandSD_813491B4
 
+# .text:0xDE0 | 0x813491CC | size: 0x1C
 .fn iplNandSD_813491CC, global
 /* 813491CC 000175CC  80 A3 00 00 */	lwz r5, 0x0(r3)
 /* 813491D0 000175D0  38 00 00 00 */	li r0, 0x0
@@ -1201,6 +1269,7 @@
 /* 813491E4 000175E4  48 00 95 14 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn iplNandSD_813491CC
 
+# .text:0xDFC | 0x813491E8 | size: 0x18
 .fn iplNandSD_813491E8, global
 /* 813491E8 000175E8  80 E3 00 00 */	lwz r7, 0x0(r3)
 /* 813491EC 000175EC  38 80 00 25 */	li r4, 0x25
@@ -1210,6 +1279,7 @@
 /* 813491FC 000175FC  48 00 94 FC */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn iplNandSD_813491E8
 
+# .text:0xE14 | 0x81349200 | size: 0x1C
 .fn iplNandSD_81349200, global
 /* 81349200 00017600  80 A3 00 00 */	lwz r5, 0x0(r3)
 /* 81349204 00017604  38 00 00 00 */	li r0, 0x0
@@ -1220,6 +1290,7 @@
 /* 81349218 00017618  48 00 94 E0 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn iplNandSD_81349200
 
+# .text:0xE30 | 0x8134921C | size: 0x14
 .fn iplNandSD_8134921C, global
 /* 8134921C 0001761C  80 A3 00 00 */	lwz r5, 0x0(r3)
 /* 81349220 00017620  3C A5 00 04 */	addis r5, r5, 0x4
@@ -1228,6 +1299,7 @@
 /* 8134922C 0001762C  48 00 94 CC */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn iplNandSD_8134921C
 
+# .text:0xE44 | 0x81349230 | size: 0x1C
 .fn iplNandSD_81349230, global
 /* 81349230 00017630  80 A3 00 00 */	lwz r5, 0x0(r3)
 /* 81349234 00017634  38 00 00 00 */	li r0, 0x0
@@ -1238,6 +1310,7 @@
 /* 81349248 00017648  48 00 94 B0 */	b send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 .endfn iplNandSD_81349230
 
+# .text:0xE60 | 0x8134924C | size: 0x48
 # ipl::NandSDWorker::is_disk_or_user_nand_app(unsigned long long)
 .fn is_disk_or_user_nand_app__Q23ipl12NandSDWorkerFUx, global
 /* 8134924C 0001764C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1262,6 +1335,7 @@
 /* 81349290 00017690  4E 80 00 20 */	blr
 .endfn is_disk_or_user_nand_app__Q23ipl12NandSDWorkerFUx
 
+# .text:0xEA8 | 0x81349294 | size: 0x68
 # ipl::NandSDWorker::is_user_nand_app(unsigned long long)
 .fn is_user_nand_app__Q23ipl12NandSDWorkerFUx, global
 /* 81349294 00017694  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1294,6 +1368,7 @@
 /* 813492F8 000176F8  4E 80 00 20 */	blr
 .endfn is_user_nand_app__Q23ipl12NandSDWorkerFUx
 
+# .text:0xF10 | 0x813492FC | size: 0x48
 # ipl::NandSDWorker::is_data_only_title(unsigned long long)
 .fn is_data_only_title__Q23ipl12NandSDWorkerFUx, global
 /* 813492FC 000176FC  38 00 FF FF */	li r0, -0x1
@@ -1318,6 +1393,7 @@
 /* 81349340 00017740  4E 80 00 20 */	blr
 .endfn is_data_only_title__Q23ipl12NandSDWorkerFUx
 
+# .text:0xF58 | 0x81349344 | size: 0x64
 # ipl::NandSDWorker::is_available_data_only_titleidlo(unsigned long)
 .fn is_available_data_only_titleidlo__Q23ipl12NandSDWorkerFUl, global
 /* 81349344 00017744  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1348,6 +1424,7 @@
 /* 813493A4 000177A4  4E 80 00 20 */	blr
 .endfn is_available_data_only_titleidlo__Q23ipl12NandSDWorkerFUl
 
+# .text:0xFBC | 0x813493A8 | size: 0x8C
 # ipl::NandSDWorker::get_sd_save_path(unsigned long long, char*)
 .fn get_sd_save_path__Q23ipl12NandSDWorkerFUxPc, global
 /* 813493A8 000177A8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1389,6 +1466,7 @@
 /* 81349430 00017830  4E 80 00 20 */	blr
 .endfn get_sd_save_path__Q23ipl12NandSDWorkerFUxPc
 
+# .text:0x1048 | 0x81349434 | size: 0x30
 # ipl::NandSDWorker::get_sd_app_path(unsigned long long, char*)
 .fn get_sd_app_path__Q23ipl12NandSDWorkerFUxPc, global
 /* 81349434 00017834  38 00 FF FF */	li r0, -0x1
@@ -1405,6 +1483,7 @@
 /* 81349460 00017860  48 2B 75 48 */	b fn_816009A8
 .endfn get_sd_app_path__Q23ipl12NandSDWorkerFUxPc
 
+# .text:0x1078 | 0x81349464 | size: 0x38
 # ipl::NandSDWorker::gamecode_to_titleid_lo(const char*)
 .fn gamecode_to_titleid_lo__Q23ipl12NandSDWorkerFPCc, global
 /* 81349464 00017864  88 83 00 02 */	lbz r4, 0x2(r3)
@@ -1423,6 +1502,7 @@
 /* 81349498 00017898  4E 80 00 20 */	blr
 .endfn gamecode_to_titleid_lo__Q23ipl12NandSDWorkerFPCc
 
+# .text:0x10B0 | 0x8134949C | size: 0x3C
 # ipl::NandSDWorker::thread_main(void*)
 .fn thread_main__Q23ipl12NandSDWorkerFPv, global
 /* 8134949C 0001789C  7C 60 1B 78 */	mr r0, r3
@@ -1442,6 +1522,7 @@
 /* 813494D4 000178D4  48 00 00 E4 */	b run__Q23ipl12NandSDWorkerFv
 .endfn thread_main__Q23ipl12NandSDWorkerFPv
 
+# .text:0x10EC | 0x813494D8 | size: 0xE0
 # ipl::NandSDWorker::delete_meta_file(unsigned long long)
 .fn delete_meta_file__Q23ipl12NandSDWorkerFUx, global
 /* 813494D8 000178D8  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -1507,6 +1588,7 @@
 /* 813495B4 000179B4  4E 80 00 20 */	blr
 .endfn delete_meta_file__Q23ipl12NandSDWorkerFUx
 
+# .text:0x11CC | 0x813495B8 | size: 0x8BC
 # ipl::NandSDWorker::run()
 .fn run__Q23ipl12NandSDWorkerFv, global
 /* 813495B8 000179B8  94 21 FF 50 */	stwu r1, -0xb0(r1)
@@ -2136,6 +2218,7 @@
 /* 81349E70 00018270  4E 80 00 20 */	blr
 .endfn run__Q23ipl12NandSDWorkerFv
 
+# .text:0x1A88 | 0x81349E74 | size: 0x50C
 # ipl::NandSDWorker::do_startup()
 .fn do_startup__Q23ipl12NandSDWorkerFv, global
 /* 81349E74 00018274  94 21 FF 40 */	stwu r1, -0xc0(r1)
@@ -2484,6 +2567,7 @@
 /* 8134A37C 0001877C  4E 80 00 20 */	blr
 .endfn do_startup__Q23ipl12NandSDWorkerFv
 
+# .text:0x1F94 | 0x8134A380 | size: 0x208
 # ipl::NandSDWorker::clean_duplicated_nand_app()
 .fn clean_duplicated_nand_app__Q23ipl12NandSDWorkerFv, global
 /* 8134A380 00018780  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -2628,6 +2712,7 @@
 /* 8134A584 00018984  4E 80 00 20 */	blr
 .endfn clean_duplicated_nand_app__Q23ipl12NandSDWorkerFv
 
+# .text:0x219C | 0x8134A588 | size: 0x190
 .fn iplNandSD_8134A588, global
 /* 8134A588 00018988  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8134A58C 0001898C  7C 08 02 A6 */	mflr r0
@@ -2739,6 +2824,7 @@
 /* 8134A714 00018B14  4E 80 00 20 */	blr
 .endfn iplNandSD_8134A588
 
+# .text:0x232C | 0x8134A718 | size: 0x220
 # ipl::NandSDWorker::clean_partial_nand_app()
 .fn clean_partial_nand_app__Q23ipl12NandSDWorkerFv, global
 /* 8134A718 00018B18  94 21 FF 70 */	stwu r1, -0x90(r1)
@@ -2889,6 +2975,7 @@
 /* 8134A934 00018D34  4E 80 00 20 */	blr
 .endfn clean_partial_nand_app__Q23ipl12NandSDWorkerFv
 
+# .text:0x254C | 0x8134A938 | size: 0x2CC
 # ipl::NandSDWorker::do_mount_sd()
 .fn do_mount_sd__Q23ipl12NandSDWorkerFv, global
 /* 8134A938 00018D38  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -3092,6 +3179,7 @@
 /* 8134AC00 00019000  4E 80 00 20 */	blr
 .endfn do_mount_sd__Q23ipl12NandSDWorkerFv
 
+# .text:0x2818 | 0x8134AC04 | size: 0x1EC
 # ipl::NandSDWorker::call_fa_mount()
 .fn call_fa_mount__Q23ipl12NandSDWorkerFv, global
 /* 8134AC04 00019004  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -3227,6 +3315,7 @@
 /* 8134ADEC 000191EC  4E 80 00 20 */	blr
 .endfn call_fa_mount__Q23ipl12NandSDWorkerFv
 
+# .text:0x2A04 | 0x8134ADF0 | size: 0x178
 # ipl::NandSDWorker::do_list_nand_save()
 .fn do_list_nand_save__Q23ipl12NandSDWorkerFv, global
 /* 8134ADF0 000191F0  94 21 FF 80 */	stwu r1, -0x80(r1)
@@ -3329,6 +3418,7 @@
 /* 8134AF64 00019364  4E 80 00 20 */	blr
 .endfn do_list_nand_save__Q23ipl12NandSDWorkerFv
 
+# .text:0x2B7C | 0x8134AF68 | size: 0xE4
 # ipl::NandSDWorker::check_nand_save_banner_exist(unsigned long long)
 .fn check_nand_save_banner_exist__Q23ipl12NandSDWorkerFUx, global
 /* 8134AF68 00019368  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -3394,6 +3484,7 @@
 /* 8134B048 00019448  4E 80 00 20 */	blr
 .endfn check_nand_save_banner_exist__Q23ipl12NandSDWorkerFUx
 
+# .text:0x2C60 | 0x8134B04C | size: 0x3B0
 # ipl::NandSDWorker::get_nand_save_banner(unsigned long long, WIISaveBannerFile*, unsigned long*)
 .fn get_nand_save_banner__Q23ipl12NandSDWorkerFUxP17WIISaveBannerFilePUl, global
 /* 8134B04C 0001944C  94 21 FF 00 */	stwu r1, -0x100(r1)
@@ -3651,6 +3742,7 @@
 /* 8134B3F8 000197F8  4E 80 00 20 */	blr
 .endfn get_nand_save_banner__Q23ipl12NandSDWorkerFUxP17WIISaveBannerFilePUl
 
+# .text:0x3010 | 0x8134B3FC | size: 0x160
 # ipl::NandSDWorker::do_get_sd_save_banner()
 .fn do_get_sd_save_banner__Q23ipl12NandSDWorkerFv, global
 /* 8134B3FC 000197FC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -3750,6 +3842,7 @@
 /* 8134B558 00019958  4E 80 00 20 */	blr
 .endfn do_get_sd_save_banner__Q23ipl12NandSDWorkerFv
 
+# .text:0x3170 | 0x8134B55C | size: 0x1CC
 # ipl::NandSDWorker::do_get_sd_app_thumbnail()
 .fn do_get_sd_app_thumbnail__Q23ipl12NandSDWorkerFv, global
 /* 8134B55C 0001995C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -3879,6 +3972,7 @@
 /* 8134B724 00019B24  4E 80 00 20 */	blr
 .endfn do_get_sd_app_thumbnail__Q23ipl12NandSDWorkerFv
 
+# .text:0x333C | 0x8134B728 | size: 0x1F4
 .fn iplNandSD_8134B728, global
 /* 8134B728 00019B28  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8134B72C 00019B2C  7C 08 02 A6 */	mflr r0
@@ -4017,6 +4111,7 @@
 /* 8134B918 00019D18  4E 80 00 20 */	blr
 .endfn iplNandSD_8134B728
 
+# .text:0x3530 | 0x8134B91C | size: 0x344
 .fn iplNandSD_8134B91C, global
 /* 8134B91C 00019D1C  94 21 FF 40 */	stwu r1, -0xc0(r1)
 /* 8134B920 00019D20  7C 08 02 A6 */	mflr r0
@@ -4243,6 +4338,7 @@
 /* 8134BC5C 0001A05C  4E 80 00 20 */	blr
 .endfn iplNandSD_8134B91C
 
+# .text:0x3874 | 0x8134BC60 | size: 0x270
 .fn iplNandSD_8134BC60, global
 /* 8134BC60 0001A060  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 8134BC64 0001A064  7C 08 02 A6 */	mflr r0
@@ -4411,6 +4507,7 @@
 /* 8134BECC 0001A2CC  4E 80 00 20 */	blr
 .endfn iplNandSD_8134BC60
 
+# .text:0x3AE4 | 0x8134BED0 | size: 0x3C8
 .fn iplNandSD_8134BED0, global
 /* 8134BED0 0001A2D0  94 21 FF 70 */	stwu r1, -0x90(r1)
 /* 8134BED4 0001A2D4  7C 08 02 A6 */	mflr r0
@@ -4670,6 +4767,7 @@
 /* 8134C294 0001A694  4E 80 00 20 */	blr
 .endfn iplNandSD_8134BED0
 
+# .text:0x3EAC | 0x8134C298 | size: 0x3D8
 .fn iplNandSD_8134C298, global
 /* 8134C298 0001A698  94 21 FF 50 */	stwu r1, -0xb0(r1)
 /* 8134C29C 0001A69C  7C 08 02 A6 */	mflr r0
@@ -4938,6 +5036,7 @@
 /* 8134C66C 0001AA6C  4E 80 00 20 */	blr
 .endfn iplNandSD_8134C298
 
+# .text:0x4284 | 0x8134C670 | size: 0x1C8
 .fn iplNandSD_8134C670, global
 /* 8134C670 0001AA70  94 21 FF 70 */	stwu r1, -0x90(r1)
 /* 8134C674 0001AA74  7C 08 02 A6 */	mflr r0
@@ -5061,6 +5160,7 @@
 /* 8134C834 0001AC34  4E 80 00 20 */	blr
 .endfn iplNandSD_8134C670
 
+# .text:0x444C | 0x8134C838 | size: 0x2D0
 .fn iplNandSD_8134C838, global
 /* 8134C838 0001AC38  94 21 FE F0 */	stwu r1, -0x110(r1)
 /* 8134C83C 0001AC3C  7C 08 02 A6 */	mflr r0
@@ -5255,6 +5355,7 @@
 /* 8134CB04 0001AF04  4E 80 00 20 */	blr
 .endfn iplNandSD_8134C838
 
+# .text:0x471C | 0x8134CB08 | size: 0x260
 # ipl::NandSDWorker::do_get_nand_save_size()
 .fn do_get_nand_save_size__Q23ipl12NandSDWorkerFv, global
 /* 8134CB08 0001AF08  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -5420,6 +5521,7 @@
 /* 8134CD64 0001B164  4E 80 00 20 */	blr
 .endfn do_get_nand_save_size__Q23ipl12NandSDWorkerFv
 
+# .text:0x497C | 0x8134CD68 | size: 0x1F4
 # ipl::NandSDWorker::do_get_nand_app_size()
 .fn do_get_nand_app_size__Q23ipl12NandSDWorkerFv, global
 /* 8134CD68 0001B168  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -5556,6 +5658,7 @@
 /* 8134CF58 0001B358  4E 80 00 20 */	blr
 .endfn do_get_nand_app_size__Q23ipl12NandSDWorkerFv
 
+# .text:0x4B70 | 0x8134CF5C | size: 0x140
 # ipl::NandSDWorker::get_sd_save_size(unsigned long)
 .fn get_sd_save_size__Q23ipl12NandSDWorkerFUl, global
 /* 8134CF5C 0001B35C  94 21 FF 90 */	stwu r1, -0x70(r1)
@@ -5646,6 +5749,7 @@
 /* 8134D098 0001B498  4E 80 00 20 */	blr
 .endfn get_sd_save_size__Q23ipl12NandSDWorkerFUl
 
+# .text:0x4CB0 | 0x8134D09C | size: 0x140
 # ipl::NandSDWorker::get_sd_app_size(unsigned long)
 .fn get_sd_app_size__Q23ipl12NandSDWorkerFUl, global
 /* 8134D09C 0001B49C  94 21 FF 90 */	stwu r1, -0x70(r1)
@@ -5736,6 +5840,7 @@
 /* 8134D1D8 0001B5D8  4E 80 00 20 */	blr
 .endfn get_sd_app_size__Q23ipl12NandSDWorkerFUl
 
+# .text:0x4DF0 | 0x8134D1DC | size: 0xD4
 # ipl::NandSDWorker::do_delete_sd_save()
 .fn do_delete_sd_save__Q23ipl12NandSDWorkerFv, global
 /* 8134D1DC 0001B5DC  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -5795,6 +5900,7 @@
 /* 8134D2AC 0001B6AC  4E 80 00 20 */	blr
 .endfn do_delete_sd_save__Q23ipl12NandSDWorkerFv
 
+# .text:0x4EC4 | 0x8134D2B0 | size: 0xD4
 # ipl::NandSDWorker::do_delete_sd_app()
 .fn do_delete_sd_app__Q23ipl12NandSDWorkerFv, global
 /* 8134D2B0 0001B6B0  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -5854,6 +5960,7 @@
 /* 8134D380 0001B780  4E 80 00 20 */	blr
 .endfn do_delete_sd_app__Q23ipl12NandSDWorkerFv
 
+# .text:0x4F98 | 0x8134D384 | size: 0x2B8
 # ipl::NandSDWorker::do_initialize_nand()
 .fn do_initialize_nand__Q23ipl12NandSDWorkerFv, global
 /* 8134D384 0001B784  94 21 FB 80 */	stwu r1, -0x480(r1)
@@ -5938,7 +6045,7 @@
 /* 8134D4AC 0001B8AC  38 7F 0F 59 */	addi r3, r31, 0xf59
 /* 8134D4B0 0001B8B0  4C C6 31 82 */	crclr cr1eq
 /* 8134D4B4 0001B8B4  48 1E 11 ED */	bl OSReport
-/* 8134D4B8 0001B8B8  48 1E 33 CD */	bl fn_81530884
+/* 8134D4B8 0001B8B8  48 1E 33 CD */	bl OSDisableInterrupts
 /* 8134D4BC 0001B8BC  7C 7E 1B 78 */	mr r30, r3
 /* 8134D4C0 0001B8C0  38 61 00 08 */	addi r3, r1, 0x8
 /* 8134D4C4 0001B8C4  38 80 00 00 */	li r4, 0x0
@@ -5979,7 +6086,7 @@
 /* 8134D544 0001B944  48 1E 11 5D */	bl OSReport
 .L_8134D548:
 /* 8134D548 0001B948  7F C3 F3 78 */	mr r3, r30
-/* 8134D54C 0001B94C  48 1E 33 61 */	bl fn_815308AC
+/* 8134D54C 0001B94C  48 1E 33 61 */	bl OSRestoreInterrupts
 /* 8134D550 0001B950  48 21 C3 FD */	bl fn_8156994C
 /* 8134D554 0001B954  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134D558 0001B958  40 82 00 14 */	bne .L_8134D56C
@@ -6047,6 +6154,7 @@
 /* 8134D638 0001BA38  4E 80 00 20 */	blr
 .endfn do_initialize_nand__Q23ipl12NandSDWorkerFv
 
+# .text:0x5250 | 0x8134D63C | size: 0xD4
 # ipl::NandSDWorker::initialize_meta()
 .fn initialize_meta__Q23ipl12NandSDWorkerFv, global
 /* 8134D63C 0001BA3C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -6109,6 +6217,7 @@
 /* 8134D70C 0001BB0C  4E 80 00 20 */	blr
 .endfn initialize_meta__Q23ipl12NandSDWorkerFv
 
+# .text:0x5324 | 0x8134D710 | size: 0x1B0
 # ipl::NandSDWorker::delete_nand_disk_app_with_ticket()
 .fn delete_nand_disk_app_with_ticket__Q23ipl12NandSDWorkerFv, global
 /* 8134D710 0001BB10  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -6231,6 +6340,7 @@
 /* 8134D8BC 0001BCBC  4E 80 00 20 */	blr
 .endfn delete_nand_disk_app_with_ticket__Q23ipl12NandSDWorkerFv
 
+# .text:0x54D4 | 0x8134D8C0 | size: 0x2BC
 # ipl::NandSDWorker::delete_ticket(unsigned long long)
 .fn delete_ticket__Q23ipl12NandSDWorkerFUx, global
 /* 8134D8C0 0001BCC0  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -6423,6 +6533,7 @@
 /* 8134DB78 0001BF78  4E 80 00 20 */	blr
 .endfn delete_ticket__Q23ipl12NandSDWorkerFUx
 
+# .text:0x5790 | 0x8134DB7C | size: 0xC4
 # ipl::NandSDWorker::delete_empty_title(unsigned long long, bool)
 .fn delete_empty_title__Q23ipl12NandSDWorkerFUxb, global
 /* 8134DB7C 0001BF7C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -6480,6 +6591,7 @@
 /* 8134DC3C 0001C03C  4E 80 00 20 */	blr
 .endfn delete_empty_title__Q23ipl12NandSDWorkerFUxb
 
+# .text:0x5854 | 0x8134DC40 | size: 0x248
 # ipl::NandSDWorker::delete_nand_titles()
 .fn delete_nand_titles__Q23ipl12NandSDWorkerFv, global
 /* 8134DC40 0001C040  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -6644,6 +6756,7 @@
 /* 8134DE84 0001C284  4E 80 00 20 */	blr
 .endfn delete_nand_titles__Q23ipl12NandSDWorkerFv
 
+# .text:0x5A9C | 0x8134DE88 | size: 0xD4
 # ipl::NandSDWorker::do_get_nand_user_free_area()
 .fn do_get_nand_user_free_area__Q23ipl12NandSDWorkerFv, global
 /* 8134DE88 0001C288  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -6703,6 +6816,7 @@
 /* 8134DF58 0001C358  4E 80 00 20 */	blr
 .endfn do_get_nand_user_free_area__Q23ipl12NandSDWorkerFv
 
+# .text:0x5B70 | 0x8134DF5C | size: 0xF8
 # ipl::NandSDWorker::get_nand_free_area(unsigned long*, unsigned long*, long*, long*)
 .fn get_nand_free_area__Q23ipl12NandSDWorkerFPUlPUlPlPl, global
 /* 8134DF5C 0001C35C  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -6773,6 +6887,7 @@
 /* 8134E050 0001C450  4E 80 00 20 */	blr
 .endfn get_nand_free_area__Q23ipl12NandSDWorkerFPUlPUlPlPl
 
+# .text:0x5C68 | 0x8134E054 | size: 0xFC
 # ipl::NandSDWorker::check_nand_free_area(unsigned long, unsigned long, long, long)
 .fn check_nand_free_area__Q23ipl12NandSDWorkerFUlUlll, global
 /* 8134E054 0001C454  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -6846,6 +6961,7 @@
 /* 8134E14C 0001C54C  4E 80 00 20 */	blr
 .endfn check_nand_free_area__Q23ipl12NandSDWorkerFUlUlll
 
+# .text:0x5D64 | 0x8134E150 | size: 0x87C
 # ipl::NandSDWorker::do_copy_nand_save_to_sd()
 .fn do_copy_nand_save_to_sd__Q23ipl12NandSDWorkerFv, global
 /* 8134E150 0001C550  94 21 FE C0 */	stwu r1, -0x140(r1)
@@ -7424,6 +7540,7 @@
 /* 8134E9C8 0001CDC8  4E 80 00 20 */	blr
 .endfn do_copy_nand_save_to_sd__Q23ipl12NandSDWorkerFv
 
+# .text:0x65E0 | 0x8134E9CC | size: 0x154
 # ipl::NandSDWorker::prepare_sd_copy(const char*)
 .fn prepare_sd_copy__Q23ipl12NandSDWorkerFPCc, global
 /* 8134E9CC 0001CDCC  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -7518,6 +7635,7 @@
 /* 8134EB1C 0001CF1C  4E 80 00 20 */	blr
 .endfn prepare_sd_copy__Q23ipl12NandSDWorkerFPCc
 
+# .text:0x6734 | 0x8134EB20 | size: 0x178
 # ipl::NandSDWorker::create_sd_backup_dir(unsigned long long)
 .fn create_sd_backup_dir__Q23ipl12NandSDWorkerFUx, global
 /* 8134EB20 0001CF20  94 21 FF 70 */	stwu r1, -0x90(r1)
@@ -7624,6 +7742,7 @@
 /* 8134EC94 0001D094  4E 80 00 20 */	blr
 .endfn create_sd_backup_dir__Q23ipl12NandSDWorkerFUx
 
+# .text:0x68AC | 0x8134EC98 | size: 0x124
 # ipl::NandSDWorker::create_sd_dir(const char*, const char*)
 .fn create_sd_dir__Q23ipl12NandSDWorkerFPCcPCc, global
 /* 8134EC98 0001D098  94 21 FB 50 */	stwu r1, -0x4b0(r1)
@@ -7643,7 +7762,7 @@
 /* 8134ECD0 0001D0D0  7F 84 E3 78 */	mr r4, r28
 /* 8134ECD4 0001D0D4  38 61 00 08 */	addi r3, r1, 0x8
 /* 8134ECD8 0001D0D8  38 A0 00 40 */	li r5, 0x40
-/* 8134ECDC 0001D0DC  48 2B 36 E9 */	bl fn_816023C4
+/* 8134ECDC 0001D0DC  48 2B 36 E9 */	bl strncpy
 /* 8134ECE0 0001D0E0  3F C0 81 63 */	lis r30, lbl_81637475@ha
 /* 8134ECE4 0001D0E4  3B E0 00 00 */	li r31, 0x0
 .L_8134ECE8:
@@ -7681,7 +7800,7 @@
 /* 8134ED60 0001D160  7F 44 D3 78 */	mr r4, r26
 /* 8134ED64 0001D164  38 61 00 08 */	addi r3, r1, 0x8
 /* 8134ED68 0001D168  38 A0 00 40 */	li r5, 0x40
-/* 8134ED6C 0001D16C  48 2B 36 59 */	bl fn_816023C4
+/* 8134ED6C 0001D16C  48 2B 36 59 */	bl strncpy
 /* 8134ED70 0001D170  38 61 00 08 */	addi r3, r1, 0x8
 /* 8134ED74 0001D174  38 8D 81 A8 */	li r4, lbl_816961E8@sda21
 /* 8134ED78 0001D178  7C 7B 1A 14 */	add r3, r27, r3
@@ -7706,6 +7825,7 @@
 /* 8134EDB8 0001D1B8  4E 80 00 20 */	blr
 .endfn create_sd_dir__Q23ipl12NandSDWorkerFPCcPCc
 
+# .text:0x69D0 | 0x8134EDBC | size: 0x8CC
 # ipl::NandSDWorker::do_copy_sd_save_to_nand()
 .fn do_copy_sd_save_to_nand__Q23ipl12NandSDWorkerFv, global
 /* 8134EDBC 0001D1BC  94 21 FD B0 */	stwu r1, -0x250(r1)
@@ -8106,7 +8226,7 @@
 /* 8134F394 0001D794  80 8D 81 80 */	lwz r4, lbl_816961C0@sda21(r0)
 /* 8134F398 0001D798  38 61 00 68 */	addi r3, r1, 0x68
 /* 8134F39C 0001D79C  38 A0 00 40 */	li r5, 0x40
-/* 8134F3A0 0001D7A0  48 2B 30 25 */	bl fn_816023C4
+/* 8134F3A0 0001D7A0  48 2B 30 25 */	bl strncpy
 /* 8134F3A4 0001D7A4  38 61 00 68 */	addi r3, r1, 0x68
 /* 8134F3A8 0001D7A8  38 8D 81 A8 */	li r4, lbl_816961E8@sda21
 /* 8134F3AC 0001D7AC  38 A0 00 40 */	li r5, 0x40
@@ -8305,6 +8425,7 @@
 /* 8134F684 0001DA84  4E 80 00 20 */	blr
 .endfn do_copy_sd_save_to_nand__Q23ipl12NandSDWorkerFv
 
+# .text:0x729C | 0x8134F688 | size: 0x238
 # ipl::NandSDWorker::get_sd_save_banner(unsigned long, ipl::NandSDWorker::SDSaveBanner*)
 .fn get_sd_save_banner__Q23ipl12NandSDWorkerFUlPQ33ipl12NandSDWorker12SDSaveBanner, global
 /* 8134F688 0001DA88  94 21 FF 80 */	stwu r1, -0x80(r1)
@@ -8462,6 +8583,7 @@
 /* 8134F8BC 0001DCBC  4E 80 00 20 */	blr
 .endfn get_sd_save_banner__Q23ipl12NandSDWorkerFUlPQ33ipl12NandSDWorker12SDSaveBanner
 
+# .text:0x74D4 | 0x8134F8C0 | size: 0x170
 # ipl::NandSDWorker::get_sd_wad_header(unsigned long, WADBackupHeader*)
 .fn get_sd_wad_header__Q23ipl12NandSDWorkerFUlP15WADBackupHeader, global
 /* 8134F8C0 0001DCC0  94 21 FF 90 */	stwu r1, -0x70(r1)
@@ -8566,6 +8688,7 @@
 /* 8134FA2C 0001DE2C  4E 80 00 20 */	blr
 .endfn get_sd_wad_header__Q23ipl12NandSDWorkerFUlP15WADBackupHeader
 
+# .text:0x7644 | 0x8134FA30 | size: 0x174
 # ipl::NandSDWorker::do_format_sd()
 .fn do_format_sd__Q23ipl12NandSDWorkerFv, global
 /* 8134FA30 0001DE30  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -8668,6 +8791,7 @@
 /* 8134FBA0 0001DFA0  4E 80 00 20 */	blr
 .endfn do_format_sd__Q23ipl12NandSDWorkerFv
 
+# .text:0x77B8 | 0x8134FBA4 | size: 0xF0
 # ipl::NandSDWorker::get_sd_free_area()
 .fn get_sd_free_area__Q23ipl12NandSDWorkerFv, global
 /* 8134FBA4 0001DFA4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -8734,6 +8858,7 @@
 /* 8134FC90 0001E090  4E 80 00 20 */	blr
 .endfn get_sd_free_area__Q23ipl12NandSDWorkerFv
 
+# .text:0x78A8 | 0x8134FC94 | size: 0x214
 # ipl::NandSDWorker::delete_download_task(unsigned long)
 .fn delete_download_task__Q23ipl12NandSDWorkerFUl, global
 /* 8134FC94 0001E094  94 21 FD C0 */	stwu r1, -0x240(r1)
@@ -8882,6 +9007,7 @@
 /* 8134FEA4 0001E2A4  4E 80 00 20 */	blr
 .endfn delete_download_task__Q23ipl12NandSDWorkerFUl
 
+# .text:0x7ABC | 0x8134FEA8 | size: 0x134
 # ipl::NandSDWorker::delete_nand_app_content(unsigned long long)
 .fn delete_nand_app_content__Q23ipl12NandSDWorkerFUx, global
 /* 8134FEA8 0001E2A8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -8969,6 +9095,7 @@
 /* 8134FFD8 0001E3D8  4E 80 00 20 */	blr
 .endfn delete_nand_app_content__Q23ipl12NandSDWorkerFUx
 
+# .text:0x7BF0 | 0x8134FFDC | size: 0x530
 # ipl::NandSDWorker::do_copy_nand_app_to_sd()
 .fn do_copy_nand_app_to_sd__Q23ipl12NandSDWorkerFv, global
 /* 8134FFDC 0001E3DC  94 21 FE C0 */	stwu r1, -0x140(r1)
@@ -9321,6 +9448,7 @@
 /* 81350508 0001E908  4E 80 00 20 */	blr
 .endfn do_copy_nand_app_to_sd__Q23ipl12NandSDWorkerFv
 
+# .text:0x8120 | 0x8135050C | size: 0x160
 # ipl::NandSDWorker::get_save_banner_for_data_only_title(unsigned long long, WIISaveBannerFile*, unsigned long*)
 .fn get_save_banner_for_data_only_title__Q23ipl12NandSDWorkerFUxP17WIISaveBannerFilePUl, global
 /* 8135050C 0001E90C  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -9422,6 +9550,7 @@
 /* 81350668 0001EA68  4E 80 00 20 */	blr
 .endfn get_save_banner_for_data_only_title__Q23ipl12NandSDWorkerFUxP17WIISaveBannerFilePUl
 
+# .text:0x8280 | 0x8135066C | size: 0x480
 # ipl::NandSDWorker::get_app_banner_from_meta(unsigned long long, ipl::NandSDWorker::SDAppBanner*)
 .fn get_app_banner_from_meta__Q23ipl12NandSDWorkerFUxPQ33ipl12NandSDWorker11SDAppBanner, global
 /* 8135066C 0001EA6C  94 21 FE C0 */	stwu r1, -0x140(r1)
@@ -9727,6 +9856,7 @@
 /* 81350AE8 0001EEE8  4E 80 00 20 */	blr
 .endfn get_app_banner_from_meta__Q23ipl12NandSDWorkerFUxPQ33ipl12NandSDWorker11SDAppBanner
 
+# .text:0x8700 | 0x81350AEC | size: 0x21C
 # ipl::NandSDWorker::open_nand_app_content(unsigned long long, unsigned short, unsigned long*, ESTicketView**)
 .fn open_nand_app_content__Q23ipl12NandSDWorkerFUxUsPUlPP12ESTicketView, global
 /* 81350AEC 0001EEEC  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -9875,6 +10005,7 @@
 /* 81350D04 0001F104  4E 80 00 20 */	blr
 .endfn open_nand_app_content__Q23ipl12NandSDWorkerFUxUsPUlPP12ESTicketView
 
+# .text:0x891C | 0x81350D08 | size: 0x158
 # ipl::NandSDWorker::read_file(void*, ipl::NandSDWorker::FileKind, long, unsigned long, void*)
 .fn read_file__Q23ipl12NandSDWorkerFPvQ33ipl12NandSDWorker8FileKindlUlPv, global
 /* 81350D08 0001F108  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -9973,6 +10104,7 @@
 /* 81350E5C 0001F25C  4E 80 00 20 */	blr
 .endfn read_file__Q23ipl12NandSDWorkerFPvQ33ipl12NandSDWorker8FileKindlUlPv
 
+# .text:0x8A74 | 0x81350E60 | size: 0x54
 # ipl::NandSDWorker::search_meta_header(const unsigned char*)
 .fn search_meta_header__Q23ipl12NandSDWorkerFPCUc, global
 /* 81350E60 0001F260  38 00 00 A0 */	li r0, 0xa0
@@ -10001,6 +10133,7 @@
 /* 81350EB0 0001F2B0  4E 80 00 20 */	blr
 .endfn search_meta_header__Q23ipl12NandSDWorkerFPCUc
 
+# .text:0x8AC8 | 0x81350EB4 | size: 0xAC
 # ipl::NandSDWorker::check_header_base(const unsigned char*, unsigned long*)
 .fn check_header_base__Q23ipl12NandSDWorkerFPCUcPUl, global
 /* 81350EB4 0001F2B4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -10053,6 +10186,7 @@
 /* 81350F5C 0001F35C  4E 80 00 20 */	blr
 .endfn check_header_base__Q23ipl12NandSDWorkerFPCUcPUl
 
+# .text:0x8B74 | 0x81350F60 | size: 0x9C
 # ipl::NandSDWorker::check_header_md5(unsigned char*)
 .fn check_header_md5__Q23ipl12NandSDWorkerFPUc, global
 /* 81350F60 0001F360  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -10097,6 +10231,7 @@
 /* 81350FF8 0001F3F8  4E 80 00 20 */	blr
 .endfn check_header_md5__Q23ipl12NandSDWorkerFPUc
 
+# .text:0x8C10 | 0x81350FFC | size: 0xA0
 # ipl::NandSDWorker::check_md5(const unsigned char*, const unsigned char*, unsigned long)
 .fn check_md5__Q23ipl12NandSDWorkerFPCUcPCUcUl, global
 /* 81350FFC 0001F3FC  94 21 FF 80 */	stwu r1, -0x80(r1)
@@ -10144,6 +10279,7 @@
 /* 81351098 0001F498  4E 80 00 20 */	blr
 .endfn check_md5__Q23ipl12NandSDWorkerFPCUcPCUcUl
 
+# .text:0x8CB0 | 0x8135109C | size: 0x58
 .fn iplNandSD_8135109C, global
 /* 8135109C 0001F49C  2C 04 00 00 */	cmpwi r4, 0x0
 /* 813510A0 0001F4A0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -10170,6 +10306,7 @@
 /* 813510F0 0001F4F0  4E 80 00 20 */	blr
 .endfn iplNandSD_8135109C
 
+# .text:0x8D08 | 0x813510F4 | size: 0x4B0
 # ipl::NandSDWorker::do_copy_sd_app_to_nand()
 .fn do_copy_sd_app_to_nand__Q23ipl12NandSDWorkerFv, global
 /* 813510F4 0001F4F4  94 21 FF 80 */	stwu r1, -0x80(r1)
@@ -10492,6 +10629,7 @@
 /* 813515A0 0001F9A0  4E 80 00 20 */	blr
 .endfn do_copy_sd_app_to_nand__Q23ipl12NandSDWorkerFv
 
+# .text:0x91B8 | 0x813515A4 | size: 0xBC
 # ipl::NandSDWorker::change_nand_app_count(long)
 .fn change_nand_app_count__Q23ipl12NandSDWorkerFl, global
 /* 813515A4 0001F9A4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -10545,6 +10683,7 @@
 /* 8135165C 0001FA5C  4E 80 00 20 */	blr
 .endfn change_nand_app_count__Q23ipl12NandSDWorkerFl
 
+# .text:0x9274 | 0x81351660 | size: 0x274
 # ipl::NandSDWorker::get_sd_app_banner(unsigned long, ipl::NandSDWorker::SDAppBanner*)
 .fn get_sd_app_banner__Q23ipl12NandSDWorkerFUlPQ33ipl12NandSDWorker11SDAppBanner, global
 /* 81351660 0001FA60  94 21 FF 70 */	stwu r1, -0x90(r1)
@@ -10717,6 +10856,7 @@
 /* 813518D0 0001FCD0  4E 80 00 20 */	blr
 .endfn get_sd_app_banner__Q23ipl12NandSDWorkerFUlPQ33ipl12NandSDWorker11SDAppBanner
 
+# .text:0x94E8 | 0x813518D4 | size: 0x2B0
 # ipl::NandSDWorker::get_sd_app_thumbnail(const ipl::NandSDWorker::SDAppBanner*, unsigned char*)
 .fn get_sd_app_thumbnail__Q23ipl12NandSDWorkerFPCQ33ipl12NandSDWorker11SDAppBannerPUc, global
 /* 813518D4 0001FCD4  94 21 FF 90 */	stwu r1, -0x70(r1)
@@ -10904,6 +11044,7 @@
 /* 81351B80 0001FF80  4E 80 00 20 */	blr
 .endfn get_sd_app_thumbnail__Q23ipl12NandSDWorkerFPCQ33ipl12NandSDWorker11SDAppBannerPUc
 
+# .text:0x9798 | 0x81351B84 | size: 0x2C
 # ipl::NandSDWorker::nand_app_exist(unsigned long long)
 .fn nand_app_exist__Q23ipl12NandSDWorkerFUx, global
 /* 81351B84 0001FF84  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -10919,6 +11060,7 @@
 /* 81351BAC 0001FFAC  4E 80 00 20 */	blr
 .endfn nand_app_exist__Q23ipl12NandSDWorkerFUx
 
+# .text:0x97C4 | 0x81351BB0 | size: 0x388
 # ipl::NandSDWorker::nand_app_exist_ex(unsigned long long)
 .fn nand_app_exist_ex__Q23ipl12NandSDWorkerFUx, global
 /* 81351BB0 0001FFB0  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -10944,7 +11086,7 @@
 /* 81351C00 00020000  38 9F 01 43 */	addi r4, r31, 0x143
 /* 81351C04 00020004  3B 40 00 00 */	li r26, 0x0
 /* 81351C08 00020008  4C C6 31 82 */	crclr cr1eq
-/* 81351C0C 0002000C  48 2A EE 75 */	bl fn_81600A80
+/* 81351C0C 0002000C  48 2A EE 75 */	bl sprintf
 /* 81351C10 00020010  38 61 00 30 */	addi r3, r1, 0x30
 /* 81351C14 00020014  38 81 00 24 */	addi r4, r1, 0x24
 /* 81351C18 00020018  38 A1 00 20 */	addi r5, r1, 0x20
@@ -11175,6 +11317,7 @@
 /* 81351F34 00020334  4E 80 00 20 */	blr
 .endfn nand_app_exist_ex__Q23ipl12NandSDWorkerFUx
 
+# .text:0x9B4C | 0x81351F38 | size: 0xE4
 # ipl::NandSDWorker::get_nand_app_tmdview(unsigned long long, ESTmdView*)
 .fn get_nand_app_tmdview__Q23ipl12NandSDWorkerFUxP9ESTmdView, global
 /* 81351F38 00020338  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -11239,6 +11382,7 @@
 /* 81352018 00020418  4E 80 00 20 */	blr
 .endfn get_nand_app_tmdview__Q23ipl12NandSDWorkerFUxP9ESTmdView
 
+# .text:0x9C30 | 0x8135201C | size: 0x110
 # ipl::NandSDWorker::content_exist(ESTmdView*, unsigned long)
 .fn content_exist__Q23ipl12NandSDWorkerFP9ESTmdViewUl, global
 /* 8135201C 0002041C  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -11322,6 +11466,7 @@
 /* 81352128 00020528  4E 80 00 20 */	blr
 .endfn content_exist__Q23ipl12NandSDWorkerFP9ESTmdViewUl
 
+# .text:0x9D40 | 0x8135212C | size: 0x104
 # ipl::NandSDWorker::do_list_nand_app()
 .fn do_list_nand_app__Q23ipl12NandSDWorkerFv, global
 /* 8135212C 0002052C  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -11394,6 +11539,7 @@
 /* 8135222C 0002062C  4E 80 00 20 */	blr
 .endfn do_list_nand_app__Q23ipl12NandSDWorkerFv
 
+# .text:0x9E44 | 0x81352230 | size: 0x1C0
 # ipl::NandSDWorker::get_nand_app_thumbnail(unsigned long long, unsigned char*, ipl::channel::SChanMgrMetaHeader*)
 .fn get_nand_app_thumbnail__Q23ipl12NandSDWorkerFUxPUcPQ33ipl7channel18SChanMgrMetaHeader, global
 /* 81352230 00020630  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -11518,6 +11664,7 @@
 /* 813523EC 000207EC  4E 80 00 20 */	blr
 .endfn get_nand_app_thumbnail__Q23ipl12NandSDWorkerFUxPUcPQ33ipl7channel18SChanMgrMetaHeader
 
+# .text:0xA004 | 0x813523F0 | size: 0x168
 # ipl::NandSDWorker::uncompress_app_thumbnail(const unsigned char*, unsigned long, unsigned char*)
 .fn uncompress_app_thumbnail__Q23ipl12NandSDWorkerFPCUcUlPUc, global
 /* 813523F0 000207F0  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -11619,6 +11766,7 @@
 /* 81352554 00020954  4E 80 00 20 */	blr
 .endfn uncompress_app_thumbnail__Q23ipl12NandSDWorkerFPCUcUlPUc
 
+# .text:0xA16C | 0x81352558 | size: 0x34
 # ipl::NandSDWorker::is_sli_compressed(const unsigned char*)
 .fn is_sli_compressed__Q23ipl12NandSDWorkerFPCUc, global
 /* 81352558 00020958  88 03 00 00 */	lbz r0, 0x0(r3)
@@ -11637,6 +11785,7 @@
 /* 81352588 00020988  4E 80 00 20 */	blr
 .endfn is_sli_compressed__Q23ipl12NandSDWorkerFPCUc
 
+# .text:0xA1A0 | 0x8135258C | size: 0x34
 # ipl::NandSDWorker::is_asr_compressed(const unsigned char*)
 .fn is_asr_compressed__Q23ipl12NandSDWorkerFPCUc, global
 /* 8135258C 0002098C  88 03 00 00 */	lbz r0, 0x0(r3)
@@ -11655,6 +11804,7 @@
 /* 813525BC 000209BC  4E 80 00 20 */	blr
 .endfn is_asr_compressed__Q23ipl12NandSDWorkerFPCUc
 
+# .text:0xA1D4 | 0x813525C0 | size: 0x34
 # ipl::NandSDWorker::is_ash_compressed(const unsigned char*)
 .fn is_ash_compressed__Q23ipl12NandSDWorkerFPCUc, global
 /* 813525C0 000209C0  88 03 00 00 */	lbz r0, 0x0(r3)
@@ -11673,6 +11823,7 @@
 /* 813525F0 000209F0  4E 80 00 20 */	blr
 .endfn is_ash_compressed__Q23ipl12NandSDWorkerFPCUc
 
+# .text:0xA208 | 0x813525F4 | size: 0x38
 # ipl::NandSDWorker::is_lz7_compressed(const unsigned char*)
 .fn is_lz7_compressed__Q23ipl12NandSDWorkerFPCUc, global
 /* 813525F4 000209F4  88 03 00 00 */	lbz r0, 0x0(r3)
@@ -11692,6 +11843,7 @@
 /* 81352628 00020A28  4E 80 00 20 */	blr
 .endfn is_lz7_compressed__Q23ipl12NandSDWorkerFPCUc
 
+# .text:0xA240 | 0x8135262C | size: 0x70
 # ipl::NandSDWorker::is_compressed(const unsigned char*)
 .fn is_compressed__Q23ipl12NandSDWorkerFPCUc, global
 /* 8135262C 00020A2C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -11727,6 +11879,7 @@
 /* 81352698 00020A98  4E 80 00 20 */	blr
 .endfn is_compressed__Q23ipl12NandSDWorkerFPCUc
 
+# .text:0xA2B0 | 0x8135269C | size: 0x5C
 # ipl::NandSDWorker::get_decode_size(const unsigned char*)
 .fn get_decode_size__Q23ipl12NandSDWorkerFPCUc, global
 /* 8135269C 00020A9C  88 03 00 00 */	lbz r0, 0x0(r3)
@@ -11756,6 +11909,7 @@
 /* 813526F4 00020AF4  4E 80 00 20 */	blr
 .endfn get_decode_size__Q23ipl12NandSDWorkerFPCUc
 
+# .text:0xA30C | 0x813526F8 | size: 0x6C
 # ipl::NandSDWorker::send_work(ipl::NandSDWorker::WorkMessage)
 .fn send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage, global
 /* 813526F8 00020AF8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -11788,6 +11942,7 @@
 /* 81352760 00020B60  4E 80 00 20 */	blr
 .endfn send_work__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker11WorkMessage
 
+# .text:0xA378 | 0x81352764 | size: 0x54
 # ipl::NandSDWorker::wait_work()
 .fn wait_work__Q23ipl12NandSDWorkerFv, global
 /* 81352764 00020B64  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -11813,6 +11968,7 @@
 /* 813527B4 00020BB4  4E 80 00 20 */	blr
 .endfn wait_work__Q23ipl12NandSDWorkerFv
 
+# .text:0xA3CC | 0x813527B8 | size: 0x50
 # ipl::NandSDWorker::get_state()
 .fn get_state__Q23ipl12NandSDWorkerFv, global
 /* 813527B8 00020BB8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -11837,6 +11993,7 @@
 /* 81352804 00020C04  4E 80 00 20 */	blr
 .endfn get_state__Q23ipl12NandSDWorkerFv
 
+# .text:0xA41C | 0x81352808 | size: 0x60
 # ipl::NandSDWorker::set_state(ipl::NandSDWorker::WorkState)
 .fn set_state__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker9WorkState, global
 /* 81352808 00020C08  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -11865,6 +12022,7 @@
 /* 81352864 00020C64  4E 80 00 20 */	blr
 .endfn set_state__Q23ipl12NandSDWorkerFQ33ipl12NandSDWorker9WorkState
 
+# .text:0xA47C | 0x81352868 | size: 0x48
 # ipl::NandSDWorker::sd_insert_callback(signed char)
 .fn sd_insert_callback__Q23ipl12NandSDWorkerFSc, global
 /* 81352868 00020C68  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -11888,6 +12046,7 @@
 /* 813528AC 00020CAC  4E 80 00 20 */	blr
 .endfn sd_insert_callback__Q23ipl12NandSDWorkerFSc
 
+# .text:0xA4C4 | 0x813528B0 | size: 0x48
 # ipl::NandSDWorker::sd_eject_callback(signed char)
 .fn sd_eject_callback__Q23ipl12NandSDWorkerFSc, global
 /* 813528B0 00020CB0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -11911,6 +12070,7 @@
 /* 813528F4 00020CF4  4E 80 00 20 */	blr
 .endfn sd_eject_callback__Q23ipl12NandSDWorkerFSc
 
+# .text:0xA50C | 0x813528F8 | size: 0x2BC
 # ipl::NandSDWorker::add_save_cache(nw4r::ut::List*, unsigned long long, WIISaveBannerFile*, long)
 .fn add_save_cache__Q23ipl12NandSDWorkerFPQ34nw4r2ut4ListUxP17WIISaveBannerFilel, global
 /* 813528F8 00020CF8  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -12105,6 +12265,7 @@
 /* 81352BB0 00020FB0  4E 80 00 20 */	blr
 .endfn add_save_cache__Q23ipl12NandSDWorkerFPQ34nw4r2ut4ListUxP17WIISaveBannerFilel
 
+# .text:0xA7C8 | 0x81352BB4 | size: 0x7C
 # ipl::NandSDWorker::find_save_cache(nw4r::ut::List*, unsigned long long)
 .fn find_save_cache__Q23ipl12NandSDWorkerFPQ34nw4r2ut4ListUx, global
 /* 81352BB4 00020FB4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -12143,6 +12304,7 @@
 /* 81352C2C 0002102C  4E 80 00 20 */	blr
 .endfn find_save_cache__Q23ipl12NandSDWorkerFPQ34nw4r2ut4ListUx
 
+# .text:0xA844 | 0x81352C30 | size: 0x64
 # ipl::NandSDWorker::delete_save_cache(nw4r::ut::List*, unsigned long long)
 .fn delete_save_cache__Q23ipl12NandSDWorkerFPQ34nw4r2ut4ListUx, global
 /* 81352C30 00021030  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -12173,6 +12335,7 @@
 /* 81352C90 00021090  4E 80 00 20 */	blr
 .endfn delete_save_cache__Q23ipl12NandSDWorkerFPQ34nw4r2ut4ListUx
 
+# .text:0xA8A8 | 0x81352C94 | size: 0x74
 # ipl::NandSDWorker::clear_save_cache(nw4r::ut::List*)
 .fn clear_save_cache__Q23ipl12NandSDWorkerFPQ34nw4r2ut4List, global
 /* 81352C94 00021094  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -12208,6 +12371,7 @@
 /* 81352D04 00021104  4E 80 00 20 */	blr
 .endfn clear_save_cache__Q23ipl12NandSDWorkerFPQ34nw4r2ut4List
 
+# .text:0xA91C | 0x81352D08 | size: 0xF0
 # ipl::NandSDWorker::add_app_cache(nw4r::ut::List*, unsigned long long, unsigned char*, unsigned long, ipl::channel::SChanMgrMetaHeader*, long)
 .fn add_app_cache__Q23ipl12NandSDWorkerFPQ34nw4r2ut4ListUxPUcUlPQ33ipl7channel18SChanMgrMetaHeaderl, global
 /* 81352D08 00021108  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -12275,6 +12439,7 @@
 /* 81352DF4 000211F4  4E 80 00 20 */	blr
 .endfn add_app_cache__Q23ipl12NandSDWorkerFPQ34nw4r2ut4ListUxPUcUlPQ33ipl7channel18SChanMgrMetaHeaderl
 
+# .text:0xAA0C | 0x81352DF8 | size: 0xD0
 # ipl::NandSDWorker::find_app_cache(nw4r::ut::List*, unsigned long long)
 .fn find_app_cache__Q23ipl12NandSDWorkerFPQ34nw4r2ut4ListUx, global
 /* 81352DF8 000211F8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -12337,6 +12502,7 @@
 /* 81352EC4 000212C4  4E 80 00 20 */	blr
 .endfn find_app_cache__Q23ipl12NandSDWorkerFPQ34nw4r2ut4ListUx
 
+# .text:0xAADC | 0x81352EC8 | size: 0x64
 # ipl::NandSDWorker::delete_app_cache(nw4r::ut::List*, unsigned long long)
 .fn delete_app_cache__Q23ipl12NandSDWorkerFPQ34nw4r2ut4ListUx, global
 /* 81352EC8 000212C8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -12367,6 +12533,7 @@
 /* 81352F28 00021328  4E 80 00 20 */	blr
 .endfn delete_app_cache__Q23ipl12NandSDWorkerFPQ34nw4r2ut4ListUx
 
+# .text:0xAB40 | 0x81352F2C | size: 0x70
 # ipl::NandSDWorker::clear_app_cache(nw4r::ut::List*)
 .fn clear_app_cache__Q23ipl12NandSDWorkerFPQ34nw4r2ut4List, global
 /* 81352F2C 0002132C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -12401,6 +12568,7 @@
 /* 81352F98 00021398  4E 80 00 20 */	blr
 .endfn clear_app_cache__Q23ipl12NandSDWorkerFPQ34nw4r2ut4List
 
+# .text:0xABB0 | 0x81352F9C | size: 0x278
 # ipl::NandSDWorker::get_sd_entry_list(const char*, unsigned long*, unsigned long)
 .fn get_sd_entry_list__Q23ipl12NandSDWorkerFPCcPUlUl, global
 /* 81352F9C 0002139C  94 21 FA F0 */	stwu r1, -0x510(r1)
@@ -12435,7 +12603,7 @@
 /* 8135300C 0002140C  80 8D 81 6C */	lwz r4, lbl_816961AC@sda21(r0)
 /* 81353010 00021410  38 61 00 64 */	addi r3, r1, 0x64
 /* 81353014 00021414  38 A0 00 40 */	li r5, 0x40
-/* 81353018 00021418  48 2A F3 AD */	bl fn_816023C4
+/* 81353018 00021418  48 2A F3 AD */	bl strncpy
 /* 8135301C 0002141C  38 61 00 64 */	addi r3, r1, 0x64
 /* 81353020 00021420  38 8D 81 B4 */	li r4, lbl_816961F4@sda21
 /* 81353024 00021424  38 A0 00 40 */	li r5, 0x40
@@ -12577,6 +12745,7 @@
 /* 81353210 00021610  4E 80 00 20 */	blr
 .endfn get_sd_entry_list__Q23ipl12NandSDWorkerFPCcPUlUl
 
+# .text:0xAE28 | 0x81353214 | size: 0xD8
 # ipl::NandSDWorker::sd_file_exist(const char*, unsigned long)
 .fn sd_file_exist__Q23ipl12NandSDWorkerFPCcUl, global
 /* 81353214 00021614  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -12640,6 +12809,7 @@
 /* 813532E8 000216E8  4E 80 00 20 */	blr
 .endfn sd_file_exist__Q23ipl12NandSDWorkerFPCcUl
 
+# .text:0xAF00 | 0x813532EC | size: 0x7C
 # ipl::NandSDWorker::get_sd_save_list(unsigned long*)
 .fn get_sd_save_list__Q23ipl12NandSDWorkerFPUl, global
 /* 813532EC 000216EC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -12677,6 +12847,7 @@
 /* 81353364 00021764  4E 80 00 20 */	blr
 .endfn get_sd_save_list__Q23ipl12NandSDWorkerFPUl
 
+# .text:0xAF7C | 0x81353368 | size: 0x78
 # ipl::NandSDWorker::get_sd_app_list(unsigned long*)
 .fn get_sd_app_list__Q23ipl12NandSDWorkerFPUl, global
 /* 81353368 00021768  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -12713,6 +12884,7 @@
 /* 813533DC 000217DC  4E 80 00 20 */	blr
 .endfn get_sd_app_list__Q23ipl12NandSDWorkerFPUl
 
+# .text:0xAFF4 | 0x813533E0 | size: 0x1C4
 # ipl::NandSDWorker::recursion_nand_save(unsigned long long, ipl::NandSDWorker::RecursiveProcess, const char**, unsigned long)
 .fn recursion_nand_save__Q23ipl12NandSDWorkerFUxQ33ipl12NandSDWorker16RecursiveProcessPPCcUl, global
 /* 813533E0 000217E0  94 21 FF 50 */	stwu r1, -0xb0(r1)
@@ -12750,7 +12922,7 @@
 /* 8135345C 0002185C  38 61 00 08 */	addi r3, r1, 0x8
 /* 81353460 00021860  38 81 00 48 */	addi r4, r1, 0x48
 /* 81353464 00021864  38 A0 00 40 */	li r5, 0x40
-/* 81353468 00021868  48 2A EF 5D */	bl fn_816023C4
+/* 81353468 00021868  48 2A EF 5D */	bl strncpy
 /* 8135346C 0002186C  38 61 00 08 */	addi r3, r1, 0x8
 /* 81353470 00021870  38 8D 81 A8 */	li r4, lbl_816961E8@sda21
 /* 81353474 00021874  38 A0 00 40 */	li r5, 0x40
@@ -12837,6 +13009,7 @@
 /* 813535A0 000219A0  4E 80 00 20 */	blr
 .endfn recursion_nand_save__Q23ipl12NandSDWorkerFUxQ33ipl12NandSDWorker16RecursiveProcessPPCcUl
 
+# .text:0xB1B8 | 0x813535A4 | size: 0x4F8
 # ipl::NandSDWorker::recursion_nand(const char*, const char*, ipl::NandSDWorker::RecursiveProcess, const char**, unsigned long)
 .fn recursion_nand__Q23ipl12NandSDWorkerFPCcPCcQ33ipl12NandSDWorker16RecursiveProcessPPCcUl, global
 /* 813535A4 000219A4  94 21 FF 00 */	stwu r1, -0x100(r1)
@@ -12881,7 +13054,7 @@
 /* 8135363C 00021A3C  7D E4 7B 78 */	mr r4, r15
 /* 81353640 00021A40  38 A0 00 40 */	li r5, 0x40
 /* 81353644 00021A44  38 7D 00 04 */	addi r3, r29, 0x4
-/* 81353648 00021A48  48 2A ED 7D */	bl fn_816023C4
+/* 81353648 00021A48  48 2A ED 7D */	bl strncpy
 /* 8135364C 00021A4C  7C 7D 82 14 */	add r3, r29, r16
 /* 81353650 00021A50  88 03 00 03 */	lbz r0, 0x3(r3)
 /* 81353654 00021A54  2C 00 00 2F */	cmpwi r0, 0x2f
@@ -12970,7 +13143,7 @@
 /* 81353780 00021B80  38 61 00 2C */	addi r3, r1, 0x2c
 /* 81353784 00021B84  38 81 00 6C */	addi r4, r1, 0x6c
 /* 81353788 00021B88  38 A0 00 40 */	li r5, 0x40
-/* 8135378C 00021B8C  48 2A EC 39 */	bl fn_816023C4
+/* 8135378C 00021B8C  48 2A EC 39 */	bl strncpy
 /* 81353790 00021B90  38 61 00 2C */	addi r3, r1, 0x2c
 /* 81353794 00021B94  38 8D 81 A8 */	li r4, lbl_816961E8@sda21
 /* 81353798 00021B98  38 A0 00 40 */	li r5, 0x40
@@ -13188,6 +13361,7 @@
 /* 81353A98 00021E98  4E 80 00 20 */	blr
 .endfn recursion_nand__Q23ipl12NandSDWorkerFPCcPCcQ33ipl12NandSDWorker16RecursiveProcessPPCcUl
 
+# .text:0xB6B0 | 0x81353A9C | size: 0x110
 # ipl::NandSDWorker::nand_get_length(const char*)
 .fn nand_get_length__Q23ipl12NandSDWorkerFPCc, global
 /* 81353A9C 00021E9C  94 21 FF 50 */	stwu r1, -0xb0(r1)
@@ -13266,6 +13440,7 @@
 /* 81353BA8 00021FA8  4E 80 00 20 */	blr
 .endfn nand_get_length__Q23ipl12NandSDWorkerFPCc
 
+# .text:0xB7C0 | 0x81353BAC | size: 0xAC
 # ipl::NandSDWorker::change_uid(unsigned long long)
 .fn change_uid__Q23ipl12NandSDWorkerFUx, global
 /* 81353BAC 00021FAC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -13300,7 +13475,7 @@
 /* 81353C20 00022020  48 00 00 20 */	b .L_81353C40
 .L_81353C24:
 /* 81353C24 00022024  48 22 08 81 */	bl fn_815744A4
-/* 81353C28 00022028  48 22 07 49 */	bl fn_81574370
+/* 81353C28 00022028  48 22 07 49 */	bl ISFS_OpenLib
 /* 81353C2C 0002202C  80 7D 00 00 */	lwz r3, 0x0(r29)
 /* 81353C30 00022030  3C 63 00 04 */	addis r3, r3, 0x4
 /* 81353C34 00022034  93 C3 EA 54 */	stw r30, -0x15ac(r3)
@@ -13316,6 +13491,7 @@
 /* 81353C54 00022054  4E 80 00 20 */	blr
 .endfn change_uid__Q23ipl12NandSDWorkerFUx
 
+# .text:0xB86C | 0x81353C58 | size: 0x5C
 # ipl::NandSDWorker::check_nand_corrupt(long, long*)
 .fn check_nand_corrupt__Q23ipl12NandSDWorkerFlPl, global
 /* 81353C58 00022058  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -13346,6 +13522,7 @@
 /* 81353CB0 000220B0  4E 80 00 20 */	blr
 .endfn check_nand_corrupt__Q23ipl12NandSDWorkerFlPl
 
+# .text:0xB8C8 | 0x81353CB4 | size: 0x14C
 # ipl::NandSDWorker::handle_sd_error(long, long*)
 .fn handle_sd_error__Q23ipl12NandSDWorkerFlPl, global
 /* 81353CB4 000220B4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -13447,6 +13624,7 @@
 /* 81353DFC 000221FC  4E 80 00 20 */	blr
 .endfn handle_sd_error__Q23ipl12NandSDWorkerFlPl
 
+# .text:0xBA14 | 0x81353E00 | size: 0x84
 # ipl::NandSDWorker::handle_sd_error_for_entry(long, long*)
 .fn handle_sd_error_for_entry__Q23ipl12NandSDWorkerFlPl, global
 /* 81353E00 00022200  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -13489,6 +13667,7 @@
 /* 81353E80 00022280  4E 80 00 20 */	blr
 .endfn handle_sd_error_for_entry__Q23ipl12NandSDWorkerFlPl
 
+# .text:0xBA98 | 0x81353E84 | size: 0x18
 # ipl::NandSDWorker::is_all_region(unsigned long long)
 .fn is_all_region__Q23ipl12NandSDWorkerFUx, global
 /* 81353E84 00022284  54 C0 06 3E */	clrlwi r0, r6, 24
@@ -13499,6 +13678,7 @@
 /* 81353E98 00022298  4E 80 00 20 */	blr
 .endfn is_all_region__Q23ipl12NandSDWorkerFUx
 
+# .text:0xBAB0 | 0x81353E9C | size: 0x30
 # ipl::NandSDWorker::is_same_title(unsigned long long, unsigned long long)
 .fn is_same_title__Q23ipl12NandSDWorkerFUxUx, global
 /* 81353E9C 0002229C  38 60 FF 00 */	li r3, -0x100
@@ -13515,6 +13695,7 @@
 /* 81353EC8 000222C8  4E 80 00 20 */	blr
 .endfn is_same_title__Q23ipl12NandSDWorkerFUxUx
 
+# .text:0xBAE0 | 0x81353ECC | size: 0x10C
 # ipl::NandSDWorker::item_exist_nand_save_folder(unsigned long long, const char*)
 .fn item_exist_nand_save_folder__Q23ipl12NandSDWorkerFUxPCc, global
 /* 81353ECC 000222CC  94 21 FF 90 */	stwu r1, -0x70(r1)
@@ -13591,6 +13772,7 @@
 /* 81353FD4 000223D4  4E 80 00 20 */	blr
 .endfn item_exist_nand_save_folder__Q23ipl12NandSDWorkerFUxPCc
 
+# .text:0xBBEC | 0x81353FD8 | size: 0x98
 # ipl::NandSDWorker::encrypt(const void*, unsigned long, void*)
 .fn encrypt__Q23ipl12NandSDWorkerFPCvUlPv, global
 /* 81353FD8 000223D8  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -13634,6 +13816,7 @@
 /* 8135406C 0002246C  4E 80 00 20 */	blr
 .endfn encrypt__Q23ipl12NandSDWorkerFPCvUlPv
 
+# .text:0xBC84 | 0x81354070 | size: 0x98
 # ipl::NandSDWorker::decrypt(const void*, unsigned long, void*)
 .fn decrypt__Q23ipl12NandSDWorkerFPCvUlPv, global
 /* 81354070 00022470  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -13677,6 +13860,7 @@
 /* 81354104 00022504  4E 80 00 20 */	blr
 .endfn decrypt__Q23ipl12NandSDWorkerFPCvUlPv
 
+# .text:0xBD1C | 0x81354108 | size: 0x1C
 # ipl::NandSDWorker::is_fa_file(unsigned char)
 .fn is_fa_file__Q23ipl12NandSDWorkerFUc, global
 /* 81354108 00022508  54 80 06 F7 */	rlwinm. r0, r4, 0, 27, 27
@@ -13688,6 +13872,7 @@
 /* 81354120 00022520  4E 80 00 20 */	blr
 .endfn is_fa_file__Q23ipl12NandSDWorkerFUc
 
+# .text:0xBD38 | 0x81354124 | size: 0x180
 # ipl::ut::FreeList::FreeList()
 .fn __ct__Q33ipl2ut8FreeListFv, global
 /* 81354124 00022524  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -13796,6 +13981,7 @@
 /* 813542A0 000226A0  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl2ut8FreeListFv
 
+# .text:0xBEB8 | 0x813542A4 | size: 0xBC
 # ipl::ut::FreeList::init(void*, unsigned long, unsigned long)
 .fn init__Q33ipl2ut8FreeListFPvUlUl, global
 /* 813542A4 000226A4  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -13850,6 +14036,7 @@
 /* 8135435C 0002275C  4E 80 00 20 */	blr
 .endfn init__Q33ipl2ut8FreeListFPvUlUl
 
+# .text:0xBF74 | 0x81354360 | size: 0x58
 # ipl::ut::FreeList::get()
 .fn get__Q33ipl2ut8FreeListFv, global
 /* 81354360 00022760  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -13879,6 +14066,7 @@
 /* 813543B4 000227B4  4E 80 00 20 */	blr
 .endfn get__Q33ipl2ut8FreeListFv
 
+# .text:0xBFCC | 0x813543B8 | size: 0xA8
 # ipl::ut::Stack::Stack()
 .fn __ct__Q33ipl2ut5StackFv, global
 /* 813543B8 000227B8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -13926,6 +14114,7 @@
 /* 8135445C 0002285C  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl2ut5StackFv
 
+# .text:0xC074 | 0x81354460 | size: 0x4C
 # ipl::ut::Stack::init(void*, unsigned long, unsigned long)
 .fn init__Q33ipl2ut5StackFPvUlUl, global
 /* 81354460 00022860  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -13950,6 +14139,7 @@
 /* 813544A8 000228A8  4E 80 00 20 */	blr
 .endfn init__Q33ipl2ut5StackFPvUlUl
 
+# .text:0xC0C0 | 0x813544AC | size: 0x160
 # ipl::ut::Stack::push(const void*)
 .fn push__Q33ipl2ut5StackFPCv, global
 /* 813544AC 000228AC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -14047,6 +14237,7 @@
 /* 81354608 00022A08  4E 80 00 20 */	blr
 .endfn push__Q33ipl2ut5StackFPCv
 
+# .text:0xC220 | 0x8135460C | size: 0x48
 # ipl::ut::Stack::pop(void*)
 .fn pop__Q33ipl2ut5StackFPv, global
 /* 8135460C 00022A0C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -14070,6 +14261,7 @@
 /* 81354650 00022A50  4E 80 00 20 */	blr
 .endfn pop__Q33ipl2ut5StackFPv
 
+# .text:0xC268 | 0x81354654 | size: 0xA4
 .fn iplNandSD_81354654, global
 /* 81354654 00022A54  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81354658 00022A58  7C 08 02 A6 */	mflr r0
@@ -14116,6 +14308,7 @@
 /* 813546F4 00022AF4  4E 80 00 20 */	blr
 .endfn iplNandSD_81354654
 
+# .text:0xC30C | 0x813546F8 | size: 0xC8
 .fn iplNandSD_813546F8, global
 /* 813546F8 00022AF8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 813546FC 00022AFC  7C 08 02 A6 */	mflr r0
@@ -14173,6 +14366,7 @@
 /* 813547BC 00022BBC  4E 80 00 20 */	blr
 .endfn iplNandSD_813546F8
 
+# .text:0xC3D4 | 0x813547C0 | size: 0x80
 .fn iplNandSD_813547C0, global
 /* 813547C0 00022BC0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 813547C4 00022BC4  7C 08 02 A6 */	mflr r0
@@ -14211,6 +14405,7 @@
 /* 8135483C 00022C3C  4E 80 00 20 */	blr
 .endfn iplNandSD_813547C0
 
+# .text:0xC454 | 0x81354840 | size: 0xF4
 .fn iplNandSD_81354840, global
 /* 81354840 00022C40  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 81354844 00022C44  7C 08 02 A6 */	mflr r0
@@ -14278,6 +14473,7 @@
 /* 81354930 00022D30  4E 80 00 20 */	blr
 .endfn iplNandSD_81354840
 
+# .text:0xC548 | 0x81354934 | size: 0x184
 .fn iplNandSD_81354934, global
 /* 81354934 00022D34  94 21 FF 60 */	stwu r1, -0xa0(r1)
 /* 81354938 00022D38  7C 08 02 A6 */	mflr r0
@@ -14381,6 +14577,7 @@
 /* 81354AB4 00022EB4  4E 80 00 20 */	blr
 .endfn iplNandSD_81354934
 
+# .text:0xC6CC | 0x81354AB8 | size: 0x14
 .fn iplNandSD_81354AB8, global
 /* 81354AB8 00022EB8  38 00 00 00 */	li r0, 0x0
 /* 81354ABC 00022EBC  90 03 00 00 */	stw r0, 0x0(r3)
@@ -14389,6 +14586,7 @@
 /* 81354AC8 00022EC8  4E 80 00 20 */	blr
 .endfn iplNandSD_81354AB8
 
+# .text:0xC6E0 | 0x81354ACC | size: 0x5C
 .fn iplNandSD_81354ACC, global
 /* 81354ACC 00022ECC  38 06 FF FF */	subi r0, r6, 0x1
 /* 81354AD0 00022ED0  90 83 00 00 */	stw r4, 0x0(r3)
@@ -14417,6 +14615,7 @@
 /* 81354B24 00022F24  4E 80 00 20 */	blr
 .endfn iplNandSD_81354ACC
 
+# .text:0xC73C | 0x81354B28 | size: 0x24
 .fn iplNandSD_81354B28, global
 /* 81354B28 00022F28  80 83 00 00 */	lwz r4, 0x0(r3)
 /* 81354B2C 00022F2C  2C 04 00 00 */	cmpwi r4, 0x0
@@ -14430,6 +14629,7 @@
 /* 81354B48 00022F48  4E 80 00 20 */	blr
 .endfn iplNandSD_81354B28
 
+# .text:0xC760 | 0x81354B4C | size: 0x40
 .fn iplNandSD_81354B4C, global
 /* 81354B4C 00022F4C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81354B50 00022F50  7C 08 02 A6 */	mflr r0
@@ -14449,6 +14649,7 @@
 /* 81354B88 00022F88  4E 80 00 20 */	blr
 .endfn iplNandSD_81354B4C
 
+# .text:0xC7A0 | 0x81354B8C | size: 0x4C
 .fn iplNandSD_81354B8C, global
 /* 81354B8C 00022F8C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81354B90 00022F90  7C 08 02 A6 */	mflr r0
@@ -14471,6 +14672,7 @@
 /* 81354BD4 00022FD4  4E 80 00 20 */	blr
 .endfn iplNandSD_81354B8C
 
+# .text:0xC7EC | 0x81354BD8 | size: 0x78
 .fn iplNandSD_81354BD8, global
 /* 81354BD8 00022FD8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81354BDC 00022FDC  7C 08 02 A6 */	mflr r0
@@ -14506,6 +14708,7 @@
 /* 81354C4C 0002304C  4E 80 00 20 */	blr
 .endfn iplNandSD_81354BD8
 
+# .text:0xC864 | 0x81354C50 | size: 0x80
 .fn iplNandSD_81354C50, global
 /* 81354C50 00023050  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81354C54 00023054  7C 08 02 A6 */	mflr r0
@@ -14544,10 +14747,11 @@
 /* 81354CCC 000230CC  4E 80 00 20 */	blr
 .endfn iplNandSD_81354C50
 
-# 0x8160D638 - 0x8160D668
+# 0x8160D638..0x8160D668 | size: 0x30
 .rodata
 .balign 8
 
+# .rodata:0x0 | 0x8160D638 | size: 0x10
 .obj lbl_8160D638, global
 	.4byte 0x216712E6
 	.4byte 0xAA1F689F
@@ -14555,6 +14759,7 @@
 	.4byte 0x24DC6A98
 .endobj lbl_8160D638
 
+# .rodata:0x10 | 0x8160D648 | size: 0x10
 .obj lbl_8160D648, global
 	.4byte 0x0E653781
 	.4byte 0x99BE4517
@@ -14562,6 +14767,7 @@
 	.4byte 0x451A5793
 .endobj lbl_8160D648
 
+# .rodata:0x20 | 0x8160D658 | size: 0x10
 .obj lbl_8160D658, global
 	.4byte 0x00000000
 	.4byte lbl_816373CA
@@ -14569,42 +14775,51 @@
 	.4byte lbl_816373EA
 .endobj lbl_8160D658
 
-# 0x81635A88 - 0x816389E8
+# 0x81635A88..0x816389E8 | size: 0x2F60
 .data
 .balign 8
 
+# .data:0x0 | 0x81635A88 | size: 0xB
 .obj lbl_81635A88, global
 	.string "banner.bin"
 .endobj lbl_81635A88
 
+# .data:0xB | 0x81635A93 | size: 0xB
 .obj lbl_81635A93, global
 	.string "notransfer"
 .endobj lbl_81635A93
 
+# .data:0x16 | 0x81635A9E | size: 0x14
 .obj lbl_81635A9E, global
 	.string "/private/wii/title/"
 .endobj lbl_81635A9E
 
+# .data:0x2A | 0x81635AB2 | size: 0x9
 .obj lbl_81635AB2, global
 	.string "data.bin"
 .endobj lbl_81635AB2
 
+# .data:0x33 | 0x81635ABB | size: 0xC
 .obj lbl_81635ABB, global
 	.string "content.bin"
 .endobj lbl_81635ABB
 
+# .data:0x3F | 0x81635AC7 | size: 0x14
 .obj lbl_81635AC7, global
 	.string "/shared2/succession"
 .endobj lbl_81635AC7
 
+# .data:0x53 | 0x81635ADB | size: 0x20
 .obj lbl_81635ADB, global
 	.string "/shared2/succession/transfer.id"
 .endobj lbl_81635ADB
 
+# .data:0x73 | 0x81635AFB | size: 0x10
 .obj lbl_81635AFB, global
 	.string "/tmp/nandsdwork"
 .endobj lbl_81635AFB
 
+# .data:0x83 | 0x81635B0B | size: 0x21
 .obj lbl_81635B0B, global
 	.4byte 0x73756363
 	.4byte 0x65737369
@@ -14617,26 +14832,32 @@
 	.4byte lbl_816961D7
 .endobj lbl_81635B0B
 
+# .data:0xA4 | 0x81635B2C | size: 0xC
 .obj lbl_81635B2C, global
 	.string "setting.txt"
 .endobj lbl_81635B2C
 
+# .data:0xB0 | 0x81635B38 | size: 0xA
 .obj lbl_81635B38, global
 	.string "cache.dat"
 .endobj lbl_81635B38
 
+# .data:0xBA | 0x81635B42 | size: 0x1E
 .obj lbl_81635B42, global
 	.string "/title/00000001/00000002/data"
 .endobj lbl_81635B42
 
+# .data:0xD8 | 0x81635B60 | size: 0x22
 .obj lbl_81635B60, global
 	.string "NandSDWorker: num FAT cache : %d\n"
 .endobj lbl_81635B60
 
+# .data:0xFA | 0x81635B82 | size: 0x22
 .obj lbl_81635B82, global
 	.string "NandSDWorker: num Data cache: %d\n"
 .endobj lbl_81635B82
 
+# .data:0x11C | 0x81635BA4 | size: 0x6A
 .obj lbl_81635BA4, global
 	.4byte 0x2F746974
 	.4byte 0x6C652F25
@@ -14667,14 +14888,17 @@
 	.2byte 0x7800
 .endobj lbl_81635BA4
 
+# .data:0x186 | 0x81635C0E | size: 0x21
 .obj lbl_81635C0E, global
 	.string "/private/wii/title/%08x/data.bin"
 .endobj lbl_81635C0E
 
+# .data:0x1A7 | 0x81635C2F | size: 0x25
 .obj lbl_81635C2F, global
 	.string "/private/wii/title/%c%c%c%c/data.bin"
 .endobj lbl_81635C2F
 
+# .data:0x1CC | 0x81635C54 | size: 0xC7
 .obj lbl_81635C54, global
 	.4byte 0x2F707269
 	.4byte 0x76617465
@@ -14728,6 +14952,7 @@
 	.byte 0x5D, 0x0A, 0x00
 .endobj lbl_81635C54
 
+# .data:0x293 | 0x81635D1B | size: 0x95
 .obj lbl_81635D1B, global
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
@@ -14769,6 +14994,7 @@
 	.byte 0x00
 .endobj lbl_81635D1B
 
+# .data:0x328 | 0x81635DB0 | size: 0xD0
 .obj jumptable_81635DB0, local
 	.rel run__Q23ipl12NandSDWorkerFv, .L_81349E04
 	.rel run__Q23ipl12NandSDWorkerFv, .L_8134961C
@@ -14824,6 +15050,7 @@
 	.rel run__Q23ipl12NandSDWorkerFv, .L_81349DE4
 .endobj jumptable_81635DB0
 
+# .data:0x3F8 | 0x81635E80 | size: 0x54B
 .obj gap_08_81635E80_data, global
 .hidden gap_08_81635E80_data
 	.4byte 0x4E616E64
@@ -15167,6 +15394,7 @@
 	.byte 0x78, 0x0A, 0x00
 .endobj gap_08_81635E80_data
 
+# .data:0x943 | 0x816363CB | size: 0x163
 .obj lbl_816363CB, global
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
@@ -15259,10 +15487,12 @@
 	.byte 0x74, 0x0A, 0x00
 .endobj lbl_816363CB
 
+# .data:0xAA6 | 0x8163652E | size: 0x15
 .obj lbl_8163652E, global
 	.string "/private/wii/loc.dat"
 .endobj lbl_8163652E
 
+# .data:0xABB | 0x81636543 | size: 0x42
 .obj lbl_81636543, global
 	.4byte 0x2F707269
 	.4byte 0x76617465
@@ -15283,6 +15513,7 @@
 	.2byte 0x0A00
 .endobj lbl_81636543
 
+# .data:0xAFD | 0x81636585 | size: 0x170
 .obj lbl_81636585, global
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
@@ -15378,10 +15609,12 @@
 	.4byte 0x64290A00
 .endobj lbl_81636585
 
+# .data:0xC6D | 0x816366F5 | size: 0x25
 .obj lbl_816366F5, global
 	.string "NandSDWorker: WADBackup failed.[%d]\n"
 .endobj lbl_816366F5
 
+# .data:0xC92 | 0x8163671A | size: 0xAE
 .obj lbl_8163671A, global
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
@@ -15429,6 +15662,7 @@
 	.2byte 0x0A00
 .endobj lbl_8163671A
 
+# .data:0xD40 | 0x816367C8 | size: 0xE0
 .obj lbl_816367C8, global
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
@@ -15488,18 +15722,22 @@
 	.4byte 0x645D0A00
 .endobj lbl_816367C8
 
+# .data:0xE20 | 0x816368A8 | size: 0x21
 .obj lbl_816368A8, global
 	.string "NandSDWorker: file %s size = %d\n"
 .endobj lbl_816368A8
 
+# .data:0xE41 | 0x816368C9 | size: 0x1F
 .obj lbl_816368C9, global
 	.string "NandSDWorker: FAFstat failed.\n"
 .endobj lbl_816368C9
 
+# .data:0xE60 | 0x816368E8 | size: 0x1E
 .obj lbl_816368E8, global
 	.string "NandSDWorker: delete file %s\n"
 .endobj lbl_816368E8
 
+# .data:0xE7E | 0x81636906 | size: 0x450
 .obj lbl_81636906, global
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
@@ -15779,6 +16017,7 @@
 	.4byte 0x6C780A00
 .endobj lbl_81636906
 
+# .data:0x12CE | 0x81636D56 | size: 0x64E
 .obj lbl_81636D56, global
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
@@ -16186,18 +16425,22 @@
 	.2byte 0x0A00
 .endobj lbl_81636D56
 
+# .data:0x191C | 0x816373A4 | size: 0x26
 .obj lbl_816373A4, global
 	.string "NandSDWorker: FAFstat %s failed.[%d]\n"
 .endobj lbl_816373A4
 
+# .data:0x1942 | 0x816373CA | size: 0x13
 .obj lbl_816373CA, global
 	.string "/private/wii/title"
 .endobj lbl_816373CA
 
+# .data:0x1955 | 0x816373DD | size: 0xD
 .obj lbl_816373DD, global
 	.string "/private/wii"
 .endobj lbl_816373DD
 
+# .data:0x1962 | 0x816373EA | size: 0x61
 .obj lbl_816373EA, global
 	.4byte 0x2F707269
 	.4byte 0x76617465
@@ -16226,10 +16469,12 @@
 	.byte 0x00
 .endobj lbl_816373EA
 
+# .data:0x19C3 | 0x8163744B | size: 0x2A
 .obj lbl_8163744B, global
 	.string "NandSDWorker: FACreatedir %s failed.[%d]\n"
 .endobj lbl_8163744B
 
+# .data:0x19ED | 0x81637475 | size: 0x425
 .obj lbl_81637475, global
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
@@ -16499,10 +16744,12 @@
 	.byte 0x00
 .endobj lbl_81637475
 
+# .data:0x1E12 | 0x8163789A | size: 0x28
 .obj lbl_8163789A, global
 	.string "NandSDWorker: SD card free area = %llu\n"
 .endobj lbl_8163789A
 
+# .data:0x1E3A | 0x816378C2 | size: 0x6D9
 .obj lbl_816378C2, global
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
@@ -16945,14 +17192,17 @@
 	.byte 0x00
 .endobj lbl_816378C2
 
+# .data:0x2513 | 0x81637F9B | size: 0x35
 .obj lbl_81637F9B, global
 	.string "BANNER WARNING: invalid signature or header size %d\n"
 .endobj lbl_81637F9B
 
+# .data:0x2548 | 0x81637FD0 | size: 0x34
 .obj lbl_81637FD0, global
 	.string "BANNER WARNING: different version v.%d ( now v.%d)\n"
 .endobj lbl_81637FD0
 
+# .data:0x257C | 0x81638004 | size: 0x448
 .obj lbl_81638004, global
 	.4byte 0x42414E4E
 	.4byte 0x45522057
@@ -17230,6 +17480,7 @@
 	.4byte 0x782E0A00
 .endobj lbl_81638004
 
+# .data:0x29C4 | 0x8163844C | size: 0x69
 .obj lbl_8163844C, global
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
@@ -17260,14 +17511,17 @@
 	.byte 0x00
 .endobj lbl_8163844C
 
+# .data:0x2A2D | 0x816384B5 | size: 0x24
 .obj lbl_816384B5, global
 	.string "NandSDWorker: recieve message = %d\n"
 .endobj lbl_816384B5
 
+# .data:0x2A51 | 0x816384D9 | size: 0x2E
 .obj lbl_816384D9, global
 	.string "NandSDWorker: SD card inserted !!   %c drive\n"
 .endobj lbl_816384D9
 
+# .data:0x2A7F | 0x81638507 | size: 0x79
 .obj lbl_81638507, global
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
@@ -17302,6 +17556,7 @@
 	.byte 0x00
 .endobj lbl_81638507
 
+# .data:0x2AF8 | 0x81638580 | size: 0xCE
 .obj lbl_81638580, global
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
@@ -17357,10 +17612,12 @@
 	.2byte 0x0A00
 .endobj lbl_81638580
 
+# .data:0x2BC6 | 0x8163864E | size: 0x20
 .obj lbl_8163864E, global
 	.string "NandSDWorker: sd save num = %d\n"
 .endobj lbl_8163864E
 
+# .data:0x2BE6 | 0x8163866E | size: 0x1E1
 .obj lbl_8163866E, global
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
@@ -17485,14 +17742,17 @@
 	.byte 0x00
 .endobj lbl_8163866E
 
+# .data:0x2DC7 | 0x8163884F | size: 0x21
 .obj lbl_8163884F, global
 	.string "ES_SetUid failed[%d]: 0x%016llx\n"
 .endobj lbl_8163884F
 
+# .data:0x2DE8 | 0x81638870 | size: 0x24
 .obj lbl_81638870, global
 	.string "NandSDWorker: nand memory corrupt!\n"
 .endobj lbl_81638870
 
+# .data:0x2E0C | 0x81638894 | size: 0x43
 .obj lbl_81638894, global
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
@@ -17513,14 +17773,17 @@
 	.byte 0x2E, 0x0A, 0x00
 .endobj lbl_81638894
 
+# .data:0x2E4F | 0x816388D7 | size: 0x2A
 .obj lbl_816388D7, global
 	.string "NandSDWorker: NANDReadDir %s failed.[%d]\n"
 .endobj lbl_816388D7
 
+# .data:0x2E79 | 0x81638901 | size: 0x26
 .obj lbl_81638901, global
 	.string "NandSDWorker: ES_Encrypt failed.[%d]\n"
 .endobj lbl_81638901
 
+# .data:0x2E9F | 0x81638927 | size: 0xC1
 .obj lbl_81638927, global
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
@@ -17573,137 +17836,167 @@
 	.byte 0x00
 .endobj lbl_81638927
 
-# 0x81694570 - 0x81694590
+# 0x81694570..0x81694590 | size: 0x20
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x81694570 | size: 0x4
 .obj lbl_81694570, global
 	.4byte lbl_8163652E
 .endobj lbl_81694570
 
+# .sdata2:0x4 | 0x81694574 | size: 0x4
 .obj lbl_81694574, global
 	.4byte lbl_81636543
 .endobj lbl_81694574
 
+# .sdata2:0x8 | 0x81694578 | size: 0x4
 .obj lbl_81694578, global
 	.4byte lbl_8163652E
 .endobj lbl_81694578
 
+# .sdata2:0xC | 0x8169457C | size: 0x4
 .obj lbl_8169457C, global
 	.4byte lbl_81636543
 .endobj lbl_8169457C
 
+# .sdata2:0x10 | 0x81694580 | size: 0x4
 .obj lbl_81694580, global
 	.float 100
 .endobj lbl_81694580
 
+# .sdata2:0x14 | 0x81694584 | size: 0x4
 .obj gap_09_81694584_sdata2, global
 .hidden gap_09_81694584_sdata2
 	.4byte 0x00000000
 .endobj gap_09_81694584_sdata2
 
+# .sdata2:0x18 | 0x81694588 | size: 0x8
 .obj lbl_81694588, global
 	.double 4503599627370496
 .endobj lbl_81694588
 
-# 0x81696198 - 0x816961F8
+# 0x81696198..0x816961F8 | size: 0x60
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x81696198 | size: 0x4
 .obj lbl_81696198, global
 	.4byte lbl_81635A88
 .endobj lbl_81696198
 
+# .sdata:0x4 | 0x8169619C | size: 0x8
 .obj lbl_8169619C, global
 	.4byte 0x6E6F636F
 	.4byte 0x70790000
 .endobj lbl_8169619C
 
+# .sdata:0xC | 0x816961A4 | size: 0x4
 .obj lbl_816961A4, global
 	.4byte lbl_8169619C
 .endobj lbl_816961A4
 
+# .sdata:0x10 | 0x816961A8 | size: 0x4
 .obj lbl_816961A8, global
 	.4byte lbl_81635A93
 .endobj lbl_816961A8
 
+# .sdata:0x14 | 0x816961AC | size: 0x4
 .obj lbl_816961AC, global
 	.4byte lbl_81635A9E
 .endobj lbl_816961AC
 
+# .sdata:0x18 | 0x816961B0 | size: 0x4
 .obj lbl_816961B0, global
 	.4byte lbl_81635AB2
 .endobj lbl_816961B0
 
+# .sdata:0x1C | 0x816961B4 | size: 0x4
 .obj lbl_816961B4, global
 	.4byte lbl_81635ABB
 .endobj lbl_816961B4
 
+# .sdata:0x20 | 0x816961B8 | size: 0x4
 .obj lbl_816961B8, global
 	.4byte lbl_81635AC7
 .endobj lbl_816961B8
 
+# .sdata:0x24 | 0x816961BC | size: 0x4
 .obj lbl_816961BC, global
 	.4byte lbl_81635ADB
 .endobj lbl_816961BC
 
+# .sdata:0x28 | 0x816961C0 | size: 0x4
 .obj lbl_816961C0, global
 	.4byte lbl_81635AFB
 .endobj lbl_816961C0
 
+# .sdata:0x2C | 0x816961C4 | size: 0x6
 .obj lbl_816961C4, global
 	.string "test/"
 .endobj lbl_816961C4
 
+# .sdata:0x32 | 0x816961CA | size: 0x7
 .obj lbl_816961CA, global
 	.string "test2/"
 .endobj lbl_816961CA
 
+# .sdata:0x39 | 0x816961D1 | size: 0x6
 .obj lbl_816961D1, global
 	.string "wc24/"
 .endobj lbl_816961D1
 
+# .sdata:0x3F | 0x816961D7 | size: 0x5
 .obj lbl_816961D7, global
 	.string "sys/"
 .endobj lbl_816961D7
 
+# .sdata:0x44 | 0x816961DC | size: 0x8
 .obj lbl_816961DC, global
 	.4byte lbl_81635B2C
 	.4byte lbl_81635B38
 .endobj lbl_816961DC
 
+# .sdata:0x4C | 0x816961E4 | size: 0x4
 .obj lbl_816961E4, global
 	.4byte lbl_81635B42
 .endobj lbl_816961E4
 
+# .sdata:0x50 | 0x816961E8 | size: 0x2
 .obj lbl_816961E8, global
 	.string "/"
 .endobj lbl_816961E8
 
+# .sdata:0x52 | 0x816961EA | size: 0x3
 .obj lbl_816961EA, global
 	.string "r+"
 .endobj lbl_816961EA
 
+# .sdata:0x55 | 0x816961ED | size: 0x2
 .obj lbl_816961ED, global
 	.string "r"
 .endobj lbl_816961ED
 
+# .sdata:0x57 | 0x816961EF | size: 0x5
 .obj lbl_816961EF, global
 	.string "IMET"
 .endobj lbl_816961EF
 
+# .sdata:0x5C | 0x816961F4 | size: 0x4
 .obj lbl_816961F4, global
 	.string "%s/"
 .endobj lbl_816961F4
 
-# 0x816986D8 - 0x816986E0
+# 0x816986D8..0x816986E0 | size: 0x8
 .section .sbss, "wa", @nobits
 .balign 8
 
+# .sbss:0x0 | 0x816986D8 | size: 0x4
 .obj lbl_816986D8, global
 	.skip 0x4
 .endobj lbl_816986D8
 
+# .sbss:0x4 | 0x816986DC | size: 0x4
 .obj lbl_816986DC, global
 	.skip 0x4
 .endobj lbl_816986DC

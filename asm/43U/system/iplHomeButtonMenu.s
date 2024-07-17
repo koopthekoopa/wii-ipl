@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplHomeButtonMenu.cpp"
 
-# 0x81347B6C - 0x813483EC
+# 0x81347B6C..0x813483EC | size: 0x880
 .text
 .balign 4
 
+# .text:0x0 | 0x81347B6C | size: 0x1B4
 # ipl::HomeButtonMenu::HomeButtonMenu(EGG::Heap*)
 .fn __ct__Q23ipl14HomeButtonMenuFPQ23EGG4Heap, global
 /* 81347B6C 00015F6C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -118,6 +119,7 @@
 /* 81347D1C 0001611C  4E 80 00 20 */	blr
 .endfn __ct__Q23ipl14HomeButtonMenuFPQ23EGG4Heap
 
+# .text:0x1B4 | 0x81347D20 | size: 0xB4
 # ipl::HomeButtonMenu::DrawBanIcon(unsigned char)
 .fn DrawBanIcon__Q23ipl14HomeButtonMenuFUc, global
 /* 81347D20 00016120  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -167,6 +169,7 @@
 /* 81347DD0 000161D0  4E 80 00 20 */	blr
 .endfn DrawBanIcon__Q23ipl14HomeButtonMenuFUc
 
+# .text:0x268 | 0x81347DD4 | size: 0xD8
 # ipl::HomeButtonMenu::callHBM()
 .fn callHBM__Q23ipl14HomeButtonMenuFv, global
 /* 81347DD4 000161D4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -227,6 +230,7 @@
 /* 81347EA8 000162A8  4E 80 00 20 */	blr
 .endfn callHBM__Q23ipl14HomeButtonMenuFv
 
+# .text:0x340 | 0x81347EAC | size: 0xEC
 # ipl::HomeButtonMenu::checkStart()
 .fn checkStart__Q23ipl14HomeButtonMenuFv, global
 /* 81347EAC 000162AC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -295,6 +299,7 @@
 /* 81347F94 00016394  4E 80 00 20 */	blr
 .endfn checkStart__Q23ipl14HomeButtonMenuFv
 
+# .text:0x42C | 0x81347F98 | size: 0x320
 # ipl::HomeButtonMenu::calc()
 .fn calc__Q23ipl14HomeButtonMenuFv, global
 /* 81347F98 00016398  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -510,6 +515,7 @@
 /* 813482B4 000166B4  4E 80 00 20 */	blr
 .endfn calc__Q23ipl14HomeButtonMenuFv
 
+# .text:0x74C | 0x813482B8 | size: 0x60
 # ipl::HomeButtonMenu::draw()
 .fn draw__Q23ipl14HomeButtonMenuFv, global
 /* 813482B8 000166B8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -540,6 +546,7 @@
 /* 81348314 00016714  4E 80 00 20 */	blr
 .endfn draw__Q23ipl14HomeButtonMenuFv
 
+# .text:0x7AC | 0x81348318 | size: 0x2C
 # ipl::HomeButtonMenu::disable()
 .fn disable__Q23ipl14HomeButtonMenuFv, global
 /* 81348318 00016718  88 03 00 00 */	lbz r0, 0x0(r3)
@@ -556,6 +563,7 @@
 /* 81348340 00016740  4E 80 00 20 */	blr
 .endfn disable__Q23ipl14HomeButtonMenuFv
 
+# .text:0x7D8 | 0x81348344 | size: 0x14
 # ipl::HomeButtonMenu::enable()
 .fn enable__Q23ipl14HomeButtonMenuFv, global
 /* 81348344 00016744  38 80 00 00 */	li r4, 0x0
@@ -565,6 +573,7 @@
 /* 81348354 00016754  4E 80 00 20 */	blr
 .endfn enable__Q23ipl14HomeButtonMenuFv
 
+# .text:0x7EC | 0x81348358 | size: 0x2C
 # ipl::HomeButtonMenu::disable_byTVRC()
 .fn disable_byTVRC__Q23ipl14HomeButtonMenuFv, global
 /* 81348358 00016758  88 03 00 00 */	lbz r0, 0x0(r3)
@@ -581,6 +590,7 @@
 /* 81348380 00016780  4E 80 00 20 */	blr
 .endfn disable_byTVRC__Q23ipl14HomeButtonMenuFv
 
+# .text:0x818 | 0x81348384 | size: 0x14
 # ipl::HomeButtonMenu::enable_byTVRC()
 .fn enable_byTVRC__Q23ipl14HomeButtonMenuFv, global
 /* 81348384 00016784  38 80 00 00 */	li r4, 0x0
@@ -590,6 +600,7 @@
 /* 81348394 00016794  4E 80 00 20 */	blr
 .endfn enable_byTVRC__Q23ipl14HomeButtonMenuFv
 
+# .text:0x82C | 0x81348398 | size: 0x54
 # ipl::HomeButtonMenu::getSelectBtnNum()
 .fn getSelectBtnNum__Q23ipl14HomeButtonMenuFv, global
 /* 81348398 00016798  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -617,10 +628,11 @@
 /* 813483E8 000167E8  4E 80 00 20 */	blr
 .endfn getSelectBtnNum__Q23ipl14HomeButtonMenuFv
 
-# 0x81635A70 - 0x81635A88
+# 0x81635A70..0x81635A88 | size: 0x18
 .data
 .balign 8
 
+# .data:0x0 | 0x81635A70 | size: 0x18
 .obj lbl_81635A70, global
 	.4byte 0x48424D3A
 	.4byte 0x20537461
@@ -630,63 +642,77 @@
 	.4byte 0x00000000
 .endobj lbl_81635A70
 
-# 0x81694540 - 0x81694570
+# 0x81694540..0x81694570 | size: 0x30
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x81694540 | size: 0x4
 .obj lbl_81694540, global
 	.float 1.3684211
 .endobj lbl_81694540
 
+# .sdata2:0x4 | 0x81694544 | size: 0x4
 .obj lbl_81694544, global
 	.float 1
 .endobj lbl_81694544
 
+# .sdata2:0x8 | 0x81694548 | size: 0x1
 .obj lbl_81694548, global
 	.byte 0xFF
 .endobj lbl_81694548
 
+# .sdata2:0x9 | 0x81694549 | size: 0x1
 .obj lbl_81694549, global
 	.byte 0xFF
 .endobj lbl_81694549
 
+# .sdata2:0xA | 0x8169454A | size: 0x1
 .obj lbl_8169454A, global
 	.byte 0xFF
 .endobj lbl_8169454A
 
+# .sdata2:0xB | 0x8169454B | size: 0x1
 .obj gap_09_8169454B_sdata2, global
 .hidden gap_09_8169454B_sdata2
 	.byte 0x00
 .endobj gap_09_8169454B_sdata2
 
+# .sdata2:0xC | 0x8169454C | size: 0x4
 .obj lbl_8169454C, global
 	.float -256
 .endobj lbl_8169454C
 
+# .sdata2:0x10 | 0x81694550 | size: 0x4
 .obj lbl_81694550, global
 	.float 188
 .endobj lbl_81694550
 
+# .sdata2:0x14 | 0x81694554 | size: 0x4
 .obj lbl_81694554, global
 	.float -200
 .endobj lbl_81694554
 
+# .sdata2:0x18 | 0x81694558 | size: 0x4
 .obj lbl_81694558, global
 	.float 132
 .endobj lbl_81694558
 
+# .sdata2:0x1C | 0x8169455C | size: 0x4
 .obj lbl_8169455C, global
 	.float 255.9
 .endobj lbl_8169455C
 
+# .sdata2:0x20 | 0x81694560 | size: 0x4
 .obj lbl_81694560, global
 	.float 250
 .endobj lbl_81694560
 
+# .sdata2:0x24 | 0x81694564 | size: 0x4
 .obj lbl_81694564, global
 	.float 1000
 .endobj lbl_81694564
 
+# .sdata2:0x28 | 0x81694568 | size: 0x8
 .obj lbl_81694568, global
 	.double 4503599627370496
 .endobj lbl_81694568

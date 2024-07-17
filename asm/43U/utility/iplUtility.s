@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplUtility.cpp"
 
-# 0x8136345C - 0x81364B88
+# 0x8136345C..0x81364B88 | size: 0x172C
 .text
 .balign 4
 
+# .text:0x0 | 0x8136345C | size: 0x104
 # ipl::utility::Calendar::setCalendarTime(OSCalendarTime*)
 .fn setCalendarTime__Q33ipl7utility8CalendarFP14OSCalendarTime, global
 /* 8136345C 0003185C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -77,6 +78,7 @@
 /* 8136355C 0003195C  4E 80 00 20 */	blr
 .endfn setCalendarTime__Q33ipl7utility8CalendarFP14OSCalendarTime
 
+# .text:0x104 | 0x81363560 | size: 0x30
 # ipl::utility::Language::getPath()
 .fn getPath__Q33ipl7utility8LanguageFv, global
 /* 81363560 00031960  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -93,6 +95,7 @@
 /* 8136358C 0003198C  4E 80 00 20 */	blr
 .endfn getPath__Q33ipl7utility8LanguageFv
 
+# .text:0x134 | 0x81363590 | size: 0x3C
 # ipl::utility::BScroller::BScroller()
 .fn __ct__Q33ipl7utility9BScrollerFv, global
 /* 81363590 00031990  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -112,6 +115,7 @@
 /* 813635C8 000319C8  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl7utility9BScrollerFv
 
+# .text:0x170 | 0x813635CC | size: 0x28
 # ipl::utility::BScroller::init()
 .fn init__Q33ipl7utility9BScrollerFv, global
 /* 813635CC 000319CC  C0 02 82 00 */	lfs f0, lbl_81694600@sda21(r0)
@@ -126,6 +130,7 @@
 /* 813635F0 000319F0  4E 80 00 20 */	blr
 .endfn init__Q33ipl7utility9BScrollerFv
 
+# .text:0x198 | 0x813635F4 | size: 0x64
 # ipl::utility::BScroller::calc()
 .fn calc__Q33ipl7utility9BScrollerFv, global
 /* 813635F4 000319F4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -156,6 +161,7 @@
 /* 81363654 00031A54  4E 80 00 20 */	blr
 .endfn calc__Q33ipl7utility9BScrollerFv
 
+# .text:0x1FC | 0x81363658 | size: 0x364
 # ipl::utility::BScroller::isYoungController(int)
 .fn isYoungController__Q33ipl7utility9BScrollerFi, global
 /* 81363658 00031A58  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -389,12 +395,14 @@
 /* 813639B8 00031DB8  4E 80 00 20 */	blr
 .endfn isYoungController__Q33ipl7utility9BScrollerFi
 
+# .text:0x560 | 0x813639BC | size: 0x8
 # float ipl::math::abs<float>(const float&)
 .fn "abs<f>__Q23ipl4mathFRCf_f", global
 /* 813639BC 00031DBC  38 60 00 01 */	li r3, 0x1
 /* 813639C0 00031DC0  4E 80 00 20 */	blr
 .endfn "abs<f>__Q23ipl4mathFRCf_f"
 
+# .text:0x568 | 0x813639C4 | size: 0xC
 # ipl::utility::BScroller::_get()
 .fn _get__Q33ipl7utility9BScrollerFv, global
 /* 813639C4 00031DC4  C0 03 00 00 */	lfs f0, 0x0(r3)
@@ -402,6 +410,7 @@
 /* 813639CC 00031DCC  4E 80 00 20 */	blr
 .endfn _get__Q33ipl7utility9BScrollerFv
 
+# .text:0x574 | 0x813639D0 | size: 0x48
 # ipl::utility::BScroller::set_arw_param()
 .fn set_arw_param__Q33ipl7utility9BScrollerFv, global
 /* 813639D0 00031DD0  C0 43 00 0C */	lfs f2, 0xc(r3)
@@ -425,6 +434,7 @@
 /* 81363A14 00031E14  4E 80 00 20 */	blr
 .endfn set_arw_param__Q33ipl7utility9BScrollerFv
 
+# .text:0x5BC | 0x81363A18 | size: 0xCC
 # ipl::utility::BScroller::isActive() const
 .fn isActive__Q33ipl7utility9BScrollerCFv, global
 /* 81363A18 00031E18  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -482,6 +492,7 @@
 /* 81363AE0 00031EE0  4E 80 00 20 */	blr
 .endfn isActive__Q33ipl7utility9BScrollerCFv
 
+# .text:0x688 | 0x81363AE4 | size: 0x14
 # ipl::utility::BScroller::isUp() const
 .fn isUp__Q33ipl7utility9BScrollerCFv, global
 /* 81363AE4 00031EE4  80 63 00 04 */	lwz r3, 0x4(r3)
@@ -491,6 +502,7 @@
 /* 81363AF4 00031EF4  4E 80 00 20 */	blr
 .endfn isUp__Q33ipl7utility9BScrollerCFv
 
+# .text:0x69C | 0x81363AF8 | size: 0x18
 # ipl::utility::BScroller::isDown() const
 .fn isDown__Q33ipl7utility9BScrollerCFv, global
 /* 81363AF8 00031EF8  C0 23 00 18 */	lfs f1, 0x18(r3)
@@ -501,6 +513,7 @@
 /* 81363B0C 00031F0C  4E 80 00 20 */	blr
 .endfn isDown__Q33ipl7utility9BScrollerCFv
 
+# .text:0x6B4 | 0x81363B10 | size: 0x18
 .fn iplUtility_81363B10, global
 /* 81363B10 00031F10  C0 23 00 18 */	lfs f1, 0x18(r3)
 /* 81363B14 00031F14  C0 02 82 00 */	lfs f0, lbl_81694600@sda21(r0)
@@ -510,6 +523,7 @@
 /* 81363B24 00031F24  4E 80 00 20 */	blr
 .endfn iplUtility_81363B10
 
+# .text:0x6CC | 0x81363B28 | size: 0x58
 # ipl::utility::YoungBScroller::isYoungController(int)
 .fn isYoungController__Q33ipl7utility14YoungBScrollerFi, global
 /* 81363B28 00031F28  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -538,6 +552,7 @@
 /* 81363B7C 00031F7C  4E 80 00 20 */	blr
 .endfn isYoungController__Q33ipl7utility14YoungBScrollerFi
 
+# .text:0x724 | 0x81363B80 | size: 0x80
 # ipl::utility::Scroller::Scroller()
 .fn __ct__Q33ipl7utility8ScrollerFv, global
 /* 81363B80 00031F80  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -574,6 +589,7 @@
 /* 81363BFC 00031FFC  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl7utility8ScrollerFv
 
+# .text:0x7A4 | 0x81363C00 | size: 0x10
 # ipl::math::HermiteIntp<float>::HermiteIntp()
 .fn "__ct__Q33ipl4math14HermiteIntp<f>Fv", global
 /* 81363C00 00032000  3C 80 81 64 */	lis r4, lbl_81641268@ha
@@ -582,6 +598,7 @@
 /* 81363C0C 0003200C  4E 80 00 20 */	blr
 .endfn "__ct__Q33ipl4math14HermiteIntp<f>Fv"
 
+# .text:0x7B4 | 0x81363C10 | size: 0x40
 # ipl::math::HermiteIntp<float>::~HermiteIntp()
 .fn "__dt__Q33ipl4math14HermiteIntp<f>Fv", global
 /* 81363C10 00032010  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -603,6 +620,7 @@
 /* 81363C4C 0003204C  4E 80 00 20 */	blr
 .endfn "__dt__Q33ipl4math14HermiteIntp<f>Fv"
 
+# .text:0x7F4 | 0x81363C50 | size: 0x78
 # ipl::math::HermiteIntp<float>::init(const float&, const float&, float, float, float, int, float)
 .fn "init__Q33ipl4math14HermiteIntp<f>FRCfRCffffif", global
 /* 81363C50 00032050  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -637,6 +655,7 @@
 /* 81363CC4 000320C4  4E 80 00 20 */	blr
 .endfn "init__Q33ipl4math14HermiteIntp<f>FRCfRCffffif"
 
+# .text:0x86C | 0x81363CC8 | size: 0x30
 # ipl::utility::Scroller::movable_pos(float) const
 .fn movable_pos__Q33ipl7utility8ScrollerCFf, global
 /* 81363CC8 000320C8  C0 63 00 40 */	lfs f3, 0x40(r3)
@@ -654,6 +673,7 @@
 /* 81363CF4 000320F4  4E 80 00 20 */	blr
 .endfn movable_pos__Q33ipl7utility8ScrollerCFf
 
+# .text:0x89C | 0x81363CF8 | size: 0x2CC
 # ipl::utility::Scroller::calc()
 .fn calc__Q33ipl7utility8ScrollerFv, global
 /* 81363CF8 000320F8  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -849,12 +869,14 @@
 /* 81363FC0 000323C0  4E 80 00 20 */	blr
 .endfn calc__Q33ipl7utility8ScrollerFv
 
+# .text:0xB68 | 0x81363FC4 | size: 0x8
 # ipl::utility::Scroller::get() const
 .fn get__Q33ipl7utility8ScrollerCFv, global
 /* 81363FC4 000323C4  C0 23 00 40 */	lfs f1, 0x40(r3)
 /* 81363FC8 000323C8  4E 80 00 20 */	blr
 .endfn get__Q33ipl7utility8ScrollerCFv
 
+# .text:0xB70 | 0x81363FCC | size: 0x30
 # ipl::utility::CharacterCode::shiftJISToUTF16(wchar_t*, const unsigned char*, long)
 .fn shiftJISToUTF16__Q33ipl7utility13CharacterCodeFPwPCUcl, global
 /* 81363FCC 000323CC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -871,6 +893,7 @@
 /* 81363FF8 000323F8  4E 80 00 20 */	blr
 .endfn shiftJISToUTF16__Q33ipl7utility13CharacterCodeFPwPCUcl
 
+# .text:0xBA0 | 0x81363FFC | size: 0x30
 # ipl::utility::CharacterCode::ANSIToUTF16(wchar_t*, const unsigned char*, long)
 .fn ANSIToUTF16__Q33ipl7utility13CharacterCodeFPwPCUcl, global
 /* 81363FFC 000323FC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -887,6 +910,7 @@
 /* 81364028 00032428  4E 80 00 20 */	blr
 .endfn ANSIToUTF16__Q33ipl7utility13CharacterCodeFPwPCUcl
 
+# .text:0xBD0 | 0x8136402C | size: 0xA4
 # ipl::utility::CharacterCode::UTF16ToANSI(unsigned char*, const wchar_t*, long)
 .fn UTF16ToANSI__Q33ipl7utility13CharacterCodeFPUcPCwl, global
 /* 8136402C 0003242C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -936,6 +960,7 @@
 /* 813640CC 000324CC  4E 80 00 20 */	blr
 .endfn UTF16ToANSI__Q33ipl7utility13CharacterCodeFPUcPCwl
 
+# .text:0xC74 | 0x813640D0 | size: 0x30
 # ipl::utility::CharacterCode::UTF8ToUTF16(wchar_t*, const char*, long)
 .fn UTF8ToUTF16__Q33ipl7utility13CharacterCodeFPwPCcl, global
 /* 813640D0 000324D0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -952,6 +977,7 @@
 /* 813640FC 000324FC  4E 80 00 20 */	blr
 .endfn UTF8ToUTF16__Q33ipl7utility13CharacterCodeFPwPCcl
 
+# .text:0xCA4 | 0x81364100 | size: 0x30
 # ipl::utility::CharacterCode::UTF16ToUTF8(char*, const wchar_t*, long)
 .fn UTF16ToUTF8__Q33ipl7utility13CharacterCodeFPcPCwl, global
 /* 81364100 00032500  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -968,6 +994,7 @@
 /* 8136412C 0003252C  4E 80 00 20 */	blr
 .endfn UTF16ToUTF8__Q33ipl7utility13CharacterCodeFPcPCwl
 
+# .text:0xCD4 | 0x81364130 | size: 0x8C
 # ipl::utility::CharacterCode::ANSIToUTF8(char*, const unsigned char*)
 .fn ANSIToUTF8__Q33ipl7utility13CharacterCodeFPcPCUc, global
 /* 81364130 00032530  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1009,6 +1036,7 @@
 /* 813641B8 000325B8  4E 80 00 20 */	blr
 .endfn ANSIToUTF8__Q33ipl7utility13CharacterCodeFPcPCUc
 
+# .text:0xD60 | 0x813641BC | size: 0x98
 # ipl::utility::CharacterCode::ANSIToUTF8(char*, const unsigned char*, int)
 .fn ANSIToUTF8__Q33ipl7utility13CharacterCodeFPcPCUci, global
 /* 813641BC 000325BC  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1053,6 +1081,7 @@
 /* 81364250 00032650  4E 80 00 20 */	blr
 .endfn ANSIToUTF8__Q33ipl7utility13CharacterCodeFPcPCUci
 
+# .text:0xDF8 | 0x81364254 | size: 0x90
 # ipl::utility::CharacterCode::UTF8ToANSI(unsigned char*, const char*)
 .fn UTF8ToANSI__Q33ipl7utility13CharacterCodeFPUcPCc, global
 /* 81364254 00032654  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1095,6 +1124,7 @@
 /* 813642E0 000326E0  4E 80 00 20 */	blr
 .endfn UTF8ToANSI__Q33ipl7utility13CharacterCodeFPUcPCc
 
+# .text:0xE88 | 0x813642E4 | size: 0xF4
 # ipl::utility::CharacterCode::UTF16ToU32(unsigned long*, const wchar_t*)
 .fn UTF16ToU32__Q33ipl7utility13CharacterCodeFPUlPCw, global
 /* 813642E4 000326E4  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -1164,6 +1194,7 @@
 /* 813643D4 000327D4  4E 80 00 20 */	blr
 .endfn UTF16ToU32__Q33ipl7utility13CharacterCodeFPUlPCw
 
+# .text:0xF7C | 0x813643D8 | size: 0x1C
 # ipl::utility::CharacterCode::WiiIdToUTF16(wchar_t*, unsigned long long)
 .fn WiiIdToUTF16__Q33ipl7utility13CharacterCodeFPwUx, global
 /* 813643D8 000327D8  3D 20 81 64 */	lis r9, lbl_81641258@ha
@@ -1175,6 +1206,7 @@
 /* 813643F0 000327F0  48 2A 41 E0 */	b fn_816085D0
 .endfn WiiIdToUTF16__Q33ipl7utility13CharacterCodeFPwUx
 
+# .text:0xF98 | 0x813643F4 | size: 0x30
 # ipl::utility::CharacterCode::changeEndian(wchar_t*, int)
 .fn changeEndian__Q33ipl7utility13CharacterCodeFPwi, global
 /* 813643F4 000327F4  38 A0 00 00 */	li r5, 0x0
@@ -1192,6 +1224,7 @@
 /* 81364420 00032820  4E 80 00 20 */	blr
 .endfn changeEndian__Q33ipl7utility13CharacterCodeFPwi
 
+# .text:0xFC8 | 0x81364424 | size: 0x7C
 # ipl::utility::timer::set_msec(int)
 .fn set_msec__Q33ipl7utility5timerFi, global
 /* 81364424 00032824  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1227,6 +1260,7 @@
 /* 8136449C 0003289C  4E 80 00 20 */	blr
 .endfn set_msec__Q33ipl7utility5timerFi
 
+# .text:0x1044 | 0x813644A0 | size: 0x4C
 # ipl::utility::timer::operator()()
 .fn __cl__Q33ipl7utility5timerFv, global
 /* 813644A0 000328A0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1250,6 +1284,7 @@
 /* 813644E8 000328E8  4E 80 00 20 */	blr
 .endfn __cl__Q33ipl7utility5timerFv
 
+# .text:0x1090 | 0x813644EC | size: 0xB8
 # ipl::utility::layout::set_string(nw4r::lyt::Pane*, const wchar_t*)
 .fn set_string__Q33ipl7utility6layoutFPQ34nw4r3lyt4PanePCw, global
 /* 813644EC 000328EC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1306,6 +1341,7 @@
 /* 813645A0 000329A0  4E 80 00 20 */	blr
 .endfn set_string__Q33ipl7utility6layoutFPQ34nw4r3lyt4PanePCw
 
+# .text:0x1148 | 0x813645A4 | size: 0xC
 # ipl::utility::layout::set_texture(nw4r::lyt::Material*, const _GXTexObj&)
 .fn set_texture__Q33ipl7utility6layoutFPQ34nw4r3lyt8MaterialRC9_GXTexObj, global
 /* 813645A4 000329A4  7C 85 23 78 */	mr r5, r4
@@ -1313,6 +1349,7 @@
 /* 813645AC 000329AC  48 1C 38 70 */	b fn_81527E1C
 .endfn set_texture__Q33ipl7utility6layoutFPQ34nw4r3lyt8MaterialRC9_GXTexObj
 
+# .text:0x1154 | 0x813645B0 | size: 0x44
 # ipl::utility::layout::set_texture(nw4r::lyt::Material*, const nw4r::lyt::Material*, unsigned char)
 .fn set_texture__Q33ipl7utility6layoutFPQ34nw4r3lyt8MaterialPCQ34nw4r3lyt8MaterialUc, global
 /* 813645B0 000329B0  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1334,6 +1371,7 @@
 /* 813645F0 000329F0  4E 80 00 20 */	blr
 .endfn set_texture__Q33ipl7utility6layoutFPQ34nw4r3lyt8MaterialPCQ34nw4r3lyt8MaterialUc
 
+# .text:0x1198 | 0x813645F4 | size: 0x8C
 # ipl::utility::get_cursor_pos(const ipl::math::VEC2&)
 .fn get_cursor_pos__Q23ipl7utilityFRCQ33ipl4math4VEC2, global
 /* 813645F4 000329F4  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -1373,6 +1411,7 @@
 /* 8136467C 00032A7C  4E 80 00 20 */	blr
 .endfn get_cursor_pos__Q23ipl7utilityFRCQ33ipl4math4VEC2
 
+# .text:0x1224 | 0x81364680 | size: 0x118
 # ipl::utility::tpl_validity::tpl_validity(TPLPalette*, unsigned long)
 .fn __ct__Q33ipl7utility12tpl_validityFP10TPLPaletteUl, global
 /* 81364680 00032A80  38 00 00 00 */	li r0, 0x0
@@ -1450,6 +1489,7 @@
 /* 81364794 00032B94  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl7utility12tpl_validityFP10TPLPaletteUl
 
+# .text:0x133C | 0x81364798 | size: 0x294
 # ipl::utility::tpl_validity::is_valid_cmn()
 .fn is_valid_cmn__Q33ipl7utility12tpl_validityFv, global
 /* 81364798 00032B98  80 A3 00 00 */	lwz r5, 0x0(r3)
@@ -1644,11 +1684,13 @@
 /* 81364A28 00032E28  4E 80 00 20 */	blr
 .endfn is_valid_cmn__Q33ipl7utility12tpl_validityFv
 
+# .text:0x15D0 | 0x81364A2C | size: 0x4
 # ipl::utility::tpl_validity::is_valid()
 .fn is_valid__Q33ipl7utility12tpl_validityFv, global
 /* 81364A2C 00032E2C  4B FF FD 6C */	b is_valid_cmn__Q33ipl7utility12tpl_validityFv
 .endfn is_valid__Q33ipl7utility12tpl_validityFv
 
+# .text:0x15D4 | 0x81364A30 | size: 0x94
 # ipl::utility::tpl_validity::is_valid_for_ltx()
 .fn is_valid_for_ltx__Q33ipl7utility12tpl_validityFv, global
 /* 81364A30 00032E30  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1694,6 +1736,7 @@
 /* 81364AC0 00032EC0  4E 80 00 20 */	blr
 .endfn is_valid_for_ltx__Q33ipl7utility12tpl_validityFv
 
+# .text:0x1668 | 0x81364AC4 | size: 0x1C
 # ipl::utility::memcpy_s(void*, unsigned long, const void*, unsigned long)
 .fn memcpy_s__Q23ipl7utilityFPvUlPCvUl, global
 /* 81364AC4 00032EC4  7C 80 23 78 */	mr r0, r4
@@ -1706,6 +1749,7 @@
 /* 81364ADC 00032EDC  4B FC B7 54 */	b memcpy
 .endfn memcpy_s__Q23ipl7utilityFPvUlPCvUl
 
+# .text:0x1684 | 0x81364AE0 | size: 0x38
 # ipl::utility::wpad::isIncreaseConnectedWpad(unsigned long, unsigned long)
 .fn isIncreaseConnectedWpad__Q33ipl7utility4wpadFUlUl, global
 /* 81364AE0 00032EE0  38 00 00 04 */	li r0, 0x4
@@ -1726,6 +1770,7 @@
 /* 81364B14 00032F14  4E 80 00 20 */	blr
 .endfn isIncreaseConnectedWpad__Q33ipl7utility4wpadFUlUl
 
+# .text:0x16BC | 0x81364B18 | size: 0x70
 # ipl::utility::wpad::getWpadConnectedMask()
 .fn getWpadConnectedMask__Q33ipl7utility4wpadFv, global
 /* 81364B18 00032F18  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1760,10 +1805,11 @@
 /* 81364B84 00032F84  4E 80 00 20 */	blr
 .endfn getWpadConnectedMask__Q33ipl7utility4wpadFv
 
-# 0x81641208 - 0x81641290
+# 0x81641208..0x81641290 | size: 0x88
 .data
 .balign 8
 
+# .data:0x0 | 0x81641208 | size: 0x28
 .obj lbl_81641208, global
 	.4byte lbl_81696250
 	.4byte lbl_81696254
@@ -1777,18 +1823,22 @@
 	.4byte lbl_81696270
 .endobj lbl_81641208
 
+# .data:0x28 | 0x81641230 | size: 0x11
 .obj lbl_81641230, global
 	.string "WIPL_SE_B_SCROLL"
 .endobj lbl_81641230
 
+# .data:0x39 | 0x81641241 | size: 0x17
 .obj lbl_81641241, global
 	.string "WIPL_SE_MESSAGE_SCROLL"
 .endobj lbl_81641241
 
+# .data:0x50 | 0x81641258 | size: 0x10
 .obj lbl_81641258, global
 	.string16 "%016llu"
 .endobj lbl_81641258
 
+# .data:0x60 | 0x81641268 | size: 0x10
 .obj lbl_81641268, global
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -1796,175 +1846,215 @@
 	.4byte calc__Q33ipl7utility15FrameControllerFv
 .endobj lbl_81641268
 
+# .data:0x70 | 0x81641278 | size: 0xC
 .obj lbl_81641278, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte isYoungController__Q33ipl7utility14YoungBScrollerFi
 .endobj lbl_81641278
 
+# .data:0x7C | 0x81641284 | size: 0xC
 .obj lbl_81641284, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte "abs<f>__Q23ipl4mathFRCf_f"
 .endobj lbl_81641284
 
-# 0x81694600 - 0x81694658
+# 0x81694600..0x81694658 | size: 0x58
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x81694600 | size: 0x4
 .obj lbl_81694600, global
 	.float 0
 .endobj lbl_81694600
 
+# .sdata2:0x4 | 0x81694604 | size: 0x4
 .obj lbl_81694604, global
 	.float -1
 .endobj lbl_81694604
 
+# .sdata2:0x8 | 0x81694608 | size: 0x4
 .obj lbl_81694608, global
 	.float 1
 .endobj lbl_81694608
 
+# .sdata2:0xC | 0x8169460C | size: 0x4
 .obj lbl_8169460C, global
 	.float 128
 .endobj lbl_8169460C
 
+# .sdata2:0x10 | 0x81694610 | size: 0x4
 .obj lbl_81694610, global
 	.float -0.01
 .endobj lbl_81694610
 
+# .sdata2:0x14 | 0x81694614 | size: 0x4
 .obj lbl_81694614, global
 	.float -10
 .endobj lbl_81694614
 
+# .sdata2:0x18 | 0x81694618 | size: 0x4
 .obj lbl_81694618, global
 	.float 10
 .endobj lbl_81694618
 
+# .sdata2:0x1C | 0x8169461C | size: 0x4
 .obj lbl_8169461C, global
 	.float 0.01
 .endobj lbl_8169461C
 
+# .sdata2:0x20 | 0x81694620 | size: 0x4
 .obj lbl_81694620, global
 	.float 0.6
 .endobj lbl_81694620
 
+# .sdata2:0x24 | 0x81694624 | size: 0x4
 .obj lbl_81694624, global
 	.float 1.5
 .endobj lbl_81694624
 
+# .sdata2:0x28 | 0x81694628 | size: 0x4
 .obj lbl_81694628, global
 	.float 20
 .endobj lbl_81694628
 
+# .sdata2:0x2C | 0x8169462C | size: 0x4
 .obj lbl_8169462C, global
 	.float 2
 .endobj lbl_8169462C
 
+# .sdata2:0x30 | 0x81694630 | size: 0x4
 .obj lbl_81694630, global
 	.float 3
 .endobj lbl_81694630
 
+# .sdata2:0x34 | 0x81694634 | size: 0x4
 .obj gap_09_81694634_sdata2, global
 .hidden gap_09_81694634_sdata2
 	.4byte 0x00000000
 .endobj gap_09_81694634_sdata2
 
+# .sdata2:0x38 | 0x81694638 | size: 0x8
 .obj lbl_81694638, global
 	.double 10
 .endobj lbl_81694638
 
+# .sdata2:0x40 | 0x81694640 | size: 0x8
 .obj lbl_81694640, global
 	.double 4503601774854144
 .endobj lbl_81694640
 
+# .sdata2:0x48 | 0x81694648 | size: 0x8
 .obj lbl_81694648, global
 	.double 4503599627370496
 .endobj lbl_81694648
 
+# .sdata2:0x50 | 0x81694650 | size: 0x4
 .obj lbl_81694650, global
 	.float -100
 .endobj lbl_81694650
 
+# .sdata2:0x54 | 0x81694654 | size: 0x4
 .obj lbl_81694654, global
 	.float 100
 .endobj lbl_81694654
 
-# 0x81696250 - 0x816962A0
+# 0x81696250..0x816962A0 | size: 0x50
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x81696250 | size: 0x4
 .obj lbl_81696250, global
 	.string "jpn"
 .endobj lbl_81696250
 
+# .sdata:0x4 | 0x81696254 | size: 0x4
 .obj lbl_81696254, global
 	.string "eng"
 .endobj lbl_81696254
 
+# .sdata:0x8 | 0x81696258 | size: 0x4
 .obj lbl_81696258, global
 	.string "ger"
 .endobj lbl_81696258
 
+# .sdata:0xC | 0x8169625C | size: 0x4
 .obj lbl_8169625C, global
 	.string "fra"
 .endobj lbl_8169625C
 
+# .sdata:0x10 | 0x81696260 | size: 0x4
 .obj lbl_81696260, global
 	.string "spa"
 .endobj lbl_81696260
 
+# .sdata:0x14 | 0x81696264 | size: 0x4
 .obj lbl_81696264, global
 	.string "ita"
 .endobj lbl_81696264
 
+# .sdata:0x18 | 0x81696268 | size: 0x4
 .obj lbl_81696268, global
 	.string "ned"
 .endobj lbl_81696268
 
+# .sdata:0x1C | 0x8169626C | size: 0x4
 .obj lbl_8169626C, global
 	.string "chn"
 .endobj lbl_8169626C
 
+# .sdata:0x20 | 0x81696270 | size: 0x4
 .obj lbl_81696270, global
 	.string "kor"
 .endobj lbl_81696270
 
+# .sdata:0x24 | 0x81696274 | size: 0x4
 .obj lbl_81696274, global
 	.4byte 0x3F800000
 .endobj lbl_81696274
 
+# .sdata:0x28 | 0x81696278 | size: 0x4
 .obj lbl_81696278, global
 	.4byte 0x3F800000
 .endobj lbl_81696278
 
+# .sdata:0x2C | 0x8169627C | size: 0x4
 .obj lbl_8169627C, global
 	.4byte 0x3F800000
 .endobj lbl_8169627C
 
+# .sdata:0x30 | 0x81696280 | size: 0x4
 .obj lbl_81696280, global
 	.4byte 0x3F800000
 .endobj lbl_81696280
 
+# .sdata:0x34 | 0x81696284 | size: 0x4
 .obj lbl_81696284, global
 	.4byte 0x00000000
 .endobj lbl_81696284
 
+# .sdata:0x38 | 0x81696288 | size: 0x4
 .obj lbl_81696288, global
 	.4byte 0x3F800000
 .endobj lbl_81696288
 
+# .sdata:0x3C | 0x8169628C | size: 0x4
 .obj lbl_8169628C, global
 	.4byte 0x00000000
 .endobj lbl_8169628C
 
+# .sdata:0x40 | 0x81696290 | size: 0x4
 .obj lbl_81696290, global
 	.4byte 0xC3960000
 .endobj lbl_81696290
 
+# .sdata:0x44 | 0x81696294 | size: 0x4
 .obj lbl_81696294, global
 	.4byte 0x00000000
 .endobj lbl_81696294
 
+# .sdata:0x48 | 0x81696298 | size: 0x8
 .obj lbl_81696298, global
 	.4byte 0x43960000
 	.4byte 0x00000000

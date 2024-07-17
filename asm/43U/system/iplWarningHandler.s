@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplWarningHandler.cpp"
 
-# 0x81356D4C - 0x81356E48
+# 0x81356D4C..0x81356E48 | size: 0xFC
 .text
 .balign 4
 
+# .text:0x0 | 0x81356D4C | size: 0x64
 # ipl::WarningHandler::WarningHandler(EGG::Heap*)
 .fn __ct__Q23ipl14WarningHandlerFPQ23EGG4Heap, global
 /* 81356D4C 0002514C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -35,6 +36,7 @@
 /* 81356DAC 000251AC  4E 80 00 20 */	blr
 .endfn __ct__Q23ipl14WarningHandlerFPQ23EGG4Heap
 
+# .text:0x64 | 0x81356DB0 | size: 0x7C
 # ipl::WarningHandler::set(ipl::WarningHandler::Type, unsigned long)
 .fn set__Q23ipl14WarningHandlerFQ33ipl14WarningHandler4TypeUl, global
 /* 81356DB0 000251B0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -71,18 +73,21 @@
 /* 81356E28 00025228  4E 80 00 20 */	blr
 .endfn set__Q23ipl14WarningHandlerFQ33ipl14WarningHandler4TypeUl
 
+# .text:0xE0 | 0x81356E2C | size: 0x8
 # ipl::WarningHandler::calc()
 .fn calc__Q23ipl14WarningHandlerFv, global
 /* 81356E2C 0002522C  80 63 00 08 */	lwz r3, 0x8(r3)
 /* 81356E30 00025230  4B FE E4 3C */	b calc__Q23ipl12DialogWindowFv
 .endfn calc__Q23ipl14WarningHandlerFv
 
+# .text:0xE8 | 0x81356E34 | size: 0x8
 # ipl::WarningHandler::draw()
 .fn draw__Q23ipl14WarningHandlerFv, global
 /* 81356E34 00025234  80 63 00 08 */	lwz r3, 0x8(r3)
 /* 81356E38 00025238  4B FE F0 B0 */	b draw__Q23ipl12DialogWindowFv
 .endfn draw__Q23ipl14WarningHandlerFv
 
+# .text:0xF0 | 0x81356E3C | size: 0xC
 # ipl::WarningHandler::check()
 .fn check__Q23ipl14WarningHandlerFv, global
 /* 81356E3C 0002523C  80 63 00 08 */	lwz r3, 0x8(r3)

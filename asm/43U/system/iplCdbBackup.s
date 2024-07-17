@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplCdbBackup.cpp"
 
-# 0x8135A590 - 0x8135B53C
+# 0x8135A590..0x8135B53C | size: 0xFAC
 .text
 .balign 4
 
+# .text:0x0 | 0x8135A590 | size: 0xA0
 # ipl::CdbBackup::CdbBackup()
 .fn __ct__Q23ipl9CdbBackupFv, global
 /* 8135A590 00028990  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -52,6 +53,7 @@
 /* 8135A62C 00028A2C  4E 80 00 20 */	blr
 .endfn __ct__Q23ipl9CdbBackupFv
 
+# .text:0xA0 | 0x8135A630 | size: 0x64
 # ipl::CdbBackup::~CdbBackup()
 .fn __dt__Q23ipl9CdbBackupFv, global
 /* 8135A630 00028A30  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -82,6 +84,7 @@
 /* 8135A690 00028A90  4E 80 00 20 */	blr
 .endfn __dt__Q23ipl9CdbBackupFv
 
+# .text:0x104 | 0x8135A694 | size: 0x74
 # ipl::CdbBackup::update()
 .fn update__Q23ipl9CdbBackupFv, global
 /* 8135A694 00028A94  80 03 00 10 */	lwz r0, 0x10(r3)
@@ -132,6 +135,7 @@
 /* 8135A704 00028B04  4E 80 00 20 */	blr
 .endfn update__Q23ipl9CdbBackupFv
 
+# .text:0x178 | 0x8135A708 | size: 0x70
 # ipl::CdbBackup::stt_wait_worker()
 .fn stt_wait_worker__Q23ipl9CdbBackupFv, global
 /* 8135A708 00028B08  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -167,6 +171,7 @@
 /* 8135A774 00028B74  4E 80 00 20 */	blr
 .endfn stt_wait_worker__Q23ipl9CdbBackupFv
 
+# .text:0x1E8 | 0x8135A778 | size: 0x60
 # ipl::CdbBackup::stt_mount_sd()
 .fn stt_mount_sd__Q23ipl9CdbBackupFv, global
 /* 8135A778 00028B78  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -197,6 +202,7 @@
 /* 8135A7D4 00028BD4  4E 80 00 20 */	blr
 .endfn stt_mount_sd__Q23ipl9CdbBackupFv
 
+# .text:0x248 | 0x8135A7D8 | size: 0xE0
 # ipl::CdbBackup::stt_check_sd()
 .fn stt_check_sd__Q23ipl9CdbBackupFv, global
 /* 8135A7D8 00028BD8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -264,6 +270,7 @@
 /* 8135A8B4 00028CB4  4E 80 00 20 */	blr
 .endfn stt_check_sd__Q23ipl9CdbBackupFv
 
+# .text:0x328 | 0x8135A8B8 | size: 0xB8
 # ipl::CdbBackup::stt_wait_del_msg()
 .fn stt_wait_del_msg__Q23ipl9CdbBackupFv, global
 /* 8135A8B8 00028CB8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -317,6 +324,7 @@
 /* 8135A96C 00028D6C  4E 80 00 20 */	blr
 .endfn stt_wait_del_msg__Q23ipl9CdbBackupFv
 
+# .text:0x3E0 | 0x8135A970 | size: 0xA0
 # ipl::CdbBackup::stt_wait_besd_del_msg()
 .fn stt_wait_besd_del_msg__Q23ipl9CdbBackupFv, global
 /* 8135A970 00028D70  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -364,6 +372,7 @@
 /* 8135AA0C 00028E0C  4E 80 00 20 */	blr
 .endfn stt_wait_besd_del_msg__Q23ipl9CdbBackupFv
 
+# .text:0x480 | 0x8135AA10 | size: 0x4C
 # ipl::CdbBackup::stt_wait_delete()
 .fn stt_wait_delete__Q23ipl9CdbBackupFv, global
 /* 8135AA10 00028E10  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -388,6 +397,7 @@
 /* 8135AA58 00028E58  4E 80 00 20 */	blr
 .endfn stt_wait_delete__Q23ipl9CdbBackupFv
 
+# .text:0x4CC | 0x8135AA5C | size: 0x8C
 # ipl::CdbBackup::stt_wait_del_msg_fns()
 .fn stt_wait_del_msg_fns__Q23ipl9CdbBackupFv, global
 /* 8135AA5C 00028E5C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -430,6 +440,7 @@
 /* 8135AAE4 00028EE4  4E 80 00 20 */	blr
 .endfn stt_wait_del_msg_fns__Q23ipl9CdbBackupFv
 
+# .text:0x558 | 0x8135AAE8 | size: 0x148
 # ipl::CdbBackup::stt_wait_sd_back_msg()
 .fn stt_wait_sd_back_msg__Q23ipl9CdbBackupFv, global
 /* 8135AAE8 00028EE8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -530,6 +541,7 @@
 /* 8135AC2C 0002902C  4E 80 00 20 */	blr
 .endfn stt_wait_sd_back_msg__Q23ipl9CdbBackupFv
 
+# .text:0x6A0 | 0x8135AC30 | size: 0x120
 # ipl::CdbBackup::stt_check_sd_err()
 .fn stt_check_sd_err__Q23ipl9CdbBackupFv, global
 /* 8135AC30 00029030  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -613,6 +625,7 @@
 /* 8135AD4C 0002914C  4E 80 00 20 */	blr
 .endfn stt_check_sd_err__Q23ipl9CdbBackupFv
 
+# .text:0x7C0 | 0x8135AD50 | size: 0xC8
 # ipl::CdbBackup::stt_check_prepare_back()
 .fn stt_check_prepare_back__Q23ipl9CdbBackupFv, global
 /* 8135AD50 00029150  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -671,6 +684,7 @@
 /* 8135AE14 00029214  4E 80 00 20 */	blr
 .endfn stt_check_prepare_back__Q23ipl9CdbBackupFv
 
+# .text:0x888 | 0x8135AE18 | size: 0x98
 # ipl::CdbBackup::stt_wait_backup()
 .fn stt_wait_backup__Q23ipl9CdbBackupFv, global
 /* 8135AE18 00029218  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -717,6 +731,7 @@
 /* 8135AEAC 000292AC  4E 80 00 20 */	blr
 .endfn stt_wait_backup__Q23ipl9CdbBackupFv
 
+# .text:0x920 | 0x8135AEB0 | size: 0x128
 # ipl::CdbBackup::stt_wait_back_msg_fns()
 .fn stt_wait_back_msg_fns__Q23ipl9CdbBackupFv, global
 /* 8135AEB0 000292B0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -803,6 +818,7 @@
 /* 8135AFD4 000293D4  4E 80 00 20 */	blr
 .endfn stt_wait_back_msg_fns__Q23ipl9CdbBackupFv
 
+# .text:0xA48 | 0x8135AFD8 | size: 0x2C
 # ipl::CdbBackup::stt_wait_ret_msg()
 .fn stt_wait_ret_msg__Q23ipl9CdbBackupFv, global
 /* 8135AFD8 000293D8  3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
@@ -818,6 +834,7 @@
 /* 8135B000 00029400  4E 80 00 20 */	blr
 .endfn stt_wait_ret_msg__Q23ipl9CdbBackupFv
 
+# .text:0xA74 | 0x8135B004 | size: 0x2C
 # ipl::CdbBackup::stt_wait_fns_msg()
 .fn stt_wait_fns_msg__Q23ipl9CdbBackupFv, global
 /* 8135B004 00029404  3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
@@ -833,6 +850,7 @@
 /* 8135B02C 0002942C  4E 80 00 20 */	blr
 .endfn stt_wait_fns_msg__Q23ipl9CdbBackupFv
 
+# .text:0xAA0 | 0x8135B030 | size: 0x60
 # ipl::CdbBackup::stt_clean_up_back()
 .fn stt_clean_up_back__Q23ipl9CdbBackupFv, global
 /* 8135B030 00029430  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -863,6 +881,7 @@
 /* 8135B08C 0002948C  4E 80 00 20 */	blr
 .endfn stt_clean_up_back__Q23ipl9CdbBackupFv
 
+# .text:0xB00 | 0x8135B090 | size: 0x60
 # ipl::CdbBackup::stt_wait_terminate()
 .fn stt_wait_terminate__Q23ipl9CdbBackupFv, global
 /* 8135B090 00029490  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -894,6 +913,7 @@
 /* 8135B0EC 000294EC  4E 80 00 20 */	blr
 .endfn stt_wait_terminate__Q23ipl9CdbBackupFv
 
+# .text:0xB60 | 0x8135B0F0 | size: 0xD0
 # ipl::CdbBackup::error_handling()
 .fn error_handling__Q23ipl9CdbBackupFv, global
 /* 8135B0F0 000294F0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -955,6 +975,7 @@
 /* 8135B1BC 000295BC  4E 80 00 20 */	blr
 .endfn error_handling__Q23ipl9CdbBackupFv
 
+# .text:0xC30 | 0x8135B1C0 | size: 0x28
 # ipl::cdb_backup_delete_task_(void*)
 .fn cdb_backup_delete_task___3iplFPv, global
 /* 8135B1C0 000295C0  80 A3 00 08 */	lwz r5, 0x8(r3)
@@ -969,6 +990,7 @@
 /* 8135B1E4 000295E4  4E 80 00 20 */	blr
 .endfn cdb_backup_delete_task___3iplFPv
 
+# .text:0xC58 | 0x8135B1E8 | size: 0x8C
 # ipl::cdb_backup_move_task_(void*)
 .fn cdb_backup_move_task___3iplFPv, global
 /* 8135B1E8 000295E8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1012,6 +1034,7 @@
 /* 8135B270 00029670  4E 80 00 20 */	blr
 .endfn cdb_backup_move_task___3iplFPv
 
+# .text:0xCE4 | 0x8135B274 | size: 0xDC
 .fn iplCdbBack_8135B274, global
 /* 8135B274 00029674  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8135B278 00029678  7C 08 02 A6 */	mflr r0
@@ -1074,6 +1097,7 @@
 /* 8135B34C 0002974C  4E 80 00 20 */	blr
 .endfn iplCdbBack_8135B274
 
+# .text:0xDC0 | 0x8135B350 | size: 0xBC
 .fn iplCdbBack_8135B350, global
 /* 8135B350 00029750  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8135B354 00029754  7C 08 02 A6 */	mflr r0
@@ -1128,6 +1152,7 @@
 /* 8135B408 00029808  4E 80 00 20 */	blr
 .endfn iplCdbBack_8135B350
 
+# .text:0xE7C | 0x8135B40C | size: 0x114
 .fn iplCdbBack_8135B40C, global
 /* 8135B40C 0002980C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8135B410 00029810  7C 08 02 A6 */	mflr r0
@@ -1206,6 +1231,7 @@
 /* 8135B51C 0002991C  4E 80 00 20 */	blr
 .endfn iplCdbBack_8135B40C
 
+# .text:0xF90 | 0x8135B520 | size: 0x1C
 .fn iplCdbBack_8135B520, global
 /* 8135B520 00029920  80 82 80 98 */	lwz r4, lbl_81694498@sda21(r0)
 /* 8135B524 00029924  3C 60 01 40 */	lis r3, 0x140
@@ -1216,15 +1242,16 @@
 /* 8135B538 00029938  4E 80 00 20 */	blr
 .endfn iplCdbBack_8135B520
 
-# 0x8160D1D0 - 0x8160D1D4
+# 0x8160D1D0..0x8160D1D4 | size: 0x4
 .section .ctors, "a"
 .balign 4
 	.4byte iplCdbBack_8135B520
 
-# 0x81639278 - 0x816392D8
+# 0x81639278..0x816392D8 | size: 0x60
 .data
 .balign 8
 
+# .data:0x0 | 0x81639278 | size: 0x44
 .obj jumptable_81639278, local
 	.rel update__Q23ipl9CdbBackupFv, .L_8135A6B8
 	.rel update__Q23ipl9CdbBackupFv, .L_8135A6BC
@@ -1245,18 +1272,21 @@
 	.rel update__Q23ipl9CdbBackupFv, .L_8135A700
 .endobj jumptable_81639278
 
+# .data:0x44 | 0x816392BC | size: 0xB
 .obj lbl_816392BC, global
 	.string "SDVFWorker"
 .endobj lbl_816392BC
 
+# .data:0x4F | 0x816392C7 | size: 0x11
 .obj lbl_816392C7, global
 	.string "iplCdbBackup.cpp"
 .endobj lbl_816392C7
 
-# 0x816986F0 - 0x816986F8
+# 0x816986F0..0x816986F8 | size: 0x8
 .section .sbss, "wa", @nobits
 .balign 8
 
+# .sbss:0x0 | 0x816986F0 | size: 0x8
 .obj lbl_816986F0, global
 	.skip 0x8
 .endobj lbl_816986F0

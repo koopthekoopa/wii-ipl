@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplESMisc.cpp"
 
-# 0x81365704 - 0x813682C4
+# 0x81365704..0x813682C4 | size: 0x2BC0
 .text
 .balign 4
 
+# .text:0x0 | 0x81365704 | size: 0x110
 # ipl::utility::ESMisc::GetTmdView(EGG::Heap*, unsigned long long, ESTmdView**)
 .fn GetTmdView__Q33ipl7utility6ESMiscFPQ23EGG4HeapUxPP9ESTmdView, global
 /* 81365704 00033B04  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -79,6 +80,7 @@
 /* 81365810 00033C10  4E 80 00 20 */	blr
 .endfn GetTmdView__Q33ipl7utility6ESMiscFPQ23EGG4HeapUxPP9ESTmdView
 
+# .text:0x110 | 0x81365814 | size: 0x134
 # ipl::utility::ESMisc::GetTicketViewList(EGG::Heap*, unsigned long long, ESTicketView**, unsigned long*)
 .fn GetTicketViewList__Q33ipl7utility6ESMiscFPQ23EGG4HeapUxPP12ESTicketViewPUl, global
 /* 81365814 00033C14  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -165,6 +167,7 @@
 /* 81365944 00033D44  4E 80 00 20 */	blr
 .endfn GetTicketViewList__Q33ipl7utility6ESMiscFPQ23EGG4HeapUxPP12ESTicketViewPUl
 
+# .text:0x244 | 0x81365948 | size: 0xC0
 # ipl::utility::ESMisc::GetTicketView(EGG::Heap*, unsigned long long, ESTicketView*, int)
 .fn GetTicketView__Q33ipl7utility6ESMiscFPQ23EGG4HeapUxP12ESTicketViewi, global
 /* 81365948 00033D48  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -220,6 +223,7 @@
 /* 81365A04 00033E04  4E 80 00 20 */	blr
 .endfn GetTicketView__Q33ipl7utility6ESMiscFPQ23EGG4HeapUxP12ESTicketViewi
 
+# .text:0x304 | 0x81365A08 | size: 0xB4
 # ipl::utility::ESMisc::PrivateContentsExist(unsigned long long)
 .fn PrivateContentsExist__Q33ipl7utility6ESMiscFUx, global
 /* 81365A08 00033E08  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -240,11 +244,11 @@
 /* 81365A44 00033E44  90 C1 00 20 */	stw r6, 0x20(r1)
 /* 81365A48 00033E48  7C E6 00 38 */	and r6, r7, r0
 /* 81365A4C 00033E4C  4C C6 31 82 */	crclr cr1eq
-/* 81365A50 00033E50  48 29 B0 31 */	bl fn_81600A80
+/* 81365A50 00033E50  48 29 B0 31 */	bl sprintf
 /* 81365A54 00033E54  38 61 00 40 */	addi r3, r1, 0x40
 /* 81365A58 00033E58  38 81 00 24 */	addi r4, r1, 0x24
 /* 81365A5C 00033E5C  38 A1 00 20 */	addi r5, r1, 0x20
-/* 81365A60 00033E60  48 20 1C 31 */	bl fn_81567690
+/* 81365A60 00033E60  48 20 1C 31 */	bl NANDSecretGetUsage
 /* 81365A64 00033E64  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81365A68 00033E68  7C 64 1B 78 */	mr r4, r3
 /* 81365A6C 00033E6C  40 82 00 10 */	bne .L_81365A7C
@@ -273,6 +277,7 @@
 /* 81365AB8 00033EB8  4E 80 00 20 */	blr
 .endfn PrivateContentsExist__Q33ipl7utility6ESMiscFUx
 
+# .text:0x3B8 | 0x81365ABC | size: 0x184
 # ipl::utility::ESMisc::ContentExist(ESTmdView*, unsigned long, long*)
 .fn ContentExist__Q33ipl7utility6ESMiscFP9ESTmdViewUlPl, global
 /* 81365ABC 00033EBC  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -389,6 +394,7 @@
 /* 81365C3C 0003403C  4E 80 00 20 */	blr
 .endfn ContentExist__Q33ipl7utility6ESMiscFP9ESTmdViewUlPl
 
+# .text:0x53C | 0x81365C40 | size: 0x29C
 # ipl::utility::ESMisc::checkContentsNum(unsigned long long, ESTmdView*)
 .fn checkContentsNum__Q33ipl7utility6ESMiscFUxP9ESTmdView, global
 /* 81365C40 00034040  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -582,6 +588,7 @@
 /* 81365ED8 000342D8  4E 80 00 20 */	blr
 .endfn checkContentsNum__Q33ipl7utility6ESMiscFUxP9ESTmdView
 
+# .text:0x7D8 | 0x81365EDC | size: 0x2DC
 # ipl::utility::ESMisc::GetValidTicketIndex(EGG::Heap*, unsigned long long, ESTicketView*, unsigned long)
 .fn GetValidTicketIndex__Q33ipl7utility6ESMiscFPQ23EGG4HeapUxP12ESTicketViewUl, global
 /* 81365EDC 000342DC  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -627,7 +634,7 @@
 /* 81365F70 00034370  7D 89 03 A6 */	mtctr r12
 /* 81365F74 00034374  4E 80 04 21 */	bctrl
 /* 81365F78 00034378  7C 7B 1B 78 */	mr r27, r3
-/* 81365F7C 0003437C  48 20 B7 C5 */	bl fn_81571740
+/* 81365F7C 0003437C  48 20 B7 C5 */	bl ESP_InitLib
 /* 81365F80 00034380  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81365F84 00034384  41 80 01 B4 */	blt .L_81366138
 /* 81365F88 00034388  80 61 00 08 */	lwz r3, 0x8(r1)
@@ -782,6 +789,7 @@
 /* 813661B4 000345B4  4E 80 00 20 */	blr
 .endfn GetValidTicketIndex__Q33ipl7utility6ESMiscFPQ23EGG4HeapUxP12ESTicketViewUl
 
+# .text:0xAB4 | 0x813661B8 | size: 0xDC
 # ipl::utility::ESMisc::IsLastTicketExpired(unsigned long long*)
 .fn IsLastTicketExpired__Q33ipl7utility6ESMiscFPUx, global
 /* 813661B8 000345B8  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -798,7 +806,7 @@
 /* 813661E4 000345E4  41 82 00 18 */	beq .L_813661FC
 /* 813661E8 000345E8  3C 60 81 64 */	lis r3, lbl_816418B5@ha
 /* 813661EC 000345EC  38 63 18 B5 */	addi r3, r3, lbl_816418B5@l
-/* 813661F0 000345F0  48 1F DC B9 */	bl fn_81563EA8
+/* 813661F0 000345F0  48 1F DC B9 */	bl NANDPrivateDelete
 /* 813661F4 000345F4  38 60 00 00 */	li r3, 0x0
 /* 813661F8 000345F8  48 00 00 80 */	b .L_81366278
 .L_813661FC:
@@ -806,7 +814,7 @@
 /* 81366200 00034600  38 81 00 40 */	addi r4, r1, 0x40
 /* 81366204 00034604  38 63 18 B5 */	addi r3, r3, lbl_816418B5@l
 /* 81366208 00034608  38 A0 00 01 */	li r5, 0x1
-/* 8136620C 0003460C  48 1F F0 ED */	bl fn_815652F8
+/* 8136620C 0003460C  48 1F F0 ED */	bl NANDPrivateOpen
 /* 81366210 00034610  2C 03 FF F4 */	cmpwi r3, -0xc
 /* 81366214 00034614  40 82 00 0C */	bne .L_81366220
 /* 81366218 00034618  38 60 00 00 */	li r3, 0x0
@@ -820,10 +828,10 @@
 /* 81366230 00034630  38 61 00 40 */	addi r3, r1, 0x40
 /* 81366234 00034634  38 81 00 20 */	addi r4, r1, 0x20
 /* 81366238 00034638  38 A0 00 20 */	li r5, 0x20
-/* 8136623C 0003463C  48 1F DD C5 */	bl fn_81564000
+/* 8136623C 0003463C  48 1F DD C5 */	bl NANDRead
 /* 81366240 00034640  7C 7F 1B 78 */	mr r31, r3
 /* 81366244 00034644  38 61 00 40 */	addi r3, r1, 0x40
-/* 81366248 00034648  48 1F F2 A5 */	bl fn_815654EC
+/* 81366248 00034648  48 1F F2 A5 */	bl NANDClose
 /* 8136624C 0003464C  2C 1F 00 20 */	cmpwi r31, 0x20
 /* 81366250 00034650  41 82 00 0C */	beq .L_8136625C
 /* 81366254 00034654  38 60 00 00 */	li r3, 0x0
@@ -847,18 +855,21 @@
 /* 81366290 00034690  4E 80 00 20 */	blr
 .endfn IsLastTicketExpired__Q33ipl7utility6ESMiscFPUx
 
+# .text:0xB90 | 0x81366294 | size: 0xC
 # ipl::utility::ESMisc::DeleteExpiredFlagFile()
 .fn DeleteExpiredFlagFile__Q33ipl7utility6ESMiscFv, global
 /* 81366294 00034694  3C 60 81 64 */	lis r3, lbl_816418B5@ha
 /* 81366298 00034698  38 63 18 B5 */	addi r3, r3, lbl_816418B5@l
-/* 8136629C 0003469C  48 1F DC 0C */	b fn_81563EA8
+/* 8136629C 0003469C  48 1F DC 0C */	b NANDPrivateDelete
 .endfn DeleteExpiredFlagFile__Q33ipl7utility6ESMiscFv
 
+# .text:0xB9C | 0x813662A0 | size: 0x4
 # ipl::utility::ESMisc::CheckTmdCountryCode(ESTmdView*)
 .fn CheckTmdCountryCode__Q33ipl7utility6ESMiscFP9ESTmdView, global
 /* 813662A0 000346A0  48 1C 8D EC */	b fn_8152F08C
 .endfn CheckTmdCountryCode__Q33ipl7utility6ESMiscFP9ESTmdView
 
+# .text:0xBA0 | 0x813662A4 | size: 0x50
 # ipl::utility::ESMisc::__IsPCEnable()
 .fn __IsPCEnable__Q33ipl7utility6ESMiscFv, global
 /* 813662A4 000346A4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -887,6 +898,7 @@
 /* 813662F0 000346F0  4E 80 00 20 */	blr
 .endfn __IsPCEnable__Q33ipl7utility6ESMiscFv
 
+# .text:0xBF0 | 0x813662F4 | size: 0xB8
 # ipl::utility::ESMisc::CheckTmdParentalControl(ESTmdView*)
 .fn CheckTmdParentalControl__Q33ipl7utility6ESMiscFP9ESTmdView, global
 /* 813662F4 000346F4  94 21 FF 90 */	stwu r1, -0x70(r1)
@@ -943,6 +955,7 @@
 /* 813663A8 000347A8  4E 80 00 20 */	blr
 .endfn CheckTmdParentalControl__Q33ipl7utility6ESMiscFP9ESTmdView
 
+# .text:0xCA8 | 0x813663AC | size: 0x264
 # ipl::utility::ESMisc::NumPrivateContents(EGG::Heap*, unsigned long long)
 .fn NumPrivateContents__Q33ipl7utility6ESMiscFPQ23EGG4HeapUx, global
 /* 813663AC 000347AC  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1114,6 +1127,7 @@
 /* 8136660C 00034A0C  4E 80 00 20 */	blr
 .endfn NumPrivateContents__Q33ipl7utility6ESMiscFPQ23EGG4HeapUx
 
+# .text:0xF0C | 0x81366610 | size: 0x70
 # ipl::utility::ESMisc::ChangeUid(unsigned long long)
 .fn ChangeUid__Q33ipl7utility6ESMiscFUx, global
 /* 81366610 00034A10  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1137,7 +1151,7 @@
 /* 81366658 00034A58  48 00 00 10 */	b .L_81366668
 .L_8136665C:
 /* 8136665C 00034A5C  48 20 DE 49 */	bl fn_815744A4
-/* 81366660 00034A60  48 20 DD 11 */	bl fn_81574370
+/* 81366660 00034A60  48 20 DD 11 */	bl ISFS_OpenLib
 /* 81366664 00034A64  38 60 00 01 */	li r3, 0x1
 .L_81366668:
 /* 81366668 00034A68  80 01 00 14 */	lwz r0, 0x14(r1)
@@ -1148,6 +1162,7 @@
 /* 8136667C 00034A7C  4E 80 00 20 */	blr
 .endfn ChangeUid__Q33ipl7utility6ESMiscFUx
 
+# .text:0xF7C | 0x81366680 | size: 0xD8
 # ipl::utility::ESMisc::NumInodesSaveDirRoot(unsigned long long)
 .fn NumInodesSaveDirRoot__Q33ipl7utility6ESMiscFUx, global
 /* 81366680 00034A80  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -1179,7 +1194,7 @@
 /* 813666E8 00034AE8  38 61 00 40 */	addi r3, r1, 0x40
 /* 813666EC 00034AEC  38 A1 00 20 */	addi r5, r1, 0x20
 /* 813666F0 00034AF0  38 80 00 00 */	li r4, 0x0
-/* 813666F4 00034AF4  48 1F DC ED */	bl fn_815643E0
+/* 813666F4 00034AF4  48 1F DC ED */	bl NANDPrivateReadDir
 /* 813666F8 00034AF8  2C 03 00 00 */	cmpwi r3, 0x0
 /* 813666FC 00034AFC  7C 7E 1B 78 */	mr r30, r3
 /* 81366700 00034B00  41 82 00 20 */	beq .L_81366720
@@ -1209,6 +1224,7 @@
 /* 81366754 00034B54  4E 80 00 20 */	blr
 .endfn NumInodesSaveDirRoot__Q33ipl7utility6ESMiscFUx
 
+# .text:0x1054 | 0x81366758 | size: 0x1E8
 # ipl::utility::ESMisc::CheckSafeDeleteTitle(EGG::Heap*, unsigned long long)
 .fn CheckSafeDeleteTitle__Q33ipl7utility6ESMiscFPQ23EGG4HeapUx, global
 /* 81366758 00034B58  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1345,6 +1361,7 @@
 /* 8136693C 00034D3C  4E 80 00 20 */	blr
 .endfn CheckSafeDeleteTitle__Q33ipl7utility6ESMiscFPQ23EGG4HeapUx
 
+# .text:0x123C | 0x81366940 | size: 0xEC
 # ipl::utility::ESMisc::DeleteTitle(EGG::Heap*, unsigned long long)
 .fn DeleteTitle__Q33ipl7utility6ESMiscFPQ23EGG4HeapUx, global
 /* 81366940 00034D40  94 21 FF 50 */	stwu r1, -0xb0(r1)
@@ -1411,6 +1428,7 @@
 /* 81366A28 00034E28  4E 80 00 20 */	blr
 .endfn DeleteTitle__Q33ipl7utility6ESMiscFPQ23EGG4HeapUx
 
+# .text:0x1328 | 0x81366A2C | size: 0x1E4
 # ipl::utility::ESMisc::DeleteEmptyTitles(EGG::Heap*)
 .fn DeleteEmptyTitles__Q33ipl7utility6ESMiscFPQ23EGG4Heap, global
 /* 81366A2C 00034E2C  94 21 FF 30 */	stwu r1, -0xd0(r1)
@@ -1545,6 +1563,7 @@
 /* 81366C0C 0003500C  4E 80 00 20 */	blr
 .endfn DeleteEmptyTitles__Q33ipl7utility6ESMiscFPQ23EGG4Heap
 
+# .text:0x150C | 0x81366C10 | size: 0x6C
 .fn iplES_81366C10, global
 /* 81366C10 00035010  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 81366C14 00035014  7C 08 02 A6 */	mflr r0
@@ -1569,13 +1588,14 @@
 /* 81366C5C 0003505C  4C C6 31 82 */	crclr cr1eq
 /* 81366C60 00035060  48 29 9D 49 */	bl fn_816009A8
 /* 81366C64 00035064  38 61 00 08 */	addi r3, r1, 0x8
-/* 81366C68 00035068  48 1F D2 41 */	bl fn_81563EA8
+/* 81366C68 00035068  48 1F D2 41 */	bl NANDPrivateDelete
 /* 81366C6C 0003506C  80 01 00 54 */	lwz r0, 0x54(r1)
 /* 81366C70 00035070  7C 08 03 A6 */	mtlr r0
 /* 81366C74 00035074  38 21 00 50 */	addi r1, r1, 0x50
 /* 81366C78 00035078  4E 80 00 20 */	blr
 .endfn iplES_81366C10
 
+# .text:0x1578 | 0x81366C7C | size: 0x268
 .fn iplES_81366C7C, global
 /* 81366C7C 0003507C  94 21 FD C0 */	stwu r1, -0x240(r1)
 /* 81366C80 00035080  7C 08 02 A6 */	mflr r0
@@ -1744,6 +1764,7 @@
 /* 81366EE0 000352E0  4E 80 00 20 */	blr
 .endfn iplES_81366C7C
 
+# .text:0x17E0 | 0x81366EE4 | size: 0x1BC
 .fn iplES_81366EE4, global
 /* 81366EE4 000352E4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81366EE8 000352E8  7C 08 02 A6 */	mflr r0
@@ -1865,6 +1886,7 @@
 /* 8136709C 0003549C  4E 80 00 20 */	blr
 .endfn iplES_81366EE4
 
+# .text:0x199C | 0x813670A0 | size: 0x124
 # ipl::utility::ESMisc::PrepareTitleDir(unsigned long long, EGG::Heap*)
 .fn PrepareTitleDir__Q33ipl7utility6ESMiscFUxPQ23EGG4Heap, global
 /* 813670A0 000354A0  94 21 FF 50 */	stwu r1, -0xb0(r1)
@@ -1947,6 +1969,7 @@
 /* 813671C0 000355C0  4E 80 00 20 */	blr
 .endfn PrepareTitleDir__Q33ipl7utility6ESMiscFUxPQ23EGG4Heap
 
+# .text:0x1AC0 | 0x813671C4 | size: 0x1EC
 # ipl::utility::ESMisc::DeleteSavedata(unsigned long long, EGG::Heap*)
 .fn DeleteSavedata__Q33ipl7utility6ESMiscFUxPQ23EGG4Heap, global
 /* 813671C4 000355C4  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -1970,11 +1993,11 @@
 /* 8136720C 0003560C  38 9E 0C AA */	addi r4, r30, 0xcaa
 /* 81367210 00035610  7C E6 00 38 */	and r6, r7, r0
 /* 81367214 00035614  4C C6 31 82 */	crclr cr1eq
-/* 81367218 00035618  48 29 98 69 */	bl fn_81600A80
+/* 81367218 00035618  48 29 98 69 */	bl sprintf
 /* 8136721C 0003561C  38 61 00 A0 */	addi r3, r1, 0xa0
 /* 81367220 00035620  38 A1 00 20 */	addi r5, r1, 0x20
 /* 81367224 00035624  38 80 00 00 */	li r4, 0x0
-/* 81367228 00035628  48 1F D0 E9 */	bl fn_81564310
+/* 81367228 00035628  48 1F D0 E9 */	bl NANDReadDir
 /* 8136722C 0003562C  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81367230 00035630  7C 7A 1B 78 */	mr r26, r3
 /* 81367234 00035634  40 82 00 10 */	bne .L_81367244
@@ -2015,7 +2038,7 @@
 /* 813672B4 000356B4  7F A4 EB 78 */	mr r4, r29
 /* 813672B8 000356B8  38 61 00 A0 */	addi r3, r1, 0xa0
 /* 813672BC 000356BC  38 A1 00 20 */	addi r5, r1, 0x20
-/* 813672C0 000356C0  48 1F D0 51 */	bl fn_81564310
+/* 813672C0 000356C0  48 1F D0 51 */	bl NANDReadDir
 /* 813672C4 000356C4  2C 03 00 00 */	cmpwi r3, 0x0
 /* 813672C8 000356C8  7C 7A 1B 78 */	mr r26, r3
 /* 813672CC 000356CC  41 82 00 24 */	beq .L_813672F0
@@ -2042,7 +2065,7 @@
 /* 81367318 00035718  48 29 96 91 */	bl fn_816009A8
 /* 8136731C 0003571C  9B E1 00 80 */	stb r31, 0x80(r1)
 /* 81367320 00035720  38 61 00 40 */	addi r3, r1, 0x40
-/* 81367324 00035724  48 1F CB 85 */	bl fn_81563EA8
+/* 81367324 00035724  48 1F CB 85 */	bl NANDPrivateDelete
 /* 81367328 00035728  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8136732C 0003572C  7C 7A 1B 78 */	mr r26, r3
 /* 81367330 00035730  41 82 00 20 */	beq .L_81367350
@@ -2083,6 +2106,7 @@
 /* 813673AC 000357AC  4E 80 00 20 */	blr
 .endfn DeleteSavedata__Q33ipl7utility6ESMiscFUxPQ23EGG4Heap
 
+# .text:0x1CAC | 0x813673B0 | size: 0x30
 .fn iplES_813673B0, global
 /* 813673B0 000357B0  7C 89 03 A6 */	mtctr r4
 /* 813673B4 000357B4  28 04 00 00 */	cmplwi r4, 0x0
@@ -2101,6 +2125,7 @@
 /* 813673DC 000357DC  4E 80 00 20 */	blr
 .endfn iplES_813673B0
 
+# .text:0x1CDC | 0x813673E0 | size: 0x704
 # ipl::utility::ESMisc::InitSavedata(unsigned long long, EGG::Heap*)
 .fn InitSavedata__Q33ipl7utility6ESMiscFUxPQ23EGG4Heap, global
 /* 813673E0 000357E0  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -2110,7 +2135,7 @@
 /* 813673F0 000357F0  7C 08 02 A6 */	mflr r0
 /* 813673F4 000357F4  7D 8B 63 78 */	mr r11, r12
 /* 813673F8 000357F8  90 0C 00 04 */	stw r0, 0x4(r12)
-/* 813673FC 000357FC  48 29 20 91 */	bl __save_gpr
+/* 813673FC 000357FC  48 29 20 91 */	bl _savegpr_14
 /* 81367400 00035800  3B 80 00 00 */	li r28, 0x0
 /* 81367404 00035804  3E A0 81 64 */	lis r21, lbl_816412C0@ha
 /* 81367408 00035808  93 81 00 24 */	stw r28, 0x24(r1)
@@ -2195,7 +2220,7 @@
 /* 81367534 00035934  39 E0 00 00 */	li r15, 0x0
 /* 81367538 00035938  3B E0 00 00 */	li r31, 0x0
 /* 8136753C 0003593C  4C C6 31 82 */	crclr cr1eq
-/* 81367540 00035940  48 29 95 41 */	bl fn_81600A80
+/* 81367540 00035940  48 29 95 41 */	bl sprintf
 /* 81367544 00035944  7E 64 9B 78 */	mr r4, r19
 /* 81367548 00035948  7E 83 A3 78 */	mr r3, r20
 /* 8136754C 0003594C  4B FF F0 C5 */	bl ChangeUid__Q33ipl7utility6ESMiscFUx
@@ -2215,7 +2240,7 @@
 /* 81367580 00035980  38 61 00 28 */	addi r3, r1, 0x28
 /* 81367584 00035984  38 81 01 60 */	addi r4, r1, 0x160
 /* 81367588 00035988  38 A0 00 01 */	li r5, 0x1
-/* 8136758C 0003598C  48 1F DD 6D */	bl fn_815652F8
+/* 8136758C 0003598C  48 1F DD 6D */	bl NANDPrivateOpen
 /* 81367590 00035990  2C 03 FF F4 */	cmpwi r3, -0xc
 /* 81367594 00035994  40 82 00 24 */	bne .L_813675B8
 /* 81367598 00035998  7C 67 1B 78 */	mr r7, r3
@@ -2262,7 +2287,7 @@
 /* 81367630 00035A30  7F C4 F3 78 */	mr r4, r30
 /* 81367634 00035A34  38 61 01 60 */	addi r3, r1, 0x160
 /* 81367638 00035A38  38 A0 40 00 */	li r5, 0x4000
-/* 8136763C 00035A3C  48 1F C9 C5 */	bl fn_81564000
+/* 8136763C 00035A3C  48 1F C9 C5 */	bl NANDRead
 /* 81367640 00035A40  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81367644 00035A44  40 80 00 20 */	bge .L_81367664
 /* 81367648 00035A48  7C 66 1B 78 */	mr r6, r3
@@ -2375,7 +2400,7 @@
 /* 813677E0 00035BE0  3B E0 00 01 */	li r31, 0x1
 .L_813677E4:
 /* 813677E4 00035BE4  38 61 01 60 */	addi r3, r1, 0x160
-/* 813677E8 00035BE8  48 1F DD 05 */	bl fn_815654EC
+/* 813677E8 00035BE8  48 1F DD 05 */	bl NANDClose
 /* 813677EC 00035BEC  2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813677F0 00035BF0  39 E0 00 00 */	li r15, 0x0
 /* 813677F4 00035BF4  41 82 00 14 */	beq .L_81367808
@@ -2396,7 +2421,7 @@
 /* 81367828 00035C28  2C 0F 00 00 */	cmpwi r15, 0x0
 /* 8136782C 00035C2C  41 82 00 0C */	beq .L_81367838
 /* 81367830 00035C30  38 61 01 60 */	addi r3, r1, 0x160
-/* 81367834 00035C34  48 1F DC B9 */	bl fn_815654EC
+/* 81367834 00035C34  48 1F DC B9 */	bl NANDClose
 .L_81367838:
 /* 81367838 00035C38  38 80 00 02 */	li r4, 0x2
 /* 8136783C 00035C3C  38 60 00 01 */	li r3, 0x1
@@ -2578,13 +2603,14 @@
 /* 81367AC4 00035EC4  7F 63 DB 78 */	mr r3, r27
 /* 81367AC8 00035EC8  81 41 00 00 */	lwz r10, 0x0(r1)
 /* 81367ACC 00035ECC  7D 4B 53 78 */	mr r11, r10
-/* 81367AD0 00035ED0  48 29 1A 09 */	bl __restore_gpr
+/* 81367AD0 00035ED0  48 29 1A 09 */	bl _restgpr_14
 /* 81367AD4 00035ED4  80 0A 00 04 */	lwz r0, 0x4(r10)
 /* 81367AD8 00035ED8  7C 08 03 A6 */	mtlr r0
 /* 81367ADC 00035EDC  7D 41 53 78 */	mr r1, r10
 /* 81367AE0 00035EE0  4E 80 00 20 */	blr
 .endfn InitSavedata__Q33ipl7utility6ESMiscFUxPQ23EGG4Heap
 
+# .text:0x23E0 | 0x81367AE4 | size: 0x4C
 # ipl::utility::TMDFile::TMDFile(EGG::Heap*)
 .fn __ct__Q33ipl7utility7TMDFileFPQ23EGG4Heap, global
 /* 81367AE4 00035EE4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -2608,6 +2634,7 @@
 /* 81367B2C 00035F2C  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl7utility7TMDFileFPQ23EGG4Heap
 
+# .text:0x242C | 0x81367B30 | size: 0x12C
 # ipl::utility::TMDFile::Open(char*)
 .fn Open__Q33ipl7utility7TMDFileFPc, global
 /* 81367B30 00035F30  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2628,14 +2655,14 @@
 /* 81367B68 00035F68  7F A3 EB 78 */	mr r3, r29
 /* 81367B6C 00035F6C  38 9C 00 04 */	addi r4, r28, 0x4
 /* 81367B70 00035F70  38 A0 00 03 */	li r5, 0x3
-/* 81367B74 00035F74  48 1F D7 85 */	bl fn_815652F8
+/* 81367B74 00035F74  48 1F D7 85 */	bl NANDPrivateOpen
 /* 81367B78 00035F78  2C 03 FF F4 */	cmpwi r3, -0xc
 /* 81367B7C 00035F7C  7C 7E 1B 78 */	mr r30, r3
 /* 81367B80 00035F80  40 82 00 58 */	bne .L_81367BD8
 /* 81367B84 00035F84  7F A3 EB 78 */	mr r3, r29
 /* 81367B88 00035F88  38 80 00 3F */	li r4, 0x3f
 /* 81367B8C 00035F8C  38 A0 00 00 */	li r5, 0x0
-/* 81367B90 00035F90  48 1F C1 7D */	bl fn_81563D0C
+/* 81367B90 00035F90  48 1F C1 7D */	bl NANDPrivateCreate
 /* 81367B94 00035F94  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81367B98 00035F98  7C 7E 1B 78 */	mr r30, r3
 /* 81367B9C 00035F9C  41 82 00 28 */	beq .L_81367BC4
@@ -2652,7 +2679,7 @@
 /* 81367BC4 00035FC4  7F A3 EB 78 */	mr r3, r29
 /* 81367BC8 00035FC8  38 9C 00 04 */	addi r4, r28, 0x4
 /* 81367BCC 00035FCC  38 A0 00 03 */	li r5, 0x3
-/* 81367BD0 00035FD0  48 1F D7 29 */	bl fn_815652F8
+/* 81367BD0 00035FD0  48 1F D7 29 */	bl NANDPrivateOpen
 /* 81367BD4 00035FD4  7C 7E 1B 78 */	mr r30, r3
 .L_81367BD8:
 /* 81367BD8 00035FD8  2C 1E 00 00 */	cmpwi r30, 0x0
@@ -2671,7 +2698,7 @@
 /* 81367C08 00036008  38 7C 00 04 */	addi r3, r28, 0x4
 /* 81367C0C 0003600C  90 1C 00 90 */	stw r0, 0x90(r28)
 /* 81367C10 00036010  38 9C 00 94 */	addi r4, r28, 0x94
-/* 81367C14 00036014  48 1F CD 1D */	bl fn_81564930
+/* 81367C14 00036014  48 1F CD 1D */	bl NANDGetLength
 /* 81367C18 00036018  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81367C1C 0003601C  7C 7E 1B 78 */	mr r30, r3
 /* 81367C20 00036020  41 82 00 24 */	beq .L_81367C44
@@ -2692,6 +2719,7 @@
 /* 81367C58 00036058  4E 80 00 20 */	blr
 .endfn Open__Q33ipl7utility7TMDFileFPc
 
+# .text:0x2558 | 0x81367C5C | size: 0x50
 # ipl::utility::TMDFile::Close()
 .fn Close__Q33ipl7utility7TMDFileFv, global
 /* 81367C5C 0003605C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -2704,7 +2732,7 @@
 /* 81367C78 00036078  2C 00 00 00 */	cmpwi r0, 0x0
 /* 81367C7C 0003607C  41 82 00 18 */	beq .L_81367C94
 /* 81367C80 00036080  38 63 00 04 */	addi r3, r3, 0x4
-/* 81367C84 00036084  48 1F D8 69 */	bl fn_815654EC
+/* 81367C84 00036084  48 1F D8 69 */	bl NANDClose
 /* 81367C88 00036088  38 00 00 00 */	li r0, 0x0
 /* 81367C8C 0003608C  7C 64 1B 78 */	mr r4, r3
 /* 81367C90 00036090  90 1F 00 90 */	stw r0, 0x90(r31)
@@ -2717,6 +2745,7 @@
 /* 81367CA8 000360A8  4E 80 00 20 */	blr
 .endfn Close__Q33ipl7utility7TMDFileFv
 
+# .text:0x25A8 | 0x81367CAC | size: 0x14C
 # ipl::utility::TMDFile::Exist(unsigned long long, unsigned long*, unsigned long*)
 .fn Exist__Q33ipl7utility7TMDFileFUxPUlPUl, global
 /* 81367CAC 000360AC  54 2B 06 FE */	clrlwi r11, r1, 27
@@ -2745,7 +2774,7 @@
 /* 81367D04 00036104  7F C4 F3 78 */	mr r4, r30
 /* 81367D08 00036108  38 79 00 04 */	addi r3, r25, 0x4
 /* 81367D0C 0003610C  38 A0 00 00 */	li r5, 0x0
-/* 81367D10 00036110  48 1F C4 B1 */	bl fn_815641C0
+/* 81367D10 00036110  48 1F C4 B1 */	bl NANDSeek
 /* 81367D14 00036114  7C 03 F0 40 */	cmplw r3, r30
 /* 81367D18 00036118  41 82 00 28 */	beq .L_81367D40
 /* 81367D1C 0003611C  7C 66 1B 78 */	mr r6, r3
@@ -2761,7 +2790,7 @@
 /* 81367D40 00036140  38 79 00 04 */	addi r3, r25, 0x4
 /* 81367D44 00036144  38 81 00 20 */	addi r4, r1, 0x20
 /* 81367D48 00036148  38 A0 00 20 */	li r5, 0x20
-/* 81367D4C 0003614C  48 1F C2 B5 */	bl fn_81564000
+/* 81367D4C 0003614C  48 1F C2 B5 */	bl NANDRead
 /* 81367D50 00036150  28 03 00 20 */	cmplwi r3, 0x20
 /* 81367D54 00036154  41 82 00 28 */	beq .L_81367D7C
 /* 81367D58 00036158  7C 66 1B 78 */	mr r6, r3
@@ -2812,6 +2841,7 @@
 /* 81367DF4 000361F4  4E 80 00 20 */	blr
 .endfn Exist__Q33ipl7utility7TMDFileFUxPUlPUl
 
+# .text:0x26F4 | 0x81367DF8 | size: 0x2B4
 # ipl::utility::TMDFile::Backup(unsigned long long)
 .fn Backup__Q33ipl7utility7TMDFileFUx, global
 /* 81367DF8 000361F8  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -2840,7 +2870,7 @@
 /* 81367E50 00036250  38 7F 00 04 */	addi r3, r31, 0x4
 /* 81367E54 00036254  38 80 00 00 */	li r4, 0x0
 /* 81367E58 00036258  38 A0 00 02 */	li r5, 0x2
-/* 81367E5C 0003625C  48 1F C3 65 */	bl fn_815641C0
+/* 81367E5C 0003625C  48 1F C3 65 */	bl NANDSeek
 /* 81367E60 00036260  80 FF 00 94 */	lwz r7, 0x94(r31)
 /* 81367E64 00036264  7C 7D 1B 78 */	mr r29, r3
 /* 81367E68 00036268  7C 03 38 40 */	cmplw r3, r7
@@ -2855,7 +2885,7 @@
 .L_81367E8C:
 /* 81367E8C 0003628C  38 7F 00 04 */	addi r3, r31, 0x4
 /* 81367E90 00036290  38 81 00 24 */	addi r4, r1, 0x24
-/* 81367E94 00036294  48 1F CB 25 */	bl fn_815649B8
+/* 81367E94 00036294  48 1F CB 25 */	bl NANDTell
 /* 81367E98 00036298  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81367E9C 0003629C  7C 7D 1B 78 */	mr r29, r3
 /* 81367EA0 000362A0  41 82 00 20 */	beq .L_81367EC0
@@ -2964,7 +2994,7 @@
 /* 81368024 00036424  7F 64 DB 78 */	mr r4, r27
 /* 81368028 00036428  7F 85 E3 78 */	mr r5, r28
 /* 8136802C 0003642C  38 7F 00 04 */	addi r3, r31, 0x4
-/* 81368030 00036430  48 1F C0 B1 */	bl fn_815640E0
+/* 81368030 00036430  48 1F C0 B1 */	bl NANDWrite
 /* 81368034 00036434  7C 03 E0 40 */	cmplw r3, r28
 /* 81368038 00036438  7C 7D 1B 78 */	mr r29, r3
 /* 8136803C 0003643C  41 82 00 24 */	beq .L_81368060
@@ -3001,6 +3031,7 @@
 /* 813680A8 000364A8  4E 80 00 20 */	blr
 .endfn Backup__Q33ipl7utility7TMDFileFUx
 
+# .text:0x29A8 | 0x813680AC | size: 0x218
 # ipl::utility::TMDFile::Restore(unsigned long long)
 .fn Restore__Q33ipl7utility7TMDFileFUx, global
 /* 813680AC 000364AC  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -3056,7 +3087,7 @@
 /* 81368168 00036568  80 81 00 0C */	lwz r4, 0xc(r1)
 /* 8136816C 0003656C  38 79 00 04 */	addi r3, r25, 0x4
 /* 81368170 00036570  38 A0 00 00 */	li r5, 0x0
-/* 81368174 00036574  48 1F C0 4D */	bl fn_815641C0
+/* 81368174 00036574  48 1F C0 4D */	bl NANDSeek
 /* 81368178 00036578  80 E1 00 0C */	lwz r7, 0xc(r1)
 /* 8136817C 0003657C  7C 7D 1B 78 */	mr r29, r3
 /* 81368180 00036580  7C 03 38 40 */	cmplw r3, r7
@@ -3086,7 +3117,7 @@
 /* 813681DC 000365DC  7F 84 E3 78 */	mr r4, r28
 /* 813681E0 000365E0  7F E5 FB 78 */	mr r5, r31
 /* 813681E4 000365E4  38 79 00 04 */	addi r3, r25, 0x4
-/* 813681E8 000365E8  48 1F BE 19 */	bl fn_81564000
+/* 813681E8 000365E8  48 1F BE 19 */	bl NANDRead
 /* 813681EC 000365EC  7C 03 F8 40 */	cmplw r3, r31
 /* 813681F0 000365F0  7C 7D 1B 78 */	mr r29, r3
 /* 813681F4 000365F4  41 82 00 24 */	beq .L_81368218
@@ -3148,42 +3179,51 @@
 /* 813682C0 000366C0  4E 80 00 20 */	blr
 .endfn Restore__Q33ipl7utility7TMDFileFUx
 
-# 0x816412C0 - 0x816423E0
+# 0x816412C0..0x816423E0 | size: 0x1120
 .data
 .balign 8
 
+# .data:0x0 | 0x816412C0 | size: 0x2B
 .obj lbl_816412C0, global
 	.string "ESMisc::GetTmdView: ES_GetTmdView1 err %d\n"
 .endobj lbl_816412C0
 
+# .data:0x2B | 0x816412EB | size: 0x2B
 .obj lbl_816412EB, global
 	.string "ESMisc::GetTmdView: ES_GetTmdView2 err %d\n"
 .endobj lbl_816412EB
 
+# .data:0x56 | 0x81641316 | size: 0x36
 .obj lbl_81641316, global
 	.string "ESMisc::GetTicketViewList: ES_GetTicketViews1 err %d\n"
 .endobj lbl_81641316
 
+# .data:0x8C | 0x8164134C | size: 0x36
 .obj lbl_8164134C, global
 	.string "ESMisc::GetTicketViewList: ES_GetTicketViews2 err %d\n"
 .endobj lbl_8164134C
 
+# .data:0xC2 | 0x81641382 | size: 0x29
 .obj lbl_81641382, global
 	.string "ESMisc::GetTicketView: Invalid index %d\n"
 .endobj lbl_81641382
 
+# .data:0xEB | 0x816413AB | size: 0x19
 .obj lbl_816413AB, global
 	.string "/title/%08x/%08x/content"
 .endobj lbl_816413AB
 
+# .data:0x104 | 0x816413C4 | size: 0x26
 .obj lbl_816413C4, global
 	.string "ESMisc::PrivateContentsExist: err %d\n"
 .endobj lbl_816413C4
 
+# .data:0x12A | 0x816413EA | size: 0x3A
 .obj lbl_816413EA, global
 	.string "ESMisc::ContentExist: ES_ListTitleContentsOnCard1 err %d\n"
 .endobj lbl_816413EA
 
+# .data:0x164 | 0x81641424 | size: 0x491
 .obj lbl_81641424, global
 	.4byte 0x45534D69
 	.4byte 0x73633A3A
@@ -3480,6 +3520,7 @@
 	.byte 0x00
 .endobj lbl_81641424
 
+# .data:0x5F5 | 0x816418B5 | size: 0xF0
 .obj lbl_816418B5, global
 	.4byte 0x2F736861
 	.4byte 0x72656432
@@ -3543,6 +3584,7 @@
 	.4byte 0x25640A00
 .endobj lbl_816418B5
 
+# .data:0x6E5 | 0x816419A5 | size: 0x268
 .obj lbl_816419A5, global
 	.4byte 0x45535F53
 	.4byte 0x65745569
@@ -3700,6 +3742,7 @@
 	.4byte 0x25640A00
 .endobj lbl_816419A5
 
+# .data:0x94D | 0x81641C0D | size: 0x7D3
 .obj lbl_81641C0D, global
 	.4byte 0x2F6D6574
 	.4byte 0x612F2530
@@ -4204,26 +4247,31 @@
 	.byte 0x00, 0x00, 0x00
 .endobj lbl_81641C0D
 
-# 0x816962A0 - 0x816962C0
+# 0x816962A0..0x816962C0 | size: 0x20
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x816962A0 | size: 0x5
 .obj lbl_816962A0, global
 	.string "%s%s"
 .endobj lbl_816962A0
 
+# .sdata:0x5 | 0x816962A5 | size: 0x5
 .obj lbl_816962A5, global
 	.string "Open"
 .endobj lbl_816962A5
 
+# .sdata:0xA | 0x816962AA | size: 0x6
 .obj lbl_816962AA, global
 	.string "Exist"
 .endobj lbl_816962AA
 
+# .sdata:0x10 | 0x816962B0 | size: 0x7
 .obj lbl_816962B0, global
 	.string "Backup"
 .endobj lbl_816962B0
 
+# .sdata:0x17 | 0x816962B7 | size: 0x9
 .obj lbl_816962B7, global
 	.4byte 0x52657374
 	.4byte 0x6F726500

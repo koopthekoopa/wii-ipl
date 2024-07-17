@@ -1,4 +1,4 @@
-#include "utility/iplMessageManager.h"
+#include "utility/iplMessageBase.h"
 
 namespace ipl {
     namespace utility {

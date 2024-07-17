@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplController.cpp"
 
-# 0x81335CCC - 0x81337978
+# 0x81335CCC..0x81337978 | size: 0x1CAC
 .text
 .balign 4
 
+# .text:0x0 | 0x81335CCC | size: 0x310
 # ipl::controller::Base::read()
 .fn read__Q33ipl10controller4BaseFv, global
 /* 81335CCC 000040CC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -221,36 +222,42 @@
 /* 81335FD8 000043D8  4E 80 00 20 */	blr
 .endfn read__Q33ipl10controller4BaseFv
 
+# .text:0x310 | 0x81335FDC | size: 0x8
 # ipl::controller::Interface::isValidBtn() const
 .fn isValidBtn__Q33ipl10controller9InterfaceCFv, global
 /* 81335FDC 000043DC  38 60 00 00 */	li r3, 0x0
 /* 81335FE0 000043E0  4E 80 00 20 */	blr
 .endfn isValidBtn__Q33ipl10controller9InterfaceCFv
 
+# .text:0x318 | 0x81335FE4 | size: 0x8
 # ipl::controller::Interface::downTrg(unsigned long) const
 .fn downTrg__Q33ipl10controller9InterfaceCFUl, global
 /* 81335FE4 000043E4  38 60 00 00 */	li r3, 0x0
 /* 81335FE8 000043E8  4E 80 00 20 */	blr
 .endfn downTrg__Q33ipl10controller9InterfaceCFUl
 
+# .text:0x320 | 0x81335FEC | size: 0x8
 # ipl::controller::Interface::pinch() const
 .fn pinch__Q33ipl10controller9InterfaceCFv, global
 /* 81335FEC 000043EC  38 60 00 00 */	li r3, 0x0
 /* 81335FF0 000043F0  4E 80 00 20 */	blr
 .endfn pinch__Q33ipl10controller9InterfaceCFv
 
+# .text:0x328 | 0x81335FF4 | size: 0x8
 # ipl::controller::Interface::down(unsigned long) const
 .fn down__Q33ipl10controller9InterfaceCFUl, global
 /* 81335FF4 000043F4  38 60 00 00 */	li r3, 0x0
 /* 81335FF8 000043F8  4E 80 00 20 */	blr
 .endfn down__Q33ipl10controller9InterfaceCFUl
 
+# .text:0x330 | 0x81335FFC | size: 0x8
 # ipl::controller::Interface::getKPADStatus() const
 .fn getKPADStatus__Q33ipl10controller9InterfaceCFv, global
 /* 81335FFC 000043FC  38 60 00 00 */	li r3, 0x0
 /* 81336000 00004400  4E 80 00 20 */	blr
 .endfn getKPADStatus__Q33ipl10controller9InterfaceCFv
 
+# .text:0x338 | 0x81336004 | size: 0x14
 # ipl::controller::Base::decide() const
 .fn decide__Q33ipl10controller4BaseCFv, global
 /* 81336004 00004404  80 63 00 08 */	lwz r3, 0x8(r3)
@@ -260,6 +267,7 @@
 /* 81336014 00004414  4E 80 00 20 */	blr
 .endfn decide__Q33ipl10controller4BaseCFv
 
+# .text:0x34C | 0x81336018 | size: 0x64
 # ipl::controller::Base::rumble(int)
 .fn rumble__Q33ipl10controller4BaseFi, global
 /* 81336018 00004418  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -290,6 +298,7 @@
 /* 81336078 00004478  4E 80 00 20 */	blr
 .endfn rumble__Q33ipl10controller4BaseFi
 
+# .text:0x3B0 | 0x8133607C | size: 0x50
 # ipl::controller::Base::cancelRumbling()
 .fn cancelRumbling__Q33ipl10controller4BaseFv, global
 /* 8133607C 0000447C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -315,6 +324,7 @@
 /* 813360C8 000044C8  4E 80 00 20 */	blr
 .endfn cancelRumbling__Q33ipl10controller4BaseFv
 
+# .text:0x400 | 0x813360CC | size: 0x148
 # ipl::controller::Revolution::read()
 .fn read__Q33ipl10controller10RevolutionFv, global
 /* 813360CC 000044CC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -406,6 +416,7 @@
 /* 81336210 00004610  4E 80 00 20 */	blr
 .endfn read__Q33ipl10controller10RevolutionFv
 
+# .text:0x548 | 0x81336214 | size: 0x54
 # ipl::controller::Revolution::isValidDpd() const
 .fn isValidDpd__Q33ipl10controller10RevolutionCFv, global
 /* 81336214 00004614  88 03 00 1C */	lbz r0, 0x1c(r3)
@@ -433,6 +444,7 @@
 /* 81336264 00004664  4E 80 00 20 */	blr
 .endfn isValidDpd__Q33ipl10controller10RevolutionCFv
 
+# .text:0x59C | 0x81336268 | size: 0x34
 # ipl::controller::Revolution::isValidBtn() const
 .fn isValidBtn__Q33ipl10controller10RevolutionCFv, global
 /* 81336268 00004668  80 83 00 20 */	lwz r4, 0x20(r3)
@@ -450,6 +462,7 @@
 /* 81336298 00004698  4E 80 00 20 */	blr
 .endfn isValidBtn__Q33ipl10controller10RevolutionCFv
 
+# .text:0x5D0 | 0x8133629C | size: 0x6C
 # ipl::controller::Revolution::down(unsigned long) const
 .fn down__Q33ipl10controller10RevolutionCFUl, global
 /* 8133629C 0000469C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -482,6 +495,7 @@
 /* 81336304 00004704  4E 80 00 20 */	blr
 .endfn down__Q33ipl10controller10RevolutionCFUl
 
+# .text:0x63C | 0x81336308 | size: 0x120
 # ipl::controller::Revolution::getDpdProjectionPos() const
 .fn getDpdProjectionPos__Q33ipl10controller10RevolutionCFv, global
 /* 81336308 00004708  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -563,6 +577,7 @@
 /* 81336424 00004824  4E 80 00 20 */	blr
 .endfn getDpdProjectionPos__Q33ipl10controller10RevolutionCFv
 
+# .text:0x75C | 0x81336428 | size: 0x18
 # nw4r::ut::Rect::Rect()
 .fn __ct__Q34nw4r2ut4RectFv, global
 /* 81336428 00004828  C0 02 80 54 */	lfs f0, lbl_81694454@sda21(r0)
@@ -573,6 +588,7 @@
 /* 8133643C 0000483C  4E 80 00 20 */	blr
 .endfn __ct__Q34nw4r2ut4RectFv
 
+# .text:0x774 | 0x81336440 | size: 0xC
 # ipl::math::VEC2::set(float, float)
 .fn set__Q33ipl4math4VEC2Fff, global
 /* 81336440 00004840  D0 23 00 00 */	stfs f1, 0x0(r3)
@@ -580,6 +596,7 @@
 /* 81336448 00004848  4E 80 00 20 */	blr
 .endfn set__Q33ipl4math4VEC2Fff
 
+# .text:0x780 | 0x8133644C | size: 0x9C
 # ipl::controller::Classic::Classic(int, KPADStatus&)
 .fn __ct__Q33ipl10controller7ClassicFiR10KPADStatus, global
 /* 8133644C 0000484C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -623,6 +640,7 @@
 /* 813364E4 000048E4  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl10controller7ClassicFiR10KPADStatus
 
+# .text:0x81C | 0x813364E8 | size: 0x40
 # ipl::controller::Base::~Base()
 .fn __dt__Q33ipl10controller4BaseFv, global
 /* 813364E8 000048E8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -644,6 +662,7 @@
 /* 81336524 00004924  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl10controller4BaseFv
 
+# .text:0x85C | 0x81336528 | size: 0x40
 # ipl::controller::Revolution::~Revolution()
 .fn __dt__Q33ipl10controller10RevolutionFv, global
 /* 81336528 00004928  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -665,6 +684,7 @@
 /* 81336564 00004964  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl10controller10RevolutionFv
 
+# .text:0x89C | 0x81336568 | size: 0xC
 # ipl::math::VEC2::VEC2(float, float)
 .fn __ct__Q33ipl4math4VEC2Fff, global
 /* 81336568 00004968  D0 23 00 00 */	stfs f1, 0x0(r3)
@@ -672,6 +692,7 @@
 /* 81336570 00004970  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl4math4VEC2Fff
 
+# .text:0x8A8 | 0x81336574 | size: 0x16C
 # ipl::controller::Classic::read()
 .fn read__Q33ipl10controller7ClassicFv, global
 /* 81336574 00004974  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -772,6 +793,7 @@
 /* 813366DC 00004ADC  4E 80 00 20 */	blr
 .endfn read__Q33ipl10controller7ClassicFv
 
+# .text:0xA14 | 0x813366E0 | size: 0xC
 # ipl::controller::Classic::getClassicHoldFlag() const
 .fn getClassicHoldFlag__Q33ipl10controller7ClassicCFv, global
 /* 813366E0 00004AE0  80 63 00 20 */	lwz r3, 0x20(r3)
@@ -779,6 +801,7 @@
 /* 813366E8 00004AE8  4E 80 00 20 */	blr
 .endfn getClassicHoldFlag__Q33ipl10controller7ClassicCFv
 
+# .text:0xA20 | 0x813366EC | size: 0x24
 # float ipl::math::abs_clamp<float>(const float&, const float&)
 .fn "abs_clamp<f>__Q23ipl4mathFRCfRCf_f", global
 /* 813366EC 00004AEC  C0 03 00 00 */	lfs f0, 0x0(r3)
@@ -792,6 +815,7 @@
 /* 8133670C 00004B0C  4E 80 00 20 */	blr
 .endfn "abs_clamp<f>__Q23ipl4mathFRCfRCf_f"
 
+# .text:0xA44 | 0x81336710 | size: 0x64
 # ipl::controller::Classic::getHorizon() const
 .fn getHorizon__Q33ipl10controller7ClassicCFv, global
 /* 81336710 00004B10  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -823,6 +847,7 @@
 /* 81336770 00004B70  4E 80 00 20 */	blr
 .endfn getHorizon__Q33ipl10controller7ClassicCFv
 
+# .text:0xAA8 | 0x81336774 | size: 0x7C
 # ipl::controller::Classic::getDpdPos() const
 .fn getDpdPos__Q33ipl10controller7ClassicCFv, global
 /* 81336774 00004B74  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -861,6 +886,7 @@
 /* 813367EC 00004BEC  4E 80 00 20 */	blr
 .endfn getDpdPos__Q33ipl10controller7ClassicCFv
 
+# .text:0xB24 | 0x813367F0 | size: 0x14
 # ipl::math::VEC2::operator=(const ipl::math::VEC2&)
 .fn __as__Q33ipl4math4VEC2FRCQ33ipl4math4VEC2, global
 /* 813367F0 00004BF0  C0 24 00 00 */	lfs f1, 0x0(r4)
@@ -870,6 +896,7 @@
 /* 81336800 00004C00  4E 80 00 20 */	blr
 .endfn __as__Q33ipl4math4VEC2FRCQ33ipl4math4VEC2
 
+# .text:0xB38 | 0x81336804 | size: 0x174
 # ipl::controller::Classic::getDpdProjectionPos() const
 .fn getDpdProjectionPos__Q33ipl10controller7ClassicCFv, global
 /* 81336804 00004C04  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -975,6 +1002,7 @@
 /* 81336974 00004D74  4E 80 00 20 */	blr
 .endfn getDpdProjectionPos__Q33ipl10controller7ClassicCFv
 
+# .text:0xCAC | 0x81336978 | size: 0x40
 # ipl::controller::Master::down(unsigned long) const
 .fn down__Q33ipl10controller6MasterCFUl, global
 /* 81336978 00004D78  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -995,6 +1023,7 @@
 /* 813369B4 00004DB4  4E 80 00 20 */	blr
 .endfn down__Q33ipl10controller6MasterCFUl
 
+# .text:0xCEC | 0x813369B8 | size: 0x40
 # ipl::controller::Master::downTrg(unsigned long) const
 .fn downTrg__Q33ipl10controller6MasterCFUl, global
 /* 813369B8 00004DB8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1015,6 +1044,7 @@
 /* 813369F4 00004DF4  4E 80 00 20 */	blr
 .endfn downTrg__Q33ipl10controller6MasterCFUl
 
+# .text:0xD2C | 0x813369F8 | size: 0x40
 # ipl::controller::Master::upTrg(unsigned long) const
 .fn upTrg__Q33ipl10controller6MasterCFUl, global
 /* 813369F8 00004DF8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1035,12 +1065,14 @@
 /* 81336A34 00004E34  4E 80 00 20 */	blr
 .endfn upTrg__Q33ipl10controller6MasterCFUl
 
+# .text:0xD6C | 0x81336A38 | size: 0x8
 # ipl::controller::Interface::upTrg(unsigned long) const
 .fn upTrg__Q33ipl10controller9InterfaceCFUl, global
 /* 81336A38 00004E38  38 60 00 00 */	li r3, 0x0
 /* 81336A3C 00004E3C  4E 80 00 20 */	blr
 .endfn upTrg__Q33ipl10controller9InterfaceCFUl
 
+# .text:0xD74 | 0x81336A40 | size: 0x40
 # ipl::controller::Master::repeat(unsigned long) const
 .fn repeat__Q33ipl10controller6MasterCFUl, global
 /* 81336A40 00004E40  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1061,12 +1093,14 @@
 /* 81336A7C 00004E7C  4E 80 00 20 */	blr
 .endfn repeat__Q33ipl10controller6MasterCFUl
 
+# .text:0xDB4 | 0x81336A80 | size: 0x8
 # ipl::controller::Interface::repeat(unsigned long) const
 .fn repeat__Q33ipl10controller9InterfaceCFUl, global
 /* 81336A80 00004E80  38 60 00 00 */	li r3, 0x0
 /* 81336A84 00004E84  4E 80 00 20 */	blr
 .endfn repeat__Q33ipl10controller9InterfaceCFUl
 
+# .text:0xDBC | 0x81336A88 | size: 0x8C
 # ipl::controller::Master::decide() const
 .fn decide__Q33ipl10controller6MasterCFv, global
 /* 81336A88 00004E88  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1108,6 +1142,7 @@
 /* 81336B10 00004F10  4E 80 00 20 */	blr
 .endfn decide__Q33ipl10controller6MasterCFv
 
+# .text:0xE48 | 0x81336B14 | size: 0x70
 # ipl::controller::Master::setForceInvalid(bool)
 .fn setForceInvalid__Q33ipl10controller6MasterFb, global
 /* 81336B14 00004F14  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1142,6 +1177,7 @@
 /* 81336B80 00004F80  4E 80 00 20 */	blr
 .endfn setForceInvalid__Q33ipl10controller6MasterFb
 
+# .text:0xEB8 | 0x81336B84 | size: 0x94
 # ipl::controller::Master::call(unsigned long, bool (ipl::controller::Interface::*)(unsigned long) const) const
 .fn call__Q33ipl10controller6MasterCFUlMQ33ipl10controller9InterfaceFPCvPCvUl_b, global
 /* 81336B84 00004F84  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1185,53 +1221,62 @@
 /* 81336C14 00005014  4E 80 00 20 */	blr
 .endfn call__Q33ipl10controller6MasterCFUlMQ33ipl10controller9InterfaceFPCvPCvUl_b
 
+# .text:0xF4C | 0x81336C18 | size: 0x4
 # ipl::controller::Interface::read()
 .fn read__Q33ipl10controller9InterfaceFv, global
 /* 81336C18 00005018  4E 80 00 20 */	blr
 .endfn read__Q33ipl10controller9InterfaceFv
 
+# .text:0xF50 | 0x81336C1C | size: 0x8
 # ipl::controller::Interface::getSubStickY() const
 .fn getSubStickY__Q33ipl10controller9InterfaceCFv, global
 /* 81336C1C 0000501C  38 60 00 00 */	li r3, 0x0
 /* 81336C20 00005020  4E 80 00 20 */	blr
 .endfn getSubStickY__Q33ipl10controller9InterfaceCFv
 
+# .text:0xF58 | 0x81336C24 | size: 0x8
 # ipl::controller::Interface::getSubStickX() const
 .fn getSubStickX__Q33ipl10controller9InterfaceCFv, global
 /* 81336C24 00005024  38 60 00 00 */	li r3, 0x0
 /* 81336C28 00005028  4E 80 00 20 */	blr
 .endfn getSubStickX__Q33ipl10controller9InterfaceCFv
 
+# .text:0xF60 | 0x81336C2C | size: 0x8
 # ipl::controller::Interface::getMainStickY() const
 .fn getMainStickY__Q33ipl10controller9InterfaceCFv, global
 /* 81336C2C 0000502C  38 60 00 00 */	li r3, 0x0
 /* 81336C30 00005030  4E 80 00 20 */	blr
 .endfn getMainStickY__Q33ipl10controller9InterfaceCFv
 
+# .text:0xF68 | 0x81336C34 | size: 0x8
 # ipl::controller::Interface::getMainStickX() const
 .fn getMainStickX__Q33ipl10controller9InterfaceCFv, global
 /* 81336C34 00005034  38 60 00 00 */	li r3, 0x0
 /* 81336C38 00005038  4E 80 00 20 */	blr
 .endfn getMainStickX__Q33ipl10controller9InterfaceCFv
 
+# .text:0xF70 | 0x81336C3C | size: 0x8
 # ipl::controller::Interface::isValidDpd() const
 .fn isValidDpd__Q33ipl10controller9InterfaceCFv, global
 /* 81336C3C 0000503C  38 60 00 00 */	li r3, 0x0
 /* 81336C40 00005040  4E 80 00 20 */	blr
 .endfn isValidDpd__Q33ipl10controller9InterfaceCFv
 
+# .text:0xF78 | 0x81336C44 | size: 0x8
 # ipl::controller::Interface::getPADStatus() const
 .fn getPADStatus__Q33ipl10controller9InterfaceCFv, global
 /* 81336C44 00005044  38 60 00 00 */	li r3, 0x0
 /* 81336C48 00005048  4E 80 00 20 */	blr
 .endfn getPADStatus__Q33ipl10controller9InterfaceCFv
 
+# .text:0xF80 | 0x81336C4C | size: 0x8
 # ipl::controller::Interface::getDpdDistance() const
 .fn getDpdDistance__Q33ipl10controller9InterfaceCFv, global
 /* 81336C4C 0000504C  C0 22 80 54 */	lfs f1, lbl_81694454@sda21(r0)
 /* 81336C50 00005050  4E 80 00 20 */	blr
 .endfn getDpdDistance__Q33ipl10controller9InterfaceCFv
 
+# .text:0xF88 | 0x81336C54 | size: 0x20
 # ipl::controller::Interface::getHorizon() const
 .fn getHorizon__Q33ipl10controller9InterfaceCFv, global
 /* 81336C54 00005054  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1244,6 +1289,7 @@
 /* 81336C70 00005070  4E 80 00 20 */	blr
 .endfn getHorizon__Q33ipl10controller9InterfaceCFv
 
+# .text:0xFA8 | 0x81336C74 | size: 0x20
 # ipl::controller::Interface::getDpdProjectionPos() const
 .fn getDpdProjectionPos__Q33ipl10controller9InterfaceCFv, global
 /* 81336C74 00005074  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1256,6 +1302,7 @@
 /* 81336C90 00005090  4E 80 00 20 */	blr
 .endfn getDpdProjectionPos__Q33ipl10controller9InterfaceCFv
 
+# .text:0xFC8 | 0x81336C94 | size: 0x20
 # ipl::controller::Interface::getDpdPos() const
 .fn getDpdPos__Q33ipl10controller9InterfaceCFv, global
 /* 81336C94 00005094  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1268,101 +1315,118 @@
 /* 81336CB0 000050B0  4E 80 00 20 */	blr
 .endfn getDpdPos__Q33ipl10controller9InterfaceCFv
 
+# .text:0xFE8 | 0x81336CB4 | size: 0x8
 # ipl::controller::Interface::getClassicReleaseFlag() const
 .fn getClassicReleaseFlag__Q33ipl10controller9InterfaceCFv, global
 /* 81336CB4 000050B4  38 60 00 00 */	li r3, 0x0
 /* 81336CB8 000050B8  4E 80 00 20 */	blr
 .endfn getClassicReleaseFlag__Q33ipl10controller9InterfaceCFv
 
+# .text:0xFF0 | 0x81336CBC | size: 0x8
 # ipl::controller::Interface::getClassicTrigFlag() const
 .fn getClassicTrigFlag__Q33ipl10controller9InterfaceCFv, global
 /* 81336CBC 000050BC  38 60 00 00 */	li r3, 0x0
 /* 81336CC0 000050C0  4E 80 00 20 */	blr
 .endfn getClassicTrigFlag__Q33ipl10controller9InterfaceCFv
 
+# .text:0xFF8 | 0x81336CC4 | size: 0x8
 # ipl::controller::Interface::getClassicHoldFlag() const
 .fn getClassicHoldFlag__Q33ipl10controller9InterfaceCFv, global
 /* 81336CC4 000050C4  38 60 00 00 */	li r3, 0x0
 /* 81336CC8 000050C8  4E 80 00 20 */	blr
 .endfn getClassicHoldFlag__Q33ipl10controller9InterfaceCFv
 
+# .text:0x1000 | 0x81336CCC | size: 0x8
 # ipl::controller::Interface::getReleaseFlag() const
 .fn getReleaseFlag__Q33ipl10controller9InterfaceCFv, global
 /* 81336CCC 000050CC  38 60 00 00 */	li r3, 0x0
 /* 81336CD0 000050D0  4E 80 00 20 */	blr
 .endfn getReleaseFlag__Q33ipl10controller9InterfaceCFv
 
+# .text:0x1008 | 0x81336CD4 | size: 0x8
 # ipl::controller::Interface::getTrigFlag() const
 .fn getTrigFlag__Q33ipl10controller9InterfaceCFv, global
 /* 81336CD4 000050D4  38 60 00 00 */	li r3, 0x0
 /* 81336CD8 000050D8  4E 80 00 20 */	blr
 .endfn getTrigFlag__Q33ipl10controller9InterfaceCFv
 
+# .text:0x1010 | 0x81336CDC | size: 0x8
 # ipl::controller::Interface::getHoldFlag() const
 .fn getHoldFlag__Q33ipl10controller9InterfaceCFv, global
 /* 81336CDC 000050DC  38 60 00 00 */	li r3, 0x0
 /* 81336CE0 000050E0  4E 80 00 20 */	blr
 .endfn getHoldFlag__Q33ipl10controller9InterfaceCFv
 
+# .text:0x1018 | 0x81336CE4 | size: 0x4
 # ipl::controller::Interface::cancelRumbling()
 .fn cancelRumbling__Q33ipl10controller9InterfaceFv, global
 /* 81336CE4 000050E4  4E 80 00 20 */	blr
 .endfn cancelRumbling__Q33ipl10controller9InterfaceFv
 
+# .text:0x101C | 0x81336CE8 | size: 0x8
 # ipl::controller::Interface::rumble(int)
 .fn rumble__Q33ipl10controller9InterfaceFi, global
 /* 81336CE8 000050E8  38 60 00 00 */	li r3, 0x0
 /* 81336CEC 000050EC  4E 80 00 20 */	blr
 .endfn rumble__Q33ipl10controller9InterfaceFi
 
+# .text:0x1024 | 0x81336CF0 | size: 0x8
 # ipl::controller::Interface::pinchOffTrg() const
 .fn pinchOffTrg__Q33ipl10controller9InterfaceCFv, global
 /* 81336CF0 000050F0  38 60 00 00 */	li r3, 0x0
 /* 81336CF4 000050F4  4E 80 00 20 */	blr
 .endfn pinchOffTrg__Q33ipl10controller9InterfaceCFv
 
+# .text:0x102C | 0x81336CF8 | size: 0x8
 # ipl::controller::Interface::pinchTrg() const
 .fn pinchTrg__Q33ipl10controller9InterfaceCFv, global
 /* 81336CF8 000050F8  38 60 00 00 */	li r3, 0x0
 /* 81336CFC 000050FC  4E 80 00 20 */	blr
 .endfn pinchTrg__Q33ipl10controller9InterfaceCFv
 
+# .text:0x1034 | 0x81336D00 | size: 0x8
 # ipl::controller::Interface::getChannel() const
 .fn getChannel__Q33ipl10controller9InterfaceCFv, global
 /* 81336D00 00005100  38 60 FF FF */	li r3, -0x1
 /* 81336D04 00005104  4E 80 00 20 */	blr
 .endfn getChannel__Q33ipl10controller9InterfaceCFv
 
+# .text:0x103C | 0x81336D08 | size: 0x8
 # ipl::controller::Interface::getType() const
 .fn getType__Q33ipl10controller9InterfaceCFv, global
 /* 81336D08 00005108  38 60 FF FF */	li r3, -0x1
 /* 81336D0C 0000510C  4E 80 00 20 */	blr
 .endfn getType__Q33ipl10controller9InterfaceCFv
 
+# .text:0x1044 | 0x81336D10 | size: 0x8
 # ipl::controller::Base::setForceInvalid(bool)
 .fn setForceInvalid__Q33ipl10controller4BaseFb, global
 /* 81336D10 00005110  98 83 00 1C */	stb r4, 0x1c(r3)
 /* 81336D14 00005114  4E 80 00 20 */	blr
 .endfn setForceInvalid__Q33ipl10controller4BaseFb
 
+# .text:0x104C | 0x81336D18 | size: 0x8
 # ipl::controller::Base::getType() const
 .fn getType__Q33ipl10controller4BaseCFv, global
 /* 81336D18 00005118  80 63 00 18 */	lwz r3, 0x18(r3)
 /* 81336D1C 0000511C  4E 80 00 20 */	blr
 .endfn getType__Q33ipl10controller4BaseCFv
 
+# .text:0x1054 | 0x81336D20 | size: 0x8
 # ipl::controller::Base::getChannel() const
 .fn getChannel__Q33ipl10controller4BaseCFv, global
 /* 81336D20 00005120  80 63 00 14 */	lwz r3, 0x14(r3)
 /* 81336D24 00005124  4E 80 00 20 */	blr
 .endfn getChannel__Q33ipl10controller4BaseCFv
 
+# .text:0x105C | 0x81336D28 | size: 0x8
 # ipl::controller::Revolution::getKPADStatus() const
 .fn getKPADStatus__Q33ipl10controller10RevolutionCFv, global
 /* 81336D28 00005128  80 63 00 20 */	lwz r3, 0x20(r3)
 /* 81336D2C 0000512C  4E 80 00 20 */	blr
 .endfn getKPADStatus__Q33ipl10controller10RevolutionCFv
 
+# .text:0x1064 | 0x81336D30 | size: 0xC
 # ipl::controller::Revolution::getDpdDistance() const
 .fn getDpdDistance__Q33ipl10controller10RevolutionCFv, global
 /* 81336D30 00005130  80 63 00 20 */	lwz r3, 0x20(r3)
@@ -1370,6 +1434,7 @@
 /* 81336D38 00005138  4E 80 00 20 */	blr
 .endfn getDpdDistance__Q33ipl10controller10RevolutionCFv
 
+# .text:0x1070 | 0x81336D3C | size: 0xC
 # ipl::controller::Revolution::getReleaseFlag() const
 .fn getReleaseFlag__Q33ipl10controller10RevolutionCFv, global
 /* 81336D3C 0000513C  80 63 00 20 */	lwz r3, 0x20(r3)
@@ -1377,6 +1442,7 @@
 /* 81336D44 00005144  4E 80 00 20 */	blr
 .endfn getReleaseFlag__Q33ipl10controller10RevolutionCFv
 
+# .text:0x107C | 0x81336D48 | size: 0xC
 # ipl::controller::Revolution::getTrigFlag() const
 .fn getTrigFlag__Q33ipl10controller10RevolutionCFv, global
 /* 81336D48 00005148  80 63 00 20 */	lwz r3, 0x20(r3)
@@ -1384,6 +1450,7 @@
 /* 81336D50 00005150  4E 80 00 20 */	blr
 .endfn getTrigFlag__Q33ipl10controller10RevolutionCFv
 
+# .text:0x1088 | 0x81336D54 | size: 0xC
 # ipl::controller::Revolution::getHoldFlag() const
 .fn getHoldFlag__Q33ipl10controller10RevolutionCFv, global
 /* 81336D54 00005154  80 63 00 20 */	lwz r3, 0x20(r3)
@@ -1391,6 +1458,7 @@
 /* 81336D5C 0000515C  4E 80 00 20 */	blr
 .endfn getHoldFlag__Q33ipl10controller10RevolutionCFv
 
+# .text:0x1094 | 0x81336D60 | size: 0x6C
 # ipl::controller::Revolution::pinchOffTrg() const
 .fn pinchOffTrg__Q33ipl10controller10RevolutionCFv, global
 /* 81336D60 00005160  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1423,6 +1491,7 @@
 /* 81336DC8 000051C8  4E 80 00 20 */	blr
 .endfn pinchOffTrg__Q33ipl10controller10RevolutionCFv
 
+# .text:0x1100 | 0x81336DCC | size: 0x60
 # ipl::controller::Revolution::pinch() const
 .fn pinch__Q33ipl10controller10RevolutionCFv, global
 /* 81336DCC 000051CC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1452,6 +1521,7 @@
 /* 81336E28 00005228  4E 80 00 20 */	blr
 .endfn pinch__Q33ipl10controller10RevolutionCFv
 
+# .text:0x1160 | 0x81336E2C | size: 0x6C
 # ipl::controller::Revolution::pinchTrg() const
 .fn pinchTrg__Q33ipl10controller10RevolutionCFv, global
 /* 81336E2C 0000522C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1484,6 +1554,7 @@
 /* 81336E94 00005294  4E 80 00 20 */	blr
 .endfn pinchTrg__Q33ipl10controller10RevolutionCFv
 
+# .text:0x11CC | 0x81336E98 | size: 0x64
 # ipl::controller::Revolution::repeat(unsigned long) const
 .fn repeat__Q33ipl10controller10RevolutionCFUl, global
 /* 81336E98 00005298  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1514,6 +1585,7 @@
 /* 81336EF8 000052F8  4E 80 00 20 */	blr
 .endfn repeat__Q33ipl10controller10RevolutionCFUl
 
+# .text:0x1230 | 0x81336EFC | size: 0x10
 # ipl::controller::Classic::isValidDpdClassic() const
 .fn isValidDpdClassic__Q33ipl10controller7ClassicCFv, global
 /* 81336EFC 000052FC  80 63 00 2C */	lwz r3, 0x2c(r3)
@@ -1522,6 +1594,7 @@
 /* 81336F08 00005308  4E 80 00 20 */	blr
 .endfn isValidDpdClassic__Q33ipl10controller7ClassicCFv
 
+# .text:0x1240 | 0x81336F0C | size: 0x68
 # ipl::controller::Classic::isValidDpd() const
 .fn isValidDpd__Q33ipl10controller7ClassicCFv, global
 /* 81336F0C 0000530C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1555,6 +1628,7 @@
 /* 81336F70 00005370  4E 80 00 20 */	blr
 .endfn isValidDpd__Q33ipl10controller7ClassicCFv
 
+# .text:0x12A8 | 0x81336F74 | size: 0xC
 # ipl::controller::Classic::getClassicReleaseFlag() const
 .fn getClassicReleaseFlag__Q33ipl10controller7ClassicCFv, global
 /* 81336F74 00005374  80 63 00 20 */	lwz r3, 0x20(r3)
@@ -1562,6 +1636,7 @@
 /* 81336F7C 0000537C  4E 80 00 20 */	blr
 .endfn getClassicReleaseFlag__Q33ipl10controller7ClassicCFv
 
+# .text:0x12B4 | 0x81336F80 | size: 0xC
 # ipl::controller::Classic::getClassicTrigFlag() const
 .fn getClassicTrigFlag__Q33ipl10controller7ClassicCFv, global
 /* 81336F80 00005380  80 63 00 20 */	lwz r3, 0x20(r3)
@@ -1569,6 +1644,7 @@
 /* 81336F88 00005388  4E 80 00 20 */	blr
 .endfn getClassicTrigFlag__Q33ipl10controller7ClassicCFv
 
+# .text:0x12C0 | 0x81336F8C | size: 0x8C
 # ipl::controller::Classic::upTrg(unsigned long) const
 .fn upTrg__Q33ipl10controller7ClassicCFUl, global
 /* 81336F8C 0000538C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1610,6 +1686,7 @@
 /* 81337014 00005414  4E 80 00 20 */	blr
 .endfn upTrg__Q33ipl10controller7ClassicCFUl
 
+# .text:0x134C | 0x81337018 | size: 0x8C
 # ipl::controller::Classic::downTrg(unsigned long) const
 .fn downTrg__Q33ipl10controller7ClassicCFUl, global
 /* 81337018 00005418  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1651,6 +1728,7 @@
 /* 813370A0 000054A0  4E 80 00 20 */	blr
 .endfn downTrg__Q33ipl10controller7ClassicCFUl
 
+# .text:0x13D8 | 0x813370A4 | size: 0x8C
 # ipl::controller::Classic::down(unsigned long) const
 .fn down__Q33ipl10controller7ClassicCFUl, global
 /* 813370A4 000054A4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1692,6 +1770,7 @@
 /* 8133712C 0000552C  4E 80 00 20 */	blr
 .endfn down__Q33ipl10controller7ClassicCFUl
 
+# .text:0x1464 | 0x81337130 | size: 0x3C
 # ipl::controller::Revolution::getHorizon() const
 .fn getHorizon__Q33ipl10controller10RevolutionCFv, global
 /* 81337130 00005530  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1711,6 +1790,7 @@
 /* 81337168 00005568  4E 80 00 20 */	blr
 .endfn getHorizon__Q33ipl10controller10RevolutionCFv
 
+# .text:0x14A0 | 0x8133716C | size: 0x3C
 # ipl::controller::Revolution::getDpdPos() const
 .fn getDpdPos__Q33ipl10controller10RevolutionCFv, global
 /* 8133716C 0000556C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1730,6 +1810,7 @@
 /* 813371A4 000055A4  4E 80 00 20 */	blr
 .endfn getDpdPos__Q33ipl10controller10RevolutionCFv
 
+# .text:0x14DC | 0x813371A8 | size: 0x6C
 # ipl::controller::Revolution::upTrg(unsigned long) const
 .fn upTrg__Q33ipl10controller10RevolutionCFUl, global
 /* 813371A8 000055A8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1762,6 +1843,7 @@
 /* 81337210 00005610  4E 80 00 20 */	blr
 .endfn upTrg__Q33ipl10controller10RevolutionCFUl
 
+# .text:0x1548 | 0x81337214 | size: 0x6C
 # ipl::controller::Revolution::downTrg(unsigned long) const
 .fn downTrg__Q33ipl10controller10RevolutionCFUl, global
 /* 81337214 00005614  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1794,6 +1876,7 @@
 /* 8133727C 0000567C  4E 80 00 20 */	blr
 .endfn downTrg__Q33ipl10controller10RevolutionCFUl
 
+# .text:0x15B4 | 0x81337280 | size: 0x58
 # ipl::controller::Classic::~Classic()
 .fn __dt__Q33ipl10controller7ClassicFv, global
 /* 81337280 00005680  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1821,6 +1904,7 @@
 /* 813372D4 000056D4  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl10controller7ClassicFv
 
+# .text:0x160C | 0x813372D8 | size: 0x40
 # ipl::controller::Master::~Master()
 .fn __dt__Q33ipl10controller6MasterFv, global
 /* 813372D8 000056D8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1842,6 +1926,7 @@
 /* 81337314 00005714  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl10controller6MasterFv
 
+# .text:0x164C | 0x81337318 | size: 0x18
 # ipl::controller::Manager::alloc(unsigned long)
 .fn alloc__Q33ipl10controller7ManagerFUl, global
 /* 81337318 00005718  7C 64 1B 78 */	mr r4, r3
@@ -1852,6 +1937,7 @@
 /* 8133732C 0000572C  4E 80 04 20 */	bctr
 .endfn alloc__Q33ipl10controller7ManagerFUl
 
+# .text:0x1664 | 0x81337330 | size: 0x38
 # ipl::controller::Manager::free(void*)
 .fn free__Q33ipl10controller7ManagerFPv, global
 /* 81337330 00005730  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1870,6 +1956,7 @@
 /* 81337364 00005764  4E 80 00 20 */	blr
 .endfn free__Q33ipl10controller7ManagerFPv
 
+# .text:0x169C | 0x81337368 | size: 0x198
 # ipl::controller::Manager::Manager(EGG::Heap*)
 .fn __ct__Q33ipl10controller7ManagerFPQ23EGG4Heap, global
 /* 81337368 00005768  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1981,6 +2068,7 @@
 /* 813374FC 000058FC  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl10controller7ManagerFPQ23EGG4Heap
 
+# .text:0x1834 | 0x81337500 | size: 0x2F8
 # ipl::controller::Manager::read()
 .fn read__Q33ipl10controller7ManagerFv, global
 /* 81337500 00005900  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -2197,6 +2285,7 @@
 /* 813377F4 00005BF4  4E 80 00 20 */	blr
 .endfn read__Q33ipl10controller7ManagerFv
 
+# .text:0x1B2C | 0x813377F8 | size: 0x88
 # ipl::controller::Revolution::Revolution(int, int, KPADStatus&)
 .fn __ct__Q33ipl10controller10RevolutionFiiR10KPADStatus, global
 /* 813377F8 00005BF8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2235,12 +2324,14 @@
 /* 8133787C 00005C7C  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl10controller10RevolutionFiiR10KPADStatus
 
+# .text:0x1BB4 | 0x81337880 | size: 0x8
 # ipl::controller::Manager::getMasterController()
 .fn getMasterController__Q33ipl10controller7ManagerFv, global
 /* 81337880 00005C80  38 63 00 D0 */	addi r3, r3, 0xd0
 /* 81337884 00005C84  4E 80 00 20 */	blr
 .endfn getMasterController__Q33ipl10controller7ManagerFv
 
+# .text:0x1BBC | 0x81337888 | size: 0xC
 # ipl::controller::Manager::getController(int)
 .fn getController__Q33ipl10controller7ManagerFi, global
 /* 81337888 00005C88  54 80 10 3A */	slwi r0, r4, 2
@@ -2248,6 +2339,7 @@
 /* 81337890 00005C90  4E 80 00 20 */	blr
 .endfn getController__Q33ipl10controller7ManagerFi
 
+# .text:0x1BC8 | 0x81337894 | size: 0x34
 # ipl::controller::Manager::getYoungController()
 .fn getYoungController__Q33ipl10controller7ManagerFv, global
 /* 81337894 00005C94  38 00 00 04 */	li r0, 0x4
@@ -2268,6 +2360,7 @@
 /* 813378C4 00005CC4  4E 80 00 20 */	blr
 .endfn getYoungController__Q33ipl10controller7ManagerFv
 
+# .text:0x1BFC | 0x813378C8 | size: 0x58
 # ipl::controller::Core::~Core()
 .fn __dt__Q33ipl10controller4CoreFv, global
 /* 813378C8 00005CC8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -2295,6 +2388,7 @@
 /* 8133791C 00005D1C  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl10controller4CoreFv
 
+# .text:0x1C54 | 0x81337920 | size: 0x58
 # ipl::controller::FreeStyle::~FreeStyle()
 .fn __dt__Q33ipl10controller9FreeStyleFv, global
 /* 81337920 00005D20  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -2322,10 +2416,11 @@
 /* 81337974 00005D74  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl10controller9FreeStyleFv
 
-# 0x8160D2C0 - 0x8160D2D0
+# 0x8160D2C0..0x8160D2D0 | size: 0x10
 .rodata
 .balign 8
 
+# .rodata:0x0 | 0x8160D2C0 | size: 0x10
 .obj lbl_8160D2C0, global
 	.4byte 0x3E4CCCCD
 	.4byte 0x3E99999A
@@ -2333,34 +2428,39 @@
 	.4byte 0x00000000
 .endobj lbl_8160D2C0
 
-# 0x816346A8 - 0x81634A28
+# 0x816346A8..0x81634A28 | size: 0x380
 .data
 .balign 8
 
+# .data:0x0 | 0x816346A8 | size: 0xC
 .obj lbl_816346A8, global
 	.4byte 0x00000000
 	.4byte 0x00000014
 	.4byte 0x00000000
 .endobj lbl_816346A8
 
+# .data:0xC | 0x816346B4 | size: 0xC
 .obj lbl_816346B4, global
 	.4byte 0x00000000
 	.4byte 0x00000018
 	.4byte 0x00000000
 .endobj lbl_816346B4
 
+# .data:0x18 | 0x816346C0 | size: 0xC
 .obj lbl_816346C0, global
 	.4byte 0x00000000
 	.4byte 0x0000001C
 	.4byte 0x00000000
 .endobj lbl_816346C0
 
+# .data:0x24 | 0x816346CC | size: 0xC
 .obj lbl_816346CC, global
 	.4byte 0x00000000
 	.4byte 0x00000030
 	.4byte 0x00000000
 .endobj lbl_816346CC
 
+# .data:0x30 | 0x816346D8 | size: 0x8C
 # ipl::controller::Master::__vtable
 .obj __vt__Q33ipl10controller6Master, global
 	.4byte 0x00000000
@@ -2400,6 +2500,7 @@
 	.4byte read__Q33ipl10controller9InterfaceFv
 .endobj __vt__Q33ipl10controller6Master
 
+# .data:0xBC | 0x81634764 | size: 0x90
 # ipl::controller::Classic::__vtable
 .obj __vt__Q33ipl10controller7Classic, global
 	.4byte 0x00000000
@@ -2440,6 +2541,7 @@
 	.4byte isValidDpdClassic__Q33ipl10controller7ClassicCFv
 .endobj __vt__Q33ipl10controller7Classic
 
+# .data:0x14C | 0x816347F4 | size: 0x8C
 # ipl::controller::Revolution::__vtable
 .obj __vt__Q33ipl10controller10Revolution, global
 	.4byte 0x00000000
@@ -2479,6 +2581,7 @@
 	.4byte read__Q33ipl10controller10RevolutionFv
 .endobj __vt__Q33ipl10controller10Revolution
 
+# .data:0x1D8 | 0x81634880 | size: 0x90
 # ipl::controller::Base::__vtable
 .obj __vt__Q33ipl10controller4Base, global
 	.4byte 0x00000000
@@ -2519,6 +2622,7 @@
 	.4byte 0x00000000
 .endobj __vt__Q33ipl10controller4Base
 
+# .data:0x268 | 0x81634910 | size: 0x8C
 # ipl::controller::FreeStyle::__vtable
 .obj __vt__Q33ipl10controller9FreeStyle, global
 	.4byte 0x00000000
@@ -2558,6 +2662,7 @@
 	.4byte read__Q33ipl10controller10RevolutionFv
 .endobj __vt__Q33ipl10controller9FreeStyle
 
+# .data:0x2F4 | 0x8163499C | size: 0x8C
 # ipl::controller::Core::__vtable
 .obj __vt__Q33ipl10controller4Core, global
 	.4byte 0x00000000
@@ -2597,117 +2702,142 @@
 	.4byte read__Q33ipl10controller10RevolutionFv
 .endobj __vt__Q33ipl10controller4Core
 
-# 0x81694440 - 0x81694490
+# 0x81694440..0x81694490 | size: 0x50
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x81694440 | size: 0x4
 .obj lbl_81694440, global
 	.float 1000
 .endobj lbl_81694440
 
+# .sdata2:0x4 | 0x81694444 | size: 0x4
 .obj lbl_81694444, global
 	.float 0.058333334
 .endobj lbl_81694444
 
+# .sdata2:0x8 | 0x81694448 | size: 0x8
 .obj lbl_81694448, global
 	.double 4503599627370496
 .endobj lbl_81694448
 
+# .sdata2:0x10 | 0x81694450 | size: 0x4
 .obj lbl_81694450, global
 	.float inf
 .endobj lbl_81694450
 
+# .sdata2:0x14 | 0x81694454 | size: 0x4
 .obj lbl_81694454, global
 	.float 0
 .endobj lbl_81694454
 
+# .sdata2:0x18 | 0x81694458 | size: 0x4
 .obj lbl_81694458, global
 	.float 1.10132
 .endobj lbl_81694458
 
+# .sdata2:0x1C | 0x8169445C | size: 0x4
 .obj lbl_8169445C, global
 	.float 1.15
 .endobj lbl_8169445C
 
+# .sdata2:0x20 | 0x81694460 | size: 0x4
 .obj lbl_81694460, global
 	.float 100
 .endobj lbl_81694460
 
+# .sdata2:0x24 | 0x81694464 | size: 0x4
 .obj lbl_81694464, global
 	.float 0.01
 .endobj lbl_81694464
 
+# .sdata2:0x28 | 0x81694468 | size: 0x4
 .obj lbl_81694468, global
 	.float 0.0036
 .endobj lbl_81694468
 
+# .sdata2:0x2C | 0x8169446C | size: 0x4
 .obj lbl_8169446C, global
 	.float 0.05
 .endobj lbl_8169446C
 
+# .sdata2:0x30 | 0x81694470 | size: 0x4
 .obj lbl_81694470, global
 	.float 1
 .endobj lbl_81694470
 
+# .sdata2:0x34 | 0x81694474 | size: 0x4
 .obj lbl_81694474, global
 	.float -0.2679492
 .endobj lbl_81694474
 
+# .sdata2:0x38 | 0x81694478 | size: 0x4
 .obj lbl_81694478, global
 	.float 0.5
 .endobj lbl_81694478
 
+# .sdata2:0x3C | 0x8169447C | size: 0x4
 .obj lbl_8169447C, global
 	.float 0.1
 .endobj lbl_8169447C
 
+# .sdata2:0x40 | 0x81694480 | size: 0x4
 .obj lbl_81694480, global
 	.float 0.2
 .endobj lbl_81694480
 
+# .sdata2:0x44 | 0x81694484 | size: 0x4
 .obj lbl_81694484, global
 	.float -0.2
 .endobj lbl_81694484
 
+# .sdata2:0x48 | 0x81694488 | size: 0x4
 .obj lbl_81694488, global
 	.float 0.05
 .endobj lbl_81694488
 
+# .sdata2:0x4C | 0x8169448C | size: 0x4
 .obj lbl_8169448C, global
 	.float 1
 .endobj lbl_8169448C
 
-# 0x81696080 - 0x81696088
+# 0x81696080..0x81696088 | size: 0x8
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x81696080 | size: 0x4
 .obj lbl_81696080, global
 	.4byte 0x3FE66666
 .endobj lbl_81696080
 
+# .sdata:0x4 | 0x81696084 | size: 0x4
 .obj lbl_81696084, global
 	.4byte 0x3F99999A
 .endobj lbl_81696084
 
-# 0x81698680 - 0x81698690
+# 0x81698680..0x81698690 | size: 0x10
 .section .sbss, "wa", @nobits
 .balign 8
 
+# .sbss:0x0 | 0x81698680 | size: 0x4
 # ipl::controller::Manager::mpBuf
 .obj mpBuf__Q33ipl10controller7Manager, global
 	.skip 0x4
 .endobj mpBuf__Q33ipl10controller7Manager
 
+# .sbss:0x4 | 0x81698684 | size: 0x4
 # ipl::controller::Manager::mpParentHeap
 .obj mpParentHeap__Q33ipl10controller7Manager, global
 	.skip 0x4
 .endobj mpParentHeap__Q33ipl10controller7Manager
 
+# .sbss:0x8 | 0x81698688 | size: 0x4
 # ipl::controller::Manager::mpHeap
 .obj mpHeap__Q33ipl10controller7Manager, global
 	.skip 0x4
 .endobj mpHeap__Q33ipl10controller7Manager
 
+# .sbss:0xC | 0x8169868C | size: 0x4
 # ipl::controller::Manager::mpAllocator
 .obj mpAllocator__Q33ipl10controller7Manager, global
 	.skip 0x4

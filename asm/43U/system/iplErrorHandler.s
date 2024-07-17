@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplErrorHandler.cpp"
 
-# 0x81356458 - 0x813567FC
+# 0x81356458..0x813567FC | size: 0x3A4
 .text
 .balign 4
 
+# .text:0x0 | 0x81356458 | size: 0xBC
 # ipl::ErrorHandler::ErrorHandler(EGG::Heap*)
 .fn __ct__Q23ipl12ErrorHandlerFPQ23EGG4Heap, global
 /* 81356458 00024858  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -57,6 +58,7 @@
 /* 81356510 00024910  4E 80 00 20 */	blr
 .endfn __ct__Q23ipl12ErrorHandlerFPQ23EGG4Heap
 
+# .text:0xBC | 0x81356514 | size: 0x98
 # ipl::ErrorHandler::set(ipl::ErrorHandler::Type, unsigned long, const char*, int, int)
 .fn set__Q23ipl12ErrorHandlerFQ33ipl12ErrorHandler4TypeUlPCcii, global
 /* 81356514 00024914  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -73,7 +75,7 @@
 /* 81356540 00024940  7C C4 33 78 */	mr r4, r6
 /* 81356544 00024944  38 A0 00 04 */	li r5, 0x4
 /* 81356548 00024948  38 63 00 14 */	addi r3, r3, 0x14
-/* 8135654C 0002494C  48 2A BE 79 */	bl fn_816023C4
+/* 8135654C 0002494C  48 2A BE 79 */	bl strncpy
 /* 81356550 00024950  38 00 00 00 */	li r0, 0x0
 /* 81356554 00024954  98 1F 00 17 */	stb r0, 0x17(r31)
 /* 81356558 00024958  48 00 00 14 */	b .L_8135656C
@@ -103,6 +105,7 @@
 /* 813565A8 000249A8  4E 80 00 20 */	blr
 .endfn set__Q23ipl12ErrorHandlerFQ33ipl12ErrorHandler4TypeUlPCcii
 
+# .text:0x154 | 0x813565AC | size: 0x14C
 # ipl::ErrorHandler::check()
 .fn check__Q23ipl12ErrorHandlerFv, global
 /* 813565AC 000249AC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -201,6 +204,7 @@
 /* 813566F4 00024AF4  4E 80 00 20 */	blr
 .endfn check__Q23ipl12ErrorHandlerFv
 
+# .text:0x2A0 | 0x813566F8 | size: 0x30
 # ipl::ErrorHandler::log(const char*, int, const char*, int)
 .fn log__Q23ipl12ErrorHandlerFPCciPCci, global
 /* 813566F8 00024AF8  7C 89 23 78 */	mr r9, r4
@@ -214,9 +218,10 @@
 /* 81356718 00024B18  38 84 8E BC */	addi r4, r4, lbl_81638EBC@l
 /* 8135671C 00024B1C  38 60 00 00 */	li r3, 0x0
 /* 81356720 00024B20  4C C6 31 82 */	crclr cr1eq
-/* 81356724 00024B24  48 21 16 04 */	b fn_81567D28
+/* 81356724 00024B24  48 21 16 04 */	b NANDLoggingAddMessageAsync
 .endfn log__Q23ipl12ErrorHandlerFPCciPCci
 
+# .text:0x2D0 | 0x81356728 | size: 0x90
 # ipl::ErrorHandler::calc()
 .fn calc__Q23ipl12ErrorHandlerFv, global
 /* 81356728 00024B28  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -259,6 +264,7 @@
 /* 813567B4 00024BB4  4E 80 00 20 */	blr
 .endfn calc__Q23ipl12ErrorHandlerFv
 
+# .text:0x360 | 0x813567B8 | size: 0x44
 # ipl::ErrorHandler::draw()
 .fn draw__Q23ipl12ErrorHandlerFv, global
 /* 813567B8 00024BB8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -281,14 +287,16 @@
 /* 813567F8 00024BF8  4E 80 00 20 */	blr
 .endfn draw__Q23ipl12ErrorHandlerFv
 
-# 0x81638E78 - 0x81638ED8
+# 0x81638E78..0x81638ED8 | size: 0x60
 .data
 .balign 8
 
+# .data:0x0 | 0x81638E78 | size: 0xF
 .obj lbl_81638E78, global
 	.string "my_Fatal.brlyt"
 .endobj lbl_81638E78
 
+# .data:0xF | 0x81638E87 | size: 0xD
 .obj lbl_81638E87, global
 	.4byte 0x54657874
 	.4byte 0x426F785F
@@ -296,6 +304,7 @@
 	.byte 0x00
 .endobj lbl_81638E87
 
+# .data:0x1C | 0x81638E94 | size: 0x28
 .obj jumptable_81638E94, local
 	.rel check__Q23ipl12ErrorHandlerFv, .L_8135661C
 	.rel check__Q23ipl12ErrorHandlerFv, .L_81356658
@@ -309,6 +318,7 @@
 	.rel check__Q23ipl12ErrorHandlerFv, .L_8135664C
 .endobj jumptable_81638E94
 
+# .data:0x44 | 0x81638EBC | size: 0x1C
 .obj lbl_81638EBC, global
 	.4byte 0x25732065
 	.4byte 0x72726F72
@@ -319,10 +329,11 @@
 	.4byte 0x25640000
 .endobj lbl_81638EBC
 
-# 0x81696200 - 0x81696208
+# 0x81696200..0x81696208 | size: 0x8
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x81696200 | size: 0x8
 .obj lbl_81696200, global
 	.4byte 0x61726300
 	.4byte 0x00000000

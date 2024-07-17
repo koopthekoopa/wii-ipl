@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "iplNandWrapper.cpp"
 
-# 0x8135FC1C - 0x81360764
+# 0x8135FC1C..0x81360764 | size: 0xB48
 .text
 .balign 4
 
+# .text:0x0 | 0x8135FC1C | size: 0x74
 # ipl::nand::wrapper::Create(const char*, unsigned char, unsigned char)
 .fn Create__Q33ipl4nand7wrapperFPCcUcUc, global
 /* 8135FC1C 0002E01C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -20,7 +21,7 @@
 /* 8135FC40 0002E040  7F 63 DB 78 */	mr r3, r27
 /* 8135FC44 0002E044  7F 84 E3 78 */	mr r4, r28
 /* 8135FC48 0002E048  7F A5 EB 78 */	mr r5, r29
-/* 8135FC4C 0002E04C  48 20 40 4D */	bl fn_81563C98
+/* 8135FC4C 0002E04C  48 20 40 4D */	bl NANDCreate
 /* 8135FC50 0002E050  3B FF 00 01 */	addi r31, r31, 0x1
 /* 8135FC54 0002E054  7C 7E 1B 78 */	mr r30, r3
 /* 8135FC58 0002E058  7F E4 FB 78 */	mr r4, r31
@@ -40,6 +41,7 @@
 /* 8135FC8C 0002E08C  4E 80 00 20 */	blr
 .endfn Create__Q33ipl4nand7wrapperFPCcUcUc
 
+# .text:0x74 | 0x8135FC90 | size: 0x74
 # ipl::nand::wrapper::Open(const char*, NANDFileInfo*, unsigned char)
 .fn Open__Q33ipl4nand7wrapperFPCcP12NANDFileInfoUc, global
 /* 8135FC90 0002E090  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -55,7 +57,7 @@
 /* 8135FCB4 0002E0B4  7F 63 DB 78 */	mr r3, r27
 /* 8135FCB8 0002E0B8  7F 84 E3 78 */	mr r4, r28
 /* 8135FCBC 0002E0BC  7F A5 EB 78 */	mr r5, r29
-/* 8135FCC0 0002E0C0  48 20 55 AD */	bl fn_8156526C
+/* 8135FCC0 0002E0C0  48 20 55 AD */	bl NANDOpen
 /* 8135FCC4 0002E0C4  3B FF 00 01 */	addi r31, r31, 0x1
 /* 8135FCC8 0002E0C8  7C 7E 1B 78 */	mr r30, r3
 /* 8135FCCC 0002E0CC  7F E4 FB 78 */	mr r4, r31
@@ -75,6 +77,7 @@
 /* 8135FD00 0002E100  4E 80 00 20 */	blr
 .endfn Open__Q33ipl4nand7wrapperFPCcP12NANDFileInfoUc
 
+# .text:0xE8 | 0x8135FD04 | size: 0x64
 # ipl::nand::wrapper::Close(NANDFileInfo*)
 .fn Close__Q33ipl4nand7wrapperFP12NANDFileInfo, global
 /* 8135FD04 0002E104  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -86,7 +89,7 @@
 /* 8135FD1C 0002E11C  3B E0 00 00 */	li r31, 0x0
 .L_8135FD20:
 /* 8135FD20 0002E120  7F A3 EB 78 */	mr r3, r29
-/* 8135FD24 0002E124  48 20 57 C9 */	bl fn_815654EC
+/* 8135FD24 0002E124  48 20 57 C9 */	bl NANDClose
 /* 8135FD28 0002E128  3B FF 00 01 */	addi r31, r31, 0x1
 /* 8135FD2C 0002E12C  7C 7E 1B 78 */	mr r30, r3
 /* 8135FD30 0002E130  7F E4 FB 78 */	mr r4, r31
@@ -106,6 +109,7 @@
 /* 8135FD64 0002E164  4E 80 00 20 */	blr
 .endfn Close__Q33ipl4nand7wrapperFP12NANDFileInfo
 
+# .text:0x14C | 0x8135FD68 | size: 0x74
 # ipl::nand::wrapper::Read(NANDFileInfo*, void*, unsigned long)
 .fn Read__Q33ipl4nand7wrapperFP12NANDFileInfoPvUl, global
 /* 8135FD68 0002E168  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -121,7 +125,7 @@
 /* 8135FD8C 0002E18C  7F 63 DB 78 */	mr r3, r27
 /* 8135FD90 0002E190  7F 84 E3 78 */	mr r4, r28
 /* 8135FD94 0002E194  7F A5 EB 78 */	mr r5, r29
-/* 8135FD98 0002E198  48 20 42 69 */	bl fn_81564000
+/* 8135FD98 0002E198  48 20 42 69 */	bl NANDRead
 /* 8135FD9C 0002E19C  3B FF 00 01 */	addi r31, r31, 0x1
 /* 8135FDA0 0002E1A0  7C 7E 1B 78 */	mr r30, r3
 /* 8135FDA4 0002E1A4  7F E4 FB 78 */	mr r4, r31
@@ -141,6 +145,7 @@
 /* 8135FDD8 0002E1D8  4E 80 00 20 */	blr
 .endfn Read__Q33ipl4nand7wrapperFP12NANDFileInfoPvUl
 
+# .text:0x1C0 | 0x8135FDDC | size: 0x74
 # ipl::nand::wrapper::Write(NANDFileInfo*, const void*, unsigned long)
 .fn Write__Q33ipl4nand7wrapperFP12NANDFileInfoPCvUl, global
 /* 8135FDDC 0002E1DC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -156,7 +161,7 @@
 /* 8135FE00 0002E200  7F 63 DB 78 */	mr r3, r27
 /* 8135FE04 0002E204  7F 84 E3 78 */	mr r4, r28
 /* 8135FE08 0002E208  7F A5 EB 78 */	mr r5, r29
-/* 8135FE0C 0002E20C  48 20 42 D5 */	bl fn_815640E0
+/* 8135FE0C 0002E20C  48 20 42 D5 */	bl NANDWrite
 /* 8135FE10 0002E210  3B FF 00 01 */	addi r31, r31, 0x1
 /* 8135FE14 0002E214  7C 7E 1B 78 */	mr r30, r3
 /* 8135FE18 0002E218  7F E4 FB 78 */	mr r4, r31
@@ -176,6 +181,7 @@
 /* 8135FE4C 0002E24C  4E 80 00 20 */	blr
 .endfn Write__Q33ipl4nand7wrapperFP12NANDFileInfoPCvUl
 
+# .text:0x234 | 0x8135FE50 | size: 0x74
 # ipl::nand::wrapper::Seek(NANDFileInfo*, long, long)
 .fn Seek__Q33ipl4nand7wrapperFP12NANDFileInfoll, global
 /* 8135FE50 0002E250  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -191,7 +197,7 @@
 /* 8135FE74 0002E274  7F 63 DB 78 */	mr r3, r27
 /* 8135FE78 0002E278  7F 84 E3 78 */	mr r4, r28
 /* 8135FE7C 0002E27C  7F A5 EB 78 */	mr r5, r29
-/* 8135FE80 0002E280  48 20 43 41 */	bl fn_815641C0
+/* 8135FE80 0002E280  48 20 43 41 */	bl NANDSeek
 /* 8135FE84 0002E284  3B FF 00 01 */	addi r31, r31, 0x1
 /* 8135FE88 0002E288  7C 7E 1B 78 */	mr r30, r3
 /* 8135FE8C 0002E28C  7F E4 FB 78 */	mr r4, r31
@@ -211,6 +217,7 @@
 /* 8135FEC0 0002E2C0  4E 80 00 20 */	blr
 .endfn Seek__Q33ipl4nand7wrapperFP12NANDFileInfoll
 
+# .text:0x2A8 | 0x8135FEC4 | size: 0x6C
 # ipl::nand::wrapper::GetLength(NANDFileInfo*, unsigned long*)
 .fn GetLength__Q33ipl4nand7wrapperFP12NANDFileInfoPUl, global
 /* 8135FEC4 0002E2C4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -224,7 +231,7 @@
 .L_8135FEE4:
 /* 8135FEE4 0002E2E4  7F 83 E3 78 */	mr r3, r28
 /* 8135FEE8 0002E2E8  7F A4 EB 78 */	mr r4, r29
-/* 8135FEEC 0002E2EC  48 20 4A 45 */	bl fn_81564930
+/* 8135FEEC 0002E2EC  48 20 4A 45 */	bl NANDGetLength
 /* 8135FEF0 0002E2F0  3B FF 00 01 */	addi r31, r31, 0x1
 /* 8135FEF4 0002E2F4  7C 7E 1B 78 */	mr r30, r3
 /* 8135FEF8 0002E2F8  7F E4 FB 78 */	mr r4, r31
@@ -244,12 +251,13 @@
 /* 8135FF2C 0002E32C  4E 80 00 20 */	blr
 .endfn GetLength__Q33ipl4nand7wrapperFP12NANDFileInfoPUl
 
+# .text:0x314 | 0x8135FF30 | size: 0x2C
 # ipl::nand::wrapper::SafeClose(NANDFileInfo*)
 .fn SafeClose__Q33ipl4nand7wrapperFP12NANDFileInfo, global
 /* 8135FF30 0002E330  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8135FF34 0002E334  7C 08 02 A6 */	mflr r0
 /* 8135FF38 0002E338  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8135FF3C 0002E33C  48 20 5A 65 */	bl fn_815659A0
+/* 8135FF3C 0002E33C  48 20 5A 65 */	bl NANDSafeClose
 /* 8135FF40 0002E340  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8135FF44 0002E344  41 82 00 08 */	beq .L_8135FF4C
 /* 8135FF48 0002E348  38 60 FF 80 */	li r3, -0x80
@@ -260,6 +268,7 @@
 /* 8135FF58 0002E358  4E 80 00 20 */	blr
 .endfn SafeClose__Q33ipl4nand7wrapperFP12NANDFileInfo
 
+# .text:0x340 | 0x8135FF5C | size: 0x74
 # ipl::nand::wrapper::ReadDir(const char*, char*, unsigned long*)
 .fn ReadDir__Q33ipl4nand7wrapperFPCcPcPUl, global
 /* 8135FF5C 0002E35C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -275,7 +284,7 @@
 /* 8135FF80 0002E380  7F 63 DB 78 */	mr r3, r27
 /* 8135FF84 0002E384  7F 84 E3 78 */	mr r4, r28
 /* 8135FF88 0002E388  7F A5 EB 78 */	mr r5, r29
-/* 8135FF8C 0002E38C  48 20 43 85 */	bl fn_81564310
+/* 8135FF8C 0002E38C  48 20 43 85 */	bl NANDReadDir
 /* 8135FF90 0002E390  3B FF 00 01 */	addi r31, r31, 0x1
 /* 8135FF94 0002E394  7C 7E 1B 78 */	mr r30, r3
 /* 8135FF98 0002E398  7F E4 FB 78 */	mr r4, r31
@@ -295,6 +304,7 @@
 /* 8135FFCC 0002E3CC  4E 80 00 20 */	blr
 .endfn ReadDir__Q33ipl4nand7wrapperFPCcPcPUl
 
+# .text:0x3B4 | 0x8135FFD0 | size: 0x74
 # ipl::nand::wrapper::CreateDir(const char*, unsigned char, unsigned char)
 .fn CreateDir__Q33ipl4nand7wrapperFPCcUcUc, global
 /* 8135FFD0 0002E3D0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -310,7 +320,7 @@
 /* 8135FFF4 0002E3F4  7F 63 DB 78 */	mr r3, r27
 /* 8135FFF8 0002E3F8  7F 84 E3 78 */	mr r4, r28
 /* 8135FFFC 0002E3FC  7F A5 EB 78 */	mr r5, r29
-/* 81360000 0002E400  48 20 45 C5 */	bl fn_815645C4
+/* 81360000 0002E400  48 20 45 C5 */	bl NANDCreateDir
 /* 81360004 0002E404  3B FF 00 01 */	addi r31, r31, 0x1
 /* 81360008 0002E408  7C 7E 1B 78 */	mr r30, r3
 /* 8136000C 0002E40C  7F E4 FB 78 */	mr r4, r31
@@ -330,6 +340,7 @@
 /* 81360040 0002E440  4E 80 00 20 */	blr
 .endfn CreateDir__Q33ipl4nand7wrapperFPCcUcUc
 
+# .text:0x428 | 0x81360044 | size: 0x64
 # ipl::nand::wrapper::ChangeDir(const char*)
 .fn ChangeDir__Q33ipl4nand7wrapperFPCc, global
 /* 81360044 0002E444  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -341,7 +352,7 @@
 /* 8136005C 0002E45C  3B E0 00 00 */	li r31, 0x0
 .L_81360060:
 /* 81360060 0002E460  7F A3 EB 78 */	mr r3, r29
-/* 81360064 0002E464  48 20 70 39 */	bl fn_8156709C
+/* 81360064 0002E464  48 20 70 39 */	bl NANDChangeDir
 /* 81360068 0002E468  3B FF 00 01 */	addi r31, r31, 0x1
 /* 8136006C 0002E46C  7C 7E 1B 78 */	mr r30, r3
 /* 81360070 0002E470  7F E4 FB 78 */	mr r4, r31
@@ -361,6 +372,7 @@
 /* 813600A4 0002E4A4  4E 80 00 20 */	blr
 .endfn ChangeDir__Q33ipl4nand7wrapperFPCc
 
+# .text:0x48C | 0x813600A8 | size: 0x64
 # ipl::nand::wrapper::Delete(const char*)
 .fn Delete__Q33ipl4nand7wrapperFPCc, global
 /* 813600A8 0002E4A8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -372,7 +384,7 @@
 /* 813600C0 0002E4C0  3B E0 00 00 */	li r31, 0x0
 .L_813600C4:
 /* 813600C4 0002E4C4  7F A3 EB 78 */	mr r3, r29
-/* 813600C8 0002E4C8  48 20 3D 31 */	bl fn_81563DF8
+/* 813600C8 0002E4C8  48 20 3D 31 */	bl NANDDelete
 /* 813600CC 0002E4CC  3B FF 00 01 */	addi r31, r31, 0x1
 /* 813600D0 0002E4D0  7C 7E 1B 78 */	mr r30, r3
 /* 813600D4 0002E4D4  7F E4 FB 78 */	mr r4, r31
@@ -392,6 +404,7 @@
 /* 81360108 0002E508  4E 80 00 20 */	blr
 .endfn Delete__Q33ipl4nand7wrapperFPCc
 
+# .text:0x4F0 | 0x8136010C | size: 0x6C
 # ipl::nand::wrapper::GetStatus(const char*, NANDStatus*)
 .fn GetStatus__Q33ipl4nand7wrapperFPCcP10NANDStatus, global
 /* 8136010C 0002E50C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -405,7 +418,7 @@
 .L_8136012C:
 /* 8136012C 0002E52C  7F 83 E3 78 */	mr r3, r28
 /* 81360130 0002E530  7F A4 EB 78 */	mr r4, r29
-/* 81360134 0002E534  48 20 4C B9 */	bl fn_81564DEC
+/* 81360134 0002E534  48 20 4C B9 */	bl NANDGetStatus
 /* 81360138 0002E538  3B FF 00 01 */	addi r31, r31, 0x1
 /* 8136013C 0002E53C  7C 7E 1B 78 */	mr r30, r3
 /* 81360140 0002E540  7F E4 FB 78 */	mr r4, r31
@@ -425,6 +438,7 @@
 /* 81360174 0002E574  4E 80 00 20 */	blr
 .endfn GetStatus__Q33ipl4nand7wrapperFPCcP10NANDStatus
 
+# .text:0x55C | 0x81360178 | size: 0x6C
 # ipl::nand::wrapper::GetType(const char*, unsigned char*)
 .fn GetType__Q33ipl4nand7wrapperFPCcPUc, global
 /* 81360178 0002E578  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -438,7 +452,7 @@
 .L_81360198:
 /* 81360198 0002E598  7F 83 E3 78 */	mr r3, r28
 /* 8136019C 0002E59C  7F A4 EB 78 */	mr r4, r29
-/* 813601A0 0002E5A0  48 20 73 9D */	bl fn_8156753C
+/* 813601A0 0002E5A0  48 20 73 9D */	bl NANDGetType
 /* 813601A4 0002E5A4  3B FF 00 01 */	addi r31, r31, 0x1
 /* 813601A8 0002E5A8  7C 7E 1B 78 */	mr r30, r3
 /* 813601AC 0002E5AC  7F E4 FB 78 */	mr r4, r31
@@ -458,6 +472,7 @@
 /* 813601E0 0002E5E0  4E 80 00 20 */	blr
 .endfn GetType__Q33ipl4nand7wrapperFPCcPUc
 
+# .text:0x5C8 | 0x813601E4 | size: 0x74
 # ipl::nand::wrapper::PrivateCreate(const char*, unsigned char, unsigned char)
 .fn PrivateCreate__Q33ipl4nand7wrapperFPCcUcUc, global
 /* 813601E4 0002E5E4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -473,7 +488,7 @@
 /* 81360208 0002E608  7F 63 DB 78 */	mr r3, r27
 /* 8136020C 0002E60C  7F 84 E3 78 */	mr r4, r28
 /* 81360210 0002E610  7F A5 EB 78 */	mr r5, r29
-/* 81360214 0002E614  48 20 3A F9 */	bl fn_81563D0C
+/* 81360214 0002E614  48 20 3A F9 */	bl NANDPrivateCreate
 /* 81360218 0002E618  3B FF 00 01 */	addi r31, r31, 0x1
 /* 8136021C 0002E61C  7C 7E 1B 78 */	mr r30, r3
 /* 81360220 0002E620  7F E4 FB 78 */	mr r4, r31
@@ -493,6 +508,7 @@
 /* 81360254 0002E654  4E 80 00 20 */	blr
 .endfn PrivateCreate__Q33ipl4nand7wrapperFPCcUcUc
 
+# .text:0x63C | 0x81360258 | size: 0x74
 # ipl::nand::wrapper::PrivateOpen(const char*, NANDFileInfo*, unsigned char)
 .fn PrivateOpen__Q33ipl4nand7wrapperFPCcP12NANDFileInfoUc, global
 /* 81360258 0002E658  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -508,7 +524,7 @@
 /* 8136027C 0002E67C  7F 63 DB 78 */	mr r3, r27
 /* 81360280 0002E680  7F 84 E3 78 */	mr r4, r28
 /* 81360284 0002E684  7F A5 EB 78 */	mr r5, r29
-/* 81360288 0002E688  48 20 50 71 */	bl fn_815652F8
+/* 81360288 0002E688  48 20 50 71 */	bl NANDPrivateOpen
 /* 8136028C 0002E68C  3B FF 00 01 */	addi r31, r31, 0x1
 /* 81360290 0002E690  7C 7E 1B 78 */	mr r30, r3
 /* 81360294 0002E694  7F E4 FB 78 */	mr r4, r31
@@ -528,12 +544,13 @@
 /* 813602C8 0002E6C8  4E 80 00 20 */	blr
 .endfn PrivateOpen__Q33ipl4nand7wrapperFPCcP12NANDFileInfoUc
 
+# .text:0x6B0 | 0x813602CC | size: 0x2C
 # ipl::nand::wrapper::PrivateSafeOpen(const char*, NANDFileInfo*, unsigned char, void*, unsigned long)
 .fn PrivateSafeOpen__Q33ipl4nand7wrapperFPCcP12NANDFileInfoUcPvUl, global
 /* 813602CC 0002E6CC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 813602D0 0002E6D0  7C 08 02 A6 */	mflr r0
 /* 813602D4 0002E6D4  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813602D8 0002E6D8  48 20 53 15 */	bl fn_815655EC
+/* 813602D8 0002E6D8  48 20 53 15 */	bl NANDPrivateSafeOpen
 /* 813602DC 0002E6DC  2C 03 00 00 */	cmpwi r3, 0x0
 /* 813602E0 0002E6E0  41 82 00 08 */	beq .L_813602E8
 /* 813602E4 0002E6E4  38 60 FF 80 */	li r3, -0x80
@@ -544,6 +561,7 @@
 /* 813602F4 0002E6F4  4E 80 00 20 */	blr
 .endfn PrivateSafeOpen__Q33ipl4nand7wrapperFPCcP12NANDFileInfoUcPvUl
 
+# .text:0x6DC | 0x813602F8 | size: 0x74
 # ipl::nand::wrapper::PrivateReadDir(const char*, char*, unsigned long*)
 .fn PrivateReadDir__Q33ipl4nand7wrapperFPCcPcPUl, global
 /* 813602F8 0002E6F8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -559,7 +577,7 @@
 /* 8136031C 0002E71C  7F 63 DB 78 */	mr r3, r27
 /* 81360320 0002E720  7F 84 E3 78 */	mr r4, r28
 /* 81360324 0002E724  7F A5 EB 78 */	mr r5, r29
-/* 81360328 0002E728  48 20 40 B9 */	bl fn_815643E0
+/* 81360328 0002E728  48 20 40 B9 */	bl NANDPrivateReadDir
 /* 8136032C 0002E72C  3B FF 00 01 */	addi r31, r31, 0x1
 /* 81360330 0002E730  7C 7E 1B 78 */	mr r30, r3
 /* 81360334 0002E734  7F E4 FB 78 */	mr r4, r31
@@ -579,6 +597,7 @@
 /* 81360368 0002E768  4E 80 00 20 */	blr
 .endfn PrivateReadDir__Q33ipl4nand7wrapperFPCcPcPUl
 
+# .text:0x750 | 0x8136036C | size: 0x74
 # ipl::nand::wrapper::PrivateCreateDir(const char*, unsigned char, unsigned char)
 .fn PrivateCreateDir__Q33ipl4nand7wrapperFPCcUcUc, global
 /* 8136036C 0002E76C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -594,7 +613,7 @@
 /* 81360390 0002E790  7F 63 DB 78 */	mr r3, r27
 /* 81360394 0002E794  7F 84 E3 78 */	mr r4, r28
 /* 81360398 0002E798  7F A5 EB 78 */	mr r5, r29
-/* 8136039C 0002E79C  48 20 42 9D */	bl fn_81564638
+/* 8136039C 0002E79C  48 20 42 9D */	bl NANDPrivateCreateDir
 /* 813603A0 0002E7A0  3B FF 00 01 */	addi r31, r31, 0x1
 /* 813603A4 0002E7A4  7C 7E 1B 78 */	mr r30, r3
 /* 813603A8 0002E7A8  7F E4 FB 78 */	mr r4, r31
@@ -614,6 +633,7 @@
 /* 813603DC 0002E7DC  4E 80 00 20 */	blr
 .endfn PrivateCreateDir__Q33ipl4nand7wrapperFPCcUcUc
 
+# .text:0x7C4 | 0x813603E0 | size: 0x64
 # ipl::nand::wrapper::PrivateDelete(const char*)
 .fn PrivateDelete__Q33ipl4nand7wrapperFPCc, global
 /* 813603E0 0002E7E0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -625,7 +645,7 @@
 /* 813603F8 0002E7F8  3B E0 00 00 */	li r31, 0x0
 .L_813603FC:
 /* 813603FC 0002E7FC  7F A3 EB 78 */	mr r3, r29
-/* 81360400 0002E800  48 20 3A A9 */	bl fn_81563EA8
+/* 81360400 0002E800  48 20 3A A9 */	bl NANDPrivateDelete
 /* 81360404 0002E804  3B FF 00 01 */	addi r31, r31, 0x1
 /* 81360408 0002E808  7C 7E 1B 78 */	mr r30, r3
 /* 8136040C 0002E80C  7F E4 FB 78 */	mr r4, r31
@@ -645,6 +665,7 @@
 /* 81360440 0002E840  4E 80 00 20 */	blr
 .endfn PrivateDelete__Q33ipl4nand7wrapperFPCc
 
+# .text:0x828 | 0x81360444 | size: 0x6C
 # ipl::nand::wrapper::PrivateMove(const char*, const char*)
 .fn PrivateMove__Q33ipl4nand7wrapperFPCcPCc, global
 /* 81360444 0002E844  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -658,7 +679,7 @@
 .L_81360464:
 /* 81360464 0002E864  7F 83 E3 78 */	mr r3, r28
 /* 81360468 0002E868  7F A4 EB 78 */	mr r4, r29
-/* 8136046C 0002E86C  48 20 44 61 */	bl fn_815648CC
+/* 8136046C 0002E86C  48 20 44 61 */	bl NANDPrivateMove
 /* 81360470 0002E870  3B FF 00 01 */	addi r31, r31, 0x1
 /* 81360474 0002E874  7C 7E 1B 78 */	mr r30, r3
 /* 81360478 0002E878  7F E4 FB 78 */	mr r4, r31
@@ -678,6 +699,7 @@
 /* 813604AC 0002E8AC  4E 80 00 20 */	blr
 .endfn PrivateMove__Q33ipl4nand7wrapperFPCcPCc
 
+# .text:0x894 | 0x813604B0 | size: 0x6C
 # ipl::nand::wrapper::PrivateGetType(const char*, unsigned char*)
 .fn PrivateGetType__Q33ipl4nand7wrapperFPCcPUc, global
 /* 813604B0 0002E8B0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -691,7 +713,7 @@
 .L_813604D0:
 /* 813604D0 0002E8D0  7F 83 E3 78 */	mr r3, r28
 /* 813604D4 0002E8D4  7F A4 EB 78 */	mr r4, r29
-/* 813604D8 0002E8D8  48 20 70 A9 */	bl fn_81567580
+/* 813604D8 0002E8D8  48 20 70 A9 */	bl NANDPrivateGetType
 /* 813604DC 0002E8DC  3B FF 00 01 */	addi r31, r31, 0x1
 /* 813604E0 0002E8E0  7C 7E 1B 78 */	mr r30, r3
 /* 813604E4 0002E8E4  7F E4 FB 78 */	mr r4, r31
@@ -711,6 +733,7 @@
 /* 81360518 0002E918  4E 80 00 20 */	blr
 .endfn PrivateGetType__Q33ipl4nand7wrapperFPCcPUc
 
+# .text:0x900 | 0x8136051C | size: 0x74
 # ipl::nand::wrapper::SecretGetUsage(const char*, unsigned long*, unsigned long*)
 .fn SecretGetUsage__Q33ipl4nand7wrapperFPCcPUlPUl, global
 /* 8136051C 0002E91C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -726,7 +749,7 @@
 /* 81360540 0002E940  7F 63 DB 78 */	mr r3, r27
 /* 81360544 0002E944  7F 84 E3 78 */	mr r4, r28
 /* 81360548 0002E948  7F A5 EB 78 */	mr r5, r29
-/* 8136054C 0002E94C  48 20 71 45 */	bl fn_81567690
+/* 8136054C 0002E94C  48 20 71 45 */	bl NANDSecretGetUsage
 /* 81360550 0002E950  3B FF 00 01 */	addi r31, r31, 0x1
 /* 81360554 0002E954  7C 7E 1B 78 */	mr r30, r3
 /* 81360558 0002E958  7F E4 FB 78 */	mr r4, r31
@@ -746,6 +769,7 @@
 /* 8136058C 0002E98C  4E 80 00 20 */	blr
 .endfn SecretGetUsage__Q33ipl4nand7wrapperFPCcPUlPUl
 
+# .text:0x974 | 0x81360590 | size: 0x6C
 # ipl::nand::wrapper::SecretGetUserUsage(unsigned long*, unsigned long*)
 .fn SecretGetUserUsage__Q33ipl4nand7wrapperFPUlPUl, global
 /* 81360590 0002E990  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -759,7 +783,7 @@
 .L_813605B0:
 /* 813605B0 0002E9B0  7F 83 E3 78 */	mr r3, r28
 /* 813605B4 0002E9B4  7F A4 EB 78 */	mr r4, r29
-/* 813605B8 0002E9B8  48 20 73 D9 */	bl fn_81567990
+/* 813605B8 0002E9B8  48 20 73 D9 */	bl NANDSecretGetUserUsage
 /* 813605BC 0002E9BC  3B FF 00 01 */	addi r31, r31, 0x1
 /* 813605C0 0002E9C0  7C 7E 1B 78 */	mr r30, r3
 /* 813605C4 0002E9C4  7F E4 FB 78 */	mr r4, r31
@@ -779,6 +803,7 @@
 /* 813605F8 0002E9F8  4E 80 00 20 */	blr
 .endfn SecretGetUserUsage__Q33ipl4nand7wrapperFPUlPUl
 
+# .text:0x9E0 | 0x813605FC | size: 0x84
 # ipl::nand::wrapper::SecretGetSystemAvailableArea(const NANDFileSystemStatus*, unsigned long, unsigned long, unsigned long*, unsigned long*)
 .fn SecretGetSystemAvailableArea__Q33ipl4nand7wrapperFPC20NANDFileSystemStatusUlUlPUlPUl, global
 /* 813605FC 0002E9FC  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -798,7 +823,7 @@
 /* 81360630 0002EA30  7F 65 DB 78 */	mr r5, r27
 /* 81360634 0002EA34  7F 86 E3 78 */	mr r6, r28
 /* 81360638 0002EA38  7F A7 EB 78 */	mr r7, r29
-/* 8136063C 0002EA3C  48 20 71 95 */	bl fn_815677D0
+/* 8136063C 0002EA3C  48 20 71 95 */	bl NANDSecretGetSystemAvailableArea
 /* 81360640 0002EA40  3B FF 00 01 */	addi r31, r31, 0x1
 /* 81360644 0002EA44  7C 7E 1B 78 */	mr r30, r3
 /* 81360648 0002EA48  7F E4 FB 78 */	mr r4, r31
@@ -818,6 +843,7 @@
 /* 8136067C 0002EA7C  4E 80 00 20 */	blr
 .endfn SecretGetSystemAvailableArea__Q33ipl4nand7wrapperFPC20NANDFileSystemStatusUlUlPUlPUl
 
+# .text:0xA64 | 0x81360680 | size: 0x64
 # ipl::nand::wrapper::SecretGetFileSystemStatus(NANDFileSystemStatus*)
 .fn SecretGetFileSystemStatus__Q33ipl4nand7wrapperFP20NANDFileSystemStatus, global
 /* 81360680 0002EA80  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -829,7 +855,7 @@
 /* 81360698 0002EA98  3B E0 00 00 */	li r31, 0x0
 .L_8136069C:
 /* 8136069C 0002EA9C  7F A3 EB 78 */	mr r3, r29
-/* 813606A0 0002EAA0  48 20 70 A9 */	bl fn_81567748
+/* 813606A0 0002EAA0  48 20 70 A9 */	bl NANDSecretGetFileSystemStatus
 /* 813606A4 0002EAA4  3B FF 00 01 */	addi r31, r31, 0x1
 /* 813606A8 0002EAA8  7C 7E 1B 78 */	mr r30, r3
 /* 813606AC 0002EAAC  7F E4 FB 78 */	mr r4, r31
@@ -849,6 +875,7 @@
 /* 813606E0 0002EAE0  4E 80 00 20 */	blr
 .endfn SecretGetFileSystemStatus__Q33ipl4nand7wrapperFP20NANDFileSystemStatus
 
+# .text:0xAC8 | 0x813606E4 | size: 0x80
 # ipl::nand::wrapper::_condition(int, int)
 .fn _condition__Q33ipl4nand7wrapperFii, global
 /* 813606E4 0002EAE4  94 21 FF F0 */	stwu r1, -0x10(r1)
