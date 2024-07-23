@@ -13,6 +13,10 @@ namespace ipl {
                 Object(EGG::Heap* pHeap, int width, int height, int faceId, void (*someFunc)(ipl::nigaoe::Object*, void*), void* pArg3);
                 Object(EGG::Heap* pHeap, int width, int height, RFLiCharData* charData, void (*someFunc)(ipl::nigaoe::Object*, void*), void* pArg3);
                 ~Object();
+
+                inline void SomeFunc(void* unk) {
+                    return (*mSomeFunc)(this, unk);
+                }
             
             private:
                 void init(EGG::Heap* pHeap, int width, int height);
@@ -30,10 +34,10 @@ namespace ipl {
                 
                 void (*mSomeFunc)(ipl::nigaoe::Object*, void*); // 0x40
                 
-                void* field_0x44;
+                void* unk_0x44;
                 u32 unused_0x48;
                 u32 unused_0x4c;
-                u8 field_0x50;
+                u8 unk_0x50;
         };
     }
 }

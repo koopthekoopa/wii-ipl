@@ -15,7 +15,7 @@ namespace ipl {
                 void InitMessageQueue(OSMessage* pMsg, s32 msgCount);
                 
             private:
-                undefined4 field_0x00;
+                undefined4 unk_0x00;
                 OSMessageQueue pMsgQueue; // 0x04
         };
     }

@@ -1,5 +1,5 @@
-#ifndef RFL_ICON_H
-#define RFL_ICON_H
+#ifndef REVOLUTION_FACE_ICON_H
+#define REVOLUTION_FACE_ICON_H
 
 #include <revolution/types.h>
 #include <revolution/gx.h>
@@ -32,6 +32,6 @@ RFLErrcode RFLMakeIcon(void* pBuffer, RFLDataSource source, RFLMiddleDB* middleD
 }
 #endif
 
-#endif // RFL_ICON_H
+#endif // REVOLUTION_FACE_ICON_H
 
 

@@ -1,5 +1,5 @@
-#ifndef RFL_TYPES_H
-#define RFL_TYPES_H
+#ifndef REVOLUTION_FACE_TYPES_H
+#define REVOLUTION_FACE_TYPES_H
 
 #include <revolution/types.h>
 
@@ -70,6 +70,6 @@ typedef struct {
 }
 #endif
 
-#endif // RFL_TYPES_H
+#endif // REVOLUTION_FACE_TYPES_H
 
 

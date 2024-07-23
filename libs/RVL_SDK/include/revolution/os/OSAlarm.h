@@ -13,16 +13,16 @@ typedef struct OSAlarm OSAlarm;
 typedef void (*OSAlarmHandler)(OSAlarm* alarm, OSContext* context);
 
 struct OSAlarm {
-    OSAlarmHandler  handler;
-    u32             tag;
-    OSTime          fire;
-    OSAlarm*        prev;
-    OSAlarm*        next;
+    OSAlarmHandler  handler;    // 0x00
+    u32             tag;        // 0x04
+    OSTime          fire;       // 0x08
+    OSAlarm*        prev;       // 0x0C
+    OSAlarm*        next;       // 0x10
 
-    OSTime          period;
-    OSTime          start;
+    OSTime          period;     // 0x14
+    OSTime          start;      // 0x18
 
-    void*           userData;
+    void*           userData;   // 0x1C
 };
 
 void OSCreateAlarm(OSAlarm* alarm);

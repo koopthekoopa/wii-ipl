@@ -37,7 +37,7 @@ COMMON_CCFLAGS =	-enum int \
 					-inline auto \
 					-Cpp_exceptions off \
 					-proc gekko \
-					-fp hardware \
+					-fp hard \
 					-RTTI off
 
 # Common Compiler Flags for Metrowork's libraries
@@ -45,7 +45,7 @@ COMMON_MW_CCFLAGS =	-enum int \
 					-inline auto \
 					-Cpp_exceptions off \
 					-proc gekko \
-					-fp hardware \
+					-fp hard \
 					-use_lmw_stmw on \
 					-rostr
 

@@ -11,15 +11,8 @@ namespace ipl {
             @Address: 0x8133EE00
             @Size: 0x48
         */
-        Object::Object(EGG::Heap* pHeap, int width, int height, int faceId, void (*someFunc)(ipl::nigaoe::Object*, void*), void* pArg3) {
-            mFaceId = faceId;
-            mpCharData = NULL;
-            
-            mSomeFunc = someFunc;
-            
-            field_0x44 = pArg3;
-            field_0x50 = 0;
-            
+        Object::Object(EGG::Heap* pHeap, int width, int height, int faceId, void (*someFunc)(ipl::nigaoe::Object*, void*), void* pArg3) 
+        : mFaceId(faceId), mpCharData(NULL), mSomeFunc(someFunc), unk_0x44(pArg3), unk_0x50(0) {
             init(pHeap, width, height);
         }
         
@@ -27,15 +20,8 @@ namespace ipl {
             @Address: 0x8133EE48
             @Size: 0x4C
         */
-        Object::Object(EGG::Heap* pHeap, int width, int height, RFLiCharData* charData, void (*someFunc)(ipl::nigaoe::Object*, void*), void* pArg3) {
-            mpCharData = charData;
-            mFaceId = -1;
-            
-            mSomeFunc = someFunc;
-            
-            field_0x44 = pArg3;
-            field_0x50 = 0;
-            
+        Object::Object(EGG::Heap* pHeap, int width, int height, RFLiCharData* charData, void (*someFunc)(ipl::nigaoe::Object*, void*), void* pArg3) 
+        : mFaceId(-1), mpCharData(charData), mSomeFunc(someFunc), unk_0x44(pArg3), unk_0x50(0) {
             init(pHeap, width, height);
         }
         
@@ -95,8 +81,8 @@ namespace ipl {
             
             GXInitTexObj(&mFaceTexObj, mpIconTex, mIconSettings.width, mIconSettings.height, GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP, GX_FALSE);
             
-            field_0x50 = 1;
-            mSomeFunc(this, field_0x44);
+            unk_0x50 = 1;
+            SomeFunc(unk_0x44);
         }
     }
 }

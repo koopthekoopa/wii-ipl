@@ -11,12 +11,12 @@ extern "C" {
 typedef void*   OSMessage;
 
 typedef struct {
-    OSThreadQueue   queueSend;
-    OSThreadQueue   queueReceive;
-    OSMessage*      msgArray;
-    s32             msgCount;
-    s32             firstIndex;
-    s32             usedCount;
+    OSThreadQueue   queueSend;      // 0x00
+    OSThreadQueue   queueReceive;   // 0x08
+    OSMessage*      msgArray;       // 0x10
+    s32             msgCount;       // 0x14
+    s32             firstIndex;     // 0x18
+    s32             usedCount;      // 0x1C
 } OSMessageQueue;
 
 void OSInitMessageQueue(OSMessageQueue* pMsgQueue, OSMessage* pMsg, s32 msgCount);

@@ -17,7 +17,7 @@ SYSTEM_OBJECTS	=	$(ASSEMBLY_ROOT)/rvl_dec.o \
 					$(ASSEMBLY_ROOT)/iplCdbWrapper.o \
 					$(ASSEMBLY_ROOT)/iplPlayTimeLog.o \
 					$(ASSEMBLY_ROOT)/iplNwc24Manager.o \
-					$(ASSEMBLY_ROOT)/iplPointer.o \
+					iplPointer.o \
 					$(ASSEMBLY_ROOT)/iplPointerCore.o \
 					$(ASSEMBLY_ROOT)/iplDialogWindow.o \
 					$(ASSEMBLY_ROOT)/iplHomeButtonMenu.o \

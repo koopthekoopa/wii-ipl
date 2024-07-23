@@ -7,15 +7,8 @@ namespace ipl {
             @Address: 0x813632A8
             @Size: 0x9C
         */
-        Capture::Capture(EGG::Heap* pHeap, int x, int y, int width, int height, _GXTexFmt texFmt) {
-            mXPos = (u16)x;
-            mYPos = (u16)y;
-            
-            mTextureWidth = (u16)width;
-            mTextureHeight = (u16)height;
-            
-            mTextureFormat = texFmt;
-            
+        Capture::Capture(EGG::Heap* pHeap, int x, int y, int width, int height, _GXTexFmt texFmt)
+        : mXPos(x), mYPos(y), mTextureWidth(width), mTextureHeight(height), mTextureFormat(texFmt) {
             mTextureSize = GXGetTexBufferSize(width, height, texFmt, GX_FALSE, 1);
             mTextureBuffer = new(pHeap, DOLPHIN_ALIGNMENT) u8[mTextureSize];
             

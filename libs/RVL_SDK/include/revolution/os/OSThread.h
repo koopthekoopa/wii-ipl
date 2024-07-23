@@ -16,50 +16,50 @@ typedef struct OSThread OSThread;
 typedef struct OSMutex OSMutex;
 
 typedef struct {
-    OSThread*  head;
-    OSThread*  tail;
+    OSThread*  head;    // 0x00
+    OSThread*  tail;    // 0x04
 } OSThreadQueue;
 
 typedef struct {
-    OSThread*  next;
-    OSThread*  prev;
+    OSThread*  next;    // 0x00
+    OSThread*  prev;    // 0x04
 } OSThreadLink;
 
 typedef struct {
-    OSMutex*   head;
-    OSMutex*   tail;
+    OSMutex*   head;    // 0x00
+    OSMutex*   tail;    // 0x04
 } OSMutexQueue;
 
 typedef struct {
-    OSMutex*   next;
-    OSMutex*   prev;
+    OSMutex*   next;    // 0x00
+    OSMutex*   prev;    // 0x04
 } OSMutexLink;
 
-struct OSThread{
-    OSContext       context;
+struct OSThread {
+    OSContext       context;                            // 0x00
 
-    u16             state;
-    u16             attr; 
-    s32             suspend;
-    OSPriority      priority;
-    OSPriority      base;
-    void*           val;
+    u16             state;                              // 0x2C8
+    u16             attr;                               // 0x2CA
+    s32             suspend;                            // 0x2CC
+    OSPriority      priority;                           // 0x2D0
+    OSPriority      base;                               // 0x2D4
+    void*           val;                                // 0x2D8
 
-    OSThreadQueue*  queue;
-    OSThreadLink    link;
+    OSThreadQueue*  queue;                              // 0x2DC
+    OSThreadLink    link;                               // 0x2E0
 
-    OSThreadQueue   queueJoin;
+    OSThreadQueue   queueJoin;                          // 0x2E8
 
-    OSMutex*        mutex;
-    OSMutexQueue    queueMutex;
+    OSMutex*        mutex;                              // 0x2F0
+    OSMutexQueue    queueMutex;                         // 0x2F8
 
-    OSThreadLink    linkActive;
+    OSThreadLink    linkActive;                         // 0x300
 
-    u8*             stackBase;
-    u32*            stackEnd;
+    u8*             stackBase;                          // 0x308
+    u32*            stackEnd;                           // 0x30C
 
-    s32             error;
-    void*           specific[OS_THREAD_SPECIFIC_MAX];
+    s32             error;                              // 0x310
+    void*           specific[OS_THREAD_SPECIFIC_MAX];   // 0x314
 };
 
 #ifdef __cplusplus

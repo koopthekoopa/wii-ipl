@@ -8,14 +8,14 @@ extern "C" {
 #include <revolution/os/OSThread.h>
 
 struct OSMutex {
-    OSThreadQueue   queue;
-    OSThread*       thread;
-    s32             count;
-    OSMutexLink     link;
+    OSThreadQueue   queue;  // 0x00
+    OSThread*       thread; // 0x08
+    s32             count;  // 0x0C
+    OSMutexLink     link;   // 0x10
 };
 
 struct OSCond {
-    OSThreadQueue   queue;
+    OSThreadQueue   queue;  // 0x00
 };
 
 #ifdef __cplusplus

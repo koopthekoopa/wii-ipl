@@ -3,14 +3,14 @@
 
 namespace ipl {
     namespace System {
-        u8 smArg[0x02D8];
+        ArgData smArg;
     
         /*
             @Address 0x81332C24
             @Size 0x48
         */
         Arg::Arg() {
-            memset(smArg, 0, 0x02D8);
+            memset(&smArg, 0, 0x02D8);
             OSCreateAlarm(&unkAlarm);
         }
         
@@ -19,7 +19,7 @@ namespace ipl {
             @Size 0x18
         */
         bool isResetAcceptable() {
-            return smArg[0x02B9] == 0;
+            return smArg.pad1[0x249] == 0;
         }
     }
 }

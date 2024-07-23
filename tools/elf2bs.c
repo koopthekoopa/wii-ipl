@@ -6,28 +6,28 @@
 
 typedef struct {
     // "identifier"
-	uint32_t i_magic; // 0x00
-	uint8_t i_bit; // 0x04
-	uint8_t i_endian; // 0x05
-	uint8_t i_version; // 0x06
-	uint8_t i_osabi; // 0x07
-	uint8_t i_abiversion; // 0x08
-	uint8_t i_pad[7]; // 0x09
+    uint32_t i_magic; // 0x00
+    uint8_t i_bit; // 0x04
+    uint8_t i_endian; // 0x05
+    uint8_t i_version; // 0x06
+    uint8_t i_osabi; // 0x07
+    uint8_t i_abiversion; // 0x08
+    uint8_t i_pad[7]; // 0x09
     
     // header
-	uint16_t type;
-	uint16_t machine;
-	uint32_t version;
-	uint32_t entry;
-	uint32_t phoff;
-	uint32_t shoff;
-	uint32_t flags;
-	uint16_t ehsize;
-	uint16_t phentsize;
-	uint16_t phnum;
-	uint16_t shentsize;
-	uint16_t shnum;
-	uint16_t shstrndx;
+    uint16_t type;
+    uint16_t machine;
+    uint32_t version;
+    uint32_t entry;
+    uint32_t phoff;
+    uint32_t shoff;
+    uint32_t flags;
+    uint16_t ehsize;
+    uint16_t phentsize;
+    uint16_t phnum;
+    uint16_t shentsize;
+    uint16_t shnum;
+    uint16_t shstrndx;
 } PPCElfHead;
 
 typedef struct {
@@ -50,11 +50,11 @@ typedef struct {
 } BSHead;
 
 static inline uint32_t be32(uint32_t v) {
-	return (v >> 24) | ((v >> 8)  & 0x0000FF00) | ((v << 8)  & 0x00FF0000) | (v << 24);
+    return (v >> 24) | ((v >> 8)  & 0x0000FF00) | ((v << 8)  & 0x00FF0000) | (v << 24);
 }
 
 static inline uint16_t be16(uint16_t v) {
-	return (v >> 8) | (v << 8);
+    return (v >> 8) | (v << 8);
 }
 
 static bool gotArg(char* arg0, char* arg1) {

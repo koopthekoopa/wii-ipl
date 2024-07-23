@@ -1,5 +1,5 @@
-#ifndef EGG_DISPOSER_H
-#define EGG_DISPOSER_H
+#ifndef EGG_CORE_DISPOSER_H
+#define EGG_CORE_DISPOSER_H
 
 #include <nw4r/ut/list.h>
 
@@ -17,6 +17,6 @@ namespace EGG {
     };
 }
 
-#endif // EGG_DISPOSER_H
+#endif // EGG_CORE_DISPOSER_H
 
 

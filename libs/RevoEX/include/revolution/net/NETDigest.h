@@ -1,5 +1,5 @@
-#ifndef REVOEX_NET_NETDIGEST_H
-#define REVOEX_NET_NETDIGEST_H
+#ifndef REVOEX_NET_DIGEST_H
+#define REVOEX_NET_DIGEST_H
 
 #include <revolution/types.h>
 
@@ -13,6 +13,6 @@ u32 NETCalcCRC32(const void* data, s32 size);
 }
 #endif
 
-#endif // REVOEX_NET_NETDIGEST_H
+#endif // REVOEX_NET_DIGEST_H
 
 

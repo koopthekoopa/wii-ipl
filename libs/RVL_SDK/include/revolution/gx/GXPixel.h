@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-void GXSetDither(GXBool dither);
+void GXSetDither(GXBool enable);
 
 #ifdef __cplusplus
 }

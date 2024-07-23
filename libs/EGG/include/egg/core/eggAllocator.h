@@ -1,5 +1,5 @@
-#ifndef EGG_ALLOCATOR_H
-#define EGG_ALLOCATOR_H
+#ifndef EGG_CORE_ALLOCATOR_H
+#define EGG_CORE_ALLOCATOR_H
 
 namespace EGG {
     class Allocator {
@@ -9,6 +9,6 @@ namespace EGG {
     };
 }
 
-#endif // EGG_ALLOCATOR_H
+#endif // EGG_CORE_ALLOCATOR_H
 
 
