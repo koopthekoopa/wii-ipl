@@ -4,11 +4,11 @@
 #include <decomp_types.h>
 #include <revolution.h>
 #include <egg/core.h>
-#include <nw4r/math/types.h>
 #include "system/iplSystem.h"
 #include "system/iplPointerCore.h"
 #include "system/iplNand.h"
 #include "layout/iplLayout.h"
+#include "utility/iplMath.h"
 
 #define MAX_LAYOUT_FILES    9
 
@@ -25,21 +25,24 @@ namespace ipl {
             void calc();
             void draw();
             
-            void setState(int chan, int unk1);
-            void changeType(int chan, int unk1);
+            void setState(int chan, int state);
+            void changeType(int chan, int type);
 
-            layout::Object* get_layout(int chan, BOOL grabbing = FALSE);
+            layout::Object* get_layout(int chan, int type = POINTER_LYT_TYPE_POINT);
         
         public:
             nand::LayoutFile* mLayoutArchive;                   // 0x00
             layout::Object* mLayoutObject[MAX_LAYOUT_FILES];    // 0x04
             
             int unk_0x28;
-            nw4r::math::VEC2 mOriginPos;                        // 0x2C
+            math::VEC2 mOriginPos;                              // 0x2C
+
             f32 mArrowLength;                                   // 0x34
             PointerDirection mPointDirection;
+
             bool mScrolling;                                    // 0x3C
             bool unk_0x3D;
+            
             u8 unk_0x3E;
             u8 unk_0x3F;
             

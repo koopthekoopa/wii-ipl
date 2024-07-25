@@ -1,6 +1,11 @@
+#define OVERRIDE_PANE_SETTRANSLATE
+
 #include "system/iplPointer.h"
+#include <nw4r/math/types.h>
 #include <nw4r/lyt/types.h>
 #include <nw4r/lyt/pane.h>
+#include <nw4r/ut/inlines.h>
+#include "utility/iplUtility.h"
 
 namespace ipl {
     #define MINIMUM_LENGTH    32
@@ -64,29 +69,25 @@ namespace ipl {
             pOriginPane->SetTranslate(mOriginPos);
 
             // Arrow Length
-            {
-                nw4r::lyt::Size arrowSize = pArrowPane->GetSize();
-                // Limit the length between 32 and 128
-                newArrowLength = mArrowLength < MINIMUM_LENGTH ? newArrowLength = MINIMUM_LENGTH :
-                                (mArrowLength > MAXIMUM_LENGTH ? newArrowLength = MAXIMUM_LENGTH : newArrowLength = mArrowLength);
-                arrowSize.height = newArrowLength;
+            nw4r::lyt::Size arrowSize = pArrowPane->GetSize();
+            // Limit the length between 32 and 128
+            newArrowLength = UTILITY_CLAMP(mArrowLength, MINIMUM_LENGTH, MAXIMUM_LENGTH);
+            arrowSize.height = newArrowLength;
 
-                // Set the new length
-                pArrowPane->SetSize(arrowSize);
-            }
+            // Set the new length
+            pArrowPane->SetSize(arrowSize);
 
             // Arrow Scale
-            {
-                // Y Scale:  1.0 = Down
-                // Y Scale: -1.0 = Up
-                if (mPointDirection == PNT_DOWN) {
-                    newYScale = 1.0;
-                }
-                else {
-                    newYScale = -1.0;
-                }
-                pArrowRoot->SetScale(nw4r::math::VEC2(1.0, newYScale));
+            // Y Scale:  1.0 = Down
+            // Y Scale: -1.0 = Up
+            if (mPointDirection == PNT_DOWN) {
+                newYScale = 1.0;
             }
+            else {
+                newYScale = -1.0;
+            }
+            pArrowRoot->SetScale(math::VEC2(1.0, newYScale));
+
 
             pArrowRoot->SetVisible(mScrolling);
             pOriginPane->SetVisible(!mScrolling);
@@ -94,29 +95,7 @@ namespace ipl {
             mLayoutObject[LYT_SCROLLER_ID]->calc();
         }
     }
-}
 
-namespace nw4r {
-    namespace lyt {
-        /*
-            @Address: 0x813443E4
-            @Size: 0x30
-        */
-        void Pane::SetTranslate(const math::VEC2& translate) {
-            mTranslate = math::VEC3(translate.x, translate.y, 0);
-        }
-
-        /*
-            @Address: 0x81344414
-            @Size: 0x14
-        */
-        void Pane::SetVisible(bool visible) {
-            detail::SetBit(&mFlags, 0, visible);
-        }
-    }
-}
-
-namespace ipl {
     /*
         @Address: 0x81344428
         @Size: 0x50
@@ -134,28 +113,28 @@ namespace ipl {
         @Address: 0x81344478
         @Size: 0x8
     */
-    void Pointer::setState(int chan, int unk1) {
-        mCore.setState(chan, unk1);
+    void Pointer::setState(int chan, int state) {
+        mCore.setState(chan, state);
     }
 
     /*
         @Address: 0x81344480
         @Size: 0x8
     */
-    void Pointer::changeType(int chan, int unk1) {
-        mCore.changeType(chan, unk1);
+    void Pointer::changeType(int chan, int type) {
+        mCore.changeType(chan, type);
     }
 
     /*
         @Address: 0x81344488
         @Size: 0x3C
     */
-    layout::Object* Pointer::get_layout(int chan, BOOL grabbing) {
+    layout::Object* Pointer::get_layout(int chan, int type) {
         int grabId = LYT_INVALID_ID;
 
-        switch (grabbing) {
-            case FALSE: grabId = LYT_POINT_ID; break;
-            case TRUE: grabId = LYT_GRAB_ID; break;
+        switch (type) {
+            case POINTER_LYT_TYPE_POINT: grabId = LYT_POINT_ID; break;
+            case POINTER_LYT_TYPE_GRABBING: grabId = LYT_GRAB_ID; break;
         }
 
         return mLayoutObject[grabId + chan];

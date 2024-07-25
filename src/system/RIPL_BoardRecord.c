@@ -14,25 +14,24 @@ const char* RBRFileType_Log = "log";
     @Address 0x81332B48
     @Size 0x98
 */
-u8* RBRGetPicture(u32* rbrData, s32* maybeRbrSize) {
+u8* RBRGetPicture(u32* pRbrData, s32* dataSize) {
     u8* pRetData = NULL;
 
-    if (rbrData[0] == RBR_SIGNATURE && rbrData[(RBR_HEADER_SIZE / sizeof(rbrData[0]))] == NETCalcCRC32(rbrData, RBR_HEADER_SIZE)) {
+    if (pRbrData[0] == RBR_SIGNATURE && pRbrData[(RBR_HEADER_SIZE / sizeof(pRbrData[0]))] == NETCalcCRC32(pRbrData, RBR_HEADER_SIZE)) {
         u32 index = 0;
         u32 count = 2;
 
-        while(count != 0) {
-            RBRAttachment* pData = (RBRAttachment*)&rbrData[index];
+        while(count--) {
+            RBRAttachment* pData = (RBRAttachment*)&pRbrData[index];
 
             if (pData->type == RBR_IMAGE_TYPE) {
-                pRetData = (u8*)rbrData + pData->dataOffset;
-                *maybeRbrSize = pData->maybeSize;
+                pRetData = (u8*)pRbrData + pData->dataOffset;
+                *dataSize = pData->dataSize;
                 
                 break;
             }
             
             index += 3;
-            count--;
         };
     }
 

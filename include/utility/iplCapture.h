@@ -11,7 +11,7 @@ namespace ipl {
             public:
                 Capture(EGG::Heap* pHeap, int x, int y, int width, int height, _GXTexFmt texFmt);
                 ~Capture();
-                void capture(BOOL unk);
+                void capture(BOOL copyFilter);
             
             private:
                 u16 mXPos;                  // 0x00

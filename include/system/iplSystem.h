@@ -3,7 +3,8 @@
 
 #include <revolution.h>
 #include "system/iplNand.h"
-#include "system/iplNand.h"
+#include "system/iplController.h"
+#include <nw4r/ut/Rect.h>
 
 namespace ipl {
     namespace System {
@@ -28,7 +29,11 @@ namespace ipl {
         void init(int argc, char** argv);
         void run();
         
+        // stubs for now
         GXRenderModeObj* getRenderModeObj();
+        controller::Interface* getController(int chan);
+        void getProjectionRect(nw4r::ut::Rect* prjRect);
+        void getProjectionRect4x3(nw4r::ut::Rect* prjRect);
 
         // Inlines
 

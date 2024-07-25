@@ -27,10 +27,10 @@ namespace ipl {
             @Address: 0x8136339C
             @Size: 0xC0
         */
-        void Capture::capture(BOOL unk) {
+        void Capture::capture(BOOL copyFilter) {
             DCInvalidateRange(mTextureBuffer, mTextureSize);
             
-            if (!unk) {
+            if (!copyFilter) {
                 GXRenderModeObj *pRmode = System::getRenderModeObj();
                 GXSetCopyFilter(GX_FALSE, pRmode->sample_pattern, GX_FALSE, pRmode->vfilter);
             }
@@ -41,7 +41,7 @@ namespace ipl {
             GXCopyTex(mTextureBuffer, GX_FALSE);
             GXPixModeSync();
             
-            if (unk == FALSE) {
+            if (!copyFilter) {
                 GXRenderModeObj *pRmode = System::getRenderModeObj();
                 GXSetCopyFilter(pRmode->aa, pRmode->sample_pattern, GX_TRUE, pRmode->vfilter);
             }

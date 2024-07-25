@@ -11,7 +11,7 @@ typedef struct RBRUnkStruct {
     u32 unk[0x4A];
     s32 type;
     u32 dataOffset;
-    s32 maybeSize;
+    s32 dataSize;
 } RBRAttachment;
 
 extern const char* RBRFileType_Txt;
@@ -19,7 +19,7 @@ extern const char* RBRFileType_Odh;
 extern const char* RBRFileType_Dat;
 extern const char* RBRFileType_Log;
 
-extern u8* RBRGetPicture(u32* rbrData, s32* unkData);
+extern u8* RBRGetPicture(u32* pRbrData, s32* dataSize);
 extern void RBRGetPosRect(f32* left, f32* right, f32* top, f32* bottom);
 
 #ifdef __cplusplus
