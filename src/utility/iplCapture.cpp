@@ -1,12 +1,13 @@
-#include "system/iplSystem.h"
 #include "utility/iplCapture.h"
+
+#include "system/iplSystem.h"
 
 namespace ipl {
     namespace utility {
         /*
-            @Address: 0x813632A8
-            @Size: 0x9C
-        */
+         * @note Address: 0x813632A8 (4.3U)
+         * @note Size: 0x9C
+         */
         Capture::Capture(EGG::Heap* pHeap, int x, int y, int width, int height, _GXTexFmt texFmt)
         : mXPos(x), mYPos(y), mTextureWidth(width), mTextureHeight(height), mTextureFormat(texFmt) {
             mTextureSize = GXGetTexBufferSize(width, height, texFmt, GX_FALSE, 1);
@@ -16,17 +17,17 @@ namespace ipl {
         }
         
         /*
-            @Address: 0x81363344
-            @Size: 0x58
-        */
+         * @note Address: 0x81363344 (4.3U)
+         * @note Size: 0x58
+         */
         Capture::~Capture() {
             delete[] mTextureBuffer;
         }
         
         /*
-            @Address: 0x8136339C
-            @Size: 0xC0
-        */
+         * @note Address: 0x8136339C (4.3U)
+         * @note Size: 0xC0
+         */
         void Capture::capture(BOOL copyFilter) {
             DCInvalidateRange(mTextureBuffer, mTextureSize);
             

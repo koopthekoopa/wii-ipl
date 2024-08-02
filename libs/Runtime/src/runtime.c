@@ -1,4 +1,4 @@
-#include <decomp_vscode.h>
+#include <decomp_ide.h>
 
 #define save_restore_reg    r11
 
@@ -130,9 +130,9 @@ L_815F93EC:
 }
 
 /*
-    @Address 0x815F948C
-    @Size 0x4C
-*/
+ * @note Address 0x815F948C
+ * @note Size 0x4C
+ */
 static asm void __save_fpr() {
     nofralloc
 
@@ -176,9 +176,9 @@ static asm void __save_fpr() {
 }
 
 /*
-    @Address 0x815F9440
-    @Size 0x4C
-*/
+ * @note Address 0x815F9440
+ * @note Size 0x4C
+ */
 static asm void __restore_fpr() {
     nofralloc
     ENTRY_RESTORE_FPR(14)
@@ -221,9 +221,9 @@ static asm void __restore_fpr() {
 }
 
 /*
-    @Address 0x815F948C
-    @Size 0x4C
-*/
+ * @note Address 0x815F948C
+ * @note Size 0x4C
+ */
 static asm void __save_gpr() {
     nofralloc
     ENTRY_SAVE_GPR(14)
@@ -266,9 +266,9 @@ static asm void __save_gpr() {
 }
 
 /*
-    @Address 0x815F94D8
-    @Size 0x4C
-*/
+ * @note Address 0x815F94D8
+ * @note Size 0x4C
+ */
 static asm void __restore_gpr() {
     nofralloc
     ENTRY_RESTORE_GPR(14)
@@ -311,9 +311,9 @@ static asm void __restore_gpr() {
 }
 
 /*
-    @note Address: 0x815F9524
-    @note Size: 0xEC
-*/
+ * @note Address: 0x815F9524 (4.3U)
+ * @note Size: 0xEC
+ */
 asm void __div2u() {
 /* 815F9524 002C7924  2C 03 00 00 */    cmpwi r3, 0x0
 /* 815F9528 002C7928  7C 60 00 34 */    cntlzw r0, r3
@@ -386,9 +386,9 @@ L_815F9604:
 }
 
 /*
-    @note Address: 0x815F9610
-    @note Size: 0x138
-*/
+ * @note Address: 0x815F9610 (4.3U)
+ * @note Size: 0x138
+ */
 asm void __div2i() {
 /* 815F9610 002C7A10  94 21 FF F0 */    stwu r1, -0x10(r1)
 /* 815F9614 002C7A14  54 69 00 01 */    clrrwi. r9, r3, 31
@@ -484,9 +484,9 @@ L_815F9740:
 }
 
 /*
-    @note Address: 0x815F9748
-    @note Size: 0xE4
-*/
+ * @note Address: 0x815F9748 (4.3U)
+ * @note Size: 0xE4
+ */
 asm void __mod2u() {
 /* 815F9748 002C7B48  2C 03 00 00 */    cmpwi r3, 0x0
 /* 815F974C 002C7B4C  7C 60 00 34 */    cntlzw r0, r3
@@ -557,9 +557,9 @@ L_815F9828:
 }
 
 /*
-    @note Address: 0x815F982C
-    @note Size: 0x10C
-*/
+ * @note Address: 0x815F982C (4.3U)
+ * @note Size: 0x10C
+ */
 asm void __mod2i() {
 /* 815F982C 002C7C2C  2F 83 00 00 */    cmpwi cr7, r3, 0x0
 /* 815F9830 002C7C30  40 9C 00 0C */    bge cr7, L_815F983C
@@ -643,9 +643,9 @@ L_815F9934:
 }
 
 /*
-    @note Address: 0x815F9938
-    @note Size: 0x24
-*/
+ * @note Address: 0x815F9938 (4.3U)
+ * @note Size: 0x24
+ */
 asm void __shl2i() {
 /* 815F9938 002C7D38  21 05 00 20 */    subfic r8, r5, 0x20
 /* 815F993C 002C7D3C  31 25 FF E0 */    subic r9, r5, 0x20
@@ -659,9 +659,9 @@ asm void __shl2i() {
 }
 
 /*
-    @note Address: 0x815F995C
-    @note Size: 0x24
-*/
+ * @note Address: 0x815F995C (4.3U)
+ * @note Size: 0x24
+ */
 asm void __shr2u() {
 /* 815F995C 002C7D5C  21 05 00 20 */    subfic r8, r5, 0x20
 /* 815F9960 002C7D60  31 25 FF E0 */    subic r9, r5, 0x20
@@ -675,9 +675,9 @@ asm void __shr2u() {
 }
 
 /*
-    @note Address: 0x815F9980
-    @note Size: 0x28
-*/
+ * @note Address: 0x815F9980 (4.3U)
+ * @note Size: 0x28
+ */
 asm void __shr2i() {
 /* 815F9980 002C7D80  21 05 00 20 */    subfic r8, r5, 0x20
 /* 815F9984 002C7D84  35 25 FF E0 */    subic. r9, r5, 0x20
@@ -693,9 +693,9 @@ L_815F99A0:
 }
 
 /*
-    @note Address: 0x815F99A8
-    @note Size: 0xB0
-*/
+ * @note Address: 0x815F99A8 (4.3U)
+ * @note Size: 0xB0
+ */
 asm void __cvt_sll_dbl() {
 /* 815F99A8 002C7DA8  94 21 FF F0 */    stwu r1, -0x10(r1)
 /* 815F99AC 002C7DAC  54 65 00 01 */    clrrwi. r5, r3, 31
@@ -748,9 +748,9 @@ L_815F9A44:
 }
 
 /*
-    @note Address: 0x815F9A58
-    @note Size: 0x9C
-*/
+ * @note Address: 0x815F9A58 (4.3U)
+ * @note Size: 0x9C
+ */
 asm void __cvt_ull_dbl() {
 /* 815F9A58 002C7E58  94 21 FF F0 */    stwu r1, -0x10(r1)
 /* 815F9A5C 002C7E5C  7C 67 23 79 */    or. r7, r3, r4
@@ -797,9 +797,9 @@ L_815F9AE0:
 }
 
 /*
-    @note Address: 0x815F9AF4
-    @note Size: 0xA0
-*/
+ * @note Address: 0x815F9AF4 (4.3U)
+ * @note Size: 0xA0
+ */
 asm void __cvt_ull_flt() {
 /* 815F9AF4 002C7EF4  94 21 FF F0 */    stwu r1, -0x10(r1)
 /* 815F9AF8 002C7EF8  7C 67 23 79 */    or. r7, r3, r4
@@ -847,9 +847,9 @@ L_815F9B7C:
 }
 
 /*
-    @note Address: 0x815F9B94
-    @note Size: 0xCC
-*/
+ * @note Address: 0x815F9B94 (4.3U)
+ * @note Size: 0xCC
+ */
 asm void __cvt_dbl_usll() {
 /* 815F9B94 002C7F94  94 21 FF F0 */    stwu r1, -0x10(r1)
 /* 815F9B98 002C7F98  D8 21 00 08 */    stfd f1, 0x8(r1)
@@ -911,9 +911,9 @@ L_815F9C58:
 }
 
 /*
-    @note Address: 0x815F9C60
-    @note Size: 0xAB
-*/
+ * @note Address: 0x815F9C60 (4.3U)
+ * @note Size: 0xAB
+ */
 asm void __cvt_dbl_ull() {
 /* 815F9C60 002C8060  94 21 FF F0 */    stwu r1, -0x10(r1)
 /* 815F9C64 002C8064  D8 21 00 08 */    stfd f1, 0x8(r1)

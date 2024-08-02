@@ -2,13 +2,17 @@
 #define IPL_POINTER_H
 
 #include <decomp_types.h>
+
 #include <revolution.h>
+
 #include <egg/core.h>
-#include "system/iplSystem.h"
-#include "system/iplPointerCore.h"
+
 #include "system/iplNand.h"
-#include "layout/iplLayout.h"
+#include "system/iplPointerCore.h"
+
 #include "utility/iplMath.h"
+
+#include "layout/iplLayout.h"
 
 #define MAX_LAYOUT_FILES    9
 
@@ -22,31 +26,31 @@ namespace ipl {
         public:
             Pointer(EGG::Heap* pHeap);
 
-            void calc();
-            void draw();
+            void            calc();
+            void            draw();
             
-            void setState(int chan, int state);
-            void changeType(int chan, int type);
+            void            setState(int chan, int state);
+            void            changeType(int chan, int type);
 
-            layout::Object* get_layout(int chan, int type = POINTER_LYT_TYPE_POINT);
+            layout::Object* get_layout(int chan, int type);
         
         public:
-            nand::LayoutFile* mLayoutArchive;                   // 0x00
-            layout::Object* mLayoutObject[MAX_LAYOUT_FILES];    // 0x04
+            nand::LayoutFile*   mLayoutArchive;                     // 0x00
+            layout::Object*     mLayoutObject[MAX_LAYOUT_FILES];    // 0x04
             
-            int unk_0x28;
-            math::VEC2 mOriginPos;                              // 0x2C
+            int                 unk_0x28;
+            math::VEC2          mOriginPos;                         // 0x2C
 
-            f32 mArrowLength;                                   // 0x34
-            PointerDirection mPointDirection;
+            f32                 mArrowLength;                       // 0x34
+            PointerDirection    mPointDirection;
 
-            bool mScrolling;                                    // 0x3C
-            bool unk_0x3D;
+            bool                mScrolling;                         // 0x3C
+            bool                unk_0x3D;
             
-            u8 unk_0x3E;
-            u8 unk_0x3F;
+            u8                  unk_0x3E;
+            u8                  unk_0x3F;
             
-            PointerCore mCore;                                  // 0x40
+            PointerCore         mCore;                              // 0x40
     };
 }
 

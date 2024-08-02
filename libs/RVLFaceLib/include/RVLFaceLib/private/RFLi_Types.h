@@ -137,10 +137,10 @@ typedef struct RFLiCharData {
     u16 favoriteColor : 4;
     u16 favorite : 1;
 
-    wchar_t name[RFL_NAME_LENGTH];  // 0x02
-    u8 height;                      // 0x16
-    u8 build;                       // 0x17
-    RFLCreateID createID;           // 0x18
+    wchar_t     name[RFL_NAME_LENGTH];  // 0x02
+    u8          height;                 // 0x16
+    u8          build;                  // 0x17
+    RFLCreateID createID;               // 0x18
 
     // 0x20
     u16 faceType : 3;

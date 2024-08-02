@@ -1,4 +1,5 @@
 #include "system/RIPL_BoardRecord.h"
+
 #include <revolution/net/NETDigest.h>
 
 #define RBR_SIGNATURE       'RI_5'
@@ -11,9 +12,9 @@ const char* RBRFileType_Dat = "dat";
 const char* RBRFileType_Log = "log";
 
 /*
-    @Address 0x81332B48
-    @Size 0x98
-*/
+ * @note Address 0x81332B48 (4.3U/4.3E)
+ * @note Size 0x98
+ */
 u8* RBRGetPicture(u32* pRbrData, s32* dataSize) {
     u8* pRetData = NULL;
 
@@ -22,7 +23,7 @@ u8* RBRGetPicture(u32* pRbrData, s32* dataSize) {
         u32 count = 2;
 
         while(count--) {
-            RBRAttachment* pData = (RBRAttachment*)&pRbrData[index];
+            RBRSomeData* pData = (RBRSomeData*)&pRbrData[index];
 
             if (pData->type == RBR_IMAGE_TYPE) {
                 pRetData = (u8*)pRbrData + pData->dataOffset;
@@ -39,9 +40,9 @@ u8* RBRGetPicture(u32* pRbrData, s32* dataSize) {
 }
 
 /*
-    @Address 0x81332BE0
-    @Size 0x44
-*/
+ * @note Address 0x81332BE0 (4.3U/4.3E)
+ * @note Size 0x44
+ */
 void RBRGetPosRect(f32* left, f32* right, f32* top, f32* bottom) {
     if (left != NULL) {
         *left = -230;

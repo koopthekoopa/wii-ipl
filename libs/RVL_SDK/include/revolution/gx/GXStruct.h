@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 typedef struct {
-    u8 r, g, b, a;  // 0x00
+    u8  r, g, b, a; // 0x00
 } GXColor;
 
 typedef struct {

@@ -1,4 +1,4 @@
-#include <decomp_vscode.h>
+#include <decomp_ide.h>
 #include <revolution/base/PPCArch.h>
 #include <__ppc_eabi_init.h>
 
@@ -21,15 +21,15 @@ extern void exit();
 #endif
 
 typedef void (*VoidPTR)();
-__declspec(section ".init") extern VoidPTR _ctors[];
-__declspec(section ".init") extern VoidPTR _dtors[];
+__declspec(section ".init") extern VoidPTR  _ctors[];
+__declspec(section ".init") extern VoidPTR  _dtors[];
 
 #pragma section code_type ".init"
 
 /*
-    @Address 0x813301D8
-    @Size 0x24
-*/
+ * @note Address 0x813301D8 (4.3U)
+ * @note Size 0x24
+ */
 asm void __init_hardware() {
     mfmsr r0
     ori r0, r0, 0x2000
@@ -45,10 +45,10 @@ asm void __init_hardware() {
 }
 
 /*
-    @Address 0x813301FC
-    @Size 0x34
-*/
-asm void __flush_cache(void* address, unsigned int size) {
+ * @note Address 0x813301FC (4.3U)
+ * @note Size 0x34
+ */
+asm void __flush_cache(void* pAddress, unsigned int size) {
     lis r5, 0xFFFF
     ori r5, r5, 0xFFF1
 
@@ -75,9 +75,9 @@ loop:
 #pragma section code_type ".text"
 
 /*
-    @Address 0x81538608
-    @Size 0x20
-*/
+ * @note Address 0x81538608 (4.3U)
+ * @note Size 0x20
+ */
 asm void __init_user() {
     fralloc
 
@@ -89,9 +89,9 @@ asm void __init_user() {
 
 
 /*
-    @Address 0x81538628
-    @Size 0x48
-*/
+ * @note Address 0x81538628 (4.3U)
+ * @note Size 0x48
+ */
 static void __init_cpp() {
     VoidPTR *ctor;
 
@@ -113,9 +113,9 @@ static void _ExitProcess() {
 }
 
 /*
-    @Address 0x81538670
-    @Size 0x4C
-*/
+ * @note Address 0x81538670 (4.3U)
+ * @note Size 0x4C
+ */
 void exit() {
     __fini_cpp();
     _ExitProcess();

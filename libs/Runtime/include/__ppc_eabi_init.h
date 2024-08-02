@@ -9,7 +9,7 @@ __declspec(section ".init") extern void __init_registers();
 __declspec(section ".init") extern void __init_data();
 
 __declspec(section ".init") extern void __init_hardware();
-__declspec(section ".init") extern void __flush_cache(void* address, unsigned int size);
+__declspec(section ".init") extern void __flush_cache(void* pAddress, unsigned int size);
 
 extern void __init_user();
 

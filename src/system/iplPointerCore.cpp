@@ -1,16 +1,27 @@
-
 #include "system/iplPointerCore.h"
+
+#include <nw4r/math.h>
+#include <nw4r/lyt.h>
+
+#include "system/iplSystem.h"
+#include "system/iplPointer.h"
+
+#include "utility/iplMath.h"
 #include "utility/iplUtility.h"
 #include "utility/iplGraphics.h"
-#include <nw4r/lyt/types.h>
-#include <nw4r/math/types.h>
-#include <nw4r/math/triangular.h>
-#include <nw4r/lyt/pane.h>
 
 namespace ipl {
+    /*
+     * @note Address: 0x813444C4 (4.3U)
+     * @note Size: 0x24
+     */
     PointerCoreObject::PointerCoreObject()
     : mLayoutObject(NULL), mState(0), mLayoutType(POINTER_LYT_TYPE_UNK3), mChan(0), unk_0x10(0) {}
 
+    /*
+     * @note Address: 0x813444E8 (4.3U)
+     * @note Size: 0x19C
+     */
    void PointerCoreObject::calc(Pointer* pPointer, const controller::Interface* pController) {
         mLayoutObject = NULL;
         if (pController && pController->Active()) {
@@ -37,7 +48,11 @@ namespace ipl {
             mLayoutObject->calc();
         }
     }
-
+    
+    /*
+     * @note Address: 0x813446A0 (4.3U)
+     * @note Size: 0x24
+     */
     void PointerCoreObject::draw() {
         if (!mLayoutObject) return;
         if (mState != 0) return;
@@ -45,8 +60,10 @@ namespace ipl {
         mLayoutObject->draw();
     }
     
-    
-
+    /*
+     * @note Address: 0x813446C4 (4.3U)
+     * @note Size: 0x7C
+     */
     PointerCore::PointerCore() : mCursors() {
         int chan = 0;
         for (int i = WPAD_MAX_CONTROLLERS - 1; i >= 0; i--) {
@@ -56,6 +73,10 @@ namespace ipl {
         }
     }
 
+    /*
+     * @note Address: 0x81344740 (4.3U)
+     * @note Size: 0x10
+     */
     void PointerCore::setState(int chan, int state) {
         mCursors[chan].setState(state);
     }
@@ -66,6 +87,10 @@ namespace ipl {
         }
     }
 
+    /*
+     * @note Address: 0x813447B4 (4.3U)
+     * @note Size: 0x54
+     */
     void PointerCore::draw() {
         utility::Graphics::setDefaultOrtho(0);
 
@@ -74,6 +99,10 @@ namespace ipl {
         }
     }
 
+    /*
+     * @note Address: 0x81344808 (4.3U)
+     * @note Size: 0x10
+     */
     void PointerCore::changeType(int chan, int type) {
         mCursors[chan].setLayoutType(type);
     }

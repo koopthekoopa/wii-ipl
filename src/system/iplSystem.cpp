@@ -1,26 +1,29 @@
-#include "ipl.h"
+#include "system/iplSystem.h"
+
 #include <cstring>
 
 namespace ipl {
-    namespace System {
-        ArgData smArg;
+    /*
+     * @note Address 0x81089008
+     * @note Size 0x2D8
+    */
+    System::ArgData System::smArg;
     
-        /*
-            @Address 0x81332C24
-            @Size 0x48
-        */
-        Arg::Arg() {
-            memset(&smArg, 0, 0x02D8);
-            OSCreateAlarm(&unkAlarm);
-        }
-        
-        /*
-            @Address 0x81334B10
-            @Size 0x18
-        */
-        bool isResetAcceptable() {
-            return smArg.pad1[0x249] == 0;
-        }
+    /*
+     * @note Address 0x81332C24
+     * @note Size 0x48
+    */
+    System::Arg::Arg() {
+        memset(&smArg, 0, sizeof(ArgData));
+        OSCreateAlarm(&mUnkAlarm);
+    }
+    
+    /*
+     * @note Address 0x81334B10
+     * @note Size 0x18
+    */
+    bool System::isResetAcceptable() {
+        return !smArg.mCanReset;
     }
 }
 

@@ -26,7 +26,7 @@ typedef struct {
 
 #define RFL_ICON_TEX_FORMAT (GX_TF_RGB5A3)
 
-RFLErrcode RFLMakeIcon(void* pBuffer, RFLDataSource source, RFLMiddleDB* middleDB, u16 index, RFLExpression expression, const RFLIconSetting* setting);
+RFLErrcode	RFLMakeIcon(void* pBuffer, RFLDataSource source, RFLMiddleDB* middleDB, u16 index, RFLExpression expression, const RFLIconSetting* setting);
 
 #ifdef __cplusplus
 }

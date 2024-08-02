@@ -7,10 +7,10 @@
 
 namespace std {
     // MSL/memory.h
-    using ::memcpy;
-    using ::memset;
+    using   ::memcpy;
+    using   ::memset;
     
-    using ::strlen;
+    using   ::strlen;
 } // namespace std
 
 #endif

@@ -19,10 +19,10 @@ typedef struct {
     s32             usedCount;      // 0x1C
 } OSMessageQueue;
 
-void OSInitMessageQueue(OSMessageQueue* pMsgQueue, OSMessage* pMsg, s32 msgCount);
-BOOL OSSendMessage(OSMessageQueue* pMsgQueue, OSMessage pMsg, s32 flags);
-BOOL OSJamMessage(OSMessageQueue* pMsgQueue, OSMessage pMsg, s32 flags);
-BOOL OSReceiveMessage(OSMessageQueue* pMsgQueue, OSMessage* pMsg, s32 flags);
+void    OSInitMessageQueue(OSMessageQueue* pMsgQueue, OSMessage* pMsg, s32 msgCount);
+BOOL    OSSendMessage(OSMessageQueue* pMsgQueue, OSMessage pMsg, s32 flags);
+BOOL    OSJamMessage(OSMessageQueue* pMsgQueue, OSMessage pMsg, s32 flags);
+BOOL    OSReceiveMessage(OSMessageQueue* pMsgQueue, OSMessage* pMsg, s32 flags);
 
 #ifdef __cplusplus
 }

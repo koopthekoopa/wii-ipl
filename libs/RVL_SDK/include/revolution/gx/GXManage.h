@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-void GXPixModeSync();
+void    GXPixModeSync();
 
 #ifdef __cplusplus
 }

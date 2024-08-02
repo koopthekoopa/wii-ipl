@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-size_t strlen(const char* str);
+size_t  strlen(const char* str);
 
 #ifdef __cplusplus
 }

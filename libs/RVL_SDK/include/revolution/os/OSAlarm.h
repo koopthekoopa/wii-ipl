@@ -25,7 +25,7 @@ struct OSAlarm {
     void*           userData;   // 0x1C
 };
 
-void OSCreateAlarm(OSAlarm* alarm);
+void OSCreateAlarm(OSAlarm* pAlarm);
 
 #ifdef __cplusplus
 }

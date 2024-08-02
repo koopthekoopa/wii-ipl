@@ -48,7 +48,7 @@ typedef enum {
 } RFLDataSource;
 
 typedef struct {
-	u8 data[24];	 // 0x00
+	u8	data[24];	// 0x00
 } RFLMiddleDB;
 
 typedef enum {
@@ -63,7 +63,7 @@ typedef enum {
 } RFLExpression;
 
 typedef struct {
-	u8 data[RFL_CREATEID_LENGTH];	// 0x00
+	u8	data[RFL_CREATEID_LENGTH];	// 0x00
 } RFLCreateID;
 
 #ifdef __cplusplus

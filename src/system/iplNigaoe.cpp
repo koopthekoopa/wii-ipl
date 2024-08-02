@@ -1,34 +1,37 @@
-#include "system/iplSystem.h"
 #include "system/iplNigaoe.h"
-#include <revolution/gx.h>
-#include <string.h>
+
+#include <revolution.h>
+
+#include <cstring>
+
+#include "system/iplSystem.h"
 
 #define GX_RGB5A3_SIZE 2
 
 namespace ipl {
     namespace nigaoe {
         /*
-            @Address: 0x8133EE00
-            @Size: 0x48
-        */
-        Object::Object(EGG::Heap* pHeap, int width, int height, int faceId, void (*someFunc)(ipl::nigaoe::Object*, void*), void* pArg3) 
+         * @note Address: 0x8133EE00 (4.3U)
+         * @note Size: 0x48
+         */
+        Object::Object(EGG::Heap* pHeap, int width, int height, int faceId, void (*someFunc)(Object*, void*), void* pArg3) 
         : mFaceId(faceId), mpCharData(NULL), mSomeFunc(someFunc), unk_0x44(pArg3), unk_0x50(0) {
             init(pHeap, width, height);
         }
         
         /*
-            @Address: 0x8133EE48
-            @Size: 0x4C
-        */
-        Object::Object(EGG::Heap* pHeap, int width, int height, RFLiCharData* charData, void (*someFunc)(ipl::nigaoe::Object*, void*), void* pArg3) 
+         * @note Address: 0x8133EE48 (4.3U)
+         * @note Size: 0x4C
+         */
+        Object::Object(EGG::Heap* pHeap, int width, int height, RFLiCharData* charData, void (*someFunc)(Object*, void*), void* pArg3) 
         : mFaceId(-1), mpCharData(charData), mSomeFunc(someFunc), unk_0x44(pArg3), unk_0x50(0) {
             init(pHeap, width, height);
         }
         
         /*
-            @Address: 0x8133EE94
-            @Size: 0x7C
-        */
+         * @note Address: 0x8133EE94 (4.3U)
+         * @note Size: 0x7C
+         */
         void Object::init(EGG::Heap* pHeap, int width, int height) {
             mIconSettings.width = width;
             mIconSettings.height = height;
@@ -47,17 +50,17 @@ namespace ipl {
         }
         
         /*
-            @Address: 0x8133EF10
-            @Size: 0x58
-        */
+         * @note Address: 0x8133EF10 (4.3U)
+         * @note Size: 0x58
+         */
         Object::~Object() {
             delete[] mpIconTex;
         }
         
         /*
-            @Address: 0x8133EF68
-            @Size: 0x100
-        */
+         * @note Address: 0x8133EF68 (4.3U)
+         * @note Size: 0x100
+         */
         void Object::make_icon() {
             GXRenderModeObj *rMode;
             RFLErrcode err = RFLErrcode_Success;

@@ -2,10 +2,12 @@
 #define NW4R_LAYOUT_PANE_H
 
 #include <revolution/types.h>
+
 #include <nw4r/math/types.h>
 #include <nw4r/lyt/types.h>
 #include <nw4r/lyt/material.h>
 #include <nw4r/ut/LinkList.h>
+
 #include <stddef.h>
 
 namespace nw4r {
@@ -25,45 +27,46 @@ namespace nw4r {
         class Pane : detail::PaneBase {
             public:
                 Pane();
-                virtual ~Pane();                                                            // 0x08
+                virtual ~Pane();                                                                    // 0x08
 
-                virtual undefined4* GetRuntimeTypeInfo() const;                             // 0x0C
+                virtual undefined4* GetRuntimeTypeInfo() const;                                     // 0x0C
 
-                virtual void CalculateMtx(const undefined4& drawInfo);                      // 0x10
+                virtual void        CalculateMtx(const undefined4& drawInfo);                       // 0x10
 
-                virtual void Draw(const undefined4& drawInfo);                              // 0x14
-                virtual void DrawSelf(const undefined4& drawInfo);                          // 0x18
+                virtual void        Draw(const undefined4& drawInfo);                               // 0x14
+                virtual void        DrawSelf(const undefined4& drawInfo);                           // 0x18
 
-                virtual void Animate(u32 unk);                                              // 0x1C
-                virtual void AnimateSelf(u32 unk);                                          // 0x20
+                virtual void        Animate(u32 unk);                                               // 0x1C
+                virtual void        AnimateSelf(u32 unk);                                           // 0x20
 
-                virtual ut::Color GetVtxColor(u32 index) const;                             // 0x24
-                virtual void SetVtxColor(u32 index, ut::Color newColor);                    // 0x28
-                virtual u8 GetVtxColorElement(u32 index) const;                             // 0x2C
-                virtual void SetVtxColorElement(u32 index, u8 element);                     // 0x30
+                virtual ut::Color   GetVtxColor(u32 index) const;                                   // 0x24
+                virtual void        SetVtxColor(u32 index, ut::Color newColor);                     // 0x28
+                virtual u8          GetVtxColorElement(u32 index) const;                            // 0x2C
+                virtual void        SetVtxColorElement(u32 index, u8 element);                      // 0x30
 
-                virtual undefined GetColorElement(u32 index) const;                         // 0x34
-                virtual void SetColorElement(u32 index, u8 color);                          // 0x38
+                virtual undefined   GetColorElement(u32 index) const;                               // 0x34
+                virtual void        SetColorElement(u32 index, u8 color);                           // 0x38
                 
-                virtual Pane* FindPaneByName(const char* findName, bool bRecursive = true); // 0x3C
+                virtual Pane*       FindPaneByName(const char* findName, bool bRecursive = true);   // 0x3C
+
                 
-                
 
-                const math::VEC3& GetTranslate() { return mTranslate; }
-                void SetTranslate(const math::VEC3& translate) { mTranslate = translate; }
-                void SetTranslate(const math::VEC2& translate) { SetTranslate(math::VEC3(translate.x, translate.y, 0)); }
+                const math::VEC3&   GetTranslate()                              { return mTranslate; }
+                void                SetTranslate(const math::VEC3& translate)   { mTranslate = translate; }
+                void                SetTranslate(const math::VEC2& translate)   { SetTranslate(math::VEC3(translate.x, translate.y, 0)); }
 
-                const math::VEC3& GetRotate() const { return mRotate; }
-                void SetRotate(const math::VEC3& rotate) { mRotate = rotate; }
+                const math::VEC3&   GetRotate() const                           { return mRotate; }
+                void                SetRotate(const math::VEC3& rotate)         { mRotate = rotate; }
 
-                const math::VEC2& GetScale() const { return mScale; }
-                void SetScale(const math::VEC2& scale) { mScale = scale; }
+                const math::VEC2&   GetScale() const                            { return mScale; }
+                void                SetScale(const math::VEC2& scale)           { mScale = scale; }
 
-                const Size& GetSize() const { return mSize; }
-                void SetSize(const Size& size) { mSize = size; }
+                const Size&         GetSize() const                             { return mSize; }
+                void                SetSize(const Size& size)                   { mSize = size; }
 
-                void SetVisible(bool visible) { detail::SetBit(&mFlags, 0, visible); };
-            public:
+                void                SetVisible(bool visible)                    { detail::SetBit(&mFlags, 0, visible); };
+            
+            private:
                 Pane*                               mpParent;           // 0x0C
                 ut::LinkList<detail::PaneBase, 0>   mChildList;         // 0x10
                 ut::LinkList<AnimationLink, 0>      mAnimList;          // 0x1C

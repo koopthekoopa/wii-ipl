@@ -1,53 +1,53 @@
-#include <decomp_vscode.h>
+#include <decomp_ide.h>
 #include <size_t.h>
 
 #pragma section code_type ".init"
 
 /*
-    @Address 0x81330230
-    @Size 0x50
-*/
-void* memcpy(void* dest, const void* src, size_t count) {
-    char* p;
-    char* q;
-    int i;
+ * @note Address 0x81330230 (4.3U)
+ * @note Size 0x50
+ */
+void* memcpy(void* pDest, const void* pSrc, size_t count) {
+    char*   p;
+    char*   q;
+    int     i;
 
-    if (src >= dest) {
-        p = (char*)src - 1;
-        q = (char*)dest - 1;
+    if (pSrc >= pDest) {
+        p = (char*)pSrc - 1;
+        q = (char*)pDest - 1;
 
         for (i = count + 1; --i;) {
             *++q = *++p;
         }
     } else {
-        p = (char*)src + count;
-        q = (char*)dest + count;
+        p = (char*)pSrc + count;
+        q = (char*)pDest + count;
 
         for (i = count + 1; --i;) {
             *--q = *--p;
         }
     }
     
-    return dest;
+    return pDest;
 }
 
 
 /*
-    @Address 0x81330280
-    @Size 0xB4
-*/
-void  __fill_mem(void* dest, int value, unsigned long length) {
-#define cDest ((unsigned char*)dest)
-#define lDest ((unsigned long*)dest)
+ * @note Address 0x81330280 (4.3U)
+ * @note Size 0xB4
+ */
+void  __fill_mem(void* pDest, int value, unsigned long length) {
+#define cDest ((unsigned char*)pDest)
+#define lDest ((unsigned long*)pDest)
     unsigned long val = (unsigned char)value;
     unsigned long i;
-    lDest = (unsigned long*)dest;
-    cDest = (unsigned char*)dest;
+    lDest = (unsigned long*)pDest;
+    cDest = (unsigned char*)pDest;
 
     cDest--;
 
     if (length >= 32) {
-        i = ~(unsigned long)dest & 3;
+        i = ~(unsigned long)pDest & 3;
         
         if (i) {
             length -= i;
@@ -100,23 +100,23 @@ void  __fill_mem(void* dest, int value, unsigned long length) {
 }
 
 /*
-    @Address 0x81330334
-    @Size 0x30
-*/
-void* memset(void* dest, int ch, size_t count) {
-    __fill_mem(dest, ch, count);
-    return dest;
+ * @note Address 0x81330334 (4.3U)
+ * @note Size 0x30
+ */
+void* memset(void* pDest, int ch, size_t count) {
+    __fill_mem(pDest, ch, count);
+    return pDest;
 }
 
 #pragma section code_type ".text"
 
 /*
-    @Address 0x815F8EFC
-    @Size 0x1C
-*/
+ * @note Address 0x815F8EFC (4.3U)
+ * @note Size 0x1C
+ */
 __declspec(weak) size_t strlen(const char* str) {
-    size_t size = -1;
-    unsigned char* p = (unsigned char*)str - 1;
+    size_t          size = -1;
+    unsigned char*  p = (unsigned char*)str - 1;
 
     do {
         size++;

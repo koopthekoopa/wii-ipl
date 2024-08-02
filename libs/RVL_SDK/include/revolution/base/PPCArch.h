@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-void PPCHalt();
+void    PPCHalt();
 
 #ifdef __cplusplus
 }

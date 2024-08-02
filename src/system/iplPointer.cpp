@@ -1,17 +1,22 @@
-#define OVERRIDE_PANE_SETTRANSLATE
-
 #include "system/iplPointer.h"
-#include <nw4r/math/types.h>
-#include <nw4r/lyt/types.h>
-#include <nw4r/lyt/pane.h>
-#include <nw4r/ut/inlines.h>
+
+#include <nw4r/math.h>
+#include <nw4r/ut.h>
+#include <nw4r/lyt.h>
+
+#include "system/iplSystem.h"
+
 #include "utility/iplUtility.h"
+#include "utility/iplMath.h"
 
 namespace ipl {
     #define MINIMUM_LENGTH    32
     #define MAXIMUM_LENGTH    128
-    
-    // 0x816354D4
+
+    /*
+     * @note Address: 0x816354D4 (4.3U)
+     * @note Size: 0x24
+     */
     static const char* scLayoutName[MAX_LAYOUT_FILES] = {
         #define LYT_INVALID_ID     -1
     
@@ -22,25 +27,25 @@ namespace ipl {
         "P3_Def.brlyt",
         "P4_Def.brlyt",
         
-        #define LYT_GRAB_ID        4
         // Grab
+        #define LYT_GRAB_ID        4
         "P1_Cat.brlyt",
         "P2_Cat.brlyt",
         "P3_Cat.brlyt",
         "P4_Cat.brlyt",
         
-        #define LYT_SCROLLER_ID    8
         // Scroller
+        #define LYT_SCROLLER_ID    8
          "my_BScroll_a.brlyt"
     };
 
     /*
-        @Address: 0x81344188
-        @Size: 0xE8
-    */
+     * @note Address: 0x81344188 (4.3U)
+     * @note Size: 0xE8
+     */
     Pointer::Pointer(EGG::Heap* pHeap)
     : unk_0x28(-1), mOriginPos(0, 0), mArrowLength(MINIMUM_LENGTH), mPointDirection(PNT_DOWN), mScrolling(false), unk_0x3D(true), mCore() {
-        mLayoutArchive = System::GetNANDManager()->readLayout(pHeap, "cursor.ash", false);
+        mLayoutArchive = System::getNandManager()->readLayout(pHeap, "cursor.ash", false);
         
         for (int i = 0; i < MAX_LAYOUT_FILES; i++) {
             mLayoutObject[i] = new(pHeap, 4) layout::Object(pHeap, mLayoutArchive, "arc", scLayoutName[i]);
@@ -49,9 +54,9 @@ namespace ipl {
     }
 
     /*
-        @Address: 0x81344270
-        @Size: 0x174
-    */
+     * @note Address: 0x81344270 (4.3U)
+     * @note Size: 0x174
+     */
     void Pointer::calc() {
         mCore.calc(this);
 
@@ -97,9 +102,9 @@ namespace ipl {
     }
 
     /*
-        @Address: 0x81344428
-        @Size: 0x50
-    */
+     * @note Address: 0x81344428 (4.3U)
+     * @note Size: 0x50
+     */
     void Pointer::draw() {
         if (unk_0x3D) {
             mCore.draw();
@@ -110,25 +115,25 @@ namespace ipl {
     }
     
     /*
-        @Address: 0x81344478
-        @Size: 0x8
-    */
+     * @note Address: 0x81344478 (4.3U)
+     * @note Size: 0x8
+     */
     void Pointer::setState(int chan, int state) {
         mCore.setState(chan, state);
     }
 
     /*
-        @Address: 0x81344480
-        @Size: 0x8
-    */
+     * @note Address: 0x81344480 (4.3U)
+     * @note Size: 0x8
+     */
     void Pointer::changeType(int chan, int type) {
         mCore.changeType(chan, type);
     }
 
     /*
-        @Address: 0x81344488
-        @Size: 0x3C
-    */
+     * @note Address: 0x81344488 (4.3U)
+     * @note Size: 0x3C
+     */
     layout::Object* Pointer::get_layout(int chan, int type) {
         int grabId = LYT_INVALID_ID;
 

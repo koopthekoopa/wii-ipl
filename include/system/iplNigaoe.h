@@ -1,43 +1,44 @@
 #ifndef IPL_NIGAOE_H
 #define IPL_NIGAOE_H
 
-#include <decomp_types.h>
+#include <decomp.h>
+
 #include <revolution.h>
+
 #include <egg/core.h>
+
 #include <RVLFaceLibPrivate.h>
 
 namespace ipl {
     namespace nigaoe {
         class Object {
             public:
-                Object(EGG::Heap* pHeap, int width, int height, int faceId, void (*someFunc)(ipl::nigaoe::Object*, void*), void* pArg3);
-                Object(EGG::Heap* pHeap, int width, int height, RFLiCharData* charData, void (*someFunc)(ipl::nigaoe::Object*, void*), void* pArg3);
+                Object(EGG::Heap* pHeap, int width, int height, int faceId, void (*someFunc)(Object*, void*), void* pArg3);
+                Object(EGG::Heap* pHeap, int width, int height, RFLiCharData* pCharData, void (*someFunc)(Object*, void*), void* pArg3);
                 ~Object();
 
-                inline void SomeFunc(void* unk) {
-                    return (*mSomeFunc)(this, unk);
-                }
+                void    SomeFunc(void* pArg1) { return (*mSomeFunc)(this, pArg1); }
             
             private:
-                void init(EGG::Heap* pHeap, int width, int height);
-                void make_icon();
+                void    init(EGG::Heap* pHeap, int width, int height);
+                void    make_icon();
                 
-                u8* mpIconTex;                                  // 0x00
-                size_t mIconSize;                               // 0x04
+                u8*             mpIconTex;                      // 0x00
+                size_t          mIconSize;                      // 0x04
                 
-                RFLIconSetting mIconSettings;                   // 0x08
+                RFLIconSetting  mIconSettings;                  // 0x08
                 
-                GXTexObj mFaceTexObj;                           // 0x18
+                GXTexObj        mFaceTexObj;                    // 0x18
                 
-                RFLiCharData* mpCharData;                       // 0x38
-                u32 mFaceId;                                    // 0x3c
+                RFLiCharData*   mpCharData;                     // 0x38
+                u32             mFaceId;                        // 0x3c
                 
-                void (*mSomeFunc)(ipl::nigaoe::Object*, void*); // 0x40
+                void            (*mSomeFunc)(Object*, void*);   // 0x40
                 
-                void* unk_0x44;
-                u32 unused_0x48;
-                u32 unused_0x4c;
-                u8 unk_0x50;
+                void*           unk_0x44;
+                undefined4      unused_0x48;
+                undefined4      unused_0x4c;
+                u8              unk_0x50;
         };
     }
 }

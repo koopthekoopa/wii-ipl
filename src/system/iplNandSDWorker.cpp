@@ -1,10 +1,12 @@
-#include "ipl.h"
+#include "system/iplNandSDWorker.h"
+
+#include <revolution.h>
 
 namespace ipl {
     /*
-        @Address 0x81350EB4
-        @Size 0xAC
-    */
+     * @note Address 0x81350EB4
+     * @note Size 0xAC
+     */
     BOOL NandSDWorker::check_header_base(const u8 *bnrData, u32 *hashOut) {
     #define IMET_HDR_HASH *(u32 *)(bnrData + 4) 
     #define IMET_HDR_VERSION *(u32 *)(bnrData + 8)

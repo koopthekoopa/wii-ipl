@@ -7,20 +7,20 @@
 extern "C" {
 #endif
 
-typedef struct RBRUnkStruct {
+typedef struct {
     u32 unk[0x4A];
     s32 type;
     u32 dataOffset;
     s32 dataSize;
-} RBRAttachment;
+} RBRSomeData;
 
-extern const char* RBRFileType_Txt;
-extern const char* RBRFileType_Odh;
-extern const char* RBRFileType_Dat;
-extern const char* RBRFileType_Log;
+extern const char*  RBRFileType_Txt;
+extern const char*  RBRFileType_Odh;
+extern const char*  RBRFileType_Dat;
+extern const char*  RBRFileType_Log;
 
-extern u8* RBRGetPicture(u32* pRbrData, s32* dataSize);
-extern void RBRGetPosRect(f32* left, f32* right, f32* top, f32* bottom);
+extern u8*          RBRGetPicture(u32* pRbrData, s32* dataSize);
+extern void         RBRGetPosRect(f32* left, f32* right, f32* top, f32* bottom);
 
 #ifdef __cplusplus
 }
