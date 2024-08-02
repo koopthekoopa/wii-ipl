@@ -37,7 +37,7 @@ SYSTEM_OBJECTS	=	$(ASSEMBLY_ROOT)/rvl_dec.o \
 					$(ASSEMBLY_ROOT)/iplNandWrapper.o \
 					main.o \
 					$(ASSEMBLY_ROOT)/iplBs2Manager.o \
-					$(ASSEMBLY_ROOT)/iplTVRC.o \
+					$(ASSEMBLY_ROOT)/TVRC.o \
 					$(ASSEMBLY_ROOT)/iplTVRCManager.o \
 					$(ASSEMBLY_ROOT)/data/iplEngErrorBmg.o \
 					$(ASSEMBLY_ROOT)/data/iplFraErrorBmg.o \

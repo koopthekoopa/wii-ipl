@@ -27,6 +27,7 @@ extern void __start();
 /*
  * @note Address: 0x81330000 (4.3J/4.3U/4.3E)
  * @note Size: 0xA8
+ * @note THIS MUST BE THE FIRST FUNCTION LINKED AT 0x81330000 (UNLESS YOU CHANGE 'BS2_ENTRY' FROM 'BS1.inc')
  */
 __declspec(weak) asm void __start() {
     nofralloc

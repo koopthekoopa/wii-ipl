@@ -8,7 +8,7 @@ BS2_INC_PATHS			= $(COMMON_INCLUDES)
 
 # stuff for linking the elf
 BS2_ELF_NAME		= BS2
-BS2_ELF_CC			= $(CW_GC_30A3)
+BS2_ELF_CC			= $(CW_GC_30A52)
 BS2_ELF_ENTRY_POINT	= __start
 BS2_ELF_ADDRESS		= 0x81330000
 BS2_ELF_LINKSCRIPT	= ldscript_ipl2.lcf
@@ -16,10 +16,12 @@ BS2_ELF_LINKSCRIPT	= ldscript_ipl2.lcf
 # libraries
 include $(RULES_ROOT)/BS2Libs/system.mak
 include $(RULES_ROOT)/BS2Libs/utility.mak
+include $(RULES_ROOT)/BS2Libs/layout.mak
 include $(RULES_ROOT)/BS2Libs/BS2.mak
 
 BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(BS2_BLD_PATH)/utility.a \
+						$(BS2_BLD_PATH)/layout.a \
 						$(BS2_BLD_PATH)/BS2.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/base.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/os.a \
