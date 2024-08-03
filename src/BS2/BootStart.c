@@ -24,7 +24,7 @@ extern void exit();
 
 extern void __start();
 
-/*
+/**
  * @note Address: 0x81330000 (4.3J/4.3U/4.3E)
  * @note Size: 0xA8
  * @note THIS MUST BE THE FIRST FUNCTION LINKED AT 0x81330000 (UNLESS YOU CHANGE 'BS2_ENTRY' FROM 'BS1.inc')
@@ -93,7 +93,7 @@ bi2_end_arg_parse:
     b       exit
 }
 
-/*
+/**
  * @note Address: 0x813300A8 (4.3J/4.3U/4.3E)
  * @note Size: 0x90
  */
@@ -156,7 +156,7 @@ static void init_bss_section(void* dest, unsigned int size) {
     }
 }
 
-/*
+/**
  * @note Address: 0x81330138 (4.3J/4.3U/4.3E)
  * @note Size: 0xA0
  */

@@ -11,14 +11,14 @@
 #include "utility/iplGraphics.h"
 
 namespace ipl {
-    /*
+    /**
      * @note Address: 0x813444C4 (4.3U)
      * @note Size: 0x24
      */
     PointerCoreObject::PointerCoreObject()
     : mLayoutObject(NULL), mState(0), mLayoutType(POINTER_LYT_TYPE_UNK3), mChan(0), unk_0x10(0) {}
 
-    /*
+    /**
      * @note Address: 0x813444E8 (4.3U)
      * @note Size: 0x19C
      */
@@ -45,11 +45,12 @@ namespace ipl {
             pCursorRotate->SetRotate(cursorRotateVec);
             pCursorRotateShadow->SetRotate(cursorRotateVec);
 
+            // Update the layout
             mLayoutObject->calc();
         }
     }
     
-    /*
+    /**
      * @note Address: 0x813446A0 (4.3U)
      * @note Size: 0x24
      */
@@ -60,20 +61,20 @@ namespace ipl {
         mLayoutObject->draw();
     }
     
-    /*
+    /**
      * @note Address: 0x813446C4 (4.3U)
      * @note Size: 0x7C
      */
     PointerCore::PointerCore() : mCursors() {
         int chan = 0;
         for (int i = WPAD_MAX_CONTROLLERS - 1; i >= 0; i--) {
-            mCursors[chan].setLayoutType(POINTER_LYT_TYPE_POINT);
+            mCursors[chan].changeType(POINTER_LYT_TYPE_POINT);
             mCursors[chan].setChan(chan);
             chan++;
         }
     }
 
-    /*
+    /**
      * @note Address: 0x81344740 (4.3U)
      * @note Size: 0x10
      */
@@ -81,13 +82,17 @@ namespace ipl {
         mCursors[chan].setState(state);
     }
 
+    /**
+     * @note Address: 0x81344750 (4.3U)
+     * @note Size: 0x64
+     */
     void PointerCore::calc(Pointer* pPointer) {
         for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
             mCursors[i].calc(pPointer, System::getController(i));
         }
     }
 
-    /*
+    /**
      * @note Address: 0x813447B4 (4.3U)
      * @note Size: 0x54
      */
@@ -99,12 +104,12 @@ namespace ipl {
         }
     }
 
-    /*
+    /**
      * @note Address: 0x81344808 (4.3U)
      * @note Size: 0x10
      */
     void PointerCore::changeType(int chan, int type) {
-        mCursors[chan].setLayoutType(type);
+        mCursors[chan].changeType(type);
     }
 }
 

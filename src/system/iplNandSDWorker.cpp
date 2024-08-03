@@ -3,7 +3,7 @@
 #include <revolution.h>
 
 namespace ipl {
-    /*
+    /**
      * @note Address 0x81350EB4
      * @note Size 0xAC
      */

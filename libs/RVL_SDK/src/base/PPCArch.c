@@ -1,4 +1,4 @@
-/*
+/**
     *** STUB ***
 */
 void PPCHalt() {

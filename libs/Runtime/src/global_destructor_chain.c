@@ -3,7 +3,7 @@
 
 DtorChain* __global_destructor_chain;
 
-/*
+/**
  * @note Address: 0x815F8FE0 (4.3U)
  * @note Size 0x18
  */
@@ -15,7 +15,7 @@ void __register_global_object(void* object, void* dtor, DtorChain* chain) {
     __global_destructor_chain = chain;
 }
 
-/*
+/**
  * @note Address: 0x815F8FF8 (4.3U)
  * @note Size 0x48
  */

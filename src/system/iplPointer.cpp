@@ -13,7 +13,7 @@ namespace ipl {
     #define MINIMUM_LENGTH    32
     #define MAXIMUM_LENGTH    128
 
-    /*
+    /**
      * @note Address: 0x816354D4 (4.3U)
      * @note Size: 0x24
      */
@@ -39,7 +39,7 @@ namespace ipl {
          "my_BScroll_a.brlyt"
     };
 
-    /*
+    /**
      * @note Address: 0x81344188 (4.3U)
      * @note Size: 0xE8
      */
@@ -53,7 +53,7 @@ namespace ipl {
         }
     }
 
-    /*
+    /**
      * @note Address: 0x81344270 (4.3U)
      * @note Size: 0x174
      */
@@ -93,15 +93,15 @@ namespace ipl {
             }
             pArrowRoot->SetScale(math::VEC2(1.0, newYScale));
 
-
             pArrowRoot->SetVisible(mScrolling);
             pOriginPane->SetVisible(!mScrolling);
 
+            // Calculate the scrolling layout
             mLayoutObject[LYT_SCROLLER_ID]->calc();
         }
     }
 
-    /*
+    /**
      * @note Address: 0x81344428 (4.3U)
      * @note Size: 0x50
      */
@@ -114,7 +114,7 @@ namespace ipl {
         }
     }
     
-    /*
+    /**
      * @note Address: 0x81344478 (4.3U)
      * @note Size: 0x8
      */
@@ -122,7 +122,7 @@ namespace ipl {
         mCore.setState(chan, state);
     }
 
-    /*
+    /**
      * @note Address: 0x81344480 (4.3U)
      * @note Size: 0x8
      */
@@ -130,7 +130,7 @@ namespace ipl {
         mCore.changeType(chan, type);
     }
 
-    /*
+    /**
      * @note Address: 0x81344488 (4.3U)
      * @note Size: 0x3C
      */

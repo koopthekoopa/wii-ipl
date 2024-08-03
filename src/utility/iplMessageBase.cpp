@@ -2,7 +2,7 @@
 
 namespace ipl {
     namespace utility {
-        /*
+        /**
          * @note Address: 0x81364D78 (4.3U)
          * @note Size: 0x2C
          */
@@ -10,7 +10,7 @@ namespace ipl {
             return OSSendMessage(&mpMsgQueue, msg, flags) != FALSE;
         }
         
-        /*
+        /**
          * @note Address: 0x81364DA4 (4.3U)
          * @note Size: 0x2C
          */
@@ -18,7 +18,7 @@ namespace ipl {
             return OSJamMessage(&mpMsgQueue, msg, flags) != FALSE;
         }
         
-        /*
+        /**
          * @note Address: 0x81364DD0 (4.3U)
          * @note Size: 0x2C
          */
@@ -26,7 +26,7 @@ namespace ipl {
             return OSReceiveMessage(&mpMsgQueue, pMsg, flags) != FALSE;
         }
         
-        /*
+        /**
          * @note Address: 0x81364DFC (4.3U)
          * @note Size: 0x8
          */

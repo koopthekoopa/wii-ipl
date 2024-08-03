@@ -11,10 +11,23 @@ namespace ipl {
     namespace utility {
         class Capture {
             public:
-                Capture(EGG::Heap* pHeap, int x, int y, int width, int height, _GXTexFmt texFmt);
+                /**
+                 * @param pHeap The memory heap used for this.
+                 * @param x The X position of the capture.
+                 * @param y The Y position of the capture.
+                 * @param width The width position of the capture.
+                 * @param height The height position of the capture.
+                 * @param texFmt Texture format of the capture. (RGB5A3 by default)
+                 */
+                Capture(EGG::Heap* pHeap, int x, int y, int width, int height, _GXTexFmt texFmt = GX_TF_RGB5A3);
                 ~Capture();
 
-                void    capture(BOOL copyFilter);
+                /**
+                 * @brief Capture the screen
+                 * 
+                 * @param disableFilter Disable the GX filter on capture.
+                 */
+                void    capture(BOOL disableFilter);
             
             private:
                 u16         mXPos;          // 0x00

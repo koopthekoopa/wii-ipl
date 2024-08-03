@@ -4,7 +4,7 @@
 
 namespace ipl {
     namespace utility {
-        /*
+        /**
          * @note Address: 0x813632A8 (4.3U)
          * @note Size: 0x9C
          */
@@ -16,7 +16,7 @@ namespace ipl {
             GXInitTexObj(&mTexObj, mTextureBuffer, mTextureWidth, mTextureHeight, mTextureFormat, GX_CLAMP, GX_CLAMP, GX_FALSE);
         }
         
-        /*
+        /**
          * @note Address: 0x81363344 (4.3U)
          * @note Size: 0x58
          */
@@ -24,14 +24,14 @@ namespace ipl {
             delete[] mTextureBuffer;
         }
         
-        /*
+        /**
          * @note Address: 0x8136339C (4.3U)
          * @note Size: 0xC0
          */
-        void Capture::capture(BOOL copyFilter) {
+        void Capture::capture(BOOL disableFilter) {
             DCInvalidateRange(mTextureBuffer, mTextureSize);
             
-            if (!copyFilter) {
+            if (!disableFilter) {
                 GXRenderModeObj *pRmode = System::getRenderModeObj();
                 GXSetCopyFilter(GX_FALSE, pRmode->sample_pattern, GX_FALSE, pRmode->vfilter);
             }
@@ -42,7 +42,7 @@ namespace ipl {
             GXCopyTex(mTextureBuffer, GX_FALSE);
             GXPixModeSync();
             
-            if (!copyFilter) {
+            if (!disableFilter) {
                 GXRenderModeObj *pRmode = System::getRenderModeObj();
                 GXSetCopyFilter(pRmode->aa, pRmode->sample_pattern, GX_TRUE, pRmode->vfilter);
             }

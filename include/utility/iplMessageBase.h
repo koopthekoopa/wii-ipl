@@ -9,10 +9,10 @@ namespace ipl {
     namespace utility {
         class ut_message_base {
             public:
+
                 BOOL    SendMessage(OSMessage msg, s32 flags);
                 BOOL    JamMessage(OSMessage msg, s32 flags);
                 BOOL    ReceiveMessage(OSMessage* pMsg, s32 flags);
-                
                 void    InitMessageQueue(OSMessage* pMsg, s32 msgCount);
                 
             private:

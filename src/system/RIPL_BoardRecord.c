@@ -11,7 +11,7 @@ const char* RBRFileType_Odh = "odh";
 const char* RBRFileType_Dat = "dat";
 const char* RBRFileType_Log = "log";
 
-/*
+/**
  * @note Address 0x81332B48 (4.3U/4.3E)
  * @note Size 0x98
  */
@@ -39,7 +39,7 @@ u8* RBRGetPicture(u32* pRbrData, s32* dataSize) {
     return pRetData;
 }
 
-/*
+/**
  * @note Address 0x81332BE0 (4.3U/4.3E)
  * @note Size 0x44
  */

@@ -25,7 +25,7 @@ static inline void __exception_info_constants(__eti_init_info* info, char** R2) 
     info = _eti_init_info;
 }
 
-/*
+/**
  * @note Address: 0x815F9D08 (4.3U)
  * @note Size: 0x3C
  */
@@ -39,7 +39,7 @@ extern void __init_cpp_exceptions() {
     }
 }
 
-/*
+/**
  * @note Address: 0x815F9D44 (4.3U)
  * @note Size: 0x34
  */

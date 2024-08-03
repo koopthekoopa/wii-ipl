@@ -9,8 +9,8 @@ extern "C" {
 
 typedef u8 GXBool;
 
-#define GX_TRUE        ((GXBool)1)
-#define GX_FALSE       ((GXBool)0)
+#define GX_TRUE        ((GXBool)TRUE)
+#define GX_FALSE       ((GXBool)FALSE)
 
 #define _GX_TF_ZTF     0x10 /* Z Texture format */
 #define _GX_TF_CTF     0x20 /* Copy texture format */

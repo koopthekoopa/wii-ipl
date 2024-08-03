@@ -3,7 +3,7 @@
 
 #pragma section code_type ".init"
 
-/*
+/**
  * @note Address 0x81330230 (4.3U)
  * @note Size 0x50
  */
@@ -32,7 +32,7 @@ void* memcpy(void* pDest, const void* pSrc, size_t count) {
 }
 
 
-/*
+/**
  * @note Address 0x81330280 (4.3U)
  * @note Size 0xB4
  */
@@ -99,7 +99,7 @@ void  __fill_mem(void* pDest, int value, unsigned long length) {
 #undef lDest
 }
 
-/*
+/**
  * @note Address 0x81330334 (4.3U)
  * @note Size 0x30
  */
@@ -110,7 +110,7 @@ void* memset(void* pDest, int ch, size_t count) {
 
 #pragma section code_type ".text"
 
-/*
+/**
  * @note Address 0x815F8EFC (4.3U)
  * @note Size 0x1C
  */

@@ -17,8 +17,19 @@ namespace ipl {
         class Manager {
             public:
                 Manager();
-
-                LayoutFile* readLayout(EGG::Heap* pHead, const char* archiveName, bool unk);
+                
+                /**
+                 * @brief Reads a Layout File.
+                 * 
+                 * This loads an ASH compressed archive containing Layout Data.
+                 * 
+                 * @param pHeap The memory heap used for the function.
+                 * @param archiveName The file name of the ASH compressed archive.
+                 * @param unk Unkown boolean.
+                 * 
+                 * @return The Layout File Data as `ipl::nand::LayoutFile`.
+                 */
+                LayoutFile* readLayout(EGG::Heap* pHeap, const char* archiveName, bool unk);
         };
     }
 }

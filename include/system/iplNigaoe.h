@@ -17,7 +17,10 @@ namespace ipl {
                 Object(EGG::Heap* pHeap, int width, int height, RFLiCharData* pCharData, void (*someFunc)(Object*, void*), void* pArg3);
                 ~Object();
 
-                void    SomeFunc(void* pArg1) { return (*mSomeFunc)(this, pArg1); }
+                /**
+                 * @param pArg0 Argument 1.
+                 */
+                void    SomeFunc(void* pArg0) { return (*mSomeFunc)(this, pArg0); }
             
             private:
                 void    init(EGG::Heap* pHeap, int width, int height);

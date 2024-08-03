@@ -94,6 +94,10 @@ const unsigned long long __constants[] = {
     0x41E0000000000000,
 };
 
+/**
+ * @note Address 0x815F9398
+ * @note Size 0x5C
+ */
 asm unsigned long __cvt_fp2unsigned(register double d) {
     nofralloc
 
@@ -129,7 +133,7 @@ L_815F93EC:
     blr
 }
 
-/*
+/**
  * @note Address 0x815F948C
  * @note Size 0x4C
  */
@@ -175,7 +179,7 @@ static asm void __save_fpr() {
         blr
 }
 
-/*
+/**
  * @note Address 0x815F9440
  * @note Size 0x4C
  */
@@ -220,7 +224,7 @@ static asm void __restore_fpr() {
         blr
 }
 
-/*
+/**
  * @note Address 0x815F948C
  * @note Size 0x4C
  */
@@ -265,7 +269,7 @@ static asm void __save_gpr() {
         blr
 }
 
-/*
+/**
  * @note Address 0x815F94D8
  * @note Size 0x4C
  */
@@ -310,7 +314,7 @@ static asm void __restore_gpr() {
         blr
 }
 
-/*
+/**
  * @note Address: 0x815F9524 (4.3U)
  * @note Size: 0xEC
  */
@@ -385,7 +389,7 @@ L_815F9604:
 /* 815F960C 002C7A0C  4E 80 00 20 */    blr
 }
 
-/*
+/**
  * @note Address: 0x815F9610 (4.3U)
  * @note Size: 0x138
  */
@@ -483,7 +487,7 @@ L_815F9740:
 /* 815F9744 002C7B44  4E 80 00 20 */    blr
 }
 
-/*
+/**
  * @note Address: 0x815F9748 (4.3U)
  * @note Size: 0xE4
  */
@@ -556,7 +560,7 @@ L_815F9828:
 /* 815F9828 002C7C28  4E 80 00 20 */    blr
 }
 
-/*
+/**
  * @note Address: 0x815F982C (4.3U)
  * @note Size: 0x10C
  */
@@ -642,7 +646,7 @@ L_815F9934:
 /* 815F9934 002C7D34  4E 80 00 20 */    blr
 }
 
-/*
+/**
  * @note Address: 0x815F9938 (4.3U)
  * @note Size: 0x24
  */
@@ -658,7 +662,7 @@ asm void __shl2i() {
 /* 815F9958 002C7D58  4E 80 00 20 */    blr
 }
 
-/*
+/**
  * @note Address: 0x815F995C (4.3U)
  * @note Size: 0x24
  */
@@ -674,7 +678,7 @@ asm void __shr2u() {
 /* 815F997C 002C7D7C  4E 80 00 20 */    blr
 }
 
-/*
+/**
  * @note Address: 0x815F9980 (4.3U)
  * @note Size: 0x28
  */
@@ -692,7 +696,7 @@ L_815F99A0:
 /* 815F99A4 002C7DA4  4E 80 00 20 */    blr
 }
 
-/*
+/**
  * @note Address: 0x815F99A8 (4.3U)
  * @note Size: 0xB0
  */
@@ -747,7 +751,7 @@ L_815F9A44:
 /* 815F9A54 002C7E54  4E 80 00 20 */    blr
 }
 
-/*
+/**
  * @note Address: 0x815F9A58 (4.3U)
  * @note Size: 0x9C
  */
@@ -796,7 +800,7 @@ L_815F9AE0:
 /* 815F9AF0 002C7EF0  4E 80 00 20 */    blr
 }
 
-/*
+/**
  * @note Address: 0x815F9AF4 (4.3U)
  * @note Size: 0xA0
  */
@@ -846,7 +850,7 @@ L_815F9B7C:
 /* 815F9B90 002C7F90  4E 80 00 20 */    blr
 }
 
-/*
+/**
  * @note Address: 0x815F9B94 (4.3U)
  * @note Size: 0xCC
  */
@@ -910,7 +914,7 @@ L_815F9C58:
 /* 815F9C5C 002C805C  4E 80 00 20 */    blr
 }
 
-/*
+/**
  * @note Address: 0x815F9C60 (4.3U)
  * @note Size: 0xAB
  */

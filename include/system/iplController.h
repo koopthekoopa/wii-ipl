@@ -36,12 +36,29 @@ namespace ipl {
                 virtual int         unk_0x4C();
                 virtual int         unk_0x50();
                 virtual int         unk_0x54();
+                /**
+                 * @brief Gets the IR sensor position of the Wii Remote.
+                 * 
+                 * @return The IR sensor X and Y as `ipl::math::VEC2`.
+                 */
                 virtual math::VEC2  getIRPos() const;
+                /**
+                 * @brief Gets the Horizon of the Wii Remote.
+                 * 
+                 * @return The Horizon X and Y as `ipl::math::VEC2`.
+                 */
                 virtual math::VEC2  getHorizon() const;
                 virtual int         unk_0x60();
                 virtual int         unk_0x64();
                 virtual int         unk_0x68();
                 virtual int         unk_0x6C();
+                /**
+                 * @brief If the Wii Remote is available.
+                 * 
+                 * @remark This function is probably instead called `isValidDpd`
+                 * 
+                 * @return Whether it is active or not.
+                 */
                 virtual bool        Active() const;
         };
     }

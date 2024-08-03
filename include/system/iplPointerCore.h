@@ -12,7 +12,6 @@
 
 #include "layout/iplLayout.h"
 
-
 namespace ipl {
     enum {
         POINTER_LYT_TYPE_POINT = 0,
@@ -22,6 +21,9 @@ namespace ipl {
     };
 
     class Pointer;
+    /**
+     * @warning Do not use `ipl::PointerCoreObject`, Please instead use `ipl::Pointer`
+     */
     class PointerCoreObject {
         public:
             PointerCoreObject();
@@ -30,10 +32,7 @@ namespace ipl {
             void    draw();
             
             void    setState(int newState) { mState = newState; }
-            int     getState() { return mState; }
-            
-            void    setLayoutType(int newLayoutType) { mLayoutType = newLayoutType; }
-            int     getLayoutType() { return mLayoutType; }
+            void    changeType(int newLayoutType) { mLayoutType = newLayoutType; }
             
             void    setChan(int newChan) { mChan = newChan; }
             int     getChan() { return mChan; }
@@ -48,6 +47,9 @@ namespace ipl {
             f32             unk_0x10;
     };
     
+    /**
+     * @warning Do not use `ipl::PointerCore`, Please instead use `ipl::Pointer`
+     */
     class PointerCore {
         public:
             PointerCore();

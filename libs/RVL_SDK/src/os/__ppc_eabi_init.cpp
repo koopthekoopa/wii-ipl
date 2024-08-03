@@ -26,7 +26,7 @@ __declspec(section ".init") extern VoidPTR  _dtors[];
 
 #pragma section code_type ".init"
 
-/*
+/**
  * @note Address 0x813301D8 (4.3U)
  * @note Size 0x24
  */
@@ -44,7 +44,7 @@ asm void __init_hardware() {
     blr
 }
 
-/*
+/**
  * @note Address 0x813301FC (4.3U)
  * @note Size 0x34
  */
@@ -74,7 +74,7 @@ loop:
 
 #pragma section code_type ".text"
 
-/*
+/**
  * @note Address 0x81538608 (4.3U)
  * @note Size 0x20
  */
@@ -88,7 +88,7 @@ asm void __init_user() {
 }
 
 
-/*
+/**
  * @note Address 0x81538628 (4.3U)
  * @note Size 0x48
  */
@@ -112,7 +112,7 @@ static void _ExitProcess() {
     PPCHalt();
 }
 
-/*
+/**
  * @note Address 0x81538670 (4.3U)
  * @note Size 0x4C
  */

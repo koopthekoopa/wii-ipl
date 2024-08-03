@@ -10,7 +10,7 @@
 
 namespace ipl {
     namespace nigaoe {
-        /*
+        /**
          * @note Address: 0x8133EE00 (4.3U)
          * @note Size: 0x48
          */
@@ -19,7 +19,7 @@ namespace ipl {
             init(pHeap, width, height);
         }
         
-        /*
+        /**
          * @note Address: 0x8133EE48 (4.3U)
          * @note Size: 0x4C
          */
@@ -28,7 +28,7 @@ namespace ipl {
             init(pHeap, width, height);
         }
         
-        /*
+        /**
          * @note Address: 0x8133EE94 (4.3U)
          * @note Size: 0x7C
          */
@@ -49,7 +49,7 @@ namespace ipl {
             }
         }
         
-        /*
+        /**
          * @note Address: 0x8133EF10 (4.3U)
          * @note Size: 0x58
          */
@@ -57,7 +57,7 @@ namespace ipl {
             delete[] mpIconTex;
         }
         
-        /*
+        /**
          * @note Address: 0x8133EF68 (4.3U)
          * @note Size: 0x100
          */

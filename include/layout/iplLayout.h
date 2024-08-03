@@ -17,10 +17,21 @@ namespace ipl {
             public:
                 Object(EGG::Heap* pHeap, nand::LayoutFile* pLayoutArchive, const char* layoutDirectory, const char* layoutFileName);
                 
+                /**
+                 * @brief Lock up(?) until it has finished binding panes.
+                 */
                 void                    finishBinding();
+                /**
+                 * @brief Updates the Layout.
+                 */
                 void                    calc();
+                /**
+                 * @brief Draws the Layout.
+                 */
                 void                    draw();
-
+                /**
+                 * @brief Gets the root of the Layout.
+                 */
                 nw4r::lyt::Pane*        GetRootPane() { return mpRootPane; }
                 
             private:
