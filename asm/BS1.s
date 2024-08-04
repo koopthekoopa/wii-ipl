@@ -1,8 +1,10 @@
-/*---------------------------------------------------------------------------*
-                         Wii Menu Boot Sequence 1
-                    Disassembled from Version 4.3 (PAL)
-                but they are the exact same in every version
-*---------------------------------------------------------------------------*/
+/*-------------------------------------------------*
+             Wii Menu Boot Sequence 1
+         Disassembled from Version 4.3 (PAL)
+    but they are the exact same in every version
+*--------------------------------------------------*/
+
+/* `__start` MUST BE LINKED FIRST AT 0x80003400 */
 
 #include "BS1.inc"
      .text

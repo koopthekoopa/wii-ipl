@@ -55,3 +55,4 @@ objdiff.json.old
 
 # Scrapped :(
 .web/*
+tools/objcopy.txt

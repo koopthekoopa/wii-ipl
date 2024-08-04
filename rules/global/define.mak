@@ -3,10 +3,25 @@ NONE		= none
 
 DEFRULES	= mainrules
 
-AS			= powerpc-eabi-as
+AS			= powerpc-eabi-as$(EXEC)
 AS_MWCC		= mwasmeppc.exe
 CC			= mwcceppc.exe
 LD			= mwldeppc.exe
+
+ELF2BS		= elf2bs$(EXEC)
+MAKESEL		= makesel$(EXEC)
+GCC			= gcc
+
+# Defines for OS
+ifneq ($(OS),Windows_NT)
+WIBO	= $(TOOLS_ROOT)/wibo
+PY		= python3
+EXEC	=
+else
+WIBO	=
+PY		= python
+EXEC	= .exe
+endif
 
 CW_GC_27	= $(TOOLS_ROOT)/GC/2.7
 CW_GC_30A3	= $(TOOLS_ROOT)/GC/3.0a3

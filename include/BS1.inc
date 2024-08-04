@@ -1,9 +1,3 @@
-/*---------------------------------------------------------------------------*
-                         Wii Menu Boot Sequence 1
-                    Disassembled from Version 4.3 (PAL)
-                but they are the exact same in every version
-*---------------------------------------------------------------------------*/
-
 HID0_DEFAULT        .set    0x00110C64
 MSR_ADDRESS         .set    0x00002000
 

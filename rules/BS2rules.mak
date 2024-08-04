@@ -13,12 +13,15 @@ BS2_ELF_ENTRY_POINT	= __start
 BS2_ELF_ADDRESS		= 0x81330000
 BS2_ELF_LINKSCRIPT	= ldscript_ipl2.lcf
 
+# for BootStage
+BS2_IMAGE_SIZE		= 0x3B0000
+
 # libraries
-include $(RULES_ROOT)/BS2Libs/system.mak
-include $(RULES_ROOT)/BS2Libs/utility.mak
-include $(RULES_ROOT)/BS2Libs/layout.mak
-include $(RULES_ROOT)/BS2Libs/sound.mak
-include $(RULES_ROOT)/BS2Libs/BS2.mak
+-include $(RULES_ROOT)/BS2Libs/system.mak
+-include $(RULES_ROOT)/BS2Libs/utility.mak
+-include $(RULES_ROOT)/BS2Libs/layout.mak
+-include $(RULES_ROOT)/BS2Libs/sound.mak
+-include $(RULES_ROOT)/BS2Libs/BS2.mak
 
 BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(BS2_BLD_PATH)/utility.a \
@@ -33,7 +36,7 @@ $(BUILD_ROOT)/$(BS2_ELF_NAME).elf: $(BS2_ELF_LIBRARIES)
 	$(call LinkElf,$(BS2_ELF_CC),$?,$@,$(BS2_ELF_LINKSCRIPT))
 
 # the target
-bs2:	$(BUILD_ROOT)/$(BS2_ELF_NAME).elf
+bs2:	$(BUILD_ROOT)/$(BS2_ELF_NAME).elf | 
 
 clean_bs2:
 	@echo Cleaning BS2...

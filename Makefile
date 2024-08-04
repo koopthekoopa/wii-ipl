@@ -1,15 +1,13 @@
 VERSION		:= 43U
 IPL_INFILE	= base.$(VERSION).app
+IPL_OUTFILE	= ipl.$(VERSION).app
+
 ifneq ($(VERSION),43U)
-$(error Only Wii Menu 4.3U is currently supported)
+$(error Only Wii Menu 4.3U is currently supported. Sorry)
 endif
 
-ifneq ($(OS),Windows_NT)
-EXEC	= wine
-PY		= python
-else
-EXEC	=
-PY		= python3
+ifeq ("$(wildcard $(IPL_INFILE))","")
+$(error You must obtain the Wii Menu's Executable file and place it in this directory and rename it to $(IPL_INFILE))
 endif
 
 ### Directory defines
@@ -34,23 +32,33 @@ NW4R_ROOT			= $(LIBRARIES_ROOT)/NW4R
 EGG_ROOT			= $(LIBRARIES_ROOT)/EGG
 RVLFACELIB_ROOT		= $(LIBRARIES_ROOT)/RVLFaceLib
 
-include $(RULES_ROOT)/global/define.mak
-include $(RULES_ROOT)/global/build.mak
-
-### Setup library files
-
-
+-include $(RULES_ROOT)/global/define.mak
+-include $(RULES_ROOT)/global/build.mak
 
 ### Main thing
-all: Runtime RVL_SDK RevoEX bs1 bs2 $(BIN_OUTPUT)
+all: Runtime RVL_SDK RevoEX bs1 bs2 build/$(IPL_OUTFILE)
+	@echo Build complete!
 
 clean: clean_Runtime clean_RVL_SDK clean_RevoEX clean_bs1 clean_bs2
 
+prepare: PrepareDecomp
+
+build/$(IPL_OUTFILE): bs1 bs2
+	@echo Converting ELF files to $@...
+	@$(TOOLS_ROOT)/$(ELF2BS) -b $(IPL_INFILE) -bs1 $(BUILD_ROOT)/$(BS1_ELF_NAME).elf -bs2 $(BUILD_ROOT)/$(BS2_ELF_NAME).elf -bs2_size $(BS2_IMAGE_SIZE) -output $@
+	@echo == SHA1 Sum should fail here as this does not compile a matching executable yet. ==
+	@sha1sum -c sums/ipl.$(VERSION).sha1
+	
 
 
 ### Build library files
-include $(RUNTIME_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
-include $(REVOLUTION_SDK_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
-include $(REVOLUTION_EXT_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
-include $(RULES_ROOT)/BS1rules.mak
-include $(RULES_ROOT)/BS2rules.mak
+-include $(RULES_ROOT)/Prepare.mak
+
+-include $(RUNTIME_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
+-include $(REVOLUTION_SDK_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
+-include $(REVOLUTION_EXT_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
+
+-include $(RULES_ROOT)/BS1rules.mak
+-include $(RULES_ROOT)/BS2rules.mak
+
+

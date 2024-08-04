@@ -1,5 +1,4 @@
 import os
-import subprocess
 import urllib.request
 import zipfile
 import platform
@@ -20,11 +19,6 @@ def extractZIPURL(url):
     os.remove("temp.zip")
 
 def main():
-    print("Downloading MWCC...")
-    extractZIPURL("https://files.decomp.dev/compilers_latest.zip")
-    
-    print("Downloading PowerPC BinUtils...")
-
     sys = platform.system().lower()
     arc = platform.machine().lower()
     if sys.__contains__("msys"):
@@ -35,10 +29,6 @@ def main():
         arc = "i686"
 
     extractZIPURL("https://github.com/encounter/gc-wii-binutils/releases/latest/download/" + sys + "-" + arc + ".zip")
-    
-    for filename in os.listdir(f"{os.path.dirname(__file__)}/tools"):
-        f = os.path.join(f"{os.path.dirname(__file__)}/tools", filename)
-        os.chmod(f, os.stat(f).st_mode | stat.S_IEXEC)
         
 if __name__ == "__main__":
     main()
