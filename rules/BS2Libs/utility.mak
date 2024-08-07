@@ -11,6 +11,8 @@ UTILITY_OBJECTS	=	$(BS2_OBJASM_PATH)/utility/iplTree.o \
 					$(BS2_OBJASM_PATH)/utility/iplESMisc.o \
 					$(BS2_OBJASM_PATH)/utility/iplCSFlags.o
 
+DEPENDENCIES += $(UTILITY_OBJECTS:.o=.d)
+
 $(BS2_OBJ_PATH)/utility/%.o: $(BS2_SRC_PATH)/utility/%.cpp
 	$(call BuildCPPSources,$(UTILITY_CCPATH),$(UTILITY_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))
 

@@ -8,12 +8,13 @@ BS1_ELF_CC			= $(CW_GC_30A52)
 BS1_ELF_ADDRESS		= 0x80003400
 
 # only one little object
-BS1_OBJECTS	= BS1.o
+BS1_OBJECTS	= $(BS1_OBJ_PATH)/BS1.o
 
 $(BS1_OBJ_PATH)/%.o: $(ASSEMBLY_ROOT)/%.s
 	$(call BuildMWCCASMSources,$(INCLUDE_ROOT),$(BS1_ELF_CC))
-$(BUILD_ROOT)/$(BS1_ELF_NAME).elf: $(foreach OBJ,$(BS1_OBJECTS:.s=.o),$(BS1_OBJ_PATH)/$(OBJ))
-	$(call LinkSmallElf,$(BS1_ELF_CC),$?,$@,$(BS1_ELF_ADDRESS))
+
+$(BUILD_ROOT)/$(BS1_ELF_NAME).elf: $(BS1_OBJECTS)
+	$(call LinkSmallElf,$(BS1_ELF_CC),$(BS1_OBJECTS),$@,$(BS1_ELF_ADDRESS))
 
 bs1:	$(BUILD_ROOT)/$(BS1_ELF_NAME).elf
 

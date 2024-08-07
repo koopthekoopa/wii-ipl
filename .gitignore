@@ -43,7 +43,7 @@ tools/Wii/*
 tools/src/*
 tools/PPC/*
 tools/*.exe
-tools/info.txt
+tools/*.txt
 .vscode/settings.json
 *.bat
 *.img
@@ -57,4 +57,3 @@ objdiff.json.old
 
 # Scrapped :(
 .web/*
-tools/objcopy.txt

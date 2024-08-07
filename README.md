@@ -54,17 +54,22 @@ sudo pacman -S base-devel python git
 
 - You will need a copy of the Wii Menu's Executable from it's WAD file.
   - Use your preferred WAD Extractor and use it to extract the Wii Menu WAD file.
-  - Then copy the executable file `00000008.app` to the decompilation directory and rename it to:
-    - `base.43U.app` (For Wii Menu 4.3U)
+  - Then copy the executable file `00000008.app` to the decompilation directory and rename it to `base.<version>.app`
+    - Make sure the version on the filename does not include the decimal at the middle (for example `4.3U` should be `43U`)
     - Check to make sure the file matches with the [SHA-1 Sums](#sums)!   
 
-- You will need to prepare for compiling. To do that you need to type in:
+- You will need to prepare for build. To do that you need to type in:
   ```
-  make prepare
+  make prepare VERSION=<version>
   ```   
 
-- You are now ready to go! To build you need to type in `make VERSION=<Wii Menu version>` (for example: `make VERSION=43U` for Wii Menu 4.3U)
-  - Wii Menu 4.3U is the default version.
+- You are now ready to build! To build you need to type in
+  ```
+  make VERSION=<version>
+  ```
+  - The output should be `ipl.<version>.app` in the build folder.
+  
+> If you want to compile another version, you have to prepare for build again to do so.
 
 ## Sums
 |File|SHA-1|

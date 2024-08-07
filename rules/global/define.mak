@@ -11,6 +11,8 @@ PY		= python
 EXEC	= .exe
 endif
 
+FIX_DEP			= $(TOOLS_ROOT)/transform_dep.py
+
 PPC_ROOT		= $(TOOLS_ROOT)/PPC
 
 # Tools defines

@@ -20,7 +20,9 @@ endef
 define BuildCSources
 	@echo Compiling $<...
 	@mkdir -p $(dir $@)
-	@$(WIBO) $(1)/$(CC) -lang c $(2) -DIPL=$(VERSION) -I- -i $(4) $(foreach INC,$(3),-ir $(INC)) -nodefaults -c -o $@ $<
+	@$(WIBO) $(1)/$(CC) -lang c $(2) -DIPL=$(VERSION) -I- -i $(4) $(foreach INC,$(3),-ir $(INC)) -nodefaults -MD -c -o $(dir $@) $<
+	@$(PY) $(FIX_DEP) $(subst .o,.d,$@) $(subst .o,.unix.d,$@)
+	@rm -rf $(subst .o,.d,$@)
 endef
 
 # $(1) = CC Path
@@ -30,7 +32,9 @@ endef
 define BuildCPPSources
 	@echo Compiling $<...
 	@mkdir -p $(dir $@)
-	@$(WIBO) $(1)/$(CC) -lang c++ $(2) -DIPL=$(VERSION) -I- -i $(4) $(foreach INC,$(3),-ir $(INC)) -nodefaults -c -o $@ $<
+	@$(WIBO) $(1)/$(CC) -lang c++ $(2) -DIPL=$(VERSION) -I- -i $(4) $(foreach INC,$(3),-ir $(INC)) -nodefaults -MD -c -o $(dir $@) $<
+	@$(PY) $(FIX_DEP) $(subst .o,.d,$@) $(subst .o,.unix.d,$@)
+	@rm -rf $(subst .o,.d,$@)
 endef
 
 # $(1) = CC Path

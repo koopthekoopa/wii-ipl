@@ -4,6 +4,8 @@ OS_OBJECTS  =   $(SDK_OBJ_PATH)/os/OSAlarm.o \
                 $(SDK_OBJ_PATH)/os/stubs.o \
                 $(SDK_OBJ_PATH)/os/__ppc_eabi_init.o
 
+DEPENDENCIES += $(OS_OBJECTS:.o=.d)
+
 $(SDK_OBJ_PATH)/os/%.o: $(SDK_SRC_PATH)/os/%.c
 	$(call BuildCSources,$(OS_CCPATH),$(OS_CFLAGS),$(SDK_INC_PATHS),$(INCLUDE_ROOT))
 

@@ -49,6 +49,8 @@ SYSTEM_OBJECTS	=	$(BS2_OBJASM_PATH)/system/rvl_dec.o \
 					$(DATA_OUT_ROOT)/ipl_error_chn.bmg.o \
 					$(DATA_OUT_ROOT)/fatalDlg.ash.o
 
+DEPENDENCIES += $(SYSTEM_OBJECTS:.o=.d)
+
 $(BS2_OBJ_PATH)/system/%.o: $(BS2_SRC_PATH)/system/%.c
 	$(call BuildCSources,$(SYSTEM_CCPATH),$(SYSTEM_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))
 

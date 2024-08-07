@@ -4,6 +4,8 @@ LAYOUT_OBJECTS	=	$(BS2_OBJASM_PATH)/layout/GUIManager.o \
 					$(BS2_OBJASM_PATH)/layout/iplLayout.o \
 					$(BS2_OBJASM_PATH)/layout/iplGuiManager.o
 
+DEPENDENCIES += $(LAYOUT_OBJECTS:.o=.d)
+
 $(BS2_OBJ_PATH)/layout/%.o: $(BS2_SRC_PATH)/layout/%.cpp
 	$(call BuildCPPSources,$(LAYOUT_CCPATH),$(LAYOUT_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))
 
