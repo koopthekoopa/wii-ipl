@@ -1,9 +1,9 @@
-# mandatory
+# Mandatory
 BS2_SRC_PATH			= $(SOURCE_ROOT)
 BS2_ASM_PATH			= $(VER_ASSEMBLY_ROOT)
 BS2_BLD_PATH			= $(BUILD_ROOT)/BS2
-BS2_OBJ_PATH			= $(BS2_BLD_PATH)/obj
-BS2_OBJ_ASM_PATH		= $(BS2_BLD_PATH)/obj/$(ASSEMBLY_ROOT)
+BS2_OBJ_PATH			= $(BS2_BLD_PATH)/$(OBJECT_ROOT)
+BS2_OBJASM_PATH			= $(BS2_OBJ_PATH)/$(ASSEMBLY_ROOT)
 BS2_INC_PATHS			= $(COMMON_INCLUDES)
 
 # stuff for linking the elf
@@ -36,7 +36,7 @@ $(BUILD_ROOT)/$(BS2_ELF_NAME).elf: $(BS2_ELF_LIBRARIES)
 	$(call LinkElf,$(BS2_ELF_CC),$?,$@,$(BS2_ELF_LINKSCRIPT))
 
 # the target
-bs2:	$(BUILD_ROOT)/$(BS2_ELF_NAME).elf | 
+bs2:	$(BUILD_ROOT)/$(BS2_ELF_NAME).elf
 
 clean_bs2:
 	@echo Cleaning BS2...

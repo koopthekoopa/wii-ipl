@@ -1,65 +1,64 @@
-SYSTEM_LIBNAME	=	system
 SYSTEM_CFLAGS	=	-O4,s -ipa file $(COMMON_CCFLAGS)
 SYSTEM_CCPATH	=	$(CW_GC_30A52)
-SYSTEM_OBJECTS	=	$(ASSEMBLY_ROOT)/rvl_dec.o \
-					RIPL_BoardRecord.o \
-					$(ASSEMBLY_ROOT)/iplSystem.o \
-					$(ASSEMBLY_ROOT)/iplController.o \
-					$(ASSEMBLY_ROOT)/iplChannelManager.o \
-					$(ASSEMBLY_ROOT)/iplChannelScriptManager.o \
-					$(ASSEMBLY_ROOT)/iplFramework.o \
-					$(ASSEMBLY_ROOT)/iplException.o \
-					$(ASSEMBLY_ROOT)/iplMessage.o \
-					$(ASSEMBLY_ROOT)/iplMessageManager.o \
-					$(ASSEMBLY_ROOT)/iplNigaoeManager.o \
-					iplNigaoe.o \
-					$(ASSEMBLY_ROOT)/iplCdbManager.o \
-					$(ASSEMBLY_ROOT)/iplCdbWrapper.o \
-					$(ASSEMBLY_ROOT)/iplPlayTimeLog.o \
-					$(ASSEMBLY_ROOT)/iplNwc24Manager.o \
-					iplPointer.o \
-					iplPointerCore.o \
-					$(ASSEMBLY_ROOT)/iplDialogWindow.o \
-					$(ASSEMBLY_ROOT)/iplHomeButtonMenu.o \
-					$(ASSEMBLY_ROOT)/iplNandSDWorker.o \
-					$(ASSEMBLY_ROOT)/iplKeyboard.o \
-					$(ASSEMBLY_ROOT)/iplErrorHandler.o \
-					$(ASSEMBLY_ROOT)/iplResetHandler.o \
-					$(ASSEMBLY_ROOT)/iplWarningHandler.o \
-					$(ASSEMBLY_ROOT)/iplSocketSetting.o \
-					$(ASSEMBLY_ROOT)/iplPostmanManager.o \
-					$(ASSEMBLY_ROOT)/iplSaveDataManager.o \
-					$(ASSEMBLY_ROOT)/iplChannelRsoThread.o \
-					$(ASSEMBLY_ROOT)/IplRsoSystem.o \
-					$(ASSEMBLY_ROOT)/iplCdbBackup.o \
-					$(ASSEMBLY_ROOT)/odh.o \
-					$(ASSEMBLY_ROOT)/iplSDVFWorker.o \
-					$(ASSEMBLY_ROOT)/iplNandWrapper.o \
-					main.o \
-					$(ASSEMBLY_ROOT)/iplBs2Manager.o \
-					$(ASSEMBLY_ROOT)/TVRC.o \
-					$(ASSEMBLY_ROOT)/iplTVRCManager.o \
-					$(ASSEMBLY_ROOT)/data/iplEngErrorBmg.o \
-					$(ASSEMBLY_ROOT)/data/iplFraErrorBmg.o \
-					$(ASSEMBLY_ROOT)/data/iplGerErrorBmg.o \
-					$(ASSEMBLY_ROOT)/data/iplItaErrorBmg.o \
-					$(ASSEMBLY_ROOT)/data/iplJpnErrorBmg.o \
-					$(ASSEMBLY_ROOT)/data/iplDutErrorBmg.o \
-					$(ASSEMBLY_ROOT)/data/iplSpaErrorBmg.o \
-					$(ASSEMBLY_ROOT)/data/iplKorErrorBmg.o \
-					$(ASSEMBLY_ROOT)/data/iplChnErrorBmg.o \
-					$(ASSEMBLY_ROOT)/data/UnkErrorAshFile.o
+SYSTEM_OBJECTS	=	$(BS2_OBJASM_PATH)/system/rvl_dec.o \
+					$(BS2_OBJ_PATH)/system/RIPL_BoardRecord.o \
+					$(BS2_OBJASM_PATH)/system/iplSystem.o \
+					$(BS2_OBJASM_PATH)/system/iplController.o \
+					$(BS2_OBJASM_PATH)/system/iplChannelManager.o \
+					$(BS2_OBJASM_PATH)/system/iplChannelScriptManager.o \
+					$(BS2_OBJASM_PATH)/system/iplFramework.o \
+					$(BS2_OBJASM_PATH)/system/iplException.o \
+					$(BS2_OBJASM_PATH)/system/iplMessage.o \
+					$(BS2_OBJASM_PATH)/system/iplMessageManager.o \
+					$(BS2_OBJASM_PATH)/system/iplNigaoeManager.o \
+					$(BS2_OBJ_PATH)/system/iplNigaoe.o \
+					$(BS2_OBJASM_PATH)/system/iplCdbManager.o \
+					$(BS2_OBJASM_PATH)/system/iplCdbWrapper.o \
+					$(BS2_OBJASM_PATH)/system/iplPlayTimeLog.o \
+					$(BS2_OBJASM_PATH)/system/iplNwc24Manager.o \
+					$(BS2_OBJ_PATH)/system/iplPointer.o \
+					$(BS2_OBJ_PATH)/system/iplPointerCore.o \
+					$(BS2_OBJASM_PATH)/system/iplDialogWindow.o \
+					$(BS2_OBJASM_PATH)/system/iplHomeButtonMenu.o \
+					$(BS2_OBJASM_PATH)/system/iplNandSDWorker.o \
+					$(BS2_OBJASM_PATH)/system/iplKeyboard.o \
+					$(BS2_OBJASM_PATH)/system/iplErrorHandler.o \
+					$(BS2_OBJASM_PATH)/system/iplResetHandler.o \
+					$(BS2_OBJASM_PATH)/system/iplWarningHandler.o \
+					$(BS2_OBJASM_PATH)/system/iplSocketSetting.o \
+					$(BS2_OBJASM_PATH)/system/iplPostmanManager.o \
+					$(BS2_OBJASM_PATH)/system/iplSaveDataManager.o \
+					$(BS2_OBJASM_PATH)/system/iplChannelRsoThread.o \
+					$(BS2_OBJASM_PATH)/system/IplRsoSystem.o \
+					$(BS2_OBJASM_PATH)/system/iplCdbBackup.o \
+					$(BS2_OBJASM_PATH)/system/odh.o \
+					$(BS2_OBJASM_PATH)/system/iplSDVFWorker.o \
+					$(BS2_OBJASM_PATH)/system/iplNandWrapper.o \
+					$(BS2_OBJ_PATH)/system/main.o \
+					$(BS2_OBJASM_PATH)/system/iplBs2Manager.o \
+					$(BS2_OBJASM_PATH)/system/TVRC.o \
+					$(BS2_OBJASM_PATH)/system/iplTVRCManager.o \
+					$(DATA_OUT_ROOT)/ipl_error_eng.bmg.o \
+					$(DATA_OUT_ROOT)/ipl_error_fra.bmg.o \
+					$(DATA_OUT_ROOT)/ipl_error_ger.bmg.o \
+					$(DATA_OUT_ROOT)/ipl_error_ita.bmg.o \
+					$(DATA_OUT_ROOT)/ipl_error_jpn.bmg.o \
+					$(DATA_OUT_ROOT)/ipl_error_ned.bmg.o \
+					$(DATA_OUT_ROOT)/ipl_error_spa.bmg.o \
+					$(DATA_OUT_ROOT)/ipl_error_kor.bmg.o \
+					$(DATA_OUT_ROOT)/ipl_error_chn.bmg.o \
+					$(DATA_OUT_ROOT)/fatalDlg.ash.o
 
-$(BS2_OBJ_PATH)/$(SYSTEM_LIBNAME)/%.o: $(BS2_SRC_PATH)/$(SYSTEM_LIBNAME)/%.c
+$(BS2_OBJ_PATH)/system/%.o: $(BS2_SRC_PATH)/system/%.c
 	$(call BuildCSources,$(SYSTEM_CCPATH),$(SYSTEM_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))
 
-$(BS2_OBJ_PATH)/$(SYSTEM_LIBNAME)/%.o: $(BS2_SRC_PATH)/$(SYSTEM_LIBNAME)/%.cpp
+$(BS2_OBJ_PATH)/system/%.o: $(BS2_SRC_PATH)/system/%.cpp
 	$(call BuildCPPSources,$(SYSTEM_CCPATH),$(SYSTEM_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))
 
-$(BS2_OBJ_PATH)/$(SYSTEM_LIBNAME)/$(ASSEMBLY_ROOT)/%.o: $(BS2_ASM_PATH)/$(SYSTEM_LIBNAME)/%.s
+$(BS2_OBJASM_PATH)/system/%.o: $(BS2_ASM_PATH)/system/%.s
 	$(call BuildASMSources,$(INCLUDE_ROOT))
 
-$(BS2_BLD_PATH)/$(SYSTEM_LIBNAME).a: $(foreach OBJ,$(SYSTEM_OBJECTS),$(BS2_OBJ_PATH)/$(SYSTEM_LIBNAME)/$(OBJ))
+$(BS2_BLD_PATH)/system.a: $(SYSTEM_OBJECTS)
 	$(call LinkLibrary,$(SYSTEM_CCPATH),$?,$@)
 
 

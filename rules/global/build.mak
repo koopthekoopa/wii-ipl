@@ -1,15 +1,8 @@
-ifneq ($(OS),Windows_NT)
-define AddPerms
-	@chmod +x $(1)
-endef
-endif
-
 # $(1) = Include Path
 define BuildASMSources
 	@echo Assembling $<...
 	@mkdir -p $(dir $@)
-	@$(call AddPerms,$(TOOLS_ROOT)/$(AS))
-	@$(TOOLS_ROOT)/$(AS) $(COMMON_ASFLAGS) -DIPL=$(VERSION) -I- -I $(1) -c -o $@ $<
+	@$(AS) $(COMMON_ASFLAGS) -DIPL=$(VERSION) -I- -I $(1) -c -o $@ $<
 endef
 
 # $(1) = Include Path

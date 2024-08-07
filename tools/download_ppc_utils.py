@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 import urllib.request
 import zipfile
@@ -13,8 +15,11 @@ def extractZIPURL(url):
     file.write(response)
     file.close()
     
+    if not os.path.exists("tools/PPC"):
+        os.makedirs("tools/PPC")
+    
     with zipfile.ZipFile("temp.zip", 'r') as zip:
-        zip.extractall("tools/") 
+        zip.extractall("tools/PPC") 
     
     os.remove("temp.zip")
 

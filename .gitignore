@@ -36,10 +36,12 @@
 # Exclusive for decomp
 ctx.c
 .private/*
+build/*
+data/*
 tools/GC/*
 tools/Wii/*
 tools/src/*
-tools/powerpc-eabi-embedspu
+tools/PPC/*
 tools/*.exe
 tools/info.txt
 .vscode/settings.json

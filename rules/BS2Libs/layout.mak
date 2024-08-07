@@ -1,20 +1,16 @@
-LAYOUT_LIBNAME	=	layout
 LAYOUT_CFLAGS	=	-O4,s -ipa file $(COMMON_CCFLAGS)
 LAYOUT_CCPATH	=	$(CW_GC_30A52)
-LAYOUT_OBJECTS	=	$(ASSEMBLY_ROOT)/GUIManager.o \
-					$(ASSEMBLY_ROOT)/iplLayout.o \
-					$(ASSEMBLY_ROOT)/iplGuiManager.o
+LAYOUT_OBJECTS	=	$(BS2_OBJASM_PATH)/layout/GUIManager.o \
+					$(BS2_OBJASM_PATH)/layout/iplLayout.o \
+					$(BS2_OBJASM_PATH)/layout/iplGuiManager.o
 
-$(BS2_OBJ_PATH)/$(LAYOUT_LIBNAME)/%.o: $(BS2_SRC_PATH)/$(LAYOUT_LIBNAME)/%.c
-	$(call BuildCSources,$(LAYOUT_CCPATH),$(LAYOUT_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))
-
-$(BS2_OBJ_PATH)/$(LAYOUT_LIBNAME)/%.o: $(BS2_SRC_PATH)/$(LAYOUT_LIBNAME)/%.cpp
+$(BS2_OBJ_PATH)/layout/%.o: $(BS2_SRC_PATH)/layout/%.cpp
 	$(call BuildCPPSources,$(LAYOUT_CCPATH),$(LAYOUT_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))
 
-$(BS2_OBJ_PATH)/$(LAYOUT_LIBNAME)/$(ASSEMBLY_ROOT)/%.o: $(BS2_ASM_PATH)/$(LAYOUT_LIBNAME)/%.s
+$(BS2_OBJASM_PATH)/layout/%.o: $(BS2_ASM_PATH)/layout/%.s
 	$(call BuildASMSources,$(INCLUDE_ROOT))
 
-$(BS2_BLD_PATH)/$(LAYOUT_LIBNAME).a: $(foreach OBJ,$(LAYOUT_OBJECTS),$(BS2_OBJ_PATH)/$(LAYOUT_LIBNAME)/$(OBJ))
+$(BS2_BLD_PATH)/layout.a: $(LAYOUT_OBJECTS)
 	$(call LinkLibrary,$(LAYOUT_CCPATH),$?,$@)
 
 

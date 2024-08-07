@@ -1,6 +1,6 @@
 # mandatory
 BS1_BLD_PATH		= $(BUILD_ROOT)/BS1
-BS1_OBJ_PATH		= $(BS1_BLD_PATH)/obj
+BS1_OBJ_PATH		= $(BS1_BLD_PATH)/$(OBJECT_ROOT)
 
 # stuff for linking the elf
 BS1_ELF_NAME		= BS1
