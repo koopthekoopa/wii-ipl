@@ -13,16 +13,16 @@
 /* 81344820 00012C20  90 01 00 34 */	stw r0, 0x34(r1)
 /* 81344824 00012C24  39 61 00 30 */	addi r11, r1, 0x30
 /* 81344828 00012C28  48 2B 4C 91 */	bl _savegpr_25
-/* 8134482C 00012C2C  3C A0 81 63 */	lis r5, lbl_81635A20@ha
+/* 8134482C 00012C2C  3C A0 81 63 */	lis r5, __vt__Q23ipl12DialogWindow@ha
 /* 81344830 00012C30  38 C0 00 00 */	li r6, 0x0
 /* 81344834 00012C34  38 00 FF FF */	li r0, -0x1
-/* 81344838 00012C38  3F E0 81 63 */	lis r31, lbl_81635510@ha
-/* 8134483C 00012C3C  38 A5 5A 20 */	addi r5, r5, lbl_81635A20@l
+/* 81344838 00012C38  3F E0 81 63 */	lis r31, mscBtnName__Q23ipl12DialogWindow@ha
+/* 8134483C 00012C3C  38 A5 5A 20 */	addi r5, r5, __vt__Q23ipl12DialogWindow@l
 /* 81344840 00012C40  90 C3 00 08 */	stw r6, 0x8(r3)
 /* 81344844 00012C44  7C 7C 1B 78 */	mr r28, r3
 /* 81344848 00012C48  7C 9D 23 78 */	mr r29, r4
 /* 8134484C 00012C4C  90 A3 00 00 */	stw r5, 0x0(r3)
-/* 81344850 00012C50  3B FF 55 10 */	addi r31, r31, lbl_81635510@l
+/* 81344850 00012C50  3B FF 55 10 */	addi r31, r31, mscBtnName__Q23ipl12DialogWindow@l
 /* 81344854 00012C54  38 A0 00 04 */	li r5, 0x4
 /* 81344858 00012C58  90 C3 00 0C */	stw r6, 0xc(r3)
 /* 8134485C 00012C5C  90 03 00 20 */	stw r0, 0x20(r3)
@@ -565,9 +565,9 @@
 /* 81345078 00013478  90 01 00 24 */	stw r0, 0x24(r1)
 /* 8134507C 0001347C  39 61 00 20 */	addi r11, r1, 0x20
 /* 81345080 00013480  48 2B 44 45 */	bl _savegpr_28
-/* 81345084 00013484  3D 20 81 64 */	lis r9, lbl_816427E0@ha
+/* 81345084 00013484  3D 20 81 64 */	lis r9, __vt__Q23gui7Manager@ha
 /* 81345088 00013488  2C 04 00 00 */	cmpwi r4, 0x0
-/* 8134508C 0001348C  39 29 27 E0 */	addi r9, r9, lbl_816427E0@l
+/* 8134508C 0001348C  39 29 27 E0 */	addi r9, r9, __vt__Q23gui7Manager@l
 /* 81345090 00013490  90 83 00 04 */	stw r4, 0x4(r3)
 /* 81345094 00013494  7C 7C 1B 78 */	mr r28, r3
 /* 81345098 00013498  7C BD 2B 78 */	mr r29, r5
@@ -586,16 +586,16 @@
 /* 813450C8 000134C8  38 7C 00 08 */	addi r3, r28, 0x8
 /* 813450CC 000134CC  38 80 00 08 */	li r4, 0x8
 /* 813450D0 000134D0  48 1C CF 8D */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
-/* 813450D4 000134D4  3C 80 81 64 */	lis r4, lbl_81642784@ha
+/* 813450D4 000134D4  3C 80 81 64 */	lis r4, __vt__Q23gui11PaneManager@ha
 /* 813450D8 000134D8  93 BC 00 24 */	stw r29, 0x24(r28)
-/* 813450DC 000134DC  38 84 27 84 */	addi r4, r4, lbl_81642784@l
+/* 813450DC 000134DC  38 84 27 84 */	addi r4, r4, __vt__Q23gui11PaneManager@l
 /* 813450E0 000134E0  38 7C 00 18 */	addi r3, r28, 0x18
 /* 813450E4 000134E4  90 9C 00 00 */	stw r4, 0x0(r28)
 /* 813450E8 000134E8  38 80 00 08 */	li r4, 0x8
 /* 813450EC 000134EC  48 1C CF 71 */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
-/* 813450F0 000134F0  3C 80 81 63 */	lis r4, lbl_816359C4@ha
+/* 813450F0 000134F0  3C 80 81 63 */	lis r4, __vt__Q33ipl3gui11PaneManager@ha
 /* 813450F4 000134F4  93 DC 00 2C */	stw r30, 0x2c(r28)
-/* 813450F8 000134F8  38 84 59 C4 */	addi r4, r4, lbl_816359C4@l
+/* 813450F8 000134F8  38 84 59 C4 */	addi r4, r4, __vt__Q33ipl3gui11PaneManager@l
 /* 813450FC 000134FC  39 61 00 20 */	addi r11, r1, 0x20
 /* 81345100 00013500  90 9C 00 00 */	stw r4, 0x0(r28)
 /* 81345104 00013504  7F 83 E3 78 */	mr r3, r28
@@ -3436,9 +3436,9 @@
 /* 813477A8 00015BA8  90 01 00 24 */	stw r0, 0x24(r1)
 /* 813477AC 00015BAC  39 61 00 20 */	addi r11, r1, 0x20
 /* 813477B0 00015BB0  48 2B 1D 11 */	bl _savegpr_27
-/* 813477B4 00015BB4  3F C0 81 63 */	lis r30, lbl_81635510@ha
+/* 813477B4 00015BB4  3F C0 81 63 */	lis r30, mscBtnName__Q23ipl12DialogWindow@ha
 /* 813477B8 00015BB8  7C 9B 23 78 */	mr r27, r4
-/* 813477BC 00015BBC  3B DE 55 10 */	addi r30, r30, lbl_81635510@l
+/* 813477BC 00015BBC  3B DE 55 10 */	addi r30, r30, mscBtnName__Q23ipl12DialogWindow@l
 /* 813477C0 00015BC0  3B A0 FF FF */	li r29, -0x1
 /* 813477C4 00015BC4  3B 80 00 00 */	li r28, 0x0
 /* 813477C8 00015BC8  3B E0 00 00 */	li r31, 0x0
@@ -3798,7 +3798,8 @@
 .balign 8
 
 # .data:0x0 | 0x81635510 | size: 0x42A
-.obj lbl_81635510, global
+# ipl::DialogWindow::mscBtnName
+.obj mscBtnName__Q23ipl12DialogWindow, global
 	.4byte lbl_81696130
 	.4byte lbl_81696137
 	.4byte lbl_8169613E
@@ -4066,7 +4067,7 @@
 	.4byte 0x5F41632E
 	.4byte 0x62726C61
 	.2byte 0x6E00
-.endobj lbl_81635510
+.endobj mscBtnName__Q23ipl12DialogWindow
 
 # .data:0x42A | 0x8163593A | size: 0x14
 .obj lbl_8163593A, global
@@ -4117,7 +4118,8 @@
 .endobj lbl_816359B4
 
 # .data:0x4B4 | 0x816359C4 | size: 0x5C
-.obj lbl_816359C4, global
+# ipl::gui::PaneManager::__vtable
+.obj __vt__Q33ipl3gui11PaneManager, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte create__Q23gui9InterfaceFv
@@ -4141,22 +4143,33 @@
 	.4byte setDrawInfo__Q23gui11PaneManagerFPCQ34nw4r3lyt8DrawInfo
 	.4byte setAllBoundingBoxComponentTriggerTarget__Q23gui11PaneManagerFb
 	.4byte "walkInChildren__Q23gui11PaneManagerFRQ34nw4r2ut28LinkList<Q34nw4r3lyt4Pane,4>"
-.endobj lbl_816359C4
+.endobj __vt__Q33ipl3gui11PaneManager
 
-# .data:0x510 | 0x81635A20 | size: 0x50
-.obj lbl_81635A20, global
+# .data:0x510 | 0x81635A20 | size: 0x18
+# ipl::DialogWindow::__vtable
+.obj __vt__Q23ipl12DialogWindow, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onEvent__Q23ipl12DialogWindowFUlUlPv
 	.4byte setManager__Q23gui12EventHandlerFPQ23gui7Manager
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
+.endobj __vt__Q23ipl12DialogWindow
+
+# .data:0x528 | 0x81635A38 | size: 0x18
+# gui::EventHandler::__vtable
+.obj __vt__Q23gui12EventHandler, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onEvent__Q23gui12EventHandlerFUlUlPv
 	.4byte setManager__Q23gui12EventHandlerFPQ23gui7Manager
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
+.endobj __vt__Q23gui12EventHandler
+
+# .data:0x540 | 0x81635A50 | size: 0x20
+# gui::Interface::__vtable
+.obj __vt__Q23gui9Interface, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte create__Q23gui9InterfaceFv
@@ -4165,7 +4178,7 @@
 	.4byte draw__Q23gui9InterfaceFRA3_A4_f
 	.4byte draw__Q23gui9InterfaceFv
 	.4byte __dt__Q23gui9InterfaceFv
-.endobj lbl_81635A20
+.endobj __vt__Q23gui9Interface
 
 # 0x81694510..0x81694540 | size: 0x30
 .section .sdata2, "a"

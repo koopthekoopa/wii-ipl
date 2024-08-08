@@ -25,9 +25,9 @@
 /* 8133C710 0000AB10  38 E0 00 00 */	li r7, 0x0
 /* 8133C714 0000AB14  39 40 00 00 */	li r10, 0x0
 /* 8133C718 0000AB18  4B FF EC 1D */	bl __ct__Q33ipl4nand4FileFPQ23EGG4HeapPCcP9ARCHandlePCciUlb
-/* 8133C71C 0000AB1C  3C 60 81 63 */	lis r3, lbl_81634DB8@ha
+/* 8133C71C 0000AB1C  3C 60 81 63 */	lis r3, __vt__Q33ipl4nand10SharedFile@ha
 /* 8133C720 0000AB20  38 00 00 00 */	li r0, 0x0
-/* 8133C724 0000AB24  38 63 4D B8 */	addi r3, r3, lbl_81634DB8@l
+/* 8133C724 0000AB24  38 63 4D B8 */	addi r3, r3, __vt__Q33ipl4nand10SharedFile@l
 /* 8133C728 0000AB28  38 80 FF FF */	li r4, -0x1
 /* 8133C72C 0000AB2C  90 7B 00 00 */	stw r3, 0x0(r27)
 /* 8133C730 0000AB30  39 61 00 20 */	addi r11, r1, 0x20
@@ -422,7 +422,8 @@
 .endobj lbl_81634DA6
 
 # .data:0x28 | 0x81634DB8 | size: 0x58
-.obj lbl_81634DB8, global
+# ipl::nand::SharedFile::__vtable
+.obj __vt__Q33ipl4nand10SharedFile, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl4nand10SharedFileFv
@@ -445,7 +446,7 @@
 	.4byte isLz7Compressed__Q33ipl4nand4FileFPCUc
 	.4byte callback___Q33ipl4nand4FileFv
 	.4byte 0x00000000
-.endobj lbl_81634DB8
+.endobj __vt__Q33ipl4nand10SharedFile
 
 # 0x816960A8..0x816960B0 | size: 0x8
 .section .sdata, "wa"

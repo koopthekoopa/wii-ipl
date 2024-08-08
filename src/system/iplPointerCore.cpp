@@ -24,7 +24,7 @@ namespace ipl {
      */
    void PointerCoreObject::calc(Pointer* pPointer, const controller::Interface* pController) {
         mLayoutObject = NULL;
-        if (pController && pController->Active()) {
+        if (pController && pController->isValidDpd()) {
             nw4r::lyt::Pane *pCursorMovePane, *pCursorRotate, *pCursorRotateShadow;
 
             // Prepare layout
@@ -32,7 +32,7 @@ namespace ipl {
             pCursorMovePane = mLayoutObject->GetRootPane()->FindPaneByName("N_Trans");
 
             // Set the position
-            pCursorMovePane->SetTranslate(utility::get_cursor_pos(pController->getIRPos()));
+            pCursorMovePane->SetTranslate(utility::get_cursor_pos(pController->getDpdProjectionPos()));
 
             // Prepare rotation
             math::VEC2 cursorHorizon(pController->getHorizon());

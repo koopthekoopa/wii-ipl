@@ -13,12 +13,12 @@
 /* 8136E908 0003CD08  90 01 00 24 */	stw r0, 0x24(r1)
 /* 8136E90C 0003CD0C  39 61 00 20 */	addi r11, r1, 0x20
 /* 8136E910 0003CD10  48 28 AB B9 */	bl _savegpr_29
-/* 8136E914 0003CD14  3C E0 81 64 */	lis r7, lbl_81643FC4@ha
-/* 8136E918 0003CD18  3C C0 81 64 */	lis r6, lbl_81643FD0@ha
-/* 8136E91C 0003CD1C  38 E7 3F C4 */	addi r7, r7, lbl_81643FC4@l
+/* 8136E914 0003CD14  3C E0 81 64 */	lis r7, __vt__Q37ext_ead3www13BrowserWindow@ha
+/* 8136E918 0003CD18  3C C0 81 64 */	lis r6, "__vt__Q37ext_ead3www58ut_message_cmd<Q47ext_ead3www13BrowserWindow9WindowCmd,32>"@ha
+/* 8136E91C 0003CD1C  38 E7 3F C4 */	addi r7, r7, __vt__Q37ext_ead3www13BrowserWindow@l
 /* 8136E920 0003CD20  3B E0 00 00 */	li r31, 0x0
 /* 8136E924 0003CD24  3B C3 00 88 */	addi r30, r3, 0x88
-/* 8136E928 0003CD28  38 C6 3F D0 */	addi r6, r6, lbl_81643FD0@l
+/* 8136E928 0003CD28  38 C6 3F D0 */	addi r6, r6, "__vt__Q37ext_ead3www58ut_message_cmd<Q47ext_ead3www13BrowserWindow9WindowCmd,32>"@l
 /* 8136E92C 0003CD2C  90 83 00 08 */	stw r4, 0x8(r3)
 /* 8136E930 0003CD30  7C 7D 1B 78 */	mr r29, r3
 /* 8136E934 0003CD34  38 9E 01 A4 */	addi r4, r30, 0x1a4
@@ -112,8 +112,8 @@
 /* 8136EA60 0003CE60  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8136EA64 0003CE64  7C 7E 1B 78 */	mr r30, r3
 /* 8136EA68 0003CE68  41 82 00 30 */	beq .L_8136EA98
-/* 8136EA6C 0003CE6C  3C 80 81 64 */	lis r4, lbl_81643FC4@ha
-/* 8136EA70 0003CE70  38 84 3F C4 */	addi r4, r4, lbl_81643FC4@l
+/* 8136EA6C 0003CE6C  3C 80 81 64 */	lis r4, __vt__Q37ext_ead3www13BrowserWindow@ha
+/* 8136EA70 0003CE70  38 84 3F C4 */	addi r4, r4, __vt__Q37ext_ead3www13BrowserWindow@l
 /* 8136EA74 0003CE74  90 83 00 00 */	stw r4, 0x0(r3)
 /* 8136EA78 0003CE78  48 00 02 5D */	bl CloseWindow__Q37ext_ead3www13BrowserWindowFv
 /* 8136EA7C 0003CE7C  38 7E 00 88 */	addi r3, r30, 0x88
@@ -1320,14 +1320,16 @@
 .endobj jumptable_81643EEC
 
 # .data:0x4BC | 0x81643FC4 | size: 0xC
-.obj lbl_81643FC4, global
+# ext_ead::www::BrowserWindow::__vtable
+.obj __vt__Q37ext_ead3www13BrowserWindow, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q37ext_ead3www13BrowserWindowFv
-.endobj lbl_81643FC4
+.endobj __vt__Q37ext_ead3www13BrowserWindow
 
 # .data:0x4C8 | 0x81643FD0 | size: 0x20
-.obj lbl_81643FD0, global
+# ext_ead::www::ut_message_cmd<ext_ead::www::BrowserWindow::WindowCmd, 32>::__vtable
+.obj "__vt__Q37ext_ead3www58ut_message_cmd<Q47ext_ead3www13BrowserWindow9WindowCmd,32>", global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte "__dt__Q37ext_ead3www58ut_message_cmd<Q47ext_ead3www13BrowserWindow9WindowCmd,32>Fv"
@@ -1336,7 +1338,7 @@
 	.4byte ReceiveMessage__Q37ext_ead3www15ut_message_baseFPPvl
 	.4byte InitMessageQueue__Q37ext_ead3www15ut_message_baseFPPvl
 	.4byte 0x00000000
-.endobj lbl_81643FD0
+.endobj "__vt__Q37ext_ead3www58ut_message_cmd<Q47ext_ead3www13BrowserWindow9WindowCmd,32>"
 
 # 0x816962F8..0x81696300 | size: 0x8
 .section .sdata, "wa"

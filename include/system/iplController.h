@@ -16,7 +16,7 @@ namespace ipl {
             public:
                 Interface();
 
-                virtual int         unk_0x08();
+                virtual             ~Interface();
                 virtual int         unk_0x0C();
                 virtual int         unk_0x10();
                 virtual int         unk_0x14();
@@ -41,25 +41,23 @@ namespace ipl {
                  * 
                  * @return The IR sensor X and Y as `ipl::math::VEC2`.
                  */
-                virtual math::VEC2  getIRPos() const;
+                virtual math::VEC2  getDpdProjectionPos() const;    // 0x58
                 /**
                  * @brief Gets the Horizon of the Wii Remote.
                  * 
                  * @return The Horizon X and Y as `ipl::math::VEC2`.
                  */
-                virtual math::VEC2  getHorizon() const;
+                virtual math::VEC2  getHorizon() const;             // 0x5C
                 virtual int         unk_0x60();
                 virtual int         unk_0x64();
                 virtual int         unk_0x68();
                 virtual int         unk_0x6C();
                 /**
-                 * @brief If the Wii Remote is available.
+                 * @brief If the Wii Remote is pointing to the IR sensor bar.
                  * 
-                 * @remark This function is probably instead called `isValidDpd`
-                 * 
-                 * @return Whether it is active or not.
+                 * @return Whether it is pointing or not.
                  */
-                virtual bool        Active() const;
+                virtual bool        isValidDpd() const;             // 0x70
         };
     }
 }

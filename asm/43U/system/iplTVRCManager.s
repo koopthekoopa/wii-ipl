@@ -13,9 +13,9 @@
 /* 81361958 0002FD58  90 01 00 24 */	stw r0, 0x24(r1)
 /* 8136195C 0002FD5C  39 61 00 20 */	addi r11, r1, 0x20
 /* 81361960 0002FD60  48 29 7B 65 */	bl _savegpr_28
-/* 81361964 0002FD64  3C C0 81 64 */	lis r6, lbl_816398F4@ha
+/* 81361964 0002FD64  3C C0 81 64 */	lis r6, __vt__Q23ipl11TVRCManager@ha
 /* 81361968 0002FD68  3B C0 00 00 */	li r30, 0x0
-/* 8136196C 0002FD6C  38 C6 98 F4 */	addi r6, r6, lbl_816398F4@l
+/* 8136196C 0002FD6C  38 C6 98 F4 */	addi r6, r6, __vt__Q23ipl11TVRCManager@l
 /* 81361970 0002FD70  38 A0 00 03 */	li r5, 0x3
 /* 81361974 0002FD74  38 00 00 02 */	li r0, 0x2
 /* 81361978 0002FD78  90 C3 00 00 */	stw r6, 0x0(r3)
@@ -84,9 +84,9 @@
 /* 81361A5C 0002FE5C  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 81361A60 0002FE60  7C 7E 1B 78 */	mr r30, r3
 /* 81361A64 0002FE64  41 82 00 2C */	beq .L_81361A90
-/* 81361A68 0002FE68  3C A0 81 64 */	lis r5, lbl_816398F4@ha
+/* 81361A68 0002FE68  3C A0 81 64 */	lis r5, __vt__Q23ipl11TVRCManager@ha
 /* 81361A6C 0002FE6C  38 80 00 00 */	li r4, 0x0
-/* 81361A70 0002FE70  38 A5 98 F4 */	addi r5, r5, lbl_816398F4@l
+/* 81361A70 0002FE70  38 A5 98 F4 */	addi r5, r5, __vt__Q23ipl11TVRCManager@l
 /* 81361A74 0002FE74  90 A3 00 00 */	stw r5, 0x0(r3)
 /* 81361A78 0002FE78  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 81361A7C 0002FE7C  48 29 65 05 */	bl fn_815F7F80
@@ -1038,11 +1038,12 @@
 .endobj jumptable_816398C0
 
 # .data:0x64 | 0x816398F4 | size: 0xC
-.obj lbl_816398F4, global
+# ipl::TVRCManager::__vtable
+.obj __vt__Q23ipl11TVRCManager, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q23ipl11TVRCManagerFv
-.endobj lbl_816398F4
+.endobj __vt__Q23ipl11TVRCManager
 
 # 0x81698778..0x81698780 | size: 0x8
 .section .sbss, "wa", @nobits

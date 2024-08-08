@@ -8,9 +8,9 @@
 # .text:0x0 | 0x81357CB8 | size: 0x38
 # ipl::savedata::Manager::Manager(EGG::Heap*)
 .fn __ct__Q33ipl8savedata7ManagerFPQ23EGG4Heap, global
-/* 81357CB8 000260B8  3C C0 81 64 */	lis r6, lbl_816391F4@ha
+/* 81357CB8 000260B8  3C C0 81 64 */	lis r6, __vt__Q33ipl8savedata7Manager@ha
 /* 81357CBC 000260BC  38 A0 00 00 */	li r5, 0x0
-/* 81357CC0 000260C0  38 C6 91 F4 */	addi r6, r6, lbl_816391F4@l
+/* 81357CC0 000260C0  38 C6 91 F4 */	addi r6, r6, __vt__Q33ipl8savedata7Manager@l
 /* 81357CC4 000260C4  38 00 00 01 */	li r0, 0x1
 /* 81357CC8 000260C8  90 C3 00 00 */	stw r6, 0x0(r3)
 /* 81357CCC 000260CC  90 83 00 04 */	stw r4, 0x4(r3)
@@ -37,8 +37,8 @@
 /* 81357D0C 0002610C  7C 7E 1B 78 */	mr r30, r3
 /* 81357D10 00026110  41 82 00 48 */	beq .L_81357D58
 /* 81357D14 00026114  80 03 04 F0 */	lwz r0, 0x4f0(r3)
-/* 81357D18 00026118  3C 80 81 64 */	lis r4, lbl_816391F4@ha
-/* 81357D1C 0002611C  38 84 91 F4 */	addi r4, r4, lbl_816391F4@l
+/* 81357D18 00026118  3C 80 81 64 */	lis r4, __vt__Q33ipl8savedata7Manager@ha
+/* 81357D1C 0002611C  38 84 91 F4 */	addi r4, r4, __vt__Q33ipl8savedata7Manager@l
 /* 81357D20 00026120  2C 00 00 00 */	cmpwi r0, 0x0
 /* 81357D24 00026124  90 83 00 00 */	stw r4, 0x0(r3)
 /* 81357D28 00026128  41 82 00 20 */	beq .L_81357D48
@@ -2366,11 +2366,12 @@
 .endobj jumptable_816391C4
 
 # .data:0xAC | 0x816391F4 | size: 0xC
-.obj lbl_816391F4, global
+# ipl::savedata::Manager::__vtable
+.obj __vt__Q33ipl8savedata7Manager, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl8savedata7ManagerFv
-.endobj lbl_816391F4
+.endobj __vt__Q33ipl8savedata7Manager
 
 # 0x81696210..0x81696220 | size: 0x10
 .section .sdata, "wa"

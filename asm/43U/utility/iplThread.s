@@ -31,9 +31,9 @@
 # .text:0x48 | 0x81364BD0 | size: 0x24
 # ipl::utility::ut_thread::ut_thread()
 .fn __ct__Q33ipl7utility9ut_threadFv, global
-/* 81364BD0 00032FD0  3C A0 81 64 */	lis r5, lbl_81641290@ha
+/* 81364BD0 00032FD0  3C A0 81 64 */	lis r5, __vt__Q33ipl7utility9ut_thread@ha
 /* 81364BD4 00032FD4  38 80 00 00 */	li r4, 0x0
-/* 81364BD8 00032FD8  38 A5 12 90 */	addi r5, r5, lbl_81641290@l
+/* 81364BD8 00032FD8  38 A5 12 90 */	addi r5, r5, __vt__Q33ipl7utility9ut_thread@l
 /* 81364BDC 00032FDC  38 00 00 10 */	li r0, 0x10
 /* 81364BE0 00032FE0  90 A3 00 00 */	stw r5, 0x0(r3)
 /* 81364BE4 00032FE4  90 83 03 20 */	stw r4, 0x320(r3)
@@ -186,7 +186,8 @@
 .balign 8
 
 # .data:0x0 | 0x81641290 | size: 0x30
-.obj lbl_81641290, global
+# ipl::utility::ut_thread::__vtable
+.obj __vt__Q33ipl7utility9ut_thread, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl7utility9ut_threadFv
@@ -199,4 +200,4 @@
 	.4byte IsThreadSuspended__Q33ipl7utility9ut_threadFv
 	.4byte SetThreadPriority__Q33ipl7utility9ut_threadFi
 	.4byte 0x00000000
-.endobj lbl_81641290
+.endobj __vt__Q33ipl7utility9ut_thread

@@ -394,11 +394,11 @@
 .fn __ct__Q37ext_ead3www14SurfaceManagerFv, global
 /* 8136E41C 0003C81C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8136E420 0003C820  7C 08 02 A6 */	mflr r0
-/* 8136E424 0003C824  3C C0 81 64 */	lis r6, lbl_81643AA0@ha
+/* 8136E424 0003C824  3C C0 81 64 */	lis r6, __vt__Q37ext_ead3www14SurfaceManager@ha
 /* 8136E428 0003C828  38 A0 02 60 */	li r5, 0x260
 /* 8136E42C 0003C82C  90 01 00 14 */	stw r0, 0x14(r1)
 /* 8136E430 0003C830  38 00 00 00 */	li r0, 0x0
-/* 8136E434 0003C834  38 C6 3A A0 */	addi r6, r6, lbl_81643AA0@l
+/* 8136E434 0003C834  38 C6 3A A0 */	addi r6, r6, __vt__Q37ext_ead3www14SurfaceManager@l
 /* 8136E438 0003C838  38 80 01 C8 */	li r4, 0x1c8
 /* 8136E43C 0003C83C  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8136E440 0003C840  7C 7F 1B 78 */	mr r31, r3
@@ -523,10 +523,10 @@
 # .text:0x684 | 0x8136E5BC | size: 0x24
 # ext_ead::www::SurfaceManager::RegisterFontFile(int, void*, unsigned long)
 .fn RegisterFontFile__Q37ext_ead3www14SurfaceManagerFiPvUl, global
-/* 8136E5BC 0003C9BC  3C C0 81 64 */	lis r6, lbl_8164398C@ha
+/* 8136E5BC 0003C9BC  3C C0 81 64 */	lis r6, WWW_FONT_FILE_DATA_TABLE__@ha
 /* 8136E5C0 0003C9C0  7C A4 2A 14 */	add r5, r4, r5
 /* 8136E5C4 0003C9C4  54 63 20 36 */	slwi r3, r3, 4
-/* 8136E5C8 0003C9C8  38 C6 39 8C */	addi r6, r6, lbl_8164398C@l
+/* 8136E5C8 0003C9C8  38 C6 39 8C */	addi r6, r6, WWW_FONT_FILE_DATA_TABLE__@l
 /* 8136E5CC 0003C9CC  38 05 00 01 */	addi r0, r5, 0x1
 /* 8136E5D0 0003C9D0  7C 66 1A 14 */	add r3, r6, r3
 /* 8136E5D4 0003C9D4  90 83 00 08 */	stw r4, 0x8(r3)
@@ -1431,7 +1431,7 @@
 .endobj lbl_8164397C
 
 # .data:0xC7C | 0x8164398C | size: 0x20
-.obj lbl_8164398C, global
+.obj WWW_FONT_FILE_DATA_TABLE__, global
 	.4byte lbl_8164397C
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -1440,7 +1440,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8164398C
+.endobj WWW_FONT_FILE_DATA_TABLE__
 
 # .data:0xC9C | 0x816439AC | size: 0x5D
 .obj lbl_816439AC, global
@@ -1518,14 +1518,15 @@
 .endobj lbl_81643A76
 
 # .data:0xD90 | 0x81643AA0 | size: 0x18
-.obj lbl_81643AA0, global
+# ext_ead::www::SurfaceManager::__vtable
+.obj __vt__Q37ext_ead3www14SurfaceManager, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q37ext_ead3www14SurfaceManagerFv
 	.4byte 0x203A2025
 	.4byte 0x645B6D73
 	.4byte 0x5D0A0000
-.endobj lbl_81643AA0
+.endobj __vt__Q37ext_ead3www14SurfaceManager
 
 # 0x816962F0..0x816962F8 | size: 0x8
 .section .sdata, "wa"

@@ -15,7 +15,7 @@ $(BS2_OBJASM_PATH)/BS2/%.o: $(BS2_ASM_PATH)/BS2/%.s
 	$(call BuildASMSources,$(INCLUDE_ROOT))
 
 $(BS2_BLD_PATH)/BS2.a: $(BS2_OBJECTS)
-	$(call LinkLibrary,$(BS2_CCPATH),$?,$@)
+	$(call LinkLibrary,$(BS2_CCPATH),$(BS2_OBJECTS),$@)
 
 
 

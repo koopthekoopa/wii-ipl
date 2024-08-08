@@ -13,9 +13,9 @@
 /* 81369AC4 00037EC4  90 01 00 24 */	stw r0, 0x24(r1)
 /* 81369AC8 00037EC8  39 61 00 20 */	addi r11, r1, 0x20
 /* 81369ACC 00037ECC  48 28 F9 F9 */	bl _savegpr_28
-/* 81369AD0 00037ED0  3C E0 81 64 */	lis r7, lbl_81642930@ha
+/* 81369AD0 00037ED0  3C E0 81 64 */	lis r7, __vt__Q33ipl6layout8Animator@ha
 /* 81369AD4 00037ED4  38 00 00 00 */	li r0, 0x0
-/* 81369AD8 00037ED8  38 E7 29 30 */	addi r7, r7, lbl_81642930@l
+/* 81369AD8 00037ED8  38 E7 29 30 */	addi r7, r7, __vt__Q33ipl6layout8Animator@l
 /* 81369ADC 00037EDC  7C 9F 23 78 */	mr r31, r4
 /* 81369AE0 00037EE0  90 E3 00 00 */	stw r7, 0x0(r3)
 /* 81369AE4 00037EE4  7C 7C 1B 78 */	mr r28, r3
@@ -161,9 +161,9 @@
 /* 81369C8C 0003808C  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 81369C90 00038090  7C 7E 1B 78 */	mr r30, r3
 /* 81369C94 00038094  4B FF FE 29 */	bl __ct__Q33ipl6layout8AnimatorFPQ34nw4r3lyt13AnimTransformbb
-/* 81369C98 00038098  3C 80 81 64 */	lis r4, lbl_81642918@ha
+/* 81369C98 00038098  3C 80 81 64 */	lis r4, __vt__Q33ipl6layout12PaneAnimator@ha
 /* 81369C9C 0003809C  93 FE 00 30 */	stw r31, 0x30(r30)
-/* 81369CA0 000380A0  38 84 29 18 */	addi r4, r4, lbl_81642918@l
+/* 81369CA0 000380A0  38 84 29 18 */	addi r4, r4, __vt__Q33ipl6layout12PaneAnimator@l
 /* 81369CA4 000380A4  7F C3 F3 78 */	mr r3, r30
 /* 81369CA8 000380A8  90 9E 00 00 */	stw r4, 0x0(r30)
 /* 81369CAC 000380AC  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -238,9 +238,9 @@
 /* 81369D6C 0003816C  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 81369D70 00038170  7C 7E 1B 78 */	mr r30, r3
 /* 81369D74 00038174  4B FF FD 49 */	bl __ct__Q33ipl6layout8AnimatorFPQ34nw4r3lyt13AnimTransformbb
-/* 81369D78 00038178  3C 80 81 64 */	lis r4, lbl_81642900@ha
+/* 81369D78 00038178  3C 80 81 64 */	lis r4, __vt__Q33ipl6layout13GroupAnimator@ha
 /* 81369D7C 0003817C  93 FE 00 30 */	stw r31, 0x30(r30)
-/* 81369D80 00038180  38 84 29 00 */	addi r4, r4, lbl_81642900@l
+/* 81369D80 00038180  38 84 29 00 */	addi r4, r4, __vt__Q33ipl6layout13GroupAnimator@l
 /* 81369D84 00038184  7F C3 F3 78 */	mr r3, r30
 /* 81369D88 00038188  90 9E 00 00 */	stw r4, 0x0(r30)
 /* 81369D8C 0003818C  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -372,9 +372,9 @@
 /* 81369EFC 000382FC  90 01 00 24 */	stw r0, 0x24(r1)
 /* 81369F00 00038300  39 61 00 20 */	addi r11, r1, 0x20
 /* 81369F04 00038304  48 28 F5 BD */	bl _savegpr_27
-/* 81369F08 00038308  3D 00 81 64 */	lis r8, lbl_816428F4@ha
+/* 81369F08 00038308  3D 00 81 64 */	lis r8, __vt__Q33ipl6layout6Object@ha
 /* 81369F0C 0003830C  7C 7B 1B 78 */	mr r27, r3
-/* 81369F10 00038310  39 08 28 F4 */	addi r8, r8, lbl_816428F4@l
+/* 81369F10 00038310  39 08 28 F4 */	addi r8, r8, __vt__Q33ipl6layout6Object@l
 /* 81369F14 00038314  7C 9C 23 78 */	mr r28, r4
 /* 81369F18 00038318  91 03 00 00 */	stw r8, 0x0(r3)
 /* 81369F1C 0003831C  7C BD 2B 78 */	mr r29, r5
@@ -464,9 +464,9 @@
 /* 8136A02C 0003842C  90 01 00 24 */	stw r0, 0x24(r1)
 /* 8136A030 00038430  39 61 00 20 */	addi r11, r1, 0x20
 /* 8136A034 00038434  48 28 F4 8D */	bl _savegpr_27
-/* 8136A038 00038438  3D 00 81 64 */	lis r8, lbl_816428F4@ha
+/* 8136A038 00038438  3D 00 81 64 */	lis r8, __vt__Q33ipl6layout6Object@ha
 /* 8136A03C 0003843C  7C 7B 1B 78 */	mr r27, r3
-/* 8136A040 00038440  39 08 28 F4 */	addi r8, r8, lbl_816428F4@l
+/* 8136A040 00038440  39 08 28 F4 */	addi r8, r8, __vt__Q33ipl6layout6Object@l
 /* 8136A044 00038444  7C 9C 23 78 */	mr r28, r4
 /* 8136A048 00038448  91 03 00 00 */	stw r8, 0x0(r3)
 /* 8136A04C 0003844C  7C BD 2B 78 */	mr r29, r5
@@ -553,8 +553,8 @@
 /* 8136A164 00038564  7C 7D 1B 78 */	mr r29, r3
 /* 8136A168 00038568  7C 9E 23 78 */	mr r30, r4
 /* 8136A16C 0003856C  41 82 00 E8 */	beq .L_8136A254
-/* 8136A170 00038570  3C 80 81 64 */	lis r4, lbl_816428F4@ha
-/* 8136A174 00038574  38 84 28 F4 */	addi r4, r4, lbl_816428F4@l
+/* 8136A170 00038570  3C 80 81 64 */	lis r4, __vt__Q33ipl6layout6Object@ha
+/* 8136A174 00038574  38 84 28 F4 */	addi r4, r4, __vt__Q33ipl6layout6Object@l
 /* 8136A178 00038578  90 83 00 00 */	stw r4, 0x0(r3)
 /* 8136A17C 0003857C  48 00 00 30 */	b .L_8136A1AC
 .L_8136A180:
@@ -1676,41 +1676,45 @@
 .endobj lbl_81642890
 
 # .data:0x64 | 0x816428F4 | size: 0xC
-.obj lbl_816428F4, global
+# ipl::layout::Object::__vtable
+.obj __vt__Q33ipl6layout6Object, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl6layout6ObjectFv
-.endobj lbl_816428F4
+.endobj __vt__Q33ipl6layout6Object
 
 # .data:0x70 | 0x81642900 | size: 0x18
-.obj lbl_81642900, global
+# ipl::layout::GroupAnimator::__vtable
+.obj __vt__Q33ipl6layout13GroupAnimator, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl6layout13GroupAnimatorFv
 	.4byte calc__Q33ipl6layout8AnimatorFv
 	.4byte setFlag__Q33ipl6layout13GroupAnimatorFb
 	.4byte bind__Q33ipl6layout13GroupAnimatorFv
-.endobj lbl_81642900
+.endobj __vt__Q33ipl6layout13GroupAnimator
 
 # .data:0x88 | 0x81642918 | size: 0x18
-.obj lbl_81642918, global
+# ipl::layout::PaneAnimator::__vtable
+.obj __vt__Q33ipl6layout12PaneAnimator, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl6layout12PaneAnimatorFv
 	.4byte calc__Q33ipl6layout8AnimatorFv
 	.4byte setFlag__Q33ipl6layout12PaneAnimatorFb
 	.4byte bind__Q33ipl6layout12PaneAnimatorFv
-.endobj lbl_81642918
+.endobj __vt__Q33ipl6layout12PaneAnimator
 
 # .data:0xA0 | 0x81642930 | size: 0x18
-.obj lbl_81642930, global
+# ipl::layout::Animator::__vtable
+.obj __vt__Q33ipl6layout8Animator, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl6layout8AnimatorFv
 	.4byte calc__Q33ipl6layout8AnimatorFv
 	.4byte setFlag__Q33ipl6layout8AnimatorFb
 	.4byte bind__Q33ipl6layout8AnimatorFv
-.endobj lbl_81642930
+.endobj __vt__Q33ipl6layout8Animator
 
 # 0x81694688..0x81694698 | size: 0x10
 .section .sdata2, "a"

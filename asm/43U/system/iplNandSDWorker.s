@@ -14819,18 +14819,23 @@
 	.string "/tmp/nandsdwork"
 .endobj lbl_81635AFB
 
-# .data:0x83 | 0x81635B0B | size: 0x21
+# .data:0x83 | 0x81635B0B | size: 0xD
 .obj lbl_81635B0B, global
 	.4byte 0x73756363
 	.4byte 0x65737369
 	.4byte 0x6F6E2F00
 	.byte 0x00
+.endobj lbl_81635B0B
+
+# .data:0x90 | 0x81635B18 | size: 0x14
+# ipl::NandSDWorker::c_ignore_list_for_shared2
+.obj c_ignore_list_for_shared2__Q23ipl12NandSDWorker, global
 	.4byte lbl_816961C4
 	.4byte lbl_816961CA
 	.4byte lbl_81635B0B
 	.4byte lbl_816961D1
 	.4byte lbl_816961D7
-.endobj lbl_81635B0B
+.endobj c_ignore_list_for_shared2__Q23ipl12NandSDWorker
 
 # .data:0xA4 | 0x81635B2C | size: 0xC
 .obj lbl_81635B2C, global

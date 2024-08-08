@@ -24,9 +24,9 @@
 /* 8133CC68 0000B068  38 E0 00 00 */	li r7, 0x0
 /* 8133CC6C 0000B06C  39 40 00 00 */	li r10, 0x0
 /* 8133CC70 0000B070  4B FF E6 C5 */	bl __ct__Q33ipl4nand4FileFPQ23EGG4HeapPCcP9ARCHandlePCciUlb
-/* 8133CC74 0000B074  3C 60 81 63 */	lis r3, lbl_81634E3C@ha
+/* 8133CC74 0000B074  3C 60 81 63 */	lis r3, __vt__Q33ipl4nand8MetaFile@ha
 /* 8133CC78 0000B078  38 00 00 00 */	li r0, 0x0
-/* 8133CC7C 0000B07C  38 63 4E 3C */	addi r3, r3, lbl_81634E3C@l
+/* 8133CC7C 0000B07C  38 63 4E 3C */	addi r3, r3, __vt__Q33ipl4nand8MetaFile@l
 /* 8133CC80 0000B080  38 80 FF FF */	li r4, -0x1
 /* 8133CC84 0000B084  90 7A 00 00 */	stw r3, 0x0(r26)
 /* 8133CC88 0000B088  39 61 00 20 */	addi r11, r1, 0x20
@@ -497,7 +497,8 @@
 .endobj lbl_81634E2A
 
 # .data:0x2C | 0x81634E3C | size: 0x54
-.obj lbl_81634E3C, global
+# ipl::nand::MetaFile::__vtable
+.obj __vt__Q33ipl4nand8MetaFile, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl4nand8MetaFileFv
@@ -519,7 +520,7 @@
 	.4byte isAshCompressed__Q33ipl4nand4FileFPCUc
 	.4byte isLz7Compressed__Q33ipl4nand4FileFPCUc
 	.4byte callback___Q33ipl4nand8MetaFileFv
-.endobj lbl_81634E3C
+.endobj __vt__Q33ipl4nand8MetaFile
 
 # 0x816960B0..0x816960B8 | size: 0x8
 .section .sdata, "wa"

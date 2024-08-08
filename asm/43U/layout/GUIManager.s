@@ -271,9 +271,9 @@
 /* 81368C5C 0003705C  7C 7D 1B 78 */	mr r29, r3
 /* 81368C60 00037060  7C 9E 23 78 */	mr r30, r4
 /* 81368C64 00037064  41 82 00 78 */	beq .L_81368CDC
-/* 81368C68 00037068  3C A0 81 64 */	lis r5, lbl_816427E0@ha
+/* 81368C68 00037068  3C A0 81 64 */	lis r5, __vt__Q23gui7Manager@ha
 /* 81368C6C 0003706C  38 80 00 00 */	li r4, 0x0
-/* 81368C70 00037070  38 A5 27 E0 */	addi r5, r5, lbl_816427E0@l
+/* 81368C70 00037070  38 A5 27 E0 */	addi r5, r5, __vt__Q23gui7Manager@l
 /* 81368C74 00037074  90 A3 00 00 */	stw r5, 0x0(r3)
 /* 81368C78 00037078  38 63 00 08 */	addi r3, r3, 0x8
 /* 81368C7C 0003707C  48 1A 96 61 */	bl List_GetNext__Q24nw4r2utFPCQ34nw4r2ut4ListPCv
@@ -765,9 +765,9 @@
 /* 81369280 00037680  7C 7D 1B 78 */	mr r29, r3
 /* 81369284 00037684  7C 9E 23 78 */	mr r30, r4
 /* 81369288 00037688  41 82 00 B0 */	beq .L_81369338
-/* 8136928C 0003768C  3C A0 81 64 */	lis r5, lbl_81642784@ha
+/* 8136928C 0003768C  3C A0 81 64 */	lis r5, __vt__Q23gui11PaneManager@ha
 /* 81369290 00037690  38 80 00 00 */	li r4, 0x0
-/* 81369294 00037694  38 A5 27 84 */	addi r5, r5, lbl_81642784@l
+/* 81369294 00037694  38 A5 27 84 */	addi r5, r5, __vt__Q23gui11PaneManager@l
 /* 81369298 00037698  90 A3 00 00 */	stw r5, 0x0(r3)
 /* 8136929C 0003769C  38 63 00 18 */	addi r3, r3, 0x18
 /* 813692A0 000376A0  48 1A 90 3D */	bl List_GetNext__Q24nw4r2utFPCQ34nw4r2ut4ListPCv
@@ -1024,10 +1024,10 @@
 .fn __ct__Q23gui13PaneComponentFUl, global
 /* 813695D8 000379D8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 813695DC 000379DC  7C 08 02 A6 */	mflr r0
-/* 813695E0 000379E0  3D 80 81 64 */	lis r12, lbl_81642824@ha
+/* 813695E0 000379E0  3D 80 81 64 */	lis r12, __vt__Q23gui9Component@ha
 /* 813695E4 000379E4  3C A0 00 01 */	lis r5, 0x1
 /* 813695E8 000379E8  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813695EC 000379EC  39 8C 28 24 */	addi r12, r12, lbl_81642824@l
+/* 813695EC 000379EC  39 8C 28 24 */	addi r12, r12, __vt__Q23gui9Component@l
 /* 813695F0 000379F0  38 05 FF FF */	subi r0, r5, 0x1
 /* 813695F4 000379F4  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813695F8 000379F8  3B E0 00 00 */	li r31, 0x0
@@ -1041,9 +1041,9 @@
 /* 81369618 00037A18  81 8C 00 0C */	lwz r12, 0xc(r12)
 /* 8136961C 00037A1C  7D 89 03 A6 */	mtctr r12
 /* 81369620 00037A20  4E 80 04 21 */	bctrl
-/* 81369624 00037A24  3C 60 81 64 */	lis r3, lbl_81642710@ha
+/* 81369624 00037A24  3C 60 81 64 */	lis r3, __vt__Q23gui13PaneComponent@ha
 /* 81369628 00037A28  93 FE 00 94 */	stw r31, 0x94(r30)
-/* 8136962C 00037A2C  38 63 27 10 */	addi r3, r3, lbl_81642710@l
+/* 8136962C 00037A2C  38 63 27 10 */	addi r3, r3, __vt__Q23gui13PaneComponent@l
 /* 81369630 00037A30  90 7E 00 00 */	stw r3, 0x0(r30)
 /* 81369634 00037A34  7F C3 F3 78 */	mr r3, r30
 /* 81369638 00037A38  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -1425,7 +1425,8 @@
 .balign 8
 
 # .data:0x0 | 0x81642710 | size: 0x74
-.obj lbl_81642710, global
+# gui::PaneComponent::__vtable
+.obj __vt__Q23gui13PaneComponent, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte create__Q23gui9InterfaceFv
@@ -1455,10 +1456,11 @@
 	.4byte contain__Q23gui13PaneComponentFff
 	.4byte setPane__Q23gui13PaneComponentFPQ34nw4r3lyt4Pane
 	.4byte getPane__Q23gui13PaneComponentFv
-.endobj lbl_81642710
+.endobj __vt__Q23gui13PaneComponent
 
 # .data:0x74 | 0x81642784 | size: 0x5C
-.obj lbl_81642784, global
+# gui::PaneManager::__vtable
+.obj __vt__Q23gui11PaneManager, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte create__Q23gui9InterfaceFv
@@ -1482,10 +1484,11 @@
 	.4byte setDrawInfo__Q23gui11PaneManagerFPCQ34nw4r3lyt8DrawInfo
 	.4byte setAllBoundingBoxComponentTriggerTarget__Q23gui11PaneManagerFb
 	.4byte "walkInChildren__Q23gui11PaneManagerFRQ34nw4r2ut28LinkList<Q34nw4r3lyt4Pane,4>"
-.endobj lbl_81642784
+.endobj __vt__Q23gui11PaneManager
 
 # .data:0xD0 | 0x816427E0 | size: 0x44
-.obj lbl_816427E0, global
+# gui::Manager::__vtable
+.obj __vt__Q23gui7Manager, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte create__Q23gui9InterfaceFv
@@ -1503,10 +1506,11 @@
 	.4byte setEventHandler__Q23gui7ManagerFPQ23gui12EventHandler
 	.4byte changeEventHandler__Q23gui7ManagerFPQ23gui12EventHandler
 	.4byte setDraggingButton__Q23gui7ManagerFUl
-.endobj lbl_816427E0
+.endobj __vt__Q23gui7Manager
 
 # .data:0x114 | 0x81642824 | size: 0x6C
-.obj lbl_81642824, global
+# gui::Component::__vtable
+.obj __vt__Q23gui9Component, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte create__Q23gui9InterfaceFv
@@ -1534,7 +1538,7 @@
 	.4byte getFlightDuration__Q23gui9ComponentFi
 	.4byte setFlightDuration__Q23gui9ComponentFiUs
 	.4byte 0x00000000
-.endobj lbl_81642824
+.endobj __vt__Q23gui9Component
 
 # 0x81694678..0x81694688 | size: 0x10
 .section .sdata2, "a"

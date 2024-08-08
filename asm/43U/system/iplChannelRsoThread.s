@@ -16,9 +16,9 @@
 /* 813598D0 00027CD0  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813598D4 00027CD4  7C 7E 1B 78 */	mr r30, r3
 /* 813598D8 00027CD8  48 00 B2 F9 */	bl __ct__Q33ipl7utility9ut_threadFv
-/* 813598DC 00027CDC  3C 80 81 64 */	lis r4, lbl_81639200@ha
+/* 813598DC 00027CDC  3C 80 81 64 */	lis r4, __vt__Q33ipl7channel9RsoThread@ha
 /* 813598E0 00027CE0  38 00 00 00 */	li r0, 0x0
-/* 813598E4 00027CE4  38 84 92 00 */	addi r4, r4, lbl_81639200@l
+/* 813598E4 00027CE4  38 84 92 00 */	addi r4, r4, __vt__Q33ipl7channel9RsoThread@l
 /* 813598E8 00027CE8  3C 60 00 01 */	lis r3, 0x1
 /* 813598EC 00027CEC  90 9E 00 00 */	stw r4, 0x0(r30)
 /* 813598F0 00027CF0  7F E4 FB 78 */	mr r4, r31
@@ -49,8 +49,8 @@
 /* 81359940 00027D40  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 81359944 00027D44  7C 7E 1B 78 */	mr r30, r3
 /* 81359948 00027D48  41 82 00 34 */	beq .L_8135997C
-/* 8135994C 00027D4C  3C 80 81 64 */	lis r4, lbl_81639200@ha
-/* 81359950 00027D50  38 84 92 00 */	addi r4, r4, lbl_81639200@l
+/* 8135994C 00027D4C  3C 80 81 64 */	lis r4, __vt__Q33ipl7channel9RsoThread@ha
+/* 81359950 00027D50  38 84 92 00 */	addi r4, r4, __vt__Q33ipl7channel9RsoThread@l
 /* 81359954 00027D54  90 83 00 00 */	stw r4, 0x0(r3)
 /* 81359958 00027D58  80 63 03 2C */	lwz r3, 0x32c(r3)
 /* 8135995C 00027D5C  48 29 E7 91 */	bl __dla__FPv
@@ -147,7 +147,8 @@
 .balign 8
 
 # .data:0x0 | 0x81639200 | size: 0x30
-.obj lbl_81639200, global
+# ipl::channel::RsoThread::__vtable
+.obj __vt__Q33ipl7channel9RsoThread, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl7channel9RsoThreadFv
@@ -160,4 +161,4 @@
 	.4byte IsThreadSuspended__Q33ipl7utility9ut_threadFv
 	.4byte SetThreadPriority__Q33ipl7utility9ut_threadFi
 	.4byte 0x00000000
-.endobj lbl_81639200
+.endobj __vt__Q33ipl7channel9RsoThread

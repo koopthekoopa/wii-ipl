@@ -10,12 +10,12 @@
 .fn __ct__Q33ipl3bs27ManagerFPQ23EGG4Heap, global
 /* 813607A0 0002EBA0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 813607A4 0002EBA4  7C 08 02 A6 */	mflr r0
-/* 813607A8 0002EBA8  3C A0 81 64 */	lis r5, lbl_81639880@ha
+/* 813607A8 0002EBA8  3C A0 81 64 */	lis r5, __vt__Q33ipl3bs27Manager@ha
 /* 813607AC 0002EBAC  38 E0 00 01 */	li r7, 0x1
 /* 813607B0 0002EBB0  90 01 00 14 */	stw r0, 0x14(r1)
 /* 813607B4 0002EBB4  38 00 00 00 */	li r0, 0x0
 /* 813607B8 0002EBB8  38 C0 00 34 */	li r6, 0x34
-/* 813607BC 0002EBBC  38 A5 98 80 */	addi r5, r5, lbl_81639880@l
+/* 813607BC 0002EBBC  38 A5 98 80 */	addi r5, r5, __vt__Q33ipl3bs27Manager@l
 /* 813607C0 0002EBC0  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813607C4 0002EBC4  7C 7F 1B 78 */	mr r31, r3
 /* 813607C8 0002EBC8  90 A3 00 00 */	stw r5, 0x0(r3)
@@ -59,8 +59,8 @@
 /* 8136084C 0002EC4C  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 81360850 0002EC50  7C 7E 1B 78 */	mr r30, r3
 /* 81360854 0002EC54  41 82 00 28 */	beq .L_8136087C
-/* 81360858 0002EC58  3C 80 81 64 */	lis r4, lbl_81639880@ha
-/* 8136085C 0002EC5C  38 84 98 80 */	addi r4, r4, lbl_81639880@l
+/* 81360858 0002EC58  3C 80 81 64 */	lis r4, __vt__Q33ipl3bs27Manager@ha
+/* 8136085C 0002EC5C  38 84 98 80 */	addi r4, r4, __vt__Q33ipl3bs27Manager@l
 /* 81360860 0002EC60  90 83 00 00 */	stw r4, 0x0(r3)
 /* 81360864 0002EC64  80 63 00 14 */	lwz r3, 0x14(r3)
 /* 81360868 0002EC68  48 29 78 85 */	bl __dla__FPv
@@ -759,9 +759,10 @@
 .endobj jumptable_816397E0
 
 # .data:0xA0 | 0x81639880 | size: 0x10
-.obj lbl_81639880, global
+# ipl::bs2::Manager::__vtable
+.obj __vt__Q33ipl3bs27Manager, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl3bs27ManagerFv
 	.4byte 0x00000000
-.endobj lbl_81639880
+.endobj __vt__Q33ipl3bs27Manager

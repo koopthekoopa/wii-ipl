@@ -10,9 +10,9 @@
 .fn __ct__Q33ipl7channel7ManagerFPQ23EGG4Heap, global
 /* 81337978 00005D78  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133797C 00005D7C  7C 08 02 A6 */	mflr r0
-/* 81337980 00005D80  3C A0 81 63 */	lis r5, lbl_81634AFC@ha
+/* 81337980 00005D80  3C A0 81 63 */	lis r5, __vt__Q33ipl7channel7Manager@ha
 /* 81337984 00005D84  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81337988 00005D88  38 A5 4A FC */	addi r5, r5, lbl_81634AFC@l
+/* 81337988 00005D88  38 A5 4A FC */	addi r5, r5, __vt__Q33ipl7channel7Manager@l
 /* 8133798C 00005D8C  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 81337990 00005D90  3B E0 00 00 */	li r31, 0x0
 /* 81337994 00005D94  93 C1 00 08 */	stw r30, 0x8(r1)
@@ -109,9 +109,9 @@
 /* 81337AE4 00005EE4  7C 79 1B 78 */	mr r25, r3
 /* 81337AE8 00005EE8  7C 9A 23 78 */	mr r26, r4
 /* 81337AEC 00005EEC  41 82 00 B4 */	beq .L_81337BA0
-/* 81337AF0 00005EF0  3C C0 81 63 */	lis r6, lbl_81634AFC@ha
+/* 81337AF0 00005EF0  3C C0 81 63 */	lis r6, __vt__Q33ipl7channel7Manager@ha
 /* 81337AF4 00005EF4  38 81 00 0C */	addi r4, r1, 0xc
-/* 81337AF8 00005EF8  38 C6 4A FC */	addi r6, r6, lbl_81634AFC@l
+/* 81337AF8 00005EF8  38 C6 4A FC */	addi r6, r6, __vt__Q33ipl7channel7Manager@l
 /* 81337AFC 00005EFC  38 A1 00 08 */	addi r5, r1, 0x8
 /* 81337B00 00005F00  90 C3 00 00 */	stw r6, 0x0(r3)
 /* 81337B04 00005F04  48 00 13 4D */	bl getDiskChannelLocation__Q33ipl7channel7ManagerFPiPi
@@ -4028,11 +4028,12 @@
 .endobj jumptable_81634ACC
 
 # .data:0xD4 | 0x81634AFC | size: 0xC
-.obj lbl_81634AFC, global
+# ipl::channel::Manager::__vtable
+.obj __vt__Q33ipl7channel7Manager, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl7channel7ManagerFv
-.endobj lbl_81634AFC
+.endobj __vt__Q33ipl7channel7Manager
 
 # 0x81696088..0x81696098 | size: 0x10
 .section .sdata, "wa"

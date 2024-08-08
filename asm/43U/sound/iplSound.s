@@ -1763,9 +1763,9 @@
 /* 8136C7D4 0003ABD4  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8136C7D8 0003ABD8  7C 7F 1B 78 */	mr r31, r3
 /* 8136C7DC 0003ABDC  48 28 99 75 */	bl fn_815F6150
-/* 8136C7E0 0003ABE0  3C A0 81 64 */	lis r5, lbl_81642948@ha
+/* 8136C7E0 0003ABE0  3C A0 81 64 */	lis r5, __vt__Q33ipl3snd6System@ha
 /* 8136C7E4 0003ABE4  7F E3 FB 78 */	mr r3, r31
-/* 8136C7E8 0003ABE8  38 A5 29 48 */	addi r5, r5, lbl_81642948@l
+/* 8136C7E8 0003ABE8  38 A5 29 48 */	addi r5, r5, __vt__Q33ipl3snd6System@l
 /* 8136C7EC 0003ABEC  38 85 00 10 */	addi r4, r5, 0x10
 /* 8136C7F0 0003ABF0  90 BF 00 00 */	stw r5, 0x0(r31)
 /* 8136C7F4 0003ABF4  38 05 00 20 */	addi r0, r5, 0x20
@@ -1813,7 +1813,8 @@
 .balign 8
 
 # .data:0x0 | 0x81642948 | size: 0x78
-.obj lbl_81642948, global
+# ipl::snd::System::__vtable
+.obj __vt__Q33ipl3snd6System, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte fn_815F6278
@@ -1844,7 +1845,7 @@
 	.4byte holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUi
 	.4byte holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
 	.4byte __dt__Q33ipl3snd6SystemFv
-.endobj lbl_81642948
+.endobj __vt__Q33ipl3snd6System
 
 # 0x816946A0..0x816946B8 | size: 0x18
 .section .sdata2, "a"

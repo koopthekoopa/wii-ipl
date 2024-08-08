@@ -2078,7 +2078,8 @@
 .endobj jumptable_81638DB8
 
 # .data:0x408 | 0x81638DF0 | size: 0x4C
-.obj lbl_81638DF0, global
+# ipl::keyboard::Manager::__vtable
+.obj __vt__Q33ipl8keyboard7Manager, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte create__Q33ipl8keyboard7ManagerFPQ33ipl4nand4FilePQ23EGG4Heap
@@ -2098,10 +2099,11 @@
 	.4byte touchFormInDisp__Q33ipl8keyboard7ManagerFi
 	.4byte setConfigure__Q33ipl8keyboard7ManagerFQ43ipl8keyboard7Manager12KeyboardType
 	.4byte doSave__Q33ipl8keyboard7ManagerFv
-.endobj lbl_81638DF0
+.endobj __vt__Q33ipl8keyboard7Manager
 
 # .data:0x454 | 0x81638E3C | size: 0x3C
-.obj lbl_81638E3C, global
+# ipl::keyboard::EventObserver::__vtable
+.obj __vt__Q33ipl8keyboard13EventObserver, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onInput__Q29textinput13EventObserverFQ39textinput15CommandReceiver13INPUT_COMMANDPv
@@ -2117,7 +2119,7 @@
 	.4byte 0x6774680A
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81638E3C
+.endobj __vt__Q33ipl8keyboard13EventObserver
 
 # 0x81694590..0x81694598 | size: 0x8
 .section .sdata2, "a"

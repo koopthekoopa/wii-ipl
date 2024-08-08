@@ -31,9 +31,9 @@
 # .text:0x48 | 0x8136E6FC | size: 0x24
 # ext_ead::www::ut_thread::ut_thread()
 .fn __ct__Q37ext_ead3www9ut_threadFv, global
-/* 8136E6FC 0003CAFC  3C A0 81 64 */	lis r5, lbl_81643ADC@ha
+/* 8136E6FC 0003CAFC  3C A0 81 64 */	lis r5, __vt__Q37ext_ead3www9ut_thread@ha
 /* 8136E700 0003CB00  38 80 00 00 */	li r4, 0x0
-/* 8136E704 0003CB04  38 A5 3A DC */	addi r5, r5, lbl_81643ADC@l
+/* 8136E704 0003CB04  38 A5 3A DC */	addi r5, r5, __vt__Q37ext_ead3www9ut_thread@l
 /* 8136E708 0003CB08  38 00 00 10 */	li r0, 0x10
 /* 8136E70C 0003CB0C  90 A3 00 00 */	stw r5, 0x0(r3)
 /* 8136E710 0003CB10  90 83 03 20 */	stw r4, 0x320(r3)
@@ -191,7 +191,8 @@
 .endobj lbl_81643AB8
 
 # .data:0x24 | 0x81643ADC | size: 0x2C
-.obj lbl_81643ADC, global
+# ext_ead::www::ut_thread::__vtable
+.obj __vt__Q37ext_ead3www9ut_thread, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q37ext_ead3www9ut_threadFv
@@ -203,4 +204,4 @@
 	.4byte IsThreadTerminated__Q37ext_ead3www9ut_threadFv
 	.4byte IsThreadSuspended__Q37ext_ead3www9ut_threadFv
 	.4byte 0x00000000
-.endobj lbl_81643ADC
+.endobj __vt__Q37ext_ead3www9ut_thread

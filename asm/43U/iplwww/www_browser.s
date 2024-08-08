@@ -99,11 +99,11 @@
 /* 8136C920 0003AD20  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8136C924 0003AD24  7C 7E 1B 78 */	mr r30, r3
 /* 8136C928 0003AD28  48 00 1D D5 */	bl __ct__Q37ext_ead3www9ut_threadFv
-/* 8136C92C 0003AD2C  3C 60 81 64 */	lis r3, lbl_81642CA4@ha
-/* 8136C930 0003AD30  3C C0 81 64 */	lis r6, lbl_81642CE8@ha
-/* 8136C934 0003AD34  38 63 2C A4 */	addi r3, r3, lbl_81642CA4@l
+/* 8136C92C 0003AD2C  3C 60 81 64 */	lis r3, __vt__Q37ext_ead3www13BrowserThread@ha
+/* 8136C930 0003AD30  3C C0 81 64 */	lis r6, "__vt__Q37ext_ead3www57ut_message_cmd<Q47ext_ead3www13BrowserThread9CmdPacket,8>"@ha
+/* 8136C934 0003AD34  38 63 2C A4 */	addi r3, r3, __vt__Q37ext_ead3www13BrowserThread@l
 /* 8136C938 0003AD38  3B FE 03 CC */	addi r31, r30, 0x3cc
-/* 8136C93C 0003AD3C  38 C6 2C E8 */	addi r6, r6, lbl_81642CE8@l
+/* 8136C93C 0003AD3C  38 C6 2C E8 */	addi r6, r6, "__vt__Q37ext_ead3www57ut_message_cmd<Q47ext_ead3www13BrowserThread9CmdPacket,8>"@l
 /* 8136C940 0003AD40  90 7E 00 00 */	stw r3, 0x0(r30)
 /* 8136C944 0003AD44  38 A0 00 08 */	li r5, 0x8
 /* 8136C948 0003AD48  7F E3 FB 78 */	mr r3, r31
@@ -117,9 +117,9 @@
 /* 8136C968 0003AD68  38 80 00 00 */	li r4, 0x0
 /* 8136C96C 0003AD6C  38 A0 00 E0 */	li r5, 0xe0
 /* 8136C970 0003AD70  4B FC 39 C5 */	bl memset
-/* 8136C974 0003AD74  3C 60 81 64 */	lis r3, lbl_81642CCC@ha
+/* 8136C974 0003AD74  3C 60 81 64 */	lis r3, "__vt__Q37ext_ead3www40ut_message_cmd<Q37ext_ead3www7ImeData,8>"@ha
 /* 8136C978 0003AD78  3B FE 05 10 */	addi r31, r30, 0x510
-/* 8136C97C 0003AD7C  38 63 2C CC */	addi r3, r3, lbl_81642CCC@l
+/* 8136C97C 0003AD7C  38 63 2C CC */	addi r3, r3, "__vt__Q37ext_ead3www40ut_message_cmd<Q37ext_ead3www7ImeData,8>"@l
 /* 8136C980 0003AD80  38 A0 00 08 */	li r5, 0x8
 /* 8136C984 0003AD84  90 7E 05 10 */	stw r3, 0x510(r30)
 /* 8136C988 0003AD88  7F E3 FB 78 */	mr r3, r31
@@ -216,8 +216,8 @@
 /* 8136CAAC 0003AEAC  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8136CAB0 0003AEB0  7C 7E 1B 78 */	mr r30, r3
 /* 8136CAB4 0003AEB4  41 82 00 9C */	beq .L_8136CB50
-/* 8136CAB8 0003AEB8  3C 80 81 64 */	lis r4, lbl_81642CA4@ha
-/* 8136CABC 0003AEBC  38 84 2C A4 */	addi r4, r4, lbl_81642CA4@l
+/* 8136CAB8 0003AEB8  3C 80 81 64 */	lis r4, __vt__Q37ext_ead3www13BrowserThread@ha
+/* 8136CABC 0003AEBC  38 84 2C A4 */	addi r4, r4, __vt__Q37ext_ead3www13BrowserThread@l
 /* 8136CAC0 0003AEC0  90 83 00 00 */	stw r4, 0x0(r3)
 /* 8136CAC4 0003AEC4  80 0D A9 18 */	lwz r0, classInitialized___Q37ext_ead3www13BrowserThread@sda21(r0)
 /* 8136CAC8 0003AEC8  34 00 FF FF */	subic. r0, r0, 0x1
@@ -593,11 +593,11 @@
 /* 8136CFC0 0003B3C0  90 01 00 70 */	stw r0, 0x70(r1)
 /* 8136CFC4 0003B3C4  48 00 19 39 */	bl IPLWWWVReport__Q37ext_ead3www5printFiPCcP16__va_list_struct
 /* 8136CFC8 0003B3C8  3C 60 80 00 */	lis r3, 0x8000
-/* 8136CFCC 0003B3CC  3C 80 81 64 */	lis r4, lbl_81642D04@ha
+/* 8136CFCC 0003B3CC  3C 80 81 64 */	lis r4, "@STRING@report__Q47ext_ead3www5print9TickTimerFPCce"@ha
 /* 8136CFD0 0003B3D0  80 63 00 F8 */	lwz r3, 0xf8(r3)
 /* 8136CFD4 0003B3D4  38 00 03 E8 */	li r0, 0x3e8
 /* 8136CFD8 0003B3D8  80 DE 00 00 */	lwz r6, 0x0(r30)
-/* 8136CFDC 0003B3DC  38 84 2D 04 */	addi r4, r4, lbl_81642D04@l
+/* 8136CFDC 0003B3DC  38 84 2D 04 */	addi r4, r4, "@STRING@report__Q47ext_ead3www5print9TickTimerFPCce"@l
 /* 8136CFE0 0003B3E0  54 63 F0 BE */	srwi r3, r3, 2
 /* 8136CFE4 0003B3E4  80 BE 00 04 */	lwz r5, 0x4(r30)
 /* 8136CFE8 0003B3E8  7C 03 03 96 */	divwu r0, r3, r0
@@ -1903,7 +1903,8 @@
 .endobj lbl_81642BF9
 
 # .data:0x2E4 | 0x81642CA4 | size: 0x28
-.obj lbl_81642CA4, global
+# ext_ead::www::BrowserThread::__vtable
+.obj __vt__Q37ext_ead3www13BrowserThread, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q37ext_ead3www13BrowserThreadFv
@@ -1914,10 +1915,11 @@
 	.4byte WaitForThreadExit__Q37ext_ead3www9ut_threadFv
 	.4byte IsThreadTerminated__Q37ext_ead3www9ut_threadFv
 	.4byte IsThreadSuspended__Q37ext_ead3www9ut_threadFv
-.endobj lbl_81642CA4
+.endobj __vt__Q37ext_ead3www13BrowserThread
 
 # .data:0x30C | 0x81642CCC | size: 0x1C
-.obj lbl_81642CCC, global
+# ext_ead::www::ut_message_cmd<ext_ead::www::ImeData, 8>::__vtable
+.obj "__vt__Q37ext_ead3www40ut_message_cmd<Q37ext_ead3www7ImeData,8>", global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte "__dt__Q37ext_ead3www40ut_message_cmd<Q37ext_ead3www7ImeData,8>Fv"
@@ -1925,10 +1927,11 @@
 	.4byte JamMessage__Q37ext_ead3www15ut_message_baseFPvl
 	.4byte ReceiveMessage__Q37ext_ead3www15ut_message_baseFPPvl
 	.4byte InitMessageQueue__Q37ext_ead3www15ut_message_baseFPPvl
-.endobj lbl_81642CCC
+.endobj "__vt__Q37ext_ead3www40ut_message_cmd<Q37ext_ead3www7ImeData,8>"
 
 # .data:0x328 | 0x81642CE8 | size: 0x1C
-.obj lbl_81642CE8, global
+# ext_ead::www::ut_message_cmd<ext_ead::www::BrowserThread::CmdPacket, 8>::__vtable
+.obj "__vt__Q37ext_ead3www57ut_message_cmd<Q47ext_ead3www13BrowserThread9CmdPacket,8>", global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte "__dt__Q37ext_ead3www57ut_message_cmd<Q47ext_ead3www13BrowserThread9CmdPacket,8>Fv"
@@ -1936,14 +1939,15 @@
 	.4byte JamMessage__Q37ext_ead3www15ut_message_baseFPvl
 	.4byte ReceiveMessage__Q37ext_ead3www15ut_message_baseFPPvl
 	.4byte InitMessageQueue__Q37ext_ead3www15ut_message_baseFPPvl
-.endobj lbl_81642CE8
+.endobj "__vt__Q37ext_ead3www57ut_message_cmd<Q47ext_ead3www13BrowserThread9CmdPacket,8>"
 
 # .data:0x344 | 0x81642D04 | size: 0xC
-.obj lbl_81642D04, global
+# ext_ead::www::print::TickTimer::@STRING@report(const char*, ...)
+.obj "@STRING@report__Q47ext_ead3www5print9TickTimerFPCce", global
 	.4byte 0x203A2025
 	.4byte 0x645B6D73
 	.4byte 0x5D0A0000
-.endobj lbl_81642D04
+.endobj "@STRING@report__Q47ext_ead3www5print9TickTimerFPCce"
 
 # 0x816962C8..0x816962F0 | size: 0x28
 .section .sdata, "wa"

@@ -22,9 +22,9 @@
 # .text:0x20 | 0x8136270C | size: 0x24
 # ipl::utility::Tree::Tree()
 .fn __ct__Q33ipl7utility4TreeFv, global
-/* 8136270C 00030B0C  3C 80 81 64 */	lis r4, lbl_816411E8@ha
+/* 8136270C 00030B0C  3C 80 81 64 */	lis r4, __vt__Q33ipl7utility4Tree@ha
 /* 81362710 00030B10  38 00 00 00 */	li r0, 0x0
-/* 81362714 00030B14  38 84 11 E8 */	addi r4, r4, lbl_816411E8@l
+/* 81362714 00030B14  38 84 11 E8 */	addi r4, r4, __vt__Q33ipl7utility4Tree@l
 /* 81362718 00030B18  90 03 00 04 */	stw r0, 0x4(r3)
 /* 8136271C 00030B1C  90 83 00 00 */	stw r4, 0x0(r3)
 /* 81362720 00030B20  90 03 00 08 */	stw r0, 0x8(r3)
@@ -156,7 +156,8 @@
 .balign 8
 
 # .data:0x0 | 0x816411E8 | size: 0x20
-.obj lbl_816411E8, global
+# ipl::utility::Tree::__vtable
+.obj __vt__Q33ipl7utility4Tree, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl7utility4TreeFv
@@ -165,4 +166,4 @@
 	.4byte getNext__Q33ipl7utility4TreeFv
 	.4byte getPrev__Q33ipl7utility4TreeFv
 	.4byte 0x00000000
-.endobj lbl_816411E8
+.endobj __vt__Q33ipl7utility4Tree

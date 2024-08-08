@@ -14,7 +14,7 @@ $(BS2_OBJASM_PATH)/sound/%.o: $(BS2_ASM_PATH)/sound/%.s
 	$(call BuildASMSources,$(INCLUDE_ROOT))
 
 $(BS2_BLD_PATH)/sound.a: $(SOUND_OBJECTS)
-	$(call LinkLibrary,$(SOUND_CCPATH),$?,$@)
+	$(call LinkLibrary,$(SOUND_CCPATH),$(SOUND_OBJECTS),$@)
 
 
 

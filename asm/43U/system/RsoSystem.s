@@ -1,5 +1,5 @@
 .include "macros.inc"
-.file "IplRsoSystem.cpp"
+.file "RsoSystem.cpp"
 
 # 0x81359A70..0x8135A590 | size: 0xB20
 .text

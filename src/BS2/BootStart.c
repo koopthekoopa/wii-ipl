@@ -1,6 +1,8 @@
-#include <decomp_ide.h>
+#include <decomp.h>
+
 #include <__ppc_eabi_linker.h>
 #include <__ppc_eabi_init.h>
+
 #include <string.h>
 
 #define EXCEPTION_MASK_ADDR 0x80000044

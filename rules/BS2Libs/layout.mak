@@ -13,7 +13,7 @@ $(BS2_OBJASM_PATH)/layout/%.o: $(BS2_ASM_PATH)/layout/%.s
 	$(call BuildASMSources,$(INCLUDE_ROOT))
 
 $(BS2_BLD_PATH)/layout.a: $(LAYOUT_OBJECTS)
-	$(call LinkLibrary,$(LAYOUT_CCPATH),$?,$@)
+	$(call LinkLibrary,$(LAYOUT_CCPATH),$(LAYOUT_OBJECTS),$@)
 
 
 

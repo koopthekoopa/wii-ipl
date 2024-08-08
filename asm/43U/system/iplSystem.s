@@ -1043,12 +1043,12 @@
 /* 81333AA4 00001EA4  48 2C 46 0D */	bl __nw__FUlPQ23EGG4Heapi
 /* 81333AA8 00001EA8  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81333AAC 00001EAC  41 82 00 30 */	beq .L_81333ADC
-/* 81333AB0 00001EB0  3C A0 81 64 */	lis r5, lbl_81638DF0@ha
-/* 81333AB4 00001EB4  3C 80 81 64 */	lis r4, lbl_81638E3C@ha
-/* 81333AB8 00001EB8  38 A5 8D F0 */	addi r5, r5, lbl_81638DF0@l
+/* 81333AB0 00001EB0  3C A0 81 64 */	lis r5, __vt__Q33ipl8keyboard7Manager@ha
+/* 81333AB4 00001EB4  3C 80 81 64 */	lis r4, __vt__Q33ipl8keyboard13EventObserver@ha
+/* 81333AB8 00001EB8  38 A5 8D F0 */	addi r5, r5, __vt__Q33ipl8keyboard7Manager@l
 /* 81333ABC 00001EBC  38 00 00 00 */	li r0, 0x0
 /* 81333AC0 00001EC0  90 A3 00 00 */	stw r5, 0x0(r3)
-/* 81333AC4 00001EC4  38 84 8E 3C */	addi r4, r4, lbl_81638E3C@l
+/* 81333AC4 00001EC4  38 84 8E 3C */	addi r4, r4, __vt__Q33ipl8keyboard13EventObserver@l
 /* 81333AC8 00001EC8  90 03 00 04 */	stw r0, 0x4(r3)
 /* 81333ACC 00001ECC  90 83 00 08 */	stw r4, 0x8(r3)
 /* 81333AD0 00001ED0  90 03 00 20 */	stw r0, 0x20(r3)

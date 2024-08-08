@@ -85,9 +85,9 @@
 /* 81363564 00031964  7C 08 02 A6 */	mflr r0
 /* 81363568 00031968  90 01 00 14 */	stw r0, 0x14(r1)
 /* 8136356C 0003196C  4B FD 24 81 */	bl getLanguage__Q23ipl6SystemFv
-/* 81363570 00031970  3C 80 81 64 */	lis r4, lbl_81641208@ha
+/* 81363570 00031970  3C 80 81 64 */	lis r4, mLangPath__Q33ipl7utility8Language@ha
 /* 81363574 00031974  54 60 10 3A */	slwi r0, r3, 2
-/* 81363578 00031978  38 84 12 08 */	addi r4, r4, lbl_81641208@l
+/* 81363578 00031978  38 84 12 08 */	addi r4, r4, mLangPath__Q33ipl7utility8Language@l
 /* 8136357C 0003197C  7C 64 00 2E */	lwzx r3, r4, r0
 /* 81363580 00031980  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 81363584 00031984  7C 08 03 A6 */	mtlr r0
@@ -100,9 +100,9 @@
 .fn __ct__Q33ipl7utility9BScrollerFv, global
 /* 81363590 00031990  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81363594 00031994  7C 08 02 A6 */	mflr r0
-/* 81363598 00031998  3C 80 81 64 */	lis r4, lbl_81641284@ha
+/* 81363598 00031998  3C 80 81 64 */	lis r4, __vt__Q33ipl7utility9BScroller@ha
 /* 8136359C 0003199C  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813635A0 000319A0  38 84 12 84 */	addi r4, r4, lbl_81641284@l
+/* 813635A0 000319A0  38 84 12 84 */	addi r4, r4, __vt__Q33ipl7utility9BScroller@l
 /* 813635A4 000319A4  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813635A8 000319A8  7C 7F 1B 78 */	mr r31, r3
 /* 813635AC 000319AC  90 83 00 00 */	stw r4, 0x0(r3)
@@ -592,8 +592,8 @@
 # .text:0x7A4 | 0x81363C00 | size: 0x10
 # ipl::math::HermiteIntp<float>::HermiteIntp()
 .fn "__ct__Q33ipl4math14HermiteIntp<f>Fv", global
-/* 81363C00 00032000  3C 80 81 64 */	lis r4, lbl_81641268@ha
-/* 81363C04 00032004  38 84 12 68 */	addi r4, r4, lbl_81641268@l
+/* 81363C00 00032000  3C 80 81 64 */	lis r4, "__vt__Q33ipl4math14HermiteIntp<f>"@ha
+/* 81363C04 00032004  38 84 12 68 */	addi r4, r4, "__vt__Q33ipl4math14HermiteIntp<f>"@l
 /* 81363C08 00032008  90 83 00 00 */	stw r4, 0x0(r3)
 /* 81363C0C 0003200C  4E 80 00 20 */	blr
 .endfn "__ct__Q33ipl4math14HermiteIntp<f>Fv"
@@ -1810,7 +1810,8 @@
 .balign 8
 
 # .data:0x0 | 0x81641208 | size: 0x28
-.obj lbl_81641208, global
+# ipl::utility::Language::mLangPath
+.obj mLangPath__Q33ipl7utility8Language, global
 	.4byte lbl_81696250
 	.4byte lbl_81696254
 	.4byte lbl_81696258
@@ -1821,7 +1822,7 @@
 	.4byte lbl_8169626C
 	.4byte lbl_81696254
 	.4byte lbl_81696270
-.endobj lbl_81641208
+.endobj mLangPath__Q33ipl7utility8Language
 
 # .data:0x28 | 0x81641230 | size: 0x11
 .obj lbl_81641230, global
@@ -1839,26 +1840,29 @@
 .endobj lbl_81641258
 
 # .data:0x60 | 0x81641268 | size: 0x10
-.obj lbl_81641268, global
+# ipl::math::HermiteIntp<float>::__vtable
+.obj "__vt__Q33ipl4math14HermiteIntp<f>", global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte "__dt__Q33ipl4math14HermiteIntp<f>Fv"
 	.4byte calc__Q33ipl7utility15FrameControllerFv
-.endobj lbl_81641268
+.endobj "__vt__Q33ipl4math14HermiteIntp<f>"
 
 # .data:0x70 | 0x81641278 | size: 0xC
-.obj lbl_81641278, global
+# ipl::utility::YoungBScroller::__vtable
+.obj __vt__Q33ipl7utility14YoungBScroller, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte isYoungController__Q33ipl7utility14YoungBScrollerFi
-.endobj lbl_81641278
+.endobj __vt__Q33ipl7utility14YoungBScroller
 
 # .data:0x7C | 0x81641284 | size: 0xC
-.obj lbl_81641284, global
+# ipl::utility::BScroller::__vtable
+.obj __vt__Q33ipl7utility9BScroller, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte "abs<f>__Q23ipl4mathFRCf_f"
-.endobj lbl_81641284
+.endobj __vt__Q33ipl7utility9BScroller
 
 # 0x81694600..0x81694658 | size: 0x58
 .section .sdata2, "a"

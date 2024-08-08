@@ -8,8 +8,8 @@
 # .text:0x0 | 0x8133B2E4 | size: 0x10
 # ipl::nand::Base::Base()
 .fn __ct__Q33ipl4nand4BaseFv, global
-/* 8133B2E4 000096E4  3C 80 81 63 */	lis r4, lbl_81634D6C@ha
-/* 8133B2E8 000096E8  38 84 4D 6C */	addi r4, r4, lbl_81634D6C@l
+/* 8133B2E4 000096E4  3C 80 81 63 */	lis r4, __vt__Q33ipl4nand4Base@ha
+/* 8133B2E8 000096E8  38 84 4D 6C */	addi r4, r4, __vt__Q33ipl4nand4Base@l
 /* 8133B2EC 000096EC  90 83 00 00 */	stw r4, 0x0(r3)
 /* 8133B2F0 000096F0  4E 80 00 20 */	blr
 .endfn __ct__Q33ipl4nand4BaseFv
@@ -44,11 +44,11 @@
 /* 8133B33C 0000973C  90 01 00 24 */	stw r0, 0x24(r1)
 /* 8133B340 00009740  39 61 00 20 */	addi r11, r1, 0x20
 /* 8133B344 00009744  48 2B E1 85 */	bl _savegpr_29
-/* 8133B348 00009748  3D 80 81 63 */	lis r12, lbl_81634D18@ha
+/* 8133B348 00009748  3D 80 81 63 */	lis r12, __vt__Q33ipl4nand4File@ha
 /* 8133B34C 0000974C  38 00 00 00 */	li r0, 0x0
 /* 8133B350 00009750  7C 9E 23 78 */	mr r30, r4
 /* 8133B354 00009754  39 60 00 01 */	li r11, 0x1
-/* 8133B358 00009758  39 8C 4D 18 */	addi r12, r12, lbl_81634D18@l
+/* 8133B358 00009758  39 8C 4D 18 */	addi r12, r12, __vt__Q33ipl4nand4File@l
 /* 8133B35C 0000975C  90 03 00 AC */	stw r0, 0xac(r3)
 /* 8133B360 00009760  7C A4 2B 78 */	mr r4, r5
 /* 8133B364 00009764  7C 7D 1B 78 */	mr r29, r3
@@ -95,14 +95,14 @@
 .fn __ct__Q33ipl4nand4FileFPQ23EGG4HeapPCcPUcUlUc, global
 /* 8133B3F4 000097F4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8133B3F8 000097F8  7C 08 02 A6 */	mflr r0
-/* 8133B3FC 000097FC  3D 60 81 63 */	lis r11, lbl_81634D18@ha
+/* 8133B3FC 000097FC  3D 60 81 63 */	lis r11, __vt__Q33ipl4nand4File@ha
 /* 8133B400 00009800  7C 8C 23 78 */	mr r12, r4
 /* 8133B404 00009804  90 01 00 14 */	stw r0, 0x14(r1)
 /* 8133B408 00009808  7C A4 2B 78 */	mr r4, r5
 /* 8133B40C 0000980C  39 40 00 00 */	li r10, 0x0
 /* 8133B410 00009810  39 20 00 02 */	li r9, 0x2
 /* 8133B414 00009814  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 8133B418 00009818  39 6B 4D 18 */	addi r11, r11, lbl_81634D18@l
+/* 8133B418 00009818  39 6B 4D 18 */	addi r11, r11, __vt__Q33ipl4nand4File@l
 /* 8133B41C 0000981C  38 00 00 01 */	li r0, 0x1
 /* 8133B420 00009820  7C 7F 1B 78 */	mr r31, r3
 /* 8133B424 00009824  91 43 00 AC */	stw r10, 0xac(r3)
@@ -156,8 +156,8 @@
 /* 8133B4D0 000098D0  7C 7E 1B 78 */	mr r30, r3
 /* 8133B4D4 000098D4  41 82 00 3C */	beq .L_8133B510
 /* 8133B4D8 000098D8  88 03 00 9C */	lbz r0, 0x9c(r3)
-/* 8133B4DC 000098DC  3C 80 81 63 */	lis r4, lbl_81634D18@ha
-/* 8133B4E0 000098E0  38 84 4D 18 */	addi r4, r4, lbl_81634D18@l
+/* 8133B4DC 000098DC  3C 80 81 63 */	lis r4, __vt__Q33ipl4nand4File@ha
+/* 8133B4E0 000098E0  38 84 4D 18 */	addi r4, r4, __vt__Q33ipl4nand4File@l
 /* 8133B4E4 000098E4  28 00 00 01 */	cmplwi r0, 0x1
 /* 8133B4E8 000098E8  90 83 00 00 */	stw r4, 0x0(r3)
 /* 8133B4EC 000098EC  40 82 00 14 */	bne .L_8133B500
@@ -977,9 +977,9 @@
 /* 8133BFB8 0000A3B8  90 01 00 74 */	stw r0, 0x74(r1)
 /* 8133BFBC 0000A3BC  39 61 00 70 */	addi r11, r1, 0x70
 /* 8133BFC0 0000A3C0  48 2B D4 F9 */	bl _savegpr_25
-/* 8133BFC4 0000A3C4  3D 20 81 63 */	lis r9, lbl_81634CF8@ha
+/* 8133BFC4 0000A3C4  3D 20 81 63 */	lis r9, __vt__Q33ipl4nand8LangFile@ha
 /* 8133BFC8 0000A3C8  38 00 00 00 */	li r0, 0x0
-/* 8133BFCC 0000A3CC  39 29 4C F8 */	addi r9, r9, lbl_81634CF8@l
+/* 8133BFCC 0000A3CC  39 29 4C F8 */	addi r9, r9, __vt__Q33ipl4nand8LangFile@l
 /* 8133BFD0 0000A3D0  7C BB 2B 78 */	mr r27, r5
 /* 8133BFD4 0000A3D4  91 23 00 00 */	stw r9, 0x0(r3)
 /* 8133BFD8 0000A3D8  7C 9A 23 78 */	mr r26, r4
@@ -1090,8 +1090,8 @@
 /* 8133C160 0000A560  7C 7E 1B 78 */	mr r30, r3
 /* 8133C164 0000A564  41 82 00 6C */	beq .L_8133C1D0
 /* 8133C168 0000A568  80 03 00 04 */	lwz r0, 0x4(r3)
-/* 8133C16C 0000A56C  3C 80 81 63 */	lis r4, lbl_81634CF8@ha
-/* 8133C170 0000A570  38 84 4C F8 */	addi r4, r4, lbl_81634CF8@l
+/* 8133C16C 0000A56C  3C 80 81 63 */	lis r4, __vt__Q33ipl4nand8LangFile@ha
+/* 8133C170 0000A570  38 84 4C F8 */	addi r4, r4, __vt__Q33ipl4nand8LangFile@l
 /* 8133C174 0000A574  2C 00 00 00 */	cmpwi r0, 0x0
 /* 8133C178 0000A578  90 83 00 00 */	stw r4, 0x0(r3)
 /* 8133C17C 0000A57C  41 82 00 20 */	beq .L_8133C19C
@@ -1168,9 +1168,9 @@
 /* 8133C25C 0000A65C  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8133C260 0000A660  7C 7F 1B 78 */	mr r31, r3
 /* 8133C264 0000A664  4B FF FD 4D */	bl __ct__Q33ipl4nand8LangFileFPQ23EGG4HeapPCcPCcP9ARCHandleb
-/* 8133C268 0000A668  3C 80 81 63 */	lis r4, lbl_81634CD8@ha
+/* 8133C268 0000A668  3C 80 81 63 */	lis r4, __vt__Q33ipl4nand10LayoutFile@ha
 /* 8133C26C 0000A66C  7F E3 FB 78 */	mr r3, r31
-/* 8133C270 0000A670  38 84 4C D8 */	addi r4, r4, lbl_81634CD8@l
+/* 8133C270 0000A670  38 84 4C D8 */	addi r4, r4, __vt__Q33ipl4nand10LayoutFile@l
 /* 8133C274 0000A674  90 9F 00 00 */	stw r4, 0x0(r31)
 /* 8133C278 0000A678  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8133C27C 0000A67C  80 01 00 14 */	lwz r0, 0x14(r1)
@@ -1535,7 +1535,8 @@
 .balign 8
 
 # .data:0x0 | 0x81634CD8 | size: 0x20
-.obj lbl_81634CD8, global
+# ipl::nand::LayoutFile::__vtable
+.obj __vt__Q33ipl4nand10LayoutFile, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl4nand10LayoutFileFv
@@ -1544,10 +1545,11 @@
 	.4byte isFinished__Q33ipl4nand8LangFileFv
 	.4byte checkData__Q33ipl4nand8LangFileFv
 	.4byte isFatalError__Q33ipl4nand8LangFileFv
-.endobj lbl_81634CD8
+.endobj __vt__Q33ipl4nand10LayoutFile
 
 # .data:0x20 | 0x81634CF8 | size: 0x20
-.obj lbl_81634CF8, global
+# ipl::nand::LangFile::__vtable
+.obj __vt__Q33ipl4nand8LangFile, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl4nand8LangFileFv
@@ -1556,10 +1558,11 @@
 	.4byte isFinished__Q33ipl4nand8LangFileFv
 	.4byte checkData__Q33ipl4nand8LangFileFv
 	.4byte isFatalError__Q33ipl4nand8LangFileFv
-.endobj lbl_81634CF8
+.endobj __vt__Q33ipl4nand8LangFile
 
 # .data:0x40 | 0x81634D18 | size: 0x54
-.obj lbl_81634D18, global
+# ipl::nand::File::__vtable
+.obj __vt__Q33ipl4nand4File, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl4nand4FileFv
@@ -1581,10 +1584,11 @@
 	.4byte isAshCompressed__Q33ipl4nand4FileFPCUc
 	.4byte isLz7Compressed__Q33ipl4nand4FileFPCUc
 	.4byte callback___Q33ipl4nand4FileFv
-.endobj lbl_81634D18
+.endobj __vt__Q33ipl4nand4File
 
 # .data:0x94 | 0x81634D6C | size: 0x24
-.obj lbl_81634D6C, global
+# ipl::nand::Base::__vtable
+.obj __vt__Q33ipl4nand4Base, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl4nand4BaseFv
@@ -1594,7 +1598,7 @@
 	.4byte checkData__Q33ipl4nand4BaseFv
 	.4byte isFatalError__Q33ipl4nand4BaseFv
 	.4byte 0x00000000
-.endobj lbl_81634D6C
+.endobj __vt__Q33ipl4nand4Base
 
 # 0x81696098..0x816960A8 | size: 0x10
 .section .sdata, "wa"
