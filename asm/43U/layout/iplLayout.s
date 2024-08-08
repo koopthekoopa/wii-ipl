@@ -1731,7 +1731,7 @@
 	.double 4503599627370496
 .endobj lbl_81694690
 
-# 0x816962C0..0x816962D0 | size: 0x10
+# 0x816962C0..0x816962C8 | size: 0x8
 .section .sdata, "wa"
 .balign 8
 
@@ -1740,9 +1740,3 @@
 	.4byte 0x61726300
 	.4byte 0x00000000
 .endobj lbl_816962C0
-
-# .sdata:0x8 | 0x816962C8 | size: 0x8
-.obj lbl_816962C8, global
-	.4byte 0x6D617263
-	.4byte 0x00000000
-.endobj lbl_816962C8

@@ -1,0 +1,14 @@
+#ifndef IPL_ERROR_MESSAGE_IDS
+#define IPL_ERROR_MESSAGE_IDS
+
+enum {
+    IPL_ERROR_MESSAGE_DISC_ERROR = 0,
+    IPL_ERROR_MESSAGE_NAND_ERROR,
+    IPL_ERROR_MESSAGE_FILE_ERROR,
+    IPL_ERROR_MESSAGE_WAD_ERROR,
+    IPL_ERROR_MESSAGE_KEY_ERROR,    /* Always English, but blank in the korean/chinese releases. */
+}
+
+#endif // IPL_ERROR_MESSAGE_IDS
+
+

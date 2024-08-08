@@ -6,6 +6,10 @@
 #define ROUNDUP(x, a) (((unsigned int)(x) + (a) - 1) & ~((a) - 1))
 #define PTR_ROUNDUP(x, a) ((void*)(((unsigned int)(x) + ((a) - 1)) & ~((a) - 1)))
 
+#ifdef UNIT_DOESNT_MATCH
+#error This unit does not match yet. Use the assembly instead.
+#endif
+
 #endif // DECOMP_UTILS_H
 
 
