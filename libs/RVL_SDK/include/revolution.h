@@ -5,6 +5,7 @@
 
 #include <revolution/os.h>
 #include <revolution/gx.h>
+#include <revolution/vi.h>
 
 #endif // REVOLUTION_H
 

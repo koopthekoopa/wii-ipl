@@ -1,7 +1,13 @@
 BS2_CFLAGS =	-O4,s -ipa file $(COMMON_CCFLAGS)
 BS2_CCPATH =	$(CW_GC_30A52)
 BS2_OBJECTS =	$(BS2_OBJ_PATH)/BS2/BootStart.o \
-				$(BS2_OBJ_PATH)/BS2/BS2.o
+				$(BS2_OBJ_PATH)/BS2/BS2Entry.o \
+				$(BS2_OBJ_PATH)/BS2/BS2.o # stub \
+				$(BS2_OBJASM_PATH)/BS2/BS2Init.o \
+				$(BS2_OBJASM_PATH)/BS2/BS2Mach.o \
+				$(BS2_OBJASM_PATH)/BS2/BS2Update.o \
+				$(BS2_OBJASM_PATH)/BS2/BS2ParentalControl.o \
+				$(BS2_OBJASM_PATH)/BS2/BringUp.o
 
 DEPENDENCIES += $(BS2_OBJECTS:.o=.d)
 
