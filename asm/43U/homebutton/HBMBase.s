@@ -15,14 +15,14 @@
 .balign 4
 
 # .text:0x0 | 0x813715A8 | size: 0xC
-.fn HBMBase_813715A8, global
+.fn HBMBase_813715A8, local
 /* 813715A8 0003F9A8  7C 64 1B 78 */	mr r4, r3
 /* 813715AC 0003F9AC  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
 /* 813715B0 0003F9B0  48 1E A0 B8 */	b fn_8155B668
 .endfn HBMBase_813715A8
 
 # .text:0xC | 0x813715B4 | size: 0xC
-.fn HBMBase_813715B4, global
+.fn HBMBase_813715B4, local
 /* 813715B4 0003F9B4  7C 64 1B 78 */	mr r4, r3
 /* 813715B8 0003F9B8  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
 /* 813715BC 0003F9BC  48 1E A0 BC */	b fn_8155B678
@@ -467,7 +467,7 @@
 .endfn deleteInstance__Q210homebutton10HomeButtonFv
 
 # .text:0x5CC | 0x81371B74 | size: 0x80
-.fn HBMBase_81371B74, global
+.fn HBMBase_81371B74, local
 /* 81371B74 0003FF74  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81371B78 0003FF78  7C 08 02 A6 */	mflr r0
 /* 81371B7C 0003FF7C  90 01 00 24 */	stw r0, 0x24(r1)
@@ -3197,7 +3197,7 @@
 .endfn setSpeakerAlarm__Q210homebutton10HomeButtonFii
 
 # .text:0x2C10 | 0x813741B8 | size: 0x84
-.fn homebutton_813741B8, global
+.fn homebutton_813741B8, local
 /* 813741B8 000425B8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 813741BC 000425BC  7C 08 02 A6 */	mflr r0
 /* 813741C0 000425C0  90 01 00 24 */	stw r0, 0x24(r1)
@@ -3237,7 +3237,7 @@
 .endfn homebutton_813741B8
 
 # .text:0x2C94 | 0x8137423C | size: 0x30
-.fn homebutton_8137423C, global
+.fn homebutton_8137423C, local
 /* 8137423C 0004263C  2C 03 00 01 */	cmpwi r3, 0x1
 /* 81374240 00042640  40 82 00 10 */	bne .L_81374250
 /* 81374244 00042644  80 AD A9 70 */	lwz r5, lbl_816989B0@sda21(r0)

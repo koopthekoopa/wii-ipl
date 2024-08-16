@@ -65,14 +65,14 @@ namespace ipl {
             nand::LayoutFile*   mLayoutArchive;                     // 0x00
             layout::Object*     mLayoutObject[MAX_LAYOUT_FILES];    // 0x04
             
-            int                 unk_0x28;
+            int                 mMaybeType;                         // 0x28
             math::VEC2          mOriginPos;                         // 0x2C
 
             f32                 mArrowLength;                       // 0x34
             PointerDirection    mPointDirection;
 
             bool                mScrolling;                         // 0x3C
-            bool                unk_0x3D;
+            bool                mVisible;                           // 0x3D
             
             u8                  unk_0x3E;
             u8                  unk_0x3F;

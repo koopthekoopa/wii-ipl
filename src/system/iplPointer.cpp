@@ -44,7 +44,7 @@ namespace ipl {
      * @note Size: 0xE8
      */
     Pointer::Pointer(EGG::Heap* pHeap)
-    : unk_0x28(-1), mOriginPos(0, 0), mArrowLength(MINIMUM_LENGTH), mPointDirection(PNT_DOWN), mScrolling(false), unk_0x3D(true), mCore() {
+    : mMaybeType(-1), mOriginPos(0, 0), mArrowLength(MINIMUM_LENGTH), mPointDirection(PNT_DOWN), mScrolling(false), mVisible(true), mCore() {
         mLayoutArchive = System::getNandManager()->readLayout(pHeap, "cursor.ash", false);
         
         for (int i = 0; i < MAX_LAYOUT_FILES; i++) {
@@ -60,7 +60,7 @@ namespace ipl {
     void Pointer::calc() {
         mCore.calc(this);
 
-        if (unk_0x28 >= 0) {
+        if (mMaybeType >= 0) {
             nw4r::lyt::Pane *pArrowPane, *pArrowRoot, *pOriginPane;
             f32 newArrowLength, newYScale;
 
@@ -74,10 +74,10 @@ namespace ipl {
             pOriginPane->SetTranslate(mOriginPos);
 
             // Arrow Length
-            nw4r::lyt::Size arrowSize = pArrowPane->GetSize();
-            // Limit the length between 32 and 128
-            newArrowLength = UTILITY_CLAMP(mArrowLength, MINIMUM_LENGTH, MAXIMUM_LENGTH);
-            arrowSize.height = newArrowLength;
+            nw4r::lyt::Size arrowSize   = pArrowPane->GetSize();
+            // Limit the length between MINIMUM_LENGTH and MAXIMUM_LENGTH
+            newArrowLength              = UTILITY_CLAMP(mArrowLength, MINIMUM_LENGTH, MAXIMUM_LENGTH);
+            arrowSize.height            = newArrowLength;
 
             // Set the new length
             pArrowPane->SetSize(arrowSize);
@@ -106,9 +106,9 @@ namespace ipl {
      * @note Size: 0x50
      */
     void Pointer::draw() {
-        if (unk_0x3D) {
+        if (mVisible) {
             mCore.draw();
-            if (unk_0x28 >= 0) {
+            if (mMaybeType >= 0) {
                 mLayoutObject[LYT_SCROLLER_ID]->draw();
             }
         }
@@ -138,8 +138,13 @@ namespace ipl {
         int grabId = LYT_INVALID_ID;
 
         switch (type) {
-            case POINTER_LYT_TYPE_POINT: grabId = LYT_POINT_ID; break;
-            case POINTER_LYT_TYPE_GRABBING: grabId = LYT_GRAB_ID; break;
+            case POINTER_LYT_TYPE_POINT:
+                grabId = LYT_POINT_ID;
+                break;
+            
+            case POINTER_LYT_TYPE_GRABBING:
+                grabId = LYT_GRAB_ID;
+                break;
         }
 
         return mLayoutObject[grabId + chan];

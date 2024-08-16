@@ -21,8 +21,10 @@ extern void exit();
 #endif
 
 typedef void (*VoidPTR)();
-__declspec(section ".init") extern VoidPTR  _ctors[];
-__declspec(section ".init") extern VoidPTR  _dtors[];
+#pragma section code_type ".ctors$00"
+__declspec(section ".ctors$00") extern VoidPTR  _ctors[];
+#pragma section code_type ".dtors$00"
+__declspec(section ".dtors$00") extern VoidPTR  _dtors[];
 
 #pragma section code_type ".init"
 

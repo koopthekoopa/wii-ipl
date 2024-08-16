@@ -25,6 +25,7 @@ ELF2BS			= elf2bs$(EXEC)
 MAKESEL			= makesel$(EXEC)
 EXTRACT_DATA	= extract_bin.py
 GCC				= gcc
+CHMOD			= chmod +x
 
 ## Misc defines
 DEFRULES		= mainrules
@@ -55,27 +56,27 @@ COMMON_INCLUDES	=	$(INCLUDE_ROOT)/decomp \
 COMMON_ASFLAGS		=	-mgekko
 COMMON_MWCC_ASFLAGS =	-proc gekko
 
-COMMON_LDFLAGS	=	-proc gekko \
-					-fp hardware \
-					-unused \
-					-mapunused \
-					-nofail
+COMMON_LDFLAGS	=		-proc gekko \
+						-fp hardware \
+						-unused \
+						-mapunused \
+						-nofail
 
 # Common Compiler Flags for Nintendo's libraries and the application
-COMMON_CCFLAGS =	-enum int \
-					-inline auto \
-					-Cpp_exceptions off \
-					-proc gekko \
-					-fp hard \
-					-RTTI off
+COMMON_CCFLAGS =		-enum int \
+						-inline auto \
+						-Cpp_exceptions off \
+						-proc gekko \
+						-fp hardware \
+						-RTTI off
 
 # Common Compiler Flags for Metrowork's libraries
-COMMON_MW_CCFLAGS =	-enum int \
-					-inline auto \
-					-Cpp_exceptions off \
-					-proc gekko \
-					-fp hard \
-					-use_lmw_stmw on \
-					-rostr
+COMMON_MW_CCFLAGS =		-enum int \
+						-inline auto \
+						-Cpp_exceptions off \
+						-proc gekko \
+						-fp hard \
+						-use_lmw_stmw on \
+						-rostr
 
 

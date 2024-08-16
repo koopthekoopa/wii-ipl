@@ -34,14 +34,13 @@ namespace ipl {
             // Set the position
             pCursorMovePane->SetTranslate(utility::get_cursor_pos(pController->getDpdProjectionPos()));
 
-            // Prepare rotation
+            // Set rotation
             math::VEC2 cursorHorizon(pController->getHorizon());
             math::VEC3 cursorRotateVec(0, 0, nw4r::math::Atan2Deg(-cursorHorizon.y, cursorHorizon.x));
 
             pCursorRotate = mLayoutObject->GetRootPane()->FindPaneByName("N_Rot");
             pCursorRotateShadow = mLayoutObject->GetRootPane()->FindPaneByName("N_SRot");
 
-            // Set rotation
             pCursorRotate->SetRotate(cursorRotateVec);
             pCursorRotateShadow->SetRotate(cursorRotateVec);
 

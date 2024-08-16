@@ -1223,9 +1223,9 @@
 .endfn isLoadedLockedMsg__Q33ipl7channel7ManagerFv
 
 # .text:0xFB4 | 0x8133892C | size: 0x4
-.fn iplChannelMgr_UNUSED_8133892C, global
+.fn iplChannelMgr_8133892C, local
 /* 8133892C 00006D2C  4E 80 00 20 */	blr
-.endfn iplChannelMgr_UNUSED_8133892C
+.endfn iplChannelMgr_8133892C
 
 # .text:0xFB8 | 0x81338930 | size: 0x10
 # ipl::nand::File::isFinished()
@@ -1903,14 +1903,14 @@
 .endfn iplChannelManager_813391C0
 
 # .text:0x1878 | 0x813391F0 | size: 0xC
-.fn iplChannelManager_813391F0, global
+.fn iplChannelManager_813391F0, local
 /* 813391F0 000075F0  80 A3 15 4C */	lwz r5, 0x154c(r3)
 /* 813391F4 000075F4  80 C3 15 50 */	lwz r6, 0x1550(r3)
 /* 813391F8 000075F8  48 00 00 04 */	b iplChannelManager_813391FC
 .endfn iplChannelManager_813391F0
 
 # .text:0x1884 | 0x813391FC | size: 0x184
-.fn iplChannelManager_813391FC, global
+.fn iplChannelManager_813391FC, local
 /* 813391FC 000075FC  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 81339200 00007600  7C 08 02 A6 */	mflr r0
 /* 81339204 00007604  90 01 00 34 */	stw r0, 0x34(r1)
@@ -2016,7 +2016,7 @@
 .endfn iplChannelManager_813391FC
 
 # .text:0x1A08 | 0x81339380 | size: 0x1DC
-.fn iplChannelManager_81339380, global
+.fn iplChannelManager_81339380, local
 /* 81339380 00007780  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81339384 00007784  7C 08 02 A6 */	mflr r0
 /* 81339388 00007788  90 01 00 14 */	stw r0, 0x14(r1)
@@ -3288,7 +3288,7 @@
 .endfn nand_error_handling__Q33ipl7channel7ManagerFi
 
 # .text:0x2B68 | 0x8133A4E0 | size: 0x9C
-.fn iplChannelManager_8133A4E0, global
+.fn iplChannelManager_8133A4E0, local
 /* 8133A4E0 000088E0  39 80 00 00 */	li r12, 0x0
 /* 8133A4E4 000088E4  38 80 00 00 */	li r4, 0x0
 /* 8133A4E8 000088E8  38 00 00 0C */	li r0, 0xc
@@ -4069,16 +4069,10 @@
 	.skip 0x4
 .endobj lbl_81698694
 
-# .sbss:0x8 | 0x81698698 | size: 0x1
+# .sbss:0x8 | 0x81698698 | size: 0x4
 .obj lbl_81698698, global
-	.skip 0x1
+	.skip 0x4
 .endobj lbl_81698698
-
-# .sbss:0x9 | 0x81698699 | size: 0x3
-.obj gap_12_81698699_sbss, global
-.hidden gap_12_81698699_sbss
-	.skip 0x3
-.endobj gap_12_81698699_sbss
 
 # .sbss:0xC | 0x8169869C | size: 0x4
 .obj lbl_8169869C, global

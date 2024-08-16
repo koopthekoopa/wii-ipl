@@ -19,7 +19,7 @@ $(BS2_OBJASM_PATH)/iplwww/%.o: $(BS2_ASM_PATH)/iplwww/%.s
 	$(call BuildASMSources,$(INCLUDE_ROOT))
 
 $(BS2_BLD_PATH)/iplwww.a: $(IPL_WWW_OBJECTS)
-	$(call LinkLibrary,$(IPL_WWW_CCPATH),$(IPL_WWW_OBJECTS),$@)
+	$(call LinkLibrary,$(IPL_WWW_CCPATH),$^,$@)
 
 
 

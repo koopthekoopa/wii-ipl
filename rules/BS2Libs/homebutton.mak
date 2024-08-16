@@ -16,6 +16,6 @@ $(BS2_OBJASM_PATH)/homebutton/%.o: $(BS2_ASM_PATH)/homebutton/%.s
 	$(call BuildASMSources,$(INCLUDE_ROOT))
 
 $(BS2_BLD_PATH)/homebutton.a: $(HBM_OBJECTS)
-	$(call LinkLibrary,$(HBM_CCPATH),$(HBM_OBJECTS),$@)
+	$(call LinkLibrary,$(HBM_CCPATH),$^,$@)
 
 

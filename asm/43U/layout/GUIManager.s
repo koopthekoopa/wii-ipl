@@ -1359,7 +1359,7 @@
 .endfn draw__Q23gui13PaneComponentFv
 
 # .text:0x1138 | 0x81369A50 | size: 0x2C
-.fn GuiMgr_81369A50, global
+.fn GuiMgr_81369A50, local
 /* 81369A50 00037E50  88 03 00 CF */	lbz r0, 0xcf(r3)
 /* 81369A54 00037E54  54 00 07 FF */	clrlwi. r0, r0, 31
 /* 81369A58 00037E58  40 82 00 0C */	bne .L_81369A64
@@ -1376,7 +1376,7 @@
 .endfn GuiMgr_81369A50
 
 # .text:0x1164 | 0x81369A7C | size: 0x4
-.fn GuiMgr_81369A7C, global
+.fn GuiMgr_81369A7C, local
 /* 81369A7C 00037E7C  4E 80 00 20 */	blr
 .endfn GuiMgr_81369A7C
 

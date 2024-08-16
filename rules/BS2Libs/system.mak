@@ -61,7 +61,7 @@ $(BS2_OBJASM_PATH)/system/%.o: $(BS2_ASM_PATH)/system/%.s
 	$(call BuildASMSources,$(INCLUDE_ROOT))
 
 $(BS2_BLD_PATH)/system.a: $(SYSTEM_OBJECTS)
-	$(call LinkLibrary,$(SYSTEM_CCPATH),$(SYSTEM_OBJECTS),$@)
+	$(call LinkLibrary,$(SYSTEM_CCPATH),$^,$@)
 
 
 

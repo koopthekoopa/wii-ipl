@@ -22,7 +22,7 @@
 .balign 4
 
 # .text:0x0 | 0x8136F9D0 | size: 0x24
-.fn www_wiisetting_8136F9D0, global
+.fn www_wiisetting_8136F9D0, local
 /* 8136F9D0 0003DDD0  2C 04 00 01 */	cmpwi r4, 0x1
 /* 8136F9D4 0003DDD4  4C 82 00 20 */	bnelr
 /* 8136F9D8 0003DDD8  38 80 00 01 */	li r4, 0x1
@@ -35,7 +35,7 @@
 .endfn www_wiisetting_8136F9D0
 
 # .text:0x24 | 0x8136F9F4 | size: 0x44
-.fn www_wiisetting_8136F9F4, global
+.fn www_wiisetting_8136F9F4, local
 /* 8136F9F4 0003DDF4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8136F9F8 0003DDF8  7C 08 02 A6 */	mflr r0
 /* 8136F9FC 0003DDFC  2C 04 00 01 */	cmpwi r4, 0x1
@@ -1561,7 +1561,7 @@
 .endfn wiiWriteBack__Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue
 
 # .text:0x1490 | 0x81370E60 | size: 0x54
-.fn www_wiisetting_81370E60, global
+.fn www_wiisetting_81370E60, local
 /* 81370E60 0003F260  1C C3 00 30 */	mulli r6, r3, 0x30
 /* 81370E64 0003F264  3C A0 81 61 */	lis r5, lbl_8160F060@ha
 /* 81370E68 0003F268  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
@@ -1617,7 +1617,7 @@
 .endfn initWiiSetting__Q23www10wiisettingFv
 
 # .text:0x1544 | 0x81370F14 | size: 0x98
-.fn www_wiisetting_81370F14, global
+.fn www_wiisetting_81370F14, local
 /* 81370F14 0003F314  94 21 FE C0 */	stwu r1, -0x140(r1)
 /* 81370F18 0003F318  7C 08 02 A6 */	mflr r0
 /* 81370F1C 0003F31C  90 01 01 44 */	stw r0, 0x144(r1)

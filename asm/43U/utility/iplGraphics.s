@@ -422,7 +422,7 @@
 .endfn drawPolygon__Q33ipl7utility8GraphicsFRCQ34nw4r2ut4Rect8_GXColor
 
 # .text:0x5A8 | 0x81362FA8 | size: 0x14
-.fn iplGraphics_81362FA8, global
+.fn iplGraphics_81362FA8, local
 /* 81362FA8 000313A8  3C 60 CC 01 */	lis r3, 0xcc01
 /* 81362FAC 000313AC  D0 23 80 00 */	stfs f1, -0x8000(r3)
 /* 81362FB0 000313B0  D0 43 80 00 */	stfs f2, -0x8000(r3)
@@ -625,7 +625,7 @@
 .endfn drawTexture__Q33ipl7utility8GraphicsFRCQ34nw4r2ut4RectRC9_GXTexObj8_GXColorUcQ43ipl7utility8Graphics11Orientation
 
 # .text:0x89C | 0x8136329C | size: 0xC
-.fn iplGraphics_8136329C, global
+.fn iplGraphics_8136329C, local
 /* 8136329C 0003169C  3C 60 81 09 */	lis r3, mArg__Q33ipl7utility8Graphics@ha
 /* 813632A0 000316A0  38 63 97 C0 */	addi r3, r3, mArg__Q33ipl7utility8Graphics@l
 /* 813632A4 000316A4  4B FF F7 5C */	b __ct__Q43ipl7utility8Graphics3ArgFv

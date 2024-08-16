@@ -14,7 +14,7 @@ $(REVOEX_OBJASM_PATH)/net/%.o: $(REVOEX_ASM_PATH)/net/%.s
 	$(call BuildASMSources,$(INCLUDE_ROOT))
 
 $(REVOEX_BLD_PATH)/net.a: $(NET_OBJECTS)
-	$(call LinkLibrary,$(NET_CCPATH),$?,$@)
+	$(call LinkLibrary,$(NET_CCPATH),$^,$@)
 
 
 

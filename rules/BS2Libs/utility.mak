@@ -20,7 +20,7 @@ $(BS2_OBJASM_PATH)/utility/%.o: $(BS2_ASM_PATH)/utility/%.s
 	$(call BuildASMSources,$(INCLUDE_ROOT))
 
 $(BS2_BLD_PATH)/utility.a: $(UTILITY_OBJECTS)
-	$(call LinkLibrary,$(UTILITY_CCPATH),$(UTILITY_OBJECTS),$@)
+	$(call LinkLibrary,$(UTILITY_CCPATH),$^,$@)
 
 
 

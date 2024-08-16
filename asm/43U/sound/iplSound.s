@@ -1571,7 +1571,7 @@
 .endfn __dt__Q33ipl3snd6SystemFv
 
 # .text:0x132C | 0x8136C588 | size: 0xB4
-.fn iplSound_8136C588, global
+.fn iplSound_8136C588, local
 /* 8136C588 0003A988  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8136C58C 0003A98C  7C 08 02 A6 */	mflr r0
 /* 8136C590 0003A990  3C 80 81 37 */	lis r4, __ct__Q33ipl3snd10tagSSeInfoFv@ha
@@ -1700,7 +1700,7 @@
 .endfn __ct__Q33ipl3snd11tagSBgmInfoFv
 
 # .text:0x14C8 | 0x8136C724 | size: 0x1C
-.fn iplSound_8136C724, global
+.fn iplSound_8136C724, local
 /* 8136C724 0003AB24  3C 60 81 09 */	lis r3, _seBlk__Q23ipl3snd@ha
 /* 8136C728 0003AB28  3C 80 81 37 */	lis r4, __ct__Q33ipl3snd11tagSBgmInfoFv@ha
 /* 8136C72C 0003AB2C  38 63 98 54 */	addi r3, r3, _seBlk__Q23ipl3snd@l
@@ -1711,7 +1711,7 @@
 .endfn iplSound_8136C724
 
 # .text:0x14E4 | 0x8136C740 | size: 0x30
-.fn iplSound_8136C740, global
+.fn iplSound_8136C740, local
 /* 8136C740 0003AB40  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8136C744 0003AB44  7C 08 02 A6 */	mflr r0
 /* 8136C748 0003AB48  90 01 00 14 */	stw r0, 0x14(r1)

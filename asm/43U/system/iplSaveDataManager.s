@@ -1134,7 +1134,7 @@
 .endfn checkSpecialTitles__Q33ipl8savedata7ManagerFPUxUl
 
 # .text:0xF20 | 0x81358BD8 | size: 0xD0
-.fn iplSavedata_81358BD8, global
+.fn iplSavedata_81358BD8, local
 /* 81358BD8 00026FD8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81358BDC 00026FDC  7C 08 02 A6 */	mflr r0
 /* 81358BE0 00026FE0  90 01 00 24 */	stw r0, 0x24(r1)
@@ -1938,7 +1938,7 @@
 .endfn updateVersion__Q33ipl8savedata7ManagerFUlUl
 
 # .text:0x19B8 | 0x81359670 | size: 0x48
-.fn iplSavedata_81359670, global
+.fn iplSavedata_81359670, local
 /* 81359670 00027A70  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81359674 00027A74  7C 08 02 A6 */	mflr r0
 /* 81359678 00027A78  38 80 00 00 */	li r4, 0x0

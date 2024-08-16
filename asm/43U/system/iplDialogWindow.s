@@ -1069,7 +1069,7 @@
 .endfn setEventHandler__Q23gui7ManagerFPQ23gui12EventHandler
 
 # .text:0xF00 | 0x81345718 | size: 0x60
-.fn iplDialogWindow_81345718, global
+.fn iplDialogWindow_81345718, local
 /* 81345718 00013B18  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8134571C 00013B1C  7C 08 02 A6 */	mflr r0
 /* 81345720 00013B20  90 01 00 24 */	stw r0, 0x24(r1)
@@ -1099,7 +1099,7 @@
 .endfn iplDialogWindow_81345718
 
 # .text:0xF60 | 0x81345778 | size: 0x108
-.fn iplDialogWindow_81345778, global
+.fn iplDialogWindow_81345778, local
 /* 81345778 00013B78  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8134577C 00013B7C  7C 08 02 A6 */	mflr r0
 /* 81345780 00013B80  90 01 00 14 */	stw r0, 0x14(r1)
@@ -1173,7 +1173,7 @@
 .endfn iplDialogWindow_81345778
 
 # .text:0x1068 | 0x81345880 | size: 0x5E4
-.fn iplDialogWindow_81345880, global
+.fn iplDialogWindow_81345880, local
 /* 81345880 00013C80  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 81345884 00013C84  7C 08 02 A6 */	mflr r0
 /* 81345888 00013C88  90 01 00 34 */	stw r0, 0x34(r1)
@@ -2440,7 +2440,7 @@
 .endfn iplDialogWindow_81346938
 
 # .text:0x21EC | 0x81346A04 | size: 0xC
-.fn iplDialogWindow_81346A04, global
+.fn iplDialogWindow_81346A04, local
 /* 81346A04 00014E04  D0 23 00 00 */	stfs f1, 0x0(r3)
 /* 81346A08 00014E08  D0 43 00 04 */	stfs f2, 0x4(r3)
 /* 81346A0C 00014E0C  4E 80 00 20 */	blr
@@ -3720,7 +3720,7 @@
 .endfn init__Q23gui9InterfaceFv
 
 # .text:0x327C | 0x81347A94 | size: 0x3C
-.fn iplPaneMgr_81347A94, global
+.fn iplPaneMgr_81347A94, local
 /* 81347A94 00015E94  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81347A98 00015E98  7C 08 02 A6 */	mflr r0
 /* 81347A9C 00015E9C  C0 22 81 2C */	lfs f1, lbl_8169452C@sda21(r0)

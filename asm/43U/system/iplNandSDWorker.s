@@ -2713,7 +2713,7 @@
 .endfn clean_duplicated_nand_app__Q23ipl12NandSDWorkerFv
 
 # .text:0x219C | 0x8134A588 | size: 0x190
-.fn iplNandSD_8134A588, global
+.fn iplNandSD_8134A588, local
 /* 8134A588 00018988  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8134A58C 0001898C  7C 08 02 A6 */	mflr r0
 /* 8134A590 00018990  90 01 00 34 */	stw r0, 0x34(r1)
@@ -3973,7 +3973,7 @@
 .endfn do_get_sd_app_thumbnail__Q23ipl12NandSDWorkerFv
 
 # .text:0x333C | 0x8134B728 | size: 0x1F4
-.fn iplNandSD_8134B728, global
+.fn iplNandSD_8134B728, local
 /* 8134B728 00019B28  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8134B72C 00019B2C  7C 08 02 A6 */	mflr r0
 /* 8134B730 00019B30  90 01 00 24 */	stw r0, 0x24(r1)
@@ -4112,7 +4112,7 @@
 .endfn iplNandSD_8134B728
 
 # .text:0x3530 | 0x8134B91C | size: 0x344
-.fn iplNandSD_8134B91C, global
+.fn iplNandSD_8134B91C, local
 /* 8134B91C 00019D1C  94 21 FF 40 */	stwu r1, -0xc0(r1)
 /* 8134B920 00019D20  7C 08 02 A6 */	mflr r0
 /* 8134B924 00019D24  90 01 00 C4 */	stw r0, 0xc4(r1)
@@ -4339,7 +4339,7 @@
 .endfn iplNandSD_8134B91C
 
 # .text:0x3874 | 0x8134BC60 | size: 0x270
-.fn iplNandSD_8134BC60, global
+.fn iplNandSD_8134BC60, local
 /* 8134BC60 0001A060  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 8134BC64 0001A064  7C 08 02 A6 */	mflr r0
 /* 8134BC68 0001A068  90 01 00 64 */	stw r0, 0x64(r1)
@@ -4508,7 +4508,7 @@
 .endfn iplNandSD_8134BC60
 
 # .text:0x3AE4 | 0x8134BED0 | size: 0x3C8
-.fn iplNandSD_8134BED0, global
+.fn iplNandSD_8134BED0, local
 /* 8134BED0 0001A2D0  94 21 FF 70 */	stwu r1, -0x90(r1)
 /* 8134BED4 0001A2D4  7C 08 02 A6 */	mflr r0
 /* 8134BED8 0001A2D8  90 01 00 94 */	stw r0, 0x94(r1)
@@ -4768,7 +4768,7 @@
 .endfn iplNandSD_8134BED0
 
 # .text:0x3EAC | 0x8134C298 | size: 0x3D8
-.fn iplNandSD_8134C298, global
+.fn iplNandSD_8134C298, local
 /* 8134C298 0001A698  94 21 FF 50 */	stwu r1, -0xb0(r1)
 /* 8134C29C 0001A69C  7C 08 02 A6 */	mflr r0
 /* 8134C2A0 0001A6A0  90 01 00 B4 */	stw r0, 0xb4(r1)
@@ -5037,7 +5037,7 @@
 .endfn iplNandSD_8134C298
 
 # .text:0x4284 | 0x8134C670 | size: 0x1C8
-.fn iplNandSD_8134C670, global
+.fn iplNandSD_8134C670, local
 /* 8134C670 0001AA70  94 21 FF 70 */	stwu r1, -0x90(r1)
 /* 8134C674 0001AA74  7C 08 02 A6 */	mflr r0
 /* 8134C678 0001AA78  90 01 00 94 */	stw r0, 0x94(r1)
@@ -5161,7 +5161,7 @@
 .endfn iplNandSD_8134C670
 
 # .text:0x444C | 0x8134C838 | size: 0x2D0
-.fn iplNandSD_8134C838, global
+.fn iplNandSD_8134C838, local
 /* 8134C838 0001AC38  94 21 FE F0 */	stwu r1, -0x110(r1)
 /* 8134C83C 0001AC3C  7C 08 02 A6 */	mflr r0
 /* 8134C840 0001AC40  90 01 01 14 */	stw r0, 0x114(r1)
@@ -10280,7 +10280,7 @@
 .endfn check_md5__Q23ipl12NandSDWorkerFPCUcPCUcUl
 
 # .text:0x8CB0 | 0x8135109C | size: 0x58
-.fn iplNandSD_8135109C, global
+.fn iplNandSD_8135109C, local
 /* 8135109C 0001F49C  2C 04 00 00 */	cmpwi r4, 0x0
 /* 813510A0 0001F4A0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 813510A4 0001F4A4  41 82 00 48 */	beq .L_813510EC
@@ -14262,7 +14262,7 @@
 .endfn pop__Q33ipl2ut5StackFPv
 
 # .text:0xC268 | 0x81354654 | size: 0xA4
-.fn iplNandSD_81354654, global
+.fn iplNandSD_81354654, local
 /* 81354654 00022A54  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81354658 00022A58  7C 08 02 A6 */	mflr r0
 /* 8135465C 00022A5C  90 01 00 24 */	stw r0, 0x24(r1)
@@ -14309,7 +14309,7 @@
 .endfn iplNandSD_81354654
 
 # .text:0xC30C | 0x813546F8 | size: 0xC8
-.fn iplNandSD_813546F8, global
+.fn iplNandSD_813546F8, local
 /* 813546F8 00022AF8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 813546FC 00022AFC  7C 08 02 A6 */	mflr r0
 /* 81354700 00022B00  90 01 00 24 */	stw r0, 0x24(r1)
@@ -14367,7 +14367,7 @@
 .endfn iplNandSD_813546F8
 
 # .text:0xC3D4 | 0x813547C0 | size: 0x80
-.fn iplNandSD_813547C0, global
+.fn iplNandSD_813547C0, local
 /* 813547C0 00022BC0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 813547C4 00022BC4  7C 08 02 A6 */	mflr r0
 /* 813547C8 00022BC8  90 01 00 24 */	stw r0, 0x24(r1)
@@ -14406,7 +14406,7 @@
 .endfn iplNandSD_813547C0
 
 # .text:0xC454 | 0x81354840 | size: 0xF4
-.fn iplNandSD_81354840, global
+.fn iplNandSD_81354840, local
 /* 81354840 00022C40  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 81354844 00022C44  7C 08 02 A6 */	mflr r0
 /* 81354848 00022C48  90 01 00 74 */	stw r0, 0x74(r1)
@@ -14474,7 +14474,7 @@
 .endfn iplNandSD_81354840
 
 # .text:0xC548 | 0x81354934 | size: 0x184
-.fn iplNandSD_81354934, global
+.fn iplNandSD_81354934, local
 /* 81354934 00022D34  94 21 FF 60 */	stwu r1, -0xa0(r1)
 /* 81354938 00022D38  7C 08 02 A6 */	mflr r0
 /* 8135493C 00022D3C  90 01 00 A4 */	stw r0, 0xa4(r1)
@@ -14578,7 +14578,7 @@
 .endfn iplNandSD_81354934
 
 # .text:0xC6CC | 0x81354AB8 | size: 0x14
-.fn iplNandSD_81354AB8, global
+.fn iplNandSD_81354AB8, local
 /* 81354AB8 00022EB8  38 00 00 00 */	li r0, 0x0
 /* 81354ABC 00022EBC  90 03 00 00 */	stw r0, 0x0(r3)
 /* 81354AC0 00022EC0  90 03 00 04 */	stw r0, 0x4(r3)
@@ -14587,7 +14587,7 @@
 .endfn iplNandSD_81354AB8
 
 # .text:0xC6E0 | 0x81354ACC | size: 0x5C
-.fn iplNandSD_81354ACC, global
+.fn iplNandSD_81354ACC, local
 /* 81354ACC 00022ECC  38 06 FF FF */	subi r0, r6, 0x1
 /* 81354AD0 00022ED0  90 83 00 00 */	stw r4, 0x0(r3)
 /* 81354AD4 00022ED4  54 A9 F0 BE */	srwi r9, r5, 2
@@ -14616,7 +14616,7 @@
 .endfn iplNandSD_81354ACC
 
 # .text:0xC73C | 0x81354B28 | size: 0x24
-.fn iplNandSD_81354B28, global
+.fn iplNandSD_81354B28, local
 /* 81354B28 00022F28  80 83 00 00 */	lwz r4, 0x0(r3)
 /* 81354B2C 00022F2C  2C 04 00 00 */	cmpwi r4, 0x0
 /* 81354B30 00022F30  40 82 00 0C */	bne .L_81354B3C
@@ -14630,7 +14630,7 @@
 .endfn iplNandSD_81354B28
 
 # .text:0xC760 | 0x81354B4C | size: 0x40
-.fn iplNandSD_81354B4C, global
+.fn iplNandSD_81354B4C, local
 /* 81354B4C 00022F4C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81354B50 00022F50  7C 08 02 A6 */	mflr r0
 /* 81354B54 00022F54  90 01 00 14 */	stw r0, 0x14(r1)
@@ -14650,7 +14650,7 @@
 .endfn iplNandSD_81354B4C
 
 # .text:0xC7A0 | 0x81354B8C | size: 0x4C
-.fn iplNandSD_81354B8C, global
+.fn iplNandSD_81354B8C, local
 /* 81354B8C 00022F8C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81354B90 00022F90  7C 08 02 A6 */	mflr r0
 /* 81354B94 00022F94  90 01 00 14 */	stw r0, 0x14(r1)
@@ -14673,7 +14673,7 @@
 .endfn iplNandSD_81354B8C
 
 # .text:0xC7EC | 0x81354BD8 | size: 0x78
-.fn iplNandSD_81354BD8, global
+.fn iplNandSD_81354BD8, local
 /* 81354BD8 00022FD8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81354BDC 00022FDC  7C 08 02 A6 */	mflr r0
 /* 81354BE0 00022FE0  90 01 00 24 */	stw r0, 0x24(r1)
@@ -14709,7 +14709,7 @@
 .endfn iplNandSD_81354BD8
 
 # .text:0xC864 | 0x81354C50 | size: 0x80
-.fn iplNandSD_81354C50, global
+.fn iplNandSD_81354C50, local
 /* 81354C50 00023050  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81354C54 00023054  7C 08 02 A6 */	mflr r0
 /* 81354C58 00023058  90 01 00 14 */	stw r0, 0x14(r1)

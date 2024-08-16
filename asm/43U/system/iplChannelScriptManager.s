@@ -643,139 +643,14 @@
 /* 8133B2E0 000096E0  4E 80 00 20 */	blr
 .endfn calcCSThread__Q33ipl7channel20ChannelScriptManagerFv
 
-# 0x81634B08..0x81634CD8 | size: 0x1D0
+# 0x81634B08..0x81634C90 | size: 0x188
 .data
 .balign 8
 
 # .data:0x0 | 0x81634B08 | size: 0x188
 .obj lbl_81634B08, global
-	.4byte 0x69706C43
-	.4byte 0x68616E6E
-	.4byte 0x656C5363
-	.4byte 0x72697074
-	.4byte 0x4D616E61
-	.4byte 0x6765722E
-	.4byte 0x63707000
-	.4byte 0x4348414E
-	.4byte 0x53566D53
-	.4byte 0x79737465
-	.4byte 0x6D4D656E
-	.4byte 0x75496E69
-	.4byte 0x74206572
-	.4byte 0x726F720A
-	.4byte 0x00566D4C
-	.4byte 0x61796F75
-	.4byte 0x74496E69
-	.4byte 0x74206572
-	.4byte 0x726F720A
-	.4byte 0x00566D50
-	.4byte 0x616E6549
-	.4byte 0x6E697420
-	.4byte 0x6572726F
-	.4byte 0x720A0056
-	.4byte 0x6D4D6174
-	.4byte 0x65726961
-	.4byte 0x6C496E69
-	.4byte 0x74206572
-	.4byte 0x726F720A
-	.4byte 0x00566D54
-	.4byte 0x65787475
-	.4byte 0x7265496E
-	.4byte 0x69742065
-	.4byte 0x72726F72
-	.4byte 0x0A00566D
-	.4byte 0x53617665
-	.4byte 0x44617461
-	.4byte 0x496E6974
-	.4byte 0x20657272
-	.4byte 0x6F720A00
-	.4byte 0x566D5665
-	.4byte 0x6333496E
-	.4byte 0x69742065
-	.4byte 0x72726F72
-	.4byte 0x0A00566D
-	.4byte 0x4D545833
-	.4byte 0x34496E69
-	.4byte 0x74206572
-	.4byte 0x726F720A
-	.4byte 0x00566D47
-	.4byte 0x58496E69
-	.4byte 0x74206572
-	.4byte 0x726F720A
-	.4byte 0x00566D54
-	.4byte 0x65787457
-	.4byte 0x72697465
-	.4byte 0x72496E69
-	.4byte 0x74206572
-	.4byte 0x726F720A
-	.4byte 0x00566D46
-	.4byte 0x6F6E7449
-	.4byte 0x6E697420
-	.4byte 0x6572726F
-	.4byte 0x720A0056
-	.4byte 0x6D526563
-	.4byte 0x74496E69
-	.4byte 0x74206572
-	.4byte 0x726F720A
-	.4byte 0x00566D43
-	.4byte 0x6F6C6F72
-	.4byte 0x496E6974
-	.4byte 0x20657272
-	.4byte 0x6F720A00
-	.4byte 0x566D436F
-	.4byte 0x6C6F7253
-	.4byte 0x3130496E
-	.4byte 0x69742065
-	.4byte 0x72726F72
-	.4byte 0x0A00566D
-	.4byte 0x53697A65
-	.4byte 0x496E6974
-	.4byte 0x20657272
-	.4byte 0x6F720A00
-	.4byte 0x566D416E
-	.4byte 0x696D496E
-	.4byte 0x69742065
-	.4byte 0x72726F72
-	.4byte 0x0A00566D
-	.4byte 0x536F756E
-	.4byte 0x64496E69
-	.4byte 0x74206572
-	.4byte 0x726F720A
-	.4byte 0x00566D49
-	.4byte 0x706C496D
-	.4byte 0x61676549
-	.4byte 0x6E697420
-	.4byte 0x6572726F
-	.4byte 0x720A0000
+	.string "iplChannelScriptManager.cpp\000CHANSVmSystemMenuInit error\n\000VmLayoutInit error\n\000VmPaneInit error\n\000VmMaterialInit error\n\000VmTextureInit error\n\000VmSaveDataInit error\n\000VmVec3Init error\n\000VmMTX34Init error\n\000VmGXInit error\n\000VmTextWriterInit error\n\000VmFontInit error\n\000VmRectInit error\n\000VmColorInit error\n\000VmColorS10Init error\n\000VmSizeInit error\n\000VmAnimInit error\n\000VmSoundInit error\n\000VmIplImageInit error\n\000"
 .endobj lbl_81634B08
-
-# .data:0x188 | 0x81634C90 | size: 0xC
-.obj lbl_81634C90, global
-	.string "iplNand.cpp"
-.endobj lbl_81634C90
-
-# .data:0x194 | 0x81634C9C | size: 0xC
-.obj lbl_81634C9C, global
-	.4byte 0x2F636F6D
-	.4byte 0x6D6F6E2F
-	.4byte 0x00000000
-.endobj lbl_81634C9C
-
-# .data:0x1A0 | 0x81634CA8 | size: 0x30
-.obj jumptable_81634CA8, global
-	.4byte nand_error_handling__Q33ipl4nand4FileFi+0x70
-	.4byte nand_error_handling__Q33ipl4nand4FileFi+0xAC
-	.4byte nand_error_handling__Q33ipl4nand4FileFi+0xAC
-	.4byte nand_error_handling__Q33ipl4nand4FileFi+0x58
-	.4byte nand_error_handling__Q33ipl4nand4FileFi+0x64
-	.4byte nand_error_handling__Q33ipl4nand4FileFi+0xAC
-	.4byte nand_error_handling__Q33ipl4nand4FileFi+0x64
-	.4byte nand_error_handling__Q33ipl4nand4FileFi+0xAC
-	.4byte nand_error_handling__Q33ipl4nand4FileFi+0xAC
-	.4byte nand_error_handling__Q33ipl4nand4FileFi+0x50
-	.4byte nand_error_handling__Q33ipl4nand4FileFi+0x70
-	.4byte nand_error_handling__Q33ipl4nand4FileFi+0x7C
-.endobj jumptable_81634CA8
 
 # 0x816986A8..0x816986B0 | size: 0x8
 .section .sbss, "wa", @nobits

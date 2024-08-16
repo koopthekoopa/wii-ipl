@@ -19,15 +19,18 @@ $(TOOLS_ROOT)/$(MAKESEL): $(TOOLS_ROOT)/makesel.c
 $(TOOLS_ROOT)/PPC:
 	@echo Downloading PPC Utilities...
 	@$(PY) $(TOOLS_ROOT)/download_ppc_utils.py
+	@$(CHMOD) $(OBJCOPY)
+	@$(CHMOD) $(AS)
 
 $(TOOLS_ROOT)/GC:
 	@echo Downloading MWCC...
 	@$(PY) $(TOOLS_ROOT)/download_mwcc.py
 
 ifneq ($(OS),Windows_NT)
-$(TOOLS_ROOT)/wibo:
+$(WIBO):
 	@echo Downloading Wibo...
 	@$(PY) $(TOOLS_ROOT)/download_wibo.py
+	@$(CHMOD) $(WIBO)
 endif
 
 .PHONY: $(TOOLS_ROOT)/wibo
@@ -43,8 +46,6 @@ $(DATA_ROOT): $(CONFIG_ROOT)/extract.txt
 # Prepare
 
 PrepareDecomp: $(TOOLS) DownloadTools $(DATA_ROOT)
-	@echo Giving tools permissions...
-	@$(PY) $(TOOLS_ROOT)/tools_perms.py
 	@echo Prepared for Building!
 
 # Check if the decomp is prepared
@@ -80,7 +81,7 @@ endif
 endif
 
 ifneq ($(OS),Windows_NT)
-ifeq (,$(wildcard $(TOOLS_ROOT)/wibo))
+ifeq (,$(wildcard $(WIBO)))
 ifneq ($(MAKECMDGOALS),prepare)
 $(error $(PREP_ERROR))
 endif

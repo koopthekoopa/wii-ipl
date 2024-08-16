@@ -135,7 +135,7 @@
 .endfn freefunc__Q33ipl6socket13SocketSettingFUlPvl
 
 # .text:0x16C | 0x81356FB4 | size: 0x34
-.fn iplSocket_81356FB4, global
+.fn iplSocket_81356FB4, local
 /* 81356FB4 000253B4  39 4D A6 A8 */	li r10, lbl_816986E8@sda21
 /* 81356FB8 000253B8  3C 60 81 09 */	lis r3, mMac__Q33ipl6socket13SocketSetting@ha
 /* 81356FBC 000253BC  3C 80 81 64 */	lis r4, lbl_81638EEA@ha

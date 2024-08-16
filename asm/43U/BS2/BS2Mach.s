@@ -6,7 +6,7 @@
 .balign 8
 
 # .bss:0x0 | 0x8108A6E0 | size: 0x1000
-.obj BS2Mach_8108A6E0, global
+.obj BS2Mach_8108A6E0, local
 	.skip 0x1000
 .endobj BS2Mach_8108A6E0
 
@@ -21,12 +21,12 @@
 .endobj Block
 
 # .bss:0x1070 | 0x8108B750 | size: 0x10
-.obj BS2Mach_8108B750, global
+.obj BS2Mach_8108B750, local
 	.skip 0x10
 .endobj BS2Mach_8108B750
 
 # .bss:0x1080 | 0x8108B760 | size: 0x830
-.obj BS2Mach_8108B760, global
+.obj BS2Mach_8108B760, local
 	.skip 0x830
 .endobj BS2Mach_8108B760
 
@@ -36,7 +36,7 @@
 .endobj BS2CacheFileInfo
 
 # .bss:0x1946 | 0x8108C026 | size: 0xC0C9
-.obj BS2Mach_8108BF90, global
+.obj BS2Mach_8108BF90, local
 	.skip 0xC0C9
 .endobj BS2Mach_8108BF90
 
@@ -46,7 +46,7 @@
 .endobj BS2Mach_810980EF
 
 # .bss:0x1F800 | 0x810A9EE0 | size: 0x60
-.obj BS2Mach_810A9EE0, global
+.obj BS2Mach_810A9EE0, local
 	.skip 0x60
 .endobj BS2Mach_810A9EE0
 
@@ -398,7 +398,7 @@
 .endfn BS2IsDiagDisc
 
 # .text:0x438 | 0x8137B3EC | size: 0xAC
-.fn BS2Mach_8137B3EC, global
+.fn BS2Mach_8137B3EC, local
 /* 8137B3EC 000497EC  7C A9 03 A6 */	mtctr r5
 /* 8137B3F0 000497F0  7C 68 03 A6 */	mtlr r3
 /* 8137B3F4 000497F4  38 00 00 00 */	li r0, 0x0
@@ -860,13 +860,13 @@
 .endfn BS2StartLoadingTitle
 
 # .text:0xA68 | 0x8137BA1C | size: 0x8
-.fn BS2Mach_8137BA1C, global
+.fn BS2Mach_8137BA1C, local
 /* 8137BA1C 00049E1C  90 6D AA 14 */	stw r3, lbl_81698A54@sda21(r0)
 /* 8137BA20 00049E20  4E 80 00 20 */	blr
 .endfn BS2Mach_8137BA1C
 
 # .text:0xA70 | 0x8137BA24 | size: 0x11C
-.fn BS2Mach_8137BA24, global
+.fn BS2Mach_8137BA24, local
 /* 8137BA24 00049E24  54 2B 06 FE */	clrlwi r11, r1, 27
 /* 8137BA28 00049E28  7C 2C 0B 78 */	mr r12, r1
 /* 8137BA2C 00049E2C  21 6B FE A0 */	subfic r11, r11, -0x160
@@ -947,7 +947,7 @@
 .endfn BS2Mach_8137BA24
 
 # .text:0xB8C | 0x8137BB40 | size: 0x224
-.fn BS2Mach_8137BB40, global
+.fn BS2Mach_8137BB40, local
 /* 8137BB40 00049F40  54 2B 06 FE */	clrlwi r11, r1, 27
 /* 8137BB44 00049F44  7C 2C 0B 78 */	mr r12, r1
 /* 8137BB48 00049F48  21 6B FD 80 */	subfic r11, r11, -0x280
@@ -1778,7 +1778,7 @@
 .endfn BS2StartGCGame
 
 # .text:0x1764 | 0x8137C718 | size: 0x198
-.fn BS2Mach_8137C718, global
+.fn BS2Mach_8137C718, local
 /* 8137C718 0004AB18  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8137C71C 0004AB1C  7C 08 02 A6 */	mflr r0
 /* 8137C720 0004AB20  90 01 00 14 */	stw r0, 0x14(r1)
@@ -1902,7 +1902,7 @@
 .endfn BS2Mach_8137C718
 
 # .text:0x18FC | 0x8137C8B0 | size: 0x200
-.fn BS2Mach_8137C8B0, global
+.fn BS2Mach_8137C8B0, local
 /* 8137C8B0 0004ACB0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8137C8B4 0004ACB4  7C 08 02 A6 */	mflr r0
 /* 8137C8B8 0004ACB8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -2043,7 +2043,7 @@
 .endfn BS2Mach_8137C8B0
 
 # .text:0x1AFC | 0x8137CAB0 | size: 0xBC
-.fn BS2Mach_8137CAB0, global
+.fn BS2Mach_8137CAB0, local
 /* 8137CAB0 0004AEB0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8137CAB4 0004AEB4  7C 08 02 A6 */	mflr r0
 /* 8137CAB8 0004AEB8  39 00 00 02 */	li r8, 0x2
@@ -2096,7 +2096,7 @@
 .endfn BS2Mach_8137CAB0
 
 # .text:0x1BB8 | 0x8137CB6C | size: 0xBC
-.fn BS2Mach_8137CB6C, global
+.fn BS2Mach_8137CB6C, local
 /* 8137CB6C 0004AF6C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8137CB70 0004AF70  7C 08 02 A6 */	mflr r0
 /* 8137CB74 0004AF74  39 00 00 01 */	li r8, 0x1
@@ -2149,7 +2149,7 @@
 .endfn BS2Mach_8137CB6C
 
 # .text:0x1C74 | 0x8137CC28 | size: 0x658
-.fn BS2Mach_8137CC28, global
+.fn BS2Mach_8137CC28, local
 /* 8137CC28 0004B028  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8137CC2C 0004B02C  7C 08 02 A6 */	mflr r0
 /* 8137CC30 0004B030  90 01 00 24 */	stw r0, 0x24(r1)
@@ -2588,7 +2588,7 @@
 .endfn BS2Mach_8137CC28
 
 # .text:0x22CC | 0x8137D280 | size: 0x9C
-.fn BS2Mach_8137D280, global
+.fn BS2Mach_8137D280, local
 /* 8137D280 0004B680  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8137D284 0004B684  7C 08 02 A6 */	mflr r0
 /* 8137D288 0004B688  90 01 00 24 */	stw r0, 0x24(r1)
@@ -2633,7 +2633,7 @@
 .endfn BS2Mach_8137D280
 
 # .text:0x2368 | 0x8137D31C | size: 0x9C
-.fn BS2Mach_8137D31C, global
+.fn BS2Mach_8137D31C, local
 /* 8137D31C 0004B71C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8137D320 0004B720  7C 08 02 A6 */	mflr r0
 /* 8137D324 0004B724  90 01 00 24 */	stw r0, 0x24(r1)

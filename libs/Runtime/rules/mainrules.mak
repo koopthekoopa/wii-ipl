@@ -27,7 +27,7 @@ $(RUNTIME_OBJASM_PATH)/%.o: $(RUNTIME_ASM_PATH)/%.s
 	$(call BuildASMSources,$(INCLUDE_ROOT))
 
 $(RUNTIME_BLD_PATH)/Runtime.PPCEABI.H.a: $(RUNTIME_OBJECTS)
-	$(call LinkLibrary,$(RUNTIME_CCPATH),$?,$@)
+	$(call LinkLibrary,$(RUNTIME_CCPATH),$^,$@)
 
 Runtime: $(RUNTIME_BLD_PATH)/Runtime.PPCEABI.H.a
 clean_Runtime:

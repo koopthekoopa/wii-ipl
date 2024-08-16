@@ -6,8 +6,8 @@
 extern "C" {
 #endif // __cplusplus
 
-extern void mainmenu();
-extern s32 NANDCheck(u32 fsBlock, u32 inode, u32 *pAnswer);
+void mainmenu();
+s32 NANDCheck(u32 fsBlock, u32 node, u32 *answer);
 
 #ifdef __cplusplus
 }
@@ -26,8 +26,8 @@ void mainmenu() {
  * @note Address: 0x81360790 (4.3U)
  * @note Size: 0x10
  */
-s32 NANDCheck(u32 fsBlock, u32 inode, u32 *pAnswer) {
-    *pAnswer = NULL;
+s32 NANDCheck(u32 fsBlock, u32 node, u32 *answer) {
+    *answer = 0;
     return 0;
 }
 

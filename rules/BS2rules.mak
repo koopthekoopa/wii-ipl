@@ -37,7 +37,7 @@ BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(RUNTIME_ROOT)/$(BUILD_ROOT)/Runtime.PPCEABI.H.a
 
 $(BUILD_ROOT)/$(BS2_ELF_NAME).elf: $(BS2_ELF_LIBRARIES)
-	$(call LinkElf,$(BS2_ELF_CC),$(BS2_ELF_LIBRARIES),$@,$(BS2_ELF_LINKSCRIPT))
+	$(call LinkElf,$(BS2_ELF_CC),$^,$@,$(BS2_ELF_LINKSCRIPT))
 
 # the target
 bs2:	$(BUILD_ROOT)/$(BS2_ELF_NAME).elf

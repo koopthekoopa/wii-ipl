@@ -42,6 +42,7 @@ endef
 define LinkElf
 	@echo Linking executable $@...
 	@mkdir -p $(dir $@)
+
 	@$(WIBO) $(1)/$(LD) $(COMMON_LDFLAGS) -nodefaults -lcf $(4) -map $(3:.elf=.map) -o $@ $(2)
 endef
 

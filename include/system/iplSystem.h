@@ -6,7 +6,6 @@
 #include <nw4r/ut.h>
 
 #include "system/iplNand.h"
-
 #include "system/iplController.h"
 
 namespace ipl {

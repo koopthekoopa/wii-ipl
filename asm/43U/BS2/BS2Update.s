@@ -1,7 +1,7 @@
 .include "macros.inc"
 .file "BS2Update.c"
 
-# 0x810ADF80..0x810B7340 | size: 0x93C0
+# 0x810ADF80..0x810B6EE0 | size: 0x8F60
 .section .bss, "wa", @nobits
 .balign 8
 
@@ -11,7 +11,7 @@
 .endobj BS2Update_810ADF80
 
 # .bss:0x3600 | 0x810B1580 | size: 0x2360
-.obj BS2Update_810B1580, global
+.obj BS2Update_810B1580, local
 	.skip 0x2360
 .endobj BS2Update_810B1580
 
@@ -19,41 +19,6 @@
 .obj BS2Update_810B38E0, global
 	.skip 0x3600
 .endobj BS2Update_810B38E0
-
-# .bss:0x8F60 | 0x810B6EE0 | size: 0x2C8
-.obj BS2Update_810B6EE0, global
-	.skip 0x2C8
-.endobj BS2Update_810B6EE0
-
-# .bss:0x9228 | 0x810B71A8 | size: 0x18
-.obj BS2Update_810B71A8, global
-	.skip 0x18
-.endobj BS2Update_810B71A8
-
-# .bss:0x9240 | 0x810B71C0 | size: 0x140
-.obj BS2Update_810B71C0, global
-	.skip 0x140
-.endobj BS2Update_810B71C0
-
-# .bss:0x9380 | 0x810B7300 | size: 0xC
-.obj BS2Update_810B7300, global
-	.skip 0xC
-.endobj BS2Update_810B7300
-
-# .bss:0x938C | 0x810B730C | size: 0xC
-.obj BS2Update_810B730C, global
-	.skip 0xC
-.endobj BS2Update_810B730C
-
-# .bss:0x9398 | 0x810B7318 | size: 0xC
-.obj BS2Update_810B7318, global
-	.skip 0xC
-.endobj BS2Update_810B7318
-
-# .bss:0x93A4 | 0x810B7324 | size: 0x1C
-.obj BS2Update_810B7324, global
-	.skip 0x1C
-.endobj BS2Update_810B7324
 
 # 0x8137F208..0x813801DC | size: 0xFD4
 .text

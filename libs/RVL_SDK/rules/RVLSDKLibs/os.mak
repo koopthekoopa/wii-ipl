@@ -16,7 +16,7 @@ $(SDK_OBJASM_PATH)/os/%.o: $(SDK_ASM_PATH)/os/%.s
 	$(call BuildASMSources,$(INCLUDE_ROOT))
 
 $(SDK_BLD_PATH)/os.a: $(OS_OBJECTS)
-	$(call LinkLibrary,$(OS_CCPATH),$?,$@)
+	$(call LinkLibrary,$(OS_CCPATH),$^,$@)
 
 
 

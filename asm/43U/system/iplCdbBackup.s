@@ -1035,7 +1035,7 @@
 .endfn cdb_backup_move_task___3iplFPv
 
 # .text:0xCE4 | 0x8135B274 | size: 0xDC
-.fn iplCdbBack_8135B274, global
+.fn iplCdbBack_8135B274, local
 /* 8135B274 00029674  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8135B278 00029678  7C 08 02 A6 */	mflr r0
 /* 8135B27C 0002967C  38 80 00 00 */	li r4, 0x0
@@ -1098,7 +1098,7 @@
 .endfn iplCdbBack_8135B274
 
 # .text:0xDC0 | 0x8135B350 | size: 0xBC
-.fn iplCdbBack_8135B350, global
+.fn iplCdbBack_8135B350, local
 /* 8135B350 00029750  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8135B354 00029754  7C 08 02 A6 */	mflr r0
 /* 8135B358 00029758  90 01 00 24 */	stw r0, 0x24(r1)
@@ -1153,7 +1153,7 @@
 .endfn iplCdbBack_8135B350
 
 # .text:0xE7C | 0x8135B40C | size: 0x114
-.fn iplCdbBack_8135B40C, global
+.fn iplCdbBack_8135B40C, local
 /* 8135B40C 0002980C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8135B410 00029810  7C 08 02 A6 */	mflr r0
 /* 8135B414 00029814  38 80 00 00 */	li r4, 0x0
@@ -1232,7 +1232,7 @@
 .endfn iplCdbBack_8135B40C
 
 # .text:0xF90 | 0x8135B520 | size: 0x1C
-.fn iplCdbBack_8135B520, global
+.fn iplCdbBack_8135B520, local
 /* 8135B520 00029920  80 82 80 98 */	lwz r4, lbl_81694498@sda21(r0)
 /* 8135B524 00029924  3C 60 01 40 */	lis r3, 0x140
 /* 8135B528 00029928  38 00 00 64 */	li r0, 0x64

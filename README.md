@@ -39,7 +39,7 @@ For linux users, this is how you install the dependencies depending on your dist
 sudo apt install build-essential git python3
 ```
 
-### For Arch Linux (untested)
+### For Arch Linux
 ```
 sudo pacman -S base-devel python git
 ```
@@ -53,7 +53,7 @@ sudo pacman -S base-devel python git
   - Otherwise download the repository by clicking on **Code** then **Download ZIP** then extract the .zip contents   
 
 - You will need a copy of the Wii Menu's Executable from it's WAD file.
-  - Use your preferred WAD Extractor and use it to extract the Wii Menu WAD file.
+  - Use your preferred WAD Extractor (I recommend ShowMiiWADs, it works fine with Wine) and use it to extract the Wii Menu WAD file.
   - Then copy the executable file `00000008.app` to the decompilation directory and rename it to `base.<version>.app`
     - Make sure the version on the filename does not include the decimal at the middle (for example `4.3U` should be `43U`)
     - Check to make sure the file matches with the [SHA-1 Sums](#sums)!   

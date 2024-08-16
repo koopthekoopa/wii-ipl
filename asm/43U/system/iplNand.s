@@ -1285,17 +1285,22 @@
 /* 8133C3F8 0000A7F8  7C A5 00 2E */	lwzx r5, r5, r0
 /* 8133C3FC 0000A7FC  7C A9 03 A6 */	mtctr r5
 /* 8133C400 0000A800  4E 80 04 20 */	bctr
+.L_8133C404:
 /* 8133C404 0000A804  3B C0 00 01 */	li r30, 0x1
 /* 8133C408 0000A808  48 00 00 A0 */	b .L_8133C4A8
+.L_8133C40C:
 /* 8133C40C 0000A80C  38 00 00 03 */	li r0, 0x3
 /* 8133C410 0000A810  90 03 00 A8 */	stw r0, 0xa8(r3)
 /* 8133C414 0000A814  48 00 00 94 */	b .L_8133C4A8
+.L_8133C418:
 /* 8133C418 0000A818  38 00 00 01 */	li r0, 0x1
 /* 8133C41C 0000A81C  98 03 01 89 */	stb r0, 0x189(r3)
 /* 8133C420 0000A820  48 00 00 88 */	b .L_8133C4A8
+.L_8133C424:
 /* 8133C424 0000A824  38 00 00 02 */	li r0, 0x2
 /* 8133C428 0000A828  90 03 00 A8 */	stw r0, 0xa8(r3)
 /* 8133C42C 0000A82C  48 00 00 7C */	b .L_8133C4A8
+.L_8133C430:
 /* 8133C430 0000A830  38 00 00 01 */	li r0, 0x1
 /* 8133C434 0000A834  3C C0 81 09 */	lis r6, smArg__Q23ipl6System@ha
 /* 8133C438 0000A838  98 03 01 88 */	stb r0, 0x188(r3)
@@ -1530,11 +1535,39 @@
 /* 8133C6D4 0000AAD4  4E 80 00 20 */	blr
 .endfn __dt__Q33ipl4nand10LayoutFileFv
 
-# 0x81634CD8..0x81634D90 | size: 0xB8
+# 0x81634C90..0x81634D90 | size: 0x100
 .data
 .balign 8
 
-# .data:0x0 | 0x81634CD8 | size: 0x20
+# .data:0x0 | 0x81634C90 | size: 0xC
+.obj lbl_81634C90, global
+	.string "iplNand.cpp"
+.endobj lbl_81634C90
+
+# .data:0xC | 0x81634C9C | size: 0xC
+.obj lbl_81634C9C, global
+	.4byte 0x2F636F6D
+	.4byte 0x6D6F6E2F
+	.4byte 0x00000000
+.endobj lbl_81634C9C
+
+# .data:0x18 | 0x81634CA8 | size: 0x30
+.obj jumptable_81634CA8, local
+	.rel nand_error_handling__Q33ipl4nand4FileFi, .L_8133C424
+	.rel nand_error_handling__Q33ipl4nand4FileFi, .L_8133C460
+	.rel nand_error_handling__Q33ipl4nand4FileFi, .L_8133C460
+	.rel nand_error_handling__Q33ipl4nand4FileFi, .L_8133C40C
+	.rel nand_error_handling__Q33ipl4nand4FileFi, .L_8133C418
+	.rel nand_error_handling__Q33ipl4nand4FileFi, .L_8133C460
+	.rel nand_error_handling__Q33ipl4nand4FileFi, .L_8133C418
+	.rel nand_error_handling__Q33ipl4nand4FileFi, .L_8133C460
+	.rel nand_error_handling__Q33ipl4nand4FileFi, .L_8133C460
+	.rel nand_error_handling__Q33ipl4nand4FileFi, .L_8133C404
+	.rel nand_error_handling__Q33ipl4nand4FileFi, .L_8133C424
+	.rel nand_error_handling__Q33ipl4nand4FileFi, .L_8133C430
+.endobj jumptable_81634CA8
+
+# .data:0x48 | 0x81634CD8 | size: 0x20
 # ipl::nand::LayoutFile::__vtable
 .obj __vt__Q33ipl4nand10LayoutFile, global
 	.4byte 0x00000000
@@ -1547,7 +1580,7 @@
 	.4byte isFatalError__Q33ipl4nand8LangFileFv
 .endobj __vt__Q33ipl4nand10LayoutFile
 
-# .data:0x20 | 0x81634CF8 | size: 0x20
+# .data:0x68 | 0x81634CF8 | size: 0x20
 # ipl::nand::LangFile::__vtable
 .obj __vt__Q33ipl4nand8LangFile, global
 	.4byte 0x00000000
@@ -1560,7 +1593,7 @@
 	.4byte isFatalError__Q33ipl4nand8LangFileFv
 .endobj __vt__Q33ipl4nand8LangFile
 
-# .data:0x40 | 0x81634D18 | size: 0x54
+# .data:0x88 | 0x81634D18 | size: 0x54
 # ipl::nand::File::__vtable
 .obj __vt__Q33ipl4nand4File, global
 	.4byte 0x00000000
@@ -1586,7 +1619,7 @@
 	.4byte callback___Q33ipl4nand4FileFv
 .endobj __vt__Q33ipl4nand4File
 
-# .data:0x94 | 0x81634D6C | size: 0x24
+# .data:0xDC | 0x81634D6C | size: 0x24
 # ipl::nand::Base::__vtable
 .obj __vt__Q33ipl4nand4Base, global
 	.4byte 0x00000000

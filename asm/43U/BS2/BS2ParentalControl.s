@@ -105,6 +105,7 @@
 /* 8138030C 0004E70C  7C 63 00 2E */	lwzx r3, r3, r0
 /* 81380310 0004E710  7C 69 03 A6 */	mtctr r3
 /* 81380314 0004E714  4E 80 04 20 */	bctr
+.L_81380318:
 /* 81380318 0004E718  3C 60 81 0B */	lis r3, bi3@ha
 /* 8138031C 0004E71C  38 63 9F 40 */	addi r3, r3, bi3@l
 /* 81380320 0004E720  88 03 00 10 */	lbz r0, 0x10(r3)
@@ -112,6 +113,7 @@
 /* 81380328 0004E728  7C 00 00 34 */	cntlzw r0, r0
 /* 8138032C 0004E72C  54 03 D9 7E */	srwi r3, r0, 5
 /* 81380330 0004E730  48 00 00 B0 */	b .L_813803E0
+.L_81380334:
 /* 81380334 0004E734  3C 60 81 0B */	lis r3, bi3@ha
 /* 81380338 0004E738  38 63 9F 40 */	addi r3, r3, bi3@l
 /* 8138033C 0004E73C  88 03 00 11 */	lbz r0, 0x11(r3)
@@ -119,6 +121,7 @@
 /* 81380344 0004E744  7C 00 00 34 */	cntlzw r0, r0
 /* 81380348 0004E748  54 03 D9 7E */	srwi r3, r0, 5
 /* 8138034C 0004E74C  48 00 00 94 */	b .L_813803E0
+.L_81380350:
 /* 81380350 0004E750  3C 60 81 0B */	lis r3, bi3@ha
 /* 81380354 0004E754  38 63 9F 40 */	addi r3, r3, bi3@l
 /* 81380358 0004E758  88 03 00 13 */	lbz r0, 0x13(r3)
@@ -141,6 +144,7 @@
 .L_8138039C:
 /* 8138039C 0004E79C  38 60 00 01 */	li r3, 0x1
 /* 813803A0 0004E7A0  48 00 00 40 */	b .L_813803E0
+.L_813803A4:
 /* 813803A4 0004E7A4  3C 60 81 0B */	lis r3, bi3@ha
 /* 813803A8 0004E7A8  38 63 9F 40 */	addi r3, r3, bi3@l
 /* 813803AC 0004E7AC  88 03 00 18 */	lbz r0, 0x18(r3)
@@ -148,6 +152,7 @@
 /* 813803B4 0004E7B4  7C 00 00 34 */	cntlzw r0, r0
 /* 813803B8 0004E7B8  54 03 D9 7E */	srwi r3, r0, 5
 /* 813803BC 0004E7BC  48 00 00 24 */	b .L_813803E0
+.L_813803C0:
 /* 813803C0 0004E7C0  3C 60 81 0B */	lis r3, bi3@ha
 /* 813803C4 0004E7C4  38 63 9F 40 */	addi r3, r3, bi3@l
 /* 813803C8 0004E7C8  88 03 00 19 */	lbz r0, 0x19(r3)
@@ -163,3 +168,24 @@
 /* 813803E8 0004E7E8  38 21 00 10 */	addi r1, r1, 0x10
 /* 813803EC 0004E7EC  4E 80 00 20 */	blr
 .endfn BS2IsValidDisc
+
+# 0x81646EA8..0x81646EC8 | size: 0x20
+.data
+.balign 8
+
+# .data:0x0 | 0x81646EA8 | size: 0x1C
+.obj jumptable_81646EA8, local
+	.rel BS2IsValidDisc, .L_81380318
+	.rel BS2IsValidDisc, .L_81380334
+	.rel BS2IsValidDisc, .L_81380350
+	.rel BS2IsValidDisc, .L_813803A4
+	.rel BS2IsValidDisc, .L_813803DC
+	.rel BS2IsValidDisc, .L_81380318
+	.rel BS2IsValidDisc, .L_813803C0
+.endobj jumptable_81646EA8
+
+# .data:0x1C | 0x81646EC4 | size: 0x4
+.obj gap_08_81646EC4_data, global
+.hidden gap_08_81646EC4_data
+	.4byte 0x00000000
+.endobj gap_08_81646EC4_data

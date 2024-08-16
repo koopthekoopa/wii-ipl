@@ -1564,7 +1564,7 @@
 .endfn DeleteEmptyTitles__Q33ipl7utility6ESMiscFPQ23EGG4Heap
 
 # .text:0x150C | 0x81366C10 | size: 0x6C
-.fn iplES_81366C10, global
+.fn iplES_81366C10, local
 /* 81366C10 00035010  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 81366C14 00035014  7C 08 02 A6 */	mflr r0
 /* 81366C18 00035018  7C 67 1B 78 */	mr r7, r3
@@ -1596,7 +1596,7 @@
 .endfn iplES_81366C10
 
 # .text:0x1578 | 0x81366C7C | size: 0x268
-.fn iplES_81366C7C, global
+.fn iplES_81366C7C, local
 /* 81366C7C 0003507C  94 21 FD C0 */	stwu r1, -0x240(r1)
 /* 81366C80 00035080  7C 08 02 A6 */	mflr r0
 /* 81366C84 00035084  90 01 02 44 */	stw r0, 0x244(r1)
@@ -2107,7 +2107,7 @@
 .endfn DeleteSavedata__Q33ipl7utility6ESMiscFUxPQ23EGG4Heap
 
 # .text:0x1CAC | 0x813673B0 | size: 0x30
-.fn iplES_813673B0, global
+.fn iplES_813673B0, local
 /* 813673B0 000357B0  7C 89 03 A6 */	mtctr r4
 /* 813673B4 000357B4  28 04 00 00 */	cmplwi r4, 0x0
 /* 813673B8 000357B8  40 81 00 20 */	ble .L_813673D8

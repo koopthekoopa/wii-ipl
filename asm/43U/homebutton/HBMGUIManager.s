@@ -1335,7 +1335,7 @@
 .endfn draw__Q310homebutton3gui13PaneComponentFv
 
 # .text:0x1120 | 0x81378EB8 | size: 0x2C
-.fn HBMGuiManager_81378EB8, global
+.fn HBMGuiManager_81378EB8, local
 /* 81378EB8 000472B8  88 03 00 CF */	lbz r0, 0xcf(r3)
 /* 81378EBC 000472BC  54 00 07 FF */	clrlwi. r0, r0, 31
 /* 81378EC0 000472C0  40 82 00 0C */	bne .L_81378ECC
@@ -1352,7 +1352,7 @@
 .endfn HBMGuiManager_81378EB8
 
 # .text:0x114C | 0x81378EE4 | size: 0x4
-.fn HBMGuiManager_81378EE4, global
+.fn HBMGuiManager_81378EE4, local
 /* 81378EE4 000472E4  4E 80 00 20 */	blr
 .endfn HBMGuiManager_81378EE4
 

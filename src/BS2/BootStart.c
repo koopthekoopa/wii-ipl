@@ -18,13 +18,9 @@ extern int  main(int argc, char** argv);
 extern void DBInit();
 extern void exit();
 
-#ifdef __cplusplus
-}
-#endif
-
 #pragma section code_type ".init"
 
-extern void __start();
+void __start();
 
 /**
  * @note Address: 0x81330000 (4.3J/4.3U/4.3E)
