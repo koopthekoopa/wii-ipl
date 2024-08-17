@@ -69,7 +69,7 @@ namespace ipl {
                 RFLiMakeIconFromData((void*)mpIconTex, mpCharData, RFLExp_Normal, &mIconSettings);
             }
             else {
-                err = RFLMakeIcon((void*)mpIconTex, RFLDataSource_Official, NULL, (mFaceId & 0xFFFF), RFLExp_Normal, &mIconSettings);
+                err = RFLMakeIcon((void*)mpIconTex, RFLDataSource_Official, NULL, (u16)mFaceId, RFLExp_Normal, &mIconSettings);
             }
             
             if (err != RFLErrcode_Success) {

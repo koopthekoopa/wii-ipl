@@ -45,7 +45,7 @@ namespace ipl {
      */
     Pointer::Pointer(EGG::Heap* pHeap)
     : mMaybeType(-1), mOriginPos(0, 0), mArrowLength(MINIMUM_LENGTH), mPointDirection(PNT_DOWN), mScrolling(false), mVisible(true), mCore() {
-        mLayoutArchive = System::getNandManager()->readLayout(pHeap, "cursor.ash", false);
+        mLayoutArchive = System::getArg()->getNandManager()->readLayout(pHeap, "cursor.ash", false);
         
         for (int i = 0; i < MAX_LAYOUT_FILES; i++) {
             mLayoutObject[i] = new(pHeap, 4) layout::Object(pHeap, mLayoutArchive, "arc", scLayoutName[i]);
@@ -138,13 +138,14 @@ namespace ipl {
         int grabId = LYT_INVALID_ID;
 
         switch (type) {
-            case POINTER_LYT_TYPE_POINT:
+            case POINTER_LYT_TYPE_POINT: {
                 grabId = LYT_POINT_ID;
                 break;
-            
-            case POINTER_LYT_TYPE_GRABBING:
+            }
+            case POINTER_LYT_TYPE_GRABBING: {
                 grabId = LYT_GRAB_ID;
                 break;
+            }
         }
 
         return mLayoutObject[grabId + chan];

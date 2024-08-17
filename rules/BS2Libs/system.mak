@@ -8,8 +8,8 @@ SYSTEM_OBJECTS	=	$(BS2_OBJASM_PATH)/system/rvl_dec.o \
 					$(BS2_OBJASM_PATH)/system/iplChannelScriptManager.o \
 					$(BS2_OBJASM_PATH)/system/iplFramework.o \
 					$(BS2_OBJASM_PATH)/system/iplException.o \
-					$(BS2_OBJASM_PATH)/system/iplMessage.o \
-					$(BS2_OBJASM_PATH)/system/iplMessageManager.o \
+					$(BS2_OBJ_PATH)/system/iplMessage.o \
+					$(BS2_OBJ_PATH)/system/iplMessageManager.o \
 					$(BS2_OBJASM_PATH)/system/iplNigaoeManager.o \
 					$(BS2_OBJ_PATH)/system/iplNigaoe.o \
 					$(BS2_OBJASM_PATH)/system/iplCdbManager.o \
