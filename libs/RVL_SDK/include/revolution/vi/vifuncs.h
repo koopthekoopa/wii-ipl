@@ -8,7 +8,8 @@ extern "C" {
 #endif
 
 void VIWaitForRetrace();
-
+void VISetBlack(BOOL setBlack);
+void VIFlush();
 u32  VIGetTvFormat();
 
 #ifdef __cplusplus

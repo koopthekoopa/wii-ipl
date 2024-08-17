@@ -31,7 +31,7 @@ namespace ipl {
      * @note Size: 0xBC
      */
     ErrorHandler::ErrorHandler(EGG::Heap* pHeap)
-    : mReady(FALSE), mType(IPL_ERROR_GENERIC), mMessageID(0), mpArcData(NULL) {
+    : mReady(FALSE), mType(IPL_ERROR_UNK), mMessageID(0), mpArcData(NULL) {
 
         // Decompress the archive file.
         mArcSize = Rvl_decode_ash_size(fatalDlg_ash);
@@ -66,7 +66,7 @@ namespace ipl {
         }
 
         curThread = OSGetCurrentThread();
-        if (curThread == System::getUnkStruct0()->getThread()) {
+        if (curThread == System::getArg()->getUnkThread()->getMessageQueue()->queueSend.tail) {
             check();
         }
         else {
@@ -129,7 +129,7 @@ namespace ipl {
             pTextBox->SetString(pErrorMsg.getMessage(mMessageID));
 
             // Fade out to display error screen.
-            System::getArg()->getFader()->fadeOut();
+            System::getArg()->getCaptureFader()->fadeOut();
             System::err_run();
         }
     }
@@ -147,8 +147,8 @@ namespace ipl {
      * @note Size: 0x90
      */
     void ErrorHandler::calc() {
-        if (mReady == FALSE && System::getArg()->getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
-            System::getArg()->getFader()->fadeIn();
+        if (mReady == FALSE && System::getArg()->getCaptureFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+            System::getArg()->getCaptureFader()->fadeIn();
             mReady = TRUE;
         }
 

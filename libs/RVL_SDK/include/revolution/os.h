@@ -14,6 +14,9 @@ typedef u32 OSTick;
 #include <revolution/os/OSMutex.h>
 #include <revolution/os/OSThread.h>
 #include <revolution/os/OSMessage.h>
+#include <revolution/os/OSResetSW.h>
+
+extern void OSShutdownSystem();
 
 void OSReport(const char* msg, ...);
 

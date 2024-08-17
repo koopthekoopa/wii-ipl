@@ -41,7 +41,7 @@
 /* 813619C8 0002FDC8  93 DC 00 4C */	stw r30, 0x4c(r28)
 /* 813619CC 0002FDCC  93 DC 00 48 */	stw r30, 0x48(r28)
 /* 813619D0 0002FDD0  93 DC 00 04 */	stw r30, 0x4(r28)
-/* 813619D4 0002FDD4  93 8D A7 38 */	stw r28, lbl_81698778@sda21(r0)
+/* 813619D4 0002FDD4  93 8D A7 38 */	stw r28, m_handle__Q23ipl11TVRCManager@sda21(r0)
 /* 813619D8 0002FDD8  93 FC 00 14 */	stw r31, 0x14(r28)
 /* 813619DC 0002FDDC  81 9D 00 00 */	lwz r12, 0x0(r29)
 /* 813619E0 0002FDE0  81 8C 00 14 */	lwz r12, 0x14(r12)
@@ -1050,9 +1050,10 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698778 | size: 0x4
-.obj lbl_81698778, global
+# ipl::TVRCManager::m_handle
+.obj m_handle__Q23ipl11TVRCManager, global
 	.skip 0x4
-.endobj lbl_81698778
+.endobj m_handle__Q23ipl11TVRCManager
 
 # .sbss:0x4 | 0x8169877C | size: 0x4
 .obj lbl_8169877C, global

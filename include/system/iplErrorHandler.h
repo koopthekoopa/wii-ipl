@@ -13,16 +13,21 @@ namespace ipl {
     class ErrorHandler {
         public:
             enum Type {
+                IPL_ERROR_UNK = 0,
+                IPL_ERROR_UNK_DEFAULT
+            };
+            
+            enum {
                 /* An error has occurred. */
-                IPL_ERROR_GENERIC = 0,
+                MESG_ERROR_GENERIC = 0,
                 /* The Wii System Memory is damaged. */
-                IPL_ERROR_NAND_ERROR,
+                MESG_ERROR_NAND_ERROR,
                 /* The system files are corrupted. */
-                IPL_ERROR_CONTENT_ERROR,
+                MESG_ERROR_CONTENT_ERROR,
                 /* This channel can't be used. */
-                IPL_ERROR_ES_ERROR,
+                MESG_ERROR_ES_ERROR,
                 /* Error:003 unauthorized device has been detected. */
-                IPL_ERROR_KEY_ERROR,
+                MESG_ERROR_KEY_ERROR
             };
 
             /**

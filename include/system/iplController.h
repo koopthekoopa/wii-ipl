@@ -12,6 +12,11 @@
 
 namespace ipl {
     namespace controller {
+        class Manager {
+            public:
+                Manager();
+        };
+        
         class Interface {
             public:
                 Interface();
