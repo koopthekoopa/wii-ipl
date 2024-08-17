@@ -5,11 +5,17 @@
 
 #include <nw4r/ut.h>
 
+#include <egg/core.h>
+
 #include "system/iplNand.h"
 #include "system/iplController.h"
+#include "system/iplErrorHandler.h"
+#include "system/iplWarningHandler.h"
+#include "system/iplDialogWindow.h"
+#include "system/iplHomeButton.h"
 
 namespace ipl {
-    class System{
+    class System {
         public:
             class Arg {
                 public:
@@ -20,6 +26,18 @@ namespace ipl {
                     
                     OSAlarm mUnkAlarm;          // 0x1E0
             };
+
+            typedef struct {
+                private:
+                    u8  unk_0x00[0x10];
+
+                    OSThread* mpThread;         // 0x10
+
+                public:
+                    OSThread* getThread()           { return mpThread; }
+
+                friend class System;
+            } UnkStruct0;
 
             typedef struct {
                 private:
@@ -40,9 +58,17 @@ namespace ipl {
                 private:
                     u8                  unk_0x00[0x6C];
 
-                    ipl::nand::Manager* mpNandManager;          // 0x6C
-
-                    u8                  unk_0x70[0xC0];
+                    nand::Manager*      mpNandManager;          // 0x6C
+                    u8                  unk_0x70[0x28];
+                    ErrorHandler*       mpErrorHandler;         // 0x98
+                    undefined4*         mpResetHandler;         // (?) 0x9C
+                    WarningHandler*     mpWarningHandler;       // 0xA0
+                    u8                  unk_0xA4[0x10];
+                    HomeButton*         mpHomeButton;           // 0xB4
+                    u8                  unk_0xB8[0x8];
+                    UnkStruct0*         unk_0xC0;
+                    EGG::ColorFader*    mpFader;                // 0xC4
+                    u8                  unk_0xC8[0x68];
 
                     ArgRegionData*      mpEngArg;               // 0x130
                     ArgRegionData*      mpFraArg;               // 0x134
@@ -52,7 +78,7 @@ namespace ipl {
                     ArgRegionData*      mpDutArg;               // 0x144
                     ArgRegionData*      mpSpaArg;               // 0x148
                     ArgRegionData*      mpChnSimpleArg;         // 0x14C
-                    ArgRegionData*      mpChnTraditionalArg;    // 0x150 (?)
+                    ArgRegionData*      mpChnTraditionalArg;    // 0x150
                     ArgRegionData*      mpKorArg;               // 0x154
 
                     u8                  unk_0x158[0x161];
@@ -63,22 +89,34 @@ namespace ipl {
 
                 public:
                     /**
-                     * @return The System Memory Manager of the IPL.
+                     * @return The Content Manager of the system.
                      */
-                    nand::Manager*  getNandManager()        { return mpNandManager; }
+                    nand::Manager*      getNandManager()    { return mpNandManager; }
+                    /**
+                     * @return The Error Handler of the system.
+                     */
+                    ErrorHandler*       getErrorHandler()   { return mpErrorHandler; }
+                    /**
+                     * @return The HOME Menu of the system.
+                     */
+                    HomeButton*         getHomeButton()     { return mpHomeButton; }
+                    /**
+                     * @return The Fader of the system.
+                     */
+                    EGG::ColorFader*    getFader()          { return mpFader; }
 
                 friend class System;
             } ArgData;
         
             /**
-             * @brief Initializes the IPL.
+             * @brief Initializes the system.
              * 
              * @param argc The amount of arguments passed,
              * @param argv Array of arguments.
              */
             static void init(int argc, char** argv);
             /**
-             * @brief Boots up the IPL.
+             * @brief Boots up the system.
              * 
              * @note Run this function after `ipl::System::init`
              */
@@ -88,7 +126,7 @@ namespace ipl {
              */
             static s32 getLanguage();
             /**
-             * @return A boolean telling if the user can restart their Wii console.
+             * @return A boolean indicating if the user can restart their Wii console.
              */
             static bool                     isResetAcceptable();
             /**
@@ -101,6 +139,14 @@ namespace ipl {
              * @param chan The Wii Remote Player
              */
             static controller::Interface*   getController(int chan);
+            /**
+             * @brief Prepare the system for error handler
+             */
+            static void                     err_run();
+            /**
+             * @brief Prepare the system for warning handler
+             */
+            static void                     warning_run();
             
             
             /*****   INLINES   *****/
@@ -150,6 +196,10 @@ namespace ipl {
              * @return The Korean work data.
              */
             static ArgRegionData*   getKorArg()             { return smArg.mpKorArg; }
+            /**
+             * @return Gets something.
+             */
+            static UnkStruct0*      getUnkStruct0()         { return smArg.unk_0xC0; }
 
         private:
             static ArgData  smArg;

@@ -4,8 +4,10 @@
 #include <revolution/types.h>
 
 #include <nw4r/math/types.h>
+
 #include <nw4r/lyt/types.h>
 #include <nw4r/lyt/material.h>
+
 #include <nw4r/ut/LinkList.h>
 
 #include <stddef.h>
@@ -27,27 +29,42 @@ namespace nw4r {
         class Pane : detail::PaneBase {
             public:
                 Pane();
-                virtual ~Pane();                                                                    // 0x08
+                virtual ~Pane();                                                                                        // 0x08
 
-                virtual undefined4* GetRuntimeTypeInfo() const;                                     // 0x0C
+                virtual undefined4* GetRuntimeTypeInfo() const;                                                         // 0x0C
 
-                virtual void        CalculateMtx(const undefined4& drawInfo);                       // 0x10
+                virtual void        CalculateMtx(const undefined4& drawInfo);                                           // 0x10
 
-                virtual void        Draw(const undefined4& drawInfo);                               // 0x14
-                virtual void        DrawSelf(const undefined4& drawInfo);                           // 0x18
+                virtual void        Draw(const undefined4& drawInfo);                                                   // 0x14
+                virtual void        DrawSelf(const undefined4& drawInfo);                                               // 0x18
 
-                virtual void        Animate(u32 unk);                                               // 0x1C
-                virtual void        AnimateSelf(u32 unk);                                           // 0x20
+                virtual void        Animate(u32 unk);                                                                   // 0x1C
+                virtual void        AnimateSelf(u32 unk);                                                               // 0x20
 
-                virtual ut::Color   GetVtxColor(u32 index) const;                                   // 0x24
-                virtual void        SetVtxColor(u32 index, ut::Color newColor);                     // 0x28
-                virtual u8          GetVtxColorElement(u32 index) const;                            // 0x2C
-                virtual void        SetVtxColorElement(u32 index, u8 element);                      // 0x30
+                virtual ut::Color   GetVtxColor(u32 index) const;                                                       // 0x24
+                virtual void        SetVtxColor(u32 index, ut::Color newColor);                                         // 0x28
+                virtual u8          GetVtxColorElement(u32 index) const;                                                // 0x2C
+                virtual void        SetVtxColorElement(u32 index, u8 element);                                          // 0x30
 
-                virtual undefined   GetColorElement(u32 index) const;                               // 0x34
-                virtual void        SetColorElement(u32 index, u8 color);                           // 0x38
+                virtual undefined   GetColorElement(u32 index) const;                                                   // 0x34
+                virtual void        SetColorElement(u32 index, u8 color);                                               // 0x38
                 
-                virtual Pane*       FindPaneByName(const char* findName, bool bRecursive = true);   // 0x3C
+                virtual Pane*       FindPaneByName(const char* findName, bool recursive = true);                        // 0x3C
+                virtual Pane*       FindMatertialByName(const char* findName, bool recursive = true);                   // 0x40
+
+                virtual Pane*       BindAnimation(undefined4* animTrans, bool unk0, bool unk1);                         // 0x44
+                
+                virtual void        UnbindAnimation(undefined4* animTrans, bool recursive = true);                      // 0x48
+                virtual void        UnbindAllAnimation(bool recursive = true);                                          // 0x4C
+                virtual void        UnbindAnimationSelf(undefined4* animTrans);                                         // 0x50
+                
+                virtual void        FindAnimationLink(undefined4* animTrans);                                           // 0x54
+
+                virtual void        SetAnimationEnable(undefined4* animTrans, bool unk, bool recursive = true);         // 0x58
+
+                virtual Material*   GetMaterial() const;                                                                // 0x5C
+
+                virtual void*       LoadMtx(undefined4* drawInfo);                                                      // 0x60
 
                 
 

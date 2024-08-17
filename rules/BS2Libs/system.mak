@@ -6,6 +6,11 @@ SYSTEM_OBJECTS	=	$(BS2_OBJASM_PATH)/system/rvl_dec.o \
 					$(BS2_OBJASM_PATH)/system/iplController.o \
 					$(BS2_OBJASM_PATH)/system/iplChannelManager.o \
 					$(BS2_OBJASM_PATH)/system/iplChannelScriptManager.o \
+					$(BS2_OBJASM_PATH)/system/iplNand.o \
+					$(BS2_OBJASM_PATH)/system/iplNandShared.o \
+					$(BS2_OBJASM_PATH)/system/iplNandMeta.o \
+					$(BS2_OBJASM_PATH)/system/iplNandManager.o \
+					$(BS2_OBJASM_PATH)/system/iplNandWall.o \
 					$(BS2_OBJASM_PATH)/system/iplFramework.o \
 					$(BS2_OBJASM_PATH)/system/iplException.o \
 					$(BS2_OBJ_PATH)/system/iplMessage.o \
@@ -22,9 +27,9 @@ SYSTEM_OBJECTS	=	$(BS2_OBJASM_PATH)/system/rvl_dec.o \
 					$(BS2_OBJASM_PATH)/system/iplHomeButtonMenu.o \
 					$(BS2_OBJASM_PATH)/system/iplNandSDWorker.o \
 					$(BS2_OBJASM_PATH)/system/iplKeyboard.o \
-					$(BS2_OBJASM_PATH)/system/iplErrorHandler.o \
+					$(BS2_OBJ_PATH)/system/iplErrorHandler.o \
 					$(BS2_OBJASM_PATH)/system/iplResetHandler.o \
-					$(BS2_OBJASM_PATH)/system/iplWarningHandler.o \
+					$(BS2_OBJ_PATH)/system/iplWarningHandler.o \
 					$(BS2_OBJASM_PATH)/system/iplSocketSetting.o \
 					$(BS2_OBJASM_PATH)/system/iplPostmanManager.o \
 					$(BS2_OBJASM_PATH)/system/iplSaveDataManager.o \

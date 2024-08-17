@@ -7,7 +7,7 @@
 namespace ipl {
     namespace message {
         /**
-         * @note Address: 0x8133E7D4
+         * @note Address: 0x8133E7D4 (4.3U)
          * @note Size: 0x50
          */
         Manager::Manager(EGG::Heap* pHeap) {
@@ -16,7 +16,7 @@ namespace ipl {
         }
 
         /**
-         * @note Address: 0x8133E824
+         * @note Address: 0x8133E824 (4.3U)
          * @note Size: 0x50
          */
         void Manager::initMessage() {

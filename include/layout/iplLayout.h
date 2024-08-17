@@ -15,8 +15,21 @@ namespace ipl {
     namespace layout {
         class Object {
             public:
+                /**
+                 * @param pHeap The work heap.
+                 * @param pLayoutArchive The layout archive.
+                 * @param layoutDirectory The directory containing the layout.
+                 * @param layoutFileName The file name of the layout.
+                 */
                 Object(EGG::Heap* pHeap, nand::LayoutFile* pLayoutArchive, const char* layoutDirectory, const char* layoutFileName);
-                
+                /**
+                 * @param pHeap The work heap.
+                 * @param pLayoutArcBuffer The layout archive buffer.
+                 * @param layoutDirectory The directory containing the layout.
+                 * @param layoutFileName The file name of the layout.
+                 */
+                Object(EGG::Heap* pHeap, void* pLayoutArcBuffer, const char* layoutDirectory, const char* layoutFileName);
+
                 /**
                  * @brief Lock up(?) until it has finished binding panes.
                  */

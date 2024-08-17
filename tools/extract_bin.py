@@ -30,10 +30,6 @@ def main():
     )
     args = parser.parse_args()
     
-    # entry[0]=filename
-    # entry[1]=offset
-    # entry[2]=size
-    
     if not os.path.exists(args.output):
         os.makedirs(args.output)
     
@@ -48,6 +44,9 @@ def main():
 
     readList = list(csv.reader(flist))
     for i in range(len(readList)):
+        # entry[0]=filename
+        # entry[1]=offset
+        # entry[2]=size
         entry = readList[i]
         with open(args.output + "/" + entry[0], "wb") as outFile:
             bfile.seek(int(entry[1], 0))
