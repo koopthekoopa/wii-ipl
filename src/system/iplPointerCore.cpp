@@ -16,20 +16,20 @@ namespace ipl {
      * @note Size: 0x24
      */
     PointerCoreObject::PointerCoreObject()
-    : mLayoutObject(NULL), mState(0), mLayoutType(POINTER_LYT_TYPE_UNK3), mChan(0), unk_0x10(0) {}
+    : mpLayout(NULL), mState(0), mLayoutType(POINTER_LYT_TYPE_UNK3), mChan(0), unk_0x10(0) {}
 
     /**
      * @note Address: 0x813444E8 (4.3U)
      * @note Size: 0x19C
      */
    void PointerCoreObject::calc(Pointer* pPointer, const controller::Interface* pController) {
-        mLayoutObject = NULL;
+        mpLayout = NULL;
         if (pController && pController->isValidDpd()) {
             nw4r::lyt::Pane *pCursorMovePane, *pCursorRotate, *pCursorRotateShadow;
 
             // Prepare layout
-            mLayoutObject = pPointer->get_layout(mChan, mLayoutType);
-            pCursorMovePane = mLayoutObject->GetRootPane()->FindPaneByName("N_Trans");
+            mpLayout = pPointer->get_layout(mChan, mLayoutType);
+            pCursorMovePane = mpLayout->GetRootPane()->FindPaneByName("N_Trans");
 
             // Set the position
             pCursorMovePane->SetTranslate(utility::get_cursor_pos(pController->getDpdProjectionPos()));
@@ -38,14 +38,14 @@ namespace ipl {
             math::VEC2 cursorHorizon(pController->getHorizon());
             math::VEC3 cursorRotateVec(0, 0, nw4r::math::Atan2Deg(-cursorHorizon.y, cursorHorizon.x));
 
-            pCursorRotate = mLayoutObject->GetRootPane()->FindPaneByName("N_Rot");
-            pCursorRotateShadow = mLayoutObject->GetRootPane()->FindPaneByName("N_SRot");
+            pCursorRotate = mpLayout->GetRootPane()->FindPaneByName("N_Rot");
+            pCursorRotateShadow = mpLayout->GetRootPane()->FindPaneByName("N_SRot");
 
             pCursorRotate->SetRotate(cursorRotateVec);
             pCursorRotateShadow->SetRotate(cursorRotateVec);
 
             // Update the layout
-            mLayoutObject->calc();
+            mpLayout->calc();
         }
     }
     
@@ -54,10 +54,10 @@ namespace ipl {
      * @note Size: 0x24
      */
     void PointerCoreObject::draw() {
-        if (!mLayoutObject) return;
+        if (!mpLayout) return;
         if (mState != 0) return;
 
-        mLayoutObject->draw();
+        mpLayout->draw();
     }
     
     /**

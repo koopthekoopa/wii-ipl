@@ -38,7 +38,7 @@ namespace ipl {
             int     getChan() { return mChan; }
 
         private:
-            layout::Object* mLayoutObject;  // 0x00
+            layout::Object* mpLayout;       // 0x00
             
             int             mState;         // 0x04
             int             mLayoutType;    // 0x08

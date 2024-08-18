@@ -10,8 +10,8 @@
 #include "utility/iplMath.h"
 
 namespace ipl {
-    #define MINIMUM_LENGTH    32
-    #define MAXIMUM_LENGTH    128
+    #define MINIMUM_SCROLL_LENGTH    32
+    #define MAXIMUM_SCROLL_LENGTH    128
 
     /**
      * @note Address: 0x816354D4 (4.3U)
@@ -44,12 +44,12 @@ namespace ipl {
      * @note Size: 0xE8
      */
     Pointer::Pointer(EGG::Heap* pHeap)
-    : mMaybeType(-1), mOriginPos(0, 0), mArrowLength(MINIMUM_LENGTH), mPointDirection(PNT_DOWN), mScrolling(false), mVisible(true), mCore() {
-        mLayoutArchive = System::getArg()->getNandManager()->readLayout(pHeap, "cursor.ash", false);
+    : mMaybeType(-1), mOriginPos(0, 0), mArrowLength(MINIMUM_SCROLL_LENGTH), mPointDirection(PNT_DOWN), mScrolling(false), mVisible(true), mCore() {
+        mpLayoutArchive = System::getArg()->getNandManager()->readLayout(pHeap, "cursor.ash", false);
         
         for (int i = 0; i < MAX_LAYOUT_FILES; i++) {
-            mLayoutObject[i] = new(pHeap, 4) layout::Object(pHeap, mLayoutArchive, "arc", scLayoutName[i]);
-            mLayoutObject[i]->finishBinding();
+            mpLayout[i] = new(pHeap, 4) layout::Object(pHeap, mpLayoutArchive, "arc", scLayoutName[i]);
+            mpLayout[i]->finishBinding();
         }
     }
 
@@ -58,16 +58,18 @@ namespace ipl {
      * @note Size: 0x174
      */
     void Pointer::calc() {
+        // Update the pointer cursor
         mCore.calc(this);
 
+        // Update the scrolling cursor
         if (mMaybeType >= 0) {
             nw4r::lyt::Pane *pArrowPane, *pArrowRoot, *pOriginPane;
             f32 newArrowLength, newYScale;
 
             // Get the Arrow Panes
-            pArrowRoot =    mLayoutObject[LYT_SCROLLER_ID]->GetRootPane()->FindPaneByName("N_BArw");
-            pArrowPane =    mLayoutObject[LYT_SCROLLER_ID]->GetRootPane()->FindPaneByName("W_BArw");
-            pOriginPane =   mLayoutObject[LYT_SCROLLER_ID]->GetRootPane()->FindPaneByName("BArwBase");
+            pArrowRoot =    mpLayout[LYT_SCROLLER_ID]->GetRootPane()->FindPaneByName("N_BArw");
+            pArrowPane =    mpLayout[LYT_SCROLLER_ID]->GetRootPane()->FindPaneByName("W_BArw");
+            pOriginPane =   mpLayout[LYT_SCROLLER_ID]->GetRootPane()->FindPaneByName("BArwBase");
 
             // Arrow Position
             pArrowRoot->SetTranslate(mOriginPos);
@@ -75,8 +77,8 @@ namespace ipl {
 
             // Arrow Length
             nw4r::lyt::Size arrowSize   = pArrowPane->GetSize();
-            // Limit the length between MINIMUM_LENGTH and MAXIMUM_LENGTH
-            newArrowLength              = UTILITY_CLAMP(mArrowLength, MINIMUM_LENGTH, MAXIMUM_LENGTH);
+            // Limit the length between MINIMUM_SCROLL_LENGTH and MAXIMUM_SCROLL_LENGTH
+            newArrowLength              = UTILITY_CLAMP(mArrowLength, MINIMUM_SCROLL_LENGTH, MAXIMUM_SCROLL_LENGTH);
             arrowSize.height            = newArrowLength;
 
             // Set the new length
@@ -96,8 +98,8 @@ namespace ipl {
             pArrowRoot->SetVisible(mScrolling);
             pOriginPane->SetVisible(!mScrolling);
 
-            // Calculate the scrolling layout
-            mLayoutObject[LYT_SCROLLER_ID]->calc();
+            // Calculate the scroller layout
+            mpLayout[LYT_SCROLLER_ID]->calc();
         }
     }
 
@@ -108,8 +110,9 @@ namespace ipl {
     void Pointer::draw() {
         if (mVisible) {
             mCore.draw();
+            
             if (mMaybeType >= 0) {
-                mLayoutObject[LYT_SCROLLER_ID]->draw();
+                mpLayout[LYT_SCROLLER_ID]->draw();
             }
         }
     }
@@ -148,7 +151,7 @@ namespace ipl {
             }
         }
 
-        return mLayoutObject[grabId + chan];
+        return mpLayout[grabId + chan];
     }
 }
 

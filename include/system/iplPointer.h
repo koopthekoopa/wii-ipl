@@ -62,8 +62,8 @@ namespace ipl {
             layout::Object* get_layout(int chan, int type);
         
         public:
-            nand::LayoutFile*   mLayoutArchive;                     // 0x00
-            layout::Object*     mLayoutObject[MAX_LAYOUT_FILES];    // 0x04
+            nand::LayoutFile*   mpLayoutArchive;                    // 0x00
+            layout::Object*     mpLayout[MAX_LAYOUT_FILES];         // 0x04
             
             int                 mMaybeType;                         // 0x28
             math::VEC2          mOriginPos;                         // 0x2C
