@@ -114,7 +114,7 @@ namespace ipl {
 
     /**
      * @note Address: 0x81356C5C (4.3U)
-     * @note Size: ()
+     * @note Size: 0xF0
      */
     void ResetHandler::fatalUpdate() {
         switch(mFatalPowerState) {

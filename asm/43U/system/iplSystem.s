@@ -3589,29 +3589,25 @@
 .endfn onInput__Q29textinput13EventObserverFQ39textinput15CommandReceiver13INPUT_COMMANDPv
 
 # .text:0x309C | 0x81335CC0 | size: 0xC
-.fn iplKeyboard_81335CC0, local
+.fn "__sinit_\\iplSystem_cpp", local
 /* 81335CC0 000040C0  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
 /* 81335CC4 000040C4  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
 /* 81335CC8 000040C8  4B FF CF 5C */	b __ct__Q33ipl6System3ArgFv
-.endfn iplKeyboard_81335CC0
+.endfn "__sinit_\\iplSystem_cpp"
 
 # 0x8160D1C4..0x8160D1C8 | size: 0x4
 .section .ctors, "a"
 .balign 4
-	.4byte iplKeyboard_81335CC0
+	.4byte "__sinit_\\iplSystem_cpp"
 
 # 0x81634120..0x816346A8 | size: 0x588
 .data
 .balign 8
 
 # .data:0x0 | 0x81634120 | size: 0x13
-.obj pad_08_81634120_data, local
-	.4byte 0x6172656E
-	.4byte 0x61206C6F
-	.4byte 0x20257820
-	.4byte 0x68692025
-	.byte 0x78, 0x0A, 0x00
-.endobj pad_08_81634120_data
+.obj lbl_81634120, global
+	.string "arena lo %x hi %x\n"
+.endobj lbl_81634120
 
 # .data:0x13 | 0x81634133 | size: 0x3A
 .obj lbl_81634133, global

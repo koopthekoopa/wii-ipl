@@ -25,6 +25,8 @@ BS2_IMAGE_SIZE		= 0x3B0000
 -include $(RULES_ROOT)/BS2Libs/homebutton.mak
 -include $(RULES_ROOT)/BS2Libs/BS2.mak
 
+-include $(RULES_ROOT)/BS2Libs/address.mak
+
 BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(BS2_BLD_PATH)/utility.a \
 						$(BS2_BLD_PATH)/layout.a \
@@ -32,6 +34,7 @@ BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(BS2_BLD_PATH)/iplwww.a \
 						$(BS2_BLD_PATH)/homebutton.a \
 						$(BS2_BLD_PATH)/BS2.a \
+						$(BS2_BLD_PATH)/address.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/base.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/os.a \
 						$(RUNTIME_ROOT)/$(BUILD_ROOT)/Runtime.PPCEABI.H.a

@@ -8,7 +8,7 @@ Supported versions (currently):
 - 4.3 (USA)
 
 ## Dependencies
-**TODO: build for MAC OS**
+**TODO: build for MAC OS**   
 The following dependencies are required to build the decompilation:   
 
 - Git (optional)

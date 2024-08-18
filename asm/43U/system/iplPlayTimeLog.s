@@ -305,7 +305,7 @@
 /* 81340A8C 0000EE8C  98 01 00 0E */	stb r0, 0xe(r1)
 /* 81340A90 0000EE90  98 01 00 0F */	stb r0, 0xf(r1)
 /* 81340A94 0000EE94  48 14 C0 85 */	bl fn_8148CB18
-/* 81340A98 0000EE98  80 8D 80 1C */	lwz r4, RBRFileType_Log_Ptr@sda21(r0)
+/* 81340A98 0000EE98  80 8D 80 1C */	lwz r4, RBRFileType_Log@sda21(r0)
 /* 81340A9C 0000EE9C  38 61 00 08 */	addi r3, r1, 0x8
 /* 81340AA0 0000EEA0  38 A0 00 08 */	li r5, 0x8
 /* 81340AA4 0000EEA4  48 2C 1A F9 */	bl strcmp
@@ -1046,7 +1046,7 @@
 /* 8134151C 0000F91C  99 61 00 33 */	stb r11, 0x33(r1)
 /* 81341520 0000F920  90 01 00 28 */	stw r0, 0x28(r1)
 /* 81341524 0000F924  81 41 00 30 */	lwz r10, 0x30(r1)
-/* 81341528 0000F928  80 AD 80 1C */	lwz r5, RBRFileType_Log_Ptr@sda21(r0)
+/* 81341528 0000F928  80 AD 80 1C */	lwz r5, RBRFileType_Log@sda21(r0)
 /* 8134152C 0000F92C  4B FF DC 41 */	bl createNewRecord__Q33ipl3cdb7ManagerFPCcPCcPC14OSCalendarTimePUlPUsRCQ33ipl4math4VEC2UlRC15NWC24FriendAddrUsUsPCwPCwPCvPPCvPUlP17RBRAttachmentType
 /* 81341530 0000F930  7F 63 DB 78 */	mr r3, r27
 /* 81341534 0000F934  48 2B 6B B9 */	bl __dla__FPv
@@ -1359,17 +1359,16 @@
 .endfn write_record__Q23ipl11PlayTimeLogFP10_CDBRecordPQ23ipl11EventBufferPUc
 
 # .text:0x12E8 | 0x81341970 | size: 0xC
-# ipl::PlayTimeLog::createInstance()
-.fn createInstance__Q23ipl11PlayTimeLogFv, global
+.fn "__sinit_\\iplPlayTimeLog_cpp", global
 /* 81341970 0000FD70  3C 60 81 09 */	lis r3, smArg__Q23ipl11PlayTimeLog@ha
 /* 81341974 0000FD74  38 63 95 50 */	addi r3, r3, smArg__Q23ipl11PlayTimeLog@l
 /* 81341978 0000FD78  4B FF ED 10 */	b __ct__Q23ipl11PlayTimeLogFv
-.endfn createInstance__Q23ipl11PlayTimeLogFv
+.endfn "__sinit_\\iplPlayTimeLog_cpp"
 
 # 0x8160D1C8..0x8160D1CC | size: 0x4
 .section .ctors, "a"
 .balign 4
-	.4byte createInstance__Q23ipl11PlayTimeLogFv
+	.4byte "__sinit_\\iplPlayTimeLog_cpp"
 
 # 0x8160D620..0x8160D638 | size: 0x18
 .rodata

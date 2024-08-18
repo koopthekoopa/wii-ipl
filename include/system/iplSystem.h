@@ -23,16 +23,6 @@
 namespace ipl {
     class System {
         public:
-            class Arg {
-                public:
-                    Arg();
-                
-                private:
-                    u8      unk_0x00[0x1E0];
-                    
-                    OSAlarm mUnkAlarm;          // 0x1E0
-            };
-
             typedef struct {
                 private:
                     u8  unk_0x00[0xA0];
@@ -41,12 +31,40 @@ namespace ipl {
 
                 public:
                     /** @return The Message Data of the language. */
-                    u8* getMessageData()            { return mpMsgData; }
+                    u8* getMessageData()                        { return mpMsgData; }
 
                 friend class System;
             } ArgRegionData;
 
-            typedef struct {
+            class Arg {
+                public:
+                    Arg();
+
+                    /** @return The Scene Manager object. */
+                    scene::Manager*     getSceneManager()       { return mpSceneManager; }
+                    /** @return The Content Manager object. */
+                    nand::Manager*      getNandManager()        { return mpNandManager; }
+                    /** @return The WiiConnect24 Manager object. */
+                    nwc24::Manager*     getNwc24Manager()       { return mpNwc24Manager; }
+                    /** @return The Save Data Manager object. */
+                    savedata::Manager*  getSaveDataManager()    { return mpSaveDataManager; }
+                    /** @return The Error Handler object. */
+                    ErrorHandler*       getErrorHandler()       { return mpErrorHandler; }
+                    /** @return The Reset Handler object. */
+                    ResetHandler*       getResetHandler()       { return mpResetHandler; }
+                    /** @return The Warning Handler object. */
+                    WarningHandler*     getWarningHandler()     { return mpWarningHandler; }
+                    /** @return The Warning Handler object. */
+                    postman::Manager*   getPostmanManager()     { return mpPostmanManager; }
+                    /** @return The HOME Menu object. */
+                    HomeButton*         getHomeButton()         { return mpHomeButton; }
+                    /** @return something */
+                    EGG::Thread*        getUnkThread()          { return mpUnkThread; }
+                    /** @return The Fader object for fading out a captured screen. */
+                    EGG::ColorFader*    getErrorFader()         { return mpErrorFader; }
+                    /** @return The fader object. */
+                    EGG::ColorFader*    getFader()              { return mpFader; }
+                
                 private:
                     u8                  unk_0x00[0x64];
 
@@ -71,7 +89,7 @@ namespace ipl {
                     u8                  unk_0xB8[0x8];
 
                     EGG::Thread*        mpUnkThread;            // 0xC0
-                    EGG::ColorFader*    mpCaptureFader;         // 0xC4
+                    EGG::ColorFader*    mpErrorFader;           // 0xC4
                     EGG::ColorFader*    mpFader;                // 0xC8
 
                     u8                  unk_0xCC[0x64];
@@ -87,7 +105,9 @@ namespace ipl {
                     ArgRegionData*      mpChnTraditionalArg;    // 0x150
                     ArgRegionData*      mpKorArg;               // 0x154
 
-                    u8                  unk_0x158[0x161];
+                    u8                  unk_0x158[0x88];
+                    OSAlarm             mUnkAlarm;              // 0x1E0
+                    u8                  unk_0x20C[0xA9];
 
                     bool                mbResetDisabled;        // 0x2B9
                     bool                unk_0x2BA;
@@ -96,34 +116,8 @@ namespace ipl {
 
                     u8                  unk_0x2BD[0x1B];
 
-                public:
-                    /** @return The Scene Manager object. */
-                    scene::Manager*     getSceneManager()       { return mpSceneManager; }
-                    /** @return The Content Manager object. */
-                    nand::Manager*      getNandManager()        { return mpNandManager; }
-                    /** @return The WiiConnect24 Manager object. */
-                    nwc24::Manager*     getNwc24Manager()       { return mpNwc24Manager; }
-                    /** @return The Save Data Manager object. */
-                    savedata::Manager*  getSaveDataManager()    { return mpSaveDataManager; }
-                    /** @return The Error Handler object. */
-                    ErrorHandler*       getErrorHandler()       { return mpErrorHandler; }
-                    /** @return The Reset Handler object. */
-                    ResetHandler*       getResetHandler()       { return mpResetHandler; }
-                    /** @return The Warning Handler object. */
-                    WarningHandler*     getWarningHandler()     { return mpWarningHandler; }
-                    /** @return The Warning Handler object. */
-                    postman::Manager*   getPostmanManager()     { return mpPostmanManager; }
-                    /** @return The HOME Menu object. */
-                    HomeButton*         getHomeButton()         { return mpHomeButton; }
-                    /** @return something */
-                    EGG::Thread*        getUnkThread()          { return mpUnkThread; }
-                    /** @return The Fader object for fading out a captured screen. */
-                    EGG::ColorFader*    getCaptureFader()       { return mpCaptureFader; }
-                    /** @return The fader object. */
-                    EGG::ColorFader*    getFader()              { return mpFader; }
-
                 friend class System;
-            } ArgData;
+            };
         
             /**
              * @brief Initializes the system.
@@ -162,7 +156,7 @@ namespace ipl {
             
 
             /** @return The System work data. */
-            static ArgData*         getArg()                { return &smArg; }
+            static Arg*         getArg()                    { return &smArg; }
             /** @return The English work data. */
             static ArgRegionData*   getEngArg()             { return smArg.mpEngArg; }
             /** @return The French work data. */
@@ -185,7 +179,7 @@ namespace ipl {
             static ArgRegionData*   getKorArg()             { return smArg.mpKorArg; }
 
         private:
-            static ArgData  smArg;
+            static Arg  smArg;
     };
 }
 

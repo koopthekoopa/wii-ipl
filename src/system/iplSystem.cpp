@@ -1,4 +1,4 @@
-#define UNIT_DOESNT_MATCH
+//#define UNIT_DOESNT_MATCH
 
 #include <decomp.h>
 
@@ -11,14 +11,14 @@ namespace ipl {
      * @note Address 0x81089008
      * @note Size 0x2D8
     */
-    System::ArgData System::smArg;
+    System::Arg System::smArg;
     
     /**
      * @note Address 0x81332C24
      * @note Size 0x48
     */
     System::Arg::Arg() {
-        memset(&smArg, 0, sizeof(ArgData));
+        memset(&smArg, 0, sizeof(Arg));
         OSCreateAlarm(&mUnkAlarm);
     }
     

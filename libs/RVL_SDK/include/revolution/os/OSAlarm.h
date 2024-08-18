@@ -16,13 +16,13 @@ struct OSAlarm {
     OSAlarmHandler  handler;    // 0x00
     u32             tag;        // 0x04
     OSTime          fire;       // 0x08
-    OSAlarm*        prev;       // 0x0C
-    OSAlarm*        next;       // 0x10
+    OSAlarm*        prev;       // 0x10
+    OSAlarm*        next;       // 0x14
 
-    OSTime          period;     // 0x14
-    OSTime          start;      // 0x18
+    OSTime          period;     // 0x18
+    OSTime          start;      // 0x20
 
-    void*           userData;   // 0x1C
+    void*           userData;   // 0x28
 };
 
 void OSCreateAlarm(OSAlarm* pAlarm);

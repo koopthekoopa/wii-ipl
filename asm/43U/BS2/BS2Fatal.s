@@ -901,6 +901,50 @@
 	.4byte lbl_8164745B
 .endobj lbl_8160F628
 
+# 0x81646F08..0x81647538 | size: 0x630
+.data
+.balign 8
+
+# .data:0x0 | 0x81646F08 | size: 0xA5
+.obj lbl_81646F08, global
+	.string "\n\n\n           \203G\203\211\201[\202\252\224\255\220\266\202\265\202\334\202\265\202\275\201B\n\n\203C\203W\203F\203N\203g\203{\203^\203\223\202\360\211\237\202\265\202\304\203f\203B\203X\203N\202\360\216\346\202\350\217o\202\265\202\304\202\251\n\202\347\201A\226{\221\314\202\314\223d\214\271\202\360OFF\202\311\202\265\202\304\201A\226{\221\314\202\314\216\346\210\265\220\340\226\276\217\221\202\314\n           \216w\216\246\202\311\217]\202\301\202\304\202\255\202\276\202\263\202\242\201B"
+.endobj lbl_81646F08
+
+# .data:0xA5 | 0x81646FAD | size: 0xBC
+.obj lbl_81646FAD, global
+	.string "\n\n\n          An error has occurred.\n    Press the Eject Button, remove the\n    Game Disc, and turn the power off.\n   Please read the Wii operations manual\n           for more information."
+.endobj lbl_81646FAD
+
+# .data:0x161 | 0x81647069 | size: 0xE8
+.obj lbl_81647069, global
+	.string "\n\n\n         Ein Fehler ist aufgetreten.\n  Dr\374cke den Ausgabeknopf, entnimm die\n  Game Disc und schalte die Wii-Konsole\naus. Bitte lies die Bedienungsanleitung der\n Wii-Konsole, um weitere Informationen zu\n                 erhalten."
+.endobj lbl_81647069
+
+# .data:0x249 | 0x81647151 | size: 0xE8
+.obj lbl_81647151, global
+	.string "\n\n\n          Une erreur est survenue.\n   Appuyez sur le bouton EJECT, retirez\n  le disque de jeu et \351teignez la console.\n   Veuillez vous r\351f\351rer au mode d'emploi\n     de la console pour de plus amples\n                informations."
+.endobj lbl_81647151
+
+# .data:0x331 | 0x81647239 | size: 0xC0
+.obj lbl_81647239, global
+	.string "\n\n\n         Se ha producido un error.\n  Pulsa el Bot\363n EJECT, saca el disco y\n apaga la consola. Consulta el manual de\n  instrucciones de la consola Wii para\n         obtener m\341s informaci\363n."
+.endobj lbl_81647239
+
+# .data:0x3F1 | 0x816472F9 | size: 0xC7
+.obj lbl_816472F9, global
+	.string "\n\n\n        Si \350 verificato un errore.\n Premi il pulsante EJECT, estrai il disco\ndi gioco e spegni la console. Per maggiori\n   informazioni consulta il manuale di\n       istruzioni della console Wii."
+.endobj lbl_816472F9
+
+# .data:0x4B8 | 0x816473C0 | size: 0x9B
+.obj lbl_816473C0, global
+	.string "\n\n\n       Er is een fout opgetreden.\n   Druk op de ejectknop, verwijder de\n speldisk en zet het systeem uit. Lees\nde Wii-handleiding voor meer informatie."
+.endobj lbl_816473C0
+
+# .data:0x553 | 0x8164745B | size: 0xDD
+.obj lbl_8164745B, global
+	.string "\n\n                Error #104,\n          An error has occurred.\n    Press the EJECT Button, remove the\n    Game Disc, and turn the power off.\n   Please read the Wii operations manual\n           for more information.\000\000\000\000\000\000"
+.endobj lbl_8164745B
+
 # 0x81694788..0x816947D0 | size: 0x48
 .section .sdata2, "a"
 .balign 8
