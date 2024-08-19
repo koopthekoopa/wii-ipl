@@ -9,7 +9,7 @@ namespace ipl {
      * @note Size: 0x64
      */
     WarningHandler::WarningHandler(EGG::Heap* pHeap)
-    : mType(UNK_WARN_TYPE), mMessageID(0) {
+    : mType(NONE), mMessageID(0) {
         mpDialog = new(pHeap, 4) DialogWindow(pHeap);
     }
 
@@ -23,7 +23,7 @@ namespace ipl {
 
         System::getArg()->getHomeButton()->disable();
 
-        if (mType != UNK_WARN_TYPE) {
+        if (mType != NONE) {
             mpDialog->callBtn1(msgId, 46 /* message ID for "OK" */);
             System::warning_run();
         }

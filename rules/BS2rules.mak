@@ -16,6 +16,10 @@ BS2_ELF_LINKSCRIPT	= ldscript_ipl2.lcf
 # for BootStage
 BS2_IMAGE_SIZE		= 0x3B0000
 
+# for libraries
+BS2_CMN_CFLAGS	=	-O4,s -ipa file $(COMMON_CCFLAGS)
+BS2_CMN_CCPATH	=	$(CW_GC_30A52)
+
 # libraries
 -include $(RULES_ROOT)/BS2Libs/system.mak
 -include $(RULES_ROOT)/BS2Libs/utility.mak
@@ -28,6 +32,7 @@ BS2_IMAGE_SIZE		= 0x3B0000
 -include $(RULES_ROOT)/BS2Libs/address.mak
 -include $(RULES_ROOT)/BS2Libs/backMenu.mak
 -include $(RULES_ROOT)/BS2Libs/board.mak
+-include $(RULES_ROOT)/BS2Libs/button.mak
 
 BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(BS2_BLD_PATH)/utility.a \
@@ -39,6 +44,7 @@ BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(BS2_BLD_PATH)/address.a \
 						$(BS2_BLD_PATH)/backMenu.a \
 						$(BS2_BLD_PATH)/board.a \
+						$(BS2_BLD_PATH)/button.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/base.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/os.a \
 						$(RUNTIME_ROOT)/$(BUILD_ROOT)/Runtime.PPCEABI.H.a

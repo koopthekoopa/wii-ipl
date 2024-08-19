@@ -263,7 +263,7 @@
 /* 813877B0 00055BB0  48 08 39 89 */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813877B4 00055BB4  7F E4 FB 78 */	mr r4, r31
 /* 813877B8 00055BB8  38 A0 00 00 */	li r5, 0x0
-/* 813877BC 00055BBC  48 01 51 81 */	bl fn_8139C93C
+/* 813877BC 00055BBC  48 01 51 81 */	bl setEventHandler__Q33ipl5scene6ButtonFPQ23gui12EventHandlerPQ23gui12EventHandler
 /* 813877C0 00055BC0  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813877C4 00055BC4  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 813877C8 00055BC8  7C 08 03 A6 */	mtlr r0
@@ -318,7 +318,7 @@
 /* 81387858 00055C58  48 08 38 E1 */	bl getScene__Q33ipl5scene7ManagerFi
 /* 8138785C 00055C5C  38 80 00 00 */	li r4, 0x0
 /* 81387860 00055C60  38 A0 00 00 */	li r5, 0x0
-/* 81387864 00055C64  48 01 50 D9 */	bl fn_8139C93C
+/* 81387864 00055C64  48 01 50 D9 */	bl setEventHandler__Q33ipl5scene6ButtonFPQ23gui12EventHandlerPQ23gui12EventHandler
 /* 81387868 00055C68  80 7F 00 68 */	lwz r3, 0x68(r31)
 /* 8138786C 00055C6C  38 80 00 01 */	li r4, 0x1
 /* 81387870 00055C70  38 63 02 8C */	addi r3, r3, 0x28c
@@ -402,11 +402,11 @@
 /* 81387954 00055D54  80 65 00 64 */	lwz r3, 0x64(r5)
 /* 81387958 00055D58  48 08 37 E1 */	bl getScene__Q33ipl5scene7ManagerFi
 /* 8138795C 00055D5C  7C 7F 1B 78 */	mr r31, r3
-/* 81387960 00055D60  48 01 4F B5 */	bl fn_8139C914
+/* 81387960 00055D60  48 01 4F B5 */	bl isActive__Q33ipl5scene6ButtonCFv
 /* 81387964 00055D64  2C 03 00 00 */	cmpwi r3, 0x0
 /* 81387968 00055D68  41 82 00 0C */	beq .L_81387974
 /* 8138796C 00055D6C  7F E3 FB 78 */	mr r3, r31
-/* 81387970 00055D70  48 01 4B FD */	bl fn_8139C56C
+/* 81387970 00055D70  48 01 4B FD */	bl update__Q33ipl5scene6ButtonFv
 .L_81387974:
 /* 81387974 00055D74  80 1E 00 64 */	lwz r0, 0x64(r30)
 /* 81387978 00055D78  2C 00 00 00 */	cmpwi r0, 0x0
@@ -602,10 +602,10 @@
 .L_81387BF0:
 /* 81387BF0 00055FF0  7F C3 F3 78 */	mr r3, r30
 /* 81387BF4 00055FF4  38 80 00 0C */	li r4, 0xc
-/* 81387BF8 00055FF8  48 01 58 31 */	bl fn_8139D428
+/* 81387BF8 00055FF8  48 01 58 31 */	bl reserveAnm__Q33ipl5scene6ButtonFi
 /* 81387BFC 00055FFC  7F C3 F3 78 */	mr r3, r30
 /* 81387C00 00056000  38 80 00 0B */	li r4, 0xb
-/* 81387C04 00056004  48 01 58 25 */	bl fn_8139D428
+/* 81387C04 00056004  48 01 58 25 */	bl reserveAnm__Q33ipl5scene6ButtonFi
 /* 81387C08 00056008  80 7D 00 68 */	lwz r3, 0x68(r29)
 /* 81387C0C 0005600C  38 1F 00 06 */	addi r0, r31, 0x6
 /* 81387C10 00056010  54 04 04 3E */	clrlwi r4, r0, 16
@@ -808,21 +808,21 @@
 /* 81387EA4 000562A4  40 82 00 64 */	bne .L_81387F08
 /* 81387EA8 000562A8  7F C3 F3 78 */	mr r3, r30
 /* 81387EAC 000562AC  38 80 00 1B */	li r4, 0x1b
-/* 81387EB0 000562B0  48 01 55 79 */	bl fn_8139D428
+/* 81387EB0 000562B0  48 01 55 79 */	bl reserveAnm__Q33ipl5scene6ButtonFi
 /* 81387EB4 000562B4  7F C3 F3 78 */	mr r3, r30
 /* 81387EB8 000562B8  38 80 00 0C */	li r4, 0xc
-/* 81387EBC 000562BC  48 01 55 6D */	bl fn_8139D428
+/* 81387EBC 000562BC  48 01 55 6D */	bl reserveAnm__Q33ipl5scene6ButtonFi
 /* 81387EC0 000562C0  7F C3 F3 78 */	mr r3, r30
 /* 81387EC4 000562C4  38 80 00 00 */	li r4, 0x0
 /* 81387EC8 000562C8  38 A0 00 23 */	li r5, 0x23
-/* 81387ECC 000562CC  48 01 55 91 */	bl fn_8139D45C
+/* 81387ECC 000562CC  48 01 55 91 */	bl reserveText__Q33ipl5scene6ButtonFiUl
 /* 81387ED0 000562D0  7F C3 F3 78 */	mr r3, r30
 /* 81387ED4 000562D4  38 80 00 01 */	li r4, 0x1
 /* 81387ED8 000562D8  38 A0 00 29 */	li r5, 0x29
-/* 81387EDC 000562DC  48 01 55 81 */	bl fn_8139D45C
+/* 81387EDC 000562DC  48 01 55 81 */	bl reserveText__Q33ipl5scene6ButtonFiUl
 /* 81387EE0 000562E0  7F C3 F3 78 */	mr r3, r30
 /* 81387EE4 000562E4  38 80 00 0F */	li r4, 0xf
-/* 81387EE8 000562E8  48 01 55 41 */	bl fn_8139D428
+/* 81387EE8 000562E8  48 01 55 41 */	bl reserveAnm__Q33ipl5scene6ButtonFi
 /* 81387EEC 000562EC  3C 60 81 09 */	lis r3, sSystem__Q23ipl3snd@ha
 /* 81387EF0 000562F0  3C 80 81 64 */	lis r4, lbl_81647D9A@ha
 /* 81387EF4 000562F4  38 63 99 2C */	addi r3, r3, sSystem__Q23ipl3snd@l
@@ -1089,7 +1089,7 @@
 	.4byte calcCommonAfter__Q33ipl5scene13AddressAddSelFv
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte fn_8139D848
+	.4byte onEvent__Q33ipl5scene22ButtonEventHandlerBaseFUlUlPv
 	.4byte setManager__Q23gui12EventHandlerFPQ23gui7Manager
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv

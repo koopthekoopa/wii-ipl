@@ -31,7 +31,7 @@ namespace ipl {
      * @note Size: 0xBC
      */
     ErrorHandler::ErrorHandler(EGG::Heap* pHeap)
-    : mReady(FALSE), mType(IPL_ERROR_UNK), mMessageID(0), mpArcData(NULL) {
+    : mReady(FALSE), mType(NONE), mMessageID(MESG_GENERIC), mpArcData(NULL) {
 
         // Decompress the archive file.
         mArcSize = Rvl_decode_ash_size(fatalDlg_ash);
@@ -79,7 +79,7 @@ namespace ipl {
      * @note Size: 0x14C
      */
     void ErrorHandler::check() {
-        if (mType != 0) {
+        if (mType != NONE) {
             message::Message pErrorMsg = message::Message();
             u8* pMsg;
 

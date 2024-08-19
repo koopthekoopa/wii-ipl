@@ -13,21 +13,21 @@ namespace ipl {
     class ErrorHandler {
         public:
             enum Type {
-                IPL_ERROR_UNK = 0,
-                IPL_ERROR_UNK_DEFAULT
+                NONE = 0,
+                DEFAULT
             };
             
             enum {
                 /* An error has occurred. */
-                MESG_ERROR_GENERIC = 0,
+                MESG_GENERIC = 0,
                 /* The Wii System Memory is damaged. */
-                MESG_ERROR_NAND_ERROR,
+                MESG_NAND,
                 /* The system files are corrupted. */
-                MESG_ERROR_CONTENT_ERROR,
+                MESG_CONTENT,
                 /* This channel can't be used. */
-                MESG_ERROR_ES_ERROR,
+                MESG_CHANNEL,
                 /* Error:003 unauthorized device has been detected. */
-                MESG_ERROR_KEY_ERROR
+                MESG_KEY
             };
 
             /**
@@ -36,7 +36,7 @@ namespace ipl {
             ErrorHandler(EGG::Heap* pHeap);
 
             /**
-             * @brief Sets the error type.
+             * @brief Display the error screen.
              * 
              * @param type The error type.
              * @param msgId The message ID that will be displayed.
@@ -45,24 +45,17 @@ namespace ipl {
              * @param arg3 Unknown. Left as `-1`.
              */
             void set(Type type, u32 msgId, const char* arg1 = NULL, int arg2 = 0, int arg3 = -1);
+            
             /**
-             * @brief Run the error screen.
-             */
-            void check();
-            /**
-             * @brief Update the error screen.
-             */
-            void calc();
-            /**
-             * @brief Log the error to the NAND log (`shared2/test2/nanderr.log`)
+             * @brief Log the error to the NAND log. (`shared2/test2/nanderr.log`)
              */
             void log(const char* type, int code, const char* file, int line);
-            /**
-             * @brief Draw the error screen.
-             */
-            void draw();
 
         private:
+            void draw();
+            void check();
+            void calc();
+            
             BOOL            mReady;     // 0x00
 
             Type            mType;      // 0x04
@@ -77,6 +70,8 @@ namespace ipl {
             u32             mArcSize;   // 0x1C
 
             layout::Object* mpLayout;   // 0x20
+        
+        friend class System;
     };
 }
 

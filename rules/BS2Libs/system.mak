@@ -1,5 +1,3 @@
-SYSTEM_CFLAGS	=	-O4,s -ipa file $(COMMON_CCFLAGS)
-SYSTEM_CCPATH	=	$(CW_GC_30A52)
 SYSTEM_OBJECTS	=	$(BS2_OBJASM_PATH)/system/rvl_dec.o \
 					$(BS2_OBJ_PATH)/system/RIPL_BoardRecord.o \
 					$(BS2_OBJASM_PATH)/system/iplSystem.o \
@@ -57,16 +55,16 @@ SYSTEM_OBJECTS	=	$(BS2_OBJASM_PATH)/system/rvl_dec.o \
 DEPENDENCIES += $(SYSTEM_OBJECTS:.o=.d)
 
 $(BS2_OBJ_PATH)/system/%.o: $(BS2_SRC_PATH)/system/%.c
-	$(call BuildCSources,$(SYSTEM_CCPATH),$(SYSTEM_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))
+	$(call BuildCSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))
 
 $(BS2_OBJ_PATH)/system/%.o: $(BS2_SRC_PATH)/system/%.cpp
-	$(call BuildCPPSources,$(SYSTEM_CCPATH),$(SYSTEM_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))
+	$(call BuildCPPSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))
 
 $(BS2_OBJASM_PATH)/system/%.o: $(BS2_ASM_PATH)/system/%.s
 	$(call BuildASMSources,$(INCLUDE_ROOT))
 
 $(BS2_BLD_PATH)/system.a: $(SYSTEM_OBJECTS)
-	$(call LinkLibrary,$(SYSTEM_CCPATH),$^,$@)
+	$(call LinkLibrary,$(BS2_CMN_CCPATH),$^,$@)
 
 
 
