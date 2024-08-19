@@ -1,12 +1,12 @@
-#ifndef IPL_MESSAGE_BASE_H
-#define IPL_MESSAGE_BASE_H
+#ifndef IPL_WWW_MESSAGE_H
+#define IPL_WWW_MESSAGE_H
 
 #include <decomp.h>
 
 #include <revolution.h>
 
-namespace ipl {
-    namespace utility {
+namespace ext_ead {
+    namespace www {
         class ut_message_base {
             public:
                 BOOL    SendMessage(OSMessage msg, s32 flags);
