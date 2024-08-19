@@ -126,9 +126,8 @@ namespace ipl {
                 }
                 break;
             }
-            case FATAL_STATE_SHUTDOWN_VIDEO: {  // Shutdown the video when it is done fading out
+            case FATAL_STATE_SHUTDOWN_VIDEO: {  // Shutdown the video when it is done fading out (no need as it's already doing that in `FATAL_STATE_SHUTDOWN_OS`)
                 if (System::getArg()->getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
-                    // no need
                     VISetBlack(TRUE);
                     VIFlush();
 

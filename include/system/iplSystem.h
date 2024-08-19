@@ -64,6 +64,9 @@ namespace ipl {
                     EGG::ColorFader*    getErrorFader()         { return mpErrorFader; }
                     /** @return The fader object. */
                     EGG::ColorFader*    getFader()              { return mpFader; }
+                    /** @return Whether the NAND has enough capacity. */
+                    bool                isNandFull()            { return mbIsNandFull; }
+                    void                setNandFull(bool value) { mbIsNandFull = value; }
                 
                 private:
                     u8                  unk_0x00[0x64];
@@ -111,7 +114,7 @@ namespace ipl {
 
                     bool                mbResetDisabled;        // 0x2B9
                     bool                unk_0x2BA;
-                    bool                mbUnkBool2;             // 0x2BB
+                    bool                mbIsNandFull;           // 0x2BB
                     bool                mbUnkBool3;             // 0x2BC
 
                     u8                  unk_0x2BD[0x1B];

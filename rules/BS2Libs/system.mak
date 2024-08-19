@@ -8,7 +8,7 @@ SYSTEM_OBJECTS	=	$(BS2_OBJASM_PATH)/system/rvl_dec.o \
 					$(BS2_OBJASM_PATH)/system/iplNandShared.o \
 					$(BS2_OBJASM_PATH)/system/iplNandMeta.o \
 					$(BS2_OBJASM_PATH)/system/iplNandManager.o \
-					$(BS2_OBJASM_PATH)/system/iplNandWall.o \
+					$(BS2_OBJ_PATH)/system/iplNandWall.o \
 					$(BS2_OBJASM_PATH)/system/iplFramework.o \
 					$(BS2_OBJASM_PATH)/system/iplException.o \
 					$(BS2_OBJ_PATH)/system/iplMessage.o \

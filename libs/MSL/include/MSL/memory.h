@@ -1,5 +1,5 @@
-#ifndef MSL_MSL_MEMORY_H
-#define MSL_MSL_MEMORY_H
+#ifndef MSL_MEMORY_H
+#define MSL_MEMORY_H
 
 #include <size_t.h>
 
@@ -14,6 +14,6 @@ void* memcpy(void* dest, const void* src, size_t count);
 }
 #endif
 
-#endif // MSL_MSL_MEMORY_H
+#endif // MSL_MEMORY_H
 
 
