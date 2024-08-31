@@ -1,5 +1,9 @@
 #include "system/iplMessage.h"
 
+#include <revolution/sc.h>
+
+#include "system/iplSystem.h"
+
 namespace ipl {
     namespace message {
         /**
@@ -28,12 +32,12 @@ namespace ipl {
                 #define CURRENT_SECTION ((MESGDataHeader*)(msgData))
 
                 switch (CURRENT_SECTION->signature) {
-                    case 'INF1': { // If it is the information section
+                    case 'INF1': { // The information section
                         mpInfoHeader = (MESGInfoHeader*)(msgData);
                         mpInfoData = (MESGInfoBlock*)(msgData + sizeof(MESGInfoHeader));
                         break;
                     }
-                    case 'DAT1': { // If it is the data section
+                    case 'DAT1': { // The data section
                         mspMessageData = (u8*)(msgData + sizeof(MESGDataHeader));
                         break;
                     }

@@ -1,4 +1,4 @@
-//#define UNIT_DOESNT_MATCH
+#define UNIT_DOESNT_MATCH
 
 #include <decomp.h>
 
@@ -7,11 +7,7 @@
 #include <cstring>
 
 namespace ipl {
-    /**
-     * @note Address 0x81089008
-     * @note Size 0x2D8
-    */
-    System::Arg System::smArg;
+    System::Arg System::smArg;  /** @note Address 0x81089008 (4.3J/U/E) Size 0x2D8 */
     
     /**
      * @note Address 0x81332C24

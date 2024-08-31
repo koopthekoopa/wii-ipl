@@ -9,6 +9,20 @@
 
 #include "layout/iplLayout.h"
 
+/* An error has occurred. */
+#define MESG_ERR_GENERIC    0
+/* The Wii System Memory is damaged. */
+#define MESG_ERR_NAND       1
+/* The system files are corrupted. */
+#define MESG_ERR_CONTENT    2
+/* This channel can't be used. */
+#define MESG_ERR_CHANNEL    3
+/* Error:003 unauthorized device has been detected. */
+#define MESG_ERR_KEY        4
+
+#define ERR_NONE    ipl::ErrorHandler::NONE
+#define ERR_DEFAULT ipl::ErrorHandler::DEFAULT
+
 namespace ipl {
     class ErrorHandler {
         public:
@@ -16,28 +30,12 @@ namespace ipl {
                 NONE = 0,
                 DEFAULT
             };
-            
-            enum {
-                /* An error has occurred. */
-                MESG_GENERIC = 0,
-                /* The Wii System Memory is damaged. */
-                MESG_NAND,
-                /* The system files are corrupted. */
-                MESG_CONTENT,
-                /* This channel can't be used. */
-                MESG_CHANNEL,
-                /* Error:003 unauthorized device has been detected. */
-                MESG_KEY
-            };
 
-            /**
-             * @param pHeap The work heap.
-             */
+            /** @param pHeap The work heap. */
             ErrorHandler(EGG::Heap* pHeap);
 
             /**
              * @brief Display the error screen.
-             * 
              * @param type The error type.
              * @param msgId The message ID that will be displayed.
              * @param arg1 Unknown. Left as `NULL`.
@@ -46,10 +44,12 @@ namespace ipl {
              */
             void set(Type type, u32 msgId, const char* arg1 = NULL, int arg2 = 0, int arg3 = -1);
             
-            /**
-             * @brief Log the error to the NAND log. (`shared2/test2/nanderr.log`)
-             */
-            void log(const char* type, int code, const char* file, int line);
+            /** @brief Log the error to the NAND log. (`shared2/test2/nanderr.log`)
+             * @param type The error type.
+             * @param result The result it thrown.
+            */
+            #define Log(type, result) log(type, result, __FILE__, __LINE__)
+            void log(const char* type, int result, const char* file, int line);
 
         private:
             void draw();

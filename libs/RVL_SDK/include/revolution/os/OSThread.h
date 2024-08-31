@@ -13,7 +13,7 @@ typedef s32 OSPriority;
 #define OS_THREAD_SPECIFIC_MAX  2
 
 typedef struct OSThread OSThread;
-typedef struct OSMutex OSMutex;
+typedef struct OSMutex  OSMutex;
 
 typedef struct {
     OSThread*  head;    // 0x00
@@ -37,33 +37,50 @@ typedef struct {
 
 struct OSThread {
     OSContext       context;                            // 0x00
-
+    
     u16             state;                              // 0x2C8
-    u16             attr;                               // 0x2CA
+    u16             flags;                              // 0x2CA
+    
     s32             suspend;                            // 0x2CC
     OSPriority      priority;                           // 0x2D0
-    OSPriority      base;                               // 0x2D4
-    void*           val;                                // 0x2D8
-
+    
+    s32             base;                               // 0x2D4
+    u32             val;                                // 0x2D8
+    
     OSThreadQueue*  queue;                              // 0x2DC
-    OSThreadLink    link;                               // 0x2E0
-
+    OSThread*       next;                               // 0x2E0
+    OSThread*       prev;                               // 0x2E4
+    
     OSThreadQueue   queueJoin;                          // 0x2E8
-
+    
     OSMutex*        mutex;                              // 0x2F0
-    OSMutexQueue    queueMutex;                         // 0x2F8
-
-    OSThreadLink    linkActive;                         // 0x300
-
-    u8*             stackBase;                          // 0x308
-    u32*            stackEnd;                           // 0x30C
-
-    s32             error;                              // 0x310
-    void*           specific[OS_THREAD_SPECIFIC_MAX];   // 0x314
+    OSMutexQueue    queueMutex;                         // 0x2F4
+    
+    OSThread*       nextActive;                         // 0x2FC
+    OSThread*       prevActive;                         // 0x300
+    
+    u32*            stackBegin;                         // 0x304
+    u32*            stackEnd;                           // 0x308
+    
+    s32             error;                              // 0x30C
+    void*           specific[OS_THREAD_SPECIFIC_MAX];   // 0x310
 };
 
-OSThread* OSGetCurrentThread();
-void OSCancelThread(OSThread* pThread);
+typedef void (*OSIdleFunction)(void* pParam);
+typedef void (*OSSwitchThreadCallback)(OSThread* pFrom, OSThread* pTo);
+
+BOOL        OSCreateThread(OSThread* pThread, void* (*ThreadFunc)(void*), void* pParam, void* pStack, u32 stackSize, OSPriority priority, u16 attr);
+BOOL        OSJoinThread(OSThread* pThread, void* val);
+BOOL        OSIsThreadTerminated(OSThread* pThread);
+BOOL        OSIsThreadSuspended(OSThread* pThread);
+BOOL        OSSetThreadPriority(OSThread* pThread, OSPriority priority);
+
+s32         OSResumeThread(OSThread* pThread);
+s32         OSSuspendThread(OSThread* pThread);
+
+OSThread*   OSGetCurrentThread();
+
+void        OSCancelThread(OSThread* pThread);
 
 #ifdef __cplusplus
 }

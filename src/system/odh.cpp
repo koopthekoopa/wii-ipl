@@ -12,7 +12,7 @@ s32 CArGBAOdh::ScaleLimit(s32 scale) {
     if (newScale < 0) {
         newScale = 0;
     } else if (scale > 255) {
-        newScale = 0xFF;
+        newScale = 255;
     }
     
     return newScale;

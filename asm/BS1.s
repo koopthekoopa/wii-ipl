@@ -1,5 +1,5 @@
 /*-------------------------------------------------*
-             Wii Menu Boot Sequence 1
+               Wii Menu Boot Stage 1
          Disassembled from Version 4.3 (PAL)
     but they are the exact same in every version
 *--------------------------------------------------*/

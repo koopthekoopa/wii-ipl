@@ -2,15 +2,18 @@
 
 #include "system/iplSystem.h"
 #include "system/iplHomeButton.h"
+#include "system/iplMessage.h"
 
 namespace ipl {
     /**
      * @note Address: 0x81356D4C (4.3U)
      * @note Size: 0x64
      */
-    WarningHandler::WarningHandler(EGG::Heap* pHeap)
-    : mType(NONE), mMessageID(0) {
-        mpDialog = new(pHeap, 4) DialogWindow(pHeap);
+    WarningHandler::WarningHandler(EGG::Heap* pHeap) :
+    mType(NONE),
+    mMessageID(0) {
+        
+        mpDialog = new(pHeap, CLASS_HEAP) DialogWindow(pHeap);
     }
 
     /**
@@ -21,14 +24,14 @@ namespace ipl {
         mType = type;
         mMessageID = msgId;
 
-        System::getArg()->getHomeButton()->disable();
+        System::getHomeMenu()->disable();
 
         if (mType != NONE) {
-            mpDialog->callBtn1(msgId, 46 /* message ID for "OK" */);
+            mpDialog->callBtn1(msgId, MESG_CMN_OK);
             System::warning_run();
         }
 
-        System::getArg()->getHomeButton()->enable();
+        System::getHomeMenu()->enable();
     }
 
     /**

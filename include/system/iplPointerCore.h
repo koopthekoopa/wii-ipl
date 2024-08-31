@@ -14,10 +14,10 @@
 
 namespace ipl {
     enum {
-        POINTER_LYT_TYPE_POINT = 0,
-        POINTER_LYT_TYPE_GRABBING,
-        POINTER_LYT_TYPE_UNK2,
-        POINTER_LYT_TYPE_UNK3
+        POINTER_LYT_POINT = 0,
+        POINTER_LYT_GRABBING,
+        POINTER_LYT_UNK2,
+        POINTER_LYT_UNK3
     };
 
     class Pointer;

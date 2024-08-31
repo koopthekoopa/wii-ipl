@@ -10,8 +10,8 @@
 #include "utility/iplMath.h"
 
 namespace ipl {
-    #define MINIMUM_SCROLL_LENGTH    32
-    #define MAXIMUM_SCROLL_LENGTH    128
+    #define MINIMUM_SCROLL_LENGTH    32.f
+    #define MAXIMUM_SCROLL_LENGTH    128.f
 
     /**
      * @note Address: 0x816354D4 (4.3U)
@@ -43,12 +43,19 @@ namespace ipl {
      * @note Address: 0x81344188 (4.3U)
      * @note Size: 0xE8
      */
-    Pointer::Pointer(EGG::Heap* pHeap)
-    : mMaybeType(-1), mOriginPos(0, 0), mArrowLength(MINIMUM_SCROLL_LENGTH), mPointDirection(PNT_DOWN), mScrolling(false), mVisible(true), mCore() {
-        mpLayoutArchive = System::getArg()->getNandManager()->readLayout(pHeap, "cursor.ash", false);
+    Pointer::Pointer(EGG::Heap* pHeap) :
+    unk_0x28(-1),
+    mOriginPos(0.f, 0.f),
+    mArrowLength(MINIMUM_SCROLL_LENGTH),
+    mPointDirection(PNT_DOWN),
+    mScrolling(false),
+    mVisible(true),
+    mCore() {
+        
+        mpLayoutArchive = System::getNand()->readLayout(pHeap, "cursor.ash", false);
         
         for (int i = 0; i < MAX_LAYOUT_FILES; i++) {
-            mpLayout[i] = new(pHeap, 4) layout::Object(pHeap, mpLayoutArchive, "arc", scLayoutName[i]);
+            mpLayout[i] = new(pHeap, CLASS_HEAP) layout::Object(pHeap, mpLayoutArchive, "arc", scLayoutName[i]);
             mpLayout[i]->finishBinding();
         }
     }
@@ -62,40 +69,36 @@ namespace ipl {
         mCore.calc(this);
 
         // Update the scrolling cursor
-        if (mMaybeType >= 0) {
-            nw4r::lyt::Pane *pArrowPane, *pArrowRoot, *pOriginPane;
-            f32 newArrowLength, newYScale;
-
-            // Get the Arrow Panes
-            pArrowRoot =    mpLayout[LYT_SCROLLER_ID]->GetRootPane()->FindPaneByName("N_BArw");
-            pArrowPane =    mpLayout[LYT_SCROLLER_ID]->GetRootPane()->FindPaneByName("W_BArw");
-            pOriginPane =   mpLayout[LYT_SCROLLER_ID]->GetRootPane()->FindPaneByName("BArwBase");
+        if (unk_0x28 >= 0) {
+            nw4r::lyt::Pane* pRootPane =    mpLayout[LYT_SCROLLER_ID]->GetRootPane()->FindPaneByName("N_BArw");
+            nw4r::lyt::Pane* pLengthPane =  mpLayout[LYT_SCROLLER_ID]->GetRootPane()->FindPaneByName("W_BArw");
+            nw4r::lyt::Pane* pOriginPane =  mpLayout[LYT_SCROLLER_ID]->GetRootPane()->FindPaneByName("BArwBase");
 
             // Arrow Position
-            pArrowRoot->SetTranslate(mOriginPos);
+            pRootPane->SetTranslate(mOriginPos);
             pOriginPane->SetTranslate(mOriginPos);
 
             // Arrow Length
-            nw4r::lyt::Size arrowSize   = pArrowPane->GetSize();
-            // Limit the length between MINIMUM_SCROLL_LENGTH and MAXIMUM_SCROLL_LENGTH
-            newArrowLength              = UTILITY_CLAMP(mArrowLength, MINIMUM_SCROLL_LENGTH, MAXIMUM_SCROLL_LENGTH);
-            arrowSize.height            = newArrowLength;
+            nw4r::lyt::Size arrowSize =     pLengthPane->GetSize();
+            f32 newArrowLength =            UTILITY_CLAMP(mArrowLength, MINIMUM_SCROLL_LENGTH, MAXIMUM_SCROLL_LENGTH);
+            arrowSize.height =              newArrowLength;
 
-            // Set the new length
-            pArrowPane->SetSize(arrowSize);
+            pLengthPane->SetSize(arrowSize);
 
             // Arrow Scale
             // Y Scale:  1.0 = Down
             // Y Scale: -1.0 = Up
+            f32 arrowDirection;
             if (mPointDirection == PNT_DOWN) {
-                newYScale = 1.0;
+                arrowDirection = 1.0f;
             }
             else {
-                newYScale = -1.0;
+                arrowDirection = -1.0f;
             }
-            pArrowRoot->SetScale(math::VEC2(1.0, newYScale));
+            pRootPane->SetScale(math::VEC2(1.0f, arrowDirection));
 
-            pArrowRoot->SetVisible(mScrolling);
+            // Visible panes
+            pRootPane->SetVisible(mScrolling);
             pOriginPane->SetVisible(!mScrolling);
 
             // Calculate the scroller layout
@@ -111,7 +114,7 @@ namespace ipl {
         if (mVisible) {
             mCore.draw();
             
-            if (mMaybeType >= 0) {
+            if (unk_0x28 >= 0) {
                 mpLayout[LYT_SCROLLER_ID]->draw();
             }
         }
@@ -141,11 +144,11 @@ namespace ipl {
         int grabId = LYT_INVALID_ID;
 
         switch (type) {
-            case POINTER_LYT_TYPE_POINT: {
+            case POINTER_LYT_POINT: {
                 grabId = LYT_POINT_ID;
                 break;
             }
-            case POINTER_LYT_TYPE_GRABBING: {
+            case POINTER_LYT_GRABBING: {
                 grabId = LYT_GRAB_ID;
                 break;
             }

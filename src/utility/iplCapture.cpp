@@ -8,10 +8,15 @@ namespace ipl {
          * @note Address: 0x813632A8 (4.3U)
          * @note Size: 0x9C
          */
-        Capture::Capture(EGG::Heap* pHeap, int x, int y, int width, int height, _GXTexFmt texFmt)
-        : mXPos(x), mYPos(y), mTextureWidth(width), mTextureHeight(height), mTextureFormat(texFmt) {
+        Capture::Capture(EGG::Heap* pHeap, int x, int y, int width, int height, _GXTexFmt texFmt) :
+        mXPos(x),
+        mYPos(y),
+        mTextureWidth(width),
+        mTextureHeight(height),
+        mTextureFormat(texFmt) {
+            
             mTextureSize = GXGetTexBufferSize(width, height, texFmt, GX_FALSE, 1);
-            mTextureBuffer = new(pHeap, DOLPHIN_ALIGNMENT) u8[mTextureSize];
+            mTextureBuffer = new(pHeap, BUFFER_HEAP) u8[mTextureSize];
             
             GXInitTexObj(&mTexObj, mTextureBuffer, mTextureWidth, mTextureHeight, mTextureFormat, GX_CLAMP, GX_CLAMP, GX_FALSE);
         }

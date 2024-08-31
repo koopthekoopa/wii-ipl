@@ -5,23 +5,17 @@
 
 #include <cstring>
 
-#define INODE_UNKNOWN 0x1800
-#define BLOCKS_UNKNOWN 0x8000
+#define INODE_MAX   0x1800
+#define BLOCKS_MAX  0x8000
 
 namespace ipl {
     namespace nandwall {
-        using namespace nand;
+        using namespace nand::wrapper;
 
-        /**
-         * @note Address: 0x816986B0 (4.3U)
-         * @note Size: 0x8
-         */
-        u32 user_used_fsblocks, user_used_inodes;
-        /**
-         * @note Address: 0x816986B8 (4.3U)
-         * @note Size: 0x8
-         */
-        u32 global_free_fsblock, global_free_inode;
+        u32 user_used_fsblocks;     /** @note Address: 0x816986B0 (4.3U), Size: 0x4 */
+        u32 user_used_inodes;       /** @note Address: 0x816986B4 (4.3U), Size: 0x4 */
+        u32 global_free_fsblock;    /** @note Address: 0x816986B8 (4.3U), Size: 0x4 */
+        u32 global_free_inode;      /** @note Address: 0x816986BC (4.3U), Size: 0x4 */
 
         /**
          * @note Address: 0x8133DC0C (4.3U)
@@ -30,10 +24,10 @@ namespace ipl {
         void throwNandCheckCommand(void* unusedBuffer) {
             NANDFileSystemStatus status;
 
-            wrapper::SecretGetUserUsage(&user_used_fsblocks, &user_used_inodes);
+            SecretGetUserUsage(&user_used_fsblocks, &user_used_inodes);
 
             memset(&status, 0, sizeof(status));
-            wrapper::SecretGetFileSystemStatus(&status);
+            SecretGetFileSystemStatus(&status);
 
             calcGlobalUsage_(&global_free_fsblock, &global_free_inode, &status);
 
@@ -44,10 +38,10 @@ namespace ipl {
             OSReport("**********************************************\n");
 
             if (!isNandCapacity()){
-                System::getArg()->setNandFull(true);
+                System::setNandFull(true);
             }
             else {
-                System::getArg()->setNandFull(false);
+                System::setNandFull(false);
             }
         }
 
@@ -74,8 +68,8 @@ namespace ipl {
             u32 used = pStatus->usedBlocks;
             u32 size = bad + reserved + 0x140;
 
-            *freeINodes = (INODE_UNKNOWN - 1) - pStatus->usedInodes;
-            *freeBlocks = (BLOCKS_UNKNOWN - size) - pStatus->usedBlocks;
+            *freeINodes = (INODE_MAX - 1) - pStatus->usedInodes;
+            *freeBlocks = (BLOCKS_MAX - size) - pStatus->usedBlocks;
         }
 
         /**
@@ -85,11 +79,12 @@ namespace ipl {
         BOOL checkNandCapacityAppBootable() {
             u32 usedDirBlocks = 0;
             u32 usedDirINodes = 0;
-            wrapper::SecretGetUsage("/tmp", &usedDirBlocks, &usedDirINodes);
+
+            SecretGetUsage("/tmp", &usedDirBlocks, &usedDirINodes);
 
             NANDFileSystemStatus status;
             memset(&status, 0, sizeof(status));
-            wrapper::SecretGetFileSystemStatus(&status);
+            SecretGetFileSystemStatus(&status);
 
             u32 freeBlocks = 0;
             u32 freeINodes = 0;

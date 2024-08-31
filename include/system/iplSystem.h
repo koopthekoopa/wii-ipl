@@ -13,7 +13,9 @@
 #include "system/iplResetHandler.h"
 #include "system/iplWarningHandler.h"
 #include "system/iplDialogWindow.h"
+#include "system/iplPointer.h"
 #include "system/iplHomeButton.h"
+#include "system/iplMessage.h"
 #include "system/iplSaveData.h"
 #include "system/iplNwc24Manager.h"
 #include "system/iplPostmanManager.h"
@@ -31,52 +33,26 @@ namespace ipl {
 
                 public:
                     /** @return The Message Data of the language. */
-                    u8* getMessageData()                        { return mpMsgData; }
+                    u8* getBuffer() { return mpMsgData; }
 
                 friend class System;
-            } ArgRegionData;
+            } UnkRegionData;
 
             class Arg {
                 public:
                     Arg();
 
-                    /** @return The Scene Manager object. */
-                    scene::Manager*     getSceneManager()       { return mpSceneManager; }
-                    /** @return The Content Manager object. */
-                    nand::Manager*      getNandManager()        { return mpNandManager; }
-                    /** @return The WiiConnect24 Manager object. */
-                    nwc24::Manager*     getNwc24Manager()       { return mpNwc24Manager; }
-                    /** @return The Save Data Manager object. */
-                    savedata::Manager*  getSaveDataManager()    { return mpSaveDataManager; }
-                    /** @return The Error Handler object. */
-                    ErrorHandler*       getErrorHandler()       { return mpErrorHandler; }
-                    /** @return The Reset Handler object. */
-                    ResetHandler*       getResetHandler()       { return mpResetHandler; }
-                    /** @return The Warning Handler object. */
-                    WarningHandler*     getWarningHandler()     { return mpWarningHandler; }
-                    /** @return The Warning Handler object. */
-                    postman::Manager*   getPostmanManager()     { return mpPostmanManager; }
-                    /** @return The HOME Menu object. */
-                    HomeButton*         getHomeButton()         { return mpHomeButton; }
-                    /** @return something */
-                    EGG::Thread*        getUnkThread()          { return mpUnkThread; }
-                    /** @return The Fader object for fading out a captured screen. */
-                    EGG::ColorFader*    getErrorFader()         { return mpErrorFader; }
-                    /** @return The fader object. */
-                    EGG::ColorFader*    getFader()              { return mpFader; }
-                    /** @return Whether the NAND has enough capacity. */
-                    bool                isNandFull()            { return mbIsNandFull; }
-                    void                setNandFull(bool value) { mbIsNandFull = value; }
-                
                 private:
-                    u8                  unk_0x00[0x64];
+                    u8                  unk_0x00[0x08];
+                    EGG::Heap*          mpMem1Heap;             // 0x08
+                    EGG::Heap*          mpMem2Heap;             // 0x0C
+                    u8                  unk_0x10[0x54];
 
                     scene::Manager*     mpSceneManager;         // 0x64
                     undefined4*         unk_0x68;
                     nand::Manager*      mpNandManager;          // 0x6C
 
-                    u8                  unk_0x70[0x1C];
-
+                    message::Message    mUnkMsg;                // 0x70
                     nwc24::Manager*     mpNwc24Manager;         // 0x8C
                     undefined4*         unk_0x90;
                     savedata::Manager*  mpSaveDataManager;      // 0x94
@@ -85,28 +61,29 @@ namespace ipl {
                     WarningHandler*     mpWarningHandler;       // 0xA0
                     postman::Manager*   mpPostmanManager;       // 0xA4
 
-                    u8                  unk_0xA8[0xC];
+                    u8                  unk_0xA8[0x4];
 
+                    DialogWindow*       mpDialog;               // 0xAC
+                    Pointer*            mpPointer;              // 0xB0
                     HomeButton*         mpHomeButton;           // 0xB4
-
-                    u8                  unk_0xB8[0x8];
-
+                    undefined4*         unk_0xB8;
+                    message::Manager*   mpMessage;              // 0xBC
                     EGG::Thread*        mpUnkThread;            // 0xC0
-                    EGG::ColorFader*    mpErrorFader;           // 0xC4
+                    EGG::ColorFader*    mpErrFader;             // 0xC4
                     EGG::ColorFader*    mpFader;                // 0xC8
 
                     u8                  unk_0xCC[0x64];
 
-                    ArgRegionData*      mpEngArg;               // 0x130
-                    ArgRegionData*      mpFraArg;               // 0x134
-                    ArgRegionData*      mpGerArg;               // 0x138
-                    ArgRegionData*      mpItaArg;               // 0x13C
-                    ArgRegionData*      mpJpnArg;               // 0x140
-                    ArgRegionData*      mpDutArg;               // 0x144
-                    ArgRegionData*      mpSpaArg;               // 0x148
-                    ArgRegionData*      mpChnSimpleArg;         // 0x14C
-                    ArgRegionData*      mpChnTraditionalArg;    // 0x150
-                    ArgRegionData*      mpKorArg;               // 0x154
+                    UnkRegionData*      mpEngMsg;               // 0x130
+                    UnkRegionData*      mpFraMsg;               // 0x134
+                    UnkRegionData*      mpGerMsg;               // 0x138
+                    UnkRegionData*      mpItaMsg;               // 0x13C
+                    UnkRegionData*      mpJpnMsg;               // 0x140
+                    UnkRegionData*      mpDutMsg;               // 0x144
+                    UnkRegionData*      mpSpaMsg;               // 0x148
+                    UnkRegionData*      mpChnMsg;               // 0x14C
+                    UnkRegionData*      mpChnTradMsg;           // 0x150
+                    UnkRegionData*      mpKorMsg;               // 0x154
 
                     u8                  unk_0x158[0x88];
                     OSAlarm             mUnkAlarm;              // 0x1E0
@@ -115,7 +92,7 @@ namespace ipl {
                     bool                mbResetDisabled;        // 0x2B9
                     bool                unk_0x2BA;
                     bool                mbIsNandFull;           // 0x2BB
-                    bool                mbUnkBool3;             // 0x2BC
+                    bool                mbSafeMode;             // 0x2BC
 
                     u8                  unk_0x2BD[0x1B];
 
@@ -124,14 +101,12 @@ namespace ipl {
         
             /**
              * @brief Initializes the system.
-             * 
              * @param argc The amount of arguments passed,
              * @param argv Array of arguments.
              */
             static void init(int argc, char** argv);
             /**
              * @brief Boots up the system.
-             * 
              * @note Run this function after `ipl::System::init`
              */
             static void run();
@@ -143,7 +118,6 @@ namespace ipl {
             static GXRenderModeObj*         getRenderModeObj();
             /**
              * @return The Wii Remotes of the IPL.
-             * 
              * @param chan The Wii Remote Player
              */
             static controller::Interface*   getController(int chan);
@@ -156,30 +130,66 @@ namespace ipl {
             
             
             /*****   INLINES   *****/
-            
 
-            /** @return The System work data. */
-            static Arg*         getArg()                    { return &smArg; }
-            /** @return The English work data. */
-            static ArgRegionData*   getEngArg()             { return smArg.mpEngArg; }
-            /** @return The French work data. */
-            static ArgRegionData*   getFraArg()             { return smArg.mpFraArg; }
-            /** @return The German work data. */
-            static ArgRegionData*   getGerArg()             { return smArg.mpGerArg; }
-            /** @return The Italian work data. */
-            static ArgRegionData*   getItaArg()             { return smArg.mpItaArg; }
-            /** @return The Japanese work data. */
-            static ArgRegionData*   getJpnArg()             { return smArg.mpJpnArg; }
-            /** @return The Dutch work data. */
-            static ArgRegionData*   getDutArg()             { return smArg.mpDutArg; }
-            /** @return The Spanish work data. */
-            static ArgRegionData*   getSpaArg()             { return smArg.mpSpaArg; }
-            /** @return The Chinese (simple) work data. */
-            static ArgRegionData*   getChnSimpleArg()       { return smArg.mpChnSimpleArg; }
-            /** @return The Chinese (traditional) data. */
-            static ArgRegionData*   getChnTraditionalArg()  { return smArg.mpChnTraditionalArg; }
-            /** @return The Korean work data. */
-            static ArgRegionData*   getKorArg()             { return smArg.mpKorArg; }
+            /** @return The English message data. */
+            static UnkRegionData*       getEngMsg()             { return smArg.mpEngMsg; }
+            /** @return The French message data. */
+            static UnkRegionData*       getFraMsg()             { return smArg.mpFraMsg; }
+            /** @return The German message data. */
+            static UnkRegionData*       getGerMsg()             { return smArg.mpGerMsg; }
+            /** @return The Italian message data. */
+            static UnkRegionData*       getItaMsg()             { return smArg.mpItaMsg; }
+            /** @return The Japanese message data. */
+            static UnkRegionData*       getJpnMsg()             { return smArg.mpJpnMsg; }
+            /** @return The Dutch message data. */
+            static UnkRegionData*       getDutMsg()             { return smArg.mpDutMsg; }
+            /** @return The Spanish message data. */
+            static UnkRegionData*       getSpaMsg()             { return smArg.mpSpaMsg; }
+            /** @return The Chinese (simple) message data. */
+            static UnkRegionData*       getChnMsg()             { return smArg.mpChnMsg; }
+            /** @return The Chinese (traditional) message data. */
+            static UnkRegionData*       getChnTradMsg()         { return smArg.mpChnTradMsg; }
+            /** @return The Korean message data. */
+            static UnkRegionData*       getKorMsg()             { return smArg.mpKorMsg; }
+
+
+
+            /** @return The Scene Manager object. */
+            static scene::Manager*      getSceneMgr()           { return smArg.mpSceneManager; }
+            /** @return The Content Manager object. */
+            static nand::Manager*       getNand()               { return smArg.mpNandManager; }
+            /** @return The WiiConnect24 Manager object. */
+            static nwc24::Manager*      getNwc24()              { return smArg.mpNwc24Manager; }
+            /** @return The Save Data Manager object. */
+            static savedata::Manager*   getSaveData()           { return smArg.mpSaveDataManager; }
+            /** @return The Error Handler object. */
+            static ErrorHandler*        getError()              { return smArg.mpErrorHandler; }
+            /** @return The Reset Handler object. */
+            static ResetHandler*        getReset()              { return smArg.mpResetHandler; }
+            /** @return The Warning Handler object. */
+            static WarningHandler*      getWarning()            { return smArg.mpWarningHandler; }
+            /** @return The Postman Handler object. */
+            static postman::Manager*    getPostman()            { return smArg.mpPostmanManager; }
+            /** @return The HOME Menu object. */
+            static HomeButton*          getHomeMenu()           { return smArg.mpHomeButton; }
+            /** @return The Dialog object. */
+            static DialogWindow*        getDialog()             { return smArg.mpDialog; }
+            /** @return The Pointer object. */
+            static Pointer*             getPointer()            { return smArg.mpPointer; }
+            /** @return The Message object. */
+            static message::Message*    getMessage()            { return smArg.mpMessage->getMessage(); }
+            /** @return something */
+            static EGG::Thread*         getUnkThread()          { return smArg.mpUnkThread; }
+            /** @return The Fader object for fading out to the error handler. */
+            static EGG::ColorFader*     getErrFader()           { return smArg.mpErrFader; }
+            /** @return The fader object. */
+            static EGG::ColorFader*     getFader()              { return smArg.mpFader; }
+            /** @return Whether the NAND has enough capacity. */
+            static bool                 isNandFull()            { return smArg.mbIsNandFull; }
+            static void                 setNandFull(bool value) { smArg.mbIsNandFull = value; }
+            /** @return Whether the system is in Maintenance Mode. */
+            static bool                 isSafeMode()            { return smArg.mbSafeMode; }
+            static void                 setSafeMode(bool value) { smArg.mbSafeMode = value; }
 
         private:
             static Arg  smArg;

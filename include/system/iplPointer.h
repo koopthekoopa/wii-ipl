@@ -24,22 +24,15 @@ namespace ipl {
 
     class Pointer {
         public:
-            /**
-             * @param pHeap The memory heap used for work.
-             */
+            /** @param pHeap The memory heap used for work. */
             Pointer(EGG::Heap* pHeap);
 
-            /**
-             * @brief Updates the Wii Remote Pointers.
-             */
+            /** @brief Updates the Wii Remote Pointers. */
             void            calc();
-            /**
-             * @brief Draws the Wii Remote Pointers.
-             */
+            /** @brief Draws the Wii Remote Pointers. */
             void            draw();
             /**
              * @brief Changes the state of a Wii Remote Pointer.
-             * 
              * @param chan The Wii Remote Player (0 - 3)
              * @param state The state that will change to.
              */
@@ -53,10 +46,8 @@ namespace ipl {
             void            changeType(int chan, int type);
             /**
              * @brief Gets the Layout Data of a Wii Remote Pointer.
-             *
              * @param chan The Wii Remote Player (0 - 3)
              * @param type The layout type that will return.
-             * 
              * @return The Layout Data as `ipl::layout::Object`
              */
             layout::Object* get_layout(int chan, int type);
@@ -65,7 +56,7 @@ namespace ipl {
             nand::LayoutFile*   mpLayoutArchive;                    // 0x00
             layout::Object*     mpLayout[MAX_LAYOUT_FILES];         // 0x04
             
-            int                 mMaybeType;                         // 0x28
+            int                 unk_0x28;
             math::VEC2          mOriginPos;                         // 0x2C
 
             f32                 mArrowLength;                       // 0x34

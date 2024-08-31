@@ -1,5 +1,6 @@
 #include "system/iplErrorHandler.h"
 
+#include <revolution/nand.h>
 #include <revolution/sc.h>
 
 #include <cstring>
@@ -23,19 +24,20 @@ extern u8 ipl_error_ned_bmg[];
 extern u8 ipl_error_chn_bmg[];
 extern u8 ipl_error_kor_bmg[];
 
-extern void NANDLoggingAddMessageAsync(int type, const char* format, ...); // here for now
-
 namespace ipl {
     /**
      * @note Address: 0x81356458 (4.3U)
      * @note Size: 0xBC
      */
-    ErrorHandler::ErrorHandler(EGG::Heap* pHeap)
-    : mReady(FALSE), mType(NONE), mMessageID(MESG_GENERIC), mpArcData(NULL) {
+    ErrorHandler::ErrorHandler(EGG::Heap* pHeap) :
+    mReady(FALSE),
+    mType(NONE),
+    mMessageID(MESG_ERR_GENERIC),
+    mpArcData(NULL) {
 
         // Decompress the archive file.
         mArcSize = Rvl_decode_ash_size(fatalDlg_ash);
-        mpArcData = new(pHeap, DOLPHIN_ALIGNMENT) u8[mArcSize];
+        mpArcData = new(pHeap, BUFFER_HEAP) u8[mArcSize];
 
         Rvl_decode(mpArcData, fatalDlg_ash);
 
@@ -66,7 +68,7 @@ namespace ipl {
         }
 
         curThread = OSGetCurrentThread();
-        if (curThread == System::getArg()->getUnkThread()->getMessageQueue()->queueSend.tail) {
+        if (curThread == System::getUnkThread()->getMessageQueue()->queueSend.tail) {
             check();
         }
         else {
@@ -80,7 +82,7 @@ namespace ipl {
      */
     void ErrorHandler::check() {
         if (mType != NONE) {
-            message::Message pErrorMsg = message::Message();
+            message::Message ErrorMsg = message::Message();
             u8* pMsg;
 
             // Get the message data by language.
@@ -122,14 +124,14 @@ namespace ipl {
                     break;
                 }
             }
-            pErrorMsg.setResource(pMsg);
+            ErrorMsg.setResource(pMsg);
 
-            // Get the text box pane from the layout.
+            // Set the on-screen text.
             nw4r::lyt::TextBox* pTextBox = (nw4r::lyt::TextBox*)mpLayout->GetRootPane()->FindPaneByName("TextBox_00");
-            pTextBox->SetString(pErrorMsg.getMessage(mMessageID));
+            pTextBox->SetString(ErrorMsg.getMessage(mMessageID));
 
-            // Fade out to display error screen.
-            System::getArg()->getErrorFader()->fadeOut();
+            // Prepare for error screen.
+            System::getErrFader()->fadeOut();
             System::err_run();
         }
     }
@@ -138,8 +140,8 @@ namespace ipl {
      * @note Address: 0x813566F8 (4.3U)
      * @note Size: 0x30
      */
-    void ErrorHandler::log(const char* type, int code, const char* file, int line) {
-        NANDLoggingAddMessageAsync(NULL, "%s error. [%d] %s line: %d", type, code, file, line);
+    void ErrorHandler::log(const char* type, int result, const char* file, int line) {
+        NANDLoggingAddMessageAsync(NULL, "%s error. [%d] %s line: %d", type, result, file, line);
     }
 
     /**
@@ -147,8 +149,8 @@ namespace ipl {
      * @note Size: 0x90
      */
     void ErrorHandler::calc() {
-        if (mReady == FALSE && System::getArg()->getErrorFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
-            System::getArg()->getErrorFader()->fadeIn();
+        if (mReady == FALSE && System::getErrFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+            System::getErrFader()->fadeIn();
             mReady = TRUE;
         }
 

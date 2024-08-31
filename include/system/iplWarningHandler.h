@@ -7,14 +7,17 @@
 
 #include "system/iplDialogWindow.h"
 
+#define WARN_NONE       ipl::WarningHandler::NONE
+#define WARN_DEFAULT    ipl::WarningHandler::DEFAULT
+
 namespace ipl {
     class WarningHandler {
-        enum Type {
-            NONE = 0,
-            DEFAULT
-        };
-
         public:
+            enum Type {
+                NONE = 0,
+                DEFAULT
+            };
+
             WarningHandler(EGG::Heap* pHeap);
 
             /**

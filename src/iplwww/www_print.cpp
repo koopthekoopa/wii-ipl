@@ -1,8 +1,6 @@
+#include "iplwww/www_print.h"
+
 #include <config.h>
-
-#include <revolution.h>
-
-#include <stdarg.h>
 
 namespace ext_ead {
     namespace www {

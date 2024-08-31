@@ -14,9 +14,7 @@ namespace ipl {
     namespace utility {
         /**
          * @brief Converts IR position to Cursor position.
-         * 
          * @param basePos The IR position.
-         * 
          * @return The Cursor Position as `ipl::math::VEC2`
          */
         math::VEC2  get_cursor_pos(const math::VEC2& basePos);

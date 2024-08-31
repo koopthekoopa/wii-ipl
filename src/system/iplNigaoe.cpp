@@ -14,8 +14,13 @@ namespace ipl {
          * @note Address: 0x8133EE00 (4.3U)
          * @note Size: 0x48
          */
-        Object::Object(EGG::Heap* pHeap, int width, int height, int faceId, void (*someFunc)(Object*, void*), void* pArg3) 
-        : mFaceId(faceId), mpCharData(NULL), mSomeFunc(someFunc), unk_0x44(pArg3), unk_0x50(0) {
+        Object::Object(EGG::Heap* pHeap, int width, int height, int faceId, MakeIconCallback callback, void* pArg3) :
+        mFaceId(faceId),
+        mpCharData(NULL),
+        mCallBack(callback),
+        unk_0x44(pArg3),
+        unk_0x50(0) {
+
             init(pHeap, width, height);
         }
         
@@ -23,8 +28,13 @@ namespace ipl {
          * @note Address: 0x8133EE48 (4.3U)
          * @note Size: 0x4C
          */
-        Object::Object(EGG::Heap* pHeap, int width, int height, RFLiCharData* charData, void (*someFunc)(Object*, void*), void* pArg3) 
-        : mFaceId(-1), mpCharData(charData), mSomeFunc(someFunc), unk_0x44(pArg3), unk_0x50(0) {
+        Object::Object(EGG::Heap* pHeap, int width, int height, RFLiCharData* charData, MakeIconCallback callback, void* pArg3) :
+        mFaceId(-1),
+        mpCharData(charData),
+        mCallBack(callback),
+        unk_0x44(pArg3),
+        unk_0x50(0) {
+            
             init(pHeap, width, height);
         }
         
@@ -41,12 +51,10 @@ namespace ipl {
             
             mIconSettings.drawXluOnly = FALSE;
 
-            {
-                u32 iconSize = width * height * GX_RGB5A3_SIZE;
-                mIconSize = iconSize;
+            u32 iconSize = width * height * GX_RGB5A3_SIZE;
+            mIconSize = iconSize;
                 
-                mpIconTex = new(pHeap, DOLPHIN_ALIGNMENT) u8[iconSize];
-            }
+            mpIconTex = new(pHeap, BUFFER_HEAP) u8[iconSize];
         }
         
         /**
@@ -85,7 +93,7 @@ namespace ipl {
             GXInitTexObj(&mFaceTexObj, mpIconTex, mIconSettings.width, mIconSettings.height, GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP, GX_FALSE);
             
             unk_0x50 = 1;
-            SomeFunc(unk_0x44);
+            mCallBack(this, unk_0x44);
         }
     }
 }

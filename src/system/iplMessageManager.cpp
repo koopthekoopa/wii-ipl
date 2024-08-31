@@ -1,4 +1,4 @@
-#include "system/iplMessageManager.h"
+#include "system/iplMessage.h"
 
 #include <revolution/sc.h>
 
@@ -11,7 +11,7 @@ namespace ipl {
          * @note Size: 0x50
          */
         Manager::Manager(EGG::Heap* pHeap) {
-            mpMessageData = new(pHeap, 4) Message();
+            mpMessage = new(pHeap, CLASS_HEAP) Message();
             initMessage();
         }
 
@@ -22,43 +22,43 @@ namespace ipl {
         void Manager::initMessage() {
             switch(System::getLanguage()) {
                 case SC_LANG_ENGLISH: {
-                    mpMessageData->setResource(System::getEngArg()->getMessageData());
+                    mpMessage->setResource(System::getEngMsg()->getBuffer());
                     break;
                 }
                 case SC_LANG_FRENCH: {
-                    mpMessageData->setResource(System::getFraArg()->getMessageData());
+                    mpMessage->setResource(System::getFraMsg()->getBuffer());
                     break;
                 }
                 case SC_LANG_GERMAN: {
-                    mpMessageData->setResource(System::getGerArg()->getMessageData());
+                    mpMessage->setResource(System::getGerMsg()->getBuffer());
                     break;
                 }
                 case SC_LANG_ITALIAN: {
-                    mpMessageData->setResource(System::getItaArg()->getMessageData());
+                    mpMessage->setResource(System::getItaMsg()->getBuffer());
                     break;
                 }
                 case SC_LANG_JAPANESE: {
-                    mpMessageData->setResource(System::getJpnArg()->getMessageData());
+                    mpMessage->setResource(System::getJpnMsg()->getBuffer());
                     break;
                 }
                 case SC_LANG_DUTCH: {
-                    mpMessageData->setResource(System::getDutArg()->getMessageData());
+                    mpMessage->setResource(System::getDutMsg()->getBuffer());
                     break;
                 }
                 case SC_LANG_SPANISH: {
-                    mpMessageData->setResource(System::getSpaArg()->getMessageData());
+                    mpMessage->setResource(System::getSpaMsg()->getBuffer());
                     break;
                 }
                 case SC_LANG_SIMPLE_CHINESE: {
-                    mpMessageData->setResource(System::getChnSimpleArg()->getMessageData());
+                    mpMessage->setResource(System::getChnMsg()->getBuffer());
                     break;
                 }
                 case SC_LANG_KOREAN: {
-                    mpMessageData->setResource(System::getKorArg()->getMessageData());
+                    mpMessage->setResource(System::getKorMsg()->getBuffer());
                     break;
                 }
                 default: {
-                    mpMessageData->setResource(System::getEngArg()->getMessageData());
+                    mpMessage->setResource(System::getEngMsg()->getBuffer());
                     break;
                 }
             }

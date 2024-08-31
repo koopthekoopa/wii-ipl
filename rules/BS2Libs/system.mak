@@ -36,7 +36,7 @@ SYSTEM_OBJECTS	=	$(BS2_OBJASM_PATH)/system/rvl_dec.o \
 					$(BS2_OBJASM_PATH)/system/iplCdbBackup.o \
 					$(BS2_OBJASM_PATH)/system/odh.o \
 					$(BS2_OBJASM_PATH)/system/iplSDVFWorker.o \
-					$(BS2_OBJASM_PATH)/system/iplNandWrapper.o \
+					$(BS2_OBJ_PATH)/system/iplNandWrapper.o \
 					$(BS2_OBJ_PATH)/system/main.o \
 					$(BS2_OBJASM_PATH)/system/iplBS2Manager.o \
 					$(BS2_OBJASM_PATH)/system/TVRC.o \

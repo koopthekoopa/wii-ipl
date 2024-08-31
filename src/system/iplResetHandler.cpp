@@ -14,16 +14,17 @@ namespace ipl {
      * @note Address: 0x813567FC (4.3U)
      * @note Size: 0x94
      */
-    ResetHandler::ResetHandler(EGG::Heap* pHeap) {
+    ResetHandler::ResetHandler(EGG::Heap* pHeap) :
+    mType(0), // ?
+    mState(0),
+    mPoweringOff(FALSE), // ?
+    mFatalState(FATAL_STATE_NONE) {
+        
         #pragma unused(pHeap)
-        mPowerType = 0;
-        mPowerState = 0;
-        mPoweringOff = FALSE;
-        mFatalPowerState = 0;
 
         // Prepare the fade out.
-        System::getArg()->getFader()->setStatus(EGG::Fader::STATUS_PREPARE_OUT);
-        System::getArg()->getFader()->calc();
+        System::getFader()->setStatus(EGG::Fader::STATUS_PREPARE_OUT);
+        System::getFader()->calc();
 
         // Set the callbacks.
         OSSetResetCallback((OSResetCallback)cbReset);
@@ -35,8 +36,8 @@ namespace ipl {
      * @note Size: 0x24
      */
     void ResetHandler::cbReset() {
-        if (System::getArg()->getResetHandler()->getPowerType() == 0) {
-            System::getArg()->getResetHandler()->changePowerType(1);
+        if (System::getReset()->getType() == 0) {
+            System::getReset()->changeType(1);
         }
     }
 
@@ -45,8 +46,8 @@ namespace ipl {
      * @note Size: 0x24
      */
     void ResetHandler::cbPowerOff() {
-        if (System::getArg()->getResetHandler()->getPowerType() == 0) {
-            System::getArg()->getResetHandler()->changePowerType(2);
+        if (System::getReset()->getType() == 0) {
+            System::getReset()->changeType(2);
         }
     }
 
@@ -55,8 +56,8 @@ namespace ipl {
      * @note Size: 0x18
      */
     void ResetHandler::reset() {
-        if (mPowerType == 0) {
-            mPowerType = 1;
+        if (mType == 0) {
+            mType = 1;
         }
     }
 
@@ -65,7 +66,7 @@ namespace ipl {
      * @note Size: 0x14
      */
     void ResetHandler::check() {
-        if (mPowerType != 0) {
+        if (mType != 0) {
             System::reset_run();
         }
     }
@@ -75,10 +76,9 @@ namespace ipl {
      * @note Size: 0x2FC
      */
     void ResetHandler::update() {
-        if (mPowerType != 0) {
-            switch(mPowerState) {
+        if (mType != 0) {
+            switch(mState) {
                 case 0: {
-                    // To be matched...
                     break;
                 }
             }
@@ -98,8 +98,8 @@ namespace ipl {
      * @note Size: 0x24
      */
     void ResetHandler::cbFatalPowerOff() {
-        if (System::getArg()->getResetHandler()->getFatalPowerState() == FATAL_STATE_SHUTDOWN_NONE) {
-            System::getArg()->getResetHandler()->changeFatalPowerState(FATAL_STATE_SHUTDOWN_FADE);
+        if (System::getReset()->getFatalState() == FATAL_STATE_NONE) {
+            System::getReset()->changeFatalState(FATAL_STATE_INIT);
         }
     }
 
@@ -117,25 +117,34 @@ namespace ipl {
      * @note Size: 0xF0
      */
     void ResetHandler::fatalUpdate() {
-        switch(mFatalPowerState) {
-            case FATAL_STATE_SHUTDOWN_FADE: {   // Fade out
-                if (System::getArg()->getFader()->fadeOut()) {
-                    System::getArg()->getFader()->fadeOut();
+        switch(mFatalState) {
+            // Fade out
+            case FATAL_STATE_FADE: {
+                if (System::getFader()->fadeOut()) {
+                    System::getFader()->fadeOut();
 
-                    mFatalPowerState = FATAL_STATE_SHUTDOWN_VIDEO;
+                    mFatalState = FATAL_STATE_VIDEO;
                 }
                 break;
             }
+<<<<<<< HEAD
+            // Shutdown the video
+            // (no need as it's already doing that in `FATAL_STATE_SYSTEM`)
+            case FATAL_STATE_VIDEO: {
+                if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+=======
             case FATAL_STATE_SHUTDOWN_VIDEO: {  // Shutdown the video when it is done fading out (no need as it's already doing that in `FATAL_STATE_SHUTDOWN_OS`)
                 if (System::getArg()->getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+>>>>>>> 4e8bba39bb259be4fc6f17707b6fe266268010cb
                     VISetBlack(TRUE);
                     VIFlush();
 
-                    mFatalPowerState = FATAL_STATE_SHUTDOWN_OS;
+                    mFatalState = FATAL_STATE_SYSTEM;
                 }
                 break;
             }
-            case FATAL_STATE_SHUTDOWN_OS: {     // Shutdown the system
+            // Shutdown the system
+            case FATAL_STATE_SYSTEM: {
                 VISetBlack(TRUE);
                 VIFlush();
 

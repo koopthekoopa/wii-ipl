@@ -1,7 +1,11 @@
 #ifndef IPL_MESSAGE_H
 #define IPL_MESSAGE_H
 
+#include "system/MESGEntries.h"
+
 #include <revolution/types.h>
+
+#include <egg/core.h>
 
 namespace ipl {
     namespace message {
@@ -12,15 +16,12 @@ namespace ipl {
 
                 /**
                  * @brief Sets the message resource data.
-                 *
                  * @param msgData The message resource data.
                  */
                 void        setResource(u8* msgData);
                 /**
                  * @brief Get message string from resource data.
-                 *
                  * @param id The message ID.
-                 *
                  * @return The message string as Unicode (wchar_t).
                  */
                 wchar_t*    getMessage(u32 id) const;
@@ -58,6 +59,19 @@ namespace ipl {
                 MESGInfoBlock* mpInfoData;      // 0x04
 
                 u8* mspMessageData;             // 0x08
+        };
+
+        class Manager {
+            public:
+                Manager(EGG::Heap* pHeap);
+
+                /** @return The message data in use */
+                Message* getMessage()   { return mpMessage; }
+            
+            private:
+                void initMessage();
+
+                Message* mpMessage; // 0x00
         };
     }
 }

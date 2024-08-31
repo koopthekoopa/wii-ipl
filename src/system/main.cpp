@@ -1,17 +1,9 @@
 #include <revolution.h>
+#include <revolution/nand.h>
 
 #include "system/iplSystem.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif // __cplusplus
-
-void mainmenu();
-s32 NANDCheck(u32 fsBlock, u32 node, u32 *answer);
-
-#ifdef __cplusplus
-}
-#endif // __cplusplus
+extern "C" void mainmenu();
 
 /**
  * @note Address: 0x81360764 (4.3U)
@@ -26,9 +18,10 @@ void mainmenu() {
  * @note Address: 0x81360790 (4.3U)
  * @note Size: 0x10
  */
-s32 NANDCheck(u32 fsBlock, u32 node, u32 *answer) {
+s32 NANDCheck(u32 fsBlock, u32 iNode, u32 *answer) {
     *answer = 0;
-    return 0;
+    
+    return 0; /* success */
 }
 
 
