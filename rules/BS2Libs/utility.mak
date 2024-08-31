@@ -1,9 +1,9 @@
-UTILITY_OBJECTS	=	$(BS2_OBJASM_PATH)/utility/iplTree.o \
+UTILITY_OBJECTS	=	$(BS2_OBJ_PATH)/utility/iplTree.o \
 					$(BS2_OBJASM_PATH)/utility/iplFrameController.o \
 					$(BS2_OBJASM_PATH)/utility/iplGraphics.o \
 					$(BS2_OBJ_PATH)/utility/iplCapture.o \
 					$(BS2_OBJASM_PATH)/utility/iplUtility.o \
-					$(BS2_OBJASM_PATH)/utility/iplThread.o \
+					$(BS2_OBJ_PATH)/utility/iplThread.o \
 					$(BS2_OBJ_PATH)/utility/iplMessageBase.o \
 					$(BS2_OBJASM_PATH)/utility/iplJpegDecoder.o \
 					$(BS2_OBJASM_PATH)/utility/iplESMisc.o \
