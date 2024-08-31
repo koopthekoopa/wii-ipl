@@ -37,6 +37,8 @@ BS2_CMN_CCPATH	=	$(CW_GC_30A52)
 -include $(RULES_ROOT)/BS2Libs/scene/channelSelect.mak
 -include $(RULES_ROOT)/BS2Libs/scene/faceSelect.mak
 -include $(RULES_ROOT)/BS2Libs/scene/health.mak
+-include $(RULES_ROOT)/BS2Libs/scene/kitayamaTest.mak
+-include $(RULES_ROOT)/BS2Libs/scene/letter.mak
 
 BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(BS2_BLD_PATH)/utility.a \
@@ -54,6 +56,8 @@ BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(BS2_BLD_PATH)/scene/channelSelect.a \
 						$(BS2_BLD_PATH)/scene/faceSelect.a \
 						$(BS2_BLD_PATH)/scene/health.a \
+						$(BS2_BLD_PATH)/scene/kitayamaTest.a \
+						$(BS2_BLD_PATH)/scene/letter.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/base.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/os.a \
 						$(RUNTIME_ROOT)/$(BUILD_ROOT)/Runtime.PPCEABI.H.a
