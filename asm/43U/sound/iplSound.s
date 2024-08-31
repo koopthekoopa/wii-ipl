@@ -1571,7 +1571,7 @@
 .endfn __dt__Q33ipl3snd6SystemFv
 
 # .text:0x132C | 0x8136C588 | size: 0xB4
-.fn iplSound_8136C588, local
+.fn "__sinit_\\iplSound_cpp", local
 /* 8136C588 0003A988  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8136C58C 0003A98C  7C 08 02 A6 */	mflr r0
 /* 8136C590 0003A990  3C 80 81 37 */	lis r4, __ct__Q33ipl3snd10tagSSeInfoFv@ha
@@ -1617,7 +1617,7 @@
 /* 8136C630 0003AA30  7C 08 03 A6 */	mtlr r0
 /* 8136C634 0003AA34  38 21 00 10 */	addi r1, r1, 0x10
 /* 8136C638 0003AA38  4E 80 00 20 */	blr
-.endfn iplSound_8136C588
+.endfn "__sinit_\\iplSound_cpp"
 
 # .text:0x13E0 | 0x8136C63C | size: 0x30
 # ipl::snd::tagSSeInfo::tagSSeInfo()
@@ -1794,7 +1794,7 @@
 # 0x8160D1D8..0x8160D1DC | size: 0x4
 .section .ctors, "a"
 .balign 4
-	.4byte iplSound_8136C588
+	.4byte "__sinit_\\iplSound_cpp"
 
 # 0x8160F048..0x8160F058 | size: 0x10
 .rodata

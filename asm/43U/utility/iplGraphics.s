@@ -625,16 +625,16 @@
 .endfn drawTexture__Q33ipl7utility8GraphicsFRCQ34nw4r2ut4RectRC9_GXTexObj8_GXColorUcQ43ipl7utility8Graphics11Orientation
 
 # .text:0x89C | 0x8136329C | size: 0xC
-.fn iplGraphics_8136329C, local
+.fn "__sinit_\\iplGraphics_cpp", local
 /* 8136329C 0003169C  3C 60 81 09 */	lis r3, mArg__Q33ipl7utility8Graphics@ha
 /* 813632A0 000316A0  38 63 97 C0 */	addi r3, r3, mArg__Q33ipl7utility8Graphics@l
 /* 813632A4 000316A4  4B FF F7 5C */	b __ct__Q43ipl7utility8Graphics3ArgFv
-.endfn iplGraphics_8136329C
+.endfn "__sinit_\\iplGraphics_cpp"
 
 # 0x8160D1D4..0x8160D1D8 | size: 0x4
 .section .ctors, "a"
 .balign 4
-	.4byte iplGraphics_8136329C
+	.4byte "__sinit_\\iplGraphics_cpp"
 
 # 0x816945E8..0x81694600 | size: 0x18
 .section .sdata2, "a"

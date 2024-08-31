@@ -1232,7 +1232,7 @@
 .endfn iplCdbBack_8135B40C
 
 # .text:0xF90 | 0x8135B520 | size: 0x1C
-.fn iplCdbBack_8135B520, local
+.fn "__sinit_\\iplCdbBackup_cpp", local
 /* 8135B520 00029920  80 82 80 98 */	lwz r4, lbl_81694498@sda21(r0)
 /* 8135B524 00029924  3C 60 01 40 */	lis r3, 0x140
 /* 8135B528 00029928  38 00 00 64 */	li r0, 0x64
@@ -1240,12 +1240,12 @@
 /* 8135B530 00029930  7C 03 03 D6 */	divw r0, r3, r0
 /* 8135B534 00029934  90 0D A6 B0 */	stw r0, lbl_816986F0@sda21(r0)
 /* 8135B538 00029938  4E 80 00 20 */	blr
-.endfn iplCdbBack_8135B520
+.endfn "__sinit_\\iplCdbBackup_cpp"
 
 # 0x8160D1D0..0x8160D1D4 | size: 0x4
 .section .ctors, "a"
 .balign 4
-	.4byte iplCdbBack_8135B520
+	.4byte "__sinit_\\iplCdbBackup_cpp"
 
 # 0x81639278..0x816392D8 | size: 0x60
 .data

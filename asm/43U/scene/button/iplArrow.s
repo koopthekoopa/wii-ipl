@@ -116,3 +116,31 @@
 /* 8139DBA8 0006BFA8  38 63 FF EC */	subi r3, r3, 0x14
 /* 8139DBAC 0006BFAC  4B FF FF A4 */	b __dt__Q33ipl5scene5ArrowFv
 .endfn "@20@__dt__Q33ipl5scene5ArrowFv"
+
+# 0x8164C2F8..0x8164C348 | size: 0x50
+.data
+.balign 8
+
+# .data:0x0 | 0x8164C2F8 | size: 0x50
+.obj lbl_8164C2F8, global
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte __dt__Q33ipl5scene5ArrowFv
+	.4byte getParent__Q33ipl5scene4BaseFv
+	.4byte getChild__Q33ipl5scene4BaseFv
+	.4byte getNext__Q33ipl5scene4BaseFv
+	.4byte getPrev__Q33ipl5scene4BaseFv
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte "@20@__dt__Q33ipl5scene5ArrowFv"
+	.4byte isReady__Q33ipl5scene4BaseCFv
+	.4byte isResetAcceptable__Q33ipl5scene4BaseCFv
+	.4byte startResetting__Q33ipl5scene4BaseFv
+	.4byte isResetProcessDone__Q33ipl5scene4BaseFv
+	.4byte prepare__Q33ipl5scene4BaseFv
+	.4byte create__Q33ipl5scene4BaseFv
+	.4byte calc__Q33ipl5scene4BaseFv
+	.4byte draw__Q33ipl5scene5ArrowFv
+	.4byte destroy__Q33ipl5scene4BaseFv
+	.4byte 0x00000000
+.endobj lbl_8164C2F8

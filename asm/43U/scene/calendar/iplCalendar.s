@@ -1,0 +1,2691 @@
+.include "macros.inc"
+.file "iplCalendar.cpp"
+
+# 0x810B7300..0x810B7318 | size: 0x18
+.section .bss, "wa", @nobits
+.balign 8
+
+# .bss:0x0 | 0x810B7300 | size: 0xC
+# ipl::scene::Calendar::mscMinDate
+.obj mscMinDate__Q33ipl5scene8Calendar, global
+	.skip 0xC
+.endobj mscMinDate__Q33ipl5scene8Calendar
+
+# .bss:0xC | 0x810B730C | size: 0xC
+# ipl::scene::Calendar::mscMaxDate
+.obj mscMaxDate__Q33ipl5scene8Calendar, global
+	.skip 0xC
+.endobj mscMaxDate__Q33ipl5scene8Calendar
+
+# 0x8139DBB0..0x8139F8CC | size: 0x1D1C
+.text
+.balign 4
+
+# .text:0x0 | 0x8139DBB0 | size: 0xE4
+# ipl::scene::Calendar::Calendar(EGG::Heap*)
+.fn __ct__Q33ipl5scene8CalendarFPQ23EGG4Heap, global
+/* 8139DBB0 0006BFB0  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139DBB4 0006BFB4  7C 08 02 A6 */	mflr r0
+/* 8139DBB8 0006BFB8  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139DBBC 0006BFBC  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139DBC0 0006BFC0  93 C1 00 08 */	stw r30, 0x8(r1)
+/* 8139DBC4 0006BFC4  7C 7E 1B 78 */	mr r30, r3
+/* 8139DBC8 0006BFC8  48 06 D6 41 */	bl fn_8140B208
+/* 8139DBCC 0006BFCC  3C 60 81 65 */	lis r3, __vt__Q33ipl5scene8Calendar@ha
+/* 8139DBD0 0006BFD0  3B E0 00 00 */	li r31, 0x0
+/* 8139DBD4 0006BFD4  38 63 C5 7C */	addi r3, r3, __vt__Q33ipl5scene8Calendar@l
+/* 8139DBD8 0006BFD8  93 FE 00 A0 */	stw r31, 0xa0(r30)
+/* 8139DBDC 0006BFDC  38 A3 00 1C */	addi r5, r3, 0x1c
+/* 8139DBE0 0006BFE0  38 80 00 40 */	li r4, 0x40
+/* 8139DBE4 0006BFE4  38 03 00 68 */	addi r0, r3, 0x68
+/* 8139DBE8 0006BFE8  90 7E 00 00 */	stw r3, 0x0(r30)
+/* 8139DBEC 0006BFEC  38 7E 00 84 */	addi r3, r30, 0x84
+/* 8139DBF0 0006BFF0  93 FE 00 60 */	stw r31, 0x60(r30)
+/* 8139DBF4 0006BFF4  90 BE 00 14 */	stw r5, 0x14(r30)
+/* 8139DBF8 0006BFF8  90 1E 00 58 */	stw r0, 0x58(r30)
+/* 8139DBFC 0006BFFC  93 FE 00 64 */	stw r31, 0x64(r30)
+/* 8139DC00 0006C000  93 FE 00 68 */	stw r31, 0x68(r30)
+/* 8139DC04 0006C004  93 FE 00 6C */	stw r31, 0x6c(r30)
+/* 8139DC08 0006C008  93 FE 00 70 */	stw r31, 0x70(r30)
+/* 8139DC0C 0006C00C  93 FE 00 74 */	stw r31, 0x74(r30)
+/* 8139DC10 0006C010  93 FE 00 78 */	stw r31, 0x78(r30)
+/* 8139DC14 0006C014  93 FE 00 7C */	stw r31, 0x7c(r30)
+/* 8139DC18 0006C018  93 FE 00 80 */	stw r31, 0x80(r30)
+/* 8139DC1C 0006C01C  9B FE 00 9C */	stb r31, 0x9c(r30)
+/* 8139DC20 0006C020  93 FE 00 A4 */	stw r31, 0xa4(r30)
+/* 8139DC24 0006C024  93 FE 00 A8 */	stw r31, 0xa8(r30)
+/* 8139DC28 0006C028  48 17 44 35 */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
+/* 8139DC2C 0006C02C  38 7E 00 90 */	addi r3, r30, 0x90
+/* 8139DC30 0006C030  38 80 00 48 */	li r4, 0x48
+/* 8139DC34 0006C034  48 17 44 29 */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
+/* 8139DC38 0006C038  4B F9 7E 55 */	bl getRegion__Q23ipl6SystemFv
+/* 8139DC3C 0006C03C  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139DC40 0006C040  41 82 00 1C */	beq .L_8139DC5C
+/* 8139DC44 0006C044  4B F9 7E 49 */	bl getRegion__Q23ipl6SystemFv
+/* 8139DC48 0006C048  28 03 00 06 */	cmplwi r3, 0x6
+/* 8139DC4C 0006C04C  41 82 00 10 */	beq .L_8139DC5C
+/* 8139DC50 0006C050  4B F9 7E 3D */	bl getRegion__Q23ipl6SystemFv
+/* 8139DC54 0006C054  28 03 00 0B */	cmplwi r3, 0xb
+/* 8139DC58 0006C058  40 82 00 08 */	bne .L_8139DC60
+.L_8139DC5C:
+/* 8139DC5C 0006C05C  3B E0 00 01 */	li r31, 0x1
+.L_8139DC60:
+/* 8139DC60 0006C060  9B FE 00 AC */	stb r31, 0xac(r30)
+/* 8139DC64 0006C064  4B F9 7E 29 */	bl getRegion__Q23ipl6SystemFv
+/* 8139DC68 0006C068  38 03 FF FF */	subi r0, r3, 0x1
+/* 8139DC6C 0006C06C  7F C3 F3 78 */	mr r3, r30
+/* 8139DC70 0006C070  7C 00 00 34 */	cntlzw r0, r0
+/* 8139DC74 0006C074  54 00 D9 7E */	srwi r0, r0, 5
+/* 8139DC78 0006C078  98 1E 00 AD */	stb r0, 0xad(r30)
+/* 8139DC7C 0006C07C  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139DC80 0006C080  83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 8139DC84 0006C084  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139DC88 0006C088  7C 08 03 A6 */	mtlr r0
+/* 8139DC8C 0006C08C  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139DC90 0006C090  4E 80 00 20 */	blr
+.endfn __ct__Q33ipl5scene8CalendarFPQ23EGG4Heap
+
+# .text:0xE4 | 0x8139DC94 | size: 0x4C
+# ipl::scene::Calendar::prepare()
+.fn prepare__Q33ipl5scene8CalendarFv, global
+/* 8139DC94 0006C094  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139DC98 0006C098  7C 08 02 A6 */	mflr r0
+/* 8139DC9C 0006C09C  3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
+/* 8139DCA0 0006C0A0  3C A0 81 65 */	lis r5, lbl_8164C4BC@ha
+/* 8139DCA4 0006C0A4  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139DCA8 0006C0A8  38 84 90 08 */	addi r4, r4, smArg__Q23ipl6System@l
+/* 8139DCAC 0006C0AC  38 A5 C4 BC */	addi r5, r5, lbl_8164C4BC@l
+/* 8139DCB0 0006C0B0  38 C0 00 00 */	li r6, 0x0
+/* 8139DCB4 0006C0B4  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139DCB8 0006C0B8  7C 7F 1B 78 */	mr r31, r3
+/* 8139DCBC 0006C0BC  80 64 00 6C */	lwz r3, 0x6c(r4)
+/* 8139DCC0 0006C0C0  80 9F 00 24 */	lwz r4, 0x24(r31)
+/* 8139DCC4 0006C0C4  4B F9 FB F1 */	bl readLayoutAsync__Q33ipl4nand7ManagerFPQ23EGG4HeapPCcb
+/* 8139DCC8 0006C0C8  90 7F 00 70 */	stw r3, 0x70(r31)
+/* 8139DCCC 0006C0CC  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139DCD0 0006C0D0  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139DCD4 0006C0D4  7C 08 03 A6 */	mtlr r0
+/* 8139DCD8 0006C0D8  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139DCDC 0006C0DC  4E 80 00 20 */	blr
+.endfn prepare__Q33ipl5scene8CalendarFv
+
+# .text:0x130 | 0x8139DCE0 | size: 0x1FC
+# ipl::scene::Calendar::create()
+.fn create__Q33ipl5scene8CalendarFv, global
+/* 8139DCE0 0006C0E0  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8139DCE4 0006C0E4  7C 08 02 A6 */	mflr r0
+/* 8139DCE8 0006C0E8  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8139DCEC 0006C0EC  39 61 00 20 */	addi r11, r1, 0x20
+/* 8139DCF0 0006C0F0  48 25 B7 D5 */	bl _savegpr_28
+/* 8139DCF4 0006C0F4  3F E0 81 65 */	lis r31, lbl_8164C348@ha
+/* 8139DCF8 0006C0F8  7C 7C 1B 78 */	mr r28, r3
+/* 8139DCFC 0006C0FC  3B FF C3 48 */	addi r31, r31, lbl_8164C348@l
+/* 8139DD00 0006C100  38 60 05 80 */	li r3, 0x580
+/* 8139DD04 0006C104  48 25 A3 99 */	bl __nw__FUl
+/* 8139DD08 0006C108  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139DD0C 0006C10C  41 82 00 18 */	beq .L_8139DD24
+/* 8139DD10 0006C110  80 9C 00 24 */	lwz r4, 0x24(r28)
+/* 8139DD14 0006C114  38 FF 01 81 */	addi r7, r31, 0x181
+/* 8139DD18 0006C118  80 BC 00 70 */	lwz r5, 0x70(r28)
+/* 8139DD1C 0006C11C  38 CD 87 80 */	li r6, lbl_816967C0@sda21
+/* 8139DD20 0006C120  4B FC C3 05 */	bl __ct__Q33ipl6layout6ObjectFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCc
+.L_8139DD24:
+/* 8139DD24 0006C124  90 7C 00 6C */	stw r3, 0x6c(r28)
+/* 8139DD28 0006C128  38 9F 01 93 */	addi r4, r31, 0x193
+/* 8139DD2C 0006C12C  38 AD 87 84 */	li r5, lbl_816967C4@sda21
+/* 8139DD30 0006C130  38 C0 00 00 */	li r6, 0x0
+/* 8139DD34 0006C134  38 E0 00 01 */	li r7, 0x1
+/* 8139DD38 0006C138  4B FC C7 A9 */	bl bindToGroup__Q33ipl6layout6ObjectFPCcPCcbb
+/* 8139DD3C 0006C13C  90 7C 00 74 */	stw r3, 0x74(r28)
+/* 8139DD40 0006C140  38 9F 01 93 */	addi r4, r31, 0x193
+/* 8139DD44 0006C144  80 7C 00 6C */	lwz r3, 0x6c(r28)
+/* 8139DD48 0006C148  38 AD 87 8A */	li r5, lbl_816967CA@sda21
+/* 8139DD4C 0006C14C  38 C0 00 01 */	li r6, 0x1
+/* 8139DD50 0006C150  38 E0 00 01 */	li r7, 0x1
+/* 8139DD54 0006C154  4B FC C7 8D */	bl bindToGroup__Q33ipl6layout6ObjectFPCcPCcbb
+/* 8139DD58 0006C158  90 7C 00 78 */	stw r3, 0x78(r28)
+/* 8139DD5C 0006C15C  7F 83 E3 78 */	mr r3, r28
+/* 8139DD60 0006C160  38 80 00 00 */	li r4, 0x0
+/* 8139DD64 0006C164  48 00 04 D5 */	bl doAnim__Q33ipl5scene8CalendarFi
+/* 8139DD68 0006C168  80 7C 00 6C */	lwz r3, 0x6c(r28)
+/* 8139DD6C 0006C16C  4B FC C9 99 */	bl calc__Q33ipl6layout6ObjectFv
+/* 8139DD70 0006C170  80 7C 00 6C */	lwz r3, 0x6c(r28)
+/* 8139DD74 0006C174  4B FC C8 C1 */	bl finishBinding__Q33ipl6layout6ObjectFv
+/* 8139DD78 0006C178  3B A0 00 00 */	li r29, 0x0
+.L_8139DD7C:
+/* 8139DD7C 0006C17C  38 60 00 50 */	li r3, 0x50
+/* 8139DD80 0006C180  48 25 A3 1D */	bl __nw__FUl
+/* 8139DD84 0006C184  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139DD88 0006C188  7C 7E 1B 78 */	mr r30, r3
+/* 8139DD8C 0006C18C  41 82 00 1C */	beq .L_8139DDA8
+/* 8139DD90 0006C190  80 9C 00 24 */	lwz r4, 0x24(r28)
+/* 8139DD94 0006C194  38 FF 01 A5 */	addi r7, r31, 0x1a5
+/* 8139DD98 0006C198  80 BC 00 70 */	lwz r5, 0x70(r28)
+/* 8139DD9C 0006C19C  38 CD 87 80 */	li r6, lbl_816967C0@sda21
+/* 8139DDA0 0006C1A0  48 00 1B 2D */	bl __ct__Q33ipl5scene4DateFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCc
+/* 8139DDA4 0006C1A4  7C 7E 1B 78 */	mr r30, r3
+.L_8139DDA8:
+/* 8139DDA8 0006C1A8  2C 1D 00 2A */	cmpwi r29, 0x2a
+/* 8139DDAC 0006C1AC  40 80 00 10 */	bge .L_8139DDBC
+/* 8139DDB0 0006C1B0  7F C4 F3 78 */	mr r4, r30
+/* 8139DDB4 0006C1B4  38 7C 00 90 */	addi r3, r28, 0x90
+/* 8139DDB8 0006C1B8  48 17 42 BD */	bl List_Append__Q24nw4r2utFPQ34nw4r2ut4ListPv
+.L_8139DDBC:
+/* 8139DDBC 0006C1BC  7F C4 F3 78 */	mr r4, r30
+/* 8139DDC0 0006C1C0  38 7C 00 84 */	addi r3, r28, 0x84
+/* 8139DDC4 0006C1C4  48 17 42 B1 */	bl List_Append__Q24nw4r2utFPQ34nw4r2ut4ListPv
+/* 8139DDC8 0006C1C8  3B BD 00 01 */	addi r29, r29, 0x1
+/* 8139DDCC 0006C1CC  2C 1D 00 54 */	cmpwi r29, 0x54
+/* 8139DDD0 0006C1D0  41 80 FF AC */	blt .L_8139DD7C
+/* 8139DDD4 0006C1D4  7F 83 E3 78 */	mr r3, r28
+/* 8139DDD8 0006C1D8  38 80 00 01 */	li r4, 0x1
+/* 8139DDDC 0006C1DC  48 00 15 D5 */	bl set_date_pos__Q33ipl5scene8CalendarFi
+/* 8139DDE0 0006C1E0  7F 83 E3 78 */	mr r3, r28
+/* 8139DDE4 0006C1E4  38 80 00 02 */	li r4, 0x2
+/* 8139DDE8 0006C1E8  48 00 15 C9 */	bl set_date_pos__Q33ipl5scene8CalendarFi
+/* 8139DDEC 0006C1EC  3B A0 00 00 */	li r29, 0x0
+/* 8139DDF0 0006C1F0  48 00 00 0C */	b .L_8139DDFC
+.L_8139DDF4:
+/* 8139DDF4 0006C1F4  7F A3 EB 78 */	mr r3, r29
+/* 8139DDF8 0006C1F8  48 00 1C DD */	bl calc__Q33ipl5scene4DateFv
+.L_8139DDFC:
+/* 8139DDFC 0006C1FC  7F A4 EB 78 */	mr r4, r29
+/* 8139DE00 0006C200  38 7C 00 84 */	addi r3, r28, 0x84
+/* 8139DE04 0006C204  48 17 44 D9 */	bl List_GetNext__Q24nw4r2utFPCQ34nw4r2ut4ListPCv
+/* 8139DE08 0006C208  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139DE0C 0006C20C  7C 7D 1B 78 */	mr r29, r3
+/* 8139DE10 0006C210  40 82 FF E4 */	bne .L_8139DDF4
+/* 8139DE14 0006C214  38 60 00 0C */	li r3, 0xc
+/* 8139DE18 0006C218  48 25 A2 85 */	bl __nw__FUl
+/* 8139DE1C 0006C21C  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139DE20 0006C220  7C 7F 1B 78 */	mr r31, r3
+/* 8139DE24 0006C224  41 82 00 30 */	beq .L_8139DE54
+/* 8139DE28 0006C228  81 9C 00 00 */	lwz r12, 0x0(r28)
+/* 8139DE2C 0006C22C  7F 83 E3 78 */	mr r3, r28
+/* 8139DE30 0006C230  81 8C 00 0C */	lwz r12, 0xc(r12)
+/* 8139DE34 0006C234  7D 89 03 A6 */	mtctr r12
+/* 8139DE38 0006C238  4E 80 04 21 */	bctrl
+/* 8139DE3C 0006C23C  80 03 0D 08 */	lwz r0, 0xd08(r3)
+/* 8139DE40 0006C240  90 1F 00 00 */	stw r0, 0x0(r31)
+/* 8139DE44 0006C244  80 03 0D 0C */	lwz r0, 0xd0c(r3)
+/* 8139DE48 0006C248  90 1F 00 04 */	stw r0, 0x4(r31)
+/* 8139DE4C 0006C24C  80 03 0D 10 */	lwz r0, 0xd10(r3)
+/* 8139DE50 0006C250  90 1F 00 08 */	stw r0, 0x8(r31)
+.L_8139DE54:
+/* 8139DE54 0006C254  93 FC 00 7C */	stw r31, 0x7c(r28)
+/* 8139DE58 0006C258  7F 83 E3 78 */	mr r3, r28
+/* 8139DE5C 0006C25C  48 00 0E B1 */	bl set_textbox_day__Q33ipl5scene8CalendarFv
+/* 8139DE60 0006C260  7F 83 E3 78 */	mr r3, r28
+/* 8139DE64 0006C264  48 00 0F 3D */	bl set_textbox_month__Q33ipl5scene8CalendarFv
+/* 8139DE68 0006C268  80 BC 00 7C */	lwz r5, 0x7c(r28)
+/* 8139DE6C 0006C26C  7F 83 E3 78 */	mr r3, r28
+/* 8139DE70 0006C270  38 80 00 01 */	li r4, 0x1
+/* 8139DE74 0006C274  48 00 12 31 */	bl set_textbox_date__Q33ipl5scene8CalendarFiRCQ33ipl7utility4Date
+/* 8139DE78 0006C278  7F 83 E3 78 */	mr r3, r28
+/* 8139DE7C 0006C27C  48 00 18 C9 */	bl exec_search_task__Q33ipl5scene8CalendarFv
+/* 8139DE80 0006C280  88 1C 00 AC */	lbz r0, 0xac(r28)
+/* 8139DE84 0006C284  38 80 00 00 */	li r4, 0x0
+/* 8139DE88 0006C288  80 7C 00 78 */	lwz r3, 0x78(r28)
+/* 8139DE8C 0006C28C  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139DE90 0006C290  40 82 00 14 */	bne .L_8139DEA4
+/* 8139DE94 0006C294  88 1C 00 AD */	lbz r0, 0xad(r28)
+/* 8139DE98 0006C298  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139DE9C 0006C29C  40 82 00 08 */	bne .L_8139DEA4
+/* 8139DEA0 0006C2A0  38 80 00 01 */	li r4, 0x1
+.L_8139DEA4:
+/* 8139DEA4 0006C2A4  6C 84 80 00 */	xoris r4, r4, 0x8000
+/* 8139DEA8 0006C2A8  3C 00 43 30 */	lis r0, 0x4330
+/* 8139DEAC 0006C2AC  90 81 00 0C */	stw r4, 0xc(r1)
+/* 8139DEB0 0006C2B0  C8 22 84 D8 */	lfd f1, lbl_816948D8@sda21(r0)
+/* 8139DEB4 0006C2B4  90 01 00 08 */	stw r0, 0x8(r1)
+/* 8139DEB8 0006C2B8  C8 01 00 08 */	lfd f0, 0x8(r1)
+/* 8139DEBC 0006C2BC  EC 20 08 28 */	fsubs f1, f0, f1
+/* 8139DEC0 0006C2C0  4B FC BD A1 */	bl initAnmFrame__Q33ipl6layout8AnimatorFf
+/* 8139DEC4 0006C2C4  39 61 00 20 */	addi r11, r1, 0x20
+/* 8139DEC8 0006C2C8  48 25 B6 49 */	bl _restgpr_28
+/* 8139DECC 0006C2CC  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8139DED0 0006C2D0  7C 08 03 A6 */	mtlr r0
+/* 8139DED4 0006C2D4  38 21 00 20 */	addi r1, r1, 0x20
+/* 8139DED8 0006C2D8  4E 80 00 20 */	blr
+.endfn create__Q33ipl5scene8CalendarFv
+
+# .text:0x32C | 0x8139DEDC | size: 0xA4
+# ipl::scene::Calendar::calcCommon()
+.fn calcCommon__Q33ipl5scene8CalendarFv, global
+/* 8139DEDC 0006C2DC  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139DEE0 0006C2E0  7C 08 02 A6 */	mflr r0
+/* 8139DEE4 0006C2E4  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139DEE8 0006C2E8  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139DEEC 0006C2EC  93 C1 00 08 */	stw r30, 0x8(r1)
+/* 8139DEF0 0006C2F0  7C 7E 1B 78 */	mr r30, r3
+/* 8139DEF4 0006C2F4  80 63 00 6C */	lwz r3, 0x6c(r3)
+/* 8139DEF8 0006C2F8  4B FC C8 0D */	bl calc__Q33ipl6layout6ObjectFv
+/* 8139DEFC 0006C2FC  7F C3 F3 78 */	mr r3, r30
+/* 8139DF00 0006C300  38 80 00 01 */	li r4, 0x1
+/* 8139DF04 0006C304  48 00 14 AD */	bl set_date_pos__Q33ipl5scene8CalendarFi
+/* 8139DF08 0006C308  80 1E 00 64 */	lwz r0, 0x64(r30)
+/* 8139DF0C 0006C30C  2C 00 00 02 */	cmpwi r0, 0x2
+/* 8139DF10 0006C310  41 82 00 24 */	beq .L_8139DF34
+/* 8139DF14 0006C314  40 80 00 2C */	bge .L_8139DF40
+/* 8139DF18 0006C318  2C 00 00 01 */	cmpwi r0, 0x1
+/* 8139DF1C 0006C31C  40 80 00 08 */	bge .L_8139DF24
+/* 8139DF20 0006C320  48 00 00 20 */	b .L_8139DF40
+.L_8139DF24:
+/* 8139DF24 0006C324  7F C3 F3 78 */	mr r3, r30
+/* 8139DF28 0006C328  38 80 00 02 */	li r4, 0x2
+/* 8139DF2C 0006C32C  48 00 14 85 */	bl set_date_pos__Q33ipl5scene8CalendarFi
+/* 8139DF30 0006C330  48 00 00 10 */	b .L_8139DF40
+.L_8139DF34:
+/* 8139DF34 0006C334  7F C3 F3 78 */	mr r3, r30
+/* 8139DF38 0006C338  38 80 00 00 */	li r4, 0x0
+/* 8139DF3C 0006C33C  48 00 14 75 */	bl set_date_pos__Q33ipl5scene8CalendarFi
+.L_8139DF40:
+/* 8139DF40 0006C340  3B E0 00 00 */	li r31, 0x0
+/* 8139DF44 0006C344  48 00 00 0C */	b .L_8139DF50
+.L_8139DF48:
+/* 8139DF48 0006C348  7F E3 FB 78 */	mr r3, r31
+/* 8139DF4C 0006C34C  48 00 1B 89 */	bl calc__Q33ipl5scene4DateFv
+.L_8139DF50:
+/* 8139DF50 0006C350  7F E4 FB 78 */	mr r4, r31
+/* 8139DF54 0006C354  38 7E 00 84 */	addi r3, r30, 0x84
+/* 8139DF58 0006C358  48 17 43 85 */	bl List_GetNext__Q24nw4r2utFPCQ34nw4r2ut4ListPCv
+/* 8139DF5C 0006C35C  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139DF60 0006C360  7C 7F 1B 78 */	mr r31, r3
+/* 8139DF64 0006C364  40 82 FF E4 */	bne .L_8139DF48
+/* 8139DF68 0006C368  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139DF6C 0006C36C  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139DF70 0006C370  83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 8139DF74 0006C374  7C 08 03 A6 */	mtlr r0
+/* 8139DF78 0006C378  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139DF7C 0006C37C  4E 80 00 20 */	blr
+.endfn calcCommon__Q33ipl5scene8CalendarFv
+
+# .text:0x3D0 | 0x8139DF80 | size: 0xC4
+# ipl::scene::Calendar::calcFadein()
+.fn calcFadein__Q33ipl5scene8CalendarFv, global
+/* 8139DF80 0006C380  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8139DF84 0006C384  7C 08 02 A6 */	mflr r0
+/* 8139DF88 0006C388  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8139DF8C 0006C38C  39 61 00 20 */	addi r11, r1, 0x20
+/* 8139DF90 0006C390  48 25 B5 39 */	bl _savegpr_29
+/* 8139DF94 0006C394  7C 7D 1B 78 */	mr r29, r3
+/* 8139DF98 0006C398  80 63 00 6C */	lwz r3, 0x6c(r3)
+/* 8139DF9C 0006C39C  3B C0 00 00 */	li r30, 0x0
+/* 8139DFA0 0006C3A0  38 80 00 00 */	li r4, 0x0
+/* 8139DFA4 0006C3A4  4B FC CB 2D */	bl isPlaying__Q33ipl6layout6ObjectCFi
+/* 8139DFA8 0006C3A8  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139DFAC 0006C3AC  40 82 00 7C */	bne .L_8139E028
+/* 8139DFB0 0006C3B0  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 8139DFB4 0006C3B4  38 80 00 05 */	li r4, 0x5
+/* 8139DFB8 0006C3B8  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 8139DFBC 0006C3BC  80 63 00 64 */	lwz r3, 0x64(r3)
+/* 8139DFC0 0006C3C0  48 06 D1 79 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 8139DFC4 0006C3C4  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139DFC8 0006C3C8  7C 7F 1B 78 */	mr r31, r3
+/* 8139DFCC 0006C3CC  41 82 00 5C */	beq .L_8139E028
+/* 8139DFD0 0006C3D0  2C 1D 00 00 */	cmpwi r29, 0x0
+/* 8139DFD4 0006C3D4  7F A4 EB 78 */	mr r4, r29
+/* 8139DFD8 0006C3D8  41 82 00 08 */	beq .L_8139DFE0
+/* 8139DFDC 0006C3DC  38 9D 00 58 */	addi r4, r29, 0x58
+.L_8139DFE0:
+/* 8139DFE0 0006C3E0  7F E3 FB 78 */	mr r3, r31
+/* 8139DFE4 0006C3E4  38 A0 00 00 */	li r5, 0x0
+/* 8139DFE8 0006C3E8  4B FF E9 55 */	bl setEventHandler__Q33ipl5scene6ButtonFPQ23gui12EventHandlerPQ23gui12EventHandler
+/* 8139DFEC 0006C3EC  7F A3 EB 78 */	mr r3, r29
+/* 8139DFF0 0006C3F0  48 00 17 ED */	bl is_lower_limit__Q33ipl5scene8CalendarFv
+/* 8139DFF4 0006C3F4  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139DFF8 0006C3F8  40 82 00 10 */	bne .L_8139E008
+/* 8139DFFC 0006C3FC  7F E3 FB 78 */	mr r3, r31
+/* 8139E000 0006C400  38 80 00 18 */	li r4, 0x18
+/* 8139E004 0006C404  4B FF EB 55 */	bl iplButton_8139CB58
+.L_8139E008:
+/* 8139E008 0006C408  7F A3 EB 78 */	mr r3, r29
+/* 8139E00C 0006C40C  48 00 17 99 */	bl is_upper_limit__Q33ipl5scene8CalendarFv
+/* 8139E010 0006C410  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E014 0006C414  40 82 00 10 */	bne .L_8139E024
+/* 8139E018 0006C418  7F E3 FB 78 */	mr r3, r31
+/* 8139E01C 0006C41C  38 80 00 17 */	li r4, 0x17
+/* 8139E020 0006C420  4B FF EB 39 */	bl iplButton_8139CB58
+.L_8139E024:
+/* 8139E024 0006C424  3B C0 00 01 */	li r30, 0x1
+.L_8139E028:
+/* 8139E028 0006C428  39 61 00 20 */	addi r11, r1, 0x20
+/* 8139E02C 0006C42C  7F C3 F3 78 */	mr r3, r30
+/* 8139E030 0006C430  48 25 B4 E5 */	bl _restgpr_29
+/* 8139E034 0006C434  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8139E038 0006C438  7C 08 03 A6 */	mtlr r0
+/* 8139E03C 0006C43C  38 21 00 20 */	addi r1, r1, 0x20
+/* 8139E040 0006C440  4E 80 00 20 */	blr
+.endfn calcFadein__Q33ipl5scene8CalendarFv
+
+# .text:0x494 | 0x8139E044 | size: 0x8C
+# ipl::scene::Calendar::calcNormal()
+.fn calcNormal__Q33ipl5scene8CalendarFv, global
+/* 8139E044 0006C444  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139E048 0006C448  7C 08 02 A6 */	mflr r0
+/* 8139E04C 0006C44C  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139E050 0006C450  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139E054 0006C454  7C 7F 1B 78 */	mr r31, r3
+/* 8139E058 0006C458  80 03 00 64 */	lwz r0, 0x64(r3)
+/* 8139E05C 0006C45C  2C 00 00 02 */	cmpwi r0, 0x2
+/* 8139E060 0006C460  41 82 00 38 */	beq .L_8139E098
+/* 8139E064 0006C464  40 80 00 14 */	bge .L_8139E078
+/* 8139E068 0006C468  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139E06C 0006C46C  41 82 00 1C */	beq .L_8139E088
+/* 8139E070 0006C470  40 80 00 20 */	bge .L_8139E090
+/* 8139E074 0006C474  48 00 00 38 */	b .L_8139E0AC
+.L_8139E078:
+/* 8139E078 0006C478  2C 00 00 04 */	cmpwi r0, 0x4
+/* 8139E07C 0006C47C  41 82 00 2C */	beq .L_8139E0A8
+/* 8139E080 0006C480  40 80 00 2C */	bge .L_8139E0AC
+/* 8139E084 0006C484  48 00 00 1C */	b .L_8139E0A0
+.L_8139E088:
+/* 8139E088 0006C488  48 00 04 65 */	bl on_normal__Q33ipl5scene8CalendarFv
+/* 8139E08C 0006C48C  48 00 00 20 */	b .L_8139E0AC
+.L_8139E090:
+/* 8139E090 0006C490  48 00 05 61 */	bl on_scroll__Q33ipl5scene8CalendarFv
+/* 8139E094 0006C494  48 00 00 18 */	b .L_8139E0AC
+.L_8139E098:
+/* 8139E098 0006C498  48 00 05 59 */	bl on_scroll__Q33ipl5scene8CalendarFv
+/* 8139E09C 0006C49C  48 00 00 10 */	b .L_8139E0AC
+.L_8139E0A0:
+/* 8139E0A0 0006C4A0  48 00 06 91 */	bl on_wait_task__Q33ipl5scene8CalendarFv
+/* 8139E0A4 0006C4A4  48 00 00 08 */	b .L_8139E0AC
+.L_8139E0A8:
+/* 8139E0A8 0006C4A8  48 00 06 CD */	bl on_wait_exit__Q33ipl5scene8CalendarFv
+.L_8139E0AC:
+/* 8139E0AC 0006C4AC  80 7F 00 64 */	lwz r3, 0x64(r31)
+/* 8139E0B0 0006C4B0  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139E0B4 0006C4B4  38 03 FF FB */	subi r0, r3, 0x5
+/* 8139E0B8 0006C4B8  7C 00 00 34 */	cntlzw r0, r0
+/* 8139E0BC 0006C4BC  54 03 D9 7E */	srwi r3, r0, 5
+/* 8139E0C0 0006C4C0  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139E0C4 0006C4C4  7C 08 03 A6 */	mtlr r0
+/* 8139E0C8 0006C4C8  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139E0CC 0006C4CC  4E 80 00 20 */	blr
+.endfn calcNormal__Q33ipl5scene8CalendarFv
+
+# .text:0x520 | 0x8139E0D0 | size: 0x64
+# ipl::scene::Calendar::initCalcFadeout()
+.fn initCalcFadeout__Q33ipl5scene8CalendarFv, global
+/* 8139E0D0 0006C4D0  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139E0D4 0006C4D4  7C 08 02 A6 */	mflr r0
+/* 8139E0D8 0006C4D8  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139E0DC 0006C4DC  80 03 00 A8 */	lwz r0, 0xa8(r3)
+/* 8139E0E0 0006C4E0  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139E0E4 0006C4E4  40 82 00 24 */	bne .L_8139E108
+/* 8139E0E8 0006C4E8  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 8139E0EC 0006C4EC  38 80 00 05 */	li r4, 0x5
+/* 8139E0F0 0006C4F0  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 8139E0F4 0006C4F4  80 63 00 64 */	lwz r3, 0x64(r3)
+/* 8139E0F8 0006C4F8  48 06 D0 41 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 8139E0FC 0006C4FC  38 80 00 05 */	li r4, 0x5
+/* 8139E100 0006C500  4B FF EA 59 */	bl iplButton_8139CB58
+/* 8139E104 0006C504  48 00 00 20 */	b .L_8139E124
+.L_8139E108:
+/* 8139E108 0006C508  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 8139E10C 0006C50C  38 80 00 05 */	li r4, 0x5
+/* 8139E110 0006C510  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 8139E114 0006C514  80 63 00 64 */	lwz r3, 0x64(r3)
+/* 8139E118 0006C518  48 06 D0 21 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 8139E11C 0006C51C  38 80 00 06 */	li r4, 0x6
+/* 8139E120 0006C520  4B FF EA 39 */	bl iplButton_8139CB58
+.L_8139E124:
+/* 8139E124 0006C524  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139E128 0006C528  7C 08 03 A6 */	mtlr r0
+/* 8139E12C 0006C52C  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139E130 0006C530  4E 80 00 20 */	blr
+.endfn initCalcFadeout__Q33ipl5scene8CalendarFv
+
+# .text:0x584 | 0x8139E134 | size: 0x30
+# ipl::scene::Calendar::calcFadeout()
+.fn calcFadeout__Q33ipl5scene8CalendarFv, global
+/* 8139E134 0006C534  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139E138 0006C538  7C 08 02 A6 */	mflr r0
+/* 8139E13C 0006C53C  38 80 00 00 */	li r4, 0x0
+/* 8139E140 0006C540  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139E144 0006C544  80 63 00 6C */	lwz r3, 0x6c(r3)
+/* 8139E148 0006C548  4B FC C9 89 */	bl isPlaying__Q33ipl6layout6ObjectCFi
+/* 8139E14C 0006C54C  7C 60 00 34 */	cntlzw r0, r3
+/* 8139E150 0006C550  54 03 D9 7E */	srwi r3, r0, 5
+/* 8139E154 0006C554  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139E158 0006C558  7C 08 03 A6 */	mtlr r0
+/* 8139E15C 0006C55C  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139E160 0006C560  4E 80 00 20 */	blr
+.endfn calcFadeout__Q33ipl5scene8CalendarFv
+
+# .text:0x5B4 | 0x8139E164 | size: 0xD4
+# ipl::scene::Calendar::draw()
+.fn draw__Q33ipl5scene8CalendarFv, global
+/* 8139E164 0006C564  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139E168 0006C568  7C 08 02 A6 */	mflr r0
+/* 8139E16C 0006C56C  3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
+/* 8139E170 0006C570  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139E174 0006C574  38 84 90 08 */	addi r4, r4, smArg__Q23ipl6System@l
+/* 8139E178 0006C578  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139E17C 0006C57C  93 C1 00 08 */	stw r30, 0x8(r1)
+/* 8139E180 0006C580  7C 7E 1B 78 */	mr r30, r3
+/* 8139E184 0006C584  80 64 00 64 */	lwz r3, 0x64(r4)
+/* 8139E188 0006C588  80 03 01 00 */	lwz r0, 0x100(r3)
+/* 8139E18C 0006C58C  2C 00 00 01 */	cmpwi r0, 0x1
+/* 8139E190 0006C590  40 82 00 90 */	bne .L_8139E220
+/* 8139E194 0006C594  38 60 00 00 */	li r3, 0x0
+/* 8139E198 0006C598  4B FC 48 D5 */	bl setOrtho__Q33ipl7utility8GraphicsFUl
+/* 8139E19C 0006C59C  80 7E 00 6C */	lwz r3, 0x6c(r30)
+/* 8139E1A0 0006C5A0  4B FC C5 FD */	bl draw__Q33ipl6layout6ObjectFv
+/* 8139E1A4 0006C5A4  80 7E 00 64 */	lwz r3, 0x64(r30)
+/* 8139E1A8 0006C5A8  38 03 FF FF */	subi r0, r3, 0x1
+/* 8139E1AC 0006C5AC  28 00 00 01 */	cmplwi r0, 0x1
+/* 8139E1B0 0006C5B0  41 81 00 28 */	bgt .L_8139E1D8
+/* 8139E1B4 0006C5B4  3B E0 00 53 */	li r31, 0x53
+.L_8139E1B8:
+/* 8139E1B8 0006C5B8  38 7E 00 84 */	addi r3, r30, 0x84
+/* 8139E1BC 0006C5BC  57 E4 04 3E */	clrlwi r4, r31, 16
+/* 8139E1C0 0006C5C0  48 17 41 59 */	bl fn_81512318
+/* 8139E1C4 0006C5C4  38 80 00 00 */	li r4, 0x0
+/* 8139E1C8 0006C5C8  48 00 19 A5 */	bl draw__Q33ipl5scene4DateFb
+/* 8139E1CC 0006C5CC  37 FF FF FF */	subic. r31, r31, 0x1
+/* 8139E1D0 0006C5D0  40 80 FF E8 */	bge .L_8139E1B8
+/* 8139E1D4 0006C5D4  48 00 00 4C */	b .L_8139E220
+.L_8139E1D8:
+/* 8139E1D8 0006C5D8  3B E0 00 00 */	li r31, 0x0
+.L_8139E1DC:
+/* 8139E1DC 0006C5DC  38 7E 00 90 */	addi r3, r30, 0x90
+/* 8139E1E0 0006C5E0  57 E4 04 3E */	clrlwi r4, r31, 16
+/* 8139E1E4 0006C5E4  48 17 41 35 */	bl fn_81512318
+/* 8139E1E8 0006C5E8  38 80 00 00 */	li r4, 0x0
+/* 8139E1EC 0006C5EC  48 00 19 81 */	bl draw__Q33ipl5scene4DateFb
+/* 8139E1F0 0006C5F0  3B FF 00 01 */	addi r31, r31, 0x1
+/* 8139E1F4 0006C5F4  28 1F 00 2A */	cmplwi r31, 0x2a
+/* 8139E1F8 0006C5F8  41 80 FF E4 */	blt .L_8139E1DC
+/* 8139E1FC 0006C5FC  3B E0 00 00 */	li r31, 0x0
+.L_8139E200:
+/* 8139E200 0006C600  38 7E 00 90 */	addi r3, r30, 0x90
+/* 8139E204 0006C604  57 E4 04 3E */	clrlwi r4, r31, 16
+/* 8139E208 0006C608  48 17 41 11 */	bl fn_81512318
+/* 8139E20C 0006C60C  38 80 00 01 */	li r4, 0x1
+/* 8139E210 0006C610  48 00 19 5D */	bl draw__Q33ipl5scene4DateFb
+/* 8139E214 0006C614  3B FF 00 01 */	addi r31, r31, 0x1
+/* 8139E218 0006C618  28 1F 00 2A */	cmplwi r31, 0x2a
+/* 8139E21C 0006C61C  41 80 FF E4 */	blt .L_8139E200
+.L_8139E220:
+/* 8139E220 0006C620  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139E224 0006C624  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139E228 0006C628  83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 8139E22C 0006C62C  7C 08 03 A6 */	mtlr r0
+/* 8139E230 0006C630  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139E234 0006C634  4E 80 00 20 */	blr
+.endfn draw__Q33ipl5scene8CalendarFv
+
+# .text:0x688 | 0x8139E238 | size: 0x6C
+# ipl::scene::Calendar::doAnim(int)
+.fn doAnim__Q33ipl5scene8CalendarFi, global
+/* 8139E238 0006C638  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139E23C 0006C63C  7C 08 02 A6 */	mflr r0
+/* 8139E240 0006C640  3C C0 81 61 */	lis r6, lbl_8160F9E0@ha
+/* 8139E244 0006C644  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139E248 0006C648  54 80 18 38 */	slwi r0, r4, 3
+/* 8139E24C 0006C64C  38 C6 F9 E0 */	addi r6, r6, lbl_8160F9E0@l
+/* 8139E250 0006C650  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139E254 0006C654  7C 86 02 14 */	add r4, r6, r0
+/* 8139E258 0006C658  7C 06 04 2E */	lfsx f0, r6, r0
+/* 8139E25C 0006C65C  38 00 00 00 */	li r0, 0x0
+/* 8139E260 0006C660  80 A3 00 74 */	lwz r5, 0x74(r3)
+/* 8139E264 0006C664  C0 24 00 04 */	lfs f1, 0x4(r4)
+/* 8139E268 0006C668  D0 05 00 08 */	stfs f0, 0x8(r5)
+/* 8139E26C 0006C66C  80 83 00 74 */	lwz r4, 0x74(r3)
+/* 8139E270 0006C670  D0 24 00 04 */	stfs f1, 0x4(r4)
+/* 8139E274 0006C674  80 83 00 74 */	lwz r4, 0x74(r3)
+/* 8139E278 0006C678  90 04 00 18 */	stw r0, 0x18(r4)
+/* 8139E27C 0006C67C  83 E3 00 74 */	lwz r31, 0x74(r3)
+/* 8139E280 0006C680  7F E3 FB 78 */	mr r3, r31
+/* 8139E284 0006C684  4B FC 45 ED */	bl initFrame__Q33ipl7utility15FrameControllerFv
+/* 8139E288 0006C688  38 00 00 01 */	li r0, 0x1
+/* 8139E28C 0006C68C  90 1F 00 14 */	stw r0, 0x14(r31)
+/* 8139E290 0006C690  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139E294 0006C694  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139E298 0006C698  7C 08 03 A6 */	mtlr r0
+/* 8139E29C 0006C69C  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139E2A0 0006C6A0  4E 80 00 20 */	blr
+.endfn doAnim__Q33ipl5scene8CalendarFi
+
+# .text:0x6F4 | 0x8139E2A4 | size: 0x170
+# ipl::scene::Calendar::onEventDerived(unsigned long, unsigned long, const ipl::controller::Interface*)
+.fn onEventDerived__Q33ipl5scene8CalendarFUlUlPCQ33ipl10controller9Interface, global
+/* 8139E2A4 0006C6A4  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8139E2A8 0006C6A8  7C 08 02 A6 */	mflr r0
+/* 8139E2AC 0006C6AC  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8139E2B0 0006C6B0  39 61 00 20 */	addi r11, r1, 0x20
+/* 8139E2B4 0006C6B4  48 25 B2 15 */	bl _savegpr_29
+/* 8139E2B8 0006C6B8  7C 7D 1B 78 */	mr r29, r3
+/* 8139E2BC 0006C6BC  80 63 00 5C */	lwz r3, 0x5c(r3)
+/* 8139E2C0 0006C6C0  7C BE 2B 78 */	mr r30, r5
+/* 8139E2C4 0006C6C4  7C DF 33 78 */	mr r31, r6
+/* 8139E2C8 0006C6C8  81 83 00 00 */	lwz r12, 0x0(r3)
+/* 8139E2CC 0006C6CC  81 8C 00 24 */	lwz r12, 0x24(r12)
+/* 8139E2D0 0006C6D0  7D 89 03 A6 */	mtctr r12
+/* 8139E2D4 0006C6D4  4E 80 04 21 */	bctrl
+/* 8139E2D8 0006C6D8  81 83 00 00 */	lwz r12, 0x0(r3)
+/* 8139E2DC 0006C6DC  81 8C 00 70 */	lwz r12, 0x70(r12)
+/* 8139E2E0 0006C6E0  7D 89 03 A6 */	mtctr r12
+/* 8139E2E4 0006C6E4  4E 80 04 21 */	bctrl
+/* 8139E2E8 0006C6E8  2C 1E 00 00 */	cmpwi r30, 0x0
+/* 8139E2EC 0006C6EC  3B C3 00 B4 */	addi r30, r3, 0xb4
+/* 8139E2F0 0006C6F0  41 82 00 08 */	beq .L_8139E2F8
+/* 8139E2F4 0006C6F4  48 00 01 08 */	b .L_8139E3FC
+.L_8139E2F8:
+/* 8139E2F8 0006C6F8  81 9F 00 00 */	lwz r12, 0x0(r31)
+/* 8139E2FC 0006C6FC  3C 80 00 10 */	lis r4, 0x10
+/* 8139E300 0006C700  7F E3 FB 78 */	mr r3, r31
+/* 8139E304 0006C704  81 8C 00 18 */	lwz r12, 0x18(r12)
+/* 8139E308 0006C708  38 84 08 00 */	addi r4, r4, 0x800
+/* 8139E30C 0006C70C  7D 89 03 A6 */	mtctr r12
+/* 8139E310 0006C710  4E 80 04 21 */	bctrl
+/* 8139E314 0006C714  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E318 0006C718  41 82 00 E4 */	beq .L_8139E3FC
+/* 8139E31C 0006C71C  3F E0 81 65 */	lis r31, lbl_8164BF5C@ha
+/* 8139E320 0006C720  7F C3 F3 78 */	mr r3, r30
+/* 8139E324 0006C724  3B FF BF 5C */	addi r31, r31, lbl_8164BF5C@l
+/* 8139E328 0006C728  80 9F 00 14 */	lwz r4, 0x14(r31)
+/* 8139E32C 0006C72C  48 26 41 55 */	bl strcmp
+/* 8139E330 0006C730  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E334 0006C734  40 82 00 2C */	bne .L_8139E360
+/* 8139E338 0006C738  38 00 00 00 */	li r0, 0x0
+/* 8139E33C 0006C73C  7F A3 EB 78 */	mr r3, r29
+/* 8139E340 0006C740  90 1D 00 A8 */	stw r0, 0xa8(r29)
+/* 8139E344 0006C744  48 00 08 15 */	bl start_exit__Q33ipl5scene8CalendarFv
+/* 8139E348 0006C748  3C 60 81 09 */	lis r3, sSystem__Q23ipl3snd@ha
+/* 8139E34C 0006C74C  3C 80 81 65 */	lis r4, lbl_8164C4FF@ha
+/* 8139E350 0006C750  38 63 99 2C */	addi r3, r3, sSystem__Q23ipl3snd@l
+/* 8139E354 0006C754  38 84 C4 FF */	addi r4, r4, lbl_8164C4FF@l
+/* 8139E358 0006C758  4B FC D1 15 */	bl startSE__Q33ipl3snd6SystemFPCc
+/* 8139E35C 0006C75C  48 00 00 A0 */	b .L_8139E3FC
+.L_8139E360:
+/* 8139E360 0006C760  80 9F 00 24 */	lwz r4, 0x24(r31)
+/* 8139E364 0006C764  7F C3 F3 78 */	mr r3, r30
+/* 8139E368 0006C768  48 26 41 19 */	bl strcmp
+/* 8139E36C 0006C76C  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E370 0006C770  40 82 00 3C */	bne .L_8139E3AC
+/* 8139E374 0006C774  7F A3 EB 78 */	mr r3, r29
+/* 8139E378 0006C778  48 00 14 2D */	bl is_upper_limit__Q33ipl5scene8CalendarFv
+/* 8139E37C 0006C77C  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E380 0006C780  40 82 00 2C */	bne .L_8139E3AC
+/* 8139E384 0006C784  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 8139E388 0006C788  38 80 00 05 */	li r4, 0x5
+/* 8139E38C 0006C78C  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 8139E390 0006C790  80 63 00 64 */	lwz r3, 0x64(r3)
+/* 8139E394 0006C794  48 06 CD A5 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 8139E398 0006C798  38 80 00 13 */	li r4, 0x13
+/* 8139E39C 0006C79C  4B FF E7 BD */	bl iplButton_8139CB58
+/* 8139E3A0 0006C7A0  7F A3 EB 78 */	mr r3, r29
+/* 8139E3A4 0006C7A4  48 00 03 F5 */	bl start_scroll_r__Q33ipl5scene8CalendarFv
+/* 8139E3A8 0006C7A8  48 00 00 54 */	b .L_8139E3FC
+.L_8139E3AC:
+/* 8139E3AC 0006C7AC  3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
+/* 8139E3B0 0006C7B0  7F C3 F3 78 */	mr r3, r30
+/* 8139E3B4 0006C7B4  38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 8139E3B8 0006C7B8  80 84 00 28 */	lwz r4, 0x28(r4)
+/* 8139E3BC 0006C7BC  48 26 40 C5 */	bl strcmp
+/* 8139E3C0 0006C7C0  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E3C4 0006C7C4  40 82 00 38 */	bne .L_8139E3FC
+/* 8139E3C8 0006C7C8  7F A3 EB 78 */	mr r3, r29
+/* 8139E3CC 0006C7CC  48 00 14 11 */	bl is_lower_limit__Q33ipl5scene8CalendarFv
+/* 8139E3D0 0006C7D0  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E3D4 0006C7D4  40 82 00 28 */	bne .L_8139E3FC
+/* 8139E3D8 0006C7D8  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 8139E3DC 0006C7DC  38 80 00 05 */	li r4, 0x5
+/* 8139E3E0 0006C7E0  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 8139E3E4 0006C7E4  80 63 00 64 */	lwz r3, 0x64(r3)
+/* 8139E3E8 0006C7E8  48 06 CD 51 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 8139E3EC 0006C7EC  38 80 00 14 */	li r4, 0x14
+/* 8139E3F0 0006C7F0  4B FF E7 69 */	bl iplButton_8139CB58
+/* 8139E3F4 0006C7F4  7F A3 EB 78 */	mr r3, r29
+/* 8139E3F8 0006C7F8  48 00 05 75 */	bl start_scroll_l__Q33ipl5scene8CalendarFv
+.L_8139E3FC:
+/* 8139E3FC 0006C7FC  39 61 00 20 */	addi r11, r1, 0x20
+/* 8139E400 0006C800  48 25 B1 15 */	bl _restgpr_29
+/* 8139E404 0006C804  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8139E408 0006C808  7C 08 03 A6 */	mtlr r0
+/* 8139E40C 0006C80C  38 21 00 20 */	addi r1, r1, 0x20
+/* 8139E410 0006C810  4E 80 00 20 */	blr
+.endfn onEventDerived__Q33ipl5scene8CalendarFUlUlPCQ33ipl10controller9Interface
+
+# .text:0x864 | 0x8139E414 | size: 0x48
+# ipl::scene::Calendar::onPointDate(ipl::scene::Date*)
+.fn onPointDate__Q33ipl5scene8CalendarFPQ33ipl5scene4Date, global
+/* 8139E414 0006C814  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139E418 0006C818  7C 08 02 A6 */	mflr r0
+/* 8139E41C 0006C81C  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139E420 0006C820  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139E424 0006C824  7C 9F 23 78 */	mr r31, r4
+/* 8139E428 0006C828  93 C1 00 08 */	stw r30, 0x8(r1)
+/* 8139E42C 0006C82C  7C 7E 1B 78 */	mr r30, r3
+/* 8139E430 0006C830  38 63 00 90 */	addi r3, r3, 0x90
+/* 8139E434 0006C834  48 17 3E 3D */	bl List_Remove__Q24nw4r2utFPQ34nw4r2ut4ListPv
+/* 8139E438 0006C838  7F E4 FB 78 */	mr r4, r31
+/* 8139E43C 0006C83C  38 7E 00 90 */	addi r3, r30, 0x90
+/* 8139E440 0006C840  48 17 3C 35 */	bl List_Append__Q24nw4r2utFPQ34nw4r2ut4ListPv
+/* 8139E444 0006C844  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139E448 0006C848  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139E44C 0006C84C  83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 8139E450 0006C850  7C 08 03 A6 */	mtlr r0
+/* 8139E454 0006C854  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139E458 0006C858  4E 80 00 20 */	blr
+.endfn onPointDate__Q33ipl5scene8CalendarFPQ33ipl5scene4Date
+
+# .text:0x8AC | 0x8139E45C | size: 0x90
+# ipl::scene::Calendar::onTrigDate(ipl::scene::Date*)
+.fn onTrigDate__Q33ipl5scene8CalendarFPQ33ipl5scene4Date, global
+/* 8139E45C 0006C85C  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139E460 0006C860  7C 08 02 A6 */	mflr r0
+/* 8139E464 0006C864  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139E468 0006C868  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139E46C 0006C86C  7C 9F 23 78 */	mr r31, r4
+/* 8139E470 0006C870  93 C1 00 08 */	stw r30, 0x8(r1)
+/* 8139E474 0006C874  7C 7E 1B 78 */	mr r30, r3
+/* 8139E478 0006C878  80 03 00 64 */	lwz r0, 0x64(r3)
+/* 8139E47C 0006C87C  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139E480 0006C880  40 82 00 54 */	bne .L_8139E4D4
+/* 8139E484 0006C884  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 8139E488 0006C888  38 80 00 04 */	li r4, 0x4
+/* 8139E48C 0006C88C  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 8139E490 0006C890  80 63 00 64 */	lwz r3, 0x64(r3)
+/* 8139E494 0006C894  48 06 CC A5 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 8139E498 0006C898  80 9F 00 38 */	lwz r4, 0x38(r31)
+/* 8139E49C 0006C89C  4B FF 14 29 */	bl updateDate__Q33ipl5scene5BoardFRCQ33ipl7utility4Date
+/* 8139E4A0 0006C8A0  7F E3 FB 78 */	mr r3, r31
+/* 8139E4A4 0006C8A4  38 80 00 02 */	li r4, 0x2
+/* 8139E4A8 0006C8A8  48 00 16 F9 */	bl doAnim__Q33ipl5scene4DateFi
+/* 8139E4AC 0006C8AC  3C 60 81 09 */	lis r3, sSystem__Q23ipl3snd@ha
+/* 8139E4B0 0006C8B0  3C 80 81 65 */	lis r4, lbl_8164C50E@ha
+/* 8139E4B4 0006C8B4  93 FE 00 80 */	stw r31, 0x80(r30)
+/* 8139E4B8 0006C8B8  38 63 99 2C */	addi r3, r3, sSystem__Q23ipl3snd@l
+/* 8139E4BC 0006C8BC  38 84 C5 0E */	addi r4, r4, lbl_8164C50E@l
+/* 8139E4C0 0006C8C0  4B FC CF AD */	bl startSE__Q33ipl3snd6SystemFPCc
+/* 8139E4C4 0006C8C4  80 7E 00 64 */	lwz r3, 0x64(r30)
+/* 8139E4C8 0006C8C8  38 00 00 04 */	li r0, 0x4
+/* 8139E4CC 0006C8CC  90 7E 00 68 */	stw r3, 0x68(r30)
+/* 8139E4D0 0006C8D0  90 1E 00 64 */	stw r0, 0x64(r30)
+.L_8139E4D4:
+/* 8139E4D4 0006C8D4  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139E4D8 0006C8D8  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139E4DC 0006C8DC  83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 8139E4E0 0006C8E0  7C 08 03 A6 */	mtlr r0
+/* 8139E4E4 0006C8E4  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139E4E8 0006C8E8  4E 80 00 20 */	blr
+.endfn onTrigDate__Q33ipl5scene8CalendarFPQ33ipl5scene4Date
+
+# .text:0x93C | 0x8139E4EC | size: 0x104
+# ipl::scene::Calendar::on_normal()
+.fn on_normal__Q33ipl5scene8CalendarFv, global
+/* 8139E4EC 0006C8EC  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139E4F0 0006C8F0  7C 08 02 A6 */	mflr r0
+/* 8139E4F4 0006C8F4  3C A0 81 09 */	lis r5, smArg__Q23ipl6System@ha
+/* 8139E4F8 0006C8F8  38 80 00 05 */	li r4, 0x5
+/* 8139E4FC 0006C8FC  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139E500 0006C900  38 A5 90 08 */	addi r5, r5, smArg__Q23ipl6System@l
+/* 8139E504 0006C904  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139E508 0006C908  93 C1 00 08 */	stw r30, 0x8(r1)
+/* 8139E50C 0006C90C  7C 7E 1B 78 */	mr r30, r3
+/* 8139E510 0006C910  80 65 00 64 */	lwz r3, 0x64(r5)
+/* 8139E514 0006C914  48 06 CC 25 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 8139E518 0006C918  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E51C 0006C91C  7C 7F 1B 78 */	mr r31, r3
+/* 8139E520 0006C920  41 82 00 18 */	beq .L_8139E538
+/* 8139E524 0006C924  4B FF E3 F1 */	bl isActive__Q33ipl5scene6ButtonCFv
+/* 8139E528 0006C928  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E52C 0006C92C  41 82 00 0C */	beq .L_8139E538
+/* 8139E530 0006C930  7F E3 FB 78 */	mr r3, r31
+/* 8139E534 0006C934  4B FF E0 39 */	bl update__Q33ipl5scene6ButtonFv
+.L_8139E538:
+/* 8139E538 0006C938  3B E0 00 00 */	li r31, 0x0
+.L_8139E53C:
+/* 8139E53C 0006C93C  38 7E 00 84 */	addi r3, r30, 0x84
+/* 8139E540 0006C940  57 E4 04 3E */	clrlwi r4, r31, 16
+/* 8139E544 0006C944  48 17 3D D5 */	bl fn_81512318
+/* 8139E548 0006C948  48 00 19 2D */	bl update__Q33ipl5scene4DateFv
+/* 8139E54C 0006C94C  3B FF 00 01 */	addi r31, r31, 0x1
+/* 8139E550 0006C950  28 1F 00 2A */	cmplwi r31, 0x2a
+/* 8139E554 0006C954  41 80 FF E8 */	blt .L_8139E53C
+/* 8139E558 0006C958  4B F9 74 51 */	bl getMasterController__Q23ipl6SystemFv
+/* 8139E55C 0006C95C  81 83 00 00 */	lwz r12, 0x0(r3)
+/* 8139E560 0006C960  3C 80 30 00 */	lis r4, 0x3000
+/* 8139E564 0006C964  7C 7F 1B 78 */	mr r31, r3
+/* 8139E568 0006C968  81 8C 00 14 */	lwz r12, 0x14(r12)
+/* 8139E56C 0006C96C  38 84 10 00 */	addi r4, r4, 0x1000
+/* 8139E570 0006C970  7D 89 03 A6 */	mtctr r12
+/* 8139E574 0006C974  4E 80 04 21 */	bctrl
+/* 8139E578 0006C978  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E57C 0006C97C  41 82 00 20 */	beq .L_8139E59C
+/* 8139E580 0006C980  7F C3 F3 78 */	mr r3, r30
+/* 8139E584 0006C984  48 00 12 59 */	bl is_lower_limit__Q33ipl5scene8CalendarFv
+/* 8139E588 0006C988  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E58C 0006C98C  40 82 00 10 */	bne .L_8139E59C
+/* 8139E590 0006C990  7F C3 F3 78 */	mr r3, r30
+/* 8139E594 0006C994  48 00 03 D9 */	bl start_scroll_l__Q33ipl5scene8CalendarFv
+/* 8139E598 0006C998  48 00 00 40 */	b .L_8139E5D8
+.L_8139E59C:
+/* 8139E59C 0006C99C  81 9F 00 00 */	lwz r12, 0x0(r31)
+/* 8139E5A0 0006C9A0  3C 80 06 00 */	lis r4, 0x600
+/* 8139E5A4 0006C9A4  7F E3 FB 78 */	mr r3, r31
+/* 8139E5A8 0006C9A8  81 8C 00 14 */	lwz r12, 0x14(r12)
+/* 8139E5AC 0006C9AC  38 84 00 10 */	addi r4, r4, 0x10
+/* 8139E5B0 0006C9B0  7D 89 03 A6 */	mtctr r12
+/* 8139E5B4 0006C9B4  4E 80 04 21 */	bctrl
+/* 8139E5B8 0006C9B8  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E5BC 0006C9BC  41 82 00 1C */	beq .L_8139E5D8
+/* 8139E5C0 0006C9C0  7F C3 F3 78 */	mr r3, r30
+/* 8139E5C4 0006C9C4  48 00 11 E1 */	bl is_upper_limit__Q33ipl5scene8CalendarFv
+/* 8139E5C8 0006C9C8  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E5CC 0006C9CC  40 82 00 0C */	bne .L_8139E5D8
+/* 8139E5D0 0006C9D0  7F C3 F3 78 */	mr r3, r30
+/* 8139E5D4 0006C9D4  48 00 01 C5 */	bl start_scroll_r__Q33ipl5scene8CalendarFv
+.L_8139E5D8:
+/* 8139E5D8 0006C9D8  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139E5DC 0006C9DC  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139E5E0 0006C9E0  83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 8139E5E4 0006C9E4  7C 08 03 A6 */	mtlr r0
+/* 8139E5E8 0006C9E8  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139E5EC 0006C9EC  4E 80 00 20 */	blr
+.endfn on_normal__Q33ipl5scene8CalendarFv
+
+# .text:0xA40 | 0x8139E5F0 | size: 0x140
+# ipl::scene::Calendar::on_scroll()
+.fn on_scroll__Q33ipl5scene8CalendarFv, global
+/* 8139E5F0 0006C9F0  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8139E5F4 0006C9F4  7C 08 02 A6 */	mflr r0
+/* 8139E5F8 0006C9F8  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8139E5FC 0006C9FC  39 61 00 20 */	addi r11, r1, 0x20
+/* 8139E600 0006CA00  48 25 AE C5 */	bl _savegpr_28
+/* 8139E604 0006CA04  88 03 00 9C */	lbz r0, 0x9c(r3)
+/* 8139E608 0006CA08  7C 7C 1B 78 */	mr r28, r3
+/* 8139E60C 0006CA0C  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139E610 0006CA10  41 82 00 44 */	beq .L_8139E654
+/* 8139E614 0006CA14  80 03 00 64 */	lwz r0, 0x64(r3)
+/* 8139E618 0006CA18  2C 00 00 02 */	cmpwi r0, 0x2
+/* 8139E61C 0006CA1C  41 82 00 24 */	beq .L_8139E640
+/* 8139E620 0006CA20  40 80 00 2C */	bge .L_8139E64C
+/* 8139E624 0006CA24  2C 00 00 01 */	cmpwi r0, 0x1
+/* 8139E628 0006CA28  40 80 00 08 */	bge .L_8139E630
+/* 8139E62C 0006CA2C  48 00 00 20 */	b .L_8139E64C
+.L_8139E630:
+/* 8139E630 0006CA30  80 A3 00 7C */	lwz r5, 0x7c(r3)
+/* 8139E634 0006CA34  38 80 00 02 */	li r4, 0x2
+/* 8139E638 0006CA38  48 00 0A 6D */	bl set_textbox_date__Q33ipl5scene8CalendarFiRCQ33ipl7utility4Date
+/* 8139E63C 0006CA3C  48 00 00 10 */	b .L_8139E64C
+.L_8139E640:
+/* 8139E640 0006CA40  80 A3 00 7C */	lwz r5, 0x7c(r3)
+/* 8139E644 0006CA44  38 80 00 00 */	li r4, 0x0
+/* 8139E648 0006CA48  48 00 0A 5D */	bl set_textbox_date__Q33ipl5scene8CalendarFiRCQ33ipl7utility4Date
+.L_8139E64C:
+/* 8139E64C 0006CA4C  38 00 00 00 */	li r0, 0x0
+/* 8139E650 0006CA50  98 1C 00 9C */	stb r0, 0x9c(r28)
+.L_8139E654:
+/* 8139E654 0006CA54  80 7C 00 6C */	lwz r3, 0x6c(r28)
+/* 8139E658 0006CA58  38 80 00 00 */	li r4, 0x0
+/* 8139E65C 0006CA5C  4B FC C4 75 */	bl isPlaying__Q33ipl6layout6ObjectCFi
+/* 8139E660 0006CA60  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E664 0006CA64  40 82 00 B4 */	bne .L_8139E718
+/* 8139E668 0006CA68  3B E0 00 00 */	li r31, 0x0
+/* 8139E66C 0006CA6C  48 00 00 0C */	b .L_8139E678
+.L_8139E670:
+/* 8139E670 0006CA70  7F E3 FB 78 */	mr r3, r31
+/* 8139E674 0006CA74  48 00 1C E5 */	bl initEvent__Q33ipl5scene4DateFv
+.L_8139E678:
+/* 8139E678 0006CA78  7F E4 FB 78 */	mr r4, r31
+/* 8139E67C 0006CA7C  38 7C 00 84 */	addi r3, r28, 0x84
+/* 8139E680 0006CA80  48 17 3C 5D */	bl List_GetNext__Q24nw4r2utFPCQ34nw4r2ut4ListPCv
+/* 8139E684 0006CA84  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E688 0006CA88  7C 7F 1B 78 */	mr r31, r3
+/* 8139E68C 0006CA8C  40 82 FF E4 */	bne .L_8139E670
+/* 8139E690 0006CA90  7F 83 E3 78 */	mr r3, r28
+/* 8139E694 0006CA94  48 00 07 0D */	bl set_textbox_month__Q33ipl5scene8CalendarFv
+/* 8139E698 0006CA98  80 BC 00 7C */	lwz r5, 0x7c(r28)
+/* 8139E69C 0006CA9C  7F 83 E3 78 */	mr r3, r28
+/* 8139E6A0 0006CAA0  38 80 00 01 */	li r4, 0x1
+/* 8139E6A4 0006CAA4  48 00 0A 01 */	bl set_textbox_date__Q33ipl5scene8CalendarFiRCQ33ipl7utility4Date
+/* 8139E6A8 0006CAA8  7F 83 E3 78 */	mr r3, r28
+/* 8139E6AC 0006CAAC  38 80 00 01 */	li r4, 0x1
+/* 8139E6B0 0006CAB0  4B FF FB 89 */	bl doAnim__Q33ipl5scene8CalendarFi
+/* 8139E6B4 0006CAB4  80 7C 00 6C */	lwz r3, 0x6c(r28)
+/* 8139E6B8 0006CAB8  4B FC C0 4D */	bl calc__Q33ipl6layout6ObjectFv
+/* 8139E6BC 0006CABC  7F 83 E3 78 */	mr r3, r28
+/* 8139E6C0 0006CAC0  38 80 00 01 */	li r4, 0x1
+/* 8139E6C4 0006CAC4  48 00 0C ED */	bl set_date_pos__Q33ipl5scene8CalendarFi
+/* 8139E6C8 0006CAC8  3B C0 00 00 */	li r30, 0x0
+/* 8139E6CC 0006CACC  3B E0 00 00 */	li r31, 0x0
+.L_8139E6D0:
+/* 8139E6D0 0006CAD0  38 7C 00 84 */	addi r3, r28, 0x84
+/* 8139E6D4 0006CAD4  57 C4 04 3E */	clrlwi r4, r30, 16
+/* 8139E6D8 0006CAD8  48 17 3C 41 */	bl fn_81512318
+/* 8139E6DC 0006CADC  93 E3 00 0C */	stw r31, 0xc(r3)
+/* 8139E6E0 0006CAE0  7C 7D 1B 78 */	mr r29, r3
+/* 8139E6E4 0006CAE4  38 80 00 0B */	li r4, 0xb
+/* 8139E6E8 0006CAE8  48 00 14 B9 */	bl doAnim__Q33ipl5scene4DateFi
+/* 8139E6EC 0006CAEC  7F A3 EB 78 */	mr r3, r29
+/* 8139E6F0 0006CAF0  48 00 13 E5 */	bl calc__Q33ipl5scene4DateFv
+/* 8139E6F4 0006CAF4  3B DE 00 01 */	addi r30, r30, 0x1
+/* 8139E6F8 0006CAF8  28 1E 00 2A */	cmplwi r30, 0x2a
+/* 8139E6FC 0006CAFC  41 80 FF D4 */	blt .L_8139E6D0
+/* 8139E700 0006CB00  7F 83 E3 78 */	mr r3, r28
+/* 8139E704 0006CB04  48 00 10 41 */	bl exec_search_task__Q33ipl5scene8CalendarFv
+/* 8139E708 0006CB08  80 7C 00 64 */	lwz r3, 0x64(r28)
+/* 8139E70C 0006CB0C  38 00 00 00 */	li r0, 0x0
+/* 8139E710 0006CB10  90 7C 00 68 */	stw r3, 0x68(r28)
+/* 8139E714 0006CB14  90 1C 00 64 */	stw r0, 0x64(r28)
+.L_8139E718:
+/* 8139E718 0006CB18  39 61 00 20 */	addi r11, r1, 0x20
+/* 8139E71C 0006CB1C  48 25 AD F5 */	bl _restgpr_28
+/* 8139E720 0006CB20  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8139E724 0006CB24  7C 08 03 A6 */	mtlr r0
+/* 8139E728 0006CB28  38 21 00 20 */	addi r1, r1, 0x20
+/* 8139E72C 0006CB2C  4E 80 00 20 */	blr
+.endfn on_scroll__Q33ipl5scene8CalendarFv
+
+# .text:0xB80 | 0x8139E730 | size: 0x44
+# ipl::scene::Calendar::on_wait_task()
+.fn on_wait_task__Q33ipl5scene8CalendarFv, global
+/* 8139E730 0006CB30  80 03 00 A0 */	lwz r0, 0xa0(r3)
+/* 8139E734 0006CB34  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139E738 0006CB38  4C 82 00 20 */	bnelr
+/* 8139E73C 0006CB3C  80 03 00 68 */	lwz r0, 0x68(r3)
+/* 8139E740 0006CB40  2C 00 00 02 */	cmpwi r0, 0x2
+/* 8139E744 0006CB44  41 82 00 24 */	beq .L_8139E768
+/* 8139E748 0006CB48  40 80 00 10 */	bge .L_8139E758
+/* 8139E74C 0006CB4C  2C 00 00 01 */	cmpwi r0, 0x1
+/* 8139E750 0006CB50  40 80 00 14 */	bge .L_8139E764
+/* 8139E754 0006CB54  4E 80 00 20 */	blr
+.L_8139E758:
+/* 8139E758 0006CB58  2C 00 00 05 */	cmpwi r0, 0x5
+/* 8139E75C 0006CB5C  41 82 00 10 */	beq .L_8139E76C
+/* 8139E760 0006CB60  4E 80 00 20 */	blr
+.L_8139E764:
+/* 8139E764 0006CB64  48 00 00 7C */	b do_scroll_r__Q33ipl5scene8CalendarFv
+.L_8139E768:
+/* 8139E768 0006CB68  48 00 02 50 */	b do_scroll_l__Q33ipl5scene8CalendarFv
+.L_8139E76C:
+/* 8139E76C 0006CB6C  48 00 04 60 */	b do_exit__Q33ipl5scene8CalendarFv
+/* 8139E770 0006CB70  4E 80 00 20 */	blr
+.endfn on_wait_task__Q33ipl5scene8CalendarFv
+
+# .text:0xBC4 | 0x8139E774 | size: 0x24
+# ipl::scene::Calendar::on_wait_exit()
+.fn on_wait_exit__Q33ipl5scene8CalendarFv, global
+/* 8139E774 0006CB74  80 83 00 80 */	lwz r4, 0x80(r3)
+/* 8139E778 0006CB78  80 84 00 30 */	lwz r4, 0x30(r4)
+/* 8139E77C 0006CB7C  80 04 00 14 */	lwz r0, 0x14(r4)
+/* 8139E780 0006CB80  2C 00 00 01 */	cmpwi r0, 0x1
+/* 8139E784 0006CB84  4D 82 00 20 */	beqlr
+/* 8139E788 0006CB88  38 00 00 01 */	li r0, 0x1
+/* 8139E78C 0006CB8C  90 03 00 A8 */	stw r0, 0xa8(r3)
+/* 8139E790 0006CB90  48 00 03 C8 */	b start_exit__Q33ipl5scene8CalendarFv
+/* 8139E794 0006CB94  4E 80 00 20 */	blr
+.endfn on_wait_exit__Q33ipl5scene8CalendarFv
+
+# .text:0xBE8 | 0x8139E798 | size: 0x48
+# ipl::scene::Calendar::start_scroll_r()
+.fn start_scroll_r__Q33ipl5scene8CalendarFv, global
+/* 8139E798 0006CB98  80 A3 00 64 */	lwz r5, 0x64(r3)
+/* 8139E79C 0006CB9C  2C 05 00 00 */	cmpwi r5, 0x0
+/* 8139E7A0 0006CBA0  41 82 00 0C */	beq .L_8139E7AC
+/* 8139E7A4 0006CBA4  2C 05 00 03 */	cmpwi r5, 0x3
+/* 8139E7A8 0006CBA8  4C 82 00 20 */	bnelr
+.L_8139E7AC:
+/* 8139E7AC 0006CBAC  80 03 00 A0 */	lwz r0, 0xa0(r3)
+/* 8139E7B0 0006CBB0  38 80 00 01 */	li r4, 0x1
+/* 8139E7B4 0006CBB4  90 A3 00 68 */	stw r5, 0x68(r3)
+/* 8139E7B8 0006CBB8  2C 00 00 01 */	cmpwi r0, 0x1
+/* 8139E7BC 0006CBBC  90 83 00 64 */	stw r4, 0x64(r3)
+/* 8139E7C0 0006CBC0  40 82 00 18 */	bne .L_8139E7D8
+/* 8139E7C4 0006CBC4  38 00 00 03 */	li r0, 0x3
+/* 8139E7C8 0006CBC8  90 83 00 A4 */	stw r4, 0xa4(r3)
+/* 8139E7CC 0006CBCC  90 83 00 68 */	stw r4, 0x68(r3)
+/* 8139E7D0 0006CBD0  90 03 00 64 */	stw r0, 0x64(r3)
+/* 8139E7D4 0006CBD4  4E 80 00 20 */	blr
+.L_8139E7D8:
+/* 8139E7D8 0006CBD8  48 00 00 08 */	b do_scroll_r__Q33ipl5scene8CalendarFv
+/* 8139E7DC 0006CBDC  4E 80 00 20 */	blr
+.endfn start_scroll_r__Q33ipl5scene8CalendarFv
+
+# .text:0xC30 | 0x8139E7E0 | size: 0x124
+# ipl::scene::Calendar::do_scroll_r()
+.fn do_scroll_r__Q33ipl5scene8CalendarFv, global
+/* 8139E7E0 0006CBE0  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139E7E4 0006CBE4  7C 08 02 A6 */	mflr r0
+/* 8139E7E8 0006CBE8  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139E7EC 0006CBEC  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139E7F0 0006CBF0  3B E0 00 00 */	li r31, 0x0
+/* 8139E7F4 0006CBF4  93 C1 00 08 */	stw r30, 0x8(r1)
+/* 8139E7F8 0006CBF8  7C 7E 1B 78 */	mr r30, r3
+/* 8139E7FC 0006CBFC  48 00 00 0C */	b .L_8139E808
+.L_8139E800:
+/* 8139E800 0006CC00  7F E3 FB 78 */	mr r3, r31
+/* 8139E804 0006CC04  48 00 1B 55 */	bl initEvent__Q33ipl5scene4DateFv
+.L_8139E808:
+/* 8139E808 0006CC08  7F E4 FB 78 */	mr r4, r31
+/* 8139E80C 0006CC0C  38 7E 00 84 */	addi r3, r30, 0x84
+/* 8139E810 0006CC10  48 17 3A CD */	bl List_GetNext__Q24nw4r2utFPCQ34nw4r2ut4ListPCv
+/* 8139E814 0006CC14  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E818 0006CC18  7C 7F 1B 78 */	mr r31, r3
+/* 8139E81C 0006CC1C  40 82 FF E4 */	bne .L_8139E800
+/* 8139E820 0006CC20  7F C3 F3 78 */	mr r3, r30
+/* 8139E824 0006CC24  48 00 0F 81 */	bl is_upper_limit__Q33ipl5scene8CalendarFv
+/* 8139E828 0006CC28  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E82C 0006CC2C  40 82 00 C0 */	bne .L_8139E8EC
+/* 8139E830 0006CC30  7F C3 F3 78 */	mr r3, r30
+/* 8139E834 0006CC34  48 00 0F A9 */	bl is_lower_limit__Q33ipl5scene8CalendarFv
+/* 8139E838 0006CC38  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E83C 0006CC3C  41 82 00 24 */	beq .L_8139E860
+/* 8139E840 0006CC40  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 8139E844 0006CC44  38 80 00 05 */	li r4, 0x5
+/* 8139E848 0006CC48  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 8139E84C 0006CC4C  80 63 00 64 */	lwz r3, 0x64(r3)
+/* 8139E850 0006CC50  48 06 C8 E9 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 8139E854 0006CC54  38 80 00 18 */	li r4, 0x18
+/* 8139E858 0006CC58  4B FF E3 01 */	bl iplButton_8139CB58
+/* 8139E85C 0006CC5C  48 00 00 50 */	b .L_8139E8AC
+.L_8139E860:
+/* 8139E860 0006CC60  80 BE 00 7C */	lwz r5, 0x7c(r30)
+/* 8139E864 0006CC64  3C 60 81 0B */	lis r3, mscMaxDate__Q33ipl5scene8Calendar@ha
+/* 8139E868 0006CC68  80 03 73 0C */	lwz r0, mscMaxDate__Q33ipl5scene8Calendar@l(r3)
+/* 8139E86C 0006CC6C  80 85 00 00 */	lwz r4, 0x0(r5)
+/* 8139E870 0006CC70  7C 04 00 00 */	cmpw r4, r0
+/* 8139E874 0006CC74  40 82 00 38 */	bne .L_8139E8AC
+/* 8139E878 0006CC78  38 63 73 0C */	addi r3, r3, mscMaxDate__Q33ipl5scene8Calendar@l
+/* 8139E87C 0006CC7C  80 85 00 04 */	lwz r4, 0x4(r5)
+/* 8139E880 0006CC80  80 63 00 04 */	lwz r3, 0x4(r3)
+/* 8139E884 0006CC84  38 03 FF FF */	subi r0, r3, 0x1
+/* 8139E888 0006CC88  7C 04 00 00 */	cmpw r4, r0
+/* 8139E88C 0006CC8C  40 82 00 20 */	bne .L_8139E8AC
+/* 8139E890 0006CC90  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 8139E894 0006CC94  38 80 00 05 */	li r4, 0x5
+/* 8139E898 0006CC98  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 8139E89C 0006CC9C  80 63 00 64 */	lwz r3, 0x64(r3)
+/* 8139E8A0 0006CCA0  48 06 C8 99 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 8139E8A4 0006CCA4  38 80 00 19 */	li r4, 0x19
+/* 8139E8A8 0006CCA8  4B FF E2 B1 */	bl iplButton_8139CB58
+.L_8139E8AC:
+/* 8139E8AC 0006CCAC  80 7E 00 7C */	lwz r3, 0x7c(r30)
+/* 8139E8B0 0006CCB0  7C 64 1B 78 */	mr r4, r3
+/* 8139E8B4 0006CCB4  48 00 00 51 */	bl getNextMonth__Q33ipl7utility8CalendarFRCQ33ipl7utility4DatePQ33ipl7utility4Date
+/* 8139E8B8 0006CCB8  7F C3 F3 78 */	mr r3, r30
+/* 8139E8BC 0006CCBC  38 80 00 02 */	li r4, 0x2
+/* 8139E8C0 0006CCC0  4B FF F9 79 */	bl doAnim__Q33ipl5scene8CalendarFi
+/* 8139E8C4 0006CCC4  3C 60 81 09 */	lis r3, sSystem__Q23ipl3snd@ha
+/* 8139E8C8 0006CCC8  3C 80 81 65 */	lis r4, lbl_8164C522@ha
+/* 8139E8CC 0006CCCC  38 63 99 2C */	addi r3, r3, sSystem__Q23ipl3snd@l
+/* 8139E8D0 0006CCD0  38 84 C5 22 */	addi r4, r4, lbl_8164C522@l
+/* 8139E8D4 0006CCD4  4B FC CB 99 */	bl startSE__Q33ipl3snd6SystemFPCc
+/* 8139E8D8 0006CCD8  80 1E 00 64 */	lwz r0, 0x64(r30)
+/* 8139E8DC 0006CCDC  38 60 00 01 */	li r3, 0x1
+/* 8139E8E0 0006CCE0  98 7E 00 9C */	stb r3, 0x9c(r30)
+/* 8139E8E4 0006CCE4  90 1E 00 68 */	stw r0, 0x68(r30)
+/* 8139E8E8 0006CCE8  90 7E 00 64 */	stw r3, 0x64(r30)
+.L_8139E8EC:
+/* 8139E8EC 0006CCEC  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139E8F0 0006CCF0  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139E8F4 0006CCF4  83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 8139E8F8 0006CCF8  7C 08 03 A6 */	mtlr r0
+/* 8139E8FC 0006CCFC  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139E900 0006CD00  4E 80 00 20 */	blr
+.endfn do_scroll_r__Q33ipl5scene8CalendarFv
+
+# .text:0xD54 | 0x8139E904 | size: 0x68
+# ipl::utility::Calendar::getNextMonth(const ipl::utility::Date&, ipl::utility::Date*)
+.fn getNextMonth__Q33ipl7utility8CalendarFRCQ33ipl7utility4DatePQ33ipl7utility4Date, weak
+/* 8139E904 0006CD04  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139E908 0006CD08  7C 08 02 A6 */	mflr r0
+/* 8139E90C 0006CD0C  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139E910 0006CD10  7C 60 1B 78 */	mr r0, r3
+/* 8139E914 0006CD14  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139E918 0006CD18  7C 9F 23 78 */	mr r31, r4
+/* 8139E91C 0006CD1C  7F E3 FB 78 */	mr r3, r31
+/* 8139E920 0006CD20  7C 04 03 78 */	mr r4, r0
+/* 8139E924 0006CD24  4B FF 11 A9 */	bl __as__Q33ipl7utility4DateFRCQ33ipl7utility4Date
+/* 8139E928 0006CD28  80 7F 00 04 */	lwz r3, 0x4(r31)
+/* 8139E92C 0006CD2C  38 03 00 01 */	addi r0, r3, 0x1
+/* 8139E930 0006CD30  2C 00 00 0C */	cmpwi r0, 0xc
+/* 8139E934 0006CD34  90 1F 00 04 */	stw r0, 0x4(r31)
+/* 8139E938 0006CD38  40 81 00 18 */	ble .L_8139E950
+/* 8139E93C 0006CD3C  80 7F 00 00 */	lwz r3, 0x0(r31)
+/* 8139E940 0006CD40  38 00 00 01 */	li r0, 0x1
+/* 8139E944 0006CD44  90 1F 00 04 */	stw r0, 0x4(r31)
+/* 8139E948 0006CD48  38 03 00 01 */	addi r0, r3, 0x1
+/* 8139E94C 0006CD4C  90 1F 00 00 */	stw r0, 0x0(r31)
+.L_8139E950:
+/* 8139E950 0006CD50  38 00 00 01 */	li r0, 0x1
+/* 8139E954 0006CD54  90 1F 00 08 */	stw r0, 0x8(r31)
+/* 8139E958 0006CD58  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139E95C 0006CD5C  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139E960 0006CD60  7C 08 03 A6 */	mtlr r0
+/* 8139E964 0006CD64  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139E968 0006CD68  4E 80 00 20 */	blr
+.endfn getNextMonth__Q33ipl7utility8CalendarFRCQ33ipl7utility4DatePQ33ipl7utility4Date
+
+# .text:0xDBC | 0x8139E96C | size: 0x4C
+# ipl::scene::Calendar::start_scroll_l()
+.fn start_scroll_l__Q33ipl5scene8CalendarFv, global
+/* 8139E96C 0006CD6C  80 83 00 64 */	lwz r4, 0x64(r3)
+/* 8139E970 0006CD70  2C 04 00 00 */	cmpwi r4, 0x0
+/* 8139E974 0006CD74  41 82 00 0C */	beq .L_8139E980
+/* 8139E978 0006CD78  2C 04 00 03 */	cmpwi r4, 0x3
+/* 8139E97C 0006CD7C  4C 82 00 20 */	bnelr
+.L_8139E980:
+/* 8139E980 0006CD80  80 03 00 A0 */	lwz r0, 0xa0(r3)
+/* 8139E984 0006CD84  38 A0 00 02 */	li r5, 0x2
+/* 8139E988 0006CD88  90 83 00 68 */	stw r4, 0x68(r3)
+/* 8139E98C 0006CD8C  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139E990 0006CD90  90 A3 00 64 */	stw r5, 0x64(r3)
+/* 8139E994 0006CD94  41 82 00 1C */	beq .L_8139E9B0
+/* 8139E998 0006CD98  38 80 00 01 */	li r4, 0x1
+/* 8139E99C 0006CD9C  38 00 00 03 */	li r0, 0x3
+/* 8139E9A0 0006CDA0  90 83 00 A4 */	stw r4, 0xa4(r3)
+/* 8139E9A4 0006CDA4  90 A3 00 68 */	stw r5, 0x68(r3)
+/* 8139E9A8 0006CDA8  90 03 00 64 */	stw r0, 0x64(r3)
+/* 8139E9AC 0006CDAC  4E 80 00 20 */	blr
+.L_8139E9B0:
+/* 8139E9B0 0006CDB0  48 00 00 08 */	b do_scroll_l__Q33ipl5scene8CalendarFv
+/* 8139E9B4 0006CDB4  4E 80 00 20 */	blr
+.endfn start_scroll_l__Q33ipl5scene8CalendarFv
+
+# .text:0xE08 | 0x8139E9B8 | size: 0x128
+# ipl::scene::Calendar::do_scroll_l()
+.fn do_scroll_l__Q33ipl5scene8CalendarFv, global
+/* 8139E9B8 0006CDB8  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139E9BC 0006CDBC  7C 08 02 A6 */	mflr r0
+/* 8139E9C0 0006CDC0  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139E9C4 0006CDC4  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139E9C8 0006CDC8  3B E0 00 00 */	li r31, 0x0
+/* 8139E9CC 0006CDCC  93 C1 00 08 */	stw r30, 0x8(r1)
+/* 8139E9D0 0006CDD0  7C 7E 1B 78 */	mr r30, r3
+/* 8139E9D4 0006CDD4  48 00 00 0C */	b .L_8139E9E0
+.L_8139E9D8:
+/* 8139E9D8 0006CDD8  7F E3 FB 78 */	mr r3, r31
+/* 8139E9DC 0006CDDC  48 00 19 7D */	bl initEvent__Q33ipl5scene4DateFv
+.L_8139E9E0:
+/* 8139E9E0 0006CDE0  7F E4 FB 78 */	mr r4, r31
+/* 8139E9E4 0006CDE4  38 7E 00 84 */	addi r3, r30, 0x84
+/* 8139E9E8 0006CDE8  48 17 38 F5 */	bl List_GetNext__Q24nw4r2utFPCQ34nw4r2ut4ListPCv
+/* 8139E9EC 0006CDEC  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139E9F0 0006CDF0  7C 7F 1B 78 */	mr r31, r3
+/* 8139E9F4 0006CDF4  40 82 FF E4 */	bne .L_8139E9D8
+/* 8139E9F8 0006CDF8  7F C3 F3 78 */	mr r3, r30
+/* 8139E9FC 0006CDFC  48 00 0D E1 */	bl is_lower_limit__Q33ipl5scene8CalendarFv
+/* 8139EA00 0006CE00  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139EA04 0006CE04  40 82 00 C4 */	bne .L_8139EAC8
+/* 8139EA08 0006CE08  7F C3 F3 78 */	mr r3, r30
+/* 8139EA0C 0006CE0C  48 00 0D 99 */	bl is_upper_limit__Q33ipl5scene8CalendarFv
+/* 8139EA10 0006CE10  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139EA14 0006CE14  41 82 00 24 */	beq .L_8139EA38
+/* 8139EA18 0006CE18  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 8139EA1C 0006CE1C  38 80 00 05 */	li r4, 0x5
+/* 8139EA20 0006CE20  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 8139EA24 0006CE24  80 63 00 64 */	lwz r3, 0x64(r3)
+/* 8139EA28 0006CE28  48 06 C7 11 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 8139EA2C 0006CE2C  38 80 00 17 */	li r4, 0x17
+/* 8139EA30 0006CE30  4B FF E1 29 */	bl iplButton_8139CB58
+/* 8139EA34 0006CE34  48 00 00 50 */	b .L_8139EA84
+.L_8139EA38:
+/* 8139EA38 0006CE38  80 BE 00 7C */	lwz r5, 0x7c(r30)
+/* 8139EA3C 0006CE3C  3C 60 81 0B */	lis r3, mscMinDate__Q33ipl5scene8Calendar@ha
+/* 8139EA40 0006CE40  80 03 73 00 */	lwz r0, mscMinDate__Q33ipl5scene8Calendar@l(r3)
+/* 8139EA44 0006CE44  80 85 00 00 */	lwz r4, 0x0(r5)
+/* 8139EA48 0006CE48  7C 04 00 00 */	cmpw r4, r0
+/* 8139EA4C 0006CE4C  40 82 00 38 */	bne .L_8139EA84
+/* 8139EA50 0006CE50  38 63 73 00 */	addi r3, r3, mscMinDate__Q33ipl5scene8Calendar@l
+/* 8139EA54 0006CE54  80 85 00 04 */	lwz r4, 0x4(r5)
+/* 8139EA58 0006CE58  80 63 00 04 */	lwz r3, 0x4(r3)
+/* 8139EA5C 0006CE5C  38 03 00 01 */	addi r0, r3, 0x1
+/* 8139EA60 0006CE60  7C 04 00 00 */	cmpw r4, r0
+/* 8139EA64 0006CE64  40 82 00 20 */	bne .L_8139EA84
+/* 8139EA68 0006CE68  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 8139EA6C 0006CE6C  38 80 00 05 */	li r4, 0x5
+/* 8139EA70 0006CE70  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 8139EA74 0006CE74  80 63 00 64 */	lwz r3, 0x64(r3)
+/* 8139EA78 0006CE78  48 06 C6 C1 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 8139EA7C 0006CE7C  38 80 00 1A */	li r4, 0x1a
+/* 8139EA80 0006CE80  4B FF E0 D9 */	bl iplButton_8139CB58
+.L_8139EA84:
+/* 8139EA84 0006CE84  80 7E 00 7C */	lwz r3, 0x7c(r30)
+/* 8139EA88 0006CE88  7C 64 1B 78 */	mr r4, r3
+/* 8139EA8C 0006CE8C  48 00 00 55 */	bl getLastMonth__Q33ipl7utility8CalendarFRCQ33ipl7utility4DatePQ33ipl7utility4Date
+/* 8139EA90 0006CE90  7F C3 F3 78 */	mr r3, r30
+/* 8139EA94 0006CE94  38 80 00 03 */	li r4, 0x3
+/* 8139EA98 0006CE98  4B FF F7 A1 */	bl doAnim__Q33ipl5scene8CalendarFi
+/* 8139EA9C 0006CE9C  3C 60 81 09 */	lis r3, sSystem__Q23ipl3snd@ha
+/* 8139EAA0 0006CEA0  3C 80 81 65 */	lis r4, lbl_8164C522@ha
+/* 8139EAA4 0006CEA4  38 63 99 2C */	addi r3, r3, sSystem__Q23ipl3snd@l
+/* 8139EAA8 0006CEA8  38 84 C5 22 */	addi r4, r4, lbl_8164C522@l
+/* 8139EAAC 0006CEAC  4B FC C9 C1 */	bl startSE__Q33ipl3snd6SystemFPCc
+/* 8139EAB0 0006CEB0  80 7E 00 64 */	lwz r3, 0x64(r30)
+/* 8139EAB4 0006CEB4  38 80 00 01 */	li r4, 0x1
+/* 8139EAB8 0006CEB8  38 00 00 02 */	li r0, 0x2
+/* 8139EABC 0006CEBC  98 9E 00 9C */	stb r4, 0x9c(r30)
+/* 8139EAC0 0006CEC0  90 7E 00 68 */	stw r3, 0x68(r30)
+/* 8139EAC4 0006CEC4  90 1E 00 64 */	stw r0, 0x64(r30)
+.L_8139EAC8:
+/* 8139EAC8 0006CEC8  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139EACC 0006CECC  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139EAD0 0006CED0  83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 8139EAD4 0006CED4  7C 08 03 A6 */	mtlr r0
+/* 8139EAD8 0006CED8  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139EADC 0006CEDC  4E 80 00 20 */	blr
+.endfn do_scroll_l__Q33ipl5scene8CalendarFv
+
+# .text:0xF30 | 0x8139EAE0 | size: 0x78
+# ipl::utility::Calendar::getLastMonth(const ipl::utility::Date&, ipl::utility::Date*)
+.fn getLastMonth__Q33ipl7utility8CalendarFRCQ33ipl7utility4DatePQ33ipl7utility4Date, weak
+/* 8139EAE0 0006CEE0  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139EAE4 0006CEE4  7C 08 02 A6 */	mflr r0
+/* 8139EAE8 0006CEE8  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139EAEC 0006CEEC  7C 60 1B 78 */	mr r0, r3
+/* 8139EAF0 0006CEF0  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139EAF4 0006CEF4  7C 9F 23 78 */	mr r31, r4
+/* 8139EAF8 0006CEF8  7F E3 FB 78 */	mr r3, r31
+/* 8139EAFC 0006CEFC  7C 04 03 78 */	mr r4, r0
+/* 8139EB00 0006CF00  4B FF 0F CD */	bl __as__Q33ipl7utility4DateFRCQ33ipl7utility4Date
+/* 8139EB04 0006CF04  80 7F 00 04 */	lwz r3, 0x4(r31)
+/* 8139EB08 0006CF08  34 63 FF FF */	subic. r3, r3, 0x1
+/* 8139EB0C 0006CF0C  90 7F 00 04 */	stw r3, 0x4(r31)
+/* 8139EB10 0006CF10  41 81 00 24 */	bgt .L_8139EB34
+/* 8139EB14 0006CF14  34 03 FF FF */	subic. r0, r3, 0x1
+/* 8139EB18 0006CF18  90 1F 00 04 */	stw r0, 0x4(r31)
+/* 8139EB1C 0006CF1C  41 81 00 18 */	bgt .L_8139EB34
+/* 8139EB20 0006CF20  80 7F 00 00 */	lwz r3, 0x0(r31)
+/* 8139EB24 0006CF24  38 00 00 0C */	li r0, 0xc
+/* 8139EB28 0006CF28  90 1F 00 04 */	stw r0, 0x4(r31)
+/* 8139EB2C 0006CF2C  38 03 FF FF */	subi r0, r3, 0x1
+/* 8139EB30 0006CF30  90 1F 00 00 */	stw r0, 0x0(r31)
+.L_8139EB34:
+/* 8139EB34 0006CF34  80 7F 00 00 */	lwz r3, 0x0(r31)
+/* 8139EB38 0006CF38  80 9F 00 04 */	lwz r4, 0x4(r31)
+/* 8139EB3C 0006CF3C  4B FF 0F AD */	bl getDays__Q33ipl7utility8CalendarFii
+/* 8139EB40 0006CF40  90 7F 00 08 */	stw r3, 0x8(r31)
+/* 8139EB44 0006CF44  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139EB48 0006CF48  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139EB4C 0006CF4C  7C 08 03 A6 */	mtlr r0
+/* 8139EB50 0006CF50  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139EB54 0006CF54  4E 80 00 20 */	blr
+.endfn getLastMonth__Q33ipl7utility8CalendarFRCQ33ipl7utility4DatePQ33ipl7utility4Date
+
+# .text:0xFA8 | 0x8139EB58 | size: 0x74
+# ipl::scene::Calendar::start_exit()
+.fn start_exit__Q33ipl5scene8CalendarFv, global
+/* 8139EB58 0006CF58  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139EB5C 0006CF5C  7C 08 02 A6 */	mflr r0
+/* 8139EB60 0006CF60  38 80 00 05 */	li r4, 0x5
+/* 8139EB64 0006CF64  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139EB68 0006CF68  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139EB6C 0006CF6C  7C 7F 1B 78 */	mr r31, r3
+/* 8139EB70 0006CF70  80 03 00 A0 */	lwz r0, 0xa0(r3)
+/* 8139EB74 0006CF74  80 A3 00 64 */	lwz r5, 0x64(r3)
+/* 8139EB78 0006CF78  2C 00 00 01 */	cmpwi r0, 0x1
+/* 8139EB7C 0006CF7C  90 A3 00 68 */	stw r5, 0x68(r3)
+/* 8139EB80 0006CF80  90 83 00 64 */	stw r4, 0x64(r3)
+/* 8139EB84 0006CF84  40 82 00 30 */	bne .L_8139EBB4
+/* 8139EB88 0006CF88  3C 60 81 65 */	lis r3, lbl_8164C53A@ha
+/* 8139EB8C 0006CF8C  38 63 C5 3A */	addi r3, r3, lbl_8164C53A@l
+/* 8139EB90 0006CF90  4C C6 31 82 */	crclr cr1eq
+/* 8139EB94 0006CF94  48 18 FB 0D */	bl OSReport
+/* 8139EB98 0006CF98  80 7F 00 64 */	lwz r3, 0x64(r31)
+/* 8139EB9C 0006CF9C  38 80 00 01 */	li r4, 0x1
+/* 8139EBA0 0006CFA0  38 00 00 03 */	li r0, 0x3
+/* 8139EBA4 0006CFA4  90 9F 00 A4 */	stw r4, 0xa4(r31)
+/* 8139EBA8 0006CFA8  90 7F 00 68 */	stw r3, 0x68(r31)
+/* 8139EBAC 0006CFAC  90 1F 00 64 */	stw r0, 0x64(r31)
+/* 8139EBB0 0006CFB0  48 00 00 08 */	b .L_8139EBB8
+.L_8139EBB4:
+/* 8139EBB4 0006CFB4  48 00 00 19 */	bl do_exit__Q33ipl5scene8CalendarFv
+.L_8139EBB8:
+/* 8139EBB8 0006CFB8  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139EBBC 0006CFBC  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139EBC0 0006CFC0  7C 08 03 A6 */	mtlr r0
+/* 8139EBC4 0006CFC4  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139EBC8 0006CFC8  4E 80 00 20 */	blr
+.endfn start_exit__Q33ipl5scene8CalendarFv
+
+# .text:0x101C | 0x8139EBCC | size: 0xB8
+# ipl::scene::Calendar::do_exit()
+.fn do_exit__Q33ipl5scene8CalendarFv, global
+/* 8139EBCC 0006CFCC  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139EBD0 0006CFD0  7C 08 02 A6 */	mflr r0
+/* 8139EBD4 0006CFD4  38 80 00 04 */	li r4, 0x4
+/* 8139EBD8 0006CFD8  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139EBDC 0006CFDC  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139EBE0 0006CFE0  7C 7F 1B 78 */	mr r31, r3
+/* 8139EBE4 0006CFE4  4B FF F6 55 */	bl doAnim__Q33ipl5scene8CalendarFi
+/* 8139EBE8 0006CFE8  7F E3 FB 78 */	mr r3, r31
+/* 8139EBEC 0006CFEC  48 00 0B B9 */	bl is_upper_limit__Q33ipl5scene8CalendarFv
+/* 8139EBF0 0006CFF0  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139EBF4 0006CFF4  40 82 00 20 */	bne .L_8139EC14
+/* 8139EBF8 0006CFF8  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 8139EBFC 0006CFFC  38 80 00 05 */	li r4, 0x5
+/* 8139EC00 0006D000  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 8139EC04 0006D004  80 63 00 64 */	lwz r3, 0x64(r3)
+/* 8139EC08 0006D008  48 06 C5 31 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 8139EC0C 0006D00C  38 80 00 19 */	li r4, 0x19
+/* 8139EC10 0006D010  4B FF DF 49 */	bl iplButton_8139CB58
+.L_8139EC14:
+/* 8139EC14 0006D014  7F E3 FB 78 */	mr r3, r31
+/* 8139EC18 0006D018  48 00 0B C5 */	bl is_lower_limit__Q33ipl5scene8CalendarFv
+/* 8139EC1C 0006D01C  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139EC20 0006D020  40 82 00 20 */	bne .L_8139EC40
+/* 8139EC24 0006D024  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 8139EC28 0006D028  38 80 00 05 */	li r4, 0x5
+/* 8139EC2C 0006D02C  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 8139EC30 0006D030  80 63 00 64 */	lwz r3, 0x64(r3)
+/* 8139EC34 0006D034  48 06 C5 05 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 8139EC38 0006D038  38 80 00 1A */	li r4, 0x1a
+/* 8139EC3C 0006D03C  4B FF DF 1D */	bl iplButton_8139CB58
+.L_8139EC40:
+/* 8139EC40 0006D040  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 8139EC44 0006D044  38 80 00 05 */	li r4, 0x5
+/* 8139EC48 0006D048  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 8139EC4C 0006D04C  80 63 00 64 */	lwz r3, 0x64(r3)
+/* 8139EC50 0006D050  48 06 C4 E9 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 8139EC54 0006D054  38 80 00 00 */	li r4, 0x0
+/* 8139EC58 0006D058  38 A0 00 00 */	li r5, 0x0
+/* 8139EC5C 0006D05C  4B FF DC E1 */	bl setEventHandler__Q33ipl5scene6ButtonFPQ23gui12EventHandlerPQ23gui12EventHandler
+/* 8139EC60 0006D060  80 7F 00 64 */	lwz r3, 0x64(r31)
+/* 8139EC64 0006D064  38 00 00 05 */	li r0, 0x5
+/* 8139EC68 0006D068  90 7F 00 68 */	stw r3, 0x68(r31)
+/* 8139EC6C 0006D06C  90 1F 00 64 */	stw r0, 0x64(r31)
+/* 8139EC70 0006D070  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139EC74 0006D074  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139EC78 0006D078  7C 08 03 A6 */	mtlr r0
+/* 8139EC7C 0006D07C  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139EC80 0006D080  4E 80 00 20 */	blr
+.endfn do_exit__Q33ipl5scene8CalendarFv
+
+# .text:0x10D4 | 0x8139EC84 | size: 0x88
+# ipl::scene::Calendar::set_textbox(const char*, unsigned long)
+.fn set_textbox__Q33ipl5scene8CalendarFPCcUl, global
+/* 8139EC84 0006D084  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139EC88 0006D088  7C 08 02 A6 */	mflr r0
+/* 8139EC8C 0006D08C  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139EC90 0006D090  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139EC94 0006D094  93 C1 00 08 */	stw r30, 0x8(r1)
+/* 8139EC98 0006D098  7C BE 2B 78 */	mr r30, r5
+/* 8139EC9C 0006D09C  38 A0 00 01 */	li r5, 0x1
+/* 8139ECA0 0006D0A0  80 63 00 6C */	lwz r3, 0x6c(r3)
+/* 8139ECA4 0006D0A4  80 63 00 14 */	lwz r3, 0x14(r3)
+/* 8139ECA8 0006D0A8  81 83 00 00 */	lwz r12, 0x0(r3)
+/* 8139ECAC 0006D0AC  81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 8139ECB0 0006D0B0  7D 89 03 A6 */	mtctr r12
+/* 8139ECB4 0006D0B4  4E 80 04 21 */	bctrl
+/* 8139ECB8 0006D0B8  4B FA 71 AD */	bl "DynamicCast<PQ34nw4r3lyt7TextBox,Q34nw4r3lyt4Pane>__Q24nw4r2utFPQ34nw4r3lyt4Pane_PQ34nw4r3lyt7TextBox"
+/* 8139ECBC 0006D0BC  3C A0 81 09 */	lis r5, smArg__Q23ipl6System@ha
+/* 8139ECC0 0006D0C0  7C 7F 1B 78 */	mr r31, r3
+/* 8139ECC4 0006D0C4  38 A5 90 08 */	addi r5, r5, smArg__Q23ipl6System@l
+/* 8139ECC8 0006D0C8  7F C4 F3 78 */	mr r4, r30
+/* 8139ECCC 0006D0CC  80 65 00 80 */	lwz r3, 0x80(r5)
+/* 8139ECD0 0006D0D0  80 63 00 00 */	lwz r3, 0x0(r3)
+/* 8139ECD4 0006D0D4  4B F9 FA E9 */	bl getMessage__Q33ipl7message7MessageCFUl
+/* 8139ECD8 0006D0D8  81 9F 00 00 */	lwz r12, 0x0(r31)
+/* 8139ECDC 0006D0DC  7C 64 1B 78 */	mr r4, r3
+/* 8139ECE0 0006D0E0  7F E3 FB 78 */	mr r3, r31
+/* 8139ECE4 0006D0E4  38 A0 00 00 */	li r5, 0x0
+/* 8139ECE8 0006D0E8  81 8C 00 6C */	lwz r12, 0x6c(r12)
+/* 8139ECEC 0006D0EC  7D 89 03 A6 */	mtctr r12
+/* 8139ECF0 0006D0F0  4E 80 04 21 */	bctrl
+/* 8139ECF4 0006D0F4  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139ECF8 0006D0F8  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139ECFC 0006D0FC  83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 8139ED00 0006D100  7C 08 03 A6 */	mtlr r0
+/* 8139ED04 0006D104  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139ED08 0006D108  4E 80 00 20 */	blr
+.endfn set_textbox__Q33ipl5scene8CalendarFPCcUl
+
+# .text:0x115C | 0x8139ED0C | size: 0x94
+# ipl::scene::Calendar::set_textbox_day()
+.fn set_textbox_day__Q33ipl5scene8CalendarFv, global
+/* 8139ED0C 0006D10C  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8139ED10 0006D110  7C 08 02 A6 */	mflr r0
+/* 8139ED14 0006D114  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8139ED18 0006D118  39 61 00 20 */	addi r11, r1, 0x20
+/* 8139ED1C 0006D11C  48 25 A7 A9 */	bl _savegpr_28
+/* 8139ED20 0006D120  88 03 00 AC */	lbz r0, 0xac(r3)
+/* 8139ED24 0006D124  7C 7C 1B 78 */	mr r28, r3
+/* 8139ED28 0006D128  38 80 00 00 */	li r4, 0x0
+/* 8139ED2C 0006D12C  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139ED30 0006D130  40 82 00 10 */	bne .L_8139ED40
+/* 8139ED34 0006D134  88 03 00 AD */	lbz r0, 0xad(r3)
+/* 8139ED38 0006D138  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139ED3C 0006D13C  41 82 00 08 */	beq .L_8139ED44
+.L_8139ED40:
+/* 8139ED40 0006D140  38 80 00 01 */	li r4, 0x1
+.L_8139ED44:
+/* 8139ED44 0006D144  2C 04 00 00 */	cmpwi r4, 0x0
+/* 8139ED48 0006D148  3F C0 81 61 */	lis r30, lbl_8160FAB0@ha
+/* 8139ED4C 0006D14C  3B DE FA B0 */	addi r30, r30, lbl_8160FAB0@l
+/* 8139ED50 0006D150  41 82 00 0C */	beq .L_8139ED5C
+/* 8139ED54 0006D154  3F C0 81 61 */	lis r30, lbl_8160FA08@ha
+/* 8139ED58 0006D158  3B DE FA 08 */	addi r30, r30, lbl_8160FA08@l
+.L_8139ED5C:
+/* 8139ED5C 0006D15C  3B A0 00 00 */	li r29, 0x0
+/* 8139ED60 0006D160  3B E0 00 00 */	li r31, 0x0
+.L_8139ED64:
+/* 8139ED64 0006D164  7C BE FA 14 */	add r5, r30, r31
+/* 8139ED68 0006D168  7C 9E F8 2E */	lwzx r4, r30, r31
+/* 8139ED6C 0006D16C  80 A5 00 04 */	lwz r5, 0x4(r5)
+/* 8139ED70 0006D170  7F 83 E3 78 */	mr r3, r28
+/* 8139ED74 0006D174  4B FF FF 11 */	bl set_textbox__Q33ipl5scene8CalendarFPCcUl
+/* 8139ED78 0006D178  3B BD 00 01 */	addi r29, r29, 0x1
+/* 8139ED7C 0006D17C  3B FF 00 08 */	addi r31, r31, 0x8
+/* 8139ED80 0006D180  2C 1D 00 15 */	cmpwi r29, 0x15
+/* 8139ED84 0006D184  41 80 FF E0 */	blt .L_8139ED64
+/* 8139ED88 0006D188  39 61 00 20 */	addi r11, r1, 0x20
+/* 8139ED8C 0006D18C  48 25 A7 85 */	bl _restgpr_28
+/* 8139ED90 0006D190  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8139ED94 0006D194  7C 08 03 A6 */	mtlr r0
+/* 8139ED98 0006D198  38 21 00 20 */	addi r1, r1, 0x20
+/* 8139ED9C 0006D19C  4E 80 00 20 */	blr
+.endfn set_textbox_day__Q33ipl5scene8CalendarFv
+
+# .text:0x11F0 | 0x8139EDA0 | size: 0x90
+# ipl::scene::Calendar::set_textbox_month()
+.fn set_textbox_month__Q33ipl5scene8CalendarFv, global
+/* 8139EDA0 0006D1A0  94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 8139EDA4 0006D1A4  7C 08 02 A6 */	mflr r0
+/* 8139EDA8 0006D1A8  90 01 00 34 */	stw r0, 0x34(r1)
+/* 8139EDAC 0006D1AC  93 E1 00 2C */	stw r31, 0x2c(r1)
+/* 8139EDB0 0006D1B0  93 C1 00 28 */	stw r30, 0x28(r1)
+/* 8139EDB4 0006D1B4  7C 7E 1B 78 */	mr r30, r3
+/* 8139EDB8 0006D1B8  38 61 00 14 */	addi r3, r1, 0x14
+/* 8139EDBC 0006D1BC  4B FF 0C 7D */	bl __ct__Q33ipl7utility4DateFv
+/* 8139EDC0 0006D1C0  38 61 00 08 */	addi r3, r1, 0x8
+/* 8139EDC4 0006D1C4  4B FF 0C 75 */	bl __ct__Q33ipl7utility4DateFv
+/* 8139EDC8 0006D1C8  80 7E 00 7C */	lwz r3, 0x7c(r30)
+/* 8139EDCC 0006D1CC  38 81 00 14 */	addi r4, r1, 0x14
+/* 8139EDD0 0006D1D0  4B FF FD 11 */	bl getLastMonth__Q33ipl7utility8CalendarFRCQ33ipl7utility4DatePQ33ipl7utility4Date
+/* 8139EDD4 0006D1D4  80 7E 00 7C */	lwz r3, 0x7c(r30)
+/* 8139EDD8 0006D1D8  38 81 00 08 */	addi r4, r1, 0x8
+/* 8139EDDC 0006D1DC  4B FF FB 29 */	bl getNextMonth__Q33ipl7utility8CalendarFRCQ33ipl7utility4DatePQ33ipl7utility4Date
+/* 8139EDE0 0006D1E0  3F E0 81 65 */	lis r31, lbl_8164C458@ha
+/* 8139EDE4 0006D1E4  7F C3 F3 78 */	mr r3, r30
+/* 8139EDE8 0006D1E8  80 9F C4 58 */	lwz r4, lbl_8164C458@l(r31)
+/* 8139EDEC 0006D1EC  38 A1 00 14 */	addi r5, r1, 0x14
+/* 8139EDF0 0006D1F0  48 00 00 41 */	bl set_textbox_month__Q33ipl5scene8CalendarFPCcRCQ33ipl7utility4Date
+/* 8139EDF4 0006D1F4  3B FF C4 58 */	addi r31, r31, lbl_8164C458@l
+/* 8139EDF8 0006D1F8  80 BE 00 7C */	lwz r5, 0x7c(r30)
+/* 8139EDFC 0006D1FC  80 9F 00 04 */	lwz r4, 0x4(r31)
+/* 8139EE00 0006D200  7F C3 F3 78 */	mr r3, r30
+/* 8139EE04 0006D204  48 00 00 2D */	bl set_textbox_month__Q33ipl5scene8CalendarFPCcRCQ33ipl7utility4Date
+/* 8139EE08 0006D208  80 9F 00 08 */	lwz r4, 0x8(r31)
+/* 8139EE0C 0006D20C  7F C3 F3 78 */	mr r3, r30
+/* 8139EE10 0006D210  38 A1 00 08 */	addi r5, r1, 0x8
+/* 8139EE14 0006D214  48 00 00 1D */	bl set_textbox_month__Q33ipl5scene8CalendarFPCcRCQ33ipl7utility4Date
+/* 8139EE18 0006D218  80 01 00 34 */	lwz r0, 0x34(r1)
+/* 8139EE1C 0006D21C  83 E1 00 2C */	lwz r31, 0x2c(r1)
+/* 8139EE20 0006D220  83 C1 00 28 */	lwz r30, 0x28(r1)
+/* 8139EE24 0006D224  7C 08 03 A6 */	mtlr r0
+/* 8139EE28 0006D228  38 21 00 30 */	addi r1, r1, 0x30
+/* 8139EE2C 0006D22C  4E 80 00 20 */	blr
+.endfn set_textbox_month__Q33ipl5scene8CalendarFv
+
+# .text:0x1280 | 0x8139EE30 | size: 0x274
+# ipl::scene::Calendar::set_textbox_month(const char*, const ipl::utility::Date&)
+.fn set_textbox_month__Q33ipl5scene8CalendarFPCcRCQ33ipl7utility4Date, global
+/* 8139EE30 0006D230  94 21 FF 80 */	stwu r1, -0x80(r1)
+/* 8139EE34 0006D234  7C 08 02 A6 */	mflr r0
+/* 8139EE38 0006D238  90 01 00 84 */	stw r0, 0x84(r1)
+/* 8139EE3C 0006D23C  39 61 00 80 */	addi r11, r1, 0x80
+/* 8139EE40 0006D240  48 25 A6 81 */	bl _savegpr_27
+/* 8139EE44 0006D244  38 00 00 10 */	li r0, 0x10
+/* 8139EE48 0006D248  7C 9D 23 78 */	mr r29, r4
+/* 8139EE4C 0006D24C  7C 7C 1B 78 */	mr r28, r3
+/* 8139EE50 0006D250  38 C1 00 1A */	addi r6, r1, 0x1a
+/* 8139EE54 0006D254  38 80 00 00 */	li r4, 0x0
+/* 8139EE58 0006D258  7C 09 03 A6 */	mtctr r0
+.L_8139EE5C:
+/* 8139EE5C 0006D25C  B0 86 00 02 */	sth r4, 0x2(r6)
+/* 8139EE60 0006D260  B4 86 00 04 */	sthu r4, 0x4(r6)
+/* 8139EE64 0006D264  42 00 FF F8 */	bdnz .L_8139EE5C
+/* 8139EE68 0006D268  3C 80 81 61 */	lis r4, lbl_8160FB88@ha
+/* 8139EE6C 0006D26C  38 00 00 05 */	li r0, 0x5
+/* 8139EE70 0006D270  38 84 FB 88 */	addi r4, r4, lbl_8160FB88@l
+/* 8139EE74 0006D274  38 E1 00 06 */	addi r7, r1, 0x6
+/* 8139EE78 0006D278  38 C4 FF FE */	subi r6, r4, 0x2
+/* 8139EE7C 0006D27C  7C 09 03 A6 */	mtctr r0
+.L_8139EE80:
+/* 8139EE80 0006D280  A0 86 00 02 */	lhz r4, 0x2(r6)
+/* 8139EE84 0006D284  A4 06 00 04 */	lhzu r0, 0x4(r6)
+/* 8139EE88 0006D288  B0 87 00 02 */	sth r4, 0x2(r7)
+/* 8139EE8C 0006D28C  B4 07 00 04 */	sthu r0, 0x4(r7)
+/* 8139EE90 0006D290  42 00 FF F0 */	bdnz .L_8139EE80
+/* 8139EE94 0006D294  88 03 00 AC */	lbz r0, 0xac(r3)
+/* 8139EE98 0006D298  3B C0 00 00 */	li r30, 0x0
+/* 8139EE9C 0006D29C  83 E5 00 00 */	lwz r31, 0x0(r5)
+/* 8139EEA0 0006D2A0  3B 60 00 00 */	li r27, 0x0
+/* 8139EEA4 0006D2A4  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139EEA8 0006D2A8  41 82 00 C0 */	beq .L_8139EF68
+/* 8139EEAC 0006D2AC  38 00 00 64 */	li r0, 0x64
+/* 8139EEB0 0006D2B0  39 20 00 0A */	li r9, 0xa
+/* 8139EEB4 0006D2B4  7D 5F 03 D6 */	divw r10, r31, r0
+/* 8139EEB8 0006D2B8  80 65 00 04 */	lwz r3, 0x4(r5)
+/* 8139EEBC 0006D2BC  39 00 03 E8 */	li r8, 0x3e8
+/* 8139EEC0 0006D2C0  38 03 FF FF */	subi r0, r3, 0x1
+/* 8139EEC4 0006D2C4  3C 80 81 61 */	lis r4, lbl_8160FB58@ha
+/* 8139EEC8 0006D2C8  3C A0 81 09 */	lis r5, smArg__Q23ipl6System@ha
+/* 8139EECC 0006D2CC  7C FF 4B D6 */	divw r7, r31, r9
+/* 8139EED0 0006D2D0  38 A5 90 08 */	addi r5, r5, smArg__Q23ipl6System@l
+/* 8139EED4 0006D2D4  54 00 10 3A */	slwi r0, r0, 2
+/* 8139EED8 0006D2D8  80 A5 00 80 */	lwz r5, 0x80(r5)
+/* 8139EEDC 0006D2DC  38 84 FB 58 */	addi r4, r4, lbl_8160FB58@l
+/* 8139EEE0 0006D2E0  7C 84 00 2E */	lwzx r4, r4, r0
+/* 8139EEE4 0006D2E4  7C CA 4B D6 */	divw r6, r10, r9
+/* 8139EEE8 0006D2E8  38 61 00 08 */	addi r3, r1, 0x8
+/* 8139EEEC 0006D2EC  3B 60 00 08 */	li r27, 0x8
+/* 8139EEF0 0006D2F0  7D 7F 43 D6 */	divw r11, r31, r8
+/* 8139EEF4 0006D2F4  7D 06 49 D6 */	mullw r8, r6, r9
+/* 8139EEF8 0006D2F8  55 66 08 3C */	slwi r6, r11, 1
+/* 8139EEFC 0006D2FC  7C C3 32 2E */	lhzx r6, r3, r6
+/* 8139EF00 0006D300  B0 C1 00 1C */	sth r6, 0x1c(r1)
+/* 8139EF04 0006D304  7C 07 4B D6 */	divw r0, r7, r9
+/* 8139EF08 0006D308  7C C0 49 D6 */	mullw r6, r0, r9
+/* 8139EF0C 0006D30C  7C 08 50 50 */	subf r0, r8, r10
+/* 8139EF10 0006D310  54 00 08 3C */	slwi r0, r0, 1
+/* 8139EF14 0006D314  7D 03 02 2E */	lhzx r8, r3, r0
+/* 8139EF18 0006D318  7C 07 49 D6 */	mullw r0, r7, r9
+/* 8139EF1C 0006D31C  7C C6 38 50 */	subf r6, r6, r7
+/* 8139EF20 0006D320  B1 01 00 1E */	sth r8, 0x1e(r1)
+/* 8139EF24 0006D324  54 C6 08 3C */	slwi r6, r6, 1
+/* 8139EF28 0006D328  7C C3 32 2E */	lhzx r6, r3, r6
+/* 8139EF2C 0006D32C  7C 00 F8 50 */	subf r0, r0, r31
+/* 8139EF30 0006D330  54 00 08 3C */	slwi r0, r0, 1
+/* 8139EF34 0006D334  B0 C1 00 20 */	sth r6, 0x20(r1)
+/* 8139EF38 0006D338  7C 03 02 2E */	lhzx r0, r3, r0
+/* 8139EF3C 0006D33C  B0 01 00 22 */	sth r0, 0x22(r1)
+/* 8139EF40 0006D340  80 65 00 00 */	lwz r3, 0x0(r5)
+/* 8139EF44 0006D344  4B F9 F8 79 */	bl getMessage__Q33ipl7message7MessageCFUl
+/* 8139EF48 0006D348  38 81 00 1C */	addi r4, r1, 0x1c
+.L_8139EF4C:
+/* 8139EF4C 0006D34C  A0 03 00 00 */	lhz r0, 0x0(r3)
+/* 8139EF50 0006D350  38 63 00 02 */	addi r3, r3, 0x2
+/* 8139EF54 0006D354  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139EF58 0006D358  7C 04 DB 2E */	sthx r0, r4, r27
+/* 8139EF5C 0006D35C  3B 7B 00 02 */	addi r27, r27, 0x2
+/* 8139EF60 0006D360  40 82 FF EC */	bne .L_8139EF4C
+/* 8139EF64 0006D364  48 00 00 EC */	b .L_8139F050
+.L_8139EF68:
+/* 8139EF68 0006D368  80 65 00 04 */	lwz r3, 0x4(r5)
+/* 8139EF6C 0006D36C  3C A0 81 09 */	lis r5, smArg__Q23ipl6System@ha
+/* 8139EF70 0006D370  38 A5 90 08 */	addi r5, r5, smArg__Q23ipl6System@l
+/* 8139EF74 0006D374  3C 80 81 61 */	lis r4, lbl_8160FB58@ha
+/* 8139EF78 0006D378  38 03 FF FF */	subi r0, r3, 0x1
+/* 8139EF7C 0006D37C  80 65 00 80 */	lwz r3, 0x80(r5)
+/* 8139EF80 0006D380  54 00 10 3A */	slwi r0, r0, 2
+/* 8139EF84 0006D384  38 84 FB 58 */	addi r4, r4, lbl_8160FB58@l
+/* 8139EF88 0006D388  80 63 00 00 */	lwz r3, 0x0(r3)
+/* 8139EF8C 0006D38C  7C 84 00 2E */	lwzx r4, r4, r0
+/* 8139EF90 0006D390  4B F9 F8 2D */	bl getMessage__Q33ipl7message7MessageCFUl
+/* 8139EF94 0006D394  38 81 00 1C */	addi r4, r1, 0x1c
+.L_8139EF98:
+/* 8139EF98 0006D398  A0 03 00 00 */	lhz r0, 0x0(r3)
+/* 8139EF9C 0006D39C  38 63 00 02 */	addi r3, r3, 0x2
+/* 8139EFA0 0006D3A0  3B DE 00 01 */	addi r30, r30, 0x1
+/* 8139EFA4 0006D3A4  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139EFA8 0006D3A8  7C 04 DB 2E */	sthx r0, r4, r27
+/* 8139EFAC 0006D3AC  3B 7B 00 02 */	addi r27, r27, 0x2
+/* 8139EFB0 0006D3B0  40 82 FF E8 */	bne .L_8139EF98
+/* 8139EFB4 0006D3B4  38 00 00 64 */	li r0, 0x64
+/* 8139EFB8 0006D3B8  39 40 00 0A */	li r10, 0xa
+/* 8139EFBC 0006D3BC  7D 7F 03 D6 */	divw r11, r31, r0
+/* 8139EFC0 0006D3C0  3B DE FF FF */	subi r30, r30, 0x1
+/* 8139EFC4 0006D3C4  39 20 03 E8 */	li r9, 0x3e8
+/* 8139EFC8 0006D3C8  57 C0 08 3C */	slwi r0, r30, 1
+/* 8139EFCC 0006D3CC  3B DE 00 01 */	addi r30, r30, 0x1
+/* 8139EFD0 0006D3D0  38 60 00 20 */	li r3, 0x20
+/* 8139EFD4 0006D3D4  57 CC 08 3C */	slwi r12, r30, 1
+/* 8139EFD8 0006D3D8  3B DE 00 01 */	addi r30, r30, 0x1
+/* 8139EFDC 0006D3DC  57 C8 08 3C */	slwi r8, r30, 1
+/* 8139EFE0 0006D3E0  7C 64 03 2E */	sthx r3, r4, r0
+/* 8139EFE4 0006D3E4  7C FF 53 D6 */	divw r7, r31, r10
+/* 8139EFE8 0006D3E8  3B DE 00 01 */	addi r30, r30, 0x1
+/* 8139EFEC 0006D3EC  3B 61 00 08 */	addi r27, r1, 0x8
+/* 8139EFF0 0006D3F0  57 C5 08 3C */	slwi r5, r30, 1
+/* 8139EFF4 0006D3F4  3B DE 00 01 */	addi r30, r30, 0x1
+/* 8139EFF8 0006D3F8  57 C0 08 3C */	slwi r0, r30, 1
+/* 8139EFFC 0006D3FC  7C CB 53 D6 */	divw r6, r11, r10
+/* 8139F000 0006D400  7F DF 4B D6 */	divw r30, r31, r9
+/* 8139F004 0006D404  7D 26 51 D6 */	mullw r9, r6, r10
+/* 8139F008 0006D408  57 C6 08 3C */	slwi r6, r30, 1
+/* 8139F00C 0006D40C  7C DB 32 2E */	lhzx r6, r27, r6
+/* 8139F010 0006D410  7C C4 63 2E */	sthx r6, r4, r12
+/* 8139F014 0006D414  7C 67 53 D6 */	divw r3, r7, r10
+/* 8139F018 0006D418  7C C3 51 D6 */	mullw r6, r3, r10
+/* 8139F01C 0006D41C  7C 69 58 50 */	subf r3, r9, r11
+/* 8139F020 0006D420  54 63 08 3C */	slwi r3, r3, 1
+/* 8139F024 0006D424  7D 3B 1A 2E */	lhzx r9, r27, r3
+/* 8139F028 0006D428  7C 67 51 D6 */	mullw r3, r7, r10
+/* 8139F02C 0006D42C  7C C6 38 50 */	subf r6, r6, r7
+/* 8139F030 0006D430  7D 24 43 2E */	sthx r9, r4, r8
+/* 8139F034 0006D434  54 C6 08 3C */	slwi r6, r6, 1
+/* 8139F038 0006D438  7C DB 32 2E */	lhzx r6, r27, r6
+/* 8139F03C 0006D43C  7C 63 F8 50 */	subf r3, r3, r31
+/* 8139F040 0006D440  54 63 08 3C */	slwi r3, r3, 1
+/* 8139F044 0006D444  7C C4 2B 2E */	sthx r6, r4, r5
+/* 8139F048 0006D448  7C 7B 1A 2E */	lhzx r3, r27, r3
+/* 8139F04C 0006D44C  7C 64 03 2E */	sthx r3, r4, r0
+.L_8139F050:
+/* 8139F050 0006D450  80 7C 00 6C */	lwz r3, 0x6c(r28)
+/* 8139F054 0006D454  7F A4 EB 78 */	mr r4, r29
+/* 8139F058 0006D458  38 A0 00 01 */	li r5, 0x1
+/* 8139F05C 0006D45C  80 63 00 14 */	lwz r3, 0x14(r3)
+/* 8139F060 0006D460  81 83 00 00 */	lwz r12, 0x0(r3)
+/* 8139F064 0006D464  81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 8139F068 0006D468  7D 89 03 A6 */	mtctr r12
+/* 8139F06C 0006D46C  4E 80 04 21 */	bctrl
+/* 8139F070 0006D470  4B FA 6D F5 */	bl "DynamicCast<PQ34nw4r3lyt7TextBox,Q34nw4r3lyt4Pane>__Q24nw4r2utFPQ34nw4r3lyt4Pane_PQ34nw4r3lyt7TextBox"
+/* 8139F074 0006D474  81 83 00 00 */	lwz r12, 0x0(r3)
+/* 8139F078 0006D478  38 81 00 1C */	addi r4, r1, 0x1c
+/* 8139F07C 0006D47C  38 A0 00 00 */	li r5, 0x0
+/* 8139F080 0006D480  81 8C 00 6C */	lwz r12, 0x6c(r12)
+/* 8139F084 0006D484  7D 89 03 A6 */	mtctr r12
+/* 8139F088 0006D488  4E 80 04 21 */	bctrl
+/* 8139F08C 0006D48C  39 61 00 80 */	addi r11, r1, 0x80
+/* 8139F090 0006D490  48 25 A4 7D */	bl _restgpr_27
+/* 8139F094 0006D494  80 01 00 84 */	lwz r0, 0x84(r1)
+/* 8139F098 0006D498  7C 08 03 A6 */	mtlr r0
+/* 8139F09C 0006D49C  38 21 00 80 */	addi r1, r1, 0x80
+/* 8139F0A0 0006D4A0  4E 80 00 20 */	blr
+.endfn set_textbox_month__Q33ipl5scene8CalendarFPCcRCQ33ipl7utility4Date
+
+# .text:0x14F4 | 0x8139F0A4 | size: 0x29C
+# ipl::scene::Calendar::set_textbox_date(int, const ipl::utility::Date&)
+.fn set_textbox_date__Q33ipl5scene8CalendarFiRCQ33ipl7utility4Date, global
+/* 8139F0A4 0006D4A4  94 21 FF 70 */	stwu r1, -0x90(r1)
+/* 8139F0A8 0006D4A8  7C 08 02 A6 */	mflr r0
+/* 8139F0AC 0006D4AC  90 01 00 94 */	stw r0, 0x94(r1)
+/* 8139F0B0 0006D4B0  39 61 00 90 */	addi r11, r1, 0x90
+/* 8139F0B4 0006D4B4  48 25 A3 F9 */	bl _savegpr_22
+/* 8139F0B8 0006D4B8  7C 76 1B 78 */	mr r22, r3
+/* 8139F0BC 0006D4BC  7C 99 23 78 */	mr r25, r4
+/* 8139F0C0 0006D4C0  7C B7 2B 78 */	mr r23, r5
+/* 8139F0C4 0006D4C4  4B F9 69 29 */	bl getLanguage__Q23ipl6SystemFv
+/* 8139F0C8 0006D4C8  80 77 00 00 */	lwz r3, 0x0(r23)
+/* 8139F0CC 0006D4CC  38 A0 00 01 */	li r5, 0x1
+/* 8139F0D0 0006D4D0  80 97 00 04 */	lwz r4, 0x4(r23)
+/* 8139F0D4 0006D4D4  48 00 02 6D */	bl getWeek__Q33ipl7utility8CalendarFiii
+/* 8139F0D8 0006D4D8  7C 7C 1B 78 */	mr r28, r3
+/* 8139F0DC 0006D4DC  80 77 00 00 */	lwz r3, 0x0(r23)
+/* 8139F0E0 0006D4E0  80 97 00 04 */	lwz r4, 0x4(r23)
+/* 8139F0E4 0006D4E4  4B FF 0A 05 */	bl getDays__Q33ipl7utility8CalendarFii
+/* 8139F0E8 0006D4E8  3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
+/* 8139F0EC 0006D4EC  38 00 00 05 */	li r0, 0x5
+/* 8139F0F0 0006D4F0  38 84 90 08 */	addi r4, r4, smArg__Q23ipl6System@l
+/* 8139F0F4 0006D4F4  7C 7D 1B 78 */	mr r29, r3
+/* 8139F0F8 0006D4F8  38 A1 00 34 */	addi r5, r1, 0x34
+/* 8139F0FC 0006D4FC  38 84 00 38 */	addi r4, r4, 0x38
+/* 8139F100 0006D500  7C 09 03 A6 */	mtctr r0
+.L_8139F104:
+/* 8139F104 0006D504  80 64 00 04 */	lwz r3, 0x4(r4)
+/* 8139F108 0006D508  84 04 00 08 */	lwzu r0, 0x8(r4)
+/* 8139F10C 0006D50C  90 65 00 04 */	stw r3, 0x4(r5)
+/* 8139F110 0006D510  94 05 00 08 */	stwu r0, 0x8(r5)
+/* 8139F114 0006D514  42 00 FF F0 */	bdnz .L_8139F104
+/* 8139F118 0006D518  80 A1 00 48 */	lwz r5, 0x48(r1)
+/* 8139F11C 0006D51C  38 61 00 2C */	addi r3, r1, 0x2c
+/* 8139F120 0006D520  80 81 00 4C */	lwz r4, 0x4c(r1)
+/* 8139F124 0006D524  80 C1 00 44 */	lwz r6, 0x44(r1)
+/* 8139F128 0006D528  38 A5 00 01 */	addi r5, r5, 0x1
+/* 8139F12C 0006D52C  48 00 02 75 */	bl __ct__Q33ipl7utility4DateFiii
+/* 8139F130 0006D530  38 61 00 20 */	addi r3, r1, 0x20
+/* 8139F134 0006D534  4B FF 09 05 */	bl __ct__Q33ipl7utility4DateFv
+/* 8139F138 0006D538  38 61 00 14 */	addi r3, r1, 0x14
+/* 8139F13C 0006D53C  4B FF 08 FD */	bl __ct__Q33ipl7utility4DateFv
+/* 8139F140 0006D540  7E E3 BB 78 */	mr r3, r23
+/* 8139F144 0006D544  38 81 00 20 */	addi r4, r1, 0x20
+/* 8139F148 0006D548  4B FF F9 99 */	bl getLastMonth__Q33ipl7utility8CalendarFRCQ33ipl7utility4DatePQ33ipl7utility4Date
+/* 8139F14C 0006D54C  7E E3 BB 78 */	mr r3, r23
+/* 8139F150 0006D550  38 81 00 14 */	addi r4, r1, 0x14
+/* 8139F154 0006D554  4B FF F7 B1 */	bl getNextMonth__Q33ipl7utility8CalendarFRCQ33ipl7utility4DatePQ33ipl7utility4Date
+/* 8139F158 0006D558  88 16 00 AC */	lbz r0, 0xac(r22)
+/* 8139F15C 0006D55C  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139F160 0006D560  40 82 00 10 */	bne .L_8139F170
+/* 8139F164 0006D564  88 16 00 AD */	lbz r0, 0xad(r22)
+/* 8139F168 0006D568  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139F16C 0006D56C  41 82 00 1C */	beq .L_8139F188
+.L_8139F170:
+/* 8139F170 0006D570  80 77 00 00 */	lwz r3, 0x0(r23)
+/* 8139F174 0006D574  7F A5 EB 78 */	mr r5, r29
+/* 8139F178 0006D578  80 97 00 04 */	lwz r4, 0x4(r23)
+/* 8139F17C 0006D57C  48 00 01 C5 */	bl getWeek__Q33ipl7utility8CalendarFiii
+/* 8139F180 0006D580  23 03 00 06 */	subfic r24, r3, 0x6
+/* 8139F184 0006D584  48 00 00 34 */	b .L_8139F1B8
+.L_8139F188:
+/* 8139F188 0006D588  37 9C FF FF */	subic. r28, r28, 0x1
+/* 8139F18C 0006D58C  40 80 00 08 */	bge .L_8139F194
+/* 8139F190 0006D590  3B 80 00 06 */	li r28, 0x6
+.L_8139F194:
+/* 8139F194 0006D594  80 77 00 00 */	lwz r3, 0x0(r23)
+/* 8139F198 0006D598  7F A5 EB 78 */	mr r5, r29
+/* 8139F19C 0006D59C  80 97 00 04 */	lwz r4, 0x4(r23)
+/* 8139F1A0 0006D5A0  48 00 01 A1 */	bl getWeek__Q33ipl7utility8CalendarFiii
+/* 8139F1A4 0006D5A4  38 03 FF FF */	subi r0, r3, 0x1
+/* 8139F1A8 0006D5A8  23 00 00 06 */	subfic r24, r0, 0x6
+/* 8139F1AC 0006D5AC  2C 18 00 07 */	cmpwi r24, 0x7
+/* 8139F1B0 0006D5B0  41 80 00 08 */	blt .L_8139F1B8
+/* 8139F1B4 0006D5B4  3B 00 00 00 */	li r24, 0x0
+.L_8139F1B8:
+/* 8139F1B8 0006D5B8  38 79 FF FF */	subi r3, r25, 0x1
+/* 8139F1BC 0006D5BC  38 00 00 2A */	li r0, 0x2a
+/* 8139F1C0 0006D5C0  30 83 FF FF */	subic r4, r3, 0x1
+/* 8139F1C4 0006D5C4  7C 84 21 10 */	subfe r4, r4, r4
+/* 8139F1C8 0006D5C8  38 61 00 08 */	addi r3, r1, 0x8
+/* 8139F1CC 0006D5CC  7C 1B 20 78 */	andc r27, r0, r4
+/* 8139F1D0 0006D5D0  4B FF 08 69 */	bl __ct__Q33ipl7utility4DateFv
+/* 8139F1D4 0006D5D4  7F DD E2 14 */	add r30, r29, r28
+/* 8139F1D8 0006D5D8  3B 20 00 00 */	li r25, 0x0
+/* 8139F1DC 0006D5DC  7F F8 F2 14 */	add r31, r24, r30
+.L_8139F1E0:
+/* 8139F1E0 0006D5E0  38 76 00 84 */	addi r3, r22, 0x84
+/* 8139F1E4 0006D5E4  57 64 04 3E */	clrlwi r4, r27, 16
+/* 8139F1E8 0006D5E8  48 17 31 31 */	bl fn_81512318
+/* 8139F1EC 0006D5EC  7C 78 1B 78 */	mr r24, r3
+/* 8139F1F0 0006D5F0  38 80 00 01 */	li r4, 0x1
+/* 8139F1F4 0006D5F4  3B 7B 00 01 */	addi r27, r27, 0x1
+/* 8139F1F8 0006D5F8  48 00 0A D1 */	bl setVisible__Q33ipl5scene4DateFb
+/* 8139F1FC 0006D5FC  7C 19 E0 51 */	subf. r0, r25, r28
+/* 8139F200 0006D600  3B 40 00 00 */	li r26, 0x0
+/* 8139F204 0006D604  40 81 00 2C */	ble .L_8139F230
+/* 8139F208 0006D608  80 01 00 28 */	lwz r0, 0x28(r1)
+/* 8139F20C 0006D60C  80 A1 00 20 */	lwz r5, 0x20(r1)
+/* 8139F210 0006D610  7C 1C 00 50 */	subf r0, r28, r0
+/* 8139F214 0006D614  80 81 00 24 */	lwz r4, 0x24(r1)
+/* 8139F218 0006D618  7C 79 02 14 */	add r3, r25, r0
+/* 8139F21C 0006D61C  90 A1 00 08 */	stw r5, 0x8(r1)
+/* 8139F220 0006D620  38 03 00 01 */	addi r0, r3, 0x1
+/* 8139F224 0006D624  90 81 00 0C */	stw r4, 0xc(r1)
+/* 8139F228 0006D628  90 01 00 10 */	stw r0, 0x10(r1)
+/* 8139F22C 0006D62C  48 00 00 D8 */	b .L_8139F304
+.L_8139F230:
+/* 8139F230 0006D630  7C 19 F0 51 */	subf. r0, r25, r30
+/* 8139F234 0006D634  40 81 00 94 */	ble .L_8139F2C8
+/* 8139F238 0006D638  80 D7 00 00 */	lwz r6, 0x0(r23)
+/* 8139F23C 0006D63C  7C 7C C8 50 */	subf r3, r28, r25
+/* 8139F240 0006D640  80 01 00 2C */	lwz r0, 0x2c(r1)
+/* 8139F244 0006D644  38 83 00 01 */	addi r4, r3, 0x1
+/* 8139F248 0006D648  80 B7 00 04 */	lwz r5, 0x4(r23)
+/* 8139F24C 0006D64C  63 5A 00 02 */	ori r26, r26, 0x2
+/* 8139F250 0006D650  7C 06 00 00 */	cmpw r6, r0
+/* 8139F254 0006D654  90 C1 00 08 */	stw r6, 0x8(r1)
+/* 8139F258 0006D658  38 60 00 00 */	li r3, 0x0
+/* 8139F25C 0006D65C  90 A1 00 0C */	stw r5, 0xc(r1)
+/* 8139F260 0006D660  90 81 00 10 */	stw r4, 0x10(r1)
+/* 8139F264 0006D664  40 82 00 20 */	bne .L_8139F284
+/* 8139F268 0006D668  80 01 00 30 */	lwz r0, 0x30(r1)
+/* 8139F26C 0006D66C  7C 05 00 00 */	cmpw r5, r0
+/* 8139F270 0006D670  40 82 00 14 */	bne .L_8139F284
+/* 8139F274 0006D674  80 01 00 34 */	lwz r0, 0x34(r1)
+/* 8139F278 0006D678  7C 04 00 00 */	cmpw r4, r0
+/* 8139F27C 0006D67C  40 82 00 08 */	bne .L_8139F284
+/* 8139F280 0006D680  38 60 00 01 */	li r3, 0x1
+.L_8139F284:
+/* 8139F284 0006D684  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139F288 0006D688  41 82 00 08 */	beq .L_8139F290
+/* 8139F28C 0006D68C  63 5A 00 01 */	ori r26, r26, 0x1
+.L_8139F290:
+/* 8139F290 0006D690  80 61 00 08 */	lwz r3, 0x8(r1)
+/* 8139F294 0006D694  80 81 00 0C */	lwz r4, 0xc(r1)
+/* 8139F298 0006D698  80 A1 00 10 */	lwz r5, 0x10(r1)
+/* 8139F29C 0006D69C  48 00 00 A5 */	bl getWeek__Q33ipl7utility8CalendarFiii
+/* 8139F2A0 0006D6A0  2C 03 00 06 */	cmpwi r3, 0x6
+/* 8139F2A4 0006D6A4  41 82 00 14 */	beq .L_8139F2B8
+/* 8139F2A8 0006D6A8  40 80 00 5C */	bge .L_8139F304
+/* 8139F2AC 0006D6AC  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139F2B0 0006D6B0  41 82 00 10 */	beq .L_8139F2C0
+/* 8139F2B4 0006D6B4  48 00 00 50 */	b .L_8139F304
+.L_8139F2B8:
+/* 8139F2B8 0006D6B8  63 5A 00 08 */	ori r26, r26, 0x8
+/* 8139F2BC 0006D6BC  48 00 00 48 */	b .L_8139F304
+.L_8139F2C0:
+/* 8139F2C0 0006D6C0  63 5A 00 04 */	ori r26, r26, 0x4
+/* 8139F2C4 0006D6C4  48 00 00 40 */	b .L_8139F304
+.L_8139F2C8:
+/* 8139F2C8 0006D6C8  7C 19 F8 51 */	subf. r0, r25, r31
+/* 8139F2CC 0006D6CC  40 81 00 28 */	ble .L_8139F2F4
+/* 8139F2D0 0006D6D0  7C 1D C8 50 */	subf r0, r29, r25
+/* 8139F2D4 0006D6D4  80 A1 00 14 */	lwz r5, 0x14(r1)
+/* 8139F2D8 0006D6D8  7C 7C 00 50 */	subf r3, r28, r0
+/* 8139F2DC 0006D6DC  80 81 00 18 */	lwz r4, 0x18(r1)
+/* 8139F2E0 0006D6E0  38 03 00 01 */	addi r0, r3, 0x1
+/* 8139F2E4 0006D6E4  90 A1 00 08 */	stw r5, 0x8(r1)
+/* 8139F2E8 0006D6E8  90 81 00 0C */	stw r4, 0xc(r1)
+/* 8139F2EC 0006D6EC  90 01 00 10 */	stw r0, 0x10(r1)
+/* 8139F2F0 0006D6F0  48 00 00 14 */	b .L_8139F304
+.L_8139F2F4:
+/* 8139F2F4 0006D6F4  7F 03 C3 78 */	mr r3, r24
+/* 8139F2F8 0006D6F8  38 80 00 00 */	li r4, 0x0
+/* 8139F2FC 0006D6FC  48 00 09 CD */	bl setVisible__Q33ipl5scene4DateFb
+/* 8139F300 0006D700  48 00 00 1C */	b .L_8139F31C
+.L_8139F304:
+/* 8139F304 0006D704  7F 03 C3 78 */	mr r3, r24
+/* 8139F308 0006D708  38 81 00 08 */	addi r4, r1, 0x8
+/* 8139F30C 0006D70C  48 00 0B 41 */	bl setDate__Q33ipl5scene4DateFRCQ33ipl7utility4Date
+/* 8139F310 0006D710  7F 03 C3 78 */	mr r3, r24
+/* 8139F314 0006D714  7F 44 D3 78 */	mr r4, r26
+/* 8139F318 0006D718  48 00 0A 55 */	bl setAttribute__Q33ipl5scene4DateFi
+.L_8139F31C:
+/* 8139F31C 0006D71C  3B 39 00 01 */	addi r25, r25, 0x1
+/* 8139F320 0006D720  2C 19 00 2A */	cmpwi r25, 0x2a
+/* 8139F324 0006D724  41 80 FE BC */	blt .L_8139F1E0
+/* 8139F328 0006D728  39 61 00 90 */	addi r11, r1, 0x90
+/* 8139F32C 0006D72C  48 25 A1 CD */	bl _restgpr_22
+/* 8139F330 0006D730  80 01 00 94 */	lwz r0, 0x94(r1)
+/* 8139F334 0006D734  7C 08 03 A6 */	mtlr r0
+/* 8139F338 0006D738  38 21 00 90 */	addi r1, r1, 0x90
+/* 8139F33C 0006D73C  4E 80 00 20 */	blr
+.endfn set_textbox_date__Q33ipl5scene8CalendarFiRCQ33ipl7utility4Date
+
+# .text:0x1790 | 0x8139F340 | size: 0x60
+# ipl::utility::Calendar::getWeek(int, int, int)
+.fn getWeek__Q33ipl7utility8CalendarFiii, weak
+/* 8139F340 0006D740  2C 04 00 02 */	cmpwi r4, 0x2
+/* 8139F344 0006D744  41 81 00 0C */	bgt .L_8139F350
+/* 8139F348 0006D748  38 63 FF FF */	subi r3, r3, 0x1
+/* 8139F34C 0006D74C  38 84 00 0C */	addi r4, r4, 0xc
+.L_8139F350:
+/* 8139F350 0006D750  1C 84 00 0D */	mulli r4, r4, 0xd
+/* 8139F354 0006D754  38 C0 00 64 */	li r6, 0x64
+/* 8139F358 0006D758  7C 60 16 70 */	srawi r0, r3, 2
+/* 8139F35C 0006D75C  38 E0 01 90 */	li r7, 0x190
+/* 8139F360 0006D760  39 04 00 08 */	addi r8, r4, 0x8
+/* 8139F364 0006D764  7C 00 01 94 */	addze r0, r0
+/* 8139F368 0006D768  38 80 00 05 */	li r4, 0x5
+/* 8139F36C 0006D76C  7D 08 23 D6 */	divw r8, r8, r4
+/* 8139F370 0006D770  7C 03 02 14 */	add r0, r3, r0
+/* 8139F374 0006D774  38 80 00 07 */	li r4, 0x7
+/* 8139F378 0006D778  7C C3 33 D6 */	divw r6, r3, r6
+/* 8139F37C 0006D77C  7C A5 42 14 */	add r5, r5, r8
+/* 8139F380 0006D780  7C 63 3B D6 */	divw r3, r3, r7
+/* 8139F384 0006D784  7C 06 00 50 */	subf r0, r6, r0
+/* 8139F388 0006D788  7C 03 02 14 */	add r0, r3, r0
+/* 8139F38C 0006D78C  7C 65 02 14 */	add r3, r5, r0
+/* 8139F390 0006D790  7C 03 23 D6 */	divw r0, r3, r4
+/* 8139F394 0006D794  7C 00 21 D6 */	mullw r0, r0, r4
+/* 8139F398 0006D798  7C 60 18 50 */	subf r3, r0, r3
+/* 8139F39C 0006D79C  4E 80 00 20 */	blr
+.endfn getWeek__Q33ipl7utility8CalendarFiii
+
+# .text:0x17F0 | 0x8139F3A0 | size: 0x10
+# ipl::utility::Date::Date(int, int, int)
+.fn __ct__Q33ipl7utility4DateFiii, weak
+/* 8139F3A0 0006D7A0  90 83 00 00 */	stw r4, 0x0(r3)
+/* 8139F3A4 0006D7A4  90 A3 00 04 */	stw r5, 0x4(r3)
+/* 8139F3A8 0006D7A8  90 C3 00 08 */	stw r6, 0x8(r3)
+/* 8139F3AC 0006D7AC  4E 80 00 20 */	blr
+.endfn __ct__Q33ipl7utility4DateFiii
+
+# .text:0x1800 | 0x8139F3B0 | size: 0x16C
+# ipl::scene::Calendar::set_date_pos(int)
+.fn set_date_pos__Q33ipl5scene8CalendarFi, global
+/* 8139F3B0 0006D7B0  94 21 FF 90 */	stwu r1, -0x70(r1)
+/* 8139F3B4 0006D7B4  7C 08 02 A6 */	mflr r0
+/* 8139F3B8 0006D7B8  90 01 00 74 */	stw r0, 0x74(r1)
+/* 8139F3BC 0006D7BC  DB E1 00 60 */	stfd f31, 0x60(r1)
+/* 8139F3C0 0006D7C0  F3 E1 00 68 */	psq_st f31, 0x68(r1), 0, qr0
+/* 8139F3C4 0006D7C4  DB C1 00 50 */	stfd f30, 0x50(r1)
+/* 8139F3C8 0006D7C8  F3 C1 00 58 */	psq_st f30, 0x58(r1), 0, qr0
+/* 8139F3CC 0006D7CC  39 61 00 50 */	addi r11, r1, 0x50
+/* 8139F3D0 0006D7D0  48 25 A0 E5 */	bl _savegpr_24
+/* 8139F3D4 0006D7D4  80 C3 00 6C */	lwz r6, 0x6c(r3)
+/* 8139F3D8 0006D7D8  7C 7E 1B 78 */	mr r30, r3
+/* 8139F3DC 0006D7DC  3C A0 81 65 */	lis r5, lbl_8164C480@ha
+/* 8139F3E0 0006D7E0  54 9B 10 3A */	slwi r27, r4, 2
+/* 8139F3E4 0006D7E4  80 66 00 14 */	lwz r3, 0x14(r6)
+/* 8139F3E8 0006D7E8  38 A5 C4 80 */	addi r5, r5, lbl_8164C480@l
+/* 8139F3EC 0006D7EC  7C 98 23 78 */	mr r24, r4
+/* 8139F3F0 0006D7F0  7C 85 D8 2E */	lwzx r4, r5, r27
+/* 8139F3F4 0006D7F4  81 83 00 00 */	lwz r12, 0x0(r3)
+/* 8139F3F8 0006D7F8  38 A0 00 01 */	li r5, 0x1
+/* 8139F3FC 0006D7FC  81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 8139F400 0006D800  7D 89 03 A6 */	mtctr r12
+/* 8139F404 0006D804  4E 80 04 21 */	bctrl
+/* 8139F408 0006D808  80 DE 00 6C */	lwz r6, 0x6c(r30)
+/* 8139F40C 0006D80C  7C 7F 1B 78 */	mr r31, r3
+/* 8139F410 0006D810  3C 80 81 65 */	lis r4, lbl_8164C4B0@ha
+/* 8139F414 0006D814  38 A0 00 01 */	li r5, 0x1
+/* 8139F418 0006D818  80 66 00 14 */	lwz r3, 0x14(r6)
+/* 8139F41C 0006D81C  38 84 C4 B0 */	addi r4, r4, lbl_8164C4B0@l
+/* 8139F420 0006D820  7C 84 D8 2E */	lwzx r4, r4, r27
+/* 8139F424 0006D824  81 83 00 00 */	lwz r12, 0x0(r3)
+/* 8139F428 0006D828  81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 8139F42C 0006D82C  7D 89 03 A6 */	mtctr r12
+/* 8139F430 0006D830  4E 80 04 21 */	bctrl
+/* 8139F434 0006D834  38 18 FF FF */	subi r0, r24, 0x1
+/* 8139F438 0006D838  CB C2 84 D8 */	lfd f30, lbl_816948D8@sda21(r0)
+/* 8139F43C 0006D83C  30 00 FF FF */	subic r0, r0, 0x1
+/* 8139F440 0006D840  C3 E2 84 E0 */	lfs f31, lbl_816948E0@sda21(r0)
+/* 8139F444 0006D844  7C 80 01 10 */	subfe r4, r0, r0
+/* 8139F448 0006D848  3B 63 00 84 */	addi r27, r3, 0x84
+/* 8139F44C 0006D84C  38 00 00 2A */	li r0, 0x2a
+/* 8139F450 0006D850  3B 20 00 00 */	li r25, 0x0
+/* 8139F454 0006D854  7C 1A 20 78 */	andc r26, r0, r4
+/* 8139F458 0006D858  3B 80 00 07 */	li r28, 0x7
+/* 8139F45C 0006D85C  3F A0 43 30 */	lis r29, 0x4330
+.L_8139F460:
+/* 8139F460 0006D860  38 7E 00 84 */	addi r3, r30, 0x84
+/* 8139F464 0006D864  57 44 04 3E */	clrlwi r4, r26, 16
+/* 8139F468 0006D868  48 17 2E B1 */	bl fn_81512318
+/* 8139F46C 0006D86C  57 26 04 3E */	clrlwi r6, r25, 16
+/* 8139F470 0006D870  38 81 00 08 */	addi r4, r1, 0x8
+/* 8139F474 0006D874  7C E6 E3 D6 */	divw r7, r6, r28
+/* 8139F478 0006D878  7C 78 1B 78 */	mr r24, r3
+/* 8139F47C 0006D87C  93 A1 00 18 */	stw r29, 0x18(r1)
+/* 8139F480 0006D880  7F 63 DB 78 */	mr r3, r27
+/* 8139F484 0006D884  7C 85 23 78 */	mr r5, r4
+/* 8139F488 0006D888  93 A1 00 20 */	stw r29, 0x20(r1)
+/* 8139F48C 0006D88C  7C 07 E1 D6 */	mullw r0, r7, r28
+/* 8139F490 0006D890  D3 E1 00 10 */	stfs f31, 0x10(r1)
+/* 8139F494 0006D894  3B 5A 00 01 */	addi r26, r26, 0x1
+/* 8139F498 0006D898  7C 00 30 50 */	subf r0, r0, r6
+/* 8139F49C 0006D89C  1C C0 00 46 */	mulli r6, r0, 0x46
+/* 8139F4A0 0006D8A0  1C 07 FF D0 */	mulli r0, r7, -0x30
+/* 8139F4A4 0006D8A4  6C C6 80 00 */	xoris r6, r6, 0x8000
+/* 8139F4A8 0006D8A8  90 C1 00 1C */	stw r6, 0x1c(r1)
+/* 8139F4AC 0006D8AC  6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 8139F4B0 0006D8B0  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8139F4B4 0006D8B4  C8 21 00 18 */	lfd f1, 0x18(r1)
+/* 8139F4B8 0006D8B8  C8 01 00 20 */	lfd f0, 0x20(r1)
+/* 8139F4BC 0006D8BC  EC 21 F0 28 */	fsubs f1, f1, f30
+/* 8139F4C0 0006D8C0  EC 00 F0 28 */	fsubs f0, f0, f30
+/* 8139F4C4 0006D8C4  D0 21 00 08 */	stfs f1, 0x8(r1)
+/* 8139F4C8 0006D8C8  D0 01 00 0C */	stfs f0, 0xc(r1)
+/* 8139F4CC 0006D8CC  48 1A 1F F1 */	bl fn_815414BC
+/* 8139F4D0 0006D8D0  7F 03 C3 78 */	mr r3, r24
+/* 8139F4D4 0006D8D4  38 81 00 08 */	addi r4, r1, 0x8
+/* 8139F4D8 0006D8D8  48 00 07 99 */	bl setTranslate__Q33ipl5scene4DateFRCQ34nw4r4math4VEC3
+/* 8139F4DC 0006D8DC  7F 03 C3 78 */	mr r3, r24
+/* 8139F4E0 0006D8E0  38 9F 00 38 */	addi r4, r31, 0x38
+/* 8139F4E4 0006D8E4  48 00 07 35 */	bl setRotate__Q33ipl5scene4DateFRCQ34nw4r4math4VEC3
+/* 8139F4E8 0006D8E8  3B 39 00 01 */	addi r25, r25, 0x1
+/* 8139F4EC 0006D8EC  28 19 00 2A */	cmplwi r25, 0x2a
+/* 8139F4F0 0006D8F0  41 80 FF 70 */	blt .L_8139F460
+/* 8139F4F4 0006D8F4  E3 E1 00 68 */	psq_l f31, 0x68(r1), 0, qr0
+/* 8139F4F8 0006D8F8  CB E1 00 60 */	lfd f31, 0x60(r1)
+/* 8139F4FC 0006D8FC  E3 C1 00 58 */	psq_l f30, 0x58(r1), 0, qr0
+/* 8139F500 0006D900  39 61 00 50 */	addi r11, r1, 0x50
+/* 8139F504 0006D904  CB C1 00 50 */	lfd f30, 0x50(r1)
+/* 8139F508 0006D908  48 25 9F F9 */	bl _restgpr_24
+/* 8139F50C 0006D90C  80 01 00 74 */	lwz r0, 0x74(r1)
+/* 8139F510 0006D910  7C 08 03 A6 */	mtlr r0
+/* 8139F514 0006D914  38 21 00 70 */	addi r1, r1, 0x70
+/* 8139F518 0006D918  4E 80 00 20 */	blr
+.endfn set_date_pos__Q33ipl5scene8CalendarFi
+
+# .text:0x196C | 0x8139F51C | size: 0xD0
+# ipl::scene::search_task_cb_(void*, _CDBRecord*)
+.fn search_task_cb___Q23ipl5sceneFPvP10_CDBRecord, global
+/* 8139F51C 0006D91C  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8139F520 0006D920  7C 08 02 A6 */	mflr r0
+/* 8139F524 0006D924  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8139F528 0006D928  39 61 00 20 */	addi r11, r1, 0x20
+/* 8139F52C 0006D92C  48 25 9F 9D */	bl _savegpr_29
+/* 8139F530 0006D930  3F E0 81 09 */	lis r31, smArg__Q23ipl6System@ha
+/* 8139F534 0006D934  7C 9E 23 78 */	mr r30, r4
+/* 8139F538 0006D938  3B FF 90 08 */	addi r31, r31, smArg__Q23ipl6System@l
+/* 8139F53C 0006D93C  7C 7D 1B 78 */	mr r29, r3
+/* 8139F540 0006D940  80 7F 00 64 */	lwz r3, 0x64(r31)
+/* 8139F544 0006D944  38 80 00 07 */	li r4, 0x7
+/* 8139F548 0006D948  48 06 BB F1 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 8139F54C 0006D94C  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139F550 0006D950  41 82 00 80 */	beq .L_8139F5D0
+/* 8139F554 0006D954  38 00 00 00 */	li r0, 0x0
+/* 8139F558 0006D958  7F C3 F3 78 */	mr r3, r30
+/* 8139F55C 0006D95C  98 01 00 08 */	stb r0, 0x8(r1)
+/* 8139F560 0006D960  38 81 00 08 */	addi r4, r1, 0x8
+/* 8139F564 0006D964  98 01 00 09 */	stb r0, 0x9(r1)
+/* 8139F568 0006D968  98 01 00 0A */	stb r0, 0xa(r1)
+/* 8139F56C 0006D96C  98 01 00 0B */	stb r0, 0xb(r1)
+/* 8139F570 0006D970  98 01 00 0C */	stb r0, 0xc(r1)
+/* 8139F574 0006D974  98 01 00 0D */	stb r0, 0xd(r1)
+/* 8139F578 0006D978  98 01 00 0E */	stb r0, 0xe(r1)
+/* 8139F57C 0006D97C  98 01 00 0F */	stb r0, 0xf(r1)
+/* 8139F580 0006D980  48 0E D5 99 */	bl fn_8148CB18
+/* 8139F584 0006D984  88 1F 02 BC */	lbz r0, 0x2bc(r31)
+/* 8139F588 0006D988  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139F58C 0006D98C  41 82 00 0C */	beq .L_8139F598
+/* 8139F590 0006D990  38 60 00 00 */	li r3, 0x0
+/* 8139F594 0006D994  48 00 00 08 */	b .L_8139F59C
+.L_8139F598:
+/* 8139F598 0006D998  80 7F 00 7C */	lwz r3, 0x7c(r31)
+.L_8139F59C:
+/* 8139F59C 0006D99C  38 81 00 08 */	addi r4, r1, 0x8
+/* 8139F5A0 0006D9A0  4B FA 03 E9 */	bl isTxtValidType__Q33ipl3cdb7ManagerFPCc
+/* 8139F5A4 0006D9A4  90 7D 00 0C */	stw r3, 0xc(r29)
+/* 8139F5A8 0006D9A8  80 1D 00 0C */	lwz r0, 0xc(r29)
+/* 8139F5AC 0006D9AC  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139F5B0 0006D9B0  40 82 00 0C */	bne .L_8139F5BC
+/* 8139F5B4 0006D9B4  38 60 00 01 */	li r3, 0x1
+/* 8139F5B8 0006D9B8  48 00 00 1C */	b .L_8139F5D4
+.L_8139F5BC:
+/* 8139F5BC 0006D9BC  7F A3 EB 78 */	mr r3, r29
+/* 8139F5C0 0006D9C0  38 80 00 0A */	li r4, 0xa
+/* 8139F5C4 0006D9C4  48 00 05 DD */	bl doAnim__Q33ipl5scene4DateFi
+/* 8139F5C8 0006D9C8  7F A3 EB 78 */	mr r3, r29
+/* 8139F5CC 0006D9CC  48 00 05 09 */	bl calc__Q33ipl5scene4DateFv
+.L_8139F5D0:
+/* 8139F5D0 0006D9D0  38 60 00 00 */	li r3, 0x0
+.L_8139F5D4:
+/* 8139F5D4 0006D9D4  39 61 00 20 */	addi r11, r1, 0x20
+/* 8139F5D8 0006D9D8  48 25 9F 3D */	bl _restgpr_29
+/* 8139F5DC 0006D9DC  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8139F5E0 0006D9E0  7C 08 03 A6 */	mtlr r0
+/* 8139F5E4 0006D9E4  38 21 00 20 */	addi r1, r1, 0x20
+/* 8139F5E8 0006D9E8  4E 80 00 20 */	blr
+.endfn search_task_cb___Q23ipl5sceneFPvP10_CDBRecord
+
+# .text:0x1A3C | 0x8139F5EC | size: 0x158
+# ipl::scene::search_task_(void*)
+.fn search_task___Q23ipl5sceneFPv, global
+/* 8139F5EC 0006D9EC  94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 8139F5F0 0006D9F0  7C 08 02 A6 */	mflr r0
+/* 8139F5F4 0006D9F4  90 01 00 34 */	stw r0, 0x34(r1)
+/* 8139F5F8 0006D9F8  39 61 00 30 */	addi r11, r1, 0x30
+/* 8139F5FC 0006D9FC  48 25 9E C5 */	bl _savegpr_27
+/* 8139F600 0006DA00  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 8139F604 0006DA04  38 80 00 07 */	li r4, 0x7
+/* 8139F608 0006DA08  3B A3 90 08 */	addi r29, r3, smArg__Q23ipl6System@l
+/* 8139F60C 0006DA0C  80 7D 00 64 */	lwz r3, 0x64(r29)
+/* 8139F610 0006DA10  48 06 BB 29 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 8139F614 0006DA14  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139F618 0006DA18  7C 7E 1B 78 */	mr r30, r3
+/* 8139F61C 0006DA1C  41 82 01 10 */	beq .L_8139F72C
+/* 8139F620 0006DA20  3B 80 00 00 */	li r28, 0x0
+/* 8139F624 0006DA24  3F E0 81 3A */	lis r31, search_task_cb___Q23ipl5sceneFPvP10_CDBRecord@ha
+.L_8139F628:
+/* 8139F628 0006DA28  80 1E 00 A4 */	lwz r0, 0xa4(r30)
+/* 8139F62C 0006DA2C  2C 00 00 01 */	cmpwi r0, 0x1
+/* 8139F630 0006DA30  40 82 00 20 */	bne .L_8139F650
+/* 8139F634 0006DA34  3C 60 81 65 */	lis r3, lbl_8164C54E@ha
+/* 8139F638 0006DA38  38 63 C5 4E */	addi r3, r3, lbl_8164C54E@l
+/* 8139F63C 0006DA3C  4C C6 31 82 */	crclr cr1eq
+/* 8139F640 0006DA40  48 18 F0 61 */	bl OSReport
+/* 8139F644 0006DA44  38 00 00 00 */	li r0, 0x0
+/* 8139F648 0006DA48  90 1E 00 A4 */	stw r0, 0xa4(r30)
+/* 8139F64C 0006DA4C  48 00 00 C4 */	b .L_8139F710
+.L_8139F650:
+/* 8139F650 0006DA50  38 7E 00 84 */	addi r3, r30, 0x84
+/* 8139F654 0006DA54  57 84 04 3E */	clrlwi r4, r28, 16
+/* 8139F658 0006DA58  48 17 2C C1 */	bl fn_81512318
+/* 8139F65C 0006DA5C  7C 7B 1B 78 */	mr r27, r3
+/* 8139F660 0006DA60  48 00 06 C5 */	bl getVisible__Q33ipl5scene4DateFv
+/* 8139F664 0006DA64  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139F668 0006DA68  41 82 00 9C */	beq .L_8139F704
+/* 8139F66C 0006DA6C  80 BB 00 38 */	lwz r5, 0x38(r27)
+/* 8139F670 0006DA70  38 C0 00 00 */	li r6, 0x0
+/* 8139F674 0006DA74  38 E0 00 00 */	li r7, 0x0
+/* 8139F678 0006DA78  39 00 00 00 */	li r8, 0x0
+/* 8139F67C 0006DA7C  80 85 00 04 */	lwz r4, 0x4(r5)
+/* 8139F680 0006DA80  80 65 00 00 */	lwz r3, 0x0(r5)
+/* 8139F684 0006DA84  80 A5 00 08 */	lwz r5, 0x8(r5)
+/* 8139F688 0006DA88  38 84 FF FF */	subi r4, r4, 0x1
+/* 8139F68C 0006DA8C  48 0E 6C 5D */	bl fn_814862E8
+/* 8139F690 0006DA90  90 61 00 0C */	stw r3, 0xc(r1)
+/* 8139F694 0006DA94  38 C0 00 17 */	li r6, 0x17
+/* 8139F698 0006DA98  38 E0 00 3B */	li r7, 0x3b
+/* 8139F69C 0006DA9C  39 00 00 3B */	li r8, 0x3b
+/* 8139F6A0 0006DAA0  80 BB 00 38 */	lwz r5, 0x38(r27)
+/* 8139F6A4 0006DAA4  80 85 00 04 */	lwz r4, 0x4(r5)
+/* 8139F6A8 0006DAA8  80 65 00 00 */	lwz r3, 0x0(r5)
+/* 8139F6AC 0006DAAC  80 A5 00 08 */	lwz r5, 0x8(r5)
+/* 8139F6B0 0006DAB0  38 84 FF FF */	subi r4, r4, 0x1
+/* 8139F6B4 0006DAB4  48 0E 6C 35 */	bl fn_814862E8
+/* 8139F6B8 0006DAB8  88 1D 02 BC */	lbz r0, 0x2bc(r29)
+/* 8139F6BC 0006DABC  90 61 00 08 */	stw r3, 0x8(r1)
+/* 8139F6C0 0006DAC0  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139F6C4 0006DAC4  41 82 00 0C */	beq .L_8139F6D0
+/* 8139F6C8 0006DAC8  38 60 00 00 */	li r3, 0x0
+/* 8139F6CC 0006DACC  48 00 00 08 */	b .L_8139F6D4
+.L_8139F6D0:
+/* 8139F6D0 0006DAD0  80 7D 00 7C */	lwz r3, 0x7c(r29)
+.L_8139F6D4:
+/* 8139F6D4 0006DAD4  88 03 00 14 */	lbz r0, 0x14(r3)
+/* 8139F6D8 0006DAD8  38 81 00 0C */	addi r4, r1, 0xc
+/* 8139F6DC 0006DADC  38 A1 00 08 */	addi r5, r1, 0x8
+/* 8139F6E0 0006DAE0  38 C0 00 01 */	li r6, 0x1
+/* 8139F6E4 0006DAE4  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8139F6E8 0006DAE8  38 E0 00 01 */	li r7, 0x1
+/* 8139F6EC 0006DAEC  41 82 00 08 */	beq .L_8139F6F4
+/* 8139F6F0 0006DAF0  38 E0 00 03 */	li r7, 0x3
+.L_8139F6F4:
+/* 8139F6F4 0006DAF4  7F 6A DB 78 */	mr r10, r27
+/* 8139F6F8 0006DAF8  39 3F F5 1C */	addi r9, r31, search_task_cb___Q23ipl5sceneFPvP10_CDBRecord@l
+/* 8139F6FC 0006DAFC  39 00 00 00 */	li r8, 0x0
+/* 8139F700 0006DB00  4B FA 06 61 */	bl search__Q33ipl3cdb7ManagerFRCUlRCUl18CDBSearchDirection17CDBRecordLocationiPFPvP10_CDBRecord_iPv
+.L_8139F704:
+/* 8139F704 0006DB04  3B 9C 00 01 */	addi r28, r28, 0x1
+/* 8139F708 0006DB08  28 1C 00 2A */	cmplwi r28, 0x2a
+/* 8139F70C 0006DB0C  41 80 FF 1C */	blt .L_8139F628
+.L_8139F710:
+/* 8139F710 0006DB10  3C 60 81 65 */	lis r3, lbl_8164C566@ha
+/* 8139F714 0006DB14  38 63 C5 66 */	addi r3, r3, lbl_8164C566@l
+/* 8139F718 0006DB18  4C C6 31 82 */	crclr cr1eq
+/* 8139F71C 0006DB1C  48 18 EF 85 */	bl OSReport
+/* 8139F720 0006DB20  38 00 00 00 */	li r0, 0x0
+/* 8139F724 0006DB24  90 1E 00 A0 */	stw r0, 0xa0(r30)
+/* 8139F728 0006DB28  90 1E 00 A4 */	stw r0, 0xa4(r30)
+.L_8139F72C:
+/* 8139F72C 0006DB2C  39 61 00 30 */	addi r11, r1, 0x30
+/* 8139F730 0006DB30  48 25 9D DD */	bl _restgpr_27
+/* 8139F734 0006DB34  80 01 00 34 */	lwz r0, 0x34(r1)
+/* 8139F738 0006DB38  7C 08 03 A6 */	mtlr r0
+/* 8139F73C 0006DB3C  38 21 00 30 */	addi r1, r1, 0x30
+/* 8139F740 0006DB40  4E 80 00 20 */	blr
+.endfn search_task___Q23ipl5sceneFPv
+
+# .text:0x1B94 | 0x8139F744 | size: 0x60
+# ipl::scene::Calendar::exec_search_task()
+.fn exec_search_task__Q33ipl5scene8CalendarFv, global
+/* 8139F744 0006DB44  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139F748 0006DB48  7C 08 02 A6 */	mflr r0
+/* 8139F74C 0006DB4C  3C 80 81 65 */	lis r4, lbl_8164C572@ha
+/* 8139F750 0006DB50  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139F754 0006DB54  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139F758 0006DB58  7C 7F 1B 78 */	mr r31, r3
+/* 8139F75C 0006DB5C  38 64 C5 72 */	addi r3, r4, lbl_8164C572@l
+/* 8139F760 0006DB60  4C C6 31 82 */	crclr cr1eq
+/* 8139F764 0006DB64  48 18 EF 3D */	bl OSReport
+/* 8139F768 0006DB68  38 00 00 01 */	li r0, 0x1
+/* 8139F76C 0006DB6C  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 8139F770 0006DB70  90 1F 00 A0 */	stw r0, 0xa0(r31)
+/* 8139F774 0006DB74  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 8139F778 0006DB78  3C 80 81 3A */	lis r4, search_task___Q23ipl5sceneFPv@ha
+/* 8139F77C 0006DB7C  7F E5 FB 78 */	mr r5, r31
+/* 8139F780 0006DB80  80 63 00 D0 */	lwz r3, 0xd0(r3)
+/* 8139F784 0006DB84  38 84 F5 EC */	addi r4, r4, search_task___Q23ipl5sceneFPv@l
+/* 8139F788 0006DB88  38 C0 00 00 */	li r6, 0x0
+/* 8139F78C 0006DB8C  48 25 8B 41 */	bl fn_815F82CC
+/* 8139F790 0006DB90  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139F794 0006DB94  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139F798 0006DB98  7C 08 03 A6 */	mtlr r0
+/* 8139F79C 0006DB9C  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139F7A0 0006DBA0  4E 80 00 20 */	blr
+.endfn exec_search_task__Q33ipl5scene8CalendarFv
+
+# .text:0x1BF4 | 0x8139F7A4 | size: 0x38
+# ipl::scene::Calendar::is_upper_limit()
+.fn is_upper_limit__Q33ipl5scene8CalendarFv, global
+/* 8139F7A4 0006DBA4  80 C3 00 7C */	lwz r6, 0x7c(r3)
+/* 8139F7A8 0006DBA8  3C 80 81 0B */	lis r4, mscMaxDate__Q33ipl5scene8Calendar@ha
+/* 8139F7AC 0006DBAC  80 04 73 0C */	lwz r0, mscMaxDate__Q33ipl5scene8Calendar@l(r4)
+/* 8139F7B0 0006DBB0  38 60 00 00 */	li r3, 0x0
+/* 8139F7B4 0006DBB4  80 A6 00 00 */	lwz r5, 0x0(r6)
+/* 8139F7B8 0006DBB8  7C 05 00 00 */	cmpw r5, r0
+/* 8139F7BC 0006DBBC  4C 82 00 20 */	bnelr
+/* 8139F7C0 0006DBC0  38 84 73 0C */	addi r4, r4, mscMaxDate__Q33ipl5scene8Calendar@l
+/* 8139F7C4 0006DBC4  80 A6 00 04 */	lwz r5, 0x4(r6)
+/* 8139F7C8 0006DBC8  80 04 00 04 */	lwz r0, 0x4(r4)
+/* 8139F7CC 0006DBCC  7C 05 00 00 */	cmpw r5, r0
+/* 8139F7D0 0006DBD0  4C 82 00 20 */	bnelr
+/* 8139F7D4 0006DBD4  38 60 00 01 */	li r3, 0x1
+/* 8139F7D8 0006DBD8  4E 80 00 20 */	blr
+.endfn is_upper_limit__Q33ipl5scene8CalendarFv
+
+# .text:0x1C2C | 0x8139F7DC | size: 0x38
+# ipl::scene::Calendar::is_lower_limit()
+.fn is_lower_limit__Q33ipl5scene8CalendarFv, global
+/* 8139F7DC 0006DBDC  80 C3 00 7C */	lwz r6, 0x7c(r3)
+/* 8139F7E0 0006DBE0  3C 80 81 0B */	lis r4, mscMinDate__Q33ipl5scene8Calendar@ha
+/* 8139F7E4 0006DBE4  80 04 73 00 */	lwz r0, mscMinDate__Q33ipl5scene8Calendar@l(r4)
+/* 8139F7E8 0006DBE8  38 60 00 00 */	li r3, 0x0
+/* 8139F7EC 0006DBEC  80 A6 00 00 */	lwz r5, 0x0(r6)
+/* 8139F7F0 0006DBF0  7C 05 00 00 */	cmpw r5, r0
+/* 8139F7F4 0006DBF4  4C 82 00 20 */	bnelr
+/* 8139F7F8 0006DBF8  38 84 73 00 */	addi r4, r4, mscMinDate__Q33ipl5scene8Calendar@l
+/* 8139F7FC 0006DBFC  80 A6 00 04 */	lwz r5, 0x4(r6)
+/* 8139F800 0006DC00  80 04 00 04 */	lwz r0, 0x4(r4)
+/* 8139F804 0006DC04  7C 05 00 00 */	cmpw r5, r0
+/* 8139F808 0006DC08  4C 82 00 20 */	bnelr
+/* 8139F80C 0006DC0C  38 60 00 01 */	li r3, 0x1
+/* 8139F810 0006DC10  4E 80 00 20 */	blr
+.endfn is_lower_limit__Q33ipl5scene8CalendarFv
+
+# .text:0x1C64 | 0x8139F814 | size: 0x5C
+# ipl::scene::Calendar::~Calendar()
+.fn __dt__Q33ipl5scene8CalendarFv, global
+/* 8139F814 0006DC14  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139F818 0006DC18  7C 08 02 A6 */	mflr r0
+/* 8139F81C 0006DC1C  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8139F820 0006DC20  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139F824 0006DC24  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8139F828 0006DC28  7C 9F 23 78 */	mr r31, r4
+/* 8139F82C 0006DC2C  93 C1 00 08 */	stw r30, 0x8(r1)
+/* 8139F830 0006DC30  7C 7E 1B 78 */	mr r30, r3
+/* 8139F834 0006DC34  41 82 00 20 */	beq .L_8139F854
+/* 8139F838 0006DC38  41 82 00 0C */	beq .L_8139F844
+/* 8139F83C 0006DC3C  38 80 00 00 */	li r4, 0x0
+/* 8139F840 0006DC40  48 06 A4 25 */	bl fn_81409C64
+.L_8139F844:
+/* 8139F844 0006DC44  2C 1F 00 00 */	cmpwi r31, 0x0
+/* 8139F848 0006DC48  40 81 00 0C */	ble .L_8139F854
+/* 8139F84C 0006DC4C  7F C3 F3 78 */	mr r3, r30
+/* 8139F850 0006DC50  48 25 88 95 */	bl __dl__FPv
+.L_8139F854:
+/* 8139F854 0006DC54  7F C3 F3 78 */	mr r3, r30
+/* 8139F858 0006DC58  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8139F85C 0006DC5C  83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 8139F860 0006DC60  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139F864 0006DC64  7C 08 03 A6 */	mtlr r0
+/* 8139F868 0006DC68  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139F86C 0006DC6C  4E 80 00 20 */	blr
+.endfn __dt__Q33ipl5scene8CalendarFv
+
+# .text:0x1CC0 | 0x8139F870 | size: 0x4C
+.fn "__sinit_\\iplCalendar_cpp", global
+/* 8139F870 0006DC70  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8139F874 0006DC74  7C 08 02 A6 */	mflr r0
+/* 8139F878 0006DC78  3C 60 81 0B */	lis r3, mscMinDate__Q33ipl5scene8Calendar@ha
+/* 8139F87C 0006DC7C  38 80 07 D0 */	li r4, 0x7d0
+/* 8139F880 0006DC80  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8139F884 0006DC84  38 63 73 00 */	addi r3, r3, mscMinDate__Q33ipl5scene8Calendar@l
+/* 8139F888 0006DC88  38 A0 00 01 */	li r5, 0x1
+/* 8139F88C 0006DC8C  38 C0 00 01 */	li r6, 0x1
+/* 8139F890 0006DC90  4B FF FB 11 */	bl __ct__Q33ipl7utility4DateFiii
+/* 8139F894 0006DC94  3C 60 81 0B */	lis r3, mscMaxDate__Q33ipl5scene8Calendar@ha
+/* 8139F898 0006DC98  38 80 07 F3 */	li r4, 0x7f3
+/* 8139F89C 0006DC9C  38 63 73 0C */	addi r3, r3, mscMaxDate__Q33ipl5scene8Calendar@l
+/* 8139F8A0 0006DCA0  38 A0 00 0C */	li r5, 0xc
+/* 8139F8A4 0006DCA4  38 C0 00 1F */	li r6, 0x1f
+/* 8139F8A8 0006DCA8  4B FF FA F9 */	bl __ct__Q33ipl7utility4DateFiii
+/* 8139F8AC 0006DCAC  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8139F8B0 0006DCB0  7C 08 03 A6 */	mtlr r0
+/* 8139F8B4 0006DCB4  38 21 00 10 */	addi r1, r1, 0x10
+/* 8139F8B8 0006DCB8  4E 80 00 20 */	blr
+.endfn "__sinit_\\iplCalendar_cpp"
+
+# .text:0x1D0C | 0x8139F8BC | size: 0x8
+.fn "@20@__dt__Q33ipl5scene8CalendarFv", global
+/* 8139F8BC 0006DCBC  38 63 FF EC */	subi r3, r3, 0x14
+/* 8139F8C0 0006DCC0  4B FF FF 54 */	b __dt__Q33ipl5scene8CalendarFv
+.endfn "@20@__dt__Q33ipl5scene8CalendarFv"
+
+# .text:0x1D14 | 0x8139F8C4 | size: 0x8
+# ipl::scene::Calendar::@88@onEventDerived(unsigned long, unsigned long, const ipl::controller::Interface*)
+.fn "@88@onEventDerived__Q33ipl5scene8CalendarFUlUlPCQ33ipl10controller9Interface", global
+/* 8139F8C4 0006DCC4  38 63 FF A8 */	subi r3, r3, 0x58
+/* 8139F8C8 0006DCC8  4B FF E9 DC */	b onEventDerived__Q33ipl5scene8CalendarFUlUlPCQ33ipl10controller9Interface
+.endfn "@88@onEventDerived__Q33ipl5scene8CalendarFUlUlPCQ33ipl10controller9Interface"
+
+# 0x8160D1E0..0x8160D1E4 | size: 0x4
+.section .ctors, "a"
+.balign 4
+	.4byte "__sinit_\\iplCalendar_cpp"
+
+# 0x8160F9E0..0x8160FBA0 | size: 0x1C0
+.rodata
+.balign 8
+
+# .rodata:0x0 | 0x8160F9E0 | size: 0x28
+.obj lbl_8160F9E0, global
+	.4byte 0x447A0000
+	.4byte 0x44820000
+	.4byte 0x44820000
+	.4byte 0x44820000
+	.4byte 0x44FA0000
+	.4byte 0x44FDC000
+	.4byte 0x453B8000
+	.4byte 0x453D6000
+	.4byte 0x457A0000
+	.4byte 0x457B4000
+.endobj lbl_8160F9E0
+
+# .rodata:0x28 | 0x8160FA08 | size: 0xA8
+.obj lbl_8160FA08, global
+	.4byte lbl_8164C348
+	.4byte 0x00000074
+	.4byte lbl_8164C353
+	.4byte 0x0000006E
+	.4byte lbl_8164C35E
+	.4byte 0x0000006F
+	.4byte lbl_8164C369
+	.4byte 0x00000070
+	.4byte lbl_8164C374
+	.4byte 0x00000071
+	.4byte lbl_8164C37F
+	.4byte 0x00000072
+	.4byte lbl_8164C38A
+	.4byte 0x00000073
+	.4byte lbl_8164C395
+	.4byte 0x00000074
+	.4byte lbl_8164C3A0
+	.4byte 0x0000006E
+	.4byte lbl_8164C3AB
+	.4byte 0x0000006F
+	.4byte lbl_8164C3B6
+	.4byte 0x00000070
+	.4byte lbl_8164C3C1
+	.4byte 0x00000071
+	.4byte lbl_8164C3CC
+	.4byte 0x00000072
+	.4byte lbl_8164C3D7
+	.4byte 0x00000073
+	.4byte lbl_8164C3E2
+	.4byte 0x00000074
+	.4byte lbl_8164C3ED
+	.4byte 0x0000006E
+	.4byte lbl_8164C3F8
+	.4byte 0x0000006F
+	.4byte lbl_8164C403
+	.4byte 0x00000070
+	.4byte lbl_8164C40E
+	.4byte 0x00000071
+	.4byte lbl_8164C419
+	.4byte 0x00000072
+	.4byte lbl_8164C424
+	.4byte 0x00000073
+.endobj lbl_8160FA08
+
+# .rodata:0xD0 | 0x8160FAB0 | size: 0xA8
+.obj lbl_8160FAB0, global
+	.4byte lbl_8164C348
+	.4byte 0x0000006E
+	.4byte lbl_8164C353
+	.4byte 0x0000006F
+	.4byte lbl_8164C35E
+	.4byte 0x00000070
+	.4byte lbl_8164C369
+	.4byte 0x00000071
+	.4byte lbl_8164C374
+	.4byte 0x00000072
+	.4byte lbl_8164C37F
+	.4byte 0x00000073
+	.4byte lbl_8164C38A
+	.4byte 0x00000074
+	.4byte lbl_8164C395
+	.4byte 0x0000006E
+	.4byte lbl_8164C3A0
+	.4byte 0x0000006F
+	.4byte lbl_8164C3AB
+	.4byte 0x00000070
+	.4byte lbl_8164C3B6
+	.4byte 0x00000071
+	.4byte lbl_8164C3C1
+	.4byte 0x00000072
+	.4byte lbl_8164C3CC
+	.4byte 0x00000073
+	.4byte lbl_8164C3D7
+	.4byte 0x00000074
+	.4byte lbl_8164C3E2
+	.4byte 0x0000006E
+	.4byte lbl_8164C3ED
+	.4byte 0x0000006F
+	.4byte lbl_8164C3F8
+	.4byte 0x00000070
+	.4byte lbl_8164C403
+	.4byte 0x00000071
+	.4byte lbl_8164C40E
+	.4byte 0x00000072
+	.4byte lbl_8164C419
+	.4byte 0x00000073
+	.4byte lbl_8164C424
+	.4byte 0x00000074
+.endobj lbl_8160FAB0
+
+# .rodata:0x178 | 0x8160FB58 | size: 0x30
+.obj lbl_8160FB58, global
+	.4byte 0x00000076
+	.4byte 0x00000077
+	.4byte 0x00000078
+	.4byte 0x00000079
+	.4byte 0x0000007A
+	.4byte 0x0000007B
+	.4byte 0x0000007C
+	.4byte 0x0000007D
+	.4byte 0x0000007E
+	.4byte 0x0000007F
+	.4byte 0x00000080
+	.4byte 0x00000081
+.endobj lbl_8160FB58
+
+# .rodata:0x1A8 | 0x8160FB88 | size: 0x18
+.obj lbl_8160FB88, global
+	.2byte 0x0030
+	.2byte 0x0031
+	.2byte 0x0032
+	.2byte 0x0033
+	.2byte 0x0034
+	.2byte 0x0035
+	.2byte 0x0036
+	.2byte 0x0037
+	.2byte 0x0038
+	.2byte 0x0039
+	.2byte 0x0000
+	.2byte 0x0000
+.endobj lbl_8160FB88
+
+# 0x8164C348..0x8164C620 | size: 0x2D8
+.data
+.balign 8
+
+# .data:0x0 | 0x8164C348 | size: 0xB
+.obj lbl_8164C348, global
+	.string "TextBox_00"
+.endobj lbl_8164C348
+
+# .data:0xB | 0x8164C353 | size: 0xB
+.obj lbl_8164C353, global
+	.string "TextBox_01"
+.endobj lbl_8164C353
+
+# .data:0x16 | 0x8164C35E | size: 0xB
+.obj lbl_8164C35E, global
+	.string "TextBox_02"
+.endobj lbl_8164C35E
+
+# .data:0x21 | 0x8164C369 | size: 0xB
+.obj lbl_8164C369, global
+	.string "TextBox_03"
+.endobj lbl_8164C369
+
+# .data:0x2C | 0x8164C374 | size: 0xB
+.obj lbl_8164C374, global
+	.string "TextBox_04"
+.endobj lbl_8164C374
+
+# .data:0x37 | 0x8164C37F | size: 0xB
+.obj lbl_8164C37F, global
+	.string "TextBox_05"
+.endobj lbl_8164C37F
+
+# .data:0x42 | 0x8164C38A | size: 0xB
+.obj lbl_8164C38A, global
+	.string "TextBox_06"
+.endobj lbl_8164C38A
+
+# .data:0x4D | 0x8164C395 | size: 0xB
+.obj lbl_8164C395, global
+	.string "TextBox_08"
+.endobj lbl_8164C395
+
+# .data:0x58 | 0x8164C3A0 | size: 0xB
+.obj lbl_8164C3A0, global
+	.string "TextBox_09"
+.endobj lbl_8164C3A0
+
+# .data:0x63 | 0x8164C3AB | size: 0xB
+.obj lbl_8164C3AB, global
+	.string "TextBox_10"
+.endobj lbl_8164C3AB
+
+# .data:0x6E | 0x8164C3B6 | size: 0xB
+.obj lbl_8164C3B6, global
+	.string "TextBox_11"
+.endobj lbl_8164C3B6
+
+# .data:0x79 | 0x8164C3C1 | size: 0xB
+.obj lbl_8164C3C1, global
+	.string "TextBox_12"
+.endobj lbl_8164C3C1
+
+# .data:0x84 | 0x8164C3CC | size: 0xB
+.obj lbl_8164C3CC, global
+	.string "TextBox_13"
+.endobj lbl_8164C3CC
+
+# .data:0x8F | 0x8164C3D7 | size: 0xB
+.obj lbl_8164C3D7, global
+	.string "TextBox_07"
+.endobj lbl_8164C3D7
+
+# .data:0x9A | 0x8164C3E2 | size: 0xB
+.obj lbl_8164C3E2, global
+	.string "TextBox_16"
+.endobj lbl_8164C3E2
+
+# .data:0xA5 | 0x8164C3ED | size: 0xB
+.obj lbl_8164C3ED, global
+	.string "TextBox_17"
+.endobj lbl_8164C3ED
+
+# .data:0xB0 | 0x8164C3F8 | size: 0xB
+.obj lbl_8164C3F8, global
+	.string "TextBox_18"
+.endobj lbl_8164C3F8
+
+# .data:0xBB | 0x8164C403 | size: 0xB
+.obj lbl_8164C403, global
+	.string "TextBox_19"
+.endobj lbl_8164C403
+
+# .data:0xC6 | 0x8164C40E | size: 0xB
+.obj lbl_8164C40E, global
+	.string "TextBox_20"
+.endobj lbl_8164C40E
+
+# .data:0xD1 | 0x8164C419 | size: 0xB
+.obj lbl_8164C419, global
+	.string "TextBox_14"
+.endobj lbl_8164C419
+
+# .data:0xDC | 0x8164C424 | size: 0xB
+.obj lbl_8164C424, global
+	.string "TextBox_15"
+.endobj lbl_8164C424
+
+# .data:0xE7 | 0x8164C42F | size: 0xD
+.obj lbl_8164C42F, global
+	.string "T_CalMonth_a"
+.endobj lbl_8164C42F
+
+# .data:0xF4 | 0x8164C43C | size: 0xD
+.obj lbl_8164C43C, global
+	.string "T_CalMonth_b"
+.endobj lbl_8164C43C
+
+# .data:0x101 | 0x8164C449 | size: 0xF
+.obj lbl_8164C449, global
+	.4byte 0x545F4361
+	.4byte 0x6C4D6F6E
+	.4byte 0x74685F63
+	.byte 0x00, 0x00, 0x00
+.endobj lbl_8164C449
+
+# .data:0x110 | 0x8164C458 | size: 0xC
+.obj lbl_8164C458, global
+	.4byte lbl_8164C42F
+	.4byte lbl_8164C43C
+	.4byte lbl_8164C449
+.endobj lbl_8164C458
+
+# .data:0x11C | 0x8164C464 | size: 0x9
+.obj lbl_8164C464, global
+	.string "N_Cal_a1"
+.endobj lbl_8164C464
+
+# .data:0x125 | 0x8164C46D | size: 0x9
+.obj lbl_8164C46D, global
+	.string "N_Cal_b1"
+.endobj lbl_8164C46D
+
+# .data:0x12E | 0x8164C476 | size: 0xA
+.obj lbl_8164C476, global
+	.4byte 0x4E5F4361
+	.4byte 0x6C5F6331
+	.2byte 0x0000
+.endobj lbl_8164C476
+
+# .data:0x138 | 0x8164C480 | size: 0xC
+.obj lbl_8164C480, global
+	.4byte lbl_8164C464
+	.4byte lbl_8164C46D
+	.4byte lbl_8164C476
+.endobj lbl_8164C480
+
+# .data:0x144 | 0x8164C48C | size: 0xB
+.obj lbl_8164C48C, global
+	.string "N_CalPos_a"
+.endobj lbl_8164C48C
+
+# .data:0x14F | 0x8164C497 | size: 0xB
+.obj lbl_8164C497, global
+	.string "N_CalPos_b"
+.endobj lbl_8164C497
+
+# .data:0x15A | 0x8164C4A2 | size: 0xE
+.obj lbl_8164C4A2, global
+	.4byte 0x4E5F4361
+	.4byte 0x6C506F73
+	.4byte 0x5F630000
+	.2byte 0x0000
+.endobj lbl_8164C4A2
+
+# .data:0x168 | 0x8164C4B0 | size: 0xC
+.obj lbl_8164C4B0, global
+	.4byte lbl_8164C48C
+	.4byte lbl_8164C497
+	.4byte lbl_8164C4A2
+.endobj lbl_8164C4B0
+
+# .data:0x174 | 0x8164C4BC | size: 0x43
+.obj lbl_8164C4BC, global
+	.4byte 0x63616C65
+	.4byte 0x6E646172
+	.4byte 0x2E617368
+	.4byte 0x006D795F
+	.4byte 0x49706C54
+	.4byte 0x6F705F67
+	.4byte 0x2E62726C
+	.4byte 0x7974006D
+	.4byte 0x795F4970
+	.4byte 0x6C546F70
+	.4byte 0x5F672E62
+	.4byte 0x726C616E
+	.4byte 0x006D795F
+	.4byte 0x49706C54
+	.4byte 0x6F705F66
+	.4byte 0x2E62726C
+	.byte 0x79, 0x74, 0x00
+.endobj lbl_8164C4BC
+
+# .data:0x1B7 | 0x8164C4FF | size: 0xF
+.obj lbl_8164C4FF, global
+	.string "WIPL_SE_CANCEL"
+.endobj lbl_8164C4FF
+
+# .data:0x1C6 | 0x8164C50E | size: 0x14
+.obj lbl_8164C50E, global
+	.string "WIPL_SE_DATE_SELECT"
+.endobj lbl_8164C50E
+
+# .data:0x1DA | 0x8164C522 | size: 0x18
+.obj lbl_8164C522, global
+	.string "WIPL_SE_CALENDAR_SCROLL"
+.endobj lbl_8164C522
+
+# .data:0x1F2 | 0x8164C53A | size: 0x14
+.obj lbl_8164C53A, global
+	.4byte 0x8C9F8DF5
+	.4byte 0x835E8358
+	.4byte 0x834E8F49
+	.4byte 0x97B99776
+	.4byte 0x8B810A00
+.endobj lbl_8164C53A
+
+# .data:0x206 | 0x8164C54E | size: 0x18
+.obj lbl_8164C54E, global
+	.4byte 0x835E8358
+	.4byte 0x834E834C
+	.4byte 0x83838393
+	.4byte 0x835A838B
+	.4byte 0x82B382EA
+	.4byte 0x82BD0A00
+.endobj lbl_8164C54E
+
+# .data:0x21E | 0x8164C566 | size: 0xC
+.obj lbl_8164C566, global
+	.4byte 0x835E8358
+	.4byte 0x834E8F49
+	.4byte 0x97B90A00
+.endobj lbl_8164C566
+
+# .data:0x22A | 0x8164C572 | size: 0xA
+.obj lbl_8164C572, global
+	.4byte 0x8C9F8DF5
+	.4byte 0x8A4A8E6E
+	.2byte 0x0A00
+.endobj lbl_8164C572
+
+# .data:0x234 | 0x8164C57C | size: 0xA4
+# ipl::scene::Calendar::__vtable
+.obj __vt__Q33ipl5scene8Calendar, global
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte __dt__Q33ipl5scene8CalendarFv
+	.4byte getParent__Q33ipl5scene4BaseFv
+	.4byte getChild__Q33ipl5scene4BaseFv
+	.4byte getNext__Q33ipl5scene4BaseFv
+	.4byte getPrev__Q33ipl5scene4BaseFv
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte "@20@__dt__Q33ipl5scene8CalendarFv"
+	.4byte isReady__Q33ipl5scene4BaseCFv
+	.4byte isResetAcceptable__Q33ipl5scene4BaseCFv
+	.4byte startResetting__Q33ipl5scene4BaseFv
+	.4byte isResetProcessDone__Q33ipl5scene4BaseFv
+	.4byte prepare__Q33ipl5scene8CalendarFv
+	.4byte create__Q33ipl5scene8CalendarFv
+	.4byte fn_8140B254
+	.4byte draw__Q33ipl5scene8CalendarFv
+	.4byte destroy__Q33ipl5scene4BaseFv
+	.4byte initCalcNormal__Q33ipl5scene14FaderSceneBaseFv
+	.4byte initCalcFadeout__Q33ipl5scene8CalendarFv
+	.4byte calcCommon__Q33ipl5scene8CalendarFv
+	.4byte calcFadein__Q33ipl5scene8CalendarFv
+	.4byte calcNormal__Q33ipl5scene8CalendarFv
+	.4byte calcFadeout__Q33ipl5scene8CalendarFv
+	.4byte calcCommonAfter__Q33ipl5scene14FaderSceneBaseFv
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte onEvent__Q33ipl5scene22ButtonEventHandlerBaseFUlUlPv
+	.4byte setManager__Q23gui12EventHandlerFPQ23gui7Manager
+	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
+	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
+	.4byte "@88@onEventDerived__Q33ipl5scene8CalendarFUlUlPCQ33ipl10controller9Interface"
+	.4byte onEventDerived__Q33ipl5scene8CalendarFUlUlPCQ33ipl10controller9Interface
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+.endobj __vt__Q33ipl5scene8Calendar
+
+# 0x816948D8..0x816948E8 | size: 0x10
+.section .sdata2, "a"
+.balign 8
+
+# .sdata2:0x0 | 0x816948D8 | size: 0x8
+.obj lbl_816948D8, global
+	.double 4503601774854144
+.endobj lbl_816948D8
+
+# .sdata2:0x8 | 0x816948E0 | size: 0x8
+.obj lbl_816948E0, global
+	.float 0
+	.float 0
+.endobj lbl_816948E0
+
+# 0x816967C0..0x816967D8 | size: 0x18
+.section .sdata, "wa"
+.balign 8
+
+# .sdata:0x0 | 0x816967C0 | size: 0x4
+.obj lbl_816967C0, global
+	.string "arc"
+.endobj lbl_816967C0
+
+# .sdata:0x4 | 0x816967C4 | size: 0x6
+.obj lbl_816967C4, global
+	.string "G_All"
+.endobj lbl_816967C4
+
+# .sdata:0xA | 0x816967CA | size: 0xE
+.obj lbl_816967CA, global
+	.4byte 0x475F596F
+	.4byte 0x62690000
+	.4byte 0x00000000
+	.2byte 0x0000
+.endobj lbl_816967CA

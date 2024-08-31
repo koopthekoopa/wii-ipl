@@ -28,11 +28,11 @@ BS2_CMN_CCPATH	=	$(CW_GC_30A52)
 -include $(RULES_ROOT)/BS2Libs/iplwww.mak
 -include $(RULES_ROOT)/BS2Libs/homebutton.mak
 -include $(RULES_ROOT)/BS2Libs/BS2.mak
-
--include $(RULES_ROOT)/BS2Libs/address.mak
--include $(RULES_ROOT)/BS2Libs/backMenu.mak
--include $(RULES_ROOT)/BS2Libs/board.mak
--include $(RULES_ROOT)/BS2Libs/button.mak
+-include $(RULES_ROOT)/BS2Libs/scene/address.mak
+-include $(RULES_ROOT)/BS2Libs/scene/backMenu.mak
+-include $(RULES_ROOT)/BS2Libs/scene/board.mak
+-include $(RULES_ROOT)/BS2Libs/scene/button.mak
+-include $(RULES_ROOT)/BS2Libs/scene/calendar.mak
 
 BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(BS2_BLD_PATH)/utility.a \
@@ -41,10 +41,11 @@ BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(BS2_BLD_PATH)/iplwww.a \
 						$(BS2_BLD_PATH)/homebutton.a \
 						$(BS2_BLD_PATH)/BS2.a \
-						$(BS2_BLD_PATH)/address.a \
-						$(BS2_BLD_PATH)/backMenu.a \
-						$(BS2_BLD_PATH)/board.a \
-						$(BS2_BLD_PATH)/button.a \
+						$(BS2_BLD_PATH)/scene/address.a \
+						$(BS2_BLD_PATH)/scene/backMenu.a \
+						$(BS2_BLD_PATH)/scene/board.a \
+						$(BS2_BLD_PATH)/scene/button.a \
+						$(BS2_BLD_PATH)/scene/calendar.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/base.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/os.a \
 						$(RUNTIME_ROOT)/$(BUILD_ROOT)/Runtime.PPCEABI.H.a

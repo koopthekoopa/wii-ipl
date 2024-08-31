@@ -97,7 +97,7 @@
 /* 8133AB80 00008F80  38 BE 00 1C */	addi r5, r30, 0x1c
 /* 8133AB84 00008F84  38 80 00 65 */	li r4, 0x65
 /* 8133AB88 00008F88  4C C6 31 82 */	crclr cr1eq
-/* 8133AB8C 00008F8C  48 1F 3B A5 */	bl fn_8152E730
+/* 8133AB8C 00008F8C  48 1F 3B A5 */	bl OSPanic
 .L_8133AB90:
 /* 8133AB90 00008F90  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133AB94 00008F94  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -108,7 +108,7 @@
 /* 8133ABA8 00008FA8  38 BE 00 39 */	addi r5, r30, 0x39
 /* 8133ABAC 00008FAC  38 80 00 69 */	li r4, 0x69
 /* 8133ABB0 00008FB0  4C C6 31 82 */	crclr cr1eq
-/* 8133ABB4 00008FB4  48 1F 3B 7D */	bl fn_8152E730
+/* 8133ABB4 00008FB4  48 1F 3B 7D */	bl OSPanic
 .L_8133ABB8:
 /* 8133ABB8 00008FB8  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133ABBC 00008FBC  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -119,7 +119,7 @@
 /* 8133ABD0 00008FD0  38 BE 00 4D */	addi r5, r30, 0x4d
 /* 8133ABD4 00008FD4  38 80 00 6D */	li r4, 0x6d
 /* 8133ABD8 00008FD8  4C C6 31 82 */	crclr cr1eq
-/* 8133ABDC 00008FDC  48 1F 3B 55 */	bl fn_8152E730
+/* 8133ABDC 00008FDC  48 1F 3B 55 */	bl OSPanic
 .L_8133ABE0:
 /* 8133ABE0 00008FE0  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133ABE4 00008FE4  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -130,7 +130,7 @@
 /* 8133ABF8 00008FF8  38 BE 00 5F */	addi r5, r30, 0x5f
 /* 8133ABFC 00008FFC  38 80 00 71 */	li r4, 0x71
 /* 8133AC00 00009000  4C C6 31 82 */	crclr cr1eq
-/* 8133AC04 00009004  48 1F 3B 2D */	bl fn_8152E730
+/* 8133AC04 00009004  48 1F 3B 2D */	bl OSPanic
 .L_8133AC08:
 /* 8133AC08 00009008  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133AC0C 0000900C  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -141,7 +141,7 @@
 /* 8133AC20 00009020  38 BE 00 75 */	addi r5, r30, 0x75
 /* 8133AC24 00009024  38 80 00 75 */	li r4, 0x75
 /* 8133AC28 00009028  4C C6 31 82 */	crclr cr1eq
-/* 8133AC2C 0000902C  48 1F 3B 05 */	bl fn_8152E730
+/* 8133AC2C 0000902C  48 1F 3B 05 */	bl OSPanic
 .L_8133AC30:
 /* 8133AC30 00009030  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133AC34 00009034  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -152,7 +152,7 @@
 /* 8133AC48 00009048  38 BE 00 8A */	addi r5, r30, 0x8a
 /* 8133AC4C 0000904C  38 80 00 79 */	li r4, 0x79
 /* 8133AC50 00009050  4C C6 31 82 */	crclr cr1eq
-/* 8133AC54 00009054  48 1F 3A DD */	bl fn_8152E730
+/* 8133AC54 00009054  48 1F 3A DD */	bl OSPanic
 .L_8133AC58:
 /* 8133AC58 00009058  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133AC5C 0000905C  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -163,7 +163,7 @@
 /* 8133AC70 00009070  38 BE 00 A0 */	addi r5, r30, 0xa0
 /* 8133AC74 00009074  38 80 00 7D */	li r4, 0x7d
 /* 8133AC78 00009078  4C C6 31 82 */	crclr cr1eq
-/* 8133AC7C 0000907C  48 1F 3A B5 */	bl fn_8152E730
+/* 8133AC7C 0000907C  48 1F 3A B5 */	bl OSPanic
 .L_8133AC80:
 /* 8133AC80 00009080  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133AC84 00009084  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -174,7 +174,7 @@
 /* 8133AC98 00009098  38 BE 00 B2 */	addi r5, r30, 0xb2
 /* 8133AC9C 0000909C  38 80 00 81 */	li r4, 0x81
 /* 8133ACA0 000090A0  4C C6 31 82 */	crclr cr1eq
-/* 8133ACA4 000090A4  48 1F 3A 8D */	bl fn_8152E730
+/* 8133ACA4 000090A4  48 1F 3A 8D */	bl OSPanic
 .L_8133ACA8:
 /* 8133ACA8 000090A8  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133ACAC 000090AC  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -185,7 +185,7 @@
 /* 8133ACC0 000090C0  38 BE 00 C5 */	addi r5, r30, 0xc5
 /* 8133ACC4 000090C4  38 80 00 85 */	li r4, 0x85
 /* 8133ACC8 000090C8  4C C6 31 82 */	crclr cr1eq
-/* 8133ACCC 000090CC  48 1F 3A 65 */	bl fn_8152E730
+/* 8133ACCC 000090CC  48 1F 3A 65 */	bl OSPanic
 .L_8133ACD0:
 /* 8133ACD0 000090D0  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133ACD4 000090D4  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -196,7 +196,7 @@
 /* 8133ACE8 000090E8  38 BE 00 D5 */	addi r5, r30, 0xd5
 /* 8133ACEC 000090EC  38 80 00 89 */	li r4, 0x89
 /* 8133ACF0 000090F0  4C C6 31 82 */	crclr cr1eq
-/* 8133ACF4 000090F4  48 1F 3A 3D */	bl fn_8152E730
+/* 8133ACF4 000090F4  48 1F 3A 3D */	bl OSPanic
 .L_8133ACF8:
 /* 8133ACF8 000090F8  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133ACFC 000090FC  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -207,7 +207,7 @@
 /* 8133AD10 00009110  38 BE 00 ED */	addi r5, r30, 0xed
 /* 8133AD14 00009114  38 80 00 8D */	li r4, 0x8d
 /* 8133AD18 00009118  4C C6 31 82 */	crclr cr1eq
-/* 8133AD1C 0000911C  48 1F 3A 15 */	bl fn_8152E730
+/* 8133AD1C 0000911C  48 1F 3A 15 */	bl OSPanic
 .L_8133AD20:
 /* 8133AD20 00009120  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133AD24 00009124  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -218,7 +218,7 @@
 /* 8133AD38 00009138  38 BE 00 FF */	addi r5, r30, 0xff
 /* 8133AD3C 0000913C  38 80 00 91 */	li r4, 0x91
 /* 8133AD40 00009140  4C C6 31 82 */	crclr cr1eq
-/* 8133AD44 00009144  48 1F 39 ED */	bl fn_8152E730
+/* 8133AD44 00009144  48 1F 39 ED */	bl OSPanic
 .L_8133AD48:
 /* 8133AD48 00009148  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133AD4C 0000914C  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -229,7 +229,7 @@
 /* 8133AD60 00009160  38 BE 01 11 */	addi r5, r30, 0x111
 /* 8133AD64 00009164  38 80 00 95 */	li r4, 0x95
 /* 8133AD68 00009168  4C C6 31 82 */	crclr cr1eq
-/* 8133AD6C 0000916C  48 1F 39 C5 */	bl fn_8152E730
+/* 8133AD6C 0000916C  48 1F 39 C5 */	bl OSPanic
 .L_8133AD70:
 /* 8133AD70 00009170  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133AD74 00009174  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -240,7 +240,7 @@
 /* 8133AD88 00009188  38 BE 01 24 */	addi r5, r30, 0x124
 /* 8133AD8C 0000918C  38 80 00 99 */	li r4, 0x99
 /* 8133AD90 00009190  4C C6 31 82 */	crclr cr1eq
-/* 8133AD94 00009194  48 1F 39 9D */	bl fn_8152E730
+/* 8133AD94 00009194  48 1F 39 9D */	bl OSPanic
 .L_8133AD98:
 /* 8133AD98 00009198  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133AD9C 0000919C  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -251,7 +251,7 @@
 /* 8133ADB0 000091B0  38 BE 01 3A */	addi r5, r30, 0x13a
 /* 8133ADB4 000091B4  38 80 00 9D */	li r4, 0x9d
 /* 8133ADB8 000091B8  4C C6 31 82 */	crclr cr1eq
-/* 8133ADBC 000091BC  48 1F 39 75 */	bl fn_8152E730
+/* 8133ADBC 000091BC  48 1F 39 75 */	bl OSPanic
 .L_8133ADC0:
 /* 8133ADC0 000091C0  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133ADC4 000091C4  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -262,7 +262,7 @@
 /* 8133ADD8 000091D8  38 BE 01 4C */	addi r5, r30, 0x14c
 /* 8133ADDC 000091DC  38 80 00 A1 */	li r4, 0xa1
 /* 8133ADE0 000091E0  4C C6 31 82 */	crclr cr1eq
-/* 8133ADE4 000091E4  48 1F 39 4D */	bl fn_8152E730
+/* 8133ADE4 000091E4  48 1F 39 4D */	bl OSPanic
 .L_8133ADE8:
 /* 8133ADE8 000091E8  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133ADEC 000091EC  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -273,7 +273,7 @@
 /* 8133AE00 00009200  38 BE 01 5E */	addi r5, r30, 0x15e
 /* 8133AE04 00009204  38 80 00 A5 */	li r4, 0xa5
 /* 8133AE08 00009208  4C C6 31 82 */	crclr cr1eq
-/* 8133AE0C 0000920C  48 1F 39 25 */	bl fn_8152E730
+/* 8133AE0C 0000920C  48 1F 39 25 */	bl OSPanic
 .L_8133AE10:
 /* 8133AE10 00009210  3C 60 81 09 */	lis r3, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133AE14 00009214  38 63 92 E0 */	addi r3, r3, smCSVm__Q33ipl7channel20ChannelScriptManager@l
@@ -284,7 +284,7 @@
 /* 8133AE28 00009228  38 BE 01 71 */	addi r5, r30, 0x171
 /* 8133AE2C 0000922C  38 80 00 A9 */	li r4, 0xa9
 /* 8133AE30 00009230  4C C6 31 82 */	crclr cr1eq
-/* 8133AE34 00009234  48 1F 38 FD */	bl fn_8152E730
+/* 8133AE34 00009234  48 1F 38 FD */	bl OSPanic
 .L_8133AE38:
 /* 8133AE38 00009238  3F E0 81 09 */	lis r31, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
 /* 8133AE3C 0000923C  38 7F 92 E0 */	addi r3, r31, smCSVm__Q33ipl7channel20ChannelScriptManager@l

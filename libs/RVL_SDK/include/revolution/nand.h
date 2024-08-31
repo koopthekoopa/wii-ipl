@@ -74,10 +74,10 @@ typedef struct NANDFileInfo {
 } NANDFileInfo;
 
 typedef struct NANDStatus {
-    u32 ownerId;    // 0x00
-    u16 groupId;    // 0x04
-    u8 attr;        // 0x06
-    u8 perm;        // 0x07
+    u32 ownerId;                    // 0x00
+    u16 groupId;                    // 0x04
+    u8 attr;                        // 0x06
+    u8 perm;                        // 0x07
 } NANDStatus;
 
 void    NANDInit();

@@ -17,7 +17,7 @@
 /* 81363474 00031874  48 20 6E 41 */	bl fn_8156A2B4
 /* 81363478 00031878  7C 7E 1B 78 */	mr r30, r3
 /* 8136347C 0003187C  38 61 00 08 */	addi r3, r1, 0x8
-/* 81363480 00031880  48 1C F1 FD */	bl fn_8153267C
+/* 81363480 00031880  48 1C F1 FD */	bl __OSGetRTC
 /* 81363484 00031884  3C 60 80 00 */	lis r3, 0x8000
 /* 81363488 00031888  80 01 00 08 */	lwz r0, 0x8(r1)
 /* 8136348C 0003188C  80 63 00 F8 */	lwz r3, 0xf8(r3)
@@ -39,13 +39,13 @@
 /* 813634CC 000318CC  38 60 00 01 */	li r3, 0x1
 /* 813634D0 000318D0  48 1C FB A1 */	bl fn_81533070
 .L_813634D4:
-/* 813634D4 000318D4  48 1C FB AD */	bl fn_81533080
+/* 813634D4 000318D4  48 1C FB AD */	bl __OSSyncSram
 /* 813634D8 000318D8  2C 03 00 00 */	cmpwi r3, 0x0
 /* 813634DC 000318DC  41 82 FF F8 */	beq .L_813634D4
 /* 813634E0 000318E0  38 00 00 00 */	li r0, 0x0
 /* 813634E4 000318E4  38 61 00 08 */	addi r3, r1, 0x8
 /* 813634E8 000318E8  90 01 00 08 */	stw r0, 0x8(r1)
-/* 813634EC 000318EC  48 1C F1 91 */	bl fn_8153267C
+/* 813634EC 000318EC  48 1C F1 91 */	bl __OSGetRTC
 /* 813634F0 000318F0  2C 03 00 00 */	cmpwi r3, 0x0
 /* 813634F4 000318F4  41 82 00 10 */	beq .L_81363504
 /* 813634F8 000318F8  80 01 00 08 */	lwz r0, 0x8(r1)
@@ -56,7 +56,7 @@
 /* 81363508 00031908  48 1C F3 A9 */	bl fn_815328B0
 .L_8136350C:
 /* 8136350C 0003190C  7F E3 FB 78 */	mr r3, r31
-/* 81363510 00031910  48 1D 2C 1D */	bl fn_8153612C
+/* 81363510 00031910  48 1D 2C 1D */	bl OSCalendarTimeToTicks
 /* 81363514 00031914  3C C0 80 00 */	lis r6, 0x8000
 /* 81363518 00031918  38 A0 00 00 */	li r5, 0x0
 /* 8136351C 0003191C  80 06 00 F8 */	lwz r0, 0xf8(r6)
@@ -66,7 +66,7 @@
 /* 8136352C 0003192C  7C 60 20 50 */	subf r3, r0, r4
 /* 81363530 00031930  48 20 6D C5 */	bl fn_8156A2F4
 /* 81363534 00031934  7F E3 FB 78 */	mr r3, r31
-/* 81363538 00031938  48 1D 2B F5 */	bl fn_8153612C
+/* 81363538 00031938  48 1D 2B F5 */	bl OSCalendarTimeToTicks
 /* 8136353C 0003193C  48 1D 27 79 */	bl fn_81535CB4
 /* 81363540 00031940  38 60 00 00 */	li r3, 0x0
 /* 81363544 00031944  48 14 B2 6D */	bl fn_814AE7B0
@@ -131,8 +131,7 @@
 .endfn init__Q33ipl7utility9BScrollerFv
 
 # .text:0x198 | 0x813635F4 | size: 0x64
-# ipl::utility::BScroller::calc()
-.fn calc__Q33ipl7utility9BScrollerFv, global
+.fn iplUtility_813635F4, global
 /* 813635F4 000319F4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 813635F8 000319F8  7C 08 02 A6 */	mflr r0
 /* 813635FC 000319FC  90 01 00 14 */	stw r0, 0x14(r1)
@@ -159,11 +158,11 @@
 /* 8136364C 00031A4C  7C 08 03 A6 */	mtlr r0
 /* 81363650 00031A50  38 21 00 10 */	addi r1, r1, 0x10
 /* 81363654 00031A54  4E 80 00 20 */	blr
-.endfn calc__Q33ipl7utility9BScrollerFv
+.endfn iplUtility_813635F4
 
 # .text:0x1FC | 0x81363658 | size: 0x364
-# ipl::utility::BScroller::isYoungController(int)
-.fn isYoungController__Q33ipl7utility9BScrollerFi, global
+# ipl::utility::BScroller::calc()
+.fn calc__Q33ipl7utility9BScrollerFv, global
 /* 81363658 00031A58  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 8136365C 00031A5C  7C 08 02 A6 */	mflr r0
 /* 81363660 00031A60  90 01 00 64 */	stw r0, 0x64(r1)
@@ -256,10 +255,10 @@
 /* 813637B8 00031BB8  38 65 00 2C */	addi r3, r5, 0x2c
 /* 813637BC 00031BBC  4B FD 30 35 */	bl __as__Q33ipl4math4VEC2FRCQ33ipl4math4VEC2
 /* 813637C0 00031BC0  7F 83 E3 78 */	mr r3, r28
-/* 813637C4 00031BC4  48 00 02 0D */	bl set_arw_param__Q33ipl7utility9BScrollerFv
+/* 813637C4 00031BC4  48 00 02 0D */	bl _get__Q33ipl7utility9BScrollerFv
 /* 813637C8 00031BC8  D0 3C 00 18 */	stfs f1, 0x18(r28)
 /* 813637CC 00031BCC  7F 83 E3 78 */	mr r3, r28
-/* 813637D0 00031BD0  48 00 02 49 */	bl isActive__Q33ipl7utility9BScrollerCFv
+/* 813637D0 00031BD0  48 00 02 49 */	bl set_arw_param__Q33ipl7utility9BScrollerFv
 /* 813637D4 00031BD4  3B C0 00 01 */	li r30, 0x1
 /* 813637D8 00031BD8  48 00 01 70 */	b .L_81363948
 .L_813637DC:
@@ -332,17 +331,17 @@
 /* 813638D8 00031CD8  4B FD 2E 15 */	bl "abs_clamp<f>__Q23ipl4mathFRCfRCf_f"
 /* 813638DC 00031CDC  D0 3C 00 0C */	stfs f1, 0xc(r28)
 /* 813638E0 00031CE0  7F 83 E3 78 */	mr r3, r28
-/* 813638E4 00031CE4  48 00 00 ED */	bl set_arw_param__Q33ipl7utility9BScrollerFv
+/* 813638E4 00031CE4  48 00 00 ED */	bl _get__Q33ipl7utility9BScrollerFv
 /* 813638E8 00031CE8  D0 3C 00 18 */	stfs f1, 0x18(r28)
 /* 813638EC 00031CEC  7F 83 E3 78 */	mr r3, r28
-/* 813638F0 00031CF0  48 00 01 29 */	bl isActive__Q33ipl7utility9BScrollerCFv
+/* 813638F0 00031CF0  48 00 01 29 */	bl set_arw_param__Q33ipl7utility9BScrollerFv
 /* 813638F4 00031CF4  48 00 00 54 */	b .L_81363948
 .L_813638F8:
 /* 813638F8 00031CF8  38 7C 00 0C */	addi r3, r28, 0xc
-/* 813638FC 00031CFC  48 00 00 C9 */	bl _get__Q33ipl7utility9BScrollerFv
+/* 813638FC 00031CFC  48 00 00 C9 */	bl "abs<f>__Q23ipl4mathFRCf_f"
 /* 81363900 00031D00  FF E0 08 90 */	fmr f31, f1
 /* 81363904 00031D04  38 7C 00 08 */	addi r3, r28, 0x8
-/* 81363908 00031D08  48 00 00 BD */	bl _get__Q33ipl7utility9BScrollerFv
+/* 81363908 00031D08  48 00 00 BD */	bl "abs<f>__Q23ipl4mathFRCf_f"
 /* 8136390C 00031D0C  FC 01 F8 40 */	fcmpo cr0, f1, f31
 /* 81363910 00031D10  40 80 00 38 */	bge .L_81363948
 /* 81363914 00031D14  C0 3C 00 0C */	lfs f1, 0xc(r28)
@@ -356,13 +355,13 @@
 .L_81363930:
 /* 81363930 00031D30  D0 1C 00 0C */	stfs f0, 0xc(r28)
 /* 81363934 00031D34  7F 83 E3 78 */	mr r3, r28
-/* 81363938 00031D38  48 00 00 99 */	bl set_arw_param__Q33ipl7utility9BScrollerFv
+/* 81363938 00031D38  48 00 00 99 */	bl _get__Q33ipl7utility9BScrollerFv
 /* 8136393C 00031D3C  D0 3C 00 18 */	stfs f1, 0x18(r28)
 /* 81363940 00031D40  7F 83 E3 78 */	mr r3, r28
-/* 81363944 00031D44  48 00 00 D5 */	bl isActive__Q33ipl7utility9BScrollerCFv
+/* 81363944 00031D44  48 00 00 D5 */	bl set_arw_param__Q33ipl7utility9BScrollerFv
 .L_81363948:
 /* 81363948 00031D48  38 7C 00 1C */	addi r3, r28, 0x1c
-/* 8136394C 00031D4C  48 00 00 79 */	bl _get__Q33ipl7utility9BScrollerFv
+/* 8136394C 00031D4C  48 00 00 79 */	bl "abs<f>__Q23ipl4mathFRCf_f"
 /* 81363950 00031D50  C0 02 82 0C */	lfs f0, lbl_8169460C@sda21(r0)
 /* 81363954 00031D54  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 81363958 00031D58  40 81 00 40 */	ble .L_81363998
@@ -393,26 +392,26 @@
 /* 813639B0 00031DB0  7C 08 03 A6 */	mtlr r0
 /* 813639B4 00031DB4  38 21 00 60 */	addi r1, r1, 0x60
 /* 813639B8 00031DB8  4E 80 00 20 */	blr
-.endfn isYoungController__Q33ipl7utility9BScrollerFi
+.endfn calc__Q33ipl7utility9BScrollerFv
 
 # .text:0x560 | 0x813639BC | size: 0x8
-# float ipl::math::abs<float>(const float&)
-.fn "abs<f>__Q23ipl4mathFRCf_f", global
+# ipl::utility::BScroller::isYoungController(int)
+.fn isYoungController__Q33ipl7utility9BScrollerFi, global
 /* 813639BC 00031DBC  38 60 00 01 */	li r3, 0x1
 /* 813639C0 00031DC0  4E 80 00 20 */	blr
-.endfn "abs<f>__Q23ipl4mathFRCf_f"
+.endfn isYoungController__Q33ipl7utility9BScrollerFi
 
 # .text:0x568 | 0x813639C4 | size: 0xC
-# ipl::utility::BScroller::_get()
-.fn _get__Q33ipl7utility9BScrollerFv, global
+# float ipl::math::abs<float>(const float&)
+.fn "abs<f>__Q23ipl4mathFRCf_f", global
 /* 813639C4 00031DC4  C0 03 00 00 */	lfs f0, 0x0(r3)
 /* 813639C8 00031DC8  FC 20 02 10 */	fabs f1, f0
 /* 813639CC 00031DCC  4E 80 00 20 */	blr
-.endfn _get__Q33ipl7utility9BScrollerFv
+.endfn "abs<f>__Q23ipl4mathFRCf_f"
 
 # .text:0x574 | 0x813639D0 | size: 0x48
-# ipl::utility::BScroller::set_arw_param()
-.fn set_arw_param__Q33ipl7utility9BScrollerFv, global
+# ipl::utility::BScroller::_get()
+.fn _get__Q33ipl7utility9BScrollerFv, global
 /* 813639D0 00031DD0  C0 43 00 0C */	lfs f2, 0xc(r3)
 /* 813639D4 00031DD4  C0 23 00 14 */	lfs f1, 0x14(r3)
 /* 813639D8 00031DD8  C0 02 82 10 */	lfs f0, lbl_81694610@sda21(r0)
@@ -432,11 +431,11 @@
 /* 81363A0C 00031E0C  C0 02 82 18 */	lfs f0, lbl_81694618@sda21(r0)
 /* 81363A10 00031E10  EC 20 00 72 */	fmuls f1, f0, f1
 /* 81363A14 00031E14  4E 80 00 20 */	blr
-.endfn set_arw_param__Q33ipl7utility9BScrollerFv
+.endfn _get__Q33ipl7utility9BScrollerFv
 
 # .text:0x5BC | 0x81363A18 | size: 0xCC
-# ipl::utility::BScroller::isActive() const
-.fn isActive__Q33ipl7utility9BScrollerCFv, global
+# ipl::utility::BScroller::set_arw_param()
+.fn set_arw_param__Q33ipl7utility9BScrollerFv, global
 /* 81363A18 00031E18  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 81363A1C 00031E1C  7C 08 02 A6 */	mflr r0
 /* 81363A20 00031E20  90 01 00 44 */	stw r0, 0x44(r1)
@@ -470,12 +469,12 @@
 /* 81363A88 00031E88  C0 01 00 10 */	lfs f0, 0x10(r1)
 /* 81363A8C 00031E8C  EF E1 00 28 */	fsubs f31, f1, f0
 /* 81363A90 00031E90  D0 41 00 08 */	stfs f2, 0x8(r1)
-/* 81363A94 00031E94  4B FF FF 31 */	bl _get__Q33ipl7utility9BScrollerFv
+/* 81363A94 00031E94  4B FF FF 31 */	bl "abs<f>__Q23ipl4mathFRCf_f"
 /* 81363A98 00031E98  EC 01 07 F2 */	fmuls f0, f1, f31
 /* 81363A9C 00031E9C  80 9F 00 B0 */	lwz r4, 0xb0(r31)
 /* 81363AA0 00031EA0  38 7E 00 18 */	addi r3, r30, 0x18
 /* 81363AA4 00031EA4  D0 04 00 34 */	stfs f0, 0x34(r4)
-/* 81363AA8 00031EA8  4B FF FF 1D */	bl _get__Q33ipl7utility9BScrollerFv
+/* 81363AA8 00031EA8  4B FF FF 1D */	bl "abs<f>__Q23ipl4mathFRCf_f"
 /* 81363AAC 00031EAC  C0 02 82 00 */	lfs f0, lbl_81694600@sda21(r0)
 /* 81363AB0 00031EB0  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 81363AB4 00031EB4  7C 00 00 26 */	mfcr r0
@@ -490,38 +489,39 @@
 /* 81363AD8 00031ED8  7C 08 03 A6 */	mtlr r0
 /* 81363ADC 00031EDC  38 21 00 40 */	addi r1, r1, 0x40
 /* 81363AE0 00031EE0  4E 80 00 20 */	blr
-.endfn isActive__Q33ipl7utility9BScrollerCFv
+.endfn set_arw_param__Q33ipl7utility9BScrollerFv
 
 # .text:0x688 | 0x81363AE4 | size: 0x14
-# ipl::utility::BScroller::isUp() const
-.fn isUp__Q33ipl7utility9BScrollerCFv, global
+# ipl::utility::BScroller::isActive() const
+.fn isActive__Q33ipl7utility9BScrollerCFv, global
 /* 81363AE4 00031EE4  80 63 00 04 */	lwz r3, 0x4(r3)
 /* 81363AE8 00031EE8  38 63 00 01 */	addi r3, r3, 0x1
 /* 81363AEC 00031EEC  30 03 FF FF */	subic r0, r3, 0x1
 /* 81363AF0 00031EF0  7C 60 19 10 */	subfe r3, r0, r3
 /* 81363AF4 00031EF4  4E 80 00 20 */	blr
-.endfn isUp__Q33ipl7utility9BScrollerCFv
+.endfn isActive__Q33ipl7utility9BScrollerCFv
 
 # .text:0x69C | 0x81363AF8 | size: 0x18
-# ipl::utility::BScroller::isDown() const
-.fn isDown__Q33ipl7utility9BScrollerCFv, global
+# ipl::utility::BScroller::isUp() const
+.fn isUp__Q33ipl7utility9BScrollerCFv, global
 /* 81363AF8 00031EF8  C0 23 00 18 */	lfs f1, 0x18(r3)
 /* 81363AFC 00031EFC  C0 02 82 00 */	lfs f0, lbl_81694600@sda21(r0)
 /* 81363B00 00031F00  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 81363B04 00031F04  7C 60 00 26 */	mfcr r3
 /* 81363B08 00031F08  54 63 0F FE */	srwi r3, r3, 31
 /* 81363B0C 00031F0C  4E 80 00 20 */	blr
-.endfn isDown__Q33ipl7utility9BScrollerCFv
+.endfn isUp__Q33ipl7utility9BScrollerCFv
 
 # .text:0x6B4 | 0x81363B10 | size: 0x18
-.fn iplUtility_81363B10, global
+# ipl::utility::BScroller::isDown() const
+.fn isDown__Q33ipl7utility9BScrollerCFv_81363B10, global
 /* 81363B10 00031F10  C0 23 00 18 */	lfs f1, 0x18(r3)
 /* 81363B14 00031F14  C0 02 82 00 */	lfs f0, lbl_81694600@sda21(r0)
 /* 81363B18 00031F18  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 81363B1C 00031F1C  7C 60 00 26 */	mfcr r3
 /* 81363B20 00031F20  54 63 17 FE */	extrwi r3, r3, 1, 1
 /* 81363B24 00031F24  4E 80 00 20 */	blr
-.endfn iplUtility_81363B10
+.endfn isDown__Q33ipl7utility9BScrollerCFv_81363B10
 
 # .text:0x6CC | 0x81363B28 | size: 0x58
 # ipl::utility::YoungBScroller::isYoungController(int)
@@ -848,7 +848,7 @@
 /* 81363F70 00032370  38 61 00 08 */	addi r3, r1, 0x8
 /* 81363F74 00032374  EC 1F 00 28 */	fsubs f0, f31, f0
 /* 81363F78 00032378  D0 01 00 08 */	stfs f0, 0x8(r1)
-/* 81363F7C 0003237C  4B FF FA 49 */	bl _get__Q33ipl7utility9BScrollerFv
+/* 81363F7C 0003237C  4B FF FA 49 */	bl "abs<f>__Q23ipl4mathFRCf_f"
 /* 81363F80 00032380  C0 02 82 08 */	lfs f0, lbl_81694608@sda21(r0)
 /* 81363F84 00032384  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 81363F88 00032388  40 81 00 18 */	ble .L_81363FA0
@@ -1162,7 +1162,7 @@
 /* 81364358 00032758  90 01 00 0C */	stw r0, 0xc(r1)
 /* 8136435C 0003275C  C8 01 00 08 */	lfd f0, 0x8(r1)
 /* 81364360 00032760  FC 40 F0 28 */	fsub f2, f0, f30
-/* 81364364 00032764  48 2A 89 CD */	bl fn_8160CD30
+/* 81364364 00032764  48 2A 89 CD */	bl pow
 /* 81364368 00032768  7C 7A FA 2E */	lhzx r3, r26, r31
 /* 8136436C 0003276C  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 81364370 00032770  38 03 FF D0 */	subi r0, r3, 0x30
@@ -1203,7 +1203,7 @@
 /* 813643E4 000327E4  38 80 00 11 */	li r4, 0x11
 /* 813643E8 000327E8  38 A9 12 58 */	addi r5, r9, lbl_81641258@l
 /* 813643EC 000327EC  4C C6 31 82 */	crclr cr1eq
-/* 813643F0 000327F0  48 2A 41 E0 */	b fn_816085D0
+/* 813643F0 000327F0  48 2A 41 E0 */	b swprintf
 .endfn WiiIdToUTF16__Q33ipl7utility13CharacterCodeFPwUx
 
 # .text:0xF98 | 0x813643F4 | size: 0x30
@@ -1234,7 +1234,7 @@
 /* 81364434 00032834  7C 9F 23 78 */	mr r31, r4
 /* 81364438 00032838  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8136443C 0003283C  7C 7E 1B 78 */	mr r30, r3
-/* 81364440 00032840  48 1D 18 41 */	bl fn_81535C80
+/* 81364440 00032840  48 1D 18 41 */	bl OSGetTime
 /* 81364444 00032844  3C A0 80 00 */	lis r5, 0x8000
 /* 81364448 00032848  38 C0 00 00 */	li r6, 0x0
 /* 8136444C 0003284C  80 E5 00 F8 */	lwz r7, 0xf8(r5)
@@ -1268,7 +1268,7 @@
 /* 813644A8 000328A8  90 01 00 14 */	stw r0, 0x14(r1)
 /* 813644AC 000328AC  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813644B0 000328B0  7C 7F 1B 78 */	mr r31, r3
-/* 813644B4 000328B4  48 1D 17 CD */	bl fn_81535C80
+/* 813644B4 000328B4  48 1D 17 CD */	bl OSGetTime
 /* 813644B8 000328B8  80 1F 00 00 */	lwz r0, 0x0(r31)
 /* 813644BC 000328BC  6C 65 80 00 */	xoris r5, r3, 0x8000
 /* 813644C0 000328C0  80 7F 00 04 */	lwz r3, 0x4(r31)
@@ -1861,7 +1861,7 @@
 .obj __vt__Q33ipl7utility9BScroller, global
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte "abs<f>__Q23ipl4mathFRCf_f"
+	.4byte isYoungController__Q33ipl7utility9BScrollerFi
 .endobj __vt__Q33ipl7utility9BScroller
 
 # 0x81694600..0x81694658 | size: 0x58

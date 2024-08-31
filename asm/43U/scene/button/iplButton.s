@@ -15,9 +15,9 @@
 /* 8139BCA4 0006A0A4  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8139BCA8 0006A0A8  7C 7E 1B 78 */	mr r30, r3
 /* 8139BCAC 0006A0AC  48 06 DF 41 */	bl fn_81409BEC
-/* 8139BCB0 0006A0B0  3C 80 81 65 */	lis r4, lbl_8164C230@ha
+/* 8139BCB0 0006A0B0  3C 80 81 65 */	lis r4, __vt__Q33ipl5scene6Button@ha
 /* 8139BCB4 0006A0B4  3B E0 00 00 */	li r31, 0x0
-/* 8139BCB8 0006A0B8  38 84 C2 30 */	addi r4, r4, lbl_8164C230@l
+/* 8139BCB8 0006A0B8  38 84 C2 30 */	addi r4, r4, __vt__Q33ipl5scene6Button@l
 /* 8139BCBC 0006A0BC  93 FE 00 54 */	stw r31, 0x54(r30)
 /* 8139BCC0 0006A0C0  38 04 00 1C */	addi r0, r4, 0x1c
 /* 8139BCC4 0006A0C4  38 7E 00 64 */	addi r3, r30, 0x64
@@ -1367,7 +1367,7 @@
 .L_8139CF04:
 /* 8139CF04 0006B304  7C 9E F8 2E */	lwzx r4, r30, r31
 /* 8139CF08 0006B308  7F 63 DB 78 */	mr r3, r27
-/* 8139CF0C 0006B30C  48 26 55 75 */	bl fn_81602480
+/* 8139CF0C 0006B30C  48 26 55 75 */	bl strcmp
 /* 8139CF10 0006B310  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8139CF14 0006B314  40 82 00 0C */	bne .L_8139CF20
 /* 8139CF18 0006B318  7F 9D E3 78 */	mr r29, r28
@@ -1984,7 +1984,7 @@
 /* 8139D738 0006BB38  7C 83 23 78 */	mr r3, r4
 /* 8139D73C 0006BB3C  7C BE 2B 78 */	mr r30, r5
 /* 8139D740 0006BB40  38 8D 86 B9 */	li r4, lbl_816966F9@sda21
-/* 8139D744 0006BB44  48 26 4D 3D */	bl fn_81602480
+/* 8139D744 0006BB44  48 26 4D 3D */	bl strcmp
 /* 8139D748 0006BB48  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8139D74C 0006BB4C  40 82 00 68 */	bne .L_8139D7B4
 /* 8139D750 0006BB50  80 1D 00 08 */	lwz r0, 0x8(r29)
@@ -2033,7 +2033,7 @@
 /* 8139D7E0 0006BBE0  7C 7E 1B 78 */	mr r30, r3
 /* 8139D7E4 0006BBE4  7C 83 23 78 */	mr r3, r4
 /* 8139D7E8 0006BBE8  38 8D 86 B9 */	li r4, lbl_816966F9@sda21
-/* 8139D7EC 0006BBEC  48 26 4C 95 */	bl fn_81602480
+/* 8139D7EC 0006BBEC  48 26 4C 95 */	bl strcmp
 /* 8139D7F0 0006BBF0  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8139D7F4 0006BBF4  40 82 00 3C */	bne .L_8139D830
 /* 8139D7F8 0006BBF8  80 1E 00 08 */	lwz r0, 0x8(r30)
@@ -2555,7 +2555,7 @@
 	.rel iplButton_8139CB58, .L_8139CC84
 .endobj jumptable_8164C0E4
 
-# .data:0x200 | 0x8164C148 | size: 0xE8
+# .data:0x200 | 0x8164C148 | size: 0xB0
 .obj lbl_8164C148, global
 	.4byte 0x5749504C
 	.4byte 0x5F53455F
@@ -2601,6 +2601,11 @@
 	.4byte 0x6C656374
 	.4byte 0x2E62726C
 	.4byte 0x616E0000
+.endobj lbl_8164C148
+
+# .data:0x2B0 | 0x8164C1F8 | size: 0x1C
+# ipl::scene::OptOutButtonEventHandlerBase::__vtable
+.obj __vt__Q33ipl5scene28OptOutButtonEventHandlerBase, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onEvent__Q33ipl5scene28OptOutButtonEventHandlerBaseFUlUlPv
@@ -2608,6 +2613,11 @@
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
 	.4byte onEventDerived__Q33ipl5scene28OptOutButtonEventHandlerBaseFUlUlPCQ33ipl10controller9Interface
+.endobj __vt__Q33ipl5scene28OptOutButtonEventHandlerBase
+
+# .data:0x2CC | 0x8164C214 | size: 0x1C
+# ipl::scene::ButtonEventHandlerBase::__vtable
+.obj __vt__Q33ipl5scene22ButtonEventHandlerBase, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onEvent__Q33ipl5scene22ButtonEventHandlerBaseFUlUlPv
@@ -2615,10 +2625,11 @@
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
 	.4byte onEventDerived__Q33ipl5scene22ButtonEventHandlerBaseFUlUlPCQ33ipl10controller9Interface
-.endobj lbl_8164C148
+.endobj __vt__Q33ipl5scene22ButtonEventHandlerBase
 
 # .data:0x2E8 | 0x8164C230 | size: 0xC8
-.obj lbl_8164C230, global
+# ipl::scene::Button::__vtable
+.obj __vt__Q33ipl5scene6Button, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene6ButtonFv
@@ -2669,7 +2680,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8164C230
+.endobj __vt__Q33ipl5scene6Button
 
 # 0x816948A0..0x816948D8 | size: 0x38
 .section .sdata2, "a"

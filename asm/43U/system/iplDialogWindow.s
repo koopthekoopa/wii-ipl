@@ -1,7 +1,7 @@
 .include "macros.inc"
 .file "iplDialogWindow.cpp"
 
-# 0x81344818..0x81347B6C | size: 0x3354
+# 0x81344818..0x81347AD0 | size: 0x32B8
 .text
 .balign 4
 
@@ -3446,7 +3446,7 @@
 /* 813477CC 00015BCC  7C 7E F8 2E */	lwzx r3, r30, r31
 /* 813477D0 00015BD0  7F 64 DB 78 */	mr r4, r27
 /* 813477D4 00015BD4  38 A0 00 10 */	li r5, 0x10
-/* 813477D8 00015BD8  48 2B AD C5 */	bl strcmp
+/* 813477D8 00015BD8  48 2B AD C5 */	bl strncmp
 /* 813477DC 00015BDC  2C 03 00 00 */	cmpwi r3, 0x0
 /* 813477E0 00015BE0  40 82 00 0C */	bne .L_813477EC
 /* 813477E4 00015BE4  7F 9D E3 78 */	mr r29, r28
@@ -3720,7 +3720,7 @@
 .endfn init__Q23gui9InterfaceFv
 
 # .text:0x327C | 0x81347A94 | size: 0x3C
-.fn iplPaneMgr_81347A94, local
+.fn "__sinit_\\iplDialogWindow_cpp", local
 /* 81347A94 00015E94  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81347A98 00015E98  7C 08 02 A6 */	mflr r0
 /* 81347A9C 00015E9C  C0 22 81 2C */	lfs f1, lbl_8169452C@sda21(r0)
@@ -3736,62 +3736,12 @@
 /* 81347AC4 00015EC4  7C 08 03 A6 */	mtlr r0
 /* 81347AC8 00015EC8  38 21 00 10 */	addi r1, r1, 0x10
 /* 81347ACC 00015ECC  4E 80 00 20 */	blr
-.endfn iplPaneMgr_81347A94
-
-# .text:0x32B8 | 0x81347AD0 | size: 0x9C
-.fn iplPaneMgr_81347AD0, global
-/* 81347AD0 00015ED0  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 81347AD4 00015ED4  7C 08 02 A6 */	mflr r0
-/* 81347AD8 00015ED8  2C 03 00 03 */	cmpwi r3, 0x3
-/* 81347ADC 00015EDC  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81347AE0 00015EE0  41 82 00 60 */	beq .L_81347B40
-/* 81347AE4 00015EE4  40 80 00 10 */	bge .L_81347AF4
-/* 81347AE8 00015EE8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81347AEC 00015EEC  41 82 00 18 */	beq .L_81347B04
-/* 81347AF0 00015EF0  48 00 00 6C */	b .L_81347B5C
-.L_81347AF4:
-/* 81347AF4 00015EF4  2C 03 00 05 */	cmpwi r3, 0x5
-/* 81347AF8 00015EF8  41 82 00 54 */	beq .L_81347B4C
-/* 81347AFC 00015EFC  40 80 00 60 */	bge .L_81347B5C
-/* 81347B00 00015F00  48 00 00 14 */	b .L_81347B14
-.L_81347B04:
-/* 81347B04 00015F04  3C 60 81 09 */	lis r3, sSystem__Q23ipl3snd@ha
-/* 81347B08 00015F08  38 63 99 2C */	addi r3, r3, sSystem__Q23ipl3snd@l
-/* 81347B0C 00015F0C  48 02 42 81 */	bl pauseOnBGM__Q33ipl3snd6SystemFv
-/* 81347B10 00015F10  48 00 00 4C */	b .L_81347B5C
-.L_81347B14:
-/* 81347B14 00015F14  88 0D A6 90 */	lbz r0, lbl_816986D0@sda21(r0)
-/* 81347B18 00015F18  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81347B1C 00015F1C  41 82 00 14 */	beq .L_81347B30
-/* 81347B20 00015F20  3C 60 81 09 */	lis r3, sSystem__Q23ipl3snd@ha
-/* 81347B24 00015F24  38 63 99 2C */	addi r3, r3, sSystem__Q23ipl3snd@l
-/* 81347B28 00015F28  48 02 40 ED */	bl resetAllSound__Q33ipl3snd6SystemFv
-/* 81347B2C 00015F2C  48 00 00 30 */	b .L_81347B5C
-.L_81347B30:
-/* 81347B30 00015F30  3C 60 81 09 */	lis r3, sSystem__Q23ipl3snd@ha
-/* 81347B34 00015F34  38 63 99 2C */	addi r3, r3, sSystem__Q23ipl3snd@l
-/* 81347B38 00015F38  48 02 42 FD */	bl pauseOffBGM__Q33ipl3snd6SystemFv
-/* 81347B3C 00015F3C  48 00 00 20 */	b .L_81347B5C
-.L_81347B40:
-/* 81347B40 00015F40  38 00 00 01 */	li r0, 0x1
-/* 81347B44 00015F44  98 0D A6 90 */	stb r0, lbl_816986D0@sda21(r0)
-/* 81347B48 00015F48  48 00 00 14 */	b .L_81347B5C
-.L_81347B4C:
-/* 81347B4C 00015F4C  3C 60 81 09 */	lis r3, sSystem__Q23ipl3snd@ha
-/* 81347B50 00015F50  38 63 99 2C */	addi r3, r3, sSystem__Q23ipl3snd@l
-/* 81347B54 00015F54  48 02 3A 25 */	bl startSEIndex__Q33ipl3snd6SystemFUl
-/* 81347B58 00015F58  38 60 00 01 */	li r3, 0x1
-.L_81347B5C:
-/* 81347B5C 00015F5C  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 81347B60 00015F60  7C 08 03 A6 */	mtlr r0
-/* 81347B64 00015F64  38 21 00 10 */	addi r1, r1, 0x10
-/* 81347B68 00015F68  4E 80 00 20 */	blr
-.endfn iplPaneMgr_81347AD0
+.endfn "__sinit_\\iplDialogWindow_cpp"
 
 # 0x8160D1CC..0x8160D1D0 | size: 0x4
 .section .ctors, "a"
 .balign 4
-	.4byte iplPaneMgr_81347A94
+	.4byte "__sinit_\\iplDialogWindow_cpp"
 
 # 0x81635510..0x81635A70 | size: 0x560
 .data
