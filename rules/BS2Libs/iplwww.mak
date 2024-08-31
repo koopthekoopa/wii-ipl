@@ -1,7 +1,7 @@
 IPL_WWW_OBJECTS	=	$(BS2_OBJASM_PATH)/iplwww/www_browser.o \
 					$(BS2_OBJ_PATH)/iplwww/www_message.o \
 					$(BS2_OBJASM_PATH)/iplwww/www_surface.o \
-					$(BS2_OBJASM_PATH)/iplwww/www_thread.o \
+					$(BS2_OBJ_PATH)/iplwww/www_thread.o \
 					$(BS2_OBJ_PATH)/iplwww/www_print.o \
 					$(BS2_OBJASM_PATH)/iplwww/www_window.o \
 					$(BS2_OBJASM_PATH)/iplwww/www_transition.o \

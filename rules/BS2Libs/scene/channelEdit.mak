@@ -1,5 +1,10 @@
-CHANNEL_EDIT_OBJECTS    =	$(BS2_OBJASM_PATH)/scene/channelEdit/iplCalendar.o \
-                            $(BS2_OBJASM_PATH)/scene/channelEdit/iplDate.o
+CHANNEL_EDIT_OBJECTS    =	$(BS2_OBJASM_PATH)/scene/channelEdit/iplChannelEdit.o \
+                            $(BS2_OBJASM_PATH)/scene/channelEdit/iplChanAppBase.o \
+                            $(BS2_OBJASM_PATH)/scene/channelEdit/iplChanAppBox.o \
+                            $(BS2_OBJASM_PATH)/scene/channelEdit/iplChanAppEdit.o \
+                            $(BS2_OBJASM_PATH)/scene/channelEdit/iplAnmController.o \
+                            $(BS2_OBJASM_PATH)/scene/channelEdit/iplNandSDCardManager.o \
+                            $(BS2_OBJASM_PATH)/scene/channelEdit/iplThumbnail.o
 
 DEPENDENCIES += $(CHANNEL_EDIT_OBJECTS:.o=.d)
 

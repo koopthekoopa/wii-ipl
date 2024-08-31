@@ -31,7 +31,7 @@ SYSTEM_OBJECTS	=	$(BS2_OBJASM_PATH)/system/rvl_dec.o \
 					$(BS2_OBJASM_PATH)/system/iplSocketSetting.o \
 					$(BS2_OBJASM_PATH)/system/iplPostmanManager.o \
 					$(BS2_OBJASM_PATH)/system/iplSaveDataManager.o \
-					$(BS2_OBJASM_PATH)/system/iplChannelRsoThread.o \
+					$(BS2_OBJ_PATH)/system/iplChannelRsoThread.o \
 					$(BS2_OBJASM_PATH)/system/RsoSystem.o \
 					$(BS2_OBJASM_PATH)/system/iplCdbBackup.o \
 					$(BS2_OBJASM_PATH)/system/odh.o \

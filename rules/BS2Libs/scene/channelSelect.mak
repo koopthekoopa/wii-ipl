@@ -1,5 +1,7 @@
-CHANNEL_SELECT_OBJECTS    =	$(BS2_OBJASM_PATH)/scene/channelSelect/iplCalendar.o \
-                            $(BS2_OBJASM_PATH)/scene/channelSelect/iplDate.o
+CHANNEL_SELECT_OBJECTS    =	$(BS2_OBJASM_PATH)/scene/channelSelect/iplChannelSelect.o \
+                            $(BS2_OBJASM_PATH)/scene/channelSelect/iplClock.o \
+                            $(BS2_OBJASM_PATH)/scene/channelSelect/iplChannelObj.o \
+                            $(BS2_OBJASM_PATH)/scene/channelSelect/iplChannelTitle.o
 
 DEPENDENCIES += $(CHANNEL_SELECT_OBJECTS:.o=.d)
 
