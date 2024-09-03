@@ -1,5 +1,7 @@
 MEMORY {
-    // The BSS is moved to there as since version 2.0 they were running out of free space in the BS2 area (0x81330000 - 0x8137D0000) which is where the Wii Menu is stored.
+    // The BSS is moved to there as since version 2.0
+    // they were running out of free space in the BS2 area
+    // (0x81330000 - 0x8137D0000) which is where the Wii Menu is stored.
     da_bss: origin = 0x81080000
     main:   origin = 0x81330000
 }

@@ -65,7 +65,7 @@ namespace ipl {
                 bool                mbStartUpdate;      // 0x20
                 BS2UpdateEntry*     mEntries;           // 0x24
                 int                 mPrevEntry;         // 0x28
-                undefined4          mPrevFound;         // 0x2C
+                int                 mPrevFound;         // 0x2C
                 u32                 mEntrySize;         // 0x30
                 u32                 mEntryOffset;       // 0x34
         };

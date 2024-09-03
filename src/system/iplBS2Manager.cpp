@@ -341,12 +341,10 @@ namespace ipl {
      */
     void bs2::Manager::updateTick() {
         if (mbStartUpdate && BS2UpdateState() == 2) {
-            
-
+            int i;
             mEntryOffset = 0;
 
             // Find the current entry
-            int i;
             for (i = 0; i < BS2GetUpdateEntryNum(); i++) {
                 if (BS2GetCurrentEntry() != NULL) {
                     if (mEntries[i].titleId == BS2GetCurrentEntry()->titleId &&
@@ -359,14 +357,13 @@ namespace ipl {
 
             int entry = i;
 
-            // If the current entry cannot be found
+            // If the entry cannot be found
             if (entry == BS2GetUpdateEntryNum()) {
                 mEntryOffset = mEntrySize;
                 mbStartUpdate = false;
             }
-            // If the current entry is the previous one
+            // If the entry was the previous one
             else if (entry == mPrevEntry) {
-                // ???
                 mPrevFound++;
                 entry = mEntries[entry].size;
                 u32 unk = (sizeof(BS2UpdateEntry) * MAX_ENTRIES) * mPrevFound;
@@ -375,7 +372,7 @@ namespace ipl {
                 }
                 mEntryOffset += entry;
             }
-            // If the current entry was found
+            // If the entry was found
             else {
                 mPrevEntry = entry;
                 mPrevFound = 0;

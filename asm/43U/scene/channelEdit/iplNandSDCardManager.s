@@ -134,7 +134,7 @@
 /* 813A7818 | 7C 1C E9 D6 */	mullw r0, r28, r29
 /* 813A781C | 7C 7F 02 14 */	add r3, r31, r0
 /* 813A7820 | 38 63 5C 90 */	addi r3, r3, 0x5c90
-/* 813A7824 | 48 02 20 A9 */	bl fn_813C98CC
+/* 813A7824 | 48 02 20 A9 */	bl init__Q33ipl5scene17WiiBannerFileInfoFv
 /* 813A7828 | 3B 9C 00 01 */	addi r28, r28, 0x1
 /* 813A782C | 3B DE 06 28 */	addi r30, r30, 0x628
 /* 813A7830 | 2C 1C 00 0F */	cmpwi r28, 0xf
@@ -1891,7 +1891,7 @@
 /* 813A8F90 | 40 82 00 90 */	bne .L_813A9020
 /* 813A8F94 | 3C 7F 00 0F */	addis r3, r31, 0xf
 /* 813A8F98 | 80 63 85 EC */	lwz r3, -0x7a14(r3)
-/* 813A8F9C | 48 02 0A 0D */	bl fn_813C99A8
+/* 813A8F9C | 48 02 0A 0D */	bl create__Q33ipl5scene17WiiBannerFileInfoFv
 /* 813A8FA0 | 7F E3 FB 78 */	mr r3, r31
 /* 813A8FA4 | 48 00 05 B9 */	bl getAsyncResult__Q33ipl5scene17NandSDCardManagerFv
 /* 813A8FA8 | 6C 63 80 00 */	xoris r3, r3, 0x8000
@@ -2313,7 +2313,7 @@
 /* 813A9524 | 7C 1C F9 D6 */	mullw r0, r28, r31
 /* 813A9528 | 7C 7B 02 14 */	add r3, r27, r0
 /* 813A952C | 38 63 5C 90 */	addi r3, r3, 0x5c90
-/* 813A9530 | 48 02 03 9D */	bl fn_813C98CC
+/* 813A9530 | 48 02 03 9D */	bl init__Q33ipl5scene17WiiBannerFileInfoFv
 /* 813A9534 | 3B 9C 00 01 */	addi r28, r28, 0x1
 /* 813A9538 | 3B DE 06 28 */	addi r30, r30, 0x628
 /* 813A953C | 2C 1C 00 0F */	cmpwi r28, 0xf
