@@ -1,5 +1,5 @@
-#ifndef IPL_CHANNEL_RSO_THREAD
-#define IPL_CHANNEL_RSO_THREAD
+#ifndef IPL_CHANNEL_RSO_THREAD_H
+#define IPL_CHANNEL_RSO_THREAD_H
 
 #include "utility/iplThread.h"
 
@@ -33,6 +33,6 @@ namespace ipl {
     }
 }
 
-#endif // IPL_CHANNEL_RSO_THREAD
+#endif // IPL_CHANNEL_RSO_THREAD_H
 
 

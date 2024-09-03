@@ -50,16 +50,16 @@ namespace ipl {
          * @note Address: 0x8136276C
          * @note Size: 0x38
          */
-        void Tree::insert(Tree* pTree, Tree* pNewTree) {
+        void Tree::insert(Tree* pTree, Tree* pTree2) {
             pTree->mpParent = this;
-            pTree->mpPrev = pNewTree->mpPrev;
-            pTree->mpNext = pNewTree;
-            if (pNewTree->mpPrev != NULL) {
-                pNewTree->mpPrev->mpNext = pTree;
+            pTree->mpPrev = pTree2->mpPrev;
+            pTree->mpNext = pTree2;
+            if (pTree2->mpPrev != NULL) {
+                pTree2->mpPrev->mpNext = pTree;
             }
             
-            pNewTree->mpPrev = pTree;
-            if (mpChild == pNewTree) {
+            pTree2->mpPrev = pTree;
+            if (mpChild == pTree2) {
                 mpChild = pTree;
             }
         }

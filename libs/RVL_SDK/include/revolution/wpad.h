@@ -7,6 +7,11 @@ extern "C" {
 
 #define WPAD_MAX_CONTROLLERS    4
 
+s32     WPADGetStatus();
+
+
+void __WPADReconnect(BOOL reconnect);
+
 #ifdef __cplusplus
 }
 #endif // __cplusplus

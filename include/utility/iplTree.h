@@ -18,7 +18,7 @@ namespace ipl {
                 virtual Tree*   getParent();    // 0x18
 
                 void            attach(Tree* pTree);
-                void            insert(Tree* pTree, Tree* pNewTree);
+                void            insert(Tree* pTree, Tree* pTree2);
                 void            detach();
 
             private:

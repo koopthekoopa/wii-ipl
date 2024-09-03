@@ -53,6 +53,7 @@ namespace ipl {
                     mpMessage->setResource(System::getChnMsg()->getBuffer());
                     break;
                 }
+                // Traditional chinese is unused?
                 case SC_LANG_KOREAN: {
                     mpMessage->setResource(System::getKorMsg()->getBuffer());
                     break;
