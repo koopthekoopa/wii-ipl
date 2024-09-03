@@ -23,1846 +23,1846 @@
 
 # .text:0x0 | 0x8136F9D0 | size: 0x24
 .fn www_wiisetting_8136F9D0, local
-/* 8136F9D0 0003DDD0  2C 04 00 01 */	cmpwi r4, 0x1
-/* 8136F9D4 0003DDD4  4C 82 00 20 */	bnelr
-/* 8136F9D8 0003DDD8  38 80 00 01 */	li r4, 0x1
-/* 8136F9DC 0003DDDC  38 00 00 00 */	li r0, 0x0
-/* 8136F9E0 0003DDE0  90 8D 82 D0 */	stw r4, lbl_81696310@sda21(r0)
-/* 8136F9E4 0003DDE4  38 80 00 00 */	li r4, 0x0
-/* 8136F9E8 0003DDE8  90 0D A9 48 */	stw r0, lbl_81698988@sda21(r0)
-/* 8136F9EC 0003DDEC  48 21 89 E0 */	b fn_815883CC
-/* 8136F9F0 0003DDF0  4E 80 00 20 */	blr
+/* 8136F9D0 | 2C 04 00 01 */	cmpwi r4, 0x1
+/* 8136F9D4 | 4C 82 00 20 */	bnelr
+/* 8136F9D8 | 38 80 00 01 */	li r4, 0x1
+/* 8136F9DC | 38 00 00 00 */	li r0, 0x0
+/* 8136F9E0 | 90 8D 82 D0 */	stw r4, lbl_81696310@sda21(r0)
+/* 8136F9E4 | 38 80 00 00 */	li r4, 0x0
+/* 8136F9E8 | 90 0D A9 48 */	stw r0, lbl_81698988@sda21(r0)
+/* 8136F9EC | 48 21 89 E0 */	b fn_815883CC
+/* 8136F9F0 | 4E 80 00 20 */	blr
 .endfn www_wiisetting_8136F9D0
 
 # .text:0x24 | 0x8136F9F4 | size: 0x44
 .fn www_wiisetting_8136F9F4, local
-/* 8136F9F4 0003DDF4  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 8136F9F8 0003DDF8  7C 08 02 A6 */	mflr r0
-/* 8136F9FC 0003DDFC  2C 04 00 01 */	cmpwi r4, 0x1
-/* 8136FA00 0003DE00  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8136FA04 0003DE04  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 8136FA08 0003DE08  7C 7F 1B 78 */	mr r31, r3
-/* 8136FA0C 0003DE0C  40 82 00 18 */	bne .L_8136FA24
-/* 8136FA10 0003DE10  48 21 89 A1 */	bl fn_815883B0
-/* 8136FA14 0003DE14  3C 80 81 37 */	lis r4, www_wiisetting_8136F9D0@ha
-/* 8136FA18 0003DE18  7F E3 FB 78 */	mr r3, r31
-/* 8136FA1C 0003DE1C  38 84 F9 D0 */	addi r4, r4, www_wiisetting_8136F9D0@l
-/* 8136FA20 0003DE20  48 21 89 AD */	bl fn_815883CC
+/* 8136F9F4 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8136F9F8 | 7C 08 02 A6 */	mflr r0
+/* 8136F9FC | 2C 04 00 01 */	cmpwi r4, 0x1
+/* 8136FA00 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 8136FA04 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8136FA08 | 7C 7F 1B 78 */	mr r31, r3
+/* 8136FA0C | 40 82 00 18 */	bne .L_8136FA24
+/* 8136FA10 | 48 21 89 A1 */	bl fn_815883B0
+/* 8136FA14 | 3C 80 81 37 */	lis r4, www_wiisetting_8136F9D0@ha
+/* 8136FA18 | 7F E3 FB 78 */	mr r3, r31
+/* 8136FA1C | 38 84 F9 D0 */	addi r4, r4, www_wiisetting_8136F9D0@l
+/* 8136FA20 | 48 21 89 AD */	bl fn_815883CC
 .L_8136FA24:
-/* 8136FA24 0003DE24  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 8136FA28 0003DE28  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 8136FA2C 0003DE2C  7C 08 03 A6 */	mtlr r0
-/* 8136FA30 0003DE30  38 21 00 10 */	addi r1, r1, 0x10
-/* 8136FA34 0003DE34  4E 80 00 20 */	blr
+/* 8136FA24 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8136FA28 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8136FA2C | 7C 08 03 A6 */	mtlr r0
+/* 8136FA30 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 8136FA34 | 4E 80 00 20 */	blr
 .endfn www_wiisetting_8136F9F4
 
 # .text:0x68 | 0x8136FA38 | size: 0x8
 # www::wiisetting::allow_access(const char*, const char*, int)
 .fn allow_access__Q23www10wiisettingFPCcPCci, global
-/* 8136FA38 0003DE38  38 60 00 01 */	li r3, 0x1
-/* 8136FA3C 0003DE3C  4E 80 00 20 */	blr
+/* 8136FA38 | 38 60 00 01 */	li r3, 0x1
+/* 8136FA3C | 4E 80 00 20 */	blr
 .endfn allow_access__Q23www10wiisettingFPCcPCci
 
 # .text:0x70 | 0x8136FA40 | size: 0x88
 # www::wiisetting::AddJsPlugin()
 .fn AddJsPlugin__Q23www10wiisettingFv, global
-/* 8136FA40 0003DE40  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 8136FA44 0003DE44  7C 08 02 A6 */	mflr r0
-/* 8136FA48 0003DE48  3C A0 81 09 */	lis r5, cap__Q23www10wiisetting@ha
-/* 8136FA4C 0003DE4C  3C E0 81 37 */	lis r7, globalGetter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue@ha
-/* 8136FA50 0003DE50  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8136FA54 0003DE54  3C C0 81 37 */	lis r6, allow_access__Q23www10wiisettingFPCcPCci@ha
-/* 8136FA58 0003DE58  39 0D 82 D4 */	li r8, lbl_81696314@sda21
-/* 8136FA5C 0003DE5C  3C 60 81 64 */	lis r3, lbl_816440E3@ha
-/* 8136FA60 0003DE60  81 8D A8 FC */	lwz r12, WWWAddJSPlugin@sda21(r0)
-/* 8136FA64 0003DE64  38 85 A5 00 */	addi r4, r5, cap__Q23www10wiisetting@l
-/* 8136FA68 0003DE68  38 00 00 00 */	li r0, 0x0
-/* 8136FA6C 0003DE6C  38 E7 FA C8 */	addi r7, r7, globalGetter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue@l
-/* 8136FA70 0003DE70  38 C6 FA 38 */	addi r6, r6, allow_access__Q23www10wiisettingFPCcPCci@l
-/* 8136FA74 0003DE74  91 05 A5 00 */	stw r8, cap__Q23www10wiisetting@l(r5)
-/* 8136FA78 0003DE78  38 63 40 E3 */	addi r3, r3, lbl_816440E3@l
-/* 8136FA7C 0003DE7C  38 AD A9 60 */	li r5, opera_callbacks__Q23www10wiisetting@sda21
-/* 8136FA80 0003DE80  90 04 00 04 */	stw r0, 0x4(r4)
-/* 8136FA84 0003DE84  90 E4 00 08 */	stw r7, 0x8(r4)
-/* 8136FA88 0003DE88  90 04 00 0C */	stw r0, 0xc(r4)
-/* 8136FA8C 0003DE8C  90 04 00 10 */	stw r0, 0x10(r4)
-/* 8136FA90 0003DE90  90 04 00 14 */	stw r0, 0x14(r4)
-/* 8136FA94 0003DE94  90 04 00 18 */	stw r0, 0x18(r4)
-/* 8136FA98 0003DE98  90 C4 00 1C */	stw r6, 0x1c(r4)
-/* 8136FA9C 0003DE9C  7D 89 03 A6 */	mtctr r12
-/* 8136FAA0 0003DEA0  4E 80 04 21 */	bctrl
-/* 8136FAA4 0003DEA4  3C 80 81 64 */	lis r4, lbl_816440F2@ha
-/* 8136FAA8 0003DEA8  38 60 00 03 */	li r3, 0x3
-/* 8136FAAC 0003DEAC  38 84 40 F2 */	addi r4, r4, lbl_816440F2@l
-/* 8136FAB0 0003DEB0  4C C6 31 82 */	crclr cr1eq
-/* 8136FAB4 0003DEB4  4B FF ED E1 */	bl IPLWWWReport__Q37ext_ead3www5printFiPCce
-/* 8136FAB8 0003DEB8  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 8136FABC 0003DEBC  7C 08 03 A6 */	mtlr r0
-/* 8136FAC0 0003DEC0  38 21 00 10 */	addi r1, r1, 0x10
-/* 8136FAC4 0003DEC4  4E 80 00 20 */	blr
+/* 8136FA40 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8136FA44 | 7C 08 02 A6 */	mflr r0
+/* 8136FA48 | 3C A0 81 09 */	lis r5, cap__Q23www10wiisetting@ha
+/* 8136FA4C | 3C E0 81 37 */	lis r7, globalGetter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue@ha
+/* 8136FA50 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 8136FA54 | 3C C0 81 37 */	lis r6, allow_access__Q23www10wiisettingFPCcPCci@ha
+/* 8136FA58 | 39 0D 82 D4 */	li r8, lbl_81696314@sda21
+/* 8136FA5C | 3C 60 81 64 */	lis r3, lbl_816440E3@ha
+/* 8136FA60 | 81 8D A8 FC */	lwz r12, WWWAddJSPlugin@sda21(r0)
+/* 8136FA64 | 38 85 A5 00 */	addi r4, r5, cap__Q23www10wiisetting@l
+/* 8136FA68 | 38 00 00 00 */	li r0, 0x0
+/* 8136FA6C | 38 E7 FA C8 */	addi r7, r7, globalGetter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue@l
+/* 8136FA70 | 38 C6 FA 38 */	addi r6, r6, allow_access__Q23www10wiisettingFPCcPCci@l
+/* 8136FA74 | 91 05 A5 00 */	stw r8, cap__Q23www10wiisetting@l(r5)
+/* 8136FA78 | 38 63 40 E3 */	addi r3, r3, lbl_816440E3@l
+/* 8136FA7C | 38 AD A9 60 */	li r5, opera_callbacks__Q23www10wiisetting@sda21
+/* 8136FA80 | 90 04 00 04 */	stw r0, 0x4(r4)
+/* 8136FA84 | 90 E4 00 08 */	stw r7, 0x8(r4)
+/* 8136FA88 | 90 04 00 0C */	stw r0, 0xc(r4)
+/* 8136FA8C | 90 04 00 10 */	stw r0, 0x10(r4)
+/* 8136FA90 | 90 04 00 14 */	stw r0, 0x14(r4)
+/* 8136FA94 | 90 04 00 18 */	stw r0, 0x18(r4)
+/* 8136FA98 | 90 C4 00 1C */	stw r6, 0x1c(r4)
+/* 8136FA9C | 7D 89 03 A6 */	mtctr r12
+/* 8136FAA0 | 4E 80 04 21 */	bctrl
+/* 8136FAA4 | 3C 80 81 64 */	lis r4, lbl_816440F2@ha
+/* 8136FAA8 | 38 60 00 03 */	li r3, 0x3
+/* 8136FAAC | 38 84 40 F2 */	addi r4, r4, lbl_816440F2@l
+/* 8136FAB0 | 4C C6 31 82 */	crclr cr1eq
+/* 8136FAB4 | 4B FF ED E1 */	bl IPLWWWReport__Q37ext_ead3www5printFiPCce
+/* 8136FAB8 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8136FABC | 7C 08 03 A6 */	mtlr r0
+/* 8136FAC0 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 8136FAC4 | 4E 80 00 20 */	blr
 .endfn AddJsPlugin__Q23www10wiisettingFv
 
 # .text:0xF8 | 0x8136FAC8 | size: 0xC8
 # www::wiisetting::globalGetter_(WWWJSPluginObj*, const char*, WWWJSPluginValue*)
 .fn globalGetter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue, global
-/* 8136FAC8 0003DEC8  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 8136FACC 0003DECC  7C 08 02 A6 */	mflr r0
-/* 8136FAD0 0003DED0  90 01 00 24 */	stw r0, 0x24(r1)
-/* 8136FAD4 0003DED4  39 61 00 20 */	addi r11, r1, 0x20
-/* 8136FAD8 0003DED8  48 28 99 F1 */	bl _savegpr_29
-/* 8136FADC 0003DEDC  3F E0 81 64 */	lis r31, lbl_816440A0@ha
-/* 8136FAE0 0003DEE0  7C 7D 1B 78 */	mr r29, r3
-/* 8136FAE4 0003DEE4  3B FF 40 A0 */	addi r31, r31, lbl_816440A0@l
-/* 8136FAE8 0003DEE8  7C 83 23 78 */	mr r3, r4
-/* 8136FAEC 0003DEEC  7C BE 2B 78 */	mr r30, r5
-/* 8136FAF0 0003DEF0  38 9F 00 71 */	addi r4, r31, 0x71
-/* 8136FAF4 0003DEF4  48 29 29 8D */	bl strcmp
-/* 8136FAF8 0003DEF8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 8136FAFC 0003DEFC  40 82 00 78 */	bne .L_8136FB74
-/* 8136FB00 0003DF00  38 7F 00 7C */	addi r3, r31, 0x7c
-/* 8136FB04 0003DF04  4C C6 31 82 */	crclr cr1eq
-/* 8136FB08 0003DF08  48 1B EB 99 */	bl OSReport
-/* 8136FB0C 0003DF0C  80 8D A9 60 */	lwz r4, opera_callbacks__Q23www10wiisetting@sda21(r0)
-/* 8136FB10 0003DF10  3C E0 81 37 */	lis r7, ObjectConstructor___Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue@ha
-/* 8136FB14 0003DF14  7F A3 EB 78 */	mr r3, r29
-/* 8136FB18 0003DF18  39 41 00 08 */	addi r10, r1, 0x8
-/* 8136FB1C 0003DF1C  81 84 00 00 */	lwz r12, 0x0(r4)
-/* 8136FB20 0003DF20  38 E7 FB 90 */	addi r7, r7, ObjectConstructor___Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue@l
-/* 8136FB24 0003DF24  38 80 00 00 */	li r4, 0x0
-/* 8136FB28 0003DF28  38 A0 00 00 */	li r5, 0x0
-/* 8136FB2C 0003DF2C  38 C0 00 00 */	li r6, 0x0
-/* 8136FB30 0003DF30  39 0D 82 DC */	li r8, lbl_8169631C@sda21
-/* 8136FB34 0003DF34  39 20 00 00 */	li r9, 0x0
-/* 8136FB38 0003DF38  7D 89 03 A6 */	mtctr r12
-/* 8136FB3C 0003DF3C  4E 80 04 21 */	bctrl
-/* 8136FB40 0003DF40  2C 03 00 00 */	cmpwi r3, 0x0
-/* 8136FB44 0003DF44  40 80 00 0C */	bge .L_8136FB50
-/* 8136FB48 0003DF48  38 60 00 0A */	li r3, 0xa
-/* 8136FB4C 0003DF4C  48 00 00 2C */	b .L_8136FB78
+/* 8136FAC8 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8136FACC | 7C 08 02 A6 */	mflr r0
+/* 8136FAD0 | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 8136FAD4 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 8136FAD8 | 48 28 99 F1 */	bl _savegpr_29
+/* 8136FADC | 3F E0 81 64 */	lis r31, lbl_816440A0@ha
+/* 8136FAE0 | 7C 7D 1B 78 */	mr r29, r3
+/* 8136FAE4 | 3B FF 40 A0 */	addi r31, r31, lbl_816440A0@l
+/* 8136FAE8 | 7C 83 23 78 */	mr r3, r4
+/* 8136FAEC | 7C BE 2B 78 */	mr r30, r5
+/* 8136FAF0 | 38 9F 00 71 */	addi r4, r31, 0x71
+/* 8136FAF4 | 48 29 29 8D */	bl strcmp
+/* 8136FAF8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 8136FAFC | 40 82 00 78 */	bne .L_8136FB74
+/* 8136FB00 | 38 7F 00 7C */	addi r3, r31, 0x7c
+/* 8136FB04 | 4C C6 31 82 */	crclr cr1eq
+/* 8136FB08 | 48 1B EB 99 */	bl OSReport
+/* 8136FB0C | 80 8D A9 60 */	lwz r4, opera_callbacks__Q23www10wiisetting@sda21(r0)
+/* 8136FB10 | 3C E0 81 37 */	lis r7, ObjectConstructor___Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue@ha
+/* 8136FB14 | 7F A3 EB 78 */	mr r3, r29
+/* 8136FB18 | 39 41 00 08 */	addi r10, r1, 0x8
+/* 8136FB1C | 81 84 00 00 */	lwz r12, 0x0(r4)
+/* 8136FB20 | 38 E7 FB 90 */	addi r7, r7, ObjectConstructor___Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue@l
+/* 8136FB24 | 38 80 00 00 */	li r4, 0x0
+/* 8136FB28 | 38 A0 00 00 */	li r5, 0x0
+/* 8136FB2C | 38 C0 00 00 */	li r6, 0x0
+/* 8136FB30 | 39 0D 82 DC */	li r8, lbl_8169631C@sda21
+/* 8136FB34 | 39 20 00 00 */	li r9, 0x0
+/* 8136FB38 | 7D 89 03 A6 */	mtctr r12
+/* 8136FB3C | 4E 80 04 21 */	bctrl
+/* 8136FB40 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 8136FB44 | 40 80 00 0C */	bge .L_8136FB50
+/* 8136FB48 | 38 60 00 0A */	li r3, 0xa
+/* 8136FB4C | 48 00 00 2C */	b .L_8136FB78
 .L_8136FB50:
-/* 8136FB50 0003DF50  38 7F 00 A1 */	addi r3, r31, 0xa1
-/* 8136FB54 0003DF54  4C C6 31 82 */	crclr cr1eq
-/* 8136FB58 0003DF58  48 1B EB 49 */	bl OSReport
-/* 8136FB5C 0003DF5C  38 00 00 00 */	li r0, 0x0
-/* 8136FB60 0003DF60  38 60 00 07 */	li r3, 0x7
-/* 8136FB64 0003DF64  90 1E 00 00 */	stw r0, 0x0(r30)
-/* 8136FB68 0003DF68  80 01 00 08 */	lwz r0, 0x8(r1)
-/* 8136FB6C 0003DF6C  90 1E 00 08 */	stw r0, 0x8(r30)
-/* 8136FB70 0003DF70  48 00 00 08 */	b .L_8136FB78
+/* 8136FB50 | 38 7F 00 A1 */	addi r3, r31, 0xa1
+/* 8136FB54 | 4C C6 31 82 */	crclr cr1eq
+/* 8136FB58 | 48 1B EB 49 */	bl OSReport
+/* 8136FB5C | 38 00 00 00 */	li r0, 0x0
+/* 8136FB60 | 38 60 00 07 */	li r3, 0x7
+/* 8136FB64 | 90 1E 00 00 */	stw r0, 0x0(r30)
+/* 8136FB68 | 80 01 00 08 */	lwz r0, 0x8(r1)
+/* 8136FB6C | 90 1E 00 08 */	stw r0, 0x8(r30)
+/* 8136FB70 | 48 00 00 08 */	b .L_8136FB78
 .L_8136FB74:
-/* 8136FB74 0003DF74  38 60 00 08 */	li r3, 0x8
+/* 8136FB74 | 38 60 00 08 */	li r3, 0x8
 .L_8136FB78:
-/* 8136FB78 0003DF78  39 61 00 20 */	addi r11, r1, 0x20
-/* 8136FB7C 0003DF7C  48 28 99 99 */	bl _restgpr_29
-/* 8136FB80 0003DF80  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 8136FB84 0003DF84  7C 08 03 A6 */	mtlr r0
-/* 8136FB88 0003DF88  38 21 00 20 */	addi r1, r1, 0x20
-/* 8136FB8C 0003DF8C  4E 80 00 20 */	blr
+/* 8136FB78 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 8136FB7C | 48 28 99 99 */	bl _restgpr_29
+/* 8136FB80 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8136FB84 | 7C 08 03 A6 */	mtlr r0
+/* 8136FB88 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 8136FB8C | 4E 80 00 20 */	blr
 .endfn globalGetter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue
 
 # .text:0x1C0 | 0x8136FB90 | size: 0xA0
 # www::wiisetting::ObjectConstructor_(WWWJSPluginObj*, WWWJSPluginObj*, int, WWWJSPluginValue*, WWWJSPluginValue*)
 .fn ObjectConstructor___Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue, global
-/* 8136FB90 0003DF90  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 8136FB94 0003DF94  7C 08 02 A6 */	mflr r0
-/* 8136FB98 0003DF98  2C 05 00 00 */	cmpwi r5, 0x0
-/* 8136FB9C 0003DF9C  7C 83 23 78 */	mr r3, r4
-/* 8136FBA0 0003DFA0  90 01 00 24 */	stw r0, 0x24(r1)
-/* 8136FBA4 0003DFA4  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8136FBA8 0003DFA8  7C FF 3B 78 */	mr r31, r7
-/* 8136FBAC 0003DFAC  41 82 00 0C */	beq .L_8136FBB8
-/* 8136FBB0 0003DFB0  38 60 00 13 */	li r3, 0x13
-/* 8136FBB4 0003DFB4  48 00 00 68 */	b .L_8136FC1C
+/* 8136FB90 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8136FB94 | 7C 08 02 A6 */	mflr r0
+/* 8136FB98 | 2C 05 00 00 */	cmpwi r5, 0x0
+/* 8136FB9C | 7C 83 23 78 */	mr r3, r4
+/* 8136FBA0 | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 8136FBA4 | 93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 8136FBA8 | 7C FF 3B 78 */	mr r31, r7
+/* 8136FBAC | 41 82 00 0C */	beq .L_8136FBB8
+/* 8136FBB0 | 38 60 00 13 */	li r3, 0x13
+/* 8136FBB4 | 48 00 00 68 */	b .L_8136FC1C
 .L_8136FBB8:
-/* 8136FBB8 0003DFB8  80 CD A9 60 */	lwz r6, opera_callbacks__Q23www10wiisetting@sda21(r0)
-/* 8136FBBC 0003DFBC  3C 80 81 37 */	lis r4, Getter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue@ha
-/* 8136FBC0 0003DFC0  3C A0 81 37 */	lis r5, Setter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue@ha
-/* 8136FBC4 0003DFC4  38 E1 00 08 */	addi r7, r1, 0x8
-/* 8136FBC8 0003DFC8  81 86 00 04 */	lwz r12, 0x4(r6)
-/* 8136FBCC 0003DFCC  38 84 FC 30 */	addi r4, r4, Getter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue@l
-/* 8136FBD0 0003DFD0  38 A5 05 B4 */	addi r5, r5, Setter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue@l
-/* 8136FBD4 0003DFD4  38 C0 00 00 */	li r6, 0x0
-/* 8136FBD8 0003DFD8  7D 89 03 A6 */	mtctr r12
-/* 8136FBDC 0003DFDC  4E 80 04 21 */	bctrl
-/* 8136FBE0 0003DFE0  2C 03 00 00 */	cmpwi r3, 0x0
-/* 8136FBE4 0003DFE4  40 80 00 0C */	bge .L_8136FBF0
-/* 8136FBE8 0003DFE8  38 60 00 12 */	li r3, 0x12
-/* 8136FBEC 0003DFEC  48 00 00 30 */	b .L_8136FC1C
+/* 8136FBB8 | 80 CD A9 60 */	lwz r6, opera_callbacks__Q23www10wiisetting@sda21(r0)
+/* 8136FBBC | 3C 80 81 37 */	lis r4, Getter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue@ha
+/* 8136FBC0 | 3C A0 81 37 */	lis r5, Setter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue@ha
+/* 8136FBC4 | 38 E1 00 08 */	addi r7, r1, 0x8
+/* 8136FBC8 | 81 86 00 04 */	lwz r12, 0x4(r6)
+/* 8136FBCC | 38 84 FC 30 */	addi r4, r4, Getter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue@l
+/* 8136FBD0 | 38 A5 05 B4 */	addi r5, r5, Setter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue@l
+/* 8136FBD4 | 38 C0 00 00 */	li r6, 0x0
+/* 8136FBD8 | 7D 89 03 A6 */	mtctr r12
+/* 8136FBDC | 4E 80 04 21 */	bctrl
+/* 8136FBE0 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 8136FBE4 | 40 80 00 0C */	bge .L_8136FBF0
+/* 8136FBE8 | 38 60 00 12 */	li r3, 0x12
+/* 8136FBEC | 48 00 00 30 */	b .L_8136FC1C
 .L_8136FBF0:
-/* 8136FBF0 0003DFF0  38 A0 00 00 */	li r5, 0x0
-/* 8136FBF4 0003DFF4  3C 60 81 64 */	lis r3, lbl_8164415B@ha
-/* 8136FBF8 0003DFF8  90 BF 00 00 */	stw r5, 0x0(r31)
-/* 8136FBFC 0003DFFC  38 63 41 5B */	addi r3, r3, lbl_8164415B@l
-/* 8136FC00 0003E000  80 01 00 08 */	lwz r0, 0x8(r1)
-/* 8136FC04 0003E004  90 1F 00 08 */	stw r0, 0x8(r31)
-/* 8136FC08 0003E008  80 81 00 08 */	lwz r4, 0x8(r1)
-/* 8136FC0C 0003E00C  90 A4 00 00 */	stw r5, 0x0(r4)
-/* 8136FC10 0003E010  4C C6 31 82 */	crclr cr1eq
-/* 8136FC14 0003E014  48 1B EA 8D */	bl OSReport
-/* 8136FC18 0003E018  38 60 00 10 */	li r3, 0x10
+/* 8136FBF0 | 38 A0 00 00 */	li r5, 0x0
+/* 8136FBF4 | 3C 60 81 64 */	lis r3, lbl_8164415B@ha
+/* 8136FBF8 | 90 BF 00 00 */	stw r5, 0x0(r31)
+/* 8136FBFC | 38 63 41 5B */	addi r3, r3, lbl_8164415B@l
+/* 8136FC00 | 80 01 00 08 */	lwz r0, 0x8(r1)
+/* 8136FC04 | 90 1F 00 08 */	stw r0, 0x8(r31)
+/* 8136FC08 | 80 81 00 08 */	lwz r4, 0x8(r1)
+/* 8136FC0C | 90 A4 00 00 */	stw r5, 0x0(r4)
+/* 8136FC10 | 4C C6 31 82 */	crclr cr1eq
+/* 8136FC14 | 48 1B EA 8D */	bl OSReport
+/* 8136FC18 | 38 60 00 10 */	li r3, 0x10
 .L_8136FC1C:
-/* 8136FC1C 0003E01C  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 8136FC20 0003E020  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 8136FC24 0003E024  7C 08 03 A6 */	mtlr r0
-/* 8136FC28 0003E028  38 21 00 20 */	addi r1, r1, 0x20
-/* 8136FC2C 0003E02C  4E 80 00 20 */	blr
+/* 8136FC1C | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8136FC20 | 83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 8136FC24 | 7C 08 03 A6 */	mtlr r0
+/* 8136FC28 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 8136FC2C | 4E 80 00 20 */	blr
 .endfn ObjectConstructor___Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue
 
 # .text:0x260 | 0x8136FC30 | size: 0x984
 # www::wiisetting::Getter_(WWWJSPluginObj*, const char*, WWWJSPluginValue*)
 .fn Getter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue, global
-/* 8136FC30 0003E030  94 21 FF 30 */	stwu r1, -0xd0(r1)
-/* 8136FC34 0003E034  7C 08 02 A6 */	mflr r0
-/* 8136FC38 0003E038  90 01 00 D4 */	stw r0, 0xd4(r1)
-/* 8136FC3C 0003E03C  39 61 00 D0 */	addi r11, r1, 0xd0
-/* 8136FC40 0003E040  48 28 98 79 */	bl _savegpr_25
-/* 8136FC44 0003E044  3C 00 43 30 */	lis r0, 0x4330
-/* 8136FC48 0003E048  3F E0 81 64 */	lis r31, lbl_816440A0@ha
-/* 8136FC4C 0003E04C  7C 9E 23 78 */	mr r30, r4
-/* 8136FC50 0003E050  90 01 00 A0 */	stw r0, 0xa0(r1)
-/* 8136FC54 0003E054  3B FF 40 A0 */	addi r31, r31, lbl_816440A0@l
-/* 8136FC58 0003E058  7C 79 1B 78 */	mr r25, r3
-/* 8136FC5C 0003E05C  90 01 00 A8 */	stw r0, 0xa8(r1)
-/* 8136FC60 0003E060  7C BD 2B 78 */	mr r29, r5
-/* 8136FC64 0003E064  7F C3 F3 78 */	mr r3, r30
-/* 8136FC68 0003E068  38 9F 00 DA */	addi r4, r31, 0xda
-/* 8136FC6C 0003E06C  48 29 28 15 */	bl strcmp
-/* 8136FC70 0003E070  2C 03 00 00 */	cmpwi r3, 0x0
-/* 8136FC74 0003E074  40 82 00 60 */	bne .L_8136FCD4
-/* 8136FC78 0003E078  80 8D A9 60 */	lwz r4, opera_callbacks__Q23www10wiisetting@sda21(r0)
-/* 8136FC7C 0003E07C  3C C0 81 37 */	lis r6, wiiOSReport__Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue@ha
-/* 8136FC80 0003E080  38 C6 0A C0 */	addi r6, r6, wiiOSReport__Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue@l
-/* 8136FC84 0003E084  7F 23 CB 78 */	mr r3, r25
-/* 8136FC88 0003E088  81 84 00 00 */	lwz r12, 0x0(r4)
-/* 8136FC8C 0003E08C  7C C7 33 78 */	mr r7, r6
-/* 8136FC90 0003E090  39 41 00 10 */	addi r10, r1, 0x10
-/* 8136FC94 0003E094  38 80 00 00 */	li r4, 0x0
-/* 8136FC98 0003E098  38 A0 00 00 */	li r5, 0x0
-/* 8136FC9C 0003E09C  39 0D 82 DC */	li r8, lbl_8169631C@sda21
-/* 8136FCA0 0003E0A0  39 20 00 00 */	li r9, 0x0
-/* 8136FCA4 0003E0A4  7D 89 03 A6 */	mtctr r12
-/* 8136FCA8 0003E0A8  4E 80 04 21 */	bctrl
-/* 8136FCAC 0003E0AC  2C 03 00 00 */	cmpwi r3, 0x0
-/* 8136FCB0 0003E0B0  40 80 00 0C */	bge .L_8136FCBC
-/* 8136FCB4 0003E0B4  38 60 00 0A */	li r3, 0xa
-/* 8136FCB8 0003E0B8  48 00 08 E4 */	b .L_8137059C
+/* 8136FC30 | 94 21 FF 30 */	stwu r1, -0xd0(r1)
+/* 8136FC34 | 7C 08 02 A6 */	mflr r0
+/* 8136FC38 | 90 01 00 D4 */	stw r0, 0xd4(r1)
+/* 8136FC3C | 39 61 00 D0 */	addi r11, r1, 0xd0
+/* 8136FC40 | 48 28 98 79 */	bl _savegpr_25
+/* 8136FC44 | 3C 00 43 30 */	lis r0, 0x4330
+/* 8136FC48 | 3F E0 81 64 */	lis r31, lbl_816440A0@ha
+/* 8136FC4C | 7C 9E 23 78 */	mr r30, r4
+/* 8136FC50 | 90 01 00 A0 */	stw r0, 0xa0(r1)
+/* 8136FC54 | 3B FF 40 A0 */	addi r31, r31, lbl_816440A0@l
+/* 8136FC58 | 7C 79 1B 78 */	mr r25, r3
+/* 8136FC5C | 90 01 00 A8 */	stw r0, 0xa8(r1)
+/* 8136FC60 | 7C BD 2B 78 */	mr r29, r5
+/* 8136FC64 | 7F C3 F3 78 */	mr r3, r30
+/* 8136FC68 | 38 9F 00 DA */	addi r4, r31, 0xda
+/* 8136FC6C | 48 29 28 15 */	bl strcmp
+/* 8136FC70 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 8136FC74 | 40 82 00 60 */	bne .L_8136FCD4
+/* 8136FC78 | 80 8D A9 60 */	lwz r4, opera_callbacks__Q23www10wiisetting@sda21(r0)
+/* 8136FC7C | 3C C0 81 37 */	lis r6, wiiOSReport__Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue@ha
+/* 8136FC80 | 38 C6 0A C0 */	addi r6, r6, wiiOSReport__Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue@l
+/* 8136FC84 | 7F 23 CB 78 */	mr r3, r25
+/* 8136FC88 | 81 84 00 00 */	lwz r12, 0x0(r4)
+/* 8136FC8C | 7C C7 33 78 */	mr r7, r6
+/* 8136FC90 | 39 41 00 10 */	addi r10, r1, 0x10
+/* 8136FC94 | 38 80 00 00 */	li r4, 0x0
+/* 8136FC98 | 38 A0 00 00 */	li r5, 0x0
+/* 8136FC9C | 39 0D 82 DC */	li r8, lbl_8169631C@sda21
+/* 8136FCA0 | 39 20 00 00 */	li r9, 0x0
+/* 8136FCA4 | 7D 89 03 A6 */	mtctr r12
+/* 8136FCA8 | 4E 80 04 21 */	bctrl
+/* 8136FCAC | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 8136FCB0 | 40 80 00 0C */	bge .L_8136FCBC
+/* 8136FCB4 | 38 60 00 0A */	li r3, 0xa
+/* 8136FCB8 | 48 00 08 E4 */	b .L_8137059C
 .L_8136FCBC:
-/* 8136FCBC 0003E0BC  38 00 00 00 */	li r0, 0x0
-/* 8136FCC0 0003E0C0  38 60 00 07 */	li r3, 0x7
-/* 8136FCC4 0003E0C4  90 1D 00 00 */	stw r0, 0x0(r29)
-/* 8136FCC8 0003E0C8  80 01 00 10 */	lwz r0, 0x10(r1)
-/* 8136FCCC 0003E0CC  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FCD0 0003E0D0  48 00 08 CC */	b .L_8137059C
+/* 8136FCBC | 38 00 00 00 */	li r0, 0x0
+/* 8136FCC0 | 38 60 00 07 */	li r3, 0x7
+/* 8136FCC4 | 90 1D 00 00 */	stw r0, 0x0(r29)
+/* 8136FCC8 | 80 01 00 10 */	lwz r0, 0x10(r1)
+/* 8136FCCC | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FCD0 | 48 00 08 CC */	b .L_8137059C
 .L_8136FCD4:
-/* 8136FCD4 0003E0D4  7F C3 F3 78 */	mr r3, r30
-/* 8136FCD8 0003E0D8  38 9F 00 E7 */	addi r4, r31, 0xe7
-/* 8136FCDC 0003E0DC  48 29 27 A5 */	bl strcmp
-/* 8136FCE0 0003E0E0  2C 03 00 00 */	cmpwi r3, 0x0
-/* 8136FCE4 0003E0E4  40 82 00 60 */	bne .L_8136FD44
-/* 8136FCE8 0003E0E8  80 8D A9 60 */	lwz r4, opera_callbacks__Q23www10wiisetting@sda21(r0)
-/* 8136FCEC 0003E0EC  3C C0 81 37 */	lis r6, wiiWriteBack__Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue@ha
-/* 8136FCF0 0003E0F0  38 C6 0B 1C */	addi r6, r6, wiiWriteBack__Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue@l
-/* 8136FCF4 0003E0F4  7F 23 CB 78 */	mr r3, r25
-/* 8136FCF8 0003E0F8  81 84 00 00 */	lwz r12, 0x0(r4)
-/* 8136FCFC 0003E0FC  7C C7 33 78 */	mr r7, r6
-/* 8136FD00 0003E100  39 41 00 0C */	addi r10, r1, 0xc
-/* 8136FD04 0003E104  38 80 00 00 */	li r4, 0x0
-/* 8136FD08 0003E108  38 A0 00 00 */	li r5, 0x0
-/* 8136FD0C 0003E10C  39 0D 82 DC */	li r8, lbl_8169631C@sda21
-/* 8136FD10 0003E110  39 20 00 00 */	li r9, 0x0
-/* 8136FD14 0003E114  7D 89 03 A6 */	mtctr r12
-/* 8136FD18 0003E118  4E 80 04 21 */	bctrl
-/* 8136FD1C 0003E11C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 8136FD20 0003E120  40 80 00 0C */	bge .L_8136FD2C
-/* 8136FD24 0003E124  38 60 00 0A */	li r3, 0xa
-/* 8136FD28 0003E128  48 00 08 74 */	b .L_8137059C
+/* 8136FCD4 | 7F C3 F3 78 */	mr r3, r30
+/* 8136FCD8 | 38 9F 00 E7 */	addi r4, r31, 0xe7
+/* 8136FCDC | 48 29 27 A5 */	bl strcmp
+/* 8136FCE0 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 8136FCE4 | 40 82 00 60 */	bne .L_8136FD44
+/* 8136FCE8 | 80 8D A9 60 */	lwz r4, opera_callbacks__Q23www10wiisetting@sda21(r0)
+/* 8136FCEC | 3C C0 81 37 */	lis r6, wiiWriteBack__Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue@ha
+/* 8136FCF0 | 38 C6 0B 1C */	addi r6, r6, wiiWriteBack__Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue@l
+/* 8136FCF4 | 7F 23 CB 78 */	mr r3, r25
+/* 8136FCF8 | 81 84 00 00 */	lwz r12, 0x0(r4)
+/* 8136FCFC | 7C C7 33 78 */	mr r7, r6
+/* 8136FD00 | 39 41 00 0C */	addi r10, r1, 0xc
+/* 8136FD04 | 38 80 00 00 */	li r4, 0x0
+/* 8136FD08 | 38 A0 00 00 */	li r5, 0x0
+/* 8136FD0C | 39 0D 82 DC */	li r8, lbl_8169631C@sda21
+/* 8136FD10 | 39 20 00 00 */	li r9, 0x0
+/* 8136FD14 | 7D 89 03 A6 */	mtctr r12
+/* 8136FD18 | 4E 80 04 21 */	bctrl
+/* 8136FD1C | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 8136FD20 | 40 80 00 0C */	bge .L_8136FD2C
+/* 8136FD24 | 38 60 00 0A */	li r3, 0xa
+/* 8136FD28 | 48 00 08 74 */	b .L_8137059C
 .L_8136FD2C:
-/* 8136FD2C 0003E12C  38 00 00 00 */	li r0, 0x0
-/* 8136FD30 0003E130  38 60 00 07 */	li r3, 0x7
-/* 8136FD34 0003E134  90 1D 00 00 */	stw r0, 0x0(r29)
-/* 8136FD38 0003E138  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8136FD3C 0003E13C  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FD40 0003E140  48 00 08 5C */	b .L_8137059C
+/* 8136FD2C | 38 00 00 00 */	li r0, 0x0
+/* 8136FD30 | 38 60 00 07 */	li r3, 0x7
+/* 8136FD34 | 90 1D 00 00 */	stw r0, 0x0(r29)
+/* 8136FD38 | 80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8136FD3C | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FD40 | 48 00 08 5C */	b .L_8137059C
 .L_8136FD44:
-/* 8136FD44 0003E144  88 0D A9 54 */	lbz r0, lbl_81698994@sda21(r0)
-/* 8136FD48 0003E148  28 00 00 08 */	cmplwi r0, 0x8
-/* 8136FD4C 0003E14C  41 82 00 34 */	beq .L_8136FD80
-/* 8136FD50 0003E150  28 00 00 2F */	cmplwi r0, 0x2f
-/* 8136FD54 0003E154  41 82 00 2C */	beq .L_8136FD80
-/* 8136FD58 0003E158  28 00 00 3C */	cmplwi r0, 0x3c
-/* 8136FD5C 0003E15C  41 82 00 24 */	beq .L_8136FD80
-/* 8136FD60 0003E160  28 00 00 0B */	cmplwi r0, 0xb
-/* 8136FD64 0003E164  41 82 00 1C */	beq .L_8136FD80
-/* 8136FD68 0003E168  28 00 00 30 */	cmplwi r0, 0x30
-/* 8136FD6C 0003E16C  41 82 00 14 */	beq .L_8136FD80
-/* 8136FD70 0003E170  28 00 00 2D */	cmplwi r0, 0x2d
-/* 8136FD74 0003E174  41 82 00 0C */	beq .L_8136FD80
-/* 8136FD78 0003E178  38 00 00 00 */	li r0, 0x0
-/* 8136FD7C 0003E17C  98 0D A9 54 */	stb r0, lbl_81698994@sda21(r0)
+/* 8136FD44 | 88 0D A9 54 */	lbz r0, lbl_81698994@sda21(r0)
+/* 8136FD48 | 28 00 00 08 */	cmplwi r0, 0x8
+/* 8136FD4C | 41 82 00 34 */	beq .L_8136FD80
+/* 8136FD50 | 28 00 00 2F */	cmplwi r0, 0x2f
+/* 8136FD54 | 41 82 00 2C */	beq .L_8136FD80
+/* 8136FD58 | 28 00 00 3C */	cmplwi r0, 0x3c
+/* 8136FD5C | 41 82 00 24 */	beq .L_8136FD80
+/* 8136FD60 | 28 00 00 0B */	cmplwi r0, 0xb
+/* 8136FD64 | 41 82 00 1C */	beq .L_8136FD80
+/* 8136FD68 | 28 00 00 30 */	cmplwi r0, 0x30
+/* 8136FD6C | 41 82 00 14 */	beq .L_8136FD80
+/* 8136FD70 | 28 00 00 2D */	cmplwi r0, 0x2d
+/* 8136FD74 | 41 82 00 0C */	beq .L_8136FD80
+/* 8136FD78 | 38 00 00 00 */	li r0, 0x0
+/* 8136FD7C | 98 0D A9 54 */	stb r0, lbl_81698994@sda21(r0)
 .L_8136FD80:
-/* 8136FD80 0003E180  3B 20 00 08 */	li r25, 0x8
-/* 8136FD84 0003E184  48 1C 5E FD */	bl OSGetTime
-/* 8136FD88 0003E188  38 A1 00 14 */	addi r5, r1, 0x14
-/* 8136FD8C 0003E18C  48 1C 61 D9 */	bl OSTicksToCalendarTime
-/* 8136FD90 0003E190  3C 60 81 64 */	lis r3, lbl_81644834@ha
-/* 8136FD94 0003E194  38 00 00 0C */	li r0, 0xc
-/* 8136FD98 0003E198  38 63 48 34 */	addi r3, r3, lbl_81644834@l
-/* 8136FD9C 0003E19C  38 A1 00 38 */	addi r5, r1, 0x38
-/* 8136FDA0 0003E1A0  38 83 FF FC */	subi r4, r3, 0x4
-/* 8136FDA4 0003E1A4  7C 09 03 A6 */	mtctr r0
+/* 8136FD80 | 3B 20 00 08 */	li r25, 0x8
+/* 8136FD84 | 48 1C 5E FD */	bl OSGetTime
+/* 8136FD88 | 38 A1 00 14 */	addi r5, r1, 0x14
+/* 8136FD8C | 48 1C 61 D9 */	bl OSTicksToCalendarTime
+/* 8136FD90 | 3C 60 81 64 */	lis r3, lbl_81644834@ha
+/* 8136FD94 | 38 00 00 0C */	li r0, 0xc
+/* 8136FD98 | 38 63 48 34 */	addi r3, r3, lbl_81644834@l
+/* 8136FD9C | 38 A1 00 38 */	addi r5, r1, 0x38
+/* 8136FDA0 | 38 83 FF FC */	subi r4, r3, 0x4
+/* 8136FDA4 | 7C 09 03 A6 */	mtctr r0
 .L_8136FDA8:
-/* 8136FDA8 0003E1A8  80 64 00 04 */	lwz r3, 0x4(r4)
-/* 8136FDAC 0003E1AC  84 04 00 08 */	lwzu r0, 0x8(r4)
-/* 8136FDB0 0003E1B0  90 65 00 04 */	stw r3, 0x4(r5)
-/* 8136FDB4 0003E1B4  94 05 00 08 */	stwu r0, 0x8(r5)
-/* 8136FDB8 0003E1B8  42 00 FF F0 */	bdnz .L_8136FDA8
-/* 8136FDBC 0003E1BC  80 04 00 04 */	lwz r0, 0x4(r4)
-/* 8136FDC0 0003E1C0  3B 61 00 3C */	addi r27, r1, 0x3c
-/* 8136FDC4 0003E1C4  3B 40 00 00 */	li r26, 0x0
-/* 8136FDC8 0003E1C8  3B 80 00 00 */	li r28, 0x0
-/* 8136FDCC 0003E1CC  90 05 00 04 */	stw r0, 0x4(r5)
+/* 8136FDA8 | 80 64 00 04 */	lwz r3, 0x4(r4)
+/* 8136FDAC | 84 04 00 08 */	lwzu r0, 0x8(r4)
+/* 8136FDB0 | 90 65 00 04 */	stw r3, 0x4(r5)
+/* 8136FDB4 | 94 05 00 08 */	stwu r0, 0x8(r5)
+/* 8136FDB8 | 42 00 FF F0 */	bdnz .L_8136FDA8
+/* 8136FDBC | 80 04 00 04 */	lwz r0, 0x4(r4)
+/* 8136FDC0 | 3B 61 00 3C */	addi r27, r1, 0x3c
+/* 8136FDC4 | 3B 40 00 00 */	li r26, 0x0
+/* 8136FDC8 | 3B 80 00 00 */	li r28, 0x0
+/* 8136FDCC | 90 05 00 04 */	stw r0, 0x4(r5)
 .L_8136FDD0:
-/* 8136FDD0 0003E1D0  7C 9B E0 2E */	lwzx r4, r27, r28
-/* 8136FDD4 0003E1D4  7F C3 F3 78 */	mr r3, r30
-/* 8136FDD8 0003E1D8  48 29 26 A9 */	bl strcmp
-/* 8136FDDC 0003E1DC  2C 03 00 00 */	cmpwi r3, 0x0
-/* 8136FDE0 0003E1E0  40 82 00 0C */	bne .L_8136FDEC
-/* 8136FDE4 0003E1E4  38 9A 00 01 */	addi r4, r26, 0x1
-/* 8136FDE8 0003E1E8  48 00 00 18 */	b .L_8136FE00
+/* 8136FDD0 | 7C 9B E0 2E */	lwzx r4, r27, r28
+/* 8136FDD4 | 7F C3 F3 78 */	mr r3, r30
+/* 8136FDD8 | 48 29 26 A9 */	bl strcmp
+/* 8136FDDC | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 8136FDE0 | 40 82 00 0C */	bne .L_8136FDEC
+/* 8136FDE4 | 38 9A 00 01 */	addi r4, r26, 0x1
+/* 8136FDE8 | 48 00 00 18 */	b .L_8136FE00
 .L_8136FDEC:
-/* 8136FDEC 0003E1EC  3B 5A 00 01 */	addi r26, r26, 0x1
-/* 8136FDF0 0003E1F0  3B 9C 00 04 */	addi r28, r28, 0x4
-/* 8136FDF4 0003E1F4  2C 1A 00 18 */	cmpwi r26, 0x18
-/* 8136FDF8 0003E1F8  41 80 FF D8 */	blt .L_8136FDD0
-/* 8136FDFC 0003E1FC  38 80 FF FF */	li r4, -0x1
+/* 8136FDEC | 3B 5A 00 01 */	addi r26, r26, 0x1
+/* 8136FDF0 | 3B 9C 00 04 */	addi r28, r28, 0x4
+/* 8136FDF4 | 2C 1A 00 18 */	cmpwi r26, 0x18
+/* 8136FDF8 | 41 80 FF D8 */	blt .L_8136FDD0
+/* 8136FDFC | 38 80 FF FF */	li r4, -0x1
 .L_8136FE00:
-/* 8136FE00 0003E200  2C 04 00 00 */	cmpwi r4, 0x0
-/* 8136FE04 0003E204  41 80 02 7C */	blt .L_81370080
-/* 8136FE08 0003E208  38 00 00 01 */	li r0, 0x1
-/* 8136FE0C 0003E20C  28 04 00 18 */	cmplwi r4, 0x18
-/* 8136FE10 0003E210  90 1D 00 00 */	stw r0, 0x0(r29)
-/* 8136FE14 0003E214  41 81 02 64 */	bgt .L_81370078
-/* 8136FE18 0003E218  3C 60 81 64 */	lis r3, jumptable_816442CC@ha
-/* 8136FE1C 0003E21C  54 80 10 3A */	slwi r0, r4, 2
-/* 8136FE20 0003E220  38 63 42 CC */	addi r3, r3, jumptable_816442CC@l
-/* 8136FE24 0003E224  7C 63 00 2E */	lwzx r3, r3, r0
-/* 8136FE28 0003E228  7C 69 03 A6 */	mtctr r3
-/* 8136FE2C 0003E22C  4E 80 04 20 */	bctr
+/* 8136FE00 | 2C 04 00 00 */	cmpwi r4, 0x0
+/* 8136FE04 | 41 80 02 7C */	blt .L_81370080
+/* 8136FE08 | 38 00 00 01 */	li r0, 0x1
+/* 8136FE0C | 28 04 00 18 */	cmplwi r4, 0x18
+/* 8136FE10 | 90 1D 00 00 */	stw r0, 0x0(r29)
+/* 8136FE14 | 41 81 02 64 */	bgt .L_81370078
+/* 8136FE18 | 3C 60 81 64 */	lis r3, jumptable_816442CC@ha
+/* 8136FE1C | 54 80 10 3A */	slwi r0, r4, 2
+/* 8136FE20 | 38 63 42 CC */	addi r3, r3, jumptable_816442CC@l
+/* 8136FE24 | 7C 63 00 2E */	lwzx r3, r3, r0
+/* 8136FE28 | 7C 69 03 A6 */	mtctr r3
+/* 8136FE2C | 4E 80 04 20 */	bctr
 .L_8136FE30:
-/* 8136FE30 0003E230  48 08 B9 39 */	bl getMacAddr__Q33ipl3ncd10NCDSettingFv
-/* 8136FE34 0003E234  90 7D 00 08 */	stw r3, 0x8(r29)
-/* 8136FE38 0003E238  48 00 02 40 */	b .L_81370078
+/* 8136FE30 | 48 08 B9 39 */	bl getMacAddr__Q33ipl3ncd10NCDSettingFv
+/* 8136FE34 | 90 7D 00 08 */	stw r3, 0x8(r29)
+/* 8136FE38 | 48 00 02 40 */	b .L_81370078
 .L_8136FE3C:
-/* 8136FE3C 0003E23C  4B FE 70 0D */	bl getLANMacAddrUtf8__Q33ipl6socket13SocketSettingFv
-/* 8136FE40 0003E240  90 7D 00 08 */	stw r3, 0x8(r29)
-/* 8136FE44 0003E244  48 00 02 34 */	b .L_81370078
+/* 8136FE3C | 4B FE 70 0D */	bl getLANMacAddrUtf8__Q33ipl6socket13SocketSettingFv
+/* 8136FE40 | 90 7D 00 08 */	stw r3, 0x8(r29)
+/* 8136FE44 | 48 00 02 34 */	b .L_81370078
 .L_8136FE48:
-/* 8136FE48 0003E248  80 0D A9 5C */	lwz r0, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FE4C 0003E24C  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FE50 0003E250  48 00 02 28 */	b .L_81370078
+/* 8136FE48 | 80 0D A9 5C */	lwz r0, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FE4C | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FE50 | 48 00 02 28 */	b .L_81370078
 .L_8136FE54:
-/* 8136FE54 0003E254  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FE58 0003E258  38 03 00 60 */	addi r0, r3, 0x60
-/* 8136FE5C 0003E25C  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FE60 0003E260  48 00 02 18 */	b .L_81370078
+/* 8136FE54 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FE58 | 38 03 00 60 */	addi r0, r3, 0x60
+/* 8136FE5C | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FE60 | 48 00 02 18 */	b .L_81370078
 .L_8136FE64:
-/* 8136FE64 0003E264  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FE68 0003E268  38 03 00 C1 */	addi r0, r3, 0xc1
-/* 8136FE6C 0003E26C  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FE70 0003E270  48 00 02 08 */	b .L_81370078
+/* 8136FE64 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FE68 | 38 03 00 C1 */	addi r0, r3, 0xc1
+/* 8136FE6C | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FE70 | 48 00 02 08 */	b .L_81370078
 .L_8136FE74:
-/* 8136FE74 0003E274  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FE78 0003E278  38 03 00 D1 */	addi r0, r3, 0xd1
-/* 8136FE7C 0003E27C  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FE80 0003E280  48 00 01 F8 */	b .L_81370078
+/* 8136FE74 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FE78 | 38 03 00 D1 */	addi r0, r3, 0xd1
+/* 8136FE7C | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FE80 | 48 00 01 F8 */	b .L_81370078
 .L_8136FE84:
-/* 8136FE84 0003E284  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FE88 0003E288  38 03 00 E1 */	addi r0, r3, 0xe1
-/* 8136FE8C 0003E28C  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FE90 0003E290  48 00 01 E8 */	b .L_81370078
+/* 8136FE84 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FE88 | 38 03 00 E1 */	addi r0, r3, 0xe1
+/* 8136FE8C | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FE90 | 48 00 01 E8 */	b .L_81370078
 .L_8136FE94:
-/* 8136FE94 0003E294  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FE98 0003E298  38 03 00 F1 */	addi r0, r3, 0xf1
-/* 8136FE9C 0003E29C  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FEA0 0003E2A0  48 00 01 D8 */	b .L_81370078
+/* 8136FE94 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FE98 | 38 03 00 F1 */	addi r0, r3, 0xf1
+/* 8136FE9C | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FEA0 | 48 00 01 D8 */	b .L_81370078
 .L_8136FEA4:
-/* 8136FEA4 0003E2A4  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FEA8 0003E2A8  38 03 01 01 */	addi r0, r3, 0x101
-/* 8136FEAC 0003E2AC  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FEB0 0003E2B0  48 00 01 C8 */	b .L_81370078
+/* 8136FEA4 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FEA8 | 38 03 01 01 */	addi r0, r3, 0x101
+/* 8136FEAC | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FEB0 | 48 00 01 C8 */	b .L_81370078
 .L_8136FEB4:
-/* 8136FEB4 0003E2B4  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FEB8 0003E2B8  38 03 01 11 */	addi r0, r3, 0x111
-/* 8136FEBC 0003E2BC  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FEC0 0003E2C0  48 00 01 B8 */	b .L_81370078
+/* 8136FEB4 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FEB8 | 38 03 01 11 */	addi r0, r3, 0x111
+/* 8136FEBC | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FEC0 | 48 00 01 B8 */	b .L_81370078
 .L_8136FEC4:
-/* 8136FEC4 0003E2C4  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FEC8 0003E2C8  38 03 04 12 */	addi r0, r3, 0x412
-/* 8136FECC 0003E2CC  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FED0 0003E2D0  48 00 01 A8 */	b .L_81370078
+/* 8136FEC4 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FEC8 | 38 03 04 12 */	addi r0, r3, 0x412
+/* 8136FECC | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FED0 | 48 00 01 A8 */	b .L_81370078
 .L_8136FED4:
-/* 8136FED4 0003E2D4  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FED8 0003E2D8  38 03 04 18 */	addi r0, r3, 0x418
-/* 8136FEDC 0003E2DC  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FEE0 0003E2E0  48 00 01 98 */	b .L_81370078
+/* 8136FED4 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FED8 | 38 03 04 18 */	addi r0, r3, 0x418
+/* 8136FEDC | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FEE0 | 48 00 01 98 */	b .L_81370078
 .L_8136FEE4:
-/* 8136FEE4 0003E2E4  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FEE8 0003E2E8  38 03 04 79 */	addi r0, r3, 0x479
-/* 8136FEEC 0003E2EC  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FEF0 0003E2F0  48 00 01 88 */	b .L_81370078
+/* 8136FEE4 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FEE8 | 38 03 04 79 */	addi r0, r3, 0x479
+/* 8136FEEC | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FEF0 | 48 00 01 88 */	b .L_81370078
 .L_8136FEF4:
-/* 8136FEF4 0003E2F4  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FEF8 0003E2F8  38 03 04 DA */	addi r0, r3, 0x4da
-/* 8136FEFC 0003E2FC  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FF00 0003E300  48 00 01 78 */	b .L_81370078
+/* 8136FEF4 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FEF8 | 38 03 04 DA */	addi r0, r3, 0x4da
+/* 8136FEFC | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FF00 | 48 00 01 78 */	b .L_81370078
 .L_8136FF04:
-/* 8136FF04 0003E304  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FF08 0003E308  38 03 04 EE */	addi r0, r3, 0x4ee
-/* 8136FF0C 0003E30C  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FF10 0003E310  48 00 01 68 */	b .L_81370078
+/* 8136FF04 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FF08 | 38 03 04 EE */	addi r0, r3, 0x4ee
+/* 8136FF0C | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FF10 | 48 00 01 68 */	b .L_81370078
 .L_8136FF14:
-/* 8136FF14 0003E314  48 08 C4 61 */	bl fn_813FC374
-/* 8136FF18 0003E318  90 7D 00 08 */	stw r3, 0x8(r29)
-/* 8136FF1C 0003E31C  48 00 01 5C */	b .L_81370078
+/* 8136FF14 | 48 08 C4 61 */	bl fn_813FC374
+/* 8136FF18 | 90 7D 00 08 */	stw r3, 0x8(r29)
+/* 8136FF1C | 48 00 01 5C */	b .L_81370078
 .L_8136FF20:
-/* 8136FF20 0003E320  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FF24 0003E324  38 03 05 FE */	addi r0, r3, 0x5fe
-/* 8136FF28 0003E328  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FF2C 0003E32C  48 00 01 4C */	b .L_81370078
+/* 8136FF20 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FF24 | 38 03 05 FE */	addi r0, r3, 0x5fe
+/* 8136FF28 | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FF2C | 48 00 01 4C */	b .L_81370078
 .L_8136FF30:
-/* 8136FF30 0003E330  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FF34 0003E334  38 03 06 0E */	addi r0, r3, 0x60e
-/* 8136FF38 0003E338  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 8136FF3C 0003E33C  48 00 01 3C */	b .L_81370078
+/* 8136FF30 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FF34 | 38 03 06 0E */	addi r0, r3, 0x60e
+/* 8136FF38 | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8136FF3C | 48 00 01 3C */	b .L_81370078
 .L_8136FF40:
-/* 8136FF40 0003E340  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FF44 0003E344  38 80 00 00 */	li r4, 0x0
-/* 8136FF48 0003E348  38 A0 00 42 */	li r5, 0x42
-/* 8136FF4C 0003E34C  38 63 05 BC */	addi r3, r3, 0x5bc
-/* 8136FF50 0003E350  4B FC 03 E5 */	bl memset
-/* 8136FF54 0003E354  48 08 B6 19 */	bl fn_813FB56C
-/* 8136FF58 0003E358  88 8D A9 55 */	lbz r4, lbl_81698995@sda21(r0)
-/* 8136FF5C 0003E35C  54 65 04 3E */	clrlwi r5, r3, 16
-/* 8136FF60 0003E360  38 7F 00 F1 */	addi r3, r31, 0xf1
-/* 8136FF64 0003E364  4C C6 31 82 */	crclr cr1eq
-/* 8136FF68 0003E368  48 1B E7 39 */	bl OSReport
-/* 8136FF6C 0003E36C  48 08 B6 01 */	bl fn_813FB56C
-/* 8136FF70 0003E370  88 0D A9 55 */	lbz r0, lbl_81698995@sda21(r0)
-/* 8136FF74 0003E374  54 63 04 3E */	clrlwi r3, r3, 16
-/* 8136FF78 0003E378  7C 00 18 00 */	cmpw r0, r3
-/* 8136FF7C 0003E37C  40 82 00 6C */	bne .L_8136FFE8
-/* 8136FF80 0003E380  48 08 B7 35 */	bl fn_813FB6B4
-/* 8136FF84 0003E384  54 64 04 3E */	clrlwi r4, r3, 16
-/* 8136FF88 0003E388  38 7F 00 FD */	addi r3, r31, 0xfd
-/* 8136FF8C 0003E38C  4C C6 31 82 */	crclr cr1eq
-/* 8136FF90 0003E390  48 1B E7 11 */	bl OSReport
-/* 8136FF94 0003E394  3B 20 00 00 */	li r25, 0x0
-/* 8136FF98 0003E398  3B 60 00 2A */	li r27, 0x2a
-/* 8136FF9C 0003E39C  48 00 00 14 */	b .L_8136FFB0
+/* 8136FF40 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FF44 | 38 80 00 00 */	li r4, 0x0
+/* 8136FF48 | 38 A0 00 42 */	li r5, 0x42
+/* 8136FF4C | 38 63 05 BC */	addi r3, r3, 0x5bc
+/* 8136FF50 | 4B FC 03 E5 */	bl memset
+/* 8136FF54 | 48 08 B6 19 */	bl fn_813FB56C
+/* 8136FF58 | 88 8D A9 55 */	lbz r4, lbl_81698995@sda21(r0)
+/* 8136FF5C | 54 65 04 3E */	clrlwi r5, r3, 16
+/* 8136FF60 | 38 7F 00 F1 */	addi r3, r31, 0xf1
+/* 8136FF64 | 4C C6 31 82 */	crclr cr1eq
+/* 8136FF68 | 48 1B E7 39 */	bl OSReport
+/* 8136FF6C | 48 08 B6 01 */	bl fn_813FB56C
+/* 8136FF70 | 88 0D A9 55 */	lbz r0, lbl_81698995@sda21(r0)
+/* 8136FF74 | 54 63 04 3E */	clrlwi r3, r3, 16
+/* 8136FF78 | 7C 00 18 00 */	cmpw r0, r3
+/* 8136FF7C | 40 82 00 6C */	bne .L_8136FFE8
+/* 8136FF80 | 48 08 B7 35 */	bl fn_813FB6B4
+/* 8136FF84 | 54 64 04 3E */	clrlwi r4, r3, 16
+/* 8136FF88 | 38 7F 00 FD */	addi r3, r31, 0xfd
+/* 8136FF8C | 4C C6 31 82 */	crclr cr1eq
+/* 8136FF90 | 48 1B E7 11 */	bl OSReport
+/* 8136FF94 | 3B 20 00 00 */	li r25, 0x0
+/* 8136FF98 | 3B 60 00 2A */	li r27, 0x2a
+/* 8136FF9C | 48 00 00 14 */	b .L_8136FFB0
 .L_8136FFA0:
-/* 8136FFA0 0003E3A0  80 0D A9 5C */	lwz r0, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FFA4 0003E3A4  7C 60 CA 14 */	add r3, r0, r25
-/* 8136FFA8 0003E3A8  3B 39 00 01 */	addi r25, r25, 0x1
-/* 8136FFAC 0003E3AC  9B 63 05 BC */	stb r27, 0x5bc(r3)
+/* 8136FFA0 | 80 0D A9 5C */	lwz r0, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FFA4 | 7C 60 CA 14 */	add r3, r0, r25
+/* 8136FFA8 | 3B 39 00 01 */	addi r25, r25, 0x1
+/* 8136FFAC | 9B 63 05 BC */	stb r27, 0x5bc(r3)
 .L_8136FFB0:
-/* 8136FFB0 0003E3B0  48 08 B7 05 */	bl fn_813FB6B4
-/* 8136FFB4 0003E3B4  54 60 04 3E */	clrlwi r0, r3, 16
-/* 8136FFB8 0003E3B8  7C 19 00 00 */	cmpw r25, r0
-/* 8136FFBC 0003E3BC  41 80 FF E4 */	blt .L_8136FFA0
-/* 8136FFC0 0003E3C0  2C 19 00 20 */	cmpwi r25, 0x20
-/* 8136FFC4 0003E3C4  40 81 00 38 */	ble .L_8136FFFC
-/* 8136FFC8 0003E3C8  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FFCC 0003E3CC  38 00 00 0A */	li r0, 0xa
-/* 8136FFD0 0003E3D0  38 80 00 2A */	li r4, 0x2a
-/* 8136FFD4 0003E3D4  98 03 05 DC */	stb r0, 0x5dc(r3)
-/* 8136FFD8 0003E3D8  80 0D A9 5C */	lwz r0, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FFDC 0003E3DC  7C 60 CA 14 */	add r3, r0, r25
-/* 8136FFE0 0003E3E0  98 83 05 BC */	stb r4, 0x5bc(r3)
-/* 8136FFE4 0003E3E4  48 00 00 18 */	b .L_8136FFFC
+/* 8136FFB0 | 48 08 B7 05 */	bl fn_813FB6B4
+/* 8136FFB4 | 54 60 04 3E */	clrlwi r0, r3, 16
+/* 8136FFB8 | 7C 19 00 00 */	cmpw r25, r0
+/* 8136FFBC | 41 80 FF E4 */	blt .L_8136FFA0
+/* 8136FFC0 | 2C 19 00 20 */	cmpwi r25, 0x20
+/* 8136FFC4 | 40 81 00 38 */	ble .L_8136FFFC
+/* 8136FFC8 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FFCC | 38 00 00 0A */	li r0, 0xa
+/* 8136FFD0 | 38 80 00 2A */	li r4, 0x2a
+/* 8136FFD4 | 98 03 05 DC */	stb r0, 0x5dc(r3)
+/* 8136FFD8 | 80 0D A9 5C */	lwz r0, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FFDC | 7C 60 CA 14 */	add r3, r0, r25
+/* 8136FFE0 | 98 83 05 BC */	stb r4, 0x5bc(r3)
+/* 8136FFE4 | 48 00 00 18 */	b .L_8136FFFC
 .L_8136FFE8:
-/* 8136FFE8 0003E3E8  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8136FFEC 0003E3EC  38 80 00 00 */	li r4, 0x0
-/* 8136FFF0 0003E3F0  38 A0 00 41 */	li r5, 0x41
-/* 8136FFF4 0003E3F4  38 63 00 1F */	addi r3, r3, 0x1f
-/* 8136FFF8 0003E3F8  4B FC 03 3D */	bl memset
+/* 8136FFE8 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8136FFEC | 38 80 00 00 */	li r4, 0x0
+/* 8136FFF0 | 38 A0 00 41 */	li r5, 0x41
+/* 8136FFF4 | 38 63 00 1F */	addi r3, r3, 0x1f
+/* 8136FFF8 | 4B FC 03 3D */	bl memset
 .L_8136FFFC:
-/* 8136FFFC 0003E3FC  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 81370000 0003E400  38 03 05 BC */	addi r0, r3, 0x5bc
-/* 81370004 0003E404  90 1D 00 08 */	stw r0, 0x8(r29)
-/* 81370008 0003E408  48 00 00 70 */	b .L_81370078
+/* 8136FFFC | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 81370000 | 38 03 05 BC */	addi r0, r3, 0x5bc
+/* 81370004 | 90 1D 00 08 */	stw r0, 0x8(r29)
+/* 81370008 | 48 00 00 70 */	b .L_81370078
 .L_8137000C:
-/* 8137000C 0003E40C  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 81370010 0003E410  38 80 00 00 */	li r4, 0x0
-/* 81370014 0003E414  38 A0 00 42 */	li r5, 0x42
-/* 81370018 0003E418  38 63 05 BC */	addi r3, r3, 0x5bc
-/* 8137001C 0003E41C  4B FC 03 19 */	bl memset
-/* 81370020 0003E420  3B 40 00 00 */	li r26, 0x0
-/* 81370024 0003E424  3B 60 00 2A */	li r27, 0x2a
-/* 81370028 0003E428  48 00 00 10 */	b .L_81370038
+/* 8137000C | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 81370010 | 38 80 00 00 */	li r4, 0x0
+/* 81370014 | 38 A0 00 42 */	li r5, 0x42
+/* 81370018 | 38 63 05 BC */	addi r3, r3, 0x5bc
+/* 8137001C | 4B FC 03 19 */	bl memset
+/* 81370020 | 3B 40 00 00 */	li r26, 0x0
+/* 81370024 | 3B 60 00 2A */	li r27, 0x2a
+/* 81370028 | 48 00 00 10 */	b .L_81370038
 .L_8137002C:
-/* 8137002C 0003E42C  7C 79 D2 14 */	add r3, r25, r26
-/* 81370030 0003E430  3B 5A 00 01 */	addi r26, r26, 0x1
-/* 81370034 0003E434  9B 63 05 BC */	stb r27, 0x5bc(r3)
+/* 8137002C | 7C 79 D2 14 */	add r3, r25, r26
+/* 81370030 | 3B 5A 00 01 */	addi r26, r26, 0x1
+/* 81370034 | 9B 63 05 BC */	stb r27, 0x5bc(r3)
 .L_81370038:
-/* 81370038 0003E438  83 2D A9 5C */	lwz r25, pString__Q23www10wiisetting@sda21(r0)
-/* 8137003C 0003E43C  38 79 00 1F */	addi r3, r25, 0x1f
-/* 81370040 0003E440  48 28 8E BD */	bl strlen
-/* 81370044 0003E444  7C 1A 18 40 */	cmplw r26, r3
-/* 81370048 0003E448  41 80 FF E4 */	blt .L_8137002C
-/* 8137004C 0003E44C  2C 1A 00 20 */	cmpwi r26, 0x20
-/* 81370050 0003E450  40 81 00 1C */	ble .L_8137006C
-/* 81370054 0003E454  38 00 00 0A */	li r0, 0xa
-/* 81370058 0003E458  38 80 00 2A */	li r4, 0x2a
-/* 8137005C 0003E45C  98 19 05 DC */	stb r0, 0x5dc(r25)
-/* 81370060 0003E460  80 0D A9 5C */	lwz r0, pString__Q23www10wiisetting@sda21(r0)
-/* 81370064 0003E464  7C 60 D2 14 */	add r3, r0, r26
-/* 81370068 0003E468  98 83 05 BC */	stb r4, 0x5bc(r3)
+/* 81370038 | 83 2D A9 5C */	lwz r25, pString__Q23www10wiisetting@sda21(r0)
+/* 8137003C | 38 79 00 1F */	addi r3, r25, 0x1f
+/* 81370040 | 48 28 8E BD */	bl strlen
+/* 81370044 | 7C 1A 18 40 */	cmplw r26, r3
+/* 81370048 | 41 80 FF E4 */	blt .L_8137002C
+/* 8137004C | 2C 1A 00 20 */	cmpwi r26, 0x20
+/* 81370050 | 40 81 00 1C */	ble .L_8137006C
+/* 81370054 | 38 00 00 0A */	li r0, 0xa
+/* 81370058 | 38 80 00 2A */	li r4, 0x2a
+/* 8137005C | 98 19 05 DC */	stb r0, 0x5dc(r25)
+/* 81370060 | 80 0D A9 5C */	lwz r0, pString__Q23www10wiisetting@sda21(r0)
+/* 81370064 | 7C 60 D2 14 */	add r3, r0, r26
+/* 81370068 | 98 83 05 BC */	stb r4, 0x5bc(r3)
 .L_8137006C:
-/* 8137006C 0003E46C  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 81370070 0003E470  38 03 05 BC */	addi r0, r3, 0x5bc
-/* 81370074 0003E474  90 1D 00 08 */	stw r0, 0x8(r29)
+/* 8137006C | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 81370070 | 38 03 05 BC */	addi r0, r3, 0x5bc
+/* 81370074 | 90 1D 00 08 */	stw r0, 0x8(r29)
 .L_81370078:
-/* 81370078 0003E478  3B 20 00 06 */	li r25, 0x6
-/* 8137007C 0003E47C  48 00 05 1C */	b .L_81370598
+/* 81370078 | 3B 20 00 06 */	li r25, 0x6
+/* 8137007C | 48 00 05 1C */	b .L_81370598
 .L_81370080:
-/* 81370080 0003E480  7F C3 F3 78 */	mr r3, r30
-/* 81370084 0003E484  38 8D 82 DD */	li r4, lbl_8169631D@sda21
-/* 81370088 0003E488  48 29 23 F9 */	bl strcmp
-/* 8137008C 0003E48C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81370090 0003E490  40 82 00 0C */	bne .L_8137009C
-/* 81370094 0003E494  3B 20 00 06 */	li r25, 0x6
-/* 81370098 0003E498  48 00 05 00 */	b .L_81370598
+/* 81370080 | 7F C3 F3 78 */	mr r3, r30
+/* 81370084 | 38 8D 82 DD */	li r4, lbl_8169631D@sda21
+/* 81370088 | 48 29 23 F9 */	bl strcmp
+/* 8137008C | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81370090 | 40 82 00 0C */	bne .L_8137009C
+/* 81370094 | 3B 20 00 06 */	li r25, 0x6
+/* 81370098 | 48 00 05 00 */	b .L_81370598
 .L_8137009C:
-/* 8137009C 0003E49C  7F C3 F3 78 */	mr r3, r30
-/* 813700A0 0003E4A0  48 00 0E 75 */	bl www_wiisetting_81370F14
-/* 813700A4 0003E4A4  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813700A8 0003E4A8  7C 7F 1B 78 */	mr r31, r3
-/* 813700AC 0003E4AC  41 80 04 EC */	blt .L_81370598
-/* 813700B0 0003E4B0  38 00 00 02 */	li r0, 0x2
-/* 813700B4 0003E4B4  28 03 00 47 */	cmplwi r3, 0x47
-/* 813700B8 0003E4B8  90 1D 00 00 */	stw r0, 0x0(r29)
-/* 813700BC 0003E4BC  41 81 03 94 */	bgt .L_81370450
-/* 813700C0 0003E4C0  3C 80 81 64 */	lis r4, jumptable_816441AC@ha
-/* 813700C4 0003E4C4  54 60 10 3A */	slwi r0, r3, 2
-/* 813700C8 0003E4C8  38 84 41 AC */	addi r4, r4, jumptable_816441AC@l
-/* 813700CC 0003E4CC  7C 84 00 2E */	lwzx r4, r4, r0
-/* 813700D0 0003E4D0  7C 89 03 A6 */	mtctr r4
-/* 813700D4 0003E4D4  4E 80 04 20 */	bctr
+/* 8137009C | 7F C3 F3 78 */	mr r3, r30
+/* 813700A0 | 48 00 0E 75 */	bl www_wiisetting_81370F14
+/* 813700A4 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813700A8 | 7C 7F 1B 78 */	mr r31, r3
+/* 813700AC | 41 80 04 EC */	blt .L_81370598
+/* 813700B0 | 38 00 00 02 */	li r0, 0x2
+/* 813700B4 | 28 03 00 47 */	cmplwi r3, 0x47
+/* 813700B8 | 90 1D 00 00 */	stw r0, 0x0(r29)
+/* 813700BC | 41 81 03 94 */	bgt .L_81370450
+/* 813700C0 | 3C 80 81 64 */	lis r4, jumptable_816441AC@ha
+/* 813700C4 | 54 60 10 3A */	slwi r0, r3, 2
+/* 813700C8 | 38 84 41 AC */	addi r4, r4, jumptable_816441AC@l
+/* 813700CC | 7C 84 00 2E */	lwzx r4, r4, r0
+/* 813700D0 | 7C 89 03 A6 */	mtctr r4
+/* 813700D4 | 4E 80 04 20 */	bctr
 .L_813700D8:
-/* 813700D8 0003E4D8  3F 60 81 09 */	lis r27, sWiiData__Q23www10wiisetting@ha
-/* 813700DC 0003E4DC  3B 7B A4 B8 */	addi r27, r27, sWiiData__Q23www10wiisetting@l
-/* 813700E0 0003E4E0  48 1F A1 69 */	bl fn_8156A248
-/* 813700E4 0003E4E4  7C 7B F9 AE */	stbx r3, r27, r31
-/* 813700E8 0003E4E8  98 6D A9 55 */	stb r3, lbl_81698995@sda21(r0)
-/* 813700EC 0003E4EC  48 00 03 64 */	b .L_81370450
+/* 813700D8 | 3F 60 81 09 */	lis r27, sWiiData__Q23www10wiisetting@ha
+/* 813700DC | 3B 7B A4 B8 */	addi r27, r27, sWiiData__Q23www10wiisetting@l
+/* 813700E0 | 48 1F A1 69 */	bl fn_8156A248
+/* 813700E4 | 7C 7B F9 AE */	stbx r3, r27, r31
+/* 813700E8 | 98 6D A9 55 */	stb r3, lbl_81698995@sda21(r0)
+/* 813700EC | 48 00 03 64 */	b .L_81370450
 .L_813700F0:
-/* 813700F0 0003E4F0  48 1F A7 31 */	bl fn_8156A820
-/* 813700F4 0003E4F4  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813700F8 0003E4F8  54 60 07 FE */	clrlwi r0, r3, 31
-/* 813700FC 0003E4FC  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370100 0003E500  7C 04 F9 AE */	stbx r0, r4, r31
-/* 81370104 0003E504  48 00 03 4C */	b .L_81370450
+/* 813700F0 | 48 1F A7 31 */	bl fn_8156A820
+/* 813700F4 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813700F8 | 54 60 07 FE */	clrlwi r0, r3, 31
+/* 813700FC | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370100 | 7C 04 F9 AE */	stbx r0, r4, r31
+/* 81370104 | 48 00 03 4C */	b .L_81370450
 .L_81370108:
-/* 81370108 0003E508  48 08 B3 ED */	bl fn_813FB4F4
-/* 8137010C 0003E50C  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370110 0003E510  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370114 0003E514  7C 64 F9 AE */	stbx r3, r4, r31
-/* 81370118 0003E518  48 00 03 38 */	b .L_81370450
+/* 81370108 | 48 08 B3 ED */	bl fn_813FB4F4
+/* 8137010C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370110 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370114 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 81370118 | 48 00 03 38 */	b .L_81370450
 .L_8137011C:
-/* 8137011C 0003E51C  38 61 00 08 */	addi r3, r1, 0x8
-/* 81370120 0003E520  48 1F 9F CD */	bl fn_8156A0EC
-/* 81370124 0003E524  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 81370128 0003E528  88 81 00 08 */	lbz r4, 0x8(r1)
-/* 8137012C 0003E52C  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 81370130 0003E530  88 01 00 09 */	lbz r0, 0x9(r1)
-/* 81370134 0003E534  98 83 00 04 */	stb r4, 0x4(r3)
-/* 81370138 0003E538  98 03 00 05 */	stb r0, 0x5(r3)
-/* 8137013C 0003E53C  48 00 03 14 */	b .L_81370450
+/* 8137011C | 38 61 00 08 */	addi r3, r1, 0x8
+/* 81370120 | 48 1F 9F CD */	bl fn_8156A0EC
+/* 81370124 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 81370128 | 88 81 00 08 */	lbz r4, 0x8(r1)
+/* 8137012C | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 81370130 | 88 01 00 09 */	lbz r0, 0x9(r1)
+/* 81370134 | 98 83 00 04 */	stb r4, 0x4(r3)
+/* 81370138 | 98 03 00 05 */	stb r0, 0x5(r3)
+/* 8137013C | 48 00 03 14 */	b .L_81370450
 .L_81370140:
-/* 81370140 0003E540  48 1F 9E 75 */	bl SCGetAspectRatio
-/* 81370144 0003E544  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370148 0003E548  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 8137014C 0003E54C  7C 64 F9 AE */	stbx r3, r4, r31
-/* 81370150 0003E550  48 00 03 00 */	b .L_81370450
+/* 81370140 | 48 1F 9E 75 */	bl SCGetAspectRatio
+/* 81370144 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370148 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 8137014C | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 81370150 | 48 00 03 00 */	b .L_81370450
 .L_81370154:
-/* 81370154 0003E554  48 1F A0 3D */	bl fn_8156A190
-/* 81370158 0003E558  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 8137015C 0003E55C  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370160 0003E560  7C 64 F9 AE */	stbx r3, r4, r31
-/* 81370164 0003E564  48 00 02 EC */	b .L_81370450
+/* 81370154 | 48 1F A0 3D */	bl fn_8156A190
+/* 81370158 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 8137015C | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370160 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 81370164 | 48 00 02 EC */	b .L_81370450
 .L_81370168:
-/* 81370168 0003E568  48 1F A0 85 */	bl fn_8156A1EC
-/* 8137016C 0003E56C  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370170 0003E570  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370174 0003E574  7C 64 F9 AE */	stbx r3, r4, r31
-/* 81370178 0003E578  48 00 02 D8 */	b .L_81370450
+/* 81370168 | 48 1F A0 85 */	bl fn_8156A1EC
+/* 8137016C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370170 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370174 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 81370178 | 48 00 02 D8 */	b .L_81370450
 .L_8137017C:
-/* 8137017C 0003E57C  48 1F A2 C1 */	bl fn_8156A43C
-/* 81370180 0003E580  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370184 0003E584  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370188 0003E588  7C 64 F9 AE */	stbx r3, r4, r31
-/* 8137018C 0003E58C  48 00 02 C4 */	b .L_81370450
+/* 8137017C | 48 1F A2 C1 */	bl fn_8156A43C
+/* 81370180 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370184 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370188 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 8137018C | 48 00 02 C4 */	b .L_81370450
 .L_81370190:
-/* 81370190 0003E590  80 A1 00 28 */	lwz r5, 0x28(r1)
-/* 81370194 0003E594  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370198 0003E598  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 8137019C 0003E59C  38 05 F8 30 */	subi r0, r5, 0x7d0
-/* 813701A0 0003E5A0  7C 04 19 AE */	stbx r0, r4, r3
-/* 813701A4 0003E5A4  48 00 02 AC */	b .L_81370450
+/* 81370190 | 80 A1 00 28 */	lwz r5, 0x28(r1)
+/* 81370194 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370198 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 8137019C | 38 05 F8 30 */	subi r0, r5, 0x7d0
+/* 813701A0 | 7C 04 19 AE */	stbx r0, r4, r3
+/* 813701A4 | 48 00 02 AC */	b .L_81370450
 .L_813701A8:
-/* 813701A8 0003E5A8  80 A1 00 24 */	lwz r5, 0x24(r1)
-/* 813701AC 0003E5AC  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813701B0 0003E5B0  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813701B4 0003E5B4  38 05 00 01 */	addi r0, r5, 0x1
-/* 813701B8 0003E5B8  7C 04 19 AE */	stbx r0, r4, r3
-/* 813701BC 0003E5BC  48 00 02 94 */	b .L_81370450
+/* 813701A8 | 80 A1 00 24 */	lwz r5, 0x24(r1)
+/* 813701AC | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813701B0 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813701B4 | 38 05 00 01 */	addi r0, r5, 0x1
+/* 813701B8 | 7C 04 19 AE */	stbx r0, r4, r3
+/* 813701BC | 48 00 02 94 */	b .L_81370450
 .L_813701C0:
-/* 813701C0 0003E5C0  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813701C4 0003E5C4  80 01 00 20 */	lwz r0, 0x20(r1)
-/* 813701C8 0003E5C8  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813701CC 0003E5CC  7C 04 19 AE */	stbx r0, r4, r3
-/* 813701D0 0003E5D0  48 00 02 80 */	b .L_81370450
+/* 813701C0 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813701C4 | 80 01 00 20 */	lwz r0, 0x20(r1)
+/* 813701C8 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813701CC | 7C 04 19 AE */	stbx r0, r4, r3
+/* 813701D0 | 48 00 02 80 */	b .L_81370450
 .L_813701D4:
-/* 813701D4 0003E5D4  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813701D8 0003E5D8  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 813701DC 0003E5DC  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813701E0 0003E5E0  7C 04 19 AE */	stbx r0, r4, r3
-/* 813701E4 0003E5E4  48 00 02 6C */	b .L_81370450
+/* 813701D4 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813701D8 | 80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 813701DC | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813701E0 | 7C 04 19 AE */	stbx r0, r4, r3
+/* 813701E4 | 48 00 02 6C */	b .L_81370450
 .L_813701E8:
-/* 813701E8 0003E5E8  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813701EC 0003E5EC  80 01 00 18 */	lwz r0, 0x18(r1)
-/* 813701F0 0003E5F0  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813701F4 0003E5F4  7C 04 19 AE */	stbx r0, r4, r3
-/* 813701F8 0003E5F8  48 00 02 58 */	b .L_81370450
+/* 813701E8 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813701EC | 80 01 00 18 */	lwz r0, 0x18(r1)
+/* 813701F0 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813701F4 | 7C 04 19 AE */	stbx r0, r4, r3
+/* 813701F8 | 48 00 02 58 */	b .L_81370450
 .L_813701FC:
-/* 813701FC 0003E5FC  48 08 9E D9 */	bl fn_813FA0D4
-/* 81370200 0003E600  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370204 0003E604  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370208 0003E608  7C 64 F9 AE */	stbx r3, r4, r31
-/* 8137020C 0003E60C  48 00 02 44 */	b .L_81370450
+/* 813701FC | 48 08 9E D9 */	bl fn_813FA0D4
+/* 81370200 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370204 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370208 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 8137020C | 48 00 02 44 */	b .L_81370450
 .L_81370210:
-/* 81370210 0003E610  38 60 00 00 */	li r3, 0x0
-/* 81370214 0003E614  48 08 9E 15 */	bl fn_813FA028
-/* 81370218 0003E618  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 8137021C 0003E61C  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370220 0003E620  7C 64 F9 AE */	stbx r3, r4, r31
-/* 81370224 0003E624  48 00 02 2C */	b .L_81370450
+/* 81370210 | 38 60 00 00 */	li r3, 0x0
+/* 81370214 | 48 08 9E 15 */	bl fn_813FA028
+/* 81370218 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 8137021C | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370220 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 81370224 | 48 00 02 2C */	b .L_81370450
 .L_81370228:
-/* 81370228 0003E628  38 60 00 01 */	li r3, 0x1
-/* 8137022C 0003E62C  48 08 9D FD */	bl fn_813FA028
-/* 81370230 0003E630  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370234 0003E634  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370238 0003E638  7C 64 F9 AE */	stbx r3, r4, r31
-/* 8137023C 0003E63C  48 00 02 14 */	b .L_81370450
+/* 81370228 | 38 60 00 01 */	li r3, 0x1
+/* 8137022C | 48 08 9D FD */	bl fn_813FA028
+/* 81370230 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370234 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370238 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 8137023C | 48 00 02 14 */	b .L_81370450
 .L_81370240:
-/* 81370240 0003E640  38 60 00 02 */	li r3, 0x2
-/* 81370244 0003E644  48 08 9D E5 */	bl fn_813FA028
-/* 81370248 0003E648  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 8137024C 0003E64C  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370250 0003E650  7C 64 F9 AE */	stbx r3, r4, r31
-/* 81370254 0003E654  48 00 01 FC */	b .L_81370450
+/* 81370240 | 38 60 00 02 */	li r3, 0x2
+/* 81370244 | 48 08 9D E5 */	bl fn_813FA028
+/* 81370248 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 8137024C | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370250 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 81370254 | 48 00 01 FC */	b .L_81370450
 .L_81370258:
-/* 81370258 0003E658  48 08 B2 75 */	bl fn_813FB4CC
-/* 8137025C 0003E65C  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370260 0003E660  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370264 0003E664  7C 64 F9 AE */	stbx r3, r4, r31
-/* 81370268 0003E668  48 00 01 E8 */	b .L_81370450
+/* 81370258 | 48 08 B2 75 */	bl fn_813FB4CC
+/* 8137025C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370260 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370264 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 81370268 | 48 00 01 E8 */	b .L_81370450
 .L_8137026C:
-/* 8137026C 0003E66C  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370270 0003E670  88 AD A9 56 */	lbz r5, lbl_81698996@sda21(r0)
-/* 81370274 0003E674  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370278 0003E678  38 00 00 00 */	li r0, 0x0
-/* 8137027C 0003E67C  7C A4 19 AE */	stbx r5, r4, r3
-/* 81370280 0003E680  98 0D A9 56 */	stb r0, lbl_81698996@sda21(r0)
-/* 81370284 0003E684  48 00 01 CC */	b .L_81370450
+/* 8137026C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370270 | 88 AD A9 56 */	lbz r5, lbl_81698996@sda21(r0)
+/* 81370274 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370278 | 38 00 00 00 */	li r0, 0x0
+/* 8137027C | 7C A4 19 AE */	stbx r5, r4, r3
+/* 81370280 | 98 0D A9 56 */	stb r0, lbl_81698996@sda21(r0)
+/* 81370284 | 48 00 01 CC */	b .L_81370450
 .L_81370288:
-/* 81370288 0003E688  48 08 B2 E5 */	bl fn_813FB56C
-/* 8137028C 0003E68C  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370290 0003E690  38 00 00 00 */	li r0, 0x0
-/* 81370294 0003E694  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370298 0003E698  98 0D A9 56 */	stb r0, lbl_81698996@sda21(r0)
-/* 8137029C 0003E69C  7C 64 F9 AE */	stbx r3, r4, r31
-/* 813702A0 0003E6A0  48 00 01 B0 */	b .L_81370450
+/* 81370288 | 48 08 B2 E5 */	bl fn_813FB56C
+/* 8137028C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370290 | 38 00 00 00 */	li r0, 0x0
+/* 81370294 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370298 | 98 0D A9 56 */	stb r0, lbl_81698996@sda21(r0)
+/* 8137029C | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 813702A0 | 48 00 01 B0 */	b .L_81370450
 .L_813702A4:
-/* 813702A4 0003E6A4  48 08 9E A9 */	bl fn_813FA14C
-/* 813702A8 0003E6A8  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813702AC 0003E6AC  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813702B0 0003E6B0  7C 64 F9 AE */	stbx r3, r4, r31
-/* 813702B4 0003E6B4  48 00 01 9C */	b .L_81370450
+/* 813702A4 | 48 08 9E A9 */	bl fn_813FA14C
+/* 813702A8 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813702AC | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813702B0 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 813702B4 | 48 00 01 9C */	b .L_81370450
 .L_813702B8:
-/* 813702B8 0003E6B8  48 08 9E B5 */	bl fn_813FA16C
-/* 813702BC 0003E6BC  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813702C0 0003E6C0  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813702C4 0003E6C4  7C 64 F9 AE */	stbx r3, r4, r31
-/* 813702C8 0003E6C8  48 00 01 88 */	b .L_81370450
+/* 813702B8 | 48 08 9E B5 */	bl fn_813FA16C
+/* 813702BC | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813702C0 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813702C4 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 813702C8 | 48 00 01 88 */	b .L_81370450
 .L_813702CC:
-/* 813702CC 0003E6CC  48 08 B0 35 */	bl fn_813FB300
-/* 813702D0 0003E6D0  48 00 01 80 */	b .L_81370450
+/* 813702CC | 48 08 B0 35 */	bl fn_813FB300
+/* 813702D0 | 48 00 01 80 */	b .L_81370450
 .L_813702D4:
-/* 813702D4 0003E6D4  48 08 B0 45 */	bl fn_813FB318
-/* 813702D8 0003E6D8  48 00 01 78 */	b .L_81370450
+/* 813702D4 | 48 08 B0 45 */	bl fn_813FB318
+/* 813702D8 | 48 00 01 78 */	b .L_81370450
 .L_813702DC:
-/* 813702DC 0003E6DC  48 08 A0 41 */	bl fn_813FA31C
-/* 813702E0 0003E6E0  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813702E4 0003E6E4  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813702E8 0003E6E8  7C 64 F9 AE */	stbx r3, r4, r31
-/* 813702EC 0003E6EC  48 00 01 64 */	b .L_81370450
+/* 813702DC | 48 08 A0 41 */	bl fn_813FA31C
+/* 813702E0 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813702E4 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813702E8 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 813702EC | 48 00 01 64 */	b .L_81370450
 .L_813702F0:
-/* 813702F0 0003E6F0  48 08 A0 49 */	bl fn_813FA338
-/* 813702F4 0003E6F4  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813702F8 0003E6F8  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813702FC 0003E6FC  7C 64 F9 AE */	stbx r3, r4, r31
-/* 81370300 0003E700  48 00 01 50 */	b .L_81370450
+/* 813702F0 | 48 08 A0 49 */	bl fn_813FA338
+/* 813702F4 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813702F8 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813702FC | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 81370300 | 48 00 01 50 */	b .L_81370450
 .L_81370304:
-/* 81370304 0003E704  48 08 A0 51 */	bl fn_813FA354
-/* 81370308 0003E708  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 8137030C 0003E70C  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370310 0003E710  7C 64 F9 AE */	stbx r3, r4, r31
-/* 81370314 0003E714  48 00 01 3C */	b .L_81370450
+/* 81370304 | 48 08 A0 51 */	bl fn_813FA354
+/* 81370308 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 8137030C | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370310 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 81370314 | 48 00 01 3C */	b .L_81370450
 .L_81370318:
-/* 81370318 0003E718  48 08 B8 85 */	bl fn_813FBB9C
-/* 8137031C 0003E71C  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370320 0003E720  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370324 0003E724  7C 64 F9 AE */	stbx r3, r4, r31
-/* 81370328 0003E728  48 00 01 28 */	b .L_81370450
+/* 81370318 | 48 08 B8 85 */	bl fn_813FBB9C
+/* 8137031C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370320 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370324 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 81370328 | 48 00 01 28 */	b .L_81370450
 .L_8137032C:
-/* 8137032C 0003E72C  48 08 BA E1 */	bl fn_813FBE0C
-/* 81370330 0003E730  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370334 0003E734  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370338 0003E738  7C 64 F9 AE */	stbx r3, r4, r31
-/* 8137033C 0003E73C  48 00 01 14 */	b .L_81370450
+/* 8137032C | 48 08 BA E1 */	bl fn_813FBE0C
+/* 81370330 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370334 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370338 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 8137033C | 48 00 01 14 */	b .L_81370450
 .L_81370340:
-/* 81370340 0003E740  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370344 0003E744  88 0D A9 55 */	lbz r0, lbl_81698995@sda21(r0)
-/* 81370348 0003E748  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 8137034C 0003E74C  7C 04 19 AE */	stbx r0, r4, r3
-/* 81370350 0003E750  7C 03 03 78 */	mr r3, r0
-/* 81370354 0003E754  48 08 BB B9 */	bl fn_813FBF0C
-/* 81370358 0003E758  48 00 00 F8 */	b .L_81370450
+/* 81370340 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370344 | 88 0D A9 55 */	lbz r0, lbl_81698995@sda21(r0)
+/* 81370348 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 8137034C | 7C 04 19 AE */	stbx r0, r4, r3
+/* 81370350 | 7C 03 03 78 */	mr r3, r0
+/* 81370354 | 48 08 BB B9 */	bl fn_813FBF0C
+/* 81370358 | 48 00 00 F8 */	b .L_81370450
 .L_8137035C:
-/* 8137035C 0003E75C  88 6D A9 55 */	lbz r3, lbl_81698995@sda21(r0)
-/* 81370360 0003E760  48 08 BB 8D */	bl fn_813FBEEC
-/* 81370364 0003E764  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 81370368 0003E768  88 0D A9 55 */	lbz r0, lbl_81698995@sda21(r0)
-/* 8137036C 0003E76C  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 81370370 0003E770  98 03 00 2D */	stb r0, 0x2d(r3)
-/* 81370374 0003E774  48 00 00 DC */	b .L_81370450
+/* 8137035C | 88 6D A9 55 */	lbz r3, lbl_81698995@sda21(r0)
+/* 81370360 | 48 08 BB 8D */	bl fn_813FBEEC
+/* 81370364 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 81370368 | 88 0D A9 55 */	lbz r0, lbl_81698995@sda21(r0)
+/* 8137036C | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 81370370 | 98 03 00 2D */	stb r0, 0x2d(r3)
+/* 81370374 | 48 00 00 DC */	b .L_81370450
 .L_81370378:
-/* 81370378 0003E778  48 08 BA B5 */	bl fn_813FBE2C
-/* 8137037C 0003E77C  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370380 0003E780  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370384 0003E784  7C 64 F9 AE */	stbx r3, r4, r31
-/* 81370388 0003E788  48 00 00 C8 */	b .L_81370450
+/* 81370378 | 48 08 BA B5 */	bl fn_813FBE2C
+/* 8137037C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370380 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370384 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 81370388 | 48 00 00 C8 */	b .L_81370450
 .L_8137038C:
-/* 8137038C 0003E78C  48 1F 9D 05 */	bl fn_8156A090
-/* 81370390 0003E790  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370394 0003E794  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370398 0003E798  7C 64 F9 AE */	stbx r3, r4, r31
-/* 8137039C 0003E79C  48 00 00 B4 */	b .L_81370450
+/* 8137038C | 48 1F 9D 05 */	bl fn_8156A090
+/* 81370390 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370394 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370398 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 8137039C | 48 00 00 B4 */	b .L_81370450
 .L_813703A0:
-/* 813703A0 0003E7A0  48 1F 9D 65 */	bl SCGetLanguage
-/* 813703A4 0003E7A4  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813703A8 0003E7A8  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813703AC 0003E7AC  7C 64 F9 AE */	stbx r3, r4, r31
-/* 813703B0 0003E7B0  48 00 00 A0 */	b .L_81370450
+/* 813703A0 | 48 1F 9D 65 */	bl SCGetLanguage
+/* 813703A4 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813703A8 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813703AC | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 813703B0 | 48 00 00 A0 */	b .L_81370450
 .L_813703B4:
-/* 813703B4 0003E7B4  48 1C DF 45 */	bl fn_8153E2F8
-/* 813703B8 0003E7B8  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813703BC 0003E7BC  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813703C0 0003E7C0  7C 64 F9 AE */	stbx r3, r4, r31
-/* 813703C4 0003E7C4  48 00 00 8C */	b .L_81370450
+/* 813703B4 | 48 1C DF 45 */	bl fn_8153E2F8
+/* 813703B8 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813703BC | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813703C0 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 813703C4 | 48 00 00 8C */	b .L_81370450
 .L_813703C8:
-/* 813703C8 0003E7C8  48 08 B1 2D */	bl fn_813FB4F4
-/* 813703CC 0003E7CC  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813703D0 0003E7D0  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813703D4 0003E7D4  7C 64 F9 AE */	stbx r3, r4, r31
-/* 813703D8 0003E7D8  48 00 00 78 */	b .L_81370450
+/* 813703C8 | 48 08 B1 2D */	bl fn_813FB4F4
+/* 813703CC | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813703D0 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813703D4 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 813703D8 | 48 00 00 78 */	b .L_81370450
 .L_813703DC:
-/* 813703DC 0003E7DC  48 08 9D 51 */	bl fn_813FA12C
-/* 813703E0 0003E7E0  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813703E4 0003E7E4  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813703E8 0003E7E8  7C 64 F9 AE */	stbx r3, r4, r31
-/* 813703EC 0003E7EC  48 00 00 64 */	b .L_81370450
+/* 813703DC | 48 08 9D 51 */	bl fn_813FA12C
+/* 813703E0 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813703E4 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813703E8 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 813703EC | 48 00 00 64 */	b .L_81370450
 .L_813703F0:
-/* 813703F0 0003E7F0  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813703F4 0003E7F4  88 0D A9 57 */	lbz r0, lbl_81698997@sda21(r0)
-/* 813703F8 0003E7F8  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813703FC 0003E7FC  7C 04 19 AE */	stbx r0, r4, r3
-/* 81370400 0003E800  48 00 00 50 */	b .L_81370450
+/* 813703F0 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813703F4 | 88 0D A9 57 */	lbz r0, lbl_81698997@sda21(r0)
+/* 813703F8 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813703FC | 7C 04 19 AE */	stbx r0, r4, r3
+/* 81370400 | 48 00 00 50 */	b .L_81370450
 .L_81370404:
-/* 81370404 0003E804  4B FE 6D 61 */	bl checkLANMacAddrAvailable__Q33ipl6socket13SocketSettingFv
-/* 81370408 0003E808  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 8137040C 0003E80C  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370410 0003E810  7C 64 F9 AE */	stbx r3, r4, r31
-/* 81370414 0003E814  48 00 00 3C */	b .L_81370450
+/* 81370404 | 4B FE 6D 61 */	bl checkLANMacAddrAvailable__Q33ipl6socket13SocketSettingFv
+/* 81370408 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 8137040C | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370410 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 81370414 | 48 00 00 3C */	b .L_81370450
 .L_81370418:
-/* 81370418 0003E818  48 1F A3 61 */	bl fn_8156A778
-/* 8137041C 0003E81C  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370420 0003E820  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370424 0003E824  7C 64 F9 AE */	stbx r3, r4, r31
-/* 81370428 0003E828  48 00 00 28 */	b .L_81370450
+/* 81370418 | 48 1F A3 61 */	bl fn_8156A778
+/* 8137041C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370420 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370424 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 81370428 | 48 00 00 28 */	b .L_81370450
 .L_8137042C:
-/* 8137042C 0003E82C  4B FC 56 61 */	bl getRegion__Q23ipl6SystemFv
-/* 81370430 0003E830  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370434 0003E834  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370438 0003E838  7C 64 F9 AE */	stbx r3, r4, r31
-/* 8137043C 0003E83C  48 00 00 14 */	b .L_81370450
+/* 8137042C | 4B FC 56 61 */	bl getRegion__Q23ipl6SystemFv
+/* 81370430 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370434 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370438 | 7C 64 F9 AE */	stbx r3, r4, r31
+/* 8137043C | 48 00 00 14 */	b .L_81370450
 .L_81370440:
-/* 81370440 0003E840  48 1F A3 9D */	bl fn_8156A7DC
-/* 81370444 0003E844  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370448 0003E848  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 8137044C 0003E84C  7C 64 F9 AE */	stbx r3, r4, r31
+/* 81370440 | 48 1F A3 9D */	bl fn_8156A7DC
+/* 81370444 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370448 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 8137044C | 7C 64 F9 AE */	stbx r3, r4, r31
 .L_81370450:
-/* 81370450 0003E850  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 81370454 0003E854  C8 22 82 B8 */	lfd f1, lbl_816946B8@sda21(r0)
-/* 81370458 0003E858  3B 63 A4 B8 */	addi r27, r3, sWiiData__Q23www10wiisetting@l
-/* 8137045C 0003E85C  2C 1F 00 35 */	cmpwi r31, 0x35
-/* 81370460 0003E860  7C 1B F8 AE */	lbzx r0, r27, r31
-/* 81370464 0003E864  90 01 00 A4 */	stw r0, 0xa4(r1)
-/* 81370468 0003E868  C8 01 00 A0 */	lfd f0, 0xa0(r1)
-/* 8137046C 0003E86C  FC 00 08 28 */	fsub f0, f0, f1
-/* 81370470 0003E870  D8 1D 00 08 */	stfd f0, 0x8(r29)
-/* 81370474 0003E874  40 82 00 24 */	bne .L_81370498
-/* 81370478 0003E878  80 0D A9 4C */	lwz r0, lbl_8169898C@sda21(r0)
-/* 8137047C 0003E87C  C8 22 82 C0 */	lfd f1, lbl_816946C0@sda21(r0)
-/* 81370480 0003E880  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 81370484 0003E884  90 01 00 AC */	stw r0, 0xac(r1)
-/* 81370488 0003E888  C8 01 00 A8 */	lfd f0, 0xa8(r1)
-/* 8137048C 0003E88C  FC 00 08 28 */	fsub f0, f0, f1
-/* 81370490 0003E890  D8 1D 00 08 */	stfd f0, 0x8(r29)
-/* 81370494 0003E894  48 00 01 00 */	b .L_81370594
+/* 81370450 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 81370454 | C8 22 82 B8 */	lfd f1, lbl_816946B8@sda21(r0)
+/* 81370458 | 3B 63 A4 B8 */	addi r27, r3, sWiiData__Q23www10wiisetting@l
+/* 8137045C | 2C 1F 00 35 */	cmpwi r31, 0x35
+/* 81370460 | 7C 1B F8 AE */	lbzx r0, r27, r31
+/* 81370464 | 90 01 00 A4 */	stw r0, 0xa4(r1)
+/* 81370468 | C8 01 00 A0 */	lfd f0, 0xa0(r1)
+/* 8137046C | FC 00 08 28 */	fsub f0, f0, f1
+/* 81370470 | D8 1D 00 08 */	stfd f0, 0x8(r29)
+/* 81370474 | 40 82 00 24 */	bne .L_81370498
+/* 81370478 | 80 0D A9 4C */	lwz r0, lbl_8169898C@sda21(r0)
+/* 8137047C | C8 22 82 C0 */	lfd f1, lbl_816946C0@sda21(r0)
+/* 81370480 | 6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 81370484 | 90 01 00 AC */	stw r0, 0xac(r1)
+/* 81370488 | C8 01 00 A8 */	lfd f0, 0xa8(r1)
+/* 8137048C | FC 00 08 28 */	fsub f0, f0, f1
+/* 81370490 | D8 1D 00 08 */	stfd f0, 0x8(r29)
+/* 81370494 | 48 00 01 00 */	b .L_81370594
 .L_81370498:
-/* 81370498 0003E898  2C 1F 00 40 */	cmpwi r31, 0x40
-/* 8137049C 0003E89C  40 82 00 20 */	bne .L_813704BC
-/* 813704A0 0003E8A0  48 08 B7 29 */	bl fn_813FBBC8
-/* 813704A4 0003E8A4  90 61 00 A4 */	stw r3, 0xa4(r1)
-/* 813704A8 0003E8A8  C8 22 82 B8 */	lfd f1, lbl_816946B8@sda21(r0)
-/* 813704AC 0003E8AC  C8 01 00 A0 */	lfd f0, 0xa0(r1)
-/* 813704B0 0003E8B0  FC 00 08 28 */	fsub f0, f0, f1
-/* 813704B4 0003E8B4  D8 1D 00 08 */	stfd f0, 0x8(r29)
-/* 813704B8 0003E8B8  48 00 00 DC */	b .L_81370594
+/* 81370498 | 2C 1F 00 40 */	cmpwi r31, 0x40
+/* 8137049C | 40 82 00 20 */	bne .L_813704BC
+/* 813704A0 | 48 08 B7 29 */	bl fn_813FBBC8
+/* 813704A4 | 90 61 00 A4 */	stw r3, 0xa4(r1)
+/* 813704A8 | C8 22 82 B8 */	lfd f1, lbl_816946B8@sda21(r0)
+/* 813704AC | C8 01 00 A0 */	lfd f0, 0xa0(r1)
+/* 813704B0 | FC 00 08 28 */	fsub f0, f0, f1
+/* 813704B4 | D8 1D 00 08 */	stfd f0, 0x8(r29)
+/* 813704B8 | 48 00 00 DC */	b .L_81370594
 .L_813704BC:
-/* 813704BC 0003E8BC  2C 1F 00 3C */	cmpwi r31, 0x3c
-/* 813704C0 0003E8C0  40 82 00 D4 */	bne .L_81370594
-/* 813704C4 0003E8C4  4B FC 55 C9 */	bl getRegion__Q23ipl6SystemFv
-/* 813704C8 0003E8C8  28 03 00 01 */	cmplwi r3, 0x1
-/* 813704CC 0003E8CC  40 82 00 5C */	bne .L_81370528
-/* 813704D0 0003E8D0  4B FC 55 1D */	bl getLanguage__Q23ipl6SystemFv
-/* 813704D4 0003E8D4  2C 03 00 03 */	cmpwi r3, 0x3
-/* 813704D8 0003E8D8  41 82 00 30 */	beq .L_81370508
-/* 813704DC 0003E8DC  40 80 00 10 */	bge .L_813704EC
-/* 813704E0 0003E8E0  2C 03 00 01 */	cmpwi r3, 0x1
-/* 813704E4 0003E8E4  41 82 00 14 */	beq .L_813704F8
-/* 813704E8 0003E8E8  48 00 00 94 */	b .L_8137057C
+/* 813704BC | 2C 1F 00 3C */	cmpwi r31, 0x3c
+/* 813704C0 | 40 82 00 D4 */	bne .L_81370594
+/* 813704C4 | 4B FC 55 C9 */	bl getRegion__Q23ipl6SystemFv
+/* 813704C8 | 28 03 00 01 */	cmplwi r3, 0x1
+/* 813704CC | 40 82 00 5C */	bne .L_81370528
+/* 813704D0 | 4B FC 55 1D */	bl getLanguage__Q23ipl6SystemFv
+/* 813704D4 | 2C 03 00 03 */	cmpwi r3, 0x3
+/* 813704D8 | 41 82 00 30 */	beq .L_81370508
+/* 813704DC | 40 80 00 10 */	bge .L_813704EC
+/* 813704E0 | 2C 03 00 01 */	cmpwi r3, 0x1
+/* 813704E4 | 41 82 00 14 */	beq .L_813704F8
+/* 813704E8 | 48 00 00 94 */	b .L_8137057C
 .L_813704EC:
-/* 813704EC 0003E8EC  2C 03 00 05 */	cmpwi r3, 0x5
-/* 813704F0 0003E8F0  40 80 00 8C */	bge .L_8137057C
-/* 813704F4 0003E8F4  48 00 00 24 */	b .L_81370518
+/* 813704EC | 2C 03 00 05 */	cmpwi r3, 0x5
+/* 813704F0 | 40 80 00 8C */	bge .L_8137057C
+/* 813704F4 | 48 00 00 24 */	b .L_81370518
 .L_813704F8:
-/* 813704F8 0003E8F8  38 60 00 00 */	li r3, 0x0
-/* 813704FC 0003E8FC  48 00 09 65 */	bl www_wiisetting_81370E60
-/* 81370500 0003E900  7C 7E 1B 78 */	mr r30, r3
-/* 81370504 0003E904  48 00 00 78 */	b .L_8137057C
+/* 813704F8 | 38 60 00 00 */	li r3, 0x0
+/* 813704FC | 48 00 09 65 */	bl www_wiisetting_81370E60
+/* 81370500 | 7C 7E 1B 78 */	mr r30, r3
+/* 81370504 | 48 00 00 78 */	b .L_8137057C
 .L_81370508:
-/* 81370508 0003E908  38 60 00 01 */	li r3, 0x1
-/* 8137050C 0003E90C  48 00 09 55 */	bl www_wiisetting_81370E60
-/* 81370510 0003E910  7C 7E 1B 78 */	mr r30, r3
-/* 81370514 0003E914  48 00 00 68 */	b .L_8137057C
+/* 81370508 | 38 60 00 01 */	li r3, 0x1
+/* 8137050C | 48 00 09 55 */	bl www_wiisetting_81370E60
+/* 81370510 | 7C 7E 1B 78 */	mr r30, r3
+/* 81370514 | 48 00 00 68 */	b .L_8137057C
 .L_81370518:
-/* 81370518 0003E918  38 60 00 02 */	li r3, 0x2
-/* 8137051C 0003E91C  48 00 09 45 */	bl www_wiisetting_81370E60
-/* 81370520 0003E920  7C 7E 1B 78 */	mr r30, r3
-/* 81370524 0003E924  48 00 00 58 */	b .L_8137057C
+/* 81370518 | 38 60 00 02 */	li r3, 0x2
+/* 8137051C | 48 00 09 45 */	bl www_wiisetting_81370E60
+/* 81370520 | 7C 7E 1B 78 */	mr r30, r3
+/* 81370524 | 48 00 00 58 */	b .L_8137057C
 .L_81370528:
-/* 81370528 0003E928  4B FC 55 65 */	bl getRegion__Q23ipl6SystemFv
-/* 8137052C 0003E92C  28 03 00 02 */	cmplwi r3, 0x2
-/* 81370530 0003E930  40 82 00 4C */	bne .L_8137057C
-/* 81370534 0003E934  3F 80 81 61 */	lis r28, lbl_8160F0F0@ha
-/* 81370538 0003E938  3B E0 00 00 */	li r31, 0x0
-/* 8137053C 0003E93C  3B 9C F0 F0 */	addi r28, r28, lbl_8160F0F0@l
+/* 81370528 | 4B FC 55 65 */	bl getRegion__Q23ipl6SystemFv
+/* 8137052C | 28 03 00 02 */	cmplwi r3, 0x2
+/* 81370530 | 40 82 00 4C */	bne .L_8137057C
+/* 81370534 | 3F 80 81 61 */	lis r28, lbl_8160F0F0@ha
+/* 81370538 | 3B E0 00 00 */	li r31, 0x0
+/* 8137053C | 3B 9C F0 F0 */	addi r28, r28, lbl_8160F0F0@l
 .L_81370540:
-/* 81370540 0003E940  4B FC 54 AD */	bl getLanguage__Q23ipl6SystemFv
-/* 81370544 0003E944  1C 63 00 3B */	mulli r3, r3, 0x3b
-/* 81370548 0003E948  88 1B 00 3C */	lbz r0, 0x3c(r27)
-/* 8137054C 0003E94C  7C 7F 1A 14 */	add r3, r31, r3
-/* 81370550 0003E950  7C 7C 1A 14 */	add r3, r28, r3
-/* 81370554 0003E954  88 63 FF C5 */	lbz r3, -0x3b(r3)
-/* 81370558 0003E958  38 63 00 40 */	addi r3, r3, 0x40
-/* 8137055C 0003E95C  7C 00 18 00 */	cmpw r0, r3
-/* 81370560 0003E960  40 82 00 10 */	bne .L_81370570
-/* 81370564 0003E964  38 1F 00 40 */	addi r0, r31, 0x40
-/* 81370568 0003E968  54 1E 06 3E */	clrlwi r30, r0, 24
-/* 8137056C 0003E96C  48 00 00 10 */	b .L_8137057C
+/* 81370540 | 4B FC 54 AD */	bl getLanguage__Q23ipl6SystemFv
+/* 81370544 | 1C 63 00 3B */	mulli r3, r3, 0x3b
+/* 81370548 | 88 1B 00 3C */	lbz r0, 0x3c(r27)
+/* 8137054C | 7C 7F 1A 14 */	add r3, r31, r3
+/* 81370550 | 7C 7C 1A 14 */	add r3, r28, r3
+/* 81370554 | 88 63 FF C5 */	lbz r3, -0x3b(r3)
+/* 81370558 | 38 63 00 40 */	addi r3, r3, 0x40
+/* 8137055C | 7C 00 18 00 */	cmpw r0, r3
+/* 81370560 | 40 82 00 10 */	bne .L_81370570
+/* 81370564 | 38 1F 00 40 */	addi r0, r31, 0x40
+/* 81370568 | 54 1E 06 3E */	clrlwi r30, r0, 24
+/* 8137056C | 48 00 00 10 */	b .L_8137057C
 .L_81370570:
-/* 81370570 0003E970  3B FF 00 01 */	addi r31, r31, 0x1
-/* 81370574 0003E974  2C 1F 00 3B */	cmpwi r31, 0x3b
-/* 81370578 0003E978  41 80 FF C8 */	blt .L_81370540
+/* 81370570 | 3B FF 00 01 */	addi r31, r31, 0x1
+/* 81370574 | 2C 1F 00 3B */	cmpwi r31, 0x3b
+/* 81370578 | 41 80 FF C8 */	blt .L_81370540
 .L_8137057C:
-/* 8137057C 0003E97C  57 C0 06 3E */	clrlwi r0, r30, 24
-/* 81370580 0003E980  C8 22 82 B8 */	lfd f1, lbl_816946B8@sda21(r0)
-/* 81370584 0003E984  90 01 00 AC */	stw r0, 0xac(r1)
-/* 81370588 0003E988  C8 01 00 A8 */	lfd f0, 0xa8(r1)
-/* 8137058C 0003E98C  FC 00 08 28 */	fsub f0, f0, f1
-/* 81370590 0003E990  D8 1D 00 08 */	stfd f0, 0x8(r29)
+/* 8137057C | 57 C0 06 3E */	clrlwi r0, r30, 24
+/* 81370580 | C8 22 82 B8 */	lfd f1, lbl_816946B8@sda21(r0)
+/* 81370584 | 90 01 00 AC */	stw r0, 0xac(r1)
+/* 81370588 | C8 01 00 A8 */	lfd f0, 0xa8(r1)
+/* 8137058C | FC 00 08 28 */	fsub f0, f0, f1
+/* 81370590 | D8 1D 00 08 */	stfd f0, 0x8(r29)
 .L_81370594:
-/* 81370594 0003E994  3B 20 00 06 */	li r25, 0x6
+/* 81370594 | 3B 20 00 06 */	li r25, 0x6
 .L_81370598:
-/* 81370598 0003E998  7F 23 CB 78 */	mr r3, r25
+/* 81370598 | 7F 23 CB 78 */	mr r3, r25
 .L_8137059C:
-/* 8137059C 0003E99C  39 61 00 D0 */	addi r11, r1, 0xd0
-/* 813705A0 0003E9A0  48 28 8F 65 */	bl _restgpr_25
-/* 813705A4 0003E9A4  80 01 00 D4 */	lwz r0, 0xd4(r1)
-/* 813705A8 0003E9A8  7C 08 03 A6 */	mtlr r0
-/* 813705AC 0003E9AC  38 21 00 D0 */	addi r1, r1, 0xd0
-/* 813705B0 0003E9B0  4E 80 00 20 */	blr
+/* 8137059C | 39 61 00 D0 */	addi r11, r1, 0xd0
+/* 813705A0 | 48 28 8F 65 */	bl _restgpr_25
+/* 813705A4 | 80 01 00 D4 */	lwz r0, 0xd4(r1)
+/* 813705A8 | 7C 08 03 A6 */	mtlr r0
+/* 813705AC | 38 21 00 D0 */	addi r1, r1, 0xd0
+/* 813705B0 | 4E 80 00 20 */	blr
 .endfn Getter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue
 
 # .text:0xBE4 | 0x813705B4 | size: 0x50C
 # www::wiisetting::Setter_(WWWJSPluginObj*, const char*, WWWJSPluginValue*)
 .fn Setter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue, global
-/* 813705B4 0003E9B4  94 21 FF D0 */	stwu r1, -0x30(r1)
-/* 813705B8 0003E9B8  7C 08 02 A6 */	mflr r0
-/* 813705BC 0003E9BC  90 01 00 34 */	stw r0, 0x34(r1)
-/* 813705C0 0003E9C0  39 61 00 30 */	addi r11, r1, 0x30
-/* 813705C4 0003E9C4  48 28 8E FD */	bl _savegpr_27
-/* 813705C8 0003E9C8  7C 9B 23 78 */	mr r27, r4
-/* 813705CC 0003E9CC  3F E0 81 64 */	lis r31, lbl_816440A0@ha
-/* 813705D0 0003E9D0  7C BD 2B 78 */	mr r29, r5
-/* 813705D4 0003E9D4  7F 63 DB 78 */	mr r3, r27
-/* 813705D8 0003E9D8  3B FF 40 A0 */	addi r31, r31, lbl_816440A0@l
-/* 813705DC 0003E9DC  48 00 09 39 */	bl www_wiisetting_81370F14
-/* 813705E0 0003E9E0  2C 03 00 12 */	cmpwi r3, 0x12
-/* 813705E4 0003E9E4  7C 7E 1B 78 */	mr r30, r3
-/* 813705E8 0003E9E8  40 82 00 7C */	bne .L_81370664
-/* 813705EC 0003E9EC  C8 1D 00 08 */	lfd f0, 0x8(r29)
-/* 813705F0 0003E9F0  3C A0 81 09 */	lis r5, sWiiData__Q23www10wiisetting@ha
-/* 813705F4 0003E9F4  38 A5 A4 B8 */	addi r5, r5, sWiiData__Q23www10wiisetting@l
-/* 813705F8 0003E9F8  FC 00 00 1E */	fctiwz f0, f0
-/* 813705FC 0003E9FC  D8 01 00 08 */	stfd f0, 0x8(r1)
-/* 81370600 0003EA00  80 81 00 0C */	lwz r4, 0xc(r1)
-/* 81370604 0003EA04  54 80 06 3E */	clrlwi r0, r4, 24
-/* 81370608 0003EA08  7C 85 19 AE */	stbx r4, r5, r3
-/* 8137060C 0003EA0C  2C 00 00 32 */	cmpwi r0, 0x32
-/* 81370610 0003EA10  41 82 00 28 */	beq .L_81370638
-/* 81370614 0003EA14  40 80 00 38 */	bge .L_8137064C
-/* 81370618 0003EA18  2C 00 00 01 */	cmpwi r0, 0x1
-/* 8137061C 0003EA1C  41 82 00 08 */	beq .L_81370624
-/* 81370620 0003EA20  48 00 00 2C */	b .L_8137064C
+/* 813705B4 | 94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 813705B8 | 7C 08 02 A6 */	mflr r0
+/* 813705BC | 90 01 00 34 */	stw r0, 0x34(r1)
+/* 813705C0 | 39 61 00 30 */	addi r11, r1, 0x30
+/* 813705C4 | 48 28 8E FD */	bl _savegpr_27
+/* 813705C8 | 7C 9B 23 78 */	mr r27, r4
+/* 813705CC | 3F E0 81 64 */	lis r31, lbl_816440A0@ha
+/* 813705D0 | 7C BD 2B 78 */	mr r29, r5
+/* 813705D4 | 7F 63 DB 78 */	mr r3, r27
+/* 813705D8 | 3B FF 40 A0 */	addi r31, r31, lbl_816440A0@l
+/* 813705DC | 48 00 09 39 */	bl www_wiisetting_81370F14
+/* 813705E0 | 2C 03 00 12 */	cmpwi r3, 0x12
+/* 813705E4 | 7C 7E 1B 78 */	mr r30, r3
+/* 813705E8 | 40 82 00 7C */	bne .L_81370664
+/* 813705EC | C8 1D 00 08 */	lfd f0, 0x8(r29)
+/* 813705F0 | 3C A0 81 09 */	lis r5, sWiiData__Q23www10wiisetting@ha
+/* 813705F4 | 38 A5 A4 B8 */	addi r5, r5, sWiiData__Q23www10wiisetting@l
+/* 813705F8 | FC 00 00 1E */	fctiwz f0, f0
+/* 813705FC | D8 01 00 08 */	stfd f0, 0x8(r1)
+/* 81370600 | 80 81 00 0C */	lwz r4, 0xc(r1)
+/* 81370604 | 54 80 06 3E */	clrlwi r0, r4, 24
+/* 81370608 | 7C 85 19 AE */	stbx r4, r5, r3
+/* 8137060C | 2C 00 00 32 */	cmpwi r0, 0x32
+/* 81370610 | 41 82 00 28 */	beq .L_81370638
+/* 81370614 | 40 80 00 38 */	bge .L_8137064C
+/* 81370618 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 8137061C | 41 82 00 08 */	beq .L_81370624
+/* 81370620 | 48 00 00 2C */	b .L_8137064C
 .L_81370624:
-/* 81370624 0003EA24  48 1F 99 ED */	bl fn_8156A010
-/* 81370628 0003EA28  38 03 00 10 */	addi r0, r3, 0x10
-/* 8137062C 0003EA2C  20 00 00 20 */	subfic r0, r0, 0x20
-/* 81370630 0003EA30  98 0D A9 55 */	stb r0, lbl_81698995@sda21(r0)
-/* 81370634 0003EA34  48 00 00 18 */	b .L_8137064C
+/* 81370624 | 48 1F 99 ED */	bl fn_8156A010
+/* 81370628 | 38 03 00 10 */	addi r0, r3, 0x10
+/* 8137062C | 20 00 00 20 */	subfic r0, r0, 0x20
+/* 81370630 | 98 0D A9 55 */	stb r0, lbl_81698995@sda21(r0)
+/* 81370634 | 48 00 00 18 */	b .L_8137064C
 .L_81370638:
-/* 81370638 0003EA38  80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
-/* 8137063C 0003EA3C  38 80 00 00 */	li r4, 0x0
-/* 81370640 0003EA40  38 A0 00 40 */	li r5, 0x40
-/* 81370644 0003EA44  38 63 06 0E */	addi r3, r3, 0x60e
-/* 81370648 0003EA48  4B FB FC ED */	bl memset
+/* 81370638 | 80 6D A9 5C */	lwz r3, pString__Q23www10wiisetting@sda21(r0)
+/* 8137063C | 38 80 00 00 */	li r4, 0x0
+/* 81370640 | 38 A0 00 40 */	li r5, 0x40
+/* 81370644 | 38 63 06 0E */	addi r3, r3, 0x60e
+/* 81370648 | 4B FB FC ED */	bl memset
 .L_8137064C:
-/* 8137064C 0003EA4C  38 60 00 01 */	li r3, 0x1
-/* 81370650 0003EA50  38 00 00 00 */	li r0, 0x0
-/* 81370654 0003EA54  90 6D 82 D0 */	stw r3, lbl_81696310@sda21(r0)
-/* 81370658 0003EA58  38 60 00 0B */	li r3, 0xb
-/* 8137065C 0003EA5C  90 0D A9 48 */	stw r0, lbl_81698988@sda21(r0)
-/* 81370660 0003EA60  48 00 04 48 */	b .L_81370AA8
+/* 8137064C | 38 60 00 01 */	li r3, 0x1
+/* 81370650 | 38 00 00 00 */	li r0, 0x0
+/* 81370654 | 90 6D 82 D0 */	stw r3, lbl_81696310@sda21(r0)
+/* 81370658 | 38 60 00 0B */	li r3, 0xb
+/* 8137065C | 90 0D A9 48 */	stw r0, lbl_81698988@sda21(r0)
+/* 81370660 | 48 00 04 48 */	b .L_81370AA8
 .L_81370664:
-/* 81370664 0003EA64  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81370668 0003EA68  41 80 04 3C */	blt .L_81370AA4
-/* 8137066C 0003EA6C  38 03 FF C9 */	subi r0, r3, 0x37
-/* 81370670 0003EA70  28 00 00 01 */	cmplwi r0, 0x1
-/* 81370674 0003EA74  41 81 00 64 */	bgt .L_813706D8
-/* 81370678 0003EA78  C8 22 82 C8 */	lfd f1, lbl_816946C8@sda21(r0)
-/* 8137067C 0003EA7C  C8 1D 00 08 */	lfd f0, 0x8(r29)
-/* 81370680 0003EA80  FC 01 00 00 */	fcmpu cr0, f1, f0
-/* 81370684 0003EA84  40 82 00 38 */	bne .L_813706BC
-/* 81370688 0003EA88  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 8137068C 0003EA8C  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370690 0003EA90  88 04 00 37 */	lbz r0, 0x37(r4)
-/* 81370694 0003EA94  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81370698 0003EA98  40 82 00 CC */	bne .L_81370764
-/* 8137069C 0003EA9C  88 04 00 38 */	lbz r0, 0x38(r4)
-/* 813706A0 0003EAA0  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813706A4 0003EAA4  40 82 00 C0 */	bne .L_81370764
-/* 813706A8 0003EAA8  FC 00 00 1E */	fctiwz f0, f0
-/* 813706AC 0003EAAC  D8 01 00 08 */	stfd f0, 0x8(r1)
-/* 813706B0 0003EAB0  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 813706B4 0003EAB4  7C 04 19 AE */	stbx r0, r4, r3
-/* 813706B8 0003EAB8  48 00 00 AC */	b .L_81370764
+/* 81370664 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81370668 | 41 80 04 3C */	blt .L_81370AA4
+/* 8137066C | 38 03 FF C9 */	subi r0, r3, 0x37
+/* 81370670 | 28 00 00 01 */	cmplwi r0, 0x1
+/* 81370674 | 41 81 00 64 */	bgt .L_813706D8
+/* 81370678 | C8 22 82 C8 */	lfd f1, lbl_816946C8@sda21(r0)
+/* 8137067C | C8 1D 00 08 */	lfd f0, 0x8(r29)
+/* 81370680 | FC 01 00 00 */	fcmpu cr0, f1, f0
+/* 81370684 | 40 82 00 38 */	bne .L_813706BC
+/* 81370688 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 8137068C | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370690 | 88 04 00 37 */	lbz r0, 0x37(r4)
+/* 81370694 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81370698 | 40 82 00 CC */	bne .L_81370764
+/* 8137069C | 88 04 00 38 */	lbz r0, 0x38(r4)
+/* 813706A0 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813706A4 | 40 82 00 C0 */	bne .L_81370764
+/* 813706A8 | FC 00 00 1E */	fctiwz f0, f0
+/* 813706AC | D8 01 00 08 */	stfd f0, 0x8(r1)
+/* 813706B0 | 80 01 00 0C */	lwz r0, 0xc(r1)
+/* 813706B4 | 7C 04 19 AE */	stbx r0, r4, r3
+/* 813706B8 | 48 00 00 AC */	b .L_81370764
 .L_813706BC:
-/* 813706BC 0003EABC  FC 00 00 1E */	fctiwz f0, f0
-/* 813706C0 0003EAC0  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813706C4 0003EAC4  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813706C8 0003EAC8  D8 01 00 08 */	stfd f0, 0x8(r1)
-/* 813706CC 0003EACC  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 813706D0 0003EAD0  7C 04 19 AE */	stbx r0, r4, r3
-/* 813706D4 0003EAD4  48 00 00 90 */	b .L_81370764
+/* 813706BC | FC 00 00 1E */	fctiwz f0, f0
+/* 813706C0 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813706C4 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813706C8 | D8 01 00 08 */	stfd f0, 0x8(r1)
+/* 813706CC | 80 01 00 0C */	lwz r0, 0xc(r1)
+/* 813706D0 | 7C 04 19 AE */	stbx r0, r4, r3
+/* 813706D4 | 48 00 00 90 */	b .L_81370764
 .L_813706D8:
-/* 813706D8 0003EAD8  2C 03 00 40 */	cmpwi r3, 0x40
-/* 813706DC 0003EADC  40 82 00 38 */	bne .L_81370714
-/* 813706E0 0003EAE0  C8 3D 00 08 */	lfd f1, 0x8(r29)
-/* 813706E4 0003EAE4  48 28 8C B5 */	bl __cvt_fp2unsigned
-/* 813706E8 0003EAE8  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813706EC 0003EAEC  54 60 06 31 */	rlwinm. r0, r3, 0, 24, 24
-/* 813706F0 0003EAF0  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813706F4 0003EAF4  7C A4 F0 AE */	lbzx r5, r4, r30
-/* 813706F8 0003EAF8  54 60 06 7E */	clrlwi r0, r3, 25
-/* 813706FC 0003EAFC  7C A3 03 78 */	or r3, r5, r0
-/* 81370700 0003EB00  41 82 00 08 */	beq .L_81370708
-/* 81370704 0003EB04  7C A3 00 78 */	andc r3, r5, r0
+/* 813706D8 | 2C 03 00 40 */	cmpwi r3, 0x40
+/* 813706DC | 40 82 00 38 */	bne .L_81370714
+/* 813706E0 | C8 3D 00 08 */	lfd f1, 0x8(r29)
+/* 813706E4 | 48 28 8C B5 */	bl __cvt_fp2unsigned
+/* 813706E8 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813706EC | 54 60 06 31 */	rlwinm. r0, r3, 0, 24, 24
+/* 813706F0 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813706F4 | 7C A4 F0 AE */	lbzx r5, r4, r30
+/* 813706F8 | 54 60 06 7E */	clrlwi r0, r3, 25
+/* 813706FC | 7C A3 03 78 */	or r3, r5, r0
+/* 81370700 | 41 82 00 08 */	beq .L_81370708
+/* 81370704 | 7C A3 00 78 */	andc r3, r5, r0
 .L_81370708:
-/* 81370708 0003EB08  7C 64 F1 AE */	stbx r3, r4, r30
-/* 8137070C 0003EB0C  9B CD A9 54 */	stb r30, lbl_81698994@sda21(r0)
-/* 81370710 0003EB10  48 00 00 54 */	b .L_81370764
+/* 81370708 | 7C 64 F1 AE */	stbx r3, r4, r30
+/* 8137070C | 9B CD A9 54 */	stb r30, lbl_81698994@sda21(r0)
+/* 81370710 | 48 00 00 54 */	b .L_81370764
 .L_81370714:
-/* 81370714 0003EB14  C8 1D 00 08 */	lfd f0, 0x8(r29)
-/* 81370718 0003EB18  3F 80 81 09 */	lis r28, sWiiData__Q23www10wiisetting@ha
-/* 8137071C 0003EB1C  2C 03 00 1C */	cmpwi r3, 0x1c
-/* 81370720 0003EB20  FC 00 00 1E */	fctiwz f0, f0
-/* 81370724 0003EB24  3B 9C A4 B8 */	addi r28, r28, sWiiData__Q23www10wiisetting@l
-/* 81370728 0003EB28  D8 01 00 08 */	stfd f0, 0x8(r1)
-/* 8137072C 0003EB2C  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 81370730 0003EB30  7C 1C 19 AE */	stbx r0, r28, r3
-/* 81370734 0003EB34  41 82 00 08 */	beq .L_8137073C
-/* 81370738 0003EB38  98 6D A9 54 */	stb r3, lbl_81698994@sda21(r0)
+/* 81370714 | C8 1D 00 08 */	lfd f0, 0x8(r29)
+/* 81370718 | 3F 80 81 09 */	lis r28, sWiiData__Q23www10wiisetting@ha
+/* 8137071C | 2C 03 00 1C */	cmpwi r3, 0x1c
+/* 81370720 | FC 00 00 1E */	fctiwz f0, f0
+/* 81370724 | 3B 9C A4 B8 */	addi r28, r28, sWiiData__Q23www10wiisetting@l
+/* 81370728 | D8 01 00 08 */	stfd f0, 0x8(r1)
+/* 8137072C | 80 01 00 0C */	lwz r0, 0xc(r1)
+/* 81370730 | 7C 1C 19 AE */	stbx r0, r28, r3
+/* 81370734 | 41 82 00 08 */	beq .L_8137073C
+/* 81370738 | 98 6D A9 54 */	stb r3, lbl_81698994@sda21(r0)
 .L_8137073C:
-/* 8137073C 0003EB3C  80 BD 00 00 */	lwz r5, 0x0(r29)
-/* 81370740 0003EB40  7F 64 DB 78 */	mr r4, r27
-/* 81370744 0003EB44  38 7F 02 90 */	addi r3, r31, 0x290
-/* 81370748 0003EB48  4C C6 31 82 */	crclr cr1eq
-/* 8137074C 0003EB4C  48 1B DF 55 */	bl OSReport
-/* 81370750 0003EB50  7C BC F0 AE */	lbzx r5, r28, r30
-/* 81370754 0003EB54  7F C4 F3 78 */	mr r4, r30
-/* 81370758 0003EB58  38 7F 02 B5 */	addi r3, r31, 0x2b5
-/* 8137075C 0003EB5C  4C C6 31 82 */	crclr cr1eq
-/* 81370760 0003EB60  48 1B DF 41 */	bl OSReport
+/* 8137073C | 80 BD 00 00 */	lwz r5, 0x0(r29)
+/* 81370740 | 7F 64 DB 78 */	mr r4, r27
+/* 81370744 | 38 7F 02 90 */	addi r3, r31, 0x290
+/* 81370748 | 4C C6 31 82 */	crclr cr1eq
+/* 8137074C | 48 1B DF 55 */	bl OSReport
+/* 81370750 | 7C BC F0 AE */	lbzx r5, r28, r30
+/* 81370754 | 7F C4 F3 78 */	mr r4, r30
+/* 81370758 | 38 7F 02 B5 */	addi r3, r31, 0x2b5
+/* 8137075C | 4C C6 31 82 */	crclr cr1eq
+/* 81370760 | 48 1B DF 41 */	bl OSReport
 .L_81370764:
-/* 81370764 0003EB64  28 1E 00 45 */	cmplwi r30, 0x45
-/* 81370768 0003EB68  41 81 03 34 */	bgt .L_81370A9C
-/* 8137076C 0003EB6C  3C 60 81 64 */	lis r3, jumptable_81644390@ha
-/* 81370770 0003EB70  57 C0 10 3A */	slwi r0, r30, 2
-/* 81370774 0003EB74  38 63 43 90 */	addi r3, r3, jumptable_81644390@l
-/* 81370778 0003EB78  7C 63 00 2E */	lwzx r3, r3, r0
-/* 8137077C 0003EB7C  7C 69 03 A6 */	mtctr r3
-/* 81370780 0003EB80  4E 80 04 20 */	bctr
+/* 81370764 | 28 1E 00 45 */	cmplwi r30, 0x45
+/* 81370768 | 41 81 03 34 */	bgt .L_81370A9C
+/* 8137076C | 3C 60 81 64 */	lis r3, jumptable_81644390@ha
+/* 81370770 | 57 C0 10 3A */	slwi r0, r30, 2
+/* 81370774 | 38 63 43 90 */	addi r3, r3, jumptable_81644390@l
+/* 81370778 | 7C 63 00 2E */	lwzx r3, r3, r0
+/* 8137077C | 7C 69 03 A6 */	mtctr r3
+/* 81370780 | 4E 80 04 20 */	bctr
 .L_81370784:
-/* 81370784 0003EB84  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 81370788 0003EB88  38 00 00 01 */	li r0, 0x1
-/* 8137078C 0003EB8C  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 81370790 0003EB90  98 03 00 36 */	stb r0, 0x36(r3)
-/* 81370794 0003EB94  48 00 03 08 */	b .L_81370A9C
+/* 81370784 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 81370788 | 38 00 00 01 */	li r0, 0x1
+/* 8137078C | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 81370790 | 98 03 00 36 */	stb r0, 0x36(r3)
+/* 81370794 | 48 00 03 08 */	b .L_81370A9C
 .L_81370798:
-/* 81370798 0003EB98  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 8137079C 0003EB9C  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813707A0 0003EBA0  7C 64 F0 AE */	lbzx r3, r4, r30
-/* 813707A4 0003EBA4  38 03 00 0A */	addi r0, r3, 0xa
-/* 813707A8 0003EBA8  98 04 00 37 */	stb r0, 0x37(r4)
-/* 813707AC 0003EBAC  48 00 02 F0 */	b .L_81370A9C
+/* 81370798 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 8137079C | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813707A0 | 7C 64 F0 AE */	lbzx r3, r4, r30
+/* 813707A4 | 38 03 00 0A */	addi r0, r3, 0xa
+/* 813707A8 | 98 04 00 37 */	stb r0, 0x37(r4)
+/* 813707AC | 48 00 02 F0 */	b .L_81370A9C
 .L_813707B0:
-/* 813707B0 0003EBB0  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 813707B4 0003EBB4  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 813707B8 0003EBB8  7C 63 F0 AE */	lbzx r3, r3, r30
-/* 813707BC 0003EBBC  48 20 CB CD */	bl fn_8157D388
-/* 813707C0 0003EBC0  3B 80 00 00 */	li r28, 0x0
-/* 813707C4 0003EBC4  3B C0 00 00 */	li r30, 0x0
-/* 813707C8 0003EBC8  3F A0 81 37 */	lis r29, www_wiisetting_8136F9F4@ha
+/* 813707B0 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 813707B4 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 813707B8 | 7C 63 F0 AE */	lbzx r3, r3, r30
+/* 813707BC | 48 20 CB CD */	bl fn_8157D388
+/* 813707C0 | 3B 80 00 00 */	li r28, 0x0
+/* 813707C4 | 3B C0 00 00 */	li r30, 0x0
+/* 813707C8 | 3F A0 81 37 */	lis r29, www_wiisetting_8136F9F4@ha
 .L_813707CC:
-/* 813707CC 0003EBCC  7F 83 E3 78 */	mr r3, r28
-/* 813707D0 0003EBD0  48 20 CC 4D */	bl fn_8157D41C
-/* 813707D4 0003EBD4  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813707D8 0003EBD8  41 82 00 14 */	beq .L_813707EC
-/* 813707DC 0003EBDC  93 CD 82 D0 */	stw r30, lbl_81696310@sda21(r0)
-/* 813707E0 0003EBE0  7F 83 E3 78 */	mr r3, r28
-/* 813707E4 0003EBE4  93 CD A9 48 */	stw r30, lbl_81698988@sda21(r0)
-/* 813707E8 0003EBE8  48 21 7B AD */	bl fn_81588394
+/* 813707CC | 7F 83 E3 78 */	mr r3, r28
+/* 813707D0 | 48 20 CC 4D */	bl fn_8157D41C
+/* 813707D4 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813707D8 | 41 82 00 14 */	beq .L_813707EC
+/* 813707DC | 93 CD 82 D0 */	stw r30, lbl_81696310@sda21(r0)
+/* 813707E0 | 7F 83 E3 78 */	mr r3, r28
+/* 813707E4 | 93 CD A9 48 */	stw r30, lbl_81698988@sda21(r0)
+/* 813707E8 | 48 21 7B AD */	bl fn_81588394
 .L_813707EC:
-/* 813707EC 0003EBEC  7F 83 E3 78 */	mr r3, r28
-/* 813707F0 0003EBF0  38 9D F9 F4 */	addi r4, r29, www_wiisetting_8136F9F4@l
-/* 813707F4 0003EBF4  48 21 7B D9 */	bl fn_815883CC
-/* 813707F8 0003EBF8  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 813707FC 0003EBFC  2C 1C 00 04 */	cmpwi r28, 0x4
-/* 81370800 0003EC00  41 80 FF CC */	blt .L_813707CC
-/* 81370804 0003EC04  48 00 02 98 */	b .L_81370A9C
+/* 813707EC | 7F 83 E3 78 */	mr r3, r28
+/* 813707F0 | 38 9D F9 F4 */	addi r4, r29, www_wiisetting_8136F9F4@l
+/* 813707F4 | 48 21 7B D9 */	bl fn_815883CC
+/* 813707F8 | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 813707FC | 2C 1C 00 04 */	cmpwi r28, 0x4
+/* 81370800 | 41 80 FF CC */	blt .L_813707CC
+/* 81370804 | 48 00 02 98 */	b .L_81370A9C
 .L_81370808:
-/* 81370808 0003EC08  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 8137080C 0003EC0C  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 81370810 0003EC10  7C 63 F0 AE */	lbzx r3, r3, r30
-/* 81370814 0003EC14  48 08 98 0D */	bl fn_813FA020
-/* 81370818 0003EC18  48 00 02 84 */	b .L_81370A9C
+/* 81370808 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 8137080C | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 81370810 | 7C 63 F0 AE */	lbzx r3, r3, r30
+/* 81370814 | 48 08 98 0D */	bl fn_813FA020
+/* 81370818 | 48 00 02 84 */	b .L_81370A9C
 .L_8137081C:
-/* 8137081C 0003EC1C  48 08 A2 B5 */	bl fn_813FAAD0
-/* 81370820 0003EC20  48 00 02 7C */	b .L_81370A9C
+/* 8137081C | 48 08 A2 B5 */	bl fn_813FAAD0
+/* 81370820 | 48 00 02 7C */	b .L_81370A9C
 .L_81370824:
-/* 81370824 0003EC24  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 81370828 0003EC28  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 8137082C 0003EC2C  7C 63 F0 AE */	lbzx r3, r3, r30
-/* 81370830 0003EC30  48 08 A3 11 */	bl fn_813FAB40
-/* 81370834 0003EC34  48 00 02 68 */	b .L_81370A9C
+/* 81370824 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 81370828 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 8137082C | 7C 63 F0 AE */	lbzx r3, r3, r30
+/* 81370830 | 48 08 A3 11 */	bl fn_813FAB40
+/* 81370834 | 48 00 02 68 */	b .L_81370A9C
 .L_81370838:
-/* 81370838 0003EC38  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 8137083C 0003EC3C  38 00 00 00 */	li r0, 0x0
-/* 81370840 0003EC40  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 81370844 0003EC44  98 0D A9 56 */	stb r0, lbl_81698996@sda21(r0)
-/* 81370848 0003EC48  7C 63 F0 AE */	lbzx r3, r3, r30
-/* 8137084C 0003EC4C  48 00 07 61 */	bl startFunc__Q23www10wiisettingFUc
-/* 81370850 0003EC50  48 00 02 4C */	b .L_81370A9C
+/* 81370838 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 8137083C | 38 00 00 00 */	li r0, 0x0
+/* 81370840 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 81370844 | 98 0D A9 56 */	stb r0, lbl_81698996@sda21(r0)
+/* 81370848 | 7C 63 F0 AE */	lbzx r3, r3, r30
+/* 8137084C | 48 00 07 61 */	bl startFunc__Q23www10wiisettingFUc
+/* 81370850 | 48 00 02 4C */	b .L_81370A9C
 .L_81370854:
-/* 81370854 0003EC54  48 08 AD 19 */	bl fn_813FB56C
-/* 81370858 0003EC58  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 8137085C 0003EC5C  98 6D A9 55 */	stb r3, lbl_81698995@sda21(r0)
-/* 81370860 0003EC60  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370864 0003EC64  7C 64 F0 AE */	lbzx r3, r4, r30
-/* 81370868 0003EC68  48 08 A4 29 */	bl fn_813FAC90
-/* 8137086C 0003EC6C  48 00 02 30 */	b .L_81370A9C
+/* 81370854 | 48 08 AD 19 */	bl fn_813FB56C
+/* 81370858 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 8137085C | 98 6D A9 55 */	stb r3, lbl_81698995@sda21(r0)
+/* 81370860 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370864 | 7C 64 F0 AE */	lbzx r3, r4, r30
+/* 81370868 | 48 08 A4 29 */	bl fn_813FAC90
+/* 8137086C | 48 00 02 30 */	b .L_81370A9C
 .L_81370870:
-/* 81370870 0003EC70  88 6D A9 55 */	lbz r3, lbl_81698995@sda21(r0)
-/* 81370874 0003EC74  48 08 A4 1D */	bl fn_813FAC90
-/* 81370878 0003EC78  48 00 02 24 */	b .L_81370A9C
+/* 81370870 | 88 6D A9 55 */	lbz r3, lbl_81698995@sda21(r0)
+/* 81370874 | 48 08 A4 1D */	bl fn_813FAC90
+/* 81370878 | 48 00 02 24 */	b .L_81370A9C
 .L_8137087C:
-/* 8137087C 0003EC7C  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 81370880 0003EC80  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 81370884 0003EC84  7C 63 F0 AE */	lbzx r3, r3, r30
-/* 81370888 0003EC88  48 08 A1 45 */	bl fn_813FA9CC
-/* 8137088C 0003EC8C  48 00 02 10 */	b .L_81370A9C
+/* 8137087C | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 81370880 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 81370884 | 7C 63 F0 AE */	lbzx r3, r3, r30
+/* 81370888 | 48 08 A1 45 */	bl fn_813FA9CC
+/* 8137088C | 48 00 02 10 */	b .L_81370A9C
 .L_81370890:
-/* 81370890 0003EC90  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 81370894 0003EC94  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 81370898 0003EC98  7C 63 F0 AE */	lbzx r3, r3, r30
-/* 8137089C 0003EC9C  48 08 A1 81 */	bl fn_813FAA1C
-/* 813708A0 0003ECA0  48 00 01 FC */	b .L_81370A9C
+/* 81370890 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 81370894 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 81370898 | 7C 63 F0 AE */	lbzx r3, r3, r30
+/* 8137089C | 48 08 A1 81 */	bl fn_813FAA1C
+/* 813708A0 | 48 00 01 FC */	b .L_81370A9C
 .L_813708A4:
-/* 813708A4 0003ECA4  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 813708A8 0003ECA8  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 813708AC 0003ECAC  7C 63 F0 AE */	lbzx r3, r3, r30
-/* 813708B0 0003ECB0  48 08 A1 BD */	bl fn_813FAA6C
-/* 813708B4 0003ECB4  48 00 01 E8 */	b .L_81370A9C
+/* 813708A4 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 813708A8 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 813708AC | 7C 63 F0 AE */	lbzx r3, r3, r30
+/* 813708B0 | 48 08 A1 BD */	bl fn_813FAA6C
+/* 813708B4 | 48 00 01 E8 */	b .L_81370A9C
 .L_813708B8:
-/* 813708B8 0003ECB8  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 813708BC 0003ECBC  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 813708C0 0003ECC0  7C 63 F0 AE */	lbzx r3, r3, r30
-/* 813708C4 0003ECC4  48 08 A1 ED */	bl fn_813FAAB0
-/* 813708C8 0003ECC8  48 00 01 D4 */	b .L_81370A9C
+/* 813708B8 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 813708BC | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 813708C0 | 7C 63 F0 AE */	lbzx r3, r3, r30
+/* 813708C4 | 48 08 A1 ED */	bl fn_813FAAB0
+/* 813708C8 | 48 00 01 D4 */	b .L_81370A9C
 .L_813708CC:
-/* 813708CC 0003ECCC  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 813708D0 0003ECD0  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 813708D4 0003ECD4  7C 63 F0 AE */	lbzx r3, r3, r30
-/* 813708D8 0003ECD8  48 08 A2 FD */	bl fn_813FABD4
-/* 813708DC 0003ECDC  48 00 01 C0 */	b .L_81370A9C
+/* 813708CC | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 813708D0 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 813708D4 | 7C 63 F0 AE */	lbzx r3, r3, r30
+/* 813708D8 | 48 08 A2 FD */	bl fn_813FABD4
+/* 813708DC | 48 00 01 C0 */	b .L_81370A9C
 .L_813708E0:
-/* 813708E0 0003ECE0  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 813708E4 0003ECE4  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 813708E8 0003ECE8  7C 63 F0 AE */	lbzx r3, r3, r30
-/* 813708EC 0003ECEC  48 08 B5 A5 */	bl fn_813FBE90
-/* 813708F0 0003ECF0  48 08 B0 99 */	bl fn_813FB988
-/* 813708F4 0003ECF4  48 00 01 A8 */	b .L_81370A9C
+/* 813708E0 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 813708E4 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 813708E8 | 7C 63 F0 AE */	lbzx r3, r3, r30
+/* 813708EC | 48 08 B5 A5 */	bl fn_813FBE90
+/* 813708F0 | 48 08 B0 99 */	bl fn_813FB988
+/* 813708F4 | 48 00 01 A8 */	b .L_81370A9C
 .L_813708F8:
-/* 813708F8 0003ECF8  C8 3D 00 08 */	lfd f1, 0x8(r29)
-/* 813708FC 0003ECFC  48 28 8A 9D */	bl __cvt_fp2unsigned
-/* 81370900 0003ED00  54 60 05 EF */	rlwinm. r0, r3, 0, 23, 23
-/* 81370904 0003ED04  41 82 01 98 */	beq .L_81370A9C
-/* 81370908 0003ED08  48 08 B2 B1 */	bl fn_813FBBB8
-/* 8137090C 0003ED0C  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370910 0003ED10  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370914 0003ED14  7C 64 F1 AE */	stbx r3, r4, r30
-/* 81370918 0003ED18  48 00 01 84 */	b .L_81370A9C
+/* 813708F8 | C8 3D 00 08 */	lfd f1, 0x8(r29)
+/* 813708FC | 48 28 8A 9D */	bl __cvt_fp2unsigned
+/* 81370900 | 54 60 05 EF */	rlwinm. r0, r3, 0, 23, 23
+/* 81370904 | 41 82 01 98 */	beq .L_81370A9C
+/* 81370908 | 48 08 B2 B1 */	bl fn_813FBBB8
+/* 8137090C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370910 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370914 | 7C 64 F1 AE */	stbx r3, r4, r30
+/* 81370918 | 48 00 01 84 */	b .L_81370A9C
 .L_8137091C:
-/* 8137091C 0003ED1C  48 08 B2 9D */	bl fn_813FBBB8
-/* 81370920 0003ED20  98 6D A9 55 */	stb r3, lbl_81698995@sda21(r0)
-/* 81370924 0003ED24  48 00 01 78 */	b .L_81370A9C
+/* 8137091C | 48 08 B2 9D */	bl fn_813FBBB8
+/* 81370920 | 98 6D A9 55 */	stb r3, lbl_81698995@sda21(r0)
+/* 81370924 | 48 00 01 78 */	b .L_81370A9C
 .L_81370928:
-/* 81370928 0003ED28  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 8137092C 0003ED2C  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 81370930 0003ED30  7C 63 F0 AE */	lbzx r3, r3, r30
-/* 81370934 0003ED34  48 08 B5 D9 */	bl fn_813FBF0C
-/* 81370938 0003ED38  48 00 01 64 */	b .L_81370A9C
+/* 81370928 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 8137092C | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 81370930 | 7C 63 F0 AE */	lbzx r3, r3, r30
+/* 81370934 | 48 08 B5 D9 */	bl fn_813FBF0C
+/* 81370938 | 48 00 01 64 */	b .L_81370A9C
 .L_8137093C:
-/* 8137093C 0003ED3C  48 08 B4 D1 */	bl fn_813FBE0C
-/* 81370940 0003ED40  98 6D A9 55 */	stb r3, lbl_81698995@sda21(r0)
-/* 81370944 0003ED44  48 00 01 58 */	b .L_81370A9C
+/* 8137093C | 48 08 B4 D1 */	bl fn_813FBE0C
+/* 81370940 | 98 6D A9 55 */	stb r3, lbl_81698995@sda21(r0)
+/* 81370944 | 48 00 01 58 */	b .L_81370A9C
 .L_81370948:
-/* 81370948 0003ED48  48 08 A9 E9 */	bl fn_813FB330
-/* 8137094C 0003ED4C  48 00 01 50 */	b .L_81370A9C
+/* 81370948 | 48 08 A9 E9 */	bl fn_813FB330
+/* 8137094C | 48 00 01 50 */	b .L_81370A9C
 .L_81370950:
-/* 81370950 0003ED50  4B FC 51 3D */	bl getRegion__Q23ipl6SystemFv
-/* 81370954 0003ED54  28 03 00 01 */	cmplwi r3, 0x1
-/* 81370958 0003ED58  40 82 00 A4 */	bne .L_813709FC
-/* 8137095C 0003ED5C  4B FC 50 91 */	bl getLanguage__Q23ipl6SystemFv
-/* 81370960 0003ED60  2C 03 00 03 */	cmpwi r3, 0x3
-/* 81370964 0003ED64  41 82 00 48 */	beq .L_813709AC
-/* 81370968 0003ED68  40 80 00 10 */	bge .L_81370978
-/* 8137096C 0003ED6C  2C 03 00 01 */	cmpwi r3, 0x1
-/* 81370970 0003ED70  41 82 00 14 */	beq .L_81370984
-/* 81370974 0003ED74  48 00 01 28 */	b .L_81370A9C
+/* 81370950 | 4B FC 51 3D */	bl getRegion__Q23ipl6SystemFv
+/* 81370954 | 28 03 00 01 */	cmplwi r3, 0x1
+/* 81370958 | 40 82 00 A4 */	bne .L_813709FC
+/* 8137095C | 4B FC 50 91 */	bl getLanguage__Q23ipl6SystemFv
+/* 81370960 | 2C 03 00 03 */	cmpwi r3, 0x3
+/* 81370964 | 41 82 00 48 */	beq .L_813709AC
+/* 81370968 | 40 80 00 10 */	bge .L_81370978
+/* 8137096C | 2C 03 00 01 */	cmpwi r3, 0x1
+/* 81370970 | 41 82 00 14 */	beq .L_81370984
+/* 81370974 | 48 00 01 28 */	b .L_81370A9C
 .L_81370978:
-/* 81370978 0003ED78  2C 03 00 05 */	cmpwi r3, 0x5
-/* 8137097C 0003ED7C  40 80 01 20 */	bge .L_81370A9C
-/* 81370980 0003ED80  48 00 00 54 */	b .L_813709D4
+/* 81370978 | 2C 03 00 05 */	cmpwi r3, 0x5
+/* 8137097C | 40 80 01 20 */	bge .L_81370A9C
+/* 81370980 | 48 00 00 54 */	b .L_813709D4
 .L_81370984:
-/* 81370984 0003ED84  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370988 0003ED88  3C 60 81 61 */	lis r3, lbl_8160F060@ha
-/* 8137098C 0003ED8C  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370990 0003ED90  88 04 00 3C */	lbz r0, 0x3c(r4)
-/* 81370994 0003ED94  38 63 F0 60 */	addi r3, r3, lbl_8160F060@l
-/* 81370998 0003ED98  7C 60 1A 14 */	add r3, r0, r3
-/* 8137099C 0003ED9C  88 63 FF F8 */	lbz r3, -0x8(r3)
-/* 813709A0 0003EDA0  38 03 00 08 */	addi r0, r3, 0x8
-/* 813709A4 0003EDA4  98 04 00 3C */	stb r0, 0x3c(r4)
-/* 813709A8 0003EDA8  48 00 00 F4 */	b .L_81370A9C
+/* 81370984 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370988 | 3C 60 81 61 */	lis r3, lbl_8160F060@ha
+/* 8137098C | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370990 | 88 04 00 3C */	lbz r0, 0x3c(r4)
+/* 81370994 | 38 63 F0 60 */	addi r3, r3, lbl_8160F060@l
+/* 81370998 | 7C 60 1A 14 */	add r3, r0, r3
+/* 8137099C | 88 63 FF F8 */	lbz r3, -0x8(r3)
+/* 813709A0 | 38 03 00 08 */	addi r0, r3, 0x8
+/* 813709A4 | 98 04 00 3C */	stb r0, 0x3c(r4)
+/* 813709A8 | 48 00 00 F4 */	b .L_81370A9C
 .L_813709AC:
-/* 813709AC 0003EDAC  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813709B0 0003EDB0  3C 60 81 61 */	lis r3, lbl_8160F060@ha
-/* 813709B4 0003EDB4  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813709B8 0003EDB8  88 04 00 3C */	lbz r0, 0x3c(r4)
-/* 813709BC 0003EDBC  38 63 F0 60 */	addi r3, r3, lbl_8160F060@l
-/* 813709C0 0003EDC0  7C 60 1A 14 */	add r3, r0, r3
-/* 813709C4 0003EDC4  88 63 00 28 */	lbz r3, 0x28(r3)
-/* 813709C8 0003EDC8  38 03 00 08 */	addi r0, r3, 0x8
-/* 813709CC 0003EDCC  98 04 00 3C */	stb r0, 0x3c(r4)
-/* 813709D0 0003EDD0  48 00 00 CC */	b .L_81370A9C
+/* 813709AC | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813709B0 | 3C 60 81 61 */	lis r3, lbl_8160F060@ha
+/* 813709B4 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813709B8 | 88 04 00 3C */	lbz r0, 0x3c(r4)
+/* 813709BC | 38 63 F0 60 */	addi r3, r3, lbl_8160F060@l
+/* 813709C0 | 7C 60 1A 14 */	add r3, r0, r3
+/* 813709C4 | 88 63 00 28 */	lbz r3, 0x28(r3)
+/* 813709C8 | 38 03 00 08 */	addi r0, r3, 0x8
+/* 813709CC | 98 04 00 3C */	stb r0, 0x3c(r4)
+/* 813709D0 | 48 00 00 CC */	b .L_81370A9C
 .L_813709D4:
-/* 813709D4 0003EDD4  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 813709D8 0003EDD8  3C 60 81 61 */	lis r3, lbl_8160F060@ha
-/* 813709DC 0003EDDC  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 813709E0 0003EDE0  88 04 00 3C */	lbz r0, 0x3c(r4)
-/* 813709E4 0003EDE4  38 63 F0 60 */	addi r3, r3, lbl_8160F060@l
-/* 813709E8 0003EDE8  7C 60 1A 14 */	add r3, r0, r3
-/* 813709EC 0003EDEC  88 63 00 58 */	lbz r3, 0x58(r3)
-/* 813709F0 0003EDF0  38 03 00 08 */	addi r0, r3, 0x8
-/* 813709F4 0003EDF4  98 04 00 3C */	stb r0, 0x3c(r4)
-/* 813709F8 0003EDF8  48 00 00 A4 */	b .L_81370A9C
+/* 813709D4 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 813709D8 | 3C 60 81 61 */	lis r3, lbl_8160F060@ha
+/* 813709DC | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 813709E0 | 88 04 00 3C */	lbz r0, 0x3c(r4)
+/* 813709E4 | 38 63 F0 60 */	addi r3, r3, lbl_8160F060@l
+/* 813709E8 | 7C 60 1A 14 */	add r3, r0, r3
+/* 813709EC | 88 63 00 58 */	lbz r3, 0x58(r3)
+/* 813709F0 | 38 03 00 08 */	addi r0, r3, 0x8
+/* 813709F4 | 98 04 00 3C */	stb r0, 0x3c(r4)
+/* 813709F8 | 48 00 00 A4 */	b .L_81370A9C
 .L_813709FC:
-/* 813709FC 0003EDFC  4B FC 50 91 */	bl getRegion__Q23ipl6SystemFv
-/* 81370A00 0003EE00  28 03 00 02 */	cmplwi r3, 0x2
-/* 81370A04 0003EE04  40 82 00 98 */	bne .L_81370A9C
-/* 81370A08 0003EE08  4B FC 4F E5 */	bl getLanguage__Q23ipl6SystemFv
-/* 81370A0C 0003EE0C  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370A10 0003EE10  3C A0 81 61 */	lis r5, lbl_8160F0F0@ha
-/* 81370A14 0003EE14  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370A18 0003EE18  1C 63 00 3B */	mulli r3, r3, 0x3b
-/* 81370A1C 0003EE1C  38 A5 F0 F0 */	addi r5, r5, lbl_8160F0F0@l
-/* 81370A20 0003EE20  88 04 00 3C */	lbz r0, 0x3c(r4)
-/* 81370A24 0003EE24  7C 65 1A 14 */	add r3, r5, r3
-/* 81370A28 0003EE28  7C 60 1A 14 */	add r3, r0, r3
-/* 81370A2C 0003EE2C  88 63 FF 85 */	lbz r3, -0x7b(r3)
-/* 81370A30 0003EE30  38 03 00 40 */	addi r0, r3, 0x40
-/* 81370A34 0003EE34  98 04 00 3C */	stb r0, 0x3c(r4)
-/* 81370A38 0003EE38  48 00 00 64 */	b .L_81370A9C
+/* 813709FC | 4B FC 50 91 */	bl getRegion__Q23ipl6SystemFv
+/* 81370A00 | 28 03 00 02 */	cmplwi r3, 0x2
+/* 81370A04 | 40 82 00 98 */	bne .L_81370A9C
+/* 81370A08 | 4B FC 4F E5 */	bl getLanguage__Q23ipl6SystemFv
+/* 81370A0C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370A10 | 3C A0 81 61 */	lis r5, lbl_8160F0F0@ha
+/* 81370A14 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370A18 | 1C 63 00 3B */	mulli r3, r3, 0x3b
+/* 81370A1C | 38 A5 F0 F0 */	addi r5, r5, lbl_8160F0F0@l
+/* 81370A20 | 88 04 00 3C */	lbz r0, 0x3c(r4)
+/* 81370A24 | 7C 65 1A 14 */	add r3, r5, r3
+/* 81370A28 | 7C 60 1A 14 */	add r3, r0, r3
+/* 81370A2C | 88 63 FF 85 */	lbz r3, -0x7b(r3)
+/* 81370A30 | 38 03 00 40 */	addi r0, r3, 0x40
+/* 81370A34 | 98 04 00 3C */	stb r0, 0x3c(r4)
+/* 81370A38 | 48 00 00 64 */	b .L_81370A9C
 .L_81370A3C:
-/* 81370A3C 0003EE3C  48 08 B4 31 */	bl fn_813FBE6C
-/* 81370A40 0003EE40  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370A44 0003EE44  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370A48 0003EE48  98 64 00 3C */	stb r3, 0x3c(r4)
-/* 81370A4C 0003EE4C  48 00 00 50 */	b .L_81370A9C
+/* 81370A3C | 48 08 B4 31 */	bl fn_813FBE6C
+/* 81370A40 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370A44 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370A48 | 98 64 00 3C */	stb r3, 0x3c(r4)
+/* 81370A4C | 48 00 00 50 */	b .L_81370A9C
 .L_81370A50:
-/* 81370A50 0003EE50  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 81370A54 0003EE54  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 81370A58 0003EE58  7C 03 F0 AE */	lbzx r0, r3, r30
-/* 81370A5C 0003EE5C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81370A60 0003EE60  40 82 00 18 */	bne .L_81370A78
-/* 81370A64 0003EE64  48 1F 8E E9 */	bl fn_8156994C
-/* 81370A68 0003EE68  38 7F 02 C4 */	addi r3, r31, 0x2c4
-/* 81370A6C 0003EE6C  4C C6 31 82 */	crclr cr1eq
-/* 81370A70 0003EE70  48 1B DC 31 */	bl OSReport
-/* 81370A74 0003EE74  48 00 00 28 */	b .L_81370A9C
+/* 81370A50 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 81370A54 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 81370A58 | 7C 03 F0 AE */	lbzx r0, r3, r30
+/* 81370A5C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81370A60 | 40 82 00 18 */	bne .L_81370A78
+/* 81370A64 | 48 1F 8E E9 */	bl fn_8156994C
+/* 81370A68 | 38 7F 02 C4 */	addi r3, r31, 0x2c4
+/* 81370A6C | 4C C6 31 82 */	crclr cr1eq
+/* 81370A70 | 48 1B DC 31 */	bl OSReport
+/* 81370A74 | 48 00 00 28 */	b .L_81370A9C
 .L_81370A78:
-/* 81370A78 0003EE78  28 00 00 45 */	cmplwi r0, 0x45
-/* 81370A7C 0003EE7C  41 82 00 20 */	beq .L_81370A9C
-/* 81370A80 0003EE80  98 0D A9 54 */	stb r0, lbl_81698994@sda21(r0)
-/* 81370A84 0003EE84  38 60 00 00 */	li r3, 0x0
-/* 81370A88 0003EE88  38 80 00 00 */	li r4, 0x0
-/* 81370A8C 0003EE8C  38 A0 00 00 */	li r5, 0x0
-/* 81370A90 0003EE90  38 C0 00 00 */	li r6, 0x0
-/* 81370A94 0003EE94  38 E0 00 00 */	li r7, 0x0
-/* 81370A98 0003EE98  48 00 00 85 */	bl wiiWriteBack__Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue
+/* 81370A78 | 28 00 00 45 */	cmplwi r0, 0x45
+/* 81370A7C | 41 82 00 20 */	beq .L_81370A9C
+/* 81370A80 | 98 0D A9 54 */	stb r0, lbl_81698994@sda21(r0)
+/* 81370A84 | 38 60 00 00 */	li r3, 0x0
+/* 81370A88 | 38 80 00 00 */	li r4, 0x0
+/* 81370A8C | 38 A0 00 00 */	li r5, 0x0
+/* 81370A90 | 38 C0 00 00 */	li r6, 0x0
+/* 81370A94 | 38 E0 00 00 */	li r7, 0x0
+/* 81370A98 | 48 00 00 85 */	bl wiiWriteBack__Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue
 .L_81370A9C:
-/* 81370A9C 0003EE9C  38 60 00 0B */	li r3, 0xb
-/* 81370AA0 0003EEA0  48 00 00 08 */	b .L_81370AA8
+/* 81370A9C | 38 60 00 0B */	li r3, 0xb
+/* 81370AA0 | 48 00 00 08 */	b .L_81370AA8
 .L_81370AA4:
-/* 81370AA4 0003EEA4  38 60 00 08 */	li r3, 0x8
+/* 81370AA4 | 38 60 00 08 */	li r3, 0x8
 .L_81370AA8:
-/* 81370AA8 0003EEA8  39 61 00 30 */	addi r11, r1, 0x30
-/* 81370AAC 0003EEAC  48 28 8A 61 */	bl _restgpr_27
-/* 81370AB0 0003EEB0  80 01 00 34 */	lwz r0, 0x34(r1)
-/* 81370AB4 0003EEB4  7C 08 03 A6 */	mtlr r0
-/* 81370AB8 0003EEB8  38 21 00 30 */	addi r1, r1, 0x30
-/* 81370ABC 0003EEBC  4E 80 00 20 */	blr
+/* 81370AA8 | 39 61 00 30 */	addi r11, r1, 0x30
+/* 81370AAC | 48 28 8A 61 */	bl _restgpr_27
+/* 81370AB0 | 80 01 00 34 */	lwz r0, 0x34(r1)
+/* 81370AB4 | 7C 08 03 A6 */	mtlr r0
+/* 81370AB8 | 38 21 00 30 */	addi r1, r1, 0x30
+/* 81370ABC | 4E 80 00 20 */	blr
 .endfn Setter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue
 
 # .text:0x10F0 | 0x81370AC0 | size: 0x5C
 # www::wiisetting::wiiOSReport(WWWJSPluginObj*, WWWJSPluginObj*, int, WWWJSPluginValue*, WWWJSPluginValue*)
 .fn wiiOSReport__Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue, global
-/* 81370AC0 0003EEC0  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 81370AC4 0003EEC4  7C 08 02 A6 */	mflr r0
-/* 81370AC8 0003EEC8  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81370ACC 0003EECC  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 81370AD0 0003EED0  7C DF 33 78 */	mr r31, r6
-/* 81370AD4 0003EED4  80 06 00 00 */	lwz r0, 0x0(r6)
-/* 81370AD8 0003EED8  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81370ADC 0003EEDC  40 82 00 28 */	bne .L_81370B04
-/* 81370AE0 0003EEE0  3C 80 81 64 */	lis r4, lbl_816444A8@ha
-/* 81370AE4 0003EEE4  38 60 00 03 */	li r3, 0x3
-/* 81370AE8 0003EEE8  38 84 44 A8 */	addi r4, r4, lbl_816444A8@l
-/* 81370AEC 0003EEEC  4C C6 31 82 */	crclr cr1eq
-/* 81370AF0 0003EEF0  4B FF DD A5 */	bl IPLWWWReport__Q37ext_ead3www5printFiPCce
-/* 81370AF4 0003EEF4  C8 3F 00 08 */	lfd f1, 0x8(r31)
-/* 81370AF8 0003EEF8  38 6D 82 E5 */	li r3, lbl_81696325@sda21
-/* 81370AFC 0003EEFC  4C C6 32 42 */	crset cr1eq
-/* 81370B00 0003EF00  48 1B DB A1 */	bl OSReport
+/* 81370AC0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 81370AC4 | 7C 08 02 A6 */	mflr r0
+/* 81370AC8 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81370ACC | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 81370AD0 | 7C DF 33 78 */	mr r31, r6
+/* 81370AD4 | 80 06 00 00 */	lwz r0, 0x0(r6)
+/* 81370AD8 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81370ADC | 40 82 00 28 */	bne .L_81370B04
+/* 81370AE0 | 3C 80 81 64 */	lis r4, lbl_816444A8@ha
+/* 81370AE4 | 38 60 00 03 */	li r3, 0x3
+/* 81370AE8 | 38 84 44 A8 */	addi r4, r4, lbl_816444A8@l
+/* 81370AEC | 4C C6 31 82 */	crclr cr1eq
+/* 81370AF0 | 4B FF DD A5 */	bl IPLWWWReport__Q37ext_ead3www5printFiPCce
+/* 81370AF4 | C8 3F 00 08 */	lfd f1, 0x8(r31)
+/* 81370AF8 | 38 6D 82 E5 */	li r3, lbl_81696325@sda21
+/* 81370AFC | 4C C6 32 42 */	crset cr1eq
+/* 81370B00 | 48 1B DB A1 */	bl OSReport
 .L_81370B04:
-/* 81370B04 0003EF04  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 81370B08 0003EF08  38 60 00 11 */	li r3, 0x11
-/* 81370B0C 0003EF0C  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 81370B10 0003EF10  7C 08 03 A6 */	mtlr r0
-/* 81370B14 0003EF14  38 21 00 10 */	addi r1, r1, 0x10
-/* 81370B18 0003EF18  4E 80 00 20 */	blr
+/* 81370B04 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 81370B08 | 38 60 00 11 */	li r3, 0x11
+/* 81370B0C | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 81370B10 | 7C 08 03 A6 */	mtlr r0
+/* 81370B14 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 81370B18 | 4E 80 00 20 */	blr
 .endfn wiiOSReport__Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue
 
 # .text:0x114C | 0x81370B1C | size: 0x344
 # www::wiisetting::wiiWriteBack(WWWJSPluginObj*, WWWJSPluginObj*, int, WWWJSPluginValue*, WWWJSPluginValue*)
 .fn wiiWriteBack__Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue, global
-/* 81370B1C 0003EF1C  94 21 FF 90 */	stwu r1, -0x70(r1)
-/* 81370B20 0003EF20  7C 08 02 A6 */	mflr r0
-/* 81370B24 0003EF24  90 01 00 74 */	stw r0, 0x74(r1)
-/* 81370B28 0003EF28  39 61 00 70 */	addi r11, r1, 0x70
-/* 81370B2C 0003EF2C  48 28 89 9D */	bl _savegpr_29
-/* 81370B30 0003EF30  3F C0 81 09 */	lis r30, sWiiData__Q23www10wiisetting@ha
-/* 81370B34 0003EF34  88 8D A9 54 */	lbz r4, lbl_81698994@sda21(r0)
-/* 81370B38 0003EF38  3B DE A4 B8 */	addi r30, r30, sWiiData__Q23www10wiisetting@l
-/* 81370B3C 0003EF3C  3F E0 81 64 */	lis r31, lbl_816440A0@ha
-/* 81370B40 0003EF40  7C DD 33 78 */	mr r29, r6
-/* 81370B44 0003EF44  7C BE 20 AE */	lbzx r5, r30, r4
-/* 81370B48 0003EF48  3B FF 40 A0 */	addi r31, r31, lbl_816440A0@l
-/* 81370B4C 0003EF4C  88 CD A9 55 */	lbz r6, lbl_81698995@sda21(r0)
-/* 81370B50 0003EF50  38 7F 04 1F */	addi r3, r31, 0x41f
-/* 81370B54 0003EF54  4C C6 31 82 */	crclr cr1eq
-/* 81370B58 0003EF58  48 1B DB 49 */	bl OSReport
-/* 81370B5C 0003EF5C  88 8D A9 54 */	lbz r4, lbl_81698994@sda21(r0)
-/* 81370B60 0003EF60  28 04 00 40 */	cmplwi r4, 0x40
-/* 81370B64 0003EF64  41 81 02 98 */	bgt .L_81370DFC
-/* 81370B68 0003EF68  3C 60 81 64 */	lis r3, jumptable_81644528@ha
-/* 81370B6C 0003EF6C  54 80 10 3A */	slwi r0, r4, 2
-/* 81370B70 0003EF70  38 63 45 28 */	addi r3, r3, jumptable_81644528@l
-/* 81370B74 0003EF74  7C 63 00 2E */	lwzx r3, r3, r0
-/* 81370B78 0003EF78  7C 69 03 A6 */	mtctr r3
-/* 81370B7C 0003EF7C  4E 80 04 20 */	bctr
+/* 81370B1C | 94 21 FF 90 */	stwu r1, -0x70(r1)
+/* 81370B20 | 7C 08 02 A6 */	mflr r0
+/* 81370B24 | 90 01 00 74 */	stw r0, 0x74(r1)
+/* 81370B28 | 39 61 00 70 */	addi r11, r1, 0x70
+/* 81370B2C | 48 28 89 9D */	bl _savegpr_29
+/* 81370B30 | 3F C0 81 09 */	lis r30, sWiiData__Q23www10wiisetting@ha
+/* 81370B34 | 88 8D A9 54 */	lbz r4, lbl_81698994@sda21(r0)
+/* 81370B38 | 3B DE A4 B8 */	addi r30, r30, sWiiData__Q23www10wiisetting@l
+/* 81370B3C | 3F E0 81 64 */	lis r31, lbl_816440A0@ha
+/* 81370B40 | 7C DD 33 78 */	mr r29, r6
+/* 81370B44 | 7C BE 20 AE */	lbzx r5, r30, r4
+/* 81370B48 | 3B FF 40 A0 */	addi r31, r31, lbl_816440A0@l
+/* 81370B4C | 88 CD A9 55 */	lbz r6, lbl_81698995@sda21(r0)
+/* 81370B50 | 38 7F 04 1F */	addi r3, r31, 0x41f
+/* 81370B54 | 4C C6 31 82 */	crclr cr1eq
+/* 81370B58 | 48 1B DB 49 */	bl OSReport
+/* 81370B5C | 88 8D A9 54 */	lbz r4, lbl_81698994@sda21(r0)
+/* 81370B60 | 28 04 00 40 */	cmplwi r4, 0x40
+/* 81370B64 | 41 81 02 98 */	bgt .L_81370DFC
+/* 81370B68 | 3C 60 81 64 */	lis r3, jumptable_81644528@ha
+/* 81370B6C | 54 80 10 3A */	slwi r0, r4, 2
+/* 81370B70 | 38 63 45 28 */	addi r3, r3, jumptable_81644528@l
+/* 81370B74 | 7C 63 00 2E */	lwzx r3, r3, r0
+/* 81370B78 | 7C 69 03 A6 */	mtctr r3
+/* 81370B7C | 4E 80 04 20 */	bctr
 .L_81370B80:
-/* 81370B80 0003EF80  88 7E 00 01 */	lbz r3, 0x1(r30)
-/* 81370B84 0003EF84  48 1F 97 29 */	bl fn_8156A2AC
-/* 81370B88 0003EF88  48 00 02 74 */	b .L_81370DFC
+/* 81370B80 | 88 7E 00 01 */	lbz r3, 0x1(r30)
+/* 81370B84 | 48 1F 97 29 */	bl fn_8156A2AC
+/* 81370B88 | 48 00 02 74 */	b .L_81370DFC
 .L_81370B8C:
-/* 81370B8C 0003EF8C  48 1F 9C 95 */	bl fn_8156A820
-/* 81370B90 0003EF90  88 9E 00 02 */	lbz r4, 0x2(r30)
-/* 81370B94 0003EF94  54 60 07 FE */	clrlwi r0, r3, 31
-/* 81370B98 0003EF98  7C 04 00 40 */	cmplw r4, r0
-/* 81370B9C 0003EF9C  41 82 02 60 */	beq .L_81370DFC
-/* 81370BA0 0003EFA0  2C 04 00 00 */	cmpwi r4, 0x0
-/* 81370BA4 0003EFA4  60 60 00 01 */	ori r0, r3, 0x1
-/* 81370BA8 0003EFA8  40 82 00 08 */	bne .L_81370BB0
-/* 81370BAC 0003EFAC  54 60 00 3C */	clrrwi r0, r3, 1
+/* 81370B8C | 48 1F 9C 95 */	bl fn_8156A820
+/* 81370B90 | 88 9E 00 02 */	lbz r4, 0x2(r30)
+/* 81370B94 | 54 60 07 FE */	clrlwi r0, r3, 31
+/* 81370B98 | 7C 04 00 40 */	cmplw r4, r0
+/* 81370B9C | 41 82 02 60 */	beq .L_81370DFC
+/* 81370BA0 | 2C 04 00 00 */	cmpwi r4, 0x0
+/* 81370BA4 | 60 60 00 01 */	ori r0, r3, 0x1
+/* 81370BA8 | 40 82 00 08 */	bne .L_81370BB0
+/* 81370BAC | 54 60 00 3C */	clrrwi r0, r3, 1
 .L_81370BB0:
-/* 81370BB0 0003EFB0  7C 03 03 78 */	mr r3, r0
-/* 81370BB4 0003EFB4  48 1F 9C A9 */	bl fn_8156A85C
-/* 81370BB8 0003EFB8  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 81370BBC 0003EFBC  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 81370BC0 0003EFC0  88 03 00 02 */	lbz r0, 0x2(r3)
-/* 81370BC4 0003EFC4  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81370BC8 0003EFC8  40 82 00 14 */	bne .L_81370BDC
-/* 81370BCC 0003EFCC  38 00 00 00 */	li r0, 0x0
-/* 81370BD0 0003EFD0  98 03 00 04 */	stb r0, 0x4(r3)
-/* 81370BD4 0003EFD4  98 03 00 05 */	stb r0, 0x5(r3)
-/* 81370BD8 0003EFD8  48 00 00 10 */	b .L_81370BE8
+/* 81370BB0 | 7C 03 03 78 */	mr r3, r0
+/* 81370BB4 | 48 1F 9C A9 */	bl fn_8156A85C
+/* 81370BB8 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 81370BBC | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 81370BC0 | 88 03 00 02 */	lbz r0, 0x2(r3)
+/* 81370BC4 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81370BC8 | 40 82 00 14 */	bne .L_81370BDC
+/* 81370BCC | 38 00 00 00 */	li r0, 0x0
+/* 81370BD0 | 98 03 00 04 */	stb r0, 0x4(r3)
+/* 81370BD4 | 98 03 00 05 */	stb r0, 0x5(r3)
+/* 81370BD8 | 48 00 00 10 */	b .L_81370BE8
 .L_81370BDC:
-/* 81370BDC 0003EFDC  38 00 00 01 */	li r0, 0x1
-/* 81370BE0 0003EFE0  98 03 00 04 */	stb r0, 0x4(r3)
-/* 81370BE4 0003EFE4  98 03 00 05 */	stb r0, 0x5(r3)
+/* 81370BDC | 38 00 00 01 */	li r0, 0x1
+/* 81370BE0 | 98 03 00 04 */	stb r0, 0x4(r3)
+/* 81370BE4 | 98 03 00 05 */	stb r0, 0x5(r3)
 .L_81370BE8:
-/* 81370BE8 0003EFE8  3C A0 81 09 */	lis r5, sWiiData__Q23www10wiisetting@ha
-/* 81370BEC 0003EFEC  38 61 00 08 */	addi r3, r1, 0x8
-/* 81370BF0 0003EFF0  38 A5 A4 B8 */	addi r5, r5, sWiiData__Q23www10wiisetting@l
-/* 81370BF4 0003EFF4  88 85 00 04 */	lbz r4, 0x4(r5)
-/* 81370BF8 0003EFF8  88 05 00 05 */	lbz r0, 0x5(r5)
-/* 81370BFC 0003EFFC  98 81 00 08 */	stb r4, 0x8(r1)
-/* 81370C00 0003F000  98 01 00 09 */	stb r0, 0x9(r1)
-/* 81370C04 0003F004  48 1F 94 F5 */	bl fn_8156A0F8
-/* 81370C08 0003F008  48 08 AD 81 */	bl fn_813FB988
-/* 81370C0C 0003F00C  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
-/* 81370C10 0003F010  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
-/* 81370C14 0003F014  88 03 02 BC */	lbz r0, 0x2bc(r3)
-/* 81370C18 0003F018  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81370C1C 0003F01C  41 82 00 0C */	beq .L_81370C28
-/* 81370C20 0003F020  38 60 00 00 */	li r3, 0x0
-/* 81370C24 0003F024  48 00 00 08 */	b .L_81370C2C
+/* 81370BE8 | 3C A0 81 09 */	lis r5, sWiiData__Q23www10wiisetting@ha
+/* 81370BEC | 38 61 00 08 */	addi r3, r1, 0x8
+/* 81370BF0 | 38 A5 A4 B8 */	addi r5, r5, sWiiData__Q23www10wiisetting@l
+/* 81370BF4 | 88 85 00 04 */	lbz r4, 0x4(r5)
+/* 81370BF8 | 88 05 00 05 */	lbz r0, 0x5(r5)
+/* 81370BFC | 98 81 00 08 */	stb r4, 0x8(r1)
+/* 81370C00 | 98 01 00 09 */	stb r0, 0x9(r1)
+/* 81370C04 | 48 1F 94 F5 */	bl fn_8156A0F8
+/* 81370C08 | 48 08 AD 81 */	bl fn_813FB988
+/* 81370C0C | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 81370C10 | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 81370C14 | 88 03 02 BC */	lbz r0, 0x2bc(r3)
+/* 81370C18 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81370C1C | 41 82 00 0C */	beq .L_81370C28
+/* 81370C20 | 38 60 00 00 */	li r3, 0x0
+/* 81370C24 | 48 00 00 08 */	b .L_81370C2C
 .L_81370C28:
-/* 81370C28 0003F028  80 63 00 8C */	lwz r3, 0x8c(r3)
+/* 81370C28 | 80 63 00 8C */	lwz r3, 0x8c(r3)
 .L_81370C2C:
-/* 81370C2C 0003F02C  38 80 00 01 */	li r4, 0x1
-/* 81370C30 0003F030  4B FD 18 39 */	bl enableLedNotification__Q33ipl5nwc247ManagerFi
-/* 81370C34 0003F034  48 00 01 C8 */	b .L_81370DFC
+/* 81370C2C | 38 80 00 01 */	li r4, 0x1
+/* 81370C30 | 4B FD 18 39 */	bl enableLedNotification__Q33ipl5nwc247ManagerFi
+/* 81370C34 | 48 00 01 C8 */	b .L_81370DFC
 .L_81370C38:
-/* 81370C38 0003F038  88 9E 00 04 */	lbz r4, 0x4(r30)
-/* 81370C3C 0003F03C  38 61 00 0A */	addi r3, r1, 0xa
-/* 81370C40 0003F040  88 1E 00 05 */	lbz r0, 0x5(r30)
-/* 81370C44 0003F044  98 81 00 0A */	stb r4, 0xa(r1)
-/* 81370C48 0003F048  98 01 00 0B */	stb r0, 0xb(r1)
-/* 81370C4C 0003F04C  48 1F 94 AD */	bl fn_8156A0F8
-/* 81370C50 0003F050  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
-/* 81370C54 0003F054  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
-/* 81370C58 0003F058  88 03 02 BC */	lbz r0, 0x2bc(r3)
-/* 81370C5C 0003F05C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81370C60 0003F060  41 82 00 0C */	beq .L_81370C6C
-/* 81370C64 0003F064  38 60 00 00 */	li r3, 0x0
-/* 81370C68 0003F068  48 00 00 08 */	b .L_81370C70
+/* 81370C38 | 88 9E 00 04 */	lbz r4, 0x4(r30)
+/* 81370C3C | 38 61 00 0A */	addi r3, r1, 0xa
+/* 81370C40 | 88 1E 00 05 */	lbz r0, 0x5(r30)
+/* 81370C44 | 98 81 00 0A */	stb r4, 0xa(r1)
+/* 81370C48 | 98 01 00 0B */	stb r0, 0xb(r1)
+/* 81370C4C | 48 1F 94 AD */	bl fn_8156A0F8
+/* 81370C50 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 81370C54 | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 81370C58 | 88 03 02 BC */	lbz r0, 0x2bc(r3)
+/* 81370C5C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81370C60 | 41 82 00 0C */	beq .L_81370C6C
+/* 81370C64 | 38 60 00 00 */	li r3, 0x0
+/* 81370C68 | 48 00 00 08 */	b .L_81370C70
 .L_81370C6C:
-/* 81370C6C 0003F06C  80 63 00 8C */	lwz r3, 0x8c(r3)
+/* 81370C6C | 80 63 00 8C */	lwz r3, 0x8c(r3)
 .L_81370C70:
-/* 81370C70 0003F070  38 80 00 01 */	li r4, 0x1
-/* 81370C74 0003F074  4B FD 17 F5 */	bl enableLedNotification__Q33ipl5nwc247ManagerFi
-/* 81370C78 0003F078  48 00 01 84 */	b .L_81370DFC
+/* 81370C70 | 38 80 00 01 */	li r4, 0x1
+/* 81370C74 | 4B FD 17 F5 */	bl enableLedNotification__Q33ipl5nwc247ManagerFi
+/* 81370C78 | 48 00 01 84 */	b .L_81370DFC
 .L_81370C7C:
-/* 81370C7C 0003F07C  80 6D A9 58 */	lwz r3, lbl_81698998@sda21(r0)
-/* 81370C80 0003F080  38 80 00 1C */	li r4, 0x1c
-/* 81370C84 0003F084  38 A0 00 00 */	li r5, 0x0
-/* 81370C88 0003F088  48 1C 03 F9 */	bl OSSendMessage
-/* 81370C8C 0003F08C  38 7F 04 44 */	addi r3, r31, 0x444
-/* 81370C90 0003F090  38 80 00 1C */	li r4, 0x1c
-/* 81370C94 0003F094  4C C6 31 82 */	crclr cr1eq
-/* 81370C98 0003F098  48 1B DA 09 */	bl OSReport
-/* 81370C9C 0003F09C  48 00 01 60 */	b .L_81370DFC
+/* 81370C7C | 80 6D A9 58 */	lwz r3, lbl_81698998@sda21(r0)
+/* 81370C80 | 38 80 00 1C */	li r4, 0x1c
+/* 81370C84 | 38 A0 00 00 */	li r5, 0x0
+/* 81370C88 | 48 1C 03 F9 */	bl OSSendMessage
+/* 81370C8C | 38 7F 04 44 */	addi r3, r31, 0x444
+/* 81370C90 | 38 80 00 1C */	li r4, 0x1c
+/* 81370C94 | 4C C6 31 82 */	crclr cr1eq
+/* 81370C98 | 48 1B DA 09 */	bl OSReport
+/* 81370C9C | 48 00 01 60 */	b .L_81370DFC
 .L_81370CA0:
-/* 81370CA0 0003F0A0  C8 22 82 D0 */	lfd f1, lbl_816946D0@sda21(r0)
-/* 81370CA4 0003F0A4  C8 1D 00 08 */	lfd f0, 0x8(r29)
-/* 81370CA8 0003F0A8  FC 01 00 00 */	fcmpu cr0, f1, f0
-/* 81370CAC 0003F0AC  40 82 00 28 */	bne .L_81370CD4
-/* 81370CB0 0003F0B0  88 0D A9 55 */	lbz r0, lbl_81698995@sda21(r0)
-/* 81370CB4 0003F0B4  20 00 00 10 */	subfic r0, r0, 0x10
-/* 81370CB8 0003F0B8  7C 03 07 74 */	extsb r3, r0
-/* 81370CBC 0003F0BC  48 1F 93 C9 */	bl fn_8156A084
-/* 81370CC0 0003F0C0  88 6D A9 55 */	lbz r3, lbl_81698995@sda21(r0)
-/* 81370CC4 0003F0C4  38 00 00 01 */	li r0, 0x1
-/* 81370CC8 0003F0C8  98 1E 00 36 */	stb r0, 0x36(r30)
-/* 81370CCC 0003F0CC  98 7E 00 07 */	stb r3, 0x7(r30)
-/* 81370CD0 0003F0D0  48 00 01 2C */	b .L_81370DFC
+/* 81370CA0 | C8 22 82 D0 */	lfd f1, lbl_816946D0@sda21(r0)
+/* 81370CA4 | C8 1D 00 08 */	lfd f0, 0x8(r29)
+/* 81370CA8 | FC 01 00 00 */	fcmpu cr0, f1, f0
+/* 81370CAC | 40 82 00 28 */	bne .L_81370CD4
+/* 81370CB0 | 88 0D A9 55 */	lbz r0, lbl_81698995@sda21(r0)
+/* 81370CB4 | 20 00 00 10 */	subfic r0, r0, 0x10
+/* 81370CB8 | 7C 03 07 74 */	extsb r3, r0
+/* 81370CBC | 48 1F 93 C9 */	bl fn_8156A084
+/* 81370CC0 | 88 6D A9 55 */	lbz r3, lbl_81698995@sda21(r0)
+/* 81370CC4 | 38 00 00 01 */	li r0, 0x1
+/* 81370CC8 | 98 1E 00 36 */	stb r0, 0x36(r30)
+/* 81370CCC | 98 7E 00 07 */	stb r3, 0x7(r30)
+/* 81370CD0 | 48 00 01 2C */	b .L_81370DFC
 .L_81370CD4:
-/* 81370CD4 0003F0D4  88 1E 00 07 */	lbz r0, 0x7(r30)
-/* 81370CD8 0003F0D8  20 00 00 10 */	subfic r0, r0, 0x10
-/* 81370CDC 0003F0DC  7C 03 07 74 */	extsb r3, r0
-/* 81370CE0 0003F0E0  48 1F 93 A5 */	bl fn_8156A084
-/* 81370CE4 0003F0E4  48 00 01 18 */	b .L_81370DFC
+/* 81370CD4 | 88 1E 00 07 */	lbz r0, 0x7(r30)
+/* 81370CD8 | 20 00 00 10 */	subfic r0, r0, 0x10
+/* 81370CDC | 7C 03 07 74 */	extsb r3, r0
+/* 81370CE0 | 48 1F 93 A5 */	bl fn_8156A084
+/* 81370CE4 | 48 00 01 18 */	b .L_81370DFC
 .L_81370CE8:
-/* 81370CE8 0003F0E8  7C 7E 20 AE */	lbzx r3, r30, r4
-/* 81370CEC 0003F0EC  48 1F 96 A9 */	bl fn_8156A394
-/* 81370CF0 0003F0F0  48 00 01 0C */	b .L_81370DFC
+/* 81370CE8 | 7C 7E 20 AE */	lbzx r3, r30, r4
+/* 81370CEC | 48 1F 96 A9 */	bl fn_8156A394
+/* 81370CF0 | 48 00 01 0C */	b .L_81370DFC
 .L_81370CF4:
-/* 81370CF4 0003F0F4  7C 7E 20 AE */	lbzx r3, r30, r4
-/* 81370CF8 0003F0F8  48 1F 94 ED */	bl fn_8156A1E4
-/* 81370CFC 0003F0FC  48 00 01 00 */	b .L_81370DFC
+/* 81370CF4 | 7C 7E 20 AE */	lbzx r3, r30, r4
+/* 81370CF8 | 48 1F 94 ED */	bl fn_8156A1E4
+/* 81370CFC | 48 00 01 00 */	b .L_81370DFC
 .L_81370D00:
-/* 81370D00 0003F100  7C 7E 20 AE */	lbzx r3, r30, r4
-/* 81370D04 0003F104  48 1F 95 3D */	bl fn_8156A240
-/* 81370D08 0003F108  88 0D A9 54 */	lbz r0, lbl_81698994@sda21(r0)
-/* 81370D0C 0003F10C  7C 7E 00 AE */	lbzx r3, r30, r0
-/* 81370D10 0003F110  48 1C DA 39 */	bl fn_8153E748
-/* 81370D14 0003F114  48 00 00 E8 */	b .L_81370DFC
+/* 81370D00 | 7C 7E 20 AE */	lbzx r3, r30, r4
+/* 81370D04 | 48 1F 95 3D */	bl fn_8156A240
+/* 81370D08 | 88 0D A9 54 */	lbz r0, lbl_81698994@sda21(r0)
+/* 81370D0C | 7C 7E 00 AE */	lbzx r3, r30, r0
+/* 81370D10 | 48 1C DA 39 */	bl fn_8153E748
+/* 81370D14 | 48 00 00 E8 */	b .L_81370DFC
 .L_81370D18:
-/* 81370D18 0003F118  7C 7E 20 AE */	lbzx r3, r30, r4
-/* 81370D1C 0003F11C  48 1F 97 75 */	bl fn_8156A490
-/* 81370D20 0003F120  48 00 00 DC */	b .L_81370DFC
+/* 81370D18 | 7C 7E 20 AE */	lbzx r3, r30, r4
+/* 81370D1C | 48 1F 97 75 */	bl fn_8156A490
+/* 81370D20 | 48 00 00 DC */	b .L_81370DFC
 .L_81370D24:
-/* 81370D24 0003F124  48 1C 4F 5D */	bl OSGetTime
-/* 81370D28 0003F128  38 A1 00 34 */	addi r5, r1, 0x34
-/* 81370D2C 0003F12C  48 1C 52 39 */	bl OSTicksToCalendarTime
-/* 81370D30 0003F130  88 BE 00 0C */	lbz r5, 0xc(r30)
-/* 81370D34 0003F134  38 61 00 34 */	addi r3, r1, 0x34
-/* 81370D38 0003F138  88 9E 00 0D */	lbz r4, 0xd(r30)
-/* 81370D3C 0003F13C  88 1E 00 0E */	lbz r0, 0xe(r30)
-/* 81370D40 0003F140  38 A5 07 D0 */	addi r5, r5, 0x7d0
-/* 81370D44 0003F144  38 84 FF FF */	subi r4, r4, 0x1
-/* 81370D48 0003F148  90 A1 00 48 */	stw r5, 0x48(r1)
-/* 81370D4C 0003F14C  90 81 00 44 */	stw r4, 0x44(r1)
-/* 81370D50 0003F150  90 01 00 40 */	stw r0, 0x40(r1)
-/* 81370D54 0003F154  48 1C 53 D9 */	bl OSCalendarTimeToTicks
-/* 81370D58 0003F158  38 A1 00 34 */	addi r5, r1, 0x34
-/* 81370D5C 0003F15C  48 1C 52 09 */	bl OSTicksToCalendarTime
-/* 81370D60 0003F160  38 61 00 34 */	addi r3, r1, 0x34
-/* 81370D64 0003F164  4B FF 26 F9 */	bl setCalendarTime__Q33ipl7utility8CalendarFP14OSCalendarTime
-/* 81370D68 0003F168  48 00 00 94 */	b .L_81370DFC
+/* 81370D24 | 48 1C 4F 5D */	bl OSGetTime
+/* 81370D28 | 38 A1 00 34 */	addi r5, r1, 0x34
+/* 81370D2C | 48 1C 52 39 */	bl OSTicksToCalendarTime
+/* 81370D30 | 88 BE 00 0C */	lbz r5, 0xc(r30)
+/* 81370D34 | 38 61 00 34 */	addi r3, r1, 0x34
+/* 81370D38 | 88 9E 00 0D */	lbz r4, 0xd(r30)
+/* 81370D3C | 88 1E 00 0E */	lbz r0, 0xe(r30)
+/* 81370D40 | 38 A5 07 D0 */	addi r5, r5, 0x7d0
+/* 81370D44 | 38 84 FF FF */	subi r4, r4, 0x1
+/* 81370D48 | 90 A1 00 48 */	stw r5, 0x48(r1)
+/* 81370D4C | 90 81 00 44 */	stw r4, 0x44(r1)
+/* 81370D50 | 90 01 00 40 */	stw r0, 0x40(r1)
+/* 81370D54 | 48 1C 53 D9 */	bl OSCalendarTimeToTicks
+/* 81370D58 | 38 A1 00 34 */	addi r5, r1, 0x34
+/* 81370D5C | 48 1C 52 09 */	bl OSTicksToCalendarTime
+/* 81370D60 | 38 61 00 34 */	addi r3, r1, 0x34
+/* 81370D64 | 4B FF 26 F9 */	bl setCalendarTime__Q33ipl7utility8CalendarFP14OSCalendarTime
+/* 81370D68 | 48 00 00 94 */	b .L_81370DFC
 .L_81370D6C:
-/* 81370D6C 0003F16C  48 1C 4F 15 */	bl OSGetTime
-/* 81370D70 0003F170  38 A1 00 0C */	addi r5, r1, 0xc
-/* 81370D74 0003F174  48 1C 51 F1 */	bl OSTicksToCalendarTime
-/* 81370D78 0003F178  88 BE 00 0F */	lbz r5, 0xf(r30)
-/* 81370D7C 0003F17C  38 00 00 00 */	li r0, 0x0
-/* 81370D80 0003F180  88 9E 00 10 */	lbz r4, 0x10(r30)
-/* 81370D84 0003F184  38 61 00 0C */	addi r3, r1, 0xc
-/* 81370D88 0003F188  90 A1 00 14 */	stw r5, 0x14(r1)
-/* 81370D8C 0003F18C  90 81 00 10 */	stw r4, 0x10(r1)
-/* 81370D90 0003F190  90 01 00 0C */	stw r0, 0xc(r1)
-/* 81370D94 0003F194  90 01 00 2C */	stw r0, 0x2c(r1)
-/* 81370D98 0003F198  90 01 00 30 */	stw r0, 0x30(r1)
-/* 81370D9C 0003F19C  4B FF 26 C1 */	bl setCalendarTime__Q33ipl7utility8CalendarFP14OSCalendarTime
-/* 81370DA0 0003F1A0  48 00 00 5C */	b .L_81370DFC
+/* 81370D6C | 48 1C 4F 15 */	bl OSGetTime
+/* 81370D70 | 38 A1 00 0C */	addi r5, r1, 0xc
+/* 81370D74 | 48 1C 51 F1 */	bl OSTicksToCalendarTime
+/* 81370D78 | 88 BE 00 0F */	lbz r5, 0xf(r30)
+/* 81370D7C | 38 00 00 00 */	li r0, 0x0
+/* 81370D80 | 88 9E 00 10 */	lbz r4, 0x10(r30)
+/* 81370D84 | 38 61 00 0C */	addi r3, r1, 0xc
+/* 81370D88 | 90 A1 00 14 */	stw r5, 0x14(r1)
+/* 81370D8C | 90 81 00 10 */	stw r4, 0x10(r1)
+/* 81370D90 | 90 01 00 0C */	stw r0, 0xc(r1)
+/* 81370D94 | 90 01 00 2C */	stw r0, 0x2c(r1)
+/* 81370D98 | 90 01 00 30 */	stw r0, 0x30(r1)
+/* 81370D9C | 4B FF 26 C1 */	bl setCalendarTime__Q33ipl7utility8CalendarFP14OSCalendarTime
+/* 81370DA0 | 48 00 00 5C */	b .L_81370DFC
 .L_81370DA4:
-/* 81370DA4 0003F1A4  80 6D A9 58 */	lwz r3, lbl_81698998@sda21(r0)
-/* 81370DA8 0003F1A8  38 80 00 50 */	li r4, 0x50
-/* 81370DAC 0003F1AC  38 A0 00 00 */	li r5, 0x0
-/* 81370DB0 0003F1B0  48 1C 02 D1 */	bl OSSendMessage
-/* 81370DB4 0003F1B4  38 7F 04 44 */	addi r3, r31, 0x444
-/* 81370DB8 0003F1B8  38 80 00 50 */	li r4, 0x50
-/* 81370DBC 0003F1BC  4C C6 31 82 */	crclr cr1eq
-/* 81370DC0 0003F1C0  48 1B D8 E1 */	bl OSReport
-/* 81370DC4 0003F1C4  48 00 00 38 */	b .L_81370DFC
+/* 81370DA4 | 80 6D A9 58 */	lwz r3, lbl_81698998@sda21(r0)
+/* 81370DA8 | 38 80 00 50 */	li r4, 0x50
+/* 81370DAC | 38 A0 00 00 */	li r5, 0x0
+/* 81370DB0 | 48 1C 02 D1 */	bl OSSendMessage
+/* 81370DB4 | 38 7F 04 44 */	addi r3, r31, 0x444
+/* 81370DB8 | 38 80 00 50 */	li r4, 0x50
+/* 81370DBC | 4C C6 31 82 */	crclr cr1eq
+/* 81370DC0 | 48 1B D8 E1 */	bl OSReport
+/* 81370DC4 | 48 00 00 38 */	b .L_81370DFC
 .L_81370DC8:
-/* 81370DC8 0003F1C8  7C 7E 20 AE */	lbzx r3, r30, r4
-/* 81370DCC 0003F1CC  48 08 B1 21 */	bl fn_813FBEEC
-/* 81370DD0 0003F1D0  48 00 00 2C */	b .L_81370DFC
+/* 81370DC8 | 7C 7E 20 AE */	lbzx r3, r30, r4
+/* 81370DCC | 48 08 B1 21 */	bl fn_813FBEEC
+/* 81370DD0 | 48 00 00 2C */	b .L_81370DFC
 .L_81370DD4:
-/* 81370DD4 0003F1D4  7C 7E 20 AE */	lbzx r3, r30, r4
-/* 81370DD8 0003F1D8  48 08 B1 E1 */	bl fn_813FBFB8
-/* 81370DDC 0003F1DC  48 00 00 20 */	b .L_81370DFC
+/* 81370DD4 | 7C 7E 20 AE */	lbzx r3, r30, r4
+/* 81370DD8 | 48 08 B1 E1 */	bl fn_813FBFB8
+/* 81370DDC | 48 00 00 20 */	b .L_81370DFC
 .L_81370DE0:
-/* 81370DE0 0003F1E0  88 7E 00 08 */	lbz r3, 0x8(r30)
-/* 81370DE4 0003F1E4  48 1F 94 01 */	bl fn_8156A1E4
-/* 81370DE8 0003F1E8  88 7E 00 2F */	lbz r3, 0x2f(r30)
-/* 81370DEC 0003F1EC  48 1F 92 F9 */	bl fn_8156A0E4
-/* 81370DF0 0003F1F0  48 00 00 0C */	b .L_81370DFC
+/* 81370DE0 | 88 7E 00 08 */	lbz r3, 0x8(r30)
+/* 81370DE4 | 48 1F 94 01 */	bl fn_8156A1E4
+/* 81370DE8 | 88 7E 00 2F */	lbz r3, 0x2f(r30)
+/* 81370DEC | 48 1F 92 F9 */	bl fn_8156A0E4
+/* 81370DF0 | 48 00 00 0C */	b .L_81370DFC
 .L_81370DF4:
-/* 81370DF4 0003F1F4  88 7E 00 3C */	lbz r3, 0x3c(r30)
-/* 81370DF8 0003F1F8  48 08 B1 79 */	bl fn_813FBF70
+/* 81370DF4 | 88 7E 00 3C */	lbz r3, 0x3c(r30)
+/* 81370DF8 | 48 08 B1 79 */	bl fn_813FBF70
 .L_81370DFC:
-/* 81370DFC 0003F1FC  88 0D A9 54 */	lbz r0, lbl_81698994@sda21(r0)
-/* 81370E00 0003F200  2C 00 00 0F */	cmpwi r0, 0xf
-/* 81370E04 0003F204  41 82 00 38 */	beq .L_81370E3C
-/* 81370E08 0003F208  40 80 00 1C */	bge .L_81370E24
-/* 81370E0C 0003F20C  2C 00 00 0C */	cmpwi r0, 0xc
-/* 81370E10 0003F210  41 82 00 2C */	beq .L_81370E3C
-/* 81370E14 0003F214  40 80 00 18 */	bge .L_81370E2C
-/* 81370E18 0003F218  2C 00 00 06 */	cmpwi r0, 0x6
-/* 81370E1C 0003F21C  41 82 00 20 */	beq .L_81370E3C
-/* 81370E20 0003F220  48 00 00 0C */	b .L_81370E2C
+/* 81370DFC | 88 0D A9 54 */	lbz r0, lbl_81698994@sda21(r0)
+/* 81370E00 | 2C 00 00 0F */	cmpwi r0, 0xf
+/* 81370E04 | 41 82 00 38 */	beq .L_81370E3C
+/* 81370E08 | 40 80 00 1C */	bge .L_81370E24
+/* 81370E0C | 2C 00 00 0C */	cmpwi r0, 0xc
+/* 81370E10 | 41 82 00 2C */	beq .L_81370E3C
+/* 81370E14 | 40 80 00 18 */	bge .L_81370E2C
+/* 81370E18 | 2C 00 00 06 */	cmpwi r0, 0x6
+/* 81370E1C | 41 82 00 20 */	beq .L_81370E3C
+/* 81370E20 | 48 00 00 0C */	b .L_81370E2C
 .L_81370E24:
-/* 81370E24 0003F224  2C 00 00 30 */	cmpwi r0, 0x30
-/* 81370E28 0003F228  41 82 00 14 */	beq .L_81370E3C
+/* 81370E24 | 2C 00 00 30 */	cmpwi r0, 0x30
+/* 81370E28 | 41 82 00 14 */	beq .L_81370E3C
 .L_81370E2C:
-/* 81370E2C 0003F22C  48 1F 8B 21 */	bl fn_8156994C
-/* 81370E30 0003F230  38 7F 04 58 */	addi r3, r31, 0x458
-/* 81370E34 0003F234  4C C6 31 82 */	crclr cr1eq
-/* 81370E38 0003F238  48 1B D8 69 */	bl OSReport
+/* 81370E2C | 48 1F 8B 21 */	bl fn_8156994C
+/* 81370E30 | 38 7F 04 58 */	addi r3, r31, 0x458
+/* 81370E34 | 4C C6 31 82 */	crclr cr1eq
+/* 81370E38 | 48 1B D8 69 */	bl OSReport
 .L_81370E3C:
-/* 81370E3C 0003F23C  38 00 00 00 */	li r0, 0x0
-/* 81370E40 0003F240  39 61 00 70 */	addi r11, r1, 0x70
-/* 81370E44 0003F244  98 0D A9 54 */	stb r0, lbl_81698994@sda21(r0)
-/* 81370E48 0003F248  38 60 00 11 */	li r3, 0x11
-/* 81370E4C 0003F24C  48 28 86 C9 */	bl _restgpr_29
-/* 81370E50 0003F250  80 01 00 74 */	lwz r0, 0x74(r1)
-/* 81370E54 0003F254  7C 08 03 A6 */	mtlr r0
-/* 81370E58 0003F258  38 21 00 70 */	addi r1, r1, 0x70
-/* 81370E5C 0003F25C  4E 80 00 20 */	blr
+/* 81370E3C | 38 00 00 00 */	li r0, 0x0
+/* 81370E40 | 39 61 00 70 */	addi r11, r1, 0x70
+/* 81370E44 | 98 0D A9 54 */	stb r0, lbl_81698994@sda21(r0)
+/* 81370E48 | 38 60 00 11 */	li r3, 0x11
+/* 81370E4C | 48 28 86 C9 */	bl _restgpr_29
+/* 81370E50 | 80 01 00 74 */	lwz r0, 0x74(r1)
+/* 81370E54 | 7C 08 03 A6 */	mtlr r0
+/* 81370E58 | 38 21 00 70 */	addi r1, r1, 0x70
+/* 81370E5C | 4E 80 00 20 */	blr
 .endfn wiiWriteBack__Q23www10wiisettingFP14WWWJSPluginObjP14WWWJSPluginObjiP16WWWJSPluginValueP16WWWJSPluginValue
 
 # .text:0x1490 | 0x81370E60 | size: 0x54
 .fn www_wiisetting_81370E60, local
-/* 81370E60 0003F260  1C C3 00 30 */	mulli r6, r3, 0x30
-/* 81370E64 0003F264  3C A0 81 61 */	lis r5, lbl_8160F060@ha
-/* 81370E68 0003F268  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81370E6C 0003F26C  38 A5 F0 60 */	addi r5, r5, lbl_8160F060@l
-/* 81370E70 0003F270  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81370E74 0003F274  38 00 00 30 */	li r0, 0x30
-/* 81370E78 0003F278  7C A5 32 14 */	add r5, r5, r6
-/* 81370E7C 0003F27C  88 C4 00 3C */	lbz r6, 0x3c(r4)
-/* 81370E80 0003F280  38 E0 00 00 */	li r7, 0x0
-/* 81370E84 0003F284  7C 09 03 A6 */	mtctr r0
+/* 81370E60 | 1C C3 00 30 */	mulli r6, r3, 0x30
+/* 81370E64 | 3C A0 81 61 */	lis r5, lbl_8160F060@ha
+/* 81370E68 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81370E6C | 38 A5 F0 60 */	addi r5, r5, lbl_8160F060@l
+/* 81370E70 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81370E74 | 38 00 00 30 */	li r0, 0x30
+/* 81370E78 | 7C A5 32 14 */	add r5, r5, r6
+/* 81370E7C | 88 C4 00 3C */	lbz r6, 0x3c(r4)
+/* 81370E80 | 38 E0 00 00 */	li r7, 0x0
+/* 81370E84 | 7C 09 03 A6 */	mtctr r0
 .L_81370E88:
-/* 81370E88 0003F288  54 E0 06 3E */	clrlwi r0, r7, 24
-/* 81370E8C 0003F28C  7C 85 00 AE */	lbzx r4, r5, r0
-/* 81370E90 0003F290  38 04 00 08 */	addi r0, r4, 0x8
-/* 81370E94 0003F294  7C 06 00 00 */	cmpw r6, r0
-/* 81370E98 0003F298  40 82 00 10 */	bne .L_81370EA8
-/* 81370E9C 0003F29C  38 07 00 08 */	addi r0, r7, 0x8
-/* 81370EA0 0003F2A0  54 03 06 3E */	clrlwi r3, r0, 24
-/* 81370EA4 0003F2A4  4E 80 00 20 */	blr
+/* 81370E88 | 54 E0 06 3E */	clrlwi r0, r7, 24
+/* 81370E8C | 7C 85 00 AE */	lbzx r4, r5, r0
+/* 81370E90 | 38 04 00 08 */	addi r0, r4, 0x8
+/* 81370E94 | 7C 06 00 00 */	cmpw r6, r0
+/* 81370E98 | 40 82 00 10 */	bne .L_81370EA8
+/* 81370E9C | 38 07 00 08 */	addi r0, r7, 0x8
+/* 81370EA0 | 54 03 06 3E */	clrlwi r3, r0, 24
+/* 81370EA4 | 4E 80 00 20 */	blr
 .L_81370EA8:
-/* 81370EA8 0003F2A8  38 E7 00 01 */	addi r7, r7, 0x1
-/* 81370EAC 0003F2AC  42 00 FF DC */	bdnz .L_81370E88
-/* 81370EB0 0003F2B0  4E 80 00 20 */	blr
+/* 81370EA8 | 38 E7 00 01 */	addi r7, r7, 0x1
+/* 81370EAC | 42 00 FF DC */	bdnz .L_81370E88
+/* 81370EB0 | 4E 80 00 20 */	blr
 .endfn www_wiisetting_81370E60
 
 # .text:0x14E4 | 0x81370EB4 | size: 0x60
 # www::wiisetting::initWiiSetting()
 .fn initWiiSetting__Q23www10wiisettingFv, global
-/* 81370EB4 0003F2B4  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 81370EB8 0003F2B8  7C 08 02 A6 */	mflr r0
-/* 81370EBC 0003F2BC  38 80 00 00 */	li r4, 0x0
-/* 81370EC0 0003F2C0  38 A0 00 48 */	li r5, 0x48
-/* 81370EC4 0003F2C4  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81370EC8 0003F2C8  38 00 00 00 */	li r0, 0x0
-/* 81370ECC 0003F2CC  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 81370ED0 0003F2D0  3F E0 81 09 */	lis r31, sWiiData__Q23www10wiisetting@ha
-/* 81370ED4 0003F2D4  38 7F A4 B8 */	addi r3, r31, sWiiData__Q23www10wiisetting@l
-/* 81370ED8 0003F2D8  98 0D A9 54 */	stb r0, lbl_81698994@sda21(r0)
-/* 81370EDC 0003F2DC  4B FB F4 59 */	bl memset
-/* 81370EE0 0003F2E0  38 6D A9 4C */	li r3, lbl_8169898C@sda21
-/* 81370EE4 0003F2E4  38 80 00 00 */	li r4, 0x0
-/* 81370EE8 0003F2E8  38 A0 00 08 */	li r5, 0x8
-/* 81370EEC 0003F2EC  4B FB F4 49 */	bl memset
-/* 81370EF0 0003F2F0  48 1F 99 31 */	bl fn_8156A820
-/* 81370EF4 0003F2F4  54 60 07 FE */	clrlwi r0, r3, 31
-/* 81370EF8 0003F2F8  38 7F A4 B8 */	addi r3, r31, sWiiData__Q23www10wiisetting@l
-/* 81370EFC 0003F2FC  98 03 00 02 */	stb r0, 0x2(r3)
-/* 81370F00 0003F300  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 81370F04 0003F304  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 81370F08 0003F308  7C 08 03 A6 */	mtlr r0
-/* 81370F0C 0003F30C  38 21 00 10 */	addi r1, r1, 0x10
-/* 81370F10 0003F310  4E 80 00 20 */	blr
+/* 81370EB4 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 81370EB8 | 7C 08 02 A6 */	mflr r0
+/* 81370EBC | 38 80 00 00 */	li r4, 0x0
+/* 81370EC0 | 38 A0 00 48 */	li r5, 0x48
+/* 81370EC4 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81370EC8 | 38 00 00 00 */	li r0, 0x0
+/* 81370ECC | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 81370ED0 | 3F E0 81 09 */	lis r31, sWiiData__Q23www10wiisetting@ha
+/* 81370ED4 | 38 7F A4 B8 */	addi r3, r31, sWiiData__Q23www10wiisetting@l
+/* 81370ED8 | 98 0D A9 54 */	stb r0, lbl_81698994@sda21(r0)
+/* 81370EDC | 4B FB F4 59 */	bl memset
+/* 81370EE0 | 38 6D A9 4C */	li r3, lbl_8169898C@sda21
+/* 81370EE4 | 38 80 00 00 */	li r4, 0x0
+/* 81370EE8 | 38 A0 00 08 */	li r5, 0x8
+/* 81370EEC | 4B FB F4 49 */	bl memset
+/* 81370EF0 | 48 1F 99 31 */	bl fn_8156A820
+/* 81370EF4 | 54 60 07 FE */	clrlwi r0, r3, 31
+/* 81370EF8 | 38 7F A4 B8 */	addi r3, r31, sWiiData__Q23www10wiisetting@l
+/* 81370EFC | 98 03 00 02 */	stb r0, 0x2(r3)
+/* 81370F00 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 81370F04 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 81370F08 | 7C 08 03 A6 */	mtlr r0
+/* 81370F0C | 38 21 00 10 */	addi r1, r1, 0x10
+/* 81370F10 | 4E 80 00 20 */	blr
 .endfn initWiiSetting__Q23www10wiisettingFv
 
 # .text:0x1544 | 0x81370F14 | size: 0x98
 .fn www_wiisetting_81370F14, local
-/* 81370F14 0003F314  94 21 FE C0 */	stwu r1, -0x140(r1)
-/* 81370F18 0003F318  7C 08 02 A6 */	mflr r0
-/* 81370F1C 0003F31C  90 01 01 44 */	stw r0, 0x144(r1)
-/* 81370F20 0003F320  39 61 01 40 */	addi r11, r1, 0x140
-/* 81370F24 0003F324  48 28 85 A1 */	bl _savegpr_28
-/* 81370F28 0003F328  3C 80 81 61 */	lis r4, lbl_8160F254@ha
-/* 81370F2C 0003F32C  38 00 00 24 */	li r0, 0x24
-/* 81370F30 0003F330  38 84 F2 54 */	addi r4, r4, lbl_8160F254@l
-/* 81370F34 0003F334  7C 7C 1B 78 */	mr r28, r3
-/* 81370F38 0003F338  38 A1 00 04 */	addi r5, r1, 0x4
-/* 81370F3C 0003F33C  38 84 FF FC */	subi r4, r4, 0x4
-/* 81370F40 0003F340  7C 09 03 A6 */	mtctr r0
+/* 81370F14 | 94 21 FE C0 */	stwu r1, -0x140(r1)
+/* 81370F18 | 7C 08 02 A6 */	mflr r0
+/* 81370F1C | 90 01 01 44 */	stw r0, 0x144(r1)
+/* 81370F20 | 39 61 01 40 */	addi r11, r1, 0x140
+/* 81370F24 | 48 28 85 A1 */	bl _savegpr_28
+/* 81370F28 | 3C 80 81 61 */	lis r4, lbl_8160F254@ha
+/* 81370F2C | 38 00 00 24 */	li r0, 0x24
+/* 81370F30 | 38 84 F2 54 */	addi r4, r4, lbl_8160F254@l
+/* 81370F34 | 7C 7C 1B 78 */	mr r28, r3
+/* 81370F38 | 38 A1 00 04 */	addi r5, r1, 0x4
+/* 81370F3C | 38 84 FF FC */	subi r4, r4, 0x4
+/* 81370F40 | 7C 09 03 A6 */	mtctr r0
 .L_81370F44:
-/* 81370F44 0003F344  80 64 00 04 */	lwz r3, 0x4(r4)
-/* 81370F48 0003F348  84 04 00 08 */	lwzu r0, 0x8(r4)
-/* 81370F4C 0003F34C  90 65 00 04 */	stw r3, 0x4(r5)
-/* 81370F50 0003F350  94 05 00 08 */	stwu r0, 0x8(r5)
-/* 81370F54 0003F354  42 00 FF F0 */	bdnz .L_81370F44
-/* 81370F58 0003F358  3B C1 00 08 */	addi r30, r1, 0x8
-/* 81370F5C 0003F35C  3B A0 00 00 */	li r29, 0x0
-/* 81370F60 0003F360  3B E0 00 00 */	li r31, 0x0
+/* 81370F44 | 80 64 00 04 */	lwz r3, 0x4(r4)
+/* 81370F48 | 84 04 00 08 */	lwzu r0, 0x8(r4)
+/* 81370F4C | 90 65 00 04 */	stw r3, 0x4(r5)
+/* 81370F50 | 94 05 00 08 */	stwu r0, 0x8(r5)
+/* 81370F54 | 42 00 FF F0 */	bdnz .L_81370F44
+/* 81370F58 | 3B C1 00 08 */	addi r30, r1, 0x8
+/* 81370F5C | 3B A0 00 00 */	li r29, 0x0
+/* 81370F60 | 3B E0 00 00 */	li r31, 0x0
 .L_81370F64:
-/* 81370F64 0003F364  7C 9E F8 2E */	lwzx r4, r30, r31
-/* 81370F68 0003F368  7F 83 E3 78 */	mr r3, r28
-/* 81370F6C 0003F36C  48 29 15 15 */	bl strcmp
-/* 81370F70 0003F370  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81370F74 0003F374  40 82 00 0C */	bne .L_81370F80
-/* 81370F78 0003F378  38 7D 00 01 */	addi r3, r29, 0x1
-/* 81370F7C 0003F37C  48 00 00 18 */	b .L_81370F94
+/* 81370F64 | 7C 9E F8 2E */	lwzx r4, r30, r31
+/* 81370F68 | 7F 83 E3 78 */	mr r3, r28
+/* 81370F6C | 48 29 15 15 */	bl strcmp
+/* 81370F70 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81370F74 | 40 82 00 0C */	bne .L_81370F80
+/* 81370F78 | 38 7D 00 01 */	addi r3, r29, 0x1
+/* 81370F7C | 48 00 00 18 */	b .L_81370F94
 .L_81370F80:
-/* 81370F80 0003F380  3B BD 00 01 */	addi r29, r29, 0x1
-/* 81370F84 0003F384  3B FF 00 04 */	addi r31, r31, 0x4
-/* 81370F88 0003F388  2C 1D 00 48 */	cmpwi r29, 0x48
-/* 81370F8C 0003F38C  41 80 FF D8 */	blt .L_81370F64
-/* 81370F90 0003F390  38 60 FF FF */	li r3, -0x1
+/* 81370F80 | 3B BD 00 01 */	addi r29, r29, 0x1
+/* 81370F84 | 3B FF 00 04 */	addi r31, r31, 0x4
+/* 81370F88 | 2C 1D 00 48 */	cmpwi r29, 0x48
+/* 81370F8C | 41 80 FF D8 */	blt .L_81370F64
+/* 81370F90 | 38 60 FF FF */	li r3, -0x1
 .L_81370F94:
-/* 81370F94 0003F394  39 61 01 40 */	addi r11, r1, 0x140
-/* 81370F98 0003F398  48 28 85 79 */	bl _restgpr_28
-/* 81370F9C 0003F39C  80 01 01 44 */	lwz r0, 0x144(r1)
-/* 81370FA0 0003F3A0  7C 08 03 A6 */	mtlr r0
-/* 81370FA4 0003F3A4  38 21 01 40 */	addi r1, r1, 0x140
-/* 81370FA8 0003F3A8  4E 80 00 20 */	blr
+/* 81370F94 | 39 61 01 40 */	addi r11, r1, 0x140
+/* 81370F98 | 48 28 85 79 */	bl _restgpr_28
+/* 81370F9C | 80 01 01 44 */	lwz r0, 0x144(r1)
+/* 81370FA0 | 7C 08 03 A6 */	mtlr r0
+/* 81370FA4 | 38 21 01 40 */	addi r1, r1, 0x140
+/* 81370FA8 | 4E 80 00 20 */	blr
 .endfn www_wiisetting_81370F14
 
 # .text:0x15DC | 0x81370FAC | size: 0x1A4
 # www::wiisetting::startFunc(unsigned char)
 .fn startFunc__Q23www10wiisettingFUc, global
-/* 81370FAC 0003F3AC  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 81370FB0 0003F3B0  7C 08 02 A6 */	mflr r0
-/* 81370FB4 0003F3B4  28 03 00 67 */	cmplwi r3, 0x67
-/* 81370FB8 0003F3B8  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81370FBC 0003F3BC  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 81370FC0 0003F3C0  7C 7F 1B 78 */	mr r31, r3
-/* 81370FC4 0003F3C4  93 C1 00 08 */	stw r30, 0x8(r1)
-/* 81370FC8 0003F3C8  3F C0 81 64 */	lis r30, lbl_816440A0@ha
-/* 81370FCC 0003F3CC  3B DE 40 A0 */	addi r30, r30, lbl_816440A0@l
-/* 81370FD0 0003F3D0  41 81 01 58 */	bgt .L_81371128
-/* 81370FD4 0003F3D4  3C 80 81 64 */	lis r4, jumptable_816448F8@ha
-/* 81370FD8 0003F3D8  54 60 10 3A */	slwi r0, r3, 2
-/* 81370FDC 0003F3DC  38 84 48 F8 */	addi r4, r4, jumptable_816448F8@l
-/* 81370FE0 0003F3E0  7C 84 00 2E */	lwzx r4, r4, r0
-/* 81370FE4 0003F3E4  7C 89 03 A6 */	mtctr r4
-/* 81370FE8 0003F3E8  4E 80 04 20 */	bctr
+/* 81370FAC | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 81370FB0 | 7C 08 02 A6 */	mflr r0
+/* 81370FB4 | 28 03 00 67 */	cmplwi r3, 0x67
+/* 81370FB8 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81370FBC | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 81370FC0 | 7C 7F 1B 78 */	mr r31, r3
+/* 81370FC4 | 93 C1 00 08 */	stw r30, 0x8(r1)
+/* 81370FC8 | 3F C0 81 64 */	lis r30, lbl_816440A0@ha
+/* 81370FCC | 3B DE 40 A0 */	addi r30, r30, lbl_816440A0@l
+/* 81370FD0 | 41 81 01 58 */	bgt .L_81371128
+/* 81370FD4 | 3C 80 81 64 */	lis r4, jumptable_816448F8@ha
+/* 81370FD8 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81370FDC | 38 84 48 F8 */	addi r4, r4, jumptable_816448F8@l
+/* 81370FE0 | 7C 84 00 2E */	lwzx r4, r4, r0
+/* 81370FE4 | 7C 89 03 A6 */	mtctr r4
+/* 81370FE8 | 4E 80 04 20 */	bctr
 .L_81370FEC:
-/* 81370FEC 0003F3EC  80 6D A9 58 */	lwz r3, lbl_81698998@sda21(r0)
-/* 81370FF0 0003F3F0  7F E4 FB 78 */	mr r4, r31
-/* 81370FF4 0003F3F4  38 A0 00 00 */	li r5, 0x0
-/* 81370FF8 0003F3F8  48 1C 00 89 */	bl OSSendMessage
-/* 81370FFC 0003F3FC  7F E4 FB 78 */	mr r4, r31
-/* 81371000 0003F400  38 7E 04 44 */	addi r3, r30, 0x444
-/* 81371004 0003F404  4C C6 31 82 */	crclr cr1eq
-/* 81371008 0003F408  48 1B D6 99 */	bl OSReport
-/* 8137100C 0003F40C  48 00 01 1C */	b .L_81371128
+/* 81370FEC | 80 6D A9 58 */	lwz r3, lbl_81698998@sda21(r0)
+/* 81370FF0 | 7F E4 FB 78 */	mr r4, r31
+/* 81370FF4 | 38 A0 00 00 */	li r5, 0x0
+/* 81370FF8 | 48 1C 00 89 */	bl OSSendMessage
+/* 81370FFC | 7F E4 FB 78 */	mr r4, r31
+/* 81371000 | 38 7E 04 44 */	addi r3, r30, 0x444
+/* 81371004 | 4C C6 31 82 */	crclr cr1eq
+/* 81371008 | 48 1B D6 99 */	bl OSReport
+/* 8137100C | 48 00 01 1C */	b .L_81371128
 .L_81371010:
-/* 81371010 0003F410  38 8D A9 4C */	li r4, lbl_8169898C@sda21
-/* 81371014 0003F414  98 64 00 04 */	stb r3, 0x4(r4)
-/* 81371018 0003F418  48 00 01 10 */	b .L_81371128
+/* 81371010 | 38 8D A9 4C */	li r4, lbl_8169898C@sda21
+/* 81371014 | 98 64 00 04 */	stb r3, 0x4(r4)
+/* 81371018 | 48 00 01 10 */	b .L_81371128
 .L_8137101C:
-/* 8137101C 0003F41C  38 8D A9 4C */	li r4, lbl_8169898C@sda21
-/* 81371020 0003F420  88 04 00 04 */	lbz r0, 0x4(r4)
-/* 81371024 0003F424  28 00 00 21 */	cmplwi r0, 0x21
-/* 81371028 0003F428  40 82 00 14 */	bne .L_8137103C
-/* 8137102C 0003F42C  38 7E 07 F8 */	addi r3, r30, 0x7f8
-/* 81371030 0003F430  4C C6 31 82 */	crclr cr1eq
-/* 81371034 0003F434  48 1B D6 6D */	bl OSReport
-/* 81371038 0003F438  48 00 00 F0 */	b .L_81371128
+/* 8137101C | 38 8D A9 4C */	li r4, lbl_8169898C@sda21
+/* 81371020 | 88 04 00 04 */	lbz r0, 0x4(r4)
+/* 81371024 | 28 00 00 21 */	cmplwi r0, 0x21
+/* 81371028 | 40 82 00 14 */	bne .L_8137103C
+/* 8137102C | 38 7E 07 F8 */	addi r3, r30, 0x7f8
+/* 81371030 | 4C C6 31 82 */	crclr cr1eq
+/* 81371034 | 48 1B D6 6D */	bl OSReport
+/* 81371038 | 48 00 00 F0 */	b .L_81371128
 .L_8137103C:
-/* 8137103C 0003F43C  98 64 00 04 */	stb r3, 0x4(r4)
-/* 81371040 0003F440  48 00 00 E8 */	b .L_81371128
+/* 8137103C | 98 64 00 04 */	stb r3, 0x4(r4)
+/* 81371040 | 48 00 00 E8 */	b .L_81371128
 .L_81371044:
-/* 81371044 0003F444  38 8D A9 4C */	li r4, lbl_8169898C@sda21
-/* 81371048 0003F448  98 64 00 04 */	stb r3, 0x4(r4)
-/* 8137104C 0003F44C  48 00 00 DC */	b .L_81371128
+/* 81371044 | 38 8D A9 4C */	li r4, lbl_8169898C@sda21
+/* 81371048 | 98 64 00 04 */	stb r3, 0x4(r4)
+/* 8137104C | 48 00 00 DC */	b .L_81371128
 .L_81371050:
-/* 81371050 0003F450  38 8D A9 4C */	li r4, lbl_8169898C@sda21
-/* 81371054 0003F454  88 04 00 04 */	lbz r0, 0x4(r4)
-/* 81371058 0003F458  28 00 00 2B */	cmplwi r0, 0x2b
-/* 8137105C 0003F45C  40 82 00 18 */	bne .L_81371074
-/* 81371060 0003F460  38 7E 08 1F */	addi r3, r30, 0x81f
-/* 81371064 0003F464  38 9F FF D9 */	subi r4, r31, 0x27
-/* 81371068 0003F468  4C C6 31 82 */	crclr cr1eq
-/* 8137106C 0003F46C  48 1B D6 35 */	bl OSReport
-/* 81371070 0003F470  48 00 00 B8 */	b .L_81371128
+/* 81371050 | 38 8D A9 4C */	li r4, lbl_8169898C@sda21
+/* 81371054 | 88 04 00 04 */	lbz r0, 0x4(r4)
+/* 81371058 | 28 00 00 2B */	cmplwi r0, 0x2b
+/* 8137105C | 40 82 00 18 */	bne .L_81371074
+/* 81371060 | 38 7E 08 1F */	addi r3, r30, 0x81f
+/* 81371064 | 38 9F FF D9 */	subi r4, r31, 0x27
+/* 81371068 | 4C C6 31 82 */	crclr cr1eq
+/* 8137106C | 48 1B D6 35 */	bl OSReport
+/* 81371070 | 48 00 00 B8 */	b .L_81371128
 .L_81371074:
-/* 81371074 0003F474  98 64 00 04 */	stb r3, 0x4(r4)
-/* 81371078 0003F478  48 00 00 B0 */	b .L_81371128
+/* 81371074 | 98 64 00 04 */	stb r3, 0x4(r4)
+/* 81371078 | 48 00 00 B0 */	b .L_81371128
 .L_8137107C:
-/* 8137107C 0003F47C  38 8D A9 4C */	li r4, lbl_8169898C@sda21
-/* 81371080 0003F480  98 64 00 04 */	stb r3, 0x4(r4)
-/* 81371084 0003F484  48 00 00 A4 */	b .L_81371128
+/* 8137107C | 38 8D A9 4C */	li r4, lbl_8169898C@sda21
+/* 81371080 | 98 64 00 04 */	stb r3, 0x4(r4)
+/* 81371084 | 48 00 00 A4 */	b .L_81371128
 .L_81371088:
-/* 81371088 0003F488  48 08 A1 71 */	bl fn_813FB1F8
-/* 8137108C 0003F48C  48 00 00 9C */	b .L_81371128
+/* 81371088 | 48 08 A1 71 */	bl fn_813FB1F8
+/* 8137108C | 48 00 00 9C */	b .L_81371128
 .L_81371090:
-/* 81371090 0003F490  38 60 00 00 */	li r3, 0x0
-/* 81371094 0003F494  48 08 AD 59 */	bl fn_813FBDEC
-/* 81371098 0003F498  7C 7F 1B 78 */	mr r31, r3
-/* 8137109C 0003F49C  38 7E 08 44 */	addi r3, r30, 0x844
-/* 813710A0 0003F4A0  57 E4 06 3E */	clrlwi r4, r31, 24
-/* 813710A4 0003F4A4  4C C6 31 82 */	crclr cr1eq
-/* 813710A8 0003F4A8  48 1B D5 F9 */	bl OSReport
-/* 813710AC 0003F4AC  9B ED A9 56 */	stb r31, lbl_81698996@sda21(r0)
-/* 813710B0 0003F4B0  48 00 00 78 */	b .L_81371128
+/* 81371090 | 38 60 00 00 */	li r3, 0x0
+/* 81371094 | 48 08 AD 59 */	bl fn_813FBDEC
+/* 81371098 | 7C 7F 1B 78 */	mr r31, r3
+/* 8137109C | 38 7E 08 44 */	addi r3, r30, 0x844
+/* 813710A0 | 57 E4 06 3E */	clrlwi r4, r31, 24
+/* 813710A4 | 4C C6 31 82 */	crclr cr1eq
+/* 813710A8 | 48 1B D5 F9 */	bl OSReport
+/* 813710AC | 9B ED A9 56 */	stb r31, lbl_81698996@sda21(r0)
+/* 813710B0 | 48 00 00 78 */	b .L_81371128
 .L_813710B4:
-/* 813710B4 0003F4B4  38 60 00 01 */	li r3, 0x1
-/* 813710B8 0003F4B8  48 08 AD 35 */	bl fn_813FBDEC
-/* 813710BC 0003F4BC  7C 7F 1B 78 */	mr r31, r3
-/* 813710C0 0003F4C0  38 7E 08 44 */	addi r3, r30, 0x844
-/* 813710C4 0003F4C4  57 E4 06 3E */	clrlwi r4, r31, 24
-/* 813710C8 0003F4C8  4C C6 31 82 */	crclr cr1eq
-/* 813710CC 0003F4CC  48 1B D5 D5 */	bl OSReport
-/* 813710D0 0003F4D0  9B ED A9 56 */	stb r31, lbl_81698996@sda21(r0)
-/* 813710D4 0003F4D4  48 00 00 54 */	b .L_81371128
+/* 813710B4 | 38 60 00 01 */	li r3, 0x1
+/* 813710B8 | 48 08 AD 35 */	bl fn_813FBDEC
+/* 813710BC | 7C 7F 1B 78 */	mr r31, r3
+/* 813710C0 | 38 7E 08 44 */	addi r3, r30, 0x844
+/* 813710C4 | 57 E4 06 3E */	clrlwi r4, r31, 24
+/* 813710C8 | 4C C6 31 82 */	crclr cr1eq
+/* 813710CC | 48 1B D5 D5 */	bl OSReport
+/* 813710D0 | 9B ED A9 56 */	stb r31, lbl_81698996@sda21(r0)
+/* 813710D4 | 48 00 00 54 */	b .L_81371128
 .L_813710D8:
-/* 813710D8 0003F4D8  38 60 00 02 */	li r3, 0x2
-/* 813710DC 0003F4DC  48 08 AD 11 */	bl fn_813FBDEC
-/* 813710E0 0003F4E0  7C 7F 1B 78 */	mr r31, r3
-/* 813710E4 0003F4E4  38 7E 08 44 */	addi r3, r30, 0x844
-/* 813710E8 0003F4E8  57 E4 06 3E */	clrlwi r4, r31, 24
-/* 813710EC 0003F4EC  4C C6 31 82 */	crclr cr1eq
-/* 813710F0 0003F4F0  48 1B D5 B1 */	bl OSReport
-/* 813710F4 0003F4F4  9B ED A9 56 */	stb r31, lbl_81698996@sda21(r0)
-/* 813710F8 0003F4F8  48 00 00 30 */	b .L_81371128
+/* 813710D8 | 38 60 00 02 */	li r3, 0x2
+/* 813710DC | 48 08 AD 11 */	bl fn_813FBDEC
+/* 813710E0 | 7C 7F 1B 78 */	mr r31, r3
+/* 813710E4 | 38 7E 08 44 */	addi r3, r30, 0x844
+/* 813710E8 | 57 E4 06 3E */	clrlwi r4, r31, 24
+/* 813710EC | 4C C6 31 82 */	crclr cr1eq
+/* 813710F0 | 48 1B D5 B1 */	bl OSReport
+/* 813710F4 | 9B ED A9 56 */	stb r31, lbl_81698996@sda21(r0)
+/* 813710F8 | 48 00 00 30 */	b .L_81371128
 .L_813710FC:
-/* 813710FC 0003F4FC  48 08 A1 55 */	bl fn_813FB250
-/* 81371100 0003F500  48 00 00 28 */	b .L_81371128
+/* 813710FC | 48 08 A1 55 */	bl fn_813FB250
+/* 81371100 | 48 00 00 28 */	b .L_81371128
 .L_81371104:
-/* 81371104 0003F504  48 08 A1 71 */	bl fn_813FB274
-/* 81371108 0003F508  48 00 00 20 */	b .L_81371128
+/* 81371104 | 48 08 A1 71 */	bl fn_813FB274
+/* 81371108 | 48 00 00 20 */	b .L_81371128
 .L_8137110C:
-/* 8137110C 0003F50C  48 08 AF 79 */	bl fn_813FC084
-/* 81371110 0003F510  48 00 00 18 */	b .L_81371128
+/* 8137110C | 48 08 AF 79 */	bl fn_813FC084
+/* 81371110 | 48 00 00 18 */	b .L_81371128
 .L_81371114:
-/* 81371114 0003F514  48 08 B0 09 */	bl fn_813FC11C
+/* 81371114 | 48 08 B0 09 */	bl fn_813FC11C
 .L_81371118:
-/* 81371118 0003F518  48 08 AA B1 */	bl fn_813FBBC8
-/* 8137111C 0003F51C  3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
-/* 81371120 0003F520  38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
-/* 81371124 0003F524  98 64 00 40 */	stb r3, 0x40(r4)
+/* 81371118 | 48 08 AA B1 */	bl fn_813FBBC8
+/* 8137111C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
+/* 81371120 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
+/* 81371124 | 98 64 00 40 */	stb r3, 0x40(r4)
 .L_81371128:
-/* 81371128 0003F528  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 8137112C 0003F52C  38 00 00 00 */	li r0, 0x0
-/* 81371130 0003F530  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 81371134 0003F534  98 03 00 1C */	stb r0, 0x1c(r3)
-/* 81371138 0003F538  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 8137113C 0003F53C  83 C1 00 08 */	lwz r30, 0x8(r1)
-/* 81371140 0003F540  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 81371144 0003F544  7C 08 03 A6 */	mtlr r0
-/* 81371148 0003F548  38 21 00 10 */	addi r1, r1, 0x10
-/* 8137114C 0003F54C  4E 80 00 20 */	blr
+/* 81371128 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 8137112C | 38 00 00 00 */	li r0, 0x0
+/* 81371130 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 81371134 | 98 03 00 1C */	stb r0, 0x1c(r3)
+/* 81371138 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8137113C | 83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 81371140 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 81371144 | 7C 08 03 A6 */	mtlr r0
+/* 81371148 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 8137114C | 4E 80 00 20 */	blr
 .endfn startFunc__Q23www10wiisettingFUc
 
 # .text:0x1780 | 0x81371150 | size: 0xC
 # www::wiisetting::getWiiSettingData()
 .fn getWiiSettingData__Q23www10wiisettingFv, global
-/* 81371150 0003F550  3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
-/* 81371154 0003F554  38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
-/* 81371158 0003F558  4E 80 00 20 */	blr
+/* 81371150 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
+/* 81371154 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
+/* 81371158 | 4E 80 00 20 */	blr
 .endfn getWiiSettingData__Q23www10wiisettingFv
 
 # .text:0x178C | 0x8137115C | size: 0x8
 # www::wiisetting::getWiiSettingFlag()
 .fn getWiiSettingFlag__Q23www10wiisettingFv, global
-/* 8137115C 0003F55C  38 6D A9 4C */	li r3, lbl_8169898C@sda21
-/* 81371160 0003F560  4E 80 00 20 */	blr
+/* 8137115C | 38 6D A9 4C */	li r3, lbl_8169898C@sda21
+/* 81371160 | 4E 80 00 20 */	blr
 .endfn getWiiSettingFlag__Q23www10wiisettingFv
 
 # .text:0x1794 | 0x81371164 | size: 0x8
 # www::wiisetting::setStringBuf(www::wiisetting::SetStringBuf*)
 .fn setStringBuf__Q23www10wiisettingFPQ33www10wiisetting12SetStringBuf, global
-/* 81371164 0003F564  90 6D A9 5C */	stw r3, pString__Q23www10wiisetting@sda21(r0)
-/* 81371168 0003F568  4E 80 00 20 */	blr
+/* 81371164 | 90 6D A9 5C */	stw r3, pString__Q23www10wiisetting@sda21(r0)
+/* 81371168 | 4E 80 00 20 */	blr
 .endfn setStringBuf__Q23www10wiisettingFPQ33www10wiisetting12SetStringBuf
 
 # .text:0x179C | 0x8137116C | size: 0x8
 # www::wiisetting::setInitSetupFlag(unsigned char)
 .fn setInitSetupFlag__Q23www10wiisettingFUc, global
-/* 8137116C 0003F56C  98 6D A9 57 */	stb r3, lbl_81698997@sda21(r0)
-/* 81371170 0003F570  4E 80 00 20 */	blr
+/* 8137116C | 98 6D A9 57 */	stb r3, lbl_81698997@sda21(r0)
+/* 81371170 | 4E 80 00 20 */	blr
 .endfn setInitSetupFlag__Q23www10wiisettingFUc
 
 # .text:0x17A4 | 0x81371174 | size: 0x40
 # www::wiisetting::setFuncResult(unsigned char)
 .fn setFuncResult__Q23www10wiisettingFUc, global
-/* 81371174 0003F574  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 81371178 0003F578  7C 08 02 A6 */	mflr r0
-/* 8137117C 0003F57C  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81371180 0003F580  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 81371184 0003F584  7C 7F 1B 78 */	mr r31, r3
-/* 81371188 0003F588  3C 60 81 64 */	lis r3, lbl_816448E4@ha
-/* 8137118C 0003F58C  7F E4 FB 78 */	mr r4, r31
-/* 81371190 0003F590  38 63 48 E4 */	addi r3, r3, lbl_816448E4@l
-/* 81371194 0003F594  4C C6 31 82 */	crclr cr1eq
-/* 81371198 0003F598  48 1B D5 09 */	bl OSReport
-/* 8137119C 0003F59C  9B ED A9 56 */	stb r31, lbl_81698996@sda21(r0)
-/* 813711A0 0003F5A0  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813711A4 0003F5A4  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813711A8 0003F5A8  7C 08 03 A6 */	mtlr r0
-/* 813711AC 0003F5AC  38 21 00 10 */	addi r1, r1, 0x10
-/* 813711B0 0003F5B0  4E 80 00 20 */	blr
+/* 81371174 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 81371178 | 7C 08 02 A6 */	mflr r0
+/* 8137117C | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81371180 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 81371184 | 7C 7F 1B 78 */	mr r31, r3
+/* 81371188 | 3C 60 81 64 */	lis r3, lbl_816448E4@ha
+/* 8137118C | 7F E4 FB 78 */	mr r4, r31
+/* 81371190 | 38 63 48 E4 */	addi r3, r3, lbl_816448E4@l
+/* 81371194 | 4C C6 31 82 */	crclr cr1eq
+/* 81371198 | 48 1B D5 09 */	bl OSReport
+/* 8137119C | 9B ED A9 56 */	stb r31, lbl_81698996@sda21(r0)
+/* 813711A0 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813711A4 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813711A8 | 7C 08 03 A6 */	mtlr r0
+/* 813711AC | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813711B0 | 4E 80 00 20 */	blr
 .endfn setFuncResult__Q23www10wiisettingFUc
 
 # .text:0x17E4 | 0x813711B4 | size: 0x34
 # www::wiisetting::getFuncResult()
 .fn getFuncResult__Q23www10wiisettingFv, global
-/* 813711B4 0003F5B4  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 813711B8 0003F5B8  7C 08 02 A6 */	mflr r0
-/* 813711BC 0003F5BC  3C 60 81 64 */	lis r3, lbl_81644A98@ha
-/* 813711C0 0003F5C0  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813711C4 0003F5C4  38 63 4A 98 */	addi r3, r3, lbl_81644A98@l
-/* 813711C8 0003F5C8  88 8D A9 56 */	lbz r4, lbl_81698996@sda21(r0)
-/* 813711CC 0003F5CC  4C C6 31 82 */	crclr cr1eq
-/* 813711D0 0003F5D0  48 1B D4 D1 */	bl OSReport
-/* 813711D4 0003F5D4  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813711D8 0003F5D8  88 6D A9 56 */	lbz r3, lbl_81698996@sda21(r0)
-/* 813711DC 0003F5DC  7C 08 03 A6 */	mtlr r0
-/* 813711E0 0003F5E0  38 21 00 10 */	addi r1, r1, 0x10
-/* 813711E4 0003F5E4  4E 80 00 20 */	blr
+/* 813711B4 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813711B8 | 7C 08 02 A6 */	mflr r0
+/* 813711BC | 3C 60 81 64 */	lis r3, lbl_81644A98@ha
+/* 813711C0 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813711C4 | 38 63 4A 98 */	addi r3, r3, lbl_81644A98@l
+/* 813711C8 | 88 8D A9 56 */	lbz r4, lbl_81698996@sda21(r0)
+/* 813711CC | 4C C6 31 82 */	crclr cr1eq
+/* 813711D0 | 48 1B D4 D1 */	bl OSReport
+/* 813711D4 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813711D8 | 88 6D A9 56 */	lbz r3, lbl_81698996@sda21(r0)
+/* 813711DC | 7C 08 03 A6 */	mtlr r0
+/* 813711E0 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813711E4 | 4E 80 00 20 */	blr
 .endfn getFuncResult__Q23www10wiisettingFv
 
 # .text:0x1818 | 0x813711E8 | size: 0x8
 # www::wiisetting::setMsgQueue(OSMessageQueue*)
 .fn setMsgQueue__Q23www10wiisettingFP14OSMessageQueue, global
-/* 813711E8 0003F5E8  90 6D A9 58 */	stw r3, lbl_81698998@sda21(r0)
-/* 813711EC 0003F5EC  4E 80 00 20 */	blr
+/* 813711E8 | 90 6D A9 58 */	stw r3, lbl_81698998@sda21(r0)
+/* 813711EC | 4E 80 00 20 */	blr
 .endfn setMsgQueue__Q23www10wiisettingFP14OSMessageQueue
 
 # 0x8160F058..0x8160F378 | size: 0x320

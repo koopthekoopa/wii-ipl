@@ -94,7 +94,6 @@ void  __fill_mem(void* pDest, int value, unsigned long length) {
             *++cDest = val;
         } while(--length);
     }
-
 #undef cDest
 #undef lDest
 }

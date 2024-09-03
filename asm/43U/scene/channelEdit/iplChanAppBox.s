@@ -8,991 +8,991 @@
 # .text:0x0 | 0x813A4710 | size: 0x2F0
 # ipl::scene::ChanAppBox::ChanAppBox(EGG::Heap*, ipl::nand::LayoutFile*, const char*, const char*)
 .fn __ct__Q33ipl5scene10ChanAppBoxFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCc, global
-/* 813A4710 00072B10  94 21 FF D0 */	stwu r1, -0x30(r1)
-/* 813A4714 00072B14  7C 08 02 A6 */	mflr r0
-/* 813A4718 00072B18  90 01 00 34 */	stw r0, 0x34(r1)
-/* 813A471C 00072B1C  39 61 00 30 */	addi r11, r1, 0x30
-/* 813A4720 00072B20  48 25 4D 99 */	bl _savegpr_25
-/* 813A4724 00072B24  3D 00 81 65 */	lis r8, __vt__Q33ipl5scene13AnmController@ha
-/* 813A4728 00072B28  3B A0 00 00 */	li r29, 0x0
-/* 813A472C 00072B2C  39 08 D0 F8 */	addi r8, r8, __vt__Q33ipl5scene13AnmController@l
-/* 813A4730 00072B30  3F E0 81 65 */	lis r31, lbl_8164D108@ha
-/* 813A4734 00072B34  91 03 00 00 */	stw r8, 0x0(r3)
-/* 813A4738 00072B38  7C 7E 1B 78 */	mr r30, r3
-/* 813A473C 00072B3C  7C 99 23 78 */	mr r25, r4
-/* 813A4740 00072B40  7C BA 2B 78 */	mr r26, r5
-/* 813A4744 00072B44  90 83 00 24 */	stw r4, 0x24(r3)
-/* 813A4748 00072B48  7C DB 33 78 */	mr r27, r6
-/* 813A474C 00072B4C  7C FC 3B 78 */	mr r28, r7
-/* 813A4750 00072B50  3B FF D1 08 */	addi r31, r31, lbl_8164D108@l
-/* 813A4754 00072B54  93 A3 00 04 */	stw r29, 0x4(r3)
-/* 813A4758 00072B58  38 80 00 04 */	li r4, 0x4
-/* 813A475C 00072B5C  38 63 00 0C */	addi r3, r3, 0xc
-/* 813A4760 00072B60  48 16 D8 FD */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
-/* 813A4764 00072B64  38 7E 00 18 */	addi r3, r30, 0x18
-/* 813A4768 00072B68  38 80 00 00 */	li r4, 0x0
-/* 813A476C 00072B6C  48 16 D8 F1 */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
-/* 813A4770 00072B70  3C 60 81 65 */	lis r3, __vt__Q33ipl5scene10ChanAppBox@ha
-/* 813A4774 00072B74  93 BE 00 30 */	stw r29, 0x30(r30)
-/* 813A4778 00072B78  38 63 D2 20 */	addi r3, r3, __vt__Q33ipl5scene10ChanAppBox@l
-/* 813A477C 00072B7C  7F 24 CB 78 */	mr r4, r25
-/* 813A4780 00072B80  38 03 00 0C */	addi r0, r3, 0xc
-/* 813A4784 00072B84  90 7E 00 00 */	stw r3, 0x0(r30)
-/* 813A4788 00072B88  38 60 05 80 */	li r3, 0x580
-/* 813A478C 00072B8C  38 A0 00 04 */	li r5, 0x4
-/* 813A4790 00072B90  90 1E 00 28 */	stw r0, 0x28(r30)
-/* 813A4794 00072B94  93 BE 00 3C */	stw r29, 0x3c(r30)
-/* 813A4798 00072B98  93 BE 00 40 */	stw r29, 0x40(r30)
-/* 813A479C 00072B9C  93 BE 00 44 */	stw r29, 0x44(r30)
-/* 813A47A0 00072BA0  9B BE 00 48 */	stb r29, 0x48(r30)
-/* 813A47A4 00072BA4  48 25 39 0D */	bl __nw__FUlPQ23EGG4Heapi
-/* 813A47A8 00072BA8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A47AC 00072BAC  41 82 00 18 */	beq .L_813A47C4
-/* 813A47B0 00072BB0  7F 24 CB 78 */	mr r4, r25
-/* 813A47B4 00072BB4  7F 45 D3 78 */	mr r5, r26
-/* 813A47B8 00072BB8  7F 66 DB 78 */	mr r6, r27
-/* 813A47BC 00072BBC  7F 87 E3 78 */	mr r7, r28
-/* 813A47C0 00072BC0  4B FC 58 65 */	bl __ct__Q33ipl6layout6ObjectFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCc
+/* 813A4710 | 94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 813A4714 | 7C 08 02 A6 */	mflr r0
+/* 813A4718 | 90 01 00 34 */	stw r0, 0x34(r1)
+/* 813A471C | 39 61 00 30 */	addi r11, r1, 0x30
+/* 813A4720 | 48 25 4D 99 */	bl _savegpr_25
+/* 813A4724 | 3D 00 81 65 */	lis r8, __vt__Q33ipl5scene13AnmController@ha
+/* 813A4728 | 3B A0 00 00 */	li r29, 0x0
+/* 813A472C | 39 08 D0 F8 */	addi r8, r8, __vt__Q33ipl5scene13AnmController@l
+/* 813A4730 | 3F E0 81 65 */	lis r31, lbl_8164D108@ha
+/* 813A4734 | 91 03 00 00 */	stw r8, 0x0(r3)
+/* 813A4738 | 7C 7E 1B 78 */	mr r30, r3
+/* 813A473C | 7C 99 23 78 */	mr r25, r4
+/* 813A4740 | 7C BA 2B 78 */	mr r26, r5
+/* 813A4744 | 90 83 00 24 */	stw r4, 0x24(r3)
+/* 813A4748 | 7C DB 33 78 */	mr r27, r6
+/* 813A474C | 7C FC 3B 78 */	mr r28, r7
+/* 813A4750 | 3B FF D1 08 */	addi r31, r31, lbl_8164D108@l
+/* 813A4754 | 93 A3 00 04 */	stw r29, 0x4(r3)
+/* 813A4758 | 38 80 00 04 */	li r4, 0x4
+/* 813A475C | 38 63 00 0C */	addi r3, r3, 0xc
+/* 813A4760 | 48 16 D8 FD */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
+/* 813A4764 | 38 7E 00 18 */	addi r3, r30, 0x18
+/* 813A4768 | 38 80 00 00 */	li r4, 0x0
+/* 813A476C | 48 16 D8 F1 */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
+/* 813A4770 | 3C 60 81 65 */	lis r3, __vt__Q33ipl5scene10ChanAppBox@ha
+/* 813A4774 | 93 BE 00 30 */	stw r29, 0x30(r30)
+/* 813A4778 | 38 63 D2 20 */	addi r3, r3, __vt__Q33ipl5scene10ChanAppBox@l
+/* 813A477C | 7F 24 CB 78 */	mr r4, r25
+/* 813A4780 | 38 03 00 0C */	addi r0, r3, 0xc
+/* 813A4784 | 90 7E 00 00 */	stw r3, 0x0(r30)
+/* 813A4788 | 38 60 05 80 */	li r3, 0x580
+/* 813A478C | 38 A0 00 04 */	li r5, 0x4
+/* 813A4790 | 90 1E 00 28 */	stw r0, 0x28(r30)
+/* 813A4794 | 93 BE 00 3C */	stw r29, 0x3c(r30)
+/* 813A4798 | 93 BE 00 40 */	stw r29, 0x40(r30)
+/* 813A479C | 93 BE 00 44 */	stw r29, 0x44(r30)
+/* 813A47A0 | 9B BE 00 48 */	stb r29, 0x48(r30)
+/* 813A47A4 | 48 25 39 0D */	bl __nw__FUlPQ23EGG4Heapi
+/* 813A47A8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A47AC | 41 82 00 18 */	beq .L_813A47C4
+/* 813A47B0 | 7F 24 CB 78 */	mr r4, r25
+/* 813A47B4 | 7F 45 D3 78 */	mr r5, r26
+/* 813A47B8 | 7F 66 DB 78 */	mr r6, r27
+/* 813A47BC | 7F 87 E3 78 */	mr r7, r28
+/* 813A47C0 | 4B FC 58 65 */	bl __ct__Q33ipl6layout6ObjectFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCc
 .L_813A47C4:
-/* 813A47C4 00072BC4  90 7E 00 04 */	stw r3, 0x4(r30)
-/* 813A47C8 00072BC8  7F C3 F3 78 */	mr r3, r30
-/* 813A47CC 00072BCC  38 9F 00 00 */	addi r4, r31, 0x0
-/* 813A47D0 00072BD0  38 AD 88 08 */	li r5, lbl_81696848@sda21
-/* 813A47D4 00072BD4  48 00 28 C1 */	bl add_animation__Q33ipl5scene13AnmControllerFPCcPCc
-/* 813A47D8 00072BD8  7F C3 F3 78 */	mr r3, r30
-/* 813A47DC 00072BDC  38 9F 00 25 */	addi r4, r31, 0x25
-/* 813A47E0 00072BE0  38 AD 88 08 */	li r5, lbl_81696848@sda21
-/* 813A47E4 00072BE4  48 00 28 B1 */	bl add_animation__Q33ipl5scene13AnmControllerFPCcPCc
-/* 813A47E8 00072BE8  7F C3 F3 78 */	mr r3, r30
-/* 813A47EC 00072BEC  38 9F 00 4B */	addi r4, r31, 0x4b
-/* 813A47F0 00072BF0  38 AD 88 08 */	li r5, lbl_81696848@sda21
-/* 813A47F4 00072BF4  48 00 28 A1 */	bl add_animation__Q33ipl5scene13AnmControllerFPCcPCc
-/* 813A47F8 00072BF8  7F C3 F3 78 */	mr r3, r30
-/* 813A47FC 00072BFC  38 9F 00 76 */	addi r4, r31, 0x76
-/* 813A4800 00072C00  38 AD 88 08 */	li r5, lbl_81696848@sda21
-/* 813A4804 00072C04  48 00 28 91 */	bl add_animation__Q33ipl5scene13AnmControllerFPCcPCc
-/* 813A4808 00072C08  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 813A480C 00072C0C  4B FC 5E 29 */	bl finishBinding__Q33ipl6layout6ObjectFv
-/* 813A4810 00072C10  7F C3 F3 78 */	mr r3, r30
-/* 813A4814 00072C14  38 9F 00 A2 */	addi r4, r31, 0xa2
-/* 813A4818 00072C18  38 A0 00 00 */	li r5, 0x0
-/* 813A481C 00072C1C  48 00 2C B9 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
-/* 813A4820 00072C20  7F C3 F3 78 */	mr r3, r30
-/* 813A4824 00072C24  38 9F 00 AD */	addi r4, r31, 0xad
-/* 813A4828 00072C28  38 A0 00 00 */	li r5, 0x0
-/* 813A482C 00072C2C  48 00 2C A9 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
-/* 813A4830 00072C30  38 60 00 34 */	li r3, 0x34
-/* 813A4834 00072C34  48 25 38 69 */	bl __nw__FUl
-/* 813A4838 00072C38  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A483C 00072C3C  7C 7D 1B 78 */	mr r29, r3
-/* 813A4840 00072C40  41 82 00 98 */	beq .L_813A48D8
-/* 813A4844 00072C44  2C 1E 00 00 */	cmpwi r30, 0x0
-/* 813A4848 00072C48  7F C6 F3 78 */	mr r6, r30
-/* 813A484C 00072C4C  41 82 00 08 */	beq .L_813A4854
-/* 813A4850 00072C50  38 DE 00 28 */	addi r6, r30, 0x28
+/* 813A47C4 | 90 7E 00 04 */	stw r3, 0x4(r30)
+/* 813A47C8 | 7F C3 F3 78 */	mr r3, r30
+/* 813A47CC | 38 9F 00 00 */	addi r4, r31, 0x0
+/* 813A47D0 | 38 AD 88 08 */	li r5, lbl_81696848@sda21
+/* 813A47D4 | 48 00 28 C1 */	bl add_animation__Q33ipl5scene13AnmControllerFPCcPCc
+/* 813A47D8 | 7F C3 F3 78 */	mr r3, r30
+/* 813A47DC | 38 9F 00 25 */	addi r4, r31, 0x25
+/* 813A47E0 | 38 AD 88 08 */	li r5, lbl_81696848@sda21
+/* 813A47E4 | 48 00 28 B1 */	bl add_animation__Q33ipl5scene13AnmControllerFPCcPCc
+/* 813A47E8 | 7F C3 F3 78 */	mr r3, r30
+/* 813A47EC | 38 9F 00 4B */	addi r4, r31, 0x4b
+/* 813A47F0 | 38 AD 88 08 */	li r5, lbl_81696848@sda21
+/* 813A47F4 | 48 00 28 A1 */	bl add_animation__Q33ipl5scene13AnmControllerFPCcPCc
+/* 813A47F8 | 7F C3 F3 78 */	mr r3, r30
+/* 813A47FC | 38 9F 00 76 */	addi r4, r31, 0x76
+/* 813A4800 | 38 AD 88 08 */	li r5, lbl_81696848@sda21
+/* 813A4804 | 48 00 28 91 */	bl add_animation__Q33ipl5scene13AnmControllerFPCcPCc
+/* 813A4808 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 813A480C | 4B FC 5E 29 */	bl finishBinding__Q33ipl6layout6ObjectFv
+/* 813A4810 | 7F C3 F3 78 */	mr r3, r30
+/* 813A4814 | 38 9F 00 A2 */	addi r4, r31, 0xa2
+/* 813A4818 | 38 A0 00 00 */	li r5, 0x0
+/* 813A481C | 48 00 2C B9 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
+/* 813A4820 | 7F C3 F3 78 */	mr r3, r30
+/* 813A4824 | 38 9F 00 AD */	addi r4, r31, 0xad
+/* 813A4828 | 38 A0 00 00 */	li r5, 0x0
+/* 813A482C | 48 00 2C A9 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
+/* 813A4830 | 38 60 00 34 */	li r3, 0x34
+/* 813A4834 | 48 25 38 69 */	bl __nw__FUl
+/* 813A4838 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A483C | 7C 7D 1B 78 */	mr r29, r3
+/* 813A4840 | 41 82 00 98 */	beq .L_813A48D8
+/* 813A4844 | 2C 1E 00 00 */	cmpwi r30, 0x0
+/* 813A4848 | 7F C6 F3 78 */	mr r6, r30
+/* 813A484C | 41 82 00 08 */	beq .L_813A4854
+/* 813A4850 | 38 DE 00 28 */	addi r6, r30, 0x28
 .L_813A4854:
-/* 813A4854 00072C54  80 BE 00 04 */	lwz r5, 0x4(r30)
-/* 813A4858 00072C58  3C 80 81 64 */	lis r4, __vt__Q23gui7Manager@ha
-/* 813A485C 00072C5C  38 84 27 E0 */	addi r4, r4, __vt__Q23gui7Manager@l
-/* 813A4860 00072C60  2C 06 00 00 */	cmpwi r6, 0x0
-/* 813A4864 00072C64  90 83 00 00 */	stw r4, 0x0(r3)
-/* 813A4868 00072C68  38 00 00 00 */	li r0, 0x0
-/* 813A486C 00072C6C  3B 85 02 98 */	addi r28, r5, 0x298
-/* 813A4870 00072C70  90 C3 00 04 */	stw r6, 0x4(r3)
-/* 813A4874 00072C74  90 03 00 14 */	stw r0, 0x14(r3)
-/* 813A4878 00072C78  41 82 00 1C */	beq .L_813A4894
-/* 813A487C 00072C7C  81 86 00 00 */	lwz r12, 0x0(r6)
-/* 813A4880 00072C80  7C C3 33 78 */	mr r3, r6
-/* 813A4884 00072C84  7F A4 EB 78 */	mr r4, r29
-/* 813A4888 00072C88  81 8C 00 0C */	lwz r12, 0xc(r12)
-/* 813A488C 00072C8C  7D 89 03 A6 */	mtctr r12
-/* 813A4890 00072C90  4E 80 04 21 */	bctrl
+/* 813A4854 | 80 BE 00 04 */	lwz r5, 0x4(r30)
+/* 813A4858 | 3C 80 81 64 */	lis r4, __vt__Q23gui7Manager@ha
+/* 813A485C | 38 84 27 E0 */	addi r4, r4, __vt__Q23gui7Manager@l
+/* 813A4860 | 2C 06 00 00 */	cmpwi r6, 0x0
+/* 813A4864 | 90 83 00 00 */	stw r4, 0x0(r3)
+/* 813A4868 | 38 00 00 00 */	li r0, 0x0
+/* 813A486C | 3B 85 02 98 */	addi r28, r5, 0x298
+/* 813A4870 | 90 C3 00 04 */	stw r6, 0x4(r3)
+/* 813A4874 | 90 03 00 14 */	stw r0, 0x14(r3)
+/* 813A4878 | 41 82 00 1C */	beq .L_813A4894
+/* 813A487C | 81 86 00 00 */	lwz r12, 0x0(r6)
+/* 813A4880 | 7C C3 33 78 */	mr r3, r6
+/* 813A4884 | 7F A4 EB 78 */	mr r4, r29
+/* 813A4888 | 81 8C 00 0C */	lwz r12, 0xc(r12)
+/* 813A488C | 7D 89 03 A6 */	mtctr r12
+/* 813A4890 | 4E 80 04 21 */	bctrl
 .L_813A4894:
-/* 813A4894 00072C94  38 7D 00 08 */	addi r3, r29, 0x8
-/* 813A4898 00072C98  38 80 00 08 */	li r4, 0x8
-/* 813A489C 00072C9C  48 16 D7 C1 */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
-/* 813A48A0 00072CA0  3C A0 81 64 */	lis r5, __vt__Q23gui11PaneManager@ha
-/* 813A48A4 00072CA4  38 7D 00 18 */	addi r3, r29, 0x18
-/* 813A48A8 00072CA8  38 A5 27 84 */	addi r5, r5, __vt__Q23gui11PaneManager@l
-/* 813A48AC 00072CAC  38 80 00 08 */	li r4, 0x8
-/* 813A48B0 00072CB0  90 BD 00 00 */	stw r5, 0x0(r29)
-/* 813A48B4 00072CB4  93 9D 00 24 */	stw r28, 0x24(r29)
-/* 813A48B8 00072CB8  48 16 D7 A5 */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
-/* 813A48BC 00072CBC  3C 80 81 63 */	lis r4, __vt__Q33ipl3gui11PaneManager@ha
-/* 813A48C0 00072CC0  38 60 00 00 */	li r3, 0x0
-/* 813A48C4 00072CC4  38 84 59 C4 */	addi r4, r4, __vt__Q33ipl3gui11PaneManager@l
-/* 813A48C8 00072CC8  38 00 00 01 */	li r0, 0x1
-/* 813A48CC 00072CCC  90 9D 00 00 */	stw r4, 0x0(r29)
-/* 813A48D0 00072CD0  90 7D 00 2C */	stw r3, 0x2c(r29)
-/* 813A48D4 00072CD4  98 1D 00 30 */	stb r0, 0x30(r29)
+/* 813A4894 | 38 7D 00 08 */	addi r3, r29, 0x8
+/* 813A4898 | 38 80 00 08 */	li r4, 0x8
+/* 813A489C | 48 16 D7 C1 */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
+/* 813A48A0 | 3C A0 81 64 */	lis r5, __vt__Q23gui11PaneManager@ha
+/* 813A48A4 | 38 7D 00 18 */	addi r3, r29, 0x18
+/* 813A48A8 | 38 A5 27 84 */	addi r5, r5, __vt__Q23gui11PaneManager@l
+/* 813A48AC | 38 80 00 08 */	li r4, 0x8
+/* 813A48B0 | 90 BD 00 00 */	stw r5, 0x0(r29)
+/* 813A48B4 | 93 9D 00 24 */	stw r28, 0x24(r29)
+/* 813A48B8 | 48 16 D7 A5 */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
+/* 813A48BC | 3C 80 81 63 */	lis r4, __vt__Q33ipl3gui11PaneManager@ha
+/* 813A48C0 | 38 60 00 00 */	li r3, 0x0
+/* 813A48C4 | 38 84 59 C4 */	addi r4, r4, __vt__Q33ipl3gui11PaneManager@l
+/* 813A48C8 | 38 00 00 01 */	li r0, 0x1
+/* 813A48CC | 90 9D 00 00 */	stw r4, 0x0(r29)
+/* 813A48D0 | 90 7D 00 2C */	stw r3, 0x2c(r29)
+/* 813A48D4 | 98 1D 00 30 */	stb r0, 0x30(r29)
 .L_813A48D8:
-/* 813A48D8 00072CD8  93 BE 00 08 */	stw r29, 0x8(r30)
-/* 813A48DC 00072CDC  7F A3 EB 78 */	mr r3, r29
-/* 813A48E0 00072CE0  80 9E 00 04 */	lwz r4, 0x4(r30)
-/* 813A48E4 00072CE4  81 9D 00 00 */	lwz r12, 0x0(r29)
-/* 813A48E8 00072CE8  38 84 00 04 */	addi r4, r4, 0x4
-/* 813A48EC 00072CEC  81 8C 00 44 */	lwz r12, 0x44(r12)
-/* 813A48F0 00072CF0  7D 89 03 A6 */	mtctr r12
-/* 813A48F4 00072CF4  4E 80 04 21 */	bctrl
-/* 813A48F8 00072CF8  80 7E 00 08 */	lwz r3, 0x8(r30)
-/* 813A48FC 00072CFC  38 80 00 00 */	li r4, 0x0
-/* 813A4900 00072D00  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813A4904 00072D04  81 8C 00 34 */	lwz r12, 0x34(r12)
-/* 813A4908 00072D08  7D 89 03 A6 */	mtctr r12
-/* 813A490C 00072D0C  4E 80 04 21 */	bctrl
-/* 813A4910 00072D10  48 1C 56 A5 */	bl SCGetAspectRatio
-/* 813A4914 00072D14  54 60 06 3E */	clrlwi r0, r3, 24
-/* 813A4918 00072D18  28 00 00 01 */	cmplwi r0, 0x1
-/* 813A491C 00072D1C  40 82 00 68 */	bne .L_813A4984
-/* 813A4920 00072D20  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 813A4924 00072D24  38 9F 00 B7 */	addi r4, r31, 0xb7
-/* 813A4928 00072D28  38 A0 00 01 */	li r5, 0x1
-/* 813A492C 00072D2C  80 63 00 14 */	lwz r3, 0x14(r3)
-/* 813A4930 00072D30  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813A4934 00072D34  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 813A4938 00072D38  7D 89 03 A6 */	mtctr r12
-/* 813A493C 00072D3C  4E 80 04 21 */	bctrl
-/* 813A4940 00072D40  7C 64 1B 78 */	mr r4, r3
-/* 813A4944 00072D44  80 7E 00 08 */	lwz r3, 0x8(r30)
-/* 813A4948 00072D48  38 A0 00 01 */	li r5, 0x1
-/* 813A494C 00072D4C  4B FC 68 81 */	bl setTriggerTarget__Q33ipl3gui11PaneManagerFPQ34nw4r3lyt4Paneb
-/* 813A4950 00072D50  7F C3 F3 78 */	mr r3, r30
-/* 813A4954 00072D54  38 80 00 03 */	li r4, 0x3
-/* 813A4958 00072D58  48 00 28 89 */	bl get_animation__Q33ipl5scene13AnmControllerFi
-/* 813A495C 00072D5C  7C 7D 1B 78 */	mr r29, r3
-/* 813A4960 00072D60  7F C3 F3 78 */	mr r3, r30
-/* 813A4964 00072D64  38 80 00 02 */	li r4, 0x2
-/* 813A4968 00072D68  48 00 28 79 */	bl get_animation__Q33ipl5scene13AnmControllerFi
-/* 813A496C 00072D6C  7C 65 1B 78 */	mr r5, r3
-/* 813A4970 00072D70  7F C3 F3 78 */	mr r3, r30
-/* 813A4974 00072D74  7F A6 EB 78 */	mr r6, r29
-/* 813A4978 00072D78  38 9F 00 B7 */	addi r4, r31, 0xb7
-/* 813A497C 00072D7C  48 00 28 71 */	bl add_anmpane__Q33ipl5scene13AnmControllerFPCcPQ33ipl5scene3AnmPQ33ipl5scene3Anm
-/* 813A4980 00072D80  48 00 00 64 */	b .L_813A49E4
+/* 813A48D8 | 93 BE 00 08 */	stw r29, 0x8(r30)
+/* 813A48DC | 7F A3 EB 78 */	mr r3, r29
+/* 813A48E0 | 80 9E 00 04 */	lwz r4, 0x4(r30)
+/* 813A48E4 | 81 9D 00 00 */	lwz r12, 0x0(r29)
+/* 813A48E8 | 38 84 00 04 */	addi r4, r4, 0x4
+/* 813A48EC | 81 8C 00 44 */	lwz r12, 0x44(r12)
+/* 813A48F0 | 7D 89 03 A6 */	mtctr r12
+/* 813A48F4 | 4E 80 04 21 */	bctrl
+/* 813A48F8 | 80 7E 00 08 */	lwz r3, 0x8(r30)
+/* 813A48FC | 38 80 00 00 */	li r4, 0x0
+/* 813A4900 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813A4904 | 81 8C 00 34 */	lwz r12, 0x34(r12)
+/* 813A4908 | 7D 89 03 A6 */	mtctr r12
+/* 813A490C | 4E 80 04 21 */	bctrl
+/* 813A4910 | 48 1C 56 A5 */	bl SCGetAspectRatio
+/* 813A4914 | 54 60 06 3E */	clrlwi r0, r3, 24
+/* 813A4918 | 28 00 00 01 */	cmplwi r0, 0x1
+/* 813A491C | 40 82 00 68 */	bne .L_813A4984
+/* 813A4920 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 813A4924 | 38 9F 00 B7 */	addi r4, r31, 0xb7
+/* 813A4928 | 38 A0 00 01 */	li r5, 0x1
+/* 813A492C | 80 63 00 14 */	lwz r3, 0x14(r3)
+/* 813A4930 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813A4934 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 813A4938 | 7D 89 03 A6 */	mtctr r12
+/* 813A493C | 4E 80 04 21 */	bctrl
+/* 813A4940 | 7C 64 1B 78 */	mr r4, r3
+/* 813A4944 | 80 7E 00 08 */	lwz r3, 0x8(r30)
+/* 813A4948 | 38 A0 00 01 */	li r5, 0x1
+/* 813A494C | 4B FC 68 81 */	bl setTriggerTarget__Q33ipl3gui11PaneManagerFPQ34nw4r3lyt4Paneb
+/* 813A4950 | 7F C3 F3 78 */	mr r3, r30
+/* 813A4954 | 38 80 00 03 */	li r4, 0x3
+/* 813A4958 | 48 00 28 89 */	bl get_animation__Q33ipl5scene13AnmControllerFi
+/* 813A495C | 7C 7D 1B 78 */	mr r29, r3
+/* 813A4960 | 7F C3 F3 78 */	mr r3, r30
+/* 813A4964 | 38 80 00 02 */	li r4, 0x2
+/* 813A4968 | 48 00 28 79 */	bl get_animation__Q33ipl5scene13AnmControllerFi
+/* 813A496C | 7C 65 1B 78 */	mr r5, r3
+/* 813A4970 | 7F C3 F3 78 */	mr r3, r30
+/* 813A4974 | 7F A6 EB 78 */	mr r6, r29
+/* 813A4978 | 38 9F 00 B7 */	addi r4, r31, 0xb7
+/* 813A497C | 48 00 28 71 */	bl add_anmpane__Q33ipl5scene13AnmControllerFPCcPQ33ipl5scene3AnmPQ33ipl5scene3Anm
+/* 813A4980 | 48 00 00 64 */	b .L_813A49E4
 .L_813A4984:
-/* 813A4984 00072D84  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 813A4988 00072D88  38 9F 00 C1 */	addi r4, r31, 0xc1
-/* 813A498C 00072D8C  38 A0 00 01 */	li r5, 0x1
-/* 813A4990 00072D90  80 63 00 14 */	lwz r3, 0x14(r3)
-/* 813A4994 00072D94  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813A4998 00072D98  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 813A499C 00072D9C  7D 89 03 A6 */	mtctr r12
-/* 813A49A0 00072DA0  4E 80 04 21 */	bctrl
-/* 813A49A4 00072DA4  7C 64 1B 78 */	mr r4, r3
-/* 813A49A8 00072DA8  80 7E 00 08 */	lwz r3, 0x8(r30)
-/* 813A49AC 00072DAC  38 A0 00 01 */	li r5, 0x1
-/* 813A49B0 00072DB0  4B FC 68 1D */	bl setTriggerTarget__Q33ipl3gui11PaneManagerFPQ34nw4r3lyt4Paneb
-/* 813A49B4 00072DB4  7F C3 F3 78 */	mr r3, r30
-/* 813A49B8 00072DB8  38 80 00 03 */	li r4, 0x3
-/* 813A49BC 00072DBC  48 00 28 25 */	bl get_animation__Q33ipl5scene13AnmControllerFi
-/* 813A49C0 00072DC0  7C 7D 1B 78 */	mr r29, r3
-/* 813A49C4 00072DC4  7F C3 F3 78 */	mr r3, r30
-/* 813A49C8 00072DC8  38 80 00 02 */	li r4, 0x2
-/* 813A49CC 00072DCC  48 00 28 15 */	bl get_animation__Q33ipl5scene13AnmControllerFi
-/* 813A49D0 00072DD0  7C 65 1B 78 */	mr r5, r3
-/* 813A49D4 00072DD4  7F C3 F3 78 */	mr r3, r30
-/* 813A49D8 00072DD8  7F A6 EB 78 */	mr r6, r29
-/* 813A49DC 00072DDC  38 9F 00 C1 */	addi r4, r31, 0xc1
-/* 813A49E0 00072DE0  48 00 28 0D */	bl add_anmpane__Q33ipl5scene13AnmControllerFPCcPQ33ipl5scene3AnmPQ33ipl5scene3Anm
+/* 813A4984 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 813A4988 | 38 9F 00 C1 */	addi r4, r31, 0xc1
+/* 813A498C | 38 A0 00 01 */	li r5, 0x1
+/* 813A4990 | 80 63 00 14 */	lwz r3, 0x14(r3)
+/* 813A4994 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813A4998 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 813A499C | 7D 89 03 A6 */	mtctr r12
+/* 813A49A0 | 4E 80 04 21 */	bctrl
+/* 813A49A4 | 7C 64 1B 78 */	mr r4, r3
+/* 813A49A8 | 80 7E 00 08 */	lwz r3, 0x8(r30)
+/* 813A49AC | 38 A0 00 01 */	li r5, 0x1
+/* 813A49B0 | 4B FC 68 1D */	bl setTriggerTarget__Q33ipl3gui11PaneManagerFPQ34nw4r3lyt4Paneb
+/* 813A49B4 | 7F C3 F3 78 */	mr r3, r30
+/* 813A49B8 | 38 80 00 03 */	li r4, 0x3
+/* 813A49BC | 48 00 28 25 */	bl get_animation__Q33ipl5scene13AnmControllerFi
+/* 813A49C0 | 7C 7D 1B 78 */	mr r29, r3
+/* 813A49C4 | 7F C3 F3 78 */	mr r3, r30
+/* 813A49C8 | 38 80 00 02 */	li r4, 0x2
+/* 813A49CC | 48 00 28 15 */	bl get_animation__Q33ipl5scene13AnmControllerFi
+/* 813A49D0 | 7C 65 1B 78 */	mr r5, r3
+/* 813A49D4 | 7F C3 F3 78 */	mr r3, r30
+/* 813A49D8 | 7F A6 EB 78 */	mr r6, r29
+/* 813A49DC | 38 9F 00 C1 */	addi r4, r31, 0xc1
+/* 813A49E0 | 48 00 28 0D */	bl add_anmpane__Q33ipl5scene13AnmControllerFPCcPQ33ipl5scene3AnmPQ33ipl5scene3Anm
 .L_813A49E4:
-/* 813A49E4 00072DE4  39 61 00 30 */	addi r11, r1, 0x30
-/* 813A49E8 00072DE8  7F C3 F3 78 */	mr r3, r30
-/* 813A49EC 00072DEC  48 25 4B 19 */	bl _restgpr_25
-/* 813A49F0 00072DF0  80 01 00 34 */	lwz r0, 0x34(r1)
-/* 813A49F4 00072DF4  7C 08 03 A6 */	mtlr r0
-/* 813A49F8 00072DF8  38 21 00 30 */	addi r1, r1, 0x30
-/* 813A49FC 00072DFC  4E 80 00 20 */	blr
+/* 813A49E4 | 39 61 00 30 */	addi r11, r1, 0x30
+/* 813A49E8 | 7F C3 F3 78 */	mr r3, r30
+/* 813A49EC | 48 25 4B 19 */	bl _restgpr_25
+/* 813A49F0 | 80 01 00 34 */	lwz r0, 0x34(r1)
+/* 813A49F4 | 7C 08 03 A6 */	mtlr r0
+/* 813A49F8 | 38 21 00 30 */	addi r1, r1, 0x30
+/* 813A49FC | 4E 80 00 20 */	blr
 .endfn __ct__Q33ipl5scene10ChanAppBoxFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCc
 
 # .text:0x2F0 | 0x813A4A00 | size: 0xB4
 # ipl::scene::ChanAppBox::~ChanAppBox()
 .fn __dt__Q33ipl5scene10ChanAppBoxFv, global
-/* 813A4A00 00072E00  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 813A4A04 00072E04  7C 08 02 A6 */	mflr r0
-/* 813A4A08 00072E08  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A4A0C 00072E0C  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813A4A10 00072E10  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813A4A14 00072E14  7C 9F 23 78 */	mr r31, r4
-/* 813A4A18 00072E18  93 C1 00 08 */	stw r30, 0x8(r1)
-/* 813A4A1C 00072E1C  7C 7E 1B 78 */	mr r30, r3
-/* 813A4A20 00072E20  41 82 00 78 */	beq .L_813A4A98
-/* 813A4A24 00072E24  80 A3 00 04 */	lwz r5, 0x4(r3)
-/* 813A4A28 00072E28  3C 80 81 65 */	lis r4, __vt__Q33ipl5scene10ChanAppBox@ha
-/* 813A4A2C 00072E2C  38 84 D2 20 */	addi r4, r4, __vt__Q33ipl5scene10ChanAppBox@l
-/* 813A4A30 00072E30  38 04 00 0C */	addi r0, r4, 0xc
-/* 813A4A34 00072E34  2C 05 00 00 */	cmpwi r5, 0x0
-/* 813A4A38 00072E38  90 83 00 00 */	stw r4, 0x0(r3)
-/* 813A4A3C 00072E3C  90 03 00 28 */	stw r0, 0x28(r3)
-/* 813A4A40 00072E40  41 82 00 1C */	beq .L_813A4A5C
-/* 813A4A44 00072E44  81 85 00 00 */	lwz r12, 0x0(r5)
-/* 813A4A48 00072E48  7C A3 2B 78 */	mr r3, r5
-/* 813A4A4C 00072E4C  38 80 00 01 */	li r4, 0x1
-/* 813A4A50 00072E50  81 8C 00 08 */	lwz r12, 0x8(r12)
-/* 813A4A54 00072E54  7D 89 03 A6 */	mtctr r12
-/* 813A4A58 00072E58  4E 80 04 21 */	bctrl
+/* 813A4A00 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813A4A04 | 7C 08 02 A6 */	mflr r0
+/* 813A4A08 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A4A0C | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813A4A10 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 813A4A14 | 7C 9F 23 78 */	mr r31, r4
+/* 813A4A18 | 93 C1 00 08 */	stw r30, 0x8(r1)
+/* 813A4A1C | 7C 7E 1B 78 */	mr r30, r3
+/* 813A4A20 | 41 82 00 78 */	beq .L_813A4A98
+/* 813A4A24 | 80 A3 00 04 */	lwz r5, 0x4(r3)
+/* 813A4A28 | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene10ChanAppBox@ha
+/* 813A4A2C | 38 84 D2 20 */	addi r4, r4, __vt__Q33ipl5scene10ChanAppBox@l
+/* 813A4A30 | 38 04 00 0C */	addi r0, r4, 0xc
+/* 813A4A34 | 2C 05 00 00 */	cmpwi r5, 0x0
+/* 813A4A38 | 90 83 00 00 */	stw r4, 0x0(r3)
+/* 813A4A3C | 90 03 00 28 */	stw r0, 0x28(r3)
+/* 813A4A40 | 41 82 00 1C */	beq .L_813A4A5C
+/* 813A4A44 | 81 85 00 00 */	lwz r12, 0x0(r5)
+/* 813A4A48 | 7C A3 2B 78 */	mr r3, r5
+/* 813A4A4C | 38 80 00 01 */	li r4, 0x1
+/* 813A4A50 | 81 8C 00 08 */	lwz r12, 0x8(r12)
+/* 813A4A54 | 7D 89 03 A6 */	mtctr r12
+/* 813A4A58 | 4E 80 04 21 */	bctrl
 .L_813A4A5C:
-/* 813A4A5C 00072E5C  80 7E 00 08 */	lwz r3, 0x8(r30)
-/* 813A4A60 00072E60  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A4A64 00072E64  41 82 00 18 */	beq .L_813A4A7C
-/* 813A4A68 00072E68  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813A4A6C 00072E6C  38 80 00 01 */	li r4, 0x1
-/* 813A4A70 00072E70  81 8C 00 1C */	lwz r12, 0x1c(r12)
-/* 813A4A74 00072E74  7D 89 03 A6 */	mtctr r12
-/* 813A4A78 00072E78  4E 80 04 21 */	bctrl
+/* 813A4A5C | 80 7E 00 08 */	lwz r3, 0x8(r30)
+/* 813A4A60 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A4A64 | 41 82 00 18 */	beq .L_813A4A7C
+/* 813A4A68 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813A4A6C | 38 80 00 01 */	li r4, 0x1
+/* 813A4A70 | 81 8C 00 1C */	lwz r12, 0x1c(r12)
+/* 813A4A74 | 7D 89 03 A6 */	mtctr r12
+/* 813A4A78 | 4E 80 04 21 */	bctrl
 .L_813A4A7C:
-/* 813A4A7C 00072E7C  7F C3 F3 78 */	mr r3, r30
-/* 813A4A80 00072E80  38 80 00 00 */	li r4, 0x0
-/* 813A4A84 00072E84  4B FF F3 55 */	bl __dt__Q33ipl5scene13AnmControllerFv
-/* 813A4A88 00072E88  2C 1F 00 00 */	cmpwi r31, 0x0
-/* 813A4A8C 00072E8C  40 81 00 0C */	ble .L_813A4A98
-/* 813A4A90 00072E90  7F C3 F3 78 */	mr r3, r30
-/* 813A4A94 00072E94  48 25 36 51 */	bl __dl__FPv
+/* 813A4A7C | 7F C3 F3 78 */	mr r3, r30
+/* 813A4A80 | 38 80 00 00 */	li r4, 0x0
+/* 813A4A84 | 4B FF F3 55 */	bl __dt__Q33ipl5scene13AnmControllerFv
+/* 813A4A88 | 2C 1F 00 00 */	cmpwi r31, 0x0
+/* 813A4A8C | 40 81 00 0C */	ble .L_813A4A98
+/* 813A4A90 | 7F C3 F3 78 */	mr r3, r30
+/* 813A4A94 | 48 25 36 51 */	bl __dl__FPv
 .L_813A4A98:
-/* 813A4A98 00072E98  7F C3 F3 78 */	mr r3, r30
-/* 813A4A9C 00072E9C  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813A4AA0 00072EA0  83 C1 00 08 */	lwz r30, 0x8(r1)
-/* 813A4AA4 00072EA4  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813A4AA8 00072EA8  7C 08 03 A6 */	mtlr r0
-/* 813A4AAC 00072EAC  38 21 00 10 */	addi r1, r1, 0x10
-/* 813A4AB0 00072EB0  4E 80 00 20 */	blr
+/* 813A4A98 | 7F C3 F3 78 */	mr r3, r30
+/* 813A4A9C | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813A4AA0 | 83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 813A4AA4 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813A4AA8 | 7C 08 03 A6 */	mtlr r0
+/* 813A4AAC | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813A4AB0 | 4E 80 00 20 */	blr
 .endfn __dt__Q33ipl5scene10ChanAppBoxFv
 
 # .text:0x3A4 | 0x813A4AB4 | size: 0x24C
 # ipl::scene::ChanAppBox::calc()
 .fn calc__Q33ipl5scene10ChanAppBoxFv, global
-/* 813A4AB4 00072EB4  94 21 FF A0 */	stwu r1, -0x60(r1)
-/* 813A4AB8 00072EB8  7C 08 02 A6 */	mflr r0
-/* 813A4ABC 00072EBC  90 01 00 64 */	stw r0, 0x64(r1)
-/* 813A4AC0 00072EC0  DB E1 00 50 */	stfd f31, 0x50(r1)
-/* 813A4AC4 00072EC4  F3 E1 00 58 */	psq_st f31, 0x58(r1), 0, qr0
-/* 813A4AC8 00072EC8  39 61 00 50 */	addi r11, r1, 0x50
-/* 813A4ACC 00072ECC  48 25 49 FD */	bl _savegpr_29
-/* 813A4AD0 00072ED0  7C 7F 1B 78 */	mr r31, r3
-/* 813A4AD4 00072ED4  3F C0 81 65 */	lis r30, lbl_8164D108@ha
-/* 813A4AD8 00072ED8  80 63 00 04 */	lwz r3, 0x4(r3)
-/* 813A4ADC 00072EDC  3B DE D1 08 */	addi r30, r30, lbl_8164D108@l
-/* 813A4AE0 00072EE0  4B FC 5C 25 */	bl calc__Q33ipl6layout6ObjectFv
-/* 813A4AE4 00072EE4  80 7F 00 08 */	lwz r3, 0x8(r31)
-/* 813A4AE8 00072EE8  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813A4AEC 00072EEC  81 8C 00 10 */	lwz r12, 0x10(r12)
-/* 813A4AF0 00072EF0  7D 89 03 A6 */	mtctr r12
-/* 813A4AF4 00072EF4  4E 80 04 21 */	bctrl
-/* 813A4AF8 00072EF8  3B A0 00 00 */	li r29, 0x0
-/* 813A4AFC 00072EFC  48 00 00 0C */	b .L_813A4B08
+/* 813A4AB4 | 94 21 FF A0 */	stwu r1, -0x60(r1)
+/* 813A4AB8 | 7C 08 02 A6 */	mflr r0
+/* 813A4ABC | 90 01 00 64 */	stw r0, 0x64(r1)
+/* 813A4AC0 | DB E1 00 50 */	stfd f31, 0x50(r1)
+/* 813A4AC4 | F3 E1 00 58 */	psq_st f31, 0x58(r1), 0, qr0
+/* 813A4AC8 | 39 61 00 50 */	addi r11, r1, 0x50
+/* 813A4ACC | 48 25 49 FD */	bl _savegpr_29
+/* 813A4AD0 | 7C 7F 1B 78 */	mr r31, r3
+/* 813A4AD4 | 3F C0 81 65 */	lis r30, lbl_8164D108@ha
+/* 813A4AD8 | 80 63 00 04 */	lwz r3, 0x4(r3)
+/* 813A4ADC | 3B DE D1 08 */	addi r30, r30, lbl_8164D108@l
+/* 813A4AE0 | 4B FC 5C 25 */	bl calc__Q33ipl6layout6ObjectFv
+/* 813A4AE4 | 80 7F 00 08 */	lwz r3, 0x8(r31)
+/* 813A4AE8 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813A4AEC | 81 8C 00 10 */	lwz r12, 0x10(r12)
+/* 813A4AF0 | 7D 89 03 A6 */	mtctr r12
+/* 813A4AF4 | 4E 80 04 21 */	bctrl
+/* 813A4AF8 | 3B A0 00 00 */	li r29, 0x0
+/* 813A4AFC | 48 00 00 0C */	b .L_813A4B08
 .L_813A4B00:
-/* 813A4B00 00072F00  7F A3 EB 78 */	mr r3, r29
-/* 813A4B04 00072F04  48 00 24 01 */	bl calc__Q33ipl5scene7AnmPaneFv
+/* 813A4B00 | 7F A3 EB 78 */	mr r3, r29
+/* 813A4B04 | 48 00 24 01 */	bl calc__Q33ipl5scene7AnmPaneFv
 .L_813A4B08:
-/* 813A4B08 00072F08  7F A4 EB 78 */	mr r4, r29
-/* 813A4B0C 00072F0C  38 7F 00 18 */	addi r3, r31, 0x18
-/* 813A4B10 00072F10  48 16 D7 CD */	bl List_GetNext__Q24nw4r2utFPCQ34nw4r2ut4ListPCv
-/* 813A4B14 00072F14  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A4B18 00072F18  7C 7D 1B 78 */	mr r29, r3
-/* 813A4B1C 00072F1C  40 82 FF E4 */	bne .L_813A4B00
-/* 813A4B20 00072F20  80 1F 00 3C */	lwz r0, 0x3c(r31)
-/* 813A4B24 00072F24  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813A4B28 00072F28  41 82 01 70 */	beq .L_813A4C98
-/* 813A4B2C 00072F2C  80 7F 00 40 */	lwz r3, 0x40(r31)
-/* 813A4B30 00072F30  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A4B34 00072F34  41 82 01 64 */	beq .L_813A4C98
-/* 813A4B38 00072F38  80 03 00 00 */	lwz r0, 0x0(r3)
-/* 813A4B3C 00072F3C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813A4B40 00072F40  41 82 01 58 */	beq .L_813A4C98
-/* 813A4B44 00072F44  38 61 00 2C */	addi r3, r1, 0x2c
-/* 813A4B48 00072F48  4B F9 18 E1 */	bl __ct__Q34nw4r2ut4RectFv
-/* 813A4B4C 00072F4C  38 61 00 2C */	addi r3, r1, 0x2c
-/* 813A4B50 00072F50  4B F9 0D FD */	bl getProjectionRect4x3__Q23ipl6SystemFPQ34nw4r2ut4Rect
-/* 813A4B54 00072F54  38 61 00 1C */	addi r3, r1, 0x1c
-/* 813A4B58 00072F58  4B F9 18 D1 */	bl __ct__Q34nw4r2ut4RectFv
-/* 813A4B5C 00072F5C  38 61 00 1C */	addi r3, r1, 0x1c
-/* 813A4B60 00072F60  4B F9 0E 11 */	bl getProjectionRect16x9__Q23ipl6SystemFPQ34nw4r2ut4Rect
-/* 813A4B64 00072F64  C0 61 00 34 */	lfs f3, 0x34(r1)
-/* 813A4B68 00072F68  7F E3 FB 78 */	mr r3, r31
-/* 813A4B6C 00072F6C  C0 41 00 2C */	lfs f2, 0x2c(r1)
-/* 813A4B70 00072F70  38 8D 88 18 */	li r4, lbl_81696858@sda21
-/* 813A4B74 00072F74  C0 21 00 24 */	lfs f1, 0x24(r1)
-/* 813A4B78 00072F78  C0 01 00 1C */	lfs f0, 0x1c(r1)
-/* 813A4B7C 00072F7C  EC 43 10 28 */	fsubs f2, f3, f2
-/* 813A4B80 00072F80  EC 01 00 28 */	fsubs f0, f1, f0
-/* 813A4B84 00072F84  EF E0 10 24 */	fdivs f31, f0, f2
-/* 813A4B88 00072F88  48 00 2A 3D */	bl get_translate__Q33ipl5scene13AnmControllerFPCc
-/* 813A4B8C 00072F8C  80 A3 00 00 */	lwz r5, 0x0(r3)
-/* 813A4B90 00072F90  80 83 00 04 */	lwz r4, 0x4(r3)
-/* 813A4B94 00072F94  80 03 00 08 */	lwz r0, 0x8(r3)
-/* 813A4B98 00072F98  90 A1 00 10 */	stw r5, 0x10(r1)
-/* 813A4B9C 00072F9C  90 81 00 14 */	stw r4, 0x14(r1)
-/* 813A4BA0 00072FA0  90 01 00 18 */	stw r0, 0x18(r1)
-/* 813A4BA4 00072FA4  48 1C 54 11 */	bl SCGetAspectRatio
-/* 813A4BA8 00072FA8  54 60 06 3E */	clrlwi r0, r3, 24
-/* 813A4BAC 00072FAC  28 00 00 01 */	cmplwi r0, 0x1
-/* 813A4BB0 00072FB0  40 82 00 10 */	bne .L_813A4BC0
-/* 813A4BB4 00072FB4  C0 01 00 10 */	lfs f0, 0x10(r1)
-/* 813A4BB8 00072FB8  EC 00 07 F2 */	fmuls f0, f0, f31
-/* 813A4BBC 00072FBC  D0 01 00 10 */	stfs f0, 0x10(r1)
+/* 813A4B08 | 7F A4 EB 78 */	mr r4, r29
+/* 813A4B0C | 38 7F 00 18 */	addi r3, r31, 0x18
+/* 813A4B10 | 48 16 D7 CD */	bl List_GetNext__Q24nw4r2utFPCQ34nw4r2ut4ListPCv
+/* 813A4B14 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A4B18 | 7C 7D 1B 78 */	mr r29, r3
+/* 813A4B1C | 40 82 FF E4 */	bne .L_813A4B00
+/* 813A4B20 | 80 1F 00 3C */	lwz r0, 0x3c(r31)
+/* 813A4B24 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813A4B28 | 41 82 01 70 */	beq .L_813A4C98
+/* 813A4B2C | 80 7F 00 40 */	lwz r3, 0x40(r31)
+/* 813A4B30 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A4B34 | 41 82 01 64 */	beq .L_813A4C98
+/* 813A4B38 | 80 03 00 00 */	lwz r0, 0x0(r3)
+/* 813A4B3C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813A4B40 | 41 82 01 58 */	beq .L_813A4C98
+/* 813A4B44 | 38 61 00 2C */	addi r3, r1, 0x2c
+/* 813A4B48 | 4B F9 18 E1 */	bl __ct__Q34nw4r2ut4RectFv
+/* 813A4B4C | 38 61 00 2C */	addi r3, r1, 0x2c
+/* 813A4B50 | 4B F9 0D FD */	bl getProjectionRect4x3__Q23ipl6SystemFPQ34nw4r2ut4Rect
+/* 813A4B54 | 38 61 00 1C */	addi r3, r1, 0x1c
+/* 813A4B58 | 4B F9 18 D1 */	bl __ct__Q34nw4r2ut4RectFv
+/* 813A4B5C | 38 61 00 1C */	addi r3, r1, 0x1c
+/* 813A4B60 | 4B F9 0E 11 */	bl getProjectionRect16x9__Q23ipl6SystemFPQ34nw4r2ut4Rect
+/* 813A4B64 | C0 61 00 34 */	lfs f3, 0x34(r1)
+/* 813A4B68 | 7F E3 FB 78 */	mr r3, r31
+/* 813A4B6C | C0 41 00 2C */	lfs f2, 0x2c(r1)
+/* 813A4B70 | 38 8D 88 18 */	li r4, lbl_81696858@sda21
+/* 813A4B74 | C0 21 00 24 */	lfs f1, 0x24(r1)
+/* 813A4B78 | C0 01 00 1C */	lfs f0, 0x1c(r1)
+/* 813A4B7C | EC 43 10 28 */	fsubs f2, f3, f2
+/* 813A4B80 | EC 01 00 28 */	fsubs f0, f1, f0
+/* 813A4B84 | EF E0 10 24 */	fdivs f31, f0, f2
+/* 813A4B88 | 48 00 2A 3D */	bl get_translate__Q33ipl5scene13AnmControllerFPCc
+/* 813A4B8C | 80 A3 00 00 */	lwz r5, 0x0(r3)
+/* 813A4B90 | 80 83 00 04 */	lwz r4, 0x4(r3)
+/* 813A4B94 | 80 03 00 08 */	lwz r0, 0x8(r3)
+/* 813A4B98 | 90 A1 00 10 */	stw r5, 0x10(r1)
+/* 813A4B9C | 90 81 00 14 */	stw r4, 0x14(r1)
+/* 813A4BA0 | 90 01 00 18 */	stw r0, 0x18(r1)
+/* 813A4BA4 | 48 1C 54 11 */	bl SCGetAspectRatio
+/* 813A4BA8 | 54 60 06 3E */	clrlwi r0, r3, 24
+/* 813A4BAC | 28 00 00 01 */	cmplwi r0, 0x1
+/* 813A4BB0 | 40 82 00 10 */	bne .L_813A4BC0
+/* 813A4BB4 | C0 01 00 10 */	lfs f0, 0x10(r1)
+/* 813A4BB8 | EC 00 07 F2 */	fmuls f0, f0, f31
+/* 813A4BBC | D0 01 00 10 */	stfs f0, 0x10(r1)
 .L_813A4BC0:
-/* 813A4BC0 00072FC0  80 7F 00 40 */	lwz r3, 0x40(r31)
-/* 813A4BC4 00072FC4  C0 41 00 10 */	lfs f2, 0x10(r1)
-/* 813A4BC8 00072FC8  80 63 00 00 */	lwz r3, 0x0(r3)
-/* 813A4BCC 00072FCC  C0 21 00 14 */	lfs f1, 0x14(r1)
-/* 813A4BD0 00072FD0  80 63 00 14 */	lwz r3, 0x14(r3)
-/* 813A4BD4 00072FD4  C0 01 00 18 */	lfs f0, 0x18(r1)
-/* 813A4BD8 00072FD8  D0 43 00 2C */	stfs f2, 0x2c(r3)
-/* 813A4BDC 00072FDC  D0 23 00 30 */	stfs f1, 0x30(r3)
-/* 813A4BE0 00072FE0  D0 03 00 34 */	stfs f0, 0x34(r3)
-/* 813A4BE4 00072FE4  80 7F 00 40 */	lwz r3, 0x40(r31)
-/* 813A4BE8 00072FE8  48 00 57 51 */	bl calc__Q33ipl5scene9ThumbnailFv
-/* 813A4BEC 00072FEC  80 7F 00 40 */	lwz r3, 0x40(r31)
-/* 813A4BF0 00072FF0  80 63 00 00 */	lwz r3, 0x0(r3)
-/* 813A4BF4 00072FF4  80 83 00 14 */	lwz r4, 0x14(r3)
-/* 813A4BF8 00072FF8  80 64 00 44 */	lwz r3, 0x44(r4)
-/* 813A4BFC 00072FFC  80 04 00 48 */	lwz r0, 0x48(r4)
-/* 813A4C00 00073000  90 61 00 08 */	stw r3, 0x8(r1)
-/* 813A4C04 00073004  90 01 00 0C */	stw r0, 0xc(r1)
-/* 813A4C08 00073008  48 1C 53 AD */	bl SCGetAspectRatio
-/* 813A4C0C 0007300C  54 60 06 3E */	clrlwi r0, r3, 24
-/* 813A4C10 00073010  28 00 00 01 */	cmplwi r0, 0x1
-/* 813A4C14 00073014  40 82 00 38 */	bne .L_813A4C4C
-/* 813A4C18 00073018  7F E3 FB 78 */	mr r3, r31
-/* 813A4C1C 0007301C  38 9E 00 CB */	addi r4, r30, 0xcb
-/* 813A4C20 00073020  48 00 29 E1 */	bl get_scale__Q33ipl5scene13AnmControllerFPCc
-/* 813A4C24 00073024  C0 23 00 00 */	lfs f1, 0x0(r3)
-/* 813A4C28 00073028  38 61 00 08 */	addi r3, r1, 0x8
-/* 813A4C2C 0007302C  48 00 00 D5 */	bl __amu__Q34nw4r4math4VEC2Ff
-/* 813A4C30 00073030  7F E3 FB 78 */	mr r3, r31
-/* 813A4C34 00073034  38 9E 00 D7 */	addi r4, r30, 0xd7
-/* 813A4C38 00073038  48 00 29 C9 */	bl get_scale__Q33ipl5scene13AnmControllerFPCc
-/* 813A4C3C 0007303C  C0 23 00 00 */	lfs f1, 0x0(r3)
-/* 813A4C40 00073040  38 61 00 08 */	addi r3, r1, 0x8
-/* 813A4C44 00073044  48 00 00 BD */	bl __amu__Q34nw4r4math4VEC2Ff
-/* 813A4C48 00073048  48 00 00 34 */	b .L_813A4C7C
+/* 813A4BC0 | 80 7F 00 40 */	lwz r3, 0x40(r31)
+/* 813A4BC4 | C0 41 00 10 */	lfs f2, 0x10(r1)
+/* 813A4BC8 | 80 63 00 00 */	lwz r3, 0x0(r3)
+/* 813A4BCC | C0 21 00 14 */	lfs f1, 0x14(r1)
+/* 813A4BD0 | 80 63 00 14 */	lwz r3, 0x14(r3)
+/* 813A4BD4 | C0 01 00 18 */	lfs f0, 0x18(r1)
+/* 813A4BD8 | D0 43 00 2C */	stfs f2, 0x2c(r3)
+/* 813A4BDC | D0 23 00 30 */	stfs f1, 0x30(r3)
+/* 813A4BE0 | D0 03 00 34 */	stfs f0, 0x34(r3)
+/* 813A4BE4 | 80 7F 00 40 */	lwz r3, 0x40(r31)
+/* 813A4BE8 | 48 00 57 51 */	bl calc__Q33ipl5scene9ThumbnailFv
+/* 813A4BEC | 80 7F 00 40 */	lwz r3, 0x40(r31)
+/* 813A4BF0 | 80 63 00 00 */	lwz r3, 0x0(r3)
+/* 813A4BF4 | 80 83 00 14 */	lwz r4, 0x14(r3)
+/* 813A4BF8 | 80 64 00 44 */	lwz r3, 0x44(r4)
+/* 813A4BFC | 80 04 00 48 */	lwz r0, 0x48(r4)
+/* 813A4C00 | 90 61 00 08 */	stw r3, 0x8(r1)
+/* 813A4C04 | 90 01 00 0C */	stw r0, 0xc(r1)
+/* 813A4C08 | 48 1C 53 AD */	bl SCGetAspectRatio
+/* 813A4C0C | 54 60 06 3E */	clrlwi r0, r3, 24
+/* 813A4C10 | 28 00 00 01 */	cmplwi r0, 0x1
+/* 813A4C14 | 40 82 00 38 */	bne .L_813A4C4C
+/* 813A4C18 | 7F E3 FB 78 */	mr r3, r31
+/* 813A4C1C | 38 9E 00 CB */	addi r4, r30, 0xcb
+/* 813A4C20 | 48 00 29 E1 */	bl get_scale__Q33ipl5scene13AnmControllerFPCc
+/* 813A4C24 | C0 23 00 00 */	lfs f1, 0x0(r3)
+/* 813A4C28 | 38 61 00 08 */	addi r3, r1, 0x8
+/* 813A4C2C | 48 00 00 D5 */	bl __amu__Q34nw4r4math4VEC2Ff
+/* 813A4C30 | 7F E3 FB 78 */	mr r3, r31
+/* 813A4C34 | 38 9E 00 D7 */	addi r4, r30, 0xd7
+/* 813A4C38 | 48 00 29 C9 */	bl get_scale__Q33ipl5scene13AnmControllerFPCc
+/* 813A4C3C | C0 23 00 00 */	lfs f1, 0x0(r3)
+/* 813A4C40 | 38 61 00 08 */	addi r3, r1, 0x8
+/* 813A4C44 | 48 00 00 BD */	bl __amu__Q34nw4r4math4VEC2Ff
+/* 813A4C48 | 48 00 00 34 */	b .L_813A4C7C
 .L_813A4C4C:
-/* 813A4C4C 0007304C  7F E3 FB 78 */	mr r3, r31
-/* 813A4C50 00073050  38 9E 00 E1 */	addi r4, r30, 0xe1
-/* 813A4C54 00073054  48 00 29 AD */	bl get_scale__Q33ipl5scene13AnmControllerFPCc
-/* 813A4C58 00073058  C0 23 00 00 */	lfs f1, 0x0(r3)
-/* 813A4C5C 0007305C  38 61 00 08 */	addi r3, r1, 0x8
-/* 813A4C60 00073060  48 00 00 A1 */	bl __amu__Q34nw4r4math4VEC2Ff
-/* 813A4C64 00073064  7F E3 FB 78 */	mr r3, r31
-/* 813A4C68 00073068  38 9E 00 EC */	addi r4, r30, 0xec
-/* 813A4C6C 0007306C  48 00 29 95 */	bl get_scale__Q33ipl5scene13AnmControllerFPCc
-/* 813A4C70 00073070  C0 23 00 00 */	lfs f1, 0x0(r3)
-/* 813A4C74 00073074  38 61 00 08 */	addi r3, r1, 0x8
-/* 813A4C78 00073078  48 00 00 89 */	bl __amu__Q34nw4r4math4VEC2Ff
+/* 813A4C4C | 7F E3 FB 78 */	mr r3, r31
+/* 813A4C50 | 38 9E 00 E1 */	addi r4, r30, 0xe1
+/* 813A4C54 | 48 00 29 AD */	bl get_scale__Q33ipl5scene13AnmControllerFPCc
+/* 813A4C58 | C0 23 00 00 */	lfs f1, 0x0(r3)
+/* 813A4C5C | 38 61 00 08 */	addi r3, r1, 0x8
+/* 813A4C60 | 48 00 00 A1 */	bl __amu__Q34nw4r4math4VEC2Ff
+/* 813A4C64 | 7F E3 FB 78 */	mr r3, r31
+/* 813A4C68 | 38 9E 00 EC */	addi r4, r30, 0xec
+/* 813A4C6C | 48 00 29 95 */	bl get_scale__Q33ipl5scene13AnmControllerFPCc
+/* 813A4C70 | C0 23 00 00 */	lfs f1, 0x0(r3)
+/* 813A4C74 | 38 61 00 08 */	addi r3, r1, 0x8
+/* 813A4C78 | 48 00 00 89 */	bl __amu__Q34nw4r4math4VEC2Ff
 .L_813A4C7C:
-/* 813A4C7C 0007307C  80 7F 00 40 */	lwz r3, 0x40(r31)
-/* 813A4C80 00073080  C0 01 00 08 */	lfs f0, 0x8(r1)
-/* 813A4C84 00073084  80 63 00 00 */	lwz r3, 0x0(r3)
-/* 813A4C88 00073088  80 63 00 14 */	lwz r3, 0x14(r3)
-/* 813A4C8C 0007308C  D0 03 00 44 */	stfs f0, 0x44(r3)
-/* 813A4C90 00073090  C0 01 00 0C */	lfs f0, 0xc(r1)
-/* 813A4C94 00073094  D0 03 00 48 */	stfs f0, 0x48(r3)
+/* 813A4C7C | 80 7F 00 40 */	lwz r3, 0x40(r31)
+/* 813A4C80 | C0 01 00 08 */	lfs f0, 0x8(r1)
+/* 813A4C84 | 80 63 00 00 */	lwz r3, 0x0(r3)
+/* 813A4C88 | 80 63 00 14 */	lwz r3, 0x14(r3)
+/* 813A4C8C | D0 03 00 44 */	stfs f0, 0x44(r3)
+/* 813A4C90 | C0 01 00 0C */	lfs f0, 0xc(r1)
+/* 813A4C94 | D0 03 00 48 */	stfs f0, 0x48(r3)
 .L_813A4C98:
-/* 813A4C98 00073098  80 1F 00 3C */	lwz r0, 0x3c(r31)
-/* 813A4C9C 0007309C  2C 00 00 02 */	cmpwi r0, 0x2
-/* 813A4CA0 000730A0  41 82 00 18 */	beq .L_813A4CB8
-/* 813A4CA4 000730A4  40 80 00 08 */	bge .L_813A4CAC
-/* 813A4CA8 000730A8  48 00 00 38 */	b .L_813A4CE0
+/* 813A4C98 | 80 1F 00 3C */	lwz r0, 0x3c(r31)
+/* 813A4C9C | 2C 00 00 02 */	cmpwi r0, 0x2
+/* 813A4CA0 | 41 82 00 18 */	beq .L_813A4CB8
+/* 813A4CA4 | 40 80 00 08 */	bge .L_813A4CAC
+/* 813A4CA8 | 48 00 00 38 */	b .L_813A4CE0
 .L_813A4CAC:
-/* 813A4CAC 000730AC  2C 00 00 04 */	cmpwi r0, 0x4
-/* 813A4CB0 000730B0  40 80 00 30 */	bge .L_813A4CE0
-/* 813A4CB4 000730B4  48 00 00 24 */	b .L_813A4CD8
+/* 813A4CAC | 2C 00 00 04 */	cmpwi r0, 0x4
+/* 813A4CB0 | 40 80 00 30 */	bge .L_813A4CE0
+/* 813A4CB4 | 48 00 00 24 */	b .L_813A4CD8
 .L_813A4CB8:
-/* 813A4CB8 000730B8  7F E3 FB 78 */	mr r3, r31
-/* 813A4CBC 000730BC  38 80 00 00 */	li r4, 0x0
-/* 813A4CC0 000730C0  48 00 24 E5 */	bl is_animation__Q33ipl5scene13AnmControllerFi
-/* 813A4CC4 000730C4  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A4CC8 000730C8  40 82 00 18 */	bne .L_813A4CE0
-/* 813A4CCC 000730CC  38 00 00 01 */	li r0, 0x1
-/* 813A4CD0 000730D0  90 1F 00 3C */	stw r0, 0x3c(r31)
-/* 813A4CD4 000730D4  48 00 00 0C */	b .L_813A4CE0
+/* 813A4CB8 | 7F E3 FB 78 */	mr r3, r31
+/* 813A4CBC | 38 80 00 00 */	li r4, 0x0
+/* 813A4CC0 | 48 00 24 E5 */	bl is_animation__Q33ipl5scene13AnmControllerFi
+/* 813A4CC4 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A4CC8 | 40 82 00 18 */	bne .L_813A4CE0
+/* 813A4CCC | 38 00 00 01 */	li r0, 0x1
+/* 813A4CD0 | 90 1F 00 3C */	stw r0, 0x3c(r31)
+/* 813A4CD4 | 48 00 00 0C */	b .L_813A4CE0
 .L_813A4CD8:
-/* 813A4CD8 000730D8  7F E3 FB 78 */	mr r3, r31
-/* 813A4CDC 000730DC  48 00 07 91 */	bl on_fadeout__Q33ipl5scene10ChanAppBoxFv
+/* 813A4CD8 | 7F E3 FB 78 */	mr r3, r31
+/* 813A4CDC | 48 00 07 91 */	bl on_fadeout__Q33ipl5scene10ChanAppBoxFv
 .L_813A4CE0:
-/* 813A4CE0 000730E0  E3 E1 00 58 */	psq_l f31, 0x58(r1), 0, qr0
-/* 813A4CE4 000730E4  39 61 00 50 */	addi r11, r1, 0x50
-/* 813A4CE8 000730E8  CB E1 00 50 */	lfd f31, 0x50(r1)
-/* 813A4CEC 000730EC  48 25 48 29 */	bl _restgpr_29
-/* 813A4CF0 000730F0  80 01 00 64 */	lwz r0, 0x64(r1)
-/* 813A4CF4 000730F4  7C 08 03 A6 */	mtlr r0
-/* 813A4CF8 000730F8  38 21 00 60 */	addi r1, r1, 0x60
-/* 813A4CFC 000730FC  4E 80 00 20 */	blr
+/* 813A4CE0 | E3 E1 00 58 */	psq_l f31, 0x58(r1), 0, qr0
+/* 813A4CE4 | 39 61 00 50 */	addi r11, r1, 0x50
+/* 813A4CE8 | CB E1 00 50 */	lfd f31, 0x50(r1)
+/* 813A4CEC | 48 25 48 29 */	bl _restgpr_29
+/* 813A4CF0 | 80 01 00 64 */	lwz r0, 0x64(r1)
+/* 813A4CF4 | 7C 08 03 A6 */	mtlr r0
+/* 813A4CF8 | 38 21 00 60 */	addi r1, r1, 0x60
+/* 813A4CFC | 4E 80 00 20 */	blr
 .endfn calc__Q33ipl5scene10ChanAppBoxFv
 
 # .text:0x5F0 | 0x813A4D00 | size: 0x1C
 # nw4r::math::VEC2::operator*=(float)
 .fn __amu__Q34nw4r4math4VEC2Ff, weak
-/* 813A4D00 00073100  C0 43 00 00 */	lfs f2, 0x0(r3)
-/* 813A4D04 00073104  C0 03 00 04 */	lfs f0, 0x4(r3)
-/* 813A4D08 00073108  EC 42 00 72 */	fmuls f2, f2, f1
-/* 813A4D0C 0007310C  EC 00 00 72 */	fmuls f0, f0, f1
-/* 813A4D10 00073110  D0 43 00 00 */	stfs f2, 0x0(r3)
-/* 813A4D14 00073114  D0 03 00 04 */	stfs f0, 0x4(r3)
-/* 813A4D18 00073118  4E 80 00 20 */	blr
+/* 813A4D00 | C0 43 00 00 */	lfs f2, 0x0(r3)
+/* 813A4D04 | C0 03 00 04 */	lfs f0, 0x4(r3)
+/* 813A4D08 | EC 42 00 72 */	fmuls f2, f2, f1
+/* 813A4D0C | EC 00 00 72 */	fmuls f0, f0, f1
+/* 813A4D10 | D0 43 00 00 */	stfs f2, 0x0(r3)
+/* 813A4D14 | D0 03 00 04 */	stfs f0, 0x4(r3)
+/* 813A4D18 | 4E 80 00 20 */	blr
 .endfn __amu__Q34nw4r4math4VEC2Ff
 
 # .text:0x60C | 0x813A4D1C | size: 0x2D4
 # ipl::scene::ChanAppBox::draw()
 .fn draw__Q33ipl5scene10ChanAppBoxFv, global
-/* 813A4D1C 0007311C  94 21 FF 80 */	stwu r1, -0x80(r1)
-/* 813A4D20 00073120  7C 08 02 A6 */	mflr r0
-/* 813A4D24 00073124  90 01 00 84 */	stw r0, 0x84(r1)
-/* 813A4D28 00073128  DB E1 00 70 */	stfd f31, 0x70(r1)
-/* 813A4D2C 0007312C  F3 E1 00 78 */	psq_st f31, 0x78(r1), 0, qr0
-/* 813A4D30 00073130  DB C1 00 60 */	stfd f30, 0x60(r1)
-/* 813A4D34 00073134  F3 C1 00 68 */	psq_st f30, 0x68(r1), 0, qr0
-/* 813A4D38 00073138  DB A1 00 50 */	stfd f29, 0x50(r1)
-/* 813A4D3C 0007313C  F3 A1 00 58 */	psq_st f29, 0x58(r1), 0, qr0
-/* 813A4D40 00073140  39 61 00 50 */	addi r11, r1, 0x50
-/* 813A4D44 00073144  48 25 47 7D */	bl _savegpr_27
-/* 813A4D48 00073148  80 03 00 3C */	lwz r0, 0x3c(r3)
-/* 813A4D4C 0007314C  3C 80 43 30 */	lis r4, 0x4330
-/* 813A4D50 00073150  3F E0 81 65 */	lis r31, lbl_8164D108@ha
-/* 813A4D54 00073154  90 81 00 28 */	stw r4, 0x28(r1)
-/* 813A4D58 00073158  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813A4D5C 0007315C  7C 7E 1B 78 */	mr r30, r3
-/* 813A4D60 00073160  90 81 00 30 */	stw r4, 0x30(r1)
-/* 813A4D64 00073164  3B FF D1 08 */	addi r31, r31, lbl_8164D108@l
-/* 813A4D68 00073168  41 82 02 58 */	beq .L_813A4FC0
-/* 813A4D6C 0007316C  80 63 00 04 */	lwz r3, 0x4(r3)
-/* 813A4D70 00073170  4B FC 5A 2D */	bl draw__Q33ipl6layout6ObjectFv
-/* 813A4D74 00073174  7F C3 F3 78 */	mr r3, r30
-/* 813A4D78 00073178  38 9F 00 F6 */	addi r4, r31, 0xf6
-/* 813A4D7C 0007317C  38 A0 00 00 */	li r5, 0x0
-/* 813A4D80 00073180  48 00 27 55 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
-/* 813A4D84 00073184  7F C3 F3 78 */	mr r3, r30
-/* 813A4D88 00073188  38 9F 01 07 */	addi r4, r31, 0x107
-/* 813A4D8C 0007318C  38 A0 00 00 */	li r5, 0x0
-/* 813A4D90 00073190  48 00 27 45 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
-/* 813A4D94 00073194  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
-/* 813A4D98 00073198  38 80 00 0C */	li r4, 0xc
-/* 813A4D9C 0007319C  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
-/* 813A4DA0 000731A0  80 63 00 64 */	lwz r3, 0x64(r3)
-/* 813A4DA4 000731A4  48 06 63 95 */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813A4DA8 000731A8  80 63 00 54 */	lwz r3, 0x54(r3)
-/* 813A4DAC 000731AC  38 03 FF FB */	subi r0, r3, 0x5
-/* 813A4DB0 000731B0  28 00 00 01 */	cmplwi r0, 0x1
-/* 813A4DB4 000731B4  40 81 02 0C */	ble .L_813A4FC0
-/* 813A4DB8 000731B8  80 1E 00 3C */	lwz r0, 0x3c(r30)
-/* 813A4DBC 000731BC  2C 00 00 02 */	cmpwi r0, 0x2
-/* 813A4DC0 000731C0  41 82 02 00 */	beq .L_813A4FC0
-/* 813A4DC4 000731C4  2C 00 00 03 */	cmpwi r0, 0x3
-/* 813A4DC8 000731C8  41 82 01 F8 */	beq .L_813A4FC0
-/* 813A4DCC 000731CC  7F C3 F3 78 */	mr r3, r30
-/* 813A4DD0 000731D0  38 9F 00 AD */	addi r4, r31, 0xad
-/* 813A4DD4 000731D4  48 00 27 55 */	bl get_visible__Q33ipl5scene13AnmControllerFPCc
-/* 813A4DD8 000731D8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A4DDC 000731DC  40 82 00 18 */	bne .L_813A4DF4
-/* 813A4DE0 000731E0  7F C3 F3 78 */	mr r3, r30
-/* 813A4DE4 000731E4  38 9F 00 A2 */	addi r4, r31, 0xa2
-/* 813A4DE8 000731E8  48 00 27 41 */	bl get_visible__Q33ipl5scene13AnmControllerFPCc
-/* 813A4DEC 000731EC  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A4DF0 000731F0  41 82 01 D0 */	beq .L_813A4FC0
+/* 813A4D1C | 94 21 FF 80 */	stwu r1, -0x80(r1)
+/* 813A4D20 | 7C 08 02 A6 */	mflr r0
+/* 813A4D24 | 90 01 00 84 */	stw r0, 0x84(r1)
+/* 813A4D28 | DB E1 00 70 */	stfd f31, 0x70(r1)
+/* 813A4D2C | F3 E1 00 78 */	psq_st f31, 0x78(r1), 0, qr0
+/* 813A4D30 | DB C1 00 60 */	stfd f30, 0x60(r1)
+/* 813A4D34 | F3 C1 00 68 */	psq_st f30, 0x68(r1), 0, qr0
+/* 813A4D38 | DB A1 00 50 */	stfd f29, 0x50(r1)
+/* 813A4D3C | F3 A1 00 58 */	psq_st f29, 0x58(r1), 0, qr0
+/* 813A4D40 | 39 61 00 50 */	addi r11, r1, 0x50
+/* 813A4D44 | 48 25 47 7D */	bl _savegpr_27
+/* 813A4D48 | 80 03 00 3C */	lwz r0, 0x3c(r3)
+/* 813A4D4C | 3C 80 43 30 */	lis r4, 0x4330
+/* 813A4D50 | 3F E0 81 65 */	lis r31, lbl_8164D108@ha
+/* 813A4D54 | 90 81 00 28 */	stw r4, 0x28(r1)
+/* 813A4D58 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813A4D5C | 7C 7E 1B 78 */	mr r30, r3
+/* 813A4D60 | 90 81 00 30 */	stw r4, 0x30(r1)
+/* 813A4D64 | 3B FF D1 08 */	addi r31, r31, lbl_8164D108@l
+/* 813A4D68 | 41 82 02 58 */	beq .L_813A4FC0
+/* 813A4D6C | 80 63 00 04 */	lwz r3, 0x4(r3)
+/* 813A4D70 | 4B FC 5A 2D */	bl draw__Q33ipl6layout6ObjectFv
+/* 813A4D74 | 7F C3 F3 78 */	mr r3, r30
+/* 813A4D78 | 38 9F 00 F6 */	addi r4, r31, 0xf6
+/* 813A4D7C | 38 A0 00 00 */	li r5, 0x0
+/* 813A4D80 | 48 00 27 55 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
+/* 813A4D84 | 7F C3 F3 78 */	mr r3, r30
+/* 813A4D88 | 38 9F 01 07 */	addi r4, r31, 0x107
+/* 813A4D8C | 38 A0 00 00 */	li r5, 0x0
+/* 813A4D90 | 48 00 27 45 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
+/* 813A4D94 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 813A4D98 | 38 80 00 0C */	li r4, 0xc
+/* 813A4D9C | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 813A4DA0 | 80 63 00 64 */	lwz r3, 0x64(r3)
+/* 813A4DA4 | 48 06 63 95 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 813A4DA8 | 80 63 00 54 */	lwz r3, 0x54(r3)
+/* 813A4DAC | 38 03 FF FB */	subi r0, r3, 0x5
+/* 813A4DB0 | 28 00 00 01 */	cmplwi r0, 0x1
+/* 813A4DB4 | 40 81 02 0C */	ble .L_813A4FC0
+/* 813A4DB8 | 80 1E 00 3C */	lwz r0, 0x3c(r30)
+/* 813A4DBC | 2C 00 00 02 */	cmpwi r0, 0x2
+/* 813A4DC0 | 41 82 02 00 */	beq .L_813A4FC0
+/* 813A4DC4 | 2C 00 00 03 */	cmpwi r0, 0x3
+/* 813A4DC8 | 41 82 01 F8 */	beq .L_813A4FC0
+/* 813A4DCC | 7F C3 F3 78 */	mr r3, r30
+/* 813A4DD0 | 38 9F 00 AD */	addi r4, r31, 0xad
+/* 813A4DD4 | 48 00 27 55 */	bl get_visible__Q33ipl5scene13AnmControllerFPCc
+/* 813A4DD8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A4DDC | 40 82 00 18 */	bne .L_813A4DF4
+/* 813A4DE0 | 7F C3 F3 78 */	mr r3, r30
+/* 813A4DE4 | 38 9F 00 A2 */	addi r4, r31, 0xa2
+/* 813A4DE8 | 48 00 27 41 */	bl get_visible__Q33ipl5scene13AnmControllerFPCc
+/* 813A4DEC | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A4DF0 | 41 82 01 D0 */	beq .L_813A4FC0
 .L_813A4DF4:
-/* 813A4DF4 000731F4  80 7E 00 40 */	lwz r3, 0x40(r30)
-/* 813A4DF8 000731F8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A4DFC 000731FC  41 82 01 C4 */	beq .L_813A4FC0
-/* 813A4E00 00073200  80 03 00 00 */	lwz r0, 0x0(r3)
-/* 813A4E04 00073204  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813A4E08 00073208  41 82 01 B8 */	beq .L_813A4FC0
-/* 813A4E0C 0007320C  48 1C 51 A9 */	bl SCGetAspectRatio
-/* 813A4E10 00073210  3F 60 81 61 */	lis r27, lbl_8160FC70@ha
-/* 813A4E14 00073214  54 60 1D 78 */	clrlslwi r0, r3, 24, 3
-/* 813A4E18 00073218  3B 7B FC 70 */	addi r27, r27, lbl_8160FC70@l
-/* 813A4E1C 0007321C  7F DB 04 2E */	lfsx f30, r27, r0
-/* 813A4E20 00073220  48 1C 51 95 */	bl SCGetAspectRatio
-/* 813A4E24 00073224  54 60 1D 78 */	clrlslwi r0, r3, 24, 3
-/* 813A4E28 00073228  38 61 00 14 */	addi r3, r1, 0x14
-/* 813A4E2C 0007322C  7C 9B 02 14 */	add r4, r27, r0
-/* 813A4E30 00073230  C3 E4 00 04 */	lfs f31, 0x4(r4)
-/* 813A4E34 00073234  4B F9 15 F5 */	bl __ct__Q34nw4r2ut4RectFv
-/* 813A4E38 00073238  38 61 00 14 */	addi r3, r1, 0x14
-/* 813A4E3C 0007323C  4B F9 0A DD */	bl getProjectionRect__Q23ipl6SystemFPQ34nw4r2ut4Rect
-/* 813A4E40 00073240  4B F9 0B 55 */	bl getRenderModeObj__Q23ipl6SystemFv
-/* 813A4E44 00073244  A0 03 00 04 */	lhz r0, 0x4(r3)
-/* 813A4E48 00073248  C0 02 85 04 */	lfs f0, lbl_81694904@sda21(r0)
-/* 813A4E4C 0007324C  90 01 00 34 */	stw r0, 0x34(r1)
-/* 813A4E50 00073250  80 9E 00 40 */	lwz r4, 0x40(r30)
-/* 813A4E54 00073254  EC 20 07 F2 */	fmuls f1, f0, f31
-/* 813A4E58 00073258  C8 61 00 30 */	lfd f3, 0x30(r1)
-/* 813A4E5C 0007325C  EC 40 07 B2 */	fmuls f2, f0, f30
-/* 813A4E60 00073260  C9 22 85 08 */	lfd f9, lbl_81694908@sda21(r0)
-/* 813A4E64 00073264  90 01 00 34 */	stw r0, 0x34(r1)
-/* 813A4E68 00073268  C0 A1 00 1C */	lfs f5, 0x1c(r1)
-/* 813A4E6C 0007326C  EC 63 48 28 */	fsubs f3, f3, f9
-/* 813A4E70 00073270  C0 81 00 14 */	lfs f4, 0x14(r1)
-/* 813A4E74 00073274  C8 01 00 30 */	lfd f0, 0x30(r1)
-/* 813A4E78 00073278  EC 85 20 28 */	fsubs f4, f5, f4
-/* 813A4E7C 0007327C  90 01 00 2C */	stw r0, 0x2c(r1)
-/* 813A4E80 00073280  EC 00 48 28 */	fsubs f0, f0, f9
-/* 813A4E84 00073284  80 84 00 00 */	lwz r4, 0x0(r4)
-/* 813A4E88 00073288  C9 01 00 28 */	lfd f8, 0x28(r1)
-/* 813A4E8C 0007328C  80 A4 00 14 */	lwz r5, 0x14(r4)
-/* 813A4E90 00073290  EC 00 20 24 */	fdivs f0, f0, f4
-/* 813A4E94 00073294  A0 03 00 06 */	lhz r0, 0x6(r3)
-/* 813A4E98 00073298  80 85 00 2C */	lwz r4, 0x2c(r5)
-/* 813A4E9C 0007329C  90 01 00 2C */	stw r0, 0x2c(r1)
-/* 813A4EA0 000732A0  80 65 00 30 */	lwz r3, 0x30(r5)
-/* 813A4EA4 000732A4  90 81 00 08 */	stw r4, 0x8(r1)
-/* 813A4EA8 000732A8  EC A3 20 24 */	fdivs f5, f3, f4
-/* 813A4EAC 000732AC  C0 81 00 08 */	lfs f4, 0x8(r1)
-/* 813A4EB0 000732B0  80 05 00 34 */	lwz r0, 0x34(r5)
-/* 813A4EB4 000732B4  C8 61 00 28 */	lfd f3, 0x28(r1)
-/* 813A4EB8 000732B8  C0 E2 85 00 */	lfs f7, lbl_81694900@sda21(r0)
-/* 813A4EBC 000732BC  90 61 00 0C */	stw r3, 0xc(r1)
-/* 813A4EC0 000732C0  EC C4 F0 28 */	fsubs f6, f4, f30
-/* 813A4EC4 000732C4  90 01 00 10 */	stw r0, 0x10(r1)
-/* 813A4EC8 000732C8  EC 83 48 28 */	fsubs f4, f3, f9
-/* 813A4ECC 000732CC  C0 61 00 0C */	lfs f3, 0xc(r1)
-/* 813A4ED0 000732D0  ED 08 48 28 */	fsubs f8, f8, f9
-/* 813A4ED4 000732D4  EC A6 01 72 */	fmuls f5, f6, f5
-/* 813A4ED8 000732D8  EC 84 01 F2 */	fmuls f4, f4, f7
-/* 813A4EDC 000732DC  EC E8 01 F2 */	fmuls f7, f8, f7
-/* 813A4EE0 000732E0  EF A2 00 32 */	fmuls f29, f2, f0
-/* 813A4EE4 000732E4  EC 64 18 28 */	fsubs f3, f4, f3
-/* 813A4EE8 000732E8  EF C7 28 2A */	fadds f30, f7, f5
-/* 813A4EEC 000732EC  EF E3 F8 28 */	fsubs f31, f3, f31
-/* 813A4EF0 000732F0  48 25 44 A9 */	bl __cvt_fp2unsigned
-/* 813A4EF4 000732F4  FC 20 E8 90 */	fmr f1, f29
-/* 813A4EF8 000732F8  7C 7B 1B 78 */	mr r27, r3
-/* 813A4EFC 000732FC  48 25 44 9D */	bl __cvt_fp2unsigned
-/* 813A4F00 00073300  FC 20 F8 90 */	fmr f1, f31
-/* 813A4F04 00073304  7C 7C 1B 78 */	mr r28, r3
-/* 813A4F08 00073308  48 25 44 91 */	bl __cvt_fp2unsigned
-/* 813A4F0C 0007330C  FC 20 F0 90 */	fmr f1, f30
-/* 813A4F10 00073310  7C 7D 1B 78 */	mr r29, r3
-/* 813A4F14 00073314  48 25 44 85 */	bl __cvt_fp2unsigned
-/* 813A4F18 00073318  7F A4 EB 78 */	mr r4, r29
-/* 813A4F1C 0007331C  7F 85 E3 78 */	mr r5, r28
-/* 813A4F20 00073320  7F 66 DB 78 */	mr r6, r27
-/* 813A4F24 00073324  48 1A 30 85 */	bl GXSetScissor
-/* 813A4F28 00073328  80 9E 00 40 */	lwz r4, 0x40(r30)
-/* 813A4F2C 0007332C  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 813A4F30 00073330  80 A4 00 00 */	lwz r5, 0x0(r4)
-/* 813A4F34 00073334  38 83 02 98 */	addi r4, r3, 0x298
-/* 813A4F38 00073338  80 65 00 14 */	lwz r3, 0x14(r5)
-/* 813A4F3C 0007333C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813A4F40 00073340  81 8C 00 10 */	lwz r12, 0x10(r12)
-/* 813A4F44 00073344  7D 89 03 A6 */	mtctr r12
-/* 813A4F48 00073348  4E 80 04 21 */	bctrl
-/* 813A4F4C 0007334C  80 7E 00 40 */	lwz r3, 0x40(r30)
-/* 813A4F50 00073350  48 00 53 FD */	bl draw__Q33ipl5scene9ThumbnailFv
-/* 813A4F54 00073354  48 1C 50 61 */	bl SCGetAspectRatio
-/* 813A4F58 00073358  54 60 06 3E */	clrlwi r0, r3, 24
-/* 813A4F5C 0007335C  28 00 00 01 */	cmplwi r0, 0x1
-/* 813A4F60 00073360  40 82 00 24 */	bne .L_813A4F84
-/* 813A4F64 00073364  7F C3 F3 78 */	mr r3, r30
-/* 813A4F68 00073368  38 9F 01 07 */	addi r4, r31, 0x107
-/* 813A4F6C 0007336C  38 A0 00 01 */	li r5, 0x1
-/* 813A4F70 00073370  48 00 25 65 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
-/* 813A4F74 00073374  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 813A4F78 00073378  38 9F 01 07 */	addi r4, r31, 0x107
-/* 813A4F7C 0007337C  4B FC 58 8D */	bl draw__Q33ipl6layout6ObjectFPCc
-/* 813A4F80 00073380  48 00 00 20 */	b .L_813A4FA0
+/* 813A4DF4 | 80 7E 00 40 */	lwz r3, 0x40(r30)
+/* 813A4DF8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A4DFC | 41 82 01 C4 */	beq .L_813A4FC0
+/* 813A4E00 | 80 03 00 00 */	lwz r0, 0x0(r3)
+/* 813A4E04 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813A4E08 | 41 82 01 B8 */	beq .L_813A4FC0
+/* 813A4E0C | 48 1C 51 A9 */	bl SCGetAspectRatio
+/* 813A4E10 | 3F 60 81 61 */	lis r27, lbl_8160FC70@ha
+/* 813A4E14 | 54 60 1D 78 */	clrlslwi r0, r3, 24, 3
+/* 813A4E18 | 3B 7B FC 70 */	addi r27, r27, lbl_8160FC70@l
+/* 813A4E1C | 7F DB 04 2E */	lfsx f30, r27, r0
+/* 813A4E20 | 48 1C 51 95 */	bl SCGetAspectRatio
+/* 813A4E24 | 54 60 1D 78 */	clrlslwi r0, r3, 24, 3
+/* 813A4E28 | 38 61 00 14 */	addi r3, r1, 0x14
+/* 813A4E2C | 7C 9B 02 14 */	add r4, r27, r0
+/* 813A4E30 | C3 E4 00 04 */	lfs f31, 0x4(r4)
+/* 813A4E34 | 4B F9 15 F5 */	bl __ct__Q34nw4r2ut4RectFv
+/* 813A4E38 | 38 61 00 14 */	addi r3, r1, 0x14
+/* 813A4E3C | 4B F9 0A DD */	bl getProjectionRect__Q23ipl6SystemFPQ34nw4r2ut4Rect
+/* 813A4E40 | 4B F9 0B 55 */	bl getRenderModeObj__Q23ipl6SystemFv
+/* 813A4E44 | A0 03 00 04 */	lhz r0, 0x4(r3)
+/* 813A4E48 | C0 02 85 04 */	lfs f0, lbl_81694904@sda21(r0)
+/* 813A4E4C | 90 01 00 34 */	stw r0, 0x34(r1)
+/* 813A4E50 | 80 9E 00 40 */	lwz r4, 0x40(r30)
+/* 813A4E54 | EC 20 07 F2 */	fmuls f1, f0, f31
+/* 813A4E58 | C8 61 00 30 */	lfd f3, 0x30(r1)
+/* 813A4E5C | EC 40 07 B2 */	fmuls f2, f0, f30
+/* 813A4E60 | C9 22 85 08 */	lfd f9, lbl_81694908@sda21(r0)
+/* 813A4E64 | 90 01 00 34 */	stw r0, 0x34(r1)
+/* 813A4E68 | C0 A1 00 1C */	lfs f5, 0x1c(r1)
+/* 813A4E6C | EC 63 48 28 */	fsubs f3, f3, f9
+/* 813A4E70 | C0 81 00 14 */	lfs f4, 0x14(r1)
+/* 813A4E74 | C8 01 00 30 */	lfd f0, 0x30(r1)
+/* 813A4E78 | EC 85 20 28 */	fsubs f4, f5, f4
+/* 813A4E7C | 90 01 00 2C */	stw r0, 0x2c(r1)
+/* 813A4E80 | EC 00 48 28 */	fsubs f0, f0, f9
+/* 813A4E84 | 80 84 00 00 */	lwz r4, 0x0(r4)
+/* 813A4E88 | C9 01 00 28 */	lfd f8, 0x28(r1)
+/* 813A4E8C | 80 A4 00 14 */	lwz r5, 0x14(r4)
+/* 813A4E90 | EC 00 20 24 */	fdivs f0, f0, f4
+/* 813A4E94 | A0 03 00 06 */	lhz r0, 0x6(r3)
+/* 813A4E98 | 80 85 00 2C */	lwz r4, 0x2c(r5)
+/* 813A4E9C | 90 01 00 2C */	stw r0, 0x2c(r1)
+/* 813A4EA0 | 80 65 00 30 */	lwz r3, 0x30(r5)
+/* 813A4EA4 | 90 81 00 08 */	stw r4, 0x8(r1)
+/* 813A4EA8 | EC A3 20 24 */	fdivs f5, f3, f4
+/* 813A4EAC | C0 81 00 08 */	lfs f4, 0x8(r1)
+/* 813A4EB0 | 80 05 00 34 */	lwz r0, 0x34(r5)
+/* 813A4EB4 | C8 61 00 28 */	lfd f3, 0x28(r1)
+/* 813A4EB8 | C0 E2 85 00 */	lfs f7, lbl_81694900@sda21(r0)
+/* 813A4EBC | 90 61 00 0C */	stw r3, 0xc(r1)
+/* 813A4EC0 | EC C4 F0 28 */	fsubs f6, f4, f30
+/* 813A4EC4 | 90 01 00 10 */	stw r0, 0x10(r1)
+/* 813A4EC8 | EC 83 48 28 */	fsubs f4, f3, f9
+/* 813A4ECC | C0 61 00 0C */	lfs f3, 0xc(r1)
+/* 813A4ED0 | ED 08 48 28 */	fsubs f8, f8, f9
+/* 813A4ED4 | EC A6 01 72 */	fmuls f5, f6, f5
+/* 813A4ED8 | EC 84 01 F2 */	fmuls f4, f4, f7
+/* 813A4EDC | EC E8 01 F2 */	fmuls f7, f8, f7
+/* 813A4EE0 | EF A2 00 32 */	fmuls f29, f2, f0
+/* 813A4EE4 | EC 64 18 28 */	fsubs f3, f4, f3
+/* 813A4EE8 | EF C7 28 2A */	fadds f30, f7, f5
+/* 813A4EEC | EF E3 F8 28 */	fsubs f31, f3, f31
+/* 813A4EF0 | 48 25 44 A9 */	bl __cvt_fp2unsigned
+/* 813A4EF4 | FC 20 E8 90 */	fmr f1, f29
+/* 813A4EF8 | 7C 7B 1B 78 */	mr r27, r3
+/* 813A4EFC | 48 25 44 9D */	bl __cvt_fp2unsigned
+/* 813A4F00 | FC 20 F8 90 */	fmr f1, f31
+/* 813A4F04 | 7C 7C 1B 78 */	mr r28, r3
+/* 813A4F08 | 48 25 44 91 */	bl __cvt_fp2unsigned
+/* 813A4F0C | FC 20 F0 90 */	fmr f1, f30
+/* 813A4F10 | 7C 7D 1B 78 */	mr r29, r3
+/* 813A4F14 | 48 25 44 85 */	bl __cvt_fp2unsigned
+/* 813A4F18 | 7F A4 EB 78 */	mr r4, r29
+/* 813A4F1C | 7F 85 E3 78 */	mr r5, r28
+/* 813A4F20 | 7F 66 DB 78 */	mr r6, r27
+/* 813A4F24 | 48 1A 30 85 */	bl GXSetScissor
+/* 813A4F28 | 80 9E 00 40 */	lwz r4, 0x40(r30)
+/* 813A4F2C | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 813A4F30 | 80 A4 00 00 */	lwz r5, 0x0(r4)
+/* 813A4F34 | 38 83 02 98 */	addi r4, r3, 0x298
+/* 813A4F38 | 80 65 00 14 */	lwz r3, 0x14(r5)
+/* 813A4F3C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813A4F40 | 81 8C 00 10 */	lwz r12, 0x10(r12)
+/* 813A4F44 | 7D 89 03 A6 */	mtctr r12
+/* 813A4F48 | 4E 80 04 21 */	bctrl
+/* 813A4F4C | 80 7E 00 40 */	lwz r3, 0x40(r30)
+/* 813A4F50 | 48 00 53 FD */	bl draw__Q33ipl5scene9ThumbnailFv
+/* 813A4F54 | 48 1C 50 61 */	bl SCGetAspectRatio
+/* 813A4F58 | 54 60 06 3E */	clrlwi r0, r3, 24
+/* 813A4F5C | 28 00 00 01 */	cmplwi r0, 0x1
+/* 813A4F60 | 40 82 00 24 */	bne .L_813A4F84
+/* 813A4F64 | 7F C3 F3 78 */	mr r3, r30
+/* 813A4F68 | 38 9F 01 07 */	addi r4, r31, 0x107
+/* 813A4F6C | 38 A0 00 01 */	li r5, 0x1
+/* 813A4F70 | 48 00 25 65 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
+/* 813A4F74 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 813A4F78 | 38 9F 01 07 */	addi r4, r31, 0x107
+/* 813A4F7C | 4B FC 58 8D */	bl draw__Q33ipl6layout6ObjectFPCc
+/* 813A4F80 | 48 00 00 20 */	b .L_813A4FA0
 .L_813A4F84:
-/* 813A4F84 00073384  7F C3 F3 78 */	mr r3, r30
-/* 813A4F88 00073388  38 9F 00 F6 */	addi r4, r31, 0xf6
-/* 813A4F8C 0007338C  38 A0 00 01 */	li r5, 0x1
-/* 813A4F90 00073390  48 00 25 45 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
-/* 813A4F94 00073394  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 813A4F98 00073398  38 9F 00 F6 */	addi r4, r31, 0xf6
-/* 813A4F9C 0007339C  4B FC 58 6D */	bl draw__Q33ipl6layout6ObjectFPCc
+/* 813A4F84 | 7F C3 F3 78 */	mr r3, r30
+/* 813A4F88 | 38 9F 00 F6 */	addi r4, r31, 0xf6
+/* 813A4F8C | 38 A0 00 01 */	li r5, 0x1
+/* 813A4F90 | 48 00 25 45 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
+/* 813A4F94 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 813A4F98 | 38 9F 00 F6 */	addi r4, r31, 0xf6
+/* 813A4F9C | 4B FC 58 6D */	bl draw__Q33ipl6layout6ObjectFPCc
 .L_813A4FA0:
-/* 813A4FA0 000733A0  4B F9 09 F5 */	bl getRenderModeObj__Q23ipl6SystemFv
-/* 813A4FA4 000733A4  A3 C3 00 06 */	lhz r30, 0x6(r3)
-/* 813A4FA8 000733A8  4B F9 09 ED */	bl getRenderModeObj__Q23ipl6SystemFv
-/* 813A4FAC 000733AC  A0 A3 00 04 */	lhz r5, 0x4(r3)
-/* 813A4FB0 000733B0  7F C6 F3 78 */	mr r6, r30
-/* 813A4FB4 000733B4  38 60 00 00 */	li r3, 0x0
-/* 813A4FB8 000733B8  38 80 00 00 */	li r4, 0x0
-/* 813A4FBC 000733BC  48 1A 2F ED */	bl GXSetScissor
+/* 813A4FA0 | 4B F9 09 F5 */	bl getRenderModeObj__Q23ipl6SystemFv
+/* 813A4FA4 | A3 C3 00 06 */	lhz r30, 0x6(r3)
+/* 813A4FA8 | 4B F9 09 ED */	bl getRenderModeObj__Q23ipl6SystemFv
+/* 813A4FAC | A0 A3 00 04 */	lhz r5, 0x4(r3)
+/* 813A4FB0 | 7F C6 F3 78 */	mr r6, r30
+/* 813A4FB4 | 38 60 00 00 */	li r3, 0x0
+/* 813A4FB8 | 38 80 00 00 */	li r4, 0x0
+/* 813A4FBC | 48 1A 2F ED */	bl GXSetScissor
 .L_813A4FC0:
-/* 813A4FC0 000733C0  E3 E1 00 78 */	psq_l f31, 0x78(r1), 0, qr0
-/* 813A4FC4 000733C4  CB E1 00 70 */	lfd f31, 0x70(r1)
-/* 813A4FC8 000733C8  E3 C1 00 68 */	psq_l f30, 0x68(r1), 0, qr0
-/* 813A4FCC 000733CC  CB C1 00 60 */	lfd f30, 0x60(r1)
-/* 813A4FD0 000733D0  E3 A1 00 58 */	psq_l f29, 0x58(r1), 0, qr0
-/* 813A4FD4 000733D4  39 61 00 50 */	addi r11, r1, 0x50
-/* 813A4FD8 000733D8  CB A1 00 50 */	lfd f29, 0x50(r1)
-/* 813A4FDC 000733DC  48 25 45 31 */	bl _restgpr_27
-/* 813A4FE0 000733E0  80 01 00 84 */	lwz r0, 0x84(r1)
-/* 813A4FE4 000733E4  7C 08 03 A6 */	mtlr r0
-/* 813A4FE8 000733E8  38 21 00 80 */	addi r1, r1, 0x80
-/* 813A4FEC 000733EC  4E 80 00 20 */	blr
+/* 813A4FC0 | E3 E1 00 78 */	psq_l f31, 0x78(r1), 0, qr0
+/* 813A4FC4 | CB E1 00 70 */	lfd f31, 0x70(r1)
+/* 813A4FC8 | E3 C1 00 68 */	psq_l f30, 0x68(r1), 0, qr0
+/* 813A4FCC | CB C1 00 60 */	lfd f30, 0x60(r1)
+/* 813A4FD0 | E3 A1 00 58 */	psq_l f29, 0x58(r1), 0, qr0
+/* 813A4FD4 | 39 61 00 50 */	addi r11, r1, 0x50
+/* 813A4FD8 | CB A1 00 50 */	lfd f29, 0x50(r1)
+/* 813A4FDC | 48 25 45 31 */	bl _restgpr_27
+/* 813A4FE0 | 80 01 00 84 */	lwz r0, 0x84(r1)
+/* 813A4FE4 | 7C 08 03 A6 */	mtlr r0
+/* 813A4FE8 | 38 21 00 80 */	addi r1, r1, 0x80
+/* 813A4FEC | 4E 80 00 20 */	blr
 .endfn draw__Q33ipl5scene10ChanAppBoxFv
 
 # .text:0x8E0 | 0x813A4FF0 | size: 0x8
 # ipl::scene::ChanAppBox::update()
 .fn update__Q33ipl5scene10ChanAppBoxFv, global
-/* 813A4FF0 000733F0  80 63 00 08 */	lwz r3, 0x8(r3)
-/* 813A4FF4 000733F4  4B FC 5F 98 */	b update__Q33ipl3gui11PaneManagerFv
+/* 813A4FF0 | 80 63 00 08 */	lwz r3, 0x8(r3)
+/* 813A4FF4 | 4B FC 5F 98 */	b update__Q33ipl3gui11PaneManagerFv
 .endfn update__Q33ipl5scene10ChanAppBoxFv
 
 # .text:0x8E8 | 0x813A4FF8 | size: 0xA8
 # ipl::scene::ChanAppBox::anmFadein()
 .fn anmFadein__Q33ipl5scene10ChanAppBoxFv, global
-/* 813A4FF8 000733F8  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 813A4FFC 000733FC  7C 08 02 A6 */	mflr r0
-/* 813A5000 00073400  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813A5004 00073404  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813A5008 00073408  7C 7F 1B 78 */	mr r31, r3
-/* 813A500C 0007340C  48 1C 4F A9 */	bl SCGetAspectRatio
-/* 813A5010 00073410  54 60 06 3E */	clrlwi r0, r3, 24
-/* 813A5014 00073414  28 00 00 01 */	cmplwi r0, 0x1
-/* 813A5018 00073418  40 82 00 30 */	bne .L_813A5048
-/* 813A501C 0007341C  3C 80 81 65 */	lis r4, lbl_8164D1AA@ha
-/* 813A5020 00073420  7F E3 FB 78 */	mr r3, r31
-/* 813A5024 00073424  38 84 D1 AA */	addi r4, r4, lbl_8164D1AA@l
-/* 813A5028 00073428  38 A0 00 01 */	li r5, 0x1
-/* 813A502C 0007342C  48 00 24 A9 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
-/* 813A5030 00073430  3C 80 81 65 */	lis r4, lbl_8164D1B5@ha
-/* 813A5034 00073434  7F E3 FB 78 */	mr r3, r31
-/* 813A5038 00073438  38 84 D1 B5 */	addi r4, r4, lbl_8164D1B5@l
-/* 813A503C 0007343C  38 A0 00 00 */	li r5, 0x0
-/* 813A5040 00073440  48 00 24 95 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
-/* 813A5044 00073444  48 00 00 2C */	b .L_813A5070
+/* 813A4FF8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813A4FFC | 7C 08 02 A6 */	mflr r0
+/* 813A5000 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813A5004 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 813A5008 | 7C 7F 1B 78 */	mr r31, r3
+/* 813A500C | 48 1C 4F A9 */	bl SCGetAspectRatio
+/* 813A5010 | 54 60 06 3E */	clrlwi r0, r3, 24
+/* 813A5014 | 28 00 00 01 */	cmplwi r0, 0x1
+/* 813A5018 | 40 82 00 30 */	bne .L_813A5048
+/* 813A501C | 3C 80 81 65 */	lis r4, lbl_8164D1AA@ha
+/* 813A5020 | 7F E3 FB 78 */	mr r3, r31
+/* 813A5024 | 38 84 D1 AA */	addi r4, r4, lbl_8164D1AA@l
+/* 813A5028 | 38 A0 00 01 */	li r5, 0x1
+/* 813A502C | 48 00 24 A9 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
+/* 813A5030 | 3C 80 81 65 */	lis r4, lbl_8164D1B5@ha
+/* 813A5034 | 7F E3 FB 78 */	mr r3, r31
+/* 813A5038 | 38 84 D1 B5 */	addi r4, r4, lbl_8164D1B5@l
+/* 813A503C | 38 A0 00 00 */	li r5, 0x0
+/* 813A5040 | 48 00 24 95 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
+/* 813A5044 | 48 00 00 2C */	b .L_813A5070
 .L_813A5048:
-/* 813A5048 00073448  3C 80 81 65 */	lis r4, lbl_8164D1AA@ha
-/* 813A504C 0007344C  7F E3 FB 78 */	mr r3, r31
-/* 813A5050 00073450  38 84 D1 AA */	addi r4, r4, lbl_8164D1AA@l
-/* 813A5054 00073454  38 A0 00 00 */	li r5, 0x0
-/* 813A5058 00073458  48 00 24 7D */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
-/* 813A505C 0007345C  3C 80 81 65 */	lis r4, lbl_8164D1B5@ha
-/* 813A5060 00073460  7F E3 FB 78 */	mr r3, r31
-/* 813A5064 00073464  38 84 D1 B5 */	addi r4, r4, lbl_8164D1B5@l
-/* 813A5068 00073468  38 A0 00 01 */	li r5, 0x1
-/* 813A506C 0007346C  48 00 24 69 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
+/* 813A5048 | 3C 80 81 65 */	lis r4, lbl_8164D1AA@ha
+/* 813A504C | 7F E3 FB 78 */	mr r3, r31
+/* 813A5050 | 38 84 D1 AA */	addi r4, r4, lbl_8164D1AA@l
+/* 813A5054 | 38 A0 00 00 */	li r5, 0x0
+/* 813A5058 | 48 00 24 7D */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
+/* 813A505C | 3C 80 81 65 */	lis r4, lbl_8164D1B5@ha
+/* 813A5060 | 7F E3 FB 78 */	mr r3, r31
+/* 813A5064 | 38 84 D1 B5 */	addi r4, r4, lbl_8164D1B5@l
+/* 813A5068 | 38 A0 00 01 */	li r5, 0x1
+/* 813A506C | 48 00 24 69 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
 .L_813A5070:
-/* 813A5070 00073470  7F E3 FB 78 */	mr r3, r31
-/* 813A5074 00073474  38 80 00 00 */	li r4, 0x0
-/* 813A5078 00073478  38 A0 00 00 */	li r5, 0x0
-/* 813A507C 0007347C  38 C0 00 01 */	li r6, 0x1
-/* 813A5080 00073480  48 00 20 81 */	bl do_animation__Q33ipl5scene13AnmControllerFiib
-/* 813A5084 00073484  38 00 00 02 */	li r0, 0x2
-/* 813A5088 00073488  90 1F 00 3C */	stw r0, 0x3c(r31)
-/* 813A508C 0007348C  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813A5090 00073490  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813A5094 00073494  7C 08 03 A6 */	mtlr r0
-/* 813A5098 00073498  38 21 00 10 */	addi r1, r1, 0x10
-/* 813A509C 0007349C  4E 80 00 20 */	blr
+/* 813A5070 | 7F E3 FB 78 */	mr r3, r31
+/* 813A5074 | 38 80 00 00 */	li r4, 0x0
+/* 813A5078 | 38 A0 00 00 */	li r5, 0x0
+/* 813A507C | 38 C0 00 01 */	li r6, 0x1
+/* 813A5080 | 48 00 20 81 */	bl do_animation__Q33ipl5scene13AnmControllerFiib
+/* 813A5084 | 38 00 00 02 */	li r0, 0x2
+/* 813A5088 | 90 1F 00 3C */	stw r0, 0x3c(r31)
+/* 813A508C | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813A5090 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813A5094 | 7C 08 03 A6 */	mtlr r0
+/* 813A5098 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813A509C | 4E 80 00 20 */	blr
 .endfn anmFadein__Q33ipl5scene10ChanAppBoxFv
 
 # .text:0x990 | 0x813A50A0 | size: 0x58
 # ipl::scene::ChanAppBox::anmFadeout()
 .fn anmFadeout__Q33ipl5scene10ChanAppBoxFv, global
-/* 813A50A0 000734A0  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 813A50A4 000734A4  7C 08 02 A6 */	mflr r0
-/* 813A50A8 000734A8  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813A50AC 000734AC  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813A50B0 000734B0  7C 7F 1B 78 */	mr r31, r3
-/* 813A50B4 000734B4  80 03 00 44 */	lwz r0, 0x44(r3)
-/* 813A50B8 000734B8  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813A50BC 000734BC  41 82 00 0C */	beq .L_813A50C8
-/* 813A50C0 000734C0  7C 03 03 78 */	mr r3, r0
-/* 813A50C4 000734C4  48 02 C5 A5 */	bl fn_813D1668
+/* 813A50A0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813A50A4 | 7C 08 02 A6 */	mflr r0
+/* 813A50A8 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813A50AC | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 813A50B0 | 7C 7F 1B 78 */	mr r31, r3
+/* 813A50B4 | 80 03 00 44 */	lwz r0, 0x44(r3)
+/* 813A50B8 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813A50BC | 41 82 00 0C */	beq .L_813A50C8
+/* 813A50C0 | 7C 03 03 78 */	mr r3, r0
+/* 813A50C4 | 48 02 C5 A5 */	bl fn_813D1668
 .L_813A50C8:
-/* 813A50C8 000734C8  7F E3 FB 78 */	mr r3, r31
-/* 813A50CC 000734CC  38 80 00 01 */	li r4, 0x1
-/* 813A50D0 000734D0  38 A0 00 00 */	li r5, 0x0
-/* 813A50D4 000734D4  38 C0 00 01 */	li r6, 0x1
-/* 813A50D8 000734D8  48 00 20 29 */	bl do_animation__Q33ipl5scene13AnmControllerFiib
-/* 813A50DC 000734DC  38 00 00 03 */	li r0, 0x3
-/* 813A50E0 000734E0  90 1F 00 3C */	stw r0, 0x3c(r31)
-/* 813A50E4 000734E4  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813A50E8 000734E8  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813A50EC 000734EC  7C 08 03 A6 */	mtlr r0
-/* 813A50F0 000734F0  38 21 00 10 */	addi r1, r1, 0x10
-/* 813A50F4 000734F4  4E 80 00 20 */	blr
+/* 813A50C8 | 7F E3 FB 78 */	mr r3, r31
+/* 813A50CC | 38 80 00 01 */	li r4, 0x1
+/* 813A50D0 | 38 A0 00 00 */	li r5, 0x0
+/* 813A50D4 | 38 C0 00 01 */	li r6, 0x1
+/* 813A50D8 | 48 00 20 29 */	bl do_animation__Q33ipl5scene13AnmControllerFiib
+/* 813A50DC | 38 00 00 03 */	li r0, 0x3
+/* 813A50E0 | 90 1F 00 3C */	stw r0, 0x3c(r31)
+/* 813A50E4 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813A50E8 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813A50EC | 7C 08 03 A6 */	mtlr r0
+/* 813A50F0 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813A50F4 | 4E 80 00 20 */	blr
 .endfn anmFadeout__Q33ipl5scene10ChanAppBoxFv
 
 # .text:0x9E8 | 0x813A50F8 | size: 0x2EC
 # ipl::scene::ChanAppBox::onEvent(unsigned long, unsigned long, void*)
 .fn onEvent__Q33ipl5scene10ChanAppBoxFUlUlPv, global
-/* 813A50F8 000734F8  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 813A50FC 000734FC  7C 08 02 A6 */	mflr r0
-/* 813A5100 00073500  90 01 00 24 */	stw r0, 0x24(r1)
-/* 813A5104 00073504  39 61 00 20 */	addi r11, r1, 0x20
-/* 813A5108 00073508  48 25 43 BD */	bl _savegpr_28
-/* 813A510C 0007350C  7C 7F 1B 78 */	mr r31, r3
-/* 813A5110 00073510  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 813A5114 00073514  7C BC 2B 78 */	mr r28, r5
-/* 813A5118 00073518  7C DD 33 78 */	mr r29, r6
-/* 813A511C 0007351C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813A5120 00073520  81 8C 00 24 */	lwz r12, 0x24(r12)
-/* 813A5124 00073524  7D 89 03 A6 */	mtctr r12
-/* 813A5128 00073528  4E 80 04 21 */	bctrl
-/* 813A512C 0007352C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813A5130 00073530  81 8C 00 70 */	lwz r12, 0x70(r12)
-/* 813A5134 00073534  7D 89 03 A6 */	mtctr r12
-/* 813A5138 00073538  4E 80 04 21 */	bctrl
-/* 813A513C 0007353C  2C 1C 00 02 */	cmpwi r28, 0x2
-/* 813A5140 00073540  3B C3 00 B4 */	addi r30, r3, 0xb4
-/* 813A5144 00073544  41 82 01 C0 */	beq .L_813A5304
-/* 813A5148 00073548  40 80 00 14 */	bge .L_813A515C
-/* 813A514C 0007354C  2C 1C 00 00 */	cmpwi r28, 0x0
-/* 813A5150 00073550  41 82 02 1C */	beq .L_813A536C
-/* 813A5154 00073554  40 80 00 14 */	bge .L_813A5168
-/* 813A5158 00073558  48 00 02 74 */	b .L_813A53CC
+/* 813A50F8 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 813A50FC | 7C 08 02 A6 */	mflr r0
+/* 813A5100 | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 813A5104 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813A5108 | 48 25 43 BD */	bl _savegpr_28
+/* 813A510C | 7C 7F 1B 78 */	mr r31, r3
+/* 813A5110 | 80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 813A5114 | 7C BC 2B 78 */	mr r28, r5
+/* 813A5118 | 7C DD 33 78 */	mr r29, r6
+/* 813A511C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813A5120 | 81 8C 00 24 */	lwz r12, 0x24(r12)
+/* 813A5124 | 7D 89 03 A6 */	mtctr r12
+/* 813A5128 | 4E 80 04 21 */	bctrl
+/* 813A512C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813A5130 | 81 8C 00 70 */	lwz r12, 0x70(r12)
+/* 813A5134 | 7D 89 03 A6 */	mtctr r12
+/* 813A5138 | 4E 80 04 21 */	bctrl
+/* 813A513C | 2C 1C 00 02 */	cmpwi r28, 0x2
+/* 813A5140 | 3B C3 00 B4 */	addi r30, r3, 0xb4
+/* 813A5144 | 41 82 01 C0 */	beq .L_813A5304
+/* 813A5148 | 40 80 00 14 */	bge .L_813A515C
+/* 813A514C | 2C 1C 00 00 */	cmpwi r28, 0x0
+/* 813A5150 | 41 82 02 1C */	beq .L_813A536C
+/* 813A5154 | 40 80 00 14 */	bge .L_813A5168
+/* 813A5158 | 48 00 02 74 */	b .L_813A53CC
 .L_813A515C:
-/* 813A515C 0007355C  2C 1C 00 04 */	cmpwi r28, 0x4
-/* 813A5160 00073560  40 80 02 6C */	bge .L_813A53CC
-/* 813A5164 00073564  48 00 00 E4 */	b .L_813A5248
+/* 813A515C | 2C 1C 00 04 */	cmpwi r28, 0x4
+/* 813A5160 | 40 80 02 6C */	bge .L_813A53CC
+/* 813A5164 | 48 00 00 E4 */	b .L_813A5248
 .L_813A5168:
-/* 813A5168 00073568  7F E3 FB 78 */	mr r3, r31
-/* 813A516C 0007356C  7F C4 F3 78 */	mr r4, r30
-/* 813A5170 00073570  48 00 21 01 */	bl get_anmpane__Q33ipl5scene13AnmControllerFPCc
-/* 813A5174 00073574  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A5178 00073578  7C 7D 1B 78 */	mr r29, r3
-/* 813A517C 0007357C  41 82 02 50 */	beq .L_813A53CC
-/* 813A5180 00073580  80 A3 00 14 */	lwz r5, 0x14(r3)
-/* 813A5184 00073584  3F C0 81 09 */	lis r30, smArg__Q23ipl6System@ha
-/* 813A5188 00073588  3B DE 90 08 */	addi r30, r30, smArg__Q23ipl6System@l
-/* 813A518C 0007358C  38 80 00 0C */	li r4, 0xc
-/* 813A5190 00073590  38 05 00 01 */	addi r0, r5, 0x1
-/* 813A5194 00073594  90 03 00 14 */	stw r0, 0x14(r3)
-/* 813A5198 00073598  80 7E 00 64 */	lwz r3, 0x64(r30)
-/* 813A519C 0007359C  48 06 5F 9D */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813A51A0 000735A0  7F A4 EB 78 */	mr r4, r29
-/* 813A51A4 000735A4  4B FF C7 2D */	bl onPoint__Q33ipl5scene11ChannelEditFPQ33ipl5scene7AnmPane
-/* 813A51A8 000735A8  80 7F 00 44 */	lwz r3, 0x44(r31)
-/* 813A51AC 000735AC  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A51B0 000735B0  41 82 02 1C */	beq .L_813A53CC
-/* 813A51B4 000735B4  80 9F 00 40 */	lwz r4, 0x40(r31)
-/* 813A51B8 000735B8  2C 04 00 00 */	cmpwi r4, 0x0
-/* 813A51BC 000735BC  41 82 02 10 */	beq .L_813A53CC
-/* 813A51C0 000735C0  88 1F 00 48 */	lbz r0, 0x48(r31)
-/* 813A51C4 000735C4  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813A51C8 000735C8  40 82 02 04 */	bne .L_813A53CC
-/* 813A51CC 000735CC  38 00 00 01 */	li r0, 0x1
-/* 813A51D0 000735D0  98 1F 00 48 */	stb r0, 0x48(r31)
-/* 813A51D4 000735D4  88 04 06 20 */	lbz r0, 0x620(r4)
-/* 813A51D8 000735D8  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813A51DC 000735DC  41 82 00 14 */	beq .L_813A51F0
-/* 813A51E0 000735E0  38 8D 88 10 */	li r4, lbl_81696850@sda21
-/* 813A51E4 000735E4  38 A0 00 00 */	li r5, 0x0
-/* 813A51E8 000735E8  48 02 C4 19 */	bl fn_813D1600
-/* 813A51EC 000735EC  48 00 00 50 */	b .L_813A523C
+/* 813A5168 | 7F E3 FB 78 */	mr r3, r31
+/* 813A516C | 7F C4 F3 78 */	mr r4, r30
+/* 813A5170 | 48 00 21 01 */	bl get_anmpane__Q33ipl5scene13AnmControllerFPCc
+/* 813A5174 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A5178 | 7C 7D 1B 78 */	mr r29, r3
+/* 813A517C | 41 82 02 50 */	beq .L_813A53CC
+/* 813A5180 | 80 A3 00 14 */	lwz r5, 0x14(r3)
+/* 813A5184 | 3F C0 81 09 */	lis r30, smArg__Q23ipl6System@ha
+/* 813A5188 | 3B DE 90 08 */	addi r30, r30, smArg__Q23ipl6System@l
+/* 813A518C | 38 80 00 0C */	li r4, 0xc
+/* 813A5190 | 38 05 00 01 */	addi r0, r5, 0x1
+/* 813A5194 | 90 03 00 14 */	stw r0, 0x14(r3)
+/* 813A5198 | 80 7E 00 64 */	lwz r3, 0x64(r30)
+/* 813A519C | 48 06 5F 9D */	bl getScene__Q33ipl5scene7ManagerFi
+/* 813A51A0 | 7F A4 EB 78 */	mr r4, r29
+/* 813A51A4 | 4B FF C7 2D */	bl onPoint__Q33ipl5scene11ChannelEditFPQ33ipl5scene7AnmPane
+/* 813A51A8 | 80 7F 00 44 */	lwz r3, 0x44(r31)
+/* 813A51AC | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A51B0 | 41 82 02 1C */	beq .L_813A53CC
+/* 813A51B4 | 80 9F 00 40 */	lwz r4, 0x40(r31)
+/* 813A51B8 | 2C 04 00 00 */	cmpwi r4, 0x0
+/* 813A51BC | 41 82 02 10 */	beq .L_813A53CC
+/* 813A51C0 | 88 1F 00 48 */	lbz r0, 0x48(r31)
+/* 813A51C4 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813A51C8 | 40 82 02 04 */	bne .L_813A53CC
+/* 813A51CC | 38 00 00 01 */	li r0, 0x1
+/* 813A51D0 | 98 1F 00 48 */	stb r0, 0x48(r31)
+/* 813A51D4 | 88 04 06 20 */	lbz r0, 0x620(r4)
+/* 813A51D8 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813A51DC | 41 82 00 14 */	beq .L_813A51F0
+/* 813A51E0 | 38 8D 88 10 */	li r4, lbl_81696850@sda21
+/* 813A51E4 | 38 A0 00 00 */	li r5, 0x0
+/* 813A51E8 | 48 02 C4 19 */	bl fn_813D1600
+/* 813A51EC | 48 00 00 50 */	b .L_813A523C
 .L_813A51F0:
-/* 813A51F0 000735F0  88 04 06 21 */	lbz r0, 0x621(r4)
-/* 813A51F4 000735F4  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813A51F8 000735F8  41 82 00 28 */	beq .L_813A5220
-/* 813A51FC 000735FC  80 7E 00 80 */	lwz r3, 0x80(r30)
-/* 813A5200 00073600  38 80 01 2F */	li r4, 0x12f
-/* 813A5204 00073604  80 63 00 00 */	lwz r3, 0x0(r3)
-/* 813A5208 00073608  4B F9 95 B5 */	bl getMessage__Q33ipl7message7MessageCFUl
-/* 813A520C 0007360C  7C 64 1B 78 */	mr r4, r3
-/* 813A5210 00073610  80 7F 00 44 */	lwz r3, 0x44(r31)
-/* 813A5214 00073614  38 A0 00 00 */	li r5, 0x0
-/* 813A5218 00073618  48 02 C3 E9 */	bl fn_813D1600
-/* 813A521C 0007361C  48 00 00 20 */	b .L_813A523C
+/* 813A51F0 | 88 04 06 21 */	lbz r0, 0x621(r4)
+/* 813A51F4 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813A51F8 | 41 82 00 28 */	beq .L_813A5220
+/* 813A51FC | 80 7E 00 80 */	lwz r3, 0x80(r30)
+/* 813A5200 | 38 80 01 2F */	li r4, 0x12f
+/* 813A5204 | 80 63 00 00 */	lwz r3, 0x0(r3)
+/* 813A5208 | 4B F9 95 B5 */	bl getMessage__Q33ipl7message7MessageCFUl
+/* 813A520C | 7C 64 1B 78 */	mr r4, r3
+/* 813A5210 | 80 7F 00 44 */	lwz r3, 0x44(r31)
+/* 813A5214 | 38 A0 00 00 */	li r5, 0x0
+/* 813A5218 | 48 02 C3 E9 */	bl fn_813D1600
+/* 813A521C | 48 00 00 20 */	b .L_813A523C
 .L_813A5220:
-/* 813A5220 00073620  7C 83 23 78 */	mr r3, r4
-/* 813A5224 00073624  38 80 00 00 */	li r4, 0x0
-/* 813A5228 00073628  48 00 51 C9 */	bl getTitle__Q33ipl5scene9ThumbnailFi
-/* 813A522C 0007362C  7C 64 1B 78 */	mr r4, r3
-/* 813A5230 00073630  80 7F 00 44 */	lwz r3, 0x44(r31)
-/* 813A5234 00073634  38 A0 00 00 */	li r5, 0x0
-/* 813A5238 00073638  48 02 C3 C9 */	bl fn_813D1600
+/* 813A5220 | 7C 83 23 78 */	mr r3, r4
+/* 813A5224 | 38 80 00 00 */	li r4, 0x0
+/* 813A5228 | 48 00 51 C9 */	bl getTitle__Q33ipl5scene9ThumbnailFi
+/* 813A522C | 7C 64 1B 78 */	mr r4, r3
+/* 813A5230 | 80 7F 00 44 */	lwz r3, 0x44(r31)
+/* 813A5234 | 38 A0 00 00 */	li r5, 0x0
+/* 813A5238 | 48 02 C3 C9 */	bl fn_813D1600
 .L_813A523C:
-/* 813A523C 0007363C  80 7F 00 44 */	lwz r3, 0x44(r31)
-/* 813A5240 00073640  48 02 C4 D9 */	bl fn_813D1718
-/* 813A5244 00073644  48 00 01 88 */	b .L_813A53CC
+/* 813A523C | 80 7F 00 44 */	lwz r3, 0x44(r31)
+/* 813A5240 | 48 02 C4 D9 */	bl fn_813D1718
+/* 813A5244 | 48 00 01 88 */	b .L_813A53CC
 .L_813A5248:
-/* 813A5248 00073648  7F E3 FB 78 */	mr r3, r31
-/* 813A524C 0007364C  7F C4 F3 78 */	mr r4, r30
-/* 813A5250 00073650  48 00 20 21 */	bl get_anmpane__Q33ipl5scene13AnmControllerFPCc
-/* 813A5254 00073654  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A5258 00073658  41 82 01 74 */	beq .L_813A53CC
-/* 813A525C 0007365C  80 7F 00 44 */	lwz r3, 0x44(r31)
-/* 813A5260 00073660  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A5264 00073664  41 82 01 68 */	beq .L_813A53CC
-/* 813A5268 00073668  80 9F 00 40 */	lwz r4, 0x40(r31)
-/* 813A526C 0007366C  2C 04 00 00 */	cmpwi r4, 0x0
-/* 813A5270 00073670  41 82 01 5C */	beq .L_813A53CC
-/* 813A5274 00073674  88 1F 00 48 */	lbz r0, 0x48(r31)
-/* 813A5278 00073678  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813A527C 0007367C  40 82 01 50 */	bne .L_813A53CC
-/* 813A5280 00073680  38 00 00 01 */	li r0, 0x1
-/* 813A5284 00073684  98 1F 00 48 */	stb r0, 0x48(r31)
-/* 813A5288 00073688  88 04 06 20 */	lbz r0, 0x620(r4)
-/* 813A528C 0007368C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813A5290 00073690  41 82 00 14 */	beq .L_813A52A4
-/* 813A5294 00073694  38 8D 88 10 */	li r4, lbl_81696850@sda21
-/* 813A5298 00073698  38 A0 00 00 */	li r5, 0x0
-/* 813A529C 0007369C  48 02 C3 65 */	bl fn_813D1600
-/* 813A52A0 000736A0  48 00 00 58 */	b .L_813A52F8
+/* 813A5248 | 7F E3 FB 78 */	mr r3, r31
+/* 813A524C | 7F C4 F3 78 */	mr r4, r30
+/* 813A5250 | 48 00 20 21 */	bl get_anmpane__Q33ipl5scene13AnmControllerFPCc
+/* 813A5254 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A5258 | 41 82 01 74 */	beq .L_813A53CC
+/* 813A525C | 80 7F 00 44 */	lwz r3, 0x44(r31)
+/* 813A5260 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A5264 | 41 82 01 68 */	beq .L_813A53CC
+/* 813A5268 | 80 9F 00 40 */	lwz r4, 0x40(r31)
+/* 813A526C | 2C 04 00 00 */	cmpwi r4, 0x0
+/* 813A5270 | 41 82 01 5C */	beq .L_813A53CC
+/* 813A5274 | 88 1F 00 48 */	lbz r0, 0x48(r31)
+/* 813A5278 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813A527C | 40 82 01 50 */	bne .L_813A53CC
+/* 813A5280 | 38 00 00 01 */	li r0, 0x1
+/* 813A5284 | 98 1F 00 48 */	stb r0, 0x48(r31)
+/* 813A5288 | 88 04 06 20 */	lbz r0, 0x620(r4)
+/* 813A528C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813A5290 | 41 82 00 14 */	beq .L_813A52A4
+/* 813A5294 | 38 8D 88 10 */	li r4, lbl_81696850@sda21
+/* 813A5298 | 38 A0 00 00 */	li r5, 0x0
+/* 813A529C | 48 02 C3 65 */	bl fn_813D1600
+/* 813A52A0 | 48 00 00 58 */	b .L_813A52F8
 .L_813A52A4:
-/* 813A52A4 000736A4  88 04 06 21 */	lbz r0, 0x621(r4)
-/* 813A52A8 000736A8  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813A52AC 000736AC  41 82 00 30 */	beq .L_813A52DC
-/* 813A52B0 000736B0  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
-/* 813A52B4 000736B4  38 80 01 2F */	li r4, 0x12f
-/* 813A52B8 000736B8  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
-/* 813A52BC 000736BC  80 63 00 80 */	lwz r3, 0x80(r3)
-/* 813A52C0 000736C0  80 63 00 00 */	lwz r3, 0x0(r3)
-/* 813A52C4 000736C4  4B F9 94 F9 */	bl getMessage__Q33ipl7message7MessageCFUl
-/* 813A52C8 000736C8  7C 64 1B 78 */	mr r4, r3
-/* 813A52CC 000736CC  80 7F 00 44 */	lwz r3, 0x44(r31)
-/* 813A52D0 000736D0  38 A0 00 00 */	li r5, 0x0
-/* 813A52D4 000736D4  48 02 C3 2D */	bl fn_813D1600
-/* 813A52D8 000736D8  48 00 00 20 */	b .L_813A52F8
+/* 813A52A4 | 88 04 06 21 */	lbz r0, 0x621(r4)
+/* 813A52A8 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813A52AC | 41 82 00 30 */	beq .L_813A52DC
+/* 813A52B0 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 813A52B4 | 38 80 01 2F */	li r4, 0x12f
+/* 813A52B8 | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 813A52BC | 80 63 00 80 */	lwz r3, 0x80(r3)
+/* 813A52C0 | 80 63 00 00 */	lwz r3, 0x0(r3)
+/* 813A52C4 | 4B F9 94 F9 */	bl getMessage__Q33ipl7message7MessageCFUl
+/* 813A52C8 | 7C 64 1B 78 */	mr r4, r3
+/* 813A52CC | 80 7F 00 44 */	lwz r3, 0x44(r31)
+/* 813A52D0 | 38 A0 00 00 */	li r5, 0x0
+/* 813A52D4 | 48 02 C3 2D */	bl fn_813D1600
+/* 813A52D8 | 48 00 00 20 */	b .L_813A52F8
 .L_813A52DC:
-/* 813A52DC 000736DC  7C 83 23 78 */	mr r3, r4
-/* 813A52E0 000736E0  38 80 00 00 */	li r4, 0x0
-/* 813A52E4 000736E4  48 00 51 0D */	bl getTitle__Q33ipl5scene9ThumbnailFi
-/* 813A52E8 000736E8  7C 64 1B 78 */	mr r4, r3
-/* 813A52EC 000736EC  80 7F 00 44 */	lwz r3, 0x44(r31)
-/* 813A52F0 000736F0  38 A0 00 00 */	li r5, 0x0
-/* 813A52F4 000736F4  48 02 C3 0D */	bl fn_813D1600
+/* 813A52DC | 7C 83 23 78 */	mr r3, r4
+/* 813A52E0 | 38 80 00 00 */	li r4, 0x0
+/* 813A52E4 | 48 00 51 0D */	bl getTitle__Q33ipl5scene9ThumbnailFi
+/* 813A52E8 | 7C 64 1B 78 */	mr r4, r3
+/* 813A52EC | 80 7F 00 44 */	lwz r3, 0x44(r31)
+/* 813A52F0 | 38 A0 00 00 */	li r5, 0x0
+/* 813A52F4 | 48 02 C3 0D */	bl fn_813D1600
 .L_813A52F8:
-/* 813A52F8 000736F8  80 7F 00 44 */	lwz r3, 0x44(r31)
-/* 813A52FC 000736FC  48 02 C4 1D */	bl fn_813D1718
-/* 813A5300 00073700  48 00 00 CC */	b .L_813A53CC
+/* 813A52F8 | 80 7F 00 44 */	lwz r3, 0x44(r31)
+/* 813A52FC | 48 02 C4 1D */	bl fn_813D1718
+/* 813A5300 | 48 00 00 CC */	b .L_813A53CC
 .L_813A5304:
-/* 813A5304 00073704  7F E3 FB 78 */	mr r3, r31
-/* 813A5308 00073708  7F C4 F3 78 */	mr r4, r30
-/* 813A530C 0007370C  48 00 1F 65 */	bl get_anmpane__Q33ipl5scene13AnmControllerFPCc
-/* 813A5310 00073710  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A5314 00073714  7C 7D 1B 78 */	mr r29, r3
-/* 813A5318 00073718  41 82 00 B4 */	beq .L_813A53CC
-/* 813A531C 0007371C  80 C3 00 14 */	lwz r6, 0x14(r3)
-/* 813A5320 00073720  3C A0 81 09 */	lis r5, smArg__Q23ipl6System@ha
-/* 813A5324 00073724  38 A5 90 08 */	addi r5, r5, smArg__Q23ipl6System@l
-/* 813A5328 00073728  38 80 00 0C */	li r4, 0xc
-/* 813A532C 0007372C  38 06 FF FF */	subi r0, r6, 0x1
-/* 813A5330 00073730  90 03 00 14 */	stw r0, 0x14(r3)
-/* 813A5334 00073734  80 65 00 64 */	lwz r3, 0x64(r5)
-/* 813A5338 00073738  48 06 5E 01 */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813A533C 0007373C  7F A4 EB 78 */	mr r4, r29
-/* 813A5340 00073740  4B FF C6 51 */	bl onLeft__Q33ipl5scene11ChannelEditFPQ33ipl5scene7AnmPane
-/* 813A5344 00073744  80 7F 00 44 */	lwz r3, 0x44(r31)
-/* 813A5348 00073748  38 00 00 00 */	li r0, 0x0
-/* 813A534C 0007374C  98 1F 00 48 */	stb r0, 0x48(r31)
-/* 813A5350 00073750  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A5354 00073754  41 82 00 78 */	beq .L_813A53CC
-/* 813A5358 00073758  80 1F 00 40 */	lwz r0, 0x40(r31)
-/* 813A535C 0007375C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813A5360 00073760  41 82 00 6C */	beq .L_813A53CC
-/* 813A5364 00073764  48 02 C5 F1 */	bl fn_813D1954
-/* 813A5368 00073768  48 00 00 64 */	b .L_813A53CC
+/* 813A5304 | 7F E3 FB 78 */	mr r3, r31
+/* 813A5308 | 7F C4 F3 78 */	mr r4, r30
+/* 813A530C | 48 00 1F 65 */	bl get_anmpane__Q33ipl5scene13AnmControllerFPCc
+/* 813A5310 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A5314 | 7C 7D 1B 78 */	mr r29, r3
+/* 813A5318 | 41 82 00 B4 */	beq .L_813A53CC
+/* 813A531C | 80 C3 00 14 */	lwz r6, 0x14(r3)
+/* 813A5320 | 3C A0 81 09 */	lis r5, smArg__Q23ipl6System@ha
+/* 813A5324 | 38 A5 90 08 */	addi r5, r5, smArg__Q23ipl6System@l
+/* 813A5328 | 38 80 00 0C */	li r4, 0xc
+/* 813A532C | 38 06 FF FF */	subi r0, r6, 0x1
+/* 813A5330 | 90 03 00 14 */	stw r0, 0x14(r3)
+/* 813A5334 | 80 65 00 64 */	lwz r3, 0x64(r5)
+/* 813A5338 | 48 06 5E 01 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 813A533C | 7F A4 EB 78 */	mr r4, r29
+/* 813A5340 | 4B FF C6 51 */	bl onLeft__Q33ipl5scene11ChannelEditFPQ33ipl5scene7AnmPane
+/* 813A5344 | 80 7F 00 44 */	lwz r3, 0x44(r31)
+/* 813A5348 | 38 00 00 00 */	li r0, 0x0
+/* 813A534C | 98 1F 00 48 */	stb r0, 0x48(r31)
+/* 813A5350 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A5354 | 41 82 00 78 */	beq .L_813A53CC
+/* 813A5358 | 80 1F 00 40 */	lwz r0, 0x40(r31)
+/* 813A535C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813A5360 | 41 82 00 6C */	beq .L_813A53CC
+/* 813A5364 | 48 02 C5 F1 */	bl fn_813D1954
+/* 813A5368 | 48 00 00 64 */	b .L_813A53CC
 .L_813A536C:
-/* 813A536C 0007376C  81 9D 00 00 */	lwz r12, 0x0(r29)
-/* 813A5370 00073770  3C 80 00 10 */	lis r4, 0x10
-/* 813A5374 00073774  7F A3 EB 78 */	mr r3, r29
-/* 813A5378 00073778  81 8C 00 18 */	lwz r12, 0x18(r12)
-/* 813A537C 0007377C  38 84 08 00 */	addi r4, r4, 0x800
-/* 813A5380 00073780  7D 89 03 A6 */	mtctr r12
-/* 813A5384 00073784  4E 80 04 21 */	bctrl
-/* 813A5388 00073788  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A538C 0007378C  41 82 00 40 */	beq .L_813A53CC
-/* 813A5390 00073790  7F E3 FB 78 */	mr r3, r31
-/* 813A5394 00073794  7F C4 F3 78 */	mr r4, r30
-/* 813A5398 00073798  48 00 1E D9 */	bl get_anmpane__Q33ipl5scene13AnmControllerFPCc
-/* 813A539C 0007379C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A53A0 000737A0  41 82 00 2C */	beq .L_813A53CC
-/* 813A53A4 000737A4  80 1F 00 40 */	lwz r0, 0x40(r31)
-/* 813A53A8 000737A8  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813A53AC 000737AC  41 82 00 20 */	beq .L_813A53CC
-/* 813A53B0 000737B0  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
-/* 813A53B4 000737B4  38 80 00 0C */	li r4, 0xc
-/* 813A53B8 000737B8  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
-/* 813A53BC 000737BC  80 63 00 64 */	lwz r3, 0x64(r3)
-/* 813A53C0 000737C0  48 06 5D 79 */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813A53C4 000737C4  7F E4 FB 78 */	mr r4, r31
-/* 813A53C8 000737C8  4B FF C8 ED */	bl onTrig__Q33ipl5scene11ChannelEditFPQ33ipl5scene10ChanAppBox
+/* 813A536C | 81 9D 00 00 */	lwz r12, 0x0(r29)
+/* 813A5370 | 3C 80 00 10 */	lis r4, 0x10
+/* 813A5374 | 7F A3 EB 78 */	mr r3, r29
+/* 813A5378 | 81 8C 00 18 */	lwz r12, 0x18(r12)
+/* 813A537C | 38 84 08 00 */	addi r4, r4, 0x800
+/* 813A5380 | 7D 89 03 A6 */	mtctr r12
+/* 813A5384 | 4E 80 04 21 */	bctrl
+/* 813A5388 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A538C | 41 82 00 40 */	beq .L_813A53CC
+/* 813A5390 | 7F E3 FB 78 */	mr r3, r31
+/* 813A5394 | 7F C4 F3 78 */	mr r4, r30
+/* 813A5398 | 48 00 1E D9 */	bl get_anmpane__Q33ipl5scene13AnmControllerFPCc
+/* 813A539C | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A53A0 | 41 82 00 2C */	beq .L_813A53CC
+/* 813A53A4 | 80 1F 00 40 */	lwz r0, 0x40(r31)
+/* 813A53A8 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813A53AC | 41 82 00 20 */	beq .L_813A53CC
+/* 813A53B0 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 813A53B4 | 38 80 00 0C */	li r4, 0xc
+/* 813A53B8 | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 813A53BC | 80 63 00 64 */	lwz r3, 0x64(r3)
+/* 813A53C0 | 48 06 5D 79 */	bl getScene__Q33ipl5scene7ManagerFi
+/* 813A53C4 | 7F E4 FB 78 */	mr r4, r31
+/* 813A53C8 | 4B FF C8 ED */	bl onTrig__Q33ipl5scene11ChannelEditFPQ33ipl5scene10ChanAppBox
 .L_813A53CC:
-/* 813A53CC 000737CC  39 61 00 20 */	addi r11, r1, 0x20
-/* 813A53D0 000737D0  48 25 41 41 */	bl _restgpr_28
-/* 813A53D4 000737D4  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 813A53D8 000737D8  7C 08 03 A6 */	mtlr r0
-/* 813A53DC 000737DC  38 21 00 20 */	addi r1, r1, 0x20
-/* 813A53E0 000737E0  4E 80 00 20 */	blr
+/* 813A53CC | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813A53D0 | 48 25 41 41 */	bl _restgpr_28
+/* 813A53D4 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 813A53D8 | 7C 08 03 A6 */	mtlr r0
+/* 813A53DC | 38 21 00 20 */	addi r1, r1, 0x20
+/* 813A53E0 | 4E 80 00 20 */	blr
 .endfn onEvent__Q33ipl5scene10ChanAppBoxFUlUlPv
 
 # .text:0xCD4 | 0x813A53E4 | size: 0x74
 # ipl::scene::ChanAppBox::clearEvent()
 .fn clearEvent__Q33ipl5scene10ChanAppBoxFv, global
-/* 813A53E4 000737E4  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 813A53E8 000737E8  7C 08 02 A6 */	mflr r0
-/* 813A53EC 000737EC  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813A53F0 000737F0  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813A53F4 000737F4  7C 7F 1B 78 */	mr r31, r3
-/* 813A53F8 000737F8  48 1C 4B BD */	bl SCGetAspectRatio
-/* 813A53FC 000737FC  54 60 06 3E */	clrlwi r0, r3, 24
-/* 813A5400 00073800  28 00 00 01 */	cmplwi r0, 0x1
-/* 813A5404 00073804  40 82 00 18 */	bne .L_813A541C
-/* 813A5408 00073808  3C 80 81 65 */	lis r4, lbl_8164D1BF@ha
-/* 813A540C 0007380C  7F E3 FB 78 */	mr r3, r31
-/* 813A5410 00073810  38 84 D1 BF */	addi r4, r4, lbl_8164D1BF@l
-/* 813A5414 00073814  48 00 1E DD */	bl clear_anmpane__Q33ipl5scene13AnmControllerFPCc
-/* 813A5418 00073818  48 00 00 14 */	b .L_813A542C
+/* 813A53E4 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813A53E8 | 7C 08 02 A6 */	mflr r0
+/* 813A53EC | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813A53F0 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 813A53F4 | 7C 7F 1B 78 */	mr r31, r3
+/* 813A53F8 | 48 1C 4B BD */	bl SCGetAspectRatio
+/* 813A53FC | 54 60 06 3E */	clrlwi r0, r3, 24
+/* 813A5400 | 28 00 00 01 */	cmplwi r0, 0x1
+/* 813A5404 | 40 82 00 18 */	bne .L_813A541C
+/* 813A5408 | 3C 80 81 65 */	lis r4, lbl_8164D1BF@ha
+/* 813A540C | 7F E3 FB 78 */	mr r3, r31
+/* 813A5410 | 38 84 D1 BF */	addi r4, r4, lbl_8164D1BF@l
+/* 813A5414 | 48 00 1E DD */	bl clear_anmpane__Q33ipl5scene13AnmControllerFPCc
+/* 813A5418 | 48 00 00 14 */	b .L_813A542C
 .L_813A541C:
-/* 813A541C 0007381C  3C 80 81 65 */	lis r4, lbl_8164D1C9@ha
-/* 813A5420 00073820  7F E3 FB 78 */	mr r3, r31
-/* 813A5424 00073824  38 84 D1 C9 */	addi r4, r4, lbl_8164D1C9@l
-/* 813A5428 00073828  48 00 1E C9 */	bl clear_anmpane__Q33ipl5scene13AnmControllerFPCc
+/* 813A541C | 3C 80 81 65 */	lis r4, lbl_8164D1C9@ha
+/* 813A5420 | 7F E3 FB 78 */	mr r3, r31
+/* 813A5424 | 38 84 D1 C9 */	addi r4, r4, lbl_8164D1C9@l
+/* 813A5428 | 48 00 1E C9 */	bl clear_anmpane__Q33ipl5scene13AnmControllerFPCc
 .L_813A542C:
-/* 813A542C 0007382C  80 7F 00 44 */	lwz r3, 0x44(r31)
-/* 813A5430 00073830  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A5434 00073834  41 82 00 10 */	beq .L_813A5444
-/* 813A5438 00073838  48 02 C2 31 */	bl fn_813D1668
-/* 813A543C 0007383C  38 00 00 00 */	li r0, 0x0
-/* 813A5440 00073840  98 1F 00 48 */	stb r0, 0x48(r31)
+/* 813A542C | 80 7F 00 44 */	lwz r3, 0x44(r31)
+/* 813A5430 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A5434 | 41 82 00 10 */	beq .L_813A5444
+/* 813A5438 | 48 02 C2 31 */	bl fn_813D1668
+/* 813A543C | 38 00 00 00 */	li r0, 0x0
+/* 813A5440 | 98 1F 00 48 */	stb r0, 0x48(r31)
 .L_813A5444:
-/* 813A5444 00073844  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813A5448 00073848  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813A544C 0007384C  7C 08 03 A6 */	mtlr r0
-/* 813A5450 00073850  38 21 00 10 */	addi r1, r1, 0x10
-/* 813A5454 00073854  4E 80 00 20 */	blr
+/* 813A5444 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813A5448 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813A544C | 7C 08 03 A6 */	mtlr r0
+/* 813A5450 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813A5454 | 4E 80 00 20 */	blr
 .endfn clearEvent__Q33ipl5scene10ChanAppBoxFv
 
 # .text:0xD48 | 0x813A5458 | size: 0x14
 # ipl::scene::ChanAppBox::get_channel_edit()
 .fn get_channel_edit__Q33ipl5scene10ChanAppBoxFv, global
-/* 813A5458 00073858  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
-/* 813A545C 0007385C  38 80 00 0C */	li r4, 0xc
-/* 813A5460 00073860  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
-/* 813A5464 00073864  80 63 00 64 */	lwz r3, 0x64(r3)
-/* 813A5468 00073868  48 06 5C D0 */	b getScene__Q33ipl5scene7ManagerFi
+/* 813A5458 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
+/* 813A545C | 38 80 00 0C */	li r4, 0xc
+/* 813A5460 | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
+/* 813A5464 | 80 63 00 64 */	lwz r3, 0x64(r3)
+/* 813A5468 | 48 06 5C D0 */	b getScene__Q33ipl5scene7ManagerFi
 .endfn get_channel_edit__Q33ipl5scene10ChanAppBoxFv
 
 # .text:0xD5C | 0x813A546C | size: 0x68
 # ipl::scene::ChanAppBox::on_fadeout()
 .fn on_fadeout__Q33ipl5scene10ChanAppBoxFv, global
-/* 813A546C 0007386C  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 813A5470 00073870  7C 08 02 A6 */	mflr r0
-/* 813A5474 00073874  38 80 00 01 */	li r4, 0x1
-/* 813A5478 00073878  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813A547C 0007387C  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813A5480 00073880  7C 7F 1B 78 */	mr r31, r3
-/* 813A5484 00073884  48 00 1D 21 */	bl is_animation__Q33ipl5scene13AnmControllerFi
-/* 813A5488 00073888  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813A548C 0007388C  40 82 00 34 */	bne .L_813A54C0
-/* 813A5490 00073890  3C 80 81 65 */	lis r4, lbl_8164D1AA@ha
-/* 813A5494 00073894  7F E3 FB 78 */	mr r3, r31
-/* 813A5498 00073898  38 84 D1 AA */	addi r4, r4, lbl_8164D1AA@l
-/* 813A549C 0007389C  38 A0 00 00 */	li r5, 0x0
-/* 813A54A0 000738A0  48 00 20 35 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
-/* 813A54A4 000738A4  3C 80 81 65 */	lis r4, lbl_8164D1B5@ha
-/* 813A54A8 000738A8  7F E3 FB 78 */	mr r3, r31
-/* 813A54AC 000738AC  38 84 D1 B5 */	addi r4, r4, lbl_8164D1B5@l
-/* 813A54B0 000738B0  38 A0 00 00 */	li r5, 0x0
-/* 813A54B4 000738B4  48 00 20 21 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
-/* 813A54B8 000738B8  38 00 00 01 */	li r0, 0x1
-/* 813A54BC 000738BC  90 1F 00 3C */	stw r0, 0x3c(r31)
+/* 813A546C | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813A5470 | 7C 08 02 A6 */	mflr r0
+/* 813A5474 | 38 80 00 01 */	li r4, 0x1
+/* 813A5478 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813A547C | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 813A5480 | 7C 7F 1B 78 */	mr r31, r3
+/* 813A5484 | 48 00 1D 21 */	bl is_animation__Q33ipl5scene13AnmControllerFi
+/* 813A5488 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813A548C | 40 82 00 34 */	bne .L_813A54C0
+/* 813A5490 | 3C 80 81 65 */	lis r4, lbl_8164D1AA@ha
+/* 813A5494 | 7F E3 FB 78 */	mr r3, r31
+/* 813A5498 | 38 84 D1 AA */	addi r4, r4, lbl_8164D1AA@l
+/* 813A549C | 38 A0 00 00 */	li r5, 0x0
+/* 813A54A0 | 48 00 20 35 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
+/* 813A54A4 | 3C 80 81 65 */	lis r4, lbl_8164D1B5@ha
+/* 813A54A8 | 7F E3 FB 78 */	mr r3, r31
+/* 813A54AC | 38 84 D1 B5 */	addi r4, r4, lbl_8164D1B5@l
+/* 813A54B0 | 38 A0 00 00 */	li r5, 0x0
+/* 813A54B4 | 48 00 20 21 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
+/* 813A54B8 | 38 00 00 01 */	li r0, 0x1
+/* 813A54BC | 90 1F 00 3C */	stw r0, 0x3c(r31)
 .L_813A54C0:
-/* 813A54C0 000738C0  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813A54C4 000738C4  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813A54C8 000738C8  7C 08 03 A6 */	mtlr r0
-/* 813A54CC 000738CC  38 21 00 10 */	addi r1, r1, 0x10
-/* 813A54D0 000738D0  4E 80 00 20 */	blr
+/* 813A54C0 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813A54C4 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813A54C8 | 7C 08 03 A6 */	mtlr r0
+/* 813A54CC | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813A54D0 | 4E 80 00 20 */	blr
 .endfn on_fadeout__Q33ipl5scene10ChanAppBoxFv
 
 # .text:0xDC4 | 0x813A54D4 | size: 0x8
 # ipl::scene::ChanAppBox::@40@onEvent(unsigned long, unsigned long, void*)
 .fn "@40@onEvent__Q33ipl5scene10ChanAppBoxFUlUlPv", global
-/* 813A54D4 000738D4  38 63 FF D8 */	subi r3, r3, 0x28
-/* 813A54D8 000738D8  4B FF FC 20 */	b onEvent__Q33ipl5scene10ChanAppBoxFUlUlPv
+/* 813A54D4 | 38 63 FF D8 */	subi r3, r3, 0x28
+/* 813A54D8 | 4B FF FC 20 */	b onEvent__Q33ipl5scene10ChanAppBoxFUlUlPv
 .endfn "@40@onEvent__Q33ipl5scene10ChanAppBoxFUlUlPv"
 
 # 0x8160FC70..0x8160FC80 | size: 0x10

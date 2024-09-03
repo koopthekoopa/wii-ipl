@@ -8,1782 +8,1782 @@
 # .text:0x0 | 0x813BE9E8 | size: 0x44
 # ipl::kitayama::NandSDWorker_AutoTest::NandSDWorker_AutoTest()
 .fn __ct__Q33ipl8kitayama21NandSDWorker_AutoTestFv, global
-/* 813BE9E8 0008CDE8  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 813BE9EC 0008CDEC  7C 08 02 A6 */	mflr r0
-/* 813BE9F0 0008CDF0  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813BE9F4 0008CDF4  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813BE9F8 0008CDF8  7C 7F 1B 78 */	mr r31, r3
-/* 813BE9FC 0008CDFC  4B F8 99 F1 */	bl __ct__Q23ipl12NandSDWorkerFv
-/* 813BEA00 0008CE00  3C 9F 00 01 */	addis r4, r31, 0x1
-/* 813BEA04 0008CE04  38 60 00 00 */	li r3, 0x0
-/* 813BEA08 0008CE08  38 00 FF FF */	li r0, -0x1
-/* 813BEA0C 0008CE0C  90 64 F3 A8 */	stw r3, -0xc58(r4)
-/* 813BEA10 0008CE10  7F E3 FB 78 */	mr r3, r31
-/* 813BEA14 0008CE14  90 04 F3 B0 */	stw r0, -0xc50(r4)
-/* 813BEA18 0008CE18  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813BEA1C 0008CE1C  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813BEA20 0008CE20  7C 08 03 A6 */	mtlr r0
-/* 813BEA24 0008CE24  38 21 00 10 */	addi r1, r1, 0x10
-/* 813BEA28 0008CE28  4E 80 00 20 */	blr
+/* 813BE9E8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813BE9EC | 7C 08 02 A6 */	mflr r0
+/* 813BE9F0 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813BE9F4 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 813BE9F8 | 7C 7F 1B 78 */	mr r31, r3
+/* 813BE9FC | 4B F8 99 F1 */	bl __ct__Q23ipl12NandSDWorkerFv
+/* 813BEA00 | 3C 9F 00 01 */	addis r4, r31, 0x1
+/* 813BEA04 | 38 60 00 00 */	li r3, 0x0
+/* 813BEA08 | 38 00 FF FF */	li r0, -0x1
+/* 813BEA0C | 90 64 F3 A8 */	stw r3, -0xc58(r4)
+/* 813BEA10 | 7F E3 FB 78 */	mr r3, r31
+/* 813BEA14 | 90 04 F3 B0 */	stw r0, -0xc50(r4)
+/* 813BEA18 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813BEA1C | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813BEA20 | 7C 08 03 A6 */	mtlr r0
+/* 813BEA24 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813BEA28 | 4E 80 00 20 */	blr
 .endfn __ct__Q33ipl8kitayama21NandSDWorker_AutoTestFv
 
 # .text:0x44 | 0x813BEA2C | size: 0x58
 # ipl::kitayama::NandSDWorker_AutoTest::~NandSDWorker_AutoTest()
 .fn __dt__Q33ipl8kitayama21NandSDWorker_AutoTestFv, global
-/* 813BEA2C 0008CE2C  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 813BEA30 0008CE30  7C 08 02 A6 */	mflr r0
-/* 813BEA34 0008CE34  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BEA38 0008CE38  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813BEA3C 0008CE3C  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813BEA40 0008CE40  7C 9F 23 78 */	mr r31, r4
-/* 813BEA44 0008CE44  93 C1 00 08 */	stw r30, 0x8(r1)
-/* 813BEA48 0008CE48  7C 7E 1B 78 */	mr r30, r3
-/* 813BEA4C 0008CE4C  41 82 00 1C */	beq .L_813BEA68
-/* 813BEA50 0008CE50  38 80 FF FF */	li r4, -0x1
-/* 813BEA54 0008CE54  4B F8 99 A5 */	bl __dt__Q23ipl12NandSDWorkerFv
-/* 813BEA58 0008CE58  2C 1F 00 00 */	cmpwi r31, 0x0
-/* 813BEA5C 0008CE5C  40 81 00 0C */	ble .L_813BEA68
-/* 813BEA60 0008CE60  7F C3 F3 78 */	mr r3, r30
-/* 813BEA64 0008CE64  48 23 96 81 */	bl __dl__FPv
+/* 813BEA2C | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813BEA30 | 7C 08 02 A6 */	mflr r0
+/* 813BEA34 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BEA38 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813BEA3C | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 813BEA40 | 7C 9F 23 78 */	mr r31, r4
+/* 813BEA44 | 93 C1 00 08 */	stw r30, 0x8(r1)
+/* 813BEA48 | 7C 7E 1B 78 */	mr r30, r3
+/* 813BEA4C | 41 82 00 1C */	beq .L_813BEA68
+/* 813BEA50 | 38 80 FF FF */	li r4, -0x1
+/* 813BEA54 | 4B F8 99 A5 */	bl __dt__Q23ipl12NandSDWorkerFv
+/* 813BEA58 | 2C 1F 00 00 */	cmpwi r31, 0x0
+/* 813BEA5C | 40 81 00 0C */	ble .L_813BEA68
+/* 813BEA60 | 7F C3 F3 78 */	mr r3, r30
+/* 813BEA64 | 48 23 96 81 */	bl __dl__FPv
 .L_813BEA68:
-/* 813BEA68 0008CE68  7F C3 F3 78 */	mr r3, r30
-/* 813BEA6C 0008CE6C  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813BEA70 0008CE70  83 C1 00 08 */	lwz r30, 0x8(r1)
-/* 813BEA74 0008CE74  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813BEA78 0008CE78  7C 08 03 A6 */	mtlr r0
-/* 813BEA7C 0008CE7C  38 21 00 10 */	addi r1, r1, 0x10
-/* 813BEA80 0008CE80  4E 80 00 20 */	blr
+/* 813BEA68 | 7F C3 F3 78 */	mr r3, r30
+/* 813BEA6C | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813BEA70 | 83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 813BEA74 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813BEA78 | 7C 08 03 A6 */	mtlr r0
+/* 813BEA7C | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813BEA80 | 4E 80 00 20 */	blr
 .endfn __dt__Q33ipl8kitayama21NandSDWorker_AutoTestFv
 
 # .text:0x9C | 0x813BEA84 | size: 0x48
 # ipl::kitayama::NandSDWorker_AutoTest::start_save_test(void*, void*, int)
 .fn start_save_test__Q33ipl8kitayama21NandSDWorker_AutoTestFPvPvi, global
-/* 813BEA84 0008CE84  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 813BEA88 0008CE88  7C 08 02 A6 */	mflr r0
-/* 813BEA8C 0008CE8C  7C C7 33 78 */	mr r7, r6
-/* 813BEA90 0008CE90  38 C0 00 00 */	li r6, 0x0
-/* 813BEA94 0008CE94  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813BEA98 0008CE98  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813BEA9C 0008CE9C  7C 7F 1B 78 */	mr r31, r3
-/* 813BEAA0 0008CEA0  4B F8 99 99 */	bl create__Q23ipl12NandSDWorkerFPvPvPvi
-/* 813BEAA4 0008CEA4  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEAA8 0008CEA8  38 80 00 01 */	li r4, 0x1
-/* 813BEAAC 0008CEAC  38 00 00 00 */	li r0, 0x0
-/* 813BEAB0 0008CEB0  90 83 F3 A8 */	stw r4, -0xc58(r3)
-/* 813BEAB4 0008CEB4  90 03 F3 AC */	stw r0, -0xc54(r3)
-/* 813BEAB8 0008CEB8  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813BEABC 0008CEBC  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813BEAC0 0008CEC0  7C 08 03 A6 */	mtlr r0
-/* 813BEAC4 0008CEC4  38 21 00 10 */	addi r1, r1, 0x10
-/* 813BEAC8 0008CEC8  4E 80 00 20 */	blr
+/* 813BEA84 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813BEA88 | 7C 08 02 A6 */	mflr r0
+/* 813BEA8C | 7C C7 33 78 */	mr r7, r6
+/* 813BEA90 | 38 C0 00 00 */	li r6, 0x0
+/* 813BEA94 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813BEA98 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 813BEA9C | 7C 7F 1B 78 */	mr r31, r3
+/* 813BEAA0 | 4B F8 99 99 */	bl create__Q23ipl12NandSDWorkerFPvPvPvi
+/* 813BEAA4 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEAA8 | 38 80 00 01 */	li r4, 0x1
+/* 813BEAAC | 38 00 00 00 */	li r0, 0x0
+/* 813BEAB0 | 90 83 F3 A8 */	stw r4, -0xc58(r3)
+/* 813BEAB4 | 90 03 F3 AC */	stw r0, -0xc54(r3)
+/* 813BEAB8 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813BEABC | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813BEAC0 | 7C 08 03 A6 */	mtlr r0
+/* 813BEAC4 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813BEAC8 | 4E 80 00 20 */	blr
 .endfn start_save_test__Q33ipl8kitayama21NandSDWorker_AutoTestFPvPvi
 
 # .text:0xE4 | 0x813BEACC | size: 0x4C
 # ipl::kitayama::NandSDWorker_AutoTest::start_initialize_nand(void*, int)
 .fn start_initialize_nand__Q33ipl8kitayama21NandSDWorker_AutoTestFPvi, global
-/* 813BEACC 0008CECC  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 813BEAD0 0008CED0  7C 08 02 A6 */	mflr r0
-/* 813BEAD4 0008CED4  7C A7 2B 78 */	mr r7, r5
-/* 813BEAD8 0008CED8  38 A0 00 00 */	li r5, 0x0
-/* 813BEADC 0008CEDC  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813BEAE0 0008CEE0  38 C0 00 00 */	li r6, 0x0
-/* 813BEAE4 0008CEE4  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813BEAE8 0008CEE8  7C 7F 1B 78 */	mr r31, r3
-/* 813BEAEC 0008CEEC  4B F8 99 4D */	bl create__Q23ipl12NandSDWorkerFPvPvPvi
-/* 813BEAF0 0008CEF0  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEAF4 0008CEF4  38 80 00 1B */	li r4, 0x1b
-/* 813BEAF8 0008CEF8  38 00 00 01 */	li r0, 0x1
-/* 813BEAFC 0008CEFC  90 83 F3 A8 */	stw r4, -0xc58(r3)
-/* 813BEB00 0008CF00  90 03 F3 AC */	stw r0, -0xc54(r3)
-/* 813BEB04 0008CF04  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813BEB08 0008CF08  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813BEB0C 0008CF0C  7C 08 03 A6 */	mtlr r0
-/* 813BEB10 0008CF10  38 21 00 10 */	addi r1, r1, 0x10
-/* 813BEB14 0008CF14  4E 80 00 20 */	blr
+/* 813BEACC | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813BEAD0 | 7C 08 02 A6 */	mflr r0
+/* 813BEAD4 | 7C A7 2B 78 */	mr r7, r5
+/* 813BEAD8 | 38 A0 00 00 */	li r5, 0x0
+/* 813BEADC | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813BEAE0 | 38 C0 00 00 */	li r6, 0x0
+/* 813BEAE4 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 813BEAE8 | 7C 7F 1B 78 */	mr r31, r3
+/* 813BEAEC | 4B F8 99 4D */	bl create__Q23ipl12NandSDWorkerFPvPvPvi
+/* 813BEAF0 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEAF4 | 38 80 00 1B */	li r4, 0x1b
+/* 813BEAF8 | 38 00 00 01 */	li r0, 0x1
+/* 813BEAFC | 90 83 F3 A8 */	stw r4, -0xc58(r3)
+/* 813BEB00 | 90 03 F3 AC */	stw r0, -0xc54(r3)
+/* 813BEB04 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813BEB08 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813BEB0C | 7C 08 03 A6 */	mtlr r0
+/* 813BEB10 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813BEB14 | 4E 80 00 20 */	blr
 .endfn start_initialize_nand__Q33ipl8kitayama21NandSDWorker_AutoTestFPvi
 
 # .text:0x130 | 0x813BEB18 | size: 0x4C
 # ipl::kitayama::NandSDWorker_AutoTest::start_app_test(void*, void*, int)
 .fn start_app_test__Q33ipl8kitayama21NandSDWorker_AutoTestFPvPvi, global
-/* 813BEB18 0008CF18  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 813BEB1C 0008CF1C  7C 08 02 A6 */	mflr r0
-/* 813BEB20 0008CF20  7C C7 33 78 */	mr r7, r6
-/* 813BEB24 0008CF24  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813BEB28 0008CF28  7C A0 2B 78 */	mr r0, r5
-/* 813BEB2C 0008CF2C  38 A0 00 00 */	li r5, 0x0
-/* 813BEB30 0008CF30  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813BEB34 0008CF34  7C 7F 1B 78 */	mr r31, r3
-/* 813BEB38 0008CF38  7C 06 03 78 */	mr r6, r0
-/* 813BEB3C 0008CF3C  4B F8 98 FD */	bl create__Q23ipl12NandSDWorkerFPvPvPvi
-/* 813BEB40 0008CF40  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEB44 0008CF44  38 00 00 02 */	li r0, 0x2
-/* 813BEB48 0008CF48  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BEB4C 0008CF4C  90 03 F3 AC */	stw r0, -0xc54(r3)
-/* 813BEB50 0008CF50  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813BEB54 0008CF54  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813BEB58 0008CF58  7C 08 03 A6 */	mtlr r0
-/* 813BEB5C 0008CF5C  38 21 00 10 */	addi r1, r1, 0x10
-/* 813BEB60 0008CF60  4E 80 00 20 */	blr
+/* 813BEB18 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813BEB1C | 7C 08 02 A6 */	mflr r0
+/* 813BEB20 | 7C C7 33 78 */	mr r7, r6
+/* 813BEB24 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813BEB28 | 7C A0 2B 78 */	mr r0, r5
+/* 813BEB2C | 38 A0 00 00 */	li r5, 0x0
+/* 813BEB30 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 813BEB34 | 7C 7F 1B 78 */	mr r31, r3
+/* 813BEB38 | 7C 06 03 78 */	mr r6, r0
+/* 813BEB3C | 4B F8 98 FD */	bl create__Q23ipl12NandSDWorkerFPvPvPvi
+/* 813BEB40 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEB44 | 38 00 00 02 */	li r0, 0x2
+/* 813BEB48 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BEB4C | 90 03 F3 AC */	stw r0, -0xc54(r3)
+/* 813BEB50 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813BEB54 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813BEB58 | 7C 08 03 A6 */	mtlr r0
+/* 813BEB5C | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813BEB60 | 4E 80 00 20 */	blr
 .endfn start_app_test__Q33ipl8kitayama21NandSDWorker_AutoTestFPvPvi
 
 # .text:0x17C | 0x813BEB64 | size: 0x90
 # ipl::kitayama::NandSDWorker_AutoTest::process()
 .fn process__Q33ipl8kitayama21NandSDWorker_AutoTestFv, global
-/* 813BEB64 0008CF64  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 813BEB68 0008CF68  7C 08 02 A6 */	mflr r0
-/* 813BEB6C 0008CF6C  3C 83 00 01 */	addis r4, r3, 0x1
-/* 813BEB70 0008CF70  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813BEB74 0008CF74  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813BEB78 0008CF78  7C 7F 1B 78 */	mr r31, r3
-/* 813BEB7C 0008CF7C  80 04 F3 AC */	lwz r0, -0xc54(r4)
-/* 813BEB80 0008CF80  2C 00 00 01 */	cmpwi r0, 0x1
-/* 813BEB84 0008CF84  41 82 00 28 */	beq .L_813BEBAC
-/* 813BEB88 0008CF88  40 80 00 10 */	bge .L_813BEB98
-/* 813BEB8C 0008CF8C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813BEB90 0008CF90  40 80 00 14 */	bge .L_813BEBA4
-/* 813BEB94 0008CF94  48 00 00 28 */	b .L_813BEBBC
+/* 813BEB64 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813BEB68 | 7C 08 02 A6 */	mflr r0
+/* 813BEB6C | 3C 83 00 01 */	addis r4, r3, 0x1
+/* 813BEB70 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813BEB74 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 813BEB78 | 7C 7F 1B 78 */	mr r31, r3
+/* 813BEB7C | 80 04 F3 AC */	lwz r0, -0xc54(r4)
+/* 813BEB80 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 813BEB84 | 41 82 00 28 */	beq .L_813BEBAC
+/* 813BEB88 | 40 80 00 10 */	bge .L_813BEB98
+/* 813BEB8C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813BEB90 | 40 80 00 14 */	bge .L_813BEBA4
+/* 813BEB94 | 48 00 00 28 */	b .L_813BEBBC
 .L_813BEB98:
-/* 813BEB98 0008CF98  2C 00 00 03 */	cmpwi r0, 0x3
-/* 813BEB9C 0008CF9C  40 80 00 20 */	bge .L_813BEBBC
-/* 813BEBA0 0008CFA0  48 00 00 14 */	b .L_813BEBB4
+/* 813BEB98 | 2C 00 00 03 */	cmpwi r0, 0x3
+/* 813BEB9C | 40 80 00 20 */	bge .L_813BEBBC
+/* 813BEBA0 | 48 00 00 14 */	b .L_813BEBB4
 .L_813BEBA4:
-/* 813BEBA4 0008CFA4  48 00 00 5D */	bl process_save_test__Q33ipl8kitayama21NandSDWorker_AutoTestFv
-/* 813BEBA8 0008CFA8  48 00 00 38 */	b .L_813BEBE0
+/* 813BEBA4 | 48 00 00 5D */	bl process_save_test__Q33ipl8kitayama21NandSDWorker_AutoTestFv
+/* 813BEBA8 | 48 00 00 38 */	b .L_813BEBE0
 .L_813BEBAC:
-/* 813BEBAC 0008CFAC  48 00 0B A1 */	bl process_initialize__Q33ipl8kitayama21NandSDWorker_AutoTestFv
-/* 813BEBB0 0008CFB0  48 00 00 30 */	b .L_813BEBE0
+/* 813BEBAC | 48 00 0B A1 */	bl process_initialize__Q33ipl8kitayama21NandSDWorker_AutoTestFv
+/* 813BEBB0 | 48 00 00 30 */	b .L_813BEBE0
 .L_813BEBB4:
-/* 813BEBB4 0008CFB4  48 00 0C A1 */	bl process_app_test__Q33ipl8kitayama21NandSDWorker_AutoTestFv
-/* 813BEBB8 0008CFB8  48 00 00 28 */	b .L_813BEBE0
+/* 813BEBB4 | 48 00 0C A1 */	bl process_app_test__Q33ipl8kitayama21NandSDWorker_AutoTestFv
+/* 813BEBB8 | 48 00 00 28 */	b .L_813BEBE0
 .L_813BEBBC:
-/* 813BEBBC 0008CFBC  3C 60 81 65 */	lis r3, lbl_8164FD80@ha
-/* 813BEBC0 0008CFC0  3C A0 81 65 */	lis r5, lbl_8164FD9A@ha
-/* 813BEBC4 0008CFC4  38 63 FD 80 */	addi r3, r3, lbl_8164FD80@l
-/* 813BEBC8 0008CFC8  38 80 00 3C */	li r4, 0x3c
-/* 813BEBCC 0008CFCC  38 A5 FD 9A */	addi r5, r5, lbl_8164FD9A@l
-/* 813BEBD0 0008CFD0  4C C6 31 82 */	crclr cr1eq
-/* 813BEBD4 0008CFD4  48 16 FB 5D */	bl OSPanic
-/* 813BEBD8 0008CFD8  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEBDC 0008CFDC  80 63 F3 A8 */	lwz r3, -0xc58(r3)
+/* 813BEBBC | 3C 60 81 65 */	lis r3, lbl_8164FD80@ha
+/* 813BEBC0 | 3C A0 81 65 */	lis r5, lbl_8164FD9A@ha
+/* 813BEBC4 | 38 63 FD 80 */	addi r3, r3, lbl_8164FD80@l
+/* 813BEBC8 | 38 80 00 3C */	li r4, 0x3c
+/* 813BEBCC | 38 A5 FD 9A */	addi r5, r5, lbl_8164FD9A@l
+/* 813BEBD0 | 4C C6 31 82 */	crclr cr1eq
+/* 813BEBD4 | 48 16 FB 5D */	bl OSPanic
+/* 813BEBD8 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEBDC | 80 63 F3 A8 */	lwz r3, -0xc58(r3)
 .L_813BEBE0:
-/* 813BEBE0 0008CFE0  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813BEBE4 0008CFE4  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813BEBE8 0008CFE8  7C 08 03 A6 */	mtlr r0
-/* 813BEBEC 0008CFEC  38 21 00 10 */	addi r1, r1, 0x10
-/* 813BEBF0 0008CFF0  4E 80 00 20 */	blr
+/* 813BEBE0 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813BEBE4 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813BEBE8 | 7C 08 03 A6 */	mtlr r0
+/* 813BEBEC | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813BEBF0 | 4E 80 00 20 */	blr
 .endfn process__Q33ipl8kitayama21NandSDWorker_AutoTestFv
 
 # .text:0x20C | 0x813BEBF4 | size: 0xC
 # ipl::kitayama::NandSDWorker_AutoTest::get_result()
 .fn get_result__Q33ipl8kitayama21NandSDWorker_AutoTestFv, global
-/* 813BEBF4 0008CFF4  3C 63 00 01 */	addis r3, r3, 0x1
-/* 813BEBF8 0008CFF8  80 63 F3 B0 */	lwz r3, -0xc50(r3)
-/* 813BEBFC 0008CFFC  4E 80 00 20 */	blr
+/* 813BEBF4 | 3C 63 00 01 */	addis r3, r3, 0x1
+/* 813BEBF8 | 80 63 F3 B0 */	lwz r3, -0xc50(r3)
+/* 813BEBFC | 4E 80 00 20 */	blr
 .endfn get_result__Q33ipl8kitayama21NandSDWorker_AutoTestFv
 
 # .text:0x218 | 0x813BEC00 | size: 0xB4C
 # ipl::kitayama::NandSDWorker_AutoTest::process_save_test()
 .fn process_save_test__Q33ipl8kitayama21NandSDWorker_AutoTestFv, global
-/* 813BEC00 0008D000  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 813BEC04 0008D004  7C 08 02 A6 */	mflr r0
-/* 813BEC08 0008D008  90 01 00 24 */	stw r0, 0x24(r1)
-/* 813BEC0C 0008D00C  39 61 00 20 */	addi r11, r1, 0x20
-/* 813BEC10 0008D010  48 23 A8 B5 */	bl _savegpr_28
-/* 813BEC14 0008D014  3C A3 00 01 */	addis r5, r3, 0x1
-/* 813BEC18 0008D018  3F A0 81 65 */	lis r29, lbl_8164FD80@ha
-/* 813BEC1C 0008D01C  80 05 F3 A8 */	lwz r0, -0xc58(r5)
-/* 813BEC20 0008D020  7C 7F 1B 78 */	mr r31, r3
-/* 813BEC24 0008D024  3B BD FD 80 */	addi r29, r29, lbl_8164FD80@l
-/* 813BEC28 0008D028  28 00 00 52 */	cmplwi r0, 0x52
-/* 813BEC2C 0008D02C  41 81 0B 00 */	bgt .L_813BF72C
-/* 813BEC30 0008D030  3C 80 81 65 */	lis r4, jumptable_8164FF5C@ha
-/* 813BEC34 0008D034  54 00 10 3A */	slwi r0, r0, 2
-/* 813BEC38 0008D038  38 84 FF 5C */	addi r4, r4, jumptable_8164FF5C@l
-/* 813BEC3C 0008D03C  7C 84 00 2E */	lwzx r4, r4, r0
-/* 813BEC40 0008D040  7C 89 03 A6 */	mtctr r4
-/* 813BEC44 0008D044  4E 80 04 20 */	bctr
+/* 813BEC00 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 813BEC04 | 7C 08 02 A6 */	mflr r0
+/* 813BEC08 | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 813BEC0C | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813BEC10 | 48 23 A8 B5 */	bl _savegpr_28
+/* 813BEC14 | 3C A3 00 01 */	addis r5, r3, 0x1
+/* 813BEC18 | 3F A0 81 65 */	lis r29, lbl_8164FD80@ha
+/* 813BEC1C | 80 05 F3 A8 */	lwz r0, -0xc58(r5)
+/* 813BEC20 | 7C 7F 1B 78 */	mr r31, r3
+/* 813BEC24 | 3B BD FD 80 */	addi r29, r29, lbl_8164FD80@l
+/* 813BEC28 | 28 00 00 52 */	cmplwi r0, 0x52
+/* 813BEC2C | 41 81 0B 00 */	bgt .L_813BF72C
+/* 813BEC30 | 3C 80 81 65 */	lis r4, jumptable_8164FF5C@ha
+/* 813BEC34 | 54 00 10 3A */	slwi r0, r0, 2
+/* 813BEC38 | 38 84 FF 5C */	addi r4, r4, jumptable_8164FF5C@l
+/* 813BEC3C | 7C 84 00 2E */	lwzx r4, r4, r0
+/* 813BEC40 | 7C 89 03 A6 */	mtctr r4
+/* 813BEC44 | 4E 80 04 20 */	bctr
 .L_813BEC48:
-/* 813BEC48 0008D048  38 00 00 02 */	li r0, 0x2
-/* 813BEC4C 0008D04C  90 05 F3 A8 */	stw r0, -0xc58(r5)
-/* 813BEC50 0008D050  48 00 0A DC */	b .L_813BF72C
+/* 813BEC48 | 38 00 00 02 */	li r0, 0x2
+/* 813BEC4C | 90 05 F3 A8 */	stw r0, -0xc58(r5)
+/* 813BEC50 | 48 00 0A DC */	b .L_813BF72C
 .L_813BEC54:
-/* 813BEC54 0008D054  4B F8 A0 95 */	bl startup_async__Q23ipl12NandSDWorkerFv
-/* 813BEC58 0008D058  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEC5C 0008D05C  38 00 00 03 */	li r0, 0x3
-/* 813BEC60 0008D060  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BEC64 0008D064  48 00 0A C8 */	b .L_813BF72C
+/* 813BEC54 | 4B F8 A0 95 */	bl startup_async__Q23ipl12NandSDWorkerFv
+/* 813BEC58 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEC5C | 38 00 00 03 */	li r0, 0x3
+/* 813BEC60 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BEC64 | 48 00 0A C8 */	b .L_813BF72C
 .L_813BEC68:
-/* 813BEC68 0008D068  4B F8 9B A1 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BEC6C 0008D06C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BEC70 0008D070  40 82 0A BC */	bne .L_813BF72C
-/* 813BEC74 0008D074  7F E3 FB 78 */	mr r3, r31
-/* 813BEC78 0008D078  4B F8 9B BD */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BEC7C 0008D07C  7C 64 1B 78 */	mr r4, r3
-/* 813BEC80 0008D080  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BEC84 0008D084  4C C6 31 82 */	crclr cr1eq
-/* 813BEC88 0008D088  48 16 FA 19 */	bl OSReport
-/* 813BEC8C 0008D08C  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEC90 0008D090  38 00 00 04 */	li r0, 0x4
-/* 813BEC94 0008D094  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BEC98 0008D098  48 00 0A 94 */	b .L_813BF72C
+/* 813BEC68 | 4B F8 9B A1 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BEC6C | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BEC70 | 40 82 0A BC */	bne .L_813BF72C
+/* 813BEC74 | 7F E3 FB 78 */	mr r3, r31
+/* 813BEC78 | 4B F8 9B BD */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BEC7C | 7C 64 1B 78 */	mr r4, r3
+/* 813BEC80 | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BEC84 | 4C C6 31 82 */	crclr cr1eq
+/* 813BEC88 | 48 16 FA 19 */	bl OSReport
+/* 813BEC8C | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEC90 | 38 00 00 04 */	li r0, 0x4
+/* 813BEC94 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BEC98 | 48 00 0A 94 */	b .L_813BF72C
 .L_813BEC9C:
-/* 813BEC9C 0008D09C  4B F8 A0 9D */	bl mount_sd_async__Q23ipl12NandSDWorkerFv
-/* 813BECA0 0008D0A0  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BECA4 0008D0A4  38 00 00 05 */	li r0, 0x5
-/* 813BECA8 0008D0A8  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BECAC 0008D0AC  48 00 0A 80 */	b .L_813BF72C
+/* 813BEC9C | 4B F8 A0 9D */	bl mount_sd_async__Q23ipl12NandSDWorkerFv
+/* 813BECA0 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BECA4 | 38 00 00 05 */	li r0, 0x5
+/* 813BECA8 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BECAC | 48 00 0A 80 */	b .L_813BF72C
 .L_813BECB0:
-/* 813BECB0 0008D0B0  4B F8 9B 59 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BECB4 0008D0B4  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BECB8 0008D0B8  40 82 0A 74 */	bne .L_813BF72C
-/* 813BECBC 0008D0BC  7F E3 FB 78 */	mr r3, r31
-/* 813BECC0 0008D0C0  4B F8 9B 75 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BECC4 0008D0C4  7C 64 1B 78 */	mr r4, r3
-/* 813BECC8 0008D0C8  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BECCC 0008D0CC  4C C6 31 82 */	crclr cr1eq
-/* 813BECD0 0008D0D0  48 16 F9 D1 */	bl OSReport
-/* 813BECD4 0008D0D4  7F E3 FB 78 */	mr r3, r31
-/* 813BECD8 0008D0D8  4B F8 9F C9 */	bl is_sd_write_protected__Q23ipl12NandSDWorkerFv
-/* 813BECDC 0008D0DC  7C 64 1B 78 */	mr r4, r3
-/* 813BECE0 0008D0E0  38 7D 00 36 */	addi r3, r29, 0x36
-/* 813BECE4 0008D0E4  4C C6 31 82 */	crclr cr1eq
-/* 813BECE8 0008D0E8  48 16 F9 B9 */	bl OSReport
-/* 813BECEC 0008D0EC  7F E3 FB 78 */	mr r3, r31
-/* 813BECF0 0008D0F0  4B F8 9F D5 */	bl get_sd_drive_letter__Q23ipl12NandSDWorkerFv
-/* 813BECF4 0008D0F4  7C 64 07 74 */	extsb r4, r3
-/* 813BECF8 0008D0F8  38 7D 00 51 */	addi r3, r29, 0x51
-/* 813BECFC 0008D0FC  4C C6 31 82 */	crclr cr1eq
-/* 813BED00 0008D100  48 16 F9 A1 */	bl OSReport
-/* 813BED04 0008D104  7F E3 FB 78 */	mr r3, r31
-/* 813BED08 0008D108  4B F8 9B 7D */	bl get_sd_state__Q23ipl12NandSDWorkerFv
-/* 813BED0C 0008D10C  7C 64 1B 78 */	mr r4, r3
-/* 813BED10 0008D110  38 7D 00 66 */	addi r3, r29, 0x66
-/* 813BED14 0008D114  4C C6 31 82 */	crclr cr1eq
-/* 813BED18 0008D118  48 16 F9 89 */	bl OSReport
-/* 813BED1C 0008D11C  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BED20 0008D120  38 00 00 21 */	li r0, 0x21
-/* 813BED24 0008D124  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BED28 0008D128  48 00 0A 04 */	b .L_813BF72C
+/* 813BECB0 | 4B F8 9B 59 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BECB4 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BECB8 | 40 82 0A 74 */	bne .L_813BF72C
+/* 813BECBC | 7F E3 FB 78 */	mr r3, r31
+/* 813BECC0 | 4B F8 9B 75 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BECC4 | 7C 64 1B 78 */	mr r4, r3
+/* 813BECC8 | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BECCC | 4C C6 31 82 */	crclr cr1eq
+/* 813BECD0 | 48 16 F9 D1 */	bl OSReport
+/* 813BECD4 | 7F E3 FB 78 */	mr r3, r31
+/* 813BECD8 | 4B F8 9F C9 */	bl is_sd_write_protected__Q23ipl12NandSDWorkerFv
+/* 813BECDC | 7C 64 1B 78 */	mr r4, r3
+/* 813BECE0 | 38 7D 00 36 */	addi r3, r29, 0x36
+/* 813BECE4 | 4C C6 31 82 */	crclr cr1eq
+/* 813BECE8 | 48 16 F9 B9 */	bl OSReport
+/* 813BECEC | 7F E3 FB 78 */	mr r3, r31
+/* 813BECF0 | 4B F8 9F D5 */	bl get_sd_drive_letter__Q23ipl12NandSDWorkerFv
+/* 813BECF4 | 7C 64 07 74 */	extsb r4, r3
+/* 813BECF8 | 38 7D 00 51 */	addi r3, r29, 0x51
+/* 813BECFC | 4C C6 31 82 */	crclr cr1eq
+/* 813BED00 | 48 16 F9 A1 */	bl OSReport
+/* 813BED04 | 7F E3 FB 78 */	mr r3, r31
+/* 813BED08 | 4B F8 9B 7D */	bl get_sd_state__Q23ipl12NandSDWorkerFv
+/* 813BED0C | 7C 64 1B 78 */	mr r4, r3
+/* 813BED10 | 38 7D 00 66 */	addi r3, r29, 0x66
+/* 813BED14 | 4C C6 31 82 */	crclr cr1eq
+/* 813BED18 | 48 16 F9 89 */	bl OSReport
+/* 813BED1C | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BED20 | 38 00 00 21 */	li r0, 0x21
+/* 813BED24 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BED28 | 48 00 0A 04 */	b .L_813BF72C
 .L_813BED2C:
-/* 813BED2C 0008D12C  4B F8 A2 A5 */	bl format_sd_async__Q23ipl12NandSDWorkerFv
-/* 813BED30 0008D130  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BED34 0008D134  38 00 00 22 */	li r0, 0x22
-/* 813BED38 0008D138  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BED3C 0008D13C  48 00 09 F0 */	b .L_813BF72C
+/* 813BED2C | 4B F8 A2 A5 */	bl format_sd_async__Q23ipl12NandSDWorkerFv
+/* 813BED30 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BED34 | 38 00 00 22 */	li r0, 0x22
+/* 813BED38 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BED3C | 48 00 09 F0 */	b .L_813BF72C
 .L_813BED40:
-/* 813BED40 0008D140  4B F8 9A C9 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BED44 0008D144  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BED48 0008D148  40 82 09 E4 */	bne .L_813BF72C
-/* 813BED4C 0008D14C  7F E3 FB 78 */	mr r3, r31
-/* 813BED50 0008D150  4B F8 9A E5 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BED54 0008D154  7C 64 1B 78 */	mr r4, r3
-/* 813BED58 0008D158  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BED5C 0008D15C  4C C6 31 82 */	crclr cr1eq
-/* 813BED60 0008D160  48 16 F9 41 */	bl OSReport
-/* 813BED64 0008D164  7F E3 FB 78 */	mr r3, r31
-/* 813BED68 0008D168  4B F8 9B 25 */	bl get_nand_save_num__Q23ipl12NandSDWorkerFv
-/* 813BED6C 0008D16C  7C 64 1B 78 */	mr r4, r3
-/* 813BED70 0008D170  38 7D 00 74 */	addi r3, r29, 0x74
-/* 813BED74 0008D174  4C C6 31 82 */	crclr cr1eq
-/* 813BED78 0008D178  48 16 F9 29 */	bl OSReport
-/* 813BED7C 0008D17C  7F E3 FB 78 */	mr r3, r31
-/* 813BED80 0008D180  4B F8 9D 29 */	bl get_sd_save_num__Q23ipl12NandSDWorkerFv
-/* 813BED84 0008D184  7C 64 1B 78 */	mr r4, r3
-/* 813BED88 0008D188  38 7D 00 88 */	addi r3, r29, 0x88
-/* 813BED8C 0008D18C  4C C6 31 82 */	crclr cr1eq
-/* 813BED90 0008D190  48 16 F9 11 */	bl OSReport
-/* 813BED94 0008D194  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BED98 0008D198  38 00 00 39 */	li r0, 0x39
-/* 813BED9C 0008D19C  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BEDA0 0008D1A0  48 00 09 8C */	b .L_813BF72C
+/* 813BED40 | 4B F8 9A C9 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BED44 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BED48 | 40 82 09 E4 */	bne .L_813BF72C
+/* 813BED4C | 7F E3 FB 78 */	mr r3, r31
+/* 813BED50 | 4B F8 9A E5 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BED54 | 7C 64 1B 78 */	mr r4, r3
+/* 813BED58 | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BED5C | 4C C6 31 82 */	crclr cr1eq
+/* 813BED60 | 48 16 F9 41 */	bl OSReport
+/* 813BED64 | 7F E3 FB 78 */	mr r3, r31
+/* 813BED68 | 4B F8 9B 25 */	bl get_nand_save_num__Q23ipl12NandSDWorkerFv
+/* 813BED6C | 7C 64 1B 78 */	mr r4, r3
+/* 813BED70 | 38 7D 00 74 */	addi r3, r29, 0x74
+/* 813BED74 | 4C C6 31 82 */	crclr cr1eq
+/* 813BED78 | 48 16 F9 29 */	bl OSReport
+/* 813BED7C | 7F E3 FB 78 */	mr r3, r31
+/* 813BED80 | 4B F8 9D 29 */	bl get_sd_save_num__Q23ipl12NandSDWorkerFv
+/* 813BED84 | 7C 64 1B 78 */	mr r4, r3
+/* 813BED88 | 38 7D 00 88 */	addi r3, r29, 0x88
+/* 813BED8C | 4C C6 31 82 */	crclr cr1eq
+/* 813BED90 | 48 16 F9 11 */	bl OSReport
+/* 813BED94 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BED98 | 38 00 00 39 */	li r0, 0x39
+/* 813BED9C | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BEDA0 | 48 00 09 8C */	b .L_813BF72C
 .L_813BEDA4:
-/* 813BEDA4 0008D1A4  3C 80 30 30 */	lis r4, 0x3030
-/* 813BEDA8 0008D1A8  3C A0 00 01 */	lis r5, 0x1
-/* 813BEDAC 0008D1AC  38 C4 30 30 */	addi r6, r4, 0x3030
-/* 813BEDB0 0008D1B0  4B F8 A3 19 */	bl nocopy_exist_nand_save_async__Q23ipl12NandSDWorkerFUx
-/* 813BEDB4 0008D1B4  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEDB8 0008D1B8  38 00 00 3A */	li r0, 0x3a
-/* 813BEDBC 0008D1BC  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BEDC0 0008D1C0  48 00 09 6C */	b .L_813BF72C
+/* 813BEDA4 | 3C 80 30 30 */	lis r4, 0x3030
+/* 813BEDA8 | 3C A0 00 01 */	lis r5, 0x1
+/* 813BEDAC | 38 C4 30 30 */	addi r6, r4, 0x3030
+/* 813BEDB0 | 4B F8 A3 19 */	bl nocopy_exist_nand_save_async__Q23ipl12NandSDWorkerFUx
+/* 813BEDB4 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEDB8 | 38 00 00 3A */	li r0, 0x3a
+/* 813BEDBC | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BEDC0 | 48 00 09 6C */	b .L_813BF72C
 .L_813BEDC4:
-/* 813BEDC4 0008D1C4  4B F8 9A 45 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BEDC8 0008D1C8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BEDCC 0008D1CC  40 82 09 60 */	bne .L_813BF72C
-/* 813BEDD0 0008D1D0  7F E3 FB 78 */	mr r3, r31
-/* 813BEDD4 0008D1D4  4B F8 9A 61 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BEDD8 0008D1D8  7C 64 1B 78 */	mr r4, r3
-/* 813BEDDC 0008D1DC  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BEDE0 0008D1E0  4C C6 31 82 */	crclr cr1eq
-/* 813BEDE4 0008D1E4  48 16 F8 BD */	bl OSReport
-/* 813BEDE8 0008D1E8  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEDEC 0008D1EC  38 00 00 1D */	li r0, 0x1d
-/* 813BEDF0 0008D1F0  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BEDF4 0008D1F4  48 00 09 38 */	b .L_813BF72C
+/* 813BEDC4 | 4B F8 9A 45 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BEDC8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BEDCC | 40 82 09 60 */	bne .L_813BF72C
+/* 813BEDD0 | 7F E3 FB 78 */	mr r3, r31
+/* 813BEDD4 | 4B F8 9A 61 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BEDD8 | 7C 64 1B 78 */	mr r4, r3
+/* 813BEDDC | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BEDE0 | 4C C6 31 82 */	crclr cr1eq
+/* 813BEDE4 | 48 16 F8 BD */	bl OSReport
+/* 813BEDE8 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEDEC | 38 00 00 1D */	li r0, 0x1d
+/* 813BEDF0 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BEDF4 | 48 00 09 38 */	b .L_813BF72C
 .L_813BEDF8:
-/* 813BEDF8 0008D1F8  3C 80 30 30 */	lis r4, 0x3030
-/* 813BEDFC 0008D1FC  3C A0 00 01 */	lis r5, 0x1
-/* 813BEE00 0008D200  38 C4 30 30 */	addi r6, r4, 0x3030
-/* 813BEE04 0008D204  4B F8 A1 99 */	bl copy_nand_save_to_sd_async__Q23ipl12NandSDWorkerFUx
-/* 813BEE08 0008D208  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEE0C 0008D20C  38 00 00 1E */	li r0, 0x1e
-/* 813BEE10 0008D210  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BEE14 0008D214  48 00 09 18 */	b .L_813BF72C
+/* 813BEDF8 | 3C 80 30 30 */	lis r4, 0x3030
+/* 813BEDFC | 3C A0 00 01 */	lis r5, 0x1
+/* 813BEE00 | 38 C4 30 30 */	addi r6, r4, 0x3030
+/* 813BEE04 | 4B F8 A1 99 */	bl copy_nand_save_to_sd_async__Q23ipl12NandSDWorkerFUx
+/* 813BEE08 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEE0C | 38 00 00 1E */	li r0, 0x1e
+/* 813BEE10 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BEE14 | 48 00 09 18 */	b .L_813BF72C
 .L_813BEE18:
-/* 813BEE18 0008D218  4B F8 99 F1 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BEE1C 0008D21C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BEE20 0008D220  40 82 09 0C */	bne .L_813BF72C
-/* 813BEE24 0008D224  7F E3 FB 78 */	mr r3, r31
-/* 813BEE28 0008D228  4B F8 9A 0D */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BEE2C 0008D22C  7C 64 1B 78 */	mr r4, r3
-/* 813BEE30 0008D230  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BEE34 0008D234  4C C6 31 82 */	crclr cr1eq
-/* 813BEE38 0008D238  48 16 F8 69 */	bl OSReport
-/* 813BEE3C 0008D23C  7F E3 FB 78 */	mr r3, r31
-/* 813BEE40 0008D240  4B F8 9A 4D */	bl get_nand_save_num__Q23ipl12NandSDWorkerFv
-/* 813BEE44 0008D244  7C 64 1B 78 */	mr r4, r3
-/* 813BEE48 0008D248  38 7D 00 74 */	addi r3, r29, 0x74
-/* 813BEE4C 0008D24C  4C C6 31 82 */	crclr cr1eq
-/* 813BEE50 0008D250  48 16 F8 51 */	bl OSReport
-/* 813BEE54 0008D254  7F E3 FB 78 */	mr r3, r31
-/* 813BEE58 0008D258  4B F8 9C 51 */	bl get_sd_save_num__Q23ipl12NandSDWorkerFv
-/* 813BEE5C 0008D25C  7C 64 1B 78 */	mr r4, r3
-/* 813BEE60 0008D260  38 7D 00 88 */	addi r3, r29, 0x88
-/* 813BEE64 0008D264  4C C6 31 82 */	crclr cr1eq
-/* 813BEE68 0008D268  48 16 F8 39 */	bl OSReport
-/* 813BEE6C 0008D26C  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEE70 0008D270  38 00 00 3B */	li r0, 0x3b
-/* 813BEE74 0008D274  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BEE78 0008D278  48 00 08 B4 */	b .L_813BF72C
+/* 813BEE18 | 4B F8 99 F1 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BEE1C | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BEE20 | 40 82 09 0C */	bne .L_813BF72C
+/* 813BEE24 | 7F E3 FB 78 */	mr r3, r31
+/* 813BEE28 | 4B F8 9A 0D */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BEE2C | 7C 64 1B 78 */	mr r4, r3
+/* 813BEE30 | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BEE34 | 4C C6 31 82 */	crclr cr1eq
+/* 813BEE38 | 48 16 F8 69 */	bl OSReport
+/* 813BEE3C | 7F E3 FB 78 */	mr r3, r31
+/* 813BEE40 | 4B F8 9A 4D */	bl get_nand_save_num__Q23ipl12NandSDWorkerFv
+/* 813BEE44 | 7C 64 1B 78 */	mr r4, r3
+/* 813BEE48 | 38 7D 00 74 */	addi r3, r29, 0x74
+/* 813BEE4C | 4C C6 31 82 */	crclr cr1eq
+/* 813BEE50 | 48 16 F8 51 */	bl OSReport
+/* 813BEE54 | 7F E3 FB 78 */	mr r3, r31
+/* 813BEE58 | 4B F8 9C 51 */	bl get_sd_save_num__Q23ipl12NandSDWorkerFv
+/* 813BEE5C | 7C 64 1B 78 */	mr r4, r3
+/* 813BEE60 | 38 7D 00 88 */	addi r3, r29, 0x88
+/* 813BEE64 | 4C C6 31 82 */	crclr cr1eq
+/* 813BEE68 | 48 16 F8 39 */	bl OSReport
+/* 813BEE6C | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEE70 | 38 00 00 3B */	li r0, 0x3b
+/* 813BEE74 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BEE78 | 48 00 08 B4 */	b .L_813BF72C
 .L_813BEE7C:
-/* 813BEE7C 0008D27C  3C 80 30 30 */	lis r4, 0x3030
-/* 813BEE80 0008D280  3C A0 00 01 */	lis r5, 0x1
-/* 813BEE84 0008D284  38 C4 30 30 */	addi r6, r4, 0x3030
-/* 813BEE88 0008D288  4B F8 A2 59 */	bl nand_save_exist_async__Q23ipl12NandSDWorkerFUx
-/* 813BEE8C 0008D28C  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEE90 0008D290  38 00 00 3C */	li r0, 0x3c
-/* 813BEE94 0008D294  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BEE98 0008D298  48 00 08 94 */	b .L_813BF72C
+/* 813BEE7C | 3C 80 30 30 */	lis r4, 0x3030
+/* 813BEE80 | 3C A0 00 01 */	lis r5, 0x1
+/* 813BEE84 | 38 C4 30 30 */	addi r6, r4, 0x3030
+/* 813BEE88 | 4B F8 A2 59 */	bl nand_save_exist_async__Q23ipl12NandSDWorkerFUx
+/* 813BEE8C | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEE90 | 38 00 00 3C */	li r0, 0x3c
+/* 813BEE94 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BEE98 | 48 00 08 94 */	b .L_813BF72C
 .L_813BEE9C:
-/* 813BEE9C 0008D29C  4B F8 99 6D */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BEEA0 0008D2A0  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BEEA4 0008D2A4  40 82 08 88 */	bne .L_813BF72C
-/* 813BEEA8 0008D2A8  7F E3 FB 78 */	mr r3, r31
-/* 813BEEAC 0008D2AC  4B F8 99 89 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BEEB0 0008D2B0  7C 64 1B 78 */	mr r4, r3
-/* 813BEEB4 0008D2B4  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BEEB8 0008D2B8  4C C6 31 82 */	crclr cr1eq
-/* 813BEEBC 0008D2BC  48 16 F7 E5 */	bl OSReport
-/* 813BEEC0 0008D2C0  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEEC4 0008D2C4  38 00 00 3D */	li r0, 0x3d
-/* 813BEEC8 0008D2C8  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BEECC 0008D2CC  48 00 08 60 */	b .L_813BF72C
+/* 813BEE9C | 4B F8 99 6D */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BEEA0 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BEEA4 | 40 82 08 88 */	bne .L_813BF72C
+/* 813BEEA8 | 7F E3 FB 78 */	mr r3, r31
+/* 813BEEAC | 4B F8 99 89 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BEEB0 | 7C 64 1B 78 */	mr r4, r3
+/* 813BEEB4 | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BEEB8 | 4C C6 31 82 */	crclr cr1eq
+/* 813BEEBC | 48 16 F7 E5 */	bl OSReport
+/* 813BEEC0 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEEC4 | 38 00 00 3D */	li r0, 0x3d
+/* 813BEEC8 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BEECC | 48 00 08 60 */	b .L_813BF72C
 .L_813BEED0:
-/* 813BEED0 0008D2D0  3C 80 30 30 */	lis r4, 0x3030
-/* 813BEED4 0008D2D4  38 84 30 30 */	addi r4, r4, 0x3030
-/* 813BEED8 0008D2D8  4B F8 A2 21 */	bl nand_save_exist_lo_async__Q23ipl12NandSDWorkerFUl
-/* 813BEEDC 0008D2DC  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEEE0 0008D2E0  38 00 00 3E */	li r0, 0x3e
-/* 813BEEE4 0008D2E4  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BEEE8 0008D2E8  48 00 08 44 */	b .L_813BF72C
+/* 813BEED0 | 3C 80 30 30 */	lis r4, 0x3030
+/* 813BEED4 | 38 84 30 30 */	addi r4, r4, 0x3030
+/* 813BEED8 | 4B F8 A2 21 */	bl nand_save_exist_lo_async__Q23ipl12NandSDWorkerFUl
+/* 813BEEDC | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEEE0 | 38 00 00 3E */	li r0, 0x3e
+/* 813BEEE4 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BEEE8 | 48 00 08 44 */	b .L_813BF72C
 .L_813BEEEC:
-/* 813BEEEC 0008D2EC  4B F8 99 1D */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BEEF0 0008D2F0  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BEEF4 0008D2F4  40 82 08 38 */	bne .L_813BF72C
-/* 813BEEF8 0008D2F8  7F E3 FB 78 */	mr r3, r31
-/* 813BEEFC 0008D2FC  4B F8 99 39 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BEF00 0008D300  7C 64 1B 78 */	mr r4, r3
-/* 813BEF04 0008D304  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BEF08 0008D308  4C C6 31 82 */	crclr cr1eq
-/* 813BEF0C 0008D30C  48 16 F7 95 */	bl OSReport
-/* 813BEF10 0008D310  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEF14 0008D314  38 00 00 0E */	li r0, 0xe
-/* 813BEF18 0008D318  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BEF1C 0008D31C  48 00 08 10 */	b .L_813BF72C
+/* 813BEEEC | 4B F8 99 1D */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BEEF0 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BEEF4 | 40 82 08 38 */	bne .L_813BF72C
+/* 813BEEF8 | 7F E3 FB 78 */	mr r3, r31
+/* 813BEEFC | 4B F8 99 39 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BEF00 | 7C 64 1B 78 */	mr r4, r3
+/* 813BEF04 | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BEF08 | 4C C6 31 82 */	crclr cr1eq
+/* 813BEF0C | 48 16 F7 95 */	bl OSReport
+/* 813BEF10 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEF14 | 38 00 00 0E */	li r0, 0xe
+/* 813BEF18 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BEF1C | 48 00 08 10 */	b .L_813BF72C
 .L_813BEF20:
-/* 813BEF20 0008D320  3C 80 30 30 */	lis r4, 0x3030
-/* 813BEF24 0008D324  3C A0 00 01 */	lis r5, 0x1
-/* 813BEF28 0008D328  38 C4 30 30 */	addi r6, r4, 0x3030
-/* 813BEF2C 0008D32C  4B F8 9F D9 */	bl delete_nand_save_async__Q23ipl12NandSDWorkerFUx
-/* 813BEF30 0008D330  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEF34 0008D334  38 00 00 0F */	li r0, 0xf
-/* 813BEF38 0008D338  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BEF3C 0008D33C  48 00 07 F0 */	b .L_813BF72C
+/* 813BEF20 | 3C 80 30 30 */	lis r4, 0x3030
+/* 813BEF24 | 3C A0 00 01 */	lis r5, 0x1
+/* 813BEF28 | 38 C4 30 30 */	addi r6, r4, 0x3030
+/* 813BEF2C | 4B F8 9F D9 */	bl delete_nand_save_async__Q23ipl12NandSDWorkerFUx
+/* 813BEF30 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEF34 | 38 00 00 0F */	li r0, 0xf
+/* 813BEF38 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BEF3C | 48 00 07 F0 */	b .L_813BF72C
 .L_813BEF40:
-/* 813BEF40 0008D340  4B F8 98 C9 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BEF44 0008D344  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BEF48 0008D348  40 82 07 E4 */	bne .L_813BF72C
-/* 813BEF4C 0008D34C  7F E3 FB 78 */	mr r3, r31
-/* 813BEF50 0008D350  4B F8 98 E5 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BEF54 0008D354  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BEF58 0008D358  40 82 00 1C */	bne .L_813BEF74
-/* 813BEF5C 0008D35C  3C 80 30 30 */	lis r4, 0x3030
-/* 813BEF60 0008D360  38 7D 00 9A */	addi r3, r29, 0x9a
-/* 813BEF64 0008D364  38 C4 30 30 */	addi r6, r4, 0x3030
-/* 813BEF68 0008D368  3C A0 00 01 */	lis r5, 0x1
-/* 813BEF6C 0008D36C  4C C6 31 82 */	crclr cr1eq
-/* 813BEF70 0008D370  48 16 F7 31 */	bl OSReport
+/* 813BEF40 | 4B F8 98 C9 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BEF44 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BEF48 | 40 82 07 E4 */	bne .L_813BF72C
+/* 813BEF4C | 7F E3 FB 78 */	mr r3, r31
+/* 813BEF50 | 4B F8 98 E5 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BEF54 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BEF58 | 40 82 00 1C */	bne .L_813BEF74
+/* 813BEF5C | 3C 80 30 30 */	lis r4, 0x3030
+/* 813BEF60 | 38 7D 00 9A */	addi r3, r29, 0x9a
+/* 813BEF64 | 38 C4 30 30 */	addi r6, r4, 0x3030
+/* 813BEF68 | 3C A0 00 01 */	lis r5, 0x1
+/* 813BEF6C | 4C C6 31 82 */	crclr cr1eq
+/* 813BEF70 | 48 16 F7 31 */	bl OSReport
 .L_813BEF74:
-/* 813BEF74 0008D374  7F E3 FB 78 */	mr r3, r31
-/* 813BEF78 0008D378  4B F8 98 BD */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BEF7C 0008D37C  7C 64 1B 78 */	mr r4, r3
-/* 813BEF80 0008D380  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BEF84 0008D384  4C C6 31 82 */	crclr cr1eq
-/* 813BEF88 0008D388  48 16 F7 19 */	bl OSReport
-/* 813BEF8C 0008D38C  7F E3 FB 78 */	mr r3, r31
-/* 813BEF90 0008D390  4B F8 98 FD */	bl get_nand_save_num__Q23ipl12NandSDWorkerFv
-/* 813BEF94 0008D394  7C 64 1B 78 */	mr r4, r3
-/* 813BEF98 0008D398  38 7D 00 74 */	addi r3, r29, 0x74
-/* 813BEF9C 0008D39C  4C C6 31 82 */	crclr cr1eq
-/* 813BEFA0 0008D3A0  48 16 F7 01 */	bl OSReport
-/* 813BEFA4 0008D3A4  7F E3 FB 78 */	mr r3, r31
-/* 813BEFA8 0008D3A8  4B F8 9B 01 */	bl get_sd_save_num__Q23ipl12NandSDWorkerFv
-/* 813BEFAC 0008D3AC  7C 64 1B 78 */	mr r4, r3
-/* 813BEFB0 0008D3B0  38 7D 00 88 */	addi r3, r29, 0x88
-/* 813BEFB4 0008D3B4  4C C6 31 82 */	crclr cr1eq
-/* 813BEFB8 0008D3B8  48 16 F6 E9 */	bl OSReport
-/* 813BEFBC 0008D3BC  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEFC0 0008D3C0  38 00 00 45 */	li r0, 0x45
-/* 813BEFC4 0008D3C4  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BEFC8 0008D3C8  48 00 07 64 */	b .L_813BF72C
+/* 813BEF74 | 7F E3 FB 78 */	mr r3, r31
+/* 813BEF78 | 4B F8 98 BD */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BEF7C | 7C 64 1B 78 */	mr r4, r3
+/* 813BEF80 | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BEF84 | 4C C6 31 82 */	crclr cr1eq
+/* 813BEF88 | 48 16 F7 19 */	bl OSReport
+/* 813BEF8C | 7F E3 FB 78 */	mr r3, r31
+/* 813BEF90 | 4B F8 98 FD */	bl get_nand_save_num__Q23ipl12NandSDWorkerFv
+/* 813BEF94 | 7C 64 1B 78 */	mr r4, r3
+/* 813BEF98 | 38 7D 00 74 */	addi r3, r29, 0x74
+/* 813BEF9C | 4C C6 31 82 */	crclr cr1eq
+/* 813BEFA0 | 48 16 F7 01 */	bl OSReport
+/* 813BEFA4 | 7F E3 FB 78 */	mr r3, r31
+/* 813BEFA8 | 4B F8 9B 01 */	bl get_sd_save_num__Q23ipl12NandSDWorkerFv
+/* 813BEFAC | 7C 64 1B 78 */	mr r4, r3
+/* 813BEFB0 | 38 7D 00 88 */	addi r3, r29, 0x88
+/* 813BEFB4 | 4C C6 31 82 */	crclr cr1eq
+/* 813BEFB8 | 48 16 F6 E9 */	bl OSReport
+/* 813BEFBC | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEFC0 | 38 00 00 45 */	li r0, 0x45
+/* 813BEFC4 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BEFC8 | 48 00 07 64 */	b .L_813BF72C
 .L_813BEFCC:
-/* 813BEFCC 0008D3CC  3C 80 30 30 */	lis r4, 0x3030
-/* 813BEFD0 0008D3D0  3C A0 00 01 */	lis r5, 0x1
-/* 813BEFD4 0008D3D4  38 C4 30 30 */	addi r6, r4, 0x3030
-/* 813BEFD8 0008D3D8  4B F8 A1 09 */	bl nand_save_exist_async__Q23ipl12NandSDWorkerFUx
-/* 813BEFDC 0008D3DC  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BEFE0 0008D3E0  38 00 00 46 */	li r0, 0x46
-/* 813BEFE4 0008D3E4  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BEFE8 0008D3E8  48 00 07 44 */	b .L_813BF72C
+/* 813BEFCC | 3C 80 30 30 */	lis r4, 0x3030
+/* 813BEFD0 | 3C A0 00 01 */	lis r5, 0x1
+/* 813BEFD4 | 38 C4 30 30 */	addi r6, r4, 0x3030
+/* 813BEFD8 | 4B F8 A1 09 */	bl nand_save_exist_async__Q23ipl12NandSDWorkerFUx
+/* 813BEFDC | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BEFE0 | 38 00 00 46 */	li r0, 0x46
+/* 813BEFE4 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BEFE8 | 48 00 07 44 */	b .L_813BF72C
 .L_813BEFEC:
-/* 813BEFEC 0008D3EC  4B F8 98 1D */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BEFF0 0008D3F0  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BEFF4 0008D3F4  40 82 07 38 */	bne .L_813BF72C
-/* 813BEFF8 0008D3F8  7F E3 FB 78 */	mr r3, r31
-/* 813BEFFC 0008D3FC  4B F8 98 39 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF000 0008D400  7C 64 1B 78 */	mr r4, r3
-/* 813BF004 0008D404  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BF008 0008D408  4C C6 31 82 */	crclr cr1eq
-/* 813BF00C 0008D40C  48 16 F6 95 */	bl OSReport
-/* 813BF010 0008D410  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF014 0008D414  38 00 00 47 */	li r0, 0x47
-/* 813BF018 0008D418  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF01C 0008D41C  48 00 07 10 */	b .L_813BF72C
+/* 813BEFEC | 4B F8 98 1D */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BEFF0 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BEFF4 | 40 82 07 38 */	bne .L_813BF72C
+/* 813BEFF8 | 7F E3 FB 78 */	mr r3, r31
+/* 813BEFFC | 4B F8 98 39 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF000 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF004 | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BF008 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF00C | 48 16 F6 95 */	bl OSReport
+/* 813BF010 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF014 | 38 00 00 47 */	li r0, 0x47
+/* 813BF018 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF01C | 48 00 07 10 */	b .L_813BF72C
 .L_813BF020:
-/* 813BF020 0008D420  3C 80 30 30 */	lis r4, 0x3030
-/* 813BF024 0008D424  38 84 30 30 */	addi r4, r4, 0x3030
-/* 813BF028 0008D428  4B F8 A0 D1 */	bl nand_save_exist_lo_async__Q23ipl12NandSDWorkerFUl
-/* 813BF02C 0008D42C  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF030 0008D430  38 00 00 48 */	li r0, 0x48
-/* 813BF034 0008D434  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF038 0008D438  48 00 06 F4 */	b .L_813BF72C
+/* 813BF020 | 3C 80 30 30 */	lis r4, 0x3030
+/* 813BF024 | 38 84 30 30 */	addi r4, r4, 0x3030
+/* 813BF028 | 4B F8 A0 D1 */	bl nand_save_exist_lo_async__Q23ipl12NandSDWorkerFUl
+/* 813BF02C | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF030 | 38 00 00 48 */	li r0, 0x48
+/* 813BF034 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF038 | 48 00 06 F4 */	b .L_813BF72C
 .L_813BF03C:
-/* 813BF03C 0008D43C  4B F8 97 CD */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF040 0008D440  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF044 0008D444  40 82 06 E8 */	bne .L_813BF72C
-/* 813BF048 0008D448  7F E3 FB 78 */	mr r3, r31
-/* 813BF04C 0008D44C  4B F8 97 E9 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF050 0008D450  7C 64 1B 78 */	mr r4, r3
-/* 813BF054 0008D454  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BF058 0008D458  4C C6 31 82 */	crclr cr1eq
-/* 813BF05C 0008D45C  48 16 F6 45 */	bl OSReport
-/* 813BF060 0008D460  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF064 0008D464  38 00 00 1F */	li r0, 0x1f
-/* 813BF068 0008D468  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF06C 0008D46C  48 00 06 C0 */	b .L_813BF72C
+/* 813BF03C | 4B F8 97 CD */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF040 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF044 | 40 82 06 E8 */	bne .L_813BF72C
+/* 813BF048 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF04C | 4B F8 97 E9 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF050 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF054 | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BF058 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF05C | 48 16 F6 45 */	bl OSReport
+/* 813BF060 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF064 | 38 00 00 1F */	li r0, 0x1f
+/* 813BF068 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF06C | 48 00 06 C0 */	b .L_813BF72C
 .L_813BF070:
-/* 813BF070 0008D470  3C 80 30 30 */	lis r4, 0x3030
-/* 813BF074 0008D474  38 84 30 30 */	addi r4, r4, 0x3030
-/* 813BF078 0008D478  4B F8 9F 3D */	bl copy_sd_save_to_nand_async__Q23ipl12NandSDWorkerFUl
-/* 813BF07C 0008D47C  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF080 0008D480  38 00 00 20 */	li r0, 0x20
-/* 813BF084 0008D484  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF088 0008D488  48 00 06 A4 */	b .L_813BF72C
+/* 813BF070 | 3C 80 30 30 */	lis r4, 0x3030
+/* 813BF074 | 38 84 30 30 */	addi r4, r4, 0x3030
+/* 813BF078 | 4B F8 9F 3D */	bl copy_sd_save_to_nand_async__Q23ipl12NandSDWorkerFUl
+/* 813BF07C | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF080 | 38 00 00 20 */	li r0, 0x20
+/* 813BF084 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF088 | 48 00 06 A4 */	b .L_813BF72C
 .L_813BF08C:
-/* 813BF08C 0008D48C  4B F8 97 7D */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF090 0008D490  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF094 0008D494  40 82 06 98 */	bne .L_813BF72C
-/* 813BF098 0008D498  7F E3 FB 78 */	mr r3, r31
-/* 813BF09C 0008D49C  4B F8 97 99 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF0A0 0008D4A0  3C BF 00 01 */	addis r5, r31, 0x1
-/* 813BF0A4 0008D4A4  7C 64 1B 78 */	mr r4, r3
-/* 813BF0A8 0008D4A8  90 65 F3 B0 */	stw r3, -0xc50(r5)
-/* 813BF0AC 0008D4AC  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BF0B0 0008D4B0  4C C6 31 82 */	crclr cr1eq
-/* 813BF0B4 0008D4B4  48 16 F5 ED */	bl OSReport
-/* 813BF0B8 0008D4B8  7F E3 FB 78 */	mr r3, r31
-/* 813BF0BC 0008D4BC  4B F8 97 D1 */	bl get_nand_save_num__Q23ipl12NandSDWorkerFv
-/* 813BF0C0 0008D4C0  7C 64 1B 78 */	mr r4, r3
-/* 813BF0C4 0008D4C4  38 7D 00 74 */	addi r3, r29, 0x74
-/* 813BF0C8 0008D4C8  4C C6 31 82 */	crclr cr1eq
-/* 813BF0CC 0008D4CC  48 16 F5 D5 */	bl OSReport
-/* 813BF0D0 0008D4D0  7F E3 FB 78 */	mr r3, r31
-/* 813BF0D4 0008D4D4  4B F8 99 D5 */	bl get_sd_save_num__Q23ipl12NandSDWorkerFv
-/* 813BF0D8 0008D4D8  7C 64 1B 78 */	mr r4, r3
-/* 813BF0DC 0008D4DC  38 7D 00 88 */	addi r3, r29, 0x88
-/* 813BF0E0 0008D4E0  4C C6 31 82 */	crclr cr1eq
-/* 813BF0E4 0008D4E4  48 16 F5 BD */	bl OSReport
-/* 813BF0E8 0008D4E8  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF0EC 0008D4EC  38 00 00 41 */	li r0, 0x41
-/* 813BF0F0 0008D4F0  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF0F4 0008D4F4  48 00 06 38 */	b .L_813BF72C
+/* 813BF08C | 4B F8 97 7D */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF090 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF094 | 40 82 06 98 */	bne .L_813BF72C
+/* 813BF098 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF09C | 4B F8 97 99 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF0A0 | 3C BF 00 01 */	addis r5, r31, 0x1
+/* 813BF0A4 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF0A8 | 90 65 F3 B0 */	stw r3, -0xc50(r5)
+/* 813BF0AC | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BF0B0 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF0B4 | 48 16 F5 ED */	bl OSReport
+/* 813BF0B8 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF0BC | 4B F8 97 D1 */	bl get_nand_save_num__Q23ipl12NandSDWorkerFv
+/* 813BF0C0 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF0C4 | 38 7D 00 74 */	addi r3, r29, 0x74
+/* 813BF0C8 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF0CC | 48 16 F5 D5 */	bl OSReport
+/* 813BF0D0 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF0D4 | 4B F8 99 D5 */	bl get_sd_save_num__Q23ipl12NandSDWorkerFv
+/* 813BF0D8 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF0DC | 38 7D 00 88 */	addi r3, r29, 0x88
+/* 813BF0E0 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF0E4 | 48 16 F5 BD */	bl OSReport
+/* 813BF0E8 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF0EC | 38 00 00 41 */	li r0, 0x41
+/* 813BF0F0 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF0F4 | 48 00 06 38 */	b .L_813BF72C
 .L_813BF0F8:
-/* 813BF0F8 0008D4F8  3C 80 30 30 */	lis r4, 0x3030
-/* 813BF0FC 0008D4FC  38 84 30 30 */	addi r4, r4, 0x3030
-/* 813BF100 0008D500  4B F8 A0 49 */	bl sd_app_exist_async__Q23ipl12NandSDWorkerFUl
-/* 813BF104 0008D504  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF108 0008D508  38 00 00 42 */	li r0, 0x42
-/* 813BF10C 0008D50C  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF110 0008D510  48 00 06 1C */	b .L_813BF72C
+/* 813BF0F8 | 3C 80 30 30 */	lis r4, 0x3030
+/* 813BF0FC | 38 84 30 30 */	addi r4, r4, 0x3030
+/* 813BF100 | 4B F8 A0 49 */	bl sd_app_exist_async__Q23ipl12NandSDWorkerFUl
+/* 813BF104 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF108 | 38 00 00 42 */	li r0, 0x42
+/* 813BF10C | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF110 | 48 00 06 1C */	b .L_813BF72C
 .L_813BF114:
-/* 813BF114 0008D514  4B F8 96 F5 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF118 0008D518  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF11C 0008D51C  40 82 06 10 */	bne .L_813BF72C
-/* 813BF120 0008D520  7F E3 FB 78 */	mr r3, r31
-/* 813BF124 0008D524  4B F8 97 11 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF128 0008D528  7C 64 1B 78 */	mr r4, r3
-/* 813BF12C 0008D52C  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BF130 0008D530  4C C6 31 82 */	crclr cr1eq
-/* 813BF134 0008D534  48 16 F5 6D */	bl OSReport
-/* 813BF138 0008D538  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF13C 0008D53C  38 00 00 06 */	li r0, 0x6
-/* 813BF140 0008D540  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF144 0008D544  48 00 05 E8 */	b .L_813BF72C
+/* 813BF114 | 4B F8 96 F5 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF118 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF11C | 40 82 06 10 */	bne .L_813BF72C
+/* 813BF120 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF124 | 4B F8 97 11 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF128 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF12C | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BF130 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF134 | 48 16 F5 6D */	bl OSReport
+/* 813BF138 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF13C | 38 00 00 06 */	li r0, 0x6
+/* 813BF140 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF144 | 48 00 05 E8 */	b .L_813BF72C
 .L_813BF148:
-/* 813BF148 0008D548  4B F8 9E 4D */	bl get_nand_user_free_area_async__Q23ipl12NandSDWorkerFv
-/* 813BF14C 0008D54C  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF150 0008D550  38 00 00 07 */	li r0, 0x7
-/* 813BF154 0008D554  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF158 0008D558  48 00 05 D4 */	b .L_813BF72C
+/* 813BF148 | 4B F8 9E 4D */	bl get_nand_user_free_area_async__Q23ipl12NandSDWorkerFv
+/* 813BF14C | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF150 | 38 00 00 07 */	li r0, 0x7
+/* 813BF154 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF158 | 48 00 05 D4 */	b .L_813BF72C
 .L_813BF15C:
-/* 813BF15C 0008D55C  4B F8 96 AD */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF160 0008D560  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF164 0008D564  40 82 05 C8 */	bne .L_813BF72C
-/* 813BF168 0008D568  7F E3 FB 78 */	mr r3, r31
-/* 813BF16C 0008D56C  4B F8 96 C9 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF170 0008D570  7C 64 1B 78 */	mr r4, r3
-/* 813BF174 0008D574  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BF178 0008D578  4C C6 31 82 */	crclr cr1eq
-/* 813BF17C 0008D57C  48 16 F5 25 */	bl OSReport
-/* 813BF180 0008D580  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF184 0008D584  38 00 00 08 */	li r0, 0x8
-/* 813BF188 0008D588  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF18C 0008D58C  48 00 05 A0 */	b .L_813BF72C
+/* 813BF15C | 4B F8 96 AD */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF160 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF164 | 40 82 05 C8 */	bne .L_813BF72C
+/* 813BF168 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF16C | 4B F8 96 C9 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF170 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF174 | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BF178 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF17C | 48 16 F5 25 */	bl OSReport
+/* 813BF180 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF184 | 38 00 00 08 */	li r0, 0x8
+/* 813BF188 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF18C | 48 00 05 A0 */	b .L_813BF72C
 .L_813BF190:
-/* 813BF190 0008D590  4B F8 96 FD */	bl get_nand_save_num__Q23ipl12NandSDWorkerFv
-/* 813BF194 0008D594  7C 64 1B 78 */	mr r4, r3
-/* 813BF198 0008D598  38 7D 00 74 */	addi r3, r29, 0x74
-/* 813BF19C 0008D59C  4C C6 31 82 */	crclr cr1eq
-/* 813BF1A0 0008D5A0  48 16 F5 01 */	bl OSReport
-/* 813BF1A4 0008D5A4  7F E3 FB 78 */	mr r3, r31
-/* 813BF1A8 0008D5A8  38 9F 00 08 */	addi r4, r31, 0x8
-/* 813BF1AC 0008D5AC  4B F8 9B 95 */	bl list_nand_save_async__Q23ipl12NandSDWorkerFPUx
-/* 813BF1B0 0008D5B0  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF1B4 0008D5B4  38 00 00 09 */	li r0, 0x9
-/* 813BF1B8 0008D5B8  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF1BC 0008D5BC  48 00 05 70 */	b .L_813BF72C
+/* 813BF190 | 4B F8 96 FD */	bl get_nand_save_num__Q23ipl12NandSDWorkerFv
+/* 813BF194 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF198 | 38 7D 00 74 */	addi r3, r29, 0x74
+/* 813BF19C | 4C C6 31 82 */	crclr cr1eq
+/* 813BF1A0 | 48 16 F5 01 */	bl OSReport
+/* 813BF1A4 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF1A8 | 38 9F 00 08 */	addi r4, r31, 0x8
+/* 813BF1AC | 4B F8 9B 95 */	bl list_nand_save_async__Q23ipl12NandSDWorkerFPUx
+/* 813BF1B0 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF1B4 | 38 00 00 09 */	li r0, 0x9
+/* 813BF1B8 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF1BC | 48 00 05 70 */	b .L_813BF72C
 .L_813BF1C0:
-/* 813BF1C0 0008D5C0  4B F8 96 49 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF1C4 0008D5C4  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF1C8 0008D5C8  40 82 05 64 */	bne .L_813BF72C
-/* 813BF1CC 0008D5CC  7F E3 FB 78 */	mr r3, r31
-/* 813BF1D0 0008D5D0  4B F8 96 65 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF1D4 0008D5D4  7C 64 1B 78 */	mr r4, r3
-/* 813BF1D8 0008D5D8  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BF1DC 0008D5DC  4C C6 31 82 */	crclr cr1eq
-/* 813BF1E0 0008D5E0  48 16 F4 C1 */	bl OSReport
-/* 813BF1E4 0008D5E4  3B 80 00 00 */	li r28, 0x0
-/* 813BF1E8 0008D5E8  3B C0 00 00 */	li r30, 0x0
-/* 813BF1EC 0008D5EC  48 00 00 24 */	b .L_813BF210
+/* 813BF1C0 | 4B F8 96 49 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF1C4 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF1C8 | 40 82 05 64 */	bne .L_813BF72C
+/* 813BF1CC | 7F E3 FB 78 */	mr r3, r31
+/* 813BF1D0 | 4B F8 96 65 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF1D4 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF1D8 | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BF1DC | 4C C6 31 82 */	crclr cr1eq
+/* 813BF1E0 | 48 16 F4 C1 */	bl OSReport
+/* 813BF1E4 | 3B 80 00 00 */	li r28, 0x0
+/* 813BF1E8 | 3B C0 00 00 */	li r30, 0x0
+/* 813BF1EC | 48 00 00 24 */	b .L_813BF210
 .L_813BF1F0:
-/* 813BF1F0 0008D5F0  7C 9F F2 14 */	add r4, r31, r30
-/* 813BF1F4 0008D5F4  38 7D 00 BC */	addi r3, r29, 0xbc
-/* 813BF1F8 0008D5F8  80 A4 00 08 */	lwz r5, 0x8(r4)
-/* 813BF1FC 0008D5FC  80 C4 00 0C */	lwz r6, 0xc(r4)
-/* 813BF200 0008D600  4C C6 31 82 */	crclr cr1eq
-/* 813BF204 0008D604  48 16 F4 9D */	bl OSReport
-/* 813BF208 0008D608  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 813BF20C 0008D60C  3B DE 00 08 */	addi r30, r30, 0x8
+/* 813BF1F0 | 7C 9F F2 14 */	add r4, r31, r30
+/* 813BF1F4 | 38 7D 00 BC */	addi r3, r29, 0xbc
+/* 813BF1F8 | 80 A4 00 08 */	lwz r5, 0x8(r4)
+/* 813BF1FC | 80 C4 00 0C */	lwz r6, 0xc(r4)
+/* 813BF200 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF204 | 48 16 F4 9D */	bl OSReport
+/* 813BF208 | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 813BF20C | 3B DE 00 08 */	addi r30, r30, 0x8
 .L_813BF210:
-/* 813BF210 0008D610  7F E3 FB 78 */	mr r3, r31
-/* 813BF214 0008D614  4B F8 96 79 */	bl get_nand_save_num__Q23ipl12NandSDWorkerFv
-/* 813BF218 0008D618  7C 1C 18 40 */	cmplw r28, r3
-/* 813BF21C 0008D61C  41 80 FF D4 */	blt .L_813BF1F0
-/* 813BF220 0008D620  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF224 0008D624  38 00 00 0A */	li r0, 0xa
-/* 813BF228 0008D628  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF22C 0008D62C  48 00 05 00 */	b .L_813BF72C
+/* 813BF210 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF214 | 4B F8 96 79 */	bl get_nand_save_num__Q23ipl12NandSDWorkerFv
+/* 813BF218 | 7C 1C 18 40 */	cmplw r28, r3
+/* 813BF21C | 41 80 FF D4 */	blt .L_813BF1F0
+/* 813BF220 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF224 | 38 00 00 0A */	li r0, 0xa
+/* 813BF228 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF22C | 48 00 05 00 */	b .L_813BF72C
 .L_813BF230:
-/* 813BF230 0008D630  80 A3 00 08 */	lwz r5, 0x8(r3)
-/* 813BF234 0008D634  38 E3 03 08 */	addi r7, r3, 0x308
-/* 813BF238 0008D638  80 C3 00 0C */	lwz r6, 0xc(r3)
-/* 813BF23C 0008D63C  4B F8 9B 19 */	bl get_nand_save_banner_async__Q23ipl12NandSDWorkerFUxP17WIISaveBannerFile
-/* 813BF240 0008D640  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF244 0008D644  38 00 00 0B */	li r0, 0xb
-/* 813BF248 0008D648  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF24C 0008D64C  48 00 04 E0 */	b .L_813BF72C
+/* 813BF230 | 80 A3 00 08 */	lwz r5, 0x8(r3)
+/* 813BF234 | 38 E3 03 08 */	addi r7, r3, 0x308
+/* 813BF238 | 80 C3 00 0C */	lwz r6, 0xc(r3)
+/* 813BF23C | 4B F8 9B 19 */	bl get_nand_save_banner_async__Q23ipl12NandSDWorkerFUxP17WIISaveBannerFile
+/* 813BF240 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF244 | 38 00 00 0B */	li r0, 0xb
+/* 813BF248 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF24C | 48 00 04 E0 */	b .L_813BF72C
 .L_813BF250:
-/* 813BF250 0008D650  4B F8 95 B9 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF254 0008D654  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF258 0008D658  40 82 04 D4 */	bne .L_813BF72C
-/* 813BF25C 0008D65C  7F E3 FB 78 */	mr r3, r31
-/* 813BF260 0008D660  4B F8 95 D5 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF264 0008D664  7C 64 1B 78 */	mr r4, r3
-/* 813BF268 0008D668  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BF26C 0008D66C  4C C6 31 82 */	crclr cr1eq
-/* 813BF270 0008D670  48 16 F4 31 */	bl OSReport
-/* 813BF274 0008D674  7F E3 FB 78 */	mr r3, r31
-/* 813BF278 0008D678  4B F8 95 BD */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF27C 0008D67C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF280 0008D680  40 82 00 38 */	bne .L_813BF2B8
-/* 813BF284 0008D684  80 9F 03 08 */	lwz r4, 0x308(r31)
-/* 813BF288 0008D688  38 7D 00 D6 */	addi r3, r29, 0xd6
-/* 813BF28C 0008D68C  4C C6 31 82 */	crclr cr1eq
-/* 813BF290 0008D690  48 16 F4 11 */	bl OSReport
-/* 813BF294 0008D694  80 BF 00 08 */	lwz r5, 0x8(r31)
-/* 813BF298 0008D698  7F E3 FB 78 */	mr r3, r31
-/* 813BF29C 0008D69C  80 DF 00 0C */	lwz r6, 0xc(r31)
-/* 813BF2A0 0008D6A0  4B F8 96 0D */	bl get_cached_nand_save_banner__Q23ipl12NandSDWorkerFUx
-/* 813BF2A4 0008D6A4  7C 64 1B 78 */	mr r4, r3
-/* 813BF2A8 0008D6A8  38 7D 00 EF */	addi r3, r29, 0xef
-/* 813BF2AC 0008D6AC  80 84 00 00 */	lwz r4, 0x0(r4)
-/* 813BF2B0 0008D6B0  4C C6 31 82 */	crclr cr1eq
-/* 813BF2B4 0008D6B4  48 16 F3 ED */	bl OSReport
+/* 813BF250 | 4B F8 95 B9 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF254 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF258 | 40 82 04 D4 */	bne .L_813BF72C
+/* 813BF25C | 7F E3 FB 78 */	mr r3, r31
+/* 813BF260 | 4B F8 95 D5 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF264 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF268 | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BF26C | 4C C6 31 82 */	crclr cr1eq
+/* 813BF270 | 48 16 F4 31 */	bl OSReport
+/* 813BF274 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF278 | 4B F8 95 BD */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF27C | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF280 | 40 82 00 38 */	bne .L_813BF2B8
+/* 813BF284 | 80 9F 03 08 */	lwz r4, 0x308(r31)
+/* 813BF288 | 38 7D 00 D6 */	addi r3, r29, 0xd6
+/* 813BF28C | 4C C6 31 82 */	crclr cr1eq
+/* 813BF290 | 48 16 F4 11 */	bl OSReport
+/* 813BF294 | 80 BF 00 08 */	lwz r5, 0x8(r31)
+/* 813BF298 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF29C | 80 DF 00 0C */	lwz r6, 0xc(r31)
+/* 813BF2A0 | 4B F8 96 0D */	bl get_cached_nand_save_banner__Q23ipl12NandSDWorkerFUx
+/* 813BF2A4 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF2A8 | 38 7D 00 EF */	addi r3, r29, 0xef
+/* 813BF2AC | 80 84 00 00 */	lwz r4, 0x0(r4)
+/* 813BF2B0 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF2B4 | 48 16 F3 ED */	bl OSReport
 .L_813BF2B8:
-/* 813BF2B8 0008D6B8  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF2BC 0008D6BC  38 00 00 0C */	li r0, 0xc
-/* 813BF2C0 0008D6C0  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF2C4 0008D6C4  48 00 04 68 */	b .L_813BF72C
+/* 813BF2B8 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF2BC | 38 00 00 0C */	li r0, 0xc
+/* 813BF2C0 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF2C4 | 48 00 04 68 */	b .L_813BF72C
 .L_813BF2C8:
-/* 813BF2C8 0008D6C8  80 A3 00 08 */	lwz r5, 0x8(r3)
-/* 813BF2CC 0008D6CC  80 C3 00 0C */	lwz r6, 0xc(r3)
-/* 813BF2D0 0008D6D0  4B F8 9C 05 */	bl get_nand_save_size_async__Q23ipl12NandSDWorkerFUx
-/* 813BF2D4 0008D6D4  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF2D8 0008D6D8  38 00 00 0D */	li r0, 0xd
-/* 813BF2DC 0008D6DC  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF2E0 0008D6E0  48 00 04 4C */	b .L_813BF72C
+/* 813BF2C8 | 80 A3 00 08 */	lwz r5, 0x8(r3)
+/* 813BF2CC | 80 C3 00 0C */	lwz r6, 0xc(r3)
+/* 813BF2D0 | 4B F8 9C 05 */	bl get_nand_save_size_async__Q23ipl12NandSDWorkerFUx
+/* 813BF2D4 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF2D8 | 38 00 00 0D */	li r0, 0xd
+/* 813BF2DC | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF2E0 | 48 00 04 4C */	b .L_813BF72C
 .L_813BF2E4:
-/* 813BF2E4 0008D6E4  4B F8 95 25 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF2E8 0008D6E8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF2EC 0008D6EC  40 82 04 40 */	bne .L_813BF72C
-/* 813BF2F0 0008D6F0  7F E3 FB 78 */	mr r3, r31
-/* 813BF2F4 0008D6F4  4B F8 95 41 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF2F8 0008D6F8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF2FC 0008D6FC  7C 7C 1B 78 */	mr r28, r3
-/* 813BF300 0008D700  41 80 00 40 */	blt .L_813BF340
-/* 813BF304 0008D704  80 BF 00 08 */	lwz r5, 0x8(r31)
-/* 813BF308 0008D708  7F 87 E3 78 */	mr r7, r28
-/* 813BF30C 0008D70C  80 DF 00 0C */	lwz r6, 0xc(r31)
-/* 813BF310 0008D710  38 7D 01 0F */	addi r3, r29, 0x10f
-/* 813BF314 0008D714  4C C6 31 82 */	crclr cr1eq
-/* 813BF318 0008D718  48 16 F3 89 */	bl OSReport
-/* 813BF31C 0008D71C  80 BF 00 08 */	lwz r5, 0x8(r31)
-/* 813BF320 0008D720  7F E3 FB 78 */	mr r3, r31
-/* 813BF324 0008D724  80 DF 00 0C */	lwz r6, 0xc(r31)
-/* 813BF328 0008D728  4B F8 96 ED */	bl get_cached_nand_save_size__Q23ipl12NandSDWorkerFUx
-/* 813BF32C 0008D72C  7C 64 1B 78 */	mr r4, r3
-/* 813BF330 0008D730  38 7D 01 2E */	addi r3, r29, 0x12e
-/* 813BF334 0008D734  4C C6 31 82 */	crclr cr1eq
-/* 813BF338 0008D738  48 16 F3 69 */	bl OSReport
-/* 813BF33C 0008D73C  48 00 00 28 */	b .L_813BF364
+/* 813BF2E4 | 4B F8 95 25 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF2E8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF2EC | 40 82 04 40 */	bne .L_813BF72C
+/* 813BF2F0 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF2F4 | 4B F8 95 41 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF2F8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF2FC | 7C 7C 1B 78 */	mr r28, r3
+/* 813BF300 | 41 80 00 40 */	blt .L_813BF340
+/* 813BF304 | 80 BF 00 08 */	lwz r5, 0x8(r31)
+/* 813BF308 | 7F 87 E3 78 */	mr r7, r28
+/* 813BF30C | 80 DF 00 0C */	lwz r6, 0xc(r31)
+/* 813BF310 | 38 7D 01 0F */	addi r3, r29, 0x10f
+/* 813BF314 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF318 | 48 16 F3 89 */	bl OSReport
+/* 813BF31C | 80 BF 00 08 */	lwz r5, 0x8(r31)
+/* 813BF320 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF324 | 80 DF 00 0C */	lwz r6, 0xc(r31)
+/* 813BF328 | 4B F8 96 ED */	bl get_cached_nand_save_size__Q23ipl12NandSDWorkerFUx
+/* 813BF32C | 7C 64 1B 78 */	mr r4, r3
+/* 813BF330 | 38 7D 01 2E */	addi r3, r29, 0x12e
+/* 813BF334 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF338 | 48 16 F3 69 */	bl OSReport
+/* 813BF33C | 48 00 00 28 */	b .L_813BF364
 .L_813BF340:
-/* 813BF340 0008D740  7F 84 E3 78 */	mr r4, r28
-/* 813BF344 0008D744  38 7D 01 45 */	addi r3, r29, 0x145
-/* 813BF348 0008D748  4C C6 31 82 */	crclr cr1eq
-/* 813BF34C 0008D74C  48 16 F3 55 */	bl OSReport
-/* 813BF350 0008D750  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF354 0008D754  38 00 00 4F */	li r0, 0x4f
-/* 813BF358 0008D758  93 83 F3 B0 */	stw r28, -0xc50(r3)
-/* 813BF35C 0008D75C  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF360 0008D760  48 00 03 CC */	b .L_813BF72C
+/* 813BF340 | 7F 84 E3 78 */	mr r4, r28
+/* 813BF344 | 38 7D 01 45 */	addi r3, r29, 0x145
+/* 813BF348 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF34C | 48 16 F3 55 */	bl OSReport
+/* 813BF350 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF354 | 38 00 00 4F */	li r0, 0x4f
+/* 813BF358 | 93 83 F3 B0 */	stw r28, -0xc50(r3)
+/* 813BF35C | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF360 | 48 00 03 CC */	b .L_813BF72C
 .L_813BF364:
-/* 813BF364 0008D764  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF368 0008D768  38 00 00 10 */	li r0, 0x10
-/* 813BF36C 0008D76C  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF370 0008D770  48 00 03 BC */	b .L_813BF72C
+/* 813BF364 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF368 | 38 00 00 10 */	li r0, 0x10
+/* 813BF36C | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF370 | 48 00 03 BC */	b .L_813BF72C
 .L_813BF374:
-/* 813BF374 0008D774  4B F8 95 11 */	bl get_sd_state__Q23ipl12NandSDWorkerFv
-/* 813BF378 0008D778  2C 03 00 02 */	cmpwi r3, 0x2
-/* 813BF37C 0008D77C  40 82 03 B0 */	bne .L_813BF72C
-/* 813BF380 0008D780  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF384 0008D784  38 00 00 11 */	li r0, 0x11
-/* 813BF388 0008D788  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF38C 0008D78C  48 00 03 A0 */	b .L_813BF72C
+/* 813BF374 | 4B F8 95 11 */	bl get_sd_state__Q23ipl12NandSDWorkerFv
+/* 813BF378 | 2C 03 00 02 */	cmpwi r3, 0x2
+/* 813BF37C | 40 82 03 B0 */	bne .L_813BF72C
+/* 813BF380 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF384 | 38 00 00 11 */	li r0, 0x11
+/* 813BF388 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF38C | 48 00 03 A0 */	b .L_813BF72C
 .L_813BF390:
-/* 813BF390 0008D790  4B F8 99 A9 */	bl mount_sd_async__Q23ipl12NandSDWorkerFv
-/* 813BF394 0008D794  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF398 0008D798  38 00 00 12 */	li r0, 0x12
-/* 813BF39C 0008D79C  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF3A0 0008D7A0  48 00 03 8C */	b .L_813BF72C
+/* 813BF390 | 4B F8 99 A9 */	bl mount_sd_async__Q23ipl12NandSDWorkerFv
+/* 813BF394 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF398 | 38 00 00 12 */	li r0, 0x12
+/* 813BF39C | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF3A0 | 48 00 03 8C */	b .L_813BF72C
 .L_813BF3A4:
-/* 813BF3A4 0008D7A4  4B F8 94 65 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF3A8 0008D7A8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF3AC 0008D7AC  40 82 03 80 */	bne .L_813BF72C
-/* 813BF3B0 0008D7B0  7F E3 FB 78 */	mr r3, r31
-/* 813BF3B4 0008D7B4  4B F8 94 81 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF3B8 0008D7B8  7C 64 1B 78 */	mr r4, r3
-/* 813BF3BC 0008D7BC  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BF3C0 0008D7C0  4C C6 31 82 */	crclr cr1eq
-/* 813BF3C4 0008D7C4  48 16 F2 DD */	bl OSReport
-/* 813BF3C8 0008D7C8  7F E3 FB 78 */	mr r3, r31
-/* 813BF3CC 0008D7CC  4B F8 94 B9 */	bl get_sd_state__Q23ipl12NandSDWorkerFv
-/* 813BF3D0 0008D7D0  7C 64 1B 78 */	mr r4, r3
-/* 813BF3D4 0008D7D4  38 7D 00 66 */	addi r3, r29, 0x66
-/* 813BF3D8 0008D7D8  4C C6 31 82 */	crclr cr1eq
-/* 813BF3DC 0008D7DC  48 16 F2 C5 */	bl OSReport
-/* 813BF3E0 0008D7E0  7F E3 FB 78 */	mr r3, r31
-/* 813BF3E4 0008D7E4  4B F8 94 A1 */	bl get_sd_state__Q23ipl12NandSDWorkerFv
-/* 813BF3E8 0008D7E8  2C 03 00 06 */	cmpwi r3, 0x6
-/* 813BF3EC 0008D7EC  40 82 00 44 */	bne .L_813BF430
-/* 813BF3F0 0008D7F0  7F E3 FB 78 */	mr r3, r31
-/* 813BF3F4 0008D7F4  4B F8 98 AD */	bl is_sd_write_protected__Q23ipl12NandSDWorkerFv
-/* 813BF3F8 0008D7F8  7C 64 1B 78 */	mr r4, r3
-/* 813BF3FC 0008D7FC  38 7D 00 36 */	addi r3, r29, 0x36
-/* 813BF400 0008D800  4C C6 31 82 */	crclr cr1eq
-/* 813BF404 0008D804  48 16 F2 9D */	bl OSReport
-/* 813BF408 0008D808  7F E3 FB 78 */	mr r3, r31
-/* 813BF40C 0008D80C  4B F8 98 B9 */	bl get_sd_drive_letter__Q23ipl12NandSDWorkerFv
-/* 813BF410 0008D810  7C 64 07 74 */	extsb r4, r3
-/* 813BF414 0008D814  38 7D 00 51 */	addi r3, r29, 0x51
-/* 813BF418 0008D818  4C C6 31 82 */	crclr cr1eq
-/* 813BF41C 0008D81C  48 16 F2 85 */	bl OSReport
-/* 813BF420 0008D820  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF424 0008D824  38 00 00 13 */	li r0, 0x13
-/* 813BF428 0008D828  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF42C 0008D82C  48 00 03 00 */	b .L_813BF72C
+/* 813BF3A4 | 4B F8 94 65 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF3A8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF3AC | 40 82 03 80 */	bne .L_813BF72C
+/* 813BF3B0 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF3B4 | 4B F8 94 81 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF3B8 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF3BC | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BF3C0 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF3C4 | 48 16 F2 DD */	bl OSReport
+/* 813BF3C8 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF3CC | 4B F8 94 B9 */	bl get_sd_state__Q23ipl12NandSDWorkerFv
+/* 813BF3D0 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF3D4 | 38 7D 00 66 */	addi r3, r29, 0x66
+/* 813BF3D8 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF3DC | 48 16 F2 C5 */	bl OSReport
+/* 813BF3E0 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF3E4 | 4B F8 94 A1 */	bl get_sd_state__Q23ipl12NandSDWorkerFv
+/* 813BF3E8 | 2C 03 00 06 */	cmpwi r3, 0x6
+/* 813BF3EC | 40 82 00 44 */	bne .L_813BF430
+/* 813BF3F0 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF3F4 | 4B F8 98 AD */	bl is_sd_write_protected__Q23ipl12NandSDWorkerFv
+/* 813BF3F8 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF3FC | 38 7D 00 36 */	addi r3, r29, 0x36
+/* 813BF400 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF404 | 48 16 F2 9D */	bl OSReport
+/* 813BF408 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF40C | 4B F8 98 B9 */	bl get_sd_drive_letter__Q23ipl12NandSDWorkerFv
+/* 813BF410 | 7C 64 07 74 */	extsb r4, r3
+/* 813BF414 | 38 7D 00 51 */	addi r3, r29, 0x51
+/* 813BF418 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF41C | 48 16 F2 85 */	bl OSReport
+/* 813BF420 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF424 | 38 00 00 13 */	li r0, 0x13
+/* 813BF428 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF42C | 48 00 03 00 */	b .L_813BF72C
 .L_813BF430:
-/* 813BF430 0008D830  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF434 0008D834  38 00 00 10 */	li r0, 0x10
-/* 813BF438 0008D838  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF43C 0008D83C  48 00 02 F0 */	b .L_813BF72C
+/* 813BF430 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF434 | 38 00 00 10 */	li r0, 0x10
+/* 813BF438 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF43C | 48 00 02 F0 */	b .L_813BF72C
 .L_813BF440:
-/* 813BF440 0008D840  38 80 00 00 */	li r4, 0x0
-/* 813BF444 0008D844  38 A0 01 00 */	li r5, 0x100
-/* 813BF448 0008D848  38 63 02 08 */	addi r3, r3, 0x208
-/* 813BF44C 0008D84C  4B F7 0E E9 */	bl memset
-/* 813BF450 0008D850  7F E3 FB 78 */	mr r3, r31
-/* 813BF454 0008D854  38 9F 02 08 */	addi r4, r31, 0x208
-/* 813BF458 0008D858  4B F8 99 21 */	bl list_sd_save_async__Q23ipl12NandSDWorkerFPUl
-/* 813BF45C 0008D85C  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF460 0008D860  38 00 00 14 */	li r0, 0x14
-/* 813BF464 0008D864  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF468 0008D868  48 00 02 C4 */	b .L_813BF72C
+/* 813BF440 | 38 80 00 00 */	li r4, 0x0
+/* 813BF444 | 38 A0 01 00 */	li r5, 0x100
+/* 813BF448 | 38 63 02 08 */	addi r3, r3, 0x208
+/* 813BF44C | 4B F7 0E E9 */	bl memset
+/* 813BF450 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF454 | 38 9F 02 08 */	addi r4, r31, 0x208
+/* 813BF458 | 4B F8 99 21 */	bl list_sd_save_async__Q23ipl12NandSDWorkerFPUl
+/* 813BF45C | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF460 | 38 00 00 14 */	li r0, 0x14
+/* 813BF464 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF468 | 48 00 02 C4 */	b .L_813BF72C
 .L_813BF46C:
-/* 813BF46C 0008D86C  4B F8 93 9D */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF470 0008D870  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF474 0008D874  40 82 02 B8 */	bne .L_813BF72C
-/* 813BF478 0008D878  7F E3 FB 78 */	mr r3, r31
-/* 813BF47C 0008D87C  4B F8 93 B9 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF480 0008D880  7C 64 1B 78 */	mr r4, r3
-/* 813BF484 0008D884  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BF488 0008D888  4C C6 31 82 */	crclr cr1eq
-/* 813BF48C 0008D88C  48 16 F2 15 */	bl OSReport
-/* 813BF490 0008D890  7F E3 FB 78 */	mr r3, r31
-/* 813BF494 0008D894  4B F8 96 15 */	bl get_sd_save_num__Q23ipl12NandSDWorkerFv
-/* 813BF498 0008D898  7C 64 1B 78 */	mr r4, r3
-/* 813BF49C 0008D89C  38 7D 00 88 */	addi r3, r29, 0x88
-/* 813BF4A0 0008D8A0  4C C6 31 82 */	crclr cr1eq
-/* 813BF4A4 0008D8A4  48 16 F1 FD */	bl OSReport
-/* 813BF4A8 0008D8A8  3B 80 00 00 */	li r28, 0x0
-/* 813BF4AC 0008D8AC  3B C0 00 00 */	li r30, 0x0
-/* 813BF4B0 0008D8B0  48 00 00 20 */	b .L_813BF4D0
+/* 813BF46C | 4B F8 93 9D */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF470 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF474 | 40 82 02 B8 */	bne .L_813BF72C
+/* 813BF478 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF47C | 4B F8 93 B9 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF480 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF484 | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BF488 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF48C | 48 16 F2 15 */	bl OSReport
+/* 813BF490 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF494 | 4B F8 96 15 */	bl get_sd_save_num__Q23ipl12NandSDWorkerFv
+/* 813BF498 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF49C | 38 7D 00 88 */	addi r3, r29, 0x88
+/* 813BF4A0 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF4A4 | 48 16 F1 FD */	bl OSReport
+/* 813BF4A8 | 3B 80 00 00 */	li r28, 0x0
+/* 813BF4AC | 3B C0 00 00 */	li r30, 0x0
+/* 813BF4B0 | 48 00 00 20 */	b .L_813BF4D0
 .L_813BF4B4:
-/* 813BF4B4 0008D8B4  7C 9F F2 14 */	add r4, r31, r30
-/* 813BF4B8 0008D8B8  38 7D 01 69 */	addi r3, r29, 0x169
-/* 813BF4BC 0008D8BC  80 84 02 08 */	lwz r4, 0x208(r4)
-/* 813BF4C0 0008D8C0  4C C6 31 82 */	crclr cr1eq
-/* 813BF4C4 0008D8C4  48 16 F1 DD */	bl OSReport
-/* 813BF4C8 0008D8C8  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 813BF4CC 0008D8CC  3B DE 00 04 */	addi r30, r30, 0x4
+/* 813BF4B4 | 7C 9F F2 14 */	add r4, r31, r30
+/* 813BF4B8 | 38 7D 01 69 */	addi r3, r29, 0x169
+/* 813BF4BC | 80 84 02 08 */	lwz r4, 0x208(r4)
+/* 813BF4C0 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF4C4 | 48 16 F1 DD */	bl OSReport
+/* 813BF4C8 | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 813BF4CC | 3B DE 00 04 */	addi r30, r30, 0x4
 .L_813BF4D0:
-/* 813BF4D0 0008D8D0  7F E3 FB 78 */	mr r3, r31
-/* 813BF4D4 0008D8D4  4B F8 95 D5 */	bl get_sd_save_num__Q23ipl12NandSDWorkerFv
-/* 813BF4D8 0008D8D8  7C 1C 18 00 */	cmpw r28, r3
-/* 813BF4DC 0008D8DC  41 80 FF D8 */	blt .L_813BF4B4
-/* 813BF4E0 0008D8E0  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF4E4 0008D8E4  38 00 00 15 */	li r0, 0x15
-/* 813BF4E8 0008D8E8  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF4EC 0008D8EC  48 00 02 40 */	b .L_813BF72C
+/* 813BF4D0 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF4D4 | 4B F8 95 D5 */	bl get_sd_save_num__Q23ipl12NandSDWorkerFv
+/* 813BF4D8 | 7C 1C 18 00 */	cmpw r28, r3
+/* 813BF4DC | 41 80 FF D8 */	blt .L_813BF4B4
+/* 813BF4E0 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF4E4 | 38 00 00 15 */	li r0, 0x15
+/* 813BF4E8 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF4EC | 48 00 02 40 */	b .L_813BF72C
 .L_813BF4F0:
-/* 813BF4F0 0008D8F0  3C 80 00 01 */	lis r4, 0x1
-/* 813BF4F4 0008D8F4  38 63 03 08 */	addi r3, r3, 0x308
-/* 813BF4F8 0008D8F8  38 A4 F0 A0 */	subi r5, r4, 0xf60
-/* 813BF4FC 0008D8FC  38 80 00 00 */	li r4, 0x0
-/* 813BF500 0008D900  4B F7 0E 35 */	bl memset
-/* 813BF504 0008D904  80 9F 02 08 */	lwz r4, 0x208(r31)
-/* 813BF508 0008D908  7F E3 FB 78 */	mr r3, r31
-/* 813BF50C 0008D90C  38 BF 03 08 */	addi r5, r31, 0x308
-/* 813BF510 0008D910  4B F8 98 91 */	bl get_sd_save_banner_async__Q23ipl12NandSDWorkerFUlP17WIISaveBannerFile
-/* 813BF514 0008D914  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF518 0008D918  38 00 00 16 */	li r0, 0x16
-/* 813BF51C 0008D91C  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF520 0008D920  48 00 02 0C */	b .L_813BF72C
+/* 813BF4F0 | 3C 80 00 01 */	lis r4, 0x1
+/* 813BF4F4 | 38 63 03 08 */	addi r3, r3, 0x308
+/* 813BF4F8 | 38 A4 F0 A0 */	subi r5, r4, 0xf60
+/* 813BF4FC | 38 80 00 00 */	li r4, 0x0
+/* 813BF500 | 4B F7 0E 35 */	bl memset
+/* 813BF504 | 80 9F 02 08 */	lwz r4, 0x208(r31)
+/* 813BF508 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF50C | 38 BF 03 08 */	addi r5, r31, 0x308
+/* 813BF510 | 4B F8 98 91 */	bl get_sd_save_banner_async__Q23ipl12NandSDWorkerFUlP17WIISaveBannerFile
+/* 813BF514 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF518 | 38 00 00 16 */	li r0, 0x16
+/* 813BF51C | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF520 | 48 00 02 0C */	b .L_813BF72C
 .L_813BF524:
-/* 813BF524 0008D924  4B F8 92 E5 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF528 0008D928  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF52C 0008D92C  40 82 02 00 */	bne .L_813BF72C
-/* 813BF530 0008D930  7F E3 FB 78 */	mr r3, r31
-/* 813BF534 0008D934  4B F8 93 01 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF538 0008D938  7C 64 1B 78 */	mr r4, r3
-/* 813BF53C 0008D93C  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BF540 0008D940  4C C6 31 82 */	crclr cr1eq
-/* 813BF544 0008D944  48 16 F1 5D */	bl OSReport
-/* 813BF548 0008D948  7F E3 FB 78 */	mr r3, r31
-/* 813BF54C 0008D94C  4B F8 92 E9 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF550 0008D950  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF554 0008D954  40 82 00 34 */	bne .L_813BF588
-/* 813BF558 0008D958  80 9F 03 08 */	lwz r4, 0x308(r31)
-/* 813BF55C 0008D95C  38 7D 00 D6 */	addi r3, r29, 0xd6
-/* 813BF560 0008D960  4C C6 31 82 */	crclr cr1eq
-/* 813BF564 0008D964  48 16 F1 3D */	bl OSReport
-/* 813BF568 0008D968  80 9F 02 08 */	lwz r4, 0x208(r31)
-/* 813BF56C 0008D96C  7F E3 FB 78 */	mr r3, r31
-/* 813BF570 0008D970  4B F8 95 81 */	bl get_cached_sd_save_banner__Q23ipl12NandSDWorkerFUl
-/* 813BF574 0008D974  7C 64 1B 78 */	mr r4, r3
-/* 813BF578 0008D978  38 7D 00 EF */	addi r3, r29, 0xef
-/* 813BF57C 0008D97C  80 84 00 00 */	lwz r4, 0x0(r4)
-/* 813BF580 0008D980  4C C6 31 82 */	crclr cr1eq
-/* 813BF584 0008D984  48 16 F1 1D */	bl OSReport
+/* 813BF524 | 4B F8 92 E5 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF528 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF52C | 40 82 02 00 */	bne .L_813BF72C
+/* 813BF530 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF534 | 4B F8 93 01 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF538 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF53C | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BF540 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF544 | 48 16 F1 5D */	bl OSReport
+/* 813BF548 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF54C | 4B F8 92 E9 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF550 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF554 | 40 82 00 34 */	bne .L_813BF588
+/* 813BF558 | 80 9F 03 08 */	lwz r4, 0x308(r31)
+/* 813BF55C | 38 7D 00 D6 */	addi r3, r29, 0xd6
+/* 813BF560 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF564 | 48 16 F1 3D */	bl OSReport
+/* 813BF568 | 80 9F 02 08 */	lwz r4, 0x208(r31)
+/* 813BF56C | 7F E3 FB 78 */	mr r3, r31
+/* 813BF570 | 4B F8 95 81 */	bl get_cached_sd_save_banner__Q23ipl12NandSDWorkerFUl
+/* 813BF574 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF578 | 38 7D 00 EF */	addi r3, r29, 0xef
+/* 813BF57C | 80 84 00 00 */	lwz r4, 0x0(r4)
+/* 813BF580 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF584 | 48 16 F1 1D */	bl OSReport
 .L_813BF588:
-/* 813BF588 0008D988  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF58C 0008D98C  38 00 00 17 */	li r0, 0x17
-/* 813BF590 0008D990  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF594 0008D994  48 00 01 98 */	b .L_813BF72C
+/* 813BF588 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF58C | 38 00 00 17 */	li r0, 0x17
+/* 813BF590 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF594 | 48 00 01 98 */	b .L_813BF72C
 .L_813BF598:
-/* 813BF598 0008D998  80 83 02 08 */	lwz r4, 0x208(r3)
-/* 813BF59C 0008D99C  4B F8 99 81 */	bl get_sd_save_size_async__Q23ipl12NandSDWorkerFUl
-/* 813BF5A0 0008D9A0  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF5A4 0008D9A4  38 00 00 18 */	li r0, 0x18
-/* 813BF5A8 0008D9A8  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF5AC 0008D9AC  48 00 01 80 */	b .L_813BF72C
+/* 813BF598 | 80 83 02 08 */	lwz r4, 0x208(r3)
+/* 813BF59C | 4B F8 99 81 */	bl get_sd_save_size_async__Q23ipl12NandSDWorkerFUl
+/* 813BF5A0 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF5A4 | 38 00 00 18 */	li r0, 0x18
+/* 813BF5A8 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF5AC | 48 00 01 80 */	b .L_813BF72C
 .L_813BF5B0:
-/* 813BF5B0 0008D9B0  4B F8 92 59 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF5B4 0008D9B4  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF5B8 0008D9B8  40 82 01 74 */	bne .L_813BF72C
-/* 813BF5BC 0008D9BC  7F E3 FB 78 */	mr r3, r31
-/* 813BF5C0 0008D9C0  4B F8 92 75 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF5C4 0008D9C4  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF5C8 0008D9C8  7C 7C 1B 78 */	mr r28, r3
-/* 813BF5CC 0008D9CC  41 80 00 38 */	blt .L_813BF604
-/* 813BF5D0 0008D9D0  80 9F 02 08 */	lwz r4, 0x208(r31)
-/* 813BF5D4 0008D9D4  7F 85 E3 78 */	mr r5, r28
-/* 813BF5D8 0008D9D8  38 7D 01 7E */	addi r3, r29, 0x17e
-/* 813BF5DC 0008D9DC  4C C6 31 82 */	crclr cr1eq
-/* 813BF5E0 0008D9E0  48 16 F0 C1 */	bl OSReport
-/* 813BF5E4 0008D9E4  80 9F 02 08 */	lwz r4, 0x208(r31)
-/* 813BF5E8 0008D9E8  7F E3 FB 78 */	mr r3, r31
-/* 813BF5EC 0008D9EC  4B F8 95 E9 */	bl get_cached_sd_save_size__Q23ipl12NandSDWorkerFUl
-/* 813BF5F0 0008D9F0  7C 64 1B 78 */	mr r4, r3
-/* 813BF5F4 0008D9F4  38 7D 01 2E */	addi r3, r29, 0x12e
-/* 813BF5F8 0008D9F8  4C C6 31 82 */	crclr cr1eq
-/* 813BF5FC 0008D9FC  48 16 F0 A5 */	bl OSReport
-/* 813BF600 0008DA00  48 00 00 28 */	b .L_813BF628
+/* 813BF5B0 | 4B F8 92 59 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF5B4 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF5B8 | 40 82 01 74 */	bne .L_813BF72C
+/* 813BF5BC | 7F E3 FB 78 */	mr r3, r31
+/* 813BF5C0 | 4B F8 92 75 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF5C4 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF5C8 | 7C 7C 1B 78 */	mr r28, r3
+/* 813BF5CC | 41 80 00 38 */	blt .L_813BF604
+/* 813BF5D0 | 80 9F 02 08 */	lwz r4, 0x208(r31)
+/* 813BF5D4 | 7F 85 E3 78 */	mr r5, r28
+/* 813BF5D8 | 38 7D 01 7E */	addi r3, r29, 0x17e
+/* 813BF5DC | 4C C6 31 82 */	crclr cr1eq
+/* 813BF5E0 | 48 16 F0 C1 */	bl OSReport
+/* 813BF5E4 | 80 9F 02 08 */	lwz r4, 0x208(r31)
+/* 813BF5E8 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF5EC | 4B F8 95 E9 */	bl get_cached_sd_save_size__Q23ipl12NandSDWorkerFUl
+/* 813BF5F0 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF5F4 | 38 7D 01 2E */	addi r3, r29, 0x12e
+/* 813BF5F8 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF5FC | 48 16 F0 A5 */	bl OSReport
+/* 813BF600 | 48 00 00 28 */	b .L_813BF628
 .L_813BF604:
-/* 813BF604 0008DA04  7F 84 E3 78 */	mr r4, r28
-/* 813BF608 0008DA08  38 7D 01 9A */	addi r3, r29, 0x19a
-/* 813BF60C 0008DA0C  4C C6 31 82 */	crclr cr1eq
-/* 813BF610 0008DA10  48 16 F0 91 */	bl OSReport
-/* 813BF614 0008DA14  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF618 0008DA18  38 00 00 4F */	li r0, 0x4f
-/* 813BF61C 0008DA1C  93 83 F3 B0 */	stw r28, -0xc50(r3)
-/* 813BF620 0008DA20  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF624 0008DA24  48 00 01 08 */	b .L_813BF72C
+/* 813BF604 | 7F 84 E3 78 */	mr r4, r28
+/* 813BF608 | 38 7D 01 9A */	addi r3, r29, 0x19a
+/* 813BF60C | 4C C6 31 82 */	crclr cr1eq
+/* 813BF610 | 48 16 F0 91 */	bl OSReport
+/* 813BF614 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF618 | 38 00 00 4F */	li r0, 0x4f
+/* 813BF61C | 93 83 F3 B0 */	stw r28, -0xc50(r3)
+/* 813BF620 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF624 | 48 00 01 08 */	b .L_813BF72C
 .L_813BF628:
-/* 813BF628 0008DA28  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF62C 0008DA2C  38 00 00 19 */	li r0, 0x19
-/* 813BF630 0008DA30  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF634 0008DA34  48 00 00 F8 */	b .L_813BF72C
+/* 813BF628 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF62C | 38 00 00 19 */	li r0, 0x19
+/* 813BF630 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF634 | 48 00 00 F8 */	b .L_813BF72C
 .L_813BF638:
-/* 813BF638 0008DA38  80 83 02 08 */	lwz r4, 0x208(r3)
-/* 813BF63C 0008DA3C  4B F8 99 19 */	bl delete_sd_save_async__Q23ipl12NandSDWorkerFUl
-/* 813BF640 0008DA40  80 9F 02 08 */	lwz r4, 0x208(r31)
-/* 813BF644 0008DA44  38 7D 01 BC */	addi r3, r29, 0x1bc
-/* 813BF648 0008DA48  4C C6 31 82 */	crclr cr1eq
-/* 813BF64C 0008DA4C  48 16 F0 55 */	bl OSReport
-/* 813BF650 0008DA50  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF654 0008DA54  38 00 00 1A */	li r0, 0x1a
-/* 813BF658 0008DA58  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF65C 0008DA5C  48 00 00 D0 */	b .L_813BF72C
+/* 813BF638 | 80 83 02 08 */	lwz r4, 0x208(r3)
+/* 813BF63C | 4B F8 99 19 */	bl delete_sd_save_async__Q23ipl12NandSDWorkerFUl
+/* 813BF640 | 80 9F 02 08 */	lwz r4, 0x208(r31)
+/* 813BF644 | 38 7D 01 BC */	addi r3, r29, 0x1bc
+/* 813BF648 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF64C | 48 16 F0 55 */	bl OSReport
+/* 813BF650 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF654 | 38 00 00 1A */	li r0, 0x1a
+/* 813BF658 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF65C | 48 00 00 D0 */	b .L_813BF72C
 .L_813BF660:
-/* 813BF660 0008DA60  4B F8 91 A9 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF664 0008DA64  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF668 0008DA68  40 82 00 C4 */	bne .L_813BF72C
-/* 813BF66C 0008DA6C  7F E3 FB 78 */	mr r3, r31
-/* 813BF670 0008DA70  4B F8 91 C5 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF674 0008DA74  7C 64 1B 78 */	mr r4, r3
-/* 813BF678 0008DA78  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BF67C 0008DA7C  4C C6 31 82 */	crclr cr1eq
-/* 813BF680 0008DA80  48 16 F0 21 */	bl OSReport
-/* 813BF684 0008DA84  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF688 0008DA88  38 80 00 00 */	li r4, 0x0
-/* 813BF68C 0008DA8C  38 00 00 4B */	li r0, 0x4b
-/* 813BF690 0008DA90  90 83 F3 B0 */	stw r4, -0xc50(r3)
-/* 813BF694 0008DA94  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF698 0008DA98  48 00 00 94 */	b .L_813BF72C
+/* 813BF660 | 4B F8 91 A9 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF664 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF668 | 40 82 00 C4 */	bne .L_813BF72C
+/* 813BF66C | 7F E3 FB 78 */	mr r3, r31
+/* 813BF670 | 4B F8 91 C5 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF674 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF678 | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BF67C | 4C C6 31 82 */	crclr cr1eq
+/* 813BF680 | 48 16 F0 21 */	bl OSReport
+/* 813BF684 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF688 | 38 80 00 00 */	li r4, 0x0
+/* 813BF68C | 38 00 00 4B */	li r0, 0x4b
+/* 813BF690 | 90 83 F3 B0 */	stw r4, -0xc50(r3)
+/* 813BF694 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF698 | 48 00 00 94 */	b .L_813BF72C
 .L_813BF69C:
-/* 813BF69C 0008DA9C  80 83 02 08 */	lwz r4, 0x208(r3)
-/* 813BF6A0 0008DAA0  4B F8 9A A9 */	bl sd_app_exist_async__Q23ipl12NandSDWorkerFUl
-/* 813BF6A4 0008DAA4  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF6A8 0008DAA8  38 00 00 4C */	li r0, 0x4c
-/* 813BF6AC 0008DAAC  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF6B0 0008DAB0  48 00 00 7C */	b .L_813BF72C
+/* 813BF69C | 80 83 02 08 */	lwz r4, 0x208(r3)
+/* 813BF6A0 | 4B F8 9A A9 */	bl sd_app_exist_async__Q23ipl12NandSDWorkerFUl
+/* 813BF6A4 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF6A8 | 38 00 00 4C */	li r0, 0x4c
+/* 813BF6AC | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF6B0 | 48 00 00 7C */	b .L_813BF72C
 .L_813BF6B4:
-/* 813BF6B4 0008DAB4  4B F8 91 55 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF6B8 0008DAB8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF6BC 0008DABC  40 82 00 70 */	bne .L_813BF72C
-/* 813BF6C0 0008DAC0  7F E3 FB 78 */	mr r3, r31
-/* 813BF6C4 0008DAC4  4B F8 91 71 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF6C8 0008DAC8  7C 64 1B 78 */	mr r4, r3
-/* 813BF6CC 0008DACC  38 7D 00 2A */	addi r3, r29, 0x2a
-/* 813BF6D0 0008DAD0  4C C6 31 82 */	crclr cr1eq
-/* 813BF6D4 0008DAD4  48 16 EF CD */	bl OSReport
-/* 813BF6D8 0008DAD8  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF6DC 0008DADC  38 00 00 4F */	li r0, 0x4f
-/* 813BF6E0 0008DAE0  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF6E4 0008DAE4  48 00 00 48 */	b .L_813BF72C
+/* 813BF6B4 | 4B F8 91 55 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF6B8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF6BC | 40 82 00 70 */	bne .L_813BF72C
+/* 813BF6C0 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF6C4 | 4B F8 91 71 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF6C8 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF6CC | 38 7D 00 2A */	addi r3, r29, 0x2a
+/* 813BF6D0 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF6D4 | 48 16 EF CD */	bl OSReport
+/* 813BF6D8 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF6DC | 38 00 00 4F */	li r0, 0x4f
+/* 813BF6E0 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF6E4 | 48 00 00 48 */	b .L_813BF72C
 .L_813BF6E8:
-/* 813BF6E8 0008DAE8  4B F8 96 09 */	bl terminate_async__Q23ipl12NandSDWorkerFv
-/* 813BF6EC 0008DAEC  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF6F0 0008DAF0  38 00 00 50 */	li r0, 0x50
-/* 813BF6F4 0008DAF4  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF6F8 0008DAF8  48 00 00 34 */	b .L_813BF72C
+/* 813BF6E8 | 4B F8 96 09 */	bl terminate_async__Q23ipl12NandSDWorkerFv
+/* 813BF6EC | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF6F0 | 38 00 00 50 */	li r0, 0x50
+/* 813BF6F4 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF6F8 | 48 00 00 34 */	b .L_813BF72C
 .L_813BF6FC:
-/* 813BF6FC 0008DAFC  4B F8 90 FD */	bl is_terminated__Q23ipl12NandSDWorkerFv
-/* 813BF700 0008DB00  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF704 0008DB04  41 82 00 28 */	beq .L_813BF72C
-/* 813BF708 0008DB08  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF70C 0008DB0C  80 03 F3 B0 */	lwz r0, -0xc50(r3)
-/* 813BF710 0008DB10  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813BF714 0008DB14  40 82 00 10 */	bne .L_813BF724
-/* 813BF718 0008DB18  38 00 00 52 */	li r0, 0x52
-/* 813BF71C 0008DB1C  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF720 0008DB20  48 00 00 0C */	b .L_813BF72C
+/* 813BF6FC | 4B F8 90 FD */	bl is_terminated__Q23ipl12NandSDWorkerFv
+/* 813BF700 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF704 | 41 82 00 28 */	beq .L_813BF72C
+/* 813BF708 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF70C | 80 03 F3 B0 */	lwz r0, -0xc50(r3)
+/* 813BF710 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813BF714 | 40 82 00 10 */	bne .L_813BF724
+/* 813BF718 | 38 00 00 52 */	li r0, 0x52
+/* 813BF71C | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF720 | 48 00 00 0C */	b .L_813BF72C
 .L_813BF724:
-/* 813BF724 0008DB24  38 00 00 51 */	li r0, 0x51
-/* 813BF728 0008DB28  90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF724 | 38 00 00 51 */	li r0, 0x51
+/* 813BF728 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
 .L_813BF72C:
-/* 813BF72C 0008DB2C  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF730 0008DB30  39 61 00 20 */	addi r11, r1, 0x20
-/* 813BF734 0008DB34  80 63 F3 A8 */	lwz r3, -0xc58(r3)
-/* 813BF738 0008DB38  48 23 9D D9 */	bl _restgpr_28
-/* 813BF73C 0008DB3C  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 813BF740 0008DB40  7C 08 03 A6 */	mtlr r0
-/* 813BF744 0008DB44  38 21 00 20 */	addi r1, r1, 0x20
-/* 813BF748 0008DB48  4E 80 00 20 */	blr
+/* 813BF72C | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF730 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813BF734 | 80 63 F3 A8 */	lwz r3, -0xc58(r3)
+/* 813BF738 | 48 23 9D D9 */	bl _restgpr_28
+/* 813BF73C | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 813BF740 | 7C 08 03 A6 */	mtlr r0
+/* 813BF744 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 813BF748 | 4E 80 00 20 */	blr
 .endfn process_save_test__Q33ipl8kitayama21NandSDWorker_AutoTestFv
 
 # .text:0xD64 | 0x813BF74C | size: 0x108
 # ipl::kitayama::NandSDWorker_AutoTest::process_initialize()
 .fn process_initialize__Q33ipl8kitayama21NandSDWorker_AutoTestFv, global
-/* 813BF74C 0008DB4C  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 813BF750 0008DB50  7C 08 02 A6 */	mflr r0
-/* 813BF754 0008DB54  3C 83 00 01 */	addis r4, r3, 0x1
-/* 813BF758 0008DB58  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813BF75C 0008DB5C  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813BF760 0008DB60  7C 7F 1B 78 */	mr r31, r3
-/* 813BF764 0008DB64  80 04 F3 A8 */	lwz r0, -0xc58(r4)
-/* 813BF768 0008DB68  2C 00 00 4F */	cmpwi r0, 0x4f
-/* 813BF76C 0008DB6C  41 82 00 88 */	beq .L_813BF7F4
-/* 813BF770 0008DB70  40 80 00 1C */	bge .L_813BF78C
-/* 813BF774 0008DB74  2C 00 00 1C */	cmpwi r0, 0x1c
-/* 813BF778 0008DB78  41 82 00 3C */	beq .L_813BF7B4
-/* 813BF77C 0008DB7C  40 80 00 BC */	bge .L_813BF838
-/* 813BF780 0008DB80  2C 00 00 1B */	cmpwi r0, 0x1b
-/* 813BF784 0008DB84  40 80 00 1C */	bge .L_813BF7A0
-/* 813BF788 0008DB88  48 00 00 B0 */	b .L_813BF838
+/* 813BF74C | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813BF750 | 7C 08 02 A6 */	mflr r0
+/* 813BF754 | 3C 83 00 01 */	addis r4, r3, 0x1
+/* 813BF758 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813BF75C | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 813BF760 | 7C 7F 1B 78 */	mr r31, r3
+/* 813BF764 | 80 04 F3 A8 */	lwz r0, -0xc58(r4)
+/* 813BF768 | 2C 00 00 4F */	cmpwi r0, 0x4f
+/* 813BF76C | 41 82 00 88 */	beq .L_813BF7F4
+/* 813BF770 | 40 80 00 1C */	bge .L_813BF78C
+/* 813BF774 | 2C 00 00 1C */	cmpwi r0, 0x1c
+/* 813BF778 | 41 82 00 3C */	beq .L_813BF7B4
+/* 813BF77C | 40 80 00 BC */	bge .L_813BF838
+/* 813BF780 | 2C 00 00 1B */	cmpwi r0, 0x1b
+/* 813BF784 | 40 80 00 1C */	bge .L_813BF7A0
+/* 813BF788 | 48 00 00 B0 */	b .L_813BF838
 .L_813BF78C:
-/* 813BF78C 0008DB8C  2C 00 00 53 */	cmpwi r0, 0x53
-/* 813BF790 0008DB90  40 80 00 A8 */	bge .L_813BF838
-/* 813BF794 0008DB94  2C 00 00 51 */	cmpwi r0, 0x51
-/* 813BF798 0008DB98  40 80 00 A0 */	bge .L_813BF838
-/* 813BF79C 0008DB9C  48 00 00 6C */	b .L_813BF808
+/* 813BF78C | 2C 00 00 53 */	cmpwi r0, 0x53
+/* 813BF790 | 40 80 00 A8 */	bge .L_813BF838
+/* 813BF794 | 2C 00 00 51 */	cmpwi r0, 0x51
+/* 813BF798 | 40 80 00 A0 */	bge .L_813BF838
+/* 813BF79C | 48 00 00 6C */	b .L_813BF808
 .L_813BF7A0:
-/* 813BF7A0 0008DBA0  4B F8 97 ED */	bl initialize_nand_async__Q23ipl12NandSDWorkerFv
-/* 813BF7A4 0008DBA4  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF7A8 0008DBA8  38 00 00 1C */	li r0, 0x1c
-/* 813BF7AC 0008DBAC  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF7B0 0008DBB0  48 00 00 88 */	b .L_813BF838
+/* 813BF7A0 | 4B F8 97 ED */	bl initialize_nand_async__Q23ipl12NandSDWorkerFv
+/* 813BF7A4 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF7A8 | 38 00 00 1C */	li r0, 0x1c
+/* 813BF7AC | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF7B0 | 48 00 00 88 */	b .L_813BF838
 .L_813BF7B4:
-/* 813BF7B4 0008DBB4  4B F8 90 55 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF7B8 0008DBB8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF7BC 0008DBBC  40 82 00 7C */	bne .L_813BF838
-/* 813BF7C0 0008DBC0  7F E3 FB 78 */	mr r3, r31
-/* 813BF7C4 0008DBC4  4B F8 90 71 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF7C8 0008DBC8  3C BF 00 01 */	addis r5, r31, 0x1
-/* 813BF7CC 0008DBCC  7C 64 1B 78 */	mr r4, r3
-/* 813BF7D0 0008DBD0  90 65 F3 B0 */	stw r3, -0xc50(r5)
-/* 813BF7D4 0008DBD4  3C 60 81 65 */	lis r3, lbl_8164FDAA@ha
-/* 813BF7D8 0008DBD8  38 63 FD AA */	addi r3, r3, lbl_8164FDAA@l
-/* 813BF7DC 0008DBDC  4C C6 31 82 */	crclr cr1eq
-/* 813BF7E0 0008DBE0  48 16 EE C1 */	bl OSReport
-/* 813BF7E4 0008DBE4  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF7E8 0008DBE8  38 00 00 4F */	li r0, 0x4f
-/* 813BF7EC 0008DBEC  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF7F0 0008DBF0  48 00 00 48 */	b .L_813BF838
+/* 813BF7B4 | 4B F8 90 55 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF7B8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF7BC | 40 82 00 7C */	bne .L_813BF838
+/* 813BF7C0 | 7F E3 FB 78 */	mr r3, r31
+/* 813BF7C4 | 4B F8 90 71 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF7C8 | 3C BF 00 01 */	addis r5, r31, 0x1
+/* 813BF7CC | 7C 64 1B 78 */	mr r4, r3
+/* 813BF7D0 | 90 65 F3 B0 */	stw r3, -0xc50(r5)
+/* 813BF7D4 | 3C 60 81 65 */	lis r3, lbl_8164FDAA@ha
+/* 813BF7D8 | 38 63 FD AA */	addi r3, r3, lbl_8164FDAA@l
+/* 813BF7DC | 4C C6 31 82 */	crclr cr1eq
+/* 813BF7E0 | 48 16 EE C1 */	bl OSReport
+/* 813BF7E4 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF7E8 | 38 00 00 4F */	li r0, 0x4f
+/* 813BF7EC | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF7F0 | 48 00 00 48 */	b .L_813BF838
 .L_813BF7F4:
-/* 813BF7F4 0008DBF4  4B F8 94 FD */	bl terminate_async__Q23ipl12NandSDWorkerFv
-/* 813BF7F8 0008DBF8  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF7FC 0008DBFC  38 00 00 50 */	li r0, 0x50
-/* 813BF800 0008DC00  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF804 0008DC04  48 00 00 34 */	b .L_813BF838
+/* 813BF7F4 | 4B F8 94 FD */	bl terminate_async__Q23ipl12NandSDWorkerFv
+/* 813BF7F8 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF7FC | 38 00 00 50 */	li r0, 0x50
+/* 813BF800 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF804 | 48 00 00 34 */	b .L_813BF838
 .L_813BF808:
-/* 813BF808 0008DC08  4B F8 8F F1 */	bl is_terminated__Q23ipl12NandSDWorkerFv
-/* 813BF80C 0008DC0C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF810 0008DC10  41 82 00 28 */	beq .L_813BF838
-/* 813BF814 0008DC14  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF818 0008DC18  80 03 F3 B0 */	lwz r0, -0xc50(r3)
-/* 813BF81C 0008DC1C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813BF820 0008DC20  40 82 00 10 */	bne .L_813BF830
-/* 813BF824 0008DC24  38 00 00 52 */	li r0, 0x52
-/* 813BF828 0008DC28  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF82C 0008DC2C  48 00 00 0C */	b .L_813BF838
+/* 813BF808 | 4B F8 8F F1 */	bl is_terminated__Q23ipl12NandSDWorkerFv
+/* 813BF80C | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF810 | 41 82 00 28 */	beq .L_813BF838
+/* 813BF814 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF818 | 80 03 F3 B0 */	lwz r0, -0xc50(r3)
+/* 813BF81C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813BF820 | 40 82 00 10 */	bne .L_813BF830
+/* 813BF824 | 38 00 00 52 */	li r0, 0x52
+/* 813BF828 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF82C | 48 00 00 0C */	b .L_813BF838
 .L_813BF830:
-/* 813BF830 0008DC30  38 00 00 51 */	li r0, 0x51
-/* 813BF834 0008DC34  90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF830 | 38 00 00 51 */	li r0, 0x51
+/* 813BF834 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
 .L_813BF838:
-/* 813BF838 0008DC38  3C 7F 00 01 */	addis r3, r31, 0x1
-/* 813BF83C 0008DC3C  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813BF840 0008DC40  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813BF844 0008DC44  80 63 F3 A8 */	lwz r3, -0xc58(r3)
-/* 813BF848 0008DC48  7C 08 03 A6 */	mtlr r0
-/* 813BF84C 0008DC4C  38 21 00 10 */	addi r1, r1, 0x10
-/* 813BF850 0008DC50  4E 80 00 20 */	blr
+/* 813BF838 | 3C 7F 00 01 */	addis r3, r31, 0x1
+/* 813BF83C | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813BF840 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813BF844 | 80 63 F3 A8 */	lwz r3, -0xc58(r3)
+/* 813BF848 | 7C 08 03 A6 */	mtlr r0
+/* 813BF84C | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813BF850 | 4E 80 00 20 */	blr
 .endfn process_initialize__Q33ipl8kitayama21NandSDWorker_AutoTestFv
 
 # .text:0xE6C | 0x813BF854 | size: 0xAA4
 # ipl::kitayama::NandSDWorker_AutoTest::process_app_test()
 .fn process_app_test__Q33ipl8kitayama21NandSDWorker_AutoTestFv, global
-/* 813BF854 0008DC54  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 813BF858 0008DC58  7C 08 02 A6 */	mflr r0
-/* 813BF85C 0008DC5C  90 01 00 24 */	stw r0, 0x24(r1)
-/* 813BF860 0008DC60  39 61 00 20 */	addi r11, r1, 0x20
-/* 813BF864 0008DC64  48 23 9C 61 */	bl _savegpr_28
-/* 813BF868 0008DC68  3C E3 00 01 */	addis r7, r3, 0x1
-/* 813BF86C 0008DC6C  3F E0 81 65 */	lis r31, lbl_8164FD80@ha
-/* 813BF870 0008DC70  80 07 F3 A8 */	lwz r0, -0xc58(r7)
-/* 813BF874 0008DC74  7C 7E 1B 78 */	mr r30, r3
-/* 813BF878 0008DC78  3B FF FD 80 */	addi r31, r31, lbl_8164FD80@l
-/* 813BF87C 0008DC7C  28 00 00 52 */	cmplwi r0, 0x52
-/* 813BF880 0008DC80  41 81 0A 58 */	bgt .L_813C02D8
-/* 813BF884 0008DC84  3C 80 81 65 */	lis r4, jumptable_81650234@ha
-/* 813BF888 0008DC88  54 00 10 3A */	slwi r0, r0, 2
-/* 813BF88C 0008DC8C  38 84 02 34 */	addi r4, r4, jumptable_81650234@l
-/* 813BF890 0008DC90  7C 84 00 2E */	lwzx r4, r4, r0
-/* 813BF894 0008DC94  7C 89 03 A6 */	mtctr r4
-/* 813BF898 0008DC98  4E 80 04 20 */	bctr
+/* 813BF854 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 813BF858 | 7C 08 02 A6 */	mflr r0
+/* 813BF85C | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 813BF860 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813BF864 | 48 23 9C 61 */	bl _savegpr_28
+/* 813BF868 | 3C E3 00 01 */	addis r7, r3, 0x1
+/* 813BF86C | 3F E0 81 65 */	lis r31, lbl_8164FD80@ha
+/* 813BF870 | 80 07 F3 A8 */	lwz r0, -0xc58(r7)
+/* 813BF874 | 7C 7E 1B 78 */	mr r30, r3
+/* 813BF878 | 3B FF FD 80 */	addi r31, r31, lbl_8164FD80@l
+/* 813BF87C | 28 00 00 52 */	cmplwi r0, 0x52
+/* 813BF880 | 41 81 0A 58 */	bgt .L_813C02D8
+/* 813BF884 | 3C 80 81 65 */	lis r4, jumptable_81650234@ha
+/* 813BF888 | 54 00 10 3A */	slwi r0, r0, 2
+/* 813BF88C | 38 84 02 34 */	addi r4, r4, jumptable_81650234@l
+/* 813BF890 | 7C 84 00 2E */	lwzx r4, r4, r0
+/* 813BF894 | 7C 89 03 A6 */	mtctr r4
+/* 813BF898 | 4E 80 04 20 */	bctr
 .L_813BF89C:
-/* 813BF89C 0008DC9C  4B F8 94 4D */	bl startup_async__Q23ipl12NandSDWorkerFv
-/* 813BF8A0 0008DCA0  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BF8A4 0008DCA4  38 00 00 03 */	li r0, 0x3
-/* 813BF8A8 0008DCA8  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF8AC 0008DCAC  48 00 0A 2C */	b .L_813C02D8
+/* 813BF89C | 4B F8 94 4D */	bl startup_async__Q23ipl12NandSDWorkerFv
+/* 813BF8A0 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BF8A4 | 38 00 00 03 */	li r0, 0x3
+/* 813BF8A8 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF8AC | 48 00 0A 2C */	b .L_813C02D8
 .L_813BF8B0:
-/* 813BF8B0 0008DCB0  4B F8 8F 59 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF8B4 0008DCB4  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF8B8 0008DCB8  40 82 0A 20 */	bne .L_813C02D8
-/* 813BF8BC 0008DCBC  7F C3 F3 78 */	mr r3, r30
-/* 813BF8C0 0008DCC0  4B F8 8F 75 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF8C4 0008DCC4  7C 64 1B 78 */	mr r4, r3
-/* 813BF8C8 0008DCC8  38 7F 00 2A */	addi r3, r31, 0x2a
-/* 813BF8CC 0008DCCC  4C C6 31 82 */	crclr cr1eq
-/* 813BF8D0 0008DCD0  48 16 ED D1 */	bl OSReport
-/* 813BF8D4 0008DCD4  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BF8D8 0008DCD8  38 00 00 2B */	li r0, 0x2b
-/* 813BF8DC 0008DCDC  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF8E0 0008DCE0  48 00 09 F8 */	b .L_813C02D8
+/* 813BF8B0 | 4B F8 8F 59 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF8B4 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF8B8 | 40 82 0A 20 */	bne .L_813C02D8
+/* 813BF8BC | 7F C3 F3 78 */	mr r3, r30
+/* 813BF8C0 | 4B F8 8F 75 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF8C4 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF8C8 | 38 7F 00 2A */	addi r3, r31, 0x2a
+/* 813BF8CC | 4C C6 31 82 */	crclr cr1eq
+/* 813BF8D0 | 48 16 ED D1 */	bl OSReport
+/* 813BF8D4 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BF8D8 | 38 00 00 2B */	li r0, 0x2b
+/* 813BF8DC | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF8E0 | 48 00 09 F8 */	b .L_813C02D8
 .L_813BF8E4:
-/* 813BF8E4 0008DCE4  4B F8 8F B9 */	bl get_nand_app_num__Q23ipl12NandSDWorkerFv
-/* 813BF8E8 0008DCE8  7C 64 1B 78 */	mr r4, r3
-/* 813BF8EC 0008DCEC  38 7F 03 28 */	addi r3, r31, 0x328
-/* 813BF8F0 0008DCF0  4C C6 31 82 */	crclr cr1eq
-/* 813BF8F4 0008DCF4  48 16 ED AD */	bl OSReport
-/* 813BF8F8 0008DCF8  7F C3 F3 78 */	mr r3, r30
-/* 813BF8FC 0008DCFC  38 9E 00 08 */	addi r4, r30, 0x8
-/* 813BF900 0008DD00  4B F8 96 ED */	bl list_nand_app_async__Q23ipl12NandSDWorkerFPUx
-/* 813BF904 0008DD04  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BF908 0008DD08  38 00 00 2C */	li r0, 0x2c
-/* 813BF90C 0008DD0C  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF910 0008DD10  48 00 09 C8 */	b .L_813C02D8
+/* 813BF8E4 | 4B F8 8F B9 */	bl get_nand_app_num__Q23ipl12NandSDWorkerFv
+/* 813BF8E8 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF8EC | 38 7F 03 28 */	addi r3, r31, 0x328
+/* 813BF8F0 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF8F4 | 48 16 ED AD */	bl OSReport
+/* 813BF8F8 | 7F C3 F3 78 */	mr r3, r30
+/* 813BF8FC | 38 9E 00 08 */	addi r4, r30, 0x8
+/* 813BF900 | 4B F8 96 ED */	bl list_nand_app_async__Q23ipl12NandSDWorkerFPUx
+/* 813BF904 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BF908 | 38 00 00 2C */	li r0, 0x2c
+/* 813BF90C | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF910 | 48 00 09 C8 */	b .L_813C02D8
 .L_813BF914:
-/* 813BF914 0008DD14  4B F8 8E F5 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF918 0008DD18  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF91C 0008DD1C  40 82 09 BC */	bne .L_813C02D8
-/* 813BF920 0008DD20  7F C3 F3 78 */	mr r3, r30
-/* 813BF924 0008DD24  4B F8 8F 11 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF928 0008DD28  7C 64 1B 78 */	mr r4, r3
-/* 813BF92C 0008DD2C  38 7F 00 2A */	addi r3, r31, 0x2a
-/* 813BF930 0008DD30  4C C6 31 82 */	crclr cr1eq
-/* 813BF934 0008DD34  48 16 ED 6D */	bl OSReport
-/* 813BF938 0008DD38  3B 80 00 00 */	li r28, 0x0
-/* 813BF93C 0008DD3C  3B A0 00 00 */	li r29, 0x0
-/* 813BF940 0008DD40  48 00 00 24 */	b .L_813BF964
+/* 813BF914 | 4B F8 8E F5 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF918 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF91C | 40 82 09 BC */	bne .L_813C02D8
+/* 813BF920 | 7F C3 F3 78 */	mr r3, r30
+/* 813BF924 | 4B F8 8F 11 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF928 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF92C | 38 7F 00 2A */	addi r3, r31, 0x2a
+/* 813BF930 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF934 | 48 16 ED 6D */	bl OSReport
+/* 813BF938 | 3B 80 00 00 */	li r28, 0x0
+/* 813BF93C | 3B A0 00 00 */	li r29, 0x0
+/* 813BF940 | 48 00 00 24 */	b .L_813BF964
 .L_813BF944:
-/* 813BF944 0008DD44  7C 9E EA 14 */	add r4, r30, r29
-/* 813BF948 0008DD48  38 7F 03 3B */	addi r3, r31, 0x33b
-/* 813BF94C 0008DD4C  80 A4 00 08 */	lwz r5, 0x8(r4)
-/* 813BF950 0008DD50  80 C4 00 0C */	lwz r6, 0xc(r4)
-/* 813BF954 0008DD54  4C C6 31 82 */	crclr cr1eq
-/* 813BF958 0008DD58  48 16 ED 49 */	bl OSReport
-/* 813BF95C 0008DD5C  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 813BF960 0008DD60  3B BD 00 08 */	addi r29, r29, 0x8
+/* 813BF944 | 7C 9E EA 14 */	add r4, r30, r29
+/* 813BF948 | 38 7F 03 3B */	addi r3, r31, 0x33b
+/* 813BF94C | 80 A4 00 08 */	lwz r5, 0x8(r4)
+/* 813BF950 | 80 C4 00 0C */	lwz r6, 0xc(r4)
+/* 813BF954 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF958 | 48 16 ED 49 */	bl OSReport
+/* 813BF95C | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 813BF960 | 3B BD 00 08 */	addi r29, r29, 0x8
 .L_813BF964:
-/* 813BF964 0008DD64  7F C3 F3 78 */	mr r3, r30
-/* 813BF968 0008DD68  4B F8 8F 35 */	bl get_nand_app_num__Q23ipl12NandSDWorkerFv
-/* 813BF96C 0008DD6C  7C 1C 18 40 */	cmplw r28, r3
-/* 813BF970 0008DD70  41 80 FF D4 */	blt .L_813BF944
-/* 813BF974 0008DD74  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BF978 0008DD78  38 00 00 2D */	li r0, 0x2d
-/* 813BF97C 0008DD7C  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF980 0008DD80  48 00 09 58 */	b .L_813C02D8
+/* 813BF964 | 7F C3 F3 78 */	mr r3, r30
+/* 813BF968 | 4B F8 8F 35 */	bl get_nand_app_num__Q23ipl12NandSDWorkerFv
+/* 813BF96C | 7C 1C 18 40 */	cmplw r28, r3
+/* 813BF970 | 41 80 FF D4 */	blt .L_813BF944
+/* 813BF974 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BF978 | 38 00 00 2D */	li r0, 0x2d
+/* 813BF97C | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF980 | 48 00 09 58 */	b .L_813C02D8
 .L_813BF984:
-/* 813BF984 0008DD84  3D 03 00 03 */	addis r8, r3, 0x3
-/* 813BF988 0008DD88  80 A3 00 08 */	lwz r5, 0x8(r3)
-/* 813BF98C 0008DD8C  80 C3 00 0C */	lwz r6, 0xc(r3)
-/* 813BF990 0008DD90  38 E7 F3 B4 */	subi r7, r7, 0xc4c
-/* 813BF994 0008DD94  39 08 83 B4 */	subi r8, r8, 0x7c4c
-/* 813BF998 0008DD98  4B F8 96 89 */	bl get_nand_app_thumbnail_async__Q23ipl12NandSDWorkerFUxPvPQ33ipl7channel18SChanMgrMetaHeader
-/* 813BF99C 0008DD9C  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BF9A0 0008DDA0  38 00 00 2E */	li r0, 0x2e
-/* 813BF9A4 0008DDA4  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BF9A8 0008DDA8  48 00 09 30 */	b .L_813C02D8
+/* 813BF984 | 3D 03 00 03 */	addis r8, r3, 0x3
+/* 813BF988 | 80 A3 00 08 */	lwz r5, 0x8(r3)
+/* 813BF98C | 80 C3 00 0C */	lwz r6, 0xc(r3)
+/* 813BF990 | 38 E7 F3 B4 */	subi r7, r7, 0xc4c
+/* 813BF994 | 39 08 83 B4 */	subi r8, r8, 0x7c4c
+/* 813BF998 | 4B F8 96 89 */	bl get_nand_app_thumbnail_async__Q23ipl12NandSDWorkerFUxPvPQ33ipl7channel18SChanMgrMetaHeader
+/* 813BF99C | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BF9A0 | 38 00 00 2E */	li r0, 0x2e
+/* 813BF9A4 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BF9A8 | 48 00 09 30 */	b .L_813C02D8
 .L_813BF9AC:
-/* 813BF9AC 0008DDAC  4B F8 8E 5D */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BF9B0 0008DDB0  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF9B4 0008DDB4  40 82 09 24 */	bne .L_813C02D8
-/* 813BF9B8 0008DDB8  7F C3 F3 78 */	mr r3, r30
-/* 813BF9BC 0008DDBC  4B F8 8E 79 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF9C0 0008DDC0  7C 64 1B 78 */	mr r4, r3
-/* 813BF9C4 0008DDC4  38 7F 00 2A */	addi r3, r31, 0x2a
-/* 813BF9C8 0008DDC8  4C C6 31 82 */	crclr cr1eq
-/* 813BF9CC 0008DDCC  48 16 EC D5 */	bl OSReport
-/* 813BF9D0 0008DDD0  7F C3 F3 78 */	mr r3, r30
-/* 813BF9D4 0008DDD4  4B F8 8E 61 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BF9D8 0008DDD8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BF9DC 0008DDDC  40 81 00 B0 */	ble .L_813BFA8C
-/* 813BF9E0 0008DDE0  80 BE 00 08 */	lwz r5, 0x8(r30)
-/* 813BF9E4 0008DDE4  7F C3 F3 78 */	mr r3, r30
-/* 813BF9E8 0008DDE8  80 DE 00 0C */	lwz r6, 0xc(r30)
-/* 813BF9EC 0008DDEC  4B F8 8F 6D */	bl get_cached_nand_app_meta_header__Q23ipl12NandSDWorkerFUx
-/* 813BF9F0 0008DDF0  3C 9E 00 01 */	addis r4, r30, 0x1
-/* 813BF9F4 0008DDF4  7C 7D 1B 78 */	mr r29, r3
-/* 813BF9F8 0008DDF8  80 84 F3 B4 */	lwz r4, -0xc4c(r4)
-/* 813BF9FC 0008DDFC  38 7F 00 D6 */	addi r3, r31, 0xd6
-/* 813BFA00 0008DE00  4C C6 31 82 */	crclr cr1eq
-/* 813BFA04 0008DE04  48 16 EC 9D */	bl OSReport
-/* 813BFA08 0008DE08  80 BE 00 08 */	lwz r5, 0x8(r30)
-/* 813BFA0C 0008DE0C  7F C3 F3 78 */	mr r3, r30
-/* 813BFA10 0008DE10  80 DE 00 0C */	lwz r6, 0xc(r30)
-/* 813BFA14 0008DE14  38 E1 00 0C */	addi r7, r1, 0xc
-/* 813BFA18 0008DE18  4B F8 8E DD */	bl get_cached_nand_app_thumbnail__Q23ipl12NandSDWorkerFUxPUl
-/* 813BFA1C 0008DE1C  7C 64 1B 78 */	mr r4, r3
-/* 813BFA20 0008DE20  38 7F 00 EF */	addi r3, r31, 0xef
-/* 813BFA24 0008DE24  80 84 00 00 */	lwz r4, 0x0(r4)
-/* 813BFA28 0008DE28  4C C6 31 82 */	crclr cr1eq
-/* 813BFA2C 0008DE2C  48 16 EC 75 */	bl OSReport
-/* 813BFA30 0008DE30  3C FE 00 03 */	addis r7, r30, 0x3
-/* 813BFA34 0008DE34  38 7F 03 54 */	addi r3, r31, 0x354
-/* 813BFA38 0008DE38  88 87 83 F4 */	lbz r4, -0x7c0c(r7)
-/* 813BFA3C 0008DE3C  88 A7 83 F5 */	lbz r5, -0x7c0b(r7)
-/* 813BFA40 0008DE40  88 C7 83 F6 */	lbz r6, -0x7c0a(r7)
-/* 813BFA44 0008DE44  7C 84 07 74 */	extsb r4, r4
-/* 813BFA48 0008DE48  88 E7 83 F7 */	lbz r7, -0x7c09(r7)
-/* 813BFA4C 0008DE4C  7C A5 07 74 */	extsb r5, r5
-/* 813BFA50 0008DE50  7C C6 07 74 */	extsb r6, r6
-/* 813BFA54 0008DE54  7C E7 07 74 */	extsb r7, r7
-/* 813BFA58 0008DE58  4C C6 31 82 */	crclr cr1eq
-/* 813BFA5C 0008DE5C  48 16 EC 45 */	bl OSReport
-/* 813BFA60 0008DE60  88 9D 00 40 */	lbz r4, 0x40(r29)
-/* 813BFA64 0008DE64  38 7F 03 6E */	addi r3, r31, 0x36e
-/* 813BFA68 0008DE68  88 BD 00 41 */	lbz r5, 0x41(r29)
-/* 813BFA6C 0008DE6C  88 DD 00 42 */	lbz r6, 0x42(r29)
-/* 813BFA70 0008DE70  7C 84 07 74 */	extsb r4, r4
-/* 813BFA74 0008DE74  88 FD 00 43 */	lbz r7, 0x43(r29)
-/* 813BFA78 0008DE78  7C A5 07 74 */	extsb r5, r5
-/* 813BFA7C 0008DE7C  7C C6 07 74 */	extsb r6, r6
-/* 813BFA80 0008DE80  7C E7 07 74 */	extsb r7, r7
-/* 813BFA84 0008DE84  4C C6 31 82 */	crclr cr1eq
-/* 813BFA88 0008DE88  48 16 EC 19 */	bl OSReport
+/* 813BF9AC | 4B F8 8E 5D */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BF9B0 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF9B4 | 40 82 09 24 */	bne .L_813C02D8
+/* 813BF9B8 | 7F C3 F3 78 */	mr r3, r30
+/* 813BF9BC | 4B F8 8E 79 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF9C0 | 7C 64 1B 78 */	mr r4, r3
+/* 813BF9C4 | 38 7F 00 2A */	addi r3, r31, 0x2a
+/* 813BF9C8 | 4C C6 31 82 */	crclr cr1eq
+/* 813BF9CC | 48 16 EC D5 */	bl OSReport
+/* 813BF9D0 | 7F C3 F3 78 */	mr r3, r30
+/* 813BF9D4 | 4B F8 8E 61 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BF9D8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BF9DC | 40 81 00 B0 */	ble .L_813BFA8C
+/* 813BF9E0 | 80 BE 00 08 */	lwz r5, 0x8(r30)
+/* 813BF9E4 | 7F C3 F3 78 */	mr r3, r30
+/* 813BF9E8 | 80 DE 00 0C */	lwz r6, 0xc(r30)
+/* 813BF9EC | 4B F8 8F 6D */	bl get_cached_nand_app_meta_header__Q23ipl12NandSDWorkerFUx
+/* 813BF9F0 | 3C 9E 00 01 */	addis r4, r30, 0x1
+/* 813BF9F4 | 7C 7D 1B 78 */	mr r29, r3
+/* 813BF9F8 | 80 84 F3 B4 */	lwz r4, -0xc4c(r4)
+/* 813BF9FC | 38 7F 00 D6 */	addi r3, r31, 0xd6
+/* 813BFA00 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFA04 | 48 16 EC 9D */	bl OSReport
+/* 813BFA08 | 80 BE 00 08 */	lwz r5, 0x8(r30)
+/* 813BFA0C | 7F C3 F3 78 */	mr r3, r30
+/* 813BFA10 | 80 DE 00 0C */	lwz r6, 0xc(r30)
+/* 813BFA14 | 38 E1 00 0C */	addi r7, r1, 0xc
+/* 813BFA18 | 4B F8 8E DD */	bl get_cached_nand_app_thumbnail__Q23ipl12NandSDWorkerFUxPUl
+/* 813BFA1C | 7C 64 1B 78 */	mr r4, r3
+/* 813BFA20 | 38 7F 00 EF */	addi r3, r31, 0xef
+/* 813BFA24 | 80 84 00 00 */	lwz r4, 0x0(r4)
+/* 813BFA28 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFA2C | 48 16 EC 75 */	bl OSReport
+/* 813BFA30 | 3C FE 00 03 */	addis r7, r30, 0x3
+/* 813BFA34 | 38 7F 03 54 */	addi r3, r31, 0x354
+/* 813BFA38 | 88 87 83 F4 */	lbz r4, -0x7c0c(r7)
+/* 813BFA3C | 88 A7 83 F5 */	lbz r5, -0x7c0b(r7)
+/* 813BFA40 | 88 C7 83 F6 */	lbz r6, -0x7c0a(r7)
+/* 813BFA44 | 7C 84 07 74 */	extsb r4, r4
+/* 813BFA48 | 88 E7 83 F7 */	lbz r7, -0x7c09(r7)
+/* 813BFA4C | 7C A5 07 74 */	extsb r5, r5
+/* 813BFA50 | 7C C6 07 74 */	extsb r6, r6
+/* 813BFA54 | 7C E7 07 74 */	extsb r7, r7
+/* 813BFA58 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFA5C | 48 16 EC 45 */	bl OSReport
+/* 813BFA60 | 88 9D 00 40 */	lbz r4, 0x40(r29)
+/* 813BFA64 | 38 7F 03 6E */	addi r3, r31, 0x36e
+/* 813BFA68 | 88 BD 00 41 */	lbz r5, 0x41(r29)
+/* 813BFA6C | 88 DD 00 42 */	lbz r6, 0x42(r29)
+/* 813BFA70 | 7C 84 07 74 */	extsb r4, r4
+/* 813BFA74 | 88 FD 00 43 */	lbz r7, 0x43(r29)
+/* 813BFA78 | 7C A5 07 74 */	extsb r5, r5
+/* 813BFA7C | 7C C6 07 74 */	extsb r6, r6
+/* 813BFA80 | 7C E7 07 74 */	extsb r7, r7
+/* 813BFA84 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFA88 | 48 16 EC 19 */	bl OSReport
 .L_813BFA8C:
-/* 813BFA8C 0008DE8C  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFA90 0008DE90  38 00 00 37 */	li r0, 0x37
-/* 813BFA94 0008DE94  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFA98 0008DE98  48 00 08 40 */	b .L_813C02D8
+/* 813BFA8C | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFA90 | 38 00 00 37 */	li r0, 0x37
+/* 813BFA94 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFA98 | 48 00 08 40 */	b .L_813C02D8
 .L_813BFA9C:
-/* 813BFA9C 0008DE9C  80 A3 00 08 */	lwz r5, 0x8(r3)
-/* 813BFAA0 0008DEA0  80 C3 00 0C */	lwz r6, 0xc(r3)
-/* 813BFAA4 0008DEA4  4B F8 94 49 */	bl get_nand_app_size_async__Q23ipl12NandSDWorkerFUx
-/* 813BFAA8 0008DEA8  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFAAC 0008DEAC  38 00 00 38 */	li r0, 0x38
-/* 813BFAB0 0008DEB0  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFAB4 0008DEB4  48 00 08 24 */	b .L_813C02D8
+/* 813BFA9C | 80 A3 00 08 */	lwz r5, 0x8(r3)
+/* 813BFAA0 | 80 C3 00 0C */	lwz r6, 0xc(r3)
+/* 813BFAA4 | 4B F8 94 49 */	bl get_nand_app_size_async__Q23ipl12NandSDWorkerFUx
+/* 813BFAA8 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFAAC | 38 00 00 38 */	li r0, 0x38
+/* 813BFAB0 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFAB4 | 48 00 08 24 */	b .L_813C02D8
 .L_813BFAB8:
-/* 813BFAB8 0008DEB8  4B F8 8D 51 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BFABC 0008DEBC  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BFAC0 0008DEC0  40 82 08 18 */	bne .L_813C02D8
-/* 813BFAC4 0008DEC4  7F C3 F3 78 */	mr r3, r30
-/* 813BFAC8 0008DEC8  4B F8 8D 6D */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BFACC 0008DECC  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BFAD0 0008DED0  7C 7C 1B 78 */	mr r28, r3
-/* 813BFAD4 0008DED4  41 80 00 40 */	blt .L_813BFB14
-/* 813BFAD8 0008DED8  80 BE 00 08 */	lwz r5, 0x8(r30)
-/* 813BFADC 0008DEDC  7F 87 E3 78 */	mr r7, r28
-/* 813BFAE0 0008DEE0  80 DE 00 0C */	lwz r6, 0xc(r30)
-/* 813BFAE4 0008DEE4  38 7F 03 8F */	addi r3, r31, 0x38f
-/* 813BFAE8 0008DEE8  4C C6 31 82 */	crclr cr1eq
-/* 813BFAEC 0008DEEC  48 16 EB B5 */	bl OSReport
-/* 813BFAF0 0008DEF0  80 BE 00 08 */	lwz r5, 0x8(r30)
-/* 813BFAF4 0008DEF4  7F C3 F3 78 */	mr r3, r30
-/* 813BFAF8 0008DEF8  80 DE 00 0C */	lwz r6, 0xc(r30)
-/* 813BFAFC 0008DEFC  4B F8 8F 65 */	bl get_cached_nand_app_size__Q23ipl12NandSDWorkerFUx
-/* 813BFB00 0008DF00  7C 64 1B 78 */	mr r4, r3
-/* 813BFB04 0008DF04  38 7F 03 AD */	addi r3, r31, 0x3ad
-/* 813BFB08 0008DF08  4C C6 31 82 */	crclr cr1eq
-/* 813BFB0C 0008DF0C  48 16 EB 95 */	bl OSReport
-/* 813BFB10 0008DF10  48 00 00 28 */	b .L_813BFB38
+/* 813BFAB8 | 4B F8 8D 51 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BFABC | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BFAC0 | 40 82 08 18 */	bne .L_813C02D8
+/* 813BFAC4 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFAC8 | 4B F8 8D 6D */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BFACC | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BFAD0 | 7C 7C 1B 78 */	mr r28, r3
+/* 813BFAD4 | 41 80 00 40 */	blt .L_813BFB14
+/* 813BFAD8 | 80 BE 00 08 */	lwz r5, 0x8(r30)
+/* 813BFADC | 7F 87 E3 78 */	mr r7, r28
+/* 813BFAE0 | 80 DE 00 0C */	lwz r6, 0xc(r30)
+/* 813BFAE4 | 38 7F 03 8F */	addi r3, r31, 0x38f
+/* 813BFAE8 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFAEC | 48 16 EB B5 */	bl OSReport
+/* 813BFAF0 | 80 BE 00 08 */	lwz r5, 0x8(r30)
+/* 813BFAF4 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFAF8 | 80 DE 00 0C */	lwz r6, 0xc(r30)
+/* 813BFAFC | 4B F8 8F 65 */	bl get_cached_nand_app_size__Q23ipl12NandSDWorkerFUx
+/* 813BFB00 | 7C 64 1B 78 */	mr r4, r3
+/* 813BFB04 | 38 7F 03 AD */	addi r3, r31, 0x3ad
+/* 813BFB08 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFB0C | 48 16 EB 95 */	bl OSReport
+/* 813BFB10 | 48 00 00 28 */	b .L_813BFB38
 .L_813BFB14:
-/* 813BFB14 0008DF14  7F 84 E3 78 */	mr r4, r28
-/* 813BFB18 0008DF18  38 7F 03 C3 */	addi r3, r31, 0x3c3
-/* 813BFB1C 0008DF1C  4C C6 31 82 */	crclr cr1eq
-/* 813BFB20 0008DF20  48 16 EB 81 */	bl OSReport
-/* 813BFB24 0008DF24  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFB28 0008DF28  38 00 00 4F */	li r0, 0x4f
-/* 813BFB2C 0008DF2C  93 83 F3 B0 */	stw r28, -0xc50(r3)
-/* 813BFB30 0008DF30  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFB34 0008DF34  48 00 07 A4 */	b .L_813C02D8
+/* 813BFB14 | 7F 84 E3 78 */	mr r4, r28
+/* 813BFB18 | 38 7F 03 C3 */	addi r3, r31, 0x3c3
+/* 813BFB1C | 4C C6 31 82 */	crclr cr1eq
+/* 813BFB20 | 48 16 EB 81 */	bl OSReport
+/* 813BFB24 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFB28 | 38 00 00 4F */	li r0, 0x4f
+/* 813BFB2C | 93 83 F3 B0 */	stw r28, -0xc50(r3)
+/* 813BFB30 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFB34 | 48 00 07 A4 */	b .L_813C02D8
 .L_813BFB38:
-/* 813BFB38 0008DF38  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFB3C 0008DF3C  38 00 00 04 */	li r0, 0x4
-/* 813BFB40 0008DF40  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFB44 0008DF44  48 00 07 94 */	b .L_813C02D8
+/* 813BFB38 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFB3C | 38 00 00 04 */	li r0, 0x4
+/* 813BFB40 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFB44 | 48 00 07 94 */	b .L_813C02D8
 .L_813BFB48:
-/* 813BFB48 0008DF48  4B F8 91 F1 */	bl mount_sd_async__Q23ipl12NandSDWorkerFv
-/* 813BFB4C 0008DF4C  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFB50 0008DF50  38 00 00 05 */	li r0, 0x5
-/* 813BFB54 0008DF54  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFB58 0008DF58  48 00 07 80 */	b .L_813C02D8
+/* 813BFB48 | 4B F8 91 F1 */	bl mount_sd_async__Q23ipl12NandSDWorkerFv
+/* 813BFB4C | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFB50 | 38 00 00 05 */	li r0, 0x5
+/* 813BFB54 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFB58 | 48 00 07 80 */	b .L_813C02D8
 .L_813BFB5C:
-/* 813BFB5C 0008DF5C  4B F8 8C AD */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BFB60 0008DF60  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BFB64 0008DF64  40 82 07 74 */	bne .L_813C02D8
-/* 813BFB68 0008DF68  7F C3 F3 78 */	mr r3, r30
-/* 813BFB6C 0008DF6C  4B F8 8C C9 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BFB70 0008DF70  7C 64 1B 78 */	mr r4, r3
-/* 813BFB74 0008DF74  38 7F 00 2A */	addi r3, r31, 0x2a
-/* 813BFB78 0008DF78  4C C6 31 82 */	crclr cr1eq
-/* 813BFB7C 0008DF7C  48 16 EB 25 */	bl OSReport
-/* 813BFB80 0008DF80  7F C3 F3 78 */	mr r3, r30
-/* 813BFB84 0008DF84  4B F8 91 1D */	bl is_sd_write_protected__Q23ipl12NandSDWorkerFv
-/* 813BFB88 0008DF88  7C 64 1B 78 */	mr r4, r3
-/* 813BFB8C 0008DF8C  38 7F 00 36 */	addi r3, r31, 0x36
-/* 813BFB90 0008DF90  4C C6 31 82 */	crclr cr1eq
-/* 813BFB94 0008DF94  48 16 EB 0D */	bl OSReport
-/* 813BFB98 0008DF98  7F C3 F3 78 */	mr r3, r30
-/* 813BFB9C 0008DF9C  4B F8 91 29 */	bl get_sd_drive_letter__Q23ipl12NandSDWorkerFv
-/* 813BFBA0 0008DFA0  7C 64 07 74 */	extsb r4, r3
-/* 813BFBA4 0008DFA4  38 7F 00 51 */	addi r3, r31, 0x51
-/* 813BFBA8 0008DFA8  4C C6 31 82 */	crclr cr1eq
-/* 813BFBAC 0008DFAC  48 16 EA F5 */	bl OSReport
-/* 813BFBB0 0008DFB0  7F C3 F3 78 */	mr r3, r30
-/* 813BFBB4 0008DFB4  4B F8 8C D1 */	bl get_sd_state__Q23ipl12NandSDWorkerFv
-/* 813BFBB8 0008DFB8  7C 64 1B 78 */	mr r4, r3
-/* 813BFBBC 0008DFBC  38 7F 00 66 */	addi r3, r31, 0x66
-/* 813BFBC0 0008DFC0  4C C6 31 82 */	crclr cr1eq
-/* 813BFBC4 0008DFC4  48 16 EA DD */	bl OSReport
-/* 813BFBC8 0008DFC8  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFBCC 0008DFCC  38 00 00 21 */	li r0, 0x21
-/* 813BFBD0 0008DFD0  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFBD4 0008DFD4  48 00 07 04 */	b .L_813C02D8
+/* 813BFB5C | 4B F8 8C AD */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BFB60 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BFB64 | 40 82 07 74 */	bne .L_813C02D8
+/* 813BFB68 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFB6C | 4B F8 8C C9 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BFB70 | 7C 64 1B 78 */	mr r4, r3
+/* 813BFB74 | 38 7F 00 2A */	addi r3, r31, 0x2a
+/* 813BFB78 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFB7C | 48 16 EB 25 */	bl OSReport
+/* 813BFB80 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFB84 | 4B F8 91 1D */	bl is_sd_write_protected__Q23ipl12NandSDWorkerFv
+/* 813BFB88 | 7C 64 1B 78 */	mr r4, r3
+/* 813BFB8C | 38 7F 00 36 */	addi r3, r31, 0x36
+/* 813BFB90 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFB94 | 48 16 EB 0D */	bl OSReport
+/* 813BFB98 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFB9C | 4B F8 91 29 */	bl get_sd_drive_letter__Q23ipl12NandSDWorkerFv
+/* 813BFBA0 | 7C 64 07 74 */	extsb r4, r3
+/* 813BFBA4 | 38 7F 00 51 */	addi r3, r31, 0x51
+/* 813BFBA8 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFBAC | 48 16 EA F5 */	bl OSReport
+/* 813BFBB0 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFBB4 | 4B F8 8C D1 */	bl get_sd_state__Q23ipl12NandSDWorkerFv
+/* 813BFBB8 | 7C 64 1B 78 */	mr r4, r3
+/* 813BFBBC | 38 7F 00 66 */	addi r3, r31, 0x66
+/* 813BFBC0 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFBC4 | 48 16 EA DD */	bl OSReport
+/* 813BFBC8 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFBCC | 38 00 00 21 */	li r0, 0x21
+/* 813BFBD0 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFBD4 | 48 00 07 04 */	b .L_813C02D8
 .L_813BFBD8:
-/* 813BFBD8 0008DFD8  4B F8 93 F9 */	bl format_sd_async__Q23ipl12NandSDWorkerFv
-/* 813BFBDC 0008DFDC  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFBE0 0008DFE0  38 00 00 22 */	li r0, 0x22
-/* 813BFBE4 0008DFE4  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFBE8 0008DFE8  48 00 06 F0 */	b .L_813C02D8
+/* 813BFBD8 | 4B F8 93 F9 */	bl format_sd_async__Q23ipl12NandSDWorkerFv
+/* 813BFBDC | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFBE0 | 38 00 00 22 */	li r0, 0x22
+/* 813BFBE4 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFBE8 | 48 00 06 F0 */	b .L_813C02D8
 .L_813BFBEC:
-/* 813BFBEC 0008DFEC  4B F8 8C 1D */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BFBF0 0008DFF0  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BFBF4 0008DFF4  40 82 06 E4 */	bne .L_813C02D8
-/* 813BFBF8 0008DFF8  7F C3 F3 78 */	mr r3, r30
-/* 813BFBFC 0008DFFC  4B F8 8C 39 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BFC00 0008E000  7C 64 1B 78 */	mr r4, r3
-/* 813BFC04 0008E004  38 7F 00 2A */	addi r3, r31, 0x2a
-/* 813BFC08 0008E008  4C C6 31 82 */	crclr cr1eq
-/* 813BFC0C 0008E00C  48 16 EA 95 */	bl OSReport
-/* 813BFC10 0008E010  7F C3 F3 78 */	mr r3, r30
-/* 813BFC14 0008E014  4B F8 8E B9 */	bl get_sd_app_num__Q23ipl12NandSDWorkerFv
-/* 813BFC18 0008E018  7C 64 1B 78 */	mr r4, r3
-/* 813BFC1C 0008E01C  38 7F 03 E6 */	addi r3, r31, 0x3e6
-/* 813BFC20 0008E020  4C C6 31 82 */	crclr cr1eq
-/* 813BFC24 0008E024  48 16 EA 7D */	bl OSReport
-/* 813BFC28 0008E028  7F C3 F3 78 */	mr r3, r30
-/* 813BFC2C 0008E02C  4B F8 8C 71 */	bl get_nand_app_num__Q23ipl12NandSDWorkerFv
-/* 813BFC30 0008E030  7C 64 1B 78 */	mr r4, r3
-/* 813BFC34 0008E034  38 7F 03 28 */	addi r3, r31, 0x328
-/* 813BFC38 0008E038  4C C6 31 82 */	crclr cr1eq
-/* 813BFC3C 0008E03C  48 16 EA 65 */	bl OSReport
-/* 813BFC40 0008E040  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFC44 0008E044  38 00 00 3F */	li r0, 0x3f
-/* 813BFC48 0008E048  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFC4C 0008E04C  48 00 06 8C */	b .L_813C02D8
+/* 813BFBEC | 4B F8 8C 1D */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BFBF0 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BFBF4 | 40 82 06 E4 */	bne .L_813C02D8
+/* 813BFBF8 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFBFC | 4B F8 8C 39 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BFC00 | 7C 64 1B 78 */	mr r4, r3
+/* 813BFC04 | 38 7F 00 2A */	addi r3, r31, 0x2a
+/* 813BFC08 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFC0C | 48 16 EA 95 */	bl OSReport
+/* 813BFC10 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFC14 | 4B F8 8E B9 */	bl get_sd_app_num__Q23ipl12NandSDWorkerFv
+/* 813BFC18 | 7C 64 1B 78 */	mr r4, r3
+/* 813BFC1C | 38 7F 03 E6 */	addi r3, r31, 0x3e6
+/* 813BFC20 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFC24 | 48 16 EA 7D */	bl OSReport
+/* 813BFC28 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFC2C | 4B F8 8C 71 */	bl get_nand_app_num__Q23ipl12NandSDWorkerFv
+/* 813BFC30 | 7C 64 1B 78 */	mr r4, r3
+/* 813BFC34 | 38 7F 03 28 */	addi r3, r31, 0x328
+/* 813BFC38 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFC3C | 48 16 EA 65 */	bl OSReport
+/* 813BFC40 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFC44 | 38 00 00 3F */	li r0, 0x3f
+/* 813BFC48 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFC4C | 48 00 06 8C */	b .L_813C02D8
 .L_813BFC50:
-/* 813BFC50 0008E050  80 A3 00 08 */	lwz r5, 0x8(r3)
-/* 813BFC54 0008E054  80 C3 00 0C */	lwz r6, 0xc(r3)
-/* 813BFC58 0008E058  4B F8 94 BD */	bl nand_app_exist_async__Q23ipl12NandSDWorkerFUx
-/* 813BFC5C 0008E05C  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFC60 0008E060  38 00 00 40 */	li r0, 0x40
-/* 813BFC64 0008E064  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFC68 0008E068  48 00 06 70 */	b .L_813C02D8
+/* 813BFC50 | 80 A3 00 08 */	lwz r5, 0x8(r3)
+/* 813BFC54 | 80 C3 00 0C */	lwz r6, 0xc(r3)
+/* 813BFC58 | 4B F8 94 BD */	bl nand_app_exist_async__Q23ipl12NandSDWorkerFUx
+/* 813BFC5C | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFC60 | 38 00 00 40 */	li r0, 0x40
+/* 813BFC64 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFC68 | 48 00 06 70 */	b .L_813C02D8
 .L_813BFC6C:
-/* 813BFC6C 0008E06C  4B F8 8B 9D */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BFC70 0008E070  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BFC74 0008E074  40 82 06 64 */	bne .L_813C02D8
-/* 813BFC78 0008E078  7F C3 F3 78 */	mr r3, r30
-/* 813BFC7C 0008E07C  4B F8 8B B9 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BFC80 0008E080  7C 64 1B 78 */	mr r4, r3
-/* 813BFC84 0008E084  38 7F 00 2A */	addi r3, r31, 0x2a
-/* 813BFC88 0008E088  4C C6 31 82 */	crclr cr1eq
-/* 813BFC8C 0008E08C  48 16 EA 15 */	bl OSReport
-/* 813BFC90 0008E090  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFC94 0008E094  38 00 00 25 */	li r0, 0x25
-/* 813BFC98 0008E098  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFC9C 0008E09C  48 00 06 3C */	b .L_813C02D8
+/* 813BFC6C | 4B F8 8B 9D */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BFC70 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BFC74 | 40 82 06 64 */	bne .L_813C02D8
+/* 813BFC78 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFC7C | 4B F8 8B B9 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BFC80 | 7C 64 1B 78 */	mr r4, r3
+/* 813BFC84 | 38 7F 00 2A */	addi r3, r31, 0x2a
+/* 813BFC88 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFC8C | 48 16 EA 15 */	bl OSReport
+/* 813BFC90 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFC94 | 38 00 00 25 */	li r0, 0x25
+/* 813BFC98 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFC9C | 48 00 06 3C */	b .L_813C02D8
 .L_813BFCA0:
-/* 813BFCA0 0008E0A0  80 A3 00 08 */	lwz r5, 0x8(r3)
-/* 813BFCA4 0008E0A4  80 C3 00 0C */	lwz r6, 0xc(r3)
-/* 813BFCA8 0008E0A8  4B F8 93 D1 */	bl copy_nand_app_to_sd_async__Q23ipl12NandSDWorkerFUx
-/* 813BFCAC 0008E0AC  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFCB0 0008E0B0  38 00 00 26 */	li r0, 0x26
-/* 813BFCB4 0008E0B4  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFCB8 0008E0B8  48 00 06 20 */	b .L_813C02D8
+/* 813BFCA0 | 80 A3 00 08 */	lwz r5, 0x8(r3)
+/* 813BFCA4 | 80 C3 00 0C */	lwz r6, 0xc(r3)
+/* 813BFCA8 | 4B F8 93 D1 */	bl copy_nand_app_to_sd_async__Q23ipl12NandSDWorkerFUx
+/* 813BFCAC | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFCB0 | 38 00 00 26 */	li r0, 0x26
+/* 813BFCB4 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFCB8 | 48 00 06 20 */	b .L_813C02D8
 .L_813BFCBC:
-/* 813BFCBC 0008E0BC  4B F8 8B 4D */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BFCC0 0008E0C0  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BFCC4 0008E0C4  40 82 06 14 */	bne .L_813C02D8
-/* 813BFCC8 0008E0C8  7F C3 F3 78 */	mr r3, r30
-/* 813BFCCC 0008E0CC  4B F8 8B 69 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BFCD0 0008E0D0  7C 64 1B 78 */	mr r4, r3
-/* 813BFCD4 0008E0D4  38 7F 00 2A */	addi r3, r31, 0x2a
-/* 813BFCD8 0008E0D8  4C C6 31 82 */	crclr cr1eq
-/* 813BFCDC 0008E0DC  48 16 E9 C5 */	bl OSReport
-/* 813BFCE0 0008E0E0  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFCE4 0008E0E4  38 00 00 23 */	li r0, 0x23
-/* 813BFCE8 0008E0E8  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFCEC 0008E0EC  48 00 05 EC */	b .L_813C02D8
+/* 813BFCBC | 4B F8 8B 4D */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BFCC0 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BFCC4 | 40 82 06 14 */	bne .L_813C02D8
+/* 813BFCC8 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFCCC | 4B F8 8B 69 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BFCD0 | 7C 64 1B 78 */	mr r4, r3
+/* 813BFCD4 | 38 7F 00 2A */	addi r3, r31, 0x2a
+/* 813BFCD8 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFCDC | 48 16 E9 C5 */	bl OSReport
+/* 813BFCE0 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFCE4 | 38 00 00 23 */	li r0, 0x23
+/* 813BFCE8 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFCEC | 48 00 05 EC */	b .L_813C02D8
 .L_813BFCF0:
-/* 813BFCF0 0008E0F0  38 7F 03 F7 */	addi r3, r31, 0x3f7
-/* 813BFCF4 0008E0F4  4C C6 31 82 */	crclr cr1eq
-/* 813BFCF8 0008E0F8  48 16 E9 A9 */	bl OSReport
-/* 813BFCFC 0008E0FC  3C 9E 00 03 */	addis r4, r30, 0x3
-/* 813BFD00 0008E100  7F C3 F3 78 */	mr r3, r30
-/* 813BFD04 0008E104  38 84 89 B8 */	subi r4, r4, 0x7648
-/* 813BFD08 0008E108  4B F8 92 D1 */	bl get_sd_free_area_async__Q23ipl12NandSDWorkerFv
-/* 813BFD0C 0008E10C  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFD10 0008E110  38 00 00 24 */	li r0, 0x24
-/* 813BFD14 0008E114  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFD18 0008E118  48 00 05 C0 */	b .L_813C02D8
+/* 813BFCF0 | 38 7F 03 F7 */	addi r3, r31, 0x3f7
+/* 813BFCF4 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFCF8 | 48 16 E9 A9 */	bl OSReport
+/* 813BFCFC | 3C 9E 00 03 */	addis r4, r30, 0x3
+/* 813BFD00 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFD04 | 38 84 89 B8 */	subi r4, r4, 0x7648
+/* 813BFD08 | 4B F8 92 D1 */	bl get_sd_free_area_async__Q23ipl12NandSDWorkerFv
+/* 813BFD0C | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFD10 | 38 00 00 24 */	li r0, 0x24
+/* 813BFD14 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFD18 | 48 00 05 C0 */	b .L_813C02D8
 .L_813BFD1C:
-/* 813BFD1C 0008E11C  4B F8 8A ED */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BFD20 0008E120  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BFD24 0008E124  40 82 05 B4 */	bne .L_813C02D8
-/* 813BFD28 0008E128  7F C3 F3 78 */	mr r3, r30
-/* 813BFD2C 0008E12C  4B F8 8B 09 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BFD30 0008E130  3C DE 00 03 */	addis r6, r30, 0x3
-/* 813BFD34 0008E134  7C 64 1B 78 */	mr r4, r3
-/* 813BFD38 0008E138  80 A6 89 B8 */	lwz r5, -0x7648(r6)
-/* 813BFD3C 0008E13C  38 7F 04 0A */	addi r3, r31, 0x40a
-/* 813BFD40 0008E140  80 C6 89 BC */	lwz r6, -0x7644(r6)
-/* 813BFD44 0008E144  4C C6 31 82 */	crclr cr1eq
-/* 813BFD48 0008E148  48 16 E9 59 */	bl OSReport
-/* 813BFD4C 0008E14C  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFD50 0008E150  38 00 00 2F */	li r0, 0x2f
-/* 813BFD54 0008E154  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFD58 0008E158  48 00 05 80 */	b .L_813C02D8
+/* 813BFD1C | 4B F8 8A ED */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BFD20 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BFD24 | 40 82 05 B4 */	bne .L_813C02D8
+/* 813BFD28 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFD2C | 4B F8 8B 09 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BFD30 | 3C DE 00 03 */	addis r6, r30, 0x3
+/* 813BFD34 | 7C 64 1B 78 */	mr r4, r3
+/* 813BFD38 | 80 A6 89 B8 */	lwz r5, -0x7648(r6)
+/* 813BFD3C | 38 7F 04 0A */	addi r3, r31, 0x40a
+/* 813BFD40 | 80 C6 89 BC */	lwz r6, -0x7644(r6)
+/* 813BFD44 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFD48 | 48 16 E9 59 */	bl OSReport
+/* 813BFD4C | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFD50 | 38 00 00 2F */	li r0, 0x2f
+/* 813BFD54 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFD58 | 48 00 05 80 */	b .L_813C02D8
 .L_813BFD5C:
-/* 813BFD5C 0008E15C  38 80 00 00 */	li r4, 0x0
-/* 813BFD60 0008E160  38 A0 01 00 */	li r5, 0x100
-/* 813BFD64 0008E164  38 63 02 08 */	addi r3, r3, 0x208
-/* 813BFD68 0008E168  4B F7 05 CD */	bl memset
-/* 813BFD6C 0008E16C  7F C3 F3 78 */	mr r3, r30
-/* 813BFD70 0008E170  38 9E 02 08 */	addi r4, r30, 0x208
-/* 813BFD74 0008E174  4B F8 90 19 */	bl list_sd_app_async__Q23ipl12NandSDWorkerFPUl
-/* 813BFD78 0008E178  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFD7C 0008E17C  38 00 00 30 */	li r0, 0x30
-/* 813BFD80 0008E180  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFD84 0008E184  48 00 05 54 */	b .L_813C02D8
+/* 813BFD5C | 38 80 00 00 */	li r4, 0x0
+/* 813BFD60 | 38 A0 01 00 */	li r5, 0x100
+/* 813BFD64 | 38 63 02 08 */	addi r3, r3, 0x208
+/* 813BFD68 | 4B F7 05 CD */	bl memset
+/* 813BFD6C | 7F C3 F3 78 */	mr r3, r30
+/* 813BFD70 | 38 9E 02 08 */	addi r4, r30, 0x208
+/* 813BFD74 | 4B F8 90 19 */	bl list_sd_app_async__Q23ipl12NandSDWorkerFPUl
+/* 813BFD78 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFD7C | 38 00 00 30 */	li r0, 0x30
+/* 813BFD80 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFD84 | 48 00 05 54 */	b .L_813C02D8
 .L_813BFD88:
-/* 813BFD88 0008E188  4B F8 8A 81 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BFD8C 0008E18C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BFD90 0008E190  40 82 05 48 */	bne .L_813C02D8
-/* 813BFD94 0008E194  7F C3 F3 78 */	mr r3, r30
-/* 813BFD98 0008E198  4B F8 8A 9D */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BFD9C 0008E19C  7C 64 1B 78 */	mr r4, r3
-/* 813BFDA0 0008E1A0  38 7F 00 2A */	addi r3, r31, 0x2a
-/* 813BFDA4 0008E1A4  4C C6 31 82 */	crclr cr1eq
-/* 813BFDA8 0008E1A8  48 16 E8 F9 */	bl OSReport
-/* 813BFDAC 0008E1AC  7F C3 F3 78 */	mr r3, r30
-/* 813BFDB0 0008E1B0  4B F8 8D 1D */	bl get_sd_app_num__Q23ipl12NandSDWorkerFv
-/* 813BFDB4 0008E1B4  7C 64 1B 78 */	mr r4, r3
-/* 813BFDB8 0008E1B8  38 7F 03 E6 */	addi r3, r31, 0x3e6
-/* 813BFDBC 0008E1BC  4C C6 31 82 */	crclr cr1eq
-/* 813BFDC0 0008E1C0  48 16 E8 E1 */	bl OSReport
-/* 813BFDC4 0008E1C4  7F C3 F3 78 */	mr r3, r30
-/* 813BFDC8 0008E1C8  4B F8 8A D5 */	bl get_nand_app_num__Q23ipl12NandSDWorkerFv
-/* 813BFDCC 0008E1CC  7C 64 1B 78 */	mr r4, r3
-/* 813BFDD0 0008E1D0  38 7F 03 28 */	addi r3, r31, 0x328
-/* 813BFDD4 0008E1D4  4C C6 31 82 */	crclr cr1eq
-/* 813BFDD8 0008E1D8  48 16 E8 C9 */	bl OSReport
-/* 813BFDDC 0008E1DC  3B 80 00 00 */	li r28, 0x0
-/* 813BFDE0 0008E1E0  3B A0 00 00 */	li r29, 0x0
-/* 813BFDE4 0008E1E4  48 00 00 20 */	b .L_813BFE04
+/* 813BFD88 | 4B F8 8A 81 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BFD8C | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BFD90 | 40 82 05 48 */	bne .L_813C02D8
+/* 813BFD94 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFD98 | 4B F8 8A 9D */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BFD9C | 7C 64 1B 78 */	mr r4, r3
+/* 813BFDA0 | 38 7F 00 2A */	addi r3, r31, 0x2a
+/* 813BFDA4 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFDA8 | 48 16 E8 F9 */	bl OSReport
+/* 813BFDAC | 7F C3 F3 78 */	mr r3, r30
+/* 813BFDB0 | 4B F8 8D 1D */	bl get_sd_app_num__Q23ipl12NandSDWorkerFv
+/* 813BFDB4 | 7C 64 1B 78 */	mr r4, r3
+/* 813BFDB8 | 38 7F 03 E6 */	addi r3, r31, 0x3e6
+/* 813BFDBC | 4C C6 31 82 */	crclr cr1eq
+/* 813BFDC0 | 48 16 E8 E1 */	bl OSReport
+/* 813BFDC4 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFDC8 | 4B F8 8A D5 */	bl get_nand_app_num__Q23ipl12NandSDWorkerFv
+/* 813BFDCC | 7C 64 1B 78 */	mr r4, r3
+/* 813BFDD0 | 38 7F 03 28 */	addi r3, r31, 0x328
+/* 813BFDD4 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFDD8 | 48 16 E8 C9 */	bl OSReport
+/* 813BFDDC | 3B 80 00 00 */	li r28, 0x0
+/* 813BFDE0 | 3B A0 00 00 */	li r29, 0x0
+/* 813BFDE4 | 48 00 00 20 */	b .L_813BFE04
 .L_813BFDE8:
-/* 813BFDE8 0008E1E8  7C 9E EA 14 */	add r4, r30, r29
-/* 813BFDEC 0008E1EC  38 7F 04 26 */	addi r3, r31, 0x426
-/* 813BFDF0 0008E1F0  80 84 02 08 */	lwz r4, 0x208(r4)
-/* 813BFDF4 0008E1F4  4C C6 31 82 */	crclr cr1eq
-/* 813BFDF8 0008E1F8  48 16 E8 A9 */	bl OSReport
-/* 813BFDFC 0008E1FC  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 813BFE00 0008E200  3B BD 00 04 */	addi r29, r29, 0x4
+/* 813BFDE8 | 7C 9E EA 14 */	add r4, r30, r29
+/* 813BFDEC | 38 7F 04 26 */	addi r3, r31, 0x426
+/* 813BFDF0 | 80 84 02 08 */	lwz r4, 0x208(r4)
+/* 813BFDF4 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFDF8 | 48 16 E8 A9 */	bl OSReport
+/* 813BFDFC | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 813BFE00 | 3B BD 00 04 */	addi r29, r29, 0x4
 .L_813BFE04:
-/* 813BFE04 0008E204  7F C3 F3 78 */	mr r3, r30
-/* 813BFE08 0008E208  4B F8 8C C5 */	bl get_sd_app_num__Q23ipl12NandSDWorkerFv
-/* 813BFE0C 0008E20C  7C 1C 18 00 */	cmpw r28, r3
-/* 813BFE10 0008E210  41 80 FF D8 */	blt .L_813BFDE8
-/* 813BFE14 0008E214  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFE18 0008E218  38 00 00 43 */	li r0, 0x43
-/* 813BFE1C 0008E21C  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFE20 0008E220  48 00 04 B8 */	b .L_813C02D8
+/* 813BFE04 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFE08 | 4B F8 8C C5 */	bl get_sd_app_num__Q23ipl12NandSDWorkerFv
+/* 813BFE0C | 7C 1C 18 00 */	cmpw r28, r3
+/* 813BFE10 | 41 80 FF D8 */	blt .L_813BFDE8
+/* 813BFE14 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFE18 | 38 00 00 43 */	li r0, 0x43
+/* 813BFE1C | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFE20 | 48 00 04 B8 */	b .L_813C02D8
 .L_813BFE24:
-/* 813BFE24 0008E224  80 83 02 08 */	lwz r4, 0x208(r3)
-/* 813BFE28 0008E228  4B F8 93 3D */	bl iplNandSD_81349164
-/* 813BFE2C 0008E22C  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFE30 0008E230  38 00 00 44 */	li r0, 0x44
-/* 813BFE34 0008E234  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFE38 0008E238  48 00 04 A0 */	b .L_813C02D8
+/* 813BFE24 | 80 83 02 08 */	lwz r4, 0x208(r3)
+/* 813BFE28 | 4B F8 93 3D */	bl iplNandSD_81349164
+/* 813BFE2C | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFE30 | 38 00 00 44 */	li r0, 0x44
+/* 813BFE34 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFE38 | 48 00 04 A0 */	b .L_813C02D8
 .L_813BFE3C:
-/* 813BFE3C 0008E23C  4B F8 89 CD */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BFE40 0008E240  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BFE44 0008E244  40 82 04 94 */	bne .L_813C02D8
-/* 813BFE48 0008E248  7F C3 F3 78 */	mr r3, r30
-/* 813BFE4C 0008E24C  4B F8 89 E9 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BFE50 0008E250  7C 64 1B 78 */	mr r4, r3
-/* 813BFE54 0008E254  38 7F 00 2A */	addi r3, r31, 0x2a
-/* 813BFE58 0008E258  4C C6 31 82 */	crclr cr1eq
-/* 813BFE5C 0008E25C  48 16 E8 45 */	bl OSReport
-/* 813BFE60 0008E260  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFE64 0008E264  38 00 00 31 */	li r0, 0x31
-/* 813BFE68 0008E268  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFE6C 0008E26C  48 00 04 6C */	b .L_813C02D8
+/* 813BFE3C | 4B F8 89 CD */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BFE40 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BFE44 | 40 82 04 94 */	bne .L_813C02D8
+/* 813BFE48 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFE4C | 4B F8 89 E9 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BFE50 | 7C 64 1B 78 */	mr r4, r3
+/* 813BFE54 | 38 7F 00 2A */	addi r3, r31, 0x2a
+/* 813BFE58 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFE5C | 48 16 E8 45 */	bl OSReport
+/* 813BFE60 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFE64 | 38 00 00 31 */	li r0, 0x31
+/* 813BFE68 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFE6C | 48 00 04 6C */	b .L_813C02D8
 .L_813BFE70:
-/* 813BFE70 0008E270  7C E3 3B 78 */	mr r3, r7
-/* 813BFE74 0008E274  3C 80 00 02 */	lis r4, 0x2
-/* 813BFE78 0008E278  38 A4 90 00 */	subi r5, r4, 0x7000
-/* 813BFE7C 0008E27C  38 80 00 00 */	li r4, 0x0
-/* 813BFE80 0008E280  38 63 F3 B4 */	subi r3, r3, 0xc4c
-/* 813BFE84 0008E284  4B F7 04 B1 */	bl memset
-/* 813BFE88 0008E288  3C BE 00 01 */	addis r5, r30, 0x1
-/* 813BFE8C 0008E28C  3C DE 00 03 */	addis r6, r30, 0x3
-/* 813BFE90 0008E290  80 9E 02 08 */	lwz r4, 0x208(r30)
-/* 813BFE94 0008E294  7F C3 F3 78 */	mr r3, r30
-/* 813BFE98 0008E298  38 C6 83 B4 */	subi r6, r6, 0x7c4c
-/* 813BFE9C 0008E29C  38 A5 F3 B4 */	subi r5, r5, 0xc4c
-/* 813BFEA0 0008E2A0  4B F8 8F 29 */	bl get_sd_app_thumbnail_async__Q23ipl12NandSDWorkerFUlPUcPQ33ipl7channel18SChanMgrMetaHeader
-/* 813BFEA4 0008E2A4  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFEA8 0008E2A8  38 00 00 32 */	li r0, 0x32
-/* 813BFEAC 0008E2AC  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFEB0 0008E2B0  48 00 04 28 */	b .L_813C02D8
+/* 813BFE70 | 7C E3 3B 78 */	mr r3, r7
+/* 813BFE74 | 3C 80 00 02 */	lis r4, 0x2
+/* 813BFE78 | 38 A4 90 00 */	subi r5, r4, 0x7000
+/* 813BFE7C | 38 80 00 00 */	li r4, 0x0
+/* 813BFE80 | 38 63 F3 B4 */	subi r3, r3, 0xc4c
+/* 813BFE84 | 4B F7 04 B1 */	bl memset
+/* 813BFE88 | 3C BE 00 01 */	addis r5, r30, 0x1
+/* 813BFE8C | 3C DE 00 03 */	addis r6, r30, 0x3
+/* 813BFE90 | 80 9E 02 08 */	lwz r4, 0x208(r30)
+/* 813BFE94 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFE98 | 38 C6 83 B4 */	subi r6, r6, 0x7c4c
+/* 813BFE9C | 38 A5 F3 B4 */	subi r5, r5, 0xc4c
+/* 813BFEA0 | 4B F8 8F 29 */	bl get_sd_app_thumbnail_async__Q23ipl12NandSDWorkerFUlPUcPQ33ipl7channel18SChanMgrMetaHeader
+/* 813BFEA4 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFEA8 | 38 00 00 32 */	li r0, 0x32
+/* 813BFEAC | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFEB0 | 48 00 04 28 */	b .L_813C02D8
 .L_813BFEB4:
-/* 813BFEB4 0008E2B4  4B F8 89 55 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BFEB8 0008E2B8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BFEBC 0008E2BC  40 82 04 1C */	bne .L_813C02D8
-/* 813BFEC0 0008E2C0  7F C3 F3 78 */	mr r3, r30
-/* 813BFEC4 0008E2C4  4B F8 89 71 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BFEC8 0008E2C8  7C 64 1B 78 */	mr r4, r3
-/* 813BFECC 0008E2CC  38 7F 00 2A */	addi r3, r31, 0x2a
-/* 813BFED0 0008E2D0  4C C6 31 82 */	crclr cr1eq
-/* 813BFED4 0008E2D4  48 16 E7 CD */	bl OSReport
-/* 813BFED8 0008E2D8  7F C3 F3 78 */	mr r3, r30
-/* 813BFEDC 0008E2DC  4B F8 89 59 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BFEE0 0008E2E0  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BFEE4 0008E2E4  41 80 00 A8 */	blt .L_813BFF8C
-/* 813BFEE8 0008E2E8  80 9E 02 08 */	lwz r4, 0x208(r30)
-/* 813BFEEC 0008E2EC  7F C3 F3 78 */	mr r3, r30
-/* 813BFEF0 0008E2F0  4B F8 8A B9 */	bl get_cached_sd_app_meta_header__Q23ipl12NandSDWorkerFUl
-/* 813BFEF4 0008E2F4  3C 9E 00 01 */	addis r4, r30, 0x1
-/* 813BFEF8 0008E2F8  7C 7D 1B 78 */	mr r29, r3
-/* 813BFEFC 0008E2FC  80 84 F3 B4 */	lwz r4, -0xc4c(r4)
-/* 813BFF00 0008E300  38 7F 00 D6 */	addi r3, r31, 0xd6
-/* 813BFF04 0008E304  4C C6 31 82 */	crclr cr1eq
-/* 813BFF08 0008E308  48 16 E7 99 */	bl OSReport
-/* 813BFF0C 0008E30C  80 9E 02 08 */	lwz r4, 0x208(r30)
-/* 813BFF10 0008E310  7F C3 F3 78 */	mr r3, r30
-/* 813BFF14 0008E314  38 A1 00 08 */	addi r5, r1, 0x8
-/* 813BFF18 0008E318  4B F8 8C 3D */	bl get_cached_sd_app_thumbnail__Q23ipl12NandSDWorkerFUlPUl
-/* 813BFF1C 0008E31C  7C 64 1B 78 */	mr r4, r3
-/* 813BFF20 0008E320  38 7F 00 EF */	addi r3, r31, 0xef
-/* 813BFF24 0008E324  80 84 00 00 */	lwz r4, 0x0(r4)
-/* 813BFF28 0008E328  4C C6 31 82 */	crclr cr1eq
-/* 813BFF2C 0008E32C  48 16 E7 75 */	bl OSReport
-/* 813BFF30 0008E330  3C FE 00 03 */	addis r7, r30, 0x3
-/* 813BFF34 0008E334  38 7F 03 54 */	addi r3, r31, 0x354
-/* 813BFF38 0008E338  88 87 83 F4 */	lbz r4, -0x7c0c(r7)
-/* 813BFF3C 0008E33C  88 A7 83 F5 */	lbz r5, -0x7c0b(r7)
-/* 813BFF40 0008E340  88 C7 83 F6 */	lbz r6, -0x7c0a(r7)
-/* 813BFF44 0008E344  7C 84 07 74 */	extsb r4, r4
-/* 813BFF48 0008E348  88 E7 83 F7 */	lbz r7, -0x7c09(r7)
-/* 813BFF4C 0008E34C  7C A5 07 74 */	extsb r5, r5
-/* 813BFF50 0008E350  7C C6 07 74 */	extsb r6, r6
-/* 813BFF54 0008E354  7C E7 07 74 */	extsb r7, r7
-/* 813BFF58 0008E358  4C C6 31 82 */	crclr cr1eq
-/* 813BFF5C 0008E35C  48 16 E7 45 */	bl OSReport
-/* 813BFF60 0008E360  88 9D 00 40 */	lbz r4, 0x40(r29)
-/* 813BFF64 0008E364  38 7F 03 6E */	addi r3, r31, 0x36e
-/* 813BFF68 0008E368  88 BD 00 41 */	lbz r5, 0x41(r29)
-/* 813BFF6C 0008E36C  88 DD 00 42 */	lbz r6, 0x42(r29)
-/* 813BFF70 0008E370  7C 84 07 74 */	extsb r4, r4
-/* 813BFF74 0008E374  88 FD 00 43 */	lbz r7, 0x43(r29)
-/* 813BFF78 0008E378  7C A5 07 74 */	extsb r5, r5
-/* 813BFF7C 0008E37C  7C C6 07 74 */	extsb r6, r6
-/* 813BFF80 0008E380  7C E7 07 74 */	extsb r7, r7
-/* 813BFF84 0008E384  4C C6 31 82 */	crclr cr1eq
-/* 813BFF88 0008E388  48 16 E7 19 */	bl OSReport
+/* 813BFEB4 | 4B F8 89 55 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BFEB8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BFEBC | 40 82 04 1C */	bne .L_813C02D8
+/* 813BFEC0 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFEC4 | 4B F8 89 71 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BFEC8 | 7C 64 1B 78 */	mr r4, r3
+/* 813BFECC | 38 7F 00 2A */	addi r3, r31, 0x2a
+/* 813BFED0 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFED4 | 48 16 E7 CD */	bl OSReport
+/* 813BFED8 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFEDC | 4B F8 89 59 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BFEE0 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BFEE4 | 41 80 00 A8 */	blt .L_813BFF8C
+/* 813BFEE8 | 80 9E 02 08 */	lwz r4, 0x208(r30)
+/* 813BFEEC | 7F C3 F3 78 */	mr r3, r30
+/* 813BFEF0 | 4B F8 8A B9 */	bl get_cached_sd_app_meta_header__Q23ipl12NandSDWorkerFUl
+/* 813BFEF4 | 3C 9E 00 01 */	addis r4, r30, 0x1
+/* 813BFEF8 | 7C 7D 1B 78 */	mr r29, r3
+/* 813BFEFC | 80 84 F3 B4 */	lwz r4, -0xc4c(r4)
+/* 813BFF00 | 38 7F 00 D6 */	addi r3, r31, 0xd6
+/* 813BFF04 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFF08 | 48 16 E7 99 */	bl OSReport
+/* 813BFF0C | 80 9E 02 08 */	lwz r4, 0x208(r30)
+/* 813BFF10 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFF14 | 38 A1 00 08 */	addi r5, r1, 0x8
+/* 813BFF18 | 4B F8 8C 3D */	bl get_cached_sd_app_thumbnail__Q23ipl12NandSDWorkerFUlPUl
+/* 813BFF1C | 7C 64 1B 78 */	mr r4, r3
+/* 813BFF20 | 38 7F 00 EF */	addi r3, r31, 0xef
+/* 813BFF24 | 80 84 00 00 */	lwz r4, 0x0(r4)
+/* 813BFF28 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFF2C | 48 16 E7 75 */	bl OSReport
+/* 813BFF30 | 3C FE 00 03 */	addis r7, r30, 0x3
+/* 813BFF34 | 38 7F 03 54 */	addi r3, r31, 0x354
+/* 813BFF38 | 88 87 83 F4 */	lbz r4, -0x7c0c(r7)
+/* 813BFF3C | 88 A7 83 F5 */	lbz r5, -0x7c0b(r7)
+/* 813BFF40 | 88 C7 83 F6 */	lbz r6, -0x7c0a(r7)
+/* 813BFF44 | 7C 84 07 74 */	extsb r4, r4
+/* 813BFF48 | 88 E7 83 F7 */	lbz r7, -0x7c09(r7)
+/* 813BFF4C | 7C A5 07 74 */	extsb r5, r5
+/* 813BFF50 | 7C C6 07 74 */	extsb r6, r6
+/* 813BFF54 | 7C E7 07 74 */	extsb r7, r7
+/* 813BFF58 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFF5C | 48 16 E7 45 */	bl OSReport
+/* 813BFF60 | 88 9D 00 40 */	lbz r4, 0x40(r29)
+/* 813BFF64 | 38 7F 03 6E */	addi r3, r31, 0x36e
+/* 813BFF68 | 88 BD 00 41 */	lbz r5, 0x41(r29)
+/* 813BFF6C | 88 DD 00 42 */	lbz r6, 0x42(r29)
+/* 813BFF70 | 7C 84 07 74 */	extsb r4, r4
+/* 813BFF74 | 88 FD 00 43 */	lbz r7, 0x43(r29)
+/* 813BFF78 | 7C A5 07 74 */	extsb r5, r5
+/* 813BFF7C | 7C C6 07 74 */	extsb r6, r6
+/* 813BFF80 | 7C E7 07 74 */	extsb r7, r7
+/* 813BFF84 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFF88 | 48 16 E7 19 */	bl OSReport
 .L_813BFF8C:
-/* 813BFF8C 0008E38C  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFF90 0008E390  38 00 00 33 */	li r0, 0x33
-/* 813BFF94 0008E394  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFF98 0008E398  48 00 03 40 */	b .L_813C02D8
+/* 813BFF8C | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFF90 | 38 00 00 33 */	li r0, 0x33
+/* 813BFF94 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFF98 | 48 00 03 40 */	b .L_813C02D8
 .L_813BFF9C:
-/* 813BFF9C 0008E39C  80 83 02 08 */	lwz r4, 0x208(r3)
-/* 813BFFA0 0008E3A0  4B F8 8F 99 */	bl get_sd_app_size_async__Q23ipl12NandSDWorkerFUl
-/* 813BFFA4 0008E3A4  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813BFFA8 0008E3A8  38 00 00 34 */	li r0, 0x34
-/* 813BFFAC 0008E3AC  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813BFFB0 0008E3B0  48 00 03 28 */	b .L_813C02D8
+/* 813BFF9C | 80 83 02 08 */	lwz r4, 0x208(r3)
+/* 813BFFA0 | 4B F8 8F 99 */	bl get_sd_app_size_async__Q23ipl12NandSDWorkerFUl
+/* 813BFFA4 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813BFFA8 | 38 00 00 34 */	li r0, 0x34
+/* 813BFFAC | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813BFFB0 | 48 00 03 28 */	b .L_813C02D8
 .L_813BFFB4:
-/* 813BFFB4 0008E3B4  4B F8 88 55 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813BFFB8 0008E3B8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BFFBC 0008E3BC  40 82 03 1C */	bne .L_813C02D8
-/* 813BFFC0 0008E3C0  7F C3 F3 78 */	mr r3, r30
-/* 813BFFC4 0008E3C4  4B F8 88 71 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813BFFC8 0008E3C8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813BFFCC 0008E3CC  7C 7C 1B 78 */	mr r28, r3
-/* 813BFFD0 0008E3D0  41 80 00 38 */	blt .L_813C0008
-/* 813BFFD4 0008E3D4  80 9E 02 08 */	lwz r4, 0x208(r30)
-/* 813BFFD8 0008E3D8  7F 85 E3 78 */	mr r5, r28
-/* 813BFFDC 0008E3DC  38 7F 04 3A */	addi r3, r31, 0x43a
-/* 813BFFE0 0008E3E0  4C C6 31 82 */	crclr cr1eq
-/* 813BFFE4 0008E3E4  48 16 E6 BD */	bl OSReport
-/* 813BFFE8 0008E3E8  80 9E 02 08 */	lwz r4, 0x208(r30)
-/* 813BFFEC 0008E3EC  7F C3 F3 78 */	mr r3, r30
-/* 813BFFF0 0008E3F0  4B F8 8C 4D */	bl get_cached_sd_app_size__Q23ipl12NandSDWorkerFUl
-/* 813BFFF4 0008E3F4  7C 64 1B 78 */	mr r4, r3
-/* 813BFFF8 0008E3F8  38 7F 03 AD */	addi r3, r31, 0x3ad
-/* 813BFFFC 0008E3FC  4C C6 31 82 */	crclr cr1eq
-/* 813C0000 0008E400  48 16 E6 A1 */	bl OSReport
-/* 813C0004 0008E404  48 00 00 28 */	b .L_813C002C
+/* 813BFFB4 | 4B F8 88 55 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813BFFB8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BFFBC | 40 82 03 1C */	bne .L_813C02D8
+/* 813BFFC0 | 7F C3 F3 78 */	mr r3, r30
+/* 813BFFC4 | 4B F8 88 71 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813BFFC8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813BFFCC | 7C 7C 1B 78 */	mr r28, r3
+/* 813BFFD0 | 41 80 00 38 */	blt .L_813C0008
+/* 813BFFD4 | 80 9E 02 08 */	lwz r4, 0x208(r30)
+/* 813BFFD8 | 7F 85 E3 78 */	mr r5, r28
+/* 813BFFDC | 38 7F 04 3A */	addi r3, r31, 0x43a
+/* 813BFFE0 | 4C C6 31 82 */	crclr cr1eq
+/* 813BFFE4 | 48 16 E6 BD */	bl OSReport
+/* 813BFFE8 | 80 9E 02 08 */	lwz r4, 0x208(r30)
+/* 813BFFEC | 7F C3 F3 78 */	mr r3, r30
+/* 813BFFF0 | 4B F8 8C 4D */	bl get_cached_sd_app_size__Q23ipl12NandSDWorkerFUl
+/* 813BFFF4 | 7C 64 1B 78 */	mr r4, r3
+/* 813BFFF8 | 38 7F 03 AD */	addi r3, r31, 0x3ad
+/* 813BFFFC | 4C C6 31 82 */	crclr cr1eq
+/* 813C0000 | 48 16 E6 A1 */	bl OSReport
+/* 813C0004 | 48 00 00 28 */	b .L_813C002C
 .L_813C0008:
-/* 813C0008 0008E408  7F 84 E3 78 */	mr r4, r28
-/* 813C000C 0008E40C  38 7F 04 55 */	addi r3, r31, 0x455
-/* 813C0010 0008E410  4C C6 31 82 */	crclr cr1eq
-/* 813C0014 0008E414  48 16 E6 8D */	bl OSReport
-/* 813C0018 0008E418  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813C001C 0008E41C  38 00 00 4F */	li r0, 0x4f
-/* 813C0020 0008E420  93 83 F3 B0 */	stw r28, -0xc50(r3)
-/* 813C0024 0008E424  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813C0028 0008E428  48 00 02 B0 */	b .L_813C02D8
+/* 813C0008 | 7F 84 E3 78 */	mr r4, r28
+/* 813C000C | 38 7F 04 55 */	addi r3, r31, 0x455
+/* 813C0010 | 4C C6 31 82 */	crclr cr1eq
+/* 813C0014 | 48 16 E6 8D */	bl OSReport
+/* 813C0018 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813C001C | 38 00 00 4F */	li r0, 0x4f
+/* 813C0020 | 93 83 F3 B0 */	stw r28, -0xc50(r3)
+/* 813C0024 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813C0028 | 48 00 02 B0 */	b .L_813C02D8
 .L_813C002C:
-/* 813C002C 0008E42C  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813C0030 0008E430  38 00 00 29 */	li r0, 0x29
-/* 813C0034 0008E434  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813C0038 0008E438  48 00 02 A0 */	b .L_813C02D8
+/* 813C002C | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813C0030 | 38 00 00 29 */	li r0, 0x29
+/* 813C0034 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813C0038 | 48 00 02 A0 */	b .L_813C02D8
 .L_813C003C:
-/* 813C003C 0008E43C  80 A3 00 08 */	lwz r5, 0x8(r3)
-/* 813C0040 0008E440  38 E0 00 00 */	li r7, 0x0
-/* 813C0044 0008E444  80 C3 00 0C */	lwz r6, 0xc(r3)
-/* 813C0048 0008E448  4B F8 90 09 */	bl delete_nand_app_async__Q23ipl12NandSDWorkerFUx
-/* 813C004C 0008E44C  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813C0050 0008E450  38 00 00 2A */	li r0, 0x2a
-/* 813C0054 0008E454  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813C0058 0008E458  48 00 02 80 */	b .L_813C02D8
+/* 813C003C | 80 A3 00 08 */	lwz r5, 0x8(r3)
+/* 813C0040 | 38 E0 00 00 */	li r7, 0x0
+/* 813C0044 | 80 C3 00 0C */	lwz r6, 0xc(r3)
+/* 813C0048 | 4B F8 90 09 */	bl delete_nand_app_async__Q23ipl12NandSDWorkerFUx
+/* 813C004C | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813C0050 | 38 00 00 2A */	li r0, 0x2a
+/* 813C0054 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813C0058 | 48 00 02 80 */	b .L_813C02D8
 .L_813C005C:
-/* 813C005C 0008E45C  4B F8 87 AD */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813C0060 0008E460  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813C0064 0008E464  40 82 02 74 */	bne .L_813C02D8
-/* 813C0068 0008E468  7F C3 F3 78 */	mr r3, r30
-/* 813C006C 0008E46C  4B F8 87 C9 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813C0070 0008E470  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813C0074 0008E474  40 82 00 18 */	bne .L_813C008C
-/* 813C0078 0008E478  80 BE 00 08 */	lwz r5, 0x8(r30)
-/* 813C007C 0008E47C  38 7F 04 76 */	addi r3, r31, 0x476
-/* 813C0080 0008E480  80 DE 00 0C */	lwz r6, 0xc(r30)
-/* 813C0084 0008E484  4C C6 31 82 */	crclr cr1eq
-/* 813C0088 0008E488  48 16 E6 19 */	bl OSReport
+/* 813C005C | 4B F8 87 AD */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813C0060 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813C0064 | 40 82 02 74 */	bne .L_813C02D8
+/* 813C0068 | 7F C3 F3 78 */	mr r3, r30
+/* 813C006C | 4B F8 87 C9 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813C0070 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813C0074 | 40 82 00 18 */	bne .L_813C008C
+/* 813C0078 | 80 BE 00 08 */	lwz r5, 0x8(r30)
+/* 813C007C | 38 7F 04 76 */	addi r3, r31, 0x476
+/* 813C0080 | 80 DE 00 0C */	lwz r6, 0xc(r30)
+/* 813C0084 | 4C C6 31 82 */	crclr cr1eq
+/* 813C0088 | 48 16 E6 19 */	bl OSReport
 .L_813C008C:
-/* 813C008C 0008E48C  7F C3 F3 78 */	mr r3, r30
-/* 813C0090 0008E490  4B F8 87 A5 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813C0094 0008E494  7C 64 1B 78 */	mr r4, r3
-/* 813C0098 0008E498  38 7F 00 2A */	addi r3, r31, 0x2a
-/* 813C009C 0008E49C  4C C6 31 82 */	crclr cr1eq
-/* 813C00A0 0008E4A0  48 16 E6 01 */	bl OSReport
-/* 813C00A4 0008E4A4  7F C3 F3 78 */	mr r3, r30
-/* 813C00A8 0008E4A8  4B F8 8A 25 */	bl get_sd_app_num__Q23ipl12NandSDWorkerFv
-/* 813C00AC 0008E4AC  7C 64 1B 78 */	mr r4, r3
-/* 813C00B0 0008E4B0  38 7F 03 E6 */	addi r3, r31, 0x3e6
-/* 813C00B4 0008E4B4  4C C6 31 82 */	crclr cr1eq
-/* 813C00B8 0008E4B8  48 16 E5 E9 */	bl OSReport
-/* 813C00BC 0008E4BC  7F C3 F3 78 */	mr r3, r30
-/* 813C00C0 0008E4C0  4B F8 87 DD */	bl get_nand_app_num__Q23ipl12NandSDWorkerFv
-/* 813C00C4 0008E4C4  7C 64 1B 78 */	mr r4, r3
-/* 813C00C8 0008E4C8  38 7F 03 28 */	addi r3, r31, 0x328
-/* 813C00CC 0008E4CC  4C C6 31 82 */	crclr cr1eq
-/* 813C00D0 0008E4D0  48 16 E5 D1 */	bl OSReport
-/* 813C00D4 0008E4D4  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813C00D8 0008E4D8  38 00 00 49 */	li r0, 0x49
-/* 813C00DC 0008E4DC  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813C00E0 0008E4E0  48 00 01 F8 */	b .L_813C02D8
+/* 813C008C | 7F C3 F3 78 */	mr r3, r30
+/* 813C0090 | 4B F8 87 A5 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813C0094 | 7C 64 1B 78 */	mr r4, r3
+/* 813C0098 | 38 7F 00 2A */	addi r3, r31, 0x2a
+/* 813C009C | 4C C6 31 82 */	crclr cr1eq
+/* 813C00A0 | 48 16 E6 01 */	bl OSReport
+/* 813C00A4 | 7F C3 F3 78 */	mr r3, r30
+/* 813C00A8 | 4B F8 8A 25 */	bl get_sd_app_num__Q23ipl12NandSDWorkerFv
+/* 813C00AC | 7C 64 1B 78 */	mr r4, r3
+/* 813C00B0 | 38 7F 03 E6 */	addi r3, r31, 0x3e6
+/* 813C00B4 | 4C C6 31 82 */	crclr cr1eq
+/* 813C00B8 | 48 16 E5 E9 */	bl OSReport
+/* 813C00BC | 7F C3 F3 78 */	mr r3, r30
+/* 813C00C0 | 4B F8 87 DD */	bl get_nand_app_num__Q23ipl12NandSDWorkerFv
+/* 813C00C4 | 7C 64 1B 78 */	mr r4, r3
+/* 813C00C8 | 38 7F 03 28 */	addi r3, r31, 0x328
+/* 813C00CC | 4C C6 31 82 */	crclr cr1eq
+/* 813C00D0 | 48 16 E5 D1 */	bl OSReport
+/* 813C00D4 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813C00D8 | 38 00 00 49 */	li r0, 0x49
+/* 813C00DC | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813C00E0 | 48 00 01 F8 */	b .L_813C02D8
 .L_813C00E4:
-/* 813C00E4 0008E4E4  80 A3 00 08 */	lwz r5, 0x8(r3)
-/* 813C00E8 0008E4E8  80 C3 00 0C */	lwz r6, 0xc(r3)
-/* 813C00EC 0008E4EC  4B F8 90 29 */	bl nand_app_exist_async__Q23ipl12NandSDWorkerFUx
-/* 813C00F0 0008E4F0  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813C00F4 0008E4F4  38 00 00 4A */	li r0, 0x4a
-/* 813C00F8 0008E4F8  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813C00FC 0008E4FC  48 00 01 DC */	b .L_813C02D8
+/* 813C00E4 | 80 A3 00 08 */	lwz r5, 0x8(r3)
+/* 813C00E8 | 80 C3 00 0C */	lwz r6, 0xc(r3)
+/* 813C00EC | 4B F8 90 29 */	bl nand_app_exist_async__Q23ipl12NandSDWorkerFUx
+/* 813C00F0 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813C00F4 | 38 00 00 4A */	li r0, 0x4a
+/* 813C00F8 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813C00FC | 48 00 01 DC */	b .L_813C02D8
 .L_813C0100:
-/* 813C0100 0008E500  4B F8 87 09 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813C0104 0008E504  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813C0108 0008E508  40 82 01 D0 */	bne .L_813C02D8
-/* 813C010C 0008E50C  7F C3 F3 78 */	mr r3, r30
-/* 813C0110 0008E510  4B F8 87 25 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813C0114 0008E514  7C 64 1B 78 */	mr r4, r3
-/* 813C0118 0008E518  38 7F 00 2A */	addi r3, r31, 0x2a
-/* 813C011C 0008E51C  4C C6 31 82 */	crclr cr1eq
-/* 813C0120 0008E520  48 16 E5 81 */	bl OSReport
-/* 813C0124 0008E524  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813C0128 0008E528  38 00 00 27 */	li r0, 0x27
-/* 813C012C 0008E52C  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813C0130 0008E530  48 00 01 A8 */	b .L_813C02D8
+/* 813C0100 | 4B F8 87 09 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813C0104 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813C0108 | 40 82 01 D0 */	bne .L_813C02D8
+/* 813C010C | 7F C3 F3 78 */	mr r3, r30
+/* 813C0110 | 4B F8 87 25 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813C0114 | 7C 64 1B 78 */	mr r4, r3
+/* 813C0118 | 38 7F 00 2A */	addi r3, r31, 0x2a
+/* 813C011C | 4C C6 31 82 */	crclr cr1eq
+/* 813C0120 | 48 16 E5 81 */	bl OSReport
+/* 813C0124 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813C0128 | 38 00 00 27 */	li r0, 0x27
+/* 813C012C | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813C0130 | 48 00 01 A8 */	b .L_813C02D8
 .L_813C0134:
-/* 813C0134 0008E534  80 83 02 08 */	lwz r4, 0x208(r3)
-/* 813C0138 0008E538  38 A0 00 00 */	li r5, 0x0
-/* 813C013C 0008E53C  4B F8 8F 5D */	bl copy_sd_app_to_nand_async__Q23ipl12NandSDWorkerFUl
-/* 813C0140 0008E540  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813C0144 0008E544  38 00 00 28 */	li r0, 0x28
-/* 813C0148 0008E548  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813C014C 0008E54C  48 00 01 8C */	b .L_813C02D8
+/* 813C0134 | 80 83 02 08 */	lwz r4, 0x208(r3)
+/* 813C0138 | 38 A0 00 00 */	li r5, 0x0
+/* 813C013C | 4B F8 8F 5D */	bl copy_sd_app_to_nand_async__Q23ipl12NandSDWorkerFUl
+/* 813C0140 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813C0144 | 38 00 00 28 */	li r0, 0x28
+/* 813C0148 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813C014C | 48 00 01 8C */	b .L_813C02D8
 .L_813C0150:
-/* 813C0150 0008E550  4B F8 86 B9 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813C0154 0008E554  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813C0158 0008E558  40 82 01 80 */	bne .L_813C02D8
-/* 813C015C 0008E55C  7F C3 F3 78 */	mr r3, r30
-/* 813C0160 0008E560  4B F8 86 D5 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813C0164 0008E564  7C 64 1B 78 */	mr r4, r3
-/* 813C0168 0008E568  38 7F 00 2A */	addi r3, r31, 0x2a
-/* 813C016C 0008E56C  4C C6 31 82 */	crclr cr1eq
-/* 813C0170 0008E570  48 16 E5 31 */	bl OSReport
-/* 813C0174 0008E574  7F C3 F3 78 */	mr r3, r30
-/* 813C0178 0008E578  4B F8 89 55 */	bl get_sd_app_num__Q23ipl12NandSDWorkerFv
-/* 813C017C 0008E57C  7C 64 1B 78 */	mr r4, r3
-/* 813C0180 0008E580  38 7F 03 E6 */	addi r3, r31, 0x3e6
-/* 813C0184 0008E584  4C C6 31 82 */	crclr cr1eq
-/* 813C0188 0008E588  48 16 E5 19 */	bl OSReport
-/* 813C018C 0008E58C  7F C3 F3 78 */	mr r3, r30
-/* 813C0190 0008E590  4B F8 87 0D */	bl get_nand_app_num__Q23ipl12NandSDWorkerFv
-/* 813C0194 0008E594  7C 64 1B 78 */	mr r4, r3
-/* 813C0198 0008E598  38 7F 03 28 */	addi r3, r31, 0x328
-/* 813C019C 0008E59C  4C C6 31 82 */	crclr cr1eq
-/* 813C01A0 0008E5A0  48 16 E5 01 */	bl OSReport
-/* 813C01A4 0008E5A4  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813C01A8 0008E5A8  38 00 00 35 */	li r0, 0x35
-/* 813C01AC 0008E5AC  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813C01B0 0008E5B0  48 00 01 28 */	b .L_813C02D8
+/* 813C0150 | 4B F8 86 B9 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813C0154 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813C0158 | 40 82 01 80 */	bne .L_813C02D8
+/* 813C015C | 7F C3 F3 78 */	mr r3, r30
+/* 813C0160 | 4B F8 86 D5 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813C0164 | 7C 64 1B 78 */	mr r4, r3
+/* 813C0168 | 38 7F 00 2A */	addi r3, r31, 0x2a
+/* 813C016C | 4C C6 31 82 */	crclr cr1eq
+/* 813C0170 | 48 16 E5 31 */	bl OSReport
+/* 813C0174 | 7F C3 F3 78 */	mr r3, r30
+/* 813C0178 | 4B F8 89 55 */	bl get_sd_app_num__Q23ipl12NandSDWorkerFv
+/* 813C017C | 7C 64 1B 78 */	mr r4, r3
+/* 813C0180 | 38 7F 03 E6 */	addi r3, r31, 0x3e6
+/* 813C0184 | 4C C6 31 82 */	crclr cr1eq
+/* 813C0188 | 48 16 E5 19 */	bl OSReport
+/* 813C018C | 7F C3 F3 78 */	mr r3, r30
+/* 813C0190 | 4B F8 87 0D */	bl get_nand_app_num__Q23ipl12NandSDWorkerFv
+/* 813C0194 | 7C 64 1B 78 */	mr r4, r3
+/* 813C0198 | 38 7F 03 28 */	addi r3, r31, 0x328
+/* 813C019C | 4C C6 31 82 */	crclr cr1eq
+/* 813C01A0 | 48 16 E5 01 */	bl OSReport
+/* 813C01A4 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813C01A8 | 38 00 00 35 */	li r0, 0x35
+/* 813C01AC | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813C01B0 | 48 00 01 28 */	b .L_813C02D8
 .L_813C01B4:
-/* 813C01B4 0008E5B4  80 83 02 08 */	lwz r4, 0x208(r3)
-/* 813C01B8 0008E5B8  4B F8 8D B9 */	bl delete_sd_app_async__Q23ipl12NandSDWorkerFUl
-/* 813C01BC 0008E5BC  80 9E 02 08 */	lwz r4, 0x208(r30)
-/* 813C01C0 0008E5C0  38 7F 04 97 */	addi r3, r31, 0x497
-/* 813C01C4 0008E5C4  4C C6 31 82 */	crclr cr1eq
-/* 813C01C8 0008E5C8  48 16 E4 D9 */	bl OSReport
-/* 813C01CC 0008E5CC  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813C01D0 0008E5D0  38 00 00 36 */	li r0, 0x36
-/* 813C01D4 0008E5D4  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813C01D8 0008E5D8  48 00 01 00 */	b .L_813C02D8
+/* 813C01B4 | 80 83 02 08 */	lwz r4, 0x208(r3)
+/* 813C01B8 | 4B F8 8D B9 */	bl delete_sd_app_async__Q23ipl12NandSDWorkerFUl
+/* 813C01BC | 80 9E 02 08 */	lwz r4, 0x208(r30)
+/* 813C01C0 | 38 7F 04 97 */	addi r3, r31, 0x497
+/* 813C01C4 | 4C C6 31 82 */	crclr cr1eq
+/* 813C01C8 | 48 16 E4 D9 */	bl OSReport
+/* 813C01CC | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813C01D0 | 38 00 00 36 */	li r0, 0x36
+/* 813C01D4 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813C01D8 | 48 00 01 00 */	b .L_813C02D8
 .L_813C01DC:
-/* 813C01DC 0008E5DC  4B F8 86 2D */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813C01E0 0008E5E0  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813C01E4 0008E5E4  40 82 00 F4 */	bne .L_813C02D8
-/* 813C01E8 0008E5E8  7F C3 F3 78 */	mr r3, r30
-/* 813C01EC 0008E5EC  4B F8 86 49 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813C01F0 0008E5F0  7C 64 1B 78 */	mr r4, r3
-/* 813C01F4 0008E5F4  38 7F 00 2A */	addi r3, r31, 0x2a
-/* 813C01F8 0008E5F8  4C C6 31 82 */	crclr cr1eq
-/* 813C01FC 0008E5FC  48 16 E4 A5 */	bl OSReport
-/* 813C0200 0008E600  7F C3 F3 78 */	mr r3, r30
-/* 813C0204 0008E604  4B F8 88 C9 */	bl get_sd_app_num__Q23ipl12NandSDWorkerFv
-/* 813C0208 0008E608  7C 64 1B 78 */	mr r4, r3
-/* 813C020C 0008E60C  38 7F 03 E6 */	addi r3, r31, 0x3e6
-/* 813C0210 0008E610  4C C6 31 82 */	crclr cr1eq
-/* 813C0214 0008E614  48 16 E4 8D */	bl OSReport
-/* 813C0218 0008E618  7F C3 F3 78 */	mr r3, r30
-/* 813C021C 0008E61C  4B F8 86 81 */	bl get_nand_app_num__Q23ipl12NandSDWorkerFv
-/* 813C0220 0008E620  7C 64 1B 78 */	mr r4, r3
-/* 813C0224 0008E624  38 7F 03 28 */	addi r3, r31, 0x328
-/* 813C0228 0008E628  4C C6 31 82 */	crclr cr1eq
-/* 813C022C 0008E62C  48 16 E4 75 */	bl OSReport
-/* 813C0230 0008E630  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813C0234 0008E634  38 80 00 00 */	li r4, 0x0
-/* 813C0238 0008E638  38 00 00 4D */	li r0, 0x4d
-/* 813C023C 0008E63C  90 83 F3 B0 */	stw r4, -0xc50(r3)
-/* 813C0240 0008E640  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813C0244 0008E644  48 00 00 94 */	b .L_813C02D8
+/* 813C01DC | 4B F8 86 2D */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813C01E0 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813C01E4 | 40 82 00 F4 */	bne .L_813C02D8
+/* 813C01E8 | 7F C3 F3 78 */	mr r3, r30
+/* 813C01EC | 4B F8 86 49 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813C01F0 | 7C 64 1B 78 */	mr r4, r3
+/* 813C01F4 | 38 7F 00 2A */	addi r3, r31, 0x2a
+/* 813C01F8 | 4C C6 31 82 */	crclr cr1eq
+/* 813C01FC | 48 16 E4 A5 */	bl OSReport
+/* 813C0200 | 7F C3 F3 78 */	mr r3, r30
+/* 813C0204 | 4B F8 88 C9 */	bl get_sd_app_num__Q23ipl12NandSDWorkerFv
+/* 813C0208 | 7C 64 1B 78 */	mr r4, r3
+/* 813C020C | 38 7F 03 E6 */	addi r3, r31, 0x3e6
+/* 813C0210 | 4C C6 31 82 */	crclr cr1eq
+/* 813C0214 | 48 16 E4 8D */	bl OSReport
+/* 813C0218 | 7F C3 F3 78 */	mr r3, r30
+/* 813C021C | 4B F8 86 81 */	bl get_nand_app_num__Q23ipl12NandSDWorkerFv
+/* 813C0220 | 7C 64 1B 78 */	mr r4, r3
+/* 813C0224 | 38 7F 03 28 */	addi r3, r31, 0x328
+/* 813C0228 | 4C C6 31 82 */	crclr cr1eq
+/* 813C022C | 48 16 E4 75 */	bl OSReport
+/* 813C0230 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813C0234 | 38 80 00 00 */	li r4, 0x0
+/* 813C0238 | 38 00 00 4D */	li r0, 0x4d
+/* 813C023C | 90 83 F3 B0 */	stw r4, -0xc50(r3)
+/* 813C0240 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813C0244 | 48 00 00 94 */	b .L_813C02D8
 .L_813C0248:
-/* 813C0248 0008E648  80 83 02 08 */	lwz r4, 0x208(r3)
-/* 813C024C 0008E64C  4B F8 8F 19 */	bl iplNandSD_81349164
-/* 813C0250 0008E650  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813C0254 0008E654  38 00 00 4E */	li r0, 0x4e
-/* 813C0258 0008E658  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813C025C 0008E65C  48 00 00 7C */	b .L_813C02D8
+/* 813C0248 | 80 83 02 08 */	lwz r4, 0x208(r3)
+/* 813C024C | 4B F8 8F 19 */	bl iplNandSD_81349164
+/* 813C0250 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813C0254 | 38 00 00 4E */	li r0, 0x4e
+/* 813C0258 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813C025C | 48 00 00 7C */	b .L_813C02D8
 .L_813C0260:
-/* 813C0260 0008E660  4B F8 85 A9 */	bl is_working__Q23ipl12NandSDWorkerFv
-/* 813C0264 0008E664  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813C0268 0008E668  40 82 00 70 */	bne .L_813C02D8
-/* 813C026C 0008E66C  7F C3 F3 78 */	mr r3, r30
-/* 813C0270 0008E670  4B F8 85 C5 */	bl get_async_result__Q23ipl12NandSDWorkerFv
-/* 813C0274 0008E674  7C 64 1B 78 */	mr r4, r3
-/* 813C0278 0008E678  38 7F 00 2A */	addi r3, r31, 0x2a
-/* 813C027C 0008E67C  4C C6 31 82 */	crclr cr1eq
-/* 813C0280 0008E680  48 16 E4 21 */	bl OSReport
-/* 813C0284 0008E684  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813C0288 0008E688  38 00 00 4F */	li r0, 0x4f
-/* 813C028C 0008E68C  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813C0290 0008E690  48 00 00 48 */	b .L_813C02D8
+/* 813C0260 | 4B F8 85 A9 */	bl is_working__Q23ipl12NandSDWorkerFv
+/* 813C0264 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813C0268 | 40 82 00 70 */	bne .L_813C02D8
+/* 813C026C | 7F C3 F3 78 */	mr r3, r30
+/* 813C0270 | 4B F8 85 C5 */	bl get_async_result__Q23ipl12NandSDWorkerFv
+/* 813C0274 | 7C 64 1B 78 */	mr r4, r3
+/* 813C0278 | 38 7F 00 2A */	addi r3, r31, 0x2a
+/* 813C027C | 4C C6 31 82 */	crclr cr1eq
+/* 813C0280 | 48 16 E4 21 */	bl OSReport
+/* 813C0284 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813C0288 | 38 00 00 4F */	li r0, 0x4f
+/* 813C028C | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813C0290 | 48 00 00 48 */	b .L_813C02D8
 .L_813C0294:
-/* 813C0294 0008E694  4B F8 8A 5D */	bl terminate_async__Q23ipl12NandSDWorkerFv
-/* 813C0298 0008E698  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813C029C 0008E69C  38 00 00 50 */	li r0, 0x50
-/* 813C02A0 0008E6A0  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813C02A4 0008E6A4  48 00 00 34 */	b .L_813C02D8
+/* 813C0294 | 4B F8 8A 5D */	bl terminate_async__Q23ipl12NandSDWorkerFv
+/* 813C0298 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813C029C | 38 00 00 50 */	li r0, 0x50
+/* 813C02A0 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813C02A4 | 48 00 00 34 */	b .L_813C02D8
 .L_813C02A8:
-/* 813C02A8 0008E6A8  4B F8 85 51 */	bl is_terminated__Q23ipl12NandSDWorkerFv
-/* 813C02AC 0008E6AC  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813C02B0 0008E6B0  41 82 00 28 */	beq .L_813C02D8
-/* 813C02B4 0008E6B4  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813C02B8 0008E6B8  80 03 F3 B0 */	lwz r0, -0xc50(r3)
-/* 813C02BC 0008E6BC  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813C02C0 0008E6C0  40 82 00 10 */	bne .L_813C02D0
-/* 813C02C4 0008E6C4  38 00 00 52 */	li r0, 0x52
-/* 813C02C8 0008E6C8  90 03 F3 A8 */	stw r0, -0xc58(r3)
-/* 813C02CC 0008E6CC  48 00 00 0C */	b .L_813C02D8
+/* 813C02A8 | 4B F8 85 51 */	bl is_terminated__Q23ipl12NandSDWorkerFv
+/* 813C02AC | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813C02B0 | 41 82 00 28 */	beq .L_813C02D8
+/* 813C02B4 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813C02B8 | 80 03 F3 B0 */	lwz r0, -0xc50(r3)
+/* 813C02BC | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813C02C0 | 40 82 00 10 */	bne .L_813C02D0
+/* 813C02C4 | 38 00 00 52 */	li r0, 0x52
+/* 813C02C8 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813C02CC | 48 00 00 0C */	b .L_813C02D8
 .L_813C02D0:
-/* 813C02D0 0008E6D0  38 00 00 51 */	li r0, 0x51
-/* 813C02D4 0008E6D4  90 03 F3 A8 */	stw r0, -0xc58(r3)
+/* 813C02D0 | 38 00 00 51 */	li r0, 0x51
+/* 813C02D4 | 90 03 F3 A8 */	stw r0, -0xc58(r3)
 .L_813C02D8:
-/* 813C02D8 0008E6D8  3C 7E 00 01 */	addis r3, r30, 0x1
-/* 813C02DC 0008E6DC  39 61 00 20 */	addi r11, r1, 0x20
-/* 813C02E0 0008E6E0  80 63 F3 A8 */	lwz r3, -0xc58(r3)
-/* 813C02E4 0008E6E4  48 23 92 2D */	bl _restgpr_28
-/* 813C02E8 0008E6E8  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 813C02EC 0008E6EC  7C 08 03 A6 */	mtlr r0
-/* 813C02F0 0008E6F0  38 21 00 20 */	addi r1, r1, 0x20
-/* 813C02F4 0008E6F4  4E 80 00 20 */	blr
+/* 813C02D8 | 3C 7E 00 01 */	addis r3, r30, 0x1
+/* 813C02DC | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813C02E0 | 80 63 F3 A8 */	lwz r3, -0xc58(r3)
+/* 813C02E4 | 48 23 92 2D */	bl _restgpr_28
+/* 813C02E8 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 813C02EC | 7C 08 03 A6 */	mtlr r0
+/* 813C02F0 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 813C02F4 | 4E 80 00 20 */	blr
 .endfn process_app_test__Q33ipl8kitayama21NandSDWorker_AutoTestFv
 
 # 0x8164FD80..0x81650380 | size: 0x600

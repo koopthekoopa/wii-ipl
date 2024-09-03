@@ -16,6646 +16,6646 @@
 
 # .text:0x0 | 0x813715A8 | size: 0xC
 .fn HBMBase_813715A8, local
-/* 813715A8 0003F9A8  7C 64 1B 78 */	mr r4, r3
-/* 813715AC 0003F9AC  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 813715B0 0003F9B0  48 1E A0 B8 */	b fn_8155B668
+/* 813715A8 | 7C 64 1B 78 */	mr r4, r3
+/* 813715AC | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 813715B0 | 48 1E A0 B8 */	b fn_8155B668
 .endfn HBMBase_813715A8
 
 # .text:0xC | 0x813715B4 | size: 0xC
 .fn HBMBase_813715B4, local
-/* 813715B4 0003F9B4  7C 64 1B 78 */	mr r4, r3
-/* 813715B8 0003F9B8  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 813715BC 0003F9BC  48 1E A0 BC */	b fn_8155B678
+/* 813715B4 | 7C 64 1B 78 */	mr r4, r3
+/* 813715B8 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 813715BC | 48 1E A0 BC */	b fn_8155B678
 .endfn HBMBase_813715B4
 
 # .text:0x18 | 0x813715C0 | size: 0x2C
 # getAllocatorType(const HBMDataInfo*)
 .fn getAllocatorType__FPC11HBMDataInfo, global
-/* 813715C0 0003F9C0  80 03 00 40 */	lwz r0, 0x40(r3)
-/* 813715C4 0003F9C4  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813715C8 0003F9C8  41 82 00 0C */	beq .L_813715D4
-/* 813715CC 0003F9CC  38 60 00 00 */	li r3, 0x0
-/* 813715D0 0003F9D0  4E 80 00 20 */	blr
+/* 813715C0 | 80 03 00 40 */	lwz r0, 0x40(r3)
+/* 813715C4 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813715C8 | 41 82 00 0C */	beq .L_813715D4
+/* 813715CC | 38 60 00 00 */	li r3, 0x0
+/* 813715D0 | 4E 80 00 20 */	blr
 .L_813715D4:
-/* 813715D4 0003F9D4  80 03 00 18 */	lwz r0, 0x18(r3)
-/* 813715D8 0003F9D8  38 60 00 02 */	li r3, 0x2
-/* 813715DC 0003F9DC  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813715E0 0003F9E0  4D 82 00 20 */	beqlr
-/* 813715E4 0003F9E4  38 60 00 01 */	li r3, 0x1
-/* 813715E8 0003F9E8  4E 80 00 20 */	blr
+/* 813715D4 | 80 03 00 18 */	lwz r0, 0x18(r3)
+/* 813715D8 | 38 60 00 02 */	li r3, 0x2
+/* 813715DC | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813715E0 | 4D 82 00 20 */	beqlr
+/* 813715E4 | 38 60 00 01 */	li r3, 0x1
+/* 813715E8 | 4E 80 00 20 */	blr
 .endfn getAllocatorType__FPC11HBMDataInfo
 
 # .text:0x44 | 0x813715EC | size: 0xC8
 .fn HBMCreate, global
-/* 813715EC 0003F9EC  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 813715F0 0003F9F0  7C 08 02 A6 */	mflr r0
-/* 813715F4 0003F9F4  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813715F8 0003F9F8  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813715FC 0003F9FC  93 C1 00 08 */	stw r30, 0x8(r1)
-/* 81371600 0003FA00  7C 7E 1B 78 */	mr r30, r3
-/* 81371604 0003FA04  4B FF FF BD */	bl getAllocatorType__FPC11HBMDataInfo
-/* 81371608 0003FA08  2C 03 00 01 */	cmpwi r3, 0x1
-/* 8137160C 0003FA0C  40 82 00 30 */	bne .L_8137163C
-/* 81371610 0003FA10  80 7E 00 18 */	lwz r3, 0x18(r30)
-/* 81371614 0003FA14  38 A0 00 00 */	li r5, 0x0
-/* 81371618 0003FA18  80 9E 00 30 */	lwz r4, 0x30(r30)
-/* 8137161C 0003FA1C  48 1E 90 59 */	bl fn_8155A674
-/* 81371620 0003FA20  3F E0 81 09 */	lis r31, lbl_8108A520@ha
-/* 81371624 0003FA24  7C 64 1B 78 */	mr r4, r3
-/* 81371628 0003FA28  38 7F A5 20 */	addi r3, r31, lbl_8108A520@l
-/* 8137162C 0003FA2C  38 A0 00 20 */	li r5, 0x20
-/* 81371630 0003FA30  48 1E A0 59 */	bl fn_8155B688
-/* 81371634 0003FA34  38 1F A5 20 */	addi r0, r31, lbl_8108A520@l
-/* 81371638 0003FA38  90 0D 84 10 */	stw r0, lbl_81696450@sda21(r0)
+/* 813715EC | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813715F0 | 7C 08 02 A6 */	mflr r0
+/* 813715F4 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813715F8 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 813715FC | 93 C1 00 08 */	stw r30, 0x8(r1)
+/* 81371600 | 7C 7E 1B 78 */	mr r30, r3
+/* 81371604 | 4B FF FF BD */	bl getAllocatorType__FPC11HBMDataInfo
+/* 81371608 | 2C 03 00 01 */	cmpwi r3, 0x1
+/* 8137160C | 40 82 00 30 */	bne .L_8137163C
+/* 81371610 | 80 7E 00 18 */	lwz r3, 0x18(r30)
+/* 81371614 | 38 A0 00 00 */	li r5, 0x0
+/* 81371618 | 80 9E 00 30 */	lwz r4, 0x30(r30)
+/* 8137161C | 48 1E 90 59 */	bl fn_8155A674
+/* 81371620 | 3F E0 81 09 */	lis r31, lbl_8108A520@ha
+/* 81371624 | 7C 64 1B 78 */	mr r4, r3
+/* 81371628 | 38 7F A5 20 */	addi r3, r31, lbl_8108A520@l
+/* 8137162C | 38 A0 00 20 */	li r5, 0x20
+/* 81371630 | 48 1E A0 59 */	bl fn_8155B688
+/* 81371634 | 38 1F A5 20 */	addi r0, r31, lbl_8108A520@l
+/* 81371638 | 90 0D 84 10 */	stw r0, lbl_81696450@sda21(r0)
 .L_8137163C:
-/* 8137163C 0003FA3C  7F C3 F3 78 */	mr r3, r30
-/* 81371640 0003FA40  4B FF FF 81 */	bl getAllocatorType__FPC11HBMDataInfo
-/* 81371644 0003FA44  2C 03 00 01 */	cmpwi r3, 0x1
-/* 81371648 0003FA48  41 82 00 30 */	beq .L_81371678
-/* 8137164C 0003FA4C  40 80 00 10 */	bge .L_8137165C
-/* 81371650 0003FA50  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81371654 0003FA54  40 80 00 14 */	bge .L_81371668
-/* 81371658 0003FA58  48 00 00 34 */	b .L_8137168C
+/* 8137163C | 7F C3 F3 78 */	mr r3, r30
+/* 81371640 | 4B FF FF 81 */	bl getAllocatorType__FPC11HBMDataInfo
+/* 81371644 | 2C 03 00 01 */	cmpwi r3, 0x1
+/* 81371648 | 41 82 00 30 */	beq .L_81371678
+/* 8137164C | 40 80 00 10 */	bge .L_8137165C
+/* 81371650 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81371654 | 40 80 00 14 */	bge .L_81371668
+/* 81371658 | 48 00 00 34 */	b .L_8137168C
 .L_8137165C:
-/* 8137165C 0003FA5C  2C 03 00 03 */	cmpwi r3, 0x3
-/* 81371660 0003FA60  40 80 00 2C */	bge .L_8137168C
-/* 81371664 0003FA64  48 00 00 20 */	b .L_81371684
+/* 8137165C | 2C 03 00 03 */	cmpwi r3, 0x3
+/* 81371660 | 40 80 00 2C */	bge .L_8137168C
+/* 81371664 | 48 00 00 20 */	b .L_81371684
 .L_81371668:
-/* 81371668 0003FA68  80 1E 00 40 */	lwz r0, 0x40(r30)
-/* 8137166C 0003FA6C  90 0D AF 68 */	stw r0, lbl_81698FA8@sda21(r0)
-/* 81371670 0003FA70  90 0D 84 10 */	stw r0, lbl_81696450@sda21(r0)
-/* 81371674 0003FA74  48 00 00 18 */	b .L_8137168C
+/* 81371668 | 80 1E 00 40 */	lwz r0, 0x40(r30)
+/* 8137166C | 90 0D AF 68 */	stw r0, lbl_81698FA8@sda21(r0)
+/* 81371670 | 90 0D 84 10 */	stw r0, lbl_81696450@sda21(r0)
+/* 81371674 | 48 00 00 18 */	b .L_8137168C
 .L_81371678:
-/* 81371678 0003FA78  80 0D 84 10 */	lwz r0, lbl_81696450@sda21(r0)
-/* 8137167C 0003FA7C  90 0D AF 68 */	stw r0, lbl_81698FA8@sda21(r0)
-/* 81371680 0003FA80  48 00 00 0C */	b .L_8137168C
+/* 81371678 | 80 0D 84 10 */	lwz r0, lbl_81696450@sda21(r0)
+/* 8137167C | 90 0D AF 68 */	stw r0, lbl_81698FA8@sda21(r0)
+/* 81371680 | 48 00 00 0C */	b .L_8137168C
 .L_81371684:
-/* 81371684 0003FA84  80 0D AF 68 */	lwz r0, lbl_81698FA8@sda21(r0)
-/* 81371688 0003FA88  90 0D 84 10 */	stw r0, lbl_81696450@sda21(r0)
+/* 81371684 | 80 0D AF 68 */	lwz r0, lbl_81698FA8@sda21(r0)
+/* 81371688 | 90 0D 84 10 */	stw r0, lbl_81696450@sda21(r0)
 .L_8137168C:
-/* 8137168C 0003FA8C  7F C3 F3 78 */	mr r3, r30
-/* 81371690 0003FA90  48 00 04 5D */	bl createInstance__Q210homebutton10HomeButtonFPC11HBMDataInfo
-/* 81371694 0003FA94  80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
-/* 81371698 0003FA98  48 00 05 5D */	bl create__Q210homebutton10HomeButtonFv
-/* 8137169C 0003FA9C  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813716A0 0003FAA0  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813716A4 0003FAA4  83 C1 00 08 */	lwz r30, 0x8(r1)
-/* 813716A8 0003FAA8  7C 08 03 A6 */	mtlr r0
-/* 813716AC 0003FAAC  38 21 00 10 */	addi r1, r1, 0x10
-/* 813716B0 0003FAB0  4E 80 00 20 */	blr
+/* 8137168C | 7F C3 F3 78 */	mr r3, r30
+/* 81371690 | 48 00 04 5D */	bl createInstance__Q210homebutton10HomeButtonFPC11HBMDataInfo
+/* 81371694 | 80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
+/* 81371698 | 48 00 05 5D */	bl create__Q210homebutton10HomeButtonFv
+/* 8137169C | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813716A0 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813716A4 | 83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 813716A8 | 7C 08 03 A6 */	mtlr r0
+/* 813716AC | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813716B0 | 4E 80 00 20 */	blr
 .endfn HBMCreate
 
 # .text:0x10C | 0x813716B4 | size: 0x54
 .fn HBMDelete, global
-/* 813716B4 0003FAB4  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 813716B8 0003FAB8  7C 08 02 A6 */	mflr r0
-/* 813716BC 0003FABC  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813716C0 0003FAC0  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813716C4 0003FAC4  80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
-/* 813716C8 0003FAC8  80 0D 84 10 */	lwz r0, lbl_81696450@sda21(r0)
-/* 813716CC 0003FACC  83 E3 00 04 */	lwz r31, 0x4(r3)
-/* 813716D0 0003FAD0  90 0D AF 68 */	stw r0, lbl_81698FA8@sda21(r0)
-/* 813716D4 0003FAD4  48 00 04 65 */	bl deleteInstance__Q210homebutton10HomeButtonFv
-/* 813716D8 0003FAD8  7F E3 FB 78 */	mr r3, r31
-/* 813716DC 0003FADC  4B FF FE E5 */	bl getAllocatorType__FPC11HBMDataInfo
-/* 813716E0 0003FAE0  2C 03 00 01 */	cmpwi r3, 0x1
-/* 813716E4 0003FAE4  40 82 00 10 */	bne .L_813716F4
-/* 813716E8 0003FAE8  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 813716EC 0003FAEC  80 63 00 04 */	lwz r3, 0x4(r3)
-/* 813716F0 0003FAF0  48 1E 90 35 */	bl fn_8155A724
+/* 813716B4 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813716B8 | 7C 08 02 A6 */	mflr r0
+/* 813716BC | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813716C0 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 813716C4 | 80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
+/* 813716C8 | 80 0D 84 10 */	lwz r0, lbl_81696450@sda21(r0)
+/* 813716CC | 83 E3 00 04 */	lwz r31, 0x4(r3)
+/* 813716D0 | 90 0D AF 68 */	stw r0, lbl_81698FA8@sda21(r0)
+/* 813716D4 | 48 00 04 65 */	bl deleteInstance__Q210homebutton10HomeButtonFv
+/* 813716D8 | 7F E3 FB 78 */	mr r3, r31
+/* 813716DC | 4B FF FE E5 */	bl getAllocatorType__FPC11HBMDataInfo
+/* 813716E0 | 2C 03 00 01 */	cmpwi r3, 0x1
+/* 813716E4 | 40 82 00 10 */	bne .L_813716F4
+/* 813716E8 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 813716EC | 80 63 00 04 */	lwz r3, 0x4(r3)
+/* 813716F0 | 48 1E 90 35 */	bl fn_8155A724
 .L_813716F4:
-/* 813716F4 0003FAF4  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813716F8 0003FAF8  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813716FC 0003FAFC  7C 08 03 A6 */	mtlr r0
-/* 81371700 0003FB00  38 21 00 10 */	addi r1, r1, 0x10
-/* 81371704 0003FB04  4E 80 00 20 */	blr
+/* 813716F4 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813716F8 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813716FC | 7C 08 03 A6 */	mtlr r0
+/* 81371700 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 81371704 | 4E 80 00 20 */	blr
 .endfn HBMDelete
 
 # .text:0x160 | 0x81371708 | size: 0x8
 .fn HBMInit, global
-/* 81371708 0003FB08  80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
-/* 8137170C 0003FB0C  48 00 0F A8 */	b init__Q210homebutton10HomeButtonFv
+/* 81371708 | 80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
+/* 8137170C | 48 00 0F A8 */	b init__Q210homebutton10HomeButtonFv
 .endfn HBMInit
 
 # .text:0x168 | 0x81371710 | size: 0x30
 .fn HBMCalc, global
-/* 81371710 0003FB10  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 81371714 0003FB14  7C 08 02 A6 */	mflr r0
-/* 81371718 0003FB18  7C 64 1B 78 */	mr r4, r3
-/* 8137171C 0003FB1C  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81371720 0003FB20  80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
-/* 81371724 0003FB24  48 00 17 79 */	bl calc__Q210homebutton10HomeButtonFPC17HBMControllerData
-/* 81371728 0003FB28  80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
-/* 8137172C 0003FB2C  48 00 53 DD */	bl getSelectBtnNum__Q210homebutton10HomeButtonFv
-/* 81371730 0003FB30  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 81371734 0003FB34  7C 08 03 A6 */	mtlr r0
-/* 81371738 0003FB38  38 21 00 10 */	addi r1, r1, 0x10
-/* 8137173C 0003FB3C  4E 80 00 20 */	blr
+/* 81371710 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 81371714 | 7C 08 02 A6 */	mflr r0
+/* 81371718 | 7C 64 1B 78 */	mr r4, r3
+/* 8137171C | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81371720 | 80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
+/* 81371724 | 48 00 17 79 */	bl calc__Q210homebutton10HomeButtonFPC17HBMControllerData
+/* 81371728 | 80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
+/* 8137172C | 48 00 53 DD */	bl getSelectBtnNum__Q210homebutton10HomeButtonFv
+/* 81371730 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 81371734 | 7C 08 03 A6 */	mtlr r0
+/* 81371738 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 8137173C | 4E 80 00 20 */	blr
 .endfn HBMCalc
 
 # .text:0x198 | 0x81371740 | size: 0x8
 .fn HBMDraw, global
-/* 81371740 0003FB40  80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
-/* 81371744 0003FB44  48 00 28 B4 */	b draw__Q210homebutton10HomeButtonFv
+/* 81371740 | 80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
+/* 81371744 | 48 00 28 B4 */	b draw__Q210homebutton10HomeButtonFv
 .endfn HBMDraw
 
 # .text:0x1A0 | 0x81371748 | size: 0x8
 .fn HBMGetSelectBtnNum, global
-/* 81371748 0003FB48  80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
-/* 8137174C 0003FB4C  48 00 53 BC */	b getSelectBtnNum__Q210homebutton10HomeButtonFv
+/* 81371748 | 80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
+/* 8137174C | 48 00 53 BC */	b getSelectBtnNum__Q210homebutton10HomeButtonFv
 .endfn HBMGetSelectBtnNum
 
 # .text:0x1A8 | 0x81371750 | size: 0xC
 .fn HBMSetAdjustFlag, global
-/* 81371750 0003FB50  7C 64 1B 78 */	mr r4, r3
-/* 81371754 0003FB54  80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
-/* 81371758 0003FB58  48 00 54 10 */	b setAdjustFlag__Q210homebutton10HomeButtonFi
+/* 81371750 | 7C 64 1B 78 */	mr r4, r3
+/* 81371754 | 80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
+/* 81371758 | 48 00 54 10 */	b setAdjustFlag__Q210homebutton10HomeButtonFi
 .endfn HBMSetAdjustFlag
 
 # .text:0x1B4 | 0x8137175C | size: 0xF4
 # homebutton::HomeButton::HomeButton(const HBMDataInfo*)
 .fn __ct__Q210homebutton10HomeButtonFPC11HBMDataInfo, global
-/* 8137175C 0003FB5C  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 81371760 0003FB60  7C 08 02 A6 */	mflr r0
-/* 81371764 0003FB64  90 01 00 24 */	stw r0, 0x24(r1)
-/* 81371768 0003FB68  39 61 00 20 */	addi r11, r1, 0x20
-/* 8137176C 0003FB6C  48 28 7D 5D */	bl _savegpr_29
-/* 81371770 0003FB70  3B E0 00 00 */	li r31, 0x0
-/* 81371774 0003FB74  90 83 00 04 */	stw r4, 0x4(r3)
-/* 81371778 0003FB78  7C 7D 1B 78 */	mr r29, r3
-/* 8137177C 0003FB7C  93 E3 02 2C */	stw r31, 0x22c(r3)
-/* 81371780 0003FB80  93 E3 02 44 */	stw r31, 0x244(r3)
-/* 81371784 0003FB84  38 63 02 4C */	addi r3, r3, 0x24c
-/* 81371788 0003FB88  48 1B 7A 21 */	bl fn_815291A8
-/* 8137178C 0003FB8C  38 00 FF FF */	li r0, -0x1
-/* 81371790 0003FB90  38 80 00 1E */	li r4, 0x1e
-/* 81371794 0003FB94  38 60 00 02 */	li r3, 0x2
-/* 81371798 0003FB98  93 FD 04 48 */	stw r31, 0x448(r29)
-/* 8137179C 0003FB9C  3B C0 00 00 */	li r30, 0x0
-/* 813717A0 0003FBA0  90 9D 04 4C */	stw r4, 0x44c(r29)
-/* 813717A4 0003FBA4  93 FD 04 50 */	stw r31, 0x450(r29)
-/* 813717A8 0003FBA8  9B FD 04 54 */	stb r31, 0x454(r29)
-/* 813717AC 0003FBAC  9B FD 04 55 */	stb r31, 0x455(r29)
-/* 813717B0 0003FBB0  9B FD 04 56 */	stb r31, 0x456(r29)
-/* 813717B4 0003FBB4  90 7D 00 10 */	stw r3, 0x10(r29)
-/* 813717B8 0003FBB8  90 1D 00 B0 */	stw r0, 0xb0(r29)
-/* 813717BC 0003FBBC  90 1D 00 14 */	stw r0, 0x14(r29)
-/* 813717C0 0003FBC0  93 FD 00 18 */	stw r31, 0x18(r29)
-/* 813717C4 0003FBC4  93 FD 00 00 */	stw r31, 0x0(r29)
-/* 813717C8 0003FBC8  93 FD 00 64 */	stw r31, 0x64(r29)
-/* 813717CC 0003FBCC  9B FD 00 86 */	stb r31, 0x86(r29)
-/* 813717D0 0003FBD0  93 FD 00 68 */	stw r31, 0x68(r29)
-/* 813717D4 0003FBD4  93 FD 00 6C */	stw r31, 0x6c(r29)
-/* 813717D8 0003FBD8  93 FD 00 70 */	stw r31, 0x70(r29)
-/* 813717DC 0003FBDC  93 FD 00 74 */	stw r31, 0x74(r29)
-/* 813717E0 0003FBE0  9B FD 00 87 */	stb r31, 0x87(r29)
-/* 813717E4 0003FBE4  9B FD 00 88 */	stb r31, 0x88(r29)
+/* 8137175C | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81371760 | 7C 08 02 A6 */	mflr r0
+/* 81371764 | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 81371768 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 8137176C | 48 28 7D 5D */	bl _savegpr_29
+/* 81371770 | 3B E0 00 00 */	li r31, 0x0
+/* 81371774 | 90 83 00 04 */	stw r4, 0x4(r3)
+/* 81371778 | 7C 7D 1B 78 */	mr r29, r3
+/* 8137177C | 93 E3 02 2C */	stw r31, 0x22c(r3)
+/* 81371780 | 93 E3 02 44 */	stw r31, 0x244(r3)
+/* 81371784 | 38 63 02 4C */	addi r3, r3, 0x24c
+/* 81371788 | 48 1B 7A 21 */	bl fn_815291A8
+/* 8137178C | 38 00 FF FF */	li r0, -0x1
+/* 81371790 | 38 80 00 1E */	li r4, 0x1e
+/* 81371794 | 38 60 00 02 */	li r3, 0x2
+/* 81371798 | 93 FD 04 48 */	stw r31, 0x448(r29)
+/* 8137179C | 3B C0 00 00 */	li r30, 0x0
+/* 813717A0 | 90 9D 04 4C */	stw r4, 0x44c(r29)
+/* 813717A4 | 93 FD 04 50 */	stw r31, 0x450(r29)
+/* 813717A8 | 9B FD 04 54 */	stb r31, 0x454(r29)
+/* 813717AC | 9B FD 04 55 */	stb r31, 0x455(r29)
+/* 813717B0 | 9B FD 04 56 */	stb r31, 0x456(r29)
+/* 813717B4 | 90 7D 00 10 */	stw r3, 0x10(r29)
+/* 813717B8 | 90 1D 00 B0 */	stw r0, 0xb0(r29)
+/* 813717BC | 90 1D 00 14 */	stw r0, 0x14(r29)
+/* 813717C0 | 93 FD 00 18 */	stw r31, 0x18(r29)
+/* 813717C4 | 93 FD 00 00 */	stw r31, 0x0(r29)
+/* 813717C8 | 93 FD 00 64 */	stw r31, 0x64(r29)
+/* 813717CC | 9B FD 00 86 */	stb r31, 0x86(r29)
+/* 813717D0 | 93 FD 00 68 */	stw r31, 0x68(r29)
+/* 813717D4 | 93 FD 00 6C */	stw r31, 0x6c(r29)
+/* 813717D8 | 93 FD 00 70 */	stw r31, 0x70(r29)
+/* 813717DC | 93 FD 00 74 */	stw r31, 0x74(r29)
+/* 813717E0 | 9B FD 00 87 */	stb r31, 0x87(r29)
+/* 813717E4 | 9B FD 00 88 */	stb r31, 0x88(r29)
 .L_813717E8:
-/* 813717E8 0003FBE8  7C 7D FA 14 */	add r3, r29, r31
-/* 813717EC 0003FBEC  38 63 04 58 */	addi r3, r3, 0x458
-/* 813717F0 0003FBF0  48 1B B0 F5 */	bl OSCreateAlarm
-/* 813717F4 0003FBF4  7C 7D FA 14 */	add r3, r29, r31
-/* 813717F8 0003FBF8  38 63 05 18 */	addi r3, r3, 0x518
-/* 813717FC 0003FBFC  48 1B B0 E9 */	bl OSCreateAlarm
-/* 81371800 0003FC00  3B DE 00 01 */	addi r30, r30, 0x1
-/* 81371804 0003FC04  3B FF 00 30 */	addi r31, r31, 0x30
-/* 81371808 0003FC08  2C 1E 00 04 */	cmpwi r30, 0x4
-/* 8137180C 0003FC0C  41 80 FF DC */	blt .L_813717E8
-/* 81371810 0003FC10  38 7D 05 D8 */	addi r3, r29, 0x5d8
-/* 81371814 0003FC14  48 1B B0 D1 */	bl OSCreateAlarm
-/* 81371818 0003FC18  38 00 00 00 */	li r0, 0x0
-/* 8137181C 0003FC1C  39 61 00 20 */	addi r11, r1, 0x20
-/* 81371820 0003FC20  90 1D 06 08 */	stw r0, 0x608(r29)
-/* 81371824 0003FC24  7F A3 EB 78 */	mr r3, r29
-/* 81371828 0003FC28  90 1D 06 0C */	stw r0, 0x60c(r29)
-/* 8137182C 0003FC2C  90 1D 06 10 */	stw r0, 0x610(r29)
-/* 81371830 0003FC30  90 1D 06 14 */	stw r0, 0x614(r29)
-/* 81371834 0003FC34  90 1D 06 18 */	stw r0, 0x618(r29)
-/* 81371838 0003FC38  90 1D 06 1C */	stw r0, 0x61c(r29)
-/* 8137183C 0003FC3C  48 28 7C D9 */	bl _restgpr_29
-/* 81371840 0003FC40  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 81371844 0003FC44  7C 08 03 A6 */	mtlr r0
-/* 81371848 0003FC48  38 21 00 20 */	addi r1, r1, 0x20
-/* 8137184C 0003FC4C  4E 80 00 20 */	blr
+/* 813717E8 | 7C 7D FA 14 */	add r3, r29, r31
+/* 813717EC | 38 63 04 58 */	addi r3, r3, 0x458
+/* 813717F0 | 48 1B B0 F5 */	bl OSCreateAlarm
+/* 813717F4 | 7C 7D FA 14 */	add r3, r29, r31
+/* 813717F8 | 38 63 05 18 */	addi r3, r3, 0x518
+/* 813717FC | 48 1B B0 E9 */	bl OSCreateAlarm
+/* 81371800 | 3B DE 00 01 */	addi r30, r30, 0x1
+/* 81371804 | 3B FF 00 30 */	addi r31, r31, 0x30
+/* 81371808 | 2C 1E 00 04 */	cmpwi r30, 0x4
+/* 8137180C | 41 80 FF DC */	blt .L_813717E8
+/* 81371810 | 38 7D 05 D8 */	addi r3, r29, 0x5d8
+/* 81371814 | 48 1B B0 D1 */	bl OSCreateAlarm
+/* 81371818 | 38 00 00 00 */	li r0, 0x0
+/* 8137181C | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81371820 | 90 1D 06 08 */	stw r0, 0x608(r29)
+/* 81371824 | 7F A3 EB 78 */	mr r3, r29
+/* 81371828 | 90 1D 06 0C */	stw r0, 0x60c(r29)
+/* 8137182C | 90 1D 06 10 */	stw r0, 0x610(r29)
+/* 81371830 | 90 1D 06 14 */	stw r0, 0x614(r29)
+/* 81371834 | 90 1D 06 18 */	stw r0, 0x618(r29)
+/* 81371838 | 90 1D 06 1C */	stw r0, 0x61c(r29)
+/* 8137183C | 48 28 7C D9 */	bl _restgpr_29
+/* 81371840 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81371844 | 7C 08 03 A6 */	mtlr r0
+/* 81371848 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 8137184C | 4E 80 00 20 */	blr
 .endfn __ct__Q210homebutton10HomeButtonFPC11HBMDataInfo
 
 # .text:0x2A8 | 0x81371850 | size: 0x29C
 # homebutton::HomeButton::~HomeButton()
 .fn __dt__Q210homebutton10HomeButtonFv, global
-/* 81371850 0003FC50  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 81371854 0003FC54  7C 08 02 A6 */	mflr r0
-/* 81371858 0003FC58  90 01 00 24 */	stw r0, 0x24(r1)
-/* 8137185C 0003FC5C  39 61 00 20 */	addi r11, r1, 0x20
-/* 81371860 0003FC60  48 28 7C 61 */	bl _savegpr_27
-/* 81371864 0003FC64  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81371868 0003FC68  7C 7E 1B 78 */	mr r30, r3
-/* 8137186C 0003FC6C  7C 9F 23 78 */	mr r31, r4
-/* 81371870 0003FC70  41 82 02 60 */	beq .L_81371AD0
-/* 81371874 0003FC74  80 63 02 40 */	lwz r3, 0x240(r3)
-/* 81371878 0003FC78  38 80 FF FF */	li r4, -0x1
-/* 8137187C 0003FC7C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81371880 0003FC80  81 8C 00 08 */	lwz r12, 0x8(r12)
-/* 81371884 0003FC84  7D 89 03 A6 */	mtctr r12
-/* 81371888 0003FC88  4E 80 04 21 */	bctrl
-/* 8137188C 0003FC8C  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81371890 0003FC90  80 9E 02 40 */	lwz r4, 0x240(r30)
-/* 81371894 0003FC94  48 1E 9D E5 */	bl fn_8155B678
-/* 81371898 0003FC98  80 7E 02 2C */	lwz r3, 0x22c(r30)
-/* 8137189C 0003FC9C  38 80 FF FF */	li r4, -0x1
-/* 813718A0 0003FCA0  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813718A4 0003FCA4  81 8C 00 08 */	lwz r12, 0x8(r12)
-/* 813718A8 0003FCA8  7D 89 03 A6 */	mtctr r12
-/* 813718AC 0003FCAC  4E 80 04 21 */	bctrl
-/* 813718B0 0003FCB0  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 813718B4 0003FCB4  80 9E 02 2C */	lwz r4, 0x22c(r30)
-/* 813718B8 0003FCB8  48 1E 9D C1 */	bl fn_8155B678
-/* 813718BC 0003FCBC  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 813718C0 0003FCC0  80 03 00 28 */	lwz r0, 0x28(r3)
-/* 813718C4 0003FCC4  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813718C8 0003FCC8  40 82 00 44 */	bne .L_8137190C
-/* 813718CC 0003FCCC  3B 60 00 00 */	li r27, 0x0
-/* 813718D0 0003FCD0  3B A0 00 00 */	li r29, 0x0
+/* 81371850 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81371854 | 7C 08 02 A6 */	mflr r0
+/* 81371858 | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 8137185C | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81371860 | 48 28 7C 61 */	bl _savegpr_27
+/* 81371864 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81371868 | 7C 7E 1B 78 */	mr r30, r3
+/* 8137186C | 7C 9F 23 78 */	mr r31, r4
+/* 81371870 | 41 82 02 60 */	beq .L_81371AD0
+/* 81371874 | 80 63 02 40 */	lwz r3, 0x240(r3)
+/* 81371878 | 38 80 FF FF */	li r4, -0x1
+/* 8137187C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81371880 | 81 8C 00 08 */	lwz r12, 0x8(r12)
+/* 81371884 | 7D 89 03 A6 */	mtctr r12
+/* 81371888 | 4E 80 04 21 */	bctrl
+/* 8137188C | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81371890 | 80 9E 02 40 */	lwz r4, 0x240(r30)
+/* 81371894 | 48 1E 9D E5 */	bl fn_8155B678
+/* 81371898 | 80 7E 02 2C */	lwz r3, 0x22c(r30)
+/* 8137189C | 38 80 FF FF */	li r4, -0x1
+/* 813718A0 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813718A4 | 81 8C 00 08 */	lwz r12, 0x8(r12)
+/* 813718A8 | 7D 89 03 A6 */	mtctr r12
+/* 813718AC | 4E 80 04 21 */	bctrl
+/* 813718B0 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 813718B4 | 80 9E 02 2C */	lwz r4, 0x22c(r30)
+/* 813718B8 | 48 1E 9D C1 */	bl fn_8155B678
+/* 813718BC | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 813718C0 | 80 03 00 28 */	lwz r0, 0x28(r3)
+/* 813718C4 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813718C8 | 40 82 00 44 */	bne .L_8137190C
+/* 813718CC | 3B 60 00 00 */	li r27, 0x0
+/* 813718D0 | 3B A0 00 00 */	li r29, 0x0
 .L_813718D4:
-/* 813718D4 0003FCD4  7F 9E EA 14 */	add r28, r30, r29
-/* 813718D8 0003FCD8  38 80 FF FF */	li r4, -0x1
-/* 813718DC 0003FCDC  80 7C 02 30 */	lwz r3, 0x230(r28)
-/* 813718E0 0003FCE0  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813718E4 0003FCE4  81 8C 00 08 */	lwz r12, 0x8(r12)
-/* 813718E8 0003FCE8  7D 89 03 A6 */	mtctr r12
-/* 813718EC 0003FCEC  4E 80 04 21 */	bctrl
-/* 813718F0 0003FCF0  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 813718F4 0003FCF4  80 9C 02 30 */	lwz r4, 0x230(r28)
-/* 813718F8 0003FCF8  48 1E 9D 81 */	bl fn_8155B678
-/* 813718FC 0003FCFC  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81371900 0003FD00  3B BD 00 04 */	addi r29, r29, 0x4
-/* 81371904 0003FD04  2C 1B 00 04 */	cmpwi r27, 0x4
-/* 81371908 0003FD08  41 80 FF CC */	blt .L_813718D4
+/* 813718D4 | 7F 9E EA 14 */	add r28, r30, r29
+/* 813718D8 | 38 80 FF FF */	li r4, -0x1
+/* 813718DC | 80 7C 02 30 */	lwz r3, 0x230(r28)
+/* 813718E0 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813718E4 | 81 8C 00 08 */	lwz r12, 0x8(r12)
+/* 813718E8 | 7D 89 03 A6 */	mtctr r12
+/* 813718EC | 4E 80 04 21 */	bctrl
+/* 813718F0 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 813718F4 | 80 9C 02 30 */	lwz r4, 0x230(r28)
+/* 813718F8 | 48 1E 9D 81 */	bl fn_8155B678
+/* 813718FC | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81371900 | 3B BD 00 04 */	addi r29, r29, 0x4
+/* 81371904 | 2C 1B 00 04 */	cmpwi r27, 0x4
+/* 81371908 | 41 80 FF CC */	blt .L_813718D4
 .L_8137190C:
-/* 8137190C 0003FD0C  3B 60 00 00 */	li r27, 0x0
-/* 81371910 0003FD10  3B A0 00 00 */	li r29, 0x0
-/* 81371914 0003FD14  48 00 00 34 */	b .L_81371948
+/* 8137190C | 3B 60 00 00 */	li r27, 0x0
+/* 81371910 | 3B A0 00 00 */	li r29, 0x0
+/* 81371914 | 48 00 00 34 */	b .L_81371948
 .L_81371918:
-/* 81371918 0003FD18  7F 9E EA 14 */	add r28, r30, r29
-/* 8137191C 0003FD1C  38 80 FF FF */	li r4, -0x1
-/* 81371920 0003FD20  80 7C 02 B4 */	lwz r3, 0x2b4(r28)
-/* 81371924 0003FD24  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81371928 0003FD28  81 8C 00 08 */	lwz r12, 0x8(r12)
-/* 8137192C 0003FD2C  7D 89 03 A6 */	mtctr r12
-/* 81371930 0003FD30  4E 80 04 21 */	bctrl
-/* 81371934 0003FD34  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81371938 0003FD38  80 9C 02 B4 */	lwz r4, 0x2b4(r28)
-/* 8137193C 0003FD3C  48 1E 9D 3D */	bl fn_8155B678
-/* 81371940 0003FD40  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81371944 0003FD44  3B BD 00 04 */	addi r29, r29, 0x4
+/* 81371918 | 7F 9E EA 14 */	add r28, r30, r29
+/* 8137191C | 38 80 FF FF */	li r4, -0x1
+/* 81371920 | 80 7C 02 B4 */	lwz r3, 0x2b4(r28)
+/* 81371924 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81371928 | 81 8C 00 08 */	lwz r12, 0x8(r12)
+/* 8137192C | 7D 89 03 A6 */	mtctr r12
+/* 81371930 | 4E 80 04 21 */	bctrl
+/* 81371934 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81371938 | 80 9C 02 B4 */	lwz r4, 0x2b4(r28)
+/* 8137193C | 48 1E 9D 3D */	bl fn_8155B678
+/* 81371940 | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81371944 | 3B BD 00 04 */	addi r29, r29, 0x4
 .L_81371948:
-/* 81371948 0003FD48  80 1E 00 0C */	lwz r0, 0xc(r30)
-/* 8137194C 0003FD4C  7C 1B 00 00 */	cmpw r27, r0
-/* 81371950 0003FD50  41 80 FF C8 */	blt .L_81371918
-/* 81371954 0003FD54  3B 60 00 00 */	li r27, 0x0
-/* 81371958 0003FD58  3B A0 00 00 */	li r29, 0x0
+/* 81371948 | 80 1E 00 0C */	lwz r0, 0xc(r30)
+/* 8137194C | 7C 1B 00 00 */	cmpw r27, r0
+/* 81371950 | 41 80 FF C8 */	blt .L_81371918
+/* 81371954 | 3B 60 00 00 */	li r27, 0x0
+/* 81371958 | 3B A0 00 00 */	li r29, 0x0
 .L_8137195C:
-/* 8137195C 0003FD5C  7F 9E EA 14 */	add r28, r30, r29
-/* 81371960 0003FD60  38 80 FF FF */	li r4, -0x1
-/* 81371964 0003FD64  80 7C 04 0C */	lwz r3, 0x40c(r28)
-/* 81371968 0003FD68  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 8137196C 0003FD6C  81 8C 00 08 */	lwz r12, 0x8(r12)
-/* 81371970 0003FD70  7D 89 03 A6 */	mtctr r12
-/* 81371974 0003FD74  4E 80 04 21 */	bctrl
-/* 81371978 0003FD78  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 8137197C 0003FD7C  80 9C 04 0C */	lwz r4, 0x40c(r28)
-/* 81371980 0003FD80  48 1E 9C F9 */	bl fn_8155B678
-/* 81371984 0003FD84  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81371988 0003FD88  3B BD 00 04 */	addi r29, r29, 0x4
-/* 8137198C 0003FD8C  2C 1B 00 0F */	cmpwi r27, 0xf
-/* 81371990 0003FD90  41 80 FF CC */	blt .L_8137195C
-/* 81371994 0003FD94  3B 60 00 00 */	li r27, 0x0
-/* 81371998 0003FD98  3B A0 00 00 */	li r29, 0x0
+/* 8137195C | 7F 9E EA 14 */	add r28, r30, r29
+/* 81371960 | 38 80 FF FF */	li r4, -0x1
+/* 81371964 | 80 7C 04 0C */	lwz r3, 0x40c(r28)
+/* 81371968 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 8137196C | 81 8C 00 08 */	lwz r12, 0x8(r12)
+/* 81371970 | 7D 89 03 A6 */	mtctr r12
+/* 81371974 | 4E 80 04 21 */	bctrl
+/* 81371978 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 8137197C | 80 9C 04 0C */	lwz r4, 0x40c(r28)
+/* 81371980 | 48 1E 9C F9 */	bl fn_8155B678
+/* 81371984 | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81371988 | 3B BD 00 04 */	addi r29, r29, 0x4
+/* 8137198C | 2C 1B 00 0F */	cmpwi r27, 0xf
+/* 81371990 | 41 80 FF CC */	blt .L_8137195C
+/* 81371994 | 3B 60 00 00 */	li r27, 0x0
+/* 81371998 | 3B A0 00 00 */	li r29, 0x0
 .L_8137199C:
-/* 8137199C 0003FD9C  7F 9E EA 14 */	add r28, r30, r29
-/* 813719A0 0003FDA0  38 80 FF FF */	li r4, -0x1
-/* 813719A4 0003FDA4  80 7C 02 E4 */	lwz r3, 0x2e4(r28)
-/* 813719A8 0003FDA8  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813719AC 0003FDAC  81 8C 00 08 */	lwz r12, 0x8(r12)
-/* 813719B0 0003FDB0  7D 89 03 A6 */	mtctr r12
-/* 813719B4 0003FDB4  4E 80 04 21 */	bctrl
-/* 813719B8 0003FDB8  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 813719BC 0003FDBC  80 9C 02 E4 */	lwz r4, 0x2e4(r28)
-/* 813719C0 0003FDC0  48 1E 9C B9 */	bl fn_8155B678
-/* 813719C4 0003FDC4  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 813719C8 0003FDC8  3B BD 00 04 */	addi r29, r29, 0x4
-/* 813719CC 0003FDCC  2C 1B 00 4A */	cmpwi r27, 0x4a
-/* 813719D0 0003FDD0  41 80 FF CC */	blt .L_8137199C
-/* 813719D4 0003FDD4  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 813719D8 0003FDD8  80 9E 02 48 */	lwz r4, 0x248(r30)
-/* 813719DC 0003FDDC  48 1E 9C 9D */	bl fn_8155B678
-/* 813719E0 0003FDE0  80 7E 02 44 */	lwz r3, 0x244(r30)
-/* 813719E4 0003FDE4  38 80 FF FF */	li r4, -0x1
-/* 813719E8 0003FDE8  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813719EC 0003FDEC  81 8C 00 1C */	lwz r12, 0x1c(r12)
-/* 813719F0 0003FDF0  7D 89 03 A6 */	mtctr r12
-/* 813719F4 0003FDF4  4E 80 04 21 */	bctrl
-/* 813719F8 0003FDF8  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 813719FC 0003FDFC  80 9E 02 44 */	lwz r4, 0x244(r30)
-/* 81371A00 0003FE00  48 1E 9C 79 */	bl fn_8155B678
-/* 81371A04 0003FE04  3B 60 00 00 */	li r27, 0x0
-/* 81371A08 0003FE08  3B A0 00 00 */	li r29, 0x0
+/* 8137199C | 7F 9E EA 14 */	add r28, r30, r29
+/* 813719A0 | 38 80 FF FF */	li r4, -0x1
+/* 813719A4 | 80 7C 02 E4 */	lwz r3, 0x2e4(r28)
+/* 813719A8 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813719AC | 81 8C 00 08 */	lwz r12, 0x8(r12)
+/* 813719B0 | 7D 89 03 A6 */	mtctr r12
+/* 813719B4 | 4E 80 04 21 */	bctrl
+/* 813719B8 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 813719BC | 80 9C 02 E4 */	lwz r4, 0x2e4(r28)
+/* 813719C0 | 48 1E 9C B9 */	bl fn_8155B678
+/* 813719C4 | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 813719C8 | 3B BD 00 04 */	addi r29, r29, 0x4
+/* 813719CC | 2C 1B 00 4A */	cmpwi r27, 0x4a
+/* 813719D0 | 41 80 FF CC */	blt .L_8137199C
+/* 813719D4 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 813719D8 | 80 9E 02 48 */	lwz r4, 0x248(r30)
+/* 813719DC | 48 1E 9C 9D */	bl fn_8155B678
+/* 813719E0 | 80 7E 02 44 */	lwz r3, 0x244(r30)
+/* 813719E4 | 38 80 FF FF */	li r4, -0x1
+/* 813719E8 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813719EC | 81 8C 00 1C */	lwz r12, 0x1c(r12)
+/* 813719F0 | 7D 89 03 A6 */	mtctr r12
+/* 813719F4 | 4E 80 04 21 */	bctrl
+/* 813719F8 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 813719FC | 80 9E 02 44 */	lwz r4, 0x244(r30)
+/* 81371A00 | 48 1E 9C 79 */	bl fn_8155B678
+/* 81371A04 | 3B 60 00 00 */	li r27, 0x0
+/* 81371A08 | 3B A0 00 00 */	li r29, 0x0
 .L_81371A0C:
-/* 81371A0C 0003FE0C  7F 9E EA 14 */	add r28, r30, r29
-/* 81371A10 0003FE10  38 80 FF FF */	li r4, -0x1
-/* 81371A14 0003FE14  80 7C 02 A0 */	lwz r3, 0x2a0(r28)
-/* 81371A18 0003FE18  48 00 5B 4D */	bl __dt__Q210homebutton10ControllerFv
-/* 81371A1C 0003FE1C  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81371A20 0003FE20  80 9C 02 A0 */	lwz r4, 0x2a0(r28)
-/* 81371A24 0003FE24  48 1E 9C 55 */	bl fn_8155B678
-/* 81371A28 0003FE28  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81371A2C 0003FE2C  3B BD 00 04 */	addi r29, r29, 0x4
-/* 81371A30 0003FE30  2C 1B 00 04 */	cmpwi r27, 0x4
-/* 81371A34 0003FE34  41 80 FF D8 */	blt .L_81371A0C
-/* 81371A38 0003FE38  80 7E 02 B0 */	lwz r3, 0x2b0(r30)
-/* 81371A3C 0003FE3C  38 80 FF FF */	li r4, -0x1
-/* 81371A40 0003FE40  81 83 01 F0 */	lwz r12, 0x1f0(r3)
-/* 81371A44 0003FE44  81 8C 00 08 */	lwz r12, 0x8(r12)
-/* 81371A48 0003FE48  7D 89 03 A6 */	mtctr r12
-/* 81371A4C 0003FE4C  4E 80 04 21 */	bctrl
-/* 81371A50 0003FE50  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81371A54 0003FE54  80 9E 02 B0 */	lwz r4, 0x2b0(r30)
-/* 81371A58 0003FE58  48 1E 9C 21 */	bl fn_8155B678
-/* 81371A5C 0003FE5C  38 00 00 00 */	li r0, 0x0
-/* 81371A60 0003FE60  80 9E 00 A8 */	lwz r4, 0xa8(r30)
-/* 81371A64 0003FE64  90 1E 02 B0 */	stw r0, 0x2b0(r30)
-/* 81371A68 0003FE68  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81371A6C 0003FE6C  48 1E 9C 0D */	bl fn_8155B678
-/* 81371A70 0003FE70  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81371A74 0003FE74  80 9E 00 AC */	lwz r4, 0xac(r30)
-/* 81371A78 0003FE78  48 1E 9C 01 */	bl fn_8155B678
-/* 81371A7C 0003FE7C  3B 60 00 00 */	li r27, 0x0
-/* 81371A80 0003FE80  3B A0 00 00 */	li r29, 0x0
+/* 81371A0C | 7F 9E EA 14 */	add r28, r30, r29
+/* 81371A10 | 38 80 FF FF */	li r4, -0x1
+/* 81371A14 | 80 7C 02 A0 */	lwz r3, 0x2a0(r28)
+/* 81371A18 | 48 00 5B 4D */	bl __dt__Q210homebutton10ControllerFv
+/* 81371A1C | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81371A20 | 80 9C 02 A0 */	lwz r4, 0x2a0(r28)
+/* 81371A24 | 48 1E 9C 55 */	bl fn_8155B678
+/* 81371A28 | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81371A2C | 3B BD 00 04 */	addi r29, r29, 0x4
+/* 81371A30 | 2C 1B 00 04 */	cmpwi r27, 0x4
+/* 81371A34 | 41 80 FF D8 */	blt .L_81371A0C
+/* 81371A38 | 80 7E 02 B0 */	lwz r3, 0x2b0(r30)
+/* 81371A3C | 38 80 FF FF */	li r4, -0x1
+/* 81371A40 | 81 83 01 F0 */	lwz r12, 0x1f0(r3)
+/* 81371A44 | 81 8C 00 08 */	lwz r12, 0x8(r12)
+/* 81371A48 | 7D 89 03 A6 */	mtctr r12
+/* 81371A4C | 4E 80 04 21 */	bctrl
+/* 81371A50 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81371A54 | 80 9E 02 B0 */	lwz r4, 0x2b0(r30)
+/* 81371A58 | 48 1E 9C 21 */	bl fn_8155B678
+/* 81371A5C | 38 00 00 00 */	li r0, 0x0
+/* 81371A60 | 80 9E 00 A8 */	lwz r4, 0xa8(r30)
+/* 81371A64 | 90 1E 02 B0 */	stw r0, 0x2b0(r30)
+/* 81371A68 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81371A6C | 48 1E 9C 0D */	bl fn_8155B678
+/* 81371A70 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81371A74 | 80 9E 00 AC */	lwz r4, 0xac(r30)
+/* 81371A78 | 48 1E 9C 01 */	bl fn_8155B678
+/* 81371A7C | 3B 60 00 00 */	li r27, 0x0
+/* 81371A80 | 3B A0 00 00 */	li r29, 0x0
 .L_81371A84:
-/* 81371A84 0003FE84  7C 7E EA 14 */	add r3, r30, r29
-/* 81371A88 0003FE88  38 63 04 58 */	addi r3, r3, 0x458
-/* 81371A8C 0003FE8C  48 1B B1 AD */	bl fn_8152CC38
-/* 81371A90 0003FE90  7C 7E EA 14 */	add r3, r30, r29
-/* 81371A94 0003FE94  38 63 05 18 */	addi r3, r3, 0x518
-/* 81371A98 0003FE98  48 1B B1 A1 */	bl fn_8152CC38
-/* 81371A9C 0003FE9C  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81371AA0 0003FEA0  3B BD 00 30 */	addi r29, r29, 0x30
-/* 81371AA4 0003FEA4  2C 1B 00 04 */	cmpwi r27, 0x4
-/* 81371AA8 0003FEA8  41 80 FF DC */	blt .L_81371A84
-/* 81371AAC 0003FEAC  38 7E 05 D8 */	addi r3, r30, 0x5d8
-/* 81371AB0 0003FEB0  48 1B B1 89 */	bl fn_8152CC38
-/* 81371AB4 0003FEB4  38 7E 02 4C */	addi r3, r30, 0x24c
-/* 81371AB8 0003FEB8  38 80 FF FF */	li r4, -0x1
-/* 81371ABC 0003FEBC  48 1B 77 61 */	bl fn_8152921C
-/* 81371AC0 0003FEC0  2C 1F 00 00 */	cmpwi r31, 0x0
-/* 81371AC4 0003FEC4  40 81 00 0C */	ble .L_81371AD0
-/* 81371AC8 0003FEC8  7F C3 F3 78 */	mr r3, r30
-/* 81371ACC 0003FECC  48 28 66 19 */	bl __dl__FPv
+/* 81371A84 | 7C 7E EA 14 */	add r3, r30, r29
+/* 81371A88 | 38 63 04 58 */	addi r3, r3, 0x458
+/* 81371A8C | 48 1B B1 AD */	bl fn_8152CC38
+/* 81371A90 | 7C 7E EA 14 */	add r3, r30, r29
+/* 81371A94 | 38 63 05 18 */	addi r3, r3, 0x518
+/* 81371A98 | 48 1B B1 A1 */	bl fn_8152CC38
+/* 81371A9C | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81371AA0 | 3B BD 00 30 */	addi r29, r29, 0x30
+/* 81371AA4 | 2C 1B 00 04 */	cmpwi r27, 0x4
+/* 81371AA8 | 41 80 FF DC */	blt .L_81371A84
+/* 81371AAC | 38 7E 05 D8 */	addi r3, r30, 0x5d8
+/* 81371AB0 | 48 1B B1 89 */	bl fn_8152CC38
+/* 81371AB4 | 38 7E 02 4C */	addi r3, r30, 0x24c
+/* 81371AB8 | 38 80 FF FF */	li r4, -0x1
+/* 81371ABC | 48 1B 77 61 */	bl fn_8152921C
+/* 81371AC0 | 2C 1F 00 00 */	cmpwi r31, 0x0
+/* 81371AC4 | 40 81 00 0C */	ble .L_81371AD0
+/* 81371AC8 | 7F C3 F3 78 */	mr r3, r30
+/* 81371ACC | 48 28 66 19 */	bl __dl__FPv
 .L_81371AD0:
-/* 81371AD0 0003FED0  39 61 00 20 */	addi r11, r1, 0x20
-/* 81371AD4 0003FED4  7F C3 F3 78 */	mr r3, r30
-/* 81371AD8 0003FED8  48 28 7A 35 */	bl _restgpr_27
-/* 81371ADC 0003FEDC  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 81371AE0 0003FEE0  7C 08 03 A6 */	mtlr r0
-/* 81371AE4 0003FEE4  38 21 00 20 */	addi r1, r1, 0x20
-/* 81371AE8 0003FEE8  4E 80 00 20 */	blr
+/* 81371AD0 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81371AD4 | 7F C3 F3 78 */	mr r3, r30
+/* 81371AD8 | 48 28 7A 35 */	bl _restgpr_27
+/* 81371ADC | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81371AE0 | 7C 08 03 A6 */	mtlr r0
+/* 81371AE4 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 81371AE8 | 4E 80 00 20 */	blr
 .endfn __dt__Q210homebutton10HomeButtonFv
 
 # .text:0x544 | 0x81371AEC | size: 0x4C
 # homebutton::HomeButton::createInstance(const HBMDataInfo*)
 .fn createInstance__Q210homebutton10HomeButtonFPC11HBMDataInfo, global
-/* 81371AEC 0003FEEC  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 81371AF0 0003FEF0  7C 08 02 A6 */	mflr r0
-/* 81371AF4 0003FEF4  38 80 07 A0 */	li r4, 0x7a0
-/* 81371AF8 0003FEF8  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81371AFC 0003FEFC  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 81371B00 0003FF00  7C 7F 1B 78 */	mr r31, r3
-/* 81371B04 0003FF04  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81371B08 0003FF08  48 1E 9B 61 */	bl fn_8155B668
-/* 81371B0C 0003FF0C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81371B10 0003FF10  41 82 00 14 */	beq .L_81371B24
-/* 81371B14 0003FF14  41 82 00 0C */	beq .L_81371B20
-/* 81371B18 0003FF18  7F E4 FB 78 */	mr r4, r31
-/* 81371B1C 0003FF1C  4B FF FC 41 */	bl __ct__Q210homebutton10HomeButtonFPC11HBMDataInfo
+/* 81371AEC | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 81371AF0 | 7C 08 02 A6 */	mflr r0
+/* 81371AF4 | 38 80 07 A0 */	li r4, 0x7a0
+/* 81371AF8 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81371AFC | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 81371B00 | 7C 7F 1B 78 */	mr r31, r3
+/* 81371B04 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81371B08 | 48 1E 9B 61 */	bl fn_8155B668
+/* 81371B0C | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81371B10 | 41 82 00 14 */	beq .L_81371B24
+/* 81371B14 | 41 82 00 0C */	beq .L_81371B20
+/* 81371B18 | 7F E4 FB 78 */	mr r4, r31
+/* 81371B1C | 4B FF FC 41 */	bl __ct__Q210homebutton10HomeButtonFPC11HBMDataInfo
 .L_81371B20:
-/* 81371B20 0003FF20  90 6D A9 70 */	stw r3, lbl_816989B0@sda21(r0)
+/* 81371B20 | 90 6D A9 70 */	stw r3, lbl_816989B0@sda21(r0)
 .L_81371B24:
-/* 81371B24 0003FF24  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 81371B28 0003FF28  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 81371B2C 0003FF2C  7C 08 03 A6 */	mtlr r0
-/* 81371B30 0003FF30  38 21 00 10 */	addi r1, r1, 0x10
-/* 81371B34 0003FF34  4E 80 00 20 */	blr
+/* 81371B24 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 81371B28 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 81371B2C | 7C 08 03 A6 */	mtlr r0
+/* 81371B30 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 81371B34 | 4E 80 00 20 */	blr
 .endfn createInstance__Q210homebutton10HomeButtonFPC11HBMDataInfo
 
 # .text:0x590 | 0x81371B38 | size: 0x3C
 # homebutton::HomeButton::deleteInstance()
 .fn deleteInstance__Q210homebutton10HomeButtonFv, global
-/* 81371B38 0003FF38  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 81371B3C 0003FF3C  7C 08 02 A6 */	mflr r0
-/* 81371B40 0003FF40  38 80 FF FF */	li r4, -0x1
-/* 81371B44 0003FF44  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81371B48 0003FF48  80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
-/* 81371B4C 0003FF4C  4B FF FD 05 */	bl __dt__Q210homebutton10HomeButtonFv
-/* 81371B50 0003FF50  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81371B54 0003FF54  80 8D A9 70 */	lwz r4, lbl_816989B0@sda21(r0)
-/* 81371B58 0003FF58  48 1E 9B 21 */	bl fn_8155B678
-/* 81371B5C 0003FF5C  38 00 00 00 */	li r0, 0x0
-/* 81371B60 0003FF60  90 0D A9 70 */	stw r0, lbl_816989B0@sda21(r0)
-/* 81371B64 0003FF64  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 81371B68 0003FF68  7C 08 03 A6 */	mtlr r0
-/* 81371B6C 0003FF6C  38 21 00 10 */	addi r1, r1, 0x10
-/* 81371B70 0003FF70  4E 80 00 20 */	blr
+/* 81371B38 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 81371B3C | 7C 08 02 A6 */	mflr r0
+/* 81371B40 | 38 80 FF FF */	li r4, -0x1
+/* 81371B44 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81371B48 | 80 6D A9 70 */	lwz r3, lbl_816989B0@sda21(r0)
+/* 81371B4C | 4B FF FD 05 */	bl __dt__Q210homebutton10HomeButtonFv
+/* 81371B50 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81371B54 | 80 8D A9 70 */	lwz r4, lbl_816989B0@sda21(r0)
+/* 81371B58 | 48 1E 9B 21 */	bl fn_8155B678
+/* 81371B5C | 38 00 00 00 */	li r0, 0x0
+/* 81371B60 | 90 0D A9 70 */	stw r0, lbl_816989B0@sda21(r0)
+/* 81371B64 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 81371B68 | 7C 08 03 A6 */	mtlr r0
+/* 81371B6C | 38 21 00 10 */	addi r1, r1, 0x10
+/* 81371B70 | 4E 80 00 20 */	blr
 .endfn deleteInstance__Q210homebutton10HomeButtonFv
 
 # .text:0x5CC | 0x81371B74 | size: 0x80
 .fn HBMBase_81371B74, local
-/* 81371B74 0003FF74  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 81371B78 0003FF78  7C 08 02 A6 */	mflr r0
-/* 81371B7C 0003FF7C  90 01 00 24 */	stw r0, 0x24(r1)
-/* 81371B80 0003FF80  39 61 00 20 */	addi r11, r1, 0x20
-/* 81371B84 0003FF84  48 28 79 41 */	bl _savegpr_28
-/* 81371B88 0003FF88  2C 04 00 00 */	cmpwi r4, 0x0
-/* 81371B8C 0003FF8C  7C 7C 1B 78 */	mr r28, r3
-/* 81371B90 0003FF90  7C 9D 23 78 */	mr r29, r4
-/* 81371B94 0003FF94  7C BE 2B 78 */	mr r30, r5
-/* 81371B98 0003FF98  41 82 00 44 */	beq .L_81371BDC
-/* 81371B9C 0003FF9C  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81371BA0 0003FFA0  38 80 00 A4 */	li r4, 0xa4
-/* 81371BA4 0003FFA4  48 1E 9A C5 */	bl fn_8155B668
-/* 81371BA8 0003FFA8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81371BAC 0003FFAC  7C 7F 1B 78 */	mr r31, r3
-/* 81371BB0 0003FFB0  41 82 00 10 */	beq .L_81371BC0
-/* 81371BB4 0003FFB4  38 00 00 00 */	li r0, 0x0
-/* 81371BB8 0003FFB8  90 03 00 00 */	stw r0, 0x0(r3)
-/* 81371BBC 0003FFBC  90 03 00 04 */	stw r0, 0x4(r3)
+/* 81371B74 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81371B78 | 7C 08 02 A6 */	mflr r0
+/* 81371B7C | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 81371B80 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81371B84 | 48 28 79 41 */	bl _savegpr_28
+/* 81371B88 | 2C 04 00 00 */	cmpwi r4, 0x0
+/* 81371B8C | 7C 7C 1B 78 */	mr r28, r3
+/* 81371B90 | 7C 9D 23 78 */	mr r29, r4
+/* 81371B94 | 7C BE 2B 78 */	mr r30, r5
+/* 81371B98 | 41 82 00 44 */	beq .L_81371BDC
+/* 81371B9C | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81371BA0 | 38 80 00 A4 */	li r4, 0xa4
+/* 81371BA4 | 48 1E 9A C5 */	bl fn_8155B668
+/* 81371BA8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81371BAC | 7C 7F 1B 78 */	mr r31, r3
+/* 81371BB0 | 41 82 00 10 */	beq .L_81371BC0
+/* 81371BB4 | 38 00 00 00 */	li r0, 0x0
+/* 81371BB8 | 90 03 00 00 */	stw r0, 0x0(r3)
+/* 81371BBC | 90 03 00 04 */	stw r0, 0x4(r3)
 .L_81371BC0:
-/* 81371BC0 0003FFC0  7F E3 FB 78 */	mr r3, r31
-/* 81371BC4 0003FFC4  7F A4 EB 78 */	mr r4, r29
-/* 81371BC8 0003FFC8  7F C5 F3 78 */	mr r5, r30
-/* 81371BCC 0003FFCC  48 1B 87 BD */	bl fn_8152A388
-/* 81371BD0 0003FFD0  7F 83 E3 78 */	mr r3, r28
-/* 81371BD4 0003FFD4  7F E4 FB 78 */	mr r4, r31
-/* 81371BD8 0003FFD8  48 1B 89 1D */	bl fn_8152A4F4
+/* 81371BC0 | 7F E3 FB 78 */	mr r3, r31
+/* 81371BC4 | 7F A4 EB 78 */	mr r4, r29
+/* 81371BC8 | 7F C5 F3 78 */	mr r5, r30
+/* 81371BCC | 48 1B 87 BD */	bl fn_8152A388
+/* 81371BD0 | 7F 83 E3 78 */	mr r3, r28
+/* 81371BD4 | 7F E4 FB 78 */	mr r4, r31
+/* 81371BD8 | 48 1B 89 1D */	bl fn_8152A4F4
 .L_81371BDC:
-/* 81371BDC 0003FFDC  39 61 00 20 */	addi r11, r1, 0x20
-/* 81371BE0 0003FFE0  48 28 79 31 */	bl _restgpr_28
-/* 81371BE4 0003FFE4  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 81371BE8 0003FFE8  7C 08 03 A6 */	mtlr r0
-/* 81371BEC 0003FFEC  38 21 00 20 */	addi r1, r1, 0x20
-/* 81371BF0 0003FFF0  4E 80 00 20 */	blr
+/* 81371BDC | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81371BE0 | 48 28 79 31 */	bl _restgpr_28
+/* 81371BE4 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81371BE8 | 7C 08 03 A6 */	mtlr r0
+/* 81371BEC | 38 21 00 20 */	addi r1, r1, 0x20
+/* 81371BF0 | 4E 80 00 20 */	blr
 .endfn HBMBase_81371B74
 
 # .text:0x64C | 0x81371BF4 | size: 0x890
 # homebutton::HomeButton::create()
 .fn create__Q210homebutton10HomeButtonFv, global
-/* 81371BF4 0003FFF4  94 21 FF 20 */	stwu r1, -0xe0(r1)
-/* 81371BF8 0003FFF8  7C 08 02 A6 */	mflr r0
-/* 81371BFC 0003FFFC  90 01 00 E4 */	stw r0, 0xe4(r1)
-/* 81371C00 00040000  DB E1 00 D0 */	stfd f31, 0xd0(r1)
-/* 81371C04 00040004  F3 E1 00 D8 */	psq_st f31, 0xd8(r1), 0, qr0
-/* 81371C08 00040008  39 61 00 D0 */	addi r11, r1, 0xd0
-/* 81371C0C 0004000C  48 28 78 99 */	bl _savegpr_20
-/* 81371C10 00040010  38 00 00 00 */	li r0, 0x0
-/* 81371C14 00040014  3F 80 81 64 */	lis r28, lbl_81644B40@ha
-/* 81371C18 00040018  98 03 00 8B */	stb r0, 0x8b(r3)
-/* 81371C1C 0004001C  7C 79 1B 78 */	mr r25, r3
-/* 81371C20 00040020  3B 9C 4B 40 */	addi r28, r28, lbl_81644B40@l
-/* 81371C24 00040024  98 03 00 8C */	stb r0, 0x8c(r3)
-/* 81371C28 00040028  98 03 00 8D */	stb r0, 0x8d(r3)
-/* 81371C2C 0004002C  48 00 08 ED */	bl set_config__Q210homebutton10HomeButtonFv
-/* 81371C30 00040030  7F 23 CB 78 */	mr r3, r25
-/* 81371C34 00040034  48 00 09 F5 */	bl set_text__Q210homebutton10HomeButtonFv
-/* 81371C38 00040038  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81371C3C 0004003C  38 80 00 1C */	li r4, 0x1c
-/* 81371C40 00040040  48 1E 9A 29 */	bl fn_8155B668
-/* 81371C44 00040044  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81371C48 00040048  41 82 00 08 */	beq .L_81371C50
-/* 81371C4C 0004004C  48 1B 87 A9 */	bl fn_8152A3F4
+/* 81371BF4 | 94 21 FF 20 */	stwu r1, -0xe0(r1)
+/* 81371BF8 | 7C 08 02 A6 */	mflr r0
+/* 81371BFC | 90 01 00 E4 */	stw r0, 0xe4(r1)
+/* 81371C00 | DB E1 00 D0 */	stfd f31, 0xd0(r1)
+/* 81371C04 | F3 E1 00 D8 */	psq_st f31, 0xd8(r1), 0, qr0
+/* 81371C08 | 39 61 00 D0 */	addi r11, r1, 0xd0
+/* 81371C0C | 48 28 78 99 */	bl _savegpr_20
+/* 81371C10 | 38 00 00 00 */	li r0, 0x0
+/* 81371C14 | 3F 80 81 64 */	lis r28, lbl_81644B40@ha
+/* 81371C18 | 98 03 00 8B */	stb r0, 0x8b(r3)
+/* 81371C1C | 7C 79 1B 78 */	mr r25, r3
+/* 81371C20 | 3B 9C 4B 40 */	addi r28, r28, lbl_81644B40@l
+/* 81371C24 | 98 03 00 8C */	stb r0, 0x8c(r3)
+/* 81371C28 | 98 03 00 8D */	stb r0, 0x8d(r3)
+/* 81371C2C | 48 00 08 ED */	bl set_config__Q210homebutton10HomeButtonFv
+/* 81371C30 | 7F 23 CB 78 */	mr r3, r25
+/* 81371C34 | 48 00 09 F5 */	bl set_text__Q210homebutton10HomeButtonFv
+/* 81371C38 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81371C3C | 38 80 00 1C */	li r4, 0x1c
+/* 81371C40 | 48 1E 9A 29 */	bl fn_8155B668
+/* 81371C44 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81371C48 | 41 82 00 08 */	beq .L_81371C50
+/* 81371C4C | 48 1B 87 A9 */	bl fn_8152A3F4
 .L_81371C50:
-/* 81371C50 00040050  90 79 02 40 */	stw r3, 0x240(r25)
-/* 81371C54 00040054  38 AD 84 AC */	li r5, lbl_816964EC@sda21
-/* 81371C58 00040058  80 99 00 04 */	lwz r4, 0x4(r25)
-/* 81371C5C 0004005C  80 84 00 00 */	lwz r4, 0x0(r4)
-/* 81371C60 00040060  4B FF FF 15 */	bl HBMBase_81371B74
-/* 81371C64 00040064  80 99 00 04 */	lwz r4, 0x4(r25)
-/* 81371C68 00040068  38 AD 84 AC */	li r5, lbl_816964EC@sda21
-/* 81371C6C 0004006C  80 79 02 40 */	lwz r3, 0x240(r25)
-/* 81371C70 00040070  80 84 00 04 */	lwz r4, 0x4(r4)
-/* 81371C74 00040074  4B FF FF 01 */	bl HBMBase_81371B74
-/* 81371C78 00040078  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81371C7C 0004007C  38 80 00 8C */	li r4, 0x8c
-/* 81371C80 00040080  48 1E 99 E9 */	bl fn_8155B668
-/* 81371C84 00040084  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81371C88 00040088  7C 75 1B 78 */	mr r21, r3
-/* 81371C8C 0004008C  41 82 00 0C */	beq .L_81371C98
-/* 81371C90 00040090  48 1B 86 A5 */	bl fn_8152A334
-/* 81371C94 00040094  7C 75 1B 78 */	mr r21, r3
+/* 81371C50 | 90 79 02 40 */	stw r3, 0x240(r25)
+/* 81371C54 | 38 AD 84 AC */	li r5, lbl_816964EC@sda21
+/* 81371C58 | 80 99 00 04 */	lwz r4, 0x4(r25)
+/* 81371C5C | 80 84 00 00 */	lwz r4, 0x0(r4)
+/* 81371C60 | 4B FF FF 15 */	bl HBMBase_81371B74
+/* 81371C64 | 80 99 00 04 */	lwz r4, 0x4(r25)
+/* 81371C68 | 38 AD 84 AC */	li r5, lbl_816964EC@sda21
+/* 81371C6C | 80 79 02 40 */	lwz r3, 0x240(r25)
+/* 81371C70 | 80 84 00 04 */	lwz r4, 0x4(r4)
+/* 81371C74 | 4B FF FF 01 */	bl HBMBase_81371B74
+/* 81371C78 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81371C7C | 38 80 00 8C */	li r4, 0x8c
+/* 81371C80 | 48 1E 99 E9 */	bl fn_8155B668
+/* 81371C84 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81371C88 | 7C 75 1B 78 */	mr r21, r3
+/* 81371C8C | 41 82 00 0C */	beq .L_81371C98
+/* 81371C90 | 48 1B 86 A5 */	bl fn_8152A334
+/* 81371C94 | 7C 75 1B 78 */	mr r21, r3
 .L_81371C98:
-/* 81371C98 00040098  80 B9 00 04 */	lwz r5, 0x4(r25)
-/* 81371C9C 0004009C  7E A3 AB 78 */	mr r3, r21
-/* 81371CA0 000400A0  38 9C 09 AC */	addi r4, r28, 0x9ac
-/* 81371CA4 000400A4  80 A5 00 08 */	lwz r5, 0x8(r5)
-/* 81371CA8 000400A8  48 1B 86 A1 */	bl fn_8152A348
-/* 81371CAC 000400AC  80 79 02 40 */	lwz r3, 0x240(r25)
-/* 81371CB0 000400B0  7E A4 AB 78 */	mr r4, r21
-/* 81371CB4 000400B4  48 1B 88 ED */	bl fn_8152A5A0
-/* 81371CB8 000400B8  80 79 00 04 */	lwz r3, 0x4(r25)
-/* 81371CBC 000400BC  80 03 00 28 */	lwz r0, 0x28(r3)
-/* 81371CC0 000400C0  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81371CC4 000400C4  40 82 00 84 */	bne .L_81371D48
-/* 81371CC8 000400C8  3A BC 00 34 */	addi r21, r28, 0x34
-/* 81371CCC 000400CC  3A 80 00 00 */	li r20, 0x0
-/* 81371CD0 000400D0  3A E0 00 00 */	li r23, 0x0
+/* 81371C98 | 80 B9 00 04 */	lwz r5, 0x4(r25)
+/* 81371C9C | 7E A3 AB 78 */	mr r3, r21
+/* 81371CA0 | 38 9C 09 AC */	addi r4, r28, 0x9ac
+/* 81371CA4 | 80 A5 00 08 */	lwz r5, 0x8(r5)
+/* 81371CA8 | 48 1B 86 A1 */	bl fn_8152A348
+/* 81371CAC | 80 79 02 40 */	lwz r3, 0x240(r25)
+/* 81371CB0 | 7E A4 AB 78 */	mr r4, r21
+/* 81371CB4 | 48 1B 88 ED */	bl fn_8152A5A0
+/* 81371CB8 | 80 79 00 04 */	lwz r3, 0x4(r25)
+/* 81371CBC | 80 03 00 28 */	lwz r0, 0x28(r3)
+/* 81371CC0 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81371CC4 | 40 82 00 84 */	bne .L_81371D48
+/* 81371CC8 | 3A BC 00 34 */	addi r21, r28, 0x34
+/* 81371CCC | 3A 80 00 00 */	li r20, 0x0
+/* 81371CD0 | 3A E0 00 00 */	li r23, 0x0
 .L_81371CD4:
-/* 81371CD4 000400D4  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81371CD8 000400D8  38 80 00 24 */	li r4, 0x24
-/* 81371CDC 000400DC  48 1E 99 8D */	bl fn_8155B668
-/* 81371CE0 000400E0  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81371CE4 000400E4  41 82 00 14 */	beq .L_81371CF8
-/* 81371CE8 000400E8  41 82 00 08 */	beq .L_81371CF0
-/* 81371CEC 000400EC  48 1A E3 69 */	bl fn_81520054
+/* 81371CD4 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81371CD8 | 38 80 00 24 */	li r4, 0x24
+/* 81371CDC | 48 1E 99 8D */	bl fn_8155B668
+/* 81371CE0 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81371CE4 | 41 82 00 14 */	beq .L_81371CF8
+/* 81371CE8 | 41 82 00 08 */	beq .L_81371CF0
+/* 81371CEC | 48 1A E3 69 */	bl fn_81520054
 .L_81371CF0:
-/* 81371CF0 000400F0  7C 99 BA 14 */	add r4, r25, r23
-/* 81371CF4 000400F4  90 64 02 30 */	stw r3, 0x230(r4)
+/* 81371CF0 | 7C 99 BA 14 */	add r4, r25, r23
+/* 81371CF4 | 90 64 02 30 */	stw r3, 0x230(r4)
 .L_81371CF8:
-/* 81371CF8 000400F8  80 79 02 40 */	lwz r3, 0x240(r25)
-/* 81371CFC 000400FC  38 80 00 00 */	li r4, 0x0
-/* 81371D00 00040100  7C B5 B8 2E */	lwzx r5, r21, r23
-/* 81371D04 00040104  38 C0 00 00 */	li r6, 0x0
-/* 81371D08 00040108  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81371D0C 0004010C  81 8C 00 0C */	lwz r12, 0xc(r12)
-/* 81371D10 00040110  7D 89 03 A6 */	mtctr r12
-/* 81371D14 00040114  4E 80 04 21 */	bctrl
-/* 81371D18 00040118  7C B9 BA 14 */	add r5, r25, r23
-/* 81371D1C 0004011C  7C 64 1B 78 */	mr r4, r3
-/* 81371D20 00040120  80 65 02 30 */	lwz r3, 0x230(r5)
-/* 81371D24 00040124  80 B9 02 40 */	lwz r5, 0x240(r25)
-/* 81371D28 00040128  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81371D2C 0004012C  81 8C 00 0C */	lwz r12, 0xc(r12)
-/* 81371D30 00040130  7D 89 03 A6 */	mtctr r12
-/* 81371D34 00040134  4E 80 04 21 */	bctrl
-/* 81371D38 00040138  3A 94 00 01 */	addi r20, r20, 0x1
-/* 81371D3C 0004013C  3A F7 00 04 */	addi r23, r23, 0x4
-/* 81371D40 00040140  2C 14 00 04 */	cmpwi r20, 0x4
-/* 81371D44 00040144  41 80 FF 90 */	blt .L_81371CD4
+/* 81371CF8 | 80 79 02 40 */	lwz r3, 0x240(r25)
+/* 81371CFC | 38 80 00 00 */	li r4, 0x0
+/* 81371D00 | 7C B5 B8 2E */	lwzx r5, r21, r23
+/* 81371D04 | 38 C0 00 00 */	li r6, 0x0
+/* 81371D08 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81371D0C | 81 8C 00 0C */	lwz r12, 0xc(r12)
+/* 81371D10 | 7D 89 03 A6 */	mtctr r12
+/* 81371D14 | 4E 80 04 21 */	bctrl
+/* 81371D18 | 7C B9 BA 14 */	add r5, r25, r23
+/* 81371D1C | 7C 64 1B 78 */	mr r4, r3
+/* 81371D20 | 80 65 02 30 */	lwz r3, 0x230(r5)
+/* 81371D24 | 80 B9 02 40 */	lwz r5, 0x240(r25)
+/* 81371D28 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81371D2C | 81 8C 00 0C */	lwz r12, 0xc(r12)
+/* 81371D30 | 7D 89 03 A6 */	mtctr r12
+/* 81371D34 | 4E 80 04 21 */	bctrl
+/* 81371D38 | 3A 94 00 01 */	addi r20, r20, 0x1
+/* 81371D3C | 3A F7 00 04 */	addi r23, r23, 0x4
+/* 81371D40 | 2C 14 00 04 */	cmpwi r20, 0x4
+/* 81371D44 | 41 80 FF 90 */	blt .L_81371CD4
 .L_81371D48:
-/* 81371D48 00040148  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81371D4C 0004014C  38 80 00 24 */	li r4, 0x24
-/* 81371D50 00040150  48 1E 99 19 */	bl fn_8155B668
-/* 81371D54 00040154  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81371D58 00040158  41 82 00 10 */	beq .L_81371D68
-/* 81371D5C 0004015C  41 82 00 08 */	beq .L_81371D64
-/* 81371D60 00040160  48 1A E2 F5 */	bl fn_81520054
+/* 81371D48 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81371D4C | 38 80 00 24 */	li r4, 0x24
+/* 81371D50 | 48 1E 99 19 */	bl fn_8155B668
+/* 81371D54 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81371D58 | 41 82 00 10 */	beq .L_81371D68
+/* 81371D5C | 41 82 00 08 */	beq .L_81371D64
+/* 81371D60 | 48 1A E2 F5 */	bl fn_81520054
 .L_81371D64:
-/* 81371D64 00040164  90 79 02 2C */	stw r3, 0x22c(r25)
+/* 81371D64 | 90 79 02 2C */	stw r3, 0x22c(r25)
 .L_81371D68:
-/* 81371D68 00040168  80 79 02 40 */	lwz r3, 0x240(r25)
-/* 81371D6C 0004016C  38 80 00 00 */	li r4, 0x0
-/* 81371D70 00040170  80 B9 00 A8 */	lwz r5, 0xa8(r25)
-/* 81371D74 00040174  38 C0 00 00 */	li r6, 0x0
-/* 81371D78 00040178  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81371D7C 0004017C  81 8C 00 0C */	lwz r12, 0xc(r12)
-/* 81371D80 00040180  7D 89 03 A6 */	mtctr r12
-/* 81371D84 00040184  4E 80 04 21 */	bctrl
-/* 81371D88 00040188  7C 64 1B 78 */	mr r4, r3
-/* 81371D8C 0004018C  80 79 02 2C */	lwz r3, 0x22c(r25)
-/* 81371D90 00040190  80 B9 02 40 */	lwz r5, 0x240(r25)
-/* 81371D94 00040194  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81371D98 00040198  81 8C 00 0C */	lwz r12, 0xc(r12)
-/* 81371D9C 0004019C  7D 89 03 A6 */	mtctr r12
-/* 81371DA0 000401A0  4E 80 04 21 */	bctrl
-/* 81371DA4 000401A4  3F E0 81 61 */	lis r31, lbl_8160F378@ha
-/* 81371DA8 000401A8  CB E2 82 E0 */	lfd f31, lbl_816946E0@sda21(r0)
-/* 81371DAC 000401AC  3B FF F3 78 */	addi r31, r31, lbl_8160F378@l
-/* 81371DB0 000401B0  3B DC 01 74 */	addi r30, r28, 0x174
-/* 81371DB4 000401B4  3B BC 01 1C */	addi r29, r28, 0x11c
-/* 81371DB8 000401B8  3B 40 00 00 */	li r26, 0x0
-/* 81371DBC 000401BC  3A E0 00 00 */	li r23, 0x0
-/* 81371DC0 000401C0  3B 00 00 00 */	li r24, 0x0
-/* 81371DC4 000401C4  3E A0 43 30 */	lis r21, 0x4330
-/* 81371DC8 000401C8  48 00 01 60 */	b .L_81371F28
+/* 81371D68 | 80 79 02 40 */	lwz r3, 0x240(r25)
+/* 81371D6C | 38 80 00 00 */	li r4, 0x0
+/* 81371D70 | 80 B9 00 A8 */	lwz r5, 0xa8(r25)
+/* 81371D74 | 38 C0 00 00 */	li r6, 0x0
+/* 81371D78 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81371D7C | 81 8C 00 0C */	lwz r12, 0xc(r12)
+/* 81371D80 | 7D 89 03 A6 */	mtctr r12
+/* 81371D84 | 4E 80 04 21 */	bctrl
+/* 81371D88 | 7C 64 1B 78 */	mr r4, r3
+/* 81371D8C | 80 79 02 2C */	lwz r3, 0x22c(r25)
+/* 81371D90 | 80 B9 02 40 */	lwz r5, 0x240(r25)
+/* 81371D94 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81371D98 | 81 8C 00 0C */	lwz r12, 0xc(r12)
+/* 81371D9C | 7D 89 03 A6 */	mtctr r12
+/* 81371DA0 | 4E 80 04 21 */	bctrl
+/* 81371DA4 | 3F E0 81 61 */	lis r31, lbl_8160F378@ha
+/* 81371DA8 | CB E2 82 E0 */	lfd f31, lbl_816946E0@sda21(r0)
+/* 81371DAC | 3B FF F3 78 */	addi r31, r31, lbl_8160F378@l
+/* 81371DB0 | 3B DC 01 74 */	addi r30, r28, 0x174
+/* 81371DB4 | 3B BC 01 1C */	addi r29, r28, 0x11c
+/* 81371DB8 | 3B 40 00 00 */	li r26, 0x0
+/* 81371DBC | 3A E0 00 00 */	li r23, 0x0
+/* 81371DC0 | 3B 00 00 00 */	li r24, 0x0
+/* 81371DC4 | 3E A0 43 30 */	lis r21, 0x4330
+/* 81371DC8 | 48 00 01 60 */	b .L_81371F28
 .L_81371DCC:
-/* 81371DCC 000401CC  80 99 00 AC */	lwz r4, 0xac(r25)
-/* 81371DD0 000401D0  38 61 00 58 */	addi r3, r1, 0x58
-/* 81371DD4 000401D4  48 29 05 31 */	bl strcpy
-/* 81371DD8 000401D8  7E 9F BA 14 */	add r20, r31, r23
-/* 81371DDC 000401DC  38 61 00 58 */	addi r3, r1, 0x58
-/* 81371DE0 000401E0  80 14 00 04 */	lwz r0, 0x4(r20)
-/* 81371DE4 000401E4  54 00 10 3A */	slwi r0, r0, 2
-/* 81371DE8 000401E8  7C 9E 00 2E */	lwzx r4, r30, r0
-/* 81371DEC 000401EC  48 29 06 1D */	bl strcat
-/* 81371DF0 000401F0  80 79 02 40 */	lwz r3, 0x240(r25)
-/* 81371DF4 000401F4  38 A1 00 58 */	addi r5, r1, 0x58
-/* 81371DF8 000401F8  38 80 00 00 */	li r4, 0x0
-/* 81371DFC 000401FC  38 C0 00 00 */	li r6, 0x0
-/* 81371E00 00040200  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81371E04 00040204  81 8C 00 0C */	lwz r12, 0xc(r12)
-/* 81371E08 00040208  7D 89 03 A6 */	mtctr r12
-/* 81371E0C 0004020C  4E 80 04 21 */	bctrl
-/* 81371E10 00040210  7C 76 1B 78 */	mr r22, r3
-/* 81371E14 00040214  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81371E18 00040218  38 80 00 28 */	li r4, 0x28
-/* 81371E1C 0004021C  48 1E 98 4D */	bl fn_8155B668
-/* 81371E20 00040220  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81371E24 00040224  41 82 00 14 */	beq .L_81371E38
-/* 81371E28 00040228  41 82 00 08 */	beq .L_81371E30
-/* 81371E2C 0004022C  48 00 53 B5 */	bl __ct__Q210homebutton18GroupAnmControllerFv
+/* 81371DCC | 80 99 00 AC */	lwz r4, 0xac(r25)
+/* 81371DD0 | 38 61 00 58 */	addi r3, r1, 0x58
+/* 81371DD4 | 48 29 05 31 */	bl strcpy
+/* 81371DD8 | 7E 9F BA 14 */	add r20, r31, r23
+/* 81371DDC | 38 61 00 58 */	addi r3, r1, 0x58
+/* 81371DE0 | 80 14 00 04 */	lwz r0, 0x4(r20)
+/* 81371DE4 | 54 00 10 3A */	slwi r0, r0, 2
+/* 81371DE8 | 7C 9E 00 2E */	lwzx r4, r30, r0
+/* 81371DEC | 48 29 06 1D */	bl strcat
+/* 81371DF0 | 80 79 02 40 */	lwz r3, 0x240(r25)
+/* 81371DF4 | 38 A1 00 58 */	addi r5, r1, 0x58
+/* 81371DF8 | 38 80 00 00 */	li r4, 0x0
+/* 81371DFC | 38 C0 00 00 */	li r6, 0x0
+/* 81371E00 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81371E04 | 81 8C 00 0C */	lwz r12, 0xc(r12)
+/* 81371E08 | 7D 89 03 A6 */	mtctr r12
+/* 81371E0C | 4E 80 04 21 */	bctrl
+/* 81371E10 | 7C 76 1B 78 */	mr r22, r3
+/* 81371E14 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81371E18 | 38 80 00 28 */	li r4, 0x28
+/* 81371E1C | 48 1E 98 4D */	bl fn_8155B668
+/* 81371E20 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81371E24 | 41 82 00 14 */	beq .L_81371E38
+/* 81371E28 | 41 82 00 08 */	beq .L_81371E30
+/* 81371E2C | 48 00 53 B5 */	bl __ct__Q210homebutton18GroupAnmControllerFv
 .L_81371E30:
-/* 81371E30 00040230  7C 99 C2 14 */	add r4, r25, r24
-/* 81371E34 00040234  90 64 02 B4 */	stw r3, 0x2b4(r4)
+/* 81371E30 | 7C 99 C2 14 */	add r4, r25, r24
+/* 81371E34 | 90 64 02 B4 */	stw r3, 0x2b4(r4)
 .L_81371E38:
-/* 81371E38 00040238  80 79 02 2C */	lwz r3, 0x22c(r25)
-/* 81371E3C 0004023C  7E C4 B3 78 */	mr r4, r22
-/* 81371E40 00040240  7F 79 C2 14 */	add r27, r25, r24
-/* 81371E44 00040244  80 B9 02 40 */	lwz r5, 0x240(r25)
-/* 81371E48 00040248  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81371E4C 0004024C  81 8C 00 10 */	lwz r12, 0x10(r12)
-/* 81371E50 00040250  7D 89 03 A6 */	mtctr r12
-/* 81371E54 00040254  4E 80 04 21 */	bctrl
-/* 81371E58 00040258  80 9B 02 B4 */	lwz r4, 0x2b4(r27)
-/* 81371E5C 0004025C  80 14 00 00 */	lwz r0, 0x0(r20)
-/* 81371E60 00040260  90 64 00 24 */	stw r3, 0x24(r4)
-/* 81371E64 00040264  54 00 10 3A */	slwi r0, r0, 2
-/* 81371E68 00040268  80 79 02 2C */	lwz r3, 0x22c(r25)
-/* 81371E6C 0004026C  7C 9D 00 2E */	lwzx r4, r29, r0
-/* 81371E70 00040270  80 63 00 14 */	lwz r3, 0x14(r3)
-/* 81371E74 00040274  48 1A DF C9 */	bl fn_8151FE3C
-/* 81371E78 00040278  80 9B 02 B4 */	lwz r4, 0x2b4(r27)
-/* 81371E7C 0004027C  90 64 00 20 */	stw r3, 0x20(r4)
-/* 81371E80 00040280  80 7B 02 B4 */	lwz r3, 0x2b4(r27)
-/* 81371E84 00040284  80 63 00 20 */	lwz r3, 0x20(r3)
-/* 81371E88 00040288  3A 83 00 0C */	addi r20, r3, 0xc
-/* 81371E8C 0004028C  7E 83 A3 78 */	mr r3, r20
-/* 81371E90 00040290  4B FF 7F A5 */	bl "GetBeginIter__Q34nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>Fv"
-/* 81371E94 00040294  7C 76 1B 78 */	mr r22, r3
-/* 81371E98 00040298  48 00 00 28 */	b .L_81371EC0
+/* 81371E38 | 80 79 02 2C */	lwz r3, 0x22c(r25)
+/* 81371E3C | 7E C4 B3 78 */	mr r4, r22
+/* 81371E40 | 7F 79 C2 14 */	add r27, r25, r24
+/* 81371E44 | 80 B9 02 40 */	lwz r5, 0x240(r25)
+/* 81371E48 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81371E4C | 81 8C 00 10 */	lwz r12, 0x10(r12)
+/* 81371E50 | 7D 89 03 A6 */	mtctr r12
+/* 81371E54 | 4E 80 04 21 */	bctrl
+/* 81371E58 | 80 9B 02 B4 */	lwz r4, 0x2b4(r27)
+/* 81371E5C | 80 14 00 00 */	lwz r0, 0x0(r20)
+/* 81371E60 | 90 64 00 24 */	stw r3, 0x24(r4)
+/* 81371E64 | 54 00 10 3A */	slwi r0, r0, 2
+/* 81371E68 | 80 79 02 2C */	lwz r3, 0x22c(r25)
+/* 81371E6C | 7C 9D 00 2E */	lwzx r4, r29, r0
+/* 81371E70 | 80 63 00 14 */	lwz r3, 0x14(r3)
+/* 81371E74 | 48 1A DF C9 */	bl fn_8151FE3C
+/* 81371E78 | 80 9B 02 B4 */	lwz r4, 0x2b4(r27)
+/* 81371E7C | 90 64 00 20 */	stw r3, 0x20(r4)
+/* 81371E80 | 80 7B 02 B4 */	lwz r3, 0x2b4(r27)
+/* 81371E84 | 80 63 00 20 */	lwz r3, 0x20(r3)
+/* 81371E88 | 3A 83 00 0C */	addi r20, r3, 0xc
+/* 81371E8C | 7E 83 A3 78 */	mr r3, r20
+/* 81371E90 | 4B FF 7F A5 */	bl "GetBeginIter__Q34nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>Fv"
+/* 81371E94 | 7C 76 1B 78 */	mr r22, r3
+/* 81371E98 | 48 00 00 28 */	b .L_81371EC0
 .L_81371E9C:
-/* 81371E9C 0004029C  80 76 00 08 */	lwz r3, 0x8(r22)
-/* 81371EA0 000402A0  38 A0 00 00 */	li r5, 0x0
-/* 81371EA4 000402A4  80 9B 02 B4 */	lwz r4, 0x2b4(r27)
-/* 81371EA8 000402A8  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81371EAC 000402AC  80 84 00 24 */	lwz r4, 0x24(r4)
-/* 81371EB0 000402B0  81 8C 00 44 */	lwz r12, 0x44(r12)
-/* 81371EB4 000402B4  7D 89 03 A6 */	mtctr r12
-/* 81371EB8 000402B8  4E 80 04 21 */	bctrl
-/* 81371EBC 000402BC  82 D6 00 00 */	lwz r22, 0x0(r22)
+/* 81371E9C | 80 76 00 08 */	lwz r3, 0x8(r22)
+/* 81371EA0 | 38 A0 00 00 */	li r5, 0x0
+/* 81371EA4 | 80 9B 02 B4 */	lwz r4, 0x2b4(r27)
+/* 81371EA8 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81371EAC | 80 84 00 24 */	lwz r4, 0x24(r4)
+/* 81371EB0 | 81 8C 00 44 */	lwz r12, 0x44(r12)
+/* 81371EB4 | 7D 89 03 A6 */	mtctr r12
+/* 81371EB8 | 4E 80 04 21 */	bctrl
+/* 81371EBC | 82 D6 00 00 */	lwz r22, 0x0(r22)
 .L_81371EC0:
-/* 81371EC0 000402C0  7E 83 A3 78 */	mr r3, r20
-/* 81371EC4 000402C4  4B FF 7F 79 */	bl "GetEndIter__Q34nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>Fv"
-/* 81371EC8 000402C8  90 61 00 18 */	stw r3, 0x18(r1)
-/* 81371ECC 000402CC  38 61 00 1C */	addi r3, r1, 0x1c
-/* 81371ED0 000402D0  38 81 00 18 */	addi r4, r1, 0x18
-/* 81371ED4 000402D4  92 C1 00 1C */	stw r22, 0x1c(r1)
-/* 81371ED8 000402D8  4B FF 7F 6D */	bl "__ne__Q24nw4r2utFQ44nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>8IteratorQ44nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>8Iterator"
-/* 81371EDC 000402DC  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81371EE0 000402E0  40 82 FF BC */	bne .L_81371E9C
-/* 81371EE4 000402E4  80 7B 02 B4 */	lwz r3, 0x2b4(r27)
-/* 81371EE8 000402E8  80 63 00 24 */	lwz r3, 0x24(r3)
-/* 81371EEC 000402EC  48 1B 78 61 */	bl fn_8152974C
-/* 81371EF0 000402F0  54 60 04 3E */	clrlwi r0, r3, 16
-/* 81371EF4 000402F4  80 B9 00 04 */	lwz r5, 0x4(r25)
-/* 81371EF8 000402F8  90 01 00 9C */	stw r0, 0x9c(r1)
-/* 81371EFC 000402FC  38 80 00 00 */	li r4, 0x0
-/* 81371F00 00040300  80 7B 02 B4 */	lwz r3, 0x2b4(r27)
-/* 81371F04 00040304  92 A1 00 98 */	stw r21, 0x98(r1)
-/* 81371F08 00040308  C0 42 82 D8 */	lfs f2, lbl_816946D8@sda21(r0)
-/* 81371F0C 0004030C  C8 01 00 98 */	lfd f0, 0x98(r1)
-/* 81371F10 00040310  C0 65 00 34 */	lfs f3, 0x34(r5)
-/* 81371F14 00040314  EC 20 F8 28 */	fsubs f1, f0, f31
-/* 81371F18 00040318  48 00 5C F9 */	bl init__Q210homebutton15FrameControllerFifff
-/* 81371F1C 0004031C  3B 5A 00 01 */	addi r26, r26, 0x1
-/* 81371F20 00040320  3A F7 00 08 */	addi r23, r23, 0x8
-/* 81371F24 00040324  3B 18 00 04 */	addi r24, r24, 0x4
+/* 81371EC0 | 7E 83 A3 78 */	mr r3, r20
+/* 81371EC4 | 4B FF 7F 79 */	bl "GetEndIter__Q34nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>Fv"
+/* 81371EC8 | 90 61 00 18 */	stw r3, 0x18(r1)
+/* 81371ECC | 38 61 00 1C */	addi r3, r1, 0x1c
+/* 81371ED0 | 38 81 00 18 */	addi r4, r1, 0x18
+/* 81371ED4 | 92 C1 00 1C */	stw r22, 0x1c(r1)
+/* 81371ED8 | 4B FF 7F 6D */	bl "__ne__Q24nw4r2utFQ44nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>8IteratorQ44nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>8Iterator"
+/* 81371EDC | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81371EE0 | 40 82 FF BC */	bne .L_81371E9C
+/* 81371EE4 | 80 7B 02 B4 */	lwz r3, 0x2b4(r27)
+/* 81371EE8 | 80 63 00 24 */	lwz r3, 0x24(r3)
+/* 81371EEC | 48 1B 78 61 */	bl fn_8152974C
+/* 81371EF0 | 54 60 04 3E */	clrlwi r0, r3, 16
+/* 81371EF4 | 80 B9 00 04 */	lwz r5, 0x4(r25)
+/* 81371EF8 | 90 01 00 9C */	stw r0, 0x9c(r1)
+/* 81371EFC | 38 80 00 00 */	li r4, 0x0
+/* 81371F00 | 80 7B 02 B4 */	lwz r3, 0x2b4(r27)
+/* 81371F04 | 92 A1 00 98 */	stw r21, 0x98(r1)
+/* 81371F08 | C0 42 82 D8 */	lfs f2, lbl_816946D8@sda21(r0)
+/* 81371F0C | C8 01 00 98 */	lfd f0, 0x98(r1)
+/* 81371F10 | C0 65 00 34 */	lfs f3, 0x34(r5)
+/* 81371F14 | EC 20 F8 28 */	fsubs f1, f0, f31
+/* 81371F18 | 48 00 5C F9 */	bl init__Q210homebutton15FrameControllerFifff
+/* 81371F1C | 3B 5A 00 01 */	addi r26, r26, 0x1
+/* 81371F20 | 3A F7 00 08 */	addi r23, r23, 0x8
+/* 81371F24 | 3B 18 00 04 */	addi r24, r24, 0x4
 .L_81371F28:
-/* 81371F28 00040328  80 19 00 0C */	lwz r0, 0xc(r25)
-/* 81371F2C 0004032C  7C 1A 00 00 */	cmpw r26, r0
-/* 81371F30 00040330  41 80 FE 9C */	blt .L_81371DCC
-/* 81371F34 00040334  3F A0 81 61 */	lis r29, lbl_8160F3D8@ha
-/* 81371F38 00040338  CB E2 82 E0 */	lfd f31, lbl_816946E0@sda21(r0)
-/* 81371F3C 0004033C  3B BD F3 D8 */	addi r29, r29, lbl_8160F3D8@l
-/* 81371F40 00040340  3B DC 05 88 */	addi r30, r28, 0x588
-/* 81371F44 00040344  3B FC 07 1C */	addi r31, r28, 0x71c
-/* 81371F48 00040348  3B 40 00 00 */	li r26, 0x0
-/* 81371F4C 0004034C  3B 00 00 00 */	li r24, 0x0
-/* 81371F50 00040350  3A E0 00 00 */	li r23, 0x0
-/* 81371F54 00040354  3E A0 43 30 */	lis r21, 0x4330
+/* 81371F28 | 80 19 00 0C */	lwz r0, 0xc(r25)
+/* 81371F2C | 7C 1A 00 00 */	cmpw r26, r0
+/* 81371F30 | 41 80 FE 9C */	blt .L_81371DCC
+/* 81371F34 | 3F A0 81 61 */	lis r29, lbl_8160F3D8@ha
+/* 81371F38 | CB E2 82 E0 */	lfd f31, lbl_816946E0@sda21(r0)
+/* 81371F3C | 3B BD F3 D8 */	addi r29, r29, lbl_8160F3D8@l
+/* 81371F40 | 3B DC 05 88 */	addi r30, r28, 0x588
+/* 81371F44 | 3B FC 07 1C */	addi r31, r28, 0x71c
+/* 81371F48 | 3B 40 00 00 */	li r26, 0x0
+/* 81371F4C | 3B 00 00 00 */	li r24, 0x0
+/* 81371F50 | 3A E0 00 00 */	li r23, 0x0
+/* 81371F54 | 3E A0 43 30 */	lis r21, 0x4330
 .L_81371F58:
-/* 81371F58 00040358  80 99 00 AC */	lwz r4, 0xac(r25)
-/* 81371F5C 0004035C  38 61 00 58 */	addi r3, r1, 0x58
-/* 81371F60 00040360  48 29 03 A5 */	bl strcpy
-/* 81371F64 00040364  7E 9D C2 14 */	add r20, r29, r24
-/* 81371F68 00040368  38 61 00 58 */	addi r3, r1, 0x58
-/* 81371F6C 0004036C  80 14 00 04 */	lwz r0, 0x4(r20)
-/* 81371F70 00040370  54 00 10 3A */	slwi r0, r0, 2
-/* 81371F74 00040374  7C 9E 00 2E */	lwzx r4, r30, r0
-/* 81371F78 00040378  48 29 04 91 */	bl strcat
-/* 81371F7C 0004037C  80 79 02 40 */	lwz r3, 0x240(r25)
-/* 81371F80 00040380  38 A1 00 58 */	addi r5, r1, 0x58
-/* 81371F84 00040384  38 80 00 00 */	li r4, 0x0
-/* 81371F88 00040388  38 C0 00 00 */	li r6, 0x0
-/* 81371F8C 0004038C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81371F90 00040390  81 8C 00 0C */	lwz r12, 0xc(r12)
-/* 81371F94 00040394  7D 89 03 A6 */	mtctr r12
-/* 81371F98 00040398  4E 80 04 21 */	bctrl
-/* 81371F9C 0004039C  7C 76 1B 78 */	mr r22, r3
-/* 81371FA0 000403A0  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81371FA4 000403A4  38 80 00 28 */	li r4, 0x28
-/* 81371FA8 000403A8  48 1E 96 C1 */	bl fn_8155B668
-/* 81371FAC 000403AC  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81371FB0 000403B0  41 82 00 14 */	beq .L_81371FC4
-/* 81371FB4 000403B4  41 82 00 08 */	beq .L_81371FBC
-/* 81371FB8 000403B8  48 00 52 29 */	bl __ct__Q210homebutton18GroupAnmControllerFv
+/* 81371F58 | 80 99 00 AC */	lwz r4, 0xac(r25)
+/* 81371F5C | 38 61 00 58 */	addi r3, r1, 0x58
+/* 81371F60 | 48 29 03 A5 */	bl strcpy
+/* 81371F64 | 7E 9D C2 14 */	add r20, r29, r24
+/* 81371F68 | 38 61 00 58 */	addi r3, r1, 0x58
+/* 81371F6C | 80 14 00 04 */	lwz r0, 0x4(r20)
+/* 81371F70 | 54 00 10 3A */	slwi r0, r0, 2
+/* 81371F74 | 7C 9E 00 2E */	lwzx r4, r30, r0
+/* 81371F78 | 48 29 04 91 */	bl strcat
+/* 81371F7C | 80 79 02 40 */	lwz r3, 0x240(r25)
+/* 81371F80 | 38 A1 00 58 */	addi r5, r1, 0x58
+/* 81371F84 | 38 80 00 00 */	li r4, 0x0
+/* 81371F88 | 38 C0 00 00 */	li r6, 0x0
+/* 81371F8C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81371F90 | 81 8C 00 0C */	lwz r12, 0xc(r12)
+/* 81371F94 | 7D 89 03 A6 */	mtctr r12
+/* 81371F98 | 4E 80 04 21 */	bctrl
+/* 81371F9C | 7C 76 1B 78 */	mr r22, r3
+/* 81371FA0 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81371FA4 | 38 80 00 28 */	li r4, 0x28
+/* 81371FA8 | 48 1E 96 C1 */	bl fn_8155B668
+/* 81371FAC | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81371FB0 | 41 82 00 14 */	beq .L_81371FC4
+/* 81371FB4 | 41 82 00 08 */	beq .L_81371FBC
+/* 81371FB8 | 48 00 52 29 */	bl __ct__Q210homebutton18GroupAnmControllerFv
 .L_81371FBC:
-/* 81371FBC 000403BC  7C 99 BA 14 */	add r4, r25, r23
-/* 81371FC0 000403C0  90 64 02 E4 */	stw r3, 0x2e4(r4)
+/* 81371FBC | 7C 99 BA 14 */	add r4, r25, r23
+/* 81371FC0 | 90 64 02 E4 */	stw r3, 0x2e4(r4)
 .L_81371FC4:
-/* 81371FC4 000403C4  80 79 02 2C */	lwz r3, 0x22c(r25)
-/* 81371FC8 000403C8  7E C4 B3 78 */	mr r4, r22
-/* 81371FCC 000403CC  7F 79 BA 14 */	add r27, r25, r23
-/* 81371FD0 000403D0  80 B9 02 40 */	lwz r5, 0x240(r25)
-/* 81371FD4 000403D4  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81371FD8 000403D8  81 8C 00 10 */	lwz r12, 0x10(r12)
-/* 81371FDC 000403DC  7D 89 03 A6 */	mtctr r12
-/* 81371FE0 000403E0  4E 80 04 21 */	bctrl
-/* 81371FE4 000403E4  80 9B 02 E4 */	lwz r4, 0x2e4(r27)
-/* 81371FE8 000403E8  80 14 00 00 */	lwz r0, 0x0(r20)
-/* 81371FEC 000403EC  90 64 00 24 */	stw r3, 0x24(r4)
-/* 81371FF0 000403F0  54 00 10 3A */	slwi r0, r0, 2
-/* 81371FF4 000403F4  80 79 02 2C */	lwz r3, 0x22c(r25)
-/* 81371FF8 000403F8  7C 9F 00 2E */	lwzx r4, r31, r0
-/* 81371FFC 000403FC  80 63 00 14 */	lwz r3, 0x14(r3)
-/* 81372000 00040400  48 1A DE 3D */	bl fn_8151FE3C
-/* 81372004 00040404  80 9B 02 E4 */	lwz r4, 0x2e4(r27)
-/* 81372008 00040408  90 64 00 20 */	stw r3, 0x20(r4)
-/* 8137200C 0004040C  80 7B 02 E4 */	lwz r3, 0x2e4(r27)
-/* 81372010 00040410  80 63 00 20 */	lwz r3, 0x20(r3)
-/* 81372014 00040414  3A 83 00 0C */	addi r20, r3, 0xc
-/* 81372018 00040418  7E 83 A3 78 */	mr r3, r20
-/* 8137201C 0004041C  4B FF 7E 19 */	bl "GetBeginIter__Q34nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>Fv"
-/* 81372020 00040420  7C 76 1B 78 */	mr r22, r3
-/* 81372024 00040424  48 00 00 28 */	b .L_8137204C
+/* 81371FC4 | 80 79 02 2C */	lwz r3, 0x22c(r25)
+/* 81371FC8 | 7E C4 B3 78 */	mr r4, r22
+/* 81371FCC | 7F 79 BA 14 */	add r27, r25, r23
+/* 81371FD0 | 80 B9 02 40 */	lwz r5, 0x240(r25)
+/* 81371FD4 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81371FD8 | 81 8C 00 10 */	lwz r12, 0x10(r12)
+/* 81371FDC | 7D 89 03 A6 */	mtctr r12
+/* 81371FE0 | 4E 80 04 21 */	bctrl
+/* 81371FE4 | 80 9B 02 E4 */	lwz r4, 0x2e4(r27)
+/* 81371FE8 | 80 14 00 00 */	lwz r0, 0x0(r20)
+/* 81371FEC | 90 64 00 24 */	stw r3, 0x24(r4)
+/* 81371FF0 | 54 00 10 3A */	slwi r0, r0, 2
+/* 81371FF4 | 80 79 02 2C */	lwz r3, 0x22c(r25)
+/* 81371FF8 | 7C 9F 00 2E */	lwzx r4, r31, r0
+/* 81371FFC | 80 63 00 14 */	lwz r3, 0x14(r3)
+/* 81372000 | 48 1A DE 3D */	bl fn_8151FE3C
+/* 81372004 | 80 9B 02 E4 */	lwz r4, 0x2e4(r27)
+/* 81372008 | 90 64 00 20 */	stw r3, 0x20(r4)
+/* 8137200C | 80 7B 02 E4 */	lwz r3, 0x2e4(r27)
+/* 81372010 | 80 63 00 20 */	lwz r3, 0x20(r3)
+/* 81372014 | 3A 83 00 0C */	addi r20, r3, 0xc
+/* 81372018 | 7E 83 A3 78 */	mr r3, r20
+/* 8137201C | 4B FF 7E 19 */	bl "GetBeginIter__Q34nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>Fv"
+/* 81372020 | 7C 76 1B 78 */	mr r22, r3
+/* 81372024 | 48 00 00 28 */	b .L_8137204C
 .L_81372028:
-/* 81372028 00040428  80 76 00 08 */	lwz r3, 0x8(r22)
-/* 8137202C 0004042C  38 A0 00 00 */	li r5, 0x0
-/* 81372030 00040430  80 9B 02 E4 */	lwz r4, 0x2e4(r27)
-/* 81372034 00040434  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81372038 00040438  80 84 00 24 */	lwz r4, 0x24(r4)
-/* 8137203C 0004043C  81 8C 00 44 */	lwz r12, 0x44(r12)
-/* 81372040 00040440  7D 89 03 A6 */	mtctr r12
-/* 81372044 00040444  4E 80 04 21 */	bctrl
-/* 81372048 00040448  82 D6 00 00 */	lwz r22, 0x0(r22)
+/* 81372028 | 80 76 00 08 */	lwz r3, 0x8(r22)
+/* 8137202C | 38 A0 00 00 */	li r5, 0x0
+/* 81372030 | 80 9B 02 E4 */	lwz r4, 0x2e4(r27)
+/* 81372034 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81372038 | 80 84 00 24 */	lwz r4, 0x24(r4)
+/* 8137203C | 81 8C 00 44 */	lwz r12, 0x44(r12)
+/* 81372040 | 7D 89 03 A6 */	mtctr r12
+/* 81372044 | 4E 80 04 21 */	bctrl
+/* 81372048 | 82 D6 00 00 */	lwz r22, 0x0(r22)
 .L_8137204C:
-/* 8137204C 0004044C  7E 83 A3 78 */	mr r3, r20
-/* 81372050 00040450  4B FF 7D ED */	bl "GetEndIter__Q34nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>Fv"
-/* 81372054 00040454  90 61 00 10 */	stw r3, 0x10(r1)
-/* 81372058 00040458  38 61 00 14 */	addi r3, r1, 0x14
-/* 8137205C 0004045C  38 81 00 10 */	addi r4, r1, 0x10
-/* 81372060 00040460  92 C1 00 14 */	stw r22, 0x14(r1)
-/* 81372064 00040464  4B FF 7D E1 */	bl "__ne__Q24nw4r2utFQ44nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>8IteratorQ44nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>8Iterator"
-/* 81372068 00040468  2C 03 00 00 */	cmpwi r3, 0x0
-/* 8137206C 0004046C  40 82 FF BC */	bne .L_81372028
-/* 81372070 00040470  80 7B 02 E4 */	lwz r3, 0x2e4(r27)
-/* 81372074 00040474  80 63 00 24 */	lwz r3, 0x24(r3)
-/* 81372078 00040478  48 1B 76 D5 */	bl fn_8152974C
-/* 8137207C 0004047C  54 60 04 3E */	clrlwi r0, r3, 16
-/* 81372080 00040480  80 B9 00 04 */	lwz r5, 0x4(r25)
-/* 81372084 00040484  90 01 00 9C */	stw r0, 0x9c(r1)
-/* 81372088 00040488  38 80 00 00 */	li r4, 0x0
-/* 8137208C 0004048C  80 7B 02 E4 */	lwz r3, 0x2e4(r27)
-/* 81372090 00040490  92 A1 00 98 */	stw r21, 0x98(r1)
-/* 81372094 00040494  C0 42 82 D8 */	lfs f2, lbl_816946D8@sda21(r0)
-/* 81372098 00040498  C8 01 00 98 */	lfd f0, 0x98(r1)
-/* 8137209C 0004049C  C0 65 00 34 */	lfs f3, 0x34(r5)
-/* 813720A0 000404A0  EC 20 F8 28 */	fsubs f1, f0, f31
-/* 813720A4 000404A4  48 00 5B 6D */	bl init__Q210homebutton15FrameControllerFifff
-/* 813720A8 000404A8  3B 5A 00 01 */	addi r26, r26, 0x1
-/* 813720AC 000404AC  3A F7 00 04 */	addi r23, r23, 0x4
-/* 813720B0 000404B0  2C 1A 00 4A */	cmpwi r26, 0x4a
-/* 813720B4 000404B4  3B 18 00 08 */	addi r24, r24, 0x8
-/* 813720B8 000404B8  41 80 FE A0 */	blt .L_81371F58
-/* 813720BC 000404BC  CB E2 82 E0 */	lfd f31, lbl_816946E0@sda21(r0)
-/* 813720C0 000404C0  3B FC 02 A4 */	addi r31, r28, 0x2a4
-/* 813720C4 000404C4  3B 1C 03 9C */	addi r24, r28, 0x39c
-/* 813720C8 000404C8  3B 60 00 00 */	li r27, 0x0
-/* 813720CC 000404CC  3B 40 00 00 */	li r26, 0x0
-/* 813720D0 000404D0  3E E0 43 30 */	lis r23, 0x4330
+/* 8137204C | 7E 83 A3 78 */	mr r3, r20
+/* 81372050 | 4B FF 7D ED */	bl "GetEndIter__Q34nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>Fv"
+/* 81372054 | 90 61 00 10 */	stw r3, 0x10(r1)
+/* 81372058 | 38 61 00 14 */	addi r3, r1, 0x14
+/* 8137205C | 38 81 00 10 */	addi r4, r1, 0x10
+/* 81372060 | 92 C1 00 14 */	stw r22, 0x14(r1)
+/* 81372064 | 4B FF 7D E1 */	bl "__ne__Q24nw4r2utFQ44nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>8IteratorQ44nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>8Iterator"
+/* 81372068 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 8137206C | 40 82 FF BC */	bne .L_81372028
+/* 81372070 | 80 7B 02 E4 */	lwz r3, 0x2e4(r27)
+/* 81372074 | 80 63 00 24 */	lwz r3, 0x24(r3)
+/* 81372078 | 48 1B 76 D5 */	bl fn_8152974C
+/* 8137207C | 54 60 04 3E */	clrlwi r0, r3, 16
+/* 81372080 | 80 B9 00 04 */	lwz r5, 0x4(r25)
+/* 81372084 | 90 01 00 9C */	stw r0, 0x9c(r1)
+/* 81372088 | 38 80 00 00 */	li r4, 0x0
+/* 8137208C | 80 7B 02 E4 */	lwz r3, 0x2e4(r27)
+/* 81372090 | 92 A1 00 98 */	stw r21, 0x98(r1)
+/* 81372094 | C0 42 82 D8 */	lfs f2, lbl_816946D8@sda21(r0)
+/* 81372098 | C8 01 00 98 */	lfd f0, 0x98(r1)
+/* 8137209C | C0 65 00 34 */	lfs f3, 0x34(r5)
+/* 813720A0 | EC 20 F8 28 */	fsubs f1, f0, f31
+/* 813720A4 | 48 00 5B 6D */	bl init__Q210homebutton15FrameControllerFifff
+/* 813720A8 | 3B 5A 00 01 */	addi r26, r26, 0x1
+/* 813720AC | 3A F7 00 04 */	addi r23, r23, 0x4
+/* 813720B0 | 2C 1A 00 4A */	cmpwi r26, 0x4a
+/* 813720B4 | 3B 18 00 08 */	addi r24, r24, 0x8
+/* 813720B8 | 41 80 FE A0 */	blt .L_81371F58
+/* 813720BC | CB E2 82 E0 */	lfd f31, lbl_816946E0@sda21(r0)
+/* 813720C0 | 3B FC 02 A4 */	addi r31, r28, 0x2a4
+/* 813720C4 | 3B 1C 03 9C */	addi r24, r28, 0x39c
+/* 813720C8 | 3B 60 00 00 */	li r27, 0x0
+/* 813720CC | 3B 40 00 00 */	li r26, 0x0
+/* 813720D0 | 3E E0 43 30 */	lis r23, 0x4330
 .L_813720D4:
-/* 813720D4 000404D4  80 99 00 AC */	lwz r4, 0xac(r25)
-/* 813720D8 000404D8  38 61 00 58 */	addi r3, r1, 0x58
-/* 813720DC 000404DC  48 29 02 29 */	bl strcpy
-/* 813720E0 000404E0  7C 9F D0 2E */	lwzx r4, r31, r26
-/* 813720E4 000404E4  38 61 00 58 */	addi r3, r1, 0x58
-/* 813720E8 000404E8  48 29 03 21 */	bl strcat
-/* 813720EC 000404EC  80 79 02 40 */	lwz r3, 0x240(r25)
-/* 813720F0 000404F0  38 A1 00 58 */	addi r5, r1, 0x58
-/* 813720F4 000404F4  38 80 00 00 */	li r4, 0x0
-/* 813720F8 000404F8  38 C0 00 00 */	li r6, 0x0
-/* 813720FC 000404FC  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81372100 00040500  81 8C 00 0C */	lwz r12, 0xc(r12)
-/* 81372104 00040504  7D 89 03 A6 */	mtctr r12
-/* 81372108 00040508  4E 80 04 21 */	bctrl
-/* 8137210C 0004050C  7C 74 1B 78 */	mr r20, r3
-/* 81372110 00040510  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81372114 00040514  38 80 00 28 */	li r4, 0x28
-/* 81372118 00040518  48 1E 95 51 */	bl fn_8155B668
-/* 8137211C 0004051C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81372120 00040520  41 82 00 14 */	beq .L_81372134
-/* 81372124 00040524  41 82 00 08 */	beq .L_8137212C
-/* 81372128 00040528  48 00 50 B9 */	bl __ct__Q210homebutton18GroupAnmControllerFv
+/* 813720D4 | 80 99 00 AC */	lwz r4, 0xac(r25)
+/* 813720D8 | 38 61 00 58 */	addi r3, r1, 0x58
+/* 813720DC | 48 29 02 29 */	bl strcpy
+/* 813720E0 | 7C 9F D0 2E */	lwzx r4, r31, r26
+/* 813720E4 | 38 61 00 58 */	addi r3, r1, 0x58
+/* 813720E8 | 48 29 03 21 */	bl strcat
+/* 813720EC | 80 79 02 40 */	lwz r3, 0x240(r25)
+/* 813720F0 | 38 A1 00 58 */	addi r5, r1, 0x58
+/* 813720F4 | 38 80 00 00 */	li r4, 0x0
+/* 813720F8 | 38 C0 00 00 */	li r6, 0x0
+/* 813720FC | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81372100 | 81 8C 00 0C */	lwz r12, 0xc(r12)
+/* 81372104 | 7D 89 03 A6 */	mtctr r12
+/* 81372108 | 4E 80 04 21 */	bctrl
+/* 8137210C | 7C 74 1B 78 */	mr r20, r3
+/* 81372110 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81372114 | 38 80 00 28 */	li r4, 0x28
+/* 81372118 | 48 1E 95 51 */	bl fn_8155B668
+/* 8137211C | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81372120 | 41 82 00 14 */	beq .L_81372134
+/* 81372124 | 41 82 00 08 */	beq .L_8137212C
+/* 81372128 | 48 00 50 B9 */	bl __ct__Q210homebutton18GroupAnmControllerFv
 .L_8137212C:
-/* 8137212C 0004052C  7C 99 D2 14 */	add r4, r25, r26
-/* 81372130 00040530  90 64 04 0C */	stw r3, 0x40c(r4)
+/* 8137212C | 7C 99 D2 14 */	add r4, r25, r26
+/* 81372130 | 90 64 04 0C */	stw r3, 0x40c(r4)
 .L_81372134:
-/* 81372134 00040534  80 79 02 2C */	lwz r3, 0x22c(r25)
-/* 81372138 00040538  7E 84 A3 78 */	mr r4, r20
-/* 8137213C 0004053C  7E B9 D2 14 */	add r21, r25, r26
-/* 81372140 00040540  80 B9 02 40 */	lwz r5, 0x240(r25)
-/* 81372144 00040544  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81372148 00040548  81 8C 00 10 */	lwz r12, 0x10(r12)
-/* 8137214C 0004054C  7D 89 03 A6 */	mtctr r12
-/* 81372150 00040550  4E 80 04 21 */	bctrl
-/* 81372154 00040554  80 95 04 0C */	lwz r4, 0x40c(r21)
-/* 81372158 00040558  90 64 00 24 */	stw r3, 0x24(r4)
-/* 8137215C 0004055C  80 79 02 2C */	lwz r3, 0x22c(r25)
-/* 81372160 00040560  7C 98 D0 2E */	lwzx r4, r24, r26
-/* 81372164 00040564  80 63 00 14 */	lwz r3, 0x14(r3)
-/* 81372168 00040568  48 1A DC D5 */	bl fn_8151FE3C
-/* 8137216C 0004056C  80 95 04 0C */	lwz r4, 0x40c(r21)
-/* 81372170 00040570  90 64 00 20 */	stw r3, 0x20(r4)
-/* 81372174 00040574  80 75 04 0C */	lwz r3, 0x40c(r21)
-/* 81372178 00040578  80 63 00 20 */	lwz r3, 0x20(r3)
-/* 8137217C 0004057C  3A 83 00 0C */	addi r20, r3, 0xc
-/* 81372180 00040580  7E 83 A3 78 */	mr r3, r20
-/* 81372184 00040584  4B FF 7C B1 */	bl "GetBeginIter__Q34nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>Fv"
-/* 81372188 00040588  7C 76 1B 78 */	mr r22, r3
-/* 8137218C 0004058C  48 00 00 28 */	b .L_813721B4
+/* 81372134 | 80 79 02 2C */	lwz r3, 0x22c(r25)
+/* 81372138 | 7E 84 A3 78 */	mr r4, r20
+/* 8137213C | 7E B9 D2 14 */	add r21, r25, r26
+/* 81372140 | 80 B9 02 40 */	lwz r5, 0x240(r25)
+/* 81372144 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81372148 | 81 8C 00 10 */	lwz r12, 0x10(r12)
+/* 8137214C | 7D 89 03 A6 */	mtctr r12
+/* 81372150 | 4E 80 04 21 */	bctrl
+/* 81372154 | 80 95 04 0C */	lwz r4, 0x40c(r21)
+/* 81372158 | 90 64 00 24 */	stw r3, 0x24(r4)
+/* 8137215C | 80 79 02 2C */	lwz r3, 0x22c(r25)
+/* 81372160 | 7C 98 D0 2E */	lwzx r4, r24, r26
+/* 81372164 | 80 63 00 14 */	lwz r3, 0x14(r3)
+/* 81372168 | 48 1A DC D5 */	bl fn_8151FE3C
+/* 8137216C | 80 95 04 0C */	lwz r4, 0x40c(r21)
+/* 81372170 | 90 64 00 20 */	stw r3, 0x20(r4)
+/* 81372174 | 80 75 04 0C */	lwz r3, 0x40c(r21)
+/* 81372178 | 80 63 00 20 */	lwz r3, 0x20(r3)
+/* 8137217C | 3A 83 00 0C */	addi r20, r3, 0xc
+/* 81372180 | 7E 83 A3 78 */	mr r3, r20
+/* 81372184 | 4B FF 7C B1 */	bl "GetBeginIter__Q34nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>Fv"
+/* 81372188 | 7C 76 1B 78 */	mr r22, r3
+/* 8137218C | 48 00 00 28 */	b .L_813721B4
 .L_81372190:
-/* 81372190 00040590  80 76 00 08 */	lwz r3, 0x8(r22)
-/* 81372194 00040594  38 A0 00 00 */	li r5, 0x0
-/* 81372198 00040598  80 95 04 0C */	lwz r4, 0x40c(r21)
-/* 8137219C 0004059C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813721A0 000405A0  80 84 00 24 */	lwz r4, 0x24(r4)
-/* 813721A4 000405A4  81 8C 00 44 */	lwz r12, 0x44(r12)
-/* 813721A8 000405A8  7D 89 03 A6 */	mtctr r12
-/* 813721AC 000405AC  4E 80 04 21 */	bctrl
-/* 813721B0 000405B0  82 D6 00 00 */	lwz r22, 0x0(r22)
+/* 81372190 | 80 76 00 08 */	lwz r3, 0x8(r22)
+/* 81372194 | 38 A0 00 00 */	li r5, 0x0
+/* 81372198 | 80 95 04 0C */	lwz r4, 0x40c(r21)
+/* 8137219C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813721A0 | 80 84 00 24 */	lwz r4, 0x24(r4)
+/* 813721A4 | 81 8C 00 44 */	lwz r12, 0x44(r12)
+/* 813721A8 | 7D 89 03 A6 */	mtctr r12
+/* 813721AC | 4E 80 04 21 */	bctrl
+/* 813721B0 | 82 D6 00 00 */	lwz r22, 0x0(r22)
 .L_813721B4:
-/* 813721B4 000405B4  7E 83 A3 78 */	mr r3, r20
-/* 813721B8 000405B8  4B FF 7C 85 */	bl "GetEndIter__Q34nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>Fv"
-/* 813721BC 000405BC  90 61 00 08 */	stw r3, 0x8(r1)
-/* 813721C0 000405C0  38 61 00 0C */	addi r3, r1, 0xc
-/* 813721C4 000405C4  38 81 00 08 */	addi r4, r1, 0x8
-/* 813721C8 000405C8  92 C1 00 0C */	stw r22, 0xc(r1)
-/* 813721CC 000405CC  4B FF 7C 79 */	bl "__ne__Q24nw4r2utFQ44nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>8IteratorQ44nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>8Iterator"
-/* 813721D0 000405D0  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813721D4 000405D4  40 82 FF BC */	bne .L_81372190
-/* 813721D8 000405D8  7E 99 D2 14 */	add r20, r25, r26
-/* 813721DC 000405DC  80 74 04 0C */	lwz r3, 0x40c(r20)
-/* 813721E0 000405E0  80 63 00 24 */	lwz r3, 0x24(r3)
-/* 813721E4 000405E4  48 1B 75 69 */	bl fn_8152974C
-/* 813721E8 000405E8  54 60 04 3E */	clrlwi r0, r3, 16
-/* 813721EC 000405EC  80 B9 00 04 */	lwz r5, 0x4(r25)
-/* 813721F0 000405F0  90 01 00 9C */	stw r0, 0x9c(r1)
-/* 813721F4 000405F4  38 80 00 00 */	li r4, 0x0
-/* 813721F8 000405F8  80 74 04 0C */	lwz r3, 0x40c(r20)
-/* 813721FC 000405FC  92 E1 00 98 */	stw r23, 0x98(r1)
-/* 81372200 00040600  C0 42 82 D8 */	lfs f2, lbl_816946D8@sda21(r0)
-/* 81372204 00040604  C8 01 00 98 */	lfd f0, 0x98(r1)
-/* 81372208 00040608  C0 65 00 34 */	lfs f3, 0x34(r5)
-/* 8137220C 0004060C  EC 20 F8 28 */	fsubs f1, f0, f31
-/* 81372210 00040610  48 00 5A 01 */	bl init__Q210homebutton15FrameControllerFifff
-/* 81372214 00040614  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81372218 00040618  3B 5A 00 04 */	addi r26, r26, 0x4
-/* 8137221C 0004061C  2C 1B 00 0F */	cmpwi r27, 0xf
-/* 81372220 00040620  41 80 FE B4 */	blt .L_813720D4
-/* 81372224 00040624  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81372228 00040628  38 80 00 0C */	li r4, 0xc
-/* 8137222C 0004062C  48 1E 94 3D */	bl fn_8155B668
-/* 81372230 00040630  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81372234 00040634  41 82 00 1C */	beq .L_81372250
-/* 81372238 00040638  41 82 00 14 */	beq .L_8137224C
-/* 8137223C 0004063C  3C 80 81 64 */	lis r4, __vt__Q210homebutton22HomeButtonEventHandler@ha
-/* 81372240 00040640  38 84 55 E0 */	addi r4, r4, __vt__Q210homebutton22HomeButtonEventHandler@l
-/* 81372244 00040644  90 83 00 00 */	stw r4, 0x0(r3)
-/* 81372248 00040648  93 23 00 08 */	stw r25, 0x8(r3)
+/* 813721B4 | 7E 83 A3 78 */	mr r3, r20
+/* 813721B8 | 4B FF 7C 85 */	bl "GetEndIter__Q34nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>Fv"
+/* 813721BC | 90 61 00 08 */	stw r3, 0x8(r1)
+/* 813721C0 | 38 61 00 0C */	addi r3, r1, 0xc
+/* 813721C4 | 38 81 00 08 */	addi r4, r1, 0x8
+/* 813721C8 | 92 C1 00 0C */	stw r22, 0xc(r1)
+/* 813721CC | 4B FF 7C 79 */	bl "__ne__Q24nw4r2utFQ44nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>8IteratorQ44nw4r2ut39LinkList<Q44nw4r3lyt6detail8PaneLink,0>8Iterator"
+/* 813721D0 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813721D4 | 40 82 FF BC */	bne .L_81372190
+/* 813721D8 | 7E 99 D2 14 */	add r20, r25, r26
+/* 813721DC | 80 74 04 0C */	lwz r3, 0x40c(r20)
+/* 813721E0 | 80 63 00 24 */	lwz r3, 0x24(r3)
+/* 813721E4 | 48 1B 75 69 */	bl fn_8152974C
+/* 813721E8 | 54 60 04 3E */	clrlwi r0, r3, 16
+/* 813721EC | 80 B9 00 04 */	lwz r5, 0x4(r25)
+/* 813721F0 | 90 01 00 9C */	stw r0, 0x9c(r1)
+/* 813721F4 | 38 80 00 00 */	li r4, 0x0
+/* 813721F8 | 80 74 04 0C */	lwz r3, 0x40c(r20)
+/* 813721FC | 92 E1 00 98 */	stw r23, 0x98(r1)
+/* 81372200 | C0 42 82 D8 */	lfs f2, lbl_816946D8@sda21(r0)
+/* 81372204 | C8 01 00 98 */	lfd f0, 0x98(r1)
+/* 81372208 | C0 65 00 34 */	lfs f3, 0x34(r5)
+/* 8137220C | EC 20 F8 28 */	fsubs f1, f0, f31
+/* 81372210 | 48 00 5A 01 */	bl init__Q210homebutton15FrameControllerFifff
+/* 81372214 | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81372218 | 3B 5A 00 04 */	addi r26, r26, 0x4
+/* 8137221C | 2C 1B 00 0F */	cmpwi r27, 0xf
+/* 81372220 | 41 80 FE B4 */	blt .L_813720D4
+/* 81372224 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81372228 | 38 80 00 0C */	li r4, 0xc
+/* 8137222C | 48 1E 94 3D */	bl fn_8155B668
+/* 81372230 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81372234 | 41 82 00 1C */	beq .L_81372250
+/* 81372238 | 41 82 00 14 */	beq .L_8137224C
+/* 8137223C | 3C 80 81 64 */	lis r4, __vt__Q210homebutton22HomeButtonEventHandler@ha
+/* 81372240 | 38 84 55 E0 */	addi r4, r4, __vt__Q210homebutton22HomeButtonEventHandler@l
+/* 81372244 | 90 83 00 00 */	stw r4, 0x0(r3)
+/* 81372248 | 93 23 00 08 */	stw r25, 0x8(r3)
 .L_8137224C:
-/* 8137224C 0004064C  90 79 02 48 */	stw r3, 0x248(r25)
+/* 8137224C | 90 79 02 48 */	stw r3, 0x248(r25)
 .L_81372250:
-/* 81372250 00040650  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81372254 00040654  38 80 00 2C */	li r4, 0x2c
-/* 81372258 00040658  48 1E 94 11 */	bl fn_8155B668
-/* 8137225C 0004065C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81372260 00040660  7C 75 1B 78 */	mr r21, r3
-/* 81372264 00040664  41 82 00 74 */	beq .L_813722D8
-/* 81372268 00040668  41 82 00 6C */	beq .L_813722D4
-/* 8137226C 0004066C  80 19 02 48 */	lwz r0, 0x248(r25)
-/* 81372270 00040670  3C 80 81 64 */	lis r4, __vt__Q310homebutton3gui7Manager@ha
-/* 81372274 00040674  80 AD 84 10 */	lwz r5, lbl_81696450@sda21(r0)
-/* 81372278 00040678  38 84 56 FC */	addi r4, r4, __vt__Q310homebutton3gui7Manager@l
-/* 8137227C 0004067C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81372280 00040680  90 83 00 00 */	stw r4, 0x0(r3)
-/* 81372284 00040684  90 03 00 04 */	stw r0, 0x4(r3)
-/* 81372288 00040688  90 A3 00 14 */	stw r5, 0x14(r3)
-/* 8137228C 0004068C  41 82 00 1C */	beq .L_813722A8
-/* 81372290 00040690  7C 03 03 78 */	mr r3, r0
-/* 81372294 00040694  7E A4 AB 78 */	mr r4, r21
-/* 81372298 00040698  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 8137229C 0004069C  81 8C 00 0C */	lwz r12, 0xc(r12)
-/* 813722A0 000406A0  7D 89 03 A6 */	mtctr r12
-/* 813722A4 000406A4  4E 80 04 21 */	bctrl
+/* 81372250 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81372254 | 38 80 00 2C */	li r4, 0x2c
+/* 81372258 | 48 1E 94 11 */	bl fn_8155B668
+/* 8137225C | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81372260 | 7C 75 1B 78 */	mr r21, r3
+/* 81372264 | 41 82 00 74 */	beq .L_813722D8
+/* 81372268 | 41 82 00 6C */	beq .L_813722D4
+/* 8137226C | 80 19 02 48 */	lwz r0, 0x248(r25)
+/* 81372270 | 3C 80 81 64 */	lis r4, __vt__Q310homebutton3gui7Manager@ha
+/* 81372274 | 80 AD 84 10 */	lwz r5, lbl_81696450@sda21(r0)
+/* 81372278 | 38 84 56 FC */	addi r4, r4, __vt__Q310homebutton3gui7Manager@l
+/* 8137227C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81372280 | 90 83 00 00 */	stw r4, 0x0(r3)
+/* 81372284 | 90 03 00 04 */	stw r0, 0x4(r3)
+/* 81372288 | 90 A3 00 14 */	stw r5, 0x14(r3)
+/* 8137228C | 41 82 00 1C */	beq .L_813722A8
+/* 81372290 | 7C 03 03 78 */	mr r3, r0
+/* 81372294 | 7E A4 AB 78 */	mr r4, r21
+/* 81372298 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 8137229C | 81 8C 00 0C */	lwz r12, 0xc(r12)
+/* 813722A0 | 7D 89 03 A6 */	mtctr r12
+/* 813722A4 | 4E 80 04 21 */	bctrl
 .L_813722A8:
-/* 813722A8 000406A8  38 75 00 08 */	addi r3, r21, 0x8
-/* 813722AC 000406AC  38 80 00 08 */	li r4, 0x8
-/* 813722B0 000406B0  48 19 FD AD */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
-/* 813722B4 000406B4  3C 80 81 64 */	lis r4, __vt__Q310homebutton3gui11PaneManager@ha
-/* 813722B8 000406B8  38 00 00 00 */	li r0, 0x0
-/* 813722BC 000406BC  38 84 56 A8 */	addi r4, r4, __vt__Q310homebutton3gui11PaneManager@l
-/* 813722C0 000406C0  38 75 00 18 */	addi r3, r21, 0x18
-/* 813722C4 000406C4  90 95 00 00 */	stw r4, 0x0(r21)
-/* 813722C8 000406C8  38 80 00 08 */	li r4, 0x8
-/* 813722CC 000406CC  90 15 00 24 */	stw r0, 0x24(r21)
-/* 813722D0 000406D0  48 19 FD 8D */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
+/* 813722A8 | 38 75 00 08 */	addi r3, r21, 0x8
+/* 813722AC | 38 80 00 08 */	li r4, 0x8
+/* 813722B0 | 48 19 FD AD */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
+/* 813722B4 | 3C 80 81 64 */	lis r4, __vt__Q310homebutton3gui11PaneManager@ha
+/* 813722B8 | 38 00 00 00 */	li r0, 0x0
+/* 813722BC | 38 84 56 A8 */	addi r4, r4, __vt__Q310homebutton3gui11PaneManager@l
+/* 813722C0 | 38 75 00 18 */	addi r3, r21, 0x18
+/* 813722C4 | 90 95 00 00 */	stw r4, 0x0(r21)
+/* 813722C8 | 38 80 00 08 */	li r4, 0x8
+/* 813722CC | 90 15 00 24 */	stw r0, 0x24(r21)
+/* 813722D0 | 48 19 FD 8D */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
 .L_813722D4:
-/* 813722D4 000406D4  92 B9 02 44 */	stw r21, 0x244(r25)
+/* 813722D4 | 92 B9 02 44 */	stw r21, 0x244(r25)
 .L_813722D8:
-/* 813722D8 000406D8  80 79 02 44 */	lwz r3, 0x244(r25)
-/* 813722DC 000406DC  80 99 02 2C */	lwz r4, 0x22c(r25)
-/* 813722E0 000406E0  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813722E4 000406E4  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 813722E8 000406E8  7D 89 03 A6 */	mtctr r12
-/* 813722EC 000406EC  4E 80 04 21 */	bctrl
-/* 813722F0 000406F0  80 79 02 44 */	lwz r3, 0x244(r25)
-/* 813722F4 000406F4  38 80 00 00 */	li r4, 0x0
-/* 813722F8 000406F8  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813722FC 000406FC  81 8C 00 34 */	lwz r12, 0x34(r12)
-/* 81372300 00040700  7D 89 03 A6 */	mtctr r12
-/* 81372304 00040704  4E 80 04 21 */	bctrl
-/* 81372308 00040708  3A DC 00 6C */	addi r22, r28, 0x6c
-/* 8137230C 0004070C  3A 80 00 00 */	li r20, 0x0
-/* 81372310 00040710  3B 40 00 00 */	li r26, 0x0
-/* 81372314 00040714  48 00 00 58 */	b .L_8137236C
+/* 813722D8 | 80 79 02 44 */	lwz r3, 0x244(r25)
+/* 813722DC | 80 99 02 2C */	lwz r4, 0x22c(r25)
+/* 813722E0 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813722E4 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 813722E8 | 7D 89 03 A6 */	mtctr r12
+/* 813722EC | 4E 80 04 21 */	bctrl
+/* 813722F0 | 80 79 02 44 */	lwz r3, 0x244(r25)
+/* 813722F4 | 38 80 00 00 */	li r4, 0x0
+/* 813722F8 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813722FC | 81 8C 00 34 */	lwz r12, 0x34(r12)
+/* 81372300 | 7D 89 03 A6 */	mtctr r12
+/* 81372304 | 4E 80 04 21 */	bctrl
+/* 81372308 | 3A DC 00 6C */	addi r22, r28, 0x6c
+/* 8137230C | 3A 80 00 00 */	li r20, 0x0
+/* 81372310 | 3B 40 00 00 */	li r26, 0x0
+/* 81372314 | 48 00 00 58 */	b .L_8137236C
 .L_81372318:
-/* 81372318 00040718  80 79 02 2C */	lwz r3, 0x22c(r25)
-/* 8137231C 0004071C  38 A0 00 01 */	li r5, 0x1
-/* 81372320 00040720  7C 96 D0 2E */	lwzx r4, r22, r26
-/* 81372324 00040724  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81372328 00040728  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 8137232C 0004072C  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81372330 00040730  7D 89 03 A6 */	mtctr r12
-/* 81372334 00040734  4E 80 04 21 */	bctrl
-/* 81372338 00040738  7C 64 1B 78 */	mr r4, r3
-/* 8137233C 0004073C  80 79 02 44 */	lwz r3, 0x244(r25)
-/* 81372340 00040740  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81372344 00040744  81 8C 00 40 */	lwz r12, 0x40(r12)
-/* 81372348 00040748  7D 89 03 A6 */	mtctr r12
-/* 8137234C 0004074C  4E 80 04 21 */	bctrl
-/* 81372350 00040750  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81372354 00040754  38 80 00 01 */	li r4, 0x1
-/* 81372358 00040758  81 8C 00 50 */	lwz r12, 0x50(r12)
-/* 8137235C 0004075C  7D 89 03 A6 */	mtctr r12
-/* 81372360 00040760  4E 80 04 21 */	bctrl
-/* 81372364 00040764  3A 94 00 01 */	addi r20, r20, 0x1
-/* 81372368 00040768  3B 5A 00 04 */	addi r26, r26, 0x4
+/* 81372318 | 80 79 02 2C */	lwz r3, 0x22c(r25)
+/* 8137231C | 38 A0 00 01 */	li r5, 0x1
+/* 81372320 | 7C 96 D0 2E */	lwzx r4, r22, r26
+/* 81372324 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81372328 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 8137232C | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81372330 | 7D 89 03 A6 */	mtctr r12
+/* 81372334 | 4E 80 04 21 */	bctrl
+/* 81372338 | 7C 64 1B 78 */	mr r4, r3
+/* 8137233C | 80 79 02 44 */	lwz r3, 0x244(r25)
+/* 81372340 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81372344 | 81 8C 00 40 */	lwz r12, 0x40(r12)
+/* 81372348 | 7D 89 03 A6 */	mtctr r12
+/* 8137234C | 4E 80 04 21 */	bctrl
+/* 81372350 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81372354 | 38 80 00 01 */	li r4, 0x1
+/* 81372358 | 81 8C 00 50 */	lwz r12, 0x50(r12)
+/* 8137235C | 7D 89 03 A6 */	mtctr r12
+/* 81372360 | 4E 80 04 21 */	bctrl
+/* 81372364 | 3A 94 00 01 */	addi r20, r20, 0x1
+/* 81372368 | 3B 5A 00 04 */	addi r26, r26, 0x4
 .L_8137236C:
-/* 8137236C 0004076C  80 19 00 08 */	lwz r0, 0x8(r25)
-/* 81372370 00040770  7C 14 00 00 */	cmpw r20, r0
-/* 81372374 00040774  41 80 FF A4 */	blt .L_81372318
-/* 81372378 00040778  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 8137237C 0004077C  38 80 01 F8 */	li r4, 0x1f8
-/* 81372380 00040780  48 1E 92 E9 */	bl fn_8155B668
-/* 81372384 00040784  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81372388 00040788  41 82 00 18 */	beq .L_813723A0
-/* 8137238C 0004078C  41 82 00 10 */	beq .L_8137239C
-/* 81372390 00040790  80 99 00 04 */	lwz r4, 0x4(r25)
-/* 81372394 00040794  80 84 00 0C */	lwz r4, 0xc(r4)
-/* 81372398 00040798  48 00 6D B1 */	bl __ct__Q210homebutton9RemoteSpkFPv
+/* 8137236C | 80 19 00 08 */	lwz r0, 0x8(r25)
+/* 81372370 | 7C 14 00 00 */	cmpw r20, r0
+/* 81372374 | 41 80 FF A4 */	blt .L_81372318
+/* 81372378 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 8137237C | 38 80 01 F8 */	li r4, 0x1f8
+/* 81372380 | 48 1E 92 E9 */	bl fn_8155B668
+/* 81372384 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81372388 | 41 82 00 18 */	beq .L_813723A0
+/* 8137238C | 41 82 00 10 */	beq .L_8137239C
+/* 81372390 | 80 99 00 04 */	lwz r4, 0x4(r25)
+/* 81372394 | 80 84 00 0C */	lwz r4, 0xc(r4)
+/* 81372398 | 48 00 6D B1 */	bl __ct__Q210homebutton9RemoteSpkFPv
 .L_8137239C:
-/* 8137239C 0004079C  90 79 02 B0 */	stw r3, 0x2b0(r25)
+/* 8137239C | 90 79 02 B0 */	stw r3, 0x2b0(r25)
 .L_813723A0:
-/* 813723A0 000407A0  3A 80 00 00 */	li r20, 0x0
-/* 813723A4 000407A4  3B 40 00 00 */	li r26, 0x0
+/* 813723A0 | 3A 80 00 00 */	li r20, 0x0
+/* 813723A4 | 3B 40 00 00 */	li r26, 0x0
 .L_813723A8:
-/* 813723A8 000407A8  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 813723AC 000407AC  38 80 00 48 */	li r4, 0x48
-/* 813723B0 000407B0  48 1E 92 B9 */	bl fn_8155B668
-/* 813723B4 000407B4  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813723B8 000407B8  41 82 00 1C */	beq .L_813723D4
-/* 813723BC 000407BC  41 82 00 10 */	beq .L_813723CC
-/* 813723C0 000407C0  80 B9 02 B0 */	lwz r5, 0x2b0(r25)
-/* 813723C4 000407C4  7E 84 A3 78 */	mr r4, r20
-/* 813723C8 000407C8  48 00 50 D1 */	bl __ct__Q210homebutton10ControllerFiPQ210homebutton9RemoteSpk
+/* 813723A8 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 813723AC | 38 80 00 48 */	li r4, 0x48
+/* 813723B0 | 48 1E 92 B9 */	bl fn_8155B668
+/* 813723B4 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813723B8 | 41 82 00 1C */	beq .L_813723D4
+/* 813723BC | 41 82 00 10 */	beq .L_813723CC
+/* 813723C0 | 80 B9 02 B0 */	lwz r5, 0x2b0(r25)
+/* 813723C4 | 7E 84 A3 78 */	mr r4, r20
+/* 813723C8 | 48 00 50 D1 */	bl __ct__Q210homebutton10ControllerFiPQ210homebutton9RemoteSpk
 .L_813723CC:
-/* 813723CC 000407CC  7C 99 D2 14 */	add r4, r25, r26
-/* 813723D0 000407D0  90 64 02 A0 */	stw r3, 0x2a0(r4)
+/* 813723CC | 7C 99 D2 14 */	add r4, r25, r26
+/* 813723D0 | 90 64 02 A0 */	stw r3, 0x2a0(r4)
 .L_813723D4:
-/* 813723D4 000407D4  3A 94 00 01 */	addi r20, r20, 0x1
-/* 813723D8 000407D8  3B 5A 00 04 */	addi r26, r26, 0x4
-/* 813723DC 000407DC  2C 14 00 04 */	cmpwi r20, 0x4
-/* 813723E0 000407E0  41 80 FF C8 */	blt .L_813723A8
-/* 813723E4 000407E4  80 79 02 44 */	lwz r3, 0x244(r25)
-/* 813723E8 000407E8  38 99 02 4C */	addi r4, r25, 0x24c
-/* 813723EC 000407EC  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813723F0 000407F0  81 8C 00 48 */	lwz r12, 0x48(r12)
-/* 813723F4 000407F4  7D 89 03 A6 */	mtctr r12
-/* 813723F8 000407F8  4E 80 04 21 */	bctrl
-/* 813723FC 000407FC  80 B9 00 04 */	lwz r5, 0x4(r25)
-/* 81372400 00040800  38 79 02 90 */	addi r3, r25, 0x290
-/* 81372404 00040804  C0 22 82 DC */	lfs f1, lbl_816946DC@sda21(r0)
-/* 81372408 00040808  38 81 00 20 */	addi r4, r1, 0x20
-/* 8137240C 0004080C  C0 05 00 38 */	lfs f0, 0x38(r5)
-/* 81372410 00040810  EC 01 00 24 */	fdivs f0, f1, f0
-/* 81372414 00040814  D0 21 00 24 */	stfs f1, 0x24(r1)
-/* 81372418 00040818  D0 01 00 20 */	stfs f0, 0x20(r1)
-/* 8137241C 0004081C  4B FF 89 BD */	bl __as__Q34nw4r4math4VEC2FRCQ34nw4r4math4VEC2
-/* 81372420 00040820  88 99 00 87 */	lbz r4, 0x87(r25)
-/* 81372424 00040824  38 61 00 28 */	addi r3, r1, 0x28
-/* 81372428 00040828  88 19 02 9C */	lbz r0, 0x29c(r25)
-/* 8137242C 0004082C  50 80 2E B4 */	rlwimi r0, r4, 5, 26, 26
-/* 81372430 00040830  98 19 02 9C */	stb r0, 0x29c(r25)
-/* 81372434 00040834  48 1C E9 FD */	bl fn_81540E30
-/* 81372438 00040838  38 00 00 06 */	li r0, 0x6
-/* 8137243C 0004083C  38 B9 02 4C */	addi r5, r25, 0x24c
-/* 81372440 00040840  38 81 00 24 */	addi r4, r1, 0x24
-/* 81372444 00040844  7C 09 03 A6 */	mtctr r0
+/* 813723D4 | 3A 94 00 01 */	addi r20, r20, 0x1
+/* 813723D8 | 3B 5A 00 04 */	addi r26, r26, 0x4
+/* 813723DC | 2C 14 00 04 */	cmpwi r20, 0x4
+/* 813723E0 | 41 80 FF C8 */	blt .L_813723A8
+/* 813723E4 | 80 79 02 44 */	lwz r3, 0x244(r25)
+/* 813723E8 | 38 99 02 4C */	addi r4, r25, 0x24c
+/* 813723EC | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813723F0 | 81 8C 00 48 */	lwz r12, 0x48(r12)
+/* 813723F4 | 7D 89 03 A6 */	mtctr r12
+/* 813723F8 | 4E 80 04 21 */	bctrl
+/* 813723FC | 80 B9 00 04 */	lwz r5, 0x4(r25)
+/* 81372400 | 38 79 02 90 */	addi r3, r25, 0x290
+/* 81372404 | C0 22 82 DC */	lfs f1, lbl_816946DC@sda21(r0)
+/* 81372408 | 38 81 00 20 */	addi r4, r1, 0x20
+/* 8137240C | C0 05 00 38 */	lfs f0, 0x38(r5)
+/* 81372410 | EC 01 00 24 */	fdivs f0, f1, f0
+/* 81372414 | D0 21 00 24 */	stfs f1, 0x24(r1)
+/* 81372418 | D0 01 00 20 */	stfs f0, 0x20(r1)
+/* 8137241C | 4B FF 89 BD */	bl __as__Q34nw4r4math4VEC2FRCQ34nw4r4math4VEC2
+/* 81372420 | 88 99 00 87 */	lbz r4, 0x87(r25)
+/* 81372424 | 38 61 00 28 */	addi r3, r1, 0x28
+/* 81372428 | 88 19 02 9C */	lbz r0, 0x29c(r25)
+/* 8137242C | 50 80 2E B4 */	rlwimi r0, r4, 5, 26, 26
+/* 81372430 | 98 19 02 9C */	stb r0, 0x29c(r25)
+/* 81372434 | 48 1C E9 FD */	bl fn_81540E30
+/* 81372438 | 38 00 00 06 */	li r0, 0x6
+/* 8137243C | 38 B9 02 4C */	addi r5, r25, 0x24c
+/* 81372440 | 38 81 00 24 */	addi r4, r1, 0x24
+/* 81372444 | 7C 09 03 A6 */	mtctr r0
 .L_81372448:
-/* 81372448 00040848  80 64 00 04 */	lwz r3, 0x4(r4)
-/* 8137244C 0004084C  84 04 00 08 */	lwzu r0, 0x8(r4)
-/* 81372450 00040850  90 65 00 04 */	stw r3, 0x4(r5)
-/* 81372454 00040854  94 05 00 08 */	stwu r0, 0x8(r5)
-/* 81372458 00040858  42 00 FF F0 */	bdnz .L_81372448
-/* 8137245C 0004085C  7F 23 CB 78 */	mr r3, r25
-/* 81372460 00040860  48 00 04 C9 */	bl init_msg__Q210homebutton10HomeButtonFv
-/* 81372464 00040864  E3 E1 00 D8 */	psq_l f31, 0xd8(r1), 0, qr0
-/* 81372468 00040868  39 61 00 D0 */	addi r11, r1, 0xd0
-/* 8137246C 0004086C  CB E1 00 D0 */	lfd f31, 0xd0(r1)
-/* 81372470 00040870  48 28 70 81 */	bl _restgpr_20
-/* 81372474 00040874  80 01 00 E4 */	lwz r0, 0xe4(r1)
-/* 81372478 00040878  7C 08 03 A6 */	mtlr r0
-/* 8137247C 0004087C  38 21 00 E0 */	addi r1, r1, 0xe0
-/* 81372480 00040880  4E 80 00 20 */	blr
+/* 81372448 | 80 64 00 04 */	lwz r3, 0x4(r4)
+/* 8137244C | 84 04 00 08 */	lwzu r0, 0x8(r4)
+/* 81372450 | 90 65 00 04 */	stw r3, 0x4(r5)
+/* 81372454 | 94 05 00 08 */	stwu r0, 0x8(r5)
+/* 81372458 | 42 00 FF F0 */	bdnz .L_81372448
+/* 8137245C | 7F 23 CB 78 */	mr r3, r25
+/* 81372460 | 48 00 04 C9 */	bl init_msg__Q210homebutton10HomeButtonFv
+/* 81372464 | E3 E1 00 D8 */	psq_l f31, 0xd8(r1), 0, qr0
+/* 81372468 | 39 61 00 D0 */	addi r11, r1, 0xd0
+/* 8137246C | CB E1 00 D0 */	lfd f31, 0xd0(r1)
+/* 81372470 | 48 28 70 81 */	bl _restgpr_20
+/* 81372474 | 80 01 00 E4 */	lwz r0, 0xe4(r1)
+/* 81372478 | 7C 08 03 A6 */	mtlr r0
+/* 8137247C | 38 21 00 E0 */	addi r1, r1, 0xe0
+/* 81372480 | 4E 80 00 20 */	blr
 .endfn create__Q210homebutton10HomeButtonFv
 
 # .text:0xEDC | 0x81372484 | size: 0x40
 # homebutton::gui::Interface::~Interface()
 .fn __dt__Q310homebutton3gui9InterfaceFv, global
-/* 81372484 00040884  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 81372488 00040888  7C 08 02 A6 */	mflr r0
-/* 8137248C 0004088C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81372490 00040890  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81372494 00040894  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 81372498 00040898  7C 7F 1B 78 */	mr r31, r3
-/* 8137249C 0004089C  41 82 00 10 */	beq .L_813724AC
-/* 813724A0 000408A0  2C 04 00 00 */	cmpwi r4, 0x0
-/* 813724A4 000408A4  40 81 00 08 */	ble .L_813724AC
-/* 813724A8 000408A8  48 28 5C 3D */	bl __dl__FPv
+/* 81372484 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 81372488 | 7C 08 02 A6 */	mflr r0
+/* 8137248C | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81372490 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81372494 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 81372498 | 7C 7F 1B 78 */	mr r31, r3
+/* 8137249C | 41 82 00 10 */	beq .L_813724AC
+/* 813724A0 | 2C 04 00 00 */	cmpwi r4, 0x0
+/* 813724A4 | 40 81 00 08 */	ble .L_813724AC
+/* 813724A8 | 48 28 5C 3D */	bl __dl__FPv
 .L_813724AC:
-/* 813724AC 000408AC  7F E3 FB 78 */	mr r3, r31
-/* 813724B0 000408B0  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813724B4 000408B4  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813724B8 000408B8  7C 08 03 A6 */	mtlr r0
-/* 813724BC 000408BC  38 21 00 10 */	addi r1, r1, 0x10
-/* 813724C0 000408C0  4E 80 00 20 */	blr
+/* 813724AC | 7F E3 FB 78 */	mr r3, r31
+/* 813724B0 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813724B4 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813724B8 | 7C 08 03 A6 */	mtlr r0
+/* 813724BC | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813724C0 | 4E 80 00 20 */	blr
 .endfn __dt__Q310homebutton3gui9InterfaceFv
 
 # .text:0xF1C | 0x813724C4 | size: 0x8
 # homebutton::gui::EventHandler::setManager(homebutton::gui::Manager*)
 .fn setManager__Q310homebutton3gui12EventHandlerFPQ310homebutton3gui7Manager, global
-/* 813724C4 000408C4  90 83 00 04 */	stw r4, 0x4(r3)
-/* 813724C8 000408C8  4E 80 00 20 */	blr
+/* 813724C4 | 90 83 00 04 */	stw r4, 0x4(r3)
+/* 813724C8 | 4E 80 00 20 */	blr
 .endfn setManager__Q310homebutton3gui12EventHandlerFPQ310homebutton3gui7Manager
 
 # .text:0xF24 | 0x813724CC | size: 0x8
 # homebutton::gui::Component::setTriggerTarget(bool)
 .fn setTriggerTarget__Q310homebutton3gui9ComponentFb, global
-/* 813724CC 000408CC  98 83 00 24 */	stb r4, 0x24(r3)
-/* 813724D0 000408D0  4E 80 00 20 */	blr
+/* 813724CC | 98 83 00 24 */	stb r4, 0x24(r3)
+/* 813724D0 | 4E 80 00 20 */	blr
 .endfn setTriggerTarget__Q310homebutton3gui9ComponentFb
 
 # .text:0xF2C | 0x813724D4 | size: 0x8
 # homebutton::gui::PaneManager::setDrawInfo(const nw4r::lyt::DrawInfo*)
 .fn setDrawInfo__Q310homebutton3gui11PaneManagerFPCQ34nw4r3lyt8DrawInfo, global
-/* 813724D4 000408D4  90 83 00 24 */	stw r4, 0x24(r3)
-/* 813724D8 000408D8  4E 80 00 20 */	blr
+/* 813724D4 | 90 83 00 24 */	stw r4, 0x24(r3)
+/* 813724D8 | 4E 80 00 20 */	blr
 .endfn setDrawInfo__Q310homebutton3gui11PaneManagerFPCQ34nw4r3lyt8DrawInfo
 
 # .text:0xF34 | 0x813724DC | size: 0xC
 # nw4r::math::VEC2::VEC2(float, float)
 .fn __ct__Q34nw4r4math4VEC2Fff, global
-/* 813724DC 000408DC  D0 23 00 00 */	stfs f1, 0x0(r3)
-/* 813724E0 000408E0  D0 43 00 04 */	stfs f2, 0x4(r3)
-/* 813724E4 000408E4  4E 80 00 20 */	blr
+/* 813724DC | D0 23 00 00 */	stfs f1, 0x0(r3)
+/* 813724E0 | D0 43 00 04 */	stfs f2, 0x4(r3)
+/* 813724E4 | 4E 80 00 20 */	blr
 .endfn __ct__Q34nw4r4math4VEC2Fff
 
 # .text:0xF40 | 0x813724E8 | size: 0x30
 # homebutton::get_comma_length(char*)
 .fn get_comma_length__10homebuttonFPc, local
-/* 813724E8 000408E8  38 A0 00 00 */	li r5, 0x0
-/* 813724EC 000408EC  48 00 00 18 */	b .L_81372504
+/* 813724E8 | 38 A0 00 00 */	li r5, 0x0
+/* 813724EC | 48 00 00 18 */	b .L_81372504
 .L_813724F0:
-/* 813724F0 000408F0  7C 80 07 74 */	extsb r0, r4
-/* 813724F4 000408F4  2C 00 00 2C */	cmpwi r0, 0x2c
-/* 813724F8 000408F8  41 82 00 18 */	beq .L_81372510
-/* 813724FC 000408FC  38 A5 00 01 */	addi r5, r5, 0x1
-/* 81372500 00040900  38 63 00 01 */	addi r3, r3, 0x1
+/* 813724F0 | 7C 80 07 74 */	extsb r0, r4
+/* 813724F4 | 2C 00 00 2C */	cmpwi r0, 0x2c
+/* 813724F8 | 41 82 00 18 */	beq .L_81372510
+/* 813724FC | 38 A5 00 01 */	addi r5, r5, 0x1
+/* 81372500 | 38 63 00 01 */	addi r3, r3, 0x1
 .L_81372504:
-/* 81372504 00040904  88 83 00 00 */	lbz r4, 0x0(r3)
-/* 81372508 00040908  7C 80 07 75 */	extsb. r0, r4
-/* 8137250C 0004090C  40 82 FF E4 */	bne .L_813724F0
+/* 81372504 | 88 83 00 00 */	lbz r4, 0x0(r3)
+/* 81372508 | 7C 80 07 75 */	extsb. r0, r4
+/* 8137250C | 40 82 FF E4 */	bne .L_813724F0
 .L_81372510:
-/* 81372510 00040910  7C A3 2B 78 */	mr r3, r5
-/* 81372514 00040914  4E 80 00 20 */	blr
+/* 81372510 | 7C A3 2B 78 */	mr r3, r5
+/* 81372514 | 4E 80 00 20 */	blr
 .endfn get_comma_length__10homebuttonFPc
 
 # .text:0xF70 | 0x81372518 | size: 0x110
 # homebutton::HomeButton::set_config()
 .fn set_config__Q210homebutton10HomeButtonFv, global
-/* 81372518 00040918  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 8137251C 0004091C  7C 08 02 A6 */	mflr r0
-/* 81372520 00040920  90 01 00 24 */	stw r0, 0x24(r1)
-/* 81372524 00040924  39 61 00 20 */	addi r11, r1, 0x20
-/* 81372528 00040928  48 28 6F 9D */	bl _savegpr_28
-/* 8137252C 0004092C  80 83 00 04 */	lwz r4, 0x4(r3)
-/* 81372530 00040930  7C 7E 1B 78 */	mr r30, r3
-/* 81372534 00040934  83 E4 00 14 */	lwz r31, 0x14(r4)
-/* 81372538 00040938  7F E3 FB 78 */	mr r3, r31
-/* 8137253C 0004093C  4B FF FF AD */	bl get_comma_length__10homebuttonFPc
-/* 81372540 00040940  7C 7C 1B 78 */	mr r28, r3
-/* 81372544 00040944  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81372548 00040948  38 9C 00 01 */	addi r4, r28, 0x1
-/* 8137254C 0004094C  48 1E 91 1D */	bl fn_8155B668
-/* 81372550 00040950  90 7E 00 A8 */	stw r3, 0xa8(r30)
-/* 81372554 00040954  7F E4 FB 78 */	mr r4, r31
-/* 81372558 00040958  7F 85 E3 78 */	mr r5, r28
-/* 8137255C 0004095C  48 28 FE 69 */	bl strncpy
-/* 81372560 00040960  80 9E 00 A8 */	lwz r4, 0xa8(r30)
-/* 81372564 00040964  7C 7C FA 14 */	add r3, r28, r31
-/* 81372568 00040968  3B A0 00 00 */	li r29, 0x0
-/* 8137256C 0004096C  3B E3 00 01 */	addi r31, r3, 0x1
-/* 81372570 00040970  7F A4 E1 AE */	stbx r29, r4, r28
-/* 81372574 00040974  7F E3 FB 78 */	mr r3, r31
-/* 81372578 00040978  4B FF FF 71 */	bl get_comma_length__10homebuttonFPc
-/* 8137257C 0004097C  7C 7C 1B 78 */	mr r28, r3
-/* 81372580 00040980  80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
-/* 81372584 00040984  38 9C 00 01 */	addi r4, r28, 0x1
-/* 81372588 00040988  48 1E 90 E1 */	bl fn_8155B668
-/* 8137258C 0004098C  90 7E 00 AC */	stw r3, 0xac(r30)
-/* 81372590 00040990  7F E4 FB 78 */	mr r4, r31
-/* 81372594 00040994  7F 85 E3 78 */	mr r5, r28
-/* 81372598 00040998  48 28 FE 2D */	bl strncpy
-/* 8137259C 0004099C  80 9E 00 AC */	lwz r4, 0xac(r30)
-/* 813725A0 000409A0  7F A3 EB 78 */	mr r3, r29
-/* 813725A4 000409A4  7F FF E2 14 */	add r31, r31, r28
-/* 813725A8 000409A8  38 E0 00 00 */	li r7, 0x0
-/* 813725AC 000409AC  7F A4 E1 AE */	stbx r29, r4, r28
-/* 813725B0 000409B0  39 00 00 00 */	li r8, 0x0
-/* 813725B4 000409B4  38 A0 00 01 */	li r5, 0x1
-/* 813725B8 000409B8  48 00 00 3C */	b .L_813725F4
+/* 81372518 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8137251C | 7C 08 02 A6 */	mflr r0
+/* 81372520 | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 81372524 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81372528 | 48 28 6F 9D */	bl _savegpr_28
+/* 8137252C | 80 83 00 04 */	lwz r4, 0x4(r3)
+/* 81372530 | 7C 7E 1B 78 */	mr r30, r3
+/* 81372534 | 83 E4 00 14 */	lwz r31, 0x14(r4)
+/* 81372538 | 7F E3 FB 78 */	mr r3, r31
+/* 8137253C | 4B FF FF AD */	bl get_comma_length__10homebuttonFPc
+/* 81372540 | 7C 7C 1B 78 */	mr r28, r3
+/* 81372544 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81372548 | 38 9C 00 01 */	addi r4, r28, 0x1
+/* 8137254C | 48 1E 91 1D */	bl fn_8155B668
+/* 81372550 | 90 7E 00 A8 */	stw r3, 0xa8(r30)
+/* 81372554 | 7F E4 FB 78 */	mr r4, r31
+/* 81372558 | 7F 85 E3 78 */	mr r5, r28
+/* 8137255C | 48 28 FE 69 */	bl strncpy
+/* 81372560 | 80 9E 00 A8 */	lwz r4, 0xa8(r30)
+/* 81372564 | 7C 7C FA 14 */	add r3, r28, r31
+/* 81372568 | 3B A0 00 00 */	li r29, 0x0
+/* 8137256C | 3B E3 00 01 */	addi r31, r3, 0x1
+/* 81372570 | 7F A4 E1 AE */	stbx r29, r4, r28
+/* 81372574 | 7F E3 FB 78 */	mr r3, r31
+/* 81372578 | 4B FF FF 71 */	bl get_comma_length__10homebuttonFPc
+/* 8137257C | 7C 7C 1B 78 */	mr r28, r3
+/* 81372580 | 80 6D 84 10 */	lwz r3, lbl_81696450@sda21(r0)
+/* 81372584 | 38 9C 00 01 */	addi r4, r28, 0x1
+/* 81372588 | 48 1E 90 E1 */	bl fn_8155B668
+/* 8137258C | 90 7E 00 AC */	stw r3, 0xac(r30)
+/* 81372590 | 7F E4 FB 78 */	mr r4, r31
+/* 81372594 | 7F 85 E3 78 */	mr r5, r28
+/* 81372598 | 48 28 FE 2D */	bl strncpy
+/* 8137259C | 80 9E 00 AC */	lwz r4, 0xac(r30)
+/* 813725A0 | 7F A3 EB 78 */	mr r3, r29
+/* 813725A4 | 7F FF E2 14 */	add r31, r31, r28
+/* 813725A8 | 38 E0 00 00 */	li r7, 0x0
+/* 813725AC | 7F A4 E1 AE */	stbx r29, r4, r28
+/* 813725B0 | 39 00 00 00 */	li r8, 0x0
+/* 813725B4 | 38 A0 00 01 */	li r5, 0x1
+/* 813725B8 | 48 00 00 3C */	b .L_813725F4
 .L_813725BC:
-/* 813725BC 000409BC  7C C0 07 74 */	extsb r0, r6
-/* 813725C0 000409C0  2C 00 00 2C */	cmpwi r0, 0x2c
-/* 813725C4 000409C4  40 82 00 2C */	bne .L_813725F0
-/* 813725C8 000409C8  88 04 00 01 */	lbz r0, 0x1(r4)
-/* 813725CC 000409CC  2C 00 00 31 */	cmpwi r0, 0x31
-/* 813725D0 000409D0  40 82 00 10 */	bne .L_813725E0
-/* 813725D4 000409D4  7C 9E 1A 14 */	add r4, r30, r3
-/* 813725D8 000409D8  90 A4 00 98 */	stw r5, 0x98(r4)
-/* 813725DC 000409DC  48 00 00 0C */	b .L_813725E8
+/* 813725BC | 7C C0 07 74 */	extsb r0, r6
+/* 813725C0 | 2C 00 00 2C */	cmpwi r0, 0x2c
+/* 813725C4 | 40 82 00 2C */	bne .L_813725F0
+/* 813725C8 | 88 04 00 01 */	lbz r0, 0x1(r4)
+/* 813725CC | 2C 00 00 31 */	cmpwi r0, 0x31
+/* 813725D0 | 40 82 00 10 */	bne .L_813725E0
+/* 813725D4 | 7C 9E 1A 14 */	add r4, r30, r3
+/* 813725D8 | 90 A4 00 98 */	stw r5, 0x98(r4)
+/* 813725DC | 48 00 00 0C */	b .L_813725E8
 .L_813725E0:
-/* 813725E0 000409E0  7C 9E 1A 14 */	add r4, r30, r3
-/* 813725E4 000409E4  93 A4 00 98 */	stw r29, 0x98(r4)
+/* 813725E0 | 7C 9E 1A 14 */	add r4, r30, r3
+/* 813725E4 | 93 A4 00 98 */	stw r29, 0x98(r4)
 .L_813725E8:
-/* 813725E8 000409E8  39 08 00 01 */	addi r8, r8, 0x1
-/* 813725EC 000409EC  38 63 00 04 */	addi r3, r3, 0x4
+/* 813725E8 | 39 08 00 01 */	addi r8, r8, 0x1
+/* 813725EC | 38 63 00 04 */	addi r3, r3, 0x4
 .L_813725F0:
-/* 813725F0 000409F0  38 E7 00 01 */	addi r7, r7, 0x1
+/* 813725F0 | 38 E7 00 01 */	addi r7, r7, 0x1
 .L_813725F4:
-/* 813725F4 000409F4  7C DF 38 AE */	lbzx r6, r31, r7
-/* 813725F8 000409F8  7C 9F 3A 14 */	add r4, r31, r7
-/* 813725FC 000409FC  7C C0 07 75 */	extsb. r0, r6
-/* 81372600 00040A00  40 82 FF BC */	bne .L_813725BC
-/* 81372604 00040A04  1C 08 00 03 */	mulli r0, r8, 0x3
-/* 81372608 00040A08  91 1E 00 08 */	stw r8, 0x8(r30)
-/* 8137260C 00040A0C  39 61 00 20 */	addi r11, r1, 0x20
-/* 81372610 00040A10  90 1E 00 0C */	stw r0, 0xc(r30)
-/* 81372614 00040A14  48 28 6E FD */	bl _restgpr_28
-/* 81372618 00040A18  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 8137261C 00040A1C  7C 08 03 A6 */	mtlr r0
-/* 81372620 00040A20  38 21 00 20 */	addi r1, r1, 0x20
-/* 81372624 00040A24  4E 80 00 20 */	blr
+/* 813725F4 | 7C DF 38 AE */	lbzx r6, r31, r7
+/* 813725F8 | 7C 9F 3A 14 */	add r4, r31, r7
+/* 813725FC | 7C C0 07 75 */	extsb. r0, r6
+/* 81372600 | 40 82 FF BC */	bne .L_813725BC
+/* 81372604 | 1C 08 00 03 */	mulli r0, r8, 0x3
+/* 81372608 | 91 1E 00 08 */	stw r8, 0x8(r30)
+/* 8137260C | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81372610 | 90 1E 00 0C */	stw r0, 0xc(r30)
+/* 81372614 | 48 28 6E FD */	bl _restgpr_28
+/* 81372618 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8137261C | 7C 08 03 A6 */	mtlr r0
+/* 81372620 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 81372624 | 4E 80 00 20 */	blr
 .endfn set_config__Q210homebutton10HomeButtonFv
 
 # .text:0x1080 | 0x81372628 | size: 0x8C
 # homebutton::HomeButton::set_text()
 .fn set_text__Q210homebutton10HomeButtonFv, global
-/* 81372628 00040A28  80 83 00 04 */	lwz r4, 0x4(r3)
-/* 8137262C 00040A2C  39 20 00 00 */	li r9, 0x0
-/* 81372630 00040A30  7D 28 4B 78 */	mr r8, r9
-/* 81372634 00040A34  38 A0 00 00 */	li r5, 0x0
-/* 81372638 00040A38  81 84 00 10 */	lwz r12, 0x10(r4)
-/* 8137263C 00040A3C  39 40 00 00 */	li r10, 0x0
-/* 81372640 00040A40  38 80 00 00 */	li r4, 0x0
-/* 81372644 00040A44  39 60 00 00 */	li r11, 0x0
-/* 81372648 00040A48  48 00 00 5C */	b .L_813726A4
+/* 81372628 | 80 83 00 04 */	lwz r4, 0x4(r3)
+/* 8137262C | 39 20 00 00 */	li r9, 0x0
+/* 81372630 | 7D 28 4B 78 */	mr r8, r9
+/* 81372634 | 38 A0 00 00 */	li r5, 0x0
+/* 81372638 | 81 84 00 10 */	lwz r12, 0x10(r4)
+/* 8137263C | 39 40 00 00 */	li r10, 0x0
+/* 81372640 | 38 80 00 00 */	li r4, 0x0
+/* 81372644 | 39 60 00 00 */	li r11, 0x0
+/* 81372648 | 48 00 00 5C */	b .L_813726A4
 .L_8137264C:
-/* 8137264C 00040A4C  28 00 00 22 */	cmplwi r0, 0x22
-/* 81372650 00040A50  40 82 00 4C */	bne .L_8137269C
-/* 81372654 00040A54  2C 0B 00 00 */	cmpwi r11, 0x0
-/* 81372658 00040A58  7D 0C 2B 2E */	sthx r8, r12, r5
-/* 8137265C 00040A5C  40 82 00 3C */	bne .L_81372698
-/* 81372660 00040A60  1C 0A 00 18 */	mulli r0, r10, 0x18
-/* 81372664 00040A64  38 C9 00 01 */	addi r6, r9, 0x1
-/* 81372668 00040A68  39 4A 00 01 */	addi r10, r10, 0x1
-/* 8137266C 00040A6C  54 C6 08 3C */	slwi r6, r6, 1
-/* 81372670 00040A70  7C 03 02 14 */	add r0, r3, r0
-/* 81372674 00040A74  2C 0A 00 0A */	cmpwi r10, 0xa
-/* 81372678 00040A78  7C EC 32 14 */	add r7, r12, r6
-/* 8137267C 00040A7C  39 60 00 01 */	li r11, 0x1
-/* 81372680 00040A80  7C C4 02 14 */	add r6, r4, r0
-/* 81372684 00040A84  90 E6 00 B4 */	stw r7, 0xb4(r6)
-/* 81372688 00040A88  40 82 00 14 */	bne .L_8137269C
-/* 8137268C 00040A8C  39 40 00 00 */	li r10, 0x0
-/* 81372690 00040A90  38 84 00 04 */	addi r4, r4, 0x4
-/* 81372694 00040A94  48 00 00 08 */	b .L_8137269C
+/* 8137264C | 28 00 00 22 */	cmplwi r0, 0x22
+/* 81372650 | 40 82 00 4C */	bne .L_8137269C
+/* 81372654 | 2C 0B 00 00 */	cmpwi r11, 0x0
+/* 81372658 | 7D 0C 2B 2E */	sthx r8, r12, r5
+/* 8137265C | 40 82 00 3C */	bne .L_81372698
+/* 81372660 | 1C 0A 00 18 */	mulli r0, r10, 0x18
+/* 81372664 | 38 C9 00 01 */	addi r6, r9, 0x1
+/* 81372668 | 39 4A 00 01 */	addi r10, r10, 0x1
+/* 8137266C | 54 C6 08 3C */	slwi r6, r6, 1
+/* 81372670 | 7C 03 02 14 */	add r0, r3, r0
+/* 81372674 | 2C 0A 00 0A */	cmpwi r10, 0xa
+/* 81372678 | 7C EC 32 14 */	add r7, r12, r6
+/* 8137267C | 39 60 00 01 */	li r11, 0x1
+/* 81372680 | 7C C4 02 14 */	add r6, r4, r0
+/* 81372684 | 90 E6 00 B4 */	stw r7, 0xb4(r6)
+/* 81372688 | 40 82 00 14 */	bne .L_8137269C
+/* 8137268C | 39 40 00 00 */	li r10, 0x0
+/* 81372690 | 38 84 00 04 */	addi r4, r4, 0x4
+/* 81372694 | 48 00 00 08 */	b .L_8137269C
 .L_81372698:
-/* 81372698 00040A98  39 60 00 00 */	li r11, 0x0
+/* 81372698 | 39 60 00 00 */	li r11, 0x0
 .L_8137269C:
-/* 8137269C 00040A9C  39 29 00 01 */	addi r9, r9, 0x1
-/* 813726A0 00040AA0  38 A5 00 02 */	addi r5, r5, 0x2
+/* 8137269C | 39 29 00 01 */	addi r9, r9, 0x1
+/* 813726A0 | 38 A5 00 02 */	addi r5, r5, 0x2
 .L_813726A4:
-/* 813726A4 00040AA4  7C 0C 2A 2E */	lhzx r0, r12, r5
-/* 813726A8 00040AA8  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813726AC 00040AAC  40 82 FF A0 */	bne .L_8137264C
-/* 813726B0 00040AB0  4E 80 00 20 */	blr
+/* 813726A4 | 7C 0C 2A 2E */	lhzx r0, r12, r5
+/* 813726A8 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813726AC | 40 82 FF A0 */	bne .L_8137264C
+/* 813726B0 | 4E 80 00 20 */	blr
 .endfn set_text__Q210homebutton10HomeButtonFv
 
 # .text:0x110C | 0x813726B4 | size: 0x274
 # homebutton::HomeButton::init()
 .fn init__Q210homebutton10HomeButtonFv, global
-/* 813726B4 00040AB4  94 21 FF C0 */	stwu r1, -0x40(r1)
-/* 813726B8 00040AB8  7C 08 02 A6 */	mflr r0
-/* 813726BC 00040ABC  90 01 00 44 */	stw r0, 0x44(r1)
-/* 813726C0 00040AC0  DB E1 00 30 */	stfd f31, 0x30(r1)
-/* 813726C4 00040AC4  F3 E1 00 38 */	psq_st f31, 0x38(r1), 0, qr0
-/* 813726C8 00040AC8  39 61 00 30 */	addi r11, r1, 0x30
-/* 813726CC 00040ACC  48 28 6D F1 */	bl _savegpr_26
-/* 813726D0 00040AD0  88 03 00 8B */	lbz r0, 0x8b(r3)
-/* 813726D4 00040AD4  3F 80 81 64 */	lis r28, lbl_81644B40@ha
-/* 813726D8 00040AD8  7C 7F 1B 78 */	mr r31, r3
-/* 813726DC 00040ADC  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813726E0 00040AE0  3B 9C 4B 40 */	addi r28, r28, lbl_81644B40@l
-/* 813726E4 00040AE4  40 82 02 24 */	bne .L_81372908
-/* 813726E8 00040AE8  80 03 00 B0 */	lwz r0, 0xb0(r3)
-/* 813726EC 00040AEC  38 80 00 00 */	li r4, 0x0
-/* 813726F0 00040AF0  38 A0 00 01 */	li r5, 0x1
-/* 813726F4 00040AF4  98 83 00 8C */	stb r4, 0x8c(r3)
-/* 813726F8 00040AF8  2C 00 00 03 */	cmpwi r0, 0x3
-/* 813726FC 00040AFC  98 A3 00 8B */	stb r5, 0x8b(r3)
-/* 81372700 00040B00  98 83 00 8D */	stb r4, 0x8d(r3)
-/* 81372704 00040B04  98 83 00 8F */	stb r4, 0x8f(r3)
-/* 81372708 00040B08  41 82 00 08 */	beq .L_81372710
-/* 8137270C 00040B0C  98 83 00 8E */	stb r4, 0x8e(r3)
+/* 813726B4 | 94 21 FF C0 */	stwu r1, -0x40(r1)
+/* 813726B8 | 7C 08 02 A6 */	mflr r0
+/* 813726BC | 90 01 00 44 */	stw r0, 0x44(r1)
+/* 813726C0 | DB E1 00 30 */	stfd f31, 0x30(r1)
+/* 813726C4 | F3 E1 00 38 */	psq_st f31, 0x38(r1), 0, qr0
+/* 813726C8 | 39 61 00 30 */	addi r11, r1, 0x30
+/* 813726CC | 48 28 6D F1 */	bl _savegpr_26
+/* 813726D0 | 88 03 00 8B */	lbz r0, 0x8b(r3)
+/* 813726D4 | 3F 80 81 64 */	lis r28, lbl_81644B40@ha
+/* 813726D8 | 7C 7F 1B 78 */	mr r31, r3
+/* 813726DC | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813726E0 | 3B 9C 4B 40 */	addi r28, r28, lbl_81644B40@l
+/* 813726E4 | 40 82 02 24 */	bne .L_81372908
+/* 813726E8 | 80 03 00 B0 */	lwz r0, 0xb0(r3)
+/* 813726EC | 38 80 00 00 */	li r4, 0x0
+/* 813726F0 | 38 A0 00 01 */	li r5, 0x1
+/* 813726F4 | 98 83 00 8C */	stb r4, 0x8c(r3)
+/* 813726F8 | 2C 00 00 03 */	cmpwi r0, 0x3
+/* 813726FC | 98 A3 00 8B */	stb r5, 0x8b(r3)
+/* 81372700 | 98 83 00 8D */	stb r4, 0x8d(r3)
+/* 81372704 | 98 83 00 8F */	stb r4, 0x8f(r3)
+/* 81372708 | 41 82 00 08 */	beq .L_81372710
+/* 8137270C | 98 83 00 8E */	stb r4, 0x8e(r3)
 .L_81372710:
-/* 81372710 00040B10  38 60 00 00 */	li r3, 0x0
-/* 81372714 00040B14  48 1D 25 A9 */	bl GXSetCullMode
-/* 81372718 00040B18  38 00 00 0E */	li r0, 0xe
-/* 8137271C 00040B1C  38 A0 00 00 */	li r5, 0x0
-/* 81372720 00040B20  38 60 00 00 */	li r3, 0x0
-/* 81372724 00040B24  7C 09 03 A6 */	mtctr r0
+/* 81372710 | 38 60 00 00 */	li r3, 0x0
+/* 81372714 | 48 1D 25 A9 */	bl GXSetCullMode
+/* 81372718 | 38 00 00 0E */	li r0, 0xe
+/* 8137271C | 38 A0 00 00 */	li r5, 0x0
+/* 81372720 | 38 60 00 00 */	li r3, 0x0
+/* 81372724 | 7C 09 03 A6 */	mtctr r0
 .L_81372728:
-/* 81372728 00040B28  7C 9F 1A 14 */	add r4, r31, r3
-/* 8137272C 00040B2C  38 63 00 04 */	addi r3, r3, 0x4
-/* 81372730 00040B30  90 A4 00 1C */	stw r5, 0x1c(r4)
-/* 81372734 00040B34  42 00 FF F4 */	bdnz .L_81372728
-/* 81372738 00040B38  3B A0 00 00 */	li r29, 0x0
-/* 8137273C 00040B3C  7F E3 FB 78 */	mr r3, r31
-/* 81372740 00040B40  93 BF 00 10 */	stw r29, 0x10(r31)
-/* 81372744 00040B44  93 BF 00 00 */	stw r29, 0x0(r31)
-/* 81372748 00040B48  9B BF 00 88 */	stb r29, 0x88(r31)
-/* 8137274C 00040B4C  48 00 28 E9 */	bl updateTrigPane__Q210homebutton10HomeButtonFv
-/* 81372750 00040B50  80 7F 02 44 */	lwz r3, 0x244(r31)
-/* 81372754 00040B54  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81372758 00040B58  81 8C 00 0C */	lwz r12, 0xc(r12)
-/* 8137275C 00040B5C  7D 89 03 A6 */	mtctr r12
-/* 81372760 00040B60  4E 80 04 21 */	bctrl
-/* 81372764 00040B64  7F E3 FB 78 */	mr r3, r31
-/* 81372768 00040B68  38 80 FF FF */	li r4, -0x1
-/* 8137276C 00040B6C  48 00 40 79 */	bl reset_guiManager__Q210homebutton10HomeButtonFi
-/* 81372770 00040B70  C3 E2 82 D8 */	lfs f31, lbl_816946D8@sda21(r0)
-/* 81372774 00040B74  3B 40 00 00 */	li r26, 0x0
-/* 81372778 00040B78  3B C0 00 00 */	li r30, 0x0
+/* 81372728 | 7C 9F 1A 14 */	add r4, r31, r3
+/* 8137272C | 38 63 00 04 */	addi r3, r3, 0x4
+/* 81372730 | 90 A4 00 1C */	stw r5, 0x1c(r4)
+/* 81372734 | 42 00 FF F4 */	bdnz .L_81372728
+/* 81372738 | 3B A0 00 00 */	li r29, 0x0
+/* 8137273C | 7F E3 FB 78 */	mr r3, r31
+/* 81372740 | 93 BF 00 10 */	stw r29, 0x10(r31)
+/* 81372744 | 93 BF 00 00 */	stw r29, 0x0(r31)
+/* 81372748 | 9B BF 00 88 */	stb r29, 0x88(r31)
+/* 8137274C | 48 00 28 E9 */	bl updateTrigPane__Q210homebutton10HomeButtonFv
+/* 81372750 | 80 7F 02 44 */	lwz r3, 0x244(r31)
+/* 81372754 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81372758 | 81 8C 00 0C */	lwz r12, 0xc(r12)
+/* 8137275C | 7D 89 03 A6 */	mtctr r12
+/* 81372760 | 4E 80 04 21 */	bctrl
+/* 81372764 | 7F E3 FB 78 */	mr r3, r31
+/* 81372768 | 38 80 FF FF */	li r4, -0x1
+/* 8137276C | 48 00 40 79 */	bl reset_guiManager__Q210homebutton10HomeButtonFi
+/* 81372770 | C3 E2 82 D8 */	lfs f31, lbl_816946D8@sda21(r0)
+/* 81372774 | 3B 40 00 00 */	li r26, 0x0
+/* 81372778 | 3B C0 00 00 */	li r30, 0x0
 .L_8137277C:
-/* 8137277C 00040B7C  2C 1A 00 04 */	cmpwi r26, 0x4
-/* 81372780 00040B80  40 80 00 44 */	bge .L_813727C4
-/* 81372784 00040B84  7F 7F F2 14 */	add r27, r31, r30
-/* 81372788 00040B88  93 BB 00 54 */	stw r29, 0x54(r27)
-/* 8137278C 00040B8C  80 7B 02 A0 */	lwz r3, 0x2a0(r27)
-/* 81372790 00040B90  48 00 50 C9 */	bl setInValidPos__Q210homebutton10ControllerFv
-/* 81372794 00040B94  80 7B 02 A0 */	lwz r3, 0x2a0(r27)
-/* 81372798 00040B98  48 00 50 AD */	bl clrKpadButton__Q210homebutton10ControllerFv
-/* 8137279C 00040B9C  80 7B 02 A0 */	lwz r3, 0x2a0(r27)
-/* 813727A0 00040BA0  48 00 50 D9 */	bl disconnect__Q210homebutton10ControllerFv
-/* 813727A4 00040BA4  80 7B 02 A0 */	lwz r3, 0x2a0(r27)
-/* 813727A8 00040BA8  48 00 54 4D */	bl clrBatteryFlag__Q210homebutton10ControllerFv
-/* 813727AC 00040BAC  80 7B 02 A0 */	lwz r3, 0x2a0(r27)
-/* 813727B0 00040BB0  48 00 4E 41 */	bl initCallback__Q210homebutton10ControllerFv
-/* 813727B4 00040BB4  80 7B 02 A0 */	lwz r3, 0x2a0(r27)
-/* 813727B8 00040BB8  48 00 51 C1 */	bl initSound__Q210homebutton10ControllerFv
-/* 813727BC 00040BBC  D3 FB 02 08 */	stfs f31, 0x208(r27)
-/* 813727C0 00040BC0  D3 FB 02 18 */	stfs f31, 0x218(r27)
+/* 8137277C | 2C 1A 00 04 */	cmpwi r26, 0x4
+/* 81372780 | 40 80 00 44 */	bge .L_813727C4
+/* 81372784 | 7F 7F F2 14 */	add r27, r31, r30
+/* 81372788 | 93 BB 00 54 */	stw r29, 0x54(r27)
+/* 8137278C | 80 7B 02 A0 */	lwz r3, 0x2a0(r27)
+/* 81372790 | 48 00 50 C9 */	bl setInValidPos__Q210homebutton10ControllerFv
+/* 81372794 | 80 7B 02 A0 */	lwz r3, 0x2a0(r27)
+/* 81372798 | 48 00 50 AD */	bl clrKpadButton__Q210homebutton10ControllerFv
+/* 8137279C | 80 7B 02 A0 */	lwz r3, 0x2a0(r27)
+/* 813727A0 | 48 00 50 D9 */	bl disconnect__Q210homebutton10ControllerFv
+/* 813727A4 | 80 7B 02 A0 */	lwz r3, 0x2a0(r27)
+/* 813727A8 | 48 00 54 4D */	bl clrBatteryFlag__Q210homebutton10ControllerFv
+/* 813727AC | 80 7B 02 A0 */	lwz r3, 0x2a0(r27)
+/* 813727B0 | 48 00 4E 41 */	bl initCallback__Q210homebutton10ControllerFv
+/* 813727B4 | 80 7B 02 A0 */	lwz r3, 0x2a0(r27)
+/* 813727B8 | 48 00 51 C1 */	bl initSound__Q210homebutton10ControllerFv
+/* 813727BC | D3 FB 02 08 */	stfs f31, 0x208(r27)
+/* 813727C0 | D3 FB 02 18 */	stfs f31, 0x218(r27)
 .L_813727C4:
-/* 813727C4 00040BC4  3B 5A 00 01 */	addi r26, r26, 0x1
-/* 813727C8 00040BC8  3B DE 00 04 */	addi r30, r30, 0x4
-/* 813727CC 00040BCC  2C 1A 00 04 */	cmpwi r26, 0x4
-/* 813727D0 00040BD0  41 80 FF AC */	blt .L_8137277C
-/* 813727D4 00040BD4  80 9F 02 2C */	lwz r4, 0x22c(r31)
-/* 813727D8 00040BD8  38 61 00 08 */	addi r3, r1, 0x8
-/* 813727DC 00040BDC  48 1A DF 3D */	bl fn_81520718
-/* 813727E0 00040BE0  C0 01 00 08 */	lfs f0, 0x8(r1)
-/* 813727E4 00040BE4  38 A0 00 01 */	li r5, 0x1
-/* 813727E8 00040BE8  80 7F 02 2C */	lwz r3, 0x22c(r31)
-/* 813727EC 00040BEC  D0 1F 02 80 */	stfs f0, 0x280(r31)
-/* 813727F0 00040BF0  C0 01 00 0C */	lfs f0, 0xc(r1)
-/* 813727F4 00040BF4  D0 1F 02 84 */	stfs f0, 0x284(r31)
-/* 813727F8 00040BF8  C0 01 00 10 */	lfs f0, 0x10(r1)
-/* 813727FC 00040BFC  D0 1F 02 88 */	stfs f0, 0x288(r31)
-/* 81372800 00040C00  C0 01 00 14 */	lfs f0, 0x14(r1)
-/* 81372804 00040C04  D0 1F 02 8C */	stfs f0, 0x28c(r31)
-/* 81372808 00040C08  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 8137280C 00040C0C  80 9C 07 DC */	lwz r4, 0x7dc(r28)
-/* 81372810 00040C10  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81372814 00040C14  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81372818 00040C18  7D 89 03 A6 */	mtctr r12
-/* 8137281C 00040C1C  4E 80 04 21 */	bctrl
-/* 81372820 00040C20  38 80 00 00 */	li r4, 0x0
-/* 81372824 00040C24  4B FD 1B F1 */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 81372828 00040C28  3B BC 08 4C */	addi r29, r28, 0x84c
-/* 8137282C 00040C2C  3B 60 00 02 */	li r27, 0x2
-/* 81372830 00040C30  3B C0 00 08 */	li r30, 0x8
+/* 813727C4 | 3B 5A 00 01 */	addi r26, r26, 0x1
+/* 813727C8 | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 813727CC | 2C 1A 00 04 */	cmpwi r26, 0x4
+/* 813727D0 | 41 80 FF AC */	blt .L_8137277C
+/* 813727D4 | 80 9F 02 2C */	lwz r4, 0x22c(r31)
+/* 813727D8 | 38 61 00 08 */	addi r3, r1, 0x8
+/* 813727DC | 48 1A DF 3D */	bl fn_81520718
+/* 813727E0 | C0 01 00 08 */	lfs f0, 0x8(r1)
+/* 813727E4 | 38 A0 00 01 */	li r5, 0x1
+/* 813727E8 | 80 7F 02 2C */	lwz r3, 0x22c(r31)
+/* 813727EC | D0 1F 02 80 */	stfs f0, 0x280(r31)
+/* 813727F0 | C0 01 00 0C */	lfs f0, 0xc(r1)
+/* 813727F4 | D0 1F 02 84 */	stfs f0, 0x284(r31)
+/* 813727F8 | C0 01 00 10 */	lfs f0, 0x10(r1)
+/* 813727FC | D0 1F 02 88 */	stfs f0, 0x288(r31)
+/* 81372800 | C0 01 00 14 */	lfs f0, 0x14(r1)
+/* 81372804 | D0 1F 02 8C */	stfs f0, 0x28c(r31)
+/* 81372808 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 8137280C | 80 9C 07 DC */	lwz r4, 0x7dc(r28)
+/* 81372810 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81372814 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81372818 | 7D 89 03 A6 */	mtctr r12
+/* 8137281C | 4E 80 04 21 */	bctrl
+/* 81372820 | 38 80 00 00 */	li r4, 0x0
+/* 81372824 | 4B FD 1B F1 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 81372828 | 3B BC 08 4C */	addi r29, r28, 0x84c
+/* 8137282C | 3B 60 00 02 */	li r27, 0x2
+/* 81372830 | 3B C0 00 08 */	li r30, 0x8
 .L_81372834:
-/* 81372834 00040C34  80 7F 02 2C */	lwz r3, 0x22c(r31)
-/* 81372838 00040C38  38 A0 00 01 */	li r5, 0x1
-/* 8137283C 00040C3C  7C 9D F0 2E */	lwzx r4, r29, r30
-/* 81372840 00040C40  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81372844 00040C44  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81372848 00040C48  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 8137284C 00040C4C  7D 89 03 A6 */	mtctr r12
-/* 81372850 00040C50  4E 80 04 21 */	bctrl
-/* 81372854 00040C54  38 80 00 00 */	li r4, 0x0
-/* 81372858 00040C58  4B FD 1B BD */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 8137285C 00040C5C  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81372860 00040C60  3B DE 00 04 */	addi r30, r30, 0x4
-/* 81372864 00040C64  2C 1B 00 07 */	cmpwi r27, 0x7
-/* 81372868 00040C68  41 80 FF CC */	blt .L_81372834
-/* 8137286C 00040C6C  3B BC 08 90 */	addi r29, r28, 0x890
-/* 81372870 00040C70  3B 60 00 00 */	li r27, 0x0
-/* 81372874 00040C74  3B C0 00 00 */	li r30, 0x0
+/* 81372834 | 80 7F 02 2C */	lwz r3, 0x22c(r31)
+/* 81372838 | 38 A0 00 01 */	li r5, 0x1
+/* 8137283C | 7C 9D F0 2E */	lwzx r4, r29, r30
+/* 81372840 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81372844 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81372848 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 8137284C | 7D 89 03 A6 */	mtctr r12
+/* 81372850 | 4E 80 04 21 */	bctrl
+/* 81372854 | 38 80 00 00 */	li r4, 0x0
+/* 81372858 | 4B FD 1B BD */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 8137285C | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81372860 | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 81372864 | 2C 1B 00 07 */	cmpwi r27, 0x7
+/* 81372868 | 41 80 FF CC */	blt .L_81372834
+/* 8137286C | 3B BC 08 90 */	addi r29, r28, 0x890
+/* 81372870 | 3B 60 00 00 */	li r27, 0x0
+/* 81372874 | 3B C0 00 00 */	li r30, 0x0
 .L_81372878:
-/* 81372878 00040C78  80 7F 02 2C */	lwz r3, 0x22c(r31)
-/* 8137287C 00040C7C  38 A0 00 01 */	li r5, 0x1
-/* 81372880 00040C80  7C 9D F0 2E */	lwzx r4, r29, r30
-/* 81372884 00040C84  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81372888 00040C88  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 8137288C 00040C8C  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81372890 00040C90  7D 89 03 A6 */	mtctr r12
-/* 81372894 00040C94  4E 80 04 21 */	bctrl
-/* 81372898 00040C98  38 80 00 00 */	li r4, 0x0
-/* 8137289C 00040C9C  4B FD 1B 79 */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 813728A0 00040CA0  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 813728A4 00040CA4  3B DE 00 04 */	addi r30, r30, 0x4
-/* 813728A8 00040CA8  2C 1B 00 03 */	cmpwi r27, 0x3
-/* 813728AC 00040CAC  41 80 FF CC */	blt .L_81372878
-/* 813728B0 00040CB0  80 7F 02 B0 */	lwz r3, 0x2b0(r31)
-/* 813728B4 00040CB4  48 00 69 D9 */	bl Start__Q210homebutton9RemoteSpkFv
-/* 813728B8 00040CB8  80 1F 06 08 */	lwz r0, 0x608(r31)
-/* 813728BC 00040CBC  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813728C0 00040CC0  41 82 00 30 */	beq .L_813728F0
-/* 813728C4 00040CC4  3B 60 00 00 */	li r27, 0x0
-/* 813728C8 00040CC8  48 00 00 18 */	b .L_813728E0
+/* 81372878 | 80 7F 02 2C */	lwz r3, 0x22c(r31)
+/* 8137287C | 38 A0 00 01 */	li r5, 0x1
+/* 81372880 | 7C 9D F0 2E */	lwzx r4, r29, r30
+/* 81372884 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81372888 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 8137288C | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81372890 | 7D 89 03 A6 */	mtctr r12
+/* 81372894 | 4E 80 04 21 */	bctrl
+/* 81372898 | 38 80 00 00 */	li r4, 0x0
+/* 8137289C | 4B FD 1B 79 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 813728A0 | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 813728A4 | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 813728A8 | 2C 1B 00 03 */	cmpwi r27, 0x3
+/* 813728AC | 41 80 FF CC */	blt .L_81372878
+/* 813728B0 | 80 7F 02 B0 */	lwz r3, 0x2b0(r31)
+/* 813728B4 | 48 00 69 D9 */	bl Start__Q210homebutton9RemoteSpkFv
+/* 813728B8 | 80 1F 06 08 */	lwz r0, 0x608(r31)
+/* 813728BC | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813728C0 | 41 82 00 30 */	beq .L_813728F0
+/* 813728C4 | 3B 60 00 00 */	li r27, 0x0
+/* 813728C8 | 48 00 00 18 */	b .L_813728E0
 .L_813728CC:
-/* 813728CC 00040CCC  7F 64 DB 78 */	mr r4, r27
-/* 813728D0 00040CD0  48 19 64 79 */	bl fn_81508D48
-/* 813728D4 00040CD4  C0 22 82 DC */	lfs f1, lbl_816946DC@sda21(r0)
-/* 813728D8 00040CD8  48 19 84 7D */	bl fn_8150AD54
-/* 813728DC 00040CDC  3B 7B 00 01 */	addi r27, r27, 0x1
+/* 813728CC | 7F 64 DB 78 */	mr r4, r27
+/* 813728D0 | 48 19 64 79 */	bl fn_81508D48
+/* 813728D4 | C0 22 82 DC */	lfs f1, lbl_816946DC@sda21(r0)
+/* 813728D8 | 48 19 84 7D */	bl fn_8150AD54
+/* 813728DC | 3B 7B 00 01 */	addi r27, r27, 0x1
 .L_813728E0:
-/* 813728E0 00040CE0  80 7F 06 08 */	lwz r3, 0x608(r31)
-/* 813728E4 00040CE4  80 03 00 70 */	lwz r0, 0x70(r3)
-/* 813728E8 00040CE8  7C 1B 00 40 */	cmplw r27, r0
-/* 813728EC 00040CEC  41 80 FF E0 */	blt .L_813728CC
+/* 813728E0 | 80 7F 06 08 */	lwz r3, 0x608(r31)
+/* 813728E4 | 80 03 00 70 */	lwz r0, 0x70(r3)
+/* 813728E8 | 7C 1B 00 40 */	cmplw r27, r0
+/* 813728EC | 41 80 FF E0 */	blt .L_813728CC
 .L_813728F0:
-/* 813728F0 00040CF0  7F E3 FB 78 */	mr r3, r31
-/* 813728F4 00040CF4  38 80 00 00 */	li r4, 0x0
-/* 813728F8 00040CF8  48 00 05 A5 */	bl calc__Q210homebutton10HomeButtonFPC17HBMControllerData
-/* 813728FC 00040CFC  38 7F 04 48 */	addi r3, r31, 0x448
-/* 81372900 00040D00  38 80 00 1E */	li r4, 0x1e
-/* 81372904 00040D04  48 00 44 69 */	bl init__Q310homebutton10HomeButton10BlackFaderFi
+/* 813728F0 | 7F E3 FB 78 */	mr r3, r31
+/* 813728F4 | 38 80 00 00 */	li r4, 0x0
+/* 813728F8 | 48 00 05 A5 */	bl calc__Q210homebutton10HomeButtonFPC17HBMControllerData
+/* 813728FC | 38 7F 04 48 */	addi r3, r31, 0x448
+/* 81372900 | 38 80 00 1E */	li r4, 0x1e
+/* 81372904 | 48 00 44 69 */	bl init__Q310homebutton10HomeButton10BlackFaderFi
 .L_81372908:
-/* 81372908 00040D08  E3 E1 00 38 */	psq_l f31, 0x38(r1), 0, qr0
-/* 8137290C 00040D0C  39 61 00 30 */	addi r11, r1, 0x30
-/* 81372910 00040D10  CB E1 00 30 */	lfd f31, 0x30(r1)
-/* 81372914 00040D14  48 28 6B F5 */	bl _restgpr_26
-/* 81372918 00040D18  80 01 00 44 */	lwz r0, 0x44(r1)
-/* 8137291C 00040D1C  7C 08 03 A6 */	mtlr r0
-/* 81372920 00040D20  38 21 00 40 */	addi r1, r1, 0x40
-/* 81372924 00040D24  4E 80 00 20 */	blr
+/* 81372908 | E3 E1 00 38 */	psq_l f31, 0x38(r1), 0, qr0
+/* 8137290C | 39 61 00 30 */	addi r11, r1, 0x30
+/* 81372910 | CB E1 00 30 */	lfd f31, 0x30(r1)
+/* 81372914 | 48 28 6B F5 */	bl _restgpr_26
+/* 81372918 | 80 01 00 44 */	lwz r0, 0x44(r1)
+/* 8137291C | 7C 08 03 A6 */	mtlr r0
+/* 81372920 | 38 21 00 40 */	addi r1, r1, 0x40
+/* 81372924 | 4E 80 00 20 */	blr
 .endfn init__Q210homebutton10HomeButtonFv
 
 # .text:0x1380 | 0x81372928 | size: 0xA0
 # homebutton::HomeButton::init_msg()
 .fn init_msg__Q210homebutton10HomeButtonFv, global
-/* 81372928 00040D28  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 8137292C 00040D2C  7C 08 02 A6 */	mflr r0
-/* 81372930 00040D30  90 01 00 24 */	stw r0, 0x24(r1)
-/* 81372934 00040D34  39 61 00 20 */	addi r11, r1, 0x20
-/* 81372938 00040D38  48 28 6B 8D */	bl _savegpr_28
-/* 8137293C 00040D3C  3F C0 81 64 */	lis r30, scFuncTextPaneName__Q210homebutton10HomeButton@ha
-/* 81372940 00040D40  7C 7C 1B 78 */	mr r28, r3
-/* 81372944 00040D44  3B DE 53 D0 */	addi r30, r30, scFuncTextPaneName__Q210homebutton10HomeButton@l
-/* 81372948 00040D48  3B A0 00 00 */	li r29, 0x0
-/* 8137294C 00040D4C  3B E0 00 00 */	li r31, 0x0
+/* 81372928 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8137292C | 7C 08 02 A6 */	mflr r0
+/* 81372930 | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 81372934 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81372938 | 48 28 6B 8D */	bl _savegpr_28
+/* 8137293C | 3F C0 81 64 */	lis r30, scFuncTextPaneName__Q210homebutton10HomeButton@ha
+/* 81372940 | 7C 7C 1B 78 */	mr r28, r3
+/* 81372944 | 3B DE 53 D0 */	addi r30, r30, scFuncTextPaneName__Q210homebutton10HomeButton@l
+/* 81372948 | 3B A0 00 00 */	li r29, 0x0
+/* 8137294C | 3B E0 00 00 */	li r31, 0x0
 .L_81372950:
-/* 81372950 00040D50  80 7C 02 2C */	lwz r3, 0x22c(r28)
-/* 81372954 00040D54  38 A0 00 01 */	li r5, 0x1
-/* 81372958 00040D58  7C 9E F8 2E */	lwzx r4, r30, r31
-/* 8137295C 00040D5C  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81372960 00040D60  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81372964 00040D64  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81372968 00040D68  7D 89 03 A6 */	mtctr r12
-/* 8137296C 00040D6C  4E 80 04 21 */	bctrl
-/* 81372970 00040D70  4B FD 34 F5 */	bl "DynamicCast<PQ34nw4r3lyt7TextBox,Q34nw4r3lyt4Pane>__Q24nw4r2utFPQ34nw4r3lyt4Pane_PQ34nw4r3lyt7TextBox"
-/* 81372974 00040D74  80 9C 00 04 */	lwz r4, 0x4(r28)
-/* 81372978 00040D78  7C 1F E2 14 */	add r0, r31, r28
-/* 8137297C 00040D7C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81372980 00040D80  38 A0 00 00 */	li r5, 0x0
-/* 81372984 00040D84  80 84 00 24 */	lwz r4, 0x24(r4)
-/* 81372988 00040D88  81 8C 00 6C */	lwz r12, 0x6c(r12)
-/* 8137298C 00040D8C  1C 84 00 18 */	mulli r4, r4, 0x18
-/* 81372990 00040D90  7C 84 02 14 */	add r4, r4, r0
-/* 81372994 00040D94  80 84 00 B4 */	lwz r4, 0xb4(r4)
-/* 81372998 00040D98  7D 89 03 A6 */	mtctr r12
-/* 8137299C 00040D9C  4E 80 04 21 */	bctrl
-/* 813729A0 00040DA0  3B BD 00 01 */	addi r29, r29, 0x1
-/* 813729A4 00040DA4  3B FF 00 04 */	addi r31, r31, 0x4
-/* 813729A8 00040DA8  2C 1D 00 03 */	cmpwi r29, 0x3
-/* 813729AC 00040DAC  41 80 FF A4 */	blt .L_81372950
-/* 813729B0 00040DB0  39 61 00 20 */	addi r11, r1, 0x20
-/* 813729B4 00040DB4  48 28 6B 5D */	bl _restgpr_28
-/* 813729B8 00040DB8  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 813729BC 00040DBC  7C 08 03 A6 */	mtlr r0
-/* 813729C0 00040DC0  38 21 00 20 */	addi r1, r1, 0x20
-/* 813729C4 00040DC4  4E 80 00 20 */	blr
+/* 81372950 | 80 7C 02 2C */	lwz r3, 0x22c(r28)
+/* 81372954 | 38 A0 00 01 */	li r5, 0x1
+/* 81372958 | 7C 9E F8 2E */	lwzx r4, r30, r31
+/* 8137295C | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81372960 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81372964 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81372968 | 7D 89 03 A6 */	mtctr r12
+/* 8137296C | 4E 80 04 21 */	bctrl
+/* 81372970 | 4B FD 34 F5 */	bl "DynamicCast<PQ34nw4r3lyt7TextBox,Q34nw4r3lyt4Pane>__Q24nw4r2utFPQ34nw4r3lyt4Pane_PQ34nw4r3lyt7TextBox"
+/* 81372974 | 80 9C 00 04 */	lwz r4, 0x4(r28)
+/* 81372978 | 7C 1F E2 14 */	add r0, r31, r28
+/* 8137297C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81372980 | 38 A0 00 00 */	li r5, 0x0
+/* 81372984 | 80 84 00 24 */	lwz r4, 0x24(r4)
+/* 81372988 | 81 8C 00 6C */	lwz r12, 0x6c(r12)
+/* 8137298C | 1C 84 00 18 */	mulli r4, r4, 0x18
+/* 81372990 | 7C 84 02 14 */	add r4, r4, r0
+/* 81372994 | 80 84 00 B4 */	lwz r4, 0xb4(r4)
+/* 81372998 | 7D 89 03 A6 */	mtctr r12
+/* 8137299C | 4E 80 04 21 */	bctrl
+/* 813729A0 | 3B BD 00 01 */	addi r29, r29, 0x1
+/* 813729A4 | 3B FF 00 04 */	addi r31, r31, 0x4
+/* 813729A8 | 2C 1D 00 03 */	cmpwi r29, 0x3
+/* 813729AC | 41 80 FF A4 */	blt .L_81372950
+/* 813729B0 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813729B4 | 48 28 6B 5D */	bl _restgpr_28
+/* 813729B8 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 813729BC | 7C 08 03 A6 */	mtlr r0
+/* 813729C0 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 813729C4 | 4E 80 00 20 */	blr
 .endfn init_msg__Q210homebutton10HomeButtonFv
 
 # .text:0x1420 | 0x813729C8 | size: 0x15C
 # homebutton::HomeButton::init_volume()
 .fn init_volume__Q210homebutton10HomeButtonFv, global
-/* 813729C8 00040DC8  94 21 FF B0 */	stwu r1, -0x50(r1)
-/* 813729CC 00040DCC  7C 08 02 A6 */	mflr r0
-/* 813729D0 00040DD0  90 01 00 54 */	stw r0, 0x54(r1)
-/* 813729D4 00040DD4  DB E1 00 40 */	stfd f31, 0x40(r1)
-/* 813729D8 00040DD8  F3 E1 00 48 */	psq_st f31, 0x48(r1), 0, qr0
-/* 813729DC 00040DDC  DB C1 00 30 */	stfd f30, 0x30(r1)
-/* 813729E0 00040DE0  F3 C1 00 38 */	psq_st f30, 0x38(r1), 0, qr0
-/* 813729E4 00040DE4  39 61 00 30 */	addi r11, r1, 0x30
-/* 813729E8 00040DE8  48 28 6A D9 */	bl _savegpr_27
-/* 813729EC 00040DEC  7C 7F 1B 78 */	mr r31, r3
-/* 813729F0 00040DF0  48 20 A5 49 */	bl fn_8157CF38
-/* 813729F4 00040DF4  54 60 06 3E */	clrlwi r0, r3, 24
-/* 813729F8 00040DF8  3F A0 43 30 */	lis r29, 0x4330
-/* 813729FC 00040DFC  90 01 00 0C */	stw r0, 0xc(r1)
-/* 81372A00 00040E00  38 60 00 7F */	li r3, 0x7f
-/* 81372A04 00040E04  C8 62 82 E0 */	lfd f3, lbl_816946E0@sda21(r0)
-/* 81372A08 00040E08  93 A1 00 08 */	stw r29, 0x8(r1)
-/* 81372A0C 00040E0C  C0 22 82 EC */	lfs f1, lbl_816946EC@sda21(r0)
-/* 81372A10 00040E10  C8 41 00 08 */	lfd f2, 0x8(r1)
-/* 81372A14 00040E14  C0 02 82 E8 */	lfs f0, lbl_816946E8@sda21(r0)
-/* 81372A18 00040E18  EC 42 18 28 */	fsubs f2, f2, f3
-/* 81372A1C 00040E1C  EC 21 00 B2 */	fmuls f1, f1, f2
-/* 81372A20 00040E20  EC 00 08 2A */	fadds f0, f0, f1
-/* 81372A24 00040E24  FC 00 00 1E */	fctiwz f0, f0
-/* 81372A28 00040E28  D8 01 00 10 */	stfd f0, 0x10(r1)
-/* 81372A2C 00040E2C  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 81372A30 00040E30  90 1F 00 80 */	stw r0, 0x80(r31)
-/* 81372A34 00040E34  48 20 A5 39 */	bl fn_8157CF6C
-/* 81372A38 00040E38  CB C2 82 F8 */	lfd f30, lbl_816946F8@sda21(r0)
-/* 81372A3C 00040E3C  3B 60 00 00 */	li r27, 0x0
-/* 81372A40 00040E40  C3 E2 82 F0 */	lfs f31, lbl_816946F0@sda21(r0)
-/* 81372A44 00040E44  3B C0 00 00 */	li r30, 0x0
+/* 813729C8 | 94 21 FF B0 */	stwu r1, -0x50(r1)
+/* 813729CC | 7C 08 02 A6 */	mflr r0
+/* 813729D0 | 90 01 00 54 */	stw r0, 0x54(r1)
+/* 813729D4 | DB E1 00 40 */	stfd f31, 0x40(r1)
+/* 813729D8 | F3 E1 00 48 */	psq_st f31, 0x48(r1), 0, qr0
+/* 813729DC | DB C1 00 30 */	stfd f30, 0x30(r1)
+/* 813729E0 | F3 C1 00 38 */	psq_st f30, 0x38(r1), 0, qr0
+/* 813729E4 | 39 61 00 30 */	addi r11, r1, 0x30
+/* 813729E8 | 48 28 6A D9 */	bl _savegpr_27
+/* 813729EC | 7C 7F 1B 78 */	mr r31, r3
+/* 813729F0 | 48 20 A5 49 */	bl fn_8157CF38
+/* 813729F4 | 54 60 06 3E */	clrlwi r0, r3, 24
+/* 813729F8 | 3F A0 43 30 */	lis r29, 0x4330
+/* 813729FC | 90 01 00 0C */	stw r0, 0xc(r1)
+/* 81372A00 | 38 60 00 7F */	li r3, 0x7f
+/* 81372A04 | C8 62 82 E0 */	lfd f3, lbl_816946E0@sda21(r0)
+/* 81372A08 | 93 A1 00 08 */	stw r29, 0x8(r1)
+/* 81372A0C | C0 22 82 EC */	lfs f1, lbl_816946EC@sda21(r0)
+/* 81372A10 | C8 41 00 08 */	lfd f2, 0x8(r1)
+/* 81372A14 | C0 02 82 E8 */	lfs f0, lbl_816946E8@sda21(r0)
+/* 81372A18 | EC 42 18 28 */	fsubs f2, f2, f3
+/* 81372A1C | EC 21 00 B2 */	fmuls f1, f1, f2
+/* 81372A20 | EC 00 08 2A */	fadds f0, f0, f1
+/* 81372A24 | FC 00 00 1E */	fctiwz f0, f0
+/* 81372A28 | D8 01 00 10 */	stfd f0, 0x10(r1)
+/* 81372A2C | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 81372A30 | 90 1F 00 80 */	stw r0, 0x80(r31)
+/* 81372A34 | 48 20 A5 39 */	bl fn_8157CF6C
+/* 81372A38 | CB C2 82 F8 */	lfd f30, lbl_816946F8@sda21(r0)
+/* 81372A3C | 3B 60 00 00 */	li r27, 0x0
+/* 81372A40 | C3 E2 82 F0 */	lfs f31, lbl_816946F0@sda21(r0)
+/* 81372A44 | 3B C0 00 00 */	li r30, 0x0
 .L_81372A48:
-/* 81372A48 00040E48  80 1F 00 80 */	lwz r0, 0x80(r31)
-/* 81372A4C 00040E4C  7F 9F F2 14 */	add r28, r31, r30
-/* 81372A50 00040E50  93 A1 00 10 */	stw r29, 0x10(r1)
-/* 81372A54 00040E54  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 81372A58 00040E58  80 7C 02 A0 */	lwz r3, 0x2a0(r28)
-/* 81372A5C 00040E5C  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81372A60 00040E60  C8 01 00 10 */	lfd f0, 0x10(r1)
-/* 81372A64 00040E64  EC 00 F0 28 */	fsubs f0, f0, f30
-/* 81372A68 00040E68  EC 20 F8 24 */	fdivs f1, f0, f31
-/* 81372A6C 00040E6C  48 00 4E 11 */	bl setSpeakerVol__Q210homebutton10ControllerFf
-/* 81372A70 00040E70  80 7C 02 A0 */	lwz r3, 0x2a0(r28)
-/* 81372A74 00040E74  48 00 4D F5 */	bl connect__Q210homebutton10ControllerFv
-/* 81372A78 00040E78  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81372A7C 00040E7C  3B DE 00 04 */	addi r30, r30, 0x4
-/* 81372A80 00040E80  2C 1B 00 04 */	cmpwi r27, 0x4
-/* 81372A84 00040E84  41 80 FF C4 */	blt .L_81372A48
-/* 81372A88 00040E88  3B 80 00 00 */	li r28, 0x0
-/* 81372A8C 00040E8C  3B C0 00 01 */	li r30, 0x1
+/* 81372A48 | 80 1F 00 80 */	lwz r0, 0x80(r31)
+/* 81372A4C | 7F 9F F2 14 */	add r28, r31, r30
+/* 81372A50 | 93 A1 00 10 */	stw r29, 0x10(r1)
+/* 81372A54 | 6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 81372A58 | 80 7C 02 A0 */	lwz r3, 0x2a0(r28)
+/* 81372A5C | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81372A60 | C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 81372A64 | EC 00 F0 28 */	fsubs f0, f0, f30
+/* 81372A68 | EC 20 F8 24 */	fdivs f1, f0, f31
+/* 81372A6C | 48 00 4E 11 */	bl setSpeakerVol__Q210homebutton10ControllerFf
+/* 81372A70 | 80 7C 02 A0 */	lwz r3, 0x2a0(r28)
+/* 81372A74 | 48 00 4D F5 */	bl connect__Q210homebutton10ControllerFv
+/* 81372A78 | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81372A7C | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 81372A80 | 2C 1B 00 04 */	cmpwi r27, 0x4
+/* 81372A84 | 41 80 FF C4 */	blt .L_81372A48
+/* 81372A88 | 3B 80 00 00 */	li r28, 0x0
+/* 81372A8C | 3B C0 00 01 */	li r30, 0x1
 .L_81372A90:
-/* 81372A90 00040E90  80 1F 00 80 */	lwz r0, 0x80(r31)
-/* 81372A94 00040E94  7C 1C 00 00 */	cmpw r28, r0
-/* 81372A98 00040E98  40 80 00 30 */	bge .L_81372AC8
-/* 81372A9C 00040E9C  7F E3 FB 78 */	mr r3, r31
-/* 81372AA0 00040EA0  38 9C 00 15 */	addi r4, r28, 0x15
-/* 81372AA4 00040EA4  38 A0 00 0A */	li r5, 0xa
-/* 81372AA8 00040EA8  48 00 40 19 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81372AAC 00040EAC  54 60 10 3A */	slwi r0, r3, 2
-/* 81372AB0 00040EB0  7C 7F 02 14 */	add r3, r31, r0
-/* 81372AB4 00040EB4  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81372AB8 00040EB8  7F A3 EB 78 */	mr r3, r29
-/* 81372ABC 00040EBC  48 00 51 75 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81372AC0 00040EC0  93 DD 00 14 */	stw r30, 0x14(r29)
-/* 81372AC4 00040EC4  48 00 00 2C */	b .L_81372AF0
+/* 81372A90 | 80 1F 00 80 */	lwz r0, 0x80(r31)
+/* 81372A94 | 7C 1C 00 00 */	cmpw r28, r0
+/* 81372A98 | 40 80 00 30 */	bge .L_81372AC8
+/* 81372A9C | 7F E3 FB 78 */	mr r3, r31
+/* 81372AA0 | 38 9C 00 15 */	addi r4, r28, 0x15
+/* 81372AA4 | 38 A0 00 0A */	li r5, 0xa
+/* 81372AA8 | 48 00 40 19 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81372AAC | 54 60 10 3A */	slwi r0, r3, 2
+/* 81372AB0 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81372AB4 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81372AB8 | 7F A3 EB 78 */	mr r3, r29
+/* 81372ABC | 48 00 51 75 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81372AC0 | 93 DD 00 14 */	stw r30, 0x14(r29)
+/* 81372AC4 | 48 00 00 2C */	b .L_81372AF0
 .L_81372AC8:
-/* 81372AC8 00040EC8  7F E3 FB 78 */	mr r3, r31
-/* 81372ACC 00040ECC  38 9C 00 15 */	addi r4, r28, 0x15
-/* 81372AD0 00040ED0  38 A0 00 09 */	li r5, 0x9
-/* 81372AD4 00040ED4  48 00 3F ED */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81372AD8 00040ED8  54 60 10 3A */	slwi r0, r3, 2
-/* 81372ADC 00040EDC  7C 7F 02 14 */	add r3, r31, r0
-/* 81372AE0 00040EE0  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81372AE4 00040EE4  7F A3 EB 78 */	mr r3, r29
-/* 81372AE8 00040EE8  48 00 51 49 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81372AEC 00040EEC  93 DD 00 14 */	stw r30, 0x14(r29)
+/* 81372AC8 | 7F E3 FB 78 */	mr r3, r31
+/* 81372ACC | 38 9C 00 15 */	addi r4, r28, 0x15
+/* 81372AD0 | 38 A0 00 09 */	li r5, 0x9
+/* 81372AD4 | 48 00 3F ED */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81372AD8 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81372ADC | 7C 7F 02 14 */	add r3, r31, r0
+/* 81372AE0 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81372AE4 | 7F A3 EB 78 */	mr r3, r29
+/* 81372AE8 | 48 00 51 49 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81372AEC | 93 DD 00 14 */	stw r30, 0x14(r29)
 .L_81372AF0:
-/* 81372AF0 00040EF0  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 81372AF4 00040EF4  2C 1C 00 0A */	cmpwi r28, 0xa
-/* 81372AF8 00040EF8  41 80 FF 98 */	blt .L_81372A90
-/* 81372AFC 00040EFC  E3 E1 00 48 */	psq_l f31, 0x48(r1), 0, qr0
-/* 81372B00 00040F00  CB E1 00 40 */	lfd f31, 0x40(r1)
-/* 81372B04 00040F04  E3 C1 00 38 */	psq_l f30, 0x38(r1), 0, qr0
-/* 81372B08 00040F08  39 61 00 30 */	addi r11, r1, 0x30
-/* 81372B0C 00040F0C  CB C1 00 30 */	lfd f30, 0x30(r1)
-/* 81372B10 00040F10  48 28 69 FD */	bl _restgpr_27
-/* 81372B14 00040F14  80 01 00 54 */	lwz r0, 0x54(r1)
-/* 81372B18 00040F18  7C 08 03 A6 */	mtlr r0
-/* 81372B1C 00040F1C  38 21 00 50 */	addi r1, r1, 0x50
-/* 81372B20 00040F20  4E 80 00 20 */	blr
+/* 81372AF0 | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 81372AF4 | 2C 1C 00 0A */	cmpwi r28, 0xa
+/* 81372AF8 | 41 80 FF 98 */	blt .L_81372A90
+/* 81372AFC | E3 E1 00 48 */	psq_l f31, 0x48(r1), 0, qr0
+/* 81372B00 | CB E1 00 40 */	lfd f31, 0x40(r1)
+/* 81372B04 | E3 C1 00 38 */	psq_l f30, 0x38(r1), 0, qr0
+/* 81372B08 | 39 61 00 30 */	addi r11, r1, 0x30
+/* 81372B0C | CB C1 00 30 */	lfd f30, 0x30(r1)
+/* 81372B10 | 48 28 69 FD */	bl _restgpr_27
+/* 81372B14 | 80 01 00 54 */	lwz r0, 0x54(r1)
+/* 81372B18 | 7C 08 03 A6 */	mtlr r0
+/* 81372B1C | 38 21 00 50 */	addi r1, r1, 0x50
+/* 81372B20 | 4E 80 00 20 */	blr
 .endfn init_volume__Q210homebutton10HomeButtonFv
 
 # .text:0x157C | 0x81372B24 | size: 0xF4
 # homebutton::HomeButton::init_vib()
 .fn init_vib__Q210homebutton10HomeButtonFv, global
-/* 81372B24 00040F24  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 81372B28 00040F28  7C 08 02 A6 */	mflr r0
-/* 81372B2C 00040F2C  90 01 00 24 */	stw r0, 0x24(r1)
-/* 81372B30 00040F30  39 61 00 20 */	addi r11, r1, 0x20
-/* 81372B34 00040F34  48 28 69 95 */	bl _savegpr_29
-/* 81372B38 00040F38  7C 7D 1B 78 */	mr r29, r3
-/* 81372B3C 00040F3C  48 20 85 1D */	bl fn_8157B058
-/* 81372B40 00040F40  30 03 FF FF */	subic r0, r3, 0x1
-/* 81372B44 00040F44  7C 60 19 10 */	subfe r3, r0, r3
-/* 81372B48 00040F48  54 60 06 3F */	clrlwi. r0, r3, 24
-/* 81372B4C 00040F4C  98 7D 00 84 */	stb r3, 0x84(r29)
-/* 81372B50 00040F50  41 82 00 5C */	beq .L_81372BAC
-/* 81372B54 00040F54  7F A3 EB 78 */	mr r3, r29
-/* 81372B58 00040F58  38 80 00 0D */	li r4, 0xd
-/* 81372B5C 00040F5C  38 A0 00 06 */	li r5, 0x6
-/* 81372B60 00040F60  48 00 3F 61 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81372B64 00040F64  54 60 10 3A */	slwi r0, r3, 2
-/* 81372B68 00040F68  7C 7D 02 14 */	add r3, r29, r0
-/* 81372B6C 00040F6C  83 C3 02 E4 */	lwz r30, 0x2e4(r3)
-/* 81372B70 00040F70  7F C3 F3 78 */	mr r3, r30
-/* 81372B74 00040F74  48 00 50 BD */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81372B78 00040F78  3B E0 00 01 */	li r31, 0x1
-/* 81372B7C 00040F7C  7F A3 EB 78 */	mr r3, r29
-/* 81372B80 00040F80  93 FE 00 14 */	stw r31, 0x14(r30)
-/* 81372B84 00040F84  38 80 00 0E */	li r4, 0xe
-/* 81372B88 00040F88  38 A0 00 08 */	li r5, 0x8
-/* 81372B8C 00040F8C  48 00 3F 35 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81372B90 00040F90  54 60 10 3A */	slwi r0, r3, 2
-/* 81372B94 00040F94  7C 7D 02 14 */	add r3, r29, r0
-/* 81372B98 00040F98  83 C3 02 E4 */	lwz r30, 0x2e4(r3)
-/* 81372B9C 00040F9C  7F C3 F3 78 */	mr r3, r30
-/* 81372BA0 00040FA0  48 00 50 91 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81372BA4 00040FA4  93 FE 00 14 */	stw r31, 0x14(r30)
-/* 81372BA8 00040FA8  48 00 00 58 */	b .L_81372C00
+/* 81372B24 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81372B28 | 7C 08 02 A6 */	mflr r0
+/* 81372B2C | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 81372B30 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81372B34 | 48 28 69 95 */	bl _savegpr_29
+/* 81372B38 | 7C 7D 1B 78 */	mr r29, r3
+/* 81372B3C | 48 20 85 1D */	bl fn_8157B058
+/* 81372B40 | 30 03 FF FF */	subic r0, r3, 0x1
+/* 81372B44 | 7C 60 19 10 */	subfe r3, r0, r3
+/* 81372B48 | 54 60 06 3F */	clrlwi. r0, r3, 24
+/* 81372B4C | 98 7D 00 84 */	stb r3, 0x84(r29)
+/* 81372B50 | 41 82 00 5C */	beq .L_81372BAC
+/* 81372B54 | 7F A3 EB 78 */	mr r3, r29
+/* 81372B58 | 38 80 00 0D */	li r4, 0xd
+/* 81372B5C | 38 A0 00 06 */	li r5, 0x6
+/* 81372B60 | 48 00 3F 61 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81372B64 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81372B68 | 7C 7D 02 14 */	add r3, r29, r0
+/* 81372B6C | 83 C3 02 E4 */	lwz r30, 0x2e4(r3)
+/* 81372B70 | 7F C3 F3 78 */	mr r3, r30
+/* 81372B74 | 48 00 50 BD */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81372B78 | 3B E0 00 01 */	li r31, 0x1
+/* 81372B7C | 7F A3 EB 78 */	mr r3, r29
+/* 81372B80 | 93 FE 00 14 */	stw r31, 0x14(r30)
+/* 81372B84 | 38 80 00 0E */	li r4, 0xe
+/* 81372B88 | 38 A0 00 08 */	li r5, 0x8
+/* 81372B8C | 48 00 3F 35 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81372B90 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81372B94 | 7C 7D 02 14 */	add r3, r29, r0
+/* 81372B98 | 83 C3 02 E4 */	lwz r30, 0x2e4(r3)
+/* 81372B9C | 7F C3 F3 78 */	mr r3, r30
+/* 81372BA0 | 48 00 50 91 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81372BA4 | 93 FE 00 14 */	stw r31, 0x14(r30)
+/* 81372BA8 | 48 00 00 58 */	b .L_81372C00
 .L_81372BAC:
-/* 81372BAC 00040FAC  7F A3 EB 78 */	mr r3, r29
-/* 81372BB0 00040FB0  38 80 00 0D */	li r4, 0xd
-/* 81372BB4 00040FB4  38 A0 00 08 */	li r5, 0x8
-/* 81372BB8 00040FB8  48 00 3F 09 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81372BBC 00040FBC  54 60 10 3A */	slwi r0, r3, 2
-/* 81372BC0 00040FC0  7C 7D 02 14 */	add r3, r29, r0
-/* 81372BC4 00040FC4  83 C3 02 E4 */	lwz r30, 0x2e4(r3)
-/* 81372BC8 00040FC8  7F C3 F3 78 */	mr r3, r30
-/* 81372BCC 00040FCC  48 00 50 65 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81372BD0 00040FD0  3B E0 00 01 */	li r31, 0x1
-/* 81372BD4 00040FD4  7F A3 EB 78 */	mr r3, r29
-/* 81372BD8 00040FD8  93 FE 00 14 */	stw r31, 0x14(r30)
-/* 81372BDC 00040FDC  38 80 00 0E */	li r4, 0xe
-/* 81372BE0 00040FE0  38 A0 00 06 */	li r5, 0x6
-/* 81372BE4 00040FE4  48 00 3E DD */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81372BE8 00040FE8  54 60 10 3A */	slwi r0, r3, 2
-/* 81372BEC 00040FEC  7C 7D 02 14 */	add r3, r29, r0
-/* 81372BF0 00040FF0  83 C3 02 E4 */	lwz r30, 0x2e4(r3)
-/* 81372BF4 00040FF4  7F C3 F3 78 */	mr r3, r30
-/* 81372BF8 00040FF8  48 00 50 39 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81372BFC 00040FFC  93 FE 00 14 */	stw r31, 0x14(r30)
+/* 81372BAC | 7F A3 EB 78 */	mr r3, r29
+/* 81372BB0 | 38 80 00 0D */	li r4, 0xd
+/* 81372BB4 | 38 A0 00 08 */	li r5, 0x8
+/* 81372BB8 | 48 00 3F 09 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81372BBC | 54 60 10 3A */	slwi r0, r3, 2
+/* 81372BC0 | 7C 7D 02 14 */	add r3, r29, r0
+/* 81372BC4 | 83 C3 02 E4 */	lwz r30, 0x2e4(r3)
+/* 81372BC8 | 7F C3 F3 78 */	mr r3, r30
+/* 81372BCC | 48 00 50 65 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81372BD0 | 3B E0 00 01 */	li r31, 0x1
+/* 81372BD4 | 7F A3 EB 78 */	mr r3, r29
+/* 81372BD8 | 93 FE 00 14 */	stw r31, 0x14(r30)
+/* 81372BDC | 38 80 00 0E */	li r4, 0xe
+/* 81372BE0 | 38 A0 00 06 */	li r5, 0x6
+/* 81372BE4 | 48 00 3E DD */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81372BE8 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81372BEC | 7C 7D 02 14 */	add r3, r29, r0
+/* 81372BF0 | 83 C3 02 E4 */	lwz r30, 0x2e4(r3)
+/* 81372BF4 | 7F C3 F3 78 */	mr r3, r30
+/* 81372BF8 | 48 00 50 39 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81372BFC | 93 FE 00 14 */	stw r31, 0x14(r30)
 .L_81372C00:
-/* 81372C00 00041000  39 61 00 20 */	addi r11, r1, 0x20
-/* 81372C04 00041004  48 28 69 11 */	bl _restgpr_29
-/* 81372C08 00041008  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 81372C0C 0004100C  7C 08 03 A6 */	mtlr r0
-/* 81372C10 00041010  38 21 00 20 */	addi r1, r1, 0x20
-/* 81372C14 00041014  4E 80 00 20 */	blr
+/* 81372C00 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81372C04 | 48 28 69 11 */	bl _restgpr_29
+/* 81372C08 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81372C0C | 7C 08 03 A6 */	mtlr r0
+/* 81372C10 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 81372C14 | 4E 80 00 20 */	blr
 .endfn init_vib__Q210homebutton10HomeButtonFv
 
 # .text:0x1670 | 0x81372C18 | size: 0x114
 # homebutton::HomeButton::init_sound()
 .fn init_sound__Q210homebutton10HomeButtonFv, global
-/* 81372C18 00041018  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 81372C1C 0004101C  7C 08 02 A6 */	mflr r0
-/* 81372C20 00041020  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81372C24 00041024  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 81372C28 00041028  7C 7F 1B 78 */	mr r31, r3
-/* 81372C2C 0004102C  80 83 00 04 */	lwz r4, 0x4(r3)
-/* 81372C30 00041030  81 84 00 1C */	lwz r12, 0x1c(r4)
-/* 81372C34 00041034  2C 0C 00 00 */	cmpwi r12, 0x0
-/* 81372C38 00041038  41 82 00 14 */	beq .L_81372C4C
-/* 81372C3C 0004103C  38 60 00 00 */	li r3, 0x0
-/* 81372C40 00041040  38 80 00 00 */	li r4, 0x0
-/* 81372C44 00041044  7D 89 03 A6 */	mtctr r12
-/* 81372C48 00041048  4E 80 04 21 */	bctrl
+/* 81372C18 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 81372C1C | 7C 08 02 A6 */	mflr r0
+/* 81372C20 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81372C24 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 81372C28 | 7C 7F 1B 78 */	mr r31, r3
+/* 81372C2C | 80 83 00 04 */	lwz r4, 0x4(r3)
+/* 81372C30 | 81 84 00 1C */	lwz r12, 0x1c(r4)
+/* 81372C34 | 2C 0C 00 00 */	cmpwi r12, 0x0
+/* 81372C38 | 41 82 00 14 */	beq .L_81372C4C
+/* 81372C3C | 38 60 00 00 */	li r3, 0x0
+/* 81372C40 | 38 80 00 00 */	li r4, 0x0
+/* 81372C44 | 7D 89 03 A6 */	mtctr r12
+/* 81372C48 | 4E 80 04 21 */	bctrl
 .L_81372C4C:
-/* 81372C4C 0004104C  48 1E 0B 65 */	bl fn_815537B0
-/* 81372C50 00041050  B0 7F 06 20 */	sth r3, 0x620(r31)
-/* 81372C54 00041054  48 1E 0B 65 */	bl fn_815537B8
-/* 81372C58 00041058  B0 7F 06 22 */	sth r3, 0x622(r31)
-/* 81372C5C 0004105C  48 1E 0B 65 */	bl fn_815537C0
-/* 81372C60 00041060  B0 7F 06 24 */	sth r3, 0x624(r31)
-/* 81372C64 00041064  38 7F 06 28 */	addi r3, r31, 0x628
-/* 81372C68 00041068  38 9F 06 2C */	addi r4, r31, 0x62c
-/* 81372C6C 0004106C  48 1E 6F 39 */	bl fn_81559BA4
-/* 81372C70 00041070  38 7F 07 90 */	addi r3, r31, 0x790
-/* 81372C74 00041074  38 9F 07 94 */	addi r4, r31, 0x794
-/* 81372C78 00041078  48 1E 00 E1 */	bl fn_81552D58
-/* 81372C7C 0004107C  3C 60 81 37 */	lis r3, HBMBase_813715A8@ha
-/* 81372C80 00041080  3C 80 81 37 */	lis r4, HBMBase_813715B4@ha
-/* 81372C84 00041084  38 63 15 A8 */	addi r3, r3, HBMBase_813715A8@l
-/* 81372C88 00041088  38 84 15 B4 */	addi r4, r4, HBMBase_813715B4@l
-/* 81372C8C 0004108C  48 1E 6F 0D */	bl fn_81559B98
-/* 81372C90 00041090  C0 62 82 D8 */	lfs f3, lbl_816946D8@sda21(r0)
-/* 81372C94 00041094  38 7F 06 30 */	addi r3, r31, 0x630
-/* 81372C98 00041098  C0 42 83 00 */	lfs f2, lbl_81694700@sda21(r0)
-/* 81372C9C 0004109C  C0 22 83 04 */	lfs f1, lbl_81694704@sda21(r0)
-/* 81372CA0 000410A0  C0 02 82 DC */	lfs f0, lbl_816946DC@sda21(r0)
-/* 81372CA4 000410A4  D0 7F 07 88 */	stfs f3, 0x788(r31)
-/* 81372CA8 000410A8  D0 5F 07 80 */	stfs f2, 0x780(r31)
-/* 81372CAC 000410AC  D0 3F 07 78 */	stfs f1, 0x778(r31)
-/* 81372CB0 000410B0  D0 7F 07 84 */	stfs f3, 0x784(r31)
-/* 81372CB4 000410B4  D0 7F 07 8C */	stfs f3, 0x78c(r31)
-/* 81372CB8 000410B8  D0 1F 07 7C */	stfs f0, 0x77c(r31)
-/* 81372CBC 000410BC  48 1E 2D 99 */	bl fn_81555A54
-/* 81372CC0 000410C0  3C 60 81 55 */	lis r3, fn_81555B40@ha
-/* 81372CC4 000410C4  38 9F 06 30 */	addi r4, r31, 0x630
-/* 81372CC8 000410C8  38 63 5B 40 */	addi r3, r3, fn_81555B40@l
-/* 81372CCC 000410CC  48 1D FF 61 */	bl fn_81552C2C
-/* 81372CD0 000410D0  3C 60 00 01 */	lis r3, 0x1
-/* 81372CD4 000410D4  38 03 80 00 */	addi r0, r3, -0x8000
-/* 81372CD8 000410D8  54 03 04 3E */	clrlwi r3, r0, 16
-/* 81372CDC 000410DC  48 1E 0A ED */	bl fn_815537C8
-/* 81372CE0 000410E0  38 60 00 00 */	li r3, 0x0
-/* 81372CE4 000410E4  48 1E 0A ED */	bl fn_815537D0
-/* 81372CE8 000410E8  38 60 00 00 */	li r3, 0x0
-/* 81372CEC 000410EC  48 1E 0A ED */	bl fn_815537D8
-/* 81372CF0 000410F0  80 7F 00 04 */	lwz r3, 0x4(r31)
-/* 81372CF4 000410F4  81 83 00 1C */	lwz r12, 0x1c(r3)
-/* 81372CF8 000410F8  2C 0C 00 00 */	cmpwi r12, 0x0
-/* 81372CFC 000410FC  41 82 00 14 */	beq .L_81372D10
-/* 81372D00 00041100  38 60 00 01 */	li r3, 0x1
-/* 81372D04 00041104  38 80 00 00 */	li r4, 0x0
-/* 81372D08 00041108  7D 89 03 A6 */	mtctr r12
-/* 81372D0C 0004110C  4E 80 04 21 */	bctrl
+/* 81372C4C | 48 1E 0B 65 */	bl fn_815537B0
+/* 81372C50 | B0 7F 06 20 */	sth r3, 0x620(r31)
+/* 81372C54 | 48 1E 0B 65 */	bl fn_815537B8
+/* 81372C58 | B0 7F 06 22 */	sth r3, 0x622(r31)
+/* 81372C5C | 48 1E 0B 65 */	bl fn_815537C0
+/* 81372C60 | B0 7F 06 24 */	sth r3, 0x624(r31)
+/* 81372C64 | 38 7F 06 28 */	addi r3, r31, 0x628
+/* 81372C68 | 38 9F 06 2C */	addi r4, r31, 0x62c
+/* 81372C6C | 48 1E 6F 39 */	bl fn_81559BA4
+/* 81372C70 | 38 7F 07 90 */	addi r3, r31, 0x790
+/* 81372C74 | 38 9F 07 94 */	addi r4, r31, 0x794
+/* 81372C78 | 48 1E 00 E1 */	bl fn_81552D58
+/* 81372C7C | 3C 60 81 37 */	lis r3, HBMBase_813715A8@ha
+/* 81372C80 | 3C 80 81 37 */	lis r4, HBMBase_813715B4@ha
+/* 81372C84 | 38 63 15 A8 */	addi r3, r3, HBMBase_813715A8@l
+/* 81372C88 | 38 84 15 B4 */	addi r4, r4, HBMBase_813715B4@l
+/* 81372C8C | 48 1E 6F 0D */	bl fn_81559B98
+/* 81372C90 | C0 62 82 D8 */	lfs f3, lbl_816946D8@sda21(r0)
+/* 81372C94 | 38 7F 06 30 */	addi r3, r31, 0x630
+/* 81372C98 | C0 42 83 00 */	lfs f2, lbl_81694700@sda21(r0)
+/* 81372C9C | C0 22 83 04 */	lfs f1, lbl_81694704@sda21(r0)
+/* 81372CA0 | C0 02 82 DC */	lfs f0, lbl_816946DC@sda21(r0)
+/* 81372CA4 | D0 7F 07 88 */	stfs f3, 0x788(r31)
+/* 81372CA8 | D0 5F 07 80 */	stfs f2, 0x780(r31)
+/* 81372CAC | D0 3F 07 78 */	stfs f1, 0x778(r31)
+/* 81372CB0 | D0 7F 07 84 */	stfs f3, 0x784(r31)
+/* 81372CB4 | D0 7F 07 8C */	stfs f3, 0x78c(r31)
+/* 81372CB8 | D0 1F 07 7C */	stfs f0, 0x77c(r31)
+/* 81372CBC | 48 1E 2D 99 */	bl fn_81555A54
+/* 81372CC0 | 3C 60 81 55 */	lis r3, fn_81555B40@ha
+/* 81372CC4 | 38 9F 06 30 */	addi r4, r31, 0x630
+/* 81372CC8 | 38 63 5B 40 */	addi r3, r3, fn_81555B40@l
+/* 81372CCC | 48 1D FF 61 */	bl fn_81552C2C
+/* 81372CD0 | 3C 60 00 01 */	lis r3, 0x1
+/* 81372CD4 | 38 03 80 00 */	addi r0, r3, -0x8000
+/* 81372CD8 | 54 03 04 3E */	clrlwi r3, r0, 16
+/* 81372CDC | 48 1E 0A ED */	bl fn_815537C8
+/* 81372CE0 | 38 60 00 00 */	li r3, 0x0
+/* 81372CE4 | 48 1E 0A ED */	bl fn_815537D0
+/* 81372CE8 | 38 60 00 00 */	li r3, 0x0
+/* 81372CEC | 48 1E 0A ED */	bl fn_815537D8
+/* 81372CF0 | 80 7F 00 04 */	lwz r3, 0x4(r31)
+/* 81372CF4 | 81 83 00 1C */	lwz r12, 0x1c(r3)
+/* 81372CF8 | 2C 0C 00 00 */	cmpwi r12, 0x0
+/* 81372CFC | 41 82 00 14 */	beq .L_81372D10
+/* 81372D00 | 38 60 00 01 */	li r3, 0x1
+/* 81372D04 | 38 80 00 00 */	li r4, 0x0
+/* 81372D08 | 7D 89 03 A6 */	mtctr r12
+/* 81372D0C | 4E 80 04 21 */	bctrl
 .L_81372D10:
-/* 81372D10 00041110  38 00 00 01 */	li r0, 0x1
-/* 81372D14 00041114  98 1F 00 8E */	stb r0, 0x8e(r31)
-/* 81372D18 00041118  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 81372D1C 0004111C  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 81372D20 00041120  7C 08 03 A6 */	mtlr r0
-/* 81372D24 00041124  38 21 00 10 */	addi r1, r1, 0x10
-/* 81372D28 00041128  4E 80 00 20 */	blr
+/* 81372D10 | 38 00 00 01 */	li r0, 0x1
+/* 81372D14 | 98 1F 00 8E */	stb r0, 0x8e(r31)
+/* 81372D18 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 81372D1C | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 81372D20 | 7C 08 03 A6 */	mtlr r0
+/* 81372D24 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 81372D28 | 4E 80 00 20 */	blr
 .endfn init_sound__Q210homebutton10HomeButtonFv
 
 # .text:0x1784 | 0x81372D2C | size: 0x170
 # homebutton::HomeButton::init_battery(const HBMControllerData*)
 .fn init_battery__Q210homebutton10HomeButtonFPC17HBMControllerData, global
-/* 81372D2C 0004112C  94 21 FF D0 */	stwu r1, -0x30(r1)
-/* 81372D30 00041130  7C 08 02 A6 */	mflr r0
-/* 81372D34 00041134  90 01 00 34 */	stw r0, 0x34(r1)
-/* 81372D38 00041138  39 61 00 30 */	addi r11, r1, 0x30
-/* 81372D3C 0004113C  48 28 67 75 */	bl _savegpr_23
-/* 81372D40 00041140  3B C0 00 00 */	li r30, 0x0
-/* 81372D44 00041144  7C 7C 1B 78 */	mr r28, r3
-/* 81372D48 00041148  7C 9D 23 78 */	mr r29, r4
-/* 81372D4C 0004114C  3B 60 00 00 */	li r27, 0x0
-/* 81372D50 00041150  7F D8 F3 78 */	mr r24, r30
-/* 81372D54 00041154  3B 40 00 00 */	li r26, 0x0
-/* 81372D58 00041158  3B 20 00 00 */	li r25, 0x0
-/* 81372D5C 0004115C  3B E0 00 01 */	li r31, 0x1
+/* 81372D2C | 94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 81372D30 | 7C 08 02 A6 */	mflr r0
+/* 81372D34 | 90 01 00 34 */	stw r0, 0x34(r1)
+/* 81372D38 | 39 61 00 30 */	addi r11, r1, 0x30
+/* 81372D3C | 48 28 67 75 */	bl _savegpr_23
+/* 81372D40 | 3B C0 00 00 */	li r30, 0x0
+/* 81372D44 | 7C 7C 1B 78 */	mr r28, r3
+/* 81372D48 | 7C 9D 23 78 */	mr r29, r4
+/* 81372D4C | 3B 60 00 00 */	li r27, 0x0
+/* 81372D50 | 7F D8 F3 78 */	mr r24, r30
+/* 81372D54 | 3B 40 00 00 */	li r26, 0x0
+/* 81372D58 | 3B 20 00 00 */	li r25, 0x0
+/* 81372D5C | 3B E0 00 01 */	li r31, 0x1
 .L_81372D60:
-/* 81372D60 00041160  7C 1D D0 2E */	lwzx r0, r29, r26
-/* 81372D64 00041164  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81372D68 00041168  41 82 00 88 */	beq .L_81372DF0
-/* 81372D6C 0004116C  80 7C 00 04 */	lwz r3, 0x4(r28)
-/* 81372D70 00041170  80 03 00 28 */	lwz r0, 0x28(r3)
-/* 81372D74 00041174  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81372D78 00041178  40 82 00 30 */	bne .L_81372DA8
-/* 81372D7C 0004117C  7C 7C CA 14 */	add r3, r28, r25
-/* 81372D80 00041180  80 8D 84 1C */	lwz r4, lbl_8169645C@sda21(r0)
-/* 81372D84 00041184  80 63 02 30 */	lwz r3, 0x230(r3)
-/* 81372D88 00041188  38 A0 00 01 */	li r5, 0x1
-/* 81372D8C 0004118C  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81372D90 00041190  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81372D94 00041194  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81372D98 00041198  7D 89 03 A6 */	mtctr r12
-/* 81372D9C 0004119C  4E 80 04 21 */	bctrl
-/* 81372DA0 000411A0  38 80 00 01 */	li r4, 0x1
-/* 81372DA4 000411A4  4B FD 16 71 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 81372D60 | 7C 1D D0 2E */	lwzx r0, r29, r26
+/* 81372D64 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81372D68 | 41 82 00 88 */	beq .L_81372DF0
+/* 81372D6C | 80 7C 00 04 */	lwz r3, 0x4(r28)
+/* 81372D70 | 80 03 00 28 */	lwz r0, 0x28(r3)
+/* 81372D74 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81372D78 | 40 82 00 30 */	bne .L_81372DA8
+/* 81372D7C | 7C 7C CA 14 */	add r3, r28, r25
+/* 81372D80 | 80 8D 84 1C */	lwz r4, lbl_8169645C@sda21(r0)
+/* 81372D84 | 80 63 02 30 */	lwz r3, 0x230(r3)
+/* 81372D88 | 38 A0 00 01 */	li r5, 0x1
+/* 81372D8C | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81372D90 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81372D94 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81372D98 | 7D 89 03 A6 */	mtctr r12
+/* 81372D9C | 4E 80 04 21 */	bctrl
+/* 81372DA0 | 38 80 00 01 */	li r4, 0x1
+/* 81372DA4 | 4B FD 16 71 */	bl SetVisible__Q34nw4r3lyt4PaneFb
 .L_81372DA8:
-/* 81372DA8 000411A8  7F 83 E3 78 */	mr r3, r28
-/* 81372DAC 000411AC  38 9E 00 1F */	addi r4, r30, 0x1f
-/* 81372DB0 000411B0  38 A0 00 11 */	li r5, 0x11
-/* 81372DB4 000411B4  48 00 3D 0D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81372DB8 000411B8  54 60 10 3A */	slwi r0, r3, 2
-/* 81372DBC 000411BC  7C 7C 02 14 */	add r3, r28, r0
-/* 81372DC0 000411C0  82 E3 02 E4 */	lwz r23, 0x2e4(r3)
-/* 81372DC4 000411C4  7E E3 BB 78 */	mr r3, r23
-/* 81372DC8 000411C8  48 00 4E 69 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81372DCC 000411CC  93 F7 00 14 */	stw r31, 0x14(r23)
-/* 81372DD0 000411D0  7C 9C F2 14 */	add r4, r28, r30
-/* 81372DD4 000411D4  7C 7C DA 14 */	add r3, r28, r27
-/* 81372DD8 000411D8  7C BC CA 14 */	add r5, r28, r25
-/* 81372DDC 000411DC  9B E4 00 7C */	stb r31, 0x7c(r4)
-/* 81372DE0 000411E0  38 83 01 A4 */	addi r4, r3, 0x1a4
-/* 81372DE4 000411E4  80 65 02 A0 */	lwz r3, 0x2a0(r5)
-/* 81372DE8 000411E8  48 00 4D 49 */	bl getInfoAsync__Q210homebutton10ControllerFP8WPADInfo
-/* 81372DEC 000411EC  48 00 00 70 */	b .L_81372E5C
+/* 81372DA8 | 7F 83 E3 78 */	mr r3, r28
+/* 81372DAC | 38 9E 00 1F */	addi r4, r30, 0x1f
+/* 81372DB0 | 38 A0 00 11 */	li r5, 0x11
+/* 81372DB4 | 48 00 3D 0D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81372DB8 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81372DBC | 7C 7C 02 14 */	add r3, r28, r0
+/* 81372DC0 | 82 E3 02 E4 */	lwz r23, 0x2e4(r3)
+/* 81372DC4 | 7E E3 BB 78 */	mr r3, r23
+/* 81372DC8 | 48 00 4E 69 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81372DCC | 93 F7 00 14 */	stw r31, 0x14(r23)
+/* 81372DD0 | 7C 9C F2 14 */	add r4, r28, r30
+/* 81372DD4 | 7C 7C DA 14 */	add r3, r28, r27
+/* 81372DD8 | 7C BC CA 14 */	add r5, r28, r25
+/* 81372DDC | 9B E4 00 7C */	stb r31, 0x7c(r4)
+/* 81372DE0 | 38 83 01 A4 */	addi r4, r3, 0x1a4
+/* 81372DE4 | 80 65 02 A0 */	lwz r3, 0x2a0(r5)
+/* 81372DE8 | 48 00 4D 49 */	bl getInfoAsync__Q210homebutton10ControllerFP8WPADInfo
+/* 81372DEC | 48 00 00 70 */	b .L_81372E5C
 .L_81372DF0:
-/* 81372DF0 000411F0  80 7C 00 04 */	lwz r3, 0x4(r28)
-/* 81372DF4 000411F4  80 03 00 28 */	lwz r0, 0x28(r3)
-/* 81372DF8 000411F8  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81372DFC 000411FC  40 82 00 30 */	bne .L_81372E2C
-/* 81372E00 00041200  7C 7C CA 14 */	add r3, r28, r25
-/* 81372E04 00041204  80 8D 84 1C */	lwz r4, lbl_8169645C@sda21(r0)
-/* 81372E08 00041208  80 63 02 30 */	lwz r3, 0x230(r3)
-/* 81372E0C 0004120C  38 A0 00 01 */	li r5, 0x1
-/* 81372E10 00041210  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81372E14 00041214  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81372E18 00041218  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81372E1C 0004121C  7D 89 03 A6 */	mtctr r12
-/* 81372E20 00041220  4E 80 04 21 */	bctrl
-/* 81372E24 00041224  38 80 00 00 */	li r4, 0x0
-/* 81372E28 00041228  4B FD 15 ED */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 81372DF0 | 80 7C 00 04 */	lwz r3, 0x4(r28)
+/* 81372DF4 | 80 03 00 28 */	lwz r0, 0x28(r3)
+/* 81372DF8 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81372DFC | 40 82 00 30 */	bne .L_81372E2C
+/* 81372E00 | 7C 7C CA 14 */	add r3, r28, r25
+/* 81372E04 | 80 8D 84 1C */	lwz r4, lbl_8169645C@sda21(r0)
+/* 81372E08 | 80 63 02 30 */	lwz r3, 0x230(r3)
+/* 81372E0C | 38 A0 00 01 */	li r5, 0x1
+/* 81372E10 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81372E14 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81372E18 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81372E1C | 7D 89 03 A6 */	mtctr r12
+/* 81372E20 | 4E 80 04 21 */	bctrl
+/* 81372E24 | 38 80 00 00 */	li r4, 0x0
+/* 81372E28 | 4B FD 15 ED */	bl SetVisible__Q34nw4r3lyt4PaneFb
 .L_81372E2C:
-/* 81372E2C 0004122C  7F 83 E3 78 */	mr r3, r28
-/* 81372E30 00041230  38 9E 00 1F */	addi r4, r30, 0x1f
-/* 81372E34 00041234  38 A0 00 10 */	li r5, 0x10
-/* 81372E38 00041238  48 00 3C 89 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81372E3C 0004123C  54 60 10 3A */	slwi r0, r3, 2
-/* 81372E40 00041240  7C 7C 02 14 */	add r3, r28, r0
-/* 81372E44 00041244  82 E3 02 E4 */	lwz r23, 0x2e4(r3)
-/* 81372E48 00041248  7E E3 BB 78 */	mr r3, r23
-/* 81372E4C 0004124C  48 00 4D E5 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81372E50 00041250  93 F7 00 14 */	stw r31, 0x14(r23)
-/* 81372E54 00041254  7C 7C F2 14 */	add r3, r28, r30
-/* 81372E58 00041258  9B 03 00 7C */	stb r24, 0x7c(r3)
+/* 81372E2C | 7F 83 E3 78 */	mr r3, r28
+/* 81372E30 | 38 9E 00 1F */	addi r4, r30, 0x1f
+/* 81372E34 | 38 A0 00 10 */	li r5, 0x10
+/* 81372E38 | 48 00 3C 89 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81372E3C | 54 60 10 3A */	slwi r0, r3, 2
+/* 81372E40 | 7C 7C 02 14 */	add r3, r28, r0
+/* 81372E44 | 82 E3 02 E4 */	lwz r23, 0x2e4(r3)
+/* 81372E48 | 7E E3 BB 78 */	mr r3, r23
+/* 81372E4C | 48 00 4D E5 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81372E50 | 93 F7 00 14 */	stw r31, 0x14(r23)
+/* 81372E54 | 7C 7C F2 14 */	add r3, r28, r30
+/* 81372E58 | 9B 03 00 7C */	stb r24, 0x7c(r3)
 .L_81372E5C:
-/* 81372E5C 0004125C  3B DE 00 01 */	addi r30, r30, 0x1
-/* 81372E60 00041260  3B 5A 00 10 */	addi r26, r26, 0x10
-/* 81372E64 00041264  2C 1E 00 04 */	cmpwi r30, 0x4
-/* 81372E68 00041268  3B 39 00 04 */	addi r25, r25, 0x4
-/* 81372E6C 0004126C  3B 7B 00 18 */	addi r27, r27, 0x18
-/* 81372E70 00041270  41 80 FE F0 */	blt .L_81372D60
-/* 81372E74 00041274  7F 83 E3 78 */	mr r3, r28
-/* 81372E78 00041278  48 00 38 D9 */	bl reset_battery__Q210homebutton10HomeButtonFv
-/* 81372E7C 0004127C  38 00 00 00 */	li r0, 0x0
-/* 81372E80 00041280  39 61 00 30 */	addi r11, r1, 0x30
-/* 81372E84 00041284  90 1C 00 78 */	stw r0, 0x78(r28)
-/* 81372E88 00041288  48 28 66 75 */	bl _restgpr_23
-/* 81372E8C 0004128C  80 01 00 34 */	lwz r0, 0x34(r1)
-/* 81372E90 00041290  7C 08 03 A6 */	mtlr r0
-/* 81372E94 00041294  38 21 00 30 */	addi r1, r1, 0x30
-/* 81372E98 00041298  4E 80 00 20 */	blr
+/* 81372E5C | 3B DE 00 01 */	addi r30, r30, 0x1
+/* 81372E60 | 3B 5A 00 10 */	addi r26, r26, 0x10
+/* 81372E64 | 2C 1E 00 04 */	cmpwi r30, 0x4
+/* 81372E68 | 3B 39 00 04 */	addi r25, r25, 0x4
+/* 81372E6C | 3B 7B 00 18 */	addi r27, r27, 0x18
+/* 81372E70 | 41 80 FE F0 */	blt .L_81372D60
+/* 81372E74 | 7F 83 E3 78 */	mr r3, r28
+/* 81372E78 | 48 00 38 D9 */	bl reset_battery__Q210homebutton10HomeButtonFv
+/* 81372E7C | 38 00 00 00 */	li r0, 0x0
+/* 81372E80 | 39 61 00 30 */	addi r11, r1, 0x30
+/* 81372E84 | 90 1C 00 78 */	stw r0, 0x78(r28)
+/* 81372E88 | 48 28 66 75 */	bl _restgpr_23
+/* 81372E8C | 80 01 00 34 */	lwz r0, 0x34(r1)
+/* 81372E90 | 7C 08 03 A6 */	mtlr r0
+/* 81372E94 | 38 21 00 30 */	addi r1, r1, 0x30
+/* 81372E98 | 4E 80 00 20 */	blr
 .endfn init_battery__Q210homebutton10HomeButtonFPC17HBMControllerData
 
 # .text:0x18F4 | 0x81372E9C | size: 0xE30
 # homebutton::HomeButton::calc(const HBMControllerData*)
 .fn calc__Q210homebutton10HomeButtonFPC17HBMControllerData, global
-/* 81372E9C 0004129C  94 21 FF A0 */	stwu r1, -0x60(r1)
-/* 81372EA0 000412A0  7C 08 02 A6 */	mflr r0
-/* 81372EA4 000412A4  90 01 00 64 */	stw r0, 0x64(r1)
-/* 81372EA8 000412A8  DB E1 00 50 */	stfd f31, 0x50(r1)
-/* 81372EAC 000412AC  F3 E1 00 58 */	psq_st f31, 0x58(r1), 0, qr0
-/* 81372EB0 000412B0  DB C1 00 40 */	stfd f30, 0x40(r1)
-/* 81372EB4 000412B4  F3 C1 00 48 */	psq_st f30, 0x48(r1), 0, qr0
-/* 81372EB8 000412B8  39 61 00 40 */	addi r11, r1, 0x40
-/* 81372EBC 000412BC  48 28 66 05 */	bl _savegpr_27
-/* 81372EC0 000412C0  7C 7E 1B 78 */	mr r30, r3
-/* 81372EC4 000412C4  80 63 02 44 */	lwz r3, 0x244(r3)
-/* 81372EC8 000412C8  3C 00 43 30 */	lis r0, 0x4330
-/* 81372ECC 000412CC  7C 9F 23 78 */	mr r31, r4
-/* 81372ED0 000412D0  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81372ED4 000412D4  90 01 00 10 */	stw r0, 0x10(r1)
-/* 81372ED8 000412D8  81 8C 00 10 */	lwz r12, 0x10(r12)
-/* 81372EDC 000412DC  90 01 00 18 */	stw r0, 0x18(r1)
-/* 81372EE0 000412E0  7D 89 03 A6 */	mtctr r12
-/* 81372EE4 000412E4  4E 80 04 21 */	bctrl
-/* 81372EE8 000412E8  3B 60 00 00 */	li r27, 0x0
-/* 81372EEC 000412EC  3B A0 00 00 */	li r29, 0x0
-/* 81372EF0 000412F0  48 00 00 18 */	b .L_81372F08
+/* 81372E9C | 94 21 FF A0 */	stwu r1, -0x60(r1)
+/* 81372EA0 | 7C 08 02 A6 */	mflr r0
+/* 81372EA4 | 90 01 00 64 */	stw r0, 0x64(r1)
+/* 81372EA8 | DB E1 00 50 */	stfd f31, 0x50(r1)
+/* 81372EAC | F3 E1 00 58 */	psq_st f31, 0x58(r1), 0, qr0
+/* 81372EB0 | DB C1 00 40 */	stfd f30, 0x40(r1)
+/* 81372EB4 | F3 C1 00 48 */	psq_st f30, 0x48(r1), 0, qr0
+/* 81372EB8 | 39 61 00 40 */	addi r11, r1, 0x40
+/* 81372EBC | 48 28 66 05 */	bl _savegpr_27
+/* 81372EC0 | 7C 7E 1B 78 */	mr r30, r3
+/* 81372EC4 | 80 63 02 44 */	lwz r3, 0x244(r3)
+/* 81372EC8 | 3C 00 43 30 */	lis r0, 0x4330
+/* 81372ECC | 7C 9F 23 78 */	mr r31, r4
+/* 81372ED0 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81372ED4 | 90 01 00 10 */	stw r0, 0x10(r1)
+/* 81372ED8 | 81 8C 00 10 */	lwz r12, 0x10(r12)
+/* 81372EDC | 90 01 00 18 */	stw r0, 0x18(r1)
+/* 81372EE0 | 7D 89 03 A6 */	mtctr r12
+/* 81372EE4 | 4E 80 04 21 */	bctrl
+/* 81372EE8 | 3B 60 00 00 */	li r27, 0x0
+/* 81372EEC | 3B A0 00 00 */	li r29, 0x0
+/* 81372EF0 | 48 00 00 18 */	b .L_81372F08
 .L_81372EF4:
-/* 81372EF4 000412F4  7C 7E EA 14 */	add r3, r30, r29
-/* 81372EF8 000412F8  80 63 02 B4 */	lwz r3, 0x2b4(r3)
-/* 81372EFC 000412FC  48 00 43 41 */	bl do_calc__Q210homebutton18GroupAnmControllerFv
-/* 81372F00 00041300  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81372F04 00041304  3B BD 00 04 */	addi r29, r29, 0x4
+/* 81372EF4 | 7C 7E EA 14 */	add r3, r30, r29
+/* 81372EF8 | 80 63 02 B4 */	lwz r3, 0x2b4(r3)
+/* 81372EFC | 48 00 43 41 */	bl do_calc__Q210homebutton18GroupAnmControllerFv
+/* 81372F00 | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81372F04 | 3B BD 00 04 */	addi r29, r29, 0x4
 .L_81372F08:
-/* 81372F08 00041308  80 1E 00 0C */	lwz r0, 0xc(r30)
-/* 81372F0C 0004130C  7C 1B 00 00 */	cmpw r27, r0
-/* 81372F10 00041310  41 80 FF E4 */	blt .L_81372EF4
-/* 81372F14 00041314  3B 60 00 00 */	li r27, 0x0
-/* 81372F18 00041318  3B A0 00 00 */	li r29, 0x0
+/* 81372F08 | 80 1E 00 0C */	lwz r0, 0xc(r30)
+/* 81372F0C | 7C 1B 00 00 */	cmpw r27, r0
+/* 81372F10 | 41 80 FF E4 */	blt .L_81372EF4
+/* 81372F14 | 3B 60 00 00 */	li r27, 0x0
+/* 81372F18 | 3B A0 00 00 */	li r29, 0x0
 .L_81372F1C:
-/* 81372F1C 0004131C  7C 7E EA 14 */	add r3, r30, r29
-/* 81372F20 00041320  80 63 04 0C */	lwz r3, 0x40c(r3)
-/* 81372F24 00041324  48 00 43 19 */	bl do_calc__Q210homebutton18GroupAnmControllerFv
-/* 81372F28 00041328  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81372F2C 0004132C  3B BD 00 04 */	addi r29, r29, 0x4
-/* 81372F30 00041330  2C 1B 00 0F */	cmpwi r27, 0xf
-/* 81372F34 00041334  41 80 FF E8 */	blt .L_81372F1C
-/* 81372F38 00041338  3B 60 00 00 */	li r27, 0x0
-/* 81372F3C 0004133C  3B A0 00 00 */	li r29, 0x0
+/* 81372F1C | 7C 7E EA 14 */	add r3, r30, r29
+/* 81372F20 | 80 63 04 0C */	lwz r3, 0x40c(r3)
+/* 81372F24 | 48 00 43 19 */	bl do_calc__Q210homebutton18GroupAnmControllerFv
+/* 81372F28 | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81372F2C | 3B BD 00 04 */	addi r29, r29, 0x4
+/* 81372F30 | 2C 1B 00 0F */	cmpwi r27, 0xf
+/* 81372F34 | 41 80 FF E8 */	blt .L_81372F1C
+/* 81372F38 | 3B 60 00 00 */	li r27, 0x0
+/* 81372F3C | 3B A0 00 00 */	li r29, 0x0
 .L_81372F40:
-/* 81372F40 00041340  7C 7E EA 14 */	add r3, r30, r29
-/* 81372F44 00041344  80 63 02 E4 */	lwz r3, 0x2e4(r3)
-/* 81372F48 00041348  48 00 42 F5 */	bl do_calc__Q210homebutton18GroupAnmControllerFv
-/* 81372F4C 0004134C  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81372F50 00041350  3B BD 00 04 */	addi r29, r29, 0x4
-/* 81372F54 00041354  2C 1B 00 4A */	cmpwi r27, 0x4a
-/* 81372F58 00041358  41 80 FF E8 */	blt .L_81372F40
-/* 81372F5C 0004135C  C3 C2 82 D8 */	lfs f30, lbl_816946D8@sda21(r0)
-/* 81372F60 00041360  3B 60 00 00 */	li r27, 0x0
-/* 81372F64 00041364  C3 E2 83 08 */	lfs f31, lbl_81694708@sda21(r0)
-/* 81372F68 00041368  3B A0 00 00 */	li r29, 0x0
+/* 81372F40 | 7C 7E EA 14 */	add r3, r30, r29
+/* 81372F44 | 80 63 02 E4 */	lwz r3, 0x2e4(r3)
+/* 81372F48 | 48 00 42 F5 */	bl do_calc__Q210homebutton18GroupAnmControllerFv
+/* 81372F4C | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81372F50 | 3B BD 00 04 */	addi r29, r29, 0x4
+/* 81372F54 | 2C 1B 00 4A */	cmpwi r27, 0x4a
+/* 81372F58 | 41 80 FF E8 */	blt .L_81372F40
+/* 81372F5C | C3 C2 82 D8 */	lfs f30, lbl_816946D8@sda21(r0)
+/* 81372F60 | 3B 60 00 00 */	li r27, 0x0
+/* 81372F64 | C3 E2 83 08 */	lfs f31, lbl_81694708@sda21(r0)
+/* 81372F68 | 3B A0 00 00 */	li r29, 0x0
 .L_81372F6C:
-/* 81372F6C 0004136C  7F 9E EA 14 */	add r28, r30, r29
-/* 81372F70 00041370  C0 3C 02 08 */	lfs f1, 0x208(r28)
-/* 81372F74 00041374  FC 01 F0 40 */	fcmpo cr0, f1, f30
-/* 81372F78 00041378  40 81 00 80 */	ble .L_81372FF8
-/* 81372F7C 0004137C  7C 7E DA 14 */	add r3, r30, r27
-/* 81372F80 00041380  88 03 00 7C */	lbz r0, 0x7c(r3)
-/* 81372F84 00041384  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81372F88 00041388  41 82 00 14 */	beq .L_81372F9C
-/* 81372F8C 0004138C  80 7C 02 A0 */	lwz r3, 0x2a0(r28)
-/* 81372F90 00041390  88 03 00 1C */	lbz r0, 0x1c(r3)
-/* 81372F94 00041394  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81372F98 00041398  40 82 00 24 */	bne .L_81372FBC
+/* 81372F6C | 7F 9E EA 14 */	add r28, r30, r29
+/* 81372F70 | C0 3C 02 08 */	lfs f1, 0x208(r28)
+/* 81372F74 | FC 01 F0 40 */	fcmpo cr0, f1, f30
+/* 81372F78 | 40 81 00 80 */	ble .L_81372FF8
+/* 81372F7C | 7C 7E DA 14 */	add r3, r30, r27
+/* 81372F80 | 88 03 00 7C */	lbz r0, 0x7c(r3)
+/* 81372F84 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81372F88 | 41 82 00 14 */	beq .L_81372F9C
+/* 81372F8C | 80 7C 02 A0 */	lwz r3, 0x2a0(r28)
+/* 81372F90 | 88 03 00 1C */	lbz r0, 0x1c(r3)
+/* 81372F94 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81372F98 | 40 82 00 24 */	bne .L_81372FBC
 .L_81372F9C:
-/* 81372F9C 0004139C  D3 DC 02 08 */	stfs f30, 0x208(r28)
-/* 81372FA0 000413A0  D3 DC 02 18 */	stfs f30, 0x218(r28)
-/* 81372FA4 000413A4  80 7C 02 A0 */	lwz r3, 0x2a0(r28)
-/* 81372FA8 000413A8  88 03 00 1C */	lbz r0, 0x1c(r3)
-/* 81372FAC 000413AC  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81372FB0 000413B0  41 82 00 74 */	beq .L_81373024
-/* 81372FB4 000413B4  48 00 4B 4D */	bl stopMotor__Q210homebutton10ControllerFv
-/* 81372FB8 000413B8  48 00 00 6C */	b .L_81373024
+/* 81372F9C | D3 DC 02 08 */	stfs f30, 0x208(r28)
+/* 81372FA0 | D3 DC 02 18 */	stfs f30, 0x218(r28)
+/* 81372FA4 | 80 7C 02 A0 */	lwz r3, 0x2a0(r28)
+/* 81372FA8 | 88 03 00 1C */	lbz r0, 0x1c(r3)
+/* 81372FAC | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81372FB0 | 41 82 00 74 */	beq .L_81373024
+/* 81372FB4 | 48 00 4B 4D */	bl stopMotor__Q210homebutton10ControllerFv
+/* 81372FB8 | 48 00 00 6C */	b .L_81373024
 .L_81372FBC:
-/* 81372FBC 000413BC  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 81372FC0 000413C0  C0 03 00 34 */	lfs f0, 0x34(r3)
-/* 81372FC4 000413C4  EC 01 00 28 */	fsubs f0, f1, f0
-/* 81372FC8 000413C8  FC 00 F0 40 */	fcmpo cr0, f0, f30
-/* 81372FCC 000413CC  D0 1C 02 08 */	stfs f0, 0x208(r28)
-/* 81372FD0 000413D0  4C 40 13 82 */	cror eq, lt, eq
-/* 81372FD4 000413D4  41 82 00 10 */	beq .L_81372FE4
-/* 81372FD8 000413D8  80 1E 00 10 */	lwz r0, 0x10(r30)
-/* 81372FDC 000413DC  2C 00 00 11 */	cmpwi r0, 0x11
-/* 81372FE0 000413E0  40 82 00 44 */	bne .L_81373024
+/* 81372FBC | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 81372FC0 | C0 03 00 34 */	lfs f0, 0x34(r3)
+/* 81372FC4 | EC 01 00 28 */	fsubs f0, f1, f0
+/* 81372FC8 | FC 00 F0 40 */	fcmpo cr0, f0, f30
+/* 81372FCC | D0 1C 02 08 */	stfs f0, 0x208(r28)
+/* 81372FD0 | 4C 40 13 82 */	cror eq, lt, eq
+/* 81372FD4 | 41 82 00 10 */	beq .L_81372FE4
+/* 81372FD8 | 80 1E 00 10 */	lwz r0, 0x10(r30)
+/* 81372FDC | 2C 00 00 11 */	cmpwi r0, 0x11
+/* 81372FE0 | 40 82 00 44 */	bne .L_81373024
 .L_81372FE4:
-/* 81372FE4 000413E4  80 7C 02 A0 */	lwz r3, 0x2a0(r28)
-/* 81372FE8 000413E8  48 00 4B 19 */	bl stopMotor__Q210homebutton10ControllerFv
-/* 81372FEC 000413EC  D3 DC 02 08 */	stfs f30, 0x208(r28)
-/* 81372FF0 000413F0  D3 FC 02 18 */	stfs f31, 0x218(r28)
-/* 81372FF4 000413F4  48 00 00 30 */	b .L_81373024
+/* 81372FE4 | 80 7C 02 A0 */	lwz r3, 0x2a0(r28)
+/* 81372FE8 | 48 00 4B 19 */	bl stopMotor__Q210homebutton10ControllerFv
+/* 81372FEC | D3 DC 02 08 */	stfs f30, 0x208(r28)
+/* 81372FF0 | D3 FC 02 18 */	stfs f31, 0x218(r28)
+/* 81372FF4 | 48 00 00 30 */	b .L_81373024
 .L_81372FF8:
-/* 81372FF8 000413F8  C0 3C 02 18 */	lfs f1, 0x218(r28)
-/* 81372FFC 000413FC  FC 01 F0 40 */	fcmpo cr0, f1, f30
-/* 81373000 00041400  40 81 00 24 */	ble .L_81373024
-/* 81373004 00041404  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 81373008 00041408  C0 03 00 34 */	lfs f0, 0x34(r3)
-/* 8137300C 0004140C  EC 01 00 28 */	fsubs f0, f1, f0
-/* 81373010 00041410  FC 00 F0 40 */	fcmpo cr0, f0, f30
-/* 81373014 00041414  D0 1C 02 18 */	stfs f0, 0x218(r28)
-/* 81373018 00041418  4C 40 13 82 */	cror eq, lt, eq
-/* 8137301C 0004141C  40 82 00 08 */	bne .L_81373024
-/* 81373020 00041420  D3 DC 02 18 */	stfs f30, 0x218(r28)
+/* 81372FF8 | C0 3C 02 18 */	lfs f1, 0x218(r28)
+/* 81372FFC | FC 01 F0 40 */	fcmpo cr0, f1, f30
+/* 81373000 | 40 81 00 24 */	ble .L_81373024
+/* 81373004 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 81373008 | C0 03 00 34 */	lfs f0, 0x34(r3)
+/* 8137300C | EC 01 00 28 */	fsubs f0, f1, f0
+/* 81373010 | FC 00 F0 40 */	fcmpo cr0, f0, f30
+/* 81373014 | D0 1C 02 18 */	stfs f0, 0x218(r28)
+/* 81373018 | 4C 40 13 82 */	cror eq, lt, eq
+/* 8137301C | 40 82 00 08 */	bne .L_81373024
+/* 81373020 | D3 DC 02 18 */	stfs f30, 0x218(r28)
 .L_81373024:
-/* 81373024 00041424  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81373028 00041428  3B BD 00 04 */	addi r29, r29, 0x4
-/* 8137302C 0004142C  2C 1B 00 04 */	cmpwi r27, 0x4
-/* 81373030 00041430  41 80 FF 3C */	blt .L_81372F6C
-/* 81373034 00041434  80 1E 00 10 */	lwz r0, 0x10(r30)
-/* 81373038 00041438  28 00 00 13 */	cmplwi r0, 0x13
-/* 8137303C 0004143C  41 81 0B 0C */	bgt .L_81373B48
-/* 81373040 00041440  3C 60 81 64 */	lis r3, jumptable_81645518@ha
-/* 81373044 00041444  54 00 10 3A */	slwi r0, r0, 2
-/* 81373048 00041448  38 63 55 18 */	addi r3, r3, jumptable_81645518@l
-/* 8137304C 0004144C  7C 63 00 2E */	lwzx r3, r3, r0
-/* 81373050 00041450  7C 69 03 A6 */	mtctr r3
-/* 81373054 00041454  4E 80 04 20 */	bctr
+/* 81373024 | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81373028 | 3B BD 00 04 */	addi r29, r29, 0x4
+/* 8137302C | 2C 1B 00 04 */	cmpwi r27, 0x4
+/* 81373030 | 41 80 FF 3C */	blt .L_81372F6C
+/* 81373034 | 80 1E 00 10 */	lwz r0, 0x10(r30)
+/* 81373038 | 28 00 00 13 */	cmplwi r0, 0x13
+/* 8137303C | 41 81 0B 0C */	bgt .L_81373B48
+/* 81373040 | 3C 60 81 64 */	lis r3, jumptable_81645518@ha
+/* 81373044 | 54 00 10 3A */	slwi r0, r0, 2
+/* 81373048 | 38 63 55 18 */	addi r3, r3, jumptable_81645518@l
+/* 8137304C | 7C 63 00 2E */	lwzx r3, r3, r0
+/* 81373050 | 7C 69 03 A6 */	mtctr r3
+/* 81373054 | 4E 80 04 20 */	bctr
 .L_81373058:
-/* 81373058 00041458  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 8137305C 0004145C  80 03 00 20 */	lwz r0, 0x20(r3)
-/* 81373060 00041460  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81373064 00041464  41 82 00 6C */	beq .L_813730D0
-/* 81373068 00041468  7F C3 F3 78 */	mr r3, r30
-/* 8137306C 0004146C  38 80 00 02 */	li r4, 0x2
-/* 81373070 00041470  38 A0 00 00 */	li r5, 0x0
-/* 81373074 00041474  48 00 3A 4D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81373078 00041478  90 7E 00 14 */	stw r3, 0x14(r30)
-/* 8137307C 0004147C  38 8D 84 B0 */	li r4, lbl_816964F0@sda21
-/* 81373080 00041480  80 7E 02 2C */	lwz r3, 0x22c(r30)
-/* 81373084 00041484  38 A0 00 01 */	li r5, 0x1
-/* 81373088 00041488  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 8137308C 0004148C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81373090 00041490  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81373094 00041494  7D 89 03 A6 */	mtctr r12
-/* 81373098 00041498  4E 80 04 21 */	bctrl
-/* 8137309C 0004149C  38 80 00 00 */	li r4, 0x0
-/* 813730A0 000414A0  4B FD 13 75 */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 813730A4 000414A4  80 7E 02 2C */	lwz r3, 0x22c(r30)
-/* 813730A8 000414A8  38 8D 84 B8 */	li r4, lbl_816964F8@sda21
-/* 813730AC 000414AC  38 A0 00 01 */	li r5, 0x1
-/* 813730B0 000414B0  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 813730B4 000414B4  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813730B8 000414B8  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 813730BC 000414BC  7D 89 03 A6 */	mtctr r12
-/* 813730C0 000414C0  4E 80 04 21 */	bctrl
-/* 813730C4 000414C4  38 80 00 01 */	li r4, 0x1
-/* 813730C8 000414C8  4B FD 13 4D */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 813730CC 000414CC  48 00 00 68 */	b .L_81373134
+/* 81373058 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 8137305C | 80 03 00 20 */	lwz r0, 0x20(r3)
+/* 81373060 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81373064 | 41 82 00 6C */	beq .L_813730D0
+/* 81373068 | 7F C3 F3 78 */	mr r3, r30
+/* 8137306C | 38 80 00 02 */	li r4, 0x2
+/* 81373070 | 38 A0 00 00 */	li r5, 0x0
+/* 81373074 | 48 00 3A 4D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81373078 | 90 7E 00 14 */	stw r3, 0x14(r30)
+/* 8137307C | 38 8D 84 B0 */	li r4, lbl_816964F0@sda21
+/* 81373080 | 80 7E 02 2C */	lwz r3, 0x22c(r30)
+/* 81373084 | 38 A0 00 01 */	li r5, 0x1
+/* 81373088 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 8137308C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81373090 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81373094 | 7D 89 03 A6 */	mtctr r12
+/* 81373098 | 4E 80 04 21 */	bctrl
+/* 8137309C | 38 80 00 00 */	li r4, 0x0
+/* 813730A0 | 4B FD 13 75 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 813730A4 | 80 7E 02 2C */	lwz r3, 0x22c(r30)
+/* 813730A8 | 38 8D 84 B8 */	li r4, lbl_816964F8@sda21
+/* 813730AC | 38 A0 00 01 */	li r5, 0x1
+/* 813730B0 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 813730B4 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813730B8 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 813730BC | 7D 89 03 A6 */	mtctr r12
+/* 813730C0 | 4E 80 04 21 */	bctrl
+/* 813730C4 | 38 80 00 01 */	li r4, 0x1
+/* 813730C8 | 4B FD 13 4D */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 813730CC | 48 00 00 68 */	b .L_81373134
 .L_813730D0:
-/* 813730D0 000414D0  7F C3 F3 78 */	mr r3, r30
-/* 813730D4 000414D4  38 80 00 00 */	li r4, 0x0
-/* 813730D8 000414D8  38 A0 00 00 */	li r5, 0x0
-/* 813730DC 000414DC  48 00 39 E5 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 813730E0 000414E0  90 7E 00 14 */	stw r3, 0x14(r30)
-/* 813730E4 000414E4  38 8D 84 B0 */	li r4, lbl_816964F0@sda21
-/* 813730E8 000414E8  80 7E 02 2C */	lwz r3, 0x22c(r30)
-/* 813730EC 000414EC  38 A0 00 01 */	li r5, 0x1
-/* 813730F0 000414F0  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 813730F4 000414F4  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813730F8 000414F8  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 813730FC 000414FC  7D 89 03 A6 */	mtctr r12
-/* 81373100 00041500  4E 80 04 21 */	bctrl
-/* 81373104 00041504  38 80 00 01 */	li r4, 0x1
-/* 81373108 00041508  4B FD 13 0D */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 8137310C 0004150C  80 7E 02 2C */	lwz r3, 0x22c(r30)
-/* 81373110 00041510  38 8D 84 B8 */	li r4, lbl_816964F8@sda21
-/* 81373114 00041514  38 A0 00 01 */	li r5, 0x1
-/* 81373118 00041518  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 8137311C 0004151C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81373120 00041520  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81373124 00041524  7D 89 03 A6 */	mtctr r12
-/* 81373128 00041528  4E 80 04 21 */	bctrl
-/* 8137312C 0004152C  38 80 00 00 */	li r4, 0x0
-/* 81373130 00041530  4B FD 12 E5 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 813730D0 | 7F C3 F3 78 */	mr r3, r30
+/* 813730D4 | 38 80 00 00 */	li r4, 0x0
+/* 813730D8 | 38 A0 00 00 */	li r5, 0x0
+/* 813730DC | 48 00 39 E5 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 813730E0 | 90 7E 00 14 */	stw r3, 0x14(r30)
+/* 813730E4 | 38 8D 84 B0 */	li r4, lbl_816964F0@sda21
+/* 813730E8 | 80 7E 02 2C */	lwz r3, 0x22c(r30)
+/* 813730EC | 38 A0 00 01 */	li r5, 0x1
+/* 813730F0 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 813730F4 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813730F8 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 813730FC | 7D 89 03 A6 */	mtctr r12
+/* 81373100 | 4E 80 04 21 */	bctrl
+/* 81373104 | 38 80 00 01 */	li r4, 0x1
+/* 81373108 | 4B FD 13 0D */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 8137310C | 80 7E 02 2C */	lwz r3, 0x22c(r30)
+/* 81373110 | 38 8D 84 B8 */	li r4, lbl_816964F8@sda21
+/* 81373114 | 38 A0 00 01 */	li r5, 0x1
+/* 81373118 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 8137311C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81373120 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81373124 | 7D 89 03 A6 */	mtctr r12
+/* 81373128 | 4E 80 04 21 */	bctrl
+/* 8137312C | 38 80 00 00 */	li r4, 0x0
+/* 81373130 | 4B FD 12 E5 */	bl SetVisible__Q34nw4r3lyt4PaneFb
 .L_81373134:
-/* 81373134 00041534  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 81373138 00041538  54 00 10 3A */	slwi r0, r0, 2
-/* 8137313C 0004153C  7C 7E 02 14 */	add r3, r30, r0
-/* 81373140 00041540  83 83 02 E4 */	lwz r28, 0x2e4(r3)
-/* 81373144 00041544  7F 83 E3 78 */	mr r3, r28
-/* 81373148 00041548  48 00 4A E9 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 8137314C 0004154C  38 00 00 01 */	li r0, 0x1
-/* 81373150 00041550  2C 1F 00 00 */	cmpwi r31, 0x0
-/* 81373154 00041554  90 1C 00 14 */	stw r0, 0x14(r28)
-/* 81373158 00041558  41 82 09 F0 */	beq .L_81373B48
-/* 8137315C 0004155C  90 1E 00 10 */	stw r0, 0x10(r30)
-/* 81373160 00041560  7F C3 F3 78 */	mr r3, r30
-/* 81373164 00041564  7F E4 FB 78 */	mr r4, r31
-/* 81373168 00041568  4B FF FB C5 */	bl init_battery__Q210homebutton10HomeButtonFPC17HBMControllerData
-/* 8137316C 0004156C  48 00 09 DC */	b .L_81373B48
+/* 81373134 | 80 1E 00 14 */	lwz r0, 0x14(r30)
+/* 81373138 | 54 00 10 3A */	slwi r0, r0, 2
+/* 8137313C | 7C 7E 02 14 */	add r3, r30, r0
+/* 81373140 | 83 83 02 E4 */	lwz r28, 0x2e4(r3)
+/* 81373144 | 7F 83 E3 78 */	mr r3, r28
+/* 81373148 | 48 00 4A E9 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 8137314C | 38 00 00 01 */	li r0, 0x1
+/* 81373150 | 2C 1F 00 00 */	cmpwi r31, 0x0
+/* 81373154 | 90 1C 00 14 */	stw r0, 0x14(r28)
+/* 81373158 | 41 82 09 F0 */	beq .L_81373B48
+/* 8137315C | 90 1E 00 10 */	stw r0, 0x10(r30)
+/* 81373160 | 7F C3 F3 78 */	mr r3, r30
+/* 81373164 | 7F E4 FB 78 */	mr r4, r31
+/* 81373168 | 4B FF FB C5 */	bl init_battery__Q210homebutton10HomeButtonFPC17HBMControllerData
+/* 8137316C | 48 00 09 DC */	b .L_81373B48
 .L_81373170:
-/* 81373170 00041570  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 81373174 00041574  54 00 10 3A */	slwi r0, r0, 2
-/* 81373178 00041578  7C 7E 02 14 */	add r3, r30, r0
-/* 8137317C 0004157C  80 63 02 E4 */	lwz r3, 0x2e4(r3)
-/* 81373180 00041580  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 81373184 00041584  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81373188 00041588  41 82 09 C0 */	beq .L_81373B48
-/* 8137318C 0004158C  7F C3 F3 78 */	mr r3, r30
-/* 81373190 00041590  4B FF F8 39 */	bl init_volume__Q210homebutton10HomeButtonFv
-/* 81373194 00041594  7F C3 F3 78 */	mr r3, r30
-/* 81373198 00041598  4B FF F9 8D */	bl init_vib__Q210homebutton10HomeButtonFv
-/* 8137319C 0004159C  7F C3 F3 78 */	mr r3, r30
-/* 813731A0 000415A0  4B FF FA 79 */	bl init_sound__Q210homebutton10HomeButtonFv
-/* 813731A4 000415A4  7F C3 F3 78 */	mr r3, r30
-/* 813731A8 000415A8  38 80 00 00 */	li r4, 0x0
-/* 813731AC 000415AC  48 00 3E D5 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 813731B0 000415B0  38 00 00 02 */	li r0, 0x2
-/* 813731B4 000415B4  90 1E 00 10 */	stw r0, 0x10(r30)
-/* 813731B8 000415B8  48 00 09 90 */	b .L_81373B48
+/* 81373170 | 80 1E 00 14 */	lwz r0, 0x14(r30)
+/* 81373174 | 54 00 10 3A */	slwi r0, r0, 2
+/* 81373178 | 7C 7E 02 14 */	add r3, r30, r0
+/* 8137317C | 80 63 02 E4 */	lwz r3, 0x2e4(r3)
+/* 81373180 | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 81373184 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81373188 | 41 82 09 C0 */	beq .L_81373B48
+/* 8137318C | 7F C3 F3 78 */	mr r3, r30
+/* 81373190 | 4B FF F8 39 */	bl init_volume__Q210homebutton10HomeButtonFv
+/* 81373194 | 7F C3 F3 78 */	mr r3, r30
+/* 81373198 | 4B FF F9 8D */	bl init_vib__Q210homebutton10HomeButtonFv
+/* 8137319C | 7F C3 F3 78 */	mr r3, r30
+/* 813731A0 | 4B FF FA 79 */	bl init_sound__Q210homebutton10HomeButtonFv
+/* 813731A4 | 7F C3 F3 78 */	mr r3, r30
+/* 813731A8 | 38 80 00 00 */	li r4, 0x0
+/* 813731AC | 48 00 3E D5 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 813731B0 | 38 00 00 02 */	li r0, 0x2
+/* 813731B4 | 90 1E 00 10 */	stw r0, 0x10(r30)
+/* 813731B8 | 48 00 09 90 */	b .L_81373B48
 .L_813731BC:
-/* 813731BC 000415BC  7F C3 F3 78 */	mr r3, r30
-/* 813731C0 000415C0  48 00 0D 65 */	bl calc_letter__Q210homebutton10HomeButtonFv
-/* 813731C4 000415C4  48 00 09 84 */	b .L_81373B48
+/* 813731BC | 7F C3 F3 78 */	mr r3, r30
+/* 813731C0 | 48 00 0D 65 */	bl calc_letter__Q210homebutton10HomeButtonFv
+/* 813731C4 | 48 00 09 84 */	b .L_81373B48
 .L_813731C8:
-/* 813731C8 000415C8  80 9E 00 14 */	lwz r4, 0x14(r30)
-/* 813731CC 000415CC  54 80 10 3A */	slwi r0, r4, 2
-/* 813731D0 000415D0  7C 7E 02 14 */	add r3, r30, r0
-/* 813731D4 000415D4  80 63 02 E4 */	lwz r3, 0x2e4(r3)
-/* 813731D8 000415D8  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 813731DC 000415DC  2C 00 00 01 */	cmpwi r0, 0x1
-/* 813731E0 000415E0  41 82 00 30 */	beq .L_81373210
-/* 813731E4 000415E4  2C 04 00 05 */	cmpwi r4, 0x5
-/* 813731E8 000415E8  41 82 00 28 */	beq .L_81373210
-/* 813731EC 000415EC  7F C3 F3 78 */	mr r3, r30
-/* 813731F0 000415F0  48 00 35 61 */	bl reset_battery__Q210homebutton10HomeButtonFv
-/* 813731F4 000415F4  38 00 00 05 */	li r0, 0x5
-/* 813731F8 000415F8  90 1E 00 14 */	stw r0, 0x14(r30)
-/* 813731FC 000415FC  83 9E 04 20 */	lwz r28, 0x420(r30)
-/* 81373200 00041600  7F 83 E3 78 */	mr r3, r28
-/* 81373204 00041604  48 00 4A 2D */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81373208 00041608  38 00 00 01 */	li r0, 0x1
-/* 8137320C 0004160C  90 1C 00 14 */	stw r0, 0x14(r28)
+/* 813731C8 | 80 9E 00 14 */	lwz r4, 0x14(r30)
+/* 813731CC | 54 80 10 3A */	slwi r0, r4, 2
+/* 813731D0 | 7C 7E 02 14 */	add r3, r30, r0
+/* 813731D4 | 80 63 02 E4 */	lwz r3, 0x2e4(r3)
+/* 813731D8 | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 813731DC | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 813731E0 | 41 82 00 30 */	beq .L_81373210
+/* 813731E4 | 2C 04 00 05 */	cmpwi r4, 0x5
+/* 813731E8 | 41 82 00 28 */	beq .L_81373210
+/* 813731EC | 7F C3 F3 78 */	mr r3, r30
+/* 813731F0 | 48 00 35 61 */	bl reset_battery__Q210homebutton10HomeButtonFv
+/* 813731F4 | 38 00 00 05 */	li r0, 0x5
+/* 813731F8 | 90 1E 00 14 */	stw r0, 0x14(r30)
+/* 813731FC | 83 9E 04 20 */	lwz r28, 0x420(r30)
+/* 81373200 | 7F 83 E3 78 */	mr r3, r28
+/* 81373204 | 48 00 4A 2D */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81373208 | 38 00 00 01 */	li r0, 0x1
+/* 8137320C | 90 1C 00 14 */	stw r0, 0x14(r28)
 .L_81373210:
-/* 81373210 00041610  80 7E 02 28 */	lwz r3, 0x228(r30)
-/* 81373214 00041614  34 03 FF FF */	subic. r0, r3, 0x1
-/* 81373218 00041618  90 1E 02 28 */	stw r0, 0x228(r30)
-/* 8137321C 0004161C  41 81 09 2C */	bgt .L_81373B48
-/* 81373220 00041620  3B 60 00 00 */	li r27, 0x0
+/* 81373210 | 80 7E 02 28 */	lwz r3, 0x228(r30)
+/* 81373214 | 34 03 FF FF */	subic. r0, r3, 0x1
+/* 81373218 | 90 1E 02 28 */	stw r0, 0x228(r30)
+/* 8137321C | 41 81 09 2C */	bgt .L_81373B48
+/* 81373220 | 3B 60 00 00 */	li r27, 0x0
 .L_81373224:
-/* 81373224 00041624  7F 63 DB 78 */	mr r3, r27
-/* 81373228 00041628  48 20 77 39 */	bl fn_8157A960
-/* 8137322C 0004162C  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81373230 00041630  2C 1B 00 04 */	cmpwi r27, 0x4
-/* 81373234 00041634  41 80 FF F0 */	blt .L_81373224
-/* 81373238 00041638  38 00 00 04 */	li r0, 0x4
-/* 8137323C 0004163C  90 1E 00 10 */	stw r0, 0x10(r30)
-/* 81373240 00041640  48 00 09 08 */	b .L_81373B48
+/* 81373224 | 7F 63 DB 78 */	mr r3, r27
+/* 81373228 | 48 20 77 39 */	bl fn_8157A960
+/* 8137322C | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81373230 | 2C 1B 00 04 */	cmpwi r27, 0x4
+/* 81373234 | 41 80 FF F0 */	blt .L_81373224
+/* 81373238 | 38 00 00 04 */	li r0, 0x4
+/* 8137323C | 90 1E 00 10 */	stw r0, 0x10(r30)
+/* 81373240 | 48 00 09 08 */	b .L_81373B48
 .L_81373244:
-/* 81373244 00041644  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 81373248 00041648  54 00 10 3A */	slwi r0, r0, 2
-/* 8137324C 0004164C  7C 7E 02 14 */	add r3, r30, r0
-/* 81373250 00041650  80 63 02 E4 */	lwz r3, 0x2e4(r3)
-/* 81373254 00041654  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 81373258 00041658  2C 00 00 01 */	cmpwi r0, 0x1
-/* 8137325C 0004165C  41 82 08 EC */	beq .L_81373B48
-/* 81373260 00041660  3B 60 00 00 */	li r27, 0x0
+/* 81373244 | 80 1E 00 14 */	lwz r0, 0x14(r30)
+/* 81373248 | 54 00 10 3A */	slwi r0, r0, 2
+/* 8137324C | 7C 7E 02 14 */	add r3, r30, r0
+/* 81373250 | 80 63 02 E4 */	lwz r3, 0x2e4(r3)
+/* 81373254 | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 81373258 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 8137325C | 41 82 08 EC */	beq .L_81373B48
+/* 81373260 | 3B 60 00 00 */	li r27, 0x0
 .L_81373264:
-/* 81373264 00041664  7F 63 DB 78 */	mr r3, r27
-/* 81373268 00041668  38 81 00 08 */	addi r4, r1, 0x8
-/* 8137326C 0004166C  48 20 77 B9 */	bl fn_8157AA24
-/* 81373270 00041670  2C 03 FF FF */	cmpwi r3, -0x1
-/* 81373274 00041674  40 82 00 10 */	bne .L_81373284
-/* 81373278 00041678  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 8137327C 0004167C  2C 1B 00 04 */	cmpwi r27, 0x4
-/* 81373280 00041680  41 80 FF E4 */	blt .L_81373264
+/* 81373264 | 7F 63 DB 78 */	mr r3, r27
+/* 81373268 | 38 81 00 08 */	addi r4, r1, 0x8
+/* 8137326C | 48 20 77 B9 */	bl fn_8157AA24
+/* 81373270 | 2C 03 FF FF */	cmpwi r3, -0x1
+/* 81373274 | 40 82 00 10 */	bne .L_81373284
+/* 81373278 | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 8137327C | 2C 1B 00 04 */	cmpwi r27, 0x4
+/* 81373280 | 41 80 FF E4 */	blt .L_81373264
 .L_81373284:
-/* 81373284 00041684  2C 1B 00 04 */	cmpwi r27, 0x4
-/* 81373288 00041688  41 80 08 C0 */	blt .L_81373B48
-/* 8137328C 0004168C  3B 80 00 00 */	li r28, 0x0
-/* 81373290 00041690  38 00 00 05 */	li r0, 0x5
-/* 81373294 00041694  3C 60 81 37 */	lis r3, homebutton_8137423C@ha
-/* 81373298 00041698  90 1E 00 10 */	stw r0, 0x10(r30)
-/* 8137329C 0004169C  38 63 42 3C */	addi r3, r3, homebutton_8137423C@l
-/* 813732A0 000416A0  93 9E 00 18 */	stw r28, 0x18(r30)
-/* 813732A4 000416A4  93 9E 00 94 */	stw r28, 0x94(r30)
-/* 813732A8 000416A8  48 20 64 F9 */	bl fn_815797A0
-/* 813732AC 000416AC  90 7E 02 04 */	stw r3, 0x204(r30)
-/* 813732B0 000416B0  9B 9E 00 8A */	stb r28, 0x8a(r30)
-/* 813732B4 000416B4  48 20 64 E5 */	bl fn_81579798
-/* 813732B8 000416B8  30 03 FF FF */	subic r0, r3, 0x1
-/* 813732BC 000416BC  7C 60 19 10 */	subfe r3, r0, r3
-/* 813732C0 000416C0  54 60 06 3F */	clrlwi. r0, r3, 24
-/* 813732C4 000416C4  98 7E 00 89 */	stb r3, 0x89(r30)
-/* 813732C8 000416C8  40 82 08 80 */	bne .L_81373B48
-/* 813732CC 000416CC  7F C3 F3 78 */	mr r3, r30
-/* 813732D0 000416D0  38 80 00 00 */	li r4, 0x0
-/* 813732D4 000416D4  48 00 0F 99 */	bl setSimpleSyncAlarm__Q210homebutton10HomeButtonFi
-/* 813732D8 000416D8  48 00 08 70 */	b .L_81373B48
+/* 81373284 | 2C 1B 00 04 */	cmpwi r27, 0x4
+/* 81373288 | 41 80 08 C0 */	blt .L_81373B48
+/* 8137328C | 3B 80 00 00 */	li r28, 0x0
+/* 81373290 | 38 00 00 05 */	li r0, 0x5
+/* 81373294 | 3C 60 81 37 */	lis r3, homebutton_8137423C@ha
+/* 81373298 | 90 1E 00 10 */	stw r0, 0x10(r30)
+/* 8137329C | 38 63 42 3C */	addi r3, r3, homebutton_8137423C@l
+/* 813732A0 | 93 9E 00 18 */	stw r28, 0x18(r30)
+/* 813732A4 | 93 9E 00 94 */	stw r28, 0x94(r30)
+/* 813732A8 | 48 20 64 F9 */	bl fn_815797A0
+/* 813732AC | 90 7E 02 04 */	stw r3, 0x204(r30)
+/* 813732B0 | 9B 9E 00 8A */	stb r28, 0x8a(r30)
+/* 813732B4 | 48 20 64 E5 */	bl fn_81579798
+/* 813732B8 | 30 03 FF FF */	subic r0, r3, 0x1
+/* 813732BC | 7C 60 19 10 */	subfe r3, r0, r3
+/* 813732C0 | 54 60 06 3F */	clrlwi. r0, r3, 24
+/* 813732C4 | 98 7E 00 89 */	stb r3, 0x89(r30)
+/* 813732C8 | 40 82 08 80 */	bne .L_81373B48
+/* 813732CC | 7F C3 F3 78 */	mr r3, r30
+/* 813732D0 | 38 80 00 00 */	li r4, 0x0
+/* 813732D4 | 48 00 0F 99 */	bl setSimpleSyncAlarm__Q210homebutton10HomeButtonFi
+/* 813732D8 | 48 00 08 70 */	b .L_81373B48
 .L_813732DC:
-/* 813732DC 000416DC  88 1E 00 89 */	lbz r0, 0x89(r30)
-/* 813732E0 000416E0  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813732E4 000416E4  41 82 08 64 */	beq .L_81373B48
-/* 813732E8 000416E8  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 813732EC 000416EC  54 00 10 3A */	slwi r0, r0, 2
-/* 813732F0 000416F0  7C 7E 02 14 */	add r3, r30, r0
-/* 813732F4 000416F4  80 63 04 0C */	lwz r3, 0x40c(r3)
-/* 813732F8 000416F8  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 813732FC 000416FC  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81373300 00041700  41 82 08 48 */	beq .L_81373B48
-/* 81373304 00041704  80 1E 00 18 */	lwz r0, 0x18(r30)
-/* 81373308 00041708  2C 00 00 00 */	cmpwi r0, 0x0
-/* 8137330C 0004170C  40 82 00 34 */	bne .L_81373340
-/* 81373310 00041710  7F C3 F3 78 */	mr r3, r30
-/* 81373314 00041714  48 00 33 51 */	bl reset_control__Q210homebutton10HomeButtonFv
-/* 81373318 00041718  7F C3 F3 78 */	mr r3, r30
-/* 8137331C 0004171C  48 00 31 BD */	bl reset_btn__Q210homebutton10HomeButtonFv
-/* 81373320 00041720  80 7E 04 44 */	lwz r3, 0x444(r30)
-/* 81373324 00041724  38 00 00 02 */	li r0, 0x2
-/* 81373328 00041728  90 03 00 18 */	stw r0, 0x18(r3)
-/* 8137332C 0004172C  83 9E 04 44 */	lwz r28, 0x444(r30)
-/* 81373330 00041730  7F 83 E3 78 */	mr r3, r28
-/* 81373334 00041734  48 00 48 FD */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81373338 00041738  38 00 00 01 */	li r0, 0x1
-/* 8137333C 0004173C  90 1C 00 14 */	stw r0, 0x14(r28)
+/* 813732DC | 88 1E 00 89 */	lbz r0, 0x89(r30)
+/* 813732E0 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813732E4 | 41 82 08 64 */	beq .L_81373B48
+/* 813732E8 | 80 1E 00 14 */	lwz r0, 0x14(r30)
+/* 813732EC | 54 00 10 3A */	slwi r0, r0, 2
+/* 813732F0 | 7C 7E 02 14 */	add r3, r30, r0
+/* 813732F4 | 80 63 04 0C */	lwz r3, 0x40c(r3)
+/* 813732F8 | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 813732FC | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81373300 | 41 82 08 48 */	beq .L_81373B48
+/* 81373304 | 80 1E 00 18 */	lwz r0, 0x18(r30)
+/* 81373308 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 8137330C | 40 82 00 34 */	bne .L_81373340
+/* 81373310 | 7F C3 F3 78 */	mr r3, r30
+/* 81373314 | 48 00 33 51 */	bl reset_control__Q210homebutton10HomeButtonFv
+/* 81373318 | 7F C3 F3 78 */	mr r3, r30
+/* 8137331C | 48 00 31 BD */	bl reset_btn__Q210homebutton10HomeButtonFv
+/* 81373320 | 80 7E 04 44 */	lwz r3, 0x444(r30)
+/* 81373324 | 38 00 00 02 */	li r0, 0x2
+/* 81373328 | 90 03 00 18 */	stw r0, 0x18(r3)
+/* 8137332C | 83 9E 04 44 */	lwz r28, 0x444(r30)
+/* 81373330 | 7F 83 E3 78 */	mr r3, r28
+/* 81373334 | 48 00 48 FD */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81373338 | 38 00 00 01 */	li r0, 0x1
+/* 8137333C | 90 1C 00 14 */	stw r0, 0x14(r28)
 .L_81373340:
-/* 81373340 00041740  88 1E 00 7F */	lbz r0, 0x7f(r30)
-/* 81373344 00041744  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81373348 00041748  41 82 00 7C */	beq .L_813733C4
-/* 8137334C 0004174C  80 1E 00 10 */	lwz r0, 0x10(r30)
-/* 81373350 00041750  2C 00 00 06 */	cmpwi r0, 0x6
-/* 81373354 00041754  41 82 00 50 */	beq .L_813733A4
-/* 81373358 00041758  80 7E 02 AC */	lwz r3, 0x2ac(r30)
-/* 8137335C 0004175C  38 80 00 05 */	li r4, 0x5
-/* 81373360 00041760  48 00 45 B9 */	bl isPlayingSoundId__Q210homebutton10ControllerCFi
-/* 81373364 00041764  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81373368 00041768  41 82 00 14 */	beq .L_8137337C
-/* 8137336C 0004176C  38 60 00 06 */	li r3, 0x6
-/* 81373370 00041770  38 00 0D F2 */	li r0, 0xdf2
-/* 81373374 00041774  90 7E 00 10 */	stw r3, 0x10(r30)
-/* 81373378 00041778  90 1E 00 18 */	stw r0, 0x18(r30)
+/* 81373340 | 88 1E 00 7F */	lbz r0, 0x7f(r30)
+/* 81373344 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81373348 | 41 82 00 7C */	beq .L_813733C4
+/* 8137334C | 80 1E 00 10 */	lwz r0, 0x10(r30)
+/* 81373350 | 2C 00 00 06 */	cmpwi r0, 0x6
+/* 81373354 | 41 82 00 50 */	beq .L_813733A4
+/* 81373358 | 80 7E 02 AC */	lwz r3, 0x2ac(r30)
+/* 8137335C | 38 80 00 05 */	li r4, 0x5
+/* 81373360 | 48 00 45 B9 */	bl isPlayingSoundId__Q210homebutton10ControllerCFi
+/* 81373364 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81373368 | 41 82 00 14 */	beq .L_8137337C
+/* 8137336C | 38 60 00 06 */	li r3, 0x6
+/* 81373370 | 38 00 0D F2 */	li r0, 0xdf2
+/* 81373374 | 90 7E 00 10 */	stw r3, 0x10(r30)
+/* 81373378 | 90 1E 00 18 */	stw r0, 0x18(r30)
 .L_8137337C:
-/* 8137337C 0004177C  80 7E 00 94 */	lwz r3, 0x94(r30)
-/* 81373380 00041780  38 03 00 01 */	addi r0, r3, 0x1
-/* 81373384 00041784  2C 00 0D F2 */	cmpwi r0, 0xdf2
-/* 81373388 00041788  90 1E 00 94 */	stw r0, 0x94(r30)
-/* 8137338C 0004178C  40 81 07 BC */	ble .L_81373B48
-/* 81373390 00041790  38 60 00 06 */	li r3, 0x6
-/* 81373394 00041794  38 00 0D F2 */	li r0, 0xdf2
-/* 81373398 00041798  90 7E 00 10 */	stw r3, 0x10(r30)
-/* 8137339C 0004179C  90 1E 00 18 */	stw r0, 0x18(r30)
-/* 813733A0 000417A0  48 00 07 A8 */	b .L_81373B48
+/* 8137337C | 80 7E 00 94 */	lwz r3, 0x94(r30)
+/* 81373380 | 38 03 00 01 */	addi r0, r3, 0x1
+/* 81373384 | 2C 00 0D F2 */	cmpwi r0, 0xdf2
+/* 81373388 | 90 1E 00 94 */	stw r0, 0x94(r30)
+/* 8137338C | 40 81 07 BC */	ble .L_81373B48
+/* 81373390 | 38 60 00 06 */	li r3, 0x6
+/* 81373394 | 38 00 0D F2 */	li r0, 0xdf2
+/* 81373398 | 90 7E 00 10 */	stw r3, 0x10(r30)
+/* 8137339C | 90 1E 00 18 */	stw r0, 0x18(r30)
+/* 813733A0 | 48 00 07 A8 */	b .L_81373B48
 .L_813733A4:
-/* 813733A4 000417A4  80 7E 00 18 */	lwz r3, 0x18(r30)
-/* 813733A8 000417A8  38 03 00 01 */	addi r0, r3, 0x1
-/* 813733AC 000417AC  2C 00 0E 10 */	cmpwi r0, 0xe10
-/* 813733B0 000417B0  90 1E 00 18 */	stw r0, 0x18(r30)
-/* 813733B4 000417B4  40 81 07 94 */	ble .L_81373B48
-/* 813733B8 000417B8  38 00 00 07 */	li r0, 0x7
-/* 813733BC 000417BC  90 1E 00 10 */	stw r0, 0x10(r30)
-/* 813733C0 000417C0  48 00 07 88 */	b .L_81373B48
+/* 813733A4 | 80 7E 00 18 */	lwz r3, 0x18(r30)
+/* 813733A8 | 38 03 00 01 */	addi r0, r3, 0x1
+/* 813733AC | 2C 00 0E 10 */	cmpwi r0, 0xe10
+/* 813733B0 | 90 1E 00 18 */	stw r0, 0x18(r30)
+/* 813733B4 | 40 81 07 94 */	ble .L_81373B48
+/* 813733B8 | 38 00 00 07 */	li r0, 0x7
+/* 813733BC | 90 1E 00 10 */	stw r0, 0x10(r30)
+/* 813733C0 | 48 00 07 88 */	b .L_81373B48
 .L_813733C4:
-/* 813733C4 000417C4  80 7E 00 18 */	lwz r3, 0x18(r30)
-/* 813733C8 000417C8  38 03 00 01 */	addi r0, r3, 0x1
-/* 813733CC 000417CC  2C 00 0E 10 */	cmpwi r0, 0xe10
-/* 813733D0 000417D0  90 1E 00 18 */	stw r0, 0x18(r30)
-/* 813733D4 000417D4  40 81 07 74 */	ble .L_81373B48
-/* 813733D8 000417D8  38 00 00 07 */	li r0, 0x7
-/* 813733DC 000417DC  90 1E 00 10 */	stw r0, 0x10(r30)
-/* 813733E0 000417E0  48 20 63 BD */	bl fn_8157979C
-/* 813733E4 000417E4  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813733E8 000417E8  40 82 07 60 */	bne .L_81373B48
-/* 813733EC 000417EC  7F C3 F3 78 */	mr r3, r30
-/* 813733F0 000417F0  38 80 00 01 */	li r4, 0x1
-/* 813733F4 000417F4  48 00 0E 79 */	bl setSimpleSyncAlarm__Q210homebutton10HomeButtonFi
-/* 813733F8 000417F8  48 00 07 50 */	b .L_81373B48
+/* 813733C4 | 80 7E 00 18 */	lwz r3, 0x18(r30)
+/* 813733C8 | 38 03 00 01 */	addi r0, r3, 0x1
+/* 813733CC | 2C 00 0E 10 */	cmpwi r0, 0xe10
+/* 813733D0 | 90 1E 00 18 */	stw r0, 0x18(r30)
+/* 813733D4 | 40 81 07 74 */	ble .L_81373B48
+/* 813733D8 | 38 00 00 07 */	li r0, 0x7
+/* 813733DC | 90 1E 00 10 */	stw r0, 0x10(r30)
+/* 813733E0 | 48 20 63 BD */	bl fn_8157979C
+/* 813733E4 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813733E8 | 40 82 07 60 */	bne .L_81373B48
+/* 813733EC | 7F C3 F3 78 */	mr r3, r30
+/* 813733F0 | 38 80 00 01 */	li r4, 0x1
+/* 813733F4 | 48 00 0E 79 */	bl setSimpleSyncAlarm__Q210homebutton10HomeButtonFi
+/* 813733F8 | 48 00 07 50 */	b .L_81373B48
 .L_813733FC:
-/* 813733FC 000417FC  88 1E 00 8A */	lbz r0, 0x8a(r30)
-/* 81373400 00041800  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81373404 00041804  41 82 07 44 */	beq .L_81373B48
-/* 81373408 00041808  80 7E 02 04 */	lwz r3, 0x204(r30)
-/* 8137340C 0004180C  48 20 63 95 */	bl fn_815797A0
-/* 81373410 00041810  3B 80 00 00 */	li r28, 0x0
-/* 81373414 00041814  80 7E 02 B0 */	lwz r3, 0x2b0(r30)
-/* 81373418 00041818  93 9E 02 04 */	stw r28, 0x204(r30)
-/* 8137341C 0004181C  48 00 5D 05 */	bl ClearPcm__Q210homebutton9RemoteSpkFv
-/* 81373420 00041820  7F C3 F3 78 */	mr r3, r30
-/* 81373424 00041824  38 80 FF FF */	li r4, -0x1
-/* 81373428 00041828  48 00 33 BD */	bl reset_guiManager__Q210homebutton10HomeButtonFi
-/* 8137342C 0004182C  38 00 00 06 */	li r0, 0x6
-/* 81373430 00041830  90 1E 00 14 */	stw r0, 0x14(r30)
-/* 81373434 00041834  83 BE 04 24 */	lwz r29, 0x424(r30)
-/* 81373438 00041838  7F A3 EB 78 */	mr r3, r29
-/* 8137343C 0004183C  48 00 47 F5 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81373440 00041840  38 60 00 01 */	li r3, 0x1
-/* 81373444 00041844  38 00 00 08 */	li r0, 0x8
-/* 81373448 00041848  90 7D 00 14 */	stw r3, 0x14(r29)
-/* 8137344C 0004184C  7F C3 F3 78 */	mr r3, r30
-/* 81373450 00041850  38 80 00 15 */	li r4, 0x15
-/* 81373454 00041854  90 1E 00 10 */	stw r0, 0x10(r30)
-/* 81373458 00041858  80 BE 04 44 */	lwz r5, 0x444(r30)
-/* 8137345C 0004185C  93 85 00 18 */	stw r28, 0x18(r5)
-/* 81373460 00041860  48 00 3C 21 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81373464 00041864  48 00 06 E4 */	b .L_81373B48
+/* 813733FC | 88 1E 00 8A */	lbz r0, 0x8a(r30)
+/* 81373400 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81373404 | 41 82 07 44 */	beq .L_81373B48
+/* 81373408 | 80 7E 02 04 */	lwz r3, 0x204(r30)
+/* 8137340C | 48 20 63 95 */	bl fn_815797A0
+/* 81373410 | 3B 80 00 00 */	li r28, 0x0
+/* 81373414 | 80 7E 02 B0 */	lwz r3, 0x2b0(r30)
+/* 81373418 | 93 9E 02 04 */	stw r28, 0x204(r30)
+/* 8137341C | 48 00 5D 05 */	bl ClearPcm__Q210homebutton9RemoteSpkFv
+/* 81373420 | 7F C3 F3 78 */	mr r3, r30
+/* 81373424 | 38 80 FF FF */	li r4, -0x1
+/* 81373428 | 48 00 33 BD */	bl reset_guiManager__Q210homebutton10HomeButtonFi
+/* 8137342C | 38 00 00 06 */	li r0, 0x6
+/* 81373430 | 90 1E 00 14 */	stw r0, 0x14(r30)
+/* 81373434 | 83 BE 04 24 */	lwz r29, 0x424(r30)
+/* 81373438 | 7F A3 EB 78 */	mr r3, r29
+/* 8137343C | 48 00 47 F5 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81373440 | 38 60 00 01 */	li r3, 0x1
+/* 81373444 | 38 00 00 08 */	li r0, 0x8
+/* 81373448 | 90 7D 00 14 */	stw r3, 0x14(r29)
+/* 8137344C | 7F C3 F3 78 */	mr r3, r30
+/* 81373450 | 38 80 00 15 */	li r4, 0x15
+/* 81373454 | 90 1E 00 10 */	stw r0, 0x10(r30)
+/* 81373458 | 80 BE 04 44 */	lwz r5, 0x444(r30)
+/* 8137345C | 93 85 00 18 */	stw r28, 0x18(r5)
+/* 81373460 | 48 00 3C 21 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81373464 | 48 00 06 E4 */	b .L_81373B48
 .L_81373468:
-/* 81373468 00041868  80 9E 00 14 */	lwz r4, 0x14(r30)
-/* 8137346C 0004186C  54 80 10 3A */	slwi r0, r4, 2
-/* 81373470 00041870  7C 7E 02 14 */	add r3, r30, r0
-/* 81373474 00041874  80 63 04 0C */	lwz r3, 0x40c(r3)
-/* 81373478 00041878  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 8137347C 0004187C  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81373480 00041880  41 82 06 C8 */	beq .L_81373B48
-/* 81373484 00041884  2C 04 00 0D */	cmpwi r4, 0xd
-/* 81373488 00041888  40 82 00 40 */	bne .L_813734C8
-/* 8137348C 0004188C  7F C3 F3 78 */	mr r3, r30
-/* 81373490 00041890  48 00 32 41 */	bl reset_window__Q210homebutton10HomeButtonFv
-/* 81373494 00041894  80 7E 02 2C */	lwz r3, 0x22c(r30)
-/* 81373498 00041898  3C 80 81 64 */	lis r4, scFuncTextPaneName__Q210homebutton10HomeButton@ha
-/* 8137349C 0004189C  38 84 53 D0 */	addi r4, r4, scFuncTextPaneName__Q210homebutton10HomeButton@l
-/* 813734A0 000418A0  38 A0 00 01 */	li r5, 0x1
-/* 813734A4 000418A4  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 813734A8 000418A8  80 84 00 08 */	lwz r4, 0x8(r4)
-/* 813734AC 000418AC  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813734B0 000418B0  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 813734B4 000418B4  7D 89 03 A6 */	mtctr r12
-/* 813734B8 000418B8  4E 80 04 21 */	bctrl
-/* 813734BC 000418BC  38 80 00 00 */	li r4, 0x0
-/* 813734C0 000418C0  4B FD 0F 55 */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 813734C4 000418C4  48 00 00 64 */	b .L_81373528
+/* 81373468 | 80 9E 00 14 */	lwz r4, 0x14(r30)
+/* 8137346C | 54 80 10 3A */	slwi r0, r4, 2
+/* 81373470 | 7C 7E 02 14 */	add r3, r30, r0
+/* 81373474 | 80 63 04 0C */	lwz r3, 0x40c(r3)
+/* 81373478 | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 8137347C | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81373480 | 41 82 06 C8 */	beq .L_81373B48
+/* 81373484 | 2C 04 00 0D */	cmpwi r4, 0xd
+/* 81373488 | 40 82 00 40 */	bne .L_813734C8
+/* 8137348C | 7F C3 F3 78 */	mr r3, r30
+/* 81373490 | 48 00 32 41 */	bl reset_window__Q210homebutton10HomeButtonFv
+/* 81373494 | 80 7E 02 2C */	lwz r3, 0x22c(r30)
+/* 81373498 | 3C 80 81 64 */	lis r4, scFuncTextPaneName__Q210homebutton10HomeButton@ha
+/* 8137349C | 38 84 53 D0 */	addi r4, r4, scFuncTextPaneName__Q210homebutton10HomeButton@l
+/* 813734A0 | 38 A0 00 01 */	li r5, 0x1
+/* 813734A4 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 813734A8 | 80 84 00 08 */	lwz r4, 0x8(r4)
+/* 813734AC | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813734B0 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 813734B4 | 7D 89 03 A6 */	mtctr r12
+/* 813734B8 | 4E 80 04 21 */	bctrl
+/* 813734BC | 38 80 00 00 */	li r4, 0x0
+/* 813734C0 | 4B FD 0F 55 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 813734C4 | 48 00 00 64 */	b .L_81373528
 .L_813734C8:
-/* 813734C8 000418C8  2C 04 00 06 */	cmpwi r4, 0x6
-/* 813734CC 000418CC  40 82 00 5C */	bne .L_81373528
-/* 813734D0 000418D0  80 7E 02 2C */	lwz r3, 0x22c(r30)
-/* 813734D4 000418D4  3F 80 81 64 */	lis r28, scFuncTextPaneName__Q210homebutton10HomeButton@ha
-/* 813734D8 000418D8  80 9C 53 D0 */	lwz r4, scFuncTextPaneName__Q210homebutton10HomeButton@l(r28)
-/* 813734DC 000418DC  38 A0 00 01 */	li r5, 0x1
-/* 813734E0 000418E0  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 813734E4 000418E4  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813734E8 000418E8  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 813734EC 000418EC  7D 89 03 A6 */	mtctr r12
-/* 813734F0 000418F0  4E 80 04 21 */	bctrl
-/* 813734F4 000418F4  38 80 00 00 */	li r4, 0x0
-/* 813734F8 000418F8  4B FD 0F 1D */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 813734FC 000418FC  80 DE 02 2C */	lwz r6, 0x22c(r30)
-/* 81373500 00041900  38 7C 53 D0 */	addi r3, r28, scFuncTextPaneName__Q210homebutton10HomeButton@l
-/* 81373504 00041904  80 83 00 04 */	lwz r4, 0x4(r3)
-/* 81373508 00041908  38 A0 00 01 */	li r5, 0x1
-/* 8137350C 0004190C  80 66 00 10 */	lwz r3, 0x10(r6)
-/* 81373510 00041910  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81373514 00041914  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81373518 00041918  7D 89 03 A6 */	mtctr r12
-/* 8137351C 0004191C  4E 80 04 21 */	bctrl
-/* 81373520 00041920  38 80 00 00 */	li r4, 0x0
-/* 81373524 00041924  4B FD 0E F1 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 813734C8 | 2C 04 00 06 */	cmpwi r4, 0x6
+/* 813734CC | 40 82 00 5C */	bne .L_81373528
+/* 813734D0 | 80 7E 02 2C */	lwz r3, 0x22c(r30)
+/* 813734D4 | 3F 80 81 64 */	lis r28, scFuncTextPaneName__Q210homebutton10HomeButton@ha
+/* 813734D8 | 80 9C 53 D0 */	lwz r4, scFuncTextPaneName__Q210homebutton10HomeButton@l(r28)
+/* 813734DC | 38 A0 00 01 */	li r5, 0x1
+/* 813734E0 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 813734E4 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813734E8 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 813734EC | 7D 89 03 A6 */	mtctr r12
+/* 813734F0 | 4E 80 04 21 */	bctrl
+/* 813734F4 | 38 80 00 00 */	li r4, 0x0
+/* 813734F8 | 4B FD 0F 1D */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 813734FC | 80 DE 02 2C */	lwz r6, 0x22c(r30)
+/* 81373500 | 38 7C 53 D0 */	addi r3, r28, scFuncTextPaneName__Q210homebutton10HomeButton@l
+/* 81373504 | 80 83 00 04 */	lwz r4, 0x4(r3)
+/* 81373508 | 38 A0 00 01 */	li r5, 0x1
+/* 8137350C | 80 66 00 10 */	lwz r3, 0x10(r6)
+/* 81373510 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81373514 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81373518 | 7D 89 03 A6 */	mtctr r12
+/* 8137351C | 4E 80 04 21 */	bctrl
+/* 81373520 | 38 80 00 00 */	li r4, 0x0
+/* 81373524 | 4B FD 0E F1 */	bl SetVisible__Q34nw4r3lyt4PaneFb
 .L_81373528:
-/* 81373528 00041928  38 00 00 02 */	li r0, 0x2
-/* 8137352C 0004192C  90 1E 00 10 */	stw r0, 0x10(r30)
-/* 81373530 00041930  48 00 06 18 */	b .L_81373B48
+/* 81373528 | 38 00 00 02 */	li r0, 0x2
+/* 8137352C | 90 1E 00 10 */	stw r0, 0x10(r30)
+/* 81373530 | 48 00 06 18 */	b .L_81373B48
 .L_81373534:
-/* 81373534 00041934  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 81373538 00041938  54 00 10 3A */	slwi r0, r0, 2
-/* 8137353C 0004193C  7C 7E 02 14 */	add r3, r30, r0
-/* 81373540 00041940  80 63 02 E4 */	lwz r3, 0x2e4(r3)
-/* 81373544 00041944  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 81373548 00041948  2C 00 00 01 */	cmpwi r0, 0x1
-/* 8137354C 0004194C  41 82 05 FC */	beq .L_81373B48
-/* 81373550 00041950  88 1E 00 84 */	lbz r0, 0x84(r30)
-/* 81373554 00041954  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81373558 00041958  41 82 00 28 */	beq .L_81373580
-/* 8137355C 0004195C  3B 60 00 00 */	li r27, 0x0
-/* 81373560 00041960  3B A0 00 00 */	li r29, 0x0
+/* 81373534 | 80 1E 00 14 */	lwz r0, 0x14(r30)
+/* 81373538 | 54 00 10 3A */	slwi r0, r0, 2
+/* 8137353C | 7C 7E 02 14 */	add r3, r30, r0
+/* 81373540 | 80 63 02 E4 */	lwz r3, 0x2e4(r3)
+/* 81373544 | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 81373548 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 8137354C | 41 82 05 FC */	beq .L_81373B48
+/* 81373550 | 88 1E 00 84 */	lbz r0, 0x84(r30)
+/* 81373554 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81373558 | 41 82 00 28 */	beq .L_81373580
+/* 8137355C | 3B 60 00 00 */	li r27, 0x0
+/* 81373560 | 3B A0 00 00 */	li r29, 0x0
 .L_81373564:
-/* 81373564 00041964  7C 7E EA 14 */	add r3, r30, r29
-/* 81373568 00041968  80 63 02 A0 */	lwz r3, 0x2a0(r3)
-/* 8137356C 0004196C  48 00 45 95 */	bl stopMotor__Q210homebutton10ControllerFv
-/* 81373570 00041970  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81373574 00041974  3B BD 00 04 */	addi r29, r29, 0x4
-/* 81373578 00041978  2C 1B 00 04 */	cmpwi r27, 0x4
-/* 8137357C 0004197C  41 80 FF E8 */	blt .L_81373564
+/* 81373564 | 7C 7E EA 14 */	add r3, r30, r29
+/* 81373568 | 80 63 02 A0 */	lwz r3, 0x2a0(r3)
+/* 8137356C | 48 00 45 95 */	bl stopMotor__Q210homebutton10ControllerFv
+/* 81373570 | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81373574 | 3B BD 00 04 */	addi r29, r29, 0x4
+/* 81373578 | 2C 1B 00 04 */	cmpwi r27, 0x4
+/* 8137357C | 41 80 FF E8 */	blt .L_81373564
 .L_81373580:
-/* 81373580 00041980  38 00 00 02 */	li r0, 0x2
-/* 81373584 00041984  90 1E 00 10 */	stw r0, 0x10(r30)
-/* 81373588 00041988  48 00 05 C0 */	b .L_81373B48
+/* 81373580 | 38 00 00 02 */	li r0, 0x2
+/* 81373584 | 90 1E 00 10 */	stw r0, 0x10(r30)
+/* 81373588 | 48 00 05 C0 */	b .L_81373B48
 .L_8137358C:
-/* 8137358C 0004198C  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 81373590 00041990  54 00 10 3A */	slwi r0, r0, 2
-/* 81373594 00041994  7C 7E 02 14 */	add r3, r30, r0
-/* 81373598 00041998  80 63 04 0C */	lwz r3, 0x40c(r3)
-/* 8137359C 0004199C  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 813735A0 000419A0  2C 00 00 01 */	cmpwi r0, 0x1
-/* 813735A4 000419A4  41 82 05 A4 */	beq .L_81373B48
-/* 813735A8 000419A8  80 7E 00 00 */	lwz r3, 0x0(r30)
-/* 813735AC 000419AC  38 00 00 00 */	li r0, 0x0
-/* 813735B0 000419B0  90 1E 00 68 */	stw r0, 0x68(r30)
-/* 813735B4 000419B4  2C 03 00 01 */	cmpwi r3, 0x1
-/* 813735B8 000419B8  90 1E 00 6C */	stw r0, 0x6c(r30)
-/* 813735BC 000419BC  90 1E 00 70 */	stw r0, 0x70(r30)
-/* 813735C0 000419C0  90 1E 00 74 */	stw r0, 0x74(r30)
-/* 813735C4 000419C4  41 82 00 58 */	beq .L_8137361C
-/* 813735C8 000419C8  3F 80 81 64 */	lis r28, scFuncTouchPaneName__Q210homebutton10HomeButton@ha
-/* 813735CC 000419CC  3B 60 00 02 */	li r27, 0x2
-/* 813735D0 000419D0  3B 9C 53 8C */	addi r28, r28, scFuncTouchPaneName__Q210homebutton10HomeButton@l
-/* 813735D4 000419D4  3B A0 00 08 */	li r29, 0x8
+/* 8137358C | 80 1E 00 14 */	lwz r0, 0x14(r30)
+/* 81373590 | 54 00 10 3A */	slwi r0, r0, 2
+/* 81373594 | 7C 7E 02 14 */	add r3, r30, r0
+/* 81373598 | 80 63 04 0C */	lwz r3, 0x40c(r3)
+/* 8137359C | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 813735A0 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 813735A4 | 41 82 05 A4 */	beq .L_81373B48
+/* 813735A8 | 80 7E 00 00 */	lwz r3, 0x0(r30)
+/* 813735AC | 38 00 00 00 */	li r0, 0x0
+/* 813735B0 | 90 1E 00 68 */	stw r0, 0x68(r30)
+/* 813735B4 | 2C 03 00 01 */	cmpwi r3, 0x1
+/* 813735B8 | 90 1E 00 6C */	stw r0, 0x6c(r30)
+/* 813735BC | 90 1E 00 70 */	stw r0, 0x70(r30)
+/* 813735C0 | 90 1E 00 74 */	stw r0, 0x74(r30)
+/* 813735C4 | 41 82 00 58 */	beq .L_8137361C
+/* 813735C8 | 3F 80 81 64 */	lis r28, scFuncTouchPaneName__Q210homebutton10HomeButton@ha
+/* 813735CC | 3B 60 00 02 */	li r27, 0x2
+/* 813735D0 | 3B 9C 53 8C */	addi r28, r28, scFuncTouchPaneName__Q210homebutton10HomeButton@l
+/* 813735D4 | 3B A0 00 08 */	li r29, 0x8
 .L_813735D8:
-/* 813735D8 000419D8  80 7E 02 2C */	lwz r3, 0x22c(r30)
-/* 813735DC 000419DC  38 A0 00 01 */	li r5, 0x1
-/* 813735E0 000419E0  7C 9C E8 2E */	lwzx r4, r28, r29
-/* 813735E4 000419E4  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 813735E8 000419E8  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813735EC 000419EC  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 813735F0 000419F0  7D 89 03 A6 */	mtctr r12
-/* 813735F4 000419F4  4E 80 04 21 */	bctrl
-/* 813735F8 000419F8  38 80 00 00 */	li r4, 0x0
-/* 813735FC 000419FC  4B FD 0E 19 */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 81373600 00041A00  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81373604 00041A04  3B BD 00 04 */	addi r29, r29, 0x4
-/* 81373608 00041A08  2C 1B 00 07 */	cmpwi r27, 0x7
-/* 8137360C 00041A0C  41 80 FF CC */	blt .L_813735D8
-/* 81373610 00041A10  38 00 00 02 */	li r0, 0x2
-/* 81373614 00041A14  90 1E 00 10 */	stw r0, 0x10(r30)
-/* 81373618 00041A18  48 00 00 3C */	b .L_81373654
+/* 813735D8 | 80 7E 02 2C */	lwz r3, 0x22c(r30)
+/* 813735DC | 38 A0 00 01 */	li r5, 0x1
+/* 813735E0 | 7C 9C E8 2E */	lwzx r4, r28, r29
+/* 813735E4 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 813735E8 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813735EC | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 813735F0 | 7D 89 03 A6 */	mtctr r12
+/* 813735F4 | 4E 80 04 21 */	bctrl
+/* 813735F8 | 38 80 00 00 */	li r4, 0x0
+/* 813735FC | 4B FD 0E 19 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 81373600 | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81373604 | 3B BD 00 04 */	addi r29, r29, 0x4
+/* 81373608 | 2C 1B 00 07 */	cmpwi r27, 0x7
+/* 8137360C | 41 80 FF CC */	blt .L_813735D8
+/* 81373610 | 38 00 00 02 */	li r0, 0x2
+/* 81373614 | 90 1E 00 10 */	stw r0, 0x10(r30)
+/* 81373618 | 48 00 00 3C */	b .L_81373654
 .L_8137361C:
-/* 8137361C 00041A1C  40 82 00 38 */	bne .L_81373654
-/* 81373620 00041A20  38 00 00 0A */	li r0, 0xa
-/* 81373624 00041A24  90 1E 00 14 */	stw r0, 0x14(r30)
-/* 81373628 00041A28  83 9E 04 34 */	lwz r28, 0x434(r30)
-/* 8137362C 00041A2C  7F 83 E3 78 */	mr r3, r28
-/* 81373630 00041A30  48 00 46 01 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81373634 00041A34  38 00 00 01 */	li r0, 0x1
-/* 81373638 00041A38  7F C3 F3 78 */	mr r3, r30
-/* 8137363C 00041A3C  90 1C 00 14 */	stw r0, 0x14(r28)
-/* 81373640 00041A40  38 80 00 07 */	li r4, 0x7
-/* 81373644 00041A44  90 1E 00 14 */	stw r0, 0x14(r30)
-/* 81373648 00041A48  48 00 3A 39 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 8137364C 00041A4C  38 00 00 08 */	li r0, 0x8
-/* 81373650 00041A50  90 1E 00 10 */	stw r0, 0x10(r30)
+/* 8137361C | 40 82 00 38 */	bne .L_81373654
+/* 81373620 | 38 00 00 0A */	li r0, 0xa
+/* 81373624 | 90 1E 00 14 */	stw r0, 0x14(r30)
+/* 81373628 | 83 9E 04 34 */	lwz r28, 0x434(r30)
+/* 8137362C | 7F 83 E3 78 */	mr r3, r28
+/* 81373630 | 48 00 46 01 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81373634 | 38 00 00 01 */	li r0, 0x1
+/* 81373638 | 7F C3 F3 78 */	mr r3, r30
+/* 8137363C | 90 1C 00 14 */	stw r0, 0x14(r28)
+/* 81373640 | 38 80 00 07 */	li r4, 0x7
+/* 81373644 | 90 1E 00 14 */	stw r0, 0x14(r30)
+/* 81373648 | 48 00 3A 39 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 8137364C | 38 00 00 08 */	li r0, 0x8
+/* 81373650 | 90 1E 00 10 */	stw r0, 0x10(r30)
 .L_81373654:
-/* 81373654 00041A54  7F C3 F3 78 */	mr r3, r30
-/* 81373658 00041A58  48 00 19 DD */	bl updateTrigPane__Q210homebutton10HomeButtonFv
-/* 8137365C 00041A5C  48 00 04 EC */	b .L_81373B48
+/* 81373654 | 7F C3 F3 78 */	mr r3, r30
+/* 81373658 | 48 00 19 DD */	bl updateTrigPane__Q210homebutton10HomeButtonFv
+/* 8137365C | 48 00 04 EC */	b .L_81373B48
 .L_81373660:
-/* 81373660 00041A60  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 81373664 00041A64  54 00 10 3A */	slwi r0, r0, 2
-/* 81373668 00041A68  7C 7E 02 14 */	add r3, r30, r0
-/* 8137366C 00041A6C  80 63 02 B4 */	lwz r3, 0x2b4(r3)
-/* 81373670 00041A70  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 81373674 00041A74  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81373678 00041A78  41 82 04 D0 */	beq .L_81373B48
-/* 8137367C 00041A7C  38 00 00 07 */	li r0, 0x7
-/* 81373680 00041A80  90 1E 00 14 */	stw r0, 0x14(r30)
-/* 81373684 00041A84  83 9E 04 28 */	lwz r28, 0x428(r30)
-/* 81373688 00041A88  7F 83 E3 78 */	mr r3, r28
-/* 8137368C 00041A8C  48 00 45 A5 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81373690 00041A90  38 60 00 01 */	li r3, 0x1
-/* 81373694 00041A94  38 00 00 0C */	li r0, 0xc
-/* 81373698 00041A98  90 7C 00 14 */	stw r3, 0x14(r28)
-/* 8137369C 00041A9C  90 1E 00 10 */	stw r0, 0x10(r30)
-/* 813736A0 00041AA0  48 00 04 A8 */	b .L_81373B48
+/* 81373660 | 80 1E 00 14 */	lwz r0, 0x14(r30)
+/* 81373664 | 54 00 10 3A */	slwi r0, r0, 2
+/* 81373668 | 7C 7E 02 14 */	add r3, r30, r0
+/* 8137366C | 80 63 02 B4 */	lwz r3, 0x2b4(r3)
+/* 81373670 | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 81373674 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81373678 | 41 82 04 D0 */	beq .L_81373B48
+/* 8137367C | 38 00 00 07 */	li r0, 0x7
+/* 81373680 | 90 1E 00 14 */	stw r0, 0x14(r30)
+/* 81373684 | 83 9E 04 28 */	lwz r28, 0x428(r30)
+/* 81373688 | 7F 83 E3 78 */	mr r3, r28
+/* 8137368C | 48 00 45 A5 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81373690 | 38 60 00 01 */	li r3, 0x1
+/* 81373694 | 38 00 00 0C */	li r0, 0xc
+/* 81373698 | 90 7C 00 14 */	stw r3, 0x14(r28)
+/* 8137369C | 90 1E 00 10 */	stw r0, 0x10(r30)
+/* 813736A0 | 48 00 04 A8 */	b .L_81373B48
 .L_813736A4:
-/* 813736A4 00041AA4  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 813736A8 00041AA8  54 00 10 3A */	slwi r0, r0, 2
-/* 813736AC 00041AAC  7C 7E 02 14 */	add r3, r30, r0
-/* 813736B0 00041AB0  80 63 04 0C */	lwz r3, 0x40c(r3)
-/* 813736B4 00041AB4  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 813736B8 00041AB8  2C 00 00 01 */	cmpwi r0, 0x1
-/* 813736BC 00041ABC  41 82 04 8C */	beq .L_81373B48
-/* 813736C0 00041AC0  7F C3 F3 78 */	mr r3, r30
-/* 813736C4 00041AC4  48 00 19 71 */	bl updateTrigPane__Q210homebutton10HomeButtonFv
-/* 813736C8 00041AC8  7F C3 F3 78 */	mr r3, r30
-/* 813736CC 00041ACC  48 00 2E 0D */	bl reset_btn__Q210homebutton10HomeButtonFv
-/* 813736D0 00041AD0  38 00 00 02 */	li r0, 0x2
-/* 813736D4 00041AD4  90 1E 00 10 */	stw r0, 0x10(r30)
-/* 813736D8 00041AD8  48 00 04 70 */	b .L_81373B48
+/* 813736A4 | 80 1E 00 14 */	lwz r0, 0x14(r30)
+/* 813736A8 | 54 00 10 3A */	slwi r0, r0, 2
+/* 813736AC | 7C 7E 02 14 */	add r3, r30, r0
+/* 813736B0 | 80 63 04 0C */	lwz r3, 0x40c(r3)
+/* 813736B4 | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 813736B8 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 813736BC | 41 82 04 8C */	beq .L_81373B48
+/* 813736C0 | 7F C3 F3 78 */	mr r3, r30
+/* 813736C4 | 48 00 19 71 */	bl updateTrigPane__Q210homebutton10HomeButtonFv
+/* 813736C8 | 7F C3 F3 78 */	mr r3, r30
+/* 813736CC | 48 00 2E 0D */	bl reset_btn__Q210homebutton10HomeButtonFv
+/* 813736D0 | 38 00 00 02 */	li r0, 0x2
+/* 813736D4 | 90 1E 00 10 */	stw r0, 0x10(r30)
+/* 813736D8 | 48 00 04 70 */	b .L_81373B48
 .L_813736DC:
-/* 813736DC 00041ADC  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 813736E0 00041AE0  54 00 10 3A */	slwi r0, r0, 2
-/* 813736E4 00041AE4  7C 7E 02 14 */	add r3, r30, r0
-/* 813736E8 00041AE8  80 63 02 E4 */	lwz r3, 0x2e4(r3)
-/* 813736EC 00041AEC  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 813736F0 00041AF0  2C 00 00 01 */	cmpwi r0, 0x1
-/* 813736F4 00041AF4  41 82 04 54 */	beq .L_81373B48
-/* 813736F8 00041AF8  80 BE 00 B0 */	lwz r5, 0xb0(r30)
-/* 813736FC 00041AFC  2C 05 00 00 */	cmpwi r5, 0x0
-/* 81373700 00041B00  41 80 00 64 */	blt .L_81373764
-/* 81373704 00041B04  80 1E 04 4C */	lwz r0, 0x44c(r30)
-/* 81373708 00041B08  38 80 00 01 */	li r4, 0x1
-/* 8137370C 00041B0C  38 60 00 13 */	li r3, 0x13
-/* 81373710 00041B10  C8 22 82 F8 */	lfd f1, lbl_816946F8@sda21(r0)
-/* 81373714 00041B14  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 81373718 00041B18  2C 05 00 03 */	cmpwi r5, 0x3
-/* 8137371C 00041B1C  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81373720 00041B20  C8 01 00 10 */	lfd f0, 0x10(r1)
-/* 81373724 00041B24  90 9E 04 50 */	stw r4, 0x450(r30)
-/* 81373728 00041B28  EC 00 08 28 */	fsubs f0, f0, f1
-/* 8137372C 00041B2C  90 7E 00 10 */	stw r3, 0x10(r30)
-/* 81373730 00041B30  D0 1E 07 98 */	stfs f0, 0x798(r30)
-/* 81373734 00041B34  41 82 00 5C */	beq .L_81373790
-/* 81373738 00041B38  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 8137373C 00041B3C  81 83 00 1C */	lwz r12, 0x1c(r3)
-/* 81373740 00041B40  2C 0C 00 00 */	cmpwi r12, 0x0
-/* 81373744 00041B44  41 82 00 4C */	beq .L_81373790
-/* 81373748 00041B48  FC 00 00 1E */	fctiwz f0, f0
-/* 8137374C 00041B4C  38 60 00 03 */	li r3, 0x3
-/* 81373750 00041B50  D8 01 00 20 */	stfd f0, 0x20(r1)
-/* 81373754 00041B54  80 81 00 24 */	lwz r4, 0x24(r1)
-/* 81373758 00041B58  7D 89 03 A6 */	mtctr r12
-/* 8137375C 00041B5C  4E 80 04 21 */	bctrl
-/* 81373760 00041B60  48 00 00 30 */	b .L_81373790
+/* 813736DC | 80 1E 00 14 */	lwz r0, 0x14(r30)
+/* 813736E0 | 54 00 10 3A */	slwi r0, r0, 2
+/* 813736E4 | 7C 7E 02 14 */	add r3, r30, r0
+/* 813736E8 | 80 63 02 E4 */	lwz r3, 0x2e4(r3)
+/* 813736EC | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 813736F0 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 813736F4 | 41 82 04 54 */	beq .L_81373B48
+/* 813736F8 | 80 BE 00 B0 */	lwz r5, 0xb0(r30)
+/* 813736FC | 2C 05 00 00 */	cmpwi r5, 0x0
+/* 81373700 | 41 80 00 64 */	blt .L_81373764
+/* 81373704 | 80 1E 04 4C */	lwz r0, 0x44c(r30)
+/* 81373708 | 38 80 00 01 */	li r4, 0x1
+/* 8137370C | 38 60 00 13 */	li r3, 0x13
+/* 81373710 | C8 22 82 F8 */	lfd f1, lbl_816946F8@sda21(r0)
+/* 81373714 | 6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 81373718 | 2C 05 00 03 */	cmpwi r5, 0x3
+/* 8137371C | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81373720 | C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 81373724 | 90 9E 04 50 */	stw r4, 0x450(r30)
+/* 81373728 | EC 00 08 28 */	fsubs f0, f0, f1
+/* 8137372C | 90 7E 00 10 */	stw r3, 0x10(r30)
+/* 81373730 | D0 1E 07 98 */	stfs f0, 0x798(r30)
+/* 81373734 | 41 82 00 5C */	beq .L_81373790
+/* 81373738 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 8137373C | 81 83 00 1C */	lwz r12, 0x1c(r3)
+/* 81373740 | 2C 0C 00 00 */	cmpwi r12, 0x0
+/* 81373744 | 41 82 00 4C */	beq .L_81373790
+/* 81373748 | FC 00 00 1E */	fctiwz f0, f0
+/* 8137374C | 38 60 00 03 */	li r3, 0x3
+/* 81373750 | D8 01 00 20 */	stfd f0, 0x20(r1)
+/* 81373754 | 80 81 00 24 */	lwz r4, 0x24(r1)
+/* 81373758 | 7D 89 03 A6 */	mtctr r12
+/* 8137375C | 4E 80 04 21 */	bctrl
+/* 81373760 | 48 00 00 30 */	b .L_81373790
 .L_81373764:
-/* 81373764 00041B64  7F C3 F3 78 */	mr r3, r30
-/* 81373768 00041B68  48 00 18 CD */	bl updateTrigPane__Q210homebutton10HomeButtonFv
-/* 8137376C 00041B6C  38 00 00 0D */	li r0, 0xd
-/* 81373770 00041B70  90 1E 00 14 */	stw r0, 0x14(r30)
-/* 81373774 00041B74  83 9E 04 40 */	lwz r28, 0x440(r30)
-/* 81373778 00041B78  7F 83 E3 78 */	mr r3, r28
-/* 8137377C 00041B7C  48 00 44 B5 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81373780 00041B80  38 60 00 01 */	li r3, 0x1
-/* 81373784 00041B84  38 00 00 08 */	li r0, 0x8
-/* 81373788 00041B88  90 7C 00 14 */	stw r3, 0x14(r28)
-/* 8137378C 00041B8C  90 1E 00 10 */	stw r0, 0x10(r30)
+/* 81373764 | 7F C3 F3 78 */	mr r3, r30
+/* 81373768 | 48 00 18 CD */	bl updateTrigPane__Q210homebutton10HomeButtonFv
+/* 8137376C | 38 00 00 0D */	li r0, 0xd
+/* 81373770 | 90 1E 00 14 */	stw r0, 0x14(r30)
+/* 81373774 | 83 9E 04 40 */	lwz r28, 0x440(r30)
+/* 81373778 | 7F 83 E3 78 */	mr r3, r28
+/* 8137377C | 48 00 44 B5 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81373780 | 38 60 00 01 */	li r3, 0x1
+/* 81373784 | 38 00 00 08 */	li r0, 0x8
+/* 81373788 | 90 7C 00 14 */	stw r3, 0x14(r28)
+/* 8137378C | 90 1E 00 10 */	stw r0, 0x10(r30)
 .L_81373790:
-/* 81373790 00041B90  7F C3 F3 78 */	mr r3, r30
-/* 81373794 00041B94  38 80 FF FF */	li r4, -0x1
-/* 81373798 00041B98  48 00 30 4D */	bl reset_guiManager__Q210homebutton10HomeButtonFi
-/* 8137379C 00041B9C  48 00 03 AC */	b .L_81373B48
+/* 81373790 | 7F C3 F3 78 */	mr r3, r30
+/* 81373794 | 38 80 FF FF */	li r4, -0x1
+/* 81373798 | 48 00 30 4D */	bl reset_guiManager__Q210homebutton10HomeButtonFi
+/* 8137379C | 48 00 03 AC */	b .L_81373B48
 .L_813737A0:
-/* 813737A0 00041BA0  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 813737A4 00041BA4  54 00 10 3A */	slwi r0, r0, 2
-/* 813737A8 00041BA8  7C 7E 02 14 */	add r3, r30, r0
-/* 813737AC 00041BAC  80 63 04 0C */	lwz r3, 0x40c(r3)
-/* 813737B0 00041BB0  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 813737B4 00041BB4  2C 00 00 01 */	cmpwi r0, 0x1
-/* 813737B8 00041BB8  41 82 03 90 */	beq .L_81373B48
-/* 813737BC 00041BBC  7F C3 F3 78 */	mr r3, r30
-/* 813737C0 00041BC0  48 00 05 0D */	bl calc_fadeoutAnm__Q210homebutton10HomeButtonFv
-/* 813737C4 00041BC4  48 00 03 84 */	b .L_81373B48
+/* 813737A0 | 80 1E 00 14 */	lwz r0, 0x14(r30)
+/* 813737A4 | 54 00 10 3A */	slwi r0, r0, 2
+/* 813737A8 | 7C 7E 02 14 */	add r3, r30, r0
+/* 813737AC | 80 63 04 0C */	lwz r3, 0x40c(r3)
+/* 813737B0 | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 813737B4 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 813737B8 | 41 82 03 90 */	beq .L_81373B48
+/* 813737BC | 7F C3 F3 78 */	mr r3, r30
+/* 813737C0 | 48 00 05 0D */	bl calc_fadeoutAnm__Q210homebutton10HomeButtonFv
+/* 813737C4 | 48 00 03 84 */	b .L_81373B48
 .L_813737C8:
-/* 813737C8 00041BC8  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 813737CC 00041BCC  54 00 10 3A */	slwi r0, r0, 2
-/* 813737D0 00041BD0  7C 7E 02 14 */	add r3, r30, r0
-/* 813737D4 00041BD4  80 63 02 B4 */	lwz r3, 0x2b4(r3)
-/* 813737D8 00041BD8  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 813737DC 00041BDC  2C 00 00 01 */	cmpwi r0, 0x1
-/* 813737E0 00041BE0  41 82 03 68 */	beq .L_81373B48
-/* 813737E4 00041BE4  80 7E 04 4C */	lwz r3, 0x44c(r30)
-/* 813737E8 00041BE8  38 A0 00 01 */	li r5, 0x1
-/* 813737EC 00041BEC  80 1E 00 B0 */	lwz r0, 0xb0(r30)
-/* 813737F0 00041BF0  38 80 00 13 */	li r4, 0x13
-/* 813737F4 00041BF4  6C 63 80 00 */	xoris r3, r3, 0x8000
-/* 813737F8 00041BF8  C8 22 82 F8 */	lfd f1, lbl_816946F8@sda21(r0)
-/* 813737FC 00041BFC  90 61 00 1C */	stw r3, 0x1c(r1)
-/* 81373800 00041C00  2C 00 00 03 */	cmpwi r0, 0x3
-/* 81373804 00041C04  C8 01 00 18 */	lfd f0, 0x18(r1)
-/* 81373808 00041C08  90 BE 04 50 */	stw r5, 0x450(r30)
-/* 8137380C 00041C0C  EC 00 08 28 */	fsubs f0, f0, f1
-/* 81373810 00041C10  90 9E 00 10 */	stw r4, 0x10(r30)
-/* 81373814 00041C14  D0 1E 07 98 */	stfs f0, 0x798(r30)
-/* 81373818 00041C18  41 82 03 30 */	beq .L_81373B48
-/* 8137381C 00041C1C  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 81373820 00041C20  81 83 00 1C */	lwz r12, 0x1c(r3)
-/* 81373824 00041C24  2C 0C 00 00 */	cmpwi r12, 0x0
-/* 81373828 00041C28  41 82 03 20 */	beq .L_81373B48
-/* 8137382C 00041C2C  FC 00 00 1E */	fctiwz f0, f0
-/* 81373830 00041C30  38 60 00 03 */	li r3, 0x3
-/* 81373834 00041C34  D8 01 00 20 */	stfd f0, 0x20(r1)
-/* 81373838 00041C38  80 81 00 24 */	lwz r4, 0x24(r1)
-/* 8137383C 00041C3C  7D 89 03 A6 */	mtctr r12
-/* 81373840 00041C40  4E 80 04 21 */	bctrl
-/* 81373844 00041C44  48 00 03 04 */	b .L_81373B48
+/* 813737C8 | 80 1E 00 14 */	lwz r0, 0x14(r30)
+/* 813737CC | 54 00 10 3A */	slwi r0, r0, 2
+/* 813737D0 | 7C 7E 02 14 */	add r3, r30, r0
+/* 813737D4 | 80 63 02 B4 */	lwz r3, 0x2b4(r3)
+/* 813737D8 | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 813737DC | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 813737E0 | 41 82 03 68 */	beq .L_81373B48
+/* 813737E4 | 80 7E 04 4C */	lwz r3, 0x44c(r30)
+/* 813737E8 | 38 A0 00 01 */	li r5, 0x1
+/* 813737EC | 80 1E 00 B0 */	lwz r0, 0xb0(r30)
+/* 813737F0 | 38 80 00 13 */	li r4, 0x13
+/* 813737F4 | 6C 63 80 00 */	xoris r3, r3, 0x8000
+/* 813737F8 | C8 22 82 F8 */	lfd f1, lbl_816946F8@sda21(r0)
+/* 813737FC | 90 61 00 1C */	stw r3, 0x1c(r1)
+/* 81373800 | 2C 00 00 03 */	cmpwi r0, 0x3
+/* 81373804 | C8 01 00 18 */	lfd f0, 0x18(r1)
+/* 81373808 | 90 BE 04 50 */	stw r5, 0x450(r30)
+/* 8137380C | EC 00 08 28 */	fsubs f0, f0, f1
+/* 81373810 | 90 9E 00 10 */	stw r4, 0x10(r30)
+/* 81373814 | D0 1E 07 98 */	stfs f0, 0x798(r30)
+/* 81373818 | 41 82 03 30 */	beq .L_81373B48
+/* 8137381C | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 81373820 | 81 83 00 1C */	lwz r12, 0x1c(r3)
+/* 81373824 | 2C 0C 00 00 */	cmpwi r12, 0x0
+/* 81373828 | 41 82 03 20 */	beq .L_81373B48
+/* 8137382C | FC 00 00 1E */	fctiwz f0, f0
+/* 81373830 | 38 60 00 03 */	li r3, 0x3
+/* 81373834 | D8 01 00 20 */	stfd f0, 0x20(r1)
+/* 81373838 | 80 81 00 24 */	lwz r4, 0x24(r1)
+/* 8137383C | 7D 89 03 A6 */	mtctr r12
+/* 81373840 | 4E 80 04 21 */	bctrl
+/* 81373844 | 48 00 03 04 */	b .L_81373B48
 .L_81373848:
-/* 81373848 00041C48  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 8137384C 00041C4C  54 00 10 3A */	slwi r0, r0, 2
-/* 81373850 00041C50  7C 7E 02 14 */	add r3, r30, r0
-/* 81373854 00041C54  80 83 02 E4 */	lwz r4, 0x2e4(r3)
-/* 81373858 00041C58  80 04 00 14 */	lwz r0, 0x14(r4)
-/* 8137385C 00041C5C  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81373860 00041C60  41 82 00 1C */	beq .L_8137387C
-/* 81373864 00041C64  38 00 00 11 */	li r0, 0x11
-/* 81373868 00041C68  C0 22 82 D8 */	lfs f1, lbl_816946D8@sda21(r0)
-/* 8137386C 00041C6C  90 1E 00 10 */	stw r0, 0x10(r30)
-/* 81373870 00041C70  7F C3 F3 78 */	mr r3, r30
-/* 81373874 00041C74  48 00 38 A5 */	bl fadeout_sound__Q210homebutton10HomeButtonFf
-/* 81373878 00041C78  48 00 02 D0 */	b .L_81373B48
+/* 81373848 | 80 1E 00 14 */	lwz r0, 0x14(r30)
+/* 8137384C | 54 00 10 3A */	slwi r0, r0, 2
+/* 81373850 | 7C 7E 02 14 */	add r3, r30, r0
+/* 81373854 | 80 83 02 E4 */	lwz r4, 0x2e4(r3)
+/* 81373858 | 80 04 00 14 */	lwz r0, 0x14(r4)
+/* 8137385C | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81373860 | 41 82 00 1C */	beq .L_8137387C
+/* 81373864 | 38 00 00 11 */	li r0, 0x11
+/* 81373868 | C0 22 82 D8 */	lfs f1, lbl_816946D8@sda21(r0)
+/* 8137386C | 90 1E 00 10 */	stw r0, 0x10(r30)
+/* 81373870 | 7F C3 F3 78 */	mr r3, r30
+/* 81373874 | 48 00 38 A5 */	bl fadeout_sound__Q210homebutton10HomeButtonFf
+/* 81373878 | 48 00 02 D0 */	b .L_81373B48
 .L_8137387C:
-/* 8137387C 00041C7C  C0 24 00 0C */	lfs f1, 0xc(r4)
-/* 81373880 00041C80  7F C3 F3 78 */	mr r3, r30
-/* 81373884 00041C84  C0 44 00 04 */	lfs f2, 0x4(r4)
-/* 81373888 00041C88  C0 1E 07 98 */	lfs f0, 0x798(r30)
-/* 8137388C 00041C8C  EC 22 08 28 */	fsubs f1, f2, f1
-/* 81373890 00041C90  EC 21 00 24 */	fdivs f1, f1, f0
-/* 81373894 00041C94  48 00 38 85 */	bl fadeout_sound__Q210homebutton10HomeButtonFf
-/* 81373898 00041C98  48 00 02 B0 */	b .L_81373B48
+/* 8137387C | C0 24 00 0C */	lfs f1, 0xc(r4)
+/* 81373880 | 7F C3 F3 78 */	mr r3, r30
+/* 81373884 | C0 44 00 04 */	lfs f2, 0x4(r4)
+/* 81373888 | C0 1E 07 98 */	lfs f0, 0x798(r30)
+/* 8137388C | EC 22 08 28 */	fsubs f1, f2, f1
+/* 81373890 | EC 21 00 24 */	fdivs f1, f1, f0
+/* 81373894 | 48 00 38 85 */	bl fadeout_sound__Q210homebutton10HomeButtonFf
+/* 81373898 | 48 00 02 B0 */	b .L_81373B48
 .L_8137389C:
-/* 8137389C 00041C9C  80 1E 00 B0 */	lwz r0, 0xb0(r30)
-/* 813738A0 00041CA0  38 60 00 12 */	li r3, 0x12
-/* 813738A4 00041CA4  90 7E 00 10 */	stw r3, 0x10(r30)
-/* 813738A8 00041CA8  2C 00 00 03 */	cmpwi r0, 0x3
-/* 813738AC 00041CAC  41 82 00 80 */	beq .L_8137392C
-/* 813738B0 00041CB0  80 1E 06 08 */	lwz r0, 0x608(r30)
-/* 813738B4 00041CB4  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813738B8 00041CB8  41 82 00 30 */	beq .L_813738E8
-/* 813738BC 00041CBC  3B 80 00 00 */	li r28, 0x0
-/* 813738C0 00041CC0  48 00 00 18 */	b .L_813738D8
+/* 8137389C | 80 1E 00 B0 */	lwz r0, 0xb0(r30)
+/* 813738A0 | 38 60 00 12 */	li r3, 0x12
+/* 813738A4 | 90 7E 00 10 */	stw r3, 0x10(r30)
+/* 813738A8 | 2C 00 00 03 */	cmpwi r0, 0x3
+/* 813738AC | 41 82 00 80 */	beq .L_8137392C
+/* 813738B0 | 80 1E 06 08 */	lwz r0, 0x608(r30)
+/* 813738B4 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813738B8 | 41 82 00 30 */	beq .L_813738E8
+/* 813738BC | 3B 80 00 00 */	li r28, 0x0
+/* 813738C0 | 48 00 00 18 */	b .L_813738D8
 .L_813738C4:
-/* 813738C4 00041CC4  7F 84 E3 78 */	mr r4, r28
-/* 813738C8 00041CC8  48 19 54 81 */	bl fn_81508D48
-/* 813738CC 00041CCC  38 80 00 00 */	li r4, 0x0
-/* 813738D0 00041CD0  48 19 74 1D */	bl fn_8150ACEC
-/* 813738D4 00041CD4  3B 9C 00 01 */	addi r28, r28, 0x1
+/* 813738C4 | 7F 84 E3 78 */	mr r4, r28
+/* 813738C8 | 48 19 54 81 */	bl fn_81508D48
+/* 813738CC | 38 80 00 00 */	li r4, 0x0
+/* 813738D0 | 48 19 74 1D */	bl fn_8150ACEC
+/* 813738D4 | 3B 9C 00 01 */	addi r28, r28, 0x1
 .L_813738D8:
-/* 813738D8 00041CD8  80 7E 06 08 */	lwz r3, 0x608(r30)
-/* 813738DC 00041CDC  80 03 00 70 */	lwz r0, 0x70(r3)
-/* 813738E0 00041CE0  7C 1C 00 40 */	cmplw r28, r0
-/* 813738E4 00041CE4  41 80 FF E0 */	blt .L_813738C4
+/* 813738D8 | 80 7E 06 08 */	lwz r3, 0x608(r30)
+/* 813738DC | 80 03 00 70 */	lwz r0, 0x70(r3)
+/* 813738E0 | 7C 1C 00 40 */	cmplw r28, r0
+/* 813738E4 | 41 80 FF E0 */	blt .L_813738C4
 .L_813738E8:
-/* 813738E8 00041CE8  88 1E 00 8E */	lbz r0, 0x8e(r30)
-/* 813738EC 00041CEC  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813738F0 00041CF0  41 82 00 3C */	beq .L_8137392C
-/* 813738F4 00041CF4  38 7E 06 30 */	addi r3, r30, 0x630
-/* 813738F8 00041CF8  48 1E 21 C1 */	bl fn_81555AB8
-/* 813738FC 00041CFC  80 7E 07 90 */	lwz r3, 0x790(r30)
-/* 81373900 00041D00  80 9E 07 94 */	lwz r4, 0x794(r30)
-/* 81373904 00041D04  48 1D F3 29 */	bl fn_81552C2C
-/* 81373908 00041D08  80 7E 06 28 */	lwz r3, 0x628(r30)
-/* 8137390C 00041D0C  80 9E 06 2C */	lwz r4, 0x62c(r30)
-/* 81373910 00041D10  48 1E 62 89 */	bl fn_81559B98
-/* 81373914 00041D14  A0 7E 06 20 */	lhz r3, 0x620(r30)
-/* 81373918 00041D18  48 1D FE B1 */	bl fn_815537C8
-/* 8137391C 00041D1C  A0 7E 06 22 */	lhz r3, 0x622(r30)
-/* 81373920 00041D20  48 1D FE B1 */	bl fn_815537D0
-/* 81373924 00041D24  A0 7E 06 24 */	lhz r3, 0x624(r30)
-/* 81373928 00041D28  48 1D FE B1 */	bl fn_815537D8
+/* 813738E8 | 88 1E 00 8E */	lbz r0, 0x8e(r30)
+/* 813738EC | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813738F0 | 41 82 00 3C */	beq .L_8137392C
+/* 813738F4 | 38 7E 06 30 */	addi r3, r30, 0x630
+/* 813738F8 | 48 1E 21 C1 */	bl fn_81555AB8
+/* 813738FC | 80 7E 07 90 */	lwz r3, 0x790(r30)
+/* 81373900 | 80 9E 07 94 */	lwz r4, 0x794(r30)
+/* 81373904 | 48 1D F3 29 */	bl fn_81552C2C
+/* 81373908 | 80 7E 06 28 */	lwz r3, 0x628(r30)
+/* 8137390C | 80 9E 06 2C */	lwz r4, 0x62c(r30)
+/* 81373910 | 48 1E 62 89 */	bl fn_81559B98
+/* 81373914 | A0 7E 06 20 */	lhz r3, 0x620(r30)
+/* 81373918 | 48 1D FE B1 */	bl fn_815537C8
+/* 8137391C | A0 7E 06 22 */	lhz r3, 0x622(r30)
+/* 81373920 | 48 1D FE B1 */	bl fn_815537D0
+/* 81373924 | A0 7E 06 24 */	lhz r3, 0x624(r30)
+/* 81373928 | 48 1D FE B1 */	bl fn_815537D8
 .L_8137392C:
-/* 8137392C 00041D2C  80 1E 00 80 */	lwz r0, 0x80(r30)
-/* 81373930 00041D30  C8 42 82 F8 */	lfd f2, lbl_816946F8@sda21(r0)
-/* 81373934 00041D34  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 81373938 00041D38  C0 02 83 0C */	lfs f0, lbl_8169470C@sda21(r0)
-/* 8137393C 00041D3C  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81373940 00041D40  C8 21 00 10 */	lfd f1, 0x10(r1)
-/* 81373944 00041D44  EC 21 10 28 */	fsubs f1, f1, f2
-/* 81373948 00041D48  EC 00 00 72 */	fmuls f0, f0, f1
-/* 8137394C 00041D4C  FC 00 00 1E */	fctiwz f0, f0
-/* 81373950 00041D50  D8 01 00 20 */	stfd f0, 0x20(r1)
-/* 81373954 00041D54  80 61 00 24 */	lwz r3, 0x24(r1)
-/* 81373958 00041D58  54 63 06 3E */	clrlwi r3, r3, 24
-/* 8137395C 00041D5C  48 20 96 11 */	bl fn_8157CF6C
-/* 81373960 00041D60  38 60 00 00 */	li r3, 0x0
-/* 81373964 00041D64  48 20 79 11 */	bl fn_8157B274
-/* 81373968 00041D68  80 7E 02 B0 */	lwz r3, 0x2b0(r30)
-/* 8137396C 00041D6C  48 00 59 A9 */	bl Stop__Q210homebutton9RemoteSpkFv
-/* 81373970 00041D70  3B 60 00 00 */	li r27, 0x0
-/* 81373974 00041D74  3B A0 00 00 */	li r29, 0x0
+/* 8137392C | 80 1E 00 80 */	lwz r0, 0x80(r30)
+/* 81373930 | C8 42 82 F8 */	lfd f2, lbl_816946F8@sda21(r0)
+/* 81373934 | 6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 81373938 | C0 02 83 0C */	lfs f0, lbl_8169470C@sda21(r0)
+/* 8137393C | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81373940 | C8 21 00 10 */	lfd f1, 0x10(r1)
+/* 81373944 | EC 21 10 28 */	fsubs f1, f1, f2
+/* 81373948 | EC 00 00 72 */	fmuls f0, f0, f1
+/* 8137394C | FC 00 00 1E */	fctiwz f0, f0
+/* 81373950 | D8 01 00 20 */	stfd f0, 0x20(r1)
+/* 81373954 | 80 61 00 24 */	lwz r3, 0x24(r1)
+/* 81373958 | 54 63 06 3E */	clrlwi r3, r3, 24
+/* 8137395C | 48 20 96 11 */	bl fn_8157CF6C
+/* 81373960 | 38 60 00 00 */	li r3, 0x0
+/* 81373964 | 48 20 79 11 */	bl fn_8157B274
+/* 81373968 | 80 7E 02 B0 */	lwz r3, 0x2b0(r30)
+/* 8137396C | 48 00 59 A9 */	bl Stop__Q210homebutton9RemoteSpkFv
+/* 81373970 | 3B 60 00 00 */	li r27, 0x0
+/* 81373974 | 3B A0 00 00 */	li r29, 0x0
 .L_81373978:
-/* 81373978 00041D78  2C 1B 00 04 */	cmpwi r27, 0x4
-/* 8137397C 00041D7C  40 80 00 10 */	bge .L_8137398C
-/* 81373980 00041D80  7C 7E EA 14 */	add r3, r30, r29
-/* 81373984 00041D84  80 63 02 A0 */	lwz r3, 0x2a0(r3)
-/* 81373988 00041D88  48 00 3C F1 */	bl clearCallback__Q210homebutton10ControllerFv
+/* 81373978 | 2C 1B 00 04 */	cmpwi r27, 0x4
+/* 8137397C | 40 80 00 10 */	bge .L_8137398C
+/* 81373980 | 7C 7E EA 14 */	add r3, r30, r29
+/* 81373984 | 80 63 02 A0 */	lwz r3, 0x2a0(r3)
+/* 81373988 | 48 00 3C F1 */	bl clearCallback__Q210homebutton10ControllerFv
 .L_8137398C:
-/* 8137398C 00041D8C  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81373990 00041D90  3B BD 00 04 */	addi r29, r29, 0x4
-/* 81373994 00041D94  2C 1B 00 04 */	cmpwi r27, 0x4
-/* 81373998 00041D98  41 80 FF E0 */	blt .L_81373978
-/* 8137399C 00041D9C  80 1E 00 B0 */	lwz r0, 0xb0(r30)
-/* 813739A0 00041DA0  2C 00 00 03 */	cmpwi r0, 0x3
-/* 813739A4 00041DA4  41 82 00 24 */	beq .L_813739C8
-/* 813739A8 00041DA8  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 813739AC 00041DAC  81 83 00 1C */	lwz r12, 0x1c(r3)
-/* 813739B0 00041DB0  2C 0C 00 00 */	cmpwi r12, 0x0
-/* 813739B4 00041DB4  41 82 00 14 */	beq .L_813739C8
-/* 813739B8 00041DB8  38 60 00 04 */	li r3, 0x4
-/* 813739BC 00041DBC  38 80 00 00 */	li r4, 0x0
-/* 813739C0 00041DC0  7D 89 03 A6 */	mtctr r12
-/* 813739C4 00041DC4  4E 80 04 21 */	bctrl
+/* 8137398C | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81373990 | 3B BD 00 04 */	addi r29, r29, 0x4
+/* 81373994 | 2C 1B 00 04 */	cmpwi r27, 0x4
+/* 81373998 | 41 80 FF E0 */	blt .L_81373978
+/* 8137399C | 80 1E 00 B0 */	lwz r0, 0xb0(r30)
+/* 813739A0 | 2C 00 00 03 */	cmpwi r0, 0x3
+/* 813739A4 | 41 82 00 24 */	beq .L_813739C8
+/* 813739A8 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 813739AC | 81 83 00 1C */	lwz r12, 0x1c(r3)
+/* 813739B0 | 2C 0C 00 00 */	cmpwi r12, 0x0
+/* 813739B4 | 41 82 00 14 */	beq .L_813739C8
+/* 813739B8 | 38 60 00 04 */	li r3, 0x4
+/* 813739BC | 38 80 00 00 */	li r4, 0x0
+/* 813739C0 | 7D 89 03 A6 */	mtctr r12
+/* 813739C4 | 4E 80 04 21 */	bctrl
 .L_813739C8:
-/* 813739C8 00041DC8  38 00 00 00 */	li r0, 0x0
-/* 813739CC 00041DCC  98 1E 00 8B */	stb r0, 0x8b(r30)
-/* 813739D0 00041DD0  48 00 01 78 */	b .L_81373B48
+/* 813739C8 | 38 00 00 00 */	li r0, 0x0
+/* 813739CC | 98 1E 00 8B */	stb r0, 0x8b(r30)
+/* 813739D0 | 48 00 01 78 */	b .L_81373B48
 .L_813739D4:
-/* 813739D4 00041DD4  38 00 00 02 */	li r0, 0x2
-/* 813739D8 00041DD8  90 1E 00 10 */	stw r0, 0x10(r30)
-/* 813739DC 00041DDC  48 00 01 6C */	b .L_81373B48
+/* 813739D4 | 38 00 00 02 */	li r0, 0x2
+/* 813739D8 | 90 1E 00 10 */	stw r0, 0x10(r30)
+/* 813739DC | 48 00 01 6C */	b .L_81373B48
 .L_813739E0:
-/* 813739E0 00041DE0  88 1E 00 8C */	lbz r0, 0x8c(r30)
-/* 813739E4 00041DE4  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813739E8 00041DE8  41 82 00 18 */	beq .L_81373A00
-/* 813739EC 00041DEC  7F C3 F3 78 */	mr r3, r30
-/* 813739F0 00041DF0  7F E4 FB 78 */	mr r4, r31
-/* 813739F4 00041DF4  4B FF F3 39 */	bl init_battery__Q210homebutton10HomeButtonFPC17HBMControllerData
-/* 813739F8 00041DF8  38 00 00 00 */	li r0, 0x0
-/* 813739FC 00041DFC  98 1E 00 8C */	stb r0, 0x8c(r30)
+/* 813739E0 | 88 1E 00 8C */	lbz r0, 0x8c(r30)
+/* 813739E4 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813739E8 | 41 82 00 18 */	beq .L_81373A00
+/* 813739EC | 7F C3 F3 78 */	mr r3, r30
+/* 813739F0 | 7F E4 FB 78 */	mr r4, r31
+/* 813739F4 | 4B FF F3 39 */	bl init_battery__Q210homebutton10HomeButtonFPC17HBMControllerData
+/* 813739F8 | 38 00 00 00 */	li r0, 0x0
+/* 813739FC | 98 1E 00 8C */	stb r0, 0x8c(r30)
 .L_81373A00:
-/* 81373A00 00041E00  88 1E 00 8D */	lbz r0, 0x8d(r30)
-/* 81373A04 00041E04  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81373A08 00041E08  41 82 00 1C */	beq .L_81373A24
-/* 81373A0C 00041E0C  7F C3 F3 78 */	mr r3, r30
-/* 81373A10 00041E10  4B FF EF B9 */	bl init_volume__Q210homebutton10HomeButtonFv
-/* 81373A14 00041E14  7F C3 F3 78 */	mr r3, r30
-/* 81373A18 00041E18  4B FF F1 0D */	bl init_vib__Q210homebutton10HomeButtonFv
-/* 81373A1C 00041E1C  38 00 00 00 */	li r0, 0x0
-/* 81373A20 00041E20  98 1E 00 8D */	stb r0, 0x8d(r30)
+/* 81373A00 | 88 1E 00 8D */	lbz r0, 0x8d(r30)
+/* 81373A04 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81373A08 | 41 82 00 1C */	beq .L_81373A24
+/* 81373A0C | 7F C3 F3 78 */	mr r3, r30
+/* 81373A10 | 4B FF EF B9 */	bl init_volume__Q210homebutton10HomeButtonFv
+/* 81373A14 | 7F C3 F3 78 */	mr r3, r30
+/* 81373A18 | 4B FF F1 0D */	bl init_vib__Q210homebutton10HomeButtonFv
+/* 81373A1C | 38 00 00 00 */	li r0, 0x0
+/* 81373A20 | 98 1E 00 8D */	stb r0, 0x8d(r30)
 .L_81373A24:
-/* 81373A24 00041E24  38 7E 04 48 */	addi r3, r30, 0x448
-/* 81373A28 00041E28  48 00 33 B5 */	bl isDone__Q310homebutton10HomeButton10BlackFaderFv
-/* 81373A2C 00041E2C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81373A30 00041E30  41 82 00 E8 */	beq .L_81373B18
-/* 81373A34 00041E34  88 1E 00 8F */	lbz r0, 0x8f(r30)
-/* 81373A38 00041E38  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81373A3C 00041E3C  41 82 00 24 */	beq .L_81373A60
-/* 81373A40 00041E40  88 1E 00 8A */	lbz r0, 0x8a(r30)
-/* 81373A44 00041E44  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81373A48 00041E48  41 82 01 00 */	beq .L_81373B48
-/* 81373A4C 00041E4C  80 7E 02 04 */	lwz r3, 0x204(r30)
-/* 81373A50 00041E50  48 20 5D 51 */	bl fn_815797A0
-/* 81373A54 00041E54  38 00 00 00 */	li r0, 0x0
-/* 81373A58 00041E58  90 1E 02 04 */	stw r0, 0x204(r30)
-/* 81373A5C 00041E5C  98 1E 00 8F */	stb r0, 0x8f(r30)
+/* 81373A24 | 38 7E 04 48 */	addi r3, r30, 0x448
+/* 81373A28 | 48 00 33 B5 */	bl isDone__Q310homebutton10HomeButton10BlackFaderFv
+/* 81373A2C | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81373A30 | 41 82 00 E8 */	beq .L_81373B18
+/* 81373A34 | 88 1E 00 8F */	lbz r0, 0x8f(r30)
+/* 81373A38 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81373A3C | 41 82 00 24 */	beq .L_81373A60
+/* 81373A40 | 88 1E 00 8A */	lbz r0, 0x8a(r30)
+/* 81373A44 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81373A48 | 41 82 01 00 */	beq .L_81373B48
+/* 81373A4C | 80 7E 02 04 */	lwz r3, 0x204(r30)
+/* 81373A50 | 48 20 5D 51 */	bl fn_815797A0
+/* 81373A54 | 38 00 00 00 */	li r0, 0x0
+/* 81373A58 | 90 1E 02 04 */	stw r0, 0x204(r30)
+/* 81373A5C | 98 1E 00 8F */	stb r0, 0x8f(r30)
 .L_81373A60:
-/* 81373A60 00041E60  88 1E 00 90 */	lbz r0, 0x90(r30)
-/* 81373A64 00041E64  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81373A68 00041E68  41 82 00 8C */	beq .L_81373AF4
-/* 81373A6C 00041E6C  80 7E 04 20 */	lwz r3, 0x420(r30)
-/* 81373A70 00041E70  48 00 41 C1 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81373A74 00041E74  80 7E 04 20 */	lwz r3, 0x420(r30)
-/* 81373A78 00041E78  3B 80 00 00 */	li r28, 0x0
-/* 81373A7C 00041E7C  3F A0 81 64 */	lis r29, scFuncTextPaneName__Q210homebutton10HomeButton@ha
-/* 81373A80 00041E80  38 A0 00 01 */	li r5, 0x1
-/* 81373A84 00041E84  93 83 00 14 */	stw r28, 0x14(r3)
-/* 81373A88 00041E88  80 7E 02 2C */	lwz r3, 0x22c(r30)
-/* 81373A8C 00041E8C  80 9D 53 D0 */	lwz r4, scFuncTextPaneName__Q210homebutton10HomeButton@l(r29)
-/* 81373A90 00041E90  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81373A94 00041E94  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81373A98 00041E98  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81373A9C 00041E9C  7D 89 03 A6 */	mtctr r12
-/* 81373AA0 00041EA0  4E 80 04 21 */	bctrl
-/* 81373AA4 00041EA4  38 80 00 00 */	li r4, 0x0
-/* 81373AA8 00041EA8  4B FD 09 6D */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 81373AAC 00041EAC  80 DE 02 2C */	lwz r6, 0x22c(r30)
-/* 81373AB0 00041EB0  38 7D 53 D0 */	addi r3, r29, scFuncTextPaneName__Q210homebutton10HomeButton@l
-/* 81373AB4 00041EB4  80 83 00 04 */	lwz r4, 0x4(r3)
-/* 81373AB8 00041EB8  38 A0 00 01 */	li r5, 0x1
-/* 81373ABC 00041EBC  80 66 00 10 */	lwz r3, 0x10(r6)
-/* 81373AC0 00041EC0  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81373AC4 00041EC4  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81373AC8 00041EC8  7D 89 03 A6 */	mtctr r12
-/* 81373ACC 00041ECC  4E 80 04 21 */	bctrl
-/* 81373AD0 00041ED0  38 80 00 00 */	li r4, 0x0
-/* 81373AD4 00041ED4  4B FD 09 41 */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 81373AD8 00041ED8  80 7E 04 44 */	lwz r3, 0x444(r30)
-/* 81373ADC 00041EDC  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 81373AE0 00041EE0  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81373AE4 00041EE4  40 82 00 10 */	bne .L_81373AF4
-/* 81373AE8 00041EE8  48 00 41 49 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81373AEC 00041EEC  80 7E 04 44 */	lwz r3, 0x444(r30)
-/* 81373AF0 00041EF0  93 83 00 14 */	stw r28, 0x14(r3)
+/* 81373A60 | 88 1E 00 90 */	lbz r0, 0x90(r30)
+/* 81373A64 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81373A68 | 41 82 00 8C */	beq .L_81373AF4
+/* 81373A6C | 80 7E 04 20 */	lwz r3, 0x420(r30)
+/* 81373A70 | 48 00 41 C1 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81373A74 | 80 7E 04 20 */	lwz r3, 0x420(r30)
+/* 81373A78 | 3B 80 00 00 */	li r28, 0x0
+/* 81373A7C | 3F A0 81 64 */	lis r29, scFuncTextPaneName__Q210homebutton10HomeButton@ha
+/* 81373A80 | 38 A0 00 01 */	li r5, 0x1
+/* 81373A84 | 93 83 00 14 */	stw r28, 0x14(r3)
+/* 81373A88 | 80 7E 02 2C */	lwz r3, 0x22c(r30)
+/* 81373A8C | 80 9D 53 D0 */	lwz r4, scFuncTextPaneName__Q210homebutton10HomeButton@l(r29)
+/* 81373A90 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81373A94 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81373A98 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81373A9C | 7D 89 03 A6 */	mtctr r12
+/* 81373AA0 | 4E 80 04 21 */	bctrl
+/* 81373AA4 | 38 80 00 00 */	li r4, 0x0
+/* 81373AA8 | 4B FD 09 6D */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 81373AAC | 80 DE 02 2C */	lwz r6, 0x22c(r30)
+/* 81373AB0 | 38 7D 53 D0 */	addi r3, r29, scFuncTextPaneName__Q210homebutton10HomeButton@l
+/* 81373AB4 | 80 83 00 04 */	lwz r4, 0x4(r3)
+/* 81373AB8 | 38 A0 00 01 */	li r5, 0x1
+/* 81373ABC | 80 66 00 10 */	lwz r3, 0x10(r6)
+/* 81373AC0 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81373AC4 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81373AC8 | 7D 89 03 A6 */	mtctr r12
+/* 81373ACC | 4E 80 04 21 */	bctrl
+/* 81373AD0 | 38 80 00 00 */	li r4, 0x0
+/* 81373AD4 | 4B FD 09 41 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 81373AD8 | 80 7E 04 44 */	lwz r3, 0x444(r30)
+/* 81373ADC | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 81373AE0 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81373AE4 | 40 82 00 10 */	bne .L_81373AF4
+/* 81373AE8 | 48 00 41 49 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81373AEC | 80 7E 04 44 */	lwz r3, 0x444(r30)
+/* 81373AF0 | 93 83 00 14 */	stw r28, 0x14(r3)
 .L_81373AF4:
-/* 81373AF4 00041EF4  38 00 00 11 */	li r0, 0x11
-/* 81373AF8 00041EF8  38 60 00 01 */	li r3, 0x1
-/* 81373AFC 00041EFC  90 1E 00 10 */	stw r0, 0x10(r30)
-/* 81373B00 00041F00  48 1C A6 29 */	bl VISetBlack
-/* 81373B04 00041F04  48 1C A4 9D */	bl VIFlush
-/* 81373B08 00041F08  C0 22 82 D8 */	lfs f1, lbl_816946D8@sda21(r0)
-/* 81373B0C 00041F0C  7F C3 F3 78 */	mr r3, r30
-/* 81373B10 00041F10  48 00 36 09 */	bl fadeout_sound__Q210homebutton10HomeButtonFf
-/* 81373B14 00041F14  48 00 00 34 */	b .L_81373B48
+/* 81373AF4 | 38 00 00 11 */	li r0, 0x11
+/* 81373AF8 | 38 60 00 01 */	li r3, 0x1
+/* 81373AFC | 90 1E 00 10 */	stw r0, 0x10(r30)
+/* 81373B00 | 48 1C A6 29 */	bl VISetBlack
+/* 81373B04 | 48 1C A4 9D */	bl VIFlush
+/* 81373B08 | C0 22 82 D8 */	lfs f1, lbl_816946D8@sda21(r0)
+/* 81373B0C | 7F C3 F3 78 */	mr r3, r30
+/* 81373B10 | 48 00 36 09 */	bl fadeout_sound__Q210homebutton10HomeButtonFf
+/* 81373B14 | 48 00 00 34 */	b .L_81373B48
 .L_81373B18:
-/* 81373B18 00041F18  80 9E 04 48 */	lwz r4, 0x448(r30)
-/* 81373B1C 00041F1C  7F C3 F3 78 */	mr r3, r30
-/* 81373B20 00041F20  80 1E 04 4C */	lwz r0, 0x44c(r30)
-/* 81373B24 00041F24  C8 42 82 F8 */	lfd f2, lbl_816946F8@sda21(r0)
-/* 81373B28 00041F28  7C 04 00 50 */	subf r0, r4, r0
-/* 81373B2C 00041F2C  C0 1E 07 98 */	lfs f0, 0x798(r30)
-/* 81373B30 00041F30  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 81373B34 00041F34  90 01 00 1C */	stw r0, 0x1c(r1)
-/* 81373B38 00041F38  C8 21 00 18 */	lfd f1, 0x18(r1)
-/* 81373B3C 00041F3C  EC 21 10 28 */	fsubs f1, f1, f2
-/* 81373B40 00041F40  EC 21 00 24 */	fdivs f1, f1, f0
-/* 81373B44 00041F44  48 00 35 D5 */	bl fadeout_sound__Q210homebutton10HomeButtonFf
+/* 81373B18 | 80 9E 04 48 */	lwz r4, 0x448(r30)
+/* 81373B1C | 7F C3 F3 78 */	mr r3, r30
+/* 81373B20 | 80 1E 04 4C */	lwz r0, 0x44c(r30)
+/* 81373B24 | C8 42 82 F8 */	lfd f2, lbl_816946F8@sda21(r0)
+/* 81373B28 | 7C 04 00 50 */	subf r0, r4, r0
+/* 81373B2C | C0 1E 07 98 */	lfs f0, 0x798(r30)
+/* 81373B30 | 6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 81373B34 | 90 01 00 1C */	stw r0, 0x1c(r1)
+/* 81373B38 | C8 21 00 18 */	lfd f1, 0x18(r1)
+/* 81373B3C | EC 21 10 28 */	fsubs f1, f1, f2
+/* 81373B40 | EC 21 00 24 */	fdivs f1, f1, f0
+/* 81373B44 | 48 00 35 D5 */	bl fadeout_sound__Q210homebutton10HomeButtonFf
 .L_81373B48:
-/* 81373B48 00041F48  80 1E 00 68 */	lwz r0, 0x68(r30)
-/* 81373B4C 00041F4C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81373B50 00041F50  41 82 00 58 */	beq .L_81373BA8
-/* 81373B54 00041F54  7F C3 F3 78 */	mr r3, r30
-/* 81373B58 00041F58  48 00 2D 35 */	bl isUpBarActive__Q210homebutton10HomeButtonCFv
-/* 81373B5C 00041F5C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81373B60 00041F60  41 82 00 48 */	beq .L_81373BA8
-/* 81373B64 00041F64  80 7E 00 68 */	lwz r3, 0x68(r30)
-/* 81373B68 00041F68  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81373B6C 00041F6C  41 82 00 34 */	beq .L_81373BA0
-/* 81373B70 00041F70  80 1E 00 70 */	lwz r0, 0x70(r30)
-/* 81373B74 00041F74  7C 03 00 00 */	cmpw r3, r0
-/* 81373B78 00041F78  41 82 00 28 */	beq .L_81373BA0
-/* 81373B7C 00041F7C  54 60 10 3A */	slwi r0, r3, 2
-/* 81373B80 00041F80  7C 7E 02 14 */	add r3, r30, r0
-/* 81373B84 00041F84  83 83 04 0C */	lwz r28, 0x40c(r3)
-/* 81373B88 00041F88  7F 83 E3 78 */	mr r3, r28
-/* 81373B8C 00041F8C  48 00 40 A5 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81373B90 00041F90  38 00 00 01 */	li r0, 0x1
-/* 81373B94 00041F94  90 1C 00 14 */	stw r0, 0x14(r28)
-/* 81373B98 00041F98  80 1E 00 68 */	lwz r0, 0x68(r30)
-/* 81373B9C 00041F9C  90 1E 00 70 */	stw r0, 0x70(r30)
+/* 81373B48 | 80 1E 00 68 */	lwz r0, 0x68(r30)
+/* 81373B4C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81373B50 | 41 82 00 58 */	beq .L_81373BA8
+/* 81373B54 | 7F C3 F3 78 */	mr r3, r30
+/* 81373B58 | 48 00 2D 35 */	bl isUpBarActive__Q210homebutton10HomeButtonCFv
+/* 81373B5C | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81373B60 | 41 82 00 48 */	beq .L_81373BA8
+/* 81373B64 | 80 7E 00 68 */	lwz r3, 0x68(r30)
+/* 81373B68 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81373B6C | 41 82 00 34 */	beq .L_81373BA0
+/* 81373B70 | 80 1E 00 70 */	lwz r0, 0x70(r30)
+/* 81373B74 | 7C 03 00 00 */	cmpw r3, r0
+/* 81373B78 | 41 82 00 28 */	beq .L_81373BA0
+/* 81373B7C | 54 60 10 3A */	slwi r0, r3, 2
+/* 81373B80 | 7C 7E 02 14 */	add r3, r30, r0
+/* 81373B84 | 83 83 04 0C */	lwz r28, 0x40c(r3)
+/* 81373B88 | 7F 83 E3 78 */	mr r3, r28
+/* 81373B8C | 48 00 40 A5 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81373B90 | 38 00 00 01 */	li r0, 0x1
+/* 81373B94 | 90 1C 00 14 */	stw r0, 0x14(r28)
+/* 81373B98 | 80 1E 00 68 */	lwz r0, 0x68(r30)
+/* 81373B9C | 90 1E 00 70 */	stw r0, 0x70(r30)
 .L_81373BA0:
-/* 81373BA0 00041FA0  38 00 00 00 */	li r0, 0x0
-/* 81373BA4 00041FA4  90 1E 00 68 */	stw r0, 0x68(r30)
+/* 81373BA0 | 38 00 00 00 */	li r0, 0x0
+/* 81373BA4 | 90 1E 00 68 */	stw r0, 0x68(r30)
 .L_81373BA8:
-/* 81373BA8 00041FA8  80 1E 00 6C */	lwz r0, 0x6c(r30)
-/* 81373BAC 00041FAC  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81373BB0 00041FB0  41 82 00 58 */	beq .L_81373C08
-/* 81373BB4 00041FB4  7F C3 F3 78 */	mr r3, r30
-/* 81373BB8 00041FB8  48 00 2D 11 */	bl isDownBarActive__Q210homebutton10HomeButtonFv
-/* 81373BBC 00041FBC  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81373BC0 00041FC0  41 82 00 48 */	beq .L_81373C08
-/* 81373BC4 00041FC4  80 7E 00 6C */	lwz r3, 0x6c(r30)
-/* 81373BC8 00041FC8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81373BCC 00041FCC  41 82 00 34 */	beq .L_81373C00
-/* 81373BD0 00041FD0  80 1E 00 74 */	lwz r0, 0x74(r30)
-/* 81373BD4 00041FD4  7C 03 00 00 */	cmpw r3, r0
-/* 81373BD8 00041FD8  41 82 00 28 */	beq .L_81373C00
-/* 81373BDC 00041FDC  54 60 10 3A */	slwi r0, r3, 2
-/* 81373BE0 00041FE0  7C 7E 02 14 */	add r3, r30, r0
-/* 81373BE4 00041FE4  83 83 02 E4 */	lwz r28, 0x2e4(r3)
-/* 81373BE8 00041FE8  7F 83 E3 78 */	mr r3, r28
-/* 81373BEC 00041FEC  48 00 40 45 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81373BF0 00041FF0  38 00 00 01 */	li r0, 0x1
-/* 81373BF4 00041FF4  90 1C 00 14 */	stw r0, 0x14(r28)
-/* 81373BF8 00041FF8  80 1E 00 6C */	lwz r0, 0x6c(r30)
-/* 81373BFC 00041FFC  90 1E 00 74 */	stw r0, 0x74(r30)
+/* 81373BA8 | 80 1E 00 6C */	lwz r0, 0x6c(r30)
+/* 81373BAC | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81373BB0 | 41 82 00 58 */	beq .L_81373C08
+/* 81373BB4 | 7F C3 F3 78 */	mr r3, r30
+/* 81373BB8 | 48 00 2D 11 */	bl isDownBarActive__Q210homebutton10HomeButtonFv
+/* 81373BBC | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81373BC0 | 41 82 00 48 */	beq .L_81373C08
+/* 81373BC4 | 80 7E 00 6C */	lwz r3, 0x6c(r30)
+/* 81373BC8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81373BCC | 41 82 00 34 */	beq .L_81373C00
+/* 81373BD0 | 80 1E 00 74 */	lwz r0, 0x74(r30)
+/* 81373BD4 | 7C 03 00 00 */	cmpw r3, r0
+/* 81373BD8 | 41 82 00 28 */	beq .L_81373C00
+/* 81373BDC | 54 60 10 3A */	slwi r0, r3, 2
+/* 81373BE0 | 7C 7E 02 14 */	add r3, r30, r0
+/* 81373BE4 | 83 83 02 E4 */	lwz r28, 0x2e4(r3)
+/* 81373BE8 | 7F 83 E3 78 */	mr r3, r28
+/* 81373BEC | 48 00 40 45 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81373BF0 | 38 00 00 01 */	li r0, 0x1
+/* 81373BF4 | 90 1C 00 14 */	stw r0, 0x14(r28)
+/* 81373BF8 | 80 1E 00 6C */	lwz r0, 0x6c(r30)
+/* 81373BFC | 90 1E 00 74 */	stw r0, 0x74(r30)
 .L_81373C00:
-/* 81373C00 00042000  38 00 00 00 */	li r0, 0x0
-/* 81373C04 00042004  90 1E 00 6C */	stw r0, 0x6c(r30)
+/* 81373C00 | 38 00 00 00 */	li r0, 0x0
+/* 81373C04 | 90 1E 00 6C */	stw r0, 0x6c(r30)
 .L_81373C08:
-/* 81373C08 00042008  2C 1F 00 00 */	cmpwi r31, 0x0
-/* 81373C0C 0004200C  41 82 00 10 */	beq .L_81373C1C
-/* 81373C10 00042010  7F C3 F3 78 */	mr r3, r30
-/* 81373C14 00042014  7F E4 FB 78 */	mr r4, r31
-/* 81373C18 00042018  48 00 06 C9 */	bl update__Q210homebutton10HomeButtonFPC17HBMControllerData
+/* 81373C08 | 2C 1F 00 00 */	cmpwi r31, 0x0
+/* 81373C0C | 41 82 00 10 */	beq .L_81373C1C
+/* 81373C10 | 7F C3 F3 78 */	mr r3, r30
+/* 81373C14 | 7F E4 FB 78 */	mr r4, r31
+/* 81373C18 | 48 00 06 C9 */	bl update__Q210homebutton10HomeButtonFPC17HBMControllerData
 .L_81373C1C:
-/* 81373C1C 0004201C  80 7E 02 2C */	lwz r3, 0x22c(r30)
-/* 81373C20 00042020  38 80 00 00 */	li r4, 0x0
-/* 81373C24 00042024  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81373C28 00042028  81 8C 00 2C */	lwz r12, 0x2c(r12)
-/* 81373C2C 0004202C  7D 89 03 A6 */	mtctr r12
-/* 81373C30 00042030  4E 80 04 21 */	bctrl
-/* 81373C34 00042034  80 7E 02 2C */	lwz r3, 0x22c(r30)
-/* 81373C38 00042038  38 9E 02 4C */	addi r4, r30, 0x24c
-/* 81373C3C 0004203C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81373C40 00042040  81 8C 00 24 */	lwz r12, 0x24(r12)
-/* 81373C44 00042044  7D 89 03 A6 */	mtctr r12
-/* 81373C48 00042048  4E 80 04 21 */	bctrl
-/* 81373C4C 0004204C  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 81373C50 00042050  80 03 00 28 */	lwz r0, 0x28(r3)
-/* 81373C54 00042054  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81373C58 00042058  40 82 00 38 */	bne .L_81373C90
-/* 81373C5C 0004205C  3B 80 00 00 */	li r28, 0x0
-/* 81373C60 00042060  3B E0 00 00 */	li r31, 0x0
+/* 81373C1C | 80 7E 02 2C */	lwz r3, 0x22c(r30)
+/* 81373C20 | 38 80 00 00 */	li r4, 0x0
+/* 81373C24 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81373C28 | 81 8C 00 2C */	lwz r12, 0x2c(r12)
+/* 81373C2C | 7D 89 03 A6 */	mtctr r12
+/* 81373C30 | 4E 80 04 21 */	bctrl
+/* 81373C34 | 80 7E 02 2C */	lwz r3, 0x22c(r30)
+/* 81373C38 | 38 9E 02 4C */	addi r4, r30, 0x24c
+/* 81373C3C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81373C40 | 81 8C 00 24 */	lwz r12, 0x24(r12)
+/* 81373C44 | 7D 89 03 A6 */	mtctr r12
+/* 81373C48 | 4E 80 04 21 */	bctrl
+/* 81373C4C | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 81373C50 | 80 03 00 28 */	lwz r0, 0x28(r3)
+/* 81373C54 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81373C58 | 40 82 00 38 */	bne .L_81373C90
+/* 81373C5C | 3B 80 00 00 */	li r28, 0x0
+/* 81373C60 | 3B E0 00 00 */	li r31, 0x0
 .L_81373C64:
-/* 81373C64 00042064  7C 7E FA 14 */	add r3, r30, r31
-/* 81373C68 00042068  38 9E 02 4C */	addi r4, r30, 0x24c
-/* 81373C6C 0004206C  80 63 02 30 */	lwz r3, 0x230(r3)
-/* 81373C70 00042070  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81373C74 00042074  81 8C 00 24 */	lwz r12, 0x24(r12)
-/* 81373C78 00042078  7D 89 03 A6 */	mtctr r12
-/* 81373C7C 0004207C  4E 80 04 21 */	bctrl
-/* 81373C80 00042080  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 81373C84 00042084  3B FF 00 04 */	addi r31, r31, 0x4
-/* 81373C88 00042088  2C 1C 00 04 */	cmpwi r28, 0x4
-/* 81373C8C 0004208C  41 80 FF D8 */	blt .L_81373C64
+/* 81373C64 | 7C 7E FA 14 */	add r3, r30, r31
+/* 81373C68 | 38 9E 02 4C */	addi r4, r30, 0x24c
+/* 81373C6C | 80 63 02 30 */	lwz r3, 0x230(r3)
+/* 81373C70 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81373C74 | 81 8C 00 24 */	lwz r12, 0x24(r12)
+/* 81373C78 | 7D 89 03 A6 */	mtctr r12
+/* 81373C7C | 4E 80 04 21 */	bctrl
+/* 81373C80 | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 81373C84 | 3B FF 00 04 */	addi r31, r31, 0x4
+/* 81373C88 | 2C 1C 00 04 */	cmpwi r28, 0x4
+/* 81373C8C | 41 80 FF D8 */	blt .L_81373C64
 .L_81373C90:
-/* 81373C90 00042090  80 7E 00 64 */	lwz r3, 0x64(r30)
-/* 81373C94 00042094  2C 03 00 02 */	cmpwi r3, 0x2
-/* 81373C98 00042098  41 81 00 0C */	bgt .L_81373CA4
-/* 81373C9C 0004209C  38 03 00 01 */	addi r0, r3, 0x1
-/* 81373CA0 000420A0  90 1E 00 64 */	stw r0, 0x64(r30)
+/* 81373C90 | 80 7E 00 64 */	lwz r3, 0x64(r30)
+/* 81373C94 | 2C 03 00 02 */	cmpwi r3, 0x2
+/* 81373C98 | 41 81 00 0C */	bgt .L_81373CA4
+/* 81373C9C | 38 03 00 01 */	addi r0, r3, 0x1
+/* 81373CA0 | 90 1E 00 64 */	stw r0, 0x64(r30)
 .L_81373CA4:
-/* 81373CA4 000420A4  E3 E1 00 58 */	psq_l f31, 0x58(r1), 0, qr0
-/* 81373CA8 000420A8  CB E1 00 50 */	lfd f31, 0x50(r1)
-/* 81373CAC 000420AC  E3 C1 00 48 */	psq_l f30, 0x48(r1), 0, qr0
-/* 81373CB0 000420B0  39 61 00 40 */	addi r11, r1, 0x40
-/* 81373CB4 000420B4  CB C1 00 40 */	lfd f30, 0x40(r1)
-/* 81373CB8 000420B8  48 28 58 55 */	bl _restgpr_27
-/* 81373CBC 000420BC  80 01 00 64 */	lwz r0, 0x64(r1)
-/* 81373CC0 000420C0  7C 08 03 A6 */	mtlr r0
-/* 81373CC4 000420C4  38 21 00 60 */	addi r1, r1, 0x60
-/* 81373CC8 000420C8  4E 80 00 20 */	blr
+/* 81373CA4 | E3 E1 00 58 */	psq_l f31, 0x58(r1), 0, qr0
+/* 81373CA8 | CB E1 00 50 */	lfd f31, 0x50(r1)
+/* 81373CAC | E3 C1 00 48 */	psq_l f30, 0x48(r1), 0, qr0
+/* 81373CB0 | 39 61 00 40 */	addi r11, r1, 0x40
+/* 81373CB4 | CB C1 00 40 */	lfd f30, 0x40(r1)
+/* 81373CB8 | 48 28 58 55 */	bl _restgpr_27
+/* 81373CBC | 80 01 00 64 */	lwz r0, 0x64(r1)
+/* 81373CC0 | 7C 08 03 A6 */	mtlr r0
+/* 81373CC4 | 38 21 00 60 */	addi r1, r1, 0x60
+/* 81373CC8 | 4E 80 00 20 */	blr
 .endfn calc__Q210homebutton10HomeButtonFPC17HBMControllerData
 
 # .text:0x2724 | 0x81373CCC | size: 0x104
 # homebutton::HomeButton::calc_fadeoutAnm()
 .fn calc_fadeoutAnm__Q210homebutton10HomeButtonFv, global
-/* 81373CCC 000420CC  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 81373CD0 000420D0  7C 08 02 A6 */	mflr r0
-/* 81373CD4 000420D4  3C 80 81 64 */	lis r4, scFuncTextPaneName__Q210homebutton10HomeButton@ha
-/* 81373CD8 000420D8  38 A0 00 01 */	li r5, 0x1
-/* 81373CDC 000420DC  90 01 00 24 */	stw r0, 0x24(r1)
-/* 81373CE0 000420E0  38 84 53 D0 */	addi r4, r4, scFuncTextPaneName__Q210homebutton10HomeButton@l
-/* 81373CE4 000420E4  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 81373CE8 000420E8  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 81373CEC 000420EC  7C 7E 1B 78 */	mr r30, r3
-/* 81373CF0 000420F0  80 C3 02 2C */	lwz r6, 0x22c(r3)
-/* 81373CF4 000420F4  80 84 00 08 */	lwz r4, 0x8(r4)
-/* 81373CF8 000420F8  80 66 00 10 */	lwz r3, 0x10(r6)
-/* 81373CFC 000420FC  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81373D00 00042100  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81373D04 00042104  7D 89 03 A6 */	mtctr r12
-/* 81373D08 00042108  4E 80 04 21 */	bctrl
-/* 81373D0C 0004210C  38 80 00 00 */	li r4, 0x0
-/* 81373D10 00042110  4B FD 07 05 */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 81373D14 00042114  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 81373D18 00042118  80 03 00 20 */	lwz r0, 0x20(r3)
-/* 81373D1C 0004211C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81373D20 00042120  41 82 00 1C */	beq .L_81373D3C
-/* 81373D24 00042124  7F C3 F3 78 */	mr r3, r30
-/* 81373D28 00042128  38 80 00 03 */	li r4, 0x3
-/* 81373D2C 0004212C  38 A0 00 01 */	li r5, 0x1
-/* 81373D30 00042130  48 00 2D 91 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81373D34 00042134  90 7E 00 14 */	stw r3, 0x14(r30)
-/* 81373D38 00042138  48 00 00 18 */	b .L_81373D50
+/* 81373CCC | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81373CD0 | 7C 08 02 A6 */	mflr r0
+/* 81373CD4 | 3C 80 81 64 */	lis r4, scFuncTextPaneName__Q210homebutton10HomeButton@ha
+/* 81373CD8 | 38 A0 00 01 */	li r5, 0x1
+/* 81373CDC | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 81373CE0 | 38 84 53 D0 */	addi r4, r4, scFuncTextPaneName__Q210homebutton10HomeButton@l
+/* 81373CE4 | 93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 81373CE8 | 93 C1 00 18 */	stw r30, 0x18(r1)
+/* 81373CEC | 7C 7E 1B 78 */	mr r30, r3
+/* 81373CF0 | 80 C3 02 2C */	lwz r6, 0x22c(r3)
+/* 81373CF4 | 80 84 00 08 */	lwz r4, 0x8(r4)
+/* 81373CF8 | 80 66 00 10 */	lwz r3, 0x10(r6)
+/* 81373CFC | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81373D00 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81373D04 | 7D 89 03 A6 */	mtctr r12
+/* 81373D08 | 4E 80 04 21 */	bctrl
+/* 81373D0C | 38 80 00 00 */	li r4, 0x0
+/* 81373D10 | 4B FD 07 05 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 81373D14 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 81373D18 | 80 03 00 20 */	lwz r0, 0x20(r3)
+/* 81373D1C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81373D20 | 41 82 00 1C */	beq .L_81373D3C
+/* 81373D24 | 7F C3 F3 78 */	mr r3, r30
+/* 81373D28 | 38 80 00 03 */	li r4, 0x3
+/* 81373D2C | 38 A0 00 01 */	li r5, 0x1
+/* 81373D30 | 48 00 2D 91 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81373D34 | 90 7E 00 14 */	stw r3, 0x14(r30)
+/* 81373D38 | 48 00 00 18 */	b .L_81373D50
 .L_81373D3C:
-/* 81373D3C 0004213C  7F C3 F3 78 */	mr r3, r30
-/* 81373D40 00042140  38 80 00 01 */	li r4, 0x1
-/* 81373D44 00042144  38 A0 00 01 */	li r5, 0x1
-/* 81373D48 00042148  48 00 2D 79 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81373D4C 0004214C  90 7E 00 14 */	stw r3, 0x14(r30)
+/* 81373D3C | 7F C3 F3 78 */	mr r3, r30
+/* 81373D40 | 38 80 00 01 */	li r4, 0x1
+/* 81373D44 | 38 A0 00 01 */	li r5, 0x1
+/* 81373D48 | 48 00 2D 79 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81373D4C | 90 7E 00 14 */	stw r3, 0x14(r30)
 .L_81373D50:
-/* 81373D50 00042150  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 81373D54 00042154  54 00 10 3A */	slwi r0, r0, 2
-/* 81373D58 00042158  7C 7E 02 14 */	add r3, r30, r0
-/* 81373D5C 0004215C  83 E3 02 E4 */	lwz r31, 0x2e4(r3)
-/* 81373D60 00042160  7F E3 FB 78 */	mr r3, r31
-/* 81373D64 00042164  48 00 3E CD */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81373D68 00042168  38 00 00 01 */	li r0, 0x1
-/* 81373D6C 0004216C  38 60 00 10 */	li r3, 0x10
-/* 81373D70 00042170  90 1F 00 14 */	stw r0, 0x14(r31)
-/* 81373D74 00042174  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 81373D78 00042178  90 7E 00 10 */	stw r3, 0x10(r30)
-/* 81373D7C 0004217C  54 00 10 3A */	slwi r0, r0, 2
-/* 81373D80 00042180  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 81373D84 00042184  7C 9E 02 14 */	add r4, r30, r0
-/* 81373D88 00042188  80 84 02 E4 */	lwz r4, 0x2e4(r4)
-/* 81373D8C 0004218C  C0 04 00 04 */	lfs f0, 0x4(r4)
-/* 81373D90 00042190  D0 1E 07 98 */	stfs f0, 0x798(r30)
-/* 81373D94 00042194  81 83 00 1C */	lwz r12, 0x1c(r3)
-/* 81373D98 00042198  2C 0C 00 00 */	cmpwi r12, 0x0
-/* 81373D9C 0004219C  41 82 00 1C */	beq .L_81373DB8
-/* 81373DA0 000421A0  FC 00 00 1E */	fctiwz f0, f0
-/* 81373DA4 000421A4  38 60 00 02 */	li r3, 0x2
-/* 81373DA8 000421A8  D8 01 00 08 */	stfd f0, 0x8(r1)
-/* 81373DAC 000421AC  80 81 00 0C */	lwz r4, 0xc(r1)
-/* 81373DB0 000421B0  7D 89 03 A6 */	mtctr r12
-/* 81373DB4 000421B4  4E 80 04 21 */	bctrl
+/* 81373D50 | 80 1E 00 14 */	lwz r0, 0x14(r30)
+/* 81373D54 | 54 00 10 3A */	slwi r0, r0, 2
+/* 81373D58 | 7C 7E 02 14 */	add r3, r30, r0
+/* 81373D5C | 83 E3 02 E4 */	lwz r31, 0x2e4(r3)
+/* 81373D60 | 7F E3 FB 78 */	mr r3, r31
+/* 81373D64 | 48 00 3E CD */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81373D68 | 38 00 00 01 */	li r0, 0x1
+/* 81373D6C | 38 60 00 10 */	li r3, 0x10
+/* 81373D70 | 90 1F 00 14 */	stw r0, 0x14(r31)
+/* 81373D74 | 80 1E 00 14 */	lwz r0, 0x14(r30)
+/* 81373D78 | 90 7E 00 10 */	stw r3, 0x10(r30)
+/* 81373D7C | 54 00 10 3A */	slwi r0, r0, 2
+/* 81373D80 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 81373D84 | 7C 9E 02 14 */	add r4, r30, r0
+/* 81373D88 | 80 84 02 E4 */	lwz r4, 0x2e4(r4)
+/* 81373D8C | C0 04 00 04 */	lfs f0, 0x4(r4)
+/* 81373D90 | D0 1E 07 98 */	stfs f0, 0x798(r30)
+/* 81373D94 | 81 83 00 1C */	lwz r12, 0x1c(r3)
+/* 81373D98 | 2C 0C 00 00 */	cmpwi r12, 0x0
+/* 81373D9C | 41 82 00 1C */	beq .L_81373DB8
+/* 81373DA0 | FC 00 00 1E */	fctiwz f0, f0
+/* 81373DA4 | 38 60 00 02 */	li r3, 0x2
+/* 81373DA8 | D8 01 00 08 */	stfd f0, 0x8(r1)
+/* 81373DAC | 80 81 00 0C */	lwz r4, 0xc(r1)
+/* 81373DB0 | 7D 89 03 A6 */	mtctr r12
+/* 81373DB4 | 4E 80 04 21 */	bctrl
 .L_81373DB8:
-/* 81373DB8 000421B8  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 81373DBC 000421BC  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 81373DC0 000421C0  83 C1 00 18 */	lwz r30, 0x18(r1)
-/* 81373DC4 000421C4  7C 08 03 A6 */	mtlr r0
-/* 81373DC8 000421C8  38 21 00 20 */	addi r1, r1, 0x20
-/* 81373DCC 000421CC  4E 80 00 20 */	blr
+/* 81373DB8 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81373DBC | 83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 81373DC0 | 83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 81373DC4 | 7C 08 03 A6 */	mtlr r0
+/* 81373DC8 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 81373DCC | 4E 80 00 20 */	blr
 .endfn calc_fadeoutAnm__Q210homebutton10HomeButtonFv
 
 # .text:0x2828 | 0x81373DD0 | size: 0x154
 # homebutton::HomeButton::calc_battery(int)
 .fn calc_battery__Q210homebutton10HomeButtonFi, global
-/* 81373DD0 000421D0  94 21 FF D0 */	stwu r1, -0x30(r1)
-/* 81373DD4 000421D4  7C 08 02 A6 */	mflr r0
-/* 81373DD8 000421D8  90 01 00 34 */	stw r0, 0x34(r1)
-/* 81373DDC 000421DC  39 61 00 30 */	addi r11, r1, 0x30
-/* 81373DE0 000421E0  48 28 56 D9 */	bl _savegpr_25
-/* 81373DE4 000421E4  1F 44 00 18 */	mulli r26, r4, 0x18
-/* 81373DE8 000421E8  3C A0 81 64 */	lis r5, scBatteryPaneName__Q210homebutton10HomeButton@ha
-/* 81373DEC 000421EC  54 80 20 36 */	slwi r0, r4, 4
-/* 81373DF0 000421F0  38 A5 54 AC */	addi r5, r5, scBatteryPaneName__Q210homebutton10HomeButton@l
-/* 81373DF4 000421F4  7C 7E 1B 78 */	mr r30, r3
-/* 81373DF8 000421F8  7C 9F 23 78 */	mr r31, r4
-/* 81373DFC 000421FC  7F 83 D2 14 */	add r28, r3, r26
-/* 81373E00 00042200  7F 65 02 14 */	add r27, r5, r0
-/* 81373E04 00042204  3B 20 00 00 */	li r25, 0x0
-/* 81373E08 00042208  3B A0 00 00 */	li r29, 0x0
+/* 81373DD0 | 94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 81373DD4 | 7C 08 02 A6 */	mflr r0
+/* 81373DD8 | 90 01 00 34 */	stw r0, 0x34(r1)
+/* 81373DDC | 39 61 00 30 */	addi r11, r1, 0x30
+/* 81373DE0 | 48 28 56 D9 */	bl _savegpr_25
+/* 81373DE4 | 1F 44 00 18 */	mulli r26, r4, 0x18
+/* 81373DE8 | 3C A0 81 64 */	lis r5, scBatteryPaneName__Q210homebutton10HomeButton@ha
+/* 81373DEC | 54 80 20 36 */	slwi r0, r4, 4
+/* 81373DF0 | 38 A5 54 AC */	addi r5, r5, scBatteryPaneName__Q210homebutton10HomeButton@l
+/* 81373DF4 | 7C 7E 1B 78 */	mr r30, r3
+/* 81373DF8 | 7C 9F 23 78 */	mr r31, r4
+/* 81373DFC | 7F 83 D2 14 */	add r28, r3, r26
+/* 81373E00 | 7F 65 02 14 */	add r27, r5, r0
+/* 81373E04 | 3B 20 00 00 */	li r25, 0x0
+/* 81373E08 | 3B A0 00 00 */	li r29, 0x0
 .L_81373E0C:
-/* 81373E0C 0004220C  88 1C 01 B8 */	lbz r0, 0x1b8(r28)
-/* 81373E10 00042210  7C 19 00 00 */	cmpw r25, r0
-/* 81373E14 00042214  40 80 00 30 */	bge .L_81373E44
-/* 81373E18 00042218  80 7E 02 2C */	lwz r3, 0x22c(r30)
-/* 81373E1C 0004221C  38 A0 00 01 */	li r5, 0x1
-/* 81373E20 00042220  7C 9B E8 2E */	lwzx r4, r27, r29
-/* 81373E24 00042224  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81373E28 00042228  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81373E2C 0004222C  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81373E30 00042230  7D 89 03 A6 */	mtctr r12
-/* 81373E34 00042234  4E 80 04 21 */	bctrl
-/* 81373E38 00042238  38 80 00 01 */	li r4, 0x1
-/* 81373E3C 0004223C  4B FD 05 D9 */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 81373E40 00042240  48 00 00 2C */	b .L_81373E6C
+/* 81373E0C | 88 1C 01 B8 */	lbz r0, 0x1b8(r28)
+/* 81373E10 | 7C 19 00 00 */	cmpw r25, r0
+/* 81373E14 | 40 80 00 30 */	bge .L_81373E44
+/* 81373E18 | 80 7E 02 2C */	lwz r3, 0x22c(r30)
+/* 81373E1C | 38 A0 00 01 */	li r5, 0x1
+/* 81373E20 | 7C 9B E8 2E */	lwzx r4, r27, r29
+/* 81373E24 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81373E28 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81373E2C | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81373E30 | 7D 89 03 A6 */	mtctr r12
+/* 81373E34 | 4E 80 04 21 */	bctrl
+/* 81373E38 | 38 80 00 01 */	li r4, 0x1
+/* 81373E3C | 4B FD 05 D9 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 81373E40 | 48 00 00 2C */	b .L_81373E6C
 .L_81373E44:
-/* 81373E44 00042244  80 7E 02 2C */	lwz r3, 0x22c(r30)
-/* 81373E48 00042248  38 A0 00 01 */	li r5, 0x1
-/* 81373E4C 0004224C  7C 9B E8 2E */	lwzx r4, r27, r29
-/* 81373E50 00042250  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81373E54 00042254  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81373E58 00042258  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81373E5C 0004225C  7D 89 03 A6 */	mtctr r12
-/* 81373E60 00042260  4E 80 04 21 */	bctrl
-/* 81373E64 00042264  38 80 00 00 */	li r4, 0x0
-/* 81373E68 00042268  4B FD 05 AD */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 81373E44 | 80 7E 02 2C */	lwz r3, 0x22c(r30)
+/* 81373E48 | 38 A0 00 01 */	li r5, 0x1
+/* 81373E4C | 7C 9B E8 2E */	lwzx r4, r27, r29
+/* 81373E50 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81373E54 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81373E58 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81373E5C | 7D 89 03 A6 */	mtctr r12
+/* 81373E60 | 4E 80 04 21 */	bctrl
+/* 81373E64 | 38 80 00 00 */	li r4, 0x0
+/* 81373E68 | 4B FD 05 AD */	bl SetVisible__Q34nw4r3lyt4PaneFb
 .L_81373E6C:
-/* 81373E6C 0004226C  3B 39 00 01 */	addi r25, r25, 0x1
-/* 81373E70 00042270  3B BD 00 04 */	addi r29, r29, 0x4
-/* 81373E74 00042274  2C 19 00 04 */	cmpwi r25, 0x4
-/* 81373E78 00042278  41 80 FF 94 */	blt .L_81373E0C
-/* 81373E7C 0004227C  7C 7E D2 14 */	add r3, r30, r26
-/* 81373E80 00042280  88 03 01 B8 */	lbz r0, 0x1b8(r3)
-/* 81373E84 00042284  28 00 00 02 */	cmplwi r0, 0x2
-/* 81373E88 00042288  40 80 00 34 */	bge .L_81373EBC
-/* 81373E8C 0004228C  7F C3 F3 78 */	mr r3, r30
-/* 81373E90 00042290  38 9F 00 1F */	addi r4, r31, 0x1f
-/* 81373E94 00042294  38 A0 00 15 */	li r5, 0x15
-/* 81373E98 00042298  48 00 2C 29 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81373E9C 0004229C  54 60 10 3A */	slwi r0, r3, 2
-/* 81373EA0 000422A0  7C 7E 02 14 */	add r3, r30, r0
-/* 81373EA4 000422A4  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81373EA8 000422A8  7F A3 EB 78 */	mr r3, r29
-/* 81373EAC 000422AC  48 00 3D 85 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81373EB0 000422B0  38 00 00 01 */	li r0, 0x1
-/* 81373EB4 000422B4  90 1D 00 14 */	stw r0, 0x14(r29)
-/* 81373EB8 000422B8  48 00 00 30 */	b .L_81373EE8
+/* 81373E6C | 3B 39 00 01 */	addi r25, r25, 0x1
+/* 81373E70 | 3B BD 00 04 */	addi r29, r29, 0x4
+/* 81373E74 | 2C 19 00 04 */	cmpwi r25, 0x4
+/* 81373E78 | 41 80 FF 94 */	blt .L_81373E0C
+/* 81373E7C | 7C 7E D2 14 */	add r3, r30, r26
+/* 81373E80 | 88 03 01 B8 */	lbz r0, 0x1b8(r3)
+/* 81373E84 | 28 00 00 02 */	cmplwi r0, 0x2
+/* 81373E88 | 40 80 00 34 */	bge .L_81373EBC
+/* 81373E8C | 7F C3 F3 78 */	mr r3, r30
+/* 81373E90 | 38 9F 00 1F */	addi r4, r31, 0x1f
+/* 81373E94 | 38 A0 00 15 */	li r5, 0x15
+/* 81373E98 | 48 00 2C 29 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81373E9C | 54 60 10 3A */	slwi r0, r3, 2
+/* 81373EA0 | 7C 7E 02 14 */	add r3, r30, r0
+/* 81373EA4 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81373EA8 | 7F A3 EB 78 */	mr r3, r29
+/* 81373EAC | 48 00 3D 85 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81373EB0 | 38 00 00 01 */	li r0, 0x1
+/* 81373EB4 | 90 1D 00 14 */	stw r0, 0x14(r29)
+/* 81373EB8 | 48 00 00 30 */	b .L_81373EE8
 .L_81373EBC:
-/* 81373EBC 000422BC  7F C3 F3 78 */	mr r3, r30
-/* 81373EC0 000422C0  38 9F 00 1F */	addi r4, r31, 0x1f
-/* 81373EC4 000422C4  38 A0 00 11 */	li r5, 0x11
-/* 81373EC8 000422C8  48 00 2B F9 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81373ECC 000422CC  54 60 10 3A */	slwi r0, r3, 2
-/* 81373ED0 000422D0  7C 7E 02 14 */	add r3, r30, r0
-/* 81373ED4 000422D4  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81373ED8 000422D8  7F A3 EB 78 */	mr r3, r29
-/* 81373EDC 000422DC  48 00 3D 55 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81373EE0 000422E0  38 00 00 01 */	li r0, 0x1
-/* 81373EE4 000422E4  90 1D 00 14 */	stw r0, 0x14(r29)
+/* 81373EBC | 7F C3 F3 78 */	mr r3, r30
+/* 81373EC0 | 38 9F 00 1F */	addi r4, r31, 0x1f
+/* 81373EC4 | 38 A0 00 11 */	li r5, 0x11
+/* 81373EC8 | 48 00 2B F9 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81373ECC | 54 60 10 3A */	slwi r0, r3, 2
+/* 81373ED0 | 7C 7E 02 14 */	add r3, r30, r0
+/* 81373ED4 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81373ED8 | 7F A3 EB 78 */	mr r3, r29
+/* 81373EDC | 48 00 3D 55 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81373EE0 | 38 00 00 01 */	li r0, 0x1
+/* 81373EE4 | 90 1D 00 14 */	stw r0, 0x14(r29)
 .L_81373EE8:
-/* 81373EE8 000422E8  80 1E 00 78 */	lwz r0, 0x78(r30)
-/* 81373EEC 000422EC  2C 00 00 64 */	cmpwi r0, 0x64
-/* 81373EF0 000422F0  40 80 00 0C */	bge .L_81373EFC
-/* 81373EF4 000422F4  38 00 00 00 */	li r0, 0x0
-/* 81373EF8 000422F8  90 1E 00 78 */	stw r0, 0x78(r30)
+/* 81373EE8 | 80 1E 00 78 */	lwz r0, 0x78(r30)
+/* 81373EEC | 2C 00 00 64 */	cmpwi r0, 0x64
+/* 81373EF0 | 40 80 00 0C */	bge .L_81373EFC
+/* 81373EF4 | 38 00 00 00 */	li r0, 0x0
+/* 81373EF8 | 90 1E 00 78 */	stw r0, 0x78(r30)
 .L_81373EFC:
-/* 81373EFC 000422FC  57 E0 10 3A */	slwi r0, r31, 2
-/* 81373F00 00042300  7C 7E 02 14 */	add r3, r30, r0
-/* 81373F04 00042304  80 63 02 A0 */	lwz r3, 0x2a0(r3)
-/* 81373F08 00042308  48 00 3C ED */	bl clrBatteryFlag__Q210homebutton10ControllerFv
-/* 81373F0C 0004230C  39 61 00 30 */	addi r11, r1, 0x30
-/* 81373F10 00042310  48 28 55 F5 */	bl _restgpr_25
-/* 81373F14 00042314  80 01 00 34 */	lwz r0, 0x34(r1)
-/* 81373F18 00042318  7C 08 03 A6 */	mtlr r0
-/* 81373F1C 0004231C  38 21 00 30 */	addi r1, r1, 0x30
-/* 81373F20 00042320  4E 80 00 20 */	blr
+/* 81373EFC | 57 E0 10 3A */	slwi r0, r31, 2
+/* 81373F00 | 7C 7E 02 14 */	add r3, r30, r0
+/* 81373F04 | 80 63 02 A0 */	lwz r3, 0x2a0(r3)
+/* 81373F08 | 48 00 3C ED */	bl clrBatteryFlag__Q210homebutton10ControllerFv
+/* 81373F0C | 39 61 00 30 */	addi r11, r1, 0x30
+/* 81373F10 | 48 28 55 F5 */	bl _restgpr_25
+/* 81373F14 | 80 01 00 34 */	lwz r0, 0x34(r1)
+/* 81373F18 | 7C 08 03 A6 */	mtlr r0
+/* 81373F1C | 38 21 00 30 */	addi r1, r1, 0x30
+/* 81373F20 | 4E 80 00 20 */	blr
 .endfn calc_battery__Q210homebutton10HomeButtonFi
 
 # .text:0x297C | 0x81373F24 | size: 0xD4
 # homebutton::HomeButton::calc_letter()
 .fn calc_letter__Q210homebutton10HomeButtonFv, global
-/* 81373F24 00042324  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 81373F28 00042328  7C 08 02 A6 */	mflr r0
-/* 81373F2C 0004232C  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81373F30 00042330  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 81373F34 00042334  7C 7F 1B 78 */	mr r31, r3
-/* 81373F38 00042338  88 A3 00 86 */	lbz r5, 0x86(r3)
-/* 81373F3C 0004233C  2C 05 00 00 */	cmpwi r5, 0x0
-/* 81373F40 00042340  41 82 00 64 */	beq .L_81373FA4
-/* 81373F44 00042344  80 83 04 0C */	lwz r4, 0x40c(r3)
-/* 81373F48 00042348  80 04 00 14 */	lwz r0, 0x14(r4)
-/* 81373F4C 0004234C  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81373F50 00042350  41 82 00 54 */	beq .L_81373FA4
-/* 81373F54 00042354  80 C3 02 2C */	lwz r6, 0x22c(r3)
-/* 81373F58 00042358  3C 60 81 64 */	lis r3, scFuncPaneName__Q210homebutton10HomeButton@ha
-/* 81373F5C 0004235C  80 83 53 1C */	lwz r4, scFuncPaneName__Q210homebutton10HomeButton@l(r3)
-/* 81373F60 00042360  38 A0 00 01 */	li r5, 0x1
-/* 81373F64 00042364  80 66 00 10 */	lwz r3, 0x10(r6)
-/* 81373F68 00042368  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81373F6C 0004236C  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81373F70 00042370  7D 89 03 A6 */	mtctr r12
-/* 81373F74 00042374  4E 80 04 21 */	bctrl
-/* 81373F78 00042378  38 80 00 01 */	li r4, 0x1
-/* 81373F7C 0004237C  4B FD 04 99 */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 81373F80 00042380  80 7F 04 0C */	lwz r3, 0x40c(r31)
-/* 81373F84 00042384  38 00 00 02 */	li r0, 0x2
-/* 81373F88 00042388  90 03 00 18 */	stw r0, 0x18(r3)
-/* 81373F8C 0004238C  83 FF 04 0C */	lwz r31, 0x40c(r31)
-/* 81373F90 00042390  7F E3 FB 78 */	mr r3, r31
-/* 81373F94 00042394  48 00 3C 9D */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81373F98 00042398  38 00 00 01 */	li r0, 0x1
-/* 81373F9C 0004239C  90 1F 00 14 */	stw r0, 0x14(r31)
-/* 81373FA0 000423A0  48 00 00 44 */	b .L_81373FE4
+/* 81373F24 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 81373F28 | 7C 08 02 A6 */	mflr r0
+/* 81373F2C | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81373F30 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 81373F34 | 7C 7F 1B 78 */	mr r31, r3
+/* 81373F38 | 88 A3 00 86 */	lbz r5, 0x86(r3)
+/* 81373F3C | 2C 05 00 00 */	cmpwi r5, 0x0
+/* 81373F40 | 41 82 00 64 */	beq .L_81373FA4
+/* 81373F44 | 80 83 04 0C */	lwz r4, 0x40c(r3)
+/* 81373F48 | 80 04 00 14 */	lwz r0, 0x14(r4)
+/* 81373F4C | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81373F50 | 41 82 00 54 */	beq .L_81373FA4
+/* 81373F54 | 80 C3 02 2C */	lwz r6, 0x22c(r3)
+/* 81373F58 | 3C 60 81 64 */	lis r3, scFuncPaneName__Q210homebutton10HomeButton@ha
+/* 81373F5C | 80 83 53 1C */	lwz r4, scFuncPaneName__Q210homebutton10HomeButton@l(r3)
+/* 81373F60 | 38 A0 00 01 */	li r5, 0x1
+/* 81373F64 | 80 66 00 10 */	lwz r3, 0x10(r6)
+/* 81373F68 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81373F6C | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81373F70 | 7D 89 03 A6 */	mtctr r12
+/* 81373F74 | 4E 80 04 21 */	bctrl
+/* 81373F78 | 38 80 00 01 */	li r4, 0x1
+/* 81373F7C | 4B FD 04 99 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 81373F80 | 80 7F 04 0C */	lwz r3, 0x40c(r31)
+/* 81373F84 | 38 00 00 02 */	li r0, 0x2
+/* 81373F88 | 90 03 00 18 */	stw r0, 0x18(r3)
+/* 81373F8C | 83 FF 04 0C */	lwz r31, 0x40c(r31)
+/* 81373F90 | 7F E3 FB 78 */	mr r3, r31
+/* 81373F94 | 48 00 3C 9D */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81373F98 | 38 00 00 01 */	li r0, 0x1
+/* 81373F9C | 90 1F 00 14 */	stw r0, 0x14(r31)
+/* 81373FA0 | 48 00 00 44 */	b .L_81373FE4
 .L_81373FA4:
-/* 81373FA4 000423A4  2C 05 00 00 */	cmpwi r5, 0x0
-/* 81373FA8 000423A8  40 82 00 3C */	bne .L_81373FE4
-/* 81373FAC 000423AC  80 C3 02 2C */	lwz r6, 0x22c(r3)
-/* 81373FB0 000423B0  3C 60 81 64 */	lis r3, scFuncPaneName__Q210homebutton10HomeButton@ha
-/* 81373FB4 000423B4  80 83 53 1C */	lwz r4, scFuncPaneName__Q210homebutton10HomeButton@l(r3)
-/* 81373FB8 000423B8  38 A0 00 01 */	li r5, 0x1
-/* 81373FBC 000423BC  80 66 00 10 */	lwz r3, 0x10(r6)
-/* 81373FC0 000423C0  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81373FC4 000423C4  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81373FC8 000423C8  7D 89 03 A6 */	mtctr r12
-/* 81373FCC 000423CC  4E 80 04 21 */	bctrl
-/* 81373FD0 000423D0  38 80 00 00 */	li r4, 0x0
-/* 81373FD4 000423D4  4B FD 04 41 */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 81373FD8 000423D8  80 7F 04 0C */	lwz r3, 0x40c(r31)
-/* 81373FDC 000423DC  38 00 00 00 */	li r0, 0x0
-/* 81373FE0 000423E0  90 03 00 14 */	stw r0, 0x14(r3)
+/* 81373FA4 | 2C 05 00 00 */	cmpwi r5, 0x0
+/* 81373FA8 | 40 82 00 3C */	bne .L_81373FE4
+/* 81373FAC | 80 C3 02 2C */	lwz r6, 0x22c(r3)
+/* 81373FB0 | 3C 60 81 64 */	lis r3, scFuncPaneName__Q210homebutton10HomeButton@ha
+/* 81373FB4 | 80 83 53 1C */	lwz r4, scFuncPaneName__Q210homebutton10HomeButton@l(r3)
+/* 81373FB8 | 38 A0 00 01 */	li r5, 0x1
+/* 81373FBC | 80 66 00 10 */	lwz r3, 0x10(r6)
+/* 81373FC0 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81373FC4 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81373FC8 | 7D 89 03 A6 */	mtctr r12
+/* 81373FCC | 4E 80 04 21 */	bctrl
+/* 81373FD0 | 38 80 00 00 */	li r4, 0x0
+/* 81373FD4 | 4B FD 04 41 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 81373FD8 | 80 7F 04 0C */	lwz r3, 0x40c(r31)
+/* 81373FDC | 38 00 00 00 */	li r0, 0x0
+/* 81373FE0 | 90 03 00 14 */	stw r0, 0x14(r3)
 .L_81373FE4:
-/* 81373FE4 000423E4  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 81373FE8 000423E8  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 81373FEC 000423EC  7C 08 03 A6 */	mtlr r0
-/* 81373FF0 000423F0  38 21 00 10 */	addi r1, r1, 0x10
-/* 81373FF4 000423F4  4E 80 00 20 */	blr
+/* 81373FE4 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 81373FE8 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 81373FEC | 7C 08 03 A6 */	mtlr r0
+/* 81373FF0 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 81373FF4 | 4E 80 00 20 */	blr
 .endfn calc_letter__Q210homebutton10HomeButtonFv
 
 # .text:0x2A50 | 0x81373FF8 | size: 0x90
 # homebutton::HomeButton::draw()
 .fn draw__Q210homebutton10HomeButtonFv, global
-/* 81373FF8 000423F8  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 81373FFC 000423FC  7C 08 02 A6 */	mflr r0
-/* 81374000 00042400  90 01 00 24 */	stw r0, 0x24(r1)
-/* 81374004 00042404  39 61 00 20 */	addi r11, r1, 0x20
-/* 81374008 00042408  48 28 54 C1 */	bl _savegpr_29
-/* 8137400C 0004240C  7C 7D 1B 78 */	mr r29, r3
-/* 81374010 00042410  80 63 02 2C */	lwz r3, 0x22c(r3)
-/* 81374014 00042414  38 9D 02 4C */	addi r4, r29, 0x24c
-/* 81374018 00042418  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 8137401C 0004241C  81 8C 00 28 */	lwz r12, 0x28(r12)
-/* 81374020 00042420  7D 89 03 A6 */	mtctr r12
-/* 81374024 00042424  4E 80 04 21 */	bctrl
-/* 81374028 00042428  80 7D 00 04 */	lwz r3, 0x4(r29)
-/* 8137402C 0004242C  80 03 00 28 */	lwz r0, 0x28(r3)
-/* 81374030 00042430  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81374034 00042434  40 82 00 34 */	bne .L_81374068
-/* 81374038 00042438  3B C0 00 03 */	li r30, 0x3
-/* 8137403C 0004243C  3B E0 00 0C */	li r31, 0xc
+/* 81373FF8 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81373FFC | 7C 08 02 A6 */	mflr r0
+/* 81374000 | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 81374004 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81374008 | 48 28 54 C1 */	bl _savegpr_29
+/* 8137400C | 7C 7D 1B 78 */	mr r29, r3
+/* 81374010 | 80 63 02 2C */	lwz r3, 0x22c(r3)
+/* 81374014 | 38 9D 02 4C */	addi r4, r29, 0x24c
+/* 81374018 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 8137401C | 81 8C 00 28 */	lwz r12, 0x28(r12)
+/* 81374020 | 7D 89 03 A6 */	mtctr r12
+/* 81374024 | 4E 80 04 21 */	bctrl
+/* 81374028 | 80 7D 00 04 */	lwz r3, 0x4(r29)
+/* 8137402C | 80 03 00 28 */	lwz r0, 0x28(r3)
+/* 81374030 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81374034 | 40 82 00 34 */	bne .L_81374068
+/* 81374038 | 3B C0 00 03 */	li r30, 0x3
+/* 8137403C | 3B E0 00 0C */	li r31, 0xc
 .L_81374040:
-/* 81374040 00042440  7C 7D FA 14 */	add r3, r29, r31
-/* 81374044 00042444  38 9D 02 4C */	addi r4, r29, 0x24c
-/* 81374048 00042448  80 63 02 30 */	lwz r3, 0x230(r3)
-/* 8137404C 0004244C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81374050 00042450  81 8C 00 28 */	lwz r12, 0x28(r12)
-/* 81374054 00042454  7D 89 03 A6 */	mtctr r12
-/* 81374058 00042458  4E 80 04 21 */	bctrl
-/* 8137405C 0004245C  37 DE FF FF */	subic. r30, r30, 0x1
-/* 81374060 00042460  3B FF FF FC */	subi r31, r31, 0x4
-/* 81374064 00042464  40 80 FF DC */	bge .L_81374040
+/* 81374040 | 7C 7D FA 14 */	add r3, r29, r31
+/* 81374044 | 38 9D 02 4C */	addi r4, r29, 0x24c
+/* 81374048 | 80 63 02 30 */	lwz r3, 0x230(r3)
+/* 8137404C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81374050 | 81 8C 00 28 */	lwz r12, 0x28(r12)
+/* 81374054 | 7D 89 03 A6 */	mtctr r12
+/* 81374058 | 4E 80 04 21 */	bctrl
+/* 8137405C | 37 DE FF FF */	subic. r30, r30, 0x1
+/* 81374060 | 3B FF FF FC */	subi r31, r31, 0x4
+/* 81374064 | 40 80 FF DC */	bge .L_81374040
 .L_81374068:
-/* 81374068 00042468  38 7D 04 48 */	addi r3, r29, 0x448
-/* 8137406C 0004246C  48 00 2D B9 */	bl draw__Q310homebutton10HomeButton10BlackFaderFv
-/* 81374070 00042470  39 61 00 20 */	addi r11, r1, 0x20
-/* 81374074 00042474  48 28 54 A1 */	bl _restgpr_29
-/* 81374078 00042478  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 8137407C 0004247C  7C 08 03 A6 */	mtlr r0
-/* 81374080 00042480  38 21 00 20 */	addi r1, r1, 0x20
-/* 81374084 00042484  4E 80 00 20 */	blr
+/* 81374068 | 38 7D 04 48 */	addi r3, r29, 0x448
+/* 8137406C | 48 00 2D B9 */	bl draw__Q310homebutton10HomeButton10BlackFaderFv
+/* 81374070 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81374074 | 48 28 54 A1 */	bl _restgpr_29
+/* 81374078 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8137407C | 7C 08 03 A6 */	mtlr r0
+/* 81374080 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 81374084 | 4E 80 00 20 */	blr
 .endfn draw__Q210homebutton10HomeButtonFv
 
 # .text:0x2AE0 | 0x81374088 | size: 0x88
 # homebutton::SpeakerCallback(OSAlarm*, OSContext*)
 .fn SpeakerCallback__10homebuttonFP7OSAlarmP9OSContext, local
-/* 81374088 00042488  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 8137408C 0004248C  7C 08 02 A6 */	mflr r0
-/* 81374090 00042490  90 01 00 24 */	stw r0, 0x24(r1)
-/* 81374094 00042494  39 61 00 20 */	addi r11, r1, 0x20
-/* 81374098 00042498  48 28 54 2D */	bl _savegpr_28
-/* 8137409C 0004249C  48 1B 8F CD */	bl fn_8152D068
-/* 813740A0 000424A0  54 7D 84 3E */	srwi r29, r3, 16
-/* 813740A4 000424A4  83 CD A9 70 */	lwz r30, lbl_816989B0@sda21(r0)
-/* 813740A8 000424A8  54 7C 04 3E */	clrlwi r28, r3, 16
-/* 813740AC 000424AC  7F A3 EB 78 */	mr r3, r29
-/* 813740B0 000424B0  48 20 78 29 */	bl fn_8157B8D8
-/* 813740B4 000424B4  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813740B8 000424B8  41 82 00 1C */	beq .L_813740D4
-/* 813740BC 000424BC  57 A0 10 3A */	slwi r0, r29, 2
-/* 813740C0 000424C0  7F FE 02 14 */	add r31, r30, r0
-/* 813740C4 000424C4  80 7F 02 A0 */	lwz r3, 0x2a0(r31)
-/* 813740C8 000424C8  48 00 39 CD */	bl isPlayReady__Q210homebutton10ControllerCFv
-/* 813740CC 000424CC  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813740D0 000424D0  40 82 00 18 */	bne .L_813740E8
+/* 81374088 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8137408C | 7C 08 02 A6 */	mflr r0
+/* 81374090 | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 81374094 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81374098 | 48 28 54 2D */	bl _savegpr_28
+/* 8137409C | 48 1B 8F CD */	bl fn_8152D068
+/* 813740A0 | 54 7D 84 3E */	srwi r29, r3, 16
+/* 813740A4 | 83 CD A9 70 */	lwz r30, lbl_816989B0@sda21(r0)
+/* 813740A8 | 54 7C 04 3E */	clrlwi r28, r3, 16
+/* 813740AC | 7F A3 EB 78 */	mr r3, r29
+/* 813740B0 | 48 20 78 29 */	bl fn_8157B8D8
+/* 813740B4 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813740B8 | 41 82 00 1C */	beq .L_813740D4
+/* 813740BC | 57 A0 10 3A */	slwi r0, r29, 2
+/* 813740C0 | 7F FE 02 14 */	add r31, r30, r0
+/* 813740C4 | 80 7F 02 A0 */	lwz r3, 0x2a0(r31)
+/* 813740C8 | 48 00 39 CD */	bl isPlayReady__Q210homebutton10ControllerCFv
+/* 813740CC | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813740D0 | 40 82 00 18 */	bne .L_813740E8
 .L_813740D4:
-/* 813740D4 000424D4  7F C3 F3 78 */	mr r3, r30
-/* 813740D8 000424D8  7F A4 EB 78 */	mr r4, r29
-/* 813740DC 000424DC  38 A0 00 32 */	li r5, 0x32
-/* 813740E0 000424E0  48 00 00 55 */	bl setSpeakerAlarm__Q210homebutton10HomeButtonFii
-/* 813740E4 000424E4  48 00 00 14 */	b .L_813740F8
+/* 813740D4 | 7F C3 F3 78 */	mr r3, r30
+/* 813740D8 | 7F A4 EB 78 */	mr r4, r29
+/* 813740DC | 38 A0 00 32 */	li r5, 0x32
+/* 813740E0 | 48 00 00 55 */	bl setSpeakerAlarm__Q210homebutton10HomeButtonFii
+/* 813740E4 | 48 00 00 14 */	b .L_813740F8
 .L_813740E8:
-/* 813740E8 000424E8  80 7F 02 A0 */	lwz r3, 0x2a0(r31)
-/* 813740EC 000424EC  7F 85 E3 78 */	mr r5, r28
-/* 813740F0 000424F0  80 9E 06 08 */	lwz r4, 0x608(r30)
-/* 813740F4 000424F4  48 00 37 91 */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
+/* 813740E8 | 80 7F 02 A0 */	lwz r3, 0x2a0(r31)
+/* 813740EC | 7F 85 E3 78 */	mr r5, r28
+/* 813740F0 | 80 9E 06 08 */	lwz r4, 0x608(r30)
+/* 813740F4 | 48 00 37 91 */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
 .L_813740F8:
-/* 813740F8 000424F8  39 61 00 20 */	addi r11, r1, 0x20
-/* 813740FC 000424FC  48 28 54 15 */	bl _restgpr_28
-/* 81374100 00042500  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 81374104 00042504  7C 08 03 A6 */	mtlr r0
-/* 81374108 00042508  38 21 00 20 */	addi r1, r1, 0x20
-/* 8137410C 0004250C  4E 80 00 20 */	blr
+/* 813740F8 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813740FC | 48 28 54 15 */	bl _restgpr_28
+/* 81374100 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81374104 | 7C 08 03 A6 */	mtlr r0
+/* 81374108 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 8137410C | 4E 80 00 20 */	blr
 .endfn SpeakerCallback__10homebuttonFP7OSAlarmP9OSContext
 
 # .text:0x2B68 | 0x81374110 | size: 0x24
 # homebutton::MotorCallback(OSAlarm*, OSContext*)
 .fn MotorCallback__10homebuttonFP7OSAlarmP9OSContext, local
-/* 81374110 00042510  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 81374114 00042514  7C 08 02 A6 */	mflr r0
-/* 81374118 00042518  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8137411C 0004251C  48 1B 8F 4D */	bl fn_8152D068
-/* 81374120 00042520  48 00 39 E1 */	bl stopMotor__Q210homebutton10ControllerFv
-/* 81374124 00042524  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 81374128 00042528  7C 08 03 A6 */	mtlr r0
-/* 8137412C 0004252C  38 21 00 10 */	addi r1, r1, 0x10
-/* 81374130 00042530  4E 80 00 20 */	blr
+/* 81374110 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 81374114 | 7C 08 02 A6 */	mflr r0
+/* 81374118 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 8137411C | 48 1B 8F 4D */	bl fn_8152D068
+/* 81374120 | 48 00 39 E1 */	bl stopMotor__Q210homebutton10ControllerFv
+/* 81374124 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 81374128 | 7C 08 03 A6 */	mtlr r0
+/* 8137412C | 38 21 00 10 */	addi r1, r1, 0x10
+/* 81374130 | 4E 80 00 20 */	blr
 .endfn MotorCallback__10homebuttonFP7OSAlarmP9OSContext
 
 # .text:0x2B8C | 0x81374134 | size: 0x84
 # homebutton::HomeButton::setSpeakerAlarm(int, int)
 .fn setSpeakerAlarm__Q210homebutton10HomeButtonFii, global
-/* 81374134 00042534  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 81374138 00042538  7C 08 02 A6 */	mflr r0
-/* 8137413C 0004253C  1C E4 00 30 */	mulli r7, r4, 0x30
-/* 81374140 00042540  54 86 80 1E */	slwi r6, r4, 16
-/* 81374144 00042544  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81374148 00042548  38 04 00 02 */	addi r0, r4, 0x2
-/* 8137414C 0004254C  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 81374150 00042550  7C 63 3A 14 */	add r3, r3, r7
-/* 81374154 00042554  3B E3 05 18 */	addi r31, r3, 0x518
-/* 81374158 00042558  7C C4 03 78 */	or r4, r6, r0
-/* 8137415C 0004255C  93 C1 00 08 */	stw r30, 0x8(r1)
-/* 81374160 00042560  7C BE 2B 78 */	mr r30, r5
-/* 81374164 00042564  7F E3 FB 78 */	mr r3, r31
-/* 81374168 00042568  48 1B 8E F9 */	bl fn_8152D060
-/* 8137416C 0004256C  7F E3 FB 78 */	mr r3, r31
-/* 81374170 00042570  48 1B 8A C9 */	bl fn_8152CC38
-/* 81374174 00042574  3C 60 80 00 */	lis r3, 0x8000
-/* 81374178 00042578  3C E0 81 37 */	lis r7, SpeakerCallback__10homebuttonFP7OSAlarmP9OSContext@ha
-/* 8137417C 0004257C  80 83 00 F8 */	lwz r4, 0xf8(r3)
-/* 81374180 00042580  38 00 03 E8 */	li r0, 0x3e8
-/* 81374184 00042584  7F E3 FB 78 */	mr r3, r31
-/* 81374188 00042588  38 E7 40 88 */	addi r7, r7, SpeakerCallback__10homebuttonFP7OSAlarmP9OSContext@l
-/* 8137418C 0004258C  54 84 F0 BE */	srwi r4, r4, 2
-/* 81374190 00042590  38 A0 00 00 */	li r5, 0x0
-/* 81374194 00042594  7C 04 03 96 */	divwu r0, r4, r0
-/* 81374198 00042598  7C DE 01 D6 */	mullw r6, r30, r0
-/* 8137419C 0004259C  48 1B 89 A9 */	bl fn_8152CB44
-/* 813741A0 000425A0  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813741A4 000425A4  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813741A8 000425A8  83 C1 00 08 */	lwz r30, 0x8(r1)
-/* 813741AC 000425AC  7C 08 03 A6 */	mtlr r0
-/* 813741B0 000425B0  38 21 00 10 */	addi r1, r1, 0x10
-/* 813741B4 000425B4  4E 80 00 20 */	blr
+/* 81374134 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 81374138 | 7C 08 02 A6 */	mflr r0
+/* 8137413C | 1C E4 00 30 */	mulli r7, r4, 0x30
+/* 81374140 | 54 86 80 1E */	slwi r6, r4, 16
+/* 81374144 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81374148 | 38 04 00 02 */	addi r0, r4, 0x2
+/* 8137414C | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 81374150 | 7C 63 3A 14 */	add r3, r3, r7
+/* 81374154 | 3B E3 05 18 */	addi r31, r3, 0x518
+/* 81374158 | 7C C4 03 78 */	or r4, r6, r0
+/* 8137415C | 93 C1 00 08 */	stw r30, 0x8(r1)
+/* 81374160 | 7C BE 2B 78 */	mr r30, r5
+/* 81374164 | 7F E3 FB 78 */	mr r3, r31
+/* 81374168 | 48 1B 8E F9 */	bl fn_8152D060
+/* 8137416C | 7F E3 FB 78 */	mr r3, r31
+/* 81374170 | 48 1B 8A C9 */	bl fn_8152CC38
+/* 81374174 | 3C 60 80 00 */	lis r3, 0x8000
+/* 81374178 | 3C E0 81 37 */	lis r7, SpeakerCallback__10homebuttonFP7OSAlarmP9OSContext@ha
+/* 8137417C | 80 83 00 F8 */	lwz r4, 0xf8(r3)
+/* 81374180 | 38 00 03 E8 */	li r0, 0x3e8
+/* 81374184 | 7F E3 FB 78 */	mr r3, r31
+/* 81374188 | 38 E7 40 88 */	addi r7, r7, SpeakerCallback__10homebuttonFP7OSAlarmP9OSContext@l
+/* 8137418C | 54 84 F0 BE */	srwi r4, r4, 2
+/* 81374190 | 38 A0 00 00 */	li r5, 0x0
+/* 81374194 | 7C 04 03 96 */	divwu r0, r4, r0
+/* 81374198 | 7C DE 01 D6 */	mullw r6, r30, r0
+/* 8137419C | 48 1B 89 A9 */	bl fn_8152CB44
+/* 813741A0 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813741A4 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813741A8 | 83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 813741AC | 7C 08 03 A6 */	mtlr r0
+/* 813741B0 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813741B4 | 4E 80 00 20 */	blr
 .endfn setSpeakerAlarm__Q210homebutton10HomeButtonFii
 
 # .text:0x2C10 | 0x813741B8 | size: 0x84
 .fn homebutton_813741B8, local
-/* 813741B8 000425B8  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 813741BC 000425BC  7C 08 02 A6 */	mflr r0
-/* 813741C0 000425C0  90 01 00 24 */	stw r0, 0x24(r1)
-/* 813741C4 000425C4  39 61 00 20 */	addi r11, r1, 0x20
-/* 813741C8 000425C8  48 28 53 01 */	bl _savegpr_29
-/* 813741CC 000425CC  83 ED A9 70 */	lwz r31, lbl_816989B0@sda21(r0)
-/* 813741D0 000425D0  48 1B 8E 99 */	bl fn_8152D068
-/* 813741D4 000425D4  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813741D8 000425D8  7C 7E 1B 78 */	mr r30, r3
-/* 813741DC 000425DC  3B A0 00 00 */	li r29, 0x0
-/* 813741E0 000425E0  40 82 00 20 */	bne .L_81374200
-/* 813741E4 000425E4  48 20 55 B5 */	bl fn_81579798
-/* 813741E8 000425E8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813741EC 000425EC  41 82 00 24 */	beq .L_81374210
-/* 813741F0 000425F0  38 00 00 01 */	li r0, 0x1
-/* 813741F4 000425F4  3B A0 00 01 */	li r29, 0x1
-/* 813741F8 000425F8  98 1F 00 89 */	stb r0, 0x89(r31)
-/* 813741FC 000425FC  48 00 00 14 */	b .L_81374210
+/* 813741B8 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 813741BC | 7C 08 02 A6 */	mflr r0
+/* 813741C0 | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 813741C4 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813741C8 | 48 28 53 01 */	bl _savegpr_29
+/* 813741CC | 83 ED A9 70 */	lwz r31, lbl_816989B0@sda21(r0)
+/* 813741D0 | 48 1B 8E 99 */	bl fn_8152D068
+/* 813741D4 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813741D8 | 7C 7E 1B 78 */	mr r30, r3
+/* 813741DC | 3B A0 00 00 */	li r29, 0x0
+/* 813741E0 | 40 82 00 20 */	bne .L_81374200
+/* 813741E4 | 48 20 55 B5 */	bl fn_81579798
+/* 813741E8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813741EC | 41 82 00 24 */	beq .L_81374210
+/* 813741F0 | 38 00 00 01 */	li r0, 0x1
+/* 813741F4 | 3B A0 00 01 */	li r29, 0x1
+/* 813741F8 | 98 1F 00 89 */	stb r0, 0x89(r31)
+/* 813741FC | 48 00 00 14 */	b .L_81374210
 .L_81374200:
-/* 81374200 00042600  48 20 55 9D */	bl fn_8157979C
-/* 81374204 00042604  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81374208 00042608  41 82 00 08 */	beq .L_81374210
-/* 8137420C 0004260C  3B A0 00 01 */	li r29, 0x1
+/* 81374200 | 48 20 55 9D */	bl fn_8157979C
+/* 81374204 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81374208 | 41 82 00 08 */	beq .L_81374210
+/* 8137420C | 3B A0 00 01 */	li r29, 0x1
 .L_81374210:
-/* 81374210 00042610  2C 1D 00 00 */	cmpwi r29, 0x0
-/* 81374214 00042614  40 82 00 10 */	bne .L_81374224
-/* 81374218 00042618  7F E3 FB 78 */	mr r3, r31
-/* 8137421C 0004261C  7F C4 F3 78 */	mr r4, r30
-/* 81374220 00042620  48 00 00 4D */	bl setSimpleSyncAlarm__Q210homebutton10HomeButtonFi
+/* 81374210 | 2C 1D 00 00 */	cmpwi r29, 0x0
+/* 81374214 | 40 82 00 10 */	bne .L_81374224
+/* 81374218 | 7F E3 FB 78 */	mr r3, r31
+/* 8137421C | 7F C4 F3 78 */	mr r4, r30
+/* 81374220 | 48 00 00 4D */	bl setSimpleSyncAlarm__Q210homebutton10HomeButtonFi
 .L_81374224:
-/* 81374224 00042624  39 61 00 20 */	addi r11, r1, 0x20
-/* 81374228 00042628  48 28 52 ED */	bl _restgpr_29
-/* 8137422C 0004262C  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 81374230 00042630  7C 08 03 A6 */	mtlr r0
-/* 81374234 00042634  38 21 00 20 */	addi r1, r1, 0x20
-/* 81374238 00042638  4E 80 00 20 */	blr
+/* 81374224 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81374228 | 48 28 52 ED */	bl _restgpr_29
+/* 8137422C | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81374230 | 7C 08 03 A6 */	mtlr r0
+/* 81374234 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 81374238 | 4E 80 00 20 */	blr
 .endfn homebutton_813741B8
 
 # .text:0x2C94 | 0x8137423C | size: 0x30
 .fn homebutton_8137423C, local
-/* 8137423C 0004263C  2C 03 00 01 */	cmpwi r3, 0x1
-/* 81374240 00042640  40 82 00 10 */	bne .L_81374250
-/* 81374244 00042644  80 AD A9 70 */	lwz r5, lbl_816989B0@sda21(r0)
-/* 81374248 00042648  38 00 00 01 */	li r0, 0x1
-/* 8137424C 0004264C  98 05 00 8A */	stb r0, 0x8a(r5)
+/* 8137423C | 2C 03 00 01 */	cmpwi r3, 0x1
+/* 81374240 | 40 82 00 10 */	bne .L_81374250
+/* 81374244 | 80 AD A9 70 */	lwz r5, lbl_816989B0@sda21(r0)
+/* 81374248 | 38 00 00 01 */	li r0, 0x1
+/* 8137424C | 98 05 00 8A */	stb r0, 0x8a(r5)
 .L_81374250:
-/* 81374250 00042650  80 AD A9 70 */	lwz r5, lbl_816989B0@sda21(r0)
-/* 81374254 00042654  81 85 02 04 */	lwz r12, 0x204(r5)
-/* 81374258 00042658  2C 0C 00 00 */	cmpwi r12, 0x0
-/* 8137425C 0004265C  4D 82 00 20 */	beqlr
-/* 81374260 00042660  7D 89 03 A6 */	mtctr r12
-/* 81374264 00042664  4E 80 04 20 */	bctr
-/* 81374268 00042668  4E 80 00 20 */	blr
+/* 81374250 | 80 AD A9 70 */	lwz r5, lbl_816989B0@sda21(r0)
+/* 81374254 | 81 85 02 04 */	lwz r12, 0x204(r5)
+/* 81374258 | 2C 0C 00 00 */	cmpwi r12, 0x0
+/* 8137425C | 4D 82 00 20 */	beqlr
+/* 81374260 | 7D 89 03 A6 */	mtctr r12
+/* 81374264 | 4E 80 04 20 */	bctr
+/* 81374268 | 4E 80 00 20 */	blr
 .endfn homebutton_8137423C
 
 # .text:0x2CC4 | 0x8137426C | size: 0x74
 # homebutton::HomeButton::setSimpleSyncAlarm(int)
 .fn setSimpleSyncAlarm__Q210homebutton10HomeButtonFi, global
-/* 8137426C 0004266C  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 81374270 00042670  7C 08 02 A6 */	mflr r0
-/* 81374274 00042674  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81374278 00042678  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 8137427C 0004267C  7C 9F 23 78 */	mr r31, r4
-/* 81374280 00042680  93 C1 00 08 */	stw r30, 0x8(r1)
-/* 81374284 00042684  7C 7E 1B 78 */	mr r30, r3
-/* 81374288 00042688  38 63 05 D8 */	addi r3, r3, 0x5d8
-/* 8137428C 0004268C  48 1B 89 AD */	bl fn_8152CC38
-/* 81374290 00042690  7F E4 FB 78 */	mr r4, r31
-/* 81374294 00042694  38 7E 05 D8 */	addi r3, r30, 0x5d8
-/* 81374298 00042698  48 1B 8D C9 */	bl fn_8152D060
-/* 8137429C 0004269C  3C 60 80 00 */	lis r3, 0x8000
-/* 813742A0 000426A0  3C E0 81 37 */	lis r7, homebutton_813741B8@ha
-/* 813742A4 000426A4  80 83 00 F8 */	lwz r4, 0xf8(r3)
-/* 813742A8 000426A8  38 00 03 E8 */	li r0, 0x3e8
-/* 813742AC 000426AC  38 7E 05 D8 */	addi r3, r30, 0x5d8
-/* 813742B0 000426B0  38 E7 41 B8 */	addi r7, r7, homebutton_813741B8@l
-/* 813742B4 000426B4  54 84 F0 BE */	srwi r4, r4, 2
-/* 813742B8 000426B8  38 A0 00 00 */	li r5, 0x0
-/* 813742BC 000426BC  7C 04 03 96 */	divwu r0, r4, r0
-/* 813742C0 000426C0  1C C0 00 64 */	mulli r6, r0, 0x64
-/* 813742C4 000426C4  48 1B 88 81 */	bl fn_8152CB44
-/* 813742C8 000426C8  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 813742CC 000426CC  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 813742D0 000426D0  83 C1 00 08 */	lwz r30, 0x8(r1)
-/* 813742D4 000426D4  7C 08 03 A6 */	mtlr r0
-/* 813742D8 000426D8  38 21 00 10 */	addi r1, r1, 0x10
-/* 813742DC 000426DC  4E 80 00 20 */	blr
+/* 8137426C | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 81374270 | 7C 08 02 A6 */	mflr r0
+/* 81374274 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81374278 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8137427C | 7C 9F 23 78 */	mr r31, r4
+/* 81374280 | 93 C1 00 08 */	stw r30, 0x8(r1)
+/* 81374284 | 7C 7E 1B 78 */	mr r30, r3
+/* 81374288 | 38 63 05 D8 */	addi r3, r3, 0x5d8
+/* 8137428C | 48 1B 89 AD */	bl fn_8152CC38
+/* 81374290 | 7F E4 FB 78 */	mr r4, r31
+/* 81374294 | 38 7E 05 D8 */	addi r3, r30, 0x5d8
+/* 81374298 | 48 1B 8D C9 */	bl fn_8152D060
+/* 8137429C | 3C 60 80 00 */	lis r3, 0x8000
+/* 813742A0 | 3C E0 81 37 */	lis r7, homebutton_813741B8@ha
+/* 813742A4 | 80 83 00 F8 */	lwz r4, 0xf8(r3)
+/* 813742A8 | 38 00 03 E8 */	li r0, 0x3e8
+/* 813742AC | 38 7E 05 D8 */	addi r3, r30, 0x5d8
+/* 813742B0 | 38 E7 41 B8 */	addi r7, r7, homebutton_813741B8@l
+/* 813742B4 | 54 84 F0 BE */	srwi r4, r4, 2
+/* 813742B8 | 38 A0 00 00 */	li r5, 0x0
+/* 813742BC | 7C 04 03 96 */	divwu r0, r4, r0
+/* 813742C0 | 1C C0 00 64 */	mulli r6, r0, 0x64
+/* 813742C4 | 48 1B 88 81 */	bl fn_8152CB44
+/* 813742C8 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 813742CC | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 813742D0 | 83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 813742D4 | 7C 08 03 A6 */	mtlr r0
+/* 813742D8 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 813742DC | 4E 80 00 20 */	blr
 .endfn setSimpleSyncAlarm__Q210homebutton10HomeButtonFi
 
 # .text:0x2D38 | 0x813742E0 | size: 0x5A4
 # homebutton::HomeButton::update(const HBMControllerData*)
 .fn update__Q210homebutton10HomeButtonFPC17HBMControllerData, global
-/* 813742E0 000426E0  94 21 FF 60 */	stwu r1, -0xa0(r1)
-/* 813742E4 000426E4  7C 08 02 A6 */	mflr r0
-/* 813742E8 000426E8  90 01 00 A4 */	stw r0, 0xa4(r1)
-/* 813742EC 000426EC  DB E1 00 90 */	stfd f31, 0x90(r1)
-/* 813742F0 000426F0  F3 E1 00 98 */	psq_st f31, 0x98(r1), 0, qr0
-/* 813742F4 000426F4  DB C1 00 80 */	stfd f30, 0x80(r1)
-/* 813742F8 000426F8  F3 C1 00 88 */	psq_st f30, 0x88(r1), 0, qr0
-/* 813742FC 000426FC  39 61 00 80 */	addi r11, r1, 0x80
-/* 81374300 00042700  48 28 51 91 */	bl _savegpr_15
-/* 81374304 00042704  7C 7E 1B 78 */	mr r30, r3
-/* 81374308 00042708  7C 9F 23 78 */	mr r31, r4
-/* 8137430C 0004270C  38 63 04 48 */	addi r3, r3, 0x448
-/* 81374310 00042710  48 00 2A 71 */	bl calc__Q310homebutton10HomeButton10BlackFaderFv
-/* 81374314 00042714  3F 20 81 64 */	lis r25, scBatteryPaneName__Q210homebutton10HomeButton@ha
-/* 81374318 00042718  C3 C2 83 14 */	lfs f30, lbl_81694714@sda21(r0)
-/* 8137431C 0004271C  C3 E2 82 D8 */	lfs f31, lbl_816946D8@sda21(r0)
-/* 81374320 00042720  3B 39 54 AC */	addi r25, r25, scBatteryPaneName__Q210homebutton10HomeButton@l
-/* 81374324 00042724  3A 20 00 00 */	li r17, 0x0
-/* 81374328 00042728  3B A0 00 00 */	li r29, 0x0
-/* 8137432C 0004272C  3B 80 00 00 */	li r28, 0x0
-/* 81374330 00042730  3B 60 00 00 */	li r27, 0x0
-/* 81374334 00042734  3B 40 00 00 */	li r26, 0x0
-/* 81374338 00042738  3A 80 00 01 */	li r20, 0x1
-/* 8137433C 0004273C  3A A0 00 00 */	li r21, 0x0
-/* 81374340 00042740  3E C0 80 00 */	lis r22, 0x8000
-/* 81374344 00042744  3A E0 03 E8 */	li r23, 0x3e8
-/* 81374348 00042748  3F 00 81 37 */	lis r24, MotorCallback__10homebuttonFP7OSAlarmP9OSContext@ha
+/* 813742E0 | 94 21 FF 60 */	stwu r1, -0xa0(r1)
+/* 813742E4 | 7C 08 02 A6 */	mflr r0
+/* 813742E8 | 90 01 00 A4 */	stw r0, 0xa4(r1)
+/* 813742EC | DB E1 00 90 */	stfd f31, 0x90(r1)
+/* 813742F0 | F3 E1 00 98 */	psq_st f31, 0x98(r1), 0, qr0
+/* 813742F4 | DB C1 00 80 */	stfd f30, 0x80(r1)
+/* 813742F8 | F3 C1 00 88 */	psq_st f30, 0x88(r1), 0, qr0
+/* 813742FC | 39 61 00 80 */	addi r11, r1, 0x80
+/* 81374300 | 48 28 51 91 */	bl _savegpr_15
+/* 81374304 | 7C 7E 1B 78 */	mr r30, r3
+/* 81374308 | 7C 9F 23 78 */	mr r31, r4
+/* 8137430C | 38 63 04 48 */	addi r3, r3, 0x448
+/* 81374310 | 48 00 2A 71 */	bl calc__Q310homebutton10HomeButton10BlackFaderFv
+/* 81374314 | 3F 20 81 64 */	lis r25, scBatteryPaneName__Q210homebutton10HomeButton@ha
+/* 81374318 | C3 C2 83 14 */	lfs f30, lbl_81694714@sda21(r0)
+/* 8137431C | C3 E2 82 D8 */	lfs f31, lbl_816946D8@sda21(r0)
+/* 81374320 | 3B 39 54 AC */	addi r25, r25, scBatteryPaneName__Q210homebutton10HomeButton@l
+/* 81374324 | 3A 20 00 00 */	li r17, 0x0
+/* 81374328 | 3B A0 00 00 */	li r29, 0x0
+/* 8137432C | 3B 80 00 00 */	li r28, 0x0
+/* 81374330 | 3B 60 00 00 */	li r27, 0x0
+/* 81374334 | 3B 40 00 00 */	li r26, 0x0
+/* 81374338 | 3A 80 00 01 */	li r20, 0x1
+/* 8137433C | 3A A0 00 00 */	li r21, 0x0
+/* 81374340 | 3E C0 80 00 */	lis r22, 0x8000
+/* 81374344 | 3A E0 03 E8 */	li r23, 0x3e8
+/* 81374348 | 3F 00 81 37 */	lis r24, MotorCallback__10homebuttonFP7OSAlarmP9OSContext@ha
 .L_8137434C:
-/* 8137434C 0004274C  7C 9F D8 2E */	lwzx r4, r31, r27
-/* 81374350 00042750  7E 7F DA 14 */	add r19, r31, r27
-/* 81374354 00042754  2C 04 00 00 */	cmpwi r4, 0x0
-/* 81374358 00042758  41 82 03 B8 */	beq .L_81374710
-/* 8137435C 0004275C  88 04 00 5D */	lbz r0, 0x5d(r4)
-/* 81374360 00042760  7C 03 07 74 */	extsb r3, r0
-/* 81374364 00042764  2C 03 FF FF */	cmpwi r3, -0x1
-/* 81374368 00042768  41 82 01 14 */	beq .L_8137447C
-/* 8137436C 0004276C  7E 5E D2 14 */	add r18, r30, r26
-/* 81374370 00042770  80 12 00 54 */	lwz r0, 0x54(r18)
-/* 81374374 00042774  2C 00 00 05 */	cmpwi r0, 0x5
-/* 81374378 00042778  40 81 00 8C */	ble .L_81374404
-/* 8137437C 0004277C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81374380 00042780  40 82 00 A0 */	bne .L_81374420
-/* 81374384 00042784  80 13 00 0C */	lwz r0, 0xc(r19)
-/* 81374388 00042788  28 00 00 02 */	cmplwi r0, 0x2
-/* 8137438C 0004278C  41 82 00 2C */	beq .L_813743B8
-/* 81374390 00042790  88 04 00 5C */	lbz r0, 0x5c(r4)
-/* 81374394 00042794  28 00 00 02 */	cmplwi r0, 0x2
-/* 81374398 00042798  41 82 00 20 */	beq .L_813743B8
-/* 8137439C 0004279C  88 04 00 5E */	lbz r0, 0x5e(r4)
-/* 813743A0 000427A0  7C 00 07 75 */	extsb. r0, r0
-/* 813743A4 000427A4  40 81 00 0C */	ble .L_813743B0
-/* 813743A8 000427A8  38 A0 00 01 */	li r5, 0x1
-/* 813743AC 000427AC  48 00 00 10 */	b .L_813743BC
+/* 8137434C | 7C 9F D8 2E */	lwzx r4, r31, r27
+/* 81374350 | 7E 7F DA 14 */	add r19, r31, r27
+/* 81374354 | 2C 04 00 00 */	cmpwi r4, 0x0
+/* 81374358 | 41 82 03 B8 */	beq .L_81374710
+/* 8137435C | 88 04 00 5D */	lbz r0, 0x5d(r4)
+/* 81374360 | 7C 03 07 74 */	extsb r3, r0
+/* 81374364 | 2C 03 FF FF */	cmpwi r3, -0x1
+/* 81374368 | 41 82 01 14 */	beq .L_8137447C
+/* 8137436C | 7E 5E D2 14 */	add r18, r30, r26
+/* 81374370 | 80 12 00 54 */	lwz r0, 0x54(r18)
+/* 81374374 | 2C 00 00 05 */	cmpwi r0, 0x5
+/* 81374378 | 40 81 00 8C */	ble .L_81374404
+/* 8137437C | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81374380 | 40 82 00 A0 */	bne .L_81374420
+/* 81374384 | 80 13 00 0C */	lwz r0, 0xc(r19)
+/* 81374388 | 28 00 00 02 */	cmplwi r0, 0x2
+/* 8137438C | 41 82 00 2C */	beq .L_813743B8
+/* 81374390 | 88 04 00 5C */	lbz r0, 0x5c(r4)
+/* 81374394 | 28 00 00 02 */	cmplwi r0, 0x2
+/* 81374398 | 41 82 00 20 */	beq .L_813743B8
+/* 8137439C | 88 04 00 5E */	lbz r0, 0x5e(r4)
+/* 813743A0 | 7C 00 07 75 */	extsb. r0, r0
+/* 813743A4 | 40 81 00 0C */	ble .L_813743B0
+/* 813743A8 | 38 A0 00 01 */	li r5, 0x1
+/* 813743AC | 48 00 00 10 */	b .L_813743BC
 .L_813743B0:
-/* 813743B0 000427B0  38 A0 00 00 */	li r5, 0x0
-/* 813743B4 000427B4  48 00 00 08 */	b .L_813743BC
+/* 813743B0 | 38 A0 00 00 */	li r5, 0x0
+/* 813743B4 | 48 00 00 08 */	b .L_813743BC
 .L_813743B8:
-/* 813743B8 000427B8  38 A0 00 01 */	li r5, 0x1
+/* 813743B8 | 38 A0 00 01 */	li r5, 0x1
 .L_813743BC:
-/* 813743BC 000427BC  80 72 02 A0 */	lwz r3, 0x2a0(r18)
-/* 813743C0 000427C0  7C 9F DA 14 */	add r4, r31, r27
-/* 813743C4 000427C4  48 00 33 09 */	bl setKpad__Q210homebutton10ControllerFPC11HBMKPadDatab
-/* 813743C8 000427C8  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 813743CC 000427CC  80 03 00 28 */	lwz r0, 0x28(r3)
-/* 813743D0 000427D0  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813743D4 000427D4  40 82 00 4C */	bne .L_81374420
-/* 813743D8 000427D8  80 72 02 30 */	lwz r3, 0x230(r18)
-/* 813743DC 000427DC  38 A0 00 01 */	li r5, 0x1
-/* 813743E0 000427E0  80 8D 84 1C */	lwz r4, lbl_8169645C@sda21(r0)
-/* 813743E4 000427E4  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 813743E8 000427E8  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813743EC 000427EC  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 813743F0 000427F0  7D 89 03 A6 */	mtctr r12
-/* 813743F4 000427F4  4E 80 04 21 */	bctrl
-/* 813743F8 000427F8  38 80 00 01 */	li r4, 0x1
-/* 813743FC 000427FC  4B FD 00 19 */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 81374400 00042800  48 00 00 20 */	b .L_81374420
+/* 813743BC | 80 72 02 A0 */	lwz r3, 0x2a0(r18)
+/* 813743C0 | 7C 9F DA 14 */	add r4, r31, r27
+/* 813743C4 | 48 00 33 09 */	bl setKpad__Q210homebutton10ControllerFPC11HBMKPadDatab
+/* 813743C8 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 813743CC | 80 03 00 28 */	lwz r0, 0x28(r3)
+/* 813743D0 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813743D4 | 40 82 00 4C */	bne .L_81374420
+/* 813743D8 | 80 72 02 30 */	lwz r3, 0x230(r18)
+/* 813743DC | 38 A0 00 01 */	li r5, 0x1
+/* 813743E0 | 80 8D 84 1C */	lwz r4, lbl_8169645C@sda21(r0)
+/* 813743E4 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 813743E8 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813743EC | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 813743F0 | 7D 89 03 A6 */	mtctr r12
+/* 813743F4 | 4E 80 04 21 */	bctrl
+/* 813743F8 | 38 80 00 01 */	li r4, 0x1
+/* 813743FC | 4B FD 00 19 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 81374400 | 48 00 00 20 */	b .L_81374420
 .L_81374404:
-/* 81374404 00042804  80 72 02 A0 */	lwz r3, 0x2a0(r18)
-/* 81374408 00042808  7E 64 9B 78 */	mr r4, r19
-/* 8137440C 0004280C  38 A0 00 00 */	li r5, 0x0
-/* 81374410 00042810  48 00 32 BD */	bl setKpad__Q210homebutton10ControllerFPC11HBMKPadDatab
-/* 81374414 00042814  80 72 00 54 */	lwz r3, 0x54(r18)
-/* 81374418 00042818  38 03 00 01 */	addi r0, r3, 0x1
-/* 8137441C 0004281C  90 12 00 54 */	stw r0, 0x54(r18)
+/* 81374404 | 80 72 02 A0 */	lwz r3, 0x2a0(r18)
+/* 81374408 | 7E 64 9B 78 */	mr r4, r19
+/* 8137440C | 38 A0 00 00 */	li r5, 0x0
+/* 81374410 | 48 00 32 BD */	bl setKpad__Q210homebutton10ControllerFPC11HBMKPadDatab
+/* 81374414 | 80 72 00 54 */	lwz r3, 0x54(r18)
+/* 81374418 | 38 03 00 01 */	addi r0, r3, 0x1
+/* 8137441C | 90 12 00 54 */	stw r0, 0x54(r18)
 .L_81374420:
-/* 81374420 00042820  80 13 00 0C */	lwz r0, 0xc(r19)
-/* 81374424 00042824  28 00 00 02 */	cmplwi r0, 0x2
-/* 81374428 00042828  41 82 00 98 */	beq .L_813744C0
-/* 8137442C 0004282C  80 73 00 00 */	lwz r3, 0x0(r19)
-/* 81374430 00042830  88 03 00 5C */	lbz r0, 0x5c(r3)
-/* 81374434 00042834  28 00 00 02 */	cmplwi r0, 0x2
-/* 81374438 00042838  41 82 00 88 */	beq .L_813744C0
-/* 8137443C 0004283C  88 03 00 5E */	lbz r0, 0x5e(r3)
-/* 81374440 00042840  7C 00 07 75 */	extsb. r0, r0
-/* 81374444 00042844  41 81 00 7C */	bgt .L_813744C0
-/* 81374448 00042848  7E 23 8B 78 */	mr r3, r17
-/* 8137444C 0004284C  38 81 00 08 */	addi r4, r1, 0x8
-/* 81374450 00042850  48 20 65 D5 */	bl fn_8157AA24
-/* 81374454 00042854  80 93 00 00 */	lwz r4, 0x0(r19)
-/* 81374458 00042858  88 04 00 5D */	lbz r0, 0x5d(r4)
-/* 8137445C 0004285C  7C 00 07 74 */	extsb r0, r0
-/* 81374460 00042860  2C 00 FF FE */	cmpwi r0, -0x2
-/* 81374464 00042864  41 82 00 5C */	beq .L_813744C0
-/* 81374468 00042868  2C 03 FF FE */	cmpwi r3, -0x2
-/* 8137446C 0004286C  41 82 00 54 */	beq .L_813744C0
-/* 81374470 00042870  80 72 02 A0 */	lwz r3, 0x2a0(r18)
-/* 81374474 00042874  48 00 33 E5 */	bl setInValidPos__Q210homebutton10ControllerFv
-/* 81374478 00042878  48 00 00 48 */	b .L_813744C0
+/* 81374420 | 80 13 00 0C */	lwz r0, 0xc(r19)
+/* 81374424 | 28 00 00 02 */	cmplwi r0, 0x2
+/* 81374428 | 41 82 00 98 */	beq .L_813744C0
+/* 8137442C | 80 73 00 00 */	lwz r3, 0x0(r19)
+/* 81374430 | 88 03 00 5C */	lbz r0, 0x5c(r3)
+/* 81374434 | 28 00 00 02 */	cmplwi r0, 0x2
+/* 81374438 | 41 82 00 88 */	beq .L_813744C0
+/* 8137443C | 88 03 00 5E */	lbz r0, 0x5e(r3)
+/* 81374440 | 7C 00 07 75 */	extsb. r0, r0
+/* 81374444 | 41 81 00 7C */	bgt .L_813744C0
+/* 81374448 | 7E 23 8B 78 */	mr r3, r17
+/* 8137444C | 38 81 00 08 */	addi r4, r1, 0x8
+/* 81374450 | 48 20 65 D5 */	bl fn_8157AA24
+/* 81374454 | 80 93 00 00 */	lwz r4, 0x0(r19)
+/* 81374458 | 88 04 00 5D */	lbz r0, 0x5d(r4)
+/* 8137445C | 7C 00 07 74 */	extsb r0, r0
+/* 81374460 | 2C 00 FF FE */	cmpwi r0, -0x2
+/* 81374464 | 41 82 00 5C */	beq .L_813744C0
+/* 81374468 | 2C 03 FF FE */	cmpwi r3, -0x2
+/* 8137446C | 41 82 00 54 */	beq .L_813744C0
+/* 81374470 | 80 72 02 A0 */	lwz r3, 0x2a0(r18)
+/* 81374474 | 48 00 33 E5 */	bl setInValidPos__Q210homebutton10ControllerFv
+/* 81374478 | 48 00 00 48 */	b .L_813744C0
 .L_8137447C:
-/* 8137447C 0004287C  7E 5E D2 14 */	add r18, r30, r26
-/* 81374480 00042880  80 72 02 A0 */	lwz r3, 0x2a0(r18)
-/* 81374484 00042884  48 00 33 D5 */	bl setInValidPos__Q210homebutton10ControllerFv
-/* 81374488 00042888  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 8137448C 0004288C  80 03 00 28 */	lwz r0, 0x28(r3)
-/* 81374490 00042890  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81374494 00042894  40 82 00 2C */	bne .L_813744C0
-/* 81374498 00042898  80 72 02 30 */	lwz r3, 0x230(r18)
-/* 8137449C 0004289C  38 A0 00 01 */	li r5, 0x1
-/* 813744A0 000428A0  80 8D 84 1C */	lwz r4, lbl_8169645C@sda21(r0)
-/* 813744A4 000428A4  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 813744A8 000428A8  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813744AC 000428AC  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 813744B0 000428B0  7D 89 03 A6 */	mtctr r12
-/* 813744B4 000428B4  4E 80 04 21 */	bctrl
-/* 813744B8 000428B8  38 80 00 00 */	li r4, 0x0
-/* 813744BC 000428BC  4B FC FF 59 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 8137447C | 7E 5E D2 14 */	add r18, r30, r26
+/* 81374480 | 80 72 02 A0 */	lwz r3, 0x2a0(r18)
+/* 81374484 | 48 00 33 D5 */	bl setInValidPos__Q210homebutton10ControllerFv
+/* 81374488 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 8137448C | 80 03 00 28 */	lwz r0, 0x28(r3)
+/* 81374490 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81374494 | 40 82 00 2C */	bne .L_813744C0
+/* 81374498 | 80 72 02 30 */	lwz r3, 0x230(r18)
+/* 8137449C | 38 A0 00 01 */	li r5, 0x1
+/* 813744A0 | 80 8D 84 1C */	lwz r4, lbl_8169645C@sda21(r0)
+/* 813744A4 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 813744A8 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813744AC | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 813744B0 | 7D 89 03 A6 */	mtctr r12
+/* 813744B4 | 4E 80 04 21 */	bctrl
+/* 813744B8 | 38 80 00 00 */	li r4, 0x0
+/* 813744BC | 4B FC FF 59 */	bl SetVisible__Q34nw4r3lyt4PaneFb
 .L_813744C0:
-/* 813744C0 000428C0  7C 7E 8A 14 */	add r3, r30, r17
-/* 813744C4 000428C4  88 03 00 7C */	lbz r0, 0x7c(r3)
-/* 813744C8 000428C8  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813744CC 000428CC  40 82 00 F0 */	bne .L_813745BC
-/* 813744D0 000428D0  9A 83 00 7C */	stb r20, 0x7c(r3)
-/* 813744D4 000428D4  7C 7E E2 14 */	add r3, r30, r28
-/* 813744D8 000428D8  38 83 01 A4 */	addi r4, r3, 0x1a4
-/* 813744DC 000428DC  80 72 02 A0 */	lwz r3, 0x2a0(r18)
-/* 813744E0 000428E0  48 00 36 51 */	bl getInfoAsync__Q210homebutton10ControllerFP8WPADInfo
-/* 813744E4 000428E4  7F C3 F3 78 */	mr r3, r30
-/* 813744E8 000428E8  38 91 00 1F */	addi r4, r17, 0x1f
-/* 813744EC 000428EC  38 A0 00 11 */	li r5, 0x11
-/* 813744F0 000428F0  48 00 25 D1 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 813744F4 000428F4  54 60 10 3A */	slwi r0, r3, 2
-/* 813744F8 000428F8  7C 7E 02 14 */	add r3, r30, r0
-/* 813744FC 000428FC  81 E3 02 E4 */	lwz r15, 0x2e4(r3)
-/* 81374500 00042900  7D E3 7B 78 */	mr r3, r15
-/* 81374504 00042904  48 00 37 2D */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81374508 00042908  92 8F 00 14 */	stw r20, 0x14(r15)
-/* 8137450C 0004290C  7F C3 F3 78 */	mr r3, r30
-/* 81374510 00042910  38 91 00 1F */	addi r4, r17, 0x1f
-/* 81374514 00042914  38 A0 00 12 */	li r5, 0x12
-/* 81374518 00042918  48 00 25 A9 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 8137451C 0004291C  54 60 10 3A */	slwi r0, r3, 2
-/* 81374520 00042920  7F C3 F3 78 */	mr r3, r30
-/* 81374524 00042924  7C BE 02 14 */	add r5, r30, r0
-/* 81374528 00042928  38 91 00 1F */	addi r4, r17, 0x1f
-/* 8137452C 0004292C  80 C5 02 E4 */	lwz r6, 0x2e4(r5)
-/* 81374530 00042930  38 A0 00 0F */	li r5, 0xf
-/* 81374534 00042934  92 A6 00 14 */	stw r21, 0x14(r6)
-/* 81374538 00042938  48 00 25 89 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 8137453C 0004293C  54 60 10 3A */	slwi r0, r3, 2
-/* 81374540 00042940  7C 7E 02 14 */	add r3, r30, r0
-/* 81374544 00042944  81 E3 02 E4 */	lwz r15, 0x2e4(r3)
-/* 81374548 00042948  7D E3 7B 78 */	mr r3, r15
-/* 8137454C 0004294C  48 00 36 E5 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81374550 00042950  92 8F 00 14 */	stw r20, 0x14(r15)
-/* 81374554 00042954  7F C3 F3 78 */	mr r3, r30
-/* 81374558 00042958  38 91 00 11 */	addi r4, r17, 0x11
-/* 8137455C 0004295C  48 00 2B 25 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81374560 00042960  80 72 02 A0 */	lwz r3, 0x2a0(r18)
-/* 81374564 00042964  48 00 33 05 */	bl connect__Q210homebutton10ControllerFv
-/* 81374568 00042968  80 72 02 A0 */	lwz r3, 0x2a0(r18)
-/* 8137456C 0004296C  48 00 35 3D */	bl startMotor__Q210homebutton10ControllerFv
-/* 81374570 00042970  7C 7E EA 14 */	add r3, r30, r29
-/* 81374574 00042974  80 92 02 A0 */	lwz r4, 0x2a0(r18)
-/* 81374578 00042978  39 E3 04 58 */	addi r15, r3, 0x458
-/* 8137457C 0004297C  7D E3 7B 78 */	mr r3, r15
-/* 81374580 00042980  48 1B 8A E1 */	bl fn_8152D060
-/* 81374584 00042984  7D E3 7B 78 */	mr r3, r15
-/* 81374588 00042988  48 1B 86 B1 */	bl fn_8152CC38
-/* 8137458C 0004298C  80 16 00 F8 */	lwz r0, 0xf8(r22)
-/* 81374590 00042990  7D E3 7B 78 */	mr r3, r15
-/* 81374594 00042994  38 F8 41 10 */	addi r7, r24, MotorCallback__10homebuttonFP7OSAlarmP9OSContext@l
-/* 81374598 00042998  38 A0 00 00 */	li r5, 0x0
-/* 8137459C 0004299C  54 00 F0 BE */	srwi r0, r0, 2
-/* 813745A0 000429A0  7C 00 BB 96 */	divwu r0, r0, r23
-/* 813745A4 000429A4  1C C0 01 2C */	mulli r6, r0, 0x12c
-/* 813745A8 000429A8  48 1B 85 9D */	bl fn_8152CB44
-/* 813745AC 000429AC  7F C3 F3 78 */	mr r3, r30
-/* 813745B0 000429B0  7E 24 8B 78 */	mr r4, r17
-/* 813745B4 000429B4  38 A0 01 90 */	li r5, 0x190
-/* 813745B8 000429B8  4B FF FB 7D */	bl setSpeakerAlarm__Q210homebutton10HomeButtonFii
+/* 813744C0 | 7C 7E 8A 14 */	add r3, r30, r17
+/* 813744C4 | 88 03 00 7C */	lbz r0, 0x7c(r3)
+/* 813744C8 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813744CC | 40 82 00 F0 */	bne .L_813745BC
+/* 813744D0 | 9A 83 00 7C */	stb r20, 0x7c(r3)
+/* 813744D4 | 7C 7E E2 14 */	add r3, r30, r28
+/* 813744D8 | 38 83 01 A4 */	addi r4, r3, 0x1a4
+/* 813744DC | 80 72 02 A0 */	lwz r3, 0x2a0(r18)
+/* 813744E0 | 48 00 36 51 */	bl getInfoAsync__Q210homebutton10ControllerFP8WPADInfo
+/* 813744E4 | 7F C3 F3 78 */	mr r3, r30
+/* 813744E8 | 38 91 00 1F */	addi r4, r17, 0x1f
+/* 813744EC | 38 A0 00 11 */	li r5, 0x11
+/* 813744F0 | 48 00 25 D1 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 813744F4 | 54 60 10 3A */	slwi r0, r3, 2
+/* 813744F8 | 7C 7E 02 14 */	add r3, r30, r0
+/* 813744FC | 81 E3 02 E4 */	lwz r15, 0x2e4(r3)
+/* 81374500 | 7D E3 7B 78 */	mr r3, r15
+/* 81374504 | 48 00 37 2D */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81374508 | 92 8F 00 14 */	stw r20, 0x14(r15)
+/* 8137450C | 7F C3 F3 78 */	mr r3, r30
+/* 81374510 | 38 91 00 1F */	addi r4, r17, 0x1f
+/* 81374514 | 38 A0 00 12 */	li r5, 0x12
+/* 81374518 | 48 00 25 A9 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 8137451C | 54 60 10 3A */	slwi r0, r3, 2
+/* 81374520 | 7F C3 F3 78 */	mr r3, r30
+/* 81374524 | 7C BE 02 14 */	add r5, r30, r0
+/* 81374528 | 38 91 00 1F */	addi r4, r17, 0x1f
+/* 8137452C | 80 C5 02 E4 */	lwz r6, 0x2e4(r5)
+/* 81374530 | 38 A0 00 0F */	li r5, 0xf
+/* 81374534 | 92 A6 00 14 */	stw r21, 0x14(r6)
+/* 81374538 | 48 00 25 89 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 8137453C | 54 60 10 3A */	slwi r0, r3, 2
+/* 81374540 | 7C 7E 02 14 */	add r3, r30, r0
+/* 81374544 | 81 E3 02 E4 */	lwz r15, 0x2e4(r3)
+/* 81374548 | 7D E3 7B 78 */	mr r3, r15
+/* 8137454C | 48 00 36 E5 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81374550 | 92 8F 00 14 */	stw r20, 0x14(r15)
+/* 81374554 | 7F C3 F3 78 */	mr r3, r30
+/* 81374558 | 38 91 00 11 */	addi r4, r17, 0x11
+/* 8137455C | 48 00 2B 25 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81374560 | 80 72 02 A0 */	lwz r3, 0x2a0(r18)
+/* 81374564 | 48 00 33 05 */	bl connect__Q210homebutton10ControllerFv
+/* 81374568 | 80 72 02 A0 */	lwz r3, 0x2a0(r18)
+/* 8137456C | 48 00 35 3D */	bl startMotor__Q210homebutton10ControllerFv
+/* 81374570 | 7C 7E EA 14 */	add r3, r30, r29
+/* 81374574 | 80 92 02 A0 */	lwz r4, 0x2a0(r18)
+/* 81374578 | 39 E3 04 58 */	addi r15, r3, 0x458
+/* 8137457C | 7D E3 7B 78 */	mr r3, r15
+/* 81374580 | 48 1B 8A E1 */	bl fn_8152D060
+/* 81374584 | 7D E3 7B 78 */	mr r3, r15
+/* 81374588 | 48 1B 86 B1 */	bl fn_8152CC38
+/* 8137458C | 80 16 00 F8 */	lwz r0, 0xf8(r22)
+/* 81374590 | 7D E3 7B 78 */	mr r3, r15
+/* 81374594 | 38 F8 41 10 */	addi r7, r24, MotorCallback__10homebuttonFP7OSAlarmP9OSContext@l
+/* 81374598 | 38 A0 00 00 */	li r5, 0x0
+/* 8137459C | 54 00 F0 BE */	srwi r0, r0, 2
+/* 813745A0 | 7C 00 BB 96 */	divwu r0, r0, r23
+/* 813745A4 | 1C C0 01 2C */	mulli r6, r0, 0x12c
+/* 813745A8 | 48 1B 85 9D */	bl fn_8152CB44
+/* 813745AC | 7F C3 F3 78 */	mr r3, r30
+/* 813745B0 | 7E 24 8B 78 */	mr r4, r17
+/* 813745B4 | 38 A0 01 90 */	li r5, 0x190
+/* 813745B8 | 4B FF FB 7D */	bl setSpeakerAlarm__Q210homebutton10HomeButtonFii
 .L_813745BC:
-/* 813745BC 000429BC  80 73 00 00 */	lwz r3, 0x0(r19)
-/* 813745C0 000429C0  88 03 00 5D */	lbz r0, 0x5d(r3)
-/* 813745C4 000429C4  7C 00 07 75 */	extsb. r0, r0
-/* 813745C8 000429C8  40 82 01 28 */	bne .L_813746F0
-/* 813745CC 000429CC  80 13 00 0C */	lwz r0, 0xc(r19)
-/* 813745D0 000429D0  28 00 00 02 */	cmplwi r0, 0x2
-/* 813745D4 000429D4  40 82 00 34 */	bne .L_81374608
-/* 813745D8 000429D8  88 03 00 5C */	lbz r0, 0x5c(r3)
-/* 813745DC 000429DC  28 00 00 02 */	cmplwi r0, 0x2
-/* 813745E0 000429E0  40 82 00 28 */	bne .L_81374608
-/* 813745E4 000429E4  C0 22 82 D8 */	lfs f1, lbl_816946D8@sda21(r0)
-/* 813745E8 000429E8  38 61 00 20 */	addi r3, r1, 0x20
-/* 813745EC 000429EC  C0 62 83 10 */	lfs f3, lbl_81694710@sda21(r0)
-/* 813745F0 000429F0  FC 40 08 90 */	fmr f2, f1
-/* 813745F4 000429F4  48 00 02 91 */	bl __ct__Q34nw4r4math4VEC3Ffff
-/* 813745F8 000429F8  7C 64 1B 78 */	mr r4, r3
-/* 813745FC 000429FC  38 61 00 2C */	addi r3, r1, 0x2c
-/* 81374600 00042A00  4B FD 00 85 */	bl __as__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3
-/* 81374604 00042A04  48 00 00 40 */	b .L_81374644
+/* 813745BC | 80 73 00 00 */	lwz r3, 0x0(r19)
+/* 813745C0 | 88 03 00 5D */	lbz r0, 0x5d(r3)
+/* 813745C4 | 7C 00 07 75 */	extsb. r0, r0
+/* 813745C8 | 40 82 01 28 */	bne .L_813746F0
+/* 813745CC | 80 13 00 0C */	lwz r0, 0xc(r19)
+/* 813745D0 | 28 00 00 02 */	cmplwi r0, 0x2
+/* 813745D4 | 40 82 00 34 */	bne .L_81374608
+/* 813745D8 | 88 03 00 5C */	lbz r0, 0x5c(r3)
+/* 813745DC | 28 00 00 02 */	cmplwi r0, 0x2
+/* 813745E0 | 40 82 00 28 */	bne .L_81374608
+/* 813745E4 | C0 22 82 D8 */	lfs f1, lbl_816946D8@sda21(r0)
+/* 813745E8 | 38 61 00 20 */	addi r3, r1, 0x20
+/* 813745EC | C0 62 83 10 */	lfs f3, lbl_81694710@sda21(r0)
+/* 813745F0 | FC 40 08 90 */	fmr f2, f1
+/* 813745F4 | 48 00 02 91 */	bl __ct__Q34nw4r4math4VEC3Ffff
+/* 813745F8 | 7C 64 1B 78 */	mr r4, r3
+/* 813745FC | 38 61 00 2C */	addi r3, r1, 0x2c
+/* 81374600 | 4B FD 00 85 */	bl __as__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3
+/* 81374604 | 48 00 00 40 */	b .L_81374644
 .L_81374608:
-/* 81374608 00042A08  80 03 00 38 */	lwz r0, 0x38(r3)
-/* 8137460C 00042A0C  80 63 00 34 */	lwz r3, 0x34(r3)
-/* 81374610 00042A10  90 01 00 10 */	stw r0, 0x10(r1)
-/* 81374614 00042A14  C0 01 00 10 */	lfs f0, 0x10(r1)
-/* 81374618 00042A18  90 61 00 0C */	stw r3, 0xc(r1)
-/* 8137461C 00042A1C  FC 20 00 50 */	fneg f1, f0
-/* 81374620 00042A20  C0 41 00 0C */	lfs f2, 0xc(r1)
-/* 81374624 00042A24  48 1A A0 59 */	bl Atan2FIdx__Q24nw4r4mathFff
-/* 81374628 00042A28  EC 1E 00 72 */	fmuls f0, f30, f1
-/* 8137462C 00042A2C  D3 E1 00 14 */	stfs f31, 0x14(r1)
-/* 81374630 00042A30  38 61 00 2C */	addi r3, r1, 0x2c
-/* 81374634 00042A34  38 81 00 14 */	addi r4, r1, 0x14
-/* 81374638 00042A38  D3 E1 00 18 */	stfs f31, 0x18(r1)
-/* 8137463C 00042A3C  D0 01 00 1C */	stfs f0, 0x1c(r1)
-/* 81374640 00042A40  4B FD 00 45 */	bl __as__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3
+/* 81374608 | 80 03 00 38 */	lwz r0, 0x38(r3)
+/* 8137460C | 80 63 00 34 */	lwz r3, 0x34(r3)
+/* 81374610 | 90 01 00 10 */	stw r0, 0x10(r1)
+/* 81374614 | C0 01 00 10 */	lfs f0, 0x10(r1)
+/* 81374618 | 90 61 00 0C */	stw r3, 0xc(r1)
+/* 8137461C | FC 20 00 50 */	fneg f1, f0
+/* 81374620 | C0 41 00 0C */	lfs f2, 0xc(r1)
+/* 81374624 | 48 1A A0 59 */	bl Atan2FIdx__Q24nw4r4mathFff
+/* 81374628 | EC 1E 00 72 */	fmuls f0, f30, f1
+/* 8137462C | D3 E1 00 14 */	stfs f31, 0x14(r1)
+/* 81374630 | 38 61 00 2C */	addi r3, r1, 0x2c
+/* 81374634 | 38 81 00 14 */	addi r4, r1, 0x14
+/* 81374638 | D3 E1 00 18 */	stfs f31, 0x18(r1)
+/* 8137463C | D0 01 00 1C */	stfs f0, 0x1c(r1)
+/* 81374640 | 4B FD 00 45 */	bl __as__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3
 .L_81374644:
-/* 81374644 00042A44  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 81374648 00042A48  80 03 00 28 */	lwz r0, 0x28(r3)
-/* 8137464C 00042A4C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81374650 00042A50  40 82 00 5C */	bne .L_813746AC
-/* 81374654 00042A54  80 72 02 30 */	lwz r3, 0x230(r18)
-/* 81374658 00042A58  38 A0 00 01 */	li r5, 0x1
-/* 8137465C 00042A5C  80 8D 84 28 */	lwz r4, lbl_81696468@sda21(r0)
-/* 81374660 00042A60  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81374664 00042A64  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81374668 00042A68  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 8137466C 00042A6C  7D 89 03 A6 */	mtctr r12
-/* 81374670 00042A70  4E 80 04 21 */	bctrl
-/* 81374674 00042A74  38 63 00 38 */	addi r3, r3, 0x38
-/* 81374678 00042A78  38 81 00 2C */	addi r4, r1, 0x2c
-/* 8137467C 00042A7C  4B FD 00 09 */	bl __as__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3
-/* 81374680 00042A80  80 72 02 30 */	lwz r3, 0x230(r18)
-/* 81374684 00042A84  38 A0 00 01 */	li r5, 0x1
-/* 81374688 00042A88  80 8D 84 34 */	lwz r4, lbl_81696474@sda21(r0)
-/* 8137468C 00042A8C  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81374690 00042A90  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81374694 00042A94  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81374698 00042A98  7D 89 03 A6 */	mtctr r12
-/* 8137469C 00042A9C  4E 80 04 21 */	bctrl
-/* 813746A0 00042AA0  38 63 00 38 */	addi r3, r3, 0x38
-/* 813746A4 00042AA4  38 81 00 2C */	addi r4, r1, 0x2c
-/* 813746A8 00042AA8  4B FC FF DD */	bl __as__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3
+/* 81374644 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 81374648 | 80 03 00 28 */	lwz r0, 0x28(r3)
+/* 8137464C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81374650 | 40 82 00 5C */	bne .L_813746AC
+/* 81374654 | 80 72 02 30 */	lwz r3, 0x230(r18)
+/* 81374658 | 38 A0 00 01 */	li r5, 0x1
+/* 8137465C | 80 8D 84 28 */	lwz r4, lbl_81696468@sda21(r0)
+/* 81374660 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81374664 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81374668 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 8137466C | 7D 89 03 A6 */	mtctr r12
+/* 81374670 | 4E 80 04 21 */	bctrl
+/* 81374674 | 38 63 00 38 */	addi r3, r3, 0x38
+/* 81374678 | 38 81 00 2C */	addi r4, r1, 0x2c
+/* 8137467C | 4B FD 00 09 */	bl __as__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3
+/* 81374680 | 80 72 02 30 */	lwz r3, 0x230(r18)
+/* 81374684 | 38 A0 00 01 */	li r5, 0x1
+/* 81374688 | 80 8D 84 34 */	lwz r4, lbl_81696474@sda21(r0)
+/* 8137468C | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81374690 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81374694 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81374698 | 7D 89 03 A6 */	mtctr r12
+/* 8137469C | 4E 80 04 21 */	bctrl
+/* 813746A0 | 38 63 00 38 */	addi r3, r3, 0x38
+/* 813746A4 | 38 81 00 2C */	addi r4, r1, 0x2c
+/* 813746A8 | 4B FC FF DD */	bl __as__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3
 .L_813746AC:
-/* 813746AC 00042AAC  80 1E 00 78 */	lwz r0, 0x78(r30)
-/* 813746B0 00042AB0  2C 00 00 64 */	cmpwi r0, 0x64
-/* 813746B4 00042AB4  40 81 00 14 */	ble .L_813746C8
-/* 813746B8 00042AB8  7C 9E E2 14 */	add r4, r30, r28
-/* 813746BC 00042ABC  80 72 02 A0 */	lwz r3, 0x2a0(r18)
-/* 813746C0 00042AC0  38 84 01 A4 */	addi r4, r4, 0x1a4
-/* 813746C4 00042AC4  48 00 34 6D */	bl getInfoAsync__Q210homebutton10ControllerFP8WPADInfo
+/* 813746AC | 80 1E 00 78 */	lwz r0, 0x78(r30)
+/* 813746B0 | 2C 00 00 64 */	cmpwi r0, 0x64
+/* 813746B4 | 40 81 00 14 */	ble .L_813746C8
+/* 813746B8 | 7C 9E E2 14 */	add r4, r30, r28
+/* 813746BC | 80 72 02 A0 */	lwz r3, 0x2a0(r18)
+/* 813746C0 | 38 84 01 A4 */	addi r4, r4, 0x1a4
+/* 813746C4 | 48 00 34 6D */	bl getInfoAsync__Q210homebutton10ControllerFP8WPADInfo
 .L_813746C8:
-/* 813746C8 00042AC8  7F C3 F3 78 */	mr r3, r30
-/* 813746CC 00042ACC  7E 24 8B 78 */	mr r4, r17
-/* 813746D0 00042AD0  48 00 01 C5 */	bl update_controller__Q210homebutton10HomeButtonFi
-/* 813746D4 00042AD4  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 813746D8 00042AD8  80 03 00 28 */	lwz r0, 0x28(r3)
-/* 813746DC 00042ADC  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813746E0 00042AE0  40 82 00 10 */	bne .L_813746F0
-/* 813746E4 00042AE4  7F C3 F3 78 */	mr r3, r30
-/* 813746E8 00042AE8  7E 24 8B 78 */	mr r4, r17
-/* 813746EC 00042AEC  48 00 07 C9 */	bl update_posController__Q210homebutton10HomeButtonFi
+/* 813746C8 | 7F C3 F3 78 */	mr r3, r30
+/* 813746CC | 7E 24 8B 78 */	mr r4, r17
+/* 813746D0 | 48 00 01 C5 */	bl update_controller__Q210homebutton10HomeButtonFi
+/* 813746D4 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 813746D8 | 80 03 00 28 */	lwz r0, 0x28(r3)
+/* 813746DC | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813746E0 | 40 82 00 10 */	bne .L_813746F0
+/* 813746E4 | 7F C3 F3 78 */	mr r3, r30
+/* 813746E8 | 7E 24 8B 78 */	mr r4, r17
+/* 813746EC | 48 00 07 C9 */	bl update_posController__Q210homebutton10HomeButtonFi
 .L_813746F0:
-/* 813746F0 00042AF0  80 72 02 A0 */	lwz r3, 0x2a0(r18)
-/* 813746F4 00042AF4  48 00 34 E1 */	bl getBatteryFlag__Q210homebutton10ControllerCFv
-/* 813746F8 00042AF8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813746FC 00042AFC  41 82 01 24 */	beq .L_81374820
-/* 81374700 00042B00  7F C3 F3 78 */	mr r3, r30
-/* 81374704 00042B04  7E 24 8B 78 */	mr r4, r17
-/* 81374708 00042B08  4B FF F6 C9 */	bl calc_battery__Q210homebutton10HomeButtonFi
-/* 8137470C 00042B0C  48 00 01 14 */	b .L_81374820
+/* 813746F0 | 80 72 02 A0 */	lwz r3, 0x2a0(r18)
+/* 813746F4 | 48 00 34 E1 */	bl getBatteryFlag__Q210homebutton10ControllerCFv
+/* 813746F8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813746FC | 41 82 01 24 */	beq .L_81374820
+/* 81374700 | 7F C3 F3 78 */	mr r3, r30
+/* 81374704 | 7E 24 8B 78 */	mr r4, r17
+/* 81374708 | 4B FF F6 C9 */	bl calc_battery__Q210homebutton10HomeButtonFi
+/* 8137470C | 48 00 01 14 */	b .L_81374820
 .L_81374710:
-/* 81374710 00042B10  7E 5E 8A 14 */	add r18, r30, r17
-/* 81374714 00042B14  88 12 00 7C */	lbz r0, 0x7c(r18)
-/* 81374718 00042B18  2C 00 00 00 */	cmpwi r0, 0x0
-/* 8137471C 00042B1C  41 82 00 F8 */	beq .L_81374814
-/* 81374720 00042B20  7F C3 F3 78 */	mr r3, r30
-/* 81374724 00042B24  38 91 00 1F */	addi r4, r17, 0x1f
-/* 81374728 00042B28  38 A0 00 11 */	li r5, 0x11
-/* 8137472C 00042B2C  48 00 23 95 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81374730 00042B30  54 60 10 3A */	slwi r0, r3, 2
-/* 81374734 00042B34  7C 7E 02 14 */	add r3, r30, r0
-/* 81374738 00042B38  81 E3 02 E4 */	lwz r15, 0x2e4(r3)
-/* 8137473C 00042B3C  7D E3 7B 78 */	mr r3, r15
-/* 81374740 00042B40  48 00 34 F1 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81374744 00042B44  92 8F 00 14 */	stw r20, 0x14(r15)
-/* 81374748 00042B48  7F C3 F3 78 */	mr r3, r30
-/* 8137474C 00042B4C  38 91 00 1F */	addi r4, r17, 0x1f
-/* 81374750 00042B50  38 A0 00 12 */	li r5, 0x12
-/* 81374754 00042B54  48 00 23 6D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81374758 00042B58  54 60 10 3A */	slwi r0, r3, 2
-/* 8137475C 00042B5C  7C 7E 02 14 */	add r3, r30, r0
-/* 81374760 00042B60  81 E3 02 E4 */	lwz r15, 0x2e4(r3)
-/* 81374764 00042B64  7D E3 7B 78 */	mr r3, r15
-/* 81374768 00042B68  48 00 34 C9 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 8137476C 00042B6C  92 8F 00 14 */	stw r20, 0x14(r15)
-/* 81374770 00042B70  7E 79 DA 14 */	add r19, r25, r27
-/* 81374774 00042B74  3A 00 00 00 */	li r16, 0x0
-/* 81374778 00042B78  39 E0 00 00 */	li r15, 0x0
+/* 81374710 | 7E 5E 8A 14 */	add r18, r30, r17
+/* 81374714 | 88 12 00 7C */	lbz r0, 0x7c(r18)
+/* 81374718 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 8137471C | 41 82 00 F8 */	beq .L_81374814
+/* 81374720 | 7F C3 F3 78 */	mr r3, r30
+/* 81374724 | 38 91 00 1F */	addi r4, r17, 0x1f
+/* 81374728 | 38 A0 00 11 */	li r5, 0x11
+/* 8137472C | 48 00 23 95 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81374730 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81374734 | 7C 7E 02 14 */	add r3, r30, r0
+/* 81374738 | 81 E3 02 E4 */	lwz r15, 0x2e4(r3)
+/* 8137473C | 7D E3 7B 78 */	mr r3, r15
+/* 81374740 | 48 00 34 F1 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81374744 | 92 8F 00 14 */	stw r20, 0x14(r15)
+/* 81374748 | 7F C3 F3 78 */	mr r3, r30
+/* 8137474C | 38 91 00 1F */	addi r4, r17, 0x1f
+/* 81374750 | 38 A0 00 12 */	li r5, 0x12
+/* 81374754 | 48 00 23 6D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81374758 | 54 60 10 3A */	slwi r0, r3, 2
+/* 8137475C | 7C 7E 02 14 */	add r3, r30, r0
+/* 81374760 | 81 E3 02 E4 */	lwz r15, 0x2e4(r3)
+/* 81374764 | 7D E3 7B 78 */	mr r3, r15
+/* 81374768 | 48 00 34 C9 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 8137476C | 92 8F 00 14 */	stw r20, 0x14(r15)
+/* 81374770 | 7E 79 DA 14 */	add r19, r25, r27
+/* 81374774 | 3A 00 00 00 */	li r16, 0x0
+/* 81374778 | 39 E0 00 00 */	li r15, 0x0
 .L_8137477C:
-/* 8137477C 00042B7C  80 7E 02 2C */	lwz r3, 0x22c(r30)
-/* 81374780 00042B80  38 A0 00 01 */	li r5, 0x1
-/* 81374784 00042B84  7C 93 78 2E */	lwzx r4, r19, r15
-/* 81374788 00042B88  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 8137478C 00042B8C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81374790 00042B90  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81374794 00042B94  7D 89 03 A6 */	mtctr r12
-/* 81374798 00042B98  4E 80 04 21 */	bctrl
-/* 8137479C 00042B9C  38 80 00 00 */	li r4, 0x0
-/* 813747A0 00042BA0  4B FC FC 75 */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 813747A4 00042BA4  3A 10 00 01 */	addi r16, r16, 0x1
-/* 813747A8 00042BA8  39 EF 00 04 */	addi r15, r15, 0x4
-/* 813747AC 00042BAC  2C 10 00 04 */	cmpwi r16, 0x4
-/* 813747B0 00042BB0  41 80 FF CC */	blt .L_8137477C
-/* 813747B4 00042BB4  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 813747B8 00042BB8  80 03 00 28 */	lwz r0, 0x28(r3)
-/* 813747BC 00042BBC  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813747C0 00042BC0  40 82 00 30 */	bne .L_813747F0
-/* 813747C4 00042BC4  7C 7E D2 14 */	add r3, r30, r26
-/* 813747C8 00042BC8  80 8D 84 1C */	lwz r4, lbl_8169645C@sda21(r0)
-/* 813747CC 00042BCC  80 63 02 30 */	lwz r3, 0x230(r3)
-/* 813747D0 00042BD0  38 A0 00 01 */	li r5, 0x1
-/* 813747D4 00042BD4  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 813747D8 00042BD8  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813747DC 00042BDC  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 813747E0 00042BE0  7D 89 03 A6 */	mtctr r12
-/* 813747E4 00042BE4  4E 80 04 21 */	bctrl
-/* 813747E8 00042BE8  38 80 00 00 */	li r4, 0x0
-/* 813747EC 00042BEC  4B FC FC 29 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 8137477C | 80 7E 02 2C */	lwz r3, 0x22c(r30)
+/* 81374780 | 38 A0 00 01 */	li r5, 0x1
+/* 81374784 | 7C 93 78 2E */	lwzx r4, r19, r15
+/* 81374788 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 8137478C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81374790 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81374794 | 7D 89 03 A6 */	mtctr r12
+/* 81374798 | 4E 80 04 21 */	bctrl
+/* 8137479C | 38 80 00 00 */	li r4, 0x0
+/* 813747A0 | 4B FC FC 75 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 813747A4 | 3A 10 00 01 */	addi r16, r16, 0x1
+/* 813747A8 | 39 EF 00 04 */	addi r15, r15, 0x4
+/* 813747AC | 2C 10 00 04 */	cmpwi r16, 0x4
+/* 813747B0 | 41 80 FF CC */	blt .L_8137477C
+/* 813747B4 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 813747B8 | 80 03 00 28 */	lwz r0, 0x28(r3)
+/* 813747BC | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813747C0 | 40 82 00 30 */	bne .L_813747F0
+/* 813747C4 | 7C 7E D2 14 */	add r3, r30, r26
+/* 813747C8 | 80 8D 84 1C */	lwz r4, lbl_8169645C@sda21(r0)
+/* 813747CC | 80 63 02 30 */	lwz r3, 0x230(r3)
+/* 813747D0 | 38 A0 00 01 */	li r5, 0x1
+/* 813747D4 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 813747D8 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813747DC | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 813747E0 | 7D 89 03 A6 */	mtctr r12
+/* 813747E4 | 4E 80 04 21 */	bctrl
+/* 813747E8 | 38 80 00 00 */	li r4, 0x0
+/* 813747EC | 4B FC FC 29 */	bl SetVisible__Q34nw4r3lyt4PaneFb
 .L_813747F0:
-/* 813747F0 00042BF0  7D FE D2 14 */	add r15, r30, r26
-/* 813747F4 00042BF4  92 AF 00 54 */	stw r21, 0x54(r15)
-/* 813747F8 00042BF8  9A B2 00 7C */	stb r21, 0x7c(r18)
-/* 813747FC 00042BFC  80 6F 02 A0 */	lwz r3, 0x2a0(r15)
-/* 81374800 00042C00  48 00 30 59 */	bl setInValidPos__Q210homebutton10ControllerFv
-/* 81374804 00042C04  80 6F 02 A0 */	lwz r3, 0x2a0(r15)
-/* 81374808 00042C08  48 00 30 3D */	bl clrKpadButton__Q210homebutton10ControllerFv
-/* 8137480C 00042C0C  80 6F 02 A0 */	lwz r3, 0x2a0(r15)
-/* 81374810 00042C10  48 00 30 69 */	bl disconnect__Q210homebutton10ControllerFv
+/* 813747F0 | 7D FE D2 14 */	add r15, r30, r26
+/* 813747F4 | 92 AF 00 54 */	stw r21, 0x54(r15)
+/* 813747F8 | 9A B2 00 7C */	stb r21, 0x7c(r18)
+/* 813747FC | 80 6F 02 A0 */	lwz r3, 0x2a0(r15)
+/* 81374800 | 48 00 30 59 */	bl setInValidPos__Q210homebutton10ControllerFv
+/* 81374804 | 80 6F 02 A0 */	lwz r3, 0x2a0(r15)
+/* 81374808 | 48 00 30 3D */	bl clrKpadButton__Q210homebutton10ControllerFv
+/* 8137480C | 80 6F 02 A0 */	lwz r3, 0x2a0(r15)
+/* 81374810 | 48 00 30 69 */	bl disconnect__Q210homebutton10ControllerFv
 .L_81374814:
-/* 81374814 00042C14  7F C3 F3 78 */	mr r3, r30
-/* 81374818 00042C18  7E 24 8B 78 */	mr r4, r17
-/* 8137481C 00042C1C  48 00 1F C9 */	bl reset_guiManager__Q210homebutton10HomeButtonFi
+/* 81374814 | 7F C3 F3 78 */	mr r3, r30
+/* 81374818 | 7E 24 8B 78 */	mr r4, r17
+/* 8137481C | 48 00 1F C9 */	bl reset_guiManager__Q210homebutton10HomeButtonFi
 .L_81374820:
-/* 81374820 00042C20  3A 31 00 01 */	addi r17, r17, 0x1
-/* 81374824 00042C24  3B 9C 00 18 */	addi r28, r28, 0x18
-/* 81374828 00042C28  2C 11 00 04 */	cmpwi r17, 0x4
-/* 8137482C 00042C2C  3B 7B 00 10 */	addi r27, r27, 0x10
-/* 81374830 00042C30  3B 5A 00 04 */	addi r26, r26, 0x4
-/* 81374834 00042C34  3B BD 00 30 */	addi r29, r29, 0x30
-/* 81374838 00042C38  41 80 FB 14 */	blt .L_8137434C
-/* 8137483C 00042C3C  80 7E 00 78 */	lwz r3, 0x78(r30)
-/* 81374840 00042C40  2C 03 00 64 */	cmpwi r3, 0x64
-/* 81374844 00042C44  40 81 00 10 */	ble .L_81374854
-/* 81374848 00042C48  38 00 00 00 */	li r0, 0x0
-/* 8137484C 00042C4C  90 1E 00 78 */	stw r0, 0x78(r30)
-/* 81374850 00042C50  48 00 00 0C */	b .L_8137485C
+/* 81374820 | 3A 31 00 01 */	addi r17, r17, 0x1
+/* 81374824 | 3B 9C 00 18 */	addi r28, r28, 0x18
+/* 81374828 | 2C 11 00 04 */	cmpwi r17, 0x4
+/* 8137482C | 3B 7B 00 10 */	addi r27, r27, 0x10
+/* 81374830 | 3B 5A 00 04 */	addi r26, r26, 0x4
+/* 81374834 | 3B BD 00 30 */	addi r29, r29, 0x30
+/* 81374838 | 41 80 FB 14 */	blt .L_8137434C
+/* 8137483C | 80 7E 00 78 */	lwz r3, 0x78(r30)
+/* 81374840 | 2C 03 00 64 */	cmpwi r3, 0x64
+/* 81374844 | 40 81 00 10 */	ble .L_81374854
+/* 81374848 | 38 00 00 00 */	li r0, 0x0
+/* 8137484C | 90 1E 00 78 */	stw r0, 0x78(r30)
+/* 81374850 | 48 00 00 0C */	b .L_8137485C
 .L_81374854:
-/* 81374854 00042C54  38 03 00 01 */	addi r0, r3, 0x1
-/* 81374858 00042C58  90 1E 00 78 */	stw r0, 0x78(r30)
+/* 81374854 | 38 03 00 01 */	addi r0, r3, 0x1
+/* 81374858 | 90 1E 00 78 */	stw r0, 0x78(r30)
 .L_8137485C:
-/* 8137485C 00042C5C  E3 E1 00 98 */	psq_l f31, 0x98(r1), 0, qr0
-/* 81374860 00042C60  CB E1 00 90 */	lfd f31, 0x90(r1)
-/* 81374864 00042C64  E3 C1 00 88 */	psq_l f30, 0x88(r1), 0, qr0
-/* 81374868 00042C68  39 61 00 80 */	addi r11, r1, 0x80
-/* 8137486C 00042C6C  CB C1 00 80 */	lfd f30, 0x80(r1)
-/* 81374870 00042C70  48 28 4C 6D */	bl _restgpr_15
-/* 81374874 00042C74  80 01 00 A4 */	lwz r0, 0xa4(r1)
-/* 81374878 00042C78  7C 08 03 A6 */	mtlr r0
-/* 8137487C 00042C7C  38 21 00 A0 */	addi r1, r1, 0xa0
-/* 81374880 00042C80  4E 80 00 20 */	blr
+/* 8137485C | E3 E1 00 98 */	psq_l f31, 0x98(r1), 0, qr0
+/* 81374860 | CB E1 00 90 */	lfd f31, 0x90(r1)
+/* 81374864 | E3 C1 00 88 */	psq_l f30, 0x88(r1), 0, qr0
+/* 81374868 | 39 61 00 80 */	addi r11, r1, 0x80
+/* 8137486C | CB C1 00 80 */	lfd f30, 0x80(r1)
+/* 81374870 | 48 28 4C 6D */	bl _restgpr_15
+/* 81374874 | 80 01 00 A4 */	lwz r0, 0xa4(r1)
+/* 81374878 | 7C 08 03 A6 */	mtlr r0
+/* 8137487C | 38 21 00 A0 */	addi r1, r1, 0xa0
+/* 81374880 | 4E 80 00 20 */	blr
 .endfn update__Q210homebutton10HomeButtonFPC17HBMControllerData
 
 # .text:0x32DC | 0x81374884 | size: 0x10
 # nw4r::math::VEC3::VEC3(float, float, float)
 .fn __ct__Q34nw4r4math4VEC3Ffff, global
-/* 81374884 00042C84  D0 23 00 00 */	stfs f1, 0x0(r3)
-/* 81374888 00042C88  D0 43 00 04 */	stfs f2, 0x4(r3)
-/* 8137488C 00042C8C  D0 63 00 08 */	stfs f3, 0x8(r3)
-/* 81374890 00042C90  4E 80 00 20 */	blr
+/* 81374884 | D0 23 00 00 */	stfs f1, 0x0(r3)
+/* 81374888 | D0 43 00 04 */	stfs f2, 0x4(r3)
+/* 8137488C | D0 63 00 08 */	stfs f3, 0x8(r3)
+/* 81374890 | 4E 80 00 20 */	blr
 .endfn __ct__Q34nw4r4math4VEC3Ffff
 
 # .text:0x32EC | 0x81374894 | size: 0x620
 # homebutton::HomeButton::update_controller(int)
 .fn update_controller__Q210homebutton10HomeButtonFi, global
-/* 81374894 00042C94  94 21 FF 90 */	stwu r1, -0x70(r1)
-/* 81374898 00042C98  7C 08 02 A6 */	mflr r0
-/* 8137489C 00042C9C  90 01 00 74 */	stw r0, 0x74(r1)
-/* 813748A0 00042CA0  DB E1 00 60 */	stfd f31, 0x60(r1)
-/* 813748A4 00042CA4  F3 E1 00 68 */	psq_st f31, 0x68(r1), 0, qr0
-/* 813748A8 00042CA8  DB C1 00 50 */	stfd f30, 0x50(r1)
-/* 813748AC 00042CAC  F3 C1 00 58 */	psq_st f30, 0x58(r1), 0, qr0
-/* 813748B0 00042CB0  39 61 00 50 */	addi r11, r1, 0x50
-/* 813748B4 00042CB4  48 28 4C 11 */	bl _savegpr_28
-/* 813748B8 00042CB8  80 03 00 10 */	lwz r0, 0x10(r3)
-/* 813748BC 00042CBC  3C A0 43 30 */	lis r5, 0x4330
-/* 813748C0 00042CC0  90 A1 00 28 */	stw r5, 0x28(r1)
-/* 813748C4 00042CC4  7C 7F 1B 78 */	mr r31, r3
-/* 813748C8 00042CC8  2C 00 00 02 */	cmpwi r0, 0x2
-/* 813748CC 00042CCC  7C 9D 23 78 */	mr r29, r4
-/* 813748D0 00042CD0  90 A1 00 30 */	stw r5, 0x30(r1)
-/* 813748D4 00042CD4  40 82 05 60 */	bne .L_81374E34
-/* 813748D8 00042CD8  54 80 10 3A */	slwi r0, r4, 2
-/* 813748DC 00042CDC  7C 63 02 14 */	add r3, r3, r0
-/* 813748E0 00042CE0  80 63 02 A0 */	lwz r3, 0x2a0(r3)
-/* 813748E4 00042CE4  48 00 31 C1 */	bl getController__Q210homebutton10ControllerFv
-/* 813748E8 00042CE8  C0 03 00 08 */	lfs f0, 0x8(r3)
-/* 813748EC 00042CEC  7C 7C 1B 78 */	mr r28, r3
-/* 813748F0 00042CF0  C0 82 83 18 */	lfs f4, lbl_81694718@sda21(r0)
-/* 813748F4 00042CF4  38 81 00 08 */	addi r4, r1, 0x8
-/* 813748F8 00042CF8  D0 01 00 08 */	stfs f0, 0x8(r1)
-/* 813748FC 00042CFC  38 A1 00 18 */	addi r5, r1, 0x18
-/* 81374900 00042D00  C0 62 83 1C */	lfs f3, lbl_8169471C@sda21(r0)
-/* 81374904 00042D04  C0 23 00 0C */	lfs f1, 0xc(r3)
-/* 81374908 00042D08  38 61 00 10 */	addi r3, r1, 0x10
-/* 8137490C 00042D0C  C0 42 83 20 */	lfs f2, lbl_81694720@sda21(r0)
-/* 81374910 00042D10  C0 02 83 24 */	lfs f0, lbl_81694724@sda21(r0)
-/* 81374914 00042D14  D0 21 00 0C */	stfs f1, 0xc(r1)
-/* 81374918 00042D18  C0 22 83 28 */	lfs f1, lbl_81694728@sda21(r0)
-/* 8137491C 00042D1C  D0 81 00 18 */	stfs f4, 0x18(r1)
-/* 81374920 00042D20  D0 61 00 1C */	stfs f3, 0x1c(r1)
-/* 81374924 00042D24  D0 41 00 20 */	stfs f2, 0x20(r1)
-/* 81374928 00042D28  D0 01 00 24 */	stfs f0, 0x24(r1)
-/* 8137492C 00042D2C  48 21 0F 75 */	bl fn_815858A0
-/* 81374930 00042D30  48 1F 56 85 */	bl SCGetAspectRatio
-/* 81374934 00042D34  54 60 06 3E */	clrlwi r0, r3, 24
-/* 81374938 00042D38  28 00 00 01 */	cmplwi r0, 0x1
-/* 8137493C 00042D3C  40 82 00 20 */	bne .L_8137495C
-/* 81374940 00042D40  C0 21 00 10 */	lfs f1, 0x10(r1)
-/* 81374944 00042D44  C0 42 83 2C */	lfs f2, lbl_8169472C@sda21(r0)
-/* 81374948 00042D48  C0 01 00 14 */	lfs f0, 0x14(r1)
-/* 8137494C 00042D4C  EC 21 00 B2 */	fmuls f1, f1, f2
-/* 81374950 00042D50  EC 00 00 B2 */	fmuls f0, f0, f2
-/* 81374954 00042D54  D0 21 00 10 */	stfs f1, 0x10(r1)
-/* 81374958 00042D58  D0 01 00 14 */	stfs f0, 0x14(r1)
+/* 81374894 | 94 21 FF 90 */	stwu r1, -0x70(r1)
+/* 81374898 | 7C 08 02 A6 */	mflr r0
+/* 8137489C | 90 01 00 74 */	stw r0, 0x74(r1)
+/* 813748A0 | DB E1 00 60 */	stfd f31, 0x60(r1)
+/* 813748A4 | F3 E1 00 68 */	psq_st f31, 0x68(r1), 0, qr0
+/* 813748A8 | DB C1 00 50 */	stfd f30, 0x50(r1)
+/* 813748AC | F3 C1 00 58 */	psq_st f30, 0x58(r1), 0, qr0
+/* 813748B0 | 39 61 00 50 */	addi r11, r1, 0x50
+/* 813748B4 | 48 28 4C 11 */	bl _savegpr_28
+/* 813748B8 | 80 03 00 10 */	lwz r0, 0x10(r3)
+/* 813748BC | 3C A0 43 30 */	lis r5, 0x4330
+/* 813748C0 | 90 A1 00 28 */	stw r5, 0x28(r1)
+/* 813748C4 | 7C 7F 1B 78 */	mr r31, r3
+/* 813748C8 | 2C 00 00 02 */	cmpwi r0, 0x2
+/* 813748CC | 7C 9D 23 78 */	mr r29, r4
+/* 813748D0 | 90 A1 00 30 */	stw r5, 0x30(r1)
+/* 813748D4 | 40 82 05 60 */	bne .L_81374E34
+/* 813748D8 | 54 80 10 3A */	slwi r0, r4, 2
+/* 813748DC | 7C 63 02 14 */	add r3, r3, r0
+/* 813748E0 | 80 63 02 A0 */	lwz r3, 0x2a0(r3)
+/* 813748E4 | 48 00 31 C1 */	bl getController__Q210homebutton10ControllerFv
+/* 813748E8 | C0 03 00 08 */	lfs f0, 0x8(r3)
+/* 813748EC | 7C 7C 1B 78 */	mr r28, r3
+/* 813748F0 | C0 82 83 18 */	lfs f4, lbl_81694718@sda21(r0)
+/* 813748F4 | 38 81 00 08 */	addi r4, r1, 0x8
+/* 813748F8 | D0 01 00 08 */	stfs f0, 0x8(r1)
+/* 813748FC | 38 A1 00 18 */	addi r5, r1, 0x18
+/* 81374900 | C0 62 83 1C */	lfs f3, lbl_8169471C@sda21(r0)
+/* 81374904 | C0 23 00 0C */	lfs f1, 0xc(r3)
+/* 81374908 | 38 61 00 10 */	addi r3, r1, 0x10
+/* 8137490C | C0 42 83 20 */	lfs f2, lbl_81694720@sda21(r0)
+/* 81374910 | C0 02 83 24 */	lfs f0, lbl_81694724@sda21(r0)
+/* 81374914 | D0 21 00 0C */	stfs f1, 0xc(r1)
+/* 81374918 | C0 22 83 28 */	lfs f1, lbl_81694728@sda21(r0)
+/* 8137491C | D0 81 00 18 */	stfs f4, 0x18(r1)
+/* 81374920 | D0 61 00 1C */	stfs f3, 0x1c(r1)
+/* 81374924 | D0 41 00 20 */	stfs f2, 0x20(r1)
+/* 81374928 | D0 01 00 24 */	stfs f0, 0x24(r1)
+/* 8137492C | 48 21 0F 75 */	bl fn_815858A0
+/* 81374930 | 48 1F 56 85 */	bl SCGetAspectRatio
+/* 81374934 | 54 60 06 3E */	clrlwi r0, r3, 24
+/* 81374938 | 28 00 00 01 */	cmplwi r0, 0x1
+/* 8137493C | 40 82 00 20 */	bne .L_8137495C
+/* 81374940 | C0 21 00 10 */	lfs f1, 0x10(r1)
+/* 81374944 | C0 42 83 2C */	lfs f2, lbl_8169472C@sda21(r0)
+/* 81374948 | C0 01 00 14 */	lfs f0, 0x14(r1)
+/* 8137494C | EC 21 00 B2 */	fmuls f1, f1, f2
+/* 81374950 | EC 00 00 B2 */	fmuls f0, f0, f2
+/* 81374954 | D0 21 00 10 */	stfs f1, 0x10(r1)
+/* 81374958 | D0 01 00 14 */	stfs f0, 0x14(r1)
 .L_8137495C:
-/* 8137495C 00042D5C  C0 02 83 30 */	lfs f0, lbl_81694730@sda21(r0)
-/* 81374960 00042D60  C0 21 00 10 */	lfs f1, 0x10(r1)
-/* 81374964 00042D64  FC 00 08 40 */	fcmpo cr0, f0, f1
-/* 81374968 00042D68  40 81 00 0C */	ble .L_81374974
-/* 8137496C 00042D6C  D0 01 00 10 */	stfs f0, 0x10(r1)
-/* 81374970 00042D70  48 00 00 40 */	b .L_813749B0
+/* 8137495C | C0 02 83 30 */	lfs f0, lbl_81694730@sda21(r0)
+/* 81374960 | C0 21 00 10 */	lfs f1, 0x10(r1)
+/* 81374964 | FC 00 08 40 */	fcmpo cr0, f0, f1
+/* 81374968 | 40 81 00 0C */	ble .L_81374974
+/* 8137496C | D0 01 00 10 */	stfs f0, 0x10(r1)
+/* 81374970 | 48 00 00 40 */	b .L_813749B0
 .L_81374974:
-/* 81374974 00042D74  C0 02 83 34 */	lfs f0, lbl_81694734@sda21(r0)
-/* 81374978 00042D78  FC 00 08 40 */	fcmpo cr0, f0, f1
-/* 8137497C 00042D7C  40 80 00 0C */	bge .L_81374988
-/* 81374980 00042D80  D0 01 00 10 */	stfs f0, 0x10(r1)
-/* 81374984 00042D84  48 00 00 2C */	b .L_813749B0
+/* 81374974 | C0 02 83 34 */	lfs f0, lbl_81694734@sda21(r0)
+/* 81374978 | FC 00 08 40 */	fcmpo cr0, f0, f1
+/* 8137497C | 40 80 00 0C */	bge .L_81374988
+/* 81374980 | D0 01 00 10 */	stfs f0, 0x10(r1)
+/* 81374984 | 48 00 00 2C */	b .L_813749B0
 .L_81374988:
-/* 81374988 00042D88  C0 02 83 38 */	lfs f0, lbl_81694738@sda21(r0)
-/* 8137498C 00042D8C  C0 21 00 14 */	lfs f1, 0x14(r1)
-/* 81374990 00042D90  FC 00 08 40 */	fcmpo cr0, f0, f1
-/* 81374994 00042D94  40 81 00 0C */	ble .L_813749A0
-/* 81374998 00042D98  D0 01 00 14 */	stfs f0, 0x14(r1)
-/* 8137499C 00042D9C  48 00 00 14 */	b .L_813749B0
+/* 81374988 | C0 02 83 38 */	lfs f0, lbl_81694738@sda21(r0)
+/* 8137498C | C0 21 00 14 */	lfs f1, 0x14(r1)
+/* 81374990 | FC 00 08 40 */	fcmpo cr0, f0, f1
+/* 81374994 | 40 81 00 0C */	ble .L_813749A0
+/* 81374998 | D0 01 00 14 */	stfs f0, 0x14(r1)
+/* 8137499C | 48 00 00 14 */	b .L_813749B0
 .L_813749A0:
-/* 813749A0 00042DA0  C0 02 83 3C */	lfs f0, lbl_8169473C@sda21(r0)
-/* 813749A4 00042DA4  FC 00 08 40 */	fcmpo cr0, f0, f1
-/* 813749A8 00042DA8  40 80 00 08 */	bge .L_813749B0
-/* 813749AC 00042DAC  D0 01 00 14 */	stfs f0, 0x14(r1)
+/* 813749A0 | C0 02 83 3C */	lfs f0, lbl_8169473C@sda21(r0)
+/* 813749A4 | FC 00 08 40 */	fcmpo cr0, f0, f1
+/* 813749A8 | 40 80 00 08 */	bge .L_813749B0
+/* 813749AC | D0 01 00 14 */	stfs f0, 0x14(r1)
 .L_813749B0:
-/* 813749B0 00042DB0  80 7F 02 44 */	lwz r3, 0x244(r31)
-/* 813749B4 00042DB4  7F A4 EB 78 */	mr r4, r29
-/* 813749B8 00042DB8  C0 01 00 14 */	lfs f0, 0x14(r1)
-/* 813749BC 00042DBC  7F 88 E3 78 */	mr r8, r28
-/* 813749C0 00042DC0  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813749C4 00042DC4  FC 40 00 50 */	fneg f2, f0
-/* 813749C8 00042DC8  C0 21 00 10 */	lfs f1, 0x10(r1)
-/* 813749CC 00042DCC  81 8C 00 2C */	lwz r12, 0x2c(r12)
-/* 813749D0 00042DD0  80 BC 00 10 */	lwz r5, 0x10(r28)
-/* 813749D4 00042DD4  80 DC 00 14 */	lwz r6, 0x14(r28)
-/* 813749D8 00042DD8  80 FC 00 18 */	lwz r7, 0x18(r28)
-/* 813749DC 00042DDC  7D 89 03 A6 */	mtctr r12
-/* 813749E0 00042DE0  4E 80 04 21 */	bctrl
-/* 813749E4 00042DE4  80 7C 00 10 */	lwz r3, 0x10(r28)
-/* 813749E8 00042DE8  54 60 00 C6 */	rlwinm r0, r3, 0, 3, 3
-/* 813749EC 00042DEC  50 60 04 21 */	rlwimi. r0, r3, 0, 16, 16
-/* 813749F0 00042DF0  41 82 01 24 */	beq .L_81374B14
-/* 813749F4 00042DF4  80 1F 00 10 */	lwz r0, 0x10(r31)
-/* 813749F8 00042DF8  2C 00 00 02 */	cmpwi r0, 0x2
-/* 813749FC 00042DFC  40 82 01 18 */	bne .L_81374B14
-/* 81374A00 00042E00  80 1F 00 00 */	lwz r0, 0x0(r31)
-/* 81374A04 00042E04  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81374A08 00042E08  40 82 00 98 */	bne .L_81374AA0
-/* 81374A0C 00042E0C  80 7F 02 44 */	lwz r3, 0x244(r31)
-/* 81374A10 00042E10  7F A4 EB 78 */	mr r4, r29
-/* 81374A14 00042E14  C0 22 82 D8 */	lfs f1, lbl_816946D8@sda21(r0)
-/* 81374A18 00042E18  38 A0 00 00 */	li r5, 0x0
-/* 81374A1C 00042E1C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81374A20 00042E20  38 C0 00 00 */	li r6, 0x0
-/* 81374A24 00042E24  C0 42 83 40 */	lfs f2, lbl_81694740@sda21(r0)
-/* 81374A28 00042E28  38 E0 00 00 */	li r7, 0x0
-/* 81374A2C 00042E2C  81 8C 00 2C */	lwz r12, 0x2c(r12)
-/* 81374A30 00042E30  39 00 00 00 */	li r8, 0x0
-/* 81374A34 00042E34  7D 89 03 A6 */	mtctr r12
-/* 81374A38 00042E38  4E 80 04 21 */	bctrl
-/* 81374A3C 00042E3C  38 00 00 04 */	li r0, 0x4
-/* 81374A40 00042E40  90 1F 00 14 */	stw r0, 0x14(r31)
-/* 81374A44 00042E44  83 DF 04 1C */	lwz r30, 0x41c(r31)
-/* 81374A48 00042E48  7F C3 F3 78 */	mr r3, r30
-/* 81374A4C 00042E4C  48 00 31 E5 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81374A50 00042E50  3B A0 00 01 */	li r29, 0x1
-/* 81374A54 00042E54  38 00 00 02 */	li r0, 0x2
-/* 81374A58 00042E58  93 BE 00 14 */	stw r29, 0x14(r30)
-/* 81374A5C 00042E5C  90 1F 00 14 */	stw r0, 0x14(r31)
-/* 81374A60 00042E60  83 DF 04 14 */	lwz r30, 0x414(r31)
-/* 81374A64 00042E64  7F C3 F3 78 */	mr r3, r30
-/* 81374A68 00042E68  48 00 31 C9 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81374A6C 00042E6C  93 BE 00 14 */	stw r29, 0x14(r30)
-/* 81374A70 00042E70  83 DF 04 38 */	lwz r30, 0x438(r31)
-/* 81374A74 00042E74  7F C3 F3 78 */	mr r3, r30
-/* 81374A78 00042E78  48 00 31 B9 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81374A7C 00042E7C  93 BE 00 14 */	stw r29, 0x14(r30)
-/* 81374A80 00042E80  38 60 00 0A */	li r3, 0xa
-/* 81374A84 00042E84  38 00 00 00 */	li r0, 0x0
-/* 81374A88 00042E88  38 80 00 08 */	li r4, 0x8
-/* 81374A8C 00042E8C  90 7F 00 10 */	stw r3, 0x10(r31)
-/* 81374A90 00042E90  7F E3 FB 78 */	mr r3, r31
-/* 81374A94 00042E94  90 1F 00 00 */	stw r0, 0x0(r31)
-/* 81374A98 00042E98  48 00 25 E9 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81374A9C 00042E9C  48 00 03 F0 */	b .L_81374E8C
+/* 813749B0 | 80 7F 02 44 */	lwz r3, 0x244(r31)
+/* 813749B4 | 7F A4 EB 78 */	mr r4, r29
+/* 813749B8 | C0 01 00 14 */	lfs f0, 0x14(r1)
+/* 813749BC | 7F 88 E3 78 */	mr r8, r28
+/* 813749C0 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813749C4 | FC 40 00 50 */	fneg f2, f0
+/* 813749C8 | C0 21 00 10 */	lfs f1, 0x10(r1)
+/* 813749CC | 81 8C 00 2C */	lwz r12, 0x2c(r12)
+/* 813749D0 | 80 BC 00 10 */	lwz r5, 0x10(r28)
+/* 813749D4 | 80 DC 00 14 */	lwz r6, 0x14(r28)
+/* 813749D8 | 80 FC 00 18 */	lwz r7, 0x18(r28)
+/* 813749DC | 7D 89 03 A6 */	mtctr r12
+/* 813749E0 | 4E 80 04 21 */	bctrl
+/* 813749E4 | 80 7C 00 10 */	lwz r3, 0x10(r28)
+/* 813749E8 | 54 60 00 C6 */	rlwinm r0, r3, 0, 3, 3
+/* 813749EC | 50 60 04 21 */	rlwimi. r0, r3, 0, 16, 16
+/* 813749F0 | 41 82 01 24 */	beq .L_81374B14
+/* 813749F4 | 80 1F 00 10 */	lwz r0, 0x10(r31)
+/* 813749F8 | 2C 00 00 02 */	cmpwi r0, 0x2
+/* 813749FC | 40 82 01 18 */	bne .L_81374B14
+/* 81374A00 | 80 1F 00 00 */	lwz r0, 0x0(r31)
+/* 81374A04 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81374A08 | 40 82 00 98 */	bne .L_81374AA0
+/* 81374A0C | 80 7F 02 44 */	lwz r3, 0x244(r31)
+/* 81374A10 | 7F A4 EB 78 */	mr r4, r29
+/* 81374A14 | C0 22 82 D8 */	lfs f1, lbl_816946D8@sda21(r0)
+/* 81374A18 | 38 A0 00 00 */	li r5, 0x0
+/* 81374A1C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81374A20 | 38 C0 00 00 */	li r6, 0x0
+/* 81374A24 | C0 42 83 40 */	lfs f2, lbl_81694740@sda21(r0)
+/* 81374A28 | 38 E0 00 00 */	li r7, 0x0
+/* 81374A2C | 81 8C 00 2C */	lwz r12, 0x2c(r12)
+/* 81374A30 | 39 00 00 00 */	li r8, 0x0
+/* 81374A34 | 7D 89 03 A6 */	mtctr r12
+/* 81374A38 | 4E 80 04 21 */	bctrl
+/* 81374A3C | 38 00 00 04 */	li r0, 0x4
+/* 81374A40 | 90 1F 00 14 */	stw r0, 0x14(r31)
+/* 81374A44 | 83 DF 04 1C */	lwz r30, 0x41c(r31)
+/* 81374A48 | 7F C3 F3 78 */	mr r3, r30
+/* 81374A4C | 48 00 31 E5 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81374A50 | 3B A0 00 01 */	li r29, 0x1
+/* 81374A54 | 38 00 00 02 */	li r0, 0x2
+/* 81374A58 | 93 BE 00 14 */	stw r29, 0x14(r30)
+/* 81374A5C | 90 1F 00 14 */	stw r0, 0x14(r31)
+/* 81374A60 | 83 DF 04 14 */	lwz r30, 0x414(r31)
+/* 81374A64 | 7F C3 F3 78 */	mr r3, r30
+/* 81374A68 | 48 00 31 C9 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81374A6C | 93 BE 00 14 */	stw r29, 0x14(r30)
+/* 81374A70 | 83 DF 04 38 */	lwz r30, 0x438(r31)
+/* 81374A74 | 7F C3 F3 78 */	mr r3, r30
+/* 81374A78 | 48 00 31 B9 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81374A7C | 93 BE 00 14 */	stw r29, 0x14(r30)
+/* 81374A80 | 38 60 00 0A */	li r3, 0xa
+/* 81374A84 | 38 00 00 00 */	li r0, 0x0
+/* 81374A88 | 38 80 00 08 */	li r4, 0x8
+/* 81374A8C | 90 7F 00 10 */	stw r3, 0x10(r31)
+/* 81374A90 | 7F E3 FB 78 */	mr r3, r31
+/* 81374A94 | 90 1F 00 00 */	stw r0, 0x0(r31)
+/* 81374A98 | 48 00 25 E9 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81374A9C | 48 00 03 F0 */	b .L_81374E8C
 .L_81374AA0:
-/* 81374AA0 00042EA0  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81374AA4 00042EA4  40 82 03 E8 */	bne .L_81374E8C
-/* 81374AA8 00042EA8  80 7F 04 18 */	lwz r3, 0x418(r31)
-/* 81374AAC 00042EAC  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 81374AB0 00042EB0  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81374AB4 00042EB4  40 82 00 0C */	bne .L_81374AC0
-/* 81374AB8 00042EB8  38 00 00 00 */	li r0, 0x0
-/* 81374ABC 00042EBC  90 03 00 14 */	stw r0, 0x14(r3)
+/* 81374AA0 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81374AA4 | 40 82 03 E8 */	bne .L_81374E8C
+/* 81374AA8 | 80 7F 04 18 */	lwz r3, 0x418(r31)
+/* 81374AAC | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 81374AB0 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81374AB4 | 40 82 00 0C */	bne .L_81374AC0
+/* 81374AB8 | 38 00 00 00 */	li r0, 0x0
+/* 81374ABC | 90 03 00 14 */	stw r0, 0x14(r3)
 .L_81374AC0:
-/* 81374AC0 00042EC0  80 7F 04 3C */	lwz r3, 0x43c(r31)
-/* 81374AC4 00042EC4  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 81374AC8 00042EC8  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81374ACC 00042ECC  40 82 00 0C */	bne .L_81374AD8
-/* 81374AD0 00042ED0  38 00 00 00 */	li r0, 0x0
-/* 81374AD4 00042ED4  90 03 00 14 */	stw r0, 0x14(r3)
+/* 81374AC0 | 80 7F 04 3C */	lwz r3, 0x43c(r31)
+/* 81374AC4 | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 81374AC8 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81374ACC | 40 82 00 0C */	bne .L_81374AD8
+/* 81374AD0 | 38 00 00 00 */	li r0, 0x0
+/* 81374AD4 | 90 03 00 14 */	stw r0, 0x14(r3)
 .L_81374AD8:
-/* 81374AD8 00042ED8  38 60 00 00 */	li r3, 0x0
-/* 81374ADC 00042EDC  38 00 00 04 */	li r0, 0x4
-/* 81374AE0 00042EE0  90 7F 00 B0 */	stw r3, 0xb0(r31)
-/* 81374AE4 00042EE4  90 1F 00 14 */	stw r0, 0x14(r31)
-/* 81374AE8 00042EE8  83 BF 04 1C */	lwz r29, 0x41c(r31)
-/* 81374AEC 00042EEC  7F A3 EB 78 */	mr r3, r29
-/* 81374AF0 00042EF0  48 00 31 41 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81374AF4 00042EF4  38 60 00 01 */	li r3, 0x1
-/* 81374AF8 00042EF8  38 00 00 0E */	li r0, 0xe
-/* 81374AFC 00042EFC  90 7D 00 14 */	stw r3, 0x14(r29)
-/* 81374B00 00042F00  7F E3 FB 78 */	mr r3, r31
-/* 81374B04 00042F04  38 80 00 01 */	li r4, 0x1
-/* 81374B08 00042F08  90 1F 00 10 */	stw r0, 0x10(r31)
-/* 81374B0C 00042F0C  48 00 25 75 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81374B10 00042F10  48 00 03 7C */	b .L_81374E8C
+/* 81374AD8 | 38 60 00 00 */	li r3, 0x0
+/* 81374ADC | 38 00 00 04 */	li r0, 0x4
+/* 81374AE0 | 90 7F 00 B0 */	stw r3, 0xb0(r31)
+/* 81374AE4 | 90 1F 00 14 */	stw r0, 0x14(r31)
+/* 81374AE8 | 83 BF 04 1C */	lwz r29, 0x41c(r31)
+/* 81374AEC | 7F A3 EB 78 */	mr r3, r29
+/* 81374AF0 | 48 00 31 41 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81374AF4 | 38 60 00 01 */	li r3, 0x1
+/* 81374AF8 | 38 00 00 0E */	li r0, 0xe
+/* 81374AFC | 90 7D 00 14 */	stw r3, 0x14(r29)
+/* 81374B00 | 7F E3 FB 78 */	mr r3, r31
+/* 81374B04 | 38 80 00 01 */	li r4, 0x1
+/* 81374B08 | 90 1F 00 10 */	stw r0, 0x10(r31)
+/* 81374B0C | 48 00 25 75 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81374B10 | 48 00 03 7C */	b .L_81374E8C
 .L_81374B14:
-/* 81374B14 00042F14  80 1F 00 00 */	lwz r0, 0x0(r31)
-/* 81374B18 00042F18  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81374B1C 00042F1C  40 82 03 70 */	bne .L_81374E8C
-/* 81374B20 00042F20  80 1F 00 10 */	lwz r0, 0x10(r31)
-/* 81374B24 00042F24  2C 00 00 02 */	cmpwi r0, 0x2
-/* 81374B28 00042F28  40 82 03 64 */	bne .L_81374E8C
-/* 81374B2C 00042F2C  54 60 04 E7 */	rlwinm. r0, r3, 0, 19, 19
-/* 81374B30 00042F30  40 82 00 0C */	bne .L_81374B3C
-/* 81374B34 00042F34  54 60 03 DF */	rlwinm. r0, r3, 0, 15, 15
-/* 81374B38 00042F38  41 82 01 74 */	beq .L_81374CAC
+/* 81374B14 | 80 1F 00 00 */	lwz r0, 0x0(r31)
+/* 81374B18 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81374B1C | 40 82 03 70 */	bne .L_81374E8C
+/* 81374B20 | 80 1F 00 10 */	lwz r0, 0x10(r31)
+/* 81374B24 | 2C 00 00 02 */	cmpwi r0, 0x2
+/* 81374B28 | 40 82 03 64 */	bne .L_81374E8C
+/* 81374B2C | 54 60 04 E7 */	rlwinm. r0, r3, 0, 19, 19
+/* 81374B30 | 40 82 00 0C */	bne .L_81374B3C
+/* 81374B34 | 54 60 03 DF */	rlwinm. r0, r3, 0, 15, 15
+/* 81374B38 | 41 82 01 74 */	beq .L_81374CAC
 .L_81374B3C:
-/* 81374B3C 00042F3C  80 7F 00 80 */	lwz r3, 0x80(r31)
-/* 81374B40 00042F40  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81374B44 00042F44  40 81 01 58 */	ble .L_81374C9C
-/* 81374B48 00042F48  38 83 FF FF */	subi r4, r3, 0x1
-/* 81374B4C 00042F4C  7F E3 FB 78 */	mr r3, r31
-/* 81374B50 00042F50  90 9F 00 80 */	stw r4, 0x80(r31)
-/* 81374B54 00042F54  38 84 00 15 */	addi r4, r4, 0x15
-/* 81374B58 00042F58  38 A0 00 0A */	li r5, 0xa
-/* 81374B5C 00042F5C  48 00 1F 65 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81374B60 00042F60  54 60 10 3A */	slwi r0, r3, 2
-/* 81374B64 00042F64  3B A0 00 00 */	li r29, 0x0
-/* 81374B68 00042F68  7C 9F 02 14 */	add r4, r31, r0
-/* 81374B6C 00042F6C  7F E3 FB 78 */	mr r3, r31
-/* 81374B70 00042F70  80 84 02 E4 */	lwz r4, 0x2e4(r4)
-/* 81374B74 00042F74  38 A0 00 09 */	li r5, 0x9
-/* 81374B78 00042F78  93 A4 00 14 */	stw r29, 0x14(r4)
-/* 81374B7C 00042F7C  80 9F 00 80 */	lwz r4, 0x80(r31)
-/* 81374B80 00042F80  38 84 00 15 */	addi r4, r4, 0x15
-/* 81374B84 00042F84  48 00 1F 3D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81374B88 00042F88  54 60 10 3A */	slwi r0, r3, 2
-/* 81374B8C 00042F8C  7C 7F 02 14 */	add r3, r31, r0
-/* 81374B90 00042F90  83 83 02 E4 */	lwz r28, 0x2e4(r3)
-/* 81374B94 00042F94  7F 83 E3 78 */	mr r3, r28
-/* 81374B98 00042F98  48 00 30 99 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81374B9C 00042F9C  3B C0 00 01 */	li r30, 0x1
-/* 81374BA0 00042FA0  7F E3 FB 78 */	mr r3, r31
-/* 81374BA4 00042FA4  93 DC 00 14 */	stw r30, 0x14(r28)
-/* 81374BA8 00042FA8  38 80 00 0B */	li r4, 0xb
-/* 81374BAC 00042FAC  38 A0 00 05 */	li r5, 0x5
-/* 81374BB0 00042FB0  48 00 1F 11 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81374BB4 00042FB4  54 60 10 3A */	slwi r0, r3, 2
-/* 81374BB8 00042FB8  7C 7F 02 14 */	add r3, r31, r0
-/* 81374BBC 00042FBC  83 83 02 E4 */	lwz r28, 0x2e4(r3)
-/* 81374BC0 00042FC0  7F 83 E3 78 */	mr r3, r28
-/* 81374BC4 00042FC4  48 00 30 6D */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81374BC8 00042FC8  93 DC 00 14 */	stw r30, 0x14(r28)
-/* 81374BCC 00042FCC  80 1F 00 80 */	lwz r0, 0x80(r31)
-/* 81374BD0 00042FD0  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81374BD4 00042FD4  40 82 00 64 */	bne .L_81374C38
-/* 81374BD8 00042FD8  7F E3 FB 78 */	mr r3, r31
-/* 81374BDC 00042FDC  38 80 00 0C */	li r4, 0xc
-/* 81374BE0 00042FE0  48 00 24 A1 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81374BE4 00042FE4  CB E2 82 F8 */	lfd f31, lbl_816946F8@sda21(r0)
-/* 81374BE8 00042FE8  3B C0 00 00 */	li r30, 0x0
-/* 81374BEC 00042FEC  C3 C2 82 F0 */	lfs f30, lbl_816946F0@sda21(r0)
+/* 81374B3C | 80 7F 00 80 */	lwz r3, 0x80(r31)
+/* 81374B40 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81374B44 | 40 81 01 58 */	ble .L_81374C9C
+/* 81374B48 | 38 83 FF FF */	subi r4, r3, 0x1
+/* 81374B4C | 7F E3 FB 78 */	mr r3, r31
+/* 81374B50 | 90 9F 00 80 */	stw r4, 0x80(r31)
+/* 81374B54 | 38 84 00 15 */	addi r4, r4, 0x15
+/* 81374B58 | 38 A0 00 0A */	li r5, 0xa
+/* 81374B5C | 48 00 1F 65 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81374B60 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81374B64 | 3B A0 00 00 */	li r29, 0x0
+/* 81374B68 | 7C 9F 02 14 */	add r4, r31, r0
+/* 81374B6C | 7F E3 FB 78 */	mr r3, r31
+/* 81374B70 | 80 84 02 E4 */	lwz r4, 0x2e4(r4)
+/* 81374B74 | 38 A0 00 09 */	li r5, 0x9
+/* 81374B78 | 93 A4 00 14 */	stw r29, 0x14(r4)
+/* 81374B7C | 80 9F 00 80 */	lwz r4, 0x80(r31)
+/* 81374B80 | 38 84 00 15 */	addi r4, r4, 0x15
+/* 81374B84 | 48 00 1F 3D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81374B88 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81374B8C | 7C 7F 02 14 */	add r3, r31, r0
+/* 81374B90 | 83 83 02 E4 */	lwz r28, 0x2e4(r3)
+/* 81374B94 | 7F 83 E3 78 */	mr r3, r28
+/* 81374B98 | 48 00 30 99 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81374B9C | 3B C0 00 01 */	li r30, 0x1
+/* 81374BA0 | 7F E3 FB 78 */	mr r3, r31
+/* 81374BA4 | 93 DC 00 14 */	stw r30, 0x14(r28)
+/* 81374BA8 | 38 80 00 0B */	li r4, 0xb
+/* 81374BAC | 38 A0 00 05 */	li r5, 0x5
+/* 81374BB0 | 48 00 1F 11 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81374BB4 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81374BB8 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81374BBC | 83 83 02 E4 */	lwz r28, 0x2e4(r3)
+/* 81374BC0 | 7F 83 E3 78 */	mr r3, r28
+/* 81374BC4 | 48 00 30 6D */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81374BC8 | 93 DC 00 14 */	stw r30, 0x14(r28)
+/* 81374BCC | 80 1F 00 80 */	lwz r0, 0x80(r31)
+/* 81374BD0 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81374BD4 | 40 82 00 64 */	bne .L_81374C38
+/* 81374BD8 | 7F E3 FB 78 */	mr r3, r31
+/* 81374BDC | 38 80 00 0C */	li r4, 0xc
+/* 81374BE0 | 48 00 24 A1 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81374BE4 | CB E2 82 F8 */	lfd f31, lbl_816946F8@sda21(r0)
+/* 81374BE8 | 3B C0 00 00 */	li r30, 0x0
+/* 81374BEC | C3 C2 82 F0 */	lfs f30, lbl_816946F0@sda21(r0)
 .L_81374BF0:
-/* 81374BF0 00042FF0  80 1F 00 80 */	lwz r0, 0x80(r31)
-/* 81374BF4 00042FF4  7F 9F EA 14 */	add r28, r31, r29
-/* 81374BF8 00042FF8  80 7C 02 A0 */	lwz r3, 0x2a0(r28)
-/* 81374BFC 00042FFC  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 81374C00 00043000  90 01 00 2C */	stw r0, 0x2c(r1)
-/* 81374C04 00043004  C8 01 00 28 */	lfd f0, 0x28(r1)
-/* 81374C08 00043008  EC 00 F8 28 */	fsubs f0, f0, f31
-/* 81374C0C 0004300C  EC 20 F0 24 */	fdivs f1, f0, f30
-/* 81374C10 00043010  48 00 2C 6D */	bl setSpeakerVol__Q210homebutton10ControllerFf
-/* 81374C14 00043014  80 7C 02 A0 */	lwz r3, 0x2a0(r28)
-/* 81374C18 00043018  38 A0 00 01 */	li r5, 0x1
-/* 81374C1C 0004301C  80 9F 06 08 */	lwz r4, 0x608(r31)
-/* 81374C20 00043020  48 00 2C 65 */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
-/* 81374C24 00043024  3B DE 00 01 */	addi r30, r30, 0x1
-/* 81374C28 00043028  3B BD 00 04 */	addi r29, r29, 0x4
-/* 81374C2C 0004302C  2C 1E 00 04 */	cmpwi r30, 0x4
-/* 81374C30 00043030  41 80 FF C0 */	blt .L_81374BF0
-/* 81374C34 00043034  48 00 02 58 */	b .L_81374E8C
+/* 81374BF0 | 80 1F 00 80 */	lwz r0, 0x80(r31)
+/* 81374BF4 | 7F 9F EA 14 */	add r28, r31, r29
+/* 81374BF8 | 80 7C 02 A0 */	lwz r3, 0x2a0(r28)
+/* 81374BFC | 6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 81374C00 | 90 01 00 2C */	stw r0, 0x2c(r1)
+/* 81374C04 | C8 01 00 28 */	lfd f0, 0x28(r1)
+/* 81374C08 | EC 00 F8 28 */	fsubs f0, f0, f31
+/* 81374C0C | EC 20 F0 24 */	fdivs f1, f0, f30
+/* 81374C10 | 48 00 2C 6D */	bl setSpeakerVol__Q210homebutton10ControllerFf
+/* 81374C14 | 80 7C 02 A0 */	lwz r3, 0x2a0(r28)
+/* 81374C18 | 38 A0 00 01 */	li r5, 0x1
+/* 81374C1C | 80 9F 06 08 */	lwz r4, 0x608(r31)
+/* 81374C20 | 48 00 2C 65 */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
+/* 81374C24 | 3B DE 00 01 */	addi r30, r30, 0x1
+/* 81374C28 | 3B BD 00 04 */	addi r29, r29, 0x4
+/* 81374C2C | 2C 1E 00 04 */	cmpwi r30, 0x4
+/* 81374C30 | 41 80 FF C0 */	blt .L_81374BF0
+/* 81374C34 | 48 00 02 58 */	b .L_81374E8C
 .L_81374C38:
-/* 81374C38 00043038  7F E3 FB 78 */	mr r3, r31
-/* 81374C3C 0004303C  38 80 00 0A */	li r4, 0xa
-/* 81374C40 00043040  48 00 24 41 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81374C44 00043044  CB E2 82 F8 */	lfd f31, lbl_816946F8@sda21(r0)
-/* 81374C48 00043048  3B A0 00 00 */	li r29, 0x0
-/* 81374C4C 0004304C  C3 C2 82 F0 */	lfs f30, lbl_816946F0@sda21(r0)
-/* 81374C50 00043050  3B C0 00 00 */	li r30, 0x0
+/* 81374C38 | 7F E3 FB 78 */	mr r3, r31
+/* 81374C3C | 38 80 00 0A */	li r4, 0xa
+/* 81374C40 | 48 00 24 41 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81374C44 | CB E2 82 F8 */	lfd f31, lbl_816946F8@sda21(r0)
+/* 81374C48 | 3B A0 00 00 */	li r29, 0x0
+/* 81374C4C | C3 C2 82 F0 */	lfs f30, lbl_816946F0@sda21(r0)
+/* 81374C50 | 3B C0 00 00 */	li r30, 0x0
 .L_81374C54:
-/* 81374C54 00043054  80 1F 00 80 */	lwz r0, 0x80(r31)
-/* 81374C58 00043058  7F 9F F2 14 */	add r28, r31, r30
-/* 81374C5C 0004305C  80 7C 02 A0 */	lwz r3, 0x2a0(r28)
-/* 81374C60 00043060  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 81374C64 00043064  90 01 00 34 */	stw r0, 0x34(r1)
-/* 81374C68 00043068  C8 01 00 30 */	lfd f0, 0x30(r1)
-/* 81374C6C 0004306C  EC 00 F8 28 */	fsubs f0, f0, f31
-/* 81374C70 00043070  EC 20 F0 24 */	fdivs f1, f0, f30
-/* 81374C74 00043074  48 00 2C 09 */	bl setSpeakerVol__Q210homebutton10ControllerFf
-/* 81374C78 00043078  80 7C 02 A0 */	lwz r3, 0x2a0(r28)
-/* 81374C7C 0004307C  38 A0 00 01 */	li r5, 0x1
-/* 81374C80 00043080  80 9F 06 08 */	lwz r4, 0x608(r31)
-/* 81374C84 00043084  48 00 2C 01 */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
-/* 81374C88 00043088  3B BD 00 01 */	addi r29, r29, 0x1
-/* 81374C8C 0004308C  3B DE 00 04 */	addi r30, r30, 0x4
-/* 81374C90 00043090  2C 1D 00 04 */	cmpwi r29, 0x4
-/* 81374C94 00043094  41 80 FF C0 */	blt .L_81374C54
-/* 81374C98 00043098  48 00 01 F4 */	b .L_81374E8C
+/* 81374C54 | 80 1F 00 80 */	lwz r0, 0x80(r31)
+/* 81374C58 | 7F 9F F2 14 */	add r28, r31, r30
+/* 81374C5C | 80 7C 02 A0 */	lwz r3, 0x2a0(r28)
+/* 81374C60 | 6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 81374C64 | 90 01 00 34 */	stw r0, 0x34(r1)
+/* 81374C68 | C8 01 00 30 */	lfd f0, 0x30(r1)
+/* 81374C6C | EC 00 F8 28 */	fsubs f0, f0, f31
+/* 81374C70 | EC 20 F0 24 */	fdivs f1, f0, f30
+/* 81374C74 | 48 00 2C 09 */	bl setSpeakerVol__Q210homebutton10ControllerFf
+/* 81374C78 | 80 7C 02 A0 */	lwz r3, 0x2a0(r28)
+/* 81374C7C | 38 A0 00 01 */	li r5, 0x1
+/* 81374C80 | 80 9F 06 08 */	lwz r4, 0x608(r31)
+/* 81374C84 | 48 00 2C 01 */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
+/* 81374C88 | 3B BD 00 01 */	addi r29, r29, 0x1
+/* 81374C8C | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 81374C90 | 2C 1D 00 04 */	cmpwi r29, 0x4
+/* 81374C94 | 41 80 FF C0 */	blt .L_81374C54
+/* 81374C98 | 48 00 01 F4 */	b .L_81374E8C
 .L_81374C9C:
-/* 81374C9C 0004309C  7F E3 FB 78 */	mr r3, r31
-/* 81374CA0 000430A0  38 80 00 0D */	li r4, 0xd
-/* 81374CA4 000430A4  48 00 23 DD */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81374CA8 000430A8  48 00 01 E4 */	b .L_81374E8C
+/* 81374C9C | 7F E3 FB 78 */	mr r3, r31
+/* 81374CA0 | 38 80 00 0D */	li r4, 0xd
+/* 81374CA4 | 48 00 23 DD */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81374CA8 | 48 00 01 E4 */	b .L_81374E8C
 .L_81374CAC:
-/* 81374CAC 000430AC  54 60 06 F7 */	rlwinm. r0, r3, 0, 27, 27
-/* 81374CB0 000430B0  40 82 00 0C */	bne .L_81374CBC
-/* 81374CB4 000430B4  54 60 03 9D */	rlwinm. r0, r3, 0, 14, 14
-/* 81374CB8 000430B8  41 82 01 D4 */	beq .L_81374E8C
+/* 81374CAC | 54 60 06 F7 */	rlwinm. r0, r3, 0, 27, 27
+/* 81374CB0 | 40 82 00 0C */	bne .L_81374CBC
+/* 81374CB4 | 54 60 03 9D */	rlwinm. r0, r3, 0, 14, 14
+/* 81374CB8 | 41 82 01 D4 */	beq .L_81374E8C
 .L_81374CBC:
-/* 81374CBC 000430BC  80 9F 00 80 */	lwz r4, 0x80(r31)
-/* 81374CC0 000430C0  2C 04 00 0A */	cmpwi r4, 0xa
-/* 81374CC4 000430C4  40 80 01 60 */	bge .L_81374E24
-/* 81374CC8 000430C8  7F E3 FB 78 */	mr r3, r31
-/* 81374CCC 000430CC  38 84 00 15 */	addi r4, r4, 0x15
-/* 81374CD0 000430D0  38 A0 00 09 */	li r5, 0x9
-/* 81374CD4 000430D4  48 00 1D ED */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81374CD8 000430D8  54 60 10 3A */	slwi r0, r3, 2
-/* 81374CDC 000430DC  38 C0 00 00 */	li r6, 0x0
-/* 81374CE0 000430E0  7C 9F 02 14 */	add r4, r31, r0
-/* 81374CE4 000430E4  7F E3 FB 78 */	mr r3, r31
-/* 81374CE8 000430E8  80 84 02 E4 */	lwz r4, 0x2e4(r4)
-/* 81374CEC 000430EC  38 A0 00 0A */	li r5, 0xa
-/* 81374CF0 000430F0  90 C4 00 14 */	stw r6, 0x14(r4)
-/* 81374CF4 000430F4  80 9F 00 80 */	lwz r4, 0x80(r31)
-/* 81374CF8 000430F8  38 84 00 15 */	addi r4, r4, 0x15
-/* 81374CFC 000430FC  48 00 1D C5 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81374D00 00043100  54 60 10 3A */	slwi r0, r3, 2
-/* 81374D04 00043104  7C 7F 02 14 */	add r3, r31, r0
-/* 81374D08 00043108  83 83 02 E4 */	lwz r28, 0x2e4(r3)
-/* 81374D0C 0004310C  7F 83 E3 78 */	mr r3, r28
-/* 81374D10 00043110  48 00 2F 21 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81374D14 00043114  3B C0 00 01 */	li r30, 0x1
-/* 81374D18 00043118  7F E3 FB 78 */	mr r3, r31
-/* 81374D1C 0004311C  93 DC 00 14 */	stw r30, 0x14(r28)
-/* 81374D20 00043120  38 80 00 0C */	li r4, 0xc
-/* 81374D24 00043124  38 A0 00 05 */	li r5, 0x5
-/* 81374D28 00043128  80 DF 00 80 */	lwz r6, 0x80(r31)
-/* 81374D2C 0004312C  38 06 00 01 */	addi r0, r6, 0x1
-/* 81374D30 00043130  90 1F 00 80 */	stw r0, 0x80(r31)
-/* 81374D34 00043134  48 00 1D 8D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81374D38 00043138  54 60 10 3A */	slwi r0, r3, 2
-/* 81374D3C 0004313C  7C 7F 02 14 */	add r3, r31, r0
-/* 81374D40 00043140  83 83 02 E4 */	lwz r28, 0x2e4(r3)
-/* 81374D44 00043144  7F 83 E3 78 */	mr r3, r28
-/* 81374D48 00043148  48 00 2E E9 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81374D4C 0004314C  93 DC 00 14 */	stw r30, 0x14(r28)
-/* 81374D50 00043150  80 1F 00 80 */	lwz r0, 0x80(r31)
-/* 81374D54 00043154  2C 00 00 0A */	cmpwi r0, 0xa
-/* 81374D58 00043158  40 82 00 68 */	bne .L_81374DC0
-/* 81374D5C 0004315C  7F E3 FB 78 */	mr r3, r31
-/* 81374D60 00043160  38 80 00 0B */	li r4, 0xb
-/* 81374D64 00043164  48 00 23 1D */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81374D68 00043168  CB E2 82 F8 */	lfd f31, lbl_816946F8@sda21(r0)
-/* 81374D6C 0004316C  3B A0 00 00 */	li r29, 0x0
-/* 81374D70 00043170  C3 C2 82 F0 */	lfs f30, lbl_816946F0@sda21(r0)
-/* 81374D74 00043174  3B C0 00 00 */	li r30, 0x0
+/* 81374CBC | 80 9F 00 80 */	lwz r4, 0x80(r31)
+/* 81374CC0 | 2C 04 00 0A */	cmpwi r4, 0xa
+/* 81374CC4 | 40 80 01 60 */	bge .L_81374E24
+/* 81374CC8 | 7F E3 FB 78 */	mr r3, r31
+/* 81374CCC | 38 84 00 15 */	addi r4, r4, 0x15
+/* 81374CD0 | 38 A0 00 09 */	li r5, 0x9
+/* 81374CD4 | 48 00 1D ED */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81374CD8 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81374CDC | 38 C0 00 00 */	li r6, 0x0
+/* 81374CE0 | 7C 9F 02 14 */	add r4, r31, r0
+/* 81374CE4 | 7F E3 FB 78 */	mr r3, r31
+/* 81374CE8 | 80 84 02 E4 */	lwz r4, 0x2e4(r4)
+/* 81374CEC | 38 A0 00 0A */	li r5, 0xa
+/* 81374CF0 | 90 C4 00 14 */	stw r6, 0x14(r4)
+/* 81374CF4 | 80 9F 00 80 */	lwz r4, 0x80(r31)
+/* 81374CF8 | 38 84 00 15 */	addi r4, r4, 0x15
+/* 81374CFC | 48 00 1D C5 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81374D00 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81374D04 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81374D08 | 83 83 02 E4 */	lwz r28, 0x2e4(r3)
+/* 81374D0C | 7F 83 E3 78 */	mr r3, r28
+/* 81374D10 | 48 00 2F 21 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81374D14 | 3B C0 00 01 */	li r30, 0x1
+/* 81374D18 | 7F E3 FB 78 */	mr r3, r31
+/* 81374D1C | 93 DC 00 14 */	stw r30, 0x14(r28)
+/* 81374D20 | 38 80 00 0C */	li r4, 0xc
+/* 81374D24 | 38 A0 00 05 */	li r5, 0x5
+/* 81374D28 | 80 DF 00 80 */	lwz r6, 0x80(r31)
+/* 81374D2C | 38 06 00 01 */	addi r0, r6, 0x1
+/* 81374D30 | 90 1F 00 80 */	stw r0, 0x80(r31)
+/* 81374D34 | 48 00 1D 8D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81374D38 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81374D3C | 7C 7F 02 14 */	add r3, r31, r0
+/* 81374D40 | 83 83 02 E4 */	lwz r28, 0x2e4(r3)
+/* 81374D44 | 7F 83 E3 78 */	mr r3, r28
+/* 81374D48 | 48 00 2E E9 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81374D4C | 93 DC 00 14 */	stw r30, 0x14(r28)
+/* 81374D50 | 80 1F 00 80 */	lwz r0, 0x80(r31)
+/* 81374D54 | 2C 00 00 0A */	cmpwi r0, 0xa
+/* 81374D58 | 40 82 00 68 */	bne .L_81374DC0
+/* 81374D5C | 7F E3 FB 78 */	mr r3, r31
+/* 81374D60 | 38 80 00 0B */	li r4, 0xb
+/* 81374D64 | 48 00 23 1D */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81374D68 | CB E2 82 F8 */	lfd f31, lbl_816946F8@sda21(r0)
+/* 81374D6C | 3B A0 00 00 */	li r29, 0x0
+/* 81374D70 | C3 C2 82 F0 */	lfs f30, lbl_816946F0@sda21(r0)
+/* 81374D74 | 3B C0 00 00 */	li r30, 0x0
 .L_81374D78:
-/* 81374D78 00043178  80 1F 00 80 */	lwz r0, 0x80(r31)
-/* 81374D7C 0004317C  7F 9F F2 14 */	add r28, r31, r30
-/* 81374D80 00043180  80 7C 02 A0 */	lwz r3, 0x2a0(r28)
-/* 81374D84 00043184  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 81374D88 00043188  90 01 00 2C */	stw r0, 0x2c(r1)
-/* 81374D8C 0004318C  C8 01 00 28 */	lfd f0, 0x28(r1)
-/* 81374D90 00043190  EC 00 F8 28 */	fsubs f0, f0, f31
-/* 81374D94 00043194  EC 20 F0 24 */	fdivs f1, f0, f30
-/* 81374D98 00043198  48 00 2A E5 */	bl setSpeakerVol__Q210homebutton10ControllerFf
-/* 81374D9C 0004319C  80 7C 02 A0 */	lwz r3, 0x2a0(r28)
-/* 81374DA0 000431A0  38 A0 00 01 */	li r5, 0x1
-/* 81374DA4 000431A4  80 9F 06 08 */	lwz r4, 0x608(r31)
-/* 81374DA8 000431A8  48 00 2A DD */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
-/* 81374DAC 000431AC  3B BD 00 01 */	addi r29, r29, 0x1
-/* 81374DB0 000431B0  3B DE 00 04 */	addi r30, r30, 0x4
-/* 81374DB4 000431B4  2C 1D 00 04 */	cmpwi r29, 0x4
-/* 81374DB8 000431B8  41 80 FF C0 */	blt .L_81374D78
-/* 81374DBC 000431BC  48 00 00 D0 */	b .L_81374E8C
+/* 81374D78 | 80 1F 00 80 */	lwz r0, 0x80(r31)
+/* 81374D7C | 7F 9F F2 14 */	add r28, r31, r30
+/* 81374D80 | 80 7C 02 A0 */	lwz r3, 0x2a0(r28)
+/* 81374D84 | 6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 81374D88 | 90 01 00 2C */	stw r0, 0x2c(r1)
+/* 81374D8C | C8 01 00 28 */	lfd f0, 0x28(r1)
+/* 81374D90 | EC 00 F8 28 */	fsubs f0, f0, f31
+/* 81374D94 | EC 20 F0 24 */	fdivs f1, f0, f30
+/* 81374D98 | 48 00 2A E5 */	bl setSpeakerVol__Q210homebutton10ControllerFf
+/* 81374D9C | 80 7C 02 A0 */	lwz r3, 0x2a0(r28)
+/* 81374DA0 | 38 A0 00 01 */	li r5, 0x1
+/* 81374DA4 | 80 9F 06 08 */	lwz r4, 0x608(r31)
+/* 81374DA8 | 48 00 2A DD */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
+/* 81374DAC | 3B BD 00 01 */	addi r29, r29, 0x1
+/* 81374DB0 | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 81374DB4 | 2C 1D 00 04 */	cmpwi r29, 0x4
+/* 81374DB8 | 41 80 FF C0 */	blt .L_81374D78
+/* 81374DBC | 48 00 00 D0 */	b .L_81374E8C
 .L_81374DC0:
-/* 81374DC0 000431C0  7F E3 FB 78 */	mr r3, r31
-/* 81374DC4 000431C4  38 80 00 09 */	li r4, 0x9
-/* 81374DC8 000431C8  48 00 22 B9 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81374DCC 000431CC  CB C2 82 F8 */	lfd f30, lbl_816946F8@sda21(r0)
-/* 81374DD0 000431D0  3B A0 00 00 */	li r29, 0x0
-/* 81374DD4 000431D4  C3 E2 82 F0 */	lfs f31, lbl_816946F0@sda21(r0)
-/* 81374DD8 000431D8  3B C0 00 00 */	li r30, 0x0
+/* 81374DC0 | 7F E3 FB 78 */	mr r3, r31
+/* 81374DC4 | 38 80 00 09 */	li r4, 0x9
+/* 81374DC8 | 48 00 22 B9 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81374DCC | CB C2 82 F8 */	lfd f30, lbl_816946F8@sda21(r0)
+/* 81374DD0 | 3B A0 00 00 */	li r29, 0x0
+/* 81374DD4 | C3 E2 82 F0 */	lfs f31, lbl_816946F0@sda21(r0)
+/* 81374DD8 | 3B C0 00 00 */	li r30, 0x0
 .L_81374DDC:
-/* 81374DDC 000431DC  80 1F 00 80 */	lwz r0, 0x80(r31)
-/* 81374DE0 000431E0  7F 9F F2 14 */	add r28, r31, r30
-/* 81374DE4 000431E4  80 7C 02 A0 */	lwz r3, 0x2a0(r28)
-/* 81374DE8 000431E8  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 81374DEC 000431EC  90 01 00 34 */	stw r0, 0x34(r1)
-/* 81374DF0 000431F0  C8 01 00 30 */	lfd f0, 0x30(r1)
-/* 81374DF4 000431F4  EC 00 F0 28 */	fsubs f0, f0, f30
-/* 81374DF8 000431F8  EC 20 F8 24 */	fdivs f1, f0, f31
-/* 81374DFC 000431FC  48 00 2A 81 */	bl setSpeakerVol__Q210homebutton10ControllerFf
-/* 81374E00 00043200  80 7C 02 A0 */	lwz r3, 0x2a0(r28)
-/* 81374E04 00043204  38 A0 00 01 */	li r5, 0x1
-/* 81374E08 00043208  80 9F 06 08 */	lwz r4, 0x608(r31)
-/* 81374E0C 0004320C  48 00 2A 79 */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
-/* 81374E10 00043210  3B BD 00 01 */	addi r29, r29, 0x1
-/* 81374E14 00043214  3B DE 00 04 */	addi r30, r30, 0x4
-/* 81374E18 00043218  2C 1D 00 04 */	cmpwi r29, 0x4
-/* 81374E1C 0004321C  41 80 FF C0 */	blt .L_81374DDC
-/* 81374E20 00043220  48 00 00 6C */	b .L_81374E8C
+/* 81374DDC | 80 1F 00 80 */	lwz r0, 0x80(r31)
+/* 81374DE0 | 7F 9F F2 14 */	add r28, r31, r30
+/* 81374DE4 | 80 7C 02 A0 */	lwz r3, 0x2a0(r28)
+/* 81374DE8 | 6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 81374DEC | 90 01 00 34 */	stw r0, 0x34(r1)
+/* 81374DF0 | C8 01 00 30 */	lfd f0, 0x30(r1)
+/* 81374DF4 | EC 00 F0 28 */	fsubs f0, f0, f30
+/* 81374DF8 | EC 20 F8 24 */	fdivs f1, f0, f31
+/* 81374DFC | 48 00 2A 81 */	bl setSpeakerVol__Q210homebutton10ControllerFf
+/* 81374E00 | 80 7C 02 A0 */	lwz r3, 0x2a0(r28)
+/* 81374E04 | 38 A0 00 01 */	li r5, 0x1
+/* 81374E08 | 80 9F 06 08 */	lwz r4, 0x608(r31)
+/* 81374E0C | 48 00 2A 79 */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
+/* 81374E10 | 3B BD 00 01 */	addi r29, r29, 0x1
+/* 81374E14 | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 81374E18 | 2C 1D 00 04 */	cmpwi r29, 0x4
+/* 81374E1C | 41 80 FF C0 */	blt .L_81374DDC
+/* 81374E20 | 48 00 00 6C */	b .L_81374E8C
 .L_81374E24:
-/* 81374E24 00043224  7F E3 FB 78 */	mr r3, r31
-/* 81374E28 00043228  38 80 00 0D */	li r4, 0xd
-/* 81374E2C 0004322C  48 00 22 55 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81374E30 00043230  48 00 00 5C */	b .L_81374E8C
+/* 81374E24 | 7F E3 FB 78 */	mr r3, r31
+/* 81374E28 | 38 80 00 0D */	li r4, 0xd
+/* 81374E2C | 48 00 22 55 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81374E30 | 48 00 00 5C */	b .L_81374E8C
 .L_81374E34:
-/* 81374E34 00043234  80 03 00 00 */	lwz r0, 0x0(r3)
-/* 81374E38 00043238  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81374E3C 0004323C  40 82 00 50 */	bne .L_81374E8C
-/* 81374E40 00043240  80 03 00 10 */	lwz r0, 0x10(r3)
-/* 81374E44 00043244  2C 00 00 05 */	cmpwi r0, 0x5
-/* 81374E48 00043248  40 82 00 44 */	bne .L_81374E8C
-/* 81374E4C 0004324C  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 81374E50 00043250  54 00 10 3A */	slwi r0, r0, 2
-/* 81374E54 00043254  7C A3 02 14 */	add r5, r3, r0
-/* 81374E58 00043258  80 A5 04 0C */	lwz r5, 0x40c(r5)
-/* 81374E5C 0004325C  80 05 00 14 */	lwz r0, 0x14(r5)
-/* 81374E60 00043260  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81374E64 00043264  41 82 00 28 */	beq .L_81374E8C
-/* 81374E68 00043268  54 80 10 3A */	slwi r0, r4, 2
-/* 81374E6C 0004326C  7C 63 02 14 */	add r3, r3, r0
-/* 81374E70 00043270  80 63 02 A0 */	lwz r3, 0x2a0(r3)
-/* 81374E74 00043274  48 00 2C 31 */	bl getController__Q210homebutton10ControllerFv
-/* 81374E78 00043278  80 03 00 10 */	lwz r0, 0x10(r3)
-/* 81374E7C 0004327C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81374E80 00043280  41 82 00 0C */	beq .L_81374E8C
-/* 81374E84 00043284  38 00 0E 10 */	li r0, 0xe10
-/* 81374E88 00043288  90 1F 00 18 */	stw r0, 0x18(r31)
+/* 81374E34 | 80 03 00 00 */	lwz r0, 0x0(r3)
+/* 81374E38 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81374E3C | 40 82 00 50 */	bne .L_81374E8C
+/* 81374E40 | 80 03 00 10 */	lwz r0, 0x10(r3)
+/* 81374E44 | 2C 00 00 05 */	cmpwi r0, 0x5
+/* 81374E48 | 40 82 00 44 */	bne .L_81374E8C
+/* 81374E4C | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 81374E50 | 54 00 10 3A */	slwi r0, r0, 2
+/* 81374E54 | 7C A3 02 14 */	add r5, r3, r0
+/* 81374E58 | 80 A5 04 0C */	lwz r5, 0x40c(r5)
+/* 81374E5C | 80 05 00 14 */	lwz r0, 0x14(r5)
+/* 81374E60 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81374E64 | 41 82 00 28 */	beq .L_81374E8C
+/* 81374E68 | 54 80 10 3A */	slwi r0, r4, 2
+/* 81374E6C | 7C 63 02 14 */	add r3, r3, r0
+/* 81374E70 | 80 63 02 A0 */	lwz r3, 0x2a0(r3)
+/* 81374E74 | 48 00 2C 31 */	bl getController__Q210homebutton10ControllerFv
+/* 81374E78 | 80 03 00 10 */	lwz r0, 0x10(r3)
+/* 81374E7C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81374E80 | 41 82 00 0C */	beq .L_81374E8C
+/* 81374E84 | 38 00 0E 10 */	li r0, 0xe10
+/* 81374E88 | 90 1F 00 18 */	stw r0, 0x18(r31)
 .L_81374E8C:
-/* 81374E8C 0004328C  E3 E1 00 68 */	psq_l f31, 0x68(r1), 0, qr0
-/* 81374E90 00043290  CB E1 00 60 */	lfd f31, 0x60(r1)
-/* 81374E94 00043294  E3 C1 00 58 */	psq_l f30, 0x58(r1), 0, qr0
-/* 81374E98 00043298  39 61 00 50 */	addi r11, r1, 0x50
-/* 81374E9C 0004329C  CB C1 00 50 */	lfd f30, 0x50(r1)
-/* 81374EA0 000432A0  48 28 46 71 */	bl _restgpr_28
-/* 81374EA4 000432A4  80 01 00 74 */	lwz r0, 0x74(r1)
-/* 81374EA8 000432A8  7C 08 03 A6 */	mtlr r0
-/* 81374EAC 000432AC  38 21 00 70 */	addi r1, r1, 0x70
-/* 81374EB0 000432B0  4E 80 00 20 */	blr
+/* 81374E8C | E3 E1 00 68 */	psq_l f31, 0x68(r1), 0, qr0
+/* 81374E90 | CB E1 00 60 */	lfd f31, 0x60(r1)
+/* 81374E94 | E3 C1 00 58 */	psq_l f30, 0x58(r1), 0, qr0
+/* 81374E98 | 39 61 00 50 */	addi r11, r1, 0x50
+/* 81374E9C | CB C1 00 50 */	lfd f30, 0x50(r1)
+/* 81374EA0 | 48 28 46 71 */	bl _restgpr_28
+/* 81374EA4 | 80 01 00 74 */	lwz r0, 0x74(r1)
+/* 81374EA8 | 7C 08 03 A6 */	mtlr r0
+/* 81374EAC | 38 21 00 70 */	addi r1, r1, 0x70
+/* 81374EB0 | 4E 80 00 20 */	blr
 .endfn update_controller__Q210homebutton10HomeButtonFi
 
 # .text:0x390C | 0x81374EB4 | size: 0x180
 # homebutton::HomeButton::update_posController(int)
 .fn update_posController__Q210homebutton10HomeButtonFi, global
-/* 81374EB4 000432B4  94 21 FF B0 */	stwu r1, -0x50(r1)
-/* 81374EB8 000432B8  7C 08 02 A6 */	mflr r0
-/* 81374EBC 000432BC  90 01 00 54 */	stw r0, 0x54(r1)
-/* 81374EC0 000432C0  93 E1 00 4C */	stw r31, 0x4c(r1)
-/* 81374EC4 000432C4  54 9F 10 3A */	slwi r31, r4, 2
-/* 81374EC8 000432C8  93 C1 00 48 */	stw r30, 0x48(r1)
-/* 81374ECC 000432CC  7C 7E 1B 78 */	mr r30, r3
-/* 81374ED0 000432D0  7C 63 FA 14 */	add r3, r3, r31
-/* 81374ED4 000432D4  80 63 02 A0 */	lwz r3, 0x2a0(r3)
-/* 81374ED8 000432D8  48 00 2B CD */	bl getController__Q210homebutton10ControllerFv
-/* 81374EDC 000432DC  C0 03 00 08 */	lfs f0, 0x8(r3)
-/* 81374EE0 000432E0  38 81 00 10 */	addi r4, r1, 0x10
-/* 81374EE4 000432E4  C0 82 83 18 */	lfs f4, lbl_81694718@sda21(r0)
-/* 81374EE8 000432E8  38 A1 00 2C */	addi r5, r1, 0x2c
-/* 81374EEC 000432EC  D0 01 00 10 */	stfs f0, 0x10(r1)
-/* 81374EF0 000432F0  C0 62 83 1C */	lfs f3, lbl_8169471C@sda21(r0)
-/* 81374EF4 000432F4  C0 23 00 0C */	lfs f1, 0xc(r3)
-/* 81374EF8 000432F8  38 61 00 18 */	addi r3, r1, 0x18
-/* 81374EFC 000432FC  C0 42 83 20 */	lfs f2, lbl_81694720@sda21(r0)
-/* 81374F00 00043300  C0 02 83 24 */	lfs f0, lbl_81694724@sda21(r0)
-/* 81374F04 00043304  D0 21 00 14 */	stfs f1, 0x14(r1)
-/* 81374F08 00043308  C0 22 83 28 */	lfs f1, lbl_81694728@sda21(r0)
-/* 81374F0C 0004330C  D0 81 00 2C */	stfs f4, 0x2c(r1)
-/* 81374F10 00043310  D0 61 00 30 */	stfs f3, 0x30(r1)
-/* 81374F14 00043314  D0 41 00 34 */	stfs f2, 0x34(r1)
-/* 81374F18 00043318  D0 01 00 38 */	stfs f0, 0x38(r1)
-/* 81374F1C 0004331C  48 21 09 85 */	bl fn_815858A0
-/* 81374F20 00043320  48 1F 50 95 */	bl SCGetAspectRatio
-/* 81374F24 00043324  54 60 06 3E */	clrlwi r0, r3, 24
-/* 81374F28 00043328  28 00 00 01 */	cmplwi r0, 0x1
-/* 81374F2C 0004332C  40 82 00 20 */	bne .L_81374F4C
-/* 81374F30 00043330  C0 21 00 18 */	lfs f1, 0x18(r1)
-/* 81374F34 00043334  C0 42 83 2C */	lfs f2, lbl_8169472C@sda21(r0)
-/* 81374F38 00043338  C0 01 00 1C */	lfs f0, 0x1c(r1)
-/* 81374F3C 0004333C  EC 21 00 B2 */	fmuls f1, f1, f2
-/* 81374F40 00043340  EC 00 00 B2 */	fmuls f0, f0, f2
-/* 81374F44 00043344  D0 21 00 18 */	stfs f1, 0x18(r1)
-/* 81374F48 00043348  D0 01 00 1C */	stfs f0, 0x1c(r1)
+/* 81374EB4 | 94 21 FF B0 */	stwu r1, -0x50(r1)
+/* 81374EB8 | 7C 08 02 A6 */	mflr r0
+/* 81374EBC | 90 01 00 54 */	stw r0, 0x54(r1)
+/* 81374EC0 | 93 E1 00 4C */	stw r31, 0x4c(r1)
+/* 81374EC4 | 54 9F 10 3A */	slwi r31, r4, 2
+/* 81374EC8 | 93 C1 00 48 */	stw r30, 0x48(r1)
+/* 81374ECC | 7C 7E 1B 78 */	mr r30, r3
+/* 81374ED0 | 7C 63 FA 14 */	add r3, r3, r31
+/* 81374ED4 | 80 63 02 A0 */	lwz r3, 0x2a0(r3)
+/* 81374ED8 | 48 00 2B CD */	bl getController__Q210homebutton10ControllerFv
+/* 81374EDC | C0 03 00 08 */	lfs f0, 0x8(r3)
+/* 81374EE0 | 38 81 00 10 */	addi r4, r1, 0x10
+/* 81374EE4 | C0 82 83 18 */	lfs f4, lbl_81694718@sda21(r0)
+/* 81374EE8 | 38 A1 00 2C */	addi r5, r1, 0x2c
+/* 81374EEC | D0 01 00 10 */	stfs f0, 0x10(r1)
+/* 81374EF0 | C0 62 83 1C */	lfs f3, lbl_8169471C@sda21(r0)
+/* 81374EF4 | C0 23 00 0C */	lfs f1, 0xc(r3)
+/* 81374EF8 | 38 61 00 18 */	addi r3, r1, 0x18
+/* 81374EFC | C0 42 83 20 */	lfs f2, lbl_81694720@sda21(r0)
+/* 81374F00 | C0 02 83 24 */	lfs f0, lbl_81694724@sda21(r0)
+/* 81374F04 | D0 21 00 14 */	stfs f1, 0x14(r1)
+/* 81374F08 | C0 22 83 28 */	lfs f1, lbl_81694728@sda21(r0)
+/* 81374F0C | D0 81 00 2C */	stfs f4, 0x2c(r1)
+/* 81374F10 | D0 61 00 30 */	stfs f3, 0x30(r1)
+/* 81374F14 | D0 41 00 34 */	stfs f2, 0x34(r1)
+/* 81374F18 | D0 01 00 38 */	stfs f0, 0x38(r1)
+/* 81374F1C | 48 21 09 85 */	bl fn_815858A0
+/* 81374F20 | 48 1F 50 95 */	bl SCGetAspectRatio
+/* 81374F24 | 54 60 06 3E */	clrlwi r0, r3, 24
+/* 81374F28 | 28 00 00 01 */	cmplwi r0, 0x1
+/* 81374F2C | 40 82 00 20 */	bne .L_81374F4C
+/* 81374F30 | C0 21 00 18 */	lfs f1, 0x18(r1)
+/* 81374F34 | C0 42 83 2C */	lfs f2, lbl_8169472C@sda21(r0)
+/* 81374F38 | C0 01 00 1C */	lfs f0, 0x1c(r1)
+/* 81374F3C | EC 21 00 B2 */	fmuls f1, f1, f2
+/* 81374F40 | EC 00 00 B2 */	fmuls f0, f0, f2
+/* 81374F44 | D0 21 00 18 */	stfs f1, 0x18(r1)
+/* 81374F48 | D0 01 00 1C */	stfs f0, 0x1c(r1)
 .L_81374F4C:
-/* 81374F4C 0004334C  C0 02 83 30 */	lfs f0, lbl_81694730@sda21(r0)
-/* 81374F50 00043350  C0 21 00 18 */	lfs f1, 0x18(r1)
-/* 81374F54 00043354  FC 00 08 40 */	fcmpo cr0, f0, f1
-/* 81374F58 00043358  40 81 00 0C */	ble .L_81374F64
-/* 81374F5C 0004335C  D0 01 00 18 */	stfs f0, 0x18(r1)
-/* 81374F60 00043360  48 00 00 40 */	b .L_81374FA0
+/* 81374F4C | C0 02 83 30 */	lfs f0, lbl_81694730@sda21(r0)
+/* 81374F50 | C0 21 00 18 */	lfs f1, 0x18(r1)
+/* 81374F54 | FC 00 08 40 */	fcmpo cr0, f0, f1
+/* 81374F58 | 40 81 00 0C */	ble .L_81374F64
+/* 81374F5C | D0 01 00 18 */	stfs f0, 0x18(r1)
+/* 81374F60 | 48 00 00 40 */	b .L_81374FA0
 .L_81374F64:
-/* 81374F64 00043364  C0 02 83 34 */	lfs f0, lbl_81694734@sda21(r0)
-/* 81374F68 00043368  FC 00 08 40 */	fcmpo cr0, f0, f1
-/* 81374F6C 0004336C  40 80 00 0C */	bge .L_81374F78
-/* 81374F70 00043370  D0 01 00 18 */	stfs f0, 0x18(r1)
-/* 81374F74 00043374  48 00 00 2C */	b .L_81374FA0
+/* 81374F64 | C0 02 83 34 */	lfs f0, lbl_81694734@sda21(r0)
+/* 81374F68 | FC 00 08 40 */	fcmpo cr0, f0, f1
+/* 81374F6C | 40 80 00 0C */	bge .L_81374F78
+/* 81374F70 | D0 01 00 18 */	stfs f0, 0x18(r1)
+/* 81374F74 | 48 00 00 2C */	b .L_81374FA0
 .L_81374F78:
-/* 81374F78 00043378  C0 02 83 38 */	lfs f0, lbl_81694738@sda21(r0)
-/* 81374F7C 0004337C  C0 21 00 1C */	lfs f1, 0x1c(r1)
-/* 81374F80 00043380  FC 00 08 40 */	fcmpo cr0, f0, f1
-/* 81374F84 00043384  40 81 00 0C */	ble .L_81374F90
-/* 81374F88 00043388  D0 01 00 1C */	stfs f0, 0x1c(r1)
-/* 81374F8C 0004338C  48 00 00 14 */	b .L_81374FA0
+/* 81374F78 | C0 02 83 38 */	lfs f0, lbl_81694738@sda21(r0)
+/* 81374F7C | C0 21 00 1C */	lfs f1, 0x1c(r1)
+/* 81374F80 | FC 00 08 40 */	fcmpo cr0, f0, f1
+/* 81374F84 | 40 81 00 0C */	ble .L_81374F90
+/* 81374F88 | D0 01 00 1C */	stfs f0, 0x1c(r1)
+/* 81374F8C | 48 00 00 14 */	b .L_81374FA0
 .L_81374F90:
-/* 81374F90 00043390  C0 02 83 3C */	lfs f0, lbl_8169473C@sda21(r0)
-/* 81374F94 00043394  FC 00 08 40 */	fcmpo cr0, f0, f1
-/* 81374F98 00043398  40 80 00 08 */	bge .L_81374FA0
-/* 81374F9C 0004339C  D0 01 00 1C */	stfs f0, 0x1c(r1)
+/* 81374F90 | C0 02 83 3C */	lfs f0, lbl_8169473C@sda21(r0)
+/* 81374F94 | FC 00 08 40 */	fcmpo cr0, f0, f1
+/* 81374F98 | 40 80 00 08 */	bge .L_81374FA0
+/* 81374F9C | D0 01 00 1C */	stfs f0, 0x1c(r1)
 .L_81374FA0:
-/* 81374FA0 000433A0  C0 01 00 1C */	lfs f0, 0x1c(r1)
-/* 81374FA4 000433A4  38 61 00 08 */	addi r3, r1, 0x8
-/* 81374FA8 000433A8  C0 21 00 18 */	lfs f1, 0x18(r1)
-/* 81374FAC 000433AC  FC 40 00 50 */	fneg f2, f0
-/* 81374FB0 000433B0  4B FF D5 2D */	bl __ct__Q34nw4r4math4VEC2Fff
-/* 81374FB4 000433B4  88 1E 00 87 */	lbz r0, 0x87(r30)
-/* 81374FB8 000433B8  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81374FBC 000433BC  41 82 00 18 */	beq .L_81374FD4
-/* 81374FC0 000433C0  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 81374FC4 000433C4  C0 21 00 08 */	lfs f1, 0x8(r1)
-/* 81374FC8 000433C8  C0 03 00 38 */	lfs f0, 0x38(r3)
-/* 81374FCC 000433CC  EC 01 00 24 */	fdivs f0, f1, f0
-/* 81374FD0 000433D0  D0 01 00 08 */	stfs f0, 0x8(r1)
+/* 81374FA0 | C0 01 00 1C */	lfs f0, 0x1c(r1)
+/* 81374FA4 | 38 61 00 08 */	addi r3, r1, 0x8
+/* 81374FA8 | C0 21 00 18 */	lfs f1, 0x18(r1)
+/* 81374FAC | FC 40 00 50 */	fneg f2, f0
+/* 81374FB0 | 4B FF D5 2D */	bl __ct__Q34nw4r4math4VEC2Fff
+/* 81374FB4 | 88 1E 00 87 */	lbz r0, 0x87(r30)
+/* 81374FB8 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81374FBC | 41 82 00 18 */	beq .L_81374FD4
+/* 81374FC0 | 80 7E 00 04 */	lwz r3, 0x4(r30)
+/* 81374FC4 | C0 21 00 08 */	lfs f1, 0x8(r1)
+/* 81374FC8 | C0 03 00 38 */	lfs f0, 0x38(r3)
+/* 81374FCC | EC 01 00 24 */	fdivs f0, f1, f0
+/* 81374FD0 | D0 01 00 08 */	stfs f0, 0x8(r1)
 .L_81374FD4:
-/* 81374FD4 000433D4  7C 7E FA 14 */	add r3, r30, r31
-/* 81374FD8 000433D8  80 8D 84 1C */	lwz r4, lbl_8169645C@sda21(r0)
-/* 81374FDC 000433DC  80 63 02 30 */	lwz r3, 0x230(r3)
-/* 81374FE0 000433E0  38 A0 00 01 */	li r5, 0x1
-/* 81374FE4 000433E4  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81374FE8 000433E8  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81374FEC 000433EC  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81374FF0 000433F0  7D 89 03 A6 */	mtctr r12
-/* 81374FF4 000433F4  4E 80 04 21 */	bctrl
-/* 81374FF8 000433F8  C0 21 00 08 */	lfs f1, 0x8(r1)
-/* 81374FFC 000433FC  7C 7F 1B 78 */	mr r31, r3
-/* 81375000 00043400  C0 41 00 0C */	lfs f2, 0xc(r1)
-/* 81375004 00043404  38 61 00 20 */	addi r3, r1, 0x20
-/* 81375008 00043408  C0 62 82 D8 */	lfs f3, lbl_816946D8@sda21(r0)
-/* 8137500C 0004340C  4B FF F8 79 */	bl __ct__Q34nw4r4math4VEC3Ffff
-/* 81375010 00043410  38 7F 00 2C */	addi r3, r31, 0x2c
-/* 81375014 00043414  38 81 00 20 */	addi r4, r1, 0x20
-/* 81375018 00043418  4B FC F6 6D */	bl __as__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3
-/* 8137501C 0004341C  80 01 00 54 */	lwz r0, 0x54(r1)
-/* 81375020 00043420  83 E1 00 4C */	lwz r31, 0x4c(r1)
-/* 81375024 00043424  83 C1 00 48 */	lwz r30, 0x48(r1)
-/* 81375028 00043428  7C 08 03 A6 */	mtlr r0
-/* 8137502C 0004342C  38 21 00 50 */	addi r1, r1, 0x50
-/* 81375030 00043430  4E 80 00 20 */	blr
+/* 81374FD4 | 7C 7E FA 14 */	add r3, r30, r31
+/* 81374FD8 | 80 8D 84 1C */	lwz r4, lbl_8169645C@sda21(r0)
+/* 81374FDC | 80 63 02 30 */	lwz r3, 0x230(r3)
+/* 81374FE0 | 38 A0 00 01 */	li r5, 0x1
+/* 81374FE4 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81374FE8 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81374FEC | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81374FF0 | 7D 89 03 A6 */	mtctr r12
+/* 81374FF4 | 4E 80 04 21 */	bctrl
+/* 81374FF8 | C0 21 00 08 */	lfs f1, 0x8(r1)
+/* 81374FFC | 7C 7F 1B 78 */	mr r31, r3
+/* 81375000 | C0 41 00 0C */	lfs f2, 0xc(r1)
+/* 81375004 | 38 61 00 20 */	addi r3, r1, 0x20
+/* 81375008 | C0 62 82 D8 */	lfs f3, lbl_816946D8@sda21(r0)
+/* 8137500C | 4B FF F8 79 */	bl __ct__Q34nw4r4math4VEC3Ffff
+/* 81375010 | 38 7F 00 2C */	addi r3, r31, 0x2c
+/* 81375014 | 38 81 00 20 */	addi r4, r1, 0x20
+/* 81375018 | 4B FC F6 6D */	bl __as__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3
+/* 8137501C | 80 01 00 54 */	lwz r0, 0x54(r1)
+/* 81375020 | 83 E1 00 4C */	lwz r31, 0x4c(r1)
+/* 81375024 | 83 C1 00 48 */	lwz r30, 0x48(r1)
+/* 81375028 | 7C 08 03 A6 */	mtlr r0
+/* 8137502C | 38 21 00 50 */	addi r1, r1, 0x50
+/* 81375030 | 4E 80 00 20 */	blr
 .endfn update_posController__Q210homebutton10HomeButtonFi
 
 # .text:0x3A8C | 0x81375034 | size: 0x2CC
 # homebutton::HomeButton::updateTrigPane()
 .fn updateTrigPane__Q210homebutton10HomeButtonFv, global
-/* 81375034 00043434  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 81375038 00043438  7C 08 02 A6 */	mflr r0
-/* 8137503C 0004343C  90 01 00 24 */	stw r0, 0x24(r1)
-/* 81375040 00043440  39 61 00 20 */	addi r11, r1, 0x20
-/* 81375044 00043444  48 28 44 81 */	bl _savegpr_28
-/* 81375048 00043448  80 03 00 00 */	lwz r0, 0x0(r3)
-/* 8137504C 0004344C  7C 7F 1B 78 */	mr r31, r3
-/* 81375050 00043450  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81375054 00043454  41 82 00 F0 */	beq .L_81375144
-/* 81375058 00043458  40 80 00 10 */	bge .L_81375068
-/* 8137505C 0004345C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81375060 00043460  40 80 00 14 */	bge .L_81375074
-/* 81375064 00043464  48 00 02 84 */	b .L_813752E8
+/* 81375034 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81375038 | 7C 08 02 A6 */	mflr r0
+/* 8137503C | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 81375040 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81375044 | 48 28 44 81 */	bl _savegpr_28
+/* 81375048 | 80 03 00 00 */	lwz r0, 0x0(r3)
+/* 8137504C | 7C 7F 1B 78 */	mr r31, r3
+/* 81375050 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81375054 | 41 82 00 F0 */	beq .L_81375144
+/* 81375058 | 40 80 00 10 */	bge .L_81375068
+/* 8137505C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81375060 | 40 80 00 14 */	bge .L_81375074
+/* 81375064 | 48 00 02 84 */	b .L_813752E8
 .L_81375068:
-/* 81375068 00043468  2C 00 00 03 */	cmpwi r0, 0x3
-/* 8137506C 0004346C  40 80 02 7C */	bge .L_813752E8
-/* 81375070 00043470  48 00 01 AC */	b .L_8137521C
+/* 81375068 | 2C 00 00 03 */	cmpwi r0, 0x3
+/* 8137506C | 40 80 02 7C */	bge .L_813752E8
+/* 81375070 | 48 00 01 AC */	b .L_8137521C
 .L_81375074:
-/* 81375074 00043474  3C 60 81 64 */	lis r3, scFuncTouchPaneName__Q210homebutton10HomeButton@ha
-/* 81375078 00043478  3B 80 00 00 */	li r28, 0x0
-/* 8137507C 0004347C  3B C0 00 00 */	li r30, 0x0
-/* 81375080 00043480  3B A3 53 8C */	addi r29, r3, scFuncTouchPaneName__Q210homebutton10HomeButton@l
+/* 81375074 | 3C 60 81 64 */	lis r3, scFuncTouchPaneName__Q210homebutton10HomeButton@ha
+/* 81375078 | 3B 80 00 00 */	li r28, 0x0
+/* 8137507C | 3B C0 00 00 */	li r30, 0x0
+/* 81375080 | 3B A3 53 8C */	addi r29, r3, scFuncTouchPaneName__Q210homebutton10HomeButton@l
 .L_81375084:
-/* 81375084 00043484  2C 1C 00 02 */	cmpwi r28, 0x2
-/* 81375088 00043488  41 80 00 0C */	blt .L_81375094
-/* 8137508C 0004348C  2C 1C 00 09 */	cmpwi r28, 0x9
-/* 81375090 00043490  40 82 00 54 */	bne .L_813750E4
+/* 81375084 | 2C 1C 00 02 */	cmpwi r28, 0x2
+/* 81375088 | 41 80 00 0C */	blt .L_81375094
+/* 8137508C | 2C 1C 00 09 */	cmpwi r28, 0x9
+/* 81375090 | 40 82 00 54 */	bne .L_813750E4
 .L_81375094:
-/* 81375094 00043494  80 7F 02 2C */	lwz r3, 0x22c(r31)
-/* 81375098 00043498  38 A0 00 01 */	li r5, 0x1
-/* 8137509C 0004349C  7C 9D F0 2E */	lwzx r4, r29, r30
-/* 813750A0 000434A0  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 813750A4 000434A4  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813750A8 000434A8  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 813750AC 000434AC  7D 89 03 A6 */	mtctr r12
-/* 813750B0 000434B0  4E 80 04 21 */	bctrl
-/* 813750B4 000434B4  7C 64 1B 78 */	mr r4, r3
-/* 813750B8 000434B8  80 7F 02 44 */	lwz r3, 0x244(r31)
-/* 813750BC 000434BC  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813750C0 000434C0  81 8C 00 40 */	lwz r12, 0x40(r12)
-/* 813750C4 000434C4  7D 89 03 A6 */	mtctr r12
-/* 813750C8 000434C8  4E 80 04 21 */	bctrl
-/* 813750CC 000434CC  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813750D0 000434D0  38 80 00 01 */	li r4, 0x1
-/* 813750D4 000434D4  81 8C 00 50 */	lwz r12, 0x50(r12)
-/* 813750D8 000434D8  7D 89 03 A6 */	mtctr r12
-/* 813750DC 000434DC  4E 80 04 21 */	bctrl
-/* 813750E0 000434E0  48 00 00 50 */	b .L_81375130
+/* 81375094 | 80 7F 02 2C */	lwz r3, 0x22c(r31)
+/* 81375098 | 38 A0 00 01 */	li r5, 0x1
+/* 8137509C | 7C 9D F0 2E */	lwzx r4, r29, r30
+/* 813750A0 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 813750A4 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813750A8 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 813750AC | 7D 89 03 A6 */	mtctr r12
+/* 813750B0 | 4E 80 04 21 */	bctrl
+/* 813750B4 | 7C 64 1B 78 */	mr r4, r3
+/* 813750B8 | 80 7F 02 44 */	lwz r3, 0x244(r31)
+/* 813750BC | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813750C0 | 81 8C 00 40 */	lwz r12, 0x40(r12)
+/* 813750C4 | 7D 89 03 A6 */	mtctr r12
+/* 813750C8 | 4E 80 04 21 */	bctrl
+/* 813750CC | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813750D0 | 38 80 00 01 */	li r4, 0x1
+/* 813750D4 | 81 8C 00 50 */	lwz r12, 0x50(r12)
+/* 813750D8 | 7D 89 03 A6 */	mtctr r12
+/* 813750DC | 4E 80 04 21 */	bctrl
+/* 813750E0 | 48 00 00 50 */	b .L_81375130
 .L_813750E4:
-/* 813750E4 000434E4  80 7F 02 2C */	lwz r3, 0x22c(r31)
-/* 813750E8 000434E8  38 A0 00 01 */	li r5, 0x1
-/* 813750EC 000434EC  7C 9D F0 2E */	lwzx r4, r29, r30
-/* 813750F0 000434F0  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 813750F4 000434F4  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813750F8 000434F8  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 813750FC 000434FC  7D 89 03 A6 */	mtctr r12
-/* 81375100 00043500  4E 80 04 21 */	bctrl
-/* 81375104 00043504  7C 64 1B 78 */	mr r4, r3
-/* 81375108 00043508  80 7F 02 44 */	lwz r3, 0x244(r31)
-/* 8137510C 0004350C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81375110 00043510  81 8C 00 40 */	lwz r12, 0x40(r12)
-/* 81375114 00043514  7D 89 03 A6 */	mtctr r12
-/* 81375118 00043518  4E 80 04 21 */	bctrl
-/* 8137511C 0004351C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81375120 00043520  38 80 00 00 */	li r4, 0x0
-/* 81375124 00043524  81 8C 00 50 */	lwz r12, 0x50(r12)
-/* 81375128 00043528  7D 89 03 A6 */	mtctr r12
-/* 8137512C 0004352C  4E 80 04 21 */	bctrl
+/* 813750E4 | 80 7F 02 2C */	lwz r3, 0x22c(r31)
+/* 813750E8 | 38 A0 00 01 */	li r5, 0x1
+/* 813750EC | 7C 9D F0 2E */	lwzx r4, r29, r30
+/* 813750F0 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 813750F4 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813750F8 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 813750FC | 7D 89 03 A6 */	mtctr r12
+/* 81375100 | 4E 80 04 21 */	bctrl
+/* 81375104 | 7C 64 1B 78 */	mr r4, r3
+/* 81375108 | 80 7F 02 44 */	lwz r3, 0x244(r31)
+/* 8137510C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81375110 | 81 8C 00 40 */	lwz r12, 0x40(r12)
+/* 81375114 | 7D 89 03 A6 */	mtctr r12
+/* 81375118 | 4E 80 04 21 */	bctrl
+/* 8137511C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81375120 | 38 80 00 00 */	li r4, 0x0
+/* 81375124 | 81 8C 00 50 */	lwz r12, 0x50(r12)
+/* 81375128 | 7D 89 03 A6 */	mtctr r12
+/* 8137512C | 4E 80 04 21 */	bctrl
 .L_81375130:
-/* 81375130 00043530  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 81375134 00043534  3B DE 00 04 */	addi r30, r30, 0x4
-/* 81375138 00043538  2C 1C 00 0A */	cmpwi r28, 0xa
-/* 8137513C 0004353C  41 80 FF 48 */	blt .L_81375084
-/* 81375140 00043540  48 00 01 A8 */	b .L_813752E8
+/* 81375130 | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 81375134 | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 81375138 | 2C 1C 00 0A */	cmpwi r28, 0xa
+/* 8137513C | 41 80 FF 48 */	blt .L_81375084
+/* 81375140 | 48 00 01 A8 */	b .L_813752E8
 .L_81375144:
-/* 81375144 00043544  3C 60 81 64 */	lis r3, scFuncTouchPaneName__Q210homebutton10HomeButton@ha
-/* 81375148 00043548  3B 80 00 00 */	li r28, 0x0
-/* 8137514C 0004354C  3B C0 00 00 */	li r30, 0x0
-/* 81375150 00043550  3B A3 53 8C */	addi r29, r3, scFuncTouchPaneName__Q210homebutton10HomeButton@l
+/* 81375144 | 3C 60 81 64 */	lis r3, scFuncTouchPaneName__Q210homebutton10HomeButton@ha
+/* 81375148 | 3B 80 00 00 */	li r28, 0x0
+/* 8137514C | 3B C0 00 00 */	li r30, 0x0
+/* 81375150 | 3B A3 53 8C */	addi r29, r3, scFuncTouchPaneName__Q210homebutton10HomeButton@l
 .L_81375154:
-/* 81375154 00043554  2C 1C 00 00 */	cmpwi r28, 0x0
-/* 81375158 00043558  40 81 00 0C */	ble .L_81375164
-/* 8137515C 0004355C  2C 1C 00 07 */	cmpwi r28, 0x7
-/* 81375160 00043560  41 80 00 0C */	blt .L_8137516C
+/* 81375154 | 2C 1C 00 00 */	cmpwi r28, 0x0
+/* 81375158 | 40 81 00 0C */	ble .L_81375164
+/* 8137515C | 2C 1C 00 07 */	cmpwi r28, 0x7
+/* 81375160 | 41 80 00 0C */	blt .L_8137516C
 .L_81375164:
-/* 81375164 00043564  2C 1C 00 09 */	cmpwi r28, 0x9
-/* 81375168 00043568  40 82 00 54 */	bne .L_813751BC
+/* 81375164 | 2C 1C 00 09 */	cmpwi r28, 0x9
+/* 81375168 | 40 82 00 54 */	bne .L_813751BC
 .L_8137516C:
-/* 8137516C 0004356C  80 7F 02 2C */	lwz r3, 0x22c(r31)
-/* 81375170 00043570  38 A0 00 01 */	li r5, 0x1
-/* 81375174 00043574  7C 9D F0 2E */	lwzx r4, r29, r30
-/* 81375178 00043578  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 8137517C 0004357C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81375180 00043580  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81375184 00043584  7D 89 03 A6 */	mtctr r12
-/* 81375188 00043588  4E 80 04 21 */	bctrl
-/* 8137518C 0004358C  7C 64 1B 78 */	mr r4, r3
-/* 81375190 00043590  80 7F 02 44 */	lwz r3, 0x244(r31)
-/* 81375194 00043594  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81375198 00043598  81 8C 00 40 */	lwz r12, 0x40(r12)
-/* 8137519C 0004359C  7D 89 03 A6 */	mtctr r12
-/* 813751A0 000435A0  4E 80 04 21 */	bctrl
-/* 813751A4 000435A4  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813751A8 000435A8  38 80 00 01 */	li r4, 0x1
-/* 813751AC 000435AC  81 8C 00 50 */	lwz r12, 0x50(r12)
-/* 813751B0 000435B0  7D 89 03 A6 */	mtctr r12
-/* 813751B4 000435B4  4E 80 04 21 */	bctrl
-/* 813751B8 000435B8  48 00 00 50 */	b .L_81375208
+/* 8137516C | 80 7F 02 2C */	lwz r3, 0x22c(r31)
+/* 81375170 | 38 A0 00 01 */	li r5, 0x1
+/* 81375174 | 7C 9D F0 2E */	lwzx r4, r29, r30
+/* 81375178 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 8137517C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81375180 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81375184 | 7D 89 03 A6 */	mtctr r12
+/* 81375188 | 4E 80 04 21 */	bctrl
+/* 8137518C | 7C 64 1B 78 */	mr r4, r3
+/* 81375190 | 80 7F 02 44 */	lwz r3, 0x244(r31)
+/* 81375194 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81375198 | 81 8C 00 40 */	lwz r12, 0x40(r12)
+/* 8137519C | 7D 89 03 A6 */	mtctr r12
+/* 813751A0 | 4E 80 04 21 */	bctrl
+/* 813751A4 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813751A8 | 38 80 00 01 */	li r4, 0x1
+/* 813751AC | 81 8C 00 50 */	lwz r12, 0x50(r12)
+/* 813751B0 | 7D 89 03 A6 */	mtctr r12
+/* 813751B4 | 4E 80 04 21 */	bctrl
+/* 813751B8 | 48 00 00 50 */	b .L_81375208
 .L_813751BC:
-/* 813751BC 000435BC  80 7F 02 2C */	lwz r3, 0x22c(r31)
-/* 813751C0 000435C0  38 A0 00 01 */	li r5, 0x1
-/* 813751C4 000435C4  7C 9D F0 2E */	lwzx r4, r29, r30
-/* 813751C8 000435C8  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 813751CC 000435CC  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813751D0 000435D0  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 813751D4 000435D4  7D 89 03 A6 */	mtctr r12
-/* 813751D8 000435D8  4E 80 04 21 */	bctrl
-/* 813751DC 000435DC  7C 64 1B 78 */	mr r4, r3
-/* 813751E0 000435E0  80 7F 02 44 */	lwz r3, 0x244(r31)
-/* 813751E4 000435E4  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813751E8 000435E8  81 8C 00 40 */	lwz r12, 0x40(r12)
-/* 813751EC 000435EC  7D 89 03 A6 */	mtctr r12
-/* 813751F0 000435F0  4E 80 04 21 */	bctrl
-/* 813751F4 000435F4  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813751F8 000435F8  38 80 00 00 */	li r4, 0x0
-/* 813751FC 000435FC  81 8C 00 50 */	lwz r12, 0x50(r12)
-/* 81375200 00043600  7D 89 03 A6 */	mtctr r12
-/* 81375204 00043604  4E 80 04 21 */	bctrl
+/* 813751BC | 80 7F 02 2C */	lwz r3, 0x22c(r31)
+/* 813751C0 | 38 A0 00 01 */	li r5, 0x1
+/* 813751C4 | 7C 9D F0 2E */	lwzx r4, r29, r30
+/* 813751C8 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 813751CC | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813751D0 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 813751D4 | 7D 89 03 A6 */	mtctr r12
+/* 813751D8 | 4E 80 04 21 */	bctrl
+/* 813751DC | 7C 64 1B 78 */	mr r4, r3
+/* 813751E0 | 80 7F 02 44 */	lwz r3, 0x244(r31)
+/* 813751E4 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813751E8 | 81 8C 00 40 */	lwz r12, 0x40(r12)
+/* 813751EC | 7D 89 03 A6 */	mtctr r12
+/* 813751F0 | 4E 80 04 21 */	bctrl
+/* 813751F4 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813751F8 | 38 80 00 00 */	li r4, 0x0
+/* 813751FC | 81 8C 00 50 */	lwz r12, 0x50(r12)
+/* 81375200 | 7D 89 03 A6 */	mtctr r12
+/* 81375204 | 4E 80 04 21 */	bctrl
 .L_81375208:
-/* 81375208 00043608  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 8137520C 0004360C  3B DE 00 04 */	addi r30, r30, 0x4
-/* 81375210 00043610  2C 1C 00 0A */	cmpwi r28, 0xa
-/* 81375214 00043614  41 80 FF 40 */	blt .L_81375154
-/* 81375218 00043618  48 00 00 D0 */	b .L_813752E8
+/* 81375208 | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 8137520C | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 81375210 | 2C 1C 00 0A */	cmpwi r28, 0xa
+/* 81375214 | 41 80 FF 40 */	blt .L_81375154
+/* 81375218 | 48 00 00 D0 */	b .L_813752E8
 .L_8137521C:
-/* 8137521C 0004361C  3C 60 81 64 */	lis r3, scFuncTouchPaneName__Q210homebutton10HomeButton@ha
-/* 81375220 00043620  3B 80 00 00 */	li r28, 0x0
-/* 81375224 00043624  3B C0 00 00 */	li r30, 0x0
-/* 81375228 00043628  3B A3 53 8C */	addi r29, r3, scFuncTouchPaneName__Q210homebutton10HomeButton@l
+/* 8137521C | 3C 60 81 64 */	lis r3, scFuncTouchPaneName__Q210homebutton10HomeButton@ha
+/* 81375220 | 3B 80 00 00 */	li r28, 0x0
+/* 81375224 | 3B C0 00 00 */	li r30, 0x0
+/* 81375228 | 3B A3 53 8C */	addi r29, r3, scFuncTouchPaneName__Q210homebutton10HomeButton@l
 .L_8137522C:
-/* 8137522C 0004362C  2C 1C 00 07 */	cmpwi r28, 0x7
-/* 81375230 00043630  41 80 00 0C */	blt .L_8137523C
-/* 81375234 00043634  2C 1C 00 09 */	cmpwi r28, 0x9
-/* 81375238 00043638  40 82 00 54 */	bne .L_8137528C
+/* 8137522C | 2C 1C 00 07 */	cmpwi r28, 0x7
+/* 81375230 | 41 80 00 0C */	blt .L_8137523C
+/* 81375234 | 2C 1C 00 09 */	cmpwi r28, 0x9
+/* 81375238 | 40 82 00 54 */	bne .L_8137528C
 .L_8137523C:
-/* 8137523C 0004363C  80 7F 02 2C */	lwz r3, 0x22c(r31)
-/* 81375240 00043640  38 A0 00 01 */	li r5, 0x1
-/* 81375244 00043644  7C 9D F0 2E */	lwzx r4, r29, r30
-/* 81375248 00043648  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 8137524C 0004364C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81375250 00043650  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81375254 00043654  7D 89 03 A6 */	mtctr r12
-/* 81375258 00043658  4E 80 04 21 */	bctrl
-/* 8137525C 0004365C  7C 64 1B 78 */	mr r4, r3
-/* 81375260 00043660  80 7F 02 44 */	lwz r3, 0x244(r31)
-/* 81375264 00043664  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81375268 00043668  81 8C 00 40 */	lwz r12, 0x40(r12)
-/* 8137526C 0004366C  7D 89 03 A6 */	mtctr r12
-/* 81375270 00043670  4E 80 04 21 */	bctrl
-/* 81375274 00043674  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81375278 00043678  38 80 00 00 */	li r4, 0x0
-/* 8137527C 0004367C  81 8C 00 50 */	lwz r12, 0x50(r12)
-/* 81375280 00043680  7D 89 03 A6 */	mtctr r12
-/* 81375284 00043684  4E 80 04 21 */	bctrl
-/* 81375288 00043688  48 00 00 50 */	b .L_813752D8
+/* 8137523C | 80 7F 02 2C */	lwz r3, 0x22c(r31)
+/* 81375240 | 38 A0 00 01 */	li r5, 0x1
+/* 81375244 | 7C 9D F0 2E */	lwzx r4, r29, r30
+/* 81375248 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 8137524C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81375250 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81375254 | 7D 89 03 A6 */	mtctr r12
+/* 81375258 | 4E 80 04 21 */	bctrl
+/* 8137525C | 7C 64 1B 78 */	mr r4, r3
+/* 81375260 | 80 7F 02 44 */	lwz r3, 0x244(r31)
+/* 81375264 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81375268 | 81 8C 00 40 */	lwz r12, 0x40(r12)
+/* 8137526C | 7D 89 03 A6 */	mtctr r12
+/* 81375270 | 4E 80 04 21 */	bctrl
+/* 81375274 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81375278 | 38 80 00 00 */	li r4, 0x0
+/* 8137527C | 81 8C 00 50 */	lwz r12, 0x50(r12)
+/* 81375280 | 7D 89 03 A6 */	mtctr r12
+/* 81375284 | 4E 80 04 21 */	bctrl
+/* 81375288 | 48 00 00 50 */	b .L_813752D8
 .L_8137528C:
-/* 8137528C 0004368C  80 7F 02 2C */	lwz r3, 0x22c(r31)
-/* 81375290 00043690  38 A0 00 01 */	li r5, 0x1
-/* 81375294 00043694  7C 9D F0 2E */	lwzx r4, r29, r30
-/* 81375298 00043698  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 8137529C 0004369C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813752A0 000436A0  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 813752A4 000436A4  7D 89 03 A6 */	mtctr r12
-/* 813752A8 000436A8  4E 80 04 21 */	bctrl
-/* 813752AC 000436AC  7C 64 1B 78 */	mr r4, r3
-/* 813752B0 000436B0  80 7F 02 44 */	lwz r3, 0x244(r31)
-/* 813752B4 000436B4  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813752B8 000436B8  81 8C 00 40 */	lwz r12, 0x40(r12)
-/* 813752BC 000436BC  7D 89 03 A6 */	mtctr r12
-/* 813752C0 000436C0  4E 80 04 21 */	bctrl
-/* 813752C4 000436C4  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813752C8 000436C8  38 80 00 01 */	li r4, 0x1
-/* 813752CC 000436CC  81 8C 00 50 */	lwz r12, 0x50(r12)
-/* 813752D0 000436D0  7D 89 03 A6 */	mtctr r12
-/* 813752D4 000436D4  4E 80 04 21 */	bctrl
+/* 8137528C | 80 7F 02 2C */	lwz r3, 0x22c(r31)
+/* 81375290 | 38 A0 00 01 */	li r5, 0x1
+/* 81375294 | 7C 9D F0 2E */	lwzx r4, r29, r30
+/* 81375298 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 8137529C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813752A0 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 813752A4 | 7D 89 03 A6 */	mtctr r12
+/* 813752A8 | 4E 80 04 21 */	bctrl
+/* 813752AC | 7C 64 1B 78 */	mr r4, r3
+/* 813752B0 | 80 7F 02 44 */	lwz r3, 0x244(r31)
+/* 813752B4 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813752B8 | 81 8C 00 40 */	lwz r12, 0x40(r12)
+/* 813752BC | 7D 89 03 A6 */	mtctr r12
+/* 813752C0 | 4E 80 04 21 */	bctrl
+/* 813752C4 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813752C8 | 38 80 00 01 */	li r4, 0x1
+/* 813752CC | 81 8C 00 50 */	lwz r12, 0x50(r12)
+/* 813752D0 | 7D 89 03 A6 */	mtctr r12
+/* 813752D4 | 4E 80 04 21 */	bctrl
 .L_813752D8:
-/* 813752D8 000436D8  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 813752DC 000436DC  3B DE 00 04 */	addi r30, r30, 0x4
-/* 813752E0 000436E0  2C 1C 00 0A */	cmpwi r28, 0xa
-/* 813752E4 000436E4  41 80 FF 48 */	blt .L_8137522C
+/* 813752D8 | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 813752DC | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 813752E0 | 2C 1C 00 0A */	cmpwi r28, 0xa
+/* 813752E4 | 41 80 FF 48 */	blt .L_8137522C
 .L_813752E8:
-/* 813752E8 000436E8  39 61 00 20 */	addi r11, r1, 0x20
-/* 813752EC 000436EC  48 28 42 25 */	bl _restgpr_28
-/* 813752F0 000436F0  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 813752F4 000436F4  7C 08 03 A6 */	mtlr r0
-/* 813752F8 000436F8  38 21 00 20 */	addi r1, r1, 0x20
-/* 813752FC 000436FC  4E 80 00 20 */	blr
+/* 813752E8 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813752EC | 48 28 42 25 */	bl _restgpr_28
+/* 813752F0 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 813752F4 | 7C 08 03 A6 */	mtlr r0
+/* 813752F8 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 813752FC | 4E 80 00 20 */	blr
 .endfn updateTrigPane__Q210homebutton10HomeButtonFv
 
 # .text:0x3D58 | 0x81375300 | size: 0x4B8
 # homebutton::HomeButton::startPointEvent(const char*, void*)
 .fn startPointEvent__Q210homebutton10HomeButtonFPCcPv, global
-/* 81375300 00043700  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 81375304 00043704  7C 08 02 A6 */	mflr r0
-/* 81375308 00043708  90 01 00 24 */	stw r0, 0x24(r1)
-/* 8137530C 0004370C  39 61 00 20 */	addi r11, r1, 0x20
-/* 81375310 00043710  48 28 41 B1 */	bl _savegpr_27
-/* 81375314 00043714  7C 7C 1B 78 */	mr r28, r3
-/* 81375318 00043718  7C BD 2B 78 */	mr r29, r5
-/* 8137531C 0004371C  48 00 16 9D */	bl getPaneNo__Q210homebutton10HomeButtonFPCc
-/* 81375320 00043720  80 1C 00 10 */	lwz r0, 0x10(r28)
-/* 81375324 00043724  7C 7F 1B 78 */	mr r31, r3
-/* 81375328 00043728  3B C0 00 00 */	li r30, 0x0
-/* 8137532C 0004372C  2C 00 00 02 */	cmpwi r0, 0x2
-/* 81375330 00043730  40 82 03 B0 */	bne .L_813756E0
-/* 81375334 00043734  2C 03 FF FF */	cmpwi r3, -0x1
-/* 81375338 00043738  41 82 03 A8 */	beq .L_813756E0
-/* 8137533C 0004373C  54 60 10 3A */	slwi r0, r3, 2
-/* 81375340 00043740  7C 9C 02 14 */	add r4, r28, r0
-/* 81375344 00043744  80 04 00 1C */	lwz r0, 0x1c(r4)
-/* 81375348 00043748  2C 00 00 00 */	cmpwi r0, 0x0
-/* 8137534C 0004374C  40 82 03 94 */	bne .L_813756E0
-/* 81375350 00043750  80 9C 00 00 */	lwz r4, 0x0(r28)
-/* 81375354 00043754  2C 04 00 02 */	cmpwi r4, 0x2
-/* 81375358 00043758  41 82 00 58 */	beq .L_813753B0
-/* 8137535C 0004375C  80 1C 00 08 */	lwz r0, 0x8(r28)
-/* 81375360 00043760  7C 03 00 00 */	cmpw r3, r0
-/* 81375364 00043764  40 80 00 4C */	bge .L_813753B0
-/* 81375368 00043768  7F 83 E3 78 */	mr r3, r28
-/* 8137536C 0004376C  7F E4 FB 78 */	mr r4, r31
-/* 81375370 00043770  38 A0 00 00 */	li r5, 0x0
-/* 81375374 00043774  48 00 16 FD */	bl findAnimator__Q210homebutton10HomeButtonFii
-/* 81375378 00043778  54 60 10 3A */	slwi r0, r3, 2
-/* 8137537C 0004377C  7C 7C 02 14 */	add r3, r28, r0
-/* 81375380 00043780  83 63 02 B4 */	lwz r27, 0x2b4(r3)
-/* 81375384 00043784  7F 63 DB 78 */	mr r3, r27
-/* 81375388 00043788  48 00 28 A9 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 8137538C 0004378C  38 00 00 01 */	li r0, 0x1
-/* 81375390 00043790  90 1B 00 14 */	stw r0, 0x14(r27)
-/* 81375394 00043794  80 1C 00 00 */	lwz r0, 0x0(r28)
-/* 81375398 00043798  2C 00 00 00 */	cmpwi r0, 0x0
-/* 8137539C 0004379C  40 82 03 44 */	bne .L_813756E0
-/* 813753A0 000437A0  7F 83 E3 78 */	mr r3, r28
-/* 813753A4 000437A4  48 00 17 81 */	bl setForcusSE__Q210homebutton10HomeButtonFv
-/* 813753A8 000437A8  3B C0 00 01 */	li r30, 0x1
-/* 813753AC 000437AC  48 00 03 34 */	b .L_813756E0
+/* 81375300 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81375304 | 7C 08 02 A6 */	mflr r0
+/* 81375308 | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 8137530C | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81375310 | 48 28 41 B1 */	bl _savegpr_27
+/* 81375314 | 7C 7C 1B 78 */	mr r28, r3
+/* 81375318 | 7C BD 2B 78 */	mr r29, r5
+/* 8137531C | 48 00 16 9D */	bl getPaneNo__Q210homebutton10HomeButtonFPCc
+/* 81375320 | 80 1C 00 10 */	lwz r0, 0x10(r28)
+/* 81375324 | 7C 7F 1B 78 */	mr r31, r3
+/* 81375328 | 3B C0 00 00 */	li r30, 0x0
+/* 8137532C | 2C 00 00 02 */	cmpwi r0, 0x2
+/* 81375330 | 40 82 03 B0 */	bne .L_813756E0
+/* 81375334 | 2C 03 FF FF */	cmpwi r3, -0x1
+/* 81375338 | 41 82 03 A8 */	beq .L_813756E0
+/* 8137533C | 54 60 10 3A */	slwi r0, r3, 2
+/* 81375340 | 7C 9C 02 14 */	add r4, r28, r0
+/* 81375344 | 80 04 00 1C */	lwz r0, 0x1c(r4)
+/* 81375348 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 8137534C | 40 82 03 94 */	bne .L_813756E0
+/* 81375350 | 80 9C 00 00 */	lwz r4, 0x0(r28)
+/* 81375354 | 2C 04 00 02 */	cmpwi r4, 0x2
+/* 81375358 | 41 82 00 58 */	beq .L_813753B0
+/* 8137535C | 80 1C 00 08 */	lwz r0, 0x8(r28)
+/* 81375360 | 7C 03 00 00 */	cmpw r3, r0
+/* 81375364 | 40 80 00 4C */	bge .L_813753B0
+/* 81375368 | 7F 83 E3 78 */	mr r3, r28
+/* 8137536C | 7F E4 FB 78 */	mr r4, r31
+/* 81375370 | 38 A0 00 00 */	li r5, 0x0
+/* 81375374 | 48 00 16 FD */	bl findAnimator__Q210homebutton10HomeButtonFii
+/* 81375378 | 54 60 10 3A */	slwi r0, r3, 2
+/* 8137537C | 7C 7C 02 14 */	add r3, r28, r0
+/* 81375380 | 83 63 02 B4 */	lwz r27, 0x2b4(r3)
+/* 81375384 | 7F 63 DB 78 */	mr r3, r27
+/* 81375388 | 48 00 28 A9 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 8137538C | 38 00 00 01 */	li r0, 0x1
+/* 81375390 | 90 1B 00 14 */	stw r0, 0x14(r27)
+/* 81375394 | 80 1C 00 00 */	lwz r0, 0x0(r28)
+/* 81375398 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 8137539C | 40 82 03 44 */	bne .L_813756E0
+/* 813753A0 | 7F 83 E3 78 */	mr r3, r28
+/* 813753A4 | 48 00 17 81 */	bl setForcusSE__Q210homebutton10HomeButtonFv
+/* 813753A8 | 3B C0 00 01 */	li r30, 0x1
+/* 813753AC | 48 00 03 34 */	b .L_813756E0
 .L_813753B0:
-/* 813753B0 000437B0  80 1C 00 08 */	lwz r0, 0x8(r28)
-/* 813753B4 000437B4  7C 00 18 50 */	subf r0, r0, r3
-/* 813753B8 000437B8  28 00 00 09 */	cmplwi r0, 0x9
-/* 813753BC 000437BC  41 81 03 24 */	bgt .L_813756E0
-/* 813753C0 000437C0  3C 60 81 64 */	lis r3, jumptable_81645568@ha
-/* 813753C4 000437C4  54 00 10 3A */	slwi r0, r0, 2
-/* 813753C8 000437C8  38 63 55 68 */	addi r3, r3, jumptable_81645568@l
-/* 813753CC 000437CC  7C 63 00 2E */	lwzx r3, r3, r0
-/* 813753D0 000437D0  7C 69 03 A6 */	mtctr r3
-/* 813753D4 000437D4  4E 80 04 20 */	bctr
+/* 813753B0 | 80 1C 00 08 */	lwz r0, 0x8(r28)
+/* 813753B4 | 7C 00 18 50 */	subf r0, r0, r3
+/* 813753B8 | 28 00 00 09 */	cmplwi r0, 0x9
+/* 813753BC | 41 81 03 24 */	bgt .L_813756E0
+/* 813753C0 | 3C 60 81 64 */	lis r3, jumptable_81645568@ha
+/* 813753C4 | 54 00 10 3A */	slwi r0, r0, 2
+/* 813753C8 | 38 63 55 68 */	addi r3, r3, jumptable_81645568@l
+/* 813753CC | 7C 63 00 2E */	lwzx r3, r3, r0
+/* 813753D0 | 7C 69 03 A6 */	mtctr r3
+/* 813753D4 | 4E 80 04 20 */	bctr
 .L_813753D8:
-/* 813753D8 000437D8  2C 04 00 00 */	cmpwi r4, 0x0
-/* 813753DC 000437DC  40 82 03 04 */	bne .L_813756E0
-/* 813753E0 000437E0  7F 83 E3 78 */	mr r3, r28
-/* 813753E4 000437E4  48 00 14 A9 */	bl isUpBarActive__Q210homebutton10HomeButtonCFv
-/* 813753E8 000437E8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813753EC 000437EC  41 82 00 38 */	beq .L_81375424
-/* 813753F0 000437F0  83 7C 04 18 */	lwz r27, 0x418(r28)
-/* 813753F4 000437F4  7F 63 DB 78 */	mr r3, r27
-/* 813753F8 000437F8  48 00 28 39 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 813753FC 000437FC  38 00 00 01 */	li r0, 0x1
-/* 81375400 00043800  38 80 00 03 */	li r4, 0x3
-/* 81375404 00043804  90 1B 00 14 */	stw r0, 0x14(r27)
-/* 81375408 00043808  38 00 00 00 */	li r0, 0x0
-/* 8137540C 0004380C  7F 83 E3 78 */	mr r3, r28
-/* 81375410 00043810  90 9C 00 70 */	stw r4, 0x70(r28)
-/* 81375414 00043814  90 1C 00 68 */	stw r0, 0x68(r28)
-/* 81375418 00043818  48 00 17 0D */	bl setForcusSE__Q210homebutton10HomeButtonFv
-/* 8137541C 0004381C  3B C0 00 01 */	li r30, 0x1
-/* 81375420 00043820  48 00 02 C0 */	b .L_813756E0
+/* 813753D8 | 2C 04 00 00 */	cmpwi r4, 0x0
+/* 813753DC | 40 82 03 04 */	bne .L_813756E0
+/* 813753E0 | 7F 83 E3 78 */	mr r3, r28
+/* 813753E4 | 48 00 14 A9 */	bl isUpBarActive__Q210homebutton10HomeButtonCFv
+/* 813753E8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813753EC | 41 82 00 38 */	beq .L_81375424
+/* 813753F0 | 83 7C 04 18 */	lwz r27, 0x418(r28)
+/* 813753F4 | 7F 63 DB 78 */	mr r3, r27
+/* 813753F8 | 48 00 28 39 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 813753FC | 38 00 00 01 */	li r0, 0x1
+/* 81375400 | 38 80 00 03 */	li r4, 0x3
+/* 81375404 | 90 1B 00 14 */	stw r0, 0x14(r27)
+/* 81375408 | 38 00 00 00 */	li r0, 0x0
+/* 8137540C | 7F 83 E3 78 */	mr r3, r28
+/* 81375410 | 90 9C 00 70 */	stw r4, 0x70(r28)
+/* 81375414 | 90 1C 00 68 */	stw r0, 0x68(r28)
+/* 81375418 | 48 00 17 0D */	bl setForcusSE__Q210homebutton10HomeButtonFv
+/* 8137541C | 3B C0 00 01 */	li r30, 0x1
+/* 81375420 | 48 00 02 C0 */	b .L_813756E0
 .L_81375424:
-/* 81375424 00043824  38 00 00 03 */	li r0, 0x3
-/* 81375428 00043828  90 1C 00 68 */	stw r0, 0x68(r28)
-/* 8137542C 0004382C  48 00 02 B4 */	b .L_813756E0
+/* 81375424 | 38 00 00 03 */	li r0, 0x3
+/* 81375428 | 90 1C 00 68 */	stw r0, 0x68(r28)
+/* 8137542C | 48 00 02 B4 */	b .L_813756E0
 .L_81375430:
-/* 81375430 00043830  2C 04 00 00 */	cmpwi r4, 0x0
-/* 81375434 00043834  40 82 00 68 */	bne .L_8137549C
-/* 81375438 00043838  7F 83 E3 78 */	mr r3, r28
-/* 8137543C 0004383C  38 80 00 04 */	li r4, 0x4
-/* 81375440 00043840  38 A0 00 02 */	li r5, 0x2
-/* 81375444 00043844  48 00 16 7D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81375448 00043848  7C 7B 1B 78 */	mr r27, r3
-/* 8137544C 0004384C  7F 83 E3 78 */	mr r3, r28
-/* 81375450 00043850  48 00 14 79 */	bl isDownBarActive__Q210homebutton10HomeButtonFv
-/* 81375454 00043854  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81375458 00043858  41 82 00 3C */	beq .L_81375494
-/* 8137545C 0004385C  57 60 10 3A */	slwi r0, r27, 2
-/* 81375460 00043860  7C 7C 02 14 */	add r3, r28, r0
-/* 81375464 00043864  83 C3 02 E4 */	lwz r30, 0x2e4(r3)
-/* 81375468 00043868  7F C3 F3 78 */	mr r3, r30
-/* 8137546C 0004386C  48 00 27 C5 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375470 00043870  38 60 00 01 */	li r3, 0x1
-/* 81375474 00043874  38 00 00 00 */	li r0, 0x0
-/* 81375478 00043878  90 7E 00 14 */	stw r3, 0x14(r30)
-/* 8137547C 0004387C  7F 83 E3 78 */	mr r3, r28
-/* 81375480 00043880  93 7C 00 74 */	stw r27, 0x74(r28)
-/* 81375484 00043884  90 1C 00 6C */	stw r0, 0x6c(r28)
-/* 81375488 00043888  48 00 16 9D */	bl setForcusSE__Q210homebutton10HomeButtonFv
-/* 8137548C 0004388C  3B C0 00 01 */	li r30, 0x1
-/* 81375490 00043890  48 00 02 50 */	b .L_813756E0
+/* 81375430 | 2C 04 00 00 */	cmpwi r4, 0x0
+/* 81375434 | 40 82 00 68 */	bne .L_8137549C
+/* 81375438 | 7F 83 E3 78 */	mr r3, r28
+/* 8137543C | 38 80 00 04 */	li r4, 0x4
+/* 81375440 | 38 A0 00 02 */	li r5, 0x2
+/* 81375444 | 48 00 16 7D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81375448 | 7C 7B 1B 78 */	mr r27, r3
+/* 8137544C | 7F 83 E3 78 */	mr r3, r28
+/* 81375450 | 48 00 14 79 */	bl isDownBarActive__Q210homebutton10HomeButtonFv
+/* 81375454 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81375458 | 41 82 00 3C */	beq .L_81375494
+/* 8137545C | 57 60 10 3A */	slwi r0, r27, 2
+/* 81375460 | 7C 7C 02 14 */	add r3, r28, r0
+/* 81375464 | 83 C3 02 E4 */	lwz r30, 0x2e4(r3)
+/* 81375468 | 7F C3 F3 78 */	mr r3, r30
+/* 8137546C | 48 00 27 C5 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375470 | 38 60 00 01 */	li r3, 0x1
+/* 81375474 | 38 00 00 00 */	li r0, 0x0
+/* 81375478 | 90 7E 00 14 */	stw r3, 0x14(r30)
+/* 8137547C | 7F 83 E3 78 */	mr r3, r28
+/* 81375480 | 93 7C 00 74 */	stw r27, 0x74(r28)
+/* 81375484 | 90 1C 00 6C */	stw r0, 0x6c(r28)
+/* 81375488 | 48 00 16 9D */	bl setForcusSE__Q210homebutton10HomeButtonFv
+/* 8137548C | 3B C0 00 01 */	li r30, 0x1
+/* 81375490 | 48 00 02 50 */	b .L_813756E0
 .L_81375494:
-/* 81375494 00043894  93 7C 00 6C */	stw r27, 0x6c(r28)
-/* 81375498 00043898  48 00 02 48 */	b .L_813756E0
+/* 81375494 | 93 7C 00 6C */	stw r27, 0x6c(r28)
+/* 81375498 | 48 00 02 48 */	b .L_813756E0
 .L_8137549C:
-/* 8137549C 0004389C  2C 04 00 01 */	cmpwi r4, 0x1
-/* 813754A0 000438A0  40 82 02 40 */	bne .L_813756E0
-/* 813754A4 000438A4  7F 83 E3 78 */	mr r3, r28
-/* 813754A8 000438A8  38 80 00 04 */	li r4, 0x4
-/* 813754AC 000438AC  38 A0 00 13 */	li r5, 0x13
-/* 813754B0 000438B0  48 00 16 11 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 813754B4 000438B4  7C 7B 1B 78 */	mr r27, r3
-/* 813754B8 000438B8  7F 83 E3 78 */	mr r3, r28
-/* 813754BC 000438BC  48 00 14 0D */	bl isDownBarActive__Q210homebutton10HomeButtonFv
-/* 813754C0 000438C0  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813754C4 000438C4  41 82 00 3C */	beq .L_81375500
-/* 813754C8 000438C8  57 60 10 3A */	slwi r0, r27, 2
-/* 813754CC 000438CC  7C 7C 02 14 */	add r3, r28, r0
-/* 813754D0 000438D0  83 C3 02 E4 */	lwz r30, 0x2e4(r3)
-/* 813754D4 000438D4  7F C3 F3 78 */	mr r3, r30
-/* 813754D8 000438D8  48 00 27 59 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 813754DC 000438DC  38 60 00 01 */	li r3, 0x1
-/* 813754E0 000438E0  38 00 00 00 */	li r0, 0x0
-/* 813754E4 000438E4  90 7E 00 14 */	stw r3, 0x14(r30)
-/* 813754E8 000438E8  7F 83 E3 78 */	mr r3, r28
-/* 813754EC 000438EC  93 7C 00 74 */	stw r27, 0x74(r28)
-/* 813754F0 000438F0  90 1C 00 6C */	stw r0, 0x6c(r28)
-/* 813754F4 000438F4  48 00 16 31 */	bl setForcusSE__Q210homebutton10HomeButtonFv
-/* 813754F8 000438F8  3B C0 00 01 */	li r30, 0x1
-/* 813754FC 000438FC  48 00 01 E4 */	b .L_813756E0
+/* 8137549C | 2C 04 00 01 */	cmpwi r4, 0x1
+/* 813754A0 | 40 82 02 40 */	bne .L_813756E0
+/* 813754A4 | 7F 83 E3 78 */	mr r3, r28
+/* 813754A8 | 38 80 00 04 */	li r4, 0x4
+/* 813754AC | 38 A0 00 13 */	li r5, 0x13
+/* 813754B0 | 48 00 16 11 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 813754B4 | 7C 7B 1B 78 */	mr r27, r3
+/* 813754B8 | 7F 83 E3 78 */	mr r3, r28
+/* 813754BC | 48 00 14 0D */	bl isDownBarActive__Q210homebutton10HomeButtonFv
+/* 813754C0 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813754C4 | 41 82 00 3C */	beq .L_81375500
+/* 813754C8 | 57 60 10 3A */	slwi r0, r27, 2
+/* 813754CC | 7C 7C 02 14 */	add r3, r28, r0
+/* 813754D0 | 83 C3 02 E4 */	lwz r30, 0x2e4(r3)
+/* 813754D4 | 7F C3 F3 78 */	mr r3, r30
+/* 813754D8 | 48 00 27 59 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 813754DC | 38 60 00 01 */	li r3, 0x1
+/* 813754E0 | 38 00 00 00 */	li r0, 0x0
+/* 813754E4 | 90 7E 00 14 */	stw r3, 0x14(r30)
+/* 813754E8 | 7F 83 E3 78 */	mr r3, r28
+/* 813754EC | 93 7C 00 74 */	stw r27, 0x74(r28)
+/* 813754F0 | 90 1C 00 6C */	stw r0, 0x6c(r28)
+/* 813754F4 | 48 00 16 31 */	bl setForcusSE__Q210homebutton10HomeButtonFv
+/* 813754F8 | 3B C0 00 01 */	li r30, 0x1
+/* 813754FC | 48 00 01 E4 */	b .L_813756E0
 .L_81375500:
-/* 81375500 00043900  93 7C 00 6C */	stw r27, 0x6c(r28)
-/* 81375504 00043904  48 00 01 DC */	b .L_813756E0
+/* 81375500 | 93 7C 00 6C */	stw r27, 0x6c(r28)
+/* 81375504 | 48 00 01 DC */	b .L_813756E0
 .L_81375508:
-/* 81375508 00043908  2C 04 00 01 */	cmpwi r4, 0x1
-/* 8137550C 0004390C  40 82 01 D4 */	bne .L_813756E0
-/* 81375510 00043910  7F 83 E3 78 */	mr r3, r28
-/* 81375514 00043914  38 80 00 06 */	li r4, 0x6
-/* 81375518 00043918  38 A0 00 04 */	li r5, 0x4
-/* 8137551C 0004391C  48 00 15 A5 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81375520 00043920  54 60 10 3A */	slwi r0, r3, 2
-/* 81375524 00043924  7C 7C 02 14 */	add r3, r28, r0
-/* 81375528 00043928  83 63 02 E4 */	lwz r27, 0x2e4(r3)
-/* 8137552C 0004392C  7F 63 DB 78 */	mr r3, r27
-/* 81375530 00043930  48 00 27 01 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375534 00043934  38 00 00 01 */	li r0, 0x1
-/* 81375538 00043938  7F 83 E3 78 */	mr r3, r28
-/* 8137553C 0004393C  90 1B 00 14 */	stw r0, 0x14(r27)
-/* 81375540 00043940  48 00 15 E5 */	bl setForcusSE__Q210homebutton10HomeButtonFv
-/* 81375544 00043944  3B C0 00 01 */	li r30, 0x1
-/* 81375548 00043948  48 00 01 98 */	b .L_813756E0
+/* 81375508 | 2C 04 00 01 */	cmpwi r4, 0x1
+/* 8137550C | 40 82 01 D4 */	bne .L_813756E0
+/* 81375510 | 7F 83 E3 78 */	mr r3, r28
+/* 81375514 | 38 80 00 06 */	li r4, 0x6
+/* 81375518 | 38 A0 00 04 */	li r5, 0x4
+/* 8137551C | 48 00 15 A5 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81375520 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81375524 | 7C 7C 02 14 */	add r3, r28, r0
+/* 81375528 | 83 63 02 E4 */	lwz r27, 0x2e4(r3)
+/* 8137552C | 7F 63 DB 78 */	mr r3, r27
+/* 81375530 | 48 00 27 01 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375534 | 38 00 00 01 */	li r0, 0x1
+/* 81375538 | 7F 83 E3 78 */	mr r3, r28
+/* 8137553C | 90 1B 00 14 */	stw r0, 0x14(r27)
+/* 81375540 | 48 00 15 E5 */	bl setForcusSE__Q210homebutton10HomeButtonFv
+/* 81375544 | 3B C0 00 01 */	li r30, 0x1
+/* 81375548 | 48 00 01 98 */	b .L_813756E0
 .L_8137554C:
-/* 8137554C 0004394C  2C 04 00 01 */	cmpwi r4, 0x1
-/* 81375550 00043950  40 82 01 90 */	bne .L_813756E0
-/* 81375554 00043954  7F 83 E3 78 */	mr r3, r28
-/* 81375558 00043958  38 80 00 07 */	li r4, 0x7
-/* 8137555C 0004395C  38 A0 00 04 */	li r5, 0x4
-/* 81375560 00043960  48 00 15 61 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81375564 00043964  54 60 10 3A */	slwi r0, r3, 2
-/* 81375568 00043968  7C 7C 02 14 */	add r3, r28, r0
-/* 8137556C 0004396C  83 63 02 E4 */	lwz r27, 0x2e4(r3)
-/* 81375570 00043970  7F 63 DB 78 */	mr r3, r27
-/* 81375574 00043974  48 00 26 BD */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375578 00043978  38 00 00 01 */	li r0, 0x1
-/* 8137557C 0004397C  7F 83 E3 78 */	mr r3, r28
-/* 81375580 00043980  90 1B 00 14 */	stw r0, 0x14(r27)
-/* 81375584 00043984  48 00 15 A1 */	bl setForcusSE__Q210homebutton10HomeButtonFv
-/* 81375588 00043988  3B C0 00 01 */	li r30, 0x1
-/* 8137558C 0004398C  48 00 01 54 */	b .L_813756E0
+/* 8137554C | 2C 04 00 01 */	cmpwi r4, 0x1
+/* 81375550 | 40 82 01 90 */	bne .L_813756E0
+/* 81375554 | 7F 83 E3 78 */	mr r3, r28
+/* 81375558 | 38 80 00 07 */	li r4, 0x7
+/* 8137555C | 38 A0 00 04 */	li r5, 0x4
+/* 81375560 | 48 00 15 61 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81375564 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81375568 | 7C 7C 02 14 */	add r3, r28, r0
+/* 8137556C | 83 63 02 E4 */	lwz r27, 0x2e4(r3)
+/* 81375570 | 7F 63 DB 78 */	mr r3, r27
+/* 81375574 | 48 00 26 BD */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375578 | 38 00 00 01 */	li r0, 0x1
+/* 8137557C | 7F 83 E3 78 */	mr r3, r28
+/* 81375580 | 90 1B 00 14 */	stw r0, 0x14(r27)
+/* 81375584 | 48 00 15 A1 */	bl setForcusSE__Q210homebutton10HomeButtonFv
+/* 81375588 | 3B C0 00 01 */	li r30, 0x1
+/* 8137558C | 48 00 01 54 */	b .L_813756E0
 .L_81375590:
-/* 81375590 00043990  2C 04 00 01 */	cmpwi r4, 0x1
-/* 81375594 00043994  40 82 01 4C */	bne .L_813756E0
-/* 81375598 00043998  7F 83 E3 78 */	mr r3, r28
-/* 8137559C 0004399C  38 80 00 08 */	li r4, 0x8
-/* 813755A0 000439A0  38 A0 00 04 */	li r5, 0x4
-/* 813755A4 000439A4  48 00 15 1D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 813755A8 000439A8  54 60 10 3A */	slwi r0, r3, 2
-/* 813755AC 000439AC  7C 7C 02 14 */	add r3, r28, r0
-/* 813755B0 000439B0  83 63 02 E4 */	lwz r27, 0x2e4(r3)
-/* 813755B4 000439B4  7F 63 DB 78 */	mr r3, r27
-/* 813755B8 000439B8  48 00 26 79 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 813755BC 000439BC  38 00 00 01 */	li r0, 0x1
-/* 813755C0 000439C0  7F 83 E3 78 */	mr r3, r28
-/* 813755C4 000439C4  90 1B 00 14 */	stw r0, 0x14(r27)
-/* 813755C8 000439C8  48 00 15 5D */	bl setForcusSE__Q210homebutton10HomeButtonFv
-/* 813755CC 000439CC  3B C0 00 01 */	li r30, 0x1
-/* 813755D0 000439D0  48 00 01 10 */	b .L_813756E0
+/* 81375590 | 2C 04 00 01 */	cmpwi r4, 0x1
+/* 81375594 | 40 82 01 4C */	bne .L_813756E0
+/* 81375598 | 7F 83 E3 78 */	mr r3, r28
+/* 8137559C | 38 80 00 08 */	li r4, 0x8
+/* 813755A0 | 38 A0 00 04 */	li r5, 0x4
+/* 813755A4 | 48 00 15 1D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 813755A8 | 54 60 10 3A */	slwi r0, r3, 2
+/* 813755AC | 7C 7C 02 14 */	add r3, r28, r0
+/* 813755B0 | 83 63 02 E4 */	lwz r27, 0x2e4(r3)
+/* 813755B4 | 7F 63 DB 78 */	mr r3, r27
+/* 813755B8 | 48 00 26 79 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 813755BC | 38 00 00 01 */	li r0, 0x1
+/* 813755C0 | 7F 83 E3 78 */	mr r3, r28
+/* 813755C4 | 90 1B 00 14 */	stw r0, 0x14(r27)
+/* 813755C8 | 48 00 15 5D */	bl setForcusSE__Q210homebutton10HomeButtonFv
+/* 813755CC | 3B C0 00 01 */	li r30, 0x1
+/* 813755D0 | 48 00 01 10 */	b .L_813756E0
 .L_813755D4:
-/* 813755D4 000439D4  2C 04 00 01 */	cmpwi r4, 0x1
-/* 813755D8 000439D8  40 82 01 08 */	bne .L_813756E0
-/* 813755DC 000439DC  7F 83 E3 78 */	mr r3, r28
-/* 813755E0 000439E0  38 80 00 09 */	li r4, 0x9
-/* 813755E4 000439E4  38 A0 00 04 */	li r5, 0x4
-/* 813755E8 000439E8  48 00 14 D9 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 813755EC 000439EC  54 60 10 3A */	slwi r0, r3, 2
-/* 813755F0 000439F0  7C 7C 02 14 */	add r3, r28, r0
-/* 813755F4 000439F4  83 63 02 E4 */	lwz r27, 0x2e4(r3)
-/* 813755F8 000439F8  7F 63 DB 78 */	mr r3, r27
-/* 813755FC 000439FC  48 00 26 35 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375600 00043A00  38 00 00 01 */	li r0, 0x1
-/* 81375604 00043A04  7F 83 E3 78 */	mr r3, r28
-/* 81375608 00043A08  90 1B 00 14 */	stw r0, 0x14(r27)
-/* 8137560C 00043A0C  48 00 15 19 */	bl setForcusSE__Q210homebutton10HomeButtonFv
-/* 81375610 00043A10  3B C0 00 01 */	li r30, 0x1
-/* 81375614 00043A14  48 00 00 CC */	b .L_813756E0
+/* 813755D4 | 2C 04 00 01 */	cmpwi r4, 0x1
+/* 813755D8 | 40 82 01 08 */	bne .L_813756E0
+/* 813755DC | 7F 83 E3 78 */	mr r3, r28
+/* 813755E0 | 38 80 00 09 */	li r4, 0x9
+/* 813755E4 | 38 A0 00 04 */	li r5, 0x4
+/* 813755E8 | 48 00 14 D9 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 813755EC | 54 60 10 3A */	slwi r0, r3, 2
+/* 813755F0 | 7C 7C 02 14 */	add r3, r28, r0
+/* 813755F4 | 83 63 02 E4 */	lwz r27, 0x2e4(r3)
+/* 813755F8 | 7F 63 DB 78 */	mr r3, r27
+/* 813755FC | 48 00 26 35 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375600 | 38 00 00 01 */	li r0, 0x1
+/* 81375604 | 7F 83 E3 78 */	mr r3, r28
+/* 81375608 | 90 1B 00 14 */	stw r0, 0x14(r27)
+/* 8137560C | 48 00 15 19 */	bl setForcusSE__Q210homebutton10HomeButtonFv
+/* 81375610 | 3B C0 00 01 */	li r30, 0x1
+/* 81375614 | 48 00 00 CC */	b .L_813756E0
 .L_81375618:
-/* 81375618 00043A18  2C 04 00 01 */	cmpwi r4, 0x1
-/* 8137561C 00043A1C  40 82 00 C4 */	bne .L_813756E0
-/* 81375620 00043A20  7F 83 E3 78 */	mr r3, r28
-/* 81375624 00043A24  38 80 00 0A */	li r4, 0xa
-/* 81375628 00043A28  38 A0 00 04 */	li r5, 0x4
-/* 8137562C 00043A2C  48 00 14 95 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81375630 00043A30  54 60 10 3A */	slwi r0, r3, 2
-/* 81375634 00043A34  7C 7C 02 14 */	add r3, r28, r0
-/* 81375638 00043A38  83 63 02 E4 */	lwz r27, 0x2e4(r3)
-/* 8137563C 00043A3C  7F 63 DB 78 */	mr r3, r27
-/* 81375640 00043A40  48 00 25 F1 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375644 00043A44  38 00 00 01 */	li r0, 0x1
-/* 81375648 00043A48  7F 83 E3 78 */	mr r3, r28
-/* 8137564C 00043A4C  90 1B 00 14 */	stw r0, 0x14(r27)
-/* 81375650 00043A50  48 00 14 D5 */	bl setForcusSE__Q210homebutton10HomeButtonFv
-/* 81375654 00043A54  3B C0 00 01 */	li r30, 0x1
-/* 81375658 00043A58  48 00 00 88 */	b .L_813756E0
+/* 81375618 | 2C 04 00 01 */	cmpwi r4, 0x1
+/* 8137561C | 40 82 00 C4 */	bne .L_813756E0
+/* 81375620 | 7F 83 E3 78 */	mr r3, r28
+/* 81375624 | 38 80 00 0A */	li r4, 0xa
+/* 81375628 | 38 A0 00 04 */	li r5, 0x4
+/* 8137562C | 48 00 14 95 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81375630 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81375634 | 7C 7C 02 14 */	add r3, r28, r0
+/* 81375638 | 83 63 02 E4 */	lwz r27, 0x2e4(r3)
+/* 8137563C | 7F 63 DB 78 */	mr r3, r27
+/* 81375640 | 48 00 25 F1 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375644 | 38 00 00 01 */	li r0, 0x1
+/* 81375648 | 7F 83 E3 78 */	mr r3, r28
+/* 8137564C | 90 1B 00 14 */	stw r0, 0x14(r27)
+/* 81375650 | 48 00 14 D5 */	bl setForcusSE__Q210homebutton10HomeButtonFv
+/* 81375654 | 3B C0 00 01 */	li r30, 0x1
+/* 81375658 | 48 00 00 88 */	b .L_813756E0
 .L_8137565C:
-/* 8137565C 00043A5C  2C 04 00 02 */	cmpwi r4, 0x2
-/* 81375660 00043A60  40 82 00 80 */	bne .L_813756E0
-/* 81375664 00043A64  7F 83 E3 78 */	mr r3, r28
-/* 81375668 00043A68  38 80 00 11 */	li r4, 0x11
-/* 8137566C 00043A6C  38 A0 00 0B */	li r5, 0xb
-/* 81375670 00043A70  48 00 14 51 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81375674 00043A74  54 60 10 3A */	slwi r0, r3, 2
-/* 81375678 00043A78  7C 7C 02 14 */	add r3, r28, r0
-/* 8137567C 00043A7C  83 63 02 E4 */	lwz r27, 0x2e4(r3)
-/* 81375680 00043A80  7F 63 DB 78 */	mr r3, r27
-/* 81375684 00043A84  48 00 25 AD */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375688 00043A88  38 00 00 01 */	li r0, 0x1
-/* 8137568C 00043A8C  7F 83 E3 78 */	mr r3, r28
-/* 81375690 00043A90  90 1B 00 14 */	stw r0, 0x14(r27)
-/* 81375694 00043A94  48 00 14 91 */	bl setForcusSE__Q210homebutton10HomeButtonFv
-/* 81375698 00043A98  3B C0 00 01 */	li r30, 0x1
-/* 8137569C 00043A9C  48 00 00 44 */	b .L_813756E0
+/* 8137565C | 2C 04 00 02 */	cmpwi r4, 0x2
+/* 81375660 | 40 82 00 80 */	bne .L_813756E0
+/* 81375664 | 7F 83 E3 78 */	mr r3, r28
+/* 81375668 | 38 80 00 11 */	li r4, 0x11
+/* 8137566C | 38 A0 00 0B */	li r5, 0xb
+/* 81375670 | 48 00 14 51 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81375674 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81375678 | 7C 7C 02 14 */	add r3, r28, r0
+/* 8137567C | 83 63 02 E4 */	lwz r27, 0x2e4(r3)
+/* 81375680 | 7F 63 DB 78 */	mr r3, r27
+/* 81375684 | 48 00 25 AD */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375688 | 38 00 00 01 */	li r0, 0x1
+/* 8137568C | 7F 83 E3 78 */	mr r3, r28
+/* 81375690 | 90 1B 00 14 */	stw r0, 0x14(r27)
+/* 81375694 | 48 00 14 91 */	bl setForcusSE__Q210homebutton10HomeButtonFv
+/* 81375698 | 3B C0 00 01 */	li r30, 0x1
+/* 8137569C | 48 00 00 44 */	b .L_813756E0
 .L_813756A0:
-/* 813756A0 00043AA0  2C 04 00 02 */	cmpwi r4, 0x2
-/* 813756A4 00043AA4  40 82 00 3C */	bne .L_813756E0
-/* 813756A8 00043AA8  7F 83 E3 78 */	mr r3, r28
-/* 813756AC 00043AAC  38 80 00 12 */	li r4, 0x12
-/* 813756B0 00043AB0  38 A0 00 0B */	li r5, 0xb
-/* 813756B4 00043AB4  48 00 14 0D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 813756B8 00043AB8  54 60 10 3A */	slwi r0, r3, 2
-/* 813756BC 00043ABC  7C 7C 02 14 */	add r3, r28, r0
-/* 813756C0 00043AC0  83 63 02 E4 */	lwz r27, 0x2e4(r3)
-/* 813756C4 00043AC4  7F 63 DB 78 */	mr r3, r27
-/* 813756C8 00043AC8  48 00 25 69 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 813756CC 00043ACC  38 00 00 01 */	li r0, 0x1
-/* 813756D0 00043AD0  7F 83 E3 78 */	mr r3, r28
-/* 813756D4 00043AD4  90 1B 00 14 */	stw r0, 0x14(r27)
-/* 813756D8 00043AD8  48 00 14 4D */	bl setForcusSE__Q210homebutton10HomeButtonFv
-/* 813756DC 00043ADC  3B C0 00 01 */	li r30, 0x1
+/* 813756A0 | 2C 04 00 02 */	cmpwi r4, 0x2
+/* 813756A4 | 40 82 00 3C */	bne .L_813756E0
+/* 813756A8 | 7F 83 E3 78 */	mr r3, r28
+/* 813756AC | 38 80 00 12 */	li r4, 0x12
+/* 813756B0 | 38 A0 00 0B */	li r5, 0xb
+/* 813756B4 | 48 00 14 0D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 813756B8 | 54 60 10 3A */	slwi r0, r3, 2
+/* 813756BC | 7C 7C 02 14 */	add r3, r28, r0
+/* 813756C0 | 83 63 02 E4 */	lwz r27, 0x2e4(r3)
+/* 813756C4 | 7F 63 DB 78 */	mr r3, r27
+/* 813756C8 | 48 00 25 69 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 813756CC | 38 00 00 01 */	li r0, 0x1
+/* 813756D0 | 7F 83 E3 78 */	mr r3, r28
+/* 813756D4 | 90 1B 00 14 */	stw r0, 0x14(r27)
+/* 813756D8 | 48 00 14 4D */	bl setForcusSE__Q210homebutton10HomeButtonFv
+/* 813756DC | 3B C0 00 01 */	li r30, 0x1
 .L_813756E0:
-/* 813756E0 00043AE0  80 7C 00 08 */	lwz r3, 0x8(r28)
-/* 813756E4 00043AE4  38 83 00 01 */	addi r4, r3, 0x1
-/* 813756E8 00043AE8  7C 1F 20 00 */	cmpw r31, r4
-/* 813756EC 00043AEC  41 82 00 10 */	beq .L_813756FC
-/* 813756F0 00043AF0  38 03 00 09 */	addi r0, r3, 0x9
-/* 813756F4 00043AF4  7C 1F 00 00 */	cmpw r31, r0
-/* 813756F8 00043AF8  40 82 00 38 */	bne .L_81375730
+/* 813756E0 | 80 7C 00 08 */	lwz r3, 0x8(r28)
+/* 813756E4 | 38 83 00 01 */	addi r4, r3, 0x1
+/* 813756E8 | 7C 1F 20 00 */	cmpw r31, r4
+/* 813756EC | 41 82 00 10 */	beq .L_813756FC
+/* 813756F0 | 38 03 00 09 */	addi r0, r3, 0x9
+/* 813756F4 | 7C 1F 00 00 */	cmpw r31, r0
+/* 813756F8 | 40 82 00 38 */	bne .L_81375730
 .L_813756FC:
-/* 813756FC 00043AFC  54 80 10 3A */	slwi r0, r4, 2
-/* 81375700 00043B00  7C 9C 02 14 */	add r4, r28, r0
-/* 81375704 00043B04  80 64 00 1C */	lwz r3, 0x1c(r4)
-/* 81375708 00043B08  38 03 00 01 */	addi r0, r3, 0x1
-/* 8137570C 00043B0C  90 04 00 1C */	stw r0, 0x1c(r4)
-/* 81375710 00043B10  80 7C 00 08 */	lwz r3, 0x8(r28)
-/* 81375714 00043B14  38 03 00 09 */	addi r0, r3, 0x9
-/* 81375718 00043B18  54 00 10 3A */	slwi r0, r0, 2
-/* 8137571C 00043B1C  7C 9C 02 14 */	add r4, r28, r0
-/* 81375720 00043B20  80 64 00 1C */	lwz r3, 0x1c(r4)
-/* 81375724 00043B24  38 03 00 01 */	addi r0, r3, 0x1
-/* 81375728 00043B28  90 04 00 1C */	stw r0, 0x1c(r4)
-/* 8137572C 00043B2C  48 00 00 18 */	b .L_81375744
+/* 813756FC | 54 80 10 3A */	slwi r0, r4, 2
+/* 81375700 | 7C 9C 02 14 */	add r4, r28, r0
+/* 81375704 | 80 64 00 1C */	lwz r3, 0x1c(r4)
+/* 81375708 | 38 03 00 01 */	addi r0, r3, 0x1
+/* 8137570C | 90 04 00 1C */	stw r0, 0x1c(r4)
+/* 81375710 | 80 7C 00 08 */	lwz r3, 0x8(r28)
+/* 81375714 | 38 03 00 09 */	addi r0, r3, 0x9
+/* 81375718 | 54 00 10 3A */	slwi r0, r0, 2
+/* 8137571C | 7C 9C 02 14 */	add r4, r28, r0
+/* 81375720 | 80 64 00 1C */	lwz r3, 0x1c(r4)
+/* 81375724 | 38 03 00 01 */	addi r0, r3, 0x1
+/* 81375728 | 90 04 00 1C */	stw r0, 0x1c(r4)
+/* 8137572C | 48 00 00 18 */	b .L_81375744
 .L_81375730:
-/* 81375730 00043B30  57 E0 10 3A */	slwi r0, r31, 2
-/* 81375734 00043B34  7C 9C 02 14 */	add r4, r28, r0
-/* 81375738 00043B38  80 64 00 1C */	lwz r3, 0x1c(r4)
-/* 8137573C 00043B3C  38 03 00 01 */	addi r0, r3, 0x1
-/* 81375740 00043B40  90 04 00 1C */	stw r0, 0x1c(r4)
+/* 81375730 | 57 E0 10 3A */	slwi r0, r31, 2
+/* 81375734 | 7C 9C 02 14 */	add r4, r28, r0
+/* 81375738 | 80 64 00 1C */	lwz r3, 0x1c(r4)
+/* 8137573C | 38 03 00 01 */	addi r0, r3, 0x1
+/* 81375740 | 90 04 00 1C */	stw r0, 0x1c(r4)
 .L_81375744:
-/* 81375744 00043B44  2C 1E 00 00 */	cmpwi r30, 0x0
-/* 81375748 00043B48  41 82 00 58 */	beq .L_813757A0
-/* 8137574C 00043B4C  2C 1D 00 00 */	cmpwi r29, 0x0
-/* 81375750 00043B50  41 82 00 50 */	beq .L_813757A0
-/* 81375754 00043B54  80 1D 00 00 */	lwz r0, 0x0(r29)
-/* 81375758 00043B58  54 00 10 3A */	slwi r0, r0, 2
-/* 8137575C 00043B5C  7C 9C 02 14 */	add r4, r28, r0
-/* 81375760 00043B60  80 64 02 A0 */	lwz r3, 0x2a0(r4)
-/* 81375764 00043B64  88 03 00 1C */	lbz r0, 0x1c(r3)
-/* 81375768 00043B68  2C 00 00 00 */	cmpwi r0, 0x0
-/* 8137576C 00043B6C  40 82 00 34 */	bne .L_813757A0
-/* 81375770 00043B70  C0 24 02 18 */	lfs f1, 0x218(r4)
-/* 81375774 00043B74  C0 02 82 D8 */	lfs f0, lbl_816946D8@sda21(r0)
-/* 81375778 00043B78  FC 01 00 40 */	fcmpo cr0, f1, f0
-/* 8137577C 00043B7C  4C 40 13 82 */	cror eq, lt, eq
-/* 81375780 00043B80  40 82 00 20 */	bne .L_813757A0
-/* 81375784 00043B84  C0 02 83 44 */	lfs f0, lbl_81694744@sda21(r0)
-/* 81375788 00043B88  D0 04 02 08 */	stfs f0, 0x208(r4)
-/* 8137578C 00043B8C  80 1D 00 00 */	lwz r0, 0x0(r29)
-/* 81375790 00043B90  54 00 10 3A */	slwi r0, r0, 2
-/* 81375794 00043B94  7C 7C 02 14 */	add r3, r28, r0
-/* 81375798 00043B98  80 63 02 A0 */	lwz r3, 0x2a0(r3)
-/* 8137579C 00043B9C  48 00 23 0D */	bl startMotor__Q210homebutton10ControllerFv
+/* 81375744 | 2C 1E 00 00 */	cmpwi r30, 0x0
+/* 81375748 | 41 82 00 58 */	beq .L_813757A0
+/* 8137574C | 2C 1D 00 00 */	cmpwi r29, 0x0
+/* 81375750 | 41 82 00 50 */	beq .L_813757A0
+/* 81375754 | 80 1D 00 00 */	lwz r0, 0x0(r29)
+/* 81375758 | 54 00 10 3A */	slwi r0, r0, 2
+/* 8137575C | 7C 9C 02 14 */	add r4, r28, r0
+/* 81375760 | 80 64 02 A0 */	lwz r3, 0x2a0(r4)
+/* 81375764 | 88 03 00 1C */	lbz r0, 0x1c(r3)
+/* 81375768 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 8137576C | 40 82 00 34 */	bne .L_813757A0
+/* 81375770 | C0 24 02 18 */	lfs f1, 0x218(r4)
+/* 81375774 | C0 02 82 D8 */	lfs f0, lbl_816946D8@sda21(r0)
+/* 81375778 | FC 01 00 40 */	fcmpo cr0, f1, f0
+/* 8137577C | 4C 40 13 82 */	cror eq, lt, eq
+/* 81375780 | 40 82 00 20 */	bne .L_813757A0
+/* 81375784 | C0 02 83 44 */	lfs f0, lbl_81694744@sda21(r0)
+/* 81375788 | D0 04 02 08 */	stfs f0, 0x208(r4)
+/* 8137578C | 80 1D 00 00 */	lwz r0, 0x0(r29)
+/* 81375790 | 54 00 10 3A */	slwi r0, r0, 2
+/* 81375794 | 7C 7C 02 14 */	add r3, r28, r0
+/* 81375798 | 80 63 02 A0 */	lwz r3, 0x2a0(r3)
+/* 8137579C | 48 00 23 0D */	bl startMotor__Q210homebutton10ControllerFv
 .L_813757A0:
-/* 813757A0 00043BA0  39 61 00 20 */	addi r11, r1, 0x20
-/* 813757A4 00043BA4  48 28 3D 69 */	bl _restgpr_27
-/* 813757A8 00043BA8  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 813757AC 00043BAC  7C 08 03 A6 */	mtlr r0
-/* 813757B0 00043BB0  38 21 00 20 */	addi r1, r1, 0x20
-/* 813757B4 00043BB4  4E 80 00 20 */	blr
+/* 813757A0 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813757A4 | 48 28 3D 69 */	bl _restgpr_27
+/* 813757A8 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 813757AC | 7C 08 03 A6 */	mtlr r0
+/* 813757B0 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 813757B4 | 4E 80 00 20 */	blr
 .endfn startPointEvent__Q210homebutton10HomeButtonFPCcPv
 
 # .text:0x4210 | 0x813757B8 | size: 0x3C0
 # homebutton::HomeButton::startLeftEvent(const char*)
 .fn startLeftEvent__Q210homebutton10HomeButtonFPCc, global
-/* 813757B8 00043BB8  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 813757BC 00043BBC  7C 08 02 A6 */	mflr r0
-/* 813757C0 00043BC0  90 01 00 24 */	stw r0, 0x24(r1)
-/* 813757C4 00043BC4  39 61 00 20 */	addi r11, r1, 0x20
-/* 813757C8 00043BC8  48 28 3D 01 */	bl _savegpr_29
-/* 813757CC 00043BCC  7C 7F 1B 78 */	mr r31, r3
-/* 813757D0 00043BD0  48 00 11 E9 */	bl getPaneNo__Q210homebutton10HomeButtonFPCc
-/* 813757D4 00043BD4  54 60 10 3A */	slwi r0, r3, 2
-/* 813757D8 00043BD8  7C 64 1B 78 */	mr r4, r3
-/* 813757DC 00043BDC  7C FF 02 14 */	add r7, r31, r0
-/* 813757E0 00043BE0  80 A7 00 1C */	lwz r5, 0x1c(r7)
-/* 813757E4 00043BE4  2C 05 00 00 */	cmpwi r5, 0x0
-/* 813757E8 00043BE8  40 81 00 5C */	ble .L_81375844
-/* 813757EC 00043BEC  80 DF 00 08 */	lwz r6, 0x8(r31)
-/* 813757F0 00043BF0  39 06 00 01 */	addi r8, r6, 0x1
-/* 813757F4 00043BF4  7C 03 40 00 */	cmpw r3, r8
-/* 813757F8 00043BF8  41 82 00 10 */	beq .L_81375808
-/* 813757FC 00043BFC  38 06 00 09 */	addi r0, r6, 0x9
-/* 81375800 00043C00  7C 03 00 00 */	cmpw r3, r0
-/* 81375804 00043C04  40 82 00 38 */	bne .L_8137583C
+/* 813757B8 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 813757BC | 7C 08 02 A6 */	mflr r0
+/* 813757C0 | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 813757C4 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813757C8 | 48 28 3D 01 */	bl _savegpr_29
+/* 813757CC | 7C 7F 1B 78 */	mr r31, r3
+/* 813757D0 | 48 00 11 E9 */	bl getPaneNo__Q210homebutton10HomeButtonFPCc
+/* 813757D4 | 54 60 10 3A */	slwi r0, r3, 2
+/* 813757D8 | 7C 64 1B 78 */	mr r4, r3
+/* 813757DC | 7C FF 02 14 */	add r7, r31, r0
+/* 813757E0 | 80 A7 00 1C */	lwz r5, 0x1c(r7)
+/* 813757E4 | 2C 05 00 00 */	cmpwi r5, 0x0
+/* 813757E8 | 40 81 00 5C */	ble .L_81375844
+/* 813757EC | 80 DF 00 08 */	lwz r6, 0x8(r31)
+/* 813757F0 | 39 06 00 01 */	addi r8, r6, 0x1
+/* 813757F4 | 7C 03 40 00 */	cmpw r3, r8
+/* 813757F8 | 41 82 00 10 */	beq .L_81375808
+/* 813757FC | 38 06 00 09 */	addi r0, r6, 0x9
+/* 81375800 | 7C 03 00 00 */	cmpw r3, r0
+/* 81375804 | 40 82 00 38 */	bne .L_8137583C
 .L_81375808:
-/* 81375808 00043C08  55 00 10 3A */	slwi r0, r8, 2
-/* 8137580C 00043C0C  7C DF 02 14 */	add r6, r31, r0
-/* 81375810 00043C10  80 A6 00 1C */	lwz r5, 0x1c(r6)
-/* 81375814 00043C14  38 05 FF FF */	subi r0, r5, 0x1
-/* 81375818 00043C18  90 06 00 1C */	stw r0, 0x1c(r6)
-/* 8137581C 00043C1C  80 BF 00 08 */	lwz r5, 0x8(r31)
-/* 81375820 00043C20  38 05 00 09 */	addi r0, r5, 0x9
-/* 81375824 00043C24  54 00 10 3A */	slwi r0, r0, 2
-/* 81375828 00043C28  7C DF 02 14 */	add r6, r31, r0
-/* 8137582C 00043C2C  80 A6 00 1C */	lwz r5, 0x1c(r6)
-/* 81375830 00043C30  38 05 FF FF */	subi r0, r5, 0x1
-/* 81375834 00043C34  90 06 00 1C */	stw r0, 0x1c(r6)
-/* 81375838 00043C38  48 00 00 0C */	b .L_81375844
+/* 81375808 | 55 00 10 3A */	slwi r0, r8, 2
+/* 8137580C | 7C DF 02 14 */	add r6, r31, r0
+/* 81375810 | 80 A6 00 1C */	lwz r5, 0x1c(r6)
+/* 81375814 | 38 05 FF FF */	subi r0, r5, 0x1
+/* 81375818 | 90 06 00 1C */	stw r0, 0x1c(r6)
+/* 8137581C | 80 BF 00 08 */	lwz r5, 0x8(r31)
+/* 81375820 | 38 05 00 09 */	addi r0, r5, 0x9
+/* 81375824 | 54 00 10 3A */	slwi r0, r0, 2
+/* 81375828 | 7C DF 02 14 */	add r6, r31, r0
+/* 8137582C | 80 A6 00 1C */	lwz r5, 0x1c(r6)
+/* 81375830 | 38 05 FF FF */	subi r0, r5, 0x1
+/* 81375834 | 90 06 00 1C */	stw r0, 0x1c(r6)
+/* 81375838 | 48 00 00 0C */	b .L_81375844
 .L_8137583C:
-/* 8137583C 00043C3C  38 05 FF FF */	subi r0, r5, 0x1
-/* 81375840 00043C40  90 07 00 1C */	stw r0, 0x1c(r7)
+/* 8137583C | 38 05 FF FF */	subi r0, r5, 0x1
+/* 81375840 | 90 07 00 1C */	stw r0, 0x1c(r7)
 .L_81375844:
-/* 81375844 00043C44  80 1F 00 10 */	lwz r0, 0x10(r31)
-/* 81375848 00043C48  2C 00 00 02 */	cmpwi r0, 0x2
-/* 8137584C 00043C4C  40 82 03 14 */	bne .L_81375B60
-/* 81375850 00043C50  2C 03 FF FF */	cmpwi r3, -0x1
-/* 81375854 00043C54  41 82 03 0C */	beq .L_81375B60
-/* 81375858 00043C58  80 07 00 1C */	lwz r0, 0x1c(r7)
-/* 8137585C 00043C5C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81375860 00043C60  40 82 03 00 */	bne .L_81375B60
-/* 81375864 00043C64  80 BF 00 00 */	lwz r5, 0x0(r31)
-/* 81375868 00043C68  2C 05 00 02 */	cmpwi r5, 0x2
-/* 8137586C 00043C6C  41 82 00 3C */	beq .L_813758A8
-/* 81375870 00043C70  80 1F 00 08 */	lwz r0, 0x8(r31)
-/* 81375874 00043C74  7C 03 00 00 */	cmpw r3, r0
-/* 81375878 00043C78  40 80 00 30 */	bge .L_813758A8
-/* 8137587C 00043C7C  7F E3 FB 78 */	mr r3, r31
-/* 81375880 00043C80  38 A0 00 02 */	li r5, 0x2
-/* 81375884 00043C84  48 00 11 ED */	bl findAnimator__Q210homebutton10HomeButtonFii
-/* 81375888 00043C88  54 60 10 3A */	slwi r0, r3, 2
-/* 8137588C 00043C8C  7C 7F 02 14 */	add r3, r31, r0
-/* 81375890 00043C90  83 C3 02 B4 */	lwz r30, 0x2b4(r3)
-/* 81375894 00043C94  7F C3 F3 78 */	mr r3, r30
-/* 81375898 00043C98  48 00 23 99 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 8137589C 00043C9C  38 00 00 01 */	li r0, 0x1
-/* 813758A0 00043CA0  90 1E 00 14 */	stw r0, 0x14(r30)
-/* 813758A4 00043CA4  48 00 02 BC */	b .L_81375B60
+/* 81375844 | 80 1F 00 10 */	lwz r0, 0x10(r31)
+/* 81375848 | 2C 00 00 02 */	cmpwi r0, 0x2
+/* 8137584C | 40 82 03 14 */	bne .L_81375B60
+/* 81375850 | 2C 03 FF FF */	cmpwi r3, -0x1
+/* 81375854 | 41 82 03 0C */	beq .L_81375B60
+/* 81375858 | 80 07 00 1C */	lwz r0, 0x1c(r7)
+/* 8137585C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81375860 | 40 82 03 00 */	bne .L_81375B60
+/* 81375864 | 80 BF 00 00 */	lwz r5, 0x0(r31)
+/* 81375868 | 2C 05 00 02 */	cmpwi r5, 0x2
+/* 8137586C | 41 82 00 3C */	beq .L_813758A8
+/* 81375870 | 80 1F 00 08 */	lwz r0, 0x8(r31)
+/* 81375874 | 7C 03 00 00 */	cmpw r3, r0
+/* 81375878 | 40 80 00 30 */	bge .L_813758A8
+/* 8137587C | 7F E3 FB 78 */	mr r3, r31
+/* 81375880 | 38 A0 00 02 */	li r5, 0x2
+/* 81375884 | 48 00 11 ED */	bl findAnimator__Q210homebutton10HomeButtonFii
+/* 81375888 | 54 60 10 3A */	slwi r0, r3, 2
+/* 8137588C | 7C 7F 02 14 */	add r3, r31, r0
+/* 81375890 | 83 C3 02 B4 */	lwz r30, 0x2b4(r3)
+/* 81375894 | 7F C3 F3 78 */	mr r3, r30
+/* 81375898 | 48 00 23 99 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 8137589C | 38 00 00 01 */	li r0, 0x1
+/* 813758A0 | 90 1E 00 14 */	stw r0, 0x14(r30)
+/* 813758A4 | 48 00 02 BC */	b .L_81375B60
 .L_813758A8:
-/* 813758A8 00043CA8  80 1F 00 08 */	lwz r0, 0x8(r31)
-/* 813758AC 00043CAC  7C 00 18 50 */	subf r0, r0, r3
-/* 813758B0 00043CB0  28 00 00 09 */	cmplwi r0, 0x9
-/* 813758B4 00043CB4  41 81 02 AC */	bgt .L_81375B60
-/* 813758B8 00043CB8  3C 60 81 64 */	lis r3, jumptable_81645590@ha
-/* 813758BC 00043CBC  54 00 10 3A */	slwi r0, r0, 2
-/* 813758C0 00043CC0  38 63 55 90 */	addi r3, r3, jumptable_81645590@l
-/* 813758C4 00043CC4  7C 63 00 2E */	lwzx r3, r3, r0
-/* 813758C8 00043CC8  7C 69 03 A6 */	mtctr r3
-/* 813758CC 00043CCC  4E 80 04 20 */	bctr
+/* 813758A8 | 80 1F 00 08 */	lwz r0, 0x8(r31)
+/* 813758AC | 7C 00 18 50 */	subf r0, r0, r3
+/* 813758B0 | 28 00 00 09 */	cmplwi r0, 0x9
+/* 813758B4 | 41 81 02 AC */	bgt .L_81375B60
+/* 813758B8 | 3C 60 81 64 */	lis r3, jumptable_81645590@ha
+/* 813758BC | 54 00 10 3A */	slwi r0, r0, 2
+/* 813758C0 | 38 63 55 90 */	addi r3, r3, jumptable_81645590@l
+/* 813758C4 | 7C 63 00 2E */	lwzx r3, r3, r0
+/* 813758C8 | 7C 69 03 A6 */	mtctr r3
+/* 813758CC | 4E 80 04 20 */	bctr
 .L_813758D0:
-/* 813758D0 00043CD0  2C 05 00 00 */	cmpwi r5, 0x0
-/* 813758D4 00043CD4  40 82 02 8C */	bne .L_81375B60
-/* 813758D8 00043CD8  7F E3 FB 78 */	mr r3, r31
-/* 813758DC 00043CDC  48 00 0F B1 */	bl isUpBarActive__Q210homebutton10HomeButtonCFv
-/* 813758E0 00043CE0  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813758E4 00043CE4  41 82 00 2C */	beq .L_81375910
-/* 813758E8 00043CE8  83 DF 04 3C */	lwz r30, 0x43c(r31)
-/* 813758EC 00043CEC  7F C3 F3 78 */	mr r3, r30
-/* 813758F0 00043CF0  48 00 23 41 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 813758F4 00043CF4  38 00 00 01 */	li r0, 0x1
-/* 813758F8 00043CF8  38 60 00 0C */	li r3, 0xc
-/* 813758FC 00043CFC  90 1E 00 14 */	stw r0, 0x14(r30)
-/* 81375900 00043D00  38 00 00 00 */	li r0, 0x0
-/* 81375904 00043D04  90 7F 00 70 */	stw r3, 0x70(r31)
-/* 81375908 00043D08  90 1F 00 68 */	stw r0, 0x68(r31)
-/* 8137590C 00043D0C  48 00 02 54 */	b .L_81375B60
+/* 813758D0 | 2C 05 00 00 */	cmpwi r5, 0x0
+/* 813758D4 | 40 82 02 8C */	bne .L_81375B60
+/* 813758D8 | 7F E3 FB 78 */	mr r3, r31
+/* 813758DC | 48 00 0F B1 */	bl isUpBarActive__Q210homebutton10HomeButtonCFv
+/* 813758E0 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813758E4 | 41 82 00 2C */	beq .L_81375910
+/* 813758E8 | 83 DF 04 3C */	lwz r30, 0x43c(r31)
+/* 813758EC | 7F C3 F3 78 */	mr r3, r30
+/* 813758F0 | 48 00 23 41 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 813758F4 | 38 00 00 01 */	li r0, 0x1
+/* 813758F8 | 38 60 00 0C */	li r3, 0xc
+/* 813758FC | 90 1E 00 14 */	stw r0, 0x14(r30)
+/* 81375900 | 38 00 00 00 */	li r0, 0x0
+/* 81375904 | 90 7F 00 70 */	stw r3, 0x70(r31)
+/* 81375908 | 90 1F 00 68 */	stw r0, 0x68(r31)
+/* 8137590C | 48 00 02 54 */	b .L_81375B60
 .L_81375910:
-/* 81375910 00043D10  38 00 00 0C */	li r0, 0xc
-/* 81375914 00043D14  90 1F 00 68 */	stw r0, 0x68(r31)
-/* 81375918 00043D18  48 00 02 48 */	b .L_81375B60
+/* 81375910 | 38 00 00 0C */	li r0, 0xc
+/* 81375914 | 90 1F 00 68 */	stw r0, 0x68(r31)
+/* 81375918 | 48 00 02 48 */	b .L_81375B60
 .L_8137591C:
-/* 8137591C 00043D1C  2C 05 00 00 */	cmpwi r5, 0x0
-/* 81375920 00043D20  40 82 00 5C */	bne .L_8137597C
-/* 81375924 00043D24  7F E3 FB 78 */	mr r3, r31
-/* 81375928 00043D28  38 80 00 05 */	li r4, 0x5
-/* 8137592C 00043D2C  38 A0 00 03 */	li r5, 0x3
-/* 81375930 00043D30  48 00 11 91 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81375934 00043D34  7C 7E 1B 78 */	mr r30, r3
-/* 81375938 00043D38  7F E3 FB 78 */	mr r3, r31
-/* 8137593C 00043D3C  48 00 0F 8D */	bl isDownBarActive__Q210homebutton10HomeButtonFv
-/* 81375940 00043D40  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81375944 00043D44  41 82 00 30 */	beq .L_81375974
-/* 81375948 00043D48  57 C0 10 3A */	slwi r0, r30, 2
-/* 8137594C 00043D4C  7C 7F 02 14 */	add r3, r31, r0
-/* 81375950 00043D50  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81375954 00043D54  7F A3 EB 78 */	mr r3, r29
-/* 81375958 00043D58  48 00 22 D9 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 8137595C 00043D5C  38 60 00 01 */	li r3, 0x1
-/* 81375960 00043D60  38 00 00 00 */	li r0, 0x0
-/* 81375964 00043D64  90 7D 00 14 */	stw r3, 0x14(r29)
-/* 81375968 00043D68  93 DF 00 74 */	stw r30, 0x74(r31)
-/* 8137596C 00043D6C  90 1F 00 6C */	stw r0, 0x6c(r31)
-/* 81375970 00043D70  48 00 01 F0 */	b .L_81375B60
+/* 8137591C | 2C 05 00 00 */	cmpwi r5, 0x0
+/* 81375920 | 40 82 00 5C */	bne .L_8137597C
+/* 81375924 | 7F E3 FB 78 */	mr r3, r31
+/* 81375928 | 38 80 00 05 */	li r4, 0x5
+/* 8137592C | 38 A0 00 03 */	li r5, 0x3
+/* 81375930 | 48 00 11 91 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81375934 | 7C 7E 1B 78 */	mr r30, r3
+/* 81375938 | 7F E3 FB 78 */	mr r3, r31
+/* 8137593C | 48 00 0F 8D */	bl isDownBarActive__Q210homebutton10HomeButtonFv
+/* 81375940 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81375944 | 41 82 00 30 */	beq .L_81375974
+/* 81375948 | 57 C0 10 3A */	slwi r0, r30, 2
+/* 8137594C | 7C 7F 02 14 */	add r3, r31, r0
+/* 81375950 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81375954 | 7F A3 EB 78 */	mr r3, r29
+/* 81375958 | 48 00 22 D9 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 8137595C | 38 60 00 01 */	li r3, 0x1
+/* 81375960 | 38 00 00 00 */	li r0, 0x0
+/* 81375964 | 90 7D 00 14 */	stw r3, 0x14(r29)
+/* 81375968 | 93 DF 00 74 */	stw r30, 0x74(r31)
+/* 8137596C | 90 1F 00 6C */	stw r0, 0x6c(r31)
+/* 81375970 | 48 00 01 F0 */	b .L_81375B60
 .L_81375974:
-/* 81375974 00043D74  93 DF 00 6C */	stw r30, 0x6c(r31)
-/* 81375978 00043D78  48 00 01 E8 */	b .L_81375B60
+/* 81375974 | 93 DF 00 6C */	stw r30, 0x6c(r31)
+/* 81375978 | 48 00 01 E8 */	b .L_81375B60
 .L_8137597C:
-/* 8137597C 00043D7C  2C 05 00 01 */	cmpwi r5, 0x1
-/* 81375980 00043D80  40 82 01 E0 */	bne .L_81375B60
-/* 81375984 00043D84  7F E3 FB 78 */	mr r3, r31
-/* 81375988 00043D88  38 80 00 05 */	li r4, 0x5
-/* 8137598C 00043D8C  38 A0 00 14 */	li r5, 0x14
-/* 81375990 00043D90  48 00 11 31 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81375994 00043D94  7C 7E 1B 78 */	mr r30, r3
-/* 81375998 00043D98  7F E3 FB 78 */	mr r3, r31
-/* 8137599C 00043D9C  48 00 0F 2D */	bl isDownBarActive__Q210homebutton10HomeButtonFv
-/* 813759A0 00043DA0  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813759A4 00043DA4  41 82 00 30 */	beq .L_813759D4
-/* 813759A8 00043DA8  57 C0 10 3A */	slwi r0, r30, 2
-/* 813759AC 00043DAC  7C 7F 02 14 */	add r3, r31, r0
-/* 813759B0 00043DB0  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 813759B4 00043DB4  7F A3 EB 78 */	mr r3, r29
-/* 813759B8 00043DB8  48 00 22 79 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 813759BC 00043DBC  38 60 00 01 */	li r3, 0x1
-/* 813759C0 00043DC0  38 00 00 00 */	li r0, 0x0
-/* 813759C4 00043DC4  90 7D 00 14 */	stw r3, 0x14(r29)
-/* 813759C8 00043DC8  93 DF 00 74 */	stw r30, 0x74(r31)
-/* 813759CC 00043DCC  90 1F 00 6C */	stw r0, 0x6c(r31)
-/* 813759D0 00043DD0  48 00 01 90 */	b .L_81375B60
+/* 8137597C | 2C 05 00 01 */	cmpwi r5, 0x1
+/* 81375980 | 40 82 01 E0 */	bne .L_81375B60
+/* 81375984 | 7F E3 FB 78 */	mr r3, r31
+/* 81375988 | 38 80 00 05 */	li r4, 0x5
+/* 8137598C | 38 A0 00 14 */	li r5, 0x14
+/* 81375990 | 48 00 11 31 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81375994 | 7C 7E 1B 78 */	mr r30, r3
+/* 81375998 | 7F E3 FB 78 */	mr r3, r31
+/* 8137599C | 48 00 0F 2D */	bl isDownBarActive__Q210homebutton10HomeButtonFv
+/* 813759A0 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813759A4 | 41 82 00 30 */	beq .L_813759D4
+/* 813759A8 | 57 C0 10 3A */	slwi r0, r30, 2
+/* 813759AC | 7C 7F 02 14 */	add r3, r31, r0
+/* 813759B0 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 813759B4 | 7F A3 EB 78 */	mr r3, r29
+/* 813759B8 | 48 00 22 79 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 813759BC | 38 60 00 01 */	li r3, 0x1
+/* 813759C0 | 38 00 00 00 */	li r0, 0x0
+/* 813759C4 | 90 7D 00 14 */	stw r3, 0x14(r29)
+/* 813759C8 | 93 DF 00 74 */	stw r30, 0x74(r31)
+/* 813759CC | 90 1F 00 6C */	stw r0, 0x6c(r31)
+/* 813759D0 | 48 00 01 90 */	b .L_81375B60
 .L_813759D4:
-/* 813759D4 00043DD4  93 DF 00 6C */	stw r30, 0x6c(r31)
-/* 813759D8 00043DD8  48 00 01 88 */	b .L_81375B60
+/* 813759D4 | 93 DF 00 6C */	stw r30, 0x6c(r31)
+/* 813759D8 | 48 00 01 88 */	b .L_81375B60
 .L_813759DC:
-/* 813759DC 00043DDC  2C 05 00 01 */	cmpwi r5, 0x1
-/* 813759E0 00043DE0  40 82 01 80 */	bne .L_81375B60
-/* 813759E4 00043DE4  7F E3 FB 78 */	mr r3, r31
-/* 813759E8 00043DE8  38 80 00 06 */	li r4, 0x6
-/* 813759EC 00043DEC  38 A0 00 07 */	li r5, 0x7
-/* 813759F0 00043DF0  48 00 10 D1 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 813759F4 00043DF4  54 60 10 3A */	slwi r0, r3, 2
-/* 813759F8 00043DF8  7C 7F 02 14 */	add r3, r31, r0
-/* 813759FC 00043DFC  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81375A00 00043E00  7F A3 EB 78 */	mr r3, r29
-/* 81375A04 00043E04  48 00 22 2D */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375A08 00043E08  38 00 00 01 */	li r0, 0x1
-/* 81375A0C 00043E0C  90 1D 00 14 */	stw r0, 0x14(r29)
-/* 81375A10 00043E10  48 00 01 50 */	b .L_81375B60
+/* 813759DC | 2C 05 00 01 */	cmpwi r5, 0x1
+/* 813759E0 | 40 82 01 80 */	bne .L_81375B60
+/* 813759E4 | 7F E3 FB 78 */	mr r3, r31
+/* 813759E8 | 38 80 00 06 */	li r4, 0x6
+/* 813759EC | 38 A0 00 07 */	li r5, 0x7
+/* 813759F0 | 48 00 10 D1 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 813759F4 | 54 60 10 3A */	slwi r0, r3, 2
+/* 813759F8 | 7C 7F 02 14 */	add r3, r31, r0
+/* 813759FC | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81375A00 | 7F A3 EB 78 */	mr r3, r29
+/* 81375A04 | 48 00 22 2D */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375A08 | 38 00 00 01 */	li r0, 0x1
+/* 81375A0C | 90 1D 00 14 */	stw r0, 0x14(r29)
+/* 81375A10 | 48 00 01 50 */	b .L_81375B60
 .L_81375A14:
-/* 81375A14 00043E14  2C 05 00 01 */	cmpwi r5, 0x1
-/* 81375A18 00043E18  40 82 01 48 */	bne .L_81375B60
-/* 81375A1C 00043E1C  7F E3 FB 78 */	mr r3, r31
-/* 81375A20 00043E20  38 80 00 07 */	li r4, 0x7
-/* 81375A24 00043E24  38 A0 00 07 */	li r5, 0x7
-/* 81375A28 00043E28  48 00 10 99 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81375A2C 00043E2C  54 60 10 3A */	slwi r0, r3, 2
-/* 81375A30 00043E30  7C 7F 02 14 */	add r3, r31, r0
-/* 81375A34 00043E34  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81375A38 00043E38  7F A3 EB 78 */	mr r3, r29
-/* 81375A3C 00043E3C  48 00 21 F5 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375A40 00043E40  38 00 00 01 */	li r0, 0x1
-/* 81375A44 00043E44  90 1D 00 14 */	stw r0, 0x14(r29)
-/* 81375A48 00043E48  48 00 01 18 */	b .L_81375B60
+/* 81375A14 | 2C 05 00 01 */	cmpwi r5, 0x1
+/* 81375A18 | 40 82 01 48 */	bne .L_81375B60
+/* 81375A1C | 7F E3 FB 78 */	mr r3, r31
+/* 81375A20 | 38 80 00 07 */	li r4, 0x7
+/* 81375A24 | 38 A0 00 07 */	li r5, 0x7
+/* 81375A28 | 48 00 10 99 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81375A2C | 54 60 10 3A */	slwi r0, r3, 2
+/* 81375A30 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81375A34 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81375A38 | 7F A3 EB 78 */	mr r3, r29
+/* 81375A3C | 48 00 21 F5 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375A40 | 38 00 00 01 */	li r0, 0x1
+/* 81375A44 | 90 1D 00 14 */	stw r0, 0x14(r29)
+/* 81375A48 | 48 00 01 18 */	b .L_81375B60
 .L_81375A4C:
-/* 81375A4C 00043E4C  2C 05 00 01 */	cmpwi r5, 0x1
-/* 81375A50 00043E50  40 82 01 10 */	bne .L_81375B60
-/* 81375A54 00043E54  7F E3 FB 78 */	mr r3, r31
-/* 81375A58 00043E58  38 80 00 08 */	li r4, 0x8
-/* 81375A5C 00043E5C  38 A0 00 07 */	li r5, 0x7
-/* 81375A60 00043E60  48 00 10 61 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81375A64 00043E64  54 60 10 3A */	slwi r0, r3, 2
-/* 81375A68 00043E68  7C 7F 02 14 */	add r3, r31, r0
-/* 81375A6C 00043E6C  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81375A70 00043E70  7F A3 EB 78 */	mr r3, r29
-/* 81375A74 00043E74  48 00 21 BD */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375A78 00043E78  38 00 00 01 */	li r0, 0x1
-/* 81375A7C 00043E7C  90 1D 00 14 */	stw r0, 0x14(r29)
-/* 81375A80 00043E80  48 00 00 E0 */	b .L_81375B60
+/* 81375A4C | 2C 05 00 01 */	cmpwi r5, 0x1
+/* 81375A50 | 40 82 01 10 */	bne .L_81375B60
+/* 81375A54 | 7F E3 FB 78 */	mr r3, r31
+/* 81375A58 | 38 80 00 08 */	li r4, 0x8
+/* 81375A5C | 38 A0 00 07 */	li r5, 0x7
+/* 81375A60 | 48 00 10 61 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81375A64 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81375A68 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81375A6C | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81375A70 | 7F A3 EB 78 */	mr r3, r29
+/* 81375A74 | 48 00 21 BD */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375A78 | 38 00 00 01 */	li r0, 0x1
+/* 81375A7C | 90 1D 00 14 */	stw r0, 0x14(r29)
+/* 81375A80 | 48 00 00 E0 */	b .L_81375B60
 .L_81375A84:
-/* 81375A84 00043E84  2C 05 00 01 */	cmpwi r5, 0x1
-/* 81375A88 00043E88  40 82 00 D8 */	bne .L_81375B60
-/* 81375A8C 00043E8C  7F E3 FB 78 */	mr r3, r31
-/* 81375A90 00043E90  38 80 00 09 */	li r4, 0x9
-/* 81375A94 00043E94  38 A0 00 07 */	li r5, 0x7
-/* 81375A98 00043E98  48 00 10 29 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81375A9C 00043E9C  54 60 10 3A */	slwi r0, r3, 2
-/* 81375AA0 00043EA0  7C 7F 02 14 */	add r3, r31, r0
-/* 81375AA4 00043EA4  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81375AA8 00043EA8  7F A3 EB 78 */	mr r3, r29
-/* 81375AAC 00043EAC  48 00 21 85 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375AB0 00043EB0  38 00 00 01 */	li r0, 0x1
-/* 81375AB4 00043EB4  90 1D 00 14 */	stw r0, 0x14(r29)
-/* 81375AB8 00043EB8  48 00 00 A8 */	b .L_81375B60
+/* 81375A84 | 2C 05 00 01 */	cmpwi r5, 0x1
+/* 81375A88 | 40 82 00 D8 */	bne .L_81375B60
+/* 81375A8C | 7F E3 FB 78 */	mr r3, r31
+/* 81375A90 | 38 80 00 09 */	li r4, 0x9
+/* 81375A94 | 38 A0 00 07 */	li r5, 0x7
+/* 81375A98 | 48 00 10 29 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81375A9C | 54 60 10 3A */	slwi r0, r3, 2
+/* 81375AA0 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81375AA4 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81375AA8 | 7F A3 EB 78 */	mr r3, r29
+/* 81375AAC | 48 00 21 85 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375AB0 | 38 00 00 01 */	li r0, 0x1
+/* 81375AB4 | 90 1D 00 14 */	stw r0, 0x14(r29)
+/* 81375AB8 | 48 00 00 A8 */	b .L_81375B60
 .L_81375ABC:
-/* 81375ABC 00043EBC  2C 05 00 01 */	cmpwi r5, 0x1
-/* 81375AC0 00043EC0  40 82 00 A0 */	bne .L_81375B60
-/* 81375AC4 00043EC4  7F E3 FB 78 */	mr r3, r31
-/* 81375AC8 00043EC8  38 80 00 0A */	li r4, 0xa
-/* 81375ACC 00043ECC  38 A0 00 07 */	li r5, 0x7
-/* 81375AD0 00043ED0  48 00 0F F1 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81375AD4 00043ED4  54 60 10 3A */	slwi r0, r3, 2
-/* 81375AD8 00043ED8  7C 7F 02 14 */	add r3, r31, r0
-/* 81375ADC 00043EDC  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81375AE0 00043EE0  7F A3 EB 78 */	mr r3, r29
-/* 81375AE4 00043EE4  48 00 21 4D */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375AE8 00043EE8  38 00 00 01 */	li r0, 0x1
-/* 81375AEC 00043EEC  90 1D 00 14 */	stw r0, 0x14(r29)
-/* 81375AF0 00043EF0  48 00 00 70 */	b .L_81375B60
+/* 81375ABC | 2C 05 00 01 */	cmpwi r5, 0x1
+/* 81375AC0 | 40 82 00 A0 */	bne .L_81375B60
+/* 81375AC4 | 7F E3 FB 78 */	mr r3, r31
+/* 81375AC8 | 38 80 00 0A */	li r4, 0xa
+/* 81375ACC | 38 A0 00 07 */	li r5, 0x7
+/* 81375AD0 | 48 00 0F F1 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81375AD4 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81375AD8 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81375ADC | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81375AE0 | 7F A3 EB 78 */	mr r3, r29
+/* 81375AE4 | 48 00 21 4D */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375AE8 | 38 00 00 01 */	li r0, 0x1
+/* 81375AEC | 90 1D 00 14 */	stw r0, 0x14(r29)
+/* 81375AF0 | 48 00 00 70 */	b .L_81375B60
 .L_81375AF4:
-/* 81375AF4 00043EF4  2C 05 00 02 */	cmpwi r5, 0x2
-/* 81375AF8 00043EF8  40 82 00 68 */	bne .L_81375B60
-/* 81375AFC 00043EFC  7F E3 FB 78 */	mr r3, r31
-/* 81375B00 00043F00  38 80 00 11 */	li r4, 0x11
-/* 81375B04 00043F04  38 A0 00 0C */	li r5, 0xc
-/* 81375B08 00043F08  48 00 0F B9 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81375B0C 00043F0C  54 60 10 3A */	slwi r0, r3, 2
-/* 81375B10 00043F10  7C 7F 02 14 */	add r3, r31, r0
-/* 81375B14 00043F14  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81375B18 00043F18  7F A3 EB 78 */	mr r3, r29
-/* 81375B1C 00043F1C  48 00 21 15 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375B20 00043F20  38 00 00 01 */	li r0, 0x1
-/* 81375B24 00043F24  90 1D 00 14 */	stw r0, 0x14(r29)
-/* 81375B28 00043F28  48 00 00 38 */	b .L_81375B60
+/* 81375AF4 | 2C 05 00 02 */	cmpwi r5, 0x2
+/* 81375AF8 | 40 82 00 68 */	bne .L_81375B60
+/* 81375AFC | 7F E3 FB 78 */	mr r3, r31
+/* 81375B00 | 38 80 00 11 */	li r4, 0x11
+/* 81375B04 | 38 A0 00 0C */	li r5, 0xc
+/* 81375B08 | 48 00 0F B9 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81375B0C | 54 60 10 3A */	slwi r0, r3, 2
+/* 81375B10 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81375B14 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81375B18 | 7F A3 EB 78 */	mr r3, r29
+/* 81375B1C | 48 00 21 15 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375B20 | 38 00 00 01 */	li r0, 0x1
+/* 81375B24 | 90 1D 00 14 */	stw r0, 0x14(r29)
+/* 81375B28 | 48 00 00 38 */	b .L_81375B60
 .L_81375B2C:
-/* 81375B2C 00043F2C  2C 05 00 02 */	cmpwi r5, 0x2
-/* 81375B30 00043F30  40 82 00 30 */	bne .L_81375B60
-/* 81375B34 00043F34  7F E3 FB 78 */	mr r3, r31
-/* 81375B38 00043F38  38 80 00 12 */	li r4, 0x12
-/* 81375B3C 00043F3C  38 A0 00 0C */	li r5, 0xc
-/* 81375B40 00043F40  48 00 0F 81 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81375B44 00043F44  54 60 10 3A */	slwi r0, r3, 2
-/* 81375B48 00043F48  7C 7F 02 14 */	add r3, r31, r0
-/* 81375B4C 00043F4C  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81375B50 00043F50  7F A3 EB 78 */	mr r3, r29
-/* 81375B54 00043F54  48 00 20 DD */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375B58 00043F58  38 00 00 01 */	li r0, 0x1
-/* 81375B5C 00043F5C  90 1D 00 14 */	stw r0, 0x14(r29)
+/* 81375B2C | 2C 05 00 02 */	cmpwi r5, 0x2
+/* 81375B30 | 40 82 00 30 */	bne .L_81375B60
+/* 81375B34 | 7F E3 FB 78 */	mr r3, r31
+/* 81375B38 | 38 80 00 12 */	li r4, 0x12
+/* 81375B3C | 38 A0 00 0C */	li r5, 0xc
+/* 81375B40 | 48 00 0F 81 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81375B44 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81375B48 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81375B4C | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81375B50 | 7F A3 EB 78 */	mr r3, r29
+/* 81375B54 | 48 00 20 DD */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375B58 | 38 00 00 01 */	li r0, 0x1
+/* 81375B5C | 90 1D 00 14 */	stw r0, 0x14(r29)
 .L_81375B60:
-/* 81375B60 00043F60  39 61 00 20 */	addi r11, r1, 0x20
-/* 81375B64 00043F64  48 28 39 B1 */	bl _restgpr_29
-/* 81375B68 00043F68  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 81375B6C 00043F6C  7C 08 03 A6 */	mtlr r0
-/* 81375B70 00043F70  38 21 00 20 */	addi r1, r1, 0x20
-/* 81375B74 00043F74  4E 80 00 20 */	blr
+/* 81375B60 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81375B64 | 48 28 39 B1 */	bl _restgpr_29
+/* 81375B68 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81375B6C | 7C 08 03 A6 */	mtlr r0
+/* 81375B70 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 81375B74 | 4E 80 00 20 */	blr
 .endfn startLeftEvent__Q210homebutton10HomeButtonFPCc
 
 # .text:0x45D0 | 0x81375B78 | size: 0x960
 # homebutton::HomeButton::startTrigEvent(const char*)
 .fn startTrigEvent__Q210homebutton10HomeButtonFPCc, global
-/* 81375B78 00043F78  94 21 FF B0 */	stwu r1, -0x50(r1)
-/* 81375B7C 00043F7C  7C 08 02 A6 */	mflr r0
-/* 81375B80 00043F80  90 01 00 54 */	stw r0, 0x54(r1)
-/* 81375B84 00043F84  DB E1 00 40 */	stfd f31, 0x40(r1)
-/* 81375B88 00043F88  F3 E1 00 48 */	psq_st f31, 0x48(r1), 0, qr0
-/* 81375B8C 00043F8C  DB C1 00 30 */	stfd f30, 0x30(r1)
-/* 81375B90 00043F90  F3 C1 00 38 */	psq_st f30, 0x38(r1), 0, qr0
-/* 81375B94 00043F94  39 61 00 30 */	addi r11, r1, 0x30
-/* 81375B98 00043F98  48 28 39 2D */	bl _savegpr_28
-/* 81375B9C 00043F9C  3C 00 43 30 */	lis r0, 0x4330
-/* 81375BA0 00043FA0  7C 7F 1B 78 */	mr r31, r3
-/* 81375BA4 00043FA4  90 01 00 08 */	stw r0, 0x8(r1)
-/* 81375BA8 00043FA8  90 01 00 10 */	stw r0, 0x10(r1)
-/* 81375BAC 00043FAC  48 00 0E 0D */	bl getPaneNo__Q210homebutton10HomeButtonFPCc
-/* 81375BB0 00043FB0  80 1F 00 10 */	lwz r0, 0x10(r31)
-/* 81375BB4 00043FB4  7C 7E 1B 78 */	mr r30, r3
-/* 81375BB8 00043FB8  2C 00 00 02 */	cmpwi r0, 0x2
-/* 81375BBC 00043FBC  40 82 08 F4 */	bne .L_813764B0
-/* 81375BC0 00043FC0  2C 03 FF FF */	cmpwi r3, -0x1
-/* 81375BC4 00043FC4  41 82 08 EC */	beq .L_813764B0
-/* 81375BC8 00043FC8  80 9F 00 00 */	lwz r4, 0x0(r31)
-/* 81375BCC 00043FCC  2C 04 00 00 */	cmpwi r4, 0x0
-/* 81375BD0 00043FD0  40 82 01 10 */	bne .L_81375CE0
-/* 81375BD4 00043FD4  80 1F 00 08 */	lwz r0, 0x8(r31)
-/* 81375BD8 00043FD8  7C 03 00 00 */	cmpw r3, r0
-/* 81375BDC 00043FDC  40 80 01 04 */	bge .L_81375CE0
-/* 81375BE0 00043FE0  38 03 00 01 */	addi r0, r3, 0x1
-/* 81375BE4 00043FE4  7F E3 FB 78 */	mr r3, r31
-/* 81375BE8 00043FE8  90 1F 00 B0 */	stw r0, 0xb0(r31)
-/* 81375BEC 00043FEC  38 9E 00 04 */	addi r4, r30, 0x4
-/* 81375BF0 00043FF0  38 A0 00 01 */	li r5, 0x1
-/* 81375BF4 00043FF4  48 00 0E 7D */	bl findAnimator__Q210homebutton10HomeButtonFii
-/* 81375BF8 00043FF8  54 60 10 3A */	slwi r0, r3, 2
-/* 81375BFC 00043FFC  90 7F 00 14 */	stw r3, 0x14(r31)
-/* 81375C00 00044000  7C 7F 02 14 */	add r3, r31, r0
-/* 81375C04 00044004  83 A3 02 B4 */	lwz r29, 0x2b4(r3)
-/* 81375C08 00044008  7F A3 EB 78 */	mr r3, r29
-/* 81375C0C 0004400C  48 00 20 25 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375C10 00044010  38 00 00 01 */	li r0, 0x1
-/* 81375C14 00044014  7F E3 FB 78 */	mr r3, r31
-/* 81375C18 00044018  90 1D 00 14 */	stw r0, 0x14(r29)
-/* 81375C1C 0004401C  38 80 00 05 */	li r4, 0x5
-/* 81375C20 00044020  48 00 14 61 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81375C24 00044024  57 C0 10 3A */	slwi r0, r30, 2
-/* 81375C28 00044028  7C 7F 02 14 */	add r3, r31, r0
-/* 81375C2C 0004402C  80 03 00 98 */	lwz r0, 0x98(r3)
-/* 81375C30 00044030  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81375C34 00044034  41 82 00 A0 */	beq .L_81375CD4
-/* 81375C38 00044038  38 60 00 0B */	li r3, 0xb
-/* 81375C3C 0004403C  38 00 00 02 */	li r0, 0x2
-/* 81375C40 00044040  90 7F 00 10 */	stw r3, 0x10(r31)
-/* 81375C44 00044044  3F A0 81 64 */	lis r29, scFuncTextPaneName__Q210homebutton10HomeButton@ha
-/* 81375C48 00044048  80 7F 02 2C */	lwz r3, 0x22c(r31)
-/* 81375C4C 0004404C  3B BD 53 D0 */	addi r29, r29, scFuncTextPaneName__Q210homebutton10HomeButton@l
-/* 81375C50 00044050  90 1F 00 00 */	stw r0, 0x0(r31)
-/* 81375C54 00044054  38 A0 00 01 */	li r5, 0x1
-/* 81375C58 00044058  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81375C5C 0004405C  80 9D 00 08 */	lwz r4, 0x8(r29)
-/* 81375C60 00044060  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81375C64 00044064  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81375C68 00044068  7D 89 03 A6 */	mtctr r12
-/* 81375C6C 0004406C  4E 80 04 21 */	bctrl
-/* 81375C70 00044070  4B FD 01 F5 */	bl "DynamicCast<PQ34nw4r3lyt7TextBox,Q34nw4r3lyt4Pane>__Q24nw4r2utFPQ34nw4r3lyt4Pane_PQ34nw4r3lyt7TextBox"
-/* 81375C74 00044074  80 9F 00 04 */	lwz r4, 0x4(r31)
-/* 81375C78 00044078  38 1E 00 02 */	addi r0, r30, 0x2
-/* 81375C7C 0004407C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81375C80 00044080  54 00 10 3A */	slwi r0, r0, 2
-/* 81375C84 00044084  80 84 00 24 */	lwz r4, 0x24(r4)
-/* 81375C88 00044088  38 A0 00 00 */	li r5, 0x0
-/* 81375C8C 0004408C  81 8C 00 6C */	lwz r12, 0x6c(r12)
-/* 81375C90 00044090  1C 84 00 18 */	mulli r4, r4, 0x18
-/* 81375C94 00044094  7C 9F 22 14 */	add r4, r31, r4
-/* 81375C98 00044098  7C 84 02 14 */	add r4, r4, r0
-/* 81375C9C 0004409C  80 84 00 B4 */	lwz r4, 0xb4(r4)
-/* 81375CA0 000440A0  7D 89 03 A6 */	mtctr r12
-/* 81375CA4 000440A4  4E 80 04 21 */	bctrl
-/* 81375CA8 000440A8  80 7F 02 2C */	lwz r3, 0x22c(r31)
-/* 81375CAC 000440AC  38 A0 00 01 */	li r5, 0x1
-/* 81375CB0 000440B0  80 9D 00 08 */	lwz r4, 0x8(r29)
-/* 81375CB4 000440B4  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81375CB8 000440B8  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81375CBC 000440BC  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81375CC0 000440C0  7D 89 03 A6 */	mtctr r12
-/* 81375CC4 000440C4  4E 80 04 21 */	bctrl
-/* 81375CC8 000440C8  38 80 00 01 */	li r4, 0x1
-/* 81375CCC 000440CC  4B FC E7 49 */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 81375CD0 000440D0  48 00 07 E0 */	b .L_813764B0
+/* 81375B78 | 94 21 FF B0 */	stwu r1, -0x50(r1)
+/* 81375B7C | 7C 08 02 A6 */	mflr r0
+/* 81375B80 | 90 01 00 54 */	stw r0, 0x54(r1)
+/* 81375B84 | DB E1 00 40 */	stfd f31, 0x40(r1)
+/* 81375B88 | F3 E1 00 48 */	psq_st f31, 0x48(r1), 0, qr0
+/* 81375B8C | DB C1 00 30 */	stfd f30, 0x30(r1)
+/* 81375B90 | F3 C1 00 38 */	psq_st f30, 0x38(r1), 0, qr0
+/* 81375B94 | 39 61 00 30 */	addi r11, r1, 0x30
+/* 81375B98 | 48 28 39 2D */	bl _savegpr_28
+/* 81375B9C | 3C 00 43 30 */	lis r0, 0x4330
+/* 81375BA0 | 7C 7F 1B 78 */	mr r31, r3
+/* 81375BA4 | 90 01 00 08 */	stw r0, 0x8(r1)
+/* 81375BA8 | 90 01 00 10 */	stw r0, 0x10(r1)
+/* 81375BAC | 48 00 0E 0D */	bl getPaneNo__Q210homebutton10HomeButtonFPCc
+/* 81375BB0 | 80 1F 00 10 */	lwz r0, 0x10(r31)
+/* 81375BB4 | 7C 7E 1B 78 */	mr r30, r3
+/* 81375BB8 | 2C 00 00 02 */	cmpwi r0, 0x2
+/* 81375BBC | 40 82 08 F4 */	bne .L_813764B0
+/* 81375BC0 | 2C 03 FF FF */	cmpwi r3, -0x1
+/* 81375BC4 | 41 82 08 EC */	beq .L_813764B0
+/* 81375BC8 | 80 9F 00 00 */	lwz r4, 0x0(r31)
+/* 81375BCC | 2C 04 00 00 */	cmpwi r4, 0x0
+/* 81375BD0 | 40 82 01 10 */	bne .L_81375CE0
+/* 81375BD4 | 80 1F 00 08 */	lwz r0, 0x8(r31)
+/* 81375BD8 | 7C 03 00 00 */	cmpw r3, r0
+/* 81375BDC | 40 80 01 04 */	bge .L_81375CE0
+/* 81375BE0 | 38 03 00 01 */	addi r0, r3, 0x1
+/* 81375BE4 | 7F E3 FB 78 */	mr r3, r31
+/* 81375BE8 | 90 1F 00 B0 */	stw r0, 0xb0(r31)
+/* 81375BEC | 38 9E 00 04 */	addi r4, r30, 0x4
+/* 81375BF0 | 38 A0 00 01 */	li r5, 0x1
+/* 81375BF4 | 48 00 0E 7D */	bl findAnimator__Q210homebutton10HomeButtonFii
+/* 81375BF8 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81375BFC | 90 7F 00 14 */	stw r3, 0x14(r31)
+/* 81375C00 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81375C04 | 83 A3 02 B4 */	lwz r29, 0x2b4(r3)
+/* 81375C08 | 7F A3 EB 78 */	mr r3, r29
+/* 81375C0C | 48 00 20 25 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375C10 | 38 00 00 01 */	li r0, 0x1
+/* 81375C14 | 7F E3 FB 78 */	mr r3, r31
+/* 81375C18 | 90 1D 00 14 */	stw r0, 0x14(r29)
+/* 81375C1C | 38 80 00 05 */	li r4, 0x5
+/* 81375C20 | 48 00 14 61 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81375C24 | 57 C0 10 3A */	slwi r0, r30, 2
+/* 81375C28 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81375C2C | 80 03 00 98 */	lwz r0, 0x98(r3)
+/* 81375C30 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81375C34 | 41 82 00 A0 */	beq .L_81375CD4
+/* 81375C38 | 38 60 00 0B */	li r3, 0xb
+/* 81375C3C | 38 00 00 02 */	li r0, 0x2
+/* 81375C40 | 90 7F 00 10 */	stw r3, 0x10(r31)
+/* 81375C44 | 3F A0 81 64 */	lis r29, scFuncTextPaneName__Q210homebutton10HomeButton@ha
+/* 81375C48 | 80 7F 02 2C */	lwz r3, 0x22c(r31)
+/* 81375C4C | 3B BD 53 D0 */	addi r29, r29, scFuncTextPaneName__Q210homebutton10HomeButton@l
+/* 81375C50 | 90 1F 00 00 */	stw r0, 0x0(r31)
+/* 81375C54 | 38 A0 00 01 */	li r5, 0x1
+/* 81375C58 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81375C5C | 80 9D 00 08 */	lwz r4, 0x8(r29)
+/* 81375C60 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81375C64 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81375C68 | 7D 89 03 A6 */	mtctr r12
+/* 81375C6C | 4E 80 04 21 */	bctrl
+/* 81375C70 | 4B FD 01 F5 */	bl "DynamicCast<PQ34nw4r3lyt7TextBox,Q34nw4r3lyt4Pane>__Q24nw4r2utFPQ34nw4r3lyt4Pane_PQ34nw4r3lyt7TextBox"
+/* 81375C74 | 80 9F 00 04 */	lwz r4, 0x4(r31)
+/* 81375C78 | 38 1E 00 02 */	addi r0, r30, 0x2
+/* 81375C7C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81375C80 | 54 00 10 3A */	slwi r0, r0, 2
+/* 81375C84 | 80 84 00 24 */	lwz r4, 0x24(r4)
+/* 81375C88 | 38 A0 00 00 */	li r5, 0x0
+/* 81375C8C | 81 8C 00 6C */	lwz r12, 0x6c(r12)
+/* 81375C90 | 1C 84 00 18 */	mulli r4, r4, 0x18
+/* 81375C94 | 7C 9F 22 14 */	add r4, r31, r4
+/* 81375C98 | 7C 84 02 14 */	add r4, r4, r0
+/* 81375C9C | 80 84 00 B4 */	lwz r4, 0xb4(r4)
+/* 81375CA0 | 7D 89 03 A6 */	mtctr r12
+/* 81375CA4 | 4E 80 04 21 */	bctrl
+/* 81375CA8 | 80 7F 02 2C */	lwz r3, 0x22c(r31)
+/* 81375CAC | 38 A0 00 01 */	li r5, 0x1
+/* 81375CB0 | 80 9D 00 08 */	lwz r4, 0x8(r29)
+/* 81375CB4 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81375CB8 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81375CBC | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81375CC0 | 7D 89 03 A6 */	mtctr r12
+/* 81375CC4 | 4E 80 04 21 */	bctrl
+/* 81375CC8 | 38 80 00 01 */	li r4, 0x1
+/* 81375CCC | 4B FC E7 49 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 81375CD0 | 48 00 07 E0 */	b .L_813764B0
 .L_81375CD4:
-/* 81375CD4 000440D4  38 00 00 0F */	li r0, 0xf
-/* 81375CD8 000440D8  90 1F 00 10 */	stw r0, 0x10(r31)
-/* 81375CDC 000440DC  48 00 07 D4 */	b .L_813764B0
+/* 81375CD4 | 38 00 00 0F */	li r0, 0xf
+/* 81375CD8 | 90 1F 00 10 */	stw r0, 0x10(r31)
+/* 81375CDC | 48 00 07 D4 */	b .L_813764B0
 .L_81375CE0:
-/* 81375CE0 000440E0  80 1F 00 08 */	lwz r0, 0x8(r31)
-/* 81375CE4 000440E4  7C 00 18 50 */	subf r0, r0, r3
-/* 81375CE8 000440E8  28 00 00 09 */	cmplwi r0, 0x9
-/* 81375CEC 000440EC  41 81 07 C4 */	bgt .L_813764B0
-/* 81375CF0 000440F0  3C 60 81 64 */	lis r3, jumptable_816455B8@ha
-/* 81375CF4 000440F4  54 00 10 3A */	slwi r0, r0, 2
-/* 81375CF8 000440F8  38 63 55 B8 */	addi r3, r3, jumptable_816455B8@l
-/* 81375CFC 000440FC  7C 63 00 2E */	lwzx r3, r3, r0
-/* 81375D00 00044100  7C 69 03 A6 */	mtctr r3
-/* 81375D04 00044104  4E 80 04 20 */	bctr
+/* 81375CE0 | 80 1F 00 08 */	lwz r0, 0x8(r31)
+/* 81375CE4 | 7C 00 18 50 */	subf r0, r0, r3
+/* 81375CE8 | 28 00 00 09 */	cmplwi r0, 0x9
+/* 81375CEC | 41 81 07 C4 */	bgt .L_813764B0
+/* 81375CF0 | 3C 60 81 64 */	lis r3, jumptable_816455B8@ha
+/* 81375CF4 | 54 00 10 3A */	slwi r0, r0, 2
+/* 81375CF8 | 38 63 55 B8 */	addi r3, r3, jumptable_816455B8@l
+/* 81375CFC | 7C 63 00 2E */	lwzx r3, r3, r0
+/* 81375D00 | 7C 69 03 A6 */	mtctr r3
+/* 81375D04 | 4E 80 04 20 */	bctr
 .L_81375D08:
-/* 81375D08 00044108  80 7F 04 3C */	lwz r3, 0x43c(r31)
-/* 81375D0C 0004410C  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 81375D10 00044110  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81375D14 00044114  40 82 00 0C */	bne .L_81375D20
-/* 81375D18 00044118  38 00 00 00 */	li r0, 0x0
-/* 81375D1C 0004411C  90 03 00 14 */	stw r0, 0x14(r3)
+/* 81375D08 | 80 7F 04 3C */	lwz r3, 0x43c(r31)
+/* 81375D0C | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 81375D10 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81375D14 | 40 82 00 0C */	bne .L_81375D20
+/* 81375D18 | 38 00 00 00 */	li r0, 0x0
+/* 81375D1C | 90 03 00 14 */	stw r0, 0x14(r3)
 .L_81375D20:
-/* 81375D20 00044120  80 7F 04 18 */	lwz r3, 0x418(r31)
-/* 81375D24 00044124  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 81375D28 00044128  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81375D2C 0004412C  40 82 00 0C */	bne .L_81375D38
-/* 81375D30 00044130  38 00 00 00 */	li r0, 0x0
-/* 81375D34 00044134  90 03 00 14 */	stw r0, 0x14(r3)
+/* 81375D20 | 80 7F 04 18 */	lwz r3, 0x418(r31)
+/* 81375D24 | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 81375D28 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81375D2C | 40 82 00 0C */	bne .L_81375D38
+/* 81375D30 | 38 00 00 00 */	li r0, 0x0
+/* 81375D34 | 90 03 00 14 */	stw r0, 0x14(r3)
 .L_81375D38:
-/* 81375D38 00044138  38 60 00 00 */	li r3, 0x0
-/* 81375D3C 0004413C  38 00 00 04 */	li r0, 0x4
-/* 81375D40 00044140  90 7F 00 B0 */	stw r3, 0xb0(r31)
-/* 81375D44 00044144  90 1F 00 14 */	stw r0, 0x14(r31)
-/* 81375D48 00044148  83 BF 04 1C */	lwz r29, 0x41c(r31)
-/* 81375D4C 0004414C  7F A3 EB 78 */	mr r3, r29
-/* 81375D50 00044150  48 00 1E E1 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375D54 00044154  38 60 00 01 */	li r3, 0x1
-/* 81375D58 00044158  38 00 00 0E */	li r0, 0xe
-/* 81375D5C 0004415C  90 7D 00 14 */	stw r3, 0x14(r29)
-/* 81375D60 00044160  7F E3 FB 78 */	mr r3, r31
-/* 81375D64 00044164  38 80 00 01 */	li r4, 0x1
-/* 81375D68 00044168  90 1F 00 10 */	stw r0, 0x10(r31)
-/* 81375D6C 0004416C  48 00 13 15 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81375D70 00044170  48 00 07 40 */	b .L_813764B0
+/* 81375D38 | 38 60 00 00 */	li r3, 0x0
+/* 81375D3C | 38 00 00 04 */	li r0, 0x4
+/* 81375D40 | 90 7F 00 B0 */	stw r3, 0xb0(r31)
+/* 81375D44 | 90 1F 00 14 */	stw r0, 0x14(r31)
+/* 81375D48 | 83 BF 04 1C */	lwz r29, 0x41c(r31)
+/* 81375D4C | 7F A3 EB 78 */	mr r3, r29
+/* 81375D50 | 48 00 1E E1 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375D54 | 38 60 00 01 */	li r3, 0x1
+/* 81375D58 | 38 00 00 0E */	li r0, 0xe
+/* 81375D5C | 90 7D 00 14 */	stw r3, 0x14(r29)
+/* 81375D60 | 7F E3 FB 78 */	mr r3, r31
+/* 81375D64 | 38 80 00 01 */	li r4, 0x1
+/* 81375D68 | 90 1F 00 10 */	stw r0, 0x10(r31)
+/* 81375D6C | 48 00 13 15 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81375D70 | 48 00 07 40 */	b .L_813764B0
 .L_81375D74:
-/* 81375D74 00044174  2C 04 00 01 */	cmpwi r4, 0x1
-/* 81375D78 00044178  40 82 00 68 */	bne .L_81375DE0
-/* 81375D7C 0004417C  38 00 00 04 */	li r0, 0x4
-/* 81375D80 00044180  90 1F 00 14 */	stw r0, 0x14(r31)
-/* 81375D84 00044184  83 DF 04 1C */	lwz r30, 0x41c(r31)
-/* 81375D88 00044188  7F C3 F3 78 */	mr r3, r30
-/* 81375D8C 0004418C  48 00 1E A5 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375D90 00044190  3B A0 00 01 */	li r29, 0x1
-/* 81375D94 00044194  38 00 00 02 */	li r0, 0x2
-/* 81375D98 00044198  93 BE 00 14 */	stw r29, 0x14(r30)
-/* 81375D9C 0004419C  90 1F 00 14 */	stw r0, 0x14(r31)
-/* 81375DA0 000441A0  83 DF 04 14 */	lwz r30, 0x414(r31)
-/* 81375DA4 000441A4  7F C3 F3 78 */	mr r3, r30
-/* 81375DA8 000441A8  48 00 1E 89 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375DAC 000441AC  93 BE 00 14 */	stw r29, 0x14(r30)
-/* 81375DB0 000441B0  83 DF 04 38 */	lwz r30, 0x438(r31)
-/* 81375DB4 000441B4  7F C3 F3 78 */	mr r3, r30
-/* 81375DB8 000441B8  48 00 1E 79 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375DBC 000441BC  93 BE 00 14 */	stw r29, 0x14(r30)
-/* 81375DC0 000441C0  38 60 00 0A */	li r3, 0xa
-/* 81375DC4 000441C4  38 00 00 00 */	li r0, 0x0
-/* 81375DC8 000441C8  38 80 00 08 */	li r4, 0x8
-/* 81375DCC 000441CC  90 7F 00 10 */	stw r3, 0x10(r31)
-/* 81375DD0 000441D0  7F E3 FB 78 */	mr r3, r31
-/* 81375DD4 000441D4  90 1F 00 00 */	stw r0, 0x0(r31)
-/* 81375DD8 000441D8  48 00 12 A9 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81375DDC 000441DC  48 00 06 D4 */	b .L_813764B0
+/* 81375D74 | 2C 04 00 01 */	cmpwi r4, 0x1
+/* 81375D78 | 40 82 00 68 */	bne .L_81375DE0
+/* 81375D7C | 38 00 00 04 */	li r0, 0x4
+/* 81375D80 | 90 1F 00 14 */	stw r0, 0x14(r31)
+/* 81375D84 | 83 DF 04 1C */	lwz r30, 0x41c(r31)
+/* 81375D88 | 7F C3 F3 78 */	mr r3, r30
+/* 81375D8C | 48 00 1E A5 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375D90 | 3B A0 00 01 */	li r29, 0x1
+/* 81375D94 | 38 00 00 02 */	li r0, 0x2
+/* 81375D98 | 93 BE 00 14 */	stw r29, 0x14(r30)
+/* 81375D9C | 90 1F 00 14 */	stw r0, 0x14(r31)
+/* 81375DA0 | 83 DF 04 14 */	lwz r30, 0x414(r31)
+/* 81375DA4 | 7F C3 F3 78 */	mr r3, r30
+/* 81375DA8 | 48 00 1E 89 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375DAC | 93 BE 00 14 */	stw r29, 0x14(r30)
+/* 81375DB0 | 83 DF 04 38 */	lwz r30, 0x438(r31)
+/* 81375DB4 | 7F C3 F3 78 */	mr r3, r30
+/* 81375DB8 | 48 00 1E 79 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375DBC | 93 BE 00 14 */	stw r29, 0x14(r30)
+/* 81375DC0 | 38 60 00 0A */	li r3, 0xa
+/* 81375DC4 | 38 00 00 00 */	li r0, 0x0
+/* 81375DC8 | 38 80 00 08 */	li r4, 0x8
+/* 81375DCC | 90 7F 00 10 */	stw r3, 0x10(r31)
+/* 81375DD0 | 7F E3 FB 78 */	mr r3, r31
+/* 81375DD4 | 90 1F 00 00 */	stw r0, 0x0(r31)
+/* 81375DD8 | 48 00 12 A9 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81375DDC | 48 00 06 D4 */	b .L_813764B0
 .L_81375DE0:
-/* 81375DE0 000441E0  2C 04 00 00 */	cmpwi r4, 0x0
-/* 81375DE4 000441E4  40 82 06 CC */	bne .L_813764B0
-/* 81375DE8 000441E8  83 DF 04 10 */	lwz r30, 0x410(r31)
-/* 81375DEC 000441EC  7F C3 F3 78 */	mr r3, r30
-/* 81375DF0 000441F0  48 00 1E 41 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375DF4 000441F4  3B A0 00 01 */	li r29, 0x1
-/* 81375DF8 000441F8  38 00 00 09 */	li r0, 0x9
-/* 81375DFC 000441FC  93 BE 00 14 */	stw r29, 0x14(r30)
-/* 81375E00 00044200  90 1F 00 14 */	stw r0, 0x14(r31)
-/* 81375E04 00044204  83 DF 04 30 */	lwz r30, 0x430(r31)
-/* 81375E08 00044208  7F C3 F3 78 */	mr r3, r30
-/* 81375E0C 0004420C  48 00 1E 25 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375E10 00044210  93 BE 00 14 */	stw r29, 0x14(r30)
-/* 81375E14 00044214  38 00 00 0A */	li r0, 0xa
-/* 81375E18 00044218  3F A0 81 64 */	lis r29, scFuncTouchPaneName__Q210homebutton10HomeButton@ha
-/* 81375E1C 0004421C  3B 80 00 02 */	li r28, 0x2
-/* 81375E20 00044220  90 1F 00 10 */	stw r0, 0x10(r31)
-/* 81375E24 00044224  3B BD 53 8C */	addi r29, r29, scFuncTouchPaneName__Q210homebutton10HomeButton@l
-/* 81375E28 00044228  3B C0 00 08 */	li r30, 0x8
+/* 81375DE0 | 2C 04 00 00 */	cmpwi r4, 0x0
+/* 81375DE4 | 40 82 06 CC */	bne .L_813764B0
+/* 81375DE8 | 83 DF 04 10 */	lwz r30, 0x410(r31)
+/* 81375DEC | 7F C3 F3 78 */	mr r3, r30
+/* 81375DF0 | 48 00 1E 41 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375DF4 | 3B A0 00 01 */	li r29, 0x1
+/* 81375DF8 | 38 00 00 09 */	li r0, 0x9
+/* 81375DFC | 93 BE 00 14 */	stw r29, 0x14(r30)
+/* 81375E00 | 90 1F 00 14 */	stw r0, 0x14(r31)
+/* 81375E04 | 83 DF 04 30 */	lwz r30, 0x430(r31)
+/* 81375E08 | 7F C3 F3 78 */	mr r3, r30
+/* 81375E0C | 48 00 1E 25 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375E10 | 93 BE 00 14 */	stw r29, 0x14(r30)
+/* 81375E14 | 38 00 00 0A */	li r0, 0xa
+/* 81375E18 | 3F A0 81 64 */	lis r29, scFuncTouchPaneName__Q210homebutton10HomeButton@ha
+/* 81375E1C | 3B 80 00 02 */	li r28, 0x2
+/* 81375E20 | 90 1F 00 10 */	stw r0, 0x10(r31)
+/* 81375E24 | 3B BD 53 8C */	addi r29, r29, scFuncTouchPaneName__Q210homebutton10HomeButton@l
+/* 81375E28 | 3B C0 00 08 */	li r30, 0x8
 .L_81375E2C:
-/* 81375E2C 0004422C  80 7F 02 2C */	lwz r3, 0x22c(r31)
-/* 81375E30 00044230  38 A0 00 01 */	li r5, 0x1
-/* 81375E34 00044234  7C 9D F0 2E */	lwzx r4, r29, r30
-/* 81375E38 00044238  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81375E3C 0004423C  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81375E40 00044240  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81375E44 00044244  7D 89 03 A6 */	mtctr r12
-/* 81375E48 00044248  4E 80 04 21 */	bctrl
-/* 81375E4C 0004424C  38 80 00 01 */	li r4, 0x1
-/* 81375E50 00044250  4B FC E5 C5 */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 81375E54 00044254  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 81375E58 00044258  3B DE 00 04 */	addi r30, r30, 0x4
-/* 81375E5C 0004425C  2C 1C 00 07 */	cmpwi r28, 0x7
-/* 81375E60 00044260  41 80 FF CC */	blt .L_81375E2C
-/* 81375E64 00044264  38 00 00 01 */	li r0, 0x1
-/* 81375E68 00044268  7F E3 FB 78 */	mr r3, r31
-/* 81375E6C 0004426C  90 1F 00 00 */	stw r0, 0x0(r31)
-/* 81375E70 00044270  38 80 00 05 */	li r4, 0x5
-/* 81375E74 00044274  48 00 12 0D */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81375E78 00044278  48 00 06 38 */	b .L_813764B0
+/* 81375E2C | 80 7F 02 2C */	lwz r3, 0x22c(r31)
+/* 81375E30 | 38 A0 00 01 */	li r5, 0x1
+/* 81375E34 | 7C 9D F0 2E */	lwzx r4, r29, r30
+/* 81375E38 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81375E3C | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81375E40 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81375E44 | 7D 89 03 A6 */	mtctr r12
+/* 81375E48 | 4E 80 04 21 */	bctrl
+/* 81375E4C | 38 80 00 01 */	li r4, 0x1
+/* 81375E50 | 4B FC E5 C5 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 81375E54 | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 81375E58 | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 81375E5C | 2C 1C 00 07 */	cmpwi r28, 0x7
+/* 81375E60 | 41 80 FF CC */	blt .L_81375E2C
+/* 81375E64 | 38 00 00 01 */	li r0, 0x1
+/* 81375E68 | 7F E3 FB 78 */	mr r3, r31
+/* 81375E6C | 90 1F 00 00 */	stw r0, 0x0(r31)
+/* 81375E70 | 38 80 00 05 */	li r4, 0x5
+/* 81375E74 | 48 00 12 0D */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81375E78 | 48 00 06 38 */	b .L_813764B0
 .L_81375E7C:
-/* 81375E7C 0004427C  80 7F 00 80 */	lwz r3, 0x80(r31)
-/* 81375E80 00044280  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81375E84 00044284  40 81 01 60 */	ble .L_81375FE4
-/* 81375E88 00044288  38 83 FF FF */	subi r4, r3, 0x1
-/* 81375E8C 0004428C  7F E3 FB 78 */	mr r3, r31
-/* 81375E90 00044290  90 9F 00 80 */	stw r4, 0x80(r31)
-/* 81375E94 00044294  38 84 00 15 */	addi r4, r4, 0x15
-/* 81375E98 00044298  38 A0 00 0A */	li r5, 0xa
-/* 81375E9C 0004429C  48 00 0C 25 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81375EA0 000442A0  54 60 10 3A */	slwi r0, r3, 2
-/* 81375EA4 000442A4  38 C0 00 00 */	li r6, 0x0
-/* 81375EA8 000442A8  7C 9F 02 14 */	add r4, r31, r0
-/* 81375EAC 000442AC  7F E3 FB 78 */	mr r3, r31
-/* 81375EB0 000442B0  80 84 02 E4 */	lwz r4, 0x2e4(r4)
-/* 81375EB4 000442B4  38 A0 00 09 */	li r5, 0x9
-/* 81375EB8 000442B8  90 C4 00 14 */	stw r6, 0x14(r4)
-/* 81375EBC 000442BC  80 9F 00 80 */	lwz r4, 0x80(r31)
-/* 81375EC0 000442C0  38 84 00 15 */	addi r4, r4, 0x15
-/* 81375EC4 000442C4  48 00 0B FD */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81375EC8 000442C8  54 60 10 3A */	slwi r0, r3, 2
-/* 81375ECC 000442CC  7C 7F 02 14 */	add r3, r31, r0
-/* 81375ED0 000442D0  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81375ED4 000442D4  7F A3 EB 78 */	mr r3, r29
-/* 81375ED8 000442D8  48 00 1D 59 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375EDC 000442DC  38 00 00 01 */	li r0, 0x1
-/* 81375EE0 000442E0  90 1D 00 14 */	stw r0, 0x14(r29)
-/* 81375EE4 000442E4  80 1F 00 80 */	lwz r0, 0x80(r31)
-/* 81375EE8 000442E8  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81375EEC 000442EC  40 82 00 68 */	bne .L_81375F54
-/* 81375EF0 000442F0  7F E3 FB 78 */	mr r3, r31
-/* 81375EF4 000442F4  38 80 00 0C */	li r4, 0xc
-/* 81375EF8 000442F8  48 00 11 89 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81375EFC 000442FC  CB E2 82 F8 */	lfd f31, lbl_816946F8@sda21(r0)
-/* 81375F00 00044300  3B 80 00 00 */	li r28, 0x0
-/* 81375F04 00044304  C3 C2 82 F0 */	lfs f30, lbl_816946F0@sda21(r0)
-/* 81375F08 00044308  3B C0 00 00 */	li r30, 0x0
+/* 81375E7C | 80 7F 00 80 */	lwz r3, 0x80(r31)
+/* 81375E80 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81375E84 | 40 81 01 60 */	ble .L_81375FE4
+/* 81375E88 | 38 83 FF FF */	subi r4, r3, 0x1
+/* 81375E8C | 7F E3 FB 78 */	mr r3, r31
+/* 81375E90 | 90 9F 00 80 */	stw r4, 0x80(r31)
+/* 81375E94 | 38 84 00 15 */	addi r4, r4, 0x15
+/* 81375E98 | 38 A0 00 0A */	li r5, 0xa
+/* 81375E9C | 48 00 0C 25 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81375EA0 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81375EA4 | 38 C0 00 00 */	li r6, 0x0
+/* 81375EA8 | 7C 9F 02 14 */	add r4, r31, r0
+/* 81375EAC | 7F E3 FB 78 */	mr r3, r31
+/* 81375EB0 | 80 84 02 E4 */	lwz r4, 0x2e4(r4)
+/* 81375EB4 | 38 A0 00 09 */	li r5, 0x9
+/* 81375EB8 | 90 C4 00 14 */	stw r6, 0x14(r4)
+/* 81375EBC | 80 9F 00 80 */	lwz r4, 0x80(r31)
+/* 81375EC0 | 38 84 00 15 */	addi r4, r4, 0x15
+/* 81375EC4 | 48 00 0B FD */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81375EC8 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81375ECC | 7C 7F 02 14 */	add r3, r31, r0
+/* 81375ED0 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81375ED4 | 7F A3 EB 78 */	mr r3, r29
+/* 81375ED8 | 48 00 1D 59 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375EDC | 38 00 00 01 */	li r0, 0x1
+/* 81375EE0 | 90 1D 00 14 */	stw r0, 0x14(r29)
+/* 81375EE4 | 80 1F 00 80 */	lwz r0, 0x80(r31)
+/* 81375EE8 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81375EEC | 40 82 00 68 */	bne .L_81375F54
+/* 81375EF0 | 7F E3 FB 78 */	mr r3, r31
+/* 81375EF4 | 38 80 00 0C */	li r4, 0xc
+/* 81375EF8 | 48 00 11 89 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81375EFC | CB E2 82 F8 */	lfd f31, lbl_816946F8@sda21(r0)
+/* 81375F00 | 3B 80 00 00 */	li r28, 0x0
+/* 81375F04 | C3 C2 82 F0 */	lfs f30, lbl_816946F0@sda21(r0)
+/* 81375F08 | 3B C0 00 00 */	li r30, 0x0
 .L_81375F0C:
-/* 81375F0C 0004430C  80 1F 00 80 */	lwz r0, 0x80(r31)
-/* 81375F10 00044310  7F BF F2 14 */	add r29, r31, r30
-/* 81375F14 00044314  80 7D 02 A0 */	lwz r3, 0x2a0(r29)
-/* 81375F18 00044318  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 81375F1C 0004431C  90 01 00 0C */	stw r0, 0xc(r1)
-/* 81375F20 00044320  C8 01 00 08 */	lfd f0, 0x8(r1)
-/* 81375F24 00044324  EC 00 F8 28 */	fsubs f0, f0, f31
-/* 81375F28 00044328  EC 20 F0 24 */	fdivs f1, f0, f30
-/* 81375F2C 0004432C  48 00 19 51 */	bl setSpeakerVol__Q210homebutton10ControllerFf
-/* 81375F30 00044330  80 7D 02 A0 */	lwz r3, 0x2a0(r29)
-/* 81375F34 00044334  38 A0 00 01 */	li r5, 0x1
-/* 81375F38 00044338  80 9F 06 08 */	lwz r4, 0x608(r31)
-/* 81375F3C 0004433C  48 00 19 49 */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
-/* 81375F40 00044340  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 81375F44 00044344  3B DE 00 04 */	addi r30, r30, 0x4
-/* 81375F48 00044348  2C 1C 00 04 */	cmpwi r28, 0x4
-/* 81375F4C 0004434C  41 80 FF C0 */	blt .L_81375F0C
-/* 81375F50 00044350  48 00 00 64 */	b .L_81375FB4
+/* 81375F0C | 80 1F 00 80 */	lwz r0, 0x80(r31)
+/* 81375F10 | 7F BF F2 14 */	add r29, r31, r30
+/* 81375F14 | 80 7D 02 A0 */	lwz r3, 0x2a0(r29)
+/* 81375F18 | 6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 81375F1C | 90 01 00 0C */	stw r0, 0xc(r1)
+/* 81375F20 | C8 01 00 08 */	lfd f0, 0x8(r1)
+/* 81375F24 | EC 00 F8 28 */	fsubs f0, f0, f31
+/* 81375F28 | EC 20 F0 24 */	fdivs f1, f0, f30
+/* 81375F2C | 48 00 19 51 */	bl setSpeakerVol__Q210homebutton10ControllerFf
+/* 81375F30 | 80 7D 02 A0 */	lwz r3, 0x2a0(r29)
+/* 81375F34 | 38 A0 00 01 */	li r5, 0x1
+/* 81375F38 | 80 9F 06 08 */	lwz r4, 0x608(r31)
+/* 81375F3C | 48 00 19 49 */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
+/* 81375F40 | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 81375F44 | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 81375F48 | 2C 1C 00 04 */	cmpwi r28, 0x4
+/* 81375F4C | 41 80 FF C0 */	blt .L_81375F0C
+/* 81375F50 | 48 00 00 64 */	b .L_81375FB4
 .L_81375F54:
-/* 81375F54 00044354  7F E3 FB 78 */	mr r3, r31
-/* 81375F58 00044358  38 80 00 0A */	li r4, 0xa
-/* 81375F5C 0004435C  48 00 11 25 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81375F60 00044360  CB E2 82 F8 */	lfd f31, lbl_816946F8@sda21(r0)
-/* 81375F64 00044364  3B 80 00 00 */	li r28, 0x0
-/* 81375F68 00044368  C3 C2 82 F0 */	lfs f30, lbl_816946F0@sda21(r0)
-/* 81375F6C 0004436C  3B C0 00 00 */	li r30, 0x0
+/* 81375F54 | 7F E3 FB 78 */	mr r3, r31
+/* 81375F58 | 38 80 00 0A */	li r4, 0xa
+/* 81375F5C | 48 00 11 25 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81375F60 | CB E2 82 F8 */	lfd f31, lbl_816946F8@sda21(r0)
+/* 81375F64 | 3B 80 00 00 */	li r28, 0x0
+/* 81375F68 | C3 C2 82 F0 */	lfs f30, lbl_816946F0@sda21(r0)
+/* 81375F6C | 3B C0 00 00 */	li r30, 0x0
 .L_81375F70:
-/* 81375F70 00044370  80 1F 00 80 */	lwz r0, 0x80(r31)
-/* 81375F74 00044374  7F BF F2 14 */	add r29, r31, r30
-/* 81375F78 00044378  80 7D 02 A0 */	lwz r3, 0x2a0(r29)
-/* 81375F7C 0004437C  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 81375F80 00044380  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81375F84 00044384  C8 01 00 10 */	lfd f0, 0x10(r1)
-/* 81375F88 00044388  EC 00 F8 28 */	fsubs f0, f0, f31
-/* 81375F8C 0004438C  EC 20 F0 24 */	fdivs f1, f0, f30
-/* 81375F90 00044390  48 00 18 ED */	bl setSpeakerVol__Q210homebutton10ControllerFf
-/* 81375F94 00044394  80 7D 02 A0 */	lwz r3, 0x2a0(r29)
-/* 81375F98 00044398  38 A0 00 01 */	li r5, 0x1
-/* 81375F9C 0004439C  80 9F 06 08 */	lwz r4, 0x608(r31)
-/* 81375FA0 000443A0  48 00 18 E5 */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
-/* 81375FA4 000443A4  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 81375FA8 000443A8  3B DE 00 04 */	addi r30, r30, 0x4
-/* 81375FAC 000443AC  2C 1C 00 04 */	cmpwi r28, 0x4
-/* 81375FB0 000443B0  41 80 FF C0 */	blt .L_81375F70
+/* 81375F70 | 80 1F 00 80 */	lwz r0, 0x80(r31)
+/* 81375F74 | 7F BF F2 14 */	add r29, r31, r30
+/* 81375F78 | 80 7D 02 A0 */	lwz r3, 0x2a0(r29)
+/* 81375F7C | 6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 81375F80 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81375F84 | C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 81375F88 | EC 00 F8 28 */	fsubs f0, f0, f31
+/* 81375F8C | EC 20 F0 24 */	fdivs f1, f0, f30
+/* 81375F90 | 48 00 18 ED */	bl setSpeakerVol__Q210homebutton10ControllerFf
+/* 81375F94 | 80 7D 02 A0 */	lwz r3, 0x2a0(r29)
+/* 81375F98 | 38 A0 00 01 */	li r5, 0x1
+/* 81375F9C | 80 9F 06 08 */	lwz r4, 0x608(r31)
+/* 81375FA0 | 48 00 18 E5 */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
+/* 81375FA4 | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 81375FA8 | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 81375FAC | 2C 1C 00 04 */	cmpwi r28, 0x4
+/* 81375FB0 | 41 80 FF C0 */	blt .L_81375F70
 .L_81375FB4:
-/* 81375FB4 000443B4  7F E3 FB 78 */	mr r3, r31
-/* 81375FB8 000443B8  38 80 00 0B */	li r4, 0xb
-/* 81375FBC 000443BC  38 A0 00 05 */	li r5, 0x5
-/* 81375FC0 000443C0  48 00 0B 01 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81375FC4 000443C4  54 60 10 3A */	slwi r0, r3, 2
-/* 81375FC8 000443C8  7C 7F 02 14 */	add r3, r31, r0
-/* 81375FCC 000443CC  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81375FD0 000443D0  7F A3 EB 78 */	mr r3, r29
-/* 81375FD4 000443D4  48 00 1C 5D */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81375FD8 000443D8  38 00 00 01 */	li r0, 0x1
-/* 81375FDC 000443DC  90 1D 00 14 */	stw r0, 0x14(r29)
-/* 81375FE0 000443E0  48 00 04 D0 */	b .L_813764B0
+/* 81375FB4 | 7F E3 FB 78 */	mr r3, r31
+/* 81375FB8 | 38 80 00 0B */	li r4, 0xb
+/* 81375FBC | 38 A0 00 05 */	li r5, 0x5
+/* 81375FC0 | 48 00 0B 01 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81375FC4 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81375FC8 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81375FCC | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81375FD0 | 7F A3 EB 78 */	mr r3, r29
+/* 81375FD4 | 48 00 1C 5D */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81375FD8 | 38 00 00 01 */	li r0, 0x1
+/* 81375FDC | 90 1D 00 14 */	stw r0, 0x14(r29)
+/* 81375FE0 | 48 00 04 D0 */	b .L_813764B0
 .L_81375FE4:
-/* 81375FE4 000443E4  7F E3 FB 78 */	mr r3, r31
-/* 81375FE8 000443E8  38 80 00 0D */	li r4, 0xd
-/* 81375FEC 000443EC  48 00 10 95 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81375FF0 000443F0  48 00 04 C0 */	b .L_813764B0
+/* 81375FE4 | 7F E3 FB 78 */	mr r3, r31
+/* 81375FE8 | 38 80 00 0D */	li r4, 0xd
+/* 81375FEC | 48 00 10 95 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81375FF0 | 48 00 04 C0 */	b .L_813764B0
 .L_81375FF4:
-/* 81375FF4 000443F4  80 9F 00 80 */	lwz r4, 0x80(r31)
-/* 81375FF8 000443F8  2C 04 00 0A */	cmpwi r4, 0xa
-/* 81375FFC 000443FC  40 80 01 60 */	bge .L_8137615C
-/* 81376000 00044400  7F E3 FB 78 */	mr r3, r31
-/* 81376004 00044404  38 84 00 15 */	addi r4, r4, 0x15
-/* 81376008 00044408  38 A0 00 09 */	li r5, 0x9
-/* 8137600C 0004440C  48 00 0A B5 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81376010 00044410  54 60 10 3A */	slwi r0, r3, 2
-/* 81376014 00044414  38 C0 00 00 */	li r6, 0x0
-/* 81376018 00044418  7C 9F 02 14 */	add r4, r31, r0
-/* 8137601C 0004441C  7F E3 FB 78 */	mr r3, r31
-/* 81376020 00044420  80 84 02 E4 */	lwz r4, 0x2e4(r4)
-/* 81376024 00044424  38 A0 00 0A */	li r5, 0xa
-/* 81376028 00044428  90 C4 00 14 */	stw r6, 0x14(r4)
-/* 8137602C 0004442C  80 9F 00 80 */	lwz r4, 0x80(r31)
-/* 81376030 00044430  38 84 00 15 */	addi r4, r4, 0x15
-/* 81376034 00044434  48 00 0A 8D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81376038 00044438  54 60 10 3A */	slwi r0, r3, 2
-/* 8137603C 0004443C  7C 7F 02 14 */	add r3, r31, r0
-/* 81376040 00044440  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81376044 00044444  7F A3 EB 78 */	mr r3, r29
-/* 81376048 00044448  48 00 1B E9 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 8137604C 0004444C  38 00 00 01 */	li r0, 0x1
-/* 81376050 00044450  90 1D 00 14 */	stw r0, 0x14(r29)
-/* 81376054 00044454  80 7F 00 80 */	lwz r3, 0x80(r31)
-/* 81376058 00044458  38 03 00 01 */	addi r0, r3, 0x1
-/* 8137605C 0004445C  2C 00 00 0A */	cmpwi r0, 0xa
-/* 81376060 00044460  90 1F 00 80 */	stw r0, 0x80(r31)
-/* 81376064 00044464  40 82 00 68 */	bne .L_813760CC
-/* 81376068 00044468  7F E3 FB 78 */	mr r3, r31
-/* 8137606C 0004446C  38 80 00 0B */	li r4, 0xb
-/* 81376070 00044470  48 00 10 11 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81376074 00044474  CB E2 82 F8 */	lfd f31, lbl_816946F8@sda21(r0)
-/* 81376078 00044478  3B 80 00 00 */	li r28, 0x0
-/* 8137607C 0004447C  C3 C2 82 F0 */	lfs f30, lbl_816946F0@sda21(r0)
-/* 81376080 00044480  3B C0 00 00 */	li r30, 0x0
+/* 81375FF4 | 80 9F 00 80 */	lwz r4, 0x80(r31)
+/* 81375FF8 | 2C 04 00 0A */	cmpwi r4, 0xa
+/* 81375FFC | 40 80 01 60 */	bge .L_8137615C
+/* 81376000 | 7F E3 FB 78 */	mr r3, r31
+/* 81376004 | 38 84 00 15 */	addi r4, r4, 0x15
+/* 81376008 | 38 A0 00 09 */	li r5, 0x9
+/* 8137600C | 48 00 0A B5 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81376010 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81376014 | 38 C0 00 00 */	li r6, 0x0
+/* 81376018 | 7C 9F 02 14 */	add r4, r31, r0
+/* 8137601C | 7F E3 FB 78 */	mr r3, r31
+/* 81376020 | 80 84 02 E4 */	lwz r4, 0x2e4(r4)
+/* 81376024 | 38 A0 00 0A */	li r5, 0xa
+/* 81376028 | 90 C4 00 14 */	stw r6, 0x14(r4)
+/* 8137602C | 80 9F 00 80 */	lwz r4, 0x80(r31)
+/* 81376030 | 38 84 00 15 */	addi r4, r4, 0x15
+/* 81376034 | 48 00 0A 8D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81376038 | 54 60 10 3A */	slwi r0, r3, 2
+/* 8137603C | 7C 7F 02 14 */	add r3, r31, r0
+/* 81376040 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81376044 | 7F A3 EB 78 */	mr r3, r29
+/* 81376048 | 48 00 1B E9 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 8137604C | 38 00 00 01 */	li r0, 0x1
+/* 81376050 | 90 1D 00 14 */	stw r0, 0x14(r29)
+/* 81376054 | 80 7F 00 80 */	lwz r3, 0x80(r31)
+/* 81376058 | 38 03 00 01 */	addi r0, r3, 0x1
+/* 8137605C | 2C 00 00 0A */	cmpwi r0, 0xa
+/* 81376060 | 90 1F 00 80 */	stw r0, 0x80(r31)
+/* 81376064 | 40 82 00 68 */	bne .L_813760CC
+/* 81376068 | 7F E3 FB 78 */	mr r3, r31
+/* 8137606C | 38 80 00 0B */	li r4, 0xb
+/* 81376070 | 48 00 10 11 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81376074 | CB E2 82 F8 */	lfd f31, lbl_816946F8@sda21(r0)
+/* 81376078 | 3B 80 00 00 */	li r28, 0x0
+/* 8137607C | C3 C2 82 F0 */	lfs f30, lbl_816946F0@sda21(r0)
+/* 81376080 | 3B C0 00 00 */	li r30, 0x0
 .L_81376084:
-/* 81376084 00044484  80 1F 00 80 */	lwz r0, 0x80(r31)
-/* 81376088 00044488  7F BF F2 14 */	add r29, r31, r30
-/* 8137608C 0004448C  80 7D 02 A0 */	lwz r3, 0x2a0(r29)
-/* 81376090 00044490  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 81376094 00044494  90 01 00 0C */	stw r0, 0xc(r1)
-/* 81376098 00044498  C8 01 00 08 */	lfd f0, 0x8(r1)
-/* 8137609C 0004449C  EC 00 F8 28 */	fsubs f0, f0, f31
-/* 813760A0 000444A0  EC 20 F0 24 */	fdivs f1, f0, f30
-/* 813760A4 000444A4  48 00 17 D9 */	bl setSpeakerVol__Q210homebutton10ControllerFf
-/* 813760A8 000444A8  80 7D 02 A0 */	lwz r3, 0x2a0(r29)
-/* 813760AC 000444AC  38 A0 00 01 */	li r5, 0x1
-/* 813760B0 000444B0  80 9F 06 08 */	lwz r4, 0x608(r31)
-/* 813760B4 000444B4  48 00 17 D1 */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
-/* 813760B8 000444B8  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 813760BC 000444BC  3B DE 00 04 */	addi r30, r30, 0x4
-/* 813760C0 000444C0  2C 1C 00 04 */	cmpwi r28, 0x4
-/* 813760C4 000444C4  41 80 FF C0 */	blt .L_81376084
-/* 813760C8 000444C8  48 00 00 64 */	b .L_8137612C
+/* 81376084 | 80 1F 00 80 */	lwz r0, 0x80(r31)
+/* 81376088 | 7F BF F2 14 */	add r29, r31, r30
+/* 8137608C | 80 7D 02 A0 */	lwz r3, 0x2a0(r29)
+/* 81376090 | 6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 81376094 | 90 01 00 0C */	stw r0, 0xc(r1)
+/* 81376098 | C8 01 00 08 */	lfd f0, 0x8(r1)
+/* 8137609C | EC 00 F8 28 */	fsubs f0, f0, f31
+/* 813760A0 | EC 20 F0 24 */	fdivs f1, f0, f30
+/* 813760A4 | 48 00 17 D9 */	bl setSpeakerVol__Q210homebutton10ControllerFf
+/* 813760A8 | 80 7D 02 A0 */	lwz r3, 0x2a0(r29)
+/* 813760AC | 38 A0 00 01 */	li r5, 0x1
+/* 813760B0 | 80 9F 06 08 */	lwz r4, 0x608(r31)
+/* 813760B4 | 48 00 17 D1 */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
+/* 813760B8 | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 813760BC | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 813760C0 | 2C 1C 00 04 */	cmpwi r28, 0x4
+/* 813760C4 | 41 80 FF C0 */	blt .L_81376084
+/* 813760C8 | 48 00 00 64 */	b .L_8137612C
 .L_813760CC:
-/* 813760CC 000444CC  7F E3 FB 78 */	mr r3, r31
-/* 813760D0 000444D0  38 80 00 09 */	li r4, 0x9
-/* 813760D4 000444D4  48 00 0F AD */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 813760D8 000444D8  CB C2 82 F8 */	lfd f30, lbl_816946F8@sda21(r0)
-/* 813760DC 000444DC  3B 80 00 00 */	li r28, 0x0
-/* 813760E0 000444E0  C3 E2 82 F0 */	lfs f31, lbl_816946F0@sda21(r0)
-/* 813760E4 000444E4  3B C0 00 00 */	li r30, 0x0
+/* 813760CC | 7F E3 FB 78 */	mr r3, r31
+/* 813760D0 | 38 80 00 09 */	li r4, 0x9
+/* 813760D4 | 48 00 0F AD */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 813760D8 | CB C2 82 F8 */	lfd f30, lbl_816946F8@sda21(r0)
+/* 813760DC | 3B 80 00 00 */	li r28, 0x0
+/* 813760E0 | C3 E2 82 F0 */	lfs f31, lbl_816946F0@sda21(r0)
+/* 813760E4 | 3B C0 00 00 */	li r30, 0x0
 .L_813760E8:
-/* 813760E8 000444E8  80 1F 00 80 */	lwz r0, 0x80(r31)
-/* 813760EC 000444EC  7F BF F2 14 */	add r29, r31, r30
-/* 813760F0 000444F0  80 7D 02 A0 */	lwz r3, 0x2a0(r29)
-/* 813760F4 000444F4  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 813760F8 000444F8  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813760FC 000444FC  C8 01 00 10 */	lfd f0, 0x10(r1)
-/* 81376100 00044500  EC 00 F0 28 */	fsubs f0, f0, f30
-/* 81376104 00044504  EC 20 F8 24 */	fdivs f1, f0, f31
-/* 81376108 00044508  48 00 17 75 */	bl setSpeakerVol__Q210homebutton10ControllerFf
-/* 8137610C 0004450C  80 7D 02 A0 */	lwz r3, 0x2a0(r29)
-/* 81376110 00044510  38 A0 00 01 */	li r5, 0x1
-/* 81376114 00044514  80 9F 06 08 */	lwz r4, 0x608(r31)
-/* 81376118 00044518  48 00 17 6D */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
-/* 8137611C 0004451C  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 81376120 00044520  3B DE 00 04 */	addi r30, r30, 0x4
-/* 81376124 00044524  2C 1C 00 04 */	cmpwi r28, 0x4
-/* 81376128 00044528  41 80 FF C0 */	blt .L_813760E8
+/* 813760E8 | 80 1F 00 80 */	lwz r0, 0x80(r31)
+/* 813760EC | 7F BF F2 14 */	add r29, r31, r30
+/* 813760F0 | 80 7D 02 A0 */	lwz r3, 0x2a0(r29)
+/* 813760F4 | 6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 813760F8 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813760FC | C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 81376100 | EC 00 F0 28 */	fsubs f0, f0, f30
+/* 81376104 | EC 20 F8 24 */	fdivs f1, f0, f31
+/* 81376108 | 48 00 17 75 */	bl setSpeakerVol__Q210homebutton10ControllerFf
+/* 8137610C | 80 7D 02 A0 */	lwz r3, 0x2a0(r29)
+/* 81376110 | 38 A0 00 01 */	li r5, 0x1
+/* 81376114 | 80 9F 06 08 */	lwz r4, 0x608(r31)
+/* 81376118 | 48 00 17 6D */	bl playSound__Q210homebutton10ControllerFPQ34nw4r3snd18SoundArchivePlayeri
+/* 8137611C | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 81376120 | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 81376124 | 2C 1C 00 04 */	cmpwi r28, 0x4
+/* 81376128 | 41 80 FF C0 */	blt .L_813760E8
 .L_8137612C:
-/* 8137612C 0004452C  7F E3 FB 78 */	mr r3, r31
-/* 81376130 00044530  38 80 00 0C */	li r4, 0xc
-/* 81376134 00044534  38 A0 00 05 */	li r5, 0x5
-/* 81376138 00044538  48 00 09 89 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 8137613C 0004453C  54 60 10 3A */	slwi r0, r3, 2
-/* 81376140 00044540  7C 7F 02 14 */	add r3, r31, r0
-/* 81376144 00044544  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81376148 00044548  7F A3 EB 78 */	mr r3, r29
-/* 8137614C 0004454C  48 00 1A E5 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81376150 00044550  38 00 00 01 */	li r0, 0x1
-/* 81376154 00044554  90 1D 00 14 */	stw r0, 0x14(r29)
-/* 81376158 00044558  48 00 03 58 */	b .L_813764B0
+/* 8137612C | 7F E3 FB 78 */	mr r3, r31
+/* 81376130 | 38 80 00 0C */	li r4, 0xc
+/* 81376134 | 38 A0 00 05 */	li r5, 0x5
+/* 81376138 | 48 00 09 89 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 8137613C | 54 60 10 3A */	slwi r0, r3, 2
+/* 81376140 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81376144 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81376148 | 7F A3 EB 78 */	mr r3, r29
+/* 8137614C | 48 00 1A E5 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81376150 | 38 00 00 01 */	li r0, 0x1
+/* 81376154 | 90 1D 00 14 */	stw r0, 0x14(r29)
+/* 81376158 | 48 00 03 58 */	b .L_813764B0
 .L_8137615C:
-/* 8137615C 0004455C  7F E3 FB 78 */	mr r3, r31
-/* 81376160 00044560  38 80 00 0D */	li r4, 0xd
-/* 81376164 00044564  48 00 0F 1D */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81376168 00044568  48 00 03 48 */	b .L_813764B0
+/* 8137615C | 7F E3 FB 78 */	mr r3, r31
+/* 81376160 | 38 80 00 0D */	li r4, 0xd
+/* 81376164 | 48 00 0F 1D */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81376168 | 48 00 03 48 */	b .L_813764B0
 .L_8137616C:
-/* 8137616C 0004456C  88 1F 00 84 */	lbz r0, 0x84(r31)
-/* 81376170 00044570  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81376174 00044574  40 82 00 78 */	bne .L_813761EC
-/* 81376178 00044578  3B C0 00 01 */	li r30, 0x1
-/* 8137617C 0004457C  38 60 00 01 */	li r3, 0x1
-/* 81376180 00044580  9B DF 00 84 */	stb r30, 0x84(r31)
-/* 81376184 00044584  48 20 4E A1 */	bl fn_8157B024
-/* 81376188 00044588  7F E3 FB 78 */	mr r3, r31
-/* 8137618C 0004458C  38 80 00 0E */	li r4, 0xe
-/* 81376190 00044590  38 A0 00 08 */	li r5, 0x8
-/* 81376194 00044594  48 00 09 2D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81376198 00044598  54 60 10 3A */	slwi r0, r3, 2
-/* 8137619C 0004459C  7C 7F 02 14 */	add r3, r31, r0
-/* 813761A0 000445A0  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 813761A4 000445A4  7F A3 EB 78 */	mr r3, r29
-/* 813761A8 000445A8  48 00 1A 89 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 813761AC 000445AC  93 DD 00 14 */	stw r30, 0x14(r29)
-/* 813761B0 000445B0  7F E3 FB 78 */	mr r3, r31
-/* 813761B4 000445B4  38 80 00 10 */	li r4, 0x10
-/* 813761B8 000445B8  38 A0 00 06 */	li r5, 0x6
-/* 813761BC 000445BC  48 00 09 05 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 813761C0 000445C0  54 60 10 3A */	slwi r0, r3, 2
-/* 813761C4 000445C4  90 7F 00 14 */	stw r3, 0x14(r31)
-/* 813761C8 000445C8  7C 7F 02 14 */	add r3, r31, r0
-/* 813761CC 000445CC  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 813761D0 000445D0  7F A3 EB 78 */	mr r3, r29
-/* 813761D4 000445D4  48 00 1A 5D */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 813761D8 000445D8  93 DD 00 14 */	stw r30, 0x14(r29)
-/* 813761DC 000445DC  7F E3 FB 78 */	mr r3, r31
-/* 813761E0 000445E0  38 80 00 0E */	li r4, 0xe
-/* 813761E4 000445E4  48 00 0E 9D */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 813761E8 000445E8  48 00 00 40 */	b .L_81376228
+/* 8137616C | 88 1F 00 84 */	lbz r0, 0x84(r31)
+/* 81376170 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81376174 | 40 82 00 78 */	bne .L_813761EC
+/* 81376178 | 3B C0 00 01 */	li r30, 0x1
+/* 8137617C | 38 60 00 01 */	li r3, 0x1
+/* 81376180 | 9B DF 00 84 */	stb r30, 0x84(r31)
+/* 81376184 | 48 20 4E A1 */	bl fn_8157B024
+/* 81376188 | 7F E3 FB 78 */	mr r3, r31
+/* 8137618C | 38 80 00 0E */	li r4, 0xe
+/* 81376190 | 38 A0 00 08 */	li r5, 0x8
+/* 81376194 | 48 00 09 2D */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81376198 | 54 60 10 3A */	slwi r0, r3, 2
+/* 8137619C | 7C 7F 02 14 */	add r3, r31, r0
+/* 813761A0 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 813761A4 | 7F A3 EB 78 */	mr r3, r29
+/* 813761A8 | 48 00 1A 89 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 813761AC | 93 DD 00 14 */	stw r30, 0x14(r29)
+/* 813761B0 | 7F E3 FB 78 */	mr r3, r31
+/* 813761B4 | 38 80 00 10 */	li r4, 0x10
+/* 813761B8 | 38 A0 00 06 */	li r5, 0x6
+/* 813761BC | 48 00 09 05 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 813761C0 | 54 60 10 3A */	slwi r0, r3, 2
+/* 813761C4 | 90 7F 00 14 */	stw r3, 0x14(r31)
+/* 813761C8 | 7C 7F 02 14 */	add r3, r31, r0
+/* 813761CC | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 813761D0 | 7F A3 EB 78 */	mr r3, r29
+/* 813761D4 | 48 00 1A 5D */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 813761D8 | 93 DD 00 14 */	stw r30, 0x14(r29)
+/* 813761DC | 7F E3 FB 78 */	mr r3, r31
+/* 813761E0 | 38 80 00 0E */	li r4, 0xe
+/* 813761E4 | 48 00 0E 9D */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 813761E8 | 48 00 00 40 */	b .L_81376228
 .L_813761EC:
-/* 813761EC 000445EC  7F E3 FB 78 */	mr r3, r31
-/* 813761F0 000445F0  38 80 00 10 */	li r4, 0x10
-/* 813761F4 000445F4  38 A0 00 0E */	li r5, 0xe
-/* 813761F8 000445F8  48 00 08 C9 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 813761FC 000445FC  54 60 10 3A */	slwi r0, r3, 2
-/* 81376200 00044600  90 7F 00 14 */	stw r3, 0x14(r31)
-/* 81376204 00044604  7C 7F 02 14 */	add r3, r31, r0
-/* 81376208 00044608  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 8137620C 0004460C  7F A3 EB 78 */	mr r3, r29
-/* 81376210 00044610  48 00 1A 21 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81376214 00044614  38 00 00 01 */	li r0, 0x1
-/* 81376218 00044618  7F E3 FB 78 */	mr r3, r31
-/* 8137621C 0004461C  90 1D 00 14 */	stw r0, 0x14(r29)
-/* 81376220 00044620  38 80 00 0D */	li r4, 0xd
-/* 81376224 00044624  48 00 0E 5D */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 813761EC | 7F E3 FB 78 */	mr r3, r31
+/* 813761F0 | 38 80 00 10 */	li r4, 0x10
+/* 813761F4 | 38 A0 00 0E */	li r5, 0xe
+/* 813761F8 | 48 00 08 C9 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 813761FC | 54 60 10 3A */	slwi r0, r3, 2
+/* 81376200 | 90 7F 00 14 */	stw r3, 0x14(r31)
+/* 81376204 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81376208 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 8137620C | 7F A3 EB 78 */	mr r3, r29
+/* 81376210 | 48 00 1A 21 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81376214 | 38 00 00 01 */	li r0, 0x1
+/* 81376218 | 7F E3 FB 78 */	mr r3, r31
+/* 8137621C | 90 1D 00 14 */	stw r0, 0x14(r29)
+/* 81376220 | 38 80 00 0D */	li r4, 0xd
+/* 81376224 | 48 00 0E 5D */	bl play_sound__Q210homebutton10HomeButtonFi
 .L_81376228:
-/* 81376228 00044628  C3 E2 82 D8 */	lfs f31, lbl_816946D8@sda21(r0)
-/* 8137622C 0004462C  3B 80 00 00 */	li r28, 0x0
-/* 81376230 00044630  3B C0 00 00 */	li r30, 0x0
+/* 81376228 | C3 E2 82 D8 */	lfs f31, lbl_816946D8@sda21(r0)
+/* 8137622C | 3B 80 00 00 */	li r28, 0x0
+/* 81376230 | 3B C0 00 00 */	li r30, 0x0
 .L_81376234:
-/* 81376234 00044634  7F BF F2 14 */	add r29, r31, r30
-/* 81376238 00044638  80 7D 02 A0 */	lwz r3, 0x2a0(r29)
-/* 8137623C 0004463C  48 00 18 6D */	bl startMotor__Q210homebutton10ControllerFv
-/* 81376240 00044640  D3 FD 02 08 */	stfs f31, 0x208(r29)
-/* 81376244 00044644  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 81376248 00044648  2C 1C 00 04 */	cmpwi r28, 0x4
-/* 8137624C 0004464C  3B DE 00 04 */	addi r30, r30, 0x4
-/* 81376250 00044650  D3 FD 02 18 */	stfs f31, 0x218(r29)
-/* 81376254 00044654  41 80 FF E0 */	blt .L_81376234
-/* 81376258 00044658  38 00 00 09 */	li r0, 0x9
-/* 8137625C 0004465C  90 1F 00 10 */	stw r0, 0x10(r31)
-/* 81376260 00044660  48 00 02 50 */	b .L_813764B0
+/* 81376234 | 7F BF F2 14 */	add r29, r31, r30
+/* 81376238 | 80 7D 02 A0 */	lwz r3, 0x2a0(r29)
+/* 8137623C | 48 00 18 6D */	bl startMotor__Q210homebutton10ControllerFv
+/* 81376240 | D3 FD 02 08 */	stfs f31, 0x208(r29)
+/* 81376244 | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 81376248 | 2C 1C 00 04 */	cmpwi r28, 0x4
+/* 8137624C | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 81376250 | D3 FD 02 18 */	stfs f31, 0x218(r29)
+/* 81376254 | 41 80 FF E0 */	blt .L_81376234
+/* 81376258 | 38 00 00 09 */	li r0, 0x9
+/* 8137625C | 90 1F 00 10 */	stw r0, 0x10(r31)
+/* 81376260 | 48 00 02 50 */	b .L_813764B0
 .L_81376264:
-/* 81376264 00044664  88 1F 00 84 */	lbz r0, 0x84(r31)
-/* 81376268 00044668  2C 00 00 00 */	cmpwi r0, 0x0
-/* 8137626C 0004466C  41 82 00 7C */	beq .L_813762E8
-/* 81376270 00044670  38 00 00 00 */	li r0, 0x0
-/* 81376274 00044674  38 60 00 00 */	li r3, 0x0
-/* 81376278 00044678  98 1F 00 84 */	stb r0, 0x84(r31)
-/* 8137627C 0004467C  48 20 4D A9 */	bl fn_8157B024
-/* 81376280 00044680  7F E3 FB 78 */	mr r3, r31
-/* 81376284 00044684  38 80 00 0E */	li r4, 0xe
-/* 81376288 00044688  38 A0 00 06 */	li r5, 0x6
-/* 8137628C 0004468C  48 00 08 35 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81376290 00044690  54 60 10 3A */	slwi r0, r3, 2
-/* 81376294 00044694  7C 7F 02 14 */	add r3, r31, r0
-/* 81376298 00044698  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 8137629C 0004469C  7F A3 EB 78 */	mr r3, r29
-/* 813762A0 000446A0  48 00 19 91 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 813762A4 000446A4  3B C0 00 01 */	li r30, 0x1
-/* 813762A8 000446A8  7F E3 FB 78 */	mr r3, r31
-/* 813762AC 000446AC  93 DD 00 14 */	stw r30, 0x14(r29)
-/* 813762B0 000446B0  38 80 00 0D */	li r4, 0xd
-/* 813762B4 000446B4  38 A0 00 08 */	li r5, 0x8
-/* 813762B8 000446B8  48 00 08 09 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 813762BC 000446BC  54 60 10 3A */	slwi r0, r3, 2
-/* 813762C0 000446C0  90 7F 00 14 */	stw r3, 0x14(r31)
-/* 813762C4 000446C4  7C 7F 02 14 */	add r3, r31, r0
-/* 813762C8 000446C8  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 813762CC 000446CC  7F A3 EB 78 */	mr r3, r29
-/* 813762D0 000446D0  48 00 19 61 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 813762D4 000446D4  93 DD 00 14 */	stw r30, 0x14(r29)
-/* 813762D8 000446D8  7F E3 FB 78 */	mr r3, r31
-/* 813762DC 000446DC  38 80 00 0F */	li r4, 0xf
-/* 813762E0 000446E0  48 00 0D A1 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 813762E4 000446E4  48 00 00 10 */	b .L_813762F4
+/* 81376264 | 88 1F 00 84 */	lbz r0, 0x84(r31)
+/* 81376268 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 8137626C | 41 82 00 7C */	beq .L_813762E8
+/* 81376270 | 38 00 00 00 */	li r0, 0x0
+/* 81376274 | 38 60 00 00 */	li r3, 0x0
+/* 81376278 | 98 1F 00 84 */	stb r0, 0x84(r31)
+/* 8137627C | 48 20 4D A9 */	bl fn_8157B024
+/* 81376280 | 7F E3 FB 78 */	mr r3, r31
+/* 81376284 | 38 80 00 0E */	li r4, 0xe
+/* 81376288 | 38 A0 00 06 */	li r5, 0x6
+/* 8137628C | 48 00 08 35 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81376290 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81376294 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81376298 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 8137629C | 7F A3 EB 78 */	mr r3, r29
+/* 813762A0 | 48 00 19 91 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 813762A4 | 3B C0 00 01 */	li r30, 0x1
+/* 813762A8 | 7F E3 FB 78 */	mr r3, r31
+/* 813762AC | 93 DD 00 14 */	stw r30, 0x14(r29)
+/* 813762B0 | 38 80 00 0D */	li r4, 0xd
+/* 813762B4 | 38 A0 00 08 */	li r5, 0x8
+/* 813762B8 | 48 00 08 09 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 813762BC | 54 60 10 3A */	slwi r0, r3, 2
+/* 813762C0 | 90 7F 00 14 */	stw r3, 0x14(r31)
+/* 813762C4 | 7C 7F 02 14 */	add r3, r31, r0
+/* 813762C8 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 813762CC | 7F A3 EB 78 */	mr r3, r29
+/* 813762D0 | 48 00 19 61 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 813762D4 | 93 DD 00 14 */	stw r30, 0x14(r29)
+/* 813762D8 | 7F E3 FB 78 */	mr r3, r31
+/* 813762DC | 38 80 00 0F */	li r4, 0xf
+/* 813762E0 | 48 00 0D A1 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 813762E4 | 48 00 00 10 */	b .L_813762F4
 .L_813762E8:
-/* 813762E8 000446E8  7F E3 FB 78 */	mr r3, r31
-/* 813762EC 000446EC  38 80 00 0D */	li r4, 0xd
-/* 813762F0 000446F0  48 00 0D 91 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 813762E8 | 7F E3 FB 78 */	mr r3, r31
+/* 813762EC | 38 80 00 0D */	li r4, 0xd
+/* 813762F0 | 48 00 0D 91 */	bl play_sound__Q210homebutton10HomeButtonFi
 .L_813762F4:
-/* 813762F4 000446F4  38 00 00 09 */	li r0, 0x9
-/* 813762F8 000446F8  90 1F 00 10 */	stw r0, 0x10(r31)
-/* 813762FC 000446FC  48 00 01 B4 */	b .L_813764B0
+/* 813762F4 | 38 00 00 09 */	li r0, 0x9
+/* 813762F8 | 90 1F 00 10 */	stw r0, 0x10(r31)
+/* 813762FC | 48 00 01 B4 */	b .L_813764B0
 .L_81376300:
-/* 81376300 00044700  7F E3 FB 78 */	mr r3, r31
-/* 81376304 00044704  38 80 00 0F */	li r4, 0xf
-/* 81376308 00044708  38 A0 00 05 */	li r5, 0x5
-/* 8137630C 0004470C  48 00 07 B5 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81376310 00044710  54 60 10 3A */	slwi r0, r3, 2
-/* 81376314 00044714  90 7F 00 14 */	stw r3, 0x14(r31)
-/* 81376318 00044718  7C 7F 02 14 */	add r3, r31, r0
-/* 8137631C 0004471C  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81376320 00044720  7F A3 EB 78 */	mr r3, r29
-/* 81376324 00044724  48 00 19 0D */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81376328 00044728  38 60 00 01 */	li r3, 0x1
-/* 8137632C 0004472C  38 00 00 03 */	li r0, 0x3
-/* 81376330 00044730  90 7D 00 14 */	stw r3, 0x14(r29)
-/* 81376334 00044734  3B 80 00 00 */	li r28, 0x0
-/* 81376338 00044738  C3 E2 82 D8 */	lfs f31, lbl_816946D8@sda21(r0)
-/* 8137633C 0004473C  3B C0 00 00 */	li r30, 0x0
-/* 81376340 00044740  90 1F 00 10 */	stw r0, 0x10(r31)
-/* 81376344 00044744  98 7F 00 88 */	stb r3, 0x88(r31)
+/* 81376300 | 7F E3 FB 78 */	mr r3, r31
+/* 81376304 | 38 80 00 0F */	li r4, 0xf
+/* 81376308 | 38 A0 00 05 */	li r5, 0x5
+/* 8137630C | 48 00 07 B5 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81376310 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81376314 | 90 7F 00 14 */	stw r3, 0x14(r31)
+/* 81376318 | 7C 7F 02 14 */	add r3, r31, r0
+/* 8137631C | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81376320 | 7F A3 EB 78 */	mr r3, r29
+/* 81376324 | 48 00 19 0D */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81376328 | 38 60 00 01 */	li r3, 0x1
+/* 8137632C | 38 00 00 03 */	li r0, 0x3
+/* 81376330 | 90 7D 00 14 */	stw r3, 0x14(r29)
+/* 81376334 | 3B 80 00 00 */	li r28, 0x0
+/* 81376338 | C3 E2 82 D8 */	lfs f31, lbl_816946D8@sda21(r0)
+/* 8137633C | 3B C0 00 00 */	li r30, 0x0
+/* 81376340 | 90 1F 00 10 */	stw r0, 0x10(r31)
+/* 81376344 | 98 7F 00 88 */	stb r3, 0x88(r31)
 .L_81376348:
-/* 81376348 00044748  7C 7F F2 14 */	add r3, r31, r30
-/* 8137634C 0004474C  D3 E3 02 08 */	stfs f31, 0x208(r3)
-/* 81376350 00044750  D3 E3 02 18 */	stfs f31, 0x218(r3)
-/* 81376354 00044754  80 63 02 A0 */	lwz r3, 0x2a0(r3)
-/* 81376358 00044758  48 00 17 A9 */	bl stopMotor__Q210homebutton10ControllerFv
-/* 8137635C 0004475C  3B 9C 00 01 */	addi r28, r28, 0x1
-/* 81376360 00044760  3B DE 00 04 */	addi r30, r30, 0x4
-/* 81376364 00044764  2C 1C 00 04 */	cmpwi r28, 0x4
-/* 81376368 00044768  41 80 FF E0 */	blt .L_81376348
-/* 8137636C 0004476C  38 00 00 1E */	li r0, 0x1e
-/* 81376370 00044770  80 7F 02 2C */	lwz r3, 0x22c(r31)
-/* 81376374 00044774  90 1F 02 28 */	stw r0, 0x228(r31)
-/* 81376378 00044778  3F C0 81 64 */	lis r30, scFuncTextPaneName__Q210homebutton10HomeButton@ha
-/* 8137637C 0004477C  38 A0 00 01 */	li r5, 0x1
-/* 81376380 00044780  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81376384 00044784  80 9E 53 D0 */	lwz r4, scFuncTextPaneName__Q210homebutton10HomeButton@l(r30)
-/* 81376388 00044788  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 8137638C 0004478C  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 81376390 00044790  7D 89 03 A6 */	mtctr r12
-/* 81376394 00044794  4E 80 04 21 */	bctrl
-/* 81376398 00044798  38 80 00 01 */	li r4, 0x1
-/* 8137639C 0004479C  4B FC E0 79 */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 813763A0 000447A0  80 DF 02 2C */	lwz r6, 0x22c(r31)
-/* 813763A4 000447A4  38 7E 53 D0 */	addi r3, r30, scFuncTextPaneName__Q210homebutton10HomeButton@l
-/* 813763A8 000447A8  80 83 00 04 */	lwz r4, 0x4(r3)
-/* 813763AC 000447AC  38 A0 00 01 */	li r5, 0x1
-/* 813763B0 000447B0  80 66 00 10 */	lwz r3, 0x10(r6)
-/* 813763B4 000447B4  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 813763B8 000447B8  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 813763BC 000447BC  7D 89 03 A6 */	mtctr r12
-/* 813763C0 000447C0  4E 80 04 21 */	bctrl
-/* 813763C4 000447C4  38 80 00 01 */	li r4, 0x1
-/* 813763C8 000447C8  4B FC E0 4D */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 813763CC 000447CC  7F E3 FB 78 */	mr r3, r31
-/* 813763D0 000447D0  38 80 00 05 */	li r4, 0x5
-/* 813763D4 000447D4  48 00 0C AD */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 813763D8 000447D8  7F E3 FB 78 */	mr r3, r31
-/* 813763DC 000447DC  38 80 00 10 */	li r4, 0x10
-/* 813763E0 000447E0  48 00 0C A1 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 813763E4 000447E4  48 00 00 CC */	b .L_813764B0
+/* 81376348 | 7C 7F F2 14 */	add r3, r31, r30
+/* 8137634C | D3 E3 02 08 */	stfs f31, 0x208(r3)
+/* 81376350 | D3 E3 02 18 */	stfs f31, 0x218(r3)
+/* 81376354 | 80 63 02 A0 */	lwz r3, 0x2a0(r3)
+/* 81376358 | 48 00 17 A9 */	bl stopMotor__Q210homebutton10ControllerFv
+/* 8137635C | 3B 9C 00 01 */	addi r28, r28, 0x1
+/* 81376360 | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 81376364 | 2C 1C 00 04 */	cmpwi r28, 0x4
+/* 81376368 | 41 80 FF E0 */	blt .L_81376348
+/* 8137636C | 38 00 00 1E */	li r0, 0x1e
+/* 81376370 | 80 7F 02 2C */	lwz r3, 0x22c(r31)
+/* 81376374 | 90 1F 02 28 */	stw r0, 0x228(r31)
+/* 81376378 | 3F C0 81 64 */	lis r30, scFuncTextPaneName__Q210homebutton10HomeButton@ha
+/* 8137637C | 38 A0 00 01 */	li r5, 0x1
+/* 81376380 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81376384 | 80 9E 53 D0 */	lwz r4, scFuncTextPaneName__Q210homebutton10HomeButton@l(r30)
+/* 81376388 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 8137638C | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 81376390 | 7D 89 03 A6 */	mtctr r12
+/* 81376394 | 4E 80 04 21 */	bctrl
+/* 81376398 | 38 80 00 01 */	li r4, 0x1
+/* 8137639C | 4B FC E0 79 */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 813763A0 | 80 DF 02 2C */	lwz r6, 0x22c(r31)
+/* 813763A4 | 38 7E 53 D0 */	addi r3, r30, scFuncTextPaneName__Q210homebutton10HomeButton@l
+/* 813763A8 | 80 83 00 04 */	lwz r4, 0x4(r3)
+/* 813763AC | 38 A0 00 01 */	li r5, 0x1
+/* 813763B0 | 80 66 00 10 */	lwz r3, 0x10(r6)
+/* 813763B4 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 813763B8 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 813763BC | 7D 89 03 A6 */	mtctr r12
+/* 813763C0 | 4E 80 04 21 */	bctrl
+/* 813763C4 | 38 80 00 01 */	li r4, 0x1
+/* 813763C8 | 4B FC E0 4D */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 813763CC | 7F E3 FB 78 */	mr r3, r31
+/* 813763D0 | 38 80 00 05 */	li r4, 0x5
+/* 813763D4 | 48 00 0C AD */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 813763D8 | 7F E3 FB 78 */	mr r3, r31
+/* 813763DC | 38 80 00 10 */	li r4, 0x10
+/* 813763E0 | 48 00 0C A1 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 813763E4 | 48 00 00 CC */	b .L_813764B0
 .L_813763E8:
-/* 813763E8 000447E8  7F E3 FB 78 */	mr r3, r31
-/* 813763EC 000447EC  38 80 00 13 */	li r4, 0x13
-/* 813763F0 000447F0  38 A0 00 0D */	li r5, 0xd
-/* 813763F4 000447F4  48 00 06 CD */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 813763F8 000447F8  54 60 10 3A */	slwi r0, r3, 2
-/* 813763FC 000447FC  90 7F 00 14 */	stw r3, 0x14(r31)
-/* 81376400 00044800  7C 7F 02 14 */	add r3, r31, r0
-/* 81376404 00044804  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 81376408 00044808  7F A3 EB 78 */	mr r3, r29
-/* 8137640C 0004480C  48 00 18 25 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81376410 00044810  38 00 00 01 */	li r0, 0x1
-/* 81376414 00044814  38 60 00 0D */	li r3, 0xd
-/* 81376418 00044818  90 1D 00 14 */	stw r0, 0x14(r29)
-/* 8137641C 0004481C  38 00 00 00 */	li r0, 0x0
-/* 81376420 00044820  80 9F 00 B0 */	lwz r4, 0xb0(r31)
-/* 81376424 00044824  90 7F 00 10 */	stw r3, 0x10(r31)
-/* 81376428 00044828  2C 04 00 01 */	cmpwi r4, 0x1
-/* 8137642C 0004482C  90 1F 00 00 */	stw r0, 0x0(r31)
-/* 81376430 00044830  40 82 00 14 */	bne .L_81376444
-/* 81376434 00044834  7F E3 FB 78 */	mr r3, r31
-/* 81376438 00044838  38 80 00 02 */	li r4, 0x2
-/* 8137643C 0004483C  48 00 0C 45 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81376440 00044840  48 00 00 70 */	b .L_813764B0
+/* 813763E8 | 7F E3 FB 78 */	mr r3, r31
+/* 813763EC | 38 80 00 13 */	li r4, 0x13
+/* 813763F0 | 38 A0 00 0D */	li r5, 0xd
+/* 813763F4 | 48 00 06 CD */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 813763F8 | 54 60 10 3A */	slwi r0, r3, 2
+/* 813763FC | 90 7F 00 14 */	stw r3, 0x14(r31)
+/* 81376400 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81376404 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 81376408 | 7F A3 EB 78 */	mr r3, r29
+/* 8137640C | 48 00 18 25 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81376410 | 38 00 00 01 */	li r0, 0x1
+/* 81376414 | 38 60 00 0D */	li r3, 0xd
+/* 81376418 | 90 1D 00 14 */	stw r0, 0x14(r29)
+/* 8137641C | 38 00 00 00 */	li r0, 0x0
+/* 81376420 | 80 9F 00 B0 */	lwz r4, 0xb0(r31)
+/* 81376424 | 90 7F 00 10 */	stw r3, 0x10(r31)
+/* 81376428 | 2C 04 00 01 */	cmpwi r4, 0x1
+/* 8137642C | 90 1F 00 00 */	stw r0, 0x0(r31)
+/* 81376430 | 40 82 00 14 */	bne .L_81376444
+/* 81376434 | 7F E3 FB 78 */	mr r3, r31
+/* 81376438 | 38 80 00 02 */	li r4, 0x2
+/* 8137643C | 48 00 0C 45 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81376440 | 48 00 00 70 */	b .L_813764B0
 .L_81376444:
-/* 81376444 00044844  2C 04 00 02 */	cmpwi r4, 0x2
-/* 81376448 00044848  40 82 00 68 */	bne .L_813764B0
-/* 8137644C 0004484C  7F E3 FB 78 */	mr r3, r31
-/* 81376450 00044850  38 80 00 03 */	li r4, 0x3
-/* 81376454 00044854  48 00 0C 2D */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81376458 00044858  48 00 00 58 */	b .L_813764B0
+/* 81376444 | 2C 04 00 02 */	cmpwi r4, 0x2
+/* 81376448 | 40 82 00 68 */	bne .L_813764B0
+/* 8137644C | 7F E3 FB 78 */	mr r3, r31
+/* 81376450 | 38 80 00 03 */	li r4, 0x3
+/* 81376454 | 48 00 0C 2D */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81376458 | 48 00 00 58 */	b .L_813764B0
 .L_8137645C:
-/* 8137645C 0004485C  7F E3 FB 78 */	mr r3, r31
-/* 81376460 00044860  38 80 00 14 */	li r4, 0x14
-/* 81376464 00044864  38 A0 00 0D */	li r5, 0xd
-/* 81376468 00044868  48 00 06 59 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 8137646C 0004486C  54 60 10 3A */	slwi r0, r3, 2
-/* 81376470 00044870  90 7F 00 14 */	stw r3, 0x14(r31)
-/* 81376474 00044874  7C 7F 02 14 */	add r3, r31, r0
-/* 81376478 00044878  83 A3 02 E4 */	lwz r29, 0x2e4(r3)
-/* 8137647C 0004487C  7F A3 EB 78 */	mr r3, r29
-/* 81376480 00044880  48 00 17 B1 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81376484 00044884  38 00 00 01 */	li r0, 0x1
-/* 81376488 00044888  38 80 00 0D */	li r4, 0xd
-/* 8137648C 0004488C  90 1D 00 14 */	stw r0, 0x14(r29)
-/* 81376490 00044890  38 A0 FF FF */	li r5, -0x1
-/* 81376494 00044894  38 00 00 00 */	li r0, 0x0
-/* 81376498 00044898  7F E3 FB 78 */	mr r3, r31
-/* 8137649C 0004489C  90 9F 00 10 */	stw r4, 0x10(r31)
-/* 813764A0 000448A0  38 80 00 06 */	li r4, 0x6
-/* 813764A4 000448A4  90 BF 00 B0 */	stw r5, 0xb0(r31)
-/* 813764A8 000448A8  90 1F 00 00 */	stw r0, 0x0(r31)
-/* 813764AC 000448AC  48 00 0B D5 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 8137645C | 7F E3 FB 78 */	mr r3, r31
+/* 81376460 | 38 80 00 14 */	li r4, 0x14
+/* 81376464 | 38 A0 00 0D */	li r5, 0xd
+/* 81376468 | 48 00 06 59 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 8137646C | 54 60 10 3A */	slwi r0, r3, 2
+/* 81376470 | 90 7F 00 14 */	stw r3, 0x14(r31)
+/* 81376474 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81376478 | 83 A3 02 E4 */	lwz r29, 0x2e4(r3)
+/* 8137647C | 7F A3 EB 78 */	mr r3, r29
+/* 81376480 | 48 00 17 B1 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81376484 | 38 00 00 01 */	li r0, 0x1
+/* 81376488 | 38 80 00 0D */	li r4, 0xd
+/* 8137648C | 90 1D 00 14 */	stw r0, 0x14(r29)
+/* 81376490 | 38 A0 FF FF */	li r5, -0x1
+/* 81376494 | 38 00 00 00 */	li r0, 0x0
+/* 81376498 | 7F E3 FB 78 */	mr r3, r31
+/* 8137649C | 90 9F 00 10 */	stw r4, 0x10(r31)
+/* 813764A0 | 38 80 00 06 */	li r4, 0x6
+/* 813764A4 | 90 BF 00 B0 */	stw r5, 0xb0(r31)
+/* 813764A8 | 90 1F 00 00 */	stw r0, 0x0(r31)
+/* 813764AC | 48 00 0B D5 */	bl play_sound__Q210homebutton10HomeButtonFi
 .L_813764B0:
-/* 813764B0 000448B0  E3 E1 00 48 */	psq_l f31, 0x48(r1), 0, qr0
-/* 813764B4 000448B4  CB E1 00 40 */	lfd f31, 0x40(r1)
-/* 813764B8 000448B8  E3 C1 00 38 */	psq_l f30, 0x38(r1), 0, qr0
-/* 813764BC 000448BC  39 61 00 30 */	addi r11, r1, 0x30
-/* 813764C0 000448C0  CB C1 00 30 */	lfd f30, 0x30(r1)
-/* 813764C4 000448C4  48 28 30 4D */	bl _restgpr_28
-/* 813764C8 000448C8  80 01 00 54 */	lwz r0, 0x54(r1)
-/* 813764CC 000448CC  7C 08 03 A6 */	mtlr r0
-/* 813764D0 000448D0  38 21 00 50 */	addi r1, r1, 0x50
-/* 813764D4 000448D4  4E 80 00 20 */	blr
+/* 813764B0 | E3 E1 00 48 */	psq_l f31, 0x48(r1), 0, qr0
+/* 813764B4 | CB E1 00 40 */	lfd f31, 0x40(r1)
+/* 813764B8 | E3 C1 00 38 */	psq_l f30, 0x38(r1), 0, qr0
+/* 813764BC | 39 61 00 30 */	addi r11, r1, 0x30
+/* 813764C0 | CB C1 00 30 */	lfd f30, 0x30(r1)
+/* 813764C4 | 48 28 30 4D */	bl _restgpr_28
+/* 813764C8 | 80 01 00 54 */	lwz r0, 0x54(r1)
+/* 813764CC | 7C 08 03 A6 */	mtlr r0
+/* 813764D0 | 38 21 00 50 */	addi r1, r1, 0x50
+/* 813764D4 | 4E 80 00 20 */	blr
 .endfn startTrigEvent__Q210homebutton10HomeButtonFPCc
 
 # .text:0x4F30 | 0x813764D8 | size: 0x18C
 # homebutton::HomeButton::reset_btn()
 .fn reset_btn__Q210homebutton10HomeButtonFv, global
-/* 813764D8 000448D8  94 21 FF D0 */	stwu r1, -0x30(r1)
-/* 813764DC 000448DC  7C 08 02 A6 */	mflr r0
-/* 813764E0 000448E0  90 01 00 34 */	stw r0, 0x34(r1)
-/* 813764E4 000448E4  39 61 00 30 */	addi r11, r1, 0x30
-/* 813764E8 000448E8  48 28 2F D1 */	bl _savegpr_25
-/* 813764EC 000448EC  3B 20 00 00 */	li r25, 0x0
-/* 813764F0 000448F0  7C 7F 1B 78 */	mr r31, r3
-/* 813764F4 000448F4  7F 3D CB 78 */	mr r29, r25
-/* 813764F8 000448F8  3B C0 00 00 */	li r30, 0x0
-/* 813764FC 000448FC  3B 80 00 01 */	li r28, 0x1
-/* 81376500 00044900  48 00 00 48 */	b .L_81376548
+/* 813764D8 | 94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 813764DC | 7C 08 02 A6 */	mflr r0
+/* 813764E0 | 90 01 00 34 */	stw r0, 0x34(r1)
+/* 813764E4 | 39 61 00 30 */	addi r11, r1, 0x30
+/* 813764E8 | 48 28 2F D1 */	bl _savegpr_25
+/* 813764EC | 3B 20 00 00 */	li r25, 0x0
+/* 813764F0 | 7C 7F 1B 78 */	mr r31, r3
+/* 813764F4 | 7F 3D CB 78 */	mr r29, r25
+/* 813764F8 | 3B C0 00 00 */	li r30, 0x0
+/* 813764FC | 3B 80 00 01 */	li r28, 0x1
+/* 81376500 | 48 00 00 48 */	b .L_81376548
 .L_81376504:
-/* 81376504 00044904  7F 5F F2 14 */	add r26, r31, r30
-/* 81376508 00044908  80 1A 00 1C */	lwz r0, 0x1c(r26)
-/* 8137650C 0004490C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81376510 00044910  41 82 00 30 */	beq .L_81376540
-/* 81376514 00044914  7F E3 FB 78 */	mr r3, r31
-/* 81376518 00044918  7F 24 CB 78 */	mr r4, r25
-/* 8137651C 0004491C  38 A0 00 02 */	li r5, 0x2
-/* 81376520 00044920  48 00 05 51 */	bl findAnimator__Q210homebutton10HomeButtonFii
-/* 81376524 00044924  54 60 10 3A */	slwi r0, r3, 2
-/* 81376528 00044928  7C 7F 02 14 */	add r3, r31, r0
-/* 8137652C 0004492C  83 63 02 B4 */	lwz r27, 0x2b4(r3)
-/* 81376530 00044930  7F 63 DB 78 */	mr r3, r27
-/* 81376534 00044934  48 00 16 FD */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81376538 00044938  93 9B 00 14 */	stw r28, 0x14(r27)
-/* 8137653C 0004493C  93 BA 00 1C */	stw r29, 0x1c(r26)
+/* 81376504 | 7F 5F F2 14 */	add r26, r31, r30
+/* 81376508 | 80 1A 00 1C */	lwz r0, 0x1c(r26)
+/* 8137650C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81376510 | 41 82 00 30 */	beq .L_81376540
+/* 81376514 | 7F E3 FB 78 */	mr r3, r31
+/* 81376518 | 7F 24 CB 78 */	mr r4, r25
+/* 8137651C | 38 A0 00 02 */	li r5, 0x2
+/* 81376520 | 48 00 05 51 */	bl findAnimator__Q210homebutton10HomeButtonFii
+/* 81376524 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81376528 | 7C 7F 02 14 */	add r3, r31, r0
+/* 8137652C | 83 63 02 B4 */	lwz r27, 0x2b4(r3)
+/* 81376530 | 7F 63 DB 78 */	mr r3, r27
+/* 81376534 | 48 00 16 FD */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81376538 | 93 9B 00 14 */	stw r28, 0x14(r27)
+/* 8137653C | 93 BA 00 1C */	stw r29, 0x1c(r26)
 .L_81376540:
-/* 81376540 00044940  3B 39 00 01 */	addi r25, r25, 0x1
-/* 81376544 00044944  3B DE 00 04 */	addi r30, r30, 0x4
+/* 81376540 | 3B 39 00 01 */	addi r25, r25, 0x1
+/* 81376544 | 3B DE 00 04 */	addi r30, r30, 0x4
 .L_81376548:
-/* 81376548 00044948  80 1F 00 08 */	lwz r0, 0x8(r31)
-/* 8137654C 0004494C  7C 19 00 00 */	cmpw r25, r0
-/* 81376550 00044950  41 80 FF B4 */	blt .L_81376504
-/* 81376554 00044954  54 00 10 3A */	slwi r0, r0, 2
-/* 81376558 00044958  7C 7F 02 14 */	add r3, r31, r0
-/* 8137655C 0004495C  80 03 00 1C */	lwz r0, 0x1c(r3)
-/* 81376560 00044960  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81376564 00044964  41 82 00 30 */	beq .L_81376594
-/* 81376568 00044968  83 7F 04 3C */	lwz r27, 0x43c(r31)
-/* 8137656C 0004496C  7F 63 DB 78 */	mr r3, r27
-/* 81376570 00044970  48 00 16 C1 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81376574 00044974  38 00 00 01 */	li r0, 0x1
-/* 81376578 00044978  38 80 00 00 */	li r4, 0x0
-/* 8137657C 0004497C  90 1B 00 14 */	stw r0, 0x14(r27)
-/* 81376580 00044980  80 7F 00 08 */	lwz r3, 0x8(r31)
-/* 81376584 00044984  38 03 00 01 */	addi r0, r3, 0x1
-/* 81376588 00044988  54 00 10 3A */	slwi r0, r0, 2
-/* 8137658C 0004498C  7C 7F 02 14 */	add r3, r31, r0
-/* 81376590 00044990  90 83 00 1C */	stw r4, 0x1c(r3)
+/* 81376548 | 80 1F 00 08 */	lwz r0, 0x8(r31)
+/* 8137654C | 7C 19 00 00 */	cmpw r25, r0
+/* 81376550 | 41 80 FF B4 */	blt .L_81376504
+/* 81376554 | 54 00 10 3A */	slwi r0, r0, 2
+/* 81376558 | 7C 7F 02 14 */	add r3, r31, r0
+/* 8137655C | 80 03 00 1C */	lwz r0, 0x1c(r3)
+/* 81376560 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81376564 | 41 82 00 30 */	beq .L_81376594
+/* 81376568 | 83 7F 04 3C */	lwz r27, 0x43c(r31)
+/* 8137656C | 7F 63 DB 78 */	mr r3, r27
+/* 81376570 | 48 00 16 C1 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81376574 | 38 00 00 01 */	li r0, 0x1
+/* 81376578 | 38 80 00 00 */	li r4, 0x0
+/* 8137657C | 90 1B 00 14 */	stw r0, 0x14(r27)
+/* 81376580 | 80 7F 00 08 */	lwz r3, 0x8(r31)
+/* 81376584 | 38 03 00 01 */	addi r0, r3, 0x1
+/* 81376588 | 54 00 10 3A */	slwi r0, r0, 2
+/* 8137658C | 7C 7F 02 14 */	add r3, r31, r0
+/* 81376590 | 90 83 00 1C */	stw r4, 0x1c(r3)
 .L_81376594:
-/* 81376594 00044994  80 7F 00 08 */	lwz r3, 0x8(r31)
-/* 81376598 00044998  38 03 00 01 */	addi r0, r3, 0x1
-/* 8137659C 0004499C  54 00 10 3A */	slwi r0, r0, 2
-/* 813765A0 000449A0  7C 7F 02 14 */	add r3, r31, r0
-/* 813765A4 000449A4  80 03 00 1C */	lwz r0, 0x1c(r3)
-/* 813765A8 000449A8  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813765AC 000449AC  41 82 00 A0 */	beq .L_8137664C
-/* 813765B0 000449B0  80 1F 00 00 */	lwz r0, 0x0(r31)
-/* 813765B4 000449B4  2C 00 00 01 */	cmpwi r0, 0x1
-/* 813765B8 000449B8  40 82 00 54 */	bne .L_8137660C
-/* 813765BC 000449BC  80 1F 00 18 */	lwz r0, 0x18(r31)
-/* 813765C0 000449C0  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813765C4 000449C4  40 82 00 88 */	bne .L_8137664C
-/* 813765C8 000449C8  7F E3 FB 78 */	mr r3, r31
-/* 813765CC 000449CC  38 80 00 05 */	li r4, 0x5
-/* 813765D0 000449D0  38 A0 00 14 */	li r5, 0x14
-/* 813765D4 000449D4  48 00 04 ED */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 813765D8 000449D8  54 60 10 3A */	slwi r0, r3, 2
-/* 813765DC 000449DC  7C 7F 02 14 */	add r3, r31, r0
-/* 813765E0 000449E0  83 63 02 E4 */	lwz r27, 0x2e4(r3)
-/* 813765E4 000449E4  7F 63 DB 78 */	mr r3, r27
-/* 813765E8 000449E8  48 00 16 49 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 813765EC 000449EC  38 00 00 01 */	li r0, 0x1
-/* 813765F0 000449F0  38 80 00 00 */	li r4, 0x0
-/* 813765F4 000449F4  90 1B 00 14 */	stw r0, 0x14(r27)
-/* 813765F8 000449F8  80 1F 00 08 */	lwz r0, 0x8(r31)
-/* 813765FC 000449FC  54 00 10 3A */	slwi r0, r0, 2
-/* 81376600 00044A00  7C 7F 02 14 */	add r3, r31, r0
-/* 81376604 00044A04  90 83 00 1C */	stw r4, 0x1c(r3)
-/* 81376608 00044A08  48 00 00 44 */	b .L_8137664C
+/* 81376594 | 80 7F 00 08 */	lwz r3, 0x8(r31)
+/* 81376598 | 38 03 00 01 */	addi r0, r3, 0x1
+/* 8137659C | 54 00 10 3A */	slwi r0, r0, 2
+/* 813765A0 | 7C 7F 02 14 */	add r3, r31, r0
+/* 813765A4 | 80 03 00 1C */	lwz r0, 0x1c(r3)
+/* 813765A8 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813765AC | 41 82 00 A0 */	beq .L_8137664C
+/* 813765B0 | 80 1F 00 00 */	lwz r0, 0x0(r31)
+/* 813765B4 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 813765B8 | 40 82 00 54 */	bne .L_8137660C
+/* 813765BC | 80 1F 00 18 */	lwz r0, 0x18(r31)
+/* 813765C0 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813765C4 | 40 82 00 88 */	bne .L_8137664C
+/* 813765C8 | 7F E3 FB 78 */	mr r3, r31
+/* 813765CC | 38 80 00 05 */	li r4, 0x5
+/* 813765D0 | 38 A0 00 14 */	li r5, 0x14
+/* 813765D4 | 48 00 04 ED */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 813765D8 | 54 60 10 3A */	slwi r0, r3, 2
+/* 813765DC | 7C 7F 02 14 */	add r3, r31, r0
+/* 813765E0 | 83 63 02 E4 */	lwz r27, 0x2e4(r3)
+/* 813765E4 | 7F 63 DB 78 */	mr r3, r27
+/* 813765E8 | 48 00 16 49 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 813765EC | 38 00 00 01 */	li r0, 0x1
+/* 813765F0 | 38 80 00 00 */	li r4, 0x0
+/* 813765F4 | 90 1B 00 14 */	stw r0, 0x14(r27)
+/* 813765F8 | 80 1F 00 08 */	lwz r0, 0x8(r31)
+/* 813765FC | 54 00 10 3A */	slwi r0, r0, 2
+/* 81376600 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81376604 | 90 83 00 1C */	stw r4, 0x1c(r3)
+/* 81376608 | 48 00 00 44 */	b .L_8137664C
 .L_8137660C:
-/* 8137660C 00044A0C  7F E3 FB 78 */	mr r3, r31
-/* 81376610 00044A10  38 80 00 05 */	li r4, 0x5
-/* 81376614 00044A14  38 A0 00 03 */	li r5, 0x3
-/* 81376618 00044A18  48 00 04 A9 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 8137661C 00044A1C  54 60 10 3A */	slwi r0, r3, 2
-/* 81376620 00044A20  7C 7F 02 14 */	add r3, r31, r0
-/* 81376624 00044A24  83 63 02 E4 */	lwz r27, 0x2e4(r3)
-/* 81376628 00044A28  7F 63 DB 78 */	mr r3, r27
-/* 8137662C 00044A2C  48 00 16 05 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81376630 00044A30  38 00 00 01 */	li r0, 0x1
-/* 81376634 00044A34  38 80 00 00 */	li r4, 0x0
-/* 81376638 00044A38  90 1B 00 14 */	stw r0, 0x14(r27)
-/* 8137663C 00044A3C  80 1F 00 08 */	lwz r0, 0x8(r31)
-/* 81376640 00044A40  54 00 10 3A */	slwi r0, r0, 2
-/* 81376644 00044A44  7C 7F 02 14 */	add r3, r31, r0
-/* 81376648 00044A48  90 83 00 1C */	stw r4, 0x1c(r3)
+/* 8137660C | 7F E3 FB 78 */	mr r3, r31
+/* 81376610 | 38 80 00 05 */	li r4, 0x5
+/* 81376614 | 38 A0 00 03 */	li r5, 0x3
+/* 81376618 | 48 00 04 A9 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 8137661C | 54 60 10 3A */	slwi r0, r3, 2
+/* 81376620 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81376624 | 83 63 02 E4 */	lwz r27, 0x2e4(r3)
+/* 81376628 | 7F 63 DB 78 */	mr r3, r27
+/* 8137662C | 48 00 16 05 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81376630 | 38 00 00 01 */	li r0, 0x1
+/* 81376634 | 38 80 00 00 */	li r4, 0x0
+/* 81376638 | 90 1B 00 14 */	stw r0, 0x14(r27)
+/* 8137663C | 80 1F 00 08 */	lwz r0, 0x8(r31)
+/* 81376640 | 54 00 10 3A */	slwi r0, r0, 2
+/* 81376644 | 7C 7F 02 14 */	add r3, r31, r0
+/* 81376648 | 90 83 00 1C */	stw r4, 0x1c(r3)
 .L_8137664C:
-/* 8137664C 00044A4C  39 61 00 30 */	addi r11, r1, 0x30
-/* 81376650 00044A50  48 28 2E B5 */	bl _restgpr_25
-/* 81376654 00044A54  80 01 00 34 */	lwz r0, 0x34(r1)
-/* 81376658 00044A58  7C 08 03 A6 */	mtlr r0
-/* 8137665C 00044A5C  38 21 00 30 */	addi r1, r1, 0x30
-/* 81376660 00044A60  4E 80 00 20 */	blr
+/* 8137664C | 39 61 00 30 */	addi r11, r1, 0x30
+/* 81376650 | 48 28 2E B5 */	bl _restgpr_25
+/* 81376654 | 80 01 00 34 */	lwz r0, 0x34(r1)
+/* 81376658 | 7C 08 03 A6 */	mtlr r0
+/* 8137665C | 38 21 00 30 */	addi r1, r1, 0x30
+/* 81376660 | 4E 80 00 20 */	blr
 .endfn reset_btn__Q210homebutton10HomeButtonFv
 
 # .text:0x50BC | 0x81376664 | size: 0x6C
 # homebutton::HomeButton::reset_control()
 .fn reset_control__Q210homebutton10HomeButtonFv, global
-/* 81376664 00044A64  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 81376668 00044A68  7C 08 02 A6 */	mflr r0
-/* 8137666C 00044A6C  90 01 00 24 */	stw r0, 0x24(r1)
-/* 81376670 00044A70  39 61 00 20 */	addi r11, r1, 0x20
-/* 81376674 00044A74  48 28 2E 51 */	bl _savegpr_28
-/* 81376678 00044A78  7C 7C 1B 78 */	mr r28, r3
-/* 8137667C 00044A7C  3B A0 00 00 */	li r29, 0x0
-/* 81376680 00044A80  3B E0 00 01 */	li r31, 0x1
+/* 81376664 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81376668 | 7C 08 02 A6 */	mflr r0
+/* 8137666C | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 81376670 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81376674 | 48 28 2E 51 */	bl _savegpr_28
+/* 81376678 | 7C 7C 1B 78 */	mr r28, r3
+/* 8137667C | 3B A0 00 00 */	li r29, 0x0
+/* 81376680 | 3B E0 00 01 */	li r31, 0x1
 .L_81376684:
-/* 81376684 00044A84  7F 83 E3 78 */	mr r3, r28
-/* 81376688 00044A88  38 9D 00 06 */	addi r4, r29, 0x6
-/* 8137668C 00044A8C  38 A0 00 07 */	li r5, 0x7
-/* 81376690 00044A90  48 00 04 31 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81376694 00044A94  54 60 10 3A */	slwi r0, r3, 2
-/* 81376698 00044A98  7C 7C 02 14 */	add r3, r28, r0
-/* 8137669C 00044A9C  83 C3 02 E4 */	lwz r30, 0x2e4(r3)
-/* 813766A0 00044AA0  7F C3 F3 78 */	mr r3, r30
-/* 813766A4 00044AA4  48 00 15 8D */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 813766A8 00044AA8  3B BD 00 01 */	addi r29, r29, 0x1
-/* 813766AC 00044AAC  93 FE 00 14 */	stw r31, 0x14(r30)
-/* 813766B0 00044AB0  2C 1D 00 05 */	cmpwi r29, 0x5
-/* 813766B4 00044AB4  41 80 FF D0 */	blt .L_81376684
-/* 813766B8 00044AB8  39 61 00 20 */	addi r11, r1, 0x20
-/* 813766BC 00044ABC  48 28 2E 55 */	bl _restgpr_28
-/* 813766C0 00044AC0  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 813766C4 00044AC4  7C 08 03 A6 */	mtlr r0
-/* 813766C8 00044AC8  38 21 00 20 */	addi r1, r1, 0x20
-/* 813766CC 00044ACC  4E 80 00 20 */	blr
+/* 81376684 | 7F 83 E3 78 */	mr r3, r28
+/* 81376688 | 38 9D 00 06 */	addi r4, r29, 0x6
+/* 8137668C | 38 A0 00 07 */	li r5, 0x7
+/* 81376690 | 48 00 04 31 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81376694 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81376698 | 7C 7C 02 14 */	add r3, r28, r0
+/* 8137669C | 83 C3 02 E4 */	lwz r30, 0x2e4(r3)
+/* 813766A0 | 7F C3 F3 78 */	mr r3, r30
+/* 813766A4 | 48 00 15 8D */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 813766A8 | 3B BD 00 01 */	addi r29, r29, 0x1
+/* 813766AC | 93 FE 00 14 */	stw r31, 0x14(r30)
+/* 813766B0 | 2C 1D 00 05 */	cmpwi r29, 0x5
+/* 813766B4 | 41 80 FF D0 */	blt .L_81376684
+/* 813766B8 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813766BC | 48 28 2E 55 */	bl _restgpr_28
+/* 813766C0 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 813766C4 | 7C 08 03 A6 */	mtlr r0
+/* 813766C8 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 813766CC | 4E 80 00 20 */	blr
 .endfn reset_control__Q210homebutton10HomeButtonFv
 
 # .text:0x5128 | 0x813766D0 | size: 0x80
 # homebutton::HomeButton::reset_window()
 .fn reset_window__Q210homebutton10HomeButtonFv, global
-/* 813766D0 00044AD0  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 813766D4 00044AD4  7C 08 02 A6 */	mflr r0
-/* 813766D8 00044AD8  90 01 00 24 */	stw r0, 0x24(r1)
-/* 813766DC 00044ADC  39 61 00 20 */	addi r11, r1, 0x20
-/* 813766E0 00044AE0  48 28 2D E9 */	bl _savegpr_29
-/* 813766E4 00044AE4  7C 7D 1B 78 */	mr r29, r3
-/* 813766E8 00044AE8  38 80 00 11 */	li r4, 0x11
-/* 813766EC 00044AEC  38 A0 00 0C */	li r5, 0xc
-/* 813766F0 00044AF0  48 00 03 D1 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 813766F4 00044AF4  54 60 10 3A */	slwi r0, r3, 2
-/* 813766F8 00044AF8  7C 7D 02 14 */	add r3, r29, r0
-/* 813766FC 00044AFC  83 C3 02 E4 */	lwz r30, 0x2e4(r3)
-/* 81376700 00044B00  7F C3 F3 78 */	mr r3, r30
-/* 81376704 00044B04  48 00 15 2D */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81376708 00044B08  3B E0 00 01 */	li r31, 0x1
-/* 8137670C 00044B0C  7F A3 EB 78 */	mr r3, r29
-/* 81376710 00044B10  93 FE 00 14 */	stw r31, 0x14(r30)
-/* 81376714 00044B14  38 80 00 12 */	li r4, 0x12
-/* 81376718 00044B18  38 A0 00 0C */	li r5, 0xc
-/* 8137671C 00044B1C  48 00 03 A5 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81376720 00044B20  54 60 10 3A */	slwi r0, r3, 2
-/* 81376724 00044B24  7C 7D 02 14 */	add r3, r29, r0
-/* 81376728 00044B28  83 C3 02 E4 */	lwz r30, 0x2e4(r3)
-/* 8137672C 00044B2C  7F C3 F3 78 */	mr r3, r30
-/* 81376730 00044B30  48 00 15 01 */	bl initFrame__Q210homebutton15FrameControllerFv
-/* 81376734 00044B34  93 FE 00 14 */	stw r31, 0x14(r30)
-/* 81376738 00044B38  39 61 00 20 */	addi r11, r1, 0x20
-/* 8137673C 00044B3C  48 28 2D D9 */	bl _restgpr_29
-/* 81376740 00044B40  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 81376744 00044B44  7C 08 03 A6 */	mtlr r0
-/* 81376748 00044B48  38 21 00 20 */	addi r1, r1, 0x20
-/* 8137674C 00044B4C  4E 80 00 20 */	blr
+/* 813766D0 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 813766D4 | 7C 08 02 A6 */	mflr r0
+/* 813766D8 | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 813766DC | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813766E0 | 48 28 2D E9 */	bl _savegpr_29
+/* 813766E4 | 7C 7D 1B 78 */	mr r29, r3
+/* 813766E8 | 38 80 00 11 */	li r4, 0x11
+/* 813766EC | 38 A0 00 0C */	li r5, 0xc
+/* 813766F0 | 48 00 03 D1 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 813766F4 | 54 60 10 3A */	slwi r0, r3, 2
+/* 813766F8 | 7C 7D 02 14 */	add r3, r29, r0
+/* 813766FC | 83 C3 02 E4 */	lwz r30, 0x2e4(r3)
+/* 81376700 | 7F C3 F3 78 */	mr r3, r30
+/* 81376704 | 48 00 15 2D */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81376708 | 3B E0 00 01 */	li r31, 0x1
+/* 8137670C | 7F A3 EB 78 */	mr r3, r29
+/* 81376710 | 93 FE 00 14 */	stw r31, 0x14(r30)
+/* 81376714 | 38 80 00 12 */	li r4, 0x12
+/* 81376718 | 38 A0 00 0C */	li r5, 0xc
+/* 8137671C | 48 00 03 A5 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81376720 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81376724 | 7C 7D 02 14 */	add r3, r29, r0
+/* 81376728 | 83 C3 02 E4 */	lwz r30, 0x2e4(r3)
+/* 8137672C | 7F C3 F3 78 */	mr r3, r30
+/* 81376730 | 48 00 15 01 */	bl initFrame__Q210homebutton15FrameControllerFv
+/* 81376734 | 93 FE 00 14 */	stw r31, 0x14(r30)
+/* 81376738 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 8137673C | 48 28 2D D9 */	bl _restgpr_29
+/* 81376740 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81376744 | 7C 08 03 A6 */	mtlr r0
+/* 81376748 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 8137674C | 4E 80 00 20 */	blr
 .endfn reset_window__Q210homebutton10HomeButtonFv
 
 # .text:0x51A8 | 0x81376750 | size: 0x94
 # homebutton::HomeButton::reset_battery()
 .fn reset_battery__Q210homebutton10HomeButtonFv, global
-/* 81376750 00044B50  94 21 FF D0 */	stwu r1, -0x30(r1)
-/* 81376754 00044B54  7C 08 02 A6 */	mflr r0
-/* 81376758 00044B58  90 01 00 34 */	stw r0, 0x34(r1)
-/* 8137675C 00044B5C  39 61 00 30 */	addi r11, r1, 0x30
-/* 81376760 00044B60  48 28 2D 59 */	bl _savegpr_25
-/* 81376764 00044B64  3F A0 81 64 */	lis r29, scBatteryPaneName__Q210homebutton10HomeButton@ha
-/* 81376768 00044B68  7C 79 1B 78 */	mr r25, r3
-/* 8137676C 00044B6C  3B BD 54 AC */	addi r29, r29, scBatteryPaneName__Q210homebutton10HomeButton@l
-/* 81376770 00044B70  3B 60 00 00 */	li r27, 0x0
-/* 81376774 00044B74  3B E0 00 00 */	li r31, 0x0
+/* 81376750 | 94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 81376754 | 7C 08 02 A6 */	mflr r0
+/* 81376758 | 90 01 00 34 */	stw r0, 0x34(r1)
+/* 8137675C | 39 61 00 30 */	addi r11, r1, 0x30
+/* 81376760 | 48 28 2D 59 */	bl _savegpr_25
+/* 81376764 | 3F A0 81 64 */	lis r29, scBatteryPaneName__Q210homebutton10HomeButton@ha
+/* 81376768 | 7C 79 1B 78 */	mr r25, r3
+/* 8137676C | 3B BD 54 AC */	addi r29, r29, scBatteryPaneName__Q210homebutton10HomeButton@l
+/* 81376770 | 3B 60 00 00 */	li r27, 0x0
+/* 81376774 | 3B E0 00 00 */	li r31, 0x0
 .L_81376778:
-/* 81376778 00044B78  7F 9D FA 14 */	add r28, r29, r31
-/* 8137677C 00044B7C  3B 40 00 00 */	li r26, 0x0
-/* 81376780 00044B80  3B C0 00 00 */	li r30, 0x0
+/* 81376778 | 7F 9D FA 14 */	add r28, r29, r31
+/* 8137677C | 3B 40 00 00 */	li r26, 0x0
+/* 81376780 | 3B C0 00 00 */	li r30, 0x0
 .L_81376784:
-/* 81376784 00044B84  80 79 02 2C */	lwz r3, 0x22c(r25)
-/* 81376788 00044B88  38 A0 00 01 */	li r5, 0x1
-/* 8137678C 00044B8C  7C 9C F0 2E */	lwzx r4, r28, r30
-/* 81376790 00044B90  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81376794 00044B94  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81376798 00044B98  81 8C 00 3C */	lwz r12, 0x3c(r12)
-/* 8137679C 00044B9C  7D 89 03 A6 */	mtctr r12
-/* 813767A0 00044BA0  4E 80 04 21 */	bctrl
-/* 813767A4 00044BA4  38 80 00 00 */	li r4, 0x0
-/* 813767A8 00044BA8  4B FC DC 6D */	bl SetVisible__Q34nw4r3lyt4PaneFb
-/* 813767AC 00044BAC  3B 5A 00 01 */	addi r26, r26, 0x1
-/* 813767B0 00044BB0  3B DE 00 04 */	addi r30, r30, 0x4
-/* 813767B4 00044BB4  2C 1A 00 04 */	cmpwi r26, 0x4
-/* 813767B8 00044BB8  41 80 FF CC */	blt .L_81376784
-/* 813767BC 00044BBC  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 813767C0 00044BC0  3B FF 00 10 */	addi r31, r31, 0x10
-/* 813767C4 00044BC4  2C 1B 00 04 */	cmpwi r27, 0x4
-/* 813767C8 00044BC8  41 80 FF B0 */	blt .L_81376778
-/* 813767CC 00044BCC  39 61 00 30 */	addi r11, r1, 0x30
-/* 813767D0 00044BD0  48 28 2D 35 */	bl _restgpr_25
-/* 813767D4 00044BD4  80 01 00 34 */	lwz r0, 0x34(r1)
-/* 813767D8 00044BD8  7C 08 03 A6 */	mtlr r0
-/* 813767DC 00044BDC  38 21 00 30 */	addi r1, r1, 0x30
-/* 813767E0 00044BE0  4E 80 00 20 */	blr
+/* 81376784 | 80 79 02 2C */	lwz r3, 0x22c(r25)
+/* 81376788 | 38 A0 00 01 */	li r5, 0x1
+/* 8137678C | 7C 9C F0 2E */	lwzx r4, r28, r30
+/* 81376790 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81376794 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81376798 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
+/* 8137679C | 7D 89 03 A6 */	mtctr r12
+/* 813767A0 | 4E 80 04 21 */	bctrl
+/* 813767A4 | 38 80 00 00 */	li r4, 0x0
+/* 813767A8 | 4B FC DC 6D */	bl SetVisible__Q34nw4r3lyt4PaneFb
+/* 813767AC | 3B 5A 00 01 */	addi r26, r26, 0x1
+/* 813767B0 | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 813767B4 | 2C 1A 00 04 */	cmpwi r26, 0x4
+/* 813767B8 | 41 80 FF CC */	blt .L_81376784
+/* 813767BC | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 813767C0 | 3B FF 00 10 */	addi r31, r31, 0x10
+/* 813767C4 | 2C 1B 00 04 */	cmpwi r27, 0x4
+/* 813767C8 | 41 80 FF B0 */	blt .L_81376778
+/* 813767CC | 39 61 00 30 */	addi r11, r1, 0x30
+/* 813767D0 | 48 28 2D 35 */	bl _restgpr_25
+/* 813767D4 | 80 01 00 34 */	lwz r0, 0x34(r1)
+/* 813767D8 | 7C 08 03 A6 */	mtlr r0
+/* 813767DC | 38 21 00 30 */	addi r1, r1, 0x30
+/* 813767E0 | 4E 80 00 20 */	blr
 .endfn reset_battery__Q210homebutton10HomeButtonFv
 
 # .text:0x523C | 0x813767E4 | size: 0xA8
 # homebutton::HomeButton::reset_guiManager(int)
 .fn reset_guiManager__Q210homebutton10HomeButtonFi, global
-/* 813767E4 00044BE4  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 813767E8 00044BE8  7C 08 02 A6 */	mflr r0
-/* 813767EC 00044BEC  2C 04 00 00 */	cmpwi r4, 0x0
-/* 813767F0 00044BF0  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813767F4 00044BF4  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813767F8 00044BF8  93 C1 00 08 */	stw r30, 0x8(r1)
-/* 813767FC 00044BFC  7C 7E 1B 78 */	mr r30, r3
-/* 81376800 00044C00  40 80 00 48 */	bge .L_81376848
-/* 81376804 00044C04  3B E0 00 00 */	li r31, 0x0
+/* 813767E4 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 813767E8 | 7C 08 02 A6 */	mflr r0
+/* 813767EC | 2C 04 00 00 */	cmpwi r4, 0x0
+/* 813767F0 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 813767F4 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 813767F8 | 93 C1 00 08 */	stw r30, 0x8(r1)
+/* 813767FC | 7C 7E 1B 78 */	mr r30, r3
+/* 81376800 | 40 80 00 48 */	bge .L_81376848
+/* 81376804 | 3B E0 00 00 */	li r31, 0x0
 .L_81376808:
-/* 81376808 00044C08  80 7E 02 44 */	lwz r3, 0x244(r30)
-/* 8137680C 00044C0C  7F E4 FB 78 */	mr r4, r31
-/* 81376810 00044C10  C0 22 83 48 */	lfs f1, lbl_81694748@sda21(r0)
-/* 81376814 00044C14  38 A0 00 00 */	li r5, 0x0
-/* 81376818 00044C18  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 8137681C 00044C1C  38 C0 00 00 */	li r6, 0x0
-/* 81376820 00044C20  FC 40 08 90 */	fmr f2, f1
-/* 81376824 00044C24  38 E0 00 00 */	li r7, 0x0
-/* 81376828 00044C28  81 8C 00 2C */	lwz r12, 0x2c(r12)
-/* 8137682C 00044C2C  39 00 00 00 */	li r8, 0x0
-/* 81376830 00044C30  7D 89 03 A6 */	mtctr r12
-/* 81376834 00044C34  4E 80 04 21 */	bctrl
-/* 81376838 00044C38  3B FF 00 01 */	addi r31, r31, 0x1
-/* 8137683C 00044C3C  2C 1F 00 08 */	cmpwi r31, 0x8
-/* 81376840 00044C40  41 80 FF C8 */	blt .L_81376808
-/* 81376844 00044C44  48 00 00 30 */	b .L_81376874
+/* 81376808 | 80 7E 02 44 */	lwz r3, 0x244(r30)
+/* 8137680C | 7F E4 FB 78 */	mr r4, r31
+/* 81376810 | C0 22 83 48 */	lfs f1, lbl_81694748@sda21(r0)
+/* 81376814 | 38 A0 00 00 */	li r5, 0x0
+/* 81376818 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 8137681C | 38 C0 00 00 */	li r6, 0x0
+/* 81376820 | FC 40 08 90 */	fmr f2, f1
+/* 81376824 | 38 E0 00 00 */	li r7, 0x0
+/* 81376828 | 81 8C 00 2C */	lwz r12, 0x2c(r12)
+/* 8137682C | 39 00 00 00 */	li r8, 0x0
+/* 81376830 | 7D 89 03 A6 */	mtctr r12
+/* 81376834 | 4E 80 04 21 */	bctrl
+/* 81376838 | 3B FF 00 01 */	addi r31, r31, 0x1
+/* 8137683C | 2C 1F 00 08 */	cmpwi r31, 0x8
+/* 81376840 | 41 80 FF C8 */	blt .L_81376808
+/* 81376844 | 48 00 00 30 */	b .L_81376874
 .L_81376848:
-/* 81376848 00044C48  80 63 02 44 */	lwz r3, 0x244(r3)
-/* 8137684C 00044C4C  38 A0 00 00 */	li r5, 0x0
-/* 81376850 00044C50  C0 22 83 48 */	lfs f1, lbl_81694748@sda21(r0)
-/* 81376854 00044C54  38 C0 00 00 */	li r6, 0x0
-/* 81376858 00044C58  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 8137685C 00044C5C  38 E0 00 00 */	li r7, 0x0
-/* 81376860 00044C60  FC 40 08 90 */	fmr f2, f1
-/* 81376864 00044C64  39 00 00 00 */	li r8, 0x0
-/* 81376868 00044C68  81 8C 00 2C */	lwz r12, 0x2c(r12)
-/* 8137686C 00044C6C  7D 89 03 A6 */	mtctr r12
-/* 81376870 00044C70  4E 80 04 21 */	bctrl
+/* 81376848 | 80 63 02 44 */	lwz r3, 0x244(r3)
+/* 8137684C | 38 A0 00 00 */	li r5, 0x0
+/* 81376850 | C0 22 83 48 */	lfs f1, lbl_81694748@sda21(r0)
+/* 81376854 | 38 C0 00 00 */	li r6, 0x0
+/* 81376858 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 8137685C | 38 E0 00 00 */	li r7, 0x0
+/* 81376860 | FC 40 08 90 */	fmr f2, f1
+/* 81376864 | 39 00 00 00 */	li r8, 0x0
+/* 81376868 | 81 8C 00 2C */	lwz r12, 0x2c(r12)
+/* 8137686C | 7D 89 03 A6 */	mtctr r12
+/* 81376870 | 4E 80 04 21 */	bctrl
 .L_81376874:
-/* 81376874 00044C74  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 81376878 00044C78  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 8137687C 00044C7C  83 C1 00 08 */	lwz r30, 0x8(r1)
-/* 81376880 00044C80  7C 08 03 A6 */	mtlr r0
-/* 81376884 00044C84  38 21 00 10 */	addi r1, r1, 0x10
-/* 81376888 00044C88  4E 80 00 20 */	blr
+/* 81376874 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 81376878 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8137687C | 83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 81376880 | 7C 08 03 A6 */	mtlr r0
+/* 81376884 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 81376888 | 4E 80 00 20 */	blr
 .endfn reset_guiManager__Q210homebutton10HomeButtonFi
 
 # .text:0x52E4 | 0x8137688C | size: 0x3C
 # homebutton::HomeButton::isUpBarActive() const
 .fn isUpBarActive__Q210homebutton10HomeButtonCFv, global
-/* 8137688C 00044C8C  80 03 00 10 */	lwz r0, 0x10(r3)
-/* 81376890 00044C90  38 A0 00 01 */	li r5, 0x1
-/* 81376894 00044C94  2C 00 00 02 */	cmpwi r0, 0x2
-/* 81376898 00044C98  40 82 00 24 */	bne .L_813768BC
-/* 8137689C 00044C9C  80 83 04 3C */	lwz r4, 0x43c(r3)
-/* 813768A0 00044CA0  80 04 00 14 */	lwz r0, 0x14(r4)
-/* 813768A4 00044CA4  2C 00 00 01 */	cmpwi r0, 0x1
-/* 813768A8 00044CA8  41 82 00 14 */	beq .L_813768BC
-/* 813768AC 00044CAC  80 63 04 18 */	lwz r3, 0x418(r3)
-/* 813768B0 00044CB0  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 813768B4 00044CB4  2C 00 00 01 */	cmpwi r0, 0x1
-/* 813768B8 00044CB8  40 82 00 08 */	bne .L_813768C0
+/* 8137688C | 80 03 00 10 */	lwz r0, 0x10(r3)
+/* 81376890 | 38 A0 00 01 */	li r5, 0x1
+/* 81376894 | 2C 00 00 02 */	cmpwi r0, 0x2
+/* 81376898 | 40 82 00 24 */	bne .L_813768BC
+/* 8137689C | 80 83 04 3C */	lwz r4, 0x43c(r3)
+/* 813768A0 | 80 04 00 14 */	lwz r0, 0x14(r4)
+/* 813768A4 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 813768A8 | 41 82 00 14 */	beq .L_813768BC
+/* 813768AC | 80 63 04 18 */	lwz r3, 0x418(r3)
+/* 813768B0 | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 813768B4 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 813768B8 | 40 82 00 08 */	bne .L_813768C0
 .L_813768BC:
-/* 813768BC 00044CBC  38 A0 00 00 */	li r5, 0x0
+/* 813768BC | 38 A0 00 00 */	li r5, 0x0
 .L_813768C0:
-/* 813768C0 00044CC0  7C A3 2B 78 */	mr r3, r5
-/* 813768C4 00044CC4  4E 80 00 20 */	blr
+/* 813768C0 | 7C A3 2B 78 */	mr r3, r5
+/* 813768C4 | 4E 80 00 20 */	blr
 .endfn isUpBarActive__Q210homebutton10HomeButtonCFv
 
 # .text:0x5320 | 0x813768C8 | size: 0xF0
 # homebutton::HomeButton::isDownBarActive()
 .fn isDownBarActive__Q210homebutton10HomeButtonFv, global
-/* 813768C8 00044CC8  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 813768CC 00044CCC  7C 08 02 A6 */	mflr r0
-/* 813768D0 00044CD0  90 01 00 24 */	stw r0, 0x24(r1)
-/* 813768D4 00044CD4  39 61 00 20 */	addi r11, r1, 0x20
-/* 813768D8 00044CD8  48 28 2B E9 */	bl _savegpr_27
-/* 813768DC 00044CDC  7C 7E 1B 78 */	mr r30, r3
-/* 813768E0 00044CE0  3B E0 00 01 */	li r31, 0x1
-/* 813768E4 00044CE4  38 80 00 04 */	li r4, 0x4
-/* 813768E8 00044CE8  38 A0 00 02 */	li r5, 0x2
-/* 813768EC 00044CEC  48 00 01 D5 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 813768F0 00044CF0  7C 7B 1B 78 */	mr r27, r3
-/* 813768F4 00044CF4  7F C3 F3 78 */	mr r3, r30
-/* 813768F8 00044CF8  38 80 00 05 */	li r4, 0x5
-/* 813768FC 00044CFC  38 A0 00 03 */	li r5, 0x3
-/* 81376900 00044D00  48 00 01 C1 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81376904 00044D04  7C 7C 1B 78 */	mr r28, r3
-/* 81376908 00044D08  7F C3 F3 78 */	mr r3, r30
-/* 8137690C 00044D0C  38 80 00 04 */	li r4, 0x4
-/* 81376910 00044D10  38 A0 00 13 */	li r5, 0x13
-/* 81376914 00044D14  48 00 01 AD */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 81376918 00044D18  7C 7D 1B 78 */	mr r29, r3
-/* 8137691C 00044D1C  7F C3 F3 78 */	mr r3, r30
-/* 81376920 00044D20  38 80 00 05 */	li r4, 0x5
-/* 81376924 00044D24  38 A0 00 14 */	li r5, 0x14
-/* 81376928 00044D28  48 00 01 99 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
-/* 8137692C 00044D2C  80 1E 00 10 */	lwz r0, 0x10(r30)
-/* 81376930 00044D30  2C 00 00 02 */	cmpwi r0, 0x2
-/* 81376934 00044D34  40 82 00 64 */	bne .L_81376998
-/* 81376938 00044D38  57 60 10 3A */	slwi r0, r27, 2
-/* 8137693C 00044D3C  7C 9E 02 14 */	add r4, r30, r0
-/* 81376940 00044D40  80 84 02 E4 */	lwz r4, 0x2e4(r4)
-/* 81376944 00044D44  80 04 00 14 */	lwz r0, 0x14(r4)
-/* 81376948 00044D48  2C 00 00 01 */	cmpwi r0, 0x1
-/* 8137694C 00044D4C  41 82 00 4C */	beq .L_81376998
-/* 81376950 00044D50  57 80 10 3A */	slwi r0, r28, 2
-/* 81376954 00044D54  7C 9E 02 14 */	add r4, r30, r0
-/* 81376958 00044D58  80 84 02 E4 */	lwz r4, 0x2e4(r4)
-/* 8137695C 00044D5C  80 04 00 14 */	lwz r0, 0x14(r4)
-/* 81376960 00044D60  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81376964 00044D64  41 82 00 34 */	beq .L_81376998
-/* 81376968 00044D68  57 A0 10 3A */	slwi r0, r29, 2
-/* 8137696C 00044D6C  7C 9E 02 14 */	add r4, r30, r0
-/* 81376970 00044D70  80 84 02 E4 */	lwz r4, 0x2e4(r4)
-/* 81376974 00044D74  80 04 00 14 */	lwz r0, 0x14(r4)
-/* 81376978 00044D78  2C 00 00 01 */	cmpwi r0, 0x1
-/* 8137697C 00044D7C  41 82 00 1C */	beq .L_81376998
-/* 81376980 00044D80  54 60 10 3A */	slwi r0, r3, 2
-/* 81376984 00044D84  7C 7E 02 14 */	add r3, r30, r0
-/* 81376988 00044D88  80 63 02 E4 */	lwz r3, 0x2e4(r3)
-/* 8137698C 00044D8C  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 81376990 00044D90  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81376994 00044D94  40 82 00 08 */	bne .L_8137699C
+/* 813768C8 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 813768CC | 7C 08 02 A6 */	mflr r0
+/* 813768D0 | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 813768D4 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813768D8 | 48 28 2B E9 */	bl _savegpr_27
+/* 813768DC | 7C 7E 1B 78 */	mr r30, r3
+/* 813768E0 | 3B E0 00 01 */	li r31, 0x1
+/* 813768E4 | 38 80 00 04 */	li r4, 0x4
+/* 813768E8 | 38 A0 00 02 */	li r5, 0x2
+/* 813768EC | 48 00 01 D5 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 813768F0 | 7C 7B 1B 78 */	mr r27, r3
+/* 813768F4 | 7F C3 F3 78 */	mr r3, r30
+/* 813768F8 | 38 80 00 05 */	li r4, 0x5
+/* 813768FC | 38 A0 00 03 */	li r5, 0x3
+/* 81376900 | 48 00 01 C1 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81376904 | 7C 7C 1B 78 */	mr r28, r3
+/* 81376908 | 7F C3 F3 78 */	mr r3, r30
+/* 8137690C | 38 80 00 04 */	li r4, 0x4
+/* 81376910 | 38 A0 00 13 */	li r5, 0x13
+/* 81376914 | 48 00 01 AD */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 81376918 | 7C 7D 1B 78 */	mr r29, r3
+/* 8137691C | 7F C3 F3 78 */	mr r3, r30
+/* 81376920 | 38 80 00 05 */	li r4, 0x5
+/* 81376924 | 38 A0 00 14 */	li r5, 0x14
+/* 81376928 | 48 00 01 99 */	bl findGroupAnimator__Q210homebutton10HomeButtonFii
+/* 8137692C | 80 1E 00 10 */	lwz r0, 0x10(r30)
+/* 81376930 | 2C 00 00 02 */	cmpwi r0, 0x2
+/* 81376934 | 40 82 00 64 */	bne .L_81376998
+/* 81376938 | 57 60 10 3A */	slwi r0, r27, 2
+/* 8137693C | 7C 9E 02 14 */	add r4, r30, r0
+/* 81376940 | 80 84 02 E4 */	lwz r4, 0x2e4(r4)
+/* 81376944 | 80 04 00 14 */	lwz r0, 0x14(r4)
+/* 81376948 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 8137694C | 41 82 00 4C */	beq .L_81376998
+/* 81376950 | 57 80 10 3A */	slwi r0, r28, 2
+/* 81376954 | 7C 9E 02 14 */	add r4, r30, r0
+/* 81376958 | 80 84 02 E4 */	lwz r4, 0x2e4(r4)
+/* 8137695C | 80 04 00 14 */	lwz r0, 0x14(r4)
+/* 81376960 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81376964 | 41 82 00 34 */	beq .L_81376998
+/* 81376968 | 57 A0 10 3A */	slwi r0, r29, 2
+/* 8137696C | 7C 9E 02 14 */	add r4, r30, r0
+/* 81376970 | 80 84 02 E4 */	lwz r4, 0x2e4(r4)
+/* 81376974 | 80 04 00 14 */	lwz r0, 0x14(r4)
+/* 81376978 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 8137697C | 41 82 00 1C */	beq .L_81376998
+/* 81376980 | 54 60 10 3A */	slwi r0, r3, 2
+/* 81376984 | 7C 7E 02 14 */	add r3, r30, r0
+/* 81376988 | 80 63 02 E4 */	lwz r3, 0x2e4(r3)
+/* 8137698C | 80 03 00 14 */	lwz r0, 0x14(r3)
+/* 81376990 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81376994 | 40 82 00 08 */	bne .L_8137699C
 .L_81376998:
-/* 81376998 00044D98  3B E0 00 00 */	li r31, 0x0
+/* 81376998 | 3B E0 00 00 */	li r31, 0x0
 .L_8137699C:
-/* 8137699C 00044D9C  39 61 00 20 */	addi r11, r1, 0x20
-/* 813769A0 00044DA0  7F E3 FB 78 */	mr r3, r31
-/* 813769A4 00044DA4  48 28 2B 69 */	bl _restgpr_27
-/* 813769A8 00044DA8  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 813769AC 00044DAC  7C 08 03 A6 */	mtlr r0
-/* 813769B0 00044DB0  38 21 00 20 */	addi r1, r1, 0x20
-/* 813769B4 00044DB4  4E 80 00 20 */	blr
+/* 8137699C | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813769A0 | 7F E3 FB 78 */	mr r3, r31
+/* 813769A4 | 48 28 2B 69 */	bl _restgpr_27
+/* 813769A8 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 813769AC | 7C 08 03 A6 */	mtlr r0
+/* 813769B0 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 813769B4 | 4E 80 00 20 */	blr
 .endfn isDownBarActive__Q210homebutton10HomeButtonFv
 
 # .text:0x5410 | 0x813769B8 | size: 0xB8
 # homebutton::HomeButton::getPaneNo(const char*)
 .fn getPaneNo__Q210homebutton10HomeButtonFPCc, global
-/* 813769B8 00044DB8  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 813769BC 00044DBC  7C 08 02 A6 */	mflr r0
-/* 813769C0 00044DC0  90 01 00 24 */	stw r0, 0x24(r1)
-/* 813769C4 00044DC4  39 61 00 20 */	addi r11, r1, 0x20
-/* 813769C8 00044DC8  48 28 2A F5 */	bl _savegpr_26
-/* 813769CC 00044DCC  3F C0 81 64 */	lis r30, scBtnName__Q210homebutton10HomeButton@ha
-/* 813769D0 00044DD0  83 A3 00 08 */	lwz r29, 0x8(r3)
-/* 813769D4 00044DD4  7C 9A 23 78 */	mr r26, r4
-/* 813769D8 00044DD8  3B 80 FF FF */	li r28, -0x1
-/* 813769DC 00044DDC  3B DE 4B AC */	addi r30, r30, scBtnName__Q210homebutton10HomeButton@l
-/* 813769E0 00044DE0  3B 60 00 00 */	li r27, 0x0
-/* 813769E4 00044DE4  3B E0 00 00 */	li r31, 0x0
-/* 813769E8 00044DE8  48 00 00 28 */	b .L_81376A10
+/* 813769B8 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 813769BC | 7C 08 02 A6 */	mflr r0
+/* 813769C0 | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 813769C4 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 813769C8 | 48 28 2A F5 */	bl _savegpr_26
+/* 813769CC | 3F C0 81 64 */	lis r30, scBtnName__Q210homebutton10HomeButton@ha
+/* 813769D0 | 83 A3 00 08 */	lwz r29, 0x8(r3)
+/* 813769D4 | 7C 9A 23 78 */	mr r26, r4
+/* 813769D8 | 3B 80 FF FF */	li r28, -0x1
+/* 813769DC | 3B DE 4B AC */	addi r30, r30, scBtnName__Q210homebutton10HomeButton@l
+/* 813769E0 | 3B 60 00 00 */	li r27, 0x0
+/* 813769E4 | 3B E0 00 00 */	li r31, 0x0
+/* 813769E8 | 48 00 00 28 */	b .L_81376A10
 .L_813769EC:
-/* 813769EC 00044DEC  7C 9E F8 2E */	lwzx r4, r30, r31
-/* 813769F0 00044DF0  7F 43 D3 78 */	mr r3, r26
-/* 813769F4 00044DF4  48 28 BA 8D */	bl strcmp
-/* 813769F8 00044DF8  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813769FC 00044DFC  40 82 00 0C */	bne .L_81376A08
-/* 81376A00 00044E00  7F 7C DB 78 */	mr r28, r27
-/* 81376A04 00044E04  48 00 00 14 */	b .L_81376A18
+/* 813769EC | 7C 9E F8 2E */	lwzx r4, r30, r31
+/* 813769F0 | 7F 43 D3 78 */	mr r3, r26
+/* 813769F4 | 48 28 BA 8D */	bl strcmp
+/* 813769F8 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813769FC | 40 82 00 0C */	bne .L_81376A08
+/* 81376A00 | 7F 7C DB 78 */	mr r28, r27
+/* 81376A04 | 48 00 00 14 */	b .L_81376A18
 .L_81376A08:
-/* 81376A08 00044E08  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81376A0C 00044E0C  3B FF 00 04 */	addi r31, r31, 0x4
+/* 81376A08 | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81376A0C | 3B FF 00 04 */	addi r31, r31, 0x4
 .L_81376A10:
-/* 81376A10 00044E10  7C 1B E8 00 */	cmpw r27, r29
-/* 81376A14 00044E14  41 80 FF D8 */	blt .L_813769EC
+/* 81376A10 | 7C 1B E8 00 */	cmpw r27, r29
+/* 81376A14 | 41 80 FF D8 */	blt .L_813769EC
 .L_81376A18:
-/* 81376A18 00044E18  3F C0 81 64 */	lis r30, scFuncTouchPaneName__Q210homebutton10HomeButton@ha
-/* 81376A1C 00044E1C  3B 60 00 00 */	li r27, 0x0
-/* 81376A20 00044E20  3B DE 53 8C */	addi r30, r30, scFuncTouchPaneName__Q210homebutton10HomeButton@l
-/* 81376A24 00044E24  3B E0 00 00 */	li r31, 0x0
+/* 81376A18 | 3F C0 81 64 */	lis r30, scFuncTouchPaneName__Q210homebutton10HomeButton@ha
+/* 81376A1C | 3B 60 00 00 */	li r27, 0x0
+/* 81376A20 | 3B DE 53 8C */	addi r30, r30, scFuncTouchPaneName__Q210homebutton10HomeButton@l
+/* 81376A24 | 3B E0 00 00 */	li r31, 0x0
 .L_81376A28:
-/* 81376A28 00044E28  7C 9E F8 2E */	lwzx r4, r30, r31
-/* 81376A2C 00044E2C  7F 43 D3 78 */	mr r3, r26
-/* 81376A30 00044E30  48 28 BA 51 */	bl strcmp
-/* 81376A34 00044E34  2C 03 00 00 */	cmpwi r3, 0x0
-/* 81376A38 00044E38  40 82 00 0C */	bne .L_81376A44
-/* 81376A3C 00044E3C  7F 9B EA 14 */	add r28, r27, r29
-/* 81376A40 00044E40  48 00 00 14 */	b .L_81376A54
+/* 81376A28 | 7C 9E F8 2E */	lwzx r4, r30, r31
+/* 81376A2C | 7F 43 D3 78 */	mr r3, r26
+/* 81376A30 | 48 28 BA 51 */	bl strcmp
+/* 81376A34 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 81376A38 | 40 82 00 0C */	bne .L_81376A44
+/* 81376A3C | 7F 9B EA 14 */	add r28, r27, r29
+/* 81376A40 | 48 00 00 14 */	b .L_81376A54
 .L_81376A44:
-/* 81376A44 00044E44  3B 7B 00 01 */	addi r27, r27, 0x1
-/* 81376A48 00044E48  3B FF 00 04 */	addi r31, r31, 0x4
-/* 81376A4C 00044E4C  2C 1B 00 0A */	cmpwi r27, 0xa
-/* 81376A50 00044E50  41 80 FF D8 */	blt .L_81376A28
+/* 81376A44 | 3B 7B 00 01 */	addi r27, r27, 0x1
+/* 81376A48 | 3B FF 00 04 */	addi r31, r31, 0x4
+/* 81376A4C | 2C 1B 00 0A */	cmpwi r27, 0xa
+/* 81376A50 | 41 80 FF D8 */	blt .L_81376A28
 .L_81376A54:
-/* 81376A54 00044E54  39 61 00 20 */	addi r11, r1, 0x20
-/* 81376A58 00044E58  7F 83 E3 78 */	mr r3, r28
-/* 81376A5C 00044E5C  48 28 2A AD */	bl _restgpr_26
-/* 81376A60 00044E60  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 81376A64 00044E64  7C 08 03 A6 */	mtlr r0
-/* 81376A68 00044E68  38 21 00 20 */	addi r1, r1, 0x20
-/* 81376A6C 00044E6C  4E 80 00 20 */	blr
+/* 81376A54 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81376A58 | 7F 83 E3 78 */	mr r3, r28
+/* 81376A5C | 48 28 2A AD */	bl _restgpr_26
+/* 81376A60 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81376A64 | 7C 08 03 A6 */	mtlr r0
+/* 81376A68 | 38 21 00 20 */	addi r1, r1, 0x20
+/* 81376A6C | 4E 80 00 20 */	blr
 .endfn getPaneNo__Q210homebutton10HomeButtonFPCc
 
 # .text:0x54C8 | 0x81376A70 | size: 0x50
 # homebutton::HomeButton::findAnimator(int, int)
 .fn findAnimator__Q210homebutton10HomeButtonFii, global
-/* 81376A70 00044E70  80 03 00 0C */	lwz r0, 0xc(r3)
-/* 81376A74 00044E74  3C E0 81 61 */	lis r7, lbl_8160F378@ha
-/* 81376A78 00044E78  38 E7 F3 78 */	addi r7, r7, lbl_8160F378@l
-/* 81376A7C 00044E7C  38 60 00 00 */	li r3, 0x0
-/* 81376A80 00044E80  38 C0 00 00 */	li r6, 0x0
-/* 81376A84 00044E84  7C 09 03 A6 */	mtctr r0
-/* 81376A88 00044E88  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81376A8C 00044E8C  40 81 00 2C */	ble .L_81376AB8
+/* 81376A70 | 80 03 00 0C */	lwz r0, 0xc(r3)
+/* 81376A74 | 3C E0 81 61 */	lis r7, lbl_8160F378@ha
+/* 81376A78 | 38 E7 F3 78 */	addi r7, r7, lbl_8160F378@l
+/* 81376A7C | 38 60 00 00 */	li r3, 0x0
+/* 81376A80 | 38 C0 00 00 */	li r6, 0x0
+/* 81376A84 | 7C 09 03 A6 */	mtctr r0
+/* 81376A88 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81376A8C | 40 81 00 2C */	ble .L_81376AB8
 .L_81376A90:
-/* 81376A90 00044E90  7C 07 30 2E */	lwzx r0, r7, r6
-/* 81376A94 00044E94  7D 07 32 14 */	add r8, r7, r6
-/* 81376A98 00044E98  7C 04 00 00 */	cmpw r4, r0
-/* 81376A9C 00044E9C  40 82 00 10 */	bne .L_81376AAC
-/* 81376AA0 00044EA0  80 08 00 04 */	lwz r0, 0x4(r8)
-/* 81376AA4 00044EA4  7C 05 00 00 */	cmpw r5, r0
-/* 81376AA8 00044EA8  4D 82 00 20 */	beqlr
+/* 81376A90 | 7C 07 30 2E */	lwzx r0, r7, r6
+/* 81376A94 | 7D 07 32 14 */	add r8, r7, r6
+/* 81376A98 | 7C 04 00 00 */	cmpw r4, r0
+/* 81376A9C | 40 82 00 10 */	bne .L_81376AAC
+/* 81376AA0 | 80 08 00 04 */	lwz r0, 0x4(r8)
+/* 81376AA4 | 7C 05 00 00 */	cmpw r5, r0
+/* 81376AA8 | 4D 82 00 20 */	beqlr
 .L_81376AAC:
-/* 81376AAC 00044EAC  38 63 00 01 */	addi r3, r3, 0x1
-/* 81376AB0 00044EB0  38 C6 00 08 */	addi r6, r6, 0x8
-/* 81376AB4 00044EB4  42 00 FF DC */	bdnz .L_81376A90
+/* 81376AAC | 38 63 00 01 */	addi r3, r3, 0x1
+/* 81376AB0 | 38 C6 00 08 */	addi r6, r6, 0x8
+/* 81376AB4 | 42 00 FF DC */	bdnz .L_81376A90
 .L_81376AB8:
-/* 81376AB8 00044EB8  38 60 FF FF */	li r3, -0x1
-/* 81376ABC 00044EBC  4E 80 00 20 */	blr
+/* 81376AB8 | 38 60 FF FF */	li r3, -0x1
+/* 81376ABC | 4E 80 00 20 */	blr
 .endfn findAnimator__Q210homebutton10HomeButtonFii
 
 # .text:0x5518 | 0x81376AC0 | size: 0x48
 # homebutton::HomeButton::findGroupAnimator(int, int)
 .fn findGroupAnimator__Q210homebutton10HomeButtonFii, global
-/* 81376AC0 00044EC0  3C E0 81 61 */	lis r7, lbl_8160F3D8@ha
-/* 81376AC4 00044EC4  38 00 00 4A */	li r0, 0x4a
-/* 81376AC8 00044EC8  38 E7 F3 D8 */	addi r7, r7, lbl_8160F3D8@l
-/* 81376ACC 00044ECC  38 60 00 00 */	li r3, 0x0
-/* 81376AD0 00044ED0  38 C0 00 00 */	li r6, 0x0
-/* 81376AD4 00044ED4  7C 09 03 A6 */	mtctr r0
+/* 81376AC0 | 3C E0 81 61 */	lis r7, lbl_8160F3D8@ha
+/* 81376AC4 | 38 00 00 4A */	li r0, 0x4a
+/* 81376AC8 | 38 E7 F3 D8 */	addi r7, r7, lbl_8160F3D8@l
+/* 81376ACC | 38 60 00 00 */	li r3, 0x0
+/* 81376AD0 | 38 C0 00 00 */	li r6, 0x0
+/* 81376AD4 | 7C 09 03 A6 */	mtctr r0
 .L_81376AD8:
-/* 81376AD8 00044ED8  7C 07 30 2E */	lwzx r0, r7, r6
-/* 81376ADC 00044EDC  7D 07 32 14 */	add r8, r7, r6
-/* 81376AE0 00044EE0  7C 04 00 00 */	cmpw r4, r0
-/* 81376AE4 00044EE4  40 82 00 10 */	bne .L_81376AF4
-/* 81376AE8 00044EE8  80 08 00 04 */	lwz r0, 0x4(r8)
-/* 81376AEC 00044EEC  7C 05 00 00 */	cmpw r5, r0
-/* 81376AF0 00044EF0  4D 82 00 20 */	beqlr
+/* 81376AD8 | 7C 07 30 2E */	lwzx r0, r7, r6
+/* 81376ADC | 7D 07 32 14 */	add r8, r7, r6
+/* 81376AE0 | 7C 04 00 00 */	cmpw r4, r0
+/* 81376AE4 | 40 82 00 10 */	bne .L_81376AF4
+/* 81376AE8 | 80 08 00 04 */	lwz r0, 0x4(r8)
+/* 81376AEC | 7C 05 00 00 */	cmpw r5, r0
+/* 81376AF0 | 4D 82 00 20 */	beqlr
 .L_81376AF4:
-/* 81376AF4 00044EF4  38 63 00 01 */	addi r3, r3, 0x1
-/* 81376AF8 00044EF8  38 C6 00 08 */	addi r6, r6, 0x8
-/* 81376AFC 00044EFC  42 00 FF DC */	bdnz .L_81376AD8
-/* 81376B00 00044F00  38 60 FF FF */	li r3, -0x1
-/* 81376B04 00044F04  4E 80 00 20 */	blr
+/* 81376AF4 | 38 63 00 01 */	addi r3, r3, 0x1
+/* 81376AF8 | 38 C6 00 08 */	addi r6, r6, 0x8
+/* 81376AFC | 42 00 FF DC */	bdnz .L_81376AD8
+/* 81376B00 | 38 60 FF FF */	li r3, -0x1
+/* 81376B04 | 4E 80 00 20 */	blr
 .endfn findGroupAnimator__Q210homebutton10HomeButtonFii
 
 # .text:0x5560 | 0x81376B08 | size: 0x1C
 # homebutton::HomeButton::getSelectBtnNum()
 .fn getSelectBtnNum__Q210homebutton10HomeButtonFv, global
-/* 81376B08 00044F08  80 03 00 10 */	lwz r0, 0x10(r3)
-/* 81376B0C 00044F0C  2C 00 00 12 */	cmpwi r0, 0x12
-/* 81376B10 00044F10  41 82 00 0C */	beq .L_81376B1C
-/* 81376B14 00044F14  38 60 FF FF */	li r3, -0x1
-/* 81376B18 00044F18  4E 80 00 20 */	blr
+/* 81376B08 | 80 03 00 10 */	lwz r0, 0x10(r3)
+/* 81376B0C | 2C 00 00 12 */	cmpwi r0, 0x12
+/* 81376B10 | 41 82 00 0C */	beq .L_81376B1C
+/* 81376B14 | 38 60 FF FF */	li r3, -0x1
+/* 81376B18 | 4E 80 00 20 */	blr
 .L_81376B1C:
-/* 81376B1C 00044F1C  80 63 00 B0 */	lwz r3, 0xb0(r3)
-/* 81376B20 00044F20  4E 80 00 20 */	blr
+/* 81376B1C | 80 63 00 B0 */	lwz r3, 0xb0(r3)
+/* 81376B20 | 4E 80 00 20 */	blr
 .endfn getSelectBtnNum__Q210homebutton10HomeButtonFv
 
 # .text:0x557C | 0x81376B24 | size: 0x44
 # homebutton::HomeButton::setForcusSE()
 .fn setForcusSE__Q210homebutton10HomeButtonFv, global
-/* 81376B24 00044F24  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 81376B28 00044F28  7C 08 02 A6 */	mflr r0
-/* 81376B2C 00044F2C  90 01 00 14 */	stw r0, 0x14(r1)
-/* 81376B30 00044F30  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 81376B34 00044F34  7C 7F 1B 78 */	mr r31, r3
-/* 81376B38 00044F38  80 03 00 64 */	lwz r0, 0x64(r3)
-/* 81376B3C 00044F3C  2C 00 00 02 */	cmpwi r0, 0x2
-/* 81376B40 00044F40  40 81 00 14 */	ble .L_81376B54
-/* 81376B44 00044F44  38 80 00 04 */	li r4, 0x4
-/* 81376B48 00044F48  48 00 05 39 */	bl play_sound__Q210homebutton10HomeButtonFi
-/* 81376B4C 00044F4C  38 00 00 00 */	li r0, 0x0
-/* 81376B50 00044F50  90 1F 00 64 */	stw r0, 0x64(r31)
+/* 81376B24 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 81376B28 | 7C 08 02 A6 */	mflr r0
+/* 81376B2C | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 81376B30 | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 81376B34 | 7C 7F 1B 78 */	mr r31, r3
+/* 81376B38 | 80 03 00 64 */	lwz r0, 0x64(r3)
+/* 81376B3C | 2C 00 00 02 */	cmpwi r0, 0x2
+/* 81376B40 | 40 81 00 14 */	ble .L_81376B54
+/* 81376B44 | 38 80 00 04 */	li r4, 0x4
+/* 81376B48 | 48 00 05 39 */	bl play_sound__Q210homebutton10HomeButtonFi
+/* 81376B4C | 38 00 00 00 */	li r0, 0x0
+/* 81376B50 | 90 1F 00 64 */	stw r0, 0x64(r31)
 .L_81376B54:
-/* 81376B54 00044F54  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 81376B58 00044F58  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 81376B5C 00044F5C  7C 08 03 A6 */	mtlr r0
-/* 81376B60 00044F60  38 21 00 10 */	addi r1, r1, 0x10
-/* 81376B64 00044F64  4E 80 00 20 */	blr
+/* 81376B54 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 81376B58 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 81376B5C | 7C 08 03 A6 */	mtlr r0
+/* 81376B60 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 81376B64 | 4E 80 00 20 */	blr
 .endfn setForcusSE__Q210homebutton10HomeButtonFv
 
 # .text:0x55C0 | 0x81376B68 | size: 0x13C
 # homebutton::HomeButton::setAdjustFlag(int)
 .fn setAdjustFlag__Q210homebutton10HomeButtonFi, global
-/* 81376B68 00044F68  94 21 FF D0 */	stwu r1, -0x30(r1)
-/* 81376B6C 00044F6C  7C 08 02 A6 */	mflr r0
-/* 81376B70 00044F70  90 01 00 34 */	stw r0, 0x34(r1)
-/* 81376B74 00044F74  39 61 00 30 */	addi r11, r1, 0x30
-/* 81376B78 00044F78  48 28 29 51 */	bl _savegpr_29
-/* 81376B7C 00044F7C  30 04 FF FF */	subic r0, r4, 0x1
-/* 81376B80 00044F80  88 A3 02 9C */	lbz r5, 0x29c(r3)
-/* 81376B84 00044F84  7C 80 21 10 */	subfe r4, r0, r4
-/* 81376B88 00044F88  7C 7F 1B 78 */	mr r31, r3
-/* 81376B8C 00044F8C  50 85 2E B4 */	rlwimi r5, r4, 5, 26, 26
-/* 81376B90 00044F90  98 83 00 87 */	stb r4, 0x87(r3)
-/* 81376B94 00044F94  54 80 06 3F */	clrlwi. r0, r4, 24
-/* 81376B98 00044F98  98 A3 02 9C */	stb r5, 0x29c(r3)
-/* 81376B9C 00044F9C  41 82 00 80 */	beq .L_81376C1C
-/* 81376BA0 00044FA0  80 83 00 04 */	lwz r4, 0x4(r3)
-/* 81376BA4 00044FA4  38 61 00 10 */	addi r3, r1, 0x10
-/* 81376BA8 00044FA8  C0 24 00 38 */	lfs f1, 0x38(r4)
-/* 81376BAC 00044FAC  C0 44 00 3C */	lfs f2, 0x3c(r4)
-/* 81376BB0 00044FB0  4B FF B9 2D */	bl __ct__Q34nw4r4math4VEC2Fff
-/* 81376BB4 00044FB4  C0 21 00 10 */	lfs f1, 0x10(r1)
-/* 81376BB8 00044FB8  38 81 00 18 */	addi r4, r1, 0x18
-/* 81376BBC 00044FBC  C0 01 00 14 */	lfs f0, 0x14(r1)
-/* 81376BC0 00044FC0  D0 21 00 18 */	stfs f1, 0x18(r1)
-/* 81376BC4 00044FC4  D0 01 00 1C */	stfs f0, 0x1c(r1)
-/* 81376BC8 00044FC8  80 7F 02 2C */	lwz r3, 0x22c(r31)
-/* 81376BCC 00044FCC  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81376BD0 00044FD0  38 63 00 44 */	addi r3, r3, 0x44
-/* 81376BD4 00044FD4  4B FF 42 05 */	bl __as__Q34nw4r4math4VEC2FRCQ34nw4r4math4VEC2
-/* 81376BD8 00044FD8  80 7F 00 04 */	lwz r3, 0x4(r31)
-/* 81376BDC 00044FDC  80 03 00 28 */	lwz r0, 0x28(r3)
-/* 81376BE0 00044FE0  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81376BE4 00044FE4  40 82 00 A0 */	bne .L_81376C84
-/* 81376BE8 00044FE8  3B A0 00 00 */	li r29, 0x0
-/* 81376BEC 00044FEC  3B C0 00 00 */	li r30, 0x0
+/* 81376B68 | 94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 81376B6C | 7C 08 02 A6 */	mflr r0
+/* 81376B70 | 90 01 00 34 */	stw r0, 0x34(r1)
+/* 81376B74 | 39 61 00 30 */	addi r11, r1, 0x30
+/* 81376B78 | 48 28 29 51 */	bl _savegpr_29
+/* 81376B7C | 30 04 FF FF */	subic r0, r4, 0x1
+/* 81376B80 | 88 A3 02 9C */	lbz r5, 0x29c(r3)
+/* 81376B84 | 7C 80 21 10 */	subfe r4, r0, r4
+/* 81376B88 | 7C 7F 1B 78 */	mr r31, r3
+/* 81376B8C | 50 85 2E B4 */	rlwimi r5, r4, 5, 26, 26
+/* 81376B90 | 98 83 00 87 */	stb r4, 0x87(r3)
+/* 81376B94 | 54 80 06 3F */	clrlwi. r0, r4, 24
+/* 81376B98 | 98 A3 02 9C */	stb r5, 0x29c(r3)
+/* 81376B9C | 41 82 00 80 */	beq .L_81376C1C
+/* 81376BA0 | 80 83 00 04 */	lwz r4, 0x4(r3)
+/* 81376BA4 | 38 61 00 10 */	addi r3, r1, 0x10
+/* 81376BA8 | C0 24 00 38 */	lfs f1, 0x38(r4)
+/* 81376BAC | C0 44 00 3C */	lfs f2, 0x3c(r4)
+/* 81376BB0 | 4B FF B9 2D */	bl __ct__Q34nw4r4math4VEC2Fff
+/* 81376BB4 | C0 21 00 10 */	lfs f1, 0x10(r1)
+/* 81376BB8 | 38 81 00 18 */	addi r4, r1, 0x18
+/* 81376BBC | C0 01 00 14 */	lfs f0, 0x14(r1)
+/* 81376BC0 | D0 21 00 18 */	stfs f1, 0x18(r1)
+/* 81376BC4 | D0 01 00 1C */	stfs f0, 0x1c(r1)
+/* 81376BC8 | 80 7F 02 2C */	lwz r3, 0x22c(r31)
+/* 81376BCC | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81376BD0 | 38 63 00 44 */	addi r3, r3, 0x44
+/* 81376BD4 | 4B FF 42 05 */	bl __as__Q34nw4r4math4VEC2FRCQ34nw4r4math4VEC2
+/* 81376BD8 | 80 7F 00 04 */	lwz r3, 0x4(r31)
+/* 81376BDC | 80 03 00 28 */	lwz r0, 0x28(r3)
+/* 81376BE0 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81376BE4 | 40 82 00 A0 */	bne .L_81376C84
+/* 81376BE8 | 3B A0 00 00 */	li r29, 0x0
+/* 81376BEC | 3B C0 00 00 */	li r30, 0x0
 .L_81376BF0:
-/* 81376BF0 00044FF0  7C 7F F2 14 */	add r3, r31, r30
-/* 81376BF4 00044FF4  38 81 00 18 */	addi r4, r1, 0x18
-/* 81376BF8 00044FF8  80 63 02 30 */	lwz r3, 0x230(r3)
-/* 81376BFC 00044FFC  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81376C00 00045000  38 63 00 44 */	addi r3, r3, 0x44
-/* 81376C04 00045004  4B FF 41 D5 */	bl __as__Q34nw4r4math4VEC2FRCQ34nw4r4math4VEC2
-/* 81376C08 00045008  3B BD 00 01 */	addi r29, r29, 0x1
-/* 81376C0C 0004500C  3B DE 00 04 */	addi r30, r30, 0x4
-/* 81376C10 00045010  2C 1D 00 04 */	cmpwi r29, 0x4
-/* 81376C14 00045014  41 80 FF DC */	blt .L_81376BF0
-/* 81376C18 00045018  48 00 00 6C */	b .L_81376C84
+/* 81376BF0 | 7C 7F F2 14 */	add r3, r31, r30
+/* 81376BF4 | 38 81 00 18 */	addi r4, r1, 0x18
+/* 81376BF8 | 80 63 02 30 */	lwz r3, 0x230(r3)
+/* 81376BFC | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81376C00 | 38 63 00 44 */	addi r3, r3, 0x44
+/* 81376C04 | 4B FF 41 D5 */	bl __as__Q34nw4r4math4VEC2FRCQ34nw4r4math4VEC2
+/* 81376C08 | 3B BD 00 01 */	addi r29, r29, 0x1
+/* 81376C0C | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 81376C10 | 2C 1D 00 04 */	cmpwi r29, 0x4
+/* 81376C14 | 41 80 FF DC */	blt .L_81376BF0
+/* 81376C18 | 48 00 00 6C */	b .L_81376C84
 .L_81376C1C:
-/* 81376C1C 0004501C  C0 02 82 DC */	lfs f0, lbl_816946DC@sda21(r0)
-/* 81376C20 00045020  38 81 00 18 */	addi r4, r1, 0x18
-/* 81376C24 00045024  D0 01 00 18 */	stfs f0, 0x18(r1)
-/* 81376C28 00045028  D0 01 00 1C */	stfs f0, 0x1c(r1)
-/* 81376C2C 0004502C  80 63 02 2C */	lwz r3, 0x22c(r3)
-/* 81376C30 00045030  D0 01 00 08 */	stfs f0, 0x8(r1)
-/* 81376C34 00045034  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81376C38 00045038  D0 01 00 0C */	stfs f0, 0xc(r1)
-/* 81376C3C 0004503C  38 63 00 44 */	addi r3, r3, 0x44
-/* 81376C40 00045040  4B FF 41 99 */	bl __as__Q34nw4r4math4VEC2FRCQ34nw4r4math4VEC2
-/* 81376C44 00045044  80 7F 00 04 */	lwz r3, 0x4(r31)
-/* 81376C48 00045048  80 03 00 28 */	lwz r0, 0x28(r3)
-/* 81376C4C 0004504C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81376C50 00045050  40 82 00 34 */	bne .L_81376C84
-/* 81376C54 00045054  3B A0 00 00 */	li r29, 0x0
-/* 81376C58 00045058  3B C0 00 00 */	li r30, 0x0
+/* 81376C1C | C0 02 82 DC */	lfs f0, lbl_816946DC@sda21(r0)
+/* 81376C20 | 38 81 00 18 */	addi r4, r1, 0x18
+/* 81376C24 | D0 01 00 18 */	stfs f0, 0x18(r1)
+/* 81376C28 | D0 01 00 1C */	stfs f0, 0x1c(r1)
+/* 81376C2C | 80 63 02 2C */	lwz r3, 0x22c(r3)
+/* 81376C30 | D0 01 00 08 */	stfs f0, 0x8(r1)
+/* 81376C34 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81376C38 | D0 01 00 0C */	stfs f0, 0xc(r1)
+/* 81376C3C | 38 63 00 44 */	addi r3, r3, 0x44
+/* 81376C40 | 4B FF 41 99 */	bl __as__Q34nw4r4math4VEC2FRCQ34nw4r4math4VEC2
+/* 81376C44 | 80 7F 00 04 */	lwz r3, 0x4(r31)
+/* 81376C48 | 80 03 00 28 */	lwz r0, 0x28(r3)
+/* 81376C4C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81376C50 | 40 82 00 34 */	bne .L_81376C84
+/* 81376C54 | 3B A0 00 00 */	li r29, 0x0
+/* 81376C58 | 3B C0 00 00 */	li r30, 0x0
 .L_81376C5C:
-/* 81376C5C 0004505C  7C 7F F2 14 */	add r3, r31, r30
-/* 81376C60 00045060  38 81 00 18 */	addi r4, r1, 0x18
-/* 81376C64 00045064  80 63 02 30 */	lwz r3, 0x230(r3)
-/* 81376C68 00045068  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 81376C6C 0004506C  38 63 00 44 */	addi r3, r3, 0x44
-/* 81376C70 00045070  4B FF 41 69 */	bl __as__Q34nw4r4math4VEC2FRCQ34nw4r4math4VEC2
-/* 81376C74 00045074  3B BD 00 01 */	addi r29, r29, 0x1
-/* 81376C78 00045078  3B DE 00 04 */	addi r30, r30, 0x4
-/* 81376C7C 0004507C  2C 1D 00 04 */	cmpwi r29, 0x4
-/* 81376C80 00045080  41 80 FF DC */	blt .L_81376C5C
+/* 81376C5C | 7C 7F F2 14 */	add r3, r31, r30
+/* 81376C60 | 38 81 00 18 */	addi r4, r1, 0x18
+/* 81376C64 | 80 63 02 30 */	lwz r3, 0x230(r3)
+/* 81376C68 | 80 63 00 10 */	lwz r3, 0x10(r3)
+/* 81376C6C | 38 63 00 44 */	addi r3, r3, 0x44
+/* 81376C70 | 4B FF 41 69 */	bl __as__Q34nw4r4math4VEC2FRCQ34nw4r4math4VEC2
+/* 81376C74 | 3B BD 00 01 */	addi r29, r29, 0x1
+/* 81376C78 | 3B DE 00 04 */	addi r30, r30, 0x4
+/* 81376C7C | 2C 1D 00 04 */	cmpwi r29, 0x4
+/* 81376C80 | 41 80 FF DC */	blt .L_81376C5C
 .L_81376C84:
-/* 81376C84 00045084  38 60 00 00 */	li r3, 0x0
-/* 81376C88 00045088  48 1C E0 35 */	bl GXSetCullMode
-/* 81376C8C 0004508C  39 61 00 30 */	addi r11, r1, 0x30
-/* 81376C90 00045090  48 28 28 85 */	bl _restgpr_29
-/* 81376C94 00045094  80 01 00 34 */	lwz r0, 0x34(r1)
-/* 81376C98 00045098  7C 08 03 A6 */	mtlr r0
-/* 81376C9C 0004509C  38 21 00 30 */	addi r1, r1, 0x30
-/* 81376CA0 000450A0  4E 80 00 20 */	blr
+/* 81376C84 | 38 60 00 00 */	li r3, 0x0
+/* 81376C88 | 48 1C E0 35 */	bl GXSetCullMode
+/* 81376C8C | 39 61 00 30 */	addi r11, r1, 0x30
+/* 81376C90 | 48 28 28 85 */	bl _restgpr_29
+/* 81376C94 | 80 01 00 34 */	lwz r0, 0x34(r1)
+/* 81376C98 | 7C 08 03 A6 */	mtlr r0
+/* 81376C9C | 38 21 00 30 */	addi r1, r1, 0x30
+/* 81376CA0 | 4E 80 00 20 */	blr
 .endfn setAdjustFlag__Q210homebutton10HomeButtonFi
 
 # .text:0x56FC | 0x81376CA4 | size: 0xC0
 # homebutton::HomeButtonEventHandler::onEvent(unsigned long, unsigned long, void*)
 .fn onEvent__Q210homebutton22HomeButtonEventHandlerFUlUlPv, global
-/* 81376CA4 000450A4  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 81376CA8 000450A8  7C 08 02 A6 */	mflr r0
-/* 81376CAC 000450AC  90 01 00 24 */	stw r0, 0x24(r1)
-/* 81376CB0 000450B0  39 61 00 20 */	addi r11, r1, 0x20
-/* 81376CB4 000450B4  48 28 28 15 */	bl _savegpr_29
-/* 81376CB8 000450B8  7C 7D 1B 78 */	mr r29, r3
-/* 81376CBC 000450BC  80 63 00 04 */	lwz r3, 0x4(r3)
-/* 81376CC0 000450C0  7C BE 2B 78 */	mr r30, r5
-/* 81376CC4 000450C4  7C DF 33 78 */	mr r31, r6
-/* 81376CC8 000450C8  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81376CCC 000450CC  81 8C 00 24 */	lwz r12, 0x24(r12)
-/* 81376CD0 000450D0  7D 89 03 A6 */	mtctr r12
-/* 81376CD4 000450D4  4E 80 04 21 */	bctrl
-/* 81376CD8 000450D8  81 83 00 00 */	lwz r12, 0x0(r3)
-/* 81376CDC 000450DC  81 8C 00 64 */	lwz r12, 0x64(r12)
-/* 81376CE0 000450E0  7D 89 03 A6 */	mtctr r12
-/* 81376CE4 000450E4  4E 80 04 21 */	bctrl
-/* 81376CE8 000450E8  2C 1E 00 01 */	cmpwi r30, 0x1
-/* 81376CEC 000450EC  80 BD 00 08 */	lwz r5, 0x8(r29)
-/* 81376CF0 000450F0  38 83 00 B4 */	addi r4, r3, 0xb4
-/* 81376CF4 000450F4  41 82 00 20 */	beq .L_81376D14
-/* 81376CF8 000450F8  40 80 00 10 */	bge .L_81376D08
-/* 81376CFC 000450FC  2C 1E 00 00 */	cmpwi r30, 0x0
-/* 81376D00 00045100  40 80 00 30 */	bge .L_81376D30
-/* 81376D04 00045104  48 00 00 48 */	b .L_81376D4C
+/* 81376CA4 | 94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 81376CA8 | 7C 08 02 A6 */	mflr r0
+/* 81376CAC | 90 01 00 24 */	stw r0, 0x24(r1)
+/* 81376CB0 | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81376CB4 | 48 28 28 15 */	bl _savegpr_29
+/* 81376CB8 | 7C 7D 1B 78 */	mr r29, r3
+/* 81376CBC | 80 63 00 04 */	lwz r3, 0x4(r3)
+/* 81376CC0 | 7C BE 2B 78 */	mr r30, r5
+/* 81376CC4 | 7C DF 33 78 */	mr r31, r6
+/* 81376CC8 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81376CCC | 81 8C 00 24 */	lwz r12, 0x24(r12)
+/* 81376CD0 | 7D 89 03 A6 */	mtctr r12
+/* 81376CD4 | 4E 80 04 21 */	bctrl
+/* 81376CD8 | 81 83 00 00 */	lwz r12, 0x0(r3)
+/* 81376CDC | 81 8C 00 64 */	lwz r12, 0x64(r12)
+/* 81376CE0 | 7D 89 03 A6 */	mtctr r12
+/* 81376CE4 | 4E 80 04 21 */	bctrl
+/* 81376CE8 | 2C 1E 00 01 */	cmpwi r30, 0x1
+/* 81376CEC | 80 BD 00 08 */	lwz r5, 0x8(r29)
+/* 81376CF0 | 38 83 00 B4 */	addi r4, r3, 0xb4
+/* 81376CF4 | 41 82 00 20 */	beq .L_81376D14
+/* 81376CF8 | 40 80 00 10 */	bge .L_81376D08
+/* 81376CFC | 2C 1E 00 00 */	cmpwi r30, 0x0
+/* 81376D00 | 40 80 00 30 */	bge .L_81376D30
+/* 81376D04 | 48 00 00 48 */	b .L_81376D4C
 .L_81376D08:
-/* 81376D08 00045108  2C 1E 00 03 */	cmpwi r30, 0x3
-/* 81376D0C 0004510C  40 80 00 40 */	bge .L_81376D4C
-/* 81376D10 00045110  48 00 00 14 */	b .L_81376D24
+/* 81376D08 | 2C 1E 00 03 */	cmpwi r30, 0x3
+/* 81376D0C | 40 80 00 40 */	bge .L_81376D4C
+/* 81376D10 | 48 00 00 14 */	b .L_81376D24
 .L_81376D14:
-/* 81376D14 00045114  7C A3 2B 78 */	mr r3, r5
-/* 81376D18 00045118  7F E5 FB 78 */	mr r5, r31
-/* 81376D1C 0004511C  4B FF E5 E5 */	bl startPointEvent__Q210homebutton10HomeButtonFPCcPv
-/* 81376D20 00045120  48 00 00 2C */	b .L_81376D4C
+/* 81376D14 | 7C A3 2B 78 */	mr r3, r5
+/* 81376D18 | 7F E5 FB 78 */	mr r5, r31
+/* 81376D1C | 4B FF E5 E5 */	bl startPointEvent__Q210homebutton10HomeButtonFPCcPv
+/* 81376D20 | 48 00 00 2C */	b .L_81376D4C
 .L_81376D24:
-/* 81376D24 00045124  7C A3 2B 78 */	mr r3, r5
-/* 81376D28 00045128  4B FF EA 91 */	bl startLeftEvent__Q210homebutton10HomeButtonFPCc
-/* 81376D2C 0004512C  48 00 00 20 */	b .L_81376D4C
+/* 81376D24 | 7C A3 2B 78 */	mr r3, r5
+/* 81376D28 | 4B FF EA 91 */	bl startLeftEvent__Q210homebutton10HomeButtonFPCc
+/* 81376D2C | 48 00 00 20 */	b .L_81376D4C
 .L_81376D30:
-/* 81376D30 00045130  80 7F 00 10 */	lwz r3, 0x10(r31)
-/* 81376D34 00045134  54 60 05 29 */	rlwinm. r0, r3, 0, 20, 20
-/* 81376D38 00045138  40 82 00 0C */	bne .L_81376D44
-/* 81376D3C 0004513C  54 60 01 CF */	rlwinm. r0, r3, 0, 7, 7
-/* 81376D40 00045140  41 82 00 0C */	beq .L_81376D4C
+/* 81376D30 | 80 7F 00 10 */	lwz r3, 0x10(r31)
+/* 81376D34 | 54 60 05 29 */	rlwinm. r0, r3, 0, 20, 20
+/* 81376D38 | 40 82 00 0C */	bne .L_81376D44
+/* 81376D3C | 54 60 01 CF */	rlwinm. r0, r3, 0, 7, 7
+/* 81376D40 | 41 82 00 0C */	beq .L_81376D4C
 .L_81376D44:
-/* 81376D44 00045144  7C A3 2B 78 */	mr r3, r5
-/* 81376D48 00045148  4B FF EE 31 */	bl startTrigEvent__Q210homebutton10HomeButtonFPCc
+/* 81376D44 | 7C A3 2B 78 */	mr r3, r5
+/* 81376D48 | 4B FF EE 31 */	bl startTrigEvent__Q210homebutton10HomeButtonFPCc
 .L_81376D4C:
-/* 81376D4C 0004514C  39 61 00 20 */	addi r11, r1, 0x20
-/* 81376D50 00045150  48 28 27 C5 */	bl _restgpr_29
-/* 81376D54 00045154  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 81376D58 00045158  7C 08 03 A6 */	mtlr r0
-/* 81376D5C 0004515C  38 21 00 20 */	addi r1, r1, 0x20
-/* 81376D60 00045160  4E 80 00 20 */	blr
+/* 81376D4C | 39 61 00 20 */	addi r11, r1, 0x20
+/* 81376D50 | 48 28 27 C5 */	bl _restgpr_29
+/* 81376D54 | 80 01 00 24 */	lwz r0, 0x24(r1)
+/* 81376D58 | 7C 08 03 A6 */	mtlr r0
+/* 81376D5C | 38 21 00 20 */	addi r1, r1, 0x20
+/* 81376D60 | 4E 80 00 20 */	blr
 .endfn onEvent__Q210homebutton22HomeButtonEventHandlerFUlUlPv
 
 # .text:0x57BC | 0x81376D64 | size: 0x8
 # homebutton::gui::PaneComponent::getPane()
 .fn getPane__Q310homebutton3gui13PaneComponentFv, global
-/* 81376D64 00045164  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 81376D68 00045168  4E 80 00 20 */	blr
+/* 81376D64 | 80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 81376D68 | 4E 80 00 20 */	blr
 .endfn getPane__Q310homebutton3gui13PaneComponentFv
 
 # .text:0x57C4 | 0x81376D6C | size: 0x14
 # homebutton::HomeButton::BlackFader::init(int)
 .fn init__Q310homebutton10HomeButton10BlackFaderFi, global
-/* 81376D6C 0004516C  38 00 00 00 */	li r0, 0x0
-/* 81376D70 00045170  90 83 00 04 */	stw r4, 0x4(r3)
-/* 81376D74 00045174  90 03 00 00 */	stw r0, 0x0(r3)
-/* 81376D78 00045178  90 03 00 08 */	stw r0, 0x8(r3)
-/* 81376D7C 0004517C  4E 80 00 20 */	blr
+/* 81376D6C | 38 00 00 00 */	li r0, 0x0
+/* 81376D70 | 90 83 00 04 */	stw r4, 0x4(r3)
+/* 81376D74 | 90 03 00 00 */	stw r0, 0x0(r3)
+/* 81376D78 | 90 03 00 08 */	stw r0, 0x8(r3)
+/* 81376D7C | 4E 80 00 20 */	blr
 .endfn init__Q310homebutton10HomeButton10BlackFaderFi
 
 # .text:0x57D8 | 0x81376D80 | size: 0x5C
 # homebutton::HomeButton::BlackFader::calc()
 .fn calc__Q310homebutton10HomeButton10BlackFaderFv, global
-/* 81376D80 00045180  80 03 00 08 */	lwz r0, 0x8(r3)
-/* 81376D84 00045184  2C 00 00 01 */	cmpwi r0, 0x1
-/* 81376D88 00045188  40 82 00 14 */	bne .L_81376D9C
-/* 81376D8C 0004518C  80 83 00 00 */	lwz r4, 0x0(r3)
-/* 81376D90 00045190  38 04 00 01 */	addi r0, r4, 0x1
-/* 81376D94 00045194  90 03 00 00 */	stw r0, 0x0(r3)
-/* 81376D98 00045198  48 00 00 18 */	b .L_81376DB0
+/* 81376D80 | 80 03 00 08 */	lwz r0, 0x8(r3)
+/* 81376D84 | 2C 00 00 01 */	cmpwi r0, 0x1
+/* 81376D88 | 40 82 00 14 */	bne .L_81376D9C
+/* 81376D8C | 80 83 00 00 */	lwz r4, 0x0(r3)
+/* 81376D90 | 38 04 00 01 */	addi r0, r4, 0x1
+/* 81376D94 | 90 03 00 00 */	stw r0, 0x0(r3)
+/* 81376D98 | 48 00 00 18 */	b .L_81376DB0
 .L_81376D9C:
-/* 81376D9C 0004519C  2C 00 00 02 */	cmpwi r0, 0x2
-/* 81376DA0 000451A0  40 82 00 10 */	bne .L_81376DB0
-/* 81376DA4 000451A4  80 83 00 00 */	lwz r4, 0x0(r3)
-/* 81376DA8 000451A8  38 04 FF FF */	subi r0, r4, 0x1
-/* 81376DAC 000451AC  90 03 00 00 */	stw r0, 0x0(r3)
+/* 81376D9C | 2C 00 00 02 */	cmpwi r0, 0x2
+/* 81376DA0 | 40 82 00 10 */	bne .L_81376DB0
+/* 81376DA4 | 80 83 00 00 */	lwz r4, 0x0(r3)
+/* 81376DA8 | 38 04 FF FF */	subi r0, r4, 0x1
+/* 81376DAC | 90 03 00 00 */	stw r0, 0x0(r3)
 .L_81376DB0:
-/* 81376DB0 000451B0  80 03 00 00 */	lwz r0, 0x0(r3)
-/* 81376DB4 000451B4  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81376DB8 000451B8  40 80 00 10 */	bge .L_81376DC8
-/* 81376DBC 000451BC  38 00 00 00 */	li r0, 0x0
-/* 81376DC0 000451C0  90 03 00 00 */	stw r0, 0x0(r3)
-/* 81376DC4 000451C4  4E 80 00 20 */	blr
+/* 81376DB0 | 80 03 00 00 */	lwz r0, 0x0(r3)
+/* 81376DB4 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81376DB8 | 40 80 00 10 */	bge .L_81376DC8
+/* 81376DBC | 38 00 00 00 */	li r0, 0x0
+/* 81376DC0 | 90 03 00 00 */	stw r0, 0x0(r3)
+/* 81376DC4 | 4E 80 00 20 */	blr
 .L_81376DC8:
-/* 81376DC8 000451C8  80 83 00 04 */	lwz r4, 0x4(r3)
-/* 81376DCC 000451CC  7C 00 20 00 */	cmpw r0, r4
-/* 81376DD0 000451D0  4C 81 00 20 */	blelr
-/* 81376DD4 000451D4  90 83 00 00 */	stw r4, 0x0(r3)
-/* 81376DD8 000451D8  4E 80 00 20 */	blr
+/* 81376DC8 | 80 83 00 04 */	lwz r4, 0x4(r3)
+/* 81376DCC | 7C 00 20 00 */	cmpw r0, r4
+/* 81376DD0 | 4C 81 00 20 */	blelr
+/* 81376DD4 | 90 83 00 00 */	stw r4, 0x0(r3)
+/* 81376DD8 | 4E 80 00 20 */	blr
 .endfn calc__Q310homebutton10HomeButton10BlackFaderFv
 
 # .text:0x5834 | 0x81376DDC | size: 0x48
 # homebutton::HomeButton::BlackFader::isDone()
 .fn isDone__Q310homebutton10HomeButton10BlackFaderFv, global
-/* 81376DDC 000451DC  80 A3 00 08 */	lwz r5, 0x8(r3)
-/* 81376DE0 000451E0  2C 05 00 01 */	cmpwi r5, 0x1
-/* 81376DE4 000451E4  40 82 00 1C */	bne .L_81376E00
-/* 81376DE8 000451E8  80 83 00 00 */	lwz r4, 0x0(r3)
-/* 81376DEC 000451EC  80 03 00 04 */	lwz r0, 0x4(r3)
-/* 81376DF0 000451F0  7C 04 00 00 */	cmpw r4, r0
-/* 81376DF4 000451F4  40 82 00 0C */	bne .L_81376E00
-/* 81376DF8 000451F8  38 60 00 01 */	li r3, 0x1
-/* 81376DFC 000451FC  4E 80 00 20 */	blr
+/* 81376DDC | 80 A3 00 08 */	lwz r5, 0x8(r3)
+/* 81376DE0 | 2C 05 00 01 */	cmpwi r5, 0x1
+/* 81376DE4 | 40 82 00 1C */	bne .L_81376E00
+/* 81376DE8 | 80 83 00 00 */	lwz r4, 0x0(r3)
+/* 81376DEC | 80 03 00 04 */	lwz r0, 0x4(r3)
+/* 81376DF0 | 7C 04 00 00 */	cmpw r4, r0
+/* 81376DF4 | 40 82 00 0C */	bne .L_81376E00
+/* 81376DF8 | 38 60 00 01 */	li r3, 0x1
+/* 81376DFC | 4E 80 00 20 */	blr
 .L_81376E00:
-/* 81376E00 00045200  2C 05 00 02 */	cmpwi r5, 0x2
-/* 81376E04 00045204  40 82 00 18 */	bne .L_81376E1C
-/* 81376E08 00045208  80 03 00 00 */	lwz r0, 0x0(r3)
-/* 81376E0C 0004520C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81376E10 00045210  40 82 00 0C */	bne .L_81376E1C
-/* 81376E14 00045214  38 60 00 01 */	li r3, 0x1
-/* 81376E18 00045218  4E 80 00 20 */	blr
+/* 81376E00 | 2C 05 00 02 */	cmpwi r5, 0x2
+/* 81376E04 | 40 82 00 18 */	bne .L_81376E1C
+/* 81376E08 | 80 03 00 00 */	lwz r0, 0x0(r3)
+/* 81376E0C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81376E10 | 40 82 00 0C */	bne .L_81376E1C
+/* 81376E14 | 38 60 00 01 */	li r3, 0x1
+/* 81376E18 | 4E 80 00 20 */	blr
 .L_81376E1C:
-/* 81376E1C 0004521C  38 60 00 00 */	li r3, 0x0
-/* 81376E20 00045220  4E 80 00 20 */	blr
+/* 81376E1C | 38 60 00 00 */	li r3, 0x0
+/* 81376E20 | 4E 80 00 20 */	blr
 .endfn isDone__Q310homebutton10HomeButton10BlackFaderFv
 
 # .text:0x587C | 0x81376E24 | size: 0x25C
 # homebutton::HomeButton::BlackFader::draw()
 .fn draw__Q310homebutton10HomeButton10BlackFaderFv, global
-/* 81376E24 00045224  94 21 FF B0 */	stwu r1, -0x50(r1)
-/* 81376E28 00045228  7C 08 02 A6 */	mflr r0
-/* 81376E2C 0004522C  90 01 00 54 */	stw r0, 0x54(r1)
-/* 81376E30 00045230  93 E1 00 4C */	stw r31, 0x4c(r1)
-/* 81376E34 00045234  93 C1 00 48 */	stw r30, 0x48(r1)
-/* 81376E38 00045238  7C 7E 1B 78 */	mr r30, r3
-/* 81376E3C 0004523C  80 83 00 00 */	lwz r4, 0x0(r3)
-/* 81376E40 00045240  80 03 00 04 */	lwz r0, 0x4(r3)
-/* 81376E44 00045244  38 61 00 10 */	addi r3, r1, 0x10
-/* 81376E48 00045248  1C 84 00 FF */	mulli r4, r4, 0xff
-/* 81376E4C 0004524C  7C 04 03 D6 */	divw r0, r4, r0
-/* 81376E50 00045250  54 1F 06 3E */	clrlwi r31, r0, 24
-/* 81376E54 00045254  48 1C 9F DD */	bl fn_81540E30
-/* 81376E58 00045258  38 61 00 10 */	addi r3, r1, 0x10
-/* 81376E5C 0004525C  38 80 00 00 */	li r4, 0x0
-/* 81376E60 00045260  48 1D 0E C1 */	bl GXLoadPosMtxImm
-/* 81376E64 00045264  38 60 00 00 */	li r3, 0x0
-/* 81376E68 00045268  48 1D 0F 61 */	bl GXSetCurrentMtx
-/* 81376E6C 0004526C  48 1C CA 61 */	bl GXClearVtxDesc
-/* 81376E70 00045270  38 60 00 09 */	li r3, 0x9
-/* 81376E74 00045274  38 80 00 01 */	li r4, 0x1
-/* 81376E78 00045278  48 1C C6 15 */	bl GXSetVtxDesc
-/* 81376E7C 0004527C  38 60 00 00 */	li r3, 0x0
-/* 81376E80 00045280  38 80 00 09 */	li r4, 0x9
-/* 81376E84 00045284  38 A0 00 00 */	li r5, 0x0
-/* 81376E88 00045288  38 C0 00 04 */	li r6, 0x4
-/* 81376E8C 0004528C  38 E0 00 00 */	li r7, 0x0
-/* 81376E90 00045290  48 1C CA 71 */	bl GXSetVtxAttrFmt
-/* 81376E94 00045294  38 60 00 01 */	li r3, 0x1
-/* 81376E98 00045298  48 1C EB 2D */	bl GXSetNumChans
-/* 81376E9C 0004529C  38 60 00 04 */	li r3, 0x4
-/* 81376EA0 000452A0  38 80 00 00 */	li r4, 0x0
-/* 81376EA4 000452A4  38 A0 00 00 */	li r5, 0x0
-/* 81376EA8 000452A8  38 C0 00 00 */	li r6, 0x0
-/* 81376EAC 000452AC  38 E0 00 00 */	li r7, 0x0
-/* 81376EB0 000452B0  39 00 00 00 */	li r8, 0x0
-/* 81376EB4 000452B4  39 20 00 02 */	li r9, 0x2
-/* 81376EB8 000452B8  48 1C EB 31 */	bl GXSetChanCtrl
-/* 81376EBC 000452BC  38 60 00 05 */	li r3, 0x5
-/* 81376EC0 000452C0  38 80 00 00 */	li r4, 0x0
-/* 81376EC4 000452C4  38 A0 00 00 */	li r5, 0x0
-/* 81376EC8 000452C8  38 C0 00 00 */	li r6, 0x0
-/* 81376ECC 000452CC  38 E0 00 00 */	li r7, 0x0
-/* 81376ED0 000452D0  39 00 00 00 */	li r8, 0x0
-/* 81376ED4 000452D4  39 20 00 02 */	li r9, 0x2
-/* 81376ED8 000452D8  48 1C EB 11 */	bl GXSetChanCtrl
-/* 81376EDC 000452DC  38 60 00 00 */	li r3, 0x0
-/* 81376EE0 000452E0  48 1C D0 7D */	bl GXSetNumTexGens
-/* 81376EE4 000452E4  38 60 00 01 */	li r3, 0x1
-/* 81376EE8 000452E8  48 1D 05 0D */	bl GXSetNumTevStages
-/* 81376EEC 000452EC  38 60 00 00 */	li r3, 0x0
-/* 81376EF0 000452F0  38 80 00 FF */	li r4, 0xff
-/* 81376EF4 000452F4  38 A0 00 FF */	li r5, 0xff
-/* 81376EF8 000452F8  38 C0 00 FF */	li r6, 0xff
-/* 81376EFC 000452FC  48 1D 03 9D */	bl GXSetTevOrder
-/* 81376F00 00045300  38 60 00 00 */	li r3, 0x0
-/* 81376F04 00045304  38 80 00 0F */	li r4, 0xf
-/* 81376F08 00045308  38 A0 00 0F */	li r5, 0xf
-/* 81376F0C 0004530C  38 C0 00 0F */	li r6, 0xf
-/* 81376F10 00045310  38 E0 00 02 */	li r7, 0x2
-/* 81376F14 00045314  48 1C FF 19 */	bl GXSetTevColorIn
-/* 81376F18 00045318  38 60 00 00 */	li r3, 0x0
-/* 81376F1C 0004531C  38 80 00 00 */	li r4, 0x0
-/* 81376F20 00045320  38 A0 00 00 */	li r5, 0x0
-/* 81376F24 00045324  38 C0 00 00 */	li r6, 0x0
-/* 81376F28 00045328  38 E0 00 01 */	li r7, 0x1
-/* 81376F2C 0004532C  39 00 00 00 */	li r8, 0x0
-/* 81376F30 00045330  48 1C FF 7D */	bl GXSetTevColorOp
-/* 81376F34 00045334  38 60 00 00 */	li r3, 0x0
-/* 81376F38 00045338  38 80 00 07 */	li r4, 0x7
-/* 81376F3C 0004533C  38 A0 00 07 */	li r5, 0x7
-/* 81376F40 00045340  38 C0 00 07 */	li r6, 0x7
-/* 81376F44 00045344  38 E0 00 01 */	li r7, 0x1
-/* 81376F48 00045348  48 1C FF 25 */	bl GXSetTevAlphaIn
-/* 81376F4C 0004534C  38 60 00 00 */	li r3, 0x0
-/* 81376F50 00045350  38 80 00 00 */	li r4, 0x0
-/* 81376F54 00045354  38 A0 00 00 */	li r5, 0x0
-/* 81376F58 00045358  38 C0 00 00 */	li r6, 0x0
-/* 81376F5C 0004535C  38 E0 00 01 */	li r7, 0x1
-/* 81376F60 00045360  39 00 00 00 */	li r8, 0x0
-/* 81376F64 00045364  48 1C FF A1 */	bl GXSetTevAlphaOp
-/* 81376F68 00045368  38 60 00 07 */	li r3, 0x7
-/* 81376F6C 0004536C  38 80 00 00 */	li r4, 0x0
-/* 81376F70 00045370  38 A0 00 01 */	li r5, 0x1
-/* 81376F74 00045374  38 C0 00 07 */	li r6, 0x7
-/* 81376F78 00045378  38 E0 00 00 */	li r7, 0x0
-/* 81376F7C 0004537C  48 1D 02 59 */	bl GXSetAlphaCompare
-/* 81376F80 00045380  38 60 00 01 */	li r3, 0x1
-/* 81376F84 00045384  38 80 00 04 */	li r4, 0x4
-/* 81376F88 00045388  38 A0 00 05 */	li r5, 0x5
-/* 81376F8C 0004538C  38 C0 00 05 */	li r6, 0x5
-/* 81376F90 00045390  48 1D 07 D9 */	bl GXSetBlendMode
-/* 81376F94 00045394  38 60 00 00 */	li r3, 0x0
-/* 81376F98 00045398  48 1D 08 4D */	bl GXSetAlphaUpdate
-/* 81376F9C 0004539C  38 60 00 00 */	li r3, 0x0
-/* 81376FA0 000453A0  38 80 00 07 */	li r4, 0x7
-/* 81376FA4 000453A4  38 A0 00 00 */	li r5, 0x0
-/* 81376FA8 000453A8  48 1D 08 69 */	bl GXSetZMode
-/* 81376FAC 000453AC  38 60 00 00 */	li r3, 0x0
-/* 81376FB0 000453B0  48 1C FD 29 */	bl GXSetNumIndStages
-/* 81376FB4 000453B4  38 60 00 00 */	li r3, 0x0
-/* 81376FB8 000453B8  38 80 00 00 */	li r4, 0x0
-/* 81376FBC 000453BC  38 A0 00 01 */	li r5, 0x1
-/* 81376FC0 000453C0  38 C0 00 02 */	li r6, 0x2
-/* 81376FC4 000453C4  38 E0 00 03 */	li r7, 0x3
-/* 81376FC8 000453C8  48 1D 01 91 */	bl GXSetTevSwapModeTableGXSetAlphaCompare
-/* 81376FCC 000453CC  38 60 00 00 */	li r3, 0x0
-/* 81376FD0 000453D0  38 80 00 00 */	li r4, 0x0
-/* 81376FD4 000453D4  38 A0 00 00 */	li r5, 0x0
-/* 81376FD8 000453D8  48 1D 01 45 */	bl GXSetTevSwapMode
-/* 81376FDC 000453DC  88 DE 00 0C */	lbz r6, 0xc(r30)
-/* 81376FE0 000453E0  38 81 00 08 */	addi r4, r1, 0x8
-/* 81376FE4 000453E4  88 BE 00 0D */	lbz r5, 0xd(r30)
-/* 81376FE8 000453E8  38 60 00 01 */	li r3, 0x1
-/* 81376FEC 000453EC  88 1E 00 0E */	lbz r0, 0xe(r30)
-/* 81376FF0 000453F0  98 C1 00 0C */	stb r6, 0xc(r1)
-/* 81376FF4 000453F4  98 A1 00 0D */	stb r5, 0xd(r1)
-/* 81376FF8 000453F8  98 01 00 0E */	stb r0, 0xe(r1)
-/* 81376FFC 000453FC  9B E1 00 0F */	stb r31, 0xf(r1)
-/* 81377000 00045400  98 C1 00 08 */	stb r6, 0x8(r1)
-/* 81377004 00045404  98 A1 00 09 */	stb r5, 0x9(r1)
-/* 81377008 00045408  98 01 00 0A */	stb r0, 0xa(r1)
-/* 8137700C 0004540C  9B E1 00 0B */	stb r31, 0xb(r1)
-/* 81377010 00045410  48 1C FF 4D */	bl GXSetTevColor
-/* 81377014 00045414  38 60 00 80 */	li r3, 0x80
-/* 81377018 00045418  38 80 00 00 */	li r4, 0x0
-/* 8137701C 0004541C  38 A0 00 04 */	li r5, 0x4
-/* 81377020 00045420  48 1C D9 D5 */	bl GXBegin
-/* 81377024 00045424  C0 02 83 4C */	lfs f0, lbl_8169474C@sda21(r0)
-/* 81377028 00045428  3C 60 CC 01 */	lis r3, 0xcc01
-/* 8137702C 0004542C  D0 03 80 00 */	stfs f0, -0x8000(r3)
-/* 81377030 00045430  C0 02 83 4C */	lfs f0, lbl_8169474C@sda21(r0)
-/* 81377034 00045434  D0 03 80 00 */	stfs f0, -0x8000(r3)
-/* 81377038 00045438  C0 02 83 4C */	lfs f0, lbl_8169474C@sda21(r0)
-/* 8137703C 0004543C  D0 03 80 00 */	stfs f0, -0x8000(r3)
-/* 81377040 00045440  C0 02 83 50 */	lfs f0, lbl_81694750@sda21(r0)
-/* 81377044 00045444  D0 03 80 00 */	stfs f0, -0x8000(r3)
-/* 81377048 00045448  C0 02 83 50 */	lfs f0, lbl_81694750@sda21(r0)
-/* 8137704C 0004544C  D0 03 80 00 */	stfs f0, -0x8000(r3)
-/* 81377050 00045450  C0 02 83 50 */	lfs f0, lbl_81694750@sda21(r0)
-/* 81377054 00045454  D0 03 80 00 */	stfs f0, -0x8000(r3)
-/* 81377058 00045458  C0 02 83 50 */	lfs f0, lbl_81694750@sda21(r0)
-/* 8137705C 0004545C  D0 03 80 00 */	stfs f0, -0x8000(r3)
-/* 81377060 00045460  C0 02 83 4C */	lfs f0, lbl_8169474C@sda21(r0)
-/* 81377064 00045464  D0 03 80 00 */	stfs f0, -0x8000(r3)
-/* 81377068 00045468  80 01 00 54 */	lwz r0, 0x54(r1)
-/* 8137706C 0004546C  83 E1 00 4C */	lwz r31, 0x4c(r1)
-/* 81377070 00045470  83 C1 00 48 */	lwz r30, 0x48(r1)
-/* 81377074 00045474  7C 08 03 A6 */	mtlr r0
-/* 81377078 00045478  38 21 00 50 */	addi r1, r1, 0x50
-/* 8137707C 0004547C  4E 80 00 20 */	blr
+/* 81376E24 | 94 21 FF B0 */	stwu r1, -0x50(r1)
+/* 81376E28 | 7C 08 02 A6 */	mflr r0
+/* 81376E2C | 90 01 00 54 */	stw r0, 0x54(r1)
+/* 81376E30 | 93 E1 00 4C */	stw r31, 0x4c(r1)
+/* 81376E34 | 93 C1 00 48 */	stw r30, 0x48(r1)
+/* 81376E38 | 7C 7E 1B 78 */	mr r30, r3
+/* 81376E3C | 80 83 00 00 */	lwz r4, 0x0(r3)
+/* 81376E40 | 80 03 00 04 */	lwz r0, 0x4(r3)
+/* 81376E44 | 38 61 00 10 */	addi r3, r1, 0x10
+/* 81376E48 | 1C 84 00 FF */	mulli r4, r4, 0xff
+/* 81376E4C | 7C 04 03 D6 */	divw r0, r4, r0
+/* 81376E50 | 54 1F 06 3E */	clrlwi r31, r0, 24
+/* 81376E54 | 48 1C 9F DD */	bl fn_81540E30
+/* 81376E58 | 38 61 00 10 */	addi r3, r1, 0x10
+/* 81376E5C | 38 80 00 00 */	li r4, 0x0
+/* 81376E60 | 48 1D 0E C1 */	bl GXLoadPosMtxImm
+/* 81376E64 | 38 60 00 00 */	li r3, 0x0
+/* 81376E68 | 48 1D 0F 61 */	bl GXSetCurrentMtx
+/* 81376E6C | 48 1C CA 61 */	bl GXClearVtxDesc
+/* 81376E70 | 38 60 00 09 */	li r3, 0x9
+/* 81376E74 | 38 80 00 01 */	li r4, 0x1
+/* 81376E78 | 48 1C C6 15 */	bl GXSetVtxDesc
+/* 81376E7C | 38 60 00 00 */	li r3, 0x0
+/* 81376E80 | 38 80 00 09 */	li r4, 0x9
+/* 81376E84 | 38 A0 00 00 */	li r5, 0x0
+/* 81376E88 | 38 C0 00 04 */	li r6, 0x4
+/* 81376E8C | 38 E0 00 00 */	li r7, 0x0
+/* 81376E90 | 48 1C CA 71 */	bl GXSetVtxAttrFmt
+/* 81376E94 | 38 60 00 01 */	li r3, 0x1
+/* 81376E98 | 48 1C EB 2D */	bl GXSetNumChans
+/* 81376E9C | 38 60 00 04 */	li r3, 0x4
+/* 81376EA0 | 38 80 00 00 */	li r4, 0x0
+/* 81376EA4 | 38 A0 00 00 */	li r5, 0x0
+/* 81376EA8 | 38 C0 00 00 */	li r6, 0x0
+/* 81376EAC | 38 E0 00 00 */	li r7, 0x0
+/* 81376EB0 | 39 00 00 00 */	li r8, 0x0
+/* 81376EB4 | 39 20 00 02 */	li r9, 0x2
+/* 81376EB8 | 48 1C EB 31 */	bl GXSetChanCtrl
+/* 81376EBC | 38 60 00 05 */	li r3, 0x5
+/* 81376EC0 | 38 80 00 00 */	li r4, 0x0
+/* 81376EC4 | 38 A0 00 00 */	li r5, 0x0
+/* 81376EC8 | 38 C0 00 00 */	li r6, 0x0
+/* 81376ECC | 38 E0 00 00 */	li r7, 0x0
+/* 81376ED0 | 39 00 00 00 */	li r8, 0x0
+/* 81376ED4 | 39 20 00 02 */	li r9, 0x2
+/* 81376ED8 | 48 1C EB 11 */	bl GXSetChanCtrl
+/* 81376EDC | 38 60 00 00 */	li r3, 0x0
+/* 81376EE0 | 48 1C D0 7D */	bl GXSetNumTexGens
+/* 81376EE4 | 38 60 00 01 */	li r3, 0x1
+/* 81376EE8 | 48 1D 05 0D */	bl GXSetNumTevStages
+/* 81376EEC | 38 60 00 00 */	li r3, 0x0
+/* 81376EF0 | 38 80 00 FF */	li r4, 0xff
+/* 81376EF4 | 38 A0 00 FF */	li r5, 0xff
+/* 81376EF8 | 38 C0 00 FF */	li r6, 0xff
+/* 81376EFC | 48 1D 03 9D */	bl GXSetTevOrder
+/* 81376F00 | 38 60 00 00 */	li r3, 0x0
+/* 81376F04 | 38 80 00 0F */	li r4, 0xf
+/* 81376F08 | 38 A0 00 0F */	li r5, 0xf
+/* 81376F0C | 38 C0 00 0F */	li r6, 0xf
+/* 81376F10 | 38 E0 00 02 */	li r7, 0x2
+/* 81376F14 | 48 1C FF 19 */	bl GXSetTevColorIn
+/* 81376F18 | 38 60 00 00 */	li r3, 0x0
+/* 81376F1C | 38 80 00 00 */	li r4, 0x0
+/* 81376F20 | 38 A0 00 00 */	li r5, 0x0
+/* 81376F24 | 38 C0 00 00 */	li r6, 0x0
+/* 81376F28 | 38 E0 00 01 */	li r7, 0x1
+/* 81376F2C | 39 00 00 00 */	li r8, 0x0
+/* 81376F30 | 48 1C FF 7D */	bl GXSetTevColorOp
+/* 81376F34 | 38 60 00 00 */	li r3, 0x0
+/* 81376F38 | 38 80 00 07 */	li r4, 0x7
+/* 81376F3C | 38 A0 00 07 */	li r5, 0x7
+/* 81376F40 | 38 C0 00 07 */	li r6, 0x7
+/* 81376F44 | 38 E0 00 01 */	li r7, 0x1
+/* 81376F48 | 48 1C FF 25 */	bl GXSetTevAlphaIn
+/* 81376F4C | 38 60 00 00 */	li r3, 0x0
+/* 81376F50 | 38 80 00 00 */	li r4, 0x0
+/* 81376F54 | 38 A0 00 00 */	li r5, 0x0
+/* 81376F58 | 38 C0 00 00 */	li r6, 0x0
+/* 81376F5C | 38 E0 00 01 */	li r7, 0x1
+/* 81376F60 | 39 00 00 00 */	li r8, 0x0
+/* 81376F64 | 48 1C FF A1 */	bl GXSetTevAlphaOp
+/* 81376F68 | 38 60 00 07 */	li r3, 0x7
+/* 81376F6C | 38 80 00 00 */	li r4, 0x0
+/* 81376F70 | 38 A0 00 01 */	li r5, 0x1
+/* 81376F74 | 38 C0 00 07 */	li r6, 0x7
+/* 81376F78 | 38 E0 00 00 */	li r7, 0x0
+/* 81376F7C | 48 1D 02 59 */	bl GXSetAlphaCompare
+/* 81376F80 | 38 60 00 01 */	li r3, 0x1
+/* 81376F84 | 38 80 00 04 */	li r4, 0x4
+/* 81376F88 | 38 A0 00 05 */	li r5, 0x5
+/* 81376F8C | 38 C0 00 05 */	li r6, 0x5
+/* 81376F90 | 48 1D 07 D9 */	bl GXSetBlendMode
+/* 81376F94 | 38 60 00 00 */	li r3, 0x0
+/* 81376F98 | 48 1D 08 4D */	bl GXSetAlphaUpdate
+/* 81376F9C | 38 60 00 00 */	li r3, 0x0
+/* 81376FA0 | 38 80 00 07 */	li r4, 0x7
+/* 81376FA4 | 38 A0 00 00 */	li r5, 0x0
+/* 81376FA8 | 48 1D 08 69 */	bl GXSetZMode
+/* 81376FAC | 38 60 00 00 */	li r3, 0x0
+/* 81376FB0 | 48 1C FD 29 */	bl GXSetNumIndStages
+/* 81376FB4 | 38 60 00 00 */	li r3, 0x0
+/* 81376FB8 | 38 80 00 00 */	li r4, 0x0
+/* 81376FBC | 38 A0 00 01 */	li r5, 0x1
+/* 81376FC0 | 38 C0 00 02 */	li r6, 0x2
+/* 81376FC4 | 38 E0 00 03 */	li r7, 0x3
+/* 81376FC8 | 48 1D 01 91 */	bl GXSetTevSwapModeTableGXSetAlphaCompare
+/* 81376FCC | 38 60 00 00 */	li r3, 0x0
+/* 81376FD0 | 38 80 00 00 */	li r4, 0x0
+/* 81376FD4 | 38 A0 00 00 */	li r5, 0x0
+/* 81376FD8 | 48 1D 01 45 */	bl GXSetTevSwapMode
+/* 81376FDC | 88 DE 00 0C */	lbz r6, 0xc(r30)
+/* 81376FE0 | 38 81 00 08 */	addi r4, r1, 0x8
+/* 81376FE4 | 88 BE 00 0D */	lbz r5, 0xd(r30)
+/* 81376FE8 | 38 60 00 01 */	li r3, 0x1
+/* 81376FEC | 88 1E 00 0E */	lbz r0, 0xe(r30)
+/* 81376FF0 | 98 C1 00 0C */	stb r6, 0xc(r1)
+/* 81376FF4 | 98 A1 00 0D */	stb r5, 0xd(r1)
+/* 81376FF8 | 98 01 00 0E */	stb r0, 0xe(r1)
+/* 81376FFC | 9B E1 00 0F */	stb r31, 0xf(r1)
+/* 81377000 | 98 C1 00 08 */	stb r6, 0x8(r1)
+/* 81377004 | 98 A1 00 09 */	stb r5, 0x9(r1)
+/* 81377008 | 98 01 00 0A */	stb r0, 0xa(r1)
+/* 8137700C | 9B E1 00 0B */	stb r31, 0xb(r1)
+/* 81377010 | 48 1C FF 4D */	bl GXSetTevColor
+/* 81377014 | 38 60 00 80 */	li r3, 0x80
+/* 81377018 | 38 80 00 00 */	li r4, 0x0
+/* 8137701C | 38 A0 00 04 */	li r5, 0x4
+/* 81377020 | 48 1C D9 D5 */	bl GXBegin
+/* 81377024 | C0 02 83 4C */	lfs f0, lbl_8169474C@sda21(r0)
+/* 81377028 | 3C 60 CC 01 */	lis r3, 0xcc01
+/* 8137702C | D0 03 80 00 */	stfs f0, -0x8000(r3)
+/* 81377030 | C0 02 83 4C */	lfs f0, lbl_8169474C@sda21(r0)
+/* 81377034 | D0 03 80 00 */	stfs f0, -0x8000(r3)
+/* 81377038 | C0 02 83 4C */	lfs f0, lbl_8169474C@sda21(r0)
+/* 8137703C | D0 03 80 00 */	stfs f0, -0x8000(r3)
+/* 81377040 | C0 02 83 50 */	lfs f0, lbl_81694750@sda21(r0)
+/* 81377044 | D0 03 80 00 */	stfs f0, -0x8000(r3)
+/* 81377048 | C0 02 83 50 */	lfs f0, lbl_81694750@sda21(r0)
+/* 8137704C | D0 03 80 00 */	stfs f0, -0x8000(r3)
+/* 81377050 | C0 02 83 50 */	lfs f0, lbl_81694750@sda21(r0)
+/* 81377054 | D0 03 80 00 */	stfs f0, -0x8000(r3)
+/* 81377058 | C0 02 83 50 */	lfs f0, lbl_81694750@sda21(r0)
+/* 8137705C | D0 03 80 00 */	stfs f0, -0x8000(r3)
+/* 81377060 | C0 02 83 4C */	lfs f0, lbl_8169474C@sda21(r0)
+/* 81377064 | D0 03 80 00 */	stfs f0, -0x8000(r3)
+/* 81377068 | 80 01 00 54 */	lwz r0, 0x54(r1)
+/* 8137706C | 83 E1 00 4C */	lwz r31, 0x4c(r1)
+/* 81377070 | 83 C1 00 48 */	lwz r30, 0x48(r1)
+/* 81377074 | 7C 08 03 A6 */	mtlr r0
+/* 81377078 | 38 21 00 50 */	addi r1, r1, 0x50
+/* 8137707C | 4E 80 00 20 */	blr
 .endfn draw__Q310homebutton10HomeButton10BlackFaderFv
 
 # .text:0x5AD8 | 0x81377080 | size: 0x98
 # homebutton::HomeButton::play_sound(int)
 .fn play_sound__Q210homebutton10HomeButtonFi, global
-/* 81377080 00045480  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 81377084 00045484  7C 08 02 A6 */	mflr r0
-/* 81377088 00045488  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8137708C 0004548C  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 81377090 00045490  7C 9F 23 78 */	mr r31, r4
-/* 81377094 00045494  93 C1 00 08 */	stw r30, 0x8(r1)
-/* 81377098 00045498  7C 7E 1B 78 */	mr r30, r3
-/* 8137709C 0004549C  80 A3 00 04 */	lwz r5, 0x4(r3)
-/* 813770A0 000454A0  38 60 00 00 */	li r3, 0x0
-/* 813770A4 000454A4  81 85 00 1C */	lwz r12, 0x1c(r5)
-/* 813770A8 000454A8  2C 0C 00 00 */	cmpwi r12, 0x0
-/* 813770AC 000454AC  41 82 00 10 */	beq .L_813770BC
-/* 813770B0 000454B0  38 60 00 05 */	li r3, 0x5
-/* 813770B4 000454B4  7D 89 03 A6 */	mtctr r12
-/* 813770B8 000454B8  4E 80 04 21 */	bctrl
+/* 81377080 | 94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 81377084 | 7C 08 02 A6 */	mflr r0
+/* 81377088 | 90 01 00 14 */	stw r0, 0x14(r1)
+/* 8137708C | 93 E1 00 0C */	stw r31, 0xc(r1)
+/* 81377090 | 7C 9F 23 78 */	mr r31, r4
+/* 81377094 | 93 C1 00 08 */	stw r30, 0x8(r1)
+/* 81377098 | 7C 7E 1B 78 */	mr r30, r3
+/* 8137709C | 80 A3 00 04 */	lwz r5, 0x4(r3)
+/* 813770A0 | 38 60 00 00 */	li r3, 0x0
+/* 813770A4 | 81 85 00 1C */	lwz r12, 0x1c(r5)
+/* 813770A8 | 2C 0C 00 00 */	cmpwi r12, 0x0
+/* 813770AC | 41 82 00 10 */	beq .L_813770BC
+/* 813770B0 | 38 60 00 05 */	li r3, 0x5
+/* 813770B4 | 7D 89 03 A6 */	mtctr r12
+/* 813770B8 | 4E 80 04 21 */	bctrl
 .L_813770BC:
-/* 813770BC 000454BC  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813770C0 000454C0  40 82 00 40 */	bne .L_81377100
-/* 813770C4 000454C4  80 1E 06 08 */	lwz r0, 0x608(r30)
-/* 813770C8 000454C8  2C 00 00 00 */	cmpwi r0, 0x0
-/* 813770CC 000454CC  41 82 00 34 */	beq .L_81377100
-/* 813770D0 000454D0  80 7E 06 1C */	lwz r3, 0x61c(r30)
-/* 813770D4 000454D4  2C 03 00 00 */	cmpwi r3, 0x0
-/* 813770D8 000454D8  41 82 00 28 */	beq .L_81377100
-/* 813770DC 000454DC  48 19 37 9D */	bl fn_8150A878
-/* 813770E0 000454E0  80 7E 06 08 */	lwz r3, 0x608(r30)
-/* 813770E4 000454E4  7F E5 FB 78 */	mr r5, r31
-/* 813770E8 000454E8  80 9E 06 1C */	lwz r4, 0x61c(r30)
-/* 813770EC 000454EC  38 C0 00 00 */	li r6, 0x0
-/* 813770F0 000454F0  38 63 00 0C */	addi r3, r3, 0xc
-/* 813770F4 000454F4  38 E0 00 00 */	li r7, 0x0
-/* 813770F8 000454F8  39 00 00 00 */	li r8, 0x0
-/* 813770FC 000454FC  48 19 4B 3D */	bl fn_8150BC38
+/* 813770BC | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813770C0 | 40 82 00 40 */	bne .L_81377100
+/* 813770C4 | 80 1E 06 08 */	lwz r0, 0x608(r30)
+/* 813770C8 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 813770CC | 41 82 00 34 */	beq .L_81377100
+/* 813770D0 | 80 7E 06 1C */	lwz r3, 0x61c(r30)
+/* 813770D4 | 2C 03 00 00 */	cmpwi r3, 0x0
+/* 813770D8 | 41 82 00 28 */	beq .L_81377100
+/* 813770DC | 48 19 37 9D */	bl fn_8150A878
+/* 813770E0 | 80 7E 06 08 */	lwz r3, 0x608(r30)
+/* 813770E4 | 7F E5 FB 78 */	mr r5, r31
+/* 813770E8 | 80 9E 06 1C */	lwz r4, 0x61c(r30)
+/* 813770EC | 38 C0 00 00 */	li r6, 0x0
+/* 813770F0 | 38 63 00 0C */	addi r3, r3, 0xc
+/* 813770F4 | 38 E0 00 00 */	li r7, 0x0
+/* 813770F8 | 39 00 00 00 */	li r8, 0x0
+/* 813770FC | 48 19 4B 3D */	bl fn_8150BC38
 .L_81377100:
-/* 81377100 00045500  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 81377104 00045504  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 81377108 00045508  83 C1 00 08 */	lwz r30, 0x8(r1)
-/* 8137710C 0004550C  7C 08 03 A6 */	mtlr r0
-/* 81377110 00045510  38 21 00 10 */	addi r1, r1, 0x10
-/* 81377114 00045514  4E 80 00 20 */	blr
+/* 81377100 | 80 01 00 14 */	lwz r0, 0x14(r1)
+/* 81377104 | 83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 81377108 | 83 C1 00 08 */	lwz r30, 0x8(r1)
+/* 8137710C | 7C 08 03 A6 */	mtlr r0
+/* 81377110 | 38 21 00 10 */	addi r1, r1, 0x10
+/* 81377114 | 4E 80 00 20 */	blr
 .endfn play_sound__Q210homebutton10HomeButtonFi
 
 # .text:0x5B70 | 0x81377118 | size: 0xB0
 # homebutton::HomeButton::fadeout_sound(float)
 .fn fadeout_sound__Q210homebutton10HomeButtonFf, global
-/* 81377118 00045518  94 21 FF D0 */	stwu r1, -0x30(r1)
-/* 8137711C 0004551C  7C 08 02 A6 */	mflr r0
-/* 81377120 00045520  90 01 00 34 */	stw r0, 0x34(r1)
-/* 81377124 00045524  DB E1 00 20 */	stfd f31, 0x20(r1)
-/* 81377128 00045528  F3 E1 00 28 */	psq_st f31, 0x28(r1), 0, qr0
-/* 8137712C 0004552C  FF E0 08 90 */	fmr f31, f1
-/* 81377130 00045530  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 81377134 00045534  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 81377138 00045538  7C 7E 1B 78 */	mr r30, r3
-/* 8137713C 0004553C  80 03 00 B0 */	lwz r0, 0xb0(r3)
-/* 81377140 00045540  2C 00 00 03 */	cmpwi r0, 0x3
-/* 81377144 00045544  41 82 00 64 */	beq .L_813771A8
-/* 81377148 00045548  88 03 00 8E */	lbz r0, 0x8e(r3)
-/* 8137714C 0004554C  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81377150 00045550  41 82 00 20 */	beq .L_81377170
-/* 81377154 00045554  C0 02 83 54 */	lfs f0, lbl_81694754@sda21(r0)
-/* 81377158 00045558  EC 00 00 72 */	fmuls f0, f0, f1
-/* 8137715C 0004555C  FC 00 00 1E */	fctiwz f0, f0
-/* 81377160 00045560  D8 01 00 08 */	stfd f0, 0x8(r1)
-/* 81377164 00045564  80 61 00 0C */	lwz r3, 0xc(r1)
-/* 81377168 00045568  54 63 04 3E */	clrlwi r3, r3, 16
-/* 8137716C 0004556C  48 1D C6 5D */	bl fn_815537C8
+/* 81377118 | 94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 8137711C | 7C 08 02 A6 */	mflr r0
+/* 81377120 | 90 01 00 34 */	stw r0, 0x34(r1)
+/* 81377124 | DB E1 00 20 */	stfd f31, 0x20(r1)
+/* 81377128 | F3 E1 00 28 */	psq_st f31, 0x28(r1), 0, qr0
+/* 8137712C | FF E0 08 90 */	fmr f31, f1
+/* 81377130 | 93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 81377134 | 93 C1 00 18 */	stw r30, 0x18(r1)
+/* 81377138 | 7C 7E 1B 78 */	mr r30, r3
+/* 8137713C | 80 03 00 B0 */	lwz r0, 0xb0(r3)
+/* 81377140 | 2C 00 00 03 */	cmpwi r0, 0x3
+/* 81377144 | 41 82 00 64 */	beq .L_813771A8
+/* 81377148 | 88 03 00 8E */	lbz r0, 0x8e(r3)
+/* 8137714C | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81377150 | 41 82 00 20 */	beq .L_81377170
+/* 81377154 | C0 02 83 54 */	lfs f0, lbl_81694754@sda21(r0)
+/* 81377158 | EC 00 00 72 */	fmuls f0, f0, f1
+/* 8137715C | FC 00 00 1E */	fctiwz f0, f0
+/* 81377160 | D8 01 00 08 */	stfd f0, 0x8(r1)
+/* 81377164 | 80 61 00 0C */	lwz r3, 0xc(r1)
+/* 81377168 | 54 63 04 3E */	clrlwi r3, r3, 16
+/* 8137716C | 48 1D C6 5D */	bl fn_815537C8
 .L_81377170:
-/* 81377170 00045570  80 1E 06 08 */	lwz r0, 0x608(r30)
-/* 81377174 00045574  2C 00 00 00 */	cmpwi r0, 0x0
-/* 81377178 00045578  41 82 00 30 */	beq .L_813771A8
-/* 8137717C 0004557C  3B E0 00 00 */	li r31, 0x0
-/* 81377180 00045580  48 00 00 18 */	b .L_81377198
+/* 81377170 | 80 1E 06 08 */	lwz r0, 0x608(r30)
+/* 81377174 | 2C 00 00 00 */	cmpwi r0, 0x0
+/* 81377178 | 41 82 00 30 */	beq .L_813771A8
+/* 8137717C | 3B E0 00 00 */	li r31, 0x0
+/* 81377180 | 48 00 00 18 */	b .L_81377198
 .L_81377184:
-/* 81377184 00045584  7F E4 FB 78 */	mr r4, r31
-/* 81377188 00045588  48 19 1B C1 */	bl fn_81508D48
-/* 8137718C 0004558C  FC 20 F8 90 */	fmr f1, f31
-/* 81377190 00045590  48 19 3B C5 */	bl fn_8150AD54
-/* 81377194 00045594  3B FF 00 01 */	addi r31, r31, 0x1
+/* 81377184 | 7F E4 FB 78 */	mr r4, r31
+/* 81377188 | 48 19 1B C1 */	bl fn_81508D48
+/* 8137718C | FC 20 F8 90 */	fmr f1, f31
+/* 81377190 | 48 19 3B C5 */	bl fn_8150AD54
+/* 81377194 | 3B FF 00 01 */	addi r31, r31, 0x1
 .L_81377198:
-/* 81377198 00045598  80 7E 06 08 */	lwz r3, 0x608(r30)
-/* 8137719C 0004559C  80 03 00 70 */	lwz r0, 0x70(r3)
-/* 813771A0 000455A0  7C 1F 00 40 */	cmplw r31, r0
-/* 813771A4 000455A4  41 80 FF E0 */	blt .L_81377184
+/* 81377198 | 80 7E 06 08 */	lwz r3, 0x608(r30)
+/* 8137719C | 80 03 00 70 */	lwz r0, 0x70(r3)
+/* 813771A0 | 7C 1F 00 40 */	cmplw r31, r0
+/* 813771A4 | 41 80 FF E0 */	blt .L_81377184
 .L_813771A8:
-/* 813771A8 000455A8  E3 E1 00 28 */	psq_l f31, 0x28(r1), 0, qr0
-/* 813771AC 000455AC  80 01 00 34 */	lwz r0, 0x34(r1)
-/* 813771B0 000455B0  CB E1 00 20 */	lfd f31, 0x20(r1)
-/* 813771B4 000455B4  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 813771B8 000455B8  83 C1 00 18 */	lwz r30, 0x18(r1)
-/* 813771BC 000455BC  7C 08 03 A6 */	mtlr r0
-/* 813771C0 000455C0  38 21 00 30 */	addi r1, r1, 0x30
-/* 813771C4 000455C4  4E 80 00 20 */	blr
+/* 813771A8 | E3 E1 00 28 */	psq_l f31, 0x28(r1), 0, qr0
+/* 813771AC | 80 01 00 34 */	lwz r0, 0x34(r1)
+/* 813771B0 | CB E1 00 20 */	lfd f31, 0x20(r1)
+/* 813771B4 | 83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 813771B8 | 83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 813771BC | 7C 08 03 A6 */	mtlr r0
+/* 813771C0 | 38 21 00 30 */	addi r1, r1, 0x30
+/* 813771C4 | 4E 80 00 20 */	blr
 .endfn fadeout_sound__Q210homebutton10HomeButtonFf
 
 # .text:0x5C20 | 0x813771C8 | size: 0x4
 # homebutton::gui::EventHandler::onEvent(unsigned long, unsigned long, void*)
 .fn onEvent__Q310homebutton3gui12EventHandlerFUlUlPv, global
-/* 813771C8 000455C8  4E 80 00 20 */	blr
+/* 813771C8 | 4E 80 00 20 */	blr
 .endfn onEvent__Q310homebutton3gui12EventHandlerFUlUlPv
 
 # .text:0x5C24 | 0x813771CC | size: 0x4
 # homebutton::gui::Interface::draw(float(&)[3][4])
 .fn draw__Q310homebutton3gui9InterfaceFRA3_A4_f, global
-/* 813771CC 000455CC  4E 80 00 20 */	blr
+/* 813771CC | 4E 80 00 20 */	blr
 .endfn draw__Q310homebutton3gui9InterfaceFRA3_A4_f
 
 # .text:0x5C28 | 0x813771D0 | size: 0x4
 # homebutton::gui::Interface::draw()
 .fn draw__Q310homebutton3gui9InterfaceFv, global
-/* 813771D0 000455D0  4E 80 00 20 */	blr
+/* 813771D0 | 4E 80 00 20 */	blr
 .endfn draw__Q310homebutton3gui9InterfaceFv
 
 # .text:0x5C2C | 0x813771D4 | size: 0x4
 # homebutton::gui::Interface::calc()
 .fn calc__Q310homebutton3gui9InterfaceFv, global
-/* 813771D4 000455D4  4E 80 00 20 */	blr
+/* 813771D4 | 4E 80 00 20 */	blr
 .endfn calc__Q310homebutton3gui9InterfaceFv
 
 # .text:0x5C30 | 0x813771D8 | size: 0x4
 # homebutton::gui::Interface::init()
 .fn init__Q310homebutton3gui9InterfaceFv, global
-/* 813771D8 000455D8  4E 80 00 20 */	blr
+/* 813771D8 | 4E 80 00 20 */	blr
 .endfn init__Q310homebutton3gui9InterfaceFv
 
 # .text:0x5C34 | 0x813771DC | size: 0x4
 # homebutton::gui::Interface::create()
 .fn create__Q310homebutton3gui9InterfaceFv, global
-/* 813771DC 000455DC  4E 80 00 20 */	blr
+/* 813771DC | 4E 80 00 20 */	blr
 .endfn create__Q310homebutton3gui9InterfaceFv
 
 # 0x8160F378..0x8160F628 | size: 0x2B0

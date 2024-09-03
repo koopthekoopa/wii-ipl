@@ -17,11 +17,11 @@ extern "C" {
 
 extern DtorChain*   __global_destructor_chain;
 
-void    __register_global_object(void* object, void* dtor, DtorChain* chain);
-void    __destroy_global_chain();
+void                __register_global_object(void* object, void* dtor, DtorChain* chain);
+void                __destroy_global_chain();
 
-int     __register_fragment(__eti_init_info* info, char* reg);
-void    __unregister_fragment(int id);
+int                 __register_fragment(__eti_init_info* info, char* reg);
+void                __unregister_fragment(int id);
 
 #ifdef __cplusplus
 }

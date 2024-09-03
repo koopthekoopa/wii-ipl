@@ -16,13 +16,13 @@ char* __va_arg(va_list args, _va_arg_type type) {
         pReg = &args->fpr;
         reg = args->fpr;
         size = 8;
-        fprOff = 8*4;
+        fprOff = 8 * 4;
         regSize = 8;
     }
 
     if (type == arg_DOUBLEWORD) {
         size = 8;
-        maxReg = maxReg-1;
+        maxReg = maxReg - 1;
         if (reg & 1)
             even = 1; 
         inc = 2;
