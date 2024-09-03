@@ -171,7 +171,7 @@
 /* 813A711C 0007551C  7C DE 33 78 */	mr r30, r6
 /* 813A7120 00075520  54 84 04 3E */	clrlwi r4, r4, 16
 /* 813A7124 00075524  38 63 00 0C */	addi r3, r3, 0xc
-/* 813A7128 00075528  48 16 B1 F1 */	bl fn_81512318
+/* 813A7128 00075528  48 16 B1 F1 */	bl List_GetNth__Q24nw4r2utFPCQ34nw4r2ut4ListUs
 /* 813A712C 0007552C  80 83 00 00 */	lwz r4, 0x0(r3)
 /* 813A7130 00075530  93 E4 00 18 */	stw r31, 0x18(r4)
 /* 813A7134 00075534  83 E3 00 00 */	lwz r31, 0x0(r3)
@@ -200,7 +200,7 @@
 /* 813A7178 00075578  54 84 04 3E */	clrlwi r4, r4, 16
 /* 813A717C 0007557C  38 63 00 0C */	addi r3, r3, 0xc
 /* 813A7180 00075580  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813A7184 00075584  48 16 B1 95 */	bl fn_81512318
+/* 813A7184 00075584  48 16 B1 95 */	bl List_GetNth__Q24nw4r2utFPCQ34nw4r2ut4ListUs
 /* 813A7188 00075588  80 63 00 00 */	lwz r3, 0x0(r3)
 /* 813A718C 0007558C  38 00 00 00 */	li r0, 0x0
 /* 813A7190 00075590  90 03 00 14 */	stw r0, 0x14(r3)
@@ -218,7 +218,7 @@
 /* 813A71AC 000755AC  54 84 04 3E */	clrlwi r4, r4, 16
 /* 813A71B0 000755B0  38 63 00 0C */	addi r3, r3, 0xc
 /* 813A71B4 000755B4  90 01 00 14 */	stw r0, 0x14(r1)
-/* 813A71B8 000755B8  48 16 B1 61 */	bl fn_81512318
+/* 813A71B8 000755B8  48 16 B1 61 */	bl List_GetNth__Q24nw4r2utFPCQ34nw4r2ut4ListUs
 /* 813A71BC 000755BC  80 63 00 00 */	lwz r3, 0x0(r3)
 /* 813A71C0 000755C0  80 63 00 14 */	lwz r3, 0x14(r3)
 /* 813A71C4 000755C4  38 03 FF FF */	subi r0, r3, 0x1
@@ -235,7 +235,7 @@
 .fn get_animation__Q33ipl5scene13AnmControllerFi, global
 /* 813A71E0 000755E0  54 84 04 3E */	clrlwi r4, r4, 16
 /* 813A71E4 000755E4  38 63 00 0C */	addi r3, r3, 0xc
-/* 813A71E8 000755E8  48 16 B1 30 */	b fn_81512318
+/* 813A71E8 000755E8  48 16 B1 30 */	b List_GetNth__Q24nw4r2utFPCQ34nw4r2ut4ListUs
 .endfn get_animation__Q33ipl5scene13AnmControllerFi
 
 # .text:0x2E8 | 0x813A71EC | size: 0x84

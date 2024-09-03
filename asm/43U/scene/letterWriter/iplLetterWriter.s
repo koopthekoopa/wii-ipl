@@ -881,7 +881,7 @@
 /* 813C0EEC 0008F2EC  80 63 00 64 */	lwz r3, 0x64(r3)
 /* 813C0EF0 0008F2F0  48 04 A2 49 */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813C0EF4 0008F2F4  88 9F 00 7C */	lbz r4, 0x7c(r31)
-/* 813C0EF8 0008F2F8  48 00 25 61 */	bl fn_813C3458
+/* 813C0EF8 0008F2F8  48 00 25 61 */	bl finishLetter__Q33ipl5scene17MailAddressSelectFb
 .L_813C0EFC:
 /* 813C0EFC 0008F2FC  3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
 /* 813C0F00 0008F300  38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
