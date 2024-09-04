@@ -1,7 +1,7 @@
 SAVEDATA_EDIT_OBJECTS    =	$(BS2_OBJASM_PATH)/scene/saveDataEdit/iplSaveDataBase.o \
-                            $(BS2_OBJASM_PATH)/scene/saveDataEdit/iplSaveDataBox.o \
-                            $(BS2_OBJASM_PATH)/scene/saveDataEdit/iplSaveDataEdit.o \
-                            $(BS2_OBJASM_PATH)/scene/saveDataEdit/iplWiiBannerFileInfo.o
+							$(BS2_OBJASM_PATH)/scene/saveDataEdit/iplSaveDataBox.o \
+							$(BS2_OBJASM_PATH)/scene/saveDataEdit/iplSaveDataEdit.o \
+							$(BS2_OBJASM_PATH)/scene/saveDataEdit/iplWiiBannerFileInfo.o
 
 DEPENDENCIES += $(SAVEDATA_EDIT_OBJECTS:.o=.d)
 

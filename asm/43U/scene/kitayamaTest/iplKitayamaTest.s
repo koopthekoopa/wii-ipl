@@ -17,9 +17,9 @@
 /* 813BE028 | 7C 9E 23 78 */	mr r30, r4
 /* 813BE02C | 7C BF 2B 78 */	mr r31, r5
 /* 813BE030 | 48 04 D1 D9 */	bl fn_8140B208
-/* 813BE034 | 3C A0 81 65 */	lis r5, lbl_8164FD14@ha
+/* 813BE034 | 3C A0 81 65 */	lis r5, __vt__Q33ipl5scene12KitayamaTest@ha
 /* 813BE038 | 38 00 00 00 */	li r0, 0x0
-/* 813BE03C | 38 A5 FD 14 */	addi r5, r5, lbl_8164FD14@l
+/* 813BE03C | 38 A5 FD 14 */	addi r5, r5, __vt__Q33ipl5scene12KitayamaTest@l
 /* 813BE040 | 93 DD 00 58 */	stw r30, 0x58(r29)
 /* 813BE044 | 38 85 00 1C */	addi r4, r5, 0x1c
 /* 813BE048 | 39 61 00 20 */	addi r11, r1, 0x20
@@ -887,7 +887,8 @@
 .endobj jumptable_8164FCE0
 
 # .data:0x20C | 0x8164FD14 | size: 0x6C
-.obj lbl_8164FD14, global
+# ipl::scene::KitayamaTest::__vtable
+.obj __vt__Q33ipl5scene12KitayamaTest, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene12KitayamaTestFv
@@ -915,4 +916,4 @@
 	.4byte calcFadeout__Q33ipl5scene12KitayamaTestFv
 	.4byte calcCommonAfter__Q33ipl5scene14FaderSceneBaseFv
 	.4byte 0x00000000
-.endobj lbl_8164FD14
+.endobj __vt__Q33ipl5scene12KitayamaTest

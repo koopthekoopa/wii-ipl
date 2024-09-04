@@ -10,16 +10,16 @@
 .fn __ct__Q33ipl5scene11BoardObjectFv, global
 /* 81393D1C | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81393D20 | 7C 08 02 A6 */	mflr r0
-/* 81393D24 | 3C 80 81 65 */	lis r4, lbl_8164B5C8@ha
-/* 81393D28 | 3D 20 81 65 */	lis r9, lbl_8164B5E0@ha
+/* 81393D24 | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene11BoardObject@ha
+/* 81393D28 | 3D 20 81 65 */	lis r9, "__vt__Q33ipl4math28LinearIntp<Q33ipl4math4VEC2>"@ha
 /* 81393D2C | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 81393D30 | 3C C0 81 09 */	lis r6, smArg__Q23ipl6System@ha
 /* 81393D34 | C0 02 84 10 */	lfs f0, lbl_81694810@sda21(r0)
 /* 81393D38 | 39 40 00 00 */	li r10, 0x0
 /* 81393D3C | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 81393D40 | 38 E0 00 01 */	li r7, 0x1
-/* 81393D44 | 38 84 B5 C8 */	addi r4, r4, lbl_8164B5C8@l
-/* 81393D48 | 39 29 B5 E0 */	addi r9, r9, lbl_8164B5E0@l
+/* 81393D44 | 38 84 B5 C8 */	addi r4, r4, __vt__Q33ipl5scene11BoardObject@l
+/* 81393D48 | 39 29 B5 E0 */	addi r9, r9, "__vt__Q33ipl4math28LinearIntp<Q33ipl4math4VEC2>"@l
 /* 81393D4C | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 81393D50 | 39 00 07 D0 */	li r8, 0x7d0
 /* 81393D54 | 38 00 00 03 */	li r0, 0x3
@@ -2852,21 +2852,28 @@
 .endobj lbl_8164B5B2
 
 # .data:0x3E0 | 0x8164B5C8 | size: 0x18
-.obj lbl_8164B5C8, global
+# ipl::scene::BoardObject::__vtable
+.obj __vt__Q33ipl5scene11BoardObject, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onEvent__Q33ipl5scene11BoardObjectFUlUlPv
 	.4byte setManager__Q23gui12EventHandlerFPQ23gui7Manager
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
-.endobj lbl_8164B5C8
+.endobj __vt__Q33ipl5scene11BoardObject
 
-# .data:0x3F8 | 0x8164B5E0 | size: 0xB8
-.obj lbl_8164B5E0, global
+# .data:0x3F8 | 0x8164B5E0 | size: 0x10
+# ipl::math::LinearIntp<ipl::math::VEC2>::__vtable
+.obj "__vt__Q33ipl4math28LinearIntp<Q33ipl4math4VEC2>", global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte "__dt__Q33ipl4math28LinearIntp<Q33ipl4math4VEC2>Fv"
 	.4byte calc__Q33ipl7utility15FrameControllerFv
+.endobj "__vt__Q33ipl4math28LinearIntp<Q33ipl4math4VEC2>"
+
+# .data:0x408 | 0x8164B5F0 | size: 0xA8
+# ipl::math::Interporation<ipl::math::VEC2>::__vtable
+.obj "__vt__Q33ipl4math31Interporation<Q33ipl4math4VEC2>", global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte "__dt__Q33ipl4math31Interporation<Q33ipl4math4VEC2>Fv"
@@ -2909,7 +2916,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8164B5E0
+.endobj "__vt__Q33ipl4math31Interporation<Q33ipl4math4VEC2>"
 
 # 0x81694810..0x81694850 | size: 0x40
 .section .sdata2, "a"

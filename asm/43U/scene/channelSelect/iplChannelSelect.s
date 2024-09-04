@@ -6361,9 +6361,9 @@
 /* 813AFB30 | 40 80 00 78 */	bge .L_813AFBA8
 /* 813AFB34 | 48 00 00 F8 */	b .L_813AFC2C
 .L_813AFB38:
-/* 813AFB38 | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
+/* 813AFB38 | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
 /* 813AFB3C | 7F 83 E3 78 */	mr r3, r28
-/* 813AFB40 | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 813AFB40 | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 813AFB44 | 80 84 00 28 */	lwz r4, 0x28(r4)
 /* 813AFB48 | 48 25 29 39 */	bl strcmp
 /* 813AFB4C | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -6375,9 +6375,9 @@
 /* 813AFB64 | 90 1F 02 B0 */	stw r0, 0x2b0(r31)
 /* 813AFB68 | 48 00 00 C4 */	b .L_813AFC2C
 .L_813AFB6C:
-/* 813AFB6C | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
+/* 813AFB6C | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
 /* 813AFB70 | 7F 83 E3 78 */	mr r3, r28
-/* 813AFB74 | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 813AFB74 | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 813AFB78 | 80 84 00 24 */	lwz r4, 0x24(r4)
 /* 813AFB7C | 48 25 29 05 */	bl strcmp
 /* 813AFB80 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -6391,9 +6391,9 @@
 /* 813AFBA0 | 90 1F 02 AC */	stw r0, 0x2ac(r31)
 /* 813AFBA4 | 48 00 00 88 */	b .L_813AFC2C
 .L_813AFBA8:
-/* 813AFBA8 | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
+/* 813AFBA8 | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
 /* 813AFBAC | 7F 83 E3 78 */	mr r3, r28
-/* 813AFBB0 | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 813AFBB0 | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 813AFBB4 | 80 84 00 28 */	lwz r4, 0x28(r4)
 /* 813AFBB8 | 48 25 28 C9 */	bl strcmp
 /* 813AFBBC | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -6408,9 +6408,9 @@
 /* 813AFBE0 | 90 1F 02 B0 */	stw r0, 0x2b0(r31)
 /* 813AFBE4 | 48 00 00 48 */	b .L_813AFC2C
 .L_813AFBE8:
-/* 813AFBE8 | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
+/* 813AFBE8 | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
 /* 813AFBEC | 7F 83 E3 78 */	mr r3, r28
-/* 813AFBF0 | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 813AFBF0 | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 813AFBF4 | 80 84 00 24 */	lwz r4, 0x24(r4)
 /* 813AFBF8 | 48 25 28 89 */	bl strcmp
 /* 813AFBFC | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -7069,9 +7069,9 @@
 /* 813B0534 | 80 7D 00 64 */	lwz r3, 0x64(r29)
 /* 813B0538 | 38 80 00 05 */	li r4, 0x5
 /* 813B053C | 48 05 AB FD */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813B0540 | 3F C0 81 65 */	lis r30, lbl_8164BF5C@ha
+/* 813B0540 | 3F C0 81 65 */	lis r30, mscButtonName__Q33ipl5scene6Button@ha
 /* 813B0544 | 7C 7B 1B 78 */	mr r27, r3
-/* 813B0548 | 80 9E BF 5C */	lwz r4, lbl_8164BF5C@l(r30)
+/* 813B0548 | 80 9E BF 5C */	lwz r4, mscButtonName__Q33ipl5scene6Button@l(r30)
 /* 813B054C | 7F 83 E3 78 */	mr r3, r28
 /* 813B0550 | 48 25 1F 31 */	bl strcmp
 /* 813B0554 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -7113,7 +7113,7 @@
 /* 813B05E0 | 4B FB AE 8D */	bl startSE__Q33ipl3snd6SystemFPCc
 /* 813B05E4 | 48 00 01 2C */	b .L_813B0710
 .L_813B05E8:
-/* 813B05E8 | 3B DE BF 5C */	addi r30, r30, lbl_8164BF5C@l
+/* 813B05E8 | 3B DE BF 5C */	addi r30, r30, mscButtonName__Q33ipl5scene6Button@l
 /* 813B05EC | 7F 83 E3 78 */	mr r3, r28
 /* 813B05F0 | 80 9E 00 08 */	lwz r4, 0x8(r30)
 /* 813B05F4 | 48 25 1E 8D */	bl strcmp
@@ -7170,9 +7170,9 @@
 /* 813B06BC | 4B FF D1 FD */	bl preparePageScrolling__Q33ipl5scene13ChannelSelectFi
 /* 813B06C0 | 48 00 00 50 */	b .L_813B0710
 .L_813B06C4:
-/* 813B06C4 | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
+/* 813B06C4 | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
 /* 813B06C8 | 7F 83 E3 78 */	mr r3, r28
-/* 813B06CC | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 813B06CC | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 813B06D0 | 80 84 00 24 */	lwz r4, 0x24(r4)
 /* 813B06D4 | 48 25 1D AD */	bl strcmp
 /* 813B06D8 | 2C 03 00 00 */	cmpwi r3, 0x0

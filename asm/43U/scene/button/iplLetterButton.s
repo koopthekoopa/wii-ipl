@@ -13,15 +13,15 @@
 /* 81396D30 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 81396D34 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 81396D38 | 48 26 27 89 */	bl _savegpr_27
-/* 81396D3C | 3D 20 81 65 */	lis r9, lbl_8164BE98@ha
-/* 81396D40 | 3D 00 81 65 */	lis r8, lbl_8164BE7C@ha
+/* 81396D3C | 3D 20 81 65 */	lis r9, __vt__Q33ipl5scene5event@ha
+/* 81396D40 | 3D 00 81 65 */	lis r8, __vt__Q33ipl5scene12button_event@ha
 /* 81396D44 | 3B 80 00 00 */	li r28, 0x0
 /* 81396D48 | 38 00 FF FF */	li r0, -0x1
-/* 81396D4C | 3C E0 81 65 */	lis r7, lbl_8164BE60@ha
-/* 81396D50 | 39 29 BE 98 */	addi r9, r9, lbl_8164BE98@l
-/* 81396D54 | 39 08 BE 7C */	addi r8, r8, lbl_8164BE7C@l
+/* 81396D4C | 3C E0 81 65 */	lis r7, __vt__Q33ipl5scene19optout_button_event@ha
+/* 81396D50 | 39 29 BE 98 */	addi r9, r9, __vt__Q33ipl5scene5event@l
+/* 81396D54 | 39 08 BE 7C */	addi r8, r8, __vt__Q33ipl5scene12button_event@l
 /* 81396D58 | 93 83 00 00 */	stw r28, 0x0(r3)
-/* 81396D5C | 38 E7 BE 60 */	addi r7, r7, lbl_8164BE60@l
+/* 81396D5C | 38 E7 BE 60 */	addi r7, r7, __vt__Q33ipl5scene19optout_button_event@l
 /* 81396D60 | 3B 63 00 58 */	addi r27, r3, 0x58
 /* 81396D64 | 90 03 00 04 */	stw r0, 0x4(r3)
 /* 81396D68 | 7C 7D 1B 78 */	mr r29, r3
@@ -70,9 +70,9 @@
 /* 81396E14 | 93 9D 01 38 */	stw r28, 0x138(r29)
 /* 81396E18 | 9B 9D 01 3C */	stb r28, 0x13c(r29)
 /* 81396E1C | 4B FF F5 55 */	bl __ct__Q33ipl5scene12UrlProcessorFv
-/* 81396E20 | 3C 80 81 65 */	lis r4, lbl_8164BE40@ha
+/* 81396E20 | 3C 80 81 65 */	lis r4, "__vt__Q33ipl4math28LinearIntp<Q33ipl4math4VEC3>"@ha
 /* 81396E24 | 38 00 00 04 */	li r0, 0x4
-/* 81396E28 | 38 84 BE 40 */	addi r4, r4, lbl_8164BE40@l
+/* 81396E28 | 38 84 BE 40 */	addi r4, r4, "__vt__Q33ipl4math28LinearIntp<Q33ipl4math4VEC3>"@l
 /* 81396E2C | 7F 83 E3 78 */	mr r3, r28
 /* 81396E30 | 90 9D 01 A8 */	stw r4, 0x1a8(r29)
 /* 81396E34 | 93 9D 01 F4 */	stw r28, 0x1f4(r29)
@@ -251,7 +251,7 @@
 .L_81397068:
 /* 81397068 | 80 7E 00 20 */	lwz r3, 0x20(r30)
 /* 8139706C | 38 80 00 01 */	li r4, 0x1
-/* 81397070 | 48 03 A4 CD */	bl fn_813D153C
+/* 81397070 | 48 03 A4 CD */	bl __dt__Q33ipl5scene11TextBalloonFv
 /* 81397074 | 80 7E 00 24 */	lwz r3, 0x24(r30)
 /* 81397078 | 48 26 10 75 */	bl __dla__FPv
 /* 8139707C | 38 7E 01 50 */	addi r3, r30, 0x150
@@ -592,9 +592,9 @@
 /* 8139750C | 48 00 2D DD */	bl calc_balloon_pos__Q33ipl5scene12focus_objectCFv
 /* 81397510 | 80 7E 00 20 */	lwz r3, 0x20(r30)
 /* 81397514 | 38 81 00 38 */	addi r4, r1, 0x38
-/* 81397518 | 48 03 A3 51 */	bl fn_813D1868
+/* 81397518 | 48 03 A3 51 */	bl updatePos__Q33ipl5scene11TextBalloonFRCQ33ipl4math4VEC3
 /* 8139751C | 80 7E 00 20 */	lwz r3, 0x20(r30)
-/* 81397520 | 48 03 A0 8D */	bl fn_813D15AC
+/* 81397520 | 48 03 A0 8D */	bl calc__Q33ipl5scene11TextBalloonFv
 /* 81397524 | 38 7E 01 50 */	addi r3, r30, 0x150
 /* 81397528 | 4B FF EE F1 */	bl update__Q33ipl5scene12UrlProcessorFv
 /* 8139752C | 80 1E 01 34 */	lwz r0, 0x134(r30)
@@ -975,7 +975,7 @@
 /* 81397A0C | 80 7C 00 20 */	lwz r3, 0x20(r28)
 /* 81397A10 | 93 FC 01 C0 */	stw r31, 0x1c0(r28)
 /* 81397A14 | 93 FC 01 BC */	stw r31, 0x1bc(r28)
-/* 81397A18 | 48 03 9C 51 */	bl fn_813D1668
+/* 81397A18 | 48 03 9C 51 */	bl terminate__Q33ipl5scene11TextBalloonFv
 /* 81397A1C | 80 7C 00 18 */	lwz r3, 0x18(r28)
 /* 81397A20 | 38 80 00 01 */	li r4, 0x1
 /* 81397A24 | 38 63 02 8C */	addi r3, r3, 0x28c
@@ -2323,7 +2323,7 @@
 /* 81398C40 | 4B FD 1B C9 */	bl draw__Q33ipl6layout6ObjectFPCc
 .L_81398C44:
 /* 81398C44 | 80 7F 00 20 */	lwz r3, 0x20(r31)
-/* 81398C48 | 48 03 89 B1 */	bl fn_813D15F8
+/* 81398C48 | 48 03 89 B1 */	bl draw__Q33ipl5scene11TextBalloonFv
 /* 81398C4C | 80 7F 00 18 */	lwz r3, 0x18(r31)
 /* 81398C50 | 38 9D 04 CC */	addi r4, r29, 0x4cc
 /* 81398C54 | 38 A0 00 01 */	li r5, 0x1
@@ -3930,7 +3930,7 @@
 /* 8139A288 | 7F A5 EB 78 */	mr r5, r29
 /* 8139A28C | 38 E7 BD CB */	addi r7, r7, lbl_8164BDCB@l
 /* 8139A290 | 38 CD 86 8F */	li r6, lbl_816966CF@sda21
-/* 8139A294 | 48 03 71 79 */	bl fn_813D140C
+/* 8139A294 | 48 03 71 79 */	bl __ct__Q33ipl5scene11TextBalloonFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCcRCQ33ipl4math4VEC3ff
 /* 8139A298 | 7C 7E 1B 78 */	mr r30, r3
 .L_8139A29C:
 /* 8139A29C | 93 DC 00 20 */	stw r30, 0x20(r28)
@@ -3941,11 +3941,11 @@
 /* 8139A2B0 | 80 7C 00 20 */	lwz r3, 0x20(r28)
 /* 8139A2B4 | 38 81 00 14 */	addi r4, r1, 0x14
 /* 8139A2B8 | 38 A0 00 00 */	li r5, 0x0
-/* 8139A2BC | 48 03 73 45 */	bl fn_813D1600
+/* 8139A2BC | 48 03 73 45 */	bl init__Q33ipl5scene11TextBalloonFPCwUl
 /* 8139A2C0 | 80 7C 00 20 */	lwz r3, 0x20(r28)
 /* 8139A2C4 | 38 A0 00 00 */	li r5, 0x0
 /* 8139A2C8 | 80 83 00 14 */	lwz r4, 0x14(r3)
-/* 8139A2CC | 48 03 79 DD */	bl fn_813D1CA8
+/* 8139A2CC | 48 03 79 DD */	bl set_textbox__Q33ipl5scene11TextBalloonFPCw
 /* 8139A2D0 | 39 61 00 40 */	addi r11, r1, 0x40
 /* 8139A2D4 | 48 25 F2 3D */	bl _restgpr_28
 /* 8139A2D8 | 80 01 00 44 */	lwz r0, 0x44(r1)
@@ -4756,9 +4756,9 @@
 /* 8139AD80 | 38 81 00 08 */	addi r4, r1, 0x8
 /* 8139AD84 | 38 A0 00 00 */	li r5, 0x0
 /* 8139AD88 | 38 C0 00 00 */	li r6, 0x0
-/* 8139AD8C | 48 03 6A 41 */	bl fn_813D17CC
+/* 8139AD8C | 48 03 6A 41 */	bl setPos__Q33ipl5scene11TextBalloonFRCQ33ipl4math4VEC3bi
 /* 8139AD90 | 80 7D 00 20 */	lwz r3, 0x20(r29)
-/* 8139AD94 | 48 03 6A 11 */	bl fn_813D17A4
+/* 8139AD94 | 48 03 6A 11 */	bl fadeinNoSetTextbox__Q33ipl5scene11TextBalloonFv
 /* 8139AD98 | 38 A0 00 01 */	li r5, 0x1
 .L_8139AD9C:
 /* 8139AD9C | 80 7E 01 E0 */	lwz r3, 0x1e0(r30)
@@ -4853,7 +4853,7 @@
 /* 8139AED4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8139AED8 | 41 82 00 0C */	beq .L_8139AEE4
 /* 8139AEDC | 80 63 00 20 */	lwz r3, 0x20(r3)
-/* 8139AEE0 | 48 03 6A 75 */	bl fn_813D1954
+/* 8139AEE0 | 48 03 6A 75 */	bl fadeout__Q33ipl5scene11TextBalloonFv
 .L_8139AEE4:
 /* 8139AEE4 | 80 7F 01 E0 */	lwz r3, 0x1e0(r31)
 /* 8139AEE8 | 38 03 FF FF */	subi r0, r3, 0x1
@@ -5542,9 +5542,9 @@
 /* 8139B830 | 4E 80 04 21 */	bctrl
 /* 8139B834 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8139B838 | 41 82 02 A4 */	beq .L_8139BADC
-/* 8139B83C | 3F C0 81 65 */	lis r30, lbl_8164BF5C@ha
+/* 8139B83C | 3F C0 81 65 */	lis r30, mscButtonName__Q33ipl5scene6Button@ha
 /* 8139B840 | 7F 83 E3 78 */	mr r3, r28
-/* 8139B844 | 3B DE BF 5C */	addi r30, r30, lbl_8164BF5C@l
+/* 8139B844 | 3B DE BF 5C */	addi r30, r30, mscButtonName__Q33ipl5scene6Button@l
 /* 8139B848 | 80 9E 00 14 */	lwz r4, 0x14(r30)
 /* 8139B84C | 48 26 6C 35 */	bl strcmp
 /* 8139B850 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -5567,7 +5567,7 @@
 /* 8139B890 | 4B FC FB DD */	bl startSE__Q33ipl3snd6SystemFPCc
 /* 8139B894 | 80 7D 00 0C */	lwz r3, 0xc(r29)
 /* 8139B898 | 80 63 00 20 */	lwz r3, 0x20(r3)
-/* 8139B89C | 48 03 5D CD */	bl fn_813D1668
+/* 8139B89C | 48 03 5D CD */	bl terminate__Q33ipl5scene11TextBalloonFv
 /* 8139B8A0 | 80 7D 00 0C */	lwz r3, 0xc(r29)
 /* 8139B8A4 | 38 80 00 03 */	li r4, 0x3
 /* 8139B8A8 | 38 00 00 02 */	li r0, 0x2
@@ -6455,20 +6455,27 @@
 	.4byte 0x55534800
 .endobj lbl_8164BDF8
 
-# .data:0x770 | 0x8164BE40 | size: 0x20
-.obj lbl_8164BE40, global
+# .data:0x770 | 0x8164BE40 | size: 0x10
+# ipl::math::LinearIntp<ipl::math::VEC3>::__vtable
+.obj "__vt__Q33ipl4math28LinearIntp<Q33ipl4math4VEC3>", global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte "__dt__Q33ipl4math28LinearIntp<Q33ipl4math4VEC3>Fv"
 	.4byte calc__Q33ipl7utility15FrameControllerFv
+.endobj "__vt__Q33ipl4math28LinearIntp<Q33ipl4math4VEC3>"
+
+# .data:0x780 | 0x8164BE50 | size: 0x10
+# ipl::math::Interporation<ipl::math::VEC3>::__vtable
+.obj "__vt__Q33ipl4math31Interporation<Q33ipl4math4VEC3>", global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte "__dt__Q33ipl4math31Interporation<Q33ipl4math4VEC3>Fv"
 	.4byte calc__Q33ipl7utility15FrameControllerFv
-.endobj lbl_8164BE40
+.endobj "__vt__Q33ipl4math31Interporation<Q33ipl4math4VEC3>"
 
 # .data:0x790 | 0x8164BE60 | size: 0x1C
-.obj lbl_8164BE60, global
+# ipl::scene::optout_button_event::__vtable
+.obj __vt__Q33ipl5scene19optout_button_event, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onEvent__Q33ipl5scene28OptOutButtonEventHandlerBaseFUlUlPv
@@ -6476,10 +6483,11 @@
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
 	.4byte onEventDerived__Q33ipl5scene19optout_button_eventFUlUlPCQ33ipl10controller9Interface
-.endobj lbl_8164BE60
+.endobj __vt__Q33ipl5scene19optout_button_event
 
 # .data:0x7AC | 0x8164BE7C | size: 0x1C
-.obj lbl_8164BE7C, global
+# ipl::scene::button_event::__vtable
+.obj __vt__Q33ipl5scene12button_event, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onEvent__Q33ipl5scene22ButtonEventHandlerBaseFUlUlPv
@@ -6487,10 +6495,11 @@
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
 	.4byte onEventDerived__Q33ipl5scene12button_eventFUlUlPCQ33ipl10controller9Interface
-.endobj lbl_8164BE7C
+.endobj __vt__Q33ipl5scene12button_event
 
 # .data:0x7C8 | 0x8164BE98 | size: 0xB0
-.obj lbl_8164BE98, global
+# ipl::scene::event::__vtable
+.obj __vt__Q33ipl5scene5event, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onEvent__Q33ipl5scene5eventFUlUlPv
@@ -6535,7 +6544,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8164BE98
+.endobj __vt__Q33ipl5scene5event
 
 # 0x81694868..0x816948A0 | size: 0x38
 .section .sdata2, "a"

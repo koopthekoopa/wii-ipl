@@ -14,9 +14,9 @@
 /* 8138EA70 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8138EA74 | 7C 7F 1B 78 */	mr r31, r3
 /* 8138EA78 | 48 07 C7 91 */	bl fn_8140B208
-/* 8138EA7C | 3C 60 81 65 */	lis r3, lbl_81648778@ha
+/* 8138EA7C | 3C 60 81 65 */	lis r3, __vt__Q33ipl5scene8BackMenu@ha
 /* 8138EA80 | 38 80 00 00 */	li r4, 0x0
-/* 8138EA84 | 38 63 87 78 */	addi r3, r3, lbl_81648778@l
+/* 8138EA84 | 38 63 87 78 */	addi r3, r3, __vt__Q33ipl5scene8BackMenu@l
 /* 8138EA88 | 38 00 00 02 */	li r0, 0x2
 /* 8138EA8C | 38 A3 00 1C */	addi r5, r3, 0x1c
 /* 8138EA90 | 90 7F 00 00 */	stw r3, 0x0(r31)
@@ -331,7 +331,8 @@
 .endobj lbl_8164875F
 
 # .data:0x30 | 0x81648778 | size: 0x68
-.obj lbl_81648778, global
+# ipl::scene::BackMenu::__vtable
+.obj __vt__Q33ipl5scene8BackMenu, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene8BackMenuFv
@@ -358,7 +359,7 @@
 	.4byte calcNormal__Q33ipl5scene8BackMenuFv
 	.4byte calcFadeout__Q33ipl5scene8BackMenuFv
 	.4byte calcCommonAfter__Q33ipl5scene14FaderSceneBaseFv
-.endobj lbl_81648778
+.endobj __vt__Q33ipl5scene8BackMenu
 
 # 0x816965F8..0x81696600 | size: 0x8
 .section .sdata, "wa"

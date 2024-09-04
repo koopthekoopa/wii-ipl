@@ -32,9 +32,9 @@
 /* 813C7CC4 | 38 7F 00 18 */	addi r3, r31, 0x18
 /* 813C7CC8 | 38 80 00 00 */	li r4, 0x0
 /* 813C7CCC | 48 14 A3 91 */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
-/* 813C7CD0 | 3C 60 81 65 */	lis r3, lbl_81651798@ha
+/* 813C7CD0 | 3C 60 81 65 */	lis r3, __vt__Q33ipl5scene11SavedataBox@ha
 /* 813C7CD4 | 93 DF 00 30 */	stw r30, 0x30(r31)
-/* 813C7CD8 | 38 63 17 98 */	addi r3, r3, lbl_81651798@l
+/* 813C7CD8 | 38 63 17 98 */	addi r3, r3, __vt__Q33ipl5scene11SavedataBox@l
 /* 813C7CDC | 7F 24 CB 78 */	mr r4, r25
 /* 813C7CE0 | 38 03 00 0C */	addi r0, r3, 0xc
 /* 813C7CE4 | 90 7F 00 00 */	stw r3, 0x0(r31)
@@ -186,8 +186,8 @@
 /* 813C7F08 | 7C 7E 1B 78 */	mr r30, r3
 /* 813C7F0C | 41 82 00 78 */	beq .L_813C7F84
 /* 813C7F10 | 80 A3 00 04 */	lwz r5, 0x4(r3)
-/* 813C7F14 | 3C 80 81 65 */	lis r4, lbl_81651798@ha
-/* 813C7F18 | 38 84 17 98 */	addi r4, r4, lbl_81651798@l
+/* 813C7F14 | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene11SavedataBox@ha
+/* 813C7F18 | 38 84 17 98 */	addi r4, r4, __vt__Q33ipl5scene11SavedataBox@l
 /* 813C7F1C | 38 04 00 0C */	addi r0, r4, 0xc
 /* 813C7F20 | 2C 05 00 00 */	cmpwi r5, 0x0
 /* 813C7F24 | 90 83 00 00 */	stw r4, 0x0(r3)
@@ -385,7 +385,7 @@
 /* 813C8190 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813C8194 | 41 82 00 0C */	beq .L_813C81A0
 /* 813C8198 | 7C 03 03 78 */	mr r3, r0
-/* 813C819C | 48 00 94 CD */	bl fn_813D1668
+/* 813C819C | 48 00 94 CD */	bl terminate__Q33ipl5scene11TextBalloonFv
 .L_813C81A0:
 /* 813C81A0 | 7F E3 FB 78 */	mr r3, r31
 /* 813C81A4 | 38 80 00 01 */	li r4, 0x1
@@ -462,17 +462,17 @@
 /* 813C82A4 | 40 82 00 14 */	bne .L_813C82B8
 /* 813C82A8 | 38 85 00 10 */	addi r4, r5, 0x10
 /* 813C82AC | 38 A0 00 00 */	li r5, 0x0
-/* 813C82B0 | 48 00 93 51 */	bl fn_813D1600
+/* 813C82B0 | 48 00 93 51 */	bl init__Q33ipl5scene11TextBalloonFPCwUl
 /* 813C82B4 | 48 00 00 10 */	b .L_813C82C4
 .L_813C82B8:
 /* 813C82B8 | 38 8D 8B E8 */	li r4, lbl_81696C28@sda21
 /* 813C82BC | 38 A0 00 00 */	li r5, 0x0
-/* 813C82C0 | 48 00 93 41 */	bl fn_813D1600
+/* 813C82C0 | 48 00 93 41 */	bl init__Q33ipl5scene11TextBalloonFPCwUl
 .L_813C82C4:
 /* 813C82C4 | 38 00 00 01 */	li r0, 0x1
 /* 813C82C8 | 80 7F 00 44 */	lwz r3, 0x44(r31)
 /* 813C82CC | 98 1F 00 48 */	stb r0, 0x48(r31)
-/* 813C82D0 | 48 00 94 49 */	bl fn_813D1718
+/* 813C82D0 | 48 00 94 49 */	bl fadein__Q33ipl5scene11TextBalloonFv
 /* 813C82D4 | 48 00 01 44 */	b .L_813C8418
 .L_813C82D8:
 /* 813C82D8 | 7F E3 FB 78 */	mr r3, r31
@@ -495,17 +495,17 @@
 /* 813C831C | 40 82 00 14 */	bne .L_813C8330
 /* 813C8320 | 38 85 00 10 */	addi r4, r5, 0x10
 /* 813C8324 | 38 A0 00 00 */	li r5, 0x0
-/* 813C8328 | 48 00 92 D9 */	bl fn_813D1600
+/* 813C8328 | 48 00 92 D9 */	bl init__Q33ipl5scene11TextBalloonFPCwUl
 /* 813C832C | 48 00 00 10 */	b .L_813C833C
 .L_813C8330:
 /* 813C8330 | 38 8D 8B E8 */	li r4, lbl_81696C28@sda21
 /* 813C8334 | 38 A0 00 00 */	li r5, 0x0
-/* 813C8338 | 48 00 92 C9 */	bl fn_813D1600
+/* 813C8338 | 48 00 92 C9 */	bl init__Q33ipl5scene11TextBalloonFPCwUl
 .L_813C833C:
 /* 813C833C | 38 00 00 01 */	li r0, 0x1
 /* 813C8340 | 80 7F 00 44 */	lwz r3, 0x44(r31)
 /* 813C8344 | 98 1F 00 48 */	stb r0, 0x48(r31)
-/* 813C8348 | 48 00 93 D1 */	bl fn_813D1718
+/* 813C8348 | 48 00 93 D1 */	bl fadein__Q33ipl5scene11TextBalloonFv
 /* 813C834C | 48 00 00 CC */	b .L_813C8418
 .L_813C8350:
 /* 813C8350 | 7F E3 FB 78 */	mr r3, r31
@@ -532,7 +532,7 @@
 /* 813C83A4 | 80 1F 00 40 */	lwz r0, 0x40(r31)
 /* 813C83A8 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813C83AC | 41 82 00 6C */	beq .L_813C8418
-/* 813C83B0 | 48 00 95 A5 */	bl fn_813D1954
+/* 813C83B0 | 48 00 95 A5 */	bl fadeout__Q33ipl5scene11TextBalloonFv
 /* 813C83B4 | 48 00 00 64 */	b .L_813C8418
 .L_813C83B8:
 /* 813C83B8 | 81 9D 00 00 */	lwz r12, 0x0(r29)
@@ -582,7 +582,7 @@
 /* 813C8450 | 80 7F 00 44 */	lwz r3, 0x44(r31)
 /* 813C8454 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813C8458 | 41 82 00 10 */	beq .L_813C8468
-/* 813C845C | 48 00 92 0D */	bl fn_813D1668
+/* 813C845C | 48 00 92 0D */	bl terminate__Q33ipl5scene11TextBalloonFv
 /* 813C8460 | 38 00 00 00 */	li r0, 0x0
 /* 813C8464 | 98 1F 00 48 */	stb r0, 0x48(r31)
 .L_813C8468:
@@ -662,7 +662,8 @@
 .endobj lbl_8165178E
 
 # .data:0xB8 | 0x81651798 | size: 0xC8
-.obj lbl_81651798, global
+# ipl::scene::SavedataBox::__vtable
+.obj __vt__Q33ipl5scene11SavedataBox, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene11SavedataBoxFv
@@ -713,7 +714,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81651798
+.endobj __vt__Q33ipl5scene11SavedataBox
 
 # 0x81696C20..0x81696C30 | size: 0x10
 .section .sdata, "wa"

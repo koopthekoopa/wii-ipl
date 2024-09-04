@@ -114,7 +114,7 @@
 /* 813A0570 | 7C 7C FA 14 */	add r3, r28, r31
 /* 813A0574 | 38 80 00 01 */	li r4, 0x1
 /* 813A0578 | 80 63 00 80 */	lwz r3, 0x80(r3)
-/* 813A057C | 48 03 0F C1 */	bl fn_813D153C
+/* 813A057C | 48 03 0F C1 */	bl __dt__Q33ipl5scene11TextBalloonFv
 /* 813A0580 | 3B DE 00 01 */	addi r30, r30, 0x1
 /* 813A0584 | 3B FF 00 04 */	addi r31, r31, 0x4
 /* 813A0588 | 2C 1E 00 0F */	cmpwi r30, 0xf
@@ -335,7 +335,7 @@
 /* 813A0898 | D0 01 00 10 */	stfs f0, 0x10(r1)
 /* 813A089C | 80 9E 00 24 */	lwz r4, 0x24(r30)
 /* 813A08A0 | 80 BE 00 5C */	lwz r5, 0x5c(r30)
-/* 813A08A4 | 48 03 0B 69 */	bl fn_813D140C
+/* 813A08A4 | 48 03 0B 69 */	bl __ct__Q33ipl5scene11TextBalloonFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCcRCQ33ipl4math4VEC3ff
 .L_813A08A8:
 /* 813A08A8 | 7F 9E EA 14 */	add r28, r30, r29
 /* 813A08AC | 38 1A 00 0F */	addi r0, r26, 0xf
@@ -404,7 +404,7 @@
 .L_813A098C:
 /* 813A098C | 7C 7D FA 14 */	add r3, r29, r31
 /* 813A0990 | 80 63 00 80 */	lwz r3, 0x80(r3)
-/* 813A0994 | 48 03 0C 19 */	bl fn_813D15AC
+/* 813A0994 | 48 03 0C 19 */	bl calc__Q33ipl5scene11TextBalloonFv
 /* 813A0998 | 3B DE 00 01 */	addi r30, r30, 0x1
 /* 813A099C | 3B FF 00 04 */	addi r31, r31, 0x4
 /* 813A09A0 | 2C 1E 00 0F */	cmpwi r30, 0xf
@@ -597,7 +597,7 @@
 /* 813A0BF0 | 3B FF 00 04 */	addi r31, r31, 0x4
 /* 813A0BF4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813A0BF8 | 41 82 00 0C */	beq .L_813A0C04
-/* 813A0BFC | 48 03 0A 6D */	bl fn_813D1668
+/* 813A0BFC | 48 03 0A 6D */	bl terminate__Q33ipl5scene11TextBalloonFv
 /* 813A0C00 | 9B 9B 00 48 */	stb r28, 0x48(r27)
 .L_813A0C04:
 /* 813A0C04 | 7F 64 DB 78 */	mr r4, r27
@@ -762,7 +762,7 @@
 /* 813A0E18 | 80 63 00 44 */	lwz r3, 0x44(r3)
 /* 813A0E1C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813A0E20 | 41 82 00 0C */	beq .L_813A0E2C
-/* 813A0E24 | 48 03 08 45 */	bl fn_813D1668
+/* 813A0E24 | 48 03 08 45 */	bl terminate__Q33ipl5scene11TextBalloonFv
 /* 813A0E28 | 9B FE 00 48 */	stb r31, 0x48(r30)
 .L_813A0E2C:
 /* 813A0E2C | 7F C4 F3 78 */	mr r4, r30
@@ -1517,7 +1517,7 @@
 .L_813A1864:
 /* 813A1864 | 7C 7D FA 14 */	add r3, r29, r31
 /* 813A1868 | 80 63 00 80 */	lwz r3, 0x80(r3)
-/* 813A186C | 48 02 FD 8D */	bl fn_813D15F8
+/* 813A186C | 48 02 FD 8D */	bl draw__Q33ipl5scene11TextBalloonFv
 /* 813A1870 | 3B DE 00 01 */	addi r30, r30, 0x1
 /* 813A1874 | 3B FF 00 04 */	addi r31, r31, 0x4
 /* 813A1878 | 2C 1E 00 0F */	cmpwi r30, 0xf
@@ -1849,7 +1849,7 @@
 /* 813A1CE0 | 80 64 00 44 */	lwz r3, 0x44(r4)
 /* 813A1CE4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813A1CE8 | 41 82 00 08 */	beq .L_813A1CF0
-/* 813A1CEC | 48 02 F9 7D */	bl fn_813D1668
+/* 813A1CEC | 48 02 F9 7D */	bl terminate__Q33ipl5scene11TextBalloonFv
 .L_813A1CF0:
 /* 813A1CF0 | 80 7E 00 6C */	lwz r3, 0x6c(r30)
 /* 813A1CF4 | 7F E4 FB 78 */	mr r4, r31

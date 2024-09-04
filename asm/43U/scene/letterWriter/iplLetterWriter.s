@@ -16,9 +16,9 @@
 /* 813C030C | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813C0310 | 7C 7E 1B 78 */	mr r30, r3
 /* 813C0314 | 48 04 B1 09 */	bl fn_8140B41C
-/* 813C0318 | 3C 60 81 65 */	lis r3, lbl_816504F8@ha
+/* 813C0318 | 3C 60 81 65 */	lis r3, __vt__Q33ipl5scene12LetterWriter@ha
 /* 813C031C | 38 80 00 00 */	li r4, 0x0
-/* 813C0320 | 38 63 04 F8 */	addi r3, r3, lbl_816504F8@l
+/* 813C0320 | 38 63 04 F8 */	addi r3, r3, __vt__Q33ipl5scene12LetterWriter@l
 /* 813C0324 | 38 00 00 03 */	li r0, 0x3
 /* 813C0328 | 38 C3 00 1C */	addi r6, r3, 0x1c
 /* 813C032C | 90 7E 00 00 */	stw r3, 0x0(r30)
@@ -321,7 +321,7 @@
 /* 813C0778 | D0 01 00 10 */	stfs f0, 0x10(r1)
 /* 813C077C | 80 9F 00 24 */	lwz r4, 0x24(r31)
 /* 813C0780 | 80 BF 00 98 */	lwz r5, 0x98(r31)
-/* 813C0784 | 48 01 0C 89 */	bl fn_813D140C
+/* 813C0784 | 48 01 0C 89 */	bl __ct__Q33ipl5scene11TextBalloonFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCcRCQ33ipl4math4VEC3ff
 .L_813C0788:
 /* 813C0788 | 90 7F 00 94 */	stw r3, 0x94(r31)
 /* 813C078C | 38 60 00 20 */	li r3, 0x20
@@ -965,9 +965,9 @@
 /* 813C0FF8 | 41 82 02 3C */	beq .L_813C1234
 /* 813C0FFC | 7F E3 FB 78 */	mr r3, r31
 /* 813C1000 | 48 04 BD 2D */	bl fn_8140CD2C
-/* 813C1004 | 3F C0 81 65 */	lis r30, lbl_8164BF5C@ha
+/* 813C1004 | 3F C0 81 65 */	lis r30, mscButtonName__Q33ipl5scene6Button@ha
 /* 813C1008 | 7C 7C 1B 78 */	mr r28, r3
-/* 813C100C | 3B DE BF 5C */	addi r30, r30, lbl_8164BF5C@l
+/* 813C100C | 3B DE BF 5C */	addi r30, r30, mscButtonName__Q33ipl5scene6Button@l
 /* 813C1010 | 7F A3 EB 78 */	mr r3, r29
 /* 813C1014 | 80 9E 00 14 */	lwz r4, 0x14(r30)
 /* 813C1018 | 48 24 14 69 */	bl strcmp
@@ -1888,8 +1888,9 @@
 	.2byte 0x0000
 .endobj lbl_816503CE
 
-# .data:0x178 | 0x816504F8 | size: 0xE0
-.obj lbl_816504F8, global
+# .data:0x178 | 0x816504F8 | size: 0xC8
+# ipl::scene::LetterWriter::__vtable
+.obj __vt__Q33ipl5scene12LetterWriter, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene12LetterWriterFv
@@ -1940,13 +1941,18 @@
 	.4byte sendToPC__Q33ipl5scene12LetterWriterFUxPCw
 	.4byte makeHeaderCaption__Q33ipl5scene12LetterWriterFPCw
 	.4byte getFriendInfo__Q33ipl5scene12LetterWriterFv
+.endobj __vt__Q33ipl5scene12LetterWriter
+
+# .data:0x240 | 0x816505C0 | size: 0x18
+# textinput::extend::memo::NigaoeEventObserver::__vtable
+.obj __vt__Q49textinput6extend4memo19NigaoeEventObserver, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onNigaoeButton__Q49textinput6extend4memo19NigaoeEventObserverFv
 	.4byte pointNigaoeButton__Q49textinput6extend4memo19NigaoeEventObserverFv
 	.4byte leftNigaoeButton__Q49textinput6extend4memo19NigaoeEventObserverFv
 	.4byte moveNigaoeButton__Q49textinput6extend4memo19NigaoeEventObserverFv
-.endobj lbl_816504F8
+.endobj __vt__Q49textinput6extend4memo19NigaoeEventObserver
 
 # 0x81694A30..0x81694A48 | size: 0x18
 .section .sdata2, "a"

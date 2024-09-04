@@ -16,9 +16,9 @@
 /* 81381674 | 7C 7F 1B 78 */	mr r31, r3
 /* 81381678 | 7C BB 2B 78 */	mr r27, r5
 /* 8138167C | 48 08 9B 8D */	bl fn_8140B208
-/* 81381680 | 3C A0 81 64 */	lis r5, lbl_81647B70@ha
+/* 81381680 | 3C A0 81 64 */	lis r5, __vt__Q33ipl5scene7Address@ha
 /* 81381684 | 3B 80 00 00 */	li r28, 0x0
-/* 81381688 | 38 A5 7B 70 */	addi r5, r5, lbl_81647B70@l
+/* 81381688 | 38 A5 7B 70 */	addi r5, r5, __vt__Q33ipl5scene7Address@l
 /* 8138168C | 39 00 00 01 */	li r8, 0x1
 /* 81381690 | 39 45 00 1C */	addi r10, r5, 0x1c
 /* 81381694 | 38 00 00 14 */	li r0, 0x14
@@ -132,8 +132,8 @@
 /* 81381810 | 7C 9E 23 78 */	mr r30, r4
 /* 81381814 | 41 82 00 84 */	beq .L_81381898
 /* 81381818 | 80 C3 02 74 */	lwz r6, 0x274(r3)
-/* 8138181C | 3C A0 81 64 */	lis r5, lbl_81647B70@ha
-/* 81381820 | 38 A5 7B 70 */	addi r5, r5, lbl_81647B70@l
+/* 8138181C | 3C A0 81 64 */	lis r5, __vt__Q33ipl5scene7Address@ha
+/* 81381820 | 38 A5 7B 70 */	addi r5, r5, __vt__Q33ipl5scene7Address@l
 /* 81381824 | 38 85 00 1C */	addi r4, r5, 0x1c
 /* 81381828 | 2C 06 00 00 */	cmpwi r6, 0x0
 /* 8138182C | 38 05 00 68 */	addi r0, r5, 0x68
@@ -429,9 +429,9 @@
 /* 81381C58 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81381C5C | 41 82 00 1C */	beq .L_81381C78
 /* 81381C60 | 38 00 00 00 */	li r0, 0x0
-/* 81381C64 | 3C 80 81 64 */	lis r4, lbl_81647B58@ha
+/* 81381C64 | 3C 80 81 64 */	lis r4, __vt__Q33ipl5scene12AddressEvent@ha
 /* 81381C68 | 90 03 00 08 */	stw r0, 0x8(r3)
-/* 81381C6C | 38 84 7B 58 */	addi r4, r4, lbl_81647B58@l
+/* 81381C6C | 38 84 7B 58 */	addi r4, r4, __vt__Q33ipl5scene12AddressEvent@l
 /* 81381C70 | 90 83 00 00 */	stw r4, 0x0(r3)
 /* 81381C74 | 93 A3 00 0C */	stw r29, 0xc(r3)
 .L_81381C78:
@@ -4645,9 +4645,9 @@
 /* 813855CC | 2C 00 00 04 */	cmpwi r0, 0x4
 /* 813855D0 | 40 82 02 54 */	bne .L_81385824
 .L_813855D4:
-/* 813855D4 | 3F 80 81 65 */	lis r28, lbl_8164BF5C@ha
+/* 813855D4 | 3F 80 81 65 */	lis r28, mscButtonName__Q33ipl5scene6Button@ha
 /* 813855D8 | 7F E3 FB 78 */	mr r3, r31
-/* 813855DC | 3B 9C BF 5C */	addi r28, r28, lbl_8164BF5C@l
+/* 813855DC | 3B 9C BF 5C */	addi r28, r28, mscButtonName__Q33ipl5scene6Button@l
 /* 813855E0 | 80 9C 00 14 */	lwz r4, 0x14(r28)
 /* 813855E4 | 48 27 CE 9D */	bl strcmp
 /* 813855E8 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -4816,9 +4816,9 @@
 /* 8138584C | 7C 1E 18 40 */	cmplw r30, r3
 /* 81385850 | 40 82 00 D8 */	bne .L_81385928
 .L_81385854:
-/* 81385854 | 3F C0 81 65 */	lis r30, lbl_8164BF5C@ha
+/* 81385854 | 3F C0 81 65 */	lis r30, mscButtonName__Q33ipl5scene6Button@ha
 /* 81385858 | 7F E3 FB 78 */	mr r3, r31
-/* 8138585C | 3B DE BF 5C */	addi r30, r30, lbl_8164BF5C@l
+/* 8138585C | 3B DE BF 5C */	addi r30, r30, mscButtonName__Q33ipl5scene6Button@l
 /* 81385860 | 80 9E 00 28 */	lwz r4, 0x28(r30)
 /* 81385864 | 48 27 CC 1D */	bl strcmp
 /* 81385868 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -4855,9 +4855,9 @@
 /* 813858DC | 7C 1E 18 40 */	cmplw r30, r3
 /* 813858E0 | 40 82 00 48 */	bne .L_81385928
 .L_813858E4:
-/* 813858E4 | 3F C0 81 65 */	lis r30, lbl_8164BF5C@ha
+/* 813858E4 | 3F C0 81 65 */	lis r30, mscButtonName__Q33ipl5scene6Button@ha
 /* 813858E8 | 7F E3 FB 78 */	mr r3, r31
-/* 813858EC | 3B DE BF 5C */	addi r30, r30, lbl_8164BF5C@l
+/* 813858EC | 3B DE BF 5C */	addi r30, r30, mscButtonName__Q33ipl5scene6Button@l
 /* 813858F0 | 80 9E 00 28 */	lwz r4, 0x28(r30)
 /* 813858F4 | 48 27 CB 8D */	bl strcmp
 /* 813858F8 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -7421,17 +7421,19 @@
 .endobj lbl_81647B48
 
 # .data:0x620 | 0x81647B58 | size: 0x18
-.obj lbl_81647B58, global
+# ipl::scene::AddressEvent::__vtable
+.obj __vt__Q33ipl5scene12AddressEvent, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onEvent__Q33ipl5scene12AddressEventFUlUlPv
 	.4byte setManager__Q23gui12EventHandlerFPQ23gui7Manager
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
-.endobj lbl_81647B58
+.endobj __vt__Q33ipl5scene12AddressEvent
 
 # .data:0x638 | 0x81647B70 | size: 0x120
-.obj lbl_81647B70, global
+# ipl::scene::Address::__vtable
+.obj __vt__Q33ipl5scene7Address, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene7AddressFv
@@ -7504,7 +7506,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81647B70
+.endobj __vt__Q33ipl5scene7Address
 
 # 0x816947D0..0x816947F0 | size: 0x20
 .section .sdata2, "a"

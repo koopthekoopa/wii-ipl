@@ -386,7 +386,7 @@
 /* 8139C210 | 7F 24 CB 78 */	mr r4, r25
 /* 8139C214 | 38 FF 01 6B */	addi r7, r31, 0x16b
 /* 8139C218 | 38 CD 87 44 */	li r6, lbl_81696784@sda21
-/* 8139C21C | 48 03 51 F1 */	bl fn_813D140C
+/* 8139C21C | 48 03 51 F1 */	bl __ct__Q33ipl5scene11TextBalloonFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCcRCQ33ipl4math4VEC3ff
 /* 8139C220 | 7C 7A 1B 78 */	mr r26, r3
 .L_8139C224:
 /* 8139C224 | 7F 3E EA 14 */	add r25, r30, r29
@@ -398,11 +398,11 @@
 /* 8139C23C | 7C 64 1B 78 */	mr r4, r3
 /* 8139C240 | 80 79 00 84 */	lwz r3, 0x84(r25)
 /* 8139C244 | 38 A0 00 00 */	li r5, 0x0
-/* 8139C248 | 48 03 53 B9 */	bl fn_813D1600
+/* 8139C248 | 48 03 53 B9 */	bl init__Q33ipl5scene11TextBalloonFPCwUl
 /* 8139C24C | 80 79 00 84 */	lwz r3, 0x84(r25)
 /* 8139C250 | 38 A0 00 00 */	li r5, 0x0
 /* 8139C254 | 80 83 00 14 */	lwz r4, 0x14(r3)
-/* 8139C258 | 48 03 5A 51 */	bl fn_813D1CA8
+/* 8139C258 | 48 03 5A 51 */	bl set_textbox__Q33ipl5scene11TextBalloonFPCw
 /* 8139C25C | 3B 18 00 01 */	addi r24, r24, 0x1
 /* 8139C260 | 3B BD 00 04 */	addi r29, r29, 0x4
 /* 8139C264 | 2C 18 00 05 */	cmpwi r24, 0x5
@@ -537,7 +537,7 @@
 .L_8139C438:
 /* 8139C438 | 7C 7F F2 14 */	add r3, r31, r30
 /* 8139C43C | 80 63 00 84 */	lwz r3, 0x84(r3)
-/* 8139C440 | 48 03 51 6D */	bl fn_813D15AC
+/* 8139C440 | 48 03 51 6D */	bl calc__Q33ipl5scene11TextBalloonFv
 /* 8139C444 | 3B BD 00 01 */	addi r29, r29, 0x1
 /* 8139C448 | 3B DE 00 04 */	addi r30, r30, 0x4
 /* 8139C44C | 2C 1D 00 05 */	cmpwi r29, 0x5
@@ -615,7 +615,7 @@
 .L_8139C538:
 /* 8139C538 | 7C 7D FA 14 */	add r3, r29, r31
 /* 8139C53C | 80 63 00 84 */	lwz r3, 0x84(r3)
-/* 8139C540 | 48 03 50 B9 */	bl fn_813D15F8
+/* 8139C540 | 48 03 50 B9 */	bl draw__Q33ipl5scene11TextBalloonFv
 /* 8139C544 | 3B DE 00 01 */	addi r30, r30, 0x1
 /* 8139C548 | 3B FF 00 04 */	addi r31, r31, 0x4
 /* 8139C54C | 2C 1E 00 05 */	cmpwi r30, 0x5
@@ -882,7 +882,7 @@
 /* 8139C8D8 | 90 1C 00 14 */	stw r0, 0x14(r28)
 /* 8139C8DC | 40 80 00 0C */	bge .L_8139C8E8
 /* 8139C8E0 | 80 7D 00 84 */	lwz r3, 0x84(r29)
-/* 8139C8E4 | 48 03 50 C9 */	bl fn_813D19AC
+/* 8139C8E4 | 48 03 50 C9 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 .L_8139C8E8:
 /* 8139C8E8 | 80 7D 00 D8 */	lwz r3, 0xd8(r29)
 /* 8139C8EC | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -1106,8 +1106,8 @@
 /* 8139CBAC | 83 E3 00 A8 */	lwz r31, 0xa8(r3)
 /* 8139CBB0 | 48 00 00 E8 */	b .L_8139CC98
 .L_8139CBB4:
-/* 8139CBB4 | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
-/* 8139CBB8 | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 8139CBB4 | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
+/* 8139CBB8 | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 8139CBBC | 80 84 00 24 */	lwz r4, 0x24(r4)
 /* 8139CBC0 | 4B FF FC 2D */	bl startLeftEvent__Q33ipl5scene6ButtonFPCc
 .L_8139CBC4:
@@ -1121,8 +1121,8 @@
 /* 8139CBDC | 83 E3 00 AC */	lwz r31, 0xac(r3)
 /* 8139CBE0 | 48 00 00 B8 */	b .L_8139CC98
 .L_8139CBE4:
-/* 8139CBE4 | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
-/* 8139CBE8 | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 8139CBE4 | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
+/* 8139CBE8 | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 8139CBEC | 80 84 00 28 */	lwz r4, 0x28(r4)
 /* 8139CBF0 | 4B FF FB FD */	bl startLeftEvent__Q33ipl5scene6ButtonFPCc
 .L_8139CBF4:
@@ -1278,7 +1278,7 @@
 .L_8139CDE4:
 /* 8139CDE4 | 7C 7D F2 14 */	add r3, r29, r30
 /* 8139CDE8 | 80 63 00 84 */	lwz r3, 0x84(r3)
-/* 8139CDEC | 48 03 4B C1 */	bl fn_813D19AC
+/* 8139CDEC | 48 03 4B C1 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 /* 8139CDF0 | 3B 9C 00 01 */	addi r28, r28, 0x1
 /* 8139CDF4 | 3B DE 00 04 */	addi r30, r30, 0x4
 /* 8139CDF8 | 2C 1C 00 05 */	cmpwi r28, 0x5
@@ -1358,9 +1358,9 @@
 /* 8139CEE0 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8139CEE4 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8139CEE8 | 48 25 C5 D9 */	bl _savegpr_27
-/* 8139CEEC | 3F C0 81 65 */	lis r30, lbl_8164BF5C@ha
+/* 8139CEEC | 3F C0 81 65 */	lis r30, mscButtonName__Q33ipl5scene6Button@ha
 /* 8139CEF0 | 7C 7B 1B 78 */	mr r27, r3
-/* 8139CEF4 | 3B DE BF 5C */	addi r30, r30, lbl_8164BF5C@l
+/* 8139CEF4 | 3B DE BF 5C */	addi r30, r30, mscButtonName__Q33ipl5scene6Button@l
 /* 8139CEF8 | 3B A0 FF FF */	li r29, -0x1
 /* 8139CEFC | 3B 80 00 00 */	li r28, 0x0
 /* 8139CF00 | 3B E0 00 00 */	li r31, 0x0
@@ -1427,9 +1427,9 @@
 /* 8139CFD4 | 38 C0 00 00 */	li r6, 0x0
 /* 8139CFD8 | D0 01 00 0C */	stfs f0, 0xc(r1)
 /* 8139CFDC | 80 7F 00 84 */	lwz r3, 0x84(r31)
-/* 8139CFE0 | 48 03 47 ED */	bl fn_813D17CC
+/* 8139CFE0 | 48 03 47 ED */	bl setPos__Q33ipl5scene11TextBalloonFRCQ33ipl4math4VEC3bi
 /* 8139CFE4 | 80 7F 00 84 */	lwz r3, 0x84(r31)
-/* 8139CFE8 | 48 03 47 BD */	bl fn_813D17A4
+/* 8139CFE8 | 48 03 47 BD */	bl fadeinNoSetTextbox__Q33ipl5scene11TextBalloonFv
 .L_8139CFEC:
 /* 8139CFEC | 39 61 00 30 */	addi r11, r1, 0x30
 /* 8139CFF0 | 48 25 C5 25 */	bl _restgpr_29
@@ -1602,13 +1602,13 @@
 /* 8139D214 | 3B 20 00 01 */	li r25, 0x1
 /* 8139D218 | 3A E0 00 00 */	li r23, 0x0
 /* 8139D21C | 3F 60 81 61 */	lis r27, lbl_8160F918@ha
-/* 8139D220 | 3F A0 81 65 */	lis r29, lbl_8164BF5C@ha
+/* 8139D220 | 3F A0 81 65 */	lis r29, mscButtonName__Q33ipl5scene6Button@ha
 /* 8139D224 | 9B 23 01 10 */	stb r25, 0x110(r3)
 /* 8139D228 | 7C 76 1B 78 */	mr r22, r3
 /* 8139D22C | 7E FA BB 78 */	mr r26, r23
 /* 8139D230 | 7E FC BB 78 */	mr r28, r23
 /* 8139D234 | 3B 7B F9 18 */	addi r27, r27, lbl_8160F918@l
-/* 8139D238 | 3B BD BF 5C */	addi r29, r29, lbl_8164BF5C@l
+/* 8139D238 | 3B BD BF 5C */	addi r29, r29, mscButtonName__Q33ipl5scene6Button@l
 /* 8139D23C | 3B E0 00 00 */	li r31, 0x0
 /* 8139D240 | 3B C0 00 00 */	li r30, 0x0
 .L_8139D244:
@@ -1671,7 +1671,7 @@
 .L_8139D30C:
 /* 8139D30C | 7C 7D FA 14 */	add r3, r29, r31
 /* 8139D310 | 80 63 00 84 */	lwz r3, 0x84(r3)
-/* 8139D314 | 48 03 46 99 */	bl fn_813D19AC
+/* 8139D314 | 48 03 46 99 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 /* 8139D318 | 3B DE 00 01 */	addi r30, r30, 0x1
 /* 8139D31C | 3B FF 00 04 */	addi r31, r31, 0x4
 /* 8139D320 | 2C 1E 00 05 */	cmpwi r30, 0x5
@@ -1728,8 +1728,8 @@
 /* 8139D3D8 | 90 1E 00 14 */	stw r0, 0x14(r30)
 .L_8139D3DC:
 /* 8139D3DC | 80 7C 00 58 */	lwz r3, 0x58(r28)
-/* 8139D3E0 | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
-/* 8139D3E4 | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 8139D3E0 | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
+/* 8139D3E4 | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 8139D3E8 | 38 A0 00 01 */	li r5, 0x1
 /* 8139D3EC | 80 63 00 14 */	lwz r3, 0x14(r3)
 /* 8139D3F0 | 7C 84 E8 2E */	lwzx r4, r4, r29
@@ -2399,7 +2399,8 @@
 .endobj lbl_8164BF52
 
 # .data:0x14 | 0x8164BF5C | size: 0x2C
-.obj lbl_8164BF5C, global
+# ipl::scene::Button::mscButtonName
+.obj mscButtonName__Q33ipl5scene6Button, global
 	.4byte lbl_81696700
 	.4byte lbl_81696706
 	.4byte lbl_8169670B
@@ -2411,7 +2412,7 @@
 	.4byte lbl_81696725
 	.4byte lbl_8169672C
 	.4byte lbl_81696733
-.endobj lbl_8164BF5C
+.endobj mscButtonName__Q33ipl5scene6Button
 
 # .data:0x40 | 0x8164BF88 | size: 0xA
 .obj lbl_8164BF88, global
@@ -2428,12 +2429,17 @@
 	.string "G_ArwR_Focus"
 .endobj lbl_8164BF9C
 
-# .data:0x61 | 0x8164BFA9 | size: 0x3B
+# .data:0x61 | 0x8164BFA9 | size: 0xF
 .obj lbl_8164BFA9, global
 	.4byte 0x475F4172
 	.4byte 0x774C5F46
 	.4byte 0x6F637573
 	.byte 0x00, 0x00, 0x00
+.endobj lbl_8164BFA9
+
+# .data:0x70 | 0x8164BFB8 | size: 0x2C
+# ipl::scene::Button::mscGroupName
+.obj mscGroupName__Q33ipl5scene6Button, global
 	.4byte lbl_8169673A
 	.4byte lbl_81696740
 	.4byte lbl_81696745
@@ -2445,7 +2451,7 @@
 	.4byte lbl_8169675F
 	.4byte lbl_8164BF9C
 	.4byte lbl_8164BFA9
-.endobj lbl_8164BFA9
+.endobj mscGroupName__Q33ipl5scene6Button
 
 # .data:0x9C | 0x8164BFE4 | size: 0xA
 .obj lbl_8164BFE4, global

@@ -1,7 +1,7 @@
 .include "macros.inc"
 .file "iplMemory.cpp"
 
-# 0x810B74F8..0x810BDF18 | size: 0x6A20
+# 0x810B74F8..0x810B7508 | size: 0x10
 .section .bss, "wa", @nobits
 .balign 8
 
@@ -10,151 +10,6 @@
 .obj sAllocator___Q23ipl10memorycard, global
 	.skip 0x10
 .endobj sAllocator___Q23ipl10memorycard
-
-# .bss:0x10 | 0x810B7508 | size: 0x8D0
-.obj lbl_810B7508, global
-	.skip 0x8D0
-.endobj lbl_810B7508
-
-# .bss:0x8E0 | 0x810B7DD8 | size: 0x2C
-.obj lbl_810B7DD8, global
-	.skip 0x2C
-.endobj lbl_810B7DD8
-
-# .bss:0x90C | 0x810B7E04 | size: 0x204
-.obj lbl_810B7E04, global
-	.skip 0x204
-.endobj lbl_810B7E04
-
-# .bss:0xB10 | 0x810B8008 | size: 0x80
-.obj lbl_810B8008, global
-	.skip 0x80
-.endobj lbl_810B8008
-
-# .bss:0xB90 | 0x810B8088 | size: 0x58
-.obj lbl_810B8088, global
-	.skip 0x58
-.endobj lbl_810B8088
-
-# .bss:0xBE8 | 0x810B80E0 | size: 0x10
-.obj lbl_810B80E0, global
-	.skip 0x10
-.endobj lbl_810B80E0
-
-# .bss:0xBF8 | 0x810B80F0 | size: 0xD8
-.obj lbl_810B80F0, global
-	.skip 0xD8
-.endobj lbl_810B80F0
-
-# .bss:0xCD0 | 0x810B81C8 | size: 0x200
-.obj lbl_810B81C8, global
-	.skip 0x200
-.endobj lbl_810B81C8
-
-# .bss:0xED0 | 0x810B83C8 | size: 0x18
-.obj lbl_810B83C8, global
-	.skip 0x18
-.endobj lbl_810B83C8
-
-# .bss:0xEE8 | 0x810B83E0 | size: 0x10
-.obj lbl_810B83E0, global
-	.skip 0x10
-.endobj lbl_810B83E0
-
-# .bss:0xEF8 | 0x810B83F0 | size: 0x158
-.obj lbl_810B83F0, global
-	.skip 0x158
-.endobj lbl_810B83F0
-
-# .bss:0x1050 | 0x810B8548 | size: 0x70
-.obj lbl_810B8548, global
-	.skip 0x70
-.endobj lbl_810B8548
-
-# .bss:0x10C0 | 0x810B85B8 | size: 0x1B5C
-.obj lbl_810B85B8, global
-	.skip 0x1B5C
-.endobj lbl_810B85B8
-
-# .bss:0x2C1C | 0x810BA114 | size: 0x1B5C
-.obj lbl_810BA114, global
-	.skip 0x1B5C
-.endobj lbl_810BA114
-
-# .bss:0x4778 | 0x810BBC70 | size: 0x20
-.obj lbl_810BBC70, global
-	.skip 0x20
-.endobj lbl_810BBC70
-
-# .bss:0x4798 | 0x810BBC90 | size: 0x54
-.obj lbl_810BBC90, global
-	.skip 0x54
-.endobj lbl_810BBC90
-
-# .bss:0x47EC | 0x810BBCE4 | size: 0x54
-.obj lbl_810BBCE4, global
-	.skip 0x54
-.endobj lbl_810BBCE4
-
-# .bss:0x4840 | 0x810BBD38 | size: 0xC
-.obj lbl_810BBD38, global
-	.skip 0xC
-.endobj lbl_810BBD38
-
-# .bss:0x484C | 0x810BBD44 | size: 0x404
-.obj lbl_810BBD44, global
-	.skip 0x404
-.endobj lbl_810BBD44
-
-# .bss:0x4C50 | 0x810BC148 | size: 0x1318
-.obj lbl_810BC148, global
-	.skip 0x1318
-.endobj lbl_810BC148
-
-# .bss:0x5F68 | 0x810BD460 | size: 0x20
-.obj lbl_810BD460, global
-	.skip 0x20
-.endobj lbl_810BD460
-
-# .bss:0x5F88 | 0x810BD480 | size: 0x18
-.obj lbl_810BD480, global
-	.skip 0x18
-.endobj lbl_810BD480
-
-# .bss:0x5FA0 | 0x810BD498 | size: 0x10
-.obj lbl_810BD498, global
-	.skip 0x10
-.endobj lbl_810BD498
-
-# .bss:0x5FB0 | 0x810BD4A8 | size: 0x160
-.obj lbl_810BD4A8, global
-	.skip 0x160
-.endobj lbl_810BD4A8
-
-# .bss:0x6110 | 0x810BD608 | size: 0x7C8
-.obj lbl_810BD608, global
-	.skip 0x7C8
-.endobj lbl_810BD608
-
-# .bss:0x68D8 | 0x810BDDD0 | size: 0x10
-.obj lbl_810BDDD0, global
-	.skip 0x10
-.endobj lbl_810BDDD0
-
-# .bss:0x68E8 | 0x810BDDE0 | size: 0xF4
-.obj lbl_810BDDE0, global
-	.skip 0xF4
-.endobj lbl_810BDDE0
-
-# .bss:0x69DC | 0x810BDED4 | size: 0x24
-.obj lbl_810BDED4, global
-	.skip 0x24
-.endobj lbl_810BDED4
-
-# .bss:0x6A00 | 0x810BDEF8 | size: 0x20
-.obj lbl_810BDEF8, global
-	.skip 0x20
-.endobj lbl_810BDEF8
 
 # 0x813C3BCC..0x813C6E84 | size: 0x32B8
 .text
@@ -169,9 +24,9 @@
 /* 813C3BD8 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813C3BDC | 7C 7F 1B 78 */	mr r31, r3
 /* 813C3BE0 | 48 04 60 0D */	bl fn_81409BEC
-/* 813C3BE4 | 3C 80 81 65 */	lis r4, lbl_816511F8@ha
+/* 813C3BE4 | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene6Memory@ha
 /* 813C3BE8 | 38 00 00 00 */	li r0, 0x0
-/* 813C3BEC | 38 84 11 F8 */	addi r4, r4, lbl_816511F8@l
+/* 813C3BEC | 38 84 11 F8 */	addi r4, r4, __vt__Q33ipl5scene6Memory@l
 /* 813C3BF0 | 90 1F 00 54 */	stw r0, 0x54(r31)
 /* 813C3BF4 | 38 64 00 1C */	addi r3, r4, 0x1c
 /* 813C3BF8 | 90 9F 00 00 */	stw r4, 0x0(r31)
@@ -211,8 +66,8 @@
 /* 813C3C6C | 7C 9D 23 78 */	mr r29, r4
 /* 813C3C70 | 41 82 01 04 */	beq .L_813C3D74
 /* 813C3C74 | 80 A3 00 60 */	lwz r5, 0x60(r3)
-/* 813C3C78 | 3C 80 81 65 */	lis r4, lbl_816511F8@ha
-/* 813C3C7C | 38 84 11 F8 */	addi r4, r4, lbl_816511F8@l
+/* 813C3C78 | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene6Memory@ha
+/* 813C3C7C | 38 84 11 F8 */	addi r4, r4, __vt__Q33ipl5scene6Memory@l
 /* 813C3C80 | 38 04 00 1C */	addi r0, r4, 0x1c
 /* 813C3C84 | 2C 05 00 00 */	cmpwi r5, 0x0
 /* 813C3C88 | 90 83 00 00 */	stw r4, 0x0(r3)
@@ -268,7 +123,7 @@
 /* 813C3D38 | 7C 7C FA 14 */	add r3, r28, r31
 /* 813C3D3C | 38 80 00 01 */	li r4, 0x1
 /* 813C3D40 | 80 63 00 7C */	lwz r3, 0x7c(r3)
-/* 813C3D44 | 48 00 D7 F9 */	bl fn_813D153C
+/* 813C3D44 | 48 00 D7 F9 */	bl __dt__Q33ipl5scene11TextBalloonFv
 /* 813C3D48 | 3B DE 00 01 */	addi r30, r30, 0x1
 /* 813C3D4C | 3B FF 00 04 */	addi r31, r31, 0x4
 /* 813C3D50 | 2C 1E 00 0F */	cmpwi r30, 0xf
@@ -481,7 +336,7 @@
 /* 813C4040 | D0 01 00 10 */	stfs f0, 0x10(r1)
 /* 813C4044 | 80 9E 00 24 */	lwz r4, 0x24(r30)
 /* 813C4048 | 80 BE 00 5C */	lwz r5, 0x5c(r30)
-/* 813C404C | 48 00 D3 C1 */	bl fn_813D140C
+/* 813C404C | 48 00 D3 C1 */	bl __ct__Q33ipl5scene11TextBalloonFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCcRCQ33ipl4math4VEC3ff
 .L_813C4050:
 /* 813C4050 | 7F 9E EA 14 */	add r28, r30, r29
 /* 813C4054 | 38 1A 00 0F */	addi r0, r26, 0xf
@@ -553,7 +408,7 @@
 .L_813C4140:
 /* 813C4140 | 7C 7D FA 14 */	add r3, r29, r31
 /* 813C4144 | 80 63 00 7C */	lwz r3, 0x7c(r3)
-/* 813C4148 | 48 00 D4 65 */	bl fn_813D15AC
+/* 813C4148 | 48 00 D4 65 */	bl calc__Q33ipl5scene11TextBalloonFv
 /* 813C414C | 3B DE 00 01 */	addi r30, r30, 0x1
 /* 813C4150 | 3B FF 00 04 */	addi r31, r31, 0x4
 /* 813C4154 | 2C 1E 00 0F */	cmpwi r30, 0xf
@@ -709,7 +564,7 @@
 /* 813C431C | 3B 60 00 00 */	li r27, 0x0
 /* 813C4320 | 3B E0 00 00 */	li r31, 0x0
 /* 813C4324 | 3B 40 00 00 */	li r26, 0x0
-/* 813C4328 | 3F C0 81 65 */	lis r30, lbl_81651244@ha
+/* 813C4328 | 3F C0 81 65 */	lis r30, "@STRING@setTranslate__Q33ipl5scene11SavedataBoxFRCQ34nw4r4math4VEC3"@ha
 /* 813C432C | 48 00 00 78 */	b .L_813C43A4
 .L_813C4330:
 /* 813C4330 | 80 79 00 60 */	lwz r3, 0x60(r25)
@@ -732,14 +587,14 @@
 /* 813C4374 | 7C 85 23 78 */	mr r5, r4
 /* 813C4378 | 48 17 D1 45 */	bl fn_815414BC
 /* 813C437C | 7F 43 D3 78 */	mr r3, r26
-/* 813C4380 | 38 9E 12 44 */	addi r4, r30, lbl_81651244@l
+/* 813C4380 | 38 9E 12 44 */	addi r4, r30, "@STRING@setTranslate__Q33ipl5scene11SavedataBoxFRCQ34nw4r4math4VEC3"@l
 /* 813C4384 | 38 A1 00 08 */	addi r5, r1, 0x8
 /* 813C4388 | 4B FE 31 E1 */	bl set_translate__Q33ipl5scene13AnmControllerFPCcRCQ34nw4r4math4VEC3
 /* 813C438C | 80 7A 00 44 */	lwz r3, 0x44(r26)
 /* 813C4390 | 3B FF 00 04 */	addi r31, r31, 0x4
 /* 813C4394 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813C4398 | 41 82 00 0C */	beq .L_813C43A4
-/* 813C439C | 48 00 D2 CD */	bl fn_813D1668
+/* 813C439C | 48 00 D2 CD */	bl terminate__Q33ipl5scene11TextBalloonFv
 /* 813C43A0 | 9B 7A 00 48 */	stb r27, 0x48(r26)
 .L_813C43A4:
 /* 813C43A4 | 7F 44 D3 78 */	mr r4, r26
@@ -769,7 +624,7 @@
 /* 813C43F0 | 3B 9C 0E AC */	addi r28, r28, lbl_81650EAC@l
 /* 813C43F4 | 3B E0 00 00 */	li r31, 0x0
 /* 813C43F8 | 3B 60 00 00 */	li r27, 0x0
-/* 813C43FC | 3F C0 81 65 */	lis r30, lbl_81651244@ha
+/* 813C43FC | 3F C0 81 65 */	lis r30, "@STRING@setTranslate__Q33ipl5scene11SavedataBoxFRCQ34nw4r4math4VEC3"@ha
 /* 813C4400 | 48 00 00 6C */	b .L_813C446C
 .L_813C4404:
 /* 813C4404 | 80 7A 00 60 */	lwz r3, 0x60(r26)
@@ -792,7 +647,7 @@
 /* 813C4448 | 7C 85 23 78 */	mr r5, r4
 /* 813C444C | 48 17 D0 71 */	bl fn_815414BC
 /* 813C4450 | 7F 63 DB 78 */	mr r3, r27
-/* 813C4454 | 38 9E 12 44 */	addi r4, r30, lbl_81651244@l
+/* 813C4454 | 38 9E 12 44 */	addi r4, r30, "@STRING@setTranslate__Q33ipl5scene11SavedataBoxFRCQ34nw4r4math4VEC3"@l
 /* 813C4458 | 38 A1 00 08 */	addi r5, r1, 0x8
 /* 813C445C | 4B FE 31 0D */	bl set_translate__Q33ipl5scene13AnmControllerFPCcRCQ34nw4r4math4VEC3
 /* 813C4460 | 7F 63 DB 78 */	mr r3, r27
@@ -905,7 +760,7 @@
 /* 813C45BC | 80 63 00 44 */	lwz r3, 0x44(r3)
 /* 813C45C0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813C45C4 | 41 82 00 0C */	beq .L_813C45D0
-/* 813C45C8 | 48 00 D0 A1 */	bl fn_813D1668
+/* 813C45C8 | 48 00 D0 A1 */	bl terminate__Q33ipl5scene11TextBalloonFv
 /* 813C45CC | 9B FE 00 48 */	stb r31, 0x48(r30)
 .L_813C45D0:
 /* 813C45D0 | 7F C4 F3 78 */	mr r4, r30
@@ -1650,7 +1505,7 @@
 .L_813C4FE0:
 /* 813C4FE0 | 7C 7D FA 14 */	add r3, r29, r31
 /* 813C4FE4 | 80 63 00 7C */	lwz r3, 0x7c(r3)
-/* 813C4FE8 | 48 00 C6 11 */	bl fn_813D15F8
+/* 813C4FE8 | 48 00 C6 11 */	bl draw__Q33ipl5scene11TextBalloonFv
 /* 813C4FEC | 3B DE 00 01 */	addi r30, r30, 0x1
 /* 813C4FF0 | 3B FF 00 04 */	addi r31, r31, 0x4
 /* 813C4FF4 | 2C 1E 00 0F */	cmpwi r30, 0xf
@@ -1982,7 +1837,7 @@
 /* 813C545C | 80 64 00 44 */	lwz r3, 0x44(r4)
 /* 813C5460 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813C5464 | 41 82 00 08 */	beq .L_813C546C
-/* 813C5468 | 48 00 C2 01 */	bl fn_813D1668
+/* 813C5468 | 48 00 C2 01 */	bl terminate__Q33ipl5scene11TextBalloonFv
 .L_813C546C:
 /* 813C546C | 80 7E 00 68 */	lwz r3, 0x68(r30)
 /* 813C5470 | 7F E4 FB 78 */	mr r4, r31
@@ -4499,7 +4354,8 @@
 .endobj lbl_816511DD
 
 # .data:0x568 | 0x816511F8 | size: 0x4C
-.obj lbl_816511F8, global
+# ipl::scene::Memory::__vtable
+.obj __vt__Q33ipl5scene6Memory, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene6MemoryFv
@@ -4519,14 +4375,15 @@
 	.4byte calc__Q33ipl5scene6MemoryFv
 	.4byte draw__Q33ipl5scene6MemoryFv
 	.4byte destroy__Q33ipl5scene4BaseFv
-.endobj lbl_816511F8
+.endobj __vt__Q33ipl5scene6Memory
 
 # .data:0x5B4 | 0x81651244 | size: 0xC
-.obj lbl_81651244, global
+# ipl::scene::SavedataBox::@STRING@setTranslate(const nw4r::math::VEC3&)
+.obj "@STRING@setTranslate__Q33ipl5scene11SavedataBoxFRCQ34nw4r4math4VEC3", global
 	.4byte 0x4E5F4461
 	.4byte 0x74615F30
 	.4byte 0x30000000
-.endobj lbl_81651244
+.endobj "@STRING@setTranslate__Q33ipl5scene11SavedataBoxFRCQ34nw4r4math4VEC3"
 
 # 0x81694A48..0x81694A58 | size: 0x10
 .section .sdata2, "a"

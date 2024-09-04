@@ -583,9 +583,9 @@
 /* 8139E310 | 4E 80 04 21 */	bctrl
 /* 8139E314 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8139E318 | 41 82 00 E4 */	beq .L_8139E3FC
-/* 8139E31C | 3F E0 81 65 */	lis r31, lbl_8164BF5C@ha
+/* 8139E31C | 3F E0 81 65 */	lis r31, mscButtonName__Q33ipl5scene6Button@ha
 /* 8139E320 | 7F C3 F3 78 */	mr r3, r30
-/* 8139E324 | 3B FF BF 5C */	addi r31, r31, lbl_8164BF5C@l
+/* 8139E324 | 3B FF BF 5C */	addi r31, r31, mscButtonName__Q33ipl5scene6Button@l
 /* 8139E328 | 80 9F 00 14 */	lwz r4, 0x14(r31)
 /* 8139E32C | 48 26 41 55 */	bl strcmp
 /* 8139E330 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -621,9 +621,9 @@
 /* 8139E3A4 | 48 00 03 F5 */	bl start_scroll_r__Q33ipl5scene8CalendarFv
 /* 8139E3A8 | 48 00 00 54 */	b .L_8139E3FC
 .L_8139E3AC:
-/* 8139E3AC | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
+/* 8139E3AC | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
 /* 8139E3B0 | 7F C3 F3 78 */	mr r3, r30
-/* 8139E3B4 | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 8139E3B4 | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 8139E3B8 | 80 84 00 28 */	lwz r4, 0x28(r4)
 /* 8139E3BC | 48 26 40 C5 */	bl strcmp
 /* 8139E3C0 | 2C 03 00 00 */	cmpwi r3, 0x0

@@ -57,9 +57,9 @@
 /* 813B40A8 | 48 24 3F F5 */	bl __nw__FUl
 /* 813B40AC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813B40B0 | 41 82 00 18 */	beq .L_813B40C8
-/* 813B40B4 | 3C 80 81 65 */	lis r4, lbl_8164EF48@ha
+/* 813B40B4 | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene27CsChanTtlButtonEventHandler@ha
 /* 813B40B8 | 93 C3 00 08 */	stw r30, 0x8(r3)
-/* 813B40BC | 38 84 EF 48 */	addi r4, r4, lbl_8164EF48@l
+/* 813B40BC | 38 84 EF 48 */	addi r4, r4, __vt__Q33ipl5scene27CsChanTtlButtonEventHandler@l
 /* 813B40C0 | 90 83 00 00 */	stw r4, 0x0(r3)
 /* 813B40C4 | 93 E3 00 0C */	stw r31, 0xc(r3)
 .L_813B40C8:
@@ -8123,9 +8123,9 @@
 /* 813BAFAC | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
 /* 813BAFB0 | 80 63 00 64 */	lwz r3, 0x64(r3)
 /* 813BAFB4 | 48 05 01 85 */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813BAFB8 | 3F E0 81 65 */	lis r31, lbl_8164BF5C@ha
+/* 813BAFB8 | 3F E0 81 65 */	lis r31, mscButtonName__Q33ipl5scene6Button@ha
 /* 813BAFBC | 7C 7D 1B 78 */	mr r29, r3
-/* 813BAFC0 | 3B FF BF 5C */	addi r31, r31, lbl_8164BF5C@l
+/* 813BAFC0 | 3B FF BF 5C */	addi r31, r31, mscButtonName__Q33ipl5scene6Button@l
 /* 813BAFC4 | 7F C3 F3 78 */	mr r3, r30
 /* 813BAFC8 | 80 9F 00 28 */	lwz r4, 0x28(r31)
 /* 813BAFCC | 48 24 74 B5 */	bl strcmp
@@ -8789,7 +8789,8 @@
 .endobj lbl_8164EF14
 
 # .data:0x7E0 | 0x8164EF48 | size: 0x1C
-.obj lbl_8164EF48, global
+# ipl::scene::CsChanTtlButtonEventHandler::__vtable
+.obj __vt__Q33ipl5scene27CsChanTtlButtonEventHandler, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onEvent__Q33ipl5scene22ButtonEventHandlerBaseFUlUlPv
@@ -8797,7 +8798,7 @@
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
 	.4byte onEventDerived__Q33ipl5scene27CsChanTtlButtonEventHandlerFUlUlPCQ33ipl10controller9Interface
-.endobj lbl_8164EF48
+.endobj __vt__Q33ipl5scene27CsChanTtlButtonEventHandler
 
 # .data:0x7FC | 0x8164EF64 | size: 0x18
 # ipl::scene::ChannelTitleEventHandler::__vtable

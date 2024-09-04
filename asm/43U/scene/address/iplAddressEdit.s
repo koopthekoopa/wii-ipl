@@ -213,9 +213,9 @@
 /* 813882F0 | 7C 7D 1B 78 */	mr r29, r3
 /* 813882F4 | 7C BE 2B 78 */	mr r30, r5
 /* 813882F8 | 48 08 2F 11 */	bl fn_8140B208
-/* 813882FC | 3C C0 81 65 */	lis r6, lbl_81648628@ha
+/* 813882FC | 3C C0 81 65 */	lis r6, __vt__Q33ipl5scene11AddressEdit@ha
 /* 81388300 | 3B E0 00 00 */	li r31, 0x0
-/* 81388304 | 38 C6 86 28 */	addi r6, r6, lbl_81648628@l
+/* 81388304 | 38 C6 86 28 */	addi r6, r6, __vt__Q33ipl5scene11AddressEdit@l
 /* 81388308 | 38 00 FF FF */	li r0, -0x1
 /* 8138830C | 38 A6 00 1C */	addi r5, r6, 0x1c
 /* 81388310 | 93 FD 00 60 */	stw r31, 0x60(r29)
@@ -274,8 +274,8 @@
 /* 813883C8 | 7C 7E 1B 78 */	mr r30, r3
 /* 813883CC | 41 82 00 5C */	beq .L_81388428
 /* 813883D0 | 80 C3 04 DC */	lwz r6, 0x4dc(r3)
-/* 813883D4 | 3C A0 81 65 */	lis r5, lbl_81648628@ha
-/* 813883D8 | 38 A5 86 28 */	addi r5, r5, lbl_81648628@l
+/* 813883D4 | 3C A0 81 65 */	lis r5, __vt__Q33ipl5scene11AddressEdit@ha
+/* 813883D8 | 38 A5 86 28 */	addi r5, r5, __vt__Q33ipl5scene11AddressEdit@l
 /* 813883DC | 38 85 00 1C */	addi r4, r5, 0x1c
 /* 813883E0 | 2C 06 00 00 */	cmpwi r6, 0x0
 /* 813883E4 | 38 05 00 68 */	addi r0, r5, 0x68
@@ -558,9 +558,9 @@
 /* 81388800 | 7C 79 1B 78 */	mr r25, r3
 /* 81388804 | 41 82 00 1C */	beq .L_81388820
 /* 81388808 | 38 00 00 00 */	li r0, 0x0
-/* 8138880C | 3C 80 81 65 */	lis r4, lbl_81648610@ha
+/* 8138880C | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene16AddressEditEvent@ha
 /* 81388810 | 90 03 00 08 */	stw r0, 0x8(r3)
-/* 81388814 | 38 84 86 10 */	addi r4, r4, lbl_81648610@l
+/* 81388814 | 38 84 86 10 */	addi r4, r4, __vt__Q33ipl5scene16AddressEditEvent@l
 /* 81388818 | 90 83 00 00 */	stw r4, 0x0(r3)
 /* 8138881C | 93 A3 00 0C */	stw r29, 0xc(r3)
 .L_81388820:
@@ -796,9 +796,9 @@
 /* 81388BA8 | 7C 7A 1B 78 */	mr r26, r3
 /* 81388BAC | 41 82 00 1C */	beq .L_81388BC8
 /* 81388BB0 | 38 00 00 00 */	li r0, 0x0
-/* 81388BB4 | 3C 80 81 65 */	lis r4, lbl_816485F8@ha
+/* 81388BB4 | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene17AddressInputEvent@ha
 /* 81388BB8 | 90 03 00 08 */	stw r0, 0x8(r3)
-/* 81388BBC | 38 84 85 F8 */	addi r4, r4, lbl_816485F8@l
+/* 81388BBC | 38 84 85 F8 */	addi r4, r4, __vt__Q33ipl5scene17AddressInputEvent@l
 /* 81388BC0 | 90 83 00 00 */	stw r4, 0x0(r3)
 /* 81388BC4 | 93 A3 00 0C */	stw r29, 0xc(r3)
 .L_81388BC8:
@@ -1157,7 +1157,7 @@
 /* 81389120 | 7F 44 D3 78 */	mr r4, r26
 /* 81389124 | 38 FF 04 06 */	addi r7, r31, 0x406
 /* 81389128 | 38 CD 85 A4 */	li r6, lbl_816965E4@sda21
-/* 8138912C | 48 04 82 E1 */	bl fn_813D140C
+/* 8138912C | 48 04 82 E1 */	bl __ct__Q33ipl5scene11TextBalloonFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCcRCQ33ipl4math4VEC3ff
 /* 81389130 | 7C 79 1B 78 */	mr r25, r3
 .L_81389134:
 /* 81389134 | 93 3D 00 A8 */	stw r25, 0xa8(r29)
@@ -1407,7 +1407,7 @@
 /* 813893FC | 4E 80 04 20 */	bctr
 .L_81389400:
 /* 81389400 | 80 7F 00 A8 */	lwz r3, 0xa8(r31)
-/* 81389404 | 48 04 81 A9 */	bl fn_813D15AC
+/* 81389404 | 48 04 81 A9 */	bl calc__Q33ipl5scene11TextBalloonFv
 .L_81389408:
 /* 81389408 | 80 7F 00 64 */	lwz r3, 0x64(r31)
 /* 8138940C | 83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -1437,7 +1437,7 @@
 /* 81389458 | 38 A0 00 00 */	li r5, 0x0
 /* 8138945C | 48 01 34 E1 */	bl setEventHandler__Q33ipl5scene6ButtonFPQ23gui12EventHandlerPQ23gui12EventHandler
 /* 81389460 | 80 7F 00 A8 */	lwz r3, 0xa8(r31)
-/* 81389464 | 48 04 81 49 */	bl fn_813D15AC
+/* 81389464 | 48 04 81 49 */	bl calc__Q33ipl5scene11TextBalloonFv
 /* 81389468 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8138946C | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 81389470 | 7C 08 03 A6 */	mtlr r0
@@ -1455,7 +1455,7 @@
 /* 8138948C | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 81389490 | 7C 7E 1B 78 */	mr r30, r3
 /* 81389494 | 80 63 00 A8 */	lwz r3, 0xa8(r3)
-/* 81389498 | 48 04 81 15 */	bl fn_813D15AC
+/* 81389498 | 48 04 81 15 */	bl calc__Q33ipl5scene11TextBalloonFv
 /* 8138949C | 3F E0 81 09 */	lis r31, smArg__Q23ipl6System@ha
 /* 813894A0 | 3B FF 90 08 */	addi r31, r31, smArg__Q23ipl6System@l
 /* 813894A4 | 80 7F 00 C4 */	lwz r3, 0xc4(r31)
@@ -1555,7 +1555,7 @@
 /* 813895E8 | 80 7F 00 74 */	lwz r3, 0x74(r31)
 /* 813895EC | 4B FE 11 B1 */	bl draw__Q33ipl6layout6ObjectFv
 /* 813895F0 | 80 7F 00 A8 */	lwz r3, 0xa8(r31)
-/* 813895F4 | 48 04 80 05 */	bl fn_813D15F8
+/* 813895F4 | 48 04 80 05 */	bl draw__Q33ipl5scene11TextBalloonFv
 .L_813895F8:
 /* 813895F8 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813895FC | 83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -1698,7 +1698,7 @@
 /* 813897DC | 38 00 00 03 */	li r0, 0x3
 /* 813897E0 | 80 7D 00 A8 */	lwz r3, 0xa8(r29)
 /* 813897E4 | 90 1D 00 64 */	stw r0, 0x64(r29)
-/* 813897E8 | 48 04 81 C5 */	bl fn_813D19AC
+/* 813897E8 | 48 04 81 C5 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 /* 813897EC | 7F A3 EB 78 */	mr r3, r29
 /* 813897F0 | 48 00 3C 95 */	bl reset_gui__Q33ipl5scene11AddressEditFv
 /* 813897F4 | 48 00 04 5C */	b .L_81389C50
@@ -1796,7 +1796,7 @@
 /* 81389960 | 7F 84 E3 78 */	mr r4, r28
 /* 81389964 | 48 00 2B 05 */	bl set_textbox__Q33ipl5scene11AddressEditFPQ34nw4r3lyt4PanePCw
 /* 81389968 | 80 7D 00 A8 */	lwz r3, 0xa8(r29)
-/* 8138996C | 48 04 80 41 */	bl fn_813D19AC
+/* 8138996C | 48 04 80 41 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 /* 81389970 | 7F A3 EB 78 */	mr r3, r29
 /* 81389974 | 48 00 3B 11 */	bl reset_gui__Q33ipl5scene11AddressEditFv
 /* 81389978 | 38 00 00 0C */	li r0, 0xc
@@ -1837,7 +1837,7 @@
 /* 813899FC | 90 1D 00 64 */	stw r0, 0x64(r29)
 .L_81389A00:
 /* 81389A00 | 80 7D 00 A8 */	lwz r3, 0xa8(r29)
-/* 81389A04 | 48 04 7F A9 */	bl fn_813D19AC
+/* 81389A04 | 48 04 7F A9 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 /* 81389A08 | 48 00 02 48 */	b .L_81389C50
 .L_81389A0C:
 /* 81389A0C | 38 61 00 08 */	addi r3, r1, 0x8
@@ -1970,7 +1970,7 @@
 /* 81389BF0 | 90 1D 00 64 */	stw r0, 0x64(r29)
 .L_81389BF4:
 /* 81389BF4 | 80 7D 00 A8 */	lwz r3, 0xa8(r29)
-/* 81389BF8 | 48 04 7D B5 */	bl fn_813D19AC
+/* 81389BF8 | 48 04 7D B5 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 /* 81389BFC | 7F A3 EB 78 */	mr r3, r29
 /* 81389C00 | 48 00 38 85 */	bl reset_gui__Q33ipl5scene11AddressEditFv
 /* 81389C04 | 48 00 00 4C */	b .L_81389C50
@@ -1985,7 +1985,7 @@
 /* 81389C24 | 38 A0 00 2E */	li r5, 0x2e
 /* 81389C28 | 4B FB CC 7D */	bl callBtn1__Q23ipl12DialogWindowFPCwUl
 /* 81389C2C | 80 7D 00 A8 */	lwz r3, 0xa8(r29)
-/* 81389C30 | 48 04 7D 7D */	bl fn_813D19AC
+/* 81389C30 | 48 04 7D 7D */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 /* 81389C34 | 7F A3 EB 78 */	mr r3, r29
 /* 81389C38 | 48 00 38 4D */	bl reset_gui__Q33ipl5scene11AddressEditFv
 /* 81389C3C | 38 00 00 09 */	li r0, 0x9
@@ -3853,7 +3853,7 @@
 /* 8138B5D4 | 7D 89 03 A6 */	mtctr r12
 /* 8138B5D8 | 4E 80 04 21 */	bctrl
 /* 8138B5DC | 80 7D 00 A8 */	lwz r3, 0xa8(r29)
-/* 8138B5E0 | 48 04 63 CD */	bl fn_813D19AC
+/* 8138B5E0 | 48 04 63 CD */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 .L_8138B5E4:
 /* 8138B5E4 | 81 9D 00 00 */	lwz r12, 0x0(r29)
 /* 8138B5E8 | 7F A3 EB 78 */	mr r3, r29
@@ -5026,7 +5026,7 @@
 /* 8138C58C | 7C 64 1B 78 */	mr r4, r3
 /* 8138C590 | 80 7F 00 A8 */	lwz r3, 0xa8(r31)
 /* 8138C594 | 38 A0 00 0A */	li r5, 0xa
-/* 8138C598 | 48 04 50 69 */	bl fn_813D1600
+/* 8138C598 | 48 04 50 69 */	bl init__Q33ipl5scene11TextBalloonFPCwUl
 /* 8138C59C | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8138C5A0 | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8138C5A4 | 83 C1 00 08 */	lwz r30, 0x8(r1)
@@ -5113,7 +5113,7 @@
 /* 8138C6B4 | 7C 64 1B 78 */	mr r4, r3
 /* 8138C6B8 | 80 7E 00 A8 */	lwz r3, 0xa8(r30)
 /* 8138C6BC | 38 A0 00 0A */	li r5, 0xa
-/* 8138C6C0 | 48 04 4F 41 */	bl fn_813D1600
+/* 8138C6C0 | 48 04 4F 41 */	bl init__Q33ipl5scene11TextBalloonFPCwUl
 /* 8138C6C4 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8138C6C8 | 48 26 CE 4D */	bl _restgpr_29
 /* 8138C6CC | 80 01 00 24 */	lwz r0, 0x24(r1)
@@ -5227,9 +5227,9 @@
 /* 8138C858 | D0 41 00 14 */	stfs f2, 0x14(r1)
 /* 8138C85C | D0 01 00 18 */	stfs f0, 0x18(r1)
 /* 8138C860 | 80 7D 00 A8 */	lwz r3, 0xa8(r29)
-/* 8138C864 | 48 04 4F 69 */	bl fn_813D17CC
+/* 8138C864 | 48 04 4F 69 */	bl setPos__Q33ipl5scene11TextBalloonFRCQ33ipl4math4VEC3bi
 /* 8138C868 | 80 7D 00 A8 */	lwz r3, 0xa8(r29)
-/* 8138C86C | 48 04 4E AD */	bl fn_813D1718
+/* 8138C86C | 48 04 4E AD */	bl fadein__Q33ipl5scene11TextBalloonFv
 .L_8138C870:
 /* 8138C870 | 57 E0 10 3A */	slwi r0, r31, 2
 /* 8138C874 | 7F 9D 02 14 */	add r28, r29, r0
@@ -5303,9 +5303,9 @@
 /* 8138C978 | D0 41 00 08 */	stfs f2, 0x8(r1)
 /* 8138C97C | D0 01 00 0C */	stfs f0, 0xc(r1)
 /* 8138C980 | 80 7D 00 A8 */	lwz r3, 0xa8(r29)
-/* 8138C984 | 48 04 4E 49 */	bl fn_813D17CC
+/* 8138C984 | 48 04 4E 49 */	bl setPos__Q33ipl5scene11TextBalloonFRCQ33ipl4math4VEC3bi
 /* 8138C988 | 80 7D 00 A8 */	lwz r3, 0xa8(r29)
-/* 8138C98C | 48 04 4D 8D */	bl fn_813D1718
+/* 8138C98C | 48 04 4D 8D */	bl fadein__Q33ipl5scene11TextBalloonFv
 .L_8138C990:
 /* 8138C990 | 80 7F 00 90 */	lwz r3, 0x90(r31)
 /* 8138C994 | 38 03 00 01 */	addi r0, r3, 0x1
@@ -5382,7 +5382,7 @@
 /* 8138CA88 | 2C 00 00 01 */	cmpwi r0, 0x1
 /* 8138CA8C | 40 82 00 0C */	bne .L_8138CA98
 /* 8138CA90 | 80 7E 00 A8 */	lwz r3, 0xa8(r30)
-/* 8138CA94 | 48 04 4F 19 */	bl fn_813D19AC
+/* 8138CA94 | 48 04 4F 19 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 .L_8138CA98:
 /* 8138CA98 | 57 E0 10 3A */	slwi r0, r31, 2
 /* 8138CA9C | 7F BE 02 14 */	add r29, r30, r0
@@ -5416,7 +5416,7 @@
 /* 8138CB00 | 2C 00 00 01 */	cmpwi r0, 0x1
 /* 8138CB04 | 40 82 00 0C */	bne .L_8138CB10
 /* 8138CB08 | 80 7E 00 A8 */	lwz r3, 0xa8(r30)
-/* 8138CB0C | 48 04 4E A1 */	bl fn_813D19AC
+/* 8138CB0C | 48 04 4E A1 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 .L_8138CB10:
 /* 8138CB10 | 80 7F 00 90 */	lwz r3, 0x90(r31)
 /* 8138CB14 | 38 03 FF FF */	subi r0, r3, 0x1
@@ -5490,7 +5490,7 @@
 /* 8138CC00 | 80 63 00 AC */	lwz r3, 0xac(r3)
 /* 8138CC04 | 4B FB 9A F5 */	bl callBtn1__Q23ipl12DialogWindowFUlUl
 /* 8138CC08 | 80 7E 00 A8 */	lwz r3, 0xa8(r30)
-/* 8138CC0C | 48 04 4D A1 */	bl fn_813D19AC
+/* 8138CC0C | 48 04 4D A1 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 /* 8138CC10 | 7F C3 F3 78 */	mr r3, r30
 /* 8138CC14 | 48 00 08 71 */	bl reset_gui__Q33ipl5scene11AddressEditFv
 /* 8138CC18 | 38 00 00 2F */	li r0, 0x2f
@@ -5520,7 +5520,7 @@
 /* 8138CC70 | 48 00 00 6C */	b .L_8138CCDC
 .L_8138CC74:
 /* 8138CC74 | 80 7E 00 A8 */	lwz r3, 0xa8(r30)
-/* 8138CC78 | 48 04 4D 35 */	bl fn_813D19AC
+/* 8138CC78 | 48 04 4D 35 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 /* 8138CC7C | 38 00 00 05 */	li r0, 0x5
 /* 8138CC80 | 38 A0 00 00 */	li r5, 0x0
 /* 8138CC84 | 38 60 00 00 */	li r3, 0x0
@@ -5978,9 +5978,9 @@
 /* 8138D2E8 | EC 00 08 2A */	fadds f0, f0, f1
 /* 8138D2EC | D0 01 00 0C */	stfs f0, 0xc(r1)
 /* 8138D2F0 | 80 7E 00 A8 */	lwz r3, 0xa8(r30)
-/* 8138D2F4 | 48 04 44 D9 */	bl fn_813D17CC
+/* 8138D2F4 | 48 04 44 D9 */	bl setPos__Q33ipl5scene11TextBalloonFRCQ33ipl4math4VEC3bi
 /* 8138D2F8 | 80 7E 00 A8 */	lwz r3, 0xa8(r30)
-/* 8138D2FC | 48 04 44 1D */	bl fn_813D1718
+/* 8138D2FC | 48 04 44 1D */	bl fadein__Q33ipl5scene11TextBalloonFv
 .L_8138D300:
 /* 8138D300 | 39 61 00 40 */	addi r11, r1, 0x40
 /* 8138D304 | 48 26 C2 05 */	bl _restgpr_26
@@ -6049,7 +6049,7 @@
 /* 8138D3E8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8138D3EC | 40 82 00 0C */	bne .L_8138D3F8
 /* 8138D3F0 | 80 7F 00 A8 */	lwz r3, 0xa8(r31)
-/* 8138D3F4 | 48 04 45 B9 */	bl fn_813D19AC
+/* 8138D3F4 | 48 04 45 B9 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 .L_8138D3F8:
 /* 8138D3F8 | 39 61 00 30 */	addi r11, r1, 0x30
 /* 8138D3FC | 48 26 C1 11 */	bl _restgpr_27
@@ -6605,9 +6605,9 @@
 /* 8138DB74 | 80 7C 00 64 */	lwz r3, 0x64(r28)
 /* 8138DB78 | 38 80 00 14 */	li r4, 0x14
 /* 8138DB7C | 48 07 D5 BD */	bl getScene__Q33ipl5scene7ManagerFi
-/* 8138DB80 | 3F 80 81 65 */	lis r28, lbl_8164BF5C@ha
+/* 8138DB80 | 3F 80 81 65 */	lis r28, mscButtonName__Q33ipl5scene6Button@ha
 /* 8138DB84 | 7F 63 DB 78 */	mr r3, r27
-/* 8138DB88 | 3B 9C BF 5C */	addi r28, r28, lbl_8164BF5C@l
+/* 8138DB88 | 3B 9C BF 5C */	addi r28, r28, mscButtonName__Q33ipl5scene6Button@l
 /* 8138DB8C | 80 9C 00 14 */	lwz r4, 0x14(r28)
 /* 8138DB90 | 48 27 48 F1 */	bl strcmp
 /* 8138DB94 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -6654,7 +6654,7 @@
 /* 8138DC34 | 90 1D 00 8C */	stw r0, 0x8c(r29)
 /* 8138DC38 | 4B FD D8 35 */	bl startSE__Q33ipl3snd6SystemFPCc
 /* 8138DC3C | 80 7D 00 A8 */	lwz r3, 0xa8(r29)
-/* 8138DC40 | 48 04 3D 6D */	bl fn_813D19AC
+/* 8138DC40 | 48 04 3D 6D */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 /* 8138DC44 | 38 00 00 30 */	li r0, 0x30
 /* 8138DC48 | 90 1D 00 64 */	stw r0, 0x64(r29)
 /* 8138DC4C | 48 00 06 CC */	b .L_8138E318
@@ -6880,7 +6880,7 @@
 /* 8138DF88 | 38 00 00 20 */	li r0, 0x20
 /* 8138DF8C | 80 7D 00 A8 */	lwz r3, 0xa8(r29)
 /* 8138DF90 | 90 1D 00 64 */	stw r0, 0x64(r29)
-/* 8138DF94 | 48 04 3A 19 */	bl fn_813D19AC
+/* 8138DF94 | 48 04 3A 19 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 /* 8138DF98 | 7F A3 EB 78 */	mr r3, r29
 /* 8138DF9C | 4B FF F4 E9 */	bl reset_gui__Q33ipl5scene11AddressEditFv
 /* 8138DFA0 | 48 00 03 78 */	b .L_8138E318
@@ -6911,7 +6911,7 @@
 /* 8138E000 | 38 00 00 23 */	li r0, 0x23
 /* 8138E004 | 80 7D 00 A8 */	lwz r3, 0xa8(r29)
 /* 8138E008 | 90 1D 00 64 */	stw r0, 0x64(r29)
-/* 8138E00C | 48 04 39 A1 */	bl fn_813D19AC
+/* 8138E00C | 48 04 39 A1 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 /* 8138E010 | 7F A3 EB 78 */	mr r3, r29
 /* 8138E014 | 4B FF F4 71 */	bl reset_gui__Q33ipl5scene11AddressEditFv
 /* 8138E018 | 48 00 03 00 */	b .L_8138E318
@@ -7085,7 +7085,7 @@
 /* 8138E29C | 38 00 00 20 */	li r0, 0x20
 /* 8138E2A0 | 80 7D 00 A8 */	lwz r3, 0xa8(r29)
 /* 8138E2A4 | 90 1D 00 64 */	stw r0, 0x64(r29)
-/* 8138E2A8 | 48 04 37 05 */	bl fn_813D19AC
+/* 8138E2A8 | 48 04 37 05 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 /* 8138E2AC | 7F A3 EB 78 */	mr r3, r29
 /* 8138E2B0 | 4B FF F1 D5 */	bl reset_gui__Q33ipl5scene11AddressEditFv
 /* 8138E2B4 | 48 00 00 64 */	b .L_8138E318
@@ -7113,7 +7113,7 @@
 /* 8138E308 | 38 00 00 23 */	li r0, 0x23
 /* 8138E30C | 80 7D 00 A8 */	lwz r3, 0xa8(r29)
 /* 8138E310 | 90 1D 00 64 */	stw r0, 0x64(r29)
-/* 8138E314 | 48 04 36 99 */	bl fn_813D19AC
+/* 8138E314 | 48 04 36 99 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 .L_8138E318:
 /* 8138E318 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8138E31C | 48 26 B1 F1 */	bl _restgpr_27
@@ -8217,27 +8217,30 @@
 .endobj lbl_816485EC
 
 # .data:0x718 | 0x816485F8 | size: 0x18
-.obj lbl_816485F8, global
+# ipl::scene::AddressInputEvent::__vtable
+.obj __vt__Q33ipl5scene17AddressInputEvent, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onEvent__Q33ipl5scene17AddressInputEventFUlUlPv
 	.4byte setManager__Q23gui12EventHandlerFPQ23gui7Manager
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
-.endobj lbl_816485F8
+.endobj __vt__Q33ipl5scene17AddressInputEvent
 
 # .data:0x730 | 0x81648610 | size: 0x18
-.obj lbl_81648610, global
+# ipl::scene::AddressEditEvent::__vtable
+.obj __vt__Q33ipl5scene16AddressEditEvent, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onEvent__Q33ipl5scene16AddressEditEventFUlUlPv
 	.4byte setManager__Q23gui12EventHandlerFPQ23gui7Manager
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
-.endobj lbl_81648610
+.endobj __vt__Q33ipl5scene16AddressEditEvent
 
 # .data:0x748 | 0x81648628 | size: 0x120
-.obj lbl_81648628, global
+# ipl::scene::AddressEdit::__vtable
+.obj __vt__Q33ipl5scene11AddressEdit, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene11AddressEditFv
@@ -8310,7 +8313,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81648628
+.endobj __vt__Q33ipl5scene11AddressEdit
 
 # 0x816947F0..0x81694808 | size: 0x18
 .section .sdata2, "a"

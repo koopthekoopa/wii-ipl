@@ -689,7 +689,7 @@
 /* 813A50B8 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813A50BC | 41 82 00 0C */	beq .L_813A50C8
 /* 813A50C0 | 7C 03 03 78 */	mr r3, r0
-/* 813A50C4 | 48 02 C5 A5 */	bl fn_813D1668
+/* 813A50C4 | 48 02 C5 A5 */	bl terminate__Q33ipl5scene11TextBalloonFv
 .L_813A50C8:
 /* 813A50C8 | 7F E3 FB 78 */	mr r3, r31
 /* 813A50CC | 38 80 00 01 */	li r4, 0x1
@@ -770,7 +770,7 @@
 /* 813A51DC | 41 82 00 14 */	beq .L_813A51F0
 /* 813A51E0 | 38 8D 88 10 */	li r4, lbl_81696850@sda21
 /* 813A51E4 | 38 A0 00 00 */	li r5, 0x0
-/* 813A51E8 | 48 02 C4 19 */	bl fn_813D1600
+/* 813A51E8 | 48 02 C4 19 */	bl init__Q33ipl5scene11TextBalloonFPCwUl
 /* 813A51EC | 48 00 00 50 */	b .L_813A523C
 .L_813A51F0:
 /* 813A51F0 | 88 04 06 21 */	lbz r0, 0x621(r4)
@@ -783,7 +783,7 @@
 /* 813A520C | 7C 64 1B 78 */	mr r4, r3
 /* 813A5210 | 80 7F 00 44 */	lwz r3, 0x44(r31)
 /* 813A5214 | 38 A0 00 00 */	li r5, 0x0
-/* 813A5218 | 48 02 C3 E9 */	bl fn_813D1600
+/* 813A5218 | 48 02 C3 E9 */	bl init__Q33ipl5scene11TextBalloonFPCwUl
 /* 813A521C | 48 00 00 20 */	b .L_813A523C
 .L_813A5220:
 /* 813A5220 | 7C 83 23 78 */	mr r3, r4
@@ -792,10 +792,10 @@
 /* 813A522C | 7C 64 1B 78 */	mr r4, r3
 /* 813A5230 | 80 7F 00 44 */	lwz r3, 0x44(r31)
 /* 813A5234 | 38 A0 00 00 */	li r5, 0x0
-/* 813A5238 | 48 02 C3 C9 */	bl fn_813D1600
+/* 813A5238 | 48 02 C3 C9 */	bl init__Q33ipl5scene11TextBalloonFPCwUl
 .L_813A523C:
 /* 813A523C | 80 7F 00 44 */	lwz r3, 0x44(r31)
-/* 813A5240 | 48 02 C4 D9 */	bl fn_813D1718
+/* 813A5240 | 48 02 C4 D9 */	bl fadein__Q33ipl5scene11TextBalloonFv
 /* 813A5244 | 48 00 01 88 */	b .L_813A53CC
 .L_813A5248:
 /* 813A5248 | 7F E3 FB 78 */	mr r3, r31
@@ -819,7 +819,7 @@
 /* 813A5290 | 41 82 00 14 */	beq .L_813A52A4
 /* 813A5294 | 38 8D 88 10 */	li r4, lbl_81696850@sda21
 /* 813A5298 | 38 A0 00 00 */	li r5, 0x0
-/* 813A529C | 48 02 C3 65 */	bl fn_813D1600
+/* 813A529C | 48 02 C3 65 */	bl init__Q33ipl5scene11TextBalloonFPCwUl
 /* 813A52A0 | 48 00 00 58 */	b .L_813A52F8
 .L_813A52A4:
 /* 813A52A4 | 88 04 06 21 */	lbz r0, 0x621(r4)
@@ -834,7 +834,7 @@
 /* 813A52C8 | 7C 64 1B 78 */	mr r4, r3
 /* 813A52CC | 80 7F 00 44 */	lwz r3, 0x44(r31)
 /* 813A52D0 | 38 A0 00 00 */	li r5, 0x0
-/* 813A52D4 | 48 02 C3 2D */	bl fn_813D1600
+/* 813A52D4 | 48 02 C3 2D */	bl init__Q33ipl5scene11TextBalloonFPCwUl
 /* 813A52D8 | 48 00 00 20 */	b .L_813A52F8
 .L_813A52DC:
 /* 813A52DC | 7C 83 23 78 */	mr r3, r4
@@ -843,10 +843,10 @@
 /* 813A52E8 | 7C 64 1B 78 */	mr r4, r3
 /* 813A52EC | 80 7F 00 44 */	lwz r3, 0x44(r31)
 /* 813A52F0 | 38 A0 00 00 */	li r5, 0x0
-/* 813A52F4 | 48 02 C3 0D */	bl fn_813D1600
+/* 813A52F4 | 48 02 C3 0D */	bl init__Q33ipl5scene11TextBalloonFPCwUl
 .L_813A52F8:
 /* 813A52F8 | 80 7F 00 44 */	lwz r3, 0x44(r31)
-/* 813A52FC | 48 02 C4 1D */	bl fn_813D1718
+/* 813A52FC | 48 02 C4 1D */	bl fadein__Q33ipl5scene11TextBalloonFv
 /* 813A5300 | 48 00 00 CC */	b .L_813A53CC
 .L_813A5304:
 /* 813A5304 | 7F E3 FB 78 */	mr r3, r31
@@ -873,7 +873,7 @@
 /* 813A5358 | 80 1F 00 40 */	lwz r0, 0x40(r31)
 /* 813A535C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813A5360 | 41 82 00 6C */	beq .L_813A53CC
-/* 813A5364 | 48 02 C5 F1 */	bl fn_813D1954
+/* 813A5364 | 48 02 C5 F1 */	bl fadeout__Q33ipl5scene11TextBalloonFv
 /* 813A5368 | 48 00 00 64 */	b .L_813A53CC
 .L_813A536C:
 /* 813A536C | 81 9D 00 00 */	lwz r12, 0x0(r29)
@@ -935,7 +935,7 @@
 /* 813A542C | 80 7F 00 44 */	lwz r3, 0x44(r31)
 /* 813A5430 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813A5434 | 41 82 00 10 */	beq .L_813A5444
-/* 813A5438 | 48 02 C2 31 */	bl fn_813D1668
+/* 813A5438 | 48 02 C2 31 */	bl terminate__Q33ipl5scene11TextBalloonFv
 /* 813A543C | 38 00 00 00 */	li r0, 0x0
 /* 813A5440 | 98 1F 00 48 */	stb r0, 0x48(r31)
 .L_813A5444:

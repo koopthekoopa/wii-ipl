@@ -32,9 +32,9 @@
 /* 813C6ED8 | 38 7E 00 18 */	addi r3, r30, 0x18
 /* 813C6EDC | 38 80 00 00 */	li r4, 0x0
 /* 813C6EE0 | 48 14 B1 7D */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
-/* 813C6EE4 | 3C 60 81 65 */	lis r3, lbl_81651618@ha
+/* 813C6EE4 | 3C 60 81 65 */	lis r3, __vt__Q33ipl5scene12SavedataBase@ha
 /* 813C6EE8 | 93 BE 00 30 */	stw r29, 0x30(r30)
-/* 813C6EEC | 38 63 16 18 */	addi r3, r3, lbl_81651618@l
+/* 813C6EEC | 38 63 16 18 */	addi r3, r3, __vt__Q33ipl5scene12SavedataBase@l
 /* 813C6EF0 | 7F 24 CB 78 */	mr r4, r25
 /* 813C6EF4 | 38 03 00 0C */	addi r0, r3, 0xc
 /* 813C6EF8 | 90 7E 00 00 */	stw r3, 0x0(r30)
@@ -385,8 +385,8 @@
 /* 813C7438 | 7C 7E 1B 78 */	mr r30, r3
 /* 813C743C | 41 82 00 78 */	beq .L_813C74B4
 /* 813C7440 | 80 A3 00 04 */	lwz r5, 0x4(r3)
-/* 813C7444 | 3C 80 81 65 */	lis r4, lbl_81651618@ha
-/* 813C7448 | 38 84 16 18 */	addi r4, r4, lbl_81651618@l
+/* 813C7444 | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene12SavedataBase@ha
+/* 813C7448 | 38 84 16 18 */	addi r4, r4, __vt__Q33ipl5scene12SavedataBase@l
 /* 813C744C | 38 04 00 0C */	addi r0, r4, 0xc
 /* 813C7450 | 2C 05 00 00 */	cmpwi r5, 0x0
 /* 813C7454 | 90 83 00 00 */	stw r4, 0x0(r3)
@@ -1290,7 +1290,8 @@
 .endobj jumptable_816515E8
 
 # .data:0x3C8 | 0x81651618 | size: 0xC8
-.obj lbl_81651618, global
+# ipl::scene::SavedataBase::__vtable
+.obj __vt__Q33ipl5scene12SavedataBase, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene12SavedataBaseFv
@@ -1341,7 +1342,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81651618
+.endobj __vt__Q33ipl5scene12SavedataBase
 
 # 0x81696BF8..0x81696C20 | size: 0x28
 .section .sdata, "wa"

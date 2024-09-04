@@ -32,12 +32,12 @@
 /* 813C84D8 | 38 7E 00 18 */	addi r3, r30, 0x18
 /* 813C84DC | 38 80 00 00 */	li r4, 0x0
 /* 813C84E0 | 48 14 9B 7D */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
-/* 813C84E4 | 3C 60 81 65 */	lis r3, lbl_81651C3C@ha
-/* 813C84E8 | 3C C0 81 65 */	lis r6, lbl_8164BE40@ha
-/* 813C84EC | 38 63 1C 3C */	addi r3, r3, lbl_81651C3C@l
+/* 813C84E4 | 3C 60 81 65 */	lis r3, __vt__Q33ipl5scene12SavedataEdit@ha
+/* 813C84E8 | 3C C0 81 65 */	lis r6, "__vt__Q33ipl4math28LinearIntp<Q33ipl4math4VEC3>"@ha
+/* 813C84EC | 38 63 1C 3C */	addi r3, r3, __vt__Q33ipl5scene12SavedataEdit@l
 /* 813C84F0 | 93 BE 00 30 */	stw r29, 0x30(r30)
 /* 813C84F4 | 38 03 00 0C */	addi r0, r3, 0xc
-/* 813C84F8 | 38 C6 BE 40 */	addi r6, r6, lbl_8164BE40@l
+/* 813C84F8 | 38 C6 BE 40 */	addi r6, r6, "__vt__Q33ipl4math28LinearIntp<Q33ipl4math4VEC3>"@l
 /* 813C84FC | 90 7E 00 00 */	stw r3, 0x0(r30)
 /* 813C8500 | 7F 24 CB 78 */	mr r4, r25
 /* 813C8504 | 38 60 05 80 */	li r3, 0x580
@@ -340,8 +340,8 @@
 /* 813C8984 | 7C 7E 1B 78 */	mr r30, r3
 /* 813C8988 | 41 82 00 84 */	beq .L_813C8A0C
 /* 813C898C | 80 A3 00 04 */	lwz r5, 0x4(r3)
-/* 813C8990 | 3C 80 81 65 */	lis r4, lbl_81651C3C@ha
-/* 813C8994 | 38 84 1C 3C */	addi r4, r4, lbl_81651C3C@l
+/* 813C8990 | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene12SavedataEdit@ha
+/* 813C8994 | 38 84 1C 3C */	addi r4, r4, __vt__Q33ipl5scene12SavedataEdit@l
 /* 813C8998 | 38 04 00 0C */	addi r0, r4, 0xc
 /* 813C899C | 2C 05 00 00 */	cmpwi r5, 0x0
 /* 813C89A0 | 90 83 00 00 */	stw r4, 0x0(r3)
@@ -1792,7 +1792,8 @@
 .endobj gap_08_81651C18_data
 
 # .data:0x3DC | 0x81651C3C | size: 0xE8
-.obj lbl_81651C3C, global
+# ipl::scene::SavedataEdit::__vtable
+.obj __vt__Q33ipl5scene12SavedataEdit, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene12SavedataEditFv
@@ -1851,7 +1852,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81651C3C
+.endobj __vt__Q33ipl5scene12SavedataEdit
 
 # .data:0x4C4 | 0x81651D24 | size: 0xC
 .obj lbl_81651D24, global

@@ -14,9 +14,9 @@
 /* 8139637C | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 81396380 | 7C 7F 1B 78 */	mr r31, r3
 /* 81396384 | 48 17 C6 B1 */	bl fn_81512A34
-/* 81396388 | 3C A0 81 65 */	lis r5, lbl_8164B6B8@ha
+/* 81396388 | 3C A0 81 65 */	lis r5, __vt__Q33ipl5scene12UrlProcessor@ha
 /* 8139638C | 38 7F 00 34 */	addi r3, r31, 0x34
-/* 81396390 | 38 A5 B6 B8 */	addi r5, r5, lbl_8164B6B8@l
+/* 81396390 | 38 A5 B6 B8 */	addi r5, r5, __vt__Q33ipl5scene12UrlProcessor@l
 /* 81396394 | 38 80 00 0C */	li r4, 0xc
 /* 81396398 | 90 BF 00 00 */	stw r5, 0x0(r31)
 /* 8139639C | 48 17 BC C1 */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
@@ -758,14 +758,15 @@
 .balign 8
 
 # .data:0x0 | 0x8164B6B8 | size: 0x18
-.obj lbl_8164B6B8, global
+# ipl::scene::UrlProcessor::__vtable
+.obj __vt__Q33ipl5scene12UrlProcessor, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene12UrlProcessorFv
 	.4byte "Process__Q33ipl5scene12UrlProcessorFUsPQ34nw4r2ut15PrintContext<w>"
 	.4byte fn_81512BE0
 	.4byte 0x00000000
-.endobj lbl_8164B6B8
+.endobj __vt__Q33ipl5scene12UrlProcessor
 
 # 0x81694850..0x81694868 | size: 0x18
 .section .sdata2, "a"

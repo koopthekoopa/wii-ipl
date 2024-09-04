@@ -16,9 +16,9 @@
 /* 813BB0B8 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813BB0BC | 7C 7E 1B 78 */	mr r30, r3
 /* 813BB0C0 | 48 05 01 49 */	bl fn_8140B208
-/* 813BB0C4 | 3C E0 81 65 */	lis r7, lbl_8164F7B8@ha
+/* 813BB0C4 | 3C E0 81 65 */	lis r7, __vt__Q33ipl5scene10FaceSelect@ha
 /* 813BB0C8 | 38 A0 00 00 */	li r5, 0x0
-/* 813BB0CC | 38 E7 F7 B8 */	addi r7, r7, lbl_8164F7B8@l
+/* 813BB0CC | 38 E7 F7 B8 */	addi r7, r7, __vt__Q33ipl5scene10FaceSelect@l
 /* 813BB0D0 | 38 80 FF FF */	li r4, -0x1
 /* 813BB0D4 | 38 C7 00 1C */	addi r6, r7, 0x1c
 /* 813BB0D8 | 38 00 00 0C */	li r0, 0xc
@@ -403,9 +403,9 @@
 /* 813BB690 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813BB694 | 41 82 00 1C */	beq .L_813BB6B0
 /* 813BB698 | 38 00 00 00 */	li r0, 0x0
-/* 813BB69C | 3C 80 81 65 */	lis r4, lbl_8164F7A0@ha
+/* 813BB69C | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene15FaceSelectEvent@ha
 /* 813BB6A0 | 90 03 00 08 */	stw r0, 0x8(r3)
-/* 813BB6A4 | 38 84 F7 A0 */	addi r4, r4, lbl_8164F7A0@l
+/* 813BB6A4 | 38 84 F7 A0 */	addi r4, r4, __vt__Q33ipl5scene15FaceSelectEvent@l
 /* 813BB6A8 | 90 83 00 00 */	stw r4, 0x0(r3)
 /* 813BB6AC | 93 C3 00 0C */	stw r30, 0xc(r3)
 .L_813BB6B0:
@@ -490,9 +490,9 @@
 /* 813BB7DC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813BB7E0 | 41 82 00 1C */	beq .L_813BB7FC
 /* 813BB7E4 | 38 00 00 00 */	li r0, 0x0
-/* 813BB7E8 | 3C 80 81 65 */	lis r4, lbl_8164F784@ha
+/* 813BB7E8 | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene21FaceSelectButtonEvent@ha
 /* 813BB7EC | 90 03 00 08 */	stw r0, 0x8(r3)
-/* 813BB7F0 | 38 84 F7 84 */	addi r4, r4, lbl_8164F784@l
+/* 813BB7F0 | 38 84 F7 84 */	addi r4, r4, __vt__Q33ipl5scene21FaceSelectButtonEvent@l
 /* 813BB7F4 | 90 83 00 00 */	stw r4, 0x0(r3)
 /* 813BB7F8 | 93 C3 00 0C */	stw r30, 0xc(r3)
 .L_813BB7FC:
@@ -567,7 +567,7 @@
 /* 813BB8F0 | 7F 64 DB 78 */	mr r4, r27
 /* 813BB8F4 | 38 FF 06 47 */	addi r7, r31, 0x647
 /* 813BB8F8 | 38 CD 8A CE */	li r6, lbl_81696B0E@sda21
-/* 813BB8FC | 48 01 5B 11 */	bl fn_813D140C
+/* 813BB8FC | 48 01 5B 11 */	bl __ct__Q33ipl5scene11TextBalloonFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCcRCQ33ipl4math4VEC3ff
 /* 813BB900 | 7C 7C 1B 78 */	mr r28, r3
 .L_813BB904:
 /* 813BB904 | 3B 5A 00 01 */	addi r26, r26, 0x1
@@ -771,7 +771,7 @@
 .L_813BBB9C:
 /* 813BBB9C | 7C 7D FA 14 */	add r3, r29, r31
 /* 813BBBA0 | 80 63 02 F0 */	lwz r3, 0x2f0(r3)
-/* 813BBBA4 | 48 01 5A 09 */	bl fn_813D15AC
+/* 813BBBA4 | 48 01 5A 09 */	bl calc__Q33ipl5scene11TextBalloonFv
 /* 813BBBA8 | 3B DE 00 01 */	addi r30, r30, 0x1
 /* 813BBBAC | 3B FF 00 04 */	addi r31, r31, 0x4
 /* 813BBBB0 | 2C 1E 00 0A */	cmpwi r30, 0xa
@@ -816,7 +816,7 @@
 .L_813BBC38:
 /* 813BBC38 | 7C 7D FA 14 */	add r3, r29, r31
 /* 813BBC3C | 80 63 02 F0 */	lwz r3, 0x2f0(r3)
-/* 813BBC40 | 48 01 59 6D */	bl fn_813D15AC
+/* 813BBC40 | 48 01 59 6D */	bl calc__Q33ipl5scene11TextBalloonFv
 /* 813BBC44 | 3B DE 00 01 */	addi r30, r30, 0x1
 /* 813BBC48 | 3B FF 00 04 */	addi r31, r31, 0x4
 /* 813BBC4C | 2C 1E 00 0A */	cmpwi r30, 0xa
@@ -1067,7 +1067,7 @@
 .L_813BBFD0:
 /* 813BBFD0 | 7C 7F F2 14 */	add r3, r31, r30
 /* 813BBFD4 | 80 63 02 F0 */	lwz r3, 0x2f0(r3)
-/* 813BBFD8 | 48 01 56 21 */	bl fn_813D15F8
+/* 813BBFD8 | 48 01 56 21 */	bl draw__Q33ipl5scene11TextBalloonFv
 /* 813BBFDC | 3B BD 00 01 */	addi r29, r29, 0x1
 /* 813BBFE0 | 3B DE 00 04 */	addi r30, r30, 0x4
 /* 813BBFE4 | 2C 1D 00 0A */	cmpwi r29, 0xa
@@ -1215,7 +1215,7 @@
 .L_813BC1EC:
 /* 813BC1EC | 7C 7F F2 14 */	add r3, r31, r30
 /* 813BC1F0 | 80 63 02 F0 */	lwz r3, 0x2f0(r3)
-/* 813BC1F4 | 48 01 53 B9 */	bl fn_813D15AC
+/* 813BC1F4 | 48 01 53 B9 */	bl calc__Q33ipl5scene11TextBalloonFv
 /* 813BC1F8 | 3B BD 00 01 */	addi r29, r29, 0x1
 /* 813BC1FC | 3B DE 00 04 */	addi r30, r30, 0x4
 /* 813BC200 | 2C 1D 00 0A */	cmpwi r29, 0xa
@@ -1534,7 +1534,7 @@
 .L_813BC650:
 /* 813BC650 | 7C 7D FA 14 */	add r3, r29, r31
 /* 813BC654 | 80 63 02 F0 */	lwz r3, 0x2f0(r3)
-/* 813BC658 | 48 01 53 55 */	bl fn_813D19AC
+/* 813BC658 | 48 01 53 55 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 /* 813BC65C | 3B DE 00 01 */	addi r30, r30, 0x1
 /* 813BC660 | 3B FF 00 04 */	addi r31, r31, 0x4
 /* 813BC664 | 2C 1E 00 0A */	cmpwi r30, 0xa
@@ -1585,7 +1585,7 @@
 .L_813BC704:
 /* 813BC704 | 7C 7D FA 14 */	add r3, r29, r31
 /* 813BC708 | 80 63 02 F0 */	lwz r3, 0x2f0(r3)
-/* 813BC70C | 48 01 52 A1 */	bl fn_813D19AC
+/* 813BC70C | 48 01 52 A1 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 /* 813BC710 | 3B DE 00 01 */	addi r30, r30, 0x1
 /* 813BC714 | 3B FF 00 04 */	addi r31, r31, 0x4
 /* 813BC718 | 2C 1E 00 0A */	cmpwi r30, 0xa
@@ -1713,9 +1713,9 @@
 /* 813BC8B4 | EC 00 08 2A */	fadds f0, f0, f1
 /* 813BC8B8 | D0 01 00 0C */	stfs f0, 0xc(r1)
 /* 813BC8BC | 80 7F 02 F0 */	lwz r3, 0x2f0(r31)
-/* 813BC8C0 | 48 01 4F 0D */	bl fn_813D17CC
+/* 813BC8C0 | 48 01 4F 0D */	bl setPos__Q33ipl5scene11TextBalloonFRCQ33ipl4math4VEC3bi
 /* 813BC8C4 | 80 7F 02 F0 */	lwz r3, 0x2f0(r31)
-/* 813BC8C8 | 48 01 4E 51 */	bl fn_813D1718
+/* 813BC8C8 | 48 01 4E 51 */	bl fadein__Q33ipl5scene11TextBalloonFv
 .L_813BC8CC:
 /* 813BC8CC | 2C 1C FF FF */	cmpwi r28, -0x1
 /* 813BC8D0 | 41 82 00 58 */	beq .L_813BC928
@@ -1800,7 +1800,7 @@
 /* 813BC9DC | 7C 7D 22 14 */	add r3, r29, r4
 /* 813BC9E0 | 3B FE 00 10 */	addi r31, r30, 0x10
 /* 813BC9E4 | 80 63 02 F0 */	lwz r3, 0x2f0(r3)
-/* 813BC9E8 | 48 01 4F C5 */	bl fn_813D19AC
+/* 813BC9E8 | 48 01 4F C5 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 .L_813BC9EC:
 /* 813BC9EC | 2C 1F FF FF */	cmpwi r31, -0x1
 /* 813BC9F0 | 41 82 00 24 */	beq .L_813BCA14
@@ -1954,7 +1954,7 @@
 .L_813BCC0C:
 /* 813BCC0C | 7C 7E EA 14 */	add r3, r30, r29
 /* 813BCC10 | 80 63 02 F0 */	lwz r3, 0x2f0(r3)
-/* 813BCC14 | 48 01 4A 55 */	bl fn_813D1668
+/* 813BCC14 | 48 01 4A 55 */	bl terminate__Q33ipl5scene11TextBalloonFv
 /* 813BCC18 | 3B 9C 00 01 */	addi r28, r28, 0x1
 /* 813BCC1C | 3B BD 00 04 */	addi r29, r29, 0x4
 /* 813BCC20 | 2C 1C 00 0A */	cmpwi r28, 0xa
@@ -2273,12 +2273,12 @@
 /* 813BD03C | 7C 7D DA 14 */	add r3, r29, r27
 /* 813BD040 | 38 A0 00 0A */	li r5, 0xa
 /* 813BD044 | 80 63 02 F0 */	lwz r3, 0x2f0(r3)
-/* 813BD048 | 48 01 45 B9 */	bl fn_813D1600
+/* 813BD048 | 48 01 45 B9 */	bl init__Q33ipl5scene11TextBalloonFPCwUl
 /* 813BD04C | 48 00 00 10 */	b .L_813BD05C
 .L_813BD050:
 /* 813BD050 | 7C 7D DA 14 */	add r3, r29, r27
 /* 813BD054 | 80 63 02 F0 */	lwz r3, 0x2f0(r3)
-/* 813BD058 | 48 01 46 11 */	bl fn_813D1668
+/* 813BD058 | 48 01 46 11 */	bl terminate__Q33ipl5scene11TextBalloonFv
 .L_813BD05C:
 /* 813BD05C | 3B FF 00 01 */	addi r31, r31, 0x1
 /* 813BD060 | 3B 7B 00 04 */	addi r27, r27, 0x4
@@ -2594,9 +2594,9 @@
 /* 813BD4A4 | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
 /* 813BD4A8 | 80 63 00 64 */	lwz r3, 0x64(r3)
 /* 813BD4AC | 48 04 DC 8D */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813BD4B0 | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
+/* 813BD4B0 | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
 /* 813BD4B4 | 7C 7E 1B 78 */	mr r30, r3
-/* 813BD4B8 | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 813BD4B8 | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 813BD4BC | 7F E3 FB 78 */	mr r3, r31
 /* 813BD4C0 | 80 84 00 14 */	lwz r4, 0x14(r4)
 /* 813BD4C4 | 48 24 4F BD */	bl strcmp
@@ -2632,7 +2632,7 @@
 /* 813BD530 | 80 1D 00 0C */	lwz r0, 0xc(r29)
 /* 813BD534 | 7C 60 FA 14 */	add r3, r0, r31
 /* 813BD538 | 80 63 02 F0 */	lwz r3, 0x2f0(r3)
-/* 813BD53C | 48 01 44 71 */	bl fn_813D19AC
+/* 813BD53C | 48 01 44 71 */	bl fadeoutForce__Q33ipl5scene11TextBalloonFv
 /* 813BD540 | 3B DE 00 01 */	addi r30, r30, 0x1
 /* 813BD544 | 3B FF 00 04 */	addi r31, r31, 0x4
 /* 813BD548 | 2C 1E 00 0A */	cmpwi r30, 0xa
@@ -3254,7 +3254,8 @@
 .endobj lbl_8164F772
 
 # .data:0x6CC | 0x8164F784 | size: 0x1C
-.obj lbl_8164F784, global
+# ipl::scene::FaceSelectButtonEvent::__vtable
+.obj __vt__Q33ipl5scene21FaceSelectButtonEvent, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onEvent__Q33ipl5scene22ButtonEventHandlerBaseFUlUlPv
@@ -3262,20 +3263,22 @@
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
 	.4byte onEventDerived__Q33ipl5scene21FaceSelectButtonEventFUlUlPCQ33ipl10controller9Interface
-.endobj lbl_8164F784
+.endobj __vt__Q33ipl5scene21FaceSelectButtonEvent
 
 # .data:0x6E8 | 0x8164F7A0 | size: 0x18
-.obj lbl_8164F7A0, global
+# ipl::scene::FaceSelectEvent::__vtable
+.obj __vt__Q33ipl5scene15FaceSelectEvent, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onEvent__Q33ipl5scene15FaceSelectEventFUlUlPv
 	.4byte setManager__Q23gui12EventHandlerFPQ23gui7Manager
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
-.endobj lbl_8164F7A0
+.endobj __vt__Q33ipl5scene15FaceSelectEvent
 
 # .data:0x700 | 0x8164F7B8 | size: 0x100
-.obj lbl_8164F7B8, global
+# ipl::scene::FaceSelect::__vtable
+.obj __vt__Q33ipl5scene10FaceSelect, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene10FaceSelectFv
@@ -3340,7 +3343,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8164F7B8
+.endobj __vt__Q33ipl5scene10FaceSelect
 
 # 0x81694A10..0x81694A30 | size: 0x20
 .section .sdata2, "a"

@@ -14,9 +14,9 @@
 /* 81387420 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 81387424 | 7C 7F 1B 78 */	mr r31, r3
 /* 81387428 | 48 08 3D E1 */	bl fn_8140B208
-/* 8138742C | 3C A0 81 64 */	lis r5, lbl_81647DC4@ha
+/* 8138742C | 3C A0 81 64 */	lis r5, __vt__Q33ipl5scene13AddressAddSel@ha
 /* 81387430 | 38 C0 00 00 */	li r6, 0x0
-/* 81387434 | 38 A5 7D C4 */	addi r5, r5, lbl_81647DC4@l
+/* 81387434 | 38 A5 7D C4 */	addi r5, r5, __vt__Q33ipl5scene13AddressAddSel@l
 /* 81387438 | 90 DF 00 60 */	stw r6, 0x60(r31)
 /* 8138743C | 38 85 00 1C */	addi r4, r5, 0x1c
 /* 81387440 | 7F E3 FB 78 */	mr r3, r31
@@ -125,9 +125,9 @@
 /* 813875C4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813875C8 | 41 82 00 1C */	beq .L_813875E4
 /* 813875CC | 38 00 00 00 */	li r0, 0x0
-/* 813875D0 | 3C 80 81 64 */	lis r4, lbl_81647DAC@ha
+/* 813875D0 | 3C 80 81 64 */	lis r4, __vt__Q33ipl5scene18AddressAddSelEvent@ha
 /* 813875D4 | 90 03 00 08 */	stw r0, 0x8(r3)
-/* 813875D8 | 38 84 7D AC */	addi r4, r4, lbl_81647DAC@l
+/* 813875D8 | 38 84 7D AC */	addi r4, r4, __vt__Q33ipl5scene18AddressAddSelEvent@l
 /* 813875DC | 90 83 00 00 */	stw r4, 0x0(r3)
 /* 813875E0 | 93 E3 00 0C */	stw r31, 0xc(r3)
 .L_813875E4:
@@ -798,9 +798,9 @@
 /* 81387E7C | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
 /* 81387E80 | 80 63 00 64 */	lwz r3, 0x64(r3)
 /* 81387E84 | 48 08 32 B5 */	bl getScene__Q33ipl5scene7ManagerFi
-/* 81387E88 | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
+/* 81387E88 | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
 /* 81387E8C | 7C 7E 1B 78 */	mr r30, r3
-/* 81387E90 | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 81387E90 | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 81387E94 | 7F E3 FB 78 */	mr r3, r31
 /* 81387E98 | 80 84 00 14 */	lwz r4, 0x14(r4)
 /* 81387E9C | 48 27 A5 E5 */	bl strcmp
@@ -1050,17 +1050,19 @@
 .endobj lbl_81647D9A
 
 # .data:0x11C | 0x81647DAC | size: 0x18
-.obj lbl_81647DAC, global
+# ipl::scene::AddressAddSelEvent::__vtable
+.obj __vt__Q33ipl5scene18AddressAddSelEvent, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onEvent__Q33ipl5scene18AddressAddSelEventFUlUlPv
 	.4byte setManager__Q23gui12EventHandlerFPQ23gui7Manager
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
-.endobj lbl_81647DAC
+.endobj __vt__Q33ipl5scene18AddressAddSelEvent
 
 # .data:0x134 | 0x81647DC4 | size: 0x11C
-.obj lbl_81647DC4, global
+# ipl::scene::AddressAddSel::__vtable
+.obj __vt__Q33ipl5scene13AddressAddSel, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene13AddressAddSelFv
@@ -1132,7 +1134,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81647DC4
+.endobj __vt__Q33ipl5scene13AddressAddSel
 
 # 0x816965D0..0x816965E0 | size: 0x10
 .section .sdata, "wa"

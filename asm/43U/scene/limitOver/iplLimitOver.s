@@ -14,9 +14,9 @@
 /* 813C1AD0 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813C1AD4 | 7C 7F 1B 78 */	mr r31, r3
 /* 813C1AD8 | 48 04 97 31 */	bl fn_8140B208
-/* 813C1ADC | 3C A0 81 65 */	lis r5, lbl_81650864@ha
+/* 813C1ADC | 3C A0 81 65 */	lis r5, __vt__Q33ipl5scene9LimitOver@ha
 /* 813C1AE0 | 38 00 00 00 */	li r0, 0x0
-/* 813C1AE4 | 38 A5 08 64 */	addi r5, r5, lbl_81650864@l
+/* 813C1AE4 | 38 A5 08 64 */	addi r5, r5, __vt__Q33ipl5scene9LimitOver@l
 /* 813C1AE8 | 90 1F 00 60 */	stw r0, 0x60(r31)
 /* 813C1AEC | 38 85 00 1C */	addi r4, r5, 0x1c
 /* 813C1AF0 | 7F E3 FB 78 */	mr r3, r31
@@ -770,11 +770,14 @@
 	.string "Mes_KR_KOR"
 .endobj lbl_81650676
 
-# .data:0xA9 | 0x81650681 | size: 0x3B
+# .data:0xA9 | 0x81650681 | size: 0xB
 .obj lbl_81650681, global
-	.4byte 0x4D65735F
-	.4byte 0x434E5F43
-	.byte 0x48, 0x4E, 0x00
+	.string "Mes_CN_CHN"
+.endobj lbl_81650681
+
+# .data:0xB4 | 0x8165068C | size: 0x30
+# ipl::scene::lo_pane_name
+.obj lo_pane_name__Q23ipl5scene, global
 	.4byte lbl_81650608
 	.4byte lbl_81650613
 	.4byte lbl_8165061E
@@ -787,7 +790,7 @@
 	.4byte lbl_8165066B
 	.4byte lbl_81650676
 	.4byte lbl_81650681
-.endobj lbl_81650681
+.endobj lo_pane_name__Q23ipl5scene
 
 # .data:0xE4 | 0x816506BC | size: 0xC
 .obj lbl_816506BC, global
@@ -844,11 +847,14 @@
 	.string "Push_KR_KOR"
 .endobj lbl_81650734
 
-# .data:0x168 | 0x81650740 | size: 0x3C
+# .data:0x168 | 0x81650740 | size: 0xC
 .obj lbl_81650740, global
-	.4byte 0x50757368
-	.4byte 0x5F434E5F
-	.4byte 0x43484E00
+	.string "Push_CN_CHN"
+.endobj lbl_81650740
+
+# .data:0x174 | 0x8165074C | size: 0x30
+# ipl::scene::lopush_pane_name
+.obj lopush_pane_name__Q23ipl5scene, global
 	.4byte lbl_816506BC
 	.4byte lbl_816506C8
 	.4byte lbl_816506D4
@@ -861,7 +867,7 @@
 	.4byte lbl_81650728
 	.4byte lbl_81650734
 	.4byte lbl_81650740
-.endobj lbl_81650740
+.endobj lopush_pane_name__Q23ipl5scene
 
 # .data:0x1A4 | 0x8165077C | size: 0x10
 .obj lbl_8165077C, global
@@ -940,7 +946,8 @@
 .endobj lbl_81650851
 
 # .data:0x28C | 0x81650864 | size: 0x6C
-.obj lbl_81650864, global
+# ipl::scene::LimitOver::__vtable
+.obj __vt__Q33ipl5scene9LimitOver, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene9LimitOverFv
@@ -968,7 +975,7 @@
 	.4byte calcFadeout__Q33ipl5scene9LimitOverFv
 	.4byte calcCommonAfter__Q33ipl5scene14FaderSceneBaseFv
 	.4byte 0x00000000
-.endobj lbl_81650864
+.endobj __vt__Q33ipl5scene9LimitOver
 
 # 0x81696B68..0x81696BC8 | size: 0x60
 .section .sdata, "wa"

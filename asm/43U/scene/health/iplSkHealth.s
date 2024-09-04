@@ -14,9 +14,9 @@
 /* 813BD5E4 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813BD5E8 | 7C 7F 1B 78 */	mr r31, r3
 /* 813BD5EC | 48 04 DC 1D */	bl fn_8140B208
-/* 813BD5F0 | 3C 60 81 65 */	lis r3, lbl_8164FAA0@ha
+/* 813BD5F0 | 3C 60 81 65 */	lis r3, __vt__Q33ipl5scene8skHealth@ha
 /* 813BD5F4 | 38 80 00 00 */	li r4, 0x0
-/* 813BD5F8 | 38 63 FA A0 */	addi r3, r3, lbl_8164FAA0@l
+/* 813BD5F8 | 38 63 FA A0 */	addi r3, r3, __vt__Q33ipl5scene8skHealth@l
 /* 813BD5FC | 38 00 00 02 */	li r0, 0x2
 /* 813BD600 | 38 A3 00 1C */	addi r5, r3, 0x1c
 /* 813BD604 | 90 7F 00 00 */	stw r3, 0x0(r31)
@@ -821,11 +821,16 @@
 	.string "Has_EU_SPA"
 .endobj lbl_8164F905
 
-# .data:0x58 | 0x8164F910 | size: 0x3C
+# .data:0x58 | 0x8164F910 | size: 0xC
 .obj lbl_8164F910, global
 	.4byte 0x4861735F
 	.4byte 0x45555F4E
 	.4byte 0x45440000
+.endobj lbl_8164F910
+
+# .data:0x64 | 0x8164F91C | size: 0x30
+# ipl::scene::has_pane_name
+.obj has_pane_name__Q23ipl5scene, global
 	.4byte lbl_81696B30
 	.4byte lbl_8164F8B8
 	.4byte lbl_8164F8C3
@@ -838,7 +843,7 @@
 	.4byte lbl_8164F910
 	.4byte lbl_81696B38
 	.4byte lbl_81696B40
-.endobj lbl_8164F910
+.endobj has_pane_name__Q23ipl5scene
 
 # .data:0x94 | 0x8164F94C | size: 0x9
 .obj lbl_8164F94C, global
@@ -895,11 +900,16 @@
 	.string "Push_KOR"
 .endobj lbl_8164F9C1
 
-# .data:0x112 | 0x8164F9CA | size: 0x3A
+# .data:0x112 | 0x8164F9CA | size: 0xA
 .obj lbl_8164F9CA, global
 	.4byte 0x50757368
 	.4byte 0x5F43484E
 	.2byte 0x0000
+.endobj lbl_8164F9CA
+
+# .data:0x11C | 0x8164F9D4 | size: 0x30
+# ipl::scene::push_pane_name
+.obj push_pane_name__Q23ipl5scene, global
 	.4byte lbl_8164F94C
 	.4byte lbl_8164F955
 	.4byte lbl_8164F961
@@ -912,7 +922,7 @@
 	.4byte lbl_8164F9B5
 	.4byte lbl_8164F9C1
 	.4byte lbl_8164F9CA
-.endobj lbl_8164F9CA
+.endobj push_pane_name__Q23ipl5scene
 
 # .data:0x14C | 0x8164FA04 | size: 0xC
 .obj lbl_8164FA04, global
@@ -968,7 +978,8 @@
 .endobj lbl_8164FA90
 
 # .data:0x1E8 | 0x8164FAA0 | size: 0x68
-.obj lbl_8164FAA0, global
+# ipl::scene::skHealth::__vtable
+.obj __vt__Q33ipl5scene8skHealth, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene8skHealthFv
@@ -995,7 +1006,7 @@
 	.4byte calcNormal__Q33ipl5scene8skHealthFv
 	.4byte calcFadeout__Q33ipl5scene8skHealthFv
 	.4byte calcCommonAfter__Q33ipl5scene14FaderSceneBaseFv
-.endobj lbl_8164FAA0
+.endobj __vt__Q33ipl5scene8skHealth
 
 # 0x81696B30..0x81696B60 | size: 0x30
 .section .sdata, "wa"

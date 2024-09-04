@@ -16,9 +16,9 @@
 /* 8138EDFC | 7C 7C 1B 78 */	mr r28, r3
 /* 8138EE00 | 7C BD 2B 78 */	mr r29, r5
 /* 8138EE04 | 48 07 AD E9 */	bl fn_81409BEC
-/* 8138EE08 | 3C A0 81 65 */	lis r5, lbl_8164B164@ha
+/* 8138EE08 | 3C A0 81 65 */	lis r5, __vt__Q33ipl5scene5Board@ha
 /* 8138EE0C | 3B C0 00 00 */	li r30, 0x0
-/* 8138EE10 | 38 A5 B1 64 */	addi r5, r5, lbl_8164B164@l
+/* 8138EE10 | 38 A5 B1 64 */	addi r5, r5, __vt__Q33ipl5scene5Board@l
 /* 8138EE14 | 93 DC 00 5C */	stw r30, 0x5c(r28)
 /* 8138EE18 | 38 85 00 1C */	addi r4, r5, 0x1c
 /* 8138EE1C | 38 7C 00 68 */	addi r3, r28, 0x68
@@ -5449,9 +5449,9 @@
 /* 81393690 | 7C 7B 1B 78 */	mr r27, r3
 /* 81393694 | 2C 1A 00 05 */	cmpwi r26, 0x5
 /* 81393698 | 40 82 00 68 */	bne .L_81393700
-/* 8139369C | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
+/* 8139369C | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
 /* 813936A0 | 7F A3 EB 78 */	mr r3, r29
-/* 813936A4 | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 813936A4 | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 813936A8 | 80 84 00 04 */	lwz r4, 0x4(r4)
 /* 813936AC | 48 26 ED D5 */	bl strcmp
 /* 813936B0 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -5477,9 +5477,9 @@
 .L_81393700:
 /* 81393700 | 2C 1A 00 05 */	cmpwi r26, 0x5
 /* 81393704 | 40 82 00 80 */	bne .L_81393784
-/* 81393708 | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
+/* 81393708 | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
 /* 8139370C | 7F A3 EB 78 */	mr r3, r29
-/* 81393710 | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 81393710 | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 81393714 | 80 84 00 0C */	lwz r4, 0xc(r4)
 /* 81393718 | 48 26 ED 69 */	bl strcmp
 /* 8139371C | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -5511,9 +5511,9 @@
 .L_81393784:
 /* 81393784 | 2C 1A 00 05 */	cmpwi r26, 0x5
 /* 81393788 | 40 82 00 8C */	bne .L_81393814
-/* 8139378C | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
+/* 8139378C | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
 /* 81393790 | 7F A3 EB 78 */	mr r3, r29
-/* 81393794 | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 81393794 | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 81393798 | 80 84 00 10 */	lwz r4, 0x10(r4)
 /* 8139379C | 48 26 EC E5 */	bl strcmp
 /* 813937A0 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -5548,9 +5548,9 @@
 .L_81393814:
 /* 81393814 | 2C 1A 00 05 */	cmpwi r26, 0x5
 /* 81393818 | 40 82 00 A0 */	bne .L_813938B8
-/* 8139381C | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
+/* 8139381C | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
 /* 81393820 | 7F A3 EB 78 */	mr r3, r29
-/* 81393824 | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 81393824 | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 81393828 | 80 84 00 24 */	lwz r4, 0x24(r4)
 /* 8139382C | 48 26 EC 55 */	bl strcmp
 /* 81393830 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -5592,9 +5592,9 @@
 .L_813938B8:
 /* 813938B8 | 2C 1A 00 05 */	cmpwi r26, 0x5
 /* 813938BC | 40 82 00 9C */	bne .L_81393958
-/* 813938C0 | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
+/* 813938C0 | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
 /* 813938C4 | 7F A3 EB 78 */	mr r3, r29
-/* 813938C8 | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 813938C8 | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 813938CC | 80 84 00 28 */	lwz r4, 0x28(r4)
 /* 813938D0 | 48 26 EB B1 */	bl strcmp
 /* 813938D4 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -6190,7 +6190,8 @@
 .endobj lbl_8164B152
 
 # .data:0x264 | 0x8164B164 | size: 0x84
-.obj lbl_8164B164, global
+# ipl::scene::Board::__vtable
+.obj __vt__Q33ipl5scene5Board, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene5BoardFv
@@ -6224,7 +6225,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8164B164
+.endobj __vt__Q33ipl5scene5Board
 
 # 0x81694808..0x81694810 | size: 0x8
 .section .sdata2, "a"

@@ -122,7 +122,8 @@
 .balign 8
 
 # .data:0x0 | 0x8164C2F8 | size: 0x50
-.obj lbl_8164C2F8, global
+# ipl::scene::Arrow::__vtable
+.obj __vt__Q33ipl5scene5Arrow, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene5ArrowFv
@@ -143,4 +144,4 @@
 	.4byte draw__Q33ipl5scene5ArrowFv
 	.4byte destroy__Q33ipl5scene4BaseFv
 	.4byte 0x00000000
-.endobj lbl_8164C2F8
+.endobj __vt__Q33ipl5scene5Arrow

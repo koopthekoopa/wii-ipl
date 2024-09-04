@@ -14,9 +14,9 @@
 /* 813C2424 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813C2428 | 7C 7F 1B 78 */	mr r31, r3
 /* 813C242C | 48 04 8D DD */	bl fn_8140B208
-/* 813C2430 | 3C C0 81 65 */	lis r6, lbl_81650B70@ha
+/* 813C2430 | 3C C0 81 65 */	lis r6, __vt__Q33ipl5scene17MailAddressSelect@ha
 /* 813C2434 | 38 E0 00 00 */	li r7, 0x0
-/* 813C2438 | 38 C6 0B 70 */	addi r6, r6, lbl_81650B70@l
+/* 813C2438 | 38 C6 0B 70 */	addi r6, r6, __vt__Q33ipl5scene17MailAddressSelect@l
 /* 813C243C | 38 00 00 03 */	li r0, 0x3
 /* 813C2440 | 38 A6 00 1C */	addi r5, r6, 0x1c
 /* 813C2444 | 7C E3 3B 78 */	mr r3, r7
@@ -220,9 +220,9 @@
 /* 813C2710 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813C2714 | 41 82 00 1C */	beq .L_813C2730
 /* 813C2718 | 38 00 00 00 */	li r0, 0x0
-/* 813C271C | 3C 80 81 65 */	lis r4, lbl_81650B58@ha
+/* 813C271C | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene16MailAddressEvent@ha
 /* 813C2720 | 90 03 00 08 */	stw r0, 0x8(r3)
-/* 813C2724 | 38 84 0B 58 */	addi r4, r4, lbl_81650B58@l
+/* 813C2724 | 38 84 0B 58 */	addi r4, r4, __vt__Q33ipl5scene16MailAddressEvent@l
 /* 813C2728 | 90 83 00 00 */	stw r4, 0x0(r3)
 /* 813C272C | 93 E3 00 0C */	stw r31, 0xc(r3)
 .L_813C2730:
@@ -1630,9 +1630,9 @@
 /* 813C39F4 | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
 /* 813C39F8 | 80 63 00 64 */	lwz r3, 0x64(r3)
 /* 813C39FC | 48 04 77 3D */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813C3A00 | 3C 80 81 65 */	lis r4, lbl_8164BF5C@ha
+/* 813C3A00 | 3C 80 81 65 */	lis r4, mscButtonName__Q33ipl5scene6Button@ha
 /* 813C3A04 | 7C 7E 1B 78 */	mr r30, r3
-/* 813C3A08 | 38 84 BF 5C */	addi r4, r4, lbl_8164BF5C@l
+/* 813C3A08 | 38 84 BF 5C */	addi r4, r4, mscButtonName__Q33ipl5scene6Button@l
 /* 813C3A0C | 7F E3 FB 78 */	mr r3, r31
 /* 813C3A10 | 80 84 00 14 */	lwz r4, 0x14(r4)
 /* 813C3A14 | 48 23 EA 6D */	bl strcmp
@@ -1971,17 +1971,19 @@
 .endobj lbl_81650B46
 
 # .data:0x288 | 0x81650B58 | size: 0x18
-.obj lbl_81650B58, global
+# ipl::scene::MailAddressEvent::__vtable
+.obj __vt__Q33ipl5scene16MailAddressEvent, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte onEvent__Q33ipl5scene16MailAddressEventFUlUlPv
 	.4byte setManager__Q23gui12EventHandlerFPQ23gui7Manager
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
-.endobj lbl_81650B58
+.endobj __vt__Q33ipl5scene16MailAddressEvent
 
 # .data:0x2A0 | 0x81650B70 | size: 0x120
-.obj lbl_81650B70, global
+# ipl::scene::MailAddressSelect::__vtable
+.obj __vt__Q33ipl5scene17MailAddressSelect, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene17MailAddressSelectFv
@@ -2054,7 +2056,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81650B70
+.endobj __vt__Q33ipl5scene17MailAddressSelect
 
 # 0x81696BC8..0x81696BD8 | size: 0x10
 .section .sdata, "wa"

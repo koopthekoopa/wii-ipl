@@ -33,11 +33,11 @@
 /* 813A5534 | 38 80 00 00 */	li r4, 0x0
 /* 813A5538 | 48 16 CB 25 */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
 /* 813A553C | 3C 60 81 65 */	lis r3, __vt__Q33ipl5scene11ChanAppEdit@ha
-/* 813A5540 | 3C C0 81 65 */	lis r6, lbl_8164BE40@ha
+/* 813A5540 | 3C C0 81 65 */	lis r6, "__vt__Q33ipl4math28LinearIntp<Q33ipl4math4VEC3>"@ha
 /* 813A5544 | 38 63 D6 D8 */	addi r3, r3, __vt__Q33ipl5scene11ChanAppEdit@l
 /* 813A5548 | 93 BE 00 30 */	stw r29, 0x30(r30)
 /* 813A554C | 38 03 00 0C */	addi r0, r3, 0xc
-/* 813A5550 | 38 C6 BE 40 */	addi r6, r6, lbl_8164BE40@l
+/* 813A5550 | 38 C6 BE 40 */	addi r6, r6, "__vt__Q33ipl4math28LinearIntp<Q33ipl4math4VEC3>"@l
 /* 813A5554 | 90 7E 00 00 */	stw r3, 0x0(r30)
 /* 813A5558 | 7F 24 CB 78 */	mr r4, r25
 /* 813A555C | 38 60 05 80 */	li r3, 0x580
