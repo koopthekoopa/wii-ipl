@@ -69,7 +69,7 @@ sudo pacman -S base-devel python git
   ```
   - The output should be `ipl.<version>.app` in the build folder.
   
-> If you want to compile another version, you have to prepare for build again to do so.
+> If you want to compile another version, you will have run `make prepare` again to do so.
 
 ## Sums
 |File|SHA-1|

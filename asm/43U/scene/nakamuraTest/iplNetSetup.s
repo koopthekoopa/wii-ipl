@@ -1,7 +1,7 @@
 .include "macros.inc"
 .file "iplNetSetup.cpp"
 
-# 0x810B83C8..0x810B83E0 | size: 0x18
+# 0x810B83C8..0x810B83F0 | size: 0x28
 .section .bss, "wa", @nobits
 .balign 8
 
@@ -10,6 +10,11 @@
 .obj sAllocLock__Q33ipl5scene8NetSetup, global
 	.skip 0x18
 .endobj sAllocLock__Q33ipl5scene8NetSetup
+
+# .bss:0x18 | 0x810B83E0 | size: 0x10
+.obj lbl_810B83E0, global
+	.skip 0x10
+.endobj lbl_810B83E0
 
 # 0x813D8D9C..0x813D95BC | size: 0x820
 .text
