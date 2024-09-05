@@ -127,15 +127,10 @@ namespace ipl {
                 }
                 break;
             }
-<<<<<<< HEAD
             // Shutdown the video
             // (no need as it's already doing that in `FATAL_STATE_SYSTEM`)
             case FATAL_STATE_VIDEO: {
                 if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
-=======
-            case FATAL_STATE_SHUTDOWN_VIDEO: {  // Shutdown the video when it is done fading out (no need as it's already doing that in `FATAL_STATE_SHUTDOWN_OS`)
-                if (System::getArg()->getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
->>>>>>> 4e8bba39bb259be4fc6f17707b6fe266268010cb
                     VISetBlack(TRUE);
                     VIFlush();
 
