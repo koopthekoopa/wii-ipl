@@ -419,7 +419,7 @@
 /* 813C087C | 38 80 00 14 */	li r4, 0x14
 /* 813C0880 | 38 C0 00 00 */	li r6, 0x0
 /* 813C0884 | 38 E0 00 02 */	li r7, 0x2
-/* 813C0888 | 48 04 96 01 */	bl fn_81409E88
+/* 813C0888 | 48 04 96 01 */	bl createChildScene__Q33ipl5scene4BaseFiPQ33ipl5scene4BasePQ33ipl5scene4BasePv
 /* 813C088C | 48 00 00 1C */	b .L_813C08A8
 .L_813C0890:
 /* 813C0890 | 7F E3 FB 78 */	mr r3, r31
@@ -427,7 +427,7 @@
 /* 813C0898 | 38 80 00 14 */	li r4, 0x14
 /* 813C089C | 38 C0 00 00 */	li r6, 0x0
 /* 813C08A0 | 38 E0 00 01 */	li r7, 0x1
-/* 813C08A4 | 48 04 95 E5 */	bl fn_81409E88
+/* 813C08A4 | 48 04 95 E5 */	bl createChildScene__Q33ipl5scene4BaseFiPQ33ipl5scene4BasePQ33ipl5scene4BasePv
 .L_813C08A8:
 /* 813C08A8 | 38 00 00 01 */	li r0, 0x1
 /* 813C08AC | 3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
@@ -1907,7 +1907,7 @@
 	.4byte isResetProcessDone__Q33ipl5scene4BaseFv
 	.4byte fn_8140B554
 	.4byte create__Q33ipl5scene12LetterWriterFv
-	.4byte fn_8140B254
+	.4byte calc__Q33ipl5scene14FaderSceneBaseFv
 	.4byte fn_8140B8FC
 	.4byte destroy__Q33ipl5scene12LetterWriterFv
 	.4byte initCalcNormal__Q33ipl5scene12LetterWriterFv

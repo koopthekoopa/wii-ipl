@@ -51,13 +51,13 @@
 /* 813DA80C | 7F E3 FB 78 */	mr r3, r31
 /* 813DA810 | 38 80 00 15 */	li r4, 0x15
 /* 813DA814 | 38 A0 00 02 */	li r5, 0x2
-/* 813DA818 | 48 02 F6 E1 */	bl fn_81409EF8
+/* 813DA818 | 48 02 F6 E1 */	bl reserveSceneChange__Q33ipl5scene4BaseFiPv
 /* 813DA81C | 48 00 00 14 */	b .L_813DA830
 .L_813DA820:
 /* 813DA820 | 7F E3 FB 78 */	mr r3, r31
 /* 813DA824 | 38 80 00 12 */	li r4, 0x12
 /* 813DA828 | 38 A0 00 06 */	li r5, 0x6
-/* 813DA82C | 48 02 F6 CD */	bl fn_81409EF8
+/* 813DA82C | 48 02 F6 CD */	bl reserveSceneChange__Q33ipl5scene4BaseFiPv
 .L_813DA830:
 /* 813DA830 | 3C 60 81 09 */	lis r3, sSystem__Q23ipl3snd@ha
 /* 813DA834 | 3C 80 81 65 */	lis r4, lbl_81653FD8@ha
@@ -102,7 +102,7 @@
 /* 813DA8A4 | 7C 7E 1B 78 */	mr r30, r3
 /* 813DA8A8 | 41 82 00 1C */	beq .L_813DA8C4
 /* 813DA8AC | 38 80 00 00 */	li r4, 0x0
-/* 813DA8B0 | 48 02 F3 B5 */	bl fn_81409C64
+/* 813DA8B0 | 48 02 F3 B5 */	bl __dt__Q33ipl5scene4BaseFv
 /* 813DA8B4 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813DA8B8 | 40 81 00 0C */	ble .L_813DA8C4
 /* 813DA8BC | 7F C3 F3 78 */	mr r3, r30

@@ -77,7 +77,7 @@
 /* 813EA978 | 7C 7E 1B 78 */	mr r30, r3
 /* 813EA97C | 41 82 00 1C */	beq .L_813EA998
 /* 813EA980 | 38 80 00 00 */	li r4, 0x0
-/* 813EA984 | 48 01 F2 E1 */	bl fn_81409C64
+/* 813EA984 | 48 01 F2 E1 */	bl __dt__Q33ipl5scene4BaseFv
 /* 813EA988 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813EA98C | 40 81 00 0C */	ble .L_813EA998
 /* 813EA990 | 7F C3 F3 78 */	mr r3, r30

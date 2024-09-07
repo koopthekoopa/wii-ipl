@@ -18,7 +18,7 @@
 /* 813AA4E8 | 7C 7E 1B 78 */	mr r30, r3
 /* 813AA4EC | 7C 9F 23 78 */	mr r31, r4
 /* 813AA4F0 | 7C BD 2B 78 */	mr r29, r5
-/* 813AA4F4 | 48 06 0D 15 */	bl fn_8140B208
+/* 813AA4F4 | 48 06 0D 15 */	bl __ct__Q33ipl5scene14FaderSceneBaseFPQ23EGG4Heap
 /* 813AA4F8 | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene13ChannelSelect@ha
 /* 813AA4FC | 3B 80 00 00 */	li r28, 0x0
 /* 813AA500 | 38 84 E0 B8 */	addi r4, r4, __vt__Q33ipl5scene13ChannelSelect@l
@@ -230,7 +230,7 @@
 /* 813AA7E8 | 41 82 00 10 */	beq .L_813AA7F8
 /* 813AA7EC | 7F C3 F3 78 */	mr r3, r30
 /* 813AA7F0 | 38 80 00 00 */	li r4, 0x0
-/* 813AA7F4 | 48 05 F4 71 */	bl fn_81409C64
+/* 813AA7F4 | 48 05 F4 71 */	bl __dt__Q33ipl5scene4BaseFv
 .L_813AA7F8:
 /* 813AA7F8 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813AA7FC | 40 81 00 0C */	ble .L_813AA808
@@ -4127,7 +4127,7 @@
 /* 813ADBF4 | 7C 67 1B 78 */	mr r7, r3
 /* 813ADBF8 | 38 80 00 03 */	li r4, 0x3
 /* 813ADBFC | 38 C0 00 00 */	li r6, 0x0
-/* 813ADC00 | 48 05 C2 88 */	b fn_81409E88
+/* 813ADC00 | 48 05 C2 88 */	b createChildScene__Q33ipl5scene4BaseFiPQ33ipl5scene4BasePQ33ipl5scene4BasePv
 /* 813ADC04 | 4E 80 00 20 */	blr
 .endfn reserveSceneChangeDerived__Q33ipl5scene13ChannelSelectFii
 
@@ -7129,7 +7129,7 @@
 /* 813B061C | 80 7F 00 0C */	lwz r3, 0xc(r31)
 /* 813B0620 | 38 80 00 15 */	li r4, 0x15
 /* 813B0624 | 38 A0 00 00 */	li r5, 0x0
-/* 813B0628 | 48 05 99 6D */	bl fn_81409F94
+/* 813B0628 | 48 05 99 6D */	bl reserveAllSceneDestruction__Q33ipl5scene4BaseFiPv
 /* 813B062C | 80 7D 00 64 */	lwz r3, 0x64(r29)
 /* 813B0630 | 38 80 00 04 */	li r4, 0x4
 /* 813B0634 | 48 05 AB 05 */	bl getScene__Q33ipl5scene7ManagerFi
@@ -7270,7 +7270,7 @@
 /* 813B0830 | 80 7C 00 0C */	lwz r3, 0xc(r28)
 /* 813B0834 | 38 80 00 24 */	li r4, 0x24
 /* 813B0838 | 38 A0 00 00 */	li r5, 0x0
-/* 813B083C | 48 05 97 59 */	bl fn_81409F94
+/* 813B083C | 48 05 97 59 */	bl reserveAllSceneDestruction__Q33ipl5scene4BaseFiPv
 /* 813B0840 | 80 7F 00 64 */	lwz r3, 0x64(r31)
 /* 813B0844 | 38 80 00 04 */	li r4, 0x4
 /* 813B0848 | 48 05 A8 F1 */	bl getScene__Q33ipl5scene7ManagerFi
@@ -8082,7 +8082,7 @@
 	.4byte isResetProcessDone__Q33ipl5scene4BaseFv
 	.4byte prepare__Q33ipl5scene13ChannelSelectFv
 	.4byte create__Q33ipl5scene13ChannelSelectFv
-	.4byte fn_8140B254
+	.4byte calc__Q33ipl5scene14FaderSceneBaseFv
 	.4byte draw__Q33ipl5scene13ChannelSelectFv
 	.4byte destroy__Q33ipl5scene13ChannelSelectFv
 	.4byte initCalcNormal__Q33ipl5scene14FaderSceneBaseFv

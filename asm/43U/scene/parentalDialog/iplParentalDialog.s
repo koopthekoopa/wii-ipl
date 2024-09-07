@@ -15,7 +15,7 @@
 /* 813D95CC | 7C BF 2B 78 */	mr r31, r5
 /* 813D95D0 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813D95D4 | 7C 7E 1B 78 */	mr r30, r3
-/* 813D95D8 | 48 03 1C 31 */	bl fn_8140B208
+/* 813D95D8 | 48 03 1C 31 */	bl __ct__Q33ipl5scene14FaderSceneBaseFPQ23EGG4Heap
 /* 813D95DC | 3C C0 81 65 */	lis r6, __vt__Q33ipl5scene14ParentalDialog@ha
 /* 813D95E0 | 38 A0 00 00 */	li r5, 0x0
 /* 813D95E4 | 38 C6 3E D8 */	addi r6, r6, __vt__Q33ipl5scene14ParentalDialog@l
@@ -1304,7 +1304,7 @@
 /* 813DA734 | 41 82 00 20 */	beq .L_813DA754
 /* 813DA738 | 41 82 00 0C */	beq .L_813DA744
 /* 813DA73C | 38 80 00 00 */	li r4, 0x0
-/* 813DA740 | 48 02 F5 25 */	bl fn_81409C64
+/* 813DA740 | 48 02 F5 25 */	bl __dt__Q33ipl5scene4BaseFv
 .L_813DA744:
 /* 813DA744 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813DA748 | 40 81 00 0C */	ble .L_813DA754
@@ -1488,7 +1488,7 @@
 	.4byte isResetProcessDone__Q33ipl5scene4BaseFv
 	.4byte prepare__Q33ipl5scene14ParentalDialogFv
 	.4byte create__Q33ipl5scene14ParentalDialogFv
-	.4byte fn_8140B254
+	.4byte calc__Q33ipl5scene14FaderSceneBaseFv
 	.4byte draw__Q33ipl5scene14ParentalDialogFv
 	.4byte destroy__Q33ipl5scene4BaseFv
 	.4byte initCalcNormal__Q33ipl5scene14FaderSceneBaseFv

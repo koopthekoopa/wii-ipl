@@ -13,7 +13,7 @@
 /* 8138EA6C | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 8138EA70 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8138EA74 | 7C 7F 1B 78 */	mr r31, r3
-/* 8138EA78 | 48 07 C7 91 */	bl fn_8140B208
+/* 8138EA78 | 48 07 C7 91 */	bl __ct__Q33ipl5scene14FaderSceneBaseFPQ23EGG4Heap
 /* 8138EA7C | 3C 60 81 65 */	lis r3, __vt__Q33ipl5scene8BackMenu@ha
 /* 8138EA80 | 38 80 00 00 */	li r4, 0x0
 /* 8138EA84 | 38 63 87 78 */	addi r3, r3, __vt__Q33ipl5scene8BackMenu@l
@@ -222,7 +222,7 @@
 /* 8138ECF8 | 98 06 00 3D */	stb r0, 0x3d(r6)
 /* 8138ECFC | 80 C7 00 9C */	lwz r6, 0x9c(r7)
 /* 8138ED00 | 90 06 00 08 */	stw r0, 0x8(r6)
-/* 8138ED04 | 48 07 B2 91 */	bl fn_81409F94
+/* 8138ED04 | 48 07 B2 91 */	bl reserveAllSceneDestruction__Q33ipl5scene4BaseFiPv
 /* 8138ED08 | 38 60 00 01 */	li r3, 0x1
 /* 8138ED0C | 48 00 00 08 */	b .L_8138ED14
 .L_8138ED10:
@@ -288,7 +288,7 @@
 /* 8138EDA4 | 41 82 00 20 */	beq .L_8138EDC4
 /* 8138EDA8 | 41 82 00 0C */	beq .L_8138EDB4
 /* 8138EDAC | 38 80 00 00 */	li r4, 0x0
-/* 8138EDB0 | 48 07 AE B5 */	bl fn_81409C64
+/* 8138EDB0 | 48 07 AE B5 */	bl __dt__Q33ipl5scene4BaseFv
 .L_8138EDB4:
 /* 8138EDB4 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 8138EDB8 | 40 81 00 0C */	ble .L_8138EDC4
@@ -349,7 +349,7 @@
 	.4byte isResetProcessDone__Q33ipl5scene4BaseFv
 	.4byte prepare__Q33ipl5scene8BackMenuFv
 	.4byte create__Q33ipl5scene8BackMenuFv
-	.4byte fn_8140B254
+	.4byte calc__Q33ipl5scene14FaderSceneBaseFv
 	.4byte draw__Q33ipl5scene8BackMenuFv
 	.4byte destroy__Q33ipl5scene4BaseFv
 	.4byte initCalcNormal__Q33ipl5scene14FaderSceneBaseFv

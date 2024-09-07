@@ -96,7 +96,7 @@
 /* 8139DB6C | 7C 7E 1B 78 */	mr r30, r3
 /* 8139DB70 | 41 82 00 1C */	beq .L_8139DB8C
 /* 8139DB74 | 38 80 00 00 */	li r4, 0x0
-/* 8139DB78 | 48 06 C0 ED */	bl fn_81409C64
+/* 8139DB78 | 48 06 C0 ED */	bl __dt__Q33ipl5scene4BaseFv
 /* 8139DB7C | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 8139DB80 | 40 81 00 0C */	ble .L_8139DB8C
 /* 8139DB84 | 7F C3 F3 78 */	mr r3, r30

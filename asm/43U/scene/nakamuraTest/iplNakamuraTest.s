@@ -14,7 +14,7 @@
 /* 813D7F9C | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813D7FA0 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813D7FA4 | 7C 7E 1B 78 */	mr r30, r3
-/* 813D7FA8 | 48 03 32 61 */	bl fn_8140B208
+/* 813D7FA8 | 48 03 32 61 */	bl __ct__Q33ipl5scene14FaderSceneBaseFPQ23EGG4Heap
 /* 813D7FAC | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene12NakamuraTest@ha
 /* 813D7FB0 | 38 7E 00 58 */	addi r3, r30, 0x58
 /* 813D7FB4 | 38 84 3B AC */	addi r4, r4, __vt__Q33ipl5scene12NakamuraTest@l
@@ -89,7 +89,7 @@
 /* 813D80B4 | 41 82 00 10 */	beq .L_813D80C4
 /* 813D80B8 | 7F C3 F3 78 */	mr r3, r30
 /* 813D80BC | 38 80 00 00 */	li r4, 0x0
-/* 813D80C0 | 48 03 1B A5 */	bl fn_81409C64
+/* 813D80C0 | 48 03 1B A5 */	bl __dt__Q33ipl5scene4BaseFv
 .L_813D80C4:
 /* 813D80C4 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813D80C8 | 40 81 00 0C */	ble .L_813D80D4
@@ -1302,7 +1302,7 @@
 	.4byte isResetProcessDone__Q33ipl5scene4BaseFv
 	.4byte prepare__Q33ipl5scene12NakamuraTestFv
 	.4byte create__Q33ipl5scene12NakamuraTestFv
-	.4byte fn_8140B254
+	.4byte calc__Q33ipl5scene14FaderSceneBaseFv
 	.4byte draw__Q33ipl5scene12NakamuraTestFv
 	.4byte destroy__Q33ipl5scene12NakamuraTestFv
 	.4byte initCalcNormal__Q33ipl5scene14FaderSceneBaseFv

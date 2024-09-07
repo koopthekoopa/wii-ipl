@@ -13,7 +13,7 @@
 /* 8138741C | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 81387420 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 81387424 | 7C 7F 1B 78 */	mr r31, r3
-/* 81387428 | 48 08 3D E1 */	bl fn_8140B208
+/* 81387428 | 48 08 3D E1 */	bl __ct__Q33ipl5scene14FaderSceneBaseFPQ23EGG4Heap
 /* 8138742C | 3C A0 81 64 */	lis r5, __vt__Q33ipl5scene13AddressAddSel@ha
 /* 81387430 | 38 C0 00 00 */	li r6, 0x0
 /* 81387434 | 38 A5 7D C4 */	addi r5, r5, __vt__Q33ipl5scene13AddressAddSel@l
@@ -592,13 +592,13 @@
 /* 81387BCC | 7F A3 EB 78 */	mr r3, r29
 /* 81387BD0 | 38 80 00 17 */	li r4, 0x17
 /* 81387BD4 | 38 A0 00 01 */	li r5, 0x1
-/* 81387BD8 | 48 08 23 21 */	bl fn_81409EF8
+/* 81387BD8 | 48 08 23 21 */	bl reserveSceneChange__Q33ipl5scene4BaseFiPv
 /* 81387BDC | 48 00 00 14 */	b .L_81387BF0
 .L_81387BE0:
 /* 81387BE0 | 7F A3 EB 78 */	mr r3, r29
 /* 81387BE4 | 38 80 00 17 */	li r4, 0x17
 /* 81387BE8 | 38 A0 00 02 */	li r5, 0x2
-/* 81387BEC | 48 08 23 0D */	bl fn_81409EF8
+/* 81387BEC | 48 08 23 0D */	bl reserveSceneChange__Q33ipl5scene4BaseFiPv
 .L_81387BF0:
 /* 81387BF0 | 7F C3 F3 78 */	mr r3, r30
 /* 81387BF4 | 38 80 00 0C */	li r4, 0xc
@@ -933,7 +933,7 @@
 /* 81388030 | 41 82 00 20 */	beq .L_81388050
 /* 81388034 | 41 82 00 0C */	beq .L_81388040
 /* 81388038 | 38 80 00 00 */	li r4, 0x0
-/* 8138803C | 48 08 1C 29 */	bl fn_81409C64
+/* 8138803C | 48 08 1C 29 */	bl __dt__Q33ipl5scene4BaseFv
 .L_81388040:
 /* 81388040 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81388044 | 40 81 00 0C */	ble .L_81388050
@@ -1079,7 +1079,7 @@
 	.4byte isResetProcessDone__Q33ipl5scene4BaseFv
 	.4byte prepare__Q33ipl5scene4BaseFv
 	.4byte create__Q33ipl5scene13AddressAddSelFv
-	.4byte fn_8140B254
+	.4byte calc__Q33ipl5scene14FaderSceneBaseFv
 	.4byte draw__Q33ipl5scene13AddressAddSelFv
 	.4byte destroy__Q33ipl5scene4BaseFv
 	.4byte initCalcNormal__Q33ipl5scene13AddressAddSelFv

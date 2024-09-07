@@ -16,7 +16,7 @@
 /* 813BE024 | 7C 7D 1B 78 */	mr r29, r3
 /* 813BE028 | 7C 9E 23 78 */	mr r30, r4
 /* 813BE02C | 7C BF 2B 78 */	mr r31, r5
-/* 813BE030 | 48 04 D1 D9 */	bl fn_8140B208
+/* 813BE030 | 48 04 D1 D9 */	bl __ct__Q33ipl5scene14FaderSceneBaseFPQ23EGG4Heap
 /* 813BE034 | 3C A0 81 65 */	lis r5, __vt__Q33ipl5scene12KitayamaTest@ha
 /* 813BE038 | 38 00 00 00 */	li r0, 0x0
 /* 813BE03C | 38 A5 FD 14 */	addi r5, r5, __vt__Q33ipl5scene12KitayamaTest@l
@@ -51,7 +51,7 @@
 /* 813BE09C | 41 82 00 20 */	beq .L_813BE0BC
 /* 813BE0A0 | 41 82 00 0C */	beq .L_813BE0AC
 /* 813BE0A4 | 38 80 00 00 */	li r4, 0x0
-/* 813BE0A8 | 48 04 BB BD */	bl fn_81409C64
+/* 813BE0A8 | 48 04 BB BD */	bl __dt__Q33ipl5scene4BaseFv
 .L_813BE0AC:
 /* 813BE0AC | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813BE0B0 | 40 81 00 0C */	ble .L_813BE0BC
@@ -663,7 +663,7 @@
 /* 813BE90C | 7F A3 EB 78 */	mr r3, r29
 /* 813BE910 | 38 80 00 04 */	li r4, 0x4
 /* 813BE914 | 38 A0 00 00 */	li r5, 0x0
-/* 813BE918 | 48 04 B6 7D */	bl fn_81409F94
+/* 813BE918 | 48 04 B6 7D */	bl reserveAllSceneDestruction__Q33ipl5scene4BaseFiPv
 /* 813BE91C | 3B C0 00 01 */	li r30, 0x1
 .L_813BE920:
 /* 813BE920 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -905,7 +905,7 @@
 	.4byte isResetProcessDone__Q33ipl5scene4BaseFv
 	.4byte prepare__Q33ipl5scene12KitayamaTestFv
 	.4byte create__Q33ipl5scene12KitayamaTestFv
-	.4byte fn_8140B254
+	.4byte calc__Q33ipl5scene14FaderSceneBaseFv
 	.4byte draw__Q33ipl5scene12KitayamaTestFv
 	.4byte destroy__Q33ipl5scene12KitayamaTestFv
 	.4byte initCalcNormal__Q33ipl5scene14FaderSceneBaseFv

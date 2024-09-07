@@ -15,7 +15,7 @@
 /* 81381670 | 48 27 7E 51 */	bl _savegpr_27
 /* 81381674 | 7C 7F 1B 78 */	mr r31, r3
 /* 81381678 | 7C BB 2B 78 */	mr r27, r5
-/* 8138167C | 48 08 9B 8D */	bl fn_8140B208
+/* 8138167C | 48 08 9B 8D */	bl __ct__Q33ipl5scene14FaderSceneBaseFPQ23EGG4Heap
 /* 81381680 | 3C A0 81 64 */	lis r5, __vt__Q33ipl5scene7Address@ha
 /* 81381684 | 3B 80 00 00 */	li r28, 0x0
 /* 81381688 | 38 A5 7B 70 */	addi r5, r5, __vt__Q33ipl5scene7Address@l
@@ -104,7 +104,7 @@
 /* 813817B8 | 7C 7E 1B 78 */	mr r30, r3
 /* 813817BC | 41 82 00 1C */	beq .L_813817D8
 /* 813817C0 | 38 80 00 00 */	li r4, 0x0
-/* 813817C4 | 48 08 84 A1 */	bl fn_81409C64
+/* 813817C4 | 48 08 84 A1 */	bl __dt__Q33ipl5scene4BaseFv
 /* 813817C8 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813817CC | 40 81 00 0C */	ble .L_813817D8
 /* 813817D0 | 7F C3 F3 78 */	mr r3, r30
@@ -159,7 +159,7 @@
 /* 81381878 | 41 82 00 10 */	beq .L_81381888
 /* 8138187C | 7F A3 EB 78 */	mr r3, r29
 /* 81381880 | 38 80 00 00 */	li r4, 0x0
-/* 81381884 | 48 08 83 E1 */	bl fn_81409C64
+/* 81381884 | 48 08 83 E1 */	bl __dt__Q33ipl5scene4BaseFv
 .L_81381888:
 /* 81381888 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 8138188C | 40 81 00 0C */	ble .L_81381898
@@ -2087,7 +2087,7 @@
 /* 813832F0 | 38 80 00 17 */	li r4, 0x17
 /* 813832F4 | 38 C0 00 00 */	li r6, 0x0
 /* 813832F8 | 38 E0 00 00 */	li r7, 0x0
-/* 813832FC | 48 08 6B 8D */	bl fn_81409E88
+/* 813832FC | 48 08 6B 8D */	bl createChildScene__Q33ipl5scene4BaseFiPQ33ipl5scene4BasePQ33ipl5scene4BasePv
 /* 81383300 | 80 7F 00 9C */	lwz r3, 0x9c(r31)
 /* 81383304 | 38 80 00 00 */	li r4, 0x0
 /* 81383308 | 38 63 02 8C */	addi r3, r3, 0x28c
@@ -2482,7 +2482,7 @@
 /* 8138382C | 38 80 00 1B */	li r4, 0x1b
 /* 81383830 | 38 C0 00 00 */	li r6, 0x0
 /* 81383834 | 38 E0 00 01 */	li r7, 0x1
-/* 81383838 | 48 08 66 51 */	bl fn_81409E88
+/* 81383838 | 48 08 66 51 */	bl createChildScene__Q33ipl5scene4BaseFiPQ33ipl5scene4BasePQ33ipl5scene4BasePv
 /* 8138383C | 38 60 00 00 */	li r3, 0x0
 /* 81383840 | 38 00 00 10 */	li r0, 0x10
 /* 81383844 | 98 7E 00 E0 */	stb r3, 0xe0(r30)
@@ -2499,7 +2499,7 @@
 /* 8138386C | 7F C3 F3 78 */	mr r3, r30
 /* 81383870 | 38 80 00 12 */	li r4, 0x12
 /* 81383874 | 38 A0 00 01 */	li r5, 0x1
-/* 81383878 | 48 08 67 1D */	bl fn_81409F94
+/* 81383878 | 48 08 67 1D */	bl reserveAllSceneDestruction__Q33ipl5scene4BaseFiPv
 /* 8138387C | 38 00 00 1A */	li r0, 0x1a
 /* 81383880 | 90 1E 00 AC */	stw r0, 0xac(r30)
 .L_81383884:
@@ -2580,7 +2580,7 @@
 /* 81383978 | 7F C3 F3 78 */	mr r3, r30
 /* 8138397C | 38 80 00 12 */	li r4, 0x12
 /* 81383980 | 38 A0 00 01 */	li r5, 0x1
-/* 81383984 | 48 08 66 11 */	bl fn_81409F94
+/* 81383984 | 48 08 66 11 */	bl reserveAllSceneDestruction__Q33ipl5scene4BaseFiPv
 /* 81383988 | 38 00 00 1A */	li r0, 0x1a
 /* 8138398C | 90 1E 00 AC */	stw r0, 0xac(r30)
 /* 81383990 | 48 00 00 A0 */	b .L_81383A30
@@ -2703,7 +2703,7 @@
 /* 81383B2C | 38 80 00 1B */	li r4, 0x1b
 /* 81383B30 | 38 C0 00 00 */	li r6, 0x0
 /* 81383B34 | 38 E0 00 01 */	li r7, 0x1
-/* 81383B38 | 48 08 63 51 */	bl fn_81409E88
+/* 81383B38 | 48 08 63 51 */	bl createChildScene__Q33ipl5scene4BaseFiPQ33ipl5scene4BasePQ33ipl5scene4BasePv
 /* 81383B3C | 38 60 00 00 */	li r3, 0x0
 /* 81383B40 | 38 00 00 13 */	li r0, 0x13
 /* 81383B44 | 98 7E 00 E0 */	stb r3, 0xe0(r30)
@@ -2720,7 +2720,7 @@
 /* 81383B6C | 7F C3 F3 78 */	mr r3, r30
 /* 81383B70 | 38 80 00 12 */	li r4, 0x12
 /* 81383B74 | 38 A0 00 04 */	li r5, 0x4
-/* 81383B78 | 48 08 64 1D */	bl fn_81409F94
+/* 81383B78 | 48 08 64 1D */	bl reserveAllSceneDestruction__Q33ipl5scene4BaseFiPv
 /* 81383B7C | 38 00 00 1A */	li r0, 0x1a
 /* 81383B80 | 90 1E 00 AC */	stw r0, 0xac(r30)
 .L_81383B84:
@@ -2801,7 +2801,7 @@
 /* 81383C78 | 7F C3 F3 78 */	mr r3, r30
 /* 81383C7C | 38 80 00 12 */	li r4, 0x12
 /* 81383C80 | 38 A0 00 04 */	li r5, 0x4
-/* 81383C84 | 48 08 63 11 */	bl fn_81409F94
+/* 81383C84 | 48 08 63 11 */	bl reserveAllSceneDestruction__Q33ipl5scene4BaseFiPv
 /* 81383C88 | 38 00 00 1A */	li r0, 0x1a
 /* 81383C8C | 90 1E 00 AC */	stw r0, 0xac(r30)
 /* 81383C90 | 48 00 00 A0 */	b .L_81383D30
@@ -5481,7 +5481,7 @@
 /* 813861D8 | 38 80 00 18 */	li r4, 0x18
 /* 813861DC | 38 C0 00 00 */	li r6, 0x0
 /* 813861E0 | 38 E0 00 00 */	li r7, 0x0
-/* 813861E4 | 48 08 3C A5 */	bl fn_81409E88
+/* 813861E4 | 48 08 3C A5 */	bl createChildScene__Q33ipl5scene4BaseFiPQ33ipl5scene4BasePQ33ipl5scene4BasePv
 /* 813861E8 | 7F E3 FB 78 */	mr r3, r31
 /* 813861EC | 38 80 00 10 */	li r4, 0x10
 /* 813861F0 | 48 01 72 39 */	bl reserveAnm__Q33ipl5scene6ButtonFi
@@ -7450,7 +7450,7 @@
 	.4byte isResetProcessDone__Q33ipl5scene4BaseFv
 	.4byte prepare__Q33ipl5scene7AddressFv
 	.4byte create__Q33ipl5scene7AddressFv
-	.4byte fn_8140B254
+	.4byte calc__Q33ipl5scene14FaderSceneBaseFv
 	.4byte draw__Q33ipl5scene7AddressFv
 	.4byte destroy__Q33ipl5scene7AddressFv
 	.4byte initCalcNormal__Q33ipl5scene7AddressFv

@@ -15,7 +15,7 @@
 /* 81406EE0 | 7C BF 2B 78 */	mr r31, r5
 /* 81406EE4 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 81406EE8 | 7C 7E 1B 78 */	mr r30, r3
-/* 81406EEC | 48 00 43 1D */	bl fn_8140B208
+/* 81406EEC | 48 00 43 1D */	bl __ct__Q33ipl5scene14FaderSceneBaseFPQ23EGG4Heap
 /* 81406EF0 | 3C E0 81 66 */	lis r7, __vt__Q33ipl5scene13SettingButton@ha
 /* 81406EF4 | 39 00 00 00 */	li r8, 0x0
 /* 81406EF8 | 38 E7 80 FC */	addi r7, r7, __vt__Q33ipl5scene13SettingButton@l
@@ -908,7 +908,7 @@
 /* 81407AB0 | 41 82 00 20 */	beq .L_81407AD0
 /* 81407AB4 | 41 82 00 0C */	beq .L_81407AC0
 /* 81407AB8 | 38 80 00 00 */	li r4, 0x0
-/* 81407ABC | 48 00 21 A9 */	bl fn_81409C64
+/* 81407ABC | 48 00 21 A9 */	bl __dt__Q33ipl5scene4BaseFv
 .L_81407AC0:
 /* 81407AC0 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81407AC4 | 40 81 00 0C */	ble .L_81407AD0
@@ -1084,7 +1084,7 @@
 	.4byte isResetProcessDone__Q33ipl5scene4BaseFv
 	.4byte prepare__Q33ipl5scene13SettingButtonFv
 	.4byte create__Q33ipl5scene13SettingButtonFv
-	.4byte fn_8140B254
+	.4byte calc__Q33ipl5scene14FaderSceneBaseFv
 	.4byte draw__Q33ipl5scene13SettingButtonFv
 	.4byte destroy__Q33ipl5scene4BaseFv
 	.4byte initCalcNormal__Q33ipl5scene14FaderSceneBaseFv

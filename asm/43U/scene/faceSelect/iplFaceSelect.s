@@ -15,7 +15,7 @@
 /* 813BB0B4 | 7C BF 2B 78 */	mr r31, r5
 /* 813BB0B8 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813BB0BC | 7C 7E 1B 78 */	mr r30, r3
-/* 813BB0C0 | 48 05 01 49 */	bl fn_8140B208
+/* 813BB0C0 | 48 05 01 49 */	bl __ct__Q33ipl5scene14FaderSceneBaseFPQ23EGG4Heap
 /* 813BB0C4 | 3C E0 81 65 */	lis r7, __vt__Q33ipl5scene10FaceSelect@ha
 /* 813BB0C8 | 38 A0 00 00 */	li r5, 0x0
 /* 813BB0CC | 38 E7 F7 B8 */	addi r7, r7, __vt__Q33ipl5scene10FaceSelect@l
@@ -2663,7 +2663,7 @@
 /* 813BD594 | 41 82 00 20 */	beq .L_813BD5B4
 /* 813BD598 | 41 82 00 0C */	beq .L_813BD5A4
 /* 813BD59C | 38 80 00 00 */	li r4, 0x0
-/* 813BD5A0 | 48 04 C6 C5 */	bl fn_81409C64
+/* 813BD5A0 | 48 04 C6 C5 */	bl __dt__Q33ipl5scene4BaseFv
 .L_813BD5A4:
 /* 813BD5A4 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813BD5A8 | 40 81 00 0C */	ble .L_813BD5B4
@@ -3295,7 +3295,7 @@
 	.4byte isResetProcessDone__Q33ipl5scene4BaseFv
 	.4byte prepare__Q33ipl5scene10FaceSelectFv
 	.4byte create__Q33ipl5scene10FaceSelectFv
-	.4byte fn_8140B254
+	.4byte calc__Q33ipl5scene14FaderSceneBaseFv
 	.4byte draw__Q33ipl5scene10FaceSelectFv
 	.4byte destroy__Q33ipl5scene10FaceSelectFv
 	.4byte initCalcNormal__Q33ipl5scene10FaceSelectFv

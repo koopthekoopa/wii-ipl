@@ -30,7 +30,7 @@
 /* 8139DBBC | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8139DBC0 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8139DBC4 | 7C 7E 1B 78 */	mr r30, r3
-/* 8139DBC8 | 48 06 D6 41 */	bl fn_8140B208
+/* 8139DBC8 | 48 06 D6 41 */	bl __ct__Q33ipl5scene14FaderSceneBaseFPQ23EGG4Heap
 /* 8139DBCC | 3C 60 81 65 */	lis r3, __vt__Q33ipl5scene8Calendar@ha
 /* 8139DBD0 | 3B E0 00 00 */	li r31, 0x0
 /* 8139DBD4 | 38 63 C5 7C */	addi r3, r3, __vt__Q33ipl5scene8Calendar@l
@@ -2156,7 +2156,7 @@
 /* 8139F834 | 41 82 00 20 */	beq .L_8139F854
 /* 8139F838 | 41 82 00 0C */	beq .L_8139F844
 /* 8139F83C | 38 80 00 00 */	li r4, 0x0
-/* 8139F840 | 48 06 A4 25 */	bl fn_81409C64
+/* 8139F840 | 48 06 A4 25 */	bl __dt__Q33ipl5scene4BaseFv
 .L_8139F844:
 /* 8139F844 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 8139F848 | 40 81 00 0C */	ble .L_8139F854
@@ -2626,7 +2626,7 @@
 	.4byte isResetProcessDone__Q33ipl5scene4BaseFv
 	.4byte prepare__Q33ipl5scene8CalendarFv
 	.4byte create__Q33ipl5scene8CalendarFv
-	.4byte fn_8140B254
+	.4byte calc__Q33ipl5scene14FaderSceneBaseFv
 	.4byte draw__Q33ipl5scene8CalendarFv
 	.4byte destroy__Q33ipl5scene4BaseFv
 	.4byte initCalcNormal__Q33ipl5scene14FaderSceneBaseFv

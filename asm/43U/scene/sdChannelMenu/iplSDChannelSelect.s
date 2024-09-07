@@ -17,7 +17,7 @@
 /* 813DAB20 | 48 21 E9 A5 */	bl _savegpr_28
 /* 813DAB24 | 7C 7E 1B 78 */	mr r30, r3
 /* 813DAB28 | 7C 9F 23 78 */	mr r31, r4
-/* 813DAB2C | 48 03 06 DD */	bl fn_8140B208
+/* 813DAB2C | 48 03 06 DD */	bl __ct__Q33ipl5scene14FaderSceneBaseFPQ23EGG4Heap
 /* 813DAB30 | 3C 80 81 65 */	lis r4, lbl_81654A3C@ha
 /* 813DAB34 | 38 60 00 10 */	li r3, 0x10
 /* 813DAB38 | 38 84 4A 3C */	addi r4, r4, lbl_81654A3C@l
@@ -252,7 +252,7 @@
 /* 813DAE9C | 41 82 00 20 */	beq .L_813DAEBC
 /* 813DAEA0 | 41 82 00 0C */	beq .L_813DAEAC
 /* 813DAEA4 | 38 80 00 00 */	li r4, 0x0
-/* 813DAEA8 | 48 02 ED BD */	bl fn_81409C64
+/* 813DAEA8 | 48 02 ED BD */	bl __dt__Q33ipl5scene4BaseFv
 .L_813DAEAC:
 /* 813DAEAC | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813DAEB0 | 40 81 00 0C */	ble .L_813DAEBC
@@ -3991,7 +3991,7 @@
 /* 813DE0D8 | 7F C7 F3 78 */	mr r7, r30
 /* 813DE0DC | 38 80 00 23 */	li r4, 0x23
 /* 813DE0E0 | 38 C0 00 00 */	li r6, 0x0
-/* 813DE0E4 | 48 02 BD A5 */	bl fn_81409E88
+/* 813DE0E4 | 48 02 BD A5 */	bl createChildScene__Q33ipl5scene4BaseFiPQ33ipl5scene4BasePQ33ipl5scene4BasePv
 /* 813DE0E8 | 38 00 00 06 */	li r0, 0x6
 /* 813DE0EC | 90 1E 00 98 */	stw r0, 0x98(r30)
 /* 813DE0F0 | 48 00 00 8C */	b .L_813DE17C
@@ -4145,7 +4145,7 @@
 /* 813DE2C4 | 88 A3 0A 30 */	lbz r5, 0xa30(r3)
 /* 813DE2C8 | 7F C3 F3 78 */	mr r3, r30
 /* 813DE2CC | 38 80 00 04 */	li r4, 0x4
-/* 813DE2D0 | 48 02 BC C5 */	bl fn_81409F94
+/* 813DE2D0 | 48 02 BC C5 */	bl reserveAllSceneDestruction__Q33ipl5scene4BaseFiPv
 .L_813DE2D4:
 /* 813DE2D4 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813DE2D8 | 83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -10528,7 +10528,7 @@
 	.4byte iplSDChannelSelect_813DDE68
 	.4byte prepare__Q33ipl5scene15SDChannelSelectFv
 	.4byte create__Q33ipl5scene15SDChannelSelectFv
-	.4byte fn_8140B254
+	.4byte calc__Q33ipl5scene14FaderSceneBaseFv
 	.4byte iplSDChannelSelect_813DE33C
 	.4byte iplSDChannelSelect_813DE6C8
 	.4byte initCalcNormal__Q33ipl5scene14FaderSceneBaseFv

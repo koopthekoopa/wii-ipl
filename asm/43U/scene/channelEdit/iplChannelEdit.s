@@ -13,7 +13,7 @@
 /* 813A0408 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813A040C | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813A0410 | 7C 7F 1B 78 */	mr r31, r3
-/* 813A0414 | 48 06 97 D9 */	bl fn_81409BEC
+/* 813A0414 | 48 06 97 D9 */	bl __ct__Q33ipl5scene4BaseFPQ23EGG4Heap
 /* 813A0418 | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene11ChannelEdit@ha
 /* 813A041C | 38 00 00 00 */	li r0, 0x0
 /* 813A0420 | 38 84 CC 1C */	addi r4, r4, __vt__Q33ipl5scene11ChannelEdit@l
@@ -121,7 +121,7 @@
 /* 813A058C | 41 80 FF E4 */	blt .L_813A0570
 /* 813A0590 | 7F 83 E3 78 */	mr r3, r28
 /* 813A0594 | 38 80 00 00 */	li r4, 0x0
-/* 813A0598 | 48 06 96 CD */	bl fn_81409C64
+/* 813A0598 | 48 06 96 CD */	bl __dt__Q33ipl5scene4BaseFv
 /* 813A059C | 2C 1D 00 00 */	cmpwi r29, 0x0
 /* 813A05A0 | 40 81 00 0C */	ble .L_813A05AC
 /* 813A05A4 | 7F 83 E3 78 */	mr r3, r28

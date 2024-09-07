@@ -12,7 +12,7 @@
 /* 813DA8EC | 7C 65 1B 78 */	mr r5, r3
 /* 813DA8F0 | 80 E3 00 54 */	lwz r7, 0x54(r3)
 /* 813DA8F4 | 38 C0 00 00 */	li r6, 0x0
-/* 813DA8F8 | 48 02 F5 90 */	b fn_81409E88
+/* 813DA8F8 | 48 02 F5 90 */	b createChildScene__Q33ipl5scene4BaseFiPQ33ipl5scene4BasePQ33ipl5scene4BasePv
 .endfn create__Q33ipl5scene9RootSceneFv
 
 # .text:0x14 | 0x813DA8FC | size: 0x1AC
@@ -152,7 +152,7 @@
 /* 813DAAC4 | 7C 7E 1B 78 */	mr r30, r3
 /* 813DAAC8 | 41 82 00 1C */	beq .L_813DAAE4
 /* 813DAACC | 38 80 00 00 */	li r4, 0x0
-/* 813DAAD0 | 48 02 F1 95 */	bl fn_81409C64
+/* 813DAAD0 | 48 02 F1 95 */	bl __dt__Q33ipl5scene4BaseFv
 /* 813DAAD4 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813DAAD8 | 40 81 00 0C */	ble .L_813DAAE4
 /* 813DAADC | 7F C3 F3 78 */	mr r3, r30

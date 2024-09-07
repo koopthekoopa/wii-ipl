@@ -13,7 +13,7 @@
 /* 813C1ACC | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813C1AD0 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813C1AD4 | 7C 7F 1B 78 */	mr r31, r3
-/* 813C1AD8 | 48 04 97 31 */	bl fn_8140B208
+/* 813C1AD8 | 48 04 97 31 */	bl __ct__Q33ipl5scene14FaderSceneBaseFPQ23EGG4Heap
 /* 813C1ADC | 3C A0 81 65 */	lis r5, __vt__Q33ipl5scene9LimitOver@ha
 /* 813C1AE0 | 38 00 00 00 */	li r0, 0x0
 /* 813C1AE4 | 38 A5 08 64 */	addi r5, r5, __vt__Q33ipl5scene9LimitOver@l
@@ -49,7 +49,7 @@
 /* 813C1B48 | 41 82 00 20 */	beq .L_813C1B68
 /* 813C1B4C | 41 82 00 0C */	beq .L_813C1B58
 /* 813C1B50 | 38 80 00 00 */	li r4, 0x0
-/* 813C1B54 | 48 04 81 11 */	bl fn_81409C64
+/* 813C1B54 | 48 04 81 11 */	bl __dt__Q33ipl5scene4BaseFv
 .L_813C1B58:
 /* 813C1B58 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813C1B5C | 40 81 00 0C */	ble .L_813C1B68
@@ -649,7 +649,7 @@
 /* 813C238C | 38 80 00 04 */	li r4, 0x4
 /* 813C2390 | 98 05 00 3D */	stb r0, 0x3d(r5)
 /* 813C2394 | 38 A0 00 00 */	li r5, 0x0
-/* 813C2398 | 48 04 7B 61 */	bl fn_81409EF8
+/* 813C2398 | 48 04 7B 61 */	bl reserveSceneChange__Q33ipl5scene4BaseFiPv
 /* 813C239C | 38 60 00 01 */	li r3, 0x1
 /* 813C23A0 | 48 00 00 08 */	b .L_813C23A8
 .L_813C23A4:
@@ -964,7 +964,7 @@
 	.4byte isResetProcessDone__Q33ipl5scene4BaseFv
 	.4byte prepare__Q33ipl5scene9LimitOverFv
 	.4byte create__Q33ipl5scene9LimitOverFv
-	.4byte fn_8140B254
+	.4byte calc__Q33ipl5scene14FaderSceneBaseFv
 	.4byte draw__Q33ipl5scene9LimitOverFv
 	.4byte destroy__Q33ipl5scene4BaseFv
 	.4byte initCalcNormal__Q33ipl5scene14FaderSceneBaseFv

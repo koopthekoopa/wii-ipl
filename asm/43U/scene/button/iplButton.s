@@ -14,7 +14,7 @@
 /* 8139BCA0 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8139BCA4 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8139BCA8 | 7C 7E 1B 78 */	mr r30, r3
-/* 8139BCAC | 48 06 DF 41 */	bl fn_81409BEC
+/* 8139BCAC | 48 06 DF 41 */	bl __ct__Q33ipl5scene4BaseFPQ23EGG4Heap
 /* 8139BCB0 | 3C 80 81 65 */	lis r4, __vt__Q33ipl5scene6Button@ha
 /* 8139BCB4 | 3B E0 00 00 */	li r31, 0x0
 /* 8139BCB8 | 38 84 C2 30 */	addi r4, r4, __vt__Q33ipl5scene6Button@l
@@ -79,7 +79,7 @@
 /* 8139BD88 | 48 04 EC 51 */	bl iplUnk1_813EA9D8
 /* 8139BD8C | 7F C3 F3 78 */	mr r3, r30
 /* 8139BD90 | 38 80 00 00 */	li r4, 0x0
-/* 8139BD94 | 48 06 DE D1 */	bl fn_81409C64
+/* 8139BD94 | 48 06 DE D1 */	bl __dt__Q33ipl5scene4BaseFv
 /* 8139BD98 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 8139BD9C | 40 81 00 0C */	ble .L_8139BDA8
 /* 8139BDA0 | 7F C3 F3 78 */	mr r3, r30

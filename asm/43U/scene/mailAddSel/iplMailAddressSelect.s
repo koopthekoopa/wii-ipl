@@ -13,7 +13,7 @@
 /* 813C2420 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813C2424 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813C2428 | 7C 7F 1B 78 */	mr r31, r3
-/* 813C242C | 48 04 8D DD */	bl fn_8140B208
+/* 813C242C | 48 04 8D DD */	bl __ct__Q33ipl5scene14FaderSceneBaseFPQ23EGG4Heap
 /* 813C2430 | 3C C0 81 65 */	lis r6, __vt__Q33ipl5scene17MailAddressSelect@ha
 /* 813C2434 | 38 E0 00 00 */	li r7, 0x0
 /* 813C2438 | 38 C6 0B 70 */	addi r6, r6, __vt__Q33ipl5scene17MailAddressSelect@l
@@ -60,7 +60,7 @@
 /* 813C24C4 | 41 82 00 20 */	beq .L_813C24E4
 /* 813C24C8 | 41 82 00 0C */	beq .L_813C24D4
 /* 813C24CC | 38 80 00 00 */	li r4, 0x0
-/* 813C24D0 | 48 04 77 95 */	bl fn_81409C64
+/* 813C24D0 | 48 04 77 95 */	bl __dt__Q33ipl5scene4BaseFv
 .L_813C24D4:
 /* 813C24D4 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813C24D8 | 40 81 00 0C */	ble .L_813C24E4
@@ -543,7 +543,7 @@
 /* 813C2B8C | 38 80 00 1B */	li r4, 0x1b
 /* 813C2B90 | 38 C0 00 00 */	li r6, 0x0
 /* 813C2B94 | 38 E0 00 01 */	li r7, 0x1
-/* 813C2B98 | 48 04 72 F1 */	bl fn_81409E88
+/* 813C2B98 | 48 04 72 F1 */	bl createChildScene__Q33ipl5scene4BaseFiPQ33ipl5scene4BasePQ33ipl5scene4BasePv
 /* 813C2B9C | 38 60 00 00 */	li r3, 0x0
 /* 813C2BA0 | 38 00 00 05 */	li r0, 0x5
 /* 813C2BA4 | 98 7F 00 88 */	stb r3, 0x88(r31)
@@ -560,7 +560,7 @@
 /* 813C2BCC | 7F E3 FB 78 */	mr r3, r31
 /* 813C2BD0 | 38 80 00 12 */	li r4, 0x12
 /* 813C2BD4 | 38 A0 00 01 */	li r5, 0x1
-/* 813C2BD8 | 48 04 73 BD */	bl fn_81409F94
+/* 813C2BD8 | 48 04 73 BD */	bl reserveAllSceneDestruction__Q33ipl5scene4BaseFiPv
 /* 813C2BDC | 38 00 00 0A */	li r0, 0xa
 /* 813C2BE0 | 90 1F 00 80 */	stw r0, 0x80(r31)
 /* 813C2BE4 | 48 00 02 38 */	b .L_813C2E1C
@@ -608,7 +608,7 @@
 /* 813C2C7C | 7F E3 FB 78 */	mr r3, r31
 /* 813C2C80 | 38 80 00 12 */	li r4, 0x12
 /* 813C2C84 | 38 A0 00 01 */	li r5, 0x1
-/* 813C2C88 | 48 04 73 0D */	bl fn_81409F94
+/* 813C2C88 | 48 04 73 0D */	bl reserveAllSceneDestruction__Q33ipl5scene4BaseFiPv
 /* 813C2C8C | 38 00 00 0A */	li r0, 0xa
 /* 813C2C90 | 90 1F 00 80 */	stw r0, 0x80(r31)
 /* 813C2C94 | 48 00 01 88 */	b .L_813C2E1C
@@ -664,7 +664,7 @@
 /* 813C2D44 | 7F E3 FB 78 */	mr r3, r31
 /* 813C2D48 | 38 80 00 12 */	li r4, 0x12
 /* 813C2D4C | 38 A0 00 04 */	li r5, 0x4
-/* 813C2D50 | 48 04 72 45 */	bl fn_81409F94
+/* 813C2D50 | 48 04 72 45 */	bl reserveAllSceneDestruction__Q33ipl5scene4BaseFiPv
 /* 813C2D54 | 38 00 00 0A */	li r0, 0xa
 /* 813C2D58 | 90 1F 00 80 */	stw r0, 0x80(r31)
 /* 813C2D5C | 48 00 00 C0 */	b .L_813C2E1C
@@ -688,7 +688,7 @@
 /* 813C2DA0 | 38 80 00 0B */	li r4, 0xb
 /* 813C2DA4 | 38 C0 00 00 */	li r6, 0x0
 /* 813C2DA8 | 38 E0 00 00 */	li r7, 0x0
-/* 813C2DAC | 48 04 70 DD */	bl fn_81409E88
+/* 813C2DAC | 48 04 70 DD */	bl createChildScene__Q33ipl5scene4BaseFiPQ33ipl5scene4BasePQ33ipl5scene4BasePv
 /* 813C2DB0 | 7F A3 EB 78 */	mr r3, r29
 /* 813C2DB4 | 38 80 00 00 */	li r4, 0x0
 /* 813C2DB8 | 38 A0 00 00 */	li r5, 0x0
@@ -985,7 +985,7 @@
 /* 813C3184 | 38 80 00 0A */	li r4, 0xa
 /* 813C3188 | 38 C0 00 00 */	li r6, 0x0
 /* 813C318C | 38 E0 00 00 */	li r7, 0x0
-/* 813C3190 | 48 04 6C F9 */	bl fn_81409E88
+/* 813C3190 | 48 04 6C F9 */	bl createChildScene__Q33ipl5scene4BaseFiPQ33ipl5scene4BasePQ33ipl5scene4BasePv
 /* 813C3194 | 48 00 00 80 */	b .L_813C3214
 .L_813C3198:
 /* 813C3198 | 3C 60 81 09 */	lis r3, sSystem__Q23ipl3snd@ha
@@ -1019,7 +1019,7 @@
 /* 813C3204 | 38 80 00 14 */	li r4, 0x14
 /* 813C3208 | 38 C0 00 00 */	li r6, 0x0
 /* 813C320C | 38 E0 00 00 */	li r7, 0x0
-/* 813C3210 | 48 04 6C 79 */	bl fn_81409E88
+/* 813C3210 | 48 04 6C 79 */	bl createChildScene__Q33ipl5scene4BaseFiPQ33ipl5scene4BasePQ33ipl5scene4BasePv
 .L_813C3214:
 /* 813C3214 | 2C 1D FF FF */	cmpwi r29, -0x1
 /* 813C3218 | 41 82 00 38 */	beq .L_813C3250
@@ -2000,7 +2000,7 @@
 	.4byte isResetProcessDone__Q33ipl5scene4BaseFv
 	.4byte prepare__Q33ipl5scene17MailAddressSelectFv
 	.4byte create__Q33ipl5scene17MailAddressSelectFv
-	.4byte fn_8140B254
+	.4byte calc__Q33ipl5scene14FaderSceneBaseFv
 	.4byte draw__Q33ipl5scene17MailAddressSelectFv
 	.4byte destroy__Q33ipl5scene17MailAddressSelectFv
 	.4byte initCalcNormal__Q33ipl5scene17MailAddressSelectFv

@@ -14,7 +14,7 @@
 /* 813C9DD8 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813C9DDC | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813C9DE0 | 7C 7E 1B 78 */	mr r30, r3
-/* 813C9DE4 | 48 03 FE 09 */	bl fn_81409BEC
+/* 813C9DE4 | 48 03 FE 09 */	bl __ct__Q33ipl5scene4BaseFPQ23EGG4Heap
 /* 813C9DE8 | 3C A0 81 65 */	lis r5, __vt__Q33ipl5scene10MemoryBase@ha
 /* 813C9DEC | 3B E0 00 00 */	li r31, 0x0
 /* 813C9DF0 | 38 A5 26 40 */	addi r5, r5, __vt__Q33ipl5scene10MemoryBase@l
@@ -2614,7 +2614,7 @@
 /* 813CC198 | 7C 7E 1B 78 */	mr r30, r3
 /* 813CC19C | 41 82 00 1C */	beq .L_813CC1B8
 /* 813CC1A0 | 38 80 00 00 */	li r4, 0x0
-/* 813CC1A4 | 48 03 DA C1 */	bl fn_81409C64
+/* 813CC1A4 | 48 03 DA C1 */	bl __dt__Q33ipl5scene4BaseFv
 /* 813CC1A8 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813CC1AC | 40 81 00 0C */	ble .L_813CC1B8
 /* 813CC1B0 | 7F C3 F3 78 */	mr r3, r30
