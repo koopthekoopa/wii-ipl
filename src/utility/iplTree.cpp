@@ -113,12 +113,6 @@ namespace ipl {
         Tree* Tree::getParent() {
             return mpParent;
         }
-
-        /**
-         * @note Address: 0x81362810
-         * @note Size: 0x40
-         */
-        Tree::~Tree() {}
     }
 }
 

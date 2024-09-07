@@ -6,8 +6,8 @@
 .balign 4
 
 # .text:0x0 | 0x813E4BBC | size: 0x1F4
-# ipl::scene::SDChannelSelect::SDChannelSelect(EGG::Heap*, int)
-.fn __ct__Q33ipl5scene15SDChannelSelectFPQ23EGG4Heapi, global
+# ipl::scene::SDChannelTitle::SDChannelTitle(EGG::Heap*, int)
+.fn __ct__Q33ipl5scene14SDChannelTitleFPQ23EGG4Heapi, global
 /* 813E4BBC | 94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 813E4BC0 | 7C 08 02 A6 */	mflr r0
 /* 813E4BC4 | 90 01 00 34 */	stw r0, 0x34(r1)
@@ -136,11 +136,11 @@
 /* 813E4DA4 | 7C 08 03 A6 */	mtlr r0
 /* 813E4DA8 | 38 21 00 30 */	addi r1, r1, 0x30
 /* 813E4DAC | 4E 80 00 20 */	blr
-.endfn __ct__Q33ipl5scene15SDChannelSelectFPQ23EGG4Heapi
+.endfn __ct__Q33ipl5scene14SDChannelTitleFPQ23EGG4Heapi
 
 # .text:0x1F4 | 0x813E4DB0 | size: 0x70
-# ipl::scene::SDChannelSelect::~SDChannelSelect()
-.fn __dt__Q33ipl5scene15SDChannelSelectFv, global
+# ipl::scene::SDChannelTitle::~SDChannelTitle()
+.fn __dt__Q33ipl5scene14SDChannelTitleFv, global
 /* 813E4DB0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 813E4DB4 | 7C 08 02 A6 */	mflr r0
 /* 813E4DB8 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -171,7 +171,7 @@
 /* 813E4E14 | 7C 08 03 A6 */	mtlr r0
 /* 813E4E18 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 813E4E1C | 4E 80 00 20 */	blr
-.endfn __dt__Q33ipl5scene15SDChannelSelectFv
+.endfn __dt__Q33ipl5scene14SDChannelTitleFv
 
 # .text:0x264 | 0x813E4E20 | size: 0x4C
 .fn iplSDChannelTitle_813E4E20, global
@@ -5239,7 +5239,7 @@
 # .text:0x48B8 | 0x813E9474 | size: 0x8
 .fn "@20@__dt__Q33ipl5scene15SDChannelSelectFv", global
 /* 813E9474 | 38 63 FF EC */	subi r3, r3, 0x14
-/* 813E9478 | 4B FF B9 38 */	b __dt__Q33ipl5scene15SDChannelSelectFv
+/* 813E9478 | 4B FF B9 38 */	b __dt__Q33ipl5scene14SDChannelTitleFv
 .endfn "@20@__dt__Q33ipl5scene15SDChannelSelectFv"
 
 # 0x81610918..0x81610948 | size: 0x30
@@ -5658,7 +5658,7 @@
 .obj lbl_816554F8, global
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte __dt__Q33ipl5scene15SDChannelSelectFv
+	.4byte __dt__Q33ipl5scene14SDChannelTitleFv
 	.4byte getParent__Q33ipl5scene4BaseFv
 	.4byte getChild__Q33ipl5scene4BaseFv
 	.4byte getNext__Q33ipl5scene4BaseFv

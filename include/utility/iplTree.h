@@ -10,7 +10,7 @@ namespace ipl {
             public:
                 Tree();
 
-                virtual         ~Tree();        // 0x08
+                virtual         ~Tree() {};     // 0x08
 
                 virtual Tree*   getPrev();      // 0x0C
                 virtual Tree*   getNext();      // 0x10

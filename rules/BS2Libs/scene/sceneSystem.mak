@@ -1,7 +1,7 @@
-SCENE_SYS_OBJS	=	$(BS2_OBJASM_PATH)/scene/sceneSystem/iplSceneBase.o \
+SCENE_SYS_OBJS	=	$(BS2_OBJ_PATH)/scene/sceneSystem/iplSceneBase.o \
 					$(BS2_OBJASM_PATH)/scene/sceneSystem/iplSceneCreator.o \
 					$(BS2_OBJASM_PATH)/scene/sceneSystem/iplSceneManager.o \
-					$(BS2_OBJASM_PATH)/scene/sceneSystem/iplFaderSceneBase.o
+					$(BS2_OBJ_PATH)/scene/sceneSystem/iplFaderSceneBase.o
 
 DEPENDENCIES += 	$(SCENE_SYS_OBJS:.o=.d)
 

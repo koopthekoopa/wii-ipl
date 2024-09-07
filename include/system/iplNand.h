@@ -28,6 +28,7 @@ namespace ipl {
                 LayoutFile* readLayout(EGG::Heap* pHeap, const char* archiveName, bool unk);
 
                 void        closeContentsAll();
+                void        sendToken(int token);
         };
     }
 }

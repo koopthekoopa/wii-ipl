@@ -375,7 +375,7 @@
 /* 8140A474 | 41 82 00 10 */	beq .L_8140A484
 /* 8140A478 | 7F A4 EB 78 */	mr r4, r29
 /* 8140A47C | 7F C5 F3 78 */	mr r5, r30
-/* 8140A480 | 4B FD A7 3D */	bl __ct__Q33ipl5scene15SDChannelSelectFPQ23EGG4Heapi
+/* 8140A480 | 4B FD A7 3D */	bl __ct__Q33ipl5scene14SDChannelTitleFPQ23EGG4Heapi
 .L_8140A484:
 /* 8140A484 | 7C 7F 1B 78 */	mr r31, r3
 /* 8140A488 | 48 00 00 54 */	b .L_8140A4DC

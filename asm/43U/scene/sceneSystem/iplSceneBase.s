@@ -17,7 +17,7 @@
 /* 81409C04 | 7C 7E 1B 78 */	mr r30, r3
 /* 81409C08 | 4B F5 8B 05 */	bl __ct__Q33ipl7utility4TreeFv
 /* 81409C0C | 38 7E 00 14 */	addi r3, r30, 0x14
-/* 81409C10 | 48 1E D8 55 */	bl fn_815F7464
+/* 81409C10 | 48 1E D8 55 */	bl __ct__Q23EGG8DisposerFv
 /* 81409C14 | 3C A0 81 66 */	lis r5, __vt__Q33ipl5scene4Base@ha
 /* 81409C18 | 38 00 00 00 */	li r0, 0x0
 /* 81409C1C | 38 A5 87 88 */	addi r5, r5, __vt__Q33ipl5scene4Base@l
@@ -54,7 +54,7 @@
 /* 81409C84 | 41 82 00 20 */	beq .L_81409CA4
 /* 81409C88 | 38 80 00 00 */	li r4, 0x0
 /* 81409C8C | 38 63 00 14 */	addi r3, r3, 0x14
-/* 81409C90 | 48 1E D8 29 */	bl fn_815F74B8
+/* 81409C90 | 48 1E D8 29 */	bl __dt__Q23EGG8DisposerFv
 /* 81409C94 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81409C98 | 40 81 00 0C */	ble .L_81409CA4
 /* 81409C9C | 7F C3 F3 78 */	mr r3, r30
