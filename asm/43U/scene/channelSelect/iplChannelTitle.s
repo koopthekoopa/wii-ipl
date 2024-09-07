@@ -5858,7 +5858,7 @@
 .L_813B9090:
 /* 813B9090 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813B9094 | 41 82 00 10 */	beq .L_813B90A4
-/* 813B9098 | 48 04 28 55 */	bl fn_813FB8EC
+/* 813B9098 | 48 04 28 55 */	bl getConnectEnableFlag__Q33ipl3ncd10NCDSettingFv
 /* 813B909C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813B90A0 | 41 82 00 0C */	beq .L_813B90AC
 .L_813B90A4:

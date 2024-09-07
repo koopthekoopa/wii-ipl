@@ -2048,7 +2048,7 @@
 /* 813C56EC | 7C 7E 1B 78 */	mr r30, r3
 /* 813C56F0 | 80 65 00 64 */	lwz r3, 0x64(r5)
 /* 813C56F4 | 48 04 5A 45 */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813C56F8 | 48 04 20 71 */	bl fn_81407768
+/* 813C56F8 | 48 04 20 71 */	bl update__Q33ipl5scene13SettingButtonFv
 /* 813C56FC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813C5700 | 41 82 00 14 */	beq .L_813C5714
 /* 813C5704 | 7F C3 F3 78 */	mr r3, r30
@@ -2660,7 +2660,7 @@
 /* 813C5EF4 | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
 /* 813C5EF8 | 80 63 00 64 */	lwz r3, 0x64(r3)
 /* 813C5EFC | 48 04 52 3D */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813C5F00 | 48 04 18 69 */	bl fn_81407768
+/* 813C5F00 | 48 04 18 69 */	bl update__Q33ipl5scene13SettingButtonFv
 /* 813C5F04 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813C5F08 | 41 82 00 10 */	beq .L_813C5F18
 /* 813C5F0C | 38 00 00 0D */	li r0, 0xd
@@ -2692,7 +2692,7 @@
 /* 813C5F58 | 7C 7F 1B 78 */	mr r31, r3
 /* 813C5F5C | 80 65 00 64 */	lwz r3, 0x64(r5)
 /* 813C5F60 | 48 04 51 D9 */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813C5F64 | 48 04 1A E9 */	bl fn_81407A4C
+/* 813C5F64 | 48 04 1A E9 */	bl isPlaying__Q33ipl5scene13SettingButtonCFv
 /* 813C5F68 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813C5F6C | 40 82 00 14 */	bne .L_813C5F80
 /* 813C5F70 | 80 7F 00 68 */	lwz r3, 0x68(r31)
@@ -2736,7 +2736,7 @@
 /* 813C5FDC | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
 /* 813C5FE0 | 80 63 00 64 */	lwz r3, 0x64(r3)
 /* 813C5FE4 | 48 04 51 55 */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813C5FE8 | 48 04 17 81 */	bl fn_81407768
+/* 813C5FE8 | 48 04 17 81 */	bl update__Q33ipl5scene13SettingButtonFv
 /* 813C5FEC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813C5FF0 | 41 82 00 14 */	beq .L_813C6004
 /* 813C5FF4 | 80 7F 00 68 */	lwz r3, 0x68(r31)
@@ -3053,7 +3053,7 @@
 /* 813C63F0 | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
 /* 813C63F4 | 80 63 00 64 */	lwz r3, 0x64(r3)
 /* 813C63F8 | 48 04 4D 41 */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813C63FC | 48 04 13 6D */	bl fn_81407768
+/* 813C63FC | 48 04 13 6D */	bl update__Q33ipl5scene13SettingButtonFv
 /* 813C6400 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813C6404 | 41 82 00 14 */	beq .L_813C6418
 /* 813C6408 | 7F E3 FB 78 */	mr r3, r31

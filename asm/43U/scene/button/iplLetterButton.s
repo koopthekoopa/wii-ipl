@@ -5057,7 +5057,7 @@
 /* 8139B18C | 7C 7F 1B 78 */	mr r31, r3
 /* 8139B190 | 93 C1 02 08 */	stw r30, 0x208(r1)
 /* 8139B194 | 3B C0 00 02 */	li r30, 0x2
-/* 8139B198 | 48 06 07 55 */	bl fn_813FB8EC
+/* 8139B198 | 48 06 07 55 */	bl getConnectEnableFlag__Q33ipl3ncd10NCDSettingFv
 /* 8139B19C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8139B1A0 | 40 82 00 3C */	bne .L_8139B1DC
 /* 8139B1A4 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -5232,7 +5232,7 @@
 /* 8139B3EC | 90 01 00 64 */	stw r0, 0x64(r1)
 /* 8139B3F0 | 93 E1 00 5C */	stw r31, 0x5c(r1)
 /* 8139B3F4 | 7C 7F 1B 78 */	mr r31, r3
-/* 8139B3F8 | 48 06 04 F5 */	bl fn_813FB8EC
+/* 8139B3F8 | 48 06 04 F5 */	bl getConnectEnableFlag__Q33ipl3ncd10NCDSettingFv
 /* 8139B3FC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8139B400 | 40 82 00 40 */	bne .L_8139B440
 /* 8139B404 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha

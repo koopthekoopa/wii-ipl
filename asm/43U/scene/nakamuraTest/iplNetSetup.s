@@ -12,9 +12,10 @@
 .endobj sAllocLock__Q33ipl5scene8NetSetup
 
 # .bss:0x18 | 0x810B83E0 | size: 0x10
-.obj lbl_810B83E0, global
+# ipl::scene::NetSetup::sSOStartupInfo
+.obj sSOStartupInfo__Q33ipl5scene8NetSetup, global
 	.skip 0x10
-.endobj lbl_810B83E0
+.endobj sSOStartupInfo__Q33ipl5scene8NetSetup
 
 # 0x813D8D9C..0x813D95BC | size: 0x820
 .text
@@ -34,8 +35,8 @@
 /* 813D8DBC | 38 7D 00 00 */	addi r3, r29, 0x0
 /* 813D8DC0 | 4C C6 31 82 */	crclr cr1eq
 /* 813D8DC4 | 48 15 58 DD */	bl OSReport
-/* 813D8DC8 | 3F C0 81 0C */	lis r30, lbl_810B83E0@ha
-/* 813D8DCC | 3B FE 83 E0 */	addi r31, r30, lbl_810B83E0@l
+/* 813D8DC8 | 3F C0 81 0C */	lis r30, sSOStartupInfo__Q33ipl5scene8NetSetup@ha
+/* 813D8DCC | 3B FE 83 E0 */	addi r31, r30, sSOStartupInfo__Q33ipl5scene8NetSetup@l
 /* 813D8DD0 | 80 7F 00 0C */	lwz r3, 0xc(r31)
 /* 813D8DD4 | 48 0B 98 E5 */	bl fn_814926B8
 /* 813D8DD8 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -49,16 +50,16 @@
 /* 813D8DF4 | 3C 60 00 01 */	lis r3, 0x1
 /* 813D8DF8 | 38 80 00 05 */	li r4, 0x5
 /* 813D8DFC | 38 03 C4 7C */	subi r0, r3, 0x3b84
-/* 813D8E00 | 90 9E 83 E0 */	stw r4, lbl_810B83E0@l(r30)
+/* 813D8E00 | 90 9E 83 E0 */	stw r4, sSOStartupInfo__Q33ipl5scene8NetSetup@l(r30)
 /* 813D8E04 | 90 1F 00 04 */	stw r0, 0x4(r31)
 /* 813D8E08 | 48 00 00 20 */	b .L_813D8E28
 .L_813D8E0C:
 /* 813D8E0C | 3C 60 00 01 */	lis r3, 0x1
-/* 813D8E10 | 3C 80 81 0C */	lis r4, lbl_810B83E0@ha
+/* 813D8E10 | 3C 80 81 0C */	lis r4, sSOStartupInfo__Q33ipl5scene8NetSetup@ha
 /* 813D8E14 | 38 A0 00 05 */	li r5, 0x5
 /* 813D8E18 | 38 03 C3 B4 */	subi r0, r3, 0x3c4c
-/* 813D8E1C | 38 64 83 E0 */	addi r3, r4, lbl_810B83E0@l
-/* 813D8E20 | 90 A4 83 E0 */	stw r5, lbl_810B83E0@l(r4)
+/* 813D8E1C | 38 64 83 E0 */	addi r3, r4, sSOStartupInfo__Q33ipl5scene8NetSetup@l
+/* 813D8E20 | 90 A4 83 E0 */	stw r5, sSOStartupInfo__Q33ipl5scene8NetSetup@l(r4)
 /* 813D8E24 | 90 03 00 04 */	stw r0, 0x4(r3)
 .L_813D8E28:
 /* 813D8E28 | 38 60 00 00 */	li r3, 0x0
@@ -80,16 +81,16 @@
 /* 813D8E60 | 3C 60 00 01 */	lis r3, 0x1
 /* 813D8E64 | 38 80 00 05 */	li r4, 0x5
 /* 813D8E68 | 38 03 C4 7C */	subi r0, r3, 0x3b84
-/* 813D8E6C | 90 9E 83 E0 */	stw r4, lbl_810B83E0@l(r30)
+/* 813D8E6C | 90 9E 83 E0 */	stw r4, sSOStartupInfo__Q33ipl5scene8NetSetup@l(r30)
 /* 813D8E70 | 90 1F 00 04 */	stw r0, 0x4(r31)
 /* 813D8E74 | 48 00 00 20 */	b .L_813D8E94
 .L_813D8E78:
 /* 813D8E78 | 3C 60 00 01 */	lis r3, 0x1
-/* 813D8E7C | 3C 80 81 0C */	lis r4, lbl_810B83E0@ha
+/* 813D8E7C | 3C 80 81 0C */	lis r4, sSOStartupInfo__Q33ipl5scene8NetSetup@ha
 /* 813D8E80 | 38 A0 00 05 */	li r5, 0x5
 /* 813D8E84 | 38 03 C3 B4 */	subi r0, r3, 0x3c4c
-/* 813D8E88 | 38 64 83 E0 */	addi r3, r4, lbl_810B83E0@l
-/* 813D8E8C | 90 A4 83 E0 */	stw r5, lbl_810B83E0@l(r4)
+/* 813D8E88 | 38 64 83 E0 */	addi r3, r4, sSOStartupInfo__Q33ipl5scene8NetSetup@l
+/* 813D8E8C | 90 A4 83 E0 */	stw r5, sSOStartupInfo__Q33ipl5scene8NetSetup@l(r4)
 /* 813D8E90 | 90 03 00 04 */	stw r0, 0x4(r3)
 .L_813D8E94:
 /* 813D8E94 | 38 60 00 00 */	li r3, 0x0
@@ -115,7 +116,7 @@
 /* 813D8EE0 | 48 15 57 C1 */	bl OSReport
 /* 813D8EE4 | 38 00 00 05 */	li r0, 0x5
 /* 813D8EE8 | 93 9F 00 04 */	stw r28, 0x4(r31)
-/* 813D8EEC | 90 1E 83 E0 */	stw r0, lbl_810B83E0@l(r30)
+/* 813D8EEC | 90 1E 83 E0 */	stw r0, sSOStartupInfo__Q33ipl5scene8NetSetup@l(r30)
 /* 813D8EF0 | 48 00 00 34 */	b .L_813D8F24
 .L_813D8EF4:
 /* 813D8EF4 | 48 0D B1 71 */	bl SOGetSockOpt
@@ -128,7 +129,7 @@
 /* 813D8F10 | 48 15 57 91 */	bl OSReport
 /* 813D8F14 | 38 60 00 03 */	li r3, 0x3
 /* 813D8F18 | 38 00 00 00 */	li r0, 0x0
-/* 813D8F1C | 90 7E 83 E0 */	stw r3, lbl_810B83E0@l(r30)
+/* 813D8F1C | 90 7E 83 E0 */	stw r3, sSOStartupInfo__Q33ipl5scene8NetSetup@l(r30)
 /* 813D8F20 | 90 1F 00 04 */	stw r0, 0x4(r31)
 .L_813D8F24:
 /* 813D8F24 | 38 60 00 00 */	li r3, 0x0
@@ -164,9 +165,9 @@
 /* 813D8F84 | 38 80 00 00 */	li r4, 0x0
 /* 813D8F88 | 38 A0 07 C4 */	li r5, 0x7c4
 /* 813D8F8C | 4B F5 73 A9 */	bl memset
-/* 813D8F90 | 3C 80 81 0C */	lis r4, lbl_810B83E0@ha
+/* 813D8F90 | 3C 80 81 0C */	lis r4, sSOStartupInfo__Q33ipl5scene8NetSetup@ha
 /* 813D8F94 | 38 7F 1B 68 */	addi r3, r31, 0x1b68
-/* 813D8F98 | 38 84 83 E0 */	addi r4, r4, lbl_810B83E0@l
+/* 813D8F98 | 38 84 83 E0 */	addi r4, r4, sSOStartupInfo__Q33ipl5scene8NetSetup@l
 /* 813D8F9C | 38 1F 1C C8 */	addi r0, r31, 0x1cc8
 /* 813D8FA0 | 90 64 00 08 */	stw r3, 0x8(r4)
 /* 813D8FA4 | 7F E3 FB 78 */	mr r3, r31
@@ -507,10 +508,10 @@
 /* 813D9424 | 48 15 AB 5D */	bl OSIsThreadTerminated
 /* 813D9428 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D942C | 41 82 00 5C */	beq .L_813D9488
-/* 813D9430 | 3C 60 81 0C */	lis r3, lbl_810B83E0@ha
+/* 813D9430 | 3C 60 81 0C */	lis r3, sSOStartupInfo__Q33ipl5scene8NetSetup@ha
 /* 813D9434 | 83 BF 27 B0 */	lwz r29, 0x27b0(r31)
-/* 813D9438 | 80 03 83 E0 */	lwz r0, lbl_810B83E0@l(r3)
-/* 813D943C | 38 63 83 E0 */	addi r3, r3, lbl_810B83E0@l
+/* 813D9438 | 80 03 83 E0 */	lwz r0, sSOStartupInfo__Q33ipl5scene8NetSetup@l(r3)
+/* 813D943C | 38 63 83 E0 */	addi r3, r3, sSOStartupInfo__Q33ipl5scene8NetSetup@l
 /* 813D9440 | 2C 1D 00 00 */	cmpwi r29, 0x0
 /* 813D9444 | 90 1F 24 8C */	stw r0, 0x248c(r31)
 /* 813D9448 | 80 03 00 04 */	lwz r0, 0x4(r3)

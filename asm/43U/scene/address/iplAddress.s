@@ -5379,7 +5379,7 @@
 /* 81386060 | 38 80 00 1D */	li r4, 0x1d
 /* 81386064 | 48 01 6A F5 */	bl iplButton_8139CB58
 .L_81386068:
-/* 81386068 | 48 07 58 85 */	bl fn_813FB8EC
+/* 81386068 | 48 07 58 85 */	bl getConnectEnableFlag__Q33ipl3ncd10NCDSettingFv
 /* 8138606C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81386070 | 40 82 00 30 */	bne .L_813860A0
 /* 81386074 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha

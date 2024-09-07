@@ -21,7 +21,7 @@
 #include "system/iplPostmanManager.h"
 #include "system/iplBS2Manager.h"
 
-#include "sceneSystem/iplSceneManager.h"
+#include "scene/iplSceneManager.h"
 
 namespace ipl {
     class System {
@@ -70,8 +70,8 @@ namespace ipl {
                     undefined4*         unk_0xB8;
                     message::Manager*   mpMessage;              // 0xBC
                     EGG::Thread*        mpUnkThread;            // 0xC0
-                    EGG::ColorFader*    mpErrFader;             // 0xC4
-                    EGG::ColorFader*    mpFader;                // 0xC8
+                    EGG::ColorFader*    mpGblFader;             // 0xC4
+                    EGG::ColorFader*    mpScnFader;             // 0xC8
 
                     u8                  unk_0xCC[0x64];
 
@@ -133,9 +133,9 @@ namespace ipl {
             /** @return something */
             static EGG::Thread*         getUnkThread()          { return smArg.mpUnkThread; }
             /** @return The Fader object for fading out to the error handler. */
-            static EGG::ColorFader*     getErrFader()           { return smArg.mpErrFader; }
+            static EGG::ColorFader*     getGlobalFader()        { return smArg.mpGblFader; }
             /** @return The fader object. */
-            static EGG::ColorFader*     getFader()              { return smArg.mpFader; }
+            static EGG::ColorFader*     getSceneFader()         { return smArg.mpScnFader; }
             /** @return The English message data. */
             static UnkRegionData*       getEngMsg()             { return smArg.mpEngMsg; }
             /** @return The French message data. */

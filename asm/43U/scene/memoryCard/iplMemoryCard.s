@@ -948,7 +948,7 @@
 /* 813CAB34 | 7C 7E 1B 78 */	mr r30, r3
 /* 813CAB38 | 38 63 00 54 */	addi r3, r3, 0x54
 /* 813CAB3C | 48 00 1F F1 */	bl get_setting_button__Q33ipl5scene10MemoryBaseFv
-/* 813CAB40 | 48 03 CC 29 */	bl fn_81407768
+/* 813CAB40 | 48 03 CC 29 */	bl update__Q33ipl5scene13SettingButtonFv
 /* 813CAB44 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813CAB48 | 41 82 00 3C */	beq .L_813CAB84
 /* 813CAB4C | 80 1E 00 8C */	lwz r0, 0x8c(r30)
@@ -1237,7 +1237,7 @@
 /* 813CAF14 | 7C 7E 1B 78 */	mr r30, r3
 /* 813CAF18 | 38 63 00 54 */	addi r3, r3, 0x54
 /* 813CAF1C | 48 00 1C 11 */	bl get_setting_button__Q33ipl5scene10MemoryBaseFv
-/* 813CAF20 | 48 03 CB 2D */	bl fn_81407A4C
+/* 813CAF20 | 48 03 CB 2D */	bl isPlaying__Q33ipl5scene13SettingButtonCFv
 /* 813CAF24 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813CAF28 | 40 82 00 5C */	bne .L_813CAF84
 /* 813CAF2C | 81 9E 00 54 */	lwz r12, 0x54(r30)

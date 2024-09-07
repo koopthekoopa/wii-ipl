@@ -47,7 +47,7 @@ static void SetConsoleInfo() {
 
     // Console type
     bi->consoleType         = OS_CONSOLE_RETAIL;
-    bi->consoleType         += (__PIRegs[0x2C / 4]) >> 0x1C;
+    bi->consoleType         += PI_REG(0x2C) >> 0x1C;
 
     *(u32*)(OS_BASE_CACHED + 0x00F0) = bi->memorySize;
 

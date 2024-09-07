@@ -1094,7 +1094,7 @@
 /* 813CFC20 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813CFC24 | 41 82 00 30 */	beq .L_813CFC54
 /* 813CFC28 | 4B FF CF 05 */	bl get_setting_button__Q33ipl5scene10MemoryBaseFv
-/* 813CFC2C | 48 03 7B 3D */	bl fn_81407768
+/* 813CFC2C | 48 03 7B 3D */	bl update__Q33ipl5scene13SettingButtonFv
 /* 813CFC30 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813CFC34 | 41 82 00 18 */	beq .L_813CFC4C
 /* 813CFC38 | 7F E3 FB 78 */	mr r3, r31
@@ -1123,7 +1123,7 @@
 /* 813CFC78 | 93 C1 00 18 */	stw r30, 0x18(r1)
 /* 813CFC7C | 7C 7E 1B 78 */	mr r30, r3
 /* 813CFC80 | 4B FF CE AD */	bl get_setting_button__Q33ipl5scene10MemoryBaseFv
-/* 813CFC84 | 48 03 7D C9 */	bl fn_81407A4C
+/* 813CFC84 | 48 03 7D C9 */	bl isPlaying__Q33ipl5scene13SettingButtonCFv
 /* 813CFC88 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813CFC8C | 40 82 00 7C */	bne .L_813CFD08
 /* 813CFC90 | C0 22 86 90 */	lfs f1, lbl_81694A90@sda21(r0)
@@ -1512,7 +1512,7 @@
 /* 813D01CC | 4B F7 6D C1 */	bl callS2Btn2__Q23ipl12DialogWindowFUlUlb
 /* 813D01D0 | 7F E3 FB 78 */	mr r3, r31
 /* 813D01D4 | 4B FF C9 59 */	bl get_setting_button__Q33ipl5scene10MemoryBaseFv
-/* 813D01D8 | 48 03 76 F5 */	bl fn_814078CC
+/* 813D01D8 | 48 03 76 F5 */	bl hideBtn__Q33ipl5scene13SettingButtonFv
 /* 813D01DC | 38 00 00 0C */	li r0, 0xc
 /* 813D01E0 | 90 1F 00 38 */	stw r0, 0x38(r31)
 .L_813D01E4:
@@ -1788,7 +1788,7 @@
 /* 813D05A0 | 7F E3 FB 78 */	mr r3, r31
 /* 813D05A4 | 90 1F 00 38 */	stw r0, 0x38(r31)
 /* 813D05A8 | 4B FF C5 85 */	bl get_setting_button__Q33ipl5scene10MemoryBaseFv
-/* 813D05AC | 48 03 72 C5 */	bl fn_81407870
+/* 813D05AC | 48 03 72 C5 */	bl showBtn__Q33ipl5scene13SettingButtonFv
 .L_813D05B0:
 /* 813D05B0 | 80 01 00 24 */	lwz r0, 0x24(r1)
 /* 813D05B4 | 83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -1873,7 +1873,7 @@
 /* 813D06B0 | 40 82 00 7C */	bne .L_813D072C
 /* 813D06B4 | 7F 83 E3 78 */	mr r3, r28
 /* 813D06B8 | 4B FF C4 75 */	bl get_setting_button__Q33ipl5scene10MemoryBaseFv
-/* 813D06BC | 48 03 70 AD */	bl fn_81407768
+/* 813D06BC | 48 03 70 AD */	bl update__Q33ipl5scene13SettingButtonFv
 /* 813D06C0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D06C4 | 41 82 00 68 */	beq .L_813D072C
 /* 813D06C8 | 3F C0 81 65 */	lis r30, lbl_81652A94@ha
@@ -1929,7 +1929,7 @@
 /* 813D0774 | 40 82 00 7C */	bne .L_813D07F0
 /* 813D0778 | 7F 83 E3 78 */	mr r3, r28
 /* 813D077C | 4B FF C3 B1 */	bl get_setting_button__Q33ipl5scene10MemoryBaseFv
-/* 813D0780 | 48 03 6F E9 */	bl fn_81407768
+/* 813D0780 | 48 03 6F E9 */	bl update__Q33ipl5scene13SettingButtonFv
 /* 813D0784 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D0788 | 41 82 00 68 */	beq .L_813D07F0
 /* 813D078C | 3F C0 81 65 */	lis r30, lbl_81652A94@ha
@@ -2602,7 +2602,7 @@
 /* 813D101C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D1020 | 41 82 00 30 */	beq .L_813D1050
 /* 813D1024 | 4B FF BB 09 */	bl get_setting_button__Q33ipl5scene10MemoryBaseFv
-/* 813D1028 | 48 03 67 41 */	bl fn_81407768
+/* 813D1028 | 48 03 67 41 */	bl update__Q33ipl5scene13SettingButtonFv
 /* 813D102C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D1030 | 41 82 00 18 */	beq .L_813D1048
 /* 813D1034 | 7F E3 FB 78 */	mr r3, r31
@@ -2680,7 +2680,7 @@
 /* 813D1120 | 93 C1 00 18 */	stw r30, 0x18(r1)
 /* 813D1124 | 7C 7E 1B 78 */	mr r30, r3
 /* 813D1128 | 4B FF BA 05 */	bl get_setting_button__Q33ipl5scene10MemoryBaseFv
-/* 813D112C | 48 03 69 21 */	bl fn_81407A4C
+/* 813D112C | 48 03 69 21 */	bl isPlaying__Q33ipl5scene13SettingButtonCFv
 /* 813D1130 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D1134 | 40 82 00 7C */	bne .L_813D11B0
 /* 813D1138 | C0 22 86 90 */	lfs f1, lbl_81694A90@sda21(r0)
@@ -2778,7 +2778,7 @@
 /* 813D1278 | 4B F7 5D 15 */	bl callS2Btn2__Q23ipl12DialogWindowFUlUlb
 /* 813D127C | 7F E3 FB 78 */	mr r3, r31
 /* 813D1280 | 4B FF B8 AD */	bl get_setting_button__Q33ipl5scene10MemoryBaseFv
-/* 813D1284 | 48 03 66 49 */	bl fn_814078CC
+/* 813D1284 | 48 03 66 49 */	bl hideBtn__Q33ipl5scene13SettingButtonFv
 /* 813D1288 | 38 00 00 09 */	li r0, 0x9
 /* 813D128C | 90 1F 00 34 */	stw r0, 0x34(r31)
 .L_813D1290:
@@ -2837,10 +2837,10 @@
 /* 813D134C | 7F C3 F3 78 */	mr r3, r30
 /* 813D1350 | 4B FF B7 DD */	bl get_setting_button__Q33ipl5scene10MemoryBaseFv
 /* 813D1354 | 38 80 01 3B */	li r4, 0x13b
-/* 813D1358 | 48 03 65 CD */	bl fn_81407924
+/* 813D1358 | 48 03 65 CD */	bl setText__Q33ipl5scene13SettingButtonFUl
 /* 813D135C | 7F C3 F3 78 */	mr r3, r30
 /* 813D1360 | 4B FF B7 CD */	bl get_setting_button__Q33ipl5scene10MemoryBaseFv
-/* 813D1364 | 48 03 65 0D */	bl fn_81407870
+/* 813D1364 | 48 03 65 0D */	bl showBtn__Q33ipl5scene13SettingButtonFv
 /* 813D1368 | 81 9E 00 00 */	lwz r12, 0x0(r30)
 /* 813D136C | 7F C3 F3 78 */	mr r3, r30
 /* 813D1370 | 38 80 00 07 */	li r4, 0x7

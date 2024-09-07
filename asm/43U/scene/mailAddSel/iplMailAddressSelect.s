@@ -1404,7 +1404,7 @@
 /* 813C36E8 | 48 23 5D E1 */	bl _savegpr_29
 /* 813C36EC | 7C 7E 1B 78 */	mr r30, r3
 /* 813C36F0 | 3B E0 00 00 */	li r31, 0x0
-/* 813C36F4 | 48 03 81 F9 */	bl fn_813FB8EC
+/* 813C36F4 | 48 03 81 F9 */	bl getConnectEnableFlag__Q33ipl3ncd10NCDSettingFv
 /* 813C36F8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813C36FC | 40 82 00 30 */	bne .L_813C372C
 /* 813C3700 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha

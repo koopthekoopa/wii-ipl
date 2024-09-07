@@ -751,19 +751,19 @@
 /* 813CCB60 | 48 03 E5 D9 */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813CCB64 | 38 80 00 02 */	li r4, 0x2
 /* 813CCB68 | 38 A0 00 00 */	li r5, 0x0
-/* 813CCB6C | 48 03 AE 8D */	bl fn_814079F8
+/* 813CCB6C | 48 03 AE 8D */	bl reserve__Q33ipl5scene13SettingButtonFiUl
 /* 813CCB70 | 80 7F 00 64 */	lwz r3, 0x64(r31)
 /* 813CCB74 | 38 80 00 16 */	li r4, 0x16
 /* 813CCB78 | 48 03 E5 C1 */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813CCB7C | 38 80 00 03 */	li r4, 0x3
 /* 813CCB80 | 38 A0 00 FC */	li r5, 0xfc
-/* 813CCB84 | 48 03 AE 75 */	bl fn_814079F8
+/* 813CCB84 | 48 03 AE 75 */	bl reserve__Q33ipl5scene13SettingButtonFiUl
 /* 813CCB88 | 80 7F 00 64 */	lwz r3, 0x64(r31)
 /* 813CCB8C | 38 80 00 16 */	li r4, 0x16
 /* 813CCB90 | 48 03 E5 A9 */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813CCB94 | 38 80 00 01 */	li r4, 0x1
 /* 813CCB98 | 38 A0 00 00 */	li r5, 0x0
-/* 813CCB9C | 48 03 AE 5D */	bl fn_814079F8
+/* 813CCB9C | 48 03 AE 5D */	bl reserve__Q33ipl5scene13SettingButtonFiUl
 /* 813CCBA0 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813CCBA4 | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 813CCBA8 | 7C 08 03 A6 */	mtlr r0
@@ -785,19 +785,19 @@
 /* 813CCBD4 | 48 03 E5 65 */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813CCBD8 | 38 80 00 02 */	li r4, 0x2
 /* 813CCBDC | 38 A0 00 00 */	li r5, 0x0
-/* 813CCBE0 | 48 03 AE 19 */	bl fn_814079F8
+/* 813CCBE0 | 48 03 AE 19 */	bl reserve__Q33ipl5scene13SettingButtonFiUl
 /* 813CCBE4 | 80 7F 00 64 */	lwz r3, 0x64(r31)
 /* 813CCBE8 | 38 80 00 16 */	li r4, 0x16
 /* 813CCBEC | 48 03 E5 4D */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813CCBF0 | 38 80 00 03 */	li r4, 0x3
 /* 813CCBF4 | 38 A0 01 3B */	li r5, 0x13b
-/* 813CCBF8 | 48 03 AE 01 */	bl fn_814079F8
+/* 813CCBF8 | 48 03 AE 01 */	bl reserve__Q33ipl5scene13SettingButtonFiUl
 /* 813CCBFC | 80 7F 00 64 */	lwz r3, 0x64(r31)
 /* 813CCC00 | 38 80 00 16 */	li r4, 0x16
 /* 813CCC04 | 48 03 E5 35 */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813CCC08 | 38 80 00 01 */	li r4, 0x1
 /* 813CCC0C | 38 A0 00 00 */	li r5, 0x0
-/* 813CCC10 | 48 03 AD E9 */	bl fn_814079F8
+/* 813CCC10 | 48 03 AD E9 */	bl reserve__Q33ipl5scene13SettingButtonFiUl
 /* 813CCC14 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813CCC18 | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 813CCC1C | 7C 08 03 A6 */	mtlr r0
@@ -819,19 +819,19 @@
 /* 813CCC48 | 48 03 E4 F1 */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813CCC4C | 38 80 00 02 */	li r4, 0x2
 /* 813CCC50 | 38 A0 00 00 */	li r5, 0x0
-/* 813CCC54 | 48 03 AD A5 */	bl fn_814079F8
+/* 813CCC54 | 48 03 AD A5 */	bl reserve__Q33ipl5scene13SettingButtonFiUl
 /* 813CCC58 | 80 7F 00 64 */	lwz r3, 0x64(r31)
 /* 813CCC5C | 38 80 00 16 */	li r4, 0x16
 /* 813CCC60 | 48 03 E4 D9 */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813CCC64 | 38 80 00 03 */	li r4, 0x3
 /* 813CCC68 | 38 A0 00 2E */	li r5, 0x2e
-/* 813CCC6C | 48 03 AD 8D */	bl fn_814079F8
+/* 813CCC6C | 48 03 AD 8D */	bl reserve__Q33ipl5scene13SettingButtonFiUl
 /* 813CCC70 | 80 7F 00 64 */	lwz r3, 0x64(r31)
 /* 813CCC74 | 38 80 00 16 */	li r4, 0x16
 /* 813CCC78 | 48 03 E4 C1 */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813CCC7C | 38 80 00 01 */	li r4, 0x1
 /* 813CCC80 | 38 A0 00 00 */	li r5, 0x0
-/* 813CCC84 | 48 03 AD 75 */	bl fn_814079F8
+/* 813CCC84 | 48 03 AD 75 */	bl reserve__Q33ipl5scene13SettingButtonFiUl
 /* 813CCC88 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813CCC8C | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 813CCC90 | 7C 08 03 A6 */	mtlr r0
@@ -852,11 +852,11 @@
 /* 813CCCB8 | 80 7F 00 64 */	lwz r3, 0x64(r31)
 /* 813CCCBC | 48 03 E4 7D */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813CCCC0 | 38 80 01 3B */	li r4, 0x13b
-/* 813CCCC4 | 48 03 AC 61 */	bl fn_81407924
+/* 813CCCC4 | 48 03 AC 61 */	bl setText__Q33ipl5scene13SettingButtonFUl
 /* 813CCCC8 | 80 7F 00 64 */	lwz r3, 0x64(r31)
 /* 813CCCCC | 38 80 00 16 */	li r4, 0x16
 /* 813CCCD0 | 48 03 E4 69 */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813CCCD4 | 48 03 AB 9D */	bl fn_81407870
+/* 813CCCD4 | 48 03 AB 9D */	bl showBtn__Q33ipl5scene13SettingButtonFv
 /* 813CCCD8 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813CCCDC | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 813CCCE0 | 7C 08 03 A6 */	mtlr r0
@@ -877,11 +877,11 @@
 /* 813CCD08 | 80 7F 00 64 */	lwz r3, 0x64(r31)
 /* 813CCD0C | 48 03 E4 2D */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813CCD10 | 38 80 00 2E */	li r4, 0x2e
-/* 813CCD14 | 48 03 AC 11 */	bl fn_81407924
+/* 813CCD14 | 48 03 AC 11 */	bl setText__Q33ipl5scene13SettingButtonFUl
 /* 813CCD18 | 80 7F 00 64 */	lwz r3, 0x64(r31)
 /* 813CCD1C | 38 80 00 16 */	li r4, 0x16
 /* 813CCD20 | 48 03 E4 19 */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813CCD24 | 48 03 AB 4D */	bl fn_81407870
+/* 813CCD24 | 48 03 AB 4D */	bl showBtn__Q33ipl5scene13SettingButtonFv
 /* 813CCD28 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813CCD2C | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 813CCD30 | 7C 08 03 A6 */	mtlr r0

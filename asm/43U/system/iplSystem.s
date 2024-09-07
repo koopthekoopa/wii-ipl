@@ -2087,7 +2087,7 @@
 /* 813348EC | 3F A0 81 09 */	lis r29, smArg__Q23ipl6System@ha
 /* 813348F0 | 3B BD 90 08 */	addi r29, r29, smArg__Q23ipl6System@l
 /* 813348F4 | 90 7D 00 B8 */	stw r3, 0xb8(r29)
-/* 813348F8 | 48 0C 6E 7D */	bl fn_813FB774
+/* 813348F8 | 48 0C 6E 7D */	bl makeMacAddr__Q33ipl3ncd10NCDSettingFv
 /* 813348FC | 80 9D 00 08 */	lwz r4, 0x8(r29)
 /* 81334900 | 38 60 07 10 */	li r3, 0x710
 /* 81334904 | 38 A0 00 04 */	li r5, 0x4

@@ -1286,11 +1286,11 @@
 /* 813A66E8 | 7C 7F 1B 78 */	mr r31, r3
 /* 813A66EC | 38 80 00 03 */	li r4, 0x3
 /* 813A66F0 | 38 A0 01 3B */	li r5, 0x13b
-/* 813A66F4 | 48 06 13 05 */	bl fn_814079F8
+/* 813A66F4 | 48 06 13 05 */	bl reserve__Q33ipl5scene13SettingButtonFiUl
 /* 813A66F8 | 7F E3 FB 78 */	mr r3, r31
 /* 813A66FC | 38 80 00 01 */	li r4, 0x1
 /* 813A6700 | 38 A0 00 00 */	li r5, 0x0
-/* 813A6704 | 48 06 12 F5 */	bl fn_814079F8
+/* 813A6704 | 48 06 12 F5 */	bl reserve__Q33ipl5scene13SettingButtonFiUl
 /* 813A6708 | 80 7E 00 80 */	lwz r3, 0x80(r30)
 /* 813A670C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813A6710 | 41 82 00 14 */	beq .L_813A6724
@@ -1614,15 +1614,15 @@
 /* 813A6B6C | 7C 7F 1B 78 */	mr r31, r3
 /* 813A6B70 | 38 80 00 02 */	li r4, 0x2
 /* 813A6B74 | 38 A0 00 00 */	li r5, 0x0
-/* 813A6B78 | 48 06 0E 81 */	bl fn_814079F8
+/* 813A6B78 | 48 06 0E 81 */	bl reserve__Q33ipl5scene13SettingButtonFiUl
 /* 813A6B7C | 7F E3 FB 78 */	mr r3, r31
 /* 813A6B80 | 7F C5 F3 78 */	mr r5, r30
 /* 813A6B84 | 38 80 00 03 */	li r4, 0x3
-/* 813A6B88 | 48 06 0E 71 */	bl fn_814079F8
+/* 813A6B88 | 48 06 0E 71 */	bl reserve__Q33ipl5scene13SettingButtonFiUl
 /* 813A6B8C | 7F E3 FB 78 */	mr r3, r31
 /* 813A6B90 | 38 80 00 01 */	li r4, 0x1
 /* 813A6B94 | 38 A0 00 00 */	li r5, 0x0
-/* 813A6B98 | 48 06 0E 61 */	bl fn_814079F8
+/* 813A6B98 | 48 06 0E 61 */	bl reserve__Q33ipl5scene13SettingButtonFiUl
 /* 813A6B9C | 2C 1E 00 FC */	cmpwi r30, 0xfc
 /* 813A6BA0 | 41 82 00 20 */	beq .L_813A6BC0
 /* 813A6BA4 | 40 80 00 10 */	bge .L_813A6BB4
@@ -1727,7 +1727,7 @@
 /* 813A6CDC | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
 /* 813A6CE0 | 80 63 00 64 */	lwz r3, 0x64(r3)
 /* 813A6CE4 | 48 06 44 55 */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813A6CE8 | 48 06 0B E5 */	bl fn_814078CC
+/* 813A6CE8 | 48 06 0B E5 */	bl hideBtn__Q33ipl5scene13SettingButtonFv
 /* 813A6CEC | 38 00 00 05 */	li r0, 0x5
 /* 813A6CF0 | 90 1F 00 3C */	stw r0, 0x3c(r31)
 .L_813A6CF4:

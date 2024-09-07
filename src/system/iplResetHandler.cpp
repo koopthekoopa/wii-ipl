@@ -23,8 +23,8 @@ namespace ipl {
         #pragma unused(pHeap)
 
         // Prepare the fade out.
-        System::getFader()->setStatus(EGG::Fader::STATUS_PREPARE_OUT);
-        System::getFader()->calc();
+        System::getSceneFader()->setStatus(EGG::Fader::STATUS_PREPARE_OUT);
+        System::getSceneFader()->calc();
 
         // Set the callbacks.
         OSSetResetCallback((OSResetCallback)cbReset);
@@ -120,8 +120,8 @@ namespace ipl {
         switch(mFatalState) {
             // Fade out
             case FATAL_STATE_FADE: {
-                if (System::getFader()->fadeOut()) {
-                    System::getFader()->fadeOut();
+                if (System::getSceneFader()->fadeOut()) {
+                    System::getSceneFader()->fadeOut();
 
                     mFatalState = FATAL_STATE_VIDEO;
                 }
@@ -130,7 +130,7 @@ namespace ipl {
             // Shutdown the video
             // (no need as it's already doing that in `FATAL_STATE_SYSTEM`)
             case FATAL_STATE_VIDEO: {
-                if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+                if (System::getSceneFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
                     VISetBlack(TRUE);
                     VIFlush();
 

@@ -206,7 +206,7 @@
 /* 813D8214 | 93 9D 2B 54 */	stw r28, 0x2b54(r29)
 /* 813D8218 | 80 65 00 64 */	lwz r3, 0x64(r5)
 /* 813D821C | 48 03 2F 1D */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813D8220 | 48 02 02 99 */	bl fn_813F84B8
+/* 813D8220 | 48 02 02 99 */	bl getProfileID__Q33ipl5scene7SettingFv
 /* 813D8224 | 7C 60 1B 78 */	mr r0, r3
 /* 813D8228 | 80 9D 28 18 */	lwz r4, 0x2818(r29)
 /* 813D822C | 38 7D 00 58 */	addi r3, r29, 0x58
@@ -459,7 +459,7 @@
 /* 813D85B0 | 88 DD 2B 60 */	lbz r6, 0x2b60(r29)
 /* 813D85B4 | 7F 83 E3 78 */	mr r3, r28
 /* 813D85B8 | 38 80 00 01 */	li r4, 0x1
-/* 813D85BC | 48 01 FF 65 */	bl fn_813F8520
+/* 813D85BC | 48 01 FF 65 */	bl setConnectTestResult__Q33ipl5scene7SettingFiibi
 .L_813D85C0:
 /* 813D85C0 | 38 00 00 07 */	li r0, 0x7
 /* 813D85C4 | 90 1D 2B 58 */	stw r0, 0x2b58(r29)
@@ -506,7 +506,7 @@
 /* 813D8658 | 80 63 00 64 */	lwz r3, 0x64(r3)
 /* 813D865C | 48 03 2A DD */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813D8660 | 7C 7C 1B 78 */	mr r28, r3
-/* 813D8664 | 48 01 FE B5 */	bl fn_813F8518
+/* 813D8664 | 48 01 FE B5 */	bl getUpdateTiming__Q33ipl5scene7SettingFv
 /* 813D8668 | 2C 03 00 04 */	cmpwi r3, 0x4
 /* 813D866C | 40 82 00 10 */	bne .L_813D867C
 /* 813D8670 | 38 00 00 09 */	li r0, 0x9
@@ -514,7 +514,7 @@
 /* 813D8678 | 48 00 06 08 */	b .L_813D8C80
 .L_813D867C:
 /* 813D867C | 7F 83 E3 78 */	mr r3, r28
-/* 813D8680 | 48 01 FE 99 */	bl fn_813F8518
+/* 813D8680 | 48 01 FE 99 */	bl getUpdateTiming__Q33ipl5scene7SettingFv
 /* 813D8684 | 2C 03 00 0A */	cmpwi r3, 0xa
 /* 813D8688 | 40 82 05 F8 */	bne .L_813D8C80
 /* 813D868C | 38 00 00 0E */	li r0, 0xe
@@ -892,7 +892,7 @@
 /* 813D8BAC | 38 80 00 03 */	li r4, 0x3
 /* 813D8BB0 | 88 DD 2B 60 */	lbz r6, 0x2b60(r29)
 /* 813D8BB4 | 38 E0 00 00 */	li r7, 0x0
-/* 813D8BB8 | 48 01 F9 69 */	bl fn_813F8520
+/* 813D8BB8 | 48 01 F9 69 */	bl setConnectTestResult__Q33ipl5scene7SettingFiibi
 /* 813D8BBC | 3B C0 00 01 */	li r30, 0x1
 /* 813D8BC0 | 48 00 00 C0 */	b .L_813D8C80
 .L_813D8BC4:
@@ -905,7 +905,7 @@
 /* 813D8BDC | 38 80 00 01 */	li r4, 0x1
 /* 813D8BE0 | 88 DD 2B 60 */	lbz r6, 0x2b60(r29)
 /* 813D8BE4 | 38 E0 00 00 */	li r7, 0x0
-/* 813D8BE8 | 48 01 F9 39 */	bl fn_813F8520
+/* 813D8BE8 | 48 01 F9 39 */	bl setConnectTestResult__Q33ipl5scene7SettingFiibi
 /* 813D8BEC | 3B C0 00 01 */	li r30, 0x1
 /* 813D8BF0 | 48 00 00 90 */	b .L_813D8C80
 .L_813D8BF4:
@@ -943,7 +943,7 @@
 /* 813D8C6C | 38 80 00 02 */	li r4, 0x2
 /* 813D8C70 | 88 DD 2B 60 */	lbz r6, 0x2b60(r29)
 /* 813D8C74 | 38 E0 00 00 */	li r7, 0x0
-/* 813D8C78 | 48 01 F8 A9 */	bl fn_813F8520
+/* 813D8C78 | 48 01 F8 A9 */	bl setConnectTestResult__Q33ipl5scene7SettingFiibi
 /* 813D8C7C | 3B C0 00 01 */	li r30, 0x1
 .L_813D8C80:
 /* 813D8C80 | 39 61 00 60 */	addi r11, r1, 0x60

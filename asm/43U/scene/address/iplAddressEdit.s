@@ -1843,7 +1843,7 @@
 /* 81389A0C | 38 61 00 08 */	addi r3, r1, 0x8
 /* 81389A10 | 48 1E 07 69 */	bl fn_8156A178
 /* 81389A14 | 7C 7F 1B 78 */	mr r31, r3
-/* 81389A18 | 48 07 1E D5 */	bl fn_813FB8EC
+/* 81389A18 | 48 07 1E D5 */	bl getConnectEnableFlag__Q33ipl3ncd10NCDSettingFv
 /* 81389A1C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81389A20 | 40 82 00 3C */	bne .L_81389A5C
 /* 81389A24 | 7F C3 F3 78 */	mr r3, r30

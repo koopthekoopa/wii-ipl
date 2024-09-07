@@ -421,7 +421,7 @@
 /* 8136FF0C | 90 1D 00 08 */	stw r0, 0x8(r29)
 /* 8136FF10 | 48 00 01 68 */	b .L_81370078
 .L_8136FF14:
-/* 8136FF14 | 48 08 C4 61 */	bl fn_813FC374
+/* 8136FF14 | 48 08 C4 61 */	bl getRequestNum__Q33ipl8parental8ParentalFv
 /* 8136FF18 | 90 7D 00 08 */	stw r3, 0x8(r29)
 /* 8136FF1C | 48 00 01 5C */	b .L_81370078
 .L_8136FF20:
@@ -440,18 +440,18 @@
 /* 8136FF48 | 38 A0 00 42 */	li r5, 0x42
 /* 8136FF4C | 38 63 05 BC */	addi r3, r3, 0x5bc
 /* 8136FF50 | 4B FC 03 E5 */	bl memset
-/* 8136FF54 | 48 08 B6 19 */	bl fn_813FB56C
+/* 8136FF54 | 48 08 B6 19 */	bl getPrivacyMode__Q33ipl3ncd10NCDSettingFv
 /* 8136FF58 | 88 8D A9 55 */	lbz r4, lbl_81698995@sda21(r0)
 /* 8136FF5C | 54 65 04 3E */	clrlwi r5, r3, 16
 /* 8136FF60 | 38 7F 00 F1 */	addi r3, r31, 0xf1
 /* 8136FF64 | 4C C6 31 82 */	crclr cr1eq
 /* 8136FF68 | 48 1B E7 39 */	bl OSReport
-/* 8136FF6C | 48 08 B6 01 */	bl fn_813FB56C
+/* 8136FF6C | 48 08 B6 01 */	bl getPrivacyMode__Q33ipl3ncd10NCDSettingFv
 /* 8136FF70 | 88 0D A9 55 */	lbz r0, lbl_81698995@sda21(r0)
 /* 8136FF74 | 54 63 04 3E */	clrlwi r3, r3, 16
 /* 8136FF78 | 7C 00 18 00 */	cmpw r0, r3
 /* 8136FF7C | 40 82 00 6C */	bne .L_8136FFE8
-/* 8136FF80 | 48 08 B7 35 */	bl fn_813FB6B4
+/* 8136FF80 | 48 08 B7 35 */	bl getPrivacyLen__Q33ipl3ncd10NCDSettingFv
 /* 8136FF84 | 54 64 04 3E */	clrlwi r4, r3, 16
 /* 8136FF88 | 38 7F 00 FD */	addi r3, r31, 0xfd
 /* 8136FF8C | 4C C6 31 82 */	crclr cr1eq
@@ -465,7 +465,7 @@
 /* 8136FFA8 | 3B 39 00 01 */	addi r25, r25, 0x1
 /* 8136FFAC | 9B 63 05 BC */	stb r27, 0x5bc(r3)
 .L_8136FFB0:
-/* 8136FFB0 | 48 08 B7 05 */	bl fn_813FB6B4
+/* 8136FFB0 | 48 08 B7 05 */	bl getPrivacyLen__Q33ipl3ncd10NCDSettingFv
 /* 8136FFB4 | 54 60 04 3E */	clrlwi r0, r3, 16
 /* 8136FFB8 | 7C 19 00 00 */	cmpw r25, r0
 /* 8136FFBC | 41 80 FF E4 */	blt .L_8136FFA0
@@ -563,7 +563,7 @@
 /* 81370100 | 7C 04 F9 AE */	stbx r0, r4, r31
 /* 81370104 | 48 00 03 4C */	b .L_81370450
 .L_81370108:
-/* 81370108 | 48 08 B3 ED */	bl fn_813FB4F4
+/* 81370108 | 48 08 B3 ED */	bl getUseProfileID__Q33ipl3ncd10NCDSettingFv
 /* 8137010C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 81370110 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 81370114 | 7C 64 F9 AE */	stbx r3, r4, r31
@@ -635,34 +635,34 @@
 /* 813701F4 | 7C 04 19 AE */	stbx r0, r4, r3
 /* 813701F8 | 48 00 02 58 */	b .L_81370450
 .L_813701FC:
-/* 813701FC | 48 08 9E D9 */	bl fn_813FA0D4
+/* 813701FC | 48 08 9E D9 */	bl checkThisFlag__Q33ipl3ncd10NCDSettingFv
 /* 81370200 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 81370204 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 81370208 | 7C 64 F9 AE */	stbx r3, r4, r31
 /* 8137020C | 48 00 02 44 */	b .L_81370450
 .L_81370210:
 /* 81370210 | 38 60 00 00 */	li r3, 0x0
-/* 81370214 | 48 08 9E 15 */	bl fn_813FA028
+/* 81370214 | 48 08 9E 15 */	bl checkFlag__Q33ipl3ncd10NCDSettingFi
 /* 81370218 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 8137021C | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 81370220 | 7C 64 F9 AE */	stbx r3, r4, r31
 /* 81370224 | 48 00 02 2C */	b .L_81370450
 .L_81370228:
 /* 81370228 | 38 60 00 01 */	li r3, 0x1
-/* 8137022C | 48 08 9D FD */	bl fn_813FA028
+/* 8137022C | 48 08 9D FD */	bl checkFlag__Q33ipl3ncd10NCDSettingFi
 /* 81370230 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 81370234 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 81370238 | 7C 64 F9 AE */	stbx r3, r4, r31
 /* 8137023C | 48 00 02 14 */	b .L_81370450
 .L_81370240:
 /* 81370240 | 38 60 00 02 */	li r3, 0x2
-/* 81370244 | 48 08 9D E5 */	bl fn_813FA028
+/* 81370244 | 48 08 9D E5 */	bl checkFlag__Q33ipl3ncd10NCDSettingFi
 /* 81370248 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 8137024C | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 81370250 | 7C 64 F9 AE */	stbx r3, r4, r31
 /* 81370254 | 48 00 01 FC */	b .L_81370450
 .L_81370258:
-/* 81370258 | 48 08 B2 75 */	bl fn_813FB4CC
+/* 81370258 | 48 08 B2 75 */	bl getID__Q33ipl3ncd10NCDSettingFv
 /* 8137025C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 81370260 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 81370264 | 7C 64 F9 AE */	stbx r3, r4, r31
@@ -676,7 +676,7 @@
 /* 81370280 | 98 0D A9 56 */	stb r0, lbl_81698996@sda21(r0)
 /* 81370284 | 48 00 01 CC */	b .L_81370450
 .L_81370288:
-/* 81370288 | 48 08 B2 E5 */	bl fn_813FB56C
+/* 81370288 | 48 08 B2 E5 */	bl getPrivacyMode__Q33ipl3ncd10NCDSettingFv
 /* 8137028C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 81370290 | 38 00 00 00 */	li r0, 0x0
 /* 81370294 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
@@ -684,49 +684,49 @@
 /* 8137029C | 7C 64 F9 AE */	stbx r3, r4, r31
 /* 813702A0 | 48 00 01 B0 */	b .L_81370450
 .L_813702A4:
-/* 813702A4 | 48 08 9E A9 */	bl fn_813FA14C
+/* 813702A4 | 48 08 9E A9 */	bl checkDHCPFlag__Q33ipl3ncd10NCDSettingFv
 /* 813702A8 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 813702AC | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 813702B0 | 7C 64 F9 AE */	stbx r3, r4, r31
 /* 813702B4 | 48 00 01 9C */	b .L_81370450
 .L_813702B8:
-/* 813702B8 | 48 08 9E B5 */	bl fn_813FA16C
+/* 813702B8 | 48 08 9E B5 */	bl checkDNSFlag__Q33ipl3ncd10NCDSettingFv
 /* 813702BC | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 813702C0 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 813702C4 | 7C 64 F9 AE */	stbx r3, r4, r31
 /* 813702C8 | 48 00 01 88 */	b .L_81370450
 .L_813702CC:
-/* 813702CC | 48 08 B0 35 */	bl fn_813FB300
+/* 813702CC | 48 08 B0 35 */	bl backupData__Q33ipl3ncd10NCDSettingFv
 /* 813702D0 | 48 00 01 80 */	b .L_81370450
 .L_813702D4:
-/* 813702D4 | 48 08 B0 45 */	bl fn_813FB318
+/* 813702D4 | 48 08 B0 45 */	bl resetData__Q33ipl3ncd10NCDSettingFv
 /* 813702D8 | 48 00 01 78 */	b .L_81370450
 .L_813702DC:
-/* 813702DC | 48 08 A0 41 */	bl fn_813FA31C
+/* 813702DC | 48 08 A0 41 */	bl checkProxyFlag__Q33ipl3ncd10NCDSettingFv
 /* 813702E0 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 813702E4 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 813702E8 | 7C 64 F9 AE */	stbx r3, r4, r31
 /* 813702EC | 48 00 01 64 */	b .L_81370450
 .L_813702F0:
-/* 813702F0 | 48 08 A0 49 */	bl fn_813FA338
+/* 813702F0 | 48 08 A0 49 */	bl checkBasic__Q33ipl3ncd10NCDSettingFv
 /* 813702F4 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 813702F8 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 813702FC | 7C 64 F9 AE */	stbx r3, r4, r31
 /* 81370300 | 48 00 01 50 */	b .L_81370450
 .L_81370304:
-/* 81370304 | 48 08 A0 51 */	bl fn_813FA354
+/* 81370304 | 48 08 A0 51 */	bl checkChangeEnable__Q33ipl3ncd10NCDSettingFv
 /* 81370308 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 8137030C | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 81370310 | 7C 64 F9 AE */	stbx r3, r4, r31
 /* 81370314 | 48 00 01 3C */	b .L_81370450
 .L_81370318:
-/* 81370318 | 48 08 B8 85 */	bl fn_813FBB9C
+/* 81370318 | 48 08 B8 85 */	bl checkFlags__Q33ipl8parental8ParentalFv
 /* 8137031C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 81370320 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 81370324 | 7C 64 F9 AE */	stbx r3, r4, r31
 /* 81370328 | 48 00 01 28 */	b .L_81370450
 .L_8137032C:
-/* 8137032C | 48 08 BA E1 */	bl fn_813FBE0C
+/* 8137032C | 48 08 BA E1 */	bl checkSecQ__Q33ipl8parental8ParentalFv
 /* 81370330 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 81370334 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 81370338 | 7C 64 F9 AE */	stbx r3, r4, r31
@@ -737,18 +737,18 @@
 /* 81370348 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 8137034C | 7C 04 19 AE */	stbx r0, r4, r3
 /* 81370350 | 7C 03 03 78 */	mr r3, r0
-/* 81370354 | 48 08 BB B9 */	bl fn_813FBF0C
+/* 81370354 | 48 08 BB B9 */	bl setSecQ__Q33ipl8parental8ParentalFUc
 /* 81370358 | 48 00 00 F8 */	b .L_81370450
 .L_8137035C:
 /* 8137035C | 88 6D A9 55 */	lbz r3, lbl_81698995@sda21(r0)
-/* 81370360 | 48 08 BB 8D */	bl fn_813FBEEC
+/* 81370360 | 48 08 BB 8D */	bl setRating__Q33ipl8parental8ParentalFUc
 /* 81370364 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
 /* 81370368 | 88 0D A9 55 */	lbz r0, lbl_81698995@sda21(r0)
 /* 8137036C | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
 /* 81370370 | 98 03 00 2D */	stb r0, 0x2d(r3)
 /* 81370374 | 48 00 00 DC */	b .L_81370450
 .L_81370378:
-/* 81370378 | 48 08 BA B5 */	bl fn_813FBE2C
+/* 81370378 | 48 08 BA B5 */	bl getOgn__Q33ipl8parental8ParentalFv
 /* 8137037C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 81370380 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 81370384 | 7C 64 F9 AE */	stbx r3, r4, r31
@@ -772,13 +772,13 @@
 /* 813703C0 | 7C 64 F9 AE */	stbx r3, r4, r31
 /* 813703C4 | 48 00 00 8C */	b .L_81370450
 .L_813703C8:
-/* 813703C8 | 48 08 B1 2D */	bl fn_813FB4F4
+/* 813703C8 | 48 08 B1 2D */	bl getUseProfileID__Q33ipl3ncd10NCDSettingFv
 /* 813703CC | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 813703D0 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 813703D4 | 7C 64 F9 AE */	stbx r3, r4, r31
 /* 813703D8 | 48 00 00 78 */	b .L_81370450
 .L_813703DC:
-/* 813703DC | 48 08 9D 51 */	bl fn_813FA12C
+/* 813703DC | 48 08 9D 51 */	bl checkConnectTestFlag__Q33ipl3ncd10NCDSettingFv
 /* 813703E0 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 813703E4 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 813703E8 | 7C 64 F9 AE */	stbx r3, r4, r31
@@ -834,7 +834,7 @@
 .L_81370498:
 /* 81370498 | 2C 1F 00 40 */	cmpwi r31, 0x40
 /* 8137049C | 40 82 00 20 */	bne .L_813704BC
-/* 813704A0 | 48 08 B7 29 */	bl fn_813FBBC8
+/* 813704A0 | 48 08 B7 29 */	bl checkRestrictions__Q33ipl8parental8ParentalFv
 /* 813704A4 | 90 61 00 A4 */	stw r3, 0xa4(r1)
 /* 813704A8 | C8 22 82 B8 */	lfd f1, lbl_816946B8@sda21(r0)
 /* 813704AC | C8 01 00 A0 */	lfd f0, 0xa0(r1)
@@ -1088,16 +1088,16 @@
 /* 81370808 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
 /* 8137080C | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
 /* 81370810 | 7C 63 F0 AE */	lbzx r3, r3, r30
-/* 81370814 | 48 08 98 0D */	bl fn_813FA020
+/* 81370814 | 48 08 98 0D */	bl initSetID__Q33ipl3ncd10NCDSettingFUs
 /* 81370818 | 48 00 02 84 */	b .L_81370A9C
 .L_8137081C:
-/* 8137081C | 48 08 A2 B5 */	bl fn_813FAAD0
+/* 8137081C | 48 08 A2 B5 */	bl setWired__Q33ipl3ncd10NCDSettingFv
 /* 81370820 | 48 00 02 7C */	b .L_81370A9C
 .L_81370824:
 /* 81370824 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
 /* 81370828 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
 /* 8137082C | 7C 63 F0 AE */	lbzx r3, r3, r30
-/* 81370830 | 48 08 A3 11 */	bl fn_813FAB40
+/* 81370830 | 48 08 A3 11 */	bl setWireless__Q33ipl3ncd10NCDSettingFUc
 /* 81370834 | 48 00 02 68 */	b .L_81370A9C
 .L_81370838:
 /* 81370838 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
@@ -1108,80 +1108,80 @@
 /* 8137084C | 48 00 07 61 */	bl startFunc__Q23www10wiisettingFUc
 /* 81370850 | 48 00 02 4C */	b .L_81370A9C
 .L_81370854:
-/* 81370854 | 48 08 AD 19 */	bl fn_813FB56C
+/* 81370854 | 48 08 AD 19 */	bl getPrivacyMode__Q33ipl3ncd10NCDSettingFv
 /* 81370858 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 8137085C | 98 6D A9 55 */	stb r3, lbl_81698995@sda21(r0)
 /* 81370860 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 81370864 | 7C 64 F0 AE */	lbzx r3, r4, r30
-/* 81370868 | 48 08 A4 29 */	bl fn_813FAC90
+/* 81370868 | 48 08 A4 29 */	bl setPrivacyMode__Q33ipl3ncd10NCDSettingFUs
 /* 8137086C | 48 00 02 30 */	b .L_81370A9C
 .L_81370870:
 /* 81370870 | 88 6D A9 55 */	lbz r3, lbl_81698995@sda21(r0)
-/* 81370874 | 48 08 A4 1D */	bl fn_813FAC90
+/* 81370874 | 48 08 A4 1D */	bl setPrivacyMode__Q33ipl3ncd10NCDSettingFUs
 /* 81370878 | 48 00 02 24 */	b .L_81370A9C
 .L_8137087C:
 /* 8137087C | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
 /* 81370880 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
 /* 81370884 | 7C 63 F0 AE */	lbzx r3, r3, r30
-/* 81370888 | 48 08 A1 45 */	bl fn_813FA9CC
+/* 81370888 | 48 08 A1 45 */	bl setDHCPFlag__Q33ipl3ncd10NCDSettingFUc
 /* 8137088C | 48 00 02 10 */	b .L_81370A9C
 .L_81370890:
 /* 81370890 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
 /* 81370894 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
 /* 81370898 | 7C 63 F0 AE */	lbzx r3, r3, r30
-/* 8137089C | 48 08 A1 81 */	bl fn_813FAA1C
+/* 8137089C | 48 08 A1 81 */	bl setDNSFlag__Q33ipl3ncd10NCDSettingFUc
 /* 813708A0 | 48 00 01 FC */	b .L_81370A9C
 .L_813708A4:
 /* 813708A4 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
 /* 813708A8 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
 /* 813708AC | 7C 63 F0 AE */	lbzx r3, r3, r30
-/* 813708B0 | 48 08 A1 BD */	bl fn_813FAA6C
+/* 813708B0 | 48 08 A1 BD */	bl setProxyFlag__Q33ipl3ncd10NCDSettingFUc
 /* 813708B4 | 48 00 01 E8 */	b .L_81370A9C
 .L_813708B8:
 /* 813708B8 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
 /* 813708BC | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
 /* 813708C0 | 7C 63 F0 AE */	lbzx r3, r3, r30
-/* 813708C4 | 48 08 A1 ED */	bl fn_813FAAB0
+/* 813708C4 | 48 08 A1 ED */	bl setBasicFlag__Q33ipl3ncd10NCDSettingFUc
 /* 813708C8 | 48 00 01 D4 */	b .L_81370A9C
 .L_813708CC:
 /* 813708CC | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
 /* 813708D0 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
 /* 813708D4 | 7C 63 F0 AE */	lbzx r3, r3, r30
-/* 813708D8 | 48 08 A2 FD */	bl fn_813FABD4
+/* 813708D8 | 48 08 A2 FD */	bl changeConnectType__Q33ipl3ncd10NCDSettingFUc
 /* 813708DC | 48 00 01 C0 */	b .L_81370A9C
 .L_813708E0:
 /* 813708E0 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
 /* 813708E4 | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
 /* 813708E8 | 7C 63 F0 AE */	lbzx r3, r3, r30
-/* 813708EC | 48 08 B5 A5 */	bl fn_813FBE90
-/* 813708F0 | 48 08 B0 99 */	bl fn_813FB988
+/* 813708EC | 48 08 B5 A5 */	bl setFlags__Q33ipl8parental8ParentalFUc
+/* 813708F0 | 48 08 B0 99 */	bl adjustNWC24Flag__Q33ipl3ncd10NCDSettingFv
 /* 813708F4 | 48 00 01 A8 */	b .L_81370A9C
 .L_813708F8:
 /* 813708F8 | C8 3D 00 08 */	lfd f1, 0x8(r29)
 /* 813708FC | 48 28 8A 9D */	bl __cvt_fp2unsigned
 /* 81370900 | 54 60 05 EF */	rlwinm. r0, r3, 0, 23, 23
 /* 81370904 | 41 82 01 98 */	beq .L_81370A9C
-/* 81370908 | 48 08 B2 B1 */	bl fn_813FBBB8
+/* 81370908 | 48 08 B2 B1 */	bl checkRating__Q33ipl8parental8ParentalFv
 /* 8137090C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 81370910 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 81370914 | 7C 64 F1 AE */	stbx r3, r4, r30
 /* 81370918 | 48 00 01 84 */	b .L_81370A9C
 .L_8137091C:
-/* 8137091C | 48 08 B2 9D */	bl fn_813FBBB8
+/* 8137091C | 48 08 B2 9D */	bl checkRating__Q33ipl8parental8ParentalFv
 /* 81370920 | 98 6D A9 55 */	stb r3, lbl_81698995@sda21(r0)
 /* 81370924 | 48 00 01 78 */	b .L_81370A9C
 .L_81370928:
 /* 81370928 | 3C 60 81 09 */	lis r3, sWiiData__Q23www10wiisetting@ha
 /* 8137092C | 38 63 A4 B8 */	addi r3, r3, sWiiData__Q23www10wiisetting@l
 /* 81370930 | 7C 63 F0 AE */	lbzx r3, r3, r30
-/* 81370934 | 48 08 B5 D9 */	bl fn_813FBF0C
+/* 81370934 | 48 08 B5 D9 */	bl setSecQ__Q33ipl8parental8ParentalFUc
 /* 81370938 | 48 00 01 64 */	b .L_81370A9C
 .L_8137093C:
-/* 8137093C | 48 08 B4 D1 */	bl fn_813FBE0C
+/* 8137093C | 48 08 B4 D1 */	bl checkSecQ__Q33ipl8parental8ParentalFv
 /* 81370940 | 98 6D A9 55 */	stb r3, lbl_81698995@sda21(r0)
 /* 81370944 | 48 00 01 58 */	b .L_81370A9C
 .L_81370948:
-/* 81370948 | 48 08 A9 E9 */	bl fn_813FB330
+/* 81370948 | 48 08 A9 E9 */	bl setUseProfileID__Q33ipl3ncd10NCDSettingFv
 /* 8137094C | 48 00 01 50 */	b .L_81370A9C
 .L_81370950:
 /* 81370950 | 4B FC 51 3D */	bl getRegion__Q23ipl6SystemFv
@@ -1249,7 +1249,7 @@
 /* 81370A34 | 98 04 00 3C */	stb r0, 0x3c(r4)
 /* 81370A38 | 48 00 00 64 */	b .L_81370A9C
 .L_81370A3C:
-/* 81370A3C | 48 08 B4 31 */	bl fn_813FBE6C
+/* 81370A3C | 48 08 B4 31 */	bl getCountry__Q33ipl8parental8ParentalFv
 /* 81370A40 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 81370A44 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 81370A48 | 98 64 00 3C */	stb r3, 0x3c(r4)
@@ -1385,7 +1385,7 @@
 /* 81370BFC | 98 81 00 08 */	stb r4, 0x8(r1)
 /* 81370C00 | 98 01 00 09 */	stb r0, 0x9(r1)
 /* 81370C04 | 48 1F 94 F5 */	bl fn_8156A0F8
-/* 81370C08 | 48 08 AD 81 */	bl fn_813FB988
+/* 81370C08 | 48 08 AD 81 */	bl adjustNWC24Flag__Q33ipl3ncd10NCDSettingFv
 /* 81370C0C | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
 /* 81370C10 | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
 /* 81370C14 | 88 03 02 BC */	lbz r0, 0x2bc(r3)
@@ -1514,11 +1514,11 @@
 /* 81370DC4 | 48 00 00 38 */	b .L_81370DFC
 .L_81370DC8:
 /* 81370DC8 | 7C 7E 20 AE */	lbzx r3, r30, r4
-/* 81370DCC | 48 08 B1 21 */	bl fn_813FBEEC
+/* 81370DCC | 48 08 B1 21 */	bl setRating__Q33ipl8parental8ParentalFUc
 /* 81370DD0 | 48 00 00 2C */	b .L_81370DFC
 .L_81370DD4:
 /* 81370DD4 | 7C 7E 20 AE */	lbzx r3, r30, r4
-/* 81370DD8 | 48 08 B1 E1 */	bl fn_813FBFB8
+/* 81370DD8 | 48 08 B1 E1 */	bl setRestrictions__Q33ipl8parental8ParentalFUl
 /* 81370DDC | 48 00 00 20 */	b .L_81370DFC
 .L_81370DE0:
 /* 81370DE0 | 88 7E 00 08 */	lbz r3, 0x8(r30)
@@ -1528,7 +1528,7 @@
 /* 81370DF0 | 48 00 00 0C */	b .L_81370DFC
 .L_81370DF4:
 /* 81370DF4 | 88 7E 00 3C */	lbz r3, 0x3c(r30)
-/* 81370DF8 | 48 08 B1 79 */	bl fn_813FBF70
+/* 81370DF8 | 48 08 B1 79 */	bl setCountry__Q33ipl8parental8ParentalFUc
 .L_81370DFC:
 /* 81370DFC | 88 0D A9 54 */	lbz r0, lbl_81698994@sda21(r0)
 /* 81370E00 | 2C 00 00 0F */	cmpwi r0, 0xf
@@ -1729,11 +1729,11 @@
 /* 81371080 | 98 64 00 04 */	stb r3, 0x4(r4)
 /* 81371084 | 48 00 00 A4 */	b .L_81371128
 .L_81371088:
-/* 81371088 | 48 08 A1 71 */	bl fn_813FB1F8
+/* 81371088 | 48 08 A1 71 */	bl clearData__Q33ipl3ncd10NCDSettingFv
 /* 8137108C | 48 00 00 9C */	b .L_81371128
 .L_81371090:
 /* 81371090 | 38 60 00 00 */	li r3, 0x0
-/* 81371094 | 48 08 AD 59 */	bl fn_813FBDEC
+/* 81371094 | 48 08 AD 59 */	bl checkMistake__Q33ipl8parental8ParentalFUc
 /* 81371098 | 7C 7F 1B 78 */	mr r31, r3
 /* 8137109C | 38 7E 08 44 */	addi r3, r30, 0x844
 /* 813710A0 | 57 E4 06 3E */	clrlwi r4, r31, 24
@@ -1743,7 +1743,7 @@
 /* 813710B0 | 48 00 00 78 */	b .L_81371128
 .L_813710B4:
 /* 813710B4 | 38 60 00 01 */	li r3, 0x1
-/* 813710B8 | 48 08 AD 35 */	bl fn_813FBDEC
+/* 813710B8 | 48 08 AD 35 */	bl checkMistake__Q33ipl8parental8ParentalFUc
 /* 813710BC | 7C 7F 1B 78 */	mr r31, r3
 /* 813710C0 | 38 7E 08 44 */	addi r3, r30, 0x844
 /* 813710C4 | 57 E4 06 3E */	clrlwi r4, r31, 24
@@ -1753,7 +1753,7 @@
 /* 813710D4 | 48 00 00 54 */	b .L_81371128
 .L_813710D8:
 /* 813710D8 | 38 60 00 02 */	li r3, 0x2
-/* 813710DC | 48 08 AD 11 */	bl fn_813FBDEC
+/* 813710DC | 48 08 AD 11 */	bl checkMistake__Q33ipl8parental8ParentalFUc
 /* 813710E0 | 7C 7F 1B 78 */	mr r31, r3
 /* 813710E4 | 38 7E 08 44 */	addi r3, r30, 0x844
 /* 813710E8 | 57 E4 06 3E */	clrlwi r4, r31, 24
@@ -1762,18 +1762,18 @@
 /* 813710F4 | 9B ED A9 56 */	stb r31, lbl_81698996@sda21(r0)
 /* 813710F8 | 48 00 00 30 */	b .L_81371128
 .L_813710FC:
-/* 813710FC | 48 08 A1 55 */	bl fn_813FB250
+/* 813710FC | 48 08 A1 55 */	bl clearLocal__Q33ipl3ncd10NCDSettingFv
 /* 81371100 | 48 00 00 28 */	b .L_81371128
 .L_81371104:
-/* 81371104 | 48 08 A1 71 */	bl fn_813FB274
+/* 81371104 | 48 08 A1 71 */	bl write__Q33ipl3ncd10NCDSettingFv
 /* 81371108 | 48 00 00 20 */	b .L_81371128
 .L_8137110C:
-/* 8137110C | 48 08 AF 79 */	bl fn_813FC084
+/* 8137110C | 48 08 AF 79 */	bl write__Q33ipl8parental8ParentalFv
 /* 81371110 | 48 00 00 18 */	b .L_81371128
 .L_81371114:
-/* 81371114 | 48 08 B0 09 */	bl fn_813FC11C
+/* 81371114 | 48 08 B0 09 */	bl clear__Q33ipl8parental8ParentalFv
 .L_81371118:
-/* 81371118 | 48 08 AA B1 */	bl fn_813FBBC8
+/* 81371118 | 48 08 AA B1 */	bl checkRestrictions__Q33ipl8parental8ParentalFv
 /* 8137111C | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 81371120 | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
 /* 81371124 | 98 64 00 40 */	stb r3, 0x40(r4)

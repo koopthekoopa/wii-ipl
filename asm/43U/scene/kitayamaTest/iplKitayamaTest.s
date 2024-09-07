@@ -630,7 +630,7 @@
 /* 813BE894 | 48 04 C8 A5 */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813BE898 | 7F 65 DB 78 */	mr r5, r27
 /* 813BE89C | 38 80 00 01 */	li r4, 0x1
-/* 813BE8A0 | 48 03 A7 C1 */	bl fn_813F9060
+/* 813BE8A0 | 48 03 A7 C1 */	bl setInitializeResult__Q33ipl5scene7SettingFbi
 /* 813BE8A4 | 38 00 00 0B */	li r0, 0xb
 /* 813BE8A8 | 3B C0 00 01 */	li r30, 0x1
 /* 813BE8AC | 90 1D 00 60 */	stw r0, 0x60(r29)

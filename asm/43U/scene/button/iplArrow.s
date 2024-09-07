@@ -61,7 +61,7 @@
 /* 8139DB20 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8139DB24 | 40 82 00 0C */	bne .L_8139DB30
 /* 8139DB28 | 38 7B 00 70 */	addi r3, r27, 0x70
-/* 8139DB2C | 48 04 D2 B1 */	bl fn_813EADDC
+/* 8139DB2C | 48 04 D2 B1 */	bl iplUnk1_813EADDC
 .L_8139DB30:
 /* 8139DB30 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8139DB34 | 48 25 B9 D5 */	bl _restgpr_26
