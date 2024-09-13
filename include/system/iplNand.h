@@ -12,6 +12,11 @@ namespace ipl {
         class LayoutFile {
             public:
                 LayoutFile();
+                virtual ~LayoutFile();
+
+                virtual void    read();
+                virtual void    write();
+                virtual BOOL    isFinished();
         };
         
         class Manager {
@@ -26,6 +31,7 @@ namespace ipl {
                  * @return The Layout File Data as `ipl::nand::LayoutFile`.
                  */
                 LayoutFile* readLayout(EGG::Heap* pHeap, const char* archiveName, bool unk);
+                LayoutFile* readLayoutAsync(EGG::Heap* pHeap, const char* archiveName, bool unk);
 
                 void        closeContentsAll();
                 void        sendToken(int token);

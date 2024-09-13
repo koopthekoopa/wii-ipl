@@ -419,7 +419,7 @@
 /* 813331B8 | 7C 08 02 A6 */	mflr r0
 /* 813331BC | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813331C0 | 93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813331C4 | 48 20 2A D5 */	bl fn_81535C98
+/* 813331C4 | 48 20 2A D5 */	bl OSGetTick
 /* 813331C8 | 3F E0 81 09 */	lis r31, smArg__Q23ipl6System@ha
 /* 813331CC | 3B FF 90 08 */	addi r31, r31, smArg__Q23ipl6System@l
 /* 813331D0 | 80 7F 00 E0 */	lwz r3, 0xe0(r31)
@@ -1665,7 +1665,7 @@
 /* 8133429C | 48 20 A4 AD */	bl fn_8153E748
 .L_813342A0:
 /* 813342A0 | 48 23 56 AD */	bl fn_8156994C
-/* 813342A4 | 48 20 19 F5 */	bl fn_81535C98
+/* 813342A4 | 48 20 19 F5 */	bl OSGetTick
 /* 813342A8 | 38 60 00 00 */	li r3, 0x0
 /* 813342AC | 48 00 99 61 */	bl throwNandCheckCommand__Q23ipl8nandwallFPv
 /* 813342B0 | 4B FF E9 BD */	bl createRootHeap___Q23ipl6SystemFv
@@ -1936,7 +1936,7 @@
 /* 813346A4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813346A8 | 7C 7E 1B 78 */	mr r30, r3
 /* 813346AC | 41 82 00 0C */	beq .L_813346B8
-/* 813346B0 | 48 20 15 E9 */	bl fn_81535C98
+/* 813346B0 | 48 20 15 E9 */	bl OSGetTick
 /* 813346B4 | 90 7E 00 00 */	stw r3, 0x0(r30)
 .L_813346B8:
 /* 813346B8 | 3F A0 81 09 */	lis r29, smArg__Q23ipl6System@ha

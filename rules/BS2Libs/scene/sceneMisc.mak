@@ -1,4 +1,4 @@
-SCENE_MISC_OBJECTS	=	$(BS2_OBJASM_PATH)/scene/sceneMisc/iplReboot.o \
+SCENE_MISC_OBJECTS	=	$(BS2_OBJ_PATH)/scene/sceneMisc/iplReboot.o \
 						$(BS2_OBJASM_PATH)/scene/sceneMisc/iplRootScene.o
 
 DEPENDENCIES += $(SCENE_MISC_OBJECTS:.o=.d)

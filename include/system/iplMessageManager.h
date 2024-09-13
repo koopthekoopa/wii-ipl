@@ -14,12 +14,12 @@ namespace ipl {
                 /**
                  * @return The message data in use.
                  */
-                Message* getMessageData() { return mpMessageData; }
+                Message* getMessage() { return mpMessage; }
             
             private:
                 void initMessage();
 
-                Message* mpMessageData; // 0x00
+                Message* mpMessage; // 0x00
         };
     }
 }

@@ -1,4 +1,4 @@
-BACKMENU_OBJECTS	=	$(BS2_OBJASM_PATH)/scene/backMenu/iplBackMenu.o \
+BACKMENU_OBJECTS	=	$(BS2_OBJ_PATH)/scene/backMenu/iplBackMenu.o \
 						$(DATA_OUT_ROOT)/backToWiiMenu.arc.o
 
 DEPENDENCIES += $(BACKMENU_OBJECTS:.o=.d)

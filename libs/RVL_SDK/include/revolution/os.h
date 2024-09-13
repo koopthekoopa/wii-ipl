@@ -57,16 +57,19 @@ u32 __OSCoreClock       : OS_BASE_CACHED | 0x000000FC;
 #define OSMicrosecondsToTicks(us)       (((us) * (OS_TIMER_CLOCK / 125000)) / 8)
 #define OSNanosecondsToTicks(ns)        (((ns) * (OS_TIMER_CLOCK / 125000)) / 8000)
 
-#define OSSleepSeconds(sec)         OSSleepTicks(OSSecondsToTicks((OSTime)s))
-#define OSSleepMilliseconds(ms)     OSSleepTicks(OSMillisecondsToTicks((OSTime)ms))
-#define OSSleepMicroseconds(us)     OSSleepTicks(OSMicrosecondsToTicks((OSTime)us))
-#define OSSleepNanoseconds(ns)      OSSleepTicks(OSNanosecondsToTicks((OSTime)ns))
+#define OSDiffTick(tick1, tick0)        ((s32)(tick1) - (s32)(tick0))
+
+#define OSSleepSeconds(sec)             OSSleepTicks(OSSecondsToTicks((OSTime)s))
+#define OSSleepMilliseconds(ms)         OSSleepTicks(OSMillisecondsToTicks((OSTime)ms))
+#define OSSleepMicroseconds(us)         OSSleepTicks(OSMicrosecondsToTicks((OSTime)us))
+#define OSSleepNanoseconds(ns)          OSSleepTicks(OSNanosecondsToTicks((OSTime)ns))
 
 void    OSShutdownSystem();
 
 void    OSReport(const char* msg, ...);
 void    OSVReport(const char* msg, va_list list);
 
+OSTick  OSGetTick();
 void    OSSleepTicks(OSTime ticks);
 
 BOOL    OSDisableInterrupts();

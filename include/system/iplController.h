@@ -21,11 +21,11 @@ namespace ipl {
             public:
                 Interface();
 
-                virtual             ~Interface();
-                virtual int         unk_0x0C();
-                virtual int         unk_0x10();
-                virtual int         unk_0x14();
-                virtual int         unk_0x18();
+                virtual             ~Interface();                   // 0x08
+                virtual int         getType() const;                // 0x0C
+                virtual int         getChannel() const;             // 0x10
+                virtual int         down(u32 button) const;         // 0x14
+                virtual int         downTrg(u32 button) const;      // 0x18
                 virtual int         unk_0x1C();
                 virtual int         unk_0x20();
                 virtual int         unk_0x24();
@@ -63,6 +63,9 @@ namespace ipl {
                  * @return Whether it is pointing or not.
                  */
                 virtual bool        isValidDpd() const;             // 0x70
+            
+            private:
+                u8 dummyData[32];
         };
     }
 }

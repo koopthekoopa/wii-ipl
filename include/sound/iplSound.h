@@ -14,6 +14,8 @@ namespace ipl {
 
                 void stopAllSound(BOOL unk = FALSE);
                 void stopBannerSound(BOOL unk = FALSE);
+                void startSE(const char* sndName);
+                int  startBGM(const char* bgmName);
             
             private:
                 undefined4 unk_0x00[0x638];

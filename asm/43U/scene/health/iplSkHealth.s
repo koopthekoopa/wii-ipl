@@ -371,13 +371,13 @@
 /* 813BDA98 | 40 82 00 14 */	bne .L_813BDAAC
 /* 813BDA9C | 38 00 00 01 */	li r0, 0x1
 /* 813BDAA0 | 98 1E 00 70 */	stb r0, 0x70(r30)
-/* 813BDAA4 | 48 17 81 F5 */	bl fn_81535C98
+/* 813BDAA4 | 48 17 81 F5 */	bl OSGetTick
 /* 813BDAA8 | 90 7E 00 68 */	stw r3, 0x68(r30)
 .L_813BDAAC:
 /* 813BDAAC | 88 1E 00 70 */	lbz r0, 0x70(r30)
 /* 813BDAB0 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813BDAB4 | 41 82 00 BC */	beq .L_813BDB70
-/* 813BDAB8 | 48 17 81 E1 */	bl fn_81535C98
+/* 813BDAB8 | 48 17 81 E1 */	bl OSGetTick
 /* 813BDABC | 3C 80 80 00 */	lis r4, 0x8000
 /* 813BDAC0 | 80 BE 00 68 */	lwz r5, 0x68(r30)
 /* 813BDAC4 | 80 84 00 F8 */	lwz r4, 0xf8(r4)
@@ -420,7 +420,7 @@
 /* 813BDB50 | 80 7E 00 58 */	lwz r3, 0x58(r30)
 /* 813BDB54 | 38 80 00 01 */	li r4, 0x1
 /* 813BDB58 | 4B FA CD A1 */	bl start__Q33ipl6layout6ObjectFi
-/* 813BDB5C | 48 17 81 3D */	bl fn_81535C98
+/* 813BDB5C | 48 17 81 3D */	bl OSGetTick
 /* 813BDB60 | 90 7E 00 6C */	stw r3, 0x6c(r30)
 /* 813BDB64 | 4B FA 6F B5 */	bl getWpadConnectedMask__Q33ipl7utility4wpadFv
 /* 813BDB68 | 90 7E 00 74 */	stw r3, 0x74(r30)
@@ -451,7 +451,7 @@
 /* 813BDBB4 | 7C 7E 1B 78 */	mr r30, r3
 /* 813BDBB8 | 7F A3 EB 78 */	mr r3, r29
 /* 813BDBBC | 48 00 02 A9 */	bl check_safe_mode__Q33ipl5scene8skHealthFv
-/* 813BDBC0 | 48 17 80 D9 */	bl fn_81535C98
+/* 813BDBC0 | 48 17 80 D9 */	bl OSGetTick
 /* 813BDBC4 | 3C 80 80 00 */	lis r4, 0x8000
 /* 813BDBC8 | 80 BD 00 6C */	lwz r5, 0x6c(r29)
 /* 813BDBCC | 80 84 00 F8 */	lwz r4, 0xf8(r4)
@@ -480,7 +480,7 @@
 /* 813BDC24 | 80 1D 00 74 */	lwz r0, 0x74(r29)
 /* 813BDC28 | 7C 00 F0 40 */	cmplw r0, r30
 /* 813BDC2C | 40 82 00 3C */	bne .L_813BDC68
-/* 813BDC30 | 48 17 80 69 */	bl fn_81535C98
+/* 813BDC30 | 48 17 80 69 */	bl OSGetTick
 /* 813BDC34 | 3C 80 80 00 */	lis r4, 0x8000
 /* 813BDC38 | 80 BD 00 6C */	lwz r5, 0x6c(r29)
 /* 813BDC3C | 80 84 00 F8 */	lwz r4, 0xf8(r4)
@@ -671,7 +671,7 @@
 /* 813BDEB8 | 4E 80 04 21 */	bctrl
 /* 813BDEBC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813BDEC0 | 41 82 00 A8 */	beq .L_813BDF68
-/* 813BDEC4 | 48 17 7D D5 */	bl fn_81535C98
+/* 813BDEC4 | 48 17 7D D5 */	bl OSGetTick
 /* 813BDEC8 | 38 00 00 01 */	li r0, 0x1
 /* 813BDECC | 90 7F 00 78 */	stw r3, 0x78(r31)
 /* 813BDED0 | 98 1F 00 7C */	stb r0, 0x7c(r31)
@@ -699,7 +699,7 @@
 /* 813BDF20 | 98 1F 00 7C */	stb r0, 0x7c(r31)
 /* 813BDF24 | 48 00 00 44 */	b .L_813BDF68
 .L_813BDF28:
-/* 813BDF28 | 48 17 7D 71 */	bl fn_81535C98
+/* 813BDF28 | 48 17 7D 71 */	bl OSGetTick
 /* 813BDF2C | 3C 80 80 00 */	lis r4, 0x8000
 /* 813BDF30 | 80 BF 00 78 */	lwz r5, 0x78(r31)
 /* 813BDF34 | 80 84 00 F8 */	lwz r4, 0xf8(r4)

@@ -461,13 +461,13 @@
 /* 813C20EC | 40 82 00 14 */	bne .L_813C2100
 /* 813C20F0 | 38 00 00 01 */	li r0, 0x1
 /* 813C20F4 | 98 1F 00 70 */	stb r0, 0x70(r31)
-/* 813C20F8 | 48 17 3B A1 */	bl fn_81535C98
+/* 813C20F8 | 48 17 3B A1 */	bl OSGetTick
 /* 813C20FC | 90 7F 00 68 */	stw r3, 0x68(r31)
 .L_813C2100:
 /* 813C2100 | 88 1F 00 70 */	lbz r0, 0x70(r31)
 /* 813C2104 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813C2108 | 41 82 00 B8 */	beq .L_813C21C0
-/* 813C210C | 48 17 3B 8D */	bl fn_81535C98
+/* 813C210C | 48 17 3B 8D */	bl OSGetTick
 /* 813C2110 | 3C 80 80 00 */	lis r4, 0x8000
 /* 813C2114 | 80 BF 00 68 */	lwz r5, 0x68(r31)
 /* 813C2118 | 80 84 00 F8 */	lwz r4, 0xf8(r4)
@@ -508,7 +508,7 @@
 /* 813C219C | 4B FA 87 5D */	bl start__Q33ipl6layout6ObjectFi
 /* 813C21A0 | 80 7F 00 58 */	lwz r3, 0x58(r31)
 /* 813C21A4 | 4B FA 85 61 */	bl calc__Q33ipl6layout6ObjectFv
-/* 813C21A8 | 48 17 3A F1 */	bl fn_81535C98
+/* 813C21A8 | 48 17 3A F1 */	bl OSGetTick
 /* 813C21AC | 90 7F 00 6C */	stw r3, 0x6c(r31)
 /* 813C21B0 | 4B FA 29 69 */	bl getWpadConnectedMask__Q33ipl7utility4wpadFv
 /* 813C21B4 | 90 7F 00 74 */	stw r3, 0x74(r31)
@@ -537,7 +537,7 @@
 /* 813C21F4 | 3B E0 00 00 */	li r31, 0x0
 /* 813C21F8 | 4B FA 29 21 */	bl getWpadConnectedMask__Q33ipl7utility4wpadFv
 /* 813C21FC | 7C 7E 1B 78 */	mr r30, r3
-/* 813C2200 | 48 17 3A 99 */	bl fn_81535C98
+/* 813C2200 | 48 17 3A 99 */	bl OSGetTick
 /* 813C2204 | 3C 80 80 00 */	lis r4, 0x8000
 /* 813C2208 | 80 BD 00 6C */	lwz r5, 0x6c(r29)
 /* 813C220C | 80 84 00 F8 */	lwz r4, 0xf8(r4)
@@ -562,7 +562,7 @@
 /* 813C2254 | 80 1D 00 74 */	lwz r0, 0x74(r29)
 /* 813C2258 | 7C 00 F0 40 */	cmplw r0, r30
 /* 813C225C | 40 82 00 30 */	bne .L_813C228C
-/* 813C2260 | 48 17 3A 39 */	bl fn_81535C98
+/* 813C2260 | 48 17 3A 39 */	bl OSGetTick
 /* 813C2264 | 3C 80 80 00 */	lis r4, 0x8000
 /* 813C2268 | 80 BD 00 6C */	lwz r5, 0x6c(r29)
 /* 813C226C | 80 84 00 F8 */	lwz r4, 0xf8(r4)

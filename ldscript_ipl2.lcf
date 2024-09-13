@@ -2,30 +2,31 @@ MEMORY {
     // The BSS is moved to there as since version 2.0
     // they were running out of free space in the BS2 area
     // (0x81330000 - 0x8137D0000) which is where the Wii Menu is stored.
+    
     da_bss: origin = 0x81080000
     main:   origin = 0x81330000
 }
 
 SECTIONS {
     GROUP: {
-        .init       ALIGN(0x20):{}
-        extab       ALIGN(0x20):{}
-        extabindex  ALIGN(0x20):{}
-        .text       ALIGN(0x20):{}
-        .ctors      ALIGN(0x20):{}
-        .dtors      ALIGN(0x20):{}
-        .rodata     ALIGN(0x20):{}
-        .data       ALIGN(0x20):{}
-        .sdata2     ALIGN(0x20):{}
-        .sbss2      ALIGN(0x20):{}
-        .sdata      ALIGN(0x20):{}
-        .sbss       ALIGN(0x20):{}
-        .stack      ALIGN(0x100):{}
-    } > main
-
-    GROUP: {
         .bss        ALIGN(0x20):{}
     } > da_bss
+
+    GROUP: {
+        .init       ALIGN(0x20):    {}
+        extab       ALIGN(0x20):    {}
+        extabindex  ALIGN(0x20):    {}
+        .text       ALIGN(0x20):    {}
+        .ctors      ALIGN(0x20):    {}
+        .dtors      ALIGN(0x20):    {}
+        .rodata     ALIGN(0x20):    {}
+        .data       ALIGN(0x20):    {}
+        .sdata2     ALIGN(0x20):    {}
+        .sbss2      ALIGN(0x20):    {}
+        .sdata      ALIGN(0x20):    {}
+        .sbss       ALIGN(0x20):    {}
+        .stack      ALIGN(0x100):   {}
+    } > main
 
     _stack_end =        _f_sbss + SIZEOF(.sbss);
     _stack_addr =       (_stack_end + 0xFFFF + 0x7) & ~0x7;

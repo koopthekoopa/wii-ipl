@@ -429,7 +429,7 @@
 /* 813DB114 | 48 00 3D 29 */	bl iplSDChannelSelect_813DEE3C
 /* 813DB118 | 7F E3 FB 78 */	mr r3, r31
 /* 813DB11C | 48 00 60 A9 */	bl iplSDChannelSelect_813E11C4
-/* 813DB120 | 48 15 AB 79 */	bl fn_81535C98
+/* 813DB120 | 48 15 AB 79 */	bl OSGetTick
 /* 813DB124 | 3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
 /* 813DB128 | 7C 7C 1B 78 */	mr r28, r3
 /* 813DB12C | 3F C0 81 65 */	lis r30, lbl_816544A7@ha
@@ -447,7 +447,7 @@
 /* 813DB154 | 80 03 00 04 */	lwz r0, 0x4(r3)
 /* 813DB158 | 2C 00 00 08 */	cmpwi r0, 0x8
 /* 813DB15C | 40 82 FF DC */	bne .L_813DB138
-/* 813DB160 | 48 15 AB 39 */	bl fn_81535C98
+/* 813DB160 | 48 15 AB 39 */	bl OSGetTick
 /* 813DB164 | 3C 80 80 00 */	lis r4, 0x8000
 /* 813DB168 | 7C BC 18 50 */	subf r5, r28, r3
 /* 813DB16C | 80 84 00 F8 */	lwz r4, 0xf8(r4)

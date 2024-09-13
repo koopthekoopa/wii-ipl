@@ -1613,7 +1613,7 @@
 /* 81366CB0 | 7D 89 03 A6 */	mtctr r12
 /* 81366CB4 | 4E 80 04 21 */	bctrl
 /* 81366CB8 | 7C 7C 1B 78 */	mr r28, r3
-/* 81366CBC | 48 1C EF DD */	bl fn_81535C98
+/* 81366CBC | 48 1C EF DD */	bl OSGetTick
 /* 81366CC0 | 38 00 00 00 */	li r0, 0x0
 /* 81366CC4 | 3B 00 00 1E */	li r24, 0x1e
 /* 81366CC8 | 7F 20 C1 D6 */	mullw r25, r0, r24
@@ -1634,7 +1634,7 @@
 /* 81366D00 | 1C 83 00 1E */	mulli r4, r3, 0x1e
 /* 81366D04 | 7C 60 CA 14 */	add r3, r0, r25
 /* 81366D08 | 48 1C EE C5 */	bl OSSleepTicks
-/* 81366D0C | 48 1C EF 8D */	bl fn_81535C98
+/* 81366D0C | 48 1C EF 8D */	bl OSGetTick
 /* 81366D10 | 80 1F 00 F8 */	lwz r0, 0xf8(r31)
 /* 81366D14 | 7C 7E 18 50 */	subf r3, r30, r3
 /* 81366D18 | 54 00 F0 BE */	srwi r0, r0, 2

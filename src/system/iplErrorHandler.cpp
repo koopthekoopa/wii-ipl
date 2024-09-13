@@ -2,6 +2,7 @@
 
 #include <revolution/nand.h>
 #include <revolution/sc.h>
+#include <revolution/gx.h>
 
 #include <cstring>
 
@@ -165,7 +166,7 @@ namespace ipl {
      */
     void ErrorHandler::draw() {
         if (mReady == TRUE) {
-            utility::Graphics::setDefaultOrtho(0);
+            utility::Graphics::setDefaultOrtho();
             mpLayout->draw();
         }
     }

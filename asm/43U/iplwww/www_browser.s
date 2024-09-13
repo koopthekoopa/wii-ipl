@@ -500,9 +500,9 @@
 /* 8136CE6C | 80 AD A9 30 */	lwz r5, wwwavail___Q37ext_ead3www4Heap@sda21(r0)
 /* 8136CE70 | 7D 89 03 A6 */	mtctr r12
 /* 8136CE74 | 4E 80 04 21 */	bctrl
-/* 8136CE78 | 48 1C 8E 21 */	bl fn_81535C98
+/* 8136CE78 | 48 1C 8E 21 */	bl OSGetTick
 /* 8136CE7C | 90 61 00 08 */	stw r3, 0x8(r1)
-/* 8136CE80 | 48 1C 8E 19 */	bl fn_81535C98
+/* 8136CE80 | 48 1C 8E 19 */	bl OSGetTick
 /* 8136CE84 | 90 61 00 08 */	stw r3, 0x8(r1)
 /* 8136CE88 | 7F C3 F3 78 */	mr r3, r30
 /* 8136CE8C | 81 8D A7 58 */	lwz r12, WWWSurfaceInit@sda21(r0)
@@ -524,7 +524,7 @@
 /* 8136CECC | 4C C6 31 82 */	crclr cr1eq
 /* 8136CED0 | 48 1C 17 D1 */	bl OSReport
 .L_8136CED4:
-/* 8136CED4 | 48 1C 8D C5 */	bl fn_81535C98
+/* 8136CED4 | 48 1C 8D C5 */	bl OSGetTick
 /* 8136CED8 | 81 8D A7 6C */	lwz r12, WWWSurfaceSetFlushCallback@sda21(r0)
 /* 8136CEDC | 3C 80 81 37 */	lis r4, FlushCallback__Q37ext_ead3www13BrowserThreadFP7WWWRecti@ha
 /* 8136CEE0 | 90 61 00 08 */	stw r3, 0x8(r1)
@@ -580,7 +580,7 @@
 /* 8136CF8C | 91 01 00 1C */	stw r8, 0x1c(r1)
 /* 8136CF90 | 91 21 00 20 */	stw r9, 0x20(r1)
 /* 8136CF94 | 91 41 00 24 */	stw r10, 0x24(r1)
-/* 8136CF98 | 48 1C 8D 01 */	bl fn_81535C98
+/* 8136CF98 | 48 1C 8D 01 */	bl OSGetTick
 /* 8136CF9C | 90 7E 00 04 */	stw r3, 0x4(r30)
 /* 8136CFA0 | 38 C1 00 88 */	addi r6, r1, 0x88
 /* 8136CFA4 | 38 01 00 08 */	addi r0, r1, 0x8
@@ -625,7 +625,7 @@
 /* 8136D02C | 3F E0 81 64 */	lis r31, lbl_816429C0@ha
 /* 8136D030 | 7C 7E 1B 78 */	mr r30, r3
 /* 8136D034 | 3B FF 29 C0 */	addi r31, r31, lbl_816429C0@l
-/* 8136D038 | 48 1C 8C 61 */	bl fn_81535C98
+/* 8136D038 | 48 1C 8C 61 */	bl OSGetTick
 /* 8136D03C | 90 61 00 08 */	stw r3, 0x8(r1)
 /* 8136D040 | 7F C3 F3 78 */	mr r3, r30
 /* 8136D044 | 4B FF FD 59 */	bl InitSurface___Q37ext_ead3www13BrowserThreadFv
@@ -636,7 +636,7 @@
 /* 8136D058 | 38 60 00 03 */	li r3, 0x3
 /* 8136D05C | 4C C6 31 82 */	crclr cr1eq
 /* 8136D060 | 48 00 18 35 */	bl IPLWWWReport__Q37ext_ead3www5printFiPCce
-/* 8136D064 | 48 1C 8C 35 */	bl fn_81535C98
+/* 8136D064 | 48 1C 8C 35 */	bl OSGetTick
 /* 8136D068 | 81 8D A7 90 */	lwz r12, WWWCreateBrowser@sda21(r0)
 /* 8136D06C | 38 FF 01 54 */	addi r7, r31, 0x154
 /* 8136D070 | 38 1F 01 65 */	addi r0, r31, 0x165
@@ -1287,9 +1287,9 @@
 /* 8136D94C | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8136D950 | 7C 08 02 A6 */	mflr r0
 /* 8136D954 | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 8136D958 | 48 1C 83 41 */	bl fn_81535C98
+/* 8136D958 | 48 1C 83 41 */	bl OSGetTick
 /* 8136D95C | 90 61 00 08 */	stw r3, 0x8(r1)
-/* 8136D960 | 48 1C 83 39 */	bl fn_81535C98
+/* 8136D960 | 48 1C 83 39 */	bl OSGetTick
 /* 8136D964 | 81 8D A7 8C */	lwz r12, WWWSurfaceAddFont@sda21(r0)
 /* 8136D968 | 3C 80 81 64 */	lis r4, lbl_81642BD1@ha
 /* 8136D96C | 90 61 00 08 */	stw r3, 0x8(r1)

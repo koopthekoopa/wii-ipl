@@ -8,27 +8,29 @@
 namespace ipl {
     namespace scene {
         enum SceneReturn {
+            /* Continue the current scene `calc` function */
             SCENE_CONTINUE = 0,
+            /* Onto the next scene `calc` function */
             SCENE_DONE,
         };
 
         SCENE_CLASS(FaderSceneBase) {
             public:
                 FaderSceneBase(EGG::Heap* pHeap);
-                virtual ~FaderSceneBase();
+                virtual ~FaderSceneBase() {}
 
-                virtual void        calc();             // 0x40
+                virtual void        calc();
 
-                virtual void        initCalcNormal();   // 0x4C
-                virtual void        initCalcFadeout();  // 0x50
+                virtual void        initCalcNormal();                       // 0x4C
+                virtual void        initCalcFadeout() {}                    // 0x50
 
-                virtual void        calcCommon();       // 0x54
+                virtual void        calcCommon() {}                         // 0x54
 
-                virtual SceneReturn calcFadein();       // 0x58
-                virtual SceneReturn calcNormal();       // 0x5C
-                virtual SceneReturn calcFadeout();      // 0x60
+                virtual SceneReturn calcFadein()    { return SCENE_DONE; }  // 0x58
+                virtual SceneReturn calcNormal()    { return SCENE_DONE; }  // 0x5C
+                virtual SceneReturn calcFadeout()   { return SCENE_DONE; }  // 0x60
 
-                virtual void        calcCommonAfter();  // 0x64
+                virtual void        calcCommonAfter();                      // 0x64
             
             private:
                 int mState; // 0x54

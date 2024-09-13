@@ -1288,7 +1288,7 @@
 /* 813B5228 | 48 1C 45 85 */	bl WPADGetStatus
 /* 813B522C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813B5230 | 40 82 00 0C */	bne .L_813B523C
-/* 813B5234 | 48 18 0A 65 */	bl fn_81535C98
+/* 813B5234 | 48 18 0A 65 */	bl OSGetTick
 /* 813B5238 | 90 7D 03 48 */	stw r3, 0x348(r29)
 .L_813B523C:
 /* 813B523C | 3F 60 81 09 */	lis r27, smArg__Q23ipl6System@ha
@@ -7605,7 +7605,7 @@
 /* 813BA874 | 48 23 EC 55 */	bl _savegpr_29
 /* 813BA878 | 7C 7D 1B 78 */	mr r29, r3
 /* 813BA87C | 7C 9E 23 78 */	mr r30, r4
-/* 813BA880 | 48 17 B4 19 */	bl fn_81535C98
+/* 813BA880 | 48 17 B4 19 */	bl OSGetTick
 /* 813BA884 | 48 1B 6E BD */	bl ESP_InitLib
 /* 813BA888 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813BA88C | 41 82 00 44 */	beq .L_813BA8D0

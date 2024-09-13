@@ -273,7 +273,7 @@
 /* 8136E278 | 3F A0 81 64 */	lis r29, lbl_81642D10@ha
 /* 8136E27C | 7C 7B 1B 78 */	mr r27, r3
 /* 8136E280 | 3B BD 2D 10 */	addi r29, r29, lbl_81642D10@l
-/* 8136E284 | 48 1C 7A 15 */	bl fn_81535C98
+/* 8136E284 | 48 1C 7A 15 */	bl OSGetTick
 /* 8136E288 | 90 61 00 08 */	stw r3, 0x8(r1)
 /* 8136E28C | 83 5B 00 34 */	lwz r26, 0x34(r27)
 /* 8136E290 | 80 9A 00 1C */	lwz r4, 0x1c(r26)
@@ -287,7 +287,7 @@
 /* 8136E2B0 | 80 BA 00 1C */	lwz r5, 0x1c(r26)
 /* 8136E2B4 | 4B FC 20 81 */	bl memset
 .L_8136E2B8:
-/* 8136E2B8 | 48 1C 79 E1 */	bl fn_81535C98
+/* 8136E2B8 | 48 1C 79 E1 */	bl OSGetTick
 /* 8136E2BC | 90 61 00 08 */	stw r3, 0x8(r1)
 /* 8136E2C0 | 7F 43 D3 78 */	mr r3, r26
 /* 8136E2C4 | 80 9B 00 30 */	lwz r4, 0x30(r27)
@@ -304,7 +304,7 @@
 /* 8136E2F0 | 4C C6 31 82 */	crclr cr1eq
 /* 8136E2F4 | 48 1C 03 AD */	bl OSReport
 .L_8136E2F8:
-/* 8136E2F8 | 48 1C 79 A1 */	bl fn_81535C98
+/* 8136E2F8 | 48 1C 79 A1 */	bl OSGetTick
 /* 8136E2FC | 90 61 00 08 */	stw r3, 0x8(r1)
 /* 8136E300 | 81 9A 00 24 */	lwz r12, 0x24(r26)
 /* 8136E304 | 2C 0C 00 00 */	cmpwi r12, 0x0
@@ -316,7 +316,7 @@
 /* 8136E318 | 38 9D 0D 49 */	addi r4, r29, 0xd49
 /* 8136E31C | 4C C6 31 82 */	crclr cr1eq
 /* 8136E320 | 4B FF EC 19 */	bl report__Q47ext_ead3www5print9TickTimerFPCce
-/* 8136E324 | 48 1C 79 75 */	bl fn_81535C98
+/* 8136E324 | 48 1C 79 75 */	bl OSGetTick
 /* 8136E328 | 90 61 00 08 */	stw r3, 0x8(r1)
 /* 8136E32C | 3B DD 08 8C */	addi r30, r29, 0x88c
 /* 8136E330 | 3B 80 00 00 */	li r28, 0x0

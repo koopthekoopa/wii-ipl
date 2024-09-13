@@ -24,11 +24,22 @@ namespace ipl {
             void update();
             void fatalUpdate();
 
-            u32 getType() { return mType; }
-            u32 getFatalState() { return mFatalState; }
+            u32 getType()                       { return mType; }
+            u32 getFatalState()                 { return mFatalState; }
 
-            void changeType(u32 value) { mType = value; }
-            void changeFatalState(u32 value) { mFatalState = value; }
+            void changeType(u32 value)          { mType = value; }
+            void changeFatalState(u32 value)    { mFatalState = value; }
+
+            /**
+             * This tells the reset handler to return to the system menu when resetting (calling `OSReturnToMenu()`)
+             * instead of rebooting the system (calling `OSRebootSystem()`)
+             */
+            void enableResetToMenu(BOOL value)  { mToMenu = value; }
+            /**
+             * Returns whether the reset handler to return to the system menu when resetting (calling `OSReturnToMenu()`)
+             * instead of rebooting the system (calling `OSRebootSystem()`)
+             */
+            BOOL willResetToMenu()              { return mToMenu; }
 
         private:
             static void cbReset();
@@ -41,7 +52,7 @@ namespace ipl {
 
             u32     mState;
             u32     mType;
-            BOOL    mPoweringOff;
+            BOOL    mToMenu;
 
             u32     mFatalState;
     };

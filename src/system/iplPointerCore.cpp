@@ -1,5 +1,7 @@
 #include "system/iplPointerCore.h"
 
+#include <revolution/gx.h>
+
 #include <nw4r/math.h>
 #include <nw4r/lyt.h>
 
@@ -97,7 +99,7 @@ namespace ipl {
      * @note Size: 0x54
      */
     void PointerCore::draw() {
-        utility::Graphics::setDefaultOrtho(0);
+        utility::Graphics::setDefaultOrtho();
 
         for (int i = WPAD_MAX_CONTROLLERS - 1; i >= 0; i--) {
             mCursors[i].draw();

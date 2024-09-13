@@ -18,9 +18,7 @@ namespace ipl {
         FaderSceneBase::FaderSceneBase(EGG::Heap* pHeap) :
         Base(pHeap),
         mState(STATE_FADE_IN) {}
-
-        FaderSceneBase::~FaderSceneBase() {}
-
+        
         /**
          * @note Address: 0x8140B254 (4.3U)
          * @note Size: 0x14C
@@ -64,14 +62,6 @@ namespace ipl {
             if (mState != STATE_DONE) {
                 calcCommonAfter();
             }
-        }
-
-        /**
-         * @note Address: 0x8140B3A0 (4.3U)
-         * @note Size: 0x8
-         */
-        SceneReturn FaderSceneBase::calcNormal() {
-            return SCENE_DONE;
         }
     }
 }

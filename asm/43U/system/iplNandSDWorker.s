@@ -8878,7 +8878,7 @@
 /* 8134FCCC | 38 A0 00 20 */	li r5, 0x20
 /* 8134FCD0 | 48 20 AA 85 */	bl fn_8155A754
 /* 8134FCD4 | 7C 7C 1B 78 */	mr r28, r3
-/* 8134FCD8 | 48 1E 5F C1 */	bl fn_81535C98
+/* 8134FCD8 | 48 1E 5F C1 */	bl OSGetTick
 /* 8134FCDC | 38 00 00 00 */	li r0, 0x0
 /* 8134FCE0 | 3A E0 00 1E */	li r23, 0x1e
 /* 8134FCE4 | 7F 00 B9 D6 */	mullw r24, r0, r23
@@ -8897,7 +8897,7 @@
 /* 8134FD14 | 1C 83 00 1E */	mulli r4, r3, 0x1e
 /* 8134FD18 | 7C 60 C2 14 */	add r3, r0, r24
 /* 8134FD1C | 48 1E 5E B1 */	bl OSSleepTicks
-/* 8134FD20 | 48 1E 5F 79 */	bl fn_81535C98
+/* 8134FD20 | 48 1E 5F 79 */	bl OSGetTick
 /* 8134FD24 | 80 1F 00 F8 */	lwz r0, 0xf8(r31)
 /* 8134FD28 | 7C 7E 18 50 */	subf r3, r30, r3
 /* 8134FD2C | 54 00 F0 BE */	srwi r0, r0, 2

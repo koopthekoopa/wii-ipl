@@ -17,7 +17,7 @@ namespace ipl {
     ResetHandler::ResetHandler(EGG::Heap* pHeap) :
     mType(0), // ?
     mState(0),
-    mPoweringOff(FALSE), // ?
+    mToMenu(FALSE),
     mFatalState(FATAL_STATE_NONE) {
         
         #pragma unused(pHeap)

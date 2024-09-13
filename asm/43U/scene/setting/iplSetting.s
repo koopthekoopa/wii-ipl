@@ -320,7 +320,7 @@
 /* 813F0B90 | 2C 00 00 08 */	cmpwi r0, 0x8
 /* 813F0B94 | 40 82 FF EC */	bne .L_813F0B80
 /* 813F0B98 | 4B F4 31 8D */	bl getUsbEtherMacAddr__Q23ipl6SystemFv
-/* 813F0B9C | 48 14 50 FD */	bl fn_81535C98
+/* 813F0B9C | 48 14 50 FD */	bl OSGetTick
 /* 813F0BA0 | 90 7C 00 A0 */	stw r3, 0xa0(r28)
 /* 813F0BA4 | 83 DE 00 6C */	lwz r30, 0x6c(r30)
 /* 813F0BA8 | 4B F4 22 8D */	bl createMem1AppHeap__Q23ipl6SystemFv
@@ -822,7 +822,7 @@
 /* 813F12E8 | 80 7E 00 70 */	lwz r3, 0x70(r30)
 /* 813F12EC | 80 63 00 A0 */	lwz r3, 0xa0(r3)
 /* 813F12F0 | 48 1C AE B9 */	bl fn_815BC1A8
-/* 813F12F4 | 48 14 49 A5 */	bl fn_81535C98
+/* 813F12F4 | 48 14 49 A5 */	bl OSGetTick
 /* 813F12F8 | 3C 80 80 00 */	lis r4, 0x8000
 /* 813F12FC | 80 BE 00 A0 */	lwz r5, 0xa0(r30)
 /* 813F1300 | 80 84 00 F8 */	lwz r4, 0xf8(r4)
@@ -834,7 +834,7 @@
 /* 813F1318 | 7C 85 03 96 */	divwu r4, r5, r0
 /* 813F131C | 4C C6 31 82 */	crclr cr1eq
 /* 813F1320 | 48 13 D3 81 */	bl OSReport
-/* 813F1324 | 48 14 49 75 */	bl fn_81535C98
+/* 813F1324 | 48 14 49 75 */	bl OSGetTick
 /* 813F1328 | 90 7E 00 A0 */	stw r3, 0xa0(r30)
 /* 813F132C | 39 61 00 30 */	addi r11, r1, 0x30
 /* 813F1330 | 48 20 81 D5 */	bl _restgpr_25
@@ -1312,7 +1312,7 @@
 /* 813F19E8 | 48 14 42 99 */	bl OSGetTime
 /* 813F19EC | 90 9D 0B A4 */	stw r4, 0xba4(r29)
 /* 813F19F0 | 90 7D 0B A0 */	stw r3, 0xba0(r29)
-/* 813F19F4 | 48 14 42 A5 */	bl fn_81535C98
+/* 813F19F4 | 48 14 42 A5 */	bl OSGetTick
 /* 813F19F8 | 3C 80 80 00 */	lis r4, 0x8000
 /* 813F19FC | 80 BD 00 A0 */	lwz r5, 0xa0(r29)
 /* 813F1A00 | 80 84 00 F8 */	lwz r4, 0xf8(r4)
@@ -1505,7 +1505,7 @@
 /* 813F1C94 | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
 /* 813F1C98 | 80 63 00 74 */	lwz r3, 0x74(r3)
 /* 813F1C9C | 4B F4 C2 BD */	bl resetRenderMode__Q23ipl9FrameworkFv
-/* 813F1CA0 | 48 14 3F F9 */	bl fn_81535C98
+/* 813F1CA0 | 48 14 3F F9 */	bl OSGetTick
 /* 813F1CA4 | 7C 7C 1B 78 */	mr r28, r3
 /* 813F1CA8 | 3F A0 80 00 */	lis r29, 0x8000
 /* 813F1CAC | 3B C0 03 E8 */	li r30, 0x3e8
@@ -1513,7 +1513,7 @@
 .L_813F1CB4:
 /* 813F1CB4 | 48 14 B3 35 */	bl VIWaitForRetrace
 .L_813F1CB8:
-/* 813F1CB8 | 48 14 3F E1 */	bl fn_81535C98
+/* 813F1CB8 | 48 14 3F E1 */	bl OSGetTick
 /* 813F1CBC | 80 1D 00 F8 */	lwz r0, 0xf8(r29)
 /* 813F1CC0 | 7C 7C 18 50 */	subf r3, r28, r3
 /* 813F1CC4 | 54 00 F0 BE */	srwi r0, r0, 2

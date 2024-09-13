@@ -5,6 +5,8 @@
 
 #include "utility/iplTree.h"
 
+#include <revolution/gx.h>
+
 #include <egg/core/eggHeap.h>
 #include <egg/core/eggDisposer.h>
 
@@ -14,20 +16,30 @@ namespace ipl {
     namespace scene {
         class Base : utility::Tree, EGG::Disposer {
             public:
+                /** @brief If the scene is ready */
                 Base(EGG::Heap* pHeap);
                 virtual ~Base();
 
-                virtual BOOL    isReady() const;
+                /** @brief If the scene is ready */
+                virtual BOOL    isReady() const             { return FALSE; }
 
-                virtual BOOL    isResetAcceptable() const;
-                virtual void    startResetting();
-                virtual BOOL    isResetProcessDone() const;
+                /** @brief If the user can power off/reset the system */
+                virtual BOOL    isResetAcceptable() const   { return TRUE; }
+                /** @brief The scene running code when powering off/resetting the system */
+                virtual void    startResetting() {}
+                /** @brief If the scene has finished its powering off/resetting task */
+                virtual BOOL    isResetProcessDone() const  { return TRUE; }
 
-                virtual void    prepare();
-                virtual void    create();
-                virtual void    calc();
-                virtual void    draw();         
-                virtual void    destroy();
+                /** @brief Prepare to create scene */
+                virtual void    prepare() {}
+                /** @brief Creating the scene */
+                virtual void    create() {}
+                /** @brief Update the scene */
+                virtual void    calc() {}
+                /** @brief Rendering the scene */
+                virtual void    draw();
+                /** @brief Destroy the scene and clear from memory */
+                virtual void    destroy() {}
 
                 void            do_prepare();
                 void            do_create();
@@ -38,8 +50,8 @@ namespace ipl {
                 void            createChildScene(int arg0, Base* pArg1, Base* pArg2, void* pArg3);
                 void            reserveSceneChange(int arg0, void* pArg1);
                 void            reserveAllSceneDestruction(int arg0, void* pArg1);
-
-            private:
+                
+            protected:
                 EGG::Heap*  mpHeap;     // 0x24
                 u32         unk_0x28;
                 u32         unk_0x2C;

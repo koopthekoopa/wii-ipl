@@ -1100,7 +1100,7 @@
 /* 813E5B4C | 48 19 3C 61 */	bl WPADGetStatus
 /* 813E5B50 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813E5B54 | 40 82 00 0C */	bne .L_813E5B60
-/* 813E5B58 | 48 15 01 41 */	bl fn_81535C98
+/* 813E5B58 | 48 15 01 41 */	bl OSGetTick
 /* 813E5B5C | 90 7E 01 84 */	stw r3, 0x184(r30)
 .L_813E5B60:
 /* 813E5B60 | 3F 80 81 09 */	lis r28, smArg__Q23ipl6System@ha

@@ -31,6 +31,7 @@ namespace ipl {
             void            calc();
             /** @brief Draws the Wii Remote Pointers. */
             void            draw();
+
             /**
              * @brief Changes the state of a Wii Remote Pointer.
              * @param chan The Wii Remote Player (0 - 3)
@@ -39,7 +40,6 @@ namespace ipl {
             void            setState(int chan, int state);
             /**
              * @brief Changes the Layout Type of a Wii Remote Pointer.
-             *
              * @param chan The Wii Remote Player (0 - 3)
              * @param type The layout type that will change to.
              */
@@ -51,6 +51,8 @@ namespace ipl {
              * @return The Layout Data as `ipl::layout::Object`
              */
             layout::Object* get_layout(int chan, int type);
+
+            void            setVisible(bool value) { mVisible = value; }
         
         public:
             nand::LayoutFile*   mpLayoutArchive;                    // 0x00

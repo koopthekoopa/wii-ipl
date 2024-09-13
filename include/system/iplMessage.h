@@ -60,19 +60,6 @@ namespace ipl {
 
                 u8* mspMessageData;             // 0x08
         };
-
-        class Manager {
-            public:
-                Manager(EGG::Heap* pHeap);
-
-                /** @return The message data in use */
-                Message* getMessage()   { return mpMessage; }
-            
-            private:
-                void initMessage();
-
-                Message* mpMessage; // 0x00
-        };
     }
 }
 

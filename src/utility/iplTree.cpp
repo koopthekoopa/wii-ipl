@@ -81,38 +81,6 @@ namespace ipl {
                 mpPrev->mpNext = mpNext;
             }
         }
-
-        /**
-         * @note Address: 0x813627F0
-         * @note Size: 0x8
-         */
-        Tree* Tree::getPrev() {
-            return mpPrev;
-        }
-
-        /**
-         * @note Address: 0x813627F8
-         * @note Size: 0x8
-         */
-        Tree* Tree::getNext() {
-            return mpNext;
-        }
-
-        /**
-         * @note Address: 0x81362800
-         * @note Size: 0x8
-         */
-        Tree* Tree::getChild() {
-            return mpChild;
-        }
-
-        /**
-         * @note Address: 0x81362808
-         * @note Size: 0x8
-         */
-        Tree* Tree::getParent() {
-            return mpParent;
-        }
     }
 }
 

@@ -35,8 +35,12 @@ namespace ipl {
                 void        pushCommand(Command* pCommand);
                 void        setDestructSync();
 
+                BOOL        isDrawingScene() { return mDrawingScene; }
+
             private:
-                u8  unk_0x00[0x130];
+                u8      unk_0x00[0x100];
+                BOOL    mDrawingScene;
+                u8      unk_0x104[0x2C];
         };
     }
 }

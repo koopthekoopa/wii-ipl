@@ -13,8 +13,10 @@ namespace EGG {
             
             virtual void setStatus(EStatus) = 0;
             virtual EStatus getStatus() const = 0;
+            
             virtual bool fadeIn() = 0;
             virtual bool fadeOut() = 0;
+            
             virtual bool calc() = 0;
             virtual void draw() = 0;
     };

@@ -137,7 +137,7 @@
 /* 813C9F84 | 3F E0 81 65 */	lis r31, lbl_81651D30@ha
 /* 813C9F88 | 7C 7E 1B 78 */	mr r30, r3
 /* 813C9F8C | 3B FF 1D 30 */	addi r31, r31, lbl_81651D30@l
-/* 813C9F90 | 48 16 BD 09 */	bl fn_81535C98
+/* 813C9F90 | 48 16 BD 09 */	bl OSGetTick
 /* 813C9F94 | 3F 60 81 09 */	lis r27, smArg__Q23ipl6System@ha
 /* 813C9F98 | 7C 7C 1B 78 */	mr r28, r3
 /* 813C9F9C | 3B 7B 90 08 */	addi r27, r27, smArg__Q23ipl6System@l
@@ -153,7 +153,7 @@
 /* 813C9FBC | 80 03 00 04 */	lwz r0, 0x4(r3)
 /* 813C9FC0 | 2C 00 00 08 */	cmpwi r0, 0x8
 /* 813C9FC4 | 40 82 FF E0 */	bne .L_813C9FA4
-/* 813C9FC8 | 48 16 BC D1 */	bl fn_81535C98
+/* 813C9FC8 | 48 16 BC D1 */	bl OSGetTick
 /* 813C9FCC | 3C 80 80 00 */	lis r4, 0x8000
 /* 813C9FD0 | 7C BC 18 50 */	subf r5, r28, r3
 /* 813C9FD4 | 80 84 00 F8 */	lwz r4, 0xf8(r4)

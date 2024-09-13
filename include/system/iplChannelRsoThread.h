@@ -14,6 +14,7 @@ namespace ipl {
                 /** @param pHeap The work heap used. */
                 RsoThread(EGG::Heap* pHeap);
                 virtual         ~RsoThread();   // 0x08
+                
                 virtual void*   Run();          // 0x0C
 
                 /** @brief Start the Banner RSO Thread. */

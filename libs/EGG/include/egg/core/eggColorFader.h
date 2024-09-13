@@ -9,13 +9,16 @@ namespace EGG {
         public:
             ColorFader(f32, f32, f32, f32, nw4r::ut::Color, EStatus);
             
-            virtual void setStatus(EStatus);    // 0x08
-            virtual EStatus getStatus() const;  // 0x0C
-            virtual bool fadeIn();              // 0x10
-            virtual bool fadeOut();             // 0x14
-            virtual bool calc();                // 0x18
-            virtual void draw();                // 0x1C
-            virtual ~ColorFader();              // 0x20
+            virtual void    setStatus(EStatus status);  // 0x08
+            virtual EStatus getStatus() const;          // 0x0C
+            
+            virtual bool    fadeIn();                   // 0x10
+            virtual bool    fadeOut();                  // 0x14
+            
+            virtual bool    calc();                     // 0x18
+            virtual void    draw();                     // 0x1C
+            
+            virtual ~ColorFader();                      // 0x20
             
          private: /* ? */
             void setFrame(u16 value);

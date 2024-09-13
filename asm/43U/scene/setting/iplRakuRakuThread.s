@@ -182,7 +182,7 @@
 /* 813FDC18 | 38 63 DE D4 */	addi r3, r3, RakuRakuThread_810BDED4@l
 /* 813FDC1C | 38 A0 00 00 */	li r5, 0x0
 /* 813FDC20 | 48 13 34 61 */	bl OSSendMessage
-/* 813FDC24 | 48 13 80 75 */	bl fn_81535C98
+/* 813FDC24 | 48 13 80 75 */	bl OSGetTick
 /* 813FDC28 | 7C 7D 1B 78 */	mr r29, r3
 /* 813FDC2C | 3F C0 80 00 */	lis r30, 0x8000
 /* 813FDC30 | 3B E0 03 E8 */	li r31, 0x3e8
@@ -196,7 +196,7 @@
 /* 813FDC4C | 2C 00 00 07 */	cmpwi r0, 0x7
 /* 813FDC50 | 41 82 00 24 */	beq .L_813FDC74
 .L_813FDC54:
-/* 813FDC54 | 48 13 80 45 */	bl fn_81535C98
+/* 813FDC54 | 48 13 80 45 */	bl OSGetTick
 /* 813FDC58 | 80 1E 00 F8 */	lwz r0, 0xf8(r30)
 /* 813FDC5C | 7C 7D 18 50 */	subf r3, r29, r3
 /* 813FDC60 | 54 00 F0 BE */	srwi r0, r0, 2
