@@ -11,6 +11,10 @@ PY		= python
 EXEC	= .exe
 endif
 
+ifeq ($(OBJDIFF),TRUE)
+OBJDIFF_FLAG = -DOBJDIFF
+endif
+
 FIX_DEP			= $(TOOLS_ROOT)/transform_dep.py
 
 PPC_ROOT		= $(TOOLS_ROOT)/PPC

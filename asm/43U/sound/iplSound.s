@@ -91,7 +91,7 @@
 /* 8136B314 | 3C 60 81 09 */	lis r3, sBannerSoundPlayer__Q23ipl3snd@ha
 /* 8136B318 | 38 80 00 05 */	li r4, 0x5
 /* 8136B31C | 38 63 9F 68 */	addi r3, r3, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8136B320 | 48 0A 33 E1 */	bl fn_8140E700
+/* 8136B320 | 48 0A 33 E1 */	bl init__17BannerSoundPlayerFl
 /* 8136B324 | 3C A0 81 09 */	lis r5, _seBlk__Q23ipl3snd@ha
 /* 8136B328 | 3C 80 00 01 */	lis r4, 0x1
 /* 8136B32C | 38 00 00 10 */	li r0, 0x10
@@ -108,7 +108,7 @@
 /* 8136B354 | 3C 60 81 09 */	lis r3, sBannerSoundPlayer__Q23ipl3snd@ha
 /* 8136B358 | C0 22 82 A0 */	lfs f1, lbl_816946A0@sda21(r0)
 /* 8136B35C | 38 63 9F 68 */	addi r3, r3, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8136B360 | 48 0A 37 E9 */	bl fn_8140EB48
+/* 8136B360 | 48 0A 37 E9 */	bl setMasterVolume__17BannerSoundPlayerFf
 /* 8136B364 | 39 61 00 50 */	addi r11, r1, 0x50
 /* 8136B368 | 48 28 E1 A5 */	bl _restgpr_27
 /* 8136B36C | 80 01 00 54 */	lwz r0, 0x54(r1)
@@ -136,7 +136,7 @@
 /* 8136B39C | 48 28 BB 09 */	bl fn_815F6EA4
 /* 8136B3A0 | 3C 60 81 09 */	lis r3, sBannerSoundPlayer__Q23ipl3snd@ha
 /* 8136B3A4 | 38 63 9F 68 */	addi r3, r3, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8136B3A8 | 48 0A 36 81 */	bl fn_8140EA28
+/* 8136B3A8 | 48 0A 36 81 */	bl calc__17BannerSoundPlayerFv
 /* 8136B3AC | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8136B3B0 | 7C 08 03 A6 */	mtlr r0
 /* 8136B3B4 | 38 21 00 10 */	addi r1, r1, 0x10
@@ -762,7 +762,7 @@
 /* 8136BBB0 | 3C 60 81 09 */	lis r3, sBannerSoundPlayer__Q23ipl3snd@ha
 /* 8136BBB4 | 7F 24 CB 78 */	mr r4, r25
 /* 8136BBB8 | 38 63 9F 68 */	addi r3, r3, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8136BBBC | 48 0A 2D 5D */	bl fn_8140E918
+/* 8136BBBC | 48 0A 2D 5D */	bl stop__17BannerSoundPlayerFUl
 /* 8136BBC0 | 1C 79 03 E8 */	mulli r3, r25, 0x3e8
 /* 8136BBC4 | 38 00 00 3C */	li r0, 0x3c
 /* 8136BBC8 | 7F 83 03 D6 */	divw r28, r3, r0
@@ -834,7 +834,7 @@
 /* 8136BCB0 | 3F E0 81 09 */	lis r31, sBannerSoundPlayer__Q23ipl3snd@ha
 /* 8136BCB4 | 38 80 00 00 */	li r4, 0x0
 /* 8136BCB8 | 38 7F 9F 68 */	addi r3, r31, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8136BCBC | 48 0A 2C 5D */	bl fn_8140E918
+/* 8136BCBC | 48 0A 2C 5D */	bl stop__17BannerSoundPlayerFUl
 /* 8136BCC0 | 48 18 B9 0D */	bl fn_814F75CC
 /* 8136BCC4 | 38 80 00 00 */	li r4, 0x0
 /* 8136BCC8 | 38 A0 00 00 */	li r5, 0x0
@@ -853,7 +853,7 @@
 /* 8136BCFC | 48 18 C4 C5 */	bl fn_814F81C0
 /* 8136BD00 | C0 22 82 A4 */	lfs f1, lbl_816946A4@sda21(r0)
 /* 8136BD04 | 38 7F 9F 68 */	addi r3, r31, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8136BD08 | 48 0A 2E 41 */	bl fn_8140EB48
+/* 8136BD08 | 48 0A 2E 41 */	bl setMasterVolume__17BannerSoundPlayerFf
 /* 8136BD0C | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8136BD10 | 48 28 D7 F9 */	bl _restgpr_26
 /* 8136BD14 | 80 01 00 24 */	lwz r0, 0x24(r1)
@@ -926,7 +926,7 @@
 /* 8136BDE0 | 3C 60 81 09 */	lis r3, sBannerSoundPlayer__Q23ipl3snd@ha
 /* 8136BDE4 | 38 80 00 01 */	li r4, 0x1
 /* 8136BDE8 | 38 63 9F 68 */	addi r3, r3, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8136BDEC | 48 0A 2B DD */	bl fn_8140E9C8
+/* 8136BDEC | 48 0A 2B DD */	bl pause__17BannerSoundPlayerFb
 /* 8136BDF0 | 48 18 B7 DD */	bl fn_814F75CC
 /* 8136BDF4 | 38 80 00 00 */	li r4, 0x0
 /* 8136BDF8 | 38 A0 00 FA */	li r5, 0xfa
@@ -977,7 +977,7 @@
 /* 8136BE90 | 3C 60 81 09 */	lis r3, sBannerSoundPlayer__Q23ipl3snd@ha
 /* 8136BE94 | 38 80 00 00 */	li r4, 0x0
 /* 8136BE98 | 38 63 9F 68 */	addi r3, r3, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8136BE9C | 48 0A 2B 2D */	bl fn_8140E9C8
+/* 8136BE9C | 48 0A 2B 2D */	bl pause__17BannerSoundPlayerFb
 .L_8136BEA0:
 /* 8136BEA0 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8136BEA4 | 83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -1241,7 +1241,7 @@
 /* 8136C1B0 | 7C 9D 23 78 */	mr r29, r4
 /* 8136C1B4 | 7C BE 2B 78 */	mr r30, r5
 /* 8136C1B8 | 38 7F 9F 68 */	addi r3, r31, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8136C1BC | 48 0A 25 FD */	bl fn_8140E7B8
+/* 8136C1BC | 48 0A 25 FD */	bl checkData__17BannerSoundPlayerFPvUlb
 /* 8136C1C0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8136C1C4 | 40 82 00 0C */	bne .L_8136C1D0
 /* 8136C1C8 | 38 60 00 00 */	li r3, 0x0
@@ -1250,7 +1250,7 @@
 /* 8136C1D0 | 7F A4 EB 78 */	mr r4, r29
 /* 8136C1D4 | 7F C5 F3 78 */	mr r5, r30
 /* 8136C1D8 | 38 7F 9F 68 */	addi r3, r31, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8136C1DC | 48 0A 26 25 */	bl fn_8140E800
+/* 8136C1DC | 48 0A 26 25 */	bl start__17BannerSoundPlayerFPvUl
 .L_8136C1E0:
 /* 8136C1E0 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8136C1E4 | 48 28 D3 31 */	bl _restgpr_29
@@ -1265,7 +1265,7 @@
 .fn stopBannerSound__Q33ipl3snd6SystemFi, global
 /* 8136C1F8 | 3C 60 81 09 */	lis r3, sBannerSoundPlayer__Q23ipl3snd@ha
 /* 8136C1FC | 38 63 9F 68 */	addi r3, r3, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8136C200 | 48 0A 27 18 */	b fn_8140E918
+/* 8136C200 | 48 0A 27 18 */	b stop__17BannerSoundPlayerFUl
 .endfn stopBannerSound__Q33ipl3snd6SystemFi
 
 # .text:0xFA8 | 0x8136C204 | size: 0x10
@@ -1274,7 +1274,7 @@
 /* 8136C204 | 3C 60 81 09 */	lis r3, sBannerSoundPlayer__Q23ipl3snd@ha
 /* 8136C208 | 38 C0 00 00 */	li r6, 0x0
 /* 8136C20C | 38 63 9F 68 */	addi r3, r3, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8136C210 | 48 0A 25 A8 */	b fn_8140E7B8
+/* 8136C210 | 48 0A 25 A8 */	b checkData__17BannerSoundPlayerFPvUlb
 .endfn checkTmpSoundFile__Q33ipl3snd6SystemFPvUl
 
 # .text:0xFB8 | 0x8136C214 | size: 0x3C
@@ -1606,10 +1606,10 @@
 /* 8136C604 | 38 BF 00 D8 */	addi r5, r31, 0xd8
 /* 8136C608 | 48 28 C9 D9 */	bl __register_global_object
 /* 8136C60C | 38 7F 07 20 */	addi r3, r31, 0x720
-/* 8136C610 | 48 0A 20 2D */	bl fn_8140E63C
-/* 8136C614 | 3C 80 81 41 */	lis r4, fn_8140E69C@ha
+/* 8136C610 | 48 0A 20 2D */	bl __ct__17BannerSoundPlayerFv
+/* 8136C614 | 3C 80 81 41 */	lis r4, __dt__17BannerSoundPlayerFv@ha
 /* 8136C618 | 38 7F 07 20 */	addi r3, r31, 0x720
-/* 8136C61C | 38 84 E6 9C */	addi r4, r4, fn_8140E69C@l
+/* 8136C61C | 38 84 E6 9C */	addi r4, r4, __dt__17BannerSoundPlayerFv@l
 /* 8136C620 | 38 BF 07 10 */	addi r5, r31, 0x710
 /* 8136C624 | 48 28 C9 BD */	bl __register_global_object
 /* 8136C628 | 80 01 00 14 */	lwz r0, 0x14(r1)

@@ -466,7 +466,7 @@
 /* 81397330 | 80 9D 01 34 */	lwz r4, 0x134(r29)
 /* 81397334 | 80 BD 01 38 */	lwz r5, 0x138(r29)
 /* 81397338 | 38 63 9F 68 */	addi r3, r3, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8139733C | 48 07 74 C5 */	bl fn_8140E800
+/* 8139733C | 48 07 74 C5 */	bl start__17BannerSoundPlayerFPvUl
 /* 81397340 | 3C 80 57 B1 */	lis r4, 0x57b1
 /* 81397344 | 38 7D 01 48 */	addi r3, r29, 0x148
 /* 81397348 | 38 84 2C 00 */	addi r4, r4, 0x2c00
@@ -1000,7 +1000,7 @@
 /* 81397A70 | 3C 60 81 09 */	lis r3, sBannerSoundPlayer__Q23ipl3snd@ha
 /* 81397A74 | 38 80 00 1E */	li r4, 0x1e
 /* 81397A78 | 38 63 9F 68 */	addi r3, r3, sBannerSoundPlayer__Q23ipl3snd@l
-/* 81397A7C | 48 07 6E 9D */	bl fn_8140E918
+/* 81397A7C | 48 07 6E 9D */	bl stop__17BannerSoundPlayerFUl
 .L_81397A80:
 /* 81397A80 | 3C 60 81 09 */	lis r3, sSystem__Q23ipl3snd@ha
 /* 81397A84 | 3C 80 81 65 */	lis r4, lbl_8164BB40@ha
@@ -2133,7 +2133,7 @@
 /* 81398988 | 41 82 00 10 */	beq .L_81398998
 /* 8139898C | 38 7B 9F 68 */	addi r3, r27, sBannerSoundPlayer__Q23ipl3snd@l
 /* 81398990 | 38 80 00 1E */	li r4, 0x1e
-/* 81398994 | 48 07 5F 85 */	bl fn_8140E918
+/* 81398994 | 48 07 5F 85 */	bl stop__17BannerSoundPlayerFUl
 .L_81398998:
 /* 81398998 | 93 9F 00 00 */	stw r28, 0x0(r31)
 /* 8139899C | 48 00 00 30 */	b .L_813989CC
@@ -5581,7 +5581,7 @@
 /* 8139B8C8 | 3C 60 81 09 */	lis r3, sBannerSoundPlayer__Q23ipl3snd@ha
 /* 8139B8CC | 38 80 00 1E */	li r4, 0x1e
 /* 8139B8D0 | 38 63 9F 68 */	addi r3, r3, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8139B8D4 | 48 07 30 45 */	bl fn_8140E918
+/* 8139B8D4 | 48 07 30 45 */	bl stop__17BannerSoundPlayerFUl
 /* 8139B8D8 | 48 00 02 04 */	b .L_8139BADC
 .L_8139B8DC:
 /* 8139B8DC | 7F 63 DB 78 */	mr r3, r27
@@ -5626,7 +5626,7 @@
 /* 8139B974 | 3C 60 81 09 */	lis r3, sBannerSoundPlayer__Q23ipl3snd@ha
 /* 8139B978 | 38 80 00 1E */	li r4, 0x1e
 /* 8139B97C | 38 63 9F 68 */	addi r3, r3, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8139B980 | 48 07 2F 99 */	bl fn_8140E918
+/* 8139B980 | 48 07 2F 99 */	bl stop__17BannerSoundPlayerFUl
 .L_8139B984:
 /* 8139B984 | 80 7D 00 0C */	lwz r3, 0xc(r29)
 /* 8139B988 | 4B FF F2 1D */	bl hide_cmn_btn__Q33ipl5scene12focus_objectFv
@@ -5719,7 +5719,7 @@
 /* 8139BACC | 3C 60 81 09 */	lis r3, sBannerSoundPlayer__Q23ipl3snd@ha
 /* 8139BAD0 | 38 80 00 1E */	li r4, 0x1e
 /* 8139BAD4 | 38 63 9F 68 */	addi r3, r3, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8139BAD8 | 48 07 2E 41 */	bl fn_8140E918
+/* 8139BAD8 | 48 07 2E 41 */	bl stop__17BannerSoundPlayerFUl
 .L_8139BADC:
 /* 8139BADC | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8139BAE0 | 48 25 DA 2D */	bl _restgpr_27
@@ -5789,7 +5789,7 @@
 /* 8139BBCC | 3C 60 81 09 */	lis r3, sBannerSoundPlayer__Q23ipl3snd@ha
 /* 8139BBD0 | 38 80 00 1E */	li r4, 0x1e
 /* 8139BBD4 | 38 63 9F 68 */	addi r3, r3, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8139BBD8 | 48 07 2D 41 */	bl fn_8140E918
+/* 8139BBD8 | 48 07 2D 41 */	bl stop__17BannerSoundPlayerFUl
 .L_8139BBDC:
 /* 8139BBDC | 80 7D 00 0C */	lwz r3, 0xc(r29)
 /* 8139BBE0 | 4B FF EF C5 */	bl hide_cmn_btn__Q33ipl5scene12focus_objectFv

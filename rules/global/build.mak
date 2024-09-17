@@ -10,7 +10,7 @@ endef
 define BuildMWCCASMSources
 	@echo Assembling MWCC $<...
 	@mkdir -p $(dir $@)
-	@$(WIBO) $(2)/$(AS_MWCC) $(COMMON_MWCC_ASFLAGS) -DIPL=$(VERSION) -I- -i $(1) -c -o $@ $<
+	@$(WIBO) $(2)/$(AS_MWCC) $(COMMON_MWCC_ASFLAGS) -DIPL=$(VERSION) $(OBJDIFF_FLAG) -I- -i $(1) -c -o $@ $<
 endef
 
 # $(1) = CC Path
@@ -20,7 +20,7 @@ endef
 define BuildCSources
 	@echo Compiling $<...
 	@mkdir -p $(dir $@)
-	@$(WIBO) $(1)/$(CC) -lang c $(2) -DIPL=$(VERSION) -I- -i $(4) $(foreach INC,$(3),-ir $(INC)) -nodefaults -MD -c -o $(dir $@) $<
+	@$(WIBO) $(1)/$(CC) -lang c $(2) -DIPL=$(VERSION) $(OBJDIFF_FLAG) -I- -i $(4) $(foreach INC,$(3),-ir $(INC)) -nodefaults -MD -c -o $(dir $@) $<
 	@$(PY) $(FIX_DEP) $(subst .o,.d,$@) $(subst .o,.d,$@)
 endef
 
@@ -31,7 +31,7 @@ endef
 define BuildCPPSources
 	@echo Compiling $<...
 	@mkdir -p $(dir $@)
-	@$(WIBO) $(1)/$(CC) -lang c++ $(2) -DIPL=$(VERSION) -I- -i $(4) $(foreach INC,$(3),-ir $(INC)) -nodefaults -MD -c -o $(dir $@) $<
+	@$(WIBO) $(1)/$(CC) -lang c++ $(2) -DIPL=$(VERSION) $(OBJDIFF_FLAG) -I- -i $(4) $(foreach INC,$(3),-ir $(INC)) -nodefaults -MD -c -o $(dir $@) $<
 	@$(PY) $(FIX_DEP) $(subst .o,.d,$@) $(subst .o,.d,$@)
 endef
 

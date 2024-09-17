@@ -403,7 +403,7 @@
 /* 8133AFD0 | 80 9F 00 28 */	lwz r4, 0x28(r31)
 /* 8133AFD4 | 80 BF 00 2C */	lwz r5, 0x2c(r31)
 /* 8133AFD8 | 38 63 9F 68 */	addi r3, r3, sBannerSoundPlayer__Q23ipl3snd@l
-/* 8133AFDC | 48 0D 38 25 */	bl fn_8140E800
+/* 8133AFDC | 48 0D 38 25 */	bl start__17BannerSoundPlayerFPvUl
 /* 8133AFE0 | 38 00 00 00 */	li r0, 0x0
 /* 8133AFE4 | 90 1F 00 34 */	stw r0, 0x34(r31)
 .L_8133AFE8:

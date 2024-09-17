@@ -15,7 +15,7 @@
 /* 813C0308 | 7C BF 2B 78 */	mr r31, r5
 /* 813C030C | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813C0310 | 7C 7E 1B 78 */	mr r30, r3
-/* 813C0314 | 48 04 B1 09 */	bl fn_8140B41C
+/* 813C0314 | 48 04 B1 09 */	bl __ct__Q33ipl5scene10TextWriterFPQ23EGG4Heap
 /* 813C0318 | 3C 60 81 65 */	lis r3, __vt__Q33ipl5scene12LetterWriter@ha
 /* 813C031C | 38 80 00 00 */	li r4, 0x0
 /* 813C0320 | 38 63 04 F8 */	addi r3, r3, __vt__Q33ipl5scene12LetterWriter@l
@@ -55,7 +55,7 @@
 /* 813C0394 | 7C 7E 1B 78 */	mr r30, r3
 /* 813C0398 | 41 82 00 1C */	beq .L_813C03B4
 /* 813C039C | 38 80 00 00 */	li r4, 0x0
-/* 813C03A0 | 48 04 B0 F9 */	bl fn_8140B498
+/* 813C03A0 | 48 04 B0 F9 */	bl __dt__Q33ipl5scene10TextWriterFv
 /* 813C03A4 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813C03A8 | 40 81 00 0C */	ble .L_813C03B4
 /* 813C03AC | 7F C3 F3 78 */	mr r3, r30
@@ -144,7 +144,7 @@
 /* 813C04C4 | 4B F9 5F 81 */	bl getZiOemDic__Q33ipl8keyboard7ManagerFv
 /* 813C04C8 | 7C 7C 1B 78 */	mr r28, r3
 /* 813C04CC | 7F E3 FB 78 */	mr r3, r31
-/* 813C04D0 | 48 04 C3 6D */	bl fn_8140C83C
+/* 813C04D0 | 48 04 C3 6D */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C04D4 | 7C 7D 1B 78 */	mr r29, r3
 /* 813C04D8 | 80 63 01 6C */	lwz r3, 0x16c(r3)
 /* 813C04DC | 7F C4 F3 78 */	mr r4, r30
@@ -168,14 +168,14 @@
 .L_813C0524:
 /* 813C0524 | 90 7F 00 68 */	stw r3, 0x68(r31)
 /* 813C0528 | 7F E3 FB 78 */	mr r3, r31
-/* 813C052C | 48 04 C3 11 */	bl fn_8140C83C
+/* 813C052C | 48 04 C3 11 */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C0530 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813C0534 | 80 9F 00 68 */	lwz r4, 0x68(r31)
 /* 813C0538 | 81 8C 02 94 */	lwz r12, 0x294(r12)
 /* 813C053C | 7D 89 03 A6 */	mtctr r12
 /* 813C0540 | 4E 80 04 21 */	bctrl
 /* 813C0544 | 7F E3 FB 78 */	mr r3, r31
-/* 813C0548 | 48 04 C2 F5 */	bl fn_8140C83C
+/* 813C0548 | 48 04 C2 F5 */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C054C | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813C0550 | 38 8D 8B 20 */	li r4, lbl_81696B60@sda21
 /* 813C0554 | 81 8C 02 60 */	lwz r12, 0x260(r12)
@@ -189,7 +189,7 @@
 /* 813C0574 | 4B F7 E2 49 */	bl getMessage__Q33ipl7message7MessageCFUl
 /* 813C0578 | 7C 7E 1B 78 */	mr r30, r3
 /* 813C057C | 7F E3 FB 78 */	mr r3, r31
-/* 813C0580 | 48 04 C2 BD */	bl fn_8140C83C
+/* 813C0580 | 48 04 C2 BD */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C0584 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813C0588 | 7F C4 F3 78 */	mr r4, r30
 /* 813C058C | 81 8C 02 64 */	lwz r12, 0x264(r12)
@@ -201,7 +201,7 @@
 /* 813C05A4 | 4B F7 E2 19 */	bl getMessage__Q33ipl7message7MessageCFUl
 /* 813C05A8 | 7C 7E 1B 78 */	mr r30, r3
 /* 813C05AC | 7F E3 FB 78 */	mr r3, r31
-/* 813C05B0 | 48 04 C2 8D */	bl fn_8140C83C
+/* 813C05B0 | 48 04 C2 8D */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C05B4 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813C05B8 | 7F C4 F3 78 */	mr r4, r30
 /* 813C05BC | 81 8C 02 68 */	lwz r12, 0x268(r12)
@@ -215,7 +215,7 @@
 /* 813C05DC | 7D 89 03 A6 */	mtctr r12
 /* 813C05E0 | 4E 80 04 21 */	bctrl
 /* 813C05E4 | 7F E3 FB 78 */	mr r3, r31
-/* 813C05E8 | 48 04 C2 55 */	bl fn_8140C83C
+/* 813C05E8 | 48 04 C2 55 */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C05EC | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813C05F0 | 81 8C 02 78 */	lwz r12, 0x278(r12)
 /* 813C05F4 | 7D 89 03 A6 */	mtctr r12
@@ -226,23 +226,23 @@
 /* 813C0608 | 3B BF 00 58 */	addi r29, r31, 0x58
 .L_813C060C:
 /* 813C060C | 7F E3 FB 78 */	mr r3, r31
-/* 813C0610 | 48 04 C7 1D */	bl fn_8140CD2C
+/* 813C0610 | 48 04 C7 1D */	bl getButton__Q33ipl5scene10TextWriterFv
 /* 813C0614 | 7F A4 EB 78 */	mr r4, r29
 /* 813C0618 | 38 A0 00 00 */	li r5, 0x0
 /* 813C061C | 4B FD C3 21 */	bl setEventHandler__Q33ipl5scene6ButtonFPQ23gui12EventHandlerPQ23gui12EventHandler
 /* 813C0620 | 7F E3 FB 78 */	mr r3, r31
-/* 813C0624 | 48 04 C2 19 */	bl fn_8140C83C
+/* 813C0624 | 48 04 C2 19 */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C0628 | 3B A0 00 00 */	li r29, 0x0
 /* 813C062C | 9B A3 03 F0 */	stb r29, 0x3f0(r3)
 /* 813C0630 | 7F E3 FB 78 */	mr r3, r31
-/* 813C0634 | 48 04 C2 09 */	bl fn_8140C83C
+/* 813C0634 | 48 04 C2 09 */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C0638 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813C063C | 38 80 00 00 */	li r4, 0x0
 /* 813C0640 | 81 8C 02 E4 */	lwz r12, 0x2e4(r12)
 /* 813C0644 | 7D 89 03 A6 */	mtctr r12
 /* 813C0648 | 4E 80 04 21 */	bctrl
 /* 813C064C | 7F E3 FB 78 */	mr r3, r31
-/* 813C0650 | 48 04 C1 ED */	bl fn_8140C83C
+/* 813C0650 | 48 04 C1 ED */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C0654 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813C0658 | 80 9F 01 E8 */	lwz r4, 0x1e8(r31)
 /* 813C065C | 81 8C 02 E8 */	lwz r12, 0x2e8(r12)
@@ -301,7 +301,7 @@
 /* 813C0728 | 7D 89 03 A6 */	mtctr r12
 /* 813C072C | 4E 80 04 21 */	bctrl
 /* 813C0730 | 7F E3 FB 78 */	mr r3, r31
-/* 813C0734 | 48 04 C1 09 */	bl fn_8140C83C
+/* 813C0734 | 48 04 C1 09 */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C0738 | 38 00 00 00 */	li r0, 0x0
 /* 813C073C | 98 03 03 F0 */	stb r0, 0x3f0(r3)
 /* 813C0740 | 38 60 00 3C */	li r3, 0x3c
@@ -343,7 +343,7 @@
 /* 813C07C8 | 4B F7 DF F5 */	bl getMessage__Q33ipl7message7MessageCFUl
 /* 813C07CC | 7C 7D 1B 78 */	mr r29, r3
 /* 813C07D0 | 7F E3 FB 78 */	mr r3, r31
-/* 813C07D4 | 48 04 C0 69 */	bl fn_8140C83C
+/* 813C07D4 | 48 04 C0 69 */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C07D8 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813C07DC | 7F A4 EB 78 */	mr r4, r29
 /* 813C07E0 | 81 8C 02 EC */	lwz r12, 0x2ec(r12)
@@ -387,7 +387,7 @@
 # .text:0x528 | 0x813C0820 | size: 0x4
 # ipl::scene::LetterWriter::calcFadein()
 .fn calcFadein__Q33ipl5scene12LetterWriterFv, global
-/* 813C0820 | 48 04 B1 38 */	b fn_8140B958
+/* 813C0820 | 48 04 B1 38 */	b calcFadein__Q33ipl5scene10TextWriterFv
 .endfn calcFadein__Q33ipl5scene12LetterWriterFv
 
 # .text:0x52C | 0x813C0824 | size: 0x234
@@ -468,12 +468,12 @@
 /* 813C0938 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813C093C | C8 01 00 10 */	lfd f0, 0x10(r1)
 /* 813C0940 | EF E0 08 28 */	fsubs f31, f0, f1
-/* 813C0944 | 48 04 BE F9 */	bl fn_8140C83C
+/* 813C0944 | 48 04 BE F9 */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C0948 | FC 20 F8 90 */	fmr f1, f31
 /* 813C094C | FC 40 F0 90 */	fmr f2, f30
 /* 813C0950 | 48 08 47 0D */	bl fn_8144505C
 /* 813C0954 | 7F E3 FB 78 */	mr r3, r31
-/* 813C0958 | 48 04 BE E5 */	bl fn_8140C83C
+/* 813C0958 | 48 04 BE E5 */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C095C | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813C0960 | 38 80 00 01 */	li r4, 0x1
 /* 813C0964 | 81 8C 02 E4 */	lwz r12, 0x2e4(r12)
@@ -493,7 +493,7 @@
 /* 813C0998 | 98 A3 01 E0 */	stb r5, 0x1e0(r3)
 /* 813C099C | 90 03 01 E4 */	stw r0, 0x1e4(r3)
 /* 813C09A0 | 7F E3 FB 78 */	mr r3, r31
-/* 813C09A4 | 48 04 B0 09 */	bl fn_8140B9AC
+/* 813C09A4 | 48 04 B0 09 */	bl initCalcNormal__Q33ipl5scene10TextWriterFv
 /* 813C09A8 | 48 00 00 88 */	b .L_813C0A30
 .L_813C09AC:
 /* 813C09AC | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -517,7 +517,7 @@
 /* 813C09F4 | 4E 80 04 21 */	bctrl
 /* 813C09F8 | 7C 7E 1B 78 */	mr r30, r3
 /* 813C09FC | 7F E3 FB 78 */	mr r3, r31
-/* 813C0A00 | 48 04 BE 3D */	bl fn_8140C83C
+/* 813C0A00 | 48 04 BE 3D */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C0A04 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813C0A08 | 7F C4 F3 78 */	mr r4, r30
 /* 813C0A0C | 81 8C 02 60 */	lwz r12, 0x260(r12)
@@ -528,7 +528,7 @@
 /* 813C0A20 | 98 7F 01 E0 */	stb r3, 0x1e0(r31)
 /* 813C0A24 | 7F E3 FB 78 */	mr r3, r31
 /* 813C0A28 | 90 1F 01 E4 */	stw r0, 0x1e4(r31)
-/* 813C0A2C | 48 04 AF 81 */	bl fn_8140B9AC
+/* 813C0A2C | 48 04 AF 81 */	bl initCalcNormal__Q33ipl5scene10TextWriterFv
 .L_813C0A30:
 /* 813C0A30 | E3 E1 00 48 */	psq_l f31, 0x48(r1), 0, qr0
 /* 813C0A34 | CB E1 00 40 */	lfd f31, 0x40(r1)
@@ -583,7 +583,7 @@
 /* 813C0ADC | 4E 80 04 21 */	bctrl
 /* 813C0AE0 | 7C 7F 1B 78 */	mr r31, r3
 /* 813C0AE4 | 7F C3 F3 78 */	mr r3, r30
-/* 813C0AE8 | 48 04 BD 55 */	bl fn_8140C83C
+/* 813C0AE8 | 48 04 BD 55 */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C0AEC | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813C0AF0 | 7F E4 FB 78 */	mr r4, r31
 /* 813C0AF4 | 81 8C 02 60 */	lwz r12, 0x260(r12)
@@ -737,7 +737,7 @@
 /* 813C0CF0 | 38 00 00 00 */	li r0, 0x0
 /* 813C0CF4 | 98 04 00 2C */	stb r0, 0x2c(r4)
 /* 813C0CF8 | 90 03 01 E4 */	stw r0, 0x1e4(r3)
-/* 813C0CFC | 48 04 C0 31 */	bl fn_8140CD2C
+/* 813C0CFC | 48 04 C0 31 */	bl getButton__Q33ipl5scene10TextWriterFv
 /* 813C0D00 | 7C 7D 1B 78 */	mr r29, r3
 /* 813C0D04 | 38 80 00 10 */	li r4, 0x10
 /* 813C0D08 | 4B FD C7 21 */	bl reserveAnm__Q33ipl5scene6ButtonFi
@@ -785,7 +785,7 @@
 /* 813C0D9C | 38 00 00 00 */	li r0, 0x0
 /* 813C0DA0 | 80 84 00 90 */	lwz r4, 0x90(r4)
 /* 813C0DA4 | 98 04 00 2C */	stb r0, 0x2c(r4)
-/* 813C0DA8 | 48 04 BF 85 */	bl fn_8140CD2C
+/* 813C0DA8 | 48 04 BF 85 */	bl getButton__Q33ipl5scene10TextWriterFv
 /* 813C0DAC | 38 80 00 00 */	li r4, 0x0
 /* 813C0DB0 | 38 A0 00 00 */	li r5, 0x0
 /* 813C0DB4 | 4B FD BB 89 */	bl setEventHandler__Q33ipl5scene6ButtonFPQ23gui12EventHandlerPQ23gui12EventHandler
@@ -809,7 +809,7 @@
 /* 813C0DF8 | 7F E3 FB 78 */	mr r3, r31
 /* 813C0DFC | 80 9E 00 90 */	lwz r4, 0x90(r30)
 /* 813C0E00 | 98 04 00 2C */	stb r0, 0x2c(r4)
-/* 813C0E04 | 48 04 BF 29 */	bl fn_8140CD2C
+/* 813C0E04 | 48 04 BF 29 */	bl getButton__Q33ipl5scene10TextWriterFv
 /* 813C0E08 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813C0E0C | 7F E4 FB 78 */	mr r4, r31
 /* 813C0E10 | 41 82 00 08 */	beq .L_813C0E18
@@ -837,7 +837,7 @@
 /* 813C0E60 | 4E 80 04 21 */	bctrl
 /* 813C0E64 | 7C 7E 1B 78 */	mr r30, r3
 /* 813C0E68 | 7F E3 FB 78 */	mr r3, r31
-/* 813C0E6C | 48 04 B9 D1 */	bl fn_8140C83C
+/* 813C0E6C | 48 04 B9 D1 */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C0E70 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813C0E74 | 7F C4 F3 78 */	mr r4, r30
 /* 813C0E78 | 81 8C 02 60 */	lwz r12, 0x260(r12)
@@ -848,7 +848,7 @@
 /* 813C0E88 | 48 00 00 0C */	b .L_813C0E94
 .L_813C0E8C:
 /* 813C0E8C | 7F E3 FB 78 */	mr r3, r31
-/* 813C0E90 | 48 04 AB 35 */	bl fn_8140B9C4
+/* 813C0E90 | 48 04 AB 35 */	bl calcNormal__Q33ipl5scene10TextWriterFv
 .L_813C0E94:
 /* 813C0E94 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 813C0E98 | 48 23 86 7D */	bl _restgpr_29
@@ -866,7 +866,7 @@
 /* 813C0EB4 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813C0EB8 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813C0EBC | 7C 7F 1B 78 */	mr r31, r3
-/* 813C0EC0 | 48 04 BE 6D */	bl fn_8140CD2C
+/* 813C0EC0 | 48 04 BE 6D */	bl getButton__Q33ipl5scene10TextWriterFv
 /* 813C0EC4 | 38 80 00 00 */	li r4, 0x0
 /* 813C0EC8 | 38 A0 00 00 */	li r5, 0x0
 /* 813C0ECC | 4B FD BA 71 */	bl setEventHandler__Q33ipl5scene6ButtonFPQ23gui12EventHandlerPQ23gui12EventHandler
@@ -907,7 +907,7 @@
 # .text:0xC3C | 0x813C0F34 | size: 0x4
 # ipl::scene::LetterWriter::calcFadeout()
 .fn calcFadeout__Q33ipl5scene12LetterWriterFv, global
-/* 813C0F34 | 48 04 B2 F8 */	b fn_8140C22C
+/* 813C0F34 | 48 04 B2 F8 */	b calcFadeout__Q33ipl5scene10TextWriterFv
 .endfn calcFadeout__Q33ipl5scene12LetterWriterFv
 
 # .text:0xC40 | 0x813C0F38 | size: 0x314
@@ -925,7 +925,7 @@
 /* 813C0F5C | 2C 00 00 02 */	cmpwi r0, 0x2
 /* 813C0F60 | 7C DC 33 78 */	mr r28, r6
 /* 813C0F64 | 41 82 02 D0 */	beq .L_813C1234
-/* 813C0F68 | 48 04 B8 C1 */	bl fn_8140C828
+/* 813C0F68 | 48 04 B8 C1 */	bl getMemoManager__Q33ipl5scene10TextWriterFv
 /* 813C0F6C | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813C0F70 | 81 8C 00 E0 */	lwz r12, 0xe0(r12)
 /* 813C0F74 | 7D 89 03 A6 */	mtctr r12
@@ -964,7 +964,7 @@
 /* 813C0FF4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813C0FF8 | 41 82 02 3C */	beq .L_813C1234
 /* 813C0FFC | 7F E3 FB 78 */	mr r3, r31
-/* 813C1000 | 48 04 BD 2D */	bl fn_8140CD2C
+/* 813C1000 | 48 04 BD 2D */	bl getButton__Q33ipl5scene10TextWriterFv
 /* 813C1004 | 3F C0 81 65 */	lis r30, mscButtonName__Q33ipl5scene6Button@ha
 /* 813C1008 | 7C 7C 1B 78 */	mr r28, r3
 /* 813C100C | 3B DE BF 5C */	addi r30, r30, mscButtonName__Q33ipl5scene6Button@l
@@ -1132,7 +1132,7 @@
 /* 813C1258 | 93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 813C125C | 93 C1 00 18 */	stw r30, 0x18(r1)
 /* 813C1260 | 7C 7E 1B 78 */	mr r30, r3
-/* 813C1264 | 48 04 BA C9 */	bl fn_8140CD2C
+/* 813C1264 | 48 04 BA C9 */	bl getButton__Q33ipl5scene10TextWriterFv
 /* 813C1268 | 3C 80 81 65 */	lis r4, lbl_816503BF@ha
 /* 813C126C | 3C A0 81 09 */	lis r5, sSystem__Q23ipl3snd@ha
 /* 813C1270 | 7C 7F 1B 78 */	mr r31, r3
@@ -1142,7 +1142,7 @@
 /* 813C1280 | 38 00 00 00 */	li r0, 0x0
 /* 813C1284 | 7F C3 F3 78 */	mr r3, r30
 /* 813C1288 | 98 1E 00 7D */	stb r0, 0x7d(r30)
-/* 813C128C | 48 04 B5 B1 */	bl fn_8140C83C
+/* 813C128C | 48 04 B5 B1 */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C1290 | 80 63 03 E8 */	lwz r3, 0x3e8(r3)
 /* 813C1294 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813C1298 | 81 8C 00 3C */	lwz r12, 0x3c(r12)
@@ -1306,7 +1306,7 @@
 /* 813C14E0 | 80 64 00 90 */	lwz r3, 0x90(r4)
 /* 813C14E4 | 4B F9 4F 29 */	bl sendRelease__Q33ipl8keyboard7ManagerFv
 /* 813C14E8 | 7F C3 F3 78 */	mr r3, r30
-/* 813C14EC | 48 04 B3 51 */	bl fn_8140C83C
+/* 813C14EC | 48 04 B3 51 */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C14F0 | 9B E3 03 F0 */	stb r31, 0x3f0(r3)
 /* 813C14F4 | 38 00 00 06 */	li r0, 0x6
 /* 813C14F8 | 90 1E 00 64 */	stw r0, 0x64(r30)
@@ -1713,7 +1713,7 @@
 /* 813C1A54 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813C1A58 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813C1A5C | 7C 9F 23 78 */	mr r31, r4
-/* 813C1A60 | 48 04 AD DD */	bl fn_8140C83C
+/* 813C1A60 | 48 04 AD DD */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C1A64 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813C1A68 | 81 8C 02 D0 */	lwz r12, 0x2d0(r12)
 /* 813C1A6C | 7D 89 03 A6 */	mtctr r12
@@ -1905,10 +1905,10 @@
 	.4byte isResetAcceptable__Q33ipl5scene10TextWriterCFv
 	.4byte startResetting__Q33ipl5scene4BaseFv
 	.4byte isResetProcessDone__Q33ipl5scene4BaseFv
-	.4byte fn_8140B554
+	.4byte prepare__Q33ipl5scene10TextWriterFv
 	.4byte create__Q33ipl5scene12LetterWriterFv
 	.4byte calc__Q33ipl5scene14FaderSceneBaseFv
-	.4byte fn_8140B8FC
+	.4byte draw__Q33ipl5scene10TextWriterFv
 	.4byte destroy__Q33ipl5scene12LetterWriterFv
 	.4byte initCalcNormal__Q33ipl5scene12LetterWriterFv
 	.4byte initCalcFadeout__Q33ipl5scene12LetterWriterFv
@@ -1924,17 +1924,17 @@
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
 	.4byte "@88@onEventDerived__Q33ipl5scene12LetterWriterFUlUlPCQ33ipl10controller9Interface"
-	.4byte fn_8140C368
-	.4byte fn_8140CBE8
-	.4byte fn_8140C288
-	.4byte fn_8140C2A0
-	.4byte fn_8140C2B8
+	.4byte onNigaoeButton__Q33ipl5scene10TextWriterFv
+	.4byte setNigaoe__Q33ipl5scene10TextWriterFPQ33ipl6nigaoe6Object
+	.4byte pointNigaoeButton__Q33ipl5scene10TextWriterFv
+	.4byte leftNigaoeButton__Q33ipl5scene10TextWriterFv
+	.4byte moveNigaoeButton__Q33ipl5scene10TextWriterFv
 	.4byte onEventDerived__Q33ipl5scene12LetterWriterFUlUlPCQ33ipl10controller9Interface
 	.4byte onSend__Q33ipl5scene12LetterWriterFv
-	.4byte fn_8140C85C
+	.4byte openNWC24__Q33ipl5scene10TextWriterFv
 	.4byte sendMessageByNWC24__Q33ipl5scene12LetterWriterFUxPCw
-	.4byte fn_8140CBBC
-	.4byte fn_8140CBE0
+	.4byte closeNWC24__Q33ipl5scene10TextWriterFv
+	.4byte getMyUserID__Q33ipl5scene10TextWriterFPUx
 	.4byte setFriendInfo__Q33ipl5scene12LetterWriterFRC15NWC24FriendInfo
 	.4byte setPhoto__Q33ipl5scene12LetterWriterFRC9_GXTexObj
 	.4byte sendToWii__Q33ipl5scene12LetterWriterFUxPCw

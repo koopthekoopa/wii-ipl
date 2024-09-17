@@ -2,13 +2,12 @@
 # Wii Menu Decompilation [![Discord Server][discord-server-badge]][discord-server-link]
 [discord-server-link]: https://discord.gg/hKx3FJJgrV
 [discord-server-badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
-This is a Work In Progress decompilation of the Wii Menu.
+This work in progress repository aims to a full 1:1 decompilation of version 4.3 of the Wii Menu. Currenty supported versions: 4.3U (USA)   
 
-Supported versions (currently):
-- 4.3 (USA)
+This repository requires a WAD of the Wii Menu.
 
 ## Dependencies
-**TODO: build for MAC OS**   
+**TODO: build for Mac OS**   
 The following dependencies are required to build the decompilation:   
 
 - Git (optional)
@@ -32,14 +31,12 @@ You will also need to install Python 3 yourself [here](https://www.python.org/do
 
 ### Linux
 
-For linux users, this is how you install the dependencies depending on your distribution
-
-### For Ubuntu/Debian
+For Ubuntu/Debian:   
 ```
 sudo apt install build-essential git python3
 ```
 
-### For Arch Linux
+For Arch Linux:   
 ```
 sudo pacman -S base-devel python git
 ```
@@ -52,7 +49,7 @@ sudo pacman -S base-devel python git
   ```
   - Otherwise download the repository by clicking on **Code** then **Download ZIP** then extract the .zip contents   
 
-- You will need a copy of the Wii Menu's Executable from it's WAD file.
+- As stated abobe, you will need a WAD of the Wii Menu to grab its executable.
   - Use your preferred WAD Extractor (I recommend ShowMiiWADs as it also works fine on Linux, if you have Wine) and use it to extract the Wii Menu WAD file.
   - Then copy the executable file `00000008.app` to the decompilation directory and rename it to `base.<version>.app`
     - Make sure the version on the filename does not include the decimal at the middle (for example `4.3U` should be `43U`)
@@ -62,8 +59,8 @@ sudo pacman -S base-devel python git
   ```
   make prepare VERSION=<version>
   ```   
-
-- You are now ready to build! To build you need to type in
+  where `<version>` is the chosen version to compile. (If you do not define `VERSION`, it will compile 4.3U by default)
+- You are now ready to build! To build you need to type in:
   ```
   make VERSION=<version>
   ```

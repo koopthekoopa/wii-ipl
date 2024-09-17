@@ -255,7 +255,7 @@
 /* 8140A2E8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8140A2EC | 41 82 00 0C */	beq .L_8140A2F8
 /* 8140A2F0 | 7F A4 EB 78 */	mr r4, r29
-/* 8140A2F4 | 48 00 11 29 */	bl fn_8140B41C
+/* 8140A2F4 | 48 00 11 29 */	bl __ct__Q33ipl5scene10TextWriterFPQ23EGG4Heap
 .L_8140A2F8:
 /* 8140A2F8 | 7C 7F 1B 78 */	mr r31, r3
 /* 8140A2FC | 48 00 01 E0 */	b .L_8140A4DC

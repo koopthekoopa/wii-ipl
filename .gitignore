@@ -52,7 +52,7 @@ tools/*.txt
 *.log
 *.elf
 *.dol
-objdiff.json.old
+objdiff.json
 *.lnk
 
 # Scrapped :(
