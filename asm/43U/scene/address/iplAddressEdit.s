@@ -2620,12 +2620,12 @@
 /* 8138A4C0 | 80 7D 00 90 */	lwz r3, 0x90(r29)
 /* 8138A4C4 | 38 80 00 00 */	li r4, 0x0
 /* 8138A4C8 | 80 63 00 04 */	lwz r3, 0x4(r3)
-/* 8138A4CC | 48 0A EB DD */	bl fn_814390A8
+/* 8138A4CC | 48 0A EB DD */	bl enableKSXFilter__Q29textinput7ManagerFb
 /* 8138A4D0 | 48 00 00 20 */	b .L_8138A4F0
 .L_8138A4D4:
 /* 8138A4D4 | 80 7D 00 90 */	lwz r3, 0x90(r29)
 /* 8138A4D8 | 80 63 00 04 */	lwz r3, 0x4(r3)
-/* 8138A4DC | 48 0A EC 35 */	bl fn_81439110
+/* 8138A4DC | 48 0A EC 35 */	bl isVacancy__Q29textinput7ManagerCFv
 /* 8138A4E0 | 7C 65 1B 78 */	mr r5, r3
 /* 8138A4E4 | 7F C3 F3 78 */	mr r3, r30
 /* 8138A4E8 | 38 80 00 00 */	li r4, 0x0
@@ -3011,7 +3011,7 @@
 /* 8138AA28 | 41 82 00 20 */	beq .L_8138AA48
 /* 8138AA2C | 80 7D 00 90 */	lwz r3, 0x90(r29)
 /* 8138AA30 | 80 63 00 04 */	lwz r3, 0x4(r3)
-/* 8138AA34 | 48 0A E6 DD */	bl fn_81439110
+/* 8138AA34 | 48 0A E6 DD */	bl isVacancy__Q29textinput7ManagerCFv
 /* 8138AA38 | 7C 65 1B 78 */	mr r5, r3
 /* 8138AA3C | 7F C3 F3 78 */	mr r3, r30
 /* 8138AA40 | 38 80 00 00 */	li r4, 0x0
@@ -3469,12 +3469,12 @@
 /* 8138B054 | 80 7D 00 90 */	lwz r3, 0x90(r29)
 /* 8138B058 | 38 80 00 00 */	li r4, 0x0
 /* 8138B05C | 80 63 00 04 */	lwz r3, 0x4(r3)
-/* 8138B060 | 48 0A E0 49 */	bl fn_814390A8
+/* 8138B060 | 48 0A E0 49 */	bl enableKSXFilter__Q29textinput7ManagerFb
 /* 8138B064 | 48 00 00 20 */	b .L_8138B084
 .L_8138B068:
 /* 8138B068 | 80 7D 00 90 */	lwz r3, 0x90(r29)
 /* 8138B06C | 80 63 00 04 */	lwz r3, 0x4(r3)
-/* 8138B070 | 48 0A E0 A1 */	bl fn_81439110
+/* 8138B070 | 48 0A E0 A1 */	bl isVacancy__Q29textinput7ManagerCFv
 /* 8138B074 | 7C 65 1B 78 */	mr r5, r3
 /* 8138B078 | 7F C3 F3 78 */	mr r3, r30
 /* 8138B07C | 38 80 00 00 */	li r4, 0x0
@@ -5629,11 +5629,11 @@
 /* 8138CDFC | 80 63 01 6C */	lwz r3, 0x16c(r3)
 /* 8138CE00 | 7F 64 DB 78 */	mr r4, r27
 /* 8138CE04 | 7F 45 D3 78 */	mr r5, r26
-/* 8138CE08 | 48 0A 70 C9 */	bl fn_81433ED0
+/* 8138CE08 | 48 0A 70 C9 */	bl openDictionary__Q39textinput8tistring6WithZiFPvPv
 /* 8138CE0C | 7F 83 E3 78 */	mr r3, r28
-/* 8138CE10 | 48 09 43 65 */	bl fn_81421174
+/* 8138CE10 | 48 09 43 65 */	bl initZiString__Q39textinput9inputform4BaseFv
 /* 8138CE14 | 7F 83 E3 78 */	mr r3, r28
-/* 8138CE18 | 48 09 7C D5 */	bl fn_81424AEC
+/* 8138CE18 | 48 09 7C D5 */	bl resetContextPredict___Q39textinput9inputform4BaseFv
 /* 8138CE1C | 38 00 00 0D */	li r0, 0xd
 /* 8138CE20 | 90 01 00 38 */	stw r0, 0x38(r1)
 /* 8138CE24 | 48 00 00 1C */	b .L_8138CE40
@@ -5643,7 +5643,7 @@
 /* 8138CE30 | 90 01 00 38 */	stw r0, 0x38(r1)
 /* 8138CE34 | 38 80 00 01 */	li r4, 0x1
 /* 8138CE38 | 80 63 00 04 */	lwz r3, 0x4(r3)
-/* 8138CE3C | 48 0A C2 6D */	bl fn_814390A8
+/* 8138CE3C | 48 0A C2 6D */	bl enableKSXFilter__Q29textinput7ManagerFb
 .L_8138CE40:
 /* 8138CE40 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
 /* 8138CE44 | 7F C4 F3 78 */	mr r4, r30
@@ -5778,11 +5778,11 @@
 /* 8138D024 | 80 63 01 6C */	lwz r3, 0x16c(r3)
 /* 8138D028 | 7F 44 D3 78 */	mr r4, r26
 /* 8138D02C | 7F 65 DB 78 */	mr r5, r27
-/* 8138D030 | 48 0A 6E A1 */	bl fn_81433ED0
+/* 8138D030 | 48 0A 6E A1 */	bl openDictionary__Q39textinput8tistring6WithZiFPvPv
 /* 8138D034 | 7F 83 E3 78 */	mr r3, r28
-/* 8138D038 | 48 09 41 3D */	bl fn_81421174
+/* 8138D038 | 48 09 41 3D */	bl initZiString__Q39textinput9inputform4BaseFv
 /* 8138D03C | 7F 83 E3 78 */	mr r3, r28
-/* 8138D040 | 48 09 7A AD */	bl fn_81424AEC
+/* 8138D040 | 48 09 7A AD */	bl resetContextPredict___Q39textinput9inputform4BaseFv
 /* 8138D044 | 38 00 00 0D */	li r0, 0xd
 /* 8138D048 | 90 01 00 08 */	stw r0, 0x8(r1)
 /* 8138D04C | 48 00 00 1C */	b .L_8138D068
@@ -5792,7 +5792,7 @@
 /* 8138D058 | 90 01 00 08 */	stw r0, 0x8(r1)
 /* 8138D05C | 38 80 00 01 */	li r4, 0x1
 /* 8138D060 | 80 63 00 04 */	lwz r3, 0x4(r3)
-/* 8138D064 | 48 0A C0 45 */	bl fn_814390A8
+/* 8138D064 | 48 0A C0 45 */	bl enableKSXFilter__Q29textinput7ManagerFb
 .L_8138D068:
 /* 8138D068 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
 /* 8138D06C | 7F C4 F3 78 */	mr r4, r30

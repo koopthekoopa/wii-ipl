@@ -49,6 +49,8 @@ BS2_CMN_CCPATH	=	$(CW_GC_30A52)
 -include $(RULES_ROOT)/BS2Libs/scene/sdChannelMenu.mak
 -include $(RULES_ROOT)/BS2Libs/scene/setting.mak
 -include $(RULES_ROOT)/BS2Libs/scene/sceneSystem.mak
+-include $(RULES_ROOT)/BS2Libs/scene/textWriter.mak
+-include $(RULES_ROOT)/BS2Libs/bannerSound.mak
 
 BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(BS2_BLD_PATH)/utility.a \
@@ -78,6 +80,8 @@ BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(BS2_BLD_PATH)/scene/sdChannelMenu.a \
 						$(BS2_BLD_PATH)/scene/setting.a \
 						$(BS2_BLD_PATH)/scene/sceneSystem.a \
+						$(BS2_BLD_PATH)/scene/textWriter.a \
+						$(BS2_BLD_PATH)/bannerSound.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/base.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/os.a \
 						$(RUNTIME_ROOT)/$(BUILD_ROOT)/Runtime.PPCEABI.H.a

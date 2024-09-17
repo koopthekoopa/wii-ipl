@@ -149,11 +149,11 @@
 /* 813C04D8 | 80 63 01 6C */	lwz r3, 0x16c(r3)
 /* 813C04DC | 7F C4 F3 78 */	mr r4, r30
 /* 813C04E0 | 7F 85 E3 78 */	mr r5, r28
-/* 813C04E4 | 48 07 39 ED */	bl fn_81433ED0
+/* 813C04E4 | 48 07 39 ED */	bl openDictionary__Q39textinput8tistring6WithZiFPvPv
 /* 813C04E8 | 7F A3 EB 78 */	mr r3, r29
-/* 813C04EC | 48 06 0C 89 */	bl fn_81421174
+/* 813C04EC | 48 06 0C 89 */	bl initZiString__Q39textinput9inputform4BaseFv
 /* 813C04F0 | 7F A3 EB 78 */	mr r3, r29
-/* 813C04F4 | 48 06 45 F9 */	bl fn_81424AEC
+/* 813C04F4 | 48 06 45 F9 */	bl resetContextPredict___Q39textinput9inputform4BaseFv
 /* 813C04F8 | 38 60 08 00 */	li r3, 0x800
 /* 813C04FC | 48 23 7B C5 */	bl __nwa__FUl
 /* 813C0500 | 90 7F 00 80 */	stw r3, 0x80(r31)

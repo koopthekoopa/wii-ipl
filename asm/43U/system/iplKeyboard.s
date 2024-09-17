@@ -432,7 +432,7 @@
 /* 8135527C | 7F A4 EB 78 */	mr r4, r29
 /* 81355280 | 7F C5 F3 78 */	mr r5, r30
 /* 81355284 | 38 DB 00 08 */	addi r6, r27, 0x8
-/* 81355288 | 48 0E 22 D1 */	bl fn_81437558
+/* 81355288 | 48 0E 22 D1 */	bl __ct__Q29textinput7ManagerFP12MEMAllocatorPQ34nw4r3lyt24MultiArcResourceAccessorPQ29textinput13EventObserver
 /* 8135528C | 3C 80 81 67 */	lis r4, lbl_816680A8@ha
 /* 81355290 | 38 60 00 00 */	li r3, 0x0
 /* 81355294 | 38 84 80 A8 */	addi r4, r4, lbl_816680A8@l
@@ -651,8 +651,8 @@
 /* 81355560 | 81 8C 00 1C */	lwz r12, 0x1c(r12)
 /* 81355564 | 7D 89 03 A6 */	mtctr r12
 /* 81355568 | 4E 80 04 21 */	bctrl
-/* 8135556C | 3C 60 81 0D */	lis r3, lbl_810C8844@ha
-/* 81355570 | 38 63 88 44 */	addi r3, r3, lbl_810C8844@l
+/* 8135556C | 3C 60 81 0D */	lis r3, sInstance__Q39textinput5input10HKBManager@ha
+/* 81355570 | 38 63 88 44 */	addi r3, r3, sInstance__Q39textinput5input10HKBManager@l
 /* 81355574 | 48 0F 21 D1 */	bl fn_81447744
 /* 81355578 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8135557C | 83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -809,11 +809,11 @@
 /* 8135578C | 90 7B 00 1C */	stw r3, 0x1c(r27)
 /* 81355790 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81355794 | 41 82 03 B4 */	beq .L_81355B48
-/* 81355798 | 3F 80 81 0D */	lis r28, lbl_810C8844@ha
-/* 8135579C | 38 7C 88 44 */	addi r3, r28, lbl_810C8844@l
+/* 81355798 | 3F 80 81 0D */	lis r28, sInstance__Q39textinput5input10HKBManager@ha
+/* 8135579C | 38 7C 88 44 */	addi r3, r28, sInstance__Q39textinput5input10HKBManager@l
 /* 813557A0 | 48 0F 22 D9 */	bl fn_81447A78
 /* 813557A4 | 80 7B 00 04 */	lwz r3, 0x4(r27)
-/* 813557A8 | 38 9C 88 44 */	addi r4, r28, lbl_810C8844@l
+/* 813557A8 | 38 9C 88 44 */	addi r4, r28, sInstance__Q39textinput5input10HKBManager@l
 /* 813557AC | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813557B0 | 81 8C 00 20 */	lwz r12, 0x20(r12)
 /* 813557B4 | 7D 89 03 A6 */	mtctr r12
@@ -1478,7 +1478,7 @@
 /* 81356068 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8135606C | 7C 7E 1B 78 */	mr r30, r3
 /* 81356070 | 80 63 00 04 */	lwz r3, 0x4(r3)
-/* 81356074 | 48 0E 30 2D */	bl fn_814390A0
+/* 81356074 | 48 0E 30 2D */	bl enableCompatibleFilter__Q29textinput7ManagerFb
 /* 81356078 | 28 1F 00 0D */	cmplwi r31, 0xd
 /* 8135607C | 41 81 01 6C */	bgt .L_813561E8
 /* 81356080 | 3C 60 81 64 */	lis r3, jumptable_81638DB8@ha

@@ -4318,11 +4318,11 @@
 /* 813F4414 | 80 63 01 6C */	lwz r3, 0x16c(r3)
 /* 813F4418 | 7F 24 CB 78 */	mr r4, r25
 /* 813F441C | 7F 05 C3 78 */	mr r5, r24
-/* 813F4420 | 48 03 FA B1 */	bl fn_81433ED0
+/* 813F4420 | 48 03 FA B1 */	bl openDictionary__Q39textinput8tistring6WithZiFPvPv
 /* 813F4424 | 7F 63 DB 78 */	mr r3, r27
-/* 813F4428 | 48 02 CD 4D */	bl fn_81421174
+/* 813F4428 | 48 02 CD 4D */	bl initZiString__Q39textinput9inputform4BaseFv
 /* 813F442C | 7F 63 DB 78 */	mr r3, r27
-/* 813F4430 | 48 03 06 BD */	bl fn_81424AEC
+/* 813F4430 | 48 03 06 BD */	bl resetContextPredict___Q39textinput9inputform4BaseFv
 .L_813F4434:
 /* 813F4434 | 3F 60 81 09 */	lis r27, smArg__Q23ipl6System@ha
 /* 813F4438 | 38 1A 09 38 */	addi r0, r26, 0x938
@@ -4692,7 +4692,7 @@
 /* 813F48F0 | 3B DE 90 08 */	addi r30, r30, smArg__Q23ipl6System@l
 /* 813F48F4 | 80 7E 00 90 */	lwz r3, 0x90(r30)
 /* 813F48F8 | 80 63 00 04 */	lwz r3, 0x4(r3)
-/* 813F48FC | 48 04 48 15 */	bl fn_81439110
+/* 813F48FC | 48 04 48 15 */	bl isVacancy__Q29textinput7ManagerCFv
 /* 813F4900 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813F4904 | 41 82 00 10 */	beq .L_813F4914
 /* 813F4908 | 7F E3 FB 78 */	mr r3, r31
