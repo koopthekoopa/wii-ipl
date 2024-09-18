@@ -6,8 +6,7 @@
 
 namespace nw4r {
     namespace ut {
-        typedef struct Color : public GXColor {
-        };
+        typedef struct Color : public GXColor {};
     }
 }
 

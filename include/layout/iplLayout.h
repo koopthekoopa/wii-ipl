@@ -13,9 +13,10 @@
 
 namespace ipl {
     enum {
-        ANIM_TYPE_ONE_TIME = 0,
-        ANIM_TYPE_WAIT,
-        ANIM_TYPE_LOOP
+        ANIM_TYPE_FORWARD = 0,
+        ANIM_TYPE_BACKWARD,
+        ANIM_TYPE_LOOP,
+        ANIM_TYPE_ALTERNATE
     };
     namespace layout {
         class Object {

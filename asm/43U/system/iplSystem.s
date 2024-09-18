@@ -2217,7 +2217,7 @@
 
 # .text:0x1EAC | 0x81334AD0 | size: 0x40
 # nw4r::ut::Color::~Color()
-.fn __dt__Q34nw4r2ut5ColorFv, global
+.fn __dt__Q34nw4r2ut5ColorFv, weak
 /* 81334AD0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81334AD4 | 7C 08 02 A6 */	mflr r0
 /* 81334AD8 | 2C 03 00 00 */	cmpwi r3, 0x0

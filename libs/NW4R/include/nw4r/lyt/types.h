@@ -38,6 +38,12 @@ namespace nw4r {
 
                 ut::LinkListNode    mNode;
         };
+        
+        enum {
+            TEXT_COLOR_FORE = 0,
+            TEXT_COLOR_BACK,
+            TEXT_COLOR_MAX
+        };
     }
 }
 

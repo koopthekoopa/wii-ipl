@@ -282,9 +282,9 @@
 /* 813C06E0 | 48 23 79 BD */	bl __nw__FUl
 /* 813C06E4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813C06E8 | 41 82 00 30 */	beq .L_813C0718
-/* 813C06EC | 3C A0 81 66 */	lis r5, lbl_8165F5E8@ha
+/* 813C06EC | 3C A0 81 66 */	lis r5, __vt__Q39textinput8tistring10StringBase@ha
 /* 813C06F0 | 38 80 04 00 */	li r4, 0x400
-/* 813C06F4 | 38 A5 F5 E8 */	addi r5, r5, lbl_8165F5E8@l
+/* 813C06F4 | 38 A5 F5 E8 */	addi r5, r5, __vt__Q39textinput8tistring10StringBase@l
 /* 813C06F8 | 38 00 00 00 */	li r0, 0x0
 /* 813C06FC | 90 A3 00 00 */	stw r5, 0x0(r3)
 /* 813C0700 | B0 83 00 04 */	sth r4, 0x4(r3)
@@ -471,7 +471,7 @@
 /* 813C0944 | 48 04 BE F9 */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C0948 | FC 20 F8 90 */	fmr f1, f31
 /* 813C094C | FC 40 F0 90 */	fmr f2, f30
-/* 813C0950 | 48 08 47 0D */	bl fn_8144505C
+/* 813C0950 | 48 08 47 0D */	bl resizePhotoPane__Q49textinput6extend6letter9InputFormFff
 /* 813C0954 | 7F E3 FB 78 */	mr r3, r31
 /* 813C0958 | 48 04 BE E5 */	bl getMemoInputForm__Q33ipl5scene10TextWriterFv
 /* 813C095C | 81 83 00 00 */	lwz r12, 0x0(r3)

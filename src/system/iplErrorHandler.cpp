@@ -112,7 +112,7 @@ namespace ipl {
                     pMsg = ipl_error_spa_bmg;
                     break;
                 }
-                case SC_LANG_SIMPLE_CHINESE: {
+                case SC_LANG_SIMP_CHINESE: {
                     pMsg = ipl_error_chn_bmg;
                     break;
                 }

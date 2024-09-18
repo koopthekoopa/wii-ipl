@@ -1,6 +1,8 @@
 #ifndef REVOLUTION_OS_H
 #define REVOLUTION_OS_H
 
+#include <revolution/gx/GXStruct.h>
+
 #include <stdarg.h>
 
 #ifdef __cplusplus
@@ -68,6 +70,8 @@ void    OSShutdownSystem();
 
 void    OSReport(const char* msg, ...);
 void    OSVReport(const char* msg, va_list list);
+
+void    OSFatal(GXColor front, GXColor back, const char* msg);
 
 OSTick  OSGetTick();
 void    OSSleepTicks(OSTime ticks);

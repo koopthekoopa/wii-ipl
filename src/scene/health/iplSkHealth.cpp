@@ -134,11 +134,11 @@ namespace ipl {
             s32 region = System::getRegion();
 
             switch (region) {
-                case SC_AREA_JAPAN: {
+                case SC_PRODUCT_AREA_JPN: {
                     result = LANG_JPN;
                     break;
                 }
-                case SC_AREA_NORTH_AMERICA: {
+                case SC_PRODUCT_AREA_USA: {
                     switch (language) {
                         case SC_LANG_ENGLISH: {
                             result = LANG_US_ENG;
@@ -155,7 +155,7 @@ namespace ipl {
                     }
                     break;
                 }
-                case SC_AREA_EUROPE: {
+                case SC_PRODUCT_AREA_EUR: {
                     switch (language) {
                         case SC_LANG_ENGLISH: {
                             result = LANG_EU_ENG;
@@ -184,11 +184,11 @@ namespace ipl {
                     }
                     break;
                 }
-                case SC_AREA_KOREA: {
+                case SC_PRODUCT_AREA_KOR: {
                     result = LANG_KOR;
                     break;
                 }
-                case SC_AREA_CHINA: {
+                case SC_PRODUCT_AREA_CHN: {
                     result = LANG_CHN;
                     break;
                 }
@@ -230,9 +230,9 @@ namespace ipl {
             mpLayout->bindToGroup("it_Has_a_Push.brlan",    "G_Push");
             mpLayout->bindToGroup("it_Has_a_SeenOut.brlan", "G_All");
 
-            mpLayout->setAnmType(ANIM_TYPE_ONE_TIME,        ANIM_FADE_IN);
+            mpLayout->setAnmType(ANIM_TYPE_FORWARD,         ANIM_FADE_IN);
             mpLayout->setAnmType(ANIM_TYPE_LOOP,            ANIM_WAIT_PUSH);
-            mpLayout->setAnmType(ANIM_TYPE_ONE_TIME,        ANIM_FADE_OUT);
+            mpLayout->setAnmType(ANIM_TYPE_FORWARD,         ANIM_FADE_OUT);
 
             mpLayout->finishBinding();
 

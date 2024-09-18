@@ -49,7 +49,7 @@ namespace ipl {
                     mpMessage->setResource(System::getSpaMsg()->getBuffer());
                     break;
                 }
-                case SC_LANG_SIMPLE_CHINESE: {
+                case SC_LANG_SIMP_CHINESE: {
                     mpMessage->setResource(System::getChnMsg()->getBuffer());
                     break;
                 }
