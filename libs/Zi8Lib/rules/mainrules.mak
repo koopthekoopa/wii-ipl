@@ -27,7 +27,7 @@ ZI8_OBJECTS     	=	$(ZI8_OBJASM_PATH)/zi8etzx.o \
                         $(ZI8_OBJASM_PATH)/zi8uwd.o \
                         $(ZI8_OBJASM_PATH)/zi8dawg2.o \
                         $(ZI8_OBJASM_PATH)/zi8candkorea.o \
-                        $(ZI8_OBJASM_PATH)/zi8error.o \
+                        $(ZI8_OBJ_PATH)/zi8error.o \
                         $(ZI8_OBJASM_PATH)/zi8keymatch.o \
                         $(ZI8_OBJASM_PATH)/zi8oemdata.o \
                         $(ZI8_OBJASM_PATH)/zi8prepare.o

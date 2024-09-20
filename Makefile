@@ -60,7 +60,7 @@ build/$(IPL_OUTFILE): bs1 bs2
 	@sha1sum -c $(CONFIG_ROOT)/sha1.txt
 
 # Clean
-clean: clean_Runtime clean_RVL_SDK clean_RevoEX clean_bs1 clean_bs2 clean_data
+clean: clean_Runtime clean_RVL_SDK clean_RevoEX clean_Zi8Lib clean_bs1 clean_bs2 clean_data
 
 # Prepare
 prepare: PrepareDecomp
