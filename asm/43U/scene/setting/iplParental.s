@@ -46,7 +46,7 @@
 /* 813FBA70 | 38 7F BC 90 */	addi r3, r31, m_sc__Q33ipl8parental8Parental@l
 /* 813FBA74 | 4B F3 48 C1 */	bl memset
 /* 813FBA78 | 38 7F BC 90 */	addi r3, r31, m_sc__Q33ipl8parental8Parental@l
-/* 813FBA7C | 48 16 E6 FD */	bl fn_8156A178
+/* 813FBA7C | 48 16 E6 FD */	bl SCGetParentalControl
 /* 813FBA80 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FBA84 | 7C 64 1B 78 */	mr r4, r3
 /* 813FBA88 | 40 82 00 14 */	bne .L_813FBA9C
@@ -61,11 +61,11 @@
 /* 813FBAA8 | 40 82 00 08 */	bne .L_813FBAB0
 /* 813FBAAC | 48 00 00 59 */	bl _initRating__Q33ipl8parental8ParentalFv
 .L_813FBAB0:
-/* 813FBAB0 | 48 16 EB FD */	bl fn_8156A6AC
+/* 813FBAB0 | 48 16 EB FD */	bl SCGetNetContentRestrictions
 /* 813FBAB4 | 3F E0 81 0C */	lis r31, m_sc__Q33ipl8parental8Parental@ha
 /* 813FBAB8 | 3B FF BC 90 */	addi r31, r31, m_sc__Q33ipl8parental8Parental@l
 /* 813FBABC | 90 7F 00 4C */	stw r3, 0x4c(r31)
-/* 813FBAC0 | 48 16 E8 DD */	bl fn_8156A39C
+/* 813FBAC0 | 48 16 E8 DD */	bl SCGetWwwRestriction
 /* 813FBAC4 | 90 7F 00 50 */	stw r3, 0x50(r31)
 /* 813FBAC8 | 3C 60 81 0C */	lis r3, m_scSave__Q33ipl8parental8Parental@ha
 /* 813FBACC | 7F E4 FB 78 */	mr r4, r31

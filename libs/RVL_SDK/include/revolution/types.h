@@ -36,6 +36,9 @@ typedef int                 BOOL;
 #define NULL                ((void *)0)
 #endif  // __cplusplus
 
+#define ALIGN(num)          __attribute__((aligned(num)))
+#define ALIGN32             ALIGN(DEFAULT_ALIGN)
+
 #define DEFAULT_ALIGN       32
 
 #endif // REVOLUTION_TYPES_H

@@ -1,0 +1,16 @@
+#ifndef MSL_CSTDIO_H
+#define MSL_CSTDIO_H
+
+#include <stdio.h>
+
+#ifdef __cplusplus
+
+namespace std {
+    using   ::sprintf;
+} // namespace std
+
+#endif
+
+#endif // MSL_CSTDIO_H
+
+

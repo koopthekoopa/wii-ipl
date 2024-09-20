@@ -1978,8 +1978,7 @@
 .endobj jumptable_81638C40
 
 # .data:0x2B8 | 0x81638CA0 | size: 0x80
-.obj gap_08_81638CA0_data, global
-.hidden gap_08_81638CA0_data
+.obj lbl_81638CA0, local
 	.4byte 0x57696942
 	.4byte 0x69746D61
 	.4byte 0x70466F6E
@@ -2012,7 +2011,7 @@
 	.4byte 0x325F4934
 	.4byte 0x2E627266
 	.4byte 0x6E740000
-.endobj gap_08_81638CA0_data
+.endobj lbl_81638CA0
 
 # .data:0x338 | 0x81638D20 | size: 0x30
 .obj jumptable_81638D20, local

@@ -4113,7 +4113,7 @@
 /* 813E84CC | 7C 08 02 A6 */	mflr r0
 /* 813E84D0 | 90 01 00 64 */	stw r0, 0x64(r1)
 /* 813E84D4 | 38 61 00 08 */	addi r3, r1, 0x8
-/* 813E84D8 | 48 18 1C A1 */	bl fn_8156A178
+/* 813E84D8 | 48 18 1C A1 */	bl SCGetParentalControl
 /* 813E84DC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813E84E0 | 41 82 00 18 */	beq .L_813E84F8
 /* 813E84E4 | 88 01 00 08 */	lbz r0, 0x8(r1)
@@ -4865,7 +4865,7 @@
 /* 813E8F30 | 48 00 00 BC */	b .L_813E8FEC
 .L_813E8F34:
 /* 813E8F34 | 38 61 00 08 */	addi r3, r1, 0x8
-/* 813E8F38 | 48 18 12 41 */	bl fn_8156A178
+/* 813E8F38 | 48 18 12 41 */	bl SCGetParentalControl
 /* 813E8F3C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813E8F40 | 40 82 00 0C */	bne .L_813E8F4C
 /* 813E8F44 | 38 60 00 01 */	li r3, 0x1
@@ -4881,13 +4881,13 @@
 /* 813E8F68 | 80 7E 00 84 */	lwz r3, 0x84(r30)
 /* 813E8F6C | 4B F5 17 4D */	bl iplChannelManager_8133A6B8
 /* 813E8F70 | 7C 7F 1B 78 */	mr r31, r3
-/* 813E8F74 | 48 18 17 39 */	bl fn_8156A6AC
+/* 813E8F74 | 48 18 17 39 */	bl SCGetNetContentRestrictions
 /* 813E8F78 | 7C 60 F8 39 */	and. r0, r3, r31
 /* 813E8F7C | 41 82 00 0C */	beq .L_813E8F88
 /* 813E8F80 | 38 60 00 00 */	li r3, 0x0
 /* 813E8F84 | 48 00 00 68 */	b .L_813E8FEC
 .L_813E8F88:
-/* 813E8F88 | 48 18 14 15 */	bl fn_8156A39C
+/* 813E8F88 | 48 18 14 15 */	bl SCGetWwwRestriction
 /* 813E8F8C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813E8F90 | 41 82 00 24 */	beq .L_813E8FB4
 /* 813E8F94 | 80 7E 00 84 */	lwz r3, 0x84(r30)

@@ -1690,7 +1690,7 @@
 /* 81433B0C | 41 82 00 10 */	beq .L_81433B1C
 /* 81433B10 | 80 9E 00 84 */	lwz r4, 0x84(r30)
 /* 81433B14 | 54 03 06 3E */	clrlwi r3, r0, 24
-/* 81433B18 | 48 02 B5 41 */	bl fn_8145F058
+/* 81433B18 | 48 02 B5 41 */	bl EZTXDetachOEMDict
 .L_81433B1C:
 /* 81433B1C | 80 9E 00 80 */	lwz r4, 0x80(r30)
 /* 81433B20 | 38 00 00 02 */	li r0, 0x2
@@ -1749,7 +1749,7 @@
 /* 81433BD8 | 80 DE 00 84 */	lwz r6, 0x84(r30)
 /* 81433BDC | 38 63 3A 50 */	addi r3, r3, SearchOEMDictionary__Q29textinput8tistringFUsPUsUcPv@l
 /* 81433BE0 | 54 04 04 3E */	clrlwi r4, r0, 16
-/* 81433BE4 | 48 02 B4 71 */	bl fn_8145F054
+/* 81433BE4 | 48 02 B4 71 */	bl EZTXAttachOEMDict
 /* 81433BE8 | 54 60 06 3E */	clrlwi r0, r3, 24
 /* 81433BEC | 90 1E 00 90 */	stw r0, 0x90(r30)
 /* 81433BF0 | 48 00 00 0C */	b .L_81433BFC
@@ -1814,12 +1814,12 @@
 /* 81433CA4 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 81433CA8 | 7C 7E 1B 78 */	mr r30, r3
 /* 81433CAC | 4B FF E9 6D */	bl create__Q39textinput8tistring10StringBaseFP12MEMAllocator
-/* 81433CB0 | 48 02 B3 25 */	bl fn_8145EFD4
+/* 81433CB0 | 48 02 B3 25 */	bl EZTXGetGlobalDataSize
 /* 81433CB4 | 54 64 04 3E */	clrlwi r4, r3, 16
 /* 81433CB8 | 7F E3 FB 78 */	mr r3, r31
 /* 81433CBC | 48 12 79 AD */	bl fn_8155B668
 /* 81433CC0 | 7C 7F 1B 78 */	mr r31, r3
-/* 81433CC4 | 48 02 B3 11 */	bl fn_8145EFD4
+/* 81433CC4 | 48 02 B3 11 */	bl EZTXGetGlobalDataSize
 /* 81433CC8 | 38 00 00 00 */	li r0, 0x0
 /* 81433CCC | 93 FE 00 84 */	stw r31, 0x84(r30)
 /* 81433CD0 | 7F C3 F3 78 */	mr r3, r30
@@ -1954,7 +1954,7 @@
 .L_81433EA8:
 /* 81433EA8 | 80 9D 00 84 */	lwz r4, 0x84(r29)
 /* 81433EAC | 38 7D 00 4C */	addi r3, r29, 0x4c
-/* 81433EB0 | 48 02 B1 9D */	bl fn_8145F04C
+/* 81433EB0 | 48 02 B1 9D */	bl EZTXGetCandidates
 .L_81433EB4:
 /* 81433EB4 | 80 01 00 24 */	lwz r0, 0x24(r1)
 /* 81433EB8 | 83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -1977,7 +1977,7 @@
 /* 81433EE8 | 7C 7E 1B 78 */	mr r30, r3
 /* 81433EEC | 7C 83 23 78 */	mr r3, r4
 /* 81433EF0 | 80 9E 00 84 */	lwz r4, 0x84(r30)
-/* 81433EF4 | 48 02 B0 E5 */	bl fn_8145EFD8
+/* 81433EF4 | 48 02 B0 E5 */	bl EZTXInitialize
 /* 81433EF8 | 38 00 00 01 */	li r0, 0x1
 /* 81433EFC | 3C 60 81 66 */	lis r3, lbl_8165F638@ha
 /* 81433F00 | 98 1E 00 78 */	stb r0, 0x78(r30)
@@ -1985,7 +1985,7 @@
 /* 81433F08 | 80 BE 00 84 */	lwz r5, 0x84(r30)
 /* 81433F0C | 38 80 00 0A */	li r4, 0xa
 /* 81433F10 | 93 FE 00 80 */	stw r31, 0x80(r30)
-/* 81433F14 | 48 02 B1 15 */	bl fn_8145F028
+/* 81433F14 | 48 02 B1 15 */	bl EZTXSetLatinSearchOrder
 /* 81433F18 | 38 00 00 00 */	li r0, 0x0
 /* 81433F1C | 90 1E 00 90 */	stw r0, 0x90(r30)
 /* 81433F20 | 83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -2634,7 +2634,7 @@
 /* 8143475C | 42 00 FF 1C */	bdnz .L_81434678
 /* 81434760 | 80 9C 00 84 */	lwz r4, 0x84(r28)
 /* 81434764 | 38 7C 00 4C */	addi r3, r28, 0x4c
-/* 81434768 | 48 02 A8 E5 */	bl fn_8145F04C
+/* 81434768 | 48 02 A8 E5 */	bl EZTXGetCandidates
 /* 8143476C | 48 00 04 38 */	b .L_81434BA4
 .L_81434770:
 /* 81434770 | 38 7F 06 00 */	addi r3, r31, 0x600
@@ -2655,7 +2655,7 @@
 /* 814347AC | 4E 80 04 21 */	bctrl
 /* 814347B0 | 80 9C 00 84 */	lwz r4, 0x84(r28)
 /* 814347B4 | 38 7C 00 4C */	addi r3, r28, 0x4c
-/* 814347B8 | 48 02 A8 95 */	bl fn_8145F04C
+/* 814347B8 | 48 02 A8 95 */	bl EZTXGetCandidates
 /* 814347BC | 81 9C 00 00 */	lwz r12, 0x0(r28)
 /* 814347C0 | 54 7E 06 3E */	clrlwi r30, r3, 24
 /* 814347C4 | 7F 83 E3 78 */	mr r3, r28
@@ -2676,7 +2676,7 @@
 /* 81434800 | 80 9C 00 84 */	lwz r4, 0x84(r28)
 /* 81434804 | 90 BC 00 64 */	stw r5, 0x64(r28)
 /* 81434808 | 98 1C 00 68 */	stb r0, 0x68(r28)
-/* 8143480C | 48 02 A8 41 */	bl fn_8145F04C
+/* 8143480C | 48 02 A8 41 */	bl EZTXGetCandidates
 /* 81434810 | 38 00 00 00 */	li r0, 0x0
 /* 81434814 | 54 63 06 3E */	clrlwi r3, r3, 24
 /* 81434818 | B0 1C 00 6A */	sth r0, 0x6a(r28)
@@ -2771,7 +2771,7 @@
 /* 81434964 | 98 7C 00 60 */	stb r3, 0x60(r28)
 /* 81434968 | 38 7C 00 4C */	addi r3, r28, 0x4c
 /* 8143496C | 80 9C 00 84 */	lwz r4, 0x84(r28)
-/* 81434970 | 48 02 A6 DD */	bl fn_8145F04C
+/* 81434970 | 48 02 A6 DD */	bl EZTXGetCandidates
 /* 81434974 | 54 7E 06 3E */	clrlwi r30, r3, 24
 .L_81434978:
 /* 81434978 | 2C 1E 00 00 */	cmpwi r30, 0x0
@@ -2886,7 +2886,7 @@
 /* 81434AF8 | 7F 43 D3 78 */	mr r3, r26
 /* 81434AFC | 38 9C 00 4C */	addi r4, r28, 0x4c
 /* 81434B00 | 57 E5 06 3E */	clrlwi r5, r31, 24
-/* 81434B04 | 48 02 A5 4D */	bl fn_8145F050
+/* 81434B04 | 48 02 A5 4D */	bl EZTXCopy
 /* 81434B08 | 54 60 06 3F */	clrlwi. r0, r3, 24
 /* 81434B0C | 41 82 00 88 */	beq .L_81434B94
 .L_81434B10:

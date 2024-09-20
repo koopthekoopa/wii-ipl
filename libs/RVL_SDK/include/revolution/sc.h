@@ -7,6 +7,9 @@
 extern "C" {
 #endif
 
+#define SC_ASPECT_RATIO_4x3     0
+#define SC_ASPECT_RATIO_16x9    1
+
 #define SC_LANG_JAPANESE        0
 #define SC_LANG_ENGLISH         1
 #define SC_LANG_GERMAN          2

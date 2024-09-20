@@ -722,10 +722,9 @@
 .endobj lbl_8169454A
 
 # .sdata2:0xB | 0x8169454B | size: 0x1
-.obj gap_09_8169454B_sdata2, global
-.hidden gap_09_8169454B_sdata2
+.obj lbl_8169454B, global
 	.byte 0x00
-.endobj gap_09_8169454B_sdata2
+.endobj lbl_8169454B
 
 # .sdata2:0xC | 0x8169454C | size: 0x4
 .obj lbl_8169454C, global

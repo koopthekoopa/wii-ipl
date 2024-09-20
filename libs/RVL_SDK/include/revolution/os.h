@@ -73,6 +73,7 @@ void    OSVReport(const char* msg, va_list list);
 
 void    OSFatal(GXColor front, GXColor back, const char* msg);
 
+OSTime  OSGetTime();
 OSTick  OSGetTick();
 void    OSSleepTicks(OSTime ticks);
 
@@ -83,7 +84,7 @@ void    OSReturnToMenu();
 
 
 
-BOOL __OSSyncSram();
+BOOL    __OSSyncSram();
 
 #include <revolution/os/OSAlarm.h>
 #include <revolution/os/OSFastCast.h>

@@ -872,7 +872,7 @@
 .fn createLayoutScene__Q23gui11PaneManagerFRCQ34nw4r3lyt6Layout, global
 /* 813693D4 | 38 00 00 00 */	li r0, 0x0
 /* 813693D8 | 80 84 00 10 */	lwz r4, 0x10(r4)
-/* 813693DC | 90 0D A7 40 */	stw r0, lbl_81698780@sda21(r0)
+/* 813693DC | 90 0D A7 40 */	stw r0, suIDCounter__Q23gui11PaneManager@sda21(r0)
 /* 813693E0 | 38 84 00 10 */	addi r4, r4, 0x10
 /* 813693E4 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813693E8 | 81 8C 00 58 */	lwz r12, 0x58(r12)
@@ -905,7 +905,7 @@
 /* 8136943C | 2C 1C 00 00 */	cmpwi r28, 0x0
 /* 81369440 | 7C 7D 1B 78 */	mr r29, r3
 /* 81369444 | 41 82 00 14 */	beq .L_81369458
-/* 81369448 | 80 8D A7 40 */	lwz r4, lbl_81698780@sda21(r0)
+/* 81369448 | 80 8D A7 40 */	lwz r4, suIDCounter__Q23gui11PaneManager@sda21(r0)
 /* 8136944C | 7F 83 E3 78 */	mr r3, r28
 /* 81369450 | 48 00 01 89 */	bl __ct__Q23gui13PaneComponentFUl
 /* 81369454 | 7C 7C 1B 78 */	mr r28, r3
@@ -922,7 +922,7 @@
 /* 81369478 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8136947C | 7C 7C 1B 78 */	mr r28, r3
 /* 81369480 | 41 82 00 10 */	beq .L_81369490
-/* 81369484 | 80 8D A7 40 */	lwz r4, lbl_81698780@sda21(r0)
+/* 81369484 | 80 8D A7 40 */	lwz r4, suIDCounter__Q23gui11PaneManager@sda21(r0)
 /* 81369488 | 48 00 01 51 */	bl __ct__Q23gui13PaneComponentFUl
 /* 8136948C | 7C 7C 1B 78 */	mr r28, r3
 .L_81369490:
@@ -939,12 +939,12 @@
 /* 813694B0 | 7F A4 EB 78 */	mr r4, r29
 /* 813694B4 | 38 7B 00 18 */	addi r3, r27, 0x18
 /* 813694B8 | 48 1A 8B BD */	bl List_Append__Q24nw4r2utFPQ34nw4r2ut4ListPv
-/* 813694BC | 80 8D A7 40 */	lwz r4, lbl_81698780@sda21(r0)
+/* 813694BC | 80 8D A7 40 */	lwz r4, suIDCounter__Q23gui11PaneManager@sda21(r0)
 /* 813694C0 | 3B BF FF FC */	subi r29, r31, 0x4
 /* 813694C4 | 7F 83 E3 78 */	mr r3, r28
 /* 813694C8 | 38 04 00 01 */	addi r0, r4, 0x1
 /* 813694CC | 7F A4 EB 78 */	mr r4, r29
-/* 813694D0 | 90 0D A7 40 */	stw r0, lbl_81698780@sda21(r0)
+/* 813694D0 | 90 0D A7 40 */	stw r0, suIDCounter__Q23gui11PaneManager@sda21(r0)
 /* 813694D4 | 81 9C 00 00 */	lwz r12, 0x0(r28)
 /* 813694D8 | 81 8C 00 6C */	lwz r12, 0x6c(r12)
 /* 813694DC | 7D 89 03 A6 */	mtctr r12
@@ -1580,6 +1580,7 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698780 | size: 0x8
-.obj lbl_81698780, global
+# gui::PaneManager::suIDCounter
+.obj suIDCounter__Q23gui11PaneManager, global
 	.skip 0x8
-.endobj lbl_81698780
+.endobj suIDCounter__Q23gui11PaneManager

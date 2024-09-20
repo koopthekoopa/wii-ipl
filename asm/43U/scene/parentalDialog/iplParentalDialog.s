@@ -1124,7 +1124,7 @@
 /* 813DA4D0 | 93 C1 00 58 */	stw r30, 0x58(r1)
 /* 813DA4D4 | 7C 7E 1B 78 */	mr r30, r3
 /* 813DA4D8 | 38 61 00 0E */	addi r3, r1, 0xe
-/* 813DA4DC | 48 18 FC 9D */	bl fn_8156A178
+/* 813DA4DC | 48 18 FC 9D */	bl SCGetParentalControl
 /* 813DA4E0 | 7C 7F 1B 78 */	mr r31, r3
 /* 813DA4E4 | 38 61 00 08 */	addi r3, r1, 0x8
 /* 813DA4E8 | 38 80 00 00 */	li r4, 0x0

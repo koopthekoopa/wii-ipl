@@ -1841,7 +1841,7 @@
 /* 81389A08 | 48 00 02 48 */	b .L_81389C50
 .L_81389A0C:
 /* 81389A0C | 38 61 00 08 */	addi r3, r1, 0x8
-/* 81389A10 | 48 1E 07 69 */	bl fn_8156A178
+/* 81389A10 | 48 1E 07 69 */	bl SCGetParentalControl
 /* 81389A14 | 7C 7F 1B 78 */	mr r31, r3
 /* 81389A18 | 48 07 1E D5 */	bl getConnectEnableFlag__Q33ipl3ncd10NCDSettingFv
 /* 81389A1C | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -1861,7 +1861,7 @@
 /* 81389A54 | 90 1D 00 64 */	stw r0, 0x64(r29)
 /* 81389A58 | 48 00 01 9C */	b .L_81389BF4
 .L_81389A5C:
-/* 81389A5C | 48 1E 0D C5 */	bl fn_8156A820
+/* 81389A5C | 48 1E 0D C5 */	bl SCGetWCFlags
 /* 81389A60 | 54 60 07 FF */	clrlwi. r0, r3, 31
 /* 81389A64 | 40 82 00 3C */	bne .L_81389AA0
 /* 81389A68 | 7F C3 F3 78 */	mr r3, r30
@@ -1884,7 +1884,7 @@
 /* 81389AA8 | 88 01 00 08 */	lbz r0, 0x8(r1)
 /* 81389AAC | 54 00 06 31 */	rlwinm. r0, r0, 0, 24, 24
 /* 81389AB0 | 41 82 00 40 */	beq .L_81389AF0
-/* 81389AB4 | 48 1E 0B F9 */	bl fn_8156A6AC
+/* 81389AB4 | 48 1E 0B F9 */	bl SCGetNetContentRestrictions
 /* 81389AB8 | 54 60 07 BD */	rlwinm. r0, r3, 0, 30, 30
 /* 81389ABC | 41 82 00 34 */	beq .L_81389AF0
 /* 81389AC0 | 7F C3 F3 78 */	mr r3, r30
@@ -4543,7 +4543,7 @@
 /* 8138BF38 | 48 00 00 AC */	b .L_8138BFE4
 .L_8138BF3C:
 /* 8138BF3C | 38 61 00 08 */	addi r3, r1, 0x8
-/* 8138BF40 | 48 1D E2 39 */	bl fn_8156A178
+/* 8138BF40 | 48 1D E2 39 */	bl SCGetParentalControl
 /* 8138BF44 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8138BF48 | 41 82 00 68 */	beq .L_8138BFB0
 /* 8138BF4C | 88 01 00 08 */	lbz r0, 0x8(r1)
@@ -4724,7 +4724,7 @@
 /* 8138C1A8 | 48 00 00 AC */	b .L_8138C254
 .L_8138C1AC:
 /* 8138C1AC | 38 61 00 08 */	addi r3, r1, 0x8
-/* 8138C1B0 | 48 1D DF C9 */	bl fn_8156A178
+/* 8138C1B0 | 48 1D DF C9 */	bl SCGetParentalControl
 /* 8138C1B4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8138C1B8 | 41 82 00 68 */	beq .L_8138C220
 /* 8138C1BC | 88 01 00 08 */	lbz r0, 0x8(r1)

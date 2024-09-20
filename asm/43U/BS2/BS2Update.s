@@ -670,7 +670,7 @@
 /* 8137FB24 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8137FB28 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137FB2C | 40 82 00 D4 */	bne .L_8137FC00
-/* 8137FB30 | 48 1E A8 6D */	bl fn_8156A39C
+/* 8137FB30 | 48 1E A8 6D */	bl SCGetWwwRestriction
 /* 8137FB34 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137FB38 | 41 82 00 34 */	beq .L_8137FB6C
 /* 8137FB3C | 7C 7D 72 14 */	add r3, r29, r14

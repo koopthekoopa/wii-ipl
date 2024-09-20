@@ -60,7 +60,7 @@
 /* 813FD1E0 | 38 A0 00 00 */	li r5, 0x0
 /* 813FD1E4 | 7C 04 03 96 */	divwu r0, r4, r0
 /* 813FD1E8 | 7C DF 01 D6 */	mullw r6, r31, r0
-/* 813FD1EC | 48 12 F9 59 */	bl fn_8152CB44
+/* 813FD1EC | 48 12 F9 59 */	bl OSSetAlarm
 /* 813FD1F0 | 38 61 00 10 */	addi r3, r1, 0x10
 /* 813FD1F4 | 38 81 00 08 */	addi r4, r1, 0x8
 /* 813FD1F8 | 38 A0 00 01 */	li r5, 0x1

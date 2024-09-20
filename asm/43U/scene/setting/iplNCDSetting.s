@@ -2166,9 +2166,9 @@
 /* 813FB9BC | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813FB9C0 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813FB9C4 | 93 C1 00 08 */	stw r30, 0x8(r1)
-/* 813FB9C8 | 48 16 EE 59 */	bl fn_8156A820
+/* 813FB9C8 | 48 16 EE 59 */	bl SCGetWCFlags
 /* 813FB9CC | 54 7E 07 FE */	clrlwi r30, r3, 31
-/* 813FB9D0 | 48 16 EC DD */	bl fn_8156A6AC
+/* 813FB9D0 | 48 16 EC DD */	bl SCGetNetContentRestrictions
 /* 813FB9D4 | 3F E0 81 0C */	lis r31, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB9D8 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 813FB9DC | 3B FF 85 B8 */	addi r31, r31, mConfig__Q33ipl3ncd10NCDSetting@l

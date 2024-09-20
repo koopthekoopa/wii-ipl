@@ -15056,8 +15056,7 @@
 .endobj jumptable_81635DB0
 
 # .data:0x3F8 | 0x81635E80 | size: 0x54B
-.obj gap_08_81635E80_data, global
-.hidden gap_08_81635E80_data
+.obj lbl_81635E80, local
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
 	.4byte 0x726B6572
@@ -15397,7 +15396,7 @@
 	.4byte 0x6174203A
 	.4byte 0x20253038
 	.byte 0x78, 0x0A, 0x00
-.endobj gap_08_81635E80_data
+.endobj lbl_81635E80
 
 # .data:0x943 | 0x816363CB | size: 0x163
 .obj lbl_816363CB, global

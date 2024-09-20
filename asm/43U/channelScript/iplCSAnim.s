@@ -790,6 +790,22 @@
 	.2byte 0x0000
 .endobj lbl_8166A9F6
 
+# 0x81694FE8..0x81694FF8 | size: 0x10
+.section .sdata2, "a"
+.balign 8
+
+# .sdata2:0x0 | 0x81694FE8 | size: 0x8
+.obj lbl_81694FE8, global
+	.float 0
+	.float 0
+.endobj lbl_81694FE8
+
+# .sdata2:0x8 | 0x81694FF0 | size: 0x8
+.obj lbl_81694FF0, global
+	.float 0
+	.float 0
+.endobj lbl_81694FF0
+
 # 0x81697970..0x81697998 | size: 0x28
 .section .sdata, "wa"
 .balign 8

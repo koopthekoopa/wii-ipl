@@ -1892,6 +1892,16 @@
 	.byte 0x00
 .endobj lbl_8166A6E3
 
+# 0x81694FC0..0x81694FC8 | size: 0x8
+.section .sdata2, "a"
+.balign 8
+
+# .sdata2:0x0 | 0x81694FC0 | size: 0x8
+.obj lbl_81694FC0, global
+	.float 0
+	.float 0
+.endobj lbl_81694FC0
+
 # 0x81697800..0x81697848 | size: 0x48
 .section .sdata, "wa"
 .balign 8

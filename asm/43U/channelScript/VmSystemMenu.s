@@ -6,7 +6,7 @@
 .balign 4
 
 # .text:0x0 | 0x814576E8 | size: 0x30
-.fn VmSCRegionThing, local
+.fn VmSystemMenu_814576E8, local
 /* 814576E8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 814576EC | 7C 08 02 A6 */	mflr r0
 /* 814576F0 | 7C A4 2B 78 */	mr r4, r5
@@ -19,7 +19,7 @@
 /* 8145770C | 7C 08 03 A6 */	mtlr r0
 /* 81457710 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457714 | 4E 80 00 20 */	blr
-.endfn VmSCRegionThing
+.endfn VmSystemMenu_814576E8
 
 # .text:0x30 | 0x81457718 | size: 0x34
 .fn CHANSGetExport_SC_ASPECT_RATIO_4x3, global
@@ -90,7 +90,7 @@
 .endfn CHANSGetExport_SC_LANG_ENGLISH
 
 # .text:0x100 | 0x814577E8 | size: 0x34
-.fn CHANSGetGetExport_SC_LANG_GERMAN, global
+.fn CHANSGetExport_SC_LANG_GERMAN, global
 /* 814577E8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 814577EC | 7C 08 02 A6 */	mflr r0
 /* 814577F0 | 7C A4 2B 78 */	mr r4, r5
@@ -104,7 +104,7 @@
 /* 81457810 | 7C 08 03 A6 */	mtlr r0
 /* 81457814 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457818 | 4E 80 00 20 */	blr
-.endfn CHANSGetGetExport_SC_LANG_GERMAN
+.endfn CHANSGetExport_SC_LANG_GERMAN
 
 # .text:0x134 | 0x8145781C | size: 0x34
 .fn CHANSGetExport_SC_LANG_FRENCH, global
@@ -124,7 +124,7 @@
 .endfn CHANSGetExport_SC_LANG_FRENCH
 
 # .text:0x168 | 0x81457850 | size: 0x34
-.fn CHANSGetGetExport_SC_LANG_SPANISH, global
+.fn CHANSGetExport_SC_LANG_SPANISH, global
 /* 81457850 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457854 | 7C 08 02 A6 */	mflr r0
 /* 81457858 | 7C A4 2B 78 */	mr r4, r5
@@ -138,7 +138,7 @@
 /* 81457878 | 7C 08 03 A6 */	mtlr r0
 /* 8145787C | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457880 | 4E 80 00 20 */	blr
-.endfn CHANSGetGetExport_SC_LANG_SPANISH
+.endfn CHANSGetExport_SC_LANG_SPANISH
 
 # .text:0x19C | 0x81457884 | size: 0x34
 .fn CHANSGetExport_SC_LANG_ITALIAN, global
@@ -475,7 +475,7 @@
 /* 81457C48 | 7C 9D 23 78 */	mr r29, r4
 /* 81457C4C | 7C BE 2B 78 */	mr r30, r5
 /* 81457C50 | 3B E0 00 00 */	li r31, 0x0
-/* 81457C54 | 48 11 2B CD */	bl fn_8156A820
+/* 81457C54 | 48 11 2B CD */	bl SCGetWCFlags
 /* 81457C58 | 54 60 07 FF */	clrlwi. r0, r3, 31
 /* 81457C5C | 41 82 00 08 */	beq .L_81457C64
 /* 81457C60 | 3B E0 00 01 */	li r31, 0x1
@@ -502,7 +502,7 @@
 /* 81457CA0 | 38 61 00 08 */	addi r3, r1, 0x8
 /* 81457CA4 | 93 E1 00 5C */	stw r31, 0x5c(r1)
 /* 81457CA8 | 3B E0 00 01 */	li r31, 0x1
-/* 81457CAC | 48 11 24 CD */	bl fn_8156A178
+/* 81457CAC | 48 11 24 CD */	bl SCGetParentalControl
 /* 81457CB0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81457CB4 | 40 82 00 0C */	bne .L_81457CC0
 /* 81457CB8 | 3B E0 00 00 */	li r31, 0x0
@@ -558,7 +558,7 @@
 /* 81457D58 | 4B FF FF 3D */	bl VmSystemMenu_81457C94
 /* 81457D5C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81457D60 | 41 82 00 14 */	beq .L_81457D74
-/* 81457D64 | 48 11 29 49 */	bl fn_8156A6AC
+/* 81457D64 | 48 11 29 49 */	bl SCGetNetContentRestrictions
 /* 81457D68 | 7F C0 18 39 */	and. r0, r30, r3
 /* 81457D6C | 41 82 00 08 */	beq .L_81457D74
 /* 81457D70 | 3B E0 00 01 */	li r31, 0x1
@@ -663,7 +663,7 @@
 /* 81457EB8 | 4B FF FD DD */	bl VmSystemMenu_81457C94
 /* 81457EBC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81457EC0 | 41 82 00 14 */	beq .L_81457ED4
-/* 81457EC4 | 48 11 24 D9 */	bl fn_8156A39C
+/* 81457EC4 | 48 11 24 D9 */	bl SCGetWwwRestriction
 /* 81457EC8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81457ECC | 41 82 00 08 */	beq .L_81457ED4
 /* 81457ED0 | 3B E0 00 01 */	li r31, 0x1
@@ -750,14 +750,14 @@
 /* 81457FCC | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81457FD0 | 7C 08 02 A6 */	mflr r0
 /* 81457FD4 | 3C 80 81 61 */	lis r4, lbl_8161730C@ha
-/* 81457FD8 | 3D 20 81 45 */	lis r9, VmSCRegionThing@ha
+/* 81457FD8 | 3D 20 81 45 */	lis r9, VmSystemMenu_814576E8@ha
 /* 81457FDC | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 81457FE0 | 38 00 00 15 */	li r0, 0x15
 /* 81457FE4 | 3D 40 81 61 */	lis r10, lbl_81617210@ha
 /* 81457FE8 | 38 84 73 0C */	addi r4, r4, lbl_8161730C@l
 /* 81457FEC | 90 01 00 08 */	stw r0, 0x8(r1)
 /* 81457FF0 | 38 00 00 0E */	li r0, 0xe
-/* 81457FF4 | 39 29 76 E8 */	addi r9, r9, VmSCRegionThing@l
+/* 81457FF4 | 39 29 76 E8 */	addi r9, r9, VmSystemMenu_814576E8@l
 /* 81457FF8 | 39 4A 72 10 */	addi r10, r10, lbl_81617210@l
 /* 81457FFC | 90 81 00 0C */	stw r4, 0xc(r1)
 /* 81458000 | 38 8D 97 95 */	li r4, lbl_816977D5@sda21
@@ -792,13 +792,13 @@
 	.4byte CHANSGetExport_SC_LANG_ENGLISH
 	.4byte 0x00000000
 	.4byte lbl_8166A2FA
-	.4byte CHANSGetGetExport_SC_LANG_GERMAN
+	.4byte CHANSGetExport_SC_LANG_GERMAN
 	.4byte 0x00000000
 	.4byte lbl_8166A309
 	.4byte CHANSGetExport_SC_LANG_FRENCH
 	.4byte 0x00000000
 	.4byte lbl_8166A318
-	.4byte CHANSGetGetExport_SC_LANG_SPANISH
+	.4byte CHANSGetExport_SC_LANG_SPANISH
 	.4byte 0x00000000
 	.4byte lbl_8166A328
 	.4byte CHANSGetExport_SC_LANG_ITALIAN

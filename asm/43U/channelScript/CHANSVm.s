@@ -1484,7 +1484,7 @@
 .endfn CHANSVm_8144B870
 
 # .text:0x1330 | 0x8144B8DC | size: 0xBC
-.fn VmDateCommon, local
+.fn CHANSVm_8144B8DC, local
 /* 8144B8DC | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144B8E0 | 7C 08 02 A6 */	mflr r0
 /* 8144B8E4 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -1537,7 +1537,7 @@
 /* 8144B98C | 7C 08 03 A6 */	mtlr r0
 /* 8144B990 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144B994 | 4E 80 00 20 */	blr
-.endfn VmDateCommon
+.endfn CHANSVm_8144B8DC
 
 # .text:0x13EC | 0x8144B998 | size: 0x54
 .fn CHANSVmSetInteger, global
@@ -2573,7 +2573,7 @@
 /* 8144C6D8 | 7C 65 1B 78 */	mr r5, r3
 /* 8144C6DC | 7F E3 FB 78 */	mr r3, r31
 /* 8144C6E0 | 38 80 00 01 */	li r4, 0x1
-/* 8144C6E4 | 4B FF F1 F9 */	bl VmDateCommon
+/* 8144C6E4 | 4B FF F1 F9 */	bl CHANSVm_8144B8DC
 /* 8144C6E8 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8144C6EC | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8144C6F0 | 7C 08 03 A6 */	mtlr r0
@@ -2592,7 +2592,7 @@
 /* 8144C714 | 7C 65 1B 78 */	mr r5, r3
 /* 8144C718 | 7F E3 FB 78 */	mr r3, r31
 /* 8144C71C | 38 80 00 02 */	li r4, 0x2
-/* 8144C720 | 4B FF F1 BD */	bl VmDateCommon
+/* 8144C720 | 4B FF F1 BD */	bl CHANSVm_8144B8DC
 /* 8144C724 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8144C728 | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8144C72C | 7C 08 03 A6 */	mtlr r0
@@ -2611,7 +2611,7 @@
 /* 8144C750 | 7C 65 1B 78 */	mr r5, r3
 /* 8144C754 | 7F E3 FB 78 */	mr r3, r31
 /* 8144C758 | 38 80 00 03 */	li r4, 0x3
-/* 8144C75C | 4B FF F1 81 */	bl VmDateCommon
+/* 8144C75C | 4B FF F1 81 */	bl CHANSVm_8144B8DC
 /* 8144C760 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8144C764 | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8144C768 | 7C 08 03 A6 */	mtlr r0
@@ -3694,7 +3694,7 @@
 /* 8144D558 | 7C 65 1B 78 */	mr r5, r3
 /* 8144D55C | 7F E3 FB 78 */	mr r3, r31
 /* 8144D560 | 38 80 00 02 */	li r4, 0x2
-/* 8144D564 | 4B FF E3 79 */	bl VmDateCommon
+/* 8144D564 | 4B FF E3 79 */	bl CHANSVm_8144B8DC
 /* 8144D568 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8144D56C | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8144D570 | 7C 08 03 A6 */	mtlr r0
@@ -4025,7 +4025,7 @@
 /* 8144D9B8 | 7C 65 1B 78 */	mr r5, r3
 /* 8144D9BC | 7F A3 EB 78 */	mr r3, r29
 /* 8144D9C0 | 38 80 00 03 */	li r4, 0x3
-/* 8144D9C4 | 4B FF DF 19 */	bl VmDateCommon
+/* 8144D9C4 | 4B FF DF 19 */	bl CHANSVm_8144B8DC
 /* 8144D9C8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144D9CC | 7C 66 1B 78 */	mr r6, r3
 /* 8144D9D0 | 41 82 00 10 */	beq .L_8144D9E0
@@ -4072,7 +4072,7 @@
 /* 8144DA54 | 7C 65 1B 78 */	mr r5, r3
 /* 8144DA58 | 7F 83 E3 78 */	mr r3, r28
 /* 8144DA5C | 38 80 00 01 */	li r4, 0x1
-/* 8144DA60 | 4B FF DE 7D */	bl VmDateCommon
+/* 8144DA60 | 4B FF DE 7D */	bl CHANSVm_8144B8DC
 /* 8144DA64 | 7C 7A 1B 78 */	mr r26, r3
 /* 8144DA68 | 7F 83 E3 78 */	mr r3, r28
 /* 8144DA6C | 38 80 00 01 */	li r4, 0x1
@@ -4080,7 +4080,7 @@
 /* 8144DA74 | 7C 65 1B 78 */	mr r5, r3
 /* 8144DA78 | 7F 83 E3 78 */	mr r3, r28
 /* 8144DA7C | 38 80 00 01 */	li r4, 0x1
-/* 8144DA80 | 4B FF DE 5D */	bl VmDateCommon
+/* 8144DA80 | 4B FF DE 5D */	bl CHANSVm_8144B8DC
 /* 8144DA84 | 7C 7B 1B 78 */	mr r27, r3
 /* 8144DA88 | 7F A3 EB 78 */	mr r3, r29
 /* 8144DA8C | 3B E0 00 00 */	li r31, 0x0
@@ -4306,7 +4306,7 @@
 /* 8144DD9C | 7C 65 1B 78 */	mr r5, r3
 /* 8144DDA0 | 7F 23 CB 78 */	mr r3, r25
 /* 8144DDA4 | 38 80 00 01 */	li r4, 0x1
-/* 8144DDA8 | 4B FF DB 35 */	bl VmDateCommon
+/* 8144DDA8 | 4B FF DB 35 */	bl CHANSVm_8144B8DC
 /* 8144DDAC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144DDB0 | 41 82 00 54 */	beq .L_8144DE04
 /* 8144DDB4 | 80 83 00 04 */	lwz r4, 0x4(r3)
@@ -4593,7 +4593,7 @@
 /* 8144E168 | 7C 65 1B 78 */	mr r5, r3
 /* 8144E16C | 7F 63 DB 78 */	mr r3, r27
 /* 8144E170 | 38 80 00 01 */	li r4, 0x1
-/* 8144E174 | 4B FF D7 69 */	bl VmDateCommon
+/* 8144E174 | 4B FF D7 69 */	bl CHANSVm_8144B8DC
 /* 8144E178 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144E17C | 41 82 00 7C */	beq .L_8144E1F8
 /* 8144E180 | 83 E3 00 04 */	lwz r31, 0x4(r3)
@@ -4698,7 +4698,7 @@
 /* 8144E2E0 | 7C 65 1B 78 */	mr r5, r3
 /* 8144E2E4 | 7F 43 D3 78 */	mr r3, r26
 /* 8144E2E8 | 38 80 00 01 */	li r4, 0x1
-/* 8144E2EC | 4B FF D5 F1 */	bl VmDateCommon
+/* 8144E2EC | 4B FF D5 F1 */	bl CHANSVm_8144B8DC
 /* 8144E2F0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144E2F4 | 41 82 00 10 */	beq .L_8144E304
 /* 8144E2F8 | 80 E3 00 00 */	lwz r7, 0x0(r3)
@@ -4724,7 +4724,7 @@
 /* 8144E33C | 7C 65 1B 78 */	mr r5, r3
 /* 8144E340 | 7F 43 D3 78 */	mr r3, r26
 /* 8144E344 | 38 80 00 01 */	li r4, 0x1
-/* 8144E348 | 4B FF D5 95 */	bl VmDateCommon
+/* 8144E348 | 4B FF D5 95 */	bl CHANSVm_8144B8DC
 /* 8144E34C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144E350 | 41 82 00 9C */	beq .L_8144E3EC
 /* 8144E354 | 28 1B 00 06 */	cmplwi r27, 0x6
@@ -5330,7 +5330,7 @@
 /* 8144EB14 | 7C 65 1B 78 */	mr r5, r3
 /* 8144EB18 | 7F C3 F3 78 */	mr r3, r30
 /* 8144EB1C | 38 80 00 02 */	li r4, 0x2
-/* 8144EB20 | 4B FF CD BD */	bl VmDateCommon
+/* 8144EB20 | 4B FF CD BD */	bl CHANSVm_8144B8DC
 /* 8144EB24 | 30 03 FF FF */	subic r0, r3, 0x1
 /* 8144EB28 | 7C 00 19 11 */	subfe. r0, r0, r3
 /* 8144EB2C | 41 82 00 20 */	beq .L_8144EB4C
@@ -5365,7 +5365,7 @@
 /* 8144EB8C | 7C 65 1B 78 */	mr r5, r3
 /* 8144EB90 | 7F C3 F3 78 */	mr r3, r30
 /* 8144EB94 | 38 80 00 02 */	li r4, 0x2
-/* 8144EB98 | 4B FF CD 45 */	bl VmDateCommon
+/* 8144EB98 | 4B FF CD 45 */	bl CHANSVm_8144B8DC
 /* 8144EB9C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144EBA0 | 41 82 00 4C */	beq .L_8144EBEC
 /* 8144EBA4 | C8 23 00 00 */	lfd f1, 0x0(r3)
@@ -5413,7 +5413,7 @@
 /* 8144EC2C | 7C 65 1B 78 */	mr r5, r3
 /* 8144EC30 | 7F C3 F3 78 */	mr r3, r30
 /* 8144EC34 | 38 80 00 02 */	li r4, 0x2
-/* 8144EC38 | 4B FF CC A5 */	bl VmDateCommon
+/* 8144EC38 | 4B FF CC A5 */	bl CHANSVm_8144B8DC
 /* 8144EC3C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144EC40 | 41 82 00 4C */	beq .L_8144EC8C
 /* 8144EC44 | C8 23 00 00 */	lfd f1, 0x0(r3)
@@ -5461,7 +5461,7 @@
 /* 8144ECCC | 7C 65 1B 78 */	mr r5, r3
 /* 8144ECD0 | 7F A3 EB 78 */	mr r3, r29
 /* 8144ECD4 | 38 80 00 02 */	li r4, 0x2
-/* 8144ECD8 | 4B FF CC 05 */	bl VmDateCommon
+/* 8144ECD8 | 4B FF CC 05 */	bl CHANSVm_8144B8DC
 /* 8144ECDC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144ECE0 | 3B E0 00 00 */	li r31, 0x0
 /* 8144ECE4 | 41 82 00 24 */	beq .L_8144ED08
@@ -5497,7 +5497,7 @@
 /* 8144ED48 | 7C 65 1B 78 */	mr r5, r3
 /* 8144ED4C | 7F 83 E3 78 */	mr r3, r28
 /* 8144ED50 | 38 80 00 02 */	li r4, 0x2
-/* 8144ED54 | 4B FF CB 89 */	bl VmDateCommon
+/* 8144ED54 | 4B FF CB 89 */	bl CHANSVm_8144B8DC
 /* 8144ED58 | 7C 7E 1B 78 */	mr r30, r3
 /* 8144ED5C | 7F 83 E3 78 */	mr r3, r28
 /* 8144ED60 | 38 80 00 01 */	li r4, 0x1
@@ -5505,7 +5505,7 @@
 /* 8144ED68 | 7C 65 1B 78 */	mr r5, r3
 /* 8144ED6C | 7F 83 E3 78 */	mr r3, r28
 /* 8144ED70 | 38 80 00 02 */	li r4, 0x2
-/* 8144ED74 | 4B FF CB 69 */	bl VmDateCommon
+/* 8144ED74 | 4B FF CB 69 */	bl CHANSVm_8144B8DC
 /* 8144ED78 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 8144ED7C | 3B E0 00 00 */	li r31, 0x0
 /* 8144ED80 | 41 82 00 30 */	beq .L_8144EDB0
@@ -5544,7 +5544,7 @@
 /* 8144EDF0 | 7C 65 1B 78 */	mr r5, r3
 /* 8144EDF4 | 7F A3 EB 78 */	mr r3, r29
 /* 8144EDF8 | 38 80 00 02 */	li r4, 0x2
-/* 8144EDFC | 4B FF CA E1 */	bl VmDateCommon
+/* 8144EDFC | 4B FF CA E1 */	bl CHANSVm_8144B8DC
 /* 8144EE00 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144EE04 | 3B E0 00 00 */	li r31, 0x0
 /* 8144EE08 | 41 82 00 24 */	beq .L_8144EE2C
@@ -5580,7 +5580,7 @@
 /* 8144EE6C | 7C 65 1B 78 */	mr r5, r3
 /* 8144EE70 | 7F A3 EB 78 */	mr r3, r29
 /* 8144EE74 | 38 80 00 02 */	li r4, 0x2
-/* 8144EE78 | 4B FF CA 65 */	bl VmDateCommon
+/* 8144EE78 | 4B FF CA 65 */	bl CHANSVm_8144B8DC
 /* 8144EE7C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144EE80 | 3B E0 00 00 */	li r31, 0x0
 /* 8144EE84 | 41 82 00 24 */	beq .L_8144EEA8
@@ -5616,7 +5616,7 @@
 /* 8144EEE8 | 7C 65 1B 78 */	mr r5, r3
 /* 8144EEEC | 7F A3 EB 78 */	mr r3, r29
 /* 8144EEF0 | 38 80 00 02 */	li r4, 0x2
-/* 8144EEF4 | 4B FF C9 E9 */	bl VmDateCommon
+/* 8144EEF4 | 4B FF C9 E9 */	bl CHANSVm_8144B8DC
 /* 8144EEF8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144EEFC | 3B E0 00 00 */	li r31, 0x0
 /* 8144EF00 | 41 82 00 24 */	beq .L_8144EF24
@@ -5652,7 +5652,7 @@
 /* 8144EF64 | 7C 65 1B 78 */	mr r5, r3
 /* 8144EF68 | 7F A3 EB 78 */	mr r3, r29
 /* 8144EF6C | 38 80 00 02 */	li r4, 0x2
-/* 8144EF70 | 4B FF C9 6D */	bl VmDateCommon
+/* 8144EF70 | 4B FF C9 6D */	bl CHANSVm_8144B8DC
 /* 8144EF74 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144EF78 | 3B E0 00 00 */	li r31, 0x0
 /* 8144EF7C | 41 82 00 24 */	beq .L_8144EFA0
@@ -5688,7 +5688,7 @@
 /* 8144EFE0 | 7C 65 1B 78 */	mr r5, r3
 /* 8144EFE4 | 7F A3 EB 78 */	mr r3, r29
 /* 8144EFE8 | 38 80 00 02 */	li r4, 0x2
-/* 8144EFEC | 4B FF C8 F1 */	bl VmDateCommon
+/* 8144EFEC | 4B FF C8 F1 */	bl CHANSVm_8144B8DC
 /* 8144EFF0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144EFF4 | 3B E0 00 00 */	li r31, 0x0
 /* 8144EFF8 | 41 82 00 24 */	beq .L_8144F01C
@@ -5763,7 +5763,7 @@
 /* 8144F0F0 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F0F4 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F0F8 | 38 80 00 02 */	li r4, 0x2
-/* 8144F0FC | 4B FF C7 E1 */	bl VmDateCommon
+/* 8144F0FC | 4B FF C7 E1 */	bl CHANSVm_8144B8DC
 /* 8144F100 | 7C 7E 1B 78 */	mr r30, r3
 /* 8144F104 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F108 | 38 80 00 01 */	li r4, 0x1
@@ -5771,7 +5771,7 @@
 /* 8144F110 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F114 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F118 | 38 80 00 02 */	li r4, 0x2
-/* 8144F11C | 4B FF C7 C1 */	bl VmDateCommon
+/* 8144F11C | 4B FF C7 C1 */	bl CHANSVm_8144B8DC
 /* 8144F120 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 8144F124 | 3B E0 00 00 */	li r31, 0x0
 /* 8144F128 | 41 82 00 30 */	beq .L_8144F158
@@ -5853,7 +5853,7 @@
 /* 8144F234 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F238 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F23C | 38 80 00 02 */	li r4, 0x2
-/* 8144F240 | 4B FF C6 9D */	bl VmDateCommon
+/* 8144F240 | 4B FF C6 9D */	bl CHANSVm_8144B8DC
 /* 8144F244 | 7C 7E 1B 78 */	mr r30, r3
 /* 8144F248 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F24C | 38 80 00 01 */	li r4, 0x1
@@ -5861,7 +5861,7 @@
 /* 8144F254 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F258 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F25C | 38 80 00 02 */	li r4, 0x2
-/* 8144F260 | 4B FF C6 7D */	bl VmDateCommon
+/* 8144F260 | 4B FF C6 7D */	bl CHANSVm_8144B8DC
 /* 8144F264 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 8144F268 | 3B E0 00 00 */	li r31, 0x0
 /* 8144F26C | 41 82 00 30 */	beq .L_8144F29C
@@ -5904,7 +5904,7 @@
 /* 8144F2E4 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F2E8 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F2EC | 38 80 00 02 */	li r4, 0x2
-/* 8144F2F0 | 4B FF C5 ED */	bl VmDateCommon
+/* 8144F2F0 | 4B FF C5 ED */	bl CHANSVm_8144B8DC
 /* 8144F2F4 | 7C 7E 1B 78 */	mr r30, r3
 /* 8144F2F8 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F2FC | 38 80 00 01 */	li r4, 0x1
@@ -5912,7 +5912,7 @@
 /* 8144F304 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F308 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F30C | 38 80 00 02 */	li r4, 0x2
-/* 8144F310 | 4B FF C5 CD */	bl VmDateCommon
+/* 8144F310 | 4B FF C5 CD */	bl CHANSVm_8144B8DC
 /* 8144F314 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 8144F318 | 3B E0 00 00 */	li r31, 0x0
 /* 8144F31C | 41 82 00 30 */	beq .L_8144F34C
@@ -5983,7 +5983,7 @@
 /* 8144F3FC | 7C 65 1B 78 */	mr r5, r3
 /* 8144F400 | 7F C3 F3 78 */	mr r3, r30
 /* 8144F404 | 38 80 00 02 */	li r4, 0x2
-/* 8144F408 | 4B FF C4 D5 */	bl VmDateCommon
+/* 8144F408 | 4B FF C4 D5 */	bl CHANSVm_8144B8DC
 /* 8144F40C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F410 | 41 82 00 48 */	beq .L_8144F458
 /* 8144F414 | C8 23 00 00 */	lfd f1, 0x0(r3)
@@ -6030,7 +6030,7 @@
 /* 8144F498 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F49C | 7F A3 EB 78 */	mr r3, r29
 /* 8144F4A0 | 38 80 00 02 */	li r4, 0x2
-/* 8144F4A4 | 4B FF C4 39 */	bl VmDateCommon
+/* 8144F4A4 | 4B FF C4 39 */	bl CHANSVm_8144B8DC
 /* 8144F4A8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F4AC | 3B E0 00 00 */	li r31, 0x0
 /* 8144F4B0 | 41 82 00 24 */	beq .L_8144F4D4
@@ -6066,7 +6066,7 @@
 /* 8144F514 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F518 | 7F C3 F3 78 */	mr r3, r30
 /* 8144F51C | 38 80 00 02 */	li r4, 0x2
-/* 8144F520 | 4B FF C3 BD */	bl VmDateCommon
+/* 8144F520 | 4B FF C3 BD */	bl CHANSVm_8144B8DC
 /* 8144F524 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F528 | 41 82 00 38 */	beq .L_8144F560
 /* 8144F52C | C8 23 00 00 */	lfd f1, 0x0(r3)
@@ -6109,7 +6109,7 @@
 /* 8144F5A0 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F5A4 | 7F A3 EB 78 */	mr r3, r29
 /* 8144F5A8 | 38 80 00 02 */	li r4, 0x2
-/* 8144F5AC | 4B FF C3 31 */	bl VmDateCommon
+/* 8144F5AC | 4B FF C3 31 */	bl CHANSVm_8144B8DC
 /* 8144F5B0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F5B4 | 3B E0 00 00 */	li r31, 0x0
 /* 8144F5B8 | 41 82 00 24 */	beq .L_8144F5DC
@@ -6149,7 +6149,7 @@
 /* 8144F62C | 7C 65 1B 78 */	mr r5, r3
 /* 8144F630 | 7F A3 EB 78 */	mr r3, r29
 /* 8144F634 | 38 80 00 03 */	li r4, 0x3
-/* 8144F638 | 4B FF C2 A5 */	bl VmDateCommon
+/* 8144F638 | 4B FF C2 A5 */	bl CHANSVm_8144B8DC
 /* 8144F63C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F640 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F644 | 3B E0 00 00 */	li r31, 0x0
@@ -6212,7 +6212,7 @@
 /* 8144F708 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F70C | 7F 43 D3 78 */	mr r3, r26
 /* 8144F710 | 38 80 00 01 */	li r4, 0x1
-/* 8144F714 | 4B FF C1 C9 */	bl VmDateCommon
+/* 8144F714 | 4B FF C1 C9 */	bl CHANSVm_8144B8DC
 /* 8144F718 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F71C | 41 82 00 14 */	beq .L_8144F730
 /* 8144F720 | 80 63 00 04 */	lwz r3, 0x4(r3)
@@ -6284,7 +6284,7 @@
 /* 8144F7F4 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F7F8 | 7F 63 DB 78 */	mr r3, r27
 /* 8144F7FC | 38 80 00 01 */	li r4, 0x1
-/* 8144F800 | 4B FF C0 DD */	bl VmDateCommon
+/* 8144F800 | 4B FF C0 DD */	bl CHANSVm_8144B8DC
 /* 8144F804 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F808 | 41 82 00 8C */	beq .L_8144F894
 /* 8144F80C | 80 BC 00 00 */	lwz r5, 0x0(r28)
@@ -6350,7 +6350,7 @@
 /* 8144F8DC | 7C 65 1B 78 */	mr r5, r3
 /* 8144F8E0 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F8E4 | 38 80 00 01 */	li r4, 0x1
-/* 8144F8E8 | 4B FF BF F5 */	bl VmDateCommon
+/* 8144F8E8 | 4B FF BF F5 */	bl CHANSVm_8144B8DC
 /* 8144F8EC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F8F0 | 41 82 00 6C */	beq .L_8144F95C
 /* 8144F8F4 | 80 FD 00 00 */	lwz r7, 0x0(r29)
@@ -6448,7 +6448,7 @@
 /* 8144FA34 | 7C 65 1B 78 */	mr r5, r3
 /* 8144FA38 | 7F 83 E3 78 */	mr r3, r28
 /* 8144FA3C | 38 80 00 03 */	li r4, 0x3
-/* 8144FA40 | 4B FF BE 9D */	bl VmDateCommon
+/* 8144FA40 | 4B FF BE 9D */	bl CHANSVm_8144B8DC
 /* 8144FA44 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144FA48 | 7C 7B 1B 78 */	mr r27, r3
 /* 8144FA4C | 41 82 01 18 */	beq .L_8144FB64
@@ -6460,7 +6460,7 @@
 /* 8144FA64 | 7C 65 1B 78 */	mr r5, r3
 /* 8144FA68 | 7F 83 E3 78 */	mr r3, r28
 /* 8144FA6C | 38 80 00 01 */	li r4, 0x1
-/* 8144FA70 | 4B FF BE 6D */	bl VmDateCommon
+/* 8144FA70 | 4B FF BE 6D */	bl CHANSVm_8144B8DC
 /* 8144FA74 | 7C 7A 1B 78 */	mr r26, r3
 .L_8144FA78:
 /* 8144FA78 | 80 DF 00 00 */	lwz r6, 0x0(r31)
@@ -6589,7 +6589,7 @@
 /* 8144FC00 | 7C 65 1B 78 */	mr r5, r3
 /* 8144FC04 | 7F 63 DB 78 */	mr r3, r27
 /* 8144FC08 | 38 80 00 03 */	li r4, 0x3
-/* 8144FC0C | 4B FF BC D1 */	bl VmDateCommon
+/* 8144FC0C | 4B FF BC D1 */	bl CHANSVm_8144B8DC
 /* 8144FC10 | 7C 7D 1B 78 */	mr r29, r3
 /* 8144FC14 | 7F 63 DB 78 */	mr r3, r27
 /* 8144FC18 | 38 80 00 01 */	li r4, 0x1
@@ -6597,7 +6597,7 @@
 /* 8144FC20 | 7C 65 1B 78 */	mr r5, r3
 /* 8144FC24 | 7F 63 DB 78 */	mr r3, r27
 /* 8144FC28 | 38 80 00 03 */	li r4, 0x3
-/* 8144FC2C | 4B FF BC B1 */	bl VmDateCommon
+/* 8144FC2C | 4B FF BC B1 */	bl CHANSVm_8144B8DC
 /* 8144FC30 | 2C 1D 00 00 */	cmpwi r29, 0x0
 /* 8144FC34 | 41 82 01 6C */	beq .L_8144FDA0
 /* 8144FC38 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -6736,7 +6736,7 @@
 /* 8144FE00 | 7C 65 1B 78 */	mr r5, r3
 /* 8144FE04 | 7F 83 E3 78 */	mr r3, r28
 /* 8144FE08 | 38 80 00 01 */	li r4, 0x1
-/* 8144FE0C | 4B FF BA D1 */	bl VmDateCommon
+/* 8144FE0C | 4B FF BA D1 */	bl CHANSVm_8144B8DC
 /* 8144FE10 | 7C 7B 1B 78 */	mr r27, r3
 /* 8144FE14 | 7F 83 E3 78 */	mr r3, r28
 /* 8144FE18 | 38 80 00 01 */	li r4, 0x1
@@ -6744,7 +6744,7 @@
 /* 8144FE20 | 7C 65 1B 78 */	mr r5, r3
 /* 8144FE24 | 7F 83 E3 78 */	mr r3, r28
 /* 8144FE28 | 38 80 00 01 */	li r4, 0x1
-/* 8144FE2C | 4B FF BA B1 */	bl VmDateCommon
+/* 8144FE2C | 4B FF BA B1 */	bl CHANSVm_8144B8DC
 /* 8144FE30 | 80 9D 00 00 */	lwz r4, 0x0(r29)
 /* 8144FE34 | 2C 1B 00 00 */	cmpwi r27, 0x0
 /* 8144FE38 | 3B E0 00 00 */	li r31, 0x0
@@ -6871,7 +6871,7 @@
 /* 8144FFEC | 7C 65 1B 78 */	mr r5, r3
 /* 8144FFF0 | 7F 63 DB 78 */	mr r3, r27
 /* 8144FFF4 | 38 80 00 03 */	li r4, 0x3
-/* 8144FFF8 | 4B FF B8 E5 */	bl VmDateCommon
+/* 8144FFF8 | 4B FF B8 E5 */	bl CHANSVm_8144B8DC
 /* 8144FFFC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81450000 | 7C 7F 1B 78 */	mr r31, r3
 /* 81450004 | 40 82 00 10 */	bne .L_81450014
@@ -6890,7 +6890,7 @@
 /* 81450034 | 7C 65 1B 78 */	mr r5, r3
 /* 81450038 | 7F 63 DB 78 */	mr r3, r27
 /* 8145003C | 38 80 00 01 */	li r4, 0x1
-/* 81450040 | 4B FF B8 9D */	bl VmDateCommon
+/* 81450040 | 4B FF B8 9D */	bl CHANSVm_8144B8DC
 /* 81450044 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81450048 | 41 82 00 30 */	beq .L_81450078
 /* 8145004C | 80 83 00 04 */	lwz r4, 0x4(r3)
@@ -7475,7 +7475,7 @@
 /* 81450838 | 7C 65 1B 78 */	mr r5, r3
 /* 8145083C | 7D E3 7B 78 */	mr r3, r15
 /* 81450840 | 38 80 00 01 */	li r4, 0x1
-/* 81450844 | 4B FF B0 99 */	bl VmDateCommon
+/* 81450844 | 4B FF B0 99 */	bl CHANSVm_8144B8DC
 /* 81450848 | 7C 64 1B 78 */	mr r4, r3
 .L_8145084C:
 /* 8145084C | 2C 04 00 00 */	cmpwi r4, 0x0
@@ -7537,7 +7537,7 @@
 /* 81450918 | 7C 65 1B 78 */	mr r5, r3
 /* 8145091C | 7D E3 7B 78 */	mr r3, r15
 /* 81450920 | 38 80 00 02 */	li r4, 0x2
-/* 81450924 | 4B FF AF B9 */	bl VmDateCommon
+/* 81450924 | 4B FF AF B9 */	bl CHANSVm_8144B8DC
 /* 81450928 | 7C 64 1B 78 */	mr r4, r3
 /* 8145092C | 39 C0 00 01 */	li r14, 0x1
 /* 81450930 | 4B FF FF 1C */	b .L_8145084C
@@ -7548,7 +7548,7 @@
 /* 81450940 | 7C 65 1B 78 */	mr r5, r3
 /* 81450944 | 7D E3 7B 78 */	mr r3, r15
 /* 81450948 | 38 80 00 01 */	li r4, 0x1
-/* 8145094C | 4B FF AF 91 */	bl VmDateCommon
+/* 8145094C | 4B FF AF 91 */	bl CHANSVm_8144B8DC
 /* 81450950 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81450954 | 3B DE 00 01 */	addi r30, r30, 0x1
 /* 81450958 | 41 82 01 74 */	beq .L_81450ACC
@@ -7566,7 +7566,7 @@
 /* 81450984 | 7C 65 1B 78 */	mr r5, r3
 /* 81450988 | 7D E3 7B 78 */	mr r3, r15
 /* 8145098C | 38 80 00 03 */	li r4, 0x3
-/* 81450990 | 4B FF AF 4D */	bl VmDateCommon
+/* 81450990 | 4B FF AF 4D */	bl CHANSVm_8144B8DC
 /* 81450994 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81450998 | 90 61 00 88 */	stw r3, 0x88(r1)
 /* 8145099C | 3B DE 00 01 */	addi r30, r30, 0x1
@@ -7909,7 +7909,7 @@
 /* 81450DF0 | 7C 65 1B 78 */	mr r5, r3
 /* 81450DF4 | 7F A3 EB 78 */	mr r3, r29
 /* 81450DF8 | 38 80 00 01 */	li r4, 0x1
-/* 81450DFC | 4B FF AA E1 */	bl VmDateCommon
+/* 81450DFC | 4B FF AA E1 */	bl CHANSVm_8144B8DC
 /* 81450E00 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81450E04 | 3B E0 00 00 */	li r31, 0x0
 /* 81450E08 | 41 82 00 18 */	beq .L_81450E20
@@ -8010,7 +8010,7 @@
 /* 81450F3C | 7C 65 1B 78 */	mr r5, r3
 /* 81450F40 | 7F 83 E3 78 */	mr r3, r28
 /* 81450F44 | 38 80 00 01 */	li r4, 0x1
-/* 81450F48 | 4B FF A9 95 */	bl VmDateCommon
+/* 81450F48 | 4B FF A9 95 */	bl CHANSVm_8144B8DC
 /* 81450F4C | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81450F50 | 7C 64 1B 78 */	mr r4, r3
 /* 81450F54 | 41 82 00 0C */	beq .L_81450F60
@@ -8068,7 +8068,7 @@
 /* 81451000 | 7C 65 1B 78 */	mr r5, r3
 /* 81451004 | 7F 83 E3 78 */	mr r3, r28
 /* 81451008 | 38 80 00 01 */	li r4, 0x1
-/* 8145100C | 4B FF A8 D1 */	bl VmDateCommon
+/* 8145100C | 4B FF A8 D1 */	bl CHANSVm_8144B8DC
 /* 81451010 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81451014 | 41 82 00 0C */	beq .L_81451020
 /* 81451018 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -8168,7 +8168,7 @@
 /* 81451154 | 7C 65 1B 78 */	mr r5, r3
 /* 81451158 | 7F C3 F3 78 */	mr r3, r30
 /* 8145115C | 38 80 00 01 */	li r4, 0x1
-/* 81451160 | 4B FF A7 7D */	bl VmDateCommon
+/* 81451160 | 4B FF A7 7D */	bl CHANSVm_8144B8DC
 /* 81451164 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81451168 | 41 82 00 0C */	beq .L_81451174
 /* 8145116C | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -8242,7 +8242,7 @@
 /* 81451248 | 7C 65 1B 78 */	mr r5, r3
 /* 8145124C | 7F E3 FB 78 */	mr r3, r31
 /* 81451250 | 38 80 00 01 */	li r4, 0x1
-/* 81451254 | 4B FF A6 89 */	bl VmDateCommon
+/* 81451254 | 4B FF A6 89 */	bl CHANSVm_8144B8DC
 /* 81451258 | 7C 7E 1B 78 */	mr r30, r3
 /* 8145125C | 7F E3 FB 78 */	mr r3, r31
 /* 81451260 | 38 80 00 01 */	li r4, 0x1
@@ -8250,7 +8250,7 @@
 /* 81451268 | 7C 65 1B 78 */	mr r5, r3
 /* 8145126C | 7F E3 FB 78 */	mr r3, r31
 /* 81451270 | 38 80 00 01 */	li r4, 0x1
-/* 81451274 | 4B FF A6 69 */	bl VmDateCommon
+/* 81451274 | 4B FF A6 69 */	bl CHANSVm_8144B8DC
 /* 81451278 | 2C 9D 00 00 */	cmpwi cr1, r29, 0x0
 /* 8145127C | 7C 64 1B 78 */	mr r4, r3
 /* 81451280 | 41 86 00 0C */	beq cr1, .L_8145128C
@@ -8360,7 +8360,7 @@
 /* 814513CC | 7C 65 1B 78 */	mr r5, r3
 /* 814513D0 | 7F 83 E3 78 */	mr r3, r28
 /* 814513D4 | 38 80 00 01 */	li r4, 0x1
-/* 814513D8 | 4B FF A5 05 */	bl VmDateCommon
+/* 814513D8 | 4B FF A5 05 */	bl CHANSVm_8144B8DC
 /* 814513DC | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 814513E0 | 41 82 00 0C */	beq .L_814513EC
 /* 814513E4 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -8417,7 +8417,7 @@
 /* 81451490 | 7C 65 1B 78 */	mr r5, r3
 /* 81451494 | 7F 63 DB 78 */	mr r3, r27
 /* 81451498 | 38 80 00 03 */	li r4, 0x3
-/* 8145149C | 4B FF A4 41 */	bl VmDateCommon
+/* 8145149C | 4B FF A4 41 */	bl CHANSVm_8144B8DC
 /* 814514A0 | 7C 7E 1B 78 */	mr r30, r3
 /* 814514A4 | 4B FF F7 01 */	bl CHANSVm_81450BA4
 /* 814514A8 | 7C 7D 1B 78 */	mr r29, r3
@@ -8430,7 +8430,7 @@
 /* 814514C4 | 7C 65 1B 78 */	mr r5, r3
 /* 814514C8 | 7F 63 DB 78 */	mr r3, r27
 /* 814514CC | 38 80 00 01 */	li r4, 0x1
-/* 814514D0 | 4B FF A4 0D */	bl VmDateCommon
+/* 814514D0 | 4B FF A4 0D */	bl CHANSVm_8144B8DC
 /* 814514D4 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 814514D8 | 41 82 00 14 */	beq .L_814514EC
 /* 814514DC | 2C 1E 00 00 */	cmpwi r30, 0x0
@@ -8503,7 +8503,7 @@
 /* 814515C0 | 7C 65 1B 78 */	mr r5, r3
 /* 814515C4 | 7F 83 E3 78 */	mr r3, r28
 /* 814515C8 | 38 80 00 01 */	li r4, 0x1
-/* 814515CC | 4B FF A3 11 */	bl VmDateCommon
+/* 814515CC | 4B FF A3 11 */	bl CHANSVm_8144B8DC
 /* 814515D0 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 814515D4 | 7C 7F 1B 78 */	mr r31, r3
 /* 814515D8 | 41 82 00 0C */	beq .L_814515E4
@@ -8566,7 +8566,7 @@
 /* 8145169C | 7C 65 1B 78 */	mr r5, r3
 /* 814516A0 | 7F 63 DB 78 */	mr r3, r27
 /* 814516A4 | 38 80 00 03 */	li r4, 0x3
-/* 814516A8 | 4B FF A2 35 */	bl VmDateCommon
+/* 814516A8 | 4B FF A2 35 */	bl CHANSVm_8144B8DC
 /* 814516AC | 7C 7C 1B 78 */	mr r28, r3
 /* 814516B0 | 4B FF F4 F5 */	bl CHANSVm_81450BA4
 /* 814516B4 | 7C 7E 1B 78 */	mr r30, r3
@@ -8579,7 +8579,7 @@
 /* 814516D0 | 7C 65 1B 78 */	mr r5, r3
 /* 814516D4 | 7F 63 DB 78 */	mr r3, r27
 /* 814516D8 | 38 80 00 01 */	li r4, 0x1
-/* 814516DC | 4B FF A2 01 */	bl VmDateCommon
+/* 814516DC | 4B FF A2 01 */	bl CHANSVm_8144B8DC
 /* 814516E0 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 814516E4 | 41 82 00 14 */	beq .L_814516F8
 /* 814516E8 | 2C 1C 00 00 */	cmpwi r28, 0x0
@@ -8746,7 +8746,7 @@
 /* 81451910 | 7C 65 1B 78 */	mr r5, r3
 /* 81451914 | 7F 63 DB 78 */	mr r3, r27
 /* 81451918 | 38 80 00 01 */	li r4, 0x1
-/* 8145191C | 4B FF 9F C1 */	bl VmDateCommon
+/* 8145191C | 4B FF 9F C1 */	bl CHANSVm_8144B8DC
 /* 81451920 | 7C 79 1B 78 */	mr r25, r3
 /* 81451924 | 7F 63 DB 78 */	mr r3, r27
 /* 81451928 | 38 80 00 01 */	li r4, 0x1
@@ -8758,7 +8758,7 @@
 /* 81451940 | 7C 65 1B 78 */	mr r5, r3
 /* 81451944 | 7F 63 DB 78 */	mr r3, r27
 /* 81451948 | 38 80 00 01 */	li r4, 0x1
-/* 8145194C | 4B FF 9F 91 */	bl VmDateCommon
+/* 8145194C | 4B FF 9F 91 */	bl CHANSVm_8144B8DC
 /* 81451950 | 7C 7D 1B 78 */	mr r29, r3
 /* 81451954 | 7F 63 DB 78 */	mr r3, r27
 /* 81451958 | 38 80 00 03 */	li r4, 0x3
@@ -8766,7 +8766,7 @@
 /* 81451960 | 7C 65 1B 78 */	mr r5, r3
 /* 81451964 | 7F 63 DB 78 */	mr r3, r27
 /* 81451968 | 38 80 00 01 */	li r4, 0x1
-/* 8145196C | 4B FF 9F 71 */	bl VmDateCommon
+/* 8145196C | 4B FF 9F 71 */	bl CHANSVm_8144B8DC
 /* 81451970 | 7C 78 1B 78 */	mr r24, r3
 /* 81451974 | 7F 43 D3 78 */	mr r3, r26
 /* 81451978 | 38 82 8B A7 */	li r4, lbl_81694FA7@sda21
@@ -8894,7 +8894,7 @@
 /* 81451B30 | 7C 65 1B 78 */	mr r5, r3
 /* 81451B34 | 7F 83 E3 78 */	mr r3, r28
 /* 81451B38 | 38 80 00 01 */	li r4, 0x1
-/* 81451B3C | 4B FF 9D A1 */	bl VmDateCommon
+/* 81451B3C | 4B FF 9D A1 */	bl CHANSVm_8144B8DC
 /* 81451B40 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 81451B44 | 7C 64 1B 78 */	mr r4, r3
 /* 81451B48 | 40 82 00 0C */	bne .L_81451B54
@@ -8963,7 +8963,7 @@
 /* 81451C20 | 7C 65 1B 78 */	mr r5, r3
 /* 81451C24 | 7F 83 E3 78 */	mr r3, r28
 /* 81451C28 | 38 80 00 01 */	li r4, 0x1
-/* 81451C2C | 4B FF 9C B1 */	bl VmDateCommon
+/* 81451C2C | 4B FF 9C B1 */	bl CHANSVm_8144B8DC
 /* 81451C30 | 7C 7E 1B 78 */	mr r30, r3
 /* 81451C34 | 7F E3 FB 78 */	mr r3, r31
 /* 81451C38 | 38 82 8B A7 */	li r4, lbl_81694FA7@sda21
@@ -9060,7 +9060,7 @@
 /* 81451D6C | 7C 65 1B 78 */	mr r5, r3
 /* 81451D70 | 7F 83 E3 78 */	mr r3, r28
 /* 81451D74 | 38 80 00 01 */	li r4, 0x1
-/* 81451D78 | 4B FF 9B 65 */	bl VmDateCommon
+/* 81451D78 | 4B FF 9B 65 */	bl CHANSVm_8144B8DC
 /* 81451D7C | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 81451D80 | 7C 64 1B 78 */	mr r4, r3
 /* 81451D84 | 40 82 00 0C */	bne .L_81451D90
@@ -9206,7 +9206,7 @@
 /* 81451F68 | 7C 65 1B 78 */	mr r5, r3
 /* 81451F6C | 7F 43 D3 78 */	mr r3, r26
 /* 81451F70 | 38 80 00 01 */	li r4, 0x1
-/* 81451F74 | 4B FF 99 69 */	bl VmDateCommon
+/* 81451F74 | 4B FF 99 69 */	bl CHANSVm_8144B8DC
 /* 81451F78 | 7C 7E 1B 78 */	mr r30, r3
 /* 81451F7C | 7F 43 D3 78 */	mr r3, r26
 /* 81451F80 | 38 80 00 01 */	li r4, 0x1
@@ -9214,7 +9214,7 @@
 /* 81451F88 | 7C 65 1B 78 */	mr r5, r3
 /* 81451F8C | 7F 43 D3 78 */	mr r3, r26
 /* 81451F90 | 38 80 00 01 */	li r4, 0x1
-/* 81451F94 | 4B FF 99 49 */	bl VmDateCommon
+/* 81451F94 | 4B FF 99 49 */	bl CHANSVm_8144B8DC
 /* 81451F98 | 3B E0 00 00 */	li r31, 0x0
 /* 81451F9C | 2C 1D 00 00 */	cmpwi r29, 0x0
 /* 81451FA0 | 93 E1 00 08 */	stw r31, 0x8(r1)
@@ -9367,7 +9367,7 @@
 /* 814521A0 | 7C 65 1B 78 */	mr r5, r3
 /* 814521A4 | 7F 43 D3 78 */	mr r3, r26
 /* 814521A8 | 38 80 00 01 */	li r4, 0x1
-/* 814521AC | 4B FF 97 31 */	bl VmDateCommon
+/* 814521AC | 4B FF 97 31 */	bl CHANSVm_8144B8DC
 /* 814521B0 | 7C 7E 1B 78 */	mr r30, r3
 /* 814521B4 | 7F 43 D3 78 */	mr r3, r26
 /* 814521B8 | 38 80 00 01 */	li r4, 0x1
@@ -9375,7 +9375,7 @@
 /* 814521C0 | 7C 65 1B 78 */	mr r5, r3
 /* 814521C4 | 7F 43 D3 78 */	mr r3, r26
 /* 814521C8 | 38 80 00 01 */	li r4, 0x1
-/* 814521CC | 4B FF 97 11 */	bl VmDateCommon
+/* 814521CC | 4B FF 97 11 */	bl CHANSVm_8144B8DC
 /* 814521D0 | 3B E0 00 00 */	li r31, 0x0
 /* 814521D4 | 2C 1D 00 00 */	cmpwi r29, 0x0
 /* 814521D8 | 93 E1 00 08 */	stw r31, 0x8(r1)
@@ -9512,7 +9512,7 @@
 /* 814523A0 | 7C 65 1B 78 */	mr r5, r3
 /* 814523A4 | 7F 43 D3 78 */	mr r3, r26
 /* 814523A8 | 38 80 00 01 */	li r4, 0x1
-/* 814523AC | 4B FF 95 31 */	bl VmDateCommon
+/* 814523AC | 4B FF 95 31 */	bl CHANSVm_8144B8DC
 /* 814523B0 | 7C 7E 1B 78 */	mr r30, r3
 /* 814523B4 | 7F 43 D3 78 */	mr r3, r26
 /* 814523B8 | 38 80 00 01 */	li r4, 0x1
@@ -9520,7 +9520,7 @@
 /* 814523C0 | 7C 65 1B 78 */	mr r5, r3
 /* 814523C4 | 7F 43 D3 78 */	mr r3, r26
 /* 814523C8 | 38 80 00 01 */	li r4, 0x1
-/* 814523CC | 4B FF 95 11 */	bl VmDateCommon
+/* 814523CC | 4B FF 95 11 */	bl CHANSVm_8144B8DC
 /* 814523D0 | 3B E0 00 00 */	li r31, 0x0
 /* 814523D4 | 2C 1D 00 00 */	cmpwi r29, 0x0
 /* 814523D8 | 93 E1 00 08 */	stw r31, 0x8(r1)
@@ -9639,7 +9639,7 @@
 /* 81452560 | 7C 65 1B 78 */	mr r5, r3
 /* 81452564 | 7F 43 D3 78 */	mr r3, r26
 /* 81452568 | 38 80 00 01 */	li r4, 0x1
-/* 8145256C | 4B FF 93 71 */	bl VmDateCommon
+/* 8145256C | 4B FF 93 71 */	bl CHANSVm_8144B8DC
 /* 81452570 | 7C 7E 1B 78 */	mr r30, r3
 /* 81452574 | 7F 43 D3 78 */	mr r3, r26
 /* 81452578 | 38 80 00 01 */	li r4, 0x1
@@ -9647,7 +9647,7 @@
 /* 81452580 | 7C 65 1B 78 */	mr r5, r3
 /* 81452584 | 7F 43 D3 78 */	mr r3, r26
 /* 81452588 | 38 80 00 01 */	li r4, 0x1
-/* 8145258C | 4B FF 93 51 */	bl VmDateCommon
+/* 8145258C | 4B FF 93 51 */	bl CHANSVm_8144B8DC
 /* 81452590 | 3B E0 00 00 */	li r31, 0x0
 /* 81452594 | 2C 1D 00 00 */	cmpwi r29, 0x0
 /* 81452598 | 93 E1 00 08 */	stw r31, 0x8(r1)
@@ -9808,7 +9808,7 @@
 /* 814527B4 | 7C 65 1B 78 */	mr r5, r3
 /* 814527B8 | 7F 23 CB 78 */	mr r3, r25
 /* 814527BC | 38 80 00 01 */	li r4, 0x1
-/* 814527C0 | 4B FF 91 1D */	bl VmDateCommon
+/* 814527C0 | 4B FF 91 1D */	bl CHANSVm_8144B8DC
 /* 814527C4 | 7C 7D 1B 78 */	mr r29, r3
 /* 814527C8 | 7F 23 CB 78 */	mr r3, r25
 /* 814527CC | 38 80 00 02 */	li r4, 0x2
@@ -9816,7 +9816,7 @@
 /* 814527D4 | 7C 65 1B 78 */	mr r5, r3
 /* 814527D8 | 7F 23 CB 78 */	mr r3, r25
 /* 814527DC | 38 80 00 01 */	li r4, 0x1
-/* 814527E0 | 4B FF 90 FD */	bl VmDateCommon
+/* 814527E0 | 4B FF 90 FD */	bl CHANSVm_8144B8DC
 /* 814527E4 | 7C 7B 1B 78 */	mr r27, r3
 /* 814527E8 | 7F C3 F3 78 */	mr r3, r30
 /* 814527EC | 38 82 8B A7 */	li r4, lbl_81694FA7@sda21
@@ -10328,7 +10328,7 @@
 /* 81452EDC | 7C 65 1B 78 */	mr r5, r3
 /* 81452EE0 | 7F C3 F3 78 */	mr r3, r30
 /* 81452EE4 | 38 80 00 01 */	li r4, 0x1
-/* 81452EE8 | 4B FF 89 F5 */	bl VmDateCommon
+/* 81452EE8 | 4B FF 89 F5 */	bl CHANSVm_8144B8DC
 /* 81452EEC | 38 00 00 00 */	li r0, 0x0
 /* 81452EF0 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81452EF4 | 98 01 00 08 */	stb r0, 0x8(r1)
@@ -10390,7 +10390,7 @@
 /* 81452FB4 | 7C 65 1B 78 */	mr r5, r3
 /* 81452FB8 | 7F C3 F3 78 */	mr r3, r30
 /* 81452FBC | 38 80 00 01 */	li r4, 0x1
-/* 81452FC0 | 4B FF 89 1D */	bl VmDateCommon
+/* 81452FC0 | 4B FF 89 1D */	bl CHANSVm_8144B8DC
 /* 81452FC4 | 38 00 00 00 */	li r0, 0x0
 /* 81452FC8 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81452FCC | B0 01 00 08 */	sth r0, 0x8(r1)
@@ -10452,7 +10452,7 @@
 /* 8145308C | 7C 65 1B 78 */	mr r5, r3
 /* 81453090 | 7F C3 F3 78 */	mr r3, r30
 /* 81453094 | 38 80 00 01 */	li r4, 0x1
-/* 81453098 | 4B FF 88 45 */	bl VmDateCommon
+/* 81453098 | 4B FF 88 45 */	bl CHANSVm_8144B8DC
 /* 8145309C | 38 00 00 00 */	li r0, 0x0
 /* 814530A0 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 814530A4 | 90 01 00 08 */	stw r0, 0x8(r1)
@@ -10514,7 +10514,7 @@
 /* 81453164 | 7C 65 1B 78 */	mr r5, r3
 /* 81453168 | 7F C3 F3 78 */	mr r3, r30
 /* 8145316C | 38 80 00 01 */	li r4, 0x1
-/* 81453170 | 4B FF 87 6D */	bl VmDateCommon
+/* 81453170 | 4B FF 87 6D */	bl CHANSVm_8144B8DC
 /* 81453174 | 38 00 00 00 */	li r0, 0x0
 /* 81453178 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 8145317C | 98 01 00 08 */	stb r0, 0x8(r1)
@@ -10576,7 +10576,7 @@
 /* 8145323C | 7C 65 1B 78 */	mr r5, r3
 /* 81453240 | 7F C3 F3 78 */	mr r3, r30
 /* 81453244 | 38 80 00 01 */	li r4, 0x1
-/* 81453248 | 4B FF 86 95 */	bl VmDateCommon
+/* 81453248 | 4B FF 86 95 */	bl CHANSVm_8144B8DC
 /* 8145324C | 38 00 00 00 */	li r0, 0x0
 /* 81453250 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81453254 | B0 01 00 08 */	sth r0, 0x8(r1)
@@ -10638,7 +10638,7 @@
 /* 81453314 | 7C 65 1B 78 */	mr r5, r3
 /* 81453318 | 7F C3 F3 78 */	mr r3, r30
 /* 8145331C | 38 80 00 01 */	li r4, 0x1
-/* 81453320 | 4B FF 85 BD */	bl VmDateCommon
+/* 81453320 | 4B FF 85 BD */	bl CHANSVm_8144B8DC
 /* 81453324 | 38 00 00 00 */	li r0, 0x0
 /* 81453328 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 8145332C | 90 01 00 08 */	stw r0, 0x8(r1)
@@ -10700,7 +10700,7 @@
 /* 814533EC | 7C 65 1B 78 */	mr r5, r3
 /* 814533F0 | 7F C3 F3 78 */	mr r3, r30
 /* 814533F4 | 38 80 00 01 */	li r4, 0x1
-/* 814533F8 | 4B FF 84 E5 */	bl VmDateCommon
+/* 814533F8 | 4B FF 84 E5 */	bl CHANSVm_8144B8DC
 /* 814533FC | 38 00 00 00 */	li r0, 0x0
 /* 81453400 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81453404 | 90 01 00 0C */	stw r0, 0xc(r1)
@@ -10907,7 +10907,7 @@
 /* 814536A8 | 7C 65 1B 78 */	mr r5, r3
 /* 814536AC | 7F C3 F3 78 */	mr r3, r30
 /* 814536B0 | 38 80 00 03 */	li r4, 0x3
-/* 814536B4 | 4B FF 82 29 */	bl VmDateCommon
+/* 814536B4 | 4B FF 82 29 */	bl CHANSVm_8144B8DC
 /* 814536B8 | 7C 72 1B 78 */	mr r18, r3
 /* 814536BC | 4B FF D4 E9 */	bl CHANSVm_81450BA4
 /* 814536C0 | 7C 74 1B 78 */	mr r20, r3
@@ -10920,7 +10920,7 @@
 /* 814536DC | 7C 65 1B 78 */	mr r5, r3
 /* 814536E0 | 7F C3 F3 78 */	mr r3, r30
 /* 814536E4 | 38 80 00 04 */	li r4, 0x4
-/* 814536E8 | 4B FF 81 F5 */	bl VmDateCommon
+/* 814536E8 | 4B FF 81 F5 */	bl CHANSVm_8144B8DC
 /* 814536EC | 2C 14 00 00 */	cmpwi r20, 0x0
 /* 814536F0 | 7C 72 1B 78 */	mr r18, r3
 /* 814536F4 | 40 82 00 0C */	bne .L_81453700
@@ -11058,7 +11058,7 @@
 /* 814538C0 | 7C 65 1B 78 */	mr r5, r3
 /* 814538C4 | 7F C3 F3 78 */	mr r3, r30
 /* 814538C8 | 38 80 00 03 */	li r4, 0x3
-/* 814538CC | 4B FF 80 11 */	bl VmDateCommon
+/* 814538CC | 4B FF 80 11 */	bl CHANSVm_8144B8DC
 /* 814538D0 | 48 00 00 20 */	b .L_814538F0
 .L_814538D4:
 /* 814538D4 | 7F C3 F3 78 */	mr r3, r30
@@ -11067,7 +11067,7 @@
 /* 814538E0 | 7C 65 1B 78 */	mr r5, r3
 /* 814538E4 | 7F C3 F3 78 */	mr r3, r30
 /* 814538E8 | 38 80 00 03 */	li r4, 0x3
-/* 814538EC | 4B FF 7F F1 */	bl VmDateCommon
+/* 814538EC | 4B FF 7F F1 */	bl CHANSVm_8144B8DC
 .L_814538F0:
 /* 814538F0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 814538F4 | 41 82 07 D0 */	beq .L_814540C4
@@ -11095,7 +11095,7 @@
 /* 81453944 | 7C 65 1B 78 */	mr r5, r3
 /* 81453948 | 7F C3 F3 78 */	mr r3, r30
 /* 8145394C | 38 80 00 03 */	li r4, 0x3
-/* 81453950 | 4B FF 7F 8D */	bl VmDateCommon
+/* 81453950 | 4B FF 7F 8D */	bl CHANSVm_8144B8DC
 /* 81453954 | 48 00 00 20 */	b .L_81453974
 .L_81453958:
 /* 81453958 | 7F C3 F3 78 */	mr r3, r30
@@ -11104,7 +11104,7 @@
 /* 81453964 | 7C 65 1B 78 */	mr r5, r3
 /* 81453968 | 7F C3 F3 78 */	mr r3, r30
 /* 8145396C | 38 80 00 03 */	li r4, 0x3
-/* 81453970 | 4B FF 7F 6D */	bl VmDateCommon
+/* 81453970 | 4B FF 7F 6D */	bl CHANSVm_8144B8DC
 .L_81453974:
 /* 81453974 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81453978 | 41 82 07 4C */	beq .L_814540C4
@@ -11318,7 +11318,7 @@
 /* 81453C64 | 7C 65 1B 78 */	mr r5, r3
 /* 81453C68 | 7F C3 F3 78 */	mr r3, r30
 /* 81453C6C | 38 80 00 01 */	li r4, 0x1
-/* 81453C70 | 4B FF 7C 6D */	bl VmDateCommon
+/* 81453C70 | 4B FF 7C 6D */	bl CHANSVm_8144B8DC
 /* 81453C74 | 48 00 00 20 */	b .L_81453C94
 .L_81453C78:
 /* 81453C78 | 7F C3 F3 78 */	mr r3, r30
@@ -11327,7 +11327,7 @@
 /* 81453C84 | 7C 65 1B 78 */	mr r5, r3
 /* 81453C88 | 7F C3 F3 78 */	mr r3, r30
 /* 81453C8C | 38 80 00 01 */	li r4, 0x1
-/* 81453C90 | 4B FF 7C 4D */	bl VmDateCommon
+/* 81453C90 | 4B FF 7C 4D */	bl CHANSVm_8144B8DC
 .L_81453C94:
 /* 81453C94 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81453C98 | 3A F7 00 01 */	addi r23, r23, 0x1
@@ -11454,7 +11454,7 @@
 /* 81453E28 | 7C 65 1B 78 */	mr r5, r3
 /* 81453E2C | 7F C3 F3 78 */	mr r3, r30
 /* 81453E30 | 38 80 00 03 */	li r4, 0x3
-/* 81453E34 | 4B FF 7A A9 */	bl VmDateCommon
+/* 81453E34 | 4B FF 7A A9 */	bl CHANSVm_8144B8DC
 /* 81453E38 | 7C 71 1B 78 */	mr r17, r3
 /* 81453E3C | 48 00 00 24 */	b .L_81453E60
 .L_81453E40:
@@ -11464,7 +11464,7 @@
 /* 81453E4C | 7C 65 1B 78 */	mr r5, r3
 /* 81453E50 | 7F C3 F3 78 */	mr r3, r30
 /* 81453E54 | 38 80 00 03 */	li r4, 0x3
-/* 81453E58 | 4B FF 7A 85 */	bl VmDateCommon
+/* 81453E58 | 4B FF 7A 85 */	bl CHANSVm_8144B8DC
 /* 81453E5C | 7C 71 1B 78 */	mr r17, r3
 .L_81453E60:
 /* 81453E60 | 2C 11 00 00 */	cmpwi r17, 0x0
@@ -11534,7 +11534,7 @@
 /* 81453F4C | 7C 65 1B 78 */	mr r5, r3
 /* 81453F50 | 7F C3 F3 78 */	mr r3, r30
 /* 81453F54 | 38 80 00 03 */	li r4, 0x3
-/* 81453F58 | 4B FF 79 85 */	bl VmDateCommon
+/* 81453F58 | 4B FF 79 85 */	bl CHANSVm_8144B8DC
 /* 81453F5C | 7C 79 1B 78 */	mr r25, r3
 /* 81453F60 | 48 00 00 24 */	b .L_81453F84
 .L_81453F64:
@@ -11544,7 +11544,7 @@
 /* 81453F70 | 7C 65 1B 78 */	mr r5, r3
 /* 81453F74 | 7F C3 F3 78 */	mr r3, r30
 /* 81453F78 | 38 80 00 03 */	li r4, 0x3
-/* 81453F7C | 4B FF 79 61 */	bl VmDateCommon
+/* 81453F7C | 4B FF 79 61 */	bl CHANSVm_8144B8DC
 /* 81453F80 | 7C 79 1B 78 */	mr r25, r3
 .L_81453F84:
 /* 81453F84 | 2C 19 00 00 */	cmpwi r25, 0x0
@@ -11710,7 +11710,7 @@
 /* 81454190 | 7C 65 1B 78 */	mr r5, r3
 /* 81454194 | 7F C3 F3 78 */	mr r3, r30
 /* 81454198 | 38 80 00 03 */	li r4, 0x3
-/* 8145419C | 4B FF 77 41 */	bl VmDateCommon
+/* 8145419C | 4B FF 77 41 */	bl CHANSVm_8144B8DC
 /* 814541A0 | 7C 73 1B 78 */	mr r19, r3
 /* 814541A4 | 4B FF CA 01 */	bl CHANSVm_81450BA4
 /* 814541A8 | 7C 75 1B 78 */	mr r21, r3
@@ -12545,7 +12545,7 @@
 /* 81454CE4 | 7C 65 1B 78 */	mr r5, r3
 /* 81454CE8 | 7F 63 DB 78 */	mr r3, r27
 /* 81454CEC | 38 80 00 03 */	li r4, 0x3
-/* 81454CF0 | 4B FF 6B ED */	bl VmDateCommon
+/* 81454CF0 | 4B FF 6B ED */	bl CHANSVm_8144B8DC
 /* 81454CF4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81454CF8 | 7C 7B 1B 78 */	mr r27, r3
 /* 81454CFC | 41 82 00 B8 */	beq .L_81454DB4
@@ -14506,12 +14506,12 @@
 /* 8145672C | 7D E3 7B 78 */	mr r3, r15
 /* 81456730 | 7E 64 9B 78 */	mr r4, r19
 /* 81456734 | 7E 45 93 78 */	mr r5, r18
-/* 81456738 | 4B FF 51 A5 */	bl VmDateCommon
+/* 81456738 | 4B FF 51 A5 */	bl CHANSVm_8144B8DC
 /* 8145673C | 7C 72 1B 78 */	mr r18, r3
 /* 81456740 | 7D E3 7B 78 */	mr r3, r15
 /* 81456744 | 7E 64 9B 78 */	mr r4, r19
 /* 81456748 | 7E 25 8B 78 */	mr r5, r17
-/* 8145674C | 4B FF 51 91 */	bl VmDateCommon
+/* 8145674C | 4B FF 51 91 */	bl CHANSVm_8144B8DC
 /* 81456750 | 7C 71 1B 78 */	mr r17, r3
 .L_81456754:
 /* 81456754 | 2C 12 00 00 */	cmpwi r18, 0x0

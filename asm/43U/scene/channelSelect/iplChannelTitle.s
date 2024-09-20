@@ -5882,7 +5882,7 @@
 /* 813B90CC | 7C 08 02 A6 */	mflr r0
 /* 813B90D0 | 90 01 00 64 */	stw r0, 0x64(r1)
 /* 813B90D4 | 38 61 00 08 */	addi r3, r1, 0x8
-/* 813B90D8 | 48 1B 10 A1 */	bl fn_8156A178
+/* 813B90D8 | 48 1B 10 A1 */	bl SCGetParentalControl
 /* 813B90DC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813B90E0 | 41 82 00 18 */	beq .L_813B90F8
 /* 813B90E4 | 88 01 00 08 */	lbz r0, 0x8(r1)
@@ -7824,7 +7824,7 @@
 /* 813BAB7C | 48 00 00 BC */	b .L_813BAC38
 .L_813BAB80:
 /* 813BAB80 | 38 61 00 08 */	addi r3, r1, 0x8
-/* 813BAB84 | 48 1A F5 F5 */	bl fn_8156A178
+/* 813BAB84 | 48 1A F5 F5 */	bl SCGetParentalControl
 /* 813BAB88 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813BAB8C | 40 82 00 0C */	bne .L_813BAB98
 /* 813BAB90 | 38 60 00 01 */	li r3, 0x1
@@ -7840,13 +7840,13 @@
 /* 813BABB4 | 80 7E 00 84 */	lwz r3, 0x84(r30)
 /* 813BABB8 | 4B F7 E1 59 */	bl isParentalRestricted__Q33ipl7channel7ManagerCFii
 /* 813BABBC | 7C 7F 1B 78 */	mr r31, r3
-/* 813BABC0 | 48 1A FA ED */	bl fn_8156A6AC
+/* 813BABC0 | 48 1A FA ED */	bl SCGetNetContentRestrictions
 /* 813BABC4 | 7C 60 F8 39 */	and. r0, r3, r31
 /* 813BABC8 | 41 82 00 0C */	beq .L_813BABD4
 /* 813BABCC | 38 60 00 00 */	li r3, 0x0
 /* 813BABD0 | 48 00 00 68 */	b .L_813BAC38
 .L_813BABD4:
-/* 813BABD4 | 48 1A F7 C9 */	bl fn_8156A39C
+/* 813BABD4 | 48 1A F7 C9 */	bl SCGetWwwRestriction
 /* 813BABD8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813BABDC | 41 82 00 24 */	beq .L_813BAC00
 /* 813BABE0 | 80 7E 00 84 */	lwz r3, 0x84(r30)

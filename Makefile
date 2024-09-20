@@ -29,6 +29,7 @@ REVOLUTION_EXT_ROOT	= $(LIBRARIES_ROOT)/RevoEX
 NW4R_ROOT			= $(LIBRARIES_ROOT)/NW4R
 EGG_ROOT			= $(LIBRARIES_ROOT)/EGG
 RVLFACELIB_ROOT		= $(LIBRARIES_ROOT)/RVLFaceLib
+EZI8_DICT_ROOT		= $(LIBRARIES_ROOT)/Zi8Lib
 
 # Checks
 ifneq ($(VERSION),43U)
@@ -46,16 +47,16 @@ endif
 .PHONY: prepare clean_data
 
 ### Build
-all: Runtime RVL_SDK RevoEX bs1 bs2 build/$(IPL_OUTFILE)
+all: Runtime RVL_SDK RevoEX Zi8Lib bs1 bs2 build/$(IPL_OUTFILE)
 	@echo Build complete!
 
 # Link
 build/$(IPL_OUTFILE): bs1 bs2
 	@echo Converting ELF files to $@...
 	@$(TOOLS_ROOT)/$(ELF2BS) -b $(IPL_INFILE) -bs1 $(BUILD_ROOT)/$(BS1_ELF_NAME).elf -bs2 $(BUILD_ROOT)/$(BS2_ELF_NAME).elf -bs2_size $(BS2_IMAGE_SIZE) -output $@
-	@echo =============================================================================
-	@echo SHA1 Sum should fail here as this does not compile a matching executable yet.
-	@echo =============================================================================
+	@echo ========================================================================
+	@echo SHA1 Sum should fail here as it does not link a matching executable yet.
+	@echo ========================================================================
 	@sha1sum -c $(CONFIG_ROOT)/sha1.txt
 
 # Clean
@@ -71,6 +72,7 @@ prepare: PrepareDecomp
 -include $(RUNTIME_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
 -include $(REVOLUTION_SDK_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
 -include $(REVOLUTION_EXT_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
+-include $(EZI8_DICT_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
 
 # App rules
 -include $(RULES_ROOT)/BS1rules.mak

@@ -2189,7 +2189,7 @@
 /* 813F2628 | 40 82 00 78 */	bne .L_813F26A0
 /* 813F262C | 38 60 00 01 */	li r3, 0x1
 /* 813F2630 | 4B F7 EB 45 */	bl setFuncResult__Q23www10wiisettingFUc
-/* 813F2634 | 48 17 81 ED */	bl fn_8156A820
+/* 813F2634 | 48 17 81 ED */	bl SCGetWCFlags
 /* 813F2638 | 54 63 00 3C */	clrrwi r3, r3, 1
 /* 813F263C | 48 17 82 21 */	bl fn_8156A85C
 /* 813F2640 | 38 00 00 00 */	li r0, 0x0
@@ -2251,7 +2251,7 @@
 .L_813F270C:
 /* 813F270C | 38 00 00 0B */	li r0, 0xb
 /* 813F2710 | 90 1D 00 74 */	stw r0, 0x74(r29)
-/* 813F2714 | 48 17 81 0D */	bl fn_8156A820
+/* 813F2714 | 48 17 81 0D */	bl SCGetWCFlags
 /* 813F2718 | 54 63 00 3C */	clrrwi r3, r3, 1
 /* 813F271C | 48 17 81 41 */	bl fn_8156A85C
 /* 813F2720 | 38 00 00 00 */	li r0, 0x0
@@ -2318,7 +2318,7 @@
 /* 813F27F8 | 80 03 00 24 */	lwz r0, 0x24(r3)
 /* 813F27FC | 2C 00 00 02 */	cmpwi r0, 0x2
 /* 813F2800 | 40 82 00 A0 */	bne .L_813F28A0
-/* 813F2804 | 48 17 80 1D */	bl fn_8156A820
+/* 813F2804 | 48 17 80 1D */	bl SCGetWCFlags
 /* 813F2808 | 54 63 00 3C */	clrrwi r3, r3, 1
 /* 813F280C | 48 17 80 51 */	bl fn_8156A85C
 /* 813F2810 | 38 00 00 00 */	li r0, 0x0
@@ -2533,7 +2533,7 @@
 /* 813F2AF4 | 48 13 DD 91 */	bl OSDisableInterrupts
 /* 813F2AF8 | 7C 7E 1B 78 */	mr r30, r3
 /* 813F2AFC | 38 60 00 00 */	li r3, 0x0
-/* 813F2B00 | 48 18 A8 C5 */	bl fn_8157D3C4
+/* 813F2B00 | 48 18 A8 C5 */	bl WPADSetSensorBarPower
 /* 813F2B04 | 7F C3 F3 78 */	mr r3, r30
 /* 813F2B08 | 48 13 DD A5 */	bl OSRestoreInterrupts
 /* 813F2B0C | 48 00 00 98 */	b .L_813F2BA4
@@ -2543,7 +2543,7 @@
 /* 813F2B18 | 48 13 DD 6D */	bl OSDisableInterrupts
 /* 813F2B1C | 7C 7E 1B 78 */	mr r30, r3
 /* 813F2B20 | 38 60 00 01 */	li r3, 0x1
-/* 813F2B24 | 48 18 A8 A1 */	bl fn_8157D3C4
+/* 813F2B24 | 48 18 A8 A1 */	bl WPADSetSensorBarPower
 /* 813F2B28 | 7F C3 F3 78 */	mr r3, r30
 /* 813F2B2C | 48 13 DD 81 */	bl OSRestoreInterrupts
 /* 813F2B30 | 38 00 00 1E */	li r0, 0x1e
@@ -2555,7 +2555,7 @@
 /* 813F2B44 | 48 13 DD 41 */	bl OSDisableInterrupts
 /* 813F2B48 | 7C 7E 1B 78 */	mr r30, r3
 /* 813F2B4C | 38 60 00 01 */	li r3, 0x1
-/* 813F2B50 | 48 18 A8 75 */	bl fn_8157D3C4
+/* 813F2B50 | 48 18 A8 75 */	bl WPADSetSensorBarPower
 /* 813F2B54 | 7F C3 F3 78 */	mr r3, r30
 /* 813F2B58 | 48 13 DD 55 */	bl OSRestoreInterrupts
 /* 813F2B5C | 3F C0 81 09 */	lis r30, smArg__Q23ipl6System@ha

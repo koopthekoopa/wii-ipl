@@ -32,12 +32,12 @@
 /* 81361048 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8136104C | 7C 08 02 A6 */	mflr r0
 /* 81361050 | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 81361054 | 80 0D A6 E4 */	lwz r0, lbl_81698724@sda21(r0)
+/* 81361054 | 80 0D A6 E4 */	lwz r0, _isInitialized__7LibTVRC@sda21(r0)
 /* 81361058 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8136105C | 41 82 00 14 */	beq .L_81361070
 /* 81361060 | 38 00 00 00 */	li r0, 0x0
 /* 81361064 | 38 60 00 00 */	li r3, 0x0
-/* 81361068 | 90 0D A6 C8 */	stw r0, lbl_81698708@sda21(r0)
+/* 81361068 | 90 0D A6 C8 */	stw r0, _lastError__7LibTVRC@sda21(r0)
 /* 8136106C | 48 00 00 58 */	b .L_813610C4
 .L_81361070:
 /* 81361070 | 3C 80 81 09 */	lis r4, _database__7LibTVRC@ha
@@ -47,20 +47,20 @@
 /* 81361080 | 40 82 00 14 */	bne .L_81361094
 /* 81361084 | 38 00 00 04 */	li r0, 0x4
 /* 81361088 | 38 60 00 00 */	li r3, 0x0
-/* 8136108C | 90 0D A6 C8 */	stw r0, lbl_81698708@sda21(r0)
+/* 8136108C | 90 0D A6 C8 */	stw r0, _lastError__7LibTVRC@sda21(r0)
 /* 81361090 | 48 00 00 34 */	b .L_813610C4
 .L_81361094:
 /* 81361094 | 38 80 FF FF */	li r4, -0x1
 /* 81361098 | 38 00 00 00 */	li r0, 0x0
 /* 8136109C | 3C 60 81 09 */	lis r3, _alarm__7LibTVRC@ha
-/* 813610A0 | 90 8D A6 D8 */	stw r4, lbl_81698718@sda21(r0)
+/* 813610A0 | 90 8D A6 D8 */	stw r4, _makerID__7LibTVRC@sda21(r0)
 /* 813610A4 | 38 63 97 80 */	addi r3, r3, _alarm__7LibTVRC@l
-/* 813610A8 | 90 0D A6 DC */	stw r0, lbl_8169871C@sda21(r0)
+/* 813610A8 | 90 0D A6 DC */	stw r0, _typeNo__7LibTVRC@sda21(r0)
 /* 813610AC | 48 1C B8 39 */	bl OSCreateAlarm
 /* 813610B0 | 38 00 00 01 */	li r0, 0x1
 /* 813610B4 | 38 60 00 01 */	li r3, 0x1
-/* 813610B8 | 90 0D A6 E4 */	stw r0, lbl_81698724@sda21(r0)
-/* 813610BC | 48 21 C3 09 */	bl fn_8157D3C4
+/* 813610B8 | 90 0D A6 E4 */	stw r0, _isInitialized__7LibTVRC@sda21(r0)
+/* 813610BC | 48 21 C3 09 */	bl WPADSetSensorBarPower
 /* 813610C0 | 38 60 00 00 */	li r3, 0x0
 .L_813610C4:
 /* 813610C4 | 80 01 00 14 */	lwz r0, 0x14(r1)
@@ -76,7 +76,7 @@
 /* 813610DC | 90 01 00 64 */	stw r0, 0x64(r1)
 /* 813610E0 | 39 61 00 60 */	addi r11, r1, 0x60
 /* 813610E4 | 48 29 83 DD */	bl _savegpr_27
-/* 813610E8 | 80 0D A6 E4 */	lwz r0, lbl_81698724@sda21(r0)
+/* 813610E8 | 80 0D A6 E4 */	lwz r0, _isInitialized__7LibTVRC@sda21(r0)
 /* 813610EC | 7C 7B 1B 78 */	mr r27, r3
 /* 813610F0 | 7C 9C 23 78 */	mr r28, r4
 /* 813610F4 | 7C BD 2B 78 */	mr r29, r5
@@ -98,10 +98,10 @@
 /* 8136112C | 38 60 00 00 */	li r3, 0x0
 /* 81361130 | 48 00 01 10 */	b .L_81361240
 .L_81361134:
-/* 81361134 | 80 0D A6 D8 */	lwz r0, lbl_81698718@sda21(r0)
+/* 81361134 | 80 0D A6 D8 */	lwz r0, _makerID__7LibTVRC@sda21(r0)
 /* 81361138 | 7C 03 00 00 */	cmpw r3, r0
 /* 8136113C | 40 82 00 18 */	bne .L_81361154
-/* 81361140 | 80 0D A6 DC */	lwz r0, lbl_8169871C@sda21(r0)
+/* 81361140 | 80 0D A6 DC */	lwz r0, _typeNo__7LibTVRC@sda21(r0)
 /* 81361144 | 7C 04 00 00 */	cmpw r4, r0
 /* 81361148 | 40 82 00 0C */	bne .L_81361154
 /* 8136114C | 38 60 00 01 */	li r3, 0x1
@@ -121,7 +121,7 @@
 /* 81361180 | 40 82 00 14 */	bne .L_81361194
 /* 81361184 | 38 00 00 06 */	li r0, 0x6
 /* 81361188 | 38 60 00 00 */	li r3, 0x0
-/* 8136118C | 90 0D A6 C8 */	stw r0, lbl_81698708@sda21(r0)
+/* 8136118C | 90 0D A6 C8 */	stw r0, _lastError__7LibTVRC@sda21(r0)
 /* 81361190 | 48 00 00 B0 */	b .L_81361240
 .L_81361194:
 /* 81361194 | 7F 9F E3 78 */	mr r31, r28
@@ -147,7 +147,7 @@
 /* 813611D8 | 40 82 00 14 */	bne .L_813611EC
 /* 813611DC | 38 00 00 06 */	li r0, 0x6
 /* 813611E0 | 38 60 00 00 */	li r3, 0x0
-/* 813611E4 | 90 0D A6 C8 */	stw r0, lbl_81698708@sda21(r0)
+/* 813611E4 | 90 0D A6 C8 */	stw r0, _lastError__7LibTVRC@sda21(r0)
 /* 813611E8 | 48 00 00 58 */	b .L_81361240
 .L_813611EC:
 /* 813611EC | 38 61 00 08 */	addi r3, r1, 0x8
@@ -157,7 +157,7 @@
 /* 813611FC | 40 81 00 14 */	ble .L_81361210
 /* 81361200 | 38 00 00 07 */	li r0, 0x7
 /* 81361204 | 38 60 00 00 */	li r3, 0x0
-/* 81361208 | 90 0D A6 C8 */	stw r0, lbl_81698708@sda21(r0)
+/* 81361208 | 90 0D A6 C8 */	stw r0, _lastError__7LibTVRC@sda21(r0)
 /* 8136120C | 48 00 00 34 */	b .L_81361240
 .L_81361210:
 /* 81361210 | 38 61 00 08 */	addi r3, r1, 0x8
@@ -167,10 +167,10 @@
 /* 81361220 | 7F C5 F3 78 */	mr r5, r30
 /* 81361224 | 4B FC F0 0D */	bl memcpy
 /* 81361228 | 38 00 00 00 */	li r0, 0x0
-/* 8136122C | 93 AD A6 CC */	stw r29, lbl_8169870C@sda21(r0)
+/* 8136122C | 93 AD A6 CC */	stw r29, _tvrcFile__7LibTVRC@sda21(r0)
 /* 81361230 | 38 60 00 01 */	li r3, 0x1
-/* 81361234 | 93 6D A6 D8 */	stw r27, lbl_81698718@sda21(r0)
-/* 81361238 | 93 8D A6 DC */	stw r28, lbl_8169871C@sda21(r0)
+/* 81361234 | 93 6D A6 D8 */	stw r27, _makerID__7LibTVRC@sda21(r0)
+/* 81361238 | 93 8D A6 DC */	stw r28, _typeNo__7LibTVRC@sda21(r0)
 /* 8136123C | 90 1F 97 60 */	stw r0, _database__7LibTVRC@l(r31)
 .L_81361240:
 /* 81361240 | 39 61 00 60 */	addi r11, r1, 0x60
@@ -183,16 +183,16 @@
 
 # .text:0x210 | 0x81361258 | size: 0x8
 .fn TVRCSetRepeatTimeout, global
-/* 81361258 | 90 6D 82 00 */	stw r3, lbl_81696240@sda21(r0)
+/* 81361258 | 90 6D 82 00 */	stw r3, _limitMilli__7LibTVRC@sda21(r0)
 /* 8136125C | 4E 80 00 20 */	blr
 .endfn TVRCSetRepeatTimeout
 
 # .text:0x218 | 0x81361260 | size: 0x30
 .fn TVRCSendStopAsync, global
-/* 81361260 | 80 0D A6 E4 */	lwz r0, lbl_81698724@sda21(r0)
+/* 81361260 | 80 0D A6 E4 */	lwz r0, _isInitialized__7LibTVRC@sda21(r0)
 /* 81361264 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81361268 | 41 82 00 10 */	beq .L_81361278
-/* 8136126C | 80 0D A6 E8 */	lwz r0, lbl_81698728@sda21(r0)
+/* 8136126C | 80 0D A6 E8 */	lwz r0, _isActive__7LibTVRC@sda21(r0)
 /* 81361270 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81361274 | 40 82 00 0C */	bne .L_81361280
 .L_81361278:
@@ -201,13 +201,13 @@
 .L_81361280:
 /* 81361280 | 38 00 00 01 */	li r0, 0x1
 /* 81361284 | 38 60 00 01 */	li r3, 0x1
-/* 81361288 | 90 0D A6 EC */	stw r0, lbl_8169872C@sda21(r0)
+/* 81361288 | 90 0D A6 EC */	stw r0, _isReserveDeactive__7LibTVRC@sda21(r0)
 /* 8136128C | 4E 80 00 20 */	blr
 .endfn TVRCSendStopAsync
 
 # .text:0x248 | 0x81361290 | size: 0x8
 .fn TVRCIsActive, global
-/* 81361290 | 80 6D A6 E8 */	lwz r3, lbl_81698728@sda21(r0)
+/* 81361290 | 80 6D A6 E8 */	lwz r3, _isActive__7LibTVRC@sda21(r0)
 /* 81361294 | 4E 80 00 20 */	blr
 .endfn TVRCIsActive
 
@@ -216,10 +216,10 @@
 /* 81361298 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8136129C | 38 A0 00 00 */	li r5, 0x0
 /* 813612A0 | 41 80 00 34 */	blt .L_813612D4
-/* 813612A4 | 80 0D A6 E4 */	lwz r0, lbl_81698724@sda21(r0)
+/* 813612A4 | 80 0D A6 E4 */	lwz r0, _isInitialized__7LibTVRC@sda21(r0)
 /* 813612A8 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813612AC | 41 82 00 28 */	beq .L_813612D4
-/* 813612B0 | 80 8D A6 CC */	lwz r4, lbl_8169870C@sda21(r0)
+/* 813612B0 | 80 8D A6 CC */	lwz r4, _tvrcFile__7LibTVRC@sda21(r0)
 /* 813612B4 | 2C 04 00 00 */	cmpwi r4, 0x0
 /* 813612B8 | 41 82 00 1C */	beq .L_813612D4
 /* 813612BC | 54 60 18 38 */	slwi r0, r3, 3
@@ -240,14 +240,14 @@
 /* 813612E4 | 90 01 00 44 */	stw r0, 0x44(r1)
 /* 813612E8 | 39 61 00 40 */	addi r11, r1, 0x40
 /* 813612EC | 48 29 81 CD */	bl _savegpr_25
-/* 813612F0 | 80 0D A6 E4 */	lwz r0, lbl_81698724@sda21(r0)
+/* 813612F0 | 80 0D A6 E4 */	lwz r0, _isInitialized__7LibTVRC@sda21(r0)
 /* 813612F4 | 7C 79 1B 78 */	mr r25, r3
 /* 813612F8 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813612FC | 41 82 00 1C */	beq .L_81361318
-/* 81361300 | 80 0D A6 E8 */	lwz r0, lbl_81698728@sda21(r0)
+/* 81361300 | 80 0D A6 E8 */	lwz r0, _isActive__7LibTVRC@sda21(r0)
 /* 81361304 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81361308 | 40 82 00 10 */	bne .L_81361318
-/* 8136130C | 80 0D A6 D8 */	lwz r0, lbl_81698718@sda21(r0)
+/* 8136130C | 80 0D A6 D8 */	lwz r0, _makerID__7LibTVRC@sda21(r0)
 /* 81361310 | 2C 00 FF FF */	cmpwi r0, -0x1
 /* 81361314 | 40 82 00 0C */	bne .L_81361320
 .L_81361318:
@@ -263,9 +263,9 @@
 /* 81361338 | 48 00 02 A4 */	b .L_813615DC
 .L_8136133C:
 /* 8136133C | 48 1C F5 49 */	bl OSDisableInterrupts
-/* 81361340 | 83 ED A6 CC */	lwz r31, lbl_8169870C@sda21(r0)
+/* 81361340 | 83 ED A6 CC */	lwz r31, _tvrcFile__7LibTVRC@sda21(r0)
 /* 81361344 | 7C 7E 1B 78 */	mr r30, r3
-/* 81361348 | 80 8D 81 F8 */	lwz r4, lbl_81696238@sda21(r0)
+/* 81361348 | 80 8D 81 F8 */	lwz r4, TVRC_FILE_HEADER__7LibTVRC@sda21(r0)
 /* 8136134C | 38 A0 00 04 */	li r5, 0x4
 /* 81361350 | 7F E3 FB 78 */	mr r3, r31
 /* 81361354 | 48 29 CE 81 */	bl memcmp
@@ -274,62 +274,62 @@
 /* 81361360 | 80 05 00 18 */	lwz r0, 0x18(r5)
 /* 81361364 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81361368 | 41 82 02 68 */	beq .L_813615D0
-/* 8136136C | 80 0D A6 E0 */	lwz r0, lbl_81698720@sda21(r0)
+/* 8136136C | 80 0D A6 E0 */	lwz r0, _isUseCustomParams__7LibTVRC@sda21(r0)
 /* 81361370 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81361374 | 40 82 00 48 */	bne .L_813613BC
-/* 81361378 | 80 CD A6 CC */	lwz r6, lbl_8169870C@sda21(r0)
+/* 81361378 | 80 CD A6 CC */	lwz r6, _tvrcFile__7LibTVRC@sda21(r0)
 /* 8136137C | 3C 60 00 02 */	lis r3, 0x2
 /* 81361380 | C0 22 81 C8 */	lfs f1, lbl_816945C8@sda21(r0)
 /* 81361384 | 3C 80 80 00 */	lis r4, 0x8000
 /* 81361388 | C0 06 00 0C */	lfs f0, 0xc(r6)
 /* 8136138C | 38 03 E8 48 */	subi r0, r3, 0x17b8
 /* 81361390 | EC 01 00 32 */	fmuls f0, f1, f0
-/* 81361394 | D0 0D A6 D0 */	stfs f0, lbl_81698710@sda21(r0)
+/* 81361394 | D0 0D A6 D0 */	stfs f0, _Hz__7LibTVRC@sda21(r0)
 /* 81361398 | C0 06 00 10 */	lfs f0, 0x10(r6)
-/* 8136139C | D0 0D A6 D4 */	stfs f0, lbl_81698714@sda21(r0)
+/* 8136139C | D0 0D A6 D4 */	stfs f0, _onTimeRatio__7LibTVRC@sda21(r0)
 /* 813613A0 | 80 64 00 F8 */	lwz r3, 0xf8(r4)
 /* 813613A4 | 80 86 00 14 */	lwz r4, 0x14(r6)
 /* 813613A8 | 54 63 F0 BE */	srwi r3, r3, 2
 /* 813613AC | 7C 03 03 96 */	divwu r0, r3, r0
 /* 813613B0 | 7C 04 01 D6 */	mullw r0, r4, r0
 /* 813613B4 | 54 00 E8 FE */	srwi r0, r0, 3
-/* 813613B8 | 90 0D A7 30 */	stw r0, lbl_81698770@sda21(r0)
+/* 813613B8 | 90 0D A7 30 */	stw r0, _tickT__7LibTVRC@sda21(r0)
 .L_813613BC:
-/* 813613BC | 80 CD A6 CC */	lwz r6, lbl_8169870C@sda21(r0)
+/* 813613BC | 80 CD A6 CC */	lwz r6, _tvrcFile__7LibTVRC@sda21(r0)
 /* 813613C0 | 7C 86 3A 14 */	add r4, r6, r7
 /* 813613C4 | 80 64 00 1C */	lwz r3, 0x1c(r4)
 /* 813613C8 | 30 03 FF FF */	subic r0, r3, 0x1
 /* 813613CC | 7C 00 19 11 */	subfe. r0, r0, r3
-/* 813613D0 | 90 0D A6 C4 */	stw r0, lbl_81698704@sda21(r0)
+/* 813613D0 | 90 0D A6 C4 */	stw r0, _isUseRepeatCode__7LibTVRC@sda21(r0)
 /* 813613D4 | 80 05 00 18 */	lwz r0, 0x18(r5)
 /* 813613D8 | 7C A6 02 14 */	add r5, r6, r0
 /* 813613DC | 80 65 00 04 */	lwz r3, 0x4(r5)
 /* 813613E0 | 38 05 00 08 */	addi r0, r5, 0x8
-/* 813613E4 | 90 6D A7 20 */	stw r3, lbl_81698760@sda21(r0)
-/* 813613E8 | 90 0D A7 24 */	stw r0, lbl_81698764@sda21(r0)
+/* 813613E4 | 90 6D A7 20 */	stw r3, _bitLength__7LibTVRC@sda21(r0)
+/* 813613E8 | 90 0D A7 24 */	stw r0, _bitArray__7LibTVRC@sda21(r0)
 /* 813613EC | 41 82 00 20 */	beq .L_8136140C
 /* 813613F0 | 80 04 00 1C */	lwz r0, 0x1c(r4)
 /* 813613F4 | 7C 9F 02 14 */	add r4, r31, r0
 /* 813613F8 | 80 64 00 04 */	lwz r3, 0x4(r4)
 /* 813613FC | 38 04 00 08 */	addi r0, r4, 0x8
-/* 81361400 | 90 6D A7 28 */	stw r3, lbl_81698768@sda21(r0)
-/* 81361404 | 90 0D A7 2C */	stw r0, lbl_8169876C@sda21(r0)
+/* 81361400 | 90 6D A7 28 */	stw r3, _repeatBitLength__7LibTVRC@sda21(r0)
+/* 81361404 | 90 0D A7 2C */	stw r0, _repeatBitArray__7LibTVRC@sda21(r0)
 /* 81361408 | 48 00 00 0C */	b .L_81361414
 .L_8136140C:
-/* 8136140C | 90 6D A7 28 */	stw r3, lbl_81698768@sda21(r0)
-/* 81361410 | 90 0D A7 2C */	stw r0, lbl_8169876C@sda21(r0)
+/* 8136140C | 90 6D A7 28 */	stw r3, _repeatBitLength__7LibTVRC@sda21(r0)
+/* 81361410 | 90 0D A7 2C */	stw r0, _repeatBitArray__7LibTVRC@sda21(r0)
 .L_81361414:
-/* 81361414 | C0 2D A6 D4 */	lfs f1, lbl_81698714@sda21(r0)
+/* 81361414 | C0 2D A6 D4 */	lfs f1, _onTimeRatio__7LibTVRC@sda21(r0)
 /* 81361418 | 3C 80 80 00 */	lis r4, 0x8000
 /* 8136141C | C8 02 81 D0 */	lfd f0, lbl_816945D0@sda21(r0)
 /* 81361420 | 3F 60 43 30 */	lis r27, 0x4330
 /* 81361424 | 80 04 00 F8 */	lwz r0, 0xf8(r4)
 /* 81361428 | 3C 60 00 02 */	lis r3, 0x2
 /* 8136142C | FC 20 00 72 */	fmul f1, f0, f1
-/* 81361430 | C0 0D A6 D0 */	lfs f0, lbl_81698710@sda21(r0)
+/* 81361430 | C0 0D A6 D0 */	lfs f0, _Hz__7LibTVRC@sda21(r0)
 /* 81361434 | 54 04 F0 BE */	srwi r4, r0, 2
 /* 81361438 | 38 03 E8 48 */	subi r0, r3, 0x17b8
-/* 8136143C | 83 2D 81 FC */	lwz r25, lbl_8169623C@sda21(r0)
+/* 8136143C | 83 2D 81 FC */	lwz r25, __tienHoseiNsec__7LibTVRC@sda21(r0)
 /* 81361440 | 7F 44 03 96 */	divwu r26, r4, r0
 /* 81361444 | FC 41 00 24 */	fdiv f2, f1, f0
 /* 81361448 | 93 61 00 08 */	stw r27, 0x8(r1)
@@ -349,13 +349,13 @@
 /* 81361480 | 7C 9A 21 D6 */	mullw r4, r26, r4
 /* 81361484 | 7C 63 02 14 */	add r3, r3, r0
 /* 81361488 | 48 29 81 89 */	bl __div2i
-/* 8136148C | C0 4D A6 D4 */	lfs f2, lbl_81698714@sda21(r0)
+/* 8136148C | C0 4D A6 D4 */	lfs f2, _onTimeRatio__7LibTVRC@sda21(r0)
 /* 81361490 | 3F 80 81 09 */	lis r28, _tickWait__7LibTVRC@ha
 /* 81361494 | C8 22 81 D8 */	lfd f1, lbl_816945D8@sda21(r0)
 /* 81361498 | 3B BC 97 B0 */	addi r29, r28, _tickWait__7LibTVRC@l
 /* 8136149C | C8 02 81 D0 */	lfd f0, lbl_816945D0@sda21(r0)
 /* 813614A0 | FC 61 10 28 */	fsub f3, f1, f2
-/* 813614A4 | C0 4D A6 D0 */	lfs f2, lbl_81698710@sda21(r0)
+/* 813614A4 | C0 4D A6 D0 */	lfs f2, _Hz__7LibTVRC@sda21(r0)
 /* 813614A8 | 93 21 00 14 */	stw r25, 0x14(r1)
 /* 813614AC | C8 22 81 E0 */	lfd f1, lbl_816945E0@sda21(r0)
 /* 813614B0 | FC 60 00 F2 */	fmul f3, f0, f3
@@ -409,18 +409,18 @@
 .L_8136156C:
 /* 8136156C | 38 00 00 00 */	li r0, 0x0
 /* 81361570 | 38 60 00 01 */	li r3, 0x1
-/* 81361574 | 90 6D A6 E8 */	stw r3, lbl_81698728@sda21(r0)
-/* 81361578 | 90 0D A6 EC */	stw r0, lbl_8169872C@sda21(r0)
-/* 8136157C | 90 0D A7 08 */	stw r0, lbl_81698748@sda21(r0)
-/* 81361580 | 90 0D A7 0C */	stw r0, lbl_8169874C@sda21(r0)
-/* 81361584 | 90 6D A7 14 */	stw r3, lbl_81698754@sda21(r0)
-/* 81361588 | 90 0D A7 18 */	stw r0, lbl_81698758@sda21(r0)
+/* 81361574 | 90 6D A6 E8 */	stw r3, _isActive__7LibTVRC@sda21(r0)
+/* 81361578 | 90 0D A6 EC */	stw r0, _isReserveDeactive__7LibTVRC@sda21(r0)
+/* 8136157C | 90 0D A7 08 */	stw r0, _isOnOff__7LibTVRC@sda21(r0)
+/* 81361580 | 90 0D A7 0C */	stw r0, _isLastOnOff__7LibTVRC@sda21(r0)
+/* 81361584 | 90 6D A7 14 */	stw r3, _func0state__7LibTVRC@sda21(r0)
+/* 81361588 | 90 0D A7 18 */	stw r0, _loop0count__7LibTVRC@sda21(r0)
 /* 8136158C | 48 1D 46 F5 */	bl OSGetTime
-/* 81361590 | 90 8D A7 04 */	stw r4, lbl_81698744@sda21(r0)
+/* 81361590 | 90 8D A7 04 */	stw r4, _totalStartTime__7LibTVRC+0x4@sda21(r0)
 /* 81361594 | 3C 80 00 02 */	lis r4, 0x2
 /* 81361598 | 3C A0 80 00 */	lis r5, 0x8000
 /* 8136159C | 3C E0 81 36 */	lis r7, __FTVRCLoop0Handler__7LibTVRCFP7OSAlarmP9OSContext@ha
-/* 813615A0 | 90 6D A7 00 */	stw r3, lbl_81698740@sda21(r0)
+/* 813615A0 | 90 6D A7 00 */	stw r3, _totalStartTime__7LibTVRC@sda21(r0)
 /* 813615A4 | 38 04 E8 48 */	subi r0, r4, 0x17b8
 /* 813615A8 | 3C 60 81 09 */	lis r3, _alarm__7LibTVRC@ha
 /* 813615AC | 38 E7 15 F4 */	addi r7, r7, __FTVRCLoop0Handler__7LibTVRCFP7OSAlarmP9OSContext@l
@@ -431,7 +431,7 @@
 /* 813615C0 | 7C 04 03 96 */	divwu r0, r4, r0
 /* 813615C4 | 1C 00 03 E8 */	mulli r0, r0, 0x3e8
 /* 813615C8 | 54 06 E8 FE */	srwi r6, r0, 3
-/* 813615CC | 48 1C B5 79 */	bl fn_8152CB44
+/* 813615CC | 48 1C B5 79 */	bl OSSetAlarm
 .L_813615D0:
 /* 813615D0 | 7F C3 F3 78 */	mr r3, r30
 /* 813615D4 | 48 1C F2 D9 */	bl OSRestoreInterrupts
@@ -455,48 +455,48 @@
 /* 81361604 | 7C 9F 23 78 */	mr r31, r4
 /* 81361608 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8136160C | 7C 7E 1B 78 */	mr r30, r3
-/* 81361610 | 80 0D A6 E8 */	lwz r0, lbl_81698728@sda21(r0)
+/* 81361610 | 80 0D A6 E8 */	lwz r0, _isActive__7LibTVRC@sda21(r0)
 /* 81361614 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81361618 | 40 82 00 0C */	bne .L_81361624
 /* 8136161C | 38 00 00 02 */	li r0, 0x2
-/* 81361620 | 90 0D A7 14 */	stw r0, lbl_81698754@sda21(r0)
+/* 81361620 | 90 0D A7 14 */	stw r0, _func0state__7LibTVRC@sda21(r0)
 .L_81361624:
-/* 81361624 | 80 0D A7 14 */	lwz r0, lbl_81698754@sda21(r0)
+/* 81361624 | 80 0D A7 14 */	lwz r0, _func0state__7LibTVRC@sda21(r0)
 /* 81361628 | 2C 00 00 01 */	cmpwi r0, 0x1
 /* 8136162C | 40 82 00 10 */	bne .L_8136163C
 /* 81361630 | 38 00 00 00 */	li r0, 0x0
-/* 81361634 | 90 0D A7 14 */	stw r0, lbl_81698754@sda21(r0)
+/* 81361634 | 90 0D A7 14 */	stw r0, _func0state__7LibTVRC@sda21(r0)
 /* 81361638 | 48 00 00 D0 */	b .L_81361708
 .L_8136163C:
 /* 8136163C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81361640 | 40 82 00 24 */	bne .L_81361664
-/* 81361644 | 80 8D A7 18 */	lwz r4, lbl_81698758@sda21(r0)
+/* 81361644 | 80 8D A7 18 */	lwz r4, _loop0count__7LibTVRC@sda21(r0)
 /* 81361648 | 38 00 00 00 */	li r0, 0x0
-/* 8136164C | 80 6D A7 08 */	lwz r3, lbl_81698748@sda21(r0)
+/* 8136164C | 80 6D A7 08 */	lwz r3, _isOnOff__7LibTVRC@sda21(r0)
 /* 81361650 | 38 84 00 01 */	addi r4, r4, 0x1
-/* 81361654 | 90 0D A7 14 */	stw r0, lbl_81698754@sda21(r0)
-/* 81361658 | 90 8D A7 18 */	stw r4, lbl_81698758@sda21(r0)
-/* 8136165C | 90 6D A7 0C */	stw r3, lbl_8169874C@sda21(r0)
+/* 81361654 | 90 0D A7 14 */	stw r0, _func0state__7LibTVRC@sda21(r0)
+/* 81361658 | 90 8D A7 18 */	stw r4, _loop0count__7LibTVRC@sda21(r0)
+/* 8136165C | 90 6D A7 0C */	stw r3, _isLastOnOff__7LibTVRC@sda21(r0)
 /* 81361660 | 48 00 00 A8 */	b .L_81361708
 .L_81361664:
 /* 81361664 | 2C 00 00 02 */	cmpwi r0, 0x2
 /* 81361668 | 40 82 00 A0 */	bne .L_81361708
-/* 8136166C | 80 0D A6 EC */	lwz r0, lbl_8169872C@sda21(r0)
+/* 8136166C | 80 0D A6 EC */	lwz r0, _isReserveDeactive__7LibTVRC@sda21(r0)
 /* 81361670 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81361674 | 40 82 00 58 */	bne .L_813616CC
 /* 81361678 | 48 1D 46 09 */	bl OSGetTime
 /* 8136167C | 3C A0 80 00 */	lis r5, 0x8000
-/* 81361680 | 80 CD A7 04 */	lwz r6, lbl_81698744@sda21(r0)
+/* 81361680 | 80 CD A7 04 */	lwz r6, _totalStartTime__7LibTVRC+0x4@sda21(r0)
 /* 81361684 | 80 A5 00 F8 */	lwz r5, 0xf8(r5)
 /* 81361688 | 38 00 03 E8 */	li r0, 0x3e8
 /* 8136168C | 7C 86 20 10 */	subfc r4, r6, r4
-/* 81361690 | 80 ED A7 00 */	lwz r7, lbl_81698740@sda21(r0)
+/* 81361690 | 80 ED A7 00 */	lwz r7, _totalStartTime__7LibTVRC@sda21(r0)
 /* 81361694 | 54 A6 F0 BE */	srwi r6, r5, 2
 /* 81361698 | 38 A0 00 00 */	li r5, 0x0
 /* 8136169C | 7C C6 03 96 */	divwu r6, r6, r0
 /* 813616A0 | 7C 67 19 10 */	subfe r3, r7, r3
 /* 813616A4 | 48 29 7F 6D */	bl __div2i
-/* 813616A8 | 80 ED 82 00 */	lwz r7, lbl_81696240@sda21(r0)
+/* 813616A8 | 80 ED 82 00 */	lwz r7, _limitMilli__7LibTVRC@sda21(r0)
 /* 813616AC | 38 C0 00 00 */	li r6, 0x0
 /* 813616B0 | 6C 65 80 00 */	xoris r5, r3, 0x8000
 /* 813616B4 | 6C C0 80 00 */	xoris r0, r6, 0x8000
@@ -507,28 +507,28 @@
 /* 813616C8 | 41 82 00 18 */	beq .L_813616E0
 .L_813616CC:
 /* 813616CC | 38 60 00 01 */	li r3, 0x1
-/* 813616D0 | 48 21 BC F5 */	bl fn_8157D3C4
+/* 813616D0 | 48 21 BC F5 */	bl WPADSetSensorBarPower
 /* 813616D4 | 38 00 00 00 */	li r0, 0x0
-/* 813616D8 | 90 0D A6 E8 */	stw r0, lbl_81698728@sda21(r0)
+/* 813616D8 | 90 0D A6 E8 */	stw r0, _isActive__7LibTVRC@sda21(r0)
 /* 813616DC | 48 00 00 E0 */	b .L_813617BC
 .L_813616E0:
-/* 813616E0 | 80 8D A6 C4 */	lwz r4, lbl_81698704@sda21(r0)
-/* 813616E4 | 80 6D A7 28 */	lwz r3, lbl_81698768@sda21(r0)
-/* 813616E8 | 80 0D A7 2C */	lwz r0, lbl_8169876C@sda21(r0)
-/* 813616EC | 90 8D A6 C0 */	stw r4, lbl_81698700@sda21(r0)
-/* 813616F0 | 90 6D A7 20 */	stw r3, lbl_81698760@sda21(r0)
-/* 813616F4 | 90 0D A7 24 */	stw r0, lbl_81698764@sda21(r0)
-/* 813616F8 | 90 CD A7 08 */	stw r6, lbl_81698748@sda21(r0)
-/* 813616FC | 90 CD A7 0C */	stw r6, lbl_8169874C@sda21(r0)
-/* 81361700 | 90 CD A7 14 */	stw r6, lbl_81698754@sda21(r0)
-/* 81361704 | 90 CD A7 18 */	stw r6, lbl_81698758@sda21(r0)
+/* 813616E0 | 80 8D A6 C4 */	lwz r4, _isUseRepeatCode__7LibTVRC@sda21(r0)
+/* 813616E4 | 80 6D A7 28 */	lwz r3, _repeatBitLength__7LibTVRC@sda21(r0)
+/* 813616E8 | 80 0D A7 2C */	lwz r0, _repeatBitArray__7LibTVRC@sda21(r0)
+/* 813616EC | 90 8D A6 C0 */	stw r4, _isRepeatActive__7LibTVRC@sda21(r0)
+/* 813616F0 | 90 6D A7 20 */	stw r3, _bitLength__7LibTVRC@sda21(r0)
+/* 813616F4 | 90 0D A7 24 */	stw r0, _bitArray__7LibTVRC@sda21(r0)
+/* 813616F8 | 90 CD A7 08 */	stw r6, _isOnOff__7LibTVRC@sda21(r0)
+/* 813616FC | 90 CD A7 0C */	stw r6, _isLastOnOff__7LibTVRC@sda21(r0)
+/* 81361700 | 90 CD A7 14 */	stw r6, _func0state__7LibTVRC@sda21(r0)
+/* 81361704 | 90 CD A7 18 */	stw r6, _loop0count__7LibTVRC@sda21(r0)
 .L_81361708:
 /* 81361708 | 38 60 00 00 */	li r3, 0x0
-/* 8136170C | 80 ED A7 24 */	lwz r7, lbl_81698764@sda21(r0)
-/* 81361710 | 90 6D A7 10 */	stw r3, lbl_81698750@sda21(r0)
-/* 81361714 | 81 0D A7 20 */	lwz r8, lbl_81698760@sda21(r0)
-/* 81361718 | 80 8D A7 18 */	lwz r4, lbl_81698758@sda21(r0)
-/* 8136171C | 80 0D A7 0C */	lwz r0, lbl_8169874C@sda21(r0)
+/* 8136170C | 80 ED A7 24 */	lwz r7, _bitArray__7LibTVRC@sda21(r0)
+/* 81361710 | 90 6D A7 10 */	stw r3, _ctCombo__7LibTVRC@sda21(r0)
+/* 81361714 | 81 0D A7 20 */	lwz r8, _bitLength__7LibTVRC@sda21(r0)
+/* 81361718 | 80 8D A7 18 */	lwz r4, _loop0count__7LibTVRC@sda21(r0)
+/* 8136171C | 80 0D A7 0C */	lwz r0, _isLastOnOff__7LibTVRC@sda21(r0)
 /* 81361720 | 48 00 00 70 */	b .L_81361790
 .L_81361724:
 /* 81361724 | 7C 85 1E 70 */	srawi r5, r4, 3
@@ -538,38 +538,38 @@
 /* 81361734 | 7C C7 30 AE */	lbzx r6, r7, r6
 /* 81361738 | 7C A5 01 94 */	addze r5, r5
 /* 8136173C | 54 A5 18 38 */	slwi r5, r5, 3
-/* 81361740 | 90 6D A7 10 */	stw r3, lbl_81698750@sda21(r0)
+/* 81361740 | 90 6D A7 10 */	stw r3, _ctCombo__7LibTVRC@sda21(r0)
 /* 81361744 | 7C A5 20 50 */	subf r5, r5, r4
 /* 81361748 | 20 A5 00 07 */	subfic r5, r5, 0x7
 /* 8136174C | 7C C5 2E 30 */	sraw r5, r6, r5
 /* 81361750 | 54 A5 07 FE */	clrlwi r5, r5, 31
 /* 81361754 | 7C 00 28 00 */	cmpw r0, r5
-/* 81361758 | 90 AD A7 08 */	stw r5, lbl_81698748@sda21(r0)
+/* 81361758 | 90 AD A7 08 */	stw r5, _isOnOff__7LibTVRC@sda21(r0)
 /* 8136175C | 41 82 00 24 */	beq .L_81361780
 /* 81361760 | 38 60 FF FF */	li r3, -0x1
 /* 81361764 | 38 00 00 00 */	li r0, 0x0
-/* 81361768 | 90 6D A7 1C */	stw r3, lbl_8169875C@sda21(r0)
+/* 81361768 | 90 6D A7 1C */	stw r3, _func1state__7LibTVRC@sda21(r0)
 /* 8136176C | 7F C3 F3 78 */	mr r3, r30
 /* 81361770 | 7F E4 FB 78 */	mr r4, r31
-/* 81361774 | 90 0D A7 14 */	stw r0, lbl_81698754@sda21(r0)
+/* 81361774 | 90 0D A7 14 */	stw r0, _func0state__7LibTVRC@sda21(r0)
 /* 81361778 | 48 00 00 5D */	bl __FTVRCLoop1Handler__7LibTVRCFP7OSAlarmP9OSContext
 /* 8136177C | 48 00 00 40 */	b .L_813617BC
 .L_81361780:
 /* 81361780 | 38 84 00 01 */	addi r4, r4, 0x1
-/* 81361784 | 90 AD A7 0C */	stw r5, lbl_8169874C@sda21(r0)
+/* 81361784 | 90 AD A7 0C */	stw r5, _isLastOnOff__7LibTVRC@sda21(r0)
 /* 81361788 | 7C A0 2B 78 */	mr r0, r5
-/* 8136178C | 90 8D A7 18 */	stw r4, lbl_81698758@sda21(r0)
+/* 8136178C | 90 8D A7 18 */	stw r4, _loop0count__7LibTVRC@sda21(r0)
 .L_81361790:
 /* 81361790 | 7C 04 40 00 */	cmpw r4, r8
 /* 81361794 | 41 80 FF 90 */	blt .L_81361724
 /* 81361798 | 38 63 00 01 */	addi r3, r3, 0x1
 /* 8136179C | 38 A0 FF FF */	li r5, -0x1
 /* 813617A0 | 38 00 00 02 */	li r0, 0x2
-/* 813617A4 | 90 6D A7 10 */	stw r3, lbl_81698750@sda21(r0)
+/* 813617A4 | 90 6D A7 10 */	stw r3, _ctCombo__7LibTVRC@sda21(r0)
 /* 813617A8 | 7F C3 F3 78 */	mr r3, r30
 /* 813617AC | 7F E4 FB 78 */	mr r4, r31
-/* 813617B0 | 90 AD A7 1C */	stw r5, lbl_8169875C@sda21(r0)
-/* 813617B4 | 90 0D A7 14 */	stw r0, lbl_81698754@sda21(r0)
+/* 813617B0 | 90 AD A7 1C */	stw r5, _func1state__7LibTVRC@sda21(r0)
+/* 813617B4 | 90 0D A7 14 */	stw r0, _func0state__7LibTVRC@sda21(r0)
 /* 813617B8 | 48 00 00 1D */	bl __FTVRCLoop1Handler__7LibTVRCFP7OSAlarmP9OSContext
 .L_813617BC:
 /* 813617BC | 80 01 00 14 */	lwz r0, 0x14(r1)
@@ -587,50 +587,50 @@
 /* 813617D8 | 7C 08 02 A6 */	mflr r0
 /* 813617DC | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813617E0 | 93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813617E4 | 80 0D A7 10 */	lwz r0, lbl_81698750@sda21(r0)
+/* 813617E4 | 80 0D A7 10 */	lwz r0, _ctCombo__7LibTVRC@sda21(r0)
 /* 813617E8 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813617EC | 41 82 01 50 */	beq .L_8136193C
-/* 813617F0 | 80 0D A6 E8 */	lwz r0, lbl_81698728@sda21(r0)
+/* 813617F0 | 80 0D A6 E8 */	lwz r0, _isActive__7LibTVRC@sda21(r0)
 /* 813617F4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813617F8 | 41 82 01 44 */	beq .L_8136193C
-/* 813617FC | 80 0D A7 1C */	lwz r0, lbl_8169875C@sda21(r0)
+/* 813617FC | 80 0D A7 1C */	lwz r0, _func1state__7LibTVRC@sda21(r0)
 /* 81361800 | 2C 00 FF FF */	cmpwi r0, -0x1
 /* 81361804 | 40 82 00 18 */	bne .L_8136181C
 /* 81361808 | 48 1D 44 79 */	bl OSGetTime
 /* 8136180C | 38 00 00 00 */	li r0, 0x0
-/* 81361810 | 90 8D A6 F4 */	stw r4, lbl_81698734@sda21(r0)
-/* 81361814 | 90 6D A6 F0 */	stw r3, lbl_81698730@sda21(r0)
-/* 81361818 | 90 0D A7 1C */	stw r0, lbl_8169875C@sda21(r0)
+/* 81361810 | 90 8D A6 F4 */	stw r4, _unitStartTime__7LibTVRC+0x4@sda21(r0)
+/* 81361814 | 90 6D A6 F0 */	stw r3, _unitStartTime__7LibTVRC@sda21(r0)
+/* 81361818 | 90 0D A7 1C */	stw r0, _func1state__7LibTVRC@sda21(r0)
 .L_8136181C:
-/* 8136181C | 80 0D A7 0C */	lwz r0, lbl_8169874C@sda21(r0)
+/* 8136181C | 80 0D A7 0C */	lwz r0, _isLastOnOff__7LibTVRC@sda21(r0)
 /* 81361820 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81361824 | 41 82 00 EC */	beq .L_81361910
 /* 81361828 | 48 1D 44 59 */	bl OSGetTime
-/* 8136182C | 80 0D A7 1C */	lwz r0, lbl_8169875C@sda21(r0)
-/* 81361830 | 90 8D A6 FC */	stw r4, lbl_8169873C@sda21(r0)
+/* 8136182C | 80 0D A7 1C */	lwz r0, _func1state__7LibTVRC@sda21(r0)
+/* 81361830 | 90 8D A6 FC */	stw r4, _unitLastTime__7LibTVRC+0x4@sda21(r0)
 /* 81361834 | 2C 00 00 00 */	cmpwi r0, 0x0
-/* 81361838 | 90 6D A6 F8 */	stw r3, lbl_81698738@sda21(r0)
+/* 81361838 | 90 6D A6 F8 */	stw r3, _unitLastTime__7LibTVRC@sda21(r0)
 /* 8136183C | 40 82 00 3C */	bne .L_81361878
 /* 81361840 | 38 60 00 01 */	li r3, 0x1
-/* 81361844 | 48 21 BB 81 */	bl fn_8157D3C4
+/* 81361844 | 48 21 BB 81 */	bl WPADSetSensorBarPower
 /* 81361848 | 3C 80 81 09 */	lis r4, _tickWait__7LibTVRC@ha
 /* 8136184C | 38 00 00 01 */	li r0, 0x1
 /* 81361850 | 38 84 97 B0 */	addi r4, r4, _tickWait__7LibTVRC@l
 /* 81361854 | 3C 60 81 09 */	lis r3, _alarm__7LibTVRC@ha
 /* 81361858 | 3C E0 81 36 */	lis r7, __FTVRCLoop1Handler__7LibTVRCFP7OSAlarmP9OSContext@ha
-/* 8136185C | 90 0D A7 1C */	stw r0, lbl_8169875C@sda21(r0)
+/* 8136185C | 90 0D A7 1C */	stw r0, _func1state__7LibTVRC@sda21(r0)
 /* 81361860 | 80 A4 00 08 */	lwz r5, 0x8(r4)
 /* 81361864 | 38 63 97 80 */	addi r3, r3, _alarm__7LibTVRC@l
 /* 81361868 | 80 C4 00 0C */	lwz r6, 0xc(r4)
 /* 8136186C | 38 E7 17 D4 */	addi r7, r7, __FTVRCLoop1Handler__7LibTVRCFP7OSAlarmP9OSContext@l
-/* 81361870 | 48 1C B2 D5 */	bl fn_8152CB44
+/* 81361870 | 48 1C B2 D5 */	bl OSSetAlarm
 /* 81361874 | 48 00 00 C8 */	b .L_8136193C
 .L_81361878:
-/* 81361878 | 80 AD A7 30 */	lwz r5, lbl_81698770@sda21(r0)
-/* 8136187C | 80 0D A7 10 */	lwz r0, lbl_81698750@sda21(r0)
-/* 81361880 | 80 CD A6 F4 */	lwz r6, lbl_81698734@sda21(r0)
+/* 81361878 | 80 AD A7 30 */	lwz r5, _tickT__7LibTVRC@sda21(r0)
+/* 8136187C | 80 0D A7 10 */	lwz r0, _ctCombo__7LibTVRC@sda21(r0)
+/* 81361880 | 80 CD A6 F4 */	lwz r6, _unitStartTime__7LibTVRC+0x4@sda21(r0)
 /* 81361884 | 7C A5 01 D6 */	mullw r5, r5, r0
-/* 81361888 | 80 0D A6 F0 */	lwz r0, lbl_81698730@sda21(r0)
+/* 81361888 | 80 0D A6 F0 */	lwz r0, _unitStartTime__7LibTVRC@sda21(r0)
 /* 8136188C | 7C 86 20 10 */	subfc r4, r6, r4
 /* 81361890 | 7C 00 19 10 */	subfe r0, r0, r3
 /* 81361894 | 38 60 00 00 */	li r3, 0x0
@@ -639,10 +639,10 @@
 /* 813618A0 | 7C 00 28 38 */	and r0, r0, r5
 /* 813618A4 | 7C 00 20 50 */	subf r0, r0, r4
 /* 813618A8 | 54 1F 0F FE */	srwi r31, r0, 31
-/* 813618AC | 48 21 BB 19 */	bl fn_8157D3C4
+/* 813618AC | 48 21 BB 19 */	bl WPADSetSensorBarPower
 /* 813618B0 | 38 00 00 00 */	li r0, 0x0
 /* 813618B4 | 2C 1F 00 00 */	cmpwi r31, 0x0
-/* 813618B8 | 90 0D A7 1C */	stw r0, lbl_8169875C@sda21(r0)
+/* 813618B8 | 90 0D A7 1C */	stw r0, _func1state__7LibTVRC@sda21(r0)
 /* 813618BC | 41 82 00 2C */	beq .L_813618E8
 /* 813618C0 | 3C A0 81 09 */	lis r5, _tickWait__7LibTVRC@ha
 /* 813618C4 | 3C 60 81 09 */	lis r3, _alarm__7LibTVRC@ha
@@ -652,7 +652,7 @@
 /* 813618D4 | 38 63 97 80 */	addi r3, r3, _alarm__7LibTVRC@l
 /* 813618D8 | 80 C4 00 04 */	lwz r6, 0x4(r4)
 /* 813618DC | 38 E7 17 D4 */	addi r7, r7, __FTVRCLoop1Handler__7LibTVRCFP7OSAlarmP9OSContext@l
-/* 813618E0 | 48 1C B2 65 */	bl fn_8152CB44
+/* 813618E0 | 48 1C B2 65 */	bl OSSetAlarm
 /* 813618E4 | 48 00 00 58 */	b .L_8136193C
 .L_813618E8:
 /* 813618E8 | 3C A0 81 09 */	lis r5, _tickWait__7LibTVRC@ha
@@ -663,20 +663,20 @@
 /* 813618FC | 38 63 97 80 */	addi r3, r3, _alarm__7LibTVRC@l
 /* 81361900 | 80 C4 00 04 */	lwz r6, 0x4(r4)
 /* 81361904 | 38 E7 15 F4 */	addi r7, r7, __FTVRCLoop0Handler__7LibTVRCFP7OSAlarmP9OSContext@l
-/* 81361908 | 48 1C B2 3D */	bl fn_8152CB44
+/* 81361908 | 48 1C B2 3D */	bl OSSetAlarm
 /* 8136190C | 48 00 00 30 */	b .L_8136193C
 .L_81361910:
 /* 81361910 | 38 60 00 00 */	li r3, 0x0
-/* 81361914 | 48 21 BA B1 */	bl fn_8157D3C4
-/* 81361918 | 80 8D A7 30 */	lwz r4, lbl_81698770@sda21(r0)
+/* 81361914 | 48 21 BA B1 */	bl WPADSetSensorBarPower
+/* 81361918 | 80 8D A7 30 */	lwz r4, _tickT__7LibTVRC@sda21(r0)
 /* 8136191C | 3C 60 81 09 */	lis r3, _alarm__7LibTVRC@ha
-/* 81361920 | 80 0D A7 10 */	lwz r0, lbl_81698750@sda21(r0)
+/* 81361920 | 80 0D A7 10 */	lwz r0, _ctCombo__7LibTVRC@sda21(r0)
 /* 81361924 | 3C E0 81 36 */	lis r7, __FTVRCLoop0Handler__7LibTVRCFP7OSAlarmP9OSContext@ha
 /* 81361928 | 38 63 97 80 */	addi r3, r3, _alarm__7LibTVRC@l
 /* 8136192C | 38 A0 00 00 */	li r5, 0x0
 /* 81361930 | 7C C4 01 D6 */	mullw r6, r4, r0
 /* 81361934 | 38 E7 15 F4 */	addi r7, r7, __FTVRCLoop0Handler__7LibTVRCFP7OSAlarmP9OSContext@l
-/* 81361938 | 48 1C B2 0D */	bl fn_8152CB44
+/* 81361938 | 48 1C B2 0D */	bl OSSetAlarm
 .L_8136193C:
 /* 8136193C | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 81361940 | 83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -726,19 +726,22 @@
 .endobj lbl_81696230
 
 # .sdata:0x8 | 0x81696238 | size: 0x4
-.obj lbl_81696238, global
+# LibTVRC::TVRC_FILE_HEADER
+.obj TVRC_FILE_HEADER__7LibTVRC, global
 	.4byte lbl_81696230
-.endobj lbl_81696238
+.endobj TVRC_FILE_HEADER__7LibTVRC
 
 # .sdata:0xC | 0x8169623C | size: 0x4
-.obj lbl_8169623C, global
+# LibTVRC::__tienHoseiNsec
+.obj __tienHoseiNsec__7LibTVRC, global
 	.4byte 0x0000044C
-.endobj lbl_8169623C
+.endobj __tienHoseiNsec__7LibTVRC
 
 # .sdata:0x10 | 0x81696240 | size: 0x4
-.obj lbl_81696240, global
+# LibTVRC::_limitMilli
+.obj _limitMilli__7LibTVRC, global
 	.4byte 0x00000190
-.endobj lbl_81696240
+.endobj _limitMilli__7LibTVRC
 
 # .sdata:0x14 | 0x81696244 | size: 0xC
 .obj lbl_81696244, global
@@ -752,146 +755,157 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698700 | size: 0x4
-.obj lbl_81698700, global
+# LibTVRC::_isRepeatActive
+.obj _isRepeatActive__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_81698700
+.endobj _isRepeatActive__7LibTVRC
 
 # .sbss:0x4 | 0x81698704 | size: 0x4
-.obj lbl_81698704, global
+# LibTVRC::_isUseRepeatCode
+.obj _isUseRepeatCode__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_81698704
+.endobj _isUseRepeatCode__7LibTVRC
 
 # .sbss:0x8 | 0x81698708 | size: 0x4
-.obj lbl_81698708, global
+# LibTVRC::_lastError
+.obj _lastError__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_81698708
+.endobj _lastError__7LibTVRC
 
 # .sbss:0xC | 0x8169870C | size: 0x4
-.obj lbl_8169870C, global
+# LibTVRC::_tvrcFile
+.obj _tvrcFile__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_8169870C
+.endobj _tvrcFile__7LibTVRC
 
 # .sbss:0x10 | 0x81698710 | size: 0x4
-.obj lbl_81698710, global
+# LibTVRC::_Hz
+.obj _Hz__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_81698710
+.endobj _Hz__7LibTVRC
 
 # .sbss:0x14 | 0x81698714 | size: 0x4
-.obj lbl_81698714, global
+# LibTVRC::_onTimeRatio
+.obj _onTimeRatio__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_81698714
+.endobj _onTimeRatio__7LibTVRC
 
 # .sbss:0x18 | 0x81698718 | size: 0x4
-.obj lbl_81698718, global
+# LibTVRC::_makerID
+.obj _makerID__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_81698718
+.endobj _makerID__7LibTVRC
 
 # .sbss:0x1C | 0x8169871C | size: 0x4
-.obj lbl_8169871C, global
+# LibTVRC::_typeNo
+.obj _typeNo__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_8169871C
+.endobj _typeNo__7LibTVRC
 
 # .sbss:0x20 | 0x81698720 | size: 0x4
-.obj lbl_81698720, global
+# LibTVRC::_isUseCustomParams
+.obj _isUseCustomParams__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_81698720
+.endobj _isUseCustomParams__7LibTVRC
 
 # .sbss:0x24 | 0x81698724 | size: 0x4
-.obj lbl_81698724, global
+# LibTVRC::_isInitialized
+.obj _isInitialized__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_81698724
+.endobj _isInitialized__7LibTVRC
 
 # .sbss:0x28 | 0x81698728 | size: 0x4
-.obj lbl_81698728, global
+# LibTVRC::_isActive
+.obj _isActive__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_81698728
+.endobj _isActive__7LibTVRC
 
 # .sbss:0x2C | 0x8169872C | size: 0x4
-.obj lbl_8169872C, global
+# LibTVRC::_isReserveDeactive
+.obj _isReserveDeactive__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_8169872C
+.endobj _isReserveDeactive__7LibTVRC
 
-# .sbss:0x30 | 0x81698730 | size: 0x4
-.obj lbl_81698730, global
-	.skip 0x4
-.endobj lbl_81698730
+# .sbss:0x30 | 0x81698730 | size: 0x8
+# LibTVRC::_unitStartTime
+.obj _unitStartTime__7LibTVRC, global
+	.skip 0x8
+.endobj _unitStartTime__7LibTVRC
 
-# .sbss:0x34 | 0x81698734 | size: 0x4
-.obj lbl_81698734, global
-	.skip 0x4
-.endobj lbl_81698734
+# .sbss:0x38 | 0x81698738 | size: 0x8
+# LibTVRC::_unitLastTime
+.obj _unitLastTime__7LibTVRC, global
+	.skip 0x8
+.endobj _unitLastTime__7LibTVRC
 
-# .sbss:0x38 | 0x81698738 | size: 0x4
-.obj lbl_81698738, global
-	.skip 0x4
-.endobj lbl_81698738
-
-# .sbss:0x3C | 0x8169873C | size: 0x4
-.obj lbl_8169873C, global
-	.skip 0x4
-.endobj lbl_8169873C
-
-# .sbss:0x40 | 0x81698740 | size: 0x4
-.obj lbl_81698740, global
-	.skip 0x4
-.endobj lbl_81698740
-
-# .sbss:0x44 | 0x81698744 | size: 0x4
-.obj lbl_81698744, global
-	.skip 0x4
-.endobj lbl_81698744
+# .sbss:0x40 | 0x81698740 | size: 0x8
+# LibTVRC::_totalStartTime
+.obj _totalStartTime__7LibTVRC, global
+	.skip 0x8
+.endobj _totalStartTime__7LibTVRC
 
 # .sbss:0x48 | 0x81698748 | size: 0x4
-.obj lbl_81698748, global
+# LibTVRC::_isOnOff
+.obj _isOnOff__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_81698748
+.endobj _isOnOff__7LibTVRC
 
 # .sbss:0x4C | 0x8169874C | size: 0x4
-.obj lbl_8169874C, global
+# LibTVRC::_isLastOnOff
+.obj _isLastOnOff__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_8169874C
+.endobj _isLastOnOff__7LibTVRC
 
 # .sbss:0x50 | 0x81698750 | size: 0x4
-.obj lbl_81698750, global
+# LibTVRC::_ctCombo
+.obj _ctCombo__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_81698750
+.endobj _ctCombo__7LibTVRC
 
 # .sbss:0x54 | 0x81698754 | size: 0x4
-.obj lbl_81698754, global
+# LibTVRC::_func0state
+.obj _func0state__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_81698754
+.endobj _func0state__7LibTVRC
 
 # .sbss:0x58 | 0x81698758 | size: 0x4
-.obj lbl_81698758, global
+# LibTVRC::_loop0count
+.obj _loop0count__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_81698758
+.endobj _loop0count__7LibTVRC
 
 # .sbss:0x5C | 0x8169875C | size: 0x4
-.obj lbl_8169875C, global
+# LibTVRC::_func1state
+.obj _func1state__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_8169875C
+.endobj _func1state__7LibTVRC
 
 # .sbss:0x60 | 0x81698760 | size: 0x4
-.obj lbl_81698760, global
+# LibTVRC::_bitLength
+.obj _bitLength__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_81698760
+.endobj _bitLength__7LibTVRC
 
 # .sbss:0x64 | 0x81698764 | size: 0x4
-.obj lbl_81698764, global
+# LibTVRC::_bitArray
+.obj _bitArray__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_81698764
+.endobj _bitArray__7LibTVRC
 
 # .sbss:0x68 | 0x81698768 | size: 0x4
-.obj lbl_81698768, global
+# LibTVRC::_repeatBitLength
+.obj _repeatBitLength__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_81698768
+.endobj _repeatBitLength__7LibTVRC
 
 # .sbss:0x6C | 0x8169876C | size: 0x4
-.obj lbl_8169876C, global
+# LibTVRC::_repeatBitArray
+.obj _repeatBitArray__7LibTVRC, global
 	.skip 0x4
-.endobj lbl_8169876C
+.endobj _repeatBitArray__7LibTVRC
 
 # .sbss:0x70 | 0x81698770 | size: 0x8
-.obj lbl_81698770, global
+# LibTVRC::_tickT
+.obj _tickT__7LibTVRC, global
 	.skip 0x8
-.endobj lbl_81698770
+.endobj _tickT__7LibTVRC

@@ -680,7 +680,7 @@
 /* 813579E4 | 38 A0 00 00 */	li r5, 0x0
 /* 813579E8 | 54 00 F0 BE */	srwi r0, r0, 2
 /* 813579EC | 1C C0 00 3C */	mulli r6, r0, 0x3c
-/* 813579F0 | 48 1D 51 55 */	bl fn_8152CB44
+/* 813579F0 | 48 1D 51 55 */	bl OSSetAlarm
 /* 813579F4 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813579F8 | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 813579FC | 7C 08 03 A6 */	mtlr r0
@@ -737,8 +737,8 @@
 /* 81357A98 | 3B FF 8F 08 */	addi r31, r31, lbl_81638F08@l
 /* 81357A9C | 93 C1 1B B8 */	stw r30, 0x1bb8(r1)
 /* 81357AA0 | 3B C0 00 00 */	li r30, 0x0
-/* 81357AA4 | 48 21 26 D5 */	bl fn_8156A178
-/* 81357AA8 | 48 21 2D 79 */	bl fn_8156A820
+/* 81357AA4 | 48 21 26 D5 */	bl SCGetParentalControl
+/* 81357AA8 | 48 21 2D 79 */	bl SCGetWCFlags
 /* 81357AAC | 54 60 07 FE */	clrlwi r0, r3, 31
 /* 81357AB0 | 28 00 00 01 */	cmplwi r0, 0x1
 /* 81357AB4 | 40 82 00 54 */	bne .L_81357B08
@@ -753,7 +753,7 @@
 /* 81357AD8 | 54 00 06 30 */	rlwinm r0, r0, 0, 24, 24
 /* 81357ADC | 2C 00 00 80 */	cmpwi r0, 0x80
 /* 81357AE0 | 40 82 00 14 */	bne .L_81357AF4
-/* 81357AE4 | 48 21 2B C9 */	bl fn_8156A6AC
+/* 81357AE4 | 48 21 2B C9 */	bl SCGetNetContentRestrictions
 /* 81357AE8 | 54 60 07 BC */	rlwinm r0, r3, 0, 30, 30
 /* 81357AEC | 28 00 00 02 */	cmplwi r0, 0x2
 /* 81357AF0 | 41 82 00 24 */	beq .L_81357B14

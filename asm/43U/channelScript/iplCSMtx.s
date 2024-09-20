@@ -580,6 +580,25 @@
 	.4byte 0x00000000
 .endobj lbl_81617698
 
+# 0x81694FD0..0x81694FE0 | size: 0x10
+.section .sdata2, "a"
+.balign 8
+
+# .sdata2:0x0 | 0x81694FD0 | size: 0x4
+.obj lbl_81694FD0, global
+	.4byte 0x00000003
+.endobj lbl_81694FD0
+
+# .sdata2:0x4 | 0x81694FD4 | size: 0x4
+.obj lbl_81694FD4, global
+	.4byte 0x00000004
+.endobj lbl_81694FD4
+
+# .sdata2:0x8 | 0x81694FD8 | size: 0x8
+.obj lbl_81694FD8, global
+	.double 0
+.endobj lbl_81694FD8
+
 # 0x816978E8..0x81697920 | size: 0x38
 .section .sdata, "wa"
 .balign 8

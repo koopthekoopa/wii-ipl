@@ -26,6 +26,7 @@ struct OSAlarm {
 };
 
 void OSCreateAlarm(OSAlarm* pAlarm);
+void    OSSetAlarm(OSAlarm* alarm, OSTime tick, OSAlarmHandler handler);
 
 #ifdef __cplusplus
 }

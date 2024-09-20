@@ -23,6 +23,7 @@ s32     WPADGetStatus();
 
 
 void __WPADReconnect(BOOL reconnect);
+void WPADSetSensorBarPower(BOOL value);
 
 #ifdef __cplusplus
 }

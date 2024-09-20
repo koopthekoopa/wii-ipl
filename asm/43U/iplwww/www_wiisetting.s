@@ -556,7 +556,7 @@
 /* 813700E8 | 98 6D A9 55 */	stb r3, lbl_81698995@sda21(r0)
 /* 813700EC | 48 00 03 64 */	b .L_81370450
 .L_813700F0:
-/* 813700F0 | 48 1F A7 31 */	bl fn_8156A820
+/* 813700F0 | 48 1F A7 31 */	bl SCGetWCFlags
 /* 813700F4 | 3C 80 81 09 */	lis r4, sWiiData__Q23www10wiisetting@ha
 /* 813700F8 | 54 60 07 FE */	clrlwi r0, r3, 31
 /* 813700FC | 38 84 A4 B8 */	addi r4, r4, sWiiData__Q23www10wiisetting@l
@@ -1351,7 +1351,7 @@
 /* 81370B84 | 48 1F 97 29 */	bl fn_8156A2AC
 /* 81370B88 | 48 00 02 74 */	b .L_81370DFC
 .L_81370B8C:
-/* 81370B8C | 48 1F 9C 95 */	bl fn_8156A820
+/* 81370B8C | 48 1F 9C 95 */	bl SCGetWCFlags
 /* 81370B90 | 88 9E 00 02 */	lbz r4, 0x2(r30)
 /* 81370B94 | 54 60 07 FE */	clrlwi r0, r3, 31
 /* 81370B98 | 7C 04 00 40 */	cmplw r4, r0
@@ -1605,7 +1605,7 @@
 /* 81370EE4 | 38 80 00 00 */	li r4, 0x0
 /* 81370EE8 | 38 A0 00 08 */	li r5, 0x8
 /* 81370EEC | 4B FB F4 49 */	bl memset
-/* 81370EF0 | 48 1F 99 31 */	bl fn_8156A820
+/* 81370EF0 | 48 1F 99 31 */	bl SCGetWCFlags
 /* 81370EF4 | 54 60 07 FE */	clrlwi r0, r3, 31
 /* 81370EF8 | 38 7F A4 B8 */	addi r3, r31, sWiiData__Q23www10wiisetting@l
 /* 81370EFC | 98 03 00 02 */	stb r0, 0x2(r3)
