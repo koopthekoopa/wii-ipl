@@ -1333,16 +1333,16 @@
 /* 8138FF0C | 9B 21 00 35 */	stb r25, 0x35(r1)
 /* 8138FF10 | 9B 21 00 36 */	stb r25, 0x36(r1)
 /* 8138FF14 | 9B 21 00 37 */	stb r25, 0x37(r1)
-/* 8138FF18 | 48 0F CC E5 */	bl fn_8148CBFC
+/* 8138FF18 | 48 0F CC E5 */	bl CDBRecordGetCalendarTimeForce
 /* 8138FF1C | 7F 83 E3 78 */	mr r3, r28
 /* 8138FF20 | 38 81 00 48 */	addi r4, r1, 0x48
-/* 8138FF24 | 48 0F CC 91 */	bl fn_8148CBB4
+/* 8138FF24 | 48 0F CC 91 */	bl CDBRecordGetKeyForce
 /* 8138FF28 | 7F 83 E3 78 */	mr r3, r28
 /* 8138FF2C | 38 81 00 30 */	addi r4, r1, 0x30
-/* 8138FF30 | 48 0F CB E9 */	bl fn_8148CB18
+/* 8138FF30 | 48 0F CB E9 */	bl CDBRecordGetTypeForce
 /* 8138FF34 | 7F 83 E3 78 */	mr r3, r28
 /* 8138FF38 | 38 81 00 24 */	addi r4, r1, 0x24
-/* 8138FF3C | 48 0F CC 25 */	bl fn_8148CB60
+/* 8138FF3C | 48 0F CC 25 */	bl CDBRecordGetGameCodeForce
 /* 8138FF40 | 88 1B 0D 01 */	lbz r0, 0xd01(r27)
 /* 8138FF44 | 28 00 00 01 */	cmplwi r0, 0x1
 /* 8138FF48 | 40 82 00 1C */	bne .L_8138FF64
@@ -1542,7 +1542,7 @@
 /* 81390214 | 38 FB 0D 50 */	addi r7, r27, 0xd50
 /* 81390218 | 39 1B 0D 54 */	addi r8, r27, 0xd54
 /* 8139021C | 39 3B 0D 58 */	addi r9, r27, 0xd58
-/* 81390220 | 48 0F C9 DD */	bl fn_8148CBFC
+/* 81390220 | 48 0F C9 DD */	bl CDBRecordGetCalendarTimeForce
 /* 81390224 | 38 7B 0D 60 */	addi r3, r27, 0xd60
 /* 81390228 | 38 81 00 48 */	addi r4, r1, 0x48
 /* 8139022C | 38 A0 00 30 */	li r5, 0x30
@@ -3240,7 +3240,7 @@
 /* 81391960 | 98 01 00 0D */	stb r0, 0xd(r1)
 /* 81391964 | 98 01 00 0E */	stb r0, 0xe(r1)
 /* 81391968 | 98 01 00 0F */	stb r0, 0xf(r1)
-/* 8139196C | 48 0F B1 AD */	bl fn_8148CB18
+/* 8139196C | 48 0F B1 AD */	bl CDBRecordGetTypeForce
 /* 81391970 | 88 1E 02 BC */	lbz r0, 0x2bc(r30)
 /* 81391974 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81391978 | 41 82 00 0C */	beq .L_81391984
@@ -3299,7 +3299,7 @@
 /* 81391A28 | 80 A1 00 18 */	lwz r5, 0x18(r1)
 /* 81391A2C | 38 84 FF FF */	subi r4, r4, 0x1
 /* 81391A30 | 39 00 00 00 */	li r8, 0x0
-/* 81391A34 | 48 0F 48 B5 */	bl fn_814862E8
+/* 81391A34 | 48 0F 48 B5 */	bl CDBMakeCDBDate
 /* 81391A38 | 80 81 00 14 */	lwz r4, 0x14(r1)
 /* 81391A3C | 38 C0 00 17 */	li r6, 0x17
 /* 81391A40 | 90 61 00 0C */	stw r3, 0xc(r1)
@@ -3308,7 +3308,7 @@
 /* 81391A4C | 38 84 FF FF */	subi r4, r4, 0x1
 /* 81391A50 | 80 A1 00 18 */	lwz r5, 0x18(r1)
 /* 81391A54 | 39 00 00 3B */	li r8, 0x3b
-/* 81391A58 | 48 0F 48 91 */	bl fn_814862E8
+/* 81391A58 | 48 0F 48 91 */	bl CDBMakeCDBDate
 /* 81391A5C | 88 1E 02 BC */	lbz r0, 0x2bc(r30)
 /* 81391A60 | 90 61 00 08 */	stw r3, 0x8(r1)
 /* 81391A64 | 2C 00 00 00 */	cmpwi r0, 0x0
@@ -3417,7 +3417,7 @@
 /* 81391BB4 | 80 DF 0D F0 */	lwz r6, 0xdf0(r31)
 /* 81391BB8 | 80 FF 0D F4 */	lwz r7, 0xdf4(r31)
 /* 81391BBC | 81 1F 0D F8 */	lwz r8, 0xdf8(r31)
-/* 81391BC0 | 48 0F 47 29 */	bl fn_814862E8
+/* 81391BC0 | 48 0F 47 29 */	bl CDBMakeCDBDate
 /* 81391BC4 | 90 61 00 0C */	stw r3, 0xc(r1)
 /* 81391BC8 | 48 00 00 58 */	b .L_81391C20
 .L_81391BCC:
@@ -3431,7 +3431,7 @@
 /* 81391BE8 | 80 BF 0D 10 */	lwz r5, 0xd10(r31)
 /* 81391BEC | 38 84 FF FF */	subi r4, r4, 0x1
 /* 81391BF0 | 39 00 00 3B */	li r8, 0x3b
-/* 81391BF4 | 48 0F 46 F5 */	bl fn_814862E8
+/* 81391BF4 | 48 0F 46 F5 */	bl CDBMakeCDBDate
 /* 81391BF8 | 48 00 00 24 */	b .L_81391C1C
 .L_81391BFC:
 /* 81391BFC | 80 9F 0D 0C */	lwz r4, 0xd0c(r31)
@@ -3441,7 +3441,7 @@
 /* 81391C0C | 80 BF 0D 10 */	lwz r5, 0xd10(r31)
 /* 81391C10 | 38 84 FF FF */	subi r4, r4, 0x1
 /* 81391C14 | 39 00 00 00 */	li r8, 0x0
-/* 81391C18 | 48 0F 46 D1 */	bl fn_814862E8
+/* 81391C18 | 48 0F 46 D1 */	bl CDBMakeCDBDate
 .L_81391C1C:
 /* 81391C1C | 90 61 00 0C */	stw r3, 0xc(r1)
 .L_81391C20:
@@ -3455,7 +3455,7 @@
 /* 81391C3C | 80 BF 0D 10 */	lwz r5, 0xd10(r31)
 /* 81391C40 | 38 84 FF FF */	subi r4, r4, 0x1
 /* 81391C44 | 39 00 00 00 */	li r8, 0x0
-/* 81391C48 | 48 0F 46 A1 */	bl fn_814862E8
+/* 81391C48 | 48 0F 46 A1 */	bl CDBMakeCDBDate
 /* 81391C4C | 48 00 00 24 */	b .L_81391C70
 .L_81391C50:
 /* 81391C50 | 80 9F 0D 0C */	lwz r4, 0xd0c(r31)
@@ -3465,7 +3465,7 @@
 /* 81391C60 | 80 BF 0D 10 */	lwz r5, 0xd10(r31)
 /* 81391C64 | 38 84 FF FF */	subi r4, r4, 0x1
 /* 81391C68 | 39 00 00 3B */	li r8, 0x3b
-/* 81391C6C | 48 0F 46 7D */	bl fn_814862E8
+/* 81391C6C | 48 0F 46 7D */	bl CDBMakeCDBDate
 .L_81391C70:
 /* 81391C70 | 3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
 /* 81391C74 | 90 61 00 08 */	stw r3, 0x8(r1)
@@ -3556,13 +3556,13 @@
 /* 81391D9C | 38 E1 00 10 */	addi r7, r1, 0x10
 /* 81391DA0 | 39 01 00 0C */	addi r8, r1, 0xc
 /* 81391DA4 | 39 21 00 08 */	addi r9, r1, 0x8
-/* 81391DA8 | 48 0F AE 55 */	bl fn_8148CBFC
+/* 81391DA8 | 48 0F AE 55 */	bl CDBRecordGetCalendarTimeForce
 /* 81391DAC | 7F 83 E3 78 */	mr r3, r28
 /* 81391DB0 | 38 81 00 28 */	addi r4, r1, 0x28
-/* 81391DB4 | 48 0F AE 01 */	bl fn_8148CBB4
+/* 81391DB4 | 48 0F AE 01 */	bl CDBRecordGetKeyForce
 /* 81391DB8 | 7F 83 E3 78 */	mr r3, r28
 /* 81391DBC | 38 81 00 14 */	addi r4, r1, 0x14
-/* 81391DC0 | 48 0F AD 59 */	bl fn_8148CB18
+/* 81391DC0 | 48 0F AD 59 */	bl CDBRecordGetTypeForce
 /* 81391DC4 | 7F E3 FB 78 */	mr r3, r31
 /* 81391DC8 | 38 81 00 14 */	addi r4, r1, 0x14
 /* 81391DCC | 4B FA DB 21 */	bl isValidType__Q33ipl3cdb7ManagerFPCc
@@ -3623,7 +3623,7 @@
 /* 81391E84 | 80 DF 0D F0 */	lwz r6, 0xdf0(r31)
 /* 81391E88 | 80 FF 0D F4 */	lwz r7, 0xdf4(r31)
 /* 81391E8C | 81 1F 0D F8 */	lwz r8, 0xdf8(r31)
-/* 81391E90 | 48 0F 44 59 */	bl fn_814862E8
+/* 81391E90 | 48 0F 44 59 */	bl CDBMakeCDBDate
 /* 81391E94 | 90 61 00 0C */	stw r3, 0xc(r1)
 /* 81391E98 | 38 C0 00 17 */	li r6, 0x17
 /* 81391E9C | 38 E0 00 3B */	li r7, 0x3b
@@ -3631,7 +3631,7 @@
 /* 81391EA4 | 80 7F 0D E4 */	lwz r3, 0xde4(r31)
 /* 81391EA8 | 80 9F 0D E8 */	lwz r4, 0xde8(r31)
 /* 81391EAC | 80 BF 0D EC */	lwz r5, 0xdec(r31)
-/* 81391EB0 | 48 0F 44 39 */	bl fn_814862E8
+/* 81391EB0 | 48 0F 44 39 */	bl CDBMakeCDBDate
 /* 81391EB4 | 88 1E 02 BC */	lbz r0, 0x2bc(r30)
 /* 81391EB8 | 90 61 00 08 */	stw r3, 0x8(r1)
 /* 81391EBC | 2C 00 00 00 */	cmpwi r0, 0x0

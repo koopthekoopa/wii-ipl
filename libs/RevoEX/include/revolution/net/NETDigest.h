@@ -7,6 +7,7 @@
 extern "C" {
 #endif
 
+u16 NETCalcCRC16(const void* pData, s32 size);
 u32 NETCalcCRC32(const void* pData, s32 size);
 
 #ifdef __cplusplus

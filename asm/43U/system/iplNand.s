@@ -876,14 +876,14 @@
 /* 8133BE7C | 7C BE 2B 78 */	mr r30, r5
 /* 8133BE80 | 7C DF 33 78 */	mr r31, r6
 /* 8133BE84 | 38 61 00 18 */	addi r3, r1, 0x18
-/* 8133BE88 | 48 15 79 6D */	bl fn_814937F4
+/* 8133BE88 | 48 15 79 6D */	bl NETMD5Init
 /* 8133BE8C | 7F C4 F3 78 */	mr r4, r30
 /* 8133BE90 | 7F E5 FB 78 */	mr r5, r31
 /* 8133BE94 | 38 61 00 18 */	addi r3, r1, 0x18
-/* 8133BE98 | 48 15 79 9D */	bl fn_81493834
+/* 8133BE98 | 48 15 79 9D */	bl NETMD5Update
 /* 8133BE9C | 38 61 00 18 */	addi r3, r1, 0x18
 /* 8133BEA0 | 38 81 00 08 */	addi r4, r1, 0x8
-/* 8133BEA4 | 48 15 7A 81 */	bl fn_81493924
+/* 8133BEA4 | 48 15 7A 81 */	bl NETMD5GetDigest
 /* 8133BEA8 | 38 00 00 10 */	li r0, 0x10
 /* 8133BEAC | 38 61 00 08 */	addi r3, r1, 0x8
 /* 8133BEB0 | 7C 09 03 A6 */	mtctr r0

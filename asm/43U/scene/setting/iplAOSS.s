@@ -226,7 +226,7 @@
 /* 813FD3F0 | 38 60 FF FF */	li r3, -0x1
 /* 813FD3F4 | 48 00 03 1C */	b .L_813FD710
 .L_813FD3F8:
-/* 813FD3F8 | 48 09 59 35 */	bl fn_81492D2C
+/* 813FD3F8 | 48 09 59 35 */	bl NCDLockWirelessDriver
 /* 813FD3FC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FD400 | 7C 79 1B 78 */	mr r25, r3
 /* 813FD404 | 41 81 00 0C */	bgt .L_813FD410
@@ -445,7 +445,7 @@
 /* 813FD6F8 | 4B FF FA 95 */	bl AOSS_813FD18C
 .L_813FD6FC:
 /* 813FD6FC | 7F 23 CB 78 */	mr r3, r25
-/* 813FD700 | 48 09 57 31 */	bl fn_81492E30
+/* 813FD700 | 48 09 57 31 */	bl NCDUnlockWirelessDriver
 /* 813FD704 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FD708 | 40 82 FF D8 */	bne .L_813FD6E0
 .L_813FD70C:
@@ -566,7 +566,7 @@
 /* 813FD8AC | 38 A0 00 04 */	li r5, 0x4
 /* 813FD8B0 | 4B F3 29 81 */	bl memcpy
 /* 813FD8B4 | 7F 63 DB 78 */	mr r3, r27
-/* 813FD8B8 | 48 09 4E 01 */	bl fn_814926B8
+/* 813FD8B8 | 48 09 4E 01 */	bl NCDSetIpConfig
 /* 813FD8BC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FD8C0 | 41 82 00 08 */	beq .L_813FD8C8
 /* 813FD8C4 | 3B 80 FF FF */	li r28, -0x1
@@ -575,7 +575,7 @@
 /* 813FD8CC | 40 82 00 1C */	bne .L_813FD8E8
 /* 813FD8D0 | 3C 60 81 0C */	lis r3, AOSS_810BD4A8@ha
 /* 813FD8D4 | 38 63 D4 A8 */	addi r3, r3, AOSS_810BD4A8@l
-/* 813FD8D8 | 48 09 4B 75 */	bl fn_8149244C
+/* 813FD8D8 | 48 09 4B 75 */	bl NCDSetIfConfig
 /* 813FD8DC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FD8E0 | 41 82 00 08 */	beq .L_813FD8E8
 /* 813FD8E4 | 3B 80 FF FF */	li r28, -0x1
@@ -599,7 +599,7 @@
 /* 813FD91C | 3B FF 00 01 */	addi r31, r31, 0x1
 /* 813FD920 | 4B FF F8 6D */	bl AOSS_813FD18C
 .L_813FD924:
-/* 813FD924 | 48 09 52 9D */	bl fn_81492BC0
+/* 813FD924 | 48 09 52 9D */	bl NCDIsInterfaceDecided
 /* 813FD928 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FD92C | 41 82 FF C8 */	beq .L_813FD8F4
 .L_813FD930:

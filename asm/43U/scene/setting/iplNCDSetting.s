@@ -849,7 +849,7 @@
 /* 813FA9AC | 48 00 10 09 */	bl adjustNWC24FlagEx___Q33ipl3ncd10NCDSettingFv
 /* 813FA9B0 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FA9B4 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
-/* 813FA9B8 | 48 09 7A 11 */	bl fn_814923C8
+/* 813FA9B8 | 48 09 7A 11 */	bl NCDWriteConfig
 /* 813FA9BC | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813FA9C0 | 7C 08 03 A6 */	mtlr r0
 /* 813FA9C4 | 38 21 00 10 */	addi r1, r1, 0x10
@@ -1513,7 +1513,7 @@
 /* 813FB22C | 4B FF F5 8D */	bl adjustNCDData___Q33ipl3ncd10NCDSettingFv
 /* 813FB230 | 48 00 07 85 */	bl adjustNWC24FlagEx___Q33ipl3ncd10NCDSettingFv
 /* 813FB234 | 7F E3 FB 78 */	mr r3, r31
-/* 813FB238 | 48 09 71 91 */	bl fn_814923C8
+/* 813FB238 | 48 09 71 91 */	bl NCDWriteConfig
 /* 813FB23C | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813FB240 | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 813FB244 | 7C 08 03 A6 */	mtlr r0
@@ -1568,7 +1568,7 @@
 /* 813FB2DC | 4B FF F4 DD */	bl adjustNCDData___Q33ipl3ncd10NCDSettingFv
 /* 813FB2E0 | 48 00 06 D5 */	bl adjustNWC24FlagEx___Q33ipl3ncd10NCDSettingFv
 /* 813FB2E4 | 7F E3 FB 78 */	mr r3, r31
-/* 813FB2E8 | 48 09 70 E1 */	bl fn_814923C8
+/* 813FB2E8 | 48 09 70 E1 */	bl NCDWriteConfig
 /* 813FB2EC | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813FB2F0 | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 813FB2F4 | 7C 08 03 A6 */	mtlr r0
@@ -1635,7 +1635,7 @@
 /* 813FB39C | 42 00 FF B8 */	bdnz .L_813FB354
 /* 813FB3A0 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB3A4 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
-/* 813FB3A8 | 48 09 70 20 */	b fn_814923C8
+/* 813FB3A8 | 48 09 70 20 */	b NCDWriteConfig
 .endfn setUseProfileID__Q33ipl3ncd10NCDSettingFv
 
 # .text:0x13E4 | 0x813FB3AC | size: 0xA8
@@ -1983,7 +1983,7 @@
 /* 813FB788 | 3F E0 81 65 */	lis r31, lbl_81657898@ha
 /* 813FB78C | 38 61 00 08 */	addi r3, r1, 0x8
 /* 813FB790 | 3B FF 78 98 */	addi r31, r31, lbl_81657898@l
-/* 813FB794 | 48 09 A0 B1 */	bl fn_81495844
+/* 813FB794 | 48 09 A0 B1 */	bl NETGetWirelessMacAddress
 /* 813FB798 | 2C 03 FF FC */	cmpwi r3, -0x4
 /* 813FB79C | 41 82 00 C8 */	beq .L_813FB864
 /* 813FB7A0 | 40 80 00 10 */	bge .L_813FB7B0
@@ -2151,7 +2151,7 @@
 /* 813FB994 | 48 00 00 21 */	bl adjustNWC24FlagEx___Q33ipl3ncd10NCDSettingFv
 /* 813FB998 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB99C | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
-/* 813FB9A0 | 48 09 6A 29 */	bl fn_814923C8
+/* 813FB9A0 | 48 09 6A 29 */	bl NCDWriteConfig
 /* 813FB9A4 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813FB9A8 | 7C 08 03 A6 */	mtlr r0
 /* 813FB9AC | 38 21 00 10 */	addi r1, r1, 0x10

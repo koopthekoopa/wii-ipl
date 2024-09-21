@@ -279,7 +279,7 @@
 .fn CHANSExport_beginRender, global
 /* 81457A28 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457A2C | 7C 08 02 A6 */	mflr r0
-/* 81457A30 | 38 8D AD 21 */	li r4, lbl_81698D61@sda21
+/* 81457A30 | 38 8D AD 21 */	li r4, VmSystemBeginRenderFlag@sda21
 /* 81457A34 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 81457A38 | 4B FF E9 0D */	bl CHANSVmSetSignal
 /* 81457A3C | 80 01 00 14 */	lwz r0, 0x14(r1)
@@ -293,7 +293,7 @@
 .fn CHANSExport_waitForRetrace, global
 /* 81457A50 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457A54 | 7C 08 02 A6 */	mflr r0
-/* 81457A58 | 38 8D AD 20 */	li r4, lbl_81698D60@sda21
+/* 81457A58 | 38 8D AD 20 */	li r4, VmSystemWaitForRetraceFlag@sda21
 /* 81457A5C | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 81457A60 | 4B FF E8 E5 */	bl CHANSVmSetSignal
 /* 81457A64 | 80 01 00 14 */	lwz r0, 0x14(r1)
@@ -1081,11 +1081,11 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698D60 | size: 0x1
-.obj lbl_81698D60, global
+.obj VmSystemWaitForRetraceFlag, global
 	.skip 0x1
-.endobj lbl_81698D60
+.endobj VmSystemWaitForRetraceFlag
 
 # .sbss:0x1 | 0x81698D61 | size: 0x7
-.obj lbl_81698D61, global
+.obj VmSystemBeginRenderFlag, global
 	.skip 0x7
-.endobj lbl_81698D61
+.endobj VmSystemBeginRenderFlag

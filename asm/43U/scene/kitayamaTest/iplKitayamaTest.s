@@ -583,7 +583,7 @@
 .L_813BE7F0:
 /* 813BE7F0 | 4B F8 09 3D */	bl closeDatabase__Q33ipl3cdb7ManagerFv
 .L_813BE7F4:
-/* 813BE7F4 | 48 0C 78 AD */	bl fn_814860A0
+/* 813BE7F4 | 48 0C 78 AD */	bl CDBUninit
 /* 813BE7F8 | 7C 64 1B 78 */	mr r4, r3
 /* 813BE7FC | 38 7F 01 AE */	addi r3, r31, 0x1ae
 /* 813BE800 | 4C C6 31 82 */	crclr cr1eq

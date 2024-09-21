@@ -158,34 +158,42 @@
 /* 814852D4 | 7C 84 18 2E */	lwzx r4, r4, r3
 /* 814852D8 | 7C 89 03 A6 */	mtctr r4
 /* 814852DC | 4E 80 04 20 */	bctr
+.L_814852E0:
 /* 814852E0 | 3C 60 00 01 */	lis r3, 0x1
 /* 814852E4 | 38 63 EF 04 */	subi r3, r3, 0x10fc
 /* 814852E8 | B0 7F 00 6A */	sth r3, 0x6a(r31)
 /* 814852EC | 48 00 00 70 */	b .L_8148535C
+.L_814852F0:
 /* 814852F0 | 3C 60 00 01 */	lis r3, 0x1
 /* 814852F4 | 38 63 EF 01 */	subi r3, r3, 0x10ff
 /* 814852F8 | B0 7F 00 6A */	sth r3, 0x6a(r31)
 /* 814852FC | 48 00 00 60 */	b .L_8148535C
+.L_81485300:
 /* 81485300 | 3C 60 00 01 */	lis r3, 0x1
 /* 81485304 | 38 63 EF 07 */	subi r3, r3, 0x10f9
 /* 81485308 | B0 7F 00 6A */	sth r3, 0x6a(r31)
 /* 8148530C | 48 00 00 50 */	b .L_8148535C
+.L_81485310:
 /* 81485310 | 3C 60 00 01 */	lis r3, 0x1
 /* 81485314 | 38 63 EF 06 */	subi r3, r3, 0x10fa
 /* 81485318 | B0 7F 00 6A */	sth r3, 0x6a(r31)
 /* 8148531C | 48 00 00 40 */	b .L_8148535C
+.L_81485320:
 /* 81485320 | 3C 60 00 01 */	lis r3, 0x1
 /* 81485324 | 38 63 EF 03 */	subi r3, r3, 0x10fd
 /* 81485328 | B0 7F 00 6A */	sth r3, 0x6a(r31)
 /* 8148532C | 48 00 00 30 */	b .L_8148535C
+.L_81485330:
 /* 81485330 | 3C 60 00 01 */	lis r3, 0x1
 /* 81485334 | 38 63 EF 05 */	subi r3, r3, 0x10fb
 /* 81485338 | B0 7F 00 6A */	sth r3, 0x6a(r31)
 /* 8148533C | 48 00 00 20 */	b .L_8148535C
+.L_81485340:
 /* 81485340 | 3C 60 00 01 */	lis r3, 0x1
 /* 81485344 | 38 63 EF 08 */	subi r3, r3, 0x10f8
 /* 81485348 | B0 7F 00 6A */	sth r3, 0x6a(r31)
 /* 8148534C | 48 00 00 10 */	b .L_8148535C
+.L_81485350:
 /* 81485350 | 3C 60 00 01 */	lis r3, 0x1
 /* 81485354 | 38 63 EF 02 */	subi r3, r3, 0x10fe
 /* 81485358 | B0 7F 00 6A */	sth r3, 0x6a(r31)
@@ -1057,3 +1065,23 @@
 /* 81485FA4 | 38 21 00 70 */	addi r1, r1, 0x70
 /* 81485FA8 | 4E 80 00 20 */	blr
 .endfn Zi8PrepareMatch
+
+# 0x8166B3D0..0x8166B400 | size: 0x30
+.data
+.balign 8
+
+# .data:0x0 | 0x8166B3D0 | size: 0x30
+.obj jumptable_8166B3D0, local
+	.rel Zi8PrepareMatch, .L_8148535C
+	.rel Zi8PrepareMatch, .L_814852E0
+	.rel Zi8PrepareMatch, .L_814852F0
+	.rel Zi8PrepareMatch, .L_81485300
+	.rel Zi8PrepareMatch, .L_81485310
+	.rel Zi8PrepareMatch, .L_81485320
+	.rel Zi8PrepareMatch, .L_81485330
+	.rel Zi8PrepareMatch, .L_81485340
+	.rel Zi8PrepareMatch, .L_81485350
+	.rel Zi8PrepareMatch, .L_8148535C
+	.rel Zi8PrepareMatch, .L_8148535C
+	.rel Zi8PrepareMatch, .L_81485300
+.endobj jumptable_8166B3D0

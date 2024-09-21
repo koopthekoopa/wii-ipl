@@ -2759,3 +2759,12 @@
 	.4byte 0x7E000000
 	.4byte 0x00000000
 .endobj lbl_81695010
+
+# 0x81695FE8..0x81695FF0 | size: 0x8
+.section .sbss2, "a", @nobits
+.balign 8
+
+# .sbss2:0x0 | 0x81695FE8 | size: 0x8
+.obj Zi8ZYdefaultFuzzyPairs, global
+	.skip 0x8
+.endobj Zi8ZYdefaultFuzzyPairs

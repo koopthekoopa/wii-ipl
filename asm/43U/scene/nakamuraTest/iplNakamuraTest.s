@@ -924,7 +924,7 @@
 /* 813D8C24 | 2C 00 FF 91 */	cmpwi r0, -0x6f
 /* 813D8C28 | 40 82 00 2C */	bne .L_813D8C54
 /* 813D8C2C | 38 60 FF 91 */	li r3, -0x6f
-/* 813D8C30 | 48 0B BF 25 */	bl fn_81494B54
+/* 813D8C30 | 48 0B BF 25 */	bl NETGetStartupErrorCode
 /* 813D8C34 | 7C 63 00 D0 */	neg r3, r3
 /* 813D8C38 | 38 00 00 64 */	li r0, 0x64
 /* 813D8C3C | 7C 03 03 D6 */	divw r0, r3, r0

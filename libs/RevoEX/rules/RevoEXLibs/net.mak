@@ -1,20 +1,21 @@
-NET_CFLAGS =	-O4,s -ipa file $(COMMON_CCFLAGS)
-NET_CCPATH =	$(CW_GC_30A52)
-NET_OBJECTS =	$(REVOEX_OBJ_PATH)/net/NETDigest.o
+NET_OBJECTS =	$(REVOEX_OBJ_PATH)/net/crc.o \
+				$(REVOEX_OBJASM_PATH)/net/md5.o \
+				$(REVOEX_OBJASM_PATH)/net/sha1.o \
+				$(REVOEX_OBJASM_PATH)/net/hmac.o \
+				$(REVOEX_OBJASM_PATH)/net/neterrorcode.o \
+				$(REVOEX_OBJ_PATH)/net/NETVersion.o \
+				$(REVOEX_OBJASM_PATH)/net/aes.o \
+				$(REVOEX_OBJ_PATH)/net/wireless_macaddr.o
 
 DEPENDENCIES += $(NET_OBJECTS:.o=.d)
 
 $(REVOEX_OBJ_PATH)/net/%.o: $(REVOEX_SRC_PATH)/net/%.c
-	$(call BuildCSources,$(NET_CCPATH),$(NET_CFLAGS),$(REVOEX_INC_PATHS),$(INCLUDE_ROOT))
-
-$(REVOEX_OBJ_PATH)/net/%.o: $(REVOEX_SRC_PATH)/net/%.cpp
-	$(call BuildCPPSources,$(NET_CCPATH),$(NET_CFLAGS),$(REVOEX_INC_PATHS),$(INCLUDE_ROOT))
+	$(call BuildCSources,$(REVOEX_CCPATH),$(REVOEX_CFLAGS),$(REVOEX_INC_PATHS),$(INCLUDE_ROOT))
 
 $(REVOEX_OBJASM_PATH)/net/%.o: $(REVOEX_ASM_PATH)/net/%.s
 	$(call BuildASMSources,$(INCLUDE_ROOT))
 
 $(REVOEX_BLD_PATH)/net.a: $(NET_OBJECTS)
-	$(call LinkLibrary,$(NET_CCPATH),$^,$@)
-
+	$(call LinkLibrary,$(REVOEX_CCPATH),$^,$@)
 
 

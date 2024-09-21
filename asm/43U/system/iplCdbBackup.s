@@ -1047,7 +1047,7 @@
 /* 8135B294 | 93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 8135B298 | 7C 7F 1B 78 */	mr r31, r3
 /* 8135B29C | 38 60 07 D0 */	li r3, 0x7d0
-/* 8135B2A0 | 48 12 B0 49 */	bl fn_814862E8
+/* 8135B2A0 | 48 12 B0 49 */	bl CDBMakeCDBDate
 /* 8135B2A4 | 90 61 00 0C */	stw r3, 0xc(r1)
 /* 8135B2A8 | 38 60 07 F3 */	li r3, 0x7f3
 /* 8135B2AC | 38 80 00 0C */	li r4, 0xc
@@ -1055,7 +1055,7 @@
 /* 8135B2B4 | 38 C0 00 17 */	li r6, 0x17
 /* 8135B2B8 | 38 E0 00 3B */	li r7, 0x3b
 /* 8135B2BC | 39 00 00 3B */	li r8, 0x3b
-/* 8135B2C0 | 48 12 B0 29 */	bl fn_814862E8
+/* 8135B2C0 | 48 12 B0 29 */	bl CDBMakeCDBDate
 /* 8135B2C4 | 3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
 /* 8135B2C8 | 90 61 00 08 */	stw r3, 0x8(r1)
 /* 8135B2CC | 38 84 90 08 */	addi r4, r4, smArg__Q23ipl6System@l
@@ -1165,7 +1165,7 @@
 /* 8135B42C | 93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 8135B430 | 7C 7F 1B 78 */	mr r31, r3
 /* 8135B434 | 38 60 07 D0 */	li r3, 0x7d0
-/* 8135B438 | 48 12 AE B1 */	bl fn_814862E8
+/* 8135B438 | 48 12 AE B1 */	bl CDBMakeCDBDate
 /* 8135B43C | 90 61 00 10 */	stw r3, 0x10(r1)
 /* 8135B440 | 38 60 07 F3 */	li r3, 0x7f3
 /* 8135B444 | 38 80 00 0C */	li r4, 0xc
@@ -1173,7 +1173,7 @@
 /* 8135B44C | 38 C0 00 17 */	li r6, 0x17
 /* 8135B450 | 38 E0 00 3B */	li r7, 0x3b
 /* 8135B454 | 39 00 00 3B */	li r8, 0x3b
-/* 8135B458 | 48 12 AE 91 */	bl fn_814862E8
+/* 8135B458 | 48 12 AE 91 */	bl CDBMakeCDBDate
 /* 8135B45C | 3C 80 81 09 */	lis r4, smArg__Q23ipl6System@ha
 /* 8135B460 | 90 61 00 0C */	stw r3, 0xc(r1)
 /* 8135B464 | 38 84 90 08 */	addi r4, r4, smArg__Q23ipl6System@l

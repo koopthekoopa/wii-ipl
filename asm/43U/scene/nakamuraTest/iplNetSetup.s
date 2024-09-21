@@ -38,7 +38,7 @@
 /* 813D8DC8 | 3F C0 81 0C */	lis r30, sSOStartupInfo__Q33ipl5scene8NetSetup@ha
 /* 813D8DCC | 3B FE 83 E0 */	addi r31, r30, sSOStartupInfo__Q33ipl5scene8NetSetup@l
 /* 813D8DD0 | 80 7F 00 0C */	lwz r3, 0xc(r31)
-/* 813D8DD4 | 48 0B 98 E5 */	bl fn_814926B8
+/* 813D8DD4 | 48 0B 98 E5 */	bl NCDSetIpConfig
 /* 813D8DD8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D8DDC | 41 82 00 54 */	beq .L_813D8E30
 /* 813D8DE0 | 2C 03 FF FD */	cmpwi r3, -0x3
@@ -69,7 +69,7 @@
 /* 813D8E34 | 4C C6 31 82 */	crclr cr1eq
 /* 813D8E38 | 48 15 58 69 */	bl OSReport
 /* 813D8E3C | 80 7F 00 08 */	lwz r3, 0x8(r31)
-/* 813D8E40 | 48 0B 96 0D */	bl fn_8149244C
+/* 813D8E40 | 48 0B 96 0D */	bl NCDSetIfConfig
 /* 813D8E44 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D8E48 | 41 82 00 54 */	beq .L_813D8E9C
 /* 813D8E4C | 2C 03 FF FD */	cmpwi r3, -0x3
@@ -108,7 +108,7 @@
 /* 813D8EC0 | 48 15 57 E1 */	bl OSReport
 /* 813D8EC4 | 7F 83 E3 78 */	mr r3, r28
 /* 813D8EC8 | 7F 64 DB 78 */	mr r4, r27
-/* 813D8ECC | 48 0B BD 09 */	bl fn_81494BD4
+/* 813D8ECC | 48 0B BD 09 */	bl NETGetStartupErrorCodeEx
 /* 813D8ED0 | 7F 83 00 D0 */	neg r28, r3
 /* 813D8ED4 | 38 7D 00 44 */	addi r3, r29, 0x44
 /* 813D8ED8 | 7F 84 E3 78 */	mr r4, r28
@@ -531,7 +531,7 @@
 /* 813D947C | 90 1F 27 B0 */	stw r0, 0x27b0(r31)
 /* 813D9480 | 48 00 00 08 */	b .L_813D9488
 .L_813D9484:
-/* 813D9484 | 48 0B 96 39 */	bl fn_81492ABC
+/* 813D9484 | 48 0B 96 39 */	bl NCDGetLinkStatus
 .L_813D9488:
 /* 813D9488 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 813D948C | 80 7F 24 8C */	lwz r3, 0x248c(r31)
@@ -559,7 +559,7 @@
 /* 813D94D0 | 38 00 00 00 */	li r0, 0x0
 /* 813D94D4 | 38 7F 1B 68 */	addi r3, r31, 0x1b68
 /* 813D94D8 | 98 1F 1B 68 */	stb r0, 0x1b68(r31)
-/* 813D94DC | 48 0B 8F 71 */	bl fn_8149244C
+/* 813D94DC | 48 0B 8F 71 */	bl NCDSetIfConfig
 /* 813D94E0 | 80 6D AB 9C */	lwz r3, lbl_81698BDC@sda21(r0)
 /* 813D94E4 | 48 18 12 41 */	bl fn_8155A724
 /* 813D94E8 | 80 01 00 14 */	lwz r0, 0x14(r1)

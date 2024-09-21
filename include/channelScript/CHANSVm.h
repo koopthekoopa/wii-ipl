@@ -34,6 +34,12 @@ typedef struct CHANSPropertyEntry {
     CHANSMethod setMethod;      // 0x08
 } CHANSPropertyEntry;
 
+typedef struct CHANSPropertyEntry {
+    const char* name;           // 0x00
+    CHANSMethod getMethod;      // 0x04
+    CHANSMethod unkMethod;      // 0x08
+} CHANSClassEntry;
+
 #define     CHANSVmMethodLength(x)  (sizeof(x) / sizeof(CHANSMethodEntry))
 #define     CHANSVmDefineMethod(x)  CHANSErr x(CHANSVm* pVm, CHANSVmObjHdr* pUnk0, CHANSVmObjHdr* pObject)
 

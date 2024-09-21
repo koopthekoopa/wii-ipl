@@ -298,7 +298,7 @@
 /* 813FCDD0 | 38 00 00 04 */	li r0, 0x4
 /* 813FCDD4 | 38 7E 04 50 */	addi r3, r30, 0x450
 /* 813FCDD8 | B0 1E 03 44 */	sth r0, 0x344(r30)
-/* 813FCDDC | 48 09 8A 69 */	bl fn_81495844
+/* 813FCDDC | 48 09 8A 69 */	bl NETGetWirelessMacAddress
 /* 813FCDE0 | 3C 60 97 65 */	lis r3, 0x9765
 /* 813FCDE4 | 80 9E 03 34 */	lwz r4, 0x334(r30)
 /* 813FCDE8 | 38 03 43 21 */	addi r0, r3, 0x4321

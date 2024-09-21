@@ -87,6 +87,7 @@ BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(BS2_BLD_PATH)/keyboard.a \
 						$(BS2_BLD_PATH)/channelScript.a \
 						$(EZI8_DICT_ROOT)/$(BUILD_ROOT)/zi8clib.a \
+						$(REVOLUTION_EXT_ROOT)/$(BUILD_ROOT)/cdb.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/base.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/os.a \
 						$(RUNTIME_ROOT)/$(BUILD_ROOT)/Runtime.PPCEABI.H.a

@@ -531,10 +531,10 @@
 /* 8133B13C | 39 61 00 30 */	addi r11, r1, 0x30
 /* 8133B140 | 48 2B E3 7D */	bl _savegpr_26
 /* 8133B144 | 3F 80 81 09 */	lis r28, smCSVm__Q33ipl7channel20ChannelScriptManager@ha
-/* 8133B148 | 3B CD AD 20 */	li r30, lbl_81698D60@sda21
+/* 8133B148 | 3B CD AD 20 */	li r30, VmSystemWaitForRetraceFlag@sda21
 /* 8133B14C | 3B BC 92 E0 */	addi r29, r28, smCSVm__Q33ipl7channel20ChannelScriptManager@l
 /* 8133B150 | 3B E0 00 02 */	li r31, 0x2
-/* 8133B154 | 3B 4D AD 21 */	li r26, lbl_81698D61@sda21
+/* 8133B154 | 3B 4D AD 21 */	li r26, VmSystemBeginRenderFlag@sda21
 /* 8133B158 | 3B 60 00 01 */	li r27, 0x1
 .L_8133B15C:
 /* 8133B15C | 38 7C 92 E0 */	addi r3, r28, smCSVm__Q33ipl7channel20ChannelScriptManager@l

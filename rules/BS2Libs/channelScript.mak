@@ -17,7 +17,8 @@ CHANS_OBJS	=	$(BS2_OBJASM_PATH)/channelScript/CHANSVm.o \
 				$(BS2_OBJASM_PATH)/channelScript/iplCSColorS10.o \
 				$(BS2_OBJASM_PATH)/channelScript/iplCSSize.o \
 				$(BS2_OBJASM_PATH)/channelScript/iplCSAnim.o \
-				$(BS2_OBJASM_PATH)/channelScript/iplCSSound.o
+				$(BS2_OBJASM_PATH)/channelScript/iplCSSound.o \
+				$(BS2_OBJASM_PATH)/channelScript/iplCSImage.o
 
 DEPENDENCIES += $(CHANS_OBJS:.o=.d)
 

@@ -260,7 +260,7 @@
 /* 813574AC | 48 00 02 A5 */	bl save_mail_now___Q33ipl7postman7ManagerFv
 /* 813574B0 | 7F E3 FB 78 */	mr r3, r31
 /* 813574B4 | 48 00 02 ED */	bl do_daily_tasks___Q33ipl7postman7ManagerFv
-/* 813574B8 | 48 13 B6 05 */	bl fn_81492ABC
+/* 813574B8 | 48 13 B6 05 */	bl NCDGetLinkStatus
 /* 813574BC | 7C 64 1B 78 */	mr r4, r3
 /* 813574C0 | 38 79 00 19 */	addi r3, r25, 0x19
 /* 813574C4 | 4C C6 31 82 */	crclr cr1eq
@@ -307,7 +307,7 @@
 /* 8135755C | 2C 00 00 01 */	cmpwi r0, 0x1
 /* 81357560 | 41 82 00 40 */	beq .L_813575A0
 /* 81357564 | 93 5F 03 34 */	stw r26, 0x334(r31)
-/* 81357568 | 48 13 B5 55 */	bl fn_81492ABC
+/* 81357568 | 48 13 B5 55 */	bl NCDGetLinkStatus
 /* 8135756C | 7C 64 1B 78 */	mr r4, r3
 /* 81357570 | 38 79 00 19 */	addi r3, r25, 0x19
 /* 81357574 | 4C C6 31 82 */	crclr cr1eq
@@ -787,7 +787,7 @@
 /* 81357B50 | 48 1D 6B 51 */	bl OSReport
 /* 81357B54 | 9B C1 00 57 */	stb r30, 0x57(r1)
 /* 81357B58 | 38 61 00 52 */	addi r3, r1, 0x52
-/* 81357B5C | 48 13 A8 6D */	bl fn_814923C8
+/* 81357B5C | 48 13 A8 6D */	bl NCDWriteConfig
 /* 81357B60 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81357B64 | 40 80 00 18 */	bge .L_81357B7C
 /* 81357B68 | 7C 64 1B 78 */	mr r4, r3
@@ -796,7 +796,7 @@
 /* 81357B74 | 48 1D 6B 2D */	bl OSReport
 /* 81357B78 | 48 00 00 08 */	b .L_81357B80
 .L_81357B7C:
-/* 81357B7C | 48 13 B3 BD */	bl fn_81492F38
+/* 81357B7C | 48 13 B3 BD */	bl NCDRestoreConfig
 .L_81357B80:
 /* 81357B80 | 80 01 1B C4 */	lwz r0, 0x1bc4(r1)
 /* 81357B84 | 83 E1 1B BC */	lwz r31, 0x1bbc(r1)

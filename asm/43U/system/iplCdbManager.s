@@ -28,13 +28,13 @@
 /* 8133F0AC | 9B DC 00 39 */	stb r30, 0x39(r28)
 /* 8133F0B0 | 38 7C 00 08 */	addi r3, r28, 0x8
 /* 8133F0B4 | 9B DC 00 38 */	stb r30, 0x38(r28)
-/* 8133F0B8 | 48 14 82 E9 */	bl fn_814873A0
+/* 8133F0B8 | 48 14 82 E9 */	bl CDBDatabaseInit
 /* 8133F0BC | 7C 64 1B 78 */	mr r4, r3
 /* 8133F0C0 | 7F 83 E3 78 */	mr r3, r28
 /* 8133F0C4 | 38 A0 00 34 */	li r5, 0x34
 /* 8133F0C8 | 48 00 13 35 */	bl error_handling__Q33ipl3cdb7ManagerF6CDBErri
 /* 8133F0CC | 38 7C 00 08 */	addi r3, r28, 0x8
-/* 8133F0D0 | 48 14 83 15 */	bl fn_814873E4
+/* 8133F0D0 | 48 14 83 15 */	bl CDBDatabaseOpen
 /* 8133F0D4 | 7C 64 1B 78 */	mr r4, r3
 /* 8133F0D8 | 7F 83 E3 78 */	mr r3, r28
 /* 8133F0DC | 38 A0 00 35 */	li r5, 0x35
@@ -68,7 +68,7 @@
 /* 8133F138 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8133F13C | 7C 7F 1B 78 */	mr r31, r3
 /* 8133F140 | 38 63 00 08 */	addi r3, r3, 0x8
-/* 8133F144 | 48 14 82 F1 */	bl fn_81487434
+/* 8133F144 | 48 14 82 F1 */	bl CDBDatabaseClose
 /* 8133F148 | 7C 64 1B 78 */	mr r4, r3
 /* 8133F14C | 7F E3 FB 78 */	mr r3, r31
 /* 8133F150 | 38 A0 00 4D */	li r5, 0x4d
@@ -841,7 +841,7 @@
 /* 8133FBA0 | 38 76 00 08 */	addi r3, r22, 0x8
 /* 8133FBA4 | 39 21 00 20 */	addi r9, r1, 0x20
 /* 8133FBA8 | 39 41 00 23 */	addi r10, r1, 0x23
-/* 8133FBAC | 48 14 79 39 */	bl fn_814874E4
+/* 8133FBAC | 48 14 79 39 */	bl CDBDatabasePrivateCreateRecordAtOnce
 /* 8133FBB0 | 7C 78 1B 78 */	mr r24, r3
 /* 8133FBB4 | 48 00 00 D4 */	b .L_8133FC88
 .L_8133FBB8:
@@ -851,7 +851,7 @@
 /* 8133FBC4 | 7F A7 EB 78 */	mr r7, r29
 /* 8133FBC8 | 7F C8 F3 78 */	mr r8, r30
 /* 8133FBCC | 38 76 00 08 */	addi r3, r22, 0x8
-/* 8133FBD0 | 48 14 7A 01 */	bl fn_814875D0
+/* 8133FBD0 | 48 14 7A 01 */	bl CDBDatabaseCreateRecordAtOnce
 /* 8133FBD4 | 7C 78 1B 78 */	mr r24, r3
 /* 8133FBD8 | 48 00 00 B0 */	b .L_8133FC88
 .L_8133FBDC:
@@ -877,7 +877,7 @@
 /* 8133FC28 | 81 1C 00 10 */	lwz r8, 0x10(r28)
 /* 8133FC2C | 81 3C 00 0C */	lwz r9, 0xc(r28)
 /* 8133FC30 | 81 5C 00 08 */	lwz r10, 0x8(r28)
-/* 8133FC34 | 48 14 7A FD */	bl fn_81487730
+/* 8133FC34 | 48 14 7A FD */	bl CDBDatabasePrivateCreateRecordAtOnceEx
 /* 8133FC38 | 7C 78 1B 78 */	mr r24, r3
 /* 8133FC3C | 48 00 00 4C */	b .L_8133FC88
 .L_8133FC40:
@@ -897,7 +897,7 @@
 /* 8133FC74 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 8133FC78 | 81 3C 00 14 */	lwz r9, 0x14(r28)
 /* 8133FC7C | 81 5C 00 10 */	lwz r10, 0x10(r28)
-/* 8133FC80 | 48 14 79 E5 */	bl fn_81487664
+/* 8133FC80 | 48 14 79 E5 */	bl CDBDatabaseCreateRecordAtOnceEx
 /* 8133FC84 | 7C 78 1B 78 */	mr r24, r3
 .L_8133FC88:
 /* 8133FC88 | 80 16 00 04 */	lwz r0, 0x4(r22)
@@ -945,7 +945,7 @@
 /* 8133FD18 | 7F A4 EB 78 */	mr r4, r29
 /* 8133FD1C | 7F C5 F3 78 */	mr r5, r30
 /* 8133FD20 | 38 7C 00 08 */	addi r3, r28, 0x8
-/* 8133FD24 | 48 14 7D 31 */	bl fn_81487A54
+/* 8133FD24 | 48 14 7D 31 */	bl CDBDatabaseFindByKey
 /* 8133FD28 | 7C 64 1B 78 */	mr r4, r3
 /* 8133FD2C | 7F 83 E3 78 */	mr r3, r28
 /* 8133FD30 | 38 A0 02 C3 */	li r5, 0x2c3
@@ -992,7 +992,7 @@
 /* 8133FDC0 | 93 C1 00 10 */	stw r30, 0x10(r1)
 /* 8133FDC4 | 39 00 00 00 */	li r8, 0x0
 /* 8133FDC8 | 39 20 00 00 */	li r9, 0x0
-/* 8133FDCC | 48 14 98 B1 */	bl fn_8148967C
+/* 8133FDCC | 48 14 98 B1 */	bl CDBDatabaseSearch
 /* 8133FDD0 | 7C 64 1B 78 */	mr r4, r3
 /* 8133FDD4 | 7E E3 BB 78 */	mr r3, r23
 /* 8133FDD8 | 38 A0 02 E5 */	li r5, 0x2e5
@@ -1025,7 +1025,7 @@
 /* 8133FE30 | 48 1F 1D D9 */	bl fn_81531C08
 /* 8133FE34 | 7F A3 EB 78 */	mr r3, r29
 /* 8133FE38 | 7F C4 F3 78 */	mr r4, r30
-/* 8133FE3C | 48 14 CB 45 */	bl fn_8148C980
+/* 8133FE3C | 48 14 CB 45 */	bl CDBRecordGetDataSize
 /* 8133FE40 | 7C 64 1B 78 */	mr r4, r3
 /* 8133FE44 | 7F 83 E3 78 */	mr r3, r28
 /* 8133FE48 | 38 A0 03 26 */	li r5, 0x326
@@ -1058,7 +1058,7 @@
 /* 8133FEA0 | 48 1F 1D 69 */	bl fn_81531C08
 /* 8133FEA4 | 7F A3 EB 78 */	mr r3, r29
 /* 8133FEA8 | 7F C4 F3 78 */	mr r4, r30
-/* 8133FEAC | 48 14 CD D9 */	bl fn_8148CC84
+/* 8133FEAC | 48 14 CD D9 */	bl CDBRecordGetId
 /* 8133FEB0 | 7C 64 1B 78 */	mr r4, r3
 /* 8133FEB4 | 7F 83 E3 78 */	mr r3, r28
 /* 8133FEB8 | 38 A0 03 67 */	li r5, 0x367
@@ -1089,7 +1089,7 @@
 /* 8133FF08 | 7F E3 FB 78 */	mr r3, r31
 /* 8133FF0C | 48 1F 1C FD */	bl fn_81531C08
 /* 8133FF10 | 7F C3 F3 78 */	mr r3, r30
-/* 8133FF14 | 48 14 CA F9 */	bl fn_8148CA0C
+/* 8133FF14 | 48 14 CA F9 */	bl CDBRecordRemove
 /* 8133FF18 | 7C 64 1B 78 */	mr r4, r3
 /* 8133FF1C | 7F A3 EB 78 */	mr r3, r29
 /* 8133FF20 | 38 A0 03 73 */	li r5, 0x373
@@ -1120,7 +1120,7 @@
 /* 8133FF70 | 7F E3 FB 78 */	mr r3, r31
 /* 8133FF74 | 48 1F 1C 95 */	bl fn_81531C08
 /* 8133FF78 | 7F C3 F3 78 */	mr r3, r30
-/* 8133FF7C | 48 14 C2 0D */	bl fn_8148C188
+/* 8133FF7C | 48 14 C2 0D */	bl CDBRecordOpen
 /* 8133FF80 | 7C 64 1B 78 */	mr r4, r3
 /* 8133FF84 | 7F A3 EB 78 */	mr r3, r29
 /* 8133FF88 | 38 A0 03 7F */	li r5, 0x37f
@@ -1156,7 +1156,7 @@
 /* 8133FFEC | 7F A4 EB 78 */	mr r4, r29
 /* 8133FFF0 | 7F C5 F3 78 */	mr r5, r30
 /* 8133FFF4 | 38 C0 00 00 */	li r6, 0x0
-/* 8133FFF8 | 48 14 C8 0D */	bl fn_8148C804
+/* 8133FFF8 | 48 14 C8 0D */	bl CDBRecordRead
 /* 8133FFFC | 7C 64 1B 78 */	mr r4, r3
 /* 81340000 | 7F 63 DB 78 */	mr r3, r27
 /* 81340004 | 38 A0 03 8D */	li r5, 0x38d
@@ -1191,7 +1191,7 @@
 /* 81340064 | 7F 83 E3 78 */	mr r3, r28
 /* 81340068 | 7F A4 EB 78 */	mr r4, r29
 /* 8134006C | 7F C5 F3 78 */	mr r5, r30
-/* 81340070 | 48 14 C5 BD */	bl fn_8148C62C
+/* 81340070 | 48 14 C5 BD */	bl CDBRecordWrite
 /* 81340074 | 7C 64 1B 78 */	mr r4, r3
 /* 81340078 | 7F 63 DB 78 */	mr r3, r27
 /* 8134007C | 38 A0 03 9B */	li r5, 0x39b
@@ -1226,7 +1226,7 @@
 /* 813400DC | 7F 83 E3 78 */	mr r3, r28
 /* 813400E0 | 7F A4 EB 78 */	mr r4, r29
 /* 813400E4 | 7F C5 F3 78 */	mr r5, r30
-/* 813400E8 | 48 14 C7 C9 */	bl fn_8148C8B0
+/* 813400E8 | 48 14 C7 C9 */	bl CDBRecordSeek
 /* 813400EC | 7C 64 1B 78 */	mr r4, r3
 /* 813400F0 | 7F 63 DB 78 */	mr r3, r27
 /* 813400F4 | 38 A0 03 A9 */	li r5, 0x3a9
@@ -1257,7 +1257,7 @@
 /* 81340144 | 7F E3 FB 78 */	mr r3, r31
 /* 81340148 | 48 1F 1A C1 */	bl fn_81531C08
 /* 8134014C | 7F C3 F3 78 */	mr r3, r30
-/* 81340150 | 48 14 C3 E1 */	bl fn_8148C530
+/* 81340150 | 48 14 C3 E1 */	bl CDBRecordClose
 /* 81340154 | 7C 64 1B 78 */	mr r4, r3
 /* 81340158 | 7F A3 EB 78 */	mr r3, r29
 /* 8134015C | 38 A0 03 B5 */	li r5, 0x3b5
@@ -1302,7 +1302,7 @@
 /* 813401BC | 7C 7D 1B 78 */	mr r29, r3
 /* 813401C0 | 7F E3 FB 78 */	mr r3, r31
 /* 813401C4 | 48 1F 1A 45 */	bl fn_81531C08
-/* 813401C8 | 48 14 96 91 */	bl fn_81489858
+/* 813401C8 | 48 14 96 91 */	bl CDBMountSD
 /* 813401CC | 7C 64 1B 78 */	mr r4, r3
 /* 813401D0 | 7F A3 EB 78 */	mr r3, r29
 /* 813401D4 | 38 A0 03 D1 */	li r5, 0x3d1
@@ -1336,7 +1336,7 @@
 /* 8134022C | 7C 7D 1B 78 */	mr r29, r3
 /* 81340230 | 7F E3 FB 78 */	mr r3, r31
 /* 81340234 | 48 1F 19 D5 */	bl fn_81531C08
-/* 81340238 | 48 14 96 25 */	bl fn_8148985C
+/* 81340238 | 48 14 96 25 */	bl CDBUnmountSDForce
 /* 8134023C | 7C 64 1B 78 */	mr r4, r3
 /* 81340240 | 7F A3 EB 78 */	mr r3, r29
 /* 81340244 | 38 A0 03 E0 */	li r5, 0x3e0
@@ -1372,7 +1372,7 @@
 /* 813402A4 | 7F E3 FB 78 */	mr r3, r31
 /* 813402A8 | 48 1F 19 61 */	bl fn_81531C08
 /* 813402AC | 7F C3 F3 78 */	mr r3, r30
-/* 813402B0 | 48 14 CC 35 */	bl fn_8148CEE4
+/* 813402B0 | 48 14 CC 35 */	bl CDBRecordBackupToSD
 /* 813402B4 | 7C 64 1B 78 */	mr r4, r3
 /* 813402B8 | 7F A3 EB 78 */	mr r3, r29
 /* 813402BC | 38 A0 04 06 */	li r5, 0x406
@@ -1404,7 +1404,7 @@
 /* 81340310 | 48 1F 18 F9 */	bl fn_81531C08
 /* 81340314 | 7F C4 F3 78 */	mr r4, r30
 /* 81340318 | 38 7D 00 08 */	addi r3, r29, 0x8
-/* 8134031C | 48 14 9D E9 */	bl fn_8148A104
+/* 8134031C | 48 14 9D E9 */	bl CDBDatabaseCleanUpEmptyDirectories
 /* 81340320 | 7C 64 1B 78 */	mr r4, r3
 /* 81340324 | 7F A3 EB 78 */	mr r3, r29
 /* 81340328 | 38 A0 04 12 */	li r5, 0x412
@@ -1434,14 +1434,14 @@
 /* 81340374 | 7C 9D 23 78 */	mr r29, r4
 /* 81340378 | 7F E3 FB 78 */	mr r3, r31
 /* 8134037C | 48 1F 18 8D */	bl fn_81531C08
-/* 81340380 | 48 14 5D D5 */	bl fn_81486154
+/* 81340380 | 48 14 5D D5 */	bl CDBGetFreeSize
 /* 81340384 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81340388 | 90 7C 00 00 */	stw r3, 0x0(r28)
 /* 8134038C | 40 80 00 40 */	bge .L_813403CC
 /* 81340390 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
 /* 81340394 | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
 /* 81340398 | 83 C3 00 98 */	lwz r30, 0x98(r3)
-/* 8134039C | 48 14 F8 49 */	bl fn_8148FBE4
+/* 8134039C | 48 14 F8 49 */	bl CDBGetLastVFError
 /* 813403A0 | 3C C0 81 63 */	lis r6, lbl_81635118@ha
 /* 813403A4 | 7C 65 1B 78 */	mr r5, r3
 /* 813403A8 | 7F C3 F3 78 */	mr r3, r30
@@ -1493,7 +1493,7 @@
 /* 81340440 | 3B C0 00 01 */	li r30, 0x1
 /* 81340444 | 48 00 01 24 */	b .L_81340568
 .L_81340448:
-/* 81340448 | 48 14 F7 AD */	bl fn_8148FBF4
+/* 81340448 | 48 14 F7 AD */	bl CDBGetFatalVFErrorFlag
 /* 8134044C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81340450 | 41 82 01 18 */	beq .L_81340568
 /* 81340454 | 3F E0 81 09 */	lis r31, smArg__Q23ipl6System@ha
@@ -1532,7 +1532,7 @@
 /* 813404D4 | 48 01 60 41 */	bl set__Q23ipl12ErrorHandlerFQ33ipl12ErrorHandler4TypeUlPCcii
 /* 813404D8 | 48 00 00 90 */	b .L_81340568
 .L_813404DC:
-/* 813404DC | 48 14 F7 11 */	bl fn_8148FBEC
+/* 813404DC | 48 14 F7 11 */	bl CDBGetLastNANDError
 /* 813404E0 | 2C 03 FF FB */	cmpwi r3, -0x5
 /* 813404E4 | 41 82 00 44 */	beq .L_81340528
 /* 813404E8 | 40 80 00 10 */	bge .L_813404F8
