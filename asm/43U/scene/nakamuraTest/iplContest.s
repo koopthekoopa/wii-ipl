@@ -136,7 +136,7 @@
 /* 813D4808 | 38 63 50 C0 */	addi r3, r3, iplContest_813D50C0@l
 /* 813D480C | 38 A0 00 11 */	li r5, 0x11
 /* 813D4810 | 38 84 51 30 */	addi r4, r4, iplContest_813D5130@l
-/* 813D4814 | 48 0C 70 A5 */	bl fn_8149B8B8
+/* 813D4814 | 48 0C 70 A5 */	bl NHTTPStartup
 /* 813D4818 | 2C 03 FF FF */	cmpwi r3, -0x1
 /* 813D481C | 40 82 00 4C */	bne .L_813D4868
 /* 813D4820 | 80 1F 00 24 */	lwz r0, 0x24(r31)
@@ -176,7 +176,7 @@
 /* 813D489C | 38 E7 53 04 */	addi r7, r7, sNHTTPReqCallback@l
 /* 813D48A0 | 38 C0 04 00 */	li r6, 0x400
 /* 813D48A4 | 39 00 00 00 */	li r8, 0x0
-/* 813D48A8 | 48 0C 72 D9 */	bl fn_8149BB80
+/* 813D48A8 | 48 0C 72 D9 */	bl NHTTPCreateRequest
 /* 813D48AC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D48B0 | 90 7F 00 4C */	stw r3, 0x4c(r31)
 /* 813D48B4 | 40 82 00 4C */	bne .L_813D4900
@@ -203,7 +203,7 @@
 /* 813D4900 | 88 1F 00 54 */	lbz r0, 0x54(r31)
 /* 813D4904 | 28 00 00 01 */	cmplwi r0, 0x1
 /* 813D4908 | 40 82 00 58 */	bne .L_813D4960
-/* 813D490C | 48 0C 7A 15 */	bl fn_8149C320
+/* 813D490C | 48 0C 7A 15 */	bl NHTTPSetProxyDefault
 /* 813D4910 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D4914 | 41 82 00 4C */	beq .L_813D4960
 /* 813D4918 | 80 1F 00 24 */	lwz r0, 0x24(r31)
@@ -229,19 +229,19 @@
 /* 813D4960 | 3F A0 81 0B */	lis r29, g_session@ha
 /* 813D4964 | 3B BD 75 08 */	addi r29, r29, g_session@l
 /* 813D4968 | 80 7D 00 4C */	lwz r3, 0x4c(r29)
-/* 813D496C | 48 0C 7B 49 */	bl fn_8149C4B4
+/* 813D496C | 48 0C 7B 49 */	bl NHTTPSetClientCertDefault
 /* 813D4970 | 80 7D 00 4C */	lwz r3, 0x4c(r29)
-/* 813D4974 | 48 0C 7A E1 */	bl fn_8149C454
+/* 813D4974 | 48 0C 7A E1 */	bl NHTTPSetRootCADefault
 /* 813D4978 | 80 7D 00 4C */	lwz r3, 0x4c(r29)
 /* 813D497C | 38 80 00 00 */	li r4, 0x0
-/* 813D4980 | 48 0C 77 D5 */	bl fn_8149C154
+/* 813D4980 | 48 0C 77 D5 */	bl NHTTPSetVerifyOption
 /* 813D4984 | 80 7D 00 4C */	lwz r3, 0x4c(r29)
-/* 813D4988 | 48 0C 74 A5 */	bl fn_8149BE2C
+/* 813D4988 | 48 0C 74 A5 */	bl NHTTPSendRequestAsync
 /* 813D498C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D4990 | 90 7D 00 48 */	stw r3, 0x48(r29)
 /* 813D4994 | 40 80 00 54 */	bge .L_813D49E8
 /* 813D4998 | 80 7D 00 4C */	lwz r3, 0x4c(r29)
-/* 813D499C | 48 0C 72 C1 */	bl fn_8149BC5C
+/* 813D499C | 48 0C 72 C1 */	bl NHTTPDeleteRequest
 /* 813D49A0 | 80 1D 00 24 */	lwz r0, 0x24(r29)
 /* 813D49A4 | 38 A0 00 04 */	li r5, 0x4
 /* 813D49A8 | 80 DD 00 28 */	lwz r6, 0x28(r29)
@@ -274,7 +274,7 @@
 .L_813D4A0C:
 /* 813D4A0C | 38 61 00 08 */	addi r3, r1, 0x8
 /* 813D4A10 | 38 81 00 0C */	addi r4, r1, 0xc
-/* 813D4A14 | 48 0C 74 B5 */	bl fn_8149BEC8
+/* 813D4A14 | 48 0C 74 B5 */	bl NHTTPGetProgress
 /* 813D4A18 | 80 81 00 08 */	lwz r4, 0x8(r1)
 /* 813D4A1C | 38 7E 00 E3 */	addi r3, r30, 0xe3
 /* 813D4A20 | 80 A1 00 0C */	lwz r5, 0xc(r1)
@@ -309,7 +309,7 @@
 /* 813D4A94 | 80 7F 00 48 */	lwz r3, 0x48(r31)
 /* 813D4A98 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D4A9C | 41 80 03 8C */	blt .L_813D4E28
-/* 813D4AA0 | 48 0C 73 E9 */	bl fn_8149BE88
+/* 813D4AA0 | 48 0C 73 E9 */	bl NHTTPCancelRequestAsync
 /* 813D4AA4 | 38 7E 00 F3 */	addi r3, r30, 0xf3
 /* 813D4AA8 | 4C C6 31 82 */	crclr cr1eq
 /* 813D4AAC | 48 15 9B F5 */	bl OSReport
@@ -323,7 +323,7 @@
 /* 813D4AC8 | 80 7F 00 50 */	lwz r3, 0x50(r31)
 /* 813D4ACC | 38 9E 01 0B */	addi r4, r30, 0x10b
 /* 813D4AD0 | 38 A1 00 10 */	addi r5, r1, 0x10
-/* 813D4AD4 | 48 0C 74 C9 */	bl fn_8149BF9C
+/* 813D4AD4 | 48 0C 74 C9 */	bl NHTTPGetHeaderField
 /* 813D4AD8 | 7C 03 E8 40 */	cmplw r3, r29
 /* 813D4ADC | 40 82 00 80 */	bne .L_813D4B5C
 /* 813D4AE0 | 80 81 00 10 */	lwz r4, 0x10(r1)
@@ -334,7 +334,7 @@
 /* 813D4AF4 | 80 7F 00 50 */	lwz r3, 0x50(r31)
 /* 813D4AF8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D4AFC | 41 82 00 10 */	beq .L_813D4B0C
-/* 813D4B00 | 48 0C 74 19 */	bl fn_8149BF18
+/* 813D4B00 | 48 0C 74 19 */	bl NHTTPDestroyResponse
 /* 813D4B04 | 38 00 00 00 */	li r0, 0x0
 /* 813D4B08 | 90 1F 00 50 */	stw r0, 0x50(r31)
 .L_813D4B0C:
@@ -354,7 +354,7 @@
 /* 813D4B3C | 38 00 00 05 */	li r0, 0x5
 /* 813D4B40 | 90 04 00 2C */	stw r0, 0x2c(r4)
 /* 813D4B44 | 38 63 54 E4 */	addi r3, r3, sNHTTPCleanupCallback@l
-/* 813D4B48 | 48 0C 6D FD */	bl fn_8149B944
+/* 813D4B48 | 48 0C 6D FD */	bl NHTTPCleanupAsync
 /* 813D4B4C | 38 7E 01 23 */	addi r3, r30, 0x123
 /* 813D4B50 | 4C C6 31 82 */	crclr cr1eq
 /* 813D4B54 | 48 15 9B 4D */	bl OSReport
@@ -385,7 +385,7 @@
 /* 813D4BAC | 80 7F 00 50 */	lwz r3, 0x50(r31)
 /* 813D4BB0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D4BB4 | 41 82 00 10 */	beq .L_813D4BC4
-/* 813D4BB8 | 48 0C 73 61 */	bl fn_8149BF18
+/* 813D4BB8 | 48 0C 73 61 */	bl NHTTPDestroyResponse
 /* 813D4BBC | 38 00 00 00 */	li r0, 0x0
 /* 813D4BC0 | 90 1F 00 50 */	stw r0, 0x50(r31)
 .L_813D4BC4:
@@ -405,7 +405,7 @@
 /* 813D4BF4 | 38 00 00 05 */	li r0, 0x5
 /* 813D4BF8 | 90 04 00 2C */	stw r0, 0x2c(r4)
 /* 813D4BFC | 38 63 54 E4 */	addi r3, r3, sNHTTPCleanupCallback@l
-/* 813D4C00 | 48 0C 6D 45 */	bl fn_8149B944
+/* 813D4C00 | 48 0C 6D 45 */	bl NHTTPCleanupAsync
 /* 813D4C04 | 38 7E 01 64 */	addi r3, r30, 0x164
 /* 813D4C08 | 4C C6 31 82 */	crclr cr1eq
 /* 813D4C0C | 48 15 9A 95 */	bl OSReport
@@ -947,7 +947,7 @@
 /* 813D5320 | 90 9F 00 50 */	stw r4, 0x50(r31)
 /* 813D5324 | 40 82 00 B0 */	bne .L_813D53D4
 /* 813D5328 | 7C 83 23 78 */	mr r3, r4
-/* 813D532C | 48 0C 6D C9 */	bl fn_8149C0F4
+/* 813D532C | 48 0C 6D C9 */	bl NHTTPGetResultCode
 /* 813D5330 | 2C 03 01 97 */	cmpwi r3, 0x197
 /* 813D5334 | 41 82 00 20 */	beq .L_813D5354
 /* 813D5338 | 40 80 00 58 */	bge .L_813D5390
@@ -1062,7 +1062,7 @@
 /* 813D54AC | 80 03 00 24 */	lwz r0, 0x24(r3)
 /* 813D54B0 | 60 00 00 04 */	ori r0, r0, 0x4
 /* 813D54B4 | 90 03 00 24 */	stw r0, 0x24(r3)
-/* 813D54B8 | 48 0C 64 C1 */	bl fn_8149B978
+/* 813D54B8 | 48 0C 64 C1 */	bl NHTTPGetError
 /* 813D54BC | 3C A0 81 65 */	lis r5, lbl_816537E6@ha
 /* 813D54C0 | 7C 64 1B 78 */	mr r4, r3
 /* 813D54C4 | 38 65 37 E6 */	addi r3, r5, lbl_816537E6@l

@@ -844,13 +844,13 @@
 /* 81441A40 | 48 1B 7A 59 */	bl _savegpr_17
 /* 81441A44 | 3E 60 81 66 */	lis r19, __vt__Q39textinput11nw4rmanager7AnmPane@ha
 /* 81441A48 | 3E A0 81 67 */	lis r21, __vt__Q49textinput6extend4memo9WholePane@ha
-/* 81441A4C | 3F E0 81 61 */	lis r31, lbl_81616548@ha
+/* 81441A4C | 3F E0 81 61 */	lis r31, csPaneToAnimation__Q39textinput6extend4memo@ha
 /* 81441A50 | 3E C0 81 67 */	lis r22, __vt__Q49textinput6extend4memo10NigaoePane@ha
 /* 81441A54 | 7C 79 1B 78 */	mr r25, r3
 /* 81441A58 | 7C 9A 23 78 */	mr r26, r4
 /* 81441A5C | 3A 73 F8 C8 */	addi r19, r19, __vt__Q39textinput11nw4rmanager7AnmPane@l
 /* 81441A60 | 3A B5 84 FC */	addi r21, r21, __vt__Q49textinput6extend4memo9WholePane@l
-/* 81441A64 | 3B FF 65 48 */	addi r31, r31, lbl_81616548@l
+/* 81441A64 | 3B FF 65 48 */	addi r31, r31, csPaneToAnimation__Q39textinput6extend4memo@l
 /* 81441A68 | 3A D6 84 D0 */	addi r22, r22, __vt__Q49textinput6extend4memo10NigaoePane@l
 /* 81441A6C | 3B C0 00 00 */	li r30, 0x0
 /* 81441A70 | 3A 80 00 00 */	li r20, 0x0
@@ -1006,18 +1006,18 @@
 /* 81441C84 | 39 61 00 50 */	addi r11, r1, 0x50
 /* 81441C88 | 48 1B 78 09 */	bl _savegpr_15
 /* 81441C8C | 7C 72 1B 78 */	mr r18, r3
-/* 81441C90 | 3F 60 81 67 */	lis r27, lbl_81668398@ha
-/* 81441C94 | 3F 20 81 61 */	lis r25, lbl_81616828@ha
-/* 81441C98 | 3D E0 81 61 */	lis r15, lbl_816165C0@ha
+/* 81441C90 | 3F 60 81 67 */	lis r27, csGroupName__Q39textinput6extend4memo@ha
+/* 81441C94 | 3F 20 81 61 */	lis r25, csGroupToAnimation__Q39textinput6extend4memo@ha
+/* 81441C98 | 3D E0 81 61 */	lis r15, csGroupAninationFile__Q39textinput6extend4memo@ha
 /* 81441C9C | 3F A0 81 66 */	lis r29, __vt__Q39textinput11nw4rmanager7AnmPane@ha
 /* 81441CA0 | 3F E0 81 67 */	lis r31, __vt__Q49textinput6extend4memo13SimpleAnmPane@ha
 /* 81441CA4 | 3F 80 81 66 */	lis r28, __vt__Q39textinput11nw4rmanager13AnimPaneGroup@ha
 /* 81441CA8 | 7C 93 23 78 */	mr r19, r4
 /* 81441CAC | 7C B4 2B 78 */	mr r20, r5
 /* 81441CB0 | 7E 5A 93 78 */	mr r26, r18
-/* 81441CB4 | 3B 7B 83 98 */	addi r27, r27, lbl_81668398@l
-/* 81441CB8 | 3B 39 68 28 */	addi r25, r25, lbl_81616828@l
-/* 81441CBC | 39 EF 65 C0 */	addi r15, r15, lbl_816165C0@l
+/* 81441CB4 | 3B 7B 83 98 */	addi r27, r27, csGroupName__Q39textinput6extend4memo@l
+/* 81441CB8 | 3B 39 68 28 */	addi r25, r25, csGroupToAnimation__Q39textinput6extend4memo@l
+/* 81441CBC | 39 EF 65 C0 */	addi r15, r15, csGroupAninationFile__Q39textinput6extend4memo@l
 /* 81441CC0 | 3B BD F8 C8 */	addi r29, r29, __vt__Q39textinput11nw4rmanager7AnmPane@l
 /* 81441CC4 | 3B FF 84 94 */	addi r31, r31, __vt__Q49textinput6extend4memo13SimpleAnmPane@l
 /* 81441CC8 | 3B 9C F8 AC */	addi r28, r28, __vt__Q39textinput11nw4rmanager13AnimPaneGroup@l
@@ -2958,12 +2958,12 @@
 .fn drawHeader__Q49textinput6extend4memo9InputFormFv, global
 /* 81443818 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144381C | 7C 08 02 A6 */	mflr r0
-/* 81443820 | 3C 80 81 67 */	lis r4, lbl_8166825C@ha
+/* 81443820 | 3C 80 81 67 */	lis r4, scPaneName__Q39textinput6extend4memo@ha
 /* 81443824 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 81443828 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8144382C | 7C 7F 1B 78 */	mr r31, r3
 /* 81443830 | 81 83 02 18 */	lwz r12, 0x218(r3)
-/* 81443834 | 80 84 82 5C */	lwz r4, lbl_8166825C@l(r4)
+/* 81443834 | 80 84 82 5C */	lwz r4, scPaneName__Q39textinput6extend4memo@l(r4)
 /* 81443838 | 81 8C 00 2C */	lwz r12, 0x2c(r12)
 /* 8144383C | 7D 89 03 A6 */	mtctr r12
 /* 81443840 | 38 63 02 18 */	addi r3, r3, 0x218
@@ -3013,8 +3013,8 @@
 /* 814438DC | F3 E1 00 48 */	psq_st f31, 0x48(r1), 0, qr0
 /* 814438E0 | DB C1 00 30 */	stfd f30, 0x30(r1)
 /* 814438E4 | F3 C1 00 38 */	psq_st f30, 0x38(r1), 0, qr0
-/* 814438E8 | 3C 80 81 67 */	lis r4, lbl_8166825C@ha
-/* 814438EC | 38 84 82 5C */	addi r4, r4, lbl_8166825C@l
+/* 814438E8 | 3C 80 81 67 */	lis r4, scPaneName__Q39textinput6extend4memo@ha
+/* 814438EC | 38 84 82 5C */	addi r4, r4, scPaneName__Q39textinput6extend4memo@l
 /* 814438F0 | 93 E1 00 2C */	stw r31, 0x2c(r1)
 /* 814438F4 | 93 C1 00 28 */	stw r30, 0x28(r1)
 /* 814438F8 | 93 A1 00 24 */	stw r29, 0x24(r1)
@@ -3097,8 +3097,8 @@
 /* 81443A0C | DB E1 00 30 */	stfd f31, 0x30(r1)
 /* 81443A10 | F3 E1 00 38 */	psq_st f31, 0x38(r1), 0, qr0
 /* 81443A14 | 93 E1 00 2C */	stw r31, 0x2c(r1)
-/* 81443A18 | 3F E0 81 67 */	lis r31, lbl_8166825C@ha
-/* 81443A1C | 3B FF 82 5C */	addi r31, r31, lbl_8166825C@l
+/* 81443A18 | 3F E0 81 67 */	lis r31, scPaneName__Q39textinput6extend4memo@ha
+/* 81443A1C | 3B FF 82 5C */	addi r31, r31, scPaneName__Q39textinput6extend4memo@l
 /* 81443A20 | 93 C1 00 28 */	stw r30, 0x28(r1)
 /* 81443A24 | 7C 7E 1B 78 */	mr r30, r3
 /* 81443A28 | 81 83 02 18 */	lwz r12, 0x218(r3)
@@ -4217,8 +4217,9 @@
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x816163B0 | size: 0x44
-.obj lbl_816163B0, global
+# .rodata:0x0 | 0x816163B0 | size: 0x198
+# textinput::extend::memo::csAninationFile
+.obj csAninationFile__Q39textinput6extend4memo, local
 	.4byte 0x00000000
 	.4byte 0x6D795F4D
 	.4byte 0x656D6F5F
@@ -4236,10 +4237,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816163B0
-
-# .rodata:0x44 | 0x816163F4 | size: 0x44
-.obj lbl_816163F4, global
+.L_816163F4:
 	.4byte 0x00000001
 	.4byte 0x6D795F4D
 	.4byte 0x656D6F5F
@@ -4257,10 +4255,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816163F4
-
-# .rodata:0x88 | 0x81616438 | size: 0x44
-.obj lbl_81616438, global
+.L_81616438:
 	.4byte 0x00000002
 	.4byte 0x6D795F4D
 	.4byte 0x656D6F5F
@@ -4278,10 +4273,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81616438
-
-# .rodata:0xCC | 0x8161647C | size: 0x44
-.obj lbl_8161647C, global
+.L_8161647C:
 	.4byte 0x00000003
 	.4byte 0x6D795F4D
 	.4byte 0x656D6F5F
@@ -4299,10 +4291,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8161647C
-
-# .rodata:0x110 | 0x816164C0 | size: 0x44
-.obj lbl_816164C0, global
+.L_816164C0:
 	.4byte 0x00000004
 	.4byte 0x6D795F4D
 	.4byte 0x656D6F5F
@@ -4320,10 +4309,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816164C0
-
-# .rodata:0x154 | 0x81616504 | size: 0x44
-.obj lbl_81616504, global
+.L_81616504:
 	.4byte 0x00000005
 	.4byte 0x6D795F4D
 	.4byte 0x656D6F5F
@@ -4341,17 +4327,18 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81616504
+.endobj csAninationFile__Q39textinput6extend4memo
 
 # .rodata:0x198 | 0x81616548 | size: 0x78
-.obj lbl_81616548, global
+# textinput::extend::memo::csPaneToAnimation
+.obj csPaneToAnimation__Q39textinput6extend4memo, local
 	.4byte 0x00000000
 	.4byte lbl_816974F8
 	.4byte 0x00000004
-	.4byte lbl_816163B0
-	.4byte lbl_816163F4
-	.4byte lbl_81616438
-	.4byte lbl_8161647C
+	.4byte csAninationFile__Q39textinput6extend4memo
+	.rel csAninationFile__Q39textinput6extend4memo, .L_816163F4
+	.rel csAninationFile__Q39textinput6extend4memo, .L_81616438
+	.rel csAninationFile__Q39textinput6extend4memo, .L_8161647C
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -4363,8 +4350,8 @@
 	.4byte 0x00000001
 	.4byte lbl_816974F0
 	.4byte 0x00000002
-	.4byte lbl_816164C0
-	.4byte lbl_81616504
+	.rel csAninationFile__Q39textinput6extend4memo, .L_816164C0
+	.rel csAninationFile__Q39textinput6extend4memo, .L_81616504
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -4375,10 +4362,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81616548
+.endobj csPaneToAnimation__Q39textinput6extend4memo
 
 # .rodata:0x210 | 0x816165C0 | size: 0x268
-.obj lbl_816165C0, global
+# textinput::extend::memo::csGroupAninationFile
+.obj csGroupAninationFile__Q39textinput6extend4memo, local
 	.4byte 0x00000000
 	.4byte 0x6D795F4D
 	.4byte 0x656D6F5F
@@ -4533,10 +4521,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816165C0
+.endobj csGroupAninationFile__Q39textinput6extend4memo
 
 # .rodata:0x478 | 0x81616828 | size: 0x90
-.obj lbl_81616828, global
+# textinput::extend::memo::csGroupToAnimation
+.obj csGroupToAnimation__Q39textinput6extend4memo, local
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000009
@@ -4573,7 +4562,7 @@
 	.4byte 0x00000004
 	.4byte 0x00000003
 	.4byte 0x00000009
-.endobj lbl_81616828
+.endobj csGroupToAnimation__Q39textinput6extend4memo
 
 # 0x81668210..0x81668860 | size: 0x650
 .data
@@ -4623,7 +4612,8 @@
 .endobj lbl_8166824C
 
 # .data:0x4C | 0x8166825C | size: 0x24
-.obj lbl_8166825C, global
+# textinput::extend::memo::scPaneName
+.obj scPaneName__Q39textinput6extend4memo, local
 	.4byte lbl_81668210
 	.4byte lbl_816974E0
 	.4byte lbl_816974E8
@@ -4633,7 +4623,7 @@
 	.4byte lbl_81668234
 	.4byte lbl_81668240
 	.4byte lbl_8166824C
-.endobj lbl_8166825C
+.endobj scPaneName__Q39textinput6extend4memo
 
 # .data:0x70 | 0x81668280 | size: 0x68
 .obj jumptable_81668280, local
@@ -4747,7 +4737,8 @@
 .endobj lbl_8166838C
 
 # .data:0x188 | 0x81668398 | size: 0x24
-.obj lbl_81668398, global
+# textinput::extend::memo::csGroupName
+.obj csGroupName__Q39textinput6extend4memo, local
 	.4byte lbl_81668324
 	.4byte lbl_81668330
 	.4byte lbl_81668340
@@ -4757,7 +4748,7 @@
 	.4byte lbl_81668374
 	.4byte lbl_81668380
 	.4byte lbl_8166838C
-.endobj lbl_81668398
+.endobj csGroupName__Q39textinput6extend4memo
 
 # .data:0x1AC | 0x816683BC | size: 0x24
 .obj jumptable_816683BC, local

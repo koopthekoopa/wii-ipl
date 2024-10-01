@@ -93,7 +93,7 @@
 /* 81494034 | 80 03 00 54 */	lwz r0, 0x54(r3)
 /* 81494038 | 7C 7E 1B 78 */	mr r30, r3
 /* 8149403C | 54 A6 48 2C */	slwi r6, r5, 9
-/* 81494040 | 38 82 8C 38 */	li r4, lbl_81695038@sda21
+/* 81494040 | 38 82 8C 38 */	li r4, padlead$2309@sda21
 /* 81494044 | 54 00 18 38 */	slwi r0, r0, 3
 /* 81494048 | 38 A0 00 01 */	li r5, 0x1
 /* 8149404C | 7C 06 02 14 */	add r0, r6, r0
@@ -110,7 +110,7 @@
 /* 81494078 | 28 05 00 08 */	cmplwi r5, 0x8
 /* 8149407C | 40 80 00 10 */	bge .L_8149408C
 /* 81494080 | 7F C3 F3 78 */	mr r3, r30
-/* 81494084 | 38 82 9B F0 */	li r4, lbl_81695FF0@sda21
+/* 81494084 | 38 82 9B F0 */	li r4, padalign$2310@sda21
 /* 81494088 | 4B FF FE DD */	bl NETSHA1Update
 .L_8149408C:
 /* 8149408C | 80 1E 00 54 */	lwz r0, 0x54(r30)
@@ -166,8 +166,8 @@
 
 # .text:0x230 | 0x81494144 | size: 0xC
 .fn NETGetSHA1Interface, global
-/* 81494144 | 3C 60 81 62 */	lis r3, lbl_816181F0@ha
-/* 81494148 | 38 63 81 F0 */	addi r3, r3, lbl_816181F0@l
+/* 81494144 | 3C 60 81 62 */	lis r3, sha1template$2339@ha
+/* 81494148 | 38 63 81 F0 */	addi r3, r3, sha1template$2339@l
 /* 8149414C | 4E 80 00 20 */	blr
 .endfn NETGetSHA1Interface
 
@@ -422,7 +422,7 @@
 .balign 8
 
 # .rodata:0x0 | 0x816181F0 | size: 0x20
-.obj lbl_816181F0, global
+.obj sha1template$2339, local
 	.4byte 0x00000014
 	.4byte 0x00000040
 	.4byte 0x00000060
@@ -431,23 +431,29 @@
 	.4byte NETSHA1Update
 	.4byte NETSHA1GetDigest
 	.4byte 0x00000000
-.endobj lbl_816181F0
+.endobj sha1template$2339
 
 # 0x81695038..0x81695040 | size: 0x8
 .section .sdata2, "a"
 .balign 8
 
-# .sdata2:0x0 | 0x81695038 | size: 0x8
-.obj lbl_81695038, global
-	.4byte 0x80000000
+# .sdata2:0x0 | 0x81695038 | size: 0x1
+.obj padlead$2309, local
+	.byte 0x80
+.endobj padlead$2309
+
+# .sdata2:0x1 | 0x81695039 | size: 0x7
+.obj gap_09_81695039_sdata2, global
+.hidden gap_09_81695039_sdata2
 	.4byte 0x00000000
-.endobj lbl_81695038
+	.byte 0x00, 0x00, 0x00
+.endobj gap_09_81695039_sdata2
 
 # 0x81695FF0..0x81695FF8 | size: 0x8
 .section .sbss2, "a", @nobits
 .balign 8
 
 # .sbss2:0x0 | 0x81695FF0 | size: 0x8
-.obj lbl_81695FF0, global
+.obj padalign$2310, local
 	.skip 0x8
-.endobj lbl_81695FF0
+.endobj padalign$2310

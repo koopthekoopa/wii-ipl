@@ -4020,6 +4020,7 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698B60 | size: 0x8
-.obj lbl_81698B60, global
+# ipl::scene::clock::m_already_shown_wii_menu
+.obj m_already_shown_wii_menu__Q33ipl5scene5clock, global
 	.skip 0x8
-.endobj lbl_81698B60
+.endobj m_already_shown_wii_menu__Q33ipl5scene5clock

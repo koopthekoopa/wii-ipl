@@ -98,7 +98,7 @@
 .L_813D8E9C:
 /* 813D8E9C | 3C 60 00 01 */	lis r3, 0x1
 /* 813D8EA0 | 38 63 AF C8 */	subi r3, r3, 0x5038
-/* 813D8EA4 | 48 0D 93 65 */	bl fn_814B2208
+/* 813D8EA4 | 48 0D 93 65 */	bl SOStartupEx
 /* 813D8EA8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D8EAC | 7C 7C 1B 78 */	mr r28, r3
 /* 813D8EB0 | 40 80 00 44 */	bge .L_813D8EF4
@@ -119,7 +119,7 @@
 /* 813D8EEC | 90 1E 83 E0 */	stw r0, sSOStartupInfo__Q33ipl5scene8NetSetup@l(r30)
 /* 813D8EF0 | 48 00 00 34 */	b .L_813D8F24
 .L_813D8EF4:
-/* 813D8EF4 | 48 0D B1 71 */	bl SOGetSockOpt
+/* 813D8EF4 | 48 0D B1 71 */	bl SOGetHostID
 /* 813D8EF8 | 90 61 00 08 */	stw r3, 0x8(r1)
 /* 813D8EFC | 38 61 00 08 */	addi r3, r1, 0x8
 /* 813D8F00 | 48 0D AA D5 */	bl SOInetNtoA
@@ -237,10 +237,10 @@
 /* 813D903C | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813D9040 | 7C BE 2B 78 */	mr r30, r5
 /* 813D9044 | 38 A0 00 00 */	li r5, 0x0
-/* 813D9048 | 90 8D AB 98 */	stw r4, lbl_81698BD8@sda21(r0)
+/* 813D9048 | 90 8D AB 98 */	stw r4, sHeapBuf__Q33ipl5scene8NetSetup@sda21(r0)
 /* 813D904C | 3C 80 00 01 */	lis r4, 0x1
 /* 813D9050 | 48 18 16 25 */	bl fn_8155A674
-/* 813D9054 | 90 6D AB 9C */	stw r3, lbl_81698BDC@sda21(r0)
+/* 813D9054 | 90 6D AB 9C */	stw r3, sHeap__Q33ipl5scene8NetSetup@sda21(r0)
 /* 813D9058 | 3C 60 81 0C */	lis r3, sAllocLock__Q33ipl5scene8NetSetup@ha
 /* 813D905C | 38 63 83 C8 */	addi r3, r3, sAllocLock__Q33ipl5scene8NetSetup@l
 /* 813D9060 | 48 15 8B 71 */	bl fn_81531BD0
@@ -467,7 +467,7 @@
 /* 813D9388 | 38 84 95 64 */	addi r4, r4, freefunc__Q33ipl5scene8NetSetupFUlPvl@l
 /* 813D938C | 90 A1 00 08 */	stw r5, 0x8(r1)
 /* 813D9390 | 90 81 00 0C */	stw r4, 0xc(r1)
-/* 813D9394 | 48 0D 8B A5 */	bl fn_814B1F38
+/* 813D9394 | 48 0D 8B A5 */	bl SOInit
 /* 813D9398 | 38 60 40 00 */	li r3, 0x4000
 /* 813D939C | 38 80 00 20 */	li r4, 0x20
 /* 813D93A0 | 48 00 01 5D */	bl allocfunc__Q33ipl5scene8NetSetupFUll
@@ -521,7 +521,7 @@
 /* 813D9458 | 3F C0 81 0C */	lis r30, sAllocLock__Q33ipl5scene8NetSetup@ha
 /* 813D945C | 38 7E 83 C8 */	addi r3, r30, sAllocLock__Q33ipl5scene8NetSetup@l
 /* 813D9460 | 48 15 87 A9 */	bl fn_81531C08
-/* 813D9464 | 80 6D AB 9C */	lwz r3, lbl_81698BDC@sda21(r0)
+/* 813D9464 | 80 6D AB 9C */	lwz r3, sHeap__Q33ipl5scene8NetSetup@sda21(r0)
 /* 813D9468 | 7F A4 EB 78 */	mr r4, r29
 /* 813D946C | 48 18 15 99 */	bl fn_8155AA04
 /* 813D9470 | 38 7E 83 C8 */	addi r3, r30, sAllocLock__Q33ipl5scene8NetSetup@l
@@ -550,8 +550,8 @@
 /* 813D94AC | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813D94B0 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813D94B4 | 7C 7F 1B 78 */	mr r31, r3
-/* 813D94B8 | 48 0D 91 79 */	bl fn_814B2630
-/* 813D94BC | 48 0D 8C 45 */	bl fn_814B2100
+/* 813D94B8 | 48 0D 91 79 */	bl SOCleanup
+/* 813D94BC | 48 0D 8C 45 */	bl SOFinish
 /* 813D94C0 | 38 7F 1B 68 */	addi r3, r31, 0x1b68
 /* 813D94C4 | 38 80 00 00 */	li r4, 0x0
 /* 813D94C8 | 38 A0 01 5E */	li r5, 0x15e
@@ -560,7 +560,7 @@
 /* 813D94D4 | 38 7F 1B 68 */	addi r3, r31, 0x1b68
 /* 813D94D8 | 98 1F 1B 68 */	stb r0, 0x1b68(r31)
 /* 813D94DC | 48 0B 8F 71 */	bl NCDSetIfConfig
-/* 813D94E0 | 80 6D AB 9C */	lwz r3, lbl_81698BDC@sda21(r0)
+/* 813D94E0 | 80 6D AB 9C */	lwz r3, sHeap__Q33ipl5scene8NetSetup@sda21(r0)
 /* 813D94E4 | 48 18 12 41 */	bl fn_8155A724
 /* 813D94E8 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813D94EC | 83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -584,7 +584,7 @@
 /* 813D9520 | 3F E0 81 0C */	lis r31, sAllocLock__Q33ipl5scene8NetSetup@ha
 /* 813D9524 | 38 7F 83 C8 */	addi r3, r31, sAllocLock__Q33ipl5scene8NetSetup@l
 /* 813D9528 | 48 15 86 E1 */	bl fn_81531C08
-/* 813D952C | 80 6D AB 9C */	lwz r3, lbl_81698BDC@sda21(r0)
+/* 813D952C | 80 6D AB 9C */	lwz r3, sHeap__Q33ipl5scene8NetSetup@sda21(r0)
 /* 813D9530 | 7F A4 EB 78 */	mr r4, r29
 /* 813D9534 | 38 A0 00 20 */	li r5, 0x20
 /* 813D9538 | 48 18 12 1D */	bl fn_8155A754
@@ -615,7 +615,7 @@
 /* 813D9584 | 3F E0 81 0C */	lis r31, sAllocLock__Q33ipl5scene8NetSetup@ha
 /* 813D9588 | 38 7F 83 C8 */	addi r3, r31, sAllocLock__Q33ipl5scene8NetSetup@l
 /* 813D958C | 48 15 86 7D */	bl fn_81531C08
-/* 813D9590 | 80 6D AB 9C */	lwz r3, lbl_81698BDC@sda21(r0)
+/* 813D9590 | 80 6D AB 9C */	lwz r3, sHeap__Q33ipl5scene8NetSetup@sda21(r0)
 /* 813D9594 | 7F C4 F3 78 */	mr r4, r30
 /* 813D9598 | 48 18 14 6D */	bl fn_8155AA04
 /* 813D959C | 38 7F 83 C8 */	addi r3, r31, sAllocLock__Q33ipl5scene8NetSetup@l
@@ -697,11 +697,13 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698BD8 | size: 0x4
-.obj lbl_81698BD8, global
+# ipl::scene::NetSetup::sHeapBuf
+.obj sHeapBuf__Q33ipl5scene8NetSetup, global
 	.skip 0x4
-.endobj lbl_81698BD8
+.endobj sHeapBuf__Q33ipl5scene8NetSetup
 
 # .sbss:0x4 | 0x81698BDC | size: 0x4
-.obj lbl_81698BDC, global
+# ipl::scene::NetSetup::sHeap
+.obj sHeap__Q33ipl5scene8NetSetup, global
 	.skip 0x4
-.endobj lbl_81698BDC
+.endobj sHeap__Q33ipl5scene8NetSetup

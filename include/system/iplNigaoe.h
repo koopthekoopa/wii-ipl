@@ -15,30 +15,32 @@ namespace ipl {
             typedef void (*MakeIconCallback)(Object*, void*);
 
             public:
-                Object(EGG::Heap* pHeap, int width, int height, int faceId, MakeIconCallback callback, void* pArg3);
-                Object(EGG::Heap* pHeap, int width, int height, RFLiCharData* pCharData, MakeIconCallback callback, void* pArg3);
+                Object(EGG::Heap* pHeap, int width, int height, int faceId, MakeIconCallback callback, void* callBackWork);
+                Object(EGG::Heap* pHeap, int width, int height, RFLiCharData* pCharData, MakeIconCallback callback, void* callBackWork);
                 ~Object();
             
             private:
                 void    init(EGG::Heap* pHeap, int width, int height);
                 void    make_icon();
+
+                BOOL    created() { return mCreated; }
                 
-                u8*                 mpIconTex;      // 0x00
-                size_t              mIconSize;      // 0x04
+                u8*                 mpIconTex;          // 0x00
+                u32                 mIconSize;          // 0x04
                 
-                RFLIconSetting      mIconSettings;  // 0x08
+                RFLIconSetting      mIconSettings;      // 0x08
                 
-                GXTexObj            mFaceTexObj;    // 0x18
+                GXTexObj            mFaceTexObj;        // 0x18
                 
-                RFLiCharData*       mpCharData;     // 0x38
-                u32                 mFaceId;        // 0x3c
+                RFLiCharData*       mpCharData;         // 0x38
+                u32                 mFaceId;            // 0x3C
                 
-                MakeIconCallback    mCallBack;      // 0x40
+                MakeIconCallback    mCallBack;          // 0x40
                 
-                void*               unk_0x44;
-                undefined4          unused_0x48;
-                undefined4          unused_0x4c;
-                u8                  unk_0x50;
+                void*               mpCallBackWork;     // 0x44
+                undefined4          unk_0x48;
+                undefined4          unk_0x4C;
+                bool                mCreated;           // 0x50
         };
     }
 }

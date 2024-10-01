@@ -201,6 +201,8 @@ namespace ipl {
          * @note Address: 0x813BD840
          * @note Size: 0x21C
          */
+        // loading `getCountryIndex_()` to `country` for some reason is stored in `r29` and not `r26`
+        // https://decomp.me/scratch/55mS2
         void skHealth::create() {
             nw4r::lyt::Pane* pHasPane;
             nw4r::lyt::Pane* pPushPane;
@@ -217,7 +219,7 @@ namespace ipl {
                 pPushPane->SetVisible(false);
             }
 
-            country = getCountryIndex_(); // this should be stored in `r26` instead of `r29`
+            country = getCountryIndex_();
 
             // Make the necessary panes visible
             mpHasPane   = mpLayout->GetRootPane()->FindPaneByName(has_pane_name[country]);
@@ -292,8 +294,12 @@ namespace ipl {
             }
 
             if (finish_safe_mode_check()) {
-                if (System::getMasterController()->downTrg(0x500C00) || mWpadMask != newWpadMask || OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) > 60000 || mbDoneSafeMode) {
-                    if (mWpadMask != newWpadMask && !utility::wpad::isIncreaseConnectedWpad(mWpadMask, newWpadMask)) {
+                if (System::getMasterController()->downTrg(0x500C00)
+                || mWpadMask != newWpadMask
+                || OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) > 60000
+                || mbDoneSafeMode) {
+                    if (mWpadMask != newWpadMask
+                    && !utility::wpad::isIncreaseConnectedWpad(mWpadMask, newWpadMask)) {
                         mWpadMask = newWpadMask;
                     }
                     else {
@@ -327,7 +333,9 @@ namespace ipl {
                 System::getGlobalFader()->fadeOut();
             }
 
-            if (System::unkBool() || (System::hasCreatedAfter() && System::isNandFull()) || System::isSafeMode()) {
+            if (System::unkBool()
+            || (System::hasCreatedAfter() && System::isNandFull())
+            || System::isSafeMode()) {
                 if (System::getGlobalFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
                     System::getPointer()->setVisible(true);
                     System::getReset()->enableResetToMenu(TRUE);
@@ -360,13 +368,13 @@ namespace ipl {
          */
         void skHealth::check_safe_mode() {
             if (!mbHeldCombo) {
-                if (System::getMasterController()->down(WPAD_BUTTON_PLUS) && System::getMasterController()->down(WPAD_BUTTON_MINUS)) {
+                if (System::getMasterController()->down(KPAD_BUTTON_PLUS) && System::getMasterController()->down(KPAD_BUTTON_MINUS)) {
                     mSafeModeTick = OSGetTick();
                     mbHeldCombo = true;
                 }
             }
             else {
-                if (!System::getMasterController()->down(WPAD_BUTTON_PLUS) || !System::getMasterController()->down(WPAD_BUTTON_MINUS)) {
+                if (!System::getMasterController()->down(KPAD_BUTTON_PLUS) || !System::getMasterController()->down(KPAD_BUTTON_MINUS)) {
                     mSafeModeTick = 0;
                     mbHeldCombo = false;
                 }
@@ -386,7 +394,7 @@ namespace ipl {
         BOOL skHealth::finish_safe_mode_check() const {
             BOOL result = FALSE;
 
-            if ((!System::getMasterController()->down(WPAD_BUTTON_PLUS) && !System::getMasterController()->down(WPAD_BUTTON_MINUS))
+            if ((!System::getMasterController()->down(KPAD_BUTTON_PLUS) && !System::getMasterController()->down(KPAD_BUTTON_MINUS))
             || mbDoneSafeMode) {
                 result = TRUE;
             }

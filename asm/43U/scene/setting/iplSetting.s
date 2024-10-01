@@ -157,7 +157,7 @@
 /* 813F0960 | 38 64 6B B8 */	addi r3, r4, lbl_81656BB8@l
 /* 813F0964 | 4C C6 31 82 */	crclr cr1eq
 /* 813F0968 | 48 13 DD 39 */	bl OSReport
-/* 813F096C | 83 ED AB A0 */	lwz r31, lbl_81698BE0@sda21(r0)
+/* 813F096C | 83 ED AB A0 */	lwz r31, mem1Buffer___Q33ipl5scene7Setting@sda21(r0)
 /* 813F0970 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 813F0974 | 41 82 00 24 */	beq .L_813F0998
 /* 813F0978 | 4B F4 24 BD */	bl createMem1AppHeap__Q23ipl6SystemFv
@@ -167,9 +167,9 @@
 /* 813F0988 | 7D 89 03 A6 */	mtctr r12
 /* 813F098C | 4E 80 04 21 */	bctrl
 /* 813F0990 | 38 00 00 00 */	li r0, 0x0
-/* 813F0994 | 90 0D AB A0 */	stw r0, lbl_81698BE0@sda21(r0)
+/* 813F0994 | 90 0D AB A0 */	stw r0, mem1Buffer___Q33ipl5scene7Setting@sda21(r0)
 .L_813F0998:
-/* 813F0998 | 80 8D AB A4 */	lwz r4, lbl_81698BE4@sda21(r0)
+/* 813F0998 | 80 8D AB A4 */	lwz r4, mem2Buffer___Q33ipl5scene7Setting@sda21(r0)
 /* 813F099C | 2C 04 00 00 */	cmpwi r4, 0x0
 /* 813F09A0 | 41 82 00 28 */	beq .L_813F09C8
 /* 813F09A4 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -180,7 +180,7 @@
 /* 813F09B8 | 7D 89 03 A6 */	mtctr r12
 /* 813F09BC | 4E 80 04 21 */	bctrl
 /* 813F09C0 | 38 00 00 00 */	li r0, 0x0
-/* 813F09C4 | 90 0D AB A4 */	stw r0, lbl_81698BE4@sda21(r0)
+/* 813F09C4 | 90 0D AB A4 */	stw r0, mem2Buffer___Q33ipl5scene7Setting@sda21(r0)
 .L_813F09C8:
 /* 813F09C8 | 80 7D 00 60 */	lwz r3, 0x60(r29)
 /* 813F09CC | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -571,9 +571,9 @@
 /* 813F0F34 | 38 CD 90 B6 */	li r6, lbl_816970F6@sda21
 /* 813F0F38 | 4B F7 90 ED */	bl __ct__Q33ipl6layout6ObjectFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCc
 .L_813F0F3C:
-/* 813F0F3C | 3F 40 81 61 */	lis r26, lbl_81610948@ha
+/* 813F0F3C | 3F 40 81 61 */	lis r26, scAnmTable__Q23ipl5scene@ha
 /* 813F0F40 | 90 7E 00 C4 */	stw r3, 0xc4(r30)
-/* 813F0F44 | 3B 5A 09 48 */	addi r26, r26, lbl_81610948@l
+/* 813F0F44 | 3B 5A 09 48 */	addi r26, r26, scAnmTable__Q23ipl5scene@l
 /* 813F0F48 | 3B 7F 02 84 */	addi r27, r31, 0x284
 /* 813F0F4C | 3B 9F 00 90 */	addi r28, r31, 0x90
 /* 813F0F50 | 3B 20 00 00 */	li r25, 0x0
@@ -852,10 +852,10 @@
 /* 813F134C | 90 01 02 14 */	stw r0, 0x214(r1)
 /* 813F1350 | 39 61 02 10 */	addi r11, r1, 0x210
 /* 813F1354 | 48 20 81 55 */	bl _savegpr_21
-/* 813F1358 | 3F C0 81 61 */	lis r30, lbl_81610948@ha
+/* 813F1358 | 3F C0 81 61 */	lis r30, scAnmTable__Q23ipl5scene@ha
 /* 813F135C | 3F E0 81 65 */	lis r31, lbl_816568E8@ha
 /* 813F1360 | 7C 78 1B 78 */	mr r24, r3
-/* 813F1364 | 3B DE 09 48 */	addi r30, r30, lbl_81610948@l
+/* 813F1364 | 3B DE 09 48 */	addi r30, r30, scAnmTable__Q23ipl5scene@l
 /* 813F1368 | 3B FF 68 E8 */	addi r31, r31, lbl_816568E8@l
 /* 813F136C | 4B F4 1A C9 */	bl createMem1AppHeap__Q23ipl6SystemFv
 /* 813F1370 | 81 83 00 00 */	lwz r12, 0x0(r3)
@@ -890,7 +890,7 @@
 /* 813F13E4 | 81 8C 00 14 */	lwz r12, 0x14(r12)
 /* 813F13E8 | 7D 89 03 A6 */	mtctr r12
 /* 813F13EC | 4E 80 04 21 */	bctrl
-/* 813F13F0 | 90 6D AB A0 */	stw r3, lbl_81698BE0@sda21(r0)
+/* 813F13F0 | 90 6D AB A0 */	stw r3, mem1Buffer___Q33ipl5scene7Setting@sda21(r0)
 /* 813F13F4 | 7F 84 E3 78 */	mr r4, r28
 /* 813F13F8 | 80 76 00 28 */	lwz r3, 0x28(r22)
 /* 813F13FC | 38 A0 00 04 */	li r5, 0x4
@@ -898,7 +898,7 @@
 /* 813F1404 | 81 8C 00 14 */	lwz r12, 0x14(r12)
 /* 813F1408 | 7D 89 03 A6 */	mtctr r12
 /* 813F140C | 4E 80 04 21 */	bctrl
-/* 813F1410 | 90 6D AB A4 */	stw r3, lbl_81698BE4@sda21(r0)
+/* 813F1410 | 90 6D AB A4 */	stw r3, mem2Buffer___Q33ipl5scene7Setting@sda21(r0)
 /* 813F1414 | 7F A4 EB 78 */	mr r4, r29
 /* 813F1418 | 7F 85 E3 78 */	mr r5, r28
 /* 813F141C | 38 7F 05 39 */	addi r3, r31, 0x539
@@ -1146,8 +1146,8 @@
 /* 813F1794 | 90 E1 00 08 */	stw r7, 0x8(r1)
 /* 813F1798 | 7F 8A E3 78 */	mr r10, r28
 /* 813F179C | 90 01 00 0C */	stw r0, 0xc(r1)
-/* 813F17A0 | 80 ED AB A0 */	lwz r7, lbl_81698BE0@sda21(r0)
-/* 813F17A4 | 81 2D AB A4 */	lwz r9, lbl_81698BE4@sda21(r0)
+/* 813F17A0 | 80 ED AB A0 */	lwz r7, mem1Buffer___Q33ipl5scene7Setting@sda21(r0)
+/* 813F17A4 | 81 2D AB A4 */	lwz r9, mem2Buffer___Q33ipl5scene7Setting@sda21(r0)
 /* 813F17A8 | 4B F7 C9 29 */	bl CreateManager__Q37ext_ead3www14SurfaceManagerFiiiiPvUlPvUlPvPCc
 /* 813F17AC | 80 78 00 64 */	lwz r3, 0x64(r24)
 /* 813F17B0 | 80 63 00 A0 */	lwz r3, 0xa0(r3)
@@ -7866,7 +7866,7 @@
 /* 813F7430 | 48 11 AE E9 */	bl List_GetNth__Q24nw4r2utFPCQ34nw4r2ut4ListUs
 /* 813F7434 | 93 A3 00 14 */	stw r29, 0x14(r3)
 /* 813F7438 | 80 78 09 00 */	lwz r3, 0x900(r24)
-/* 813F743C | 48 0E 2C B5 */	bl fn_814DA0F0
+/* 813F743C | 48 0E 2C B5 */	bl WDGetPrivacyMode
 /* 813F7440 | 80 98 09 00 */	lwz r4, 0x900(r24)
 /* 813F7444 | 54 76 06 3E */	clrlwi r22, r3, 24
 /* 813F7448 | 38 61 00 08 */	addi r3, r1, 0x8
@@ -8235,7 +8235,7 @@
 /* 813F7938 | 7C 1F 00 00 */	cmpw r31, r0
 /* 813F793C | 40 82 00 C8 */	bne .L_813F7A04
 /* 813F7940 | 7C A3 2B 78 */	mr r3, r5
-/* 813F7944 | 48 0E 27 AD */	bl fn_814DA0F0
+/* 813F7944 | 48 0E 27 AD */	bl WDGetPrivacyMode
 /* 813F7948 | 80 9E 09 00 */	lwz r4, 0x900(r30)
 /* 813F794C | 54 7D 06 3E */	clrlwi r29, r3, 24
 /* 813F7950 | 38 61 00 08 */	addi r3, r1, 0x8
@@ -10817,7 +10817,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x81610948 | size: 0x1A8
-.obj lbl_81610948, global
+# ipl::scene::scAnmTable
+.obj scAnmTable__Q23ipl5scene, local
 	.4byte 0x00000002
 	.4byte 0x00000003
 	.4byte 0x00010002
@@ -10924,7 +10925,7 @@
 	.4byte lbl_81656E0B
 	.4byte lbl_81656E14
 	.4byte lbl_81697163
-.endobj lbl_81610948
+.endobj scAnmTable__Q23ipl5scene
 
 # .rodata:0x1A8 | 0x81610AF0 | size: 0x30
 .obj lbl_81610AF0, global
@@ -12719,14 +12720,16 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698BE0 | size: 0x4
-.obj lbl_81698BE0, global
+# ipl::scene::Setting::mem1Buffer_
+.obj mem1Buffer___Q33ipl5scene7Setting, global
 	.skip 0x4
-.endobj lbl_81698BE0
+.endobj mem1Buffer___Q33ipl5scene7Setting
 
 # .sbss:0x4 | 0x81698BE4 | size: 0x4
-.obj lbl_81698BE4, global
+# ipl::scene::Setting::mem2Buffer_
+.obj mem2Buffer___Q33ipl5scene7Setting, global
 	.skip 0x4
-.endobj lbl_81698BE4
+.endobj mem2Buffer___Q33ipl5scene7Setting
 
 # .sbss:0x8 | 0x81698BE8 | size: 0x8
 .obj lbl_81698BE8, global

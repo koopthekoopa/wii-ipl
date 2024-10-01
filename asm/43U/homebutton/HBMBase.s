@@ -623,9 +623,9 @@
 /* 81371D98 | 81 8C 00 0C */	lwz r12, 0xc(r12)
 /* 81371D9C | 7D 89 03 A6 */	mtctr r12
 /* 81371DA0 | 4E 80 04 21 */	bctrl
-/* 81371DA4 | 3F E0 81 61 */	lis r31, lbl_8160F378@ha
+/* 81371DA4 | 3F E0 81 61 */	lis r31, scAnmTable__10homebutton@ha
 /* 81371DA8 | CB E2 82 E0 */	lfd f31, lbl_816946E0@sda21(r0)
-/* 81371DAC | 3B FF F3 78 */	addi r31, r31, lbl_8160F378@l
+/* 81371DAC | 3B FF F3 78 */	addi r31, r31, scAnmTable__10homebutton@l
 /* 81371DB0 | 3B DC 01 74 */	addi r30, r28, 0x174
 /* 81371DB4 | 3B BC 01 1C */	addi r29, r28, 0x11c
 /* 81371DB8 | 3B 40 00 00 */	li r26, 0x0
@@ -729,9 +729,9 @@
 /* 81371F28 | 80 19 00 0C */	lwz r0, 0xc(r25)
 /* 81371F2C | 7C 1A 00 00 */	cmpw r26, r0
 /* 81371F30 | 41 80 FE 9C */	blt .L_81371DCC
-/* 81371F34 | 3F A0 81 61 */	lis r29, lbl_8160F3D8@ha
+/* 81371F34 | 3F A0 81 61 */	lis r29, scGroupAnmTable__10homebutton@ha
 /* 81371F38 | CB E2 82 E0 */	lfd f31, lbl_816946E0@sda21(r0)
-/* 81371F3C | 3B BD F3 D8 */	addi r29, r29, lbl_8160F3D8@l
+/* 81371F3C | 3B BD F3 D8 */	addi r29, r29, scGroupAnmTable__10homebutton@l
 /* 81371F40 | 3B DC 05 88 */	addi r30, r28, 0x588
 /* 81371F44 | 3B FC 07 1C */	addi r31, r28, 0x71c
 /* 81371F48 | 3B 40 00 00 */	li r26, 0x0
@@ -6063,8 +6063,8 @@
 # homebutton::HomeButton::findAnimator(int, int)
 .fn findAnimator__Q210homebutton10HomeButtonFii, global
 /* 81376A70 | 80 03 00 0C */	lwz r0, 0xc(r3)
-/* 81376A74 | 3C E0 81 61 */	lis r7, lbl_8160F378@ha
-/* 81376A78 | 38 E7 F3 78 */	addi r7, r7, lbl_8160F378@l
+/* 81376A74 | 3C E0 81 61 */	lis r7, scAnmTable__10homebutton@ha
+/* 81376A78 | 38 E7 F3 78 */	addi r7, r7, scAnmTable__10homebutton@l
 /* 81376A7C | 38 60 00 00 */	li r3, 0x0
 /* 81376A80 | 38 C0 00 00 */	li r6, 0x0
 /* 81376A84 | 7C 09 03 A6 */	mtctr r0
@@ -6090,9 +6090,9 @@
 # .text:0x5518 | 0x81376AC0 | size: 0x48
 # homebutton::HomeButton::findGroupAnimator(int, int)
 .fn findGroupAnimator__Q210homebutton10HomeButtonFii, global
-/* 81376AC0 | 3C E0 81 61 */	lis r7, lbl_8160F3D8@ha
+/* 81376AC0 | 3C E0 81 61 */	lis r7, scGroupAnmTable__10homebutton@ha
 /* 81376AC4 | 38 00 00 4A */	li r0, 0x4a
-/* 81376AC8 | 38 E7 F3 D8 */	addi r7, r7, lbl_8160F3D8@l
+/* 81376AC8 | 38 E7 F3 D8 */	addi r7, r7, scGroupAnmTable__10homebutton@l
 /* 81376ACC | 38 60 00 00 */	li r3, 0x0
 /* 81376AD0 | 38 C0 00 00 */	li r6, 0x0
 /* 81376AD4 | 7C 09 03 A6 */	mtctr r0
@@ -6663,7 +6663,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x8160F378 | size: 0x60
-.obj lbl_8160F378, global
+# homebutton::scAnmTable
+.obj scAnmTable__10homebutton, local
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -6688,10 +6689,11 @@
 	.4byte 0x00000002
 	.4byte 0x00000007
 	.4byte 0x00000001
-.endobj lbl_8160F378
+.endobj scAnmTable__10homebutton
 
 # .rodata:0x60 | 0x8160F3D8 | size: 0x250
-.obj lbl_8160F3D8, global
+# homebutton::scGroupAnmTable
+.obj scGroupAnmTable__10homebutton, local
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000001
@@ -6840,7 +6842,7 @@
 	.4byte 0x00000012
 	.4byte 0x00000022
 	.4byte 0x00000015
-.endobj lbl_8160F3D8
+.endobj scGroupAnmTable__10homebutton
 
 # 0x81644B40..0x81645620 | size: 0xAE0
 .data

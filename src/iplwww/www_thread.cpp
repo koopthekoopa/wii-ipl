@@ -54,7 +54,7 @@ namespace ext_ead {
         }
 
         /**
-         * @note Address: 0x8136E7EC (4.3U)
+         * @note Address: 0x8136E7E4 (4.3U)
          * @note Size: 0x8
          */
         void ut_thread::Suspend() {

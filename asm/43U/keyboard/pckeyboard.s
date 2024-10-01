@@ -101,10 +101,10 @@
 /* 8141028C | 4E 80 04 21 */	bctrl
 /* 81410290 | 1C 03 00 14 */	mulli r0, r3, 0x14
 /* 81410294 | 80 9F 00 2C */	lwz r4, 0x2c(r31)
-/* 81410298 | 3C 60 81 61 */	lis r3, lbl_81614500@ha
+/* 81410298 | 3C 60 81 61 */	lis r3, csLanguageDependencyData__Q39textinput8keyboard6pctype@ha
 /* 8141029C | 93 DF 00 24 */	stw r30, 0x24(r31)
 /* 814102A0 | 2C 04 00 00 */	cmpwi r4, 0x0
-/* 814102A4 | 38 63 45 00 */	addi r3, r3, lbl_81614500@l
+/* 814102A4 | 38 63 45 00 */	addi r3, r3, csLanguageDependencyData__Q39textinput8keyboard6pctype@l
 /* 814102A8 | 7C 03 02 14 */	add r0, r3, r0
 /* 814102AC | 90 1F 00 1C */	stw r0, 0x1c(r31)
 /* 814102B0 | 40 82 00 20 */	bne .L_814102D0
@@ -1170,9 +1170,9 @@
 /* 81411038 | 81 8C 00 18 */	lwz r12, 0x18(r12)
 /* 8141103C | 7D 89 03 A6 */	mtctr r12
 /* 81411040 | 4E 80 04 21 */	bctrl
-/* 81411044 | 3C A0 81 61 */	lis r5, lbl_816145C8@ha
+/* 81411044 | 3C A0 81 61 */	lis r5, csJapanKanaInput__Q39textinput8keyboard6pctype@ha
 /* 81411048 | 7F A3 EB 78 */	mr r3, r29
-/* 8141104C | 38 A5 45 C8 */	addi r5, r5, lbl_816145C8@l
+/* 8141104C | 38 A5 45 C8 */	addi r5, r5, csJapanKanaInput__Q39textinput8keyboard6pctype@l
 /* 81411050 | 38 80 00 29 */	li r4, 0x29
 /* 81411054 | 90 BD 00 1C */	stw r5, 0x1c(r29)
 /* 81411058 | 38 A0 00 00 */	li r5, 0x0
@@ -1346,8 +1346,8 @@
 /* 8141129C | 54 00 07 3F */	clrlwi. r0, r0, 28
 /* 814112A0 | 40 82 00 20 */	bne .L_814112C0
 /* 814112A4 | 80 1F 00 0C */	lwz r0, 0xc(r31)
-/* 814112A8 | 3C 60 81 61 */	lis r3, lbl_81614500@ha
-/* 814112AC | 38 63 45 00 */	addi r3, r3, lbl_81614500@l
+/* 814112A8 | 3C 60 81 61 */	lis r3, csLanguageDependencyData__Q39textinput8keyboard6pctype@ha
+/* 814112AC | 38 63 45 00 */	addi r3, r3, csLanguageDependencyData__Q39textinput8keyboard6pctype@l
 /* 814112B0 | 1C 00 00 14 */	mulli r0, r0, 0x14
 /* 814112B4 | 7C 03 02 14 */	add r0, r3, r0
 /* 814112B8 | 90 1F 00 10 */	stw r0, 0x10(r31)
@@ -1356,14 +1356,14 @@
 /* 814112C0 | 80 1F 00 0C */	lwz r0, 0xc(r31)
 /* 814112C4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 814112C8 | 40 82 00 14 */	bne .L_814112DC
-/* 814112CC | 3C 60 81 61 */	lis r3, lbl_816145C8@ha
-/* 814112D0 | 38 63 45 C8 */	addi r3, r3, lbl_816145C8@l
+/* 814112CC | 3C 60 81 61 */	lis r3, csJapanKanaInput__Q39textinput8keyboard6pctype@ha
+/* 814112D0 | 38 63 45 C8 */	addi r3, r3, csJapanKanaInput__Q39textinput8keyboard6pctype@l
 /* 814112D4 | 90 7F 00 10 */	stw r3, 0x10(r31)
 /* 814112D8 | 48 00 00 18 */	b .L_814112F0
 .L_814112DC:
 /* 814112DC | 1C 00 00 14 */	mulli r0, r0, 0x14
-/* 814112E0 | 3C 60 81 61 */	lis r3, lbl_81614500@ha
-/* 814112E4 | 38 63 45 00 */	addi r3, r3, lbl_81614500@l
+/* 814112E0 | 3C 60 81 61 */	lis r3, csLanguageDependencyData__Q39textinput8keyboard6pctype@ha
+/* 814112E4 | 38 63 45 00 */	addi r3, r3, csLanguageDependencyData__Q39textinput8keyboard6pctype@l
 /* 814112E8 | 7C 03 02 14 */	add r0, r3, r0
 /* 814112EC | 90 1F 00 10 */	stw r0, 0x10(r31)
 .L_814112F0:
@@ -2432,7 +2432,7 @@
 /* 81412120 | 3F 20 81 66 */	lis r25, __vt__Q39textinput11nw4rmanager7AnmPane@ha
 /* 81412124 | 3F 60 81 66 */	lis r27, __vt__Q49textinput8keyboard6pctype19NormalButtonAnmPane@ha
 /* 81412128 | 3F 80 81 66 */	lis r28, __vt__Q49textinput8keyboard6pctype16ShiftCapsAnmPane@ha
-/* 8141212C | 3F 00 81 66 */	lis r24, lbl_816595A0@ha
+/* 8141212C | 3F 00 81 66 */	lis r24, csPaneToAnimation__Q39textinput8keyboard6pctype@ha
 /* 81412130 | 3F A0 81 66 */	lis r29, __vt__Q49textinput8keyboard6pctype19ToggleButtonAnmPane@ha
 /* 81412134 | 3F C0 81 66 */	lis r30, __vt__Q49textinput8keyboard6pctype18OnOffButtonAnmPane@ha
 /* 81412138 | 7C 6F 1B 78 */	mr r15, r3
@@ -2440,7 +2440,7 @@
 /* 81412140 | 3B 39 F8 C8 */	addi r25, r25, __vt__Q39textinput11nw4rmanager7AnmPane@l
 /* 81412144 | 3B 7B BB D8 */	addi r27, r27, __vt__Q49textinput8keyboard6pctype19NormalButtonAnmPane@l
 /* 81412148 | 3B 9C BB AC */	addi r28, r28, __vt__Q49textinput8keyboard6pctype16ShiftCapsAnmPane@l
-/* 8141214C | 3B 18 95 A0 */	addi r24, r24, lbl_816595A0@l
+/* 8141214C | 3B 18 95 A0 */	addi r24, r24, csPaneToAnimation__Q39textinput8keyboard6pctype@l
 /* 81412150 | 3B BD BB 80 */	addi r29, r29, __vt__Q49textinput8keyboard6pctype19ToggleButtonAnmPane@l
 /* 81412154 | 3B DE BB 54 */	addi r30, r30, __vt__Q49textinput8keyboard6pctype18OnOffButtonAnmPane@l
 /* 81412158 | 3A A0 00 00 */	li r21, 0x0
@@ -2685,10 +2685,10 @@
 /* 814124A8 | 4E 80 04 21 */	bctrl
 /* 814124AC | 1C 03 00 14 */	mulli r0, r3, 0x14
 /* 814124B0 | 80 9E 00 2C */	lwz r4, 0x2c(r30)
-/* 814124B4 | 3C 60 81 61 */	lis r3, lbl_81614500@ha
+/* 814124B4 | 3C 60 81 61 */	lis r3, csLanguageDependencyData__Q39textinput8keyboard6pctype@ha
 /* 814124B8 | 93 BE 00 24 */	stw r29, 0x24(r30)
 /* 814124BC | 2C 04 00 00 */	cmpwi r4, 0x0
-/* 814124C0 | 38 63 45 00 */	addi r3, r3, lbl_81614500@l
+/* 814124C0 | 38 63 45 00 */	addi r3, r3, csLanguageDependencyData__Q39textinput8keyboard6pctype@l
 /* 814124C4 | 7C 03 02 14 */	add r0, r3, r0
 /* 814124C8 | 90 1E 00 1C */	stw r0, 0x1c(r30)
 /* 814124CC | 40 82 00 20 */	bne .L_814124EC
@@ -5513,19 +5513,19 @@
 /* 81414BE4 | 7D 89 03 A6 */	mtctr r12
 /* 81414BE8 | 4E 80 04 21 */	bctrl
 /* 81414BEC | 1C 03 00 14 */	mulli r0, r3, 0x14
-/* 81414BF0 | 3C 60 81 61 */	lis r3, lbl_81614500@ha
-/* 81414BF4 | 38 63 45 00 */	addi r3, r3, lbl_81614500@l
+/* 81414BF0 | 3C 60 81 61 */	lis r3, csLanguageDependencyData__Q39textinput8keyboard6pctype@ha
+/* 81414BF4 | 38 63 45 00 */	addi r3, r3, csLanguageDependencyData__Q39textinput8keyboard6pctype@l
 /* 81414BF8 | 7C 03 02 14 */	add r0, r3, r0
 /* 81414BFC | 90 1D 00 1C */	stw r0, 0x1c(r29)
 /* 81414C00 | 48 00 00 20 */	b .L_81414C20
 .L_81414C04:
-/* 81414C04 | 3C 60 81 61 */	lis r3, lbl_816145C8@ha
-/* 81414C08 | 38 63 45 C8 */	addi r3, r3, lbl_816145C8@l
+/* 81414C04 | 3C 60 81 61 */	lis r3, csJapanKanaInput__Q39textinput8keyboard6pctype@ha
+/* 81414C08 | 38 63 45 C8 */	addi r3, r3, csJapanKanaInput__Q39textinput8keyboard6pctype@l
 /* 81414C0C | 90 7D 00 1C */	stw r3, 0x1c(r29)
 /* 81414C10 | 48 00 00 10 */	b .L_81414C20
 .L_81414C14:
-/* 81414C14 | 3C 60 81 61 */	lis r3, lbl_816145C8@ha
-/* 81414C18 | 38 63 45 C8 */	addi r3, r3, lbl_816145C8@l
+/* 81414C14 | 3C 60 81 61 */	lis r3, csJapanKanaInput__Q39textinput8keyboard6pctype@ha
+/* 81414C18 | 38 63 45 C8 */	addi r3, r3, csJapanKanaInput__Q39textinput8keyboard6pctype@l
 /* 81414C1C | 90 7D 00 1C */	stw r3, 0x1c(r29)
 .L_81414C20:
 /* 81414C20 | 81 9D 00 00 */	lwz r12, 0x0(r29)
@@ -8184,9 +8184,9 @@
 
 # .text:0x6D5C | 0x81416F34 | size: 0x1B0
 .fn "__sinit_\\pckeyboard_cpp", global
-/* 81416F34 | 3C 60 81 66 */	lis r3, lbl_816595A0@ha
+/* 81416F34 | 3C 60 81 66 */	lis r3, csPaneToAnimation__Q39textinput8keyboard6pctype@ha
 /* 81416F38 | 80 0D 92 C0 */	lwz r0, lbl_81697300@sda21(r0)
-/* 81416F3C | 38 63 95 A0 */	addi r3, r3, lbl_816595A0@l
+/* 81416F3C | 38 63 95 A0 */	addi r3, r3, csPaneToAnimation__Q39textinput8keyboard6pctype@l
 /* 81416F40 | 90 03 00 4C */	stw r0, 0x4c(r3)
 /* 81416F44 | 90 03 00 8C */	stw r0, 0x8c(r3)
 /* 81416F48 | 90 03 00 CC */	stw r0, 0xcc(r3)
@@ -8351,7 +8351,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x81613408 | size: 0x5B0
-.obj lbl_81613408, global
+# textinput::keyboard::pctype::csGridKeyboard
+.obj csGridKeyboard__Q39textinput8keyboard6pctype, local
 	.4byte 0x505F476B
 	.4byte 0x65795F30
 	.4byte 0x30000000
@@ -8716,10 +8717,11 @@
 	.4byte 0x00000000
 	.4byte 0x00A22234
 	.4byte 0x30FC30FC
-.endobj lbl_81613408
+.endobj csGridKeyboard__Q39textinput8keyboard6pctype
 
 # .rodata:0x5B0 | 0x816139B8 | size: 0x228
-.obj lbl_816139B8, global
+# textinput::keyboard::pctype::csPaneNameToControlKey
+.obj csPaneNameToControlKey__Q39textinput8keyboard6pctype, local
 	.4byte 0x505F6B65
 	.4byte 0x795F4C46
 	.4byte 0x00000000
@@ -8858,10 +8860,11 @@
 	.4byte 0x6E000000
 	.4byte 0x00000000
 	.4byte 0x00000010
-.endobj lbl_816139B8
+.endobj csPaneNameToControlKey__Q39textinput8keyboard6pctype
 
 # .rodata:0x7D8 | 0x81613BE0 | size: 0xC4
-.obj lbl_81613BE0, global
+# textinput::keyboard::pctype::csJPNAsciiVisiblePanes
+.obj csJPNAsciiVisiblePanes__Q39textinput8keyboard6pctype, local
 	.4byte 0x000D0018
 	.4byte lbl_81658DC4
 	.4byte lbl_81658DD8
@@ -8911,10 +8914,11 @@
 	.4byte lbl_81658FBC
 	.4byte lbl_81658FC8
 	.4byte lbl_81658FD8
-.endobj lbl_81613BE0
+.endobj csJPNAsciiVisiblePanes__Q39textinput8keyboard6pctype
 
 # .rodata:0x89C | 0x81613CA4 | size: 0xC4
-.obj lbl_81613CA4, global
+# textinput::keyboard::pctype::csUSAsciiVisiblePanes
+.obj csUSAsciiVisiblePanes__Q39textinput8keyboard6pctype, local
 	.4byte 0x00110014
 	.4byte lbl_81658EE0
 	.4byte lbl_81658EF4
@@ -8964,10 +8968,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81613CA4
+.endobj csUSAsciiVisiblePanes__Q39textinput8keyboard6pctype
 
 # .rodata:0x960 | 0x81613D68 | size: 0xC4
-.obj lbl_81613D68, global
+# textinput::keyboard::pctype::csEngAsciiVisiblePanesUK
+.obj csEngAsciiVisiblePanesUK__Q39textinput8keyboard6pctype, local
 	.4byte 0x00150010
 	.4byte lbl_81658EB0
 	.4byte lbl_81658EBC
@@ -9017,10 +9022,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81613D68
+.endobj csEngAsciiVisiblePanesUK__Q39textinput8keyboard6pctype
 
 # .rodata:0xA24 | 0x81613E2C | size: 0xC4
-.obj lbl_81613E2C, global
+# textinput::keyboard::pctype::csEngAsciiVisiblePanesSP
+.obj csEngAsciiVisiblePanesSP__Q39textinput8keyboard6pctype, local
 	.4byte 0x00150010
 	.4byte lbl_81658EB0
 	.4byte lbl_81658EBC
@@ -9070,10 +9076,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81613E2C
+.endobj csEngAsciiVisiblePanesSP__Q39textinput8keyboard6pctype
 
 # .rodata:0xAE8 | 0x81613EF0 | size: 0xC4
-.obj lbl_81613EF0, global
+# textinput::keyboard::pctype::csAsciiVisiblePanes
+.obj csAsciiVisiblePanes__Q39textinput8keyboard6pctype, local
 	.4byte 0x0017000E
 	.4byte lbl_81658E98
 	.4byte lbl_81658EA4
@@ -9123,10 +9130,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81613EF0
+.endobj csAsciiVisiblePanes__Q39textinput8keyboard6pctype
 
 # .rodata:0xBAC | 0x81613FB4 | size: 0xC4
-.obj lbl_81613FB4, global
+# textinput::keyboard::pctype::csAsciiVisiblePanesNL
+.obj csAsciiVisiblePanesNL__Q39textinput8keyboard6pctype, local
 	.4byte 0x00130012
 	.4byte lbl_81658EC8
 	.4byte lbl_81658ED4
@@ -9176,10 +9184,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81613FB4
+.endobj csAsciiVisiblePanesNL__Q39textinput8keyboard6pctype
 
 # .rodata:0xC70 | 0x81614078 | size: 0xC4
-.obj lbl_81614078, global
+# textinput::keyboard::pctype::csCNAsciiVisiblePanes
+.obj csCNAsciiVisiblePanes__Q39textinput8keyboard6pctype, local
 	.4byte 0x00140015
 	.4byte lbl_81658EE0
 	.4byte lbl_81658EF4
@@ -9229,10 +9238,10 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81614078
+.endobj csCNAsciiVisiblePanes__Q39textinput8keyboard6pctype
 
 # .rodata:0xD34 | 0x8161413C | size: 0xC4
-.obj lbl_8161413C, global
+.obj csKRAsciiVisiblePanes_Q39textinput8keyboard6pctype, local
 	.4byte 0x00100016
 	.4byte lbl_81658EE0
 	.4byte lbl_81658EF4
@@ -9282,10 +9291,11 @@
 	.4byte lbl_8165900C
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8161413C
+.endobj csKRAsciiVisiblePanes_Q39textinput8keyboard6pctype
 
 # .rodata:0xDF8 | 0x81614200 | size: 0xC0
-.obj lbl_81614200, global
+# textinput::keyboard::pctype::csCharCodeToAblautSP
+.obj csCharCodeToAblautSP__Q39textinput8keyboard6pctype, local
 	.4byte 0x006100E0
 	.4byte 0x00E100E2
 	.4byte 0x00E300E4
@@ -9334,10 +9344,11 @@
 	.4byte 0x00DD0000
 	.4byte 0x00000178
 	.4byte 0x00000000
-.endobj lbl_81614200
+.endobj csCharCodeToAblautSP__Q39textinput8keyboard6pctype
 
 # .rodata:0xEB8 | 0x816142C0 | size: 0xC0
-.obj lbl_816142C0, global
+# textinput::keyboard::pctype::csCharCodeToAblautNL
+.obj csCharCodeToAblautNL__Q39textinput8keyboard6pctype, local
 	.4byte 0x006100E0
 	.4byte 0x000000E2
 	.4byte 0x00E30000
@@ -9386,10 +9397,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00DD0178
-.endobj lbl_816142C0
+.endobj csCharCodeToAblautNL__Q39textinput8keyboard6pctype
 
 # .rodata:0xF78 | 0x81614380 | size: 0xC0
-.obj lbl_81614380, global
+# textinput::keyboard::pctype::csCharCodeToAblautDE
+.obj csCharCodeToAblautDE__Q39textinput8keyboard6pctype, local
 	.4byte 0x006100E0
 	.4byte 0x00E10000
 	.4byte 0x00000000
@@ -9438,10 +9450,11 @@
 	.4byte 0x00DD0000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81614380
+.endobj csCharCodeToAblautDE__Q39textinput8keyboard6pctype
 
 # .rodata:0x1038 | 0x81614440 | size: 0xC0
-.obj lbl_81614440, global
+# textinput::keyboard::pctype::csCharCodeToAblautFR
+.obj csCharCodeToAblautFR__Q39textinput8keyboard6pctype, local
 	.4byte 0x00610000
 	.4byte 0x000000E2
 	.4byte 0x000000E4
@@ -9490,74 +9503,77 @@
 	.4byte 0x00000000
 	.4byte 0x00000178
 	.4byte 0x00000000
-.endobj lbl_81614440
+.endobj csCharCodeToAblautFR__Q39textinput8keyboard6pctype
 
 # .rodata:0x10F8 | 0x81614500 | size: 0xC8
-.obj lbl_81614500, global
+# textinput::keyboard::pctype::csLanguageDependencyData
+.obj csLanguageDependencyData__Q39textinput8keyboard6pctype, local
 	.4byte csUSKeyboard__Q39textinput8keyboard6pctype
-	.4byte lbl_81613408
-	.4byte lbl_816139B8
-	.4byte lbl_81613BE0
+	.4byte csGridKeyboard__Q39textinput8keyboard6pctype
+	.4byte csPaneNameToControlKey__Q39textinput8keyboard6pctype
+	.4byte csJPNAsciiVisiblePanes__Q39textinput8keyboard6pctype
 	.4byte 0x00000000
 	.4byte csUSKeyboard__Q39textinput8keyboard6pctype
-	.4byte lbl_81613408
-	.4byte lbl_816139B8
-	.4byte lbl_81613CA4
+	.4byte csGridKeyboard__Q39textinput8keyboard6pctype
+	.4byte csPaneNameToControlKey__Q39textinput8keyboard6pctype
+	.4byte csUSAsciiVisiblePanes__Q39textinput8keyboard6pctype
 	.4byte 0x00000000
 	.4byte csUKKeyboard__Q39textinput8keyboard6pctype
-	.4byte lbl_81613408
-	.4byte lbl_816139B8
-	.4byte lbl_81613D68
+	.4byte csGridKeyboard__Q39textinput8keyboard6pctype
+	.4byte csPaneNameToControlKey__Q39textinput8keyboard6pctype
+	.4byte csEngAsciiVisiblePanesUK__Q39textinput8keyboard6pctype
 	.4byte 0x00000000
 	.4byte csFRKeyboard__Q39textinput8keyboard6pctype
-	.4byte lbl_81613408
-	.4byte lbl_816139B8
-	.4byte lbl_81613EF0
-	.4byte lbl_81614440
+	.4byte csGridKeyboard__Q39textinput8keyboard6pctype
+	.4byte csPaneNameToControlKey__Q39textinput8keyboard6pctype
+	.4byte csAsciiVisiblePanes__Q39textinput8keyboard6pctype
+	.4byte csCharCodeToAblautFR__Q39textinput8keyboard6pctype
 	.4byte csDEKeyboard__Q39textinput8keyboard6pctype
-	.4byte lbl_81613408
-	.4byte lbl_816139B8
-	.4byte lbl_81613EF0
-	.4byte lbl_81614380
+	.4byte csGridKeyboard__Q39textinput8keyboard6pctype
+	.4byte csPaneNameToControlKey__Q39textinput8keyboard6pctype
+	.4byte csAsciiVisiblePanes__Q39textinput8keyboard6pctype
+	.4byte csCharCodeToAblautDE__Q39textinput8keyboard6pctype
 	.4byte csITKeyboard__Q39textinput8keyboard6pctype
-	.4byte lbl_81613408
-	.4byte lbl_816139B8
-	.4byte lbl_81613EF0
+	.4byte csGridKeyboard__Q39textinput8keyboard6pctype
+	.4byte csPaneNameToControlKey__Q39textinput8keyboard6pctype
+	.4byte csAsciiVisiblePanes__Q39textinput8keyboard6pctype
 	.4byte 0x00000000
 	.4byte csESKeyboard__Q39textinput8keyboard6pctype
-	.4byte lbl_81613408
-	.4byte lbl_816139B8
-	.4byte lbl_81613E2C
-	.4byte lbl_81614200
+	.4byte csGridKeyboard__Q39textinput8keyboard6pctype
+	.4byte csPaneNameToControlKey__Q39textinput8keyboard6pctype
+	.4byte csEngAsciiVisiblePanesSP__Q39textinput8keyboard6pctype
+	.4byte csCharCodeToAblautSP__Q39textinput8keyboard6pctype
 	.4byte csNLKeyboard__Q39textinput8keyboard6pctype
-	.4byte lbl_81613408
-	.4byte lbl_816139B8
-	.4byte lbl_81613FB4
-	.4byte lbl_816142C0
+	.4byte csGridKeyboard__Q39textinput8keyboard6pctype
+	.4byte csPaneNameToControlKey__Q39textinput8keyboard6pctype
+	.4byte csAsciiVisiblePanesNL__Q39textinput8keyboard6pctype
+	.4byte csCharCodeToAblautNL__Q39textinput8keyboard6pctype
 	.4byte csCNKeyboard__Q39textinput8keyboard6pctype
-	.4byte lbl_81613408
-	.4byte lbl_816139B8
-	.4byte lbl_81614078
+	.4byte csGridKeyboard__Q39textinput8keyboard6pctype
+	.4byte csPaneNameToControlKey__Q39textinput8keyboard6pctype
+	.4byte csCNAsciiVisiblePanes__Q39textinput8keyboard6pctype
 	.4byte 0x00000000
 	.4byte csUSKeyboard__Q39textinput8keyboard6pctype
-	.4byte lbl_81613408
-	.4byte lbl_816139B8
-	.4byte lbl_8161413C
+	.4byte csGridKeyboard__Q39textinput8keyboard6pctype
+	.4byte csPaneNameToControlKey__Q39textinput8keyboard6pctype
+	.4byte csKRAsciiVisiblePanes_Q39textinput8keyboard6pctype
 	.4byte 0x00000000
-.endobj lbl_81614500
+.endobj csLanguageDependencyData__Q39textinput8keyboard6pctype
 
 # .rodata:0x11C0 | 0x816145C8 | size: 0x18
-.obj lbl_816145C8, global
+# textinput::keyboard::pctype::csJapanKanaInput
+.obj csJapanKanaInput__Q39textinput8keyboard6pctype, local
 	.4byte csJPKeyboard__Q39textinput8keyboard6pctype
-	.4byte lbl_81613408
-	.4byte lbl_816139B8
-	.4byte lbl_81613BE0
+	.4byte csGridKeyboard__Q39textinput8keyboard6pctype
+	.4byte csPaneNameToControlKey__Q39textinput8keyboard6pctype
+	.4byte csJPNAsciiVisiblePanes__Q39textinput8keyboard6pctype
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816145C8
+.endobj csJapanKanaInput__Q39textinput8keyboard6pctype
 
-# .rodata:0x11D8 | 0x816145E0 | size: 0x44
-.obj lbl_816145E0, global
+# .rodata:0x11D8 | 0x816145E0 | size: 0x440
+# textinput::keyboard::pctype::csAninationFile
+.obj csAninationFile__Q39textinput8keyboard6pctype, local
 	.4byte 0x00000000
 	.4byte 0x66735F56
 	.4byte 0x4B5F6173
@@ -9575,10 +9591,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816145E0
-
-# .rodata:0x121C | 0x81614624 | size: 0x44
-.obj lbl_81614624, global
+.L_81614624:
 	.4byte 0x00000001
 	.4byte 0x66735F56
 	.4byte 0x4B5F6173
@@ -9596,10 +9609,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81614624
-
-# .rodata:0x1260 | 0x81614668 | size: 0x44
-.obj lbl_81614668, global
+.L_81614668:
 	.4byte 0x00000002
 	.4byte 0x66735F56
 	.4byte 0x4B5F6173
@@ -9617,10 +9627,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81614668
-
-# .rodata:0x12A4 | 0x816146AC | size: 0x44
-.obj lbl_816146AC, global
+.L_816146AC:
 	.4byte 0x00000003
 	.4byte 0x66735F56
 	.4byte 0x4B5F6173
@@ -9638,10 +9645,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816146AC
-
-# .rodata:0x12E8 | 0x816146F0 | size: 0x44
-.obj lbl_816146F0, global
+.L_816146F0:
 	.4byte 0x00000004
 	.4byte 0x66735F56
 	.4byte 0x4B5F6173
@@ -9659,10 +9663,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816146F0
-
-# .rodata:0x132C | 0x81614734 | size: 0x44
-.obj lbl_81614734, global
+.L_81614734:
 	.4byte 0x00000005
 	.4byte 0x66735F56
 	.4byte 0x4B5F6173
@@ -9680,10 +9681,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81614734
-
-# .rodata:0x1370 | 0x81614778 | size: 0x44
-.obj lbl_81614778, global
+.L_81614778:
 	.4byte 0x00000006
 	.4byte 0x66735F56
 	.4byte 0x4B5F6173
@@ -9701,10 +9699,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81614778
-
-# .rodata:0x13B4 | 0x816147BC | size: 0x44
-.obj lbl_816147BC, global
+.L_816147BC:
 	.4byte 0x00000007
 	.4byte 0x66735F56
 	.4byte 0x4B5F6173
@@ -9722,10 +9717,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816147BC
-
-# .rodata:0x13F8 | 0x81614800 | size: 0x44
-.obj lbl_81614800, global
+.L_81614800:
 	.4byte 0x00000008
 	.4byte 0x66735F56
 	.4byte 0x4B5F6173
@@ -9743,10 +9735,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81614800
-
-# .rodata:0x143C | 0x81614844 | size: 0x44
-.obj lbl_81614844, global
+.L_81614844:
 	.4byte 0x00000009
 	.4byte 0x66735F56
 	.4byte 0x4B5F6173
@@ -9764,10 +9753,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81614844
-
-# .rodata:0x1480 | 0x81614888 | size: 0x44
-.obj lbl_81614888, global
+.L_81614888:
 	.4byte 0x0000000A
 	.4byte 0x66735F56
 	.4byte 0x4B5F6173
@@ -9785,10 +9771,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81614888
-
-# .rodata:0x14C4 | 0x816148CC | size: 0x44
-.obj lbl_816148CC, global
+.L_816148CC:
 	.4byte 0x0000000B
 	.4byte 0x66735F56
 	.4byte 0x4B5F6173
@@ -9806,10 +9789,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816148CC
-
-# .rodata:0x1508 | 0x81614910 | size: 0x44
-.obj lbl_81614910, global
+.L_81614910:
 	.4byte 0x0000000C
 	.4byte 0x66735F56
 	.4byte 0x4B5F6173
@@ -9827,10 +9807,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81614910
-
-# .rodata:0x154C | 0x81614954 | size: 0x44
-.obj lbl_81614954, global
+.L_81614954:
 	.4byte 0x0000000D
 	.4byte 0x66735F56
 	.4byte 0x4B5F6173
@@ -9848,10 +9825,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81614954
-
-# .rodata:0x1590 | 0x81614998 | size: 0x44
-.obj lbl_81614998, global
+.L_81614998:
 	.4byte 0x0000000E
 	.4byte 0x66735F56
 	.4byte 0x4B5F6173
@@ -9869,10 +9843,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81614998
-
-# .rodata:0x15D4 | 0x816149DC | size: 0x44
-.obj lbl_816149DC, global
+.L_816149DC:
 	.4byte 0x0000000F
 	.4byte 0x66735F56
 	.4byte 0x4B5F6173
@@ -9890,7 +9861,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816149DC
+.endobj csAninationFile__Q39textinput8keyboard6pctype
 
 # .rodata:0x1618 | 0x81614A20 | size: 0x34
 .obj lbl_81614A20, global
@@ -11058,17 +11029,18 @@
 .endobj lbl_81659590
 
 # .data:0x810 | 0x816595A0 | size: 0x2040
-.obj lbl_816595A0, global
+# textinput::keyboard::pctype::csPaneToAnimation
+.obj csPaneToAnimation__Q39textinput8keyboard6pctype, local
 	.4byte 0x00000000
 	.4byte lbl_81659034
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11079,12 +11051,12 @@
 	.4byte lbl_81659040
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11095,12 +11067,12 @@
 	.4byte lbl_8165904C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11111,12 +11083,12 @@
 	.4byte lbl_81659058
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11127,12 +11099,12 @@
 	.4byte lbl_81659064
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11143,12 +11115,12 @@
 	.4byte lbl_81659070
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11159,12 +11131,12 @@
 	.4byte lbl_8165907C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11175,12 +11147,12 @@
 	.4byte lbl_81659088
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11191,12 +11163,12 @@
 	.4byte lbl_81659094
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11207,12 +11179,12 @@
 	.4byte lbl_816590A0
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11223,12 +11195,12 @@
 	.4byte lbl_816590AC
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11239,12 +11211,12 @@
 	.4byte lbl_816590B8
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11255,12 +11227,12 @@
 	.4byte lbl_816590C4
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11271,12 +11243,12 @@
 	.4byte lbl_816590D0
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11287,12 +11259,12 @@
 	.4byte lbl_816590DC
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11303,12 +11275,12 @@
 	.4byte lbl_816590E8
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11319,12 +11291,12 @@
 	.4byte lbl_816590F4
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11335,12 +11307,12 @@
 	.4byte lbl_81659100
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11351,12 +11323,12 @@
 	.4byte lbl_8165910C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11367,12 +11339,12 @@
 	.4byte lbl_81659118
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11383,12 +11355,12 @@
 	.4byte lbl_81659124
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11399,12 +11371,12 @@
 	.4byte lbl_81659130
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11415,12 +11387,12 @@
 	.4byte lbl_8165913C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11431,12 +11403,12 @@
 	.4byte lbl_81659148
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11447,12 +11419,12 @@
 	.4byte lbl_81659154
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11463,12 +11435,12 @@
 	.4byte lbl_81659160
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11479,12 +11451,12 @@
 	.4byte lbl_8165916C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11495,12 +11467,12 @@
 	.4byte lbl_81659178
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11511,12 +11483,12 @@
 	.4byte lbl_81659184
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11527,12 +11499,12 @@
 	.4byte lbl_81659190
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11543,12 +11515,12 @@
 	.4byte lbl_8165919C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11559,12 +11531,12 @@
 	.4byte lbl_816591A8
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11575,12 +11547,12 @@
 	.4byte lbl_816591B4
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11591,12 +11563,12 @@
 	.4byte lbl_816591C0
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11607,12 +11579,12 @@
 	.4byte lbl_816591CC
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11623,12 +11595,12 @@
 	.4byte lbl_816591D8
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11639,12 +11611,12 @@
 	.4byte lbl_816591E4
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11655,12 +11627,12 @@
 	.4byte lbl_816591F0
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11671,12 +11643,12 @@
 	.4byte lbl_816591FC
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11687,12 +11659,12 @@
 	.4byte lbl_81659208
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11703,12 +11675,12 @@
 	.4byte lbl_81659214
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11719,12 +11691,12 @@
 	.4byte lbl_81658E98
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11735,12 +11707,12 @@
 	.4byte lbl_81658EB0
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11751,12 +11723,12 @@
 	.4byte lbl_81658EC8
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11767,12 +11739,12 @@
 	.4byte lbl_81659220
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11783,12 +11755,12 @@
 	.4byte lbl_8165922C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11799,12 +11771,12 @@
 	.4byte lbl_81659238
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11815,12 +11787,12 @@
 	.4byte lbl_81659244
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11831,12 +11803,12 @@
 	.4byte lbl_81659250
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11847,12 +11819,12 @@
 	.4byte lbl_8165925C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11863,12 +11835,12 @@
 	.4byte lbl_81659268
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11879,12 +11851,12 @@
 	.4byte lbl_81659278
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11895,12 +11867,12 @@
 	.4byte lbl_81659284
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11911,44 +11883,44 @@
 	.4byte lbl_81659290
 	.4byte 0x0000000C
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
-	.4byte lbl_81614778
-	.4byte lbl_816147BC
-	.4byte lbl_81614800
-	.4byte lbl_81614844
-	.4byte lbl_81614888
-	.4byte lbl_816148CC
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614778
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816147BC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614800
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614844
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614888
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816148CC
 	.4byte 0x00000001
 	.4byte lbl_8165929C
 	.4byte 0x0000000C
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
-	.4byte lbl_81614778
-	.4byte lbl_816147BC
-	.4byte lbl_81614800
-	.4byte lbl_81614844
-	.4byte lbl_81614888
-	.4byte lbl_816148CC
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614778
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816147BC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614800
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614844
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614888
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816148CC
 	.4byte 0x00000000
 	.4byte lbl_81658EF4
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11959,12 +11931,12 @@
 	.4byte lbl_816592A8
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11975,12 +11947,12 @@
 	.4byte lbl_816592B4
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -11991,12 +11963,12 @@
 	.4byte lbl_816592C0
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12007,12 +11979,12 @@
 	.4byte lbl_816592CC
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12023,12 +11995,12 @@
 	.4byte lbl_816592D8
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12039,12 +12011,12 @@
 	.4byte lbl_816592E4
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12055,12 +12027,12 @@
 	.4byte lbl_816592F0
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12071,12 +12043,12 @@
 	.4byte lbl_816592FC
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12087,12 +12059,12 @@
 	.4byte lbl_81659308
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12103,12 +12075,12 @@
 	.4byte lbl_81659314
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12119,12 +12091,12 @@
 	.4byte lbl_81658F00
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12135,12 +12107,12 @@
 	.4byte lbl_81659320
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12151,12 +12123,12 @@
 	.4byte lbl_8165932C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12167,12 +12139,12 @@
 	.4byte lbl_81659338
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12183,12 +12155,12 @@
 	.4byte lbl_81659344
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12199,12 +12171,12 @@
 	.4byte lbl_81659350
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12215,12 +12187,12 @@
 	.4byte lbl_8165935C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12231,12 +12203,12 @@
 	.4byte lbl_81659368
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12247,12 +12219,12 @@
 	.4byte lbl_81659374
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12263,12 +12235,12 @@
 	.4byte lbl_81659380
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12279,12 +12251,12 @@
 	.4byte lbl_8165938C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12295,12 +12267,12 @@
 	.4byte lbl_81658F0C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12311,12 +12283,12 @@
 	.4byte lbl_81659398
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12327,12 +12299,12 @@
 	.4byte lbl_816593A4
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12343,12 +12315,12 @@
 	.4byte lbl_816593B0
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12359,12 +12331,12 @@
 	.4byte lbl_816593BC
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12375,12 +12347,12 @@
 	.4byte lbl_816593C8
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12391,12 +12363,12 @@
 	.4byte lbl_816593D4
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12407,12 +12379,12 @@
 	.4byte lbl_816593E0
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12423,12 +12395,12 @@
 	.4byte lbl_816593EC
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12439,12 +12411,12 @@
 	.4byte lbl_816593F8
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12455,12 +12427,12 @@
 	.4byte lbl_81659404
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12471,12 +12443,12 @@
 	.4byte lbl_81658F18
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12487,12 +12459,12 @@
 	.4byte lbl_81659410
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12503,12 +12475,12 @@
 	.4byte lbl_8165941C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12519,12 +12491,12 @@
 	.4byte lbl_81659428
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12535,12 +12507,12 @@
 	.4byte lbl_81659434
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12551,12 +12523,12 @@
 	.4byte lbl_81659440
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12567,12 +12539,12 @@
 	.4byte lbl_8165944C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12583,12 +12555,12 @@
 	.4byte lbl_81659458
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12599,12 +12571,12 @@
 	.4byte lbl_81659464
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12615,12 +12587,12 @@
 	.4byte lbl_81659470
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12631,12 +12603,12 @@
 	.4byte lbl_8165947C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12647,12 +12619,12 @@
 	.4byte lbl_81658F24
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12663,12 +12635,12 @@
 	.4byte lbl_81659488
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12679,12 +12651,12 @@
 	.4byte lbl_81659494
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12695,12 +12667,12 @@
 	.4byte lbl_816594A0
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12711,12 +12683,12 @@
 	.4byte lbl_816594AC
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12727,12 +12699,12 @@
 	.4byte lbl_816594B8
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12743,12 +12715,12 @@
 	.4byte lbl_816594C4
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12759,12 +12731,12 @@
 	.4byte lbl_816594D0
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12775,12 +12747,12 @@
 	.4byte lbl_816594DC
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12791,12 +12763,12 @@
 	.4byte lbl_816594E8
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12807,12 +12779,12 @@
 	.4byte lbl_816594F4
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12823,12 +12795,12 @@
 	.4byte lbl_81659500
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12839,12 +12811,12 @@
 	.4byte lbl_8165950C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12855,12 +12827,12 @@
 	.4byte lbl_8165951C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12871,12 +12843,12 @@
 	.4byte lbl_81659528
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12887,12 +12859,12 @@
 	.4byte lbl_81658F6C
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12903,12 +12875,12 @@
 	.4byte lbl_81658F80
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12919,14 +12891,14 @@
 	.4byte lbl_81658E20
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
-	.4byte lbl_81614778
-	.4byte lbl_816147BC
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614778
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816147BC
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12935,14 +12907,14 @@
 	.4byte lbl_81658E30
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
-	.4byte lbl_81614778
-	.4byte lbl_816147BC
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614778
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816147BC
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12951,12 +12923,12 @@
 	.4byte lbl_81658E40
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12967,14 +12939,14 @@
 	.4byte lbl_81659538
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
-	.4byte lbl_81614778
-	.4byte lbl_816147BC
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614778
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816147BC
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12983,14 +12955,14 @@
 	.4byte lbl_81659544
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
-	.4byte lbl_81614778
-	.4byte lbl_816147BC
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614778
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816147BC
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12999,62 +12971,62 @@
 	.4byte lbl_81659550
 	.4byte 0x0000000B
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
-	.4byte lbl_81614778
-	.4byte lbl_81614910
-	.4byte lbl_81614954
-	.4byte lbl_81614998
-	.4byte lbl_816149DC
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614778
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614910
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614954
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614998
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816149DC
 	.4byte 0x00000000
 	.4byte 0x00000003
 	.4byte lbl_81659560
 	.4byte 0x0000000B
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
-	.4byte lbl_81614778
-	.4byte lbl_81614910
-	.4byte lbl_81614954
-	.4byte lbl_81614998
-	.4byte lbl_816149DC
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614778
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614910
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614954
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614998
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816149DC
 	.4byte 0x00000000
 	.4byte 0x00000003
 	.4byte lbl_81659570
 	.4byte 0x0000000B
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
-	.4byte lbl_81614778
-	.4byte lbl_81614910
-	.4byte lbl_81614954
-	.4byte lbl_81614998
-	.4byte lbl_816149DC
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614778
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614910
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614954
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614998
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816149DC
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte lbl_81658DE8
 	.4byte 0x00000007
 	.4byte lbl_81658DD8
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
-	.4byte lbl_81614778
-	.4byte lbl_816147BC
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614778
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816147BC
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -13063,14 +13035,14 @@
 	.4byte lbl_81658DFC
 	.4byte 0x00000007
 	.4byte lbl_81658DD8
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
-	.4byte lbl_81614778
-	.4byte lbl_816147BC
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614778
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816147BC
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -13079,14 +13051,14 @@
 	.4byte lbl_81658DD8
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
-	.4byte lbl_81614778
-	.4byte lbl_816147BC
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614778
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816147BC
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -13095,14 +13067,14 @@
 	.4byte lbl_81659580
 	.4byte 0x00000007
 	.4byte lbl_81658DD8
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
-	.4byte lbl_81614778
-	.4byte lbl_816147BC
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614778
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816147BC
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -13111,19 +13083,19 @@
 	.4byte lbl_81659590
 	.4byte 0x00000007
 	.4byte lbl_81658DD8
-	.4byte lbl_816145E0
-	.4byte lbl_81614624
-	.4byte lbl_81614668
-	.4byte lbl_816146AC
-	.4byte lbl_816146F0
-	.4byte lbl_81614734
-	.4byte lbl_81614778
-	.4byte lbl_816147BC
+	.4byte csAninationFile__Q39textinput8keyboard6pctype
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614624
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614668
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146AC
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816146F0
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614734
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_81614778
+	.rel csAninationFile__Q39textinput8keyboard6pctype, .L_816147BC
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816595A0
+.endobj csPaneToAnimation__Q39textinput8keyboard6pctype
 
 # .data:0x2850 | 0x8165B5E0 | size: 0x5C
 .obj jumptable_8165B5E0, local

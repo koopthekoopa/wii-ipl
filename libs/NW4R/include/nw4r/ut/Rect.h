@@ -7,13 +7,13 @@ namespace nw4r {
     namespace ut {
         class Rect {
             public:
-            Rect() : mLeft(0), mTop(0), mRight(0), mBottom(0) {}
-            Rect(f32 left, f32 top, f32 right, f32 bottom) : mLeft(left), mTop(top), mRight(right), mBottom(bottom) {}
+            Rect() : left(0), top(0), right(0), bottom(0) {}
+            Rect(f32 left, f32 top, f32 right, f32 bottom) : left(left), top(top), right(right), bottom(bottom) {}
 
-            f32 mLeft;
-            f32 mTop;
-            f32 mRight;
-            f32 mBottom;
+            f32 left;
+            f32 top;
+            f32 right;
+            f32 bottom;
         };
     };
 };

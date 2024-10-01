@@ -113,7 +113,7 @@
 .endfn CHANSVmGetSourceLine
 
 # .text:0x178 | 0x8144A724 | size: 0xFC
-.fn CHANSVm_8144A724, global
+.fn CHANSVmAllocFromGarbage, local
 /* 8144A724 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144A728 | 7C 08 02 A6 */	mflr r0
 /* 8144A72C | 38 C0 00 00 */	li r6, 0x0
@@ -186,10 +186,10 @@
 /* 8144A814 | 7C 08 03 A6 */	mtlr r0
 /* 8144A818 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144A81C | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144A724
+.endfn CHANSVmAllocFromGarbage
 
 # .text:0x274 | 0x8144A820 | size: 0x20
-.fn CHANSVm_8144A820, global
+.fn VmUpdateSmallestFreeHeapSize, local
 /* 8144A820 | 80 A3 00 28 */	lwz r5, 0x28(r3)
 /* 8144A824 | 80 83 00 2C */	lwz r4, 0x2c(r3)
 /* 8144A828 | 80 03 00 1C */	lwz r0, 0x1c(r3)
@@ -198,10 +198,10 @@
 /* 8144A834 | 4C 81 00 20 */	blelr
 /* 8144A838 | 90 83 00 1C */	stw r4, 0x1c(r3)
 /* 8144A83C | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144A820
+.endfn VmUpdateSmallestFreeHeapSize
 
 # .text:0x294 | 0x8144A840 | size: 0xAC
-.fn CHANSVm_8144A840, global
+.fn VmNewObjHdr, local
 /* 8144A840 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144A844 | 7C 08 02 A6 */	mflr r0
 /* 8144A848 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -213,7 +213,7 @@
 /* 8144A860 | 3B E0 00 00 */	li r31, 0x0
 /* 8144A864 | 40 82 00 10 */	bne .L_8144A874
 /* 8144A868 | 38 80 00 20 */	li r4, 0x20
-/* 8144A86C | 4B FF FE B9 */	bl CHANSVm_8144A724
+/* 8144A86C | 4B FF FE B9 */	bl CHANSVmAllocFromGarbage
 /* 8144A870 | 7C 7F 1B 78 */	mr r31, r3
 .L_8144A874:
 /* 8144A874 | 2C 1F 00 00 */	cmpwi r31, 0x0
@@ -234,7 +234,7 @@
 /* 8144A8AC | 93 FD 00 2C */	stw r31, 0x2c(r29)
 .L_8144A8B0:
 /* 8144A8B0 | 7F A3 EB 78 */	mr r3, r29
-/* 8144A8B4 | 4B FF FF 6D */	bl CHANSVm_8144A820
+/* 8144A8B4 | 4B FF FF 6D */	bl VmUpdateSmallestFreeHeapSize
 .L_8144A8B8:
 /* 8144A8B8 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 8144A8BC | 41 82 00 14 */	beq .L_8144A8D0
@@ -250,10 +250,10 @@
 /* 8144A8E0 | 7C 08 03 A6 */	mtlr r0
 /* 8144A8E4 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144A8E8 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144A840
+.endfn VmNewObjHdr
 
 # .text:0x340 | 0x8144A8EC | size: 0x94
-.fn CHANSVm_8144A8EC, global
+.fn CHANSVmAllocFromHeap, local
 /* 8144A8EC | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144A8F0 | 7C 08 02 A6 */	mflr r0
 /* 8144A8F4 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -266,7 +266,7 @@
 /* 8144A910 | 41 82 00 54 */	beq .L_8144A964
 /* 8144A914 | 54 80 06 FF */	clrlwi. r0, r4, 27
 /* 8144A918 | 40 82 00 4C */	bne .L_8144A964
-/* 8144A91C | 4B FF FE 09 */	bl CHANSVm_8144A724
+/* 8144A91C | 4B FF FE 09 */	bl CHANSVmAllocFromGarbage
 /* 8144A920 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144A924 | 7C 7E 1B 78 */	mr r30, r3
 /* 8144A928 | 40 82 00 3C */	bne .L_8144A964
@@ -279,7 +279,7 @@
 /* 8144A944 | 7F FE FB 78 */	mr r30, r31
 /* 8144A948 | 90 1C 00 28 */	stw r0, 0x28(r28)
 /* 8144A94C | 7F 83 E3 78 */	mr r3, r28
-/* 8144A950 | 4B FF FE D1 */	bl CHANSVm_8144A820
+/* 8144A950 | 4B FF FE D1 */	bl VmUpdateSmallestFreeHeapSize
 /* 8144A954 | 7F E3 FB 78 */	mr r3, r31
 /* 8144A958 | 7F A5 EB 78 */	mr r5, r29
 /* 8144A95C | 38 80 00 00 */	li r4, 0x0
@@ -292,10 +292,10 @@
 /* 8144A974 | 7C 08 03 A6 */	mtlr r0
 /* 8144A978 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144A97C | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144A8EC
+.endfn CHANSVmAllocFromHeap
 
 # .text:0x3D4 | 0x8144A980 | size: 0x1D4
-.fn CHANSVm_8144A980, global
+.fn VmFree, local
 /* 8144A980 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144A984 | 7C 08 02 A6 */	mflr r0
 /* 8144A988 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -428,10 +428,10 @@
 /* 8144AB48 | 7C 08 03 A6 */	mtlr r0
 /* 8144AB4C | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144AB50 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144A980
+.endfn VmFree
 
 # .text:0x5A8 | 0x8144AB54 | size: 0x100
-.fn CHANSVm_8144AB54, global
+.fn CHANSVmDeleteObject, local
 /* 8144AB54 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144AB58 | 7C 08 02 A6 */	mflr r0
 /* 8144AB5C | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -482,7 +482,7 @@
 /* 8144AC00 | 80 9F 00 00 */	lwz r4, 0x0(r31)
 /* 8144AC04 | 7F A3 EB 78 */	mr r3, r29
 /* 8144AC08 | 80 BF 00 08 */	lwz r5, 0x8(r31)
-/* 8144AC0C | 4B FF FD 75 */	bl CHANSVm_8144A980
+/* 8144AC0C | 4B FF FD 75 */	bl VmFree
 /* 8144AC10 | 7F E3 FB 78 */	mr r3, r31
 /* 8144AC14 | 38 80 00 00 */	li r4, 0x0
 /* 8144AC18 | 38 A0 00 10 */	li r5, 0x10
@@ -504,7 +504,7 @@
 /* 8144AC48 | 7C 08 03 A6 */	mtlr r0
 /* 8144AC4C | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144AC50 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144AB54
+.endfn CHANSVmDeleteObject
 
 # .text:0x6A8 | 0x8144AC54 | size: 0x180
 .fn CHANSVmNewObjData, global
@@ -545,7 +545,7 @@
 /* 8144ACD4 | 40 82 00 1C */	bne .L_8144ACF0
 /* 8144ACD8 | 7F A3 EB 78 */	mr r3, r29
 /* 8144ACDC | 38 80 40 00 */	li r4, 0x4000
-/* 8144ACE0 | 4B FF FC 0D */	bl CHANSVm_8144A8EC
+/* 8144ACE0 | 4B FF FC 0D */	bl CHANSVmAllocFromHeap
 /* 8144ACE4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144ACE8 | 41 82 00 4C */	beq .L_8144AD34
 /* 8144ACEC | 90 79 00 70 */	stw r3, 0x70(r25)
@@ -595,7 +595,7 @@
 /* 8144AD84 | 7F A3 EB 78 */	mr r3, r29
 /* 8144AD88 | 54 1A 00 34 */	clrrwi r26, r0, 5
 /* 8144AD8C | 7F 44 D3 78 */	mr r4, r26
-/* 8144AD90 | 4B FF FB 5D */	bl CHANSVm_8144A8EC
+/* 8144AD90 | 4B FF FB 5D */	bl CHANSVmAllocFromHeap
 /* 8144AD94 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144AD98 | 41 82 00 20 */	beq .L_8144ADB8
 /* 8144AD9C | 38 00 00 01 */	li r0, 0x1
@@ -617,7 +617,7 @@
 .endfn CHANSVmNewObjData
 
 # .text:0x828 | 0x8144ADD4 | size: 0xB0
-.fn CHANSVm_8144ADD4, global
+.fn CHANSVmNewObject, local
 /* 8144ADD4 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144ADD8 | 7C 08 02 A6 */	mflr r0
 /* 8144ADDC | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -635,7 +635,7 @@
 /* 8144AE0C | 4B EE 55 29 */	bl memset
 /* 8144AE10 | 48 00 00 14 */	b .L_8144AE24
 .L_8144AE14:
-/* 8144AE14 | 4B FF FA 2D */	bl CHANSVm_8144A840
+/* 8144AE14 | 4B FF FA 2D */	bl VmNewObjHdr
 /* 8144AE18 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144AE1C | 7C 7D 1B 78 */	mr r29, r3
 /* 8144AE20 | 41 82 00 48 */	beq .L_8144AE68
@@ -652,8 +652,8 @@
 .L_8144AE48:
 /* 8144AE48 | 28 1E 00 03 */	cmplwi r30, 0x3
 /* 8144AE4C | 40 82 00 10 */	bne .L_8144AE5C
-/* 8144AE50 | 3C 60 81 61 */	lis r3, lbl_81616CC8@ha
-/* 8144AE54 | 38 63 6C C8 */	addi r3, r3, lbl_81616CC8@l
+/* 8144AE50 | 3C 60 81 61 */	lis r3, CHANSVmConstStringDataEmpty@ha
+/* 8144AE54 | 38 63 6C C8 */	addi r3, r3, CHANSVmConstStringDataEmpty@l
 /* 8144AE58 | 90 7D 00 00 */	stw r3, 0x0(r29)
 .L_8144AE5C:
 /* 8144AE5C | 9B DD 00 08 */	stb r30, 0x8(r29)
@@ -668,7 +668,7 @@
 /* 8144AE78 | 7C 08 03 A6 */	mtlr r0
 /* 8144AE7C | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144AE80 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144ADD4
+.endfn CHANSVmNewObject
 
 # .text:0x8D8 | 0x8144AE84 | size: 0x14
 .fn CHANSVmNewStringObject, global
@@ -676,7 +676,7 @@
 /* 8144AE88 | 7C 85 23 78 */	mr r5, r4
 /* 8144AE8C | 38 80 00 00 */	li r4, 0x0
 /* 8144AE90 | 38 C0 00 03 */	li r6, 0x3
-/* 8144AE94 | 4B FF FF 40 */	b CHANSVm_8144ADD4
+/* 8144AE94 | 4B FF FF 40 */	b CHANSVmNewObject
 .endfn CHANSVmNewStringObject
 
 # .text:0x8EC | 0x8144AE98 | size: 0xE0
@@ -699,7 +699,7 @@
 /* 8144AED4 | 48 00 00 18 */	b .L_8144AEEC
 .L_8144AED8:
 /* 8144AED8 | 38 80 00 00 */	li r4, 0x0
-/* 8144AEDC | 4B FF F9 65 */	bl CHANSVm_8144A840
+/* 8144AEDC | 4B FF F9 65 */	bl VmNewObjHdr
 /* 8144AEE0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144AEE4 | 7C 7E 1B 78 */	mr r30, r3
 /* 8144AEE8 | 41 82 00 74 */	beq .L_8144AF5C
@@ -748,7 +748,7 @@
 .endfn CHANSVmCopyObject
 
 # .text:0x9CC | 0x8144AF78 | size: 0xE0
-.fn CHANSVm_8144AF78, global
+.fn VmPopObject, local
 /* 8144AF78 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144AF7C | 7C 08 02 A6 */	mflr r0
 /* 8144AF80 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -772,7 +772,7 @@
 /* 8144AFC8 | 38 03 00 50 */	addi r0, r3, 0x50
 /* 8144AFCC | 7C 04 00 40 */	cmplw r4, r0
 /* 8144AFD0 | 40 82 00 0C */	bne .L_8144AFDC
-/* 8144AFD4 | 4B FF FB 81 */	bl CHANSVm_8144AB54
+/* 8144AFD4 | 4B FF FB 81 */	bl CHANSVmDeleteObject
 /* 8144AFD8 | 7C 7E 1B 78 */	mr r30, r3
 .L_8144AFDC:
 /* 8144AFDC | 2C 1E 00 00 */	cmpwi r30, 0x0
@@ -791,7 +791,7 @@
 /* 8144B010 | 48 00 00 10 */	b .L_8144B020
 .L_8144B014:
 /* 8144B014 | 7F A4 EB 78 */	mr r4, r29
-/* 8144B018 | 4B FF FB 3D */	bl CHANSVm_8144AB54
+/* 8144B018 | 4B FF FB 3D */	bl CHANSVmDeleteObject
 /* 8144B01C | 7C 7E 1B 78 */	mr r30, r3
 .L_8144B020:
 /* 8144B020 | 2C 1E 00 00 */	cmpwi r30, 0x0
@@ -809,10 +809,10 @@
 /* 8144B04C | 7C 08 03 A6 */	mtlr r0
 /* 8144B050 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144B054 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144AF78
+.endfn VmPopObject
 
 # .text:0xAAC | 0x8144B058 | size: 0x34
-.fn CHANSVm_8144B058, global
+.fn VmStrToU16FromU8, local
 /* 8144B058 | 7C C4 2A 14 */	add r6, r4, r5
 /* 8144B05C | 54 A4 08 3C */	slwi r4, r5, 1
 /* 8144B060 | 38 00 00 00 */	li r0, 0x0
@@ -827,10 +827,10 @@
 /* 8144B080 | 7C 03 21 AE */	stbx r0, r3, r4
 /* 8144B084 | 42 00 FF EC */	bdnz .L_8144B070
 /* 8144B088 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144B058
+.endfn VmStrToU16FromU8
 
 # .text:0xAE0 | 0x8144B08C | size: 0x44
-.fn CHANSVm_8144B08C, global
+.fn VmStrCpyToU8FromU16, local
 /* 8144B08C | 7C 67 1B 78 */	mr r7, r3
 /* 8144B090 | 38 C0 00 00 */	li r6, 0x0
 /* 8144B094 | 7C A9 03 A6 */	mtctr r5
@@ -850,7 +850,7 @@
 /* 8144B0C4 | 38 E7 00 01 */	addi r7, r7, 0x1
 /* 8144B0C8 | 42 00 FF D8 */	bdnz .L_8144B0A0
 /* 8144B0CC | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144B08C
+.endfn VmStrCpyToU8FromU16
 
 # .text:0xB24 | 0x8144B0D0 | size: 0xB4
 .fn CHANSVmStrCpyToU8FromStringObject, global
@@ -905,7 +905,7 @@
 .endfn CHANSVmStrCpyToU8FromStringObject
 
 # .text:0xBD8 | 0x8144B184 | size: 0x54
-.fn CHANSVm_8144B184, global
+.fn CHANSVm_8144B184, local
 /* 8144B184 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144B188 | 7C 08 02 A6 */	mflr r0
 /* 8144B18C | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -913,7 +913,7 @@
 /* 8144B194 | FF E0 08 90 */	fmr f31, f1
 /* 8144B198 | 93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8144B19C | 3B E0 00 00 */	li r31, 0x0
-/* 8144B1A0 | 48 1B 33 CD */	bl fn_815FE56C
+/* 8144B1A0 | 48 1B 33 CD */	bl __fpclassifyd
 /* 8144B1A4 | 2C 03 00 01 */	cmpwi r3, 0x1
 /* 8144B1A8 | 41 82 00 10 */	beq .L_8144B1B8
 /* 8144B1AC | C8 02 8B 08 */	lfd f0, lbl_81694F08@sda21(r0)
@@ -932,7 +932,7 @@
 .endfn CHANSVm_8144B184
 
 # .text:0xC2C | 0x8144B1D8 | size: 0x20
-.fn CHANSVm_8144B1D8, global
+.fn CHANSVm_8144B1D8, local
 /* 8144B1D8 | C8 02 8B 28 */	lfd f0, lbl_81694F28@sda21(r0)
 /* 8144B1DC | FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 8144B1E0 | 40 80 00 0C */	bge .L_8144B1EC
@@ -945,7 +945,7 @@
 .endfn CHANSVm_8144B1D8
 
 # .text:0xC4C | 0x8144B1F8 | size: 0x50
-.fn CHANSVm_8144B1F8, global
+.fn CHANSVm_8144B1F8, local
 /* 8144B1F8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144B1FC | 7C 08 02 A6 */	mflr r0
 /* 8144B200 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -971,7 +971,7 @@
 .endfn CHANSVm_8144B1F8
 
 # .text:0xC9C | 0x8144B248 | size: 0xC4
-.fn CHANSVm_8144B248, global
+.fn VmParseInt, local
 /* 8144B248 | 94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 8144B24C | 7C 08 02 A6 */	mflr r0
 /* 8144B250 | 90 01 00 74 */	stw r0, 0x74(r1)
@@ -994,7 +994,7 @@
 /* 8144B294 | 80 83 00 00 */	lwz r4, 0x0(r3)
 /* 8144B298 | 7F A5 EB 78 */	mr r5, r29
 /* 8144B29C | 38 61 00 0C */	addi r3, r1, 0xc
-/* 8144B2A0 | 4B FF FD ED */	bl CHANSVm_8144B08C
+/* 8144B2A0 | 4B FF FD ED */	bl VmStrCpyToU8FromU16
 /* 8144B2A4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144B2A8 | 41 82 00 48 */	beq .L_8144B2F0
 /* 8144B2AC | 3B E1 00 0C */	addi r31, r1, 0xc
@@ -1025,10 +1025,10 @@
 /* 8144B300 | 7C 08 03 A6 */	mtlr r0
 /* 8144B304 | 38 21 00 70 */	addi r1, r1, 0x70
 /* 8144B308 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144B248
+.endfn VmParseInt
 
 # .text:0xD60 | 0x8144B30C | size: 0xAC
-.fn CHANSVm_8144B30C, global
+.fn CHANSVm_8144B30C, local
 /* 8144B30C | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144B310 | 7C 08 02 A6 */	mflr r0
 /* 8144B314 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -1041,7 +1041,7 @@
 /* 8144B330 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8144B334 | 7C BE 2B 78 */	mr r30, r5
 /* 8144B338 | 38 A0 00 00 */	li r5, 0x0
-/* 8144B33C | 4B FF FA 99 */	bl CHANSVm_8144ADD4
+/* 8144B33C | 4B FF FA 99 */	bl CHANSVmNewObject
 /* 8144B340 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144B344 | 7C 7F 1B 78 */	mr r31, r3
 /* 8144B348 | 41 82 00 4C */	beq .L_8144B394
@@ -1077,7 +1077,7 @@
 .endfn CHANSVm_8144B30C
 
 # .text:0xE0C | 0x8144B3B8 | size: 0x70
-.fn CHANSVm_8144B3B8, global
+.fn CHANSVmConvertToIntFromStr, local
 /* 8144B3B8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144B3BC | 7C 08 02 A6 */	mflr r0
 /* 8144B3C0 | 38 80 00 00 */	li r4, 0x0
@@ -1088,14 +1088,14 @@
 /* 8144B3D4 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8144B3D8 | 7C BE 2B 78 */	mr r30, r5
 /* 8144B3DC | 38 A0 00 00 */	li r5, 0x0
-/* 8144B3E0 | 4B FF F9 F5 */	bl CHANSVm_8144ADD4
+/* 8144B3E0 | 4B FF F9 F5 */	bl CHANSVmNewObject
 /* 8144B3E4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144B3E8 | 7C 7F 1B 78 */	mr r31, r3
 /* 8144B3EC | 41 82 00 20 */	beq .L_8144B40C
 /* 8144B3F0 | 7F C3 F3 78 */	mr r3, r30
 /* 8144B3F4 | 7F E5 FB 78 */	mr r5, r31
 /* 8144B3F8 | 38 80 00 00 */	li r4, 0x0
-/* 8144B3FC | 4B FF FE 4D */	bl CHANSVm_8144B248
+/* 8144B3FC | 4B FF FE 4D */	bl VmParseInt
 /* 8144B400 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144B404 | 40 82 00 08 */	bne .L_8144B40C
 /* 8144B408 | 3B E0 00 00 */	li r31, 0x0
@@ -1107,13 +1107,13 @@
 /* 8144B41C | 7C 08 03 A6 */	mtlr r0
 /* 8144B420 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144B424 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144B3B8
+.endfn CHANSVmConvertToIntFromStr
 
 # .text:0xE7C | 0x8144B428 | size: 0x8
-.fn CHANSVm_8144B428, global
+.fn CHANSVmConvertToIntFromArray, global
 /* 8144B428 | 38 60 00 00 */	li r3, 0x0
 /* 8144B42C | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144B428
+.endfn CHANSVmConvertToIntFromArray
 
 # .text:0xE84 | 0x8144B430 | size: 0x40
 .fn CHANSVm_8144B430, global
@@ -1124,7 +1124,7 @@
 /* 8144B440 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 8144B444 | 38 C0 00 02 */	li r6, 0x2
 /* 8144B448 | 38 E0 00 00 */	li r7, 0x0
-/* 8144B44C | 4B FF F9 89 */	bl CHANSVm_8144ADD4
+/* 8144B44C | 4B FF F9 89 */	bl CHANSVmNewObject
 /* 8144B450 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144B454 | 41 82 00 0C */	beq .L_8144B460
 /* 8144B458 | C8 02 8B 08 */	lfd f0, lbl_81694F08@sda21(r0)
@@ -1148,7 +1148,7 @@
 /* 8144B48C | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8144B490 | 7C BE 2B 78 */	mr r30, r5
 /* 8144B494 | 38 A0 00 00 */	li r5, 0x0
-/* 8144B498 | 4B FF F9 3D */	bl CHANSVm_8144ADD4
+/* 8144B498 | 4B FF F9 3D */	bl CHANSVmNewObject
 /* 8144B49C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144B4A0 | 7C 7F 1B 78 */	mr r31, r3
 /* 8144B4A4 | 41 82 00 14 */	beq .L_8144B4B8
@@ -1178,7 +1178,7 @@
 /* 8144B4F0 | 38 A0 00 00 */	li r5, 0x0
 /* 8144B4F4 | 38 C0 00 02 */	li r6, 0x2
 /* 8144B4F8 | 38 E0 00 00 */	li r7, 0x0
-/* 8144B4FC | 4B FF F8 D9 */	bl CHANSVm_8144ADD4
+/* 8144B4FC | 4B FF F8 D9 */	bl CHANSVmNewObject
 /* 8144B500 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144B504 | 7C 7B 1B 78 */	mr r27, r3
 /* 8144B508 | 41 82 00 FC */	beq .L_8144B604
@@ -1197,7 +1197,7 @@
 /* 8144B53C | 80 83 00 00 */	lwz r4, 0x0(r3)
 /* 8144B540 | 7F A5 EB 78 */	mr r5, r29
 /* 8144B544 | 38 61 00 0C */	addi r3, r1, 0xc
-/* 8144B548 | 4B FF FB 45 */	bl CHANSVm_8144B08C
+/* 8144B548 | 4B FF FB 45 */	bl VmStrCpyToU8FromU16
 /* 8144B54C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144B550 | 41 82 00 A4 */	beq .L_8144B5F4
 /* 8144B554 | 3B 81 00 0C */	addi r28, r1, 0xc
@@ -1232,7 +1232,7 @@
 .L_8144B5C0:
 /* 8144B5C0 | 38 61 00 0C */	addi r3, r1, 0xc
 /* 8144B5C4 | 38 81 00 08 */	addi r4, r1, 0x8
-/* 8144B5C8 | 48 1B 88 01 */	bl fn_81603DC8
+/* 8144B5C8 | 48 1B 88 01 */	bl strtod
 /* 8144B5CC | 80 61 00 08 */	lwz r3, 0x8(r1)
 /* 8144B5D0 | 38 01 00 0C */	addi r0, r1, 0xc
 /* 8144B5D4 | 7C 03 00 40 */	cmplw r3, r0
@@ -1269,7 +1269,7 @@
 .endfn CHANSVm_8144B620
 
 # .text:0x1080 | 0x8144B62C | size: 0x58
-.fn CHANSVm_8144B62C, global
+.fn VmToStrFromIntCommon, local
 /* 8144B62C | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144B630 | 7C 08 02 A6 */	mflr r0
 /* 8144B634 | 54 84 F8 7E */	srwi r4, r4, 1
@@ -1284,7 +1284,7 @@
 /* 8144B658 | 7F C3 F3 78 */	mr r3, r30
 /* 8144B65C | 7F C4 F3 78 */	mr r4, r30
 /* 8144B660 | 7F E5 FB 78 */	mr r5, r31
-/* 8144B664 | 4B FF F9 F5 */	bl CHANSVm_8144B058
+/* 8144B664 | 4B FF F9 F5 */	bl VmStrToU16FromU8
 /* 8144B668 | 57 E3 08 3C */	slwi r3, r31, 1
 /* 8144B66C | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8144B670 | 83 C1 00 08 */	lwz r30, 0x8(r1)
@@ -1292,7 +1292,7 @@
 /* 8144B678 | 7C 08 03 A6 */	mtlr r0
 /* 8144B67C | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144B680 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144B62C
+.endfn VmToStrFromIntCommon
 
 # .text:0x10D8 | 0x8144B684 | size: 0xB0
 .fn CHANSVm_8144B684, global
@@ -1306,7 +1306,7 @@
 /* 8144B6A0 | 38 A0 00 00 */	li r5, 0x0
 /* 8144B6A4 | 38 C0 00 03 */	li r6, 0x3
 /* 8144B6A8 | 38 E0 00 80 */	li r7, 0x80
-/* 8144B6AC | 4B FF F7 29 */	bl CHANSVm_8144ADD4
+/* 8144B6AC | 4B FF F7 29 */	bl CHANSVmNewObject
 /* 8144B6B0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144B6B4 | 7C 7D 1B 78 */	mr r29, r3
 /* 8144B6B8 | 41 82 00 58 */	beq .L_8144B710
@@ -1323,7 +1323,7 @@
 /* 8144B6E4 | 7F E3 FB 78 */	mr r3, r31
 /* 8144B6E8 | 7F E4 FB 78 */	mr r4, r31
 /* 8144B6EC | 7F C5 F3 78 */	mr r5, r30
-/* 8144B6F0 | 4B FF F9 69 */	bl CHANSVm_8144B058
+/* 8144B6F0 | 4B FF F9 69 */	bl VmStrToU16FromU8
 /* 8144B6F4 | 80 7D 00 00 */	lwz r3, 0x0(r29)
 /* 8144B6F8 | 57 C0 08 3C */	slwi r0, r30, 1
 /* 8144B6FC | 90 03 00 04 */	stw r0, 0x4(r3)
@@ -1352,11 +1352,11 @@
 /* 8144B73C | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8144B740 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8144B744 | 48 1A DD 85 */	bl _savegpr_29
-/* 8144B748 | 3F E0 81 61 */	lis r31, lbl_81616C78@ha
+/* 8144B748 | 3F E0 81 61 */	lis r31, CHANSVmConstStringObjectUndefined@ha
 /* 8144B74C | C8 25 00 00 */	lfd f1, 0x0(r5)
 /* 8144B750 | 7C 7D 1B 78 */	mr r29, r3
 /* 8144B754 | 7C BE 2B 78 */	mr r30, r5
-/* 8144B758 | 3B FF 6C 78 */	addi r31, r31, lbl_81616C78@l
+/* 8144B758 | 3B FF 6C 78 */	addi r31, r31, CHANSVmConstStringObjectUndefined@l
 /* 8144B75C | 4B FF FA 29 */	bl CHANSVm_8144B184
 /* 8144B760 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144B764 | 41 82 00 0C */	beq .L_8144B770
@@ -1381,7 +1381,7 @@
 /* 8144B7A4 | 38 A0 00 00 */	li r5, 0x0
 /* 8144B7A8 | 38 C0 00 03 */	li r6, 0x3
 /* 8144B7AC | 38 E0 00 80 */	li r7, 0x80
-/* 8144B7B0 | 4B FF F6 25 */	bl CHANSVm_8144ADD4
+/* 8144B7B0 | 4B FF F6 25 */	bl CHANSVmNewObject
 /* 8144B7B4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144B7B8 | 7C 7F 1B 78 */	mr r31, r3
 /* 8144B7BC | 41 82 00 30 */	beq .L_8144B7EC
@@ -1389,7 +1389,7 @@
 /* 8144B7C4 | 38 80 00 80 */	li r4, 0x80
 /* 8144B7C8 | C8 3E 00 00 */	lfd f1, 0x0(r30)
 /* 8144B7CC | 80 63 00 00 */	lwz r3, 0x0(r3)
-/* 8144B7D0 | 4B FF FE 5D */	bl CHANSVm_8144B62C
+/* 8144B7D0 | 4B FF FE 5D */	bl VmToStrFromIntCommon
 /* 8144B7D4 | 80 9F 00 00 */	lwz r4, 0x0(r31)
 /* 8144B7D8 | 90 64 00 04 */	stw r3, 0x4(r4)
 /* 8144B7DC | 80 7F 00 00 */	lwz r3, 0x0(r31)
@@ -1419,7 +1419,7 @@
 .endfn CHANSVm_8144B810
 
 # .text:0x1274 | 0x8144B820 | size: 0x50
-.fn CHANSVm_8144B820, global
+.fn CHANSVmConvertObjectTypeError, local
 /* 8144B820 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144B824 | 7C 08 02 A6 */	mflr r0
 /* 8144B828 | 7C 86 23 78 */	mr r6, r4
@@ -1441,10 +1441,10 @@
 /* 8144B864 | 7C 08 03 A6 */	mtlr r0
 /* 8144B868 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144B86C | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144B820
+.endfn CHANSVmConvertObjectTypeError
 
 # .text:0x12C4 | 0x8144B870 | size: 0x6C
-.fn CHANSVm_8144B870, global
+.fn VmGetEnumedType, local
 /* 8144B870 | 28 04 00 09 */	cmplwi r4, 0x9
 /* 8144B874 | 41 81 00 4C */	bgt .L_8144B8C0
 /* 8144B878 | 3C A0 81 67 */	lis r5, jumptable_81669100@ha
@@ -1481,10 +1481,10 @@
 .L_8144B8D4:
 /* 8144B8D4 | 38 60 00 01 */	li r3, 0x1
 /* 8144B8D8 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144B870
+.endfn VmGetEnumedType
 
 # .text:0x1330 | 0x8144B8DC | size: 0xBC
-.fn CHANSVm_8144B8DC, local
+.fn CHANSVmConvertObjectType, local
 /* 8144B8DC | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144B8E0 | 7C 08 02 A6 */	mflr r0
 /* 8144B8E4 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -1505,12 +1505,12 @@
 /* 8144B91C | 48 00 00 64 */	b .L_8144B980
 .L_8144B920:
 /* 8144B920 | 38 61 00 0C */	addi r3, r1, 0xc
-/* 8144B924 | 4B FF FF 4D */	bl CHANSVm_8144B870
+/* 8144B924 | 4B FF FF 4D */	bl VmGetEnumedType
 /* 8144B928 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144B92C | 41 82 00 18 */	beq .L_8144B944
 /* 8144B930 | 88 9F 00 08 */	lbz r4, 0x8(r31)
 /* 8144B934 | 38 61 00 08 */	addi r3, r1, 0x8
-/* 8144B938 | 4B FF FF 39 */	bl CHANSVm_8144B870
+/* 8144B938 | 4B FF FF 39 */	bl VmGetEnumedType
 /* 8144B93C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144B940 | 40 82 00 0C */	bne .L_8144B94C
 .L_8144B944:
@@ -1518,9 +1518,9 @@
 /* 8144B948 | 48 00 00 38 */	b .L_8144B980
 .L_8144B94C:
 /* 8144B94C | 80 61 00 0C */	lwz r3, 0xc(r1)
-/* 8144B950 | 3C A0 81 61 */	lis r5, lbl_81616D48@ha
+/* 8144B950 | 3C A0 81 61 */	lis r5, VmTypeConvertFuncTbl@ha
 /* 8144B954 | 80 01 00 08 */	lwz r0, 0x8(r1)
-/* 8144B958 | 38 A5 6D 48 */	addi r5, r5, lbl_81616D48@l
+/* 8144B958 | 38 A5 6D 48 */	addi r5, r5, VmTypeConvertFuncTbl@l
 /* 8144B95C | 1C E3 00 18 */	mulli r7, r3, 0x18
 /* 8144B960 | 7F A3 EB 78 */	mr r3, r29
 /* 8144B964 | 54 06 10 3A */	slwi r6, r0, 2
@@ -1537,7 +1537,7 @@
 /* 8144B98C | 7C 08 03 A6 */	mtlr r0
 /* 8144B990 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144B994 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144B8DC
+.endfn CHANSVmConvertObjectType
 
 # .text:0x13EC | 0x8144B998 | size: 0x54
 .fn CHANSVmSetInteger, global
@@ -1549,7 +1549,7 @@
 /* 8144B9AC | 7C 9D 23 78 */	mr r29, r4
 /* 8144B9B0 | 7C BF 2B 78 */	mr r31, r5
 /* 8144B9B4 | 7C DE 33 78 */	mr r30, r6
-/* 8144B9B8 | 4B FF F1 9D */	bl CHANSVm_8144AB54
+/* 8144B9B8 | 4B FF F1 9D */	bl CHANSVmDeleteObject
 /* 8144B9BC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144B9C0 | 40 82 00 14 */	bne .L_8144B9D4
 /* 8144B9C4 | 38 00 00 01 */	li r0, 0x1
@@ -1574,7 +1574,7 @@
 /* 8144B9FC | FF E0 08 90 */	fmr f31, f1
 /* 8144BA00 | 93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8144BA04 | 7C 9F 23 78 */	mr r31, r4
-/* 8144BA08 | 4B FF F1 4D */	bl CHANSVm_8144AB54
+/* 8144BA08 | 4B FF F1 4D */	bl CHANSVmDeleteObject
 /* 8144BA0C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144BA10 | 40 82 00 20 */	bne .L_8144BA30
 /* 8144BA14 | C8 02 8B 10 */	lfd f0, lbl_81694F10@sda21(r0)
@@ -1605,7 +1605,7 @@
 /* 8144BA60 | 7C 9C 23 78 */	mr r28, r4
 /* 8144BA64 | 7C BD 2B 78 */	mr r29, r5
 /* 8144BA68 | 7C DE 33 78 */	mr r30, r6
-/* 8144BA6C | 4B FF F0 E9 */	bl CHANSVm_8144AB54
+/* 8144BA6C | 4B FF F0 E9 */	bl CHANSVmDeleteObject
 /* 8144BA70 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144BA74 | 7C 7F 1B 78 */	mr r31, r3
 /* 8144BA78 | 40 82 00 48 */	bne .L_8144BAC0
@@ -1614,7 +1614,7 @@
 /* 8144BA84 | 7F C7 F3 78 */	mr r7, r30
 /* 8144BA88 | 38 80 00 00 */	li r4, 0x0
 /* 8144BA8C | 38 C0 00 03 */	li r6, 0x3
-/* 8144BA90 | 4B FF F3 45 */	bl CHANSVm_8144ADD4
+/* 8144BA90 | 4B FF F3 45 */	bl CHANSVmNewObject
 /* 8144BA94 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144BA98 | 40 82 00 0C */	bne .L_8144BAA4
 /* 8144BA9C | 38 60 FC 54 */	li r3, -0x3ac
@@ -1649,7 +1649,7 @@
 /* 8144BAF4 | 7C 9C 23 78 */	mr r28, r4
 /* 8144BAF8 | 7C BD 2B 78 */	mr r29, r5
 /* 8144BAFC | 7C DE 33 78 */	mr r30, r6
-/* 8144BB00 | 4B FF F0 55 */	bl CHANSVm_8144AB54
+/* 8144BB00 | 4B FF F0 55 */	bl CHANSVmDeleteObject
 /* 8144BB04 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144BB08 | 7C 7F 1B 78 */	mr r31, r3
 /* 8144BB0C | 40 82 00 48 */	bne .L_8144BB54
@@ -1658,7 +1658,7 @@
 /* 8144BB18 | 57 C7 08 3C */	slwi r7, r30, 1
 /* 8144BB1C | 38 80 00 00 */	li r4, 0x0
 /* 8144BB20 | 38 C0 00 03 */	li r6, 0x3
-/* 8144BB24 | 4B FF F2 B1 */	bl CHANSVm_8144ADD4
+/* 8144BB24 | 4B FF F2 B1 */	bl CHANSVmNewObject
 /* 8144BB28 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144BB2C | 40 82 00 0C */	bne .L_8144BB38
 /* 8144BB30 | 38 60 FC 54 */	li r3, -0x3ac
@@ -1670,7 +1670,7 @@
 /* 8144BB44 | 7F A4 EB 78 */	mr r4, r29
 /* 8144BB48 | 7F C5 F3 78 */	mr r5, r30
 /* 8144BB4C | 80 63 00 00 */	lwz r3, 0x0(r3)
-/* 8144BB50 | 4B FF F5 09 */	bl CHANSVm_8144B058
+/* 8144BB50 | 4B FF F5 09 */	bl VmStrToU16FromU8
 .L_8144BB54:
 /* 8144BB54 | 7F E3 FB 78 */	mr r3, r31
 .L_8144BB58:
@@ -1733,7 +1733,7 @@
 /* 8144BC18 | 80 E4 00 04 */	lwz r7, 0x4(r4)
 /* 8144BC1C | 38 80 00 00 */	li r4, 0x0
 /* 8144BC20 | 7C E7 02 14 */	add r7, r7, r0
-/* 8144BC24 | 4B FF F1 B1 */	bl CHANSVm_8144ADD4
+/* 8144BC24 | 4B FF F1 B1 */	bl CHANSVmNewObject
 /* 8144BC28 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144BC2C | 7C 7F 1B 78 */	mr r31, r3
 /* 8144BC30 | 41 82 00 7C */	beq .L_8144BCAC
@@ -1767,7 +1767,7 @@
 /* 8144BC98 | 40 82 00 14 */	bne .L_8144BCAC
 /* 8144BC9C | 7F 43 D3 78 */	mr r3, r26
 /* 8144BCA0 | 7F E4 FB 78 */	mr r4, r31
-/* 8144BCA4 | 4B FF EE B1 */	bl CHANSVm_8144AB54
+/* 8144BCA4 | 4B FF EE B1 */	bl CHANSVmDeleteObject
 /* 8144BCA8 | 7C 7E 1B 78 */	mr r30, r3
 .L_8144BCAC:
 /* 8144BCAC | 39 61 00 30 */	addi r11, r1, 0x30
@@ -1959,7 +1959,7 @@
 .endfn CHANSVm_8144BE7C
 
 # .text:0x1978 | 0x8144BF24 | size: 0x94
-.fn CHANSVm_8144BF24, global
+.fn VmULShift, local
 /* 8144BF24 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144BF28 | 7C 08 02 A6 */	mflr r0
 /* 8144BF2C | 2C 04 00 01 */	cmpwi r4, 0x1
@@ -2001,10 +2001,10 @@
 /* 8144BFAC | 7C 08 03 A6 */	mtlr r0
 /* 8144BFB0 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144BFB4 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144BF24
+.endfn VmULShift
 
 # .text:0x1A0C | 0x8144BFB8 | size: 0x98
-.fn CHANSVm_8144BFB8, global
+.fn VmARShift, local
 /* 8144BFB8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144BFBC | 7C 08 02 A6 */	mflr r0
 /* 8144BFC0 | 2C 04 00 01 */	cmpwi r4, 0x1
@@ -2047,10 +2047,10 @@
 /* 8144C044 | 7C 08 03 A6 */	mtlr r0
 /* 8144C048 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144C04C | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144BFB8
+.endfn VmARShift
 
 # .text:0x1AA4 | 0x8144C050 | size: 0x54
-.fn CHANSVm_8144C050, global
+.fn VmBitAnd, local
 /* 8144C050 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144C054 | 7C 08 02 A6 */	mflr r0
 /* 8144C058 | 2C 04 00 01 */	cmpwi r4, 0x1
@@ -2074,10 +2074,10 @@
 /* 8144C098 | 7C 08 03 A6 */	mtlr r0
 /* 8144C09C | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144C0A0 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144C050
+.endfn VmBitAnd
 
 # .text:0x1AF8 | 0x8144C0A4 | size: 0x54
-.fn CHANSVm_8144C0A4, global
+.fn VmBitOr, local
 /* 8144C0A4 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144C0A8 | 7C 08 02 A6 */	mflr r0
 /* 8144C0AC | 2C 04 00 01 */	cmpwi r4, 0x1
@@ -2101,10 +2101,10 @@
 /* 8144C0EC | 7C 08 03 A6 */	mtlr r0
 /* 8144C0F0 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144C0F4 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144C0A4
+.endfn VmBitOr
 
 # .text:0x1B4C | 0x8144C0F8 | size: 0x54
-.fn CHANSVm_8144C0F8, global
+.fn VmBitXor, local
 /* 8144C0F8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144C0FC | 7C 08 02 A6 */	mflr r0
 /* 8144C100 | 2C 04 00 01 */	cmpwi r4, 0x1
@@ -2128,10 +2128,10 @@
 /* 8144C140 | 7C 08 03 A6 */	mtlr r0
 /* 8144C144 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144C148 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144C0F8
+.endfn VmBitXor
 
 # .text:0x1BA0 | 0x8144C14C | size: 0x1AC
-.fn CHANSVm_8144C14C, global
+.fn VmCmpEq, local
 /* 8144C14C | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144C150 | 7C 08 02 A6 */	mflr r0
 /* 8144C154 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -2253,16 +2253,16 @@
 /* 8144C2EC | 7C 08 03 A6 */	mtlr r0
 /* 8144C2F0 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144C2F4 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144C14C
+.endfn VmCmpEq
 
 # .text:0x1D4C | 0x8144C2F8 | size: 0x54
-.fn CHANSVm_8144C2F8, global
+.fn VmCmpNeq, local
 /* 8144C2F8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144C2FC | 7C 08 02 A6 */	mflr r0
 /* 8144C300 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 8144C304 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8144C308 | 7C BF 2B 78 */	mr r31, r5
-/* 8144C30C | 4B FF FE 41 */	bl CHANSVm_8144C14C
+/* 8144C30C | 4B FF FE 41 */	bl VmCmpEq
 /* 8144C310 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144C314 | 40 82 00 24 */	bne .L_8144C338
 /* 8144C318 | 80 1F 00 00 */	lwz r0, 0x0(r31)
@@ -2279,10 +2279,10 @@
 /* 8144C340 | 7C 08 03 A6 */	mtlr r0
 /* 8144C344 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144C348 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144C2F8
+.endfn VmCmpNeq
 
 # .text:0x1DA0 | 0x8144C34C | size: 0x11C
-.fn CHANSVm_8144C34C, global
+.fn VmCmpLt, local
 /* 8144C34C | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144C350 | 7C 08 02 A6 */	mflr r0
 /* 8144C354 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -2365,18 +2365,18 @@
 /* 8144C45C | 7C 08 03 A6 */	mtlr r0
 /* 8144C460 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144C464 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144C34C
+.endfn VmCmpLt
 
 # .text:0x1EBC | 0x8144C468 | size: 0x10
-.fn CHANSVm_8144C468, global
+.fn VmCmpGt, local
 /* 8144C468 | 7C C0 33 78 */	mr r0, r6
 /* 8144C46C | 7C E6 3B 78 */	mr r6, r7
 /* 8144C470 | 7C 07 03 78 */	mr r7, r0
-/* 8144C474 | 4B FF FE D8 */	b CHANSVm_8144C34C
-.endfn CHANSVm_8144C468
+/* 8144C474 | 4B FF FE D8 */	b VmCmpLt
+.endfn VmCmpGt
 
 # .text:0x1ECC | 0x8144C478 | size: 0x124
-.fn CHANSVm_8144C478, global
+.fn VmCmpLeq, local
 /* 8144C478 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144C47C | 7C 08 02 A6 */	mflr r0
 /* 8144C480 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -2461,18 +2461,18 @@
 /* 8144C590 | 7C 08 03 A6 */	mtlr r0
 /* 8144C594 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144C598 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144C478
+.endfn VmCmpLeq
 
 # .text:0x1FF0 | 0x8144C59C | size: 0x10
-.fn CHANSVm_8144C59C, global
+.fn VmCmpGeq, local
 /* 8144C59C | 7C C0 33 78 */	mr r0, r6
 /* 8144C5A0 | 7C E6 3B 78 */	mr r6, r7
 /* 8144C5A4 | 7C 07 03 78 */	mr r7, r0
-/* 8144C5A8 | 4B FF FE D0 */	b CHANSVm_8144C478
-.endfn CHANSVm_8144C59C
+/* 8144C5A8 | 4B FF FE D0 */	b VmCmpLeq
+.endfn VmCmpGeq
 
 # .text:0x2000 | 0x8144C5AC | size: 0xD8
-.fn CHANSVm_8144C5AC, global
+.fn CHANSVmGetBoolean, local
 /* 8144C5AC | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144C5B0 | 7C 08 02 A6 */	mflr r0
 /* 8144C5B4 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -2536,7 +2536,7 @@
 /* 8144C678 | 7C 08 03 A6 */	mtlr r0
 /* 8144C67C | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144C680 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144C5AC
+.endfn CHANSVmGetBoolean
 
 # .text:0x20D8 | 0x8144C684 | size: 0xC
 .fn CHANSVmGetArgc, global
@@ -2573,7 +2573,7 @@
 /* 8144C6D8 | 7C 65 1B 78 */	mr r5, r3
 /* 8144C6DC | 7F E3 FB 78 */	mr r3, r31
 /* 8144C6E0 | 38 80 00 01 */	li r4, 0x1
-/* 8144C6E4 | 4B FF F1 F9 */	bl CHANSVm_8144B8DC
+/* 8144C6E4 | 4B FF F1 F9 */	bl CHANSVmConvertObjectType
 /* 8144C6E8 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8144C6EC | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8144C6F0 | 7C 08 03 A6 */	mtlr r0
@@ -2592,7 +2592,7 @@
 /* 8144C714 | 7C 65 1B 78 */	mr r5, r3
 /* 8144C718 | 7F E3 FB 78 */	mr r3, r31
 /* 8144C71C | 38 80 00 02 */	li r4, 0x2
-/* 8144C720 | 4B FF F1 BD */	bl CHANSVm_8144B8DC
+/* 8144C720 | 4B FF F1 BD */	bl CHANSVmConvertObjectType
 /* 8144C724 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8144C728 | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8144C72C | 7C 08 03 A6 */	mtlr r0
@@ -2611,7 +2611,7 @@
 /* 8144C750 | 7C 65 1B 78 */	mr r5, r3
 /* 8144C754 | 7F E3 FB 78 */	mr r3, r31
 /* 8144C758 | 38 80 00 03 */	li r4, 0x3
-/* 8144C75C | 4B FF F1 81 */	bl CHANSVm_8144B8DC
+/* 8144C75C | 4B FF F1 81 */	bl CHANSVmConvertObjectType
 /* 8144C760 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8144C764 | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8144C768 | 7C 08 03 A6 */	mtlr r0
@@ -2686,7 +2686,7 @@
 /* 8144C848 | 38 1E 00 3B */	addi r0, r30, 0x3b
 /* 8144C84C | 7F 23 CB 78 */	mr r3, r25
 /* 8144C850 | 54 04 00 34 */	clrrwi r4, r0, 5
-/* 8144C854 | 4B FF E0 99 */	bl CHANSVm_8144A8EC
+/* 8144C854 | 4B FF E0 99 */	bl CHANSVmAllocFromHeap
 /* 8144C858 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144C85C | 7C 7F 1B 78 */	mr r31, r3
 /* 8144C860 | 41 82 00 58 */	beq .L_8144C8B8
@@ -2732,7 +2732,7 @@
 .endfn CHANSVmAddNativeClass
 
 # .text:0x2330 | 0x8144C8DC | size: 0xE4
-.fn CHANSVm_8144C8DC, global
+.fn VmAddNativeMethodName, local
 /* 8144C8DC | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144C8E0 | 7C 08 02 A6 */	mflr r0
 /* 8144C8E4 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -2774,7 +2774,7 @@
 /* 8144C968 | 38 1D 00 27 */	addi r0, r29, 0x27
 /* 8144C96C | 7F 63 DB 78 */	mr r3, r27
 /* 8144C970 | 54 04 00 34 */	clrrwi r4, r0, 5
-/* 8144C974 | 4B FF DF 79 */	bl CHANSVm_8144A8EC
+/* 8144C974 | 4B FF DF 79 */	bl CHANSVmAllocFromHeap
 /* 8144C978 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144C97C | 90 7F 00 00 */	stw r3, 0x0(r31)
 /* 8144C980 | 41 82 00 24 */	beq .L_8144C9A4
@@ -2795,10 +2795,10 @@
 /* 8144C9B4 | 7C 08 03 A6 */	mtlr r0
 /* 8144C9B8 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144C9BC | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144C8DC
+.endfn VmAddNativeMethodName
 
 # .text:0x2414 | 0x8144C9C0 | size: 0x58
-.fn CHANSVm_8144C9C0, global
+.fn VmFindAndAddNativeProperty, local
 /* 8144C9C0 | 80 C3 00 14 */	lwz r6, 0x14(r3)
 /* 8144C9C4 | 2C 06 00 00 */	cmpwi r6, 0x0
 /* 8144C9C8 | 40 82 00 14 */	bne .L_8144C9DC
@@ -2825,10 +2825,10 @@
 .L_8144CA10:
 /* 8144CA10 | 38 60 00 00 */	li r3, 0x0
 /* 8144CA14 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144C9C0
+.endfn VmFindAndAddNativeProperty
 
 # .text:0x246C | 0x8144CA18 | size: 0x58
-.fn CHANSVm_8144CA18, global
+.fn VmFindAndAddNativeMethod, local
 /* 8144CA18 | 80 C3 00 10 */	lwz r6, 0x10(r3)
 /* 8144CA1C | 2C 06 00 00 */	cmpwi r6, 0x0
 /* 8144CA20 | 40 82 00 14 */	bne .L_8144CA34
@@ -2855,7 +2855,7 @@
 .L_8144CA68:
 /* 8144CA68 | 38 60 00 00 */	li r3, 0x0
 /* 8144CA6C | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144CA18
+.endfn VmFindAndAddNativeMethod
 
 # .text:0x24C4 | 0x8144CA70 | size: 0x108
 .fn CHANSVmAddNativeMethodList, global
@@ -2887,19 +2887,19 @@
 /* 8144CACC | 7C 65 1B 78 */	mr r5, r3
 /* 8144CAD0 | 7F 23 CB 78 */	mr r3, r25
 /* 8144CAD4 | 7F E4 FB 78 */	mr r4, r31
-/* 8144CAD8 | 4B FF FE 05 */	bl CHANSVm_8144C8DC
+/* 8144CAD8 | 4B FF FE 05 */	bl VmAddNativeMethodName
 /* 8144CADC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144CAE0 | 7C 7F 1B 78 */	mr r31, r3
 /* 8144CAE4 | 41 82 00 58 */	beq .L_8144CB3C
 /* 8144CAE8 | 7F 43 D3 78 */	mr r3, r26
 /* 8144CAEC | 7F E5 FB 78 */	mr r5, r31
 /* 8144CAF0 | 38 80 00 00 */	li r4, 0x0
-/* 8144CAF4 | 4B FF FE CD */	bl CHANSVm_8144C9C0
+/* 8144CAF4 | 4B FF FE CD */	bl VmFindAndAddNativeProperty
 /* 8144CAF8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144CAFC | 40 82 00 44 */	bne .L_8144CB40
 /* 8144CB00 | 7F 23 CB 78 */	mr r3, r25
 /* 8144CB04 | 38 80 00 20 */	li r4, 0x20
-/* 8144CB08 | 4B FF DD E5 */	bl CHANSVm_8144A8EC
+/* 8144CB08 | 4B FF DD E5 */	bl CHANSVmAllocFromHeap
 /* 8144CB0C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144CB10 | 40 82 00 0C */	bne .L_8144CB1C
 /* 8144CB14 | 38 60 FC 1A */	li r3, -0x3e6
@@ -2911,7 +2911,7 @@
 /* 8144CB28 | 93 C3 00 08 */	stw r30, 0x8(r3)
 /* 8144CB2C | 9B A3 00 06 */	stb r29, 0x6(r3)
 /* 8144CB30 | 7F 43 D3 78 */	mr r3, r26
-/* 8144CB34 | 4B FF FE E5 */	bl CHANSVm_8144CA18
+/* 8144CB34 | 4B FF FE E5 */	bl VmFindAndAddNativeMethod
 /* 8144CB38 | 48 00 00 08 */	b .L_8144CB40
 .L_8144CB3C:
 /* 8144CB3C | 38 60 FC 3C */	li r3, -0x3c4
@@ -2960,19 +2960,19 @@
 /* 8144CBC8 | 7C 65 1B 78 */	mr r5, r3
 /* 8144CBCC | 7F 43 D3 78 */	mr r3, r26
 /* 8144CBD0 | 7F E4 FB 78 */	mr r4, r31
-/* 8144CBD4 | 4B FF FD 09 */	bl CHANSVm_8144C8DC
+/* 8144CBD4 | 4B FF FD 09 */	bl VmAddNativeMethodName
 /* 8144CBD8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144CBDC | 7C 7F 1B 78 */	mr r31, r3
 /* 8144CBE0 | 41 82 00 5C */	beq .L_8144CC3C
 /* 8144CBE4 | 7F 63 DB 78 */	mr r3, r27
 /* 8144CBE8 | 7F E5 FB 78 */	mr r5, r31
 /* 8144CBEC | 38 80 00 00 */	li r4, 0x0
-/* 8144CBF0 | 4B FF FE 29 */	bl CHANSVm_8144CA18
+/* 8144CBF0 | 4B FF FE 29 */	bl VmFindAndAddNativeMethod
 /* 8144CBF4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144CBF8 | 40 82 00 48 */	bne .L_8144CC40
 /* 8144CBFC | 7F 43 D3 78 */	mr r3, r26
 /* 8144CC00 | 38 80 00 20 */	li r4, 0x20
-/* 8144CC04 | 4B FF DC E9 */	bl CHANSVm_8144A8EC
+/* 8144CC04 | 4B FF DC E9 */	bl CHANSVmAllocFromHeap
 /* 8144CC08 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144CC0C | 40 82 00 0C */	bne .L_8144CC18
 /* 8144CC10 | 38 60 FC 1A */	li r3, -0x3e6
@@ -2985,7 +2985,7 @@
 /* 8144CC28 | 93 A3 00 0C */	stw r29, 0xc(r3)
 /* 8144CC2C | 9B C3 00 06 */	stb r30, 0x6(r3)
 /* 8144CC30 | 7F 63 DB 78 */	mr r3, r27
-/* 8144CC34 | 4B FF FD 8D */	bl CHANSVm_8144C9C0
+/* 8144CC34 | 4B FF FD 8D */	bl VmFindAndAddNativeProperty
 /* 8144CC38 | 48 00 00 08 */	b .L_8144CC40
 .L_8144CC3C:
 /* 8144CC3C | 38 60 FC 47 */	li r3, -0x3b9
@@ -3079,7 +3079,7 @@
 /* 8144CD5C | 38 1D 00 37 */	addi r0, r29, 0x37
 /* 8144CD60 | 7F 63 DB 78 */	mr r3, r27
 /* 8144CD64 | 54 04 00 34 */	clrrwi r4, r0, 5
-/* 8144CD68 | 4B FF DB 85 */	bl CHANSVm_8144A8EC
+/* 8144CD68 | 4B FF DB 85 */	bl CHANSVmAllocFromHeap
 /* 8144CD6C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144CD70 | 7C 7E 1B 78 */	mr r30, r3
 /* 8144CD74 | 41 82 00 4C */	beq .L_8144CDC0
@@ -3337,7 +3337,7 @@
 /* 8144D0CC | 38 04 00 37 */	addi r0, r4, 0x37
 /* 8144D0D0 | 54 1E 00 34 */	clrrwi r30, r0, 5
 /* 8144D0D4 | 7F C4 F3 78 */	mr r4, r30
-/* 8144D0D8 | 4B FF D8 15 */	bl CHANSVm_8144A8EC
+/* 8144D0D8 | 4B FF D8 15 */	bl CHANSVmAllocFromHeap
 /* 8144D0DC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144D0E0 | 7C 7D 1B 78 */	mr r29, r3
 /* 8144D0E4 | 41 82 00 E8 */	beq .L_8144D1CC
@@ -3632,7 +3632,7 @@
 /* 8144D494 | 4B FF FD CD */	bl CHANSVm_8144D260
 /* 8144D498 | 7C 64 1B 78 */	mr r4, r3
 /* 8144D49C | 7F 83 E3 78 */	mr r3, r28
-/* 8144D4A0 | 4B FF D6 B5 */	bl CHANSVm_8144AB54
+/* 8144D4A0 | 4B FF D6 B5 */	bl CHANSVmDeleteObject
 /* 8144D4A4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144D4A8 | 40 82 00 18 */	bne .L_8144D4C0
 /* 8144D4AC | 3B DE 00 01 */	addi r30, r30, 0x1
@@ -3694,7 +3694,7 @@
 /* 8144D558 | 7C 65 1B 78 */	mr r5, r3
 /* 8144D55C | 7F E3 FB 78 */	mr r3, r31
 /* 8144D560 | 38 80 00 02 */	li r4, 0x2
-/* 8144D564 | 4B FF E3 79 */	bl CHANSVm_8144B8DC
+/* 8144D564 | 4B FF E3 79 */	bl CHANSVmConvertObjectType
 /* 8144D568 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8144D56C | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8144D570 | 7C 08 03 A6 */	mtlr r0
@@ -3869,7 +3869,7 @@
 /* 8144D798 | 7E C3 B3 78 */	mr r3, r22
 /* 8144D79C | 7E C4 B3 78 */	mr r4, r22
 /* 8144D7A0 | 7E A5 AB 78 */	mr r5, r21
-/* 8144D7A4 | 4B FF D8 B5 */	bl CHANSVm_8144B058
+/* 8144D7A4 | 4B FF D8 B5 */	bl VmStrToU16FromU8
 /* 8144D7A8 | 56 B5 08 3C */	slwi r21, r21, 1
 /* 8144D7AC | 48 00 00 84 */	b .L_8144D830
 .L_8144D7B0:
@@ -3881,7 +3881,7 @@
 /* 8144D7C4 | C8 29 00 18 */	lfd f1, 0x18(r9)
 /* 8144D7C8 | 80 03 00 00 */	lwz r0, 0x0(r3)
 /* 8144D7CC | 7C 60 E2 14 */	add r3, r0, r28
-/* 8144D7D0 | 4B FF DE 5D */	bl CHANSVm_8144B62C
+/* 8144D7D0 | 4B FF DE 5D */	bl VmToStrFromIntCommon
 /* 8144D7D4 | 7C 75 1B 78 */	mr r21, r3
 /* 8144D7D8 | 48 00 00 58 */	b .L_8144D830
 .L_8144D7DC:
@@ -3986,7 +3986,7 @@
 /* 8144D930 | 38 80 00 00 */	li r4, 0x0
 /* 8144D934 | 7F C7 F3 78 */	mr r7, r30
 /* 8144D938 | 38 C0 00 03 */	li r6, 0x3
-/* 8144D93C | 4B FF D4 99 */	bl CHANSVm_8144ADD4
+/* 8144D93C | 4B FF D4 99 */	bl CHANSVmNewObject
 /* 8144D940 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144D944 | 7C 7F 1B 78 */	mr r31, r3
 /* 8144D948 | 41 82 00 2C */	beq .L_8144D974
@@ -4011,7 +4011,7 @@
 .endfn CHANSVm_8144D8DC
 
 # .text:0x33E4 | 0x8144D990 | size: 0x9C
-.fn CHANSExport_join, global
+.fn VmMethod_join, global
 /* 8144D990 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144D994 | 7C 08 02 A6 */	mflr r0
 /* 8144D998 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -4025,7 +4025,7 @@
 /* 8144D9B8 | 7C 65 1B 78 */	mr r5, r3
 /* 8144D9BC | 7F A3 EB 78 */	mr r3, r29
 /* 8144D9C0 | 38 80 00 03 */	li r4, 0x3
-/* 8144D9C4 | 4B FF DF 19 */	bl CHANSVm_8144B8DC
+/* 8144D9C4 | 4B FF DF 19 */	bl CHANSVmConvertObjectType
 /* 8144D9C8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144D9CC | 7C 66 1B 78 */	mr r6, r3
 /* 8144D9D0 | 41 82 00 10 */	beq .L_8144D9E0
@@ -4055,10 +4055,10 @@
 /* 8144DA20 | 7C 08 03 A6 */	mtlr r0
 /* 8144DA24 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144DA28 | 4E 80 00 20 */	blr
-.endfn CHANSExport_join
+.endfn VmMethod_join
 
 # .text:0x3480 | 0x8144DA2C | size: 0x214
-.fn CHANSExport_slice, global
+.fn VmMethod_slice, global
 /* 8144DA2C | 94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8144DA30 | 7C 08 02 A6 */	mflr r0
 /* 8144DA34 | 90 01 00 34 */	stw r0, 0x34(r1)
@@ -4072,7 +4072,7 @@
 /* 8144DA54 | 7C 65 1B 78 */	mr r5, r3
 /* 8144DA58 | 7F 83 E3 78 */	mr r3, r28
 /* 8144DA5C | 38 80 00 01 */	li r4, 0x1
-/* 8144DA60 | 4B FF DE 7D */	bl CHANSVm_8144B8DC
+/* 8144DA60 | 4B FF DE 7D */	bl CHANSVmConvertObjectType
 /* 8144DA64 | 7C 7A 1B 78 */	mr r26, r3
 /* 8144DA68 | 7F 83 E3 78 */	mr r3, r28
 /* 8144DA6C | 38 80 00 01 */	li r4, 0x1
@@ -4080,7 +4080,7 @@
 /* 8144DA74 | 7C 65 1B 78 */	mr r5, r3
 /* 8144DA78 | 7F 83 E3 78 */	mr r3, r28
 /* 8144DA7C | 38 80 00 01 */	li r4, 0x1
-/* 8144DA80 | 4B FF DE 5D */	bl CHANSVm_8144B8DC
+/* 8144DA80 | 4B FF DE 5D */	bl CHANSVmConvertObjectType
 /* 8144DA84 | 7C 7B 1B 78 */	mr r27, r3
 /* 8144DA88 | 7F A3 EB 78 */	mr r3, r29
 /* 8144DA8C | 3B E0 00 00 */	li r31, 0x0
@@ -4201,7 +4201,7 @@
 /* 8144DC34 | 7C 08 03 A6 */	mtlr r0
 /* 8144DC38 | 38 21 00 30 */	addi r1, r1, 0x30
 /* 8144DC3C | 4E 80 00 20 */	blr
-.endfn CHANSExport_slice
+.endfn VmMethod_slice
 
 # .text:0x3694 | 0x8144DC40 | size: 0x108
 .fn CHANSVmNewArrayObject, global
@@ -4222,7 +4222,7 @@
 /* 8144DC78 | 38 80 00 00 */	li r4, 0x0
 /* 8144DC7C | 38 C0 00 04 */	li r6, 0x4
 /* 8144DC80 | 38 E0 00 18 */	li r7, 0x18
-/* 8144DC84 | 4B FF D1 51 */	bl CHANSVm_8144ADD4
+/* 8144DC84 | 4B FF D1 51 */	bl CHANSVmNewObject
 /* 8144DC88 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144DC8C | 7C 7C 1B 78 */	mr r28, r3
 /* 8144DC90 | 41 82 00 9C */	beq .L_8144DD2C
@@ -4280,7 +4280,7 @@
 .endfn CHANSVmNewArrayObject
 
 # .text:0x379C | 0x8144DD48 | size: 0xD8
-.fn CHANSExport_new2d, global
+.fn VmMethod_new2d, global
 /* 8144DD48 | 94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 8144DD4C | 7C 08 02 A6 */	mflr r0
 /* 8144DD50 | 90 01 00 74 */	stw r0, 0x74(r1)
@@ -4306,7 +4306,7 @@
 /* 8144DD9C | 7C 65 1B 78 */	mr r5, r3
 /* 8144DDA0 | 7F 23 CB 78 */	mr r3, r25
 /* 8144DDA4 | 38 80 00 01 */	li r4, 0x1
-/* 8144DDA8 | 4B FF DB 35 */	bl CHANSVm_8144B8DC
+/* 8144DDA8 | 4B FF DB 35 */	bl CHANSVmConvertObjectType
 /* 8144DDAC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144DDB0 | 41 82 00 54 */	beq .L_8144DE04
 /* 8144DDB4 | 80 83 00 04 */	lwz r4, 0x4(r3)
@@ -4338,10 +4338,10 @@
 /* 8144DE14 | 7C 08 03 A6 */	mtlr r0
 /* 8144DE18 | 38 21 00 70 */	addi r1, r1, 0x70
 /* 8144DE1C | 4E 80 00 20 */	blr
-.endfn CHANSExport_new2d
+.endfn VmMethod_new2d
 
 # .text:0x3874 | 0x8144DE20 | size: 0xD0
-.fn CHANSExport_shift, global
+.fn VmMethod_shift, global
 /* 8144DE20 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144DE24 | 7C 08 02 A6 */	mflr r0
 /* 8144DE28 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -4379,7 +4379,7 @@
 /* 8144DE9C | 41 82 00 38 */	beq .L_8144DED4
 /* 8144DEA0 | 7F A3 EB 78 */	mr r3, r29
 /* 8144DEA4 | 7F C4 F3 78 */	mr r4, r30
-/* 8144DEA8 | 4B FF CC AD */	bl CHANSVm_8144AB54
+/* 8144DEA8 | 4B FF CC AD */	bl CHANSVmDeleteObject
 /* 8144DEAC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144DEB0 | 40 82 00 24 */	bne .L_8144DED4
 /* 8144DEB4 | 80 7F 00 10 */	lwz r3, 0x10(r31)
@@ -4400,10 +4400,10 @@
 /* 8144DEE4 | 7C 08 03 A6 */	mtlr r0
 /* 8144DEE8 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144DEEC | 4E 80 00 20 */	blr
-.endfn CHANSExport_shift
+.endfn VmMethod_shift
 
 # .text:0x3944 | 0x8144DEF0 | size: 0x80
-.fn CHANSExport_unshift, global
+.fn VmMethod_unshift, global
 /* 8144DEF0 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144DEF4 | 7C 08 02 A6 */	mflr r0
 /* 8144DEF8 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -4438,10 +4438,10 @@
 /* 8144DF64 | 7C 08 03 A6 */	mtlr r0
 /* 8144DF68 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144DF6C | 4E 80 00 20 */	blr
-.endfn CHANSExport_unshift
+.endfn VmMethod_unshift
 
 # .text:0x39C4 | 0x8144DF70 | size: 0x80
-.fn CHANSExport_push, global
+.fn VmMethod_push, global
 /* 8144DF70 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144DF74 | 7C 08 02 A6 */	mflr r0
 /* 8144DF78 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -4476,10 +4476,10 @@
 /* 8144DFE4 | 7C 08 03 A6 */	mtlr r0
 /* 8144DFE8 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144DFEC | 4E 80 00 20 */	blr
-.endfn CHANSExport_push
+.endfn VmMethod_push
 
 # .text:0x3A44 | 0x8144DFF0 | size: 0xE8
-.fn CHANSExport_pop, global
+.fn VmMethod_pop, global
 /* 8144DFF0 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144DFF4 | 7C 08 02 A6 */	mflr r0
 /* 8144DFF8 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -4527,7 +4527,7 @@
 .L_8144E094:
 /* 8144E094 | 7F 83 E3 78 */	mr r3, r28
 /* 8144E098 | 7F C4 F3 78 */	mr r4, r30
-/* 8144E09C | 4B FF CA B9 */	bl CHANSVm_8144AB54
+/* 8144E09C | 4B FF CA B9 */	bl CHANSVmDeleteObject
 /* 8144E0A0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144E0A4 | 40 82 00 18 */	bne .L_8144E0BC
 .L_8144E0A8:
@@ -4546,10 +4546,10 @@
 /* 8144E0CC | 7C 08 03 A6 */	mtlr r0
 /* 8144E0D0 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144E0D4 | 4E 80 00 20 */	blr
-.endfn CHANSExport_pop
+.endfn VmMethod_pop
 
 # .text:0x3B2C | 0x8144E0D8 | size: 0x58
-.fn CHANSGetExport_length, global
+.fn VmGetProp_length, global
 /* 8144E0D8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144E0DC | 7C 08 02 A6 */	mflr r0
 /* 8144E0E0 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -4572,10 +4572,10 @@
 /* 8144E124 | 7C 08 03 A6 */	mtlr r0
 /* 8144E128 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144E12C | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_length
+.endfn VmGetProp_length
 
 # .text:0x3B84 | 0x8144E130 | size: 0xEC
-.fn CHANSSetExport_length, global
+.fn VmSetProp_length, global
 /* 8144E130 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144E134 | 7C 08 02 A6 */	mflr r0
 /* 8144E138 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -4593,7 +4593,7 @@
 /* 8144E168 | 7C 65 1B 78 */	mr r5, r3
 /* 8144E16C | 7F 63 DB 78 */	mr r3, r27
 /* 8144E170 | 38 80 00 01 */	li r4, 0x1
-/* 8144E174 | 4B FF D7 69 */	bl CHANSVm_8144B8DC
+/* 8144E174 | 4B FF D7 69 */	bl CHANSVmConvertObjectType
 /* 8144E178 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144E17C | 41 82 00 7C */	beq .L_8144E1F8
 /* 8144E180 | 83 E3 00 04 */	lwz r31, 0x4(r3)
@@ -4611,7 +4611,7 @@
 /* 8144E1AC | 7F 63 DB 78 */	mr r3, r27
 /* 8144E1B0 | 7F 84 E3 78 */	mr r4, r28
 /* 8144E1B4 | 38 A0 00 00 */	li r5, 0x0
-/* 8144E1B8 | 4B FF FE 39 */	bl CHANSExport_pop
+/* 8144E1B8 | 4B FF FE 39 */	bl VmMethod_pop
 /* 8144E1BC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144E1C0 | 41 82 00 40 */	beq .L_8144E200
 /* 8144E1C4 | 3B BD FF FF */	subi r29, r29, 0x1
@@ -4641,7 +4641,7 @@
 /* 8144E210 | 7C 08 03 A6 */	mtlr r0
 /* 8144E214 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144E218 | 4E 80 00 20 */	blr
-.endfn CHANSSetExport_length
+.endfn VmSetProp_length
 
 # .text:0x3C70 | 0x8144E21C | size: 0x298
 .fn CHANSVm_8144E21C, global
@@ -4698,7 +4698,7 @@
 /* 8144E2E0 | 7C 65 1B 78 */	mr r5, r3
 /* 8144E2E4 | 7F 43 D3 78 */	mr r3, r26
 /* 8144E2E8 | 38 80 00 01 */	li r4, 0x1
-/* 8144E2EC | 4B FF D5 F1 */	bl CHANSVm_8144B8DC
+/* 8144E2EC | 4B FF D5 F1 */	bl CHANSVmConvertObjectType
 /* 8144E2F0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144E2F4 | 41 82 00 10 */	beq .L_8144E304
 /* 8144E2F8 | 80 E3 00 00 */	lwz r7, 0x0(r3)
@@ -4724,7 +4724,7 @@
 /* 8144E33C | 7C 65 1B 78 */	mr r5, r3
 /* 8144E340 | 7F 43 D3 78 */	mr r3, r26
 /* 8144E344 | 38 80 00 01 */	li r4, 0x1
-/* 8144E348 | 4B FF D5 95 */	bl CHANSVm_8144B8DC
+/* 8144E348 | 4B FF D5 95 */	bl CHANSVmConvertObjectType
 /* 8144E34C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144E350 | 41 82 00 9C */	beq .L_8144E3EC
 /* 8144E354 | 28 1B 00 06 */	cmplwi r27, 0x6
@@ -4940,7 +4940,7 @@
 /* 8144E630 | 38 80 00 00 */	li r4, 0x0
 /* 8144E634 | 38 C0 00 03 */	li r6, 0x3
 /* 8144E638 | 38 E0 00 00 */	li r7, 0x0
-/* 8144E63C | 4B FF C7 99 */	bl CHANSVm_8144ADD4
+/* 8144E63C | 4B FF C7 99 */	bl CHANSVmNewObject
 /* 8144E640 | 30 03 FF FF */	subic r0, r3, 0x1
 /* 8144E644 | 7C 60 19 10 */	subfe r3, r0, r3
 .L_8144E648:
@@ -4953,7 +4953,7 @@
 .endfn CHANSVm_8144E4F4
 
 # .text:0x40B4 | 0x8144E660 | size: 0x40
-.fn CHANSExport_getDate, global
+.fn VmMethod_getDate, global
 /* 8144E660 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144E664 | 7C 08 02 A6 */	mflr r0
 /* 8144E668 | 7C 86 23 78 */	mr r6, r4
@@ -4970,10 +4970,10 @@
 /* 8144E694 | 7C 08 03 A6 */	mtlr r0
 /* 8144E698 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144E69C | 4E 80 00 20 */	blr
-.endfn CHANSExport_getDate
+.endfn VmMethod_getDate
 
 # .text:0x40F4 | 0x8144E6A0 | size: 0x40
-.fn CHANSExport_getDay, global
+.fn VmMethod_getDay, global
 /* 8144E6A0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144E6A4 | 7C 08 02 A6 */	mflr r0
 /* 8144E6A8 | 7C 86 23 78 */	mr r6, r4
@@ -4990,10 +4990,10 @@
 /* 8144E6D4 | 7C 08 03 A6 */	mtlr r0
 /* 8144E6D8 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144E6DC | 4E 80 00 20 */	blr
-.endfn CHANSExport_getDay
+.endfn VmMethod_getDay
 
 # .text:0x4134 | 0x8144E6E0 | size: 0x40
-.fn CHANSExport_getFullYear, global
+.fn VmMethod_getFullYear, global
 /* 8144E6E0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144E6E4 | 7C 08 02 A6 */	mflr r0
 /* 8144E6E8 | 7C 86 23 78 */	mr r6, r4
@@ -5010,10 +5010,10 @@
 /* 8144E714 | 7C 08 03 A6 */	mtlr r0
 /* 8144E718 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144E71C | 4E 80 00 20 */	blr
-.endfn CHANSExport_getFullYear
+.endfn VmMethod_getFullYear
 
 # .text:0x4174 | 0x8144E720 | size: 0x40
-.fn CHANSExport_getHours, global
+.fn VmMethod_getHours, global
 /* 8144E720 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144E724 | 7C 08 02 A6 */	mflr r0
 /* 8144E728 | 7C 86 23 78 */	mr r6, r4
@@ -5030,10 +5030,10 @@
 /* 8144E754 | 7C 08 03 A6 */	mtlr r0
 /* 8144E758 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144E75C | 4E 80 00 20 */	blr
-.endfn CHANSExport_getHours
+.endfn VmMethod_getHours
 
 # .text:0x41B4 | 0x8144E760 | size: 0x40
-.fn CHANSExport_getMilliseconds, global
+.fn VmMethod_getMilliseconds, global
 /* 8144E760 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144E764 | 7C 08 02 A6 */	mflr r0
 /* 8144E768 | 7C 86 23 78 */	mr r6, r4
@@ -5050,10 +5050,10 @@
 /* 8144E794 | 7C 08 03 A6 */	mtlr r0
 /* 8144E798 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144E79C | 4E 80 00 20 */	blr
-.endfn CHANSExport_getMilliseconds
+.endfn VmMethod_getMilliseconds
 
 # .text:0x41F4 | 0x8144E7A0 | size: 0x40
-.fn CHANSExport_CHANSDFunc_getMinutes, global
+.fn VmMethod_getMinutes, global
 /* 8144E7A0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144E7A4 | 7C 08 02 A6 */	mflr r0
 /* 8144E7A8 | 7C 86 23 78 */	mr r6, r4
@@ -5070,10 +5070,10 @@
 /* 8144E7D4 | 7C 08 03 A6 */	mtlr r0
 /* 8144E7D8 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144E7DC | 4E 80 00 20 */	blr
-.endfn CHANSExport_CHANSDFunc_getMinutes
+.endfn VmMethod_getMinutes
 
 # .text:0x4234 | 0x8144E7E0 | size: 0x40
-.fn CHANSExport_getMonth, global
+.fn VmMethod_getMonth, global
 /* 8144E7E0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144E7E4 | 7C 08 02 A6 */	mflr r0
 /* 8144E7E8 | 7C 86 23 78 */	mr r6, r4
@@ -5090,10 +5090,10 @@
 /* 8144E814 | 7C 08 03 A6 */	mtlr r0
 /* 8144E818 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144E81C | 4E 80 00 20 */	blr
-.endfn CHANSExport_getMonth
+.endfn VmMethod_getMonth
 
 # .text:0x4274 | 0x8144E820 | size: 0x40
-.fn CHANSExport_getSeconds, global
+.fn VmMethod_getSeconds, global
 /* 8144E820 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144E824 | 7C 08 02 A6 */	mflr r0
 /* 8144E828 | 7C 86 23 78 */	mr r6, r4
@@ -5110,10 +5110,10 @@
 /* 8144E854 | 7C 08 03 A6 */	mtlr r0
 /* 8144E858 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144E85C | 4E 80 00 20 */	blr
-.endfn CHANSExport_getSeconds
+.endfn VmMethod_getSeconds
 
 # .text:0x42B4 | 0x8144E860 | size: 0x78
-.fn CHANSExport_getTime, global
+.fn VmMethod_getTime, global
 /* 8144E860 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144E864 | 7C 08 02 A6 */	mflr r0
 /* 8144E868 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -5144,10 +5144,10 @@
 /* 8144E8CC | 7C 08 03 A6 */	mtlr r0
 /* 8144E8D0 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144E8D4 | 4E 80 00 20 */	blr
-.endfn CHANSExport_getTime
+.endfn VmMethod_getTime
 
 # .text:0x432C | 0x8144E8D8 | size: 0x98
-.fn CHANSExport_getRTC, global
+.fn VmMethod_getRTC, global
 /* 8144E8D8 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144E8DC | 7C 08 02 A6 */	mflr r0
 /* 8144E8E0 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -5157,7 +5157,7 @@
 /* 8144E8F0 | 7C 7C 1B 78 */	mr r28, r3
 /* 8144E8F4 | 7C BD 2B 78 */	mr r29, r5
 /* 8144E8F8 | 83 C4 00 00 */	lwz r30, 0x0(r4)
-/* 8144E8FC | 48 11 B9 B9 */	bl fn_8156A2B4
+/* 8144E8FC | 48 11 B9 B9 */	bl SCGetCounterBias
 /* 8144E900 | 7C 7F 1B 78 */	mr r31, r3
 /* 8144E904 | 7F C3 F3 78 */	mr r3, r30
 /* 8144E908 | 48 0E 78 25 */	bl OSCalendarTimeToTicks
@@ -5186,10 +5186,10 @@
 /* 8144E964 | 7C 08 03 A6 */	mtlr r0
 /* 8144E968 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144E96C | 4E 80 00 20 */	blr
-.endfn CHANSExport_getRTC
+.endfn VmMethod_getRTC
 
 # .text:0x43C4 | 0x8144E970 | size: 0x30
-.fn CHANSExport_E, global
+.fn VmMethod_E, global
 /* 8144E970 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144E974 | 7C 08 02 A6 */	mflr r0
 /* 8144E978 | C8 22 8B 48 */	lfd f1, lbl_81694F48@sda21(r0)
@@ -5202,10 +5202,10 @@
 /* 8144E994 | 7C 08 03 A6 */	mtlr r0
 /* 8144E998 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144E99C | 4E 80 00 20 */	blr
-.endfn CHANSExport_E
+.endfn VmMethod_E
 
 # .text:0x43F4 | 0x8144E9A0 | size: 0x30
-.fn CHANSExport_LN10, global
+.fn VmMethod_LN10, global
 /* 8144E9A0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144E9A4 | 7C 08 02 A6 */	mflr r0
 /* 8144E9A8 | C8 22 8B 50 */	lfd f1, lbl_81694F50@sda21(r0)
@@ -5218,10 +5218,10 @@
 /* 8144E9C4 | 7C 08 03 A6 */	mtlr r0
 /* 8144E9C8 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144E9CC | 4E 80 00 20 */	blr
-.endfn CHANSExport_LN10
+.endfn VmMethod_LN10
 
 # .text:0x4424 | 0x8144E9D0 | size: 0x30
-.fn CHANSExport_LBN2, global
+.fn VmMethod_LBN2, global
 /* 8144E9D0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144E9D4 | 7C 08 02 A6 */	mflr r0
 /* 8144E9D8 | C8 22 8B 58 */	lfd f1, lbl_81694F58@sda21(r0)
@@ -5234,10 +5234,10 @@
 /* 8144E9F4 | 7C 08 03 A6 */	mtlr r0
 /* 8144E9F8 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144E9FC | 4E 80 00 20 */	blr
-.endfn CHANSExport_LBN2
+.endfn VmMethod_LBN2
 
 # .text:0x4454 | 0x8144EA00 | size: 0x30
-.fn CHANSExport_LOG2E, global
+.fn VmMethod_LOG2E, global
 /* 8144EA00 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144EA04 | 7C 08 02 A6 */	mflr r0
 /* 8144EA08 | C8 22 8B 60 */	lfd f1, lbl_81694F60@sda21(r0)
@@ -5250,10 +5250,10 @@
 /* 8144EA24 | 7C 08 03 A6 */	mtlr r0
 /* 8144EA28 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144EA2C | 4E 80 00 20 */	blr
-.endfn CHANSExport_LOG2E
+.endfn VmMethod_LOG2E
 
 # .text:0x4484 | 0x8144EA30 | size: 0x30
-.fn CHANSExport_LOG10E, global
+.fn VmMethod_LOG10E, global
 /* 8144EA30 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144EA34 | 7C 08 02 A6 */	mflr r0
 /* 8144EA38 | C8 22 8B 68 */	lfd f1, lbl_81694F68@sda21(r0)
@@ -5266,10 +5266,10 @@
 /* 8144EA54 | 7C 08 03 A6 */	mtlr r0
 /* 8144EA58 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144EA5C | 4E 80 00 20 */	blr
-.endfn CHANSExport_LOG10E
+.endfn VmMethod_LOG10E
 
 # .text:0x44B4 | 0x8144EA60 | size: 0x30
-.fn CHANSExport_PI, global
+.fn VmMethod_PI, global
 /* 8144EA60 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144EA64 | 7C 08 02 A6 */	mflr r0
 /* 8144EA68 | C8 22 8B 70 */	lfd f1, lbl_81694F70@sda21(r0)
@@ -5282,10 +5282,10 @@
 /* 8144EA84 | 7C 08 03 A6 */	mtlr r0
 /* 8144EA88 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144EA8C | 4E 80 00 20 */	blr
-.endfn CHANSExport_PI
+.endfn VmMethod_PI
 
 # .text:0x44E4 | 0x8144EA90 | size: 0x30
-.fn CHANSExport_SQRT1_2, global
+.fn VmMethod_SQRT1_2, global
 /* 8144EA90 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144EA94 | 7C 08 02 A6 */	mflr r0
 /* 8144EA98 | C8 22 8B 78 */	lfd f1, lbl_81694F78@sda21(r0)
@@ -5298,10 +5298,10 @@
 /* 8144EAB4 | 7C 08 03 A6 */	mtlr r0
 /* 8144EAB8 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144EABC | 4E 80 00 20 */	blr
-.endfn CHANSExport_SQRT1_2
+.endfn VmMethod_SQRT1_2
 
 # .text:0x4514 | 0x8144EAC0 | size: 0x30
-.fn CHANSExport_SQRT2, global
+.fn VmMethod_SQRT2, global
 /* 8144EAC0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144EAC4 | 7C 08 02 A6 */	mflr r0
 /* 8144EAC8 | C8 22 8B 80 */	lfd f1, lbl_81694F80@sda21(r0)
@@ -5314,10 +5314,10 @@
 /* 8144EAE4 | 7C 08 03 A6 */	mtlr r0
 /* 8144EAE8 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144EAEC | 4E 80 00 20 */	blr
-.endfn CHANSExport_SQRT2
+.endfn VmMethod_SQRT2
 
 # .text:0x4544 | 0x8144EAF0 | size: 0x78
-.fn CHANSExport_abs, global
+.fn VmMethod_abs, global
 /* 8144EAF0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144EAF4 | 7C 08 02 A6 */	mflr r0
 /* 8144EAF8 | 38 80 00 00 */	li r4, 0x0
@@ -5330,7 +5330,7 @@
 /* 8144EB14 | 7C 65 1B 78 */	mr r5, r3
 /* 8144EB18 | 7F C3 F3 78 */	mr r3, r30
 /* 8144EB1C | 38 80 00 02 */	li r4, 0x2
-/* 8144EB20 | 4B FF CD BD */	bl CHANSVm_8144B8DC
+/* 8144EB20 | 4B FF CD BD */	bl CHANSVmConvertObjectType
 /* 8144EB24 | 30 03 FF FF */	subic r0, r3, 0x1
 /* 8144EB28 | 7C 00 19 11 */	subfe. r0, r0, r3
 /* 8144EB2C | 41 82 00 20 */	beq .L_8144EB4C
@@ -5349,10 +5349,10 @@
 /* 8144EB5C | 7C 08 03 A6 */	mtlr r0
 /* 8144EB60 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144EB64 | 4E 80 00 20 */	blr
-.endfn CHANSExport_abs
+.endfn VmMethod_abs
 
 # .text:0x45BC | 0x8144EB68 | size: 0xA0
-.fn CHANSExport_acos, global
+.fn VmMethod_acos, global
 /* 8144EB68 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144EB6C | 7C 08 02 A6 */	mflr r0
 /* 8144EB70 | 38 80 00 00 */	li r4, 0x0
@@ -5365,7 +5365,7 @@
 /* 8144EB8C | 7C 65 1B 78 */	mr r5, r3
 /* 8144EB90 | 7F C3 F3 78 */	mr r3, r30
 /* 8144EB94 | 38 80 00 02 */	li r4, 0x2
-/* 8144EB98 | 4B FF CD 45 */	bl CHANSVm_8144B8DC
+/* 8144EB98 | 4B FF CD 45 */	bl CHANSVmConvertObjectType
 /* 8144EB9C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144EBA0 | 41 82 00 4C */	beq .L_8144EBEC
 /* 8144EBA4 | C8 23 00 00 */	lfd f1, 0x0(r3)
@@ -5397,10 +5397,10 @@
 /* 8144EBFC | 7C 08 03 A6 */	mtlr r0
 /* 8144EC00 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144EC04 | 4E 80 00 20 */	blr
-.endfn CHANSExport_acos
+.endfn VmMethod_acos
 
 # .text:0x465C | 0x8144EC08 | size: 0xA0
-.fn CHANSExport_asin, global
+.fn VmMethod_asin, global
 /* 8144EC08 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144EC0C | 7C 08 02 A6 */	mflr r0
 /* 8144EC10 | 38 80 00 00 */	li r4, 0x0
@@ -5413,7 +5413,7 @@
 /* 8144EC2C | 7C 65 1B 78 */	mr r5, r3
 /* 8144EC30 | 7F C3 F3 78 */	mr r3, r30
 /* 8144EC34 | 38 80 00 02 */	li r4, 0x2
-/* 8144EC38 | 4B FF CC A5 */	bl CHANSVm_8144B8DC
+/* 8144EC38 | 4B FF CC A5 */	bl CHANSVmConvertObjectType
 /* 8144EC3C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144EC40 | 41 82 00 4C */	beq .L_8144EC8C
 /* 8144EC44 | C8 23 00 00 */	lfd f1, 0x0(r3)
@@ -5445,10 +5445,10 @@
 /* 8144EC9C | 7C 08 03 A6 */	mtlr r0
 /* 8144ECA0 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144ECA4 | 4E 80 00 20 */	blr
-.endfn CHANSExport_asin
+.endfn VmMethod_asin
 
 # .text:0x46FC | 0x8144ECA8 | size: 0x7C
-.fn CHANSExport_atan, global
+.fn VmMethod_atan, global
 /* 8144ECA8 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144ECAC | 7C 08 02 A6 */	mflr r0
 /* 8144ECB0 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -5461,7 +5461,7 @@
 /* 8144ECCC | 7C 65 1B 78 */	mr r5, r3
 /* 8144ECD0 | 7F A3 EB 78 */	mr r3, r29
 /* 8144ECD4 | 38 80 00 02 */	li r4, 0x2
-/* 8144ECD8 | 4B FF CC 05 */	bl CHANSVm_8144B8DC
+/* 8144ECD8 | 4B FF CC 05 */	bl CHANSVmConvertObjectType
 /* 8144ECDC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144ECE0 | 3B E0 00 00 */	li r31, 0x0
 /* 8144ECE4 | 41 82 00 24 */	beq .L_8144ED08
@@ -5481,10 +5481,10 @@
 /* 8144ED18 | 7C 08 03 A6 */	mtlr r0
 /* 8144ED1C | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144ED20 | 4E 80 00 20 */	blr
-.endfn CHANSExport_atan
+.endfn VmMethod_atan
 
 # .text:0x4778 | 0x8144ED24 | size: 0xA8
-.fn CHANSExport_atan2, global
+.fn VmMethod_atan2, global
 /* 8144ED24 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144ED28 | 7C 08 02 A6 */	mflr r0
 /* 8144ED2C | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -5497,7 +5497,7 @@
 /* 8144ED48 | 7C 65 1B 78 */	mr r5, r3
 /* 8144ED4C | 7F 83 E3 78 */	mr r3, r28
 /* 8144ED50 | 38 80 00 02 */	li r4, 0x2
-/* 8144ED54 | 4B FF CB 89 */	bl CHANSVm_8144B8DC
+/* 8144ED54 | 4B FF CB 89 */	bl CHANSVmConvertObjectType
 /* 8144ED58 | 7C 7E 1B 78 */	mr r30, r3
 /* 8144ED5C | 7F 83 E3 78 */	mr r3, r28
 /* 8144ED60 | 38 80 00 01 */	li r4, 0x1
@@ -5505,7 +5505,7 @@
 /* 8144ED68 | 7C 65 1B 78 */	mr r5, r3
 /* 8144ED6C | 7F 83 E3 78 */	mr r3, r28
 /* 8144ED70 | 38 80 00 02 */	li r4, 0x2
-/* 8144ED74 | 4B FF CB 69 */	bl CHANSVm_8144B8DC
+/* 8144ED74 | 4B FF CB 69 */	bl CHANSVmConvertObjectType
 /* 8144ED78 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 8144ED7C | 3B E0 00 00 */	li r31, 0x0
 /* 8144ED80 | 41 82 00 30 */	beq .L_8144EDB0
@@ -5528,10 +5528,10 @@
 /* 8144EDC0 | 7C 08 03 A6 */	mtlr r0
 /* 8144EDC4 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144EDC8 | 4E 80 00 20 */	blr
-.endfn CHANSExport_atan2
+.endfn VmMethod_atan2
 
 # .text:0x4820 | 0x8144EDCC | size: 0x7C
-.fn CHANSExport_ceil, global
+.fn VmMethod_ceil, global
 /* 8144EDCC | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144EDD0 | 7C 08 02 A6 */	mflr r0
 /* 8144EDD4 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -5544,7 +5544,7 @@
 /* 8144EDF0 | 7C 65 1B 78 */	mr r5, r3
 /* 8144EDF4 | 7F A3 EB 78 */	mr r3, r29
 /* 8144EDF8 | 38 80 00 02 */	li r4, 0x2
-/* 8144EDFC | 4B FF CA E1 */	bl CHANSVm_8144B8DC
+/* 8144EDFC | 4B FF CA E1 */	bl CHANSVmConvertObjectType
 /* 8144EE00 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144EE04 | 3B E0 00 00 */	li r31, 0x0
 /* 8144EE08 | 41 82 00 24 */	beq .L_8144EE2C
@@ -5564,10 +5564,10 @@
 /* 8144EE3C | 7C 08 03 A6 */	mtlr r0
 /* 8144EE40 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144EE44 | 4E 80 00 20 */	blr
-.endfn CHANSExport_ceil
+.endfn VmMethod_ceil
 
 # .text:0x489C | 0x8144EE48 | size: 0x7C
-.fn CHANSExport_cos, global
+.fn VmMethod_cos, global
 /* 8144EE48 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144EE4C | 7C 08 02 A6 */	mflr r0
 /* 8144EE50 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -5580,7 +5580,7 @@
 /* 8144EE6C | 7C 65 1B 78 */	mr r5, r3
 /* 8144EE70 | 7F A3 EB 78 */	mr r3, r29
 /* 8144EE74 | 38 80 00 02 */	li r4, 0x2
-/* 8144EE78 | 4B FF CA 65 */	bl CHANSVm_8144B8DC
+/* 8144EE78 | 4B FF CA 65 */	bl CHANSVmConvertObjectType
 /* 8144EE7C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144EE80 | 3B E0 00 00 */	li r31, 0x0
 /* 8144EE84 | 41 82 00 24 */	beq .L_8144EEA8
@@ -5600,10 +5600,10 @@
 /* 8144EEB8 | 7C 08 03 A6 */	mtlr r0
 /* 8144EEBC | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144EEC0 | 4E 80 00 20 */	blr
-.endfn CHANSExport_cos
+.endfn VmMethod_cos
 
 # .text:0x4918 | 0x8144EEC4 | size: 0x7C
-.fn CHANSExport_exp, global
+.fn VmMethod_exp, global
 /* 8144EEC4 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144EEC8 | 7C 08 02 A6 */	mflr r0
 /* 8144EECC | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -5616,7 +5616,7 @@
 /* 8144EEE8 | 7C 65 1B 78 */	mr r5, r3
 /* 8144EEEC | 7F A3 EB 78 */	mr r3, r29
 /* 8144EEF0 | 38 80 00 02 */	li r4, 0x2
-/* 8144EEF4 | 4B FF C9 E9 */	bl CHANSVm_8144B8DC
+/* 8144EEF4 | 4B FF C9 E9 */	bl CHANSVmConvertObjectType
 /* 8144EEF8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144EEFC | 3B E0 00 00 */	li r31, 0x0
 /* 8144EF00 | 41 82 00 24 */	beq .L_8144EF24
@@ -5636,10 +5636,10 @@
 /* 8144EF34 | 7C 08 03 A6 */	mtlr r0
 /* 8144EF38 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144EF3C | 4E 80 00 20 */	blr
-.endfn CHANSExport_exp
+.endfn VmMethod_exp
 
 # .text:0x4994 | 0x8144EF40 | size: 0x7C
-.fn CHANSExport_floor, global
+.fn VmMethod_floor, global
 /* 8144EF40 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144EF44 | 7C 08 02 A6 */	mflr r0
 /* 8144EF48 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -5652,7 +5652,7 @@
 /* 8144EF64 | 7C 65 1B 78 */	mr r5, r3
 /* 8144EF68 | 7F A3 EB 78 */	mr r3, r29
 /* 8144EF6C | 38 80 00 02 */	li r4, 0x2
-/* 8144EF70 | 4B FF C9 6D */	bl CHANSVm_8144B8DC
+/* 8144EF70 | 4B FF C9 6D */	bl CHANSVmConvertObjectType
 /* 8144EF74 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144EF78 | 3B E0 00 00 */	li r31, 0x0
 /* 8144EF7C | 41 82 00 24 */	beq .L_8144EFA0
@@ -5672,10 +5672,10 @@
 /* 8144EFB0 | 7C 08 03 A6 */	mtlr r0
 /* 8144EFB4 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144EFB8 | 4E 80 00 20 */	blr
-.endfn CHANSExport_floor
+.endfn VmMethod_floor
 
 # .text:0x4A10 | 0x8144EFBC | size: 0x7C
-.fn CHANSExport_log, global
+.fn VmMethod_log, global
 /* 8144EFBC | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144EFC0 | 7C 08 02 A6 */	mflr r0
 /* 8144EFC4 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -5688,7 +5688,7 @@
 /* 8144EFE0 | 7C 65 1B 78 */	mr r5, r3
 /* 8144EFE4 | 7F A3 EB 78 */	mr r3, r29
 /* 8144EFE8 | 38 80 00 02 */	li r4, 0x2
-/* 8144EFEC | 4B FF C8 F1 */	bl CHANSVm_8144B8DC
+/* 8144EFEC | 4B FF C8 F1 */	bl CHANSVmConvertObjectType
 /* 8144EFF0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144EFF4 | 3B E0 00 00 */	li r31, 0x0
 /* 8144EFF8 | 41 82 00 24 */	beq .L_8144F01C
@@ -5708,10 +5708,10 @@
 /* 8144F02C | 7C 08 03 A6 */	mtlr r0
 /* 8144F030 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144F034 | 4E 80 00 20 */	blr
-.endfn CHANSExport_log
+.endfn VmMethod_log
 
 # .text:0x4A8C | 0x8144F038 | size: 0x144
-.fn CHANSExport_max, global
+.fn VmMethod_max, global
 /* 8144F038 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144F03C | 7C 08 02 A6 */	mflr r0
 /* 8144F040 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -5763,7 +5763,7 @@
 /* 8144F0F0 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F0F4 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F0F8 | 38 80 00 02 */	li r4, 0x2
-/* 8144F0FC | 4B FF C7 E1 */	bl CHANSVm_8144B8DC
+/* 8144F0FC | 4B FF C7 E1 */	bl CHANSVmConvertObjectType
 /* 8144F100 | 7C 7E 1B 78 */	mr r30, r3
 /* 8144F104 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F108 | 38 80 00 01 */	li r4, 0x1
@@ -5771,7 +5771,7 @@
 /* 8144F110 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F114 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F118 | 38 80 00 02 */	li r4, 0x2
-/* 8144F11C | 4B FF C7 C1 */	bl CHANSVm_8144B8DC
+/* 8144F11C | 4B FF C7 C1 */	bl CHANSVmConvertObjectType
 /* 8144F120 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 8144F124 | 3B E0 00 00 */	li r31, 0x0
 /* 8144F128 | 41 82 00 30 */	beq .L_8144F158
@@ -5779,7 +5779,7 @@
 /* 8144F130 | 41 82 00 28 */	beq .L_8144F158
 /* 8144F134 | C8 3E 00 00 */	lfd f1, 0x0(r30)
 /* 8144F138 | C8 43 00 00 */	lfd f2, 0x0(r3)
-/* 8144F13C | 48 1B B6 C9 */	bl fn_8160A804
+/* 8144F13C | 48 1B B6 C9 */	bl fmax
 /* 8144F140 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F144 | 7F A4 EB 78 */	mr r4, r29
 /* 8144F148 | 4B FF C8 A5 */	bl CHANSVmSetFloat
@@ -5798,10 +5798,10 @@
 /* 8144F170 | 7C 08 03 A6 */	mtlr r0
 /* 8144F174 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144F178 | 4E 80 00 20 */	blr
-.endfn CHANSExport_max
+.endfn VmMethod_max
 
 # .text:0x4BD0 | 0x8144F17C | size: 0x144
-.fn CHANSExport_min, global
+.fn VmMethod_min, global
 /* 8144F17C | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144F180 | 7C 08 02 A6 */	mflr r0
 /* 8144F184 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -5853,7 +5853,7 @@
 /* 8144F234 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F238 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F23C | 38 80 00 02 */	li r4, 0x2
-/* 8144F240 | 4B FF C6 9D */	bl CHANSVm_8144B8DC
+/* 8144F240 | 4B FF C6 9D */	bl CHANSVmConvertObjectType
 /* 8144F244 | 7C 7E 1B 78 */	mr r30, r3
 /* 8144F248 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F24C | 38 80 00 01 */	li r4, 0x1
@@ -5861,7 +5861,7 @@
 /* 8144F254 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F258 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F25C | 38 80 00 02 */	li r4, 0x2
-/* 8144F260 | 4B FF C6 7D */	bl CHANSVm_8144B8DC
+/* 8144F260 | 4B FF C6 7D */	bl CHANSVmConvertObjectType
 /* 8144F264 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 8144F268 | 3B E0 00 00 */	li r31, 0x0
 /* 8144F26C | 41 82 00 30 */	beq .L_8144F29C
@@ -5869,7 +5869,7 @@
 /* 8144F274 | 41 82 00 28 */	beq .L_8144F29C
 /* 8144F278 | C8 3E 00 00 */	lfd f1, 0x0(r30)
 /* 8144F27C | C8 43 00 00 */	lfd f2, 0x0(r3)
-/* 8144F280 | 48 1B B5 F1 */	bl fn_8160A870
+/* 8144F280 | 48 1B B5 F1 */	bl fmin
 /* 8144F284 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F288 | 7F A4 EB 78 */	mr r4, r29
 /* 8144F28C | 4B FF C7 61 */	bl CHANSVmSetFloat
@@ -5888,10 +5888,10 @@
 /* 8144F2B4 | 7C 08 03 A6 */	mtlr r0
 /* 8144F2B8 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144F2BC | 4E 80 00 20 */	blr
-.endfn CHANSExport_min
+.endfn VmMethod_min
 
 # .text:0x4D14 | 0x8144F2C0 | size: 0xA8
-.fn CHANSExport_pow, global
+.fn VmMethod_pow, global
 /* 8144F2C0 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144F2C4 | 7C 08 02 A6 */	mflr r0
 /* 8144F2C8 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -5904,7 +5904,7 @@
 /* 8144F2E4 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F2E8 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F2EC | 38 80 00 02 */	li r4, 0x2
-/* 8144F2F0 | 4B FF C5 ED */	bl CHANSVm_8144B8DC
+/* 8144F2F0 | 4B FF C5 ED */	bl CHANSVmConvertObjectType
 /* 8144F2F4 | 7C 7E 1B 78 */	mr r30, r3
 /* 8144F2F8 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F2FC | 38 80 00 01 */	li r4, 0x1
@@ -5912,7 +5912,7 @@
 /* 8144F304 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F308 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F30C | 38 80 00 02 */	li r4, 0x2
-/* 8144F310 | 4B FF C5 CD */	bl CHANSVm_8144B8DC
+/* 8144F310 | 4B FF C5 CD */	bl CHANSVmConvertObjectType
 /* 8144F314 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 8144F318 | 3B E0 00 00 */	li r31, 0x0
 /* 8144F31C | 41 82 00 30 */	beq .L_8144F34C
@@ -5935,10 +5935,10 @@
 /* 8144F35C | 7C 08 03 A6 */	mtlr r0
 /* 8144F360 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144F364 | 4E 80 00 20 */	blr
-.endfn CHANSExport_pow
+.endfn VmMethod_pow
 
 # .text:0x4DBC | 0x8144F368 | size: 0x70
-.fn CHANSExport_random, global
+.fn VmMethod_random, global
 /* 8144F368 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144F36C | 7C 08 02 A6 */	mflr r0
 /* 8144F370 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -5967,10 +5967,10 @@
 /* 8144F3CC | 7C 08 03 A6 */	mtlr r0
 /* 8144F3D0 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144F3D4 | 4E 80 00 20 */	blr
-.endfn CHANSExport_random
+.endfn VmMethod_random
 
 # .text:0x4E2C | 0x8144F3D8 | size: 0x9C
-.fn CHANSExport_round, global
+.fn VmMethod_round, global
 /* 8144F3D8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144F3DC | 7C 08 02 A6 */	mflr r0
 /* 8144F3E0 | 38 80 00 00 */	li r4, 0x0
@@ -5983,7 +5983,7 @@
 /* 8144F3FC | 7C 65 1B 78 */	mr r5, r3
 /* 8144F400 | 7F C3 F3 78 */	mr r3, r30
 /* 8144F404 | 38 80 00 02 */	li r4, 0x2
-/* 8144F408 | 4B FF C4 D5 */	bl CHANSVm_8144B8DC
+/* 8144F408 | 4B FF C4 D5 */	bl CHANSVmConvertObjectType
 /* 8144F40C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F410 | 41 82 00 48 */	beq .L_8144F458
 /* 8144F414 | C8 23 00 00 */	lfd f1, 0x0(r3)
@@ -6014,10 +6014,10 @@
 /* 8144F468 | 7C 08 03 A6 */	mtlr r0
 /* 8144F46C | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144F470 | 4E 80 00 20 */	blr
-.endfn CHANSExport_round
+.endfn VmMethod_round
 
 # .text:0x4EC8 | 0x8144F474 | size: 0x7C
-.fn CHANSExport_sin, global
+.fn VmMethod_sin, global
 /* 8144F474 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144F478 | 7C 08 02 A6 */	mflr r0
 /* 8144F47C | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -6030,7 +6030,7 @@
 /* 8144F498 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F49C | 7F A3 EB 78 */	mr r3, r29
 /* 8144F4A0 | 38 80 00 02 */	li r4, 0x2
-/* 8144F4A4 | 4B FF C4 39 */	bl CHANSVm_8144B8DC
+/* 8144F4A4 | 4B FF C4 39 */	bl CHANSVmConvertObjectType
 /* 8144F4A8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F4AC | 3B E0 00 00 */	li r31, 0x0
 /* 8144F4B0 | 41 82 00 24 */	beq .L_8144F4D4
@@ -6050,10 +6050,10 @@
 /* 8144F4E4 | 7C 08 03 A6 */	mtlr r0
 /* 8144F4E8 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144F4EC | 4E 80 00 20 */	blr
-.endfn CHANSExport_sin
+.endfn VmMethod_sin
 
 # .text:0x4F44 | 0x8144F4F0 | size: 0x8C
-.fn CHANSExport_sqrt, global
+.fn VmMethod_sqrt, global
 /* 8144F4F0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144F4F4 | 7C 08 02 A6 */	mflr r0
 /* 8144F4F8 | 38 80 00 00 */	li r4, 0x0
@@ -6066,7 +6066,7 @@
 /* 8144F514 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F518 | 7F C3 F3 78 */	mr r3, r30
 /* 8144F51C | 38 80 00 02 */	li r4, 0x2
-/* 8144F520 | 4B FF C3 BD */	bl CHANSVm_8144B8DC
+/* 8144F520 | 4B FF C3 BD */	bl CHANSVmConvertObjectType
 /* 8144F524 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F528 | 41 82 00 38 */	beq .L_8144F560
 /* 8144F52C | C8 23 00 00 */	lfd f1, 0x0(r3)
@@ -6093,10 +6093,10 @@
 /* 8144F570 | 7C 08 03 A6 */	mtlr r0
 /* 8144F574 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144F578 | 4E 80 00 20 */	blr
-.endfn CHANSExport_sqrt
+.endfn VmMethod_sqrt
 
 # .text:0x4FD0 | 0x8144F57C | size: 0x7C
-.fn CHANSExport_tan, global
+.fn VmMethod_tan, global
 /* 8144F57C | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144F580 | 7C 08 02 A6 */	mflr r0
 /* 8144F584 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -6109,7 +6109,7 @@
 /* 8144F5A0 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F5A4 | 7F A3 EB 78 */	mr r3, r29
 /* 8144F5A8 | 38 80 00 02 */	li r4, 0x2
-/* 8144F5AC | 4B FF C3 31 */	bl CHANSVm_8144B8DC
+/* 8144F5AC | 4B FF C3 31 */	bl CHANSVmConvertObjectType
 /* 8144F5B0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F5B4 | 3B E0 00 00 */	li r31, 0x0
 /* 8144F5B8 | 41 82 00 24 */	beq .L_8144F5DC
@@ -6129,10 +6129,10 @@
 /* 8144F5EC | 7C 08 03 A6 */	mtlr r0
 /* 8144F5F0 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144F5F4 | 4E 80 00 20 */	blr
-.endfn CHANSExport_tan
+.endfn VmMethod_tan
 
 # .text:0x504C | 0x8144F5F8 | size: 0xA4
-.fn CHANSVm_8144F5F8, global
+.fn VmCtor_String, global
 /* 8144F5F8 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144F5FC | 7C 08 02 A6 */	mflr r0
 /* 8144F600 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -6149,7 +6149,7 @@
 /* 8144F62C | 7C 65 1B 78 */	mr r5, r3
 /* 8144F630 | 7F A3 EB 78 */	mr r3, r29
 /* 8144F634 | 38 80 00 03 */	li r4, 0x3
-/* 8144F638 | 4B FF C2 A5 */	bl CHANSVm_8144B8DC
+/* 8144F638 | 4B FF C2 A5 */	bl CHANSVmConvertObjectType
 /* 8144F63C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F640 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F644 | 3B E0 00 00 */	li r31, 0x0
@@ -6167,7 +6167,7 @@
 /* 8144F66C | 38 80 00 00 */	li r4, 0x0
 /* 8144F670 | 38 C0 00 03 */	li r6, 0x3
 /* 8144F674 | 38 E0 00 00 */	li r7, 0x0
-/* 8144F678 | 4B FF B7 5D */	bl CHANSVm_8144ADD4
+/* 8144F678 | 4B FF B7 5D */	bl CHANSVmNewObject
 /* 8144F67C | 30 03 FF FF */	subic r0, r3, 0x1
 /* 8144F680 | 7C 60 19 10 */	subfe r3, r0, r3
 .L_8144F684:
@@ -6177,10 +6177,10 @@
 /* 8144F690 | 7C 08 03 A6 */	mtlr r0
 /* 8144F694 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144F698 | 4E 80 00 20 */	blr
-.endfn CHANSVm_8144F5F8
+.endfn VmCtor_String
 
 # .text:0x50F0 | 0x8144F69C | size: 0xEC
-.fn CHANSExport_pFromCharCode, global
+.fn VmMethod_pFromCharCode, global
 /* 8144F69C | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144F6A0 | 7C 08 02 A6 */	mflr r0
 /* 8144F6A4 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -6198,7 +6198,7 @@
 /* 8144F6D4 | 38 C0 00 03 */	li r6, 0x3
 /* 8144F6D8 | A3 A7 00 14 */	lhz r29, 0x14(r7)
 /* 8144F6DC | 57 A7 08 3C */	slwi r7, r29, 1
-/* 8144F6E0 | 4B FF B6 F5 */	bl CHANSVm_8144ADD4
+/* 8144F6E0 | 4B FF B6 F5 */	bl CHANSVmNewObject
 /* 8144F6E4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F6E8 | 41 82 00 84 */	beq .L_8144F76C
 /* 8144F6EC | 3B 80 00 00 */	li r28, 0x0
@@ -6212,7 +6212,7 @@
 /* 8144F708 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F70C | 7F 43 D3 78 */	mr r3, r26
 /* 8144F710 | 38 80 00 01 */	li r4, 0x1
-/* 8144F714 | 4B FF C1 C9 */	bl CHANSVm_8144B8DC
+/* 8144F714 | 4B FF C1 C9 */	bl CHANSVmConvertObjectType
 /* 8144F718 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F71C | 41 82 00 14 */	beq .L_8144F730
 /* 8144F720 | 80 63 00 04 */	lwz r3, 0x4(r3)
@@ -6246,10 +6246,10 @@
 /* 8144F77C | 7C 08 03 A6 */	mtlr r0
 /* 8144F780 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144F784 | 4E 80 00 20 */	blr
-.endfn CHANSExport_pFromCharCode
+.endfn VmMethod_pFromCharCode
 
 # .text:0x51DC | 0x8144F788 | size: 0x40
-.fn CHANSExport_length, global
+.fn VmMethod_length, global
 /* 8144F788 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8144F78C | 7C 08 02 A6 */	mflr r0
 /* 8144F790 | 7C 86 23 78 */	mr r6, r4
@@ -6266,10 +6266,10 @@
 /* 8144F7BC | 7C 08 03 A6 */	mtlr r0
 /* 8144F7C0 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8144F7C4 | 4E 80 00 20 */	blr
-.endfn CHANSExport_length
+.endfn VmMethod_length
 
 # .text:0x521C | 0x8144F7C8 | size: 0xE8
-.fn CHANSExport_charAt, global
+.fn VmMethod_charAt, global
 /* 8144F7C8 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144F7CC | 7C 08 02 A6 */	mflr r0
 /* 8144F7D0 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -6284,7 +6284,7 @@
 /* 8144F7F4 | 7C 65 1B 78 */	mr r5, r3
 /* 8144F7F8 | 7F 63 DB 78 */	mr r3, r27
 /* 8144F7FC | 38 80 00 01 */	li r4, 0x1
-/* 8144F800 | 4B FF C0 DD */	bl CHANSVm_8144B8DC
+/* 8144F800 | 4B FF C0 DD */	bl CHANSVmConvertObjectType
 /* 8144F804 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F808 | 41 82 00 8C */	beq .L_8144F894
 /* 8144F80C | 80 BC 00 00 */	lwz r5, 0x0(r28)
@@ -6307,7 +6307,7 @@
 /* 8144F84C | 7F C7 F3 78 */	mr r7, r30
 /* 8144F850 | 38 80 00 00 */	li r4, 0x0
 /* 8144F854 | 38 C0 00 03 */	li r6, 0x3
-/* 8144F858 | 4B FF B5 7D */	bl CHANSVm_8144ADD4
+/* 8144F858 | 4B FF B5 7D */	bl CHANSVmNewObject
 /* 8144F85C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F860 | 41 82 00 34 */	beq .L_8144F894
 /* 8144F864 | 2C 1E 00 00 */	cmpwi r30, 0x0
@@ -6332,10 +6332,10 @@
 /* 8144F8A4 | 7C 08 03 A6 */	mtlr r0
 /* 8144F8A8 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144F8AC | 4E 80 00 20 */	blr
-.endfn CHANSExport_charAt
+.endfn VmMethod_charAt
 
 # .text:0x5304 | 0x8144F8B0 | size: 0xC8
-.fn CHANSExport_charCodeAt, global
+.fn VmMethod_charCodeAt, global
 /* 8144F8B0 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144F8B4 | 7C 08 02 A6 */	mflr r0
 /* 8144F8B8 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -6350,7 +6350,7 @@
 /* 8144F8DC | 7C 65 1B 78 */	mr r5, r3
 /* 8144F8E0 | 7F 83 E3 78 */	mr r3, r28
 /* 8144F8E4 | 38 80 00 01 */	li r4, 0x1
-/* 8144F8E8 | 4B FF BF F5 */	bl CHANSVm_8144B8DC
+/* 8144F8E8 | 4B FF BF F5 */	bl CHANSVmConvertObjectType
 /* 8144F8EC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F8F0 | 41 82 00 6C */	beq .L_8144F95C
 /* 8144F8F4 | 80 FD 00 00 */	lwz r7, 0x0(r29)
@@ -6389,7 +6389,7 @@
 /* 8144F96C | 7C 08 03 A6 */	mtlr r0
 /* 8144F970 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144F974 | 4E 80 00 20 */	blr
-.endfn CHANSExport_charCodeAt
+.endfn VmMethod_charCodeAt
 
 # .text:0x53CC | 0x8144F978 | size: 0x88
 .fn CHANSVmStringObjectDup, global
@@ -6410,7 +6410,7 @@
 /* 8144F9B0 | 38 80 00 00 */	li r4, 0x0
 /* 8144F9B4 | 38 C0 00 03 */	li r6, 0x3
 /* 8144F9B8 | 80 E7 00 04 */	lwz r7, 0x4(r7)
-/* 8144F9BC | 4B FF B4 19 */	bl CHANSVm_8144ADD4
+/* 8144F9BC | 4B FF B4 19 */	bl CHANSVmNewObject
 /* 8144F9C0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144F9C4 | 7C 7F 1B 78 */	mr r31, r3
 /* 8144F9C8 | 41 82 00 1C */	beq .L_8144F9E4
@@ -6448,7 +6448,7 @@
 /* 8144FA34 | 7C 65 1B 78 */	mr r5, r3
 /* 8144FA38 | 7F 83 E3 78 */	mr r3, r28
 /* 8144FA3C | 38 80 00 03 */	li r4, 0x3
-/* 8144FA40 | 4B FF BE 9D */	bl CHANSVm_8144B8DC
+/* 8144FA40 | 4B FF BE 9D */	bl CHANSVmConvertObjectType
 /* 8144FA44 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144FA48 | 7C 7B 1B 78 */	mr r27, r3
 /* 8144FA4C | 41 82 01 18 */	beq .L_8144FB64
@@ -6460,7 +6460,7 @@
 /* 8144FA64 | 7C 65 1B 78 */	mr r5, r3
 /* 8144FA68 | 7F 83 E3 78 */	mr r3, r28
 /* 8144FA6C | 38 80 00 01 */	li r4, 0x1
-/* 8144FA70 | 4B FF BE 6D */	bl CHANSVm_8144B8DC
+/* 8144FA70 | 4B FF BE 6D */	bl CHANSVmConvertObjectType
 /* 8144FA74 | 7C 7A 1B 78 */	mr r26, r3
 .L_8144FA78:
 /* 8144FA78 | 80 DF 00 00 */	lwz r6, 0x0(r31)
@@ -6550,28 +6550,28 @@
 .endfn CHANSVm_8144FA00
 
 # .text:0x55F8 | 0x8144FBA4 | size: 0xC
-.fn CHANSExport_indexOf, global
+.fn VmMethod_indexOf, global
 /* 8144FBA4 | 38 C0 00 01 */	li r6, 0x1
 /* 8144FBA8 | 38 E0 00 00 */	li r7, 0x0
 /* 8144FBAC | 4B FF FE 54 */	b CHANSVm_8144FA00
-.endfn CHANSExport_indexOf
+.endfn VmMethod_indexOf
 
 # .text:0x5604 | 0x8144FBB0 | size: 0xC
-.fn CHANSExport_lastIndexOf, global
+.fn VmMethod_lastIndexOf, global
 /* 8144FBB0 | 38 C0 00 00 */	li r6, 0x0
 /* 8144FBB4 | 38 E0 00 00 */	li r7, 0x0
 /* 8144FBB8 | 4B FF FE 48 */	b CHANSVm_8144FA00
-.endfn CHANSExport_lastIndexOf
+.endfn VmMethod_lastIndexOf
 
 # .text:0x5610 | 0x8144FBBC | size: 0xC
-.fn CHANSExport_searc, global
+.fn VmMethod_searc, global
 /* 8144FBBC | 38 C0 00 01 */	li r6, 0x1
 /* 8144FBC0 | 38 E0 00 01 */	li r7, 0x1
 /* 8144FBC4 | 4B FF FE 3C */	b CHANSVm_8144FA00
-.endfn CHANSExport_searc
+.endfn VmMethod_searc
 
 # .text:0x561C | 0x8144FBC8 | size: 0x210
-.fn CHANSExport_replace, global
+.fn VmMethod_replace, global
 /* 8144FBC8 | 94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 8144FBCC | 7C 08 02 A6 */	mflr r0
 /* 8144FBD0 | 90 01 00 44 */	stw r0, 0x44(r1)
@@ -6589,7 +6589,7 @@
 /* 8144FC00 | 7C 65 1B 78 */	mr r5, r3
 /* 8144FC04 | 7F 63 DB 78 */	mr r3, r27
 /* 8144FC08 | 38 80 00 03 */	li r4, 0x3
-/* 8144FC0C | 4B FF BC D1 */	bl CHANSVm_8144B8DC
+/* 8144FC0C | 4B FF BC D1 */	bl CHANSVmConvertObjectType
 /* 8144FC10 | 7C 7D 1B 78 */	mr r29, r3
 /* 8144FC14 | 7F 63 DB 78 */	mr r3, r27
 /* 8144FC18 | 38 80 00 01 */	li r4, 0x1
@@ -6597,7 +6597,7 @@
 /* 8144FC20 | 7C 65 1B 78 */	mr r5, r3
 /* 8144FC24 | 7F 63 DB 78 */	mr r3, r27
 /* 8144FC28 | 38 80 00 03 */	li r4, 0x3
-/* 8144FC2C | 4B FF BC B1 */	bl CHANSVm_8144B8DC
+/* 8144FC2C | 4B FF BC B1 */	bl CHANSVmConvertObjectType
 /* 8144FC30 | 2C 1D 00 00 */	cmpwi r29, 0x0
 /* 8144FC34 | 41 82 01 6C */	beq .L_8144FDA0
 /* 8144FC38 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -6689,7 +6689,7 @@
 /* 8144FD64 | 7E C7 B3 78 */	mr r7, r22
 /* 8144FD68 | 38 80 00 00 */	li r4, 0x0
 /* 8144FD6C | 38 C0 00 03 */	li r6, 0x3
-/* 8144FD70 | 4B FF B0 65 */	bl CHANSVm_8144ADD4
+/* 8144FD70 | 4B FF B0 65 */	bl CHANSVmNewObject
 /* 8144FD74 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144FD78 | 41 82 00 44 */	beq .L_8144FDBC
 /* 8144FD7C | 80 7C 00 00 */	lwz r3, 0x0(r28)
@@ -6719,10 +6719,10 @@
 /* 8144FDCC | 7C 08 03 A6 */	mtlr r0
 /* 8144FDD0 | 38 21 00 40 */	addi r1, r1, 0x40
 /* 8144FDD4 | 4E 80 00 20 */	blr
-.endfn CHANSExport_replace
+.endfn VmMethod_replace
 
 # .text:0x582C | 0x8144FDD8 | size: 0x1E4
-.fn CHANSExport_splice, global
+.fn VmMethod_splice, global
 /* 8144FDD8 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8144FDDC | 7C 08 02 A6 */	mflr r0
 /* 8144FDE0 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -6736,7 +6736,7 @@
 /* 8144FE00 | 7C 65 1B 78 */	mr r5, r3
 /* 8144FE04 | 7F 83 E3 78 */	mr r3, r28
 /* 8144FE08 | 38 80 00 01 */	li r4, 0x1
-/* 8144FE0C | 4B FF BA D1 */	bl CHANSVm_8144B8DC
+/* 8144FE0C | 4B FF BA D1 */	bl CHANSVmConvertObjectType
 /* 8144FE10 | 7C 7B 1B 78 */	mr r27, r3
 /* 8144FE14 | 7F 83 E3 78 */	mr r3, r28
 /* 8144FE18 | 38 80 00 01 */	li r4, 0x1
@@ -6744,7 +6744,7 @@
 /* 8144FE20 | 7C 65 1B 78 */	mr r5, r3
 /* 8144FE24 | 7F 83 E3 78 */	mr r3, r28
 /* 8144FE28 | 38 80 00 01 */	li r4, 0x1
-/* 8144FE2C | 4B FF BA B1 */	bl CHANSVm_8144B8DC
+/* 8144FE2C | 4B FF BA B1 */	bl CHANSVmConvertObjectType
 /* 8144FE30 | 80 9D 00 00 */	lwz r4, 0x0(r29)
 /* 8144FE34 | 2C 1B 00 00 */	cmpwi r27, 0x0
 /* 8144FE38 | 3B E0 00 00 */	li r31, 0x0
@@ -6828,7 +6828,7 @@
 /* 8144FF5C | 7F C5 F3 78 */	mr r5, r30
 /* 8144FF60 | 38 80 00 00 */	li r4, 0x0
 /* 8144FF64 | 7F 67 DB 78 */	mr r7, r27
-/* 8144FF68 | 4B FF AE 6D */	bl CHANSVm_8144ADD4
+/* 8144FF68 | 4B FF AE 6D */	bl CHANSVmNewObject
 /* 8144FF6C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8144FF70 | 41 82 00 30 */	beq .L_8144FFA0
 /* 8144FF74 | 2C 1B 00 00 */	cmpwi r27, 0x0
@@ -6852,10 +6852,10 @@
 /* 8144FFB0 | 7C 08 03 A6 */	mtlr r0
 /* 8144FFB4 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8144FFB8 | 4E 80 00 20 */	blr
-.endfn CHANSExport_splice
+.endfn VmMethod_splice
 
 # .text:0x5A10 | 0x8144FFBC | size: 0x378
-.fn CHANSExport_split, global
+.fn VmMethod_split, global
 /* 8144FFBC | 94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 8144FFC0 | 7C 08 02 A6 */	mflr r0
 /* 8144FFC4 | 90 01 00 54 */	stw r0, 0x54(r1)
@@ -6871,7 +6871,7 @@
 /* 8144FFEC | 7C 65 1B 78 */	mr r5, r3
 /* 8144FFF0 | 7F 63 DB 78 */	mr r3, r27
 /* 8144FFF4 | 38 80 00 03 */	li r4, 0x3
-/* 8144FFF8 | 4B FF B8 E5 */	bl CHANSVm_8144B8DC
+/* 8144FFF8 | 4B FF B8 E5 */	bl CHANSVmConvertObjectType
 /* 8144FFFC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81450000 | 7C 7F 1B 78 */	mr r31, r3
 /* 81450004 | 40 82 00 10 */	bne .L_81450014
@@ -6890,7 +6890,7 @@
 /* 81450034 | 7C 65 1B 78 */	mr r5, r3
 /* 81450038 | 7F 63 DB 78 */	mr r3, r27
 /* 8145003C | 38 80 00 01 */	li r4, 0x1
-/* 81450040 | 4B FF B8 9D */	bl CHANSVm_8144B8DC
+/* 81450040 | 4B FF B8 9D */	bl CHANSVmConvertObjectType
 /* 81450044 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81450048 | 41 82 00 30 */	beq .L_81450078
 /* 8145004C | 80 83 00 04 */	lwz r4, 0x4(r3)
@@ -6945,7 +6945,7 @@
 /* 81450100 | 7E 67 9B 78 */	mr r7, r19
 /* 81450104 | 38 80 00 00 */	li r4, 0x0
 /* 81450108 | 38 C0 00 03 */	li r6, 0x3
-/* 8145010C | 4B FF AC C9 */	bl CHANSVm_8144ADD4
+/* 8145010C | 4B FF AC C9 */	bl CHANSVmNewObject
 /* 81450110 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81450114 | 41 82 02 04 */	beq .L_81450318
 /* 81450118 | 80 7A 00 00 */	lwz r3, 0x0(r26)
@@ -6984,7 +6984,7 @@
 /* 8145018C | 7F 47 D3 78 */	mr r7, r26
 /* 81450190 | 38 80 00 00 */	li r4, 0x0
 /* 81450194 | 38 C0 00 03 */	li r6, 0x3
-/* 81450198 | 4B FF AC 3D */	bl CHANSVm_8144ADD4
+/* 81450198 | 4B FF AC 3D */	bl CHANSVmNewObject
 /* 8145019C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 814501A0 | 41 82 01 78 */	beq .L_81450318
 /* 814501A4 | 80 79 00 00 */	lwz r3, 0x0(r25)
@@ -7075,7 +7075,7 @@
 /* 814502D0 | 38 80 00 00 */	li r4, 0x0
 /* 814502D4 | 38 C0 00 03 */	li r6, 0x3
 /* 814502D8 | 38 E0 00 02 */	li r7, 0x2
-/* 814502DC | 4B FF AA F9 */	bl CHANSVm_8144ADD4
+/* 814502DC | 4B FF AA F9 */	bl CHANSVmNewObject
 /* 814502E0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 814502E4 | 41 82 00 34 */	beq .L_81450318
 /* 814502E8 | 80 7E 00 00 */	lwz r3, 0x0(r30)
@@ -7100,10 +7100,10 @@
 /* 81450328 | 7C 08 03 A6 */	mtlr r0
 /* 8145032C | 38 21 00 50 */	addi r1, r1, 0x50
 /* 81450330 | 4E 80 00 20 */	blr
-.endfn CHANSExport_split
+.endfn VmMethod_split
 
 # .text:0x5D88 | 0x81450334 | size: 0xB4
-.fn CHANSExport_toLowerCase, global
+.fn VmMethod_toLowerCase, global
 /* 81450334 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81450338 | 7C 08 02 A6 */	mflr r0
 /* 8145033C | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -7155,10 +7155,10 @@
 /* 814503DC | 7C 08 03 A6 */	mtlr r0
 /* 814503E0 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 814503E4 | 4E 80 00 20 */	blr
-.endfn CHANSExport_toLowerCase
+.endfn VmMethod_toLowerCase
 
 # .text:0x5E3C | 0x814503E8 | size: 0xB4
-.fn CHANSExport_toUpperCase, global
+.fn VmMethod_toUpperCase, global
 /* 814503E8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 814503EC | 7C 08 02 A6 */	mflr r0
 /* 814503F0 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -7210,7 +7210,7 @@
 /* 81450490 | 7C 08 03 A6 */	mtlr r0
 /* 81450494 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81450498 | 4E 80 00 20 */	blr
-.endfn CHANSExport_toUpperCase
+.endfn VmMethod_toUpperCase
 
 # .text:0x5EF0 | 0x8145049C | size: 0x6BC
 .fn CHANSVm_8145049C, global
@@ -7475,7 +7475,7 @@
 /* 81450838 | 7C 65 1B 78 */	mr r5, r3
 /* 8145083C | 7D E3 7B 78 */	mr r3, r15
 /* 81450840 | 38 80 00 01 */	li r4, 0x1
-/* 81450844 | 4B FF B0 99 */	bl CHANSVm_8144B8DC
+/* 81450844 | 4B FF B0 99 */	bl CHANSVmConvertObjectType
 /* 81450848 | 7C 64 1B 78 */	mr r4, r3
 .L_8145084C:
 /* 8145084C | 2C 04 00 00 */	cmpwi r4, 0x0
@@ -7510,7 +7510,7 @@
 /* 814508B8 | 7E E4 BB 78 */	mr r4, r23
 /* 814508BC | 7C 75 A2 14 */	add r3, r21, r20
 /* 814508C0 | 55 C5 F8 7E */	srwi r5, r14, 1
-/* 814508C4 | 4B FF A7 95 */	bl CHANSVm_8144B058
+/* 814508C4 | 4B FF A7 95 */	bl VmStrToU16FromU8
 /* 814508C8 | 7E 94 72 14 */	add r20, r20, r14
 /* 814508CC | 48 00 02 00 */	b .L_81450ACC
 .L_814508D0:
@@ -7537,7 +7537,7 @@
 /* 81450918 | 7C 65 1B 78 */	mr r5, r3
 /* 8145091C | 7D E3 7B 78 */	mr r3, r15
 /* 81450920 | 38 80 00 02 */	li r4, 0x2
-/* 81450924 | 4B FF AF B9 */	bl CHANSVm_8144B8DC
+/* 81450924 | 4B FF AF B9 */	bl CHANSVmConvertObjectType
 /* 81450928 | 7C 64 1B 78 */	mr r4, r3
 /* 8145092C | 39 C0 00 01 */	li r14, 0x1
 /* 81450930 | 4B FF FF 1C */	b .L_8145084C
@@ -7548,7 +7548,7 @@
 /* 81450940 | 7C 65 1B 78 */	mr r5, r3
 /* 81450944 | 7D E3 7B 78 */	mr r3, r15
 /* 81450948 | 38 80 00 01 */	li r4, 0x1
-/* 8145094C | 4B FF AF 91 */	bl CHANSVm_8144B8DC
+/* 8145094C | 4B FF AF 91 */	bl CHANSVmConvertObjectType
 /* 81450950 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81450954 | 3B DE 00 01 */	addi r30, r30, 0x1
 /* 81450958 | 41 82 01 74 */	beq .L_81450ACC
@@ -7566,7 +7566,7 @@
 /* 81450984 | 7C 65 1B 78 */	mr r5, r3
 /* 81450988 | 7D E3 7B 78 */	mr r3, r15
 /* 8145098C | 38 80 00 03 */	li r4, 0x3
-/* 81450990 | 4B FF AF 4D */	bl CHANSVm_8144B8DC
+/* 81450990 | 4B FF AF 4D */	bl CHANSVmConvertObjectType
 /* 81450994 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81450998 | 90 61 00 88 */	stw r3, 0x88(r1)
 /* 8145099C | 3B DE 00 01 */	addi r30, r30, 0x1
@@ -7579,7 +7579,7 @@
 /* 814509B8 | 38 C0 00 03 */	li r6, 0x3
 /* 814509BC | 54 12 00 3C */	clrrwi r18, r0, 1
 /* 814509C0 | 38 F2 00 02 */	addi r7, r18, 0x2
-/* 814509C4 | 4B FF A4 11 */	bl CHANSVm_8144ADD4
+/* 814509C4 | 4B FF A4 11 */	bl CHANSVmNewObject
 /* 814509C8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 814509CC | 7C 6E 1B 78 */	mr r14, r3
 /* 814509D0 | 41 82 01 6C */	beq .L_81450B3C
@@ -7609,7 +7609,7 @@
 /* 81450A2C | 38 00 00 00 */	li r0, 0x0
 /* 81450A30 | 7C 1F C1 AE */	stbx r0, r31, r24
 /* 81450A34 | 7F 05 C3 78 */	mr r5, r24
-/* 81450A38 | 4B FF A6 21 */	bl CHANSVm_8144B058
+/* 81450A38 | 4B FF A6 21 */	bl VmStrToU16FromU8
 /* 81450A3C | 57 05 08 3C */	slwi r5, r24, 1
 /* 81450A40 | 38 00 00 00 */	li r0, 0x0
 /* 81450A44 | 38 81 00 40 */	addi r4, r1, 0x40
@@ -7627,7 +7627,7 @@
 /* 81450A74 | 41 82 00 18 */	beq .L_81450A8C
 /* 81450A78 | 7D E3 7B 78 */	mr r3, r15
 /* 81450A7C | 7D C4 73 78 */	mr r4, r14
-/* 81450A80 | 4B FF A0 D5 */	bl CHANSVm_8144AB54
+/* 81450A80 | 4B FF A0 D5 */	bl CHANSVmDeleteObject
 /* 81450A84 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81450A88 | 40 82 00 B4 */	bne .L_81450B3C
 .L_81450A8C:
@@ -7662,7 +7662,7 @@
 /* 81450AE8 | 7F A7 EB 78 */	mr r7, r29
 /* 81450AEC | 38 80 00 00 */	li r4, 0x0
 /* 81450AF0 | 38 C0 00 03 */	li r6, 0x3
-/* 81450AF4 | 4B FF A2 E1 */	bl CHANSVm_8144ADD4
+/* 81450AF4 | 4B FF A2 E1 */	bl CHANSVmNewObject
 /* 81450AF8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81450AFC | 7C 70 1B 78 */	mr r16, r3
 /* 81450B00 | 41 82 00 3C */	beq .L_81450B3C
@@ -7680,7 +7680,7 @@
 /* 81450B28 | 38 80 00 00 */	li r4, 0x0
 /* 81450B2C | 38 C0 00 03 */	li r6, 0x3
 /* 81450B30 | 38 E0 00 00 */	li r7, 0x0
-/* 81450B34 | 4B FF A2 A1 */	bl CHANSVm_8144ADD4
+/* 81450B34 | 4B FF A2 A1 */	bl CHANSVmNewObject
 /* 81450B38 | 48 00 00 08 */	b .L_81450B40
 .L_81450B3C:
 /* 81450B3C | 38 60 00 00 */	li r3, 0x0
@@ -7694,7 +7694,7 @@
 .endfn CHANSVm_8145049C
 
 # .text:0x65AC | 0x81450B58 | size: 0x4C
-.fn CHANSExport_pFormat, global
+.fn VmMethod_pFormat, global
 /* 81450B58 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81450B5C | 7C 08 02 A6 */	mflr r0
 /* 81450B60 | 2C 04 00 00 */	cmpwi r4, 0x0
@@ -7716,7 +7716,7 @@
 /* 81450B98 | 7C 08 03 A6 */	mtlr r0
 /* 81450B9C | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81450BA0 | 4E 80 00 20 */	blr
-.endfn CHANSExport_pFormat
+.endfn VmMethod_pFormat
 
 # .text:0x65F8 | 0x81450BA4 | size: 0x24
 .fn CHANSVm_81450BA4, global
@@ -7747,7 +7747,7 @@
 .endfn CHANSVm_81450BC8
 
 # .text:0x6640 | 0x81450BEC | size: 0x20
-.fn CHANSVm_81450BEC, global
+.fn vmBlobInitValue, local
 /* 81450BEC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81450BF0 | 4D 82 00 20 */	beqlr
 /* 81450BF4 | 38 03 00 0C */	addi r0, r3, 0xc
@@ -7756,10 +7756,10 @@
 /* 81450C00 | 90 83 00 04 */	stw r4, 0x4(r3)
 /* 81450C04 | 90 03 00 08 */	stw r0, 0x8(r3)
 /* 81450C08 | 4E 80 00 20 */	blr
-.endfn CHANSVm_81450BEC
+.endfn vmBlobInitValue
 
 # .text:0x6660 | 0x81450C0C | size: 0xAC
-.fn CHANSVm_81450C0C, global
+.fn vmBlobCreateDirect, local
 /* 81450C0C | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81450C10 | 7C 08 02 A6 */	mflr r0
 /* 81450C14 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -7770,7 +7770,7 @@
 /* 81450C28 | 7C 9E 23 78 */	mr r30, r4
 /* 81450C2C | 7C BF 2B 78 */	mr r31, r5
 /* 81450C30 | 41 82 00 18 */	beq .L_81450C48
-/* 81450C34 | 4B FF 9F 21 */	bl CHANSVm_8144AB54
+/* 81450C34 | 4B FF 9F 21 */	bl CHANSVmDeleteObject
 /* 81450C38 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81450C3C | 41 82 00 0C */	beq .L_81450C48
 /* 81450C40 | 38 60 00 00 */	li r3, 0x0
@@ -7781,7 +7781,7 @@
 /* 81450C50 | 38 FF 00 0C */	addi r7, r31, 0xc
 /* 81450C54 | 38 80 00 00 */	li r4, 0x0
 /* 81450C58 | 38 C0 00 08 */	li r6, 0x8
-/* 81450C5C | 4B FF A1 79 */	bl CHANSVm_8144ADD4
+/* 81450C5C | 4B FF A1 79 */	bl CHANSVmNewObject
 /* 81450C60 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81450C64 | 7C 7E 1B 78 */	mr r30, r3
 /* 81450C68 | 41 82 00 1C */	beq .L_81450C84
@@ -7798,7 +7798,7 @@
 /* 81450C8C | 7F C3 F3 78 */	mr r3, r30
 /* 81450C90 | 4B FF FF 15 */	bl CHANSVm_81450BA4
 /* 81450C94 | 7F E4 FB 78 */	mr r4, r31
-/* 81450C98 | 4B FF FF 55 */	bl CHANSVm_81450BEC
+/* 81450C98 | 4B FF FF 55 */	bl vmBlobInitValue
 /* 81450C9C | 7F C3 F3 78 */	mr r3, r30
 .L_81450CA0:
 /* 81450CA0 | 39 61 00 20 */	addi r11, r1, 0x20
@@ -7807,10 +7807,10 @@
 /* 81450CAC | 7C 08 03 A6 */	mtlr r0
 /* 81450CB0 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81450CB4 | 4E 80 00 20 */	blr
-.endfn CHANSVm_81450C0C
+.endfn vmBlobCreateDirect
 
 # .text:0x670C | 0x81450CB8 | size: 0x5C
-.fn CHANSVm_81450CB8, global
+.fn vmBlobGetDataBufferDirect, local
 /* 81450CB8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81450CBC | 7C 08 02 A6 */	mflr r0
 /* 81450CC0 | 38 82 8B A7 */	li r4, lbl_81694FA7@sda21
@@ -7838,7 +7838,7 @@
 /* 81450D08 | 7C 08 03 A6 */	mtlr r0
 /* 81450D0C | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81450D10 | 4E 80 00 20 */	blr
-.endfn CHANSVm_81450CB8
+.endfn vmBlobGetDataBufferDirect
 
 # .text:0x6768 | 0x81450D14 | size: 0xB8
 .fn CHANSVm_81450D14, global
@@ -7896,7 +7896,7 @@
 .endfn CHANSVm_81450D14
 
 # .text:0x6820 | 0x81450DCC | size: 0xA8
-.fn CHANSVm_81450DCC, global
+.fn VmCtor_Blob, local
 /* 81450DCC | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81450DD0 | 7C 08 02 A6 */	mflr r0
 /* 81450DD4 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -7909,7 +7909,7 @@
 /* 81450DF0 | 7C 65 1B 78 */	mr r5, r3
 /* 81450DF4 | 7F A3 EB 78 */	mr r3, r29
 /* 81450DF8 | 38 80 00 01 */	li r4, 0x1
-/* 81450DFC | 4B FF AA E1 */	bl CHANSVm_8144B8DC
+/* 81450DFC | 4B FF AA E1 */	bl CHANSVmConvertObjectType
 /* 81450E00 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81450E04 | 3B E0 00 00 */	li r31, 0x0
 /* 81450E08 | 41 82 00 18 */	beq .L_81450E20
@@ -7934,7 +7934,7 @@
 /* 81450E4C | 48 00 00 10 */	b .L_81450E5C
 .L_81450E50:
 /* 81450E50 | 7F E4 FB 78 */	mr r4, r31
-/* 81450E54 | 4B FF FD 99 */	bl CHANSVm_81450BEC
+/* 81450E54 | 4B FF FD 99 */	bl vmBlobInitValue
 /* 81450E58 | 38 60 00 01 */	li r3, 0x1
 .L_81450E5C:
 /* 81450E5C | 39 61 00 20 */	addi r11, r1, 0x20
@@ -7943,10 +7943,10 @@
 /* 81450E68 | 7C 08 03 A6 */	mtlr r0
 /* 81450E6C | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81450E70 | 4E 80 00 20 */	blr
-.endfn CHANSVm_81450DCC
+.endfn VmCtor_Blob
 
 # .text:0x68C8 | 0x81450E74 | size: 0x28
-.fn CHANSVm_81450E74, global
+.fn VmDtor_Blob, local
 /* 81450E74 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81450E78 | 7C 08 02 A6 */	mflr r0
 /* 81450E7C | 7C 83 23 78 */	mr r3, r4
@@ -7957,10 +7957,10 @@
 /* 81450E90 | 7C 08 03 A6 */	mtlr r0
 /* 81450E94 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81450E98 | 4E 80 00 20 */	blr
-.endfn CHANSVm_81450E74
+.endfn VmDtor_Blob
 
 # .text:0x68F0 | 0x81450E9C | size: 0x68
-.fn CHANSExport_offset, global
+.fn VmMethod_offset, global
 /* 81450E9C | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81450EA0 | 7C 08 02 A6 */	mflr r0
 /* 81450EA4 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -7989,10 +7989,10 @@
 /* 81450EF8 | 7C 08 03 A6 */	mtlr r0
 /* 81450EFC | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81450F00 | 4E 80 00 20 */	blr
-.endfn CHANSExport_offset
+.endfn VmMethod_offset
 
 # .text:0x6958 | 0x81450F04 | size: 0xC4
-.fn CHANSExport_seek, global
+.fn VmMethod_seek, global
 /* 81450F04 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81450F08 | 7C 08 02 A6 */	mflr r0
 /* 81450F0C | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -8010,7 +8010,7 @@
 /* 81450F3C | 7C 65 1B 78 */	mr r5, r3
 /* 81450F40 | 7F 83 E3 78 */	mr r3, r28
 /* 81450F44 | 38 80 00 01 */	li r4, 0x1
-/* 81450F48 | 4B FF A9 95 */	bl CHANSVm_8144B8DC
+/* 81450F48 | 4B FF A9 95 */	bl CHANSVmConvertObjectType
 /* 81450F4C | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81450F50 | 7C 64 1B 78 */	mr r4, r3
 /* 81450F54 | 41 82 00 0C */	beq .L_81450F60
@@ -8047,10 +8047,10 @@
 /* 81450FBC | 7C 08 03 A6 */	mtlr r0
 /* 81450FC0 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81450FC4 | 4E 80 00 20 */	blr
-.endfn CHANSExport_seek
+.endfn VmMethod_seek
 
 # .text:0x6A1C | 0x81450FC8 | size: 0xF0
-.fn CHANSExport_skip, global
+.fn VmMethod_skip, global
 /* 81450FC8 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81450FCC | 7C 08 02 A6 */	mflr r0
 /* 81450FD0 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -8068,7 +8068,7 @@
 /* 81451000 | 7C 65 1B 78 */	mr r5, r3
 /* 81451004 | 7F 83 E3 78 */	mr r3, r28
 /* 81451008 | 38 80 00 01 */	li r4, 0x1
-/* 8145100C | 4B FF A8 D1 */	bl CHANSVm_8144B8DC
+/* 8145100C | 4B FF A8 D1 */	bl CHANSVmConvertObjectType
 /* 81451010 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81451014 | 41 82 00 0C */	beq .L_81451020
 /* 81451018 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -8116,10 +8116,10 @@
 /* 814510AC | 7C 08 03 A6 */	mtlr r0
 /* 814510B0 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 814510B4 | 4E 80 00 20 */	blr
-.endfn CHANSExport_skip
+.endfn VmMethod_skip
 
 # .text:0x6B0C | 0x814510B8 | size: 0x68
-.fn CHANSExport_getLength, global
+.fn VmMethod_getLength, global
 /* 814510B8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 814510BC | 7C 08 02 A6 */	mflr r0
 /* 814510C0 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -8148,10 +8148,10 @@
 /* 81451114 | 7C 08 03 A6 */	mtlr r0
 /* 81451118 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8145111C | 4E 80 00 20 */	blr
-.endfn CHANSExport_getLength
+.endfn VmMethod_getLength
 
 # .text:0x6B74 | 0x81451120 | size: 0xF8
-.fn CHANSExport_setLength, global
+.fn VmMethod_setLength, global
 /* 81451120 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81451124 | 7C 08 02 A6 */	mflr r0
 /* 81451128 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -8168,7 +8168,7 @@
 /* 81451154 | 7C 65 1B 78 */	mr r5, r3
 /* 81451158 | 7F C3 F3 78 */	mr r3, r30
 /* 8145115C | 38 80 00 01 */	li r4, 0x1
-/* 81451160 | 4B FF A7 7D */	bl CHANSVm_8144B8DC
+/* 81451160 | 4B FF A7 7D */	bl CHANSVmConvertObjectType
 /* 81451164 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81451168 | 41 82 00 0C */	beq .L_81451174
 /* 8145116C | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -8223,10 +8223,10 @@
 /* 8145120C | 7C 08 03 A6 */	mtlr r0
 /* 81451210 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81451214 | 4E 80 00 20 */	blr
-.endfn CHANSExport_setLength
+.endfn VmMethod_setLength
 
 # .text:0x6C6C | 0x81451218 | size: 0xFC
-.fn CHANSExport_fill, global
+.fn VmMethod_fill, global
 /* 81451218 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8145121C | 7C 08 02 A6 */	mflr r0
 /* 81451220 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -8242,7 +8242,7 @@
 /* 81451248 | 7C 65 1B 78 */	mr r5, r3
 /* 8145124C | 7F E3 FB 78 */	mr r3, r31
 /* 81451250 | 38 80 00 01 */	li r4, 0x1
-/* 81451254 | 4B FF A6 89 */	bl CHANSVm_8144B8DC
+/* 81451254 | 4B FF A6 89 */	bl CHANSVmConvertObjectType
 /* 81451258 | 7C 7E 1B 78 */	mr r30, r3
 /* 8145125C | 7F E3 FB 78 */	mr r3, r31
 /* 81451260 | 38 80 00 01 */	li r4, 0x1
@@ -8250,7 +8250,7 @@
 /* 81451268 | 7C 65 1B 78 */	mr r5, r3
 /* 8145126C | 7F E3 FB 78 */	mr r3, r31
 /* 81451270 | 38 80 00 01 */	li r4, 0x1
-/* 81451274 | 4B FF A6 69 */	bl CHANSVm_8144B8DC
+/* 81451274 | 4B FF A6 69 */	bl CHANSVmConvertObjectType
 /* 81451278 | 2C 9D 00 00 */	cmpwi cr1, r29, 0x0
 /* 8145127C | 7C 64 1B 78 */	mr r4, r3
 /* 81451280 | 41 86 00 0C */	beq cr1, .L_8145128C
@@ -8296,7 +8296,7 @@
 /* 81451308 | 7C 08 03 A6 */	mtlr r0
 /* 8145130C | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81451310 | 4E 80 00 20 */	blr
-.endfn CHANSExport_fill
+.endfn VmMethod_fill
 
 # .text:0x6D68 | 0x81451314 | size: 0x34
 .fn CHANSVm_81451314, global
@@ -8343,7 +8343,7 @@
 .endfn CHANSVm_81451348
 
 # .text:0x6DEC | 0x81451398 | size: 0xC8
-.fn CHANSExport_getString, global
+.fn VmMethod_getString, global
 /* 81451398 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8145139C | 7C 08 02 A6 */	mflr r0
 /* 814513A0 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -8360,7 +8360,7 @@
 /* 814513CC | 7C 65 1B 78 */	mr r5, r3
 /* 814513D0 | 7F 83 E3 78 */	mr r3, r28
 /* 814513D4 | 38 80 00 01 */	li r4, 0x1
-/* 814513D8 | 4B FF A5 05 */	bl CHANSVm_8144B8DC
+/* 814513D8 | 4B FF A5 05 */	bl CHANSVmConvertObjectType
 /* 814513DC | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 814513E0 | 41 82 00 0C */	beq .L_814513EC
 /* 814513E4 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -8398,10 +8398,10 @@
 /* 81451454 | 7C 08 03 A6 */	mtlr r0
 /* 81451458 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8145145C | 4E 80 00 20 */	blr
-.endfn CHANSExport_getString
+.endfn VmMethod_getString
 
 # .text:0x6EB4 | 0x81451460 | size: 0x12C
-.fn CHANSExport_setString, global
+.fn VmMethod_setString, global
 /* 81451460 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81451464 | 7C 08 02 A6 */	mflr r0
 /* 81451468 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -8417,7 +8417,7 @@
 /* 81451490 | 7C 65 1B 78 */	mr r5, r3
 /* 81451494 | 7F 63 DB 78 */	mr r3, r27
 /* 81451498 | 38 80 00 03 */	li r4, 0x3
-/* 8145149C | 4B FF A4 41 */	bl CHANSVm_8144B8DC
+/* 8145149C | 4B FF A4 41 */	bl CHANSVmConvertObjectType
 /* 814514A0 | 7C 7E 1B 78 */	mr r30, r3
 /* 814514A4 | 4B FF F7 01 */	bl CHANSVm_81450BA4
 /* 814514A8 | 7C 7D 1B 78 */	mr r29, r3
@@ -8430,7 +8430,7 @@
 /* 814514C4 | 7C 65 1B 78 */	mr r5, r3
 /* 814514C8 | 7F 63 DB 78 */	mr r3, r27
 /* 814514CC | 38 80 00 01 */	li r4, 0x1
-/* 814514D0 | 4B FF A4 0D */	bl CHANSVm_8144B8DC
+/* 814514D0 | 4B FF A4 0D */	bl CHANSVmConvertObjectType
 /* 814514D4 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 814514D8 | 41 82 00 14 */	beq .L_814514EC
 /* 814514DC | 2C 1E 00 00 */	cmpwi r30, 0x0
@@ -8468,7 +8468,7 @@
 /* 8145154C | 80 1F 00 00 */	lwz r0, 0x0(r31)
 /* 81451550 | 7F 85 E3 78 */	mr r5, r28
 /* 81451554 | 7C 63 02 14 */	add r3, r3, r0
-/* 81451558 | 4B FF 9B 35 */	bl CHANSVm_8144B08C
+/* 81451558 | 4B FF 9B 35 */	bl VmStrCpyToU8FromU16
 /* 8145155C | 80 1F 00 00 */	lwz r0, 0x0(r31)
 /* 81451560 | 38 60 00 01 */	li r3, 0x1
 /* 81451564 | 7C 00 F2 14 */	add r0, r0, r30
@@ -8483,10 +8483,10 @@
 /* 81451580 | 7C 08 03 A6 */	mtlr r0
 /* 81451584 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81451588 | 4E 80 00 20 */	blr
-.endfn CHANSExport_setString
+.endfn VmMethod_setString
 
 # .text:0x6FE0 | 0x8145158C | size: 0xE0
-.fn CHANSExport_getWString, global
+.fn VmMethod_getWString, global
 /* 8145158C | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81451590 | 7C 08 02 A6 */	mflr r0
 /* 81451594 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -8503,7 +8503,7 @@
 /* 814515C0 | 7C 65 1B 78 */	mr r5, r3
 /* 814515C4 | 7F 83 E3 78 */	mr r3, r28
 /* 814515C8 | 38 80 00 01 */	li r4, 0x1
-/* 814515CC | 4B FF A3 11 */	bl CHANSVm_8144B8DC
+/* 814515CC | 4B FF A3 11 */	bl CHANSVmConvertObjectType
 /* 814515D0 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 814515D4 | 7C 7F 1B 78 */	mr r31, r3
 /* 814515D8 | 41 82 00 0C */	beq .L_814515E4
@@ -8547,10 +8547,10 @@
 /* 81451660 | 7C 08 03 A6 */	mtlr r0
 /* 81451664 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81451668 | 4E 80 00 20 */	blr
-.endfn CHANSExport_getWString
+.endfn VmMethod_getWString
 
 # .text:0x70C0 | 0x8145166C | size: 0x19C
-.fn CHANSExport_setWString, global
+.fn VmMethod_setWString, global
 /* 8145166C | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81451670 | 7C 08 02 A6 */	mflr r0
 /* 81451674 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -8566,7 +8566,7 @@
 /* 8145169C | 7C 65 1B 78 */	mr r5, r3
 /* 814516A0 | 7F 63 DB 78 */	mr r3, r27
 /* 814516A4 | 38 80 00 03 */	li r4, 0x3
-/* 814516A8 | 4B FF A2 35 */	bl CHANSVm_8144B8DC
+/* 814516A8 | 4B FF A2 35 */	bl CHANSVmConvertObjectType
 /* 814516AC | 7C 7C 1B 78 */	mr r28, r3
 /* 814516B0 | 4B FF F4 F5 */	bl CHANSVm_81450BA4
 /* 814516B4 | 7C 7E 1B 78 */	mr r30, r3
@@ -8579,7 +8579,7 @@
 /* 814516D0 | 7C 65 1B 78 */	mr r5, r3
 /* 814516D4 | 7F 63 DB 78 */	mr r3, r27
 /* 814516D8 | 38 80 00 01 */	li r4, 0x1
-/* 814516DC | 4B FF A2 01 */	bl CHANSVm_8144B8DC
+/* 814516DC | 4B FF A2 01 */	bl CHANSVmConvertObjectType
 /* 814516E0 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 814516E4 | 41 82 00 14 */	beq .L_814516F8
 /* 814516E8 | 2C 1C 00 00 */	cmpwi r28, 0x0
@@ -8663,10 +8663,10 @@
 /* 814517FC | 7C 08 03 A6 */	mtlr r0
 /* 81451800 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81451804 | 4E 80 00 20 */	blr
-.endfn CHANSExport_setWString
+.endfn VmMethod_setWString
 
 # .text:0x725C | 0x81451808 | size: 0xD4
-.fn CHANSExport_isEqual, global
+.fn VmMethod_isEqual, global
 /* 81451808 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8145180C | 7C 08 02 A6 */	mflr r0
 /* 81451810 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -8726,10 +8726,10 @@
 /* 814518D0 | 7C 08 03 A6 */	mtlr r0
 /* 814518D4 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 814518D8 | 4E 80 00 20 */	blr
-.endfn CHANSExport_isEqual
+.endfn VmMethod_isEqual
 
 # .text:0x7330 | 0x814518DC | size: 0x220
-.fn CHANSExport_copyRangeFrom, global
+.fn VmMethod_copyRangeFrom, global
 /* 814518DC | 94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 814518E0 | 7C 08 02 A6 */	mflr r0
 /* 814518E4 | 90 01 00 34 */	stw r0, 0x34(r1)
@@ -8746,7 +8746,7 @@
 /* 81451910 | 7C 65 1B 78 */	mr r5, r3
 /* 81451914 | 7F 63 DB 78 */	mr r3, r27
 /* 81451918 | 38 80 00 01 */	li r4, 0x1
-/* 8145191C | 4B FF 9F C1 */	bl CHANSVm_8144B8DC
+/* 8145191C | 4B FF 9F C1 */	bl CHANSVmConvertObjectType
 /* 81451920 | 7C 79 1B 78 */	mr r25, r3
 /* 81451924 | 7F 63 DB 78 */	mr r3, r27
 /* 81451928 | 38 80 00 01 */	li r4, 0x1
@@ -8758,7 +8758,7 @@
 /* 81451940 | 7C 65 1B 78 */	mr r5, r3
 /* 81451944 | 7F 63 DB 78 */	mr r3, r27
 /* 81451948 | 38 80 00 01 */	li r4, 0x1
-/* 8145194C | 4B FF 9F 91 */	bl CHANSVm_8144B8DC
+/* 8145194C | 4B FF 9F 91 */	bl CHANSVmConvertObjectType
 /* 81451950 | 7C 7D 1B 78 */	mr r29, r3
 /* 81451954 | 7F 63 DB 78 */	mr r3, r27
 /* 81451958 | 38 80 00 03 */	li r4, 0x3
@@ -8766,7 +8766,7 @@
 /* 81451960 | 7C 65 1B 78 */	mr r5, r3
 /* 81451964 | 7F 63 DB 78 */	mr r3, r27
 /* 81451968 | 38 80 00 01 */	li r4, 0x1
-/* 8145196C | 4B FF 9F 71 */	bl CHANSVm_8144B8DC
+/* 8145196C | 4B FF 9F 71 */	bl CHANSVmConvertObjectType
 /* 81451970 | 7C 78 1B 78 */	mr r24, r3
 /* 81451974 | 7F 43 D3 78 */	mr r3, r26
 /* 81451978 | 38 82 8B A7 */	li r4, lbl_81694FA7@sda21
@@ -8874,10 +8874,10 @@
 /* 81451AF0 | 7C 08 03 A6 */	mtlr r0
 /* 81451AF4 | 38 21 00 30 */	addi r1, r1, 0x30
 /* 81451AF8 | 4E 80 00 20 */	blr
-.endfn CHANSExport_copyRangeFrom
+.endfn VmMethod_copyRangeFrom
 
 # .text:0x7550 | 0x81451AFC | size: 0xE4
-.fn CHANSExport_getBlob, global
+.fn VmMethod_getBlob, global
 /* 81451AFC | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81451B00 | 7C 08 02 A6 */	mflr r0
 /* 81451B04 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -8894,7 +8894,7 @@
 /* 81451B30 | 7C 65 1B 78 */	mr r5, r3
 /* 81451B34 | 7F 83 E3 78 */	mr r3, r28
 /* 81451B38 | 38 80 00 01 */	li r4, 0x1
-/* 81451B3C | 4B FF 9D A1 */	bl CHANSVm_8144B8DC
+/* 81451B3C | 4B FF 9D A1 */	bl CHANSVmConvertObjectType
 /* 81451B40 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 81451B44 | 7C 64 1B 78 */	mr r4, r3
 /* 81451B48 | 40 82 00 0C */	bne .L_81451B54
@@ -8940,10 +8940,10 @@
 /* 81451BD4 | 7C 08 03 A6 */	mtlr r0
 /* 81451BD8 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81451BDC | 4E 80 00 20 */	blr
-.endfn CHANSExport_getBlob
+.endfn VmMethod_getBlob
 
 # .text:0x7634 | 0x81451BE0 | size: 0x158
-.fn CHANSExport_setBlob, global
+.fn VmMethod_setBlob, global
 /* 81451BE0 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81451BE4 | 7C 08 02 A6 */	mflr r0
 /* 81451BE8 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -8963,7 +8963,7 @@
 /* 81451C20 | 7C 65 1B 78 */	mr r5, r3
 /* 81451C24 | 7F 83 E3 78 */	mr r3, r28
 /* 81451C28 | 38 80 00 01 */	li r4, 0x1
-/* 81451C2C | 4B FF 9C B1 */	bl CHANSVm_8144B8DC
+/* 81451C2C | 4B FF 9C B1 */	bl CHANSVmConvertObjectType
 /* 81451C30 | 7C 7E 1B 78 */	mr r30, r3
 /* 81451C34 | 7F E3 FB 78 */	mr r3, r31
 /* 81451C38 | 38 82 8B A7 */	li r4, lbl_81694FA7@sda21
@@ -9040,10 +9040,10 @@
 /* 81451D2C | 7C 08 03 A6 */	mtlr r0
 /* 81451D30 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81451D34 | 4E 80 00 20 */	blr
-.endfn CHANSExport_setBlob
+.endfn VmMethod_setBlob
 
 # .text:0x778C | 0x81451D38 | size: 0x148
-.fn CHANSExport_getHexString, global
+.fn VmMethod_getHexString, global
 /* 81451D38 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81451D3C | 7C 08 02 A6 */	mflr r0
 /* 81451D40 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -9060,7 +9060,7 @@
 /* 81451D6C | 7C 65 1B 78 */	mr r5, r3
 /* 81451D70 | 7F 83 E3 78 */	mr r3, r28
 /* 81451D74 | 38 80 00 01 */	li r4, 0x1
-/* 81451D78 | 4B FF 9B 65 */	bl CHANSVm_8144B8DC
+/* 81451D78 | 4B FF 9B 65 */	bl CHANSVmConvertObjectType
 /* 81451D7C | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 81451D80 | 7C 64 1B 78 */	mr r4, r3
 /* 81451D84 | 40 82 00 0C */	bne .L_81451D90
@@ -9087,7 +9087,7 @@
 /* 81451DCC | 57 E7 10 3A */	slwi r7, r31, 2
 /* 81451DD0 | 38 80 00 00 */	li r4, 0x0
 /* 81451DD4 | 38 C0 00 03 */	li r6, 0x3
-/* 81451DD8 | 4B FF 8F FD */	bl CHANSVm_8144ADD4
+/* 81451DD8 | 4B FF 8F FD */	bl CHANSVmNewObject
 /* 81451DDC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81451DE0 | 41 82 00 84 */	beq .L_81451E64
 /* 81451DE4 | 7F A3 EB 78 */	mr r3, r29
@@ -9133,10 +9133,10 @@
 /* 81451E74 | 7C 08 03 A6 */	mtlr r0
 /* 81451E78 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81451E7C | 4E 80 00 20 */	blr
-.endfn CHANSExport_getHexString
+.endfn VmMethod_getHexString
 
 # .text:0x78D4 | 0x81451E80 | size: 0xB4
-.fn CHANSExport_calcSHA1Digest, global
+.fn VmMethod_calcSHA1Digest, global
 /* 81451E80 | 94 21 FF 80 */	stwu r1, -0x80(r1)
 /* 81451E84 | 7C 08 02 A6 */	mflr r0
 /* 81451E88 | 90 01 00 84 */	stw r0, 0x84(r1)
@@ -9155,9 +9155,9 @@
 /* 81451EB8 | 7F C3 F3 78 */	mr r3, r30
 /* 81451EBC | 7F A4 EB 78 */	mr r4, r29
 /* 81451EC0 | 38 A0 00 14 */	li r5, 0x14
-/* 81451EC4 | 4B FF ED 49 */	bl CHANSVm_81450C0C
+/* 81451EC4 | 4B FF ED 49 */	bl vmBlobCreateDirect
 /* 81451EC8 | 7C 7E 1B 78 */	mr r30, r3
-/* 81451ECC | 4B FF ED ED */	bl CHANSVm_81450CB8
+/* 81451ECC | 4B FF ED ED */	bl vmBlobGetDataBufferDirect
 /* 81451ED0 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 81451ED4 | 7C 7D 1B 78 */	mr r29, r3
 /* 81451ED8 | 41 82 00 0C */	beq .L_81451EE4
@@ -9186,10 +9186,10 @@
 /* 81451F28 | 7C 08 03 A6 */	mtlr r0
 /* 81451F2C | 38 21 00 80 */	addi r1, r1, 0x80
 /* 81451F30 | 4E 80 00 20 */	blr
-.endfn CHANSExport_calcSHA1Digest
+.endfn VmMethod_calcSHA1Digest
 
 # .text:0x7988 | 0x81451F34 | size: 0x184
-.fn CHANSExport_calcRangeSHA1Digest, global
+.fn VmMethod_calcRangeSHA1Digest, global
 /* 81451F34 | 94 21 FF 70 */	stwu r1, -0x90(r1)
 /* 81451F38 | 7C 08 02 A6 */	mflr r0
 /* 81451F3C | 90 01 00 94 */	stw r0, 0x94(r1)
@@ -9206,7 +9206,7 @@
 /* 81451F68 | 7C 65 1B 78 */	mr r5, r3
 /* 81451F6C | 7F 43 D3 78 */	mr r3, r26
 /* 81451F70 | 38 80 00 01 */	li r4, 0x1
-/* 81451F74 | 4B FF 99 69 */	bl CHANSVm_8144B8DC
+/* 81451F74 | 4B FF 99 69 */	bl CHANSVmConvertObjectType
 /* 81451F78 | 7C 7E 1B 78 */	mr r30, r3
 /* 81451F7C | 7F 43 D3 78 */	mr r3, r26
 /* 81451F80 | 38 80 00 01 */	li r4, 0x1
@@ -9214,7 +9214,7 @@
 /* 81451F88 | 7C 65 1B 78 */	mr r5, r3
 /* 81451F8C | 7F 43 D3 78 */	mr r3, r26
 /* 81451F90 | 38 80 00 01 */	li r4, 0x1
-/* 81451F94 | 4B FF 99 49 */	bl CHANSVm_8144B8DC
+/* 81451F94 | 4B FF 99 49 */	bl CHANSVmConvertObjectType
 /* 81451F98 | 3B E0 00 00 */	li r31, 0x0
 /* 81451F9C | 2C 1D 00 00 */	cmpwi r29, 0x0
 /* 81451FA0 | 93 E1 00 08 */	stw r31, 0x8(r1)
@@ -9259,9 +9259,9 @@
 /* 81452030 | 7F 43 D3 78 */	mr r3, r26
 /* 81452034 | 7F 64 DB 78 */	mr r4, r27
 /* 81452038 | 38 A0 00 14 */	li r5, 0x14
-/* 8145203C | 4B FF EB D1 */	bl CHANSVm_81450C0C
+/* 8145203C | 4B FF EB D1 */	bl vmBlobCreateDirect
 /* 81452040 | 7C 7E 1B 78 */	mr r30, r3
-/* 81452044 | 4B FF EC 75 */	bl CHANSVm_81450CB8
+/* 81452044 | 4B FF EC 75 */	bl vmBlobGetDataBufferDirect
 /* 81452048 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 8145204C | 7C 7F 1B 78 */	mr r31, r3
 /* 81452050 | 41 82 00 0C */	beq .L_8145205C
@@ -9294,10 +9294,10 @@
 /* 814520AC | 7C 08 03 A6 */	mtlr r0
 /* 814520B0 | 38 21 00 90 */	addi r1, r1, 0x90
 /* 814520B4 | 4E 80 00 20 */	blr
-.endfn CHANSExport_calcRangeSHA1Digest
+.endfn VmMethod_calcRangeSHA1Digest
 
 # .text:0x7B0C | 0x814520B8 | size: 0xB4
-.fn CHANSExport_calcMD5Digest, global
+.fn VmMethod_calcMD5Digest, global
 /* 814520B8 | 94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 814520BC | 7C 08 02 A6 */	mflr r0
 /* 814520C0 | 90 01 00 74 */	stw r0, 0x74(r1)
@@ -9316,9 +9316,9 @@
 /* 814520F0 | 7F C3 F3 78 */	mr r3, r30
 /* 814520F4 | 7F A4 EB 78 */	mr r4, r29
 /* 814520F8 | 38 A0 00 10 */	li r5, 0x10
-/* 814520FC | 4B FF EB 11 */	bl CHANSVm_81450C0C
+/* 814520FC | 4B FF EB 11 */	bl vmBlobCreateDirect
 /* 81452100 | 7C 7E 1B 78 */	mr r30, r3
-/* 81452104 | 4B FF EB B5 */	bl CHANSVm_81450CB8
+/* 81452104 | 4B FF EB B5 */	bl vmBlobGetDataBufferDirect
 /* 81452108 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 8145210C | 7C 7D 1B 78 */	mr r29, r3
 /* 81452110 | 41 82 00 0C */	beq .L_8145211C
@@ -9347,10 +9347,10 @@
 /* 81452160 | 7C 08 03 A6 */	mtlr r0
 /* 81452164 | 38 21 00 70 */	addi r1, r1, 0x70
 /* 81452168 | 4E 80 00 20 */	blr
-.endfn CHANSExport_calcMD5Digest
+.endfn VmMethod_calcMD5Digest
 
 # .text:0x7BC0 | 0x8145216C | size: 0x184
-.fn CHANSExport_calcRangeMD5Digest, global
+.fn VmMethod_calcRangeMD5Digest, global
 /* 8145216C | 94 21 FF 80 */	stwu r1, -0x80(r1)
 /* 81452170 | 7C 08 02 A6 */	mflr r0
 /* 81452174 | 90 01 00 84 */	stw r0, 0x84(r1)
@@ -9367,7 +9367,7 @@
 /* 814521A0 | 7C 65 1B 78 */	mr r5, r3
 /* 814521A4 | 7F 43 D3 78 */	mr r3, r26
 /* 814521A8 | 38 80 00 01 */	li r4, 0x1
-/* 814521AC | 4B FF 97 31 */	bl CHANSVm_8144B8DC
+/* 814521AC | 4B FF 97 31 */	bl CHANSVmConvertObjectType
 /* 814521B0 | 7C 7E 1B 78 */	mr r30, r3
 /* 814521B4 | 7F 43 D3 78 */	mr r3, r26
 /* 814521B8 | 38 80 00 01 */	li r4, 0x1
@@ -9375,7 +9375,7 @@
 /* 814521C0 | 7C 65 1B 78 */	mr r5, r3
 /* 814521C4 | 7F 43 D3 78 */	mr r3, r26
 /* 814521C8 | 38 80 00 01 */	li r4, 0x1
-/* 814521CC | 4B FF 97 11 */	bl CHANSVm_8144B8DC
+/* 814521CC | 4B FF 97 11 */	bl CHANSVmConvertObjectType
 /* 814521D0 | 3B E0 00 00 */	li r31, 0x0
 /* 814521D4 | 2C 1D 00 00 */	cmpwi r29, 0x0
 /* 814521D8 | 93 E1 00 08 */	stw r31, 0x8(r1)
@@ -9420,9 +9420,9 @@
 /* 81452268 | 7F 43 D3 78 */	mr r3, r26
 /* 8145226C | 7F 64 DB 78 */	mr r4, r27
 /* 81452270 | 38 A0 00 10 */	li r5, 0x10
-/* 81452274 | 4B FF E9 99 */	bl CHANSVm_81450C0C
+/* 81452274 | 4B FF E9 99 */	bl vmBlobCreateDirect
 /* 81452278 | 7C 7E 1B 78 */	mr r30, r3
-/* 8145227C | 4B FF EA 3D */	bl CHANSVm_81450CB8
+/* 8145227C | 4B FF EA 3D */	bl vmBlobGetDataBufferDirect
 /* 81452280 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 81452284 | 7C 7F 1B 78 */	mr r31, r3
 /* 81452288 | 41 82 00 0C */	beq .L_81452294
@@ -9455,10 +9455,10 @@
 /* 814522E4 | 7C 08 03 A6 */	mtlr r0
 /* 814522E8 | 38 21 00 80 */	addi r1, r1, 0x80
 /* 814522EC | 4E 80 00 20 */	blr
-.endfn CHANSExport_calcRangeMD5Digest
+.endfn VmMethod_calcRangeMD5Digest
 
 # .text:0x7D44 | 0x814522F0 | size: 0x7C
-.fn CHANSExport_calcCRC16, global
+.fn VmMethod_calcCRC16, global
 /* 814522F0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 814522F4 | 7C 08 02 A6 */	mflr r0
 /* 814522F8 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -9492,10 +9492,10 @@
 /* 81452360 | 7C 08 03 A6 */	mtlr r0
 /* 81452364 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81452368 | 4E 80 00 20 */	blr
-.endfn CHANSExport_calcCRC16
+.endfn VmMethod_calcCRC16
 
 # .text:0x7DC0 | 0x8145236C | size: 0x148
-.fn CHANSExport_calcRangeCRC16, global
+.fn VmMethod_calcRangeCRC16, global
 /* 8145236C | 94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 81452370 | 7C 08 02 A6 */	mflr r0
 /* 81452374 | 90 01 00 34 */	stw r0, 0x34(r1)
@@ -9512,7 +9512,7 @@
 /* 814523A0 | 7C 65 1B 78 */	mr r5, r3
 /* 814523A4 | 7F 43 D3 78 */	mr r3, r26
 /* 814523A8 | 38 80 00 01 */	li r4, 0x1
-/* 814523AC | 4B FF 95 31 */	bl CHANSVm_8144B8DC
+/* 814523AC | 4B FF 95 31 */	bl CHANSVmConvertObjectType
 /* 814523B0 | 7C 7E 1B 78 */	mr r30, r3
 /* 814523B4 | 7F 43 D3 78 */	mr r3, r26
 /* 814523B8 | 38 80 00 01 */	li r4, 0x1
@@ -9520,7 +9520,7 @@
 /* 814523C0 | 7C 65 1B 78 */	mr r5, r3
 /* 814523C4 | 7F 43 D3 78 */	mr r3, r26
 /* 814523C8 | 38 80 00 01 */	li r4, 0x1
-/* 814523CC | 4B FF 95 11 */	bl CHANSVm_8144B8DC
+/* 814523CC | 4B FF 95 11 */	bl CHANSVmConvertObjectType
 /* 814523D0 | 3B E0 00 00 */	li r31, 0x0
 /* 814523D4 | 2C 1D 00 00 */	cmpwi r29, 0x0
 /* 814523D8 | 93 E1 00 08 */	stw r31, 0x8(r1)
@@ -9583,10 +9583,10 @@
 /* 814524A8 | 7C 08 03 A6 */	mtlr r0
 /* 814524AC | 38 21 00 30 */	addi r1, r1, 0x30
 /* 814524B0 | 4E 80 00 20 */	blr
-.endfn CHANSExport_calcRangeCRC16
+.endfn VmMethod_calcRangeCRC16
 
 # .text:0x7F08 | 0x814524B4 | size: 0x78
-.fn CHANSExport_calcCRC32, global
+.fn VmMethod_calcCRC32, global
 /* 814524B4 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 814524B8 | 7C 08 02 A6 */	mflr r0
 /* 814524BC | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -9619,10 +9619,10 @@
 /* 81452520 | 7C 08 03 A6 */	mtlr r0
 /* 81452524 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81452528 | 4E 80 00 20 */	blr
-.endfn CHANSExport_calcCRC32
+.endfn VmMethod_calcCRC32
 
 # .text:0x7F80 | 0x8145252C | size: 0x144
-.fn CHANSExport_calcRangeCRC32, global
+.fn VmMethod_calcRangeCRC32, global
 /* 8145252C | 94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 81452530 | 7C 08 02 A6 */	mflr r0
 /* 81452534 | 90 01 00 34 */	stw r0, 0x34(r1)
@@ -9639,7 +9639,7 @@
 /* 81452560 | 7C 65 1B 78 */	mr r5, r3
 /* 81452564 | 7F 43 D3 78 */	mr r3, r26
 /* 81452568 | 38 80 00 01 */	li r4, 0x1
-/* 8145256C | 4B FF 93 71 */	bl CHANSVm_8144B8DC
+/* 8145256C | 4B FF 93 71 */	bl CHANSVmConvertObjectType
 /* 81452570 | 7C 7E 1B 78 */	mr r30, r3
 /* 81452574 | 7F 43 D3 78 */	mr r3, r26
 /* 81452578 | 38 80 00 01 */	li r4, 0x1
@@ -9647,7 +9647,7 @@
 /* 81452580 | 7C 65 1B 78 */	mr r5, r3
 /* 81452584 | 7F 43 D3 78 */	mr r3, r26
 /* 81452588 | 38 80 00 01 */	li r4, 0x1
-/* 8145258C | 4B FF 93 51 */	bl CHANSVm_8144B8DC
+/* 8145258C | 4B FF 93 51 */	bl CHANSVmConvertObjectType
 /* 81452590 | 3B E0 00 00 */	li r31, 0x0
 /* 81452594 | 2C 1D 00 00 */	cmpwi r29, 0x0
 /* 81452598 | 93 E1 00 08 */	stw r31, 0x8(r1)
@@ -9709,10 +9709,10 @@
 /* 81452664 | 7C 08 03 A6 */	mtlr r0
 /* 81452668 | 38 21 00 30 */	addi r1, r1, 0x30
 /* 8145266C | 4E 80 00 20 */	blr
-.endfn CHANSExport_calcRangeCRC32
+.endfn VmMethod_calcRangeCRC32
 
 # .text:0x80C4 | 0x81452670 | size: 0x100
-.fn CHANSExport_calcHMAC, global
+.fn VmMethod_calcHMAC, global
 /* 81452670 | 94 21 FF 10 */	stwu r1, -0xf0(r1)
 /* 81452674 | 7C 08 02 A6 */	mflr r0
 /* 81452678 | 90 01 00 F4 */	stw r0, 0xf4(r1)
@@ -9749,9 +9749,9 @@
 /* 814526E4 | 7F 63 DB 78 */	mr r3, r27
 /* 814526E8 | 7F 84 E3 78 */	mr r4, r28
 /* 814526EC | 38 A0 00 14 */	li r5, 0x14
-/* 814526F0 | 4B FF E5 1D */	bl CHANSVm_81450C0C
+/* 814526F0 | 4B FF E5 1D */	bl vmBlobCreateDirect
 /* 814526F4 | 7C 7D 1B 78 */	mr r29, r3
-/* 814526F8 | 4B FF E5 C1 */	bl CHANSVm_81450CB8
+/* 814526F8 | 4B FF E5 C1 */	bl vmBlobGetDataBufferDirect
 /* 814526FC | 2C 1D 00 00 */	cmpwi r29, 0x0
 /* 81452700 | 7C 7C 1B 78 */	mr r28, r3
 /* 81452704 | 41 82 00 0C */	beq .L_81452710
@@ -9784,10 +9784,10 @@
 /* 81452764 | 7C 08 03 A6 */	mtlr r0
 /* 81452768 | 38 21 00 F0 */	addi r1, r1, 0xf0
 /* 8145276C | 4E 80 00 20 */	blr
-.endfn CHANSExport_calcHMAC
+.endfn VmMethod_calcHMAC
 
 # .text:0x81C4 | 0x81452770 | size: 0x1DC
-.fn CHANSExport_calcRangeHMAC, global
+.fn VmMethod_calcRangeHMAC, global
 /* 81452770 | 94 21 FF 00 */	stwu r1, -0x100(r1)
 /* 81452774 | 7C 08 02 A6 */	mflr r0
 /* 81452778 | 90 01 01 04 */	stw r0, 0x104(r1)
@@ -9808,7 +9808,7 @@
 /* 814527B4 | 7C 65 1B 78 */	mr r5, r3
 /* 814527B8 | 7F 23 CB 78 */	mr r3, r25
 /* 814527BC | 38 80 00 01 */	li r4, 0x1
-/* 814527C0 | 4B FF 91 1D */	bl CHANSVm_8144B8DC
+/* 814527C0 | 4B FF 91 1D */	bl CHANSVmConvertObjectType
 /* 814527C4 | 7C 7D 1B 78 */	mr r29, r3
 /* 814527C8 | 7F 23 CB 78 */	mr r3, r25
 /* 814527CC | 38 80 00 02 */	li r4, 0x2
@@ -9816,7 +9816,7 @@
 /* 814527D4 | 7C 65 1B 78 */	mr r5, r3
 /* 814527D8 | 7F 23 CB 78 */	mr r3, r25
 /* 814527DC | 38 80 00 01 */	li r4, 0x1
-/* 814527E0 | 4B FF 90 FD */	bl CHANSVm_8144B8DC
+/* 814527E0 | 4B FF 90 FD */	bl CHANSVmConvertObjectType
 /* 814527E4 | 7C 7B 1B 78 */	mr r27, r3
 /* 814527E8 | 7F C3 F3 78 */	mr r3, r30
 /* 814527EC | 38 82 8B A7 */	li r4, lbl_81694FA7@sda21
@@ -9875,9 +9875,9 @@
 /* 814528AC | 7F 23 CB 78 */	mr r3, r25
 /* 814528B0 | 7F 44 D3 78 */	mr r4, r26
 /* 814528B4 | 38 A0 00 14 */	li r5, 0x14
-/* 814528B8 | 4B FF E3 55 */	bl CHANSVm_81450C0C
+/* 814528B8 | 4B FF E3 55 */	bl vmBlobCreateDirect
 /* 814528BC | 7C 7D 1B 78 */	mr r29, r3
-/* 814528C0 | 4B FF E3 F9 */	bl CHANSVm_81450CB8
+/* 814528C0 | 4B FF E3 F9 */	bl vmBlobGetDataBufferDirect
 /* 814528C4 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 814528C8 | 7C 7F 1B 78 */	mr r31, r3
 /* 814528CC | 41 82 00 14 */	beq .L_814528E0
@@ -9916,10 +9916,10 @@
 /* 81452940 | 7C 08 03 A6 */	mtlr r0
 /* 81452944 | 38 21 01 00 */	addi r1, r1, 0x100
 /* 81452948 | 4E 80 00 20 */	blr
-.endfn CHANSExport_calcRangeHMAC
+.endfn VmMethod_calcRangeHMAC
 
 # .text:0x83A0 | 0x8145294C | size: 0xC4
-.fn CHANSExport_getU8, global
+.fn VmMethod_getU8, global
 /* 8145294C | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81452950 | 7C 08 02 A6 */	mflr r0
 /* 81452954 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -9972,10 +9972,10 @@
 /* 81452A04 | 7C 08 03 A6 */	mtlr r0
 /* 81452A08 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81452A0C | 4E 80 00 20 */	blr
-.endfn CHANSExport_getU8
+.endfn VmMethod_getU8
 
 # .text:0x8464 | 0x81452A10 | size: 0xC4
-.fn CHANSExport_getU16, global
+.fn VmMethod_getU16, global
 /* 81452A10 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81452A14 | 7C 08 02 A6 */	mflr r0
 /* 81452A18 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -10028,10 +10028,10 @@
 /* 81452AC8 | 7C 08 03 A6 */	mtlr r0
 /* 81452ACC | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81452AD0 | 4E 80 00 20 */	blr
-.endfn CHANSExport_getU16
+.endfn VmMethod_getU16
 
 # .text:0x8528 | 0x81452AD4 | size: 0xC4
-.fn CHANSExport_getU32, global
+.fn VmMethod_getU32, global
 /* 81452AD4 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81452AD8 | 7C 08 02 A6 */	mflr r0
 /* 81452ADC | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -10084,10 +10084,10 @@
 /* 81452B8C | 7C 08 03 A6 */	mtlr r0
 /* 81452B90 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81452B94 | 4E 80 00 20 */	blr
-.endfn CHANSExport_getU32
+.endfn VmMethod_getU32
 
 # .text:0x85EC | 0x81452B98 | size: 0xC8
-.fn CHANSExport_getS8, global
+.fn VmMethod_getS8, global
 /* 81452B98 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81452B9C | 7C 08 02 A6 */	mflr r0
 /* 81452BA0 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -10141,10 +10141,10 @@
 /* 81452C54 | 7C 08 03 A6 */	mtlr r0
 /* 81452C58 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81452C5C | 4E 80 00 20 */	blr
-.endfn CHANSExport_getS8
+.endfn VmMethod_getS8
 
 # .text:0x86B4 | 0x81452C60 | size: 0xC4
-.fn CHANSExport_getS16, global
+.fn VmMethod_getS16, global
 /* 81452C60 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81452C64 | 7C 08 02 A6 */	mflr r0
 /* 81452C68 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -10197,10 +10197,10 @@
 /* 81452D18 | 7C 08 03 A6 */	mtlr r0
 /* 81452D1C | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81452D20 | 4E 80 00 20 */	blr
-.endfn CHANSExport_getS16
+.endfn VmMethod_getS16
 
 # .text:0x8778 | 0x81452D24 | size: 0xC4
-.fn CHANSExport_getS32, global
+.fn VmMethod_getS32, global
 /* 81452D24 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81452D28 | 7C 08 02 A6 */	mflr r0
 /* 81452D2C | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -10253,10 +10253,10 @@
 /* 81452DDC | 7C 08 03 A6 */	mtlr r0
 /* 81452DE0 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81452DE4 | 4E 80 00 20 */	blr
-.endfn CHANSExport_getS32
+.endfn VmMethod_getS32
 
 # .text:0x883C | 0x81452DE8 | size: 0xC4
-.fn CHANSExport_getS64, global
+.fn VmMethod_getS64, global
 /* 81452DE8 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81452DEC | 7C 08 02 A6 */	mflr r0
 /* 81452DF0 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -10309,10 +10309,10 @@
 /* 81452EA0 | 7C 08 03 A6 */	mtlr r0
 /* 81452EA4 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81452EA8 | 4E 80 00 20 */	blr
-.endfn CHANSExport_getS64
+.endfn VmMethod_getS64
 
 # .text:0x8900 | 0x81452EAC | size: 0xD8
-.fn CHANSExport_setU8, global
+.fn VmMethod_setU8, global
 /* 81452EAC | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81452EB0 | 7C 08 02 A6 */	mflr r0
 /* 81452EB4 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -10328,7 +10328,7 @@
 /* 81452EDC | 7C 65 1B 78 */	mr r5, r3
 /* 81452EE0 | 7F C3 F3 78 */	mr r3, r30
 /* 81452EE4 | 38 80 00 01 */	li r4, 0x1
-/* 81452EE8 | 4B FF 89 F5 */	bl CHANSVm_8144B8DC
+/* 81452EE8 | 4B FF 89 F5 */	bl CHANSVmConvertObjectType
 /* 81452EEC | 38 00 00 00 */	li r0, 0x0
 /* 81452EF0 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81452EF4 | 98 01 00 08 */	stb r0, 0x8(r1)
@@ -10371,10 +10371,10 @@
 /* 81452F78 | 7C 08 03 A6 */	mtlr r0
 /* 81452F7C | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81452F80 | 4E 80 00 20 */	blr
-.endfn CHANSExport_setU8
+.endfn VmMethod_setU8
 
 # .text:0x89D8 | 0x81452F84 | size: 0xD8
-.fn CHANSExport_setU16, global
+.fn VmMethod_setU16, global
 /* 81452F84 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81452F88 | 7C 08 02 A6 */	mflr r0
 /* 81452F8C | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -10390,7 +10390,7 @@
 /* 81452FB4 | 7C 65 1B 78 */	mr r5, r3
 /* 81452FB8 | 7F C3 F3 78 */	mr r3, r30
 /* 81452FBC | 38 80 00 01 */	li r4, 0x1
-/* 81452FC0 | 4B FF 89 1D */	bl CHANSVm_8144B8DC
+/* 81452FC0 | 4B FF 89 1D */	bl CHANSVmConvertObjectType
 /* 81452FC4 | 38 00 00 00 */	li r0, 0x0
 /* 81452FC8 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81452FCC | B0 01 00 08 */	sth r0, 0x8(r1)
@@ -10433,10 +10433,10 @@
 /* 81453050 | 7C 08 03 A6 */	mtlr r0
 /* 81453054 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81453058 | 4E 80 00 20 */	blr
-.endfn CHANSExport_setU16
+.endfn VmMethod_setU16
 
 # .text:0x8AB0 | 0x8145305C | size: 0xD8
-.fn CHANSExport_setU32, global
+.fn VmMethod_setU32, global
 /* 8145305C | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81453060 | 7C 08 02 A6 */	mflr r0
 /* 81453064 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -10452,7 +10452,7 @@
 /* 8145308C | 7C 65 1B 78 */	mr r5, r3
 /* 81453090 | 7F C3 F3 78 */	mr r3, r30
 /* 81453094 | 38 80 00 01 */	li r4, 0x1
-/* 81453098 | 4B FF 88 45 */	bl CHANSVm_8144B8DC
+/* 81453098 | 4B FF 88 45 */	bl CHANSVmConvertObjectType
 /* 8145309C | 38 00 00 00 */	li r0, 0x0
 /* 814530A0 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 814530A4 | 90 01 00 08 */	stw r0, 0x8(r1)
@@ -10495,10 +10495,10 @@
 /* 81453128 | 7C 08 03 A6 */	mtlr r0
 /* 8145312C | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81453130 | 4E 80 00 20 */	blr
-.endfn CHANSExport_setU32
+.endfn VmMethod_setU32
 
 # .text:0x8B88 | 0x81453134 | size: 0xD8
-.fn CHANSExport_setS8, global
+.fn VmMethod_setS8, global
 /* 81453134 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81453138 | 7C 08 02 A6 */	mflr r0
 /* 8145313C | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -10514,7 +10514,7 @@
 /* 81453164 | 7C 65 1B 78 */	mr r5, r3
 /* 81453168 | 7F C3 F3 78 */	mr r3, r30
 /* 8145316C | 38 80 00 01 */	li r4, 0x1
-/* 81453170 | 4B FF 87 6D */	bl CHANSVm_8144B8DC
+/* 81453170 | 4B FF 87 6D */	bl CHANSVmConvertObjectType
 /* 81453174 | 38 00 00 00 */	li r0, 0x0
 /* 81453178 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 8145317C | 98 01 00 08 */	stb r0, 0x8(r1)
@@ -10557,10 +10557,10 @@
 /* 81453200 | 7C 08 03 A6 */	mtlr r0
 /* 81453204 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81453208 | 4E 80 00 20 */	blr
-.endfn CHANSExport_setS8
+.endfn VmMethod_setS8
 
 # .text:0x8C60 | 0x8145320C | size: 0xD8
-.fn CHANSExport_setS16, global
+.fn VmMethod_setS16, global
 /* 8145320C | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81453210 | 7C 08 02 A6 */	mflr r0
 /* 81453214 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -10576,7 +10576,7 @@
 /* 8145323C | 7C 65 1B 78 */	mr r5, r3
 /* 81453240 | 7F C3 F3 78 */	mr r3, r30
 /* 81453244 | 38 80 00 01 */	li r4, 0x1
-/* 81453248 | 4B FF 86 95 */	bl CHANSVm_8144B8DC
+/* 81453248 | 4B FF 86 95 */	bl CHANSVmConvertObjectType
 /* 8145324C | 38 00 00 00 */	li r0, 0x0
 /* 81453250 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81453254 | B0 01 00 08 */	sth r0, 0x8(r1)
@@ -10619,10 +10619,10 @@
 /* 814532D8 | 7C 08 03 A6 */	mtlr r0
 /* 814532DC | 38 21 00 20 */	addi r1, r1, 0x20
 /* 814532E0 | 4E 80 00 20 */	blr
-.endfn CHANSExport_setS16
+.endfn VmMethod_setS16
 
 # .text:0x8D38 | 0x814532E4 | size: 0xD8
-.fn CHANSExport_setS32, global
+.fn VmMethod_setS32, global
 /* 814532E4 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 814532E8 | 7C 08 02 A6 */	mflr r0
 /* 814532EC | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -10638,7 +10638,7 @@
 /* 81453314 | 7C 65 1B 78 */	mr r5, r3
 /* 81453318 | 7F C3 F3 78 */	mr r3, r30
 /* 8145331C | 38 80 00 01 */	li r4, 0x1
-/* 81453320 | 4B FF 85 BD */	bl CHANSVm_8144B8DC
+/* 81453320 | 4B FF 85 BD */	bl CHANSVmConvertObjectType
 /* 81453324 | 38 00 00 00 */	li r0, 0x0
 /* 81453328 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 8145332C | 90 01 00 08 */	stw r0, 0x8(r1)
@@ -10681,10 +10681,10 @@
 /* 814533B0 | 7C 08 03 A6 */	mtlr r0
 /* 814533B4 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 814533B8 | 4E 80 00 20 */	blr
-.endfn CHANSExport_setS32
+.endfn VmMethod_setS32
 
 # .text:0x8E10 | 0x814533BC | size: 0xE4
-.fn CHANSExport_setS64, global
+.fn VmMethod_setS64, global
 /* 814533BC | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 814533C0 | 7C 08 02 A6 */	mflr r0
 /* 814533C4 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -10700,7 +10700,7 @@
 /* 814533EC | 7C 65 1B 78 */	mr r5, r3
 /* 814533F0 | 7F C3 F3 78 */	mr r3, r30
 /* 814533F4 | 38 80 00 01 */	li r4, 0x1
-/* 814533F8 | 4B FF 84 E5 */	bl CHANSVm_8144B8DC
+/* 814533F8 | 4B FF 84 E5 */	bl CHANSVmConvertObjectType
 /* 814533FC | 38 00 00 00 */	li r0, 0x0
 /* 81453400 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 81453404 | 90 01 00 0C */	stw r0, 0xc(r1)
@@ -10746,7 +10746,7 @@
 /* 81453494 | 7C 08 03 A6 */	mtlr r0
 /* 81453498 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8145349C | 4E 80 00 20 */	blr
-.endfn CHANSExport_setS64
+.endfn VmMethod_setS64
 
 # .text:0x8EF4 | 0x814534A0 | size: 0x1D0
 .fn vmBlobParsePackFormatString, global
@@ -10758,12 +10758,12 @@
 /* 814534B4 | 3B C0 00 01 */	li r30, 0x1
 /* 814534B8 | 3B A0 00 00 */	li r29, 0x0
 /* 814534BC | 3B 80 00 00 */	li r28, 0x0
-/* 814534C0 | 3D 80 81 67 */	lis r12, lbl_81669E08@ha
+/* 814534C0 | 3D 80 81 67 */	lis r12, vmBlobPackFormatList@ha
 /* 814534C4 | 39 40 00 19 */	li r10, 0x19
 /* 814534C8 | 48 00 00 A4 */	b .L_8145356C
 .L_814534CC:
 /* 814534CC | 55 20 08 3C */	slwi r0, r9, 1
-/* 814534D0 | 3B 4C 9E 08 */	addi r26, r12, lbl_81669E08@l
+/* 814534D0 | 3B 4C 9E 08 */	addi r26, r12, vmBlobPackFormatList@l
 /* 814534D4 | 7D 67 02 2E */	lhzx r11, r7, r0
 /* 814534D8 | 3B 60 00 00 */	li r27, 0x0
 /* 814534DC | 7D 49 03 A6 */	mtctr r10
@@ -10889,7 +10889,7 @@
 .endfn vmBlobParsePackFormatString
 
 # .text:0x90C4 | 0x81453670 | size: 0xA70
-.fn CHANSVm_81453670, global
+.fn vmBlobPackCommon, local
 /* 81453670 | 94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 81453674 | 7C 08 02 A6 */	mflr r0
 /* 81453678 | 90 01 00 74 */	stw r0, 0x74(r1)
@@ -10907,7 +10907,7 @@
 /* 814536A8 | 7C 65 1B 78 */	mr r5, r3
 /* 814536AC | 7F C3 F3 78 */	mr r3, r30
 /* 814536B0 | 38 80 00 03 */	li r4, 0x3
-/* 814536B4 | 4B FF 82 29 */	bl CHANSVm_8144B8DC
+/* 814536B4 | 4B FF 82 29 */	bl CHANSVmConvertObjectType
 /* 814536B8 | 7C 72 1B 78 */	mr r18, r3
 /* 814536BC | 4B FF D4 E9 */	bl CHANSVm_81450BA4
 /* 814536C0 | 7C 74 1B 78 */	mr r20, r3
@@ -10920,7 +10920,7 @@
 /* 814536DC | 7C 65 1B 78 */	mr r5, r3
 /* 814536E0 | 7F C3 F3 78 */	mr r3, r30
 /* 814536E4 | 38 80 00 04 */	li r4, 0x4
-/* 814536E8 | 4B FF 81 F5 */	bl CHANSVm_8144B8DC
+/* 814536E8 | 4B FF 81 F5 */	bl CHANSVmConvertObjectType
 /* 814536EC | 2C 14 00 00 */	cmpwi r20, 0x0
 /* 814536F0 | 7C 72 1B 78 */	mr r18, r3
 /* 814536F4 | 40 82 00 0C */	bne .L_81453700
@@ -11058,7 +11058,7 @@
 /* 814538C0 | 7C 65 1B 78 */	mr r5, r3
 /* 814538C4 | 7F C3 F3 78 */	mr r3, r30
 /* 814538C8 | 38 80 00 03 */	li r4, 0x3
-/* 814538CC | 4B FF 80 11 */	bl CHANSVm_8144B8DC
+/* 814538CC | 4B FF 80 11 */	bl CHANSVmConvertObjectType
 /* 814538D0 | 48 00 00 20 */	b .L_814538F0
 .L_814538D4:
 /* 814538D4 | 7F C3 F3 78 */	mr r3, r30
@@ -11067,7 +11067,7 @@
 /* 814538E0 | 7C 65 1B 78 */	mr r5, r3
 /* 814538E4 | 7F C3 F3 78 */	mr r3, r30
 /* 814538E8 | 38 80 00 03 */	li r4, 0x3
-/* 814538EC | 4B FF 7F F1 */	bl CHANSVm_8144B8DC
+/* 814538EC | 4B FF 7F F1 */	bl CHANSVmConvertObjectType
 .L_814538F0:
 /* 814538F0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 814538F4 | 41 82 07 D0 */	beq .L_814540C4
@@ -11095,7 +11095,7 @@
 /* 81453944 | 7C 65 1B 78 */	mr r5, r3
 /* 81453948 | 7F C3 F3 78 */	mr r3, r30
 /* 8145394C | 38 80 00 03 */	li r4, 0x3
-/* 81453950 | 4B FF 7F 8D */	bl CHANSVm_8144B8DC
+/* 81453950 | 4B FF 7F 8D */	bl CHANSVmConvertObjectType
 /* 81453954 | 48 00 00 20 */	b .L_81453974
 .L_81453958:
 /* 81453958 | 7F C3 F3 78 */	mr r3, r30
@@ -11104,7 +11104,7 @@
 /* 81453964 | 7C 65 1B 78 */	mr r5, r3
 /* 81453968 | 7F C3 F3 78 */	mr r3, r30
 /* 8145396C | 38 80 00 03 */	li r4, 0x3
-/* 81453970 | 4B FF 7F 6D */	bl CHANSVm_8144B8DC
+/* 81453970 | 4B FF 7F 6D */	bl CHANSVmConvertObjectType
 .L_81453974:
 /* 81453974 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81453978 | 41 82 07 4C */	beq .L_814540C4
@@ -11132,7 +11132,7 @@
 /* 814539C4 | 7F C3 F3 78 */	mr r3, r30
 /* 814539C8 | 7E 24 8B 78 */	mr r4, r17
 /* 814539CC | 7F 05 C3 78 */	mr r5, r24
-/* 814539D0 | 4B FF D2 3D */	bl CHANSVm_81450C0C
+/* 814539D0 | 4B FF D2 3D */	bl vmBlobCreateDirect
 /* 814539D4 | 7C 71 1B 78 */	mr r17, r3
 /* 814539D8 | 38 82 8B A7 */	li r4, lbl_81694FA7@sda21
 /* 814539DC | 4B FF 96 29 */	bl CHANSVmCheckNativeInstance
@@ -11318,7 +11318,7 @@
 /* 81453C64 | 7C 65 1B 78 */	mr r5, r3
 /* 81453C68 | 7F C3 F3 78 */	mr r3, r30
 /* 81453C6C | 38 80 00 01 */	li r4, 0x1
-/* 81453C70 | 4B FF 7C 6D */	bl CHANSVm_8144B8DC
+/* 81453C70 | 4B FF 7C 6D */	bl CHANSVmConvertObjectType
 /* 81453C74 | 48 00 00 20 */	b .L_81453C94
 .L_81453C78:
 /* 81453C78 | 7F C3 F3 78 */	mr r3, r30
@@ -11327,7 +11327,7 @@
 /* 81453C84 | 7C 65 1B 78 */	mr r5, r3
 /* 81453C88 | 7F C3 F3 78 */	mr r3, r30
 /* 81453C8C | 38 80 00 01 */	li r4, 0x1
-/* 81453C90 | 4B FF 7C 4D */	bl CHANSVm_8144B8DC
+/* 81453C90 | 4B FF 7C 4D */	bl CHANSVmConvertObjectType
 .L_81453C94:
 /* 81453C94 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81453C98 | 3A F7 00 01 */	addi r23, r23, 0x1
@@ -11454,7 +11454,7 @@
 /* 81453E28 | 7C 65 1B 78 */	mr r5, r3
 /* 81453E2C | 7F C3 F3 78 */	mr r3, r30
 /* 81453E30 | 38 80 00 03 */	li r4, 0x3
-/* 81453E34 | 4B FF 7A A9 */	bl CHANSVm_8144B8DC
+/* 81453E34 | 4B FF 7A A9 */	bl CHANSVmConvertObjectType
 /* 81453E38 | 7C 71 1B 78 */	mr r17, r3
 /* 81453E3C | 48 00 00 24 */	b .L_81453E60
 .L_81453E40:
@@ -11464,7 +11464,7 @@
 /* 81453E4C | 7C 65 1B 78 */	mr r5, r3
 /* 81453E50 | 7F C3 F3 78 */	mr r3, r30
 /* 81453E54 | 38 80 00 03 */	li r4, 0x3
-/* 81453E58 | 4B FF 7A 85 */	bl CHANSVm_8144B8DC
+/* 81453E58 | 4B FF 7A 85 */	bl CHANSVmConvertObjectType
 /* 81453E5C | 7C 71 1B 78 */	mr r17, r3
 .L_81453E60:
 /* 81453E60 | 2C 11 00 00 */	cmpwi r17, 0x0
@@ -11510,7 +11510,7 @@
 /* 81453EF8 | 7E 23 8B 78 */	mr r3, r17
 /* 81453EFC | 7F 24 CB 78 */	mr r4, r25
 /* 81453F00 | 7F A5 EB 78 */	mr r5, r29
-/* 81453F04 | 4B FF 71 89 */	bl CHANSVm_8144B08C
+/* 81453F04 | 4B FF 71 89 */	bl VmStrCpyToU8FromU16
 /* 81453F08 | 48 00 00 14 */	b .L_81453F1C
 .L_81453F0C:
 /* 81453F0C | 7C A0 E9 D6 */	mullw r5, r0, r29
@@ -11534,7 +11534,7 @@
 /* 81453F4C | 7C 65 1B 78 */	mr r5, r3
 /* 81453F50 | 7F C3 F3 78 */	mr r3, r30
 /* 81453F54 | 38 80 00 03 */	li r4, 0x3
-/* 81453F58 | 4B FF 79 85 */	bl CHANSVm_8144B8DC
+/* 81453F58 | 4B FF 79 85 */	bl CHANSVmConvertObjectType
 /* 81453F5C | 7C 79 1B 78 */	mr r25, r3
 /* 81453F60 | 48 00 00 24 */	b .L_81453F84
 .L_81453F64:
@@ -11544,7 +11544,7 @@
 /* 81453F70 | 7C 65 1B 78 */	mr r5, r3
 /* 81453F74 | 7F C3 F3 78 */	mr r3, r30
 /* 81453F78 | 38 80 00 03 */	li r4, 0x3
-/* 81453F7C | 4B FF 79 61 */	bl CHANSVm_8144B8DC
+/* 81453F7C | 4B FF 79 61 */	bl CHANSVmConvertObjectType
 /* 81453F80 | 7C 79 1B 78 */	mr r25, r3
 .L_81453F84:
 /* 81453F84 | 2C 19 00 00 */	cmpwi r25, 0x0
@@ -11647,7 +11647,7 @@
 /* 814540D4 | 7C 08 03 A6 */	mtlr r0
 /* 814540D8 | 38 21 00 70 */	addi r1, r1, 0x70
 /* 814540DC | 4E 80 00 20 */	blr
-.endfn CHANSVm_81453670
+.endfn vmBlobPackCommon
 
 # .text:0x9B34 | 0x814540E0 | size: 0x6C
 .fn CHANSVm_814540E0, global
@@ -11681,19 +11681,19 @@
 .endfn CHANSVm_814540E0
 
 # .text:0x9BA0 | 0x8145414C | size: 0x8
-.fn CHANSExport_pCreate, global
+.fn VmMethod_pCreate, global
 /* 8145414C | 38 C0 00 01 */	li r6, 0x1
-/* 81454150 | 4B FF F5 20 */	b CHANSVm_81453670
-.endfn CHANSExport_pCreate
+/* 81454150 | 4B FF F5 20 */	b vmBlobPackCommon
+.endfn VmMethod_pCreate
 
 # .text:0x9BA8 | 0x81454154 | size: 0x8
-.fn CHANSExport_pack, global
+.fn VmMethod_pack, global
 /* 81454154 | 38 C0 00 00 */	li r6, 0x0
-/* 81454158 | 4B FF F5 18 */	b CHANSVm_81453670
-.endfn CHANSExport_pack
+/* 81454158 | 4B FF F5 18 */	b vmBlobPackCommon
+.endfn VmMethod_pack
 
 # .text:0x9BB0 | 0x8145415C | size: 0x814
-.fn CHANSExport_unpack, global
+.fn VmMethod_unpack, global
 /* 8145415C | 94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 81454160 | 7C 08 02 A6 */	mflr r0
 /* 81454164 | 90 01 00 74 */	stw r0, 0x74(r1)
@@ -11710,7 +11710,7 @@
 /* 81454190 | 7C 65 1B 78 */	mr r5, r3
 /* 81454194 | 7F C3 F3 78 */	mr r3, r30
 /* 81454198 | 38 80 00 03 */	li r4, 0x3
-/* 8145419C | 4B FF 77 41 */	bl CHANSVm_8144B8DC
+/* 8145419C | 4B FF 77 41 */	bl CHANSVmConvertObjectType
 /* 814541A0 | 7C 73 1B 78 */	mr r19, r3
 /* 814541A4 | 4B FF CA 01 */	bl CHANSVm_81450BA4
 /* 814541A8 | 7C 75 1B 78 */	mr r21, r3
@@ -12220,7 +12220,7 @@
 /* 814548B0 | 56 67 08 3C */	slwi r7, r19, 1
 /* 814548B4 | 38 80 00 00 */	li r4, 0x0
 /* 814548B8 | 38 C0 00 03 */	li r6, 0x3
-/* 814548BC | 4B FF 65 19 */	bl CHANSVm_8144ADD4
+/* 814548BC | 4B FF 65 19 */	bl CHANSVmNewObject
 /* 814548C0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 814548C4 | 41 82 00 90 */	beq .L_81454954
 /* 814548C8 | 7E 43 93 78 */	mr r3, r18
@@ -12271,7 +12271,7 @@
 /* 81454964 | 7C 08 03 A6 */	mtlr r0
 /* 81454968 | 38 21 00 70 */	addi r1, r1, 0x70
 /* 8145496C | 4E 80 00 20 */	blr
-.endfn CHANSExport_unpack
+.endfn VmMethod_unpack
 
 # .text:0xA3C4 | 0x81454970 | size: 0xB4
 .fn CHANSVmNewBlobObject, global
@@ -12288,7 +12288,7 @@
 /* 81454998 | 7C BF 2B 78 */	mr r31, r5
 .L_8145499C:
 /* 8145499C | 7F A4 EB 78 */	mr r4, r29
-/* 814549A0 | 4B FF C2 6D */	bl CHANSVm_81450C0C
+/* 814549A0 | 4B FF C2 6D */	bl vmBlobCreateDirect
 /* 814549A4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 814549A8 | 7C 7D 1B 78 */	mr r29, r3
 /* 814549AC | 40 82 00 0C */	bne .L_814549B8
@@ -12330,7 +12330,7 @@
 .endfn CHANSVmNewBlobObject
 
 # .text:0xA478 | 0x81454A24 | size: 0x40
-.fn CHANSGetExport_width, global
+.fn VmGetProp_width, global
 /* 81454A24 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81454A28 | 7C 08 02 A6 */	mflr r0
 /* 81454A2C | 7C 86 23 78 */	mr r6, r4
@@ -12347,10 +12347,10 @@
 /* 81454A58 | 7C 08 03 A6 */	mtlr r0
 /* 81454A5C | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81454A60 | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_width
+.endfn VmGetProp_width
 
 # .text:0xA4B8 | 0x81454A64 | size: 0x40
-.fn CHANSGetExport_height, global
+.fn VmGetProp_height, global
 /* 81454A64 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81454A68 | 7C 08 02 A6 */	mflr r0
 /* 81454A6C | 7C 86 23 78 */	mr r6, r4
@@ -12367,10 +12367,10 @@
 /* 81454A98 | 7C 08 03 A6 */	mtlr r0
 /* 81454A9C | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81454AA0 | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_height
+.endfn VmGetProp_height
 
 # .text:0xA4F8 | 0x81454AA4 | size: 0x40
-.fn CHANSGetExport_format, global
+.fn VmGetProp_format, global
 /* 81454AA4 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81454AA8 | 7C 08 02 A6 */	mflr r0
 /* 81454AAC | 7C 86 23 78 */	mr r6, r4
@@ -12387,12 +12387,12 @@
 /* 81454AD8 | 7C 08 03 A6 */	mtlr r0
 /* 81454ADC | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81454AE0 | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_format
+.endfn VmGetProp_format
 
 # .text:0xA538 | 0x81454AE4 | size: 0xC
 .fn CHANSVmImageRegisterAllocator, global
 /* 81454AE4 | 90 6D AD 14 */	stw r3, lbl_81698D54@sda21(r0)
-/* 81454AE8 | 90 8D AD 10 */	stw r4, lbl_81698D50@sda21(r0)
+/* 81454AE8 | 90 8D AD 10 */	stw r4, VmImageCtorCallback@sda21(r0)
 /* 81454AEC | 4E 80 00 20 */	blr
 .endfn CHANSVmImageRegisterAllocator
 
@@ -12442,7 +12442,7 @@
 /* 81454B84 | 54 FD E8 FE */	srwi r29, r7, 3
 /* 81454B88 | 7F A7 00 78 */	andc r7, r29, r0
 /* 81454B8C | 38 E7 00 20 */	addi r7, r7, 0x20
-/* 81454B90 | 4B FF 62 45 */	bl CHANSVm_8144ADD4
+/* 81454B90 | 4B FF 62 45 */	bl CHANSVmNewObject
 /* 81454B94 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81454B98 | 7C 78 1B 78 */	mr r24, r3
 /* 81454B9C | 41 82 00 A0 */	beq .L_81454C3C
@@ -12502,12 +12502,12 @@
 .endfn CHANSVmNewImageObject
 
 # .text:0xA6B4 | 0x81454C60 | size: 0x64
-.fn CHANSVm_81454C60, global
+.fn VmCtor_Image, global
 /* 81454C60 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81454C64 | 7C 08 02 A6 */	mflr r0
 /* 81454C68 | 38 A0 00 00 */	li r5, 0x0
 /* 81454C6C | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 81454C70 | 81 8D AD 10 */	lwz r12, lbl_81698D50@sda21(r0)
+/* 81454C70 | 81 8D AD 10 */	lwz r12, VmImageCtorCallback@sda21(r0)
 /* 81454C74 | 80 84 00 00 */	lwz r4, 0x0(r4)
 /* 81454C78 | 2C 0C 00 00 */	cmpwi r12, 0x0
 /* 81454C7C | 80 C4 00 00 */	lwz r6, 0x0(r4)
@@ -12530,10 +12530,10 @@
 /* 81454CB8 | 7C 08 03 A6 */	mtlr r0
 /* 81454CBC | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81454CC0 | 4E 80 00 20 */	blr
-.endfn CHANSVm_81454C60
+.endfn VmCtor_Image
 
 # .text:0xA718 | 0x81454CC4 | size: 0x10C
-.fn CHANSExport_write, global
+.fn VmMethod_write, global
 /* 81454CC4 | 94 21 FF 50 */	stwu r1, -0xb0(r1)
 /* 81454CC8 | 7C 08 02 A6 */	mflr r0
 /* 81454CCC | 90 01 00 B4 */	stw r0, 0xb4(r1)
@@ -12545,7 +12545,7 @@
 /* 81454CE4 | 7C 65 1B 78 */	mr r5, r3
 /* 81454CE8 | 7F 63 DB 78 */	mr r3, r27
 /* 81454CEC | 38 80 00 03 */	li r4, 0x3
-/* 81454CF0 | 4B FF 6B ED */	bl CHANSVm_8144B8DC
+/* 81454CF0 | 4B FF 6B ED */	bl CHANSVmConvertObjectType
 /* 81454CF4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81454CF8 | 7C 7B 1B 78 */	mr r27, r3
 /* 81454CFC | 41 82 00 B8 */	beq .L_81454DB4
@@ -12575,7 +12575,7 @@
 /* 81454D54 | 80 BB 00 00 */	lwz r5, 0x0(r27)
 /* 81454D58 | 80 05 00 00 */	lwz r0, 0x0(r5)
 /* 81454D5C | 7C A0 E2 14 */	add r5, r0, r28
-/* 81454D60 | 48 11 7C B9 */	bl fn_8156CA18
+/* 81454D60 | 48 11 7C B9 */	bl ENCConvertStringUnicodeToSjis
 /* 81454D64 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81454D68 | 7C 64 1B 78 */	mr r4, r3
 /* 81454D6C | 40 82 00 28 */	bne .L_81454D94
@@ -12607,20 +12607,20 @@
 /* 81454DC4 | 7C 08 03 A6 */	mtlr r0
 /* 81454DC8 | 38 21 00 B0 */	addi r1, r1, 0xb0
 /* 81454DCC | 4E 80 00 20 */	blr
-.endfn CHANSExport_write
+.endfn VmMethod_write
 
 # .text:0xA824 | 0x81454DD0 | size: 0x39C
-.fn CHANSVmPrepareInit, global
+.fn CHANSVmInit, global
 /* 81454DD0 | 94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 81454DD4 | 7C 08 02 A6 */	mflr r0
 /* 81454DD8 | 90 01 00 34 */	stw r0, 0x34(r1)
 /* 81454DDC | 39 61 00 30 */	addi r11, r1, 0x30
 /* 81454DE0 | 48 1A 46 E5 */	bl _savegpr_28
-/* 81454DE4 | 3F E0 81 61 */	lis r31, lbl_81616C78@ha
+/* 81454DE4 | 3F E0 81 61 */	lis r31, CHANSVmConstStringObjectUndefined@ha
 /* 81454DE8 | 7C 9E 23 78 */	mr r30, r4
 /* 81454DEC | 7C BC 2B 78 */	mr r28, r5
 /* 81454DF0 | 7C 7D 1B 78 */	mr r29, r3
-/* 81454DF4 | 3B FF 6C 78 */	addi r31, r31, lbl_81616C78@l
+/* 81454DF4 | 3B FF 6C 78 */	addi r31, r31, CHANSVmConstStringObjectUndefined@l
 /* 81454DF8 | 38 80 00 00 */	li r4, 0x0
 /* 81454DFC | 38 A0 02 70 */	li r5, 0x270
 /* 81454E00 | 4B ED B5 35 */	bl memset
@@ -12652,7 +12652,7 @@
 /* 81454E64 | 90 1D 00 24 */	stw r0, 0x24(r29)
 /* 81454E68 | 91 1D 00 28 */	stw r8, 0x28(r29)
 /* 81454E6C | 90 1D 00 2C */	stw r0, 0x2c(r29)
-/* 81454E70 | 48 00 08 71 */	bl CHANSVm_814556E0
+/* 81454E70 | 48 00 08 71 */	bl VmPushFuncReturnInfo
 /* 81454E74 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81454E78 | 7C 7E 1B 78 */	mr r30, r3
 /* 81454E7C | 40 82 02 C4 */	bne .L_81455140
@@ -12746,10 +12746,10 @@
 /* 81454FBC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81454FC0 | 41 82 01 7C */	beq .L_8145513C
 /* 81454FC4 | 38 00 00 01 */	li r0, 0x1
-/* 81454FC8 | 3C A0 81 45 */	lis r5, CHANSVm_8144F5F8@ha
+/* 81454FC8 | 3C A0 81 45 */	lis r5, VmCtor_String@ha
 /* 81454FCC | 90 01 00 08 */	stw r0, 0x8(r1)
 /* 81454FD0 | 38 7F 03 B4 */	addi r3, r31, 0x3b4
-/* 81454FD4 | 38 A5 F5 F8 */	addi r5, r5, CHANSVm_8144F5F8@l
+/* 81454FD4 | 38 A5 F5 F8 */	addi r5, r5, VmCtor_String@l
 /* 81454FD8 | 38 00 00 0C */	li r0, 0xc
 /* 81454FDC | 90 61 00 0C */	stw r3, 0xc(r1)
 /* 81454FE0 | 7F A3 EB 78 */	mr r3, r29
@@ -12776,12 +12776,12 @@
 .L_81455030:
 /* 81455030 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81455034 | 41 82 01 08 */	beq .L_8145513C
-/* 81455038 | 3C A0 81 45 */	lis r5, CHANSVm_81450DCC@ha
-/* 8145503C | 3C C0 81 45 */	lis r6, CHANSVm_81450E74@ha
+/* 81455038 | 3C A0 81 45 */	lis r5, VmCtor_Blob@ha
+/* 8145503C | 3C C0 81 45 */	lis r6, VmDtor_Blob@ha
 /* 81455040 | 7F A3 EB 78 */	mr r3, r29
 /* 81455044 | 38 82 8B A7 */	li r4, lbl_81694FA7@sda21
-/* 81455048 | 38 A5 0D CC */	addi r5, r5, CHANSVm_81450DCC@l
-/* 8145504C | 38 C6 0E 74 */	addi r6, r6, CHANSVm_81450E74@l
+/* 81455048 | 38 A5 0D CC */	addi r5, r5, VmCtor_Blob@l
+/* 8145504C | 38 C6 0E 74 */	addi r6, r6, VmDtor_Blob@l
 /* 81455050 | 38 E0 00 00 */	li r7, 0x0
 /* 81455054 | 4B FF 77 AD */	bl CHANSVmAddNativeClass2
 /* 81455058 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -12809,12 +12809,12 @@
 /* 814550A4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 814550A8 | 41 82 00 94 */	beq .L_8145513C
 /* 814550AC | 3B 80 00 00 */	li r28, 0x0
-/* 814550B0 | 3C C0 81 45 */	lis r6, CHANSVm_81454C60@ha
+/* 814550B0 | 3C C0 81 45 */	lis r6, VmCtor_Image@ha
 /* 814550B4 | 93 8D AD 14 */	stw r28, lbl_81698D54@sda21(r0)
 /* 814550B8 | 38 00 00 03 */	li r0, 0x3
 /* 814550BC | 7F A3 EB 78 */	mr r3, r29
-/* 814550C0 | 38 C6 4C 60 */	addi r6, r6, CHANSVm_81454C60@l
-/* 814550C4 | 93 8D AD 10 */	stw r28, lbl_81698D50@sda21(r0)
+/* 814550C0 | 38 C6 4C 60 */	addi r6, r6, VmCtor_Image@l
+/* 814550C4 | 93 8D AD 10 */	stw r28, VmImageCtorCallback@sda21(r0)
 /* 814550C8 | 39 5F 05 74 */	addi r10, r31, 0x574
 /* 814550CC | 38 8D 97 4C */	li r4, lbl_8169778C@sda21
 /* 814550D0 | 38 A0 00 00 */	li r5, 0x0
@@ -12859,7 +12859,7 @@
 /* 81455160 | 7C 08 03 A6 */	mtlr r0
 /* 81455164 | 38 21 00 30 */	addi r1, r1, 0x30
 /* 81455168 | 4E 80 00 20 */	blr
-.endfn CHANSVmPrepareInit
+.endfn CHANSVmInit
 
 # .text:0xABC0 | 0x8145516C | size: 0x2C
 .fn CHANSVmGetFreeExeBufp, global
@@ -13035,7 +13035,7 @@
 /* 814553B4 | 7F C3 F3 78 */	mr r3, r30
 /* 814553B8 | 38 04 00 1F */	addi r0, r4, 0x1f
 /* 814553BC | 54 04 00 34 */	clrrwi r4, r0, 5
-/* 814553C0 | 4B FF 55 2D */	bl CHANSVm_8144A8EC
+/* 814553C0 | 4B FF 55 2D */	bl CHANSVmAllocFromHeap
 /* 814553C4 | 90 7F 00 18 */	stw r3, 0x18(r31)
 .L_814553C8:
 /* 814553C8 | 80 1F 00 28 */	lwz r0, 0x28(r31)
@@ -13045,7 +13045,7 @@
 /* 814553D8 | 7F C3 F3 78 */	mr r3, r30
 /* 814553DC | 38 04 00 1F */	addi r0, r4, 0x1f
 /* 814553E0 | 54 04 00 34 */	clrrwi r4, r0, 5
-/* 814553E4 | 4B FF 55 09 */	bl CHANSVm_8144A8EC
+/* 814553E4 | 4B FF 55 09 */	bl CHANSVmAllocFromHeap
 /* 814553E8 | 90 7F 00 38 */	stw r3, 0x38(r31)
 .L_814553EC:
 /* 814553EC | 80 1F 00 30 */	lwz r0, 0x30(r31)
@@ -13055,7 +13055,7 @@
 /* 814553FC | 7F C3 F3 78 */	mr r3, r30
 /* 81455400 | 38 04 00 1F */	addi r0, r4, 0x1f
 /* 81455404 | 54 04 00 34 */	clrrwi r4, r0, 5
-/* 81455408 | 4B FF 54 E5 */	bl CHANSVm_8144A8EC
+/* 81455408 | 4B FF 54 E5 */	bl CHANSVmAllocFromHeap
 /* 8145540C | 90 7F 00 3C */	stw r3, 0x3c(r31)
 .L_81455410:
 /* 81455410 | 80 1F 00 14 */	lwz r0, 0x14(r31)
@@ -13116,7 +13116,7 @@
 /* 814554D0 | 41 81 00 24 */	bgt .L_814554F4
 /* 814554D4 | 7F C3 F3 78 */	mr r3, r30
 /* 814554D8 | 7C 9C 22 14 */	add r4, r28, r4
-/* 814554DC | 4B FF 74 01 */	bl CHANSVm_8144C8DC
+/* 814554DC | 4B FF 74 01 */	bl VmAddNativeMethodName
 /* 814554E0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 814554E4 | 41 82 00 10 */	beq .L_814554F4
 /* 814554E8 | 80 9F 00 38 */	lwz r4, 0x38(r31)
@@ -13184,14 +13184,14 @@
 .endfn CHANSVmAddExe
 
 # .text:0xB00C | 0x814555B8 | size: 0x18
-.fn CHANSVm_814555B8, global
+.fn VmOffsU32ToPtr, local
 /* 814555B8 | 80 03 00 00 */	lwz r0, 0x0(r3)
 /* 814555BC | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 814555C0 | 4D 82 00 20 */	beqlr
 /* 814555C4 | 7C 00 22 14 */	add r0, r0, r4
 /* 814555C8 | 90 03 00 00 */	stw r0, 0x0(r3)
 /* 814555CC | 4E 80 00 20 */	blr
-.endfn CHANSVm_814555B8
+.endfn VmOffsU32ToPtr
 
 # .text:0xB024 | 0x814555D0 | size: 0x84
 .fn CHANSConvertModuleOfsToPtr, global
@@ -13208,22 +13208,22 @@
 .L_814555F8:
 /* 814555F8 | 7F E4 FB 78 */	mr r4, r31
 /* 814555FC | 38 63 00 10 */	addi r3, r3, 0x10
-/* 81455600 | 4B FF FF B9 */	bl CHANSVm_814555B8
+/* 81455600 | 4B FF FF B9 */	bl VmOffsU32ToPtr
 /* 81455604 | 7F E4 FB 78 */	mr r4, r31
 /* 81455608 | 38 7F 00 24 */	addi r3, r31, 0x24
-/* 8145560C | 4B FF FF AD */	bl CHANSVm_814555B8
+/* 8145560C | 4B FF FF AD */	bl VmOffsU32ToPtr
 /* 81455610 | 7F E4 FB 78 */	mr r4, r31
 /* 81455614 | 38 7F 00 2C */	addi r3, r31, 0x2c
-/* 81455618 | 4B FF FF A1 */	bl CHANSVm_814555B8
+/* 81455618 | 4B FF FF A1 */	bl VmOffsU32ToPtr
 /* 8145561C | 7F E4 FB 78 */	mr r4, r31
 /* 81455620 | 38 7F 00 34 */	addi r3, r31, 0x34
-/* 81455624 | 4B FF FF 95 */	bl CHANSVm_814555B8
+/* 81455624 | 4B FF FF 95 */	bl VmOffsU32ToPtr
 /* 81455628 | 7F E4 FB 78 */	mr r4, r31
 /* 8145562C | 38 7F 00 40 */	addi r3, r31, 0x40
-/* 81455630 | 4B FF FF 89 */	bl CHANSVm_814555B8
+/* 81455630 | 4B FF FF 89 */	bl VmOffsU32ToPtr
 /* 81455634 | 7F E4 FB 78 */	mr r4, r31
 /* 81455638 | 38 7F 00 44 */	addi r3, r31, 0x44
-/* 8145563C | 4B FF FF 7D */	bl CHANSVm_814555B8
+/* 8145563C | 4B FF FF 7D */	bl VmOffsU32ToPtr
 /* 81455640 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 81455644 | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 81455648 | 7C 08 03 A6 */	mtlr r0
@@ -13274,7 +13274,7 @@
 .endfn CHANSVm_81455654
 
 # .text:0xB134 | 0x814556E0 | size: 0x1AC
-.fn CHANSVm_814556E0, global
+.fn VmPushFuncReturnInfo, local
 /* 814556E0 | 94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 814556E4 | 7C 08 02 A6 */	mflr r0
 /* 814556E8 | 90 01 00 34 */	stw r0, 0x34(r1)
@@ -13327,7 +13327,7 @@
 /* 81455790 | 41 80 FF AC */	blt .L_8145573C
 /* 81455794 | 93 B9 00 2C */	stw r29, 0x2c(r25)
 /* 81455798 | 7F 23 CB 78 */	mr r3, r25
-/* 8145579C | 4B FF 50 85 */	bl CHANSVm_8144A820
+/* 8145579C | 4B FF 50 85 */	bl VmUpdateSmallestFreeHeapSize
 /* 814557A0 | 57 80 20 36 */	slwi r0, r28, 4
 /* 814557A4 | 3B E0 00 00 */	li r31, 0x0
 /* 814557A8 | 37 00 00 20 */	addic. r24, r0, 0x20
@@ -13342,7 +13342,7 @@
 /* 814557CC | 7F F8 18 50 */	subf r31, r24, r3
 /* 814557D0 | 7F 23 CB 78 */	mr r3, r25
 /* 814557D4 | 93 F9 00 2C */	stw r31, 0x2c(r25)
-/* 814557D8 | 4B FF 50 49 */	bl CHANSVm_8144A820
+/* 814557D8 | 4B FF 50 49 */	bl VmUpdateSmallestFreeHeapSize
 /* 814557DC | 7F E3 FB 78 */	mr r3, r31
 /* 814557E0 | 7F 05 C3 78 */	mr r5, r24
 /* 814557E4 | 38 80 00 00 */	li r4, 0x0
@@ -13393,10 +13393,10 @@
 /* 81455880 | 7C 08 03 A6 */	mtlr r0
 /* 81455884 | 38 21 00 30 */	addi r1, r1, 0x30
 /* 81455888 | 4E 80 00 20 */	blr
-.endfn CHANSVm_814556E0
+.endfn VmPushFuncReturnInfo
 
 # .text:0xB2E0 | 0x8145588C | size: 0x1D4
-.fn CHANSVm_8145588C, global
+.fn VmReturnWithValue, local
 /* 8145588C | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81455890 | 7C 08 02 A6 */	mflr r0
 /* 81455894 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -13412,7 +13412,7 @@
 /* 814558B8 | 7C 83 F2 14 */	add r4, r3, r30
 /* 814558BC | 7F E3 FB 78 */	mr r3, r31
 /* 814558C0 | 38 84 00 20 */	addi r4, r4, 0x20
-/* 814558C4 | 4B FF 52 91 */	bl CHANSVm_8144AB54
+/* 814558C4 | 4B FF 52 91 */	bl CHANSVmDeleteObject
 /* 814558C8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 814558CC | 41 82 00 08 */	beq .L_814558D4
 /* 814558D0 | 48 00 01 78 */	b .L_81455A48
@@ -13428,7 +13428,7 @@
 .L_814558F0:
 /* 814558F0 | 7F E3 FB 78 */	mr r3, r31
 /* 814558F4 | 38 80 00 00 */	li r4, 0x0
-/* 814558F8 | 4B FF 56 81 */	bl CHANSVm_8144AF78
+/* 814558F8 | 4B FF 56 81 */	bl VmPopObject
 /* 814558FC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81455900 | 41 82 00 08 */	beq .L_81455908
 /* 81455904 | 48 00 01 44 */	b .L_81455A48
@@ -13450,7 +13450,7 @@
 .L_8145593C:
 /* 8145593C | 7F E3 FB 78 */	mr r3, r31
 /* 81455940 | 7F 84 E3 78 */	mr r4, r28
-/* 81455944 | 4B FF 56 35 */	bl CHANSVm_8144AF78
+/* 81455944 | 4B FF 56 35 */	bl VmPopObject
 /* 81455948 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8145594C | 41 82 00 08 */	beq .L_81455954
 /* 81455950 | 48 00 00 F8 */	b .L_81455A48
@@ -13482,7 +13482,7 @@
 /* 814559A8 | 4B FF FC AD */	bl CHANSVm_81455654
 /* 814559AC | 7C 64 1B 78 */	mr r4, r3
 /* 814559B0 | 7F E3 FB 78 */	mr r3, r31
-/* 814559B4 | 4B FF 51 A1 */	bl CHANSVm_8144AB54
+/* 814559B4 | 4B FF 51 A1 */	bl CHANSVmDeleteObject
 /* 814559B8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 814559BC | 41 82 00 0C */	beq .L_814559C8
 /* 814559C0 | 38 60 FC 41 */	li r3, -0x3bf
@@ -13503,7 +13503,7 @@
 /* 814559F0 | 7F 84 E3 78 */	mr r4, r28
 /* 814559F4 | 54 00 06 7E */	clrlwi r0, r0, 25
 /* 814559F8 | 98 1C 00 09 */	stb r0, 0x9(r28)
-/* 814559FC | 4B FF 51 59 */	bl CHANSVm_8144AB54
+/* 814559FC | 4B FF 51 59 */	bl CHANSVmDeleteObject
 /* 81455A00 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81455A04 | 41 82 00 0C */	beq .L_81455A10
 /* 81455A08 | 38 60 FC 41 */	li r3, -0x3bf
@@ -13514,7 +13514,7 @@
 /* 81455A18 | 7F 84 E3 78 */	mr r4, r28
 /* 81455A1C | 38 05 00 37 */	addi r0, r5, 0x37
 /* 81455A20 | 54 05 00 34 */	clrrwi r5, r0, 5
-/* 81455A24 | 4B FF 4F 5D */	bl CHANSVm_8144A980
+/* 81455A24 | 4B FF 4F 5D */	bl VmFree
 /* 81455A28 | 83 9C 00 10 */	lwz r28, 0x10(r28)
 /* 81455A2C | 93 9F 00 38 */	stw r28, 0x38(r31)
 .L_81455A30:
@@ -13532,7 +13532,7 @@
 /* 81455A54 | 7C 08 03 A6 */	mtlr r0
 /* 81455A58 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81455A5C | 4E 80 00 20 */	blr
-.endfn CHANSVm_8145588C
+.endfn VmReturnWithValue
 
 # .text:0xB4B4 | 0x81455A60 | size: 0x2F4
 .fn CHANSVmLinkModules, global
@@ -13756,7 +13756,7 @@
 .endfn CHANSVmLinkModules
 
 # .text:0xB7A8 | 0x81455D54 | size: 0x34
-.fn CHANSVm_81455D54, global
+.fn VmGetOperandp, local
 /* 81455D54 | 80 63 00 60 */	lwz r3, 0x60(r3)
 /* 81455D58 | 80 E3 00 04 */	lwz r7, 0x4(r3)
 /* 81455D5C | 80 C3 00 10 */	lwz r6, 0x10(r3)
@@ -13771,10 +13771,10 @@
 /* 81455D7C | 7C 06 22 14 */	add r0, r6, r4
 /* 81455D80 | 7C 63 02 14 */	add r3, r3, r0
 /* 81455D84 | 4E 80 00 20 */	blr
-.endfn CHANSVm_81455D54
+.endfn VmGetOperandp
 
 # .text:0xB7DC | 0x81455D88 | size: 0x44
-.fn CHANSVm_81455D88, global
+.fn VmLoadImmInteger, local
 /* 81455D88 | 39 20 00 00 */	li r9, 0x0
 /* 81455D8C | 38 00 00 00 */	li r0, 0x0
 /* 81455D90 | 7C C9 03 A6 */	mtctr r6
@@ -13794,10 +13794,10 @@
 /* 81455DC0 | 7D 26 4B 78 */	mr r6, r9
 /* 81455DC4 | 7C 05 03 78 */	mr r5, r0
 /* 81455DC8 | 4B FF 5B D0 */	b CHANSVmSetInteger
-.endfn CHANSVm_81455D88
+.endfn VmLoadImmInteger
 
 # .text:0xB820 | 0x81455DCC | size: 0x94
-.fn CHANSVm_81455DCC, global
+.fn CHANSVm_81455DCC, local
 /* 81455DCC | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81455DD0 | 7C 08 02 A6 */	mflr r0
 /* 81455DD4 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -13820,7 +13820,7 @@
 /* 81455E10 | 38 60 FC 51 */	li r3, -0x3af
 /* 81455E14 | 48 00 00 34 */	b .L_81455E48
 .L_81455E18:
-/* 81455E18 | 4B FF 4D 3D */	bl CHANSVm_8144AB54
+/* 81455E18 | 4B FF 4D 3D */	bl CHANSVmDeleteObject
 /* 81455E1C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81455E20 | 7C 7F 1B 78 */	mr r31, r3
 /* 81455E24 | 40 82 00 20 */	bne .L_81455E44
@@ -13843,7 +13843,7 @@
 .endfn CHANSVm_81455DCC
 
 # .text:0xB8B4 | 0x81455E60 | size: 0x80
-.fn CHANSVm_81455E60, global
+.fn VmDelCommon, local
 /* 81455E60 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81455E64 | 7C 08 02 A6 */	mflr r0
 /* 81455E68 | 2C 04 00 00 */	cmpwi r4, 0x0
@@ -13854,7 +13854,7 @@
 /* 81455E7C | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 81455E80 | 7C 7E 1B 78 */	mr r30, r3
 /* 81455E84 | 41 82 00 40 */	beq .L_81455EC4
-/* 81455E88 | 4B FF 4C CD */	bl CHANSVm_8144AB54
+/* 81455E88 | 4B FF 4C CD */	bl CHANSVmDeleteObject
 /* 81455E8C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81455E90 | 7C 60 1B 78 */	mr r0, r3
 /* 81455E94 | 40 82 00 30 */	bne .L_81455EC4
@@ -13879,10 +13879,10 @@
 /* 81455ED4 | 7C 08 03 A6 */	mtlr r0
 /* 81455ED8 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81455EDC | 4E 80 00 20 */	blr
-.endfn CHANSVm_81455E60
+.endfn VmDelCommon
 
 # .text:0xB934 | 0x81455EE0 | size: 0x464
-.fn CHANSVm_81455EE0, global
+.fn VmCallMethod, local
 /* 81455EE0 | 94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 81455EE4 | 7C 08 02 A6 */	mflr r0
 /* 81455EE8 | 90 01 00 54 */	stw r0, 0x54(r1)
@@ -14117,7 +14117,7 @@
 .L_81456204:
 /* 81456204 | 7F 45 D3 78 */	mr r5, r26
 /* 81456208 | 7F 26 CB 78 */	mr r6, r25
-/* 8145620C | 4B FF F4 D5 */	bl CHANSVm_814556E0
+/* 8145620C | 4B FF F4 D5 */	bl VmPushFuncReturnInfo
 /* 81456210 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456214 | 7C 76 1B 78 */	mr r22, r3
 /* 81456218 | 40 82 01 10 */	bne .L_81456328
@@ -14143,7 +14143,7 @@
 /* 81456264 | 7E A3 AB 78 */	mr r3, r21
 /* 81456268 | 7C 00 00 34 */	cntlzw r0, r0
 /* 8145626C | 54 04 D9 7E */	srwi r4, r0, 5
-/* 81456270 | 4B FF F6 1D */	bl CHANSVm_8145588C
+/* 81456270 | 4B FF F6 1D */	bl VmReturnWithValue
 /* 81456274 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456278 | 7C 76 1B 78 */	mr r22, r3
 /* 8145627C | 40 82 00 50 */	bne .L_814562CC
@@ -14151,7 +14151,7 @@
 /* 81456284 | 41 82 00 48 */	beq .L_814562CC
 /* 81456288 | 7E A3 AB 78 */	mr r3, r21
 /* 8145628C | 7F E4 FB 78 */	mr r4, r31
-/* 81456290 | 4B FF 48 C5 */	bl CHANSVm_8144AB54
+/* 81456290 | 4B FF 48 C5 */	bl CHANSVmDeleteObject
 /* 81456294 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456298 | 7C 76 1B 78 */	mr r22, r3
 /* 8145629C | 40 82 00 30 */	bne .L_814562CC
@@ -14191,7 +14191,7 @@
 /* 81456314 | 90 64 00 10 */	stw r3, 0x10(r4)
 /* 81456318 | 7E A3 AB 78 */	mr r3, r21
 /* 8145631C | 7F E4 FB 78 */	mr r4, r31
-/* 81456320 | 4B FF 48 35 */	bl CHANSVm_8144AB54
+/* 81456320 | 4B FF 48 35 */	bl CHANSVmDeleteObject
 /* 81456324 | 7C 76 1B 78 */	mr r22, r3
 .L_81456328:
 /* 81456328 | 7E C3 B3 78 */	mr r3, r22
@@ -14202,7 +14202,7 @@
 /* 81456338 | 7C 08 03 A6 */	mtlr r0
 /* 8145633C | 38 21 00 50 */	addi r1, r1, 0x50
 /* 81456340 | 4E 80 00 20 */	blr
-.endfn CHANSVm_81455EE0
+.endfn VmCallMethod
 
 # .text:0xBD98 | 0x81456344 | size: 0x10
 .fn CHANSVmSetSignal, global
@@ -14226,10 +14226,10 @@
 /* 81456378 | 39 61 00 C0 */	addi r11, r1, 0xc0
 /* 8145637C | 48 1A 31 11 */	bl _savegpr_14
 /* 81456380 | 2C 04 00 00 */	cmpwi r4, 0x0
-/* 81456384 | 3F 80 81 61 */	lis r28, lbl_81616C78@ha
+/* 81456384 | 3F 80 81 61 */	lis r28, CHANSVmConstStringObjectUndefined@ha
 /* 81456388 | 7C 6F 1B 78 */	mr r15, r3
 /* 8145638C | 7C 90 23 78 */	mr r16, r4
-/* 81456390 | 3B 9C 6C 78 */	addi r28, r28, lbl_81616C78@l
+/* 81456390 | 3B 9C 6C 78 */	addi r28, r28, CHANSVmConstStringObjectUndefined@l
 /* 81456394 | 40 82 00 08 */	bne .L_8145639C
 /* 81456398 | 3A 00 00 01 */	li r16, 0x1
 .L_8145639C:
@@ -14317,12 +14317,12 @@
 /* 814564B0 | 7D E3 7B 78 */	mr r3, r15
 /* 814564B4 | 7E A5 AB 78 */	mr r5, r21
 /* 814564B8 | 38 80 00 01 */	li r4, 0x1
-/* 814564BC | 4B FF F8 99 */	bl CHANSVm_81455D54
+/* 814564BC | 4B FF F8 99 */	bl VmGetOperandp
 /* 814564C0 | 7C 65 1B 78 */	mr r5, r3
 /* 814564C4 | 7D E3 7B 78 */	mr r3, r15
 /* 814564C8 | 7D C6 73 78 */	mr r6, r14
 /* 814564CC | 38 8F 00 50 */	addi r4, r15, 0x50
-/* 814564D0 | 4B FF F8 B9 */	bl CHANSVm_81455D88
+/* 814564D0 | 4B FF F8 B9 */	bl VmLoadImmInteger
 /* 814564D4 | 7C 6E 1B 78 */	mr r14, r3
 /* 814564D8 | 48 00 11 78 */	b .L_81457650
 .L_814564DC:
@@ -14330,7 +14330,7 @@
 /* 814564E0 | 3A A0 00 09 */	li r21, 0x9
 /* 814564E4 | 38 80 00 01 */	li r4, 0x1
 /* 814564E8 | 38 A0 00 09 */	li r5, 0x9
-/* 814564EC | 4B FF F8 69 */	bl CHANSVm_81455D54
+/* 814564EC | 4B FF F8 69 */	bl VmGetOperandp
 /* 814564F0 | 7C 64 1B 78 */	mr r4, r3
 /* 814564F4 | 38 61 00 28 */	addi r3, r1, 0x28
 /* 814564F8 | 38 A0 00 08 */	li r5, 0x8
@@ -14367,49 +14367,49 @@
 /* 81456560 | 3A 83 BE 7C */	addi r20, r3, CHANSVm_8144BE7C@l
 /* 81456564 | 48 00 00 90 */	b .L_814565F4
 .L_81456568:
-/* 81456568 | 3C 60 81 45 */	lis r3, CHANSVm_8144C050@ha
+/* 81456568 | 3C 60 81 45 */	lis r3, VmBitAnd@ha
 /* 8145656C | 3A C0 00 42 */	li r22, 0x42
-/* 81456570 | 3A 83 C0 50 */	addi r20, r3, CHANSVm_8144C050@l
+/* 81456570 | 3A 83 C0 50 */	addi r20, r3, VmBitAnd@l
 /* 81456574 | 48 00 00 80 */	b .L_814565F4
 .L_81456578:
-/* 81456578 | 3C 60 81 45 */	lis r3, CHANSVm_8144C0A4@ha
+/* 81456578 | 3C 60 81 45 */	lis r3, VmBitOr@ha
 /* 8145657C | 3A C0 00 42 */	li r22, 0x42
-/* 81456580 | 3A 83 C0 A4 */	addi r20, r3, CHANSVm_8144C0A4@l
+/* 81456580 | 3A 83 C0 A4 */	addi r20, r3, VmBitOr@l
 /* 81456584 | 48 00 00 70 */	b .L_814565F4
 .L_81456588:
-/* 81456588 | 3C 60 81 45 */	lis r3, CHANSVm_8144C0F8@ha
+/* 81456588 | 3C 60 81 45 */	lis r3, VmBitXor@ha
 /* 8145658C | 3A C0 00 42 */	li r22, 0x42
-/* 81456590 | 3A 83 C0 F8 */	addi r20, r3, CHANSVm_8144C0F8@l
+/* 81456590 | 3A 83 C0 F8 */	addi r20, r3, VmBitXor@l
 /* 81456594 | 48 00 00 60 */	b .L_814565F4
 .L_81456598:
-/* 81456598 | 3C 60 81 45 */	lis r3, CHANSVm_8144C14C@ha
+/* 81456598 | 3C 60 81 45 */	lis r3, VmCmpEq@ha
 /* 8145659C | 3A C0 00 3D */	li r22, 0x3d
-/* 814565A0 | 3A 83 C1 4C */	addi r20, r3, CHANSVm_8144C14C@l
+/* 814565A0 | 3A 83 C1 4C */	addi r20, r3, VmCmpEq@l
 /* 814565A4 | 48 00 00 50 */	b .L_814565F4
 .L_814565A8:
-/* 814565A8 | 3C 60 81 45 */	lis r3, CHANSVm_8144C2F8@ha
+/* 814565A8 | 3C 60 81 45 */	lis r3, VmCmpNeq@ha
 /* 814565AC | 3A C0 00 3D */	li r22, 0x3d
-/* 814565B0 | 3A 83 C2 F8 */	addi r20, r3, CHANSVm_8144C2F8@l
+/* 814565B0 | 3A 83 C2 F8 */	addi r20, r3, VmCmpNeq@l
 /* 814565B4 | 48 00 00 40 */	b .L_814565F4
 .L_814565B8:
-/* 814565B8 | 3C 60 81 45 */	lis r3, CHANSVm_8144C34C@ha
+/* 814565B8 | 3C 60 81 45 */	lis r3, VmCmpLt@ha
 /* 814565BC | 3A C0 00 43 */	li r22, 0x43
-/* 814565C0 | 3A 83 C3 4C */	addi r20, r3, CHANSVm_8144C34C@l
+/* 814565C0 | 3A 83 C3 4C */	addi r20, r3, VmCmpLt@l
 /* 814565C4 | 48 00 00 30 */	b .L_814565F4
 .L_814565C8:
-/* 814565C8 | 3C 60 81 45 */	lis r3, CHANSVm_8144C468@ha
+/* 814565C8 | 3C 60 81 45 */	lis r3, VmCmpGt@ha
 /* 814565CC | 3A C0 00 43 */	li r22, 0x43
-/* 814565D0 | 3A 83 C4 68 */	addi r20, r3, CHANSVm_8144C468@l
+/* 814565D0 | 3A 83 C4 68 */	addi r20, r3, VmCmpGt@l
 /* 814565D4 | 48 00 00 20 */	b .L_814565F4
 .L_814565D8:
-/* 814565D8 | 3C 60 81 45 */	lis r3, CHANSVm_8144C478@ha
+/* 814565D8 | 3C 60 81 45 */	lis r3, VmCmpLeq@ha
 /* 814565DC | 3A C0 00 43 */	li r22, 0x43
-/* 814565E0 | 3A 83 C4 78 */	addi r20, r3, CHANSVm_8144C478@l
+/* 814565E0 | 3A 83 C4 78 */	addi r20, r3, VmCmpLeq@l
 /* 814565E4 | 48 00 00 10 */	b .L_814565F4
 .L_814565E8:
-/* 814565E8 | 3C 60 81 45 */	lis r3, CHANSVm_8144C59C@ha
+/* 814565E8 | 3C 60 81 45 */	lis r3, VmCmpGeq@ha
 /* 814565EC | 3A C0 00 43 */	li r22, 0x43
-/* 814565F0 | 3A 83 C5 9C */	addi r20, r3, CHANSVm_8144C59C@l
+/* 814565F0 | 3A 83 C5 9C */	addi r20, r3, VmCmpGeq@l
 .L_814565F4:
 /* 814565F4 | 7D E3 7B 78 */	mr r3, r15
 /* 814565F8 | 3A 4F 00 50 */	addi r18, r15, 0x50
@@ -14417,12 +14417,12 @@
 /* 81456600 | 3A A0 00 02 */	li r21, 0x2
 /* 81456604 | 38 80 00 01 */	li r4, 0x1
 /* 81456608 | 38 A0 00 02 */	li r5, 0x2
-/* 8145660C | 4B FF F7 49 */	bl CHANSVm_81455D54
+/* 8145660C | 4B FF F7 49 */	bl VmGetOperandp
 /* 81456610 | 7C 65 1B 78 */	mr r5, r3
 /* 81456614 | 7D E3 7B 78 */	mr r3, r15
 /* 81456618 | 7E 24 8B 78 */	mr r4, r17
 /* 8145661C | 38 C0 00 01 */	li r6, 0x1
-/* 81456620 | 4B FF F7 69 */	bl CHANSVm_81455D88
+/* 81456620 | 4B FF F7 69 */	bl VmLoadImmInteger
 /* 81456624 | 7C 6E 1B 78 */	mr r14, r3
 .L_81456628:
 /* 81456628 | 2C 0E 00 00 */	cmpwi r14, 0x0
@@ -14439,7 +14439,7 @@
 /* 81456650 | 40 82 00 08 */	bne .L_81456658
 /* 81456654 | 7D C4 73 78 */	mr r4, r14
 .L_81456658:
-/* 81456658 | 4B FF 52 19 */	bl CHANSVm_8144B870
+/* 81456658 | 4B FF 52 19 */	bl VmGetEnumedType
 /* 8145665C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456660 | 41 82 00 A8 */	beq .L_81456708
 /* 81456664 | 3B 5A 00 01 */	addi r26, r26, 0x1
@@ -14506,12 +14506,12 @@
 /* 8145672C | 7D E3 7B 78 */	mr r3, r15
 /* 81456730 | 7E 64 9B 78 */	mr r4, r19
 /* 81456734 | 7E 45 93 78 */	mr r5, r18
-/* 81456738 | 4B FF 51 A5 */	bl CHANSVm_8144B8DC
+/* 81456738 | 4B FF 51 A5 */	bl CHANSVmConvertObjectType
 /* 8145673C | 7C 72 1B 78 */	mr r18, r3
 /* 81456740 | 7D E3 7B 78 */	mr r3, r15
 /* 81456744 | 7E 64 9B 78 */	mr r4, r19
 /* 81456748 | 7E 25 8B 78 */	mr r5, r17
-/* 8145674C | 4B FF 51 91 */	bl CHANSVm_8144B8DC
+/* 8145674C | 4B FF 51 91 */	bl CHANSVmConvertObjectType
 /* 81456750 | 7C 71 1B 78 */	mr r17, r3
 .L_81456754:
 /* 81456754 | 2C 12 00 00 */	cmpwi r18, 0x0
@@ -14535,7 +14535,7 @@
 /* 81456794 | 40 82 0E BC */	bne .L_81457650
 /* 81456798 | 7D E3 7B 78 */	mr r3, r15
 /* 8145679C | 38 81 00 60 */	addi r4, r1, 0x60
-/* 814567A0 | 4B FF 43 B5 */	bl CHANSVm_8144AB54
+/* 814567A0 | 4B FF 43 B5 */	bl CHANSVmDeleteObject
 /* 814567A4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 814567A8 | 7C 6E 1B 78 */	mr r14, r3
 /* 814567AC | 40 82 00 50 */	bne .L_814567FC
@@ -14550,14 +14550,14 @@
 /* 814567D0 | 40 82 00 2C */	bne .L_814567FC
 /* 814567D4 | 7D E3 7B 78 */	mr r3, r15
 /* 814567D8 | 7E 44 93 78 */	mr r4, r18
-/* 814567DC | 4B FF 43 79 */	bl CHANSVm_8144AB54
+/* 814567DC | 4B FF 43 79 */	bl CHANSVmDeleteObject
 /* 814567E0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 814567E4 | 7C 6E 1B 78 */	mr r14, r3
 /* 814567E8 | 40 82 00 14 */	bne .L_814567FC
 /* 814567EC | 7D E3 7B 78 */	mr r3, r15
 /* 814567F0 | 7E 44 93 78 */	mr r4, r18
 /* 814567F4 | 38 A0 00 20 */	li r5, 0x20
-/* 814567F8 | 4B FF 41 89 */	bl CHANSVm_8144A980
+/* 814567F8 | 4B FF 41 89 */	bl VmFree
 .L_814567FC:
 /* 814567FC | 2C 0E 00 00 */	cmpwi r14, 0x0
 /* 81456800 | 40 82 0E 50 */	bne .L_81457650
@@ -14572,14 +14572,14 @@
 /* 81456824 | 40 82 0E 2C */	bne .L_81457650
 /* 81456828 | 7D E3 7B 78 */	mr r3, r15
 /* 8145682C | 7E 24 8B 78 */	mr r4, r17
-/* 81456830 | 4B FF 43 25 */	bl CHANSVm_8144AB54
+/* 81456830 | 4B FF 43 25 */	bl CHANSVmDeleteObject
 /* 81456834 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456838 | 7C 6E 1B 78 */	mr r14, r3
 /* 8145683C | 40 82 0E 14 */	bne .L_81457650
 /* 81456840 | 7D E3 7B 78 */	mr r3, r15
 /* 81456844 | 7E 24 8B 78 */	mr r4, r17
 /* 81456848 | 38 A0 00 20 */	li r5, 0x20
-/* 8145684C | 4B FF 41 35 */	bl CHANSVm_8144A980
+/* 8145684C | 4B FF 41 35 */	bl VmFree
 /* 81456850 | 48 00 0E 00 */	b .L_81457650
 .L_81456854:
 /* 81456854 | 80 64 00 0C */	lwz r3, 0xc(r4)
@@ -14589,7 +14589,7 @@
 /* 81456864 | 40 80 00 44 */	bge .L_814568A8
 /* 81456868 | 7D E3 7B 78 */	mr r3, r15
 /* 8145686C | 38 80 00 01 */	li r4, 0x1
-/* 81456870 | 4B FF 3F D1 */	bl CHANSVm_8144A840
+/* 81456870 | 4B FF 3F D1 */	bl VmNewObjHdr
 /* 81456874 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456878 | 7C 64 1B 78 */	mr r4, r3
 /* 8145687C | 41 82 00 2C */	beq .L_814568A8
@@ -14614,7 +14614,7 @@
 .L_814568C0:
 /* 814568C0 | 7D E3 7B 78 */	mr r3, r15
 /* 814568C4 | 38 8F 00 50 */	addi r4, r15, 0x50
-/* 814568C8 | 4B FF 46 B1 */	bl CHANSVm_8144AF78
+/* 814568C8 | 4B FF 46 B1 */	bl VmPopObject
 /* 814568CC | 7C 6E 1B 78 */	mr r14, r3
 /* 814568D0 | 48 00 0D 80 */	b .L_81457650
 .L_814568D4:
@@ -14643,65 +14643,65 @@
 /* 8145691C | 3A 83 BE 7C */	addi r20, r3, CHANSVm_8144BE7C@l
 /* 81456920 | 48 00 00 B0 */	b .L_814569D0
 .L_81456924:
-/* 81456924 | 3C 60 81 45 */	lis r3, CHANSVm_8144C050@ha
+/* 81456924 | 3C 60 81 45 */	lis r3, VmBitAnd@ha
 /* 81456928 | 3A C0 00 42 */	li r22, 0x42
-/* 8145692C | 3A 83 C0 50 */	addi r20, r3, CHANSVm_8144C050@l
+/* 8145692C | 3A 83 C0 50 */	addi r20, r3, VmBitAnd@l
 /* 81456930 | 48 00 00 A0 */	b .L_814569D0
 .L_81456934:
-/* 81456934 | 3C 60 81 45 */	lis r3, CHANSVm_8144C0A4@ha
+/* 81456934 | 3C 60 81 45 */	lis r3, VmBitOr@ha
 /* 81456938 | 3A C0 00 42 */	li r22, 0x42
-/* 8145693C | 3A 83 C0 A4 */	addi r20, r3, CHANSVm_8144C0A4@l
+/* 8145693C | 3A 83 C0 A4 */	addi r20, r3, VmBitOr@l
 /* 81456940 | 48 00 00 90 */	b .L_814569D0
 .L_81456944:
-/* 81456944 | 3C 60 81 45 */	lis r3, CHANSVm_8144C0F8@ha
+/* 81456944 | 3C 60 81 45 */	lis r3, VmBitXor@ha
 /* 81456948 | 3A C0 00 42 */	li r22, 0x42
-/* 8145694C | 3A 83 C0 F8 */	addi r20, r3, CHANSVm_8144C0F8@l
+/* 8145694C | 3A 83 C0 F8 */	addi r20, r3, VmBitXor@l
 /* 81456950 | 48 00 00 80 */	b .L_814569D0
 .L_81456954:
-/* 81456954 | 3C 60 81 45 */	lis r3, CHANSVm_8144BF24@ha
+/* 81456954 | 3C 60 81 45 */	lis r3, VmULShift@ha
 /* 81456958 | 3A C0 00 53 */	li r22, 0x53
-/* 8145695C | 3A 83 BF 24 */	addi r20, r3, CHANSVm_8144BF24@l
+/* 8145695C | 3A 83 BF 24 */	addi r20, r3, VmULShift@l
 /* 81456960 | 48 00 00 70 */	b .L_814569D0
 .L_81456964:
-/* 81456964 | 3C 60 81 45 */	lis r3, CHANSVm_8144BFB8@ha
+/* 81456964 | 3C 60 81 45 */	lis r3, VmARShift@ha
 /* 81456968 | 3A C0 00 53 */	li r22, 0x53
-/* 8145696C | 3A 83 BF B8 */	addi r20, r3, CHANSVm_8144BFB8@l
+/* 8145696C | 3A 83 BF B8 */	addi r20, r3, VmARShift@l
 /* 81456970 | 48 00 00 60 */	b .L_814569D0
 .L_81456974:
-/* 81456974 | 3C 60 81 45 */	lis r3, CHANSVm_8144C14C@ha
+/* 81456974 | 3C 60 81 45 */	lis r3, VmCmpEq@ha
 /* 81456978 | 3A C0 00 43 */	li r22, 0x43
-/* 8145697C | 3A 83 C1 4C */	addi r20, r3, CHANSVm_8144C14C@l
+/* 8145697C | 3A 83 C1 4C */	addi r20, r3, VmCmpEq@l
 /* 81456980 | 48 00 00 50 */	b .L_814569D0
 .L_81456984:
-/* 81456984 | 3C 60 81 45 */	lis r3, CHANSVm_8144C2F8@ha
+/* 81456984 | 3C 60 81 45 */	lis r3, VmCmpNeq@ha
 /* 81456988 | 3A C0 00 43 */	li r22, 0x43
-/* 8145698C | 3A 83 C2 F8 */	addi r20, r3, CHANSVm_8144C2F8@l
+/* 8145698C | 3A 83 C2 F8 */	addi r20, r3, VmCmpNeq@l
 /* 81456990 | 48 00 00 40 */	b .L_814569D0
 .L_81456994:
-/* 81456994 | 3C 60 81 45 */	lis r3, CHANSVm_8144C34C@ha
+/* 81456994 | 3C 60 81 45 */	lis r3, VmCmpLt@ha
 /* 81456998 | 3A C0 00 43 */	li r22, 0x43
-/* 8145699C | 3A 83 C3 4C */	addi r20, r3, CHANSVm_8144C34C@l
+/* 8145699C | 3A 83 C3 4C */	addi r20, r3, VmCmpLt@l
 /* 814569A0 | 48 00 00 30 */	b .L_814569D0
 .L_814569A4:
-/* 814569A4 | 3C 60 81 45 */	lis r3, CHANSVm_8144C468@ha
+/* 814569A4 | 3C 60 81 45 */	lis r3, VmCmpGt@ha
 /* 814569A8 | 3A C0 00 43 */	li r22, 0x43
-/* 814569AC | 3A 83 C4 68 */	addi r20, r3, CHANSVm_8144C468@l
+/* 814569AC | 3A 83 C4 68 */	addi r20, r3, VmCmpGt@l
 /* 814569B0 | 48 00 00 20 */	b .L_814569D0
 .L_814569B4:
-/* 814569B4 | 3C 60 81 45 */	lis r3, CHANSVm_8144C478@ha
+/* 814569B4 | 3C 60 81 45 */	lis r3, VmCmpLeq@ha
 /* 814569B8 | 3A C0 00 43 */	li r22, 0x43
-/* 814569BC | 3A 83 C4 78 */	addi r20, r3, CHANSVm_8144C478@l
+/* 814569BC | 3A 83 C4 78 */	addi r20, r3, VmCmpLeq@l
 /* 814569C0 | 48 00 00 10 */	b .L_814569D0
 .L_814569C4:
-/* 814569C4 | 3C 60 81 45 */	lis r3, CHANSVm_8144C59C@ha
+/* 814569C4 | 3C 60 81 45 */	lis r3, VmCmpGeq@ha
 /* 814569C8 | 3A C0 00 43 */	li r22, 0x43
-/* 814569CC | 3A 83 C5 9C */	addi r20, r3, CHANSVm_8144C59C@l
+/* 814569CC | 3A 83 C5 9C */	addi r20, r3, VmCmpGeq@l
 .L_814569D0:
 /* 814569D0 | 3A 41 00 60 */	addi r18, r1, 0x60
 /* 814569D4 | 7D E3 7B 78 */	mr r3, r15
 /* 814569D8 | 7E 44 93 78 */	mr r4, r18
 /* 814569DC | 3A 2F 00 50 */	addi r17, r15, 0x50
-/* 814569E0 | 4B FF 45 99 */	bl CHANSVm_8144AF78
+/* 814569E0 | 4B FF 45 99 */	bl VmPopObject
 /* 814569E4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 814569E8 | 7C 6E 1B 78 */	mr r14, r3
 /* 814569EC | 40 82 0C 64 */	bne .L_81457650
@@ -14709,13 +14709,13 @@
 .L_814569F4:
 /* 814569F4 | 7D E3 7B 78 */	mr r3, r15
 /* 814569F8 | 38 8F 00 50 */	addi r4, r15, 0x50
-/* 814569FC | 4B FF 41 59 */	bl CHANSVm_8144AB54
+/* 814569FC | 4B FF 41 59 */	bl CHANSVmDeleteObject
 /* 81456A00 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456A04 | 7C 6E 1B 78 */	mr r14, r3
 /* 81456A08 | 40 82 00 14 */	bne .L_81456A1C
 /* 81456A0C | 7D E3 7B 78 */	mr r3, r15
 /* 81456A10 | 38 80 00 00 */	li r4, 0x0
-/* 81456A14 | 4B FF EE 79 */	bl CHANSVm_8145588C
+/* 81456A14 | 4B FF EE 79 */	bl VmReturnWithValue
 /* 81456A18 | 7C 6E 1B 78 */	mr r14, r3
 .L_81456A1C:
 /* 81456A1C | 3A A0 00 00 */	li r21, 0x0
@@ -14723,7 +14723,7 @@
 .L_81456A24:
 /* 81456A24 | 7D E3 7B 78 */	mr r3, r15
 /* 81456A28 | 38 80 00 00 */	li r4, 0x0
-/* 81456A2C | 4B FF EE 61 */	bl CHANSVm_8145588C
+/* 81456A2C | 4B FF EE 61 */	bl VmReturnWithValue
 /* 81456A30 | 7C 6E 1B 78 */	mr r14, r3
 /* 81456A34 | 3A A0 00 00 */	li r21, 0x0
 /* 81456A38 | 48 00 0C 18 */	b .L_81457650
@@ -14763,7 +14763,7 @@
 /* 81456AAC | 7D C3 73 78 */	mr r3, r14
 /* 81456AB0 | 38 A1 00 18 */	addi r5, r1, 0x18
 /* 81456AB4 | 38 80 00 00 */	li r4, 0x0
-/* 81456AB8 | 4B FF 47 91 */	bl CHANSVm_8144B248
+/* 81456AB8 | 4B FF 47 91 */	bl VmParseInt
 /* 81456ABC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456AC0 | 40 82 00 18 */	bne .L_81456AD8
 /* 81456AC4 | 93 A1 00 1C */	stw r29, 0x1c(r1)
@@ -14786,7 +14786,7 @@
 /* 81456AFC | 39 CF 00 50 */	addi r14, r15, 0x50
 /* 81456B00 | 38 61 00 08 */	addi r3, r1, 0x8
 /* 81456B04 | 7D C4 73 78 */	mr r4, r14
-/* 81456B08 | 4B FF 5A A5 */	bl CHANSVm_8144C5AC
+/* 81456B08 | 4B FF 5A A5 */	bl CHANSVmGetBoolean
 /* 81456B0C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456B10 | 40 82 00 20 */	bne .L_81456B30
 /* 81456B14 | 80 01 00 08 */	lwz r0, 0x8(r1)
@@ -14825,14 +14825,14 @@
 /* 81456B90 | 40 82 0A C0 */	bne .L_81457650
 /* 81456B94 | 7D E3 7B 78 */	mr r3, r15
 /* 81456B98 | 38 81 00 50 */	addi r4, r1, 0x50
-/* 81456B9C | 4B FF 3F B9 */	bl CHANSVm_8144AB54
+/* 81456B9C | 4B FF 3F B9 */	bl CHANSVmDeleteObject
 /* 81456BA0 | 7C 6E 1B 78 */	mr r14, r3
 /* 81456BA4 | 48 00 0A AC */	b .L_81457650
 .L_81456BA8:
 /* 81456BA8 | 7D E3 7B 78 */	mr r3, r15
 /* 81456BAC | 38 80 00 01 */	li r4, 0x1
 /* 81456BB0 | 38 A0 00 04 */	li r5, 0x4
-/* 81456BB4 | 4B FF F1 A1 */	bl CHANSVm_81455D54
+/* 81456BB4 | 4B FF F1 A1 */	bl VmGetOperandp
 /* 81456BB8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456BBC | 40 82 00 0C */	bne .L_81456BC8
 /* 81456BC0 | 38 60 FC 1D */	li r3, -0x3e3
@@ -14842,7 +14842,7 @@
 /* 81456BCC | 38 80 00 04 */	li r4, 0x4
 /* 81456BD0 | 38 A0 00 00 */	li r5, 0x0
 /* 81456BD4 | 38 C0 00 00 */	li r6, 0x0
-/* 81456BD8 | 4B FF F3 09 */	bl CHANSVm_81455EE0
+/* 81456BD8 | 4B FF F3 09 */	bl VmCallMethod
 /* 81456BDC | 7C 6E 1B 78 */	mr r14, r3
 /* 81456BE0 | 3A A0 00 00 */	li r21, 0x0
 /* 81456BE4 | 48 00 0A 6C */	b .L_81457650
@@ -14861,7 +14861,7 @@
 /* 81456C08 | 7D E3 7B 78 */	mr r3, r15
 /* 81456C0C | 38 80 00 01 */	li r4, 0x1
 /* 81456C10 | 38 A0 00 02 */	li r5, 0x2
-/* 81456C14 | 4B FF F1 41 */	bl CHANSVm_81455D54
+/* 81456C14 | 4B FF F1 41 */	bl VmGetOperandp
 /* 81456C18 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456C1C | 40 82 00 0C */	bne .L_81456C28
 /* 81456C20 | 38 60 FC 1D */	li r3, -0x3e3
@@ -14871,7 +14871,7 @@
 /* 81456C2C | 7D C6 73 78 */	mr r6, r14
 /* 81456C30 | 38 80 00 02 */	li r4, 0x2
 /* 81456C34 | 38 A0 00 01 */	li r5, 0x1
-/* 81456C38 | 4B FF F2 A9 */	bl CHANSVm_81455EE0
+/* 81456C38 | 4B FF F2 A9 */	bl VmCallMethod
 /* 81456C3C | 7C 6E 1B 78 */	mr r14, r3
 /* 81456C40 | 3A A0 00 00 */	li r21, 0x0
 /* 81456C44 | 48 00 0A 0C */	b .L_81457650
@@ -14879,7 +14879,7 @@
 /* 81456C48 | 7D E3 7B 78 */	mr r3, r15
 /* 81456C4C | 38 80 00 01 */	li r4, 0x1
 /* 81456C50 | 38 A0 00 03 */	li r5, 0x3
-/* 81456C54 | 4B FF F1 01 */	bl CHANSVm_81455D54
+/* 81456C54 | 4B FF F1 01 */	bl VmGetOperandp
 /* 81456C58 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456C5C | 40 82 00 0C */	bne .L_81456C68
 /* 81456C60 | 38 60 FC 1D */	li r3, -0x3e3
@@ -14893,7 +14893,7 @@
 /* 81456C7C | 38 A0 00 02 */	li r5, 0x2
 .L_81456C80:
 /* 81456C80 | 38 C0 00 00 */	li r6, 0x0
-/* 81456C84 | 4B FF F2 5D */	bl CHANSVm_81455EE0
+/* 81456C84 | 4B FF F2 5D */	bl VmCallMethod
 /* 81456C88 | 7C 6E 1B 78 */	mr r14, r3
 /* 81456C8C | 3A A0 00 00 */	li r21, 0x0
 /* 81456C90 | 48 00 09 C0 */	b .L_81457650
@@ -14911,7 +14911,7 @@
 /* 81456CBC | 41 82 09 94 */	beq .L_81457650
 /* 81456CC0 | 7D E3 7B 78 */	mr r3, r15
 /* 81456CC4 | 7E 24 8B 78 */	mr r4, r17
-/* 81456CC8 | 4B FF 42 B1 */	bl CHANSVm_8144AF78
+/* 81456CC8 | 4B FF 42 B1 */	bl VmPopObject
 /* 81456CCC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456CD0 | 7C 6E 1B 78 */	mr r14, r3
 /* 81456CD4 | 40 82 09 7C */	bne .L_81457650
@@ -14929,7 +14929,7 @@
 /* 81456D04 | 40 82 09 4C */	bne .L_81457650
 /* 81456D08 | 7D E3 7B 78 */	mr r3, r15
 /* 81456D0C | 38 81 00 40 */	addi r4, r1, 0x40
-/* 81456D10 | 4B FF 3E 45 */	bl CHANSVm_8144AB54
+/* 81456D10 | 4B FF 3E 45 */	bl CHANSVmDeleteObject
 /* 81456D14 | 7C 6E 1B 78 */	mr r14, r3
 /* 81456D18 | 48 00 09 38 */	b .L_81457650
 .L_81456D1C:
@@ -14937,7 +14937,7 @@
 /* 81456D20 | 3A A0 00 03 */	li r21, 0x3
 /* 81456D24 | 38 80 00 01 */	li r4, 0x1
 /* 81456D28 | 38 A0 00 03 */	li r5, 0x3
-/* 81456D2C | 4B FF F0 29 */	bl CHANSVm_81455D54
+/* 81456D2C | 4B FF F0 29 */	bl VmGetOperandp
 /* 81456D30 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456D34 | 7C 71 1B 78 */	mr r17, r3
 /* 81456D38 | 40 82 00 0C */	bne .L_81456D44
@@ -14947,7 +14947,7 @@
 /* 81456D44 | 39 CF 00 50 */	addi r14, r15, 0x50
 /* 81456D48 | 7D E3 7B 78 */	mr r3, r15
 /* 81456D4C | 7D C4 73 78 */	mr r4, r14
-/* 81456D50 | 4B FF 3E 05 */	bl CHANSVm_8144AB54
+/* 81456D50 | 4B FF 3E 05 */	bl CHANSVmDeleteObject
 /* 81456D54 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456D58 | 40 82 00 60 */	bne .L_81456DB8
 /* 81456D5C | 80 AF 00 60 */	lwz r5, 0x60(r15)
@@ -14989,7 +14989,7 @@
 /* 81456DDC | 41 82 00 DC */	beq .L_81456EB8
 /* 81456DE0 | 7D E3 7B 78 */	mr r3, r15
 /* 81456DE4 | 7E 24 8B 78 */	mr r4, r17
-/* 81456DE8 | 4B FF 41 91 */	bl CHANSVm_8144AF78
+/* 81456DE8 | 4B FF 41 91 */	bl VmPopObject
 /* 81456DEC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456DF0 | 7C 6E 1B 78 */	mr r14, r3
 /* 81456DF4 | 40 82 00 C4 */	bne .L_81456EB8
@@ -15032,7 +15032,7 @@
 /* 81456E78 | 7F 03 C3 78 */	mr r3, r24
 /* 81456E7C | 38 A1 00 10 */	addi r5, r1, 0x10
 /* 81456E80 | 38 80 00 0A */	li r4, 0xa
-/* 81456E84 | 4B FF 43 C5 */	bl CHANSVm_8144B248
+/* 81456E84 | 4B FF 43 C5 */	bl VmParseInt
 /* 81456E88 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456E8C | 41 82 00 28 */	beq .L_81456EB4
 /* 81456E90 | 80 81 00 14 */	lwz r4, 0x14(r1)
@@ -15054,7 +15054,7 @@
 /* 81456EC8 | 7D E3 7B 78 */	mr r3, r15
 /* 81456ECC | 7F 04 C3 78 */	mr r4, r24
 /* 81456ED0 | 98 11 00 08 */	stb r0, 0x8(r17)
-/* 81456ED4 | 4B FF 3C 81 */	bl CHANSVm_8144AB54
+/* 81456ED4 | 4B FF 3C 81 */	bl CHANSVmDeleteObject
 /* 81456ED8 | 7C 6E 1B 78 */	mr r14, r3
 /* 81456EDC | 48 00 07 74 */	b .L_81457650
 .L_81456EE0:
@@ -15062,7 +15062,7 @@
 /* 81456EE4 | 3A A0 00 05 */	li r21, 0x5
 /* 81456EE8 | 38 80 00 01 */	li r4, 0x1
 /* 81456EEC | 38 A0 00 05 */	li r5, 0x5
-/* 81456EF0 | 4B FF EE 65 */	bl CHANSVm_81455D54
+/* 81456EF0 | 4B FF EE 65 */	bl VmGetOperandp
 /* 81456EF4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456EF8 | 7C 76 1B 78 */	mr r22, r3
 /* 81456EFC | 40 82 00 0C */	bne .L_81456F08
@@ -15129,7 +15129,7 @@
 /* 81456FD0 | 7D E3 7B 78 */	mr r3, r15
 /* 81456FD4 | 7E 24 8B 78 */	mr r4, r17
 /* 81456FD8 | 3B 40 00 01 */	li r26, 0x1
-/* 81456FDC | 4B FF 3B 79 */	bl CHANSVm_8144AB54
+/* 81456FDC | 4B FF 3B 79 */	bl CHANSVmDeleteObject
 /* 81456FE0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81456FE4 | 40 82 00 8C */	bne .L_81457070
 /* 81456FE8 | 7D E3 7B 78 */	mr r3, r15
@@ -15137,7 +15137,7 @@
 /* 81456FF0 | 38 80 00 00 */	li r4, 0x0
 /* 81456FF4 | 38 C0 00 03 */	li r6, 0x3
 /* 81456FF8 | 38 E0 00 80 */	li r7, 0x80
-/* 81456FFC | 4B FF 3D D9 */	bl CHANSVm_8144ADD4
+/* 81456FFC | 4B FF 3D D9 */	bl CHANSVmNewObject
 /* 81457000 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81457004 | 41 82 00 6C */	beq .L_81457070
 /* 81457008 | 80 71 00 00 */	lwz r3, 0x0(r17)
@@ -15153,7 +15153,7 @@
 /* 81457030 | 7E 43 93 78 */	mr r3, r18
 /* 81457034 | 7E 44 93 78 */	mr r4, r18
 /* 81457038 | 7D C5 73 78 */	mr r5, r14
-/* 8145703C | 4B FF 40 1D */	bl CHANSVm_8144B058
+/* 8145703C | 4B FF 40 1D */	bl VmStrToU16FromU8
 /* 81457040 | 80 71 00 00 */	lwz r3, 0x0(r17)
 /* 81457044 | 55 C0 08 3C */	slwi r0, r14, 1
 /* 81457048 | 90 03 00 04 */	stw r0, 0x4(r3)
@@ -15213,7 +15213,7 @@
 /* 814570FC | 3A A0 00 03 */	li r21, 0x3
 /* 81457100 | 38 80 00 01 */	li r4, 0x1
 /* 81457104 | 38 A0 00 03 */	li r5, 0x3
-/* 81457108 | 4B FF EC 4D */	bl CHANSVm_81455D54
+/* 81457108 | 4B FF EC 4D */	bl VmGetOperandp
 /* 8145710C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81457110 | 40 82 00 0C */	bne .L_8145711C
 /* 81457114 | 38 60 FC 1D */	li r3, -0x3e3
@@ -15225,14 +15225,14 @@
 /* 81457128 | 7D E3 7B 78 */	mr r3, r15
 /* 8145712C | 7D C4 73 78 */	mr r4, r14
 /* 81457130 | 50 11 44 2E */	rlwimi r17, r0, 8, 16, 23
-/* 81457134 | 4B FF 3A 21 */	bl CHANSVm_8144AB54
+/* 81457134 | 4B FF 3A 21 */	bl CHANSVmDeleteObject
 /* 81457138 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8145713C | 40 82 00 84 */	bne .L_814571C0
 /* 81457140 | 7D E3 7B 78 */	mr r3, r15
 /* 81457144 | 7E 24 8B 78 */	mr r4, r17
 /* 81457148 | 7E 25 8B 78 */	mr r5, r17
 /* 8145714C | 38 C0 00 00 */	li r6, 0x0
-/* 81457150 | 4B FF E5 91 */	bl CHANSVm_814556E0
+/* 81457150 | 4B FF E5 91 */	bl VmPushFuncReturnInfo
 /* 81457154 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81457158 | 40 82 00 68 */	bne .L_814571C0
 /* 8145715C | 80 CF 00 40 */	lwz r6, 0x40(r15)
@@ -15261,7 +15261,7 @@
 .L_814571B4:
 /* 814571B4 | 7D E3 7B 78 */	mr r3, r15
 /* 814571B8 | 38 80 00 00 */	li r4, 0x0
-/* 814571BC | 4B FF E6 D1 */	bl CHANSVm_8145588C
+/* 814571BC | 4B FF E6 D1 */	bl VmReturnWithValue
 .L_814571C0:
 /* 814571C0 | 7C 6E 1B 78 */	mr r14, r3
 /* 814571C4 | 48 00 04 8C */	b .L_81457650
@@ -15269,7 +15269,7 @@
 /* 814571C8 | 7D E3 7B 78 */	mr r3, r15
 /* 814571CC | 38 80 00 01 */	li r4, 0x1
 /* 814571D0 | 38 A0 00 04 */	li r5, 0x4
-/* 814571D4 | 4B FF EB 81 */	bl CHANSVm_81455D54
+/* 814571D4 | 4B FF EB 81 */	bl VmGetOperandp
 /* 814571D8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 814571DC | 40 82 00 0C */	bne .L_814571E8
 /* 814571E0 | 38 60 FC 1D */	li r3, -0x3e3
@@ -15323,7 +15323,7 @@
 /* 81457284 | 3A A0 00 03 */	li r21, 0x3
 /* 81457288 | 38 80 00 01 */	li r4, 0x1
 /* 8145728C | 38 A0 00 03 */	li r5, 0x3
-/* 81457290 | 4B FF EA C5 */	bl CHANSVm_81455D54
+/* 81457290 | 4B FF EA C5 */	bl VmGetOperandp
 /* 81457294 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81457298 | 7C 65 1B 78 */	mr r5, r3
 /* 8145729C | 40 82 00 0C */	bne .L_814572A8
@@ -15338,7 +15338,7 @@
 /* 814572BC | 4B FF E3 99 */	bl CHANSVm_81455654
 /* 814572C0 | 7C 64 1B 78 */	mr r4, r3
 /* 814572C4 | 7D E3 7B 78 */	mr r3, r15
-/* 814572C8 | 4B FF EB 99 */	bl CHANSVm_81455E60
+/* 814572C8 | 4B FF EB 99 */	bl VmDelCommon
 /* 814572CC | 7C 6E 1B 78 */	mr r14, r3
 /* 814572D0 | 48 00 03 80 */	b .L_81457650
 .L_814572D4:
@@ -15353,7 +15353,7 @@
 /* 814572F4 | 4B FF 5F 6D */	bl CHANSVm_8144D260
 /* 814572F8 | 7C 64 1B 78 */	mr r4, r3
 /* 814572FC | 7D E3 7B 78 */	mr r3, r15
-/* 81457300 | 4B FF EB 61 */	bl CHANSVm_81455E60
+/* 81457300 | 4B FF EB 61 */	bl VmDelCommon
 .L_81457304:
 /* 81457304 | 7C 6E 1B 78 */	mr r14, r3
 /* 81457308 | 48 00 03 48 */	b .L_81457650
@@ -15367,7 +15367,7 @@
 /* 81457320 | 3A A0 00 02 */	li r21, 0x2
 /* 81457324 | 38 80 00 00 */	li r4, 0x0
 /* 81457328 | 38 A0 00 02 */	li r5, 0x2
-/* 8145732C | 4B FF EA 29 */	bl CHANSVm_81455D54
+/* 8145732C | 4B FF EA 29 */	bl VmGetOperandp
 /* 81457330 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81457334 | 40 82 00 0C */	bne .L_81457340
 /* 81457338 | 38 60 FC 1D */	li r3, -0x3e3
@@ -15409,7 +15409,7 @@
 /* 814573B4 | 3A A0 00 02 */	li r21, 0x2
 /* 814573B8 | 38 80 00 00 */	li r4, 0x0
 /* 814573BC | 38 A0 00 02 */	li r5, 0x2
-/* 814573C0 | 4B FF E9 95 */	bl CHANSVm_81455D54
+/* 814573C0 | 4B FF E9 95 */	bl VmGetOperandp
 /* 814573C4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 814573C8 | 7C 71 1B 78 */	mr r17, r3
 /* 814573CC | 40 82 00 0C */	bne .L_814573D8
@@ -15530,7 +15530,7 @@
 /* 81457560 | 41 82 00 10 */	beq .L_81457570
 /* 81457564 | 7D E3 7B 78 */	mr r3, r15
 /* 81457568 | 38 80 00 00 */	li r4, 0x0
-/* 8145756C | 4B FF 3A 0D */	bl CHANSVm_8144AF78
+/* 8145756C | 4B FF 3A 0D */	bl VmPopObject
 .L_81457570:
 /* 81457570 | 92 E1 00 0C */	stw r23, 0xc(r1)
 .L_81457574:
@@ -15539,7 +15539,7 @@
 .L_8145757C:
 /* 8145757C | 38 61 00 0C */	addi r3, r1, 0xc
 /* 81457580 | 38 8F 00 50 */	addi r4, r15, 0x50
-/* 81457584 | 4B FF 50 29 */	bl CHANSVm_8144C5AC
+/* 81457584 | 4B FF 50 29 */	bl CHANSVmGetBoolean
 /* 81457588 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8145758C | 7C 6E 1B 78 */	mr r14, r3
 /* 81457590 | 40 82 00 44 */	bne .L_814575D4
@@ -15551,7 +15551,7 @@
 .L_814575A8:
 /* 814575A8 | 38 61 00 0C */	addi r3, r1, 0xc
 /* 814575AC | 38 8F 00 50 */	addi r4, r15, 0x50
-/* 814575B0 | 4B FF 4F FD */	bl CHANSVm_8144C5AC
+/* 814575B0 | 4B FF 4F FD */	bl CHANSVmGetBoolean
 /* 814575B4 | 7C 6E 1B 78 */	mr r14, r3
 /* 814575B8 | 48 00 00 1C */	b .L_814575D4
 .L_814575BC:
@@ -15650,12 +15650,12 @@
 .balign 8
 
 # .rodata:0x0 | 0x81616C78 | size: 0x10
-.obj lbl_81616C78, global
+.obj CHANSVmConstStringObjectUndefined, global
 	.4byte lbl_81669070
 	.4byte 0x00000012
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81616C78
+.endobj CHANSVmConstStringObjectUndefined
 
 # .rodata:0x10 | 0x81616C88 | size: 0x10
 .obj lbl_81616C88, global
@@ -15690,16 +15690,16 @@
 .endobj lbl_81616CB8
 
 # .rodata:0x50 | 0x81616CC8 | size: 0x10
-.obj lbl_81616CC8, global
+.obj CHANSVmConstStringDataEmpty, global
 	.4byte lbl_81697582
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81616CC8
+.endobj CHANSVmConstStringDataEmpty
 
 # .rodata:0x60 | 0x81616CD8 | size: 0x50
 .obj lbl_81616CD8, global
-	.4byte lbl_81616C78
+	.4byte CHANSVmConstStringObjectUndefined
 	.4byte 0x00000000
 	.4byte 0x03800100
 	.4byte 0x00000000
@@ -15734,42 +15734,42 @@
 .endobj lbl_81616D28
 
 # .rodata:0xD0 | 0x81616D48 | size: 0x188
-.obj lbl_81616D48, global
+.obj VmTypeConvertFuncTbl, global
 	.4byte 0x00000000
-	.4byte CHANSVm_8144B820
-	.4byte CHANSVm_8144B820
-	.4byte CHANSVm_8144B820
-	.4byte CHANSVm_8144B820
-	.4byte CHANSVm_8144B820
-	.4byte CHANSVm_8144B820
+	.4byte CHANSVmConvertObjectTypeError
+	.4byte CHANSVmConvertObjectTypeError
+	.4byte CHANSVmConvertObjectTypeError
+	.4byte CHANSVmConvertObjectTypeError
+	.4byte CHANSVmConvertObjectTypeError
+	.4byte CHANSVmConvertObjectTypeError
 	.4byte 0x00000000
 	.4byte CHANSVm_8144B30C
-	.4byte CHANSVm_8144B3B8
-	.4byte CHANSVm_8144B428
-	.4byte CHANSVm_8144B820
+	.4byte CHANSVmConvertToIntFromStr
+	.4byte CHANSVmConvertToIntFromArray
+	.4byte CHANSVmConvertObjectTypeError
 	.4byte CHANSVm_8144B430
 	.4byte CHANSVm_8144B470
 	.4byte 0x00000000
 	.4byte CHANSVm_8144B4D4
-	.4byte CHANSVm_8144B820
-	.4byte CHANSVm_8144B820
+	.4byte CHANSVmConvertObjectTypeError
+	.4byte CHANSVmConvertObjectTypeError
 	.4byte CHANSVm_8144B620
 	.4byte CHANSVm_8144B684
 	.4byte CHANSVm_8144B734
 	.4byte 0x00000000
 	.4byte CHANSVm_8144B810
-	.4byte CHANSVm_8144B820
-	.4byte CHANSVm_8144B820
-	.4byte CHANSVm_8144B820
-	.4byte CHANSVm_8144B820
-	.4byte CHANSVm_8144B820
+	.4byte CHANSVmConvertObjectTypeError
+	.4byte CHANSVmConvertObjectTypeError
+	.4byte CHANSVmConvertObjectTypeError
+	.4byte CHANSVmConvertObjectTypeError
+	.4byte CHANSVmConvertObjectTypeError
 	.4byte 0x00000000
-	.4byte CHANSVm_8144B820
-	.4byte CHANSVm_8144B820
-	.4byte CHANSVm_8144B820
-	.4byte CHANSVm_8144B820
-	.4byte CHANSVm_8144B820
-	.4byte CHANSVm_8144B820
+	.4byte CHANSVmConvertObjectTypeError
+	.4byte CHANSVmConvertObjectTypeError
+	.4byte CHANSVmConvertObjectTypeError
+	.4byte CHANSVmConvertObjectTypeError
+	.4byte CHANSVmConvertObjectTypeError
+	.4byte CHANSVmConvertObjectTypeError
 	.4byte 0x00000000
 	.4byte 0x00020203
 	.4byte 0x00000201
@@ -15817,23 +15817,23 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte lbl_81697596
-	.4byte CHANSGetExport_length
-	.4byte CHANSSetExport_length
+	.4byte VmGetProp_length
+	.4byte VmSetProp_length
 	.4byte lbl_8169759D
-	.4byte CHANSExport_join
+	.4byte VmMethod_join
 	.4byte lbl_816975A2
-	.4byte CHANSExport_new2d
+	.4byte VmMethod_new2d
 	.4byte lbl_816975A8
-	.4byte CHANSExport_pop
+	.4byte VmMethod_pop
 	.4byte lbl_816975AC
-	.4byte CHANSExport_push
+	.4byte VmMethod_push
 	.4byte lbl_816975B1
-	.4byte CHANSExport_shift
+	.4byte VmMethod_shift
 	.4byte lbl_816975B7
-	.4byte CHANSExport_slice
+	.4byte VmMethod_slice
 	.4byte lbl_816975BD
-	.4byte CHANSExport_unshift
-.endobj lbl_81616D48
+	.4byte VmMethod_unshift
+.endobj VmTypeConvertFuncTbl
 
 # .rodata:0x258 | 0x81616ED0 | size: 0x340
 .obj lbl_81616ED0, global
@@ -15842,208 +15842,208 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte lbl_81697618
-	.4byte CHANSExport_getDate
+	.4byte VmMethod_getDate
 	.4byte lbl_81697620
-	.4byte CHANSExport_getDay
+	.4byte VmMethod_getDay
 	.4byte lbl_81669C0F
-	.4byte CHANSExport_getFullYear
+	.4byte VmMethod_getFullYear
 	.4byte lbl_81669C1B
-	.4byte CHANSExport_getHours
+	.4byte VmMethod_getHours
 	.4byte lbl_81669C24
-	.4byte CHANSExport_getMilliseconds
+	.4byte VmMethod_getMilliseconds
 	.4byte lbl_81669C34
-	.4byte CHANSExport_CHANSDFunc_getMinutes
+	.4byte VmMethod_getMinutes
 	.4byte lbl_81669C3F
-	.4byte CHANSExport_getMonth
+	.4byte VmMethod_getMonth
 	.4byte lbl_81669C48
-	.4byte CHANSExport_getSeconds
+	.4byte VmMethod_getSeconds
 	.4byte lbl_81697627
-	.4byte CHANSExport_getTime
+	.4byte VmMethod_getTime
 	.4byte lbl_8169762F
-	.4byte CHANSExport_getRTC
+	.4byte VmMethod_getRTC
 	.4byte lbl_81697636
-	.4byte CHANSExport_E
+	.4byte VmMethod_E
 	.4byte 0x00000000
 	.4byte lbl_81697638
-	.4byte CHANSExport_LN10
+	.4byte VmMethod_LN10
 	.4byte 0x00000000
 	.4byte lbl_8169763D
-	.4byte CHANSExport_LBN2
+	.4byte VmMethod_LBN2
 	.4byte 0x00000000
 	.4byte lbl_81697641
-	.4byte CHANSExport_LOG2E
+	.4byte VmMethod_LOG2E
 	.4byte 0x00000000
 	.4byte lbl_81697647
-	.4byte CHANSExport_LOG10E
+	.4byte VmMethod_LOG10E
 	.4byte 0x00000000
 	.4byte lbl_8169764E
-	.4byte CHANSExport_PI
+	.4byte VmMethod_PI
 	.4byte 0x00000000
 	.4byte lbl_81697651
-	.4byte CHANSExport_SQRT1_2
+	.4byte VmMethod_SQRT1_2
 	.4byte 0x00000000
 	.4byte lbl_81697659
-	.4byte CHANSExport_SQRT2
+	.4byte VmMethod_SQRT2
 	.4byte 0x00000000
 	.4byte lbl_8169765F
-	.4byte CHANSExport_abs
+	.4byte VmMethod_abs
 	.4byte lbl_81697663
-	.4byte CHANSExport_acos
+	.4byte VmMethod_acos
 	.4byte lbl_81697668
-	.4byte CHANSExport_asin
+	.4byte VmMethod_asin
 	.4byte lbl_8169766D
-	.4byte CHANSExport_atan
+	.4byte VmMethod_atan
 	.4byte lbl_81697672
-	.4byte CHANSExport_atan2
+	.4byte VmMethod_atan2
 	.4byte lbl_81697678
-	.4byte CHANSExport_ceil
+	.4byte VmMethod_ceil
 	.4byte lbl_8169767D
-	.4byte CHANSExport_cos
+	.4byte VmMethod_cos
 	.4byte lbl_81697681
-	.4byte CHANSExport_exp
+	.4byte VmMethod_exp
 	.4byte lbl_81697685
-	.4byte CHANSExport_floor
+	.4byte VmMethod_floor
 	.4byte lbl_8169768B
-	.4byte CHANSExport_log
+	.4byte VmMethod_log
 	.4byte lbl_8169768F
-	.4byte CHANSExport_max
+	.4byte VmMethod_max
 	.4byte lbl_81697693
-	.4byte CHANSExport_min
+	.4byte VmMethod_min
 	.4byte lbl_81697697
-	.4byte CHANSExport_pow
+	.4byte VmMethod_pow
 	.4byte lbl_8169769B
-	.4byte CHANSExport_random
+	.4byte VmMethod_random
 	.4byte lbl_816976A2
-	.4byte CHANSExport_round
+	.4byte VmMethod_round
 	.4byte lbl_816976A8
-	.4byte CHANSExport_sin
+	.4byte VmMethod_sin
 	.4byte lbl_816976AC
-	.4byte CHANSExport_sqrt
+	.4byte VmMethod_sqrt
 	.4byte lbl_816976B1
-	.4byte CHANSExport_tan
+	.4byte VmMethod_tan
 	.4byte lbl_81697596
-	.4byte CHANSExport_length
+	.4byte VmMethod_length
 	.4byte 0x00000000
 	.4byte lbl_816976B5
-	.4byte CHANSExport_charAt
+	.4byte VmMethod_charAt
 	.4byte lbl_81669DB8
-	.4byte CHANSExport_charCodeAt
+	.4byte VmMethod_charCodeAt
 	.4byte lbl_81669DC3
-	.4byte CHANSExport_pFromCharCode
+	.4byte VmMethod_pFromCharCode
 	.4byte lbl_816976BC
-	.4byte CHANSExport_pFormat
+	.4byte VmMethod_pFormat
 	.4byte lbl_816976C4
-	.4byte CHANSExport_indexOf
+	.4byte VmMethod_indexOf
 	.4byte lbl_81669DD1
-	.4byte CHANSExport_lastIndexOf
+	.4byte VmMethod_lastIndexOf
 	.4byte lbl_816976CC
-	.4byte CHANSExport_replace
+	.4byte VmMethod_replace
 	.4byte lbl_816976D4
-	.4byte CHANSExport_searc
+	.4byte VmMethod_searc
 	.4byte lbl_816975B7
-	.4byte CHANSExport_splice
+	.4byte VmMethod_splice
 	.4byte lbl_816976DB
-	.4byte CHANSExport_split
+	.4byte VmMethod_split
 	.4byte lbl_81669DDD
-	.4byte CHANSExport_toLowerCase
+	.4byte VmMethod_toLowerCase
 	.4byte lbl_81669DE9
-	.4byte CHANSExport_toUpperCase
+	.4byte VmMethod_toUpperCase
 	.4byte lbl_816976EC
-	.4byte CHANSExport_offset
-	.4byte CHANSExport_seek
+	.4byte VmMethod_offset
+	.4byte VmMethod_seek
 	.4byte lbl_81697596
-	.4byte CHANSExport_getLength
-	.4byte CHANSExport_setLength
+	.4byte VmMethod_getLength
+	.4byte VmMethod_setLength
 	.4byte lbl_816976F3
-	.4byte CHANSExport_pCreate
+	.4byte VmMethod_pCreate
 	.4byte lbl_816976FB
-	.4byte CHANSExport_seek
+	.4byte VmMethod_seek
 	.4byte lbl_81697700
-	.4byte CHANSExport_skip
+	.4byte VmMethod_skip
 	.4byte lbl_81697705
-	.4byte CHANSExport_isEqual
+	.4byte VmMethod_isEqual
 	.4byte lbl_81669F98
-	.4byte CHANSExport_getLength
+	.4byte VmMethod_getLength
 	.4byte lbl_81669FA2
-	.4byte CHANSExport_setLength
+	.4byte VmMethod_setLength
 	.4byte lbl_8169770D
-	.4byte CHANSExport_fill
+	.4byte VmMethod_fill
 	.4byte lbl_81697712
-	.4byte CHANSExport_getU8
+	.4byte VmMethod_getU8
 	.4byte lbl_81697718
-	.4byte CHANSExport_getU16
+	.4byte VmMethod_getU16
 	.4byte lbl_8169771F
-	.4byte CHANSExport_getU32
+	.4byte VmMethod_getU32
 	.4byte lbl_81697726
-	.4byte CHANSExport_getS8
+	.4byte VmMethod_getS8
 	.4byte lbl_8169772C
-	.4byte CHANSExport_getS16
+	.4byte VmMethod_getS16
 	.4byte lbl_81697733
-	.4byte CHANSExport_getS32
+	.4byte VmMethod_getS32
 	.4byte lbl_8169773A
-	.4byte CHANSExport_getS64
+	.4byte VmMethod_getS64
 	.4byte lbl_81697741
-	.4byte CHANSExport_setU8
+	.4byte VmMethod_setU8
 	.4byte lbl_81697747
-	.4byte CHANSExport_setU16
+	.4byte VmMethod_setU16
 	.4byte lbl_8169774E
-	.4byte CHANSExport_setU32
+	.4byte VmMethod_setU32
 	.4byte lbl_81697755
-	.4byte CHANSExport_setS8
+	.4byte VmMethod_setS8
 	.4byte lbl_8169775B
-	.4byte CHANSExport_setS16
+	.4byte VmMethod_setS16
 	.4byte lbl_81697762
-	.4byte CHANSExport_setS32
+	.4byte VmMethod_setS32
 	.4byte lbl_81697769
-	.4byte CHANSExport_setS64
+	.4byte VmMethod_setS64
 	.4byte lbl_81669FAC
-	.4byte CHANSExport_getString
+	.4byte VmMethod_getString
 	.4byte lbl_81669FB6
-	.4byte CHANSExport_getWString
+	.4byte VmMethod_getWString
 	.4byte lbl_81669FC1
-	.4byte CHANSExport_setString
+	.4byte VmMethod_setString
 	.4byte lbl_81669FCB
-	.4byte CHANSExport_setWString
+	.4byte VmMethod_setWString
 	.4byte lbl_81697770
-	.4byte CHANSExport_getBlob
+	.4byte VmMethod_getBlob
 	.4byte lbl_81697778
-	.4byte CHANSExport_setBlob
+	.4byte VmMethod_setBlob
 	.4byte lbl_81669FD6
-	.4byte CHANSExport_getHexString
+	.4byte VmMethod_getHexString
 	.4byte lbl_81669FE3
-	.4byte CHANSExport_copyRangeFrom
+	.4byte VmMethod_copyRangeFrom
 	.4byte lbl_81669FF1
-	.4byte CHANSExport_calcSHA1Digest
+	.4byte VmMethod_calcSHA1Digest
 	.4byte lbl_8166A000
-	.4byte CHANSExport_calcMD5Digest
+	.4byte VmMethod_calcMD5Digest
 	.4byte lbl_8166A00E
-	.4byte CHANSExport_calcCRC16
+	.4byte VmMethod_calcCRC16
 	.4byte lbl_8166A018
-	.4byte CHANSExport_calcCRC32
+	.4byte VmMethod_calcCRC32
 	.4byte lbl_8166A022
-	.4byte CHANSExport_calcHMAC
+	.4byte VmMethod_calcHMAC
 	.4byte lbl_8166A02B
-	.4byte CHANSExport_calcRangeSHA1Digest
+	.4byte VmMethod_calcRangeSHA1Digest
 	.4byte lbl_8166A03F
-	.4byte CHANSExport_calcRangeMD5Digest
+	.4byte VmMethod_calcRangeMD5Digest
 	.4byte lbl_8166A052
-	.4byte CHANSExport_calcRangeCRC16
+	.4byte VmMethod_calcRangeCRC16
 	.4byte lbl_8166A061
-	.4byte CHANSExport_calcRangeCRC32
+	.4byte VmMethod_calcRangeCRC32
 	.4byte lbl_8166A070
-	.4byte CHANSExport_calcRangeHMAC
+	.4byte VmMethod_calcRangeHMAC
 	.4byte lbl_81697780
-	.4byte CHANSExport_pack
+	.4byte VmMethod_pack
 	.4byte lbl_81697785
-	.4byte CHANSExport_unpack
+	.4byte VmMethod_unpack
 	.4byte lbl_81697792
-	.4byte CHANSGetExport_width
+	.4byte VmGetProp_width
 	.4byte 0x00000000
 	.4byte lbl_81697798
-	.4byte CHANSGetExport_height
+	.4byte VmGetProp_height
 	.4byte 0x00000000
 	.4byte lbl_8169779F
-	.4byte CHANSGetExport_format
+	.4byte VmGetProp_format
 	.4byte 0x00000000
 .endobj lbl_81616ED0
 
@@ -16112,16 +16112,16 @@
 
 # .data:0x90 | 0x81669100 | size: 0x28
 .obj jumptable_81669100, local
-	.rel CHANSVm_8144B870, .L_8144B890
-	.rel CHANSVm_8144B870, .L_8144B898
-	.rel CHANSVm_8144B870, .L_8144B8A0
-	.rel CHANSVm_8144B870, .L_8144B8A8
-	.rel CHANSVm_8144B870, .L_8144B8B0
-	.rel CHANSVm_8144B870, .L_8144B8C0
-	.rel CHANSVm_8144B870, .L_8144B8C0
-	.rel CHANSVm_8144B870, .L_8144B8B8
-	.rel CHANSVm_8144B870, .L_8144B8B8
-	.rel CHANSVm_8144B870, .L_8144B8B8
+	.rel VmGetEnumedType, .L_8144B890
+	.rel VmGetEnumedType, .L_8144B898
+	.rel VmGetEnumedType, .L_8144B8A0
+	.rel VmGetEnumedType, .L_8144B8A8
+	.rel VmGetEnumedType, .L_8144B8B0
+	.rel VmGetEnumedType, .L_8144B8C0
+	.rel VmGetEnumedType, .L_8144B8C0
+	.rel VmGetEnumedType, .L_8144B8B8
+	.rel VmGetEnumedType, .L_8144B8B8
+	.rel VmGetEnumedType, .L_8144B8B8
 .endobj jumptable_81669100
 
 # .data:0xB8 | 0x81669128 | size: 0x10
@@ -16131,42 +16131,42 @@
 
 # .data:0xC8 | 0x81669138 | size: 0x24
 .obj jumptable_81669138, local
-	.rel CHANSVm_8144C34C, .L_8144C388
-	.rel CHANSVm_8144C34C, .L_8144C390
-	.rel CHANSVm_8144C34C, .L_8144C3BC
-	.rel CHANSVm_8144C34C, .L_8144C3D4
-	.rel CHANSVm_8144C34C, .L_8144C388
-	.rel CHANSVm_8144C34C, .L_8144C430
-	.rel CHANSVm_8144C34C, .L_8144C430
-	.rel CHANSVm_8144C34C, .L_8144C430
-	.rel CHANSVm_8144C34C, .L_8144C388
+	.rel VmCmpLt, .L_8144C388
+	.rel VmCmpLt, .L_8144C390
+	.rel VmCmpLt, .L_8144C3BC
+	.rel VmCmpLt, .L_8144C3D4
+	.rel VmCmpLt, .L_8144C388
+	.rel VmCmpLt, .L_8144C430
+	.rel VmCmpLt, .L_8144C430
+	.rel VmCmpLt, .L_8144C430
+	.rel VmCmpLt, .L_8144C388
 .endobj jumptable_81669138
 
 # .data:0xEC | 0x8166915C | size: 0x24
 .obj jumptable_8166915C, local
-	.rel CHANSVm_8144C478, .L_8144C4B4
-	.rel CHANSVm_8144C478, .L_8144C4BC
-	.rel CHANSVm_8144C478, .L_8144C4EC
-	.rel CHANSVm_8144C478, .L_8144C508
-	.rel CHANSVm_8144C478, .L_8144C4B4
-	.rel CHANSVm_8144C478, .L_8144C564
-	.rel CHANSVm_8144C478, .L_8144C564
-	.rel CHANSVm_8144C478, .L_8144C564
-	.rel CHANSVm_8144C478, .L_8144C4B4
+	.rel VmCmpLeq, .L_8144C4B4
+	.rel VmCmpLeq, .L_8144C4BC
+	.rel VmCmpLeq, .L_8144C4EC
+	.rel VmCmpLeq, .L_8144C508
+	.rel VmCmpLeq, .L_8144C4B4
+	.rel VmCmpLeq, .L_8144C564
+	.rel VmCmpLeq, .L_8144C564
+	.rel VmCmpLeq, .L_8144C564
+	.rel VmCmpLeq, .L_8144C4B4
 .endobj jumptable_8166915C
 
 # .data:0x110 | 0x81669180 | size: 0x28
 .obj jumptable_81669180, local
-	.rel CHANSVm_8144C5AC, .L_8144C5EC
-	.rel CHANSVm_8144C5AC, .L_8144C5F4
-	.rel CHANSVm_8144C5AC, .L_8144C60C
-	.rel CHANSVm_8144C5AC, .L_8144C638
-	.rel CHANSVm_8144C5AC, .L_8144C64C
-	.rel CHANSVm_8144C5AC, .L_8144C654
-	.rel CHANSVm_8144C5AC, .L_8144C654
-	.rel CHANSVm_8144C5AC, .L_8144C64C
-	.rel CHANSVm_8144C5AC, .L_8144C64C
-	.rel CHANSVm_8144C5AC, .L_8144C64C
+	.rel CHANSVmGetBoolean, .L_8144C5EC
+	.rel CHANSVmGetBoolean, .L_8144C5F4
+	.rel CHANSVmGetBoolean, .L_8144C60C
+	.rel CHANSVmGetBoolean, .L_8144C638
+	.rel CHANSVmGetBoolean, .L_8144C64C
+	.rel CHANSVmGetBoolean, .L_8144C654
+	.rel CHANSVmGetBoolean, .L_8144C654
+	.rel CHANSVmGetBoolean, .L_8144C64C
+	.rel CHANSVmGetBoolean, .L_8144C64C
+	.rel CHANSVmGetBoolean, .L_8144C64C
 .endobj jumptable_81669180
 
 # .data:0x138 | 0x816691A8 | size: 0x15
@@ -16567,7 +16567,7 @@
 .endobj lbl_816699A6
 
 # .data:0x954 | 0x816699C4 | size: 0x14E
-.obj chansErrorList, local
+.obj vmErrorList, local
 	.4byte lbl_816691A8
 	.4byte lbl_816691BD
 	.4byte lbl_816691CF
@@ -16652,7 +16652,7 @@
 	.4byte 0x28756E6B
 	.4byte 0x6E6F776E
 	.2byte 0x2900
-.endobj chansErrorList
+.endobj vmErrorList
 
 # .data:0xAA2 | 0x81669B12 | size: 0x1B
 .obj lbl_81669B12, global
@@ -16894,7 +16894,7 @@
 .endobj lbl_81669DF5
 
 # .data:0xD98 | 0x81669E08 | size: 0x190
-.obj lbl_81669E08, global
+.obj vmBlobPackFormatList, global
 	.4byte 0x00000044
 	.4byte 0x00000001
 	.4byte 0x00000004
@@ -16995,7 +16995,7 @@
 	.4byte 0x00000001
 	.4byte 0x00000002
 	.4byte 0x00000000
-.endobj lbl_81669E08
+.endobj vmBlobPackFormatList
 
 # .data:0xF28 | 0x81669F98 | size: 0xA
 .obj lbl_81669F98, global
@@ -17354,7 +17354,7 @@
 # .sdata2:0xA4 | 0x81694FAC | size: 0xC
 .obj lbl_81694FAC, global
 	.4byte lbl_816977A6
-	.4byte CHANSExport_write
+	.4byte VmMethod_write
 	.4byte 0x00000000
 .endobj lbl_81694FAC
 
@@ -17913,9 +17913,9 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698D50 | size: 0x4
-.obj lbl_81698D50, global
+.obj VmImageCtorCallback, global
 	.skip 0x4
-.endobj lbl_81698D50
+.endobj VmImageCtorCallback
 
 # .sbss:0x4 | 0x81698D54 | size: 0x4
 .obj lbl_81698D54, global

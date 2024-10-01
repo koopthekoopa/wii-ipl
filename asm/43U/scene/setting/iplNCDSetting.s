@@ -69,7 +69,7 @@
 # .text:0x58 | 0x813FA020 | size: 0x8
 # ipl::ncd::NCDSetting::initSetID(unsigned short)
 .fn initSetID__Q33ipl3ncd10NCDSettingFUs, global
-/* 813FA020 | B0 6D AB B0 */	sth r3, lbl_81698BF0@sda21(r0)
+/* 813FA020 | B0 6D AB B0 */	sth r3, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA024 | 4E 80 00 20 */	blr
 .endfn initSetID__Q33ipl3ncd10NCDSettingFUs
 
@@ -131,7 +131,7 @@
 # .text:0x10C | 0x813FA0D4 | size: 0x8
 # ipl::ncd::NCDSetting::checkThisFlag()
 .fn checkThisFlag__Q33ipl3ncd10NCDSettingFv, global
-/* 813FA0D4 | A0 6D AB B0 */	lhz r3, lbl_81698BF0@sda21(r0)
+/* 813FA0D4 | A0 6D AB B0 */	lhz r3, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA0D8 | 4B FF FF 50 */	b checkFlag__Q33ipl3ncd10NCDSettingFi
 .endfn checkThisFlag__Q33ipl3ncd10NCDSettingFv
 
@@ -166,7 +166,7 @@
 # .text:0x164 | 0x813FA12C | size: 0x20
 # ipl::ncd::NCDSetting::checkConnectTestFlag()
 .fn checkConnectTestFlag__Q33ipl3ncd10NCDSettingFv, global
-/* 813FA12C | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FA12C | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA130 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FA134 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FA138 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -179,7 +179,7 @@
 # .text:0x184 | 0x813FA14C | size: 0x20
 # ipl::ncd::NCDSetting::checkDHCPFlag()
 .fn checkDHCPFlag__Q33ipl3ncd10NCDSettingFv, global
-/* 813FA14C | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FA14C | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA150 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FA154 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FA158 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -197,7 +197,7 @@
 /* 813FA174 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FA178 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813FA17C | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
-/* 813FA180 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FA180 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA184 | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FA188 | 7C 63 02 14 */	add r3, r3, r0
 /* 813FA18C | 88 63 00 08 */	lbz r3, 0x8(r3)
@@ -226,7 +226,7 @@
 /* 813FA1CC | 4B FF FF A1 */	bl checkDNSFlag__Q33ipl3ncd10NCDSettingFv
 /* 813FA1D0 | 54 60 06 3F */	clrlwi. r0, r3, 24
 /* 813FA1D4 | 41 82 00 48 */	beq .L_813FA21C
-/* 813FA1D8 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FA1D8 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA1DC | 3F E0 81 0C */	lis r31, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FA1E0 | 3B FF 85 B8 */	addi r31, r31, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FA1E4 | 38 80 00 00 */	li r4, 0x0
@@ -235,7 +235,7 @@
 /* 813FA1F0 | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FA1F4 | 38 63 00 18 */	addi r3, r3, 0x18
 /* 813FA1F8 | 4B F3 61 3D */	bl memset
-/* 813FA1FC | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FA1FC | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA200 | 38 80 00 00 */	li r4, 0x0
 /* 813FA204 | 38 A0 00 04 */	li r5, 0x4
 /* 813FA208 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -244,7 +244,7 @@
 /* 813FA214 | 4B F3 61 21 */	bl memset
 /* 813FA218 | 48 00 00 88 */	b .L_813FA2A0
 .L_813FA21C:
-/* 813FA21C | A0 8D AB B0 */	lhz r4, lbl_81698BF0@sda21(r0)
+/* 813FA21C | A0 8D AB B0 */	lhz r4, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA220 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FA224 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FA228 | 38 00 00 04 */	li r0, 0x4
@@ -285,7 +285,7 @@
 /* 813FA2A0 | 4B FF FE AD */	bl checkDHCPFlag__Q33ipl3ncd10NCDSettingFv
 /* 813FA2A4 | 54 60 06 3F */	clrlwi. r0, r3, 24
 /* 813FA2A8 | 41 82 00 60 */	beq .L_813FA308
-/* 813FA2AC | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FA2AC | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA2B0 | 3F E0 81 0C */	lis r31, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FA2B4 | 3B FF 85 B8 */	addi r31, r31, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FA2B8 | 38 80 00 00 */	li r4, 0x0
@@ -294,14 +294,14 @@
 /* 813FA2C4 | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FA2C8 | 38 63 00 0C */	addi r3, r3, 0xc
 /* 813FA2CC | 4B F3 60 69 */	bl memset
-/* 813FA2D0 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FA2D0 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA2D4 | 38 80 00 00 */	li r4, 0x0
 /* 813FA2D8 | 38 A0 00 04 */	li r5, 0x4
 /* 813FA2DC | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FA2E0 | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FA2E4 | 38 63 00 10 */	addi r3, r3, 0x10
 /* 813FA2E8 | 4B F3 60 4D */	bl memset
-/* 813FA2EC | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FA2EC | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA2F0 | 38 80 00 00 */	li r4, 0x0
 /* 813FA2F4 | 38 A0 00 04 */	li r5, 0x4
 /* 813FA2F8 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -319,7 +319,7 @@
 # .text:0x354 | 0x813FA31C | size: 0x1C
 # ipl::ncd::NCDSetting::checkProxyFlag()
 .fn checkProxyFlag__Q33ipl3ncd10NCDSettingFv, global
-/* 813FA31C | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FA31C | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA320 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FA324 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FA328 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -331,7 +331,7 @@
 # .text:0x370 | 0x813FA338 | size: 0x1C
 # ipl::ncd::NCDSetting::checkBasic()
 .fn checkBasic__Q33ipl3ncd10NCDSettingFv, global
-/* 813FA338 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FA338 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA33C | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FA340 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FA344 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -343,7 +343,7 @@
 # .text:0x38C | 0x813FA354 | size: 0x2C
 # ipl::ncd::NCDSetting::checkChangeEnable()
 .fn checkChangeEnable__Q33ipl3ncd10NCDSettingFv, global
-/* 813FA354 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FA354 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA358 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FA35C | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FA360 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -534,7 +534,7 @@
 /* 813FA5C8 | 7F C5 F3 78 */	mr r5, r30
 /* 813FA5CC | 38 81 00 08 */	addi r4, r1, 0x8
 /* 813FA5D0 | 4B F3 5C 61 */	bl memcpy
-/* 813FA5D4 | A0 6D AB B0 */	lhz r3, lbl_81698BF0@sda21(r0)
+/* 813FA5D4 | A0 6D AB B0 */	lhz r3, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA5D8 | 3C A0 81 0C */	lis r5, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FA5DC | 38 A5 85 B8 */	addi r5, r5, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FA5E0 | 38 C0 00 01 */	li r6, 0x1
@@ -553,7 +553,7 @@
 /* 813FA60C | 2C 1F 00 0D */	cmpwi r31, 0xd
 /* 813FA610 | 40 82 00 24 */	bne .L_813FA634
 .L_813FA614:
-/* 813FA614 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FA614 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA618 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FA61C | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FA620 | 38 80 00 00 */	li r4, 0x0
@@ -816,7 +816,7 @@
 /* 813FA938 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FA93C | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813FA940 | 41 82 00 68 */	beq .L_813FA9A8
-/* 813FA944 | A0 ED AB B0 */	lhz r7, lbl_81698BF0@sda21(r0)
+/* 813FA944 | A0 ED AB B0 */	lhz r7, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA948 | 3C C0 81 0C */	lis r6, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FA94C | 38 C6 85 B8 */	addi r6, r6, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FA950 | 38 00 00 03 */	li r0, 0x3
@@ -861,7 +861,7 @@
 .fn setDHCPFlag__Q33ipl3ncd10NCDSettingFUc, global
 /* 813FA9CC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FA9D0 | 41 82 00 28 */	beq .L_813FA9F8
-/* 813FA9D4 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FA9D4 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA9D8 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FA9DC | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FA9E0 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -871,7 +871,7 @@
 /* 813FA9F0 | 98 03 00 08 */	stb r0, 0x8(r3)
 /* 813FA9F4 | 4E 80 00 20 */	blr
 .L_813FA9F8:
-/* 813FA9F8 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FA9F8 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FA9FC | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FAA00 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FAA04 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -887,7 +887,7 @@
 .fn setDNSFlag__Q33ipl3ncd10NCDSettingFUc, global
 /* 813FAA1C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FAA20 | 41 82 00 28 */	beq .L_813FAA48
-/* 813FAA24 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAA24 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAA28 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FAA2C | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FAA30 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -897,7 +897,7 @@
 /* 813FAA40 | 98 03 00 08 */	stb r0, 0x8(r3)
 /* 813FAA44 | 4E 80 00 20 */	blr
 .L_813FAA48:
-/* 813FAA48 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAA48 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAA4C | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FAA50 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FAA54 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -911,7 +911,7 @@
 # .text:0xAA4 | 0x813FAA6C | size: 0x44
 # ipl::ncd::NCDSetting::setProxyFlag(unsigned char)
 .fn setProxyFlag__Q33ipl3ncd10NCDSettingFUc, global
-/* 813FAA6C | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAA6C | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAA70 | 3C 80 81 0C */	lis r4, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FAA74 | 38 84 85 B8 */	addi r4, r4, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FAA78 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -934,7 +934,7 @@
 # .text:0xAE8 | 0x813FAAB0 | size: 0x20
 # ipl::ncd::NCDSetting::setBasicFlag(unsigned char)
 .fn setBasicFlag__Q33ipl3ncd10NCDSettingFUc, global
-/* 813FAAB0 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAAB0 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAAB4 | 3C 80 81 0C */	lis r4, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FAAB8 | 38 84 85 B8 */	addi r4, r4, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FAABC | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -956,12 +956,12 @@
 /* 813FAAE8 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813FAAEC | 3F C0 81 0C */	lis r30, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FAAF0 | 3B FE 85 B8 */	addi r31, r30, mConfig__Q33ipl3ncd10NCDSetting@l
-/* 813FAAF4 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAAF4 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAAF8 | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FAAFC | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FAB00 | 38 63 00 08 */	addi r3, r3, 0x8
 /* 813FAB04 | 4B F3 58 31 */	bl memset
-/* 813FAB08 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAB08 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAB0C | 38 60 00 00 */	li r3, 0x0
 /* 813FAB10 | 90 7E 85 B8 */	stw r3, mConfig__Q33ipl3ncd10NCDSetting@l(r30)
 /* 813FAB14 | 38 80 00 07 */	li r4, 0x7
@@ -985,7 +985,7 @@
 /* 813FAB48 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 813FAB4C | 39 61 00 20 */	addi r11, r1, 0x20
 /* 813FAB50 | 48 1F E9 79 */	bl _savegpr_29
-/* 813FAB54 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAB54 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAB58 | 3F C0 81 0C */	lis r30, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FAB5C | 3B FE 85 B8 */	addi r31, r30, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FAB60 | 7C 7D 1B 78 */	mr r29, r3
@@ -995,7 +995,7 @@
 /* 813FAB70 | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FAB74 | 38 63 00 08 */	addi r3, r3, 0x8
 /* 813FAB78 | 4B F3 57 BD */	bl memset
-/* 813FAB7C | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAB7C | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAB80 | 38 60 00 00 */	li r3, 0x0
 /* 813FAB84 | 90 7E 85 B8 */	stw r3, mConfig__Q33ipl3ncd10NCDSetting@l(r30)
 /* 813FAB88 | 2C 1D 00 00 */	cmpwi r29, 0x0
@@ -1025,7 +1025,7 @@
 .fn changeConnectType__Q33ipl3ncd10NCDSettingFUc, global
 /* 813FABD4 | 28 03 00 01 */	cmplwi r3, 0x1
 /* 813FABD8 | 40 82 00 28 */	bne .L_813FAC00
-/* 813FABDC | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FABDC | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FABE0 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FABE4 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FABE8 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -1035,7 +1035,7 @@
 /* 813FABF8 | 98 03 00 08 */	stb r0, 0x8(r3)
 /* 813FABFC | 4E 80 00 20 */	blr
 .L_813FAC00:
-/* 813FAC00 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAC00 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAC04 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FAC08 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FAC0C | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -1059,14 +1059,14 @@
 /* 813FAC40 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813FAC44 | 7C 7E 1B 78 */	mr r30, r3
 /* 813FAC48 | 7F C4 F3 78 */	mr r4, r30
-/* 813FAC4C | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAC4C | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAC50 | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FAC54 | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FAC58 | 38 63 07 CC */	addi r3, r3, 0x7cc
 /* 813FAC5C | 4B F3 55 D5 */	bl memcpy
 /* 813FAC60 | 7F C3 F3 78 */	mr r3, r30
 /* 813FAC64 | 48 1F E2 99 */	bl strlen
-/* 813FAC68 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAC68 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAC6C | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FAC70 | 7C 9F 02 14 */	add r4, r31, r0
 /* 813FAC74 | B0 64 07 EC */	sth r3, 0x7ec(r4)
@@ -1100,7 +1100,7 @@
 /* 813FACC8 | 38 80 00 00 */	li r4, 0x0
 /* 813FACCC | 48 00 00 60 */	b .L_813FAD2C
 .L_813FACD0:
-/* 813FACD0 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FACD0 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FACD4 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FACD8 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FACDC | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -1130,7 +1130,7 @@
 .L_813FAD28:
 /* 813FAD28 | 38 80 00 00 */	li r4, 0x0
 .L_813FAD2C:
-/* 813FAD2C | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAD2C | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAD30 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FAD34 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FAD38 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -1189,7 +1189,7 @@
 .L_813FADD4:
 /* 813FADD4 | 3B C0 00 00 */	li r30, 0x0
 .L_813FADD8:
-/* 813FADD8 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FADD8 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FADDC | 3F E0 81 0C */	lis r31, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FADE0 | 3B FF 85 B8 */	addi r31, r31, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FADE4 | 38 80 00 00 */	li r4, 0x0
@@ -1198,7 +1198,7 @@
 /* 813FADF0 | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FADF4 | 38 63 07 F4 */	addi r3, r3, 0x7f4
 /* 813FADF8 | 4B F3 55 3D */	bl memset
-/* 813FADFC | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FADFC | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAE00 | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FAE04 | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FAE08 | B3 C3 07 F0 */	sth r30, 0x7f0(r3)
@@ -1218,7 +1218,7 @@
 /* 813FAE2C | 90 01 00 34 */	stw r0, 0x34(r1)
 /* 813FAE30 | 39 61 00 30 */	addi r11, r1, 0x30
 /* 813FAE34 | 48 1F E6 81 */	bl _savegpr_24
-/* 813FAE38 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAE38 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAE3C | 3C A0 81 0C */	lis r5, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FAE40 | 3B E5 85 B8 */	addi r31, r5, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FAE44 | 7C 9E 23 78 */	mr r30, r4
@@ -1230,7 +1230,7 @@
 /* 813FAE5C | 8B 03 07 F6 */	lbz r24, 0x7f6(r3)
 /* 813FAE60 | 38 63 07 F4 */	addi r3, r3, 0x7f4
 /* 813FAE64 | 4B F3 54 D1 */	bl memset
-/* 813FAE68 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAE68 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAE6C | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 813FAE70 | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FAE74 | 7C 7F 02 14 */	add r3, r31, r0
@@ -1262,7 +1262,7 @@
 .L_813FAED0:
 /* 813FAED0 | 2C 1E 00 05 */	cmpwi r30, 0x5
 /* 813FAED4 | 40 82 00 2C */	bne .L_813FAF00
-/* 813FAED8 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAED8 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAEDC | 7F A4 EB 78 */	mr r4, r29
 /* 813FAEE0 | 38 A0 00 05 */	li r5, 0x5
 /* 813FAEE4 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -1275,7 +1275,7 @@
 .L_813FAF00:
 /* 813FAF00 | 2C 1E 00 0D */	cmpwi r30, 0xd
 /* 813FAF04 | 40 82 00 28 */	bne .L_813FAF2C
-/* 813FAF08 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAF08 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAF0C | 7F A4 EB 78 */	mr r4, r29
 /* 813FAF10 | 38 A0 00 0D */	li r5, 0xd
 /* 813FAF14 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -1296,7 +1296,7 @@
 /* 813FAF48 | 7F C5 F3 78 */	mr r5, r30
 /* 813FAF4C | 38 63 07 F8 */	addi r3, r3, 0x7f8
 /* 813FAF50 | 4B F3 52 E1 */	bl memcpy
-/* 813FAF54 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAF54 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAF58 | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FAF5C | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FAF60 | B3 C3 07 F4 */	sth r30, 0x7f4(r3)
@@ -1306,7 +1306,7 @@
 /* 813FAF6C | 7F C5 F3 78 */	mr r5, r30
 /* 813FAF70 | 38 63 07 F8 */	addi r3, r3, 0x7f8
 /* 813FAF74 | 4B F3 52 BD */	bl memcpy
-/* 813FAF78 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAF78 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAF7C | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FAF80 | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FAF84 | B3 C3 07 F4 */	sth r30, 0x7f4(r3)
@@ -1332,19 +1332,19 @@
 /* 813FAFBC | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813FAFC0 | 7C 7E 1B 78 */	mr r30, r3
 /* 813FAFC4 | 7F C4 F3 78 */	mr r4, r30
-/* 813FAFC8 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAFC8 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAFCC | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FAFD0 | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FAFD4 | 38 63 00 0C */	addi r3, r3, 0xc
 /* 813FAFD8 | 4B F3 52 59 */	bl memcpy
-/* 813FAFDC | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAFDC | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAFE0 | 38 9E 00 04 */	addi r4, r30, 0x4
 /* 813FAFE4 | 38 A0 00 04 */	li r5, 0x4
 /* 813FAFE8 | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FAFEC | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FAFF0 | 38 63 00 10 */	addi r3, r3, 0x10
 /* 813FAFF4 | 4B F3 52 3D */	bl memcpy
-/* 813FAFF8 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FAFF8 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FAFFC | 38 9E 00 08 */	addi r4, r30, 0x8
 /* 813FB000 | 38 A0 00 04 */	li r5, 0x4
 /* 813FB004 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -1372,12 +1372,12 @@
 /* 813FB048 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813FB04C | 7C 7E 1B 78 */	mr r30, r3
 /* 813FB050 | 38 9E 00 0C */	addi r4, r30, 0xc
-/* 813FB054 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB054 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB058 | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FB05C | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FB060 | 38 63 00 18 */	addi r3, r3, 0x18
 /* 813FB064 | 4B F3 51 CD */	bl memcpy
-/* 813FB068 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB068 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB06C | 38 9E 00 10 */	addi r4, r30, 0x10
 /* 813FB070 | 38 A0 00 04 */	li r5, 0x4
 /* 813FB074 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -1395,7 +1395,7 @@
 # .text:0x10D4 | 0x813FB09C | size: 0x28
 # ipl::ncd::NCDSetting::setMTU(long)
 .fn setMTU__Q33ipl3ncd10NCDSettingFl, global
-/* 813FB09C | A0 AD AB B0 */	lhz r5, lbl_81698BF0@sda21(r0)
+/* 813FB09C | A0 AD AB B0 */	lhz r5, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB0A0 | 3C 80 81 0C */	lis r4, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB0A4 | 38 84 85 B8 */	addi r4, r4, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FB0A8 | 38 00 00 00 */	li r0, 0x0
@@ -1420,19 +1420,19 @@
 /* 813FB0E0 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813FB0E4 | 7C 7E 1B 78 */	mr r30, r3
 /* 813FB0E8 | 38 9E 00 04 */	addi r4, r30, 0x4
-/* 813FB0EC | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB0EC | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB0F0 | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FB0F4 | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FB0F8 | 38 63 00 30 */	addi r3, r3, 0x30
 /* 813FB0FC | 4B F3 51 35 */	bl memcpy
-/* 813FB100 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB100 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB104 | 38 9E 00 04 */	addi r4, r30, 0x4
 /* 813FB108 | 38 A0 01 00 */	li r5, 0x100
 /* 813FB10C | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FB110 | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FB114 | 38 63 01 78 */	addi r3, r3, 0x178
 /* 813FB118 | 4B F3 51 19 */	bl memcpy
-/* 813FB11C | A0 6D AB B0 */	lhz r3, lbl_81698BF0@sda21(r0)
+/* 813FB11C | A0 6D AB B0 */	lhz r3, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB120 | A0 1E 01 04 */	lhz r0, 0x104(r30)
 /* 813FB124 | 1C 63 09 1C */	mulli r3, r3, 0x91c
 /* 813FB128 | 7C 7F 1A 14 */	add r3, r31, r3
@@ -1460,26 +1460,26 @@
 /* 813FB16C | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813FB170 | 7C 7E 1B 78 */	mr r30, r3
 /* 813FB174 | 38 9E 01 06 */	addi r4, r30, 0x106
-/* 813FB178 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB178 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB17C | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FB180 | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FB184 | 38 63 01 32 */	addi r3, r3, 0x132
 /* 813FB188 | 4B F3 50 A9 */	bl memcpy
-/* 813FB18C | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB18C | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB190 | 38 9E 01 06 */	addi r4, r30, 0x106
 /* 813FB194 | 38 A0 00 21 */	li r5, 0x21
 /* 813FB198 | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FB19C | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FB1A0 | 38 63 02 7A */	addi r3, r3, 0x27a
 /* 813FB1A4 | 4B F3 50 8D */	bl memcpy
-/* 813FB1A8 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB1A8 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB1AC | 38 9E 01 27 */	addi r4, r30, 0x127
 /* 813FB1B0 | 38 A0 00 21 */	li r5, 0x21
 /* 813FB1B4 | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FB1B8 | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FB1BC | 38 63 01 53 */	addi r3, r3, 0x153
 /* 813FB1C0 | 4B F3 50 71 */	bl memcpy
-/* 813FB1C4 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB1C4 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB1C8 | 38 9E 01 27 */	addi r4, r30, 0x127
 /* 813FB1CC | 38 A0 00 21 */	li r5, 0x21
 /* 813FB1D0 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -1505,7 +1505,7 @@
 /* 813FB20C | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813FB210 | 3F E0 81 0C */	lis r31, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB214 | 3B FF 85 B8 */	addi r31, r31, mConfig__Q33ipl3ncd10NCDSetting@l
-/* 813FB218 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB218 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB21C | 1C 00 09 1C */	mulli r0, r0, 0x91c
 /* 813FB220 | 7C 7F 02 14 */	add r3, r31, r0
 /* 813FB224 | 38 63 00 08 */	addi r3, r3, 0x8
@@ -1524,7 +1524,7 @@
 # .text:0x1288 | 0x813FB250 | size: 0x24
 # ipl::ncd::NCDSetting::clearLocal()
 .fn clearLocal__Q33ipl3ncd10NCDSettingFv, global
-/* 813FB250 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB250 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB254 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB258 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FB25C | 38 80 00 00 */	li r4, 0x0
@@ -1543,7 +1543,7 @@
 /* 813FB27C | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813FB280 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813FB284 | 4B FF EF 39 */	bl checkDHCP___Q33ipl3ncd10NCDSettingFv
-/* 813FB288 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB288 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB28C | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB290 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FB294 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -1556,7 +1556,7 @@
 /* 813FB2B0 | 38 A0 01 5C */	li r5, 0x15c
 /* 813FB2B4 | 4B F3 50 81 */	bl memset
 .L_813FB2B8:
-/* 813FB2B8 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB2B8 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB2BC | 3F E0 81 0C */	lis r31, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB2C0 | 3B FF 85 B8 */	addi r31, r31, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FB2C4 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -1604,7 +1604,7 @@
 /* 813FB330 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB334 | 38 00 00 03 */	li r0, 0x3
 /* 813FB338 | 38 E3 85 B8 */	addi r7, r3, mConfig__Q33ipl3ncd10NCDSetting@l
-/* 813FB33C | A1 0D AB B0 */	lhz r8, lbl_81698BF0@sda21(r0)
+/* 813FB33C | A1 0D AB B0 */	lhz r8, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB340 | 39 40 00 00 */	li r10, 0x0
 /* 813FB344 | 38 60 00 00 */	li r3, 0x0
 /* 813FB348 | 38 A0 00 01 */	li r5, 0x1
@@ -1641,7 +1641,7 @@
 # .text:0x13E4 | 0x813FB3AC | size: 0xA8
 # ipl::ncd::NCDSetting::setAOSSParams(const NCDAossConfig&)
 .fn setAOSSParams__Q33ipl3ncd10NCDSettingFRC13NCDAossConfig, global
-/* 813FB3AC | A0 8D AB B0 */	lhz r4, lbl_81698BF0@sda21(r0)
+/* 813FB3AC | A0 8D AB B0 */	lhz r4, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB3B0 | 3C C0 81 0C */	lis r6, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB3B4 | 38 C6 85 B8 */	addi r6, r6, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FB3B8 | 38 00 00 0E */	li r0, 0xe
@@ -1692,7 +1692,7 @@
 # .text:0x148C | 0x813FB454 | size: 0x78
 # ipl::ncd::NCDSetting::setRakuParams(const NCDApConfig&)
 .fn setRakuParams__Q33ipl3ncd10NCDSettingFRC11NCDApConfig, global
-/* 813FB454 | A0 8D AB B0 */	lhz r4, lbl_81698BF0@sda21(r0)
+/* 813FB454 | A0 8D AB B0 */	lhz r4, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB458 | 3C C0 81 0C */	lis r6, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB45C | 38 C6 85 B8 */	addi r6, r6, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FB460 | 38 00 00 10 */	li r0, 0x10
@@ -1729,7 +1729,7 @@
 # .text:0x1504 | 0x813FB4CC | size: 0xC
 # ipl::ncd::NCDSetting::getID()
 .fn getID__Q33ipl3ncd10NCDSettingFv, global
-/* 813FB4CC | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB4CC | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB4D0 | 54 03 06 3E */	clrlwi r3, r0, 24
 /* 813FB4D4 | 4E 80 00 20 */	blr
 .endfn getID__Q33ipl3ncd10NCDSettingFv
@@ -1737,7 +1737,7 @@
 # .text:0x1510 | 0x813FB4D8 | size: 0x1C
 # ipl::ncd::NCDSetting::getSSID()
 .fn getSSID__Q33ipl3ncd10NCDSettingFv, global
-/* 813FB4D8 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB4D8 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB4DC | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB4E0 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FB4E4 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -1788,7 +1788,7 @@
 # .text:0x15A4 | 0x813FB56C | size: 0x94
 # ipl::ncd::NCDSetting::getPrivacyMode()
 .fn getPrivacyMode__Q33ipl3ncd10NCDSettingFv, global
-/* 813FB56C | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB56C | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB570 | 3C 80 81 0C */	lis r4, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB574 | 38 84 85 B8 */	addi r4, r4, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FB578 | 38 60 00 00 */	li r3, 0x0
@@ -1838,7 +1838,7 @@
 # .text:0x1638 | 0x813FB600 | size: 0x44
 # ipl::ncd::NCDSetting::getNCDPrivacyMode()
 .fn getNCDPrivacyMode__Q33ipl3ncd10NCDSettingFv, global
-/* 813FB600 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB600 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB604 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB608 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FB60C | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -1862,7 +1862,7 @@
 # .text:0x167C | 0x813FB644 | size: 0x70
 # ipl::ncd::NCDSetting::getPrivacy()
 .fn getPrivacy__Q33ipl3ncd10NCDSettingFv, global
-/* 813FB644 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB644 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB648 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB64C | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FB650 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -1901,7 +1901,7 @@
 # .text:0x16EC | 0x813FB6B4 | size: 0x90
 # ipl::ncd::NCDSetting::getPrivacyLen()
 .fn getPrivacyLen__Q33ipl3ncd10NCDSettingFv, global
-/* 813FB6B4 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB6B4 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB6B8 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB6BC | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FB6C0 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -1948,7 +1948,7 @@
 # .text:0x177C | 0x813FB744 | size: 0x1C
 # ipl::ncd::NCDSetting::getIP()
 .fn getIP__Q33ipl3ncd10NCDSettingFv, global
-/* 813FB744 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB744 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB748 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB74C | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FB750 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -1960,7 +1960,7 @@
 # .text:0x1798 | 0x813FB760 | size: 0x8
 # ipl::ncd::NCDSetting::getMacNum()
 .fn getMacNum__Q33ipl3ncd10NCDSettingFv, global
-/* 813FB760 | 80 6D AB B4 */	lwz r3, lbl_81698BF4@sda21(r0)
+/* 813FB760 | 80 6D AB B4 */	lwz r3, mMacNum__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB764 | 4E 80 00 20 */	blr
 .endfn getMacNum__Q33ipl3ncd10NCDSettingFv
 
@@ -2029,7 +2029,7 @@
 /* 813FB838 | 7F A4 EB 78 */	mr r4, r29
 /* 813FB83C | 7F C3 F3 78 */	mr r3, r30
 /* 813FB840 | 48 1F DF 09 */	bl __mod2u
-/* 813FB844 | 90 8D AB B4 */	stw r4, lbl_81698BF4@sda21(r0)
+/* 813FB844 | 90 8D AB B4 */	stw r4, mMacNum__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB848 | 7C 87 23 78 */	mr r7, r4
 /* 813FB84C | 7F A6 EB 78 */	mr r6, r29
 /* 813FB850 | 7F C5 F3 78 */	mr r5, r30
@@ -2062,7 +2062,7 @@
 # .text:0x18E0 | 0x813FB8A8 | size: 0x1C
 # ipl::ncd::NCDSetting::getProxy()
 .fn getProxy__Q33ipl3ncd10NCDSettingFv, global
-/* 813FB8A8 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB8A8 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB8AC | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB8B0 | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FB8B4 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -2074,7 +2074,7 @@
 # .text:0x18FC | 0x813FB8C4 | size: 0x1C
 # ipl::ncd::NCDSetting::getMTU()
 .fn getMTU__Q33ipl3ncd10NCDSettingFv, global
-/* 813FB8C4 | A0 0D AB B0 */	lhz r0, lbl_81698BF0@sda21(r0)
+/* 813FB8C4 | A0 0D AB B0 */	lhz r0, mID__Q33ipl3ncd10NCDSetting@sda21(r0)
 /* 813FB8C8 | 3C 60 81 0C */	lis r3, mConfig__Q33ipl3ncd10NCDSetting@ha
 /* 813FB8CC | 38 63 85 B8 */	addi r3, r3, mConfig__Q33ipl3ncd10NCDSetting@l
 /* 813FB8D0 | 1C 00 09 1C */	mulli r0, r0, 0x91c
@@ -2277,9 +2277,10 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698BF0 | size: 0x2
-.obj lbl_81698BF0, global
+# ipl::ncd::NCDSetting::mID
+.obj mID__Q33ipl3ncd10NCDSetting, global
 	.skip 0x2
-.endobj lbl_81698BF0
+.endobj mID__Q33ipl3ncd10NCDSetting
 
 # .sbss:0x2 | 0x81698BF2 | size: 0x2
 .obj gap_12_81698BF2_sbss, global
@@ -2288,6 +2289,7 @@
 .endobj gap_12_81698BF2_sbss
 
 # .sbss:0x4 | 0x81698BF4 | size: 0x4
-.obj lbl_81698BF4, global
+# ipl::ncd::NCDSetting::mMacNum
+.obj mMacNum__Q33ipl3ncd10NCDSetting, global
 	.skip 0x4
-.endobj lbl_81698BF4
+.endobj mMacNum__Q33ipl3ncd10NCDSetting

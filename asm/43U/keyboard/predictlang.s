@@ -763,8 +763,8 @@
 /* 8142FECC | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8142FED0 | 48 1C 95 F1 */	bl _savegpr_27
 /* 8142FED4 | 80 03 00 D0 */	lwz r0, 0xd0(r3)
-/* 8142FED8 | 3F E0 81 66 */	lis r31, lbl_8165E730@ha
-/* 8142FEDC | 3B FF E7 30 */	addi r31, r31, lbl_8165E730@l
+/* 8142FED8 | 3F E0 81 66 */	lis r31, csszToggleGroup__Q29textinput11predictlang@ha
+/* 8142FEDC | 3B FF E7 30 */	addi r31, r31, csszToggleGroup__Q29textinput11predictlang@l
 /* 8142FEE0 | 7C 7B 1B 78 */	mr r27, r3
 /* 8142FEE4 | 54 00 28 34 */	slwi r0, r0, 5
 /* 8142FEE8 | 7C 9C 23 78 */	mr r28, r4
@@ -812,8 +812,8 @@
 /* 8142FF70 | 7C 08 02 A6 */	mflr r0
 /* 8142FF74 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8142FF78 | 93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8142FF7C | 3F E0 81 66 */	lis r31, lbl_8165E730@ha
-/* 8142FF80 | 3B FF E7 30 */	addi r31, r31, lbl_8165E730@l
+/* 8142FF7C | 3F E0 81 66 */	lis r31, csszToggleGroup__Q29textinput11predictlang@ha
+/* 8142FF80 | 3B FF E7 30 */	addi r31, r31, csszToggleGroup__Q29textinput11predictlang@l
 /* 8142FF84 | 93 C1 00 18 */	stw r30, 0x18(r1)
 /* 8142FF88 | 3B C0 00 00 */	li r30, 0x0
 /* 8142FF8C | 93 A1 00 14 */	stw r29, 0x14(r1)
@@ -853,9 +853,9 @@
 # .text:0xB9C | 0x81430004 | size: 0x54
 # textinput::predictlang::LayoutByNW4R::getTargetAnmPane(textinput::Destination, textinput::inputform::Base::PredictMode)
 .fn getTargetAnmPane__Q39textinput11predictlang12LayoutByNW4RFQ29textinput11DestinationQ49textinput9inputform4Base11PredictMode, global
-/* 81430004 | 3C C0 81 66 */	lis r6, lbl_8165E7D0@ha
+/* 81430004 | 3C C0 81 66 */	lis r6, csPaneToPredictMode__Q29textinput11predictlang@ha
 /* 81430008 | 38 00 00 09 */	li r0, 0x9
-/* 8143000C | 38 C6 E7 D0 */	addi r6, r6, lbl_8165E7D0@l
+/* 8143000C | 38 C6 E7 D0 */	addi r6, r6, csPaneToPredictMode__Q29textinput11predictlang@l
 /* 81430010 | 38 E0 00 00 */	li r7, 0x0
 /* 81430014 | 7C 09 03 A6 */	mtctr r0
 .L_81430018:
@@ -1137,9 +1137,9 @@
 /* 814303F0 | 38 61 00 08 */	addi r3, r1, 0x8
 /* 814303F4 | 48 1D 1F D1 */	bl strncpy
 /* 814303F8 | 38 00 00 50 */	li r0, 0x50
-/* 814303FC | 3F C0 81 66 */	lis r30, lbl_8165E7D0@ha
+/* 814303FC | 3F C0 81 66 */	lis r30, csPaneToPredictMode__Q29textinput11predictlang@ha
 /* 81430400 | 98 01 00 08 */	stb r0, 0x8(r1)
-/* 81430404 | 3B DE E7 D0 */	addi r30, r30, lbl_8165E7D0@l
+/* 81430404 | 3B DE E7 D0 */	addi r30, r30, csPaneToPredictMode__Q29textinput11predictlang@l
 /* 81430408 | 3B A0 00 00 */	li r29, 0x0
 .L_8143040C:
 /* 8143040C | 57 BC 1B 78 */	clrlslwi r28, r29, 16, 3
@@ -1659,8 +1659,9 @@
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x816158D8 | size: 0x44
-.obj lbl_816158D8, global
+# .rodata:0x0 | 0x816158D8 | size: 0x268
+# textinput::predictlang::csAninationFile
+.obj csAninationFile__Q29textinput11predictlang, local
 	.4byte 0x00000000
 	.4byte 0x66735F70
 	.4byte 0x72646963
@@ -1678,10 +1679,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816158D8
-
-# .rodata:0x44 | 0x8161591C | size: 0x44
-.obj lbl_8161591C, global
+.L_8161591C:
 	.4byte 0x00000001
 	.4byte 0x66735F70
 	.4byte 0x72646963
@@ -1699,10 +1697,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8161591C
-
-# .rodata:0x88 | 0x81615960 | size: 0x44
-.obj lbl_81615960, global
+.L_81615960:
 	.4byte 0x00000002
 	.4byte 0x66735F70
 	.4byte 0x72646963
@@ -1720,10 +1715,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615960
-
-# .rodata:0xCC | 0x816159A4 | size: 0x44
-.obj lbl_816159A4, global
+.L_816159A4:
 	.4byte 0x00000004
 	.4byte 0x66735F70
 	.4byte 0x72646963
@@ -1741,10 +1733,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816159A4
-
-# .rodata:0x110 | 0x816159E8 | size: 0x44
-.obj lbl_816159E8, global
+.L_816159E8:
 	.4byte 0x00000005
 	.4byte 0x66735F70
 	.4byte 0x72646963
@@ -1762,10 +1751,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816159E8
-
-# .rodata:0x154 | 0x81615A2C | size: 0x44
-.obj lbl_81615A2C, global
+.L_81615A2C:
 	.4byte 0x00000006
 	.4byte 0x66735F70
 	.4byte 0x72646963
@@ -1783,10 +1769,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615A2C
-
-# .rodata:0x198 | 0x81615A70 | size: 0x44
-.obj lbl_81615A70, global
+.L_81615A70:
 	.4byte 0x00000003
 	.4byte 0x66735F70
 	.4byte 0x72646963
@@ -1804,10 +1787,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615A70
-
-# .rodata:0x1DC | 0x81615AB4 | size: 0x44
-.obj lbl_81615AB4, global
+.L_81615AB4:
 	.4byte 0x00000008
 	.4byte 0x66735F70
 	.4byte 0x72646963
@@ -1825,10 +1805,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615AB4
-
-# .rodata:0x220 | 0x81615AF8 | size: 0x48
-.obj lbl_81615AF8, global
+.L_81615AF8:
 	.4byte 0x00000007
 	.4byte 0x66735F70
 	.4byte 0x72646963
@@ -1847,7 +1824,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615AF8
+.endobj csAninationFile__Q29textinput11predictlang
 
 # 0x8165E420..0x8165EAA8 | size: 0x688
 .data
@@ -1871,9 +1848,9 @@
 	.4byte 0x00000000
 	.4byte 0x00000003
 	.4byte 0x00000000
-	.4byte lbl_816158D8
-	.4byte lbl_816159E8
-	.4byte lbl_81615A2C
+	.4byte csAninationFile__Q29textinput11predictlang
+	.rel csAninationFile__Q29textinput11predictlang, .L_816159E8
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615A2C
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -1887,13 +1864,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_816158D8
-	.4byte lbl_8161591C
-	.4byte lbl_81615960
-	.4byte lbl_816159A4
-	.4byte lbl_81615A70
-	.4byte lbl_81615AB4
-	.4byte lbl_81615AF8
+	.4byte csAninationFile__Q29textinput11predictlang
+	.rel csAninationFile__Q29textinput11predictlang, .L_8161591C
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615960
+	.rel csAninationFile__Q29textinput11predictlang, .L_816159A4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615A70
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AB4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AF8
 	.4byte 0x00000000
 	.4byte 0x00000001
 	.4byte 0x505F5052
@@ -1903,13 +1880,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_816158D8
-	.4byte lbl_8161591C
-	.4byte lbl_81615960
-	.4byte lbl_816159A4
-	.4byte lbl_81615A70
-	.4byte lbl_81615AB4
-	.4byte lbl_81615AF8
+	.4byte csAninationFile__Q29textinput11predictlang
+	.rel csAninationFile__Q29textinput11predictlang, .L_8161591C
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615960
+	.rel csAninationFile__Q29textinput11predictlang, .L_816159A4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615A70
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AB4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AF8
 	.4byte 0x00000000
 	.4byte 0x00000001
 	.4byte 0x505F5052
@@ -1919,13 +1896,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_816158D8
-	.4byte lbl_8161591C
-	.4byte lbl_81615960
-	.4byte lbl_816159A4
-	.4byte lbl_81615A70
-	.4byte lbl_81615AB4
-	.4byte lbl_81615AF8
+	.4byte csAninationFile__Q29textinput11predictlang
+	.rel csAninationFile__Q29textinput11predictlang, .L_8161591C
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615960
+	.rel csAninationFile__Q29textinput11predictlang, .L_816159A4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615A70
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AB4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AF8
 	.4byte 0x00000000
 	.4byte 0x00000001
 	.4byte 0x505F5052
@@ -1935,13 +1912,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_816158D8
-	.4byte lbl_8161591C
-	.4byte lbl_81615960
-	.4byte lbl_816159A4
-	.4byte lbl_81615A70
-	.4byte lbl_81615AB4
-	.4byte lbl_81615AF8
+	.4byte csAninationFile__Q29textinput11predictlang
+	.rel csAninationFile__Q29textinput11predictlang, .L_8161591C
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615960
+	.rel csAninationFile__Q29textinput11predictlang, .L_816159A4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615A70
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AB4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AF8
 	.4byte 0x00000000
 	.4byte 0x00000001
 	.4byte 0x505F5052
@@ -1951,13 +1928,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_816158D8
-	.4byte lbl_8161591C
-	.4byte lbl_81615960
-	.4byte lbl_816159A4
-	.4byte lbl_81615A70
-	.4byte lbl_81615AB4
-	.4byte lbl_81615AF8
+	.4byte csAninationFile__Q29textinput11predictlang
+	.rel csAninationFile__Q29textinput11predictlang, .L_8161591C
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615960
+	.rel csAninationFile__Q29textinput11predictlang, .L_816159A4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615A70
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AB4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AF8
 	.4byte 0x00000000
 	.4byte 0x00000001
 	.4byte 0x505F5052
@@ -1967,13 +1944,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_816158D8
-	.4byte lbl_8161591C
-	.4byte lbl_81615960
-	.4byte lbl_816159A4
-	.4byte lbl_81615A70
-	.4byte lbl_81615AB4
-	.4byte lbl_81615AF8
+	.4byte csAninationFile__Q29textinput11predictlang
+	.rel csAninationFile__Q29textinput11predictlang, .L_8161591C
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615960
+	.rel csAninationFile__Q29textinput11predictlang, .L_816159A4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615A70
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AB4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AF8
 	.4byte 0x00000000
 	.4byte 0x00000001
 	.4byte 0x505F5052
@@ -1983,13 +1960,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_816158D8
-	.4byte lbl_8161591C
-	.4byte lbl_81615960
-	.4byte lbl_816159A4
-	.4byte lbl_81615A70
-	.4byte lbl_81615AB4
-	.4byte lbl_81615AF8
+	.4byte csAninationFile__Q29textinput11predictlang
+	.rel csAninationFile__Q29textinput11predictlang, .L_8161591C
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615960
+	.rel csAninationFile__Q29textinput11predictlang, .L_816159A4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615A70
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AB4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AF8
 	.4byte 0x00000000
 	.4byte 0x00000001
 	.4byte 0x505F5052
@@ -1999,13 +1976,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_816158D8
-	.4byte lbl_8161591C
-	.4byte lbl_81615960
-	.4byte lbl_816159A4
-	.4byte lbl_81615A70
-	.4byte lbl_81615AB4
-	.4byte lbl_81615AF8
+	.4byte csAninationFile__Q29textinput11predictlang
+	.rel csAninationFile__Q29textinput11predictlang, .L_8161591C
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615960
+	.rel csAninationFile__Q29textinput11predictlang, .L_816159A4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615A70
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AB4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AF8
 	.4byte 0x00000000
 	.4byte 0x00000001
 	.4byte 0x505F5052
@@ -2015,13 +1992,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_816158D8
-	.4byte lbl_8161591C
-	.4byte lbl_81615960
-	.4byte lbl_816159A4
-	.4byte lbl_81615A70
-	.4byte lbl_81615AB4
-	.4byte lbl_81615AF8
+	.4byte csAninationFile__Q29textinput11predictlang
+	.rel csAninationFile__Q29textinput11predictlang, .L_8161591C
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615960
+	.rel csAninationFile__Q29textinput11predictlang, .L_816159A4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615A70
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AB4
+	.rel csAninationFile__Q29textinput11predictlang, .L_81615AF8
 	.4byte 0x00000000
 .endobj lbl_8165E430
 
@@ -2090,7 +2067,8 @@
 .endobj lbl_8165E720
 
 # .data:0x310 | 0x8165E730 | size: 0xA0
-.obj lbl_8165E730, global
+# textinput::predictlang::csszToggleGroup
+.obj csszToggleGroup__Q29textinput11predictlang, local
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -2131,10 +2109,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8165E730
+.endobj csszToggleGroup__Q29textinput11predictlang
 
 # .data:0x3B0 | 0x8165E7D0 | size: 0x48
-.obj lbl_8165E7D0, global
+# textinput::predictlang::csPaneToPredictMode
+.obj csPaneToPredictMode__Q29textinput11predictlang, local
 	.4byte 0x00000002
 	.4byte 0x00000000
 	.4byte 0x00000003
@@ -2153,7 +2132,7 @@
 	.4byte 0x00000000
 	.4byte 0x0000000A
 	.4byte 0x00000000
-.endobj lbl_8165E7D0
+.endobj csPaneToPredictMode__Q29textinput11predictlang
 
 # .data:0x3F8 | 0x8165E818 | size: 0x8C
 .obj lbl_8165E818, global

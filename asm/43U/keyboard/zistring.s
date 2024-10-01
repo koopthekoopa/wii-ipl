@@ -3294,7 +3294,7 @@
 .balign 8
 
 # .rodata:0x0 | 0x81615E50 | size: 0x18
-.obj lbl_81615E50, global
+.obj lbl_81615E50, local
 	.2byte 0x0079
 	.2byte 0x0075
 	.2byte 0x0069
@@ -3310,7 +3310,7 @@
 .endobj lbl_81615E50
 
 # .rodata:0x18 | 0x81615E68 | size: 0x20
-.obj lbl_81615E68, global
+.obj lbl_81615E68, local
 	.2byte 0x0071
 	.2byte 0x0077
 	.2byte 0x0065
@@ -3330,7 +3330,8 @@
 .endobj lbl_81615E68
 
 # .rodata:0x38 | 0x81615E88 | size: 0x2C
-.obj lbl_81615E88, global
+# textinput::keyboard::cellphonetype::csKeySetUSAbc
+.obj csKeySetUSAbc__Q39textinput8keyboard13cellphonetype_81615E88, global
 	.4byte csAlphabetKeyABCUS__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410062
 	.4byte 0x00630000
@@ -3342,10 +3343,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00010000
-.endobj lbl_81615E88
+.endobj csKeySetUSAbc__Q39textinput8keyboard13cellphonetype_81615E88
 
 # .rodata:0x64 | 0x81615EB4 | size: 0x2C
-.obj lbl_81615EB4, global
+# textinput::keyboard::cellphonetype::csKeySetUSABC
+.obj csKeySetUSABC__Q39textinput8keyboard13cellphonetype_81615EB4, global
 	.4byte csAlphabetKeyABCUS__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410042
 	.4byte 0x00430000
@@ -3357,10 +3359,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00000000
-.endobj lbl_81615EB4
+.endobj csKeySetUSABC__Q39textinput8keyboard13cellphonetype_81615EB4
 
 # .rodata:0x90 | 0x81615EE0 | size: 0x2C
-.obj lbl_81615EE0, global
+# textinput::keyboard::cellphonetype::csKeySetUSabc
+.obj csKeySetUSabc__Q39textinput8keyboard13cellphonetype_81615EE0, global
 	.4byte csAlphabetKeyabcUS__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00610062
 	.4byte 0x00630000
@@ -3372,10 +3375,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00020000
-.endobj lbl_81615EE0
+.endobj csKeySetUSabc__Q39textinput8keyboard13cellphonetype_81615EE0
 
 # .rodata:0xBC | 0x81615F0C | size: 0x2C
-.obj lbl_81615F0C, global
+# textinput::keyboard::cellphonetype::csKeySetUKAbc
+.obj csKeySetUKAbc__Q39textinput8keyboard13cellphonetype_81615F0C, global
 	.4byte csAlphabetKeyABCUK__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410062
 	.4byte 0x00630000
@@ -3387,10 +3391,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00010000
-.endobj lbl_81615F0C
+.endobj csKeySetUKAbc__Q39textinput8keyboard13cellphonetype_81615F0C
 
 # .rodata:0xE8 | 0x81615F38 | size: 0x2C
-.obj lbl_81615F38, global
+# textinput::keyboard::cellphonetype::csKeySetUKABC
+.obj csKeySetUKABC__Q39textinput8keyboard13cellphonetype_81615F38, global
 	.4byte csAlphabetKeyABCUK__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410042
 	.4byte 0x00430000
@@ -3402,10 +3407,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00000000
-.endobj lbl_81615F38
+.endobj csKeySetUKABC__Q39textinput8keyboard13cellphonetype_81615F38
 
 # .rodata:0x114 | 0x81615F64 | size: 0x2C
-.obj lbl_81615F64, global
+# textinput::keyboard::cellphonetype::csKeySetUKabc
+.obj csKeySetUKabc__Q39textinput8keyboard13cellphonetype_81615F64, global
 	.4byte csAlphabetKeyabcUK__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00610062
 	.4byte 0x00630000
@@ -3417,10 +3423,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00020000
-.endobj lbl_81615F64
+.endobj csKeySetUKabc__Q39textinput8keyboard13cellphonetype_81615F64
 
 # .rodata:0x140 | 0x81615F90 | size: 0x2C
-.obj lbl_81615F90, global
+# textinput::keyboard::cellphonetype::csKeySetDEAbc
+.obj csKeySetDEAbc__Q39textinput8keyboard13cellphonetype_81615F90, global
 	.4byte csAlphabetKeyABCDE__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410062
 	.4byte 0x00630000
@@ -3432,10 +3439,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00010000
-.endobj lbl_81615F90
+.endobj csKeySetDEAbc__Q39textinput8keyboard13cellphonetype_81615F90
 
 # .rodata:0x16C | 0x81615FBC | size: 0x2C
-.obj lbl_81615FBC, global
+# textinput::keyboard::cellphonetype::csKeySetDEABC
+.obj csKeySetDEABC__Q39textinput8keyboard13cellphonetype_81615FBC, global
 	.4byte csAlphabetKeyABCDE__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410042
 	.4byte 0x00430000
@@ -3447,10 +3455,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00000000
-.endobj lbl_81615FBC
+.endobj csKeySetDEABC__Q39textinput8keyboard13cellphonetype_81615FBC
 
 # .rodata:0x198 | 0x81615FE8 | size: 0x2C
-.obj lbl_81615FE8, global
+# textinput::keyboard::cellphonetype::csKeySetDEabc
+.obj csKeySetDEabc__Q39textinput8keyboard13cellphonetype_81615FE8, global
 	.4byte csAlphabetKeyabcDE__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00610062
 	.4byte 0x00630000
@@ -3462,10 +3471,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00000000
-.endobj lbl_81615FE8
+.endobj csKeySetDEabc__Q39textinput8keyboard13cellphonetype_81615FE8
 
 # .rodata:0x1C4 | 0x81616014 | size: 0x2C
-.obj lbl_81616014, global
+# textinput::keyboard::cellphonetype::csKeySetITAbc
+.obj csKeySetITAbc__Q39textinput8keyboard13cellphonetype_81616014, global
 	.4byte csAlphabetKeyABCIT__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410062
 	.4byte 0x00630000
@@ -3477,10 +3487,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00010000
-.endobj lbl_81616014
+.endobj csKeySetITAbc__Q39textinput8keyboard13cellphonetype_81616014
 
 # .rodata:0x1F0 | 0x81616040 | size: 0x2C
-.obj lbl_81616040, global
+# textinput::keyboard::cellphonetype::csKeySetITABC
+.obj csKeySetITABC__Q39textinput8keyboard13cellphonetype_81616040, global
 	.4byte csAlphabetKeyABCIT__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410042
 	.4byte 0x00430000
@@ -3492,10 +3503,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00000000
-.endobj lbl_81616040
+.endobj csKeySetITABC__Q39textinput8keyboard13cellphonetype_81616040
 
 # .rodata:0x21C | 0x8161606C | size: 0x2C
-.obj lbl_8161606C, global
+# textinput::keyboard::cellphonetype::csKeySetITabc
+.obj csKeySetITabc__Q39textinput8keyboard13cellphonetype_8161606C, global
 	.4byte csAlphabetKeyabcIT__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00610062
 	.4byte 0x00630000
@@ -3507,10 +3519,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00000000
-.endobj lbl_8161606C
+.endobj csKeySetITabc__Q39textinput8keyboard13cellphonetype_8161606C
 
 # .rodata:0x248 | 0x81616098 | size: 0x2C
-.obj lbl_81616098, global
+# textinput::keyboard::cellphonetype::csKeySetNLAbc
+.obj csKeySetNLAbc__Q39textinput8keyboard13cellphonetype_81616098, global
 	.4byte csAlphabetKeyABCNL__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410062
 	.4byte 0x00630000
@@ -3522,10 +3535,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00010000
-.endobj lbl_81616098
+.endobj csKeySetNLAbc__Q39textinput8keyboard13cellphonetype_81616098
 
 # .rodata:0x274 | 0x816160C4 | size: 0x2C
-.obj lbl_816160C4, global
+# textinput::keyboard::cellphonetype::csKeySetNLABC
+.obj csKeySetNLABC__Q39textinput8keyboard13cellphonetype_816160C4, global
 	.4byte csAlphabetKeyABCNL__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410042
 	.4byte 0x00430000
@@ -3537,10 +3551,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00000000
-.endobj lbl_816160C4
+.endobj csKeySetNLABC__Q39textinput8keyboard13cellphonetype_816160C4
 
 # .rodata:0x2A0 | 0x816160F0 | size: 0x2C
-.obj lbl_816160F0, global
+# textinput::keyboard::cellphonetype::csKeySetNLabc
+.obj csKeySetNLabc__Q39textinput8keyboard13cellphonetype_816160F0, global
 	.4byte csAlphabetKeyabcNL__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00610062
 	.4byte 0x00630000
@@ -3552,10 +3567,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00020000
-.endobj lbl_816160F0
+.endobj csKeySetNLabc__Q39textinput8keyboard13cellphonetype_816160F0
 
 # .rodata:0x2CC | 0x8161611C | size: 0x2C
-.obj lbl_8161611C, global
+# textinput::keyboard::cellphonetype::csKeySetSPAbc
+.obj csKeySetSPAbc__Q39textinput8keyboard13cellphonetype_8161611C, global
 	.4byte csAlphabetKeyABCSP__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410062
 	.4byte 0x00630000
@@ -3567,10 +3583,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00010000
-.endobj lbl_8161611C
+.endobj csKeySetSPAbc__Q39textinput8keyboard13cellphonetype_8161611C
 
 # .rodata:0x2F8 | 0x81616148 | size: 0x2C
-.obj lbl_81616148, global
+# textinput::keyboard::cellphonetype::csKeySetSPABC
+.obj csKeySetSPABC__Q39textinput8keyboard13cellphonetype_81616148, global
 	.4byte csAlphabetKeyABCSP__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410042
 	.4byte 0x00430000
@@ -3582,10 +3599,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00000000
-.endobj lbl_81616148
+.endobj csKeySetSPABC__Q39textinput8keyboard13cellphonetype_81616148
 
 # .rodata:0x324 | 0x81616174 | size: 0x2C
-.obj lbl_81616174, global
+# textinput::keyboard::cellphonetype::csKeySetSPabc
+.obj csKeySetSPabc__Q39textinput8keyboard13cellphonetype_81616174, global
 	.4byte csAlphabetKeyabcSP__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00610062
 	.4byte 0x00630000
@@ -3597,10 +3615,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00000000
-.endobj lbl_81616174
+.endobj csKeySetSPabc__Q39textinput8keyboard13cellphonetype_81616174
 
 # .rodata:0x350 | 0x816161A0 | size: 0x2C
-.obj lbl_816161A0, global
+# textinput::keyboard::cellphonetype::csKeySetFRAbc
+.obj csKeySetFRAbc__Q39textinput8keyboard13cellphonetype_816161A0, global
 	.4byte csAlphabetKeyABCFR__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410062
 	.4byte 0x00630000
@@ -3612,10 +3631,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00010000
-.endobj lbl_816161A0
+.endobj csKeySetFRAbc__Q39textinput8keyboard13cellphonetype_816161A0
 
 # .rodata:0x37C | 0x816161CC | size: 0x2C
-.obj lbl_816161CC, global
+# textinput::keyboard::cellphonetype::csKeySetFRABC
+.obj csKeySetFRABC__Q39textinput8keyboard13cellphonetype_816161CC, global
 	.4byte csAlphabetKeyABCFR__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410042
 	.4byte 0x00430000
@@ -3627,10 +3647,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00000000
-.endobj lbl_816161CC
+.endobj csKeySetFRABC__Q39textinput8keyboard13cellphonetype_816161CC
 
 # .rodata:0x3A8 | 0x816161F8 | size: 0x2C
-.obj lbl_816161F8, global
+# textinput::keyboard::cellphonetype::csKeySetFRabc
+.obj csKeySetFRabc__Q39textinput8keyboard13cellphonetype_816161F8, global
 	.4byte csAlphabetKeyabcFR__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00610062
 	.4byte 0x00630000
@@ -3642,10 +3663,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00000000
-.endobj lbl_816161F8
+.endobj csKeySetFRabc__Q39textinput8keyboard13cellphonetype_816161F8
 
 # .rodata:0x3D4 | 0x81616224 | size: 0x2C
-.obj lbl_81616224, global
+# textinput::keyboard::cellphonetype::csKeySetHiragana
+.obj csKeySetHiragana__Q39textinput8keyboard13cellphonetype_81616224, global
 	.4byte csAlphabetKeyAIUJP__Q39textinput8keyboard13cellphonetype
 	.4byte 0x30423044
 	.4byte 0x30460000
@@ -3657,10 +3679,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00000000
-.endobj lbl_81616224
+.endobj csKeySetHiragana__Q39textinput8keyboard13cellphonetype_81616224
 
 # .rodata:0x400 | 0x81616250 | size: 0x2C
-.obj lbl_81616250, global
+# textinput::keyboard::cellphonetype::csKeySetKatakana
+.obj csKeySetKatakana__Q39textinput8keyboard13cellphonetype_81616250, global
 	.4byte csAlphabetKeyaiuJP__Q39textinput8keyboard13cellphonetype
 	.4byte 0x30A230A4
 	.4byte 0x30A60000
@@ -3672,10 +3695,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00000000
-.endobj lbl_81616250
+.endobj csKeySetKatakana__Q39textinput8keyboard13cellphonetype_81616250
 
 # .rodata:0x42C | 0x8161627C | size: 0x2C
-.obj lbl_8161627C, global
+# textinput::keyboard::cellphonetype::csKeySetABCJP
+.obj csKeySetABCJP__Q39textinput8keyboard13cellphonetype_8161627C, global
 	.4byte csAlphabetKeyABCJP__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410062
 	.4byte 0x00630000
@@ -3687,10 +3711,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00000000
-.endobj lbl_8161627C
+.endobj csKeySetABCJP__Q39textinput8keyboard13cellphonetype_8161627C
 
 # .rodata:0x458 | 0x816162A8 | size: 0x2C
-.obj lbl_816162A8, global
+# textinput::keyboard::cellphonetype::csKeySetabcJP
+.obj csKeySetabcJP__Q39textinput8keyboard13cellphonetype_816162A8, global
 	.4byte csAlphabetKeyabcJP__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410062
 	.4byte 0x00630000
@@ -3702,10 +3727,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00000000
-.endobj lbl_816162A8
+.endobj csKeySetabcJP__Q39textinput8keyboard13cellphonetype_816162A8
 
 # .rodata:0x484 | 0x816162D4 | size: 0x2C
-.obj lbl_816162D4, global
+# textinput::keyboard::cellphonetype::csKeySetNumber
+.obj csKeySetNumber__Q39textinput8keyboard13cellphonetype_816162D4, global
 	.4byte csNumberKey__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00310032
 	.4byte 0x00330000
@@ -3717,10 +3743,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00030000
-.endobj lbl_816162D4
+.endobj csKeySetNumber__Q39textinput8keyboard13cellphonetype_816162D4
 
 # .rodata:0x4B0 | 0x81616300 | size: 0x2C
-.obj lbl_81616300, global
+# textinput::keyboard::cellphonetype::csKeySetCNABC
+.obj csKeySetCNABC__Q39textinput8keyboard13cellphonetype_81616300, global
 	.4byte csAlphabetKeyABCCN__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00410042
 	.4byte 0x00430000
@@ -3732,10 +3759,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00000000
-.endobj lbl_81616300
+.endobj csKeySetCNABC__Q39textinput8keyboard13cellphonetype_81616300
 
 # .rodata:0x4DC | 0x8161632C | size: 0x2C
-.obj lbl_8161632C, global
+# textinput::keyboard::cellphonetype::csKeySetCNabc
+.obj csKeySetCNabc__Q39textinput8keyboard13cellphonetype_8161632C, global
 	.4byte csAlphabetKeyabcCN__Q39textinput8keyboard13cellphonetype
 	.4byte 0x00610062
 	.4byte 0x00630000
@@ -3747,10 +3775,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00020000
-.endobj lbl_8161632C
+.endobj csKeySetCNabc__Q39textinput8keyboard13cellphonetype_8161632C
 
 # .rodata:0x508 | 0x81616358 | size: 0x2C
-.obj lbl_81616358, global
+# textinput::keyboard::cellphonetype::csKeySetCNPinyin
+.obj csKeySetCNPinyin__Q39textinput8keyboard13cellphonetype_81616358, global
 	.4byte csAlphabetKeyPinyinCN__Q39textinput8keyboard13cellphonetype
 	.4byte 0x62FC97F3
 	.4byte 0x00000000
@@ -3762,10 +3791,11 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00040000
-.endobj lbl_81616358
+.endobj csKeySetCNPinyin__Q39textinput8keyboard13cellphonetype_81616358
 
 # .rodata:0x534 | 0x81616384 | size: 0x2C
-.obj lbl_81616384, global
+# textinput::keyboard::cellphonetype::csKeySetHangul
+.obj csKeySetHangul__Q39textinput8keyboard13cellphonetype_81616384, global
 	.4byte csHangulKey__Q39textinput8keyboard13cellphonetype
 	.4byte 0xAC00B098
 	.4byte 0xB2E40000
@@ -3777,7 +3807,7 @@
 	.4byte 0x00000000
 	.4byte 0x0000000C
 	.4byte 0x00050000
-.endobj lbl_81616384
+.endobj csKeySetHangul__Q39textinput8keyboard13cellphonetype_81616384
 
 # 0x8165F518..0x8165F780 | size: 0x268
 .data

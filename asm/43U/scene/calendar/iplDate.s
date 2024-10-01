@@ -231,10 +231,10 @@
 /* 8139FBA0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8139FBA4 | 7C 08 02 A6 */	mflr r0
 /* 8139FBA8 | 1C C4 00 0C */	mulli r6, r4, 0xc
-/* 8139FBAC | 3C 80 81 61 */	lis r4, lbl_8160FBA0@ha
+/* 8139FBAC | 3C 80 81 61 */	lis r4, scAnmFrame__Q23ipl5scene@ha
 /* 8139FBB0 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 8139FBB4 | 38 00 00 00 */	li r0, 0x0
-/* 8139FBB8 | 38 84 FB A0 */	addi r4, r4, lbl_8160FBA0@l
+/* 8139FBB8 | 38 84 FB A0 */	addi r4, r4, scAnmFrame__Q23ipl5scene@l
 /* 8139FBBC | 7C A4 30 2E */	lwzx r5, r4, r6
 /* 8139FBC0 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8139FBC4 | 7C 84 32 14 */	add r4, r4, r6
@@ -668,17 +668,17 @@
 /* 813A0138 | 93 C1 00 18 */	stw r30, 0x18(r1)
 /* 813A013C | 41 80 00 20 */	blt .L_813A015C
 /* 813A0140 | 38 00 00 0A */	li r0, 0xa
-/* 813A0144 | 3C A0 81 61 */	lis r5, lbl_8160FC30@ha
+/* 813A0144 | 3C A0 81 61 */	lis r5, number@ha
 /* 813A0148 | 7C 04 03 D6 */	divw r0, r4, r0
-/* 813A014C | 38 A5 FC 30 */	addi r5, r5, lbl_8160FC30@l
+/* 813A014C | 38 A5 FC 30 */	addi r5, r5, number@l
 /* 813A0150 | 54 00 08 3C */	slwi r0, r0, 1
 /* 813A0154 | 7C 05 02 2E */	lhzx r0, r5, r0
 /* 813A0158 | 48 00 00 24 */	b .L_813A017C
 .L_813A015C:
 /* 813A015C | 38 C0 00 0A */	li r6, 0xa
-/* 813A0160 | 3C A0 81 61 */	lis r5, lbl_8160FC30@ha
+/* 813A0160 | 3C A0 81 61 */	lis r5, number@ha
 /* 813A0164 | 7C 04 33 D6 */	divw r0, r4, r6
-/* 813A0168 | 38 A5 FC 30 */	addi r5, r5, lbl_8160FC30@l
+/* 813A0168 | 38 A5 FC 30 */	addi r5, r5, number@l
 /* 813A016C | 7C 00 31 D6 */	mullw r0, r0, r6
 /* 813A0170 | 7C 00 20 50 */	subf r0, r0, r4
 /* 813A0174 | 54 00 08 3C */	slwi r0, r0, 1
@@ -688,9 +688,9 @@
 /* 813A0180 | B0 01 00 08 */	sth r0, 0x8(r1)
 /* 813A0184 | 41 80 00 28 */	blt .L_813A01AC
 /* 813A0188 | 38 C0 00 0A */	li r6, 0xa
-/* 813A018C | 3C A0 81 61 */	lis r5, lbl_8160FC30@ha
+/* 813A018C | 3C A0 81 61 */	lis r5, number@ha
 /* 813A0190 | 7C 04 33 D6 */	divw r0, r4, r6
-/* 813A0194 | 38 A5 FC 30 */	addi r5, r5, lbl_8160FC30@l
+/* 813A0194 | 38 A5 FC 30 */	addi r5, r5, number@l
 /* 813A0198 | 7C 00 31 D6 */	mullw r0, r0, r6
 /* 813A019C | 7C 00 20 50 */	subf r0, r0, r4
 /* 813A01A0 | 54 00 08 3C */	slwi r0, r0, 1
@@ -888,7 +888,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x8160FBA0 | size: 0x90
-.obj lbl_8160FBA0, global
+# ipl::scene::scAnmFrame
+.obj scAnmFrame__Q23ipl5scene, local
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x40C00000
@@ -925,17 +926,22 @@
 	.4byte 0x00000004
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8160FBA0
+.endobj scAnmFrame__Q23ipl5scene
 
-# .rodata:0x90 | 0x8160FC30 | size: 0x18
-.obj lbl_8160FC30, global
+# .rodata:0x90 | 0x8160FC30 | size: 0x14
+.obj number, local
 	.4byte 0x00300031
 	.4byte 0x00320033
 	.4byte 0x00340035
 	.4byte 0x00360037
 	.4byte 0x00380039
+.endobj number
+
+# .rodata:0xA4 | 0x8160FC44 | size: 0x4
+.obj gap_07_8160FC44_rodata, global
+.hidden gap_07_8160FC44_rodata
 	.4byte 0x00000000
-.endobj lbl_8160FC30
+.endobj gap_07_8160FC44_rodata
 
 # 0x8164C620..0x8164C688 | size: 0x68
 .data

@@ -1771,7 +1771,7 @@
 # ipl::scene::TextWriter::getMyUserID(unsigned long long*)
 .fn getMyUserID__Q33ipl5scene10TextWriterFPUx, global
 /* 8140CBE0 | 7C 83 23 78 */	mr r3, r4
-/* 8140CBE4 | 48 09 27 4C */	b fn_8149F330
+/* 8140CBE4 | 48 09 27 4C */	b NWC24GetMyUserId
 .endfn getMyUserID__Q33ipl5scene10TextWriterFPUx
 
 # .text:0x1838 | 0x8140CBE8 | size: 0x144

@@ -217,7 +217,7 @@
 /* 813B0C1C | 4E 80 04 21 */	bctrl
 /* 813B0C20 | 7F C4 F3 78 */	mr r4, r30
 /* 813B0C24 | 4B FB 38 C9 */	bl set_string__Q33ipl7utility6layoutFPQ34nw4r3lyt4PanePCw
-/* 813B0C28 | 88 0D AB 20 */	lbz r0, lbl_81698B60@sda21(r0)
+/* 813B0C28 | 88 0D AB 20 */	lbz r0, m_already_shown_wii_menu__Q33ipl5scene5clock@sda21(r0)
 /* 813B0C2C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813B0C30 | 41 82 00 60 */	beq .L_813B0C90
 /* 813B0C34 | 80 7F 00 2C */	lwz r3, 0x2c(r31)
@@ -246,7 +246,7 @@
 .L_813B0C90:
 /* 813B0C90 | 38 00 00 01 */	li r0, 0x1
 /* 813B0C94 | 38 7F 00 30 */	addi r3, r31, 0x30
-/* 813B0C98 | 98 0D AB 20 */	stb r0, lbl_81698B60@sda21(r0)
+/* 813B0C98 | 98 0D AB 20 */	stb r0, m_already_shown_wii_menu__Q33ipl5scene5clock@sda21(r0)
 /* 813B0C9C | 38 80 0B B8 */	li r4, 0xbb8
 /* 813B0CA0 | 4B FB 37 85 */	bl set_msec__Q33ipl7utility5timerFi
 /* 813B0CA4 | 38 00 00 00 */	li r0, 0x0

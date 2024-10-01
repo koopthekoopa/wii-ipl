@@ -843,7 +843,8 @@
 .endobj lbl_81664220
 
 # .data:0x1D4 | 0x8166422C | size: 0xAC
-.obj lbl_8166422C, global
+# textinput::keyboard::signwindow::csszSignKey
+.obj csszSignKey__Q39textinput8keyboard10signwindow, local
 	.4byte 0x545F5347
 	.4byte 0x4E6B6579
 	.4byte 0x5F333900
@@ -886,8 +887,8 @@
 	.4byte lbl_81664208
 	.4byte lbl_81664214
 	.4byte lbl_81664220
-	.4byte lbl_8166422C
-.endobj lbl_8166422C
+	.4byte csszSignKey__Q39textinput8keyboard10signwindow
+.endobj csszSignKey__Q39textinput8keyboard10signwindow
 
 # .data:0x280 | 0x816642D8 | size: 0x320
 # textinput::keyboard::signwindow::csSignKeyJP

@@ -31,9 +31,9 @@
 /* 8141716C | 7D 89 03 A6 */	mtctr r12
 /* 81417170 | 4E 80 04 21 */	bctrl
 /* 81417174 | 1C 03 00 18 */	mulli r0, r3, 0x18
-/* 81417178 | 3C 80 81 61 */	lis r4, lbl_81614ED0@ha
+/* 81417178 | 3C 80 81 61 */	lis r4, csLanguageDependencyData__Q39textinput8keyboard13cellphonetype@ha
 /* 8141717C | 7F C3 F3 78 */	mr r3, r30
-/* 81417180 | 38 84 4E D0 */	addi r4, r4, lbl_81614ED0@l
+/* 81417180 | 38 84 4E D0 */	addi r4, r4, csLanguageDependencyData__Q39textinput8keyboard13cellphonetype@l
 /* 81417184 | 7C 04 02 14 */	add r0, r4, r0
 /* 81417188 | 38 A1 00 08 */	addi r5, r1, 0x8
 /* 8141718C | 90 1E 00 28 */	stw r0, 0x28(r30)
@@ -78,9 +78,9 @@
 /* 81417214 | 7D 89 03 A6 */	mtctr r12
 /* 81417218 | 4E 80 04 21 */	bctrl
 /* 8141721C | 1C 03 00 18 */	mulli r0, r3, 0x18
-/* 81417220 | 3C 80 81 61 */	lis r4, lbl_81614ED0@ha
+/* 81417220 | 3C 80 81 61 */	lis r4, csLanguageDependencyData__Q39textinput8keyboard13cellphonetype@ha
 /* 81417224 | 7F C3 F3 78 */	mr r3, r30
-/* 81417228 | 38 84 4E D0 */	addi r4, r4, lbl_81614ED0@l
+/* 81417228 | 38 84 4E D0 */	addi r4, r4, csLanguageDependencyData__Q39textinput8keyboard13cellphonetype@l
 /* 8141722C | 7C 04 02 14 */	add r0, r4, r0
 /* 81417230 | 38 A1 00 08 */	addi r5, r1, 0x8
 /* 81417234 | 90 1E 00 28 */	stw r0, 0x28(r30)
@@ -115,11 +115,11 @@
 /* 81417280 | 39 61 00 80 */	addi r11, r1, 0x80
 /* 81417284 | 48 1E 22 19 */	bl _savegpr_18
 /* 81417288 | 88 03 00 1C */	lbz r0, 0x1c(r3)
-/* 8141728C | 3F A0 81 61 */	lis r29, lbl_81614AC0@ha
+/* 8141728C | 3F A0 81 61 */	lis r29, csPaneNameToControlKey__Q39textinput8keyboard13cellphonetype@ha
 /* 81417290 | 7C 77 1B 78 */	mr r23, r3
 /* 81417294 | 7C 98 23 78 */	mr r24, r4
 /* 81417298 | 2C 00 00 00 */	cmpwi r0, 0x0
-/* 8141729C | 3B BD 4A C0 */	addi r29, r29, lbl_81614AC0@l
+/* 8141729C | 3B BD 4A C0 */	addi r29, r29, csPaneNameToControlKey__Q39textinput8keyboard13cellphonetype@l
 /* 814172A0 | 40 82 0A 64 */	bne .L_81417D04
 /* 814172A4 | 28 04 00 04 */	cmplwi r4, 0x4
 /* 814172A8 | 83 45 00 00 */	lwz r26, 0x0(r5)
@@ -527,9 +527,9 @@
 /* 81417848 | 4E 80 04 21 */	bctrl
 /* 8141784C | 48 00 02 88 */	b .L_81417AD4
 .L_81417850:
-/* 81417850 | 3C 60 81 61 */	lis r3, lbl_816162D4@ha
+/* 81417850 | 3C 60 81 61 */	lis r3, csKeySetNumber__Q39textinput8keyboard13cellphonetype_816162D4@ha
 /* 81417854 | 3B FD 05 00 */	addi r31, r29, 0x500
-/* 81417858 | 83 63 62 D4 */	lwz r27, lbl_816162D4@l(r3)
+/* 81417858 | 83 63 62 D4 */	lwz r27, csKeySetNumber__Q39textinput8keyboard13cellphonetype_816162D4@l(r3)
 /* 8141785C | 3B 20 00 00 */	li r25, 0x0
 /* 81417860 | 3B C0 00 00 */	li r30, 0x0
 /* 81417864 | 3A 80 00 01 */	li r20, 0x1
@@ -1717,13 +1717,13 @@
 /* 814187C8 | 3A 60 00 00 */	li r19, 0x0
 /* 814187CC | 38 00 00 01 */	li r0, 0x1
 /* 814187D0 | 90 83 00 2C */	stw r4, 0x2c(r3)
-/* 814187D4 | 3F C0 81 66 */	lis r30, lbl_8165BEB0@ha
-/* 814187D8 | 3F E0 81 61 */	lis r31, lbl_81614AC0@ha
+/* 814187D4 | 3F C0 81 66 */	lis r30, csszPredictLanguage__Q39textinput8keyboard13cellphonetype@ha
+/* 814187D8 | 3F E0 81 61 */	lis r31, csPaneNameToControlKey__Q39textinput8keyboard13cellphonetype@ha
 /* 814187DC | 7C 79 1B 78 */	mr r25, r3
 /* 814187E0 | 92 63 00 14 */	stw r19, 0x14(r3)
 /* 814187E4 | 7C 9A 23 78 */	mr r26, r4
-/* 814187E8 | 3B DE BE B0 */	addi r30, r30, lbl_8165BEB0@l
-/* 814187EC | 3B FF 4A C0 */	addi r31, r31, lbl_81614AC0@l
+/* 814187E8 | 3B DE BE B0 */	addi r30, r30, csszPredictLanguage__Q39textinput8keyboard13cellphonetype@l
+/* 814187EC | 3B FF 4A C0 */	addi r31, r31, csPaneNameToControlKey__Q39textinput8keyboard13cellphonetype@l
 /* 814187F0 | 92 63 00 18 */	stw r19, 0x18(r3)
 /* 814187F4 | 92 63 00 24 */	stw r19, 0x24(r3)
 /* 814187F8 | 9A 63 00 1C */	stb r19, 0x1c(r3)
@@ -2102,10 +2102,10 @@
 /* 81418D60 | 3B 40 00 00 */	li r26, 0x0
 /* 81418D64 | 38 00 00 01 */	li r0, 0x1
 /* 81418D68 | 93 43 00 14 */	stw r26, 0x14(r3)
-/* 81418D6C | 3F E0 81 66 */	lis r31, lbl_8165BEB0@ha
+/* 81418D6C | 3F E0 81 66 */	lis r31, csszPredictLanguage__Q39textinput8keyboard13cellphonetype@ha
 /* 81418D70 | 7C 7B 1B 78 */	mr r27, r3
 /* 81418D74 | 93 43 00 18 */	stw r26, 0x18(r3)
-/* 81418D78 | 3B FF BE B0 */	addi r31, r31, lbl_8165BEB0@l
+/* 81418D78 | 3B FF BE B0 */	addi r31, r31, csszPredictLanguage__Q39textinput8keyboard13cellphonetype@l
 /* 81418D7C | 93 43 00 24 */	stw r26, 0x24(r3)
 /* 81418D80 | 9B 43 00 1C */	stb r26, 0x1c(r3)
 /* 81418D84 | 9B 43 00 1E */	stb r26, 0x1e(r3)
@@ -2118,9 +2118,9 @@
 /* 81418DA0 | 7D 89 03 A6 */	mtctr r12
 /* 81418DA4 | 4E 80 04 21 */	bctrl
 /* 81418DA8 | 1C 03 00 18 */	mulli r0, r3, 0x18
-/* 81418DAC | 3C 80 81 61 */	lis r4, lbl_81614ED0@ha
+/* 81418DAC | 3C 80 81 61 */	lis r4, csLanguageDependencyData__Q39textinput8keyboard13cellphonetype@ha
 /* 81418DB0 | 7F 63 DB 78 */	mr r3, r27
-/* 81418DB4 | 38 84 4E D0 */	addi r4, r4, lbl_81614ED0@l
+/* 81418DB4 | 38 84 4E D0 */	addi r4, r4, csLanguageDependencyData__Q39textinput8keyboard13cellphonetype@l
 /* 81418DB8 | 7C 04 02 14 */	add r0, r4, r0
 /* 81418DBC | 38 A1 00 10 */	addi r5, r1, 0x10
 /* 81418DC0 | 90 1B 00 28 */	stw r0, 0x28(r27)
@@ -2739,9 +2739,9 @@
 /* 814196E0 | 28 1D 00 04 */	cmplwi r29, 0x4
 /* 814196E4 | 83 9C 00 00 */	lwz r28, 0x0(r28)
 /* 814196E8 | 40 82 01 5C */	bne .L_81419844
-/* 814196EC | 3F E0 81 61 */	lis r31, lbl_81614AC0@ha
+/* 814196EC | 3F E0 81 61 */	lis r31, csPaneNameToControlKey__Q39textinput8keyboard13cellphonetype@ha
 /* 814196F0 | 3B C0 00 00 */	li r30, 0x0
-/* 814196F4 | 3B FF 4A C0 */	addi r31, r31, lbl_81614AC0@l
+/* 814196F4 | 3B FF 4A C0 */	addi r31, r31, csPaneNameToControlKey__Q39textinput8keyboard13cellphonetype@l
 .L_814196F8:
 /* 814196F8 | 57 C0 04 3E */	clrlwi r0, r30, 16
 /* 814196FC | 7F 84 E3 78 */	mr r4, r28
@@ -3008,8 +3008,8 @@
 /* 81419A84 | 7C 08 02 A6 */	mflr r0
 /* 81419A88 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 81419A8C | 93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 81419A90 | 3F E0 81 66 */	lis r31, lbl_8165BEB0@ha
-/* 81419A94 | 3B FF BE B0 */	addi r31, r31, lbl_8165BEB0@l
+/* 81419A90 | 3F E0 81 66 */	lis r31, csszPredictLanguage__Q39textinput8keyboard13cellphonetype@ha
+/* 81419A94 | 3B FF BE B0 */	addi r31, r31, csszPredictLanguage__Q39textinput8keyboard13cellphonetype@l
 /* 81419A98 | 93 C1 00 18 */	stw r30, 0x18(r1)
 /* 81419A9C | 7C 9E 23 78 */	mr r30, r4
 /* 81419AA0 | 93 A1 00 14 */	stw r29, 0x14(r1)
@@ -3380,31 +3380,31 @@
 /* 81419FC0 | 48 00 00 20 */	b .L_81419FE0
 .L_81419FC4:
 /* 81419FC4 | 85 83 00 38 */	lwzu r12, 0x38(r3)
-/* 81419FC8 | 3C 80 81 66 */	lis r4, lbl_8165C2B0@ha
-/* 81419FCC | 38 84 C2 B0 */	addi r4, r4, lbl_8165C2B0@l
+/* 81419FC8 | 3C 80 81 66 */	lis r4, csPaneNameToggleAnimationKey__Q39textinput8keyboard13cellphonetype@ha
+/* 81419FCC | 38 84 C2 B0 */	addi r4, r4, csPaneNameToggleAnimationKey__Q39textinput8keyboard13cellphonetype@l
 /* 81419FD0 | 81 8C 00 60 */	lwz r12, 0x60(r12)
 /* 81419FD4 | 38 84 00 30 */	addi r4, r4, 0x30
 /* 81419FD8 | 7D 89 03 A6 */	mtctr r12
 /* 81419FDC | 4E 80 04 20 */	bctr
 .L_81419FE0:
 /* 81419FE0 | 85 83 00 38 */	lwzu r12, 0x38(r3)
-/* 81419FE4 | 3C 80 81 66 */	lis r4, lbl_8165C2B0@ha
-/* 81419FE8 | 38 84 C2 B0 */	addi r4, r4, lbl_8165C2B0@l
+/* 81419FE4 | 3C 80 81 66 */	lis r4, csPaneNameToggleAnimationKey__Q39textinput8keyboard13cellphonetype@ha
+/* 81419FE8 | 38 84 C2 B0 */	addi r4, r4, csPaneNameToggleAnimationKey__Q39textinput8keyboard13cellphonetype@l
 /* 81419FEC | 81 8C 00 60 */	lwz r12, 0x60(r12)
 /* 81419FF0 | 38 84 00 48 */	addi r4, r4, 0x48
 /* 81419FF4 | 7D 89 03 A6 */	mtctr r12
 /* 81419FF8 | 4E 80 04 20 */	bctr
 .L_81419FFC:
 /* 81419FFC | 85 83 00 38 */	lwzu r12, 0x38(r3)
-/* 8141A000 | 3C 80 81 66 */	lis r4, lbl_8165C2B0@ha
-/* 8141A004 | 38 84 C2 B0 */	addi r4, r4, lbl_8165C2B0@l
+/* 8141A000 | 3C 80 81 66 */	lis r4, csPaneNameToggleAnimationKey__Q39textinput8keyboard13cellphonetype@ha
+/* 8141A004 | 38 84 C2 B0 */	addi r4, r4, csPaneNameToggleAnimationKey__Q39textinput8keyboard13cellphonetype@l
 /* 8141A008 | 81 8C 00 60 */	lwz r12, 0x60(r12)
 /* 8141A00C | 7D 89 03 A6 */	mtctr r12
 /* 8141A010 | 4E 80 04 20 */	bctr
 .L_8141A014:
 /* 8141A014 | 85 83 00 38 */	lwzu r12, 0x38(r3)
-/* 8141A018 | 3C 80 81 66 */	lis r4, lbl_8165C2B0@ha
-/* 8141A01C | 38 84 C2 B0 */	addi r4, r4, lbl_8165C2B0@l
+/* 8141A018 | 3C 80 81 66 */	lis r4, csPaneNameToggleAnimationKey__Q39textinput8keyboard13cellphonetype@ha
+/* 8141A01C | 38 84 C2 B0 */	addi r4, r4, csPaneNameToggleAnimationKey__Q39textinput8keyboard13cellphonetype@l
 /* 8141A020 | 81 8C 00 60 */	lwz r12, 0x60(r12)
 /* 8141A024 | 38 84 00 18 */	addi r4, r4, 0x18
 /* 8141A028 | 7D 89 03 A6 */	mtctr r12
@@ -3644,8 +3644,8 @@
 /* 8141A318 | 7C 08 02 A6 */	mflr r0
 /* 8141A31C | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8141A320 | 93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8141A324 | 3F E0 81 66 */	lis r31, lbl_8165BEB0@ha
-/* 8141A328 | 3B FF BE B0 */	addi r31, r31, lbl_8165BEB0@l
+/* 8141A324 | 3F E0 81 66 */	lis r31, csszPredictLanguage__Q39textinput8keyboard13cellphonetype@ha
+/* 8141A328 | 3B FF BE B0 */	addi r31, r31, csszPredictLanguage__Q39textinput8keyboard13cellphonetype@l
 /* 8141A32C | 93 C1 00 18 */	stw r30, 0x18(r1)
 /* 8141A330 | 7C 9E 23 78 */	mr r30, r4
 /* 8141A334 | 93 A1 00 14 */	stw r29, 0x14(r1)
@@ -3845,8 +3845,8 @@
 /* 8141A5DC | 2C 04 00 00 */	cmpwi r4, 0x0
 /* 8141A5E0 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8141A5E4 | 93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8141A5E8 | 3F E0 81 66 */	lis r31, lbl_8165BEB0@ha
-/* 8141A5EC | 3B FF BE B0 */	addi r31, r31, lbl_8165BEB0@l
+/* 8141A5E8 | 3F E0 81 66 */	lis r31, csszPredictLanguage__Q39textinput8keyboard13cellphonetype@ha
+/* 8141A5EC | 3B FF BE B0 */	addi r31, r31, csszPredictLanguage__Q39textinput8keyboard13cellphonetype@l
 /* 8141A5F0 | 93 C1 00 18 */	stw r30, 0x18(r1)
 /* 8141A5F4 | 7C 9E 23 78 */	mr r30, r4
 /* 8141A5F8 | 93 A1 00 14 */	stw r29, 0x14(r1)
@@ -5013,9 +5013,9 @@
 /* 8141B5FC | 40 82 00 50 */	bne .L_8141B64C
 /* 8141B600 | 54 60 05 6B */	rlwinm. r0, r3, 0, 21, 21
 /* 8141B604 | 41 82 01 5C */	beq .L_8141B760
-/* 8141B608 | 3F 20 81 66 */	lis r25, lbl_8165C050@ha
+/* 8141B608 | 3F 20 81 66 */	lis r25, csPaneNameNormalKey__Q39textinput8keyboard13cellphonetype@ha
 /* 8141B60C | 3B 40 00 00 */	li r26, 0x0
-/* 8141B610 | 3B 39 C0 50 */	addi r25, r25, lbl_8165C050@l
+/* 8141B610 | 3B 39 C0 50 */	addi r25, r25, csPaneNameNormalKey__Q39textinput8keyboard13cellphonetype@l
 .L_8141B614:
 /* 8141B614 | 80 99 00 00 */	lwz r4, 0x0(r25)
 /* 8141B618 | 7F E3 FB 78 */	mr r3, r31
@@ -5130,9 +5130,9 @@
 .L_8141B7A4:
 /* 8141B7A4 | 54 80 05 6B */	rlwinm. r0, r4, 0, 21, 21
 /* 8141B7A8 | 41 82 00 88 */	beq .L_8141B830
-/* 8141B7AC | 3F 20 81 66 */	lis r25, lbl_8165C050@ha
+/* 8141B7AC | 3F 20 81 66 */	lis r25, csPaneNameNormalKey__Q39textinput8keyboard13cellphonetype@ha
 /* 8141B7B0 | 3B 40 00 00 */	li r26, 0x0
-/* 8141B7B4 | 3B 39 C0 50 */	addi r25, r25, lbl_8165C050@l
+/* 8141B7B4 | 3B 39 C0 50 */	addi r25, r25, csPaneNameNormalKey__Q39textinput8keyboard13cellphonetype@l
 .L_8141B7B8:
 /* 8141B7B8 | 80 99 00 00 */	lwz r4, 0x0(r25)
 /* 8141B7BC | 7F E3 FB 78 */	mr r3, r31
@@ -5185,9 +5185,9 @@
 /* 8141B868 | 80 1E 00 0C */	lwz r0, 0xc(r30)
 /* 8141B86C | 54 00 05 29 */	rlwinm. r0, r0, 0, 20, 20
 /* 8141B870 | 40 82 00 F4 */	bne .L_8141B964
-/* 8141B874 | 3F 40 81 66 */	lis r26, lbl_8165C050@ha
+/* 8141B874 | 3F 40 81 66 */	lis r26, csPaneNameNormalKey__Q39textinput8keyboard13cellphonetype@ha
 /* 8141B878 | 7F E4 FB 78 */	mr r4, r31
-/* 8141B87C | 3B 5A C0 50 */	addi r26, r26, lbl_8165C050@l
+/* 8141B87C | 3B 5A C0 50 */	addi r26, r26, csPaneNameNormalKey__Q39textinput8keyboard13cellphonetype@l
 /* 8141B880 | 80 7A 00 34 */	lwz r3, 0x34(r26)
 /* 8141B884 | 48 01 E9 71 */	bl strcmp__Q29textinput4utilFPCcPCc
 /* 8141B888 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -5422,12 +5422,12 @@
 
 # .text:0x49BC | 0x8141BAD8 | size: 0x68
 .fn "__sinit_\\cellphone_cpp", global
-/* 8141BAD8 | 3C 80 81 66 */	lis r4, lbl_8165C0E8@ha
-/* 8141BADC | 3C 60 81 66 */	lis r3, lbl_8165C2B0@ha
+/* 8141BAD8 | 3C 80 81 66 */	lis r4, csPaneNameNormalAnimationKey__Q39textinput8keyboard13cellphonetype@ha
+/* 8141BADC | 3C 60 81 66 */	lis r3, csPaneNameToggleAnimationKey__Q39textinput8keyboard13cellphonetype@ha
 /* 8141BAE0 | 80 AD 93 48 */	lwz r5, lbl_81697388@sda21(r0)
-/* 8141BAE4 | 38 84 C0 E8 */	addi r4, r4, lbl_8165C0E8@l
+/* 8141BAE4 | 38 84 C0 E8 */	addi r4, r4, csPaneNameNormalAnimationKey__Q39textinput8keyboard13cellphonetype@l
 /* 8141BAE8 | 80 0D 93 50 */	lwz r0, lbl_81697390@sda21(r0)
-/* 8141BAEC | 38 63 C2 B0 */	addi r3, r3, lbl_8165C2B0@l
+/* 8141BAEC | 38 63 C2 B0 */	addi r3, r3, csPaneNameToggleAnimationKey__Q39textinput8keyboard13cellphonetype@l
 /* 8141BAF0 | 80 CD 93 4C */	lwz r6, lbl_8169738C@sda21(r0)
 /* 8141BAF4 | 90 A4 00 2C */	stw r5, 0x2c(r4)
 /* 8141BAF8 | 90 A4 00 44 */	stw r5, 0x44(r4)
@@ -5500,8 +5500,9 @@
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x81614AC0 | size: 0x410
-.obj lbl_81614AC0, global
+# .rodata:0x0 | 0x81614AC0 | size: 0x120
+# textinput::keyboard::cellphonetype::csPaneNameToControlKey
+.obj csPaneNameToControlKey__Q39textinput8keyboard13cellphonetype, local
 	.4byte 0x425F4350
 	.4byte 0x6B65795F
 	.4byte 0x4C460000
@@ -5574,6 +5575,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000002
+.endobj csPaneNameToControlKey__Q39textinput8keyboard13cellphonetype
+
+# .rodata:0x120 | 0x81614BE0 | size: 0x2F0
+# textinput::keyboard::cellphonetype::csAninationFileForControlKey
+.obj csAninationFileForControlKey__Q39textinput8keyboard13cellphonetype, local
 	.4byte 0x00000000
 	.4byte 0x66735F56
 	.4byte 0x4B5F6365
@@ -5762,69 +5768,70 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81614AC0
+.endobj csAninationFileForControlKey__Q39textinput8keyboard13cellphonetype
 
 # .rodata:0x410 | 0x81614ED0 | size: 0x108
-.obj lbl_81614ED0, global
+# textinput::keyboard::cellphonetype::csLanguageDependencyData
+.obj csLanguageDependencyData__Q39textinput8keyboard13cellphonetype, local
 	.4byte 0x00040000
-	.4byte lbl_81616224
-	.4byte lbl_81616250
-	.4byte lbl_8161627C
-	.4byte lbl_816162D4
-	.4byte lbl_816162A8
+	.4byte csKeySetHiragana__Q39textinput8keyboard13cellphonetype_81616224
+	.4byte csKeySetKatakana__Q39textinput8keyboard13cellphonetype_81616250
+	.4byte csKeySetABCJP__Q39textinput8keyboard13cellphonetype_8161627C
+	.4byte csKeySetNumber__Q39textinput8keyboard13cellphonetype_816162D4
+	.4byte csKeySetabcJP__Q39textinput8keyboard13cellphonetype_816162A8
 	.4byte 0x00040000
-	.4byte lbl_81615E88
-	.4byte lbl_81615EE0
-	.4byte lbl_81615EB4
-	.4byte lbl_816162D4
+	.4byte csKeySetUSAbc__Q39textinput8keyboard13cellphonetype_81615E88
+	.4byte csKeySetUSabc__Q39textinput8keyboard13cellphonetype_81615EE0
+	.4byte csKeySetUSABC__Q39textinput8keyboard13cellphonetype_81615EB4
+	.4byte csKeySetNumber__Q39textinput8keyboard13cellphonetype_816162D4
 	.4byte 0x00000000
 	.4byte 0x00040000
-	.4byte lbl_81615F0C
-	.4byte lbl_81615F64
-	.4byte lbl_81615F38
-	.4byte lbl_816162D4
+	.4byte csKeySetUKAbc__Q39textinput8keyboard13cellphonetype_81615F0C
+	.4byte csKeySetUKabc__Q39textinput8keyboard13cellphonetype_81615F64
+	.4byte csKeySetUKABC__Q39textinput8keyboard13cellphonetype_81615F38
+	.4byte csKeySetNumber__Q39textinput8keyboard13cellphonetype_816162D4
 	.4byte 0x00000000
 	.4byte 0x00040000
-	.4byte lbl_816161A0
-	.4byte lbl_816161F8
-	.4byte lbl_816161CC
-	.4byte lbl_816162D4
+	.4byte csKeySetFRAbc__Q39textinput8keyboard13cellphonetype_816161A0
+	.4byte csKeySetFRabc__Q39textinput8keyboard13cellphonetype_816161F8
+	.4byte csKeySetFRABC__Q39textinput8keyboard13cellphonetype_816161CC
+	.4byte csKeySetNumber__Q39textinput8keyboard13cellphonetype_816162D4
 	.4byte 0x00000000
 	.4byte 0x00040000
-	.4byte lbl_81615F90
-	.4byte lbl_81615FE8
-	.4byte lbl_81615FBC
-	.4byte lbl_816162D4
+	.4byte csKeySetDEAbc__Q39textinput8keyboard13cellphonetype_81615F90
+	.4byte csKeySetDEabc__Q39textinput8keyboard13cellphonetype_81615FE8
+	.4byte csKeySetDEABC__Q39textinput8keyboard13cellphonetype_81615FBC
+	.4byte csKeySetNumber__Q39textinput8keyboard13cellphonetype_816162D4
 	.4byte 0x00000000
 	.4byte 0x00040000
-	.4byte lbl_81616014
-	.4byte lbl_8161606C
-	.4byte lbl_81616040
-	.4byte lbl_816162D4
+	.4byte csKeySetITAbc__Q39textinput8keyboard13cellphonetype_81616014
+	.4byte csKeySetITabc__Q39textinput8keyboard13cellphonetype_8161606C
+	.4byte csKeySetITABC__Q39textinput8keyboard13cellphonetype_81616040
+	.4byte csKeySetNumber__Q39textinput8keyboard13cellphonetype_816162D4
 	.4byte 0x00000000
 	.4byte 0x00040000
-	.4byte lbl_8161611C
-	.4byte lbl_81616174
-	.4byte lbl_81616148
-	.4byte lbl_816162D4
+	.4byte csKeySetSPAbc__Q39textinput8keyboard13cellphonetype_8161611C
+	.4byte csKeySetSPabc__Q39textinput8keyboard13cellphonetype_81616174
+	.4byte csKeySetSPABC__Q39textinput8keyboard13cellphonetype_81616148
+	.4byte csKeySetNumber__Q39textinput8keyboard13cellphonetype_816162D4
 	.4byte 0x00000000
 	.4byte 0x00040000
-	.4byte lbl_81616098
-	.4byte lbl_816160F0
-	.4byte lbl_816160C4
-	.4byte lbl_816162D4
+	.4byte csKeySetNLAbc__Q39textinput8keyboard13cellphonetype_81616098
+	.4byte csKeySetNLabc__Q39textinput8keyboard13cellphonetype_816160F0
+	.4byte csKeySetNLABC__Q39textinput8keyboard13cellphonetype_816160C4
+	.4byte csKeySetNumber__Q39textinput8keyboard13cellphonetype_816162D4
 	.4byte 0x00000000
 	.4byte 0x00040000
-	.4byte lbl_81616358
-	.4byte lbl_8161632C
-	.4byte lbl_81616300
-	.4byte lbl_816162D4
+	.4byte csKeySetCNPinyin__Q39textinput8keyboard13cellphonetype_81616358
+	.4byte csKeySetCNabc__Q39textinput8keyboard13cellphonetype_8161632C
+	.4byte csKeySetCNABC__Q39textinput8keyboard13cellphonetype_81616300
+	.4byte csKeySetNumber__Q39textinput8keyboard13cellphonetype_816162D4
 	.4byte 0x00000000
 	.4byte 0x00040000
-	.4byte lbl_81616384
-	.4byte lbl_81615EE0
-	.4byte lbl_81615EB4
-	.4byte lbl_816162D4
+	.4byte csKeySetHangul__Q39textinput8keyboard13cellphonetype_81616384
+	.4byte csKeySetUSabc__Q39textinput8keyboard13cellphonetype_81615EE0
+	.4byte csKeySetUSABC__Q39textinput8keyboard13cellphonetype_81615EB4
+	.4byte csKeySetNumber__Q39textinput8keyboard13cellphonetype_816162D4
 	.4byte 0x00000000
 	.4byte 0x00200000
 	.4byte 0x01000100
@@ -5832,10 +5839,10 @@
 	.4byte 0x00000000
 	.4byte 0x00000100
 	.4byte 0x00000000
-.endobj lbl_81614ED0
+.endobj csLanguageDependencyData__Q39textinput8keyboard13cellphonetype
 
 # .rodata:0x518 | 0x81614FD8 | size: 0x10
-.obj lbl_81614FD8, global
+.obj lbl_81614FD8, local
 	.4byte 0x00200000
 	.4byte 0x00000000
 	.4byte 0x00010000
@@ -5847,7 +5854,8 @@
 .balign 8
 
 # .data:0x0 | 0x8165BEB0 | size: 0x34
-.obj lbl_8165BEB0, global
+# textinput::keyboard::cellphonetype::csszPredictLanguage
+.obj csszPredictLanguage__Q39textinput8keyboard13cellphonetype, local
 	.4byte lbl_81697328
 	.4byte lbl_81697328
 	.4byte lbl_81697330
@@ -5861,7 +5869,7 @@
 	.4byte lbl_81697370
 	.4byte lbl_81697378
 	.4byte lbl_81697380
-.endobj lbl_8165BEB0
+.endobj csszPredictLanguage__Q39textinput8keyboard13cellphonetype
 
 # .data:0x34 | 0x8165BEE4 | size: 0xC
 .obj lbl_8165BEE4, global
@@ -6053,7 +6061,8 @@
 .endobj lbl_8165C040
 
 # .data:0x1A0 | 0x8165C050 | size: 0x68
-.obj lbl_8165C050, global
+# textinput::keyboard::cellphonetype::csPaneNameNormalKey
+.obj csPaneNameNormalKey__Q39textinput8keyboard13cellphonetype, local
 	.4byte lbl_8165BEE4
 	.4byte lbl_8165BEF0
 	.4byte lbl_8165BEFC
@@ -6080,7 +6089,7 @@
 	.4byte lbl_8165C020
 	.4byte lbl_8165C030
 	.4byte lbl_8165C040
-.endobj lbl_8165C050
+.endobj csPaneNameNormalKey__Q39textinput8keyboard13cellphonetype
 
 # .data:0x208 | 0x8165C0B8 | size: 0xC
 .obj lbl_8165C0B8, global
@@ -6107,7 +6116,8 @@
 .endobj lbl_8165C0D4
 
 # .data:0x238 | 0x8165C0E8 | size: 0x1C8
-.obj lbl_8165C0E8, global
+# textinput::keyboard::cellphonetype::csPaneNameNormalAnimationKey
+.obj csPaneNameNormalAnimationKey__Q39textinput8keyboard13cellphonetype, local
 	.4byte 0x575F4350
 	.4byte 0x6B65795F
 	.4byte 0x30300000
@@ -6222,10 +6232,11 @@
 	.4byte 0x65425400
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8165C0E8
+.endobj csPaneNameNormalAnimationKey__Q39textinput8keyboard13cellphonetype
 
 # .data:0x400 | 0x8165C2B0 | size: 0x60
-.obj lbl_8165C2B0, global
+# textinput::keyboard::cellphonetype::csPaneNameToggleAnimationKey
+.obj csPaneNameToggleAnimationKey__Q39textinput8keyboard13cellphonetype, local
 	.4byte 0x575F4368
 	.4byte 0x6E675461
 	.4byte 0x675F3030
@@ -6250,7 +6261,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8165C2B0
+.endobj csPaneNameToggleAnimationKey__Q39textinput8keyboard13cellphonetype
 
 # .data:0x460 | 0x8165C310 | size: 0x28
 .obj jumptable_8165C310, local

@@ -1167,7 +1167,8 @@
 .endobj lbl_81666498
 
 # .data:0x28C | 0x816664A4 | size: 0xEC
-.obj lbl_816664A4, global
+# textinput::keyboard::pctype::scAsciiPaneName
+.obj scAsciiPaneName__Q39textinput8keyboard6pctype, global
 	.4byte 0x505F6B65
 	.4byte 0x795F4341
 	.4byte 0x50530000
@@ -1225,9 +1226,9 @@
 	.4byte lbl_81666480
 	.4byte lbl_8166648C
 	.4byte lbl_81666498
-	.4byte lbl_816664A4
+	.4byte scAsciiPaneName__Q39textinput8keyboard6pctype
 	.4byte 0x00000000
-.endobj lbl_816664A4
+.endobj scAsciiPaneName__Q39textinput8keyboard6pctype
 
 # .data:0x378 | 0x81666590 | size: 0x258
 # textinput::keyboard::pctype::csJPKeyboard

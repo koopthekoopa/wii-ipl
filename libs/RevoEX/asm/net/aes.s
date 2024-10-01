@@ -13,13 +13,13 @@
 /* 81494D90 | 39 61 00 40 */	addi r11, r1, 0x40
 /* 81494D94 | 48 16 47 11 */	bl _savegpr_20
 /* 81494D98 | 80 C3 01 00 */	lwz r6, 0x100(r3)
-/* 81494D9C | 3D 20 81 62 */	lis r9, lbl_81618430@ha
+/* 81494D9C | 3D 20 81 62 */	lis r9, AESiEncryptTable@ha
 /* 81494DA0 | 80 05 00 00 */	lwz r0, 0x0(r5)
 /* 81494DA4 | 39 63 00 20 */	addi r11, r3, 0x20
 /* 81494DA8 | 80 E3 00 10 */	lwz r7, 0x10(r3)
 /* 81494DAC | 54 CC 46 3E */	srwi r12, r6, 24
 /* 81494DB0 | 80 C5 00 04 */	lwz r6, 0x4(r5)
-/* 81494DB4 | 39 29 84 30 */	addi r9, r9, lbl_81618430@l
+/* 81494DB4 | 39 29 84 30 */	addi r9, r9, AESiEncryptTable@l
 /* 81494DB8 | 81 43 00 14 */	lwz r10, 0x14(r3)
 /* 81494DBC | 7C 00 3A 78 */	xor r0, r0, r7
 /* 81494DC0 | 80 E5 00 08 */	lwz r7, 0x8(r5)
@@ -99,9 +99,9 @@
 .L_81494EE4:
 /* 81494EE4 | 35 8C FF FF */	subic. r12, r12, 0x1
 /* 81494EE8 | 40 82 FE F8 */	bne .L_81494DE0
-/* 81494EEC | 3C 60 81 62 */	lis r3, lbl_81618210@ha
+/* 81494EEC | 3C 60 81 62 */	lis r3, AESiSubShiftTable@ha
 /* 81494EF0 | 54 C8 86 3E */	extrwi r8, r6, 8, 8
-/* 81494EF4 | 38 63 82 10 */	addi r3, r3, lbl_81618210@l
+/* 81494EF4 | 38 63 82 10 */	addi r3, r3, AESiSubShiftTable@l
 /* 81494EF8 | 54 E9 C6 3E */	extrwi r9, r7, 8, 16
 /* 81494EFC | 54 1C 46 3E */	srwi r28, r0, 24
 /* 81494F00 | 7D 03 40 AE */	lbzx r8, r3, r8
@@ -268,9 +268,9 @@
 /* 81495168 | 90 03 01 00 */	stw r0, 0x100(r3)
 .L_8149516C:
 /* 8149516C | 80 E5 00 00 */	lwz r7, 0x0(r5)
-/* 81495170 | 3D 20 81 62 */	lis r9, lbl_81618830@ha
+/* 81495170 | 3D 20 81 62 */	lis r9, AESiDecryptTable@ha
 /* 81495174 | 80 CB 00 00 */	lwz r6, 0x0(r11)
-/* 81495178 | 39 29 88 30 */	addi r9, r9, lbl_81618830@l
+/* 81495178 | 39 29 88 30 */	addi r9, r9, AESiDecryptTable@l
 /* 8149517C | 80 65 00 04 */	lwz r3, 0x4(r5)
 /* 81495180 | 80 0B 00 04 */	lwz r0, 0x4(r11)
 /* 81495184 | 7C E6 32 78 */	xor r6, r7, r6
@@ -352,9 +352,9 @@
 .L_814952B0:
 /* 814952B0 | 35 8C FF FF */	subic. r12, r12, 0x1
 /* 814952B4 | 40 82 FE F8 */	bne .L_814951AC
-/* 814952B8 | 3C 60 81 62 */	lis r3, lbl_81618310@ha
+/* 814952B8 | 3C 60 81 62 */	lis r3, AESiInvSubShiftTable@ha
 /* 814952BC | 54 C8 46 3E */	srwi r8, r6, 24
-/* 814952C0 | 38 63 83 10 */	addi r3, r3, lbl_81618310@l
+/* 814952C0 | 38 63 83 10 */	addi r3, r3, AESiInvSubShiftTable@l
 /* 814952C4 | 54 AA C6 3E */	extrwi r10, r5, 8, 16
 /* 814952C8 | 7D 03 40 AE */	lbzx r8, r3, r8
 /* 814952CC | 54 E9 86 3E */	extrwi r9, r7, 8, 8
@@ -471,13 +471,13 @@
 /* 81495474 | 57 9E F0 BE */	srwi r30, r28, 2
 /* 81495478 | 4B E9 AD B9 */	bl memcpy
 /* 8149547C | 57 C0 10 3A */	slwi r0, r30, 2
-/* 81495480 | 3D 20 81 62 */	lis r9, lbl_81618210@ha
+/* 81495480 | 3D 20 81 62 */	lis r9, AESiSubShiftTable@ha
 /* 81495484 | 7C 9F 02 14 */	add r4, r31, r0
-/* 81495488 | 3C 60 81 62 */	lis r3, lbl_81618410@ha
+/* 81495488 | 3C 60 81 62 */	lis r3, AESiRoundKeyRcon0@ha
 /* 8149548C | 81 04 FF FC */	lwz r8, -0x4(r4)
 /* 81495490 | 7F C5 F3 78 */	mr r5, r30
-/* 81495494 | 39 29 82 10 */	addi r9, r9, lbl_81618210@l
-/* 81495498 | 38 63 84 10 */	addi r3, r3, lbl_81618410@l
+/* 81495494 | 39 29 82 10 */	addi r9, r9, AESiSubShiftTable@l
+/* 81495498 | 38 63 84 10 */	addi r3, r3, AESiRoundKeyRcon0@l
 /* 8149549C | 48 00 00 C4 */	b .L_81495560
 .L_814954A0:
 /* 814954A0 | 7D 45 F3 96 */	divwu r10, r5, r30
@@ -756,7 +756,7 @@
 .balign 8
 
 # .rodata:0x0 | 0x81618210 | size: 0x100
-.obj lbl_81618210, global
+.obj AESiSubShiftTable, local
 	.4byte 0x637C777B
 	.4byte 0xF26B6FC5
 	.4byte 0x3001672B
@@ -821,10 +821,10 @@
 	.4byte 0xBFE64268
 	.4byte 0x41992D0F
 	.4byte 0xB054BB16
-.endobj lbl_81618210
+.endobj AESiSubShiftTable
 
 # .rodata:0x100 | 0x81618310 | size: 0x100
-.obj lbl_81618310, global
+.obj AESiInvSubShiftTable, local
 	.4byte 0x52096AD5
 	.4byte 0x3036A538
 	.4byte 0xBF40A39E
@@ -889,10 +889,10 @@
 	.4byte 0xBA77D626
 	.4byte 0xE1691463
 	.4byte 0x55210C7D
-.endobj lbl_81618310
+.endobj AESiInvSubShiftTable
 
-# .rodata:0x200 | 0x81618410 | size: 0x20
-.obj lbl_81618410, global
+# .rodata:0x200 | 0x81618410 | size: 0x1E
+.obj AESiRoundKeyRcon0, local
 	.4byte 0x01020408
 	.4byte 0x10204080
 	.4byte 0x1B366CD8
@@ -900,11 +900,17 @@
 	.4byte 0x5EBC63C6
 	.4byte 0x97356AD4
 	.4byte 0xB37DFAEF
-	.4byte 0xC5910000
-.endobj lbl_81618410
+	.2byte 0xC591
+.endobj AESiRoundKeyRcon0
+
+# .rodata:0x21E | 0x8161842E | size: 0x2
+.obj gap_07_8161842E_rodata, global
+.hidden gap_07_8161842E_rodata
+	.2byte 0x0000
+.endobj gap_07_8161842E_rodata
 
 # .rodata:0x220 | 0x81618430 | size: 0x400
-.obj lbl_81618430, global
+.obj AESiEncryptTable, local
 	.4byte 0x6363A5C6
 	.4byte 0x7C7C84F8
 	.4byte 0x777799EE
@@ -1161,10 +1167,10 @@
 	.4byte 0x5454FCA8
 	.4byte 0xBBBBD66D
 	.4byte 0x16163A2C
-.endobj lbl_81618430
+.endobj AESiEncryptTable
 
 # .rodata:0x620 | 0x81618830 | size: 0x400
-.obj lbl_81618830, global
+.obj AESiDecryptTable, local
 	.4byte 0xF4A75051
 	.4byte 0x4165537E
 	.4byte 0x17A4C31A
@@ -1421,7 +1427,7 @@
 	.4byte 0x32B670D5
 	.4byte 0x6C5C7448
 	.4byte 0xB85742D0
-.endobj lbl_81618830
+.endobj AESiDecryptTable
 
 # 0x8166CF90..0x8166D058 | size: 0xC8
 .data

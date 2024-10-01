@@ -522,10 +522,10 @@
 .fn doAnim__Q33ipl5scene8CalendarFi, global
 /* 8139E238 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8139E23C | 7C 08 02 A6 */	mflr r0
-/* 8139E240 | 3C C0 81 61 */	lis r6, lbl_8160F9E0@ha
+/* 8139E240 | 3C C0 81 61 */	lis r6, scAnmFrame__Q23ipl5scene@ha
 /* 8139E244 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 8139E248 | 54 80 18 38 */	slwi r0, r4, 3
-/* 8139E24C | 38 C6 F9 E0 */	addi r6, r6, lbl_8160F9E0@l
+/* 8139E24C | 38 C6 F9 E0 */	addi r6, r6, scAnmFrame__Q23ipl5scene@l
 /* 8139E250 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8139E254 | 7C 86 02 14 */	add r4, r6, r0
 /* 8139E258 | 7C 06 04 2E */	lfsx f0, r6, r0
@@ -1356,11 +1356,11 @@
 /* 8139ED40 | 38 80 00 01 */	li r4, 0x1
 .L_8139ED44:
 /* 8139ED44 | 2C 04 00 00 */	cmpwi r4, 0x0
-/* 8139ED48 | 3F C0 81 61 */	lis r30, lbl_8160FAB0@ha
-/* 8139ED4C | 3B DE FA B0 */	addi r30, r30, lbl_8160FAB0@l
+/* 8139ED48 | 3F C0 81 61 */	lis r30, scWorldDayToMessageID__Q23ipl5scene@ha
+/* 8139ED4C | 3B DE FA B0 */	addi r30, r30, scWorldDayToMessageID__Q23ipl5scene@l
 /* 8139ED50 | 41 82 00 0C */	beq .L_8139ED5C
-/* 8139ED54 | 3F C0 81 61 */	lis r30, lbl_8160FA08@ha
-/* 8139ED58 | 3B DE FA 08 */	addi r30, r30, lbl_8160FA08@l
+/* 8139ED54 | 3F C0 81 61 */	lis r30, scJapanDayToMessageID__Q23ipl5scene@ha
+/* 8139ED58 | 3B DE FA 08 */	addi r30, r30, scJapanDayToMessageID__Q23ipl5scene@l
 .L_8139ED5C:
 /* 8139ED5C | 3B A0 00 00 */	li r29, 0x0
 /* 8139ED60 | 3B E0 00 00 */	li r31, 0x0
@@ -1465,13 +1465,13 @@
 /* 8139EEB8 | 80 65 00 04 */	lwz r3, 0x4(r5)
 /* 8139EEBC | 39 00 03 E8 */	li r8, 0x3e8
 /* 8139EEC0 | 38 03 FF FF */	subi r0, r3, 0x1
-/* 8139EEC4 | 3C 80 81 61 */	lis r4, lbl_8160FB58@ha
+/* 8139EEC4 | 3C 80 81 61 */	lis r4, scMonthToMessageID__Q23ipl5scene@ha
 /* 8139EEC8 | 3C A0 81 09 */	lis r5, smArg__Q23ipl6System@ha
 /* 8139EECC | 7C FF 4B D6 */	divw r7, r31, r9
 /* 8139EED0 | 38 A5 90 08 */	addi r5, r5, smArg__Q23ipl6System@l
 /* 8139EED4 | 54 00 10 3A */	slwi r0, r0, 2
 /* 8139EED8 | 80 A5 00 80 */	lwz r5, 0x80(r5)
-/* 8139EEDC | 38 84 FB 58 */	addi r4, r4, lbl_8160FB58@l
+/* 8139EEDC | 38 84 FB 58 */	addi r4, r4, scMonthToMessageID__Q23ipl5scene@l
 /* 8139EEE0 | 7C 84 00 2E */	lwzx r4, r4, r0
 /* 8139EEE4 | 7C CA 4B D6 */	divw r6, r10, r9
 /* 8139EEE8 | 38 61 00 08 */	addi r3, r1, 0x8
@@ -1511,11 +1511,11 @@
 /* 8139EF68 | 80 65 00 04 */	lwz r3, 0x4(r5)
 /* 8139EF6C | 3C A0 81 09 */	lis r5, smArg__Q23ipl6System@ha
 /* 8139EF70 | 38 A5 90 08 */	addi r5, r5, smArg__Q23ipl6System@l
-/* 8139EF74 | 3C 80 81 61 */	lis r4, lbl_8160FB58@ha
+/* 8139EF74 | 3C 80 81 61 */	lis r4, scMonthToMessageID__Q23ipl5scene@ha
 /* 8139EF78 | 38 03 FF FF */	subi r0, r3, 0x1
 /* 8139EF7C | 80 65 00 80 */	lwz r3, 0x80(r5)
 /* 8139EF80 | 54 00 10 3A */	slwi r0, r0, 2
-/* 8139EF84 | 38 84 FB 58 */	addi r4, r4, lbl_8160FB58@l
+/* 8139EF84 | 38 84 FB 58 */	addi r4, r4, scMonthToMessageID__Q23ipl5scene@l
 /* 8139EF88 | 80 63 00 00 */	lwz r3, 0x0(r3)
 /* 8139EF8C | 7C 84 00 2E */	lwzx r4, r4, r0
 /* 8139EF90 | 4B F9 F8 2D */	bl getMessage__Q33ipl7message7MessageCFUl
@@ -2218,7 +2218,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x8160F9E0 | size: 0x28
-.obj lbl_8160F9E0, global
+# ipl::scene::scAnmFrame
+.obj scAnmFrame__Q23ipl5scene, local
 	.4byte 0x447A0000
 	.4byte 0x44820000
 	.4byte 0x44820000
@@ -2229,10 +2230,11 @@
 	.4byte 0x453D6000
 	.4byte 0x457A0000
 	.4byte 0x457B4000
-.endobj lbl_8160F9E0
+.endobj scAnmFrame__Q23ipl5scene
 
 # .rodata:0x28 | 0x8160FA08 | size: 0xA8
-.obj lbl_8160FA08, global
+# ipl::scene::scJapanDayToMessageID
+.obj scJapanDayToMessageID__Q23ipl5scene, local
 	.4byte lbl_8164C348
 	.4byte 0x00000074
 	.4byte lbl_8164C353
@@ -2275,10 +2277,11 @@
 	.4byte 0x00000072
 	.4byte lbl_8164C424
 	.4byte 0x00000073
-.endobj lbl_8160FA08
+.endobj scJapanDayToMessageID__Q23ipl5scene
 
 # .rodata:0xD0 | 0x8160FAB0 | size: 0xA8
-.obj lbl_8160FAB0, global
+# ipl::scene::scWorldDayToMessageID
+.obj scWorldDayToMessageID__Q23ipl5scene, local
 	.4byte lbl_8164C348
 	.4byte 0x0000006E
 	.4byte lbl_8164C353
@@ -2321,10 +2324,11 @@
 	.4byte 0x00000073
 	.4byte lbl_8164C424
 	.4byte 0x00000074
-.endobj lbl_8160FAB0
+.endobj scWorldDayToMessageID__Q23ipl5scene
 
 # .rodata:0x178 | 0x8160FB58 | size: 0x30
-.obj lbl_8160FB58, global
+# ipl::scene::scMonthToMessageID
+.obj scMonthToMessageID__Q23ipl5scene, local
 	.4byte 0x00000076
 	.4byte 0x00000077
 	.4byte 0x00000078
@@ -2337,7 +2341,7 @@
 	.4byte 0x0000007F
 	.4byte 0x00000080
 	.4byte 0x00000081
-.endobj lbl_8160FB58
+.endobj scMonthToMessageID__Q23ipl5scene
 
 # .rodata:0x1A8 | 0x8160FB88 | size: 0x18
 .obj lbl_8160FB88, global

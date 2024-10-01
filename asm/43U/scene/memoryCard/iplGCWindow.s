@@ -44,11 +44,11 @@
 /* 813CEDA4 | 4B F9 B2 81 */	bl __ct__Q33ipl6layout6ObjectFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCc
 .L_813CEDA8:
 /* 813CEDA8 | 90 7F 00 04 */	stw r3, 0x4(r31)
-/* 813CEDAC | 3C 80 81 61 */	lis r4, lbl_816104A8@ha
+/* 813CEDAC | 3C 80 81 61 */	lis r4, scAnmName__Q23ipl5scene@ha
 /* 813CEDB0 | 7F E3 FB 78 */	mr r3, r31
 /* 813CEDB4 | 38 A0 00 10 */	li r5, 0x10
 /* 813CEDB8 | 81 9F 00 00 */	lwz r12, 0x0(r31)
-/* 813CEDBC | 38 84 04 A8 */	addi r4, r4, lbl_816104A8@l
+/* 813CEDBC | 38 84 04 A8 */	addi r4, r4, scAnmName__Q23ipl5scene@l
 /* 813CEDC0 | 81 8C 00 30 */	lwz r12, 0x30(r12)
 /* 813CEDC4 | 7D 89 03 A6 */	mtctr r12
 /* 813CEDC8 | 4E 80 04 21 */	bctrl
@@ -204,9 +204,9 @@
 /* 813CF014 | 80 9C 00 08 */	lwz r4, 0x8(r28)
 /* 813CF018 | 7D 89 03 A6 */	mtctr r12
 /* 813CF01C | 4E 80 04 21 */	bctrl
-/* 813CF020 | 3F A0 81 61 */	lis r29, lbl_81610528@ha
+/* 813CF020 | 3F A0 81 61 */	lis r29, scTextboxToMessageID__Q23ipl5scene@ha
 /* 813CF024 | 3B 80 00 00 */	li r28, 0x0
-/* 813CF028 | 3B BD 05 28 */	addi r29, r29, lbl_81610528@l
+/* 813CF028 | 3B BD 05 28 */	addi r29, r29, scTextboxToMessageID__Q23ipl5scene@l
 /* 813CF02C | 3B C0 00 00 */	li r30, 0x0
 .L_813CF030:
 /* 813CF030 | 7C BD F2 14 */	add r5, r29, r30
@@ -2905,7 +2905,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x816104A8 | size: 0x80
-.obj lbl_816104A8, global
+# ipl::scene::scAnmName
+.obj scAnmName__Q23ipl5scene, local
 	.4byte lbl_81652820
 	.4byte lbl_81696CB0
 	.4byte lbl_8165283D
@@ -2938,17 +2939,18 @@
 	.4byte lbl_81696CB0
 	.4byte lbl_81652A3D
 	.4byte lbl_81696CCB
-.endobj lbl_816104A8
+.endobj scAnmName__Q23ipl5scene
 
 # .rodata:0x80 | 0x81610528 | size: 0x18
-.obj lbl_81610528, global
+# ipl::scene::scTextboxToMessageID
+.obj scTextboxToMessageID__Q23ipl5scene, local
 	.4byte lbl_81652A58
 	.4byte 0x000000A7
 	.4byte lbl_81652A62
 	.4byte 0x000000B2
 	.4byte lbl_81652A6C
 	.4byte 0x000000BD
-.endobj lbl_81610528
+.endobj scTextboxToMessageID__Q23ipl5scene
 
 # .rodata:0x98 | 0x81610540 | size: 0x18
 .obj lbl_81610540, global

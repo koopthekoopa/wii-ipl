@@ -763,18 +763,18 @@
 /* 8143A010 | 40 82 00 08 */	bne .L_8143A018
 /* 8143A014 | 48 00 01 18 */	b .L_8143A12C
 .L_8143A018:
-/* 8143A018 | 3F A0 81 66 */	lis r29, lbl_81660588@ha
+/* 8143A018 | 3F A0 81 66 */	lis r29, s_all_map__Q29textinput4util@ha
 /* 8143A01C | 3B E0 00 00 */	li r31, 0x0
-/* 8143A020 | 3B BD 05 88 */	addi r29, r29, lbl_81660588@l
+/* 8143A020 | 3B BD 05 88 */	addi r29, r29, s_all_map__Q29textinput4util@l
 .L_8143A024:
 /* 8143A024 | 80 7D 00 00 */	lwz r3, 0x0(r29)
 /* 8143A028 | 7F C4 F3 78 */	mr r4, r30
 /* 8143A02C | 48 1C E7 B5 */	bl fn_816087E0
 /* 8143A030 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8143A034 | 41 82 00 28 */	beq .L_8143A05C
-/* 8143A038 | 3C 80 81 66 */	lis r4, lbl_81660588@ha
+/* 8143A038 | 3C 80 81 66 */	lis r4, s_all_map__Q29textinput4util@ha
 /* 8143A03C | 57 E0 10 3A */	slwi r0, r31, 2
-/* 8143A040 | 38 84 05 88 */	addi r4, r4, lbl_81660588@l
+/* 8143A040 | 38 84 05 88 */	addi r4, r4, s_all_map__Q29textinput4util@l
 /* 8143A044 | 7C 04 00 2E */	lwzx r0, r4, r0
 /* 8143A048 | 7C 60 18 50 */	subf r3, r0, r3
 /* 8143A04C | 54 60 0F FE */	srwi r0, r3, 31
@@ -790,11 +790,11 @@
 /* 8143A06C | 2C 1F 00 04 */	cmpwi r31, 0x4
 /* 8143A070 | 40 80 00 B0 */	bge .L_8143A120
 /* 8143A074 | 38 7F 00 01 */	addi r3, r31, 0x1
-/* 8143A078 | 3C 80 81 66 */	lis r4, lbl_81660588@ha
+/* 8143A078 | 3C 80 81 66 */	lis r4, s_all_map__Q29textinput4util@ha
 /* 8143A07C | 54 60 F0 02 */	slwi r0, r3, 30
 /* 8143A080 | 57 85 08 3C */	slwi r5, r28, 1
 /* 8143A084 | 54 63 0F FE */	srwi r3, r3, 31
-/* 8143A088 | 38 84 05 88 */	addi r4, r4, lbl_81660588@l
+/* 8143A088 | 38 84 05 88 */	addi r4, r4, s_all_map__Q29textinput4util@l
 /* 8143A08C | 7C 03 00 50 */	subf r0, r3, r0
 /* 8143A090 | 54 00 10 3E */	rotlwi r0, r0, 2
 /* 8143A094 | 7C 00 1A 14 */	add r0, r0, r3
@@ -1046,10 +1046,10 @@
 
 # .text:0xD84 | 0x8143A38C | size: 0x40
 .fn "__sinit_\\util_cpp", global
-/* 8143A38C | 3C 60 81 66 */	lis r3, lbl_81660588@ha
+/* 8143A38C | 3C 60 81 66 */	lis r3, s_all_map__Q29textinput4util@ha
 /* 8143A390 | 38 CD AC E8 */	li r6, lbl_81698D28@sda21
-/* 8143A394 | 39 03 05 88 */	addi r8, r3, lbl_81660588@l
-/* 8143A398 | 81 23 05 88 */	lwz r9, lbl_81660588@l(r3)
+/* 8143A394 | 39 03 05 88 */	addi r8, r3, s_all_map__Q29textinput4util@l
+/* 8143A398 | 81 23 05 88 */	lwz r9, s_all_map__Q29textinput4util@l(r3)
 /* 8143A39C | 80 E8 00 04 */	lwz r7, 0x4(r8)
 /* 8143A3A0 | 38 8D AC F0 */	li r4, lbl_81698D30@sda21
 /* 8143A3A4 | 80 A8 00 08 */	lwz r5, 0x8(r8)
@@ -1230,12 +1230,13 @@
 .endobj lbl_81660510
 
 # .data:0x210 | 0x81660588 | size: 0x10
-.obj lbl_81660588, global
+# textinput::util::s_all_map
+.obj s_all_map__Q29textinput4util, local
 	.4byte lbl_816603A8
 	.4byte lbl_81660420
 	.4byte lbl_81660498
 	.4byte lbl_81660510
-.endobj lbl_81660588
+.endobj s_all_map__Q29textinput4util
 
 # 0x81694E28..0x81694E58 | size: 0x30
 .section .sdata2, "a"

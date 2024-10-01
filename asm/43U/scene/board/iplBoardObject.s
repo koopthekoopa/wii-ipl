@@ -2065,8 +2065,8 @@
 /* 813959E8 | 48 00 06 D5 */	bl arc_init_handle__Q33ipl5scene11BoardObjectFPvP9ARCHandle
 /* 813959EC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813959F0 | 41 82 00 70 */	beq .L_81395A60
-/* 813959F4 | 3F E0 81 61 */	lis r31, lbl_8160F6F8@ha
-/* 813959F8 | 84 9F F6 F8 */	lwzu r4, lbl_8160F6F8@l(r31)
+/* 813959F4 | 3F E0 81 61 */	lis r31, scThumbChangeTexFile__Q23ipl5scene@ha
+/* 813959F8 | 84 9F F6 F8 */	lwzu r4, scThumbChangeTexFile__Q23ipl5scene@l(r31)
 /* 813959FC | 38 61 00 14 */	addi r3, r1, 0x14
 /* 81395A00 | 38 A1 00 08 */	addi r5, r1, 0x8
 /* 81395A04 | 48 1D B4 3D */	bl ARCOpen
@@ -2561,7 +2561,7 @@
 /* 8139606C | 7C 7E 1B 78 */	mr r30, r3
 /* 81396070 | 38 6D 86 0D */	li r3, lbl_8169664D@sda21
 /* 81396074 | 93 E1 00 08 */	stw r31, 0x8(r1)
-/* 81396078 | 48 13 B0 61 */	bl fn_814D10D8
+/* 81396078 | 48 13 B0 61 */	bl VFGetSDDirectStatus
 /* 8139607C | 80 1E 00 A8 */	lwz r0, 0xa8(r30)
 /* 81396080 | 2C 00 00 02 */	cmpwi r0, 0x2
 /* 81396084 | 40 82 00 1C */	bne .L_813960A0
@@ -2606,13 +2606,19 @@
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x8160F6F8 | size: 0x10
-.obj lbl_8160F6F8, global
+# .rodata:0x0 | 0x8160F6F8 | size: 0xC
+# ipl::scene::scThumbChangeTexFile
+.obj scThumbChangeTexFile__Q23ipl5scene, local
 	.4byte lbl_8164B540
 	.4byte lbl_8164B555
 	.4byte lbl_81696628
+.endobj scThumbChangeTexFile__Q23ipl5scene
+
+# .rodata:0xC | 0x8160F704 | size: 0x4
+.obj gap_07_8160F704_rodata, global
+.hidden gap_07_8160F704_rodata
 	.4byte 0x00000000
-.endobj lbl_8160F6F8
+.endobj gap_07_8160F704_rodata
 
 # 0x8164B1E8..0x8164B698 | size: 0x4B0
 .data

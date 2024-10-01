@@ -114,7 +114,7 @@
 /* 813D56DC | 98 A1 00 15 */	stb r5, 0x15(r1)
 /* 813D56E0 | 98 81 00 16 */	stb r4, 0x16(r1)
 /* 813D56E4 | 98 01 00 17 */	stb r0, 0x17(r1)
-/* 813D56E8 | 48 0D E4 8D */	bl fn_814B3B74
+/* 813D56E8 | 48 0D E4 8D */	bl SOHtoNl
 /* 813D56EC | 90 61 00 18 */	stw r3, 0x18(r1)
 /* 813D56F0 | 7F 83 E3 78 */	mr r3, r28
 /* 813D56F4 | 38 81 00 10 */	addi r4, r1, 0x10
@@ -175,7 +175,7 @@
 /* 813D57C0 | 98 A1 00 15 */	stb r5, 0x15(r1)
 /* 813D57C4 | 98 81 00 16 */	stb r4, 0x16(r1)
 /* 813D57C8 | 98 01 00 17 */	stb r0, 0x17(r1)
-/* 813D57CC | 48 0D E3 A9 */	bl fn_814B3B74
+/* 813D57CC | 48 0D E3 A9 */	bl SOHtoNl
 /* 813D57D0 | 90 61 00 18 */	stw r3, 0x18(r1)
 /* 813D57D4 | 7F 63 DB 78 */	mr r3, r27
 /* 813D57D8 | 38 81 00 10 */	addi r4, r1, 0x10
@@ -225,29 +225,29 @@
 /* 813D5864 | 90 01 00 B4 */	stw r0, 0xb4(r1)
 /* 813D5868 | 39 61 00 B0 */	addi r11, r1, 0xb0
 /* 813D586C | 48 22 3C 31 */	bl _savegpr_18
-/* 813D5870 | 80 0D AB 4C */	lwz r0, lbl_81698B8C@sda21(r0)
+/* 813D5870 | 80 0D AB 4C */	lwz r0, gotERT1@sda21(r0)
 /* 813D5874 | 38 A0 00 08 */	li r5, 0x8
 /* 813D5878 | 90 A1 00 08 */	stw r5, 0x8(r1)
 /* 813D587C | 7C 77 1B 78 */	mr r23, r3
 /* 813D5880 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D5884 | 7C 98 23 78 */	mr r24, r4
 /* 813D5888 | 41 82 00 54 */	beq .L_813D58DC
-/* 813D588C | 80 0D AB 48 */	lwz r0, lbl_81698B88@sda21(r0)
+/* 813D588C | 80 0D AB 48 */	lwz r0, gotERT2@sda21(r0)
 /* 813D5890 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D5894 | 41 82 00 48 */	beq .L_813D58DC
-/* 813D5898 | 80 0D AB 44 */	lwz r0, lbl_81698B84@sda21(r0)
+/* 813D5898 | 80 0D AB 44 */	lwz r0, gotERT3@sda21(r0)
 /* 813D589C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D58A0 | 41 82 00 3C */	beq .L_813D58DC
-/* 813D58A4 | 80 0D AB 40 */	lwz r0, lbl_81698B80@sda21(r0)
+/* 813D58A4 | 80 0D AB 40 */	lwz r0, gotADDRESS1a@sda21(r0)
 /* 813D58A8 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D58AC | 41 82 00 30 */	beq .L_813D58DC
-/* 813D58B0 | 80 0D AB 3C */	lwz r0, lbl_81698B7C@sda21(r0)
+/* 813D58B0 | 80 0D AB 3C */	lwz r0, gotADDRESS1b@sda21(r0)
 /* 813D58B4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D58B8 | 41 82 00 24 */	beq .L_813D58DC
-/* 813D58BC | 80 0D AB 38 */	lwz r0, lbl_81698B78@sda21(r0)
+/* 813D58BC | 80 0D AB 38 */	lwz r0, gotADDRESS2@sda21(r0)
 /* 813D58C0 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D58C4 | 41 82 00 18 */	beq .L_813D58DC
-/* 813D58C8 | 80 0D AB 34 */	lwz r0, lbl_81698B74@sda21(r0)
+/* 813D58C8 | 80 0D AB 34 */	lwz r0, gotADDRESS3@sda21(r0)
 /* 813D58CC | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D58D0 | 41 82 00 0C */	beq .L_813D58DC
 /* 813D58D4 | 38 60 00 00 */	li r3, 0x0
@@ -314,9 +314,9 @@
 /* 813D59B0 | 40 80 01 F8 */	bge .L_813D5BA8
 /* 813D59B4 | 48 00 00 50 */	b .L_813D5A04
 .L_813D59B8:
-/* 813D59B8 | 93 8D AB 4C */	stw r28, lbl_81698B8C@sda21(r0)
+/* 813D59B8 | 93 8D AB 4C */	stw r28, gotERT1@sda21(r0)
 /* 813D59BC | A0 61 00 12 */	lhz r3, 0x12(r1)
-/* 813D59C0 | 48 0D E1 AD */	bl fn_814B3B6C
+/* 813D59C0 | 48 0D E1 AD */	bl SONtoHs
 /* 813D59C4 | 7C 60 1B 78 */	mr r0, r3
 /* 813D59C8 | 80 61 00 14 */	lwz r3, 0x14(r1)
 /* 813D59CC | 54 04 04 3E */	clrlwi r4, r0, 16
@@ -325,9 +325,9 @@
 /* 813D59D8 | 48 00 01 D0 */	b .L_813D5BA8
 .L_813D59DC:
 /* 813D59DC | 93 B8 00 80 */	stw r29, 0x80(r24)
-/* 813D59E0 | 93 8D AB 48 */	stw r28, lbl_81698B88@sda21(r0)
+/* 813D59E0 | 93 8D AB 48 */	stw r28, gotERT2@sda21(r0)
 /* 813D59E4 | A0 61 00 12 */	lhz r3, 0x12(r1)
-/* 813D59E8 | 48 0D E1 85 */	bl fn_814B3B6C
+/* 813D59E8 | 48 0D E1 85 */	bl SONtoHs
 /* 813D59EC | 7C 60 1B 78 */	mr r0, r3
 /* 813D59F0 | 80 61 00 14 */	lwz r3, 0x14(r1)
 /* 813D59F4 | 54 04 04 3E */	clrlwi r4, r0, 16
@@ -336,9 +336,9 @@
 /* 813D5A00 | 48 00 01 A8 */	b .L_813D5BA8
 .L_813D5A04:
 /* 813D5A04 | 93 B8 00 84 */	stw r29, 0x84(r24)
-/* 813D5A08 | 93 8D AB 44 */	stw r28, lbl_81698B84@sda21(r0)
+/* 813D5A08 | 93 8D AB 44 */	stw r28, gotERT3@sda21(r0)
 /* 813D5A0C | A0 61 00 12 */	lhz r3, 0x12(r1)
-/* 813D5A10 | 48 0D E1 5D */	bl fn_814B3B6C
+/* 813D5A10 | 48 0D E1 5D */	bl SONtoHs
 /* 813D5A14 | 7C 60 1B 78 */	mr r0, r3
 /* 813D5A18 | 80 61 00 14 */	lwz r3, 0x14(r1)
 /* 813D5A1C | 54 04 04 3E */	clrlwi r4, r0, 16
@@ -353,7 +353,7 @@
 /* 813D5A3C | 38 A0 00 15 */	li r5, 0x15
 /* 813D5A40 | 4B F5 A7 F1 */	bl memcpy
 /* 813D5A44 | 80 61 00 28 */	lwz r3, 0x28(r1)
-/* 813D5A48 | 48 0D E1 21 */	bl fn_814B3B68
+/* 813D5A48 | 48 0D E1 21 */	bl SONtoHl
 /* 813D5A4C | 2C 03 00 02 */	cmpwi r3, 0x2
 /* 813D5A50 | 90 61 00 28 */	stw r3, 0x28(r1)
 /* 813D5A54 | 41 82 00 3C */	beq .L_813D5A90
@@ -367,16 +367,16 @@
 /* 813D5A70 | 40 80 00 24 */	bge .L_813D5A94
 /* 813D5A74 | 48 00 00 0C */	b .L_813D5A80
 .L_813D5A78:
-/* 813D5A78 | 93 8D AB 40 */	stw r28, lbl_81698B80@sda21(r0)
+/* 813D5A78 | 93 8D AB 40 */	stw r28, gotADDRESS1a@sda21(r0)
 /* 813D5A7C | 48 00 00 18 */	b .L_813D5A94
 .L_813D5A80:
-/* 813D5A80 | 93 8D AB 3C */	stw r28, lbl_81698B7C@sda21(r0)
+/* 813D5A80 | 93 8D AB 3C */	stw r28, gotADDRESS1b@sda21(r0)
 /* 813D5A84 | 48 00 00 10 */	b .L_813D5A94
 .L_813D5A88:
-/* 813D5A88 | 93 8D AB 38 */	stw r28, lbl_81698B78@sda21(r0)
+/* 813D5A88 | 93 8D AB 38 */	stw r28, gotADDRESS2@sda21(r0)
 /* 813D5A8C | 48 00 00 08 */	b .L_813D5A94
 .L_813D5A90:
-/* 813D5A90 | 93 8D AB 34 */	stw r28, lbl_81698B74@sda21(r0)
+/* 813D5A90 | 93 8D AB 34 */	stw r28, gotADDRESS3@sda21(r0)
 .L_813D5A94:
 /* 813D5A94 | 3A 80 00 00 */	li r20, 0x0
 /* 813D5A98 | 48 00 0C 11 */	bl getlocalhost
@@ -394,7 +394,7 @@
 /* 813D5AC0 | 41 82 00 38 */	beq .L_813D5AF8
 /* 813D5AC4 | 82 53 00 00 */	lwz r18, 0x0(r19)
 /* 813D5AC8 | 38 7E 00 01 */	addi r3, r30, 0x1
-/* 813D5ACC | 48 0D E0 A9 */	bl fn_814B3B74
+/* 813D5ACC | 48 0D E0 A9 */	bl SOHtoNl
 /* 813D5AD0 | 7C 12 18 40 */	cmplw r18, r3
 /* 813D5AD4 | 41 82 00 1C */	beq .L_813D5AF0
 /* 813D5AD8 | 7E 54 93 78 */	mr r20, r18
@@ -426,7 +426,7 @@
 /* 813D5B30 | A0 61 00 1A */	lhz r3, 0x1a(r1)
 .L_813D5B34:
 /* 813D5B34 | 54 63 04 3E */	clrlwi r3, r3, 16
-/* 813D5B38 | 48 0D E0 35 */	bl fn_814B3B6C
+/* 813D5B38 | 48 0D E0 35 */	bl SONtoHs
 /* 813D5B3C | 80 01 00 28 */	lwz r0, 0x28(r1)
 /* 813D5B40 | 54 00 20 36 */	slwi r0, r0, 4
 /* 813D5B44 | 7C 98 02 14 */	add r4, r24, r0
@@ -437,13 +437,13 @@
 /* 813D5B58 | 7C 78 02 14 */	add r3, r24, r0
 /* 813D5B5C | 90 83 00 9C */	stw r4, 0x9c(r3)
 /* 813D5B60 | A0 61 00 33 */	lhz r3, 0x33(r1)
-/* 813D5B64 | 48 0D E0 09 */	bl fn_814B3B6C
+/* 813D5B64 | 48 0D E0 09 */	bl SONtoHs
 /* 813D5B68 | 80 01 00 28 */	lwz r0, 0x28(r1)
 /* 813D5B6C | 54 00 20 36 */	slwi r0, r0, 4
 /* 813D5B70 | 7C 98 02 14 */	add r4, r24, r0
 /* 813D5B74 | B0 64 00 A0 */	sth r3, 0xa0(r4)
 /* 813D5B78 | A0 61 00 12 */	lhz r3, 0x12(r1)
-/* 813D5B7C | 48 0D DF F1 */	bl fn_814B3B6C
+/* 813D5B7C | 48 0D DF F1 */	bl SONtoHs
 /* 813D5B80 | 7C 60 1B 78 */	mr r0, r3
 /* 813D5B84 | 80 61 00 14 */	lwz r3, 0x14(r1)
 /* 813D5B88 | 54 04 04 3E */	clrlwi r4, r0, 16
@@ -833,36 +833,36 @@
 .endobj lbl_81698B70
 
 # .sbss:0x4 | 0x81698B74 | size: 0x4
-.obj lbl_81698B74, global
+.obj gotADDRESS3, global
 	.skip 0x4
-.endobj lbl_81698B74
+.endobj gotADDRESS3
 
 # .sbss:0x8 | 0x81698B78 | size: 0x4
-.obj lbl_81698B78, global
+.obj gotADDRESS2, global
 	.skip 0x4
-.endobj lbl_81698B78
+.endobj gotADDRESS2
 
 # .sbss:0xC | 0x81698B7C | size: 0x4
-.obj lbl_81698B7C, global
+.obj gotADDRESS1b, global
 	.skip 0x4
-.endobj lbl_81698B7C
+.endobj gotADDRESS1b
 
 # .sbss:0x10 | 0x81698B80 | size: 0x4
-.obj lbl_81698B80, global
+.obj gotADDRESS1a, global
 	.skip 0x4
-.endobj lbl_81698B80
+.endobj gotADDRESS1a
 
 # .sbss:0x14 | 0x81698B84 | size: 0x4
-.obj lbl_81698B84, global
+.obj gotERT3, global
 	.skip 0x4
-.endobj lbl_81698B84
+.endobj gotERT3
 
 # .sbss:0x18 | 0x81698B88 | size: 0x4
-.obj lbl_81698B88, global
+.obj gotERT2, global
 	.skip 0x4
-.endobj lbl_81698B88
+.endobj gotERT2
 
 # .sbss:0x1C | 0x81698B8C | size: 0x4
-.obj lbl_81698B8C, global
+.obj gotERT1, global
 	.skip 0x4
-.endobj lbl_81698B8C
+.endobj gotERT1

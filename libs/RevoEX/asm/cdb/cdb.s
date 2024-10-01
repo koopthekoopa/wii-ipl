@@ -139,7 +139,7 @@
 # .text:0x1A8 | 0x81486154 | size: 0x8
 .fn CDBGetFreeSize, global
 /* 81486154 | 38 6D 99 68 */	li r3, lbl_816979A8@sda21
-/* 81486158 | 48 04 AE 98 */	b fn_814D0FF0
+/* 81486158 | 48 04 AE 98 */	b VFGetDriveFreeSize
 .endfn CDBGetFreeSize
 
 # 0x8166B400..0x8166B478 | size: 0x78

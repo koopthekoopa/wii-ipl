@@ -620,7 +620,7 @@
 /* 81333464 | 80 9F 00 08 */	lwz r4, 0x8(r31)
 /* 81333468 | 48 2C 4C 6D */	bl __nwa__FUlPQ23EGG4Heapi
 /* 8133346C | 38 9E 40 00 */	addi r4, r30, 0x4000
-/* 81333470 | 48 19 C8 C9 */	bl fn_814CFD38
+/* 81333470 | 48 19 C8 C9 */	bl VFInitEx
 /* 81333474 | 3C 60 00 06 */	lis r3, 0x6
 /* 81333478 | 80 9F 00 08 */	lwz r4, 0x8(r31)
 /* 8133347C | 38 63 CE 40 */	subi r3, r3, 0x31c0
@@ -665,7 +665,7 @@
 /* 81333514 | 40 82 00 14 */	bne .L_81333528
 /* 81333518 | 7F C3 F3 78 */	mr r3, r30
 /* 8133351C | 38 80 00 01 */	li r4, 0x1
-/* 81333520 | 48 16 D1 3D */	bl fn_814A065C
+/* 81333520 | 48 16 D1 3D */	bl NWC24InitFiles
 /* 81333524 | 48 00 00 60 */	b .L_81333584
 .L_81333528:
 /* 81333528 | 48 23 72 0D */	bl fn_8156A734
@@ -673,13 +673,13 @@
 /* 81333530 | 40 82 00 14 */	bne .L_81333544
 /* 81333534 | 7F C3 F3 78 */	mr r3, r30
 /* 81333538 | 38 80 00 00 */	li r4, 0x0
-/* 8133353C | 48 16 D1 21 */	bl fn_814A065C
+/* 8133353C | 48 16 D1 21 */	bl NWC24InitFiles
 /* 81333540 | 48 00 00 44 */	b .L_81333584
 .L_81333544:
 /* 81333544 | 7F C3 F3 78 */	mr r3, r30
-/* 81333548 | 48 16 CA CD */	bl fn_814A0014
+/* 81333548 | 48 16 CA CD */	bl NWC24OpenLib
 /* 8133354C | 7C 7F 1B 78 */	mr r31, r3
-/* 81333550 | 48 16 CC D1 */	bl fn_814A0220
+/* 81333550 | 48 16 CC D1 */	bl NWC24CloseLib
 /* 81333554 | 2C 1F FF F2 */	cmpwi r31, -0xe
 /* 81333558 | 41 82 00 10 */	beq .L_81333568
 /* 8133355C | 38 1F 00 15 */	addi r0, r31, 0x15
@@ -688,7 +688,7 @@
 .L_81333568:
 /* 81333568 | 7F C3 F3 78 */	mr r3, r30
 /* 8133356C | 38 80 00 00 */	li r4, 0x0
-/* 81333570 | 48 16 D0 ED */	bl fn_814A065C
+/* 81333570 | 48 16 D0 ED */	bl NWC24InitFiles
 /* 81333574 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
 /* 81333578 | 38 00 00 01 */	li r0, 0x1
 /* 8133357C | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
@@ -1679,7 +1679,7 @@
 /* 813342D0 | 81 8C 00 14 */	lwz r12, 0x14(r12)
 /* 813342D4 | 7D 89 03 A6 */	mtctr r12
 /* 813342D8 | 4E 80 04 21 */	bctrl
-/* 813342DC | 90 6D AC B0 */	stw r3, lbl_81698CF0@sda21(r0)
+/* 813342DC | 90 6D AC B0 */	stw r3, pBSWaveBuffer@sda21(r0)
 /* 813342E0 | 3C 60 81 33 */	lis r3, cbThreadSwitch__Q23ipl6SystemFP8OSThreadP8OSThread@ha
 /* 813342E4 | 38 63 3E 7C */	addi r3, r3, cbThreadSwitch__Q23ipl6SystemFP8OSThreadP8OSThread@l
 /* 813342E8 | 48 1F F9 75 */	bl fn_81533C5C
@@ -2258,7 +2258,7 @@
 /* 81334B38 | F3 E1 00 38 */	psq_st f31, 0x38(r1), 0, qr0
 /* 81334B3C | 39 61 00 30 */	addi r11, r1, 0x30
 /* 81334B40 | 48 2C 49 81 */	bl _savegpr_27
-/* 81334B44 | 48 17 61 F5 */	bl fn_814AAD38
+/* 81334B44 | 48 17 61 F5 */	bl NWC24SuspendScheduler
 /* 81334B48 | 38 60 00 00 */	li r3, 0x0
 /* 81334B4C | 48 20 95 DD */	bl VISetBlack
 /* 81334B50 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -3559,7 +3559,7 @@
 # .text:0x3080 | 0x81335CA4 | size: 0xC
 # textinput::EventObserver::onOK()
 .fn onOK__Q29textinput13EventObserverFv, global
-/* 81335CA4 | 38 6D 80 35 */	li r3, lbl_81696075@sda21
+/* 81335CA4 | 38 6D 80 35 */	li r3, "@STRING@onOK__Q29textinput13EventObserverFv"@sda21
 /* 81335CA8 | 4C C6 31 82 */	crclr cr1eq
 /* 81335CAC | 48 2C A9 F4 */	b printf
 .endfn onOK__Q29textinput13EventObserverFv
@@ -3813,8 +3813,9 @@
 .endobj lbl_81696071
 
 # .sdata:0x15 | 0x81696075 | size: 0xB
-.obj lbl_81696075, global
+# textinput::EventObserver::@STRING@onOK()
+.obj "@STRING@onOK__Q29textinput13EventObserverFv", global
 	.4byte 0x4F4B210A
 	.4byte 0x00000000
 	.byte 0x00, 0x00, 0x00
-.endobj lbl_81696075
+.endobj "@STRING@onOK__Q29textinput13EventObserverFv"

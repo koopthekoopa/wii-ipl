@@ -48,6 +48,11 @@ typedef enum _GXTexFmt {
     GX_TF_A8     = GX_CTF_A8
 } GXTexFmt;
 
+typedef enum _GXCITexFmt {
+    GX_TF_C4 = 0x08,
+    GX_TF_C8 = 0x09,
+    GX_TF_C14X2 = 0x0A,
+} GXCITexFmt;
 
 typedef enum _GXPosNrmMtx {
     GX_PNMTX0 = 0,
@@ -68,6 +73,39 @@ typedef enum _GXTexWrapMode {
     GX_MIRROR,
     GX_MAX_TEXWRAPMODE
 } GXTexWrapMode;
+
+typedef enum _GXTexFilter {
+    GX_NEAR = 0,
+    GX_LINEAR,
+    GX_NEAR_MIP_NEAR,
+    GX_LIN_MIP_NEAR,
+    GX_NEAR_MIP_LIN,
+    GX_LIN_MIP_LIN
+} GXTexFilter;
+
+typedef enum _GXAnisotropy {
+    GX_ANISO_1 = 0,
+    GX_ANISO_2,
+    GX_ANISO_4,
+    GX_MAX_ANISOTROPY
+} GXAnisotropy;
+
+typedef enum _GXDistAttnFn {
+    GX_DA_OFF = 0,
+    GX_DA_GENTLE,
+    GX_DA_MEDIUM,
+    GX_DA_STEEP
+} GXDistAttnFn;
+
+typedef enum _GXSpotFn {
+    GX_SP_OFF = 0,
+    GX_SP_FLAT,
+    GX_SP_COS,
+    GX_SP_COS2 ,
+    GX_SP_SHARP,
+    GX_SP_RING1,
+    GX_SP_RING2,
+} GXSpotFn;
 
 #ifdef __cplusplus
 }

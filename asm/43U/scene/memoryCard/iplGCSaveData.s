@@ -49,11 +49,11 @@
 /* 813CE5E0 | 4B F9 BA 45 */	bl __ct__Q33ipl6layout6ObjectFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCc
 .L_813CE5E4:
 /* 813CE5E4 | 90 7E 00 04 */	stw r3, 0x4(r30)
-/* 813CE5E8 | 3C 80 81 61 */	lis r4, lbl_81610480@ha
+/* 813CE5E8 | 3C 80 81 61 */	lis r4, scAnmName__Q23ipl5scene@ha
 /* 813CE5EC | 7F C3 F3 78 */	mr r3, r30
 /* 813CE5F0 | 38 A0 00 05 */	li r5, 0x5
 /* 813CE5F4 | 81 9E 00 00 */	lwz r12, 0x0(r30)
-/* 813CE5F8 | 38 84 04 80 */	addi r4, r4, lbl_81610480@l
+/* 813CE5F8 | 38 84 04 80 */	addi r4, r4, scAnmName__Q23ipl5scene@l
 /* 813CE5FC | 81 8C 00 30 */	lwz r12, 0x30(r12)
 /* 813CE600 | 7D 89 03 A6 */	mtctr r12
 /* 813CE604 | 4E 80 04 21 */	bctrl
@@ -590,7 +590,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x81610480 | size: 0x28
-.obj lbl_81610480, global
+# ipl::scene::scAnmName
+.obj scAnmName__Q23ipl5scene, local
 	.4byte lbl_816526D0
 	.4byte lbl_81696CA0
 	.4byte lbl_816526F2
@@ -601,7 +602,7 @@
 	.4byte lbl_81696CA0
 	.4byte lbl_81652766
 	.4byte lbl_8165278B
-.endobj lbl_81610480
+.endobj scAnmName__Q23ipl5scene
 
 # 0x816526D0..0x81652820 | size: 0x150
 .data

@@ -63,7 +63,7 @@
 /* 813FC440 | 38 A4 03 2C */	addi r5, r4, 0x32c
 /* 813FC444 | 38 80 08 00 */	li r4, 0x800
 /* 813FC448 | 80 63 03 7C */	lwz r3, 0x37c(r3)
-/* 813FC44C | 48 0D DA 1D */	bl fn_814D9E68
+/* 813FC44C | 48 0D DA 1D */	bl WDScanOnce
 /* 813FC450 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FC454 | 7C 64 1B 78 */	mr r4, r3
 /* 813FC458 | 41 82 00 14 */	beq .L_813FC46C
@@ -113,7 +113,7 @@
 /* 813FC4DC | 38 A0 00 20 */	li r5, 0x20
 /* 813FC4E0 | 4B F3 3E 55 */	bl memset
 /* 813FC4E4 | 38 7E 03 2C */	addi r3, r30, 0x32c
-/* 813FC4E8 | 48 0D D6 F1 */	bl fn_814D9BD8
+/* 813FC4E8 | 48 0D D6 F1 */	bl WDCheckEnableChannel
 /* 813FC4EC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FC4F0 | 7C 64 1B 78 */	mr r4, r3
 /* 813FC4F4 | 41 82 00 14 */	beq .L_813FC508

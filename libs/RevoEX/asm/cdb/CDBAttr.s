@@ -173,7 +173,7 @@
 /* 81490874 | 90 1C 04 04 */	stw r0, 0x404(r28)
 /* 81490878 | 4B E9 F9 B9 */	bl memcpy
 /* 8149087C | 38 7C 00 07 */	addi r3, r28, 0x7
-/* 81490880 | 38 82 8C 30 */	li r4, lbl_81695030@sda21
+/* 81490880 | 38 82 8C 30 */	li r4, CDB_ATTR_VERSION@sda21
 /* 81490884 | 38 A0 00 01 */	li r5, 0x1
 /* 81490888 | 4B E9 F9 A9 */	bl memcpy
 /* 8149088C | 7F A3 EB 78 */	mr r3, r29
@@ -577,10 +577,10 @@
 .balign 8
 
 # .sdata2:0x0 | 0x81695030 | size: 0x8
-.obj lbl_81695030, global
+.obj CDB_ATTR_VERSION, local
 	.4byte 0x02000000
 	.4byte 0x00000000
-.endobj lbl_81695030
+.endobj CDB_ATTR_VERSION
 
 # 0x81697A60..0x81697A68 | size: 0x8
 .section .sdata, "wa"

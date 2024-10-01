@@ -12,7 +12,7 @@
                 "${workspaceFolder}/libs/EGG/include/**",
                 "${workspaceFolder}/libs/RVLFaceLib/include/**"
             ],
-            "cStandard": "c11",
+            "cStandard": "c89",
             "cppStandard": "c++03"
         }
     ],

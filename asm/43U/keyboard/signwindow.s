@@ -21,9 +21,9 @@
 /* 81430A30 | 81 8C 00 2C */	lwz r12, 0x2c(r12)
 /* 81430A34 | 7D 89 03 A6 */	mtctr r12
 /* 81430A38 | 4E 80 04 21 */	bctrl
-/* 81430A3C | 3C 80 81 61 */	lis r4, lbl_81615DF0@ha
+/* 81430A3C | 3C 80 81 61 */	lis r4, csLanguageDependencyData__Q39textinput8keyboard10signwindow@ha
 /* 81430A40 | 54 60 18 38 */	slwi r0, r3, 3
-/* 81430A44 | 38 84 5D F0 */	addi r4, r4, lbl_81615DF0@l
+/* 81430A44 | 38 84 5D F0 */	addi r4, r4, csLanguageDependencyData__Q39textinput8keyboard10signwindow@l
 /* 81430A48 | 7C 04 02 14 */	add r0, r4, r0
 /* 81430A4C | 90 1F 00 18 */	stw r0, 0x18(r31)
 /* 81430A50 | 83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -49,9 +49,9 @@
 /* 81430A8C | 81 8C 00 2C */	lwz r12, 0x2c(r12)
 /* 81430A90 | 7D 89 03 A6 */	mtctr r12
 /* 81430A94 | 4E 80 04 21 */	bctrl
-/* 81430A98 | 3C 80 81 61 */	lis r4, lbl_81615DF0@ha
+/* 81430A98 | 3C 80 81 61 */	lis r4, csLanguageDependencyData__Q39textinput8keyboard10signwindow@ha
 /* 81430A9C | 54 60 18 38 */	slwi r0, r3, 3
-/* 81430AA0 | 38 84 5D F0 */	addi r4, r4, lbl_81615DF0@l
+/* 81430AA0 | 38 84 5D F0 */	addi r4, r4, csLanguageDependencyData__Q39textinput8keyboard10signwindow@l
 /* 81430AA4 | 7C 04 02 14 */	add r0, r4, r0
 /* 81430AA8 | 90 1F 00 18 */	stw r0, 0x18(r31)
 /* 81430AAC | 83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -73,9 +73,9 @@
 /* 81430AD8 | 7C 7F 1B 78 */	mr r31, r3
 /* 81430ADC | 7C BA 2B 78 */	mr r26, r5
 /* 81430AE0 | 40 82 01 94 */	bne .L_81430C74
-/* 81430AE4 | 3F C0 81 61 */	lis r30, lbl_81615DA8@ha
+/* 81430AE4 | 3F C0 81 61 */	lis r30, csPaneNameToControlKey__Q39textinput8keyboard10signwindow@ha
 /* 81430AE8 | 3B A0 00 00 */	li r29, 0x0
-/* 81430AEC | 3B DE 5D A8 */	addi r30, r30, lbl_81615DA8@l
+/* 81430AEC | 3B DE 5D A8 */	addi r30, r30, csPaneNameToControlKey__Q39textinput8keyboard10signwindow@l
 .L_81430AF0:
 /* 81430AF0 | 57 A0 04 3E */	clrlwi r0, r29, 16
 /* 81430AF4 | 7F 44 D3 78 */	mr r4, r26
@@ -363,9 +363,9 @@
 /* 81430E84 | 81 8C 00 2C */	lwz r12, 0x2c(r12)
 /* 81430E88 | 7D 89 03 A6 */	mtctr r12
 /* 81430E8C | 4E 80 04 21 */	bctrl
-/* 81430E90 | 3C 80 81 61 */	lis r4, lbl_81615DF0@ha
+/* 81430E90 | 3C 80 81 61 */	lis r4, csLanguageDependencyData__Q39textinput8keyboard10signwindow@ha
 /* 81430E94 | 54 60 18 38 */	slwi r0, r3, 3
-/* 81430E98 | 38 84 5D F0 */	addi r4, r4, lbl_81615DF0@l
+/* 81430E98 | 38 84 5D F0 */	addi r4, r4, csLanguageDependencyData__Q39textinput8keyboard10signwindow@l
 /* 81430E9C | 7E 03 83 78 */	mr r3, r16
 /* 81430EA0 | 7C 04 02 14 */	add r0, r4, r0
 /* 81430EA4 | 90 0F 00 18 */	stw r0, 0x18(r15)
@@ -399,12 +399,12 @@
 /* 81430F10 | 3F 20 81 66 */	lis r25, __vt__Q39textinput11nw4rmanager7AnmPane@ha
 /* 81430F14 | 3F 60 81 66 */	lis r27, __vt__Q49textinput8keyboard10signwindow23CellPhoneSignButtonPane@ha
 /* 81430F18 | 3F A0 81 66 */	lis r29, __vt__Q49textinput8keyboard10signwindow26CellPhoneSignScrollAnmPane@ha
-/* 81430F1C | 3F 00 81 66 */	lis r24, lbl_8165EBF8@ha
+/* 81430F1C | 3F 00 81 66 */	lis r24, csPaneToAnimationInSign__Q39textinput8keyboard10signwindow@ha
 /* 81430F20 | 3F C0 81 66 */	lis r30, __vt__Q49textinput8keyboard10signwindow23CellPhoneSignAllAnmPane@ha
 /* 81430F24 | 3B 39 F8 C8 */	addi r25, r25, __vt__Q39textinput11nw4rmanager7AnmPane@l
 /* 81430F28 | 3B 7B F2 E0 */	addi r27, r27, __vt__Q49textinput8keyboard10signwindow23CellPhoneSignButtonPane@l
 /* 81430F2C | 3B BD F3 08 */	addi r29, r29, __vt__Q49textinput8keyboard10signwindow26CellPhoneSignScrollAnmPane@l
-/* 81430F30 | 3B 18 EB F8 */	addi r24, r24, lbl_8165EBF8@l
+/* 81430F30 | 3B 18 EB F8 */	addi r24, r24, csPaneToAnimationInSign__Q39textinput8keyboard10signwindow@l
 /* 81430F34 | 3B DE F3 30 */	addi r30, r30, __vt__Q49textinput8keyboard10signwindow23CellPhoneSignAllAnmPane@l
 /* 81430F38 | 3A A0 00 00 */	li r21, 0x0
 /* 81430F3C | 3B 40 00 00 */	li r26, 0x0
@@ -630,9 +630,9 @@
 /* 81431250 | 81 8C 00 2C */	lwz r12, 0x2c(r12)
 /* 81431254 | 7D 89 03 A6 */	mtctr r12
 /* 81431258 | 4E 80 04 21 */	bctrl
-/* 8143125C | 3C 80 81 61 */	lis r4, lbl_81615DF0@ha
+/* 8143125C | 3C 80 81 61 */	lis r4, csLanguageDependencyData__Q39textinput8keyboard10signwindow@ha
 /* 81431260 | 54 60 18 38 */	slwi r0, r3, 3
-/* 81431264 | 38 84 5D F0 */	addi r4, r4, lbl_81615DF0@l
+/* 81431264 | 38 84 5D F0 */	addi r4, r4, csLanguageDependencyData__Q39textinput8keyboard10signwindow@l
 /* 81431268 | 38 7E 00 24 */	addi r3, r30, 0x24
 /* 8143126C | 7C 04 02 14 */	add r0, r4, r0
 /* 81431270 | 90 1E 00 18 */	stw r0, 0x18(r30)
@@ -722,9 +722,9 @@
 /* 814313AC | 4B FF F7 15 */	bl onKey__Q49textinput8keyboard10signwindow4BaseFUlPv
 /* 814313B0 | 28 1B 00 04 */	cmplwi r27, 0x4
 /* 814313B4 | 40 82 01 0C */	bne .L_814314C0
-/* 814313B8 | 3F C0 81 61 */	lis r30, lbl_81615DA8@ha
+/* 814313B8 | 3F C0 81 61 */	lis r30, csPaneNameToControlKey__Q39textinput8keyboard10signwindow@ha
 /* 814313BC | 3B A0 00 00 */	li r29, 0x0
-/* 814313C0 | 3B DE 5D A8 */	addi r30, r30, lbl_81615DA8@l
+/* 814313C0 | 3B DE 5D A8 */	addi r30, r30, csPaneNameToControlKey__Q39textinput8keyboard10signwindow@l
 .L_814313C4:
 /* 814313C4 | 57 A0 04 3E */	clrlwi r0, r29, 16
 /* 814313C8 | 7F 44 D3 78 */	mr r4, r26
@@ -1163,8 +1163,8 @@
 /* 81431994 | 7C 08 02 A6 */	mflr r0
 /* 81431998 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8143199C | 93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 814319A0 | 3F E0 81 66 */	lis r31, lbl_8165EBF8@ha
-/* 814319A4 | 3B FF EB F8 */	addi r31, r31, lbl_8165EBF8@l
+/* 814319A0 | 3F E0 81 66 */	lis r31, csPaneToAnimationInSign__Q39textinput8keyboard10signwindow@ha
+/* 814319A4 | 3B FF EB F8 */	addi r31, r31, csPaneToAnimationInSign__Q39textinput8keyboard10signwindow@l
 /* 814319A8 | 93 C1 00 18 */	stw r30, 0x18(r1)
 /* 814319AC | 3B C0 00 00 */	li r30, 0x0
 /* 814319B0 | 93 A1 00 14 */	stw r29, 0x14(r1)
@@ -2107,9 +2107,9 @@
 
 # .text:0x1B78 | 0x81432580 | size: 0x68
 .fn "__sinit_\\signwindow_cpp", global
-/* 81432580 | 3C 60 81 66 */	lis r3, lbl_8165EBF8@ha
+/* 81432580 | 3C 60 81 66 */	lis r3, csPaneToAnimationInSign__Q39textinput8keyboard10signwindow@ha
 /* 81432584 | 80 0D 93 C0 */	lwz r0, lbl_81697400@sda21(r0)
-/* 81432588 | 38 63 EB F8 */	addi r3, r3, lbl_8165EBF8@l
+/* 81432588 | 38 63 EB F8 */	addi r3, r3, csPaneToAnimationInSign__Q39textinput8keyboard10signwindow@l
 /* 8143258C | 80 8D 93 C4 */	lwz r4, lbl_81697404@sda21(r0)
 /* 81432590 | 90 03 00 DC */	stw r0, 0xdc(r3)
 /* 81432594 | 90 03 01 1C */	stw r0, 0x11c(r3)
@@ -2185,8 +2185,9 @@
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x81615B40 | size: 0x44
-.obj lbl_81615B40, global
+# .rodata:0x0 | 0x81615B40 | size: 0x268
+# textinput::keyboard::signwindow::csAninationFileForSign
+.obj csAninationFileForSign__Q39textinput8keyboard10signwindow, local
 	.4byte 0x00000000
 	.4byte 0x66735F73
 	.4byte 0x69676E57
@@ -2204,10 +2205,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615B40
-
-# .rodata:0x44 | 0x81615B84 | size: 0x44
-.obj lbl_81615B84, global
+.L_81615B84:
 	.4byte 0x00000001
 	.4byte 0x66735F73
 	.4byte 0x69676E57
@@ -2225,10 +2223,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615B84
-
-# .rodata:0x88 | 0x81615BC8 | size: 0x44
-.obj lbl_81615BC8, global
+.L_81615BC8:
 	.4byte 0x00000008
 	.4byte 0x66735F73
 	.4byte 0x69676E57
@@ -2246,10 +2241,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615BC8
-
-# .rodata:0xCC | 0x81615C0C | size: 0x44
-.obj lbl_81615C0C, global
+.L_81615C0C:
 	.4byte 0x00000002
 	.4byte 0x66735F73
 	.4byte 0x69676E57
@@ -2267,10 +2259,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615C0C
-
-# .rodata:0x110 | 0x81615C50 | size: 0x44
-.obj lbl_81615C50, global
+.L_81615C50:
 	.4byte 0x00000006
 	.4byte 0x66735F73
 	.4byte 0x69676E57
@@ -2288,10 +2277,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615C50
-
-# .rodata:0x154 | 0x81615C94 | size: 0x44
-.obj lbl_81615C94, global
+.L_81615C94:
 	.4byte 0x00000003
 	.4byte 0x66735F73
 	.4byte 0x69676E57
@@ -2309,10 +2295,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615C94
-
-# .rodata:0x198 | 0x81615CD8 | size: 0x44
-.obj lbl_81615CD8, global
+.L_81615CD8:
 	.4byte 0x00000004
 	.4byte 0x66735F73
 	.4byte 0x69676E57
@@ -2330,10 +2313,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615CD8
-
-# .rodata:0x1DC | 0x81615D1C | size: 0x44
-.obj lbl_81615D1C, global
+.L_81615D1C:
 	.4byte 0x00000007
 	.4byte 0x66735F73
 	.4byte 0x69676E57
@@ -2351,10 +2331,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615D1C
-
-# .rodata:0x220 | 0x81615D60 | size: 0x48
-.obj lbl_81615D60, global
+.L_81615D60:
 	.4byte 0x00000005
 	.4byte 0x66735F73
 	.4byte 0x69676E57
@@ -2373,10 +2350,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615D60
+.endobj csAninationFileForSign__Q39textinput8keyboard10signwindow
 
 # .rodata:0x268 | 0x81615DA8 | size: 0x48
-.obj lbl_81615DA8, global
+# textinput::keyboard::signwindow::csPaneNameToControlKey
+.obj csPaneNameToControlKey__Q39textinput8keyboard10signwindow, local
 	.4byte 0x425F5347
 	.4byte 0x4E6B6579
 	.4byte 0x5F636C6F
@@ -2395,10 +2373,11 @@
 	.4byte 0x74000000
 	.4byte 0x00000000
 	.4byte 0x00000019
-.endobj lbl_81615DA8
+.endobj csPaneNameToControlKey__Q39textinput8keyboard10signwindow
 
 # .rodata:0x2B0 | 0x81615DF0 | size: 0x50
-.obj lbl_81615DF0, global
+# textinput::keyboard::signwindow::csLanguageDependencyData
+.obj csLanguageDependencyData__Q39textinput8keyboard10signwindow, local
 	.4byte 0x04000000
 	.4byte csSignKeyJP__Q39textinput8keyboard10signwindow
 	.4byte 0x0A000000
@@ -2419,10 +2398,10 @@
 	.4byte csSignKeyCN__Q39textinput8keyboard10signwindow
 	.4byte 0x04000000
 	.4byte csSignKeyKR__Q39textinput8keyboard10signwindow
-.endobj lbl_81615DF0
+.endobj csLanguageDependencyData__Q39textinput8keyboard10signwindow
 
 # .rodata:0x300 | 0x81615E40 | size: 0x10
-.obj lbl_81615E40, global
+.obj lbl_81615E40, local
 	.4byte 0x00000003
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -2535,7 +2514,7 @@
 
 # .data:0xF0 | 0x8165EB98 | size: 0x50
 # textinput::keyboard::signwindow::csSgnKeys
-.obj csSgnKeys__Q39textinput8keyboard10signwindow, global
+.obj csSgnKeys__Q39textinput8keyboard10signwindow, local
 	.4byte lbl_8165EAA8
 	.4byte lbl_8165EAB4
 	.4byte lbl_8165EAC0
@@ -2567,7 +2546,8 @@
 .endobj lbl_8165EBE8
 
 # .data:0x150 | 0x8165EBF8 | size: 0x640
-.obj lbl_8165EBF8, global
+# textinput::keyboard::signwindow::csPaneToAnimationInSign
+.obj csPaneToAnimationInSign__Q39textinput8keyboard10signwindow, local
 	.4byte 0x00000000
 	.4byte 0x4E5F5347
 	.4byte 0x4E6B6579
@@ -2576,9 +2556,9 @@
 	.4byte 0x00000000
 	.4byte 0x00000003
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -2592,9 +2572,9 @@
 	.4byte 0x00000000
 	.4byte 0x00000003
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615D1C
-	.4byte lbl_81615D60
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615D1C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615D60
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -2608,13 +2588,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2624,13 +2604,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2640,13 +2620,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2656,13 +2636,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2672,13 +2652,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2688,13 +2668,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2704,13 +2684,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2720,13 +2700,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2736,13 +2716,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2752,13 +2732,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2768,13 +2748,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2784,13 +2764,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2800,13 +2780,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2816,13 +2796,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2832,13 +2812,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2848,13 +2828,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2864,13 +2844,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2880,13 +2860,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2896,13 +2876,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2912,13 +2892,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2928,13 +2908,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2944,13 +2924,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
 	.4byte 0x00000002
 	.4byte 0x505F5347
@@ -2960,15 +2940,15 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_81615B40
-	.4byte lbl_81615B84
-	.4byte lbl_81615BC8
-	.4byte lbl_81615C0C
-	.4byte lbl_81615C50
-	.4byte lbl_81615C94
-	.4byte lbl_81615CD8
+	.4byte csAninationFileForSign__Q39textinput8keyboard10signwindow
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615B84
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615BC8
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C0C
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C50
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615C94
+	.rel csAninationFileForSign__Q39textinput8keyboard10signwindow, .L_81615CD8
 	.4byte 0x00000000
-.endobj lbl_8165EBF8
+.endobj csPaneToAnimationInSign__Q39textinput8keyboard10signwindow
 
 # .data:0x790 | 0x8165F238 | size: 0x30
 .obj lbl_8165F238, global

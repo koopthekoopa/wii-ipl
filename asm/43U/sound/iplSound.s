@@ -36,11 +36,11 @@
 # .text:0x0 | 0x8136B25C | size: 0x24
 # ipl::snd::System::shutup(int)
 .fn shutup__Q33ipl3snd6SystemFi, global
-/* 8136B25C | 80 0D A7 50 */	lwz r0, lbl_81698790@sda21(r0)
+/* 8136B25C | 80 0D A7 50 */	lwz r0, m_isLocked__Q23ipl3snd@sda21(r0)
 /* 8136B260 | 7C 00 20 00 */	cmpw r0, r4
 /* 8136B264 | 4D 82 00 20 */	beqlr
 /* 8136B268 | 2C 04 00 00 */	cmpwi r4, 0x0
-/* 8136B26C | 90 8D A7 50 */	stw r4, lbl_81698790@sda21(r0)
+/* 8136B26C | 90 8D A7 50 */	stw r4, m_isLocked__Q23ipl3snd@sda21(r0)
 /* 8136B270 | 41 82 00 08 */	beq .L_8136B278
 /* 8136B274 | 48 1E 69 60 */	b fn_81551BD4
 .L_8136B278:
@@ -64,7 +64,7 @@
 /* 8136B2A8 | 7C DE 33 78 */	mr r30, r6
 /* 8136B2AC | 93 E3 06 24 */	stw r31, 0x624(r3)
 /* 8136B2B0 | 38 61 00 08 */	addi r3, r1, 0x8
-/* 8136B2B4 | 93 ED A7 4C */	stw r31, lbl_8169878C@sda21(r0)
+/* 8136B2B4 | 93 ED A7 4C */	stw r31, _mainBGMHandle__Q23ipl3snd@sda21(r0)
 /* 8136B2B8 | 48 28 AF 55 */	bl fn_815F620C
 /* 8136B2BC | 3C 00 00 03 */	lis r0, 0x3
 /* 8136B2C0 | 93 A1 00 08 */	stw r29, 0x8(r1)
@@ -120,9 +120,9 @@
 # .text:0x120 | 0x8136B37C | size: 0x14
 # ipl::snd::System::initFx()
 .fn initFx__Q33ipl3snd6SystemFv, global
-/* 8136B37C | 3C A0 81 61 */	lis r5, lbl_8160F048@ha
+/* 8136B37C | 3C A0 81 61 */	lis r5, reverbHiParam__Q23ipl3snd@ha
 /* 8136B380 | 38 80 00 00 */	li r4, 0x0
-/* 8136B384 | 38 A5 F0 48 */	addi r5, r5, lbl_8160F048@l
+/* 8136B384 | 38 A5 F0 48 */	addi r5, r5, reverbHiParam__Q23ipl3snd@l
 /* 8136B388 | 38 63 05 D8 */	addi r3, r3, 0x5d8
 /* 8136B38C | 48 28 B8 7C */	b fn_815F6C08
 .endfn initFx__Q33ipl3snd6SystemFv
@@ -149,19 +149,19 @@
 /* 8136B3BC | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8136B3C0 | 7C 08 02 A6 */	mflr r0
 /* 8136B3C4 | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 8136B3C8 | 80 0D A7 50 */	lwz r0, lbl_81698790@sda21(r0)
+/* 8136B3C8 | 80 0D A7 50 */	lwz r0, m_isLocked__Q23ipl3snd@sda21(r0)
 /* 8136B3CC | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8136B3D0 | 41 82 00 0C */	beq .L_8136B3DC
 /* 8136B3D4 | 38 60 00 00 */	li r3, 0x0
 /* 8136B3D8 | 48 00 00 20 */	b .L_8136B3F8
 .L_8136B3DC:
 /* 8136B3DC | 7C 85 23 78 */	mr r5, r4
-/* 8136B3E0 | 38 8D A7 48 */	li r4, lbl_81698788@sda21
+/* 8136B3E0 | 38 8D A7 48 */	li r4, _bgmBlk__Q23ipl3snd@sda21
 /* 8136B3E4 | 38 63 00 34 */	addi r3, r3, 0x34
 /* 8136B3E8 | 48 00 00 21 */	bl startSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
-/* 8136B3EC | 38 0D A7 48 */	li r0, lbl_81698788@sda21
-/* 8136B3F0 | 38 6D A7 48 */	li r3, lbl_81698788@sda21
-/* 8136B3F4 | 90 0D A7 4C */	stw r0, lbl_8169878C@sda21(r0)
+/* 8136B3EC | 38 0D A7 48 */	li r0, _bgmBlk__Q23ipl3snd@sda21
+/* 8136B3F0 | 38 6D A7 48 */	li r3, _bgmBlk__Q23ipl3snd@sda21
+/* 8136B3F4 | 90 0D A7 4C */	stw r0, _mainBGMHandle__Q23ipl3snd@sda21(r0)
 .L_8136B3F8:
 /* 8136B3F8 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8136B3FC | 7C 08 03 A6 */	mtlr r0
@@ -207,7 +207,7 @@
 /* 8136B474 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8136B478 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8136B47C | 48 28 E0 4D */	bl _savegpr_29
-/* 8136B480 | 80 0D A7 50 */	lwz r0, lbl_81698790@sda21(r0)
+/* 8136B480 | 80 0D A7 50 */	lwz r0, m_isLocked__Q23ipl3snd@sda21(r0)
 /* 8136B484 | 7C 7D 1B 78 */	mr r29, r3
 /* 8136B488 | 7C 9E 23 78 */	mr r30, r4
 /* 8136B48C | 2C 00 00 00 */	cmpwi r0, 0x0
@@ -293,7 +293,7 @@
 /* 8136B580 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8136B584 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8136B588 | 48 28 DF 41 */	bl _savegpr_29
-/* 8136B58C | 80 0D A7 50 */	lwz r0, lbl_81698790@sda21(r0)
+/* 8136B58C | 80 0D A7 50 */	lwz r0, m_isLocked__Q23ipl3snd@sda21(r0)
 /* 8136B590 | 7C 7D 1B 78 */	mr r29, r3
 /* 8136B594 | 7C 9E 23 78 */	mr r30, r4
 /* 8136B598 | 2C 00 00 00 */	cmpwi r0, 0x0
@@ -387,7 +387,7 @@
 /* 8136B6B0 | F3 E1 00 38 */	psq_st f31, 0x38(r1), 0, qr0
 /* 8136B6B4 | 39 61 00 30 */	addi r11, r1, 0x30
 /* 8136B6B8 | 48 28 DE 11 */	bl _savegpr_29
-/* 8136B6BC | 80 0D A7 50 */	lwz r0, lbl_81698790@sda21(r0)
+/* 8136B6BC | 80 0D A7 50 */	lwz r0, m_isLocked__Q23ipl3snd@sda21(r0)
 /* 8136B6C0 | FF E0 08 90 */	fmr f31, f1
 /* 8136B6C4 | 7C 7D 1B 78 */	mr r29, r3
 /* 8136B6C8 | 7C 9E 23 78 */	mr r30, r4
@@ -459,7 +459,7 @@
 /* 8136B7A8 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8136B7AC | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8136B7B0 | 48 28 DD 19 */	bl _savegpr_29
-/* 8136B7B4 | 80 0D A7 50 */	lwz r0, lbl_81698790@sda21(r0)
+/* 8136B7B4 | 80 0D A7 50 */	lwz r0, m_isLocked__Q23ipl3snd@sda21(r0)
 /* 8136B7B8 | 7C 7D 1B 78 */	mr r29, r3
 /* 8136B7BC | 7C 9E 23 78 */	mr r30, r4
 /* 8136B7C0 | 2C 00 00 00 */	cmpwi r0, 0x0
@@ -541,7 +541,7 @@
 /* 8136B8B8 | F3 C1 00 38 */	psq_st f30, 0x38(r1), 0, qr0
 /* 8136B8BC | 39 61 00 30 */	addi r11, r1, 0x30
 /* 8136B8C0 | 48 28 DC 09 */	bl _savegpr_29
-/* 8136B8C4 | 80 0D A7 50 */	lwz r0, lbl_81698790@sda21(r0)
+/* 8136B8C4 | 80 0D A7 50 */	lwz r0, m_isLocked__Q23ipl3snd@sda21(r0)
 /* 8136B8C8 | FF C0 08 90 */	fmr f30, f1
 /* 8136B8CC | FF E0 10 90 */	fmr f31, f2
 /* 8136B8D0 | 7C 7D 1B 78 */	mr r29, r3
@@ -647,7 +647,7 @@
 # .text:0x7D8 | 0x8136BA34 | size: 0x34
 # ipl::snd::System::stopBGM(int)
 .fn stopBGM__Q33ipl3snd6SystemFi, global
-/* 8136BA34 | 80 6D A7 4C */	lwz r3, lbl_8169878C@sda21(r0)
+/* 8136BA34 | 80 6D A7 4C */	lwz r3, _mainBGMHandle__Q23ipl3snd@sda21(r0)
 /* 8136BA38 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8136BA3C | 4D 82 00 20 */	beqlr
 /* 8136BA40 | 80 03 00 00 */	lwz r0, 0x0(r3)
@@ -746,7 +746,7 @@
 /* 8136BB74 | 3B FF 00 0C */	addi r31, r31, 0xc
 /* 8136BB78 | 93 DB 00 08 */	stw r30, 0x8(r27)
 /* 8136BB7C | 41 80 FF C8 */	blt .L_8136BB44
-/* 8136BB80 | 80 6D A7 4C */	lwz r3, lbl_8169878C@sda21(r0)
+/* 8136BB80 | 80 6D A7 4C */	lwz r3, _mainBGMHandle__Q23ipl3snd@sda21(r0)
 /* 8136BB84 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8136BB88 | 41 82 00 28 */	beq .L_8136BBB0
 /* 8136BB8C | 80 03 00 00 */	lwz r0, 0x0(r3)
@@ -818,7 +818,7 @@
 /* 8136BC74 | 3B FF 00 0C */	addi r31, r31, 0xc
 /* 8136BC78 | 93 DB 00 08 */	stw r30, 0x8(r27)
 /* 8136BC7C | 41 80 FF C8 */	blt .L_8136BC44
-/* 8136BC80 | 80 6D A7 4C */	lwz r3, lbl_8169878C@sda21(r0)
+/* 8136BC80 | 80 6D A7 4C */	lwz r3, _mainBGMHandle__Q23ipl3snd@sda21(r0)
 /* 8136BC84 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8136BC88 | 41 82 00 28 */	beq .L_8136BCB0
 /* 8136BC8C | 80 03 00 00 */	lwz r0, 0x0(r3)
@@ -865,7 +865,7 @@
 # .text:0xAC8 | 0x8136BD24 | size: 0x34
 # ipl::snd::System::muteOnBGM(int)
 .fn muteOnBGM__Q33ipl3snd6SystemFi, global
-/* 8136BD24 | 80 6D A7 4C */	lwz r3, lbl_8169878C@sda21(r0)
+/* 8136BD24 | 80 6D A7 4C */	lwz r3, _mainBGMHandle__Q23ipl3snd@sda21(r0)
 /* 8136BD28 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8136BD2C | 4D 82 00 20 */	beqlr
 /* 8136BD30 | 80 63 00 00 */	lwz r3, 0x0(r3)
@@ -883,7 +883,7 @@
 # .text:0xAFC | 0x8136BD58 | size: 0x34
 # ipl::snd::System::muteOffBGM(int)
 .fn muteOffBGM__Q33ipl3snd6SystemFi, global
-/* 8136BD58 | 80 6D A7 4C */	lwz r3, lbl_8169878C@sda21(r0)
+/* 8136BD58 | 80 6D A7 4C */	lwz r3, _mainBGMHandle__Q23ipl3snd@sda21(r0)
 /* 8136BD5C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8136BD60 | 4D 82 00 20 */	beqlr
 /* 8136BD64 | 80 63 00 00 */	lwz r3, 0x0(r3)
@@ -906,7 +906,7 @@
 /* 8136BD94 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 8136BD98 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8136BD9C | 7C 7F 1B 78 */	mr r31, r3
-/* 8136BDA0 | 80 8D A7 4C */	lwz r4, lbl_8169878C@sda21(r0)
+/* 8136BDA0 | 80 8D A7 4C */	lwz r4, _mainBGMHandle__Q23ipl3snd@sda21(r0)
 /* 8136BDA4 | 2C 04 00 00 */	cmpwi r4, 0x0
 /* 8136BDA8 | 41 82 00 78 */	beq .L_8136BE20
 /* 8136BDAC | 80 04 00 00 */	lwz r0, 0x0(r4)
@@ -955,11 +955,11 @@
 /* 8136BE3C | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 8136BE40 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8136BE44 | 7C 7F 1B 78 */	mr r31, r3
-/* 8136BE48 | 80 0D A7 4C */	lwz r0, lbl_8169878C@sda21(r0)
+/* 8136BE48 | 80 0D A7 4C */	lwz r0, _mainBGMHandle__Q23ipl3snd@sda21(r0)
 /* 8136BE4C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8136BE50 | 41 82 00 50 */	beq .L_8136BEA0
 /* 8136BE54 | 4B FF F5 29 */	bl initFx__Q33ipl3snd6SystemFv
-/* 8136BE58 | 80 6D A7 4C */	lwz r3, lbl_8169878C@sda21(r0)
+/* 8136BE58 | 80 6D A7 4C */	lwz r3, _mainBGMHandle__Q23ipl3snd@sda21(r0)
 /* 8136BE5C | 80 03 00 00 */	lwz r0, 0x0(r3)
 /* 8136BE60 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8136BE64 | 41 82 00 24 */	beq .L_8136BE88
@@ -1591,12 +1591,12 @@
 /* 8136C5C8 | 38 84 C7 24 */	addi r4, r4, iplSound_8136C724@l
 /* 8136C5CC | 38 60 00 00 */	li r3, 0x0
 /* 8136C5D0 | 48 28 CA 11 */	bl __register_global_object
-/* 8136C5D4 | 38 6D A7 48 */	li r3, lbl_81698788@sda21
+/* 8136C5D4 | 38 6D A7 48 */	li r3, _bgmBlk__Q23ipl3snd@sda21
 /* 8136C5D8 | 48 00 01 69 */	bl iplSound_8136C740
 /* 8136C5DC | 3C 80 81 37 */	lis r4, __dt__Q33ipl3snd11tagSBgmInfoFv@ha
 /* 8136C5E0 | 38 BF 00 CC */	addi r5, r31, 0xcc
 /* 8136C5E4 | 38 84 C7 70 */	addi r4, r4, __dt__Q33ipl3snd11tagSBgmInfoFv@l
-/* 8136C5E8 | 38 6D A7 48 */	li r3, lbl_81698788@sda21
+/* 8136C5E8 | 38 6D A7 48 */	li r3, _bgmBlk__Q23ipl3snd@sda21
 /* 8136C5EC | 48 28 C9 F5 */	bl __register_global_object
 /* 8136C5F0 | 38 7F 00 E4 */	addi r3, r31, 0xe4
 /* 8136C5F4 | 48 00 01 D5 */	bl __ct__Q33ipl3snd6SystemFv
@@ -1796,17 +1796,20 @@
 .balign 4
 	.4byte "__sinit_\\iplSound_cpp"
 
-# 0x8160F048..0x8160F058 | size: 0x10
+# 0x8160F048..0x8160F060 | size: 0x18
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x8160F048 | size: 0x10
-.obj lbl_8160F048, global
+# .rodata:0x0 | 0x8160F048 | size: 0x18
+# ipl::snd::reverbHiParam
+.obj reverbHiParam__Q23ipl3snd, local
 	.4byte 0x00000000
 	.4byte 0x40200000
 	.4byte 0x3F000000
 	.4byte 0x00000000
-.endobj lbl_8160F048
+	.4byte 0x00000000
+	.4byte 0x3F800000
+.endobj reverbHiParam__Q23ipl3snd
 
 # 0x81642948..0x816429C0 | size: 0x78
 .data
@@ -1886,16 +1889,19 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698788 | size: 0x4
-.obj lbl_81698788, global
+# ipl::snd::_bgmBlk
+.obj _bgmBlk__Q23ipl3snd, global
 	.skip 0x4
-.endobj lbl_81698788
+.endobj _bgmBlk__Q23ipl3snd
 
 # .sbss:0x4 | 0x8169878C | size: 0x4
-.obj lbl_8169878C, global
+# ipl::snd::_mainBGMHandle
+.obj _mainBGMHandle__Q23ipl3snd, global
 	.skip 0x4
-.endobj lbl_8169878C
+.endobj _mainBGMHandle__Q23ipl3snd
 
 # .sbss:0x8 | 0x81698790 | size: 0x8
-.obj lbl_81698790, global
+# ipl::snd::m_isLocked
+.obj m_isLocked__Q23ipl3snd, global
 	.skip 0x8
-.endobj lbl_81698790
+.endobj m_isLocked__Q23ipl3snd

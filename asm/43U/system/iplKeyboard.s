@@ -59,8 +59,8 @@
 /* 81354D60 | 38 04 FF FD */	subi r0, r4, 0x3
 /* 81354D64 | 28 00 00 17 */	cmplwi r0, 0x17
 /* 81354D68 | 93 E1 00 0C */	stw r31, 0xc(r1)
-/* 81354D6C | 3F E0 81 64 */	lis r31, lbl_816389E8@ha
-/* 81354D70 | 3B FF 89 E8 */	addi r31, r31, lbl_816389E8@l
+/* 81354D6C | 3F E0 81 64 */	lis r31, Zi8StaticLanguageTable@ha
+/* 81354D70 | 3B FF 89 E8 */	addi r31, r31, Zi8StaticLanguageTable@l
 /* 81354D74 | 41 81 01 E4 */	bgt .L_81354F58
 /* 81354D78 | 3C 80 81 64 */	lis r4, jumptable_81638C40@ha
 /* 81354D7C | 54 00 10 3A */	slwi r0, r0, 2
@@ -241,11 +241,11 @@
 /* 81354FA4 | 48 2A 45 19 */	bl _savegpr_26
 /* 81354FA8 | 7C BC 2B 78 */	mr r28, r5
 /* 81354FAC | 83 A4 00 A0 */	lwz r29, 0xa0(r4)
-/* 81354FB0 | 3F E0 81 64 */	lis r31, lbl_816389E8@ha
+/* 81354FB0 | 3F E0 81 64 */	lis r31, Zi8StaticLanguageTable@ha
 /* 81354FB4 | 7C 7B 1B 78 */	mr r27, r3
 /* 81354FB8 | 7F 84 E3 78 */	mr r4, r28
 /* 81354FBC | 38 60 00 A4 */	li r3, 0xa4
-/* 81354FC0 | 3B FF 89 E8 */	addi r31, r31, lbl_816389E8@l
+/* 81354FC0 | 3B FF 89 E8 */	addi r31, r31, Zi8StaticLanguageTable@l
 /* 81354FC4 | 38 A0 00 04 */	li r5, 0x4
 /* 81354FC8 | 48 2A 30 E9 */	bl __nw__FUlPQ23EGG4Heapi
 /* 81354FCC | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -1762,16 +1762,16 @@
 # .text:0x1768 | 0x81356438 | size: 0xC
 # ipl::keyboard::Manager::getZiSystemDic()
 .fn getZiSystemDic__Q33ipl8keyboard7ManagerFv, global
-/* 81356438 | 3C 60 81 64 */	lis r3, lbl_816389E8@ha
-/* 8135643C | 38 63 89 E8 */	addi r3, r3, lbl_816389E8@l
+/* 81356438 | 3C 60 81 64 */	lis r3, Zi8StaticLanguageTable@ha
+/* 8135643C | 38 63 89 E8 */	addi r3, r3, Zi8StaticLanguageTable@l
 /* 81356440 | 4E 80 00 20 */	blr
 .endfn getZiSystemDic__Q33ipl8keyboard7ManagerFv
 
 # .text:0x1774 | 0x81356444 | size: 0xC
 # ipl::keyboard::Manager::getZiOemDic()
 .fn getZiOemDic__Q33ipl8keyboard7ManagerFv, global
-/* 81356444 | 3C 60 81 64 */	lis r3, lbl_81638A40@ha
-/* 81356448 | 38 63 8A 40 */	addi r3, r3, lbl_81638A40@l
+/* 81356444 | 3C 60 81 64 */	lis r3, Zi8StaticOEMLanguageTable@ha
+/* 81356448 | 38 63 8A 40 */	addi r3, r3, Zi8StaticOEMLanguageTable@l
 /* 8135644C | 4E 80 00 20 */	blr
 .endfn getZiOemDic__Q33ipl8keyboard7ManagerFv
 
@@ -1787,7 +1787,7 @@
 .balign 8
 
 # .data:0x0 | 0x816389E8 | size: 0x58
-.obj lbl_816389E8, global
+.obj Zi8StaticLanguageTable, local
 	.4byte 0x3B000000
 	.4byte 0x00000000
 	.4byte 0x3A000000
@@ -1810,10 +1810,10 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816389E8
+.endobj Zi8StaticLanguageTable
 
 # .data:0x58 | 0x81638A40 | size: 0x172
-.obj lbl_81638A40, global
+.obj Zi8StaticOEMLanguageTable, local
 	.4byte 0x3B000000
 	.4byte 0x00000000
 	.4byte 0x3A000000
@@ -1907,7 +1907,7 @@
 	.4byte 0x00574950
 	.4byte 0x4C5F5345
 	.2byte 0x5F43
-.endobj lbl_81638A40
+.endobj Zi8StaticOEMLanguageTable
 
 # .data:0x1CA | 0x81638BB2 | size: 0x8E
 .obj lbl_81638BB2, global

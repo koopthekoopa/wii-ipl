@@ -85,7 +85,7 @@
 /* 8140E738 | 38 63 00 18 */	addi r3, r3, 0x18
 /* 8140E73C | 4B FF F1 65 */	bl makeThread__16SimpleWavePlayerFlPvUl
 .L_8140E740:
-/* 8140E740 | 80 8D AC B0 */	lwz r4, lbl_81698CF0@sda21(r0)
+/* 8140E740 | 80 8D AC B0 */	lwz r4, pBSWaveBuffer@sda21(r0)
 /* 8140E744 | 38 7F 00 18 */	addi r3, r31, 0x18
 /* 8140E748 | 38 A0 30 00 */	li r5, 0x3000
 /* 8140E74C | 4B FF EB 25 */	bl setBuffer__16SimpleWavePlayerFPsUl
@@ -532,6 +532,6 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698CF0 | size: 0x8
-.obj lbl_81698CF0, global
+.obj pBSWaveBuffer, global
 	.skip 0x8
-.endobj lbl_81698CF0
+.endobj pBSWaveBuffer

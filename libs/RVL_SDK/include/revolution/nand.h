@@ -62,34 +62,34 @@ typedef enum {
 };
 
 typedef struct NANDFileInfo {
-    s32 fd;                         // 0x00
-    s32 tempFd;                     // 0x04
+    s32     fileDescriptor;             // 0x00
+    s32     origFd;                     // 0x04
 
-    char openPath[NAND_MAX_PATH];   // 0x08
-    char tempPath[NAND_MAX_PATH];   // 0x48
+    char    origPath[NAND_MAX_PATH];    // 0x08
+    char    tmpPath[NAND_MAX_PATH];     // 0x48
 
-    u8 access;                      // 0x88
-    u8 stage;                       // 0x89
-    u8 mark;                        // 0x8A
+    u8      accType;                    // 0x88
+    u8      stage;                      // 0x89
+    u8      mark;                       // 0x8A
 } NANDFileInfo;
 
 typedef struct NANDStatus {
-    u32 ownerId;                    // 0x00
-    u16 groupId;                    // 0x04
-    u8 attr;                        // 0x06
-    u8 perm;                        // 0x07
+    u32 ownerId;    // 0x00
+    u16 groupId;    // 0x04
+    u8  attribute;  // 0x06
+    u8  permission; // 0x07
 } NANDStatus;
 
 void    NANDInit();
 
 s32     NANDCreate(const char* path, u8 perm, u8 attr);
-s32     NANDOpen(const char* path, NANDFileInfo* pInfo, u8 attr);
-s32     NANDClose(NANDFileInfo* pInfo);
-s32     NANDRead(NANDFileInfo* pInfo, void* pBuf, u32 len);
-s32     NANDWrite(NANDFileInfo* pInfo, const void* pBuf, u32 len);
-s32     NANDSeek(NANDFileInfo* pInfo, s32 offset, s32 whence);
-s32     NANDGetLength(NANDFileInfo* pInfo, u32* len);
-s32     NANDSafeClose(NANDFileInfo* pInfo);
+s32     NANDOpen(const char* path, NANDFileInfo* info, u8 attr);
+s32     NANDClose(NANDFileInfo* info);
+s32     NANDRead(NANDFileInfo* info, void* buf, u32 len);
+s32     NANDWrite(NANDFileInfo* info, const void* buf, u32 len);
+s32     NANDSeek(NANDFileInfo* info, s32 offset, s32 whence);
+s32     NANDGetLength(NANDFileInfo* info, u32* len);
+s32     NANDSafeClose(NANDFileInfo* info);
 s32     NANDDelete(const char* path);
 s32     NANDGetStatus(const char* path, NANDStatus* status);
 s32     NANDGetType(const char* path, u8* type);

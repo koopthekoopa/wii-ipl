@@ -6,7 +6,7 @@
 .balign 4
 
 # .text:0x0 | 0x814576E8 | size: 0x30
-.fn VmSystemMenu_814576E8, local
+.fn VmCtor_System, local
 /* 814576E8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 814576EC | 7C 08 02 A6 */	mflr r0
 /* 814576F0 | 7C A4 2B 78 */	mr r4, r5
@@ -19,10 +19,10 @@
 /* 8145770C | 7C 08 03 A6 */	mtlr r0
 /* 81457710 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457714 | 4E 80 00 20 */	blr
-.endfn VmSystemMenu_814576E8
+.endfn VmCtor_System
 
 # .text:0x30 | 0x81457718 | size: 0x34
-.fn CHANSGetExport_SC_ASPECT_RATIO_4x3, global
+.fn VmGetProp_SC_ASPECT_RATIO_4x3, global
 /* 81457718 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8145771C | 7C 08 02 A6 */	mflr r0
 /* 81457720 | 7C A4 2B 78 */	mr r4, r5
@@ -36,10 +36,10 @@
 /* 81457740 | 7C 08 03 A6 */	mtlr r0
 /* 81457744 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457748 | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_SC_ASPECT_RATIO_4x3
+.endfn VmGetProp_SC_ASPECT_RATIO_4x3
 
 # .text:0x64 | 0x8145774C | size: 0x34
-.fn CHANSGetExport_SC_ASPECT_RATIO_16x9, global
+.fn VmGetProp_SC_ASPECT_RATIO_16x9, global
 /* 8145774C | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457750 | 7C 08 02 A6 */	mflr r0
 /* 81457754 | 7C A4 2B 78 */	mr r4, r5
@@ -53,10 +53,10 @@
 /* 81457774 | 7C 08 03 A6 */	mtlr r0
 /* 81457778 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8145777C | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_SC_ASPECT_RATIO_16x9
+.endfn VmGetProp_SC_ASPECT_RATIO_16x9
 
 # .text:0x98 | 0x81457780 | size: 0x34
-.fn CHANSGetExport_SC_LANG_JAPANESE, global
+.fn VmGetProp_SC_LANG_JAPANESE, global
 /* 81457780 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457784 | 7C 08 02 A6 */	mflr r0
 /* 81457788 | 7C A4 2B 78 */	mr r4, r5
@@ -70,10 +70,10 @@
 /* 814577A8 | 7C 08 03 A6 */	mtlr r0
 /* 814577AC | 38 21 00 10 */	addi r1, r1, 0x10
 /* 814577B0 | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_SC_LANG_JAPANESE
+.endfn VmGetProp_SC_LANG_JAPANESE
 
 # .text:0xCC | 0x814577B4 | size: 0x34
-.fn CHANSGetExport_SC_LANG_ENGLISH, global
+.fn VmGetProp_SC_LANG_ENGLISH, global
 /* 814577B4 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 814577B8 | 7C 08 02 A6 */	mflr r0
 /* 814577BC | 7C A4 2B 78 */	mr r4, r5
@@ -87,10 +87,10 @@
 /* 814577DC | 7C 08 03 A6 */	mtlr r0
 /* 814577E0 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 814577E4 | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_SC_LANG_ENGLISH
+.endfn VmGetProp_SC_LANG_ENGLISH
 
 # .text:0x100 | 0x814577E8 | size: 0x34
-.fn CHANSGetExport_SC_LANG_GERMAN, global
+.fn VmGetProp_SC_LANG_GERMAN, global
 /* 814577E8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 814577EC | 7C 08 02 A6 */	mflr r0
 /* 814577F0 | 7C A4 2B 78 */	mr r4, r5
@@ -104,10 +104,10 @@
 /* 81457810 | 7C 08 03 A6 */	mtlr r0
 /* 81457814 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457818 | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_SC_LANG_GERMAN
+.endfn VmGetProp_SC_LANG_GERMAN
 
 # .text:0x134 | 0x8145781C | size: 0x34
-.fn CHANSGetExport_SC_LANG_FRENCH, global
+.fn VmGetProp_SC_LANG_FRENCH, global
 /* 8145781C | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457820 | 7C 08 02 A6 */	mflr r0
 /* 81457824 | 7C A4 2B 78 */	mr r4, r5
@@ -121,10 +121,10 @@
 /* 81457844 | 7C 08 03 A6 */	mtlr r0
 /* 81457848 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8145784C | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_SC_LANG_FRENCH
+.endfn VmGetProp_SC_LANG_FRENCH
 
 # .text:0x168 | 0x81457850 | size: 0x34
-.fn CHANSGetExport_SC_LANG_SPANISH, global
+.fn VmGetProp_SC_LANG_SPANISH, global
 /* 81457850 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457854 | 7C 08 02 A6 */	mflr r0
 /* 81457858 | 7C A4 2B 78 */	mr r4, r5
@@ -138,10 +138,10 @@
 /* 81457878 | 7C 08 03 A6 */	mtlr r0
 /* 8145787C | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457880 | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_SC_LANG_SPANISH
+.endfn VmGetProp_SC_LANG_SPANISH
 
 # .text:0x19C | 0x81457884 | size: 0x34
-.fn CHANSGetExport_SC_LANG_ITALIAN, global
+.fn VmGetProp_SC_LANG_ITALIAN, global
 /* 81457884 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457888 | 7C 08 02 A6 */	mflr r0
 /* 8145788C | 7C A4 2B 78 */	mr r4, r5
@@ -155,10 +155,10 @@
 /* 814578AC | 7C 08 03 A6 */	mtlr r0
 /* 814578B0 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 814578B4 | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_SC_LANG_ITALIAN
+.endfn VmGetProp_SC_LANG_ITALIAN
 
 # .text:0x1D0 | 0x814578B8 | size: 0x34
-.fn CHANSGetExport_SC_LANG_DUTCH, global
+.fn VmGetProp_SC_LANG_DUTCH, global
 /* 814578B8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 814578BC | 7C 08 02 A6 */	mflr r0
 /* 814578C0 | 7C A4 2B 78 */	mr r4, r5
@@ -172,10 +172,10 @@
 /* 814578E0 | 7C 08 03 A6 */	mtlr r0
 /* 814578E4 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 814578E8 | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_SC_LANG_DUTCH
+.endfn VmGetProp_SC_LANG_DUTCH
 
 # .text:0x204 | 0x814578EC | size: 0x34
-.fn CHANSGetExport_SC_LANG_SIMP_CHINESE, global
+.fn VmGetProp_SC_LANG_SIMP_CHINESE, global
 /* 814578EC | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 814578F0 | 7C 08 02 A6 */	mflr r0
 /* 814578F4 | 7C A4 2B 78 */	mr r4, r5
@@ -189,10 +189,10 @@
 /* 81457914 | 7C 08 03 A6 */	mtlr r0
 /* 81457918 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8145791C | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_SC_LANG_SIMP_CHINESE
+.endfn VmGetProp_SC_LANG_SIMP_CHINESE
 
 # .text:0x238 | 0x81457920 | size: 0x34
-.fn CHANSGetExport_SC_LANG_TRAD_CHINESE, global
+.fn VmGetProp_SC_LANG_TRAD_CHINESE, global
 /* 81457920 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457924 | 7C 08 02 A6 */	mflr r0
 /* 81457928 | 7C A4 2B 78 */	mr r4, r5
@@ -206,10 +206,10 @@
 /* 81457948 | 7C 08 03 A6 */	mtlr r0
 /* 8145794C | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457950 | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_SC_LANG_TRAD_CHINESE
+.endfn VmGetProp_SC_LANG_TRAD_CHINESE
 
 # .text:0x26C | 0x81457954 | size: 0x34
-.fn CHANSGetExport_SC_LANG_KOREAN, global
+.fn VmGetProp_SC_LANG_KOREAN, global
 /* 81457954 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457958 | 7C 08 02 A6 */	mflr r0
 /* 8145795C | 7C A4 2B 78 */	mr r4, r5
@@ -223,10 +223,10 @@
 /* 8145797C | 7C 08 03 A6 */	mtlr r0
 /* 81457980 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457984 | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_SC_LANG_KOREAN
+.endfn VmGetProp_SC_LANG_KOREAN
 
 # .text:0x2A0 | 0x81457988 | size: 0x40
-.fn CHANSGetExport_scprivate, global
+.fn VmGetProp_scprivate, global
 /* 81457988 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8145798C | 7C 08 02 A6 */	mflr r0
 /* 81457990 | 7C 86 23 78 */	mr r6, r4
@@ -243,10 +243,10 @@
 /* 814579BC | 7C 08 03 A6 */	mtlr r0
 /* 814579C0 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 814579C4 | 4E 80 00 20 */	blr
-.endfn CHANSGetExport_scprivate
+.endfn VmGetProp_scprivate
 
 # .text:0x2E0 | 0x814579C8 | size: 0x60
-.fn CHANSSetExport_scprivate, global
+.fn VmSetProp_scprivate, global
 /* 814579C8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 814579CC | 7C 08 02 A6 */	mflr r0
 /* 814579D0 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -273,10 +273,10 @@
 /* 81457A1C | 7C 08 03 A6 */	mtlr r0
 /* 81457A20 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457A24 | 4E 80 00 20 */	blr
-.endfn CHANSSetExport_scprivate
+.endfn VmSetProp_scprivate
 
 # .text:0x340 | 0x81457A28 | size: 0x28
-.fn CHANSExport_beginRender, global
+.fn VmMethod_beginRender, global
 /* 81457A28 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457A2C | 7C 08 02 A6 */	mflr r0
 /* 81457A30 | 38 8D AD 21 */	li r4, VmSystemBeginRenderFlag@sda21
@@ -287,10 +287,10 @@
 /* 81457A44 | 7C 08 03 A6 */	mtlr r0
 /* 81457A48 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457A4C | 4E 80 00 20 */	blr
-.endfn CHANSExport_beginRender
+.endfn VmMethod_beginRender
 
 # .text:0x368 | 0x81457A50 | size: 0x28
-.fn CHANSExport_waitForRetrace, global
+.fn VmMethod_waitForRetrace, global
 /* 81457A50 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457A54 | 7C 08 02 A6 */	mflr r0
 /* 81457A58 | 38 8D AD 20 */	li r4, VmSystemWaitForRetraceFlag@sda21
@@ -301,10 +301,10 @@
 /* 81457A6C | 7C 08 03 A6 */	mtlr r0
 /* 81457A70 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457A74 | 4E 80 00 20 */	blr
-.endfn CHANSExport_waitForRetrace
+.endfn VmMethod_waitForRetrace
 
 # .text:0x390 | 0x81457A78 | size: 0x54
-.fn CHANSExport_SCGetAspectRatio, global
+.fn VmMethod_SCGetAspectRatio, global
 /* 81457A78 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457A7C | 7C 08 02 A6 */	mflr r0
 /* 81457A80 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -326,10 +326,10 @@
 /* 81457AC0 | 7C 08 03 A6 */	mtlr r0
 /* 81457AC4 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457AC8 | 4E 80 00 20 */	blr
-.endfn CHANSExport_SCGetAspectRatio
+.endfn VmMethod_SCGetAspectRatio
 
 # .text:0x3E4 | 0x81457ACC | size: 0x54
-.fn CHANSExport_SCGetLanguage, global
+.fn VmMethod_SCGetLanguage, global
 /* 81457ACC | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457AD0 | 7C 08 02 A6 */	mflr r0
 /* 81457AD4 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -351,7 +351,7 @@
 /* 81457B14 | 7C 08 03 A6 */	mtlr r0
 /* 81457B18 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457B1C | 4E 80 00 20 */	blr
-.endfn CHANSExport_SCGetLanguage
+.endfn VmMethod_SCGetLanguage
 
 # .text:0x438 | 0x81457B20 | size: 0x50
 .fn CHANSGetProductArea, local
@@ -380,7 +380,7 @@
 .endfn CHANSGetProductArea
 
 # .text:0x488 | 0x81457B70 | size: 0x60
-.fn CHANSExport_SCGetProductArea, global
+.fn VmMethod_SCGetProductArea, global
 /* 81457B70 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81457B74 | 7C 08 02 A6 */	mflr r0
 /* 81457B78 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -406,66 +406,66 @@
 /* 81457BC4 | 7C 08 03 A6 */	mtlr r0
 /* 81457BC8 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81457BCC | 4E 80 00 20 */	blr
-.endfn CHANSExport_SCGetProductArea
+.endfn VmMethod_SCGetProductArea
 
 # .text:0x4E8 | 0x81457BD0 | size: 0xC
-.fn CHANSGetExport_SC_PRODUCT_AREA_UNKNOWN, global
+.fn VmGetProp_SC_PRODUCT_AREA_UNKNOWN, global
 /* 81457BD0 | 39 00 FF FF */	li r8, -0x1
 /* 81457BD4 | 38 E0 FF FF */	li r7, -0x1
 /* 81457BD8 | 4B FF FF 48 */	b CHANSGetProductArea
-.endfn CHANSGetExport_SC_PRODUCT_AREA_UNKNOWN
+.endfn VmGetProp_SC_PRODUCT_AREA_UNKNOWN
 
 # .text:0x4F4 | 0x81457BDC | size: 0xC
-.fn CHANSGetExport_SC_PRODUCT_AREA_JPN, global
+.fn VmGetProp_SC_PRODUCT_AREA_JPN, global
 /* 81457BDC | 39 00 00 00 */	li r8, 0x0
 /* 81457BE0 | 38 E0 00 00 */	li r7, 0x0
 /* 81457BE4 | 4B FF FF 3C */	b CHANSGetProductArea
-.endfn CHANSGetExport_SC_PRODUCT_AREA_JPN
+.endfn VmGetProp_SC_PRODUCT_AREA_JPN
 
 # .text:0x500 | 0x81457BE8 | size: 0xC
-.fn CHANSGetExport_SC_PRODUCT_AREA_USA, global
+.fn VmGetProp_SC_PRODUCT_AREA_USA, global
 /* 81457BE8 | 39 00 00 01 */	li r8, 0x1
 /* 81457BEC | 38 E0 00 00 */	li r7, 0x0
 /* 81457BF0 | 4B FF FF 30 */	b CHANSGetProductArea
-.endfn CHANSGetExport_SC_PRODUCT_AREA_USA
+.endfn VmGetProp_SC_PRODUCT_AREA_USA
 
 # .text:0x50C | 0x81457BF4 | size: 0xC
-.fn CHANSGetExport_SC_PRODUCT_AREA_EUR, global
+.fn VmGetProp_SC_PRODUCT_AREA_EUR, global
 /* 81457BF4 | 39 00 00 02 */	li r8, 0x2
 /* 81457BF8 | 38 E0 00 00 */	li r7, 0x0
 /* 81457BFC | 4B FF FF 24 */	b CHANSGetProductArea
-.endfn CHANSGetExport_SC_PRODUCT_AREA_EUR
+.endfn VmGetProp_SC_PRODUCT_AREA_EUR
 
 # .text:0x518 | 0x81457C00 | size: 0xC
-.fn CHANSGetExport_SC_PRODUCT_AREA_KOR, global
+.fn VmGetProp_SC_PRODUCT_AREA_KOR, global
 /* 81457C00 | 39 00 00 06 */	li r8, 0x6
 /* 81457C04 | 38 E0 00 00 */	li r7, 0x0
 /* 81457C08 | 4B FF FF 18 */	b CHANSGetProductArea
-.endfn CHANSGetExport_SC_PRODUCT_AREA_KOR
+.endfn VmGetProp_SC_PRODUCT_AREA_KOR
 
 # .text:0x524 | 0x81457C0C | size: 0xC
-.fn CHANSGetExport_SC_PRODUCT_AREA_HKG, global
+.fn VmGetProp_SC_PRODUCT_AREA_HKG, global
 /* 81457C0C | 39 00 00 07 */	li r8, 0x7
 /* 81457C10 | 38 E0 00 00 */	li r7, 0x0
 /* 81457C14 | 4B FF FF 0C */	b CHANSGetProductArea
-.endfn CHANSGetExport_SC_PRODUCT_AREA_HKG
+.endfn VmGetProp_SC_PRODUCT_AREA_HKG
 
 # .text:0x530 | 0x81457C18 | size: 0xC
-.fn CHANSGetExport_SC_PRODUCT_AREA_ASI, global
+.fn VmGetProp_SC_PRODUCT_AREA_ASI, global
 /* 81457C18 | 39 00 00 08 */	li r8, 0x8
 /* 81457C1C | 38 E0 00 00 */	li r7, 0x0
 /* 81457C20 | 4B FF FF 00 */	b CHANSGetProductArea
-.endfn CHANSGetExport_SC_PRODUCT_AREA_ASI
+.endfn VmGetProp_SC_PRODUCT_AREA_ASI
 
 # .text:0x53C | 0x81457C24 | size: 0xC
-.fn CHANSGetExport_SC_PRODUCT_AREA_LTN, global
+.fn VmGetProp_SC_PRODUCT_AREA_LTN, global
 /* 81457C24 | 39 00 00 09 */	li r8, 0x9
 /* 81457C28 | 38 E0 00 00 */	li r7, 0x0
 /* 81457C2C | 4B FF FE F4 */	b CHANSGetProductArea
-.endfn CHANSGetExport_SC_PRODUCT_AREA_LTN
+.endfn VmGetProp_SC_PRODUCT_AREA_LTN
 
 # .text:0x548 | 0x81457C30 | size: 0x64
-.fn CHANSExport_SCGetWCFlags, global
+.fn VmMethod_SCGetWCFlags, global
 /* 81457C30 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81457C34 | 7C 08 02 A6 */	mflr r0
 /* 81457C38 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -492,7 +492,7 @@
 /* 81457C88 | 7C 08 03 A6 */	mtlr r0
 /* 81457C8C | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81457C90 | 4E 80 00 20 */	blr
-.endfn CHANSExport_SCGetWCFlags
+.endfn VmMethod_SCGetWCFlags
 
 # .text:0x5AC | 0x81457C94 | size: 0x54
 .fn VmSystemMenu_81457C94, local
@@ -522,7 +522,7 @@
 .endfn VmSystemMenu_81457C94
 
 # .text:0x600 | 0x81457CE8 | size: 0x54
-.fn CHANSExport_getParentalControlUseFlag, global
+.fn VmMethod_getParentalControlUseFlag, global
 /* 81457CE8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457CEC | 7C 08 02 A6 */	mflr r0
 /* 81457CF0 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -544,7 +544,7 @@
 /* 81457D30 | 7C 08 03 A6 */	mtlr r0
 /* 81457D34 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457D38 | 4E 80 00 20 */	blr
-.endfn CHANSExport_getParentalControlUseFlag
+.endfn VmMethod_getParentalControlUseFlag
 
 # .text:0x654 | 0x81457D3C | size: 0x54
 .fn VmSystemMenu_81457D3C, local
@@ -573,7 +573,7 @@
 .endfn VmSystemMenu_81457D3C
 
 # .text:0x6A8 | 0x81457D90 | size: 0x58
-.fn CHANSExport_getNewsRestriction, global
+.fn VmMethod_getNewsRestriction, global
 /* 81457D90 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457D94 | 7C 08 02 A6 */	mflr r0
 /* 81457D98 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -596,10 +596,10 @@
 /* 81457DDC | 7C 08 03 A6 */	mtlr r0
 /* 81457DE0 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457DE4 | 4E 80 00 20 */	blr
-.endfn CHANSExport_getNewsRestriction
+.endfn VmMethod_getNewsRestriction
 
 # .text:0x700 | 0x81457DE8 | size: 0x58
-.fn CHANSExport_getNwc24MessageRestriction, global
+.fn VmMethod_getNwc24MessageRestriction, global
 /* 81457DE8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457DEC | 7C 08 02 A6 */	mflr r0
 /* 81457DF0 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -622,10 +622,10 @@
 /* 81457E34 | 7C 08 03 A6 */	mtlr r0
 /* 81457E38 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457E3C | 4E 80 00 20 */	blr
-.endfn CHANSExport_getNwc24MessageRestriction
+.endfn VmMethod_getNwc24MessageRestriction
 
 # .text:0x758 | 0x81457E40 | size: 0x58
-.fn CHANSExport_getShoppingRestriction, global
+.fn VmMethod_getShoppingRestriction, global
 /* 81457E40 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457E44 | 7C 08 02 A6 */	mflr r0
 /* 81457E48 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -648,10 +648,10 @@
 /* 81457E8C | 7C 08 03 A6 */	mtlr r0
 /* 81457E90 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457E94 | 4E 80 00 20 */	blr
-.endfn CHANSExport_getShoppingRestriction
+.endfn VmMethod_getShoppingRestriction
 
 # .text:0x7B0 | 0x81457E98 | size: 0x70
-.fn CHANSExport_getWwwRestriction, global
+.fn VmMethod_getWwwRestriction, global
 /* 81457E98 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81457E9C | 7C 08 02 A6 */	mflr r0
 /* 81457EA0 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -681,10 +681,10 @@
 /* 81457EFC | 7C 08 03 A6 */	mtlr r0
 /* 81457F00 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 81457F04 | 4E 80 00 20 */	blr
-.endfn CHANSExport_getWwwRestriction
+.endfn VmMethod_getWwwRestriction
 
 # .text:0x820 | 0x81457F08 | size: 0x54
-.fn CHANSExport_exit, global
+.fn VmMethod_exit, global
 /* 81457F08 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457F0C | 7C 08 02 A6 */	mflr r0
 /* 81457F10 | 38 80 00 00 */	li r4, 0x0
@@ -707,10 +707,10 @@
 /* 81457F50 | 7C 08 03 A6 */	mtlr r0
 /* 81457F54 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457F58 | 4E 80 00 20 */	blr
-.endfn CHANSExport_exit
+.endfn VmMethod_exit
 
 # .text:0x874 | 0x81457F5C | size: 0x34
-.fn CHANSExport_getSmallestFreeSysWorkSize, global
+.fn VmMethod_getSmallestFreeSysWorkSize, global
 /* 81457F5C | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457F60 | 7C 08 02 A6 */	mflr r0
 /* 81457F64 | 7C A4 2B 78 */	mr r4, r5
@@ -724,10 +724,10 @@
 /* 81457F84 | 7C 08 03 A6 */	mtlr r0
 /* 81457F88 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457F8C | 4E 80 00 20 */	blr
-.endfn CHANSExport_getSmallestFreeSysWorkSize
+.endfn VmMethod_getSmallestFreeSysWorkSize
 
 # .text:0x8A8 | 0x81457F90 | size: 0x3C
-.fn CHANSExport_getFreeSysWorkSize, global
+.fn VmMethod_getFreeSysWorkSize, global
 /* 81457F90 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81457F94 | 7C 08 02 A6 */	mflr r0
 /* 81457F98 | 7C A4 2B 78 */	mr r4, r5
@@ -743,21 +743,21 @@
 /* 81457FC0 | 7C 08 03 A6 */	mtlr r0
 /* 81457FC4 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81457FC8 | 4E 80 00 20 */	blr
-.endfn CHANSExport_getFreeSysWorkSize
+.endfn VmMethod_getFreeSysWorkSize
 
 # .text:0x8E4 | 0x81457FCC | size: 0x60
 .fn VmSystemInit, global
 /* 81457FCC | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81457FD0 | 7C 08 02 A6 */	mflr r0
 /* 81457FD4 | 3C 80 81 61 */	lis r4, lbl_8161730C@ha
-/* 81457FD8 | 3D 20 81 45 */	lis r9, VmSystemMenu_814576E8@ha
+/* 81457FD8 | 3D 20 81 45 */	lis r9, VmCtor_System@ha
 /* 81457FDC | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 81457FE0 | 38 00 00 15 */	li r0, 0x15
 /* 81457FE4 | 3D 40 81 61 */	lis r10, lbl_81617210@ha
 /* 81457FE8 | 38 84 73 0C */	addi r4, r4, lbl_8161730C@l
 /* 81457FEC | 90 01 00 08 */	stw r0, 0x8(r1)
 /* 81457FF0 | 38 00 00 0E */	li r0, 0xe
-/* 81457FF4 | 39 29 76 E8 */	addi r9, r9, VmSystemMenu_814576E8@l
+/* 81457FF4 | 39 29 76 E8 */	addi r9, r9, VmCtor_System@l
 /* 81457FF8 | 39 4A 72 10 */	addi r10, r10, lbl_81617210@l
 /* 81457FFC | 90 81 00 0C */	stw r4, 0xc(r1)
 /* 81458000 | 38 8D 97 95 */	li r4, lbl_816977D5@sda21
@@ -780,100 +780,100 @@
 # .rodata:0x0 | 0x81617210 | size: 0xFC
 .obj lbl_81617210, global
 	.4byte lbl_8166A2B0
-	.4byte CHANSGetExport_SC_ASPECT_RATIO_4x3
+	.4byte VmGetProp_SC_ASPECT_RATIO_4x3
 	.4byte 0x00000000
 	.4byte lbl_8166A2C4
-	.4byte CHANSGetExport_SC_ASPECT_RATIO_16x9
+	.4byte VmGetProp_SC_ASPECT_RATIO_16x9
 	.4byte 0x00000000
 	.4byte lbl_8166A2D9
-	.4byte CHANSGetExport_SC_LANG_JAPANESE
+	.4byte VmGetProp_SC_LANG_JAPANESE
 	.4byte 0x00000000
 	.4byte lbl_8166A2EA
-	.4byte CHANSGetExport_SC_LANG_ENGLISH
+	.4byte VmGetProp_SC_LANG_ENGLISH
 	.4byte 0x00000000
 	.4byte lbl_8166A2FA
-	.4byte CHANSGetExport_SC_LANG_GERMAN
+	.4byte VmGetProp_SC_LANG_GERMAN
 	.4byte 0x00000000
 	.4byte lbl_8166A309
-	.4byte CHANSGetExport_SC_LANG_FRENCH
+	.4byte VmGetProp_SC_LANG_FRENCH
 	.4byte 0x00000000
 	.4byte lbl_8166A318
-	.4byte CHANSGetExport_SC_LANG_SPANISH
+	.4byte VmGetProp_SC_LANG_SPANISH
 	.4byte 0x00000000
 	.4byte lbl_8166A328
-	.4byte CHANSGetExport_SC_LANG_ITALIAN
+	.4byte VmGetProp_SC_LANG_ITALIAN
 	.4byte 0x00000000
 	.4byte lbl_8166A338
-	.4byte CHANSGetExport_SC_LANG_DUTCH
+	.4byte VmGetProp_SC_LANG_DUTCH
 	.4byte 0x00000000
 	.4byte lbl_8166A346
-	.4byte CHANSGetExport_SC_LANG_SIMP_CHINESE
+	.4byte VmGetProp_SC_LANG_SIMP_CHINESE
 	.4byte 0x00000000
 	.4byte lbl_8166A35B
-	.4byte CHANSGetExport_SC_LANG_TRAD_CHINESE
+	.4byte VmGetProp_SC_LANG_TRAD_CHINESE
 	.4byte 0x00000000
 	.4byte lbl_8166A370
-	.4byte CHANSGetExport_SC_LANG_KOREAN
+	.4byte VmGetProp_SC_LANG_KOREAN
 	.4byte 0x00000000
 	.4byte lbl_8166A37F
-	.4byte CHANSGetExport_scprivate
-	.4byte CHANSSetExport_scprivate
+	.4byte VmGetProp_scprivate
+	.4byte VmSetProp_scprivate
 	.4byte lbl_8166A389
-	.4byte CHANSGetExport_SC_PRODUCT_AREA_UNKNOWN
+	.4byte VmGetProp_SC_PRODUCT_AREA_UNKNOWN
 	.4byte 0x00000000
 	.4byte lbl_8166A3A1
-	.4byte CHANSGetExport_SC_PRODUCT_AREA_JPN
+	.4byte VmGetProp_SC_PRODUCT_AREA_JPN
 	.4byte 0x00000000
 	.4byte lbl_8166A3B5
-	.4byte CHANSGetExport_SC_PRODUCT_AREA_USA
+	.4byte VmGetProp_SC_PRODUCT_AREA_USA
 	.4byte 0x00000000
 	.4byte lbl_8166A3C9
-	.4byte CHANSGetExport_SC_PRODUCT_AREA_EUR
+	.4byte VmGetProp_SC_PRODUCT_AREA_EUR
 	.4byte 0x00000000
 	.4byte lbl_8166A3DD
-	.4byte CHANSGetExport_SC_PRODUCT_AREA_KOR
+	.4byte VmGetProp_SC_PRODUCT_AREA_KOR
 	.4byte 0x00000000
 	.4byte lbl_8166A3F1
-	.4byte CHANSGetExport_SC_PRODUCT_AREA_HKG
+	.4byte VmGetProp_SC_PRODUCT_AREA_HKG
 	.4byte 0x00000000
 	.4byte lbl_8166A405
-	.4byte CHANSGetExport_SC_PRODUCT_AREA_ASI
+	.4byte VmGetProp_SC_PRODUCT_AREA_ASI
 	.4byte 0x00000000
 	.4byte lbl_8166A419
-	.4byte CHANSGetExport_SC_PRODUCT_AREA_LTN
+	.4byte VmGetProp_SC_PRODUCT_AREA_LTN
 	.4byte 0x00000000
 .endobj lbl_81617210
 
 # .rodata:0xFC | 0x8161730C | size: 0x74
 .obj lbl_8161730C, global
 	.4byte lbl_8166A42D
-	.4byte CHANSExport_beginRender
+	.4byte VmMethod_beginRender
 	.4byte lbl_816977D0
-	.4byte CHANSExport_exit
+	.4byte VmMethod_exit
 	.4byte lbl_8166A439
-	.4byte CHANSExport_SCGetAspectRatio
+	.4byte VmMethod_SCGetAspectRatio
 	.4byte lbl_8166A44A
-	.4byte CHANSExport_SCGetLanguage
+	.4byte VmMethod_SCGetLanguage
 	.4byte lbl_8166A458
-	.4byte CHANSExport_SCGetProductArea
+	.4byte VmMethod_SCGetProductArea
 	.4byte lbl_8166A469
-	.4byte CHANSExport_SCGetWCFlags
+	.4byte VmMethod_SCGetWCFlags
 	.4byte lbl_8166A476
-	.4byte CHANSExport_getParentalControlUseFlag
+	.4byte VmMethod_getParentalControlUseFlag
 	.4byte lbl_8166A490
-	.4byte CHANSExport_getNewsRestriction
+	.4byte VmMethod_getNewsRestriction
 	.4byte lbl_8166A4A3
-	.4byte CHANSExport_getNwc24MessageRestriction
+	.4byte VmMethod_getNwc24MessageRestriction
 	.4byte lbl_8166A4BE
-	.4byte CHANSExport_getShoppingRestriction
+	.4byte VmMethod_getShoppingRestriction
 	.4byte lbl_8166A4D5
-	.4byte CHANSExport_getWwwRestriction
+	.4byte VmMethod_getWwwRestriction
 	.4byte lbl_8166A4E7
-	.4byte CHANSExport_getSmallestFreeSysWorkSize
+	.4byte VmMethod_getSmallestFreeSysWorkSize
 	.4byte lbl_8166A502
-	.4byte CHANSExport_getFreeSysWorkSize
+	.4byte VmMethod_getFreeSysWorkSize
 	.4byte lbl_8166A515
-	.4byte CHANSExport_waitForRetrace
+	.4byte VmMethod_waitForRetrace
 	.4byte 0x00000000
 .endobj lbl_8161730C
 

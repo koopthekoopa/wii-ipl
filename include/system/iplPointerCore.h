@@ -4,7 +4,7 @@
 #include <decomp.h>
 
 #include <revolution.h>
-#include <revolution/wpad.h>
+#include <revolution/kpad.h>
 
 #include <egg/core.h>
 
@@ -61,7 +61,7 @@ namespace ipl {
             void    changeType(int chan, int type);
         
         private:
-            PointerCoreObject   mCursors[WPAD_MAX_CONTROLLERS]; // 0x00
+            PointerCoreObject   mCursors[KPAD_MAX_CONTROLLERS]; // 0x00
     };
 }
 

@@ -260,7 +260,7 @@
 /* 81348794 | 80 7C 00 00 */	lwz r3, 0x0(r28)
 /* 81348798 | 3C 63 00 04 */	addis r3, r3, 0x4
 /* 8134879C | 90 83 EA 34 */	stw r4, -0x15cc(r3)
-/* 813487A0 | 90 CD A6 98 */	stw r6, lbl_816986D8@sda21(r0)
+/* 813487A0 | 90 CD A6 98 */	stw r6, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 813487A4 | 80 7C 00 00 */	lwz r3, 0x0(r28)
 /* 813487A8 | 3C 63 00 04 */	addis r3, r3, 0x4
 /* 813487AC | 90 03 EA 54 */	stw r0, -0x15ac(r3)
@@ -339,7 +339,7 @@
 # .text:0x498 | 0x81348884 | size: 0x8
 # ipl::NandSDWorker::get_sd_state()
 .fn get_sd_state__Q23ipl12NandSDWorkerFv, global
-/* 81348884 | 80 6D A6 98 */	lwz r3, lbl_816986D8@sda21(r0)
+/* 81348884 | 80 6D A6 98 */	lwz r3, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 81348888 | 4E 80 00 20 */	blr
 .endfn get_sd_state__Q23ipl12NandSDWorkerFv
 
@@ -452,7 +452,7 @@
 /* 813489A8 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 813489AC | 7C 08 02 A6 */	mflr r0
 /* 813489B0 | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 813489B4 | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 813489B4 | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 813489B8 | 2C 00 00 06 */	cmpwi r0, 0x6
 /* 813489BC | 41 82 00 0C */	beq .L_813489C8
 /* 813489C0 | 38 60 00 00 */	li r3, 0x0
@@ -535,7 +535,7 @@
 # .text:0x6BC | 0x81348AA8 | size: 0x24
 # ipl::NandSDWorker::get_sd_save_num()
 .fn get_sd_save_num__Q23ipl12NandSDWorkerFv, global
-/* 81348AA8 | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 81348AA8 | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 81348AAC | 2C 00 00 06 */	cmpwi r0, 0x6
 /* 81348AB0 | 40 82 00 14 */	bne .L_81348AC4
 /* 81348AB4 | 80 63 00 00 */	lwz r3, 0x0(r3)
@@ -550,7 +550,7 @@
 # .text:0x6E0 | 0x81348ACC | size: 0x24
 # ipl::NandSDWorker::get_sd_app_num()
 .fn get_sd_app_num__Q23ipl12NandSDWorkerFv, global
-/* 81348ACC | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 81348ACC | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 81348AD0 | 2C 00 00 06 */	cmpwi r0, 0x6
 /* 81348AD4 | 40 82 00 14 */	bne .L_81348AE8
 /* 81348AD8 | 80 63 00 00 */	lwz r3, 0x0(r3)
@@ -568,7 +568,7 @@
 /* 81348AF0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81348AF4 | 7C 08 02 A6 */	mflr r0
 /* 81348AF8 | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 81348AFC | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 81348AFC | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 81348B00 | 2C 00 00 06 */	cmpwi r0, 0x6
 /* 81348B04 | 41 82 00 0C */	beq .L_81348B10
 /* 81348B08 | 38 60 00 00 */	li r3, 0x0
@@ -603,7 +603,7 @@
 /* 81348B5C | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 81348B60 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 81348B64 | 7C BF 2B 78 */	mr r31, r5
-/* 81348B68 | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 81348B68 | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 81348B6C | 2C 00 00 06 */	cmpwi r0, 0x6
 /* 81348B70 | 41 82 00 0C */	beq .L_81348B7C
 /* 81348B74 | 38 60 00 00 */	li r3, 0x0
@@ -642,7 +642,7 @@
 /* 81348BD4 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81348BD8 | 7C 08 02 A6 */	mflr r0
 /* 81348BDC | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 81348BE0 | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 81348BE0 | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 81348BE4 | 2C 00 00 06 */	cmpwi r0, 0x6
 /* 81348BE8 | 41 82 00 0C */	beq .L_81348BF4
 /* 81348BEC | 38 60 00 00 */	li r3, 0x0
@@ -676,7 +676,7 @@
 /* 81348C3C | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81348C40 | 7C 08 02 A6 */	mflr r0
 /* 81348C44 | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 81348C48 | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 81348C48 | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 81348C4C | 2C 00 00 06 */	cmpwi r0, 0x6
 /* 81348C50 | 41 82 00 0C */	beq .L_81348C5C
 /* 81348C54 | 38 60 00 00 */	li r3, 0x0
@@ -706,7 +706,7 @@
 # .text:0x8B4 | 0x81348CA0 | size: 0x24
 # ipl::NandSDWorker::is_sd_write_protected()
 .fn is_sd_write_protected__Q23ipl12NandSDWorkerFv, global
-/* 81348CA0 | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 81348CA0 | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 81348CA4 | 2C 00 00 06 */	cmpwi r0, 0x6
 /* 81348CA8 | 40 82 00 14 */	bne .L_81348CBC
 /* 81348CAC | 80 63 00 00 */	lwz r3, 0x0(r3)
@@ -721,7 +721,7 @@
 # .text:0x8D8 | 0x81348CC4 | size: 0x24
 # ipl::NandSDWorker::get_sd_drive_letter()
 .fn get_sd_drive_letter__Q23ipl12NandSDWorkerFv, global
-/* 81348CC4 | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 81348CC4 | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 81348CC8 | 2C 00 00 06 */	cmpwi r0, 0x6
 /* 81348CCC | 40 82 00 14 */	bne .L_81348CE0
 /* 81348CD0 | 80 63 00 00 */	lwz r3, 0x0(r3)
@@ -1618,7 +1618,7 @@
 /* 81349614 | 7C 89 03 A6 */	mtctr r4
 /* 81349618 | 4E 80 04 20 */	bctr
 .L_8134961C:
-/* 8134961C | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 8134961C | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 81349620 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81349624 | 41 82 00 50 */	beq .L_81349674
 /* 81349628 | 80 76 00 00 */	lwz r3, 0x0(r22)
@@ -1675,7 +1675,7 @@
 .L_813496E0:
 /* 813496E0 | 7E C3 B3 78 */	mr r3, r22
 /* 813496E4 | 48 00 12 55 */	bl do_mount_sd__Q23ipl12NandSDWorkerFv
-/* 813496E8 | 80 6D A6 98 */	lwz r3, lbl_816986D8@sda21(r0)
+/* 813496E8 | 80 6D A6 98 */	lwz r3, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 813496EC | 38 03 FF FD */	subi r0, r3, 0x3
 /* 813496F0 | 28 00 00 01 */	cmplwi r0, 0x1
 /* 813496F4 | 41 81 00 18 */	bgt .L_8134970C
@@ -2043,7 +2043,7 @@
 .L_81349BFC:
 /* 81349BFC | 80 96 00 00 */	lwz r4, 0x0(r22)
 /* 81349C00 | 7E C3 B3 78 */	mr r3, r22
-/* 81349C04 | 80 ED 81 64 */	lwz r7, lbl_816961A4@sda21(r0)
+/* 81349C04 | 80 ED 81 64 */	lwz r7, c_nocopy_folder_name__Q23ipl12NandSDWorker@sda21(r0)
 /* 81349C08 | 3C 84 00 04 */	addis r4, r4, 0x4
 /* 81349C0C | 80 A4 EA 48 */	lwz r5, -0x15b8(r4)
 /* 81349C10 | 80 C4 EA 4C */	lwz r6, -0x15b4(r4)
@@ -2210,7 +2210,7 @@
 /* 81349E50 | 39 61 00 B0 */	addi r11, r1, 0xb0
 /* 81349E54 | 90 16 00 00 */	stw r0, 0x0(r22)
 /* 81349E58 | 7E C3 B3 78 */	mr r3, r22
-/* 81349E5C | 90 0D A6 98 */	stw r0, lbl_816986D8@sda21(r0)
+/* 81349E5C | 90 0D A6 98 */	stw r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 81349E60 | 48 2A F6 99 */	bl _restgpr_22
 /* 81349E64 | 80 01 00 B4 */	lwz r0, 0xb4(r1)
 /* 81349E68 | 7C 08 03 A6 */	mtlr r0
@@ -2333,17 +2333,17 @@
 /* 8134A010 | 80 03 E6 94 */	lwz r0, -0x196c(r3)
 /* 8134A014 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8134A018 | 41 82 03 08 */	beq .L_8134A320
-/* 8134A01C | 80 8D 81 7C */	lwz r4, lbl_816961BC@sda21(r0)
+/* 8134A01C | 80 8D 81 7C */	lwz r4, c_transferid_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A020 | 7F 83 E3 78 */	mr r3, r28
 /* 8134A024 | 48 00 9A 79 */	bl nand_get_length__Q23ipl12NandSDWorkerFPCc
 /* 8134A028 | 2C 03 00 20 */	cmpwi r3, 0x20
 /* 8134A02C | 41 82 02 E4 */	beq .L_8134A310
-/* 8134A030 | 80 6D 81 7C */	lwz r3, lbl_816961BC@sda21(r0)
+/* 8134A030 | 80 6D 81 7C */	lwz r3, c_transferid_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A034 | 48 01 63 AD */	bl PrivateDelete__Q33ipl4nand7wrapperFPCc
 /* 8134A038 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134A03C | 7C 7B 1B 78 */	mr r27, r3
 /* 8134A040 | 41 82 00 34 */	beq .L_8134A074
-/* 8134A044 | 80 8D 81 7C */	lwz r4, lbl_816961BC@sda21(r0)
+/* 8134A044 | 80 8D 81 7C */	lwz r4, c_transferid_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A048 | 7F 65 DB 78 */	mr r5, r27
 /* 8134A04C | 38 7F 04 3B */	addi r3, r31, 0x43b
 /* 8134A050 | 4C C6 31 82 */	crclr cr1eq
@@ -2356,7 +2356,7 @@
 /* 8134A06C | 90 03 EA 24 */	stw r0, -0x15dc(r3)
 /* 8134A070 | 48 00 02 B0 */	b .L_8134A320
 .L_8134A074:
-/* 8134A074 | 80 6D 81 78 */	lwz r3, lbl_816961B8@sda21(r0)
+/* 8134A074 | 80 6D 81 78 */	lwz r3, c_succession_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A078 | 38 81 00 08 */	addi r4, r1, 0x8
 /* 8134A07C | 48 01 64 35 */	bl PrivateGetType__Q33ipl4nand7wrapperFPCcPUc
 /* 8134A080 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -2370,12 +2370,12 @@
 /* 8134A09C | 88 01 00 08 */	lbz r0, 0x8(r1)
 /* 8134A0A0 | 28 00 00 02 */	cmplwi r0, 0x2
 /* 8134A0A4 | 41 82 00 48 */	beq .L_8134A0EC
-/* 8134A0A8 | 80 6D 81 78 */	lwz r3, lbl_816961B8@sda21(r0)
+/* 8134A0A8 | 80 6D 81 78 */	lwz r3, c_succession_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A0AC | 48 01 63 35 */	bl PrivateDelete__Q33ipl4nand7wrapperFPCc
 /* 8134A0B0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134A0B4 | 7C 7B 1B 78 */	mr r27, r3
 /* 8134A0B8 | 41 82 00 68 */	beq .L_8134A120
-/* 8134A0BC | 80 8D 81 78 */	lwz r4, lbl_816961B8@sda21(r0)
+/* 8134A0BC | 80 8D 81 78 */	lwz r4, c_succession_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A0C0 | 7F 65 DB 78 */	mr r5, r27
 /* 8134A0C4 | 38 7F 04 3B */	addi r3, r31, 0x43b
 /* 8134A0C8 | 4C C6 31 82 */	crclr cr1eq
@@ -2396,20 +2396,20 @@
 /* 8134A100 | 48 00 3F 55 */	bl check_nand_free_area__Q23ipl12NandSDWorkerFUlUlll
 /* 8134A104 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134A108 | 41 82 00 18 */	beq .L_8134A120
-/* 8134A10C | 80 8D 81 78 */	lwz r4, lbl_816961B8@sda21(r0)
+/* 8134A10C | 80 8D 81 78 */	lwz r4, c_succession_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A110 | 38 7F 04 6B */	addi r3, r31, 0x46b
 /* 8134A114 | 4C C6 31 82 */	crclr cr1eq
 /* 8134A118 | 48 1E 45 89 */	bl OSReport
 /* 8134A11C | 48 00 02 04 */	b .L_8134A320
 .L_8134A120:
-/* 8134A120 | 80 6D 81 78 */	lwz r3, lbl_816961B8@sda21(r0)
+/* 8134A120 | 80 6D 81 78 */	lwz r3, c_succession_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A124 | 38 80 00 3F */	li r4, 0x3f
 /* 8134A128 | 38 A0 00 00 */	li r5, 0x0
 /* 8134A12C | 48 01 62 41 */	bl PrivateCreateDir__Q33ipl4nand7wrapperFPCcUcUc
 /* 8134A130 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134A134 | 7C 7B 1B 78 */	mr r27, r3
 /* 8134A138 | 41 82 00 34 */	beq .L_8134A16C
-/* 8134A13C | 80 8D 81 78 */	lwz r4, lbl_816961B8@sda21(r0)
+/* 8134A13C | 80 8D 81 78 */	lwz r4, c_succession_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A140 | 7F 65 DB 78 */	mr r5, r27
 /* 8134A144 | 38 7F 04 AA */	addi r3, r31, 0x4aa
 /* 8134A148 | 4C C6 31 82 */	crclr cr1eq
@@ -2430,20 +2430,20 @@
 /* 8134A180 | 48 00 3E D5 */	bl check_nand_free_area__Q23ipl12NandSDWorkerFUlUlll
 /* 8134A184 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134A188 | 41 82 00 18 */	beq .L_8134A1A0
-/* 8134A18C | 80 8D 81 7C */	lwz r4, lbl_816961BC@sda21(r0)
+/* 8134A18C | 80 8D 81 7C */	lwz r4, c_transferid_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A190 | 38 7F 04 6B */	addi r3, r31, 0x46b
 /* 8134A194 | 4C C6 31 82 */	crclr cr1eq
 /* 8134A198 | 48 1E 45 09 */	bl OSReport
 /* 8134A19C | 48 00 01 84 */	b .L_8134A320
 .L_8134A1A0:
-/* 8134A1A0 | 80 6D 81 7C */	lwz r3, lbl_816961BC@sda21(r0)
+/* 8134A1A0 | 80 6D 81 7C */	lwz r3, c_transferid_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A1A4 | 38 80 00 3F */	li r4, 0x3f
 /* 8134A1A8 | 38 A0 00 00 */	li r5, 0x0
 /* 8134A1AC | 48 01 60 39 */	bl PrivateCreate__Q33ipl4nand7wrapperFPCcUcUc
 /* 8134A1B0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134A1B4 | 7C 7B 1B 78 */	mr r27, r3
 /* 8134A1B8 | 41 82 00 34 */	beq .L_8134A1EC
-/* 8134A1BC | 80 8D 81 7C */	lwz r4, lbl_816961BC@sda21(r0)
+/* 8134A1BC | 80 8D 81 7C */	lwz r4, c_transferid_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A1C0 | 7F 65 DB 78 */	mr r5, r27
 /* 8134A1C4 | 38 7F 04 DD */	addi r3, r31, 0x4dd
 /* 8134A1C8 | 4C C6 31 82 */	crclr cr1eq
@@ -2456,13 +2456,13 @@
 /* 8134A1E4 | 90 03 EA 24 */	stw r0, -0x15dc(r3)
 /* 8134A1E8 | 48 00 01 38 */	b .L_8134A320
 .L_8134A1EC:
-/* 8134A1EC | 80 6D 81 7C */	lwz r3, lbl_816961BC@sda21(r0)
+/* 8134A1EC | 80 6D 81 7C */	lwz r3, c_transferid_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A1F0 | 38 81 00 18 */	addi r4, r1, 0x18
 /* 8134A1F4 | 38 A0 00 02 */	li r5, 0x2
 /* 8134A1F8 | 48 01 60 61 */	bl PrivateOpen__Q33ipl4nand7wrapperFPCcP12NANDFileInfoUc
 /* 8134A1FC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134A200 | 41 82 00 1C */	beq .L_8134A21C
-/* 8134A204 | 80 8D 81 7C */	lwz r4, lbl_816961BC@sda21(r0)
+/* 8134A204 | 80 8D 81 7C */	lwz r4, c_transferid_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A208 | 7C 65 1B 78 */	mr r5, r3
 /* 8134A20C | 38 7F 05 0D */	addi r3, r31, 0x50d
 /* 8134A210 | 4C C6 31 82 */	crclr cr1eq
@@ -2488,7 +2488,7 @@
 /* 8134A25C | 2C 03 00 20 */	cmpwi r3, 0x20
 /* 8134A260 | 7C 7B 1B 78 */	mr r27, r3
 /* 8134A264 | 41 82 00 3C */	beq .L_8134A2A0
-/* 8134A268 | 80 8D 81 7C */	lwz r4, lbl_816961BC@sda21(r0)
+/* 8134A268 | 80 8D 81 7C */	lwz r4, c_transferid_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A26C | 7F 65 DB 78 */	mr r5, r27
 /* 8134A270 | 38 7F 05 3B */	addi r3, r31, 0x53b
 /* 8134A274 | 4C C6 31 82 */	crclr cr1eq
@@ -2509,7 +2509,7 @@
 /* 8134A2A8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134A2AC | 7C 7B 1B 78 */	mr r27, r3
 /* 8134A2B0 | 41 82 00 34 */	beq .L_8134A2E4
-/* 8134A2B4 | 80 8D 81 7C */	lwz r4, lbl_816961BC@sda21(r0)
+/* 8134A2B4 | 80 8D 81 7C */	lwz r4, c_transferid_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A2B8 | 7F 65 DB 78 */	mr r5, r27
 /* 8134A2BC | 38 7F 05 63 */	addi r3, r31, 0x563
 /* 8134A2C0 | 4C C6 31 82 */	crclr cr1eq
@@ -2522,7 +2522,7 @@
 /* 8134A2DC | 90 03 EA 24 */	stw r0, -0x15dc(r3)
 /* 8134A2E0 | 48 00 00 40 */	b .L_8134A320
 .L_8134A2E4:
-/* 8134A2E4 | 80 8D 81 7C */	lwz r4, lbl_816961BC@sda21(r0)
+/* 8134A2E4 | 80 8D 81 7C */	lwz r4, c_transferid_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A2E8 | 38 7F 05 8B */	addi r3, r31, 0x58b
 /* 8134A2EC | 88 BD 00 00 */	lbz r5, 0x0(r29)
 /* 8134A2F0 | 88 DD 00 01 */	lbz r6, 0x1(r29)
@@ -2534,7 +2534,7 @@
 /* 8134A308 | 48 1E 43 99 */	bl OSReport
 /* 8134A30C | 48 00 00 14 */	b .L_8134A320
 .L_8134A310:
-/* 8134A310 | 80 8D 81 7C */	lwz r4, lbl_816961BC@sda21(r0)
+/* 8134A310 | 80 8D 81 7C */	lwz r4, c_transferid_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A314 | 38 7F 05 C0 */	addi r3, r31, 0x5c0
 /* 8134A318 | 4C C6 31 82 */	crclr cr1eq
 /* 8134A31C | 48 1E 43 85 */	bl OSReport
@@ -2983,7 +2983,7 @@
 /* 8134A940 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8134A944 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8134A948 | 48 2A EB 81 */	bl _savegpr_29
-/* 8134A94C | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 8134A94C | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A950 | 3F A0 81 63 */	lis r29, lbl_81635A88@ha
 /* 8134A954 | 7C 7F 1B 78 */	mr r31, r3
 /* 8134A958 | 2C 00 00 02 */	cmpwi r0, 0x2
@@ -3017,13 +3017,13 @@
 /* 8134A9C0 | 48 1E 3C E1 */	bl OSReport
 /* 8134A9C4 | 38 00 00 05 */	li r0, 0x5
 /* 8134A9C8 | 7F E3 FB 78 */	mr r3, r31
-/* 8134A9CC | 90 0D A6 98 */	stw r0, lbl_816986D8@sda21(r0)
+/* 8134A9CC | 90 0D A6 98 */	stw r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A9D0 | 48 00 02 35 */	bl call_fa_mount__Q23ipl12NandSDWorkerFv
 /* 8134A9D4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134A9D8 | 7C 7E 1B 78 */	mr r30, r3
 /* 8134A9DC | 40 82 00 7C */	bne .L_8134AA58
 /* 8134A9E0 | 38 00 00 07 */	li r0, 0x7
-/* 8134A9E4 | 90 0D A6 98 */	stw r0, lbl_816986D8@sda21(r0)
+/* 8134A9E4 | 90 0D A6 98 */	stw r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134A9E8 | 80 7F 00 00 */	lwz r3, 0x0(r31)
 /* 8134A9EC | 3C 83 00 02 */	addis r4, r3, 0x2
 /* 8134A9F0 | 80 04 E6 94 */	lwz r0, -0x196c(r4)
@@ -3048,11 +3048,11 @@
 /* 8134AA38 | 38 80 00 00 */	li r4, 0x0
 /* 8134AA3C | 48 00 89 2D */	bl get_sd_app_list__Q23ipl12NandSDWorkerFPUl
 .L_8134AA40:
-/* 8134AA40 | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 8134AA40 | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134AA44 | 2C 00 00 07 */	cmpwi r0, 0x7
 /* 8134AA48 | 40 82 00 64 */	bne .L_8134AAAC
 /* 8134AA4C | 38 00 00 06 */	li r0, 0x6
-/* 8134AA50 | 90 0D A6 98 */	stw r0, lbl_816986D8@sda21(r0)
+/* 8134AA50 | 90 0D A6 98 */	stw r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134AA54 | 48 00 00 58 */	b .L_8134AAAC
 .L_8134AA58:
 /* 8134AA58 | 2C 03 FF F7 */	cmpwi r3, -0x9
@@ -3061,7 +3061,7 @@
 /* 8134AA64 | 4C C6 31 82 */	crclr cr1eq
 /* 8134AA68 | 48 1E 3C 39 */	bl OSReport
 /* 8134AA6C | 38 00 00 03 */	li r0, 0x3
-/* 8134AA70 | 90 0D A6 98 */	stw r0, lbl_816986D8@sda21(r0)
+/* 8134AA70 | 90 0D A6 98 */	stw r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134AA74 | 48 00 00 38 */	b .L_8134AAAC
 .L_8134AA78:
 /* 8134AA78 | 2C 03 FF F6 */	cmpwi r3, -0xa
@@ -3070,14 +3070,14 @@
 /* 8134AA84 | 4C C6 31 82 */	crclr cr1eq
 /* 8134AA88 | 48 1E 3C 19 */	bl OSReport
 /* 8134AA8C | 38 00 00 04 */	li r0, 0x4
-/* 8134AA90 | 90 0D A6 98 */	stw r0, lbl_816986D8@sda21(r0)
+/* 8134AA90 | 90 0D A6 98 */	stw r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134AA94 | 48 00 00 18 */	b .L_8134AAAC
 .L_8134AA98:
 /* 8134AA98 | 38 7D 08 41 */	addi r3, r29, 0x841
 /* 8134AA9C | 4C C6 31 82 */	crclr cr1eq
 /* 8134AAA0 | 48 1E 3C 01 */	bl OSReport
 /* 8134AAA4 | 38 00 00 01 */	li r0, 0x1
-/* 8134AAA8 | 90 0D A6 98 */	stw r0, lbl_816986D8@sda21(r0)
+/* 8134AAA8 | 90 0D A6 98 */	stw r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 .L_8134AAAC:
 /* 8134AAAC | 80 7F 00 00 */	lwz r3, 0x0(r31)
 /* 8134AAB0 | 3C 63 00 04 */	addis r3, r3, 0x4
@@ -3091,7 +3091,7 @@
 /* 8134AACC | 48 1E 3B D5 */	bl OSReport
 /* 8134AAD0 | 38 60 00 00 */	li r3, 0x0
 /* 8134AAD4 | 38 00 FF FE */	li r0, -0x2
-/* 8134AAD8 | 90 6D A6 98 */	stw r3, lbl_816986D8@sda21(r0)
+/* 8134AAD8 | 90 6D A6 98 */	stw r3, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134AADC | 80 7F 00 00 */	lwz r3, 0x0(r31)
 /* 8134AAE0 | 3C 63 00 04 */	addis r3, r3, 0x4
 /* 8134AAE4 | 90 03 EA 24 */	stw r0, -0x15dc(r3)
@@ -3110,13 +3110,13 @@
 /* 8134AB10 | 48 00 00 DC */	b .L_8134ABEC
 .L_8134AB14:
 /* 8134AB14 | 38 00 00 05 */	li r0, 0x5
-/* 8134AB18 | 90 0D A6 98 */	stw r0, lbl_816986D8@sda21(r0)
+/* 8134AB18 | 90 0D A6 98 */	stw r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134AB1C | 48 00 00 E9 */	bl call_fa_mount__Q23ipl12NandSDWorkerFv
 /* 8134AB20 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134AB24 | 7C 7E 1B 78 */	mr r30, r3
 /* 8134AB28 | 40 82 00 7C */	bne .L_8134ABA4
 /* 8134AB2C | 38 00 00 07 */	li r0, 0x7
-/* 8134AB30 | 90 0D A6 98 */	stw r0, lbl_816986D8@sda21(r0)
+/* 8134AB30 | 90 0D A6 98 */	stw r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134AB34 | 80 7F 00 00 */	lwz r3, 0x0(r31)
 /* 8134AB38 | 3C 83 00 02 */	addis r4, r3, 0x2
 /* 8134AB3C | 80 04 E6 94 */	lwz r0, -0x196c(r4)
@@ -3141,17 +3141,17 @@
 /* 8134AB84 | 38 80 00 00 */	li r4, 0x0
 /* 8134AB88 | 48 00 87 E1 */	bl get_sd_app_list__Q23ipl12NandSDWorkerFPUl
 .L_8134AB8C:
-/* 8134AB8C | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 8134AB8C | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134AB90 | 2C 00 00 07 */	cmpwi r0, 0x7
 /* 8134AB94 | 40 82 00 38 */	bne .L_8134ABCC
 /* 8134AB98 | 38 00 00 06 */	li r0, 0x6
-/* 8134AB9C | 90 0D A6 98 */	stw r0, lbl_816986D8@sda21(r0)
+/* 8134AB9C | 90 0D A6 98 */	stw r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134ABA0 | 48 00 00 2C */	b .L_8134ABCC
 .L_8134ABA4:
 /* 8134ABA4 | 2C 03 FF F7 */	cmpwi r3, -0x9
 /* 8134ABA8 | 40 82 00 10 */	bne .L_8134ABB8
 /* 8134ABAC | 38 00 00 03 */	li r0, 0x3
-/* 8134ABB0 | 90 0D A6 98 */	stw r0, lbl_816986D8@sda21(r0)
+/* 8134ABB0 | 90 0D A6 98 */	stw r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134ABB4 | 48 00 00 18 */	b .L_8134ABCC
 .L_8134ABB8:
 /* 8134ABB8 | 2C 03 FF F6 */	cmpwi r3, -0xa
@@ -3159,7 +3159,7 @@
 /* 8134ABC0 | 40 82 00 08 */	bne .L_8134ABC8
 /* 8134ABC4 | 38 00 00 04 */	li r0, 0x4
 .L_8134ABC8:
-/* 8134ABC8 | 90 0D A6 98 */	stw r0, lbl_816986D8@sda21(r0)
+/* 8134ABC8 | 90 0D A6 98 */	stw r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 .L_8134ABCC:
 /* 8134ABCC | 80 7F 00 00 */	lwz r3, 0x0(r31)
 /* 8134ABD0 | 3C 63 00 04 */	addis r3, r3, 0x4
@@ -3187,7 +3187,7 @@
 /* 8134AC0C | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8134AC10 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8134AC14 | 48 2A E8 B5 */	bl _savegpr_29
-/* 8134AC18 | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 8134AC18 | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134AC1C | 3F E0 81 63 */	lis r31, lbl_81635A88@ha
 /* 8134AC20 | 7C 7E 1B 78 */	mr r30, r3
 /* 8134AC24 | 2C 00 00 00 */	cmpwi r0, 0x0
@@ -3298,7 +3298,7 @@
 /* 8134ADB0 | 88 84 E6 49 */	lbz r4, -0x19b7(r4)
 /* 8134ADB4 | 4C C6 31 82 */	crclr cr1eq
 /* 8134ADB8 | 48 1E 38 E9 */	bl OSReport
-/* 8134ADBC | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 8134ADBC | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134ADC0 | 38 60 FF F6 */	li r3, -0xa
 /* 8134ADC4 | 2C 00 00 01 */	cmpwi r0, 0x1
 /* 8134ADC8 | 40 82 00 10 */	bne .L_8134ADD8
@@ -3449,7 +3449,7 @@
 /* 8134AFC8 | 38 8D 81 A8 */	li r4, lbl_816961E8@sda21
 /* 8134AFCC | 38 A0 00 40 */	li r5, 0x40
 /* 8134AFD0 | 48 2B 74 65 */	bl strncat
-/* 8134AFD4 | 80 8D 81 58 */	lwz r4, lbl_81696198@sda21(r0)
+/* 8134AFD4 | 80 8D 81 58 */	lwz r4, c_banner_file_name__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134AFD8 | 38 61 00 09 */	addi r3, r1, 0x9
 /* 8134AFDC | 38 A0 00 40 */	li r5, 0x40
 /* 8134AFE0 | 48 2B 74 55 */	bl strncat
@@ -3549,7 +3549,7 @@
 /* 8134B130 | 38 8D 81 A8 */	li r4, lbl_816961E8@sda21
 /* 8134B134 | 38 A0 00 40 */	li r5, 0x40
 /* 8134B138 | 48 2B 72 FD */	bl strncat
-/* 8134B13C | 80 8D 81 58 */	lwz r4, lbl_81696198@sda21(r0)
+/* 8134B13C | 80 8D 81 58 */	lwz r4, c_banner_file_name__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134B140 | 38 61 00 10 */	addi r3, r1, 0x10
 /* 8134B144 | 38 A0 00 40 */	li r5, 0x40
 /* 8134B148 | 48 2B 72 ED */	bl strncat
@@ -4135,7 +4135,7 @@
 /* 8134B968 | 38 63 E6 A0 */	subi r3, r3, 0x1960
 /* 8134B96C | 48 20 FC FD */	bl fn_8155B668
 /* 8134B970 | 38 00 00 73 */	li r0, 0x73
-/* 8134B974 | 3C 80 81 61 */	lis r4, lbl_8160D648@ha
+/* 8134B974 | 3C 80 81 61 */	lis r4, c_md5_secret_key__Q23ipl12NandSDWorker@ha
 /* 8134B978 | 98 1F 00 00 */	stb r0, 0x0(r31)
 /* 8134B97C | 38 00 00 64 */	li r0, 0x64
 /* 8134B980 | 7C 7E 1B 78 */	mr r30, r3
@@ -4143,7 +4143,7 @@
 /* 8134B988 | 98 1F 00 01 */	stb r0, 0x1(r31)
 /* 8134B98C | 38 00 00 6C */	li r0, 0x6c
 /* 8134B990 | 38 7F 00 04 */	addi r3, r31, 0x4
-/* 8134B994 | 38 84 D6 48 */	addi r4, r4, lbl_8160D648@l
+/* 8134B994 | 38 84 D6 48 */	addi r4, r4, c_md5_secret_key__Q23ipl12NandSDWorker@l
 /* 8134B998 | 98 BF 00 02 */	stb r5, 0x2(r31)
 /* 8134B99C | 38 A0 00 10 */	li r5, 0x10
 /* 8134B9A0 | 98 1F 00 03 */	stb r0, 0x3(r31)
@@ -4374,7 +4374,7 @@
 /* 8134BCDC | 3A E0 00 00 */	li r23, 0x0
 /* 8134BCE0 | 3A C0 00 00 */	li r22, 0x0
 /* 8134BCE4 | 3A 80 00 00 */	li r20, 0x0
-/* 8134BCE8 | 3F A0 81 61 */	lis r29, lbl_8160D648@ha
+/* 8134BCE8 | 3F A0 81 61 */	lis r29, c_md5_secret_key__Q23ipl12NandSDWorker@ha
 /* 8134BCEC | 3B E0 FF FD */	li r31, -0x3
 .L_8134BCF0:
 /* 8134BCF0 | 7E 7C A0 2E */	lwzx r19, r28, r20
@@ -4412,7 +4412,7 @@
 /* 8134BD70 | 38 A0 00 10 */	li r5, 0x10
 /* 8134BD74 | 4B FE 44 BD */	bl memcpy
 /* 8134BD78 | 38 79 00 04 */	addi r3, r25, 0x4
-/* 8134BD7C | 38 9D D6 48 */	addi r4, r29, lbl_8160D648@l
+/* 8134BD7C | 38 9D D6 48 */	addi r4, r29, c_md5_secret_key__Q23ipl12NandSDWorker@l
 /* 8134BD80 | 38 A0 00 10 */	li r5, 0x10
 /* 8134BD84 | 4B FE 44 AD */	bl memcpy
 /* 8134BD88 | 7E A3 AB 78 */	mr r3, r21
@@ -4813,7 +4813,7 @@
 /* 8134C338 | 3A 80 00 00 */	li r20, 0x0
 /* 8134C33C | 48 00 00 E4 */	b .L_8134C420
 .L_8134C340:
-/* 8134C340 | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 8134C340 | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134C344 | 2C 00 00 06 */	cmpwi r0, 0x6
 /* 8134C348 | 41 82 00 18 */	beq .L_8134C360
 /* 8134C34C | 80 73 00 00 */	lwz r3, 0x0(r19)
@@ -4880,7 +4880,7 @@
 /* 8134C430 | 3B E0 00 00 */	li r31, 0x0
 /* 8134C434 | 48 00 00 E4 */	b .L_8134C518
 .L_8134C438:
-/* 8134C438 | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 8134C438 | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134C43C | 2C 00 00 06 */	cmpwi r0, 0x6
 /* 8134C440 | 41 82 00 18 */	beq .L_8134C458
 /* 8134C444 | 80 73 00 00 */	lwz r3, 0x0(r19)
@@ -4948,7 +4948,7 @@
 /* 8134C52C | 3A 80 00 00 */	li r20, 0x0
 /* 8134C530 | 48 00 00 A0 */	b .L_8134C5D0
 .L_8134C534:
-/* 8134C534 | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 8134C534 | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134C538 | 2C 00 00 06 */	cmpwi r0, 0x6
 /* 8134C53C | 41 82 00 18 */	beq .L_8134C554
 /* 8134C540 | 80 73 00 00 */	lwz r3, 0x0(r19)
@@ -5197,7 +5197,7 @@
 /* 8134C8B8 | 3F E0 81 63 */	lis r31, lbl_816367C8@ha
 /* 8134C8BC | 48 00 02 00 */	b .L_8134CABC
 .L_8134C8C0:
-/* 8134C8C0 | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 8134C8C0 | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134C8C4 | 2C 00 00 06 */	cmpwi r0, 0x6
 /* 8134C8C8 | 41 82 00 18 */	beq .L_8134C8E0
 /* 8134C8CC | 80 72 00 00 */	lwz r3, 0x0(r18)
@@ -6111,7 +6111,7 @@
 /* 8134D59C | 38 A0 00 01 */	li r5, 0x1
 /* 8134D5A0 | 38 C0 00 01 */	li r6, 0x1
 /* 8134D5A4 | 38 E0 00 01 */	li r7, 0x1
-/* 8134D5A8 | 48 15 31 5D */	bl fn_814A0704
+/* 8134D5A8 | 48 15 31 5D */	bl NWC24InitFilesIndividually
 /* 8134D5AC | 80 BC 00 00 */	lwz r5, 0x0(r28)
 /* 8134D5B0 | 7C 7D 1B 78 */	mr r29, r3
 /* 8134D5B4 | 7F C4 F3 78 */	mr r4, r30
@@ -6670,7 +6670,7 @@
 /* 8134DD50 | 40 82 00 E8 */	bne .L_8134DE38
 /* 8134DD54 | 7F E3 FB 78 */	mr r3, r31
 /* 8134DD58 | 38 E0 00 01 */	li r7, 0x1
-/* 8134DD5C | 39 0D 81 9C */	li r8, lbl_816961DC@sda21
+/* 8134DD5C | 39 0D 81 9C */	li r8, c_ignore_list_for_wiimenu__Q23ipl12NandSDWorker@sda21
 /* 8134DD60 | 39 20 00 02 */	li r9, 0x2
 /* 8134DD64 | 48 00 56 7D */	bl recursion_nand_save__Q23ipl12NandSDWorkerFUxQ33ipl12NandSDWorker16RecursiveProcessPPCcUl
 /* 8134DD68 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -7102,7 +7102,7 @@
 /* 8134E354 | 38 8D 81 A8 */	li r4, lbl_816961E8@sda21
 /* 8134E358 | 38 A0 00 40 */	li r5, 0x40
 /* 8134E35C | 48 2B 40 D9 */	bl strncat
-/* 8134E360 | 80 8D 81 58 */	lwz r4, lbl_81696198@sda21(r0)
+/* 8134E360 | 80 8D 81 58 */	lwz r4, c_banner_file_name__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134E364 | 38 61 00 70 */	addi r3, r1, 0x70
 /* 8134E368 | 38 A0 00 40 */	li r5, 0x40
 /* 8134E36C | 48 2B 40 C9 */	bl strncat
@@ -7257,9 +7257,9 @@
 /* 8134E5A0 | 90 03 EA 24 */	stw r0, -0x15dc(r3)
 /* 8134E5A4 | 48 00 03 38 */	b .L_8134E8DC
 .L_8134E5A8:
-/* 8134E5A8 | 3C 80 81 61 */	lis r4, lbl_8160D648@ha
+/* 8134E5A8 | 3C 80 81 61 */	lis r4, c_md5_secret_key__Q23ipl12NandSDWorker@ha
 /* 8134E5AC | 38 7C 00 0E */	addi r3, r28, 0xe
-/* 8134E5B0 | 38 84 D6 48 */	addi r4, r4, lbl_8160D648@l
+/* 8134E5B0 | 38 84 D6 48 */	addi r4, r4, c_md5_secret_key__Q23ipl12NandSDWorker@l
 /* 8134E5B4 | 38 A0 00 10 */	li r5, 0x10
 /* 8134E5B8 | 4B FE 1C 79 */	bl memcpy
 /* 8134E5BC | 38 61 00 B0 */	addi r3, r1, 0xb0
@@ -7442,14 +7442,14 @@
 .L_8134E860:
 /* 8134E860 | 80 97 00 00 */	lwz r4, 0x0(r23)
 /* 8134E864 | 7E E3 BB 78 */	mr r3, r23
-/* 8134E868 | 80 ED 81 64 */	lwz r7, lbl_816961A4@sda21(r0)
+/* 8134E868 | 80 ED 81 64 */	lwz r7, c_nocopy_folder_name__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134E86C | 3C 84 00 04 */	addis r4, r4, 0x4
 /* 8134E870 | 80 A4 EA 48 */	lwz r5, -0x15b8(r4)
 /* 8134E874 | 80 C4 EA 4C */	lwz r6, -0x15b4(r4)
 /* 8134E878 | 48 00 56 55 */	bl item_exist_nand_save_folder__Q23ipl12NandSDWorkerFUxPCc
 /* 8134E87C | 80 97 00 00 */	lwz r4, 0x0(r23)
 /* 8134E880 | 7C 7E 1B 78 */	mr r30, r3
-/* 8134E884 | 80 ED 81 68 */	lwz r7, lbl_816961A8@sda21(r0)
+/* 8134E884 | 80 ED 81 68 */	lwz r7, c_notransfer_folder_name__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134E888 | 7E E3 BB 78 */	mr r3, r23
 /* 8134E88C | 3C 84 00 04 */	addis r4, r4, 0x4
 /* 8134E890 | 80 A4 EA 48 */	lwz r5, -0x15b8(r4)
@@ -7495,11 +7495,11 @@
 /* 8134E920 | 48 00 52 8D */	bl change_uid__Q23ipl12NandSDWorkerFUx
 /* 8134E924 | 2C 1A 00 00 */	cmpwi r26, 0x0
 /* 8134E928 | 41 82 00 28 */	beq .L_8134E950
-/* 8134E92C | 80 6D 81 A4 */	lwz r3, lbl_816961E4@sda21(r0)
+/* 8134E92C | 80 6D 81 A4 */	lwz r3, c_wii_menu_save_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134E930 | 48 01 17 15 */	bl ChangeDir__Q33ipl4nand7wrapperFPCc
 /* 8134E934 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134E938 | 41 82 00 18 */	beq .L_8134E950
-/* 8134E93C | 80 8D 81 A4 */	lwz r4, lbl_816961E4@sda21(r0)
+/* 8134E93C | 80 8D 81 A4 */	lwz r4, c_wii_menu_save_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134E940 | 7C 65 1B 78 */	mr r5, r3
 /* 8134E944 | 38 7D 16 A4 */	addi r3, r29, 0x16a4
 /* 8134E948 | 4C C6 31 82 */	crclr cr1eq
@@ -8004,7 +8004,7 @@
 /* 8134F04C | 38 80 00 40 */	li r4, 0x40
 /* 8134F050 | 4C C6 31 82 */	crclr cr1eq
 /* 8134F054 | 48 2B 19 55 */	bl snprintf
-/* 8134F058 | 80 6D 81 80 */	lwz r3, lbl_816961C0@sda21(r0)
+/* 8134F058 | 80 6D 81 80 */	lwz r3, c_tmp_work_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134F05C | 48 01 10 4D */	bl Delete__Q33ipl4nand7wrapperFPCc
 /* 8134F060 | 80 BA 00 00 */	lwz r5, 0x0(r26)
 /* 8134F064 | 7C 64 1B 78 */	mr r4, r3
@@ -8014,7 +8014,7 @@
 /* 8134F074 | 48 00 4B E5 */	bl check_nand_corrupt__Q23ipl12NandSDWorkerFlPl
 /* 8134F078 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134F07C | 40 82 05 64 */	bne .L_8134F5E0
-/* 8134F080 | 80 6D 81 80 */	lwz r3, lbl_816961C0@sda21(r0)
+/* 8134F080 | 80 6D 81 80 */	lwz r3, c_tmp_work_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134F084 | 38 80 00 30 */	li r4, 0x30
 /* 8134F088 | 38 A0 00 00 */	li r5, 0x0
 /* 8134F08C | 48 01 0F 45 */	bl CreateDir__Q33ipl4nand7wrapperFPCcUcUc
@@ -8029,7 +8029,7 @@
 /* 8134F0B0 | 40 82 05 30 */	bne .L_8134F5E0
 /* 8134F0B4 | 2C 19 00 00 */	cmpwi r25, 0x0
 /* 8134F0B8 | 41 82 00 2C */	beq .L_8134F0E4
-/* 8134F0BC | 80 8D 81 80 */	lwz r4, lbl_816961C0@sda21(r0)
+/* 8134F0BC | 80 8D 81 80 */	lwz r4, c_tmp_work_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134F0C0 | 7F 25 CB 78 */	mr r5, r25
 /* 8134F0C4 | 38 7F 1A 4A */	addi r3, r31, 0x1a4a
 /* 8134F0C8 | 4C C6 31 82 */	crclr cr1eq
@@ -8040,11 +8040,11 @@
 /* 8134F0DC | 90 03 EA 24 */	stw r0, -0x15dc(r3)
 /* 8134F0E0 | 48 00 05 00 */	b .L_8134F5E0
 .L_8134F0E4:
-/* 8134F0E4 | 80 6D 81 80 */	lwz r3, lbl_816961C0@sda21(r0)
+/* 8134F0E4 | 80 6D 81 80 */	lwz r3, c_tmp_work_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134F0E8 | 48 01 0F 5D */	bl ChangeDir__Q33ipl4nand7wrapperFPCc
 /* 8134F0EC | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134F0F0 | 41 82 00 2C */	beq .L_8134F11C
-/* 8134F0F4 | 80 8D 81 80 */	lwz r4, lbl_816961C0@sda21(r0)
+/* 8134F0F4 | 80 8D 81 80 */	lwz r4, c_tmp_work_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134F0F8 | 7C 65 1B 78 */	mr r5, r3
 /* 8134F0FC | 38 7F 16 A4 */	addi r3, r31, 0x16a4
 /* 8134F100 | 4C C6 31 82 */	crclr cr1eq
@@ -8223,7 +8223,7 @@
 .L_8134F38C:
 /* 8134F38C | 2C 1B 00 00 */	cmpwi r27, 0x0
 /* 8134F390 | 40 82 02 3C */	bne .L_8134F5CC
-/* 8134F394 | 80 8D 81 80 */	lwz r4, lbl_816961C0@sda21(r0)
+/* 8134F394 | 80 8D 81 80 */	lwz r4, c_tmp_work_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134F398 | 38 61 00 68 */	addi r3, r1, 0x68
 /* 8134F39C | 38 A0 00 40 */	li r5, 0x40
 /* 8134F3A0 | 48 2B 30 25 */	bl strncpy
@@ -8231,7 +8231,7 @@
 /* 8134F3A8 | 38 8D 81 A8 */	li r4, lbl_816961E8@sda21
 /* 8134F3AC | 38 A0 00 40 */	li r5, 0x40
 /* 8134F3B0 | 48 2B 30 85 */	bl strncat
-/* 8134F3B4 | 80 8D 81 58 */	lwz r4, lbl_81696198@sda21(r0)
+/* 8134F3B4 | 80 8D 81 58 */	lwz r4, c_banner_file_name__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134F3B8 | 38 61 00 68 */	addi r3, r1, 0x68
 /* 8134F3BC | 38 A0 00 40 */	li r5, 0x40
 /* 8134F3C0 | 48 2B 30 75 */	bl strncat
@@ -8335,7 +8335,7 @@
 /* 8134F538 | 90 03 EA 24 */	stw r0, -0x15dc(r3)
 /* 8134F53C | 48 00 00 A4 */	b .L_8134F5E0
 .L_8134F540:
-/* 8134F540 | 80 8D 81 80 */	lwz r4, lbl_816961C0@sda21(r0)
+/* 8134F540 | 80 8D 81 80 */	lwz r4, c_tmp_work_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134F544 | 7F 43 D3 78 */	mr r3, r26
 /* 8134F548 | 38 A1 00 A8 */	addi r5, r1, 0xa8
 /* 8134F54C | 38 C0 00 02 */	li r6, 0x2
@@ -8345,7 +8345,7 @@
 /* 8134F55C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134F560 | 7C 79 1B 78 */	mr r25, r3
 /* 8134F564 | 41 82 00 28 */	beq .L_8134F58C
-/* 8134F568 | 80 8D 81 80 */	lwz r4, lbl_816961C0@sda21(r0)
+/* 8134F568 | 80 8D 81 80 */	lwz r4, c_tmp_work_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134F56C | 38 7F 1C 5E */	addi r3, r31, 0x1c5e
 /* 8134F570 | 38 A1 00 A8 */	addi r5, r1, 0xa8
 /* 8134F574 | 4C C6 31 82 */	crclr cr1eq
@@ -8381,7 +8381,7 @@
 .L_8134F5E0:
 /* 8134F5E0 | 2C 1B 00 00 */	cmpwi r27, 0x0
 /* 8134F5E4 | 40 82 00 70 */	bne .L_8134F654
-/* 8134F5E8 | 80 6D 81 80 */	lwz r3, lbl_816961C0@sda21(r0)
+/* 8134F5E8 | 80 6D 81 80 */	lwz r3, c_tmp_work_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134F5EC | 48 01 0A BD */	bl Delete__Q33ipl4nand7wrapperFPCc
 /* 8134F5F0 | 80 BA 00 00 */	lwz r5, 0x0(r26)
 /* 8134F5F4 | 7C 64 1B 78 */	mr r4, r3
@@ -8395,11 +8395,11 @@
 /* 8134F614 | 48 00 45 99 */	bl change_uid__Q23ipl12NandSDWorkerFUx
 /* 8134F618 | 2C 1C 00 00 */	cmpwi r28, 0x0
 /* 8134F61C | 41 82 00 38 */	beq .L_8134F654
-/* 8134F620 | 80 6D 81 A4 */	lwz r3, lbl_816961E4@sda21(r0)
+/* 8134F620 | 80 6D 81 A4 */	lwz r3, c_wii_menu_save_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134F624 | 48 01 0A 21 */	bl ChangeDir__Q33ipl4nand7wrapperFPCc
 /* 8134F628 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134F62C | 41 82 00 28 */	beq .L_8134F654
-/* 8134F630 | 80 8D 81 A4 */	lwz r4, lbl_816961E4@sda21(r0)
+/* 8134F630 | 80 8D 81 A4 */	lwz r4, c_wii_menu_save_path__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134F634 | 7C 65 1B 78 */	mr r5, r3
 /* 8134F638 | 38 7F 16 A4 */	addi r3, r31, 0x16a4
 /* 8134F63C | 4C C6 31 82 */	crclr cr1eq
@@ -8529,9 +8529,9 @@
 /* 8134F7F0 | 38 9A 00 0E */	addi r4, r26, 0xe
 /* 8134F7F4 | 38 A0 00 10 */	li r5, 0x10
 /* 8134F7F8 | 4B FE 0A 39 */	bl memcpy
-/* 8134F7FC | 3C 80 81 61 */	lis r4, lbl_8160D648@ha
+/* 8134F7FC | 3C 80 81 61 */	lis r4, c_md5_secret_key__Q23ipl12NandSDWorker@ha
 /* 8134F800 | 38 7A 00 0E */	addi r3, r26, 0xe
-/* 8134F804 | 38 84 D6 48 */	addi r4, r4, lbl_8160D648@l
+/* 8134F804 | 38 84 D6 48 */	addi r4, r4, c_md5_secret_key__Q23ipl12NandSDWorker@l
 /* 8134F808 | 38 A0 00 10 */	li r5, 0x10
 /* 8134F80C | 4B FE 0A 25 */	bl memcpy
 /* 8134F810 | 7F E3 FB 78 */	mr r3, r31
@@ -8696,7 +8696,7 @@
 /* 8134FA38 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8134FA3C | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8134FA40 | 48 2A 9A 89 */	bl _savegpr_29
-/* 8134FA44 | 80 8D A6 98 */	lwz r4, lbl_816986D8@sda21(r0)
+/* 8134FA44 | 80 8D A6 98 */	lwz r4, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134FA48 | 3F E0 81 63 */	lis r31, lbl_81635A88@ha
 /* 8134FA4C | 7C 7D 1B 78 */	mr r29, r3
 /* 8134FA50 | 2C 04 00 06 */	cmpwi r4, 0x6
@@ -8730,7 +8730,7 @@
 /* 8134FABC | 48 1D EB E5 */	bl OSReport
 /* 8134FAC0 | 38 60 00 03 */	li r3, 0x3
 /* 8134FAC4 | 38 00 FF F7 */	li r0, -0x9
-/* 8134FAC8 | 90 6D A6 98 */	stw r3, lbl_816986D8@sda21(r0)
+/* 8134FAC8 | 90 6D A6 98 */	stw r3, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134FACC | 80 7D 00 00 */	lwz r3, 0x0(r29)
 /* 8134FAD0 | 3C 63 00 04 */	addis r3, r3, 0x4
 /* 8134FAD4 | 90 03 EA 24 */	stw r0, -0x15dc(r3)
@@ -8748,7 +8748,7 @@
 /* 8134FB00 | 4C C6 31 82 */	crclr cr1eq
 /* 8134FB04 | 48 1D EB 9D */	bl OSReport
 /* 8134FB08 | 38 00 00 06 */	li r0, 0x6
-/* 8134FB0C | 90 0D A6 98 */	stw r0, lbl_816986D8@sda21(r0)
+/* 8134FB0C | 90 0D A6 98 */	stw r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 8134FB10 | 80 7D 00 00 */	lwz r3, 0x0(r29)
 /* 8134FB14 | 3C 83 00 02 */	addis r4, r3, 0x2
 /* 8134FB18 | 80 04 E6 94 */	lwz r0, -0x196c(r4)
@@ -8912,19 +8912,19 @@
 /* 8134FD50 | 48 00 01 10 */	b .L_8134FE60
 .L_8134FD54:
 /* 8134FD54 | 7F 83 E3 78 */	mr r3, r28
-/* 8134FD58 | 48 15 02 BD */	bl fn_814A0014
+/* 8134FD58 | 48 15 02 BD */	bl NWC24OpenLib
 /* 8134FD5C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134FD60 | 40 82 FF 98 */	bne .L_8134FCF8
 /* 8134FD64 | 38 00 00 00 */	li r0, 0x0
 /* 8134FD68 | 38 61 00 08 */	addi r3, r1, 0x8
 /* 8134FD6C | B0 01 00 08 */	sth r0, 0x8(r1)
 /* 8134FD70 | 38 80 00 01 */	li r4, 0x1
-/* 8134FD74 | 48 15 F6 95 */	bl fn_814AF408
+/* 8134FD74 | 48 15 F6 95 */	bl NWC24IterateDlTask
 /* 8134FD78 | 48 00 00 C4 */	b .L_8134FE3C
 .L_8134FD7C:
 /* 8134FD7C | A0 81 00 08 */	lhz r4, 0x8(r1)
 /* 8134FD80 | 38 61 00 10 */	addi r3, r1, 0x10
-/* 8134FD84 | 48 16 01 D9 */	bl fn_814AFF5C
+/* 8134FD84 | 48 16 01 D9 */	bl NWC24GetDlTask
 /* 8134FD88 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134FD8C | 41 82 00 18 */	beq .L_8134FDA4
 /* 8134FD90 | 7C 64 1B 78 */	mr r4, r3
@@ -8935,7 +8935,7 @@
 .L_8134FDA4:
 /* 8134FDA4 | 38 61 00 10 */	addi r3, r1, 0x10
 /* 8134FDA8 | 38 81 00 0C */	addi r4, r1, 0xc
-/* 8134FDAC | 48 15 F5 61 */	bl fn_814AF30C
+/* 8134FDAC | 48 15 F5 61 */	bl NWC24GetDlAppId
 /* 8134FDB0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134FDB4 | 41 82 00 18 */	beq .L_8134FDCC
 /* 8134FDB8 | 7C 64 1B 78 */	mr r4, r3
@@ -8952,7 +8952,7 @@
 /* 8134FDE0 | 4C C6 31 82 */	crclr cr1eq
 /* 8134FDE4 | 48 1D E8 BD */	bl OSReport
 /* 8134FDE8 | 38 61 00 10 */	addi r3, r1, 0x10
-/* 8134FDEC | 48 15 FD 91 */	bl fn_814AFB7C
+/* 8134FDEC | 48 15 FD 91 */	bl NWC24DeleteDlTask
 /* 8134FDF0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134FDF4 | 41 82 00 18 */	beq .L_8134FE0C
 /* 8134FDF8 | 7C 64 1B 78 */	mr r4, r3
@@ -8974,11 +8974,11 @@
 .L_8134FE30:
 /* 8134FE30 | 38 61 00 08 */	addi r3, r1, 0x8
 /* 8134FE34 | 38 80 00 00 */	li r4, 0x0
-/* 8134FE38 | 48 15 F5 D1 */	bl fn_814AF408
+/* 8134FE38 | 48 15 F5 D1 */	bl NWC24IterateDlTask
 .L_8134FE3C:
 /* 8134FE3C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134FE40 | 40 80 FF 3C */	bge .L_8134FD7C
-/* 8134FE44 | 48 15 03 DD */	bl fn_814A0220
+/* 8134FE44 | 48 15 03 DD */	bl NWC24CloseLib
 /* 8134FE48 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8134FE4C | 41 82 00 14 */	beq .L_8134FE60
 /* 8134FE50 | 7C 64 1B 78 */	mr r4, r3
@@ -9231,9 +9231,9 @@
 /* 813501D0 | 38 81 00 14 */	addi r4, r1, 0x14
 /* 813501D4 | 38 A0 00 10 */	li r5, 0x10
 /* 813501D8 | 4B FE 00 59 */	bl memcpy
-/* 813501DC | 3C 80 81 61 */	lis r4, lbl_8160D648@ha
+/* 813501DC | 3C 80 81 61 */	lis r4, c_md5_secret_key__Q23ipl12NandSDWorker@ha
 /* 813501E0 | 38 7B 00 0C */	addi r3, r27, 0xc
-/* 813501E4 | 38 84 D6 48 */	addi r4, r4, lbl_8160D648@l
+/* 813501E4 | 38 84 D6 48 */	addi r4, r4, c_md5_secret_key__Q23ipl12NandSDWorker@l
 /* 813501E8 | 38 A0 00 10 */	li r5, 0x10
 /* 813501EC | 4B FE 00 45 */	bl memcpy
 /* 813501F0 | 38 61 00 68 */	addi r3, r1, 0x68
@@ -10786,9 +10786,9 @@
 /* 813517C4 | 38 9B 00 0C */	addi r4, r27, 0xc
 /* 813517C8 | 38 A0 00 10 */	li r5, 0x10
 /* 813517CC | 4B FD EA 65 */	bl memcpy
-/* 813517D0 | 3C 80 81 61 */	lis r4, lbl_8160D648@ha
+/* 813517D0 | 3C 80 81 61 */	lis r4, c_md5_secret_key__Q23ipl12NandSDWorker@ha
 /* 813517D4 | 38 7B 00 0C */	addi r3, r27, 0xc
-/* 813517D8 | 38 84 D6 48 */	addi r4, r4, lbl_8160D648@l
+/* 813517D8 | 38 84 D6 48 */	addi r4, r4, c_md5_secret_key__Q23ipl12NandSDWorker@l
 /* 813517DC | 38 A0 00 10 */	li r5, 0x10
 /* 813517E0 | 4B FD EA 51 */	bl memcpy
 /* 813517E4 | 7F C3 F3 78 */	mr r3, r30
@@ -12034,11 +12034,11 @@
 /* 81352880 | 7C 04 07 74 */	extsb r4, r0
 /* 81352884 | 4C C6 31 82 */	crclr cr1eq
 /* 81352888 | 48 1D BE 19 */	bl OSReport
-/* 8135288C | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 8135288C | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 81352890 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81352894 | 41 82 00 0C */	beq .L_813528A0
 /* 81352898 | 38 00 00 02 */	li r0, 0x2
-/* 8135289C | 90 0D A6 98 */	stw r0, lbl_816986D8@sda21(r0)
+/* 8135289C | 90 0D A6 98 */	stw r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 .L_813528A0:
 /* 813528A0 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813528A4 | 7C 08 03 A6 */	mtlr r0
@@ -12058,11 +12058,11 @@
 /* 813528C8 | 7C 04 07 74 */	extsb r4, r0
 /* 813528CC | 4C C6 31 82 */	crclr cr1eq
 /* 813528D0 | 48 1D BD D1 */	bl OSReport
-/* 813528D4 | 80 0D A6 98 */	lwz r0, lbl_816986D8@sda21(r0)
+/* 813528D4 | 80 0D A6 98 */	lwz r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 /* 813528D8 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813528DC | 41 82 00 0C */	beq .L_813528E8
 /* 813528E0 | 38 00 00 01 */	li r0, 0x1
-/* 813528E4 | 90 0D A6 98 */	stw r0, lbl_816986D8@sda21(r0)
+/* 813528E4 | 90 0D A6 98 */	stw r0, s_sd_state__Q23ipl12NandSDWorker@sda21(r0)
 .L_813528E8:
 /* 813528E8 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813528EC | 7C 08 03 A6 */	mtlr r0
@@ -12600,7 +12600,7 @@
 /* 81353004 | 48 00 0D FD */	bl handle_sd_error_for_entry__Q23ipl12NandSDWorkerFlPl
 /* 81353008 | 48 00 01 F4 */	b .L_813531FC
 .L_8135300C:
-/* 8135300C | 80 8D 81 6C */	lwz r4, lbl_816961AC@sda21(r0)
+/* 8135300C | 80 8D 81 6C */	lwz r4, c_wii_sd_title_root__Q23ipl12NandSDWorker@sda21(r0)
 /* 81353010 | 38 61 00 64 */	addi r3, r1, 0x64
 /* 81353014 | 38 A0 00 40 */	li r5, 0x40
 /* 81353018 | 48 2A F3 AD */	bl strncpy
@@ -12824,7 +12824,7 @@
 /* 81353310 | 80 E3 00 00 */	lwz r7, 0x0(r3)
 /* 81353314 | 3C 87 00 04 */	addis r4, r7, 0x4
 /* 81353318 | 90 04 EA 30 */	stw r0, -0x15d0(r4)
-/* 8135331C | 80 8D 81 70 */	lwz r4, lbl_816961B0@sda21(r0)
+/* 8135331C | 80 8D 81 70 */	lwz r4, c_sd_save_file_name__Q23ipl12NandSDWorker@sda21(r0)
 /* 81353320 | 4B FF FC 7D */	bl get_sd_entry_list__Q23ipl12NandSDWorkerFPCcPUlUl
 /* 81353324 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81353328 | 40 80 00 08 */	bge .L_81353330
@@ -12861,7 +12861,7 @@
 /* 81353388 | 3C 86 00 04 */	addis r4, r6, 0x4
 /* 8135338C | 38 C0 06 40 */	li r6, 0x640
 /* 81353390 | 90 04 EA 34 */	stw r0, -0x15cc(r4)
-/* 81353394 | 80 8D 81 74 */	lwz r4, lbl_816961B4@sda21(r0)
+/* 81353394 | 80 8D 81 74 */	lwz r4, c_sd_app_file_name__Q23ipl12NandSDWorker@sda21(r0)
 /* 81353398 | 4B FF FC 05 */	bl get_sd_entry_list__Q23ipl12NandSDWorkerFPCcPUlUl
 /* 8135339C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813533A0 | 40 80 00 08 */	bge .L_813533A8
@@ -12927,7 +12927,7 @@
 /* 81353470 | 38 8D 81 A8 */	li r4, lbl_816961E8@sda21
 /* 81353474 | 38 A0 00 40 */	li r5, 0x40
 /* 81353478 | 48 2A EF BD */	bl strncat
-/* 8135347C | 80 8D 81 58 */	lwz r4, lbl_81696198@sda21(r0)
+/* 8135347C | 80 8D 81 58 */	lwz r4, c_banner_file_name__Q23ipl12NandSDWorker@sda21(r0)
 /* 81353480 | 38 61 00 08 */	addi r3, r1, 0x8
 /* 81353484 | 38 A0 00 40 */	li r5, 0x40
 /* 81353488 | 48 2A EF AD */	bl strncat
@@ -13783,12 +13783,12 @@
 /* 81353FEC | 7D 8B 63 78 */	mr r11, r12
 /* 81353FF0 | 90 0C 00 04 */	stw r0, 0x4(r12)
 /* 81353FF4 | 48 2A 54 D5 */	bl _savegpr_29
-/* 81353FF8 | 3C C0 81 61 */	lis r6, lbl_8160D638@ha
+/* 81353FF8 | 3C C0 81 61 */	lis r6, c_es_encrypt_iv__Q23ipl12NandSDWorker@ha
 /* 81353FFC | 7C 7D 1B 78 */	mr r29, r3
 /* 81354000 | 7C 9E 23 78 */	mr r30, r4
 /* 81354004 | 7C BF 2B 78 */	mr r31, r5
 /* 81354008 | 38 61 00 20 */	addi r3, r1, 0x20
-/* 8135400C | 38 86 D6 38 */	addi r4, r6, lbl_8160D638@l
+/* 8135400C | 38 86 D6 38 */	addi r4, r6, c_es_encrypt_iv__Q23ipl12NandSDWorker@l
 /* 81354010 | 38 A0 00 10 */	li r5, 0x10
 /* 81354014 | 4B FD C2 1D */	bl memcpy
 /* 81354018 | 7F A5 EB 78 */	mr r5, r29
@@ -13827,12 +13827,12 @@
 /* 81354084 | 7D 8B 63 78 */	mr r11, r12
 /* 81354088 | 90 0C 00 04 */	stw r0, 0x4(r12)
 /* 8135408C | 48 2A 54 3D */	bl _savegpr_29
-/* 81354090 | 3C C0 81 61 */	lis r6, lbl_8160D638@ha
+/* 81354090 | 3C C0 81 61 */	lis r6, c_es_encrypt_iv__Q23ipl12NandSDWorker@ha
 /* 81354094 | 7C 7D 1B 78 */	mr r29, r3
 /* 81354098 | 7C 9E 23 78 */	mr r30, r4
 /* 8135409C | 7C BF 2B 78 */	mr r31, r5
 /* 813540A0 | 38 61 00 20 */	addi r3, r1, 0x20
-/* 813540A4 | 38 86 D6 38 */	addi r4, r6, lbl_8160D638@l
+/* 813540A4 | 38 86 D6 38 */	addi r4, r6, c_es_encrypt_iv__Q23ipl12NandSDWorker@l
 /* 813540A8 | 38 A0 00 10 */	li r5, 0x10
 /* 813540AC | 4B FD C1 85 */	bl memcpy
 /* 813540B0 | 7F A5 EB 78 */	mr r5, r29
@@ -13914,7 +13914,7 @@
 /* 813541B0 | 3B C0 00 01 */	li r30, 0x1
 /* 813541B4 | 48 00 00 B8 */	b .L_8135426C
 .L_813541B8:
-/* 813541B8 | 80 ED 81 64 */	lwz r7, lbl_816961A4@sda21(r0)
+/* 813541B8 | 80 ED 81 64 */	lwz r7, c_nocopy_folder_name__Q23ipl12NandSDWorker@sda21(r0)
 /* 813541BC | 7F 63 DB 78 */	mr r3, r27
 /* 813541C0 | 7F 86 E3 78 */	mr r6, r28
 /* 813541C4 | 7F A5 EB 78 */	mr r5, r29
@@ -13938,7 +13938,7 @@
 /* 81354208 | 3B C0 00 02 */	li r30, 0x2
 /* 8135420C | 48 00 00 60 */	b .L_8135426C
 .L_81354210:
-/* 81354210 | 80 ED 81 68 */	lwz r7, lbl_816961A8@sda21(r0)
+/* 81354210 | 80 ED 81 68 */	lwz r7, c_notransfer_folder_name__Q23ipl12NandSDWorker@sda21(r0)
 /* 81354214 | 7F 63 DB 78 */	mr r3, r27
 /* 81354218 | 7F 86 E3 78 */	mr r6, r28
 /* 8135421C | 7F A5 EB 78 */	mr r5, r29
@@ -14752,20 +14752,22 @@
 .balign 8
 
 # .rodata:0x0 | 0x8160D638 | size: 0x10
-.obj lbl_8160D638, global
+# ipl::NandSDWorker::c_es_encrypt_iv
+.obj c_es_encrypt_iv__Q23ipl12NandSDWorker, global
 	.4byte 0x216712E6
 	.4byte 0xAA1F689F
 	.4byte 0x95C5A223
 	.4byte 0x24DC6A98
-.endobj lbl_8160D638
+.endobj c_es_encrypt_iv__Q23ipl12NandSDWorker
 
 # .rodata:0x10 | 0x8160D648 | size: 0x10
-.obj lbl_8160D648, global
+# ipl::NandSDWorker::c_md5_secret_key
+.obj c_md5_secret_key__Q23ipl12NandSDWorker, global
 	.4byte 0x0E653781
 	.4byte 0x99BE4517
 	.4byte 0xAB06EC22
 	.4byte 0x451A5793
-.endobj lbl_8160D648
+.endobj c_md5_secret_key__Q23ipl12NandSDWorker
 
 # .rodata:0x20 | 0x8160D658 | size: 0x10
 .obj lbl_8160D658, global
@@ -17885,55 +17887,63 @@
 .balign 8
 
 # .sdata:0x0 | 0x81696198 | size: 0x4
-.obj lbl_81696198, global
+# ipl::NandSDWorker::c_banner_file_name
+.obj c_banner_file_name__Q23ipl12NandSDWorker, global
 	.4byte lbl_81635A88
-.endobj lbl_81696198
+.endobj c_banner_file_name__Q23ipl12NandSDWorker
 
 # .sdata:0x4 | 0x8169619C | size: 0x8
-.obj lbl_8169619C, global
-	.4byte 0x6E6F636F
-	.4byte 0x70790000
-.endobj lbl_8169619C
+.obj fn_8169619C, local
+	.string "nocopy\000"
+.endobj fn_8169619C
 
 # .sdata:0xC | 0x816961A4 | size: 0x4
-.obj lbl_816961A4, global
-	.4byte lbl_8169619C
-.endobj lbl_816961A4
+# ipl::NandSDWorker::c_nocopy_folder_name
+.obj c_nocopy_folder_name__Q23ipl12NandSDWorker, global
+	.4byte fn_8169619C
+.endobj c_nocopy_folder_name__Q23ipl12NandSDWorker
 
 # .sdata:0x10 | 0x816961A8 | size: 0x4
-.obj lbl_816961A8, global
+# ipl::NandSDWorker::c_notransfer_folder_name
+.obj c_notransfer_folder_name__Q23ipl12NandSDWorker, global
 	.4byte lbl_81635A93
-.endobj lbl_816961A8
+.endobj c_notransfer_folder_name__Q23ipl12NandSDWorker
 
 # .sdata:0x14 | 0x816961AC | size: 0x4
-.obj lbl_816961AC, global
+# ipl::NandSDWorker::c_wii_sd_title_root
+.obj c_wii_sd_title_root__Q23ipl12NandSDWorker, global
 	.4byte lbl_81635A9E
-.endobj lbl_816961AC
+.endobj c_wii_sd_title_root__Q23ipl12NandSDWorker
 
 # .sdata:0x18 | 0x816961B0 | size: 0x4
-.obj lbl_816961B0, global
+# ipl::NandSDWorker::c_sd_save_file_name
+.obj c_sd_save_file_name__Q23ipl12NandSDWorker, global
 	.4byte lbl_81635AB2
-.endobj lbl_816961B0
+.endobj c_sd_save_file_name__Q23ipl12NandSDWorker
 
 # .sdata:0x1C | 0x816961B4 | size: 0x4
-.obj lbl_816961B4, global
+# ipl::NandSDWorker::c_sd_app_file_name
+.obj c_sd_app_file_name__Q23ipl12NandSDWorker, global
 	.4byte lbl_81635ABB
-.endobj lbl_816961B4
+.endobj c_sd_app_file_name__Q23ipl12NandSDWorker
 
 # .sdata:0x20 | 0x816961B8 | size: 0x4
-.obj lbl_816961B8, global
+# ipl::NandSDWorker::c_succession_path
+.obj c_succession_path__Q23ipl12NandSDWorker, global
 	.4byte lbl_81635AC7
-.endobj lbl_816961B8
+.endobj c_succession_path__Q23ipl12NandSDWorker
 
 # .sdata:0x24 | 0x816961BC | size: 0x4
-.obj lbl_816961BC, global
+# ipl::NandSDWorker::c_transferid_path
+.obj c_transferid_path__Q23ipl12NandSDWorker, global
 	.4byte lbl_81635ADB
-.endobj lbl_816961BC
+.endobj c_transferid_path__Q23ipl12NandSDWorker
 
 # .sdata:0x28 | 0x816961C0 | size: 0x4
-.obj lbl_816961C0, global
+# ipl::NandSDWorker::c_tmp_work_path
+.obj c_tmp_work_path__Q23ipl12NandSDWorker, global
 	.4byte lbl_81635AFB
-.endobj lbl_816961C0
+.endobj c_tmp_work_path__Q23ipl12NandSDWorker
 
 # .sdata:0x2C | 0x816961C4 | size: 0x6
 .obj lbl_816961C4, global
@@ -17956,15 +17966,17 @@
 .endobj lbl_816961D7
 
 # .sdata:0x44 | 0x816961DC | size: 0x8
-.obj lbl_816961DC, global
+# ipl::NandSDWorker::c_ignore_list_for_wiimenu
+.obj c_ignore_list_for_wiimenu__Q23ipl12NandSDWorker, global
 	.4byte lbl_81635B2C
 	.4byte lbl_81635B38
-.endobj lbl_816961DC
+.endobj c_ignore_list_for_wiimenu__Q23ipl12NandSDWorker
 
 # .sdata:0x4C | 0x816961E4 | size: 0x4
-.obj lbl_816961E4, global
+# ipl::NandSDWorker::c_wii_menu_save_path
+.obj c_wii_menu_save_path__Q23ipl12NandSDWorker, global
 	.4byte lbl_81635B42
-.endobj lbl_816961E4
+.endobj c_wii_menu_save_path__Q23ipl12NandSDWorker
 
 # .sdata:0x50 | 0x816961E8 | size: 0x2
 .obj lbl_816961E8, global
@@ -17996,9 +18008,10 @@
 .balign 8
 
 # .sbss:0x0 | 0x816986D8 | size: 0x4
-.obj lbl_816986D8, global
+# ipl::NandSDWorker::s_sd_state
+.obj s_sd_state__Q23ipl12NandSDWorker, global
 	.skip 0x4
-.endobj lbl_816986D8
+.endobj s_sd_state__Q23ipl12NandSDWorker
 
 # .sbss:0x4 | 0x816986DC | size: 0x4
 .obj lbl_816986DC, global

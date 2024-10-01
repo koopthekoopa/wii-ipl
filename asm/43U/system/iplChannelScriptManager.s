@@ -56,7 +56,7 @@
 /* 8133AAF0 | 38 A0 00 08 */	li r5, 0x8
 /* 8133AAF4 | 4B FF 58 41 */	bl memset
 /* 8133AAF8 | 38 00 00 00 */	li r0, 0x0
-/* 8133AAFC | 90 0D A6 6C */	stw r0, lbl_816986AC@sda21(r0)
+/* 8133AAFC | 90 0D A6 6C */	stw r0, smCSState__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133AB00 | 90 1E 00 30 */	stw r0, 0x30(r30)
 /* 8133AB04 | 90 1E 00 34 */	stw r0, 0x34(r30)
 /* 8133AB08 | 83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -75,7 +75,7 @@
 /* 8133AB28 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8133AB2C | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8133AB30 | 48 2B E9 95 */	bl _savegpr_28
-/* 8133AB34 | 90 AD A6 68 */	stw r5, lbl_816986A8@sda21(r0)
+/* 8133AB34 | 90 AD A6 68 */	stw r5, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133AB38 | 7C 7C 1B 78 */	mr r28, r3
 /* 8133AB3C | 3F C0 81 63 */	lis r30, lbl_81634B08@ha
 /* 8133AB40 | 7C 9D 23 78 */	mr r29, r4
@@ -88,7 +88,7 @@
 /* 8133AB5C | 80 9C 00 00 */	lwz r4, 0x0(r28)
 /* 8133AB60 | 38 7F 92 E0 */	addi r3, r31, smCSVm__Q33ipl7channel20ChannelScriptManager@l
 /* 8133AB64 | 3C A0 00 04 */	lis r5, 0x4
-/* 8133AB68 | 48 11 A2 69 */	bl CHANSVmPrepareInit
+/* 8133AB68 | 48 11 A2 69 */	bl CHANSVmInit
 /* 8133AB6C | 38 7F 92 E0 */	addi r3, r31, smCSVm__Q33ipl7channel20ChannelScriptManager@l
 /* 8133AB70 | 48 11 D5 E9 */	bl init__Q33ipl2cs6systemFP7CHANSVm
 /* 8133AB74 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -323,14 +323,14 @@
 /* 8133AEB4 | 48 00 00 28 */	b .L_8133AEDC
 .L_8133AEB8:
 /* 8133AEB8 | 3C 80 81 34 */	lis r4, calcCSThread__Q33ipl7channel20ChannelScriptManagerFv@ha
-/* 8133AEBC | 80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
+/* 8133AEBC | 80 6D A6 68 */	lwz r3, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133AEC0 | 38 84 B1 30 */	addi r4, r4, calcCSThread__Q33ipl7channel20ChannelScriptManagerFv@l
 /* 8133AEC4 | 48 01 EB 99 */	bl setCalcFunc__Q33ipl7channel9RsoThreadFPFv_v
-/* 8133AEC8 | 80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
+/* 8133AEC8 | 80 6D A6 68 */	lwz r3, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133AECC | 48 01 EB 15 */	bl start__Q33ipl7channel9RsoThreadFv
 /* 8133AED0 | 38 00 00 01 */	li r0, 0x1
 /* 8133AED4 | 38 60 00 01 */	li r3, 0x1
-/* 8133AED8 | 90 0D A6 6C */	stw r0, lbl_816986AC@sda21(r0)
+/* 8133AED8 | 90 0D A6 6C */	stw r0, smCSState__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 .L_8133AEDC:
 /* 8133AEDC | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8133AEE0 | 48 2B E6 31 */	bl _restgpr_28
@@ -348,17 +348,17 @@
 /* 8133AEFC | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8133AF00 | 93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 8133AF04 | 7C 7F 1B 78 */	mr r31, r3
-/* 8133AF08 | 80 0D A6 6C */	lwz r0, lbl_816986AC@sda21(r0)
+/* 8133AF08 | 80 0D A6 6C */	lwz r0, smCSState__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133AF0C | 2C 00 00 02 */	cmpwi r0, 0x2
 /* 8133AF10 | 40 82 00 64 */	bne .L_8133AF74
-/* 8133AF14 | 80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
+/* 8133AF14 | 80 6D A6 68 */	lwz r3, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133AF18 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 8133AF1C | 81 8C 00 24 */	lwz r12, 0x24(r12)
 /* 8133AF20 | 7D 89 03 A6 */	mtctr r12
 /* 8133AF24 | 4E 80 04 21 */	bctrl
 /* 8133AF28 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8133AF2C | 41 82 00 48 */	beq .L_8133AF74
-/* 8133AF30 | 80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
+/* 8133AF30 | 80 6D A6 68 */	lwz r3, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133AF34 | 38 81 00 08 */	addi r4, r1, 0x8
 /* 8133AF38 | 38 A0 00 00 */	li r5, 0x0
 /* 8133AF3C | 38 63 03 38 */	addi r3, r3, 0x338
@@ -369,26 +369,26 @@
 /* 8133AF50 | 90 1F 00 30 */	stw r0, 0x30(r31)
 /* 8133AF54 | 40 82 00 20 */	bne .L_8133AF74
 /* 8133AF58 | 38 00 00 03 */	li r0, 0x3
-/* 8133AF5C | 80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
-/* 8133AF60 | 90 0D A6 6C */	stw r0, lbl_816986AC@sda21(r0)
+/* 8133AF5C | 80 6D A6 68 */	lwz r3, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
+/* 8133AF60 | 90 0D A6 6C */	stw r0, smCSState__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133AF64 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 8133AF68 | 81 8C 00 14 */	lwz r12, 0x14(r12)
 /* 8133AF6C | 7D 89 03 A6 */	mtctr r12
 /* 8133AF70 | 4E 80 04 21 */	bctrl
 .L_8133AF74:
-/* 8133AF74 | 80 0D A6 6C */	lwz r0, lbl_816986AC@sda21(r0)
+/* 8133AF74 | 80 0D A6 6C */	lwz r0, smCSState__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133AF78 | 2C 00 00 03 */	cmpwi r0, 0x3
 /* 8133AF7C | 40 82 00 6C */	bne .L_8133AFE8
 /* 8133AF80 | 80 1F 00 30 */	lwz r0, 0x30(r31)
 /* 8133AF84 | 2C 00 00 02 */	cmpwi r0, 0x2
 /* 8133AF88 | 40 82 00 18 */	bne .L_8133AFA0
-/* 8133AF8C | 80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
+/* 8133AF8C | 80 6D A6 68 */	lwz r3, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133AF90 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 8133AF94 | 81 8C 00 14 */	lwz r12, 0x14(r12)
 /* 8133AF98 | 7D 89 03 A6 */	mtctr r12
 /* 8133AF9C | 4E 80 04 21 */	bctrl
 .L_8133AFA0:
-/* 8133AFA0 | 80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
+/* 8133AFA0 | 80 6D A6 68 */	lwz r3, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133AFA4 | 38 81 00 08 */	addi r4, r1, 0x8
 /* 8133AFA8 | 38 A0 00 01 */	li r5, 0x1
 /* 8133AFAC | 38 63 03 38 */	addi r3, r3, 0x338
@@ -407,16 +407,16 @@
 /* 8133AFE0 | 38 00 00 00 */	li r0, 0x0
 /* 8133AFE4 | 90 1F 00 34 */	stw r0, 0x34(r31)
 .L_8133AFE8:
-/* 8133AFE8 | 80 0D A6 6C */	lwz r0, lbl_816986AC@sda21(r0)
+/* 8133AFE8 | 80 0D A6 6C */	lwz r0, smCSState__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133AFEC | 2C 00 00 04 */	cmpwi r0, 0x4
 /* 8133AFF0 | 40 82 00 20 */	bne .L_8133B010
-/* 8133AFF4 | 80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
+/* 8133AFF4 | 80 6D A6 68 */	lwz r3, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133AFF8 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 8133AFFC | 81 8C 00 1C */	lwz r12, 0x1c(r12)
 /* 8133B000 | 7D 89 03 A6 */	mtctr r12
 /* 8133B004 | 4E 80 04 21 */	bctrl
 /* 8133B008 | 38 00 00 00 */	li r0, 0x0
-/* 8133B00C | 90 0D A6 6C */	stw r0, lbl_816986AC@sda21(r0)
+/* 8133B00C | 90 0D A6 6C */	stw r0, smCSState__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 .L_8133B010:
 /* 8133B010 | 80 01 00 24 */	lwz r0, 0x24(r1)
 /* 8133B014 | 83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -428,7 +428,7 @@
 # .text:0x5A4 | 0x8133B024 | size: 0xC
 # ipl::channel::ChannelScriptManager::finish()
 .fn finish__Q33ipl7channel20ChannelScriptManagerFv, global
-/* 8133B024 | 80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
+/* 8133B024 | 80 6D A6 68 */	lwz r3, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133B028 | 38 80 00 00 */	li r4, 0x0
 /* 8133B02C | 48 01 EA 30 */	b setCalcFunc__Q33ipl7channel9RsoThreadFPFv_v
 .endfn finish__Q33ipl7channel20ChannelScriptManagerFv
@@ -547,17 +547,17 @@
 /* 8133B178 | 80 1D 00 48 */	lwz r0, 0x48(r29)
 /* 8133B17C | 7C 00 D0 40 */	cmplw r0, r26
 /* 8133B180 | 40 82 00 7C */	bne .L_8133B1FC
-/* 8133B184 | 80 0D A6 6C */	lwz r0, lbl_816986AC@sda21(r0)
+/* 8133B184 | 80 0D A6 6C */	lwz r0, smCSState__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133B188 | 2C 00 00 01 */	cmpwi r0, 0x1
 /* 8133B18C | 40 82 00 38 */	bne .L_8133B1C4
-/* 8133B190 | 80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
+/* 8133B190 | 80 6D A6 68 */	lwz r3, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133B194 | 38 81 00 08 */	addi r4, r1, 0x8
-/* 8133B198 | 93 ED A6 6C */	stw r31, lbl_816986AC@sda21(r0)
+/* 8133B198 | 93 ED A6 6C */	stw r31, smCSState__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133B19C | 38 A0 00 01 */	li r5, 0x1
 /* 8133B1A0 | 38 63 03 38 */	addi r3, r3, 0x338
 /* 8133B1A4 | 93 61 00 08 */	stw r27, 0x8(r1)
 /* 8133B1A8 | 48 1F 5E D9 */	bl OSSendMessage
-/* 8133B1AC | 80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
+/* 8133B1AC | 80 6D A6 68 */	lwz r3, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133B1B0 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 8133B1B4 | 81 8C 00 18 */	lwz r12, 0x18(r12)
 /* 8133B1B8 | 7D 89 03 A6 */	mtctr r12
@@ -567,14 +567,14 @@
 /* 8133B1C4 | 3B 80 00 04 */	li r28, 0x4
 /* 8133B1C8 | 93 81 00 08 */	stw r28, 0x8(r1)
 /* 8133B1CC | 48 1F 56 B9 */	bl OSDisableInterrupts
-/* 8133B1D0 | 80 AD A6 68 */	lwz r5, lbl_816986A8@sda21(r0)
+/* 8133B1D0 | 80 AD A6 68 */	lwz r5, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133B1D4 | 30 03 FF FF */	subic r0, r3, 0x1
 /* 8133B1D8 | 7F 40 19 10 */	subfe r26, r0, r3
 /* 8133B1DC | 38 81 00 08 */	addi r4, r1, 0x8
 /* 8133B1E0 | 38 65 03 38 */	addi r3, r5, 0x338
 /* 8133B1E4 | 38 A0 00 01 */	li r5, 0x1
 /* 8133B1E8 | 48 1F 5E 99 */	bl OSSendMessage
-/* 8133B1EC | 93 8D A6 6C */	stw r28, lbl_816986AC@sda21(r0)
+/* 8133B1EC | 93 8D A6 6C */	stw r28, smCSState__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133B1F0 | 7F 43 D3 78 */	mr r3, r26
 /* 8133B1F4 | 48 1F 56 B9 */	bl OSRestoreInterrupts
 /* 8133B1F8 | 48 00 00 D4 */	b .L_8133B2CC
@@ -584,16 +584,16 @@
 /* 8133B204 | 80 1D 00 48 */	lwz r0, 0x48(r29)
 /* 8133B208 | 7C 00 F0 40 */	cmplw r0, r30
 /* 8133B20C | 40 82 00 78 */	bne .L_8133B284
-/* 8133B210 | 80 0D A6 6C */	lwz r0, lbl_816986AC@sda21(r0)
+/* 8133B210 | 80 0D A6 6C */	lwz r0, smCSState__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133B214 | 2C 00 00 03 */	cmpwi r0, 0x3
 /* 8133B218 | 40 82 00 34 */	bne .L_8133B24C
-/* 8133B21C | 80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
+/* 8133B21C | 80 6D A6 68 */	lwz r3, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133B220 | 38 81 00 08 */	addi r4, r1, 0x8
 /* 8133B224 | 93 E1 00 08 */	stw r31, 0x8(r1)
 /* 8133B228 | 38 A0 00 01 */	li r5, 0x1
 /* 8133B22C | 38 63 03 38 */	addi r3, r3, 0x338
 /* 8133B230 | 48 1F 5E 51 */	bl OSSendMessage
-/* 8133B234 | 80 6D A6 68 */	lwz r3, lbl_816986A8@sda21(r0)
+/* 8133B234 | 80 6D A6 68 */	lwz r3, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133B238 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 8133B23C | 81 8C 00 18 */	lwz r12, 0x18(r12)
 /* 8133B240 | 7D 89 03 A6 */	mtctr r12
@@ -603,14 +603,14 @@
 /* 8133B24C | 3B E0 00 04 */	li r31, 0x4
 /* 8133B250 | 93 E1 00 08 */	stw r31, 0x8(r1)
 /* 8133B254 | 48 1F 56 31 */	bl OSDisableInterrupts
-/* 8133B258 | 80 AD A6 68 */	lwz r5, lbl_816986A8@sda21(r0)
+/* 8133B258 | 80 AD A6 68 */	lwz r5, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133B25C | 30 03 FF FF */	subic r0, r3, 0x1
 /* 8133B260 | 7F 40 19 10 */	subfe r26, r0, r3
 /* 8133B264 | 38 81 00 08 */	addi r4, r1, 0x8
 /* 8133B268 | 38 65 03 38 */	addi r3, r5, 0x338
 /* 8133B26C | 38 A0 00 01 */	li r5, 0x1
 /* 8133B270 | 48 1F 5E 11 */	bl OSSendMessage
-/* 8133B274 | 93 ED A6 6C */	stw r31, lbl_816986AC@sda21(r0)
+/* 8133B274 | 93 ED A6 6C */	stw r31, smCSState__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133B278 | 7F 43 D3 78 */	mr r3, r26
 /* 8133B27C | 48 1F 56 31 */	bl OSRestoreInterrupts
 /* 8133B280 | 48 00 00 4C */	b .L_8133B2CC
@@ -624,14 +624,14 @@
 /* 8133B298 | 3B E0 00 04 */	li r31, 0x4
 /* 8133B29C | 93 E1 00 08 */	stw r31, 0x8(r1)
 /* 8133B2A0 | 48 1F 55 E5 */	bl OSDisableInterrupts
-/* 8133B2A4 | 80 AD A6 68 */	lwz r5, lbl_816986A8@sda21(r0)
+/* 8133B2A4 | 80 AD A6 68 */	lwz r5, smpThread__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133B2A8 | 30 03 FF FF */	subic r0, r3, 0x1
 /* 8133B2AC | 7F 40 19 10 */	subfe r26, r0, r3
 /* 8133B2B0 | 38 81 00 08 */	addi r4, r1, 0x8
 /* 8133B2B4 | 38 65 03 38 */	addi r3, r5, 0x338
 /* 8133B2B8 | 38 A0 00 01 */	li r5, 0x1
 /* 8133B2BC | 48 1F 5D C5 */	bl OSSendMessage
-/* 8133B2C0 | 93 ED A6 6C */	stw r31, lbl_816986AC@sda21(r0)
+/* 8133B2C0 | 93 ED A6 6C */	stw r31, smCSState__Q33ipl7channel20ChannelScriptManager@sda21(r0)
 /* 8133B2C4 | 7F 43 D3 78 */	mr r3, r26
 /* 8133B2C8 | 48 1F 55 E5 */	bl OSRestoreInterrupts
 .L_8133B2CC:
@@ -657,11 +657,13 @@
 .balign 8
 
 # .sbss:0x0 | 0x816986A8 | size: 0x4
-.obj lbl_816986A8, global
+# ipl::channel::ChannelScriptManager::smpThread
+.obj smpThread__Q33ipl7channel20ChannelScriptManager, global
 	.skip 0x4
-.endobj lbl_816986A8
+.endobj smpThread__Q33ipl7channel20ChannelScriptManager
 
 # .sbss:0x4 | 0x816986AC | size: 0x4
-.obj lbl_816986AC, global
+# ipl::channel::ChannelScriptManager::smCSState
+.obj smCSState__Q33ipl7channel20ChannelScriptManager, global
 	.skip 0x4
-.endobj lbl_816986AC
+.endobj smCSState__Q33ipl7channel20ChannelScriptManager

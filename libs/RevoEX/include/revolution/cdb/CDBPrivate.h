@@ -8,7 +8,7 @@
 enum {
     CDB_FATAL = 1,
     CDB_ERROR,
-    CDB_WARN
+    CDB_WARN,
     CDB_INFO
 };
 

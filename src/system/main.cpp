@@ -1,5 +1,4 @@
 #include <revolution.h>
-#include <revolution/nand.h>
 
 #include "system/iplSystem.h"
 
@@ -20,8 +19,7 @@ void mainmenu() {
  */
 s32 NANDCheck(u32 fsBlock, u32 iNode, u32 *answer) {
     *answer = 0;
-    
-    return 0; /* success */
+    return NAND_RESULT_OK;
 }
 
 

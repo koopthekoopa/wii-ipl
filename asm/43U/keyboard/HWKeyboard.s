@@ -1326,7 +1326,7 @@
 	.4byte 0x00000000
 	.4byte lbl_816688DC
 	.4byte 0x00000001
-	.4byte lbl_81616A0C
+	.4byte csAninationFile__Q49textinput8keyboard5hwkey10HWKeyboard_816168B8+0x154
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000

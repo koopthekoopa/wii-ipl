@@ -74,7 +74,7 @@
 /* 8135EF80 | 80 7E 00 00 */	lwz r3, 0x0(r30)
 /* 8135EF84 | 3C 63 00 02 */	addis r3, r3, 0x2
 /* 8135EF88 | 90 03 14 D4 */	stw r0, 0x14d4(r3)
-/* 8135EF8C | 90 8D A6 B8 */	stw r4, lbl_816986F8@sda21(r0)
+/* 8135EF8C | 90 8D A6 B8 */	stw r4, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135EF90 | 80 7E 00 00 */	lwz r3, 0x0(r30)
 /* 8135EF94 | 3C 63 00 02 */	addis r3, r3, 0x2
 /* 8135EF98 | 90 83 14 D8 */	stw r4, 0x14d8(r3)
@@ -151,14 +151,14 @@
 # .text:0x1D0 | 0x8135F068 | size: 0x8
 # ipl::SDVFWorker::get_sd_state()
 .fn get_sd_state__Q23ipl10SDVFWorkerFv, global
-/* 8135F068 | 80 6D A6 B8 */	lwz r3, lbl_816986F8@sda21(r0)
+/* 8135F068 | 80 6D A6 B8 */	lwz r3, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F06C | 4E 80 00 20 */	blr
 .endfn get_sd_state__Q23ipl10SDVFWorkerFv
 
 # .text:0x1D8 | 0x8135F070 | size: 0x24
 # ipl::SDVFWorker::is_sd_write_protected()
 .fn is_sd_write_protected__Q23ipl10SDVFWorkerFv, global
-/* 8135F070 | 80 0D A6 B8 */	lwz r0, lbl_816986F8@sda21(r0)
+/* 8135F070 | 80 0D A6 B8 */	lwz r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F074 | 2C 00 00 05 */	cmpwi r0, 0x5
 /* 8135F078 | 40 82 00 14 */	bne .L_8135F08C
 /* 8135F07C | 80 63 00 00 */	lwz r3, 0x0(r3)
@@ -264,7 +264,7 @@
 /* 8135F188 | 7C 89 03 A6 */	mtctr r4
 /* 8135F18C | 4E 80 04 20 */	bctr
 .L_8135F190:
-/* 8135F190 | 80 0D A6 B8 */	lwz r0, lbl_816986F8@sda21(r0)
+/* 8135F190 | 80 0D A6 B8 */	lwz r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F194 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8135F198 | 41 82 00 48 */	beq .L_8135F1E0
 /* 8135F19C | 80 79 00 00 */	lwz r3, 0x0(r25)
@@ -290,7 +290,7 @@
 .L_8135F1E8:
 /* 8135F1E8 | 7F 23 CB 78 */	mr r3, r25
 /* 8135F1EC | 48 00 02 05 */	bl do_mount_sd__Q23ipl10SDVFWorkerFv
-/* 8135F1F0 | 80 6D A6 B8 */	lwz r3, lbl_816986F8@sda21(r0)
+/* 8135F1F0 | 80 6D A6 B8 */	lwz r3, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F1F4 | 38 03 FF FD */	subi r0, r3, 0x3
 /* 8135F1F8 | 28 00 00 01 */	cmplwi r0, 0x1
 /* 8135F1FC | 41 81 00 18 */	bgt .L_8135F214
@@ -309,7 +309,7 @@
 /* 8135F228 | 48 00 05 95 */	bl do_format_sd__Q23ipl10SDVFWorkerFv
 /* 8135F22C | 48 00 01 54 */	b .L_8135F380
 .L_8135F230:
-/* 8135F230 | 80 0D A6 B8 */	lwz r0, lbl_816986F8@sda21(r0)
+/* 8135F230 | 80 0D A6 B8 */	lwz r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F234 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8135F238 | 41 82 00 4C */	beq .L_8135F284
 /* 8135F23C | 80 79 00 00 */	lwz r3, 0x0(r25)
@@ -329,7 +329,7 @@
 /* 8135F274 | 38 7B 00 1D */	addi r3, r27, 0x1d
 /* 8135F278 | 4C C6 31 82 */	crclr cr1eq
 /* 8135F27C | 48 1C F4 25 */	bl OSReport
-/* 8135F280 | 93 CD A6 B8 */	stw r30, lbl_816986F8@sda21(r0)
+/* 8135F280 | 93 CD A6 B8 */	stw r30, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 .L_8135F284:
 /* 8135F284 | 88 1F 02 BC */	lbz r0, 0x2bc(r31)
 /* 8135F288 | 2C 00 00 00 */	cmpwi r0, 0x0
@@ -434,7 +434,7 @@
 /* 8135F3CC | 39 61 00 30 */	addi r11, r1, 0x30
 /* 8135F3D0 | 90 19 00 00 */	stw r0, 0x0(r25)
 /* 8135F3D4 | 7F 23 CB 78 */	mr r3, r25
-/* 8135F3D8 | 90 0D A6 B8 */	stw r0, lbl_816986F8@sda21(r0)
+/* 8135F3D8 | 90 0D A6 B8 */	stw r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F3DC | 48 29 A1 25 */	bl _restgpr_24
 /* 8135F3E0 | 80 01 00 34 */	lwz r0, 0x34(r1)
 /* 8135F3E4 | 7C 08 03 A6 */	mtlr r0
@@ -451,7 +451,7 @@
 /* 8135F3FC | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8135F400 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8135F404 | 7C 7E 1B 78 */	mr r30, r3
-/* 8135F408 | 80 0D A6 B8 */	lwz r0, lbl_816986F8@sda21(r0)
+/* 8135F408 | 80 0D A6 B8 */	lwz r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F40C | 2C 00 00 02 */	cmpwi r0, 0x2
 /* 8135F410 | 41 82 01 54 */	beq .L_8135F564
 /* 8135F414 | 40 80 00 14 */	bge .L_8135F428
@@ -498,23 +498,23 @@
 /* 8135F4B0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8135F4B4 | 40 82 00 10 */	bne .L_8135F4C4
 /* 8135F4B8 | 38 00 00 05 */	li r0, 0x5
-/* 8135F4BC | 90 0D A6 B8 */	stw r0, lbl_816986F8@sda21(r0)
+/* 8135F4BC | 90 0D A6 B8 */	stw r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F4C0 | 48 00 00 38 */	b .L_8135F4F8
 .L_8135F4C4:
 /* 8135F4C4 | 2C 03 FF F7 */	cmpwi r3, -0x9
 /* 8135F4C8 | 40 82 00 10 */	bne .L_8135F4D8
 /* 8135F4CC | 38 00 00 03 */	li r0, 0x3
-/* 8135F4D0 | 90 0D A6 B8 */	stw r0, lbl_816986F8@sda21(r0)
+/* 8135F4D0 | 90 0D A6 B8 */	stw r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F4D4 | 48 00 00 24 */	b .L_8135F4F8
 .L_8135F4D8:
 /* 8135F4D8 | 2C 03 FF F6 */	cmpwi r3, -0xa
 /* 8135F4DC | 40 82 00 10 */	bne .L_8135F4EC
 /* 8135F4E0 | 38 00 00 04 */	li r0, 0x4
-/* 8135F4E4 | 90 0D A6 B8 */	stw r0, lbl_816986F8@sda21(r0)
+/* 8135F4E4 | 90 0D A6 B8 */	stw r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F4E8 | 48 00 00 10 */	b .L_8135F4F8
 .L_8135F4EC:
 /* 8135F4EC | 38 00 00 00 */	li r0, 0x0
-/* 8135F4F0 | 93 ED A6 B8 */	stw r31, lbl_816986F8@sda21(r0)
+/* 8135F4F0 | 93 ED A6 B8 */	stw r31, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F4F4 | 98 0D A6 BC */	stb r0, lbl_816986FC@sda21(r0)
 .L_8135F4F8:
 /* 8135F4F8 | 80 9E 00 00 */	lwz r4, 0x0(r30)
@@ -530,7 +530,7 @@
 /* 8135F51C | 48 1C F1 85 */	bl OSReport
 /* 8135F520 | 38 60 00 00 */	li r3, 0x0
 /* 8135F524 | 38 00 FF F8 */	li r0, -0x8
-/* 8135F528 | 90 6D A6 B8 */	stw r3, lbl_816986F8@sda21(r0)
+/* 8135F528 | 90 6D A6 B8 */	stw r3, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F52C | 80 7E 00 00 */	lwz r3, 0x0(r30)
 /* 8135F530 | 3C 63 00 02 */	addis r3, r3, 0x2
 /* 8135F534 | 90 03 14 D4 */	stw r0, 0x14d4(r3)
@@ -552,13 +552,13 @@
 /* 8135F568 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8135F56C | 40 82 00 10 */	bne .L_8135F57C
 /* 8135F570 | 38 00 00 05 */	li r0, 0x5
-/* 8135F574 | 90 0D A6 B8 */	stw r0, lbl_816986F8@sda21(r0)
+/* 8135F574 | 90 0D A6 B8 */	stw r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F578 | 48 00 00 2C */	b .L_8135F5A4
 .L_8135F57C:
 /* 8135F57C | 2C 03 FF F7 */	cmpwi r3, -0x9
 /* 8135F580 | 40 82 00 10 */	bne .L_8135F590
 /* 8135F584 | 38 00 00 03 */	li r0, 0x3
-/* 8135F588 | 90 0D A6 B8 */	stw r0, lbl_816986F8@sda21(r0)
+/* 8135F588 | 90 0D A6 B8 */	stw r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F58C | 48 00 00 18 */	b .L_8135F5A4
 .L_8135F590:
 /* 8135F590 | 2C 03 FF F6 */	cmpwi r3, -0xa
@@ -566,7 +566,7 @@
 /* 8135F598 | 40 82 00 08 */	bne .L_8135F5A0
 /* 8135F59C | 38 00 00 04 */	li r0, 0x4
 .L_8135F5A0:
-/* 8135F5A0 | 90 0D A6 B8 */	stw r0, lbl_816986F8@sda21(r0)
+/* 8135F5A0 | 90 0D A6 B8 */	stw r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 .L_8135F5A4:
 /* 8135F5A4 | 80 9E 00 00 */	lwz r4, 0x0(r30)
 /* 8135F5A8 | 3C 84 00 02 */	addis r4, r4, 0x2
@@ -594,7 +594,7 @@
 /* 8135F5E4 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8135F5E8 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8135F5EC | 48 29 9E DD */	bl _savegpr_29
-/* 8135F5F0 | 80 0D A6 B8 */	lwz r0, lbl_816986F8@sda21(r0)
+/* 8135F5F0 | 80 0D A6 B8 */	lwz r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F5F4 | 3F E0 81 64 */	lis r31, lbl_816394A8@ha
 /* 8135F5F8 | 7C 7D 1B 78 */	mr r29, r3
 /* 8135F5FC | 2C 00 00 00 */	cmpwi r0, 0x0
@@ -697,7 +697,7 @@
 .L_8135F76C:
 /* 8135F76C | 2C 1E 00 05 */	cmpwi r30, 0x5
 /* 8135F770 | 40 82 00 30 */	bne .L_8135F7A0
-/* 8135F774 | 80 0D A6 B8 */	lwz r0, lbl_816986F8@sda21(r0)
+/* 8135F774 | 80 0D A6 B8 */	lwz r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F778 | 2C 00 00 01 */	cmpwi r0, 0x1
 /* 8135F77C | 40 82 00 0C */	bne .L_8135F788
 /* 8135F780 | 38 60 FF FE */	li r3, -0x2
@@ -728,7 +728,7 @@
 /* 8135F7C4 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8135F7C8 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8135F7CC | 48 29 9C FD */	bl _savegpr_29
-/* 8135F7D0 | 80 8D A6 B8 */	lwz r4, lbl_816986F8@sda21(r0)
+/* 8135F7D0 | 80 8D A6 B8 */	lwz r4, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135F7D4 | 3F E0 81 64 */	lis r31, lbl_816394A8@ha
 /* 8135F7D8 | 7C 7D 1B 78 */	mr r29, r3
 /* 8135F7DC | 2C 04 00 05 */	cmpwi r4, 0x5
@@ -914,7 +914,7 @@
 /* 8135FA34 | 7C 08 02 A6 */	mflr r0
 /* 8135FA38 | 38 80 00 01 */	li r4, 0x1
 /* 8135FA3C | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 8135FA40 | 80 0D A6 B8 */	lwz r0, lbl_816986F8@sda21(r0)
+/* 8135FA40 | 80 0D A6 B8 */	lwz r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135FA44 | 98 8D A6 BC */	stb r4, lbl_816986FC@sda21(r0)
 /* 8135FA48 | 7C 64 1B 78 */	mr r4, r3
 /* 8135FA4C | 2C 00 00 00 */	cmpwi r0, 0x0
@@ -925,7 +925,7 @@
 /* 8135FA60 | 4C C6 31 82 */	crclr cr1eq
 /* 8135FA64 | 48 1C EC 3D */	bl OSReport
 /* 8135FA68 | 38 00 00 02 */	li r0, 0x2
-/* 8135FA6C | 90 0D A6 B8 */	stw r0, lbl_816986F8@sda21(r0)
+/* 8135FA6C | 90 0D A6 B8 */	stw r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 .L_8135FA70:
 /* 8135FA70 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8135FA74 | 7C 08 03 A6 */	mtlr r0
@@ -940,7 +940,7 @@
 /* 8135FA84 | 7C 08 02 A6 */	mflr r0
 /* 8135FA88 | 38 80 00 00 */	li r4, 0x0
 /* 8135FA8C | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 8135FA90 | 80 0D A6 B8 */	lwz r0, lbl_816986F8@sda21(r0)
+/* 8135FA90 | 80 0D A6 B8 */	lwz r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 /* 8135FA94 | 98 8D A6 BC */	stb r4, lbl_816986FC@sda21(r0)
 /* 8135FA98 | 7C 64 1B 78 */	mr r4, r3
 /* 8135FA9C | 2C 00 00 00 */	cmpwi r0, 0x0
@@ -951,7 +951,7 @@
 /* 8135FAB0 | 4C C6 31 82 */	crclr cr1eq
 /* 8135FAB4 | 48 1C EB ED */	bl OSReport
 /* 8135FAB8 | 38 00 00 01 */	li r0, 0x1
-/* 8135FABC | 90 0D A6 B8 */	stw r0, lbl_816986F8@sda21(r0)
+/* 8135FABC | 90 0D A6 B8 */	stw r0, s_sd_state__Q23ipl10SDVFWorker@sda21(r0)
 .L_8135FAC0:
 /* 8135FAC0 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8135FAC4 | 7C 08 03 A6 */	mtlr r0
@@ -1273,9 +1273,10 @@
 .balign 8
 
 # .sbss:0x0 | 0x816986F8 | size: 0x4
-.obj lbl_816986F8, global
+# ipl::SDVFWorker::s_sd_state
+.obj s_sd_state__Q23ipl10SDVFWorker, global
 	.skip 0x4
-.endobj lbl_816986F8
+.endobj s_sd_state__Q23ipl10SDVFWorker
 
 # .sbss:0x4 | 0x816986FC | size: 0x1
 .obj lbl_816986FC, global

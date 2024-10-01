@@ -1,6 +1,7 @@
 #ifndef IPL_UTILITY_WPAD_H
 #define IPL_UTILITY_WPAD_H
 
+#include <revolution/kpad.h>
 #include <revolution/types.h>
 
 namespace ipl {

@@ -45,7 +45,7 @@ typedef enum {
 } VITVMode;
     
 typedef enum {
-    VI_XFBMODE_SF = 0,
+    VI_XFBMODE_SF           = 0,
     VI_XFBMODE_DF
 } VIXFBMode;
 

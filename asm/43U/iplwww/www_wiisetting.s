@@ -27,7 +27,7 @@
 /* 8136F9D4 | 4C 82 00 20 */	bnelr
 /* 8136F9D8 | 38 80 00 01 */	li r4, 0x1
 /* 8136F9DC | 38 00 00 00 */	li r0, 0x0
-/* 8136F9E0 | 90 8D 82 D0 */	stw r4, lbl_81696310@sda21(r0)
+/* 8136F9E0 | 90 8D 82 D0 */	stw r4, gEnableDpd@sda21(r0)
 /* 8136F9E4 | 38 80 00 00 */	li r4, 0x0
 /* 8136F9E8 | 90 0D A9 48 */	stw r0, lbl_81698988@sda21(r0)
 /* 8136F9EC | 48 21 89 E0 */	b fn_815883CC
@@ -72,7 +72,7 @@
 /* 8136FA4C | 3C E0 81 37 */	lis r7, globalGetter___Q23www10wiisettingFP14WWWJSPluginObjPCcP16WWWJSPluginValue@ha
 /* 8136FA50 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 8136FA54 | 3C C0 81 37 */	lis r6, allow_access__Q23www10wiisettingFPCcPCci@ha
-/* 8136FA58 | 39 0D 82 D4 */	li r8, lbl_81696314@sda21
+/* 8136FA58 | 39 0D 82 D4 */	li r8, globalNames__Q23www10wiisetting@sda21
 /* 8136FA5C | 3C 60 81 64 */	lis r3, lbl_816440E3@ha
 /* 8136FA60 | 81 8D A8 FC */	lwz r12, WWWAddJSPlugin@sda21(r0)
 /* 8136FA64 | 38 85 A5 00 */	addi r4, r5, cap__Q23www10wiisetting@l
@@ -963,7 +963,7 @@
 .L_8137064C:
 /* 8137064C | 38 60 00 01 */	li r3, 0x1
 /* 81370650 | 38 00 00 00 */	li r0, 0x0
-/* 81370654 | 90 6D 82 D0 */	stw r3, lbl_81696310@sda21(r0)
+/* 81370654 | 90 6D 82 D0 */	stw r3, gEnableDpd@sda21(r0)
 /* 81370658 | 38 60 00 0B */	li r3, 0xb
 /* 8137065C | 90 0D A9 48 */	stw r0, lbl_81698988@sda21(r0)
 /* 81370660 | 48 00 04 48 */	b .L_81370AA8
@@ -1072,7 +1072,7 @@
 /* 813707D0 | 48 20 CC 4D */	bl fn_8157D41C
 /* 813707D4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813707D8 | 41 82 00 14 */	beq .L_813707EC
-/* 813707DC | 93 CD 82 D0 */	stw r30, lbl_81696310@sda21(r0)
+/* 813707DC | 93 CD 82 D0 */	stw r30, gEnableDpd@sda21(r0)
 /* 813707E0 | 7F 83 E3 78 */	mr r3, r28
 /* 813707E4 | 93 CD A9 48 */	stw r30, lbl_81698988@sda21(r0)
 /* 813707E8 | 48 21 7B AD */	bl fn_81588394
@@ -1865,17 +1865,11 @@
 /* 813711EC | 4E 80 00 20 */	blr
 .endfn setMsgQueue__Q23www10wiisettingFP14OSMessageQueue
 
-# 0x8160F058..0x8160F378 | size: 0x320
+# 0x8160F060..0x8160F378 | size: 0x318
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x8160F058 | size: 0x8
-.obj lbl_8160F058, global
-	.4byte 0x00000000
-	.4byte 0x3F800000
-.endobj lbl_8160F058
-
-# .rodata:0x8 | 0x8160F060 | size: 0x90
+# .rodata:0x0 | 0x8160F060 | size: 0x90
 .obj lbl_8160F060, global
 	.4byte 0x00010203
 	.4byte 0x04050607
@@ -1915,7 +1909,7 @@
 	.4byte 0x26272A2C
 .endobj lbl_8160F060
 
-# .rodata:0x98 | 0x8160F0F0 | size: 0x164
+# .rodata:0x90 | 0x8160F0F0 | size: 0x164
 .obj lbl_8160F0F0, global
 	.4byte 0x00010231
 	.4byte 0x03040506
@@ -2008,7 +2002,7 @@
 	.4byte 0x2B2C0000
 .endobj lbl_8160F0F0
 
-# .rodata:0x1FC | 0x8160F254 | size: 0x124
+# .rodata:0x1F4 | 0x8160F254 | size: 0x124
 .obj lbl_8160F254, global
 	.4byte lbl_81696329
 	.4byte lbl_81696331
@@ -2927,15 +2921,16 @@
 .balign 8
 
 # .sdata:0x0 | 0x81696310 | size: 0x4
-.obj lbl_81696310, global
+.obj gEnableDpd, global
 	.4byte 0x00000001
-.endobj lbl_81696310
+.endobj gEnableDpd
 
 # .sdata:0x4 | 0x81696314 | size: 0x8
-.obj lbl_81696314, global
+# www::wiisetting::globalNames
+.obj globalNames__Q23www10wiisetting, global
 	.4byte lbl_816440D8
 	.4byte 0x00000000
-.endobj lbl_81696314
+.endobj globalNames__Q23www10wiisetting
 
 # .sdata:0xC | 0x8169631C | size: 0x1
 .obj lbl_8169631C, global

@@ -16,11 +16,19 @@ typedef void    (*CHANSMethod)(CHANSVm*, CHANSVmObjHdr*, CHANSVmObjHdr*);
 typedef void    (*CHANSCtor)(CHANSVm*);
 
 struct CHANSVm {
-    undefined unk_0x00[0x270];
+    undefined           unk_0x00[0x1C];
+    undefined4          unk_0x1C;
+    undefined4          unk_0x20;
+    undefined4          unk_0x24;
+    undefined4          unk_0x28;
+    undefined4          unk_0x2C;
+    undefined           unk_0x30[0x30];
+    undefined4*         unk_0x60;
+    undefined           unk_0x64[0x20C];
 };
 
 struct CHANSVmObjHdr {
-    undefined unk_0x00[0x24];   // exact size not yet figured out.
+    undefined unk_0x00[0x10];
 };
 
 typedef struct CHANSMethodEntry {
@@ -33,12 +41,6 @@ typedef struct CHANSPropertyEntry {
     CHANSMethod getMethod;      // 0x04
     CHANSMethod setMethod;      // 0x08
 } CHANSPropertyEntry;
-
-typedef struct CHANSPropertyEntry {
-    const char* name;           // 0x00
-    CHANSMethod getMethod;      // 0x04
-    CHANSMethod unkMethod;      // 0x08
-} CHANSClassEntry;
 
 #define     CHANSVmMethodLength(x)  (sizeof(x) / sizeof(CHANSMethodEntry))
 #define     CHANSVmDefineMethod(x)  CHANSErr x(CHANSVm* pVm, CHANSVmObjHdr* pUnk0, CHANSVmObjHdr* pObject)

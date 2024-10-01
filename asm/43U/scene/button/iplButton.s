@@ -254,7 +254,7 @@
 /* 8139C010 | 38 E0 00 01 */	li r7, 0x1
 /* 8139C014 | 4B FC E4 CD */	bl bindToGroup__Q33ipl6layout6ObjectFPCcPCcbb
 /* 8139C018 | 90 7E 00 CC */	stw r3, 0xcc(r30)
-/* 8139C01C | 38 82 84 A8 */	li r4, lbl_816948A8@sda21
+/* 8139C01C | 38 82 84 A8 */	li r4, scNewArvAnmFrame__Q23ipl5scene@sda21
 /* 8139C020 | C0 02 84 C0 */	lfs f0, lbl_816948C0@sda21(r0)
 /* 8139C024 | C0 24 00 04 */	lfs f1, 0x4(r4)
 /* 8139C028 | D0 03 00 08 */	stfs f0, 0x8(r3)
@@ -269,7 +269,7 @@
 /* 8139C04C | 38 E0 00 01 */	li r7, 0x1
 /* 8139C050 | 4B FC E4 91 */	bl bindToGroup__Q33ipl6layout6ObjectFPCcPCcbb
 /* 8139C054 | 90 7E 00 D0 */	stw r3, 0xd0(r30)
-/* 8139C058 | 38 82 84 B0 */	li r4, lbl_816948B0@sda21
+/* 8139C058 | 38 82 84 B0 */	li r4, scLoopAnmFrame__Q23ipl5scene@sda21
 /* 8139C05C | C0 02 84 C0 */	lfs f0, lbl_816948C0@sda21(r0)
 /* 8139C060 | C0 24 00 04 */	lfs f1, 0x4(r4)
 /* 8139C064 | D0 03 00 08 */	stfs f0, 0x8(r3)
@@ -664,12 +664,12 @@
 /* 8139C5CC | 39 61 00 30 */	addi r11, r1, 0x30
 /* 8139C5D0 | 48 25 CE DD */	bl _savegpr_22
 /* 8139C5D4 | 3A E0 00 00 */	li r23, 0x0
-/* 8139C5D8 | 3F 40 81 61 */	lis r26, lbl_8160F918@ha
+/* 8139C5D8 | 3F 40 81 61 */	lis r26, scBtnFadeFrame__Q23ipl5scene@ha
 /* 8139C5DC | 7C 76 1B 78 */	mr r22, r3
 /* 8139C5E0 | 3B E0 00 00 */	li r31, 0x0
 /* 8139C5E4 | 7E FB BB 78 */	mr r27, r23
 /* 8139C5E8 | 7E FD BB 78 */	mr r29, r23
-/* 8139C5EC | 3B 5A F9 18 */	addi r26, r26, lbl_8160F918@l
+/* 8139C5EC | 3B 5A F9 18 */	addi r26, r26, scBtnFadeFrame__Q23ipl5scene@l
 /* 8139C5F0 | 3B C0 00 00 */	li r30, 0x0
 /* 8139C5F4 | 3B 80 00 01 */	li r28, 0x1
 .L_8139C5F8:
@@ -766,9 +766,9 @@
 /* 8139C738 | 57 E4 04 3E */	clrlwi r4, r31, 16
 /* 8139C73C | 38 63 02 8C */	addi r3, r3, 0x28c
 /* 8139C740 | 48 17 5B D9 */	bl List_GetNth__Q24nw4r2utFPCQ34nw4r2ut4ListUs
-/* 8139C744 | 3C 80 81 61 */	lis r4, lbl_8160F918@ha
+/* 8139C744 | 3C 80 81 61 */	lis r4, scBtnFadeFrame__Q23ipl5scene@ha
 /* 8139C748 | 57 E5 20 36 */	slwi r5, r31, 4
-/* 8139C74C | 38 84 F9 18 */	addi r4, r4, lbl_8160F918@l
+/* 8139C74C | 38 84 F9 18 */	addi r4, r4, scBtnFadeFrame__Q23ipl5scene@l
 /* 8139C750 | 38 00 00 00 */	li r0, 0x0
 /* 8139C754 | 7C 04 2C 2E */	lfsx f0, r4, r5
 /* 8139C758 | 7C 84 2A 14 */	add r4, r4, r5
@@ -865,9 +865,9 @@
 /* 8139C894 | 57 E4 04 3E */	clrlwi r4, r31, 16
 /* 8139C898 | 38 63 02 8C */	addi r3, r3, 0x28c
 /* 8139C89C | 48 17 5A 7D */	bl List_GetNth__Q24nw4r2utFPCQ34nw4r2ut4ListUs
-/* 8139C8A0 | 3C 80 81 61 */	lis r4, lbl_8160F918@ha
+/* 8139C8A0 | 3C 80 81 61 */	lis r4, scBtnFadeFrame__Q23ipl5scene@ha
 /* 8139C8A4 | 57 E5 20 36 */	slwi r5, r31, 4
-/* 8139C8A8 | 38 84 F9 18 */	addi r4, r4, lbl_8160F918@l
+/* 8139C8A8 | 38 84 F9 18 */	addi r4, r4, scBtnFadeFrame__Q23ipl5scene@l
 /* 8139C8AC | 38 00 00 00 */	li r0, 0x0
 /* 8139C8B0 | 7C 84 2A 14 */	add r4, r4, r5
 /* 8139C8B4 | 7C 7C 1B 78 */	mr r28, r3
@@ -1239,14 +1239,14 @@
 /* 8139CD60 | 40 80 00 08 */	bge .L_8139CD68
 /* 8139CD64 | 48 00 00 14 */	b .L_8139CD78
 .L_8139CD68:
-/* 8139CD68 | 38 62 84 A0 */	li r3, lbl_816948A0@sda21
-/* 8139CD6C | C0 02 84 A0 */	lfs f0, lbl_816948A0@sda21(r0)
+/* 8139CD68 | 38 62 84 A0 */	li r3, scAnmRepeatAnmFrame__Q23ipl5scene@sda21
+/* 8139CD6C | C0 02 84 A0 */	lfs f0, scAnmRepeatAnmFrame__Q23ipl5scene@sda21(r0)
 /* 8139CD70 | C0 23 00 04 */	lfs f1, 0x4(r3)
 /* 8139CD74 | 48 00 00 1C */	b .L_8139CD90
 .L_8139CD78:
-/* 8139CD78 | 3C 80 81 61 */	lis r4, lbl_8160F7B8@ha
+/* 8139CD78 | 3C 80 81 61 */	lis r4, scAnmFrame__Q23ipl5scene@ha
 /* 8139CD7C | 57 C0 18 38 */	slwi r0, r30, 3
-/* 8139CD80 | 38 84 F7 B8 */	addi r4, r4, lbl_8160F7B8@l
+/* 8139CD80 | 38 84 F7 B8 */	addi r4, r4, scAnmFrame__Q23ipl5scene@l
 /* 8139CD84 | 7C 64 02 14 */	add r3, r4, r0
 /* 8139CD88 | 7C 04 04 2E */	lfsx f0, r4, r0
 /* 8139CD8C | C0 23 00 04 */	lfs f1, 0x4(r3)
@@ -1317,26 +1317,26 @@
 /* 8139CE60 | 2C 05 00 00 */	cmpwi r5, 0x0
 /* 8139CE64 | 80 63 00 B0 */	lwz r3, 0xb0(r3)
 /* 8139CE68 | 41 82 00 14 */	beq .L_8139CE7C
-/* 8139CE6C | 3C 80 81 61 */	lis r4, lbl_8160F7B8@ha
-/* 8139CE70 | 38 84 F7 B8 */	addi r4, r4, lbl_8160F7B8@l
+/* 8139CE6C | 3C 80 81 61 */	lis r4, scAnmFrame__Q23ipl5scene@ha
+/* 8139CE70 | 38 84 F7 B8 */	addi r4, r4, scAnmFrame__Q23ipl5scene@l
 /* 8139CE74 | C0 24 00 BC */	lfs f1, 0xbc(r4)
 /* 8139CE78 | 48 00 00 3C */	b .L_8139CEB4
 .L_8139CE7C:
-/* 8139CE7C | 3C 80 81 61 */	lis r4, lbl_8160F7B8@ha
-/* 8139CE80 | 38 84 F7 B8 */	addi r4, r4, lbl_8160F7B8@l
+/* 8139CE7C | 3C 80 81 61 */	lis r4, scAnmFrame__Q23ipl5scene@ha
+/* 8139CE80 | 38 84 F7 B8 */	addi r4, r4, scAnmFrame__Q23ipl5scene@l
 /* 8139CE84 | C0 24 00 CC */	lfs f1, 0xcc(r4)
 /* 8139CE88 | 48 00 00 2C */	b .L_8139CEB4
 .L_8139CE8C:
 /* 8139CE8C | 2C 05 00 00 */	cmpwi r5, 0x0
 /* 8139CE90 | 80 63 00 B4 */	lwz r3, 0xb4(r3)
 /* 8139CE94 | 41 82 00 14 */	beq .L_8139CEA8
-/* 8139CE98 | 3C 80 81 61 */	lis r4, lbl_8160F7B8@ha
-/* 8139CE9C | 38 84 F7 B8 */	addi r4, r4, lbl_8160F7B8@l
+/* 8139CE98 | 3C 80 81 61 */	lis r4, scAnmFrame__Q23ipl5scene@ha
+/* 8139CE9C | 38 84 F7 B8 */	addi r4, r4, scAnmFrame__Q23ipl5scene@l
 /* 8139CEA0 | C0 24 00 C4 */	lfs f1, 0xc4(r4)
 /* 8139CEA4 | 48 00 00 10 */	b .L_8139CEB4
 .L_8139CEA8:
-/* 8139CEA8 | 3C 80 81 61 */	lis r4, lbl_8160F7B8@ha
-/* 8139CEAC | 38 84 F7 B8 */	addi r4, r4, lbl_8160F7B8@l
+/* 8139CEA8 | 3C 80 81 61 */	lis r4, scAnmFrame__Q23ipl5scene@ha
+/* 8139CEAC | 38 84 F7 B8 */	addi r4, r4, scAnmFrame__Q23ipl5scene@l
 /* 8139CEB0 | C0 24 00 D4 */	lfs f1, 0xd4(r4)
 .L_8139CEB4:
 /* 8139CEB4 | 4B FC CD AD */	bl initAnmFrame__Q33ipl6layout8AnimatorFf
@@ -1444,8 +1444,8 @@
 .fn startMailNumAnm__Q33ipl5scene6ButtonFv, global
 /* 8139D004 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8139D008 | 7C 08 02 A6 */	mflr r0
-/* 8139D00C | 38 82 84 A8 */	li r4, lbl_816948A8@sda21
-/* 8139D010 | C0 22 84 A8 */	lfs f1, lbl_816948A8@sda21(r0)
+/* 8139D00C | 38 82 84 A8 */	li r4, scNewArvAnmFrame__Q23ipl5scene@sda21
+/* 8139D010 | C0 22 84 A8 */	lfs f1, scNewArvAnmFrame__Q23ipl5scene@sda21(r0)
 /* 8139D014 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 8139D018 | 38 00 00 02 */	li r0, 0x2
 /* 8139D01C | C0 44 00 04 */	lfs f2, 0x4(r4)
@@ -1506,8 +1506,8 @@
 .fn startNewMailAnm__Q33ipl5scene6ButtonFv, global
 /* 8139D0D4 | 80 83 00 D0 */	lwz r4, 0xd0(r3)
 /* 8139D0D8 | 38 00 00 00 */	li r0, 0x0
-/* 8139D0DC | 38 A2 84 B0 */	li r5, lbl_816948B0@sda21
-/* 8139D0E0 | C0 22 84 B0 */	lfs f1, lbl_816948B0@sda21(r0)
+/* 8139D0DC | 38 A2 84 B0 */	li r5, scLoopAnmFrame__Q23ipl5scene@sda21
+/* 8139D0E0 | C0 22 84 B0 */	lfs f1, scLoopAnmFrame__Q23ipl5scene@sda21(r0)
 /* 8139D0E4 | 90 04 00 18 */	stw r0, 0x18(r4)
 /* 8139D0E8 | 38 80 00 01 */	li r4, 0x1
 /* 8139D0EC | C0 45 00 04 */	lfs f2, 0x4(r5)
@@ -1601,13 +1601,13 @@
 /* 8139D210 | 48 25 C2 9D */	bl _savegpr_22
 /* 8139D214 | 3B 20 00 01 */	li r25, 0x1
 /* 8139D218 | 3A E0 00 00 */	li r23, 0x0
-/* 8139D21C | 3F 60 81 61 */	lis r27, lbl_8160F918@ha
+/* 8139D21C | 3F 60 81 61 */	lis r27, scBtnFadeFrame__Q23ipl5scene@ha
 /* 8139D220 | 3F A0 81 65 */	lis r29, mscButtonName__Q33ipl5scene6Button@ha
 /* 8139D224 | 9B 23 01 10 */	stb r25, 0x110(r3)
 /* 8139D228 | 7C 76 1B 78 */	mr r22, r3
 /* 8139D22C | 7E FA BB 78 */	mr r26, r23
 /* 8139D230 | 7E FC BB 78 */	mr r28, r23
-/* 8139D234 | 3B 7B F9 18 */	addi r27, r27, lbl_8160F918@l
+/* 8139D234 | 3B 7B F9 18 */	addi r27, r27, scBtnFadeFrame__Q23ipl5scene@l
 /* 8139D238 | 3B BD BF 5C */	addi r29, r29, mscButtonName__Q33ipl5scene6Button@l
 /* 8139D23C | 3B E0 00 00 */	li r31, 0x0
 /* 8139D240 | 3B C0 00 00 */	li r30, 0x0
@@ -1713,9 +1713,9 @@
 /* 8139D39C | 80 63 00 58 */	lwz r3, 0x58(r3)
 /* 8139D3A0 | 38 63 02 8C */	addi r3, r3, 0x28c
 /* 8139D3A4 | 48 17 4F 75 */	bl List_GetNth__Q24nw4r2utFPCQ34nw4r2ut4ListUs
-/* 8139D3A8 | 3C 80 81 61 */	lis r4, lbl_8160F918@ha
+/* 8139D3A8 | 3C 80 81 61 */	lis r4, scBtnFadeFrame__Q23ipl5scene@ha
 /* 8139D3AC | 57 C0 20 36 */	slwi r0, r30, 4
-/* 8139D3B0 | 38 84 F9 18 */	addi r4, r4, lbl_8160F918@l
+/* 8139D3B0 | 38 84 F9 18 */	addi r4, r4, scBtnFadeFrame__Q23ipl5scene@l
 /* 8139D3B4 | 7C 7E 1B 78 */	mr r30, r3
 /* 8139D3B8 | 7C 84 02 14 */	add r4, r4, r0
 /* 8139D3BC | C0 04 00 08 */	lfs f0, 0x8(r4)
@@ -2235,7 +2235,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x8160F7B8 | size: 0x160
-.obj lbl_8160F7B8, global
+# ipl::scene::scAnmFrame
+.obj scAnmFrame__Q23ipl5scene, local
 	.4byte 0x447A0000
 	.4byte 0x44820000
 	.4byte 0x45DAC000
@@ -2324,10 +2325,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8160F7B8
+.endobj scAnmFrame__Q23ipl5scene
 
 # .rodata:0x160 | 0x8160F918 | size: 0xB0
-.obj lbl_8160F918, global
+# ipl::scene::scBtnFadeFrame
+.obj scBtnFadeFrame__Q23ipl5scene, local
 	.4byte 0x44610000
 	.4byte 0x44628000
 	.4byte 0x44688000
@@ -2372,10 +2374,10 @@
 	.4byte 0x4625DC00
 	.4byte 0x4628C000
 	.4byte 0x4628FC00
-.endobj lbl_8160F918
+.endobj scBtnFadeFrame__Q23ipl5scene
 
 # .rodata:0x210 | 0x8160F9C8 | size: 0x18
-.obj lbl_8160F9C8, global
+.obj lbl_8160F9C8, local
 	.4byte 0x0000000F
 	.4byte 0x00000010
 	.4byte 0x0000000E
@@ -2693,22 +2695,25 @@
 .balign 8
 
 # .sdata2:0x0 | 0x816948A0 | size: 0x8
-.obj lbl_816948A0, global
+# ipl::scene::scAnmRepeatAnmFrame
+.obj scAnmRepeatAnmFrame__Q23ipl5scene, global
 	.float 10503
 	.float 10580
-.endobj lbl_816948A0
+.endobj scAnmRepeatAnmFrame__Q23ipl5scene
 
 # .sdata2:0x8 | 0x816948A8 | size: 0x8
-.obj lbl_816948A8, global
+# ipl::scene::scNewArvAnmFrame
+.obj scNewArvAnmFrame__Q23ipl5scene, global
 	.float 1
 	.float 400
-.endobj lbl_816948A8
+.endobj scNewArvAnmFrame__Q23ipl5scene
 
 # .sdata2:0x10 | 0x816948B0 | size: 0x8
-.obj lbl_816948B0, global
+# ipl::scene::scLoopAnmFrame
+.obj scLoopAnmFrame__Q23ipl5scene, global
 	.float 1
 	.float 160
-.endobj lbl_816948B0
+.endobj scLoopAnmFrame__Q23ipl5scene
 
 # .sdata2:0x18 | 0x816948B8 | size: 0x8
 .obj lbl_816948B8, global

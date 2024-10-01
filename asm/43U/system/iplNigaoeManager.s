@@ -358,11 +358,6 @@
 .balign 8
 
 # .data:0x0 | 0x81635100 | size: 0x18
-.obj lbl_81635100, global
-	.4byte 0x77616974
-	.4byte 0x20617379
-	.4byte 0x6E632065
-	.4byte 0x72722025
-	.4byte 0x640A0000
-	.4byte 0x00000000
+.obj lbl_81635100, local
+	.string "wait async err %d\n\000\000\000\000\000"
 .endobj lbl_81635100

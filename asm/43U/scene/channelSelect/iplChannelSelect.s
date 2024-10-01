@@ -53,9 +53,9 @@
 /* 813AA56C | 93 9E 00 C0 */	stw r28, 0xc0(r30)
 /* 813AA570 | 93 BE 00 C4 */	stw r29, 0xc4(r30)
 /* 813AA574 | 48 1B FA 41 */	bl SCGetAspectRatio
-/* 813AA578 | 3F A0 81 61 */	lis r29, lbl_8160FFA8@ha
+/* 813AA578 | 3F A0 81 61 */	lis r29, cfChanThumbOfss__Q23ipl5scene@ha
 /* 813AA57C | 54 60 1D 78 */	clrlslwi r0, r3, 24, 3
-/* 813AA580 | 3B BD FF A8 */	addi r29, r29, lbl_8160FFA8@l
+/* 813AA580 | 3B BD FF A8 */	addi r29, r29, cfChanThumbOfss__Q23ipl5scene@l
 /* 813AA584 | 7C 1D 04 2E */	lfsx f0, r29, r0
 /* 813AA588 | D0 1E 00 D0 */	stfs f0, 0xd0(r30)
 /* 813AA58C | 48 1B FA 29 */	bl SCGetAspectRatio
@@ -834,9 +834,9 @@
 # .text:0xB38 | 0x813AB004 | size: 0x14
 # ipl::channel::Manager::getCurrentChannel(int*, int*)
 .fn getCurrentChannel__Q33ipl7channel7ManagerFPiPi, global
-/* 813AB004 | 80 0D A6 5C */	lwz r0, lbl_8169869C@sda21(r0)
+/* 813AB004 | 80 0D A6 5C */	lwz r0, msCurPage__Q33ipl7channel7Manager@sda21(r0)
 /* 813AB008 | 90 03 00 00 */	stw r0, 0x0(r3)
-/* 813AB00C | 80 0D A6 60 */	lwz r0, lbl_816986A0@sda21(r0)
+/* 813AB00C | 80 0D A6 60 */	lwz r0, msCurIndex__Q33ipl7channel7Manager@sda21(r0)
 /* 813AB010 | 90 04 00 00 */	stw r0, 0x0(r4)
 /* 813AB014 | 4E 80 00 20 */	blr
 .endfn getCurrentChannel__Q33ipl7channel7ManagerFPiPi
@@ -4098,8 +4098,8 @@
 # .text:0x36DC | 0x813ADBA8 | size: 0xC
 # ipl::channel::Manager::setCurrentChannel(int, int)
 .fn setCurrentChannel__Q33ipl7channel7ManagerFii, global
-/* 813ADBA8 | 90 6D A6 5C */	stw r3, lbl_8169869C@sda21(r0)
-/* 813ADBAC | 90 8D A6 60 */	stw r4, lbl_816986A0@sda21(r0)
+/* 813ADBA8 | 90 6D A6 5C */	stw r3, msCurPage__Q33ipl7channel7Manager@sda21(r0)
+/* 813ADBAC | 90 8D A6 60 */	stw r4, msCurIndex__Q33ipl7channel7Manager@sda21(r0)
 /* 813ADBB0 | 4E 80 00 20 */	blr
 .endfn setCurrentChannel__Q33ipl7channel7ManagerFii
 
@@ -7350,12 +7350,13 @@
 .balign 8
 
 # .rodata:0x0 | 0x8160FFA8 | size: 0x10
-.obj lbl_8160FFA8, global
+# ipl::scene::cfChanThumbOfss
+.obj cfChanThumbOfss__Q23ipl5scene, local
 	.4byte 0x42800000
 	.4byte 0x42400000
 	.4byte 0x42AA0000
 	.4byte 0x42400000
-.endobj lbl_8160FFA8
+.endobj cfChanThumbOfss__Q23ipl5scene
 
 # 0x8164D978..0x8164E1D8 | size: 0x860
 .data
@@ -8346,8 +8347,14 @@
 .section .sbss, "wa", @nobits
 .balign 8
 
-# .sbss:0x0 | 0x81698B58 | size: 0x8
+# .sbss:0x0 | 0x81698B58 | size: 0x4
 # ipl::scene::ChannelSelect::msInitFlag
 .obj msInitFlag__Q33ipl5scene13ChannelSelect, global
-	.skip 0x8
+	.skip 0x4
 .endobj msInitFlag__Q33ipl5scene13ChannelSelect
+
+# .sbss:0x4 | 0x81698B5C | size: 0x4
+.obj gap_12_81698B5C_sbss, global
+.hidden gap_12_81698B5C_sbss
+	.skip 0x4
+.endobj gap_12_81698B5C_sbss

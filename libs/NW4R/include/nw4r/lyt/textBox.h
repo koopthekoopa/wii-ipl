@@ -16,10 +16,10 @@ namespace nw4r {
 
                 virtual ~TextBox();
 
-                virtual void    AllocStringBuffer(u16 size);                // 0x64
-                virtual void    FreeStringBuffer(u16);                      // 0x68
+                virtual void    AllocStringBuffer(u16 size);                    // 0x64
+                virtual void    FreeStringBuffer(u16);                          // 0x68
 
-                virtual u16     SetString(const wchar_t* str, u16 unk = 0); // 0x6C
+                virtual u16     SetString(const wchar_t* str, u16 dstIdx = 0);  // 0x6C
                 
                 ut::Color       GetTextColor(u32 i) const {
                     NW4R_IPL_ASSERT(i < TEXT_COLOR_MAX);
@@ -31,8 +31,8 @@ namespace nw4r {
                     mTextColor[i] = color;
                 }
             private:
-                undefined4  unk;                        // 0xD4
-                ut::Color   mTextColor[TEXT_COLOR_MAX]; // 0xD8
+                wchar_t*    mTextBuf;                   // 0xD8
+                ut::Color   mTextColor[TEXT_COLOR_MAX]; // 0xDC
         };
     }
 }

@@ -27,7 +27,7 @@
 /* 813D6E3C | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813D6E40 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813D6E44 | 7C 7E 1B 78 */	mr r30, r3
-/* 813D6E48 | 80 0D AB 60 */	lwz r0, lbl_81698BA0@sda21(r0)
+/* 813D6E48 | 80 0D AB 60 */	lwz r0, negotiateList@sda21(r0)
 /* 813D6E4C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D6E50 | 40 82 00 0C */	bne .L_813D6E5C
 /* 813D6E54 | 38 60 00 00 */	li r3, 0x0
@@ -36,7 +36,7 @@
 /* 813D6E5C | 3B E0 00 00 */	li r31, 0x0
 /* 813D6E60 | 48 00 00 24 */	b .L_813D6E84
 .L_813D6E64:
-/* 813D6E64 | 80 6D AB 60 */	lwz r3, lbl_81698BA0@sda21(r0)
+/* 813D6E64 | 80 6D AB 60 */	lwz r3, negotiateList@sda21(r0)
 /* 813D6E68 | 7F E4 FB 78 */	mr r4, r31
 /* 813D6E6C | 4B FF F0 D1 */	bl ArrayNth
 /* 813D6E70 | 80 03 00 08 */	lwz r0, 0x8(r3)
@@ -46,7 +46,7 @@
 .L_813D6E80:
 /* 813D6E80 | 3B FF 00 01 */	addi r31, r31, 0x1
 .L_813D6E84:
-/* 813D6E84 | 80 6D AB 60 */	lwz r3, lbl_81698BA0@sda21(r0)
+/* 813D6E84 | 80 6D AB 60 */	lwz r3, negotiateList@sda21(r0)
 /* 813D6E88 | 4B FF F0 AD */	bl ArrayLength
 /* 813D6E8C | 7C 1F 18 00 */	cmpw r31, r3
 /* 813D6E90 | 41 80 FF D4 */	blt .L_813D6E64
@@ -71,19 +71,19 @@
 /* 813D6EC8 | 7C 7E 1B 78 */	mr r30, r3
 /* 813D6ECC | 48 00 00 2C */	b .L_813D6EF8
 .L_813D6ED0:
-/* 813D6ED0 | 80 6D AB 60 */	lwz r3, lbl_81698BA0@sda21(r0)
+/* 813D6ED0 | 80 6D AB 60 */	lwz r3, negotiateList@sda21(r0)
 /* 813D6ED4 | 7F E4 FB 78 */	mr r4, r31
 /* 813D6ED8 | 4B FF F0 65 */	bl ArrayNth
 /* 813D6EDC | 7C 1E 18 40 */	cmplw r30, r3
 /* 813D6EE0 | 40 82 00 14 */	bne .L_813D6EF4
-/* 813D6EE4 | 80 6D AB 60 */	lwz r3, lbl_81698BA0@sda21(r0)
+/* 813D6EE4 | 80 6D AB 60 */	lwz r3, negotiateList@sda21(r0)
 /* 813D6EE8 | 7F E4 FB 78 */	mr r4, r31
 /* 813D6EEC | 4B FF F0 81 */	bl ArrayRemoveAt
 /* 813D6EF0 | 48 00 00 18 */	b .L_813D6F08
 .L_813D6EF4:
 /* 813D6EF4 | 3B FF 00 01 */	addi r31, r31, 0x1
 .L_813D6EF8:
-/* 813D6EF8 | 80 6D AB 60 */	lwz r3, lbl_81698BA0@sda21(r0)
+/* 813D6EF8 | 80 6D AB 60 */	lwz r3, negotiateList@sda21(r0)
 /* 813D6EFC | 4B FF F0 39 */	bl ArrayLength
 /* 813D6F00 | 7C 1F 18 00 */	cmpw r31, r3
 /* 813D6F04 | 41 80 FF CC */	blt .L_813D6ED0
@@ -101,12 +101,12 @@
 /* 813D6F20 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 813D6F24 | 7C 08 02 A6 */	mflr r0
 /* 813D6F28 | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 813D6F2C | 80 6D AB 60 */	lwz r3, lbl_81698BA0@sda21(r0)
+/* 813D6F2C | 80 6D AB 60 */	lwz r3, negotiateList@sda21(r0)
 /* 813D6F30 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D6F34 | 41 82 00 10 */	beq .L_813D6F44
 /* 813D6F38 | 4B FF EF 99 */	bl ArrayFree
 /* 813D6F3C | 38 00 00 00 */	li r0, 0x0
-/* 813D6F40 | 90 0D AB 60 */	stw r0, lbl_81698BA0@sda21(r0)
+/* 813D6F40 | 90 0D AB 60 */	stw r0, negotiateList@sda21(r0)
 .L_813D6F44:
 /* 813D6F44 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813D6F48 | 7C 08 03 A6 */	mtlr r0
@@ -163,7 +163,7 @@
 /* 813D6FF4 | 98 61 00 12 */	stb r3, 0x12(r1)
 /* 813D6FF8 | 98 01 00 13 */	stb r0, 0x13(r1)
 /* 813D6FFC | 80 7E 00 08 */	lwz r3, 0x8(r30)
-/* 813D7000 | 48 0D CB 75 */	bl fn_814B3B74
+/* 813D7000 | 48 0D CB 75 */	bl SOHtoNl
 /* 813D7004 | 90 61 00 14 */	stw r3, 0x14(r1)
 /* 813D7008 | 3F E0 81 0C */	lis r31, __GSIACGamename@ha
 /* 813D700C | 80 8D 8C F0 */	lwz r4, lbl_81696D30@sda21(r0)
@@ -185,13 +185,13 @@
 /* 813D704C | 38 A0 00 32 */	li r5, 0x32
 /* 813D7050 | 4B F5 91 E1 */	bl memcpy
 .L_813D7054:
-/* 813D7054 | 80 0D AB 64 */	lwz r0, lbl_81698BA4@sda21(r0)
+/* 813D7054 | 80 0D AB 64 */	lwz r0, matchup1ip@sda21(r0)
 /* 813D7058 | 38 61 00 08 */	addi r3, r1, 0x8
 /* 813D705C | 90 01 00 08 */	stw r0, 0x8(r1)
 /* 813D7060 | 48 0D C9 75 */	bl SOInetNtoA
 /* 813D7064 | 80 7E 00 00 */	lwz r3, 0x0(r30)
 /* 813D7068 | 38 C1 00 0C */	addi r6, r1, 0xc
-/* 813D706C | 80 8D AB 64 */	lwz r4, lbl_81698BA4@sda21(r0)
+/* 813D706C | 80 8D AB 64 */	lwz r4, matchup1ip@sda21(r0)
 /* 813D7070 | 38 A0 6C FD */	li r5, 0x6cfd
 /* 813D7074 | 38 E0 00 49 */	li r7, 0x49
 /* 813D7078 | 4B FF FE DD */	bl NN_813D6F54
@@ -276,7 +276,7 @@
 /* 813D7188 | 98 01 00 2A */	stb r0, 0x2a(r1)
 /* 813D718C | 9B 61 00 2B */	stb r27, 0x2b(r1)
 /* 813D7190 | 80 7D 00 08 */	lwz r3, 0x8(r29)
-/* 813D7194 | 48 0D C9 E1 */	bl fn_814B3B74
+/* 813D7194 | 48 0D C9 E1 */	bl SOHtoNl
 /* 813D7198 | 90 61 00 2C */	stw r3, 0x2c(r1)
 /* 813D719C | 3B 40 00 00 */	li r26, 0x0
 /* 813D71A0 | 80 1D 00 0C */	lwz r0, 0xc(r29)
@@ -301,7 +301,7 @@
 /* 813D71E4 | 41 82 00 38 */	beq .L_813D721C
 /* 813D71E8 | 83 19 00 00 */	lwz r24, 0x0(r25)
 /* 813D71EC | 38 7C 00 01 */	addi r3, r28, 0x1
-/* 813D71F0 | 48 0D C9 85 */	bl fn_814B3B74
+/* 813D71F0 | 48 0D C9 85 */	bl SOHtoNl
 /* 813D71F4 | 7C 18 18 40 */	cmplw r24, r3
 /* 813D71F8 | 41 82 00 1C */	beq .L_813D7214
 /* 813D71FC | 7F 1A C3 78 */	mr r26, r24
@@ -317,7 +317,7 @@
 /* 813D721C | 7F 58 D3 78 */	mr r24, r26
 .L_813D7220:
 /* 813D7220 | 7F 03 C3 78 */	mr r3, r24
-/* 813D7224 | 48 0D C9 45 */	bl fn_814B3B68
+/* 813D7224 | 48 0D C9 45 */	bl SONtoHl
 /* 813D7228 | 3B 80 00 00 */	li r28, 0x0
 /* 813D722C | 54 64 46 3E */	srwi r4, r3, 24
 /* 813D7230 | 54 65 86 3E */	extrwi r5, r3, 8, 8
@@ -341,14 +341,14 @@
 /* 813D7278 | 80 1D 00 14 */	lwz r0, 0x14(r29)
 /* 813D727C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D7280 | 40 82 00 30 */	bne .L_813D72B0
-/* 813D7284 | 80 0D AB 64 */	lwz r0, lbl_81698BA4@sda21(r0)
+/* 813D7284 | 80 0D AB 64 */	lwz r0, matchup1ip@sda21(r0)
 /* 813D7288 | 38 61 00 18 */	addi r3, r1, 0x18
 /* 813D728C | 9B 81 00 30 */	stb r28, 0x30(r1)
 /* 813D7290 | 90 01 00 18 */	stw r0, 0x18(r1)
 /* 813D7294 | 48 0D C7 41 */	bl SOInetNtoA
 /* 813D7298 | 80 7D 00 04 */	lwz r3, 0x4(r29)
 /* 813D729C | 7F E6 FB 78 */	mr r6, r31
-/* 813D72A0 | 80 8D AB 64 */	lwz r4, lbl_81698BA4@sda21(r0)
+/* 813D72A0 | 80 8D AB 64 */	lwz r4, matchup1ip@sda21(r0)
 /* 813D72A4 | 7F C7 F3 78 */	mr r7, r30
 /* 813D72A8 | 38 A0 6C FD */	li r5, 0x6cfd
 /* 813D72AC | 4B FF FC A9 */	bl NN_813D6F54
@@ -356,7 +356,7 @@
 /* 813D72B0 | 80 1D 00 18 */	lwz r0, 0x18(r29)
 /* 813D72B4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D72B8 | 40 82 00 34 */	bne .L_813D72EC
-/* 813D72BC | 80 0D AB 64 */	lwz r0, lbl_81698BA4@sda21(r0)
+/* 813D72BC | 80 0D AB 64 */	lwz r0, matchup1ip@sda21(r0)
 /* 813D72C0 | 38 60 00 01 */	li r3, 0x1
 /* 813D72C4 | 98 61 00 30 */	stb r3, 0x30(r1)
 /* 813D72C8 | 38 61 00 14 */	addi r3, r1, 0x14
@@ -364,7 +364,7 @@
 /* 813D72D0 | 48 0D C7 05 */	bl SOInetNtoA
 /* 813D72D4 | 80 7D 00 00 */	lwz r3, 0x0(r29)
 /* 813D72D8 | 7F E6 FB 78 */	mr r6, r31
-/* 813D72DC | 80 8D AB 64 */	lwz r4, lbl_81698BA4@sda21(r0)
+/* 813D72DC | 80 8D AB 64 */	lwz r4, matchup1ip@sda21(r0)
 /* 813D72E0 | 7F C7 F3 78 */	mr r7, r30
 /* 813D72E4 | 38 A0 6C FD */	li r5, 0x6cfd
 /* 813D72E8 | 4B FF FC 6D */	bl NN_813D6F54
@@ -390,14 +390,14 @@
 /* 813D7328 | A0 61 00 1E */	lhz r3, 0x1e(r1)
 .L_813D732C:
 /* 813D732C | 54 63 04 3E */	clrlwi r3, r3, 16
-/* 813D7330 | 48 0D C8 3D */	bl fn_814B3B6C
+/* 813D7330 | 48 0D C8 3D */	bl SONtoHs
 /* 813D7334 | 54 60 C6 3E */	extrwi r0, r3, 8, 16
 /* 813D7338 | 98 61 00 38 */	stb r3, 0x38(r1)
 /* 813D733C | 98 01 00 37 */	stb r0, 0x37(r1)
 /* 813D7340 | 80 1D 00 1C */	lwz r0, 0x1c(r29)
 /* 813D7344 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D7348 | 40 82 00 34 */	bne .L_813D737C
-/* 813D734C | 80 0D AB 68 */	lwz r0, lbl_81698BA8@sda21(r0)
+/* 813D734C | 80 0D AB 68 */	lwz r0, matchup2ip@sda21(r0)
 /* 813D7350 | 38 60 00 02 */	li r3, 0x2
 /* 813D7354 | 98 61 00 30 */	stb r3, 0x30(r1)
 /* 813D7358 | 38 61 00 10 */	addi r3, r1, 0x10
@@ -405,7 +405,7 @@
 /* 813D7360 | 48 0D C6 75 */	bl SOInetNtoA
 /* 813D7364 | 80 7D 00 00 */	lwz r3, 0x0(r29)
 /* 813D7368 | 7F E6 FB 78 */	mr r6, r31
-/* 813D736C | 80 8D AB 68 */	lwz r4, lbl_81698BA8@sda21(r0)
+/* 813D736C | 80 8D AB 68 */	lwz r4, matchup2ip@sda21(r0)
 /* 813D7370 | 7F C7 F3 78 */	mr r7, r30
 /* 813D7374 | 38 A0 6C FD */	li r5, 0x6cfd
 /* 813D7378 | 4B FF FB DD */	bl NN_813D6F54
@@ -413,7 +413,7 @@
 /* 813D737C | 80 1D 00 20 */	lwz r0, 0x20(r29)
 /* 813D7380 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D7384 | 40 82 00 34 */	bne .L_813D73B8
-/* 813D7388 | 80 0D AB 6C */	lwz r0, lbl_81698BAC@sda21(r0)
+/* 813D7388 | 80 0D AB 6C */	lwz r0, matchup3ip@sda21(r0)
 /* 813D738C | 38 60 00 03 */	li r3, 0x3
 /* 813D7390 | 98 61 00 30 */	stb r3, 0x30(r1)
 /* 813D7394 | 38 61 00 0C */	addi r3, r1, 0xc
@@ -421,7 +421,7 @@
 /* 813D739C | 48 0D C6 39 */	bl SOInetNtoA
 /* 813D73A0 | 80 7D 00 00 */	lwz r3, 0x0(r29)
 /* 813D73A4 | 7F E6 FB 78 */	mr r6, r31
-/* 813D73A8 | 80 8D AB 6C */	lwz r4, lbl_81698BAC@sda21(r0)
+/* 813D73A8 | 80 8D AB 6C */	lwz r4, matchup3ip@sda21(r0)
 /* 813D73AC | 7F C7 F3 78 */	mr r7, r30
 /* 813D73B0 | 38 A0 6C FD */	li r5, 0x6cfd
 /* 813D73B4 | 4B FF FB A1 */	bl NN_813D6F54
@@ -455,7 +455,7 @@
 /* 813D7410 | 98 61 00 12 */	stb r3, 0x12(r1)
 /* 813D7414 | 98 01 00 13 */	stb r0, 0x13(r1)
 /* 813D7418 | 80 7F 00 08 */	lwz r3, 0x8(r31)
-/* 813D741C | 48 0D C7 59 */	bl fn_814B3B74
+/* 813D741C | 48 0D C7 59 */	bl SOHtoNl
 /* 813D7420 | 90 61 00 14 */	stw r3, 0x14(r1)
 /* 813D7424 | 80 1F 00 30 */	lwz r0, 0x30(r31)
 /* 813D7428 | 90 01 00 18 */	stw r0, 0x18(r1)
@@ -544,7 +544,7 @@
 /* 813D754C | 90 86 00 04 */	stw r4, 0x4(r6)
 /* 813D7550 | 94 06 00 08 */	stwu r0, 0x8(r6)
 /* 813D7554 | 42 00 FF F0 */	bdnz .L_813D7544
-/* 813D7558 | 81 8D AB 7C */	lwz r12, lbl_81698BBC@sda21(r0)
+/* 813D7558 | 81 8D AB 7C */	lwz r12, natifyCallback@sda21(r0)
 /* 813D755C | 38 81 00 08 */	addi r4, r1, 0x8
 /* 813D7560 | 7D 89 03 A6 */	mtctr r12
 /* 813D7564 | 4E 80 04 21 */	bctrl
@@ -605,7 +605,7 @@
 /* 813D761C | 28 00 FF FF */	cmplwi r0, 0xffff
 /* 813D7620 | 40 82 00 28 */	bne .L_813D7648
 /* 813D7624 | 7F E3 FB 78 */	mr r3, r31
-/* 813D7628 | 48 0D CA B5 */	bl fn_814B40DC
+/* 813D7628 | 48 0D CA B5 */	bl SOGetHostByName
 /* 813D762C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D7630 | 40 82 00 0C */	bne .L_813D763C
 /* 813D7634 | 38 60 00 00 */	li r3, 0x0
@@ -630,37 +630,37 @@
 /* 813D7668 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813D766C | 3F E0 81 65 */	lis r31, lbl_81653858@ha
 /* 813D7670 | 3B FF 38 58 */	addi r31, r31, lbl_81653858@l
-/* 813D7674 | 80 0D AB 64 */	lwz r0, lbl_81698BA4@sda21(r0)
+/* 813D7674 | 80 0D AB 64 */	lwz r0, matchup1ip@sda21(r0)
 /* 813D7678 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D767C | 40 82 00 14 */	bne .L_813D7690
-/* 813D7680 | 80 6D AB 88 */	lwz r3, lbl_81698BC8@sda21(r0)
+/* 813D7680 | 80 6D AB 88 */	lwz r3, Matchup1Hostname@sda21(r0)
 /* 813D7684 | 38 9F 00 00 */	addi r4, r31, 0x0
 /* 813D7688 | 4B FF FF 45 */	bl NN_813D75CC
-/* 813D768C | 90 6D AB 64 */	stw r3, lbl_81698BA4@sda21(r0)
+/* 813D768C | 90 6D AB 64 */	stw r3, matchup1ip@sda21(r0)
 .L_813D7690:
-/* 813D7690 | 80 0D AB 68 */	lwz r0, lbl_81698BA8@sda21(r0)
+/* 813D7690 | 80 0D AB 68 */	lwz r0, matchup2ip@sda21(r0)
 /* 813D7694 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D7698 | 40 82 00 14 */	bne .L_813D76AC
-/* 813D769C | 80 6D AB 84 */	lwz r3, lbl_81698BC4@sda21(r0)
+/* 813D769C | 80 6D AB 84 */	lwz r3, Matchup2Hostname@sda21(r0)
 /* 813D76A0 | 38 9F 00 1C */	addi r4, r31, 0x1c
 /* 813D76A4 | 4B FF FF 29 */	bl NN_813D75CC
-/* 813D76A8 | 90 6D AB 68 */	stw r3, lbl_81698BA8@sda21(r0)
+/* 813D76A8 | 90 6D AB 68 */	stw r3, matchup2ip@sda21(r0)
 .L_813D76AC:
-/* 813D76AC | 80 0D AB 6C */	lwz r0, lbl_81698BAC@sda21(r0)
+/* 813D76AC | 80 0D AB 6C */	lwz r0, matchup3ip@sda21(r0)
 /* 813D76B0 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D76B4 | 40 82 00 14 */	bne .L_813D76C8
-/* 813D76B8 | 80 6D AB 80 */	lwz r3, lbl_81698BC0@sda21(r0)
+/* 813D76B8 | 80 6D AB 80 */	lwz r3, Matchup3Hostname@sda21(r0)
 /* 813D76BC | 38 9F 00 38 */	addi r4, r31, 0x38
 /* 813D76C0 | 4B FF FF 0D */	bl NN_813D75CC
-/* 813D76C4 | 90 6D AB 6C */	stw r3, lbl_81698BAC@sda21(r0)
+/* 813D76C4 | 90 6D AB 6C */	stw r3, matchup3ip@sda21(r0)
 .L_813D76C8:
-/* 813D76C8 | 80 0D AB 64 */	lwz r0, lbl_81698BA4@sda21(r0)
+/* 813D76C8 | 80 0D AB 64 */	lwz r0, matchup1ip@sda21(r0)
 /* 813D76CC | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D76D0 | 41 82 00 1C */	beq .L_813D76EC
-/* 813D76D4 | 80 0D AB 68 */	lwz r0, lbl_81698BA8@sda21(r0)
+/* 813D76D4 | 80 0D AB 68 */	lwz r0, matchup2ip@sda21(r0)
 /* 813D76D8 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D76DC | 41 82 00 10 */	beq .L_813D76EC
-/* 813D76E0 | 80 0D AB 6C */	lwz r0, lbl_81698BAC@sda21(r0)
+/* 813D76E0 | 80 0D AB 6C */	lwz r0, matchup3ip@sda21(r0)
 /* 813D76E4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D76E8 | 40 82 00 0C */	bne .L_813D76F4
 .L_813D76EC:
@@ -684,7 +684,7 @@
 /* 813D7718 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813D771C | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813D7720 | 7C 7E 1B 78 */	mr r30, r3
-/* 813D7724 | 80 0D AB 50 */	lwz r0, lbl_81698B90@sda21(r0)
+/* 813D7724 | 80 0D AB 50 */	lwz r0, __GSIACResult@sda21(r0)
 /* 813D7728 | 2C 00 00 01 */	cmpwi r0, 0x1
 /* 813D772C | 41 82 00 0C */	beq .L_813D7738
 /* 813D7730 | 38 60 00 02 */	li r3, 0x2
@@ -697,7 +697,7 @@
 /* 813D7748 | 48 00 00 F0 */	b .L_813D7838
 .L_813D774C:
 /* 813D774C | 3B E0 00 01 */	li r31, 0x1
-/* 813D7750 | 93 CD AB 7C */	stw r30, lbl_81698BBC@sda21(r0)
+/* 813D7750 | 93 CD AB 7C */	stw r30, natifyCallback@sda21(r0)
 /* 813D7754 | 93 ED AB 70 */	stw r31, lbl_81698BB0@sda21(r0)
 /* 813D7758 | 4B FF F0 E1 */	bl current_time
 /* 813D775C | 3C C0 81 0C */	lis r6, nat@ha
@@ -718,39 +718,39 @@
 /* 813D7798 | 38 A0 6C FD */	li r5, 0x6cfd
 /* 813D779C | 80 6D 8C EC */	lwz r3, lbl_81696D2C@sda21(r0)
 /* 813D77A0 | 38 C0 00 01 */	li r6, 0x1
-/* 813D77A4 | 80 8D AB 64 */	lwz r4, lbl_81698BA4@sda21(r0)
+/* 813D77A4 | 80 8D AB 64 */	lwz r4, matchup1ip@sda21(r0)
 /* 813D77A8 | 4B FF DE A1 */	bl DiscoverReachability
 /* 813D77AC | 80 6D 8C EC */	lwz r3, lbl_81696D2C@sda21(r0)
 /* 813D77B0 | 38 A0 6C FD */	li r5, 0x6cfd
-/* 813D77B4 | 80 8D AB 64 */	lwz r4, lbl_81698BA4@sda21(r0)
+/* 813D77B4 | 80 8D AB 64 */	lwz r4, matchup1ip@sda21(r0)
 /* 813D77B8 | 38 C0 00 02 */	li r6, 0x2
 /* 813D77BC | 4B FF DE 8D */	bl DiscoverReachability
 /* 813D77C0 | 80 6D 8C EC */	lwz r3, lbl_81696D2C@sda21(r0)
 /* 813D77C4 | 38 A0 6C FD */	li r5, 0x6cfd
-/* 813D77C8 | 80 8D AB 68 */	lwz r4, lbl_81698BA8@sda21(r0)
+/* 813D77C8 | 80 8D AB 68 */	lwz r4, matchup2ip@sda21(r0)
 /* 813D77CC | 38 C0 00 03 */	li r6, 0x3
 /* 813D77D0 | 4B FF DE 79 */	bl DiscoverReachability
 /* 813D77D4 | 80 6D 8C E8 */	lwz r3, lbl_81696D28@sda21(r0)
 /* 813D77D8 | 38 A0 6C FD */	li r5, 0x6cfd
-/* 813D77DC | 80 8D AB 64 */	lwz r4, lbl_81698BA4@sda21(r0)
+/* 813D77DC | 80 8D AB 64 */	lwz r4, matchup1ip@sda21(r0)
 /* 813D77E0 | 38 C0 00 01 */	li r6, 0x1
 /* 813D77E4 | 38 E0 00 00 */	li r7, 0x0
 /* 813D77E8 | 4B FF DF 41 */	bl DiscoverMapping
 /* 813D77EC | 80 6D 8C E8 */	lwz r3, lbl_81696D28@sda21(r0)
 /* 813D77F0 | 38 A0 6C FD */	li r5, 0x6cfd
-/* 813D77F4 | 80 8D AB 64 */	lwz r4, lbl_81698BA4@sda21(r0)
+/* 813D77F4 | 80 8D AB 64 */	lwz r4, matchup1ip@sda21(r0)
 /* 813D77F8 | 38 C0 00 01 */	li r6, 0x1
 /* 813D77FC | 38 E0 00 03 */	li r7, 0x3
 /* 813D7800 | 4B FF DF 29 */	bl DiscoverMapping
 /* 813D7804 | 80 6D 8C E8 */	lwz r3, lbl_81696D28@sda21(r0)
 /* 813D7808 | 38 A0 6C FD */	li r5, 0x6cfd
-/* 813D780C | 80 8D AB 68 */	lwz r4, lbl_81698BA8@sda21(r0)
+/* 813D780C | 80 8D AB 68 */	lwz r4, matchup2ip@sda21(r0)
 /* 813D7810 | 38 C0 00 02 */	li r6, 0x2
 /* 813D7814 | 38 E0 00 01 */	li r7, 0x1
 /* 813D7818 | 4B FF DF 11 */	bl DiscoverMapping
 /* 813D781C | 80 6D 8C E8 */	lwz r3, lbl_81696D28@sda21(r0)
 /* 813D7820 | 38 A0 6C FD */	li r5, 0x6cfd
-/* 813D7824 | 80 8D AB 6C */	lwz r4, lbl_81698BAC@sda21(r0)
+/* 813D7824 | 80 8D AB 6C */	lwz r4, matchup3ip@sda21(r0)
 /* 813D7828 | 38 C0 00 03 */	li r6, 0x3
 /* 813D782C | 38 E0 00 02 */	li r7, 0x2
 /* 813D7830 | 4B FF DE F9 */	bl DiscoverMapping
@@ -978,7 +978,7 @@
 /* 813D7B34 | 7C 08 02 A6 */	mflr r0
 /* 813D7B38 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813D7B3C | 93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813D7B40 | 80 6D AB 60 */	lwz r3, lbl_81698BA0@sda21(r0)
+/* 813D7B40 | 80 6D AB 60 */	lwz r3, negotiateList@sda21(r0)
 /* 813D7B44 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D7B48 | 41 82 00 10 */	beq .L_813D7B58
 /* 813D7B4C | 4B FF E3 E9 */	bl ArrayLength
@@ -989,12 +989,12 @@
 /* 813D7B5C | 4B FF FD 49 */	bl NN_813D78A4
 /* 813D7B60 | 48 00 00 30 */	b .L_813D7B90
 .L_813D7B64:
-/* 813D7B64 | 80 6D AB 60 */	lwz r3, lbl_81698BA0@sda21(r0)
+/* 813D7B64 | 80 6D AB 60 */	lwz r3, negotiateList@sda21(r0)
 /* 813D7B68 | 4B FF E3 CD */	bl ArrayLength
 /* 813D7B6C | 3B E3 FF FF */	subi r31, r3, 0x1
 /* 813D7B70 | 48 00 00 18 */	b .L_813D7B88
 .L_813D7B74:
-/* 813D7B74 | 80 6D AB 60 */	lwz r3, lbl_81698BA0@sda21(r0)
+/* 813D7B74 | 80 6D AB 60 */	lwz r3, negotiateList@sda21(r0)
 /* 813D7B78 | 7F E4 FB 78 */	mr r4, r31
 /* 813D7B7C | 4B FF E3 C1 */	bl ArrayNth
 /* 813D7B80 | 4B FF FD 25 */	bl NN_813D78A4
@@ -1032,7 +1032,7 @@
 /* 813D7BE8 | 90 01 00 10 */	stw r0, 0x10(r1)
 /* 813D7BEC | 48 0D BD E9 */	bl SOInetNtoA
 /* 813D7BF0 | A0 7E 00 02 */	lhz r3, 0x2(r30)
-/* 813D7BF4 | 48 0D BF 79 */	bl fn_814B3B6C
+/* 813D7BF4 | 48 0D BF 79 */	bl SONtoHs
 /* 813D7BF8 | 28 1D 00 05 */	cmplwi r29, 0x5
 /* 813D7BFC | 41 82 00 0C */	beq .L_813D7C08
 /* 813D7C00 | 28 1D 00 07 */	cmplwi r29, 0x7
@@ -1045,7 +1045,7 @@
 /* 813D7C18 | 38 A0 00 14 */	li r5, 0x14
 /* 813D7C1C | 4B F5 86 15 */	bl memcpy
 /* 813D7C20 | 80 61 00 65 */	lwz r3, 0x65(r1)
-/* 813D7C24 | 48 0D BF 45 */	bl fn_814B3B68
+/* 813D7C24 | 48 0D BF 45 */	bl SONtoHl
 /* 813D7C28 | 4B FF F2 09 */	bl NN_813D6E30
 /* 813D7C2C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D7C30 | 7C 7F 1B 78 */	mr r31, r3
@@ -1063,7 +1063,7 @@
 /* 813D7C60 | 98 01 00 0F */	stb r0, 0xf(r1)
 /* 813D7C64 | 48 0D BD 71 */	bl SOInetNtoA
 /* 813D7C68 | A0 61 00 6D */	lhz r3, 0x6d(r1)
-/* 813D7C6C | 48 0D BF 01 */	bl fn_814B3B6C
+/* 813D7C6C | 48 0D BF 01 */	bl SONtoHs
 /* 813D7C70 | 88 01 00 70 */	lbz r0, 0x70(r1)
 /* 813D7C74 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D7C78 | 40 82 00 5C */	bne .L_813D7CD4
@@ -1076,12 +1076,12 @@
 /* 813D7C94 | 98 61 00 1A */	stb r3, 0x1a(r1)
 /* 813D7C98 | 98 01 00 1B */	stb r0, 0x1b(r1)
 /* 813D7C9C | 80 7F 00 08 */	lwz r3, 0x8(r31)
-/* 813D7CA0 | 48 0D BE D5 */	bl fn_814B3B74
+/* 813D7CA0 | 48 0D BE D5 */	bl SOHtoNl
 /* 813D7CA4 | 90 61 00 1C */	stw r3, 0x1c(r1)
 /* 813D7CA8 | 80 1F 00 0C */	lwz r0, 0xc(r31)
 /* 813D7CAC | 98 01 00 21 */	stb r0, 0x21(r1)
 /* 813D7CB0 | A0 7E 00 02 */	lhz r3, 0x2(r30)
-/* 813D7CB4 | 48 0D BE B9 */	bl fn_814B3B6C
+/* 813D7CB4 | 48 0D BE B9 */	bl SONtoHs
 /* 813D7CB8 | 7C 60 1B 78 */	mr r0, r3
 /* 813D7CBC | 80 7F 00 00 */	lwz r3, 0x0(r31)
 /* 813D7CC0 | 80 9E 00 04 */	lwz r4, 0x4(r30)
@@ -1115,7 +1115,7 @@
 /* 813D7D20 | 80 01 00 69 */	lwz r0, 0x69(r1)
 /* 813D7D24 | 90 1F 00 30 */	stw r0, 0x30(r31)
 /* 813D7D28 | A0 61 00 6D */	lhz r3, 0x6d(r1)
-/* 813D7D2C | 48 0D BE 41 */	bl fn_814B3B6C
+/* 813D7D2C | 48 0D BE 41 */	bl SONtoHs
 /* 813D7D30 | B0 7F 00 34 */	sth r3, 0x34(r31)
 /* 813D7D34 | 38 80 00 00 */	li r4, 0x0
 /* 813D7D38 | 38 00 00 02 */	li r0, 0x2
@@ -1138,11 +1138,11 @@
 /* 813D7D78 | 90 01 00 08 */	stw r0, 0x8(r1)
 /* 813D7D7C | 48 0D BC 59 */	bl SOInetNtoA
 /* 813D7D80 | A0 7E 00 02 */	lhz r3, 0x2(r30)
-/* 813D7D84 | 48 0D BD E9 */	bl fn_814B3B6C
+/* 813D7D84 | 48 0D BD E9 */	bl SONtoHs
 /* 813D7D88 | 80 1E 00 04 */	lwz r0, 0x4(r30)
 /* 813D7D8C | 90 1F 00 30 */	stw r0, 0x30(r31)
 /* 813D7D90 | A0 7E 00 02 */	lhz r3, 0x2(r30)
-/* 813D7D94 | 48 0D BD D9 */	bl fn_814B3B6C
+/* 813D7D94 | 48 0D BD D9 */	bl SONtoHs
 /* 813D7D98 | B0 7F 00 34 */	sth r3, 0x34(r31)
 /* 813D7D9C | 38 00 00 01 */	li r0, 0x1
 /* 813D7DA0 | 98 1F 00 36 */	stb r0, 0x36(r31)
@@ -1190,7 +1190,7 @@
 /* 813D7E38 | 38 A0 00 15 */	li r5, 0x15
 /* 813D7E3C | 4B F5 83 F5 */	bl memcpy
 /* 813D7E40 | 80 61 00 65 */	lwz r3, 0x65(r1)
-/* 813D7E44 | 48 0D BD 25 */	bl fn_814B3B68
+/* 813D7E44 | 48 0D BD 25 */	bl SONtoHl
 /* 813D7E48 | 4B FF EF E9 */	bl NN_813D6E30
 /* 813D7E4C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D7E50 | 7C 7F 1B 78 */	mr r31, r3
@@ -1249,7 +1249,7 @@
 /* 813D7F14 | 38 00 00 03 */	li r0, 0x3
 /* 813D7F18 | 98 01 00 64 */	stb r0, 0x64(r1)
 /* 813D7F1C | A0 7E 00 02 */	lhz r3, 0x2(r30)
-/* 813D7F20 | 48 0D BC 4D */	bl fn_814B3B6C
+/* 813D7F20 | 48 0D BC 4D */	bl SONtoHs
 /* 813D7F24 | 7C 60 1B 78 */	mr r0, r3
 /* 813D7F28 | 80 7F 00 00 */	lwz r3, 0x0(r31)
 /* 813D7F2C | 80 9E 00 04 */	lwz r4, 0x4(r30)
@@ -1348,24 +1348,24 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698BA0 | size: 0x4
-.obj lbl_81698BA0, global
+.obj negotiateList, global
 	.skip 0x4
-.endobj lbl_81698BA0
+.endobj negotiateList
 
 # .sbss:0x4 | 0x81698BA4 | size: 0x4
-.obj lbl_81698BA4, global
+.obj matchup1ip, global
 	.skip 0x4
-.endobj lbl_81698BA4
+.endobj matchup1ip
 
 # .sbss:0x8 | 0x81698BA8 | size: 0x4
-.obj lbl_81698BA8, global
+.obj matchup2ip, global
 	.skip 0x4
-.endobj lbl_81698BA8
+.endobj matchup2ip
 
 # .sbss:0xC | 0x81698BAC | size: 0x4
-.obj lbl_81698BAC, global
+.obj matchup3ip, global
 	.skip 0x4
-.endobj lbl_81698BAC
+.endobj matchup3ip
 
 # .sbss:0x10 | 0x81698BB0 | size: 0x4
 .obj lbl_81698BB0, global
@@ -1383,21 +1383,27 @@
 .endobj lbl_81698BB8
 
 # .sbss:0x1C | 0x81698BBC | size: 0x4
-.obj lbl_81698BBC, global
+.obj natifyCallback, global
 	.skip 0x4
-.endobj lbl_81698BBC
+.endobj natifyCallback
 
 # .sbss:0x20 | 0x81698BC0 | size: 0x4
-.obj lbl_81698BC0, global
+.obj Matchup3Hostname, global
 	.skip 0x4
-.endobj lbl_81698BC0
+.endobj Matchup3Hostname
 
 # .sbss:0x24 | 0x81698BC4 | size: 0x4
-.obj lbl_81698BC4, global
+.obj Matchup2Hostname, global
 	.skip 0x4
-.endobj lbl_81698BC4
+.endobj Matchup2Hostname
 
-# .sbss:0x28 | 0x81698BC8 | size: 0x8
-.obj lbl_81698BC8, global
-	.skip 0x8
-.endobj lbl_81698BC8
+# .sbss:0x28 | 0x81698BC8 | size: 0x4
+.obj Matchup1Hostname, global
+	.skip 0x4
+.endobj Matchup1Hostname
+
+# .sbss:0x2C | 0x81698BCC | size: 0x4
+.obj gap_12_81698BCC_sbss, global
+.hidden gap_12_81698BCC_sbss
+	.skip 0x4
+.endobj gap_12_81698BCC_sbss

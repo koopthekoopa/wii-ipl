@@ -49,7 +49,7 @@ sudo pacman -S base-devel python git
   ```
   - Otherwise download the repository by clicking on **Code** then **Download ZIP** then extract the .zip contents   
 
-- As stated abobe, you will need a WAD of the Wii Menu to grab its executable.
+- As stated above, you will need a WAD of the Wii Menu to grab its executable.
   - Use your preferred WAD Extractor (I recommend ShowMiiWADs as it also works fine on Linux, if you have Wine) and use it to extract the Wii Menu WAD file.
   - Then copy the executable file `00000008.app` to the decompilation directory and rename it to `base.<version>.app`
     - Make sure the version on the filename does not include the decimal at the middle (for example `4.3U` should be `43U`)

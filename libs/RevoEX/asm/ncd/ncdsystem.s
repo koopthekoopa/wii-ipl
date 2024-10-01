@@ -43,15 +43,15 @@
 /* 814923D8 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 814923DC | 7C 7E 1B 78 */	mr r30, r3
 /* 814923E0 | 48 09 E4 A5 */	bl OSDisableInterrupts
-/* 814923E4 | 80 0D AD 68 */	lwz r0, lbl_81698DA8@sda21(r0)
+/* 814923E4 | 80 0D AD 68 */	lwz r0, ncdInitialized@sda21(r0)
 /* 814923E8 | 7C 7F 1B 78 */	mr r31, r3
 /* 814923EC | 54 00 07 BD */	rlwinm. r0, r0, 0, 30, 30
 /* 814923F0 | 40 82 00 18 */	bne .L_81492408
-/* 814923F4 | 80 6D 9A 64 */	lwz r3, lbl_81697AA4@sda21(r0)
+/* 814923F4 | 80 6D 9A 64 */	lwz r3, __NCDUnofficialVersion@sda21(r0)
 /* 814923F8 | 48 09 A3 E1 */	bl OSRegisterVersion
-/* 814923FC | 80 0D AD 68 */	lwz r0, lbl_81698DA8@sda21(r0)
+/* 814923FC | 80 0D AD 68 */	lwz r0, ncdInitialized@sda21(r0)
 /* 81492400 | 60 00 00 02 */	ori r0, r0, 0x2
-/* 81492404 | 90 0D AD 68 */	stw r0, lbl_81698DA8@sda21(r0)
+/* 81492404 | 90 0D AD 68 */	stw r0, ncdInitialized@sda21(r0)
 .L_81492408:
 /* 81492408 | 7F E3 FB 78 */	mr r3, r31
 /* 8149240C | 48 09 E4 A1 */	bl OSRestoreInterrupts
@@ -83,15 +83,15 @@
 /* 8149245C | 48 16 70 61 */	bl _savegpr_26
 /* 81492460 | 7C 7E 1B 78 */	mr r30, r3
 /* 81492464 | 48 09 E4 21 */	bl OSDisableInterrupts
-/* 81492468 | 80 0D AD 68 */	lwz r0, lbl_81698DA8@sda21(r0)
+/* 81492468 | 80 0D AD 68 */	lwz r0, ncdInitialized@sda21(r0)
 /* 8149246C | 7C 7F 1B 78 */	mr r31, r3
 /* 81492470 | 54 00 07 BD */	rlwinm. r0, r0, 0, 30, 30
 /* 81492474 | 40 82 00 18 */	bne .L_8149248C
-/* 81492478 | 80 6D 9A 64 */	lwz r3, lbl_81697AA4@sda21(r0)
+/* 81492478 | 80 6D 9A 64 */	lwz r3, __NCDUnofficialVersion@sda21(r0)
 /* 8149247C | 48 09 A3 5D */	bl OSRegisterVersion
-/* 81492480 | 80 0D AD 68 */	lwz r0, lbl_81698DA8@sda21(r0)
+/* 81492480 | 80 0D AD 68 */	lwz r0, ncdInitialized@sda21(r0)
 /* 81492484 | 60 00 00 02 */	ori r0, r0, 0x2
-/* 81492488 | 90 0D AD 68 */	stw r0, lbl_81698DA8@sda21(r0)
+/* 81492488 | 90 0D AD 68 */	stw r0, ncdInitialized@sda21(r0)
 .L_8149248C:
 /* 8149248C | 7F E3 FB 78 */	mr r3, r31
 /* 81492490 | 48 09 E4 1D */	bl OSRestoreInterrupts
@@ -107,7 +107,7 @@
 /* 814924B4 | 48 00 01 EC */	b .L_814926A0
 .L_814924B8:
 /* 814924B8 | 48 00 0E 4D */	bl LockRight
-/* 814924BC | 48 01 91 B1 */	bl fn_814AB66C
+/* 814924BC | 48 01 91 B1 */	bl NWC24iLockSocket
 /* 814924C0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 814924C4 | 40 82 01 AC */	bne .L_81492670
 /* 814924C8 | 3C 60 81 67 */	lis r3, lbl_8166CC5C@ha
@@ -119,7 +119,7 @@
 /* 814924E0 | 7C 7C 1B 78 */	mr r28, r3
 /* 814924E4 | 40 82 01 84 */	bne .L_81492668
 /* 814924E8 | 88 1E 00 00 */	lbz r0, 0x0(r30)
-/* 814924EC | 83 ED AD 6C */	lwz r31, lbl_81698DAC@sda21(r0)
+/* 814924EC | 83 ED AD 6C */	lwz r31, ncdCommonBuffer@sda21(r0)
 /* 814924F0 | 28 00 00 01 */	cmplwi r0, 0x1
 /* 814924F4 | 41 82 00 18 */	beq .L_8149250C
 /* 814924F8 | 28 00 00 02 */	cmplwi r0, 0x2
@@ -225,7 +225,7 @@
 /* 81492660 | 48 00 0B 11 */	bl ExecConfigCommand
 /* 81492664 | 7C 7C 1B 78 */	mr r28, r3
 .L_81492668:
-/* 81492668 | 48 01 90 15 */	bl fn_814AB67C
+/* 81492668 | 48 01 90 15 */	bl NWC24iUnlockSocket
 /* 8149266C | 48 00 00 24 */	b .L_81492690
 .L_81492670:
 /* 81492670 | 2C 03 FF EA */	cmpwi r3, -0x16
@@ -260,15 +260,15 @@
 /* 814926C8 | 48 16 6D F5 */	bl _savegpr_26
 /* 814926CC | 7C 7A 1B 78 */	mr r26, r3
 /* 814926D0 | 48 09 E1 B5 */	bl OSDisableInterrupts
-/* 814926D4 | 80 0D AD 68 */	lwz r0, lbl_81698DA8@sda21(r0)
+/* 814926D4 | 80 0D AD 68 */	lwz r0, ncdInitialized@sda21(r0)
 /* 814926D8 | 7C 7B 1B 78 */	mr r27, r3
 /* 814926DC | 54 00 07 BD */	rlwinm. r0, r0, 0, 30, 30
 /* 814926E0 | 40 82 00 18 */	bne .L_814926F8
-/* 814926E4 | 80 6D 9A 64 */	lwz r3, lbl_81697AA4@sda21(r0)
+/* 814926E4 | 80 6D 9A 64 */	lwz r3, __NCDUnofficialVersion@sda21(r0)
 /* 814926E8 | 48 09 A0 F1 */	bl OSRegisterVersion
-/* 814926EC | 80 0D AD 68 */	lwz r0, lbl_81698DA8@sda21(r0)
+/* 814926EC | 80 0D AD 68 */	lwz r0, ncdInitialized@sda21(r0)
 /* 814926F0 | 60 00 00 02 */	ori r0, r0, 0x2
-/* 814926F4 | 90 0D AD 68 */	stw r0, lbl_81698DA8@sda21(r0)
+/* 814926F4 | 90 0D AD 68 */	stw r0, ncdInitialized@sda21(r0)
 .L_814926F8:
 /* 814926F8 | 7F 63 DB 78 */	mr r3, r27
 /* 814926FC | 48 09 E1 B1 */	bl OSRestoreInterrupts
@@ -284,7 +284,7 @@
 /* 81492720 | 48 00 02 2C */	b .L_8149294C
 .L_81492724:
 /* 81492724 | 48 00 0B E1 */	bl LockRight
-/* 81492728 | 48 01 8F 45 */	bl fn_814AB66C
+/* 81492728 | 48 01 8F 45 */	bl NWC24iLockSocket
 /* 8149272C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81492730 | 40 82 01 EC */	bne .L_8149291C
 /* 81492734 | 3C 60 81 67 */	lis r3, lbl_8166CC6C@ha
@@ -295,7 +295,7 @@
 /* 81492748 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8149274C | 7C 7B 1B 78 */	mr r27, r3
 /* 81492750 | 40 82 01 C4 */	bne .L_81492914
-/* 81492754 | 83 AD AD 6C */	lwz r29, lbl_81698DAC@sda21(r0)
+/* 81492754 | 83 AD AD 6C */	lwz r29, ncdCommonBuffer@sda21(r0)
 /* 81492758 | 3B 80 00 00 */	li r28, 0x0
 /* 8149275C | 3B 60 00 00 */	li r27, 0x0
 /* 81492760 | 7F BF EB 78 */	mr r31, r29
@@ -419,7 +419,7 @@
 /* 8149290C | 48 00 08 65 */	bl ExecConfigCommand
 /* 81492910 | 7C 7B 1B 78 */	mr r27, r3
 .L_81492914:
-/* 81492914 | 48 01 8D 69 */	bl fn_814AB67C
+/* 81492914 | 48 01 8D 69 */	bl NWC24iUnlockSocket
 /* 81492918 | 48 00 00 24 */	b .L_8149293C
 .L_8149291C:
 /* 8149291C | 2C 03 FF EA */	cmpwi r3, -0x16
@@ -471,7 +471,7 @@
 /* 814929B4 | 7C 7E 1B 78 */	mr r30, r3
 /* 814929B8 | 40 82 00 D4 */	bne .L_81492A8C
 /* 814929BC | 3C 60 81 0D */	lis r3, lbl_810C8B80@ha
-/* 814929C0 | 83 AD AD 6C */	lwz r29, lbl_81698DAC@sda21(r0)
+/* 814929C0 | 83 AD AD 6C */	lwz r29, ncdCommonBuffer@sda21(r0)
 /* 814929C4 | 38 63 8B 80 */	addi r3, r3, lbl_810C8B80@l
 /* 814929C8 | 83 83 00 04 */	lwz r28, 0x4(r3)
 /* 814929CC | 2C 1C 00 00 */	cmpwi r28, 0x0
@@ -688,7 +688,7 @@
 /* 81492C84 | 3B C0 FF FE */	li r30, -0x2
 /* 81492C88 | 48 00 00 78 */	b .L_81492D00
 .L_81492C8C:
-/* 81492C8C | 81 0D AD 6C */	lwz r8, lbl_81698DAC@sda21(r0)
+/* 81492C8C | 81 0D AD 6C */	lwz r8, ncdCommonBuffer@sda21(r0)
 /* 81492C90 | 38 FF 00 40 */	addi r7, r31, 0x40
 /* 81492C94 | 38 9F 00 20 */	addi r4, r31, 0x20
 /* 81492C98 | 38 A0 00 20 */	li r5, 0x20
@@ -709,7 +709,7 @@
 /* 81492CD0 | 83 DF 00 20 */	lwz r30, 0x20(r31)
 /* 81492CD4 | 2C 1E 00 00 */	cmpwi r30, 0x0
 /* 81492CD8 | 40 82 00 14 */	bne .L_81492CEC
-/* 81492CDC | 80 8D AD 6C */	lwz r4, lbl_81698DAC@sda21(r0)
+/* 81492CDC | 80 8D AD 6C */	lwz r4, ncdCommonBuffer@sda21(r0)
 /* 81492CE0 | 7F 83 E3 78 */	mr r3, r28
 /* 81492CE4 | 38 A0 00 06 */	li r5, 0x6
 /* 81492CE8 | 4B E9 D5 49 */	bl memcpy
@@ -849,7 +849,7 @@
 /* 81492EA8 | 3B C0 FF FE */	li r30, -0x2
 /* 81492EAC | 48 00 00 64 */	b .L_81492F10
 .L_81492EB0:
-/* 81492EB0 | 81 2D AD 6C */	lwz r9, lbl_81698DAC@sda21(r0)
+/* 81492EB0 | 81 2D AD 6C */	lwz r9, ncdCommonBuffer@sda21(r0)
 /* 81492EB4 | 38 FF 00 40 */	addi r7, r31, 0x40
 /* 81492EB8 | 39 1F 00 20 */	addi r8, r31, 0x20
 /* 81492EBC | 38 A0 00 04 */	li r5, 0x4
@@ -903,7 +903,7 @@
 /* 81492F5C | 48 00 00 80 */	b .L_81492FDC
 .L_81492F60:
 /* 81492F60 | 48 00 03 A5 */	bl LockRight
-/* 81492F64 | 48 01 87 09 */	bl fn_814AB66C
+/* 81492F64 | 48 01 87 09 */	bl NWC24iLockSocket
 /* 81492F68 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81492F6C | 40 82 00 40 */	bne .L_81492FAC
 /* 81492F70 | 3F E0 81 67 */	lis r31, lbl_8166CCA8@ha
@@ -920,7 +920,7 @@
 /* 81492F9C | 48 00 01 D5 */	bl ExecConfigCommand
 /* 81492FA0 | 7C 7E 1B 78 */	mr r30, r3
 .L_81492FA4:
-/* 81492FA4 | 48 01 86 D9 */	bl fn_814AB67C
+/* 81492FA4 | 48 01 86 D9 */	bl NWC24iUnlockSocket
 /* 81492FA8 | 48 00 00 24 */	b .L_81492FCC
 .L_81492FAC:
 /* 81492FAC | 2C 03 FF EA */	cmpwi r3, -0x16
@@ -968,7 +968,7 @@
 /* 81493038 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8149303C | 7C 7C 1B 78 */	mr r28, r3
 /* 81493040 | 40 82 00 E4 */	bne .L_81493124
-/* 81493044 | 80 8D AD 6C */	lwz r4, lbl_81698DAC@sda21(r0)
+/* 81493044 | 80 8D AD 6C */	lwz r4, ncdCommonBuffer@sda21(r0)
 /* 81493048 | 38 C0 00 00 */	li r6, 0x0
 /* 8149304C | 38 60 00 01 */	li r3, 0x1
 /* 81493050 | 88 A4 00 08 */	lbz r5, 0x8(r4)
@@ -1091,7 +1091,7 @@
 /* 814931DC | 3B C0 FF FE */	li r30, -0x2
 /* 814931E0 | 48 00 01 00 */	b .L_814932E0
 .L_814931E4:
-/* 814931E4 | 80 CD AD 6C */	lwz r6, lbl_81698DAC@sda21(r0)
+/* 814931E4 | 80 CD AD 6C */	lwz r6, ncdCommonBuffer@sda21(r0)
 /* 814931E8 | 2C 1C 00 05 */	cmpwi r28, 0x5
 /* 814931EC | 38 9F 00 40 */	addi r4, r31, 0x40
 /* 814931F0 | 38 7F 00 20 */	addi r3, r31, 0x20
@@ -1129,7 +1129,7 @@
 /* 81493264 | 38 00 00 00 */	li r0, 0x0
 /* 81493268 | 7C 1B 00 40 */	cmplw r27, r0
 /* 8149326C | 41 82 00 60 */	beq .L_814932CC
-/* 81493270 | 80 8D AD 6C */	lwz r4, lbl_81698DAC@sda21(r0)
+/* 81493270 | 80 8D AD 6C */	lwz r4, ncdCommonBuffer@sda21(r0)
 /* 81493274 | 7F 63 DB 78 */	mr r3, r27
 /* 81493278 | 38 A0 1B 5C */	li r5, 0x1b5c
 /* 8149327C | 4B E9 CF B5 */	bl memcpy
@@ -1138,7 +1138,7 @@
 /* 81493284 | 38 00 00 00 */	li r0, 0x0
 /* 81493288 | 7C 1B 00 40 */	cmplw r27, r0
 /* 8149328C | 41 82 00 14 */	beq .L_814932A0
-/* 81493290 | 80 6D AD 6C */	lwz r3, lbl_81698DAC@sda21(r0)
+/* 81493290 | 80 6D AD 6C */	lwz r3, ncdCommonBuffer@sda21(r0)
 /* 81493294 | 7F 64 DB 78 */	mr r4, r27
 /* 81493298 | 38 A0 1B 5C */	li r5, 0x1b5c
 /* 8149329C | 4B E9 CF 95 */	bl memcpy
@@ -1185,11 +1185,11 @@
 /* 8149331C | 93 C1 00 18 */	stw r30, 0x18(r1)
 /* 81493320 | 93 A1 00 14 */	stw r29, 0x14(r1)
 /* 81493324 | 48 09 D5 61 */	bl OSDisableInterrupts
-/* 81493328 | 80 0D AD 68 */	lwz r0, lbl_81698DA8@sda21(r0)
+/* 81493328 | 80 0D AD 68 */	lwz r0, ncdInitialized@sda21(r0)
 /* 8149332C | 7C 7E 1B 78 */	mr r30, r3
 /* 81493330 | 54 00 07 FF */	clrlwi. r0, r0, 31
 /* 81493334 | 40 82 00 94 */	bne .L_814933C8
-/* 81493338 | 80 6D 9A 60 */	lwz r3, lbl_81697AA0@sda21(r0)
+/* 81493338 | 80 6D 9A 60 */	lwz r3, __NCDVersion@sda21(r0)
 /* 8149333C | 48 09 94 9D */	bl OSRegisterVersion
 /* 81493340 | 38 7F 00 00 */	addi r3, r31, 0x0
 /* 81493344 | 48 09 E8 8D */	bl fn_81531BD0
@@ -1210,7 +1210,7 @@
 .L_81493380:
 /* 81493380 | 38 7D 1B 60 */	addi r3, r29, 0x1b60
 /* 81493384 | 48 0D EE 99 */	bl IPCSetBufferLo
-/* 81493388 | 93 AD AD 6C */	stw r29, lbl_81698DAC@sda21(r0)
+/* 81493388 | 93 AD AD 6C */	stw r29, ncdCommonBuffer@sda21(r0)
 /* 8149338C | 7F A3 EB 78 */	mr r3, r29
 /* 81493390 | 38 80 00 00 */	li r4, 0x0
 /* 81493394 | 38 A0 1B 60 */	li r5, 0x1b60
@@ -1223,9 +1223,9 @@
 /* 814933B0 | 38 80 00 00 */	li r4, 0x0
 /* 814933B4 | 38 A0 00 20 */	li r5, 0x20
 /* 814933B8 | 4B E9 CF 7D */	bl memset
-/* 814933BC | 80 0D AD 68 */	lwz r0, lbl_81698DA8@sda21(r0)
+/* 814933BC | 80 0D AD 68 */	lwz r0, ncdInitialized@sda21(r0)
 /* 814933C0 | 60 00 00 01 */	ori r0, r0, 0x1
-/* 814933C4 | 90 0D AD 68 */	stw r0, lbl_81698DA8@sda21(r0)
+/* 814933C4 | 90 0D AD 68 */	stw r0, ncdInitialized@sda21(r0)
 .L_814933C8:
 /* 814933C8 | 7F C3 F3 78 */	mr r3, r30
 /* 814933CC | 48 09 D4 E1 */	bl OSRestoreInterrupts
@@ -1370,25 +1370,25 @@
 .balign 8
 
 # .sdata:0x0 | 0x81697AA0 | size: 0x4
-.obj lbl_81697AA0, global
+.obj __NCDVersion, global
 	.4byte lbl_8166CBA0
-.endobj lbl_81697AA0
+.endobj __NCDVersion
 
 # .sdata:0x4 | 0x81697AA4 | size: 0x4
-.obj lbl_81697AA4, global
+.obj __NCDUnofficialVersion, global
 	.4byte lbl_8166CBE8
-.endobj lbl_81697AA4
+.endobj __NCDUnofficialVersion
 
 # 0x81698DA8..0x81698DB0 | size: 0x8
 .section .sbss, "wa", @nobits
 .balign 8
 
 # .sbss:0x0 | 0x81698DA8 | size: 0x4
-.obj lbl_81698DA8, global
+.obj ncdInitialized, local
 	.skip 0x4
-.endobj lbl_81698DA8
+.endobj ncdInitialized
 
 # .sbss:0x4 | 0x81698DAC | size: 0x4
-.obj lbl_81698DAC, global
+.obj ncdCommonBuffer, local
 	.skip 0x4
-.endobj lbl_81698DAC
+.endobj ncdCommonBuffer

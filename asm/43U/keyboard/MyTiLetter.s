@@ -1048,8 +1048,9 @@
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x816168B8 | size: 0x44
-.obj lbl_816168B8, global
+# .rodata:0x0 | 0x816168B8 | size: 0x220
+# textinput::keyboard::hwkey::HWKeyboard::csAninationFile
+.obj csAninationFile__Q49textinput8keyboard5hwkey10HWKeyboard_816168B8, global
 	.4byte 0x00000000
 	.4byte 0x6D795F4C
 	.4byte 0x65747465
@@ -1067,10 +1068,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816168B8
-
-# .rodata:0x44 | 0x816168FC | size: 0x44
-.obj lbl_816168FC, global
+.L_816168FC:
 	.4byte 0x00000001
 	.4byte 0x6D795F4C
 	.4byte 0x65747465
@@ -1088,10 +1086,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816168FC
-
-# .rodata:0x88 | 0x81616940 | size: 0x44
-.obj lbl_81616940, global
+.L_81616940:
 	.4byte 0x00000002
 	.4byte 0x6D795F4C
 	.4byte 0x65747465
@@ -1109,10 +1104,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81616940
-
-# .rodata:0xCC | 0x81616984 | size: 0x44
-.obj lbl_81616984, global
+.L_81616984:
 	.4byte 0x00000003
 	.4byte 0x6D795F4C
 	.4byte 0x65747465
@@ -1130,10 +1122,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81616984
-
-# .rodata:0x110 | 0x816169C8 | size: 0x44
-.obj lbl_816169C8, global
+.L_816169C8:
 	.4byte 0x00000004
 	.4byte 0x6D795F4C
 	.4byte 0x65747465
@@ -1151,10 +1140,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816169C8
-
-# .rodata:0x154 | 0x81616A0C | size: 0x44
-.obj lbl_81616A0C, global
+.L_81616A0C:
 	.4byte 0x00000005
 	.4byte 0x6D795F4C
 	.4byte 0x65747465
@@ -1172,10 +1158,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81616A0C
-
-# .rodata:0x198 | 0x81616A50 | size: 0x44
-.obj lbl_81616A50, global
+.L_81616A50:
 	.4byte 0x00000006
 	.4byte 0x6D795F4C
 	.4byte 0x65747465
@@ -1193,10 +1176,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81616A50
-
-# .rodata:0x1DC | 0x81616A94 | size: 0x44
-.obj lbl_81616A94, global
+.L_81616A94:
 	.4byte 0x00000007
 	.4byte 0x6D795F4C
 	.4byte 0x65747465
@@ -1214,7 +1194,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81616A94
+.endobj csAninationFile__Q49textinput8keyboard5hwkey10HWKeyboard_816168B8
 
 # .rodata:0x220 | 0x81616AD8 | size: 0xC
 .obj lbl_81616AD8, global
@@ -1225,10 +1205,10 @@
 
 # .rodata:0x22C | 0x81616AE4 | size: 0x30
 .obj lbl_81616AE4, global
-	.4byte lbl_816169C8
-	.4byte lbl_81616A0C
-	.4byte lbl_81616A50
-	.4byte lbl_81616A94
+	.rel csAninationFile__Q49textinput8keyboard5hwkey10HWKeyboard_816168B8, .L_816169C8
+	.rel csAninationFile__Q49textinput8keyboard5hwkey10HWKeyboard_816168B8, .L_81616A0C
+	.rel csAninationFile__Q49textinput8keyboard5hwkey10HWKeyboard_816168B8, .L_81616A50
+	.rel csAninationFile__Q49textinput8keyboard5hwkey10HWKeyboard_816168B8, .L_81616A94
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -1244,10 +1224,10 @@
 	.4byte 0x00000000
 	.4byte lbl_81697540
 	.4byte 0x00000004
-	.4byte lbl_816169C8
-	.4byte lbl_81616A0C
-	.4byte lbl_81616A50
-	.4byte lbl_81616A94
+	.rel csAninationFile__Q49textinput8keyboard5hwkey10HWKeyboard_816168B8, .L_816169C8
+	.rel csAninationFile__Q49textinput8keyboard5hwkey10HWKeyboard_816168B8, .L_81616A0C
+	.rel csAninationFile__Q49textinput8keyboard5hwkey10HWKeyboard_816168B8, .L_81616A50
+	.rel csAninationFile__Q49textinput8keyboard5hwkey10HWKeyboard_816168B8, .L_81616A94
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -1259,11 +1239,11 @@
 	.4byte 0x00000001
 	.4byte lbl_81697548
 	.4byte 0x00000005
-	.4byte lbl_816168B8
-	.4byte lbl_816168FC
-	.4byte lbl_81616940
-	.4byte lbl_81616984
-	.4byte lbl_816169C8
+	.4byte csAninationFile__Q49textinput8keyboard5hwkey10HWKeyboard_816168B8
+	.rel csAninationFile__Q49textinput8keyboard5hwkey10HWKeyboard_816168B8, .L_816168FC
+	.rel csAninationFile__Q49textinput8keyboard5hwkey10HWKeyboard_816168B8, .L_81616940
+	.rel csAninationFile__Q49textinput8keyboard5hwkey10HWKeyboard_816168B8, .L_81616984
+	.rel csAninationFile__Q49textinput8keyboard5hwkey10HWKeyboard_816168B8, .L_816169C8
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000

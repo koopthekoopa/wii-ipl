@@ -178,11 +178,11 @@
 /* 813CA020 | 4B FA 00 05 */	bl __ct__Q33ipl6layout6ObjectFPQ23EGG4HeapPQ33ipl4nand10LayoutFilePCcPCc
 .L_813CA024:
 /* 813CA024 | 90 7E 00 58 */	stw r3, 0x58(r30)
-/* 813CA028 | 3C 80 81 61 */	lis r4, lbl_81610368@ha
+/* 813CA028 | 3C 80 81 61 */	lis r4, scAnmName__Q23ipl5scene@ha
 /* 813CA02C | 38 7E 00 54 */	addi r3, r30, 0x54
 /* 813CA030 | 38 A0 00 1B */	li r5, 0x1b
 /* 813CA034 | 81 9E 00 54 */	lwz r12, 0x54(r30)
-/* 813CA038 | 38 84 03 68 */	addi r4, r4, lbl_81610368@l
+/* 813CA038 | 38 84 03 68 */	addi r4, r4, scAnmName__Q23ipl5scene@l
 /* 813CA03C | 81 8C 00 30 */	lwz r12, 0x30(r12)
 /* 813CA040 | 7D 89 03 A6 */	mtctr r12
 /* 813CA044 | 4E 80 04 21 */	bctrl
@@ -468,9 +468,9 @@
 /* 813CA490 | 80 9D 00 04 */	lwz r4, 0x4(r29)
 /* 813CA494 | 7D 89 03 A6 */	mtctr r12
 /* 813CA498 | 4E 80 04 21 */	bctrl
-/* 813CA49C | 3F 60 81 61 */	lis r27, lbl_81610440@ha
+/* 813CA49C | 3F 60 81 61 */	lis r27, scTextboxToMessageID__Q23ipl5scene@ha
 /* 813CA4A0 | 3B 20 00 00 */	li r25, 0x0
-/* 813CA4A4 | 3B 7B 04 40 */	addi r27, r27, lbl_81610440@l
+/* 813CA4A4 | 3B 7B 04 40 */	addi r27, r27, scTextboxToMessageID__Q23ipl5scene@l
 /* 813CA4A8 | 3B A0 00 00 */	li r29, 0x0
 .L_813CA4AC:
 /* 813CA4AC | 7C BB EA 14 */	add r5, r27, r29
@@ -2667,7 +2667,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x81610368 | size: 0xD8
-.obj lbl_81610368, global
+# ipl::scene::scAnmName
+.obj scAnmName__Q23ipl5scene, local
 	.4byte lbl_81652000
 	.4byte lbl_81652022
 	.4byte lbl_8165202B
@@ -2722,10 +2723,11 @@
 	.4byte lbl_816522F2
 	.4byte lbl_816522FD
 	.4byte lbl_816522F2
-.endobj lbl_81610368
+.endobj scAnmName__Q23ipl5scene
 
 # .rodata:0xD8 | 0x81610440 | size: 0x28
-.obj lbl_81610440, global
+# ipl::scene::scTextboxToMessageID
+.obj scTextboxToMessageID__Q23ipl5scene, local
 	.4byte lbl_81652320
 	.4byte 0x0000013F
 	.4byte lbl_8165232F
@@ -2736,7 +2738,7 @@
 	.4byte 0x00000140
 	.4byte lbl_8165235A
 	.4byte 0x000000E6
-.endobj lbl_81610440
+.endobj scTextboxToMessageID__Q23ipl5scene
 
 # .rodata:0x100 | 0x81610468 | size: 0x18
 .obj lbl_81610468, global

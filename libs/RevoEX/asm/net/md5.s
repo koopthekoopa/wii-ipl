@@ -101,7 +101,7 @@
 /* 81493930 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 81493934 | 93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 81493938 | 7C 9F 23 78 */	mr r31, r4
-/* 8149393C | 38 8D 9A 68 */	li r4, lbl_81697AA8@sda21
+/* 8149393C | 38 8D 9A 68 */	li r4, padding$@sda21
 /* 81493940 | 93 C1 00 18 */	stw r30, 0x18(r1)
 /* 81493944 | 7C 7E 1B 78 */	mr r30, r3
 /* 81493948 | 93 A1 00 14 */	stw r29, 0x14(r1)
@@ -177,11 +177,11 @@
 .fn ProcessBlock, local
 /* 81493A4C | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 81493A50 | 39 03 00 18 */	addi r8, r3, 0x18
-/* 81493A54 | 3D 20 81 67 */	lis r9, lbl_8166CD20@ha
+/* 81493A54 | 3D 20 81 67 */	lis r9, t$2350@ha
 /* 81493A58 | 39 40 00 04 */	li r10, 0x4
 /* 81493A5C | 93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 81493A60 | 7D 04 43 78 */	mr r4, r8
-/* 81493A64 | 39 29 CD 20 */	addi r9, r9, lbl_8166CD20@l
+/* 81493A64 | 39 29 CD 20 */	addi r9, r9, t$2350@l
 /* 81493A68 | 93 C1 00 18 */	stw r30, 0x18(r1)
 /* 81493A6C | 93 A1 00 14 */	stw r29, 0x14(r1)
 /* 81493A70 | 80 03 00 00 */	lwz r0, 0x0(r3)
@@ -252,9 +252,9 @@
 /* 81493B70 | 51 45 B0 12 */	rlwimi r5, r10, 22, 0, 9
 /* 81493B74 | 7C A6 2A 14 */	add r5, r6, r5
 /* 81493B78 | 42 00 FF 0C */	bdnz .L_81493A84
-/* 81493B7C | 3C 80 81 67 */	lis r4, lbl_8166CE20@ha
+/* 81493B7C | 3C 80 81 67 */	lis r4, k$2351@ha
 /* 81493B80 | 39 40 00 04 */	li r10, 0x4
-/* 81493B84 | 38 84 CE 20 */	addi r4, r4, lbl_8166CE20@l
+/* 81493B84 | 38 84 CE 20 */	addi r4, r4, k$2351@l
 /* 81493B88 | 7D 49 03 A6 */	mtctr r10
 .L_81493B8C:
 /* 81493B8C | 81 44 00 00 */	lwz r10, 0x0(r4)
@@ -492,7 +492,7 @@
 .balign 8
 
 # .data:0x0 | 0x8166CD20 | size: 0x100
-.obj lbl_8166CD20, global
+.obj t$2350, local
 	.4byte 0xD76AA478
 	.4byte 0xE8C7B756
 	.4byte 0x242070DB
@@ -557,10 +557,10 @@
 	.4byte 0xBD3AF235
 	.4byte 0x2AD7D2BB
 	.4byte 0xEB86D391
-.endobj lbl_8166CD20
+.endobj t$2350
 
 # .data:0x100 | 0x8166CE20 | size: 0xC0
-.obj lbl_8166CE20, global
+.obj k$2351, local
 	.4byte 0x00000001
 	.4byte 0x00000006
 	.4byte 0x0000000B
@@ -609,14 +609,20 @@
 	.4byte 0x0000000B
 	.4byte 0x00000002
 	.4byte 0x00000009
-.endobj lbl_8166CE20
+.endobj k$2351
 
 # 0x81697AA8..0x81697AB0 | size: 0x8
 .section .sdata, "wa"
 .balign 8
 
-# .sdata:0x0 | 0x81697AA8 | size: 0x8
-.obj lbl_81697AA8, global
-	.4byte 0x80000000
+# .sdata:0x0 | 0x81697AA8 | size: 0x1
+.obj padding$, global
+	.byte 0x80
+.endobj padding$
+
+# .sdata:0x1 | 0x81697AA9 | size: 0x7
+.obj gap_11_81697AA9_sdata, global
+.hidden gap_11_81697AA9_sdata
 	.4byte 0x00000000
-.endobj lbl_81697AA8
+	.byte 0x00, 0x00, 0x00
+.endobj gap_11_81697AA9_sdata

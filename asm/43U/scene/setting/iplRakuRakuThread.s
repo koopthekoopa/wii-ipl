@@ -205,7 +205,7 @@
 /* 813FDC6C | 28 00 07 D0 */	cmplwi r0, 0x7d0
 /* 813FDC70 | 41 80 FF C8 */	blt .L_813FDC38
 .L_813FDC74:
-/* 813FDC74 | 48 0B 44 8D */	bl fn_814B2100
+/* 813FDC74 | 48 0B 44 8D */	bl SOFinish
 /* 813FDC78 | 38 00 00 00 */	li r0, 0x0
 /* 813FDC7C | 98 0D AC 28 */	stb r0, lbl_81698C68@sda21(r0)
 .L_813FDC80:
@@ -287,7 +287,7 @@
 /* 813FDD8C | 38 84 DE FC */	addi r4, r4, RakuRakuThread_813FDEFC@l
 /* 813FDD90 | 90 A1 00 08 */	stw r5, 0x8(r1)
 /* 813FDD94 | 90 81 00 0C */	stw r4, 0xc(r1)
-/* 813FDD98 | 48 0B 41 A1 */	bl fn_814B1F38
+/* 813FDD98 | 48 0B 41 A1 */	bl SOInit
 /* 813FDD9C | 3C A0 81 40 */	lis r5, RakuRakuThread_813FDA04__Q33ipl5scene14RakuRakuThreadFv@ha
 /* 813FDDA0 | 3C C0 81 40 */	lis r6, RakuRakuThread_813FDF08@ha
 /* 813FDDA4 | 3C E0 81 40 */	lis r7, RakuRakuThread_813FDF18@ha
@@ -562,7 +562,7 @@
 /* 813FE0F4 | 38 60 00 00 */	li r3, 0x0
 /* 813FE0F8 | 48 00 01 68 */	b .L_813FE260
 .L_813FE0FC:
-/* 813FE0FC | 48 0B 40 05 */	bl fn_814B2100
+/* 813FE0FC | 48 0B 40 05 */	bl SOFinish
 /* 813FE100 | 3B 80 00 00 */	li r28, 0x0
 /* 813FE104 | 7F 23 CB 78 */	mr r3, r25
 /* 813FE108 | 9B 8D AC 28 */	stb r28, lbl_81698C68@sda21(r0)

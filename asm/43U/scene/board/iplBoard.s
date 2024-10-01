@@ -486,10 +486,10 @@
 /* 8138F42C | 2C 1E 00 0A */	cmpwi r30, 0xa
 /* 8138F430 | 41 80 00 30 */	blt .L_8138F460
 /* 8138F434 | 38 A0 00 0A */	li r5, 0xa
-/* 8138F438 | 3C 60 81 61 */	lis r3, lbl_8160F6C8@ha
+/* 8138F438 | 3C 60 81 61 */	lis r3, scNumber__Q23ipl5scene@ha
 /* 8138F43C | 7C 9E 2B D6 */	divw r4, r30, r5
 /* 8138F440 | 39 20 00 01 */	li r9, 0x1
-/* 8138F444 | 38 63 F6 C8 */	addi r3, r3, lbl_8160F6C8@l
+/* 8138F444 | 38 63 F6 C8 */	addi r3, r3, scNumber__Q23ipl5scene@l
 /* 8138F448 | 7C 04 2B D6 */	divw r0, r4, r5
 /* 8138F44C | 7C 00 29 D6 */	mullw r0, r0, r5
 /* 8138F450 | 7C 00 20 50 */	subf r0, r0, r4
@@ -498,10 +498,10 @@
 /* 8138F45C | B0 01 00 08 */	sth r0, 0x8(r1)
 .L_8138F460:
 /* 8138F460 | 39 00 00 0A */	li r8, 0xa
-/* 8138F464 | 3C C0 81 61 */	lis r6, lbl_8160F6C8@ha
+/* 8138F464 | 3C C0 81 61 */	lis r6, scNumber__Q23ipl5scene@ha
 /* 8138F468 | 7C FE 43 D6 */	divw r7, r30, r8
 /* 8138F46C | 3C 80 81 65 */	lis r4, lbl_8164AFAE@ha
-/* 8138F470 | 38 C6 F6 C8 */	addi r6, r6, lbl_8160F6C8@l
+/* 8138F470 | 38 C6 F6 C8 */	addi r6, r6, scNumber__Q23ipl5scene@l
 /* 8138F474 | 38 A1 00 08 */	addi r5, r1, 0x8
 /* 8138F478 | 55 20 08 3C */	slwi r0, r9, 1
 /* 8138F47C | 7F E3 FB 78 */	mr r3, r31
@@ -3881,9 +3881,9 @@
 /* 813921E4 | 7C DE 33 78 */	mr r30, r6
 /* 813921E8 | 7F 83 E3 78 */	mr r3, r28
 /* 813921EC | 4B FF FF 65 */	bl getWeek__Q33ipl7utility8CalendarFRCQ33ipl7utility4Date
-/* 813921F0 | 3C 80 81 61 */	lis r4, lbl_8160F6DC@ha
+/* 813921F0 | 3C 80 81 61 */	lis r4, scWeekMsgId__Q23ipl5scene@ha
 /* 813921F4 | 54 60 10 3A */	slwi r0, r3, 2
-/* 813921F8 | 38 84 F6 DC */	addi r4, r4, lbl_8160F6DC@l
+/* 813921F8 | 38 84 F6 DC */	addi r4, r4, scWeekMsgId__Q23ipl5scene@l
 /* 813921FC | 80 7F 00 00 */	lwz r3, 0x0(r31)
 /* 81392200 | 7C 84 00 2E */	lwzx r4, r4, r0
 /* 81392204 | 4B FA C5 B9 */	bl getMessage__Q33ipl7message7MessageCFUl
@@ -3920,9 +3920,9 @@
 /* 8139226C | 7C DE 33 78 */	mr r30, r6
 /* 81392270 | 7F 83 E3 78 */	mr r3, r28
 /* 81392274 | 4B FF FE DD */	bl getWeek__Q33ipl7utility8CalendarFRCQ33ipl7utility4Date
-/* 81392278 | 3C 80 81 61 */	lis r4, lbl_8160F6DC@ha
+/* 81392278 | 3C 80 81 61 */	lis r4, scWeekMsgId__Q23ipl5scene@ha
 /* 8139227C | 54 60 10 3A */	slwi r0, r3, 2
-/* 81392280 | 38 84 F6 DC */	addi r4, r4, lbl_8160F6DC@l
+/* 81392280 | 38 84 F6 DC */	addi r4, r4, scWeekMsgId__Q23ipl5scene@l
 /* 81392284 | 80 7F 00 00 */	lwz r3, 0x0(r31)
 /* 81392288 | 7C 84 00 2E */	lwzx r4, r4, r0
 /* 8139228C | 4B FA C5 31 */	bl getMessage__Q33ipl7message7MessageCFUl
@@ -3959,9 +3959,9 @@
 /* 813922F4 | 7C DE 33 78 */	mr r30, r6
 /* 813922F8 | 7F 83 E3 78 */	mr r3, r28
 /* 813922FC | 4B FF FE 55 */	bl getWeek__Q33ipl7utility8CalendarFRCQ33ipl7utility4Date
-/* 81392300 | 3C 80 81 61 */	lis r4, lbl_8160F6DC@ha
+/* 81392300 | 3C 80 81 61 */	lis r4, scWeekMsgId__Q23ipl5scene@ha
 /* 81392304 | 54 60 10 3A */	slwi r0, r3, 2
-/* 81392308 | 38 84 F6 DC */	addi r4, r4, lbl_8160F6DC@l
+/* 81392308 | 38 84 F6 DC */	addi r4, r4, scWeekMsgId__Q23ipl5scene@l
 /* 8139230C | 80 7F 00 00 */	lwz r3, 0x0(r31)
 /* 81392310 | 7C 84 00 2E */	lwzx r4, r4, r0
 /* 81392314 | 4B FA C4 A9 */	bl getMessage__Q33ipl7message7MessageCFUl
@@ -5013,9 +5013,9 @@
 /* 813930FC | 38 80 00 00 */	li r4, 0x0
 /* 81393100 | 38 65 02 8C */	addi r3, r5, 0x28c
 /* 81393104 | 48 17 F2 15 */	bl List_GetNth__Q24nw4r2utFPCQ34nw4r2ut4ListUs
-/* 81393108 | 3C 80 81 61 */	lis r4, lbl_8160F6A8@ha
+/* 81393108 | 3C 80 81 61 */	lis r4, scAnmFrame__Q23ipl5scene@ha
 /* 8139310C | 57 C5 18 38 */	slwi r5, r30, 3
-/* 81393110 | 38 84 F6 A8 */	addi r4, r4, lbl_8160F6A8@l
+/* 81393110 | 38 84 F6 A8 */	addi r4, r4, scAnmFrame__Q23ipl5scene@l
 /* 81393114 | 38 00 00 00 */	li r0, 0x0
 /* 81393118 | 7C 04 2C 2E */	lfsx f0, r4, r5
 /* 8139311C | 7C 84 2A 14 */	add r4, r4, r5
@@ -5943,7 +5943,8 @@
 .endobj lbl_8160F690
 
 # .rodata:0x18 | 0x8160F6A8 | size: 0x20
-.obj lbl_8160F6A8, global
+# ipl::scene::scAnmFrame
+.obj scAnmFrame__Q23ipl5scene, local
 	.4byte 0x41F00000
 	.4byte 0x42480000
 	.4byte 0x00000000
@@ -5952,19 +5953,21 @@
 	.4byte 0x43030000
 	.4byte 0x42700000
 	.4byte 0x42B60000
-.endobj lbl_8160F6A8
+.endobj scAnmFrame__Q23ipl5scene
 
 # .rodata:0x38 | 0x8160F6C8 | size: 0x14
-.obj lbl_8160F6C8, global
+# ipl::scene::scNumber
+.obj scNumber__Q23ipl5scene, local
 	.4byte 0x00300031
 	.4byte 0x00320033
 	.4byte 0x00340035
 	.4byte 0x00360037
 	.4byte 0x00380039
-.endobj lbl_8160F6C8
+.endobj scNumber__Q23ipl5scene
 
 # .rodata:0x4C | 0x8160F6DC | size: 0x1C
-.obj lbl_8160F6DC, global
+# ipl::scene::scWeekMsgId
+.obj scWeekMsgId__Q23ipl5scene, local
 	.4byte 0x00000074
 	.4byte 0x0000006E
 	.4byte 0x0000006F
@@ -5972,7 +5975,7 @@
 	.4byte 0x00000071
 	.4byte 0x00000072
 	.4byte 0x00000073
-.endobj lbl_8160F6DC
+.endobj scWeekMsgId__Q23ipl5scene
 
 # 0x8164AF00..0x8164B1E8 | size: 0x2E8
 .data

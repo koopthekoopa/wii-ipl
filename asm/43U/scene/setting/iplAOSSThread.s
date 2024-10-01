@@ -79,7 +79,7 @@
 /* 813FCAE0 | 81 8C 00 1C */	lwz r12, 0x1c(r12)
 /* 813FCAE4 | 7D 89 03 A6 */	mtctr r12
 /* 813FCAE8 | 4E 80 04 21 */	bctrl
-/* 813FCAEC | 48 0B 56 15 */	bl fn_814B2100
+/* 813FCAEC | 48 0B 56 15 */	bl SOFinish
 /* 813FCAF0 | 38 00 00 00 */	li r0, 0x0
 /* 813FCAF4 | 90 0D AB F0 */	stw r0, lbl_81698C30@sda21(r0)
 .L_813FCAF8:
@@ -174,7 +174,7 @@
 /* 813FCC24 | 90 7E 03 30 */	stw r3, 0x330(r30)
 /* 813FCC28 | 38 61 00 08 */	addi r3, r1, 0x8
 /* 813FCC2C | 90 0D AB F0 */	stw r0, lbl_81698C30@sda21(r0)
-/* 813FCC30 | 48 0B 53 09 */	bl fn_814B1F38
+/* 813FCC30 | 48 0B 53 09 */	bl SOInit
 /* 813FCC34 | 80 7E 03 34 */	lwz r3, 0x334(r30)
 /* 813FCC38 | 38 80 00 00 */	li r4, 0x0
 /* 813FCC3C | 38 A0 00 04 */	li r5, 0x4

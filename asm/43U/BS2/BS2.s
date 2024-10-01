@@ -83,7 +83,7 @@
 
 # .text:0xA8 | 0x813797A0 | size: 0x8
 .fn BS2GetBootType, global
-/* 813797A0 | 80 6D A9 BC */	lwz r3, lbl_816989FC@sda21(r0)
+/* 813797A0 | 80 6D A9 BC */	lwz r3, BS2SalvageMode@sda21(r0)
 /* 813797A4 | 4E 80 00 20 */	blr
 .endfn BS2GetBootType
 
@@ -629,11 +629,11 @@
 /* 81379F38 | 28 03 00 02 */	cmplwi r3, 0x2
 /* 81379F3C | 41 82 00 10 */	beq .L_81379F4C
 /* 81379F40 | 38 00 00 01 */	li r0, 0x1
-/* 81379F44 | 90 0D A9 A4 */	stw r0, lbl_816989E4@sda21(r0)
+/* 81379F44 | 90 0D A9 A4 */	stw r0, BS2NoDisk@sda21(r0)
 /* 81379F48 | 48 00 00 0C */	b .L_81379F54
 .L_81379F4C:
 /* 81379F4C | 38 00 00 00 */	li r0, 0x0
-/* 81379F50 | 90 0D A9 A4 */	stw r0, lbl_816989E4@sda21(r0)
+/* 81379F50 | 90 0D A9 A4 */	stw r0, BS2NoDisk@sda21(r0)
 .L_81379F54:
 /* 81379F54 | 38 61 00 40 */	addi r3, r1, 0x40
 /* 81379F58 | 38 80 00 00 */	li r4, 0x0
@@ -644,7 +644,7 @@
 /* 81379F6C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81379F70 | 40 82 00 28 */	bne .L_81379F98
 /* 81379F74 | 38 00 00 01 */	li r0, 0x1
-/* 81379F78 | 90 0D A9 90 */	stw r0, lbl_816989D0@sda21(r0)
+/* 81379F78 | 90 0D A9 90 */	stw r0, InvalidShutdown@sda21(r0)
 /* 81379F7C | 48 1B D7 39 */	bl fn_815376B4
 /* 81379F80 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81379F84 | 40 82 02 70 */	bne .L_8137A1F4
@@ -671,26 +671,26 @@
 /* 81379FD0 | 48 00 00 1C */	b .L_81379FEC
 .L_81379FD4:
 /* 81379FD4 | 38 00 00 01 */	li r0, 0x1
-/* 81379FD8 | 90 0D A9 98 */	stw r0, lbl_816989D8@sda21(r0)
+/* 81379FD8 | 90 0D A9 98 */	stw r0, BS2LastMode@sda21(r0)
 /* 81379FDC | 48 00 00 24 */	b .L_8137A000
 .L_81379FE0:
 /* 81379FE0 | 38 00 00 02 */	li r0, 0x2
-/* 81379FE4 | 90 0D A9 98 */	stw r0, lbl_816989D8@sda21(r0)
+/* 81379FE4 | 90 0D A9 98 */	stw r0, BS2LastMode@sda21(r0)
 /* 81379FE8 | 48 00 00 18 */	b .L_8137A000
 .L_81379FEC:
 /* 81379FEC | 38 00 00 04 */	li r0, 0x4
-/* 81379FF0 | 90 0D A9 98 */	stw r0, lbl_816989D8@sda21(r0)
+/* 81379FF0 | 90 0D A9 98 */	stw r0, BS2LastMode@sda21(r0)
 /* 81379FF4 | 48 00 00 0C */	b .L_8137A000
 .L_81379FF8:
 /* 81379FF8 | 38 00 00 00 */	li r0, 0x0
-/* 81379FFC | 90 0D A9 98 */	stw r0, lbl_816989D8@sda21(r0)
+/* 81379FFC | 90 0D A9 98 */	stw r0, BS2LastMode@sda21(r0)
 .L_8137A000:
 /* 8137A000 | 3A FC 10 30 */	addi r23, r28, 0x1030
 /* 8137A004 | 88 17 00 05 */	lbz r0, 0x5(r23)
 /* 8137A008 | 28 00 00 FF */	cmplwi r0, 0xff
 /* 8137A00C | 40 82 00 10 */	bne .L_8137A01C
 /* 8137A010 | 38 00 00 01 */	li r0, 0x1
-/* 8137A014 | 90 0D A9 90 */	stw r0, lbl_816989D0@sda21(r0)
+/* 8137A014 | 90 0D A9 90 */	stw r0, InvalidShutdown@sda21(r0)
 /* 8137A018 | 48 00 01 DC */	b .L_8137A1F4
 .L_8137A01C:
 /* 8137A01C | 48 00 64 41 */	bl getVISolidClrYCol
@@ -703,7 +703,7 @@
 /* 8137A038 | 40 82 00 10 */	bne .L_8137A048
 .L_8137A03C:
 /* 8137A03C | 38 00 00 01 */	li r0, 0x1
-/* 8137A040 | 90 0D A9 90 */	stw r0, lbl_816989D0@sda21(r0)
+/* 8137A040 | 90 0D A9 90 */	stw r0, InvalidShutdown@sda21(r0)
 /* 8137A044 | 48 00 01 B0 */	b .L_8137A1F4
 .L_8137A048:
 /* 8137A048 | 38 7C 10 30 */	addi r3, r28, 0x1030
@@ -712,10 +712,10 @@
 /* 8137A054 | 40 82 00 94 */	bne .L_8137A0E8
 /* 8137A058 | 88 03 00 07 */	lbz r0, 0x7(r3)
 /* 8137A05C | 38 60 00 01 */	li r3, 0x1
-/* 8137A060 | 90 6D A9 A8 */	stw r3, lbl_816989E8@sda21(r0)
+/* 8137A060 | 90 6D A9 A8 */	stw r3, BS2ReturnToMenu@sda21(r0)
 /* 8137A064 | 28 00 00 01 */	cmplwi r0, 0x1
 /* 8137A068 | 40 82 00 0C */	bne .L_8137A074
-/* 8137A06C | 90 6D A9 B0 */	stw r3, lbl_816989F0@sda21(r0)
+/* 8137A06C | 90 6D A9 B0 */	stw r3, BS2ReturnToDataManager@sda21(r0)
 /* 8137A070 | 48 00 00 78 */	b .L_8137A0E8
 .L_8137A074:
 /* 8137A074 | 28 00 00 02 */	cmplwi r0, 0x2
@@ -748,14 +748,14 @@
 /* 8137A0D8 | 7C 1E 00 40 */	cmplw r30, r0
 /* 8137A0DC | 41 80 FF D8 */	blt .L_8137A0B4
 /* 8137A0E0 | 38 00 00 01 */	li r0, 0x1
-/* 8137A0E4 | 90 0D A9 B4 */	stw r0, lbl_816989F4@sda21(r0)
+/* 8137A0E4 | 90 0D A9 B4 */	stw r0, BS2ReturnArgs@sda21(r0)
 .L_8137A0E8:
 /* 8137A0E8 | 38 7C 10 30 */	addi r3, r28, 0x1030
 /* 8137A0EC | 88 03 00 05 */	lbz r0, 0x5(r3)
 /* 8137A0F0 | 28 00 00 05 */	cmplwi r0, 0x5
 /* 8137A0F4 | 40 82 00 0C */	bne .L_8137A100
 /* 8137A0F8 | 38 00 00 01 */	li r0, 0x1
-/* 8137A0FC | 90 0D A9 AC */	stw r0, lbl_816989EC@sda21(r0)
+/* 8137A0FC | 90 0D A9 AC */	stw r0, BS2ReturnToIdle@sda21(r0)
 .L_8137A100:
 /* 8137A100 | 38 7C 10 30 */	addi r3, r28, 0x1030
 /* 8137A104 | 88 03 00 05 */	lbz r0, 0x5(r3)
@@ -789,7 +789,7 @@
 /* 8137A16C | 7C 1E 00 40 */	cmplw r30, r0
 /* 8137A170 | 41 80 FF D8 */	blt .L_8137A148
 /* 8137A174 | 38 00 00 01 */	li r0, 0x1
-/* 8137A178 | 90 0D A9 B8 */	stw r0, lbl_816989F8@sda21(r0)
+/* 8137A178 | 90 0D A9 B8 */	stw r0, BS2LaunchTitle@sda21(r0)
 .L_8137A17C:
 /* 8137A17C | 38 7C 10 30 */	addi r3, r28, 0x1030
 /* 8137A180 | 88 03 00 06 */	lbz r0, 0x6(r3)
@@ -798,13 +798,13 @@
 /* 8137A18C | 88 03 00 04 */	lbz r0, 0x4(r3)
 /* 8137A190 | 54 00 06 73 */	rlwinm. r0, r0, 0, 25, 25
 /* 8137A194 | 41 82 00 50 */	beq .L_8137A1E4
-/* 8137A198 | 80 0D A9 A4 */	lwz r0, lbl_816989E4@sda21(r0)
+/* 8137A198 | 80 0D A9 A4 */	lwz r0, BS2NoDisk@sda21(r0)
 /* 8137A19C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137A1A0 | 40 82 00 44 */	bne .L_8137A1E4
-/* 8137A1A4 | 80 0D A9 98 */	lwz r0, lbl_816989D8@sda21(r0)
+/* 8137A1A4 | 80 0D A9 98 */	lwz r0, BS2LastMode@sda21(r0)
 /* 8137A1A8 | 28 00 00 01 */	cmplwi r0, 0x1
 /* 8137A1AC | 41 82 00 10 */	beq .L_8137A1BC
-/* 8137A1B0 | 80 0D A9 98 */	lwz r0, lbl_816989D8@sda21(r0)
+/* 8137A1B0 | 80 0D A9 98 */	lwz r0, BS2LastMode@sda21(r0)
 /* 8137A1B4 | 28 00 00 04 */	cmplwi r0, 0x4
 /* 8137A1B8 | 40 82 00 2C */	bne .L_8137A1E4
 .L_8137A1BC:
@@ -813,16 +813,16 @@
 /* 8137A1C4 | 48 1B 44 DD */	bl OSReport
 /* 8137A1C8 | 38 60 00 01 */	li r3, 0x1
 /* 8137A1CC | 38 00 00 00 */	li r0, 0x0
-/* 8137A1D0 | 90 6D A9 9C */	stw r3, lbl_816989DC@sda21(r0)
-/* 8137A1D4 | 90 0D 84 D8 */	stw r0, lbl_81696518@sda21(r0)
-/* 8137A1D8 | 90 0D A9 A0 */	stw r0, lbl_816989E0@sda21(r0)
-/* 8137A1DC | 90 0D 84 DC */	stw r0, lbl_8169651C@sda21(r0)
+/* 8137A1D0 | 90 6D A9 9C */	stw r3, BS2BootFromCache@sda21(r0)
+/* 8137A1D4 | 90 0D 84 D8 */	stw r0, BS2BootCaching@sda21(r0)
+/* 8137A1D8 | 90 0D A9 A0 */	stw r0, BS2DriveReset@sda21(r0)
+/* 8137A1DC | 90 0D 84 DC */	stw r0, BS2WaitSpinup@sda21(r0)
 /* 8137A1E0 | 48 00 00 14 */	b .L_8137A1F4
 .L_8137A1E4:
 /* 8137A1E4 | 38 60 00 00 */	li r3, 0x0
 /* 8137A1E8 | 38 00 00 01 */	li r0, 0x1
-/* 8137A1EC | 90 6D A9 9C */	stw r3, lbl_816989DC@sda21(r0)
-/* 8137A1F0 | 90 0D 84 D8 */	stw r0, lbl_81696518@sda21(r0)
+/* 8137A1EC | 90 6D A9 9C */	stw r3, BS2BootFromCache@sda21(r0)
+/* 8137A1F0 | 90 0D 84 D8 */	stw r0, BS2BootCaching@sda21(r0)
 .L_8137A1F4:
 /* 8137A1F4 | 3B 00 00 00 */	li r24, 0x0
 /* 8137A1F8 | 38 80 00 FF */	li r4, 0xff
@@ -878,10 +878,10 @@
 /* 8137A2C0 | 2C 19 00 00 */	cmpwi r25, 0x0
 /* 8137A2C4 | 40 82 00 38 */	bne .L_8137A2FC
 /* 8137A2C8 | 38 00 00 01 */	li r0, 0x1
-/* 8137A2CC | 93 0D A9 9C */	stw r24, lbl_816989DC@sda21(r0)
+/* 8137A2CC | 93 0D A9 9C */	stw r24, BS2BootFromCache@sda21(r0)
 /* 8137A2D0 | 3B 20 FF F4 */	li r25, -0xc
-/* 8137A2D4 | 90 0D 84 D8 */	stw r0, lbl_81696518@sda21(r0)
-/* 8137A2D8 | 90 0D 84 DC */	stw r0, lbl_8169651C@sda21(r0)
+/* 8137A2D4 | 90 0D 84 D8 */	stw r0, BS2BootCaching@sda21(r0)
+/* 8137A2D8 | 90 0D 84 DC */	stw r0, BS2WaitSpinup@sda21(r0)
 /* 8137A2DC | 48 00 00 20 */	b .L_8137A2FC
 .L_8137A2E0:
 /* 8137A2E0 | 38 77 BF 90 */	addi r3, r23, BS2CacheFileInfo@l
@@ -930,33 +930,33 @@
 /* 8137A380 | 48 1E AE ED */	bl NANDOpen
 /* 8137A384 | 38 60 00 11 */	li r3, 0x11
 /* 8137A388 | 48 00 60 B9 */	bl setVISolidClrYCol
-/* 8137A38C | 80 0D A9 B4 */	lwz r0, lbl_816989F4@sda21(r0)
+/* 8137A38C | 80 0D A9 B4 */	lwz r0, BS2ReturnArgs@sda21(r0)
 /* 8137A390 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137A394 | 41 82 00 10 */	beq .L_8137A3A4
 /* 8137A398 | 38 00 00 03 */	li r0, 0x3
-/* 8137A39C | 90 0D A9 BC */	stw r0, lbl_816989FC@sda21(r0)
+/* 8137A39C | 90 0D A9 BC */	stw r0, BS2SalvageMode@sda21(r0)
 /* 8137A3A0 | 48 00 00 3C */	b .L_8137A3DC
 .L_8137A3A4:
-/* 8137A3A4 | 80 0D A9 B0 */	lwz r0, lbl_816989F0@sda21(r0)
+/* 8137A3A4 | 80 0D A9 B0 */	lwz r0, BS2ReturnToDataManager@sda21(r0)
 /* 8137A3A8 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137A3AC | 41 82 00 10 */	beq .L_8137A3BC
 /* 8137A3B0 | 38 00 00 02 */	li r0, 0x2
-/* 8137A3B4 | 90 0D A9 BC */	stw r0, lbl_816989FC@sda21(r0)
+/* 8137A3B4 | 90 0D A9 BC */	stw r0, BS2SalvageMode@sda21(r0)
 /* 8137A3B8 | 48 00 00 24 */	b .L_8137A3DC
 .L_8137A3BC:
-/* 8137A3BC | 80 0D A9 A8 */	lwz r0, lbl_816989E8@sda21(r0)
+/* 8137A3BC | 80 0D A9 A8 */	lwz r0, BS2ReturnToMenu@sda21(r0)
 /* 8137A3C0 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137A3C4 | 41 82 00 10 */	beq .L_8137A3D4
 /* 8137A3C8 | 38 00 00 01 */	li r0, 0x1
-/* 8137A3CC | 90 0D A9 BC */	stw r0, lbl_816989FC@sda21(r0)
+/* 8137A3CC | 90 0D A9 BC */	stw r0, BS2SalvageMode@sda21(r0)
 /* 8137A3D0 | 48 00 00 0C */	b .L_8137A3DC
 .L_8137A3D4:
 /* 8137A3D4 | 38 00 00 00 */	li r0, 0x0
-/* 8137A3D8 | 90 0D A9 BC */	stw r0, lbl_816989FC@sda21(r0)
+/* 8137A3D8 | 90 0D A9 BC */	stw r0, BS2SalvageMode@sda21(r0)
 .L_8137A3DC:
 /* 8137A3DC | 3A E0 00 00 */	li r23, 0x0
 /* 8137A3E0 | 3B 00 00 00 */	li r24, 0x0
-/* 8137A3E4 | 92 ED A9 C4 */	stw r23, lbl_81698A04@sda21(r0)
+/* 8137A3E4 | 92 ED A9 C4 */	stw r23, InvalidSram@sda21(r0)
 /* 8137A3E8 | 3B C0 00 00 */	li r30, 0x0
 /* 8137A3EC | 48 1B 89 05 */	bl fn_81532CF0
 /* 8137A3F0 | 7C 7F 1B 78 */	mr r31, r3
@@ -1002,7 +1002,7 @@
 /* 8137A484 | 88 7F 00 13 */	lbz r3, 0x13(r31)
 /* 8137A488 | 60 63 00 1C */	ori r3, r3, 0x1c
 /* 8137A48C | 98 7F 00 13 */	stb r3, 0x13(r31)
-/* 8137A490 | 90 0D A9 C4 */	stw r0, lbl_81698A04@sda21(r0)
+/* 8137A490 | 90 0D A9 C4 */	stw r0, InvalidSram@sda21(r0)
 .L_8137A494:
 /* 8137A494 | 7F 03 C3 78 */	mr r3, r24
 /* 8137A498 | 48 1B 8B D9 */	bl fn_81533070
@@ -1013,10 +1013,10 @@
 /* 8137A4A8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137A4AC | 41 82 FF F8 */	beq .L_8137A4A4
 .L_8137A4B0:
-/* 8137A4B0 | 80 0D A9 C4 */	lwz r0, lbl_81698A04@sda21(r0)
+/* 8137A4B0 | 80 0D A9 C4 */	lwz r0, InvalidSram@sda21(r0)
 /* 8137A4B4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137A4B8 | 40 82 01 44 */	bne .L_8137A5FC
-/* 8137A4BC | 80 0D A9 98 */	lwz r0, lbl_816989D8@sda21(r0)
+/* 8137A4BC | 80 0D A9 98 */	lwz r0, BS2LastMode@sda21(r0)
 /* 8137A4C0 | 28 00 00 02 */	cmplwi r0, 0x2
 /* 8137A4C4 | 40 82 01 38 */	bne .L_8137A5FC
 /* 8137A4C8 | 48 1E FD 81 */	bl fn_8156A248
@@ -1114,22 +1114,22 @@
 /* 8137A60C | 80 03 31 64 */	lwz r0, 0x3164(r3)
 /* 8137A610 | 28 00 00 01 */	cmplwi r0, 0x1
 /* 8137A614 | 40 82 00 18 */	bne .L_8137A62C
-/* 8137A618 | 80 0D A9 98 */	lwz r0, lbl_816989D8@sda21(r0)
+/* 8137A618 | 80 0D A9 98 */	lwz r0, BS2LastMode@sda21(r0)
 /* 8137A61C | 28 00 00 02 */	cmplwi r0, 0x2
 /* 8137A620 | 40 82 00 0C */	bne .L_8137A62C
 /* 8137A624 | 38 00 00 01 */	li r0, 0x1
-/* 8137A628 | 90 0D A9 94 */	stw r0, lbl_816989D4@sda21(r0)
+/* 8137A628 | 90 0D A9 94 */	stw r0, ShutdownFromGCFlag@sda21(r0)
 .L_8137A62C:
 /* 8137A62C | 48 1F 05 71 */	bl fn_8156AB9C
 /* 8137A630 | 7C 60 07 74 */	extsb r0, r3
 /* 8137A634 | 3C 60 80 00 */	lis r3, 0x8000
-/* 8137A638 | 90 0D A9 C0 */	stw r0, lbl_81698A00@sda21(r0)
-/* 8137A63C | 80 0D A9 C0 */	lwz r0, lbl_81698A00@sda21(r0)
+/* 8137A638 | 90 0D A9 C0 */	stw r0, BS2VideoMode@sda21(r0)
+/* 8137A63C | 80 0D A9 C0 */	lwz r0, BS2VideoMode@sda21(r0)
 /* 8137A640 | 90 03 00 CC */	stw r0, 0xcc(r3)
-/* 8137A644 | 80 0D A9 A8 */	lwz r0, lbl_816989E8@sda21(r0)
+/* 8137A644 | 80 0D A9 A8 */	lwz r0, BS2ReturnToMenu@sda21(r0)
 /* 8137A648 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137A64C | 40 82 00 78 */	bne .L_8137A6C4
-/* 8137A650 | 80 0D A9 B0 */	lwz r0, lbl_816989F0@sda21(r0)
+/* 8137A650 | 80 0D A9 B0 */	lwz r0, BS2ReturnToDataManager@sda21(r0)
 /* 8137A654 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137A658 | 40 82 00 6C */	bne .L_8137A6C4
 /* 8137A65C | 48 1E FB 35 */	bl fn_8156A190
@@ -1139,7 +1139,7 @@
 /* 8137A66C | 48 1C 3C 8D */	bl fn_8153E2F8
 /* 8137A670 | 28 03 00 01 */	cmplwi r3, 0x1
 /* 8137A674 | 40 82 00 40 */	bne .L_8137A6B4
-/* 8137A678 | 80 0D A9 C0 */	lwz r0, lbl_81698A00@sda21(r0)
+/* 8137A678 | 80 0D A9 C0 */	lwz r0, BS2VideoMode@sda21(r0)
 /* 8137A67C | 2C 00 00 05 */	cmpwi r0, 0x5
 /* 8137A680 | 41 82 00 14 */	beq .L_8137A694
 /* 8137A684 | 40 80 00 1C */	bge .L_8137A6A0
@@ -1151,13 +1151,13 @@
 /* 8137A698 | 48 1C 21 F9 */	bl fn_8153C890
 /* 8137A69C | 48 00 00 98 */	b .L_8137A734
 .L_8137A6A0:
-/* 8137A6A0 | 80 0D A9 C0 */	lwz r0, lbl_81698A00@sda21(r0)
+/* 8137A6A0 | 80 0D A9 C0 */	lwz r0, BS2VideoMode@sda21(r0)
 /* 8137A6A4 | 54 03 10 3A */	slwi r3, r0, 2
 /* 8137A6A8 | 38 63 00 02 */	addi r3, r3, 0x2
 /* 8137A6AC | 48 1C 21 E5 */	bl fn_8153C890
 /* 8137A6B0 | 48 00 00 84 */	b .L_8137A734
 .L_8137A6B4:
-/* 8137A6B4 | 80 0D A9 C0 */	lwz r0, lbl_81698A00@sda21(r0)
+/* 8137A6B4 | 80 0D A9 C0 */	lwz r0, BS2VideoMode@sda21(r0)
 /* 8137A6B8 | 54 03 10 3A */	slwi r3, r0, 2
 /* 8137A6BC | 48 1C 21 D5 */	bl fn_8153C890
 /* 8137A6C0 | 48 00 00 74 */	b .L_8137A734
@@ -1172,7 +1172,7 @@
 /* 8137A6E0 | 48 1C 3C 19 */	bl fn_8153E2F8
 /* 8137A6E4 | 28 03 00 01 */	cmplwi r3, 0x1
 /* 8137A6E8 | 40 82 00 40 */	bne .L_8137A728
-/* 8137A6EC | 80 0D A9 C0 */	lwz r0, lbl_81698A00@sda21(r0)
+/* 8137A6EC | 80 0D A9 C0 */	lwz r0, BS2VideoMode@sda21(r0)
 /* 8137A6F0 | 2C 00 00 05 */	cmpwi r0, 0x5
 /* 8137A6F4 | 41 82 00 14 */	beq .L_8137A708
 /* 8137A6F8 | 40 80 00 1C */	bge .L_8137A714
@@ -1184,13 +1184,13 @@
 /* 8137A70C | 48 1C 21 85 */	bl fn_8153C890
 /* 8137A710 | 48 00 00 24 */	b .L_8137A734
 .L_8137A714:
-/* 8137A714 | 80 0D A9 C0 */	lwz r0, lbl_81698A00@sda21(r0)
+/* 8137A714 | 80 0D A9 C0 */	lwz r0, BS2VideoMode@sda21(r0)
 /* 8137A718 | 54 03 10 3A */	slwi r3, r0, 2
 /* 8137A71C | 38 63 00 02 */	addi r3, r3, 0x2
 /* 8137A720 | 48 1C 21 71 */	bl fn_8153C890
 /* 8137A724 | 48 00 00 10 */	b .L_8137A734
 .L_8137A728:
-/* 8137A728 | 80 0D A9 C0 */	lwz r0, lbl_81698A00@sda21(r0)
+/* 8137A728 | 80 0D A9 C0 */	lwz r0, BS2VideoMode@sda21(r0)
 /* 8137A72C | 54 03 10 3A */	slwi r3, r0, 2
 /* 8137A730 | 48 1C 21 61 */	bl fn_8153C890
 .L_8137A734:
@@ -1206,7 +1206,7 @@
 /* 8137A758 | 48 1B 7F 25 */	bl __OSGetRTC
 /* 8137A75C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137A760 | 41 82 00 3C */	beq .L_8137A79C
-/* 8137A764 | 48 1E FB 51 */	bl fn_8156A2B4
+/* 8137A764 | 48 1E FB 51 */	bl SCGetCounterBias
 /* 8137A768 | 80 01 00 18 */	lwz r0, 0x18(r1)
 /* 8137A76C | 38 80 00 00 */	li r4, 0x0
 /* 8137A770 | 7C C0 1A 14 */	add r6, r0, r3
@@ -1243,7 +1243,7 @@
 /* 8137A7E0 | 4C C6 31 82 */	crclr cr1eq
 /* 8137A7E4 | 48 1B 3E BD */	bl OSReport
 .L_8137A7E8:
-/* 8137A7E8 | 80 0D A9 94 */	lwz r0, lbl_816989D4@sda21(r0)
+/* 8137A7E8 | 80 0D A9 94 */	lwz r0, ShutdownFromGCFlag@sda21(r0)
 /* 8137A7EC | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137A7F0 | 41 82 00 14 */	beq .L_8137A804
 /* 8137A7F4 | 38 7D 03 FD */	addi r3, r29, 0x3fd
@@ -1251,7 +1251,7 @@
 /* 8137A7FC | 48 1B 3E A5 */	bl OSReport
 /* 8137A800 | 48 00 5E 01 */	bl OSShutdownSystem
 .L_8137A804:
-/* 8137A804 | 80 0D A9 90 */	lwz r0, lbl_816989D0@sda21(r0)
+/* 8137A804 | 80 0D A9 90 */	lwz r0, InvalidShutdown@sda21(r0)
 /* 8137A808 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137A80C | 40 82 01 F8 */	bne .L_8137AA04
 /* 8137A810 | 3A FC 10 30 */	addi r23, r28, 0x1030
@@ -1264,7 +1264,7 @@
 /* 8137A82C | 38 7D 04 17 */	addi r3, r29, 0x417
 /* 8137A830 | 4C C6 31 82 */	crclr cr1eq
 /* 8137A834 | 48 1B 3E 6D */	bl OSReport
-/* 8137A838 | 80 0D A9 A4 */	lwz r0, lbl_816989E4@sda21(r0)
+/* 8137A838 | 80 0D A9 A4 */	lwz r0, BS2NoDisk@sda21(r0)
 /* 8137A83C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137A840 | 40 82 01 0C */	bne .L_8137A94C
 /* 8137A844 | 88 17 00 05 */	lbz r0, 0x5(r23)
@@ -1340,11 +1340,11 @@
 .L_8137A94C:
 /* 8137A94C | 38 60 00 00 */	li r3, 0x0
 /* 8137A950 | 38 00 00 01 */	li r0, 0x1
-/* 8137A954 | 90 6D A9 9C */	stw r3, lbl_816989DC@sda21(r0)
-/* 8137A958 | 90 0D 84 D8 */	stw r0, lbl_81696518@sda21(r0)
+/* 8137A954 | 90 6D A9 9C */	stw r3, BS2BootFromCache@sda21(r0)
+/* 8137A958 | 90 0D 84 D8 */	stw r0, BS2BootCaching@sda21(r0)
 /* 8137A95C | 48 00 00 C0 */	b .L_8137AA1C
 .L_8137A960:
-/* 8137A960 | 80 0D A9 AC */	lwz r0, lbl_816989EC@sda21(r0)
+/* 8137A960 | 80 0D A9 AC */	lwz r0, BS2ReturnToIdle@sda21(r0)
 /* 8137A964 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137A968 | 41 82 00 18 */	beq .L_8137A980
 /* 8137A96C | 38 7D 04 43 */	addi r3, r29, 0x443
@@ -1369,16 +1369,16 @@
 /* 8137A9B0 | 48 1B 3C F1 */	bl OSReport
 /* 8137A9B4 | 38 60 00 01 */	li r3, 0x1
 /* 8137A9B8 | 38 00 00 00 */	li r0, 0x0
-/* 8137A9BC | 90 6D A9 A0 */	stw r3, lbl_816989E0@sda21(r0)
-/* 8137A9C0 | 90 6D 84 DC */	stw r3, lbl_8169651C@sda21(r0)
-/* 8137A9C4 | 90 0D A9 9C */	stw r0, lbl_816989DC@sda21(r0)
-/* 8137A9C8 | 90 6D 84 D8 */	stw r3, lbl_81696518@sda21(r0)
+/* 8137A9BC | 90 6D A9 A0 */	stw r3, BS2DriveReset@sda21(r0)
+/* 8137A9C0 | 90 6D 84 DC */	stw r3, BS2WaitSpinup@sda21(r0)
+/* 8137A9C4 | 90 0D A9 9C */	stw r0, BS2BootFromCache@sda21(r0)
+/* 8137A9C8 | 90 6D 84 D8 */	stw r3, BS2BootCaching@sda21(r0)
 /* 8137A9CC | 48 00 00 50 */	b .L_8137AA1C
 .L_8137A9D0:
-/* 8137A9D0 | 80 0D A9 A8 */	lwz r0, lbl_816989E8@sda21(r0)
+/* 8137A9D0 | 80 0D A9 A8 */	lwz r0, BS2ReturnToMenu@sda21(r0)
 /* 8137A9D4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137A9D8 | 40 82 00 10 */	bne .L_8137A9E8
-/* 8137A9DC | 80 0D A9 B0 */	lwz r0, lbl_816989F0@sda21(r0)
+/* 8137A9DC | 80 0D A9 B0 */	lwz r0, BS2ReturnToDataManager@sda21(r0)
 /* 8137A9E0 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137A9E4 | 41 82 00 38 */	beq .L_8137AA1C
 .L_8137A9E8:
@@ -1386,24 +1386,24 @@
 /* 8137A9EC | 4C C6 31 82 */	crclr cr1eq
 /* 8137A9F0 | 48 1B 3C B1 */	bl OSReport
 /* 8137A9F4 | 38 00 00 01 */	li r0, 0x1
-/* 8137A9F8 | 90 0D A9 A0 */	stw r0, lbl_816989E0@sda21(r0)
-/* 8137A9FC | 90 0D 84 DC */	stw r0, lbl_8169651C@sda21(r0)
+/* 8137A9F8 | 90 0D A9 A0 */	stw r0, BS2DriveReset@sda21(r0)
+/* 8137A9FC | 90 0D 84 DC */	stw r0, BS2WaitSpinup@sda21(r0)
 /* 8137AA00 | 48 00 00 1C */	b .L_8137AA1C
 .L_8137AA04:
 /* 8137AA04 | 38 7D 04 70 */	addi r3, r29, 0x470
 /* 8137AA08 | 4C C6 31 82 */	crclr cr1eq
 /* 8137AA0C | 48 1B 3C 95 */	bl OSReport
 /* 8137AA10 | 38 00 00 01 */	li r0, 0x1
-/* 8137AA14 | 90 0D A9 A0 */	stw r0, lbl_816989E0@sda21(r0)
-/* 8137AA18 | 90 0D 84 DC */	stw r0, lbl_8169651C@sda21(r0)
+/* 8137AA14 | 90 0D A9 A0 */	stw r0, BS2DriveReset@sda21(r0)
+/* 8137AA18 | 90 0D 84 DC */	stw r0, BS2WaitSpinup@sda21(r0)
 .L_8137AA1C:
-/* 8137AA1C | 80 0D A9 A8 */	lwz r0, lbl_816989E8@sda21(r0)
+/* 8137AA1C | 80 0D A9 A8 */	lwz r0, BS2ReturnToMenu@sda21(r0)
 /* 8137AA20 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137AA24 | 40 82 00 1C */	bne .L_8137AA40
-/* 8137AA28 | 80 0D A9 B0 */	lwz r0, lbl_816989F0@sda21(r0)
+/* 8137AA28 | 80 0D A9 B0 */	lwz r0, BS2ReturnToDataManager@sda21(r0)
 /* 8137AA2C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137AA30 | 40 82 00 10 */	bne .L_8137AA40
-/* 8137AA34 | 80 0D A9 C0 */	lwz r0, lbl_81698A00@sda21(r0)
+/* 8137AA34 | 80 0D A9 C0 */	lwz r0, BS2VideoMode@sda21(r0)
 /* 8137AA38 | 54 03 10 3A */	slwi r3, r0, 2
 /* 8137AA3C | 48 1C 63 65 */	bl fn_81540DA0
 .L_8137AA40:
@@ -1434,10 +1434,10 @@
 /* 8137AA9C | 48 1C 25 4D */	bl VIWaitForRetrace
 /* 8137AAA0 | 38 61 00 88 */	addi r3, r1, 0x88
 /* 8137AAA4 | 48 1F BE 8D */	bl fn_81576930
-/* 8137AAA8 | 80 0D A9 90 */	lwz r0, lbl_816989D0@sda21(r0)
+/* 8137AAA8 | 80 0D A9 90 */	lwz r0, InvalidShutdown@sda21(r0)
 /* 8137AAAC | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137AAB0 | 40 82 02 F4 */	bne .L_8137ADA4
-/* 8137AAB4 | 80 0D A9 B8 */	lwz r0, lbl_816989F8@sda21(r0)
+/* 8137AAB4 | 80 0D A9 B8 */	lwz r0, BS2LaunchTitle@sda21(r0)
 /* 8137AAB8 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137AABC | 41 82 02 E8 */	beq .L_8137ADA4
 /* 8137AAC0 | 3A FC 00 00 */	addi r23, r28, 0x0
@@ -2130,14 +2130,14 @@
 .balign 8
 
 # .sdata:0x0 | 0x81696518 | size: 0x4
-.obj lbl_81696518, global
+.obj BS2BootCaching, global
 	.4byte 0x00000001
-.endobj lbl_81696518
+.endobj BS2BootCaching
 
 # .sdata:0x4 | 0x8169651C | size: 0x4
-.obj lbl_8169651C, global
+.obj BS2WaitSpinup, global
 	.4byte 0x00000001
-.endobj lbl_8169651C
+.endobj BS2WaitSpinup
 
 # .sdata:0x8 | 0x81696520 | size: 0x4
 .obj lbl_81696520, global
@@ -2231,71 +2231,71 @@
 .balign 8
 
 # .sbss:0x0 | 0x816989D0 | size: 0x4
-.obj lbl_816989D0, global
+.obj InvalidShutdown, global
 	.skip 0x4
-.endobj lbl_816989D0
+.endobj InvalidShutdown
 
 # .sbss:0x4 | 0x816989D4 | size: 0x4
-.obj lbl_816989D4, global
+.obj ShutdownFromGCFlag, global
 	.skip 0x4
-.endobj lbl_816989D4
+.endobj ShutdownFromGCFlag
 
 # .sbss:0x8 | 0x816989D8 | size: 0x4
-.obj lbl_816989D8, global
+.obj BS2LastMode, global
 	.skip 0x4
-.endobj lbl_816989D8
+.endobj BS2LastMode
 
 # .sbss:0xC | 0x816989DC | size: 0x4
-.obj lbl_816989DC, global
+.obj BS2BootFromCache, global
 	.skip 0x4
-.endobj lbl_816989DC
+.endobj BS2BootFromCache
 
 # .sbss:0x10 | 0x816989E0 | size: 0x4
-.obj lbl_816989E0, global
+.obj BS2DriveReset, global
 	.skip 0x4
-.endobj lbl_816989E0
+.endobj BS2DriveReset
 
 # .sbss:0x14 | 0x816989E4 | size: 0x4
-.obj lbl_816989E4, global
+.obj BS2NoDisk, global
 	.skip 0x4
-.endobj lbl_816989E4
+.endobj BS2NoDisk
 
 # .sbss:0x18 | 0x816989E8 | size: 0x4
-.obj lbl_816989E8, global
+.obj BS2ReturnToMenu, global
 	.skip 0x4
-.endobj lbl_816989E8
+.endobj BS2ReturnToMenu
 
 # .sbss:0x1C | 0x816989EC | size: 0x4
-.obj lbl_816989EC, global
+.obj BS2ReturnToIdle, global
 	.skip 0x4
-.endobj lbl_816989EC
+.endobj BS2ReturnToIdle
 
 # .sbss:0x20 | 0x816989F0 | size: 0x4
-.obj lbl_816989F0, global
+.obj BS2ReturnToDataManager, global
 	.skip 0x4
-.endobj lbl_816989F0
+.endobj BS2ReturnToDataManager
 
 # .sbss:0x24 | 0x816989F4 | size: 0x4
-.obj lbl_816989F4, global
+.obj BS2ReturnArgs, global
 	.skip 0x4
-.endobj lbl_816989F4
+.endobj BS2ReturnArgs
 
 # .sbss:0x28 | 0x816989F8 | size: 0x4
-.obj lbl_816989F8, global
+.obj BS2LaunchTitle, global
 	.skip 0x4
-.endobj lbl_816989F8
+.endobj BS2LaunchTitle
 
 # .sbss:0x2C | 0x816989FC | size: 0x4
-.obj lbl_816989FC, global
+.obj BS2SalvageMode, global
 	.skip 0x4
-.endobj lbl_816989FC
+.endobj BS2SalvageMode
 
 # .sbss:0x30 | 0x81698A00 | size: 0x4
-.obj lbl_81698A00, global
+.obj BS2VideoMode, global
 	.skip 0x4
-.endobj lbl_81698A00
+.endobj BS2VideoMode
 
 # .sbss:0x34 | 0x81698A04 | size: 0x4
-.obj lbl_81698A04, global
+.obj InvalidSram, global
 	.skip 0x4
-.endobj lbl_81698A04
+.endobj InvalidSram

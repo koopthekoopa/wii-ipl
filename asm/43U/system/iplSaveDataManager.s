@@ -637,9 +637,9 @@
 /* 813584EC | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813584F0 | 7C 7F 1B 78 */	mr r31, r3
 /* 813584F4 | 48 00 00 65 */	bl setDefaultHeader__Q33ipl8savedata7ManagerFv
-/* 813584F8 | 3C 80 81 61 */	lis r4, lbl_8160D668@ha
+/* 813584F8 | 3C 80 81 61 */	lis r4, cDefaultChanList__3ipl@ha
 /* 813584FC | 38 7F 00 30 */	addi r3, r31, 0x30
-/* 81358500 | 38 84 D6 68 */	addi r4, r4, lbl_8160D668@l
+/* 81358500 | 38 84 D6 68 */	addi r4, r4, cDefaultChanList__3ipl@l
 /* 81358504 | 38 A0 03 00 */	li r5, 0x300
 /* 81358508 | 4B FD 7D 29 */	bl memcpy
 /* 8135850C | 7F E3 FB 78 */	mr r3, r31
@@ -1849,11 +1849,11 @@
 # .text:0x1894 | 0x8135954C | size: 0x50
 # ipl::savedata::Manager::isDefaultChannel(unsigned long, unsigned long)
 .fn isDefaultChannel__Q33ipl8savedata7ManagerFUlUl, global
-/* 8135954C | 3C C0 81 61 */	lis r6, lbl_8160D668@ha
+/* 8135954C | 3C C0 81 61 */	lis r6, cDefaultChanList__3ipl@ha
 /* 81359550 | 38 00 00 06 */	li r0, 0x6
 /* 81359554 | 54 A7 00 2E */	clrrwi r7, r5, 8
 /* 81359558 | 38 60 00 00 */	li r3, 0x0
-/* 8135955C | 38 C6 D6 68 */	addi r6, r6, lbl_8160D668@l
+/* 8135955C | 38 C6 D6 68 */	addi r6, r6, cDefaultChanList__3ipl@l
 /* 81359560 | 38 A0 00 00 */	li r5, 0x0
 /* 81359564 | 7C 09 03 A6 */	mtctr r0
 .L_81359568:
@@ -2121,7 +2121,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x8160D668 | size: 0x300
-.obj lbl_8160D668, global
+# ipl::cDefaultChanList
+.obj cDefaultChanList__3ipl, local
 	.4byte 0x01010000
 	.4byte 0x0000000F
 	.4byte 0x00000000
@@ -2314,7 +2315,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8160D668
+.endobj cDefaultChanList__3ipl
 
 # 0x81639148..0x81639200 | size: 0xB8
 .data

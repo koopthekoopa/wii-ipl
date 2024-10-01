@@ -143,7 +143,7 @@
 /* 8140DBC4 | 3B 60 00 01 */	li r27, 0x1
 /* 8140DBC8 | 48 00 00 58 */	b .L_8140DC20
 .L_8140DBCC:
-/* 8140DBCC | 88 0D AC A5 */	lbz r0, lbl_81698CE5@sda21(r0)
+/* 8140DBCC | 88 0D AC A5 */	lbz r0, sSysPauseFlag__19AxAdpcmSimplePlayer@sda21(r0)
 /* 8140DBD0 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8140DBD4 | 41 82 00 4C */	beq .L_8140DC20
 /* 8140DBD8 | 92 9D 00 04 */	stw r20, 0x4(r29)
@@ -158,7 +158,7 @@
 /* 8140DBF4 | 92 BD 00 04 */	stw r21, 0x4(r29)
 /* 8140DBF8 | 48 00 00 28 */	b .L_8140DC20
 .L_8140DBFC:
-/* 8140DBFC | 88 0D AC A5 */	lbz r0, lbl_81698CE5@sda21(r0)
+/* 8140DBFC | 88 0D AC A5 */	lbz r0, sSysPauseFlag__19AxAdpcmSimplePlayer@sda21(r0)
 /* 8140DC00 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8140DC04 | 40 82 00 1C */	bne .L_8140DC20
 /* 8140DC08 | 80 7D 00 00 */	lwz r3, 0x0(r29)
@@ -380,7 +380,7 @@
 /* 8140DEB8 | 3B 20 00 00 */	li r25, 0x0
 /* 8140DEBC | 7C 7E 1B 78 */	mr r30, r3
 /* 8140DEC0 | 7C DF 33 78 */	mr r31, r6
-/* 8140DEC4 | 9B 2D AC A5 */	stb r25, lbl_81698CE5@sda21(r0)
+/* 8140DEC4 | 9B 2D AC A5 */	stb r25, sSysPauseFlag__19AxAdpcmSimplePlayer@sda21(r0)
 /* 8140DEC8 | 80 03 00 00 */	lwz r0, 0x0(r3)
 /* 8140DECC | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8140DED0 | 40 82 00 0C */	bne .L_8140DEDC
@@ -685,7 +685,7 @@
 .L_8140E330:
 /* 8140E330 | 38 00 00 01 */	li r0, 0x1
 /* 8140E334 | 7F E3 FB 78 */	mr r3, r31
-/* 8140E338 | 98 0D AC A6 */	stb r0, lbl_81698CE6@sda21(r0)
+/* 8140E338 | 98 0D AC A6 */	stb r0, sPlayingFlag__19AxAdpcmSimplePlayer@sda21(r0)
 /* 8140E33C | C0 3E 00 04 */	lfs f1, 0x4(r30)
 /* 8140E340 | 48 00 00 39 */	bl setVolume__13AxAdpcmHandleFf
 .L_8140E344:
@@ -837,7 +837,7 @@
 /* 8140E534 | 93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 8140E538 | 7C 9F 23 78 */	mr r31, r4
 /* 8140E53C | 4B FF F4 65 */	bl __ct__Q34nw4r2ut17AutoInterruptLockFv
-/* 8140E540 | 9B ED AC A5 */	stb r31, lbl_81698CE5@sda21(r0)
+/* 8140E540 | 9B ED AC A5 */	stb r31, sSysPauseFlag__19AxAdpcmSimplePlayer@sda21(r0)
 /* 8140E544 | 38 61 00 08 */	addi r3, r1, 0x8
 /* 8140E548 | 38 80 FF FF */	li r4, -0x1
 /* 8140E54C | 4B FF F4 89 */	bl __dt__Q34nw4r2ut17AutoInterruptLockFv
@@ -995,14 +995,16 @@
 .endobj sSysInit__19AxAdpcmSimplePlayer
 
 # .sbss:0x5 | 0x81698CE5 | size: 0x1
-.obj lbl_81698CE5, global
+# AxAdpcmSimplePlayer::sSysPauseFlag
+.obj sSysPauseFlag__19AxAdpcmSimplePlayer, global
 	.skip 0x1
-.endobj lbl_81698CE5
+.endobj sSysPauseFlag__19AxAdpcmSimplePlayer
 
 # .sbss:0x6 | 0x81698CE6 | size: 0x1
-.obj lbl_81698CE6, global
+# AxAdpcmSimplePlayer::sPlayingFlag
+.obj sPlayingFlag__19AxAdpcmSimplePlayer, global
 	.skip 0x1
-.endobj lbl_81698CE6
+.endobj sPlayingFlag__19AxAdpcmSimplePlayer
 
 # .sbss:0x7 | 0x81698CE7 | size: 0x1
 .obj gap_12_81698CE7_sbss, global

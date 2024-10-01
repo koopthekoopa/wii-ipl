@@ -55,7 +55,7 @@ namespace ipl {
          * @note Size: 0x18
          */
         wchar_t* Message::getMessage(u32 id) const {
-            u32 addr = ((u32*)(&mpInfoData->offset))[(u16)id];
+            u32 addr = (&mpInfoData->offset)[(u16)id];
             return (wchar_t*)(mspMessageData + addr);
         }
     }

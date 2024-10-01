@@ -8,11 +8,11 @@ extern "C" {
 #endif
 
 typedef struct {
-    unsigned int magic;
-    int fstStart;
-    int fstSize;
-    int fileStart;
-    int pad[4];
+    u32     magic;
+    int     fstStart;
+    int     fstSize;
+    int     fileStart;
+    int     pad[4];
 } ARCHeader;
 
 typedef struct {
@@ -22,32 +22,32 @@ typedef struct {
     u32     entryNum;           // 0xC
     char*   FSTStringStart;     // 0x10
     u32     FSTLength;          // 0x14
-    u32     curDir;             // 0x18
+    u32     currDir;            // 0x18
 } ARCHandle;
 
 typedef struct {
-    ARCHandle* handle;      // 0x00
-    u32 startOffset;        // 0x04
-    u32 length;             // 0x08
+    ARCHandle*  handle;         // 0x00
+    u32         startOffset;    // 0x04
+    u32         length;         // 0x08
 } ARCFileInfo;
 
 typedef struct {
-    ARCHandle* handle;      // 0x00
-    u32 entryNum;           // 0x04
-    u32 location;           // 0x08
-    u32 next;               // 0x0C
+    ARCHandle*  handle;         // 0x00
+    u32         entryNum;       // 0x04
+    u32         location;       // 0x08
+    u32         next;           // 0x0C
 } ARCDir;
 
 typedef struct  {
-    ARCHandle* handle;      // 0x00
-    u32 entryNum;           // 0x04
-    BOOL isDir;             // 0x08
-    char* name;             // 0x10
+    ARCHandle*  handle;         // 0x00
+    u32         entryNum;       // 0x04
+    BOOL        isDir;          // 0x08
+    char*       name;           // 0x10
 } ARCDirEntry;
 
 #define ARC_MAGIC   0x55AA382D
 
-BOOL    ARCInitHandle(void* pBuffer, ARCHandle* pHandle);
+BOOL    ARCInitHandle(void* buffer, ARCHandle* pHandle);
 
 BOOL    ARCFastOpen(ARCHandle* handle, s32 entrynum, ARCFileInfo* info);
 

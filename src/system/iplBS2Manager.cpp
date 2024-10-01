@@ -346,22 +346,25 @@ namespace ipl {
 
                 int entry = i;
 
-                // If the entry cannot be found
+                // If the entry cannot be found then cancel update
                 if (entry == BS2GetUpdateEntryNum()) {
                     mEntryOffset = mEntrySize;
                     mbStartUpdate = false;
                 }
-                // If the entry was the previous one
+                // If the entry was the previous one then skip of
                 else if (entry == mPrevEntry) {
                     mPrevFound++;
-                    entry = mEntries[entry].size;
-                    u32 unk = (sizeof(BS2UpdateEntry) * MAX_ENTRIES) * mPrevFound;
-                    if (unk <= entry) {
-                        entry = unk;
+
+                    u32 skip = mEntries[entry].size;
+
+                    u32 limit = (sizeof(BS2UpdateEntry) * MAX_ENTRIES) * mPrevFound;
+                    if (limit <= skip) {
+                        skip = limit;
                     }
-                    mEntryOffset += entry;
+
+                    mEntryOffset += skip;
                 }
-                // If the entry was found
+                // If the entry was found then use it
                 else {
                     mPrevEntry = entry;
                     mPrevFound = 0;
@@ -374,7 +377,7 @@ namespace ipl {
          * @note Size: 0xF8
          */
         void Manager::bootNewSystem() {
-            while (WPADGetStatus() != 0) {
+            while (WPADGetStatus() != WPAD_ERR_OK) {
                 VIWaitForRetrace();
             }
 

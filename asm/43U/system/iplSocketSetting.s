@@ -21,7 +21,7 @@
 /* 81356E48 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81356E4C | 7C 08 02 A6 */	mflr r0
 /* 81356E50 | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 81356E54 | 88 0D A6 AE */	lbz r0, lbl_816986EE@sda21(r0)
+/* 81356E54 | 88 0D A6 AE */	lbz r0, isMacAddr__Q33ipl6socket13SocketSetting@sda21(r0)
 /* 81356E58 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81356E5C | 40 82 00 1C */	bne .L_81356E78
 /* 81356E60 | 3C 60 81 09 */	lis r3, mMac__Q33ipl6socket13SocketSetting@ha
@@ -45,7 +45,7 @@
 /* 81356E90 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81356E94 | 7C 08 02 A6 */	mflr r0
 /* 81356E98 | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 81356E9C | 80 0D A6 A0 */	lwz r0, lbl_816986E0@sda21(r0)
+/* 81356E9C | 80 0D A6 A0 */	lwz r0, mpHeap__Q33ipl6socket13SocketSetting@sda21(r0)
 /* 81356EA0 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81356EA4 | 40 82 00 6C */	bne .L_81356F10
 /* 81356EA8 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -57,11 +57,11 @@
 /* 81356EC0 | 81 8C 00 14 */	lwz r12, 0x14(r12)
 /* 81356EC4 | 7D 89 03 A6 */	mtctr r12
 /* 81356EC8 | 4E 80 04 21 */	bctrl
-/* 81356ECC | 90 6D A6 A4 */	stw r3, lbl_816986E4@sda21(r0)
+/* 81356ECC | 90 6D A6 A4 */	stw r3, mpHeapBuf__Q33ipl6socket13SocketSetting@sda21(r0)
 /* 81356ED0 | 38 80 40 00 */	li r4, 0x4000
 /* 81356ED4 | 38 A0 00 02 */	li r5, 0x2
 /* 81356ED8 | 48 20 37 9D */	bl fn_8155A674
-/* 81356EDC | 90 6D A6 A0 */	stw r3, lbl_816986E0@sda21(r0)
+/* 81356EDC | 90 6D A6 A0 */	stw r3, mpHeap__Q33ipl6socket13SocketSetting@sda21(r0)
 /* 81356EE0 | 38 61 00 08 */	addi r3, r1, 0x8
 /* 81356EE4 | 38 80 00 00 */	li r4, 0x0
 /* 81356EE8 | 38 A0 00 08 */	li r5, 0x8
@@ -73,7 +73,7 @@
 /* 81356F00 | 38 84 6F A0 */	addi r4, r4, freefunc__Q33ipl6socket13SocketSettingFUlPvl@l
 /* 81356F04 | 90 A1 00 08 */	stw r5, 0x8(r1)
 /* 81356F08 | 90 81 00 0C */	stw r4, 0xc(r1)
-/* 81356F0C | 48 15 B0 2D */	bl fn_814B1F38
+/* 81356F0C | 48 15 B0 2D */	bl SOInit
 .L_81356F10:
 /* 81356F10 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 81356F14 | 38 60 00 01 */	li r3, 0x1
@@ -88,14 +88,14 @@
 /* 81356F24 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81356F28 | 7C 08 02 A6 */	mflr r0
 /* 81356F2C | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 81356F30 | 80 0D A6 A4 */	lwz r0, lbl_816986E4@sda21(r0)
+/* 81356F30 | 80 0D A6 A4 */	lwz r0, mpHeapBuf__Q33ipl6socket13SocketSetting@sda21(r0)
 /* 81356F34 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81356F38 | 41 82 00 3C */	beq .L_81356F74
-/* 81356F3C | 48 15 B1 C5 */	bl fn_814B2100
-/* 81356F40 | 80 6D A6 A0 */	lwz r3, lbl_816986E0@sda21(r0)
+/* 81356F3C | 48 15 B1 C5 */	bl SOFinish
+/* 81356F40 | 80 6D A6 A0 */	lwz r3, mpHeap__Q33ipl6socket13SocketSetting@sda21(r0)
 /* 81356F44 | 48 20 37 E1 */	bl fn_8155A724
 /* 81356F48 | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
-/* 81356F4C | 80 8D A6 A4 */	lwz r4, lbl_816986E4@sda21(r0)
+/* 81356F4C | 80 8D A6 A4 */	lwz r4, mpHeapBuf__Q33ipl6socket13SocketSetting@sda21(r0)
 /* 81356F50 | 38 63 90 08 */	addi r3, r3, smArg__Q23ipl6System@l
 /* 81356F54 | 80 63 00 0C */	lwz r3, 0xc(r3)
 /* 81356F58 | 81 83 00 00 */	lwz r12, 0x0(r3)
@@ -103,8 +103,8 @@
 /* 81356F60 | 7D 89 03 A6 */	mtctr r12
 /* 81356F64 | 4E 80 04 21 */	bctrl
 /* 81356F68 | 38 00 00 00 */	li r0, 0x0
-/* 81356F6C | 90 0D A6 A4 */	stw r0, lbl_816986E4@sda21(r0)
-/* 81356F70 | 90 0D A6 A0 */	stw r0, lbl_816986E0@sda21(r0)
+/* 81356F6C | 90 0D A6 A4 */	stw r0, mpHeapBuf__Q33ipl6socket13SocketSetting@sda21(r0)
+/* 81356F70 | 90 0D A6 A0 */	stw r0, mpHeap__Q33ipl6socket13SocketSetting@sda21(r0)
 .L_81356F74:
 /* 81356F74 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 81356F78 | 7C 08 03 A6 */	mtlr r0
@@ -118,7 +118,7 @@
 /* 81356F84 | 2C 04 00 00 */	cmpwi r4, 0x0
 /* 81356F88 | 38 60 00 00 */	li r3, 0x0
 /* 81356F8C | 4C 81 00 20 */	blelr
-/* 81356F90 | 80 6D A6 A0 */	lwz r3, lbl_816986E0@sda21(r0)
+/* 81356F90 | 80 6D A6 A0 */	lwz r3, mpHeap__Q33ipl6socket13SocketSetting@sda21(r0)
 /* 81356F94 | 38 A0 00 20 */	li r5, 0x20
 /* 81356F98 | 48 20 37 BC */	b fn_8155A754
 /* 81356F9C | 4E 80 00 20 */	blr
@@ -129,17 +129,17 @@
 .fn freefunc__Q33ipl6socket13SocketSettingFUlPvl, global
 /* 81356FA0 | 2C 04 00 00 */	cmpwi r4, 0x0
 /* 81356FA4 | 4D 82 00 20 */	beqlr
-/* 81356FA8 | 80 6D A6 A0 */	lwz r3, lbl_816986E0@sda21(r0)
+/* 81356FA8 | 80 6D A6 A0 */	lwz r3, mpHeap__Q33ipl6socket13SocketSetting@sda21(r0)
 /* 81356FAC | 48 20 3A 58 */	b fn_8155AA04
 /* 81356FB0 | 4E 80 00 20 */	blr
 .endfn freefunc__Q33ipl6socket13SocketSettingFUlPvl
 
 # .text:0x16C | 0x81356FB4 | size: 0x34
 .fn iplSocket_81356FB4, local
-/* 81356FB4 | 39 4D A6 A8 */	li r10, lbl_816986E8@sda21
+/* 81356FB4 | 39 4D A6 A8 */	li r10, mMacAddr__Q33ipl6socket13SocketSetting@sda21
 /* 81356FB8 | 3C 60 81 09 */	lis r3, mMac__Q33ipl6socket13SocketSetting@ha
 /* 81356FBC | 3C 80 81 64 */	lis r4, lbl_81638EEA@ha
-/* 81356FC0 | 88 AD A6 A8 */	lbz r5, lbl_816986E8@sda21(r0)
+/* 81356FC0 | 88 AD A6 A8 */	lbz r5, mMacAddr__Q33ipl6socket13SocketSetting@sda21(r0)
 /* 81356FC4 | 88 CA 00 01 */	lbz r6, 0x1(r10)
 /* 81356FC8 | 38 63 97 20 */	addi r3, r3, mMac__Q33ipl6socket13SocketSetting@l
 /* 81356FCC | 88 EA 00 02 */	lbz r7, 0x2(r10)
@@ -159,11 +159,11 @@
 /* 81356FF0 | 90 01 09 44 */	stw r0, 0x944(r1)
 /* 81356FF4 | 39 61 09 40 */	addi r11, r1, 0x940
 /* 81356FF8 | 48 2A 24 CD */	bl _savegpr_28
-/* 81356FFC | 88 0D A6 AE */	lbz r0, lbl_816986EE@sda21(r0)
+/* 81356FFC | 88 0D A6 AE */	lbz r0, isMacAddr__Q33ipl6socket13SocketSetting@sda21(r0)
 /* 81357000 | 7C 7C 1B 78 */	mr r28, r3
 /* 81357004 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81357008 | 40 82 01 44 */	bne .L_8135714C
-/* 8135700C | 38 6D A6 A8 */	li r3, lbl_816986E8@sda21
+/* 8135700C | 38 6D A6 A8 */	li r3, mMacAddr__Q33ipl6socket13SocketSetting@sda21
 /* 81357010 | 38 80 00 00 */	li r4, 0x0
 /* 81357014 | 38 A0 00 06 */	li r5, 0x6
 /* 81357018 | 4B FD 93 1D */	bl memset
@@ -236,11 +236,11 @@
 /* 81357110 | 38 E1 00 08 */	addi r7, r1, 0x8
 /* 81357114 | 38 60 00 00 */	li r3, 0x0
 /* 81357118 | 38 A0 10 04 */	li r5, 0x1004
-/* 8135711C | 38 CD A6 A8 */	li r6, lbl_816986E8@sda21
+/* 8135711C | 38 CD A6 A8 */	li r6, mMacAddr__Q33ipl6socket13SocketSetting@sda21
 /* 81357120 | 48 15 D6 4D */	bl SOGetInterfaceOpt
 /* 81357124 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81357128 | 40 80 00 14 */	bge .L_8135713C
-/* 8135712C | 38 6D A6 A8 */	li r3, lbl_816986E8@sda21
+/* 8135712C | 38 6D A6 A8 */	li r3, mMacAddr__Q33ipl6socket13SocketSetting@sda21
 /* 81357130 | 38 80 00 00 */	li r4, 0x0
 /* 81357134 | 38 A0 00 06 */	li r5, 0x6
 /* 81357138 | 4B FD 91 FD */	bl memset
@@ -249,7 +249,7 @@
 /* 81357140 | 4B FF FD E5 */	bl finish__Q33ipl6socket13SocketSettingFv
 .L_81357144:
 /* 81357144 | 38 00 00 01 */	li r0, 0x1
-/* 81357148 | 98 0D A6 AE */	stb r0, lbl_816986EE@sda21(r0)
+/* 81357148 | 98 0D A6 AE */	stb r0, isMacAddr__Q33ipl6socket13SocketSetting@sda21(r0)
 .L_8135714C:
 /* 8135714C | 39 61 09 40 */	addi r11, r1, 0x940
 /* 81357150 | 48 2A 23 C1 */	bl _restgpr_28
@@ -270,7 +270,7 @@
 /* 81357178 | 38 61 00 08 */	addi r3, r1, 0x8
 /* 8135717C | 4B FD 91 B9 */	bl memset
 /* 81357180 | 38 81 00 08 */	addi r4, r1, 0x8
-/* 81357184 | 38 6D A6 A8 */	li r3, lbl_816986E8@sda21
+/* 81357184 | 38 6D A6 A8 */	li r3, mMacAddr__Q33ipl6socket13SocketSetting@sda21
 /* 81357188 | 38 A0 00 06 */	li r5, 0x6
 /* 8135718C | 48 2A 70 49 */	bl memcmp
 /* 81357190 | 30 03 FF FF */	subic r0, r3, 0x1
@@ -300,24 +300,28 @@
 .balign 8
 
 # .sbss:0x0 | 0x816986E0 | size: 0x4
-.obj lbl_816986E0, global
+# ipl::socket::SocketSetting::mpHeap
+.obj mpHeap__Q33ipl6socket13SocketSetting, global
 	.skip 0x4
-.endobj lbl_816986E0
+.endobj mpHeap__Q33ipl6socket13SocketSetting
 
 # .sbss:0x4 | 0x816986E4 | size: 0x4
-.obj lbl_816986E4, global
+# ipl::socket::SocketSetting::mpHeapBuf
+.obj mpHeapBuf__Q33ipl6socket13SocketSetting, global
 	.skip 0x4
-.endobj lbl_816986E4
+.endobj mpHeapBuf__Q33ipl6socket13SocketSetting
 
 # .sbss:0x8 | 0x816986E8 | size: 0x6
-.obj lbl_816986E8, global
+# ipl::socket::SocketSetting::mMacAddr
+.obj mMacAddr__Q33ipl6socket13SocketSetting, global
 	.skip 0x6
-.endobj lbl_816986E8
+.endobj mMacAddr__Q33ipl6socket13SocketSetting
 
 # .sbss:0xE | 0x816986EE | size: 0x1
-.obj lbl_816986EE, global
+# ipl::socket::SocketSetting::isMacAddr
+.obj isMacAddr__Q33ipl6socket13SocketSetting, global
 	.skip 0x1
-.endobj lbl_816986EE
+.endobj isMacAddr__Q33ipl6socket13SocketSetting
 
 # .sbss:0xF | 0x816986EF | size: 0x1
 .obj gap_12_816986EF_sbss, global

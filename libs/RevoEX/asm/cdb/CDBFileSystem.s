@@ -55,7 +55,7 @@
 /* 8148AD44 | 38 60 00 04 */	li r3, 0x4
 /* 8148AD48 | 48 00 58 61 */	bl CDBReport_
 /* 8148AD4C | 7F E3 FB 78 */	mr r3, r31
-/* 8148AD50 | 48 04 67 4D */	bl fn_814D149C
+/* 8148AD50 | 48 04 67 4D */	bl VFGetApiErrorString
 /* 8148AD54 | 7C 65 1B 78 */	mr r5, r3
 /* 8148AD58 | 7F E4 FB 78 */	mr r4, r31
 /* 8148AD5C | 38 7E 00 B0 */	addi r3, r30, 0xb0
@@ -148,7 +148,7 @@
 /* 8148AE98 | 3F E0 81 0D */	lis r31, CDB_VFF_FILE_NAME@ha
 /* 8148AE9C | 80 8D AD 28 */	lwz r4, CDB_VFF_FILE_SIZE@sda21(r0)
 /* 8148AEA0 | 38 7F 89 50 */	addi r3, r31, CDB_VFF_FILE_NAME@l
-/* 8148AEA4 | 48 04 4F 71 */	bl fn_814CFE14
+/* 8148AEA4 | 48 04 4F 71 */	bl VFCreateSystemFileNANDFlashEx
 /* 8148AEA8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8148AEAC | 7C 7D 1B 78 */	mr r29, r3
 /* 8148AEB0 | 41 82 00 70 */	beq .L_8148AF20
@@ -208,7 +208,7 @@
 /* 8148AF78 | 48 00 01 30 */	b .L_8148B0A8
 .L_8148AF7C:
 /* 8148AF7C | 38 6D 99 B0 */	li r3, lbl_816979F0@sda21
-/* 8148AF80 | 48 04 5E C5 */	bl fn_814D0E44
+/* 8148AF80 | 48 04 5E C5 */	bl VFFormatDrive
 /* 8148AF84 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8148AF88 | 7C 7F 1B 78 */	mr r31, r3
 /* 8148AF8C | 41 82 00 88 */	beq .L_8148B014
@@ -236,7 +236,7 @@
 /* 8148AFDC | 38 60 00 01 */	li r3, 0x1
 /* 8148AFE0 | 48 00 55 C9 */	bl CDBReport_
 /* 8148AFE4 | 7F E3 FB 78 */	mr r3, r31
-/* 8148AFE8 | 48 04 64 B5 */	bl fn_814D149C
+/* 8148AFE8 | 48 04 64 B5 */	bl VFGetApiErrorString
 /* 8148AFEC | 7C 65 1B 78 */	mr r5, r3
 /* 8148AFF0 | 7F E4 FB 78 */	mr r4, r31
 /* 8148AFF4 | 38 7E 00 B0 */	addi r3, r30, 0xb0
@@ -263,7 +263,7 @@
 /* 8148B040 | 48 0A 36 61 */	bl OSReport
 .L_8148B044:
 /* 8148B044 | 38 6D 99 B8 */	li r3, lbl_816979F8@sda21
-/* 8148B048 | 48 04 5C AD */	bl fn_814D0CF4
+/* 8148B048 | 48 04 5C AD */	bl VFChangeDir
 /* 8148B04C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8148B050 | 7C 7F 1B 78 */	mr r31, r3
 /* 8148B054 | 41 82 00 4C */	beq .L_8148B0A0
@@ -274,7 +274,7 @@
 /* 8148B068 | 38 60 00 01 */	li r3, 0x1
 /* 8148B06C | 48 00 55 3D */	bl CDBReport_
 /* 8148B070 | 7F E3 FB 78 */	mr r3, r31
-/* 8148B074 | 48 04 64 29 */	bl fn_814D149C
+/* 8148B074 | 48 04 64 29 */	bl VFGetApiErrorString
 /* 8148B078 | 7C 65 1B 78 */	mr r5, r3
 /* 8148B07C | 38 7E 01 7C */	addi r3, r30, 0x17c
 /* 8148B080 | 38 8D 99 B8 */	li r4, lbl_816979F8@sda21
@@ -316,7 +316,7 @@
 /* 8148B0F4 | 38 60 00 01 */	li r3, 0x1
 /* 8148B0F8 | 48 00 54 B1 */	bl CDBReport_
 /* 8148B0FC | 7F E3 FB 78 */	mr r3, r31
-/* 8148B100 | 48 04 63 9D */	bl fn_814D149C
+/* 8148B100 | 48 04 63 9D */	bl VFGetApiErrorString
 /* 8148B104 | 3C C0 81 67 */	lis r6, lbl_8166B94C@ha
 /* 8148B108 | 7C 65 1B 78 */	mr r5, r3
 /* 8148B10C | 7F E4 FB 78 */	mr r4, r31

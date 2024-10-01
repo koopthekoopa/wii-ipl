@@ -4289,13 +4289,13 @@
 /* 8141F4DC | 90 01 00 44 */	stw r0, 0x44(r1)
 /* 8141F4E0 | 39 61 00 40 */	addi r11, r1, 0x40
 /* 8141F4E4 | 48 1D 9F C1 */	bl _savegpr_20
-/* 8141F4E8 | 3F 60 81 61 */	lis r27, lbl_816152A8@ha
+/* 8141F4E8 | 3F 60 81 61 */	lis r27, pppURLCheck@ha
 /* 8141F4EC | 7C 94 23 78 */	mr r20, r4
 /* 8141F4F0 | 7C B5 2B 78 */	mr r21, r5
 /* 8141F4F4 | 7C D6 33 78 */	mr r22, r6
 /* 8141F4F8 | 7C FA 3B 78 */	mr r26, r7
 /* 8141F4FC | 7D 17 43 78 */	mr r23, r8
-/* 8141F500 | 3B 7B 52 A8 */	addi r27, r27, lbl_816152A8@l
+/* 8141F500 | 3B 7B 52 A8 */	addi r27, r27, pppURLCheck@l
 /* 8141F504 | 3B A0 00 00 */	li r29, 0x0
 /* 8141F508 | 3B 80 00 01 */	li r28, 0x1
 /* 8141F50C | 48 00 01 60 */	b .L_8141F66C
@@ -11193,13 +11193,13 @@
 /* 814255A4 | 38 00 00 00 */	li r0, 0x0
 /* 814255A8 | 38 C6 CC F0 */	addi r6, r6, __vt__Q39textinput9inputform12LayoutByNW4R@l
 /* 814255AC | 3C A0 81 66 */	lis r5, lbl_8165CBE0@ha
-/* 814255B0 | 3C 80 81 61 */	lis r4, lbl_81615278@ha
+/* 814255B0 | 3C 80 81 61 */	lis r4, csLanguageDependencyDataUEJ__Q29textinput9inputform@ha
 /* 814255B4 | 90 DB 00 00 */	stw r6, 0x0(r27)
 /* 814255B8 | 38 66 00 20 */	addi r3, r6, 0x20
 /* 814255BC | 38 E6 00 B8 */	addi r7, r6, 0xb8
 /* 814255C0 | 38 C6 01 A8 */	addi r6, r6, 0x1a8
 /* 814255C4 | 38 A5 CB E0 */	addi r5, r5, lbl_8165CBE0@l
-/* 814255C8 | 38 84 52 78 */	addi r4, r4, lbl_81615278@l
+/* 814255C8 | 38 84 52 78 */	addi r4, r4, csLanguageDependencyDataUEJ__Q29textinput9inputform@l
 /* 814255CC | 90 7B 00 5C */	stw r3, 0x5c(r27)
 /* 814255D0 | 38 7B 02 D4 */	addi r3, r27, 0x2d4
 /* 814255D4 | 90 FB 01 18 */	stw r7, 0x118(r27)
@@ -12238,8 +12238,8 @@
 /* 814264A8 | 93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 814264AC | 7C 7F 1B 78 */	mr r31, r3
 /* 814264B0 | 93 C1 00 18 */	stw r30, 0x18(r1)
-/* 814264B4 | 3F C0 81 61 */	lis r30, lbl_81614FE8@ha
-/* 814264B8 | 3B DE 4F E8 */	addi r30, r30, lbl_81614FE8@l
+/* 814264B4 | 3F C0 81 61 */	lis r30, csAninationFile__Q29textinput9inputform@ha
+/* 814264B8 | 3B DE 4F E8 */	addi r30, r30, csAninationFile__Q29textinput9inputform@l
 /* 814264BC | 93 A1 00 14 */	stw r29, 0x14(r1)
 /* 814264C0 | 7C 9D 23 78 */	mr r29, r4
 /* 814264C4 | 4B FF 62 99 */	bl setLanguage__Q39textinput9inputform4BaseFQ29textinput8Language
@@ -14567,8 +14567,9 @@
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x81614FE8 | size: 0x44
-.obj lbl_81614FE8, global
+# .rodata:0x0 | 0x81614FE8 | size: 0x220
+# textinput::inputform::csAninationFile
+.obj csAninationFile__Q29textinput9inputform, local
 	.4byte 0x00000000
 	.4byte 0x66735F56
 	.4byte 0x4B5F7465
@@ -14586,10 +14587,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81614FE8
-
-# .rodata:0x44 | 0x8161502C | size: 0x44
-.obj lbl_8161502C, global
+.L_8161502C:
 	.4byte 0x00000001
 	.4byte 0x66735F56
 	.4byte 0x4B5F7465
@@ -14607,10 +14605,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8161502C
-
-# .rodata:0x88 | 0x81615070 | size: 0x44
-.obj lbl_81615070, global
+.L_81615070:
 	.4byte 0x00000002
 	.4byte 0x66735F56
 	.4byte 0x4B5F7465
@@ -14628,10 +14623,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615070
-
-# .rodata:0xCC | 0x816150B4 | size: 0x44
-.obj lbl_816150B4, global
+.L_816150B4:
 	.4byte 0x00000003
 	.4byte 0x66735F56
 	.4byte 0x4B5F7465
@@ -14649,10 +14641,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816150B4
-
-# .rodata:0x110 | 0x816150F8 | size: 0x44
-.obj lbl_816150F8, global
+.L_816150F8:
 	.4byte 0x00000004
 	.4byte 0x66735F56
 	.4byte 0x4B5F7465
@@ -14670,10 +14659,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816150F8
-
-# .rodata:0x154 | 0x8161513C | size: 0x44
-.obj lbl_8161513C, global
+.L_8161513C:
 	.4byte 0x00000005
 	.4byte 0x66735F56
 	.4byte 0x4B5F7465
@@ -14691,10 +14677,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8161513C
-
-# .rodata:0x198 | 0x81615180 | size: 0x44
-.obj lbl_81615180, global
+.L_81615180:
 	.4byte 0x00000006
 	.4byte 0x66735F56
 	.4byte 0x4B5F7465
@@ -14712,10 +14695,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615180
-
-# .rodata:0x1DC | 0x816151C4 | size: 0x44
-.obj lbl_816151C4, global
+.L_816151C4:
 	.4byte 0x00000007
 	.4byte 0x66735F56
 	.4byte 0x4B5F7465
@@ -14733,10 +14713,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816151C4
+.endobj csAninationFile__Q29textinput9inputform
 
 # .rodata:0x220 | 0x81615208 | size: 0x24
-.obj lbl_81615208, global
+# textinput::inputform::csVisiblePaneUEJ
+.obj csVisiblePaneUEJ__Q29textinput9inputform, local
 	.4byte 0x00010002
 	.4byte lbl_8165C8C0
 	.4byte 0x00000000
@@ -14746,10 +14727,11 @@
 	.4byte lbl_816973AC
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615208
+.endobj csVisiblePaneUEJ__Q29textinput9inputform
 
 # .rodata:0x244 | 0x8161522C | size: 0x24
-.obj lbl_8161522C, global
+# textinput::inputform::csVisiblePaneKOR
+.obj csVisiblePaneKOR__Q29textinput9inputform, local
 	.4byte 0x00010002
 	.4byte lbl_816973A4
 	.4byte 0x00000000
@@ -14759,10 +14741,11 @@
 	.4byte lbl_8165C8C0
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_8161522C
+.endobj csVisiblePaneKOR__Q29textinput9inputform
 
 # .rodata:0x268 | 0x81615250 | size: 0x28
-.obj lbl_81615250, global
+# textinput::inputform::csVisiblePaneCHN
+.obj csVisiblePaneCHN__Q29textinput9inputform, local
 	.4byte 0x00010002
 	.4byte lbl_816973AC
 	.4byte 0x00000000
@@ -14773,26 +14756,37 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615250
+.endobj csVisiblePaneCHN__Q29textinput9inputform
 
-# .rodata:0x290 | 0x81615278 | size: 0x30
-.obj lbl_81615278, global
-	.4byte lbl_81615208
+# .rodata:0x290 | 0x81615278 | size: 0x10
+# textinput::inputform::csLanguageDependencyDataUEJ
+.obj csLanguageDependencyDataUEJ__Q29textinput9inputform, local
+	.4byte csVisiblePaneUEJ__Q29textinput9inputform
 	.4byte lbl_8165C8CC
 	.4byte lbl_8165C8E0
 	.4byte lbl_8165C8F0
-	.4byte lbl_8161522C
+.endobj csLanguageDependencyDataUEJ__Q29textinput9inputform
+
+# .rodata:0x2A0 | 0x81615288 | size: 0x10
+# textinput::inputform::csLanguageDependencyDataKOR
+.obj csLanguageDependencyDataKOR__Q29textinput9inputform, local
+	.4byte csVisiblePaneKOR__Q29textinput9inputform
 	.4byte lbl_8165C900
 	.4byte lbl_8165C918
 	.4byte lbl_8165C928
-	.4byte lbl_81615250
+.endobj csLanguageDependencyDataKOR__Q29textinput9inputform
+
+# .rodata:0x2B0 | 0x81615298 | size: 0x10
+# textinput::inputform::csLanguageDependencyDataCHN
+.obj csLanguageDependencyDataCHN__Q29textinput9inputform, local
+	.4byte csVisiblePaneCHN__Q29textinput9inputform
 	.4byte lbl_8165C938
 	.4byte lbl_8165C950
 	.4byte lbl_8165C960
-.endobj lbl_81615278
+.endobj csLanguageDependencyDataCHN__Q29textinput9inputform
 
 # .rodata:0x2C0 | 0x816152A8 | size: 0x28
-.obj lbl_816152A8, global
+.obj pppURLCheck, local
 	.4byte 0x00680074
 	.4byte 0x00740070
 	.4byte 0x003A002F
@@ -14803,10 +14797,10 @@
 	.4byte 0x0073003A
 	.4byte 0x002F002F
 	.4byte 0x00000000
-.endobj lbl_816152A8
+.endobj pppURLCheck
 
 # .rodata:0x2E8 | 0x816152D0 | size: 0x10
-.obj lbl_816152D0, global
+.obj lbl_816152D0, local
 	.4byte 0x00200000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -14836,14 +14830,14 @@
 	.4byte lbl_8165C820
 	.4byte 0x00000008
 	.4byte 0x00000000
-	.4byte lbl_81614FE8
-	.4byte lbl_8161502C
-	.4byte lbl_81615070
-	.4byte lbl_816150B4
-	.4byte lbl_816150F8
-	.4byte lbl_8161513C
-	.4byte lbl_81615180
-	.4byte lbl_816151C4
+	.4byte csAninationFile__Q29textinput9inputform
+	.rel csAninationFile__Q29textinput9inputform, .L_8161502C
+	.rel csAninationFile__Q29textinput9inputform, .L_81615070
+	.rel csAninationFile__Q29textinput9inputform, .L_816150B4
+	.rel csAninationFile__Q29textinput9inputform, .L_816150F8
+	.rel csAninationFile__Q29textinput9inputform, .L_8161513C
+	.rel csAninationFile__Q29textinput9inputform, .L_81615180
+	.rel csAninationFile__Q29textinput9inputform, .L_816151C4
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -14852,14 +14846,14 @@
 	.4byte lbl_8165C830
 	.4byte 0x00000008
 	.4byte 0x00000000
-	.4byte lbl_81614FE8
-	.4byte lbl_8161502C
-	.4byte lbl_81615070
-	.4byte lbl_816150B4
-	.4byte lbl_816150F8
-	.4byte lbl_8161513C
-	.4byte lbl_81615180
-	.4byte lbl_816151C4
+	.4byte csAninationFile__Q29textinput9inputform
+	.rel csAninationFile__Q29textinput9inputform, .L_8161502C
+	.rel csAninationFile__Q29textinput9inputform, .L_81615070
+	.rel csAninationFile__Q29textinput9inputform, .L_816150B4
+	.rel csAninationFile__Q29textinput9inputform, .L_816150F8
+	.rel csAninationFile__Q29textinput9inputform, .L_8161513C
+	.rel csAninationFile__Q29textinput9inputform, .L_81615180
+	.rel csAninationFile__Q29textinput9inputform, .L_816151C4
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -15595,7 +15589,7 @@
 	.4byte 0x00000000
 .endobj __vt__Q29textinput4Base
 
-# .data:0xA38 | 0x8165D258 | size: 0x78
+# .data:0xA38 | 0x8165D258 | size: 0x24
 # textinput::util::Animation::__vtable
 .obj __vt__Q39textinput4util9Animation, global
 	.4byte 0x00000000
@@ -15607,10 +15601,19 @@
 	.4byte setSEFlag__Q39textinput4util9AnimationFb
 	.4byte isSEFlag__Q39textinput4util9AnimationFv
 	.4byte stop__Q39textinput4util9AnimationFv
+.endobj __vt__Q39textinput4util9Animation
+
+# .data:0xA5C | 0x8165D27C | size: 0x10
+.obj lbl_8165D258, global
 	.4byte 0x4F75744F
 	.4byte 0x664C656E
 	.4byte 0x6774680A
 	.4byte 0x00000000
+.endobj lbl_8165D258
+
+# .data:0xA6C | 0x8165D28C | size: 0x44
+# nw4r::lyt::TextBox::@STRING@GetTextColor(unsigned long) const
+.obj "@STRING@GetTextColor__Q34nw4r3lyt7TextBoxCFUl", global
 	.4byte 0x4572726F
 	.4byte 0x72233030
 	.4byte 0x340A416E
@@ -15628,7 +15631,7 @@
 	.4byte 0x72727570
 	.4byte 0x7465642E
 	.4byte 0x00000000
-.endobj __vt__Q39textinput4util9Animation
+.endobj "@STRING@GetTextColor__Q34nw4r3lyt7TextBoxCFUl"
 
 # 0x81694D28..0x81694D90 | size: 0x68
 .section .sdata2, "a"

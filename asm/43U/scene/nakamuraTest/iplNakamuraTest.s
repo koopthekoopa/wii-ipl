@@ -42,7 +42,7 @@
 /* 813D800C | 38 A0 00 02 */	li r5, 0x2
 /* 813D8010 | 48 21 F5 CD */	bl fn_815F75DC
 /* 813D8014 | 90 7E 28 10 */	stw r3, 0x2810(r30)
-/* 813D8018 | 90 6D AB 90 */	stw r3, lbl_81698BD0@sda21(r0)
+/* 813D8018 | 90 6D AB 90 */	stw r3, spHeap__Q33ipl5scene12NakamuraTest@sda21(r0)
 /* 813D801C | 7F C3 F3 78 */	mr r3, r30
 /* 813D8020 | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 813D8024 | 83 C1 00 08 */	lwz r30, 0x8(r1)
@@ -536,7 +536,7 @@
 /* 813D86C8 | B0 1D 2B 78 */	sth r0, 0x2b78(r29)
 /* 813D86CC | 38 63 8D 3C */	addi r3, r3, nhttpalloc__Q33ipl5scene12NakamuraTestFUli@l
 /* 813D86D0 | 38 84 8D 68 */	addi r4, r4, nhttpfree__Q33ipl5scene12NakamuraTestFPv@l
-/* 813D86D4 | 48 0C 31 E5 */	bl fn_8149B8B8
+/* 813D86D4 | 48 0C 31 E5 */	bl NHTTPStartup
 /* 813D86D8 | 80 7D 28 10 */	lwz r3, 0x2810(r29)
 /* 813D86DC | 3C 80 00 27 */	lis r4, 0x27
 /* 813D86E0 | 38 A0 00 04 */	li r5, 0x4
@@ -813,9 +813,9 @@
 .L_813D8A90:
 /* 813D8A90 | 38 00 00 00 */	li r0, 0x0
 /* 813D8A94 | 3C 60 81 3E */	lis r3, nhttpcleanupcallback__Q33ipl5scene12NakamuraTestFv@ha
-/* 813D8A98 | 90 0D AB 94 */	stw r0, lbl_81698BD4@sda21(r0)
+/* 813D8A98 | 90 0D AB 94 */	stw r0, sNHTTPFinished__Q33ipl5scene12NakamuraTest@sda21(r0)
 /* 813D8A9C | 38 63 8D 80 */	addi r3, r3, nhttpcleanupcallback__Q33ipl5scene12NakamuraTestFv@l
-/* 813D8AA0 | 48 0C 2E A5 */	bl fn_8149B944
+/* 813D8AA0 | 48 0C 2E A5 */	bl NHTTPCleanupAsync
 /* 813D8AA4 | 38 00 00 0D */	li r0, 0xd
 /* 813D8AA8 | 38 A1 00 08 */	addi r5, r1, 0x8
 /* 813D8AAC | 90 1D 2B 58 */	stw r0, 0x2b58(r29)
@@ -831,7 +831,7 @@
 /* 813D8AD4 | 98 1D 2B 60 */	stb r0, 0x2b60(r29)
 /* 813D8AD8 | 48 00 01 A8 */	b .L_813D8C80
 .L_813D8ADC:
-/* 813D8ADC | 80 0D AB 94 */	lwz r0, lbl_81698BD4@sda21(r0)
+/* 813D8ADC | 80 0D AB 94 */	lwz r0, sNHTTPFinished__Q33ipl5scene12NakamuraTest@sda21(r0)
 /* 813D8AE0 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813D8AE4 | 41 82 01 9C */	beq .L_813D8C80
 /* 813D8AE8 | 38 00 00 0B */	li r0, 0xb
@@ -1023,7 +1023,7 @@
 /* 813D8D48 | 40 80 00 08 */	bge .L_813D8D50
 /* 813D8D4C | 38 A0 00 04 */	li r5, 0x4
 .L_813D8D50:
-/* 813D8D50 | 80 6D AB 90 */	lwz r3, lbl_81698BD0@sda21(r0)
+/* 813D8D50 | 80 6D AB 90 */	lwz r3, spHeap__Q33ipl5scene12NakamuraTest@sda21(r0)
 /* 813D8D54 | 7C 04 03 78 */	mr r4, r0
 /* 813D8D58 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813D8D5C | 81 8C 00 14 */	lwz r12, 0x14(r12)
@@ -1035,7 +1035,7 @@
 # ipl::scene::NakamuraTest::nhttpfree(void*)
 .fn nhttpfree__Q33ipl5scene12NakamuraTestFPv, global
 /* 813D8D68 | 7C 64 1B 78 */	mr r4, r3
-/* 813D8D6C | 80 6D AB 90 */	lwz r3, lbl_81698BD0@sda21(r0)
+/* 813D8D6C | 80 6D AB 90 */	lwz r3, spHeap__Q33ipl5scene12NakamuraTest@sda21(r0)
 /* 813D8D70 | 81 83 00 00 */	lwz r12, 0x0(r3)
 /* 813D8D74 | 81 8C 00 18 */	lwz r12, 0x18(r12)
 /* 813D8D78 | 7D 89 03 A6 */	mtctr r12
@@ -1046,7 +1046,7 @@
 # ipl::scene::NakamuraTest::nhttpcleanupcallback()
 .fn nhttpcleanupcallback__Q33ipl5scene12NakamuraTestFv, global
 /* 813D8D80 | 38 00 00 01 */	li r0, 0x1
-/* 813D8D84 | 90 0D AB 94 */	stw r0, lbl_81698BD4@sda21(r0)
+/* 813D8D84 | 90 0D AB 94 */	stw r0, sNHTTPFinished__Q33ipl5scene12NakamuraTest@sda21(r0)
 /* 813D8D88 | 4E 80 00 20 */	blr
 .endfn nhttpcleanupcallback__Q33ipl5scene12NakamuraTestFv
 
@@ -1335,11 +1335,13 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698BD0 | size: 0x4
-.obj lbl_81698BD0, global
+# ipl::scene::NakamuraTest::spHeap
+.obj spHeap__Q33ipl5scene12NakamuraTest, global
 	.skip 0x4
-.endobj lbl_81698BD0
+.endobj spHeap__Q33ipl5scene12NakamuraTest
 
 # .sbss:0x4 | 0x81698BD4 | size: 0x4
-.obj lbl_81698BD4, global
+# ipl::scene::NakamuraTest::sNHTTPFinished
+.obj sNHTTPFinished__Q33ipl5scene12NakamuraTest, global
 	.skip 0x4
-.endobj lbl_81698BD4
+.endobj sNHTTPFinished__Q33ipl5scene12NakamuraTest

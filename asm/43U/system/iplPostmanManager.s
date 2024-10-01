@@ -252,7 +252,7 @@
 /* 8135748C | 48 00 03 65 */	bl manage_dltasklist_for_menu___Q33ipl7postman7ManagerFv
 /* 81357490 | 7F E3 FB 78 */	mr r3, r31
 /* 81357494 | 48 00 05 ED */	bl set_nwc24_permission___Q33ipl7postman7ManagerFv
-/* 81357498 | 48 15 39 71 */	bl fn_814AAE08
+/* 81357498 | 48 15 39 71 */	bl NWC24ResumeScheduler
 /* 8135749C | 38 79 00 00 */	addi r3, r25, 0x0
 /* 813574A0 | 4C C6 31 82 */	crclr cr1eq
 /* 813574A4 | 48 1D 71 FD */	bl OSReport
@@ -317,7 +317,7 @@
 /* 81357584 | 48 00 06 A9 */	bl ncd_debug_print___Q33ipl7postman7ManagerFb
 /* 81357588 | 7F E3 FB 78 */	mr r3, r31
 /* 8135758C | 48 00 04 F5 */	bl set_nwc24_permission___Q33ipl7postman7ManagerFv
-/* 81357590 | 48 15 38 79 */	bl fn_814AAE08
+/* 81357590 | 48 15 38 79 */	bl NWC24ResumeScheduler
 /* 81357594 | 38 79 00 00 */	addi r3, r25, 0x0
 /* 81357598 | 4C C6 31 82 */	crclr cr1eq
 /* 8135759C | 48 1D 71 05 */	bl OSReport
@@ -333,7 +333,7 @@
 /* 813575BC | 41 82 FF 34 */	beq .L_813574F0
 /* 813575C0 | 38 7F 03 38 */	addi r3, r31, 0x338
 /* 813575C4 | 48 1D 56 75 */	bl fn_8152CC38
-/* 813575C8 | 48 15 37 71 */	bl fn_814AAD38
+/* 813575C8 | 48 15 37 71 */	bl NWC24SuspendScheduler
 /* 813575CC | 38 79 00 56 */	addi r3, r25, 0x56
 /* 813575D0 | 4C C6 31 82 */	crclr cr1eq
 /* 813575D4 | 48 1D 70 CD */	bl OSReport
@@ -613,7 +613,7 @@
 .L_81357910:
 /* 81357910 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81357914 | 41 82 00 6C */	beq .L_81357980
-/* 81357918 | 48 15 34 21 */	bl fn_814AAD38
+/* 81357918 | 48 15 34 21 */	bl NWC24SuspendScheduler
 /* 8135791C | 3C 60 81 64 */	lis r3, lbl_81638F9E@ha
 /* 81357920 | 38 63 8F 9E */	addi r3, r3, lbl_81638F9E@l
 /* 81357924 | 4C C6 31 82 */	crclr cr1eq
@@ -643,7 +643,7 @@
 .L_81357978:
 /* 81357978 | 4B FE AC F9 */	bl receive__Q33ipl5nwc247ManagerFv
 .L_8135797C:
-/* 8135797C | 48 15 34 8D */	bl fn_814AAE08
+/* 8135797C | 48 15 34 8D */	bl NWC24ResumeScheduler
 .L_81357980:
 /* 81357980 | 7F E3 FB 78 */	mr r3, r31
 /* 81357984 | 48 00 00 2D */	bl set_alarm___Q33ipl7postman7ManagerFv
@@ -699,7 +699,7 @@
 /* 81357A1C | 80 03 03 34 */	lwz r0, 0x334(r3)
 /* 81357A20 | 2C 00 00 01 */	cmpwi r0, 0x1
 /* 81357A24 | 40 82 00 18 */	bne .L_81357A3C
-/* 81357A28 | 48 15 33 11 */	bl fn_814AAD38
+/* 81357A28 | 48 15 33 11 */	bl NWC24SuspendScheduler
 /* 81357A2C | 3C 60 81 64 */	lis r3, lbl_81638F5E@ha
 /* 81357A30 | 38 63 8F 5E */	addi r3, r3, lbl_81638F5E@l
 /* 81357A34 | 4C C6 31 82 */	crclr cr1eq
@@ -712,7 +712,7 @@
 /* 81357A4C | 40 82 00 20 */	bne .L_81357A6C
 /* 81357A50 | 7F E3 FB 78 */	mr r3, r31
 /* 81357A54 | 48 00 00 2D */	bl set_nwc24_permission___Q33ipl7postman7ManagerFv
-/* 81357A58 | 48 15 33 B1 */	bl fn_814AAE08
+/* 81357A58 | 48 15 33 B1 */	bl NWC24ResumeScheduler
 /* 81357A5C | 3C 60 81 64 */	lis r3, lbl_81638F08@ha
 /* 81357A60 | 38 63 8F 08 */	addi r3, r3, lbl_81638F08@l
 /* 81357A64 | 4C C6 31 82 */	crclr cr1eq
@@ -819,7 +819,7 @@
 /* 81357BB4 | 38 7F 01 B4 */	addi r3, r31, 0x1b4
 /* 81357BB8 | 4C C6 31 82 */	crclr cr1eq
 /* 81357BBC | 48 1D 6A E5 */	bl OSReport
-/* 81357BC0 | 48 14 78 D9 */	bl fn_8149F498
+/* 81357BC0 | 48 14 78 D9 */	bl NWC24RegisterUserId
 /* 81357BC4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81357BC8 | 3B C0 00 00 */	li r30, 0x0
 /* 81357BCC | 41 82 00 34 */	beq .L_81357C00
@@ -829,7 +829,7 @@
 /* 81357BDC | 38 7F 01 CB */	addi r3, r31, 0x1cb
 /* 81357BE0 | 4C C6 31 82 */	crclr cr1eq
 /* 81357BE4 | 48 1D 6A BD */	bl OSReport
-/* 81357BE8 | 48 14 8A 65 */	bl fn_814A064C
+/* 81357BE8 | 48 14 8A 65 */	bl NWC24GetErrorCode
 /* 81357BEC | 7C 7E 1B 78 */	mr r30, r3
 /* 81357BF0 | 38 7F 01 E4 */	addi r3, r31, 0x1e4
 /* 81357BF4 | 7F C4 F3 78 */	mr r4, r30

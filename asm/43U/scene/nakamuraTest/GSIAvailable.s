@@ -73,7 +73,7 @@
 /* 813D60DC | 41 82 00 08 */	beq .L_813D60E4
 /* 813D60E0 | 38 7F 00 40 */	addi r3, r31, 0x40
 .L_813D60E4:
-/* 813D60E4 | 48 0D DF F9 */	bl fn_814B40DC
+/* 813D60E4 | 48 0D DF F9 */	bl SOGetHostByName
 /* 813D60E8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813D60EC | 40 82 00 0C */	bne .L_813D60F8
 /* 813D60F0 | 38 00 00 00 */	li r0, 0x0
@@ -134,7 +134,7 @@
 /* 813D61AC | 40 82 00 14 */	bne .L_813D61C0
 /* 813D61B0 | 38 00 00 01 */	li r0, 0x1
 /* 813D61B4 | 38 60 00 01 */	li r3, 0x1
-/* 813D61B8 | 90 0D AB 50 */	stw r0, lbl_81698B90@sda21(r0)
+/* 813D61B8 | 90 0D AB 50 */	stw r0, __GSIACResult@sda21(r0)
 /* 813D61BC | 48 00 01 58 */	b .L_813D6314
 .L_813D61C0:
 /* 813D61C0 | 48 00 04 A1 */	bl CanReceiveOnSocket
@@ -197,7 +197,7 @@
 /* 813D6290 | 57 E0 07 FF */	clrlwi. r0, r31, 31
 /* 813D6294 | 41 82 00 10 */	beq .L_813D62A4
 /* 813D6298 | 38 00 00 02 */	li r0, 0x2
-/* 813D629C | 90 0D AB 50 */	stw r0, lbl_81698B90@sda21(r0)
+/* 813D629C | 90 0D AB 50 */	stw r0, __GSIACResult@sda21(r0)
 /* 813D62A0 | 48 00 00 18 */	b .L_813D62B8
 .L_813D62A4:
 /* 813D62A4 | 57 E0 07 BD */	rlwinm. r0, r31, 0, 30, 30
@@ -205,7 +205,7 @@
 /* 813D62AC | 41 82 00 08 */	beq .L_813D62B4
 /* 813D62B0 | 38 00 00 03 */	li r0, 0x3
 .L_813D62B4:
-/* 813D62B4 | 90 0D AB 50 */	stw r0, lbl_81698B90@sda21(r0)
+/* 813D62B4 | 90 0D AB 50 */	stw r0, __GSIACResult@sda21(r0)
 .L_813D62B8:
 /* 813D62B8 | 7C 03 03 78 */	mr r3, r0
 /* 813D62BC | 48 00 00 58 */	b .L_813D6314
@@ -224,7 +224,7 @@
 /* 813D62EC | 48 00 00 D9 */	bl closesocket
 /* 813D62F0 | 38 00 00 01 */	li r0, 0x1
 /* 813D62F4 | 38 60 00 01 */	li r3, 0x1
-/* 813D62F8 | 90 0D AB 50 */	stw r0, lbl_81698B90@sda21(r0)
+/* 813D62F8 | 90 0D AB 50 */	stw r0, __GSIACResult@sda21(r0)
 /* 813D62FC | 48 00 00 18 */	b .L_813D6314
 .L_813D6300:
 /* 813D6300 | 4B FF FC E9 */	bl SendPacket
@@ -274,6 +274,6 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698B90 | size: 0x8
-.obj lbl_81698B90, global
+.obj __GSIACResult, global
 	.skip 0x8
-.endobj lbl_81698B90
+.endobj __GSIACResult

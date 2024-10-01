@@ -1640,7 +1640,7 @@
 /* 813982E8 | 38 61 00 0A */	addi r3, r1, 0xa
 /* 813982EC | B3 E1 00 0A */	sth r31, 0xa(r1)
 /* 813982F0 | 38 80 00 01 */	li r4, 0x1
-/* 813982F4 | 48 11 71 15 */	bl fn_814AF408
+/* 813982F4 | 48 11 71 15 */	bl NWC24IterateDlTask
 /* 813982F8 | 48 00 00 7C */	b .L_81398374
 .L_813982FC:
 /* 813982FC | A0 A1 00 0A */	lhz r5, 0xa(r1)
@@ -1673,7 +1673,7 @@
 .L_81398368:
 /* 81398368 | 38 61 00 0A */	addi r3, r1, 0xa
 /* 8139836C | 38 80 00 00 */	li r4, 0x0
-/* 81398370 | 48 11 70 99 */	bl fn_814AF408
+/* 81398370 | 48 11 70 99 */	bl NWC24IterateDlTask
 .L_81398374:
 /* 81398374 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81398378 | 40 80 FF 84 */	bge .L_813982FC
@@ -1727,7 +1727,7 @@
 /* 81398414 | 38 61 00 0A */	addi r3, r1, 0xa
 /* 81398418 | B3 E1 00 0A */	sth r31, 0xa(r1)
 /* 8139841C | 38 80 00 01 */	li r4, 0x1
-/* 81398420 | 48 11 6F E9 */	bl fn_814AF408
+/* 81398420 | 48 11 6F E9 */	bl NWC24IterateDlTask
 /* 81398424 | 48 00 00 68 */	b .L_8139848C
 .L_81398428:
 /* 81398428 | A0 A1 00 0A */	lhz r5, 0xa(r1)
@@ -1755,7 +1755,7 @@
 .L_81398480:
 /* 81398480 | 38 61 00 0A */	addi r3, r1, 0xa
 /* 81398484 | 38 80 00 00 */	li r4, 0x0
-/* 81398488 | 48 11 6F 81 */	bl fn_814AF408
+/* 81398488 | 48 11 6F 81 */	bl NWC24IterateDlTask
 .L_8139848C:
 /* 8139848C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81398490 | 40 80 FF 98 */	bge .L_81398428
@@ -3575,9 +3575,9 @@
 /* 81399D88 | 4B FF C3 35 */	bl arc_init_handle__Q33ipl5scene11BoardObjectFPvP9ARCHandle
 /* 81399D8C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81399D90 | 41 82 00 94 */	beq .L_81399E24
-/* 81399D94 | 3F C0 81 61 */	lis r30, lbl_8160F708@ha
+/* 81399D94 | 3F C0 81 61 */	lis r30, scChangeTexFile__Q23ipl5scene@ha
 /* 81399D98 | 3B A0 00 00 */	li r29, 0x0
-/* 81399D9C | 3B DE F7 08 */	addi r30, r30, lbl_8160F708@l
+/* 81399D9C | 3B DE F7 08 */	addi r30, r30, scChangeTexFile__Q23ipl5scene@l
 /* 81399DA0 | 3B E0 00 00 */	li r31, 0x0
 .L_81399DA4:
 /* 81399DA4 | 7C 9E F8 2E */	lwzx r4, r30, r31
@@ -3693,8 +3693,8 @@
 /* 81399F28 | 4B FF C1 95 */	bl arc_init_handle__Q33ipl5scene11BoardObjectFPvP9ARCHandle
 /* 81399F2C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81399F30 | 41 82 00 A4 */	beq .L_81399FD4
-/* 81399F34 | 3C C0 81 61 */	lis r6, lbl_8160F7A8@ha
-/* 81399F38 | 84 A6 F7 A8 */	lwzu r5, lbl_8160F7A8@l(r6)
+/* 81399F34 | 3C C0 81 61 */	lis r6, scSoundFileList__Q23ipl5scene@ha
+/* 81399F38 | 84 A6 F7 A8 */	lwzu r5, scSoundFileList__Q23ipl5scene@l(r6)
 /* 81399F3C | 3B C1 00 08 */	addi r30, r1, 0x8
 /* 81399F40 | 3B 80 00 00 */	li r28, 0x0
 /* 81399F44 | 80 86 00 04 */	lwz r4, 0x4(r6)
@@ -5851,7 +5851,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x8160F708 | size: 0x6C
-.obj lbl_8160F708, global
+# ipl::scene::scChangeTexFile
+.obj scChangeTexFile__Q23ipl5scene, local
 	.4byte lbl_8164B994
 	.4byte lbl_8164B9A8
 	.4byte lbl_81696664
@@ -5879,7 +5880,7 @@
 	.4byte lbl_8164BA84
 	.4byte lbl_8164BA98
 	.4byte lbl_816966A4
-.endobj lbl_8160F708
+.endobj scChangeTexFile__Q23ipl5scene
 
 # .rodata:0x6C | 0x8160F774 | size: 0x34
 .obj lbl_8160F774, global
@@ -5912,12 +5913,13 @@
 .endobj lbl_8160F774
 
 # .rodata:0xA0 | 0x8160F7A8 | size: 0x10
-.obj lbl_8160F7A8, global
+# ipl::scene::scSoundFileList
+.obj scSoundFileList__Q23ipl5scene, local
 	.4byte lbl_8164BD8D
 	.4byte lbl_8164BD97
 	.4byte lbl_8164BDA1
 	.4byte lbl_8164BDAB
-.endobj lbl_8160F7A8
+.endobj scSoundFileList__Q23ipl5scene
 
 # 0x8164B6D0..0x8164BF48 | size: 0x878
 .data

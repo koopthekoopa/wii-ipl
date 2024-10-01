@@ -3,9 +3,14 @@
 
 #include <revolution/types.h>
 
+#include <revolution/types.h>
+#include <revolution/base/PPCArch.h>
 #include <revolution/os.h>
+#include <revolution/dvd.h>
+#include <revolution/mtx.h>
 #include <revolution/gx.h>
 #include <revolution/vi.h>
+#include <revolution/nand.h>
 
 #endif // REVOLUTION_H
 

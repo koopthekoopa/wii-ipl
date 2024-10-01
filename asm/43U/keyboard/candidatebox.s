@@ -3994,9 +3994,9 @@
 /* 8142B76C | 90 01 00 D4 */	stw r0, 0xd4(r1)
 /* 8142B770 | 39 61 00 D0 */	addi r11, r1, 0xd0
 /* 8142B774 | 48 1C DD 45 */	bl _savegpr_25
-/* 8142B778 | 3C A0 81 61 */	lis r5, lbl_81615658@ha
+/* 8142B778 | 3C A0 81 61 */	lis r5, csAninationFile__Q29textinput7toolbar_81615658@ha
 /* 8142B77C | 38 00 00 0A */	li r0, 0xa
-/* 8142B780 | 38 A5 56 58 */	addi r5, r5, lbl_81615658@l
+/* 8142B780 | 38 A5 56 58 */	addi r5, r5, csAninationFile__Q29textinput7toolbar_81615658@l
 /* 8142B784 | 7C 9F 23 78 */	mr r31, r4
 /* 8142B788 | 7C 7E 1B 78 */	mr r30, r3
 /* 8142B78C | 38 C1 00 54 */	addi r6, r1, 0x54
@@ -4008,9 +4008,9 @@
 /* 8142B7A0 | 90 66 00 04 */	stw r3, 0x4(r6)
 /* 8142B7A4 | 94 06 00 08 */	stwu r0, 0x8(r6)
 /* 8142B7A8 | 42 00 FF F0 */	bdnz .L_8142B798
-/* 8142B7AC | 3C 60 81 61 */	lis r3, lbl_816156A8@ha
+/* 8142B7AC | 3C 60 81 61 */	lis r3, csAninationFile__Q29textinput7toolbar_81615658+0x50@ha
 /* 8142B7B0 | 38 00 00 0A */	li r0, 0xa
-/* 8142B7B4 | 38 63 56 A8 */	addi r3, r3, lbl_816156A8@l
+/* 8142B7B4 | 38 63 56 A8 */	addi r3, r3, csAninationFile__Q29textinput7toolbar_81615658+0x50@l
 /* 8142B7B8 | 38 A1 00 04 */	addi r5, r1, 0x4
 /* 8142B7BC | 38 83 FF FC */	subi r4, r3, 0x4
 /* 8142B7C0 | 7C 09 03 A6 */	mtctr r0
@@ -6961,12 +6961,13 @@
 .balign 4
 	.4byte "__sinit_\\candidatebox_cpp"
 
-# 0x816152E0..0x816156F8 | size: 0x418
+# 0x816152E0..0x81615658 | size: 0x378
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x816152E0 | size: 0x44
-.obj lbl_816152E0, global
+# .rodata:0x0 | 0x816152E0 | size: 0x378
+# textinput::candidatebox::csAninationFile
+.obj csAninationFile__Q29textinput12candidatebox, local
 	.4byte 0x00000000
 	.4byte 0x66735F56
 	.4byte 0x4B5F7072
@@ -6984,10 +6985,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816152E0
-
-# .rodata:0x44 | 0x81615324 | size: 0x44
-.obj lbl_81615324, global
+.L_81615324:
 	.4byte 0x00000001
 	.4byte 0x66735F56
 	.4byte 0x4B5F7072
@@ -7005,10 +7003,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615324
-
-# .rodata:0x88 | 0x81615368 | size: 0x44
-.obj lbl_81615368, global
+.L_81615368:
 	.4byte 0x00000002
 	.4byte 0x66735F56
 	.4byte 0x4B5F7072
@@ -7026,10 +7021,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615368
-
-# .rodata:0xCC | 0x816153AC | size: 0x44
-.obj lbl_816153AC, global
+.L_816153AC:
 	.4byte 0x00000004
 	.4byte 0x66735F56
 	.4byte 0x4B5F7072
@@ -7047,10 +7039,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816153AC
-
-# .rodata:0x110 | 0x816153F0 | size: 0x44
-.obj lbl_816153F0, global
+.L_816153F0:
 	.4byte 0x00000005
 	.4byte 0x66735F56
 	.4byte 0x4B5F7072
@@ -7068,10 +7057,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816153F0
-
-# .rodata:0x154 | 0x81615434 | size: 0x44
-.obj lbl_81615434, global
+.L_81615434:
 	.4byte 0x00000006
 	.4byte 0x66735F56
 	.4byte 0x4B5F7072
@@ -7089,10 +7075,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615434
-
-# .rodata:0x198 | 0x81615478 | size: 0x44
-.obj lbl_81615478, global
+.L_81615478:
 	.4byte 0x00000003
 	.4byte 0x66735F56
 	.4byte 0x4B5F7072
@@ -7110,10 +7093,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615478
-
-# .rodata:0x1DC | 0x816154BC | size: 0x44
-.obj lbl_816154BC, global
+.L_816154BC:
 	.4byte 0x00000007
 	.4byte 0x66735F56
 	.4byte 0x4B5F7072
@@ -7131,10 +7111,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816154BC
-
-# .rodata:0x220 | 0x81615500 | size: 0x44
-.obj lbl_81615500, global
+.L_81615500:
 	.4byte 0x00000008
 	.4byte 0x66735F56
 	.4byte 0x4B5F7072
@@ -7152,10 +7129,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615500
-
-# .rodata:0x264 | 0x81615544 | size: 0x44
-.obj lbl_81615544, global
+.L_81615544:
 	.4byte 0x00000009
 	.4byte 0x66735F56
 	.4byte 0x4B5F7072
@@ -7173,10 +7147,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615544
-
-# .rodata:0x2A8 | 0x81615588 | size: 0x44
-.obj lbl_81615588, global
+.L_81615588:
 	.4byte 0x0000000B
 	.4byte 0x66735F56
 	.4byte 0x4B5F7072
@@ -7194,10 +7165,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615588
-
-# .rodata:0x2EC | 0x816155CC | size: 0x44
-.obj lbl_816155CC, global
+.L_816155CC:
 	.4byte 0x0000000A
 	.4byte 0x66735F56
 	.4byte 0x4B5F7072
@@ -7215,10 +7183,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_816155CC
-
-# .rodata:0x330 | 0x81615610 | size: 0x48
-.obj lbl_81615610, global
+.L_81615610:
 	.4byte 0x0000000C
 	.4byte 0x66735F56
 	.4byte 0x4B5F7072
@@ -7237,55 +7202,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj lbl_81615610
-
-# .rodata:0x378 | 0x81615658 | size: 0x50
-.obj lbl_81615658, global
-	.4byte lbl_8165D2D0
-	.4byte lbl_8165DA64
-	.4byte lbl_8165DA74
-	.4byte lbl_8165DA84
-	.4byte lbl_8165DA94
-	.4byte lbl_8165DAA4
-	.4byte lbl_8165DAB4
-	.4byte lbl_8165DAC4
-	.4byte lbl_8165DAD4
-	.4byte lbl_8165DAE4
-	.4byte lbl_8165DAF4
-	.4byte lbl_8165DB04
-	.4byte lbl_8165DB14
-	.4byte lbl_8165DB24
-	.4byte lbl_8165DB34
-	.4byte lbl_8165DB44
-	.4byte lbl_8165DB54
-	.4byte lbl_8165DB64
-	.4byte lbl_8165DB74
-	.4byte lbl_8165DB84
-.endobj lbl_81615658
-
-# .rodata:0x3C8 | 0x816156A8 | size: 0x50
-.obj lbl_816156A8, global
-	.4byte lbl_8165DB94
-	.4byte lbl_8165DBA4
-	.4byte lbl_8165DBB4
-	.4byte lbl_8165DBC4
-	.4byte lbl_8165DBD4
-	.4byte lbl_8165DBE4
-	.4byte lbl_8165DBF4
-	.4byte lbl_8165DC04
-	.4byte lbl_8165DC14
-	.4byte lbl_8165DC24
-	.4byte lbl_8165DC34
-	.4byte lbl_8165DC44
-	.4byte lbl_8165DC54
-	.4byte lbl_8165DC64
-	.4byte lbl_8165DC74
-	.4byte lbl_8165DC84
-	.4byte lbl_8165DC94
-	.4byte lbl_8165DCA4
-	.4byte lbl_8165DCB4
-	.4byte lbl_8165DCC4
-.endobj lbl_816156A8
+.endobj csAninationFile__Q29textinput12candidatebox
 
 # 0x8165D2D0..0x8165E070 | size: 0xDA0
 .data
@@ -7319,7 +7236,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000001
 	.4byte 0x00000000
-	.4byte lbl_816152E0
+	.4byte csAninationFile__Q29textinput12candidatebox
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7335,13 +7252,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_816153F0
-	.4byte lbl_81615434
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153F0
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615434
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x505F7072
@@ -7351,13 +7268,13 @@
 	.4byte 0x00000000
 	.4byte 0x00000007
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_816153F0
-	.4byte lbl_81615434
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153F0
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615434
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000001
 	.4byte 0x545F7072
@@ -7367,11 +7284,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7383,11 +7300,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7399,11 +7316,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7415,11 +7332,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7431,11 +7348,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7447,11 +7364,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7463,11 +7380,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7479,11 +7396,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7495,11 +7412,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7511,11 +7428,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7527,11 +7444,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7543,11 +7460,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7559,11 +7476,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7575,11 +7492,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7591,11 +7508,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7607,11 +7524,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7623,11 +7540,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7639,11 +7556,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7655,11 +7572,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7671,11 +7588,11 @@
 	.4byte 0x00000000
 	.4byte 0x00000005
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_81615478
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7687,14 +7604,14 @@
 	.4byte 0x00000000
 	.4byte 0x00000008
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_816153F0
-	.4byte lbl_81615434
-	.4byte lbl_81615478
-	.4byte lbl_816154BC
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153F0
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615434
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816154BC
 	.4byte 0x00000002
 	.4byte 0x505F4F66
 	.4byte 0x6642746E
@@ -7703,14 +7620,14 @@
 	.4byte 0x00000000
 	.4byte 0x00000008
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615324
-	.4byte lbl_81615368
-	.4byte lbl_816153AC
-	.4byte lbl_816153F0
-	.4byte lbl_81615434
-	.4byte lbl_81615478
-	.4byte lbl_816154BC
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615324
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615368
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153AC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816153F0
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615434
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615478
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816154BC
 	.4byte 0x00000003
 	.4byte 0x575F7072
 	.4byte 0x65646963
@@ -7719,12 +7636,12 @@
 	.4byte 0x00000000
 	.4byte 0x00000006
 	.4byte 0x00000000
-	.4byte lbl_816152E0
-	.4byte lbl_81615500
-	.4byte lbl_81615544
-	.4byte lbl_81615588
-	.4byte lbl_816155CC
-	.4byte lbl_81615610
+	.4byte csAninationFile__Q29textinput12candidatebox
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615500
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615544
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615588
+	.rel csAninationFile__Q29textinput12candidatebox, .L_816155CC
+	.rel csAninationFile__Q29textinput12candidatebox, .L_81615610
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x505F4F66

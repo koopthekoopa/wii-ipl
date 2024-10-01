@@ -142,7 +142,7 @@
 /* 813FC684 | 39 61 00 A0 */	addi r11, r1, 0xa0
 /* 813FC688 | 48 1F CE 0D */	bl _savegpr_16
 /* 813FC68C | 38 6D AB D4 */	li r3, lbl_81698C14@sda21
-/* 813FC690 | 48 0D D5 49 */	bl fn_814D9BD8
+/* 813FC690 | 48 0D D5 49 */	bl WDCheckEnableChannel
 /* 813FC694 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FC698 | 41 82 00 24 */	beq .L_813FC6BC
 /* 813FC69C | 81 8D AB CC */	lwz r12, lbl_81698C0C@sda21(r0)
@@ -217,7 +217,7 @@
 /* 813FC7A0 | 80 6D AB D8 */	lwz r3, lbl_81698C18@sda21(r0)
 /* 813FC7A4 | 38 A1 00 0C */	addi r5, r1, 0xc
 /* 813FC7A8 | 38 80 08 00 */	li r4, 0x800
-/* 813FC7AC | 48 0D D6 BD */	bl fn_814D9E68
+/* 813FC7AC | 48 0D D6 BD */	bl WDScanOnce
 /* 813FC7B0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FC7B4 | 40 82 01 00 */	bne .L_813FC8B4
 /* 813FC7B8 | 80 6D AB D8 */	lwz r3, lbl_81698C18@sda21(r0)

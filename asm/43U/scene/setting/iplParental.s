@@ -72,7 +72,7 @@
 /* 813FBAD0 | 38 A0 00 54 */	li r5, 0x54
 /* 813FBAD4 | 38 63 BC E4 */	addi r3, r3, m_scSave__Q33ipl8parental8Parental@l
 /* 813FBAD8 | 4B F3 47 59 */	bl memcpy
-/* 813FBADC | 38 6D AB BC */	li r3, lbl_81698BFC@sda21
+/* 813FBADC | 38 6D AB BC */	li r3, mMistake__Q33ipl8parental8Parental@sda21
 /* 813FBAE0 | 38 80 00 00 */	li r4, 0x0
 /* 813FBAE4 | 38 A0 00 03 */	li r5, 0x3
 /* 813FBAE8 | 4B F3 48 4D */	bl memset
@@ -183,7 +183,7 @@
 /* 813FBC18 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813FBC1C | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813FBC20 | 7C 7F 1B 78 */	mr r31, r3
-/* 813FBC24 | 38 6D AB B8 */	li r3, lbl_81698BF8@sda21
+/* 813FBC24 | 38 6D AB B8 */	li r3, mStackPass__Q33ipl8parental8Parental@sda21
 /* 813FBC28 | 7F E4 FB 78 */	mr r4, r31
 /* 813FBC2C | 48 20 69 71 */	bl strncmp
 /* 813FBC30 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -231,7 +231,7 @@
 .fn judgePass__Q33ipl8parental8ParentalFPCc, global
 /* 813FBCAC | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 813FBCB0 | 7C 08 02 A6 */	mflr r0
-/* 813FBCB4 | 38 8D AB BC */	li r4, lbl_81698BFC@sda21
+/* 813FBCB4 | 38 8D AB BC */	li r4, mMistake__Q33ipl8parental8Parental@sda21
 /* 813FBCB8 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813FBCBC | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 813FBCC0 | 3B E0 00 00 */	li r31, 0x0
@@ -240,14 +240,14 @@
 /* 813FBCCC | 4B FF FF A5 */	bl _checkPass__Q33ipl8parental8ParentalFPCc
 /* 813FBCD0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FBCD4 | 41 82 00 10 */	beq .L_813FBCE4
-/* 813FBCD8 | 9B ED AB BC */	stb r31, lbl_81698BFC@sda21(r0)
+/* 813FBCD8 | 9B ED AB BC */	stb r31, mMistake__Q33ipl8parental8Parental@sda21(r0)
 /* 813FBCDC | 38 60 00 01 */	li r3, 0x1
 /* 813FBCE0 | 48 00 00 14 */	b .L_813FBCF4
 .L_813FBCE4:
-/* 813FBCE4 | 88 8D AB BC */	lbz r4, lbl_81698BFC@sda21(r0)
+/* 813FBCE4 | 88 8D AB BC */	lbz r4, mMistake__Q33ipl8parental8Parental@sda21(r0)
 /* 813FBCE8 | 38 60 00 00 */	li r3, 0x0
 /* 813FBCEC | 38 04 00 01 */	addi r0, r4, 0x1
-/* 813FBCF0 | 98 0D AB BC */	stb r0, lbl_81698BFC@sda21(r0)
+/* 813FBCF0 | 98 0D AB BC */	stb r0, mMistake__Q33ipl8parental8Parental@sda21(r0)
 .L_813FBCF4:
 /* 813FBCF4 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813FBCF8 | 83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -267,11 +267,11 @@
 /* 813FBD1C | 38 A5 BC 90 */	addi r5, r5, m_sc__Q33ipl8parental8Parental@l
 /* 813FBD20 | 38 65 00 08 */	addi r3, r5, 0x8
 /* 813FBD24 | 93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813FBD28 | 3B ED AB BC */	li r31, lbl_81698BFC@sda21
+/* 813FBD28 | 3B ED AB BC */	li r31, mMistake__Q33ipl8parental8Parental@sda21
 /* 813FBD2C | 38 A0 00 40 */	li r5, 0x40
 /* 813FBD30 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813FBD34 | 3B C0 00 00 */	li r30, 0x0
-/* 813FBD38 | 9B CD AB BC */	stb r30, lbl_81698BFC@sda21(r0)
+/* 813FBD38 | 9B CD AB BC */	stb r30, mMistake__Q33ipl8parental8Parental@sda21(r0)
 /* 813FBD3C | 9B DF 00 02 */	stb r30, 0x2(r31)
 /* 813FBD40 | 48 20 24 95 */	bl memcmp
 /* 813FBD44 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -298,14 +298,14 @@
 .fn judgeMaster__Q33ipl8parental8ParentalFPCc, global
 /* 813FBD80 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 813FBD84 | 7C 08 02 A6 */	mflr r0
-/* 813FBD88 | 38 8D AB BF */	li r4, lbl_81698BFF@sda21
+/* 813FBD88 | 38 8D AB BF */	li r4, mMasterKey__Q33ipl8parental8Parental@sda21
 /* 813FBD8C | 38 A0 00 05 */	li r5, 0x5
 /* 813FBD90 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 813FBD94 | 93 E1 00 0C */	stw r31, 0xc(r1)
-/* 813FBD98 | 3B ED AB BC */	li r31, lbl_81698BFC@sda21
+/* 813FBD98 | 3B ED AB BC */	li r31, mMistake__Q33ipl8parental8Parental@sda21
 /* 813FBD9C | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 813FBDA0 | 3B C0 00 00 */	li r30, 0x0
-/* 813FBDA4 | 9B CD AB BC */	stb r30, lbl_81698BFC@sda21(r0)
+/* 813FBDA4 | 9B CD AB BC */	stb r30, mMistake__Q33ipl8parental8Parental@sda21(r0)
 /* 813FBDA8 | 9B DF 00 01 */	stb r30, 0x1(r31)
 /* 813FBDAC | 48 20 67 F1 */	bl strncmp
 /* 813FBDB0 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -330,7 +330,7 @@
 # .text:0x398 | 0x813FBDEC | size: 0x20
 # ipl::parental::Parental::checkMistake(unsigned char)
 .fn checkMistake__Q33ipl8parental8ParentalFUc, global
-/* 813FBDEC | 38 AD AB BC */	li r5, lbl_81698BFC@sda21
+/* 813FBDEC | 38 AD AB BC */	li r5, mMistake__Q33ipl8parental8Parental@sda21
 /* 813FBDF0 | 38 80 00 03 */	li r4, 0x3
 /* 813FBDF4 | 7C 05 18 AE */	lbzx r0, r5, r3
 /* 813FBDF8 | 7C 04 00 10 */	subfc r0, r4, r0
@@ -409,7 +409,7 @@
 /* 813FBEB0 | 38 A0 00 54 */	li r5, 0x54
 /* 813FBEB4 | 38 84 BC E4 */	addi r4, r4, m_scSave__Q33ipl8parental8Parental@l
 /* 813FBEB8 | 4B F3 43 79 */	bl memcpy
-/* 813FBEBC | 38 6D AB BC */	li r3, lbl_81698BFC@sda21
+/* 813FBEBC | 38 6D AB BC */	li r3, mMistake__Q33ipl8parental8Parental@sda21
 /* 813FBEC0 | 38 80 00 00 */	li r4, 0x0
 /* 813FBEC4 | 38 A0 00 03 */	li r5, 0x3
 /* 813FBEC8 | 4B F3 44 6D */	bl memset
@@ -438,7 +438,7 @@
 # ipl::parental::Parental::setPass(const char*)
 .fn setPass__Q33ipl8parental8ParentalFPCc, global
 /* 813FBEFC | 7C 64 1B 78 */	mr r4, r3
-/* 813FBF00 | 38 6D AB B8 */	li r3, lbl_81698BF8@sda21
+/* 813FBF00 | 38 6D AB B8 */	li r3, mStackPass__Q33ipl8parental8Parental@sda21
 /* 813FBF04 | 38 A0 00 04 */	li r5, 0x4
 /* 813FBF08 | 4B F3 43 28 */	b memcpy
 .endfn setPass__Q33ipl8parental8ParentalFPCc
@@ -596,7 +596,7 @@
 /* 813FC0D8 | 38 63 BC E4 */	addi r3, r3, m_scSave__Q33ipl8parental8Parental@l
 /* 813FC0DC | 38 A0 00 54 */	li r5, 0x54
 /* 813FC0E0 | 4B F3 41 51 */	bl memcpy
-/* 813FC0E4 | 38 6D AB BC */	li r3, lbl_81698BFC@sda21
+/* 813FC0E4 | 38 6D AB BC */	li r3, mMistake__Q33ipl8parental8Parental@sda21
 /* 813FC0E8 | 38 80 00 00 */	li r4, 0x0
 /* 813FC0EC | 38 A0 00 03 */	li r5, 0x3
 /* 813FC0F0 | 4B F3 42 45 */	bl memset
@@ -624,7 +624,7 @@
 /* 813FC134 | 3F E0 81 0C */	lis r31, m_sc__Q33ipl8parental8Parental@ha
 /* 813FC138 | 38 7F BC 90 */	addi r3, r31, m_sc__Q33ipl8parental8Parental@l
 /* 813FC13C | 4B F3 41 F9 */	bl memset
-/* 813FC140 | 38 6D AB BC */	li r3, lbl_81698BFC@sda21
+/* 813FC140 | 38 6D AB BC */	li r3, mMistake__Q33ipl8parental8Parental@sda21
 /* 813FC144 | 38 80 00 00 */	li r4, 0x0
 /* 813FC148 | 38 A0 00 03 */	li r5, 0x3
 /* 813FC14C | 4B F3 41 E9 */	bl memset
@@ -644,7 +644,7 @@
 # .text:0x728 | 0x813FC17C | size: 0x10
 # ipl::parental::Parental::clearMiss()
 .fn clearMiss__Q33ipl8parental8ParentalFv, global
-/* 813FC17C | 38 6D AB BC */	li r3, lbl_81698BFC@sda21
+/* 813FC17C | 38 6D AB BC */	li r3, mMistake__Q33ipl8parental8Parental@sda21
 /* 813FC180 | 38 80 00 00 */	li r4, 0x0
 /* 813FC184 | 38 A0 00 03 */	li r5, 0x3
 /* 813FC188 | 4B F3 41 AC */	b memset
@@ -731,7 +731,7 @@
 /* 813FC27C | 38 7F BD 38 */	addi r3, r31, mRequestNum__Q33ipl8parental8Parental@l
 /* 813FC280 | 38 A0 00 09 */	li r5, 0x9
 /* 813FC284 | 4B F3 40 B1 */	bl memset
-/* 813FC288 | 38 6D AB BF */	li r3, lbl_81698BFF@sda21
+/* 813FC288 | 38 6D AB BF */	li r3, mMasterKey__Q33ipl8parental8Parental@sda21
 /* 813FC28C | 38 80 00 00 */	li r4, 0x0
 /* 813FC290 | 38 A0 00 05 */	li r5, 0x5
 /* 813FC294 | 4B F3 40 A1 */	bl memset
@@ -773,7 +773,7 @@
 /* 813FC324 | 38 E3 14 C1 */	addi r7, r3, 0x14c1
 /* 813FC328 | 38 AD 91 A5 */	li r5, lbl_816971E5@sda21
 /* 813FC32C | 38 C4 86 A0 */	subi r6, r4, 0x7960
-/* 813FC330 | 38 6D AB BF */	li r3, lbl_81698BFF@sda21
+/* 813FC330 | 38 6D AB BF */	li r3, mMasterKey__Q33ipl8parental8Parental@sda21
 /* 813FC334 | 7C 07 33 96 */	divwu r0, r7, r6
 /* 813FC338 | 38 80 00 06 */	li r4, 0x6
 /* 813FC33C | 7C 00 31 D6 */	mullw r0, r0, r6
@@ -915,14 +915,16 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698BF8 | size: 0x4
-.obj lbl_81698BF8, global
+# ipl::parental::Parental::mStackPass
+.obj mStackPass__Q33ipl8parental8Parental, global
 	.skip 0x4
-.endobj lbl_81698BF8
+.endobj mStackPass__Q33ipl8parental8Parental
 
 # .sbss:0x4 | 0x81698BFC | size: 0x1
-.obj lbl_81698BFC, global
+# ipl::parental::Parental::mMistake
+.obj mMistake__Q33ipl8parental8Parental, global
 	.skip 0x1
-.endobj lbl_81698BFC
+.endobj mMistake__Q33ipl8parental8Parental
 
 # .sbss:0x5 | 0x81698BFD | size: 0x2
 .obj gap_12_81698BFD_sbss, global
@@ -931,6 +933,7 @@
 .endobj gap_12_81698BFD_sbss
 
 # .sbss:0x7 | 0x81698BFF | size: 0x9
-.obj lbl_81698BFF, global
+# ipl::parental::Parental::mMasterKey
+.obj mMasterKey__Q33ipl8parental8Parental, global
 	.skip 0x9
-.endobj lbl_81698BFF
+.endobj mMasterKey__Q33ipl8parental8Parental

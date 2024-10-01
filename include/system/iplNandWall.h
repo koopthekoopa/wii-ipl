@@ -4,7 +4,6 @@
 #include <decomp.h>
 
 #include <revolution.h>
-#include <revolution/nand.h>
 
 namespace ipl {
     namespace nandwall {

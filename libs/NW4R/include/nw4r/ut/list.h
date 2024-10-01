@@ -17,15 +17,15 @@ namespace nw4r {
             u16     offset;     // 0x0A
         } List;
         
-        void List_Init(List* pList, u16 offset);
-        void List_Append(List* pList, void* pObject);
-        void List_Prepend(List* pList, void* pObject);
-        void List_Insert(List* pList, void* pTarget, void* pObject);
-        void List_Remove(List* pList, void* pObject);
+        void List_Init(List* list, u16 offset);
+        void List_Append(List* list, void* object);
+        void List_Prepend(List* list, void* pobject);
+        void List_Insert(List* list, void* target, void* object);
+        void List_Remove(List* list, void* object);
         
-        void* List_GetNext(const List* pList, const void* pObject);
-        void* List_GetPrev(const List* pList, const void* pObject);
-        void* List_GetNth(const List* pList, u16 index);
+        void* List_GetNext(const List* list, const void* object);
+        void* List_GetPrev(const List* list, const void* object);
+        void* List_GetNth(const List* list, u16 index);
     }
 }
 

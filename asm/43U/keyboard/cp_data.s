@@ -594,7 +594,7 @@
 
 # .data:0x248 | 0x816607E0 | size: 0x68
 # textinput::keyboard::cellphonetype::csPaneNameNormalKey
-.obj csPaneNameNormalKey__Q39textinput8keyboard13cellphonetype, global
+.obj csPaneNameNormalKey__Q39textinput8keyboard13cellphonetype, local
 	.4byte lbl_81660680
 	.4byte lbl_8166068C
 	.4byte lbl_81660698

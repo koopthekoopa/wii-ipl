@@ -706,9 +706,9 @@
 /* 813C8E7C | FC 40 08 90 */	fmr f2, f1
 /* 813C8E80 | FC 60 08 90 */	fmr f3, f1
 /* 813C8E84 | 4B F9 9B D9 */	bl __ct__Q33ipl4math4VEC3Ffff
-/* 813C8E88 | 3C 80 81 65 */	lis r4, lbl_81651D24@ha
+/* 813C8E88 | 3C 80 81 65 */	lis r4, "@STRING@getTranslate__Q33ipl5scene11SavedataBoxFv"@ha
 /* 813C8E8C | 7F C3 F3 78 */	mr r3, r30
-/* 813C8E90 | 38 84 1D 24 */	addi r4, r4, lbl_81651D24@l
+/* 813C8E90 | 38 84 1D 24 */	addi r4, r4, "@STRING@getTranslate__Q33ipl5scene11SavedataBoxFv"@l
 /* 813C8E94 | 4B FD E7 31 */	bl get_translate__Q33ipl5scene13AnmControllerFPCc
 /* 813C8E98 | 7C 64 1B 78 */	mr r4, r3
 /* 813C8E9C | 38 61 00 20 */	addi r3, r1, 0x20
@@ -1855,11 +1855,12 @@
 .endobj __vt__Q33ipl5scene12SavedataEdit
 
 # .data:0x4C4 | 0x81651D24 | size: 0xC
-.obj lbl_81651D24, global
+# ipl::scene::SavedataBox::@STRING@getTranslate()
+.obj "@STRING@getTranslate__Q33ipl5scene11SavedataBoxFv", global
 	.4byte 0x4E5F4461
 	.4byte 0x74615F30
 	.4byte 0x30000000
-.endobj lbl_81651D24
+.endobj "@STRING@getTranslate__Q33ipl5scene11SavedataBoxFv"
 
 # 0x81694A58..0x81694A68 | size: 0x10
 .section .sdata2, "a"

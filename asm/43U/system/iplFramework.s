@@ -172,9 +172,9 @@
 /* 8133E014 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8133E018 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8133E01C | 48 2B B4 A5 */	bl _savegpr_27
-/* 8133E020 | 3F C0 81 63 */	lis r30, lbl_81634FA8@ha
+/* 8133E020 | 3F C0 81 63 */	lis r30, sRMO_Ntsc_640x456IntDf__3ipl@ha
 /* 8133E024 | 7C 7F 1B 78 */	mr r31, r3
-/* 8133E028 | 3B DE 4F A8 */	addi r30, r30, lbl_81634FA8@l
+/* 8133E028 | 3B DE 4F A8 */	addi r30, r30, sRMO_Ntsc_640x456IntDf__3ipl@l
 /* 8133E02C | 48 22 BF 89 */	bl SCGetAspectRatio
 /* 8133E030 | 54 7D 06 3E */	clrlwi r29, r3, 24
 /* 8133E034 | 48 22 C1 5D */	bl fn_8156A190
@@ -393,8 +393,9 @@
 .data
 .balign 8
 
-# .data:0x0 | 0x81634FA8 | size: 0x130
-.obj lbl_81634FA8, global
+# .data:0x0 | 0x81634FA8 | size: 0x3C
+# ipl::sRMO_Ntsc_640x456IntDf
+.obj sRMO_Ntsc_640x456IntDf__3ipl, local
 	.4byte 0x00000000
 	.4byte 0x028001C8
 	.4byte 0x01C80019
@@ -410,6 +411,11 @@
 	.4byte 0x06060707
 	.4byte 0x0C0C0C07
 	.4byte 0x07000000
+.endobj sRMO_Ntsc_640x456IntDf__3ipl
+
+# .data:0x3C | 0x81634FE4 | size: 0x3C
+# ipl::sRMO_Ntsc_640x456Prog
+.obj sRMO_Ntsc_640x456Prog__3ipl, local
 	.4byte 0x00000002
 	.4byte 0x028001C8
 	.4byte 0x01C80019
@@ -425,6 +431,11 @@
 	.4byte 0x06060000
 	.4byte 0x15161500
 	.4byte 0x00000000
+.endobj sRMO_Ntsc_640x456Prog__3ipl
+
+# .data:0x78 | 0x81635020 | size: 0x3C
+# ipl::sRMO_Pal50_640x456IntDf
+.obj sRMO_Pal50_640x456IntDf__3ipl, local
 	.4byte 0x00000004
 	.4byte 0x028001C8
 	.4byte 0x021E001B
@@ -440,6 +451,11 @@
 	.4byte 0x06060707
 	.4byte 0x0C0C0C07
 	.4byte 0x07000000
+.endobj sRMO_Pal50_640x456IntDf__3ipl
+
+# .data:0xB4 | 0x8163505C | size: 0x3C
+# ipl::sRMO_Pal60_640x456IntDf
+.obj sRMO_Pal60_640x456IntDf__3ipl, local
 	.4byte 0x00000014
 	.4byte 0x028001C8
 	.4byte 0x01C80019
@@ -455,6 +471,11 @@
 	.4byte 0x06060707
 	.4byte 0x0C0C0C07
 	.4byte 0x07000000
+.endobj sRMO_Pal60_640x456IntDf__3ipl
+
+# .data:0xF0 | 0x81635098 | size: 0x3C
+# ipl::sRMO_Pal60_640x456Prog
+.obj sRMO_Pal60_640x456Prog__3ipl, local
 	.4byte 0x00000016
 	.4byte 0x028001C8
 	.4byte 0x01C80019
@@ -470,8 +491,13 @@
 	.4byte 0x06060000
 	.4byte 0x15161500
 	.4byte 0x00000000
+.endobj sRMO_Pal60_640x456Prog__3ipl
+
+# .data:0x12C | 0x816350D4 | size: 0x4
+.obj gap_08_816350D4_data, global
+.hidden gap_08_816350D4_data
 	.4byte 0x00000000
-.endobj lbl_81634FA8
+.endobj gap_08_816350D4_data
 
 # 0x81694490..0x81694498 | size: 0x8
 .section .sdata2, "a"

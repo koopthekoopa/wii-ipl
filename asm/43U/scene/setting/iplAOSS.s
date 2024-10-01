@@ -22,7 +22,7 @@
 # .text:0x0 | 0x813FD170 | size: 0xC
 .fn AOSSi_Cancel, global
 /* 813FD170 | 38 00 00 01 */	li r0, 0x1
-/* 813FD174 | 90 0D AB F8 */	stw r0, lbl_81698C38@sda21(r0)
+/* 813FD174 | 90 0D AB F8 */	stw r0, AOSSi_cancel_flag@sda21(r0)
 /* 813FD178 | 4E 80 00 20 */	blr
 .endfn AOSSi_Cancel
 
@@ -171,7 +171,7 @@
 /* 813FD33C | 38 00 00 00 */	li r0, 0x0
 /* 813FD340 | 93 CD AC 10 */	stw r30, lbl_81698C50@sda21(r0)
 /* 813FD344 | 93 ED AC 14 */	stw r31, lbl_81698C54@sda21(r0)
-/* 813FD348 | 90 0D AB F8 */	stw r0, lbl_81698C38@sda21(r0)
+/* 813FD348 | 90 0D AB F8 */	stw r0, AOSSi_cancel_flag@sda21(r0)
 /* 813FD34C | 48 13 35 61 */	bl OSRestoreInterrupts
 /* 813FD350 | 38 60 00 00 */	li r3, 0x0
 .L_813FD354:
@@ -234,7 +234,7 @@
 /* 813FD40C | 48 00 03 04 */	b .L_813FD710
 .L_813FD410:
 /* 813FD410 | 38 60 00 03 */	li r3, 0x3
-/* 813FD414 | 48 0D C6 75 */	bl fn_814D9A88
+/* 813FD414 | 48 0D C6 75 */	bl WD_Startup
 /* 813FD418 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FD41C | 41 82 00 1C */	beq .L_813FD438
 /* 813FD420 | 2C 12 00 0A */	cmpwi r18, 0xa
@@ -245,7 +245,7 @@
 /* 813FD434 | 4B FF FF DC */	b .L_813FD410
 .L_813FD438:
 /* 813FD438 | 38 61 00 A0 */	addi r3, r1, 0xa0
-/* 813FD43C | 48 0D C5 79 */	bl fn_814D99B4
+/* 813FD43C | 48 0D C5 79 */	bl WD_GetInfo
 /* 813FD440 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FD444 | 40 82 00 14 */	bne .L_813FD458
 /* 813FD448 | 38 61 00 20 */	addi r3, r1, 0x20
@@ -284,7 +284,7 @@
 /* 813FD4C4 | 7F 04 C3 78 */	mr r4, r24
 /* 813FD4C8 | 38 61 00 40 */	addi r3, r1, 0x40
 /* 813FD4CC | 38 A0 32 00 */	li r5, 0x3200
-/* 813FD4D0 | 48 0D C4 01 */	bl fn_814D98D0
+/* 813FD4D0 | 48 0D C4 01 */	bl WD_Scan
 /* 813FD4D4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FD4D8 | 41 82 00 10 */	beq .L_813FD4E8
 /* 813FD4DC | 3C 03 80 00 */	addis r0, r3, 0x8000
@@ -385,7 +385,7 @@
 /* 813FD630 | 3A 20 00 00 */	li r17, 0x0
 /* 813FD634 | 48 00 00 5C */	b .L_813FD690
 .L_813FD638:
-/* 813FD638 | 80 0D AB F8 */	lwz r0, lbl_81698C38@sda21(r0)
+/* 813FD638 | 80 0D AB F8 */	lwz r0, AOSSi_cancel_flag@sda21(r0)
 /* 813FD63C | 2C 00 00 01 */	cmpwi r0, 0x1
 /* 813FD640 | 40 82 00 0C */	bne .L_813FD64C
 /* 813FD644 | 3A 20 FF FF */	li r17, -0x1
@@ -430,7 +430,7 @@
 /* 813FD6C8 | 3A B5 00 01 */	addi r21, r21, 0x1
 /* 813FD6CC | 4B FF FA C1 */	bl AOSS_813FD18C
 .L_813FD6D0:
-/* 813FD6D0 | 48 0D C4 9D */	bl fn_814D9B6C
+/* 813FD6D0 | 48 0D C4 9D */	bl WD_Cleanup
 /* 813FD6D4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FD6D8 | 40 82 FF DC */	bne .L_813FD6B4
 /* 813FD6DC | 48 00 00 20 */	b .L_813FD6FC
@@ -584,7 +584,7 @@
 /* 813FD8EC | 40 82 00 44 */	bne .L_813FD930
 /* 813FD8F0 | 48 00 00 34 */	b .L_813FD924
 .L_813FD8F4:
-/* 813FD8F4 | 80 0D AB F8 */	lwz r0, lbl_81698C38@sda21(r0)
+/* 813FD8F4 | 80 0D AB F8 */	lwz r0, AOSSi_cancel_flag@sda21(r0)
 /* 813FD8F8 | 2C 00 00 01 */	cmpwi r0, 0x1
 /* 813FD8FC | 40 82 00 0C */	bne .L_813FD908
 /* 813FD900 | 3B 80 FF FF */	li r28, -0x1
@@ -608,7 +608,7 @@
 /* 813FD938 | 38 00 00 01 */	li r0, 0x1
 /* 813FD93C | 38 61 00 20 */	addi r3, r1, 0x20
 /* 813FD940 | 90 1D 00 00 */	stw r0, 0x0(r29)
-/* 813FD944 | 48 0D C0 71 */	bl fn_814D99B4
+/* 813FD944 | 48 0D C0 71 */	bl WD_GetInfo
 /* 813FD948 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813FD94C | 40 82 00 0C */	bne .L_813FD958
 /* 813FD950 | 88 01 00 2E */	lbz r0, 0x2e(r1)
@@ -700,9 +700,9 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698C38 | size: 0x4
-.obj lbl_81698C38, global
+.obj AOSSi_cancel_flag, global
 	.skip 0x4
-.endobj lbl_81698C38
+.endobj AOSSi_cancel_flag
 
 # .sbss:0x4 | 0x81698C3C | size: 0x4
 .obj lbl_81698C3C, global

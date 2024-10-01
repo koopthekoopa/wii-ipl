@@ -187,7 +187,7 @@
 /* 81337BE4 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 81337BE8 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 81337BEC | 7C 7F 1B 78 */	mr r31, r3
-/* 81337BF0 | 88 0D A6 58 */	lbz r0, lbl_81698698@sda21(r0)
+/* 81337BF0 | 88 0D A6 58 */	lbz r0, mDiskChannelFixed__Q33ipl7channel7Manager@sda21(r0)
 /* 81337BF4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81337BF8 | 41 82 00 08 */	beq .L_81337C00
 /* 81337BFC | 48 00 1F 85 */	bl updateDiskState__Q33ipl7channel7ManagerFv
@@ -219,7 +219,7 @@
 # .text:0x2D4 | 0x81337C4C | size: 0x18
 # ipl::channel::Manager::reserveRefresh()
 .fn reserveRefresh__Q33ipl7channel7ManagerFv, global
-/* 81337C4C | 80 0D A6 50 */	lwz r0, lbl_81698690@sda21(r0)
+/* 81337C4C | 80 0D A6 50 */	lwz r0, mNumFinished__Q33ipl7channel7Manager@sda21(r0)
 /* 81337C50 | 28 00 00 30 */	cmplwi r0, 0x30
 /* 81337C54 | 4C 82 00 20 */	bnelr
 /* 81337C58 | 38 00 00 01 */	li r0, 0x1
@@ -241,11 +241,11 @@
 /* 81337C84 | 41 82 00 80 */	beq .L_81337D04
 /* 81337C88 | 38 E0 00 00 */	li r7, 0x0
 /* 81337C8C | 39 20 00 00 */	li r9, 0x0
-/* 81337C90 | 90 ED A6 50 */	stw r7, lbl_81698690@sda21(r0)
+/* 81337C90 | 90 ED A6 50 */	stw r7, mNumFinished__Q33ipl7channel7Manager@sda21(r0)
 /* 81337C94 | 38 80 00 00 */	li r4, 0x0
 /* 81337C98 | 38 00 00 0C */	li r0, 0xc
-/* 81337C9C | 90 ED A6 54 */	stw r7, lbl_81698694@sda21(r0)
-/* 81337CA0 | 98 ED A6 58 */	stb r7, lbl_81698698@sda21(r0)
+/* 81337C9C | 90 ED A6 54 */	stw r7, mNumValidChannel__Q33ipl7channel7Manager@sda21(r0)
+/* 81337CA0 | 98 ED A6 58 */	stb r7, mDiskChannelFixed__Q33ipl7channel7Manager@sda21(r0)
 /* 81337CA4 | 90 E3 00 08 */	stw r7, 0x8(r3)
 .L_81337CA8:
 /* 81337CA8 | 7D 03 22 14 */	add r8, r3, r4
@@ -2199,11 +2199,11 @@
 /* 81339610 | 38 A0 00 70 */	li r5, 0x70
 /* 81339614 | 4B FF 6D 21 */	bl memset
 /* 81339618 | 1C 7C 05 40 */	mulli r3, r28, 0x540
-/* 8133961C | 80 AD A6 50 */	lwz r5, lbl_81698690@sda21(r0)
+/* 8133961C | 80 AD A6 50 */	lwz r5, mNumFinished__Q33ipl7channel7Manager@sda21(r0)
 /* 81339620 | 38 80 00 02 */	li r4, 0x2
 /* 81339624 | 38 A5 00 01 */	addi r5, r5, 0x1
 /* 81339628 | 1C 1D 00 70 */	mulli r0, r29, 0x70
-/* 8133962C | 90 AD A6 50 */	stw r5, lbl_81698690@sda21(r0)
+/* 8133962C | 90 AD A6 50 */	stw r5, mNumFinished__Q33ipl7channel7Manager@sda21(r0)
 /* 81339630 | 7C 7B 1A 14 */	add r3, r27, r3
 /* 81339634 | 7C 63 02 14 */	add r3, r3, r0
 /* 81339638 | 90 83 00 58 */	stw r4, 0x58(r3)
@@ -2223,18 +2223,18 @@
 /* 8133966C | 90 0C 00 10 */	stw r0, 0x10(r12)
 .L_81339670:
 /* 81339670 | 38 00 00 01 */	li r0, 0x1
-/* 81339674 | 98 0D A6 58 */	stb r0, lbl_81698698@sda21(r0)
+/* 81339674 | 98 0D A6 58 */	stb r0, mDiskChannelFixed__Q33ipl7channel7Manager@sda21(r0)
 .L_81339678:
 /* 81339678 | 1C 84 05 40 */	mulli r4, r4, 0x540
-/* 8133967C | 81 0D A6 50 */	lwz r8, lbl_81698690@sda21(r0)
-/* 81339680 | 80 ED A6 54 */	lwz r7, lbl_81698694@sda21(r0)
+/* 8133967C | 81 0D A6 50 */	lwz r8, mNumFinished__Q33ipl7channel7Manager@sda21(r0)
+/* 81339680 | 80 ED A6 54 */	lwz r7, mNumValidChannel__Q33ipl7channel7Manager@sda21(r0)
 /* 81339684 | 38 C0 00 02 */	li r6, 0x2
 /* 81339688 | 39 08 00 01 */	addi r8, r8, 0x1
 /* 8133968C | 38 E7 00 01 */	addi r7, r7, 0x1
 /* 81339690 | 1C 05 00 70 */	mulli r0, r5, 0x70
 /* 81339694 | 7C 63 22 14 */	add r3, r3, r4
-/* 81339698 | 91 0D A6 50 */	stw r8, lbl_81698690@sda21(r0)
-/* 8133969C | 90 ED A6 54 */	stw r7, lbl_81698694@sda21(r0)
+/* 81339698 | 91 0D A6 50 */	stw r8, mNumFinished__Q33ipl7channel7Manager@sda21(r0)
+/* 8133969C | 90 ED A6 54 */	stw r7, mNumValidChannel__Q33ipl7channel7Manager@sda21(r0)
 /* 813396A0 | 7C 63 02 14 */	add r3, r3, r0
 /* 813396A4 | 90 C3 00 58 */	stw r6, 0x58(r3)
 /* 813396A8 | 48 00 01 9C */	b .L_81339844
@@ -2477,14 +2477,14 @@
 /* 81339A0C | 48 23 73 95 */	bl ARCInitHandle
 /* 81339A10 | 38 00 00 01 */	li r0, 0x1
 /* 81339A14 | 98 1F 00 18 */	stb r0, 0x18(r31)
-/* 81339A18 | 80 6D A6 54 */	lwz r3, lbl_81698694@sda21(r0)
+/* 81339A18 | 80 6D A6 54 */	lwz r3, mNumValidChannel__Q33ipl7channel7Manager@sda21(r0)
 /* 81339A1C | 38 03 00 01 */	addi r0, r3, 0x1
-/* 81339A20 | 90 0D A6 54 */	stw r0, lbl_81698694@sda21(r0)
+/* 81339A20 | 90 0D A6 54 */	stw r0, mNumValidChannel__Q33ipl7channel7Manager@sda21(r0)
 .L_81339A24:
-/* 81339A24 | 80 6D A6 50 */	lwz r3, lbl_81698690@sda21(r0)
+/* 81339A24 | 80 6D A6 50 */	lwz r3, mNumFinished__Q33ipl7channel7Manager@sda21(r0)
 /* 81339A28 | 38 00 00 02 */	li r0, 0x2
 /* 81339A2C | 38 63 00 01 */	addi r3, r3, 0x1
-/* 81339A30 | 90 6D A6 50 */	stw r3, lbl_81698690@sda21(r0)
+/* 81339A30 | 90 6D A6 50 */	stw r3, mNumFinished__Q33ipl7channel7Manager@sda21(r0)
 /* 81339A34 | 90 1F 00 4C */	stw r0, 0x4c(r31)
 /* 81339A38 | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 81339A3C | 83 C1 00 08 */	lwz r30, 0x8(r1)
@@ -2538,19 +2538,19 @@
 /* 81339AC0 | 7C 08 02 A6 */	mflr r0
 /* 81339AC4 | 38 60 00 00 */	li r3, 0x0
 /* 81339AC8 | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 81339ACC | 80 0D A6 50 */	lwz r0, lbl_81698690@sda21(r0)
+/* 81339ACC | 80 0D A6 50 */	lwz r0, mNumFinished__Q33ipl7channel7Manager@sda21(r0)
 /* 81339AD0 | 28 00 00 30 */	cmplwi r0, 0x30
 /* 81339AD4 | 40 82 00 40 */	bne .L_81339B14
 /* 81339AD8 | 38 00 00 00 */	li r0, 0x0
 /* 81339ADC | 38 61 00 08 */	addi r3, r1, 0x8
 /* 81339AE0 | 90 01 00 08 */	stw r0, 0x8(r1)
 /* 81339AE4 | 48 23 0D 99 */	bl fn_8156A87C
-/* 81339AE8 | 80 6D A6 54 */	lwz r3, lbl_81698694@sda21(r0)
+/* 81339AE8 | 80 6D A6 54 */	lwz r3, mNumValidChannel__Q33ipl7channel7Manager@sda21(r0)
 /* 81339AEC | 80 01 00 08 */	lwz r0, 0x8(r1)
 /* 81339AF0 | 7C 03 00 40 */	cmplw r3, r0
 /* 81339AF4 | 41 82 00 1C */	beq .L_81339B10
 /* 81339AF8 | 48 23 0D 95 */	bl fn_8156A88C
-/* 81339AFC | 80 0D A6 54 */	lwz r0, lbl_81698694@sda21(r0)
+/* 81339AFC | 80 0D A6 54 */	lwz r0, mNumValidChannel__Q33ipl7channel7Manager@sda21(r0)
 /* 81339B00 | 20 60 00 30 */	subfic r3, r0, 0x30
 /* 81339B04 | 48 23 0D 71 */	bl fn_8156A874
 /* 81339B08 | 38 60 00 01 */	li r3, 0x1
@@ -4060,26 +4060,37 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698690 | size: 0x4
-.obj lbl_81698690, global
+# ipl::channel::Manager::mNumFinished
+.obj mNumFinished__Q33ipl7channel7Manager, global
 	.skip 0x4
-.endobj lbl_81698690
+.endobj mNumFinished__Q33ipl7channel7Manager
 
 # .sbss:0x4 | 0x81698694 | size: 0x4
-.obj lbl_81698694, global
+# ipl::channel::Manager::mNumValidChannel
+.obj mNumValidChannel__Q33ipl7channel7Manager, global
 	.skip 0x4
-.endobj lbl_81698694
+.endobj mNumValidChannel__Q33ipl7channel7Manager
 
 # .sbss:0x8 | 0x81698698 | size: 0x4
-.obj lbl_81698698, global
+# ipl::channel::Manager::mDiskChannelFixed
+.obj mDiskChannelFixed__Q33ipl7channel7Manager, global
 	.skip 0x4
-.endobj lbl_81698698
+.endobj mDiskChannelFixed__Q33ipl7channel7Manager
 
 # .sbss:0xC | 0x8169869C | size: 0x4
-.obj lbl_8169869C, global
+# ipl::channel::Manager::msCurPage
+.obj msCurPage__Q33ipl7channel7Manager, global
 	.skip 0x4
-.endobj lbl_8169869C
+.endobj msCurPage__Q33ipl7channel7Manager
 
-# .sbss:0x10 | 0x816986A0 | size: 0x8
-.obj lbl_816986A0, global
-	.skip 0x8
-.endobj lbl_816986A0
+# .sbss:0x10 | 0x816986A0 | size: 0x4
+# ipl::channel::Manager::msCurIndex
+.obj msCurIndex__Q33ipl7channel7Manager, global
+	.skip 0x4
+.endobj msCurIndex__Q33ipl7channel7Manager
+
+# .sbss:0x14 | 0x816986A4 | size: 0x4
+.obj gap_12_816986A4_sbss, global
+.hidden gap_12_816986A4_sbss
+	.skip 0x4
+.endobj gap_12_816986A4_sbss
