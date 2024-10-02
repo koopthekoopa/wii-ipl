@@ -88,6 +88,15 @@ BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(BS2_BLD_PATH)/channelScript.a \
 						$(EZI8_DICT_ROOT)/$(BUILD_ROOT)/zi8clib.a \
 						$(REVOLUTION_EXT_ROOT)/$(BUILD_ROOT)/cdb.a \
+						$(REVOLUTION_EXT_ROOT)/$(BUILD_ROOT)/ncd.a \
+						$(REVOLUTION_EXT_ROOT)/$(BUILD_ROOT)/net.a \
+						$(REVOLUTION_EXT_ROOT)/$(BUILD_ROOT)/nhttp.a \
+						$(REVOLUTION_EXT_ROOT)/$(BUILD_ROOT)/nwc24.a \
+						$(REVOLUTION_EXT_ROOT)/$(BUILD_ROOT)/so.a \
+						$(REVOLUTION_EXT_ROOT)/$(BUILD_ROOT)/ssl.a \
+						$(REVOLUTION_EXT_ROOT)/$(BUILD_ROOT)/vf.a \
+						$(REVOLUTION_EXT_ROOT)/$(BUILD_ROOT)/wd.a \
+						$(RVLFACELIB_ROOT)/$(BUILD_ROOT)/RVLFaceLib.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/base.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/os.a \
 						$(RUNTIME_ROOT)/$(BUILD_ROOT)/Runtime.PPCEABI.H.a

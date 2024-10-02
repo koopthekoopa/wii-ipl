@@ -22,6 +22,7 @@ PPC_ROOT		= $(TOOLS_ROOT)/PPC
 # Tools defines
 AS				= $(PPC_ROOT)/powerpc-eabi-as$(EXEC)
 OBJCOPY			= $(PPC_ROOT)/powerpc-eabi-objcopy$(EXEC)
+DTK				= $(TOOLS_ROOT)/dtk$(EXEC)
 AS_MWCC			= mwasmeppc.exe
 CC				= mwcceppc.exe
 LD				= mwldeppc.exe

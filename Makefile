@@ -47,7 +47,7 @@ endif
 .PHONY: prepare clean_data
 
 ### Build
-all: Runtime RVL_SDK RevoEX Zi8Lib bs1 bs2 build/$(IPL_OUTFILE)
+all: Runtime RVL_SDK RevoEX RFL Zi8Lib bs1 bs2 build/$(IPL_OUTFILE)
 	@echo Build complete!
 
 # Link
@@ -60,7 +60,7 @@ build/$(IPL_OUTFILE): bs1 bs2
 	@sha1sum -c $(CONFIG_ROOT)/sha1.txt
 
 # Clean
-clean: clean_Runtime clean_RVL_SDK clean_RevoEX clean_Zi8Lib clean_bs1 clean_bs2 clean_data
+clean: clean_Runtime clean_RVL_SDK clean_RevoEX clean_RFL clean_Zi8Lib clean_bs1 clean_bs2 clean_data
 
 # Prepare
 prepare: PrepareDecomp
@@ -72,6 +72,7 @@ prepare: PrepareDecomp
 -include $(RUNTIME_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
 -include $(REVOLUTION_SDK_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
 -include $(REVOLUTION_EXT_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
+-include $(RVLFACELIB_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
 -include $(EZI8_DICT_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
 
 # App rules

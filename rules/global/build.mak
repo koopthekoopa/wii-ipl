@@ -3,6 +3,7 @@ define BuildASMSources
 	@echo Assembling $<...
 	@mkdir -p $(dir $@)
 	@$(AS) $(COMMON_ASFLAGS) -DIPL=$(VERSION) -I- -I $(1) -c -o $@ $<
+	@$(DTK) elf fixup $@ $@
 endef
 
 # $(1) = Include Path

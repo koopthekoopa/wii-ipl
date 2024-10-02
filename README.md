@@ -2,12 +2,14 @@
 # Wii Menu Decompilation [![Discord Server][discord-server-badge]][discord-server-link]
 [discord-server-link]: https://discord.gg/hKx3FJJgrV
 [discord-server-badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
-This work in progress repository aims to a full 1:1 decompilation of version 4.3 of the Wii Menu. Currenty supported versions: 4.3U (USA)   
+This work in progress repository aims to a full 1:1 decompilation of version 4.3 of the Wii Menu.   
+Currenty supported versions:
+- 4.3U (USA)   
 
 This repository requires a WAD of the Wii Menu.
 
 ## Dependencies
-**TODO: build for Mac OS**   
+**TODO: Build for Mac OS**   
 The following dependencies are required to build the decompilation:   
 
 - Git (optional)
@@ -40,6 +42,12 @@ For Arch Linux:
 ```
 sudo pacman -S base-devel python git
 ```
+
+### Automatically downloaded tools
+Here are a list of tools that get downloaded when you run `make prepare`:
+- [wibo](https://github.com/decompals/wibo) (when using linux)
+- [gc-wii-binutils](https://github.com/encounter/gc-wii-binutils)
+- [decomp-toolkit](https://www.github.com/encounter/decomp-toolkit)
 
 ## Building the Decompilation
 **NOTE: This will not compile a working Wii Menu yet!**
@@ -80,6 +88,6 @@ sudo pacman -S base-devel python git
 [objdiff](https://www.github.com/encounter/objdiff) - Used to check whenever if the compiled object is matching or not.   
 [Ghidra](https://www.github.com/NationalSecurityAgency/ghidra) - Used to load executables and output a rough decompilaton of a function.   
    
-Thanks to the people who worked on these tools!!!
+Thanks to everyone who contributed to those tools.
 
 

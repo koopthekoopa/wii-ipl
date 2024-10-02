@@ -33,9 +33,14 @@ $(WIBO):
 	@$(CHMOD) $(WIBO)
 endif
 
+$(DTK):
+	@echo Downloading DTK...
+	@$(PY) $(TOOLS_ROOT)/download_dtk.py
+	@$(CHMOD) $(DTK)
+
 .PHONY: $(TOOLS_ROOT)/wibo
 
-DownloadTools: $(TOOLS_ROOT)/GC $(TOOLS_ROOT)/PPC $(TOOLS_ROOT)/wibo
+DownloadTools: $(TOOLS_ROOT)/GC $(PPC_ROOT) $(WIBO) $(DTK)
 
 # Extract data
 
@@ -57,6 +62,12 @@ endif
 endif
 
 ifeq (,$(wildcard $(PPC_ROOT)))
+ifneq ($(MAKECMDGOALS),prepare)
+$(error $(PREP_ERROR))
+endif
+endif
+
+ifeq (,$(wildcard $(DTK)))
 ifneq ($(MAKECMDGOALS),prepare)
 $(error $(PREP_ERROR))
 endif

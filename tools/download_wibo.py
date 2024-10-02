@@ -2,9 +2,9 @@
 
 import urllib.request
 
-def extractURL(url, file):
+def extractURL(url):
     response = urllib.request.urlopen(url).read()
-    file = open(file, "wb")
+    file = open(fileName, "wb")
     file.write(response)
     file.close()
 
