@@ -3270,9 +3270,9 @@
 
 # .text:0x2C24 | 0x814D8678 | size: 0x18
 .fn VFi_nanddrv_init_drv_tbl, global
-/* 814D8678 | 3C A0 81 62 */	lis r5, l_nand_func_8161D178@ha
+/* 814D8678 | 3C A0 81 62 */	lis r5, l_nand_func@ha
 /* 814D867C | 90 83 00 04 */	stw r4, 0x4(r3)
-/* 814D8680 | 38 A5 D1 78 */	addi r5, r5, l_nand_func_8161D178@l
+/* 814D8680 | 38 A5 D1 78 */	addi r5, r5, l_nand_func@l
 /* 814D8684 | 90 A3 00 00 */	stw r5, 0x0(r3)
 /* 814D8688 | 38 60 00 00 */	li r3, 0x0
 /* 814D868C | 4E 80 00 20 */	blr
@@ -3508,6 +3508,22 @@
 /* 814D89BC | 38 21 00 50 */	addi r1, r1, 0x50
 /* 814D89C0 | 4E 80 00 20 */	blr
 .endfn nanddrv_physical_write
+
+# 0x8161D178..0x8161D198 | size: 0x20
+.rodata
+.balign 8
+
+# .rodata:0x0 | 0x8161D178 | size: 0x20
+.obj l_nand_func, local
+	.4byte nanddrv_init
+	.4byte nanddrv_finalize
+	.4byte nanddrv_mount
+	.4byte nanddrv_unmount
+	.4byte nanddrv_format
+	.4byte nanddrv_pread
+	.4byte nanddrv_pwrite
+	.4byte nanddrv_get_disk_info
+.endobj l_nand_func
 
 # 0x81698EA0..0x81698EA8 | size: 0x8
 .section .sbss, "wa", @nobits

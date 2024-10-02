@@ -2769,3 +2769,12 @@
 /* 814E6BC0 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 814E6BC4 | 4E 80 00 20 */	blr
 .endfn alarmCheckCb_
+
+# 0x816951B0..0x816951B8 | size: 0x8
+.section .sdata2, "a"
+.balign 8
+
+# .sdata2:0x0 | 0x816951B0 | size: 0x8
+.obj lbl_816951B0, global
+	.byte 0x00, 0x17, 0xAB, 0x00, 0x00, 0x00, 0x00, 0x00
+.endobj lbl_816951B0

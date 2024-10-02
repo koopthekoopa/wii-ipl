@@ -550,7 +550,7 @@
 
 # .text:0x814 | 0x81495598 | size: 0x8
 .fn NETAESCreate, global
-/* 81495598 | 38 E2 8C 40 */	li r7, lbl_81695040@sda21
+/* 81495598 | 38 E2 8C 40 */	li r7, NET_AES_BLOCK_MODE_CBC@sda21
 /* 8149559C | 4B FF FE 4C */	b NETAESCreateEx
 .endfn NETAESCreate
 
@@ -1504,7 +1504,7 @@
 .balign 8
 
 # .sdata2:0x0 | 0x81695040 | size: 0x8
-.obj lbl_81695040, global
+.obj NET_AES_BLOCK_MODE_CBC, global
 	.4byte NETiAESEncryptoBlock
 	.4byte NETiAESDecryptoBlock
-.endobj lbl_81695040
+.endobj NET_AES_BLOCK_MODE_CBC

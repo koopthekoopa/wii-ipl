@@ -29,7 +29,8 @@ REVOLUTION_EXT_ROOT	= $(LIBRARIES_ROOT)/RevoEX
 NW4R_ROOT			= $(LIBRARIES_ROOT)/NW4R
 EGG_ROOT			= $(LIBRARIES_ROOT)/EGG
 RVLFACELIB_ROOT		= $(LIBRARIES_ROOT)/RVLFaceLib
-EZI8_DICT_ROOT		= $(LIBRARIES_ROOT)/RVLMiddleware/Zi8Lib
+EZITEXT_ROOT		= $(LIBRARIES_ROOT)/RVLMiddleware/eZiText
+TMCJPEG_ROOT		= $(LIBRARIES_ROOT)/RVLMiddleware/TMC_JPEG
 
 # Checks
 ifneq ($(VERSION),43U)
@@ -47,7 +48,7 @@ endif
 .PHONY: prepare clean_data
 
 ### Build
-all: Runtime RVL_SDK RevoEX RFL Zi8Lib bs1 bs2 build/$(IPL_OUTFILE)
+all: Runtime RVL_SDK RevoEX RFL eZiText TMCJpeg bs1 bs2 build/$(IPL_OUTFILE)
 	@echo Build complete!
 
 # Link
@@ -60,7 +61,7 @@ build/$(IPL_OUTFILE): bs1 bs2
 	@sha1sum -c $(CONFIG_ROOT)/sha1.txt
 
 # Clean
-clean: clean_Runtime clean_RVL_SDK clean_RevoEX clean_RFL clean_Zi8Lib clean_bs1 clean_bs2 clean_data
+clean: clean_Runtime clean_RVL_SDK clean_RevoEX clean_RFL clean_eZiText clean_TMCJpeg clean_bs1 clean_bs2 clean_data
 
 # Prepare
 prepare: PrepareDecomp
@@ -73,7 +74,8 @@ prepare: PrepareDecomp
 -include $(REVOLUTION_SDK_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
 -include $(REVOLUTION_EXT_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
 -include $(RVLFACELIB_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
--include $(EZI8_DICT_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
+-include $(EZITEXT_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
+-include $(TMCJPEG_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
 
 # App rules
 -include $(RULES_ROOT)/BS1rules.mak

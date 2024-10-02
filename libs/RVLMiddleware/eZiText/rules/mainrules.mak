@@ -1,6 +1,6 @@
-ZI8_SRC_PATH		= 	$(EZI8_DICT_ROOT)/$(SOURCE_ROOT)
-ZI8_ASM_PATH		= 	$(EZI8_DICT_ROOT)/$(ASSEMBLY_ROOT)
-ZI8_BLD_PATH		= 	$(EZI8_DICT_ROOT)/$(BUILD_ROOT)
+ZI8_SRC_PATH		= 	$(EZITEXT_ROOT)/$(SOURCE_ROOT)
+ZI8_ASM_PATH		= 	$(EZITEXT_ROOT)/$(ASSEMBLY_ROOT)
+ZI8_BLD_PATH		= 	$(EZITEXT_ROOT)/$(BUILD_ROOT)
 ZI8_OBJ_PATH		= 	$(ZI8_BLD_PATH)/$(OBJECT_ROOT)
 ZI8_OBJASM_PATH		= 	$(ZI8_OBJ_PATH)/$(ASSEMBLY_ROOT)
 ZI8_INC_PATHS		= 	$(COMMON_INCLUDES)
@@ -43,9 +43,9 @@ $(ZI8_OBJASM_PATH)/%.o: $(ZI8_ASM_PATH)/%.s
 $(ZI8_BLD_PATH)/zi8clib.a: $(ZI8_OBJECTS)
 	$(call LinkLibrary,$(ZI8_CCPATH),$^,$@)
 
-Zi8Lib: $(ZI8_BLD_PATH)/zi8clib.a
-clean_Zi8Lib:
-	@echo Cleaning Zi8 Dictionary...
+eZiText: $(ZI8_BLD_PATH)/zi8clib.a
+clean_eZiText:
+	@echo Cleaning eZiText Dictionary...
 	@rm -rf $(ZI8_BLD_PATH)
 
 

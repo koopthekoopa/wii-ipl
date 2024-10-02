@@ -1,6 +1,20 @@
 .include "macros.inc"
 .file "sd_drv.c"
 
+# 0x810F5C80..0x810F6040 | size: 0x3C0
+.section .bss, "wa", @nobits
+.balign 8
+
+# .bss:0x0 | 0x810F5C80 | size: 0x340
+.obj l_event, local
+	.skip 0x340
+.endobj l_event
+
+# .bss:0x340 | 0x810F5FC0 | size: 0x80
+.obj l_sddrv_info, local
+	.skip 0x80
+.endobj l_sddrv_info
+
 # 0x814D89C4..0x814D97DC | size: 0xE18
 .text
 .balign 4
@@ -107,9 +121,9 @@
 /* 814D8B14 | 40 82 00 08 */	bne .L_814D8B1C
 /* 814D8B18 | 48 00 01 48 */	b .L_814D8C60
 .L_814D8B1C:
-/* 814D8B1C | 3C C0 81 0F */	lis r6, lbl_810F5C80@ha
+/* 814D8B1C | 3C C0 81 0F */	lis r6, l_event@ha
 /* 814D8B20 | 38 00 00 0D */	li r0, 0xd
-/* 814D8B24 | 38 C6 5C 80 */	addi r6, r6, lbl_810F5C80@l
+/* 814D8B24 | 38 C6 5C 80 */	addi r6, r6, l_event@l
 /* 814D8B28 | 38 60 00 00 */	li r3, 0x0
 /* 814D8B2C | 38 A0 00 00 */	li r5, 0x0
 /* 814D8B30 | 7C 09 03 A6 */	mtctr r0
@@ -303,7 +317,7 @@
 .endfn _ChkMediaEjectedAndNotifyPrfile
 
 # .text:0x3F8 | 0x814D8DBC | size: 0x204
-.fn sddrv_init_814D8DBC, global
+.fn sddrv_init, local
 /* 814D8DBC | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 814D8DC0 | 7C 08 02 A6 */	mflr r0
 /* 814D8DC4 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -388,11 +402,11 @@
 /* 814D8EE4 | 7F A3 EB 78 */	mr r3, r29
 /* 814D8EE8 | 48 00 00 B8 */	b .L_814D8FA0
 .L_814D8EEC:
-/* 814D8EEC | 3C A0 81 0F */	lis r5, lbl_810F5C80@ha
+/* 814D8EEC | 3C A0 81 0F */	lis r5, l_event@ha
 /* 814D8EF0 | 3C 80 81 4E */	lis r4, _EventCallBack@ha
 /* 814D8EF4 | 57 C0 28 34 */	slwi r0, r30, 5
 /* 814D8EF8 | 38 C0 00 02 */	li r6, 0x2
-/* 814D8EFC | 38 A5 5C 80 */	addi r5, r5, lbl_810F5C80@l
+/* 814D8EFC | 38 A5 5C 80 */	addi r5, r5, l_event@l
 /* 814D8F00 | 80 61 00 08 */	lwz r3, 0x8(r1)
 /* 814D8F04 | 7C C5 01 2E */	stwx r6, r5, r0
 /* 814D8F08 | 38 84 8A E0 */	addi r4, r4, _EventCallBack@l
@@ -421,9 +435,9 @@
 /* 814D8F60 | 7F A3 EB 78 */	mr r3, r29
 /* 814D8F64 | 48 00 00 3C */	b .L_814D8FA0
 .L_814D8F68:
-/* 814D8F68 | 3F E0 81 0F */	lis r31, lbl_810F5FC0@ha
+/* 814D8F68 | 3F E0 81 0F */	lis r31, l_sddrv_info@ha
 /* 814D8F6C | 57 C5 10 3A */	slwi r5, r30, 2
-/* 814D8F70 | 3B FF 5F C0 */	addi r31, r31, lbl_810F5FC0@l
+/* 814D8F70 | 3B FF 5F C0 */	addi r31, r31, l_sddrv_info@l
 /* 814D8F74 | 7F 83 E3 78 */	mr r3, r28
 /* 814D8F78 | 7C 1F 28 2E */	lwzx r0, r31, r5
 /* 814D8F7C | 38 80 00 01 */	li r4, 0x1
@@ -444,10 +458,10 @@
 /* 814D8FB4 | 7C 08 03 A6 */	mtlr r0
 /* 814D8FB8 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 814D8FBC | 4E 80 00 20 */	blr
-.endfn sddrv_init_814D8DBC
+.endfn sddrv_init
 
 # .text:0x5FC | 0x814D8FC0 | size: 0xF0
-.fn sddrv_mount_814D8FC0, global
+.fn sddrv_mount, local
 /* 814D8FC0 | 94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 814D8FC4 | 7C 08 02 A6 */	mflr r0
 /* 814D8FC8 | 90 01 00 34 */	stw r0, 0x34(r1)
@@ -499,9 +513,9 @@
 /* 814D906C | 80 81 00 10 */	lwz r4, 0x10(r1)
 /* 814D9070 | 7F A3 EB 78 */	mr r3, r29
 /* 814D9074 | 4B FF C6 85 */	bl dCommon_setFileSizeToDisk
-/* 814D9078 | 3C 80 81 0F */	lis r4, lbl_810F5FC0@ha
+/* 814D9078 | 3C 80 81 0F */	lis r4, l_sddrv_info@ha
 /* 814D907C | 57 C5 10 3A */	slwi r5, r30, 2
-/* 814D9080 | 38 84 5F C0 */	addi r4, r4, lbl_810F5FC0@l
+/* 814D9080 | 38 84 5F C0 */	addi r4, r4, l_sddrv_info@l
 /* 814D9084 | 38 60 00 00 */	li r3, 0x0
 /* 814D9088 | 7C 04 28 2E */	lwzx r0, r4, r5
 /* 814D908C | 60 00 00 02 */	ori r0, r0, 0x2
@@ -514,10 +528,10 @@
 /* 814D90A4 | 7C 08 03 A6 */	mtlr r0
 /* 814D90A8 | 38 21 00 30 */	addi r1, r1, 0x30
 /* 814D90AC | 4E 80 00 20 */	blr
-.endfn sddrv_mount_814D8FC0
+.endfn sddrv_mount
 
 # .text:0x6EC | 0x814D90B0 | size: 0x64
-.fn sddrv_format_814D90B0, global
+.fn sddrv_format, local
 /* 814D90B0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 814D90B4 | 7C 08 02 A6 */	mflr r0
 /* 814D90B8 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -546,10 +560,10 @@
 /* 814D9108 | 7C 08 03 A6 */	mtlr r0
 /* 814D910C | 38 21 00 10 */	addi r1, r1, 0x10
 /* 814D9110 | 4E 80 00 20 */	blr
-.endfn sddrv_format_814D90B0
+.endfn sddrv_format
 
 # .text:0x750 | 0x814D9114 | size: 0x9C
-.fn sddrv_pread_814D9114, global
+.fn sddrv_pread, local
 /* 814D9114 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 814D9118 | 7C 08 02 A6 */	mflr r0
 /* 814D911C | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -593,10 +607,10 @@
 /* 814D91A4 | 7C 08 03 A6 */	mtlr r0
 /* 814D91A8 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 814D91AC | 4E 80 00 20 */	blr
-.endfn sddrv_pread_814D9114
+.endfn sddrv_pread
 
 # .text:0x7EC | 0x814D91B0 | size: 0x9C
-.fn sddrv_pwrite_814D91B0, global
+.fn sddrv_pwrite, local
 /* 814D91B0 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 814D91B4 | 7C 08 02 A6 */	mflr r0
 /* 814D91B8 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -640,10 +654,10 @@
 /* 814D9240 | 7C 08 03 A6 */	mtlr r0
 /* 814D9244 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 814D9248 | 4E 80 00 20 */	blr
-.endfn sddrv_pwrite_814D91B0
+.endfn sddrv_pwrite
 
 # .text:0x888 | 0x814D924C | size: 0x4C
-.fn sddrv_unmount_814D924C, global
+.fn sddrv_unmount, local
 /* 814D924C | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 814D9250 | 7C 08 02 A6 */	mflr r0
 /* 814D9254 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -653,9 +667,9 @@
 /* 814D9264 | 48 00 00 24 */	b .L_814D9288
 .L_814D9268:
 /* 814D9268 | 4B FF C5 BD */	bl dCommon_getHandleIdxFromDisk
-/* 814D926C | 3C 80 81 0F */	lis r4, lbl_810F5FC0@ha
+/* 814D926C | 3C 80 81 0F */	lis r4, l_sddrv_info@ha
 /* 814D9270 | 54 65 10 3A */	slwi r5, r3, 2
-/* 814D9274 | 38 84 5F C0 */	addi r4, r4, lbl_810F5FC0@l
+/* 814D9274 | 38 84 5F C0 */	addi r4, r4, l_sddrv_info@l
 /* 814D9278 | 38 60 00 00 */	li r3, 0x0
 /* 814D927C | 7C 04 28 2E */	lwzx r0, r4, r5
 /* 814D9280 | 54 00 07 FA */	rlwinm r0, r0, 0, 31, 29
@@ -665,10 +679,10 @@
 /* 814D928C | 7C 08 03 A6 */	mtlr r0
 /* 814D9290 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 814D9294 | 4E 80 00 20 */	blr
-.endfn sddrv_unmount_814D924C
+.endfn sddrv_unmount
 
 # .text:0x8D4 | 0x814D9298 | size: 0xD8
-.fn sddrv_finalize_814D9298, global
+.fn sddrv_finalize, local
 /* 814D9298 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 814D929C | 7C 08 02 A6 */	mflr r0
 /* 814D92A0 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -710,9 +724,9 @@
 .L_814D9324:
 /* 814D9324 | 7F C3 F3 78 */	mr r3, r30
 /* 814D9328 | 4B FF C4 FD */	bl dCommon_getHandleIdxFromDisk
-/* 814D932C | 3C C0 81 0F */	lis r6, lbl_810F5FC0@ha
+/* 814D932C | 3C C0 81 0F */	lis r6, l_sddrv_info@ha
 /* 814D9330 | 54 67 10 3A */	slwi r7, r3, 2
-/* 814D9334 | 38 C6 5F C0 */	addi r6, r6, lbl_810F5FC0@l
+/* 814D9334 | 38 C6 5F C0 */	addi r6, r6, l_sddrv_info@l
 /* 814D9338 | 38 00 FF FA */	li r0, -0x6
 /* 814D933C | 7C A6 38 2E */	lwzx r5, r6, r7
 /* 814D9340 | 7F C3 F3 78 */	mr r3, r30
@@ -728,10 +742,10 @@
 /* 814D9364 | 7C 08 03 A6 */	mtlr r0
 /* 814D9368 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 814D936C | 4E 80 00 20 */	blr
-.endfn sddrv_finalize_814D9298
+.endfn sddrv_finalize
 
 # .text:0x9AC | 0x814D9370 | size: 0x154
-.fn sddrv_get_disk_info_814D9370, global
+.fn sddrv_get_disk_info, local
 /* 814D9370 | 94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 814D9374 | 7C 08 02 A6 */	mflr r0
 /* 814D9378 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -825,13 +839,13 @@
 /* 814D94B8 | 7C 08 03 A6 */	mtlr r0
 /* 814D94BC | 38 21 00 30 */	addi r1, r1, 0x30
 /* 814D94C0 | 4E 80 00 20 */	blr
-.endfn sddrv_get_disk_info_814D9370
+.endfn sddrv_get_disk_info
 
 # .text:0xB00 | 0x814D94C4 | size: 0x18
 .fn VFi_sddrv_init_drv_tbl, global
-/* 814D94C4 | 3C A0 81 62 */	lis r5, lbl_8161D198@ha
+/* 814D94C4 | 3C A0 81 62 */	lis r5, pfd_sddrv_func@ha
 /* 814D94C8 | 90 83 00 04 */	stw r4, 0x4(r3)
-/* 814D94CC | 38 A5 D1 98 */	addi r5, r5, lbl_8161D198@l
+/* 814D94CC | 38 A5 D1 98 */	addi r5, r5, pfd_sddrv_func@l
 /* 814D94D0 | 90 A3 00 00 */	stw r5, 0x0(r3)
 /* 814D94D4 | 38 60 00 00 */	li r3, 0x0
 /* 814D94D8 | 4E 80 00 20 */	blr
@@ -1064,3 +1078,19 @@
 /* 814D97D4 | 7D 41 53 78 */	mr r1, r10
 /* 814D97D8 | 4E 80 00 20 */	blr
 .endfn sddrv_physical_write
+
+# 0x8161D198..0x8161D1B8 | size: 0x20
+.rodata
+.balign 8
+
+# .rodata:0x0 | 0x8161D198 | size: 0x20
+.obj pfd_sddrv_func, local
+	.4byte sddrv_init
+	.4byte sddrv_finalize
+	.4byte sddrv_mount
+	.4byte sddrv_unmount
+	.4byte sddrv_format
+	.4byte sddrv_pread
+	.4byte sddrv_pwrite
+	.4byte sddrv_get_disk_info
+.endobj pfd_sddrv_func
