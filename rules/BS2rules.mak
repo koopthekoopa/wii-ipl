@@ -1,13 +1,14 @@
 # Mandatory
 BS2_SRC_PATH			= $(SOURCE_ROOT)
 BS2_ASM_PATH			= $(VER_ASSEMBLY_ROOT)
-BS2_BLD_PATH			= $(BUILD_ROOT)/BS2
+BS2_GLOBAL_BLD_PATH		= $(BUILD_ROOT)/BS2
+BS2_BLD_PATH			= $(BS2_GLOBAL_BLD_PATH)/$(VERSION)
 BS2_OBJ_PATH			= $(BS2_BLD_PATH)/$(OBJECT_ROOT)
 BS2_OBJASM_PATH			= $(BS2_OBJ_PATH)/$(ASSEMBLY_ROOT)
 BS2_INC_PATHS			= $(COMMON_INCLUDES)
 
 # stuff for linking the elf
-BS2_ELF_NAME		= BS2
+BS2_ELF_NAME		= BS2.$(VERSION)
 BS2_ELF_CC			= $(CW_GC_30A52)
 BS2_ELF_ENTRY_POINT	= __start
 BS2_ELF_ADDRESS		= 0x81330000
@@ -17,7 +18,7 @@ BS2_ELF_LINKSCRIPT	= ldscript_ipl2.lcf
 BS2_IMAGE_SIZE		= 0x3B0000
 
 # for libraries
-BS2_CMN_CFLAGS	=	-O4,s -ipa file $(COMMON_CCFLAGS)
+BS2_CMN_CFLAGS	=	-O4,s -ipa file $(COMMON_CCFLAGS) -sym on
 BS2_CMN_CCPATH	=	$(CW_GC_30A52)
 
 # libraries
@@ -102,16 +103,16 @@ BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/os.a \
 						$(RUNTIME_ROOT)/$(BUILD_ROOT)/Runtime.PPCEABI.H.a
 
-$(BUILD_ROOT)/$(BS2_ELF_NAME).elf: $(BS2_ELF_LIBRARIES)
+$(BUILD_ROOT)/BS2/$(BS2_ELF_NAME).elf: $(BS2_ELF_LIBRARIES)
 	$(call LinkElf,$(BS2_ELF_CC),$^,$@,$(BS2_ELF_LINKSCRIPT))
 
 # the target
-bs2:	$(BUILD_ROOT)/$(BS2_ELF_NAME).elf
+bs2:	$(BUILD_ROOT)/BS2/$(BS2_ELF_NAME).elf
 
 clean_bs2:
 	@echo Cleaning BS2...
 	@rm -rf $(BS2_BLD_PATH)
-	@rm -rf $(BUILD_ROOT)/$(BS2_ELF_NAME).elf
-	@rm -rf $(BUILD_ROOT)/$(BS2_ELF_NAME).map
+	@rm -rf $(BS2_GLOBAL_BLD_PATH)/$(BS2_ELF_NAME).elf
+	@rm -rf $(BS2_GLOBAL_BLD_PATH)/$(BS2_ELF_NAME).map
 
 

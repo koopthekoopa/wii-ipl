@@ -4,7 +4,7 @@
 #include <decomp.h>
 
 #include <revolution.h>
-#include <revolution/esp.h>
+#include <revolution/es.h>
 
 #include <egg/core.h>
 

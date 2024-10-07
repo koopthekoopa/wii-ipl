@@ -636,12 +636,12 @@
 /* 8133BB28 | 40 82 00 14 */	bne .L_8133BB3C
 /* 8133BB2C | 7F C3 F3 78 */	mr r3, r30
 /* 8133BB30 | 7F E4 FB 78 */	mr r4, r31
-/* 8133BB34 | 48 22 07 79 */	bl fn_8155C2AC
+/* 8133BB34 | 48 22 07 79 */	bl CXUncompressLZ
 /* 8133BB38 | 48 00 00 10 */	b .L_8133BB48
 .L_8133BB3C:
 /* 8133BB3C | 7F E4 FB 78 */	mr r4, r31
 /* 8133BB40 | 38 7E 00 04 */	addi r3, r30, 0x4
-/* 8133BB44 | 48 22 07 69 */	bl fn_8155C2AC
+/* 8133BB44 | 48 22 07 69 */	bl CXUncompressLZ
 .L_8133BB48:
 /* 8133BB48 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8133BB4C | 48 2B D9 C9 */	bl _restgpr_29
@@ -1201,7 +1201,7 @@
 /* 8133C2C8 | 7C 7F 1B 78 */	mr r31, r3
 /* 8133C2CC | 38 80 00 02 */	li r4, 0x2
 /* 8133C2D0 | 38 60 00 01 */	li r3, 0x1
-/* 8133C2D4 | 48 28 2B E5 */	bl fn_815BEEB8
+/* 8133C2D4 | 48 28 2B E5 */	bl ES_SetUid
 /* 8133C2D8 | 38 7E 00 08 */	addi r3, r30, 0x8
 /* 8133C2DC | 38 81 00 08 */	addi r4, r1, 0x8
 /* 8133C2E0 | 48 02 41 D1 */	bl PrivateGetType__Q33ipl4nand7wrapperFPCcPUc

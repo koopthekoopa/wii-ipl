@@ -166,7 +166,7 @@
 /* 813C9FF0 | 48 16 46 B1 */	bl OSReport
 /* 813C9FF4 | 38 80 00 02 */	li r4, 0x2
 /* 813C9FF8 | 38 60 00 01 */	li r3, 0x1
-/* 813C9FFC | 48 1F 4E BD */	bl fn_815BEEB8
+/* 813C9FFC | 48 1F 4E BD */	bl ES_SetUid
 /* 813CA000 | 38 60 05 80 */	li r3, 0x580
 /* 813CA004 | 48 22 E0 99 */	bl __nw__FUl
 /* 813CA008 | 2C 03 00 00 */	cmpwi r3, 0x0

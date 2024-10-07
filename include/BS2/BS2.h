@@ -2,7 +2,7 @@
 #define BS2_H
 
 #include <revolution/types.h>
-#include <revolution/esp.h>
+#include <revolution/es.h>
 
 #ifdef __cplusplus
 extern "C" {

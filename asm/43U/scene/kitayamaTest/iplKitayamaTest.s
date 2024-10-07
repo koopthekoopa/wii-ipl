@@ -225,7 +225,7 @@
 /* 813BE2BC | 3C 80 30 30 */	lis r4, 0x3030
 /* 813BE2C0 | 3C 60 00 01 */	lis r3, 0x1
 /* 813BE2C4 | 38 84 30 30 */	addi r4, r4, 0x3030
-/* 813BE2C8 | 48 20 0B F1 */	bl fn_815BEEB8
+/* 813BE2C8 | 48 20 0B F1 */	bl ES_SetUid
 /* 813BE2CC | 48 1B 61 D9 */	bl fn_815744A4
 /* 813BE2D0 | 48 1B 60 A1 */	bl ISFS_OpenLib
 /* 813BE2D4 | 38 7F 00 3C */	addi r3, r31, 0x3c
@@ -456,7 +456,7 @@
 .L_813BE624:
 /* 813BE624 | 38 80 00 02 */	li r4, 0x2
 /* 813BE628 | 38 60 00 01 */	li r3, 0x1
-/* 813BE62C | 48 20 08 8D */	bl fn_815BEEB8
+/* 813BE62C | 48 20 08 8D */	bl ES_SetUid
 /* 813BE630 | 48 1B 5E 75 */	bl fn_815744A4
 /* 813BE634 | 48 1B 5D 3D */	bl ISFS_OpenLib
 /* 813BE638 | 3F 80 81 09 */	lis r28, smArg__Q23ipl6System@ha

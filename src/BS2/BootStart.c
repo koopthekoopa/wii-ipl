@@ -15,8 +15,9 @@ extern "C" {
 #endif
 
 extern int  main(int argc, char** argv);
-extern void DBInit();
 extern void exit();
+
+extern void DBInit();
 
 #pragma section code_type ".init"
 
@@ -25,7 +26,7 @@ void __start();
 /**
  * @note Address: 0x81330000 (4.3J/4.3U/4.3E)
  * @note Size: 0xA8
- * @note THIS MUST BE THE FIRST FUNCTION LINKED AT 0x81330000 (UNLESS YOU CHANGE 'BS2_ENTRY' FROM 'BS1.inc')
+ * @note This must be the first function linked.
  */
 __declspec(weak) asm void __start() {
     nofralloc

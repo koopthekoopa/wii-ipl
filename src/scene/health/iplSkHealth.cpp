@@ -105,7 +105,7 @@ namespace ipl {
          * @note Size: 0x4C
          */
         void skHealth::prepare() {
-            mpLayoutFile = System::getNand()->readLayoutAsync(System::getSceneHeap(), "health.ash", true);
+            mpLayoutFile = System::getNand()->readLayoutAsync(System::getUnk28Heap(), "health.ash", true);
         }
 
         /**

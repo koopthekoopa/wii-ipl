@@ -49,6 +49,7 @@ typedef struct  {
 
 BOOL    ARCInitHandle(void* buffer, ARCHandle* pHandle);
 
+BOOL    ARCOpen(ARCHandle* handle, const char* path, ARCFileInfo* info);
 BOOL    ARCFastOpen(ARCHandle* handle, s32 entrynum, ARCFileInfo* info);
 
 s32     ARCConvertPathToEntrynum(ARCHandle* handle, const char* path);

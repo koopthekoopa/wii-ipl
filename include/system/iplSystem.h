@@ -1,6 +1,8 @@
 #ifndef IPL_SYSTEM_H
 #define IPL_SYSTEM_H
 
+#include <decomp.h>
+
 #include <revolution.h>
 
 #include <nw4r/ut.h>
@@ -27,30 +29,21 @@
 namespace ipl {
     class System {
         public:
-            typedef struct {
-                private:
-                    u8  unk_0x00[0xA0];
-
-                    u8* mpMsgData;              // 0xA0
-
-                public:
-                    /** @return The Message Data of the language. */
-                    u8* getBuffer() { return mpMsgData; }
-
-                friend class System;
-            } UnkRegionData;
-
             class Arg {
                 public:
                     Arg();
 
                 private:
-                    u8                  unk_0x00[0x08];
-                    EGG::Heap*          mpMem1Heap;             // 0x08
-                    EGG::Heap*          mpMem2Heap;             // 0x0C
-                    u8                  unk_0x10[0x18];
-                    EGG::Heap*          mpSceneHeap;            // 0x28
-                    u8                  unk_0x2C[0x38];
+                    u8                  unk_0x00[0x04];
+                    EGG::Heap*          mpAppHeap;              // 0x04
+                    EGG::Heap*          mpMem1SysHeap;          // 0x08
+                    EGG::Heap*          unk_0x0C;               // 0x0C
+                    u8                  unk_0x10[0x10];
+                    EGG::Heap*          mpNandSharedHeap;       // 0x20
+                    undefined4*         unk_0x24;
+                    EGG::Heap*          unk_0x28;
+                    EGG::Heap*          mpTreasureHeap;         // 0x2C
+                    u8                  unk_0x30[0x34];
 
                     scene::Manager*     mpSceneManager;         // 0x64
                     undefined4*         unk_0x68;
@@ -76,18 +69,22 @@ namespace ipl {
                     EGG::ColorFader*    mpGblFader;             // 0xC4
                     EGG::ColorFader*    mpScnFader;             // 0xC8
 
-                    u8                  unk_0xCC[0x64];
+                    u8                  unk_0xCC[0x34];
 
-                    UnkRegionData*      mpEngMsg;               // 0x130
-                    UnkRegionData*      mpFraMsg;               // 0x134
-                    UnkRegionData*      mpGerMsg;               // 0x138
-                    UnkRegionData*      mpItaMsg;               // 0x13C
-                    UnkRegionData*      mpJpnMsg;               // 0x140
-                    UnkRegionData*      mpDutMsg;               // 0x144
-                    UnkRegionData*      mpSpaMsg;               // 0x148
-                    UnkRegionData*      mpChnMsg;               // 0x14C
-                    UnkRegionData*      mpChnTradMsg;           // 0x150
-                    UnkRegionData*      mpKorMsg;               // 0x154
+                    nand::File*         mpFaceArcBuffer;        // 0x100
+
+                    u8                  unk_0x104[0x2C];
+
+                    nand::File*         mpEngMsg;               // 0x130
+                    nand::File*         mpFraMsg;               // 0x134
+                    nand::File*         mpGerMsg;               // 0x138
+                    nand::File*         mpItaMsg;               // 0x13C
+                    nand::File*         mpJpnMsg;               // 0x140
+                    nand::File*         mpDutMsg;               // 0x144
+                    nand::File*         mpSpaMsg;               // 0x148
+                    nand::File*         mpChnMsg;               // 0x14C
+                    nand::File*         mpChnTradMsg;           // 0x150
+                    nand::File*         mpKorMsg;               // 0x154
 
                     u8                  unk_0x158[0x88];
                     OSAlarm             mUnkAlarm;              // 0x1E0
@@ -114,8 +111,18 @@ namespace ipl {
 
                 friend class System;
             };
+            /** @return Heap used for the IPL.*/
+            static EGG::Heap*           getAppHeap()            { return smArg.mpAppHeap; }
+            /** @return MEM1 Heap */
+            static EGG::Heap*           getSysMEM1()            { return smArg.mpMem1SysHeap; }
+            /** @return MEM2 Heap */
+            static EGG::Heap*           getUnk0CHeap()          { return smArg.unk_0x0C; }
             /** @return The heap used for scenery. */
-            static EGG::Heap*           getSceneHeap()          { return smArg.mpSceneHeap; }
+            static EGG::Heap*           getUnk28Heap()          { return smArg.unk_0x28; }
+            /** @return Heap used for NAND Shared File. */
+            static EGG::Heap*           getNandSharedHeap()     { return smArg.mpNandSharedHeap; }
+            /** @return The "treasure" heap. */
+            static EGG::Heap*           getTreasureHeap()       { return smArg.mpTreasureHeap; }
             /** @return The Scene Manager object. */
             static scene::Manager*      getSceneMgr()           { return smArg.mpSceneManager; }
             /** @return The Content Manager object. */
@@ -148,26 +155,28 @@ namespace ipl {
             static EGG::ColorFader*     getGlobalFader()        { return smArg.mpGblFader; }
             /** @return The fader object. */
             static EGG::ColorFader*     getSceneFader()         { return smArg.mpScnFader; }
+            /** @return The Mii Archive Data */
+            static void*                getRFLArc()             { return smArg.mpFaceArcBuffer; }
             /** @return The English message data. */
-            static UnkRegionData*       getEngMsg()             { return smArg.mpEngMsg; }
+            static nand::File*          getEngMsg()             { return smArg.mpEngMsg; }
             /** @return The French message data. */
-            static UnkRegionData*       getFraMsg()             { return smArg.mpFraMsg; }
+            static nand::File*          getFraMsg()             { return smArg.mpFraMsg; }
             /** @return The German message data. */
-            static UnkRegionData*       getGerMsg()             { return smArg.mpGerMsg; }
+            static nand::File*          getGerMsg()             { return smArg.mpGerMsg; }
             /** @return The Italian message data. */
-            static UnkRegionData*       getItaMsg()             { return smArg.mpItaMsg; }
+            static nand::File*          getItaMsg()             { return smArg.mpItaMsg; }
             /** @return The Japanese message data. */
-            static UnkRegionData*       getJpnMsg()             { return smArg.mpJpnMsg; }
+            static nand::File*          getJpnMsg()             { return smArg.mpJpnMsg; }
             /** @return The Dutch message data. */
-            static UnkRegionData*       getDutMsg()             { return smArg.mpDutMsg; }
+            static nand::File*          getDutMsg()             { return smArg.mpDutMsg; }
             /** @return The Spanish message data. */
-            static UnkRegionData*       getSpaMsg()             { return smArg.mpSpaMsg; }
+            static nand::File*          getSpaMsg()             { return smArg.mpSpaMsg; }
             /** @return The Chinese (simple) message data. */
-            static UnkRegionData*       getChnMsg()             { return smArg.mpChnMsg; }
+            static nand::File*          getChnMsg()             { return smArg.mpChnMsg; }
             /** @return The Chinese (traditional) message data. */
-            static UnkRegionData*       getChnTradMsg()         { return smArg.mpChnTradMsg; }
+            static nand::File*          getChnTradMsg()         { return smArg.mpChnTradMsg; }
             /** @return The Korean message data. */
-            static UnkRegionData*       getKorMsg()             { return smArg.mpKorMsg; }
+            static nand::File*          getKorMsg()             { return smArg.mpKorMsg; }
             static bool                 isUnk_0x2B1()           { return smArg.unk_0x2B1; }
             static bool                 hasCreatedAfter()       { return smArg.mbCreatedAfter; }
             /** @return Whether the libraries needed have been created. */
@@ -215,14 +224,18 @@ namespace ipl {
              * @note Run this function after `ipl::System::init`
              */
             static void                     run();
+
             /** @return The language of the System. */
             static s32                      getLanguage();
             /** @return The region of the System. */
             static s32                      getRegion();
+
             /** @return A boolean indicating if the user can restart their Wii console. */
             static bool                     isResetAcceptable();
+
             /** @return The Renderer of the IPL. */
             static GXRenderModeObj*         getRenderModeObj();
+
             /**
              * @return The Wii Remote being used.
              * @param chan The Wii Remote Player
@@ -230,8 +243,18 @@ namespace ipl {
             static controller::Interface*   getController(int chan);
             /** @return The Master Wii Remote. */
             static controller::Interface*   getMasterController();
+
             /** @brief Prepare the system for error handler */
             static void                     err_run();
+            #define                         err_log(type, result, line) err_log_(#type, result, __FILE__, line)
+            static inline void              err_log_(const char* type, int result, const char* file, int line) {
+                smArg.mpErrorHandler->log(type, result, file, line);
+            }
+            #define                         err_display err_display_
+            static inline void              err_display_(int msg) {
+                smArg.mpErrorHandler->set(ErrorHandler::DEFAULT, msg);
+            }
+
             /** @brief Prepare the system for reset handler */
             static void                     reset_run();
             /** @brief Prepare the system for warning handler */

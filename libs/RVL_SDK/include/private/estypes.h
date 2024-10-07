@@ -1,11 +1,13 @@
-#ifndef REVOLUTION_ESP_H
-#define REVOLUTION_ESP_H
+#ifndef REVOLUTION_ES_TYPES_H
+#define REVOLUTION_ES_TYPES_H
 
 #include <revolution/types.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+typedef s32         ESError;
 
 typedef u32         ESId;
 typedef u32         ESContentId;
@@ -53,10 +55,12 @@ typedef struct ESTicketView {
     ESLpEntry           limits[8];      // 0x94
 } ESTicketView;
 
+#define ES_ERR_OK   0
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif // REVOLUTION_ESP_H
+#endif // REVOLUTION_ES_TYPES_H
 
 

@@ -18,6 +18,11 @@ namespace ipl {
          * @return The Cursor Position as `ipl::math::VEC2`
          */
         math::VEC2  get_cursor_pos(const math::VEC2& basePos);
+        
+        class Language {
+            public:
+                static char* getPath();
+        };
     }
 }
 

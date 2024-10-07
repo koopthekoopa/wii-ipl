@@ -1,4 +1,4 @@
-#include "system/iplPointerCore.h"
+#include "system/iplPointer.h"
 
 #include <revolution/gx.h>
 
@@ -6,7 +6,6 @@
 #include <nw4r/lyt.h>
 
 #include "system/iplSystem.h"
-#include "system/iplPointer.h"
 
 #include "utility/iplMath.h"
 #include "utility/iplUtility.h"
@@ -20,7 +19,7 @@ namespace ipl {
     PointerCoreObject::PointerCoreObject() :
     mpLayout(NULL),
     mState(0),
-    mLayoutType(POINTER_LYT_UNK3),
+    mLayoutType(Pointer::LYT_UNK3),
     mChan(0),
     unk_0x10(0) {}
 
@@ -70,7 +69,7 @@ namespace ipl {
     PointerCore::PointerCore() : mCursors() {
         int chan = 0;
         for (int i = WPAD_MAX_CONTROLLERS - 1; i >= 0; i--) {
-            mCursors[chan].changeType(POINTER_LYT_POINT);
+            mCursors[chan].changeType(Pointer::LYT_POINT);
             mCursors[chan].setChan(chan);
             chan++;
         }

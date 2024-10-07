@@ -232,7 +232,7 @@
 /* 813C3EB8 | 48 16 A7 E9 */	bl OSReport
 /* 813C3EBC | 38 80 00 02 */	li r4, 0x2
 /* 813C3EC0 | 38 60 00 01 */	li r3, 0x1
-/* 813C3EC4 | 48 1F AF F5 */	bl fn_815BEEB8
+/* 813C3EC4 | 48 1F AF F5 */	bl ES_SetUid
 /* 813C3EC8 | 38 60 00 38 */	li r3, 0x38
 /* 813C3ECC | 48 23 41 D1 */	bl __nw__FUl
 /* 813C3ED0 | 2C 03 00 00 */	cmpwi r3, 0x0

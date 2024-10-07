@@ -1,9 +1,8 @@
 #ifndef REVOLUTION_FACE_ICON_H
 #define REVOLUTION_FACE_ICON_H
 
-#include <revolution/types.h>
-#include <revolution/gx.h>
 #include <RVLFacelib/RFL_Types.h>
+#include <revolution/gx.h>
 
 #ifdef __cplusplus
 extern "C" {

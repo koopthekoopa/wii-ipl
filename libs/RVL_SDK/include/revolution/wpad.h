@@ -7,6 +7,11 @@
 extern "C" {
 #endif // __cplusplus
 
+#define WPAD_CHAN0              0
+#define WPAD_CHAN1              1
+#define WPAD_CHAN2              2
+#define WPAD_CHAN3              3
+
 #define WPAD_MAX_CONTROLLERS    4
 
 #define WPAD_BUTTON_LEFT        (1 << 0)

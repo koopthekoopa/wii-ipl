@@ -90,7 +90,7 @@ namespace ipl {
             GXSetCopyFilter(rMode->aa, rMode->sample_pattern, GX_TRUE, rMode->vfilter);
             GXSetDither(GX_TRUE);
             
-            GXInitTexObj(&mFaceTexObj, mpIconTex, mIconSettings.width, mIconSettings.height, GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP, GX_FALSE);
+            GXInitTexObj(&mFaceTexObj, mpIconTex, mIconSettings.width, mIconSettings.height, RFL_ICON_TEX_FORMAT, GX_CLAMP, GX_CLAMP, GX_FALSE);
             
             mCreated = true;
             mCallBack(this, mpCallBackWork);

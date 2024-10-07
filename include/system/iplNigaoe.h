@@ -7,7 +7,7 @@
 
 #include <egg/core.h>
 
-#include <RVLFaceLibPrivate.h>
+#include <RVLFaceLib.h>
 
 namespace ipl {
     namespace nigaoe {

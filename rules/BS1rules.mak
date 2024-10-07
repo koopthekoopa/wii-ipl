@@ -13,15 +13,15 @@ BS1_OBJECTS	= $(BS1_OBJ_PATH)/BS1.o
 $(BS1_OBJ_PATH)/%.o: $(ASSEMBLY_ROOT)/%.s
 	$(call BuildMWCCASMSources,$(INCLUDE_ROOT),$(BS1_ELF_CC))
 
-$(BUILD_ROOT)/$(BS1_ELF_NAME).elf: $(BS1_OBJECTS)
+$(BS1_BLD_PATH)/$(BS1_ELF_NAME).elf: $(BS1_OBJECTS)
 	$(call LinkSmallElf,$(BS1_ELF_CC),$^,$@,$(BS1_ELF_ADDRESS))
 
-bs1:	$(BUILD_ROOT)/$(BS1_ELF_NAME).elf
+bs1:	$(BS1_BLD_PATH)/$(BS1_ELF_NAME).elf
 
 clean_bs1:
 	@echo Cleaning BS1...
 	@rm -rf $(BS1_BLD_PATH)
-	@rm -rf $(BUILD_ROOT)/$(BS1_ELF_NAME).elf
-	@rm -rf $(BUILD_ROOT)/$(BS1_ELF_NAME).map
+	@rm -rf $(BS1_BLD_PATH)/$(BS1_ELF_NAME).elf
+	@rm -rf $(BS1_BLD_PATH)/$(BS1_ELF_NAME).map
 
 

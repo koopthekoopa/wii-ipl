@@ -84,7 +84,7 @@
 /* 813C1BB8 | 90 7F 00 5C */	stw r3, 0x5c(r31)
 /* 813C1BBC | 38 80 00 02 */	li r4, 0x2
 /* 813C1BC0 | 38 60 00 01 */	li r3, 0x1
-/* 813C1BC4 | 48 1F D2 F5 */	bl fn_815BEEB8
+/* 813C1BC4 | 48 1F D2 F5 */	bl ES_SetUid
 /* 813C1BC8 | 4B FA 46 CD */	bl DeleteExpiredFlagFile__Q33ipl7utility6ESMiscFv
 /* 813C1BCC | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 813C1BD0 | 83 E1 00 0C */	lwz r31, 0xc(r1)

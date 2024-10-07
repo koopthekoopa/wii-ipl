@@ -40,7 +40,7 @@
 /* 8133D2A8 | 48 2C 51 1D */	bl strncpy
 /* 8133D2AC | 38 80 00 02 */	li r4, 0x2
 /* 8133D2B0 | 38 60 00 01 */	li r3, 0x1
-/* 8133D2B4 | 48 28 1C 05 */	bl fn_815BEEB8
+/* 8133D2B4 | 48 28 1C 05 */	bl ES_SetUid
 /* 8133D2B8 | 38 60 00 01 */	li r3, 0x1
 /* 8133D2BC | 48 28 0E 91 */	bl ES_OpenContentFile
 /* 8133D2C0 | 2C 03 00 00 */	cmpwi r3, 0x0

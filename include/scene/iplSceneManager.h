@@ -45,6 +45,8 @@ namespace ipl {
     }
 }
 
+#include "system/iplSystem.h"
+
 #endif // IPL_SCENE_MANAGER_H
 
 

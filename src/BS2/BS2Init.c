@@ -26,15 +26,15 @@ static asm void ClearOtherBATs() {
     li      r4, 0
 
     mtdbatl 2, r4
-	mtdbatu 2, r4
-	mtdbatl 3, r4
-	mtdbatu 3, r4
-	mtibatl 1, r4
-	mtibatu 1, r4
-	mtibatl 2, r4
-	mtibatu 2, r4
-	mtibatl 3, r4
-	mtibatu 3, r4
+    mtdbatu 2, r4
+    mtdbatl 3, r4
+    mtdbatu 3, r4
+    mtibatl 1, r4
+    mtibatu 1, r4
+    mtibatl 2, r4
+    mtibatu 2, r4
+    mtibatl 3, r4
+    mtibatu 3, r4
 
     isync
 

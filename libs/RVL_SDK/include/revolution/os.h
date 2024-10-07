@@ -1,6 +1,8 @@
 #ifndef REVOLUTION_OS_H
 #define REVOLUTION_OS_H
 
+#include <decomp_utils.h>
+
 #include <revolution/gx/GXStruct.h>
 
 #include <stdarg.h>
@@ -66,6 +68,8 @@ u32 __OSCoreClock       : OS_BASE_CACHED | 0x000000FC;
 #define OSSleepMicroseconds(us)         OSSleepTicks(OSMicrosecondsToTicks((OSTime)us))
 #define OSSleepNanoseconds(ns)          OSSleepTicks(OSNanosecondsToTicks((OSTime)ns))
 
+#define OSRoundUp32B(x) ROUNDUP(x, 32)
+
 void    OSShutdownSystem();
 
 void    OSReport(const char* msg, ...);
@@ -81,8 +85,6 @@ BOOL    OSDisableInterrupts();
 BOOL    OSRestoreInterrupts(BOOL old);
 
 void    OSReturnToMenu();
-
-
 
 BOOL    __OSSyncSram();
 

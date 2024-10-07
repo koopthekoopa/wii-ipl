@@ -8,9 +8,14 @@
 extern "C" {
 #endif
 
+char*   stricmp(char* dst, const char* src);
+
 char*   strncpy(char* dst, const char* src, size_t length);
+char*   strncat(char* dst, const char* src, size_t length);
 
 size_t  strlen(const char* str);
+
+int     sprintf(char* buffer, const char* format, ...);
 
 #ifdef __cplusplus
 }

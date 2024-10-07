@@ -12,6 +12,10 @@
  */
 // #define ENABLE_IPL_WWW_REPORT
 
+
+
+#define SYSMENU_TITLE_ID    0x0000000100000002
+
 #endif // IPL_CONFIG_H
 
 

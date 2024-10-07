@@ -20,9 +20,6 @@
 /* Error:003 unauthorized device has been detected. */
 #define MESG_ERR_KEY        4
 
-#define ERR_NONE    ipl::ErrorHandler::NONE
-#define ERR_DEFAULT ipl::ErrorHandler::DEFAULT
-
 namespace ipl {
     class ErrorHandler {
         public:
@@ -44,11 +41,11 @@ namespace ipl {
              */
             void set(Type type, u32 msgId, const char* arg1 = NULL, int arg2 = 0, int arg3 = -1);
             
-            /** @brief Log the error to the NAND log. (`shared2/test2/nanderr.log`)
+            /**
+             * @brief Log the error to the NAND log. (`shared2/test2/nanderr.log`)
              * @param type The error type.
              * @param result The result it thrown.
             */
-            #define Log(type, result) log(type, result, __FILE__, __LINE__)
             void log(const char* type, int result, const char* file, int line);
 
         private:

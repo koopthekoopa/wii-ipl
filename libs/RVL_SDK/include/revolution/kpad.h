@@ -8,8 +8,6 @@ extern "C" {
 
 #include <revolution/wpad.h>
 
-#define KPAD_MAX_CONTROLLERS    WPAD_MAX_CONTROLLERS
-
 #define KPAD_BUTTON_LEFT        WPAD_BUTTON_LEFT
 #define KPAD_BUTTON_RIGHT       WPAD_BUTTON_RIGHT
 #define KPAD_BUTTON_DOWN        WPAD_BUTTON_DOWN
@@ -56,8 +54,8 @@ typedef union KPADEXStatus {
     struct {
         f64         tgc_weight;                         // 0x00
 
-        f64         weight[KPAD_MAX_CONTROLLERS];       // 0x08
-        f64         weight_ave[KPAD_MAX_CONTROLLERS];   // 0x28
+        f64         weight[WPAD_MAX_CONTROLLERS];       // 0x08
+        f64         weight_ave[WPAD_MAX_CONTROLLERS];   // 0x28
         s32         weight_err;                         // 0x48
 
         s32         tgc_weight_err;                     // 0x4C

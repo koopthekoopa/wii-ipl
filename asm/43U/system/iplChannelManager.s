@@ -3054,7 +3054,7 @@
 /* 8133A1BC | 48 22 20 B1 */	bl CXGetUncompressedSize
 /* 8133A1C0 | 80 9F 00 00 */	lwz r4, 0x0(r31)
 /* 8133A1C4 | 38 7D 00 24 */	addi r3, r29, 0x24
-/* 8133A1C8 | 48 22 20 E5 */	bl fn_8155C2AC
+/* 8133A1C8 | 48 22 20 E5 */	bl CXUncompressLZ
 /* 8133A1CC | 80 81 00 0C */	lwz r4, 0xc(r1)
 /* 8133A1D0 | 39 00 00 01 */	li r8, 0x1
 /* 8133A1D4 | 80 01 00 08 */	lwz r0, 0x8(r1)

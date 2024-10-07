@@ -5,6 +5,7 @@
 #include <nw4r/lyt.h>
 
 #include "system/iplSystem.h"
+#include "system/iplNand.h"
 
 #include "utility/iplUtility.h"
 #include "utility/iplMath.h"
@@ -47,11 +48,10 @@ namespace ipl {
     unk_0x28(-1),
     mOriginPos(0.f, 0.f),
     mArrowLength(MINIMUM_SCROLL_LENGTH),
-    mPointDirection(PNT_DOWN),
+    mPointDirection(POINT_DOWN),
     mScrolling(false),
     mVisible(true),
     mCore() {
-        
         mpLayoutArchive = System::getNand()->readLayout(pHeap, "cursor.ash", false);
         
         for (int i = 0; i < MAX_LAYOUT_FILES; i++) {
@@ -89,7 +89,7 @@ namespace ipl {
             // Y Scale:  1.0 = Down
             // Y Scale: -1.0 = Up
             f32 arrowDirection;
-            if (mPointDirection == PNT_DOWN) {
+            if (mPointDirection == POINT_DOWN) {
                 arrowDirection = 1.0f;
             }
             else {
@@ -144,11 +144,11 @@ namespace ipl {
         int grabId = LYT_INVALID_ID;
 
         switch (type) {
-            case POINTER_LYT_POINT: {
+            case LYT_POINT: {
                 grabId = LYT_POINT_ID;
                 break;
             }
-            case POINTER_LYT_GRABBING: {
+            case LYT_GRABBING: {
                 grabId = LYT_GRAB_ID;
                 break;
             }

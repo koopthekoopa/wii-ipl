@@ -10,9 +10,6 @@
 #include <revolution/kpad.h>
 #include <revolution/sc.h>
 
-#include <egg/core/eggHeap.h>
-#include <egg/core/eggDisposer.h>
-
 #define SCENE_CLASS(x)  class x : public ipl::scene::Base
 
 namespace ipl {

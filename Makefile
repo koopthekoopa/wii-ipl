@@ -7,7 +7,7 @@ IPL_INFILE		= base.$(VERSION).app
 IPL_OUTFILE		= ipl.$(VERSION).app
 
 # Directory defines (must be here)
-BUILD_ROOT				= build/$(VERSION)
+BUILD_ROOT				= build
 CONFIG_ROOT				= config/$(VERSION)
 DATA_ROOT				= data/$(VERSION)
 DATA_OUT_ROOT			= data/$(VERSION)/build
@@ -48,13 +48,13 @@ endif
 .PHONY: prepare clean_data
 
 ### Build
-all: Runtime RVL_SDK RevoEX RFL eZiText TMCJpeg bs1 bs2 build/$(IPL_OUTFILE)
+all: Runtime RVL_SDK RevoEX RFL eZiText TMCJpeg bs1 bs2 $(BUILD_ROOT)/$(IPL_OUTFILE)
 	@echo Build complete!
 
 # Link
-build/$(IPL_OUTFILE): bs1 bs2
+$(BUILD_ROOT)/$(IPL_OUTFILE): bs1 bs2
 	@echo Converting ELF files to $@...
-	@$(TOOLS_ROOT)/$(ELF2BS) -b $(IPL_INFILE) -bs1 $(BUILD_ROOT)/$(BS1_ELF_NAME).elf -bs2 $(BUILD_ROOT)/$(BS2_ELF_NAME).elf -bs2_size $(BS2_IMAGE_SIZE) -output $@
+	@$(TOOLS_ROOT)/$(ELF2BS) -b $(IPL_INFILE) -bs1 $(BS1_BLD_PATH)/$(BS1_ELF_NAME).elf -bs2 $(BS2_GLOBAL_BLD_PATH)/$(BS2_ELF_NAME).elf -bs2_size $(BS2_IMAGE_SIZE) -output $@
 	@echo ========================================================================
 	@echo SHA1 Sum should fail here as it does not link a matching executable yet.
 	@echo ========================================================================
@@ -62,6 +62,7 @@ build/$(IPL_OUTFILE): bs1 bs2
 
 # Clean
 clean: clean_Runtime clean_RVL_SDK clean_RevoEX clean_RFL clean_eZiText clean_TMCJpeg clean_bs1 clean_bs2 clean_data
+	@rm -rf $(BUILD_ROOT)/$(IPL_OUTFILE)
 
 # Prepare
 prepare: PrepareDecomp

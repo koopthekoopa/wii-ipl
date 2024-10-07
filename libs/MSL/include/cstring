@@ -10,8 +10,11 @@ namespace std {
     using   ::memcpy;
     using   ::memset;
     
+    using   ::stricmp;
     using   ::strncpy;
     using   ::strlen;
+
+    using   ::sprintf;
 } // namespace std
 
 #endif

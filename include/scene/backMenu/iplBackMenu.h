@@ -1,8 +1,6 @@
 #ifndef IPL_BACK_MENU_H
 #define IPL_BACK_MENU_H
 
-#include <egg/core.h>
-
 #include "scene/iplFaderSceneBase.h"
 
 #include "layout/iplLayout.h"
