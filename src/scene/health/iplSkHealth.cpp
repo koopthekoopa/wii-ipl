@@ -5,12 +5,7 @@
 #include <revolution/os.h>
 #include <revolution/sc.h>
 
-#include "system/iplSystem.h"
-
 #include "utility/iplWpad.h"
-#include "utility/iplGraphics.h"
-
-#include "sound/iplSound.h"
 
 namespace ipl {
     namespace scene {

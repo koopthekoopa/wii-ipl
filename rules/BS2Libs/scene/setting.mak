@@ -9,7 +9,7 @@ SETTING_OBJS	=	$(BS2_OBJASM_PATH)/scene/setting/iplSetting.o \
 					$(BS2_OBJASM_PATH)/scene/setting/iplAOSS.o \
 					$(BS2_OBJASM_PATH)/scene/setting/iplRakuRakuThread.o \
 					$(BS2_OBJASM_PATH)/scene/setting/iplATERM.o \
-					$(BS2_OBJASM_PATH)/scene/setting/iplSettingBg.o \
+					$(BS2_OBJ_PATH)/scene/setting/iplSettingBg.o \
 					$(BS2_OBJASM_PATH)/scene/setting/iplSettingButton.o \
 					$(BS2_OBJASM_PATH)/scene/setting/iplSettingSelect.o \
 

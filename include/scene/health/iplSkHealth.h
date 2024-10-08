@@ -1,15 +1,7 @@
 #ifndef IPL_HEALTH_H
 #define IPL_HEALTH_H
 
-#include <egg/core.h>
-
-#include "system/iplNand.h"
-
 #include "scene/iplFaderSceneBase.h"
-
-#include "layout/iplLayout.h"
-
-#include <nw4r/lyt.h>
 
 namespace ipl {
     namespace scene {

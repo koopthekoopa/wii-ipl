@@ -3,8 +3,6 @@
 
 #include "scene/iplFaderSceneBase.h"
 
-#include "layout/iplLayout.h"
-
 namespace ipl {
     namespace scene {
         FADER_SCENE_CLASS(BackMenu) {

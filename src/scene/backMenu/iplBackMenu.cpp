@@ -1,7 +1,5 @@
 #include "scene/backMenu/iplBackMenu.h"
 
-#include "utility/iplGraphics.h"
-
 extern u8 backToWiiMenu_arc[];
 
 namespace ipl {

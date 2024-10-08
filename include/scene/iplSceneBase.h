@@ -1,14 +1,23 @@
 #ifndef BASE_SCENE_H
 #define BASE_SCENE_H
 
-#include "scene/iplSceneManager.h"
+#include "system/iplNand.h"
+
+#include "sound/iplSound.h"
 
 #include "utility/iplTree.h"
+#include "utility/iplGraphics.h"
+
+#include "layout/iplLayout.h"
+
+#include "scene/iplSceneManager.h"
 
 #include <revolution.h>
 #include <revolution/gx.h>
 #include <revolution/kpad.h>
 #include <revolution/sc.h>
+
+#include <egg/core.h>
 
 #define SCENE_CLASS(x)  class x : public ipl::scene::Base
 

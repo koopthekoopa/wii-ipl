@@ -2,10 +2,7 @@
 
 #include "scene/channelSelect/iplChannelSelect.h"
 
-#include "system/iplSystem.h"
 #include "system/iplHomeButton.h"
-
-#include "sound/iplSound.h"
 
 namespace ipl {
     namespace scene {

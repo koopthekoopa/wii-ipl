@@ -1,7 +1,5 @@
 #include "scene/iplSceneBase.h"
 
-#include "system/iplSystem.h"
-
 namespace ipl {
     namespace scene {
         /**
