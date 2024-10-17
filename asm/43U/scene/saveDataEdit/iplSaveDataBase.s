@@ -1373,9 +1373,13 @@
 	.string "B_ArwR"
 .endobj lbl_81696C10
 
-# .sdata:0x1F | 0x81696C17 | size: 0x9
+# .sdata:0x1F | 0x81696C17 | size: 0x7
 .obj lbl_81696C17, global
-	.4byte 0x425F4172
-	.4byte 0x774C0000
-	.byte 0x00
+	.string "B_ArwL"
 .endobj lbl_81696C17
+
+# .sdata:0x26 | 0x81696C1E | size: 0x2
+.obj gap_11_81696C1E_sdata, global
+.hidden gap_11_81696C1E_sdata
+	.2byte 0x0000
+.endobj gap_11_81696C1E_sdata

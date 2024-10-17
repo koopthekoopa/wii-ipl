@@ -8,6 +8,14 @@
 # extab:0x0 | 0x813307E0 | size: 0x8
 .obj "@etb_813307E0", local
 .hidden "@etb_813307E0"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ * Saved GPR range: r27-r31
+ */
 	.4byte 0x28080000
 	.4byte 0x00000000
 .endobj "@etb_813307E0"
@@ -15,6 +23,13 @@
 # extab:0x8 | 0x813307E8 | size: 0x8
 .obj "@etb_813307E8", local
 .hidden "@etb_813307E8"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ */
 	.4byte 0x00080000
 	.4byte 0x00000000
 .endobj "@etb_813307E8"
@@ -22,6 +37,13 @@
 # extab:0x10 | 0x813307F0 | size: 0x8
 .obj "@etb_813307F0", local
 .hidden "@etb_813307F0"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ */
 	.4byte 0x00080000
 	.4byte 0x00000000
 .endobj "@etb_813307F0"
@@ -29,6 +51,13 @@
 # extab:0x18 | 0x813307F8 | size: 0x8
 .obj "@etb_813307F8", local
 .hidden "@etb_813307F8"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ */
 	.4byte 0x00080000
 	.4byte 0x00000000
 .endobj "@etb_813307F8"
@@ -36,6 +65,13 @@
 # extab:0x20 | 0x81330800 | size: 0x8
 .obj "@etb_81330800", local
 .hidden "@etb_81330800"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ */
 	.4byte 0x00080000
 	.4byte 0x00000000
 .endobj "@etb_81330800"
@@ -43,6 +79,13 @@
 # extab:0x28 | 0x81330808 | size: 0x8
 .obj "@etb_81330808", local
 .hidden "@etb_81330808"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ */
 	.4byte 0x00080000
 	.4byte 0x00000000
 .endobj "@etb_81330808"
@@ -50,6 +93,13 @@
 # extab:0x30 | 0x81330810 | size: 0x8
 .obj "@etb_81330810", local
 .hidden "@etb_81330810"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ */
 	.4byte 0x00080000
 	.4byte 0x00000000
 .endobj "@etb_81330810"

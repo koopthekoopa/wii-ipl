@@ -1067,12 +1067,16 @@
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x816105B0 | size: 0x18
+# .rodata:0x0 | 0x816105B0 | size: 0x14
 .obj lbl_816105B0, global
-	.byte 0x6E, 0x75, 0x73, 0x2E, 0x73, 0x68, 0x6F, 0x70
-	.byte 0x2E, 0x77, 0x69, 0x69, 0x2E, 0x63, 0x6F, 0x6D
-	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+	.string "nus.shop.wii.com\000\000\000"
 .endobj lbl_816105B0
+
+# .rodata:0x14 | 0x816105C4 | size: 0x4
+.obj gap_07_816105C4_rodata, global
+.hidden gap_07_816105C4_rodata
+	.4byte 0x00000000
+.endobj gap_07_816105C4_rodata
 
 # 0x816538B0..0x81653C18 | size: 0x368
 .data
@@ -1283,7 +1287,7 @@
 	.rel calcNormal__Q33ipl5scene12NakamuraTestFv, .L_813D8BF4
 .endobj jumptable_81653B64
 
-# .data:0x2FC | 0x81653BAC | size: 0x6C
+# .data:0x2FC | 0x81653BAC | size: 0x68
 # ipl::scene::NakamuraTest::__vtable
 .obj __vt__Q33ipl5scene12NakamuraTest, global
 	.4byte 0x00000000
@@ -1312,8 +1316,13 @@
 	.4byte calcNormal__Q33ipl5scene12NakamuraTestFv
 	.4byte calcFadeout__Q33ipl5scene12NakamuraTestFv
 	.4byte calcCommonAfter__Q33ipl5scene14FaderSceneBaseFv
-	.4byte 0x00000000
 .endobj __vt__Q33ipl5scene12NakamuraTest
+
+# .data:0x364 | 0x81653C14 | size: 0x4
+.obj gap_08_81653C14_data, global
+.hidden gap_08_81653C14_data
+	.4byte 0x00000000
+.endobj gap_08_81653C14_data
 
 # 0x81696D40..0x81696D48 | size: 0x8
 .section .sdata, "wa"
@@ -1324,11 +1333,16 @@
 	.string "ng"
 .endobj lbl_81696D40
 
-# .sdata:0x3 | 0x81696D43 | size: 0x5
+# .sdata:0x3 | 0x81696D43 | size: 0x3
 .obj lbl_81696D43, global
-	.4byte 0x6F6B0000
-	.byte 0x00
+	.string "ok"
 .endobj lbl_81696D43
+
+# .sdata:0x6 | 0x81696D46 | size: 0x2
+.obj gap_11_81696D46_sdata, global
+.hidden gap_11_81696D46_sdata
+	.2byte 0x0000
+.endobj gap_11_81696D46_sdata
 
 # 0x81698BD0..0x81698BD8 | size: 0x8
 .section .sbss, "wa", @nobits

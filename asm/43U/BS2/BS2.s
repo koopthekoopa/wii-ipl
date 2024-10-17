@@ -1,14 +1,30 @@
 .include "macros.inc"
 .file "BS2.c"
 
-# 0x8108A6C0..0x8108A6E0 | size: 0x20
+# 0x8108A6C0..0x8108B720 | size: 0x1060
 .section .bss, "wa", @nobits
 .balign 8
 
-# .bss:0x0 | 0x8108A6C0 | size: 0x20
-.obj BS2StateFlags, global
+# .bss:0x0 | 0x8108A6C0 | size: 0x1020
+.obj BS2NandbootInfo, local
+	.skip 0x1020
+.endobj BS2NandbootInfo
+
+# .bss:0x1020 | 0x8108B6E0 | size: 0x20
+.obj BS2StateFlags, local
 	.skip 0x20
 .endobj BS2StateFlags
+
+# .bss:0x1040 | 0x8108B700 | size: 0x10
+.obj BS2AllocatorForEject, local
+	.skip 0x10
+.endobj BS2AllocatorForEject
+
+# .bss:0x1050 | 0x8108B710 | size: 0x10
+.obj gap_00_8108B710_bss, global
+.hidden gap_00_8108B710_bss
+	.skip 0x10
+.endobj gap_00_8108B710_bss
 
 # 0x813796F8..0x8137AEA4 | size: 0x17AC
 .text
@@ -16,16 +32,16 @@
 
 # .text:0x0 | 0x813796F8 | size: 0x10
 .fn BS2GetLaunchCode, global
-/* 813796F8 | 3C 60 81 09 */	lis r3, BS2StateFlags@ha
-/* 813796FC | 38 63 A6 C0 */	addi r3, r3, BS2StateFlags@l
+/* 813796F8 | 3C 60 81 09 */	lis r3, BS2NandbootInfo@ha
+/* 813796FC | 38 63 A6 C0 */	addi r3, r3, BS2NandbootInfo@l
 /* 81379700 | 80 63 00 0C */	lwz r3, 0xc(r3)
 /* 81379704 | 4E 80 00 20 */	blr
 .endfn BS2GetLaunchCode
 
 # .text:0x10 | 0x81379708 | size: 0x18
 .fn BS2GetArgc, global
-/* 81379708 | 3C 60 81 09 */	lis r3, BS2StateFlags@ha
-/* 8137970C | 38 63 A6 C0 */	addi r3, r3, BS2StateFlags@l
+/* 81379708 | 3C 60 81 09 */	lis r3, BS2NandbootInfo@ha
+/* 8137970C | 38 63 A6 C0 */	addi r3, r3, BS2NandbootInfo@l
 /* 81379710 | 80 03 00 04 */	lwz r0, 0x4(r3)
 /* 81379714 | 7C 63 02 14 */	add r3, r3, r0
 /* 81379718 | 80 63 F0 20 */	lwz r3, -0xfe0(r3)
@@ -34,8 +50,8 @@
 
 # .text:0x28 | 0x81379720 | size: 0x2C
 .fn BS2GetArgv, global
-/* 81379720 | 3C 60 81 09 */	lis r3, BS2StateFlags@ha
-/* 81379724 | 38 63 A6 C0 */	addi r3, r3, BS2StateFlags@l
+/* 81379720 | 3C 60 81 09 */	lis r3, BS2NandbootInfo@ha
+/* 81379724 | 38 63 A6 C0 */	addi r3, r3, BS2NandbootInfo@l
 /* 81379728 | 80 03 00 04 */	lwz r0, 0x4(r3)
 /* 8137972C | 7C 63 02 14 */	add r3, r3, r0
 /* 81379730 | 80 03 F0 20 */	lwz r0, -0xfe0(r3)
@@ -50,8 +66,8 @@
 
 # .text:0x54 | 0x8137974C | size: 0x14
 .fn BS2_8137974C, global
-/* 8137974C | 3C 80 81 09 */	lis r4, BS2StateFlags@ha
-/* 81379750 | 38 84 A6 C0 */	addi r4, r4, BS2StateFlags@l
+/* 8137974C | 3C 80 81 09 */	lis r4, BS2NandbootInfo@ha
+/* 81379750 | 38 84 A6 C0 */	addi r4, r4, BS2NandbootInfo@l
 /* 81379754 | 80 64 00 18 */	lwz r3, 0x18(r4)
 /* 81379758 | 80 84 00 1C */	lwz r4, 0x1c(r4)
 /* 8137975C | 4E 80 00 20 */	blr
@@ -59,9 +75,9 @@
 
 # .text:0x68 | 0x81379760 | size: 0x10
 .fn BS2AllocForEject, local
-/* 81379760 | 3C A0 81 09 */	lis r5, BS2Mach_8108B6E0@ha
+/* 81379760 | 3C A0 81 09 */	lis r5, BS2StateFlags@ha
 /* 81379764 | 7C 64 1B 78 */	mr r4, r3
-/* 81379768 | 38 65 B6 E0 */	addi r3, r5, BS2Mach_8108B6E0@l
+/* 81379768 | 38 65 B6 E0 */	addi r3, r5, BS2StateFlags@l
 /* 8137976C | 48 1E 1E FC */	b fn_8155B668
 .endfn BS2AllocForEject
 
@@ -69,10 +85,10 @@
 .fn BS2FreeForEject, local
 /* 81379770 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81379774 | 7C 08 02 A6 */	mflr r0
-/* 81379778 | 3C A0 81 09 */	lis r5, BS2Mach_8108B6E0@ha
+/* 81379778 | 3C A0 81 09 */	lis r5, BS2StateFlags@ha
 /* 8137977C | 7C 64 1B 78 */	mr r4, r3
 /* 81379780 | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 81379784 | 38 65 B6 E0 */	addi r3, r5, BS2Mach_8108B6E0@l
+/* 81379784 | 38 65 B6 E0 */	addi r3, r5, BS2StateFlags@l
 /* 81379788 | 48 1E 1E F1 */	bl fn_8155B678
 /* 8137978C | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 81379790 | 38 60 00 01 */	li r3, 0x1
@@ -119,7 +135,7 @@
 /* 81379814 | 7C 76 1B 78 */	mr r22, r3
 /* 81379818 | 40 82 00 18 */	bne .L_81379830
 /* 8137981C | 38 BC 00 00 */	addi r5, r28, 0x0
-/* 81379820 | 38 6D 84 E4 */	li r3, lbl_81696524@sda21
+/* 81379820 | 38 6D 84 E4 */	li r3, tick$3666@sda21
 /* 81379824 | 38 80 03 75 */	li r4, 0x375
 /* 81379828 | 4C C6 31 82 */	crclr cr1eq
 /* 8137982C | 48 1B 4F 05 */	bl OSPanic
@@ -293,7 +309,7 @@
 /* 81379A98 | 41 82 00 08 */	beq .L_81379AA0
 /* 81379A9C | 48 00 22 C9 */	bl BS2StartGame
 .L_81379AA0:
-/* 81379AA0 | 38 6D 84 E4 */	li r3, lbl_81696524@sda21
+/* 81379AA0 | 38 6D 84 E4 */	li r3, tick$3666@sda21
 /* 81379AA4 | 38 80 03 01 */	li r4, 0x301
 /* 81379AA8 | 38 AD 85 10 */	li r5, lbl_81696550@sda21
 /* 81379AAC | 4C C6 31 82 */	crclr cr1eq
@@ -351,7 +367,7 @@
 /* 81379B68 | 48 1B 95 19 */	bl __OSSyncSram
 /* 81379B6C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81379B70 | 41 82 FF F8 */	beq .L_81379B68
-/* 81379B74 | 38 6D 84 E4 */	li r3, lbl_81696524@sda21
+/* 81379B74 | 38 6D 84 E4 */	li r3, tick$3666@sda21
 /* 81379B78 | 38 80 03 1B */	li r4, 0x31b
 /* 81379B7C | 38 AD 85 10 */	li r5, lbl_81696550@sda21
 /* 81379B80 | 4C C6 31 82 */	crclr cr1eq
@@ -407,24 +423,24 @@
 /* 81379C28 | 7C 16 18 40 */	cmplw r22, r3
 /* 81379C2C | 41 80 FF DC */	blt .L_81379C08
 /* 81379C30 | 48 00 65 75 */	bl BS2StartUpdate
-/* 81379C34 | 93 ED 84 E0 */	stw r31, lbl_81696520@sda21(r0)
+/* 81379C34 | 93 ED 84 E0 */	stw r31, __OSIsDiag@sda21(r0)
 /* 81379C38 | 48 00 00 F8 */	b .L_81379D30
 .L_81379C3C:
-/* 81379C3C | 80 6D 84 E0 */	lwz r3, lbl_81696520@sda21(r0)
+/* 81379C3C | 80 6D 84 E0 */	lwz r3, __OSIsDiag@sda21(r0)
 /* 81379C40 | 38 03 00 01 */	addi r0, r3, 0x1
 /* 81379C44 | 2C 03 FF FF */	cmpwi r3, -0x1
-/* 81379C48 | 90 0D 84 E0 */	stw r0, lbl_81696520@sda21(r0)
+/* 81379C48 | 90 0D 84 E0 */	stw r0, __OSIsDiag@sda21(r0)
 /* 81379C4C | 40 82 00 10 */	bne .L_81379C5C
 /* 81379C50 | 38 7C 01 AA */	addi r3, r28, 0x1aa
 /* 81379C54 | 4C C6 31 82 */	crclr cr1eq
 /* 81379C58 | 48 1B 4A 49 */	bl OSReport
 .L_81379C5C:
-/* 81379C5C | 80 6D 84 E0 */	lwz r3, lbl_81696520@sda21(r0)
+/* 81379C5C | 80 6D 84 E0 */	lwz r3, __OSIsDiag@sda21(r0)
 /* 81379C60 | 7C 03 D3 D6 */	divw r0, r3, r26
 /* 81379C64 | 7C 00 D1 D6 */	mullw r0, r0, r26
 /* 81379C68 | 7C 80 18 50 */	subf r4, r0, r3
 /* 81379C6C | 7C 64 C3 D6 */	divw r3, r4, r24
-/* 81379C70 | 90 8D 84 E0 */	stw r4, lbl_81696520@sda21(r0)
+/* 81379C70 | 90 8D 84 E0 */	stw r4, __OSIsDiag@sda21(r0)
 /* 81379C74 | 7C 03 C1 D6 */	mullw r0, r3, r24
 /* 81379C78 | 7C 00 20 51 */	subf. r0, r0, r4
 /* 81379C7C | 40 82 00 B4 */	bne .L_81379D30
@@ -454,21 +470,21 @@
 /* 81379CD0 | 48 1B 49 D1 */	bl OSReport
 /* 81379CD4 | 48 00 00 5C */	b .L_81379D30
 .L_81379CD8:
-/* 81379CD8 | 80 6D 84 E0 */	lwz r3, lbl_81696520@sda21(r0)
+/* 81379CD8 | 80 6D 84 E0 */	lwz r3, __OSIsDiag@sda21(r0)
 /* 81379CDC | 38 03 00 01 */	addi r0, r3, 0x1
 /* 81379CE0 | 2C 03 FF FF */	cmpwi r3, -0x1
-/* 81379CE4 | 90 0D 84 E0 */	stw r0, lbl_81696520@sda21(r0)
+/* 81379CE4 | 90 0D 84 E0 */	stw r0, __OSIsDiag@sda21(r0)
 /* 81379CE8 | 40 82 00 10 */	bne .L_81379CF8
 /* 81379CEC | 38 7C 01 C6 */	addi r3, r28, 0x1c6
 /* 81379CF0 | 4C C6 31 82 */	crclr cr1eq
 /* 81379CF4 | 48 1B 49 AD */	bl OSReport
 .L_81379CF8:
-/* 81379CF8 | 80 6D 84 E0 */	lwz r3, lbl_81696520@sda21(r0)
+/* 81379CF8 | 80 6D 84 E0 */	lwz r3, __OSIsDiag@sda21(r0)
 /* 81379CFC | 7C 03 D3 D6 */	divw r0, r3, r26
 /* 81379D00 | 7C 00 D1 D6 */	mullw r0, r0, r26
 /* 81379D04 | 7C 80 18 50 */	subf r4, r0, r3
 /* 81379D08 | 7C 64 C3 D6 */	divw r3, r4, r24
-/* 81379D0C | 90 8D 84 E0 */	stw r4, lbl_81696520@sda21(r0)
+/* 81379D0C | 90 8D 84 E0 */	stw r4, __OSIsDiag@sda21(r0)
 /* 81379D10 | 7C 03 C1 D6 */	mullw r0, r3, r24
 /* 81379D14 | 7C 00 20 51 */	subf. r0, r0, r4
 /* 81379D18 | 40 82 00 18 */	bne .L_81379D30
@@ -489,9 +505,9 @@
 /* 81379D40 | 90 01 01 34 */	stw r0, 0x134(r1)
 /* 81379D44 | 39 61 01 30 */	addi r11, r1, 0x130
 /* 81379D48 | 48 27 F7 65 */	bl _savegpr_22
-/* 81379D4C | 3F 80 81 09 */	lis r28, BS2StateFlags@ha
+/* 81379D4C | 3F 80 81 09 */	lis r28, BS2NandbootInfo@ha
 /* 81379D50 | 3F A0 81 64 */	lis r29, lbl_816457D8@ha
-/* 81379D54 | 3B 9C A6 C0 */	addi r28, r28, BS2StateFlags@l
+/* 81379D54 | 3B 9C A6 C0 */	addi r28, r28, BS2NandbootInfo@l
 /* 81379D58 | 3C 60 C0 00 */	lis r3, 0xc000
 /* 81379D5C | 3B BD 57 D8 */	addi r29, r29, lbl_816457D8@l
 .L_81379D60:
@@ -629,11 +645,11 @@
 /* 81379F38 | 28 03 00 02 */	cmplwi r3, 0x2
 /* 81379F3C | 41 82 00 10 */	beq .L_81379F4C
 /* 81379F40 | 38 00 00 01 */	li r0, 0x1
-/* 81379F44 | 90 0D A9 A4 */	stw r0, BS2NoDisk@sda21(r0)
+/* 81379F44 | 90 0D A9 A4 */	stw r0, BS2NoDisk_816989E4@sda21(r0)
 /* 81379F48 | 48 00 00 0C */	b .L_81379F54
 .L_81379F4C:
 /* 81379F4C | 38 00 00 00 */	li r0, 0x0
-/* 81379F50 | 90 0D A9 A4 */	stw r0, BS2NoDisk@sda21(r0)
+/* 81379F50 | 90 0D A9 A4 */	stw r0, BS2NoDisk_816989E4@sda21(r0)
 .L_81379F54:
 /* 81379F54 | 38 61 00 40 */	addi r3, r1, 0x40
 /* 81379F58 | 38 80 00 00 */	li r4, 0x0
@@ -798,7 +814,7 @@
 /* 8137A18C | 88 03 00 04 */	lbz r0, 0x4(r3)
 /* 8137A190 | 54 00 06 73 */	rlwinm. r0, r0, 0, 25, 25
 /* 8137A194 | 41 82 00 50 */	beq .L_8137A1E4
-/* 8137A198 | 80 0D A9 A4 */	lwz r0, BS2NoDisk@sda21(r0)
+/* 8137A198 | 80 0D A9 A4 */	lwz r0, BS2NoDisk_816989E4@sda21(r0)
 /* 8137A19C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137A1A0 | 40 82 00 44 */	bne .L_8137A1E4
 /* 8137A1A4 | 80 0D A9 98 */	lwz r0, BS2LastMode@sda21(r0)
@@ -813,15 +829,15 @@
 /* 8137A1C4 | 48 1B 44 DD */	bl OSReport
 /* 8137A1C8 | 38 60 00 01 */	li r3, 0x1
 /* 8137A1CC | 38 00 00 00 */	li r0, 0x0
-/* 8137A1D0 | 90 6D A9 9C */	stw r3, BS2BootFromCache@sda21(r0)
+/* 8137A1D0 | 90 6D A9 9C */	stw r3, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137A1D4 | 90 0D 84 D8 */	stw r0, BS2BootCaching@sda21(r0)
-/* 8137A1D8 | 90 0D A9 A0 */	stw r0, BS2DriveReset@sda21(r0)
+/* 8137A1D8 | 90 0D A9 A0 */	stw r0, BS2DriveReset_816989E0@sda21(r0)
 /* 8137A1DC | 90 0D 84 DC */	stw r0, BS2WaitSpinup@sda21(r0)
 /* 8137A1E0 | 48 00 00 14 */	b .L_8137A1F4
 .L_8137A1E4:
 /* 8137A1E4 | 38 60 00 00 */	li r3, 0x0
 /* 8137A1E8 | 38 00 00 01 */	li r0, 0x1
-/* 8137A1EC | 90 6D A9 9C */	stw r3, BS2BootFromCache@sda21(r0)
+/* 8137A1EC | 90 6D A9 9C */	stw r3, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137A1F0 | 90 0D 84 D8 */	stw r0, BS2BootCaching@sda21(r0)
 .L_8137A1F4:
 /* 8137A1F4 | 3B 00 00 00 */	li r24, 0x0
@@ -878,7 +894,7 @@
 /* 8137A2C0 | 2C 19 00 00 */	cmpwi r25, 0x0
 /* 8137A2C4 | 40 82 00 38 */	bne .L_8137A2FC
 /* 8137A2C8 | 38 00 00 01 */	li r0, 0x1
-/* 8137A2CC | 93 0D A9 9C */	stw r24, BS2BootFromCache@sda21(r0)
+/* 8137A2CC | 93 0D A9 9C */	stw r24, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137A2D0 | 3B 20 FF F4 */	li r25, -0xc
 /* 8137A2D4 | 90 0D 84 D8 */	stw r0, BS2BootCaching@sda21(r0)
 /* 8137A2D8 | 90 0D 84 DC */	stw r0, BS2WaitSpinup@sda21(r0)
@@ -1123,8 +1139,8 @@
 /* 8137A62C | 48 1F 05 71 */	bl fn_8156AB9C
 /* 8137A630 | 7C 60 07 74 */	extsb r0, r3
 /* 8137A634 | 3C 60 80 00 */	lis r3, 0x8000
-/* 8137A638 | 90 0D A9 C0 */	stw r0, BS2VideoMode@sda21(r0)
-/* 8137A63C | 80 0D A9 C0 */	lwz r0, BS2VideoMode@sda21(r0)
+/* 8137A638 | 90 0D A9 C0 */	stw r0, BS2VideoMode_81698A00@sda21(r0)
+/* 8137A63C | 80 0D A9 C0 */	lwz r0, BS2VideoMode_81698A00@sda21(r0)
 /* 8137A640 | 90 03 00 CC */	stw r0, 0xcc(r3)
 /* 8137A644 | 80 0D A9 A8 */	lwz r0, BS2ReturnToMenu@sda21(r0)
 /* 8137A648 | 2C 00 00 00 */	cmpwi r0, 0x0
@@ -1139,7 +1155,7 @@
 /* 8137A66C | 48 1C 3C 8D */	bl fn_8153E2F8
 /* 8137A670 | 28 03 00 01 */	cmplwi r3, 0x1
 /* 8137A674 | 40 82 00 40 */	bne .L_8137A6B4
-/* 8137A678 | 80 0D A9 C0 */	lwz r0, BS2VideoMode@sda21(r0)
+/* 8137A678 | 80 0D A9 C0 */	lwz r0, BS2VideoMode_81698A00@sda21(r0)
 /* 8137A67C | 2C 00 00 05 */	cmpwi r0, 0x5
 /* 8137A680 | 41 82 00 14 */	beq .L_8137A694
 /* 8137A684 | 40 80 00 1C */	bge .L_8137A6A0
@@ -1151,13 +1167,13 @@
 /* 8137A698 | 48 1C 21 F9 */	bl fn_8153C890
 /* 8137A69C | 48 00 00 98 */	b .L_8137A734
 .L_8137A6A0:
-/* 8137A6A0 | 80 0D A9 C0 */	lwz r0, BS2VideoMode@sda21(r0)
+/* 8137A6A0 | 80 0D A9 C0 */	lwz r0, BS2VideoMode_81698A00@sda21(r0)
 /* 8137A6A4 | 54 03 10 3A */	slwi r3, r0, 2
 /* 8137A6A8 | 38 63 00 02 */	addi r3, r3, 0x2
 /* 8137A6AC | 48 1C 21 E5 */	bl fn_8153C890
 /* 8137A6B0 | 48 00 00 84 */	b .L_8137A734
 .L_8137A6B4:
-/* 8137A6B4 | 80 0D A9 C0 */	lwz r0, BS2VideoMode@sda21(r0)
+/* 8137A6B4 | 80 0D A9 C0 */	lwz r0, BS2VideoMode_81698A00@sda21(r0)
 /* 8137A6B8 | 54 03 10 3A */	slwi r3, r0, 2
 /* 8137A6BC | 48 1C 21 D5 */	bl fn_8153C890
 /* 8137A6C0 | 48 00 00 74 */	b .L_8137A734
@@ -1172,7 +1188,7 @@
 /* 8137A6E0 | 48 1C 3C 19 */	bl fn_8153E2F8
 /* 8137A6E4 | 28 03 00 01 */	cmplwi r3, 0x1
 /* 8137A6E8 | 40 82 00 40 */	bne .L_8137A728
-/* 8137A6EC | 80 0D A9 C0 */	lwz r0, BS2VideoMode@sda21(r0)
+/* 8137A6EC | 80 0D A9 C0 */	lwz r0, BS2VideoMode_81698A00@sda21(r0)
 /* 8137A6F0 | 2C 00 00 05 */	cmpwi r0, 0x5
 /* 8137A6F4 | 41 82 00 14 */	beq .L_8137A708
 /* 8137A6F8 | 40 80 00 1C */	bge .L_8137A714
@@ -1184,13 +1200,13 @@
 /* 8137A70C | 48 1C 21 85 */	bl fn_8153C890
 /* 8137A710 | 48 00 00 24 */	b .L_8137A734
 .L_8137A714:
-/* 8137A714 | 80 0D A9 C0 */	lwz r0, BS2VideoMode@sda21(r0)
+/* 8137A714 | 80 0D A9 C0 */	lwz r0, BS2VideoMode_81698A00@sda21(r0)
 /* 8137A718 | 54 03 10 3A */	slwi r3, r0, 2
 /* 8137A71C | 38 63 00 02 */	addi r3, r3, 0x2
 /* 8137A720 | 48 1C 21 71 */	bl fn_8153C890
 /* 8137A724 | 48 00 00 10 */	b .L_8137A734
 .L_8137A728:
-/* 8137A728 | 80 0D A9 C0 */	lwz r0, BS2VideoMode@sda21(r0)
+/* 8137A728 | 80 0D A9 C0 */	lwz r0, BS2VideoMode_81698A00@sda21(r0)
 /* 8137A72C | 54 03 10 3A */	slwi r3, r0, 2
 /* 8137A730 | 48 1C 21 61 */	bl fn_8153C890
 .L_8137A734:
@@ -1264,7 +1280,7 @@
 /* 8137A82C | 38 7D 04 17 */	addi r3, r29, 0x417
 /* 8137A830 | 4C C6 31 82 */	crclr cr1eq
 /* 8137A834 | 48 1B 3E 6D */	bl OSReport
-/* 8137A838 | 80 0D A9 A4 */	lwz r0, BS2NoDisk@sda21(r0)
+/* 8137A838 | 80 0D A9 A4 */	lwz r0, BS2NoDisk_816989E4@sda21(r0)
 /* 8137A83C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137A840 | 40 82 01 0C */	bne .L_8137A94C
 /* 8137A844 | 88 17 00 05 */	lbz r0, 0x5(r23)
@@ -1282,7 +1298,7 @@
 /* 8137A874 | 7C 77 1B 78 */	mr r23, r3
 /* 8137A878 | 40 82 00 18 */	bne .L_8137A890
 /* 8137A87C | 38 BD 00 00 */	addi r5, r29, 0x0
-/* 8137A880 | 38 6D 84 E4 */	li r3, lbl_81696524@sda21
+/* 8137A880 | 38 6D 84 E4 */	li r3, tick$3666@sda21
 /* 8137A884 | 38 80 07 F6 */	li r4, 0x7f6
 /* 8137A888 | 4C C6 31 82 */	crclr cr1eq
 /* 8137A88C | 48 1B 3E A5 */	bl OSPanic
@@ -1340,7 +1356,7 @@
 .L_8137A94C:
 /* 8137A94C | 38 60 00 00 */	li r3, 0x0
 /* 8137A950 | 38 00 00 01 */	li r0, 0x1
-/* 8137A954 | 90 6D A9 9C */	stw r3, BS2BootFromCache@sda21(r0)
+/* 8137A954 | 90 6D A9 9C */	stw r3, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137A958 | 90 0D 84 D8 */	stw r0, BS2BootCaching@sda21(r0)
 /* 8137A95C | 48 00 00 C0 */	b .L_8137AA1C
 .L_8137A960:
@@ -1369,9 +1385,9 @@
 /* 8137A9B0 | 48 1B 3C F1 */	bl OSReport
 /* 8137A9B4 | 38 60 00 01 */	li r3, 0x1
 /* 8137A9B8 | 38 00 00 00 */	li r0, 0x0
-/* 8137A9BC | 90 6D A9 A0 */	stw r3, BS2DriveReset@sda21(r0)
+/* 8137A9BC | 90 6D A9 A0 */	stw r3, BS2DriveReset_816989E0@sda21(r0)
 /* 8137A9C0 | 90 6D 84 DC */	stw r3, BS2WaitSpinup@sda21(r0)
-/* 8137A9C4 | 90 0D A9 9C */	stw r0, BS2BootFromCache@sda21(r0)
+/* 8137A9C4 | 90 0D A9 9C */	stw r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137A9C8 | 90 6D 84 D8 */	stw r3, BS2BootCaching@sda21(r0)
 /* 8137A9CC | 48 00 00 50 */	b .L_8137AA1C
 .L_8137A9D0:
@@ -1386,7 +1402,7 @@
 /* 8137A9EC | 4C C6 31 82 */	crclr cr1eq
 /* 8137A9F0 | 48 1B 3C B1 */	bl OSReport
 /* 8137A9F4 | 38 00 00 01 */	li r0, 0x1
-/* 8137A9F8 | 90 0D A9 A0 */	stw r0, BS2DriveReset@sda21(r0)
+/* 8137A9F8 | 90 0D A9 A0 */	stw r0, BS2DriveReset_816989E0@sda21(r0)
 /* 8137A9FC | 90 0D 84 DC */	stw r0, BS2WaitSpinup@sda21(r0)
 /* 8137AA00 | 48 00 00 1C */	b .L_8137AA1C
 .L_8137AA04:
@@ -1394,7 +1410,7 @@
 /* 8137AA08 | 4C C6 31 82 */	crclr cr1eq
 /* 8137AA0C | 48 1B 3C 95 */	bl OSReport
 /* 8137AA10 | 38 00 00 01 */	li r0, 0x1
-/* 8137AA14 | 90 0D A9 A0 */	stw r0, BS2DriveReset@sda21(r0)
+/* 8137AA14 | 90 0D A9 A0 */	stw r0, BS2DriveReset_816989E0@sda21(r0)
 /* 8137AA18 | 90 0D 84 DC */	stw r0, BS2WaitSpinup@sda21(r0)
 .L_8137AA1C:
 /* 8137AA1C | 80 0D A9 A8 */	lwz r0, BS2ReturnToMenu@sda21(r0)
@@ -1403,7 +1419,7 @@
 /* 8137AA28 | 80 0D A9 B0 */	lwz r0, BS2ReturnToDataManager@sda21(r0)
 /* 8137AA2C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137AA30 | 40 82 00 10 */	bne .L_8137AA40
-/* 8137AA34 | 80 0D A9 C0 */	lwz r0, BS2VideoMode@sda21(r0)
+/* 8137AA34 | 80 0D A9 C0 */	lwz r0, BS2VideoMode_81698A00@sda21(r0)
 /* 8137AA38 | 54 03 10 3A */	slwi r3, r0, 2
 /* 8137AA3C | 48 1C 63 65 */	bl fn_81540DA0
 .L_8137AA40:
@@ -1700,7 +1716,7 @@
 /* 8137AE74 | 4B FF E7 E5 */	bl BS2Entry
 .L_8137AE78:
 /* 8137AE78 | 38 BD 05 A8 */	addi r5, r29, 0x5a8
-/* 8137AE7C | 38 6D 84 E4 */	li r3, lbl_81696524@sda21
+/* 8137AE7C | 38 6D 84 E4 */	li r3, tick$3666@sda21
 /* 8137AE80 | 38 80 08 7F */	li r4, 0x87f
 /* 8137AE84 | 4C C6 31 82 */	crclr cr1eq
 /* 8137AE88 | 48 1B 38 A9 */	bl OSPanic
@@ -1878,228 +1894,237 @@
 	.rel BS2BootIRD, .L_81379CC8
 .endobj jumptable_816459AC
 
-# .data:0x268 | 0x81645A40 | size: 0x368
-.obj gap_08_81645A40_data, global
-.hidden gap_08_81645A40_data
+# .data:0x268 | 0x81645A40 | size: 0x9
+.obj lbl_81645A40, global
 	.4byte 0x01020304
 	.4byte 0x05060708
-	.4byte 0x09534349
-	.4byte 0x6E697420
-	.4byte 0x6661696C
-	.4byte 0x6564210A
-	.4byte 0x002F7469
-	.4byte 0x746C652F
-	.4byte 0x30303030
-	.4byte 0x30303031
-	.4byte 0x2F303030
-	.4byte 0x30303030
-	.4byte 0x322F6461
-	.4byte 0x74612F73
-	.4byte 0x65747469
-	.4byte 0x6E672E74
-	.4byte 0x78740046
+	.byte 0x09
+.endobj lbl_81645A40
+
+# .data:0x271 | 0x81645A49 | size: 0x35C
+.obj lbl_81645A49, global
+	.4byte 0x5343496E
+	.4byte 0x69742066
 	.4byte 0x61696C65
-	.4byte 0x6420746F
-	.4byte 0x20736574
-	.4byte 0x2070726F
-	.4byte 0x64756374
-	.4byte 0x20696E66
-	.4byte 0x6F206669
-	.4byte 0x6C652070
-	.4byte 0x65726D69
-	.4byte 0x7373696F
-	.4byte 0x6E212028
-	.4byte 0x2564290A
-	.4byte 0x0070726F
-	.4byte 0x64756374
-	.4byte 0x20696E66
-	.4byte 0x6F206669
-	.4byte 0x6C652069
-	.4byte 0x73206E6F
-	.4byte 0x74206578
-	.4byte 0x6973740A
-	.4byte 0x00466174
-	.4byte 0x616C2065
-	.4byte 0x72726F72
+	.4byte 0x64210A00
+	.4byte 0x2F746974
+	.4byte 0x6C652F30
+	.4byte 0x30303030
+	.4byte 0x3030312F
+	.4byte 0x30303030
+	.4byte 0x30303032
+	.4byte 0x2F646174
+	.4byte 0x612F7365
+	.4byte 0x7474696E
+	.4byte 0x672E7478
+	.4byte 0x74004661
+	.4byte 0x696C6564
+	.4byte 0x20746F20
+	.4byte 0x73657420
+	.4byte 0x70726F64
+	.4byte 0x75637420
+	.4byte 0x696E666F
+	.4byte 0x2066696C
+	.4byte 0x65207065
+	.4byte 0x726D6973
+	.4byte 0x73696F6E
 	.4byte 0x21202825
 	.4byte 0x64290A00
-	.4byte 0x4661696C
-	.4byte 0x65642074
-	.4byte 0x6F206372
-	.4byte 0x65617465
-	.4byte 0x0A00426F
-	.4byte 0x6F742066
-	.4byte 0x726F6D20
+	.4byte 0x70726F64
+	.4byte 0x75637420
+	.4byte 0x696E666F
+	.4byte 0x2066696C
+	.4byte 0x65206973
+	.4byte 0x206E6F74
+	.4byte 0x20657869
+	.4byte 0x73740A00
+	.4byte 0x46617461
+	.4byte 0x6C206572
+	.4byte 0x726F7221
+	.4byte 0x20282564
+	.4byte 0x290A0046
+	.4byte 0x61696C65
+	.4byte 0x6420746F
+	.4byte 0x20637265
+	.4byte 0x6174650A
+	.4byte 0x00426F6F
+	.4byte 0x74206672
+	.4byte 0x6F6D2063
+	.4byte 0x61636865
+	.4byte 0x0A002F74
+	.4byte 0x69746C65
+	.4byte 0x2F303030
+	.4byte 0x30303030
+	.4byte 0x312F3030
+	.4byte 0x30303030
+	.4byte 0x30322F64
+	.4byte 0x6174612F
 	.4byte 0x63616368
-	.4byte 0x650A002F
-	.4byte 0x7469746C
-	.4byte 0x652F3030
-	.4byte 0x30303030
-	.4byte 0x30312F30
-	.4byte 0x30303030
-	.4byte 0x3030322F
-	.4byte 0x64617461
-	.4byte 0x2F636163
-	.4byte 0x68652E64
-	.4byte 0x6174006F
-	.4byte 0x70656E20
-	.4byte 0x626F6F74
-	.4byte 0x20636163
-	.4byte 0x68652066
-	.4byte 0x696C6528
-	.4byte 0x2564290A
-	.4byte 0x00676574
-	.4byte 0x20626F6F
-	.4byte 0x74206361
-	.4byte 0x63686520
-	.4byte 0x66696C65
-	.4byte 0x206C656E
-	.4byte 0x67746828
-	.4byte 0x2564290A
-	.4byte 0x00636C6F
-	.4byte 0x73652062
+	.4byte 0x652E6461
+	.4byte 0x74006F70
+	.4byte 0x656E2062
 	.4byte 0x6F6F7420
 	.4byte 0x63616368
 	.4byte 0x65206669
 	.4byte 0x6C652825
 	.4byte 0x64290A00
-	.4byte 0x64656C65
-	.4byte 0x74652062
-	.4byte 0x6F6F7420
-	.4byte 0x63616368
-	.4byte 0x65206669
-	.4byte 0x6C652825
-	.4byte 0x64290A00
-	.4byte 0x43726561
-	.4byte 0x74656420
+	.4byte 0x67657420
 	.4byte 0x626F6F74
 	.4byte 0x20636163
 	.4byte 0x68652066
-	.4byte 0x696C652E
-	.4byte 0x0A004553
-	.4byte 0x5F496E69
-	.4byte 0x744C6962
-	.4byte 0x20666169
-	.4byte 0x6C656421
-	.4byte 0x2025640A
-	.4byte 0x00536875
-	.4byte 0x74646F77
-	.4byte 0x6E207379
-	.4byte 0x7374656D
-	.4byte 0x2066726F
-	.4byte 0x6D204743
-	.4byte 0x210A0045
-	.4byte 0x4A454354
-	.4byte 0x20737769
-	.4byte 0x74636820
-	.4byte 0x77617320
-	.4byte 0x70726573
-	.4byte 0x7365640A
-	.4byte 0x00536875
-	.4byte 0x74646F77
-	.4byte 0x6E207379
-	.4byte 0x7374656D
-	.4byte 0x210A0053
-	.4byte 0x68696674
-	.4byte 0x20746F20
-	.4byte 0x69646C65
-	.4byte 0x206D6F64
-	.4byte 0x650A0044
-	.4byte 0x69736320
-	.4byte 0x696E0A00
-	.4byte 0x52657475
-	.4byte 0x726E2074
-	.4byte 0x6F206D65
-	.4byte 0x6E750A00
-	.4byte 0x4C617374
-	.4byte 0x20736875
-	.4byte 0x74646F77
-	.4byte 0x6E207365
-	.4byte 0x7175656E
-	.4byte 0x63652069
-	.4byte 0x7320696E
-	.4byte 0x76616C69
-	.4byte 0x640A002F
+	.4byte 0x696C6520
+	.4byte 0x6C656E67
+	.4byte 0x74682825
+	.4byte 0x64290A00
+	.4byte 0x636C6F73
+	.4byte 0x6520626F
+	.4byte 0x6F742063
+	.4byte 0x61636865
+	.4byte 0x2066696C
+	.4byte 0x65282564
+	.4byte 0x290A0064
+	.4byte 0x656C6574
+	.4byte 0x6520626F
+	.4byte 0x6F742063
+	.4byte 0x61636865
+	.4byte 0x2066696C
+	.4byte 0x65282564
+	.4byte 0x290A0043
+	.4byte 0x72656174
+	.4byte 0x65642062
+	.4byte 0x6F6F7420
+	.4byte 0x63616368
+	.4byte 0x65206669
+	.4byte 0x6C652E0A
+	.4byte 0x0045535F
+	.4byte 0x496E6974
+	.4byte 0x4C696220
+	.4byte 0x6661696C
+	.4byte 0x65642120
+	.4byte 0x25640A00
+	.4byte 0x53687574
+	.4byte 0x646F776E
+	.4byte 0x20737973
+	.4byte 0x74656D20
+	.4byte 0x66726F6D
+	.4byte 0x20474321
+	.4byte 0x0A00454A
+	.4byte 0x45435420
+	.4byte 0x73776974
+	.4byte 0x63682077
+	.4byte 0x61732070
+	.4byte 0x72657373
+	.4byte 0x65640A00
+	.4byte 0x53687574
+	.4byte 0x646F776E
+	.4byte 0x20737973
+	.4byte 0x74656D21
+	.4byte 0x0A005368
+	.4byte 0x69667420
+	.4byte 0x746F2069
+	.4byte 0x646C6520
+	.4byte 0x6D6F6465
+	.4byte 0x0A004469
+	.4byte 0x73632069
+	.4byte 0x6E0A0052
+	.4byte 0x65747572
+	.4byte 0x6E20746F
+	.4byte 0x206D656E
+	.4byte 0x750A004C
+	.4byte 0x61737420
+	.4byte 0x73687574
+	.4byte 0x646F776E
+	.4byte 0x20736571
+	.4byte 0x75656E63
+	.4byte 0x65206973
+	.4byte 0x20696E76
+	.4byte 0x616C6964
+	.4byte 0x0A002F73
+	.4byte 0x68617265
+	.4byte 0x64322F74
+	.4byte 0x65737432
+	.4byte 0x00466169
+	.4byte 0x6C656420
+	.4byte 0x746F2063
+	.4byte 0x72656174
+	.4byte 0x65206469
+	.4byte 0x7220222F
 	.4byte 0x73686172
 	.4byte 0x6564322F
 	.4byte 0x74657374
-	.4byte 0x32004661
-	.4byte 0x696C6564
-	.4byte 0x20746F20
-	.4byte 0x63726561
-	.4byte 0x74652064
-	.4byte 0x69722022
-	.4byte 0x2F736861
-	.4byte 0x72656432
-	.4byte 0x2F746573
-	.4byte 0x7432222E
-	.4byte 0x0A004C61
-	.4byte 0x756E6368
-	.4byte 0x204E414E
-	.4byte 0x44204170
-	.4byte 0x70206672
-	.4byte 0x6F6D2057
-	.4byte 0x4332340A
+	.4byte 0x32222E0A
 	.4byte 0x004C6175
 	.4byte 0x6E636820
-	.4byte 0x2020203A
-	.4byte 0x20307825
-	.4byte 0x3031366C
-	.4byte 0x6C780A00
-	.4byte 0x4C61756E
-	.4byte 0x6368436F
-	.4byte 0x64653A20
-	.4byte 0x25303858
-	.4byte 0x0A006172
-	.4byte 0x67632020
-	.4byte 0x20202020
-	.4byte 0x3A202564
-	.4byte 0x0A006172
-	.4byte 0x67765B25
-	.4byte 0x645D2020
-	.4byte 0x203A2025
-	.4byte 0x730A002F
-	.4byte 0x73686172
-	.4byte 0x6564322F
-	.4byte 0x7379732F
 	.4byte 0x4E414E44
-	.4byte 0x424F4F54
-	.4byte 0x494E464F
-	.4byte 0x00737065
-	.4byte 0x63696669
-	.4byte 0x65642074
-	.4byte 0x69746C65
-	.4byte 0x20627920
-	.4byte 0x57433234
-	.4byte 0x20697320
-	.4byte 0x6E6F7420
-	.4byte 0x696E7374
-	.4byte 0x616C6C65
-	.4byte 0x64210A00
-	.4byte 0x57696B69
-	.4byte 0x6B69536C
-	.4byte 0x6F742041
-	.4byte 0x0A004964
-	.4byte 0x30203A20
-	.4byte 0x25303878
-	.4byte 0x0A005769
-	.4byte 0x6B696B69
-	.4byte 0x536C6F74
-	.4byte 0x20420A00
-	.4byte 0x49643120
-	.4byte 0x3A202530
-	.4byte 0x38780A00
-	.4byte 0x42533220
-	.4byte 0x4552524F
-	.4byte 0x52203E3E
-	.4byte 0x3E205348
-	.4byte 0x4F554C44
-	.4byte 0x204E4556
-	.4byte 0x45522052
-	.4byte 0x45414348
-	.4byte 0x20484552
-	.4byte 0x45000000
-.endobj gap_08_81645A40_data
+	.4byte 0x20417070
+	.4byte 0x2066726F
+	.4byte 0x6D205743
+	.4byte 0x32340A00
+	.4byte 0x4C61756E
+	.4byte 0x63682020
+	.4byte 0x20203A20
+	.4byte 0x30782530
+	.4byte 0x31366C6C
+	.4byte 0x780A004C
+	.4byte 0x61756E63
+	.4byte 0x68436F64
+	.4byte 0x653A2025
+	.4byte 0x3038580A
+	.4byte 0x00617267
+	.4byte 0x63202020
+	.4byte 0x2020203A
+	.4byte 0x2025640A
+	.4byte 0x00617267
+	.4byte 0x765B2564
+	.4byte 0x5D202020
+	.4byte 0x3A202573
+	.4byte 0x0A002F73
+	.4byte 0x68617265
+	.4byte 0x64322F73
+	.4byte 0x79732F4E
+	.4byte 0x414E4442
+	.4byte 0x4F4F5449
+	.4byte 0x4E464F00
+	.4byte 0x73706563
+	.4byte 0x69666965
+	.4byte 0x64207469
+	.4byte 0x746C6520
+	.4byte 0x62792057
+	.4byte 0x43323420
+	.4byte 0x6973206E
+	.4byte 0x6F742069
+	.4byte 0x6E737461
+	.4byte 0x6C6C6564
+	.4byte 0x210A0057
+	.4byte 0x696B696B
+	.4byte 0x69536C6F
+	.4byte 0x7420410A
+	.4byte 0x00496430
+	.4byte 0x203A2025
+	.4byte 0x3038780A
+	.4byte 0x0057696B
+	.4byte 0x696B6953
+	.4byte 0x6C6F7420
+	.4byte 0x420A0049
+	.4byte 0x6431203A
+	.4byte 0x20253038
+	.4byte 0x780A0042
+	.4byte 0x53322045
+	.4byte 0x52524F52
+	.4byte 0x203E3E3E
+	.4byte 0x2053484F
+	.4byte 0x554C4420
+	.4byte 0x4E455645
+	.4byte 0x52205245
+	.4byte 0x41434820
+	.4byte 0x48455245
+.endobj lbl_81645A49
+
+# .data:0x5CD | 0x81645DA5 | size: 0x3
+.obj gap_08_81645DA5_data, global
+.hidden gap_08_81645DA5_data
+	.byte 0x00, 0x00, 0x00
+.endobj gap_08_81645DA5_data
 
 # 0x81694780..0x81694788 | size: 0x8
 .section .sdata2, "a"
@@ -2120,10 +2145,16 @@
 	.byte 0xFF
 .endobj lbl_81694782
 
-# .sdata2:0x3 | 0x81694783 | size: 0x5
+# .sdata2:0x3 | 0x81694783 | size: 0x1
 .obj lbl_81694783, global
-	.byte 0x00, 0x00, 0x00, 0x00, 0x00
+	.byte 0x00
 .endobj lbl_81694783
+
+# .sdata2:0x4 | 0x81694784 | size: 0x4
+.obj gap_09_81694784_sdata2, global
+.hidden gap_09_81694784_sdata2
+	.4byte 0x00000000
+.endobj gap_09_81694784_sdata2
 
 # 0x81696518..0x81696578 | size: 0x60
 .section .sdata, "wa"
@@ -2140,14 +2171,14 @@
 .endobj BS2WaitSpinup
 
 # .sdata:0x8 | 0x81696520 | size: 0x4
-.obj lbl_81696520, global
+.obj __OSIsDiag, global
 	.4byte 0xFFFFFFFF
-.endobj lbl_81696520
+.endobj __OSIsDiag
 
 # .sdata:0xC | 0x81696524 | size: 0x6
-.obj lbl_81696524, global
+.obj tick$3666, local
 	.string "BS2.c"
-.endobj lbl_81696524
+.endobj tick$3666
 
 # .sdata:0x12 | 0x8169652A | size: 0x5
 .obj lbl_8169652A, global
@@ -2219,83 +2250,87 @@
 	.string "\rReboot"
 .endobj lbl_81696567
 
-# .sdata:0x57 | 0x8169656F | size: 0x9
+# .sdata:0x57 | 0x8169656F | size: 0x8
 .obj lbl_8169656F, global
-	.4byte 0x25303136
-	.4byte 0x6C6C7800
-	.byte 0x00
+	.string "%016llx"
 .endobj lbl_8169656F
+
+# .sdata:0x5F | 0x81696577 | size: 0x1
+.obj gap_11_81696577_sdata, global
+.hidden gap_11_81696577_sdata
+	.byte 0x00
+.endobj gap_11_81696577_sdata
 
 # 0x816989D0..0x81698A08 | size: 0x38
 .section .sbss, "wa", @nobits
 .balign 8
 
 # .sbss:0x0 | 0x816989D0 | size: 0x4
-.obj InvalidShutdown, global
+.obj InvalidShutdown, local
 	.skip 0x4
 .endobj InvalidShutdown
 
 # .sbss:0x4 | 0x816989D4 | size: 0x4
-.obj ShutdownFromGCFlag, global
+.obj ShutdownFromGCFlag, local
 	.skip 0x4
 .endobj ShutdownFromGCFlag
 
 # .sbss:0x8 | 0x816989D8 | size: 0x4
-.obj BS2LastMode, global
+.obj BS2LastMode, local
 	.skip 0x4
 .endobj BS2LastMode
 
 # .sbss:0xC | 0x816989DC | size: 0x4
-.obj BS2BootFromCache, global
+.obj BS2BootFromCache_816989DC, global
 	.skip 0x4
-.endobj BS2BootFromCache
+.endobj BS2BootFromCache_816989DC
 
 # .sbss:0x10 | 0x816989E0 | size: 0x4
-.obj BS2DriveReset, global
+.obj BS2DriveReset_816989E0, global
 	.skip 0x4
-.endobj BS2DriveReset
+.endobj BS2DriveReset_816989E0
 
 # .sbss:0x14 | 0x816989E4 | size: 0x4
-.obj BS2NoDisk, global
+.obj BS2NoDisk_816989E4, global
 	.skip 0x4
-.endobj BS2NoDisk
+.endobj BS2NoDisk_816989E4
 
 # .sbss:0x18 | 0x816989E8 | size: 0x4
-.obj BS2ReturnToMenu, global
+.obj BS2ReturnToMenu, local
 	.skip 0x4
 .endobj BS2ReturnToMenu
 
 # .sbss:0x1C | 0x816989EC | size: 0x4
-.obj BS2ReturnToIdle, global
+.obj BS2ReturnToIdle, local
 	.skip 0x4
 .endobj BS2ReturnToIdle
 
 # .sbss:0x20 | 0x816989F0 | size: 0x4
-.obj BS2ReturnToDataManager, global
+.obj BS2ReturnToDataManager, local
 	.skip 0x4
 .endobj BS2ReturnToDataManager
 
 # .sbss:0x24 | 0x816989F4 | size: 0x4
-.obj BS2ReturnArgs, global
+.obj BS2ReturnArgs, local
 	.skip 0x4
 .endobj BS2ReturnArgs
 
 # .sbss:0x28 | 0x816989F8 | size: 0x4
-.obj BS2LaunchTitle, global
+.obj BS2LaunchTitle, local
 	.skip 0x4
 .endobj BS2LaunchTitle
 
 # .sbss:0x2C | 0x816989FC | size: 0x4
-.obj BS2SalvageMode, global
+.obj BS2SalvageMode, local
 	.skip 0x4
 .endobj BS2SalvageMode
 
 # .sbss:0x30 | 0x81698A00 | size: 0x4
-.obj BS2VideoMode, global
+.obj BS2VideoMode_81698A00, global
 	.skip 0x4
-.endobj BS2VideoMode
+.endobj BS2VideoMode_81698A00
 
 # .sbss:0x34 | 0x81698A04 | size: 0x4
-.obj InvalidSram, global
+.obj InvalidSram, local
 	.skip 0x4
 .endobj InvalidSram

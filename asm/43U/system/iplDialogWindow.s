@@ -3720,7 +3720,7 @@
 .endfn init__Q23gui9InterfaceFv
 
 # .text:0x327C | 0x81347A94 | size: 0x3C
-.fn "__sinit_\\iplDialogWindow_cpp", local
+.fn "__sinit_\\iplDialogWindow_cpp", weak
 /* 81347A94 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81347A98 | 7C 08 02 A6 */	mflr r0
 /* 81347A9C | C0 22 81 2C */	lfs f1, lbl_8169452C@sda21(r0)
@@ -4061,10 +4061,7 @@
 
 # .data:0x4A4 | 0x816359B4 | size: 0x10
 .obj lbl_816359B4, global
-	.4byte 0x5749504C
-	.4byte 0x5F53455F
-	.4byte 0x43414E43
-	.4byte 0x454C0000
+	.string "WIPL_SE_CANCEL\000"
 .endobj lbl_816359B4
 
 # .data:0x4B4 | 0x816359C4 | size: 0x5C
@@ -4179,11 +4176,16 @@
 	.float 22.1
 .endobj lbl_81694534
 
-# .sdata2:0x28 | 0x81694538 | size: 0x8
+# .sdata2:0x28 | 0x81694538 | size: 0x4
 .obj lbl_81694538, global
 	.float 25.9
-	.float 0
 .endobj lbl_81694538
+
+# .sdata2:0x2C | 0x8169453C | size: 0x4
+.obj gap_09_8169453C_sdata2, global
+.hidden gap_09_8169453C_sdata2
+	.4byte 0x00000000
+.endobj gap_09_8169453C_sdata2
 
 # 0x81696130..0x81696198 | size: 0x68
 .section .sdata, "wa"
@@ -4259,11 +4261,16 @@
 	.string "Shade"
 .endobj lbl_8169618A
 
-# .sdata:0x60 | 0x81696190 | size: 0x8
+# .sdata:0x60 | 0x81696190 | size: 0x6
 .obj lbl_81696190, global
-	.4byte 0x4E5F546F
-	.4byte 0x70000000
+	.string "N_Top"
 .endobj lbl_81696190
+
+# .sdata:0x66 | 0x81696196 | size: 0x2
+.obj gap_11_81696196_sdata, global
+.hidden gap_11_81696196_sdata
+	.2byte 0x0000
+.endobj gap_11_81696196_sdata
 
 # 0x816986C0..0x816986D8 | size: 0x18
 .section .sbss, "wa", @nobits
@@ -4279,7 +4286,13 @@
 	.skip 0x8
 .endobj lbl_816986C8
 
-# .sbss:0x10 | 0x816986D0 | size: 0x8
+# .sbss:0x10 | 0x816986D0 | size: 0x1
 .obj lbl_816986D0, global
-	.skip 0x8
+	.skip 0x1
 .endobj lbl_816986D0
+
+# .sbss:0x11 | 0x816986D1 | size: 0x7
+.obj gap_12_816986D1_sbss, global
+.hidden gap_12_816986D1_sbss
+	.skip 0x7
+.endobj gap_12_816986D1_sbss

@@ -844,7 +844,7 @@
 	.4byte 0x00000000
 .endobj lbl_81617210
 
-# .rodata:0xFC | 0x8161730C | size: 0x74
+# .rodata:0xFC | 0x8161730C | size: 0x70
 .obj lbl_8161730C, global
 	.4byte lbl_8166A42D
 	.4byte VmMethod_beginRender
@@ -874,8 +874,13 @@
 	.4byte VmMethod_getFreeSysWorkSize
 	.4byte lbl_8166A515
 	.4byte VmMethod_waitForRetrace
-	.4byte 0x00000000
 .endobj lbl_8161730C
+
+# .rodata:0x16C | 0x8161737C | size: 0x4
+.obj gap_07_8161737C_rodata, global
+.hidden gap_07_8161737C_rodata
+	.4byte 0x00000000
+.endobj gap_07_8161737C_rodata
 
 # 0x8166A2B0..0x8166A528 | size: 0x278
 .data
@@ -1046,14 +1051,16 @@
 	.string "getFreeSysWorkSize"
 .endobj lbl_8166A502
 
-# .data:0x265 | 0x8166A515 | size: 0x13
+# .data:0x265 | 0x8166A515 | size: 0xF
 .obj lbl_8166A515, global
-	.4byte 0x77616974
-	.4byte 0x466F7252
-	.4byte 0x65747261
-	.4byte 0x63650000
-	.byte 0x00, 0x00, 0x00
+	.string "waitForRetrace"
 .endobj lbl_8166A515
+
+# .data:0x274 | 0x8166A524 | size: 0x4
+.obj gap_08_8166A524_data, global
+.hidden gap_08_8166A524_data
+	.4byte 0x00000000
+.endobj gap_08_8166A524_data
 
 # 0x816977D0..0x816977E8 | size: 0x18
 .section .sdata, "wa"
@@ -1069,12 +1076,16 @@
 	.string "@System"
 .endobj lbl_816977D5
 
-# .sdata:0xD | 0x816977DD | size: 0xB
+# .sdata:0xD | 0x816977DD | size: 0x7
 .obj lbl_816977DD, global
-	.4byte 0x53797374
-	.4byte 0x656D0000
-	.byte 0x00, 0x00, 0x00
+	.string "System"
 .endobj lbl_816977DD
+
+# .sdata:0x14 | 0x816977E4 | size: 0x4
+.obj gap_11_816977E4_sdata, global
+.hidden gap_11_816977E4_sdata
+	.4byte 0x00000000
+.endobj gap_11_816977E4_sdata
 
 # 0x81698D60..0x81698D68 | size: 0x8
 .section .sbss, "wa", @nobits

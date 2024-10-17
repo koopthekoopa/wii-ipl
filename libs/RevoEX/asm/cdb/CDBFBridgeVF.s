@@ -573,7 +573,13 @@
 	.4byte 0x00000000
 .endobj lbl_81697A68
 
-# .sdata:0x4 | 0x81697A6C | size: 0x4
+# .sdata:0x4 | 0x81697A6C | size: 0x3
 .obj lbl_81697A6C, global
-	.4byte 0x722B0000
+	.string "r+"
 .endobj lbl_81697A6C
+
+# .sdata:0x7 | 0x81697A6F | size: 0x1
+.obj gap_11_81697A6F_sdata, global
+.hidden gap_11_81697A6F_sdata
+	.byte 0x00
+.endobj gap_11_81697A6F_sdata

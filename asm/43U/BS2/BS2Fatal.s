@@ -672,15 +672,15 @@
 /* 81381350 | 54 60 06 3E */	clrlwi r0, r3, 24
 /* 81381354 | 28 00 00 09 */	cmplwi r0, 0x9
 /* 81381358 | 40 81 00 14 */	ble .L_8138136C
-/* 8138135C | 3C 60 81 61 */	lis r3, lbl_8160F628@ha
-/* 81381360 | 38 63 F6 28 */	addi r3, r3, lbl_8160F628@l
+/* 8138135C | 3C 60 81 61 */	lis r3, __DVDErrorMessage@ha
+/* 81381360 | 38 63 F6 28 */	addi r3, r3, __DVDErrorMessage@l
 /* 81381364 | 80 A3 00 04 */	lwz r5, 0x4(r3)
 /* 81381368 | 48 00 00 18 */	b .L_81381380
 .L_8138136C:
 /* 8138136C | 48 1E 8D 99 */	bl SCGetLanguage
-/* 81381370 | 3C 80 81 61 */	lis r4, lbl_8160F628@ha
+/* 81381370 | 3C 80 81 61 */	lis r4, __DVDErrorMessage@ha
 /* 81381374 | 54 60 15 BA */	clrlslwi r0, r3, 24, 2
-/* 81381378 | 38 84 F6 28 */	addi r4, r4, lbl_8160F628@l
+/* 81381378 | 38 84 F6 28 */	addi r4, r4, __DVDErrorMessage@l
 /* 8138137C | 7C A4 00 2E */	lwzx r5, r4, r0
 .L_81381380:
 /* 81381380 | 89 81 00 14 */	lbz r12, 0x14(r1)
@@ -888,7 +888,7 @@
 .balign 8
 
 # .rodata:0x0 | 0x8160F628 | size: 0x28
-.obj lbl_8160F628, global
+.obj __DVDErrorMessage, global
 	.4byte lbl_81646F08
 	.4byte lbl_81646FAD
 	.4byte lbl_81647069
@@ -899,7 +899,7 @@
 	.4byte lbl_8164745B
 	.4byte lbl_8164745B
 	.4byte lbl_8164745B
-.endobj lbl_8160F628
+.endobj __DVDErrorMessage
 
 # 0x81646F08..0x81647538 | size: 0x630
 .data
@@ -940,10 +940,17 @@
 	.string "\n\n\n       Er is een fout opgetreden.\n   Druk op de ejectknop, verwijder de\n speldisk en zet het systeem uit. Lees\nde Wii-handleiding voor meer informatie."
 .endobj lbl_816473C0
 
-# .data:0x553 | 0x8164745B | size: 0xDD
+# .data:0x553 | 0x8164745B | size: 0xD7
 .obj lbl_8164745B, global
-	.string "\n\n                Error #104,\n          An error has occurred.\n    Press the EJECT Button, remove the\n    Game Disc, and turn the power off.\n   Please read the Wii operations manual\n           for more information.\000\000\000\000\000\000"
+	.string "\n\n                Error #104,\n          An error has occurred.\n    Press the EJECT Button, remove the\n    Game Disc, and turn the power off.\n   Please read the Wii operations manual\n           for more information."
 .endobj lbl_8164745B
+
+# .data:0x62A | 0x81647532 | size: 0x6
+.obj gap_08_81647532_data, global
+.hidden gap_08_81647532_data
+	.4byte 0x00000000
+	.2byte 0x0000
+.endobj gap_08_81647532_data
 
 # 0x81694788..0x816947D0 | size: 0x48
 .section .sdata2, "a"
@@ -1061,7 +1068,13 @@
 .section .sbss, "wa", @nobits
 .balign 8
 
-# .sbss:0x0 | 0x81698B48 | size: 0x8
+# .sbss:0x0 | 0x81698B48 | size: 0x4
 .obj lbl_81698B48, global
-	.skip 0x8
+	.skip 0x4
 .endobj lbl_81698B48
+
+# .sbss:0x4 | 0x81698B4C | size: 0x4
+.obj gap_12_81698B4C_sbss, global
+.hidden gap_12_81698B4C_sbss
+	.skip 0x4
+.endobj gap_12_81698B4C_sbss

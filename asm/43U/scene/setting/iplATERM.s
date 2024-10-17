@@ -12805,11 +12805,16 @@
 	.4byte 0x00000001
 .endobj lbl_81697244
 
-# .sdata:0x48 | 0x81697248 | size: 0x8
+# .sdata:0x48 | 0x81697248 | size: 0x5
 .obj lbl_81697248, global
-	.4byte 0x57415250
-	.4byte 0x00000000
+	.string "WARP"
 .endobj lbl_81697248
+
+# .sdata:0x4D | 0x8169724D | size: 0x3
+.obj gap_11_8169724D_sdata, global
+.hidden gap_11_8169724D_sdata
+	.byte 0x00, 0x00, 0x00
+.endobj gap_11_8169724D_sdata
 
 # 0x81698C70..0x81698CE0 | size: 0x70
 .section .sbss, "wa", @nobits

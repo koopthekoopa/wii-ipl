@@ -17901,12 +17901,17 @@
 	.string "@WinEmu"
 .endobj lbl_816977BC
 
-# .sdata:0x24C | 0x816977C4 | size: 0xC
+# .sdata:0x24C | 0x816977C4 | size: 0x5
 .obj lbl_816977C4, global
-	.4byte 0x52434845
-	.4byte 0x00000000
-	.4byte 0x00000000
+	.string "RCHE"
 .endobj lbl_816977C4
+
+# .sdata:0x251 | 0x816977C9 | size: 0x7
+.obj gap_11_816977C9_sdata, global
+.hidden gap_11_816977C9_sdata
+	.4byte 0x00000000
+	.byte 0x00, 0x00, 0x00
+.endobj gap_11_816977C9_sdata
 
 # 0x81698D50..0x81698D60 | size: 0x10
 .section .sbss, "wa", @nobits
@@ -17922,7 +17927,13 @@
 	.skip 0x4
 .endobj lbl_81698D54
 
-# .sbss:0x8 | 0x81698D58 | size: 0x8
+# .sbss:0x8 | 0x81698D58 | size: 0x4
 .obj CHANSVmDebugVerboseMode, global
-	.skip 0x8
+	.skip 0x4
 .endobj CHANSVmDebugVerboseMode
+
+# .sbss:0xC | 0x81698D5C | size: 0x4
+.obj gap_12_81698D5C_sbss, global
+.hidden gap_12_81698D5C_sbss
+	.skip 0x4
+.endobj gap_12_81698D5C_sbss

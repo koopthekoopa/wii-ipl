@@ -735,15 +735,16 @@
 	.4byte 0x00000000
 .endobj lbl_8166B94C
 
-# .data:0x308 | 0x8166B968 | size: 0x18
+# .data:0x308 | 0x8166B968 | size: 0x15
 .obj lbl_8166B968, global
-	.4byte 0x43444246
-	.4byte 0x5344656C
-	.4byte 0x65746544
-	.4byte 0x69722829
-	.4byte 0x2025730A
-	.4byte 0x00000000
+	.string "CDBFSDeleteDir() %s\n"
 .endobj lbl_8166B968
+
+# .data:0x31D | 0x8166B97D | size: 0x3
+.obj gap_08_8166B97D_data, global
+.hidden gap_08_8166B97D_data
+	.byte 0x00, 0x00, 0x00
+.endobj gap_08_8166B97D_data
 
 # 0x816979F0..0x81697A00 | size: 0x10
 .section .sdata, "wa"
@@ -759,22 +760,39 @@
 	.4byte 0x00000000
 .endobj lbl_816979F4
 
-# .sdata:0x8 | 0x816979F8 | size: 0x8
+# .sdata:0x8 | 0x816979F8 | size: 0x6
 .obj lbl_816979F8, global
-	.4byte 0x4344423A
-	.4byte 0x2F000000
+	.string "CDB:/"
 .endobj lbl_816979F8
+
+# .sdata:0xE | 0x816979FE | size: 0x2
+.obj gap_11_816979FE_sdata, global
+.hidden gap_11_816979FE_sdata
+	.2byte 0x0000
+.endobj gap_11_816979FE_sdata
 
 # 0x81698D68..0x81698D78 | size: 0x10
 .section .sbss, "wa", @nobits
 .balign 8
 
-# .sbss:0x0 | 0x81698D68 | size: 0x8
+# .sbss:0x0 | 0x81698D68 | size: 0x4
 .obj CDB_VFF_FILE_SIZE, global
-	.skip 0x8
+	.skip 0x4
 .endobj CDB_VFF_FILE_SIZE
 
-# .sbss:0x8 | 0x81698D70 | size: 0x8
+# .sbss:0x4 | 0x81698D6C | size: 0x4
+.obj gap_12_81698D6C_sbss, global
+.hidden gap_12_81698D6C_sbss
+	.skip 0x4
+.endobj gap_12_81698D6C_sbss
+
+# .sbss:0x8 | 0x81698D70 | size: 0x4
 .obj CDB_SD_VF_DRIVE_LETTER, global
-	.skip 0x8
+	.skip 0x4
 .endobj CDB_SD_VF_DRIVE_LETTER
+
+# .sbss:0xC | 0x81698D74 | size: 0x4
+.obj gap_12_81698D74_sbss, global
+.hidden gap_12_81698D74_sbss
+	.skip 0x4
+.endobj gap_12_81698D74_sbss

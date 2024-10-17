@@ -7,7 +7,7 @@ NET_OBJECTS =	$(REVOEX_OBJ_PATH)/net/crc.o \
 				$(REVOEX_OBJASM_PATH)/net/aes.o \
 				$(REVOEX_OBJ_PATH)/net/wireless_macaddr.o
 
-DEPENDENCIES += $(NET_OBJECTS:.o=.d)
+ALL_OBJECTS += $(NET_OBJECTS)
 
 $(REVOEX_OBJ_PATH)/net/%.o: $(REVOEX_SRC_PATH)/net/%.c
 	$(call BuildCSources,$(REVOEX_CCPATH),$(REVOEX_CFLAGS),$(REVOEX_INC_PATHS),$(INCLUDE_ROOT))

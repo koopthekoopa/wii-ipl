@@ -973,22 +973,31 @@
 	.4byte 0x6C616E00
 .endobj lbl_8164E1D8
 
-# .data:0xAC | 0x8164E284 | size: 0xC
+# .data:0xAC | 0x8164E284 | size: 0xA
 .obj lbl_8164E284, global
-	.4byte 0x4E5F5769
-	.4byte 0x694D656E
-	.4byte 0x75000000
+	.string "N_WiiMenu"
 .endobj lbl_8164E284
+
+# .data:0xB6 | 0x8164E28E | size: 0x2
+.obj gap_08_8164E28E_data, global
+.hidden gap_08_8164E28E_data
+	.2byte 0x0000
+.endobj gap_08_8164E28E_data
 
 # 0x816949A0..0x816949A8 | size: 0x8
 .section .sdata2, "a"
 .balign 8
 
-# .sdata2:0x0 | 0x816949A0 | size: 0x8
+# .sdata2:0x0 | 0x816949A0 | size: 0x4
 .obj lbl_816949A0, global
 	.float 0
-	.float 0
 .endobj lbl_816949A0
+
+# .sdata2:0x4 | 0x816949A4 | size: 0x4
+.obj gap_09_816949A4_sdata2, global
+.hidden gap_09_816949A4_sdata2
+	.4byte 0x00000000
+.endobj gap_09_816949A4_sdata2
 
 # 0x81696900..0x81696998 | size: 0x98
 .section .sdata, "wa"

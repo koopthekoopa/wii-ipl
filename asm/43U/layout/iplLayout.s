@@ -1539,7 +1539,7 @@
 /* 8136AE38 | 7C FE 3B 78 */	mr r30, r7
 /* 8136AE3C | 7C 04 03 78 */	mr r4, r0
 /* 8136AE40 | 38 A0 00 02 */	li r5, 0x2
-/* 8136AE44 | 48 28 C8 31 */	bl fn_815F7674
+/* 8136AE44 | 48 28 C8 31 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 8136AE48 | 7C 7F 1B 78 */	mr r31, r3
 /* 8136AE4C | 38 60 05 80 */	li r3, 0x580
 /* 8136AE50 | 7F E4 FB 78 */	mr r4, r31
@@ -1576,7 +1576,7 @@
 /* 8136AEB4 | 7C FE 3B 78 */	mr r30, r7
 /* 8136AEB8 | 7C 04 03 78 */	mr r4, r0
 /* 8136AEBC | 38 A0 00 02 */	li r5, 0x2
-/* 8136AEC0 | 48 28 C7 B5 */	bl fn_815F7674
+/* 8136AEC0 | 48 28 C7 B5 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 8136AEC4 | 7C 7F 1B 78 */	mr r31, r3
 /* 8136AEC8 | 38 60 05 80 */	li r3, 0x580
 /* 8136AECC | 7F E4 FB 78 */	mr r4, r31
@@ -1739,8 +1739,13 @@
 .section .sdata, "wa"
 .balign 8
 
-# .sdata:0x0 | 0x816962C0 | size: 0x8
+# .sdata:0x0 | 0x816962C0 | size: 0x4
 .obj lbl_816962C0, global
-	.4byte 0x61726300
-	.4byte 0x00000000
+	.string "arc"
 .endobj lbl_816962C0
+
+# .sdata:0x4 | 0x816962C4 | size: 0x4
+.obj gap_11_816962C4_sdata, global
+.hidden gap_11_816962C4_sdata
+	.4byte 0x00000000
+.endobj gap_11_816962C4_sdata

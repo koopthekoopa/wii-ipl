@@ -2400,13 +2400,18 @@
 	.4byte csSignKeyKR__Q39textinput8keyboard10signwindow
 .endobj csLanguageDependencyData__Q39textinput8keyboard10signwindow
 
-# .rodata:0x300 | 0x81615E40 | size: 0x10
+# .rodata:0x300 | 0x81615E40 | size: 0xC
 .obj lbl_81615E40, local
 	.4byte 0x00000003
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte 0x00000000
 .endobj lbl_81615E40
+
+# .rodata:0x30C | 0x81615E4C | size: 0x4
+.obj gap_07_81615E4C_rodata, global
+.hidden gap_07_81615E4C_rodata
+	.4byte 0x00000000
+.endobj gap_07_81615E4C_rodata
 
 # 0x8165EAA8..0x8165F518 | size: 0xA70
 .data

@@ -683,14 +683,19 @@
 	.4byte 0x640A0000
 .endobj lbl_81653CC0
 
-# .data:0xC0 | 0x81653CD8 | size: 0x10
+# .data:0xC0 | 0x81653CD8 | size: 0xC
 # ipl::scene::NetSetup::__vtable
 .obj __vt__Q33ipl5scene8NetSetup, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q33ipl5scene8NetSetupFv
-	.4byte 0x00000000
 .endobj __vt__Q33ipl5scene8NetSetup
+
+# .data:0xCC | 0x81653CE4 | size: 0x4
+.obj gap_08_81653CE4_data, global
+.hidden gap_08_81653CE4_data
+	.4byte 0x00000000
+.endobj gap_08_81653CE4_data
 
 # 0x81698BD8..0x81698BE0 | size: 0x8
 .section .sbss, "wa", @nobits

@@ -1,6 +1,15 @@
 .include "macros.inc"
 .file "BS2Reset.c"
 
+# 0x810B38E0..0x810B6EE0 | size: 0x3600
+.section .bss, "wa", @nobits
+.balign 8
+
+# .bss:0x0 | 0x810B38E0 | size: 0x3600
+.obj viewsBuffer, local
+	.skip 0x3600
+.endobj viewsBuffer
+
 # 0x8138049C..0x81380A34 | size: 0x598
 .text
 .balign 4
@@ -62,7 +71,7 @@
 /* 81380550 | 48 1C E0 3D */	bl fn_8154E58C
 /* 81380554 | 38 61 00 0C */	addi r3, r1, 0xc
 /* 81380558 | 48 1B 72 AD */	bl fn_81537804
-/* 8138055C | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 8138055C | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 81380560 | 38 60 00 84 */	li r3, 0x84
 /* 81380564 | 98 61 00 10 */	stb r3, 0x10(r1)
 /* 81380568 | 2C 00 00 00 */	cmpwi r0, 0x0
@@ -77,7 +86,7 @@
 /* 81380588 | 98 01 00 12 */	stb r0, 0x12(r1)
 /* 8138058C | 48 00 00 40 */	b .L_813805CC
 .L_81380590:
-/* 81380590 | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 81380590 | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 81380594 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81380598 | 41 82 00 20 */	beq .L_813805B8
 /* 8138059C | 38 61 00 08 */	addi r3, r1, 0x8
@@ -131,7 +140,7 @@
 /* 8138063C | 48 1C DF 51 */	bl fn_8154E58C
 /* 81380640 | 38 61 00 18 */	addi r3, r1, 0x18
 /* 81380644 | 48 1B 71 C1 */	bl fn_81537804
-/* 81380648 | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 81380648 | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8138064C | 38 60 00 84 */	li r3, 0x84
 /* 81380650 | 98 61 00 1C */	stb r3, 0x1c(r1)
 /* 81380654 | 2C 00 00 00 */	cmpwi r0, 0x0
@@ -146,7 +155,7 @@
 /* 81380674 | 98 01 00 1E */	stb r0, 0x1e(r1)
 /* 81380678 | 48 00 00 40 */	b .L_813806B8
 .L_8138067C:
-/* 8138067C | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 8138067C | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 81380680 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81380684 | 41 82 00 20 */	beq .L_813806A4
 /* 81380688 | 38 61 00 0C */	addi r3, r1, 0xc
@@ -223,7 +232,7 @@
 /* 81380774 | 48 1C DE 19 */	bl fn_8154E58C
 /* 81380778 | 38 61 00 18 */	addi r3, r1, 0x18
 /* 8138077C | 48 1B 70 89 */	bl fn_81537804
-/* 81380780 | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 81380780 | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 81380784 | 38 60 00 84 */	li r3, 0x84
 /* 81380788 | 98 61 00 1C */	stb r3, 0x1c(r1)
 /* 8138078C | 2C 00 00 00 */	cmpwi r0, 0x0
@@ -238,7 +247,7 @@
 /* 813807AC | 98 01 00 1E */	stb r0, 0x1e(r1)
 /* 813807B0 | 48 00 00 40 */	b .L_813807F0
 .L_813807B4:
-/* 813807B4 | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 813807B4 | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 813807B8 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813807BC | 41 82 00 20 */	beq .L_813807DC
 /* 813807C0 | 38 61 00 0C */	addi r3, r1, 0xc
@@ -317,7 +326,7 @@
 /* 813808B4 | 48 1C DC D9 */	bl fn_8154E58C
 /* 813808B8 | 38 61 00 0C */	addi r3, r1, 0xc
 /* 813808BC | 48 1B 6F 49 */	bl fn_81537804
-/* 813808C0 | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 813808C0 | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 813808C4 | 38 60 00 84 */	li r3, 0x84
 /* 813808C8 | 98 61 00 10 */	stb r3, 0x10(r1)
 /* 813808CC | 2C 00 00 00 */	cmpwi r0, 0x0
@@ -332,7 +341,7 @@
 /* 813808EC | 98 01 00 12 */	stb r0, 0x12(r1)
 /* 813808F0 | 48 00 00 40 */	b .L_81380930
 .L_813808F4:
-/* 813808F4 | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 813808F4 | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 813808F8 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813808FC | 41 82 00 20 */	beq .L_8138091C
 /* 81380900 | 38 61 00 08 */	addi r3, r1, 0x8
@@ -383,7 +392,7 @@
 /* 81380998 | 90 01 00 34 */	stw r0, 0x34(r1)
 /* 8138099C | 38 61 00 0C */	addi r3, r1, 0xc
 /* 813809A0 | 48 1B 6E 65 */	bl fn_81537804
-/* 813809A4 | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 813809A4 | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 813809A8 | 38 60 00 81 */	li r3, 0x81
 /* 813809AC | 98 61 00 10 */	stb r3, 0x10(r1)
 /* 813809B0 | 2C 00 00 00 */	cmpwi r0, 0x0
@@ -400,7 +409,7 @@
 /* 813809D8 | 98 01 00 12 */	stb r0, 0x12(r1)
 /* 813809DC | 48 00 00 40 */	b .L_81380A1C
 .L_813809E0:
-/* 813809E0 | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 813809E0 | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 813809E4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813809E8 | 41 82 00 20 */	beq .L_81380A08
 /* 813809EC | 38 61 00 08 */	addi r3, r1, 0x8
@@ -435,36 +444,40 @@
 	.string "BS2Reset.c"
 .endobj lbl_81646EC8
 
-# .data:0xB | 0x81646ED3 | size: 0x35
+# .data:0xB | 0x81646ED3 | size: 0x2F
 .obj lbl_81646ED3, global
-	.4byte 0x4F535265
-	.4byte 0x7475726E
-	.4byte 0x546F4D65
-	.4byte 0x6E752829
-	.4byte 0x3A204661
-	.4byte 0x6C696564
-	.4byte 0x20746F20
-	.4byte 0x626F6F74
-	.4byte 0x20737973
-	.4byte 0x74656D20
-	.4byte 0x6D656E75
-	.4byte 0x2E0A0000
-	.4byte 0x00000000
-	.byte 0x00
+	.string "OSReturnToMenu(): Falied to boot system menu.\n"
 .endobj lbl_81646ED3
+
+# .data:0x3A | 0x81646F02 | size: 0x6
+.obj gap_08_81646F02_data, global
+.hidden gap_08_81646F02_data
+	.4byte 0x00000000
+	.2byte 0x0000
+.endobj gap_08_81646F02_data
 
 # 0x816965B0..0x816965C0 | size: 0x10
 .section .sdata, "wa"
 .balign 8
 
-# .sdata:0x0 | 0x816965B0 | size: 0x8
+# .sdata:0x0 | 0x816965B0 | size: 0x4
 .obj lbl_816965B0, global
-	.4byte BS2Update_810B38E0
-	.4byte 0x00000000
+	.4byte viewsBuffer
 .endobj lbl_816965B0
 
-# .sdata:0x8 | 0x816965B8 | size: 0x8
-.obj lbl_816965B8, global
-	.4byte 0x25730A00
+# .sdata:0x4 | 0x816965B4 | size: 0x4
+.obj gap_11_816965B4_sdata, global
+.hidden gap_11_816965B4_sdata
 	.4byte 0x00000000
+.endobj gap_11_816965B4_sdata
+
+# .sdata:0x8 | 0x816965B8 | size: 0x4
+.obj lbl_816965B8, global
+	.string "%s\n"
 .endobj lbl_816965B8
+
+# .sdata:0xC | 0x816965BC | size: 0x4
+.obj gap_11_816965BC_sdata, global
+.hidden gap_11_816965BC_sdata
+	.4byte 0x00000000
+.endobj gap_11_816965BC_sdata

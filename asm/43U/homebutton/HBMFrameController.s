@@ -130,8 +130,13 @@
 .section .sdata2, "a"
 .balign 8
 
-# .sdata2:0x0 | 0x81694768 | size: 0x8
+# .sdata2:0x0 | 0x81694768 | size: 0x4
 .obj lbl_81694768, global
 	.float 1
-	.float 0
 .endobj lbl_81694768
+
+# .sdata2:0x4 | 0x8169476C | size: 0x4
+.obj gap_09_8169476C_sdata2, global
+.hidden gap_09_8169476C_sdata2
+	.4byte 0x00000000
+.endobj gap_09_8169476C_sdata2

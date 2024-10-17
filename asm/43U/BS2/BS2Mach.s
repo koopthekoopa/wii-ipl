@@ -1,59 +1,91 @@
 .include "macros.inc"
 .file "BS2Mach.c"
 
-# 0x8108A6E0..0x810ADF80 | size: 0x238A0
+# 0x8108B720..0x810B1580 | size: 0x25E60
 .section .bss, "wa", @nobits
 .balign 8
 
-# .bss:0x0 | 0x8108A6E0 | size: 0x1000
-.obj BS2Mach_8108A6E0, local
-	.skip 0x1000
-.endobj BS2Mach_8108A6E0
-
-# .bss:0x1000 | 0x8108B6E0 | size: 0x40
-.obj BS2Mach_8108B6E0, global
-	.skip 0x40
-.endobj BS2Mach_8108B6E0
-
-# .bss:0x1040 | 0x8108B720 | size: 0x30
+# .bss:0x0 | 0x8108B720 | size: 0x30
 .obj Block, global
 	.skip 0x30
 .endobj Block
 
-# .bss:0x1070 | 0x8108B750 | size: 0x10
-.obj BS2Mach_8108B750, local
+# .bss:0x30 | 0x8108B750 | size: 0x10
+.obj gap_00_8108B750_bss, global
+.hidden gap_00_8108B750_bss
 	.skip 0x10
-.endobj BS2Mach_8108B750
+.endobj gap_00_8108B750_bss
 
-# .bss:0x1080 | 0x8108B760 | size: 0x830
-.obj BS2Mach_8108B760, local
-	.skip 0x830
-.endobj BS2Mach_8108B760
+# .bss:0x40 | 0x8108B760 | size: 0x800
+.obj partInfoBuffer, local
+	.skip 0x800
+.endobj partInfoBuffer
 
-# .bss:0x18B0 | 0x8108BF90 | size: 0x96
+# .bss:0x840 | 0x8108BF60 | size: 0x30
+.obj CoverBlock, local
+	.skip 0x30
+.endobj CoverBlock
+
+# .bss:0x870 | 0x8108BF90 | size: 0x8C
 .obj BS2CacheFileInfo, global
-	.skip 0x96
+	.skip 0x8C
 .endobj BS2CacheFileInfo
 
-# .bss:0x1946 | 0x8108C026 | size: 0xC0C9
-.obj BS2Mach_8108BF90, local
-	.skip 0xC0C9
-.endobj BS2Mach_8108BF90
+# .bss:0x8FC | 0x8108C01C | size: 0xBC
+.obj BS2NandBlock, local
+	.skip 0xBC
+.endobj BS2NandBlock
 
-# .bss:0xDA0F | 0x810980EF | size: 0x11DF1
-.obj BS2Mach_810980EF, global
-	.skip 0x11DF1
-.endobj BS2Mach_810980EF
+# .bss:0x9B8 | 0x8108C0D8 | size: 0x8
+.obj gap_00_8108C0D8_bss, global
+.hidden gap_00_8108C0D8_bss
+	.skip 0x8
+.endobj gap_00_8108C0D8_bss
 
-# .bss:0x1F800 | 0x810A9EE0 | size: 0x60
-.obj BS2Mach_810A9EE0, local
-	.skip 0x60
-.endobj BS2Mach_810A9EE0
+# .bss:0x9C0 | 0x8108C0E0 | size: 0x1DE00
+.obj PartitionParams_8108C0E0, global
+	.skip 0x1DE00
+.endobj PartitionParams_8108C0E0
 
-# .bss:0x1F860 | 0x810A9F40 | size: 0x4040
+# .bss:0x1E7C0 | 0x810A9EE0 | size: 0x20
+.obj id, local
+	.skip 0x20
+.endobj id
+
+# .bss:0x1E7E0 | 0x810A9F00 | size: 0x20
+.obj DriveInfo, local
+	.skip 0x20
+.endobj DriveInfo
+
+# .bss:0x1E800 | 0x810A9F20 | size: 0x20
+.obj gameTocBuffer, local
+	.skip 0x20
+.endobj gameTocBuffer
+
+# .bss:0x1E820 | 0x810A9F40 | size: 0x2000
 .obj bi3, global
-	.skip 0x4040
+	.skip 0x2000
 .endobj bi3
+
+# .bss:0x20820 | 0x810ABF40 | size: 0x20
+.obj ApL, local
+	.skip 0x20
+.endobj ApL
+
+# .bss:0x20840 | 0x810ABF60 | size: 0x2000
+.obj bi2, local
+	.skip 0x2000
+.endobj bi2
+
+# .bss:0x22840 | 0x810ADF60 | size: 0x20
+.obj checkId, local
+	.skip 0x20
+.endobj checkId
+
+# .bss:0x22860 | 0x810ADF80 | size: 0x3600
+.obj viewsBuffer, local
+	.skip 0x3600
+.endobj viewsBuffer
 
 # 0x8137AFB4..0x8137F208 | size: 0x4254
 .text
@@ -89,11 +121,11 @@
 /* 8137B004 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8137B008 | 7C 08 02 A6 */	mflr r0
 /* 8137B00C | 90 01 00 14 */	stw r0, 0x14(r1)
-/* 8137B010 | 80 0D AA 0C */	lwz r0, lbl_81698A4C@sda21(r0)
+/* 8137B010 | 80 0D AA 0C */	lwz r0, NandTransferring@sda21(r0)
 /* 8137B014 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137B018 | 41 82 00 0C */	beq .L_8137B024
 /* 8137B01C | 38 00 00 00 */	li r0, 0x0
-/* 8137B020 | 90 0D AA 0C */	stw r0, lbl_81698A4C@sda21(r0)
+/* 8137B020 | 90 0D AA 0C */	stw r0, NandTransferring@sda21(r0)
 .L_8137B024:
 /* 8137B024 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137B028 | 40 80 00 30 */	bge .L_8137B058
@@ -103,7 +135,7 @@
 /* 8137B038 | 48 1B 36 69 */	bl OSReport
 /* 8137B03C | 38 80 00 00 */	li r4, 0x0
 /* 8137B040 | 38 00 00 02 */	li r0, 0x2
-/* 8137B044 | 90 8D A9 9C */	stw r4, BS2BootFromCache@sda21(r0)
+/* 8137B044 | 90 8D A9 9C */	stw r4, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137B048 | 38 60 00 01 */	li r3, 0x1
 /* 8137B04C | 90 8D 84 D8 */	stw r4, BS2BootCaching@sda21(r0)
 /* 8137B050 | 90 6D AA 04 */	stw r3, lbl_81698A44@sda21(r0)
@@ -232,12 +264,12 @@
 .L_8137B1F4:
 /* 8137B1F4 | 38 60 00 00 */	li r3, 0x0
 /* 8137B1F8 | 38 00 00 01 */	li r0, 0x1
-/* 8137B1FC | 90 6D A9 9C */	stw r3, BS2BootFromCache@sda21(r0)
+/* 8137B1FC | 90 6D A9 9C */	stw r3, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137B200 | 90 0D 84 D8 */	stw r0, BS2BootCaching@sda21(r0)
 .L_8137B204:
 /* 8137B204 | 38 00 00 01 */	li r0, 0x1
 /* 8137B208 | 7F E3 FB 78 */	mr r3, r31
-/* 8137B20C | 90 0D A9 E4 */	stw r0, lbl_81698A24@sda21(r0)
+/* 8137B20C | 90 0D A9 E4 */	stw r0, Restart@sda21(r0)
 /* 8137B210 | 48 1B 56 9D */	bl OSRestoreInterrupts
 /* 8137B214 | 80 01 00 24 */	lwz r0, 0x24(r1)
 /* 8137B218 | 83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -260,7 +292,7 @@
 /* 8137B24C | 4B FF FD 69 */	bl BS2Report
 /* 8137B250 | 80 6D A9 C8 */	lwz r3, CurrentState@sda21(r0)
 /* 8137B254 | 38 80 00 00 */	li r4, 0x0
-/* 8137B258 | 90 8D A9 E4 */	stw r4, lbl_81698A24@sda21(r0)
+/* 8137B258 | 90 8D A9 E4 */	stw r4, Restart@sda21(r0)
 /* 8137B25C | 2C 03 00 40 */	cmpwi r3, 0x40
 /* 8137B260 | 40 82 00 10 */	bne .L_8137B270
 /* 8137B264 | 7F E3 FB 78 */	mr r3, r31
@@ -328,7 +360,7 @@
 /* 8137B344 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 /* 8137B348 | 48 00 00 30 */	b .L_8137B378
 .L_8137B34C:
-/* 8137B34C | 80 0D AA 0C */	lwz r0, lbl_81698A4C@sda21(r0)
+/* 8137B34C | 80 0D AA 0C */	lwz r0, NandTransferring@sda21(r0)
 /* 8137B350 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137B354 | 41 82 00 0C */	beq .L_8137B360
 /* 8137B358 | 38 00 00 01 */	li r0, 0x1
@@ -398,7 +430,7 @@
 .endfn BS2IsDiagDisc
 
 # .text:0x438 | 0x8137B3EC | size: 0xAC
-.fn BS2Mach_8137B3EC, local
+.fn Run, local
 /* 8137B3EC | 7C A9 03 A6 */	mtctr r5
 /* 8137B3F0 | 7C 68 03 A6 */	mtlr r3
 /* 8137B3F4 | 38 00 00 00 */	li r0, 0x0
@@ -445,7 +477,7 @@
 /* 8137B490 | 4E 80 00 20 */	blr
 .L_8137B494:
 /* 8137B494 | 4B FF FF E4 */	b .L_8137B478
-.endfn BS2Mach_8137B3EC
+.endfn Run
 
 # .text:0x4E4 | 0x8137B498 | size: 0x25C
 .fn BS2GetLockedTitles, global
@@ -468,9 +500,9 @@
 /* 8137B4D4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137B4D8 | 40 82 01 18 */	bne .L_8137B5F0
 /* 8137B4DC | 38 00 00 00 */	li r0, 0x0
-/* 8137B4E0 | 3C A0 81 09 */	lis r5, BS2Mach_8108B760@ha
+/* 8137B4E0 | 3C A0 81 09 */	lis r5, partInfoBuffer@ha
 /* 8137B4E4 | 90 04 00 00 */	stw r0, 0x0(r4)
-/* 8137B4E8 | 38 A5 B7 60 */	addi r5, r5, BS2Mach_8108B760@l
+/* 8137B4E8 | 38 A5 B7 60 */	addi r5, r5, partInfoBuffer@l
 /* 8137B4EC | 3B C0 00 00 */	li r30, 0x0
 /* 8137B4F0 | 90 AD AA 58 */	stw r5, lbl_81698A98@sda21(r0)
 /* 8137B4F4 | 48 00 00 60 */	b .L_8137B554
@@ -504,9 +536,9 @@
 /* 8137B558 | 80 03 00 00 */	lwz r0, 0x0(r3)
 /* 8137B55C | 7C 1E 00 40 */	cmplw r30, r0
 /* 8137B560 | 41 80 FF 98 */	blt .L_8137B4F8
-/* 8137B564 | 3C 60 81 09 */	lis r3, BS2Mach_8108B760@ha
+/* 8137B564 | 3C 60 81 09 */	lis r3, partInfoBuffer@ha
 /* 8137B568 | 3B C0 00 00 */	li r30, 0x0
-/* 8137B56C | 38 63 B7 60 */	addi r3, r3, BS2Mach_8108B760@l
+/* 8137B56C | 38 63 B7 60 */	addi r3, r3, partInfoBuffer@l
 /* 8137B570 | 38 A3 00 20 */	addi r5, r3, 0x20
 /* 8137B574 | 90 AD AA 58 */	stw r5, lbl_81698A98@sda21(r0)
 /* 8137B578 | 48 00 00 60 */	b .L_8137B5D8
@@ -546,9 +578,9 @@
 /* 8137B5F0 | 81 04 00 00 */	lwz r8, 0x0(r4)
 /* 8137B5F4 | 2C 08 00 00 */	cmpwi r8, 0x0
 /* 8137B5F8 | 41 82 00 E0 */	beq .L_8137B6D8
-/* 8137B5FC | 3C A0 81 09 */	lis r5, BS2Mach_8108B760@ha
+/* 8137B5FC | 3C A0 81 09 */	lis r5, partInfoBuffer@ha
 /* 8137B600 | 3B C0 00 00 */	li r30, 0x0
-/* 8137B604 | 38 A5 B7 60 */	addi r5, r5, BS2Mach_8108B760@l
+/* 8137B604 | 38 A5 B7 60 */	addi r5, r5, partInfoBuffer@l
 /* 8137B608 | 38 E0 FF FF */	li r7, -0x1
 /* 8137B60C | 90 AD AA 58 */	stw r5, lbl_81698A98@sda21(r0)
 /* 8137B610 | 67 C6 00 01 */	oris r6, r30, 0x1
@@ -577,9 +609,9 @@
 /* 8137B65C | 80 04 00 00 */	lwz r0, 0x0(r4)
 /* 8137B660 | 7C 1E 00 40 */	cmplw r30, r0
 /* 8137B664 | 41 80 FF B4 */	blt .L_8137B618
-/* 8137B668 | 3C 80 81 09 */	lis r4, BS2Mach_8108B760@ha
+/* 8137B668 | 3C 80 81 09 */	lis r4, partInfoBuffer@ha
 /* 8137B66C | 3B C0 00 00 */	li r30, 0x0
-/* 8137B670 | 38 84 B7 60 */	addi r4, r4, BS2Mach_8108B760@l
+/* 8137B670 | 38 84 B7 60 */	addi r4, r4, partInfoBuffer@l
 /* 8137B674 | 38 E0 FF FF */	li r7, -0x1
 /* 8137B678 | 38 A4 00 20 */	addi r5, r4, 0x20
 /* 8137B67C | 67 C6 00 01 */	oris r6, r30, 0x1
@@ -630,9 +662,9 @@
 /* 8137B708 | 38 60 00 00 */	li r3, 0x0
 /* 8137B70C | 4E 80 00 20 */	blr
 .L_8137B710:
-/* 8137B710 | 3C 60 81 09 */	lis r3, BS2Mach_8108B760@ha
+/* 8137B710 | 3C 60 81 09 */	lis r3, partInfoBuffer@ha
 /* 8137B714 | 80 AD AA 60 */	lwz r5, lbl_81698AA0@sda21(r0)
-/* 8137B718 | 38 63 B7 60 */	addi r3, r3, BS2Mach_8108B760@l
+/* 8137B718 | 38 63 B7 60 */	addi r3, r3, partInfoBuffer@l
 /* 8137B71C | 38 C0 00 00 */	li r6, 0x0
 /* 8137B720 | 90 6D AA 58 */	stw r3, lbl_81698A98@sda21(r0)
 /* 8137B724 | 48 00 00 24 */	b .L_8137B748
@@ -650,9 +682,9 @@
 /* 8137B748 | 80 05 00 00 */	lwz r0, 0x0(r5)
 /* 8137B74C | 7C 06 00 40 */	cmplw r6, r0
 /* 8137B750 | 41 80 FF D8 */	blt .L_8137B728
-/* 8137B754 | 3C 60 81 09 */	lis r3, BS2Mach_8108B760@ha
+/* 8137B754 | 3C 60 81 09 */	lis r3, partInfoBuffer@ha
 /* 8137B758 | 80 AD AA 5C */	lwz r5, lbl_81698A9C@sda21(r0)
-/* 8137B75C | 38 63 B7 60 */	addi r3, r3, BS2Mach_8108B760@l
+/* 8137B75C | 38 63 B7 60 */	addi r3, r3, partInfoBuffer@l
 /* 8137B760 | 38 C0 00 00 */	li r6, 0x0
 /* 8137B764 | 38 63 00 20 */	addi r3, r3, 0x20
 /* 8137B768 | 90 6D AA 58 */	stw r3, lbl_81698A98@sda21(r0)
@@ -783,10 +815,10 @@
 /* 8137B914 | 38 60 00 00 */	li r3, 0x0
 /* 8137B918 | 4E 80 00 20 */	blr
 .L_8137B91C:
-/* 8137B91C | 3C 60 81 09 */	lis r3, BS2Mach_8108B760@ha
+/* 8137B91C | 3C 60 81 09 */	lis r3, partInfoBuffer@ha
 /* 8137B920 | 38 00 00 01 */	li r0, 0x1
-/* 8137B924 | 38 63 B7 60 */	addi r3, r3, BS2Mach_8108B760@l
-/* 8137B928 | 90 0D A9 F0 */	stw r0, lbl_81698A30@sda21(r0)
+/* 8137B924 | 38 63 B7 60 */	addi r3, r3, partInfoBuffer@l
+/* 8137B928 | 90 0D A9 F0 */	stw r0, StartLoadingTitle@sda21(r0)
 /* 8137B92C | 80 CD AA 60 */	lwz r6, lbl_81698AA0@sda21(r0)
 /* 8137B930 | 38 E0 00 00 */	li r7, 0x0
 /* 8137B934 | 90 AD AA 3C */	stw r5, lbl_81698A7C@sda21(r0)
@@ -796,7 +828,7 @@
 /* 8137B940 | 80 03 00 04 */	lwz r0, 0x4(r3)
 /* 8137B944 | 7C 00 20 40 */	cmplw r0, r4
 /* 8137B948 | 40 82 00 3C */	bne .L_8137B984
-/* 8137B94C | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 8137B94C | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137B950 | 90 6D AA 50 */	stw r3, lbl_81698A90@sda21(r0)
 /* 8137B954 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137B958 | 41 82 00 10 */	beq .L_8137B968
@@ -809,7 +841,7 @@
 .L_8137B970:
 /* 8137B970 | 38 00 00 00 */	li r0, 0x0
 /* 8137B974 | 38 60 00 01 */	li r3, 0x1
-/* 8137B978 | 90 0D A9 9C */	stw r0, BS2BootFromCache@sda21(r0)
+/* 8137B978 | 90 0D A9 9C */	stw r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137B97C | 90 0D 84 D8 */	stw r0, BS2BootCaching@sda21(r0)
 /* 8137B980 | 4E 80 00 20 */	blr
 .L_8137B984:
@@ -820,9 +852,9 @@
 /* 8137B990 | 80 06 00 00 */	lwz r0, 0x0(r6)
 /* 8137B994 | 7C 07 00 40 */	cmplw r7, r0
 /* 8137B998 | 41 80 FF A8 */	blt .L_8137B940
-/* 8137B99C | 3C 60 81 09 */	lis r3, BS2Mach_8108B760@ha
+/* 8137B99C | 3C 60 81 09 */	lis r3, partInfoBuffer@ha
 /* 8137B9A0 | 80 AD AA 5C */	lwz r5, lbl_81698A9C@sda21(r0)
-/* 8137B9A4 | 38 63 B7 60 */	addi r3, r3, BS2Mach_8108B760@l
+/* 8137B9A4 | 38 63 B7 60 */	addi r3, r3, partInfoBuffer@l
 /* 8137B9A8 | 38 E0 00 00 */	li r7, 0x0
 /* 8137B9AC | 38 63 00 20 */	addi r3, r3, 0x20
 /* 8137B9B0 | 90 6D AA 58 */	stw r3, lbl_81698A98@sda21(r0)
@@ -831,7 +863,7 @@
 /* 8137B9B8 | 80 03 00 04 */	lwz r0, 0x4(r3)
 /* 8137B9BC | 7C 00 20 40 */	cmplw r0, r4
 /* 8137B9C0 | 40 82 00 3C */	bne .L_8137B9FC
-/* 8137B9C4 | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 8137B9C4 | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137B9C8 | 90 6D AA 50 */	stw r3, lbl_81698A90@sda21(r0)
 /* 8137B9CC | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137B9D0 | 41 82 00 10 */	beq .L_8137B9E0
@@ -844,7 +876,7 @@
 .L_8137B9E8:
 /* 8137B9E8 | 38 00 00 00 */	li r0, 0x0
 /* 8137B9EC | 38 60 00 01 */	li r3, 0x1
-/* 8137B9F0 | 90 0D A9 9C */	stw r0, BS2BootFromCache@sda21(r0)
+/* 8137B9F0 | 90 0D A9 9C */	stw r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137B9F4 | 90 0D 84 D8 */	stw r0, BS2BootCaching@sda21(r0)
 /* 8137B9F8 | 4E 80 00 20 */	blr
 .L_8137B9FC:
@@ -860,13 +892,13 @@
 .endfn BS2StartLoadingTitle
 
 # .text:0xA68 | 0x8137BA1C | size: 0x8
-.fn BS2Mach_8137BA1C, local
+.fn callback, local
 /* 8137BA1C | 90 6D AA 14 */	stw r3, lbl_81698A54@sda21(r0)
 /* 8137BA20 | 4E 80 00 20 */	blr
-.endfn BS2Mach_8137BA1C
+.endfn callback
 
 # .text:0xA70 | 0x8137BA24 | size: 0x11C
-.fn BS2Mach_8137BA24, local
+.fn _ES_GetTicketViews, local
 /* 8137BA24 | 54 2B 06 FE */	clrlwi r11, r1, 27
 /* 8137BA28 | 7C 2C 0B 78 */	mr r12, r1
 /* 8137BA2C | 21 6B FE A0 */	subfic r11, r11, -0x160
@@ -944,10 +976,10 @@
 /* 8137BB34 | 7C 08 03 A6 */	mtlr r0
 /* 8137BB38 | 7D 41 53 78 */	mr r1, r10
 /* 8137BB3C | 4E 80 00 20 */	blr
-.endfn BS2Mach_8137BA24
+.endfn _ES_GetTicketViews
 
 # .text:0xB8C | 0x8137BB40 | size: 0x224
-.fn BS2Mach_8137BB40, local
+.fn BS2Reboot, local
 /* 8137BB40 | 54 2B 06 FE */	clrlwi r11, r1, 27
 /* 8137BB44 | 7C 2C 0B 78 */	mr r12, r1
 /* 8137BB48 | 21 6B FD 80 */	subfic r11, r11, -0x280
@@ -1008,7 +1040,7 @@
 /* 8137BC18 | 38 C0 00 02 */	li r6, 0x2
 /* 8137BC1C | 38 A0 00 01 */	li r5, 0x1
 /* 8137BC20 | 38 E0 00 00 */	li r7, 0x0
-/* 8137BC24 | 4B FF FE 01 */	bl BS2Mach_8137BA24
+/* 8137BC24 | 4B FF FE 01 */	bl _ES_GetTicketViews
 /* 8137BC28 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137BC2C | 41 82 00 18 */	beq .L_8137BC44
 /* 8137BC30 | 7C 64 1B 78 */	mr r4, r3
@@ -1033,7 +1065,7 @@
 /* 8137BC74 | 39 01 00 20 */	addi r8, r1, 0x20
 /* 8137BC78 | 38 C0 00 02 */	li r6, 0x2
 /* 8137BC7C | 38 A0 00 01 */	li r5, 0x1
-/* 8137BC80 | 4B FF FD A5 */	bl BS2Mach_8137BA24
+/* 8137BC80 | 4B FF FD A5 */	bl _ES_GetTicketViews
 /* 8137BC84 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137BC88 | 41 82 00 18 */	beq .L_8137BCA0
 /* 8137BC8C | 7C 64 1B 78 */	mr r4, r3
@@ -1097,7 +1129,7 @@
 /* 8137BD58 | 7C 08 03 A6 */	mtlr r0
 /* 8137BD5C | 7D 41 53 78 */	mr r1, r10
 /* 8137BD60 | 4E 80 00 20 */	blr
-.endfn BS2Mach_8137BB40
+.endfn BS2Reboot
 
 # .text:0xDB0 | 0x8137BD64 | size: 0x624
 .fn BS2StartGame, global
@@ -1126,7 +1158,7 @@
 /* 8137BDB8 | 4B FF F1 FD */	bl BS2Report
 /* 8137BDBC | 38 00 00 01 */	li r0, 0x1
 /* 8137BDC0 | 3C 80 81 38 */	lis r4, BS2NANDCallback@ha
-/* 8137BDC4 | 90 0D AA 0C */	stw r0, lbl_81698A4C@sda21(r0)
+/* 8137BDC4 | 90 0D AA 0C */	stw r0, NandTransferring@sda21(r0)
 /* 8137BDC8 | 38 7D 08 70 */	addi r3, r29, 0x870
 /* 8137BDCC | 38 84 B0 04 */	addi r4, r4, BS2NANDCallback@l
 /* 8137BDD0 | 38 BD 08 FC */	addi r5, r29, 0x8fc
@@ -1134,7 +1166,7 @@
 /* 8137BDD8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137BDDC | 40 82 00 28 */	bne .L_8137BE04
 .L_8137BDE0:
-/* 8137BDE0 | 80 0D AA 0C */	lwz r0, lbl_81698A4C@sda21(r0)
+/* 8137BDE0 | 80 0D AA 0C */	lwz r0, NandTransferring@sda21(r0)
 /* 8137BDE4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137BDE8 | 40 82 FF F8 */	bne .L_8137BDE0
 /* 8137BDEC | 80 0D AA 04 */	lwz r0, lbl_81698A44@sda21(r0)
@@ -1333,11 +1365,11 @@
 /* 8137C0C0 | 4C C6 31 82 */	crclr cr1eq
 /* 8137C0C4 | 4B FF EE F1 */	bl BS2Report
 /* 8137C0C8 | 38 00 00 00 */	li r0, 0x0
-/* 8137C0CC | 3C 60 81 0B */	lis r3, BS2Mach_810A9EE0@ha
-/* 8137C0D0 | 3C 80 81 38 */	lis r4, BS2Mach_8137BA1C@ha
+/* 8137C0CC | 3C 60 81 0B */	lis r3, id@ha
+/* 8137C0D0 | 3C 80 81 38 */	lis r4, callback@ha
 /* 8137C0D4 | 90 0D AA 14 */	stw r0, lbl_81698A54@sda21(r0)
-/* 8137C0D8 | 38 63 9E E0 */	addi r3, r3, BS2Mach_810A9EE0@l
-/* 8137C0DC | 38 84 BA 1C */	addi r4, r4, BS2Mach_8137BA1C@l
+/* 8137C0D8 | 38 63 9E E0 */	addi r3, r3, id@l
+/* 8137C0DC | 38 84 BA 1C */	addi r4, r4, callback@l
 /* 8137C0E0 | 48 1D 3B 85 */	bl fn_8154FC64
 .L_8137C0E4:
 /* 8137C0E4 | 80 0D AA 14 */	lwz r0, lbl_81698A54@sda21(r0)
@@ -1356,9 +1388,9 @@
 /* 8137C114 | 4C C6 31 82 */	crclr cr1eq
 /* 8137C118 | 48 1B 25 89 */	bl OSReport
 /* 8137C11C | 38 00 00 00 */	li r0, 0x0
-/* 8137C120 | 3C 60 81 38 */	lis r3, BS2Mach_8137BA1C@ha
+/* 8137C120 | 3C 60 81 38 */	lis r3, callback@ha
 /* 8137C124 | 90 0D AA 14 */	stw r0, lbl_81698A54@sda21(r0)
-/* 8137C128 | 38 63 BA 1C */	addi r3, r3, BS2Mach_8137BA1C@l
+/* 8137C128 | 38 63 BA 1C */	addi r3, r3, callback@l
 /* 8137C12C | 48 1D 4C 25 */	bl fn_81550D50
 .L_8137C130:
 /* 8137C130 | 80 0D AA 14 */	lwz r0, lbl_81698A54@sda21(r0)
@@ -1375,7 +1407,7 @@
 /* 8137C15C | 28 00 00 00 */	cmplwi r0, 0x0
 /* 8137C160 | 40 82 00 08 */	bne .L_8137C168
 .L_8137C164:
-/* 8137C164 | 4B FF F9 DD */	bl BS2Mach_8137BB40
+/* 8137C164 | 4B FF F9 DD */	bl BS2Reboot
 .L_8137C168:
 /* 8137C168 | 80 0D AA A0 */	lwz r0, lbl_81698AE0@sda21(r0)
 /* 8137C16C | 2C 00 00 00 */	cmpwi r0, 0x0
@@ -1385,7 +1417,7 @@
 /* 8137C17C | 3C 03 FC 00 */	subis r0, r3, 0x400
 /* 8137C180 | 28 00 00 00 */	cmplwi r0, 0x0
 /* 8137C184 | 40 82 00 08 */	bne .L_8137C18C
-/* 8137C188 | 4B FF F9 B9 */	bl BS2Mach_8137BB40
+/* 8137C188 | 4B FF F9 B9 */	bl BS2Reboot
 .L_8137C18C:
 /* 8137C18C | 38 60 00 01 */	li r3, 0x1
 /* 8137C190 | 48 00 52 4D */	bl DVDSetAutoFatalMessaging
@@ -1394,9 +1426,9 @@
 /* 8137C198 | 38 7E 03 7B */	addi r3, r30, 0x37b
 /* 8137C19C | 4C C6 31 82 */	crclr cr1eq
 /* 8137C1A0 | 4B FF EE 15 */	bl BS2Report
-/* 8137C1A4 | 3C 80 81 0B */	lis r4, BS2Mach_810A9EE0@ha
+/* 8137C1A4 | 3C 80 81 0B */	lis r4, id@ha
 /* 8137C1A8 | 7F 83 E3 78 */	mr r3, r28
-/* 8137C1AC | 38 84 9E E0 */	addi r4, r4, BS2Mach_810A9EE0@l
+/* 8137C1AC | 38 84 9E E0 */	addi r4, r4, id@l
 /* 8137C1B0 | 38 A0 00 04 */	li r5, 0x4
 /* 8137C1B4 | 48 28 63 E9 */	bl strncmp
 /* 8137C1B8 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -1404,7 +1436,7 @@
 /* 8137C1C0 | 38 7E 03 92 */	addi r3, r30, 0x392
 /* 8137C1C4 | 4C C6 31 82 */	crclr cr1eq
 /* 8137C1C8 | 48 1B 24 D9 */	bl OSReport
-/* 8137C1CC | 4B FF F9 75 */	bl BS2Mach_8137BB40
+/* 8137C1CC | 4B FF F9 75 */	bl BS2Reboot
 .L_8137C1D0:
 /* 8137C1D0 | 3B 7D 09 C0 */	addi r27, r29, 0x9c0
 /* 8137C1D4 | 38 7E 03 A5 */	addi r3, r30, 0x3a5
@@ -1417,22 +1449,22 @@
 /* 8137C1F0 | 2C 05 00 00 */	cmpwi r5, 0x0
 /* 8137C1F4 | 41 82 00 2C */	beq .L_8137C220
 /* 8137C1F8 | 80 6D AA 50 */	lwz r3, lbl_81698A90@sda21(r0)
-/* 8137C1FC | 3D 20 81 38 */	lis r9, BS2Mach_8137BA1C@ha
+/* 8137C1FC | 3D 20 81 38 */	lis r9, callback@ha
 /* 8137C200 | 80 FB 4D C0 */	lwz r7, 0x4dc0(r27)
 /* 8137C204 | 38 9B 02 C0 */	addi r4, r27, 0x2c0
 /* 8137C208 | 80 63 00 00 */	lwz r3, 0x0(r3)
 /* 8137C20C | 38 DB 03 C0 */	addi r6, r27, 0x3c0
 /* 8137C210 | 39 1B 4D E0 */	addi r8, r27, 0x4de0
-/* 8137C214 | 39 29 BA 1C */	addi r9, r9, BS2Mach_8137BA1C@l
+/* 8137C214 | 39 29 BA 1C */	addi r9, r9, callback@l
 /* 8137C218 | 48 1D 3E 3D */	bl fn_81550054
 /* 8137C21C | 48 00 00 28 */	b .L_8137C244
 .L_8137C220:
 /* 8137C220 | 80 6D AA 50 */	lwz r3, lbl_81698A90@sda21(r0)
-/* 8137C224 | 3D 00 81 38 */	lis r8, BS2Mach_8137BA1C@ha
+/* 8137C224 | 3D 00 81 38 */	lis r8, callback@ha
 /* 8137C228 | 38 FB 03 C0 */	addi r7, r27, 0x3c0
 /* 8137C22C | 38 80 00 00 */	li r4, 0x0
 /* 8137C230 | 80 63 00 00 */	lwz r3, 0x0(r3)
-/* 8137C234 | 39 08 BA 1C */	addi r8, r8, BS2Mach_8137BA1C@l
+/* 8137C234 | 39 08 BA 1C */	addi r8, r8, callback@l
 /* 8137C238 | 38 A0 00 00 */	li r5, 0x0
 /* 8137C23C | 38 C0 00 00 */	li r6, 0x0
 /* 8137C240 | 48 1D 3B AD */	bl fn_8154FDEC
@@ -1457,9 +1489,9 @@
 /* 8137C280 | 4C C6 31 82 */	crclr cr1eq
 /* 8137C284 | 48 1B 24 1D */	bl OSReport
 /* 8137C288 | 38 00 00 00 */	li r0, 0x0
-/* 8137C28C | 3C 60 81 38 */	lis r3, BS2Mach_8137BA1C@ha
+/* 8137C28C | 3C 60 81 38 */	lis r3, callback@ha
 /* 8137C290 | 90 0D AA 14 */	stw r0, lbl_81698A54@sda21(r0)
-/* 8137C294 | 38 63 BA 1C */	addi r3, r3, BS2Mach_8137BA1C@l
+/* 8137C294 | 38 63 BA 1C */	addi r3, r3, callback@l
 /* 8137C298 | 48 1D 4A B9 */	bl fn_81550D50
 .L_8137C29C:
 /* 8137C29C | 80 0D AA 14 */	lwz r0, lbl_81698A54@sda21(r0)
@@ -1476,7 +1508,7 @@
 /* 8137C2C8 | 28 00 00 00 */	cmplwi r0, 0x0
 /* 8137C2CC | 40 82 00 20 */	bne .L_8137C2EC
 .L_8137C2D0:
-/* 8137C2D0 | 4B FF F8 71 */	bl BS2Mach_8137BB40
+/* 8137C2D0 | 4B FF F8 71 */	bl BS2Reboot
 /* 8137C2D4 | 48 00 00 18 */	b .L_8137C2EC
 .L_8137C2D8:
 /* 8137C2D8 | 48 1D 58 15 */	bl fn_81551AEC
@@ -1519,7 +1551,7 @@
 /* 8137C360 | 3C 80 81 33 */	lis r4, 0x8133
 /* 8137C364 | 3C A0 00 02 */	lis r5, 0x2
 /* 8137C368 | 38 C0 00 00 */	li r6, 0x0
-/* 8137C36C | 4B FF F0 81 */	bl BS2Mach_8137B3EC
+/* 8137C36C | 4B FF F0 81 */	bl Run
 /* 8137C370 | 39 61 00 50 */	addi r11, r1, 0x50
 /* 8137C374 | 48 27 D1 8D */	bl _restgpr_24
 /* 8137C378 | 80 01 00 54 */	lwz r0, 0x54(r1)
@@ -1627,7 +1659,7 @@
 /* 8137C4E0 | 41 82 FF F8 */	beq .L_8137C4D8
 /* 8137C4E4 | 38 00 00 01 */	li r0, 0x1
 /* 8137C4E8 | 3C 80 81 38 */	lis r4, BS2NANDCallback@ha
-/* 8137C4EC | 90 0D AA 0C */	stw r0, lbl_81698A4C@sda21(r0)
+/* 8137C4EC | 90 0D AA 0C */	stw r0, NandTransferring@sda21(r0)
 /* 8137C4F0 | 38 7E 08 70 */	addi r3, r30, 0x870
 /* 8137C4F4 | 38 84 B0 04 */	addi r4, r4, BS2NANDCallback@l
 /* 8137C4F8 | 38 BE 08 FC */	addi r5, r30, 0x8fc
@@ -1635,7 +1667,7 @@
 /* 8137C500 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137C504 | 40 82 00 28 */	bne .L_8137C52C
 .L_8137C508:
-/* 8137C508 | 80 0D AA 0C */	lwz r0, lbl_81698A4C@sda21(r0)
+/* 8137C508 | 80 0D AA 0C */	lwz r0, NandTransferring@sda21(r0)
 /* 8137C50C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137C510 | 40 82 FF F8 */	bne .L_8137C508
 /* 8137C514 | 80 0D AA 04 */	lwz r0, lbl_81698A44@sda21(r0)
@@ -1656,7 +1688,7 @@
 /* 8137C548 | 48 1B 43 3D */	bl OSDisableInterrupts
 /* 8137C54C | 48 1B 12 DD */	bl fn_8152D828
 /* 8137C550 | 48 1B 43 49 */	bl fn_81530898
-/* 8137C554 | 80 6D A9 C0 */	lwz r3, BS2VideoMode@sda21(r0)
+/* 8137C554 | 80 6D A9 C0 */	lwz r3, BS2VideoMode_81698A00@sda21(r0)
 /* 8137C558 | 48 1B 6F 95 */	bl fn_815334EC
 .L_8137C55C:
 /* 8137C55C | 48 1B 6B 25 */	bl __OSSyncSram
@@ -1778,7 +1810,7 @@
 .endfn BS2StartGCGame
 
 # .text:0x1764 | 0x8137C718 | size: 0x198
-.fn BS2Mach_8137C718, local
+.fn CheckDVDCommandStatus, local
 /* 8137C718 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8137C71C | 7C 08 02 A6 */	mflr r0
 /* 8137C720 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -1853,7 +1885,7 @@
 /* 8137C808 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 /* 8137C80C | 48 00 00 30 */	b .L_8137C83C
 .L_8137C810:
-/* 8137C810 | 80 0D A9 E8 */	lwz r0, lbl_81698A28@sda21(r0)
+/* 8137C810 | 80 0D A9 E8 */	lwz r0, PartitionOpened@sda21(r0)
 /* 8137C814 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137C818 | 41 82 00 10 */	beq .L_8137C828
 /* 8137C81C | 38 00 00 3D */	li r0, 0x3d
@@ -1888,7 +1920,7 @@
 /* 8137C880 | 38 80 00 00 */	li r4, 0x0
 /* 8137C884 | 38 00 00 40 */	li r0, 0x40
 /* 8137C888 | 38 60 00 01 */	li r3, 0x1
-/* 8137C88C | 90 8D A9 9C */	stw r4, BS2BootFromCache@sda21(r0)
+/* 8137C88C | 90 8D A9 9C */	stw r4, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137C890 | 90 6D 84 D8 */	stw r3, BS2BootCaching@sda21(r0)
 /* 8137C894 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 .L_8137C898:
@@ -1899,10 +1931,10 @@
 /* 8137C8A4 | 7C 08 03 A6 */	mtlr r0
 /* 8137C8A8 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8137C8AC | 4E 80 00 20 */	blr
-.endfn BS2Mach_8137C718
+.endfn CheckDVDCommandStatus
 
 # .text:0x18FC | 0x8137C8B0 | size: 0x200
-.fn BS2Mach_8137C8B0, local
+.fn BS2NANDDivideCallback, local
 /* 8137C8B0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8137C8B4 | 7C 08 02 A6 */	mflr r0
 /* 8137C8B8 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -1947,11 +1979,11 @@
 /* 8137C94C | 3C A0 00 04 */	lis r5, 0x4
 /* 8137C950 | 4C C6 31 82 */	crclr cr1eq
 /* 8137C954 | 4B FF E6 61 */	bl BS2Report
-/* 8137C958 | 3C C0 81 38 */	lis r6, BS2Mach_8137C8B0@ha
+/* 8137C958 | 3C C0 81 38 */	lis r6, BS2NANDDivideCallback@ha
 /* 8137C95C | 80 6D AA 7C */	lwz r3, lbl_81698ABC@sda21(r0)
 /* 8137C960 | 80 8D AA 78 */	lwz r4, lbl_81698AB8@sda21(r0)
 /* 8137C964 | 7F E7 FB 78 */	mr r7, r31
-/* 8137C968 | 38 C6 C8 B0 */	addi r6, r6, BS2Mach_8137C8B0@l
+/* 8137C968 | 38 C6 C8 B0 */	addi r6, r6, BS2NANDDivideCallback@l
 /* 8137C96C | 3C A0 00 04 */	lis r5, 0x4
 /* 8137C970 | 48 1E 77 D9 */	bl NANDWriteAsync
 /* 8137C974 | 48 00 00 38 */	b .L_8137C9AC
@@ -1962,11 +1994,11 @@
 /* 8137C984 | 3C A0 00 04 */	lis r5, 0x4
 /* 8137C988 | 4C C6 31 82 */	crclr cr1eq
 /* 8137C98C | 4B FF E6 29 */	bl BS2Report
-/* 8137C990 | 3C C0 81 38 */	lis r6, BS2Mach_8137C8B0@ha
+/* 8137C990 | 3C C0 81 38 */	lis r6, BS2NANDDivideCallback@ha
 /* 8137C994 | 80 6D AA 7C */	lwz r3, lbl_81698ABC@sda21(r0)
 /* 8137C998 | 80 8D AA 78 */	lwz r4, lbl_81698AB8@sda21(r0)
 /* 8137C99C | 7F E7 FB 78 */	mr r7, r31
-/* 8137C9A0 | 38 C6 C8 B0 */	addi r6, r6, BS2Mach_8137C8B0@l
+/* 8137C9A0 | 38 C6 C8 B0 */	addi r6, r6, BS2NANDDivideCallback@l
 /* 8137C9A4 | 3C A0 00 04 */	lis r5, 0x4
 /* 8137C9A8 | 48 1E 76 C1 */	bl NANDReadAsync
 .L_8137C9AC:
@@ -1994,11 +2026,11 @@
 /* 8137C9FC | 4C C6 31 82 */	crclr cr1eq
 /* 8137CA00 | 4B FF E5 B5 */	bl BS2Report
 /* 8137CA04 | 80 AD AA 70 */	lwz r5, lbl_81698AB0@sda21(r0)
-/* 8137CA08 | 3C C0 81 38 */	lis r6, BS2Mach_8137C8B0@ha
+/* 8137CA08 | 3C C0 81 38 */	lis r6, BS2NANDDivideCallback@ha
 /* 8137CA0C | 80 0D AA 74 */	lwz r0, lbl_81698AB4@sda21(r0)
 /* 8137CA10 | 7F E7 FB 78 */	mr r7, r31
 /* 8137CA14 | 80 6D AA 7C */	lwz r3, lbl_81698ABC@sda21(r0)
-/* 8137CA18 | 38 C6 C8 B0 */	addi r6, r6, BS2Mach_8137C8B0@l
+/* 8137CA18 | 38 C6 C8 B0 */	addi r6, r6, BS2NANDDivideCallback@l
 /* 8137CA1C | 80 8D AA 78 */	lwz r4, lbl_81698AB8@sda21(r0)
 /* 8137CA20 | 7C A5 00 50 */	subf r5, r5, r0
 /* 8137CA24 | 48 1E 77 25 */	bl NANDWriteAsync
@@ -2013,11 +2045,11 @@
 /* 8137CA44 | 4C C6 31 82 */	crclr cr1eq
 /* 8137CA48 | 4B FF E5 6D */	bl BS2Report
 /* 8137CA4C | 80 AD AA 70 */	lwz r5, lbl_81698AB0@sda21(r0)
-/* 8137CA50 | 3C C0 81 38 */	lis r6, BS2Mach_8137C8B0@ha
+/* 8137CA50 | 3C C0 81 38 */	lis r6, BS2NANDDivideCallback@ha
 /* 8137CA54 | 80 0D AA 74 */	lwz r0, lbl_81698AB4@sda21(r0)
 /* 8137CA58 | 7F E7 FB 78 */	mr r7, r31
 /* 8137CA5C | 80 6D AA 7C */	lwz r3, lbl_81698ABC@sda21(r0)
-/* 8137CA60 | 38 C6 C8 B0 */	addi r6, r6, BS2Mach_8137C8B0@l
+/* 8137CA60 | 38 C6 C8 B0 */	addi r6, r6, BS2NANDDivideCallback@l
 /* 8137CA64 | 80 8D AA 78 */	lwz r4, lbl_81698AB8@sda21(r0)
 /* 8137CA68 | 7C A5 00 50 */	subf r5, r5, r0
 /* 8137CA6C | 48 1E 75 FD */	bl NANDReadAsync
@@ -2040,10 +2072,10 @@
 /* 8137CAA4 | 7C 08 03 A6 */	mtlr r0
 /* 8137CAA8 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8137CAAC | 4E 80 00 20 */	blr
-.endfn BS2Mach_8137C8B0
+.endfn BS2NANDDivideCallback
 
 # .text:0x1AFC | 0x8137CAB0 | size: 0xBC
-.fn BS2Mach_8137CAB0, local
+.fn BS2NANDDivideReadAsync, local
 /* 8137CAB0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8137CAB4 | 7C 08 02 A6 */	mflr r0
 /* 8137CAB8 | 39 00 00 02 */	li r8, 0x2
@@ -2066,11 +2098,11 @@
 /* 8137CAFC | 38 63 61 FA */	addi r3, r3, lbl_816461FA@l
 /* 8137CB00 | 4C C6 31 82 */	crclr cr1eq
 /* 8137CB04 | 4B FF E4 B1 */	bl BS2Report
-/* 8137CB08 | 3C C0 81 38 */	lis r6, BS2Mach_8137C8B0@ha
+/* 8137CB08 | 3C C0 81 38 */	lis r6, BS2NANDDivideCallback@ha
 /* 8137CB0C | 80 6D AA 7C */	lwz r3, lbl_81698ABC@sda21(r0)
 /* 8137CB10 | 80 8D AA 78 */	lwz r4, lbl_81698AB8@sda21(r0)
 /* 8137CB14 | 7F E7 FB 78 */	mr r7, r31
-/* 8137CB18 | 38 C6 C8 B0 */	addi r6, r6, BS2Mach_8137C8B0@l
+/* 8137CB18 | 38 C6 C8 B0 */	addi r6, r6, BS2NANDDivideCallback@l
 /* 8137CB1C | 3C A0 00 04 */	lis r5, 0x4
 /* 8137CB20 | 48 1E 75 49 */	bl NANDReadAsync
 /* 8137CB24 | 48 00 00 34 */	b .L_8137CB58
@@ -2080,12 +2112,12 @@
 /* 8137CB30 | 38 63 61 FA */	addi r3, r3, lbl_816461FA@l
 /* 8137CB34 | 4C C6 31 82 */	crclr cr1eq
 /* 8137CB38 | 4B FF E4 7D */	bl BS2Report
-/* 8137CB3C | 3C C0 81 38 */	lis r6, BS2Mach_8137C8B0@ha
+/* 8137CB3C | 3C C0 81 38 */	lis r6, BS2NANDDivideCallback@ha
 /* 8137CB40 | 80 6D AA 7C */	lwz r3, lbl_81698ABC@sda21(r0)
 /* 8137CB44 | 80 8D AA 78 */	lwz r4, lbl_81698AB8@sda21(r0)
 /* 8137CB48 | 7F E7 FB 78 */	mr r7, r31
 /* 8137CB4C | 80 AD AA 74 */	lwz r5, lbl_81698AB4@sda21(r0)
-/* 8137CB50 | 38 C6 C8 B0 */	addi r6, r6, BS2Mach_8137C8B0@l
+/* 8137CB50 | 38 C6 C8 B0 */	addi r6, r6, BS2NANDDivideCallback@l
 /* 8137CB54 | 48 1E 75 15 */	bl NANDReadAsync
 .L_8137CB58:
 /* 8137CB58 | 80 01 00 14 */	lwz r0, 0x14(r1)
@@ -2093,10 +2125,10 @@
 /* 8137CB60 | 7C 08 03 A6 */	mtlr r0
 /* 8137CB64 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8137CB68 | 4E 80 00 20 */	blr
-.endfn BS2Mach_8137CAB0
+.endfn BS2NANDDivideReadAsync
 
 # .text:0x1BB8 | 0x8137CB6C | size: 0xBC
-.fn BS2Mach_8137CB6C, local
+.fn BS2NANDDivideWriteAsync, local
 /* 8137CB6C | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8137CB70 | 7C 08 02 A6 */	mflr r0
 /* 8137CB74 | 39 00 00 01 */	li r8, 0x1
@@ -2119,11 +2151,11 @@
 /* 8137CBB8 | 38 63 61 D0 */	addi r3, r3, lbl_816461D0@l
 /* 8137CBBC | 4C C6 31 82 */	crclr cr1eq
 /* 8137CBC0 | 4B FF E3 F5 */	bl BS2Report
-/* 8137CBC4 | 3C C0 81 38 */	lis r6, BS2Mach_8137C8B0@ha
+/* 8137CBC4 | 3C C0 81 38 */	lis r6, BS2NANDDivideCallback@ha
 /* 8137CBC8 | 80 6D AA 7C */	lwz r3, lbl_81698ABC@sda21(r0)
 /* 8137CBCC | 80 8D AA 78 */	lwz r4, lbl_81698AB8@sda21(r0)
 /* 8137CBD0 | 7F E7 FB 78 */	mr r7, r31
-/* 8137CBD4 | 38 C6 C8 B0 */	addi r6, r6, BS2Mach_8137C8B0@l
+/* 8137CBD4 | 38 C6 C8 B0 */	addi r6, r6, BS2NANDDivideCallback@l
 /* 8137CBD8 | 3C A0 00 04 */	lis r5, 0x4
 /* 8137CBDC | 48 1E 75 6D */	bl NANDWriteAsync
 /* 8137CBE0 | 48 00 00 34 */	b .L_8137CC14
@@ -2133,12 +2165,12 @@
 /* 8137CBEC | 38 63 61 D0 */	addi r3, r3, lbl_816461D0@l
 /* 8137CBF0 | 4C C6 31 82 */	crclr cr1eq
 /* 8137CBF4 | 4B FF E3 C1 */	bl BS2Report
-/* 8137CBF8 | 3C C0 81 38 */	lis r6, BS2Mach_8137C8B0@ha
+/* 8137CBF8 | 3C C0 81 38 */	lis r6, BS2NANDDivideCallback@ha
 /* 8137CBFC | 80 6D AA 7C */	lwz r3, lbl_81698ABC@sda21(r0)
 /* 8137CC00 | 80 8D AA 78 */	lwz r4, lbl_81698AB8@sda21(r0)
 /* 8137CC04 | 7F E7 FB 78 */	mr r7, r31
 /* 8137CC08 | 80 AD AA 74 */	lwz r5, lbl_81698AB4@sda21(r0)
-/* 8137CC0C | 38 C6 C8 B0 */	addi r6, r6, BS2Mach_8137C8B0@l
+/* 8137CC0C | 38 C6 C8 B0 */	addi r6, r6, BS2NANDDivideCallback@l
 /* 8137CC10 | 48 1E 75 39 */	bl NANDWriteAsync
 .L_8137CC14:
 /* 8137CC14 | 80 01 00 14 */	lwz r0, 0x14(r1)
@@ -2146,7 +2178,7 @@
 /* 8137CC1C | 7C 08 03 A6 */	mtlr r0
 /* 8137CC20 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8137CC24 | 4E 80 00 20 */	blr
-.endfn BS2Mach_8137CB6C
+.endfn BS2NANDDivideWriteAsync
 
 # .text:0x1C74 | 0x8137CC28 | size: 0x658
 .fn CheckBS2CommandStatus, local
@@ -2161,7 +2193,7 @@
 /* 8137CC48 | 3B DE 5D A8 */	addi r30, r30, lbl_81645DA8@l
 /* 8137CC4C | 3F FD 00 02 */	addis r31, r29, 0x2
 /* 8137CC50 | 38 7D 00 00 */	addi r3, r29, 0x0
-/* 8137CC54 | 4B FF FA C5 */	bl BS2Mach_8137C718
+/* 8137CC54 | 4B FF FA C5 */	bl CheckDVDCommandStatus
 /* 8137CC58 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137CC5C | 40 82 00 18 */	bne .L_8137CC74
 /* 8137CC60 | 38 7E 04 7B */	addi r3, r30, 0x47b
@@ -2170,7 +2202,7 @@
 /* 8137CC6C | 38 60 00 00 */	li r3, 0x0
 /* 8137CC70 | 48 00 05 F8 */	b .L_8137D268
 .L_8137CC74:
-/* 8137CC74 | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 8137CC74 | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137CC78 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137CC7C | 40 82 00 24 */	bne .L_8137CCA0
 /* 8137CC80 | 80 0D 84 D8 */	lwz r0, BS2BootCaching@sda21(r0)
@@ -2182,7 +2214,7 @@
 /* 8137CC98 | 38 60 00 01 */	li r3, 0x1
 /* 8137CC9C | 48 00 05 CC */	b .L_8137D268
 .L_8137CCA0:
-/* 8137CCA0 | 80 0D AA 0C */	lwz r0, lbl_81698A4C@sda21(r0)
+/* 8137CCA0 | 80 0D AA 0C */	lwz r0, NandTransferring@sda21(r0)
 /* 8137CCA4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137CCA8 | 41 82 00 18 */	beq .L_8137CCC0
 /* 8137CCAC | 38 7E 04 A8 */	addi r3, r30, 0x4a8
@@ -2198,7 +2230,7 @@
 /* 8137CCD0 | 2C 00 00 03 */	cmpwi r0, 0x3
 /* 8137CCD4 | 40 82 00 0C */	bne .L_8137CCE0
 /* 8137CCD8 | 38 00 00 01 */	li r0, 0x1
-/* 8137CCDC | 90 0D A9 EC */	stw r0, lbl_81698A2C@sda21(r0)
+/* 8137CCDC | 90 0D A9 EC */	stw r0, CacheFileOpened@sda21(r0)
 .L_8137CCE0:
 /* 8137CCE0 | 38 00 00 00 */	li r0, 0x0
 /* 8137CCE4 | 38 60 00 01 */	li r3, 0x1
@@ -2223,7 +2255,7 @@
 /* 8137CD28 | 4B FF E2 8D */	bl BS2Report
 /* 8137CD2C | 38 00 00 01 */	li r0, 0x1
 /* 8137CD30 | 3C C0 81 38 */	lis r6, BS2NANDCallback@ha
-/* 8137CD34 | 90 0D AA 0C */	stw r0, lbl_81698A4C@sda21(r0)
+/* 8137CD34 | 90 0D AA 0C */	stw r0, NandTransferring@sda21(r0)
 /* 8137CD38 | 38 7D 08 70 */	addi r3, r29, 0x870
 /* 8137CD3C | 38 C6 B0 04 */	addi r6, r6, BS2NANDCallback@l
 /* 8137CD40 | 38 FD 08 FC */	addi r7, r29, 0x8fc
@@ -2242,7 +2274,7 @@
 /* 8137CD70 | 4B FF E2 45 */	bl BS2Report
 /* 8137CD74 | 38 80 00 01 */	li r4, 0x1
 /* 8137CD78 | 3C 00 00 B0 */	lis r0, 0xb0
-/* 8137CD7C | 90 8D AA 0C */	stw r4, lbl_81698A4C@sda21(r0)
+/* 8137CD7C | 90 8D AA 0C */	stw r4, NandTransferring@sda21(r0)
 /* 8137CD80 | 80 6D AA 94 */	lwz r3, lbl_81698AD4@sda21(r0)
 /* 8137CD84 | 90 8D AA 18 */	stw r4, lbl_81698A58@sda21(r0)
 /* 8137CD88 | 38 63 00 20 */	addi r3, r3, 0x20
@@ -2262,7 +2294,7 @@
 /* 8137CDBC | 38 FD 08 FC */	addi r7, r29, 0x8fc
 /* 8137CDC0 | 38 C6 B0 04 */	addi r6, r6, BS2NANDCallback@l
 /* 8137CDC4 | 38 A0 00 20 */	li r5, 0x20
-/* 8137CDC8 | 4B FF FD A5 */	bl BS2Mach_8137CB6C
+/* 8137CDC8 | 4B FF FD A5 */	bl BS2NANDDivideWriteAsync
 /* 8137CDCC | 38 60 00 00 */	li r3, 0x0
 /* 8137CDD0 | 48 00 04 98 */	b .L_8137D268
 .L_8137CDD4:
@@ -2274,7 +2306,7 @@
 /* 8137CDE8 | 4B FF E1 CD */	bl BS2Report
 /* 8137CDEC | 38 80 00 01 */	li r4, 0x1
 /* 8137CDF0 | 3C 00 00 B0 */	lis r0, 0xb0
-/* 8137CDF4 | 90 8D AA 0C */	stw r4, lbl_81698A4C@sda21(r0)
+/* 8137CDF4 | 90 8D AA 0C */	stw r4, NandTransferring@sda21(r0)
 /* 8137CDF8 | 80 6D AA 94 */	lwz r3, lbl_81698AD4@sda21(r0)
 /* 8137CDFC | 90 8D AA 18 */	stw r4, lbl_81698A58@sda21(r0)
 /* 8137CE00 | 38 63 00 20 */	addi r3, r3, 0x20
@@ -2294,7 +2326,7 @@
 /* 8137CE34 | 38 FD 08 FC */	addi r7, r29, 0x8fc
 /* 8137CE38 | 38 C6 B0 04 */	addi r6, r6, BS2NANDCallback@l
 /* 8137CE3C | 38 A0 00 20 */	li r5, 0x20
-/* 8137CE40 | 4B FF FD 2D */	bl BS2Mach_8137CB6C
+/* 8137CE40 | 4B FF FD 2D */	bl BS2NANDDivideWriteAsync
 /* 8137CE44 | 38 60 00 00 */	li r3, 0x0
 /* 8137CE48 | 48 00 04 20 */	b .L_8137D268
 .L_8137CE4C:
@@ -2306,7 +2338,7 @@
 /* 8137CE60 | 4B FF E1 55 */	bl BS2Report
 /* 8137CE64 | 38 80 00 01 */	li r4, 0x1
 /* 8137CE68 | 3C 00 00 B0 */	lis r0, 0xb0
-/* 8137CE6C | 90 8D AA 0C */	stw r4, lbl_81698A4C@sda21(r0)
+/* 8137CE6C | 90 8D AA 0C */	stw r4, NandTransferring@sda21(r0)
 /* 8137CE70 | 80 6D AA 94 */	lwz r3, lbl_81698AD4@sda21(r0)
 /* 8137CE74 | 90 8D AA 18 */	stw r4, lbl_81698A58@sda21(r0)
 /* 8137CE78 | 38 63 00 20 */	addi r3, r3, 0x20
@@ -2326,7 +2358,7 @@
 /* 8137CEAC | 38 FD 08 FC */	addi r7, r29, 0x8fc
 /* 8137CEB0 | 38 C6 B0 04 */	addi r6, r6, BS2NANDCallback@l
 /* 8137CEB4 | 38 A0 00 20 */	li r5, 0x20
-/* 8137CEB8 | 4B FF FC B5 */	bl BS2Mach_8137CB6C
+/* 8137CEB8 | 4B FF FC B5 */	bl BS2NANDDivideWriteAsync
 /* 8137CEBC | 38 60 00 00 */	li r3, 0x0
 /* 8137CEC0 | 48 00 03 A8 */	b .L_8137D268
 .L_8137CEC4:
@@ -2338,7 +2370,7 @@
 /* 8137CED8 | 4B FF E0 DD */	bl BS2Report
 /* 8137CEDC | 38 C0 00 01 */	li r6, 0x1
 /* 8137CEE0 | 80 8D AA 5C */	lwz r4, lbl_81698A9C@sda21(r0)
-/* 8137CEE4 | 90 CD AA 0C */	stw r6, lbl_81698A4C@sda21(r0)
+/* 8137CEE4 | 90 CD AA 0C */	stw r6, NandTransferring@sda21(r0)
 /* 8137CEE8 | 3C 00 00 B0 */	lis r0, 0xb0
 /* 8137CEEC | 80 AD AA 94 */	lwz r5, lbl_81698AD4@sda21(r0)
 /* 8137CEF0 | 80 64 00 00 */	lwz r3, 0x0(r4)
@@ -2368,7 +2400,7 @@
 /* 8137CF4C | 38 FD 08 FC */	addi r7, r29, 0x8fc
 /* 8137CF50 | 54 05 00 34 */	clrrwi r5, r0, 5
 /* 8137CF54 | 38 A5 00 20 */	addi r5, r5, 0x20
-/* 8137CF58 | 4B FF FC 15 */	bl BS2Mach_8137CB6C
+/* 8137CF58 | 4B FF FC 15 */	bl BS2NANDDivideWriteAsync
 /* 8137CF5C | 38 60 00 00 */	li r3, 0x0
 /* 8137CF60 | 48 00 03 08 */	b .L_8137D268
 .L_8137CF64:
@@ -2380,7 +2412,7 @@
 /* 8137CF78 | 4B FF E0 3D */	bl BS2Report
 /* 8137CF7C | 38 80 00 01 */	li r4, 0x1
 /* 8137CF80 | 3C 00 00 B0 */	lis r0, 0xb0
-/* 8137CF84 | 90 8D AA 0C */	stw r4, lbl_81698A4C@sda21(r0)
+/* 8137CF84 | 90 8D AA 0C */	stw r4, NandTransferring@sda21(r0)
 /* 8137CF88 | 80 6D AA 94 */	lwz r3, lbl_81698AD4@sda21(r0)
 /* 8137CF8C | 90 8D AA 18 */	stw r4, lbl_81698A58@sda21(r0)
 /* 8137CF90 | 38 63 20 00 */	addi r3, r3, 0x2000
@@ -2400,7 +2432,7 @@
 /* 8137CFC4 | 38 FD 08 FC */	addi r7, r29, 0x8fc
 /* 8137CFC8 | 38 C6 B0 04 */	addi r6, r6, BS2NANDCallback@l
 /* 8137CFCC | 38 A0 20 00 */	li r5, 0x2000
-/* 8137CFD0 | 4B FF FB 9D */	bl BS2Mach_8137CB6C
+/* 8137CFD0 | 4B FF FB 9D */	bl BS2NANDDivideWriteAsync
 /* 8137CFD4 | 38 60 00 00 */	li r3, 0x0
 /* 8137CFD8 | 48 00 02 90 */	b .L_8137D268
 .L_8137CFDC:
@@ -2412,7 +2444,7 @@
 /* 8137CFF0 | 4B FF DF C5 */	bl BS2Report
 /* 8137CFF4 | 38 80 00 01 */	li r4, 0x1
 /* 8137CFF8 | 3C 00 00 B0 */	lis r0, 0xb0
-/* 8137CFFC | 90 8D AA 0C */	stw r4, lbl_81698A4C@sda21(r0)
+/* 8137CFFC | 90 8D AA 0C */	stw r4, NandTransferring@sda21(r0)
 /* 8137D000 | 80 6D AA 94 */	lwz r3, lbl_81698AD4@sda21(r0)
 /* 8137D004 | 90 8D AA 18 */	stw r4, lbl_81698A58@sda21(r0)
 /* 8137D008 | 38 63 4A 00 */	addi r3, r3, 0x4a00
@@ -2433,7 +2465,7 @@
 /* 8137D040 | 38 84 03 C0 */	addi r4, r4, 0x3c0
 /* 8137D044 | 38 C6 B0 04 */	addi r6, r6, BS2NANDCallback@l
 /* 8137D048 | 38 A0 4A 00 */	li r5, 0x4a00
-/* 8137D04C | 4B FF FB 21 */	bl BS2Mach_8137CB6C
+/* 8137D04C | 4B FF FB 21 */	bl BS2NANDDivideWriteAsync
 /* 8137D050 | 38 60 00 00 */	li r3, 0x0
 /* 8137D054 | 48 00 02 14 */	b .L_8137D268
 .L_8137D058:
@@ -2445,7 +2477,7 @@
 /* 8137D06C | 4B FF DF 49 */	bl BS2Report
 /* 8137D070 | 38 80 00 01 */	li r4, 0x1
 /* 8137D074 | 3C 00 00 B0 */	lis r0, 0xb0
-/* 8137D078 | 90 8D AA 0C */	stw r4, lbl_81698A4C@sda21(r0)
+/* 8137D078 | 90 8D AA 0C */	stw r4, NandTransferring@sda21(r0)
 /* 8137D07C | 80 6D AA 94 */	lwz r3, lbl_81698AD4@sda21(r0)
 /* 8137D080 | 90 8D AA 18 */	stw r4, lbl_81698A58@sda21(r0)
 /* 8137D084 | 38 63 00 20 */	addi r3, r3, 0x20
@@ -2465,7 +2497,7 @@
 /* 8137D0B8 | 38 FD 08 FC */	addi r7, r29, 0x8fc
 /* 8137D0BC | 38 C6 B0 04 */	addi r6, r6, BS2NANDCallback@l
 /* 8137D0C0 | 38 A0 00 20 */	li r5, 0x20
-/* 8137D0C4 | 4B FF FA A9 */	bl BS2Mach_8137CB6C
+/* 8137D0C4 | 4B FF FA A9 */	bl BS2NANDDivideWriteAsync
 /* 8137D0C8 | 38 60 00 00 */	li r3, 0x0
 /* 8137D0CC | 48 00 01 9C */	b .L_8137D268
 .L_8137D0D0:
@@ -2479,7 +2511,7 @@
 /* 8137D0EC | 38 C0 00 01 */	li r6, 0x1
 /* 8137D0F0 | 80 63 00 14 */	lwz r3, 0x14(r3)
 /* 8137D0F4 | 3C 00 00 B0 */	lis r0, 0xb0
-/* 8137D0F8 | 90 CD AA 0C */	stw r6, lbl_81698A4C@sda21(r0)
+/* 8137D0F8 | 90 CD AA 0C */	stw r6, NandTransferring@sda21(r0)
 /* 8137D0FC | 38 63 00 1F */	addi r3, r3, 0x1f
 /* 8137D100 | 80 8D AA 94 */	lwz r4, lbl_81698AD4@sda21(r0)
 /* 8137D104 | 54 65 00 34 */	clrrwi r5, r3, 5
@@ -2500,7 +2532,7 @@
 /* 8137D13C | 38 FD 08 FC */	addi r7, r29, 0x8fc
 /* 8137D140 | 3C 80 81 20 */	lis r4, 0x8120
 /* 8137D144 | 38 C6 B0 04 */	addi r6, r6, BS2NANDCallback@l
-/* 8137D148 | 4B FF FA 25 */	bl BS2Mach_8137CB6C
+/* 8137D148 | 4B FF FA 25 */	bl BS2NANDDivideWriteAsync
 /* 8137D14C | 38 60 00 00 */	li r3, 0x0
 /* 8137D150 | 48 00 01 18 */	b .L_8137D268
 .L_8137D154:
@@ -2512,7 +2544,7 @@
 /* 8137D168 | 4B FF DE 4D */	bl BS2Report
 /* 8137D16C | 38 A0 00 01 */	li r5, 0x1
 /* 8137D170 | 3C 00 00 B0 */	lis r0, 0xb0
-/* 8137D174 | 90 AD AA 0C */	stw r5, lbl_81698A4C@sda21(r0)
+/* 8137D174 | 90 AD AA 0C */	stw r5, NandTransferring@sda21(r0)
 /* 8137D178 | 80 8D AA 94 */	lwz r4, lbl_81698AD4@sda21(r0)
 /* 8137D17C | 80 6D AA 8C */	lwz r3, lbl_81698ACC@sda21(r0)
 /* 8137D180 | 90 AD AA 18 */	stw r5, lbl_81698A58@sda21(r0)
@@ -2533,7 +2565,7 @@
 /* 8137D1B8 | 38 7D 08 70 */	addi r3, r29, 0x870
 /* 8137D1BC | 38 C6 B0 04 */	addi r6, r6, BS2NANDCallback@l
 /* 8137D1C0 | 38 FD 08 FC */	addi r7, r29, 0x8fc
-/* 8137D1C4 | 4B FF F9 A9 */	bl BS2Mach_8137CB6C
+/* 8137D1C4 | 4B FF F9 A9 */	bl BS2NANDDivideWriteAsync
 /* 8137D1C8 | 38 60 00 00 */	li r3, 0x0
 /* 8137D1CC | 48 00 00 9C */	b .L_8137D268
 .L_8137D1D0:
@@ -2545,7 +2577,7 @@
 /* 8137D1E4 | 4B FF DD D1 */	bl BS2Report
 /* 8137D1E8 | 38 A0 00 01 */	li r5, 0x1
 /* 8137D1EC | 3C 00 00 B0 */	lis r0, 0xb0
-/* 8137D1F0 | 90 AD AA 0C */	stw r5, lbl_81698A4C@sda21(r0)
+/* 8137D1F0 | 90 AD AA 0C */	stw r5, NandTransferring@sda21(r0)
 /* 8137D1F4 | 80 8D AA 94 */	lwz r4, lbl_81698AD4@sda21(r0)
 /* 8137D1F8 | 80 6D AA 98 */	lwz r3, lbl_81698AD8@sda21(r0)
 /* 8137D1FC | 90 AD AA 18 */	stw r5, lbl_81698A58@sda21(r0)
@@ -2570,7 +2602,7 @@
 /* 8137D244 | 38 C6 B0 04 */	addi r6, r6, BS2NANDCallback@l
 /* 8137D248 | 54 05 00 34 */	clrrwi r5, r0, 5
 /* 8137D24C | 38 FD 08 FC */	addi r7, r29, 0x8fc
-/* 8137D250 | 4B FF F9 1D */	bl BS2Mach_8137CB6C
+/* 8137D250 | 4B FF F9 1D */	bl BS2NANDDivideWriteAsync
 /* 8137D254 | 38 60 00 00 */	li r3, 0x0
 /* 8137D258 | 48 00 00 10 */	b .L_8137D268
 .L_8137D25C:
@@ -2588,13 +2620,13 @@
 .endfn CheckBS2CommandStatus
 
 # .text:0x22CC | 0x8137D280 | size: 0x9C
-.fn BS2Mach_8137D280, local
+.fn BS2InquiryAsync, local
 /* 8137D280 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8137D284 | 7C 08 02 A6 */	mflr r0
 /* 8137D288 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8137D28C | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8137D290 | 48 27 C2 39 */	bl _savegpr_29
-/* 8137D294 | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 8137D294 | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137D298 | 3F E0 81 09 */	lis r31, Block@ha
 /* 8137D29C | 7C 7D 1B 78 */	mr r29, r3
 /* 8137D2A0 | 7C 9E 23 78 */	mr r30, r4
@@ -2608,13 +2640,13 @@
 /* 8137D2C0 | 4B FF DC F5 */	bl BS2Report
 /* 8137D2C4 | 38 00 00 01 */	li r0, 0x1
 /* 8137D2C8 | 3C C0 81 38 */	lis r6, BS2NANDCallback@ha
-/* 8137D2CC | 90 0D AA 0C */	stw r0, lbl_81698A4C@sda21(r0)
+/* 8137D2CC | 90 0D AA 0C */	stw r0, NandTransferring@sda21(r0)
 /* 8137D2D0 | 7F A4 EB 78 */	mr r4, r29
 /* 8137D2D4 | 7F C5 F3 78 */	mr r5, r30
 /* 8137D2D8 | 38 7F 08 70 */	addi r3, r31, 0x870
 /* 8137D2DC | 38 C6 B0 04 */	addi r6, r6, BS2NANDCallback@l
 /* 8137D2E0 | 38 FF 08 FC */	addi r7, r31, 0x8fc
-/* 8137D2E4 | 4B FF F7 CD */	bl BS2Mach_8137CAB0
+/* 8137D2E4 | 4B FF F7 CD */	bl BS2NANDDivideReadAsync
 /* 8137D2E8 | 48 00 00 1C */	b .L_8137D304
 .L_8137D2EC:
 /* 8137D2EC | 3C E0 81 38 */	lis r7, BS2DVDCallback@ha
@@ -2630,16 +2662,16 @@
 /* 8137D310 | 7C 08 03 A6 */	mtlr r0
 /* 8137D314 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8137D318 | 4E 80 00 20 */	blr
-.endfn BS2Mach_8137D280
+.endfn BS2InquiryAsync
 
 # .text:0x2368 | 0x8137D31C | size: 0x9C
-.fn BS2Mach_8137D31C, local
+.fn BS2ReadDiskID, local
 /* 8137D31C | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8137D320 | 7C 08 02 A6 */	mflr r0
 /* 8137D324 | 90 01 00 24 */	stw r0, 0x24(r1)
 /* 8137D328 | 39 61 00 20 */	addi r11, r1, 0x20
 /* 8137D32C | 48 27 C1 9D */	bl _savegpr_29
-/* 8137D330 | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 8137D330 | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137D334 | 3F E0 81 09 */	lis r31, Block@ha
 /* 8137D338 | 7C 7D 1B 78 */	mr r29, r3
 /* 8137D33C | 7C 9E 23 78 */	mr r30, r4
@@ -2653,13 +2685,13 @@
 /* 8137D35C | 4B FF DC 59 */	bl BS2Report
 /* 8137D360 | 38 00 00 01 */	li r0, 0x1
 /* 8137D364 | 3C C0 81 38 */	lis r6, BS2NANDCallback@ha
-/* 8137D368 | 90 0D AA 0C */	stw r0, lbl_81698A4C@sda21(r0)
+/* 8137D368 | 90 0D AA 0C */	stw r0, NandTransferring@sda21(r0)
 /* 8137D36C | 7F A4 EB 78 */	mr r4, r29
 /* 8137D370 | 7F C5 F3 78 */	mr r5, r30
 /* 8137D374 | 38 7F 08 70 */	addi r3, r31, 0x870
 /* 8137D378 | 38 C6 B0 04 */	addi r6, r6, BS2NANDCallback@l
 /* 8137D37C | 38 FF 08 FC */	addi r7, r31, 0x8fc
-/* 8137D380 | 4B FF F7 31 */	bl BS2Mach_8137CAB0
+/* 8137D380 | 4B FF F7 31 */	bl BS2NANDDivideReadAsync
 /* 8137D384 | 48 00 00 1C */	b .L_8137D3A0
 .L_8137D388:
 /* 8137D388 | 3C E0 81 38 */	lis r7, BS2DVDCallback@ha
@@ -2675,7 +2707,7 @@
 /* 8137D3AC | 7C 08 03 A6 */	mtlr r0
 /* 8137D3B0 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 8137D3B4 | 4E 80 00 20 */	blr
-.endfn BS2Mach_8137D31C
+.endfn BS2ReadDiskID
 
 # .text:0x2404 | 0x8137D3B8 | size: 0x1E50
 .fn BS2Tick, global
@@ -2701,11 +2733,11 @@
 /* 8137D404 | 7C 69 03 A6 */	mtctr r3
 /* 8137D408 | 4E 80 04 20 */	bctr
 .L_8137D40C:
-/* 8137D40C | 80 8D A9 A4 */	lwz r4, BS2NoDisk@sda21(r0)
+/* 8137D40C | 80 8D A9 A4 */	lwz r4, BS2NoDisk_816989E4@sda21(r0)
 /* 8137D410 | 38 7E 06 7E */	addi r3, r30, 0x67e
 /* 8137D414 | 4C C6 31 82 */	crclr cr1eq
 /* 8137D418 | 4B FF DB 9D */	bl BS2Report
-/* 8137D41C | 80 8D A9 A0 */	lwz r4, BS2DriveReset@sda21(r0)
+/* 8137D41C | 80 8D A9 A0 */	lwz r4, BS2DriveReset_816989E0@sda21(r0)
 /* 8137D420 | 38 7E 06 95 */	addi r3, r30, 0x695
 /* 8137D424 | 4C C6 31 82 */	crclr cr1eq
 /* 8137D428 | 4B FF DB 8D */	bl BS2Report
@@ -2713,7 +2745,7 @@
 /* 8137D430 | 38 7E 06 AC */	addi r3, r30, 0x6ac
 /* 8137D434 | 4C C6 31 82 */	crclr cr1eq
 /* 8137D438 | 4B FF DB 7D */	bl BS2Report
-/* 8137D43C | 80 8D A9 9C */	lwz r4, BS2BootFromCache@sda21(r0)
+/* 8137D43C | 80 8D A9 9C */	lwz r4, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137D440 | 38 7E 06 C3 */	addi r3, r30, 0x6c3
 /* 8137D444 | 4C C6 31 82 */	crclr cr1eq
 /* 8137D448 | 4B FF DB 6D */	bl BS2Report
@@ -2730,7 +2762,7 @@
 /* 8137D474 | 93 7E 30 D4 */	stw r27, 0x30d4(r30)
 /* 8137D478 | 93 6D AA A0 */	stw r27, lbl_81698AE0@sda21(r0)
 /* 8137D47C | 93 6D AA 9C */	stw r27, lbl_81698ADC@sda21(r0)
-/* 8137D480 | 80 0D A9 A4 */	lwz r0, BS2NoDisk@sda21(r0)
+/* 8137D480 | 80 0D A9 A4 */	lwz r0, BS2NoDisk_816989E4@sda21(r0)
 /* 8137D484 | 90 8D AA 1C */	stw r4, lbl_81698A5C@sda21(r0)
 /* 8137D488 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137D48C | 93 63 00 0C */	stw r27, 0xc(r3)
@@ -2739,7 +2771,7 @@
 /* 8137D498 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 /* 8137D49C | 48 00 1D 48 */	b .L_8137F1E4
 .L_8137D4A0:
-/* 8137D4A0 | 80 0D A9 A0 */	lwz r0, BS2DriveReset@sda21(r0)
+/* 8137D4A0 | 80 0D A9 A0 */	lwz r0, BS2DriveReset_816989E0@sda21(r0)
 /* 8137D4A4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137D4A8 | 41 82 00 10 */	beq .L_8137D4B8
 /* 8137D4AC | 38 00 00 02 */	li r0, 0x2
@@ -2754,7 +2786,7 @@
 /* 8137D4CC | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137D4D0 | 90 6D AA 20 */	stw r3, lbl_81698A60@sda21(r0)
 /* 8137D4D4 | 41 82 00 34 */	beq .L_8137D508
-/* 8137D4D8 | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 8137D4D8 | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137D4DC | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137D4E0 | 40 82 00 28 */	bne .L_8137D508
 /* 8137D4E4 | 48 1B 88 55 */	bl __OSGetSystemTime
@@ -2802,7 +2834,7 @@
 /* 8137D580 | 93 6D AA 9C */	stw r27, lbl_81698ADC@sda21(r0)
 /* 8137D584 | 90 0D AA 1C */	stw r0, lbl_81698A5C@sda21(r0)
 /* 8137D588 | 48 1B 87 B1 */	bl __OSGetSystemTime
-/* 8137D58C | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 8137D58C | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137D590 | 90 8D AA 24 */	stw r4, lbl_81698A64@sda21(r0)
 /* 8137D594 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137D598 | 90 6D AA 20 */	stw r3, lbl_81698A60@sda21(r0)
@@ -2846,7 +2878,7 @@
 /* 8137D624 | 7C A5 00 D1 */	neg. r5, r5
 /* 8137D628 | 41 82 00 E0 */	beq .L_8137D708
 /* 8137D62C | 38 7D 00 00 */	addi r3, r29, 0x0
-/* 8137D630 | 4B FF F0 E9 */	bl BS2Mach_8137C718
+/* 8137D630 | 4B FF F0 E9 */	bl CheckDVDCommandStatus
 /* 8137D634 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137D638 | 41 82 1B AC */	beq .L_8137F1E4
 /* 8137D63C | 48 1B 86 FD */	bl __OSGetSystemTime
@@ -2869,7 +2901,7 @@
 /* 8137D680 | 7C 84 00 D1 */	neg. r4, r4
 /* 8137D684 | 40 82 1B 60 */	bne .L_8137F1E4
 /* 8137D688 | 38 7D 08 40 */	addi r3, r29, 0x840
-/* 8137D68C | 4B FF F0 8D */	bl BS2Mach_8137C718
+/* 8137D68C | 4B FF F0 8D */	bl CheckDVDCommandStatus
 /* 8137D690 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137D694 | 41 82 1B 50 */	beq .L_8137F1E4
 /* 8137D698 | 48 1B 86 A1 */	bl __OSGetSystemTime
@@ -2907,7 +2939,7 @@
 /* 8137D714 | 38 00 00 04 */	li r0, 0x4
 /* 8137D718 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 .L_8137D71C:
-/* 8137D71C | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 8137D71C | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137D720 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137D724 | 41 82 00 38 */	beq .L_8137D75C
 /* 8137D728 | 38 7E 06 DA */	addi r3, r30, 0x6da
@@ -2915,13 +2947,13 @@
 /* 8137D730 | 4B FF D8 85 */	bl BS2Report
 /* 8137D734 | 38 00 00 01 */	li r0, 0x1
 /* 8137D738 | 3C C0 81 38 */	lis r6, BS2NANDCallback@ha
-/* 8137D73C | 90 0D AA 0C */	stw r0, lbl_81698A4C@sda21(r0)
+/* 8137D73C | 90 0D AA 0C */	stw r0, NandTransferring@sda21(r0)
 /* 8137D740 | 38 7D 08 70 */	addi r3, r29, 0x870
 /* 8137D744 | 38 9F E7 E0 */	subi r4, r31, 0x1820
 /* 8137D748 | 38 C6 B0 04 */	addi r6, r6, BS2NANDCallback@l
 /* 8137D74C | 38 FD 08 FC */	addi r7, r29, 0x8fc
 /* 8137D750 | 38 A0 00 20 */	li r5, 0x20
-/* 8137D754 | 4B FF F3 5D */	bl BS2Mach_8137CAB0
+/* 8137D754 | 4B FF F3 5D */	bl BS2NANDDivideReadAsync
 /* 8137D758 | 48 00 00 18 */	b .L_8137D770
 .L_8137D75C:
 /* 8137D75C | 3C A0 81 38 */	lis r5, BS2DVDCallback@ha
@@ -2966,13 +2998,13 @@
 /* 8137D7E4 | 48 00 1A 00 */	b .L_8137F1E4
 .L_8137D7E8:
 /* 8137D7E8 | 38 7D 00 00 */	addi r3, r29, 0x0
-/* 8137D7EC | 4B FF EF 2D */	bl BS2Mach_8137C718
+/* 8137D7EC | 4B FF EF 2D */	bl CheckDVDCommandStatus
 /* 8137D7F0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137D7F4 | 41 82 19 F0 */	beq .L_8137F1E4
 /* 8137D7F8 | 38 00 00 08 */	li r0, 0x8
 /* 8137D7FC | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 .L_8137D800:
-/* 8137D800 | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 8137D800 | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137D804 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137D808 | 41 82 00 38 */	beq .L_8137D840
 /* 8137D80C | 38 7E 06 FA */	addi r3, r30, 0x6fa
@@ -2980,13 +3012,13 @@
 /* 8137D814 | 4B FF D7 A1 */	bl BS2Report
 /* 8137D818 | 38 00 00 01 */	li r0, 0x1
 /* 8137D81C | 3C C0 81 38 */	lis r6, BS2NANDCallback@ha
-/* 8137D820 | 90 0D AA 0C */	stw r0, lbl_81698A4C@sda21(r0)
+/* 8137D820 | 90 0D AA 0C */	stw r0, NandTransferring@sda21(r0)
 /* 8137D824 | 38 7D 08 70 */	addi r3, r29, 0x870
 /* 8137D828 | 38 9F E7 C0 */	subi r4, r31, 0x1840
 /* 8137D82C | 38 C6 B0 04 */	addi r6, r6, BS2NANDCallback@l
 /* 8137D830 | 38 FD 08 FC */	addi r7, r29, 0x8fc
 /* 8137D834 | 38 A0 00 20 */	li r5, 0x20
-/* 8137D838 | 4B FF F2 79 */	bl BS2Mach_8137CAB0
+/* 8137D838 | 4B FF F2 79 */	bl BS2NANDDivideReadAsync
 /* 8137D83C | 48 00 00 18 */	b .L_8137D854
 .L_8137D840:
 /* 8137D840 | 3C A0 81 38 */	lis r5, BS2DVDCallback@ha
@@ -3112,7 +3144,7 @@
 /* 8137D9E8 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 .L_8137D9EC:
 /* 8137D9EC | 38 7D 00 00 */	addi r3, r29, 0x0
-/* 8137D9F0 | 4B FF ED 29 */	bl BS2Mach_8137C718
+/* 8137D9F0 | 4B FF ED 29 */	bl CheckDVDCommandStatus
 /* 8137D9F4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137D9F8 | 41 82 17 EC */	beq .L_8137F1E4
 /* 8137D9FC | 38 00 00 0D */	li r0, 0xd
@@ -3129,7 +3161,7 @@
 /* 8137DA24 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 .L_8137DA28:
 /* 8137DA28 | 38 7D 00 00 */	addi r3, r29, 0x0
-/* 8137DA2C | 4B FF EC ED */	bl BS2Mach_8137C718
+/* 8137DA2C | 4B FF EC ED */	bl CheckDVDCommandStatus
 /* 8137DA30 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137DA34 | 41 82 17 B0 */	beq .L_8137F1E4
 /* 8137DA38 | 38 7F 08 40 */	addi r3, r31, 0x840
@@ -3174,7 +3206,7 @@
 /* 8137DAB8 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 /* 8137DABC | 48 00 17 28 */	b .L_8137F1E4
 .L_8137DAC0:
-/* 8137DAC0 | 80 0D A9 F0 */	lwz r0, lbl_81698A30@sda21(r0)
+/* 8137DAC0 | 80 0D A9 F0 */	lwz r0, StartLoadingTitle@sda21(r0)
 /* 8137DAC4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137DAC8 | 41 82 00 10 */	beq .L_8137DAD8
 /* 8137DACC | 38 00 00 46 */	li r0, 0x46
@@ -3184,7 +3216,7 @@
 /* 8137DAD8 | 38 7F E8 00 */	subi r3, r31, 0x1800
 /* 8137DADC | 38 80 00 20 */	li r4, 0x20
 /* 8137DAE0 | 3C A0 00 01 */	lis r5, 0x1
-/* 8137DAE4 | 4B FF F7 9D */	bl BS2Mach_8137D280
+/* 8137DAE4 | 4B FF F7 9D */	bl BS2InquiryAsync
 /* 8137DAE8 | 38 00 00 10 */	li r0, 0x10
 /* 8137DAEC | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 .L_8137DAF0:
@@ -3230,7 +3262,7 @@
 /* 8137DB88 | 38 04 00 1F */	addi r0, r4, 0x1f
 /* 8137DB8C | 54 04 00 34 */	clrrwi r4, r0, 5
 /* 8137DB90 | 38 84 00 20 */	addi r4, r4, 0x20
-/* 8137DB94 | 4B FF F6 ED */	bl BS2Mach_8137D280
+/* 8137DB94 | 4B FF F6 ED */	bl BS2InquiryAsync
 /* 8137DB98 | 38 00 00 12 */	li r0, 0x12
 /* 8137DB9C | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 .L_8137DBA0:
@@ -3306,7 +3338,7 @@
 /* 8137DC98 | 38 7F E8 20 */	subi r3, r31, 0x17e0
 /* 8137DC9C | 38 A4 38 00 */	addi r5, r4, 0x3800
 /* 8137DCA0 | 38 80 20 00 */	li r4, 0x2000
-/* 8137DCA4 | 4B FF F5 DD */	bl BS2Mach_8137D280
+/* 8137DCA4 | 4B FF F5 DD */	bl BS2InquiryAsync
 /* 8137DCA8 | 38 00 00 14 */	li r0, 0x14
 /* 8137DCAC | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 .L_8137DCB0:
@@ -3380,7 +3412,7 @@
 /* 8137DD94 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 /* 8137DD98 | 48 00 14 4C */	b .L_8137F1E4
 .L_8137DD9C:
-/* 8137DD9C | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 8137DD9C | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137DDA0 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137DDA4 | 41 82 00 10 */	beq .L_8137DDB4
 /* 8137DDA8 | 38 00 00 25 */	li r0, 0x25
@@ -3415,12 +3447,12 @@
 /* 8137DE0C | 48 1D 08 D5 */	bl fn_8154E6E0
 /* 8137DE10 | 38 60 00 01 */	li r3, 0x1
 /* 8137DE14 | 38 00 00 16 */	li r0, 0x16
-/* 8137DE18 | 90 6D A9 E8 */	stw r3, lbl_81698A28@sda21(r0)
+/* 8137DE18 | 90 6D A9 E8 */	stw r3, PartitionOpened@sda21(r0)
 /* 8137DE1C | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 /* 8137DE20 | 48 00 13 C4 */	b .L_8137F1E4
 .L_8137DE24:
 /* 8137DE24 | 38 7D 00 00 */	addi r3, r29, 0x0
-/* 8137DE28 | 4B FF E8 F1 */	bl BS2Mach_8137C718
+/* 8137DE28 | 4B FF E8 F1 */	bl CheckDVDCommandStatus
 /* 8137DE2C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137DE30 | 41 82 13 B4 */	beq .L_8137F1E4
 /* 8137DE34 | 38 9D 09 C0 */	addi r4, r29, 0x9c0
@@ -3468,7 +3500,7 @@
 /* 8137DED8 | 48 00 13 0C */	b .L_8137F1E4
 .L_8137DEDC:
 /* 8137DEDC | 38 7D 00 00 */	addi r3, r29, 0x0
-/* 8137DEE0 | 4B FF E8 39 */	bl BS2Mach_8137C718
+/* 8137DEE0 | 4B FF E8 39 */	bl CheckDVDCommandStatus
 /* 8137DEE4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137DEE8 | 41 82 12 FC */	beq .L_8137F1E4
 /* 8137DEEC | 38 7F 28 40 */	addi r3, r31, 0x2840
@@ -3496,7 +3528,7 @@
 /* 8137DF3C | 48 00 12 A8 */	b .L_8137F1E4
 .L_8137DF40:
 /* 8137DF40 | 38 7D 00 00 */	addi r3, r29, 0x0
-/* 8137DF44 | 4B FF E7 D5 */	bl BS2Mach_8137C718
+/* 8137DF44 | 4B FF E7 D5 */	bl CheckDVDCommandStatus
 /* 8137DF48 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137DF4C | 41 82 12 98 */	beq .L_8137F1E4
 /* 8137DF50 | 3B 7F 08 20 */	addi r27, r31, 0x820
@@ -3526,7 +3558,7 @@
 /* 8137DFAC | 48 00 12 38 */	b .L_8137F1E4
 .L_8137DFB0:
 /* 8137DFB0 | 38 7D 00 00 */	addi r3, r29, 0x0
-/* 8137DFB4 | 4B FF E7 65 */	bl BS2Mach_8137C718
+/* 8137DFB4 | 4B FF E7 65 */	bl CheckDVDCommandStatus
 /* 8137DFB8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137DFBC | 41 82 12 28 */	beq .L_8137F1E4
 /* 8137DFC0 | 3B 7F 08 20 */	addi r27, r31, 0x820
@@ -3597,7 +3629,7 @@
 /* 8137E0B8 | 48 00 11 2C */	b .L_8137F1E4
 .L_8137E0BC:
 /* 8137E0BC | 38 7D 00 00 */	addi r3, r29, 0x0
-/* 8137E0C0 | 4B FF E6 59 */	bl BS2Mach_8137C718
+/* 8137E0C0 | 4B FF E6 59 */	bl CheckDVDCommandStatus
 /* 8137E0C4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137E0C8 | 41 82 11 1C */	beq .L_8137F1E4
 /* 8137E0CC | 38 00 00 1D */	li r0, 0x1d
@@ -3689,7 +3721,7 @@
 /* 8137E210 | 48 00 0F D4 */	b .L_8137F1E4
 .L_8137E214:
 /* 8137E214 | 38 7D 08 40 */	addi r3, r29, 0x840
-/* 8137E218 | 4B FF E5 01 */	bl BS2Mach_8137C718
+/* 8137E218 | 4B FF E5 01 */	bl CheckDVDCommandStatus
 /* 8137E21C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137E220 | 41 82 00 8C */	beq .L_8137E2AC
 /* 8137E224 | 48 00 1F 79 */	bl BS2UpdateState
@@ -3819,11 +3851,11 @@
 /* 8137E3EC | 48 00 0D F8 */	b .L_8137F1E4
 .L_8137E3F0:
 /* 8137E3F0 | 38 7D 00 00 */	addi r3, r29, 0x0
-/* 8137E3F4 | 4B FF E3 25 */	bl BS2Mach_8137C718
+/* 8137E3F4 | 4B FF E3 25 */	bl CheckDVDCommandStatus
 /* 8137E3F8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137E3FC | 41 82 0D E8 */	beq .L_8137F1E4
 /* 8137E400 | 38 00 00 00 */	li r0, 0x0
-/* 8137E404 | 90 0D A9 E8 */	stw r0, lbl_81698A28@sda21(r0)
+/* 8137E404 | 90 0D A9 E8 */	stw r0, PartitionOpened@sda21(r0)
 /* 8137E408 | 48 00 1D 95 */	bl BS2UpdateState
 /* 8137E40C | 2C 03 00 04 */	cmpwi r3, 0x4
 /* 8137E410 | 40 82 00 10 */	bne .L_8137E420
@@ -3842,7 +3874,7 @@
 /* 8137E43C | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 /* 8137E440 | 48 00 0D A4 */	b .L_8137F1E4
 .L_8137E444:
-/* 8137E444 | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 8137E444 | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137E448 | 80 6D AA 50 */	lwz r3, lbl_81698A90@sda21(r0)
 /* 8137E44C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137E450 | 80 A3 00 00 */	lwz r5, 0x0(r3)
@@ -3853,13 +3885,13 @@
 /* 8137E464 | 38 00 00 01 */	li r0, 0x1
 /* 8137E468 | 38 9D 09 C0 */	addi r4, r29, 0x9c0
 /* 8137E46C | 3C C0 81 38 */	lis r6, BS2NANDCallback@ha
-/* 8137E470 | 90 0D AA 0C */	stw r0, lbl_81698A4C@sda21(r0)
+/* 8137E470 | 90 0D AA 0C */	stw r0, NandTransferring@sda21(r0)
 /* 8137E474 | 38 7D 08 70 */	addi r3, r29, 0x870
 /* 8137E478 | 38 84 03 C0 */	addi r4, r4, 0x3c0
 /* 8137E47C | 38 C6 B0 04 */	addi r6, r6, BS2NANDCallback@l
 /* 8137E480 | 38 FD 08 FC */	addi r7, r29, 0x8fc
 /* 8137E484 | 38 A0 4A 00 */	li r5, 0x4a00
-/* 8137E488 | 4B FF E6 29 */	bl BS2Mach_8137CAB0
+/* 8137E488 | 4B FF E6 29 */	bl BS2NANDDivideReadAsync
 /* 8137E48C | 48 00 00 1C */	b .L_8137E4A8
 .L_8137E490:
 /* 8137E490 | 38 9D 09 C0 */	addi r4, r29, 0x9c0
@@ -3871,7 +3903,7 @@
 .L_8137E4A8:
 /* 8137E4A8 | 38 60 00 01 */	li r3, 0x1
 /* 8137E4AC | 38 00 00 26 */	li r0, 0x26
-/* 8137E4B0 | 90 6D A9 E8 */	stw r3, lbl_81698A28@sda21(r0)
+/* 8137E4B0 | 90 6D A9 E8 */	stw r3, PartitionOpened@sda21(r0)
 /* 8137E4B4 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 /* 8137E4B8 | 48 00 0D 2C */	b .L_8137F1E4
 .L_8137E4BC:
@@ -4056,7 +4088,7 @@
 /* 8137E72C | 38 7F 08 20 */	addi r3, r31, 0x820
 /* 8137E730 | 38 80 00 20 */	li r4, 0x20
 /* 8137E734 | 38 A0 09 10 */	li r5, 0x910
-/* 8137E738 | 4B FF EB E5 */	bl BS2Mach_8137D31C
+/* 8137E738 | 4B FF EB E5 */	bl BS2ReadDiskID
 /* 8137E73C | 38 00 00 28 */	li r0, 0x28
 /* 8137E740 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 /* 8137E744 | 48 00 0A A0 */	b .L_8137F1E4
@@ -4082,7 +4114,7 @@
 /* 8137E78C | 38 A0 09 18 */	li r5, 0x918
 /* 8137E790 | 38 04 00 1F */	addi r0, r4, 0x1f
 /* 8137E794 | 54 04 00 34 */	clrrwi r4, r0, 5
-/* 8137E798 | 4B FF EB 85 */	bl BS2Mach_8137D31C
+/* 8137E798 | 4B FF EB 85 */	bl BS2ReadDiskID
 /* 8137E79C | 38 00 00 2A */	li r0, 0x2a
 /* 8137E7A0 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 /* 8137E7A4 | 48 00 0A 40 */	b .L_8137F1E4
@@ -4134,7 +4166,7 @@
 /* 8137E854 | 80 61 00 14 */	lwz r3, 0x14(r1)
 /* 8137E858 | 80 81 00 10 */	lwz r4, 0x10(r1)
 /* 8137E85C | 7C A5 04 30 */	srw r5, r5, r0
-/* 8137E860 | 4B FF EA BD */	bl BS2Mach_8137D31C
+/* 8137E860 | 4B FF EA BD */	bl BS2ReadDiskID
 /* 8137E864 | 80 A1 00 14 */	lwz r5, 0x14(r1)
 /* 8137E868 | 80 81 00 10 */	lwz r4, 0x10(r1)
 /* 8137E86C | 80 01 00 0C */	lwz r0, 0xc(r1)
@@ -4145,7 +4177,7 @@
 /* 8137E880 | 80 03 00 00 */	lwz r0, 0x0(r3)
 /* 8137E884 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137E888 | 41 82 00 1C */	beq .L_8137E8A4
-/* 8137E88C | 80 0D A9 9C */	lwz r0, BS2BootFromCache@sda21(r0)
+/* 8137E88C | 80 0D A9 9C */	lwz r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137E890 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137E894 | 40 82 00 10 */	bne .L_8137E8A4
 /* 8137E898 | 38 00 00 01 */	li r0, 0x1
@@ -4258,7 +4290,7 @@
 /* 8137EA18 | 54 64 00 34 */	clrrwi r4, r3, 5
 /* 8137EA1C | 80 6D A9 D4 */	lwz r3, BannerBufferAddr@sda21(r0)
 /* 8137EA20 | 7C A5 04 30 */	srw r5, r5, r0
-/* 8137EA24 | 4B FF E8 F9 */	bl BS2Mach_8137D31C
+/* 8137EA24 | 4B FF E8 F9 */	bl BS2ReadDiskID
 /* 8137EA28 | 38 00 00 2E */	li r0, 0x2e
 /* 8137EA2C | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 /* 8137EA30 | 48 00 07 B4 */	b .L_8137F1E4
@@ -4301,7 +4333,7 @@
 /* 8137EAB0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137EAB4 | 41 82 07 30 */	beq .L_8137F1E4
 /* 8137EAB8 | 38 60 00 00 */	li r3, 0x0
-/* 8137EABC | 90 6D A9 E8 */	stw r3, lbl_81698A28@sda21(r0)
+/* 8137EABC | 90 6D A9 E8 */	stw r3, PartitionOpened@sda21(r0)
 /* 8137EAC0 | 80 0D AA 08 */	lwz r0, lbl_81698A48@sda21(r0)
 /* 8137EAC4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137EAC8 | 40 82 00 10 */	bne .L_8137EAD8
@@ -4313,7 +4345,7 @@
 /* 8137EADC | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137EAE0 | 41 82 00 10 */	beq .L_8137EAF0
 /* 8137EAE4 | 38 00 00 01 */	li r0, 0x1
-/* 8137EAE8 | 90 0D A9 9C */	stw r0, BS2BootFromCache@sda21(r0)
+/* 8137EAE8 | 90 0D A9 9C */	stw r0, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137EAEC | 90 6D 84 D8 */	stw r3, BS2BootCaching@sda21(r0)
 .L_8137EAF0:
 /* 8137EAF0 | 80 6D AA 40 */	lwz r3, lbl_81698A80@sda21(r0)
@@ -4321,7 +4353,7 @@
 /* 8137EAF8 | 3C 03 FF B4 */	subis r0, r3, 0x4c
 /* 8137EAFC | 28 00 4F 43 */	cmplwi r0, 0x4f43
 /* 8137EB00 | 40 82 00 1C */	bne .L_8137EB1C
-/* 8137EB04 | 80 0D A9 F0 */	lwz r0, lbl_81698A30@sda21(r0)
+/* 8137EB04 | 80 0D A9 F0 */	lwz r0, StartLoadingTitle@sda21(r0)
 /* 8137EB08 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137EB0C | 40 82 00 10 */	bne .L_8137EB1C
 /* 8137EB10 | 38 00 00 45 */	li r0, 0x45
@@ -4349,7 +4381,7 @@
 /* 8137EB5C | 48 00 06 88 */	b .L_8137F1E4
 .L_8137EB60:
 /* 8137EB60 | 38 7D 08 40 */	addi r3, r29, 0x840
-/* 8137EB64 | 4B FF DB B5 */	bl BS2Mach_8137C718
+/* 8137EB64 | 4B FF DB B5 */	bl CheckDVDCommandStatus
 /* 8137EB68 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137EB6C | 41 82 06 78 */	beq .L_8137F1E4
 /* 8137EB70 | 80 0D A9 E0 */	lwz r0, StartingGame@sda21(r0)
@@ -4388,7 +4420,7 @@
 /* 8137EBF4 | 48 00 05 F0 */	b .L_8137F1E4
 .L_8137EBF8:
 /* 8137EBF8 | 38 7D 08 40 */	addi r3, r29, 0x840
-/* 8137EBFC | 4B FF DB 1D */	bl BS2Mach_8137C718
+/* 8137EBFC | 4B FF DB 1D */	bl CheckDVDCommandStatus
 /* 8137EC00 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137EC04 | 41 82 05 E0 */	beq .L_8137F1E4
 /* 8137EC08 | 80 0D A9 E0 */	lwz r0, StartingGame@sda21(r0)
@@ -4428,7 +4460,7 @@
 .L_8137EC90:
 /* 8137EC90 | 80 6D A9 DC */	lwz r3, MemAllocator@sda21(r0)
 /* 8137EC94 | 3B 60 00 00 */	li r27, 0x0
-/* 8137EC98 | 93 6D A9 E8 */	stw r27, lbl_81698A28@sda21(r0)
+/* 8137EC98 | 93 6D A9 E8 */	stw r27, PartitionOpened@sda21(r0)
 /* 8137EC9C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8137ECA0 | 93 6D A9 D8 */	stw r27, BannerAvailable@sda21(r0)
 /* 8137ECA4 | 41 82 00 20 */	beq .L_8137ECC4
@@ -4442,7 +4474,7 @@
 .L_8137ECC4:
 /* 8137ECC4 | 38 60 00 00 */	li r3, 0x0
 /* 8137ECC8 | 38 00 00 02 */	li r0, 0x2
-/* 8137ECCC | 90 6D A9 F0 */	stw r3, lbl_81698A30@sda21(r0)
+/* 8137ECCC | 90 6D A9 F0 */	stw r3, StartLoadingTitle@sda21(r0)
 /* 8137ECD0 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 /* 8137ECD4 | 48 00 05 10 */	b .L_8137F1E4
 .L_8137ECD8:
@@ -4462,9 +4494,9 @@
 /* 8137ED08 | 38 80 00 00 */	li r4, 0x0
 /* 8137ED0C | 38 7D 00 00 */	addi r3, r29, 0x0
 /* 8137ED10 | 38 00 00 01 */	li r0, 0x1
-/* 8137ED14 | 90 8D A9 9C */	stw r4, BS2BootFromCache@sda21(r0)
+/* 8137ED14 | 90 8D A9 9C */	stw r4, BS2BootFromCache_816989DC@sda21(r0)
 /* 8137ED18 | 90 0D 84 D8 */	stw r0, BS2BootCaching@sda21(r0)
-/* 8137ED1C | 90 8D A9 F0 */	stw r4, lbl_81698A30@sda21(r0)
+/* 8137ED1C | 90 8D A9 F0 */	stw r4, StartLoadingTitle@sda21(r0)
 /* 8137ED20 | 80 03 00 0C */	lwz r0, 0xc(r3)
 /* 8137ED24 | 2C 00 00 06 */	cmpwi r0, 0x6
 /* 8137ED28 | 40 80 00 18 */	bge .L_8137ED40
@@ -4472,7 +4504,7 @@
 /* 8137ED30 | 40 80 00 08 */	bge .L_8137ED38
 /* 8137ED34 | 48 00 00 0C */	b .L_8137ED40
 .L_8137ED38:
-/* 8137ED38 | 4B FF D9 E1 */	bl BS2Mach_8137C718
+/* 8137ED38 | 4B FF D9 E1 */	bl CheckDVDCommandStatus
 /* 8137ED3C | 48 00 04 A8 */	b .L_8137F1E4
 .L_8137ED40:
 /* 8137ED40 | 48 1B 6F F9 */	bl __OSGetSystemTime
@@ -4522,7 +4554,7 @@
 .L_8137EDEC:
 /* 8137EDEC | 38 00 00 00 */	li r0, 0x0
 /* 8137EDF0 | 3C 80 81 38 */	lis r4, BS2DVDCallback@ha
-/* 8137EDF4 | 90 0D A9 F0 */	stw r0, lbl_81698A30@sda21(r0)
+/* 8137EDF4 | 90 0D A9 F0 */	stw r0, StartLoadingTitle@sda21(r0)
 /* 8137EDF8 | 38 7D 00 00 */	addi r3, r29, 0x0
 /* 8137EDFC | 38 84 B0 68 */	addi r4, r4, BS2DVDCallback@l
 /* 8137EE00 | 48 1C EB E5 */	bl fn_8154D9E4
@@ -4530,7 +4562,7 @@
 /* 8137EE08 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 .L_8137EE0C:
 /* 8137EE0C | 38 7D 00 00 */	addi r3, r29, 0x0
-/* 8137EE10 | 4B FF D9 09 */	bl BS2Mach_8137C718
+/* 8137EE10 | 4B FF D9 09 */	bl CheckDVDCommandStatus
 /* 8137EE14 | 48 00 03 D0 */	b .L_8137F1E4
 .L_8137EE18:
 /* 8137EE18 | 80 6D A9 DC */	lwz r3, MemAllocator@sda21(r0)
@@ -4547,7 +4579,7 @@
 /* 8137EE44 | 93 6D AA 98 */	stw r27, lbl_81698AD8@sda21(r0)
 .L_8137EE48:
 /* 8137EE48 | 38 00 00 00 */	li r0, 0x0
-/* 8137EE4C | 90 0D A9 F0 */	stw r0, lbl_81698A30@sda21(r0)
+/* 8137EE4C | 90 0D A9 F0 */	stw r0, StartLoadingTitle@sda21(r0)
 /* 8137EE50 | 48 00 03 94 */	b .L_8137F1E4
 .L_8137EE54:
 /* 8137EE54 | 4B FF DD D5 */	bl CheckBS2CommandStatus
@@ -4570,8 +4602,8 @@
 /* 8137EE90 | 41 82 03 54 */	beq .L_8137F1E4
 /* 8137EE94 | 38 60 00 00 */	li r3, 0x0
 /* 8137EE98 | 38 00 00 3F */	li r0, 0x3f
-/* 8137EE9C | 90 6D A9 E8 */	stw r3, lbl_81698A28@sda21(r0)
-/* 8137EEA0 | 90 6D A9 E4 */	stw r3, lbl_81698A24@sda21(r0)
+/* 8137EE9C | 90 6D A9 E8 */	stw r3, PartitionOpened@sda21(r0)
+/* 8137EEA0 | 90 6D A9 E4 */	stw r3, Restart@sda21(r0)
 /* 8137EEA4 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 /* 8137EEA8 | 48 00 03 3C */	b .L_8137F1E4
 .L_8137EEAC:
@@ -4621,7 +4653,7 @@
 /* 8137EF48 | 48 1C FB C1 */	bl fn_8154EB08
 /* 8137EF4C | 38 60 00 01 */	li r3, 0x1
 /* 8137EF50 | 38 00 00 26 */	li r0, 0x26
-/* 8137EF54 | 90 6D A9 E8 */	stw r3, lbl_81698A28@sda21(r0)
+/* 8137EF54 | 90 6D A9 E8 */	stw r3, PartitionOpened@sda21(r0)
 /* 8137EF58 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 /* 8137EF5C | 48 00 02 88 */	b .L_8137F1E4
 .L_8137EF60:
@@ -4657,7 +4689,7 @@
 /* 8137EFC8 | 40 80 00 08 */	bge .L_8137EFD0
 /* 8137EFCC | 48 00 00 0C */	b .L_8137EFD8
 .L_8137EFD0:
-/* 8137EFD0 | 4B FF D7 49 */	bl BS2Mach_8137C718
+/* 8137EFD0 | 4B FF D7 49 */	bl CheckDVDCommandStatus
 /* 8137EFD4 | 48 00 02 10 */	b .L_8137F1E4
 .L_8137EFD8:
 /* 8137EFD8 | 48 1B 6D 61 */	bl __OSGetSystemTime
@@ -4694,10 +4726,10 @@
 .L_8137F054:
 /* 8137F054 | 38 60 00 00 */	li r3, 0x0
 /* 8137F058 | 90 6D AA 00 */	stw r3, AbortFlag@sda21(r0)
-/* 8137F05C | 80 0D A9 E4 */	lwz r0, lbl_81698A24@sda21(r0)
+/* 8137F05C | 80 0D A9 E4 */	lwz r0, Restart@sda21(r0)
 /* 8137F060 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137F064 | 41 82 01 80 */	beq .L_8137F1E4
-/* 8137F068 | 90 6D A9 E4 */	stw r3, lbl_81698A24@sda21(r0)
+/* 8137F068 | 90 6D A9 E4 */	stw r3, Restart@sda21(r0)
 /* 8137F06C | 80 0D A9 F4 */	lwz r0, FatalErrorFlag@sda21(r0)
 /* 8137F070 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137F074 | 41 82 00 10 */	beq .L_8137F084
@@ -4705,18 +4737,18 @@
 /* 8137F07C | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 /* 8137F080 | 48 00 01 64 */	b .L_8137F1E4
 .L_8137F084:
-/* 8137F084 | 80 0D A9 E8 */	lwz r0, lbl_81698A28@sda21(r0)
+/* 8137F084 | 80 0D A9 E8 */	lwz r0, PartitionOpened@sda21(r0)
 /* 8137F088 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137F08C | 41 82 00 14 */	beq .L_8137F0A0
 /* 8137F090 | 38 00 00 0F */	li r0, 0xf
-/* 8137F094 | 90 6D A9 E8 */	stw r3, lbl_81698A28@sda21(r0)
+/* 8137F094 | 90 6D A9 E8 */	stw r3, PartitionOpened@sda21(r0)
 /* 8137F098 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 /* 8137F09C | 48 00 01 48 */	b .L_8137F1E4
 .L_8137F0A0:
 /* 8137F0A0 | 80 0D B2 78 */	lwz r0, lbl_816992B8@sda21(r0)
 /* 8137F0A4 | 28 00 00 02 */	cmplwi r0, 0x2
 /* 8137F0A8 | 41 82 00 1C */	beq .L_8137F0C4
-/* 8137F0AC | 80 0D A9 A0 */	lwz r0, BS2DriveReset@sda21(r0)
+/* 8137F0AC | 80 0D A9 A0 */	lwz r0, BS2DriveReset_816989E0@sda21(r0)
 /* 8137F0B0 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137F0B4 | 41 82 00 1C */	beq .L_8137F0D0
 /* 8137F0B8 | 80 0D AA 38 */	lwz r0, lbl_81698A78@sda21(r0)
@@ -4793,7 +4825,7 @@
 /* 8137F1C0 | 90 0D A9 C8 */	stw r0, CurrentState@sda21(r0)
 .L_8137F1C4:
 /* 8137F1C4 | 38 7D 00 00 */	addi r3, r29, 0x0
-/* 8137F1C8 | 4B FF D5 51 */	bl BS2Mach_8137C718
+/* 8137F1C8 | 4B FF D5 51 */	bl CheckDVDCommandStatus
 /* 8137F1CC | 48 00 00 18 */	b .L_8137F1E4
 .L_8137F1D0:
 /* 8137F1D0 | 38 7E 02 CA */	addi r3, r30, 0x2ca
@@ -5071,19 +5103,19 @@
 
 # .data:0x3F4 | 0x8164619C | size: 0x34
 .obj jumptable_8164619C, local
-	.rel BS2Mach_8137C718, .L_8137C7D8
-	.rel BS2Mach_8137C718, .L_8137C788
-	.rel BS2Mach_8137C718, .L_8137C83C
-	.rel BS2Mach_8137C718, .L_8137C83C
-	.rel BS2Mach_8137C718, .L_8137C790
-	.rel BS2Mach_8137C718, .L_8137C79C
-	.rel BS2Mach_8137C718, .L_8137C79C
-	.rel BS2Mach_8137C718, .L_8137C834
-	.rel BS2Mach_8137C718, .L_8137C834
-	.rel BS2Mach_8137C718, .L_8137C83C
-	.rel BS2Mach_8137C718, .L_8137C83C
-	.rel BS2Mach_8137C718, .L_8137C7F8
-	.rel BS2Mach_8137C718, .L_8137C7EC
+	.rel CheckDVDCommandStatus, .L_8137C7D8
+	.rel CheckDVDCommandStatus, .L_8137C788
+	.rel CheckDVDCommandStatus, .L_8137C83C
+	.rel CheckDVDCommandStatus, .L_8137C83C
+	.rel CheckDVDCommandStatus, .L_8137C790
+	.rel CheckDVDCommandStatus, .L_8137C79C
+	.rel CheckDVDCommandStatus, .L_8137C79C
+	.rel CheckDVDCommandStatus, .L_8137C834
+	.rel CheckDVDCommandStatus, .L_8137C834
+	.rel CheckDVDCommandStatus, .L_8137C83C
+	.rel CheckDVDCommandStatus, .L_8137C83C
+	.rel CheckDVDCommandStatus, .L_8137C7F8
+	.rel CheckDVDCommandStatus, .L_8137C7EC
 .endobj jumptable_8164619C
 
 # .data:0x428 | 0x816461D0 | size: 0x2A
@@ -5599,7 +5631,7 @@
 
 # .sdata:0x0 | 0x81696578 | size: 0x4
 .obj lbl_81696578, global
-	.4byte BS2Update_810ADF80
+	.4byte viewsBuffer
 .endobj lbl_81696578
 
 # .sdata:0x4 | 0x8169657C | size: 0x8
@@ -5633,77 +5665,77 @@
 .balign 8
 
 # .sbss:0x0 | 0x81698A08 | size: 0x4
-.obj CurrentState, global
+.obj CurrentState, local
 	.skip 0x4
 .endobj CurrentState
 
 # .sbss:0x4 | 0x81698A0C | size: 0x4
-.obj Transferring, global
+.obj Transferring, local
 	.skip 0x4
 .endobj Transferring
 
 # .sbss:0x8 | 0x81698A10 | size: 0x4
-.obj BannerBuffer, global
+.obj BannerBuffer, local
 	.skip 0x4
 .endobj BannerBuffer
 
 # .sbss:0xC | 0x81698A14 | size: 0x4
-.obj BannerBufferAddr, global
+.obj BannerBufferAddr, local
 	.skip 0x4
 .endobj BannerBufferAddr
 
 # .sbss:0x10 | 0x81698A18 | size: 0x4
-.obj BannerAvailable, global
+.obj BannerAvailable, local
 	.skip 0x4
 .endobj BannerAvailable
 
 # .sbss:0x14 | 0x81698A1C | size: 0x4
-.obj MemAllocator, global
+.obj MemAllocator, local
 	.skip 0x4
 .endobj MemAllocator
 
 # .sbss:0x18 | 0x81698A20 | size: 0x4
-.obj StartingGame, global
+.obj StartingGame, local
 	.skip 0x4
 .endobj StartingGame
 
 # .sbss:0x1C | 0x81698A24 | size: 0x4
-.obj lbl_81698A24, global
+.obj Restart, local
 	.skip 0x4
-.endobj lbl_81698A24
+.endobj Restart
 
 # .sbss:0x20 | 0x81698A28 | size: 0x4
-.obj lbl_81698A28, global
+.obj PartitionOpened, local
 	.skip 0x4
-.endobj lbl_81698A28
+.endobj PartitionOpened
 
 # .sbss:0x24 | 0x81698A2C | size: 0x4
-.obj lbl_81698A2C, global
+.obj CacheFileOpened, local
 	.skip 0x4
-.endobj lbl_81698A2C
+.endobj CacheFileOpened
 
 # .sbss:0x28 | 0x81698A30 | size: 0x4
-.obj lbl_81698A30, global
+.obj StartLoadingTitle, local
 	.skip 0x4
-.endobj lbl_81698A30
+.endobj StartLoadingTitle
 
 # .sbss:0x2C | 0x81698A34 | size: 0x4
-.obj FatalErrorFlag, global
+.obj FatalErrorFlag, local
 	.skip 0x4
 .endobj FatalErrorFlag
 
 # .sbss:0x30 | 0x81698A38 | size: 0x4
-.obj RetryErrorFlag, global
+.obj RetryErrorFlag, local
 	.skip 0x4
 .endobj RetryErrorFlag
 
 # .sbss:0x34 | 0x81698A3C | size: 0x4
-.obj UpdateErrorFlag, global
+.obj UpdateErrorFlag, local
 	.skip 0x4
 .endobj UpdateErrorFlag
 
 # .sbss:0x38 | 0x81698A40 | size: 0x4
-.obj AbortFlag, global
+.obj AbortFlag, local
 	.skip 0x4
 .endobj AbortFlag
 
@@ -5718,9 +5750,9 @@
 .endobj lbl_81698A48
 
 # .sbss:0x44 | 0x81698A4C | size: 0x4
-.obj lbl_81698A4C, global
+.obj NandTransferring, global
 	.skip 0x4
-.endobj lbl_81698A4C
+.endobj NandTransferring
 
 # .sbss:0x48 | 0x81698A50 | size: 0x4
 .obj lbl_81698A50, global

@@ -4049,11 +4049,16 @@
 	.string "IMET"
 .endobj lbl_8169608B
 
-# .sdata:0x8 | 0x81696090 | size: 0x8
+# .sdata:0x8 | 0x81696090 | size: 0x5
 .obj lbl_81696090, global
-	.4byte 0x4E414E44
-	.4byte 0x00000000
+	.string "NAND"
 .endobj lbl_81696090
+
+# .sdata:0xD | 0x81696095 | size: 0x3
+.obj gap_11_81696095_sdata, global
+.hidden gap_11_81696095_sdata
+	.byte 0x00, 0x00, 0x00
+.endobj gap_11_81696095_sdata
 
 # 0x81698690..0x816986A8 | size: 0x18
 .section .sbss, "wa", @nobits

@@ -13,7 +13,7 @@ SYSTEM_OBJECTS	=	$(BS2_OBJASM_PATH)/system/rvl_dec.o \
 					$(BS2_OBJASM_PATH)/system/iplException.o \
 					$(BS2_OBJ_PATH)/system/iplMessage.o \
 					$(BS2_OBJ_PATH)/system/iplMessageManager.o \
-					$(BS2_OBJASM_PATH)/system/iplNigaoeManager.o \
+					$(BS2_OBJ_PATH)/system/iplNigaoeManager.o \
 					$(BS2_OBJ_PATH)/system/iplNigaoe.o \
 					$(BS2_OBJASM_PATH)/system/iplCdbManager.o \
 					$(BS2_OBJASM_PATH)/system/iplCdbWrapper.o \
@@ -52,7 +52,7 @@ SYSTEM_OBJECTS	=	$(BS2_OBJASM_PATH)/system/rvl_dec.o \
 					$(DATA_OUT_ROOT)/ipl_error_chn.bmg.o \
 					$(DATA_OUT_ROOT)/fatalDlg.ash.o
 
-DEPENDENCIES += $(SYSTEM_OBJECTS:.o=.d)
+ALL_OBJECTS += $(SYSTEM_OBJECTS)
 
 $(BS2_OBJ_PATH)/system/%.o: $(BS2_SRC_PATH)/system/%.c
 	$(call BuildCSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

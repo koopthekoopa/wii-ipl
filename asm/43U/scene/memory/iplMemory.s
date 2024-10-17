@@ -929,9 +929,9 @@
 /* 813C47F8 | 4B FE 2C DD */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
 /* 813C47FC | 48 00 01 BC */	b .L_813C49B8
 .L_813C4800:
-/* 813C4800 | 3C 80 81 61 */	lis r4, lbl_81610328@ha
+/* 813C4800 | 3C 80 81 61 */	lis r4, scNumber__Q23ipl5scene@ha
 /* 813C4804 | 38 60 00 05 */	li r3, 0x5
-/* 813C4808 | 38 84 03 28 */	addi r4, r4, lbl_81610328@l
+/* 813C4808 | 38 84 03 28 */	addi r4, r4, scNumber__Q23ipl5scene@l
 /* 813C480C | 38 C1 00 10 */	addi r6, r1, 0x10
 /* 813C4810 | 38 A4 FF FE */	subi r5, r4, 0x2
 /* 813C4814 | 7C 69 03 A6 */	mtctr r3
@@ -1096,9 +1096,9 @@
 /* 813C4A60 | 4B FE 2A 75 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
 /* 813C4A64 | 48 00 02 08 */	b .L_813C4C6C
 .L_813C4A68:
-/* 813C4A68 | 3C 60 81 61 */	lis r3, lbl_8161033C@ha
+/* 813C4A68 | 3C 60 81 61 */	lis r3, scNumber2__Q23ipl5scene@ha
 /* 813C4A6C | 38 00 00 05 */	li r0, 0x5
-/* 813C4A70 | 38 63 03 3C */	addi r3, r3, lbl_8161033C@l
+/* 813C4A70 | 38 63 03 3C */	addi r3, r3, scNumber2__Q23ipl5scene@l
 /* 813C4A74 | 38 C1 00 14 */	addi r6, r1, 0x14
 /* 813C4A78 | 38 A3 FF FE */	subi r5, r3, 0x2
 /* 813C4A7C | 7C 09 03 A6 */	mtctr r0
@@ -3855,7 +3855,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x81610328 | size: 0x14
-.obj lbl_81610328, global
+# ipl::scene::scNumber
+.obj scNumber__Q23ipl5scene, local
 	.2byte 0x0030
 	.2byte 0x0031
 	.2byte 0x0032
@@ -3866,10 +3867,11 @@
 	.2byte 0x0037
 	.2byte 0x0038
 	.2byte 0x0039
-.endobj lbl_81610328
+.endobj scNumber__Q23ipl5scene
 
 # .rodata:0x14 | 0x8161033C | size: 0x14
-.obj lbl_8161033C, global
+# ipl::scene::scNumber2
+.obj scNumber2__Q23ipl5scene, local
 	.2byte 0x0030
 	.2byte 0x0031
 	.2byte 0x0032
@@ -3880,7 +3882,7 @@
 	.2byte 0x0037
 	.2byte 0x0038
 	.2byte 0x0039
-.endobj lbl_8161033C
+.endobj scNumber2__Q23ipl5scene
 
 # 0x81650C90..0x81651250 | size: 0x5C0
 .data
@@ -4377,13 +4379,17 @@
 	.4byte destroy__Q33ipl5scene4BaseFv
 .endobj __vt__Q33ipl5scene6Memory
 
-# .data:0x5B4 | 0x81651244 | size: 0xC
+# .data:0x5B4 | 0x81651244 | size: 0xA
 # ipl::scene::SavedataBox::@STRING@setTranslate(const nw4r::math::VEC3&)
 .obj "@STRING@setTranslate__Q33ipl5scene11SavedataBoxFRCQ34nw4r4math4VEC3", global
-	.4byte 0x4E5F4461
-	.4byte 0x74615F30
-	.4byte 0x30000000
+	.string "N_Data_00"
 .endobj "@STRING@setTranslate__Q33ipl5scene11SavedataBoxFRCQ34nw4r4math4VEC3"
+
+# .data:0x5BE | 0x8165124E | size: 0x2
+.obj gap_08_8165124E_data, global
+.hidden gap_08_8165124E_data
+	.2byte 0x0000
+.endobj gap_08_8165124E_data
 
 # 0x81694A48..0x81694A58 | size: 0x10
 .section .sdata2, "a"

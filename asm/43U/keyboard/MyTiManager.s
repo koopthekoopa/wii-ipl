@@ -6009,11 +6009,16 @@
 	.float 1
 .endobj lbl_81694E6C
 
-# .sdata2:0x18 | 0x81694E70 | size: 0x8
+# .sdata2:0x18 | 0x81694E70 | size: 0x4
 .obj lbl_81694E70, global
 	.float inf
-	.float 0
 .endobj lbl_81694E70
+
+# .sdata2:0x1C | 0x81694E74 | size: 0x4
+.obj gap_09_81694E74_sdata2, global
+.hidden gap_09_81694E74_sdata2
+	.4byte 0x00000000
+.endobj gap_09_81694E74_sdata2
 
 # 0x816974C8..0x816974E0 | size: 0x18
 .section .sdata, "wa"

@@ -1891,7 +1891,13 @@
 	.skip 0x4
 .endobj WrBufferMutex
 
-# .sbss:0x8 | 0x81698DD0 | size: 0x8
+# .sbss:0x8 | 0x81698DD0 | size: 0x4
 .obj InstanceIdGen, local
-	.skip 0x8
+	.skip 0x4
 .endobj InstanceIdGen
+
+# .sbss:0xC | 0x81698DD4 | size: 0x4
+.obj gap_12_81698DD4_sbss, global
+.hidden gap_12_81698DD4_sbss
+	.skip 0x4
+.endobj gap_12_81698DD4_sbss

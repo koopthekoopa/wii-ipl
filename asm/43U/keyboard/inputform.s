@@ -15763,11 +15763,16 @@
 	.double 4503599627370496
 .endobj lbl_81694D80
 
-# .sdata2:0x60 | 0x81694D88 | size: 0x8
+# .sdata2:0x60 | 0x81694D88 | size: 0x4
 .obj lbl_81694D88, global
 	.float 15
-	.float 0
 .endobj lbl_81694D88
+
+# .sdata2:0x64 | 0x81694D8C | size: 0x4
+.obj gap_09_81694D8C_sdata2, global
+.hidden gap_09_81694D8C_sdata2
+	.4byte 0x00000000
+.endobj gap_09_81694D8C_sdata2
 
 # 0x81697398..0x816973C8 | size: 0x30
 .section .sdata, "wa"

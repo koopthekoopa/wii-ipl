@@ -318,25 +318,29 @@
 	.string "www_arcreader.cpp"
 .endobj lbl_81644B0D
 
-# .data:0x6F | 0x81644B1F | size: 0x21
+# .data:0x6F | 0x81644B1F | size: 0x1D
 .obj lbl_81644B1F, global
-	.4byte 0x20746865
-	.4byte 0x2066696C
-	.4byte 0x65206361
-	.4byte 0x6E6E6F74
-	.4byte 0x20726567
-	.4byte 0x69737465
-	.4byte 0x7265640A
-	.4byte 0x00000000
-	.byte 0x00
+	.string " the file cannot registered\n"
 .endobj lbl_81644B1F
+
+# .data:0x8C | 0x81644B3C | size: 0x4
+.obj gap_08_81644B3C_data, global
+.hidden gap_08_81644B3C_data
+	.4byte 0x00000000
+.endobj gap_08_81644B3C_data
 
 # 0x816989A8..0x816989B0 | size: 0x8
 .section .sbss, "wa", @nobits
 .balign 8
 
-# .sbss:0x0 | 0x816989A8 | size: 0x8
+# .sbss:0x0 | 0x816989A8 | size: 0x4
 # www::arcreader::sStatus
 .obj sStatus__Q23www9arcreader, global
-	.skip 0x8
+	.skip 0x4
 .endobj sStatus__Q23www9arcreader
+
+# .sbss:0x4 | 0x816989AC | size: 0x4
+.obj gap_12_816989AC_sbss, global
+.hidden gap_12_816989AC_sbss
+	.skip 0x4
+.endobj gap_12_816989AC_sbss

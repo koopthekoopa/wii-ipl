@@ -2,9 +2,11 @@
 #define RFL_INTERVAL_ICON_H
 
 #include <decomp_types.h>
+
 #include <revolution/types.h>
-#include <RVLFacelib/RFL_Icon.h>
+
 #include <RVLFacelib/private/RFLi_Types.h>
+#include <RVLFacelib/RFL_Icon.h>
 
 #ifdef __cplusplus
 extern "C" {

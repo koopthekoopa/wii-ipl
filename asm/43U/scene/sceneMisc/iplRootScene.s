@@ -177,7 +177,7 @@
 .data
 .balign 8
 
-# .data:0x0 | 0x81654038 | size: 0x50
+# .data:0x0 | 0x81654038 | size: 0x4C
 # ipl::scene::RootScene::__vtable
 .obj __vt__Q33ipl5scene9RootScene, global
 	.4byte 0x00000000
@@ -199,5 +199,10 @@
 	.4byte calc__Q33ipl5scene4BaseFv
 	.4byte draw__Q33ipl5scene4BaseFv
 	.4byte destroy__Q33ipl5scene4BaseFv
-	.4byte 0x00000000
 .endobj __vt__Q33ipl5scene9RootScene
+
+# .data:0x4C | 0x81654084 | size: 0x4
+.obj gap_08_81654084_data, global
+.hidden gap_08_81654084_data
+	.4byte 0x00000000
+.endobj gap_08_81654084_data

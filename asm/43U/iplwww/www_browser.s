@@ -1941,13 +1941,17 @@
 	.4byte InitMessageQueue__Q37ext_ead3www15ut_message_baseFPPvl
 .endobj "__vt__Q37ext_ead3www57ut_message_cmd<Q47ext_ead3www13BrowserThread9CmdPacket,8>"
 
-# .data:0x344 | 0x81642D04 | size: 0xC
+# .data:0x344 | 0x81642D04 | size: 0xB
 # ext_ead::www::print::TickTimer::@STRING@report(const char*, ...)
 .obj "@STRING@report__Q47ext_ead3www5print9TickTimerFPCce", global
-	.4byte 0x203A2025
-	.4byte 0x645B6D73
-	.4byte 0x5D0A0000
+	.string " : %d[ms]\n"
 .endobj "@STRING@report__Q47ext_ead3www5print9TickTimerFPCce"
+
+# .data:0x34F | 0x81642D0F | size: 0x1
+.obj gap_08_81642D0F_data, global
+.hidden gap_08_81642D0F_data
+	.byte 0x00
+.endobj gap_08_81642D0F_data
 
 # 0x816962C8..0x816962F0 | size: 0x28
 .section .sdata, "wa"
@@ -1980,12 +1984,16 @@
 	.byte 0x00
 .endobj lbl_816962E3
 
-# .sdata:0x1C | 0x816962E4 | size: 0xC
+# .sdata:0x1C | 0x816962E4 | size: 0x8
 .obj lbl_816962E4, global
-	.4byte 0x4552524F
-	.4byte 0x523F0A00
-	.4byte 0x00000000
+	.string "ERROR?\n"
 .endobj lbl_816962E4
+
+# .sdata:0x24 | 0x816962EC | size: 0x4
+.obj gap_11_816962EC_sdata, global
+.hidden gap_11_816962EC_sdata
+	.4byte 0x00000000
+.endobj gap_11_816962EC_sdata
 
 # 0x81698798..0x81698960 | size: 0x1C8
 .section .sbss, "wa", @nobits
@@ -2551,8 +2559,14 @@
 	.skip 0x4
 .endobj WWWAddProtocol
 
-# .sbss:0x1C0 | 0x81698958 | size: 0x8
+# .sbss:0x1C0 | 0x81698958 | size: 0x4
 # ext_ead::www::BrowserThread::classInitialized_
 .obj classInitialized___Q37ext_ead3www13BrowserThread, global
-	.skip 0x8
+	.skip 0x4
 .endobj classInitialized___Q37ext_ead3www13BrowserThread
+
+# .sbss:0x1C4 | 0x8169895C | size: 0x4
+.obj gap_12_8169895C_sbss, global
+.hidden gap_12_8169895C_sbss
+	.skip 0x4
+.endobj gap_12_8169895C_sbss

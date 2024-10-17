@@ -20,7 +20,7 @@ CHANS_OBJS	=	$(BS2_OBJASM_PATH)/channelScript/CHANSVm.o \
 				$(BS2_OBJASM_PATH)/channelScript/iplCSSound.o \
 				$(BS2_OBJASM_PATH)/channelScript/iplCSImage.o
 
-DEPENDENCIES += $(CHANS_OBJS:.o=.d)
+ALL_OBJECTS += $(CHANS_OBJS)
 
 $(BS2_OBJ_PATH)/channelScript/%.o: $(BS2_SRC_PATH)/channelScript/%.cpp
 	$(call BuildCPPSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

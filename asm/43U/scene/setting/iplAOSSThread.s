@@ -587,11 +587,16 @@
 .section .sdata, "wa"
 .balign 8
 
-# .sdata:0x0 | 0x816971F0 | size: 0x8
+# .sdata:0x0 | 0x816971F0 | size: 0x4
 .obj lbl_816971F0, global
-	.4byte 0x57696900
-	.4byte 0x00000000
+	.string "Wii"
 .endobj lbl_816971F0
+
+# .sdata:0x4 | 0x816971F4 | size: 0x4
+.obj gap_11_816971F4_sdata, global
+.hidden gap_11_816971F4_sdata
+	.4byte 0x00000000
+.endobj gap_11_816971F4_sdata
 
 # 0x81698C28..0x81698C38 | size: 0x10
 .section .sbss, "wa", @nobits
@@ -607,7 +612,13 @@
 	.skip 0x4
 .endobj lbl_81698C2C
 
-# .sbss:0x8 | 0x81698C30 | size: 0x8
+# .sbss:0x8 | 0x81698C30 | size: 0x4
 .obj lbl_81698C30, global
-	.skip 0x8
+	.skip 0x4
 .endobj lbl_81698C30
+
+# .sbss:0xC | 0x81698C34 | size: 0x4
+.obj gap_12_81698C34_sbss, global
+.hidden gap_12_81698C34_sbss
+	.skip 0x4
+.endobj gap_12_81698C34_sbss

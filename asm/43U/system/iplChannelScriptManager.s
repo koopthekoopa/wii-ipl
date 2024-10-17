@@ -647,10 +647,16 @@
 .data
 .balign 8
 
-# .data:0x0 | 0x81634B08 | size: 0x188
+# .data:0x0 | 0x81634B08 | size: 0x187
 .obj lbl_81634B08, global
-	.string "iplChannelScriptManager.cpp\000CHANSVmSystemMenuInit error\n\000VmLayoutInit error\n\000VmPaneInit error\n\000VmMaterialInit error\n\000VmTextureInit error\n\000VmSaveDataInit error\n\000VmVec3Init error\n\000VmMTX34Init error\n\000VmGXInit error\n\000VmTextWriterInit error\n\000VmFontInit error\n\000VmRectInit error\n\000VmColorInit error\n\000VmColorS10Init error\n\000VmSizeInit error\n\000VmAnimInit error\n\000VmSoundInit error\n\000VmIplImageInit error\n\000"
+	.string "iplChannelScriptManager.cpp\000CHANSVmSystemMenuInit error\n\000VmLayoutInit error\n\000VmPaneInit error\n\000VmMaterialInit error\n\000VmTextureInit error\n\000VmSaveDataInit error\n\000VmVec3Init error\n\000VmMTX34Init error\n\000VmGXInit error\n\000VmTextWriterInit error\n\000VmFontInit error\n\000VmRectInit error\n\000VmColorInit error\n\000VmColorS10Init error\n\000VmSizeInit error\n\000VmAnimInit error\n\000VmSoundInit error\n\000VmIplImageInit error\n"
 .endobj lbl_81634B08
+
+# .data:0x187 | 0x81634C8F | size: 0x1
+.obj gap_08_81634C8F_data, global
+.hidden gap_08_81634C8F_data
+	.byte 0x00
+.endobj gap_08_81634C8F_data
 
 # 0x816986A8..0x816986B0 | size: 0x8
 .section .sbss, "wa", @nobits

@@ -1253,20 +1253,17 @@
 	.string "SDVFWorker: SD card ejected  !!   %c drive\n"
 .endobj lbl_8163978A
 
-# .data:0x30E | 0x816397B6 | size: 0x2A
+# .data:0x30E | 0x816397B6 | size: 0x23
 .obj lbl_816397B6, global
-	.4byte 0x53445646
-	.4byte 0x576F726B
-	.4byte 0x65723A20
-	.4byte 0x4641206C
-	.4byte 0x69627261
-	.4byte 0x72792065
-	.4byte 0x72726F72
-	.4byte 0x2E5B2564
-	.4byte 0x5D0A0000
-	.4byte 0x00000000
-	.2byte 0x0000
+	.string "SDVFWorker: FA library error.[%d]\n"
 .endobj lbl_816397B6
+
+# .data:0x331 | 0x816397D9 | size: 0x7
+.obj gap_08_816397D9_data, global
+.hidden gap_08_816397D9_data
+	.4byte 0x00000000
+	.byte 0x00, 0x00, 0x00
+.endobj gap_08_816397D9_data
 
 # 0x816986F8..0x81698700 | size: 0x8
 .section .sbss, "wa", @nobits

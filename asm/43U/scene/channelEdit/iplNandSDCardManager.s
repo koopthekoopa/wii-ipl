@@ -3439,16 +3439,16 @@
 	.string "NandSDWorker"
 .endobj lbl_8164D928
 
-# .data:0x175 | 0x8164D935 | size: 0x1B
+# .data:0x175 | 0x8164D935 | size: 0x19
 .obj lbl_8164D935, global
-	.4byte 0x69706C4E
-	.4byte 0x616E6453
-	.4byte 0x44436172
-	.4byte 0x644D616E
-	.4byte 0x61676572
-	.4byte 0x2E637070
-	.byte 0x00, 0x00, 0x00
+	.string "iplNandSDCardManager.cpp"
 .endobj lbl_8164D935
+
+# .data:0x18E | 0x8164D94E | size: 0x2
+.obj gap_08_8164D94E_data, global
+.hidden gap_08_8164D94E_data
+	.2byte 0x0000
+.endobj gap_08_8164D94E_data
 
 # 0x81694938..0x81694948 | size: 0x10
 .section .sdata2, "a"

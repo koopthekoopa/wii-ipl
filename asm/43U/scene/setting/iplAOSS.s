@@ -739,7 +739,13 @@
 	.skip 0x4
 .endobj lbl_81698C54
 
-# .sbss:0x20 | 0x81698C58 | size: 0x8
+# .sbss:0x20 | 0x81698C58 | size: 0x4
 .obj lbl_81698C58, global
-	.skip 0x8
+	.skip 0x4
 .endobj lbl_81698C58
+
+# .sbss:0x24 | 0x81698C5C | size: 0x4
+.obj gap_12_81698C5C_sbss, global
+.hidden gap_12_81698C5C_sbss
+	.skip 0x4
+.endobj gap_12_81698C5C_sbss

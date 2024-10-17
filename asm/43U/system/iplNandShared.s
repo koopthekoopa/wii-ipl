@@ -421,7 +421,7 @@
 	.string "iplNandShared.cpp"
 .endobj lbl_81634DA6
 
-# .data:0x28 | 0x81634DB8 | size: 0x58
+# .data:0x28 | 0x81634DB8 | size: 0x54
 # ipl::nand::SharedFile::__vtable
 .obj __vt__Q33ipl4nand10SharedFile, global
 	.4byte 0x00000000
@@ -445,15 +445,25 @@
 	.4byte isAshCompressed__Q33ipl4nand4FileFPCUc
 	.4byte isLz7Compressed__Q33ipl4nand4FileFPCUc
 	.4byte callback___Q33ipl4nand4FileFv
-	.4byte 0x00000000
 .endobj __vt__Q33ipl4nand10SharedFile
+
+# .data:0x7C | 0x81634E0C | size: 0x4
+.obj gap_08_81634E0C_data, global
+.hidden gap_08_81634E0C_data
+	.4byte 0x00000000
+.endobj gap_08_81634E0C_data
 
 # 0x816960A8..0x816960B0 | size: 0x8
 .section .sdata, "wa"
 .balign 8
 
-# .sdata:0x0 | 0x816960A8 | size: 0x8
+# .sdata:0x0 | 0x816960A8 | size: 0x4
 .obj lbl_816960A8, global
 	.4byte 0x45530000
-	.4byte 0x00000000
 .endobj lbl_816960A8
+
+# .sdata:0x4 | 0x816960AC | size: 0x4
+.obj gap_11_816960AC_sdata, global
+.hidden gap_11_816960AC_sdata
+	.4byte 0x00000000
+.endobj gap_11_816960AC_sdata

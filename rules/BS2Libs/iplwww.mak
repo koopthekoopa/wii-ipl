@@ -8,7 +8,7 @@ IPL_WWW_OBJECTS	=	$(BS2_OBJASM_PATH)/iplwww/www_browser.o \
 					$(BS2_OBJASM_PATH)/iplwww/www_wiisetting.o \
 					$(BS2_OBJASM_PATH)/iplwww/www_arcreader.o
 
-DEPENDENCIES += $(IPL_WWW_OBJECTS:.o=.d)
+ALL_OBJECTS += $(IPL_WWW_OBJECTS)
 
 $(BS2_OBJ_PATH)/iplwww/%.o: $(BS2_SRC_PATH)/iplwww/%.cpp
 	$(call BuildCPPSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

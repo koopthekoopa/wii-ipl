@@ -23,7 +23,7 @@ RFL_OBJECTS     	=	$(RFL_OBJASM_PATH)/RFL_System.o \
                         $(RFL_OBJASM_PATH)/RFL_NWC24.o \
                         $(RFL_OBJASM_PATH)/RFL_Format.o
 
-DEPENDENCIES += $(RFL_OBJECTS:.o=.d)
+ALL_OBJECTS += $(RFL_OBJECTS)
 
 $(RFL_OBJ_PATH)/%.o: $(RFL_SRC_PATH)/%.c
 	$(call BuildCSources,$(RFL_CCPATH),$(RFL_CFLAGS),$(RFL_INC_PATHS),$(INCLUDE_ROOT))

@@ -156,7 +156,7 @@ namespace ipl {
             /** @return The fader object. */
             static EGG::ColorFader*     getSceneFader()         { return smArg.mpScnFader; }
             /** @return The Mii Archive Data */
-            static void*                getRFLArc()             { return smArg.mpFaceArcBuffer; }
+            static nand::File*          getRFLArc()             { return smArg.mpFaceArcBuffer; }
             /** @return The English message data. */
             static nand::File*          getEngMsg()             { return smArg.mpEngMsg; }
             /** @return The French message data. */

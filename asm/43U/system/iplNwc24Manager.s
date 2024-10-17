@@ -3218,10 +3218,16 @@
 	.byte 0xC8
 .endobj lbl_816944EA
 
-# .sdata2:0x23 | 0x816944EB | size: 0x5
+# .sdata2:0x23 | 0x816944EB | size: 0x1
 .obj lbl_816944EB, global
-	.byte 0xF0, 0x00, 0x00, 0x00, 0x00
+	.byte 0xF0
 .endobj lbl_816944EB
+
+# .sdata2:0x24 | 0x816944EC | size: 0x4
+.obj gap_09_816944EC_sdata2, global
+.hidden gap_09_816944EC_sdata2
+	.4byte 0x00000000
+.endobj gap_09_816944EC_sdata2
 
 # 0x816960F0..0x81696100 | size: 0x10
 .section .sdata, "wa"
@@ -3232,9 +3238,13 @@
 	.string16 "\n\n"
 .endobj lbl_816960F0
 
-# .sdata:0x6 | 0x816960F6 | size: 0xA
+# .sdata:0x6 | 0x816960F6 | size: 0x6
 .obj lbl_816960F6, global
-	.4byte 0x4E574332
-	.4byte 0x34000000
-	.2byte 0x0000
+	.string "NWC24"
 .endobj lbl_816960F6
+
+# .sdata:0xC | 0x816960FC | size: 0x4
+.obj gap_11_816960FC_sdata, global
+.hidden gap_11_816960FC_sdata
+	.4byte 0x00000000
+.endobj gap_11_816960FC_sdata

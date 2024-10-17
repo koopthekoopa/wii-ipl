@@ -1490,7 +1490,7 @@
 	.4byte updateInput__Q49textinput8keyboard5hwkey10HWKeyboardFRQ39textinput5input10HKBManager
 .endobj __vt__Q49textinput8keyboard5hwkey10HWKeyboard
 
-# .data:0x120 | 0x81669018 | size: 0x38
+# .data:0x120 | 0x81669018 | size: 0x34
 # textinput::TiLayout::__vtable
 .obj __vt__Q29textinput8TiLayout, global
 	.4byte 0x00000000
@@ -1506,8 +1506,13 @@
 	.4byte fn_815206D8
 	.4byte fn_815206F8
 	.4byte fn_8152077C
-	.4byte 0x00000000
 .endobj __vt__Q29textinput8TiLayout
+
+# .data:0x154 | 0x8166904C | size: 0x4
+.obj gap_08_8166904C_data, global
+.hidden gap_08_8166904C_data
+	.4byte 0x00000000
+.endobj gap_08_8166904C_data
 
 # 0x81694EF8..0x81694F08 | size: 0x10
 .section .sdata2, "a"
@@ -1544,7 +1549,14 @@
 	.byte 0x01
 .endobj lbl_81697571
 
-# .sdata:0x2 | 0x81697572 | size: 0x6
+# .sdata:0x2 | 0x81697572 | size: 0x1
 .obj lbl_81697572, global
-	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+	.byte 0x00
 .endobj lbl_81697572
+
+# .sdata:0x3 | 0x81697573 | size: 0x5
+.obj gap_11_81697573_sdata, global
+.hidden gap_11_81697573_sdata
+	.4byte 0x00000000
+	.byte 0x00
+.endobj gap_11_81697573_sdata

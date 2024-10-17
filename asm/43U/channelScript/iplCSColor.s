@@ -153,10 +153,10 @@
 /* 8145D7D8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8145D7DC | 7C 64 1B 78 */	mr r4, r3
 /* 8145D7E0 | 41 82 00 20 */	beq .L_8145D800
-/* 8145D7E4 | 3C A0 81 61 */	lis r5, lbl_81617780@ha
+/* 8145D7E4 | 3C A0 81 61 */	lis r5, scPropertyList__Q33ipl2cs5color@ha
 /* 8145D7E8 | 7F C3 F3 78 */	mr r3, r30
 /* 8145D7EC | 38 C0 00 04 */	li r6, 0x4
-/* 8145D7F0 | 38 A5 77 80 */	addi r5, r5, lbl_81617780@l
+/* 8145D7F0 | 38 A5 77 80 */	addi r5, r5, scPropertyList__Q33ipl2cs5color@l
 /* 8145D7F4 | 4B FE F4 65 */	bl CHANSVmAddNativePropertyAccessorsList
 /* 8145D7F8 | 7C 60 00 34 */	cntlzw r0, r3
 /* 8145D7FC | 54 1F D9 7E */	srwi r31, r0, 5
@@ -491,7 +491,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x81617780 | size: 0x30
-.obj lbl_81617780, global
+# ipl::cs::color::scPropertyList
+.obj scPropertyList__Q33ipl2cs5color, local
 	.4byte lbl_8169794E
 	.4byte "get<0>__Q33ipl2cs5colorFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
 	.4byte "set<0>__Q33ipl2cs5colorFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
@@ -504,7 +505,7 @@
 	.4byte lbl_81697954
 	.4byte "get<3>__Q33ipl2cs5colorFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
 	.4byte "set<3>__Q33ipl2cs5colorFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
-.endobj lbl_81617780
+.endobj scPropertyList__Q33ipl2cs5color
 
 # 0x81697948..0x81697958 | size: 0x10
 .section .sdata, "wa"
@@ -530,7 +531,13 @@
 	.string "b"
 .endobj lbl_81697952
 
-# .sdata:0xC | 0x81697954 | size: 0x4
+# .sdata:0xC | 0x81697954 | size: 0x2
 .obj lbl_81697954, global
-	.4byte 0x61000000
+	.string "a"
 .endobj lbl_81697954
+
+# .sdata:0xE | 0x81697956 | size: 0x2
+.obj gap_11_81697956_sdata, global
+.hidden gap_11_81697956_sdata
+	.2byte 0x0000
+.endobj gap_11_81697956_sdata

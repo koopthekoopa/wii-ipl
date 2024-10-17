@@ -6,7 +6,7 @@ CHANNEL_EDIT_OBJECTS    =	$(BS2_OBJASM_PATH)/scene/channelEdit/iplChannelEdit.o 
                             $(BS2_OBJASM_PATH)/scene/channelEdit/iplNandSDCardManager.o \
                             $(BS2_OBJASM_PATH)/scene/channelEdit/iplThumbnail.o
 
-DEPENDENCIES += $(CHANNEL_EDIT_OBJECTS:.o=.d)
+ALL_OBJECTS += $(CHANNEL_EDIT_OBJECTS)
 
 $(BS2_OBJ_PATH)/scene/channelEdit/%.o: $(BS2_SRC_PATH)/scene/channelEdit/%.cpp
 	$(call BuildCPPSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

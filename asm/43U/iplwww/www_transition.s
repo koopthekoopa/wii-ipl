@@ -343,15 +343,16 @@
 	.string "Left Scroll Set!!\n"
 .endobj lbl_81644075
 
-# .data:0x98 | 0x81644088 | size: 0x18
+# .data:0x98 | 0x81644088 | size: 0x15
 .obj lbl_81644088, global
-	.4byte 0x52696768
-	.4byte 0x74205363
-	.4byte 0x726F6C6C
-	.4byte 0x20536574
-	.4byte 0x2E21210A
-	.4byte 0x00000000
+	.string "Right Scroll Set.!!\n"
 .endobj lbl_81644088
+
+# .data:0xAD | 0x8164409D | size: 0x3
+.obj gap_08_8164409D_data, global
+.hidden gap_08_8164409D_data
+	.byte 0x00, 0x00, 0x00
+.endobj gap_08_8164409D_data
 
 # 0x81696300..0x81696310 | size: 0x10
 .section .sdata, "wa"
@@ -364,11 +365,16 @@
 	.4byte 0x00000000
 .endobj globalNames__Q23www9trasition
 
-# .sdata:0x8 | 0x81696308 | size: 0x8
+# .sdata:0x8 | 0x81696308 | size: 0x4
 .obj lbl_81696308, global
 	.4byte 0x00000000
-	.4byte 0x00000000
 .endobj lbl_81696308
+
+# .sdata:0xC | 0x8169630C | size: 0x4
+.obj gap_11_8169630C_sdata, global
+.hidden gap_11_8169630C_sdata
+	.4byte 0x00000000
+.endobj gap_11_8169630C_sdata
 
 # 0x81698978..0x81698980 | size: 0x8
 .section .sbss, "wa", @nobits

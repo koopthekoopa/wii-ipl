@@ -1177,7 +1177,7 @@
 /* 81446AB4 | 48 00 00 95 */	bl addPane___Q39textinput3gui11PaneManagerFPQ34nw4r3lyt4Pane
 /* 81446AB8 | 3B 18 00 10 */	addi r24, r24, 0x10
 /* 81446ABC | 7F 03 C3 78 */	mr r3, r24
-/* 81446AC0 | 4B FA 8C 61 */	bl ipl_813EF720
+/* 81446AC0 | 4B FA 8C 61 */	bl iplSDMemory_813EF720
 /* 81446AC4 | 7C 79 1B 78 */	mr r25, r3
 /* 81446AC8 | 3B 18 00 04 */	addi r24, r24, 0x4
 /* 81446ACC | 48 00 00 24 */	b .L_81446AF0
@@ -1195,7 +1195,7 @@
 /* 81446AF4 | 38 61 00 08 */	addi r3, r1, 0x8
 /* 81446AF8 | 38 81 00 0C */	addi r4, r1, 0xc
 /* 81446AFC | 93 21 00 08 */	stw r25, 0x8(r1)
-/* 81446B00 | 4B FA 8C 31 */	bl ipl_813EF730
+/* 81446B00 | 4B FA 8C 31 */	bl iplSDMemory_813EF730
 /* 81446B04 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81446B08 | 40 82 FF C8 */	bne .L_81446AD0
 /* 81446B0C | 83 7B 00 00 */	lwz r27, 0x0(r27)
@@ -1888,7 +1888,7 @@
 	.4byte setDraggingButton__Q39textinput3gui10GUIManagerFUl
 .endobj __vt__Q39textinput3gui10GUIManager
 
-# .data:0x110 | 0x81668E78 | size: 0x68
+# .data:0x110 | 0x81668E78 | size: 0x64
 # textinput::gui::GUIComponent::__vtable
 .obj __vt__Q39textinput3gui12GUIComponent, global
 	.4byte 0x00000000
@@ -1916,8 +1916,13 @@
 	.4byte isVisible__Q39textinput3gui12GUIComponentFv
 	.4byte getFlightDuration__Q39textinput3gui12GUIComponentFi
 	.4byte setFlightDuration__Q39textinput3gui12GUIComponentFiUs
-	.4byte 0x00000000
 .endobj __vt__Q39textinput3gui12GUIComponent
+
+# .data:0x174 | 0x81668EDC | size: 0x4
+.obj gap_08_81668EDC_data, global
+.hidden gap_08_81668EDC_data
+	.4byte 0x00000000
+.endobj gap_08_81668EDC_data
 
 # 0x81694ED0..0x81694EF8 | size: 0x28
 .section .sdata2, "a"
@@ -1974,8 +1979,13 @@
 	.byte 0xFF
 .endobj lbl_81694EEF
 
-# .sdata2:0x20 | 0x81694EF0 | size: 0x8
+# .sdata2:0x20 | 0x81694EF0 | size: 0x4
 .obj lbl_81694EF0, global
 	.float 0.5
-	.float 0
 .endobj lbl_81694EF0
+
+# .sdata2:0x24 | 0x81694EF4 | size: 0x4
+.obj gap_09_81694EF4_sdata2, global
+.hidden gap_09_81694EF4_sdata2
+	.4byte 0x00000000
+.endobj gap_09_81694EF4_sdata2

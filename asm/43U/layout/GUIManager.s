@@ -1508,7 +1508,7 @@
 	.4byte setDraggingButton__Q23gui7ManagerFUl
 .endobj __vt__Q23gui7Manager
 
-# .data:0x114 | 0x81642824 | size: 0x6C
+# .data:0x114 | 0x81642824 | size: 0x68
 # gui::Component::__vtable
 .obj __vt__Q23gui9Component, global
 	.4byte 0x00000000
@@ -1537,8 +1537,13 @@
 	.4byte isVisible__Q23gui9ComponentFv
 	.4byte getFlightDuration__Q23gui9ComponentFi
 	.4byte setFlightDuration__Q23gui9ComponentFiUs
-	.4byte 0x00000000
 .endobj __vt__Q23gui9Component
+
+# .data:0x17C | 0x8164288C | size: 0x4
+.obj gap_08_8164288C_data, global
+.hidden gap_08_8164288C_data
+	.4byte 0x00000000
+.endobj gap_08_8164288C_data
 
 # 0x81694678..0x81694688 | size: 0x10
 .section .sdata2, "a"
@@ -1569,18 +1574,29 @@
 	.byte 0xFF
 .endobj lbl_8169467F
 
-# .sdata2:0x8 | 0x81694680 | size: 0x8
+# .sdata2:0x8 | 0x81694680 | size: 0x4
 .obj lbl_81694680, global
 	.float 0.5
-	.float 0
 .endobj lbl_81694680
+
+# .sdata2:0xC | 0x81694684 | size: 0x4
+.obj gap_09_81694684_sdata2, global
+.hidden gap_09_81694684_sdata2
+	.4byte 0x00000000
+.endobj gap_09_81694684_sdata2
 
 # 0x81698780..0x81698788 | size: 0x8
 .section .sbss, "wa", @nobits
 .balign 8
 
-# .sbss:0x0 | 0x81698780 | size: 0x8
+# .sbss:0x0 | 0x81698780 | size: 0x4
 # gui::PaneManager::suIDCounter
 .obj suIDCounter__Q23gui11PaneManager, global
-	.skip 0x8
+	.skip 0x4
 .endobj suIDCounter__Q23gui11PaneManager
+
+# .sbss:0x4 | 0x81698784 | size: 0x4
+.obj gap_12_81698784_sbss, global
+.hidden gap_12_81698784_sbss
+	.skip 0x4
+.endobj gap_12_81698784_sbss

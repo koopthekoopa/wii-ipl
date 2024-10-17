@@ -141,10 +141,10 @@
 /* 8145DE04 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8145DE08 | 7C 64 1B 78 */	mr r4, r3
 /* 8145DE0C | 41 82 00 20 */	beq .L_8145DE2C
-/* 8145DE10 | 3C A0 81 61 */	lis r5, lbl_816177B0@ha
+/* 8145DE10 | 3C A0 81 61 */	lis r5, scPropertyList__Q33ipl2cs8color_10@ha
 /* 8145DE14 | 7F C3 F3 78 */	mr r3, r30
 /* 8145DE18 | 38 C0 00 04 */	li r6, 0x4
-/* 8145DE1C | 38 A5 77 B0 */	addi r5, r5, lbl_816177B0@l
+/* 8145DE1C | 38 A5 77 B0 */	addi r5, r5, scPropertyList__Q33ipl2cs8color_10@l
 /* 8145DE20 | 4B FE EE 39 */	bl CHANSVmAddNativePropertyAccessorsList
 /* 8145DE24 | 7C 60 00 34 */	cntlzw r0, r3
 /* 8145DE28 | 54 1F D9 7E */	srwi r31, r0, 5
@@ -455,7 +455,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x816177B0 | size: 0x30
-.obj lbl_816177B0, global
+# ipl::cs::color_10::scPropertyList
+.obj scPropertyList__Q33ipl2cs8color_10, local
 	.4byte lbl_8169794E
 	.4byte "get<0>__Q33ipl2cs9color_s10FP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
 	.4byte "set<0>__Q33ipl2cs9color_s10FP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
@@ -468,16 +469,20 @@
 	.4byte lbl_81697954
 	.4byte "get<3>__Q33ipl2cs9color_s10FP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
 	.4byte "set<3>__Q33ipl2cs9color_s10FP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
-.endobj lbl_816177B0
+.endobj scPropertyList__Q33ipl2cs8color_10
 
 # 0x8166A948..0x8166A958 | size: 0x10
 .data
 .balign 8
 
-# .data:0x0 | 0x8166A948 | size: 0x10
+# .data:0x0 | 0x8166A948 | size: 0xB
 .obj lbl_8166A948, global
-	.4byte 0x4758436F
-	.4byte 0x6C6F7253
-	.4byte 0x31300000
-	.4byte 0x00000000
+	.string "GXColorS10"
 .endobj lbl_8166A948
+
+# .data:0xB | 0x8166A953 | size: 0x5
+.obj gap_08_8166A953_data, global
+.hidden gap_08_8166A953_data
+	.4byte 0x00000000
+	.byte 0x00
+.endobj gap_08_8166A953_data

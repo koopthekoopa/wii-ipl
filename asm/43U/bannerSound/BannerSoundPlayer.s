@@ -311,10 +311,10 @@
 /* 8140EA08 | 48 00 00 14 */	b .L_8140EA1C
 .L_8140EA0C:
 /* 8140EA0C | 38 63 00 18 */	addi r3, r3, 0x18
-/* 8140EA10 | 48 10 12 A8 */	b fn_8150FCB8
+/* 8140EA10 | 48 10 12 A8 */	b Pause__Q34nw4r3snd10WavePlayerFb
 .L_8140EA14:
 /* 8140EA14 | 38 63 00 18 */	addi r3, r3, 0x18
-/* 8140EA18 | 48 10 12 A0 */	b fn_8150FCB8
+/* 8140EA18 | 48 10 12 A0 */	b Pause__Q34nw4r3snd10WavePlayerFb
 .L_8140EA1C:
 /* 8140EA1C | 38 63 05 00 */	addi r3, r3, 0x500
 /* 8140EA20 | 4B FF FB 04 */	b pause__19AxAdpcmSimplePlayerFb
@@ -531,7 +531,13 @@
 .section .sbss, "wa", @nobits
 .balign 8
 
-# .sbss:0x0 | 0x81698CF0 | size: 0x8
+# .sbss:0x0 | 0x81698CF0 | size: 0x4
 .obj pBSWaveBuffer, global
-	.skip 0x8
+	.skip 0x4
 .endobj pBSWaveBuffer
+
+# .sbss:0x4 | 0x81698CF4 | size: 0x4
+.obj gap_12_81698CF4_sbss, global
+.hidden gap_12_81698CF4_sbss
+	.skip 0x4
+.endobj gap_12_81698CF4_sbss

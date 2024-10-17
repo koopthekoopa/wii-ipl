@@ -8433,11 +8433,16 @@
 	.double 4503599627370496
 .endobj lbl_81694DD0
 
-# .sdata2:0x48 | 0x81694DD8 | size: 0x8
+# .sdata2:0x48 | 0x81694DD8 | size: 0x4
 .obj lbl_81694DD8, global
 	.float 15
-	.float 0
 .endobj lbl_81694DD8
+
+# .sdata2:0x4C | 0x81694DDC | size: 0x4
+.obj gap_09_81694DDC_sdata2, global
+.hidden gap_09_81694DDC_sdata2
+	.4byte 0x00000000
+.endobj gap_09_81694DDC_sdata2
 
 # 0x816973C8..0x816973F8 | size: 0x30
 .section .sdata, "wa"
@@ -8475,8 +8480,13 @@
 	.4byte 0x00000000
 .endobj lbl_816973E8
 
-# .sdata:0x28 | 0x816973F0 | size: 0x8
+# .sdata:0x28 | 0x816973F0 | size: 0x7
 .obj lbl_816973F0, global
-	.4byte 0x4E5F444F
-	.4byte 0x574E0000
+	.string "N_DOWN"
 .endobj lbl_816973F0
+
+# .sdata:0x2F | 0x816973F7 | size: 0x1
+.obj gap_11_816973F7_sdata, global
+.hidden gap_11_816973F7_sdata
+	.byte 0x00
+.endobj gap_11_816973F7_sdata

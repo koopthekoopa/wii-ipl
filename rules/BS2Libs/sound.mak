@@ -1,6 +1,6 @@
 SOUND_OBJECTS	=	$(BS2_OBJASM_PATH)/sound/iplSound.o
 
-DEPENDENCIES += $(SOUND_OBJECTS:.o=.d)
+ALL_OBJECTS += $(SOUND_OBJECTS)
 
 $(BS2_OBJ_PATH)/sound/%.o: $(BS2_SRC_PATH)/sound/%.cpp
 	$(call BuildCPPSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

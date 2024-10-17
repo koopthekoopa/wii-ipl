@@ -2727,7 +2727,7 @@
 	.4byte 0x00000000
 .endobj lbl_8166C458
 
-# .data:0x940 | 0x8166C500 | size: 0x80
+# .data:0x940 | 0x8166C500 | size: 0x18
 .obj lbl_8166C500, global
 	.4byte 0x83748340
 	.4byte 0x8343838B
@@ -2735,30 +2735,15 @@
 	.4byte 0x89FCE282
 	.4byte 0x82F08C9F
 	.4byte 0x8F6F0A00
-	.4byte 0x43444252
-	.4byte 0x65636F72
-	.4byte 0x64507269
-	.4byte 0x76617465
-	.4byte 0x4368616E
-	.4byte 0x67654F77
-	.4byte 0x6E65720A
-	.4byte 0x00000000
-	.4byte 0x20695F70
-	.4byte 0x72652D77
-	.4byte 0x69696964
-	.4byte 0x20203D20
-	.4byte 0x256C580A
-	.4byte 0x00000000
-	.4byte 0x20726563
-	.4byte 0x6F72642D
-	.4byte 0x77696969
-	.4byte 0x64203D20
-	.4byte 0x256C580A
-	.4byte 0x00000000
-	.4byte 0x70617468
-	.4byte 0x203D2573
-	.4byte 0x0A000000
-	.4byte 0x70617468
-	.4byte 0x323D2573
-	.4byte 0x0A000000
 .endobj lbl_8166C500
+
+# .data:0x958 | 0x8166C518 | size: 0x66
+.obj lbl_8166C518, global
+	.string "CDBRecordPrivateChangeOwner\n\000\000\000\000 i_pre-wiiid  = %lX\n\000\000\000\000 record-wiiid = %lX\n\000\000\000\000path =%s\n\000\000\000path2=%s\n"
+.endobj lbl_8166C518
+
+# .data:0x9BE | 0x8166C57E | size: 0x2
+.obj gap_08_8166C57E_data, global
+.hidden gap_08_8166C57E_data
+	.2byte 0x0000
+.endobj gap_08_8166C57E_data

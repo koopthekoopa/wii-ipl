@@ -17789,7 +17789,7 @@
 	.string "NandSDWorker: ES_Encrypt failed.[%d]\n"
 .endobj lbl_81638901
 
-# .data:0x2E9F | 0x81638927 | size: 0xC1
+# .data:0x2E9F | 0x81638927 | size: 0xBA
 .obj lbl_81638927, global
 	.4byte 0x4E616E64
 	.4byte 0x5344576F
@@ -17837,10 +17837,15 @@
 	.4byte 0x6E743A20
 	.4byte 0x25642076
 	.4byte 0x73202564
-	.4byte 0x0A000000
-	.4byte 0x00000000
-	.byte 0x00
+	.2byte 0x0A00
 .endobj lbl_81638927
+
+# .data:0x2F59 | 0x816389E1 | size: 0x7
+.obj gap_08_816389E1_data, global
+.hidden gap_08_816389E1_data
+	.4byte 0x00000000
+	.byte 0x00, 0x00, 0x00
+.endobj gap_08_816389E1_data
 
 # 0x81694570..0x81694590 | size: 0x20
 .section .sdata2, "a"

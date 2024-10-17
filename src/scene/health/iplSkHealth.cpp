@@ -201,22 +201,20 @@ namespace ipl {
         void skHealth::create() {
             nw4r::lyt::Pane* pHasPane;
             nw4r::lyt::Pane* pPushPane;
-            u32 country;
 
             mpLayout = new layout::Object(mpHeap, mpLayoutFile, "arc", "it_Has_a.brlyt");
 
             // Make all of the panes invisible
-            for (country = 0; country < ARRSIZE(has_pane_name); country++) {
-                pHasPane   = mpLayout->GetRootPane()->FindPaneByName(has_pane_name[country]);
-                pPushPane  = mpLayout->GetRootPane()->FindPaneByName(push_pane_name[country]);
+            for (int i = 0; i < ARRSIZE(has_pane_name); i++) {
+                pHasPane   = mpLayout->GetRootPane()->FindPaneByName(has_pane_name[i]);
+                pPushPane  = mpLayout->GetRootPane()->FindPaneByName(push_pane_name[i]);
 
                 pHasPane->SetVisible(false);
                 pPushPane->SetVisible(false);
             }
 
-            country = getCountryIndex_();
-
             // Make the necessary panes visible
+            u32 country = getCountryIndex_();
             mpHasPane   = mpLayout->GetRootPane()->FindPaneByName(has_pane_name[country]);
             mpPushPane  = mpLayout->GetRootPane()->FindPaneByName(push_pane_name[country]);
 

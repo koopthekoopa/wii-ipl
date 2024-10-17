@@ -3,11 +3,19 @@
 
 #include <revolution.h>
 
+#include <revolution/nwc24.h>
+
 namespace ipl {
     namespace nwc24 {
         class Manager {
             public:
                 Manager();
+
+                BOOL    open();
+                BOOL    close();
+
+                void    setMsgAppId(NWC24MsgObj* msgObj, u32 appId);
+                void    commitMsg(NWC24MsgObj* msgObj);
             
             private:
                 u8      unk_0x00[0xA31];

@@ -3,16 +3,14 @@
 
 namespace nw4r {
     namespace ut {
-        namespace {
-            class NonCopyable {
-                protected:
-                    NonCopyable() {}
-                    ~NonCopyable() {}
-                private:
-                    NonCopyable(const NonCopyable&);
-                    const NonCopyable& operator=(const NonCopyable&);
-            };
-        }
+        class NonCopyable {
+            protected:
+                NonCopyable()   {}
+                ~NonCopyable()  {}
+            private:
+                NonCopyable(const NonCopyable&);
+                const NonCopyable& operator=(const NonCopyable&);
+        };
     }
 }
 

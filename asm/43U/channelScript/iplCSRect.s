@@ -283,10 +283,10 @@
 /* 8145D5B4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8145D5B8 | 7C 64 1B 78 */	mr r4, r3
 /* 8145D5BC | 41 82 00 20 */	beq .L_8145D5DC
-/* 8145D5C0 | 3C A0 81 61 */	lis r5, lbl_81617760@ha
+/* 8145D5C0 | 3C A0 81 61 */	lis r5, scMethodList__Q33ipl2cs4rect@ha
 /* 8145D5C4 | 7F C3 F3 78 */	mr r3, r30
 /* 8145D5C8 | 38 C0 00 04 */	li r6, 0x4
-/* 8145D5CC | 38 A5 77 60 */	addi r5, r5, lbl_81617760@l
+/* 8145D5CC | 38 A5 77 60 */	addi r5, r5, scMethodList__Q33ipl2cs4rect@l
 /* 8145D5D0 | 4B FE F4 A1 */	bl CHANSVmAddNativeMethodList
 /* 8145D5D4 | 7C 60 00 34 */	cntlzw r0, r3
 /* 8145D5D8 | 54 1F D9 7E */	srwi r31, r0, 5
@@ -305,7 +305,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x81617760 | size: 0x20
-.obj lbl_81617760, global
+# ipl::cs::rect::scMethodList
+.obj scMethodList__Q33ipl2cs4rect, local
 	.4byte lbl_8166A920
 	.4byte get_width__Q33ipl2cs4rectFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
 	.4byte lbl_8166A929
@@ -314,7 +315,7 @@
 	.4byte set_width__Q33ipl2cs4rectFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
 	.4byte lbl_8166A93C
 	.4byte set_height__Q33ipl2cs4rectFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
-.endobj lbl_81617760
+.endobj scMethodList__Q33ipl2cs4rect
 
 # 0x8166A920..0x8166A948 | size: 0x28
 .data
@@ -335,29 +336,43 @@
 	.string "SetWidth"
 .endobj lbl_8166A933
 
-# .data:0x1C | 0x8166A93C | size: 0xC
+# .data:0x1C | 0x8166A93C | size: 0xA
 .obj lbl_8166A93C, global
-	.4byte 0x53657448
-	.4byte 0x65696768
-	.4byte 0x74000000
+	.string "SetHeight"
 .endobj lbl_8166A93C
+
+# .data:0x26 | 0x8166A946 | size: 0x2
+.obj gap_08_8166A946_data, global
+.hidden gap_08_8166A946_data
+	.2byte 0x0000
+.endobj gap_08_8166A946_data
 
 # 0x81694FE0..0x81694FE8 | size: 0x8
 .section .sdata2, "a"
 .balign 8
 
-# .sdata2:0x0 | 0x81694FE0 | size: 0x8
+# .sdata2:0x0 | 0x81694FE0 | size: 0x4
 .obj lbl_81694FE0, global
 	.float 0
-	.float 0
 .endobj lbl_81694FE0
+
+# .sdata2:0x4 | 0x81694FE4 | size: 0x4
+.obj gap_09_81694FE4_sdata2, global
+.hidden gap_09_81694FE4_sdata2
+	.4byte 0x00000000
+.endobj gap_09_81694FE4_sdata2
 
 # 0x81697940..0x81697948 | size: 0x8
 .section .sdata, "wa"
 .balign 8
 
-# .sdata:0x0 | 0x81697940 | size: 0x8
+# .sdata:0x0 | 0x81697940 | size: 0x5
 .obj lbl_81697940, global
-	.4byte 0x52656374
-	.4byte 0x00000000
+	.string "Rect"
 .endobj lbl_81697940
+
+# .sdata:0x5 | 0x81697945 | size: 0x3
+.obj gap_11_81697945_sdata, global
+.hidden gap_11_81697945_sdata
+	.byte 0x00, 0x00, 0x00
+.endobj gap_11_81697945_sdata

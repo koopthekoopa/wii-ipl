@@ -1142,9 +1142,14 @@
 	.string "G_BarIn"
 .endobj lbl_81697264
 
-# .sdata:0x14 | 0x8169726C | size: 0xC
+# .sdata:0x14 | 0x8169726C | size: 0x6
 .obj lbl_8169726C, global
-	.4byte 0x475F5769
-	.4byte 0x69000000
-	.4byte 0x00000000
+	.string "G_Wii"
 .endobj lbl_8169726C
+
+# .sdata:0x1A | 0x81697272 | size: 0x6
+.obj gap_11_81697272_sdata, global
+.hidden gap_11_81697272_sdata
+	.4byte 0x00000000
+	.2byte 0x0000
+.endobj gap_11_81697272_sdata

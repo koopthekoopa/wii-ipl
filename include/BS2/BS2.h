@@ -106,8 +106,6 @@ typedef enum {
 #define     BS2_BOOTINFO_ADDR       0x0000
 #define     BS2_RVL_BOOTINFO_ADDR   0x3100
 
-
-
 BS2State    BS2Tick();
 
 void        BS2StartGame();

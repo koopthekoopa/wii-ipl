@@ -347,7 +347,5 @@
 
 # .sdata:0x6 | 0x8169785E | size: 0xA
 .obj lbl_8169785E, global
-	.4byte 0x54657874
-	.4byte 0x75726500
-	.2byte 0x0000
+	.string "Texture\000\000"
 .endobj lbl_8169785E

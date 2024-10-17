@@ -181,14 +181,14 @@
 /* 8136B420 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8136B424 | 7C 7E 1B 78 */	mr r30, r3
 /* 8136B428 | 80 63 00 08 */	lwz r3, 0x8(r3)
-/* 8136B42C | 48 19 AD E9 */	bl fn_81506214
+/* 8136B42C | 48 19 AD E9 */	bl ConvertLabelStringToSoundId__Q34nw4r3snd12SoundArchiveCFPCc
 /* 8136B430 | 7C 65 1B 78 */	mr r5, r3
 /* 8136B434 | 7F E4 FB 78 */	mr r4, r31
 /* 8136B438 | 38 7E 04 D0 */	addi r3, r30, 0x4d0
 /* 8136B43C | 38 C0 00 00 */	li r6, 0x0
 /* 8136B440 | 38 E0 00 00 */	li r7, 0x0
 /* 8136B444 | 39 00 00 00 */	li r8, 0x0
-/* 8136B448 | 48 1A 07 F1 */	bl fn_8150BC38
+/* 8136B448 | 48 1A 07 F1 */	bl detail_StartSound__Q34nw4r3snd14SoundStartableFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerPCQ44nw4r3snd14SoundStartable9StartInfo
 /* 8136B44C | 7C 60 00 34 */	cntlzw r0, r3
 /* 8136B450 | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8136B454 | 54 03 D9 7E */	srwi r3, r0, 5
@@ -346,7 +346,7 @@
 /* 8136B638 | 38 C0 00 00 */	li r6, 0x0
 /* 8136B63C | 38 E0 00 00 */	li r7, 0x0
 /* 8136B640 | 39 00 00 00 */	li r8, 0x0
-/* 8136B644 | 48 1A 05 F5 */	bl fn_8150BC38
+/* 8136B644 | 48 1A 05 F5 */	bl detail_StartSound__Q34nw4r3snd14SoundStartableFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerPCQ44nw4r3snd14SoundStartable9StartInfo
 /* 8136B648 | 93 DF 00 08 */	stw r30, 0x8(r31)
 /* 8136B64C | 7F E3 FB 78 */	mr r3, r31
 .L_8136B650:
@@ -368,7 +368,7 @@
 /* 8136B678 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 8136B67C | 39 00 00 00 */	li r8, 0x0
 /* 8136B680 | 38 63 04 D0 */	addi r3, r3, 0x4d0
-/* 8136B684 | 48 1A 05 B5 */	bl fn_8150BC38
+/* 8136B684 | 48 1A 05 B5 */	bl detail_StartSound__Q34nw4r3snd14SoundStartableFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerPCQ44nw4r3snd14SoundStartable9StartInfo
 /* 8136B688 | 7C 60 00 34 */	cntlzw r0, r3
 /* 8136B68C | 54 03 D9 7E */	srwi r3, r0, 5
 /* 8136B690 | 80 01 00 14 */	lwz r0, 0x14(r1)
@@ -511,14 +511,14 @@
 /* 8136B854 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8136B858 | 7C 7E 1B 78 */	mr r30, r3
 /* 8136B85C | 80 63 00 08 */	lwz r3, 0x8(r3)
-/* 8136B860 | 48 19 A9 B5 */	bl fn_81506214
+/* 8136B860 | 48 19 A9 B5 */	bl ConvertLabelStringToSoundId__Q34nw4r3snd12SoundArchiveCFPCc
 /* 8136B864 | 7C 65 1B 78 */	mr r5, r3
 /* 8136B868 | 7F E4 FB 78 */	mr r4, r31
 /* 8136B86C | 38 7E 04 D0 */	addi r3, r30, 0x4d0
 /* 8136B870 | 38 C0 00 00 */	li r6, 0x0
 /* 8136B874 | 38 E0 00 00 */	li r7, 0x0
 /* 8136B878 | 39 00 00 00 */	li r8, 0x0
-/* 8136B87C | 48 1A 04 29 */	bl fn_8150BCA4
+/* 8136B87C | 48 1A 04 29 */	bl detail_HoldSound__Q34nw4r3snd14SoundStartableFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerPCQ44nw4r3snd14SoundStartable9StartInfo
 /* 8136B880 | 7C 60 00 34 */	cntlzw r0, r3
 /* 8136B884 | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8136B888 | 54 03 D9 7E */	srwi r3, r0, 5
@@ -766,18 +766,18 @@
 /* 8136BBC0 | 1C 79 03 E8 */	mulli r3, r25, 0x3e8
 /* 8136BBC4 | 38 00 00 3C */	li r0, 0x3c
 /* 8136BBC8 | 7F 83 03 D6 */	divw r28, r3, r0
-/* 8136BBCC | 48 18 BA 01 */	bl fn_814F75CC
+/* 8136BBCC | 48 18 BA 01 */	bl GetInstance__Q44nw4r3snd6detail9AxManagerFv
 /* 8136BBD0 | 7F 85 E3 78 */	mr r5, r28
 /* 8136BBD4 | 38 80 00 00 */	li r4, 0x0
-/* 8136BBD8 | 48 18 C9 59 */	bl fn_814F8530
-/* 8136BBDC | 48 18 B9 F1 */	bl fn_814F75CC
+/* 8136BBD8 | 48 18 C9 59 */	bl ClearEffect__Q44nw4r3snd6detail9AxManagerFQ34nw4r3snd6AuxBusi
+/* 8136BBDC | 48 18 B9 F1 */	bl GetInstance__Q44nw4r3snd6detail9AxManagerFv
 /* 8136BBE0 | 7F 85 E3 78 */	mr r5, r28
 /* 8136BBE4 | 38 80 00 01 */	li r4, 0x1
-/* 8136BBE8 | 48 18 C9 49 */	bl fn_814F8530
-/* 8136BBEC | 48 18 B9 E1 */	bl fn_814F75CC
+/* 8136BBE8 | 48 18 C9 49 */	bl ClearEffect__Q44nw4r3snd6detail9AxManagerFQ34nw4r3snd6AuxBusi
+/* 8136BBEC | 48 18 B9 E1 */	bl GetInstance__Q44nw4r3snd6detail9AxManagerFv
 /* 8136BBF0 | 7F 85 E3 78 */	mr r5, r28
 /* 8136BBF4 | 38 80 00 02 */	li r4, 0x2
-/* 8136BBF8 | 48 18 C9 39 */	bl fn_814F8530
+/* 8136BBF8 | 48 18 C9 39 */	bl ClearEffect__Q44nw4r3snd6detail9AxManagerFQ34nw4r3snd6AuxBusi
 /* 8136BBFC | 39 61 00 30 */	addi r11, r1, 0x30
 /* 8136BC00 | 48 28 D9 05 */	bl _restgpr_25
 /* 8136BC04 | 80 01 00 34 */	lwz r0, 0x34(r1)
@@ -835,22 +835,22 @@
 /* 8136BCB4 | 38 80 00 00 */	li r4, 0x0
 /* 8136BCB8 | 38 7F 9F 68 */	addi r3, r31, sBannerSoundPlayer__Q23ipl3snd@l
 /* 8136BCBC | 48 0A 2C 5D */	bl stop__17BannerSoundPlayerFUl
-/* 8136BCC0 | 48 18 B9 0D */	bl fn_814F75CC
+/* 8136BCC0 | 48 18 B9 0D */	bl GetInstance__Q44nw4r3snd6detail9AxManagerFv
 /* 8136BCC4 | 38 80 00 00 */	li r4, 0x0
 /* 8136BCC8 | 38 A0 00 00 */	li r5, 0x0
-/* 8136BCCC | 48 18 C8 65 */	bl fn_814F8530
-/* 8136BCD0 | 48 18 B8 FD */	bl fn_814F75CC
+/* 8136BCCC | 48 18 C8 65 */	bl ClearEffect__Q44nw4r3snd6detail9AxManagerFQ34nw4r3snd6AuxBusi
+/* 8136BCD0 | 48 18 B8 FD */	bl GetInstance__Q44nw4r3snd6detail9AxManagerFv
 /* 8136BCD4 | 38 80 00 01 */	li r4, 0x1
 /* 8136BCD8 | 38 A0 00 00 */	li r5, 0x0
-/* 8136BCDC | 48 18 C8 55 */	bl fn_814F8530
-/* 8136BCE0 | 48 18 B8 ED */	bl fn_814F75CC
+/* 8136BCDC | 48 18 C8 55 */	bl ClearEffect__Q44nw4r3snd6detail9AxManagerFQ34nw4r3snd6AuxBusi
+/* 8136BCE0 | 48 18 B8 ED */	bl GetInstance__Q44nw4r3snd6detail9AxManagerFv
 /* 8136BCE4 | 38 80 00 02 */	li r4, 0x2
 /* 8136BCE8 | 38 A0 00 00 */	li r5, 0x0
-/* 8136BCEC | 48 18 C8 45 */	bl fn_814F8530
-/* 8136BCF0 | 48 18 B8 DD */	bl fn_814F75CC
+/* 8136BCEC | 48 18 C8 45 */	bl ClearEffect__Q44nw4r3snd6detail9AxManagerFQ34nw4r3snd6AuxBusi
+/* 8136BCF0 | 48 18 B8 DD */	bl GetInstance__Q44nw4r3snd6detail9AxManagerFv
 /* 8136BCF4 | C0 22 82 A4 */	lfs f1, lbl_816946A4@sda21(r0)
 /* 8136BCF8 | 38 80 00 00 */	li r4, 0x0
-/* 8136BCFC | 48 18 C4 C5 */	bl fn_814F81C0
+/* 8136BCFC | 48 18 C4 C5 */	bl SetMasterVolume__Q44nw4r3snd6detail9AxManagerFfi
 /* 8136BD00 | C0 22 82 A4 */	lfs f1, lbl_816946A4@sda21(r0)
 /* 8136BD04 | 38 7F 9F 68 */	addi r3, r31, sBannerSoundPlayer__Q23ipl3snd@l
 /* 8136BD08 | 48 0A 2E 41 */	bl setMasterVolume__17BannerSoundPlayerFf
@@ -927,18 +927,18 @@
 /* 8136BDE4 | 38 80 00 01 */	li r4, 0x1
 /* 8136BDE8 | 38 63 9F 68 */	addi r3, r3, sBannerSoundPlayer__Q23ipl3snd@l
 /* 8136BDEC | 48 0A 2B DD */	bl pause__17BannerSoundPlayerFb
-/* 8136BDF0 | 48 18 B7 DD */	bl fn_814F75CC
+/* 8136BDF0 | 48 18 B7 DD */	bl GetInstance__Q44nw4r3snd6detail9AxManagerFv
 /* 8136BDF4 | 38 80 00 00 */	li r4, 0x0
 /* 8136BDF8 | 38 A0 00 FA */	li r5, 0xfa
-/* 8136BDFC | 48 18 C7 35 */	bl fn_814F8530
-/* 8136BE00 | 48 18 B7 CD */	bl fn_814F75CC
+/* 8136BDFC | 48 18 C7 35 */	bl ClearEffect__Q44nw4r3snd6detail9AxManagerFQ34nw4r3snd6AuxBusi
+/* 8136BE00 | 48 18 B7 CD */	bl GetInstance__Q44nw4r3snd6detail9AxManagerFv
 /* 8136BE04 | 38 80 00 01 */	li r4, 0x1
 /* 8136BE08 | 38 A0 00 FA */	li r5, 0xfa
-/* 8136BE0C | 48 18 C7 25 */	bl fn_814F8530
-/* 8136BE10 | 48 18 B7 BD */	bl fn_814F75CC
+/* 8136BE0C | 48 18 C7 25 */	bl ClearEffect__Q44nw4r3snd6detail9AxManagerFQ34nw4r3snd6AuxBusi
+/* 8136BE10 | 48 18 B7 BD */	bl GetInstance__Q44nw4r3snd6detail9AxManagerFv
 /* 8136BE14 | 38 80 00 02 */	li r4, 0x2
 /* 8136BE18 | 38 A0 00 FA */	li r5, 0xfa
-/* 8136BE1C | 48 18 C7 15 */	bl fn_814F8530
+/* 8136BE1C | 48 18 C7 15 */	bl ClearEffect__Q44nw4r3snd6detail9AxManagerFQ34nw4r3snd6AuxBusi
 .L_8136BE20:
 /* 8136BE20 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8136BE24 | 83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -1086,9 +1086,9 @@
 /* 8136BFE4 | 48 00 00 08 */	b .L_8136BFEC
 /* 8136BFE8 | 48 00 00 10 */	b .L_8136BFF8
 .L_8136BFEC:
-/* 8136BFEC | 48 18 B5 E1 */	bl fn_814F75CC
+/* 8136BFEC | 48 18 B5 E1 */	bl GetInstance__Q44nw4r3snd6detail9AxManagerFv
 /* 8136BFF0 | 7F E4 FB 78 */	mr r4, r31
-/* 8136BFF4 | 48 18 BB A1 */	bl fn_814F7B94
+/* 8136BFF4 | 48 18 BB A1 */	bl SetOutputMode__Q44nw4r3snd6detail9AxManagerFQ34nw4r3snd10OutputMode
 .L_8136BFF8:
 /* 8136BFF8 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8136BFFC | 83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -1319,7 +1319,7 @@
 /* 8136C270 | 38 9F 00 04 */	addi r4, r31, 0x4
 /* 8136C274 | 48 00 00 35 */	bl "__ct__Q44nw4r2ut6detail18AutoLock<7OSMutex>FR7OSMutex"
 /* 8136C278 | 38 7F 00 1C */	addi r3, r31, 0x1c
-/* 8136C27C | 48 19 3A A5 */	bl fn_814FFD20
+/* 8136C27C | 48 19 3A A5 */	bl GetCurrentLevel__Q44nw4r3snd6detail9FrameHeapCFv
 /* 8136C280 | 7C 7F 1B 78 */	mr r31, r3
 /* 8136C284 | 38 61 00 08 */	addi r3, r1, 0x8
 /* 8136C288 | 38 80 FF FF */	li r4, -0x1
@@ -1400,7 +1400,7 @@
 /* 8136C374 | 4B FF FF 35 */	bl "__ct__Q44nw4r2ut6detail18AutoLock<7OSMutex>FR7OSMutex"
 /* 8136C378 | 7F E4 FB 78 */	mr r4, r31
 /* 8136C37C | 38 7E 00 20 */	addi r3, r30, 0x20
-/* 8136C380 | 48 19 37 7D */	bl fn_814FFAFC
+/* 8136C380 | 48 19 37 7D */	bl LoadState__Q44nw4r3snd6detail9FrameHeapFi
 /* 8136C384 | 38 61 00 08 */	addi r3, r1, 0x8
 /* 8136C388 | 38 80 FF FF */	li r4, -0x1
 /* 8136C38C | 4B FF FF 55 */	bl "__dt__Q44nw4r2ut6detail18AutoLock<7OSMutex>Fv"
@@ -1427,7 +1427,7 @@
 /* 8136C3C4 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 8136C3C8 | 39 00 00 00 */	li r8, 0x0
 /* 8136C3CC | 38 63 04 D0 */	addi r3, r3, 0x4d0
-/* 8136C3D0 | 48 19 F8 D5 */	bl fn_8150BCA4
+/* 8136C3D0 | 48 19 F8 D5 */	bl detail_HoldSound__Q34nw4r3snd14SoundStartableFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerPCQ44nw4r3snd14SoundStartable9StartInfo
 /* 8136C3D4 | 7C 60 00 34 */	cntlzw r0, r3
 /* 8136C3D8 | 54 03 D9 7E */	srwi r3, r0, 5
 /* 8136C3DC | 80 01 00 14 */	lwz r0, 0x14(r1)
@@ -1446,7 +1446,7 @@
 /* 8136C3FC | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 8136C400 | 39 00 00 00 */	li r8, 0x0
 /* 8136C404 | 38 63 04 D0 */	addi r3, r3, 0x4d0
-/* 8136C408 | 48 19 F8 9D */	bl fn_8150BCA4
+/* 8136C408 | 48 19 F8 9D */	bl detail_HoldSound__Q34nw4r3snd14SoundStartableFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerPCQ44nw4r3snd14SoundStartable9StartInfo
 /* 8136C40C | 7C 60 00 34 */	cntlzw r0, r3
 /* 8136C410 | 54 03 D9 7E */	srwi r3, r0, 5
 /* 8136C414 | 80 01 00 14 */	lwz r0, 0x14(r1)
@@ -1465,7 +1465,7 @@
 /* 8136C434 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 8136C438 | 39 00 00 00 */	li r8, 0x0
 /* 8136C43C | 38 63 04 D0 */	addi r3, r3, 0x4d0
-/* 8136C440 | 48 19 F9 31 */	bl fn_8150BD70
+/* 8136C440 | 48 19 F9 31 */	bl detail_PrepareSound__Q34nw4r3snd14SoundStartableFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerPCQ44nw4r3snd14SoundStartable9StartInfo
 /* 8136C444 | 7C 60 00 34 */	cntlzw r0, r3
 /* 8136C448 | 54 03 D9 7E */	srwi r3, r0, 5
 /* 8136C44C | 80 01 00 14 */	lwz r0, 0x14(r1)
@@ -1484,7 +1484,7 @@
 /* 8136C46C | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 8136C470 | 39 00 00 00 */	li r8, 0x0
 /* 8136C474 | 38 63 04 D0 */	addi r3, r3, 0x4d0
-/* 8136C478 | 48 19 F8 F9 */	bl fn_8150BD70
+/* 8136C478 | 48 19 F8 F9 */	bl detail_PrepareSound__Q34nw4r3snd14SoundStartableFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerPCQ44nw4r3snd14SoundStartable9StartInfo
 /* 8136C47C | 7C 60 00 34 */	cntlzw r0, r3
 /* 8136C480 | 54 03 D9 7E */	srwi r3, r0, 5
 /* 8136C484 | 80 01 00 14 */	lwz r0, 0x14(r1)
@@ -1505,14 +1505,14 @@
 /* 8136C4AC | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8136C4B0 | 7C 7E 1B 78 */	mr r30, r3
 /* 8136C4B4 | 80 63 00 08 */	lwz r3, 0x8(r3)
-/* 8136C4B8 | 48 19 9D 5D */	bl fn_81506214
+/* 8136C4B8 | 48 19 9D 5D */	bl ConvertLabelStringToSoundId__Q34nw4r3snd12SoundArchiveCFPCc
 /* 8136C4BC | 7C 65 1B 78 */	mr r5, r3
 /* 8136C4C0 | 7F E4 FB 78 */	mr r4, r31
 /* 8136C4C4 | 38 7E 04 D0 */	addi r3, r30, 0x4d0
 /* 8136C4C8 | 38 C0 00 00 */	li r6, 0x0
 /* 8136C4CC | 38 E0 00 00 */	li r7, 0x0
 /* 8136C4D0 | 39 00 00 00 */	li r8, 0x0
-/* 8136C4D4 | 48 19 F8 9D */	bl fn_8150BD70
+/* 8136C4D4 | 48 19 F8 9D */	bl detail_PrepareSound__Q34nw4r3snd14SoundStartableFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerPCQ44nw4r3snd14SoundStartable9StartInfo
 /* 8136C4D8 | 7C 60 00 34 */	cntlzw r0, r3
 /* 8136C4DC | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8136C4E0 | 54 03 D9 7E */	srwi r3, r0, 5
@@ -1533,7 +1533,7 @@
 /* 8136C508 | 90 01 00 14 */	stw r0, 0x14(r1)
 /* 8136C50C | 39 00 00 00 */	li r8, 0x0
 /* 8136C510 | 38 63 04 D0 */	addi r3, r3, 0x4d0
-/* 8136C514 | 48 19 F7 25 */	bl fn_8150BC38
+/* 8136C514 | 48 19 F7 25 */	bl detail_StartSound__Q34nw4r3snd14SoundStartableFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerPCQ44nw4r3snd14SoundStartable9StartInfo
 /* 8136C518 | 7C 60 00 34 */	cntlzw r0, r3
 /* 8136C51C | 54 03 D9 7E */	srwi r3, r0, 5
 /* 8136C520 | 80 01 00 14 */	lwz r0, 0x14(r1)
@@ -1656,7 +1656,7 @@
 /* 8136C690 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8136C694 | 7C 7E 1B 78 */	mr r30, r3
 /* 8136C698 | 41 82 00 18 */	beq .L_8136C6B0
-/* 8136C69C | 48 19 E1 DD */	bl fn_8150A878
+/* 8136C69C | 48 19 E1 DD */	bl DetachSound__Q34nw4r3snd11SoundHandleFv
 /* 8136C6A0 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 8136C6A4 | 40 81 00 0C */	ble .L_8136C6B0
 /* 8136C6A8 | 7F C3 F3 78 */	mr r3, r30
@@ -1900,8 +1900,14 @@
 	.skip 0x4
 .endobj _mainBGMHandle__Q23ipl3snd
 
-# .sbss:0x8 | 0x81698790 | size: 0x8
+# .sbss:0x8 | 0x81698790 | size: 0x4
 # ipl::snd::m_isLocked
 .obj m_isLocked__Q23ipl3snd, global
-	.skip 0x8
+	.skip 0x4
 .endobj m_isLocked__Q23ipl3snd
+
+# .sbss:0xC | 0x81698794 | size: 0x4
+.obj gap_12_81698794_sbss, global
+.hidden gap_12_81698794_sbss
+	.skip 0x4
+.endobj gap_12_81698794_sbss

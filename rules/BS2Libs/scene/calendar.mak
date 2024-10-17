@@ -1,7 +1,7 @@
 CALENDAR_OBJECTS	=	$(BS2_OBJASM_PATH)/scene/calendar/iplCalendar.o \
 						$(BS2_OBJASM_PATH)/scene/calendar/iplDate.o
 
-DEPENDENCIES += $(CALENDAR_OBJECTS:.o=.d)
+ALL_OBJECTS += $(CALENDAR_OBJECTS)
 
 $(BS2_OBJ_PATH)/scene/calendar/%.o: $(BS2_SRC_PATH)/scene/calendar/%.cpp
 	$(call BuildCPPSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

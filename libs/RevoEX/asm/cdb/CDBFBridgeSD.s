@@ -822,15 +822,16 @@
 .data
 .balign 8
 
-# .data:0x0 | 0x8166CB18 | size: 0x18
+# .data:0x0 | 0x8166CB18 | size: 0x17
 .obj lbl_8166CB18, global
-	.4byte 0x43444246
-	.4byte 0x44656C65
-	.4byte 0x74654669
-	.4byte 0x6C655344
-	.4byte 0x28292025
-	.4byte 0x730A0000
+	.string "CDBFDeleteFileSD() %s\n"
 .endobj lbl_8166CB18
+
+# .data:0x17 | 0x8166CB2F | size: 0x1
+.obj gap_08_8166CB2F_data, global
+.hidden gap_08_8166CB2F_data
+	.byte 0x00
+.endobj gap_08_8166CB2F_data
 
 # 0x81697A70..0x81697A80 | size: 0x10
 .section .sdata, "wa"
@@ -841,13 +842,25 @@
 	.4byte 0x00000000
 .endobj lbl_81697A70
 
-# .sdata:0x4 | 0x81697A74 | size: 0x4
+# .sdata:0x4 | 0x81697A74 | size: 0x2
 .obj lbl_81697A74, global
-	.4byte 0x72000000
+	.string "r"
 .endobj lbl_81697A74
 
-# .sdata:0x8 | 0x81697A78 | size: 0x8
+# .sdata:0x6 | 0x81697A76 | size: 0x2
+.obj gap_11_81697A76_sdata, global
+.hidden gap_11_81697A76_sdata
+	.2byte 0x0000
+.endobj gap_11_81697A76_sdata
+
+# .sdata:0x8 | 0x81697A78 | size: 0x3
 .obj lbl_81697A78, global
-	.4byte 0x722B0000
-	.4byte 0x00000000
+	.string "r+"
 .endobj lbl_81697A78
+
+# .sdata:0xB | 0x81697A7B | size: 0x5
+.obj gap_11_81697A7B_sdata, global
+.hidden gap_11_81697A7B_sdata
+	.4byte 0x00000000
+	.byte 0x00
+.endobj gap_11_81697A7B_sdata

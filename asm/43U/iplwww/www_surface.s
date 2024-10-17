@@ -1517,16 +1517,19 @@
 	.2byte 0x0000
 .endobj lbl_81643A76
 
-# .data:0xD90 | 0x81643AA0 | size: 0x18
+# .data:0xD90 | 0x81643AA0 | size: 0x17
 # ext_ead::www::SurfaceManager::__vtable
 .obj __vt__Q37ext_ead3www14SurfaceManager, global
-	.4byte 0x00000000
-	.4byte 0x00000000
+	.string "\000\000\000\000\000\000\000"
 	.4byte __dt__Q37ext_ead3www14SurfaceManagerFv
-	.4byte 0x203A2025
-	.4byte 0x645B6D73
-	.4byte 0x5D0A0000
+	.string " : %d[ms]\n"
 .endobj __vt__Q37ext_ead3www14SurfaceManager
+
+# .data:0xDA7 | 0x81643AB7 | size: 0x1
+.obj gap_08_81643AB7_data, global
+.hidden gap_08_81643AB7_data
+	.byte 0x00
+.endobj gap_08_81643AB7_data
 
 # 0x816962F0..0x816962F8 | size: 0x8
 .section .sdata, "wa"

@@ -361,10 +361,10 @@
 /* 8145D120 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8145D124 | 7C 64 1B 78 */	mr r4, r3
 /* 8145D128 | 41 82 00 20 */	beq .L_8145D148
-/* 8145D12C | 3C A0 81 61 */	lis r5, lbl_81617738@ha
+/* 8145D12C | 3C A0 81 61 */	lis r5, scMethodList__Q33ipl2cs10textwriter@ha
 /* 8145D130 | 7F C3 F3 78 */	mr r3, r30
 /* 8145D134 | 38 C0 00 05 */	li r6, 0x5
-/* 8145D138 | 38 A5 77 38 */	addi r5, r5, lbl_81617738@l
+/* 8145D138 | 38 A5 77 38 */	addi r5, r5, scMethodList__Q33ipl2cs10textwriter@l
 /* 8145D13C | 4B FE F9 35 */	bl CHANSVmAddNativeMethodList
 /* 8145D140 | 7C 60 00 34 */	cntlzw r0, r3
 /* 8145D144 | 54 1F D9 7E */	srwi r31, r0, 5
@@ -383,7 +383,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x81617738 | size: 0x28
-.obj lbl_81617738, global
+# ipl::cs::textwriter::scMethodList
+.obj scMethodList__Q33ipl2cs10textwriter, local
 	.4byte lbl_8169792A
 	.4byte set_font__Q33ipl2cs10textwriterFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
 	.4byte lbl_8166A8E0
@@ -394,7 +395,7 @@
 	.4byte set_char_space__Q33ipl2cs10textwriterFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
 	.4byte lbl_8166A906
 	.4byte calc_string_rect__Q33ipl2cs10textwriterFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
-.endobj lbl_81617738
+.endobj scMethodList__Q33ipl2cs10textwriter
 
 # 0x8166A8E0..0x8166A920 | size: 0x40
 .data
@@ -439,10 +440,14 @@
 	.string "Rect"
 .endobj lbl_81697925
 
-# .sdata:0xA | 0x8169792A | size: 0xE
+# .sdata:0xA | 0x8169792A | size: 0x8
 .obj lbl_8169792A, global
-	.4byte 0x53657446
-	.4byte 0x6F6E7400
+	.string "SetFont"
+.endobj lbl_8169792A
+
+# .sdata:0x12 | 0x81697932 | size: 0x6
+.obj gap_11_81697932_sdata, global
+.hidden gap_11_81697932_sdata
 	.4byte 0x00000000
 	.2byte 0x0000
-.endobj lbl_8169792A
+.endobj gap_11_81697932_sdata

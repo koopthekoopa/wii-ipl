@@ -161,7 +161,7 @@
 /* 813DAD44 | 7F E4 FB 78 */	mr r4, r31
 /* 813DAD48 | 38 63 36 10 */	addi r3, r3, 0x3610
 /* 813DAD4C | 38 A0 00 06 */	li r5, 0x6
-/* 813DAD50 | 48 21 C9 25 */	bl fn_815F7674
+/* 813DAD50 | 48 21 C9 25 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 813DAD54 | 90 7E 00 D8 */	stw r3, 0xd8(r30)
 /* 813DAD58 | 3F A0 00 02 */	lis r29, 0x2
 /* 813DAD5C | 38 7D 12 B8 */	addi r3, r29, 0x12b8
@@ -380,13 +380,13 @@
 /* 813DB05C | 80 9F 00 24 */	lwz r4, 0x24(r31)
 /* 813DB060 | 38 63 11 00 */	addi r3, r3, 0x1100
 /* 813DB064 | 38 A0 00 06 */	li r5, 0x6
-/* 813DB068 | 48 21 C6 0D */	bl fn_815F7674
+/* 813DB068 | 48 21 C6 0D */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 813DB06C | 90 7F 00 D0 */	stw r3, 0xd0(r31)
 /* 813DB070 | 3C 60 00 03 */	lis r3, 0x3
 /* 813DB074 | 80 9F 00 24 */	lwz r4, 0x24(r31)
 /* 813DB078 | 38 63 C1 00 */	subi r3, r3, 0x3f00
 /* 813DB07C | 38 A0 00 06 */	li r5, 0x6
-/* 813DB080 | 48 21 C5 F5 */	bl fn_815F7674
+/* 813DB080 | 48 21 C5 F5 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 813DB084 | 3F 80 81 09 */	lis r28, smArg__Q23ipl6System@ha
 /* 813DB088 | 90 7F 00 D4 */	stw r3, 0xd4(r31)
 /* 813DB08C | 3B 9C 90 08 */	addi r28, r28, smArg__Q23ipl6System@l
@@ -3806,7 +3806,8 @@
 .endfn iplSDChannelSelect_813DDE44
 
 # .text:0x3360 | 0x813DDE68 | size: 0x28
-.fn iplSDChannelSelect_813DDE68, global
+# ipl::scene::SDChannelSelect::isResetProcessDone()
+.fn isResetProcessDone__Q33ipl5scene15SDChannelSelectFv, global
 /* 813DDE68 | 80 03 07 44 */	lwz r0, 0x744(r3)
 /* 813DDE6C | 2C 00 00 09 */	cmpwi r0, 0x9
 /* 813DDE70 | 40 80 00 18 */	bge .L_813DDE88
@@ -3819,10 +3820,11 @@
 .L_813DDE88:
 /* 813DDE88 | 38 60 00 01 */	li r3, 0x1
 /* 813DDE8C | 4E 80 00 20 */	blr
-.endfn iplSDChannelSelect_813DDE68
+.endfn isResetProcessDone__Q33ipl5scene15SDChannelSelectFv
 
 # .text:0x3388 | 0x813DDE90 | size: 0x1B0
-.fn iplSDChannelSelect_813DDE90, global
+# ipl::scene::SDChannelSelect::calcCommon()
+.fn calcCommon__Q33ipl5scene15SDChannelSelectFv, global
 /* 813DDE90 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 813DDE94 | 7C 08 02 A6 */	mflr r0
 /* 813DDE98 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -3846,7 +3848,7 @@
 /* 813DDEE0 | 7C 7F 1B 78 */	mr r31, r3
 /* 813DDEE4 | 41 82 00 84 */	beq .L_813DDF68
 /* 813DDEE8 | 80 9E 00 94 */	lwz r4, 0x94(r30)
-/* 813DDEEC | 48 00 C2 A1 */	bl iplSDChannelButton_813EA18C
+/* 813DDEEC | 48 00 C2 A1 */	bl iplSDButton_813EA18C
 /* 813DDEF0 | 80 1E 00 9C */	lwz r0, 0x9c(r30)
 /* 813DDEF4 | 38 60 00 03 */	li r3, 0x3
 /* 813DDEF8 | 90 7E 00 98 */	stw r3, 0x98(r30)
@@ -3855,13 +3857,13 @@
 /* 813DDF04 | 7F E3 FB 78 */	mr r3, r31
 /* 813DDF08 | 38 80 00 01 */	li r4, 0x1
 /* 813DDF0C | 38 A0 00 01 */	li r5, 0x1
-/* 813DDF10 | 48 00 C5 09 */	bl iplSDChannelButton_813EA418
+/* 813DDF10 | 48 00 C5 09 */	bl iplSDButton_813EA418
 /* 813DDF14 | 48 00 00 14 */	b .L_813DDF28
 .L_813DDF18:
 /* 813DDF18 | 7F E3 FB 78 */	mr r3, r31
 /* 813DDF1C | 38 80 00 01 */	li r4, 0x1
 /* 813DDF20 | 38 A0 00 00 */	li r5, 0x0
-/* 813DDF24 | 48 00 C4 F5 */	bl iplSDChannelButton_813EA418
+/* 813DDF24 | 48 00 C4 F5 */	bl iplSDButton_813EA418
 .L_813DDF28:
 /* 813DDF28 | 80 9E 00 A0 */	lwz r4, 0xa0(r30)
 /* 813DDF2C | 2C 04 00 01 */	cmpwi r4, 0x1
@@ -3873,13 +3875,13 @@
 /* 813DDF44 | 7F E3 FB 78 */	mr r3, r31
 /* 813DDF48 | 38 80 00 00 */	li r4, 0x0
 /* 813DDF4C | 38 A0 00 01 */	li r5, 0x1
-/* 813DDF50 | 48 00 C4 C9 */	bl iplSDChannelButton_813EA418
+/* 813DDF50 | 48 00 C4 C9 */	bl iplSDButton_813EA418
 /* 813DDF54 | 48 00 00 14 */	b .L_813DDF68
 .L_813DDF58:
 /* 813DDF58 | 7F E3 FB 78 */	mr r3, r31
 /* 813DDF5C | 38 80 00 00 */	li r4, 0x0
 /* 813DDF60 | 38 A0 00 00 */	li r5, 0x0
-/* 813DDF64 | 48 00 C4 B5 */	bl iplSDChannelButton_813EA418
+/* 813DDF64 | 48 00 C4 B5 */	bl iplSDButton_813EA418
 .L_813DDF68:
 /* 813DDF68 | 80 1E 00 98 */	lwz r0, 0x98(r30)
 /* 813DDF6C | 2C 00 00 03 */	cmpwi r0, 0x3
@@ -3937,10 +3939,11 @@
 /* 813DE034 | 7C 08 03 A6 */	mtlr r0
 /* 813DE038 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 813DE03C | 4E 80 00 20 */	blr
-.endfn iplSDChannelSelect_813DDE90
+.endfn calcCommon__Q33ipl5scene15SDChannelSelectFv
 
 # .text:0x3538 | 0x813DE040 | size: 0x30
-.fn iplSDChannelSelect_813DE040, global
+# ipl::scene::SDChannelSelect::calcFadein()
+.fn calcFadein__Q33ipl5scene15SDChannelSelectFv, global
 /* 813DE040 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 813DE044 | 7C 08 02 A6 */	mflr r0
 /* 813DE048 | 38 80 00 00 */	li r4, 0x0
@@ -3953,10 +3956,11 @@
 /* 813DE064 | 7C 08 03 A6 */	mtlr r0
 /* 813DE068 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 813DE06C | 4E 80 00 20 */	blr
-.endfn iplSDChannelSelect_813DE040
+.endfn calcFadein__Q33ipl5scene15SDChannelSelectFv
 
 # .text:0x3568 | 0x813DE070 | size: 0x1DC
-.fn iplSDChannelSelect_813DE070, global
+# ipl::scene::SDChannelSelect::calcNormal()
+.fn calcNormal__Q33ipl5scene15SDChannelSelectFv, global
 /* 813DE070 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 813DE074 | 7C 08 02 A6 */	mflr r0
 /* 813DE078 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -4106,10 +4110,11 @@
 /* 813DE240 | 7C 08 03 A6 */	mtlr r0
 /* 813DE244 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 813DE248 | 4E 80 00 20 */	blr
-.endfn iplSDChannelSelect_813DE070
+.endfn calcNormal__Q33ipl5scene15SDChannelSelectFv
 
 # .text:0x3744 | 0x813DE24C | size: 0xA0
-.fn iplSDChannelSelect_813DE24C, global
+# ipl::scene::SDChannelSelect::initCalcFadeout()
+.fn initCalcFadeout__Q33ipl5scene15SDChannelSelectFv, global
 /* 813DE24C | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 813DE250 | 7C 08 02 A6 */	mflr r0
 /* 813DE254 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -4153,10 +4158,11 @@
 /* 813DE2E0 | 7C 08 03 A6 */	mtlr r0
 /* 813DE2E4 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 813DE2E8 | 4E 80 00 20 */	blr
-.endfn iplSDChannelSelect_813DE24C
+.endfn initCalcFadeout__Q33ipl5scene15SDChannelSelectFv
 
 # .text:0x37E4 | 0x813DE2EC | size: 0x50
-.fn iplSDChannelSelect_813DE2EC, global
+# ipl::scene::SDChannelSelect::calcFadeout()
+.fn calcFadeout__Q33ipl5scene15SDChannelSelectFv, global
 /* 813DE2EC | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 813DE2F0 | 7C 08 02 A6 */	mflr r0
 /* 813DE2F4 | 90 01 00 14 */	stw r0, 0x14(r1)
@@ -4178,10 +4184,11 @@
 /* 813DE330 | 7C 08 03 A6 */	mtlr r0
 /* 813DE334 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 813DE338 | 4E 80 00 20 */	blr
-.endfn iplSDChannelSelect_813DE2EC
+.endfn calcFadeout__Q33ipl5scene15SDChannelSelectFv
 
 # .text:0x3834 | 0x813DE33C | size: 0x38C
-.fn iplSDChannelSelect_813DE33C, global
+# ipl::scene::SDChannelSelect::draw()
+.fn draw__Q33ipl5scene15SDChannelSelectFv, global
 /* 813DE33C | 94 21 FF 50 */	stwu r1, -0xb0(r1)
 /* 813DE340 | 7C 08 02 A6 */	mflr r0
 /* 813DE344 | 90 01 00 B4 */	stw r0, 0xb4(r1)
@@ -4422,10 +4429,11 @@
 /* 813DE6BC | 7C 08 03 A6 */	mtlr r0
 /* 813DE6C0 | 38 21 00 B0 */	addi r1, r1, 0xb0
 /* 813DE6C4 | 4E 80 00 20 */	blr
-.endfn iplSDChannelSelect_813DE33C
+.endfn draw__Q33ipl5scene15SDChannelSelectFv
 
 # .text:0x3BC0 | 0x813DE6C8 | size: 0x334
-.fn iplSDChannelSelect_813DE6C8, global
+# ipl::scene::SDChannelSelect::destroy()
+.fn destroy__Q33ipl5scene15SDChannelSelectFv, global
 /* 813DE6C8 | 94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 813DE6CC | 7C 08 02 A6 */	mflr r0
 /* 813DE6D0 | 90 01 00 24 */	stw r0, 0x24(r1)
@@ -4648,7 +4656,7 @@
 /* 813DE9F0 | 7C 08 03 A6 */	mtlr r0
 /* 813DE9F4 | 38 21 00 20 */	addi r1, r1, 0x20
 /* 813DE9F8 | 4E 80 00 20 */	blr
-.endfn iplSDChannelSelect_813DE6C8
+.endfn destroy__Q33ipl5scene15SDChannelSelectFv
 
 # .text:0x3EF4 | 0x813DE9FC | size: 0x440
 .fn iplSDChannelSelect_813DE9FC, global
@@ -5294,11 +5302,11 @@
 /* 813DF308 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813DF30C | 7C 7F 1B 78 */	mr r31, r3
 /* 813DF310 | 41 82 00 18 */	beq .L_813DF328
-/* 813DF314 | 48 00 AE 6D */	bl iplSDChannelButton_813EA180
+/* 813DF314 | 48 00 AE 6D */	bl iplSDButton_813EA180
 /* 813DF318 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813DF31C | 41 82 00 0C */	beq .L_813DF328
 /* 813DF320 | 7F E3 FB 78 */	mr r3, r31
-/* 813DF324 | 48 00 A8 95 */	bl iplSDChannelButton_813E9BB8
+/* 813DF324 | 48 00 A8 95 */	bl iplSDButton_813E9BB8
 .L_813DF328:
 /* 813DF328 | 80 1E 00 98 */	lwz r0, 0x98(r30)
 /* 813DF32C | 2C 00 00 01 */	cmpwi r0, 0x1
@@ -5388,7 +5396,7 @@
 /* 813DF44C | 90 1F 00 9C */	stw r0, 0x9c(r31)
 /* 813DF450 | 40 82 00 18 */	bne .L_813DF468
 /* 813DF454 | 38 80 00 0F */	li r4, 0xf
-/* 813DF458 | 48 00 AD FD */	bl iplSDChannelButton_813EA254
+/* 813DF458 | 48 00 AD FD */	bl iplSDButton_813EA254
 /* 813DF45C | 38 00 00 00 */	li r0, 0x0
 /* 813DF460 | 98 1F 00 C8 */	stb r0, 0xc8(r31)
 /* 813DF464 | 48 00 00 70 */	b .L_813DF4D4
@@ -5397,7 +5405,7 @@
 /* 813DF46C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813DF470 | 40 82 00 64 */	bne .L_813DF4D4
 /* 813DF474 | 38 80 00 0E */	li r4, 0xe
-/* 813DF478 | 48 00 AD DD */	bl iplSDChannelButton_813EA254
+/* 813DF478 | 48 00 AD DD */	bl iplSDButton_813EA254
 /* 813DF47C | 38 00 00 01 */	li r0, 0x1
 /* 813DF480 | 98 1F 00 C9 */	stb r0, 0xc9(r31)
 /* 813DF484 | 48 00 00 50 */	b .L_813DF4D4
@@ -5410,7 +5418,7 @@
 /* 813DF49C | 7C 05 00 00 */	cmpw r5, r0
 /* 813DF4A0 | 40 82 00 18 */	bne .L_813DF4B8
 /* 813DF4A4 | 38 80 00 10 */	li r4, 0x10
-/* 813DF4A8 | 48 00 AD AD */	bl iplSDChannelButton_813EA254
+/* 813DF4A8 | 48 00 AD AD */	bl iplSDButton_813EA254
 /* 813DF4AC | 38 00 00 00 */	li r0, 0x0
 /* 813DF4B0 | 98 1F 00 C9 */	stb r0, 0xc9(r31)
 /* 813DF4B4 | 48 00 00 20 */	b .L_813DF4D4
@@ -5419,7 +5427,7 @@
 /* 813DF4BC | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813DF4C0 | 40 82 00 14 */	bne .L_813DF4D4
 /* 813DF4C4 | 38 80 00 0D */	li r4, 0xd
-/* 813DF4C8 | 48 00 AD 8D */	bl iplSDChannelButton_813EA254
+/* 813DF4C8 | 48 00 AD 8D */	bl iplSDButton_813EA254
 /* 813DF4CC | 38 00 00 01 */	li r0, 0x1
 /* 813DF4D0 | 98 1F 00 C8 */	stb r0, 0xc8(r31)
 .L_813DF4D4:
@@ -5487,13 +5495,13 @@
 /* 813DF5A0 | 38 80 00 24 */	li r4, 0x24
 /* 813DF5A4 | 48 02 BB 95 */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813DF5A8 | 7C 7F 1B 78 */	mr r31, r3
-/* 813DF5AC | 48 00 B0 69 */	bl iplSDChannelButton_813EA614
+/* 813DF5AC | 48 00 B0 69 */	bl iplSDButton_813EA614
 /* 813DF5B0 | 80 1E 00 9C */	lwz r0, 0x9c(r30)
 /* 813DF5B4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813DF5B8 | 40 81 00 1C */	ble .L_813DF5D4
 /* 813DF5BC | 7F E3 FB 78 */	mr r3, r31
 /* 813DF5C0 | 38 80 00 0D */	li r4, 0xd
-/* 813DF5C4 | 48 00 AC 91 */	bl iplSDChannelButton_813EA254
+/* 813DF5C4 | 48 00 AC 91 */	bl iplSDButton_813EA254
 /* 813DF5C8 | 38 00 00 01 */	li r0, 0x1
 /* 813DF5CC | 98 1E 00 C8 */	stb r0, 0xc8(r30)
 /* 813DF5D0 | 48 00 00 0C */	b .L_813DF5DC
@@ -5510,7 +5518,7 @@
 /* 813DF5F4 | 40 80 00 1C */	bge .L_813DF610
 /* 813DF5F8 | 7F E3 FB 78 */	mr r3, r31
 /* 813DF5FC | 38 80 00 0E */	li r4, 0xe
-/* 813DF600 | 48 00 AC 55 */	bl iplSDChannelButton_813EA254
+/* 813DF600 | 48 00 AC 55 */	bl iplSDButton_813EA254
 /* 813DF604 | 38 00 00 01 */	li r0, 0x1
 /* 813DF608 | 98 1E 00 C9 */	stb r0, 0xc9(r30)
 /* 813DF60C | 48 00 00 0C */	b .L_813DF618
@@ -5520,7 +5528,7 @@
 .L_813DF618:
 /* 813DF618 | 80 9E 00 94 */	lwz r4, 0x94(r30)
 /* 813DF61C | 7F E3 FB 78 */	mr r3, r31
-/* 813DF620 | 48 00 AB 6D */	bl iplSDChannelButton_813EA18C
+/* 813DF620 | 48 00 AB 6D */	bl iplSDButton_813EA18C
 /* 813DF624 | 80 6D A7 38 */	lwz r3, m_handle__Q23ipl11TVRCManager@sda21(r0)
 /* 813DF628 | 38 80 00 01 */	li r4, 0x1
 /* 813DF62C | 4B F8 27 F5 */	bl setEnable__Q23ipl11TVRCManagerFi
@@ -6620,20 +6628,20 @@
 /* 813E04BC | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813E04C0 | 41 82 00 0C */	beq .L_813E04CC
 /* 813E04C4 | 38 80 00 0F */	li r4, 0xf
-/* 813E04C8 | 48 00 9D 8D */	bl iplSDChannelButton_813EA254
+/* 813E04C8 | 48 00 9D 8D */	bl iplSDButton_813EA254
 .L_813E04CC:
 /* 813E04CC | 88 1D 00 C9 */	lbz r0, 0xc9(r29)
 /* 813E04D0 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813E04D4 | 41 82 00 10 */	beq .L_813E04E4
 /* 813E04D8 | 7F E3 FB 78 */	mr r3, r31
 /* 813E04DC | 38 80 00 10 */	li r4, 0x10
-/* 813E04E0 | 48 00 9D 75 */	bl iplSDChannelButton_813EA254
+/* 813E04E0 | 48 00 9D 75 */	bl iplSDButton_813EA254
 .L_813E04E4:
 /* 813E04E4 | 7F E3 FB 78 */	mr r3, r31
-/* 813E04E8 | 48 00 A2 75 */	bl iplSDChannelButton_813EA75C
+/* 813E04E8 | 48 00 A2 75 */	bl iplSDButton_813EA75C
 /* 813E04EC | 7F E3 FB 78 */	mr r3, r31
 /* 813E04F0 | 38 80 00 00 */	li r4, 0x0
-/* 813E04F4 | 48 00 9C 99 */	bl iplSDChannelButton_813EA18C
+/* 813E04F4 | 48 00 9C 99 */	bl iplSDButton_813EA18C
 /* 813E04F8 | 38 00 00 05 */	li r0, 0x5
 /* 813E04FC | 3F E0 81 09 */	lis r31, sSystem__Q23ipl3snd@ha
 /* 813E0500 | 3C 80 81 65 */	lis r4, lbl_81654828@ha
@@ -7785,11 +7793,11 @@
 /* 813E1594 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813E1598 | 7C 7F 1B 78 */	mr r31, r3
 /* 813E159C | 41 82 00 18 */	beq .L_813E15B4
-/* 813E15A0 | 48 00 8B E1 */	bl iplSDChannelButton_813EA180
+/* 813E15A0 | 48 00 8B E1 */	bl iplSDButton_813EA180
 /* 813E15A4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813E15A8 | 41 82 00 0C */	beq .L_813E15B4
 /* 813E15AC | 7F E3 FB 78 */	mr r3, r31
-/* 813E15B0 | 48 00 86 09 */	bl iplSDChannelButton_813E9BB8
+/* 813E15B0 | 48 00 86 09 */	bl iplSDButton_813E9BB8
 .L_813E15B4:
 /* 813E15B4 | 80 7E 00 7C */	lwz r3, 0x7c(r30)
 /* 813E15B8 | 4B F8 99 D5 */	bl update__Q33ipl3gui11PaneManagerFv
@@ -7868,11 +7876,11 @@
 /* 813E16B8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813E16BC | 7C 7D 1B 78 */	mr r29, r3
 /* 813E16C0 | 41 82 00 18 */	beq .L_813E16D8
-/* 813E16C4 | 48 00 8A BD */	bl iplSDChannelButton_813EA180
+/* 813E16C4 | 48 00 8A BD */	bl iplSDButton_813EA180
 /* 813E16C8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813E16CC | 41 82 00 0C */	beq .L_813E16D8
 /* 813E16D0 | 7F A3 EB 78 */	mr r3, r29
-/* 813E16D4 | 48 00 84 E5 */	bl iplSDChannelButton_813E9BB8
+/* 813E16D4 | 48 00 84 E5 */	bl iplSDButton_813E9BB8
 .L_813E16D8:
 /* 813E16D8 | 80 7F 00 7C */	lwz r3, 0x7c(r31)
 /* 813E16DC | 4B F8 98 B1 */	bl update__Q33ipl3gui11PaneManagerFv
@@ -7929,7 +7937,7 @@
 /* 813E1790 | 41 80 00 D0 */	blt .L_813E1860
 /* 813E1794 | 7F A3 EB 78 */	mr r3, r29
 /* 813E1798 | 38 80 00 07 */	li r4, 0x7
-/* 813E179C | 48 00 8A B9 */	bl iplSDChannelButton_813EA254
+/* 813E179C | 48 00 8A B9 */	bl iplSDButton_813EA254
 /* 813E17A0 | 80 7F 00 68 */	lwz r3, 0x68(r31)
 /* 813E17A4 | 38 80 FF FF */	li r4, -0x1
 /* 813E17A8 | C0 22 86 C8 */	lfs f1, lbl_81694AC8@sda21(r0)
@@ -7991,7 +7999,7 @@
 /* 813E1878 | 41 80 00 CC */	blt .L_813E1944
 /* 813E187C | 7F A3 EB 78 */	mr r3, r29
 /* 813E1880 | 38 80 00 08 */	li r4, 0x8
-/* 813E1884 | 48 00 89 D1 */	bl iplSDChannelButton_813EA254
+/* 813E1884 | 48 00 89 D1 */	bl iplSDButton_813EA254
 /* 813E1888 | 80 7F 00 68 */	lwz r3, 0x68(r31)
 /* 813E188C | 38 80 FF FF */	li r4, -0x1
 /* 813E1890 | C0 22 86 D8 */	lfs f1, lbl_81694AD8@sda21(r0)
@@ -8417,11 +8425,11 @@
 /* 813E1E78 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813E1E7C | 7C 7E 1B 78 */	mr r30, r3
 /* 813E1E80 | 41 82 00 18 */	beq .L_813E1E98
-/* 813E1E84 | 48 00 82 FD */	bl iplSDChannelButton_813EA180
+/* 813E1E84 | 48 00 82 FD */	bl iplSDButton_813EA180
 /* 813E1E88 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813E1E8C | 41 82 00 0C */	beq .L_813E1E98
 /* 813E1E90 | 7F C3 F3 78 */	mr r3, r30
-/* 813E1E94 | 48 00 7D 25 */	bl iplSDChannelButton_813E9BB8
+/* 813E1E94 | 48 00 7D 25 */	bl iplSDButton_813E9BB8
 .L_813E1E98:
 /* 813E1E98 | 3F C0 81 09 */	lis r30, smArg__Q23ipl6System@ha
 /* 813E1E9C | 80 9F 00 E4 */	lwz r4, 0xe4(r31)
@@ -8463,7 +8471,7 @@
 /* 813E1F24 | 90 1F 00 9C */	stw r0, 0x9c(r31)
 /* 813E1F28 | 40 82 00 18 */	bne .L_813E1F40
 /* 813E1F2C | 38 80 00 0F */	li r4, 0xf
-/* 813E1F30 | 48 00 83 25 */	bl iplSDChannelButton_813EA254
+/* 813E1F30 | 48 00 83 25 */	bl iplSDButton_813EA254
 /* 813E1F34 | 38 00 00 00 */	li r0, 0x0
 /* 813E1F38 | 98 1F 00 C8 */	stb r0, 0xc8(r31)
 /* 813E1F3C | 48 00 00 70 */	b .L_813E1FAC
@@ -8472,7 +8480,7 @@
 /* 813E1F44 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813E1F48 | 40 82 00 64 */	bne .L_813E1FAC
 /* 813E1F4C | 38 80 00 0E */	li r4, 0xe
-/* 813E1F50 | 48 00 83 05 */	bl iplSDChannelButton_813EA254
+/* 813E1F50 | 48 00 83 05 */	bl iplSDButton_813EA254
 /* 813E1F54 | 38 00 00 01 */	li r0, 0x1
 /* 813E1F58 | 98 1F 00 C9 */	stb r0, 0xc9(r31)
 /* 813E1F5C | 48 00 00 50 */	b .L_813E1FAC
@@ -8485,7 +8493,7 @@
 /* 813E1F74 | 7C 05 00 00 */	cmpw r5, r0
 /* 813E1F78 | 40 82 00 18 */	bne .L_813E1F90
 /* 813E1F7C | 38 80 00 10 */	li r4, 0x10
-/* 813E1F80 | 48 00 82 D5 */	bl iplSDChannelButton_813EA254
+/* 813E1F80 | 48 00 82 D5 */	bl iplSDButton_813EA254
 /* 813E1F84 | 38 00 00 00 */	li r0, 0x0
 /* 813E1F88 | 98 1F 00 C9 */	stb r0, 0xc9(r31)
 /* 813E1F8C | 48 00 00 20 */	b .L_813E1FAC
@@ -8494,7 +8502,7 @@
 /* 813E1F94 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 813E1F98 | 40 82 00 14 */	bne .L_813E1FAC
 /* 813E1F9C | 38 80 00 0D */	li r4, 0xd
-/* 813E1FA0 | 48 00 82 B5 */	bl iplSDChannelButton_813EA254
+/* 813E1FA0 | 48 00 82 B5 */	bl iplSDButton_813EA254
 /* 813E1FA4 | 38 00 00 01 */	li r0, 0x1
 /* 813E1FA8 | 98 1F 00 C8 */	stb r0, 0xc8(r31)
 .L_813E1FAC:
@@ -8826,7 +8834,7 @@
 /* 813E2448 | 38 80 00 24 */	li r4, 0x24
 /* 813E244C | 80 7E 00 64 */	lwz r3, 0x64(r30)
 /* 813E2450 | 48 02 8C E9 */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813E2454 | 48 00 83 09 */	bl iplSDChannelButton_813EA75C
+/* 813E2454 | 48 00 83 09 */	bl iplSDButton_813EA75C
 /* 813E2458 | 3B A0 00 00 */	li r29, 0x0
 /* 813E245C | 48 00 00 2C */	b .L_813E2488
 .L_813E2460:
@@ -8967,7 +8975,7 @@
 /* 813E2654 | 90 1D 00 14 */	stw r0, 0x14(r29)
 /* 813E2658 | 80 7E 00 64 */	lwz r3, 0x64(r30)
 /* 813E265C | 48 02 8A DD */	bl getScene__Q33ipl5scene7ManagerFi
-/* 813E2660 | 48 00 7F B5 */	bl iplSDChannelButton_813EA614
+/* 813E2660 | 48 00 7F B5 */	bl iplSDButton_813EA614
 /* 813E2664 | 38 00 00 00 */	li r0, 0x0
 /* 813E2668 | 3B A0 00 00 */	li r29, 0x0
 /* 813E266C | 98 1F 01 04 */	stb r0, 0x104(r31)
@@ -9403,7 +9411,7 @@
 /* 813E2C84 | 38 80 00 04 */	li r4, 0x4
 /* 813E2C88 | 80 BF 00 0C */	lwz r5, 0xc(r31)
 /* 813E2C8C | 90 05 00 98 */	stw r0, 0x98(r5)
-/* 813E2C90 | 48 00 75 C5 */	bl iplSDChannelButton_813EA254
+/* 813E2C90 | 48 00 75 C5 */	bl iplSDButton_813EA254
 /* 813E2C94 | 3C 60 81 09 */	lis r3, sSystem__Q23ipl3snd@ha
 /* 813E2C98 | 3C 80 81 65 */	lis r4, lbl_816549D7@ha
 /* 813E2C9C | 38 63 99 2C */	addi r3, r3, sSystem__Q23ipl3snd@l
@@ -9418,7 +9426,7 @@
 /* 813E2CBC | 40 82 00 34 */	bne .L_813E2CF0
 /* 813E2CC0 | 7F 63 DB 78 */	mr r3, r27
 /* 813E2CC4 | 38 80 00 00 */	li r4, 0x0
-/* 813E2CC8 | 48 00 74 C5 */	bl iplSDChannelButton_813EA18C
+/* 813E2CC8 | 48 00 74 C5 */	bl iplSDButton_813EA18C
 /* 813E2CCC | 80 BF 00 0C */	lwz r5, 0xc(r31)
 /* 813E2CD0 | 38 00 00 04 */	li r0, 0x4
 /* 813E2CD4 | 3C 60 81 09 */	lis r3, sSystem__Q23ipl3snd@ha
@@ -9440,7 +9448,7 @@
 /* 813E2D10 | 40 81 00 20 */	ble .L_813E2D30
 /* 813E2D14 | 7F 63 DB 78 */	mr r3, r27
 /* 813E2D18 | 38 80 00 07 */	li r4, 0x7
-/* 813E2D1C | 48 00 75 39 */	bl iplSDChannelButton_813EA254
+/* 813E2D1C | 48 00 75 39 */	bl iplSDButton_813EA254
 /* 813E2D20 | 80 7F 00 0C */	lwz r3, 0xc(r31)
 /* 813E2D24 | 38 80 00 08 */	li r4, 0x8
 /* 813E2D28 | 4B FF D6 71 */	bl iplSDChannelSelect_813E0398
@@ -9461,7 +9469,7 @@
 /* 813E2D60 | 40 80 00 1C */	bge .L_813E2D7C
 /* 813E2D64 | 7F 63 DB 78 */	mr r3, r27
 /* 813E2D68 | 38 80 00 08 */	li r4, 0x8
-/* 813E2D6C | 48 00 74 E9 */	bl iplSDChannelButton_813EA254
+/* 813E2D6C | 48 00 74 E9 */	bl iplSDButton_813EA254
 /* 813E2D70 | 80 7F 00 0C */	lwz r3, 0xc(r31)
 /* 813E2D74 | 38 80 00 09 */	li r4, 0x9
 /* 813E2D78 | 4B FF D6 21 */	bl iplSDChannelSelect_813E0398
@@ -9475,7 +9483,8 @@
 .endfn iplSDChannelSelect_813E2B54
 
 # .text:0x828C | 0x813E2D94 | size: 0x44
-.fn iplSDChannelSelect_813E2D94, global
+# ipl::scene::SDChannelSelect::startResetting()
+.fn startResetting__Q33ipl5scene15SDChannelSelectFv, global
 /* 813E2D94 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 813E2D98 | 7C 08 02 A6 */	mflr r0
 /* 813E2D9C | 3C 80 81 09 */	lis r4, sSystem__Q23ipl3snd@ha
@@ -9493,7 +9502,7 @@
 /* 813E2DCC | 7C 08 03 A6 */	mtlr r0
 /* 813E2DD0 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 813E2DD4 | 4E 80 00 20 */	blr
-.endfn iplSDChannelSelect_813E2D94
+.endfn startResetting__Q33ipl5scene15SDChannelSelectFv
 
 # .text:0x82D0 | 0x813E2DD8 | size: 0x4C
 .fn iplSDChannelSelect_813E2DD8, global
@@ -10240,36 +10249,36 @@
 
 # .data:0x60C | 0x81654694 | size: 0x78
 .obj jumptable_81654694, local
-	.rel iplSDChannelSelect_813DE070, .L_813DE17C
-	.rel iplSDChannelSelect_813DE070, .L_813DE0BC
-	.rel iplSDChannelSelect_813DE070, .L_813DE17C
-	.rel iplSDChannelSelect_813DE070, .L_813DE17C
-	.rel iplSDChannelSelect_813DE070, .L_813DE17C
-	.rel iplSDChannelSelect_813DE070, .L_813DE0D4
-	.rel iplSDChannelSelect_813DE070, .L_813DE17C
-	.rel iplSDChannelSelect_813DE070, .L_813DE0F4
-	.rel iplSDChannelSelect_813DE070, .L_813DE0C4
-	.rel iplSDChannelSelect_813DE070, .L_813DE0C4
-	.rel iplSDChannelSelect_813DE070, .L_813DE0CC
-	.rel iplSDChannelSelect_813DE070, .L_813DE0CC
-	.rel iplSDChannelSelect_813DE070, .L_813DE0FC
-	.rel iplSDChannelSelect_813DE070, .L_813DE17C
-	.rel iplSDChannelSelect_813DE070, .L_813DE108
-	.rel iplSDChannelSelect_813DE070, .L_813DE110
-	.rel iplSDChannelSelect_813DE070, .L_813DE118
-	.rel iplSDChannelSelect_813DE070, .L_813DE120
-	.rel iplSDChannelSelect_813DE070, .L_813DE128
-	.rel iplSDChannelSelect_813DE070, .L_813DE130
-	.rel iplSDChannelSelect_813DE070, .L_813DE138
-	.rel iplSDChannelSelect_813DE070, .L_813DE140
-	.rel iplSDChannelSelect_813DE070, .L_813DE148
-	.rel iplSDChannelSelect_813DE070, .L_813DE148
-	.rel iplSDChannelSelect_813DE070, .L_813DE150
-	.rel iplSDChannelSelect_813DE070, .L_813DE158
-	.rel iplSDChannelSelect_813DE070, .L_813DE160
-	.rel iplSDChannelSelect_813DE070, .L_813DE168
-	.rel iplSDChannelSelect_813DE070, .L_813DE170
-	.rel iplSDChannelSelect_813DE070, .L_813DE178
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE17C
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE0BC
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE17C
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE17C
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE17C
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE0D4
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE17C
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE0F4
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE0C4
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE0C4
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE0CC
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE0CC
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE0FC
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE17C
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE108
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE110
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE118
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE120
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE128
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE130
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE138
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE140
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE148
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE148
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE150
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE158
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE160
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE168
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE170
+	.rel calcNormal__Q33ipl5scene15SDChannelSelectFv, .L_813DE178
 .endobj jumptable_81654694
 
 # .data:0x684 | 0x8165470C | size: 0x2F
@@ -10493,7 +10502,7 @@
 .obj lbl_81654A08, global
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte iplSDChannelButton_813EA7B8
+	.4byte iplSDButton_813EA7B8
 	.4byte setManager__Q23gui12EventHandlerFPQ23gui7Manager
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
@@ -10524,19 +10533,19 @@
 	.4byte "@20@__dt__Q33ipl5scene15SDChannelSelectFv"
 	.4byte isReady__Q33ipl5scene4BaseCFv
 	.4byte isResetAcceptable__Q33ipl5scene4BaseCFv
-	.4byte iplSDChannelSelect_813E2D94
-	.4byte iplSDChannelSelect_813DDE68
+	.4byte startResetting__Q33ipl5scene15SDChannelSelectFv
+	.4byte isResetProcessDone__Q33ipl5scene15SDChannelSelectFv
 	.4byte prepare__Q33ipl5scene15SDChannelSelectFv
 	.4byte create__Q33ipl5scene15SDChannelSelectFv
 	.4byte calc__Q33ipl5scene14FaderSceneBaseFv
-	.4byte iplSDChannelSelect_813DE33C
-	.4byte iplSDChannelSelect_813DE6C8
+	.4byte draw__Q33ipl5scene15SDChannelSelectFv
+	.4byte destroy__Q33ipl5scene15SDChannelSelectFv
 	.4byte initCalcNormal__Q33ipl5scene14FaderSceneBaseFv
-	.4byte iplSDChannelSelect_813DE24C
-	.4byte iplSDChannelSelect_813DDE90
-	.4byte iplSDChannelSelect_813DE040
-	.4byte iplSDChannelSelect_813DE070
-	.4byte iplSDChannelSelect_813DE2EC
+	.4byte initCalcFadeout__Q33ipl5scene15SDChannelSelectFv
+	.4byte calcCommon__Q33ipl5scene15SDChannelSelectFv
+	.4byte calcFadein__Q33ipl5scene15SDChannelSelectFv
+	.4byte calcNormal__Q33ipl5scene15SDChannelSelectFv
+	.4byte calcFadeout__Q33ipl5scene15SDChannelSelectFv
 	.4byte calcCommonAfter__Q33ipl5scene14FaderSceneBaseFv
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -10763,9 +10772,13 @@
 	.string "16x9"
 .endobj lbl_81696DC2
 
-# .sdata:0x47 | 0x81696DC7 | size: 0x9
+# .sdata:0x47 | 0x81696DC7 | size: 0x8
 .obj lbl_81696DC7, global
-	.4byte 0x57616974
-	.4byte 0x5F303000
-	.byte 0x00
+	.string "Wait_00"
 .endobj lbl_81696DC7
+
+# .sdata:0x4F | 0x81696DCF | size: 0x1
+.obj gap_11_81696DCF_sdata, global
+.hidden gap_11_81696DCF_sdata
+	.byte 0x00
+.endobj gap_11_81696DCF_sdata

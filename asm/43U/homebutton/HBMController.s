@@ -789,10 +789,17 @@
 .data
 .balign 8
 
-# .data:0x0 | 0x81645630 | size: 0x10
+# .data:0x0 | 0x81645630 | size: 0xB
 .obj lbl_81645630, global
-	.string "Create %d\n\000\000\000\000\000"
+	.string "Create %d\n"
 .endobj lbl_81645630
+
+# .data:0xB | 0x8164563B | size: 0x5
+.obj gap_08_8164563B_data, global
+.hidden gap_08_8164563B_data
+	.4byte 0x00000000
+	.byte 0x00
+.endobj gap_08_8164563B_data
 
 # 0x81694758..0x81694768 | size: 0x10
 .section .sdata2, "a"
@@ -808,11 +815,16 @@
 	.float -10000
 .endobj lbl_8169475C
 
-# .sdata2:0x8 | 0x81694760 | size: 0x8
+# .sdata2:0x8 | 0x81694760 | size: 0x4
 .obj lbl_81694760, global
 	.float 10
-	.float 0
 .endobj lbl_81694760
+
+# .sdata2:0xC | 0x81694764 | size: 0x4
+.obj gap_09_81694764_sdata2, global
+.hidden gap_09_81694764_sdata2
+	.4byte 0x00000000
+.endobj gap_09_81694764_sdata2
 
 # 0x816989B8..0x816989C0 | size: 0x8
 .section .sbss, "wa", @nobits

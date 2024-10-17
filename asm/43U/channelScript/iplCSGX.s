@@ -22,10 +22,10 @@
 /* 8145C414 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8145C418 | 7C 64 1B 78 */	mr r4, r3
 /* 8145C41C | 41 82 00 20 */	beq .L_8145C43C
-/* 8145C420 | 3C A0 81 61 */	lis r5, lbl_81617610@ha
+/* 8145C420 | 3C A0 81 61 */	lis r5, scPropertyList__Q33ipl2cs2gx@ha
 /* 8145C424 | 7F C3 F3 78 */	mr r3, r30
 /* 8145C428 | 38 C0 00 0B */	li r6, 0xb
-/* 8145C42C | 38 A5 76 10 */	addi r5, r5, lbl_81617610@l
+/* 8145C42C | 38 A5 76 10 */	addi r5, r5, scPropertyList__Q33ipl2cs2gx@l
 /* 8145C430 | 4B FF 08 29 */	bl CHANSVmAddNativePropertyAccessorsList
 /* 8145C434 | 7C 60 00 34 */	cntlzw r0, r3
 /* 8145C438 | 54 1F D9 7E */	srwi r31, r0, 5
@@ -115,8 +115,9 @@
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x81617610 | size: 0x88
-.obj lbl_81617610, global
+# .rodata:0x0 | 0x81617610 | size: 0x84
+# ipl::cs::gx::scPropertyList
+.obj scPropertyList__Q33ipl2cs2gx, local
 	.4byte lbl_8166A860
 	.4byte "get_int<0>__Q33ipl2cs4utilFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
 	.4byte 0x00000000
@@ -150,8 +151,13 @@
 	.4byte lbl_8166A8D4
 	.4byte "get_int<2>__Q33ipl2cs4utilFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
 	.4byte 0x00000000
+.endobj scPropertyList__Q33ipl2cs2gx
+
+# .rodata:0x84 | 0x81617694 | size: 0x4
+.obj gap_07_81617694_rodata, global
+.hidden gap_07_81617694_rodata
 	.4byte 0x00000000
-.endobj lbl_81617610
+.endobj gap_07_81617694_rodata
 
 # 0x8166A860..0x8166A8E0 | size: 0x80
 .data
@@ -209,17 +215,21 @@
 
 # .data:0x74 | 0x8166A8D4 | size: 0xC
 .obj lbl_8166A8D4, global
-	.4byte 0x2A47585F
-	.4byte 0x4D495252
-	.4byte 0x4F520000
+	.string "*GX_MIRROR\000"
 .endobj lbl_8166A8D4
 
 # 0x816978E0..0x816978E8 | size: 0x8
 .section .sdata, "wa"
 .balign 8
 
-# .sdata:0x0 | 0x816978E0 | size: 0x8
+# .sdata:0x0 | 0x816978E0 | size: 0x3
 .obj lbl_816978E0, global
-	.4byte 0x47580000
-	.4byte 0x00000000
+	.string "GX"
 .endobj lbl_816978E0
+
+# .sdata:0x3 | 0x816978E3 | size: 0x5
+.obj gap_11_816978E3_sdata, global
+.hidden gap_11_816978E3_sdata
+	.4byte 0x00000000
+	.byte 0x00
+.endobj gap_11_816978E3_sdata

@@ -6898,7 +6898,7 @@
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x8160F650 | size: 0x18
+# .rodata:0x0 | 0x8160F650 | size: 0x16
 .obj lbl_8160F650, global
 	.2byte 0x0030
 	.2byte 0x0031
@@ -6911,8 +6911,13 @@
 	.2byte 0x0038
 	.2byte 0x0039
 	.2byte 0x0000
-	.2byte 0x0000
 .endobj lbl_8160F650
+
+# .rodata:0x16 | 0x8160F666 | size: 0x2
+.obj gap_07_8160F666_rodata, global
+.hidden gap_07_8160F666_rodata
+	.2byte 0x0000
+.endobj gap_07_8160F666_rodata
 
 # 0x81647538..0x81647C90 | size: 0x758
 .data
@@ -7537,11 +7542,16 @@
 	.float 0.01
 .endobj lbl_816947E4
 
-# .sdata2:0x18 | 0x816947E8 | size: 0x8
+# .sdata2:0x18 | 0x816947E8 | size: 0x4
 .obj lbl_816947E8, global
 	.float -1
-	.float 0
 .endobj lbl_816947E8
+
+# .sdata2:0x1C | 0x816947EC | size: 0x4
+.obj gap_09_816947EC_sdata2, global
+.hidden gap_09_816947EC_sdata2
+	.4byte 0x00000000
+.endobj gap_09_816947EC_sdata2
 
 # 0x816965C0..0x816965D0 | size: 0x10
 .section .sdata, "wa"
@@ -7557,17 +7567,27 @@
 	.string "N_Top"
 .endobj lbl_816965C4
 
-# .sdata:0xA | 0x816965CA | size: 0x6
+# .sdata:0xA | 0x816965CA | size: 0x4
 .obj lbl_816965CA, global
 	.4byte 0x00000000
-	.2byte 0x0000
 .endobj lbl_816965CA
+
+# .sdata:0xE | 0x816965CE | size: 0x2
+.obj gap_11_816965CE_sdata, global
+.hidden gap_11_816965CE_sdata
+	.2byte 0x0000
+.endobj gap_11_816965CE_sdata
 
 # 0x81698B50..0x81698B58 | size: 0x8
 .section .sbss, "wa", @nobits
 .balign 8
 
-# .sbss:0x0 | 0x81698B50 | size: 0x8
+# .sbss:0x0 | 0x81698B50 | size: 0x4
 .obj lbl_81698B50, global
-	.skip 0x8
+	.skip 0x4
 .endobj lbl_81698B50
+
+# .sbss:0x4 | 0x81698B54 | size: 0x4
+.obj lbl_81698B54, global
+	.skip 0x4
+.endobj lbl_81698B54

@@ -918,15 +918,17 @@
 	.string "T_Balloon"
 .endobj lbl_81652F48
 
-# .data:0x3A | 0x81652F52 | size: 0x16
+# .data:0x3A | 0x81652F52 | size: 0x10
 .obj lbl_81652F52, global
-	.4byte 0x5749504C
-	.4byte 0x5F53455F
-	.4byte 0x42414C4C
-	.4byte 0x4F4F4E00
+	.string "WIPL_SE_BALLOON"
+.endobj lbl_81652F52
+
+# .data:0x4A | 0x81652F62 | size: 0x6
+.obj gap_08_81652F62_data, global
+.hidden gap_08_81652F62_data
 	.4byte 0x00000000
 	.2byte 0x0000
-.endobj lbl_81652F52
+.endobj gap_08_81652F62_data
 
 # 0x81694AA0..0x81694AC0 | size: 0x20
 .section .sdata2, "a"
@@ -962,11 +964,16 @@
 	.float 40
 .endobj lbl_81694AB4
 
-# .sdata2:0x18 | 0x81694AB8 | size: 0x8
+# .sdata2:0x18 | 0x81694AB8 | size: 0x4
 .obj lbl_81694AB8, global
 	.float 160
-	.float 0
 .endobj lbl_81694AB8
+
+# .sdata2:0x1C | 0x81694ABC | size: 0x4
+.obj gap_09_81694ABC_sdata2, global
+.hidden gap_09_81694ABC_sdata2
+	.4byte 0x00000000
+.endobj gap_09_81694ABC_sdata2
 
 # 0x81696CE0..0x81696CF8 | size: 0x18
 .section .sdata, "wa"

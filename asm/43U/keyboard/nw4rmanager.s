@@ -1923,7 +1923,7 @@
 	.4byte changeAnimation__Q39textinput11nw4rmanager13AnimPaneGroupFUl
 .endobj __vt__Q39textinput11nw4rmanager13AnimPaneGroup
 
-# .data:0xB0 | 0x8165F8C8 | size: 0x28
+# .data:0xB0 | 0x8165F8C8 | size: 0x24
 # textinput::nw4rmanager::AnmPane::__vtable
 .obj __vt__Q39textinput11nw4rmanager7AnmPane, global
 	.4byte 0x00000000
@@ -1935,5 +1935,10 @@
 	.4byte isInAnimation__Q39textinput11nw4rmanager7AnmPaneFv
 	.4byte searchAnimation__Q39textinput11nw4rmanager7AnmPaneFUl
 	.4byte __dt__Q39textinput11nw4rmanager7AnmPaneFv
-	.4byte 0x00000000
 .endobj __vt__Q39textinput11nw4rmanager7AnmPane
+
+# .data:0xD4 | 0x8165F8EC | size: 0x4
+.obj gap_08_8165F8EC_data, global
+.hidden gap_08_8165F8EC_data
+	.4byte 0x00000000
+.endobj gap_08_8165F8EC_data

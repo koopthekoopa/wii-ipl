@@ -385,7 +385,7 @@
 /* 8140A494 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8140A498 | 41 82 00 0C */	beq .L_8140A4A4
 /* 8140A49C | 7F A4 EB 78 */	mr r4, r29
-/* 8140A4A0 | 4B FD EF DD */	bl __ct__Q33ipl5scene15SDChannelButtonFPQ23EGG4Heap
+/* 8140A4A0 | 4B FD EF DD */	bl __ct__Q33ipl5scene8SDButtonFPQ23EGG4Heap
 .L_8140A4A4:
 /* 8140A4A4 | 7C 7F 1B 78 */	mr r31, r3
 /* 8140A4A8 | 48 00 00 34 */	b .L_8140A4DC
@@ -457,7 +457,7 @@
 	.rel size__Q33ipl5scene7CreatorFi, .L_81409FF0
 .endobj jumptable_816587D8
 
-# .data:0x94 | 0x8165886C | size: 0x98
+# .data:0x94 | 0x8165886C | size: 0x94
 .obj jumptable_8165886C, local
 	.rel create__Q33ipl5scene7CreatorFiPQ23EGG4HeapPv, .L_8140A4DC
 	.rel create__Q33ipl5scene7CreatorFiPQ23EGG4HeapPv, .L_8140A048
@@ -496,11 +496,11 @@
 	.rel create__Q33ipl5scene7CreatorFiPQ23EGG4HeapPv, .L_8140A448
 	.rel create__Q33ipl5scene7CreatorFiPQ23EGG4HeapPv, .L_8140A468
 	.rel create__Q33ipl5scene7CreatorFiPQ23EGG4HeapPv, .L_8140A48C
-	.rel create__Q33ipl5scene7CreatorFiPQ23EGG4HeapPv, .L_8140A4AC
 .endobj jumptable_8165886C
 
-# .data:0x12C | 0x81658904 | size: 0x4
-.obj gap_08_81658904_data, global
-.hidden gap_08_81658904_data
+# .data:0x128 | 0x81658900 | size: 0x8
+.obj gap_08_81658900_data, global
+.hidden gap_08_81658900_data
+	.rel create__Q33ipl5scene7CreatorFiPQ23EGG4HeapPv, .L_8140A4AC
 	.4byte 0x00000000
-.endobj gap_08_81658904_data
+.endobj gap_08_81658900_data

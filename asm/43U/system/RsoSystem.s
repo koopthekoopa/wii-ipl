@@ -868,37 +868,32 @@
 .data
 .balign 8
 
-# .data:0x0 | 0x81639230 | size: 0x48
+# .data:0x0 | 0x81639230 | size: 0x41
 .obj lbl_81639230, global
-	.4byte 0x4572726F
-	.4byte 0x72233030
-	.4byte 0x340A416E
-	.4byte 0x20657272
-	.4byte 0x6F722068
-	.4byte 0x6173206F
-	.4byte 0x63637572
-	.4byte 0x7265642E
-	.4byte 0x0A546865
-	.4byte 0x20737973
-	.4byte 0x74656D20
-	.4byte 0x66696C65
-	.4byte 0x73206172
-	.4byte 0x6520636F
-	.4byte 0x72727570
-	.4byte 0x7465642E
-	.4byte 0x00000000
-	.4byte 0x00000000
+	.string "Error#004\nAn error has occurred.\nThe system files are corrupted."
 .endobj lbl_81639230
+
+# .data:0x41 | 0x81639271 | size: 0x7
+.obj gap_08_81639271_data, global
+.hidden gap_08_81639271_data
+	.4byte 0x00000000
+	.byte 0x00, 0x00, 0x00
+.endobj gap_08_81639271_data
 
 # 0x81694598..0x816945A0 | size: 0x8
 .section .sdata2, "a"
 .balign 8
 
-# .sdata2:0x0 | 0x81694598 | size: 0x8
+# .sdata2:0x0 | 0x81694598 | size: 0x4
 .obj lbl_81694598, global
 	.float 0
-	.float 0
 .endobj lbl_81694598
+
+# .sdata2:0x4 | 0x8169459C | size: 0x4
+.obj gap_09_8169459C_sdata2, global
+.hidden gap_09_8169459C_sdata2
+	.4byte 0x00000000
+.endobj gap_09_8169459C_sdata2
 
 # 0x81696220..0x81696230 | size: 0x10
 .section .sdata, "wa"

@@ -1441,9 +1441,9 @@
 /* 8139EE5C | B0 86 00 02 */	sth r4, 0x2(r6)
 /* 8139EE60 | B4 86 00 04 */	sthu r4, 0x4(r6)
 /* 8139EE64 | 42 00 FF F8 */	bdnz .L_8139EE5C
-/* 8139EE68 | 3C 80 81 61 */	lis r4, lbl_8160FB88@ha
+/* 8139EE68 | 3C 80 81 61 */	lis r4, scNumber__Q23ipl5scene@ha
 /* 8139EE6C | 38 00 00 05 */	li r0, 0x5
-/* 8139EE70 | 38 84 FB 88 */	addi r4, r4, lbl_8160FB88@l
+/* 8139EE70 | 38 84 FB 88 */	addi r4, r4, scNumber__Q23ipl5scene@l
 /* 8139EE74 | 38 E1 00 06 */	addi r7, r1, 0x6
 /* 8139EE78 | 38 C4 FF FE */	subi r6, r4, 0x2
 /* 8139EE7C | 7C 09 03 A6 */	mtctr r0
@@ -2343,8 +2343,9 @@
 	.4byte 0x00000081
 .endobj scMonthToMessageID__Q23ipl5scene
 
-# .rodata:0x1A8 | 0x8160FB88 | size: 0x18
-.obj lbl_8160FB88, global
+# .rodata:0x1A8 | 0x8160FB88 | size: 0x14
+# ipl::scene::scNumber
+.obj scNumber__Q23ipl5scene, local
 	.2byte 0x0030
 	.2byte 0x0031
 	.2byte 0x0032
@@ -2355,9 +2356,13 @@
 	.2byte 0x0037
 	.2byte 0x0038
 	.2byte 0x0039
-	.2byte 0x0000
-	.2byte 0x0000
-.endobj lbl_8160FB88
+.endobj scNumber__Q23ipl5scene
+
+# .rodata:0x1BC | 0x8160FB9C | size: 0x4
+.obj gap_07_8160FB9C_rodata, global
+.hidden gap_07_8160FB9C_rodata
+	.4byte 0x00000000
+.endobj gap_07_8160FB9C_rodata
 
 # 0x8164C348..0x8164C620 | size: 0x2D8
 .data
@@ -2666,11 +2671,16 @@
 	.double 4503601774854144
 .endobj lbl_816948D8
 
-# .sdata2:0x8 | 0x816948E0 | size: 0x8
+# .sdata2:0x8 | 0x816948E0 | size: 0x4
 .obj lbl_816948E0, global
 	.float 0
-	.float 0
 .endobj lbl_816948E0
+
+# .sdata2:0xC | 0x816948E4 | size: 0x4
+.obj gap_09_816948E4_sdata2, global
+.hidden gap_09_816948E4_sdata2
+	.4byte 0x00000000
+.endobj gap_09_816948E4_sdata2
 
 # 0x816967C0..0x816967D8 | size: 0x18
 .section .sdata, "wa"
@@ -2686,10 +2696,14 @@
 	.string "G_All"
 .endobj lbl_816967C4
 
-# .sdata:0xA | 0x816967CA | size: 0xE
+# .sdata:0xA | 0x816967CA | size: 0x7
 .obj lbl_816967CA, global
-	.4byte 0x475F596F
-	.4byte 0x62690000
-	.4byte 0x00000000
-	.2byte 0x0000
+	.string "G_Yobi"
 .endobj lbl_816967CA
+
+# .sdata:0x11 | 0x816967D1 | size: 0x7
+.obj gap_11_816967D1_sdata, global
+.hidden gap_11_816967D1_sdata
+	.4byte 0x00000000
+	.byte 0x00, 0x00, 0x00
+.endobj gap_11_816967D1_sdata

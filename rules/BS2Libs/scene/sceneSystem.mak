@@ -3,7 +3,7 @@ SCENE_SYS_OBJS	=	$(BS2_OBJ_PATH)/scene/sceneSystem/iplSceneBase.o \
 					$(BS2_OBJASM_PATH)/scene/sceneSystem/iplSceneManager.o \
 					$(BS2_OBJ_PATH)/scene/sceneSystem/iplFaderSceneBase.o
 
-DEPENDENCIES += 	$(SCENE_SYS_OBJS:.o=.d)
+ALL_OBJECTS += 	$(SCENE_SYS_OBJS)
 
 $(BS2_OBJ_PATH)/scene/sceneSystem/%.o: $(BS2_SRC_PATH)/scene/sceneSystem/%.cpp
 	$(call BuildCPPSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

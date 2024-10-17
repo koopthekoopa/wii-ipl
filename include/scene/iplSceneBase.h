@@ -35,7 +35,7 @@ namespace ipl {
                 /** @brief If the user can power off/reset the system */
                 virtual BOOL    isResetAcceptable() const   { return TRUE; }
                 /** @brief The scene running code when powering off/resetting the system */
-                virtual void    startResetting() {}
+                virtual void    startResetting()            {}
                 /** @brief If the scene has finished its powering off/resetting task */
                 virtual BOOL    isResetProcessDone() const  { return TRUE; }
 

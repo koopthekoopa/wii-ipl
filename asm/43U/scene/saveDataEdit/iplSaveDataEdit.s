@@ -629,8 +629,8 @@
 /* 813C8D58 | 4B FD E7 09 */	bl set_texture__Q33ipl5scene13AnmControllerFPCcRC9_GXTexObj
 .L_813C8D5C:
 /* 813C8D5C | 80 BE 00 40 */	lwz r5, 0x40(r30)
-/* 813C8D60 | 3C 80 81 61 */	lis r4, lbl_81610350@ha
-/* 813C8D64 | 38 84 03 50 */	addi r4, r4, lbl_81610350@l
+/* 813C8D60 | 3C 80 81 61 */	lis r4, scNumber__Q23ipl5scene@ha
+/* 813C8D64 | 38 84 03 50 */	addi r4, r4, scNumber__Q23ipl5scene@l
 /* 813C8D68 | 38 60 00 05 */	li r3, 0x5
 /* 813C8D6C | 80 05 01 04 */	lwz r0, 0x104(r5)
 /* 813C8D70 | 38 C1 00 3E */	addi r6, r1, 0x3e
@@ -1502,8 +1502,9 @@
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x81610350 | size: 0x18
-.obj lbl_81610350, global
+# .rodata:0x0 | 0x81610350 | size: 0x14
+# ipl::scene::scNumber
+.obj scNumber__Q23ipl5scene, local
 	.2byte 0x0030
 	.2byte 0x0031
 	.2byte 0x0032
@@ -1514,9 +1515,13 @@
 	.2byte 0x0037
 	.2byte 0x0038
 	.2byte 0x0039
-	.2byte 0x0000
-	.2byte 0x0000
-.endobj lbl_81610350
+.endobj scNumber__Q23ipl5scene
+
+# .rodata:0x14 | 0x81610364 | size: 0x4
+.obj gap_07_81610364_rodata, global
+.hidden gap_07_81610364_rodata
+	.4byte 0x00000000
+.endobj gap_07_81610364_rodata
 
 # 0x81651860..0x81651D30 | size: 0x4D0
 .data
@@ -1854,13 +1859,17 @@
 	.4byte 0x00000000
 .endobj __vt__Q33ipl5scene12SavedataEdit
 
-# .data:0x4C4 | 0x81651D24 | size: 0xC
+# .data:0x4C4 | 0x81651D24 | size: 0xA
 # ipl::scene::SavedataBox::@STRING@getTranslate()
 .obj "@STRING@getTranslate__Q33ipl5scene11SavedataBoxFv", global
-	.4byte 0x4E5F4461
-	.4byte 0x74615F30
-	.4byte 0x30000000
+	.string "N_Data_00"
 .endobj "@STRING@getTranslate__Q33ipl5scene11SavedataBoxFv"
+
+# .data:0x4CE | 0x81651D2E | size: 0x2
+.obj gap_08_81651D2E_data, global
+.hidden gap_08_81651D2E_data
+	.2byte 0x0000
+.endobj gap_08_81651D2E_data
 
 # 0x81694A58..0x81694A68 | size: 0x10
 .section .sdata2, "a"
@@ -1935,9 +1944,13 @@
 	.string "N_Wait"
 .endobj lbl_81696C65
 
-# .sdata:0x3C | 0x81696C6C | size: 0xC
+# .sdata:0x3C | 0x81696C6C | size: 0x8
 .obj lbl_81696C6C, global
-	.4byte 0x003F003F
-	.4byte 0x003F0000
-	.4byte 0x00000000
+	.string16 "???"
 .endobj lbl_81696C6C
+
+# .sdata:0x44 | 0x81696C74 | size: 0x4
+.obj gap_11_81696C74_sdata, global
+.hidden gap_11_81696C74_sdata
+	.4byte 0x00000000
+.endobj gap_11_81696C74_sdata

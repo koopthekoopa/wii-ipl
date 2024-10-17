@@ -1,4 +1,4 @@
-DEPENDENCIES = 
+ALL_OBJECTS = 
 
 # IPL executable defines
 VERSION_FULL	:= 4.3U
@@ -48,7 +48,7 @@ endif
 .PHONY: prepare clean_data
 
 ### Build
-all: Runtime RVL_SDK RevoEX RFL eZiText TMCJpeg bs1 bs2 $(BUILD_ROOT)/$(IPL_OUTFILE)
+all: Runtime RVL_SDK RevoEX NW4R RFL eZiText TMCJpeg bs1 bs2 $(BUILD_ROOT)/$(IPL_OUTFILE)
 	@echo Build complete!
 
 # Link
@@ -61,7 +61,7 @@ $(BUILD_ROOT)/$(IPL_OUTFILE): bs1 bs2
 	@sha1sum -c $(CONFIG_ROOT)/sha1.txt
 
 # Clean
-clean: clean_Runtime clean_RVL_SDK clean_RevoEX clean_RFL clean_eZiText clean_TMCJpeg clean_bs1 clean_bs2 clean_data
+clean: clean_Runtime clean_RVL_SDK clean_RevoEX clean_NW4R clean_RFL clean_eZiText clean_TMCJpeg clean_bs1 clean_bs2 clean_data
 	@rm -rf $(BUILD_ROOT)/$(IPL_OUTFILE)
 
 # Prepare
@@ -74,6 +74,7 @@ prepare: PrepareDecomp
 -include $(RUNTIME_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
 -include $(REVOLUTION_SDK_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
 -include $(REVOLUTION_EXT_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
+-include $(NW4R_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
 -include $(RVLFACELIB_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
 -include $(EZITEXT_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
 -include $(TMCJPEG_ROOT)/$(RULES_ROOT)/$(DEFRULES).mak
@@ -83,6 +84,7 @@ prepare: PrepareDecomp
 -include $(RULES_ROOT)/BS2rules.mak
 
 # Inlcude dependencies
+DEPENDENCIES = $(ALL_OBJECTS:.o=.d)
 DEPENDENCIES += $(MAKECMDGOALS:.o=.d)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),prepare)

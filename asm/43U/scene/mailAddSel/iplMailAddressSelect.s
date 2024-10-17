@@ -2067,9 +2067,14 @@
 	.string "arc"
 .endobj lbl_81696BC8
 
-# .sdata:0x4 | 0x81696BCC | size: 0xC
+# .sdata:0x4 | 0x81696BCC | size: 0x7
 .obj lbl_81696BCC, global
-	.4byte 0x545F4D61
-	.4byte 0x696C0000
-	.4byte 0x00000000
+	.string "T_Mail"
 .endobj lbl_81696BCC
+
+# .sdata:0xB | 0x81696BD3 | size: 0x5
+.obj gap_11_81696BD3_sdata, global
+.hidden gap_11_81696BD3_sdata
+	.4byte 0x00000000
+	.byte 0x00
+.endobj gap_11_81696BD3_sdata

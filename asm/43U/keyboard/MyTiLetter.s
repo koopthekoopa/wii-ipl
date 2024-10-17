@@ -1745,9 +1745,14 @@
 	.string "Pic"
 .endobj lbl_81697560
 
-# .sdata:0x3C | 0x81697564 | size: 0xC
+# .sdata:0x3C | 0x81697564 | size: 0x6
 .obj lbl_81697564, global
-	.4byte 0x425F5069
-	.4byte 0x63000000
-	.4byte 0x00000000
+	.string "B_Pic"
 .endobj lbl_81697564
+
+# .sdata:0x42 | 0x8169756A | size: 0x6
+.obj gap_11_8169756A_sdata, global
+.hidden gap_11_8169756A_sdata
+	.4byte 0x00000000
+	.2byte 0x0000
+.endobj gap_11_8169756A_sdata

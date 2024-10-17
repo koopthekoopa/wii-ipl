@@ -3009,191 +3009,44 @@
 	.string "DEBUG: UnmountCard %d \n"
 .endobj lbl_81653271
 
-# .data:0x321 | 0x81653289 | size: 0x297
+# .data:0x321 | 0x81653289 | size: 0x292
 .obj lbl_81653289, global
-	.4byte 0x44454255
-	.4byte 0x473A2043
-	.4byte 0x61726454
-	.4byte 0x68726561
-	.4byte 0x64206572
-	.4byte 0x726F7220
-	.4byte 0x25642025
-	.4byte 0x640A0042
-	.4byte 0x726F6B65
-	.4byte 0x6E204669
-	.4byte 0x6C652530
-	.4byte 0x33640043
-	.4byte 0x616E2774
-	.4byte 0x20437265
-	.4byte 0x61746520
-	.4byte 0x74656D70
-	.4byte 0x2046696C
-	.4byte 0x65207769
-	.4byte 0x74682045
-	.4byte 0x72726F72
-	.4byte 0x2E004361
-	.4byte 0x6E277420
-	.4byte 0x67657420
-	.4byte 0x73746174
-	.4byte 0x7573206F
-	.4byte 0x6620436F
-	.4byte 0x70792073
-	.4byte 0x6F757263
-	.4byte 0x65204669
-	.4byte 0x6C652E0A
-	.4byte 0x0043616E
-	.4byte 0x27742067
-	.4byte 0x65742073
-	.4byte 0x6563746F
-	.4byte 0x72207369
-	.4byte 0x7A65206F
-	.4byte 0x6620436F
-	.4byte 0x70792073
-	.4byte 0x6F757263
-	.4byte 0x65206361
-	.4byte 0x72642E0A
-	.4byte 0x0043616E
-	.4byte 0x2774204F
-	.4byte 0x70656E20
-	.4byte 0x436F7079
-	.4byte 0x20736F75
-	.4byte 0x72636520
-	.4byte 0x46696C65
-	.4byte 0x2E0A0043
-	.4byte 0x616E2774
-	.4byte 0x20726561
-	.4byte 0x64206F72
-	.4byte 0x20777269
-	.4byte 0x74652064
-	.4byte 0x6174612E
-	.4byte 0x0A004361
-	.4byte 0x6E277420
-	.4byte 0x436C6F73
-	.4byte 0x6520436F
-	.4byte 0x70792073
-	.4byte 0x72632046
-	.4byte 0x696C652E
-	.4byte 0x0A004361
-	.4byte 0x6E277420
-	.4byte 0x436C6F73
-	.4byte 0x6520436F
-	.4byte 0x70792064
-	.4byte 0x73742046
-	.4byte 0x696C652E
-	.4byte 0x0A004361
-	.4byte 0x6E277420
-	.4byte 0x67657420
-	.4byte 0x73746174
-	.4byte 0x75732066
-	.4byte 0x6F722073
-	.4byte 0x72632066
-	.4byte 0x696C650A
-	.4byte 0x0043616E
-	.4byte 0x27742073
-	.4byte 0x65742073
-	.4byte 0x74617475
-	.4byte 0x7320666F
-	.4byte 0x72207372
-	.4byte 0x63206669
-	.4byte 0x6C652025
-	.4byte 0x640A0043
-	.4byte 0x616E2774
-	.4byte 0x20736574
-	.4byte 0x20737461
-	.4byte 0x74757320
-	.4byte 0x666F7220
-	.4byte 0x64737420
-	.4byte 0x66696C65
-	.4byte 0x20287372
-	.4byte 0x63206669
-	.4byte 0x6C652063
-	.4byte 0x6F707954
-	.4byte 0x696D6573
-	.4byte 0x2D2D290A
-	.4byte 0x0043616E
-	.4byte 0x27742073
-	.4byte 0x65742073
-	.4byte 0x74617475
-	.4byte 0x7320666F
-	.4byte 0x72207372
-	.4byte 0x63206669
-	.4byte 0x6C652873
-	.4byte 0x72632066
-	.4byte 0x696C6520
-	.4byte 0x636F7079
-	.4byte 0x54696D65
-	.4byte 0x732D2D29
-	.4byte 0x0A004361
-	.4byte 0x6E277420
-	.4byte 0x72656164
-	.4byte 0x2069636F
-	.4byte 0x6E20666F
-	.4byte 0x72206D6F
-	.4byte 0x76652064
-	.4byte 0x73746669
-	.4byte 0x6C650A00
-	.4byte 0x43616E27
-	.4byte 0x74207265
-	.4byte 0x70616972
-	.4byte 0x20737263
-	.4byte 0x2066696C
-	.4byte 0x65202D20
-	.4byte 0x63617264
-	.4byte 0x6469720A
-	.4byte 0x0043616E
-	.4byte 0x74272067
-	.4byte 0x65742073
-	.4byte 0x74617475
-	.4byte 0x7320666F
-	.4byte 0x72207372
-	.4byte 0x63206669
-	.4byte 0x6C652E0A
-	.4byte 0x0043616E
-	.4byte 0x27742073
-	.4byte 0x65742073
-	.4byte 0x74617475
-	.4byte 0x7320666F
-	.4byte 0x72207372
-	.4byte 0x63206669
-	.4byte 0x6C650A00
-	.4byte 0x43616E27
-	.4byte 0x74207265
-	.4byte 0x6E616D65
-	.4byte 0x20647374
-	.4byte 0x2066696C
-	.4byte 0x650A0043
-	.4byte 0x616E2774
-	.4byte 0x2044656C
-	.4byte 0x65746520
-	.4byte 0x73726320
-	.4byte 0x66696C65
-	.4byte 0x0A004361
-	.4byte 0x6E742720
-	.4byte 0x67657420
-	.4byte 0x73746174
-	.4byte 0x75732066
-	.4byte 0x6F722064
-	.4byte 0x73742066
-	.4byte 0x696C652E
-	.4byte 0x0A000000
-	.byte 0x00, 0x00, 0x00
+	.string "DEBUG: CardThread error %d %d\n\000Broken File%03d\000Can't Create temp File with Error.\000Can't get status of Copy source File.\n\000Can't get sector size of Copy source card.\n\000Can't Open Copy source File.\n\000Can't read or write data.\n\000Can't Close Copy src File.\n\000Can't Close Copy dst File.\n\000Can't get status for src file\n\000Can't set status for src file %d\n\000Can't set status for dst file (src file copyTimes--)\n\000Can't set status for src file(src file copyTimes--)\n\000Can't read icon for move dstfile\n\000Can't repair src file - carddir\n\000Cant' get status for src file.\n\000Can't set status for src file\n\000Can't rename dst file\n\000Can't Delete src file\n\000Cant' get status for dst file.\n"
 .endobj lbl_81653289
+
+# .data:0x5B3 | 0x8165351B | size: 0x5
+.obj gap_08_8165351B_data, global
+.hidden gap_08_8165351B_data
+	.4byte 0x00000000
+	.byte 0x00
+.endobj gap_08_8165351B_data
 
 # 0x81696CF8..0x81696D00 | size: 0x8
 .section .sdata, "wa"
 .balign 8
 
-# .sdata:0x0 | 0x81696CF8 | size: 0x8
+# .sdata:0x0 | 0x81696CF8 | size: 0x4
 .obj lbl_81696CF8, global
 	.4byte 0x41420000
-	.4byte 0x00000000
 .endobj lbl_81696CF8
+
+# .sdata:0x4 | 0x81696CFC | size: 0x4
+.obj gap_11_81696CFC_sdata, global
+.hidden gap_11_81696CFC_sdata
+	.4byte 0x00000000
+.endobj gap_11_81696CFC_sdata
 
 # 0x81698B68..0x81698B70 | size: 0x8
 .section .sbss, "wa", @nobits
 .balign 8
 
-# .sbss:0x0 | 0x81698B68 | size: 0x8
+# .sbss:0x0 | 0x81698B68 | size: 0x4
 .obj lbl_81698B68, global
-	.skip 0x8
+	.skip 0x4
 .endobj lbl_81698B68
+
+# .sbss:0x4 | 0x81698B6C | size: 0x4
+.obj gap_12_81698B6C_sbss, global
+.hidden gap_12_81698B6C_sbss
+	.skip 0x4
+.endobj gap_12_81698B6C_sbss

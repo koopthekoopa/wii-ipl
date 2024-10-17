@@ -5,6 +5,12 @@
 
 #include <revolution/types.h>
 
+#include <revolution/nwc24/NWC24Err.h>
+
+typedef struct NWC24MsgObj {
+    u8 dummy[0x100]; // todo
+} NWC24MsgObj;
+
 /* NWC24 Channel Jump */
 
 #define NWC24_MAX_CHJP_BLOCKS   8

@@ -10971,45 +10971,40 @@
 	.4byte 0x48414B43
 .endobj lbl_81610B20
 
-# .rodata:0x238 | 0x81610B80 | size: 0x48
+# .rodata:0x238 | 0x81610B80 | size: 0x20
 .obj lbl_81610B80, global
-	.2byte 0x0030
-	.2byte 0x0030
-	.2byte 0x0030
-	.2byte 0x002E
-	.2byte 0x0030
-	.2byte 0x0030
-	.2byte 0x0030
-	.2byte 0x002E
-	.2byte 0x0030
-	.2byte 0x0030
-	.2byte 0x0030
-	.2byte 0x002E
-	.2byte 0x0030
-	.2byte 0x0030
-	.2byte 0x0030
-	.2byte 0x0000
-	.2byte 0x0030
-	.2byte 0x0031
-	.2byte 0x0032
-	.2byte 0x0033
-	.2byte 0x0034
-	.2byte 0x0035
-	.2byte 0x0036
-	.2byte 0x0037
-	.2byte 0x0038
-	.2byte 0x0039
-	.2byte 0x0030
-	.2byte 0x0031
-	.2byte 0x0032
-	.2byte 0x0033
-	.2byte 0x0034
-	.2byte 0x0035
-	.2byte 0x0036
-	.2byte 0x0037
-	.2byte 0x0038
-	.2byte 0x0039
+	.string16 "000.000.000.000"
 .endobj lbl_81610B80
+
+# .rodata:0x258 | 0x81610BA0 | size: 0x14
+# ipl::scene::scNumber
+.obj scNumber__Q23ipl5scene, local
+	.2byte 0x0030
+	.2byte 0x0031
+	.2byte 0x0032
+	.2byte 0x0033
+	.2byte 0x0034
+	.2byte 0x0035
+	.2byte 0x0036
+	.2byte 0x0037
+	.2byte 0x0038
+	.2byte 0x0039
+.endobj scNumber__Q23ipl5scene
+
+# .rodata:0x26C | 0x81610BB4 | size: 0x14
+# ipl::scene::scNumber2
+.obj scNumber2__Q23ipl5scene, local
+	.2byte 0x0030
+	.2byte 0x0031
+	.2byte 0x0032
+	.2byte 0x0033
+	.2byte 0x0034
+	.2byte 0x0035
+	.2byte 0x0036
+	.2byte 0x0037
+	.2byte 0x0038
+	.2byte 0x0039
+.endobj scNumber2__Q23ipl5scene
 
 # 0x816568E8..0x81657898 | size: 0xFB0
 .data
@@ -12264,11 +12259,16 @@
 	.double 4503601774854144
 .endobj lbl_81694C30
 
-# .sdata2:0x38 | 0x81694C38 | size: 0x8
+# .sdata2:0x38 | 0x81694C38 | size: 0x4
 .obj lbl_81694C38, global
 	.float 78
-	.float 0
 .endobj lbl_81694C38
+
+# .sdata2:0x3C | 0x81694C3C | size: 0x4
+.obj gap_09_81694C3C_sdata2, global
+.hidden gap_09_81694C3C_sdata2
+	.4byte 0x00000000
+.endobj gap_09_81694C3C_sdata2
 
 # 0x81696FE8..0x816971E0 | size: 0x1F8
 .section .sdata, "wa"
@@ -12708,12 +12708,16 @@
 	.4byte 0x45530000
 .endobj lbl_816971D0
 
-# .sdata:0x1EC | 0x816971D4 | size: 0xC
+# .sdata:0x1EC | 0x816971D4 | size: 0x8
 .obj lbl_816971D4, global
-	.4byte 0x00250064
-	.4byte 0x000A0000
-	.4byte 0x00000000
+	.string16 "%d\n"
 .endobj lbl_816971D4
+
+# .sdata:0x1F4 | 0x816971DC | size: 0x4
+.obj gap_11_816971DC_sdata, global
+.hidden gap_11_816971DC_sdata
+	.4byte 0x00000000
+.endobj gap_11_816971DC_sdata
 
 # 0x81698BE0..0x81698BF0 | size: 0x10
 .section .sbss, "wa", @nobits
@@ -12731,7 +12735,13 @@
 	.skip 0x4
 .endobj mem2Buffer___Q33ipl5scene7Setting
 
-# .sbss:0x8 | 0x81698BE8 | size: 0x8
+# .sbss:0x8 | 0x81698BE8 | size: 0x4
 .obj lbl_81698BE8, global
-	.skip 0x8
+	.skip 0x4
 .endobj lbl_81698BE8
+
+# .sbss:0xC | 0x81698BEC | size: 0x4
+.obj gap_12_81698BEC_sbss, global
+.hidden gap_12_81698BEC_sbss
+	.skip 0x4
+.endobj gap_12_81698BEC_sbss

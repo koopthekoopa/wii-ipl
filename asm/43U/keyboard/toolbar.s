@@ -2099,7 +2099,7 @@
 	.4byte cancelStateFocusIn__Q39textinput7toolbar12LayoutByNW4RFv
 .endobj __vt__Q39textinput7toolbar12LayoutByNW4R
 
-# .data:0x368 | 0x8165E3D8 | size: 0x48
+# .data:0x368 | 0x8165E3D8 | size: 0x44
 # textinput::toolbar::Base::__vtable
 .obj __vt__Q39textinput7toolbar4Base, global
 	.4byte 0x00000000
@@ -2119,5 +2119,10 @@
 	.4byte 0x43616E63
 	.4byte 0x656C210A
 	.4byte 0x00000000
-	.4byte 0x00000000
 .endobj __vt__Q39textinput7toolbar4Base
+
+# .data:0x3AC | 0x8165E41C | size: 0x4
+.obj gap_08_8165E41C_data, global
+.hidden gap_08_8165E41C_data
+	.4byte 0x00000000
+.endobj gap_08_8165E41C_data

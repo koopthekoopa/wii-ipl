@@ -8,6 +8,14 @@
 # extab:0x0 | 0x81330420 | size: 0x8
 .obj "@etb_81330420", local
 .hidden "@etb_81330420"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ * Saved GPR range: r29-r31
+ */
 	.4byte 0x18080000
 	.4byte 0x00000000
 .endobj "@etb_81330420"
@@ -15,6 +23,14 @@
 # extab:0x8 | 0x81330428 | size: 0x8
 .obj "@etb_81330428", local
 .hidden "@etb_81330428"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ * Saved GPR range: r26-r31
+ */
 	.4byte 0x30080000
 	.4byte 0x00000000
 .endobj "@etb_81330428"
@@ -22,6 +38,13 @@
 # extab:0x10 | 0x81330430 | size: 0x8
 .obj "@etb_81330430", local
 .hidden "@etb_81330430"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ */
 	.4byte 0x00080000
 	.4byte 0x00000000
 .endobj "@etb_81330430"
@@ -29,6 +52,13 @@
 # extab:0x18 | 0x81330438 | size: 0x8
 .obj "@etb_81330438", local
 .hidden "@etb_81330438"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ */
 	.4byte 0x00080000
 	.4byte 0x00000000
 .endobj "@etb_81330438"
@@ -36,6 +66,13 @@
 # extab:0x20 | 0x81330440 | size: 0x8
 .obj "@etb_81330440", local
 .hidden "@etb_81330440"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ */
 	.4byte 0x00080000
 	.4byte 0x00000000
 .endobj "@etb_81330440"
@@ -43,6 +80,13 @@
 # extab:0x28 | 0x81330448 | size: 0x8
 .obj "@etb_81330448", local
 .hidden "@etb_81330448"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ */
 	.4byte 0x00080000
 	.4byte 0x00000000
 .endobj "@etb_81330448"
@@ -50,6 +94,14 @@
 # extab:0x30 | 0x81330450 | size: 0x8
 .obj "@etb_81330450", local
 .hidden "@etb_81330450"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ * Saved GPR range: r29-r31
+ */
 	.4byte 0x18080000
 	.4byte 0x00000000
 .endobj "@etb_81330450"

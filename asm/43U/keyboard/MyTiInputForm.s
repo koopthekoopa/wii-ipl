@@ -5234,9 +5234,14 @@
 	.4byte 0x77520000
 .endobj lbl_81697514
 
-# .sdata:0x3C | 0x8169751C | size: 0xC
+# .sdata:0x3C | 0x8169751C | size: 0x7
 .obj lbl_8169751C, global
-	.4byte 0x425F4172
-	.4byte 0x774C0000
-	.4byte 0x00000000
+	.string "B_ArwL"
 .endobj lbl_8169751C
+
+# .sdata:0x43 | 0x81697523 | size: 0x5
+.obj gap_11_81697523_sdata, global
+.hidden gap_11_81697523_sdata
+	.4byte 0x00000000
+	.byte 0x00
+.endobj gap_11_81697523_sdata

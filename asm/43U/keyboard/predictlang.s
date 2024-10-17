@@ -2344,8 +2344,13 @@
 .section .sdata, "wa"
 .balign 8
 
-# .sdata:0x0 | 0x816973F8 | size: 0x8
+# .sdata:0x0 | 0x816973F8 | size: 0x4
 .obj lbl_816973F8, global
 	.4byte lbl_8165E420
-	.4byte 0x00000000
 .endobj lbl_816973F8
+
+# .sdata:0x4 | 0x816973FC | size: 0x4
+.obj gap_11_816973FC_sdata, global
+.hidden gap_11_816973FC_sdata
+	.4byte 0x00000000
+.endobj gap_11_816973FC_sdata

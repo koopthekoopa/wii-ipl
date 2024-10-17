@@ -8,6 +8,14 @@
 # extab:0x0 | 0x813307A8 | size: 0x8
 .obj "@etb_813307A8", local
 .hidden "@etb_813307A8"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ * Saved GPR range: r26-r31
+ */
 	.4byte 0x30080000
 	.4byte 0x00000000
 .endobj "@etb_813307A8"
@@ -15,6 +23,14 @@
 # extab:0x8 | 0x813307B0 | size: 0x8
 .obj "@etb_813307B0", local
 .hidden "@etb_813307B0"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ * Saved GPR range: r25-r31
+ */
 	.4byte 0x38080000
 	.4byte 0x00000000
 .endobj "@etb_813307B0"
@@ -22,6 +38,14 @@
 # extab:0x10 | 0x813307B8 | size: 0x8
 .obj "@etb_813307B8", local
 .hidden "@etb_813307B8"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ * Saved GPR range: r25-r31
+ */
 	.4byte 0x38080000
 	.4byte 0x00000000
 .endobj "@etb_813307B8"

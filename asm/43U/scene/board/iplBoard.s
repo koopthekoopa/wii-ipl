@@ -5958,11 +5958,16 @@
 # .rodata:0x38 | 0x8160F6C8 | size: 0x14
 # ipl::scene::scNumber
 .obj scNumber__Q23ipl5scene, local
-	.4byte 0x00300031
-	.4byte 0x00320033
-	.4byte 0x00340035
-	.4byte 0x00360037
-	.4byte 0x00380039
+	.2byte 0x0030
+	.2byte 0x0031
+	.2byte 0x0032
+	.2byte 0x0033
+	.2byte 0x0034
+	.2byte 0x0035
+	.2byte 0x0036
+	.2byte 0x0037
+	.2byte 0x0038
+	.2byte 0x0039
 .endobj scNumber__Q23ipl5scene
 
 # .rodata:0x4C | 0x8160F6DC | size: 0x1C
@@ -6268,10 +6273,14 @@
 	.string "T_Day_b"
 .endobj lbl_81696613
 
-# .sdata:0x1B | 0x8169661B | size: 0xD
+# .sdata:0x1B | 0x8169661B | size: 0x8
 .obj lbl_8169661B, global
-	.4byte 0x545F4461
-	.4byte 0x795F6300
+	.string "T_Day_c"
+.endobj lbl_8169661B
+
+# .sdata:0x23 | 0x81696623 | size: 0x5
+.obj gap_11_81696623_sdata, global
+.hidden gap_11_81696623_sdata
 	.4byte 0x00000000
 	.byte 0x00
-.endobj lbl_8169661B
+.endobj gap_11_81696623_sdata

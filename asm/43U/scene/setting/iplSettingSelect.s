@@ -2842,9 +2842,14 @@
 	.string "arc"
 .endobj lbl_81697278
 
-# .sdata:0x4 | 0x8169727C | size: 0xC
+# .sdata:0x4 | 0x8169727C | size: 0x5
 .obj lbl_8169727C, global
-	.4byte 0x686F6765
-	.4byte 0x00000000
-	.4byte 0x00000000
+	.string "hoge"
 .endobj lbl_8169727C
+
+# .sdata:0x9 | 0x81697281 | size: 0x7
+.obj gap_11_81697281_sdata, global
+.hidden gap_11_81697281_sdata
+	.4byte 0x00000000
+	.byte 0x00, 0x00, 0x00
+.endobj gap_11_81697281_sdata

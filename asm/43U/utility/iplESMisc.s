@@ -3742,7 +3742,7 @@
 	.4byte 0x25640A00
 .endobj lbl_816419A5
 
-# .data:0x94D | 0x81641C0D | size: 0x7D3
+# .data:0x94D | 0x81641C0D | size: 0x7CD
 .obj lbl_81641C0D, global
 	.4byte 0x2F6D6574
 	.4byte 0x612F2530
@@ -4243,9 +4243,15 @@
 	.4byte 0x6F6E6520
 	.4byte 0x6572723A
 	.4byte 0x2025640A
-	.4byte 0x00000000
-	.byte 0x00, 0x00, 0x00
+	.byte 0x00
 .endobj lbl_81641C0D
+
+# .data:0x111A | 0x816423DA | size: 0x6
+.obj gap_08_816423DA_data, global
+.hidden gap_08_816423DA_data
+	.4byte 0x00000000
+	.2byte 0x0000
+.endobj gap_08_816423DA_data
 
 # 0x816962A0..0x816962C0 | size: 0x20
 .section .sdata, "wa"
@@ -4273,7 +4279,5 @@
 
 # .sdata:0x17 | 0x816962B7 | size: 0x9
 .obj lbl_816962B7, global
-	.4byte 0x52657374
-	.4byte 0x6F726500
-	.byte 0x00
+	.string "Restore\000"
 .endobj lbl_816962B7

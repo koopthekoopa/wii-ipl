@@ -7,9 +7,10 @@
 extern "C" {
 #endif
 
-#define RFL_NAME_LENGTH 10
-#define RFL_CREATOR_LENGTH 10
+#define RFL_NAME_LENGTH 	10
+#define RFL_CREATOR_LENGTH 	10
 #define RFL_CREATEID_LENGTH 8
+#define RFL_CHARDATA_SIZE	74
 
 typedef enum {
 	RFLErrcode_Success  = 0,
@@ -62,9 +63,13 @@ typedef enum {
 	RFLExp_Max
 } RFLExpression;
 
-typedef struct {
+typedef struct RFLCreateID {
 	u8	data[RFL_CREATEID_LENGTH];	// 0x00
 } RFLCreateID;
+
+typedef struct RFLCharData {
+	u8 data[RFL_CHARDATA_SIZE];		// 0x00
+} RFLCharData;
 
 #ifdef __cplusplus
 }

@@ -886,7 +886,7 @@
 	.rel calcNormal__Q33ipl5scene12KitayamaTestFv, .L_813BE8D4
 .endobj jumptable_8164FCE0
 
-# .data:0x20C | 0x8164FD14 | size: 0x6C
+# .data:0x20C | 0x8164FD14 | size: 0x68
 # ipl::scene::KitayamaTest::__vtable
 .obj __vt__Q33ipl5scene12KitayamaTest, global
 	.4byte 0x00000000
@@ -915,5 +915,10 @@
 	.4byte calcNormal__Q33ipl5scene12KitayamaTestFv
 	.4byte calcFadeout__Q33ipl5scene12KitayamaTestFv
 	.4byte calcCommonAfter__Q33ipl5scene14FaderSceneBaseFv
-	.4byte 0x00000000
 .endobj __vt__Q33ipl5scene12KitayamaTest
+
+# .data:0x274 | 0x8164FD7C | size: 0x4
+.obj gap_08_8164FD7C_data, global
+.hidden gap_08_8164FD7C_data
+	.4byte 0x00000000
+.endobj gap_08_8164FD7C_data

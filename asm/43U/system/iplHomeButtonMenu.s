@@ -6,7 +6,8 @@
 .balign 4
 
 # .text:0x0 | 0x81347AD0 | size: 0x9C
-.fn iplHomeButton_81347AD0, local
+# ipl::SECallback(int)
+.fn SECallback__3iplFi, local
 /* 81347AD0 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 81347AD4 | 7C 08 02 A6 */	mflr r0
 /* 81347AD8 | 2C 03 00 03 */	cmpwi r3, 0x3
@@ -53,7 +54,7 @@
 /* 81347B60 | 7C 08 03 A6 */	mtlr r0
 /* 81347B64 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 81347B68 | 4E 80 00 20 */	blr
-.endfn iplHomeButton_81347AD0
+.endfn SECallback__3iplFi
 
 # .text:0x9C | 0x81347B6C | size: 0x1B4
 # ipl::HomeButtonMenu::HomeButtonMenu(EGG::Heap*)
@@ -92,10 +93,10 @@
 /* 81347BE8 | 48 22 25 1D */	bl SCGetLanguage
 /* 81347BEC | 80 BC 00 64 */	lwz r5, 0x64(r28)
 /* 81347BF0 | 54 60 06 3E */	clrlwi r0, r3, 24
-/* 81347BF4 | 3C 80 81 34 */	lis r4, iplHomeButton_81347AD0@ha
+/* 81347BF4 | 3C 80 81 34 */	lis r4, SECallback__3iplFi@ha
 /* 81347BF8 | C0 22 81 40 */	lfs f1, lbl_81694540@sda21(r0)
 /* 81347BFC | 90 05 00 24 */	stw r0, 0x24(r5)
-/* 81347C00 | 38 84 7A D0 */	addi r4, r4, iplHomeButton_81347AD0@l
+/* 81347C00 | 38 84 7A D0 */	addi r4, r4, SECallback__3iplFi@l
 /* 81347C04 | C0 02 81 44 */	lfs f0, lbl_81694544@sda21(r0)
 /* 81347C08 | 80 7C 00 64 */	lwz r3, 0x64(r28)
 /* 81347C0C | 90 83 00 1C */	stw r4, 0x1c(r3)
@@ -682,15 +683,17 @@
 .data
 .balign 8
 
-# .data:0x0 | 0x81635A70 | size: 0x18
+# .data:0x0 | 0x81635A70 | size: 0x12
 .obj lbl_81635A70, global
-	.4byte 0x48424D3A
-	.4byte 0x20537461
-	.4byte 0x72742052
-	.4byte 0x65736574
-	.4byte 0x0A000000
-	.4byte 0x00000000
+	.string "HBM: Start Reset\n"
 .endobj lbl_81635A70
+
+# .data:0x12 | 0x81635A82 | size: 0x6
+.obj gap_08_81635A82_data, global
+.hidden gap_08_81635A82_data
+	.4byte 0x00000000
+	.2byte 0x0000
+.endobj gap_08_81635A82_data
 
 # 0x81694540..0x81694570 | size: 0x30
 .section .sdata2, "a"

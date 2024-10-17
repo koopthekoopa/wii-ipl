@@ -1,3 +1,5 @@
+#define UNIT_DOESNT_MATCH
+
 #include "system/iplNand.h"
 
 #include "config.h"
@@ -16,7 +18,10 @@
 
 #include <cstring>
 
-#define BUFFER_SIZE 0x1000
+#define BUFFER_SIZE     0x1000
+
+#define EXT_SIZE        0x40
+#define STANDARD_SIZE   0x20
 
 #define CHECK_MAGIC3(buffer, sig0, sig1, sig2) \
     buffer[0] == sig0 && buffer[1] == sig1 && buffer[2] == sig2
@@ -54,7 +59,7 @@ namespace ipl {
             mFilePerms = NAND_ACCESS_NONE;
             mpBuffer = NULL;
             mpCmpBuffer = NULL;
-            mResult = 0;
+            mResult = IPL_NAND_RESULT_NONE;
             mFatalError = false;
             mIsNandFull = false;
             mIsInNand = isInNand;
@@ -82,7 +87,7 @@ namespace ipl {
             mFilePerms = perms;
             mpBuffer = buffer;
             mpCmpBuffer = NULL;
-            mResult = 0;
+            mResult = IPL_NAND_RESULT_NONE;
             mFatalError = false;
             mIsNandFull = false;
             mIsInNand = TRUE;
@@ -309,14 +314,12 @@ namespace ipl {
         // https://decomp.me/scratch/IsA3X
         void File::read() {
             if (open_(NAND_ACCESS_READ)) {
-                u8* readBuffer;
-                u8* buffer;
-
                 if (mpLength == 0) {
                     EGG::Heap* usedHeap;
 
                     mpLength = OSRoundUp32B(getRawSize_());
 
+                    // Heap used to allocate the data.
                     usedHeap = System::getUnk28Heap();
                     if (System::getUnk28Heap() == NULL) {
                         usedHeap = System::getAppHeap();
@@ -325,55 +328,64 @@ namespace ipl {
                     mpCmpBuffer = new(usedHeap, -BUFFER_HEAP) u8[mpLength];
                 }
 
-                readBuffer += 0x40;
-                buffer = readBuffer;
-                readBlock_(readBuffer, (vu32)mpLength >= 0x40 ? 0x40 : 0x20);
+                u8  headerData[EXT_SIZE]     ALIGN32;
+                u8  sum[NET_MD5_DIGEST_SIZE] ALIGN32;
+
+                u8* buffer = headerData;
+
+                // Read the header
+                readBlock_(headerData, mpLength >= EXT_SIZE ? EXT_SIZE : STANDARD_SIZE);
 
                 s8  bHasMd5 = FALSE;
-                
                 u32 fileLen;
                 u32 fileOff = 0;
-
-                u8  sum[NET_MD5_DIGEST_SIZE];
-
-                if (CHECK_MAGIC4(readBuffer, 'I','M','D','5')) {
-                    fileLen = *(u32*)(&readBuffer[4]);
+                // Check if the header is an MD5 file.
+                if (CHECK_MAGIC4(headerData, 'I','M','D','5')) {
+                    fileLen = *(u32*)(&headerData[4]);  // get file length
 
                     bHasMd5 = TRUE;
 
-                    memcpy(sum, &readBuffer[0x10], NET_MD5_DIGEST_SIZE);
+                    memcpy(sum, &headerData[0x10], NET_MD5_DIGEST_SIZE);    // copy MD5 sum
 
                     fileOff = 0x20;
                     buffer += 0x20;
                 }
 
+                // Check if the file is compressed.
                 if (isCompressed(buffer)) {
+                    // read compressed data
                     readBlock_(mpCmpBuffer, mpLength);
 
+                    // prepare for decompression
                     mpLength = getDecodeSize_(&mpCmpBuffer[fileOff]);
                     mpBuffer = getBuffer_(mpLength);
 
+                    // LZ7 compressed
                     if (isLz7Compressed(buffer)) {
                         uncompressLz7(&mpCmpBuffer[fileOff], mpBuffer);
-                        getRawSize_();
+                        u32 rawSize = getRawSize_();    // unused
                     }
-                    else {
+                    else { // any other compression
                         Rvl_decode(mpBuffer, &mpCmpBuffer[fileOff]);
                     }
 
+                    // calculate MD5. (result 1 = success, result 2 = failed)
                     if (bHasMd5 == TRUE) {
                         mResult = calcMD5_(sum, &mpCmpBuffer[fileOff], fileLen);
                     }
                 }
                 else {
+                    // just read the data.
                     mpBuffer = getBuffer_(mpLength - fileOff);
                     readBlock_(mpBuffer, mpLength - fileOff, fileOff);
 
+                    // calculate MD5. (result 1 = success, result 2 = failed)
                     if (bHasMd5 == TRUE) {
                         mResult = calcMD5_(sum, mpBuffer, fileLen);
                     }
                 }
 
+                // clear uneeded stuff
                 delete[] mpCmpBuffer;
                 mpCmpBuffer = NULL;
 
@@ -381,7 +393,6 @@ namespace ipl {
 
                 close_();
             }
-
             mDoneTask = TRUE;
             callback_();
         }
@@ -396,18 +407,18 @@ namespace ipl {
          * @note Address: 0x8133BE64 (4.3U)
          * @note Size: 0x90
          */
-        int File::calcMD5_(const u8* sum, const u8* buffer, u32 length) const {
-            u8 digest[NET_MD5_DIGEST_SIZE];
+        IPLNandResult File::calcMD5_(const u8* sum, const u8* buffer, u32 length) const {
+            u8 calcSum[NET_MD5_DIGEST_SIZE];
 
-            NETCalcMD5(digest, buffer, length);
+            NETCalcMD5(calcSum, buffer, length);
 
             for (int i = 0; i < NET_MD5_DIGEST_SIZE; i++) {
-                if (digest[i] != sum[i]) {
-                    return 2;
+                if (calcSum[i] != sum[i]) {
+                    return IPL_NAND_RESULT_VERIFY_ERROR;
                 }
             }
 
-            return 1;
+            return IPL_NAND_RESULT_SUCCESS;
         }
 
         /**
@@ -566,7 +577,7 @@ done:
                         break;
                     }
                     case NAND_RESULT_NOEXISTS: {
-                        mResult = 3;
+                        mResult = IPL_NAND_RESULT_OPEN_ERROR;
                         break;
                     }
                     case NAND_RESULT_MAXFILES:
@@ -576,7 +587,7 @@ done:
                     }
                     case NAND_RESULT_AUTHENTICATION:
                     case NAND_RESULT_ECC_CRIT: {
-                        mResult = 2;
+                        mResult = IPL_NAND_RESULT_VERIFY_ERROR;
                         break;
                     }
                     case NAND_RESULT_CORRUPT: {

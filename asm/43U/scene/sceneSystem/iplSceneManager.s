@@ -1071,11 +1071,16 @@
 	.4byte __ml__Q43ipl5scene4Base8iteratorFv
 .endobj __vt__Q43ipl5scene4Base8iterator
 
-# .data:0x18 | 0x81658920 | size: 0x10
+# .data:0x18 | 0x81658920 | size: 0xC
 # ipl::utility::Tree::reverse_iterator::__vtable
 .obj __vt__Q43ipl7utility4Tree16reverse_iterator, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __ml__Q43ipl7utility4Tree16reverse_iteratorFv
-	.4byte 0x00000000
 .endobj __vt__Q43ipl7utility4Tree16reverse_iterator
+
+# .data:0x24 | 0x8165892C | size: 0x4
+.obj gap_08_8165892C_data, global
+.hidden gap_08_8165892C_data
+	.4byte 0x00000000
+.endobj gap_08_8165892C_data

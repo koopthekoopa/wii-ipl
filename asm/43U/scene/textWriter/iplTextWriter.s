@@ -2081,8 +2081,13 @@
 	.2byte 0x0000
 .endobj lbl_81697288
 
-# .sdata:0x2 | 0x8169728A | size: 0x6
+# .sdata:0x2 | 0x8169728A | size: 0x4
 .obj lbl_8169728A, global
-	.4byte 0x61726300
-	.2byte 0x0000
+	.string "arc"
 .endobj lbl_8169728A
+
+# .sdata:0x6 | 0x8169728E | size: 0x2
+.obj gap_11_8169728E_sdata, global
+.hidden gap_11_8169728E_sdata
+	.2byte 0x0000
+.endobj gap_11_8169728E_sdata

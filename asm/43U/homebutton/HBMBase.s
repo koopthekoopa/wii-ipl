@@ -1432,9 +1432,9 @@
 /* 813728C8 | 48 00 00 18 */	b .L_813728E0
 .L_813728CC:
 /* 813728CC | 7F 64 DB 78 */	mr r4, r27
-/* 813728D0 | 48 19 64 79 */	bl fn_81508D48
+/* 813728D0 | 48 19 64 79 */	bl GetSoundPlayer__Q34nw4r3snd18SoundArchivePlayerFUl
 /* 813728D4 | C0 22 82 DC */	lfs f1, lbl_816946DC@sda21(r0)
-/* 813728D8 | 48 19 84 7D */	bl fn_8150AD54
+/* 813728D8 | 48 19 84 7D */	bl SetVolume__Q34nw4r3snd11SoundPlayerFf
 /* 813728DC | 3B 7B 00 01 */	addi r27, r27, 0x1
 .L_813728E0:
 /* 813728E0 | 80 7F 06 08 */	lwz r3, 0x608(r31)
@@ -2549,9 +2549,9 @@
 /* 813738C0 | 48 00 00 18 */	b .L_813738D8
 .L_813738C4:
 /* 813738C4 | 7F 84 E3 78 */	mr r4, r28
-/* 813738C8 | 48 19 54 81 */	bl fn_81508D48
+/* 813738C8 | 48 19 54 81 */	bl GetSoundPlayer__Q34nw4r3snd18SoundArchivePlayerFUl
 /* 813738CC | 38 80 00 00 */	li r4, 0x0
-/* 813738D0 | 48 19 74 1D */	bl fn_8150ACEC
+/* 813738D0 | 48 19 74 1D */	bl StopAllSound__Q34nw4r3snd11SoundPlayerFi
 /* 813738D4 | 3B 9C 00 01 */	addi r28, r28, 0x1
 .L_813738D8:
 /* 813738D8 | 80 7E 06 08 */	lwz r3, 0x608(r30)
@@ -6551,7 +6551,7 @@
 /* 813770D0 | 80 7E 06 1C */	lwz r3, 0x61c(r30)
 /* 813770D4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 813770D8 | 41 82 00 28 */	beq .L_81377100
-/* 813770DC | 48 19 37 9D */	bl fn_8150A878
+/* 813770DC | 48 19 37 9D */	bl DetachSound__Q34nw4r3snd11SoundHandleFv
 /* 813770E0 | 80 7E 06 08 */	lwz r3, 0x608(r30)
 /* 813770E4 | 7F E5 FB 78 */	mr r5, r31
 /* 813770E8 | 80 9E 06 1C */	lwz r4, 0x61c(r30)
@@ -6559,7 +6559,7 @@
 /* 813770F0 | 38 63 00 0C */	addi r3, r3, 0xc
 /* 813770F4 | 38 E0 00 00 */	li r7, 0x0
 /* 813770F8 | 39 00 00 00 */	li r8, 0x0
-/* 813770FC | 48 19 4B 3D */	bl fn_8150BC38
+/* 813770FC | 48 19 4B 3D */	bl detail_StartSound__Q34nw4r3snd14SoundStartableFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerPCQ44nw4r3snd14SoundStartable9StartInfo
 .L_81377100:
 /* 81377100 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 81377104 | 83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -6602,9 +6602,9 @@
 /* 81377180 | 48 00 00 18 */	b .L_81377198
 .L_81377184:
 /* 81377184 | 7F E4 FB 78 */	mr r4, r31
-/* 81377188 | 48 19 1B C1 */	bl fn_81508D48
+/* 81377188 | 48 19 1B C1 */	bl GetSoundPlayer__Q34nw4r3snd18SoundArchivePlayerFUl
 /* 8137718C | FC 20 F8 90 */	fmr f1, f31
-/* 81377190 | 48 19 3B C5 */	bl fn_8150AD54
+/* 81377190 | 48 19 3B C5 */	bl SetVolume__Q34nw4r3snd11SoundPlayerFf
 /* 81377194 | 3B FF 00 01 */	addi r31, r31, 0x1
 .L_81377198:
 /* 81377198 | 80 7E 06 08 */	lwz r3, 0x608(r30)
@@ -8110,7 +8110,13 @@
 .section .sbss, "wa", @nobits
 .balign 8
 
-# .sbss:0x0 | 0x816989B0 | size: 0x8
+# .sbss:0x0 | 0x816989B0 | size: 0x4
 .obj lbl_816989B0, global
-	.skip 0x8
+	.skip 0x4
 .endobj lbl_816989B0
+
+# .sbss:0x4 | 0x816989B4 | size: 0x4
+.obj gap_12_816989B4_sbss, global
+.hidden gap_12_816989B4_sbss
+	.skip 0x4
+.endobj gap_12_816989B4_sbss

@@ -13945,11 +13945,16 @@
 	.4byte 0x00000000
 .endobj lbl_81697318
 
-# .sdata:0x80 | 0x81697320 | size: 0x8
+# .sdata:0x80 | 0x81697320 | size: 0x5
 .obj lbl_81697320, global
-	.4byte 0x70726463
-	.4byte 0x00000000
+	.string "prdc"
 .endobj lbl_81697320
+
+# .sdata:0x85 | 0x81697325 | size: 0x3
+.obj gap_11_81697325_sdata, global
+.hidden gap_11_81697325_sdata
+	.byte 0x00, 0x00, 0x00
+.endobj gap_11_81697325_sdata
 
 # 0x81698CF8..0x81698D00 | size: 0x8
 .section .sbss, "wa", @nobits

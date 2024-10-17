@@ -821,78 +821,16 @@
 	.string "SCSetParentalControl Failed!\n"
 .endobj lbl_81657971
 
-# .data:0x3F | 0x8165798F | size: 0x111
+# .data:0x3F | 0x8165798F | size: 0x10D
 .obj lbl_8165798F, global
-	.4byte 0x21212121
-	.4byte 0x21212121
-	.4byte 0x21212121
-	.4byte 0x53432046
-	.4byte 0x4C555348
-	.4byte 0x21212121
-	.4byte 0x21212121
-	.4byte 0x21212121
-	.4byte 0x0A006D61
-	.4byte 0x636E756D
-	.4byte 0x3A257520
-	.4byte 0x203A2573
-	.4byte 0x0A002530
-	.4byte 0x32752530
-	.4byte 0x32750064
-	.4byte 0x6174612B
-	.4byte 0x7265713A
-	.4byte 0x25730A00
-	.4byte 0x666C6167
-	.4byte 0x733A2564
-	.4byte 0x0A007261
-	.4byte 0x74696E67
-	.4byte 0x3A25640A
-	.4byte 0x00706173
-	.4byte 0x73776F72
-	.4byte 0x643A2573
-	.4byte 0x0A007365
-	.4byte 0x63726574
-	.4byte 0x51756573
-	.4byte 0x74696F6E
-	.4byte 0x3A25640A
-	.4byte 0x00736563
-	.4byte 0x72657441
-	.4byte 0x6E737765
-	.4byte 0x723A2573
-	.4byte 0x0A007365
-	.4byte 0x63726574
-	.4byte 0x416E7377
-	.4byte 0x65724C65
-	.4byte 0x6E677468
-	.4byte 0x3A25640A
-	.4byte 0x006E6574
-	.4byte 0x20636F6E
-	.4byte 0x74656E74
-	.4byte 0x73207265
-	.4byte 0x73747269
-	.4byte 0x6374696F
-	.4byte 0x6E733A25
-	.4byte 0x3032780A
-	.4byte 0x00777777
-	.4byte 0x20636861
-	.4byte 0x6E6E656C
-	.4byte 0x20726573
-	.4byte 0x74726963
-	.4byte 0x74696F6E
-	.4byte 0x20203A25
-	.4byte 0x640A0072
-	.4byte 0x65717565
-	.4byte 0x73744E75
-	.4byte 0x6D3A2573
-	.4byte 0x0A006D61
-	.4byte 0x73746572
-	.4byte 0x6B65793A
-	.4byte 0x25730A00
-	.4byte 0x636F756E
-	.4byte 0x7472793A
-	.4byte 0x2025640A
-	.4byte 0x00000000
-	.byte 0x00
+	.string "!!!!!!!!!!!!SC FLUSH!!!!!!!!!!!!\n\000macnum:%u  :%s\n\000%02u%02u\000data+req:%s\n\000flags:%d\n\000rating:%d\n\000password:%s\n\000secretQuestion:%d\n\000secretAnswer:%s\n\000secretAnswerLength:%d\n\000net contents restrictions:%02x\n\000www channel restriction  :%d\n\000requestNum:%s\n\000masterkey:%s\n\000country: %d\n"
 .endobj lbl_8165798F
+
+# .data:0x14C | 0x81657A9C | size: 0x4
+.obj gap_08_81657A9C_data, global
+.hidden gap_08_81657A9C_data
+	.4byte 0x00000000
+.endobj gap_08_81657A9C_data
 
 # 0x816971E0..0x816971F0 | size: 0x10
 .section .sdata, "wa"
@@ -903,12 +841,17 @@
 	.string "%08u"
 .endobj lbl_816971E0
 
-# .sdata:0x5 | 0x816971E5 | size: 0xB
+# .sdata:0x5 | 0x816971E5 | size: 0x5
 .obj lbl_816971E5, global
-	.4byte 0x25303575
-	.4byte 0x00000000
-	.byte 0x00, 0x00, 0x00
+	.string "%05u"
 .endobj lbl_816971E5
+
+# .sdata:0xA | 0x816971EA | size: 0x6
+.obj gap_11_816971EA_sdata, global
+.hidden gap_11_816971EA_sdata
+	.4byte 0x00000000
+	.2byte 0x0000
+.endobj gap_11_816971EA_sdata
 
 # 0x81698BF8..0x81698C08 | size: 0x10
 .section .sbss, "wa", @nobits
@@ -932,8 +875,14 @@
 	.skip 0x2
 .endobj gap_12_81698BFD_sbss
 
-# .sbss:0x7 | 0x81698BFF | size: 0x9
+# .sbss:0x7 | 0x81698BFF | size: 0x5
 # ipl::parental::Parental::mMasterKey
 .obj mMasterKey__Q33ipl8parental8Parental, global
-	.skip 0x9
+	.skip 0x5
 .endobj mMasterKey__Q33ipl8parental8Parental
+
+# .sbss:0xC | 0x81698C04 | size: 0x4
+.obj gap_12_81698C04_sbss, global
+.hidden gap_12_81698C04_sbss
+	.skip 0x4
+.endobj gap_12_81698C04_sbss

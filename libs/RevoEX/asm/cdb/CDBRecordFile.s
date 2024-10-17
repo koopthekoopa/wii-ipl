@@ -648,10 +648,13 @@
 	.4byte 0x2E0A0000
 .endobj lbl_8166C580
 
-# .data:0x10 | 0x8166C590 | size: 0x10
+# .data:0x10 | 0x8166C590 | size: 0xD
 .obj lbl_8166C590, global
-	.4byte 0x696E7661
-	.4byte 0x6C696420
-	.4byte 0x6B65790A
-	.4byte 0x00000000
+	.string "invalid key\n"
 .endobj lbl_8166C590
+
+# .data:0x1D | 0x8166C59D | size: 0x3
+.obj gap_08_8166C59D_data, global
+.hidden gap_08_8166C59D_data
+	.byte 0x00, 0x00, 0x00
+.endobj gap_08_8166C59D_data

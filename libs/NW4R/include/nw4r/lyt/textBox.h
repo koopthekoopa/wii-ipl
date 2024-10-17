@@ -22,12 +22,12 @@ namespace nw4r {
                 virtual u16     SetString(const wchar_t* str, u16 dstIdx = 0);  // 0x6C
                 
                 ut::Color       GetTextColor(u32 i) const {
-                    NW4R_IPL_ASSERT(i < TEXT_COLOR_MAX);
+                    NW4R_ASSERT(i < TEXT_COLOR_MAX);
                     return mTextColor[i];
                 }
                 
                 void            SetTextColor(u32 i, ut::Color color) {
-                    NW4R_IPL_ASSERT(i < TEXT_COLOR_MAX);
+                    NW4R_ASSERT(i < TEXT_COLOR_MAX);
                     mTextColor[i] = color;
                 }
             private:

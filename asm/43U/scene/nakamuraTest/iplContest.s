@@ -6,7 +6,7 @@
 .balign 8
 
 # .bss:0x0 | 0x810B7508 | size: 0x8D0
-.obj g_session, global
+.obj g_session, local
 	.skip 0x8D0
 .endobj g_session
 
@@ -1331,20 +1331,16 @@
 	.string "Wii Support Code:%d\n"
 .endobj lbl_816537D1
 
-# .data:0x2C6 | 0x816537E6 | size: 0x2A
+# .data:0x2C6 | 0x816537E6 | size: 0x27
 .obj lbl_816537E6, global
-	.4byte 0x5B657272
-	.4byte 0x6F725D20
-	.4byte 0x4E485454
-	.4byte 0x50526571
-	.4byte 0x43616C6C
-	.4byte 0x6261636B
-	.4byte 0x20657272
-	.4byte 0x6F72636F
-	.4byte 0x64653A25
-	.4byte 0x640A0000
-	.2byte 0x0000
+	.string "[error] NHTTPReqCallback errorcode:%d\n"
 .endobj lbl_816537E6
+
+# .data:0x2ED | 0x8165380D | size: 0x3
+.obj gap_08_8165380D_data, global
+.hidden gap_08_8165380D_data
+	.byte 0x00, 0x00, 0x00
+.endobj gap_08_8165380D_data
 
 # 0x81694AC0..0x81694AC8 | size: 0x8
 .section .sdata2, "a"

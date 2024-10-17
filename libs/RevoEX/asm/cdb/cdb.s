@@ -171,26 +171,29 @@
 	.4byte 0x0A000000
 .endobj lbl_8166B438
 
-# .data:0x50 | 0x8166B450 | size: 0x28
+# .data:0x50 | 0x8166B450 | size: 0x23
 .obj lbl_8166B450, global
-	.4byte 0x43444253
-	.4byte 0x79737465
-	.4byte 0x6D206861
-	.4byte 0x73206265
-	.4byte 0x656E2075
-	.4byte 0x6E696E69
-	.4byte 0x7469616C
-	.4byte 0x697A6564
-	.4byte 0x0A000000
-	.4byte 0x00000000
+	.string "CDBSystem has been uninitialized\n\000"
 .endobj lbl_8166B450
+
+# .data:0x73 | 0x8166B473 | size: 0x5
+.obj gap_08_8166B473_data, global
+.hidden gap_08_8166B473_data
+	.4byte 0x00000000
+	.byte 0x00
+.endobj gap_08_8166B473_data
 
 # 0x816979A8..0x816979B0 | size: 0x8
 .section .sdata, "wa"
 .balign 8
 
-# .sdata:0x0 | 0x816979A8 | size: 0x8
+# .sdata:0x0 | 0x816979A8 | size: 0x4
 .obj lbl_816979A8, global
-	.4byte 0x43444200
-	.4byte 0x00000000
+	.string "CDB"
 .endobj lbl_816979A8
+
+# .sdata:0x4 | 0x816979AC | size: 0x4
+.obj gap_11_816979AC_sdata, global
+.hidden gap_11_816979AC_sdata
+	.4byte 0x00000000
+.endobj gap_11_816979AC_sdata

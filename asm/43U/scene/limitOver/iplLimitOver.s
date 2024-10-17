@@ -945,7 +945,7 @@
 	.byte 0x00, 0x00, 0x00
 .endobj lbl_81650851
 
-# .data:0x28C | 0x81650864 | size: 0x6C
+# .data:0x28C | 0x81650864 | size: 0x68
 # ipl::scene::LimitOver::__vtable
 .obj __vt__Q33ipl5scene9LimitOver, global
 	.4byte 0x00000000
@@ -974,8 +974,13 @@
 	.4byte calcNormal__Q33ipl5scene9LimitOverFv
 	.4byte calcFadeout__Q33ipl5scene9LimitOverFv
 	.4byte calcCommonAfter__Q33ipl5scene14FaderSceneBaseFv
-	.4byte 0x00000000
 .endobj __vt__Q33ipl5scene9LimitOver
+
+# .data:0x2F4 | 0x816508CC | size: 0x4
+.obj gap_08_816508CC_data, global
+.hidden gap_08_816508CC_data
+	.4byte 0x00000000
+.endobj gap_08_816508CC_data
 
 # 0x81696B68..0x81696BC8 | size: 0x60
 .section .sdata, "wa"
@@ -1051,10 +1056,14 @@
 	.string "G_All"
 .endobj lbl_81696BB4
 
-# .sdata:0x52 | 0x81696BBA | size: 0xE
+# .sdata:0x52 | 0x81696BBA | size: 0x7
 .obj lbl_81696BBA, global
-	.4byte 0x475F5075
-	.4byte 0x73680000
-	.4byte 0x00000000
-	.2byte 0x0000
+	.string "G_Push"
 .endobj lbl_81696BBA
+
+# .sdata:0x59 | 0x81696BC1 | size: 0x7
+.obj gap_11_81696BC1_sdata, global
+.hidden gap_11_81696BC1_sdata
+	.4byte 0x00000000
+	.byte 0x00, 0x00, 0x00
+.endobj gap_11_81696BC1_sdata

@@ -867,8 +867,8 @@
 /* 813A614C | 38 63 00 2C */	addi r3, r3, 0x2c
 /* 813A6150 | 4B F9 E5 35 */	bl __as__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3
 /* 813A6154 | 80 BE 00 40 */	lwz r5, 0x40(r30)
-/* 813A6158 | 3C 80 81 61 */	lis r4, lbl_8160FC90@ha
-/* 813A615C | 38 84 FC 90 */	addi r4, r4, lbl_8160FC90@l
+/* 813A6158 | 3C 80 81 61 */	lis r4, scNumber__Q23ipl5scene@ha
+/* 813A615C | 38 84 FC 90 */	addi r4, r4, scNumber__Q23ipl5scene@l
 /* 813A6160 | 38 60 00 05 */	li r3, 0x5
 /* 813A6164 | 80 05 06 1C */	lwz r0, 0x61c(r5)
 /* 813A6168 | 38 C1 00 3E */	addi r6, r1, 0x3e
@@ -1914,8 +1914,9 @@
 	.4byte 0x42400000
 .endobj lbl_8160FC80
 
-# .rodata:0x10 | 0x8160FC90 | size: 0x18
-.obj lbl_8160FC90, global
+# .rodata:0x10 | 0x8160FC90 | size: 0x14
+# ipl::scene::scNumber
+.obj scNumber__Q23ipl5scene, local
 	.2byte 0x0030
 	.2byte 0x0031
 	.2byte 0x0032
@@ -1926,9 +1927,13 @@
 	.2byte 0x0037
 	.2byte 0x0038
 	.2byte 0x0039
-	.2byte 0x0000
-	.2byte 0x0000
-.endobj lbl_8160FC90
+.endobj scNumber__Q23ipl5scene
+
+# .rodata:0x24 | 0x8160FCA4 | size: 0x4
+.obj gap_07_8160FCA4_rodata, global
+.hidden gap_07_8160FCA4_rodata
+	.4byte 0x00000000
+.endobj gap_07_8160FCA4_rodata
 
 # 0x8164D2E8..0x8164D7C0 | size: 0x4D8
 .data
@@ -2328,9 +2333,13 @@
 	.4byte 0x69740000
 .endobj lbl_81696896
 
-# .sdata:0x3E | 0x8169689E | size: 0xA
-.obj lbl_8169689E, global
-	.4byte 0x003F003F
-	.4byte 0x003F0000
-	.2byte 0x0000
+# .sdata:0x3E | 0x8169689E | size: 0x8
+.obj lbl_8169689E, local
+	.string16 "???"
 .endobj lbl_8169689E
+
+# .sdata:0x46 | 0x816968A6 | size: 0x2
+.obj gap_11_816968A6_sdata, global
+.hidden gap_11_816968A6_sdata
+	.2byte 0x0000
+.endobj gap_11_816968A6_sdata

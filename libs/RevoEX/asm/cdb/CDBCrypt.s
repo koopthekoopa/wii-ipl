@@ -301,17 +301,28 @@
 	.4byte 0x722B0000
 .endobj lbl_81697A94
 
-# .sdata:0x18 | 0x81697A98 | size: 0x8
+# .sdata:0x18 | 0x81697A98 | size: 0x4
 .obj lbl_81697A98, global
 	.4byte 0x00000000
-	.4byte 0x00000000
 .endobj lbl_81697A98
+
+# .sdata:0x1C | 0x81697A9C | size: 0x4
+.obj gap_11_81697A9C_sdata, global
+.hidden gap_11_81697A9C_sdata
+	.4byte 0x00000000
+.endobj gap_11_81697A9C_sdata
 
 # 0x81698DA0..0x81698DA8 | size: 0x8
 .section .sbss, "wa", @nobits
 .balign 8
 
-# .sbss:0x0 | 0x81698DA0 | size: 0x8
+# .sbss:0x0 | 0x81698DA0 | size: 0x4
 .obj lbl_81698DA0, global
-	.skip 0x8
+	.skip 0x4
 .endobj lbl_81698DA0
+
+# .sbss:0x4 | 0x81698DA4 | size: 0x4
+.obj gap_12_81698DA4_sbss, global
+.hidden gap_12_81698DA4_sbss
+	.skip 0x4
+.endobj gap_12_81698DA4_sbss

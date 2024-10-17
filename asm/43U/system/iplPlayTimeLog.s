@@ -1374,15 +1374,16 @@
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x8160D620 | size: 0x18
+# .rodata:0x0 | 0x8160D620 | size: 0x16
 .obj lbl_8160D620, global
-	.4byte 0x00300031
-	.4byte 0x00320033
-	.4byte 0x00340035
-	.4byte 0x00360037
-	.4byte 0x00380039
-	.4byte 0x00000000
+	.string16 "0123456789"
 .endobj lbl_8160D620
+
+# .rodata:0x16 | 0x8160D636 | size: 0x2
+.obj gap_07_8160D636_rodata, global
+.hidden gap_07_8160D636_rodata
+	.2byte 0x0000
+.endobj gap_07_8160D636_rodata
 
 # 0x816351C0..0x81635218 | size: 0x58
 .data
@@ -1413,14 +1414,17 @@
 	.4byte 0x000A0000
 .endobj lbl_816351EE
 
-# .data:0x46 | 0x81635206 | size: 0x12
+# .data:0x46 | 0x81635206 | size: 0xC
 .obj lbl_81635206, global
-	.4byte 0x706C6179
-	.4byte 0x74696D65
-	.4byte 0x6C6F6700
+	.string "playtimelog"
+.endobj lbl_81635206
+
+# .data:0x52 | 0x81635212 | size: 0x6
+.obj gap_08_81635212_data, global
+.hidden gap_08_81635212_data
 	.4byte 0x00000000
 	.2byte 0x0000
-.endobj lbl_81635206
+.endobj gap_08_81635212_data
 
 # 0x816944A0..0x816944C8 | size: 0x28
 .section .sdata2, "a"
@@ -1466,11 +1470,16 @@
 	.4byte 0x00000003
 .endobj lbl_816944BC
 
-# .sdata2:0x20 | 0x816944C0 | size: 0x8
+# .sdata2:0x20 | 0x816944C0 | size: 0x4
 .obj lbl_816944C0, global
 	.4byte 0x00000000
-	.4byte 0x00000000
 .endobj lbl_816944C0
+
+# .sdata2:0x24 | 0x816944C4 | size: 0x4
+.obj gap_09_816944C4_sdata2, global
+.hidden gap_09_816944C4_sdata2
+	.4byte 0x00000000
+.endobj gap_09_816944C4_sdata2
 
 # 0x816960D8..0x816960F0 | size: 0x18
 .section .sdata, "wa"
@@ -1492,8 +1501,13 @@
 	.string16 "\n"
 .endobj lbl_816960E4
 
-# .sdata:0x10 | 0x816960E8 | size: 0x8
+# .sdata:0x10 | 0x816960E8 | size: 0x4
 .obj lbl_816960E8, global
-	.4byte 0x00200000
-	.4byte 0x00000000
+	.string16 " "
 .endobj lbl_816960E8
+
+# .sdata:0x14 | 0x816960EC | size: 0x4
+.obj gap_11_816960EC_sdata, global
+.hidden gap_11_816960EC_sdata
+	.4byte 0x00000000
+.endobj gap_11_816960EC_sdata

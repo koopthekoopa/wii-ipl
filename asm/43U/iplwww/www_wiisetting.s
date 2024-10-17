@@ -2882,15 +2882,17 @@
 	.rel startFunc__Q23www10wiisettingFUc, .L_81370FEC
 .endobj jumptable_816448F8
 
-# .data:0x9F8 | 0x81644A98 | size: 0x18
+# .data:0x9F8 | 0x81644A98 | size: 0x12
 .obj lbl_81644A98, global
-	.4byte 0x67657446
-	.4byte 0x756E6352
-	.4byte 0x6573756C
-	.4byte 0x743A2564
-	.4byte 0x0A000000
-	.4byte 0x00000000
+	.string "getFuncResult:%d\n"
 .endobj lbl_81644A98
+
+# .data:0xA0A | 0x81644AAA | size: 0x6
+.obj gap_08_81644AAA_data, global
+.hidden gap_08_81644AAA_data
+	.4byte 0x00000000
+	.2byte 0x0000
+.endobj gap_08_81644AAA_data
 
 # 0x816946B8..0x816946D8 | size: 0x20
 .section .sdata2, "a"
@@ -3182,13 +3184,17 @@
 	.string "lanMac"
 .endobj lbl_8169643C
 
-# .sdata:0x133 | 0x81696443 | size: 0xD
+# .sdata:0x133 | 0x81696443 | size: 0x8
 .obj lbl_81696443, global
-	.4byte 0x76657273
-	.4byte 0x696F6E00
+	.string "version"
+.endobj lbl_81696443
+
+# .sdata:0x13B | 0x8169644B | size: 0x5
+.obj gap_11_8169644B_sdata, global
+.hidden gap_11_8169644B_sdata
 	.4byte 0x00000000
 	.byte 0x00
-.endobj lbl_81696443
+.endobj gap_11_8169644B_sdata
 
 # 0x81698980..0x816989A8 | size: 0x28
 .section .sbss, "wa", @nobits
@@ -3246,8 +3252,14 @@
 	.skip 0x4
 .endobj pString__Q23www10wiisetting
 
-# .sbss:0x20 | 0x816989A0 | size: 0x8
+# .sbss:0x20 | 0x816989A0 | size: 0x4
 # www::wiisetting::opera_callbacks
 .obj opera_callbacks__Q23www10wiisetting, global
-	.skip 0x8
+	.skip 0x4
 .endobj opera_callbacks__Q23www10wiisetting
+
+# .sbss:0x24 | 0x816989A4 | size: 0x4
+.obj gap_12_816989A4_sbss, global
+.hidden gap_12_816989A4_sbss
+	.skip 0x4
+.endobj gap_12_816989A4_sbss

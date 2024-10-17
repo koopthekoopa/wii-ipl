@@ -757,31 +757,17 @@
 	.string "iplNandManager.cpp"
 .endobj lbl_81634E90
 
-# .data:0x13 | 0x81634EA3 | size: 0x55
+# .data:0x13 | 0x81634EA3 | size: 0x4D
 .obj lbl_81634EA3, global
-	.4byte 0x4A616D20
-	.4byte 0x52657175
-	.4byte 0x6573742A
-	.4byte 0x2A2A2A2A
-	.4byte 0x2A2A2A2A
-	.4byte 0x2A2A2A2A
-	.4byte 0x2A2A2A2A
-	.4byte 0x2A2A2A2A
-	.4byte 0x2A2A2A2A
-	.4byte 0x2A2A2A2A
-	.4byte 0x2A2A2A2A
-	.4byte 0x2A2A2A2A
-	.4byte 0x2A2A2A2A
-	.4byte 0x2A2A2A2A
-	.4byte 0x2A2A2A2A
-	.4byte 0x2A2A2A2A
-	.4byte 0x2A2A2A2A
-	.4byte 0x2A2A2A2A
-	.4byte 0x2A2A2A2A
-	.4byte 0x0A000000
-	.4byte 0x00000000
-	.byte 0x00
+	.ascii "Jam Request*****************************************************************\n"
 .endobj lbl_81634EA3
+
+# .data:0x60 | 0x81634EF0 | size: 0x8
+.obj gap_08_81634EF0_data, global
+.hidden gap_08_81634EF0_data
+	.4byte 0x00000000
+	.4byte 0x00000000
+.endobj gap_08_81634EF0_data
 
 # 0x816960B8..0x816960C8 | size: 0x10
 .section .sdata, "wa"
@@ -797,9 +783,13 @@
 	.string "ES"
 .endobj lbl_816960B9
 
-# .sdata:0x4 | 0x816960BC | size: 0xC
+# .sdata:0x4 | 0x816960BC | size: 0x8
 .obj lbl_816960BC, global
-	.4byte 0x2F6C6179
-	.4byte 0x6F757400
-	.4byte 0x00000000
+	.string "/layout"
 .endobj lbl_816960BC
+
+# .sdata:0xC | 0x816960C4 | size: 0x4
+.obj gap_11_816960C4_sdata, global
+.hidden gap_11_816960C4_sdata
+	.4byte 0x00000000
+.endobj gap_11_816960C4_sdata

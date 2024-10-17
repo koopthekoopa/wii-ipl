@@ -722,8 +722,7 @@
 
 # .sdata:0x0 | 0x81696C20 | size: 0x8
 .obj lbl_81696C20, global
-	.4byte 0x475F4461
-	.4byte 0x74610000
+	.string "G_Data\000"
 .endobj lbl_81696C20
 
 # .sdata:0x8 | 0x81696C28 | size: 0x8

@@ -1327,7 +1327,7 @@
 	.4byte __dt__Q37ext_ead3www13BrowserWindowFv
 .endobj __vt__Q37ext_ead3www13BrowserWindow
 
-# .data:0x4C8 | 0x81643FD0 | size: 0x20
+# .data:0x4C8 | 0x81643FD0 | size: 0x1C
 # ext_ead::www::ut_message_cmd<ext_ead::www::BrowserWindow::WindowCmd, 32>::__vtable
 .obj "__vt__Q37ext_ead3www58ut_message_cmd<Q47ext_ead3www13BrowserWindow9WindowCmd,32>", global
 	.4byte 0x00000000
@@ -1337,8 +1337,13 @@
 	.4byte JamMessage__Q37ext_ead3www15ut_message_baseFPvl
 	.4byte ReceiveMessage__Q37ext_ead3www15ut_message_baseFPPvl
 	.4byte InitMessageQueue__Q37ext_ead3www15ut_message_baseFPPvl
-	.4byte 0x00000000
 .endobj "__vt__Q37ext_ead3www58ut_message_cmd<Q47ext_ead3www13BrowserWindow9WindowCmd,32>"
+
+# .data:0x4E4 | 0x81643FEC | size: 0x4
+.obj gap_08_81643FEC_data, global
+.hidden gap_08_81643FEC_data
+	.4byte 0x00000000
+.endobj gap_08_81643FEC_data
 
 # 0x816962F8..0x81696300 | size: 0x8
 .section .sdata, "wa"

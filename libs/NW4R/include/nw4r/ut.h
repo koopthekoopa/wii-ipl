@@ -3,6 +3,8 @@
 
 #include <nw4r/ut/inlines.h>
 
+#include <nw4r/ut/RuntimeTypeInfo.h>
+
 #include <nw4r/ut/LinkList.h>
 #include <nw4r/ut/list.h>
 

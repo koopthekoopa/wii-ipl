@@ -5574,7 +5574,7 @@
 .data
 .balign 8
 
-# .data:0x0 | 0x816392D8 | size: 0x1D0
+# .data:0x0 | 0x816392D8 | size: 0x1CB
 .obj hufftreePtr, global
 	.4byte gArDc_luminance_huffTable
 	.4byte gArDc_luminance_huffTable
@@ -5690,9 +5690,15 @@
 	.4byte 0x4E472045
 	.4byte 0x52524F52
 	.4byte 0x20253038
-	.4byte 0x780A0000
-	.4byte 0x00000000
+	.byte 0x78, 0x0A, 0x00
 .endobj hufftreePtr
+
+# .data:0x1CB | 0x816394A3 | size: 0x5
+.obj gap_08_816394A3_data, global
+.hidden gap_08_816394A3_data
+	.4byte 0x00000000
+	.byte 0x00
+.endobj gap_08_816394A3_data
 
 # 0x816945A0..0x816945C8 | size: 0x28
 .section .sdata2, "a"

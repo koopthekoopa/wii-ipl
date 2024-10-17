@@ -113,10 +113,10 @@
 /* 8145818C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81458190 | 7C 64 1B 78 */	mr r4, r3
 /* 81458194 | 41 82 00 20 */	beq .L_814581B4
-/* 81458198 | 3C A0 81 61 */	lis r5, lbl_81617380@ha
+/* 81458198 | 3C A0 81 61 */	lis r5, scMethodList__Q33ipl2cs6system@ha
 /* 8145819C | 7F C3 F3 78 */	mr r3, r30
 /* 814581A0 | 38 C0 00 02 */	li r6, 0x2
-/* 814581A4 | 38 A5 73 80 */	addi r5, r5, lbl_81617380@l
+/* 814581A4 | 38 A5 73 80 */	addi r5, r5, scMethodList__Q33ipl2cs6system@l
 /* 814581A8 | 4B FF 48 C9 */	bl CHANSVmAddNativeMethodList
 /* 814581AC | 7C 60 00 34 */	cntlzw r0, r3
 /* 814581B0 | 54 1F D9 7E */	srwi r31, r0, 5
@@ -135,12 +135,13 @@
 .balign 8
 
 # .rodata:0x0 | 0x81617380 | size: 0x10
-.obj lbl_81617380, global
+# ipl::cs::system::scMethodList
+.obj scMethodList__Q33ipl2cs6system, local
 	.4byte lbl_8166A528
 	.4byte is_first_call__Q33ipl2cs6systemFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
 	.4byte lbl_8166A534
 	.4byte is_dltask_registered__Q33ipl2cs6systemFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
-.endobj lbl_81617380
+.endobj scMethodList__Q33ipl2cs6system
 
 # 0x8166A528..0x8166A548 | size: 0x20
 .data
@@ -151,14 +152,16 @@
 	.string "isFirstCall"
 .endobj lbl_8166A528
 
-# .data:0xC | 0x8166A534 | size: 0x14
+# .data:0xC | 0x8166A534 | size: 0x13
 .obj lbl_8166A534, global
-	.4byte 0x6973446C
-	.4byte 0x5461736B
-	.4byte 0x52656769
-	.4byte 0x73746572
-	.4byte 0x65640000
+	.string "isDlTaskRegistered"
 .endobj lbl_8166A534
+
+# .data:0x1F | 0x8166A547 | size: 0x1
+.obj gap_08_8166A547_data, global
+.hidden gap_08_8166A547_data
+	.byte 0x00
+.endobj gap_08_8166A547_data
 
 # 0x816977E8..0x816977F0 | size: 0x8
 .section .sdata, "wa"

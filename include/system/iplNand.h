@@ -8,12 +8,18 @@
 
 #include <egg/core.h>
 
-
 #define NANDTitleIdLo(t)   (unsigned int)(((unsigned long long)(t)) & 0xFFFFFFFF)
 #define NANDTitleIdHi(t)   (unsigned int)((((unsigned long long)(t)) >> 32) & 0xFFFFFFFF)
 
 namespace ipl {
     namespace nand {
+        enum IPLNandResult {
+            IPL_NAND_RESULT_NONE = 0,
+            IPL_NAND_RESULT_SUCCESS,
+            IPL_NAND_RESULT_VERIFY_ERROR,
+            IPL_NAND_RESULT_OPEN_ERROR,
+        };
+
         class Base {
             public:
                 Base();
@@ -41,6 +47,7 @@ namespace ipl {
                 virtual bool    isFatalError();                                         // 0x1C (0x07)
 
                 u8*             getBuffer() { return mpBuffer; }
+                u32             getLength() { return mpLength; }
 
             protected:
                 virtual BOOL    open_(u8 attr);                                         // 0x20 (0x08)
@@ -56,14 +63,16 @@ namespace ipl {
 
                 virtual BOOL    isCompressed(const u8* buffer);                         // 0x3C (0x0F)
                 virtual BOOL    isSliCompressed(const u8* buffer);                      // 0x40 (0x10)
+                /* @warning Due to an oversight, this checks for ASH compression. */
                 virtual BOOL    isAsrCompressed(const u8* buffer);                      // 0x44 (0x11)
+                /* @warning Due to an oversight, this checks for ASR compression. */
                 virtual BOOL    isAshCompressed(const u8* buffer);                      // 0x48 (0x12)
                 virtual BOOL    isLz7Compressed(const u8* buffer);                      // 0x4C (0x13)
 
                 virtual void    callback_();                                            // 0x50 (0x14)
 
             protected:
-                int             calcMD5_(const u8* sum, const u8* buffer, u32 length) const;
+                IPLNandResult   calcMD5_(const u8* sum, const u8* buffer, u32 length) const;
 
                 BOOL            nand_error_handling(int errcode);
 
@@ -82,7 +91,7 @@ namespace ipl {
                 u8*             mpBuffer;                           // 0xA0
                 u8*             mpCmpBuffer;                        // 0xA4
 
-                int             mResult;                            // 0xA8
+                IPLNandResult   mResult;                            // 0xA8
                 volatile BOOL   mDoneTask;                          // 0xAC
                 
                 ARCFileInfo     mArcFile;                           // 0xB0
@@ -99,7 +108,7 @@ namespace ipl {
         class LangFile : Base {
             public:
                 LangFile(EGG::Heap* pHeap, const char* dirName, const char* fileName, ARCHandle* arc, bool isInNand);
-                virtual ~LangFile();    // 0x08
+                virtual ~LangFile();                                // 0x08
 
                 virtual void    read();                             // 0x0C
                 
@@ -115,7 +124,13 @@ namespace ipl {
         class LayoutFile : LangFile {
             public:
                 LayoutFile(EGG::Heap* pHeap, const char* dirName, const char* fileName, ARCHandle* arc, bool isNandFile);
-                virtual ~LayoutFile();
+                virtual ~LayoutFile();                              // 0x08
+
+                virtual void    read();                             // 0x0C
+                
+                virtual bool    isFinished();                       // 0x14
+                virtual bool    checkData();                        // 0x18
+                virtual bool    isFatalError();                     // 0x1C
         };
 
         class Manager {

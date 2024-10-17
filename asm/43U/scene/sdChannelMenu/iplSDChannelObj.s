@@ -2643,18 +2643,17 @@
 	.string "my_IplTopBalloon_a_BalloonInOut.brlan"
 .endobj lbl_81654F4E
 
-# .data:0x43C | 0x81654F74 | size: 0x24
+# .data:0x43C | 0x81654F74 | size: 0x1F
 .obj lbl_81654F74, global
-	.4byte 0x5749504C
-	.4byte 0x5F53455F
-	.4byte 0x42414C4C
-	.4byte 0x4F4F4E00
-	.4byte 0x69636F6E
-	.4byte 0x5F4E6577
-	.4byte 0x2E62726C
-	.4byte 0x616E0000
-	.4byte 0x00000000
+	.string "WIPL_SE_BALLOON\000icon_New.brlan"
 .endobj lbl_81654F74
+
+# .data:0x45B | 0x81654F93 | size: 0x5
+.obj gap_08_81654F93_data, global
+.hidden gap_08_81654F93_data
+	.4byte 0x00000000
+	.byte 0x00
+.endobj gap_08_81654F93_data
 
 # 0x81694B18..0x81694B60 | size: 0x48
 .section .sdata2, "a"
@@ -2848,9 +2847,13 @@
 	.string "B_BtnA"
 .endobj lbl_81696E30
 
-# .sdata:0x67 | 0x81696E37 | size: 0x9
+# .sdata:0x67 | 0x81696E37 | size: 0x7
 .obj lbl_81696E37, global
-	.4byte 0x425F4274
-	.4byte 0x6E420000
-	.byte 0x00
+	.string "B_BtnB"
 .endobj lbl_81696E37
+
+# .sdata:0x6E | 0x81696E3E | size: 0x2
+.obj gap_11_81696E3E_sdata, global
+.hidden gap_11_81696E3E_sdata
+	.2byte 0x0000
+.endobj gap_11_81696E3E_sdata

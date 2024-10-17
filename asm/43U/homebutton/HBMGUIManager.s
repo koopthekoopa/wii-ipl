@@ -1487,7 +1487,7 @@
 	.4byte setEventHandler__Q310homebutton3gui7ManagerFPQ310homebutton3gui12EventHandler
 .endobj __vt__Q310homebutton3gui7Manager
 
-# .data:0xF8 | 0x81645738 | size: 0x60
+# .data:0xF8 | 0x81645738 | size: 0x5C
 # homebutton::gui::Component::__vtable
 .obj __vt__Q310homebutton3gui9Component, global
 	.4byte 0x00000000
@@ -1513,8 +1513,13 @@
 	.4byte setTriggerTarget__Q310homebutton3gui9ComponentFb
 	.4byte setManager__Q310homebutton3gui9ComponentFPQ310homebutton3gui7Manager
 	.4byte isVisible__Q310homebutton3gui9ComponentFv
-	.4byte 0x00000000
 .endobj __vt__Q310homebutton3gui9Component
+
+# .data:0x154 | 0x81645794 | size: 0x4
+.obj gap_08_81645794_data, global
+.hidden gap_08_81645794_data
+	.4byte 0x00000000
+.endobj gap_08_81645794_data
 
 # 0x81694770..0x81694780 | size: 0x10
 .section .sdata2, "a"
@@ -1545,17 +1550,28 @@
 	.byte 0xFF
 .endobj lbl_81694777
 
-# .sdata2:0x8 | 0x81694778 | size: 0x8
+# .sdata2:0x8 | 0x81694778 | size: 0x4
 .obj lbl_81694778, global
 	.float 0.5
-	.float 0
 .endobj lbl_81694778
+
+# .sdata2:0xC | 0x8169477C | size: 0x4
+.obj gap_09_8169477C_sdata2, global
+.hidden gap_09_8169477C_sdata2
+	.4byte 0x00000000
+.endobj gap_09_8169477C_sdata2
 
 # 0x816989C0..0x816989C8 | size: 0x8
 .section .sbss, "wa", @nobits
 .balign 8
 
-# .sbss:0x0 | 0x816989C0 | size: 0x8
+# .sbss:0x0 | 0x816989C0 | size: 0x4
 .obj lbl_816989C0, global
-	.skip 0x8
+	.skip 0x4
 .endobj lbl_816989C0
+
+# .sbss:0x4 | 0x816989C4 | size: 0x4
+.obj gap_12_816989C4_sbss, global
+.hidden gap_12_816989C4_sbss
+	.skip 0x4
+.endobj gap_12_816989C4_sbss

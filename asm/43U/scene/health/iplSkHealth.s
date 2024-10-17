@@ -1037,10 +1037,14 @@
 	.string "G_All"
 .endobj lbl_81696B4C
 
-# .sdata:0x22 | 0x81696B52 | size: 0xE
+# .sdata:0x22 | 0x81696B52 | size: 0x7
 .obj lbl_81696B52, global
-	.4byte 0x475F5075
-	.4byte 0x73680000
-	.4byte 0x00000000
-	.2byte 0x0000
+	.string "G_Push"
 .endobj lbl_81696B52
+
+# .sdata:0x29 | 0x81696B59 | size: 0x7
+.obj gap_11_81696B59_sdata, global
+.hidden gap_11_81696B59_sdata
+	.4byte 0x00000000
+	.byte 0x00, 0x00, 0x00
+.endobj gap_11_81696B59_sdata

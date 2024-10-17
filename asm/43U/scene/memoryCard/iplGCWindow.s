@@ -393,9 +393,9 @@
 /* 813CF290 | 7F 04 C3 78 */	mr r4, r24
 /* 813CF294 | 7F 25 CB 78 */	mr r5, r25
 /* 813CF298 | 4B FF F2 15 */	bl getBlocks__Q33ipl5scene17MemoryCardManagerFUcs
-/* 813CF29C | 3C 80 81 61 */	lis r4, lbl_81610540@ha
+/* 813CF29C | 3C 80 81 61 */	lis r4, scNumber__Q23ipl5scene@ha
 /* 813CF2A0 | 38 00 00 05 */	li r0, 0x5
-/* 813CF2A4 | 38 84 05 40 */	addi r4, r4, lbl_81610540@l
+/* 813CF2A4 | 38 84 05 40 */	addi r4, r4, scNumber__Q23ipl5scene@l
 /* 813CF2A8 | 38 C1 00 32 */	addi r6, r1, 0x32
 /* 813CF2AC | 38 A4 FF FE */	subi r5, r4, 0x2
 /* 813CF2B0 | 7C 09 03 A6 */	mtctr r0
@@ -2952,8 +2952,9 @@
 	.4byte 0x000000BD
 .endobj scTextboxToMessageID__Q23ipl5scene
 
-# .rodata:0x98 | 0x81610540 | size: 0x18
-.obj lbl_81610540, global
+# .rodata:0x98 | 0x81610540 | size: 0x14
+# ipl::scene::scNumber
+.obj scNumber__Q23ipl5scene, local
 	.2byte 0x0030
 	.2byte 0x0031
 	.2byte 0x0032
@@ -2964,9 +2965,13 @@
 	.2byte 0x0037
 	.2byte 0x0038
 	.2byte 0x0039
-	.2byte 0x0000
-	.2byte 0x0000
-.endobj lbl_81610540
+.endobj scNumber__Q23ipl5scene
+
+# .rodata:0xAC | 0x81610554 | size: 0x4
+.obj gap_07_81610554_rodata, global
+.hidden gap_07_81610554_rodata
+	.4byte 0x00000000
+.endobj gap_07_81610554_rodata
 
 # 0x81652820..0x81652F18 | size: 0x6F8
 .data
@@ -3525,10 +3530,14 @@
 	.string "G_Wait"
 .endobj lbl_81696CCB
 
-# .sdata:0x22 | 0x81696CD2 | size: 0xE
+# .sdata:0x22 | 0x81696CD2 | size: 0x7
 .obj lbl_81696CD2, global
-	.4byte 0x4E5F5761
-	.4byte 0x69740000
-	.4byte 0x00000000
-	.2byte 0x0000
+	.string "N_Wait"
 .endobj lbl_81696CD2
+
+# .sdata:0x29 | 0x81696CD9 | size: 0x7
+.obj gap_11_81696CD9_sdata, global
+.hidden gap_11_81696CD9_sdata
+	.4byte 0x00000000
+	.byte 0x00, 0x00, 0x00
+.endobj gap_11_81696CD9_sdata

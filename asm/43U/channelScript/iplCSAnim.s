@@ -631,18 +631,18 @@
 /* 8145EDB8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8145EDBC | 7C 7E 1B 78 */	mr r30, r3
 /* 8145EDC0 | 41 82 00 48 */	beq .L_8145EE08
-/* 8145EDC4 | 3C A0 81 61 */	lis r5, lbl_816177F8@ha
+/* 8145EDC4 | 3C A0 81 61 */	lis r5, scMethodList__Q33ipl2cs4anim@ha
 /* 8145EDC8 | 7F A3 EB 78 */	mr r3, r29
 /* 8145EDCC | 7F C4 F3 78 */	mr r4, r30
 /* 8145EDD0 | 38 C0 00 0F */	li r6, 0xf
-/* 8145EDD4 | 38 A5 77 F8 */	addi r5, r5, lbl_816177F8@l
+/* 8145EDD4 | 38 A5 77 F8 */	addi r5, r5, scMethodList__Q33ipl2cs4anim@l
 /* 8145EDD8 | 4B FE DC 99 */	bl CHANSVmAddNativeMethodList
 /* 8145EDDC | 7C 60 00 34 */	cntlzw r0, r3
-/* 8145EDE0 | 3C A0 81 61 */	lis r5, lbl_81617870@ha
+/* 8145EDE0 | 3C A0 81 61 */	lis r5, scPropertyList__Q33ipl2cs4anim@ha
 /* 8145EDE4 | 7F A3 EB 78 */	mr r3, r29
 /* 8145EDE8 | 7F C4 F3 78 */	mr r4, r30
 /* 8145EDEC | 54 1F D9 7E */	srwi r31, r0, 5
-/* 8145EDF0 | 38 A5 78 70 */	addi r5, r5, lbl_81617870@l
+/* 8145EDF0 | 38 A5 78 70 */	addi r5, r5, scPropertyList__Q33ipl2cs4anim@l
 /* 8145EDF4 | 38 C0 00 04 */	li r6, 0x4
 /* 8145EDF8 | 4B FE DE 61 */	bl CHANSVmAddNativePropertyAccessorsList
 /* 8145EDFC | 7C 60 00 34 */	cntlzw r0, r3
@@ -663,7 +663,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x816177F8 | size: 0x78
-.obj lbl_816177F8, global
+# ipl::cs::anim::scMethodList
+.obj scMethodList__Q33ipl2cs4anim, local
 	.4byte lbl_81697975
 	.4byte start__Q33ipl2cs4animFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
 	.4byte lbl_8169797B
@@ -694,10 +695,11 @@
 	.4byte get_type__Q33ipl2cs4animFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
 	.4byte lbl_8166A9C5
 	.4byte get_delta__Q33ipl2cs4animFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
-.endobj lbl_816177F8
+.endobj scMethodList__Q33ipl2cs4anim
 
 # .rodata:0x78 | 0x81617870 | size: 0x30
-.obj lbl_81617870, global
+# ipl::cs::anim::scPropertyList
+.obj scPropertyList__Q33ipl2cs4anim, local
 	.4byte lbl_8166A9CE
 	.4byte "get_int<0>__Q33ipl2cs4utilFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
 	.4byte 0x00000000
@@ -710,7 +712,7 @@
 	.4byte lbl_8166A9F6
 	.4byte "get_int<3>__Q33ipl2cs4utilFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
 	.4byte 0x00000000
-.endobj lbl_81617870
+.endobj scPropertyList__Q33ipl2cs4anim
 
 # 0x8166A958..0x8166AA08 | size: 0xB0
 .data
@@ -783,28 +785,34 @@
 
 # .data:0x9E | 0x8166A9F6 | size: 0x12
 .obj lbl_8166A9F6, global
-	.4byte 0x2A545950
-	.4byte 0x455F414C
-	.4byte 0x5445524E
-	.4byte 0x41544500
-	.2byte 0x0000
+	.string "*TYPE_ALTERNATE\000\000"
 .endobj lbl_8166A9F6
 
 # 0x81694FE8..0x81694FF8 | size: 0x10
 .section .sdata2, "a"
 .balign 8
 
-# .sdata2:0x0 | 0x81694FE8 | size: 0x8
+# .sdata2:0x0 | 0x81694FE8 | size: 0x4
 .obj lbl_81694FE8, global
-	.float 0
 	.float 0
 .endobj lbl_81694FE8
 
-# .sdata2:0x8 | 0x81694FF0 | size: 0x8
+# .sdata2:0x4 | 0x81694FEC | size: 0x4
+.obj gap_09_81694FEC_sdata2, global
+.hidden gap_09_81694FEC_sdata2
+	.4byte 0x00000000
+.endobj gap_09_81694FEC_sdata2
+
+# .sdata2:0x8 | 0x81694FF0 | size: 0x4
 .obj lbl_81694FF0, global
 	.float 0
-	.float 0
 .endobj lbl_81694FF0
+
+# .sdata2:0xC | 0x81694FF4 | size: 0x4
+.obj gap_09_81694FF4_sdata2, global
+.hidden gap_09_81694FF4_sdata2
+	.4byte 0x00000000
+.endobj gap_09_81694FF4_sdata2
 
 # 0x81697970..0x81697998 | size: 0x28
 .section .sdata, "wa"

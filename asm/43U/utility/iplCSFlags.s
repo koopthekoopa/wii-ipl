@@ -463,7 +463,7 @@
 .data
 .balign 8
 
-# .data:0x0 | 0x816423E0 | size: 0x330
+# .data:0x0 | 0x816423E0 | size: 0x32D
 .obj lbl_816423E0, global
 	.4byte 0x2F736861
 	.4byte 0x72656432
@@ -668,5 +668,11 @@
 	.4byte 0x68652066
 	.4byte 0x6C61673A
 	.4byte 0x2025640A
-	.4byte 0x00000000
+	.byte 0x00
 .endobj lbl_816423E0
+
+# .data:0x32D | 0x8164270D | size: 0x3
+.obj gap_08_8164270D_data, global
+.hidden gap_08_8164270D_data
+	.byte 0x00, 0x00, 0x00
+.endobj gap_08_8164270D_data

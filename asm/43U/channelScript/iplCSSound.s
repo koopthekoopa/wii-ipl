@@ -103,10 +103,10 @@
 /* 8145EF44 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8145EF48 | 7C 64 1B 78 */	mr r4, r3
 /* 8145EF4C | 41 82 00 20 */	beq .L_8145EF6C
-/* 8145EF50 | 3C A0 81 61 */	lis r5, lbl_816178A0@ha
+/* 8145EF50 | 3C A0 81 61 */	lis r5, scMethodList__Q33ipl2cs5sound@ha
 /* 8145EF54 | 7F C3 F3 78 */	mr r3, r30
 /* 8145EF58 | 38 C0 00 02 */	li r6, 0x2
-/* 8145EF5C | 38 A5 78 A0 */	addi r5, r5, lbl_816178A0@l
+/* 8145EF5C | 38 A5 78 A0 */	addi r5, r5, scMethodList__Q33ipl2cs5sound@l
 /* 8145EF60 | 4B FE DB 11 */	bl CHANSVmAddNativeMethodList
 /* 8145EF64 | 7C 60 00 34 */	cntlzw r0, r3
 /* 8145EF68 | 54 1F D9 7E */	srwi r31, r0, 5
@@ -125,26 +125,29 @@
 .balign 8
 
 # .rodata:0x0 | 0x816178A0 | size: 0x10
-.obj lbl_816178A0, global
+# ipl::cs::sound::scMethodList
+.obj scMethodList__Q33ipl2cs5sound, local
 	.4byte lbl_81697998
 	.4byte start__Q33ipl2cs5soundFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
 	.4byte lbl_8166AA08
 	.4byte start_default_sound__Q33ipl2cs5soundFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
-.endobj lbl_816178A0
+.endobj scMethodList__Q33ipl2cs5sound
 
 # 0x8166AA08..0x8166AA20 | size: 0x18
 .data
 .balign 8
 
-# .data:0x0 | 0x8166AA08 | size: 0x18
+# .data:0x0 | 0x8166AA08 | size: 0x12
 .obj lbl_8166AA08, global
-	.4byte 0x73746172
-	.4byte 0x74446566
-	.4byte 0x61756C74
-	.4byte 0x536F756E
-	.4byte 0x64000000
-	.4byte 0x00000000
+	.string "startDefaultSound"
 .endobj lbl_8166AA08
+
+# .data:0x12 | 0x8166AA1A | size: 0x6
+.obj gap_08_8166AA1A_data, global
+.hidden gap_08_8166AA1A_data
+	.4byte 0x00000000
+	.2byte 0x0000
+.endobj gap_08_8166AA1A_data
 
 # 0x81697998..0x816979A8 | size: 0x10
 .section .sdata, "wa"
@@ -155,9 +158,13 @@
 	.string "start"
 .endobj lbl_81697998
 
-# .sdata:0x6 | 0x8169799E | size: 0xA
+# .sdata:0x6 | 0x8169799E | size: 0x6
 .obj lbl_8169799E, global
-	.4byte 0x536F756E
-	.4byte 0x64000000
-	.2byte 0x0000
+	.string "Sound"
 .endobj lbl_8169799E
+
+# .sdata:0xC | 0x816979A4 | size: 0x4
+.obj gap_11_816979A4_sdata, global
+.hidden gap_11_816979A4_sdata
+	.4byte 0x00000000
+.endobj gap_11_816979A4_sdata

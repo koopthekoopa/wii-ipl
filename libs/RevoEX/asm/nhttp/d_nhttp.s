@@ -1152,7 +1152,13 @@
 .section .sbss, "wa", @nobits
 .balign 8
 
-# .sbss:0x0 | 0x81698DB8 | size: 0x8
+# .sbss:0x0 | 0x81698DB8 | size: 0x4
 .obj nhttpRegistered, local
-	.skip 0x8
+	.skip 0x4
 .endobj nhttpRegistered
+
+# .sbss:0x4 | 0x81698DBC | size: 0x4
+.obj gap_12_81698DBC_sbss, global
+.hidden gap_12_81698DBC_sbss
+	.skip 0x4
+.endobj gap_12_81698DBC_sbss

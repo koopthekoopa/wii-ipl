@@ -12,9 +12,9 @@
 namespace ipl {
     namespace nigaoe {
         class Object {
-            typedef void (*MakeIconCallback)(Object*, void*);
-
             public:
+                typedef void (*MakeIconCallback)(Object*, void*);
+
                 Object(EGG::Heap* pHeap, int width, int height, int faceId, MakeIconCallback callback, void* callBackWork);
                 Object(EGG::Heap* pHeap, int width, int height, RFLiCharData* pCharData, MakeIconCallback callback, void* callBackWork);
                 ~Object();
@@ -41,6 +41,8 @@ namespace ipl {
                 undefined4          unk_0x48;
                 undefined4          unk_0x4C;
                 bool                mCreated;           // 0x50
+            
+            friend class Manager;
         };
     }
 }

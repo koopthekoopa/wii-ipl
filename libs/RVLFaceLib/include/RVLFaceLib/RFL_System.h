@@ -11,6 +11,9 @@ u32			RFLGetWorkSize(BOOL useDeluxTex);
 
 RFLErrcode	RFLInitRes(void* workBuffer, void* resBuffer, u32 resSize, BOOL useDeluxTex);
 
+RFLErrcode  RFLWaitAsync();
+RFLErrcode  RFLGetAsyncStatus();
+
 #ifdef __cplusplus
 }
 #endif

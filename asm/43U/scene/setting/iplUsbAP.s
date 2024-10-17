@@ -315,13 +315,17 @@
 .data
 .balign 8
 
-# .data:0x0 | 0x81657B08 | size: 0x10
+# .data:0x0 | 0x81657B08 | size: 0x9
 .obj lbl_81657B08, global
-	.4byte 0x4E574355
-	.4byte 0x53424150
-	.4byte 0x00000000
-	.4byte 0x00000000
+	.string "NWCUSBAP"
 .endobj lbl_81657B08
+
+# .data:0x9 | 0x81657B11 | size: 0x7
+.obj gap_08_81657B11_data, global
+.hidden gap_08_81657B11_data
+	.4byte 0x00000000
+	.byte 0x00, 0x00, 0x00
+.endobj gap_08_81657B11_data
 
 # 0x81698C08..0x81698C28 | size: 0x20
 .section .sbss, "wa", @nobits
@@ -363,7 +367,13 @@
 	.skip 0x4
 .endobj lbl_81698C1C
 
-# .sbss:0x18 | 0x81698C20 | size: 0x8
+# .sbss:0x18 | 0x81698C20 | size: 0x4
 .obj lbl_81698C20, global
-	.skip 0x8
+	.skip 0x4
 .endobj lbl_81698C20
+
+# .sbss:0x1C | 0x81698C24 | size: 0x4
+.obj gap_12_81698C24_sbss, global
+.hidden gap_12_81698C24_sbss
+	.skip 0x4
+.endobj gap_12_81698C24_sbss

@@ -2100,7 +2100,7 @@
 	.4byte doSave__Q33ipl8keyboard7ManagerFv
 .endobj __vt__Q33ipl8keyboard7Manager
 
-# .data:0x454 | 0x81638E3C | size: 0x3C
+# .data:0x454 | 0x81638E3C | size: 0x38
 # ipl::keyboard::EventObserver::__vtable
 .obj __vt__Q33ipl8keyboard13EventObserver, global
 	.4byte 0x00000000
@@ -2117,8 +2117,13 @@
 	.4byte 0x664C656E
 	.4byte 0x6774680A
 	.4byte 0x00000000
-	.4byte 0x00000000
 .endobj __vt__Q33ipl8keyboard13EventObserver
+
+# .data:0x48C | 0x81638E74 | size: 0x4
+.obj gap_08_81638E74_data, global
+.hidden gap_08_81638E74_data
+	.4byte 0x00000000
+.endobj gap_08_81638E74_data
 
 # 0x81694590..0x81694598 | size: 0x8
 .section .sdata2, "a"

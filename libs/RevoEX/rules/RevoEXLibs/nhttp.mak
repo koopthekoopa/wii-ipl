@@ -12,7 +12,7 @@ NHTTP_OBJECTS =	$(REVOEX_OBJASM_PATH)/nhttp/NHTTP_bgnend.o \
 				$(REVOEX_OBJASM_PATH)/nhttp/d_nhttp.o \
 				$(REVOEX_OBJASM_PATH)/nhttp/d_nhttp_common.o
 
-DEPENDENCIES += $(NHTTP_OBJECTS:.o=.d)
+ALL_OBJECTS += $(NHTTP_OBJECTS)
 
 $(REVOEX_OBJ_PATH)/nhttp/%.o: $(REVOEX_SRC_PATH)/nhttp/%.c
 	$(call BuildCSources,$(REVOEX_CCPATH),$(REVOEX_CFLAGS),$(REVOEX_INC_PATHS),$(INCLUDE_ROOT))

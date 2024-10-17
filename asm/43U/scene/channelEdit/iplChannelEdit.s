@@ -933,9 +933,9 @@
 /* 813A105C | 48 00 64 79 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
 /* 813A1060 | 48 00 01 BC */	b .L_813A121C
 .L_813A1064:
-/* 813A1064 | 3C 80 81 61 */	lis r4, lbl_8160FC48@ha
+/* 813A1064 | 3C 80 81 61 */	lis r4, scNumber__Q23ipl5scene@ha
 /* 813A1068 | 38 60 00 05 */	li r3, 0x5
-/* 813A106C | 38 84 FC 48 */	addi r4, r4, lbl_8160FC48@l
+/* 813A106C | 38 84 FC 48 */	addi r4, r4, scNumber__Q23ipl5scene@l
 /* 813A1070 | 38 C1 00 10 */	addi r6, r1, 0x10
 /* 813A1074 | 38 A4 FF FE */	subi r5, r4, 0x2
 /* 813A1078 | 7C 69 03 A6 */	mtctr r3
@@ -1100,9 +1100,9 @@
 /* 813A12C4 | 48 00 62 11 */	bl set_visible__Q33ipl5scene13AnmControllerFPCcb
 /* 813A12C8 | 48 00 02 08 */	b .L_813A14D0
 .L_813A12CC:
-/* 813A12CC | 3C 60 81 61 */	lis r3, lbl_8160FC5C@ha
+/* 813A12CC | 3C 60 81 61 */	lis r3, scNumber2__Q23ipl5scene@ha
 /* 813A12D0 | 38 00 00 05 */	li r0, 0x5
-/* 813A12D4 | 38 63 FC 5C */	addi r3, r3, lbl_8160FC5C@l
+/* 813A12D4 | 38 63 FC 5C */	addi r3, r3, scNumber2__Q23ipl5scene@l
 /* 813A12D8 | 38 C1 00 14 */	addi r6, r1, 0x14
 /* 813A12DC | 38 A3 FF FE */	subi r5, r3, 0x2
 /* 813A12E0 | 7C 09 03 A6 */	mtctr r0
@@ -3966,7 +3966,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x8160FC48 | size: 0x14
-.obj lbl_8160FC48, global
+# ipl::scene::scNumber
+.obj scNumber__Q23ipl5scene, local
 	.2byte 0x0030
 	.2byte 0x0031
 	.2byte 0x0032
@@ -3977,10 +3978,11 @@
 	.2byte 0x0037
 	.2byte 0x0038
 	.2byte 0x0039
-.endobj lbl_8160FC48
+.endobj scNumber__Q23ipl5scene
 
 # .rodata:0x14 | 0x8160FC5C | size: 0x14
-.obj lbl_8160FC5C, global
+# ipl::scene::scNumber2
+.obj scNumber2__Q23ipl5scene, local
 	.2byte 0x0030
 	.2byte 0x0031
 	.2byte 0x0032
@@ -3991,7 +3993,7 @@
 	.2byte 0x0037
 	.2byte 0x0038
 	.2byte 0x0039
-.endobj lbl_8160FC5C
+.endobj scNumber2__Q23ipl5scene
 
 # 0x8164C688..0x8164CC68 | size: 0x5E0
 .data

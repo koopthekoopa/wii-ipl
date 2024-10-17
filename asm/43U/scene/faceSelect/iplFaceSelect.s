@@ -2040,9 +2040,9 @@
 .fn set_page__Q33ipl5scene10FaceSelectFv, global
 /* 813BCD00 | 94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 813BCD04 | 7C 08 02 A6 */	mflr r0
-/* 813BCD08 | 3C 80 81 61 */	lis r4, lbl_81610310@ha
+/* 813BCD08 | 3C 80 81 61 */	lis r4, scNumber__Q23ipl5scene@ha
 /* 813BCD0C | 90 01 00 34 */	stw r0, 0x34(r1)
-/* 813BCD10 | 38 84 03 10 */	addi r4, r4, lbl_81610310@l
+/* 813BCD10 | 38 84 03 10 */	addi r4, r4, scNumber__Q23ipl5scene@l
 /* 813BCD14 | 38 00 00 05 */	li r0, 0x5
 /* 813BCD18 | 38 C1 00 0C */	addi r6, r1, 0xc
 /* 813BCD1C | 93 E1 00 2C */	stw r31, 0x2c(r1)
@@ -2689,8 +2689,9 @@
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x81610310 | size: 0x18
-.obj lbl_81610310, global
+# .rodata:0x0 | 0x81610310 | size: 0x14
+# ipl::scene::scNumber
+.obj scNumber__Q23ipl5scene, local
 	.2byte 0x0030
 	.2byte 0x0031
 	.2byte 0x0032
@@ -2701,9 +2702,13 @@
 	.2byte 0x0037
 	.2byte 0x0038
 	.2byte 0x0039
-	.2byte 0x0000
-	.2byte 0x0000
-.endobj lbl_81610310
+.endobj scNumber__Q23ipl5scene
+
+# .rodata:0x14 | 0x81610324 | size: 0x4
+.obj gap_07_81610324_rodata, global
+.hidden gap_07_81610324_rodata
+	.4byte 0x00000000
+.endobj gap_07_81610324_rodata
 
 # 0x8164F0B8..0x8164F8B8 | size: 0x800
 .data
@@ -3374,11 +3379,16 @@
 	.double 4503599627370496
 .endobj lbl_81694A20
 
-# .sdata2:0x18 | 0x81694A28 | size: 0x8
+# .sdata2:0x18 | 0x81694A28 | size: 0x4
 .obj lbl_81694A28, global
 	.float 50
-	.float 0
 .endobj lbl_81694A28
+
+# .sdata2:0x1C | 0x81694A2C | size: 0x4
+.obj gap_09_81694A2C_sdata2, global
+.hidden gap_09_81694A2C_sdata2
+	.4byte 0x00000000
+.endobj gap_09_81694A2C_sdata2
 
 # 0x81696B00..0x81696B30 | size: 0x30
 .section .sdata, "wa"
@@ -3414,9 +3424,13 @@
 	.string "Mask_00"
 .endobj lbl_81696B1F
 
-# .sdata:0x27 | 0x81696B27 | size: 0x9
+# .sdata:0x27 | 0x81696B27 | size: 0x7
 .obj lbl_81696B27, global
-	.4byte 0x545F5061
-	.4byte 0x67650000
-	.byte 0x00
+	.string "T_Page"
 .endobj lbl_81696B27
+
+# .sdata:0x2E | 0x81696B2E | size: 0x2
+.obj gap_11_81696B2E_sdata, global
+.hidden gap_11_81696B2E_sdata
+	.2byte 0x0000
+.endobj gap_11_81696B2E_sdata

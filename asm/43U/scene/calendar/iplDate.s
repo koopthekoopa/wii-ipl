@@ -668,17 +668,17 @@
 /* 813A0138 | 93 C1 00 18 */	stw r30, 0x18(r1)
 /* 813A013C | 41 80 00 20 */	blt .L_813A015C
 /* 813A0140 | 38 00 00 0A */	li r0, 0xa
-/* 813A0144 | 3C A0 81 61 */	lis r5, number@ha
+/* 813A0144 | 3C A0 81 61 */	lis r5, scNumber__Q23ipl5scene@ha
 /* 813A0148 | 7C 04 03 D6 */	divw r0, r4, r0
-/* 813A014C | 38 A5 FC 30 */	addi r5, r5, number@l
+/* 813A014C | 38 A5 FC 30 */	addi r5, r5, scNumber__Q23ipl5scene@l
 /* 813A0150 | 54 00 08 3C */	slwi r0, r0, 1
 /* 813A0154 | 7C 05 02 2E */	lhzx r0, r5, r0
 /* 813A0158 | 48 00 00 24 */	b .L_813A017C
 .L_813A015C:
 /* 813A015C | 38 C0 00 0A */	li r6, 0xa
-/* 813A0160 | 3C A0 81 61 */	lis r5, number@ha
+/* 813A0160 | 3C A0 81 61 */	lis r5, scNumber__Q23ipl5scene@ha
 /* 813A0164 | 7C 04 33 D6 */	divw r0, r4, r6
-/* 813A0168 | 38 A5 FC 30 */	addi r5, r5, number@l
+/* 813A0168 | 38 A5 FC 30 */	addi r5, r5, scNumber__Q23ipl5scene@l
 /* 813A016C | 7C 00 31 D6 */	mullw r0, r0, r6
 /* 813A0170 | 7C 00 20 50 */	subf r0, r0, r4
 /* 813A0174 | 54 00 08 3C */	slwi r0, r0, 1
@@ -688,9 +688,9 @@
 /* 813A0180 | B0 01 00 08 */	sth r0, 0x8(r1)
 /* 813A0184 | 41 80 00 28 */	blt .L_813A01AC
 /* 813A0188 | 38 C0 00 0A */	li r6, 0xa
-/* 813A018C | 3C A0 81 61 */	lis r5, number@ha
+/* 813A018C | 3C A0 81 61 */	lis r5, scNumber__Q23ipl5scene@ha
 /* 813A0190 | 7C 04 33 D6 */	divw r0, r4, r6
-/* 813A0194 | 38 A5 FC 30 */	addi r5, r5, number@l
+/* 813A0194 | 38 A5 FC 30 */	addi r5, r5, scNumber__Q23ipl5scene@l
 /* 813A0198 | 7C 00 31 D6 */	mullw r0, r0, r6
 /* 813A019C | 7C 00 20 50 */	subf r0, r0, r4
 /* 813A01A0 | 54 00 08 3C */	slwi r0, r0, 1
@@ -929,13 +929,19 @@
 .endobj scAnmFrame__Q23ipl5scene
 
 # .rodata:0x90 | 0x8160FC30 | size: 0x14
-.obj number, local
-	.4byte 0x00300031
-	.4byte 0x00320033
-	.4byte 0x00340035
-	.4byte 0x00360037
-	.4byte 0x00380039
-.endobj number
+# ipl::scene::scNumber
+.obj scNumber__Q23ipl5scene, local
+	.2byte 0x0030
+	.2byte 0x0031
+	.2byte 0x0032
+	.2byte 0x0033
+	.2byte 0x0034
+	.2byte 0x0035
+	.2byte 0x0036
+	.2byte 0x0037
+	.2byte 0x0038
+	.2byte 0x0039
+.endobj scNumber__Q23ipl5scene
 
 # .rodata:0xA4 | 0x8160FC44 | size: 0x4
 .obj gap_07_8160FC44_rodata, global

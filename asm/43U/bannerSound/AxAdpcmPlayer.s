@@ -973,11 +973,16 @@
 .section .sdata, "wa"
 .balign 8
 
-# .sdata:0x0 | 0x81697290 | size: 0x8
+# .sdata:0x0 | 0x81697290 | size: 0x4
 .obj lbl_81697290, global
 	.4byte 0x80000000
-	.4byte 0x00000000
 .endobj lbl_81697290
+
+# .sdata:0x4 | 0x81697294 | size: 0x4
+.obj gap_11_81697294_sdata, global
+.hidden gap_11_81697294_sdata
+	.4byte 0x00000000
+.endobj gap_11_81697294_sdata
 
 # 0x81698CE0..0x81698CF0 | size: 0x10
 .section .sbss, "wa", @nobits
@@ -1012,8 +1017,14 @@
 	.skip 0x1
 .endobj gap_12_81698CE7_sbss
 
-# .sbss:0x8 | 0x81698CE8 | size: 0x8
+# .sbss:0x8 | 0x81698CE8 | size: 0x4
 # AxAdpcmSimplePlayer::sCallback
 .obj sCallback__19AxAdpcmSimplePlayer, global
-	.skip 0x8
+	.skip 0x4
 .endobj sCallback__19AxAdpcmSimplePlayer
+
+# .sbss:0xC | 0x81698CEC | size: 0x4
+.obj gap_12_81698CEC_sbss, global
+.hidden gap_12_81698CEC_sbss
+	.skip 0x4
+.endobj gap_12_81698CEC_sbss

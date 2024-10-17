@@ -131,10 +131,10 @@
 /* 8145C0F8 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8145C0FC | 7C 64 1B 78 */	mr r4, r3
 /* 8145C100 | 41 82 00 20 */	beq .L_8145C120
-/* 8145C104 | 3C A0 81 61 */	lis r5, lbl_816175E8@ha
+/* 8145C104 | 3C A0 81 61 */	lis r5, scPropertyList__Q33ipl2cs4vec3@ha
 /* 8145C108 | 7F C3 F3 78 */	mr r3, r30
 /* 8145C10C | 38 C0 00 03 */	li r6, 0x3
-/* 8145C110 | 38 A5 75 E8 */	addi r5, r5, lbl_816175E8@l
+/* 8145C110 | 38 A5 75 E8 */	addi r5, r5, scPropertyList__Q33ipl2cs4vec3@l
 /* 8145C114 | 4B FF 0B 45 */	bl CHANSVmAddNativePropertyAccessorsList
 /* 8145C118 | 7C 60 00 34 */	cntlzw r0, r3
 /* 8145C11C | 54 1F D9 7E */	srwi r31, r0, 5
@@ -359,8 +359,9 @@
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x816175E8 | size: 0x28
-.obj lbl_816175E8, global
+# .rodata:0x0 | 0x816175E8 | size: 0x24
+# ipl::cs::vec3::scPropertyList
+.obj scPropertyList__Q33ipl2cs4vec3, local
 	.4byte lbl_816978D5
 	.4byte "get<0>__Q33ipl2cs4vec3FP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
 	.4byte "set<0>__Q33ipl2cs4vec3FP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
@@ -370,18 +371,28 @@
 	.4byte lbl_816978D9
 	.4byte "get<2>__Q33ipl2cs4vec3FP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
 	.4byte "set<2>__Q33ipl2cs4vec3FP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
+.endobj scPropertyList__Q33ipl2cs4vec3
+
+# .rodata:0x24 | 0x8161760C | size: 0x4
+.obj gap_07_8161760C_rodata, global
+.hidden gap_07_8161760C_rodata
 	.4byte 0x00000000
-.endobj lbl_816175E8
+.endobj gap_07_8161760C_rodata
 
 # 0x81694FC8..0x81694FD0 | size: 0x8
 .section .sdata2, "a"
 .balign 8
 
-# .sdata2:0x0 | 0x81694FC8 | size: 0x8
+# .sdata2:0x0 | 0x81694FC8 | size: 0x4
 .obj lbl_81694FC8, global
 	.float 0
-	.float 0
 .endobj lbl_81694FC8
+
+# .sdata2:0x4 | 0x81694FCC | size: 0x4
+.obj gap_09_81694FCC_sdata2, global
+.hidden gap_09_81694FCC_sdata2
+	.4byte 0x00000000
+.endobj gap_09_81694FCC_sdata2
 
 # 0x816978D0..0x816978E0 | size: 0x10
 .section .sdata, "wa"
@@ -402,8 +413,14 @@
 	.string "y"
 .endobj lbl_816978D7
 
-# .sdata:0x9 | 0x816978D9 | size: 0x7
+# .sdata:0x9 | 0x816978D9 | size: 0x2
 .obj lbl_816978D9, global
-	.4byte 0x7A000000
-	.byte 0x00, 0x00, 0x00
+	.string "z"
 .endobj lbl_816978D9
+
+# .sdata:0xB | 0x816978DB | size: 0x5
+.obj gap_11_816978DB_sdata, global
+.hidden gap_11_816978DB_sdata
+	.4byte 0x00000000
+	.byte 0x00
+.endobj gap_11_816978DB_sdata

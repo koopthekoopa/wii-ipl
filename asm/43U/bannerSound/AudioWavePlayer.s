@@ -192,7 +192,7 @@
 /* 8140D000 | 40 82 00 10 */	bne .L_8140D010
 /* 8140D004 | 7F 83 E3 78 */	mr r3, r28
 /* 8140D008 | 7F A4 EB 78 */	mr r4, r29
-/* 8140D00C | 48 10 29 C5 */	bl fn_8150F9D0
+/* 8140D00C | 48 10 29 C5 */	bl AppendWavePacket__Q34nw4r3snd10WavePlayerFPQ44nw4r3snd10WavePlayer10WavePacket
 .L_8140D010:
 /* 8140D010 | 39 61 00 50 */	addi r11, r1, 0x50
 /* 8140D014 | 48 1E C4 E1 */	bl _restgpr_21
@@ -234,7 +234,7 @@
 /* 8140D078 | 93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8140D07C | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 8140D080 | 7C 7E 1B 78 */	mr r30, r3
-/* 8140D084 | 48 10 26 9D */	bl fn_8150F720
+/* 8140D084 | 48 10 26 9D */	bl __ct__Q34nw4r3snd10WavePlayerFv
 /* 8140D088 | C0 02 88 A0 */	lfs f0, lbl_81694CA0@sda21(r0)
 /* 8140D08C | 3C 80 81 66 */	lis r4, __vt__16SimpleWavePlayer@ha
 /* 8140D090 | 3B E0 00 01 */	li r31, 0x1
@@ -250,11 +250,11 @@
 /* 8140D0B8 | 48 00 1E 7D */	bl __ct__12WaveFileAiffFv
 /* 8140D0BC | 38 7E 00 E8 */	addi r3, r30, 0xe8
 /* 8140D0C0 | 48 00 2A 0D */	bl __ct__11WaveFileWavFv
-/* 8140D0C4 | 3C 80 81 51 */	lis r4, fn_81510448@ha
+/* 8140D0C4 | 3C 80 81 51 */	lis r4, __ct__Q44nw4r3snd10WavePlayer10WavePacketFv@ha
 /* 8140D0C8 | 3C A0 81 41 */	lis r5, __dt__Q44nw4r3snd10WavePlayer10WavePacketFv@ha
 /* 8140D0CC | 38 7E 01 18 */	addi r3, r30, 0x118
 /* 8140D0D0 | 38 C0 00 20 */	li r6, 0x20
-/* 8140D0D4 | 38 84 04 48 */	addi r4, r4, fn_81510448@l
+/* 8140D0D4 | 38 84 04 48 */	addi r4, r4, __ct__Q44nw4r3snd10WavePlayer10WavePacketFv@l
 /* 8140D0D8 | 38 A5 D1 24 */	addi r5, r5, __dt__Q44nw4r3snd10WavePlayer10WavePacketFv@l
 /* 8140D0DC | 38 E0 00 03 */	li r7, 0x3
 /* 8140D0E0 | 48 1E C1 21 */	bl __construct_array
@@ -368,7 +368,7 @@
 /* 8140D234 | 4B FF FF 31 */	bl __dt__12WaveFileAiffFv
 /* 8140D238 | 7F C3 F3 78 */	mr r3, r30
 /* 8140D23C | 38 80 00 00 */	li r4, 0x0
-/* 8140D240 | 48 10 25 69 */	bl fn_8150F7A8
+/* 8140D240 | 48 10 25 69 */	bl __dt__Q34nw4r3snd10WavePlayerFv
 /* 8140D244 | 2C 1F 00 00 */	cmpwi r31, 0x0
 /* 8140D248 | 40 81 00 0C */	ble .L_8140D254
 /* 8140D24C | 7F C3 F3 78 */	mr r3, r30
@@ -478,7 +478,7 @@
 /* 8140D3B0 | 38 A5 D0 28 */	addi r5, r5, wavePacketCallback__16SimpleWavePlayerFQ44nw4r3snd10WavePlayer24WavePacketCallbackStatusPQ34nw4r3snd10WavePlayerPQ44nw4r3snd10WavePlayer10WavePacketPv@l
 /* 8140D3B4 | 80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8140D3B8 | 90 1B 00 A4 */	stw r0, 0xa4(r27)
-/* 8140D3BC | 48 10 25 01 */	bl fn_8150F8BC
+/* 8140D3BC | 48 10 25 01 */	bl Setup__Q34nw4r3snd10WavePlayerFRCQ44nw4r3snd10WavePlayer10SetupParamPFQ44nw4r3snd10WavePlayer24WavePacketCallbackStatusPQ34nw4r3snd10WavePlayerPQ44nw4r3snd10WavePlayer10WavePacketPv_vPv
 /* 8140D3C0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8140D3C4 | 7C 7E 1B 78 */	mr r30, r3
 /* 8140D3C8 | 41 82 00 D4 */	beq .L_8140D49C
@@ -638,7 +638,7 @@
 /* 8140D5C4 | 38 A5 D0 28 */	addi r5, r5, wavePacketCallback__16SimpleWavePlayerFQ44nw4r3snd10WavePlayer24WavePacketCallbackStatusPQ34nw4r3snd10WavePlayerPQ44nw4r3snd10WavePlayer10WavePacketPv@l
 /* 8140D5C8 | 80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8140D5CC | 90 1B 00 A4 */	stw r0, 0xa4(r27)
-/* 8140D5D0 | 48 10 22 ED */	bl fn_8150F8BC
+/* 8140D5D0 | 48 10 22 ED */	bl Setup__Q34nw4r3snd10WavePlayerFRCQ44nw4r3snd10WavePlayer10SetupParamPFQ44nw4r3snd10WavePlayer24WavePacketCallbackStatusPQ34nw4r3snd10WavePlayerPQ44nw4r3snd10WavePlayer10WavePacketPv_vPv
 /* 8140D5D4 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 8140D5D8 | 7C 7E 1B 78 */	mr r30, r3
 /* 8140D5DC | 41 82 00 D4 */	beq .L_8140D6B0
@@ -734,7 +734,7 @@
 /* 8140D6F4 | 7C 7D 1B 78 */	mr r29, r3
 /* 8140D6F8 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8140D6FC | 41 82 00 90 */	beq .L_8140D78C
-/* 8140D700 | 48 10 24 CD */	bl fn_8150FBCC
+/* 8140D700 | 48 10 24 CD */	bl Stop__Q34nw4r3snd10WavePlayerFv
 /* 8140D704 | 88 1D 00 B4 */	lbz r0, 0xb4(r29)
 /* 8140D708 | 3B E0 00 00 */	li r31, 0x0
 /* 8140D70C | 38 60 00 01 */	li r3, 0x1
@@ -770,7 +770,7 @@
 /* 8140D778 | 41 80 FF E0 */	blt .L_8140D758
 .L_8140D77C:
 /* 8140D77C | 7F A3 EB 78 */	mr r3, r29
-/* 8140D780 | 48 10 23 5D */	bl fn_8150FADC
+/* 8140D780 | 48 10 23 5D */	bl Start__Q34nw4r3snd10WavePlayerFv
 /* 8140D784 | 38 60 00 01 */	li r3, 0x1
 /* 8140D788 | 48 00 00 08 */	b .L_8140D790
 .L_8140D78C:
@@ -789,7 +789,7 @@
 .fn stop__16SimpleWavePlayerFv, global
 /* 8140D7A8 | 38 00 00 00 */	li r0, 0x0
 /* 8140D7AC | 98 03 00 B2 */	stb r0, 0xb2(r3)
-/* 8140D7B0 | 48 10 24 1C */	b fn_8150FBCC
+/* 8140D7B0 | 48 10 24 1C */	b Stop__Q34nw4r3snd10WavePlayerFv
 .endfn stop__16SimpleWavePlayerFv
 
 # .text:0xA60 | 0x8140D7B4 | size: 0x94
@@ -829,7 +829,7 @@
 /* 8140D824 | 38 00 00 00 */	li r0, 0x0
 /* 8140D828 | 7F E3 FB 78 */	mr r3, r31
 /* 8140D82C | 98 1F 00 B2 */	stb r0, 0xb2(r31)
-/* 8140D830 | 48 10 23 9D */	bl fn_8150FBCC
+/* 8140D830 | 48 10 23 9D */	bl Stop__Q34nw4r3snd10WavePlayerFv
 .L_8140D834:
 /* 8140D834 | 80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8140D838 | 83 E1 00 0C */	lwz r31, 0xc(r1)

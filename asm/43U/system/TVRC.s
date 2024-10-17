@@ -743,12 +743,17 @@
 	.4byte 0x00000190
 .endobj _limitMilli__7LibTVRC
 
-# .sdata:0x14 | 0x81696244 | size: 0xC
+# .sdata:0x14 | 0x81696244 | size: 0x6
 .obj lbl_81696244, global
-	.4byte 0x2F253034
-	.4byte 0x64000000
-	.4byte 0x00000000
+	.string "/%04d"
 .endobj lbl_81696244
+
+# .sdata:0x1A | 0x8169624A | size: 0x6
+.obj gap_11_8169624A_sdata, global
+.hidden gap_11_8169624A_sdata
+	.4byte 0x00000000
+	.2byte 0x0000
+.endobj gap_11_8169624A_sdata
 
 # 0x81698700..0x81698778 | size: 0x78
 .section .sbss, "wa", @nobits
@@ -904,8 +909,14 @@
 	.skip 0x4
 .endobj _repeatBitArray__7LibTVRC
 
-# .sbss:0x70 | 0x81698770 | size: 0x8
+# .sbss:0x70 | 0x81698770 | size: 0x4
 # LibTVRC::_tickT
 .obj _tickT__7LibTVRC, global
-	.skip 0x8
+	.skip 0x4
 .endobj _tickT__7LibTVRC
+
+# .sbss:0x74 | 0x81698774 | size: 0x4
+.obj gap_12_81698774_sbss, global
+.hidden gap_12_81698774_sbss
+	.skip 0x4
+.endobj gap_12_81698774_sbss

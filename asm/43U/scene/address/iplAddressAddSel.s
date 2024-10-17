@@ -1146,8 +1146,13 @@
 	.4byte lbl_81647C99
 .endobj lbl_816965D0
 
-# .sdata:0x8 | 0x816965D8 | size: 0x8
+# .sdata:0x8 | 0x816965D8 | size: 0x4
 .obj lbl_816965D8, global
-	.4byte 0x61726300
-	.4byte 0x00000000
+	.string "arc"
 .endobj lbl_816965D8
+
+# .sdata:0xC | 0x816965DC | size: 0x4
+.obj gap_11_816965DC_sdata, global
+.hidden gap_11_816965DC_sdata
+	.4byte 0x00000000
+.endobj gap_11_816965DC_sdata

@@ -1,31 +1,21 @@
 .include "macros.inc"
 .file "BS2Update.c"
 
-# 0x810ADF80..0x810B6EE0 | size: 0x8F60
+# 0x810B1580..0x810B38E0 | size: 0x2360
 .section .bss, "wa", @nobits
 .balign 8
 
-# .bss:0x0 | 0x810ADF80 | size: 0x3600
-.obj BS2Update_810ADF80, global
-	.skip 0x3600
-.endobj BS2Update_810ADF80
-
-# .bss:0x3600 | 0x810B1580 | size: 0x2360
+# .bss:0x0 | 0x810B1580 | size: 0x2360
 .obj BS2Update_810B1580, local
 	.skip 0x2360
 .endobj BS2Update_810B1580
-
-# .bss:0x5960 | 0x810B38E0 | size: 0x3600
-.obj BS2Update_810B38E0, global
-	.skip 0x3600
-.endobj BS2Update_810B38E0
 
 # 0x8137F208..0x813801DC | size: 0xFD4
 .text
 .balign 4
 
 # .text:0x0 | 0x8137F208 | size: 0x30
-.fn BS2Update_8137F208, global
+.fn getSuffix, local
 /* 8137F208 | 94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8137F20C | 7C 08 02 A6 */	mflr r0
 /* 8137F210 | 38 80 00 2E */	li r4, 0x2e
@@ -39,7 +29,7 @@
 /* 8137F22C | 7C 08 03 A6 */	mtlr r0
 /* 8137F230 | 38 21 00 10 */	addi r1, r1, 0x10
 /* 8137F234 | 4E 80 00 20 */	blr
-.endfn BS2Update_8137F208
+.endfn getSuffix
 
 # .text:0x30 | 0x8137F238 | size: 0x120
 .fn BS2UpdateInit, global
@@ -57,34 +47,34 @@
 /* 8137F264 | 4C C6 31 82 */	crclr cr1eq
 /* 8137F268 | 4B FF BD 4D */	bl BS2Report
 /* 8137F26C | 48 1A C3 E5 */	bl fn_8152B650
-/* 8137F270 | 90 6D AB 00 */	stw r3, lbl_81698B40@sda21(r0)
+/* 8137F270 | 90 6D AB 00 */	stw r3, ConsoleType@sda21(r0)
 /* 8137F274 | 48 1A C3 65 */	bl fn_8152B5D8
-/* 8137F278 | 90 6D AA FC */	stw r3, ConsoleType@sda21(r0)
+/* 8137F278 | 90 6D AA FC */	stw r3, VersionES@sda21(r0)
 /* 8137F27C | 48 1B 20 85 */	bl fn_81531300
-/* 8137F280 | 90 6D AA F8 */	stw r3, VersionES@sda21(r0)
-/* 8137F284 | 38 6D AA F0 */	li r3, VersionMEM2@sda21
+/* 8137F280 | 90 6D AA F8 */	stw r3, VersionMEM2@sda21(r0)
+/* 8137F284 | 38 6D AA F0 */	li r3, VersionIOS@sda21
 /* 8137F288 | 48 1A C3 5D */	bl fn_8152B5E4
-/* 8137F28C | 80 8D AB 00 */	lwz r4, lbl_81698B40@sda21(r0)
+/* 8137F28C | 80 8D AB 00 */	lwz r4, ConsoleType@sda21(r0)
 /* 8137F290 | 38 7F 00 16 */	addi r3, r31, 0x16
 /* 8137F294 | 4C C6 31 82 */	crclr cr1eq
 /* 8137F298 | 4B FF BD 1D */	bl BS2Report
-/* 8137F29C | 80 8D AA FC */	lwz r4, ConsoleType@sda21(r0)
+/* 8137F29C | 80 8D AA FC */	lwz r4, VersionES@sda21(r0)
 /* 8137F2A0 | 38 7F 00 2C */	addi r3, r31, 0x2c
 /* 8137F2A4 | 4C C6 31 82 */	crclr cr1eq
 /* 8137F2A8 | 4B FF BD 0D */	bl BS2Report
-/* 8137F2AC | 80 8D AA F8 */	lwz r4, VersionES@sda21(r0)
+/* 8137F2AC | 80 8D AA F8 */	lwz r4, VersionMEM2@sda21(r0)
 /* 8137F2B0 | 38 7F 00 42 */	addi r3, r31, 0x42
 /* 8137F2B4 | 4C C6 31 82 */	crclr cr1eq
 /* 8137F2B8 | 4B FF BC FD */	bl BS2Report
 /* 8137F2BC | 38 00 00 00 */	li r0, 0x0
-/* 8137F2C0 | 93 AD AA C4 */	stw r29, State@sda21(r0)
+/* 8137F2C0 | 93 AD AA C4 */	stw r29, Allocator@sda21(r0)
 /* 8137F2C4 | 3C 60 80 48 */	lis r3, 0x8048
 /* 8137F2C8 | 38 80 00 00 */	li r4, 0x0
-/* 8137F2CC | 90 0D AA C8 */	stw r0, CurrentEntry@sda21(r0)
+/* 8137F2CC | 90 0D AA C8 */	stw r0, State@sda21(r0)
 /* 8137F2D0 | 3C A0 00 04 */	lis r5, 0x4
-/* 8137F2D4 | 90 0D AA CC */	stw r0, lbl_81698B0C@sda21(r0)
-/* 8137F2D8 | 90 0D AA B8 */	stw r0, lbl_81698AF8@sda21(r0)
-/* 8137F2DC | 90 0D AA BC */	stw r0, lbl_81698AFC@sda21(r0)
+/* 8137F2D4 | 90 0D AA CC */	stw r0, CurrentEntry@sda21(r0)
+/* 8137F2D8 | 90 0D AA B8 */	stw r0, PtrEntries@sda21(r0)
+/* 8137F2DC | 90 0D AA BC */	stw r0, NumEntries@sda21(r0)
 /* 8137F2E0 | 4B FB 10 55 */	bl memset
 /* 8137F2E4 | 3C 60 80 4C */	lis r3, 0x804c
 /* 8137F2E8 | 38 80 00 00 */	li r4, 0x0
@@ -98,10 +88,10 @@
 /* 8137F308 | 4C C6 31 82 */	crclr cr1eq
 /* 8137F30C | 4B FF BC A9 */	bl BS2Report
 /* 8137F310 | 38 DE 13 18 */	addi r6, r30, 0x1318
-/* 8137F314 | 3C 80 81 38 */	lis r4, BS2Update_8137F358@ha
+/* 8137F314 | 3C 80 81 38 */	lis r4, UpdateThread@ha
 /* 8137F318 | 38 7E 10 00 */	addi r3, r30, 0x1000
 /* 8137F31C | 38 A0 00 00 */	li r5, 0x0
-/* 8137F320 | 38 84 F3 58 */	addi r4, r4, BS2Update_8137F358@l
+/* 8137F320 | 38 84 F3 58 */	addi r4, r4, UpdateThread@l
 /* 8137F324 | 38 C6 10 00 */	addi r6, r6, 0x1000
 /* 8137F328 | 38 E0 10 00 */	li r7, 0x1000
 /* 8137F32C | 39 00 00 1F */	li r8, 0x1f
@@ -118,7 +108,7 @@
 .endfn BS2UpdateInit
 
 # .text:0x150 | 0x8137F358 | size: 0xE44
-.fn BS2Update_8137F358, global
+.fn UpdateThread, local
 /* 8137F358 | 94 21 FF 10 */	stwu r1, -0xf0(r1)
 /* 8137F35C | 7C 08 02 A6 */	mflr r0
 /* 8137F360 | 90 01 00 F4 */	stw r0, 0xf4(r1)
@@ -133,11 +123,11 @@
 /* 8137F384 | 4B FF BC 31 */	bl BS2Report
 /* 8137F388 | 39 E0 00 00 */	li r15, 0x0
 /* 8137F38C | 38 00 00 00 */	li r0, 0x0
-/* 8137F390 | 90 0D AA E0 */	stw r0, progress$@sda21(r0)
+/* 8137F390 | 90 0D AA E0 */	stw r0, StartUpdate@sda21(r0)
 /* 8137F394 | 38 61 00 20 */	addi r3, r1, 0x20
 /* 8137F398 | 3A 20 00 00 */	li r17, 0x0
 /* 8137F39C | 3B C0 00 00 */	li r30, 0x0
-/* 8137F3A0 | 90 0D AA E4 */	stw r0, rc@sda21(r0)
+/* 8137F3A0 | 90 0D AA E4 */	stw r0, CancelUpdate@sda21(r0)
 /* 8137F3A4 | 3A 40 00 00 */	li r18, 0x0
 /* 8137F3A8 | 3A 60 00 00 */	li r19, 0x0
 /* 8137F3AC | 3A 80 00 00 */	li r20, 0x0
@@ -145,7 +135,7 @@
 /* 8137F3B4 | 3B E0 00 00 */	li r31, 0x0
 /* 8137F3B8 | 91 E1 00 0C */	stw r15, 0xc(r1)
 /* 8137F3BC | 91 E1 00 10 */	stw r15, 0x10(r1)
-/* 8137F3C0 | 90 0D AA C8 */	stw r0, CurrentEntry@sda21(r0)
+/* 8137F3C0 | 90 0D AA C8 */	stw r0, State@sda21(r0)
 /* 8137F3C4 | 90 0D AA D4 */	stw r0, lbl_81698B14@sda21(r0)
 /* 8137F3C8 | 48 23 FA 59 */	bl fn_815BEE20
 /* 8137F3CC | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -379,7 +369,7 @@
 /* 8137F6F0 | 4B FF B8 C5 */	bl BS2Report
 /* 8137F6F4 | 38 00 00 05 */	li r0, 0x5
 /* 8137F6F8 | 3A 20 00 00 */	li r17, 0x0
-/* 8137F6FC | 90 0D AA C8 */	stw r0, CurrentEntry@sda21(r0)
+/* 8137F6FC | 90 0D AA C8 */	stw r0, State@sda21(r0)
 /* 8137F700 | 48 00 07 34 */	b .L_8137FE34
 .L_8137F704:
 /* 8137F704 | 7C 7A EA 14 */	add r3, r26, r29
@@ -634,7 +624,7 @@
 /* 8137FAA0 | 4C C6 31 82 */	crclr cr1eq
 /* 8137FAA4 | 4B FF B5 11 */	bl BS2Report
 /* 8137FAA8 | 38 00 00 05 */	li r0, 0x5
-/* 8137FAAC | 90 0D AA C8 */	stw r0, CurrentEntry@sda21(r0)
+/* 8137FAAC | 90 0D AA C8 */	stw r0, State@sda21(r0)
 /* 8137FAB0 | 48 00 02 94 */	b .L_8137FD44
 .L_8137FAB4:
 /* 8137FAB4 | 7C 7D 72 14 */	add r3, r29, r14
@@ -821,16 +811,16 @@
 /* 8137FD48 | 41 82 00 14 */	beq .L_8137FD5C
 /* 8137FD4C | 38 00 00 05 */	li r0, 0x5
 /* 8137FD50 | 3A 20 00 00 */	li r17, 0x0
-/* 8137FD54 | 90 0D AA C8 */	stw r0, CurrentEntry@sda21(r0)
+/* 8137FD54 | 90 0D AA C8 */	stw r0, State@sda21(r0)
 /* 8137FD58 | 48 00 00 DC */	b .L_8137FE34
 .L_8137FD5C:
 /* 8137FD5C | 39 F5 08 00 */	addi r15, r21, 0x800
 /* 8137FD60 | 3C 00 80 4C */	lis r0, 0x804c
-/* 8137FD64 | 90 0D AA B8 */	stw r0, lbl_81698AF8@sda21(r0)
+/* 8137FD64 | 90 0D AA B8 */	stw r0, PtrEntries@sda21(r0)
 /* 8137FD68 | 3A 95 23 20 */	addi r20, r21, 0x2320
 /* 8137FD6C | 3A 00 00 00 */	li r16, 0x0
 /* 8137FD70 | 3A 40 00 00 */	li r18, 0x0
-/* 8137FD74 | 91 ED AA C0 */	stw r15, lbl_81698B00@sda21(r0)
+/* 8137FD74 | 91 ED AA C0 */	stw r15, Entries@sda21(r0)
 /* 8137FD78 | 3A 60 00 00 */	li r19, 0x0
 /* 8137FD7C | 3D C0 80 48 */	lis r14, 0x8048
 /* 8137FD80 | 48 00 00 A8 */	b .L_8137FE28
@@ -886,16 +876,16 @@
 /* 8137FE2C | 7C 10 00 40 */	cmplw r16, r0
 /* 8137FE30 | 41 80 FF 54 */	blt .L_8137FD84
 .L_8137FE34:
-/* 8137FE34 | 92 2D AA BC */	stw r17, lbl_81698AFC@sda21(r0)
-/* 8137FE38 | 80 0D AA BC */	lwz r0, lbl_81698AFC@sda21(r0)
+/* 8137FE34 | 92 2D AA BC */	stw r17, NumEntries@sda21(r0)
+/* 8137FE38 | 80 0D AA BC */	lwz r0, NumEntries@sda21(r0)
 /* 8137FE3C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137FE40 | 40 82 00 2C */	bne .L_8137FE6C
 /* 8137FE44 | 38 60 00 05 */	li r3, 0x5
 /* 8137FE48 | 38 00 00 00 */	li r0, 0x0
-/* 8137FE4C | 90 6D AA C8 */	stw r3, CurrentEntry@sda21(r0)
+/* 8137FE4C | 90 6D AA C8 */	stw r3, State@sda21(r0)
 /* 8137FE50 | 38 76 04 50 */	addi r3, r22, 0x450
-/* 8137FE54 | 90 0D AA E0 */	stw r0, progress$@sda21(r0)
-/* 8137FE58 | 90 0D AA E4 */	stw r0, rc@sda21(r0)
+/* 8137FE54 | 90 0D AA E0 */	stw r0, StartUpdate@sda21(r0)
+/* 8137FE58 | 90 0D AA E4 */	stw r0, CancelUpdate@sda21(r0)
 /* 8137FE5C | 4C C6 31 82 */	crclr cr1eq
 /* 8137FE60 | 4B FF B1 55 */	bl BS2Report
 /* 8137FE64 | 38 60 00 00 */	li r3, 0x0
@@ -903,14 +893,14 @@
 .L_8137FE6C:
 /* 8137FE6C | 3A 20 00 01 */	li r17, 0x1
 /* 8137FE70 | 38 80 00 00 */	li r4, 0x0
-/* 8137FE74 | 92 2D AA C8 */	stw r17, CurrentEntry@sda21(r0)
+/* 8137FE74 | 92 2D AA C8 */	stw r17, State@sda21(r0)
 /* 8137FE78 | 3A 15 23 20 */	addi r16, r21, 0x2320
 /* 8137FE7C | 39 F5 08 00 */	addi r15, r21, 0x800
 /* 8137FE80 | 3E 40 80 48 */	lis r18, 0x8048
-/* 8137FE84 | 90 8D AA E8 */	stw r4, VersionIOS@sda21(r0)
+/* 8137FE84 | 90 8D AA E8 */	stw r4, lbl_81698B28@sda21(r0)
 /* 8137FE88 | 39 C0 00 02 */	li r14, 0x2
 .L_8137FE8C:
-/* 8137FE8C | 80 0D AA E0 */	lwz r0, progress$@sda21(r0)
+/* 8137FE8C | 80 0D AA E0 */	lwz r0, StartUpdate@sda21(r0)
 /* 8137FE90 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137FE94 | 41 82 02 B8 */	beq .L_8138014C
 /* 8137FE98 | 80 10 00 10 */	lwz r0, 0x10(r16)
@@ -919,7 +909,7 @@
 /* 8137FEA4 | 38 76 04 66 */	addi r3, r22, 0x466
 /* 8137FEA8 | 4C C6 31 82 */	crclr cr1eq
 /* 8137FEAC | 4B FF B1 09 */	bl BS2Report
-/* 8137FEB0 | 80 6D AA E8 */	lwz r3, VersionIOS@sda21(r0)
+/* 8137FEB0 | 80 6D AA E8 */	lwz r3, lbl_81698B28@sda21(r0)
 /* 8137FEB4 | 54 60 10 3A */	slwi r0, r3, 2
 /* 8137FEB8 | 7C 0F 00 2E */	lwzx r0, r15, r0
 /* 8137FEBC | 28 00 00 01 */	cmplwi r0, 0x1
@@ -930,16 +920,16 @@
 /* 8137FED0 | 38 84 00 10 */	addi r4, r4, 0x10
 /* 8137FED4 | 4C C6 31 82 */	crclr cr1eq
 /* 8137FED8 | 4B FF B0 DD */	bl BS2Report
-/* 8137FEDC | 80 AD AA E8 */	lwz r5, VersionIOS@sda21(r0)
-/* 8137FEE0 | 91 CD AA C8 */	stw r14, CurrentEntry@sda21(r0)
+/* 8137FEDC | 80 AD AA E8 */	lwz r5, lbl_81698B28@sda21(r0)
+/* 8137FEE0 | 91 CD AA C8 */	stw r14, State@sda21(r0)
 /* 8137FEE4 | 54 A4 48 2C */	slwi r4, r5, 9
 /* 8137FEE8 | 7C 72 22 14 */	add r3, r18, r4
-/* 8137FEEC | 90 6D AA CC */	stw r3, lbl_81698B0C@sda21(r0)
+/* 8137FEEC | 90 6D AA CC */	stw r3, CurrentEntry@sda21(r0)
 /* 8137FEF0 | 7C 12 20 2E */	lwzx r0, r18, r4
 /* 8137FEF4 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137FEF8 | 40 82 00 10 */	bne .L_8137FF08
 /* 8137FEFC | 38 85 00 01 */	addi r4, r5, 0x1
-/* 8137FF00 | 90 8D AA E8 */	stw r4, VersionIOS@sda21(r0)
+/* 8137FF00 | 90 8D AA E8 */	stw r4, lbl_81698B28@sda21(r0)
 /* 8137FF04 | 4B FF FF 88 */	b .L_8137FE8C
 .L_8137FF08:
 /* 8137FF08 | 7C 12 20 2E */	lwzx r0, r18, r4
@@ -948,11 +938,11 @@
 /* 8137FF14 | 38 76 04 82 */	addi r3, r22, 0x482
 /* 8137FF18 | 4C C6 31 82 */	crclr cr1eq
 /* 8137FF1C | 4B FF B0 99 */	bl BS2Report
-/* 8137FF20 | 82 6D AA E8 */	lwz r19, VersionIOS@sda21(r0)
+/* 8137FF20 | 82 6D AA E8 */	lwz r19, lbl_81698B28@sda21(r0)
 /* 8137FF24 | 56 60 48 2C */	slwi r0, r19, 9
 /* 8137FF28 | 7C 72 02 14 */	add r3, r18, r0
 /* 8137FF2C | 38 63 00 10 */	addi r3, r3, 0x10
-/* 8137FF30 | 4B FF F2 D9 */	bl BS2Update_8137F208
+/* 8137FF30 | 4B FF F2 D9 */	bl getSuffix
 /* 8137FF34 | 38 8D 85 65 */	li r4, lbl_816965A5@sda21
 /* 8137FF38 | 48 28 25 49 */	bl strcmp
 /* 8137FF3C | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -975,7 +965,7 @@
 /* 8137FF78 | 80 0D AA EC */	lwz r0, lbl_81698B2C@sda21(r0)
 /* 8137FF7C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8137FF80 | 41 82 00 54 */	beq .L_8137FFD4
-/* 8137FF84 | 80 6D AA E8 */	lwz r3, VersionIOS@sda21(r0)
+/* 8137FF84 | 80 6D AA E8 */	lwz r3, lbl_81698B28@sda21(r0)
 /* 8137FF88 | 3C 00 80 48 */	lis r0, 0x8048
 /* 8137FF8C | 80 AD AA EC */	lwz r5, lbl_81698B2C@sda21(r0)
 /* 8137FF90 | 38 96 04 9E */	addi r4, r22, 0x49e
@@ -991,12 +981,12 @@
 /* 8137FFB8 | 38 75 23 20 */	addi r3, r21, 0x2320
 /* 8137FFBC | 38 00 00 05 */	li r0, 0x5
 /* 8137FFC0 | 80 63 00 10 */	lwz r3, 0x10(r3)
-/* 8137FFC4 | 90 0D AA C8 */	stw r0, CurrentEntry@sda21(r0)
+/* 8137FFC4 | 90 0D AA C8 */	stw r0, State@sda21(r0)
 /* 8137FFC8 | 38 83 00 01 */	addi r4, r3, 0x1
-/* 8137FFCC | 90 8D AA E8 */	stw r4, VersionIOS@sda21(r0)
+/* 8137FFCC | 90 8D AA E8 */	stw r4, lbl_81698B28@sda21(r0)
 /* 8137FFD0 | 48 00 01 90 */	b .L_81380160
 .L_8137FFD4:
-/* 8137FFD4 | 80 0D AA E8 */	lwz r0, VersionIOS@sda21(r0)
+/* 8137FFD4 | 80 0D AA E8 */	lwz r0, lbl_81698B28@sda21(r0)
 /* 8137FFD8 | 54 00 48 2C */	slwi r0, r0, 9
 /* 8137FFDC | 7C 72 02 14 */	add r3, r18, r0
 /* 8137FFE0 | 80 03 00 04 */	lwz r0, 0x4(r3)
@@ -1004,19 +994,19 @@
 /* 8137FFE8 | 41 82 00 08 */	beq .L_8137FFF0
 /* 8137FFEC | 92 2D AA D0 */	stw r17, lbl_81698B10@sda21(r0)
 .L_8137FFF0:
-/* 8137FFF0 | 80 6D AA E8 */	lwz r3, VersionIOS@sda21(r0)
+/* 8137FFF0 | 80 6D AA E8 */	lwz r3, lbl_81698B28@sda21(r0)
 /* 8137FFF4 | 38 83 00 01 */	addi r4, r3, 0x1
-/* 8137FFF8 | 90 8D AA E8 */	stw r4, VersionIOS@sda21(r0)
+/* 8137FFF8 | 90 8D AA E8 */	stw r4, lbl_81698B28@sda21(r0)
 /* 8137FFFC | 4B FF FE 90 */	b .L_8137FE8C
 .L_81380000:
 /* 81380000 | 38 76 04 D9 */	addi r3, r22, 0x4d9
 /* 81380004 | 4C C6 31 82 */	crclr cr1eq
 /* 81380008 | 4B FF AF AD */	bl BS2Report
-/* 8138000C | 82 6D AA E8 */	lwz r19, VersionIOS@sda21(r0)
+/* 8138000C | 82 6D AA E8 */	lwz r19, lbl_81698B28@sda21(r0)
 /* 81380010 | 56 60 48 2C */	slwi r0, r19, 9
 /* 81380014 | 7C 72 02 14 */	add r3, r18, r0
 /* 81380018 | 38 63 00 10 */	addi r3, r3, 0x10
-/* 8138001C | 4B FF F1 ED */	bl BS2Update_8137F208
+/* 8138001C | 4B FF F1 ED */	bl getSuffix
 /* 81380020 | 38 8D 85 65 */	li r4, lbl_816965A5@sda21
 /* 81380024 | 48 28 24 5D */	bl strcmp
 /* 81380028 | 2C 03 00 00 */	cmpwi r3, 0x0
@@ -1039,7 +1029,7 @@
 /* 81380064 | 80 0D AA EC */	lwz r0, lbl_81698B2C@sda21(r0)
 /* 81380068 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 8138006C | 41 82 00 54 */	beq .L_813800C0
-/* 81380070 | 80 6D AA E8 */	lwz r3, VersionIOS@sda21(r0)
+/* 81380070 | 80 6D AA E8 */	lwz r3, lbl_81698B28@sda21(r0)
 /* 81380074 | 3C 00 80 48 */	lis r0, 0x8048
 /* 81380078 | 80 AD AA EC */	lwz r5, lbl_81698B2C@sda21(r0)
 /* 8138007C | 38 96 04 9E */	addi r4, r22, 0x49e
@@ -1055,12 +1045,12 @@
 /* 813800A4 | 38 75 23 20 */	addi r3, r21, 0x2320
 /* 813800A8 | 38 00 00 05 */	li r0, 0x5
 /* 813800AC | 80 63 00 10 */	lwz r3, 0x10(r3)
-/* 813800B0 | 90 0D AA C8 */	stw r0, CurrentEntry@sda21(r0)
+/* 813800B0 | 90 0D AA C8 */	stw r0, State@sda21(r0)
 /* 813800B4 | 38 83 00 01 */	addi r4, r3, 0x1
-/* 813800B8 | 90 8D AA E8 */	stw r4, VersionIOS@sda21(r0)
+/* 813800B8 | 90 8D AA E8 */	stw r4, lbl_81698B28@sda21(r0)
 /* 813800BC | 48 00 00 A4 */	b .L_81380160
 .L_813800C0:
-/* 813800C0 | 80 0D AA E8 */	lwz r0, VersionIOS@sda21(r0)
+/* 813800C0 | 80 0D AA E8 */	lwz r0, lbl_81698B28@sda21(r0)
 /* 813800C4 | 54 00 48 2C */	slwi r0, r0, 9
 /* 813800C8 | 7C 72 02 14 */	add r3, r18, r0
 /* 813800CC | 80 03 00 04 */	lwz r0, 0x4(r3)
@@ -1068,9 +1058,9 @@
 /* 813800D4 | 41 82 00 08 */	beq .L_813800DC
 /* 813800D8 | 92 2D AA D0 */	stw r17, lbl_81698B10@sda21(r0)
 .L_813800DC:
-/* 813800DC | 80 6D AA E8 */	lwz r3, VersionIOS@sda21(r0)
+/* 813800DC | 80 6D AA E8 */	lwz r3, lbl_81698B28@sda21(r0)
 /* 813800E0 | 38 83 00 01 */	addi r4, r3, 0x1
-/* 813800E4 | 90 8D AA E8 */	stw r4, VersionIOS@sda21(r0)
+/* 813800E4 | 90 8D AA E8 */	stw r4, lbl_81698B28@sda21(r0)
 /* 813800E8 | 4B FF FD A4 */	b .L_8137FE8C
 .L_813800EC:
 /* 813800EC | 54 60 48 2C */	slwi r0, r3, 9
@@ -1079,9 +1069,9 @@
 /* 813800F8 | 38 84 00 10 */	addi r4, r4, 0x10
 /* 813800FC | 4C C6 31 82 */	crclr cr1eq
 /* 81380100 | 4B FF AE B5 */	bl BS2Report
-/* 81380104 | 80 6D AA E8 */	lwz r3, VersionIOS@sda21(r0)
+/* 81380104 | 80 6D AA E8 */	lwz r3, lbl_81698B28@sda21(r0)
 /* 81380108 | 38 83 00 01 */	addi r4, r3, 0x1
-/* 8138010C | 90 8D AA E8 */	stw r4, VersionIOS@sda21(r0)
+/* 8138010C | 90 8D AA E8 */	stw r4, lbl_81698B28@sda21(r0)
 /* 81380110 | 4B FF FD 7C */	b .L_8137FE8C
 .L_81380114:
 /* 81380114 | 40 82 FD 78 */	bne .L_8137FE8C
@@ -1089,30 +1079,30 @@
 /* 8138011C | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81380120 | 41 82 00 10 */	beq .L_81380130
 /* 81380124 | 38 00 00 04 */	li r0, 0x4
-/* 81380128 | 90 0D AA C8 */	stw r0, CurrentEntry@sda21(r0)
+/* 81380128 | 90 0D AA C8 */	stw r0, State@sda21(r0)
 /* 8138012C | 48 00 00 0C */	b .L_81380138
 .L_81380130:
 /* 81380130 | 38 00 00 03 */	li r0, 0x3
-/* 81380134 | 90 0D AA C8 */	stw r0, CurrentEntry@sda21(r0)
+/* 81380134 | 90 0D AA C8 */	stw r0, State@sda21(r0)
 .L_81380138:
 /* 81380138 | 38 84 00 01 */	addi r4, r4, 0x1
 /* 8138013C | 38 00 00 00 */	li r0, 0x0
-/* 81380140 | 90 0D AA CC */	stw r0, lbl_81698B0C@sda21(r0)
-/* 81380144 | 90 8D AA E8 */	stw r4, VersionIOS@sda21(r0)
+/* 81380140 | 90 0D AA CC */	stw r0, CurrentEntry@sda21(r0)
+/* 81380144 | 90 8D AA E8 */	stw r4, lbl_81698B28@sda21(r0)
 /* 81380148 | 48 00 00 18 */	b .L_81380160
 .L_8138014C:
-/* 8138014C | 80 0D AA E4 */	lwz r0, rc@sda21(r0)
+/* 8138014C | 80 0D AA E4 */	lwz r0, CancelUpdate@sda21(r0)
 /* 81380150 | 2C 00 00 00 */	cmpwi r0, 0x0
 /* 81380154 | 41 82 FD 38 */	beq .L_8137FE8C
 /* 81380158 | 38 00 00 06 */	li r0, 0x6
-/* 8138015C | 90 0D AA C8 */	stw r0, CurrentEntry@sda21(r0)
+/* 8138015C | 90 0D AA C8 */	stw r0, State@sda21(r0)
 .L_81380160:
 /* 81380160 | 38 00 00 00 */	li r0, 0x0
 /* 81380164 | 38 76 04 50 */	addi r3, r22, 0x450
-/* 81380168 | 90 0D AA E0 */	stw r0, progress$@sda21(r0)
-/* 8138016C | 90 0D AA E4 */	stw r0, rc@sda21(r0)
-/* 81380170 | 90 0D AA D8 */	stw r0, StartUpdate@sda21(r0)
-/* 81380174 | 90 0D AA DC */	stw r0, CancelUpdate@sda21(r0)
+/* 81380168 | 90 0D AA E0 */	stw r0, StartUpdate@sda21(r0)
+/* 8138016C | 90 0D AA E4 */	stw r0, CancelUpdate@sda21(r0)
+/* 81380170 | 90 0D AA D8 */	stw r0, lbl_81698B18@sda21(r0)
+/* 81380174 | 90 0D AA DC */	stw r0, lbl_81698B1C@sda21(r0)
 /* 81380178 | 4C C6 31 82 */	crclr cr1eq
 /* 8138017C | 4B FF AE 39 */	bl BS2Report
 /* 81380180 | 38 60 00 00 */	li r3, 0x0
@@ -1123,43 +1113,43 @@
 /* 81380190 | 7C 08 03 A6 */	mtlr r0
 /* 81380194 | 38 21 00 F0 */	addi r1, r1, 0xf0
 /* 81380198 | 4E 80 00 20 */	blr
-.endfn BS2Update_8137F358
+.endfn UpdateThread
 
 # .text:0xF94 | 0x8138019C | size: 0x8
 .fn BS2UpdateState, global
-/* 8138019C | 80 6D AA C8 */	lwz r3, CurrentEntry@sda21(r0)
+/* 8138019C | 80 6D AA C8 */	lwz r3, State@sda21(r0)
 /* 813801A0 | 4E 80 00 20 */	blr
 .endfn BS2UpdateState
 
 # .text:0xF9C | 0x813801A4 | size: 0xC
 .fn BS2StartUpdate, global
 /* 813801A4 | 38 00 00 01 */	li r0, 0x1
-/* 813801A8 | 90 0D AA E0 */	stw r0, progress$@sda21(r0)
+/* 813801A8 | 90 0D AA E0 */	stw r0, StartUpdate@sda21(r0)
 /* 813801AC | 4E 80 00 20 */	blr
 .endfn BS2StartUpdate
 
 # .text:0xFA8 | 0x813801B0 | size: 0xC
 .fn BS2CancelUpdate, global
 /* 813801B0 | 38 00 00 01 */	li r0, 0x1
-/* 813801B4 | 90 0D AA E4 */	stw r0, rc@sda21(r0)
+/* 813801B4 | 90 0D AA E4 */	stw r0, CancelUpdate@sda21(r0)
 /* 813801B8 | 4E 80 00 20 */	blr
 .endfn BS2CancelUpdate
 
 # .text:0xFB4 | 0x813801BC | size: 0x8
 .fn BS2GetUpdateEntry, global
-/* 813801BC | 80 6D AA B8 */	lwz r3, lbl_81698AF8@sda21(r0)
+/* 813801BC | 80 6D AA B8 */	lwz r3, PtrEntries@sda21(r0)
 /* 813801C0 | 4E 80 00 20 */	blr
 .endfn BS2GetUpdateEntry
 
 # .text:0xFBC | 0x813801C4 | size: 0x8
 .fn BS2GetUpdateEntryNum, global
-/* 813801C4 | 80 6D AA BC */	lwz r3, lbl_81698AFC@sda21(r0)
+/* 813801C4 | 80 6D AA BC */	lwz r3, NumEntries@sda21(r0)
 /* 813801C8 | 4E 80 00 20 */	blr
 .endfn BS2GetUpdateEntryNum
 
 # .text:0xFC4 | 0x813801CC | size: 0x8
 .fn BS2GetCurrentEntry, global
-/* 813801CC | 80 6D AA CC */	lwz r3, lbl_81698B0C@sda21(r0)
+/* 813801CC | 80 6D AA CC */	lwz r3, CurrentEntry@sda21(r0)
 /* 813801D0 | 4E 80 00 20 */	blr
 .endfn BS2GetCurrentEntry
 
@@ -1499,18 +1489,18 @@
 
 # .data:0x500 | 0x81646E78 | size: 0x30
 .obj jumptable_81646E78, local
-	.rel BS2Update_8137F358, .L_8137F40C
-	.rel BS2Update_8137F358, .L_8137F424
-	.rel BS2Update_8137F358, .L_8137F43C
-	.rel BS2Update_8137F358, .L_8137F474
-	.rel BS2Update_8137F358, .L_8137F474
-	.rel BS2Update_8137F358, .L_8137F40C
-	.rel BS2Update_8137F358, .L_8137F454
-	.rel BS2Update_8137F358, .L_8137F474
-	.rel BS2Update_8137F358, .L_8137F474
-	.rel BS2Update_8137F358, .L_8137F474
-	.rel BS2Update_8137F358, .L_8137F474
-	.rel BS2Update_8137F358, .L_8137F464
+	.rel UpdateThread, .L_8137F40C
+	.rel UpdateThread, .L_8137F424
+	.rel UpdateThread, .L_8137F43C
+	.rel UpdateThread, .L_8137F474
+	.rel UpdateThread, .L_8137F474
+	.rel UpdateThread, .L_8137F40C
+	.rel UpdateThread, .L_8137F454
+	.rel UpdateThread, .L_8137F474
+	.rel UpdateThread, .L_8137F474
+	.rel UpdateThread, .L_8137F474
+	.rel UpdateThread, .L_8137F474
+	.rel UpdateThread, .L_8137F464
 .endobj jumptable_81646E78
 
 # 0x81696598..0x816965B0 | size: 0x18
@@ -1532,103 +1522,114 @@
 	.string "Reboot"
 .endobj lbl_8169659E
 
-# .sdata:0xD | 0x816965A5 | size: 0xB
+# .sdata:0xD | 0x816965A5 | size: 0x4
 .obj lbl_816965A5, global
-	.4byte 0x77616400
+	.string "wad"
+.endobj lbl_816965A5
+
+# .sdata:0x11 | 0x816965A9 | size: 0x7
+.obj gap_11_816965A9_sdata, global
+.hidden gap_11_816965A9_sdata
 	.4byte 0x00000000
 	.byte 0x00, 0x00, 0x00
-.endobj lbl_816965A5
+.endobj gap_11_816965A9_sdata
 
 # 0x81698AF8..0x81698B48 | size: 0x50
 .section .sbss, "wa", @nobits
 .balign 8
 
 # .sbss:0x0 | 0x81698AF8 | size: 0x4
-.obj lbl_81698AF8, global
+.obj PtrEntries, local
 	.skip 0x4
-.endobj lbl_81698AF8
+.endobj PtrEntries
 
 # .sbss:0x4 | 0x81698AFC | size: 0x4
-.obj lbl_81698AFC, global
+.obj NumEntries, local
 	.skip 0x4
-.endobj lbl_81698AFC
+.endobj NumEntries
 
 # .sbss:0x8 | 0x81698B00 | size: 0x4
-.obj lbl_81698B00, global
+.obj Entries, local
 	.skip 0x4
-.endobj lbl_81698B00
+.endobj Entries
 
 # .sbss:0xC | 0x81698B04 | size: 0x4
-.obj State, global
+.obj Allocator, local
+	.skip 0x4
+.endobj Allocator
+
+# .sbss:0x10 | 0x81698B08 | size: 0x4
+.obj State, local
 	.skip 0x4
 .endobj State
 
-# .sbss:0x10 | 0x81698B08 | size: 0x4
-.obj CurrentEntry, global
+# .sbss:0x14 | 0x81698B0C | size: 0x4
+.obj CurrentEntry, local
 	.skip 0x4
 .endobj CurrentEntry
 
-# .sbss:0x14 | 0x81698B0C | size: 0x4
-.obj lbl_81698B0C, global
-	.skip 0x4
-.endobj lbl_81698B0C
-
 # .sbss:0x18 | 0x81698B10 | size: 0x4
-.obj lbl_81698B10, global
+.obj lbl_81698B10, local
 	.skip 0x4
 .endobj lbl_81698B10
 
 # .sbss:0x1C | 0x81698B14 | size: 0x4
-.obj lbl_81698B14, global
+.obj lbl_81698B14, local
 	.skip 0x4
 .endobj lbl_81698B14
 
 # .sbss:0x20 | 0x81698B18 | size: 0x4
-.obj StartUpdate, global
+.obj lbl_81698B18, local
+	.skip 0x4
+.endobj lbl_81698B18
+
+# .sbss:0x24 | 0x81698B1C | size: 0x4
+.obj lbl_81698B1C, local
+	.skip 0x4
+.endobj lbl_81698B1C
+
+# .sbss:0x28 | 0x81698B20 | size: 0x4
+.obj StartUpdate, local
 	.skip 0x4
 .endobj StartUpdate
 
-# .sbss:0x24 | 0x81698B1C | size: 0x4
-.obj CancelUpdate, global
+# .sbss:0x2C | 0x81698B24 | size: 0x4
+.obj CancelUpdate, local
 	.skip 0x4
 .endobj CancelUpdate
 
-# .sbss:0x28 | 0x81698B20 | size: 0x4
-.obj progress$, local
-	.skip 0x4
-.endobj progress$
-
-# .sbss:0x2C | 0x81698B24 | size: 0x4
-.obj rc, global
-	.skip 0x4
-.endobj rc
-
 # .sbss:0x30 | 0x81698B28 | size: 0x4
-.obj VersionIOS, global
+.obj lbl_81698B28, local
 	.skip 0x4
-.endobj VersionIOS
+.endobj lbl_81698B28
 
 # .sbss:0x34 | 0x81698B2C | size: 0x4
-.obj lbl_81698B2C, global
+.obj lbl_81698B2C, local
 	.skip 0x4
 .endobj lbl_81698B2C
 
 # .sbss:0x38 | 0x81698B30 | size: 0x8
-.obj VersionMEM2, global
+.obj VersionIOS, global
 	.skip 0x8
-.endobj VersionMEM2
+.endobj VersionIOS
 
 # .sbss:0x40 | 0x81698B38 | size: 0x4
+.obj VersionMEM2, global
+	.skip 0x4
+.endobj VersionMEM2
+
+# .sbss:0x44 | 0x81698B3C | size: 0x4
 .obj VersionES, global
 	.skip 0x4
 .endobj VersionES
 
-# .sbss:0x44 | 0x81698B3C | size: 0x4
+# .sbss:0x48 | 0x81698B40 | size: 0x4
 .obj ConsoleType, global
 	.skip 0x4
 .endobj ConsoleType
 
-# .sbss:0x48 | 0x81698B40 | size: 0x8
-.obj lbl_81698B40, global
-	.skip 0x8
-.endobj lbl_81698B40
+# .sbss:0x4C | 0x81698B44 | size: 0x4
+.obj gap_12_81698B44_sbss, global
+.hidden gap_12_81698B44_sbss
+	.skip 0x4
+.endobj gap_12_81698B44_sbss

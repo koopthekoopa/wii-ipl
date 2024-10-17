@@ -335,7 +335,13 @@
 	.skip 0x4
 .endobj shuttingdown1125
 
-# .sbss:0x8 | 0x81698E48 | size: 0x8
+# .sbss:0x8 | 0x81698E48 | size: 0x4
 .obj result$1126, global
-	.skip 0x8
+	.skip 0x4
 .endobj result$1126
+
+# .sbss:0xC | 0x81698E4C | size: 0x4
+.obj gap_12_81698E4C_sbss, global
+.hidden gap_12_81698E4C_sbss
+	.skip 0x4
+.endobj gap_12_81698E4C_sbss

@@ -1619,7 +1619,7 @@
 	.4byte callback___Q33ipl4nand4FileFv
 .endobj __vt__Q33ipl4nand4File
 
-# .data:0xDC | 0x81634D6C | size: 0x24
+# .data:0xDC | 0x81634D6C | size: 0x20
 # ipl::nand::Base::__vtable
 .obj __vt__Q33ipl4nand4Base, global
 	.4byte 0x00000000
@@ -1630,8 +1630,13 @@
 	.4byte isFinished__Q33ipl4nand4BaseFv
 	.4byte checkData__Q33ipl4nand4BaseFv
 	.4byte isFatalError__Q33ipl4nand4BaseFv
-	.4byte 0x00000000
 .endobj __vt__Q33ipl4nand4Base
+
+# .data:0xFC | 0x81634D8C | size: 0x4
+.obj gap_08_81634D8C_data, global
+.hidden gap_08_81634D8C_data
+	.4byte 0x00000000
+.endobj gap_08_81634D8C_data
 
 # 0x81696098..0x816960A8 | size: 0x10
 .section .sdata, "wa"
@@ -1652,8 +1657,13 @@
 	.string "/"
 .endobj lbl_816960A0
 
-# .sdata:0xA | 0x816960A2 | size: 0x6
+# .sdata:0xA | 0x816960A2 | size: 0x5
 .obj lbl_816960A2, global
-	.4byte 0x4E414E44
-	.2byte 0x0000
+	.string "NAND"
 .endobj lbl_816960A2
+
+# .sdata:0xF | 0x816960A7 | size: 0x1
+.obj gap_11_816960A7_sdata, global
+.hidden gap_11_816960A7_sdata
+	.byte 0x00
+.endobj gap_11_816960A7_sdata

@@ -159,7 +159,7 @@
 /* 813B422C | 80 9F 00 24 */	lwz r4, 0x24(r31)
 /* 813B4230 | 38 63 80 00 */	addi r3, r3, -0x8000
 /* 813B4234 | 38 A0 00 06 */	li r5, 0x6
-/* 813B4238 | 48 24 34 3D */	bl fn_815F7674
+/* 813B4238 | 48 24 34 3D */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 813B423C | 90 7F 00 5C */	stw r3, 0x5c(r31)
 /* 813B4240 | 39 61 00 30 */	addi r11, r1, 0x30
 /* 813B4244 | 7F E3 FB 78 */	mr r3, r31
@@ -874,12 +874,12 @@
 /* 813B4CBC | 3B 7B 90 08 */	addi r27, r27, smArg__Q23ipl6System@l
 /* 813B4CC0 | 38 A0 00 06 */	li r5, 0x6
 /* 813B4CC4 | 80 9B 00 28 */	lwz r4, 0x28(r27)
-/* 813B4CC8 | 48 24 29 AD */	bl fn_815F7674
+/* 813B4CC8 | 48 24 29 AD */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 813B4CCC | 90 7E 03 98 */	stw r3, 0x398(r30)
 /* 813B4CD0 | 3C 60 00 08 */	lis r3, 0x8
 /* 813B4CD4 | 38 A0 00 06 */	li r5, 0x6
 /* 813B4CD8 | 80 9B 00 28 */	lwz r4, 0x28(r27)
-/* 813B4CDC | 48 24 29 99 */	bl fn_815F7674
+/* 813B4CDC | 48 24 29 99 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 813B4CE0 | 90 7E 03 9C */	stw r3, 0x39c(r30)
 /* 813B4CE4 | 38 80 00 05 */	li r4, 0x5
 /* 813B4CE8 | 80 7B 00 64 */	lwz r3, 0x64(r27)
@@ -4608,7 +4608,7 @@
 /* 813B7F08 | 80 9D 03 A8 */	lwz r4, 0x3a8(r29)
 /* 813B7F0C | 38 60 FF FF */	li r3, -0x1
 /* 813B7F10 | 38 A0 00 00 */	li r5, 0x0
-/* 813B7F14 | 48 23 F7 61 */	bl fn_815F7674
+/* 813B7F14 | 48 23 F7 61 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 813B7F18 | 90 7D 04 04 */	stw r3, 0x404(r29)
 .L_813B7F1C:
 /* 813B7F1C | 3C 60 81 09 */	lis r3, smArg__Q23ipl6System@ha
@@ -9159,9 +9159,14 @@
 	.string "BS2"
 .endobj lbl_81696AF3
 
-# .sdata:0xE7 | 0x81696AF7 | size: 0x9
+# .sdata:0xE7 | 0x81696AF7 | size: 0x3
 .obj lbl_81696AF7, global
-	.4byte 0x45530000
-	.4byte 0x00000000
-	.byte 0x00
+	.string "ES"
 .endobj lbl_81696AF7
+
+# .sdata:0xEA | 0x81696AFA | size: 0x6
+.obj gap_11_81696AFA_sdata, global
+.hidden gap_11_81696AFA_sdata
+	.4byte 0x00000000
+	.2byte 0x0000
+.endobj gap_11_81696AFA_sdata

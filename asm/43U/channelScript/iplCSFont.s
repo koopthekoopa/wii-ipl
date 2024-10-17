@@ -69,8 +69,13 @@
 .section .sdata, "wa"
 .balign 8
 
-# .sdata:0x0 | 0x81697938 | size: 0x8
+# .sdata:0x0 | 0x81697938 | size: 0x5
 .obj lbl_81697938, global
-	.4byte 0x466F6E74
-	.4byte 0x00000000
+	.string "Font"
 .endobj lbl_81697938
+
+# .sdata:0x5 | 0x8169793D | size: 0x3
+.obj gap_11_8169793D_sdata, global
+.hidden gap_11_8169793D_sdata
+	.byte 0x00, 0x00, 0x00
+.endobj gap_11_8169793D_sdata

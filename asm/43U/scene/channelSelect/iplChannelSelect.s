@@ -147,7 +147,7 @@
 /* 813AA6CC | 7F E4 FB 78 */	mr r4, r31
 /* 813AA6D0 | 38 60 3D 28 */	li r3, 0x3d28
 /* 813AA6D4 | 38 A0 00 06 */	li r5, 0x6
-/* 813AA6D8 | 48 24 CF 9D */	bl fn_815F7674
+/* 813AA6D8 | 48 24 CF 9D */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 813AA6DC | 90 7E 01 7C */	stw r3, 0x17c(r30)
 /* 813AA6E0 | 3F E0 00 02 */	lis r31, 0x2
 /* 813AA6E4 | 38 7F 12 B8 */	addi r3, r31, 0x12b8
@@ -304,18 +304,18 @@
 /* 813AA8D8 | 7C 7C 1B 78 */	mr r28, r3
 /* 813AA8DC | 38 A0 00 06 */	li r5, 0x6
 /* 813AA8E0 | 38 7F 91 00 */	subi r3, r31, 0x6f00
-/* 813AA8E4 | 48 24 CD 91 */	bl fn_815F7674
+/* 813AA8E4 | 48 24 CD 91 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 813AA8E8 | 90 7C 01 70 */	stw r3, 0x170(r28)
 /* 813AA8EC | 38 7F 59 00 */	addi r3, r31, 0x5900
 /* 813AA8F0 | 80 9C 00 24 */	lwz r4, 0x24(r28)
 /* 813AA8F4 | 38 A0 00 06 */	li r5, 0x6
-/* 813AA8F8 | 48 24 CD 7D */	bl fn_815F7674
+/* 813AA8F8 | 48 24 CD 7D */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 813AA8FC | 90 7C 01 74 */	stw r3, 0x174(r28)
 /* 813AA900 | 3C 60 00 03 */	lis r3, 0x3
 /* 813AA904 | 80 9C 00 24 */	lwz r4, 0x24(r28)
 /* 813AA908 | 38 63 21 00 */	addi r3, r3, 0x2100
 /* 813AA90C | 38 A0 00 06 */	li r5, 0x6
-/* 813AA910 | 48 24 CD 65 */	bl fn_815F7674
+/* 813AA910 | 48 24 CD 65 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 813AA914 | 90 7C 01 78 */	stw r3, 0x178(r28)
 /* 813AA918 | 7F 83 E3 78 */	mr r3, r28
 /* 813AA91C | 48 00 0D 21 */	bl createChannelModulesHeap__Q33ipl5scene13ChannelSelectFv
@@ -432,7 +432,7 @@
 /* 813AAAAC | 40 82 00 10 */	bne .L_813AAABC
 /* 813AAAB0 | 80 9E 00 BC */	lwz r4, 0xbc(r30)
 /* 813AAAB4 | 38 7C 00 70 */	addi r3, r28, 0x70
-/* 813AAAB8 | 48 04 05 75 */	bl iplUnk1_813EB02C
+/* 813AAAB8 | 48 04 05 75 */	bl iplSDMenuButton_813EB02C
 .L_813AAABC:
 /* 813AAABC | 80 7E 00 C4 */	lwz r3, 0xc4(r30)
 /* 813AAAC0 | 38 00 00 03 */	li r0, 0x3
@@ -517,12 +517,12 @@
 /* 813AABE0 | 40 82 00 14 */	bne .L_813AABF4
 /* 813AABE4 | 38 7C 00 70 */	addi r3, r28, 0x70
 /* 813AABE8 | 38 80 00 01 */	li r4, 0x1
-/* 813AABEC | 48 04 07 45 */	bl iplUnk1_813EB330
+/* 813AABEC | 48 04 07 45 */	bl iplSDMenuButton_813EB330
 /* 813AABF0 | 48 00 00 10 */	b .L_813AAC00
 .L_813AABF4:
 /* 813AABF4 | 38 7C 00 70 */	addi r3, r28, 0x70
 /* 813AABF8 | 38 80 00 00 */	li r4, 0x0
-/* 813AABFC | 48 04 07 35 */	bl iplUnk1_813EB330
+/* 813AABFC | 48 04 07 35 */	bl iplSDMenuButton_813EB330
 .L_813AAC00:
 /* 813AAC00 | 7F 83 E3 78 */	mr r3, r28
 /* 813AAC04 | 38 80 00 28 */	li r4, 0x28
@@ -592,7 +592,7 @@
 /* 813AACF8 | 48 06 04 41 */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813AACFC | 38 80 00 01 */	li r4, 0x1
 /* 813AAD00 | 38 63 00 70 */	addi r3, r3, 0x70
-/* 813AAD04 | 48 04 06 2D */	bl iplUnk1_813EB330
+/* 813AAD04 | 48 04 06 2D */	bl iplSDMenuButton_813EB330
 /* 813AAD08 | 48 00 00 1C */	b .L_813AAD24
 .L_813AAD0C:
 /* 813AAD0C | 80 7D 00 64 */	lwz r3, 0x64(r29)
@@ -600,7 +600,7 @@
 /* 813AAD14 | 48 06 04 25 */	bl getScene__Q33ipl5scene7ManagerFi
 /* 813AAD18 | 38 80 00 00 */	li r4, 0x0
 /* 813AAD1C | 38 63 00 70 */	addi r3, r3, 0x70
-/* 813AAD20 | 48 04 06 11 */	bl iplUnk1_813EB330
+/* 813AAD20 | 48 04 06 11 */	bl iplSDMenuButton_813EB330
 .L_813AAD24:
 /* 813AAD24 | 80 1E 00 C0 */	lwz r0, 0xc0(r30)
 /* 813AAD28 | 2C 00 00 04 */	cmpwi r0, 0x4
@@ -1343,7 +1343,7 @@
 /* 813AB67C | 80 9D 00 28 */	lwz r4, 0x28(r29)
 /* 813AB680 | 3C 60 00 01 */	lis r3, 0x1
 /* 813AB684 | 38 A0 00 06 */	li r5, 0x6
-/* 813AB688 | 48 24 BF ED */	bl fn_815F7674
+/* 813AB688 | 48 24 BF ED */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 813AB68C | 7C BB FA 14 */	add r5, r27, r31
 /* 813AB690 | 7C 9B E2 14 */	add r4, r27, r28
 /* 813AB694 | 90 65 01 98 */	stw r3, 0x198(r5)
@@ -2658,7 +2658,7 @@
 /* 813AC8B8 | 40 82 00 10 */	bne .L_813AC8C8
 /* 813AC8BC | 80 9E 00 BC */	lwz r4, 0xbc(r30)
 /* 813AC8C0 | 38 7F 00 70 */	addi r3, r31, 0x70
-/* 813AC8C4 | 48 03 E7 69 */	bl iplUnk1_813EB02C
+/* 813AC8C4 | 48 03 E7 69 */	bl iplSDMenuButton_813EB02C
 .L_813AC8C8:
 /* 813AC8C8 | 7F C3 F3 78 */	mr r3, r30
 /* 813AC8CC | 48 00 22 2D */	bl restartChannelModules__Q33ipl5scene13ChannelSelectFv
@@ -3992,7 +3992,7 @@
 /* 813ADA28 | 4B FE EF 15 */	bl setEventHandler__Q33ipl5scene6ButtonFPQ23gui12EventHandlerPQ23gui12EventHandler
 /* 813ADA2C | 38 7F 00 70 */	addi r3, r31, 0x70
 /* 813ADA30 | 38 80 00 00 */	li r4, 0x0
-/* 813ADA34 | 48 03 D5 F9 */	bl iplUnk1_813EB02C
+/* 813ADA34 | 48 03 D5 F9 */	bl iplSDMenuButton_813EB02C
 /* 813ADA38 | 80 7E 00 68 */	lwz r3, 0x68(r30)
 /* 813ADA3C | 38 80 FF FF */	li r4, -0x1
 /* 813ADA40 | C0 22 85 74 */	lfs f1, lbl_81694974@sda21(r0)
@@ -4070,7 +4070,7 @@
 /* 813ADB40 | 4B FE ED FD */	bl setEventHandler__Q33ipl5scene6ButtonFPQ23gui12EventHandlerPQ23gui12EventHandler
 /* 813ADB44 | 38 7F 00 70 */	addi r3, r31, 0x70
 /* 813ADB48 | 38 80 00 00 */	li r4, 0x0
-/* 813ADB4C | 48 03 D4 E1 */	bl iplUnk1_813EB02C
+/* 813ADB4C | 48 03 D4 E1 */	bl iplSDMenuButton_813EB02C
 /* 813ADB50 | 7F A3 EB 78 */	mr r3, r29
 /* 813ADB54 | 7F C4 F3 78 */	mr r4, r30
 /* 813ADB58 | 48 00 00 51 */	bl setCurrentChannel__Q33ipl7channel7ManagerFii
@@ -7125,7 +7125,7 @@
 /* 813B060C | 4B FE C3 31 */	bl setEventHandler__Q33ipl5scene6ButtonFPQ23gui12EventHandlerPQ23gui12EventHandler
 /* 813B0610 | 38 7B 00 70 */	addi r3, r27, 0x70
 /* 813B0614 | 38 80 00 00 */	li r4, 0x0
-/* 813B0618 | 48 03 AA 15 */	bl iplUnk1_813EB02C
+/* 813B0618 | 48 03 AA 15 */	bl iplSDMenuButton_813EB02C
 /* 813B061C | 80 7F 00 0C */	lwz r3, 0xc(r31)
 /* 813B0620 | 38 80 00 15 */	li r4, 0x15
 /* 813B0624 | 38 A0 00 00 */	li r5, 0x0
@@ -7266,7 +7266,7 @@
 /* 813B0820 | 4B FE C1 1D */	bl setEventHandler__Q33ipl5scene6ButtonFPQ23gui12EventHandlerPQ23gui12EventHandler
 /* 813B0824 | 38 7D 00 70 */	addi r3, r29, 0x70
 /* 813B0828 | 38 80 00 00 */	li r4, 0x0
-/* 813B082C | 48 03 A8 01 */	bl iplUnk1_813EB02C
+/* 813B082C | 48 03 A8 01 */	bl iplSDMenuButton_813EB02C
 /* 813B0830 | 80 7C 00 0C */	lwz r3, 0xc(r28)
 /* 813B0834 | 38 80 00 24 */	li r4, 0x24
 /* 813B0838 | 38 A0 00 00 */	li r5, 0x0
@@ -8034,7 +8034,7 @@
 .obj lbl_8164E068, global
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte iplUnk1_813EB51C
+	.4byte iplSDMenuButton_813EB51C
 	.4byte setManager__Q23gui12EventHandlerFPQ23gui7Manager
 	.4byte setLatestEventCtrlNo__Q23gui12EventHandlerFi
 	.4byte getLatestEventCtrlNo__Q23gui12EventHandlerFv
@@ -8336,12 +8336,17 @@
 	.byte 0x00
 .endobj lbl_816968F4
 
-# .sdata:0x45 | 0x816968F5 | size: 0xB
+# .sdata:0x45 | 0x816968F5 | size: 0x4
 .obj lbl_816968F5, global
-	.4byte 0x34783300
+	.string "4x3"
+.endobj lbl_816968F5
+
+# .sdata:0x49 | 0x816968F9 | size: 0x7
+.obj gap_11_816968F9_sdata, global
+.hidden gap_11_816968F9_sdata
 	.4byte 0x00000000
 	.byte 0x00, 0x00, 0x00
-.endobj lbl_816968F5
+.endobj gap_11_816968F9_sdata
 
 # 0x81698B58..0x81698B60 | size: 0x8
 .section .sbss, "wa", @nobits

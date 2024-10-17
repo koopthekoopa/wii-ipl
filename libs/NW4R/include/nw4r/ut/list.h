@@ -26,6 +26,18 @@ namespace nw4r {
         void* List_GetNext(const List* list, const void* object);
         void* List_GetPrev(const List* list, const void* object);
         void* List_GetNth(const List* list, u16 index);
+
+        static void* List_GetFirst(const List* list) {
+            return List_GetNext(list, NULL);
+        }
+
+        static void* List_GetLast(const List* list) {
+            return List_GetPrev(list, NULL);
+        }
+        
+        static u16 List_GetSize(const List* list) {
+            return list->numObjects;
+        }
     }
 }
 

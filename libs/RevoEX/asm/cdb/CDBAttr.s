@@ -556,31 +556,32 @@
 .data
 .balign 8
 
-# .data:0x0 | 0x8166CAE8 | size: 0x30
+# .data:0x0 | 0x8166CAE8 | size: 0x29
 .obj lbl_8166CAE8, global
-	.4byte 0x43444241
-	.4byte 0x74747253
-	.4byte 0x65744B65
-	.4byte 0x79537472
-	.4byte 0x203A2069
-	.4byte 0x6E76616C
-	.4byte 0x69642043
-	.4byte 0x44425265
-	.4byte 0x636F7264
-	.4byte 0x4B65790A
-	.4byte 0x00000000
-	.4byte 0x00000000
+	.string "CDBAttrSetKeyStr : invalid CDBRecordKey\n"
 .endobj lbl_8166CAE8
+
+# .data:0x29 | 0x8166CB11 | size: 0x7
+.obj gap_08_8166CB11_data, global
+.hidden gap_08_8166CB11_data
+	.4byte 0x00000000
+	.byte 0x00, 0x00, 0x00
+.endobj gap_08_8166CB11_data
 
 # 0x81695030..0x81695038 | size: 0x8
 .section .sdata2, "a"
 .balign 8
 
-# .sdata2:0x0 | 0x81695030 | size: 0x8
+# .sdata2:0x0 | 0x81695030 | size: 0x4
 .obj CDB_ATTR_VERSION, local
 	.4byte 0x02000000
-	.4byte 0x00000000
 .endobj CDB_ATTR_VERSION
+
+# .sdata2:0x4 | 0x81695034 | size: 0x4
+.obj gap_09_81695034_sdata2, global
+.hidden gap_09_81695034_sdata2
+	.4byte 0x00000000
+.endobj gap_09_81695034_sdata2
 
 # 0x81697A60..0x81697A68 | size: 0x8
 .section .sdata, "wa"
@@ -595,7 +596,13 @@
 .section .sbss, "wa", @nobits
 .balign 8
 
-# .sbss:0x0 | 0x81698D98 | size: 0x8
+# .sbss:0x0 | 0x81698D98 | size: 0x4
 .obj lbl_81698D98, global
-	.skip 0x8
+	.skip 0x4
 .endobj lbl_81698D98
+
+# .sbss:0x4 | 0x81698D9C | size: 0x4
+.obj gap_12_81698D9C_sbss, global
+.hidden gap_12_81698D9C_sbss
+	.skip 0x4
+.endobj gap_12_81698D9C_sbss

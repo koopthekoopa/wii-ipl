@@ -408,26 +408,28 @@
 .data
 .balign 8
 
-# .data:0x0 | 0x8164D950 | size: 0x28
+# .data:0x0 | 0x8164D950 | size: 0x27
 .obj lbl_8164D950, global
-	.4byte 0x69636F6E
-	.4byte 0x2E62726C
-	.4byte 0x79740069
-	.4byte 0x636F6E2E
-	.4byte 0x62726C61
-	.4byte 0x6E006963
-	.4byte 0x6F6E5F57
-	.4byte 0x686F6C65
-	.4byte 0x2E62726C
-	.4byte 0x616E0000
+	.string "icon.brlyt\000icon.brlan\000icon_Whole.brlan"
 .endobj lbl_8164D950
+
+# .data:0x27 | 0x8164D977 | size: 0x1
+.obj gap_08_8164D977_data, global
+.hidden gap_08_8164D977_data
+	.byte 0x00
+.endobj gap_08_8164D977_data
 
 # 0x816968A8..0x816968B0 | size: 0x8
 .section .sdata, "wa"
 .balign 8
 
-# .sdata:0x0 | 0x816968A8 | size: 0x8
+# .sdata:0x0 | 0x816968A8 | size: 0x4
 .obj lbl_816968A8, global
-	.4byte 0x61726300
-	.4byte 0x00000000
+	.string "arc"
 .endobj lbl_816968A8
+
+# .sdata:0x4 | 0x816968AC | size: 0x4
+.obj gap_11_816968AC_sdata, global
+.hidden gap_11_816968AC_sdata
+	.4byte 0x00000000
+.endobj gap_11_816968AC_sdata

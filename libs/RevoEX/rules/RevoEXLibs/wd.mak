@@ -3,7 +3,7 @@ WD_OBJECTS =	$(REVOEX_OBJASM_PATH)/wd/wd_misc.o \
 				$(REVOEX_OBJASM_PATH)/wd/wd_init.o \
 				$(REVOEX_OBJASM_PATH)/wd/WDScan.o
 
-DEPENDENCIES += $(WD_OBJECTS:.o=.d)
+ALL_OBJECTS += $(WD_OBJECTS)
 
 $(REVOEX_OBJ_PATH)/wd/%.o: $(REVOEX_SRC_PATH)/wd/%.c
 	$(call BuildCSources,$(REVOEX_CCPATH),$(REVOEX_CFLAGS),$(REVOEX_INC_PATHS),$(INCLUDE_ROOT))

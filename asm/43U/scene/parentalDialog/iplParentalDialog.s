@@ -1578,8 +1578,13 @@
 	.4byte 0x6E420000
 .endobj lbl_81696D70
 
-# .sdata:0x30 | 0x81696D78 | size: 0x8
+# .sdata:0x30 | 0x81696D78 | size: 0x4
 .obj lbl_81696D78, global
 	.4byte 0x00000000
-	.4byte 0x00000000
 .endobj lbl_81696D78
+
+# .sdata:0x34 | 0x81696D7C | size: 0x4
+.obj gap_11_81696D7C_sdata, global
+.hidden gap_11_81696D7C_sdata
+	.4byte 0x00000000
+.endobj gap_11_81696D7C_sdata

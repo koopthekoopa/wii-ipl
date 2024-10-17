@@ -747,14 +747,16 @@
 	.string "%010u_%s_%s_%03d.%s"
 .endobj lbl_8166C5A0
 
-# .data:0x14 | 0x8166C5B4 | size: 0x14
+# .data:0x14 | 0x8166C5B4 | size: 0x11
 .obj lbl_8166C5B4, global
-	.4byte 0x25303130
-	.4byte 0x755F2573
-	.4byte 0x5F253033
-	.4byte 0x642E2573
-	.4byte 0x00000000
+	.string "%010u_%s_%03d.%s"
 .endobj lbl_8166C5B4
+
+# .data:0x25 | 0x8166C5C5 | size: 0x3
+.obj gap_08_8166C5C5_data, global
+.hidden gap_08_8166C5C5_data
+	.byte 0x00, 0x00, 0x00
+.endobj gap_08_8166C5C5_data
 
 # 0x81697A30..0x81697A48 | size: 0x18
 .section .sdata, "wa"
@@ -777,7 +779,13 @@
 	.4byte 0x25580000
 .endobj lbl_81697A40
 
-# .sdata:0x14 | 0x81697A44 | size: 0x4
+# .sdata:0x14 | 0x81697A44 | size: 0x3
 .obj lbl_81697A44, global
-	.4byte 0x25640000
+	.string "%d"
 .endobj lbl_81697A44
+
+# .sdata:0x17 | 0x81697A47 | size: 0x1
+.obj gap_11_81697A47_sdata, global
+.hidden gap_11_81697A47_sdata
+	.byte 0x00
+.endobj gap_11_81697A47_sdata

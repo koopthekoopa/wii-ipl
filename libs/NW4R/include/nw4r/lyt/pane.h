@@ -8,7 +8,7 @@
 #include <nw4r/lyt/types.h>
 #include <nw4r/lyt/material.h>
 
-#include <nw4r/ut/LinkList.h>
+#include <nw4r/ut.h>
 
 #include <stddef.h>
 
@@ -20,18 +20,18 @@ namespace nw4r {
             class PaneBase {
                 public:
                     inline PaneBase() : mNode() {}
-                    virtual ~PaneBase();                                                    // 0x04
+                    virtual ~PaneBase();
 
                     ut::LinkListNode    mNode;  // 0x00
             };
         }
 
         class Pane : detail::PaneBase {
+            NW4R_UT_RUNTIME_TYPEINFO;
+
             public:
                 Pane();
                 virtual ~Pane();                                                                                        // 0x08
-
-                virtual undefined4* GetRuntimeTypeInfo() const;                                                         // 0x0C
 
                 virtual void        CalculateMtx(const undefined4& drawInfo);                                           // 0x10
 
@@ -52,21 +52,19 @@ namespace nw4r {
                 virtual Pane*       FindPaneByName(const char* findName, bool bRecursive = true);                       // 0x3C
                 virtual Pane*       FindMatertialByName(const char* findName, bool bRecursive = true);                  // 0x40
 
-                virtual Pane*       BindAnimation(undefined4* animTrans, bool unk0, bool unk1);                         // 0x44
+                virtual Pane*       BindAnimation(undefined4* pAnimTrans, bool bRecursive = true);                      // 0x44
                 
-                virtual void        UnbindAnimation(undefined4* animTrans, bool bRecursive = true);                     // 0x48
+                virtual void        UnbindAnimation(undefined4* pAnimTrans, bool bRecursive = true);                    // 0x48
                 virtual void        UnbindAllAnimation(bool bRecursive = true);                                         // 0x4C
-                virtual void        UnbindAnimationSelf(undefined4* animTrans);                                         // 0x50
+                virtual void        UnbindAnimationSelf(undefined4* pAnimTrans);                                        // 0x50
                 
-                virtual void        FindAnimationLink(undefined4* animTrans);                                           // 0x54
+                virtual void        FindAnimationLink(undefined4* pAnimTrans);                                          // 0x54
 
-                virtual void        SetAnimationEnable(undefined4* animTrans, bool unk, bool bRecursive = true);        // 0x58
+                virtual void        SetAnimationEnable(undefined4* pAnimTrans, bool bEnable, bool bRecursive = true);   // 0x58
 
                 virtual Material*   GetMaterial() const;                                                                // 0x5C
 
-                virtual void*       LoadMtx(undefined4* drawInfo);                                                      // 0x60
-
-                
+                virtual void*       LoadMtx(const undefined4& drawInfo);                                                // 0x60
 
                 const math::VEC3&   GetTranslate()                              { return mTranslate; }
                 void                SetTranslate(const math::VEC3& translate)   { mTranslate = translate; }

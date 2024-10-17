@@ -8,6 +8,14 @@
 # extab:0x0 | 0x813307D8 | size: 0x8
 .obj "@etb_813307D8", local
 .hidden "@etb_813307D8"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ * Saved GPR range: r27-r31
+ */
 	.4byte 0x28080000
 	.4byte 0x00000000
 .endobj "@etb_813307D8"

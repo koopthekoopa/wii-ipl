@@ -1661,10 +1661,10 @@
 /* 81459BF0 | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81459BF4 | 7C 64 1B 78 */	mr r4, r3
 /* 81459BF8 | 41 82 00 20 */	beq .L_81459C18
-/* 81459BFC | 3C A0 81 61 */	lis r5, lbl_816173F0@ha
+/* 81459BFC | 3C A0 81 61 */	lis r5, scMethodList__Q33ipl2cs4pane@ha
 /* 81459C00 | 7F C3 F3 78 */	mr r3, r30
 /* 81459C04 | 38 C0 00 1E */	li r6, 0x1e
-/* 81459C08 | 38 A5 73 F0 */	addi r5, r5, lbl_816173F0@l
+/* 81459C08 | 38 A5 73 F0 */	addi r5, r5, scMethodList__Q33ipl2cs4pane@l
 /* 81459C0C | 4B FF 2E 65 */	bl CHANSVmAddNativeMethodList
 /* 81459C10 | 7C 60 00 34 */	cntlzw r0, r3
 /* 81459C14 | 54 1F D9 7E */	srwi r31, r0, 5
@@ -1683,7 +1683,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x816173F0 | size: 0xF0
-.obj lbl_816173F0, global
+# ipl::cs::pane::scMethodList
+.obj scMethodList__Q33ipl2cs4pane, local
 	.4byte lbl_8169781A
 	.4byte show__Q33ipl2cs4paneFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
 	.4byte lbl_8169781F
@@ -1744,7 +1745,7 @@
 	.4byte get_font__Q33ipl2cs4paneFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
 	.4byte lbl_8169783C
 	.4byte set_font__Q33ipl2cs4paneFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
-.endobj lbl_816173F0
+.endobj scMethodList__Q33ipl2cs4pane
 
 # 0x8166A5C8..0x8166A728 | size: 0x160
 .data
@@ -1870,37 +1871,31 @@
 	.string "SetFontSize"
 .endobj lbl_8166A6D7
 
-# .data:0x11B | 0x8166A6E3 | size: 0x45
+# .data:0x11B | 0x8166A6E3 | size: 0x41
 .obj lbl_8166A6E3, global
-	.4byte 0x4572726F
-	.4byte 0x72233030
-	.4byte 0x340A416E
-	.4byte 0x20657272
-	.4byte 0x6F722068
-	.4byte 0x6173206F
-	.4byte 0x63637572
-	.4byte 0x7265642E
-	.4byte 0x0A546865
-	.4byte 0x20737973
-	.4byte 0x74656D20
-	.4byte 0x66696C65
-	.4byte 0x73206172
-	.4byte 0x6520636F
-	.4byte 0x72727570
-	.4byte 0x7465642E
-	.4byte 0x00000000
-	.byte 0x00
+	.string "Error#004\nAn error has occurred.\nThe system files are corrupted."
 .endobj lbl_8166A6E3
+
+# .data:0x15C | 0x8166A724 | size: 0x4
+.obj gap_08_8166A724_data, global
+.hidden gap_08_8166A724_data
+	.4byte 0x00000000
+.endobj gap_08_8166A724_data
 
 # 0x81694FC0..0x81694FC8 | size: 0x8
 .section .sdata2, "a"
 .balign 8
 
-# .sdata2:0x0 | 0x81694FC0 | size: 0x8
+# .sdata2:0x0 | 0x81694FC0 | size: 0x4
 .obj lbl_81694FC0, global
 	.float 0
-	.float 0
 .endobj lbl_81694FC0
+
+# .sdata2:0x4 | 0x81694FC4 | size: 0x4
+.obj gap_09_81694FC4_sdata2, global
+.hidden gap_09_81694FC4_sdata2
+	.4byte 0x00000000
+.endobj gap_09_81694FC4_sdata2
 
 # 0x81697800..0x81697848 | size: 0x48
 .section .sdata, "wa"

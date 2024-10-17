@@ -1286,7 +1286,13 @@
 .section .sbss, "wa", @nobits
 .balign 8
 
-# .sbss:0x0 | 0x816986F0 | size: 0x8
+# .sbss:0x0 | 0x816986F0 | size: 0x4
 .obj lbl_816986F0, global
-	.skip 0x8
+	.skip 0x4
 .endobj lbl_816986F0
+
+# .sbss:0x4 | 0x816986F4 | size: 0x4
+.obj gap_12_816986F4_sbss, global
+.hidden gap_12_816986F4_sbss
+	.skip 0x4
+.endobj gap_12_816986F4_sbss

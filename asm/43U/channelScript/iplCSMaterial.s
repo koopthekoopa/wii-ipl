@@ -575,10 +575,10 @@
 /* 8145A3F0 | 38 60 00 00 */	li r3, 0x0
 /* 8145A3F4 | 48 00 00 20 */	b .L_8145A414
 .L_8145A3F8:
-/* 8145A3F8 | 3C A0 81 61 */	lis r5, lbl_816174E0@ha
+/* 8145A3F8 | 3C A0 81 61 */	lis r5, scMethodList__Q33ipl2cs8material@ha
 /* 8145A3FC | 7F E3 FB 78 */	mr r3, r31
 /* 8145A400 | 38 C0 00 07 */	li r6, 0x7
-/* 8145A404 | 38 A5 74 E0 */	addi r5, r5, lbl_816174E0@l
+/* 8145A404 | 38 A5 74 E0 */	addi r5, r5, scMethodList__Q33ipl2cs8material@l
 /* 8145A408 | 4B FF 26 69 */	bl CHANSVmAddNativeMethodList
 /* 8145A40C | 7C 60 00 34 */	cntlzw r0, r3
 /* 8145A410 | 54 03 D9 7E */	srwi r3, r0, 5
@@ -595,7 +595,8 @@
 .balign 8
 
 # .rodata:0x0 | 0x816174E0 | size: 0x38
-.obj lbl_816174E0, global
+# ipl::cs::material::scMethodList
+.obj scMethodList__Q33ipl2cs8material, local
 	.4byte lbl_8166A73C
 	.4byte set_texture__Q33ipl2cs8materialFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
 	.4byte lbl_8166A747
@@ -610,7 +611,7 @@
 	.4byte get_mat_color__Q33ipl2cs8materialFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
 	.4byte lbl_8166A785
 	.4byte set_mat_color__Q33ipl2cs8materialFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
-.endobj lbl_816174E0
+.endobj scMethodList__Q33ipl2cs8material
 
 # 0x8166A728..0x8166A798 | size: 0x70
 .data
@@ -656,14 +657,17 @@
 	.string "GetMatColor"
 .endobj lbl_8166A779
 
-# .data:0x5D | 0x8166A785 | size: 0x13
+# .data:0x5D | 0x8166A785 | size: 0xC
 .obj lbl_8166A785, global
-	.4byte 0x5365744D
-	.4byte 0x6174436F
-	.4byte 0x6C6F7200
+	.string "SetMatColor"
+.endobj lbl_8166A785
+
+# .data:0x69 | 0x8166A791 | size: 0x7
+.obj gap_08_8166A791_data, global
+.hidden gap_08_8166A791_data
 	.4byte 0x00000000
 	.byte 0x00, 0x00, 0x00
-.endobj lbl_8166A785
+.endobj gap_08_8166A791_data
 
 # 0x81697848..0x81697858 | size: 0x10
 .section .sdata, "wa"
@@ -676,6 +680,5 @@
 
 # .sdata:0x8 | 0x81697850 | size: 0x8
 .obj lbl_81697850, global
-	.4byte 0x436F6C6F
-	.4byte 0x72000000
+	.string "Color\000\000"
 .endobj lbl_81697850

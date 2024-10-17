@@ -79,29 +79,16 @@
 .rodata
 .balign 8
 
-# .rodata:0x0 | 0x816178B0 | size: 0x50
+# .rodata:0x0 | 0x816178B0 | size: 0x4F
 .obj lbl_816178B0, global
-	.4byte 0x3C3C2052
-	.4byte 0x564C5F4D
-	.4byte 0x574D202D
-	.4byte 0x205A495F
-	.4byte 0x455A4954
-	.4byte 0x45585420
-	.4byte 0x0972656C
-	.4byte 0x65617365
-	.4byte 0x20627569
-	.4byte 0x6C643A20
-	.4byte 0x4A616E20
-	.4byte 0x31352032
-	.4byte 0x30303820
-	.4byte 0x31383A35
-	.4byte 0x393A3530
-	.4byte 0x20283078
-	.4byte 0x34313939
-	.4byte 0x5F363038
-	.4byte 0x33312920
-	.4byte 0x3E3E0000
+	.string "<< RVL_MWM - ZI_EZITEXT \trelease build: Jan 15 2008 18:59:50 (0x4199_60831) >>"
 .endobj lbl_816178B0
+
+# .rodata:0x4F | 0x816178FF | size: 0x1
+.obj gap_07_816178FF_rodata, global
+.hidden gap_07_816178FF_rodata
+	.byte 0x00
+.endobj gap_07_816178FF_rodata
 
 # 0x8166AA20..0x8166AA58 | size: 0x38
 .data

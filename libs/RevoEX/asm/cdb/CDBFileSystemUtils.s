@@ -774,8 +774,14 @@
 .section .sdata, "wa"
 .balign 8
 
-# .sdata:0x0 | 0x816979E8 | size: 0x8
+# .sdata:0x0 | 0x816979E8 | size: 0x1
 .obj lbl_816979E8, global
-	.4byte 0x2F000000
-	.4byte 0x00000000
+	.byte 0x2F
 .endobj lbl_816979E8
+
+# .sdata:0x1 | 0x816979E9 | size: 0x7
+.obj gap_11_816979E9_sdata, global
+.hidden gap_11_816979E9_sdata
+	.4byte 0x00000000
+	.byte 0x00, 0x00, 0x00
+.endobj gap_11_816979E9_sdata

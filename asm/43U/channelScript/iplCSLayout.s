@@ -195,18 +195,18 @@
 /* 8145844C | 2C 03 00 00 */	cmpwi r3, 0x0
 /* 81458450 | 7C 7E 1B 78 */	mr r30, r3
 /* 81458454 | 41 82 00 48 */	beq .L_8145849C
-/* 81458458 | 3C A0 81 61 */	lis r5, lbl_81617390@ha
+/* 81458458 | 3C A0 81 61 */	lis r5, scMethodList__Q33ipl2cs6layout@ha
 /* 8145845C | 7F A3 EB 78 */	mr r3, r29
 /* 81458460 | 7F C4 F3 78 */	mr r4, r30
 /* 81458464 | 38 C0 00 03 */	li r6, 0x3
-/* 81458468 | 38 A5 73 90 */	addi r5, r5, lbl_81617390@l
+/* 81458468 | 38 A5 73 90 */	addi r5, r5, scMethodList__Q33ipl2cs6layout@l
 /* 8145846C | 4B FF 46 05 */	bl CHANSVmAddNativeMethodList
 /* 81458470 | 7C 60 00 34 */	cntlzw r0, r3
-/* 81458474 | 3C A0 81 61 */	lis r5, lbl_816173A8@ha
+/* 81458474 | 3C A0 81 61 */	lis r5, scPropertyList__Q33ipl2cs4util@ha
 /* 81458478 | 7F A3 EB 78 */	mr r3, r29
 /* 8145847C | 7F C4 F3 78 */	mr r4, r30
 /* 81458480 | 54 1F D9 7E */	srwi r31, r0, 5
-/* 81458484 | 38 A5 73 A8 */	addi r5, r5, lbl_816173A8@l
+/* 81458484 | 38 A5 73 A8 */	addi r5, r5, scPropertyList__Q33ipl2cs4util@l
 /* 81458488 | 38 C0 00 06 */	li r6, 0x6
 /* 8145848C | 4B FF 47 CD */	bl CHANSVmAddNativePropertyAccessorsList
 /* 81458490 | 7C 60 00 34 */	cntlzw r0, r3
@@ -299,17 +299,19 @@
 .balign 8
 
 # .rodata:0x0 | 0x81617390 | size: 0x18
-.obj lbl_81617390, global
+# ipl::cs::layout::scMethodList
+.obj scMethodList__Q33ipl2cs6layout, local
 	.4byte lbl_8166A548
 	.4byte find_pane__Q33ipl2cs6layoutFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
 	.4byte lbl_8166A557
 	.4byte start_anm__Q33ipl2cs6layoutFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
 	.4byte lbl_816977F0
 	.4byte get_anm__Q33ipl2cs6layoutFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr
-.endobj lbl_81617390
+.endobj scMethodList__Q33ipl2cs6layout
 
 # .rodata:0x18 | 0x816173A8 | size: 0x48
-.obj lbl_816173A8, global
+# ipl::cs::util::scPropertyList
+.obj scPropertyList__Q33ipl2cs4util, local
 	.4byte lbl_8166A561
 	.4byte "get_int<0>__Q33ipl2cs4utilFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
 	.4byte 0x00000000
@@ -328,7 +330,7 @@
 	.4byte lbl_8166A5B0
 	.4byte "get_int<1>__Q33ipl2cs4utilFP7CHANSVmP13CHANSVmObjHdrP13CHANSVmObjHdr_i"
 	.4byte 0x00000000
-.endobj lbl_816173A8
+.endobj scPropertyList__Q33ipl2cs4util
 
 # 0x8166A548..0x8166A5C8 | size: 0x80
 .data
@@ -369,15 +371,16 @@
 	.string "*TEXTCOLOR_TOP"
 .endobj lbl_8166A5A1
 
-# .data:0x68 | 0x8166A5B0 | size: 0x18
+# .data:0x68 | 0x8166A5B0 | size: 0x14
 .obj lbl_8166A5B0, global
-	.4byte 0x2A544558
-	.4byte 0x54434F4C
-	.4byte 0x4F525F42
-	.4byte 0x4F54544F
-	.4byte 0x4D000000
-	.4byte 0x00000000
+	.string "*TEXTCOLOR_BOTTOM\000\000"
 .endobj lbl_8166A5B0
+
+# .data:0x7C | 0x8166A5C4 | size: 0x4
+.obj gap_08_8166A5C4_data, global
+.hidden gap_08_8166A5C4_data
+	.4byte 0x00000000
+.endobj gap_08_8166A5C4_data
 
 # 0x816977F0..0x81697800 | size: 0x10
 .section .sdata, "wa"
@@ -390,6 +393,5 @@
 
 # .sdata:0x8 | 0x816977F8 | size: 0x8
 .obj lbl_816977F8, global
-	.4byte 0x4C61796F
-	.4byte 0x75740000
+	.string "Layout\000"
 .endobj lbl_816977F8

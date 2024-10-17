@@ -235,42 +235,42 @@
 /* 81332F18 | 93 C1 00 08 */	stw r30, 0x8(r1)
 /* 81332F1C | 3B DF 90 08 */	addi r30, r31, smArg__Q23ipl6System@l
 /* 81332F20 | 80 9E 00 04 */	lwz r4, 0x4(r30)
-/* 81332F24 | 48 2C 47 51 */	bl fn_815F7674
+/* 81332F24 | 48 2C 47 51 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 81332F28 | 90 7E 00 0C */	stw r3, 0xc(r30)
 /* 81332F2C | 3C 60 00 69 */	lis r3, 0x69
 /* 81332F30 | 80 9E 00 04 */	lwz r4, 0x4(r30)
 /* 81332F34 | 38 63 60 00 */	addi r3, r3, 0x6000
 /* 81332F38 | 38 A0 00 06 */	li r5, 0x6
-/* 81332F3C | 48 2C 47 39 */	bl fn_815F7674
+/* 81332F3C | 48 2C 47 39 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 81332F40 | 90 7E 00 10 */	stw r3, 0x10(r30)
 /* 81332F44 | 3C 60 00 32 */	lis r3, 0x32
 /* 81332F48 | 80 9E 00 04 */	lwz r4, 0x4(r30)
 /* 81332F4C | 38 63 58 00 */	addi r3, r3, 0x5800
 /* 81332F50 | 38 A0 00 02 */	li r5, 0x2
-/* 81332F54 | 48 2C 47 21 */	bl fn_815F7674
+/* 81332F54 | 48 2C 47 21 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 81332F58 | 90 7E 00 14 */	stw r3, 0x14(r30)
 /* 81332F5C | 3C 60 00 1C */	lis r3, 0x1c
 /* 81332F60 | 80 9E 00 04 */	lwz r4, 0x4(r30)
 /* 81332F64 | 38 63 A4 00 */	subi r3, r3, 0x5c00
 /* 81332F68 | 38 A0 00 06 */	li r5, 0x6
-/* 81332F6C | 48 2C 47 09 */	bl fn_815F7674
+/* 81332F6C | 48 2C 47 09 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 81332F70 | 90 7E 00 18 */	stw r3, 0x18(r30)
 /* 81332F74 | 3C 60 00 20 */	lis r3, 0x20
 /* 81332F78 | 80 9E 00 04 */	lwz r4, 0x4(r30)
 /* 81332F7C | 38 A0 00 06 */	li r5, 0x6
-/* 81332F80 | 48 2C 46 F5 */	bl fn_815F7674
+/* 81332F80 | 48 2C 46 F5 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 81332F84 | 38 00 00 00 */	li r0, 0x0
 /* 81332F88 | 90 7E 00 38 */	stw r3, 0x38(r30)
 /* 81332F8C | 80 9E 00 04 */	lwz r4, 0x4(r30)
 /* 81332F90 | 3C 60 00 10 */	lis r3, 0x10
 /* 81332F94 | 90 1E 00 1C */	stw r0, 0x1c(r30)
 /* 81332F98 | 38 A0 00 06 */	li r5, 0x6
-/* 81332F9C | 48 2C 46 D9 */	bl fn_815F7674
+/* 81332F9C | 48 2C 46 D9 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 81332FA0 | 90 7E 00 20 */	stw r3, 0x20(r30)
 /* 81332FA4 | 38 60 FF FF */	li r3, -0x1
 /* 81332FA8 | 80 9F 90 08 */	lwz r4, smArg__Q23ipl6System@l(r31)
 /* 81332FAC | 38 A0 00 06 */	li r5, 0x6
-/* 81332FB0 | 48 2C 46 C5 */	bl fn_815F7674
+/* 81332FB0 | 48 2C 46 C5 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 81332FB4 | 90 7E 00 08 */	stw r3, 0x8(r30)
 /* 81332FB8 | 3F E0 81 63 */	lis r31, lbl_81634133@ha
 /* 81332FBC | 38 7F 41 33 */	addi r3, r31, lbl_81634133@l
@@ -294,7 +294,7 @@
 /* 81333004 | 80 9E 00 04 */	lwz r4, 0x4(r30)
 /* 81333008 | 38 60 FF FF */	li r3, -0x1
 /* 8133300C | 38 A0 00 06 */	li r5, 0x6
-/* 81333010 | 48 2C 46 65 */	bl fn_815F7674
+/* 81333010 | 48 2C 46 65 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 81333014 | 90 7E 00 28 */	stw r3, 0x28(r30)
 /* 81333018 | 83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8133301C | 83 C1 00 08 */	lwz r30, 0x8(r1)
@@ -3723,14 +3723,17 @@
 	.string "Cancel!\n"
 .endobj lbl_81634690_onCancel__Q29textinput13EventObserver
 
-# .data:0x579 | 0x81634699 | size: 0xF
+# .data:0x579 | 0x81634699 | size: 0xD
 # textinput::EventObserver::lbl_81634699_onOutOfLength
 .obj lbl_81634699_onOutOfLength__Q29textinput13EventObserver, global
-	.4byte 0x4F75744F
-	.4byte 0x664C656E
-	.4byte 0x6774680A
-	.byte 0x00, 0x00, 0x00
+	.string "OutOfLength\n"
 .endobj lbl_81634699_onOutOfLength__Q29textinput13EventObserver
+
+# .data:0x586 | 0x816346A6 | size: 0x2
+.obj gap_08_816346A6_data, global
+.hidden gap_08_816346A6_data
+	.2byte 0x0000
+.endobj gap_08_816346A6_data
 
 # 0x81694410..0x81694440 | size: 0x30
 .section .sdata2, "a"
@@ -3782,11 +3785,16 @@
 	.float -416
 .endobj lbl_81694434
 
-# .sdata2:0x28 | 0x81694438 | size: 0x8
+# .sdata2:0x28 | 0x81694438 | size: 0x4
 .obj lbl_81694438, global
 	.float 416
-	.float 0
 .endobj lbl_81694438
+
+# .sdata2:0x2C | 0x8169443C | size: 0x4
+.obj gap_09_8169443C_sdata2, global
+.hidden gap_09_8169443C_sdata2
+	.4byte 0x00000000
+.endobj gap_09_8169443C_sdata2
 
 # 0x81696060..0x81696080 | size: 0x20
 .section .sdata, "wa"
@@ -3812,10 +3820,15 @@
 	.string "US2"
 .endobj lbl_81696071
 
-# .sdata:0x15 | 0x81696075 | size: 0xB
+# .sdata:0x15 | 0x81696075 | size: 0x5
 # textinput::EventObserver::@STRING@onOK()
 .obj "@STRING@onOK__Q29textinput13EventObserverFv", global
-	.4byte 0x4F4B210A
-	.4byte 0x00000000
-	.byte 0x00, 0x00, 0x00
+	.string "OK!\n"
 .endobj "@STRING@onOK__Q29textinput13EventObserverFv"
+
+# .sdata:0x1A | 0x8169607A | size: 0x6
+.obj gap_11_8169607A_sdata, global
+.hidden gap_11_8169607A_sdata
+	.4byte 0x00000000
+	.2byte 0x0000
+.endobj gap_11_8169607A_sdata

@@ -572,20 +572,31 @@
 .data
 .balign 8
 
-# .data:0x0 | 0x81645798 | size: 0x10
+# .data:0x0 | 0x81645798 | size: 0xC
 # homebutton::RemoteSpk::__vtable
 .obj __vt__Q210homebutton9RemoteSpk, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte __dt__Q210homebutton9RemoteSpkFv
-	.4byte 0x00000000
 .endobj __vt__Q210homebutton9RemoteSpk
+
+# .data:0xC | 0x816457A4 | size: 0x4
+.obj gap_08_816457A4_data, global
+.hidden gap_08_816457A4_data
+	.4byte 0x00000000
+.endobj gap_08_816457A4_data
 
 # 0x816989C8..0x816989D0 | size: 0x8
 .section .sbss, "wa", @nobits
 .balign 8
 
-# .sbss:0x0 | 0x816989C8 | size: 0x8
+# .sbss:0x0 | 0x816989C8 | size: 0x4
 .obj lbl_816989C8, global
-	.skip 0x8
+	.skip 0x4
 .endobj lbl_816989C8
+
+# .sbss:0x4 | 0x816989CC | size: 0x4
+.obj gap_12_816989CC_sbss, global
+.hidden gap_12_816989CC_sbss
+	.skip 0x4
+.endobj gap_12_816989CC_sbss

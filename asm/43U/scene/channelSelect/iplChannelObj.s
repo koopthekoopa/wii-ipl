@@ -605,7 +605,7 @@
 /* 813B1D80 | 80 9F 00 98 */	lwz r4, 0x98(r31)
 /* 813B1D84 | 38 60 FF FF */	li r3, -0x1
 /* 813B1D88 | 38 A0 00 00 */	li r5, 0x0
-/* 813B1D8C | 48 24 58 E9 */	bl fn_815F7674
+/* 813B1D8C | 48 24 58 E9 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 813B1D90 | 90 7F 01 10 */	stw r3, 0x110(r31)
 .L_813B1D94:
 /* 813B1D94 | 3F C0 81 09 */	lis r30, smArg__Q23ipl6System@ha
@@ -3779,18 +3779,17 @@
 	.string "my_IplTopBalloon_a_BalloonInOut.brlan"
 .endobj lbl_8164E71E
 
-# .data:0x4B4 | 0x8164E744 | size: 0x24
+# .data:0x4B4 | 0x8164E744 | size: 0x1F
 .obj lbl_8164E744, global
-	.4byte 0x5749504C
-	.4byte 0x5F53455F
-	.4byte 0x42414C4C
-	.4byte 0x4F4F4E00
-	.4byte 0x69636F6E
-	.4byte 0x5F4E6577
-	.4byte 0x2E62726C
-	.4byte 0x616E0000
-	.4byte 0x00000000
+	.string "WIPL_SE_BALLOON\000icon_New.brlan"
 .endobj lbl_8164E744
+
+# .data:0x4D3 | 0x8164E763 | size: 0x5
+.obj gap_08_8164E763_data, global
+.hidden gap_08_8164E763_data
+	.4byte 0x00000000
+	.byte 0x00
+.endobj gap_08_8164E763_data
 
 # 0x816949A8..0x816949F0 | size: 0x48
 .section .sdata2, "a"
@@ -4007,20 +4006,30 @@
 	.string "New"
 .endobj lbl_816969FF
 
-# .sdata:0x6B | 0x81696A03 | size: 0xD
+# .sdata:0x6B | 0x81696A03 | size: 0x7
 .obj lbl_81696A03, global
-	.4byte 0x4E65775F
-	.4byte 0x25730000
-	.4byte 0x00000000
-	.byte 0x00
+	.string "New_%s"
 .endobj lbl_81696A03
+
+# .sdata:0x72 | 0x81696A0A | size: 0x6
+.obj gap_11_81696A0A_sdata, global
+.hidden gap_11_81696A0A_sdata
+	.4byte 0x00000000
+	.2byte 0x0000
+.endobj gap_11_81696A0A_sdata
 
 # 0x81698B60..0x81698B68 | size: 0x8
 .section .sbss, "wa", @nobits
 .balign 8
 
-# .sbss:0x0 | 0x81698B60 | size: 0x8
+# .sbss:0x0 | 0x81698B60 | size: 0x1
 # ipl::scene::clock::m_already_shown_wii_menu
 .obj m_already_shown_wii_menu__Q33ipl5scene5clock, global
-	.skip 0x8
+	.skip 0x1
 .endobj m_already_shown_wii_menu__Q33ipl5scene5clock
+
+# .sbss:0x1 | 0x81698B61 | size: 0x7
+.obj gap_12_81698B61_sbss, global
+.hidden gap_12_81698B61_sbss
+	.skip 0x7
+.endobj gap_12_81698B61_sbss
