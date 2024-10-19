@@ -1,24 +1,32 @@
 ALL_OBJECTS = 
 
 # IPL executable defines
-VERSION_FULL	:= 4.3U
-VERSION			:= $(subst .,,$(VERSION_FULL))
-IPL_INFILE		= base.$(VERSION).app
-IPL_OUTFILE		= ipl.$(VERSION).app
+VERSION		:= 43U
+
+IPL_INFILE	= base.$(VERSION).app
+IPL_DTKFILE	= base.$(VERSION).dtk
+IPL_OUTFILE	= ipl.$(VERSION).app
 
 # Directory defines (must be here)
 BUILD_ROOT				= build
 CONFIG_ROOT				= config/$(VERSION)
 DATA_ROOT				= data/$(VERSION)
-DATA_OUT_ROOT			= data/$(VERSION)/build
+DATA_OUT_ROOT			= $(DATA_ROOT)/build
 ASSEMBLY_ROOT			= asm
-VER_ASSEMBLY_ROOT		= $(ASSEMBLY_ROOT)/$(VERSION)
 SOURCE_ROOT				= src
 INCLUDE_ROOT			= include
 OBJECT_ROOT				= obj
 RULES_ROOT				= rules
 TOOLS_ROOT				= tools
 LIBRARIES_ROOT			= libs
+
+SPLIT_UNITS				= $(CONFIG_ROOT)/splits.txt
+SPLIT_SYMBOLS			= $(CONFIG_ROOT)/symbols.txt
+SPLIT_FILE				= $(CONFIG_ROOT)/dtkconfig.yml
+SPLIT_ROOT				= $(BUILD_ROOT)/split_$(VERSION)
+SPLIT_OBJ_ROOT			= $(SPLIT_ROOT)/obj
+SPLIT_LIBOBJ_ROOT		= $(SPLIT_OBJ_ROOT)/libs
+LINKER_FILE				= $(SPLIT_ROOT)/ldscript.lcf
 
 # Library path defines (must be here)
 RUNTIME_ROOT		= $(LIBRARIES_ROOT)/Runtime
@@ -45,23 +53,31 @@ endif
 -include $(RULES_ROOT)/global/define.mak
 -include $(RULES_ROOT)/global/build.mak
 
-.PHONY: prepare clean_data
+.PHONY: prepare all clean
 
-### Build
-all: Runtime RVL_SDK RevoEX NW4R RFL eZiText TMCJpeg bs1 bs2 $(BUILD_ROOT)/$(IPL_OUTFILE)
+.NOTPARALLEL: $(BUILD_ROOT)/$(IPL_OUTFILE)
+
+# Build
+all: $(SPLIT_ROOT) $(BUILD_ROOT)/$(IPL_OUTFILE)
 	@echo Build complete!
 
+# Split
+$(SPLIT_ROOT): $(SPLIT_FILE) $(SPLIT_UNITS) $(SPLIT_SYMBOLS)
+	@echo Splitting IPL executable...
+	@$(DTK) dol split $(SPLIT_FILE) $(SPLIT_ROOT)
+
 # Link
-$(BUILD_ROOT)/$(IPL_OUTFILE): bs1 bs2
+$(BUILD_ROOT)/$(IPL_OUTFILE): $(SPLIT_ROOT) bs1 bs2
 	@echo Converting ELF files to $@...
-	@$(TOOLS_ROOT)/$(ELF2BS) -b $(IPL_INFILE) -bs1 $(BS1_BLD_PATH)/$(BS1_ELF_NAME).elf -bs2 $(BS2_GLOBAL_BLD_PATH)/$(BS2_ELF_NAME).elf -bs2_size $(BS2_IMAGE_SIZE) -output $@
+	@$(TOOLS_ROOT)/$(ELF2BS) -b $(IPL_INFILE) -bs1 $(BS1_BLD_PATH)/$(BS1_ELF_NAME).elf -bs2 $(BS2_GBL_BLD_PATH)/$(BS2_ELF_NAME).elf -bs2_size $(BS2_IMAGE_SIZE) -output $@
 	@echo ========================================================================
 	@echo SHA1 Sum should fail here as it does not link a matching executable yet.
 	@echo ========================================================================
-	@sha1sum -c $(CONFIG_ROOT)/sha1.txt
+	@$(SHA1) -c $(CONFIG_ROOT)/sha1.txt
 
 # Clean
 clean: clean_Runtime clean_RVL_SDK clean_RevoEX clean_NW4R clean_RFL clean_eZiText clean_TMCJpeg clean_bs1 clean_bs2 clean_data
+	@rm -rf $(SPLIT_ROOT)
 	@rm -rf $(BUILD_ROOT)/$(IPL_OUTFILE)
 
 # Prepare

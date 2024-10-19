@@ -32,7 +32,7 @@ namespace ipl {
                 
                 undefined4* getScene();
 
-                void        pushCommand(Command* pCommand);
+                void        pushCommand(const Command& pCommand);
                 void        setDestructSync();
 
                 BOOL        isDrawingScene() { return mDrawingScene; }

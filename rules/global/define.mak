@@ -15,22 +15,26 @@ ifeq ($(OBJDIFF),TRUE)
 OBJDIFF_FLAG = -DOBJDIFF
 endif
 
-FIX_DEP			= $(TOOLS_ROOT)/transform_dep.py
-
 PPC_ROOT		= $(TOOLS_ROOT)/PPC
 
 # Tools defines
+GCC				= gcc
+CHMOD			= chmod +x
+SHA1			= sha1sum --ignore-missing
+
 AS				= $(PPC_ROOT)/powerpc-eabi-as$(EXEC)
 OBJCOPY			= $(PPC_ROOT)/powerpc-eabi-objcopy$(EXEC)
 DTK				= $(TOOLS_ROOT)/dtk$(EXEC)
 AS_MWCC			= mwasmeppc.exe
 CC				= mwcceppc.exe
 LD				= mwldeppc.exe
+
 ELF2BS			= elf2bs$(EXEC)
 MAKESEL			= makesel$(EXEC)
+IPL2DTK			= ipl2dtk$(EXEC)
 EXTRACT_DATA	= extract_bin.py
-GCC				= gcc
-CHMOD			= chmod +x
+
+FIX_DEP			= $(TOOLS_ROOT)/transform_dep.py
 
 ## Misc defines
 DEFRULES		= mainrules

@@ -1,15 +1,7 @@
 # $(1) = Include Path
+# $(2) = CC Path
 define BuildASMSources
 	@echo Assembling $<...
-	@mkdir -p $(dir $@)
-	@$(AS) $(COMMON_ASFLAGS) -DIPL=$(VERSION) -I- -I $(1) -c -o $@ $<
-	@$(DTK) elf fixup $@ $@
-endef
-
-# $(1) = Include Path
-# $(2) = CC Path
-define BuildMWCCASMSources
-	@echo Assembling MWCC $<...
 	@mkdir -p $(dir $@)
 	@$(WIBO) $(2)/$(AS_MWCC) $(COMMON_MWCC_ASFLAGS) -DIPL=$(VERSION) $(OBJDIFF_FLAG) -I- -i $(1) -c -o $@ $<
 endef

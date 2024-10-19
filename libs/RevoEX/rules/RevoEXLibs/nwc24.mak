@@ -1,33 +1,30 @@
-NWC24_OBJECTS =	$(REVOEX_OBJASM_PATH)/nwc24/NWC24StdAPI.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24FileAPI.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24Config.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24Utils.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24Manage.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24MsgObj.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24MBoxCtrl.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24Mime.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24Stream.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24Parser.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24MsgCommit.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24MsgRead.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24Schedule.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24DateParser.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24FriendList.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24SecretFList.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24UserId.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24Time.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24Ipc.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24Download.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24CHJump.o \
-				$(REVOEX_OBJASM_PATH)/nwc24/NWC24System.o
+NWC24_OBJECTS =	$(REVOEX_SPLIT_PATH)/nwc24/NWC24StdAPI.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24FileAPI.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24Config.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24Utils.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24Manage.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24MsgObj.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24MBoxCtrl.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24Mime.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24Stream.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24Parser.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24MsgCommit.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24MsgRead.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24Schedule.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24DateParser.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24FriendList.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24SecretFList.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24UserId.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24Time.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24Ipc.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24Download.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24CHJump.o \
+				$(REVOEX_SPLIT_PATH)/nwc24/NWC24System.o
 
 ALL_OBJECTS += $(NWC24_OBJECTS)
 
 $(REVOEX_OBJ_PATH)/nwc24/%.o: $(REVOEX_SRC_PATH)/nwc24/%.c
 	$(call BuildCSources,$(REVOEX_CCPATH),$(REVOEX_CFLAGS),$(REVOEX_INC_PATHS),$(INCLUDE_ROOT))
-
-$(REVOEX_OBJASM_PATH)/nwc24/%.o: $(REVOEX_ASM_PATH)/nwc24/%.s
-	$(call BuildASMSources,$(INCLUDE_ROOT))
 
 $(REVOEX_BLD_PATH)/nwc24.a: $(NWC24_OBJECTS)
 	$(call LinkLibrary,$(REVOEX_CCPATH),$^,$@)

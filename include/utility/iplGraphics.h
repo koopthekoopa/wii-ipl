@@ -8,6 +8,7 @@ namespace ipl {
     namespace utility {
         class Graphics {
             public:
+                static void setOrtho(u32 ortho = GX_PNMTX0);
                 static void setDefaultOrtho(u32 ortho = GX_PNMTX0);
         };
     }

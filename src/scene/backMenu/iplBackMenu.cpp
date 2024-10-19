@@ -114,7 +114,7 @@ namespace ipl {
          */
         void BackMenu::draw() {
             if (System::getSceneMgr()->isDrawingScene() == TRUE) {
-                utility::Graphics::setDefaultOrtho();
+                utility::Graphics::setOrtho();
                 mpLayout->draw();
             }
         }

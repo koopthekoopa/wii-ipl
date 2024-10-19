@@ -1,5 +1,5 @@
 #include "channelScript/CHANSVm.h"
-#include "channelScript/CHANSVmPrivate.h"
+#include "channelScript/CHANSVmInternal.h"
 
 #include <stdio.h>
 #include <stdarg.h>

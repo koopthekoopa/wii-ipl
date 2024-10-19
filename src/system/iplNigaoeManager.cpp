@@ -82,7 +82,7 @@ namespace ipl {
             if (RFLGetAsyncStatus() != RFLErrcode_Busy) {
                 Object* obj;
                 
-                for (; (obj = (Object*)nw4r::ut::List_GetLast(&mObjects)) != NULL && i < IPL_NIGAOE_ICON_MAX; i++) {
+                for (; (obj = (Object*)nw4r::ut::List_GetFirst(&mObjects)) != NULL && i < IPL_NIGAOE_ICON_MAX; i++) {
                     obj->make_icon();
                     
                     nw4r::ut::List_Remove(&mObjects, obj);

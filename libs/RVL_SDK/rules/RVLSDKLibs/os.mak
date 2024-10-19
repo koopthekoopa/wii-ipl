@@ -12,9 +12,6 @@ $(SDK_OBJ_PATH)/os/%.o: $(SDK_SRC_PATH)/os/%.c
 $(SDK_OBJ_PATH)/os/%.o: $(SDK_SRC_PATH)/os/%.cpp
 	$(call BuildCPPSources,$(OS_CCPATH),$(OS_CFLAGS),$(SDK_INC_PATHS),$(INCLUDE_ROOT))
 
-$(SDK_OBJASM_PATH)/os/%.o: $(SDK_ASM_PATH)/os/%.s
-	$(call BuildASMSources,$(INCLUDE_ROOT))
-
 $(SDK_BLD_PATH)/os.a: $(OS_OBJECTS)
 	$(call LinkLibrary,$(OS_CCPATH),$^,$@)
 

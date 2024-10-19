@@ -33,83 +33,58 @@ typedef struct Vec2 {
 
 typedef union KPADEXStatus {
     struct {
-        Vec2        stick;                              // 0x00
+        Vec2    stick;
 
-        Vec         acc;                                // 0x08
-        f32         acc_value;                          // 0x14
-        f32         acc_speed;                          // 0x18
+        Vec     acc;
+        f32     acc_value;
+        f32     acc_speed;
     } fs;
+
     struct {
-        u32         hold;                               // 0x00
-        u32         trig;                               // 0x04
+        u32     hold;
+        u32     trig;
+        u32     release;
 
-        u32         release;                            // 0x08
+        Vec2    lstick;
+        Vec2    rstick;
 
-        Vec2        lstick;                             // 0x0C
-        Vec2        rstick;                             // 0x14
-
-        f32         ltrigger;                           // 0x1C
-        f32         rtrigger;                           // 0x20
+        f32     ltrigger;
+        f32     rtrigger;
     } cl;
-    struct {
-        f64         tgc_weight;                         // 0x00
-
-        f64         weight[WPAD_MAX_CONTROLLERS];       // 0x08
-        f64         weight_ave[WPAD_MAX_CONTROLLERS];   // 0x28
-        s32         weight_err;                         // 0x48
-
-        s32         tgc_weight_err;                     // 0x4C
-    } bl;
 } KPADEXStatus;
 
-struct KPADStatus {
-    u32             hold;                               // 0x00
-    u32             trig;                               // 0x04
-    u32             release;                            // 0x08
+typedef struct KPADStatus {
+    u32             hold;
+    u32             trig;
+    u32             release;
 
-    Vec             acc;                                // 0x0C
-    f32             acc_value;                          // 0x18
-    f32             acc_speed;                          // 0x1C
+    Vec             acc;
+    f32             acc_value;
+    f32             acc_speed;
 
-    Vec2            pos;                                // 0x20
-    Vec2            vec;                                // 0x28
+    Vec2            pos;
+    Vec2            vec;
+    f32             speed;
+    
+    Vec2            horizon;
+    Vec2            hori_vec;
+    f32             hori_speed;
 
-    f32             speed;                              // 0x30
+    f32             dist;
+    f32             dist_vec;
+    f32             dist_speed;
 
-    Vec2            horizon;                            // 0x34
-    Vec2            hori_vec;                           // 0x3C
-    f32             hori_speed;                         // 0x44
+    Vec2            acc_vertical;
 
-    f32             dist;                               // 0x48
-    f32             dist_vec;                           // 0x4C
-    f32             dist_speed;                         // 0x50
+    u8              dev_type;
+    s8              wpad_err;
+    s8              dpd_valid_fg;
+    u8              data_format;
 
-    Vec2            acc_vertical;                       // 0x54
+    KPADEXStatus    ex_status;
+} KPADStatus;
 
-    u8              dev_type;                           // 0x5C
-    s8              wpad_err;                           // 0x5D
-    s8              dpd_valid_fg;                       // 0x5E
-    u8              data_format;                        // 0x5F
-    KPADEXStatus    ex_status;                          // 0x60
-};
-
-typedef struct KPADUnifiedWpadStatus {
-    union {
-        struct WPADStatus core;
-        struct WPADFSStatus fs;
-        struct WPADCLStatus cl;
-        struct WPADTRStatus tr;
-        struct WPADBLStatus bl;
-    } u;                    // 0x00
-
-    unsigned char fmt;      // 0x36
-    unsigned char padding;  // 0x37
-} KPADUnifiedWpadStatus;
-
-s32     WPADGetStatus();
-
-void    __WPADReconnect(BOOL reconnect);
-void    WPADSetSensorBarPower(BOOL value);
+s32 KPADRead(s32 chan, KPADStatus* status, u32 length);
 
 #ifdef __cplusplus
 }

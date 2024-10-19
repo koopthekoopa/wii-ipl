@@ -1,16 +1,19 @@
-PREP_ERROR = Please run 'make prepare' first
-
 # Compile tools
 
-TOOLS_CFLAGS = -Wall -Wextra -O3 -s
+TOOLS_CFLAGS = -Wall -Wextra -O2 -s
 TOOLS = $(TOOLS_ROOT)/$(ELF2BS) \
-		$(TOOLS_ROOT)/$(MAKESEL)
+		$(TOOLS_ROOT)/$(MAKESEL)\
+		$(TOOLS_ROOT)/$(IPL2DTK)
 
 $(TOOLS_ROOT)/$(ELF2BS): $(TOOLS_ROOT)/elf2bs.c
 	@echo Building $@...
 	@$(GCC) $(TOOLS_CFLAGS) -o $@ $^
 
 $(TOOLS_ROOT)/$(MAKESEL): $(TOOLS_ROOT)/makesel.c
+	@echo Building $@...
+	@$(GCC) $(TOOLS_CFLAGS) -o $@ $^
+
+$(TOOLS_ROOT)/$(IPL2DTK): $(TOOLS_ROOT)/ipl2dtk.c
 	@echo Building $@...
 	@$(GCC) $(TOOLS_CFLAGS) -o $@ $^
 
@@ -48,55 +51,16 @@ $(DATA_ROOT): $(CONFIG_ROOT)/extract.txt
 	@echo Extracting Data...
 	@$(PY) $(TOOLS_ROOT)/$(EXTRACT_DATA) -i $< -o $(DATA_ROOT) -ib $(IPL_INFILE) -oc $(OBJCOPY)
 
+
+# Convert to DTK compatible DOL file
+
+$(IPL_DTKFILE): $(TOOLS_ROOT)/$(IPL2DTK) $(IPL_INFILE)
+	@echo Prepare executable for splitting...
+	@$(TOOLS_ROOT)/$(IPL2DTK) $(IPL_INFILE) $(IPL_DTKFILE)
+
 # Prepare
 
-PrepareDecomp: $(TOOLS) DownloadTools $(DATA_ROOT)
+PrepareDecomp: $(TOOLS) DownloadTools $(DATA_ROOT) $(IPL_DTKFILE)
 	@echo Prepared for Building!
-
-# Check if the decomp is prepared
-
-ifeq (,$(wildcard $(TOOLS_ROOT)/GC))
-ifneq ($(MAKECMDGOALS),prepare)
-$(error $(PREP_ERROR))
-endif
-endif
-
-ifeq (,$(wildcard $(PPC_ROOT)))
-ifneq ($(MAKECMDGOALS),prepare)
-$(error $(PREP_ERROR))
-endif
-endif
-
-ifeq (,$(wildcard $(DTK)))
-ifneq ($(MAKECMDGOALS),prepare)
-$(error $(PREP_ERROR))
-endif
-endif
-
-ifeq (,$(wildcard $(TOOLS_ROOT)/$(ELF2BS)))
-ifneq ($(MAKECMDGOALS),prepare)
-$(error $(PREP_ERROR))
-endif
-endif
-
-ifeq (,$(wildcard $(TOOLS_ROOT)/$(MAKESEL)))
-ifneq ($(MAKECMDGOALS),prepare)
-$(error $(PREP_ERROR))
-endif
-endif
-
-ifeq (,$(wildcard $(DATA_ROOT)/$(DEFRULES).mak))
-ifneq ($(MAKECMDGOALS),prepare)
-$(error $(PREP_ERROR))
-endif
-endif
-
-ifneq ($(OS),Windows_NT)
-ifeq (,$(wildcard $(WIBO)))
-ifneq ($(MAKECMDGOALS),prepare)
-$(error $(PREP_ERROR))
-endif
-endif
-endif
 
 

@@ -11,7 +11,7 @@ BS1_ELF_ADDRESS		= 0x80003400
 BS1_OBJECTS	= $(BS1_OBJ_PATH)/BS1.o
 
 $(BS1_OBJ_PATH)/%.o: $(ASSEMBLY_ROOT)/%.s
-	$(call BuildMWCCASMSources,$(INCLUDE_ROOT),$(BS1_ELF_CC))
+	$(call BuildASMSources,$(INCLUDE_ROOT),$(BS1_ELF_CC))
 
 $(BS1_BLD_PATH)/$(BS1_ELF_NAME).elf: $(BS1_OBJECTS)
 	$(call LinkSmallElf,$(BS1_ELF_CC),$^,$@,$(BS1_ELF_ADDRESS))

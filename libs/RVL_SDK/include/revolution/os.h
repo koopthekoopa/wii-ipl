@@ -82,7 +82,8 @@ OSTick  OSGetTick();
 void    OSSleepTicks(OSTime ticks);
 
 BOOL    OSDisableInterrupts();
-BOOL    OSRestoreInterrupts(BOOL old);
+BOOL    OSEnableInterrupts();
+BOOL    OSRestoreInterrupts(BOOL level);
 
 void    OSReturnToMenu();
 

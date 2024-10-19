@@ -21,7 +21,7 @@ typedef struct {
     u32 dummy[8];   // 0x00
 } GXTexObj;
 
-typedef struct {
+typedef struct _GXRenderModeObj {
     VITVMode    viTVmode;               // 0x00
     u16         fbWidth;                // 0x04
     u16         efbHeight;              // 0x06

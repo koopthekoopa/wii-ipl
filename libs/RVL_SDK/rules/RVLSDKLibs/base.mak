@@ -10,9 +10,6 @@ $(SDK_OBJ_PATH)/base/%.o: $(SDK_SRC_PATH)/base/%.c
 $(SDK_OBJ_PATH)/base/%.o: $(SDK_SRC_PATH)/base/%.cpp
 	$(call BuildCPPSources,$(BASE_CCPATH),$(BASE_CFLAGS),$(SDK_INC_PATHS),$(INCLUDE_ROOT))
 
-$(SDK_OBJASM_PATH)/base/%.o: $(SDK_ASM_PATH)/base/%.s
-	$(call BuildASMSources,$(INCLUDE_ROOT))
-
 $(SDK_BLD_PATH)/base.a: $(BASE_OBJECTS)
 	$(call LinkLibrary,$(BASE_CCPATH),$^,$@)
 

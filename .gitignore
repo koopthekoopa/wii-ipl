@@ -52,6 +52,8 @@ tools/*.txt
 *.log
 *.elf
 *.dol
+*.bak
+*.dtk
 objdiff.json
 *.lnk
 
