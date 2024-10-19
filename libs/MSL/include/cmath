@@ -1,0 +1,16 @@
+#ifndef MSL_CMATH_H
+#define MSL_CMATH_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#define M_PI 3.141592653589793f
+
+int abs(int x);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // MSL_CMATH_H

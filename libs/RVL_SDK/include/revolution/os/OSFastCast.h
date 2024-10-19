@@ -1,4 +1,4 @@
-#ifndef REVOLUTION_OS_FAST_CASE_H
+#ifndef REVOLUTION_OS_FAST_CAST_H
 #define REVOLUTION_OS_FAST_CAST_H
 
 #include <decomp/decomp_ide.h>
@@ -9,7 +9,7 @@ extern "C" {
 #endif
 
 static void OSInitFastCast() {
-    asm {
+    asm volatile {
         li      r3, 4
         oris    r3, r3, 4
         mtspr   0x392, r3
@@ -26,6 +26,52 @@ static void OSInitFastCast() {
         oris    r3, r3, 7
         mtspr   0x395, r3
     }
+}
+
+static f32 __OSu16tof32(register const u16* arg) {
+    register f32 ret;
+    asm { psq_l ret, 0(arg), 1, 3 }
+    return ret;
+}
+
+static void OSu16tof32(const u16* in, f32* out) {
+    *out = __OSu16tof32(in);
+}
+
+static u16 __OSf32tou16(register f32 arg) {
+    f32 a;
+    register f32* ptr = &a;
+    u16 r;
+    asm { psq_st arg, 0(ptr), 1, 3 }
+    r = *(u16*)ptr;
+    return r;
+}
+
+static void OSf32tou16(const f32* in, u16* out) {
+    *out = __OSf32tou16(*in);
+}
+
+static f32 __OSs16tof32(register const s16* arg) {
+    register f32 ret;
+    asm { psq_l ret, 0(arg), 1, 5 }
+    return ret;
+}
+
+static void OSs16tof32(const s16* in, f32* out) {
+    *out = __OSs16tof32(in);
+}
+
+static s16 __OSf32tos16(register f32 arg) {
+    f32 a;
+    register f32* ptr = &a;
+    s16 r;
+    asm { psq_st arg, 0(ptr), 1, 5 }
+    r = *(s16*)ptr;
+    return r;
+}
+
+static void OSf32tos16(const f32* in, s16* out) {
+    *out = __OSf32tos16(*in);
 }
 
 #ifdef __cplusplus

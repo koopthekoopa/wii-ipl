@@ -1,24 +1,24 @@
 #ifndef MSL_CSTRING_H
 #define MSL_CSTRING_H
 
-#include <string.h>
+#include <size_t.h>
+#include <MSL/memory.h>
 
 #ifdef __cplusplus
+extern "C" {
+#endif
 
-namespace std {
-    // MSL/memory.h
-    using   ::memcpy;
-    using   ::memset;
-    
-    using   ::stricmp;
-    using   ::strncpy;
-    using   ::strlen;
+char*   stricmp(char* dst, const char* src);
 
-    using   ::sprintf;
-} // namespace std
+char*   strncpy(char* dst, const char* src, size_t length);
+char*   strncat(char* dst, const char* src, size_t length);
 
+size_t  strlen(const char* str);
+
+int     sprintf(char* buffer, const char* format, ...);
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif // MSL_CSTRING_H
-
-

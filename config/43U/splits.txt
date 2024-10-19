@@ -2423,6 +2423,19 @@ libs/NW4R/db/db_exception.cpp:
 	.sdata      start:0x81697DC0 end:0x81697DF8
 	.sbss       start:0x81698F98 end:0x81698FA0
 
+libs/NW4R/math/math_arithmetic.cpp:
+	.text       start:0x8151E538 end:0x8151E5B4
+	.sdata2     start:0x81695488 end:0x81695490
+
+libs/NW4R/math/math_triangular.cpp:
+	.text       start:0x8151E5B4 end:0x8151E824
+	.data       start:0x816705A8 end:0x816716C0
+	.sdata2     start:0x81695490 end:0x816954B0
+
+libs/NW4R/math/math_types.cpp:
+	.text       start:0x8151E824 end:0x8151E964
+	.sdata2     start:0x816954B0 end:0x816954B8
+
 libs/RVL_SDK/os/__ppc_eabi_init.cpp:
 	.init       start:0x813301D8 end:0x81330230
 	.text       start:0x81538608 end:0x815386BC

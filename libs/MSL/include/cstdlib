@@ -1,14 +1,14 @@
 #ifndef MSL_CSTDLIB_H
 #define MSL_CSTDLIB_H
 
-#include <stdlib.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+long int strtol(const char* str, char** endptr, int base);
 
 #ifdef __cplusplus
-
-namespace std {
-    using   ::strtol;
-} // namespace std
-
+}
 #endif
 
 #endif // MSL_CSTDLIB_H
