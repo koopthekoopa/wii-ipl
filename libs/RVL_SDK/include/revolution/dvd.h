@@ -23,6 +23,8 @@ typedef struct {
     u32     gcMagic;    // GameCube disc magic
 } DVDDiskID;
 
+BOOL __DVDTestAlarm(OSAlarm*);
+
 #ifdef __cplusplus
 }
 #endif

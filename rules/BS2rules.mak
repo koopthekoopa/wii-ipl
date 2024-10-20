@@ -17,7 +17,7 @@ BS2_ELF_ADDRESS		= 0x81330000
 BS2_IMAGE_SIZE		= 0x3B0000
 
 # for libraries
-BS2_CMN_CFLAGS	=	-O4,s -ipa file $(COMMON_CCFLAGS) -sym on
+BS2_CMN_CFLAGS	=	-O4,s -ipa file $(COMMON_CCFLAGS)
 BS2_CMN_CCPATH	=	$(CW_GC_30A52)
 
 # libraries

@@ -2513,6 +2513,40 @@ libs/NW4R/lyt/lyt_common.cpp:
 	.sdata2     start:0x816955C0 end:0x816955D0
 	.sbss       start:0x81698FD0 end:0x81698FD8
 
+libs/RVL_SDK/base/PPCArch.c:
+	.text       start:0x8152B340 end:0x8152B4B0
+	.data       start:0x81671C60 end:0x81671C98
+
+libs/RVL_SDK/os/OS.c:
+	.bss        start:0x811151C0 end:0x81115230
+	.text       start:0x8152B4B0 end:0x8152C88C
+	.data       start:0x81671C98 end:0x81672088
+	.sdata      start:0x81697E08 end:0x81697E38
+	.sbss       start:0x81698FD8 end:0x81699020
+
+libs/RVL_SDK/os/OSAlarm.c:
+	.text       start:0x8152C88C end:0x8152D070
+	.data       start:0x81672088 end:0x81672098
+	.sbss       start:0x81699020 end:0x81699028
+
+libs/RVL_SDK/os/OSAlloc.c:
+	.text       start:0x8152D070 end:0x8152D378
+	.sdata      start:0x81697E38 end:0x81697E40
+	.sbss       start:0x81699028 end:0x81699038
+
+libs/RVL_SDK/os/OSArena.c:
+	.text       start:0x8152D378 end:0x8152D440
+	.sdata      start:0x81697E40 end:0x81697E48
+	.sbss       start:0x81699038 end:0x81699040
+
+libs/RVL_SDK/os/OSAudioSystem.c:
+	.text       start:0x8152D440 end:0x8152D8F4
+	.data       start:0x81672098 end:0x81672118
+
+libs/RVL_SDK/os/OSCache.c:
+	.text       start:0x8152D8F4 end:0x8152DCEC
+	.data       start:0x81672118 end:0x81672350
+
 libs/RVL_SDK/os/__ppc_eabi_init.cpp:
 	.init       start:0x813301D8 end:0x81330230
 	.text       start:0x81538608 end:0x815386BC

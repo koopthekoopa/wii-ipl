@@ -93,10 +93,13 @@ BOOL    __OSSyncSram();
 #include <revolution/os/OSFastCast.h>
 #include <revolution/os/OSContext.h>
 #include <revolution/os/OSCache.h>
+#include <revolution/os/OSException.h>
 #include <revolution/os/OSMutex.h>
 #include <revolution/os/OSThread.h>
 #include <revolution/os/OSMessage.h>
+#include <revolution/os/OSReset.h>
 #include <revolution/os/OSResetSW.h>
+#include <revolution/os/OSTime.h>
 
 #ifdef __cplusplus
 }

@@ -25,6 +25,11 @@ struct OSAlarm {
     void*           userData;   // 0x28
 };
 
+typedef struct OSAlarmQueue {
+    OSAlarm* head; // 0x00
+    OSAlarm* tail; // 0x04
+} OSAlarmQueue;
+
 void OSCreateAlarm(OSAlarm* pAlarm);
 void    OSSetAlarm(OSAlarm* alarm, OSTime tick, OSAlarmHandler handler);
 
