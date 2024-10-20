@@ -133,11 +133,11 @@ namespace ipl {
                     return nand_error_handling(result);
                 }
                 else {
-                    if (System::getNand()->getDescriptor() < 0) {
+                    if (System::getNandManager()->getDescriptor() < 0) {
                         handle = NULL;
                     }
                     else {
-                        handle = System::getNand()->getArc();
+                        handle = System::getNandManager()->getArc();
                     }
 
                     return ARCOpen(handle, msFileName, &mArcFile) == TRUE;
@@ -175,13 +175,13 @@ namespace ipl {
                 else {
                     arcOffset = ARCGetStartOffset(&mArcFile);
 
-                    result = ES_SeekContentFile(System::getNand()->getDescriptor(), mFileOffset + arcOffset + offset, 0);
+                    result = ES_SeekContentFile(System::getNandManager()->getDescriptor(), mFileOffset + arcOffset + offset, 0);
                     if (result < 0) {
                         System::err_log(ES, result, 229);
                         System::err_display(MESG_ERR_CONTENT);
                     }
 
-                    result = ES_ReadContentFile(System::getNand()->getDescriptor(), buffer, length);
+                    result = ES_ReadContentFile(System::getNandManager()->getDescriptor(), buffer, length);
                     if (result < 0) {
                         System::err_log(ES, result, 237);
                         System::err_display(MESG_ERR_CONTENT);

@@ -100,7 +100,9 @@ BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(TMCJPEG_ROOT)/$(BUILD_ROOT)/tmccjpeg.a \
 						$(NW4R_ROOT)/$(BUILD_ROOT)/libnw4r_snd.a \
 						$(NW4R_ROOT)/$(BUILD_ROOT)/libnw4r_ut.a \
+						$(NW4R_ROOT)/$(BUILD_ROOT)/libnw4r_db.a \
 						$(NW4R_ROOT)/$(BUILD_ROOT)/libnw4r_math.a \
+						$(NW4R_ROOT)/$(BUILD_ROOT)/libnw4r_lyt.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/base.a \
 						$(REVOLUTION_SDK_ROOT)/$(BUILD_ROOT)/os.a \
 						$(RUNTIME_ROOT)/$(BUILD_ROOT)/Runtime.PPCEABI.H.a

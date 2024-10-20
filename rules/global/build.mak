@@ -1,3 +1,10 @@
+# $(1) = Depend file
+ifneq ($(OS),Windows_NT)
+define FixDepend
+	@$(PY) $(FIX_DEP) $(subst .o,.d,$(1)) $(subst .o,.d,$(1))
+endef
+endif
+
 # $(1) = Include Path
 # $(2) = CC Path
 define BuildASMSources
@@ -14,7 +21,7 @@ define BuildCSources
 	@echo Compiling $<...
 	@mkdir -p $(dir $@)
 	@$(WIBO) $(1)/$(CC) -lang c $(2) -DIPL=$(VERSION) $(OBJDIFF_FLAG) -I- -i $(4) $(foreach INC,$(3),-ir $(INC)) -nodefaults -MD -c -o $(dir $@) $<
-	@$(PY) $(FIX_DEP) $(subst .o,.d,$@) $(subst .o,.d,$@)
+	@$(call FixDepend,$@)
 endef
 
 # $(1) = CC Path
@@ -25,7 +32,7 @@ define BuildCPPSources
 	@echo Compiling $<...
 	@mkdir -p $(dir $@)
 	@$(WIBO) $(1)/$(CC) -lang c++ $(2) -DIPL=$(VERSION) $(OBJDIFF_FLAG) -I- -i $(4) $(foreach INC,$(3),-ir $(INC)) -nodefaults -MD -c -o $(dir $@) $<
-	@$(PY) $(FIX_DEP) $(subst .o,.d,$@) $(subst .o,.d,$@)
+	@$(call FixDepend,$@)
 endef
 
 # $(1) = CC Path

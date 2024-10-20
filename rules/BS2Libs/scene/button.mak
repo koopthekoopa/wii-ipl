@@ -3,7 +3,7 @@ BUTTON_OBJECTS	=	$(BS2_SPLIT_PATH)/scene/button/iplUrlProcessor.o \
 					$(BS2_SPLIT_PATH)/scene/button/iplButton.o \
 					$(BS2_SPLIT_PATH)/scene/button/iplArrow.o
 
-ALL_OBJECTS += $(BUTTON_OBJECTS)
+DEPENDENCIES += $(BUTTON_OBJECTS:.o=.d)
 
 $(BS2_OBJ_PATH)/scene/button/%.o: $(BS2_SRC_PATH)/scene/button/%.cpp
 	$(call BuildCPPSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

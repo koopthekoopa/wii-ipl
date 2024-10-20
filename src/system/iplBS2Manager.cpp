@@ -387,7 +387,7 @@ namespace ipl {
                 snd::getSystem()->calc();
             }
 
-            System::getNand()->closeContentsAll();
+            System::getNandManager()->closeContentsAll();
 
             VISetBlack(TRUE);
             VIFlush();

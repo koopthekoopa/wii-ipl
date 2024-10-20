@@ -54,7 +54,7 @@ VFF_OBJECTS =	$(REVOEX_SPLIT_PATH)/vf/pf_clib.o \
 				$(REVOEX_SPLIT_PATH)/vf/nand_drv.o \
 				$(REVOEX_SPLIT_PATH)/vf/sd_drv.o
 
-ALL_OBJECTS += $(VFF_OBJECTS)
+DEPENDENCIES += $(VFF_OBJECTS:.o=.d)
 
 $(REVOEX_OBJ_PATH)/vf/%.o: $(REVOEX_SRC_PATH)/vf/%.c
 	$(call BuildCSources,$(REVOEX_CCPATH),$(REVOEX_CFLAGS),$(REVOEX_INC_PATHS),$(INCLUDE_ROOT))

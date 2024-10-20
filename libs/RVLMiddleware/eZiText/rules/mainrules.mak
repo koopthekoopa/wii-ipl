@@ -31,7 +31,7 @@ ZI8_OBJECTS     	=	$(ZI8_SPLIT_PATH)/zi8etx.o \
                         $(ZI8_SPLIT_PATH)/zi8oemdata.o \
                         $(ZI8_SPLIT_PATH)/zi8prepare.o
 
-ALL_OBJECTS += $(ZI8_OBJECTS)
+DEPENDENCIES += $(ZI8_OBJECTS:.o=.d)
 
 $(ZI8_OBJ_PATH)/%.o: $(ZI8_SRC_PATH)/%.c
 	$(call BuildCSources,$(ZI8_CCPATH),$(ZI8_CFLAGS),$(ZI8_INC_PATHS),$(INCLUDE_ROOT))

@@ -3,7 +3,7 @@ CHANNEL_SELECT_OBJECTS    =	$(BS2_SPLIT_PATH)/scene/channelSelect/iplChannelSele
                             $(BS2_SPLIT_PATH)/scene/channelSelect/iplChannelObj.o \
                             $(BS2_SPLIT_PATH)/scene/channelSelect/iplChannelTitle.o
 
-ALL_OBJECTS += $(CHANNEL_SELECT_OBJECTS)
+DEPENDENCIES += $(CHANNEL_SELECT_OBJECTS:.o=.d)
 
 $(BS2_OBJ_PATH)/scene/channelSelect/%.o: $(BS2_SRC_PATH)/scene/channelSelect/%.cpp
 	$(call BuildCPPSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

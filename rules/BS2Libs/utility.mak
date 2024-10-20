@@ -9,7 +9,7 @@ UTILITY_OBJECTS	=	$(BS2_OBJ_PATH)/utility/iplTree.o \
 					$(BS2_SPLIT_PATH)/utility/iplESMisc.o \
 					$(BS2_SPLIT_PATH)/utility/iplCSFlags.o
 
-ALL_OBJECTS += $(UTILITY_OBJECTS)
+DEPENDENCIES += $(UTILITY_OBJECTS:.o=.d)
 
 $(BS2_OBJ_PATH)/utility/%.o: $(BS2_SRC_PATH)/utility/%.cpp
 	$(call BuildCPPSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

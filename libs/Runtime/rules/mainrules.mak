@@ -14,7 +14,7 @@ RUNTIME_OBJECTS     =	$(RUNTIME_OBJ_PATH)/__mem.o \
                         $(RUNTIME_OBJ_PATH)/__init_cpp_exceptions.o \
                         $(RUNTIME_OBJ_PATH)/Gecko_ExceptionPPC.o
 
-ALL_OBJECTS += $(RUNTIME_OBJECTS)
+DEPENDENCIES += $(RUNTIME_OBJECTS:.o=.d)
 
 $(RUNTIME_OBJ_PATH)/%.o: $(RUNTIME_SRC_PATH)/%.c
 	$(call BuildCSources,$(RUNTIME_CCPATH),$(RUNTIME_CFLAGS),$(RUNTIME_INC_PATHS),$(INCLUDE_ROOT))

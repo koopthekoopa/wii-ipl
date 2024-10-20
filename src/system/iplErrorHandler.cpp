@@ -132,7 +132,7 @@ namespace ipl {
             pTextBox->SetString(ErrorMsg.getMessage(mMessageID));
 
             // Prepare for error screen.
-            System::getGlobalFader()->fadeOut();
+            System::getFader()->fadeOut();
             System::err_run();
         }
     }
@@ -150,8 +150,8 @@ namespace ipl {
      * @note Size: 0x90
      */
     void ErrorHandler::calc() {
-        if (mReady == FALSE && System::getGlobalFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
-            System::getGlobalFader()->fadeIn();
+        if (mReady == FALSE && System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+            System::getFader()->fadeIn();
             mReady = TRUE;
         }
 

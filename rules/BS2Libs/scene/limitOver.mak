@@ -1,6 +1,6 @@
 LIMIT_OVER_OBJECTS	=	$(BS2_SPLIT_PATH)/scene/limitOver/iplLimitOver.o
 
-ALL_OBJECTS += $(LIMIT_OVER_OBJECTS)
+DEPENDENCIES += $(LIMIT_OVER_OBJECTS:.o=.d)
 
 $(BS2_OBJ_PATH)/scene/limitOver/%.o: $(BS2_SRC_PATH)/scene/limitOver/%.cpp
 	$(call BuildCPPSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

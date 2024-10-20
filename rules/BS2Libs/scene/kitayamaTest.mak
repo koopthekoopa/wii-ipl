@@ -1,7 +1,7 @@
 KITAYAMA_OBJECTS    =	$(BS2_SPLIT_PATH)/scene/kitayamaTest/iplKitayamaTest.o \
 						$(BS2_SPLIT_PATH)/scene/kitayamaTest/nandsdworker_autotest.o
 
-ALL_OBJECTS += $(KITAYAMA_OBJECTS)
+DEPENDENCIES += $(KITAYAMA_OBJECTS:.o=.d)
 
 $(BS2_OBJ_PATH)/scene/kitayamaTest/%.o: $(BS2_SRC_PATH)/scene/kitayamaTest/%.cpp
 	$(call BuildCPPSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

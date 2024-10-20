@@ -76,7 +76,7 @@ void BS2Init() {
     SetConsoleInfo();
 
     __PADFixBits    = -1;
-    __OSInIPL       = TRUE;
+    __OSInIPL       = TRUE; // Yes we are in the IPL!
     
     __OSFPRInit();
 

@@ -22,6 +22,7 @@
 #include "system/iplSaveData.h"
 #include "system/iplNwc24Manager.h"
 #include "system/iplPostmanManager.h"
+#include "system/iplNigaoeManager.h"
 #include "system/iplBS2Manager.h"
 
 #include "scene/iplSceneManager.h"
@@ -44,11 +45,11 @@ namespace ipl {
                     EGG::Heap*          unk_0x28;
                     EGG::Heap*          mpTreasureHeap;         // 0x2C
                     u8                  unk_0x30[0x34];
-
                     scene::Manager*     mpSceneManager;         // 0x64
                     undefined4*         unk_0x68;
-                    nand::Manager*      mpNandManager;          // 0x6C
-                    undefined           unk_0x70[0x10];
+                    nigaoe::Manager*    mpNigaoeManager;        // 0x6C
+                    nand::Manager*      mpNandManager;          // 0x70
+                    undefined           unk_0x74[0x0C];
                     message::Message*   mUnkMsg;                // 0x80
                     undefined4          unk_0x84;
                     undefined4          unk_0x88;
@@ -66,8 +67,8 @@ namespace ipl {
                     undefined4*         unk_0xB8;
                     message::Manager*   mpMessage;              // 0xBC
                     EGG::Thread*        mpUnkThread;            // 0xC0
-                    EGG::ColorFader*    mpGblFader;             // 0xC4
-                    EGG::ColorFader*    mpScnFader;             // 0xC8
+                    EGG::ColorFader*    mpFader;                // 0xC4
+                    EGG::ColorFader*    pResetFader;            // 0xC8
 
                     u8                  unk_0xCC[0x34];
 
@@ -124,25 +125,27 @@ namespace ipl {
             /** @return The "treasure" heap. */
             static EGG::Heap*           getTreasureHeap()       { return smArg.mpTreasureHeap; }
             /** @return The Scene Manager object. */
-            static scene::Manager*      getSceneMgr()           { return smArg.mpSceneManager; }
+            static scene::Manager*      getSceneManager()       { return smArg.mpSceneManager; }
+            /** @return The Mii Manager object. */
+            static nigaoe::Manager*     getMiiManager()         { return smArg.mpNigaoeManager; }
             /** @return The Content Manager object. */
-            static nand::Manager*       getNand()               { return smArg.mpNandManager; }
+            static nand::Manager*       getNandManager()        { return smArg.mpNandManager; }
             /** @return The WiiConnect24 Manager object. */
-            static nwc24::Manager*      getNwc24()              { return smArg.mpNwc24Manager; }
+            static nwc24::Manager*      getNwc24Manager()       { return smArg.mpNwc24Manager; }
             /** @return The Save Data Manager object. */
             static savedata::Manager*   getSaveData()           { return smArg.mpSaveDataManager; }
             /** @return The Error Handler object. */
-            static ErrorHandler*        getError()              { return smArg.mpErrorHandler; }
+            static ErrorHandler*        getErrorHandler()       { return smArg.mpErrorHandler; }
             /** @return The Reset Handler object. */
-            static ResetHandler*        getReset()              { return smArg.mpResetHandler; }
+            static ResetHandler*        getResetHandler()       { return smArg.mpResetHandler; }
             /** @return The Warning Handler object. */
-            static WarningHandler*      getWarning()            { return smArg.mpWarningHandler; }
+            static WarningHandler*      getWarningHandler()     { return smArg.mpWarningHandler; }
             /** @return The Postman Handler object. */
-            static postman::Manager*    getPostman()            { return smArg.mpPostmanManager; }
+            static postman::Manager*    getPostmanManager()     { return smArg.mpPostmanManager; }
             /** @return The HOME Menu object. */
-            static HomeButtonMenu*      getHomeMenu()           { return smArg.mpHomeButton; }
+            static HomeButtonMenu*      getHomeButtonMenu()     { return smArg.mpHomeButton; }
             /** @return The BS2 Manager object. */
-            static bs2::Manager*        getBS2()                { return smArg.mpBS2Manager; }
+            static bs2::Manager*        getBS2Manager()         { return smArg.mpBS2Manager; }
             /** @return The Dialog object. */
             static DialogWindow*        getDialog()             { return smArg.mpDialog; }
             /** @return The Pointer object. */
@@ -151,10 +154,10 @@ namespace ipl {
             static message::Message*    getMessage()            { return smArg.mpMessage->getMessage(); }
             /** @return something */
             static EGG::Thread*         getUnkThread()          { return smArg.mpUnkThread; }
-            /** @return The Fader object for fading out to the error handler. */
-            static EGG::ColorFader*     getGlobalFader()        { return smArg.mpGblFader; }
-            /** @return The fader object. */
-            static EGG::ColorFader*     getSceneFader()         { return smArg.mpScnFader; }
+            /** @return The Fader object */
+            static EGG::ColorFader*     getFader()              { return smArg.mpFader; }
+            /** @return The fader object for the reset handler. */
+            static EGG::ColorFader*     getResetFader()         { return smArg.pResetFader; }
             /** @return The Mii Archive Data */
             static nand::File*          getRFLArc()             { return smArg.mpFaceArcBuffer; }
             /** @return The English message data. */
@@ -182,6 +185,8 @@ namespace ipl {
             /** @return Whether the libraries needed have been created. */
             static bool                 hasLibraryCreated()     { return smArg.mbLibraryInit; }
             static bool                 isUnk_0x2B4()           { return smArg.unk_0x2B4; }
+            /** @return A boolean indicating if the user can restart their Wii console. */
+            static bool                 isResetAcceptable()     { return smArg.mbResetDisabled; }
             /** @return Whether the NAND has enough capacity. */
             static bool                 isNandFull()            { return smArg.mbIsNandFull; }
             static void                 setNandFull(bool value) { smArg.mbIsNandFull = value; }
@@ -229,10 +234,6 @@ namespace ipl {
             static s32                      getLanguage();
             /** @return The region of the System. */
             static s32                      getRegion();
-
-            /** @return A boolean indicating if the user can restart their Wii console. */
-            static bool                     isResetAcceptable();
-
             /** @return The Renderer of the IPL. */
             static GXRenderModeObj*         getRenderModeObj();
 

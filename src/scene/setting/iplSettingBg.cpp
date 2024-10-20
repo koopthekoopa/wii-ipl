@@ -19,7 +19,7 @@ namespace ipl {
          * @note Size: 0x4C
          */
         void SettingBg::prepare() {
-            mpLayoutFile = System::getNand()->readLayoutAsync(mpHeap, "setupBg.ash", false);
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(mpHeap, "setupBg.ash", false);
         }
 
         /**
@@ -33,7 +33,7 @@ namespace ipl {
             createChildScene(0x16 /* SettingButton */, this, NULL, (void*)unkID);
             createChildScene(0x13 /* SettingSelect */, this, NULL, (void*)unkID);
 
-            System::getGlobalFader()->fadeIn();
+            System::getFader()->fadeIn();
         }
 
         /**
@@ -49,7 +49,7 @@ namespace ipl {
          * @note Size: 0x50
          */
         void SettingBg::draw() {
-            if (System::getSceneMgr()->isDrawingScene() == TRUE) {
+            if (System::getSceneManager()->isDrawingScene() == TRUE) {
                 utility::Graphics::setOrtho();
                 mpLayout->draw();
             }

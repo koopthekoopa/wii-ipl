@@ -53,7 +53,7 @@ SYSTEM_OBJECTS	=	$(BS2_SPLIT_PATH)/system/enctable_stuff.o \
 					$(DATA_OUT_ROOT)/ipl_error_chn.bmg.o \
 					$(DATA_OUT_ROOT)/fatalDlg.ash.o
 
-ALL_OBJECTS += $(SYSTEM_OBJECTS)
+DEPENDENCIES += $(SYSTEM_OBJECTS:.o=.d)
 
 $(BS2_OBJ_PATH)/system/%.o: $(BS2_SRC_PATH)/system/%.c
 	$(call BuildCSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

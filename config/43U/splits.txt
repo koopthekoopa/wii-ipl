@@ -2436,6 +2436,83 @@ libs/NW4R/math/math_types.cpp:
 	.text       start:0x8151E824 end:0x8151E964
 	.sdata2     start:0x816954B0 end:0x816954B8
 
+libs/NW4R/lyt/lyt_pane.cpp:
+	.text       start:0x8151E964 end:0x8151FB98
+	.ctors      start:0x8160D260 end:0x8160D264
+	.data       start:0x816716C0 end:0x81671768
+	.sdata2     start:0x816954B8 end:0x816954E0
+	.sbss       start:0x81698FA0 end:0x81698FA8
+
+libs/NW4R/lyt/lyt_group.cpp:
+	.text       start:0x8151FB98 end:0x8151FEB8
+	.data       start:0x81671768 end:0x81671778
+
+libs/NW4R/lyt/lyt_layout.cpp:
+	.text       start:0x8151FEB8 end:0x81520B28
+	.data       start:0x81671778 end:0x816717B0
+	.sdata2     start:0x816954E0 end:0x816954E8
+	.sbss       start:0x81698FA8 end:0x81698FB0
+
+libs/NW4R/lyt/lyt_picture.cpp:
+	.text       start:0x81520B28 end:0x8152135C
+	.ctors      start:0x8160D264 end:0x8160D268
+	.data       start:0x816717B0 end:0x81671860
+	.sdata2     start:0x816954E8 end:0x81695500
+	.sbss       start:0x81698FB0 end:0x81698FB8
+
+libs/NW4R/lyt/lyt_textbox.cpp:
+	.text       start:0x8152135C end:0x81522F1C
+	.ctors      start:0x8160D268 end:0x8160D26C
+	.data       start:0x81671860 end:0x816719A0
+	.sdata2     start:0x81695500 end:0x81695528
+	.sdata      start:0x81697DF8 end:0x81697E00
+	.sbss       start:0x81698FB8 end:0x81698FC0
+
+libs/NW4R/lyt/lyt_window.cpp:
+	.text       start:0x81522F1C end:0x81525B74
+	.ctors      start:0x8160D26C end:0x8160D270
+	.data       start:0x816719A0 end:0x81671AA0
+	.sdata2     start:0x81695528 end:0x81695558
+	.sbss       start:0x81698FC0 end:0x81698FC8
+
+libs/NW4R/lyt/lyt_bounding.cpp:
+	.text       start:0x81525B74 end:0x81525C20
+	.ctors      start:0x8160D270 end:0x8160D274
+	.data       start:0x81671AA0 end:0x81671B08
+	.sbss       start:0x81698FC8 end:0x81698FD0
+
+libs/NW4R/lyt/lyt_material.cpp:
+	.text       start:0x81525C20 end:0x815291A8
+	.data       start:0x81671B08 end:0x81671B70
+	.sdata2     start:0x81695558 end:0x81695578
+	.sbss2      start:0x81696010 end:0x81696018
+
+libs/NW4R/lyt/lyt_drawinfo.cpp:
+	.text       start:0x815291A8 end:0x8152925C
+	.data       start:0x81671B70 end:0x81671B80
+	.sdata2     start:0x81695578 end:0x81695580
+
+libs/NW4R/lyt/lyt_animation.cpp:
+	.text       start:0x8152925C end:0x8152A0D0
+	.data       start:0x81671B80 end:0x81671C30
+	.sdata2     start:0x81695580 end:0x816955B0
+
+libs/NW4R/lyt/lyt_resourceAccessor.cpp:
+	.text       start:0x8152A0D0 end:0x8152A128
+	.data       start:0x81671C30 end:0x81671C48
+
+libs/NW4R/lyt/lyt_arcResourceAccessor.cpp:
+	.text       start:0x8152A128 end:0x8152A644
+	.data       start:0x81671C48 end:0x81671C60
+	.sdata2     start:0x816955B0 end:0x816955C0
+	.sdata      start:0x81697E00 end:0x81697E08
+
+libs/NW4R/lyt/lyt_common.cpp:
+	.bss        start:0x811151A0 end:0x811151C0
+	.text       start:0x8152A644 end:0x8152B340
+	.sdata2     start:0x816955C0 end:0x816955D0
+	.sbss       start:0x81698FD0 end:0x81698FD8
+
 libs/RVL_SDK/os/__ppc_eabi_init.cpp:
 	.init       start:0x813301D8 end:0x81330230
 	.text       start:0x81538608 end:0x815386BC

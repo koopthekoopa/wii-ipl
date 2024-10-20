@@ -6,7 +6,7 @@ SD_MENU_OBJS	=	$(BS2_SPLIT_PATH)/scene/sdChannelMenu/iplSDChannelSelect.o \
 					$(BS2_SPLIT_PATH)/scene/sdChannelMenu/iplSDMenuButton.o \
 					$(BS2_SPLIT_PATH)/scene/sdChannelMenu/iplSDMemory.o
 
-ALL_OBJECTS += 	$(SD_MENU_OBJS)
+DEPENDENCIES += 	$(SD_MENU_OBJS:.o=.d)
 
 $(BS2_OBJ_PATH)/scene/sdChannelMenu/%.o: $(BS2_SRC_PATH)/scene/sdChannelMenu/%.cpp
 	$(call BuildCPPSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

@@ -23,8 +23,8 @@ namespace ipl {
         #pragma unused(pHeap)
 
         // Prepare the fade out.
-        System::getSceneFader()->setStatus(EGG::Fader::STATUS_PREPARE_OUT);
-        System::getSceneFader()->calc();
+        System::getResetFader()->setStatus(EGG::Fader::STATUS_PREPARE_OUT);
+        System::getResetFader()->calc();
 
         // Set the callbacks.
         OSSetResetCallback((OSResetCallback)cbReset);
@@ -36,8 +36,8 @@ namespace ipl {
      * @note Size: 0x24
      */
     void ResetHandler::cbReset() {
-        if (System::getReset()->getType() == 0) {
-            System::getReset()->changeType(1);
+        if (System::getResetHandler()->getType() == 0) {
+            System::getResetHandler()->changeType(1);
         }
     }
 
@@ -46,8 +46,8 @@ namespace ipl {
      * @note Size: 0x24
      */
     void ResetHandler::cbPowerOff() {
-        if (System::getReset()->getType() == 0) {
-            System::getReset()->changeType(2);
+        if (System::getResetHandler()->getType() == 0) {
+            System::getResetHandler()->changeType(2);
         }
     }
 
@@ -98,8 +98,8 @@ namespace ipl {
      * @note Size: 0x24
      */
     void ResetHandler::cbFatalPowerOff() {
-        if (System::getReset()->getFatalState() == FATAL_STATE_NONE) {
-            System::getReset()->changeFatalState(FATAL_STATE_INIT);
+        if (System::getResetHandler()->getFatalState() == FATAL_STATE_NONE) {
+            System::getResetHandler()->changeFatalState(FATAL_STATE_INIT);
         }
     }
 
@@ -120,17 +120,16 @@ namespace ipl {
         switch(mFatalState) {
             // Fade out
             case FATAL_STATE_FADE: {
-                if (System::getSceneFader()->fadeOut()) {
-                    System::getSceneFader()->fadeOut();
+                if (System::getResetFader()->fadeOut()) {
+                    System::getResetFader()->fadeOut();
 
                     mFatalState = FATAL_STATE_VIDEO;
                 }
                 break;
             }
             // Shutdown the video
-            // (no need as it's already doing that in `FATAL_STATE_SYSTEM`)
             case FATAL_STATE_VIDEO: {
-                if (System::getSceneFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+                if (System::getResetFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
                     VISetBlack(TRUE);
                     VIFlush();
 
@@ -140,6 +139,7 @@ namespace ipl {
             }
             // Shutdown the system
             case FATAL_STATE_SYSTEM: {
+                // Shutdown the video... again?
                 VISetBlack(TRUE);
                 VIFlush();
 

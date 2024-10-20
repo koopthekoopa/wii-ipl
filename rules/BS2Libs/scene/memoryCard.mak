@@ -6,7 +6,7 @@ MEM_CARD_OBJECTS	=	$(BS2_SPLIT_PATH)/scene/memoryCard/iplMemoryCard.o \
 						$(BS2_SPLIT_PATH)/scene/memoryCard/iplGCTextBalloon.o \
 						$(BS2_SPLIT_PATH)/scene/memoryCard/CardSequence.o
 
-ALL_OBJECTS += $(MEM_CARD_OBJECTS)
+DEPENDENCIES += $(MEM_CARD_OBJECTS:.o=.d)
 
 $(BS2_OBJ_PATH)/scene/memoryCard/%.o: $(BS2_SRC_PATH)/scene/memoryCard/%.c
 	$(call BuildCSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

@@ -100,7 +100,7 @@ namespace ipl {
          * @note Size: 0x4C
          */
         void skHealth::prepare() {
-            mpLayoutFile = System::getNand()->readLayoutAsync(System::getUnk28Heap(), "health.ash", true);
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(System::getUnk28Heap(), "health.ash", true);
         }
 
         /**
@@ -235,8 +235,8 @@ namespace ipl {
             mpLayout->start(ANIM_FADE_IN);
             mpLayout->calc();
 
-            System::getGlobalFader()->setStatus(EGG::Fader::STATUS_PREPARE_OUT);
-            System::getGlobalFader()->calc();
+            System::getFader()->setStatus(EGG::Fader::STATUS_PREPARE_OUT);
+            System::getFader()->calc();
 
             System::getPointer()->setVisible(false);
         }
@@ -323,15 +323,15 @@ namespace ipl {
                     System::setUnk_0x2BF(true);
                 }
 
-                System::getGlobalFader()->fadeOut();
+                System::getFader()->fadeOut();
             }
 
             if (System::unkBool()
             || (System::hasCreatedAfter() && System::isNandFull())
             || System::isSafeMode()) {
-                if (System::getGlobalFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+                if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
                     System::getPointer()->setVisible(true);
-                    System::getReset()->enableResetToMenu(TRUE);
+                    System::getResetHandler()->enableResetToMenu(TRUE);
 
                     for (int i = 0; i < 1; i++) {
                         reserveAllSceneDestruction(4, NULL);
@@ -349,7 +349,7 @@ namespace ipl {
          * @note Size: 0x50
          */
         void skHealth::draw() {
-            if (System::getSceneMgr()->isDrawingScene() == TRUE) {
+            if (System::getSceneManager()->isDrawingScene() == TRUE) {
                 utility::Graphics::setOrtho();
                 mpLayout->draw();
             }

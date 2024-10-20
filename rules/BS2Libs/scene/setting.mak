@@ -13,7 +13,7 @@ SETTING_OBJS	=	$(BS2_SPLIT_PATH)/scene/setting/iplSetting.o \
 					$(BS2_SPLIT_PATH)/scene/setting/iplSettingButton.o \
 					$(BS2_SPLIT_PATH)/scene/setting/iplSettingSelect.o \
 
-ALL_OBJECTS += 	$(SETTING_OBJS)
+DEPENDENCIES += 	$(SETTING_OBJS:.o=.d)
 
 $(BS2_OBJ_PATH)/scene/setting/%.o: $(BS2_SRC_PATH)/scene/setting/%.c
 	$(call BuildCSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

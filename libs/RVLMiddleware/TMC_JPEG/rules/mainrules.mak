@@ -8,7 +8,7 @@ TMCJPG_CFLAGS      	=	-O4,p -enum int -inline auto -proc gekko -fp hardware -RTT
 TMCJPG_CCPATH      	=	$(CW_GC_30A52)
 TMCJPG_OBJECTS     	=	$(TMCJPG_SPLIT_PATH)/decapi.o
 
-ALL_OBJECTS += $(TMCJPG_OBJECTS)
+DEPENDENCIES += $(TMCJPG_OBJECTS:.o=.d)
 
 $(TMCJPG_OBJ_PATH)/%.o: $(TMCJPG_SRC_PATH)/%.c
 	$(call BuildCSources,$(TMCJPG_CCPATH),$(TMCJPG_CFLAGS),$(TMCJPG_INC_PATHS),$(INCLUDE_ROOT))

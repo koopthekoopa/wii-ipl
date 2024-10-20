@@ -43,7 +43,7 @@ namespace ipl {
             mpLayout->calc();
 
             System::getPointer()->setVisible(false);
-            System::getGlobalFader()->fadeIn();
+            System::getFader()->fadeIn();
         }
 
         /**
@@ -59,7 +59,7 @@ namespace ipl {
          * @note Size: 0x44
          */
         SceneReturn BackMenu::calcFadein() {
-            if (System::getGlobalFader()->getStatus() == EGG::Fader::STATUS_PREPARE_OUT) {
+            if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_OUT) {
                 return SCENE_DONE;
             }
             return SCENE_CONTINUE;
@@ -84,7 +84,7 @@ namespace ipl {
          * @note Size: 0x1C
          */
         void BackMenu::initCalcFadeout() {
-            System::getGlobalFader()->fadeOut();
+            System::getFader()->fadeOut();
         }
 
         /**
@@ -92,14 +92,14 @@ namespace ipl {
          * @note Size: 0xE8
          */
         SceneReturn BackMenu::calcFadeout() {
-            if (System::getGlobalFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+            if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
                 System::setUnk_0x2BE(true);
                 System::setUnk_0x2BF(true);
             }
 
             if (System::unkBool() || (System::hasCreatedAfter() && System::isNandFull())) {
                 System::getPointer()->setVisible(true);
-                System::getReset()->enableResetToMenu(TRUE);
+                System::getResetHandler()->enableResetToMenu(TRUE);
                 
                 reserveAllSceneDestruction(4, NULL);
                 
@@ -113,7 +113,7 @@ namespace ipl {
          * @note Size: 0x50
          */
         void BackMenu::draw() {
-            if (System::getSceneMgr()->isDrawingScene() == TRUE) {
+            if (System::getSceneManager()->isDrawingScene() == TRUE) {
                 utility::Graphics::setOrtho();
                 mpLayout->draw();
             }

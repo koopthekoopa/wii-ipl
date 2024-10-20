@@ -25,7 +25,7 @@ KEYBOARD_OBJS	=	$(BS2_SPLIT_PATH)/keyboard/pckeyboard.o \
 					$(BS2_SPLIT_PATH)/keyboard/HWKeyboard.o \
 					$(BS2_SPLIT_PATH)/keyboard/layout.o
 
-ALL_OBJECTS += 	$(KEYBOARD_OBJS)
+DEPENDENCIES += 	$(KEYBOARD_OBJS:.o=.d)
 
 $(BS2_OBJ_PATH)/keyboard/%.o: $(BS2_SRC_PATH)/keyboard/%.cpp
 	$(call BuildCPPSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

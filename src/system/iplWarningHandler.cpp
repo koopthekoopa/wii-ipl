@@ -24,14 +24,14 @@ namespace ipl {
         mType = type;
         mMessageID = msgId;
 
-        System::getHomeMenu()->disable();
+        System::getHomeButtonMenu()->disable();
 
         if (mType != NONE) {
             mpDialog->callBtn1(msgId, MESG_CMN_OK);
             System::warning_run();
         }
 
-        System::getHomeMenu()->enable();
+        System::getHomeButtonMenu()->enable();
     }
 
     /**

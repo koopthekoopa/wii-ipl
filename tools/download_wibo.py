@@ -2,7 +2,7 @@
 
 import urllib.request
 
-def extractURL(url):
+def extractURL(url, fileName):
     response = urllib.request.urlopen(url).read()
     file = open(fileName, "wb")
     file.write(response)

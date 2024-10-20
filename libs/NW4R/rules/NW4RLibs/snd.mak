@@ -57,7 +57,7 @@ NW_SND_OBJECTS =	$(NW4R_SPLIT_PATH)/snd/snd_AxManager.o \
 					$(NW4R_SPLIT_PATH)/snd/snd_WsdPlayer.o \
 					$(NW4R_SPLIT_PATH)/snd/snd_WsdTrack.o
 
-ALL_OBJECTS += $(NW_SND_OBJECTS)
+DEPENDENCIES += $(NW_SND_OBJECTS:.o=.d)
 
 $(NW4R_OBJ_PATH)/snd/%.o: $(NW4R_SRC_PATH)/snd/%.cpp
 	$(call BuildCPPSources,$(NW4R_CCPATH),$(NW4R_CFLAGS),$(NW4R_INC_PATHS),$(INCLUDE_ROOT))

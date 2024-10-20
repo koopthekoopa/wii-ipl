@@ -8,7 +8,7 @@ NAKAMURA_TEST_OBJS	=	$(BS2_SPLIT_PATH)/scene/nakamuraTest/iplContest.o \
 						$(BS2_SPLIT_PATH)/scene/nakamuraTest/iplNakamuraTest.o \
 						$(BS2_SPLIT_PATH)/scene/nakamuraTest/iplNetSetup.o
 
-ALL_OBJECTS += $(NAKAMURA_TEST_OBJS)
+DEPENDENCIES += $(NAKAMURA_TEST_OBJS:.o=.d)
 
 $(BS2_OBJ_PATH)/nakamuraTest/%.o: $(BS2_SRC_PATH)/nakamuraTest/%.c
 	$(call BuildCSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

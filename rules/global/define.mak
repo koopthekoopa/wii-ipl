@@ -5,10 +5,12 @@ ifneq ($(OS),Windows_NT)
 WIBO	= $(TOOLS_ROOT)/wibo
 PY		= python3
 EXEC	=
+FIX_DEP	= $(TOOLS_ROOT)/transform_dep.py
 else
 WIBO	=
 PY		= python
 EXEC	= .exe
+FIX_DEP	= 
 endif
 
 ifeq ($(OBJDIFF),TRUE)
@@ -33,8 +35,6 @@ ELF2BS			= elf2bs$(EXEC)
 MAKESEL			= makesel$(EXEC)
 IPL2DTK			= ipl2dtk$(EXEC)
 EXTRACT_DATA	= extract_bin.py
-
-FIX_DEP			= $(TOOLS_ROOT)/transform_dep.py
 
 ## Misc defines
 DEFRULES		= mainrules

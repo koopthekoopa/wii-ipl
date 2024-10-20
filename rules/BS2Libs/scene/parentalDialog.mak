@@ -1,6 +1,6 @@
 PARENTAL_DLG_OBJECTS	=	$(BS2_SPLIT_PATH)/scene/parentalDialog/iplParentalDialog.o
 
-ALL_OBJECTS += $(PARENTAL_DLG_OBJECTS)
+DEPENDENCIES += $(PARENTAL_DLG_OBJECTS:.o=.d)
 
 $(BS2_OBJ_PATH)/scene/parentalDialog/%.o: $(BS2_SRC_PATH)/scene/parentalDialog/%.cpp
 	$(call BuildCPPSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

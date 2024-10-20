@@ -1,4 +1,4 @@
-ALL_OBJECTS = 
+DEPENDENCIES = 
 
 # IPL executable defines
 VERSION		:= 43U
@@ -100,11 +100,10 @@ prepare: PrepareDecomp
 -include $(RULES_ROOT)/BS2rules.mak
 
 # Inlcude dependencies
-DEPENDENCIES = $(ALL_OBJECTS:.o=.d)
 DEPENDENCIES += $(MAKECMDGOALS:.o=.d)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),prepare)
--include $(DEPENDENCIES:.d=.unix.d)
+-include $(DEPENDENCIES)
 endif
 endif
 

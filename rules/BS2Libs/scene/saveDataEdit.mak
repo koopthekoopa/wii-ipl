@@ -3,7 +3,7 @@ SAVEDATA_EDIT_OBJECTS    =	$(BS2_SPLIT_PATH)/scene/saveDataEdit/iplSaveDataBase.
 							$(BS2_SPLIT_PATH)/scene/saveDataEdit/iplSaveDataEdit.o \
 							$(BS2_SPLIT_PATH)/scene/saveDataEdit/iplWiiBannerFileInfo.o
 
-ALL_OBJECTS += $(SAVEDATA_EDIT_OBJECTS)
+DEPENDENCIES += $(SAVEDATA_EDIT_OBJECTS:.o=.d)
 
 $(BS2_OBJ_PATH)/scene/saveDataEdit/%.o: $(BS2_SRC_PATH)/scene/saveDataEdit/%.cpp
 	$(call BuildCPPSources,$(BS2_CMN_CCPATH),$(BS2_CMN_CFLAGS),$(BS2_INC_PATHS),$(INCLUDE_ROOT))

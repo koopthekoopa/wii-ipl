@@ -17,14 +17,6 @@ namespace ipl {
         memset(&smArg, 0, sizeof(Arg));
         OSCreateAlarm(&mUnkAlarm);
     }
-    
-    /**
-     * @note Address 0x81334B10
-     * @note Size 0x18
-    */
-    bool System::isResetAcceptable() {
-        return !smArg.mbResetDisabled;
-    }
 }
 
 

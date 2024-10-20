@@ -28,7 +28,7 @@ namespace ipl {
          */
         void Base::do_prepare() {
             prepare();
-            System::getNand()->sendToken(mNandToken);
+            System::getNandManager()->sendToken(mNandToken);
         }
 
         /**
@@ -67,7 +67,7 @@ namespace ipl {
         void Base::do_destroy() {
             destroy();
             if (mCommand.unk_0x00 != 0) {
-                System::getSceneMgr()->pushCommand(mCommand);
+                System::getSceneManager()->pushCommand(mCommand);
                 mCommand.clear();
             }
         }
@@ -86,7 +86,7 @@ namespace ipl {
             command.unk_0x14 = pArg2;
             command.unk_0x18 = pArg3;
 
-            System::getSceneMgr()->pushCommand(command);
+            System::getSceneManager()->pushCommand(command);
         }
 
         /**
@@ -104,7 +104,7 @@ namespace ipl {
             command.unk_0x14 = (Base*)getChild();
             command.unk_0x18 = pArg1;
 
-            System::getSceneMgr()->pushCommand(command);
+            System::getSceneManager()->pushCommand(command);
         }
 
         /**
@@ -117,7 +117,7 @@ namespace ipl {
             mCommand.unk_0x0C = arg0;
             mCommand.unk_0x18 = pArg1;
 
-            System::getSceneMgr()->setDestructSync();
+            System::getSceneManager()->setDestructSync();
         }
     }
 }
