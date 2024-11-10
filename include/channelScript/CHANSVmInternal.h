@@ -3,7 +3,7 @@
 
 #include "channelScript/CHANSVm.h"
 
-#define VmMagic "RCHE" /* Revolution Channel Script Engine */
+#define VmMagic "RCHE" /* Revolution Channel Script Engine? */
 
 #define VmCreateMethod(name) BOOL VmMethod_##name(CHANSVm* pVm, CHANSVmObjHdr* pObj0, CHANSVmObjHdr* pObj1)
 

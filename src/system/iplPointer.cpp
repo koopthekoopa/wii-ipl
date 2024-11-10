@@ -8,11 +8,12 @@
 #include "system/iplNand.h"
 
 #include "utility/iplUtility.h"
-#include "utility/iplMath.h"
+
+#include "iplMath.h"
 
 namespace ipl {
-    #define MINIMUM_SCROLL_LENGTH    32.f
-    #define MAXIMUM_SCROLL_LENGTH    128.f
+    #define MIN_LENGTH    32.f
+    #define MAX_LENGTH    128.f
 
     /**
      * @note Address: 0x816354D4 (4.3U)
@@ -47,10 +48,10 @@ namespace ipl {
     Pointer::Pointer(EGG::Heap* pHeap) :
     unk_0x28(-1),
     mOriginPos(0.f, 0.f),
-    mArrowLength(MINIMUM_SCROLL_LENGTH),
+    mArrowLength(MIN_LENGTH),
     mPointDirection(POINT_DOWN),
-    mScrolling(false),
-    mVisible(true),
+    mbScrolling(false),
+    mbVisible(true),
     mCore() {
         mpLayoutArchive = System::getNandManager()->readLayout(pHeap, "cursor.ash", false);
         
@@ -79,9 +80,8 @@ namespace ipl {
             pOriginPane->SetTranslate(mOriginPos);
 
             // Arrow Length
-            nw4r::lyt::Size arrowSize =     pLengthPane->GetSize();
-            f32 newArrowLength =            UTILITY_CLAMP(mArrowLength, MINIMUM_SCROLL_LENGTH, MAXIMUM_SCROLL_LENGTH);
-            arrowSize.height =              newArrowLength;
+            nw4r::lyt::Size arrowSize =     pLengthPane->GetSize();   
+            arrowSize.height =              IPL_MATH_CLAMP(mArrowLength, MIN_LENGTH, MAX_LENGTH);
 
             pLengthPane->SetSize(arrowSize);
 
@@ -98,8 +98,8 @@ namespace ipl {
             pRootPane->SetScale(math::VEC2(1.0f, arrowDirection));
 
             // Visible panes
-            pRootPane->SetVisible(mScrolling);
-            pOriginPane->SetVisible(!mScrolling);
+            pRootPane->SetVisible(mbScrolling);
+            pOriginPane->SetVisible(!mbScrolling);
 
             // Calculate the scroller layout
             mpLayout[LYT_SCROLLER_ID]->calc();
@@ -111,7 +111,7 @@ namespace ipl {
      * @note Size: 0x50
      */
     void Pointer::draw() {
-        if (mVisible) {
+        if (mbVisible) {
             mCore.draw();
             
             if (unk_0x28 >= 0) {

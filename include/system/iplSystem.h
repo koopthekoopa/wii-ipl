@@ -46,11 +46,10 @@ namespace ipl {
                     EGG::Heap*          mpTreasureHeap;         // 0x2C
                     u8                  unk_0x30[0x34];
                     scene::Manager*     mpSceneManager;         // 0x64
-                    undefined4*         unk_0x68;
-                    nigaoe::Manager*    mpNigaoeManager;        // 0x6C
-                    nand::Manager*      mpNandManager;          // 0x70
-                    undefined           unk_0x74[0x0C];
-                    message::Message*   mUnkMsg;                // 0x80
+                    nigaoe::Manager*    mpNigaoeManager;        // 0x68
+                    nand::Manager*      mpNandManager;          // 0x6C
+                    undefined           unk_0x74[0x10];
+                    message::Message*   mpMessage;               // 0x80
                     undefined4          unk_0x84;
                     undefined4          unk_0x88;
                     nwc24::Manager*     mpNwc24Manager;         // 0x8C
@@ -65,7 +64,7 @@ namespace ipl {
                     Pointer*            mpPointer;              // 0xB0
                     HomeButtonMenu*     mpHomeButton;           // 0xB4
                     undefined4*         unk_0xB8;
-                    message::Manager*   mpMessage;              // 0xBC
+                    message::Manager*   mpMesgMgr;              // 0xBC
                     EGG::Thread*        mpUnkThread;            // 0xC0
                     EGG::ColorFader*    mpFader;                // 0xC4
                     EGG::ColorFader*    pResetFader;            // 0xC8
@@ -150,8 +149,8 @@ namespace ipl {
             static DialogWindow*        getDialog()             { return smArg.mpDialog; }
             /** @return The Pointer object. */
             static Pointer*             getPointer()            { return smArg.mpPointer; }
-            /** @return The Message object. */
-            static message::Message*    getMessage()            { return smArg.mpMessage->getMessage(); }
+            /** @return The Message Manager object. */
+            static message::Manager*    getMessageManager()     { return smArg.mpMesgMgr; }
             /** @return something */
             static EGG::Thread*         getUnkThread()          { return smArg.mpUnkThread; }
             /** @return The Fader object */
@@ -199,6 +198,7 @@ namespace ipl {
             static bool                 isUnk_0x2BF()           { return smArg.unk_0x2BF; }
             static void                 setUnk_0x2BF(bool val)  { smArg.unk_0x2BF = val; }
 
+            // TODO investigate this madness
             /** @return Whether the system resources have loaded */
             static bool isRsrcLoaded() { return smArg.mbResLoaded && smArg.mbFontResLoaded && smArg.mbSndResLoaded && smArg.mbDictResLoaded; }
             /** @remark This is just another `isRsrcLoaded` */

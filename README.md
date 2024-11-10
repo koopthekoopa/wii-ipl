@@ -5,6 +5,7 @@
 This work in progress repository aims to a full 1:1 decompilation of version 4.3 of the Wii Menu.   
 Currenty supported versions:
 - 4.3U (USA)   
+- 4.3E (Europe)   
 
 This repository requires a WAD of the Wii Menu.
 
@@ -63,23 +64,16 @@ Here are a list of tools that get downloaded when you run `make prepare`:
     - Make sure the version on the filename does not include the decimal at the middle (for example `4.3U` should be `43U`)
     - Check to make sure the file matches with the [SHA-1 Sums](#sums)!   
 
-- You will need to prepare for build. To do that you need to type in:
-  ```
-  make prepare VERSION=<version>
-  ```   
-  where `<version>` is the chosen version to compile. (If you do not define `VERSION`, it will compile 4.3U by default)
 - You are now ready to build! To build you need to type in:
   ```
   make VERSION=<version>
   ```
+  - Where `<version>` is the chosen version to compile. (If you do not define `VERSION`, it will compile 4.3U by default)
   - The output should be `ipl.<version>.app` in the build folder.
-  
-> If you want to compile another version, you will have run `make prepare` again to do so.
 
 ## Sums
 |File|SHA-1|
 |-------------------------------|-----------------------------|
-|`ipl.43J.app` (Wii Menu 4.3J)|`c94c8e671854d56fa2abd4c4c886e6c62a2c7f0e`|
 |`ipl.43U.app` (Wii Menu 4.3U)|`26116613f624061ba99c8d1a299aaa6efa85670d`|
 |`ipl.43E.app` (Wii Menu 4.3E)|`2ebea6ed22473857ed64b12daa71ae2d1ed61708`|
 

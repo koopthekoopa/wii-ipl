@@ -19,8 +19,7 @@ namespace ipl {
         mpCharData(NULL),
         mCallBack(callback),
         mpCallBackWork(callBackWork),
-        mCreated(false) {
-
+        mbCreated(false) {
             init(pHeap, width, height);
         }
         
@@ -33,8 +32,7 @@ namespace ipl {
         mpCharData(charData),
         mCallBack(callback),
         mpCallBackWork(callBackWork),
-        mCreated(false) {
-            
+        mbCreated(false) {
             init(pHeap, width, height);
         }
         
@@ -92,7 +90,7 @@ namespace ipl {
             
             GXInitTexObj(&mFaceTexObj, mpIconTex, mIconSettings.width, mIconSettings.height, RFL_ICON_TEX_FORMAT, GX_CLAMP, GX_CLAMP, GX_FALSE);
             
-            mCreated = true;
+            mbCreated = true;
             mCallBack(this, mpCallBackWork);
         }
     }

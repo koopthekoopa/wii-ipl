@@ -1,6 +1,6 @@
 #define UNIT_DOESNT_MATCH
 
-#include "scene/health/iplSkHealth.h"
+#include "scene/health/iplHealth.h"
 
 #include <revolution/os.h>
 #include <revolution/sc.h>
@@ -287,7 +287,7 @@ namespace ipl {
             }
 
             if (finish_safe_mode_check()) {
-                if (System::getMasterController()->downTrg(0x500C00)
+                if (System::getMasterController()->downTrg(((WPAD_BUTTON_CL_A | WPAD_BUTTON_CL_B) * 0x10000 /* ? */) | WPAD_BUTTON_B | WPAD_BUTTON_A)
                 || mWpadMask != newWpadMask
                 || OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) > 60000
                 || mbDoneSafeMode) {

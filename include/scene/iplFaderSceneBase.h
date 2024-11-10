@@ -13,6 +13,15 @@ namespace ipl {
             /* Onto the next scene `calc` function */
             SCENE_DONE,
         };
+        
+        enum {
+            FADE_STATE_FADE_IN = 0,
+            FADE_STATE_INIT_NORMAL,
+            FADE_STATE_NORMAL,
+            FADE_STATE_INIT_FADE_OUT,
+            FADE_STATE_FADE_OUT,
+            FADE_STATE_DONE,
+        };
 
         SCENE_CLASS(FaderSceneBase) {
             public:
@@ -31,6 +40,8 @@ namespace ipl {
                 virtual SceneReturn calcFadeout()   { return SCENE_DONE; }  // 0x60
 
                 virtual void        calcCommonAfter();                      // 0x64
+                
+                int                 getState()      { return mState; }
             
             private:
                 int mState; // 0x54

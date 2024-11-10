@@ -1,5 +1,5 @@
-#ifndef RIPL_BOARDRECORD_H
-#define RIPL_BOARDRECORD_H
+#ifndef IPL_MESSAGE_BOARD_H
+#define IPL_MESSAGE_BOARD_H
 
 #include <revolution/types.h>
 
@@ -19,13 +19,13 @@ extern const char*  RBRFileType_Odh;
 extern const char*  RBRFileType_Dat;
 extern const char*  RBRFileType_Log;
 
-extern u8*          RBRGetPicture(u32* pRbrData, s32* dataSize);
+extern u8*          RBRGetPicture(u32* rbrData, s32* dataSize);
 extern void         RBRGetPosRect(f32* left, f32* right, f32* top, f32* bottom);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // RIPL_BOARDRECORD_H
+#endif // IPL_MESSAGE_BOARD_H
 
 

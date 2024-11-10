@@ -19,7 +19,7 @@ namespace ipl {
         mTitleId(titleId),
         mTicket(NULL),
         mTicketIdx(ticketIdx),
-        mMetaInNand(false),
+        mbMetaInNand(false),
         mCallback(callBack),
         mCallbackWork(callBackWork) {}
 
@@ -102,13 +102,13 @@ namespace ipl {
                 line = 146;
             }
             else {
-                // Open up the meta file from content index 0 (the 00000000.app files)
+                // Open up the meta file from content index 0 (the 00000000.app file)
                 result = ES_OpenTitleContentFile(mTitleId, mTicket, 0);
                 mDescriptor = result;
 
                 // If it does not exist, load the meta file from the NAND instead (from the meta folder).
                 if (result == -1026) {
-                    mMetaInNand = true;
+                    mbMetaInNand = true;
                     return openNandFile_();
                 }
 
@@ -125,7 +125,7 @@ namespace ipl {
                         // Failed to do that? Close the file and abort.
                         result = ES_CloseContentFile(mDescriptor);
 
-                        // In case it was unlucky and it failed to even do that.
+                        // In case if it was unlucky and failed to even do that.
                         if (result < ES_ERR_OK) {
                             line = 178;
                             goto failed;
@@ -201,7 +201,7 @@ failed:
          * @note Size: 0x14
          */
         BOOL MetaFile::close_() {
-            if (mMetaInNand) {
+            if (mbMetaInNand) {
                 return closeNandFile_();
             }
             else {
@@ -222,7 +222,7 @@ failed:
          * @note Size: 0x14
          */
         void MetaFile::readBlock_(void* buffer, int length, int offset) {
-            if (mMetaInNand) {
+            if (mbMetaInNand) {
                 readNandBlock_(buffer, length, offset);
             }
             else {

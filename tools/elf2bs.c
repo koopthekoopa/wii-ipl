@@ -272,8 +272,10 @@ int main(int argc, char** argv) {
         bsOutputFile = fopen(outFileName, "wb");
 
         fwrite(&bsHeader, sizeof(BSHead), 1, bsOutputFile);
+        
         // BS1
         fwrite(BS1ImgData, inBS1Size, 1, bsOutputFile);
+        
         // Unknown header
         if (useUnknownHeader) {
             BSHead baseHeader;
@@ -288,6 +290,7 @@ int main(int argc, char** argv) {
 
             fclose(baseFile);
         }
+
         // BS2
         fwrite(BS2ImgData, inBS2Size - unknownHeaderSize, 1, bsOutputFile);
 

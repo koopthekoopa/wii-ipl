@@ -9,7 +9,7 @@ namespace ipl {
             public:
                 SettingBg(EGG::Heap* pHeap, int unk);
                 virtual ~SettingBg();
-                
+
                 virtual void    prepare();
                 virtual void    create();
                 virtual void    calc();
@@ -17,10 +17,9 @@ namespace ipl {
             
             private:
                 int unkID;                          // 0x54
-            
+
                 layout::Object*     mpLayout;       // 0x58
                 nand::LayoutFile*   mpLayoutFile;   // 0x5C
-                
         };
     }
 }

@@ -39,7 +39,7 @@ namespace ipl {
                 /** @brief Bind animation to layout */
                 void                    start(int lytId = -1);
                 /**
-                 * Bind an animation to the layout
+                 * @brief Bind an animation to the layout
                  * @param fileName The file name of the Layout animation.
                  */
                 void                    bind(const char* fileName, bool unk = true);
@@ -50,7 +50,7 @@ namespace ipl {
                 /** @brief Draws the Layout. */
                 void                    draw();
                 /**
-                 * Bind an animation to a specific group from the layout
+                 * @brief Bind an animation to a specific group from the layout
                  * @param fileName The file name of the Layout animation.
                  * @param groupName The group name to bind the animation to.
                  */

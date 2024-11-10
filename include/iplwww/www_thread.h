@@ -23,8 +23,10 @@ namespace ext_ead {
                 static  void* ThreadMain_(void* param);
 
                 OSThread        mThread;        // 0x08
+                
                 void*           mpStack;        // 0x320
                 u32             mStackSize;     // 0x324
+                
                 int             mPriority;      // 0x328
         };
     }

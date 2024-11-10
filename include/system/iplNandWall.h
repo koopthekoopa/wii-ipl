@@ -13,7 +13,6 @@ namespace ipl {
         BOOL isNandCapacity();
         /** 
          * @brief Gets the amount of free blocks and free i-nodes(?)
-         * 
          * @param freeBlocks The free blocks returned.
          * @param freeBlocks The free i-nodes returned.
          * @param pStatus The status used.

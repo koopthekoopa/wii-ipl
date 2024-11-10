@@ -27,7 +27,7 @@ namespace ipl {
         System::getHomeButtonMenu()->disable();
 
         if (mType != NONE) {
-            mpDialog->callBtn1(msgId, MESG_CMN_OK);
+            mpDialog->callBtn1(msgId, MESG_WARN_ACCEPT); // Show dialog with one button
             System::warning_run();
         }
 

@@ -47,20 +47,12 @@ DownloadTools: $(TOOLS_ROOT)/GC $(PPC_ROOT) $(WIBO) $(DTK)
 
 # Extract data
 
-$(DATA_ROOT): $(CONFIG_ROOT)/extract.txt
+$(DATA_ROOT): $(CONFIG_ROOT)/extract.csv
 	@echo Extracting Data...
 	@$(PY) $(TOOLS_ROOT)/$(EXTRACT_DATA) -i $< -o $(DATA_ROOT) -ib $(IPL_INFILE) -oc $(OBJCOPY)
 
-
-# Convert to DTK compatible DOL file
-
-$(IPL_DTKFILE): $(TOOLS_ROOT)/$(IPL2DTK) $(IPL_INFILE)
-	@echo Prepare executable for splitting...
-	@$(TOOLS_ROOT)/$(IPL2DTK) $(IPL_INFILE) $(IPL_DTKFILE)
-
 # Prepare
 
-PrepareDecomp: $(TOOLS) DownloadTools $(DATA_ROOT) $(IPL_DTKFILE)
-	@echo Prepared for Building!
+PrepareDecomp: $(TOOLS) DownloadTools $(DATA_ROOT)
 
 

@@ -13,7 +13,7 @@
 
 namespace ipl {
     namespace nand {
-        enum IPLNandResult {
+        enum NandErrResult {
             IPL_NAND_RESULT_NONE = 0,
             IPL_NAND_RESULT_SUCCESS,
             IPL_NAND_RESULT_VERIFY_ERROR,
@@ -25,7 +25,7 @@ namespace ipl {
                 Base();
                 virtual ~Base();                                    // 0x08
                 
-                virtual void    read()          {}                  // 0x0C
+                virtual void    read() {}                           // 0x0C
                 virtual void    write();                            // 0x10
                 
                 virtual bool    isFinished()    { return false; }   // 0x14
@@ -46,8 +46,10 @@ namespace ipl {
                 virtual bool    checkData();                                            // 0x18 (0x06)
                 virtual bool    isFatalError();                                         // 0x1C (0x07)
 
-                u8*             getBuffer() { return mpBuffer; }
-                u32             getLength() { return mpLength; }
+                u8*             getBuffer()     { return mpBuffer; }
+                u32             getLength()     { return mpLength; }
+                
+                bool            isFullForTask() { return mbIsFullForTask; }
 
             protected:
                 virtual BOOL    open_(u8 attr);                                         // 0x20 (0x08)
@@ -72,7 +74,7 @@ namespace ipl {
                 virtual void    callback_();                                            // 0x50 (0x14)
 
             protected:
-                IPLNandResult   calcMD5_(const u8* sum, const u8* buffer, u32 length) const;
+                NandErrResult   calcMD5_(const u8* sum, const u8* buffer, u32 length) const;
 
                 BOOL            nand_error_handling(int errcode);
 
@@ -85,14 +87,14 @@ namespace ipl {
 
                 int             mFileOffset;                        // 0x94
                 u32             mpLength;                           // 0x98
-                bool            mInit;                              // 0x9C
+                bool            mbInit;                             // 0x9C
                 u8              mFilePerms;
 
                 u8*             mpBuffer;                           // 0xA0
                 u8*             mpCmpBuffer;                        // 0xA4
 
-                IPLNandResult   mResult;                            // 0xA8
-                volatile BOOL   mDoneTask;                          // 0xAC
+                NandErrResult   mResult;                            // 0xA8
+                volatile BOOL   mbDoneTask;                         // 0xAC
                 
                 ARCFileInfo     mArcFile;                           // 0xB0
 
@@ -100,9 +102,9 @@ namespace ipl {
 
                 NANDFileInfo    mNandFile;                          // 0xF8
                 int             mLastError;                         // 0x184
-                bool            mFatalError;                        // 0x188
-                bool            mIsNandFull;                        // 0x189
-                BOOL            mIsInNand;                          // 0x18C
+                bool            mbFatalError;                       // 0x188
+                bool            mbIsFullForTask;                    // 0x189
+                BOOL            mbIsNandFile;                       // 0x18C
         };
 
         class LangFile : Base {
@@ -139,7 +141,7 @@ namespace ipl {
                 
                 /**
                  * @brief Reads an ASH compressed Layout File.
-                 * @param pHeap The memory heap used for the function.
+                 * @param pHeap The memory heap used.
                  * @param archiveName The file name of the ASH compressed archive.
                  * @param unk Unkown boolean.
                  * @return The Layout File Data as `ipl::nand::LayoutFile`.

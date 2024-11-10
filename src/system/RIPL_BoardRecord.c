@@ -16,28 +16,28 @@ const char* RBRFileType_Log = "log";
  * @note Address: 0x813321E8 (4.3J)
  * @note Size: 0x98
  */
-u8* RBRGetPicture(u32* pRbrData, s32* dataSize) {
-    u8* pPictureData = NULL;
+u8* RBRGetPicture(u32* rbrData, s32* dataSize) {
+    u8* picData = NULL;
 
-    if (pRbrData[0] == RBR_SIGNATURE && pRbrData[(RBR_HEADER_SIZE / sizeof(pRbrData[0]))] == NETCalcCRC32(pRbrData, RBR_HEADER_SIZE)) {
+    if (rbrData[0] == RBR_SIGNATURE && rbrData[(RBR_HEADER_SIZE / sizeof(rbrData[0]))] == NETCalcCRC32(rbrData, RBR_HEADER_SIZE)) {
         u32 index = 0;
         u32 count = 2;
 
         while(count--) {
-            RBRSomeData* pData = (RBRSomeData*)&pRbrData[index];
+            RBRSomeData* data = (RBRSomeData*)&rbrData[index];
 
-            if (pData->type == RBR_IMAGE_TYPE) {
-                pPictureData = (u8*)pRbrData + pData->dataOffset;
-                *dataSize = pData->dataSize;
+            if (data->type == RBR_IMAGE_TYPE) {
+                picData = (u8*)rbrData + data->dataOffset;
+                *dataSize = data->dataSize;
                 
                 break;
             }
-            
+
             index += 3;
         };
     }
 
-    return pPictureData;
+    return picData;
 }
 
 /**
@@ -49,15 +49,12 @@ void RBRGetPosRect(f32* left, f32* right, f32* top, f32* bottom) {
     if (left != NULL) {
         *left = -230;
     }
-    
     if (right != NULL) {
         *right = 230;
     }
-    
     if (top != NULL) {
         *top = 180;
     }
-    
     if (bottom != NULL) {
         *bottom = -80;
     }

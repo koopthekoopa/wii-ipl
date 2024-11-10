@@ -28,26 +28,26 @@ namespace ipl {
             
             private:
                 typedef struct {
-                    u32 signatureMsg;           // 0x00 (unused)
-                    u32 signatureBmg;           // 0x04 (unused)
-                    u32 size;                   // 0x08 (unused)
+                    u32 signatureMsg;           // 0x00 (unused in IPL)
+                    u32 signatureBmg;           // 0x04 (unused in IPL)
+                    u32 size;                   // 0x08 (unused in IPL)
                     u32 sectionCount;           // 0x0C
-                    u8 encoding;                // 0x10 (unused)
-                    u8 padding[15];             // 0x11 (unused)
+                    u8 encoding;                // 0x10 (unused in IPL)
+                    u8 padding[15];             // 0x11 (unused in IPL)
                 } MESGHeader;
 
                 typedef struct {
                     u32 signature;              // 0x00
                     u32 size;                   // 0x04
                     u16 msgCount;               // 0x08
-                    u16 infoSize;               // 0x0A (unused)
-                    u32 padding;                // 0x0C (unused)
+                    u16 infoSize;               // 0x0A (unused in IPL)
+                    u32 padding;                // 0x0C (unused in IPL)
                 } MESGInfoHeader;
 
                 typedef struct {
                     u32 offset;                 // 0x00
-                    u32 flags;                  // 0x04 (unused)
-                    u32 unk;                    // 0x08 (unused)
+                    u32 flags;                  // 0x04 (unused in IPL)
+                    u32 unk;                    // 0x08 (unused in IPL)
                 } MESGInfoBlock;
 
                 typedef struct {
@@ -56,9 +56,9 @@ namespace ipl {
                 } MESGDataHeader;
             
                 MESGInfoHeader* mpInfoHeader;   // 0x00
-                MESGInfoBlock* mpInfoData;      // 0x04
+                MESGInfoBlock*  mpInfoData;     // 0x04
 
-                u8* mspMessageData;             // 0x08
+                u8*             mspMessageData; // 0x08
         };
     }
 }

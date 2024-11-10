@@ -19,35 +19,53 @@ namespace ipl {
                 Manager(EGG::Heap* pHeap);
                 virtual ~Manager();
 
-                int update();
-                void startUpdate();
+                /** @brief Initialize Disc Update */
+                void    startUpdate();
+                /** @brief Start Disc Update */
+                int     update();
 
-                u32 getDiskBannerBuffer(void** pBuffer);
+                /**
+                 * @brief Get buffer length of a game disc's banner.
+                 * @param pBuffer Disc banner data.
+                 */
+                u32     getDiskBannerBuffer(void** pBuffer);
 
-                void reserveRVLGame();
-                void reserveGCGame();
+                void    reserveRVLGame();
+                void    reserveGCGame();
                 
-                void startRVLGame();
-                void startGCGame();
+                /** @brief Start Wii Game (same as `startGCGame`) */
+                void    startRVLGame();
+                /** @brief Start Game Cube Game (same as `startRVLGame`) */
+                void    startGCGame();
 
-                void abort();
-                void restart();
+                /** @brief Abort Game Disk? */
+                void    abort();
+                /** @brief Restart Game Disk? */
+                void    restart();
 
-                bool checkParentalControl();
+                /** @brief Wrapper for `BS2CheckParentalControl` */
+                bool    checkParentalControl();
 
-                void getDiskInfo(char** diskID, char** diskMaker);
-                
-                BOOL isTitleAvailable(ESTitleId titleId) const;
-                s32  getTicketFromNand(ESTitleId titleId, ESTicketView* pTicketView) const;
-                void loadLockedTitleAsync(ESTitleId titleId, ESTicketView& ticketView);
+                /**
+                 * @brief Gets the information of the game disc.
+                 * @param diskID Output title ID of disc.
+                 * @param diskMaker Output maker ID of disc.
+                 */
+                void    getDiskInfo(char** diskID, char** diskMaker);
 
-                void splashTick(BS2State state);
-                void execTick(BS2State state);
-                void updateTick();
+                /** @brief Check is disc title is available? */
+                BOOL    isTitleAvailable(ESTitleId titleId) const;
+                /** @brief Get disc's ticket from NAND? */
+                s32     getTicketFromNand(ESTitleId titleId, ESTicketView* pTicketView) const;
+                void    loadLockedTitleAsync(ESTitleId titleId, ESTicketView& ticketView);
 
-                void bootNewSystem();
+                void    splashTick(BS2State state);
+                void    execTick(BS2State state);
+                void    updateTick();
 
             private:
+                void    bootNewSystem();
+                
                 u32                 unk_0x04;
                 volatile BS2State   mState;             // 0x08
                 bool                unk_0x0C;
@@ -57,7 +75,7 @@ namespace ipl {
                 bool                mbIsDiagDisc;       // 0x10
                 bool                unk_0x11;
                 u8*                 mpBannerBuffer;     // 0x14
-                BOOL                mHasBanner;         // 0x18
+                BOOL                mbHasBanner;        // 0x18
                 BS2State            unk_0x1C;
 
                 // For Update

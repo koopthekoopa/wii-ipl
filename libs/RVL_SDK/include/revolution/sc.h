@@ -20,6 +20,7 @@ extern "C" {
 #define SC_LANG_SIMP_CHINESE    7
 #define SC_LANG_TRAD_CHINESE    8
 #define SC_LANG_KOREAN          9
+#define SC_LANG_MAX             10
 
 u8  SCGetLanguage();
 

@@ -11,7 +11,7 @@
 #include "system/iplNand.h"
 #include "system/iplController.h"
 
-#include "utility/iplMath.h"
+#include "iplMath.h"
 
 #include "layout/iplLayout.h"
 
@@ -112,7 +112,7 @@ namespace ipl {
              */
             layout::Object* get_layout(int chan, int type);
 
-            void            setVisible(bool value) { mVisible = value; }
+            void            setVisible(bool value) { mbVisible = value; }
         
         private:
             nand::LayoutFile*   mpLayoutArchive;                    // 0x00
@@ -124,8 +124,8 @@ namespace ipl {
             f32                 mArrowLength;                       // 0x34
             int                 mPointDirection;                    // 0x38
 
-            bool                mScrolling;                         // 0x3C
-            bool                mVisible;                           // 0x3D
+            bool                mbScrolling;                        // 0x3C
+            bool                mbVisible;                          // 0x3D
             
             u8                  unk_0x3E;
             u8                  unk_0x3F;

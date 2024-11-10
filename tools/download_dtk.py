@@ -14,18 +14,18 @@ def extractURL(url, fileName):
 
 def main():
     sys = platform.system().lower()
-    arc = platform.machine().lower()
+    arch = platform.machine().lower()
     if sys.__contains__("msys"):
         sys = "windows"
-    if arc == "amd64":
-        arc = "x86_64"
-    if arc == "x86_32":
-        arc = "i686"
+    if arch == "amd64":
+        arch = "x86_64"
+    if arch == "x86_32":
+        arch = "i686"
     ext = ""
     if sys == "windows":
         ext = ".exe"
 
-    extractURL("https://github.com/encounter/decomp-toolkit/releases/latest/download/dtk-" + sys + "-" + arc + ext, "tools/dtk" + ext)
+    extractURL("https://github.com/encounter/decomp-toolkit/releases/download/v1.3.0/dtk-" + sys + "-" + arch + ext, "tools/dtk" + ext)
         
 if __name__ == "__main__":
     main()

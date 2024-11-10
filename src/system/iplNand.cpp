@@ -4,8 +4,8 @@
 
 #include "config.h"
 
-#include "system/iplSystem.h"
 #include "system/rvl_dec.h"
+#include "system/iplSystem.h"
 #include "system/iplErrorHandler.h"
 #include "system/iplNandWall.h"
 #include "system/iplNandWrapper.h"
@@ -48,21 +48,21 @@ namespace ipl {
          * @note Size: 0xC0
          */
         // https://decomp.me/scratch/fOAdi
-        File::File(EGG::Heap* pHeap, const char* fileName, ARCHandle* arc, const char* unk2, int offset, u32 length, bool isInNand) : Base() {
+        File::File(EGG::Heap* pHeap, const char* fileName, ARCHandle* arc, const char* unk2, int offset, u32 length, bool isNandFile) : Base() {
             mDoneTask = FALSE;
             mLastError = NAND_RESULT_OK;
             mpHeap = pHeap;
             mpArc = arc;
             mFileOffset = offset;
             mpLength = length;
-            mInit = true;
+            mbInit = true;
             mFilePerms = NAND_ACCESS_NONE;
             mpBuffer = NULL;
             mpCmpBuffer = NULL;
             mResult = IPL_NAND_RESULT_NONE;
-            mFatalError = false;
-            mIsNandFull = false;
-            mIsInNand = isInNand;
+            mbFatalError = false;
+            mbIsFullForTask = false;
+            mbIsNandFile = isNandFile;
 
             strncpy(msFileName, fileName, NAND_MAX_PATH + 1);
             if (unk2) {
@@ -83,14 +83,14 @@ namespace ipl {
             mpArc = NULL;
             mFileOffset = 0;
             mpLength = length;
-            mInit = true;
+            mbInit = true;
             mFilePerms = perms;
             mpBuffer = buffer;
             mpCmpBuffer = NULL;
             mResult = IPL_NAND_RESULT_NONE;
-            mFatalError = false;
-            mIsNandFull = false;
-            mIsInNand = TRUE;
+            mbFatalError = false;
+            mbIsFullForTask = false;
+            mbIsNandFile = TRUE;
             
             strncpy(msFileName, fileName, NAND_MAX_PATH + 1);
 
@@ -105,7 +105,7 @@ namespace ipl {
          * @note Size: 0x78
          */
         File::~File() {
-            if (mInit == true && mpBuffer) {
+            if (mbInit == true && mpBuffer) {
                 delete[] mpBuffer;
             }
         }
@@ -118,7 +118,7 @@ namespace ipl {
             ARCHandle* handle;
 
             if (mpArc) {
-                if (mIsInNand) {
+                if (mbIsNandFile) {
                     // This part seems to be never used.
                     s32 result = wrapper::PrivateOpen(msUnkFileName, &mNandFile, attr);
                     if (nand_error_handling(result) == FALSE) {
@@ -128,7 +128,7 @@ namespace ipl {
                 return ARCOpen(mpArc, msFileName, &mArcFile) == TRUE;
             }
             else {
-                if (mIsInNand) {
+                if (mbIsNandFile) {
                     s32 result = wrapper::PrivateOpen(msFileName, &mNandFile, attr);
                     return nand_error_handling(result);
                 }
@@ -156,7 +156,7 @@ namespace ipl {
             if (mpArc) {
                 arcOffset = ARCGetStartOffset(&mArcFile);
 
-                if (mIsInNand) {
+                if (mbIsNandFile) {
                     result = wrapper::Seek(&mNandFile, mFileOffset + arcOffset + offset, 0);
                     nand_error_handling(result);
 
@@ -165,7 +165,7 @@ namespace ipl {
                 }
             }
             else {
-                if (mIsInNand) {
+                if (mbIsNandFile) {
                     result = wrapper::Seek(&mNandFile, mFileOffset + offset, 0);
                     nand_error_handling(result);
 
@@ -220,7 +220,7 @@ namespace ipl {
                 length = ARCGetLength(&mArcFile);
             }
             else {
-                if (mIsInNand) {
+                if (mbIsNandFile) {
                     s32 result = wrapper::GetLength(&mNandFile, &length);
                     nand_error_handling(result);
                 }
@@ -407,7 +407,7 @@ namespace ipl {
          * @note Address: 0x8133BE64 (4.3U)
          * @note Size: 0x90
          */
-        IPLNandResult File::calcMD5_(const u8* sum, const u8* buffer, u32 length) const {
+        NandErrResult File::calcMD5_(const u8* sum, const u8* buffer, u32 length) const {
             u8 calcSum[NET_MD5_DIGEST_SIZE];
 
             NETCalcMD5(calcSum, buffer, length);
@@ -429,7 +429,7 @@ namespace ipl {
             s32 result;
 
             if (mpArc) {
-                if (mIsInNand) {
+                if (mbIsNandFile) {
                     result = wrapper::Close(&mNandFile);
                     return nand_error_handling(result);
                 }
@@ -438,7 +438,7 @@ namespace ipl {
                 }
             }
             else {
-                if (mIsInNand) {
+                if (mbIsNandFile) {
                     result = wrapper::Close(&mNandFile);
                     return nand_error_handling(result);
                 }
@@ -460,7 +460,7 @@ namespace ipl {
          * @note Address: 0x8133BFB0 (4.3U)
          * @note Size: 0x194
          */
-        LangFile::LangFile(EGG::Heap* pHeap, const char* dirName, const char* fileName, ARCHandle* arc, bool isInNand) {
+        LangFile::LangFile(EGG::Heap* pHeap, const char* dirName, const char* fileName, ARCHandle* arc, bool isNandFile) {
             char fullName[NAND_MAX_PATH + 1];
             
             cmnFile = NULL;
@@ -470,7 +470,7 @@ namespace ipl {
             strncat(fullName, "/common/", (NAND_MAX_PATH + 1) - strlen(fullName));
             strncat(fullName, fileName, (NAND_MAX_PATH + 1) - strlen(fullName));
 
-            cmnFile = new(pHeap, CLASS_HEAP) File(pHeap, fullName, arc, NULL, 0, 0, isInNand);
+            cmnFile = new(pHeap, CLASS_HEAP) File(pHeap, fullName, arc, NULL, 0, 0, isNandFile);
 
             char* langPath = utility::Language::getPath();
 
@@ -480,7 +480,7 @@ namespace ipl {
             strncat(fullName, "/", (NAND_MAX_PATH + 1) - strlen(fullName));
             strncat(fullName, fileName, (NAND_MAX_PATH + 1) - strlen(fullName));
 
-            langFile = new(pHeap, CLASS_HEAP) File(pHeap, fullName, arc, NULL, 0, 0, isInNand);
+            langFile = new(pHeap, CLASS_HEAP) File(pHeap, fullName, arc, NULL, 0, 0, isNandFile);
         }
 
         /**
@@ -582,7 +582,7 @@ done:
                     }
                     case NAND_RESULT_MAXFILES:
                     case NAND_RESULT_MAXBLOCKS: {
-                        mIsNandFull = true;
+                        mbIsFullForTask = true;
                         break;
                     }
                     case NAND_RESULT_AUTHENTICATION:
@@ -591,12 +591,12 @@ done:
                         break;
                     }
                     case NAND_RESULT_CORRUPT: {
-                        mFatalError = true;
+                        mbFatalError = true;
                         System::err_display(MESG_ERR_NAND);
                         break;
                     }
                     default: {
-                        mFatalError = true;
+                        mbFatalError = true;
                         System::err_log(NAND, errcode, 808);
                         System::err_display(MESG_ERR_CONTENT);
                     }
@@ -641,7 +641,7 @@ done:
          * @note Size: 0x8
          */
         bool File::isFatalError() {
-            return mFatalError;
+            return mbFatalError;
         }
 
         /**

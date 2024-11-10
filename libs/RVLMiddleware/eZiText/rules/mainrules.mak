@@ -6,7 +6,7 @@ ZI8_INC_PATHS		= 	$(COMMON_INCLUDES)
 
 ZI8_CFLAGS      	=	-O4,p -enum int -inline auto -Cpp_exceptions on -proc gekko -fp hardware -RTTI off
 ZI8_CCPATH      	=	$(CW_GC_30A52)
-ZI8_OBJECTS     	=	$(ZI8_SPLIT_PATH)/zi8etx.o \
+ZI8_OBJECTS     	=	$(ZI8_SPLIT_PATH)/zi8ezt.o \
                         $(ZI8_SPLIT_PATH)/zi8address.o \
                         $(ZI8_SPLIT_PATH)/zi8convert.o \
                         $(ZI8_SPLIT_PATH)/zi8letter.o \
@@ -36,10 +36,10 @@ DEPENDENCIES += $(ZI8_OBJECTS:.o=.d)
 $(ZI8_OBJ_PATH)/%.o: $(ZI8_SRC_PATH)/%.c
 	$(call BuildCSources,$(ZI8_CCPATH),$(ZI8_CFLAGS),$(ZI8_INC_PATHS),$(INCLUDE_ROOT))
 
-$(ZI8_BLD_PATH)/zi8clib.a: $(ZI8_OBJECTS)
+$(ZI8_BLD_PATH)/zi8_ezitext.a: $(ZI8_OBJECTS)
 	$(call LinkLibrary,$(ZI8_CCPATH),$^,$@)
 
-eZiText: $(ZI8_BLD_PATH)/zi8clib.a
+eZiText: $(ZI8_BLD_PATH)/zi8_ezitext.a
 clean_eZiText:
 	@echo Cleaning eZiText Dictionary...
 	@rm -rf $(ZI8_BLD_PATH)

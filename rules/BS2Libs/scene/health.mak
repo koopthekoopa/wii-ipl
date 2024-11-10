@@ -1,4 +1,4 @@
-HEALTH_OBJECTS    =	$(BS2_SPLIT_PATH)/scene/health/iplSkHealth.o
+HEALTH_OBJECTS    =	$(BS2_SPLIT_PATH)/scene/health/iplHealth.o
 
 DEPENDENCIES += $(HEALTH_OBJECTS:.o=.d)
 

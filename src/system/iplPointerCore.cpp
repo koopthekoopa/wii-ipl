@@ -7,9 +7,10 @@
 
 #include "system/iplSystem.h"
 
-#include "utility/iplMath.h"
 #include "utility/iplUtility.h"
 #include "utility/iplGraphics.h"
+
+#include "iplMath.h"
 
 namespace ipl {
     /**

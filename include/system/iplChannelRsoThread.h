@@ -17,7 +17,6 @@ namespace ipl {
                 
                 virtual void*   Run();          // 0x0C
 
-                /** @brief Start the Banner RSO Thread. */
                 void            start();
                 /** @param func The new loop function. */
                 void            setCalcFunc(CalcFunc func);

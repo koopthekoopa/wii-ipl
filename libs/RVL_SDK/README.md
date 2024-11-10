@@ -1,8 +1,47 @@
 # Revolution SDK Decompilation
-A decompilation of the RVL_SDK from the Wii Menu.
+A decompilation of the Revolution SDK (RVL_SDK) from the Wii Menu.   
 
-Libraries included:
-* BASE
-* OS
+The Wii Menu has the following libraries linked:
+* **AI** (Audio Interface Library)
+* **ARC** (Archive Library; for reading "U8 files")
+* **AX** (Audio Library)
+* **AXFX** (Audio Effects Library)
+* **BASE** (PowerPC architecture Library)
+* **BTE** (BroadCom's Bluetooth Driver Library)
+* **CARD** (GameCube Memory Card Library)
+* **CNT** (Title Content API Library)
+* **CNTCACHE** (SD Title Content Library; for SD Card Menu)
+* **CX** (Compression Library)
+* **DB** (Debug Library)
+* **DSP** (DSP Library)
+* **DVD** (DVD Drive Library)
+* **ENC** (Character Encoding Library)
+* **ES** (Private ES Library)
+* **ESP** (Public ES Library)
+* **EUART** (Externel Interface Bus UART Library; by Hudson Soft)
+* **EXI** (Externel Interface Bus Library)
+* **FA** (File Allocation Library; for SD Card. Small left overs for USB support)
+* **GX** (Graphics Library)
+* **IPC** (IPC Driver and IOS Library)
+* **ISFS** (NAND ISFS Library)
+* **KBD** (Keyboard Library)
+* **KPAD** (High Level Wii Remote Library)
+* **KPR** (Key Processor Library)
+* **MEM** (Memory Manager Library)
+* **MTX** (Matrix and Vector Library)
+* **NAND** (NAND Library; Wii System Memory)
+* **NUP** (Wii NUS Library)
+* **OS** (Operating System Library)
+* **PAD** (GameCube Controller Library)
+* **RSO** (RSO Module Library)
+* **SC** (System Configuration Library)
+* **SDI** (SD Card Driver API)
+* **SI** (Serial Interface Library)
+* **TPL** (Texture Pallete Library)
+* **USB** (IUSB I/O API; written by Hudson Soft)
+* **VI** (Video Interface Library)
+* **WAD** (WAD Package Library)
+* **WPAD** (Low Level Wii Remote Library)
+* **WUD** (Wireless Driver Library)
 
 

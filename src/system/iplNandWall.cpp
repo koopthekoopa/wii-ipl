@@ -12,10 +12,10 @@ namespace ipl {
     namespace nandwall {
         using namespace nand::wrapper;
 
-        u32 user_used_fsblocks;     /** @note Address: 0x816986B0 (4.3U), Size: 0x4 */
-        u32 user_used_inodes;       /** @note Address: 0x816986B4 (4.3U), Size: 0x4 */
-        u32 global_free_fsblock;    /** @note Address: 0x816986B8 (4.3U), Size: 0x4 */
-        u32 global_free_inode;      /** @note Address: 0x816986BC (4.3U), Size: 0x4 */
+        u32 user_used_fsblocks;
+        u32 user_used_inodes;
+        u32 global_free_fsblock;
+        u32 global_free_inode;
 
         /**
          * @note Address: 0x8133DC0C (4.3U)

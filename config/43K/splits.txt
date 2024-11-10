@@ -1,0 +1,18 @@
+Sections:
+	.bss        type:bss align:4
+	.init       type:code align:4
+	extab       type:rodata align:32
+	extabindex  type:rodata align:16
+	.text       type:code align:16
+	.ctors      type:rodata align:4
+	.dtors      type:rodata align:4
+	.rodata     type:rodata align:16
+	.data       type:data align:16
+	.sdata2     type:rodata align:16
+	.sbss2      type:bss align:16
+	.sdata      type:data align:16
+	.sbss       type:bss align:16
+
+# Todo!!
+
+

@@ -10,7 +10,7 @@ typedef struct {
     u8  sig[4];     // 0x00
     u32 hash;       // 0x04
     u32 version;    // 0x08 (always 3)
-} IMETHdr;
+} METABlockHeader;
 
 namespace ipl {
     /**
@@ -18,7 +18,7 @@ namespace ipl {
      * @note Size 0xAC
      */
     BOOL NandSDWorker::check_header_base(const u8 *bnrData, u32 *hashOut) {
-        IMETHdr* header = (IMETHdr*)(bnrData);
+        METABlockHeader* header = (METABlockHeader*)(bnrData);
     
         u32 hash = header->hash;
         if (hashOut != NULL) {

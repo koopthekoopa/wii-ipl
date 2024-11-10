@@ -34,12 +34,12 @@ namespace ipl {
              * This tells the reset handler to return to the system menu when resetting (calling `OSReturnToMenu()`)
              * instead of rebooting the system (calling `OSRebootSystem()`)
              */
-            void enableResetToMenu(BOOL value)  { mToMenu = value; }
+            void enableResetToMenu(BOOL value)  { mbReturnToMenu = value; }
             /**
              * Returns whether the reset handler to return to the system menu when resetting (calling `OSReturnToMenu()`)
              * instead of rebooting the system (calling `OSRebootSystem()`)
              */
-            BOOL willResetToMenu()              { return mToMenu; }
+            BOOL willResetToMenu()              { return mbReturnToMenu; }
 
         private:
             static void cbReset();
@@ -52,7 +52,7 @@ namespace ipl {
 
             u32     mState;
             u32     mType;
-            BOOL    mToMenu;
+            BOOL    mbReturnToMenu;
 
             u32     mFatalState;
     };

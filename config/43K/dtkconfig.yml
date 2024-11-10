@@ -1,0 +1,16 @@
+object: 'build/inputs/base.43K.dtk'
+
+symbols: 'config/43K/symbols.txt'
+splits: 'config/43K/splits.txt'
+
+ldscript_template: ldscript_ipl2.lcf
+
+export_all: true
+fill_gaps: false
+
+# fix up bss nightmare from the generated dol
+block_relocations:
+    - target: .bss:0x811AF814
+      end:    .bss:0x8132FFFF
+
+

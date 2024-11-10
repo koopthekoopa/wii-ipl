@@ -47,13 +47,16 @@ namespace ipl {
              * @param result The result it thrown.
             */
             void log(const char* type, int result, const char* file, int line);
+            
+            /** @return Whenether the error handler is readty. */
+            BOOL isReady() { return mbReady; }
 
         private:
             void draw();
             void check();
             void calc();
             
-            BOOL            mReady;     // 0x00
+            BOOL            mbReady;    // 0x00
 
             Type            mType;      // 0x04
 

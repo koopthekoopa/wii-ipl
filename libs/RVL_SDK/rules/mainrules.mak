@@ -9,9 +9,21 @@ SDK_CFLAGS		= -O4,p -ipa file $(COMMON_CCFLAGS)
 
 -include $(REVOLUTION_SDK_ROOT)/$(RULES_ROOT)/RVLSDKLibs/base.mak
 -include $(REVOLUTION_SDK_ROOT)/$(RULES_ROOT)/RVLSDKLibs/os.mak
+-include $(REVOLUTION_SDK_ROOT)/$(RULES_ROOT)/RVLSDKLibs/exi.mak
+-include $(REVOLUTION_SDK_ROOT)/$(RULES_ROOT)/RVLSDKLibs/si.mak
+-include $(REVOLUTION_SDK_ROOT)/$(RULES_ROOT)/RVLSDKLibs/db.mak
+-include $(REVOLUTION_SDK_ROOT)/$(RULES_ROOT)/RVLSDKLibs/vi.mak
+-include $(REVOLUTION_SDK_ROOT)/$(RULES_ROOT)/RVLSDKLibs/mtx.mak
+-include $(REVOLUTION_SDK_ROOT)/$(RULES_ROOT)/RVLSDKLibs/gx.mak
 
 RVL_SDK:	$(SDK_BLD_PATH)/base.a \
-			$(SDK_BLD_PATH)/os.a
+			$(SDK_BLD_PATH)/os.a \
+			$(SDK_BLD_PATH)/exi.a \
+			$(SDK_BLD_PATH)/si.a \
+			$(SDK_BLD_PATH)/db.a \
+			$(SDK_BLD_PATH)/vi.a \
+			$(SDK_BLD_PATH)/mtx.a \
+			$(SDK_BLD_PATH)/gx.a
 
 clean_RVL_SDK:
 	@echo Cleaning RVL_SDK...

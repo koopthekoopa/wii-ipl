@@ -35,6 +35,16 @@
 
 # Exclusive for decomp
 ctx.c
+*.bat
+*.sh
+*.sln
+*.7z
+*.dump
+*.idb
+*.id0
+*.id1
+*.id2
+*.nam
 .private/*
 build/*
 data/*
@@ -42,9 +52,15 @@ tools/GC/*
 tools/Wii/*
 tools/src/*
 tools/PPC/*
-tools/*.exe
 tools/*.txt
+tools/makesel
+tools/ipl2dtk
+tools/elf2bs
 .vscode/settings.json
+*.filters
+*.vcxproj
+*.user
+.DS_Store
 *.bat
 *.img
 *.bin
@@ -56,6 +72,7 @@ tools/*.txt
 *.dtk
 objdiff.json
 *.lnk
+*.wad
 
 # Scrapped :(
 .web/*

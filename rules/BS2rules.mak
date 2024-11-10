@@ -46,7 +46,7 @@ BS2_CMN_CCPATH	=	$(CW_GC_30A52)
 -include $(RULES_ROOT)/BS2Libs/scene/nakamuraTest.mak
 -include $(RULES_ROOT)/BS2Libs/scene/parentalDialog.mak
 -include $(RULES_ROOT)/BS2Libs/scene/sceneMisc.mak
--include $(RULES_ROOT)/BS2Libs/scene/sdChannelMenu.mak
+-include $(RULES_ROOT)/BS2Libs/scene/sdChannelSelect.mak
 -include $(RULES_ROOT)/BS2Libs/scene/setting.mak
 -include $(RULES_ROOT)/BS2Libs/scene/sceneSystem.mak
 -include $(RULES_ROOT)/BS2Libs/scene/textWriter.mak
@@ -79,14 +79,14 @@ BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(BS2_BLD_PATH)/scene/nakamuraTest.a \
 						$(BS2_BLD_PATH)/scene/parentalDialog.a \
 						$(BS2_BLD_PATH)/scene/sceneMisc.a \
-						$(BS2_BLD_PATH)/scene/sdChannelMenu.a \
-						$(BS2_BLD_PATH)/scene/setting.a \
+						$(BS2_BLD_PATH)/scene/sdChannelSelect.a \
 						$(BS2_BLD_PATH)/scene/sceneSystem.a \
+						$(BS2_BLD_PATH)/scene/setting.a \
 						$(BS2_BLD_PATH)/scene/textWriter.a \
 						$(BS2_BLD_PATH)/bannerSound.a \
 						$(BS2_BLD_PATH)/keyboard.a \
 						$(BS2_BLD_PATH)/channelScript.a \
-						$(EZITEXT_ROOT)/$(BUILD_ROOT)/zi8clib.a \
+						$(EZITEXT_ROOT)/$(BUILD_ROOT)/zi8_ezitext.a \
 						$(REVOLUTION_EXT_ROOT)/$(BUILD_ROOT)/cdb.a \
 						$(REVOLUTION_EXT_ROOT)/$(BUILD_ROOT)/ncd.a \
 						$(REVOLUTION_EXT_ROOT)/$(BUILD_ROOT)/net.a \

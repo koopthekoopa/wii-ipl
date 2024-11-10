@@ -31,11 +31,10 @@ namespace ipl {
      * @note Size: 0xBC
      */
     ErrorHandler::ErrorHandler(EGG::Heap* pHeap) :
-    mReady(FALSE),
+    mbReady(FALSE),
     mType(NONE),
     mMessageID(MESG_ERR_GENERIC),
     mpArcData(NULL) {
-
         // Decompress the archive file.
         mArcSize = Rvl_decode_ash_size(fatalDlg_ash);
         mpArcData = new(pHeap, BUFFER_HEAP) u8[mArcSize];
@@ -57,7 +56,7 @@ namespace ipl {
         mType = type;
         mMessageID = msgId;
 
-        // Debug related?
+        // Debug related? (never used when calling this function and seems to be incomplete)
         unk_0x0C = arg2;
         unk_0x10 = arg3;
         if (arg1) {
@@ -150,12 +149,12 @@ namespace ipl {
      * @note Size: 0x90
      */
     void ErrorHandler::calc() {
-        if (mReady == FALSE && System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+        if (mbReady == FALSE && System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
             System::getFader()->fadeIn();
-            mReady = TRUE;
+            mbReady = TRUE;
         }
 
-        if (mReady == TRUE) {
+        if (mbReady == TRUE) {
             mpLayout->calc();
         }
     }
@@ -165,7 +164,7 @@ namespace ipl {
      * @note Size: 0x44
      */
     void ErrorHandler::draw() {
-        if (mReady == TRUE) {
+        if (mbReady == TRUE) {
             utility::Graphics::setDefaultOrtho();
             mpLayout->draw();
         }

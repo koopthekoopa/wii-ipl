@@ -8,7 +8,7 @@
 namespace ipl {
     namespace nand {
         class MetaFile : File {
-            typedef void (*UnkCallback)(void*);
+            typedef void (*MetaCallback)(void*);
             
             public:
                 MetaFile(EGG::Heap* pHeap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, UnkCallback callBack, void* callBackWork, int ticketIdx);
@@ -27,8 +27,10 @@ namespace ipl {
             private:
                 BOOL            openNandFile_();
                 BOOL            openTicketFile_();
+                
                 void            readNandBlock_(void* bufferOut, int length, int offset);
                 void            readTicketBlock_(void* bufferOut, int length, int offset);
+                
                 BOOL            closeNandFile_();
                 BOOL            closeTicketFile_();
                 
@@ -37,9 +39,9 @@ namespace ipl {
                 ESTitleId       mTitleId;       // 0x198
                 ESTicketView*   mTicket;        // 0x19C
                 int             mTicketIdx;     // 0x1A0
-                bool            mMetaInNand;    // 0x1A4
+                bool            mbMetaInNand;   // 0x1A4
                 
-                UnkCallback     mCallback;      // 0x1A8
+                MetaCallback    mCallback;      // 0x1A8
                 void*           mCallbackWork;  // 0x1AC
         };
     }

@@ -19,7 +19,6 @@ namespace ipl {
             private:
                 BOOL            openTicketFile_();
                 BOOL            closeTicketFile_();
-                
 
                 u32             mContentIdx;    // 0x190
                 int             mDescriptor;    // 0x194

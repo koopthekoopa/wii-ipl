@@ -8,7 +8,7 @@
 
 #include <egg/core.h>
 
-#include "utility/iplMath.h"
+#include "iplMath.h"
 
 namespace ipl {
     namespace controller {
@@ -43,13 +43,11 @@ namespace ipl {
                 virtual int         unk_0x54();
                 /**
                  * @brief Gets the IR sensor position of the Wii Remote.
-                 * 
                  * @return The IR sensor X and Y as `ipl::math::VEC2`.
                  */
                 virtual math::VEC2  getDpdProjectionPos() const;    // 0x58
                 /**
                  * @brief Gets the Horizon of the Wii Remote.
-                 * 
                  * @return The Horizon X and Y as `ipl::math::VEC2`.
                  */
                 virtual math::VEC2  getHorizon() const;             // 0x5C
@@ -59,7 +57,6 @@ namespace ipl {
                 virtual int         unk_0x6C();
                 /**
                  * @brief If the Wii Remote is pointing to the IR sensor bar.
-                 * 
                  * @return Whether it is pointing or not.
                  */
                 virtual bool        isValidDpd() const;             // 0x70

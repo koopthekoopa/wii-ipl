@@ -9,7 +9,17 @@ namespace ext_ead {
     namespace www {
         namespace print {
             void IPLWWWReport(int type, const char* format, ...);
-            void IPLWWWVReport(int type, const char* format,  __va_list_struct* args);
+            void IPLWWWVReport(int type, const char* format, va_list args);
+
+            // maybe this was defined in the header?
+            char* Message[] = {
+                "[TickTimer]",
+                "[Warning]",
+                "[Info]",
+                "[Debug]",
+                "[[Event]]",
+                NULL,
+            };
         }
     }
 }

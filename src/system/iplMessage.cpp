@@ -32,12 +32,12 @@ namespace ipl {
                 #define CURRENT_SECTION ((MESGDataHeader*)(msgData))
 
                 switch (CURRENT_SECTION->signature) {
-                    case 'INF1': { // The information section
+                    case 'INF1': { // Meta Data section
                         mpInfoHeader = (MESGInfoHeader*)(msgData);
                         mpInfoData = (MESGInfoBlock*)(msgData + sizeof(MESGInfoHeader));
                         break;
                     }
-                    case 'DAT1': { // The data section
+                    case 'DAT1': { // Data section
                         mspMessageData = (u8*)(msgData + sizeof(MESGDataHeader));
                         break;
                     }
@@ -55,8 +55,9 @@ namespace ipl {
          * @note Size: 0x18
          */
         wchar_t* Message::getMessage(u32 id) const {
-            u32 addr = (&mpInfoData->offset)[(u16)id];
-            return (wchar_t*)(mspMessageData + addr);
+            // Get data from offset
+            u32 off = (&mpInfoData->offset)[(u16)id];
+            return (wchar_t*)(mspMessageData + off);
         }
     }
 }

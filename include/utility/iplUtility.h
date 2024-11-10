@@ -6,9 +6,7 @@
 #include <revolution.h>
 #include <revolution/wpad.h>
 
-#include "utility/iplMath.h"
-
-#define UTILITY_CLAMP(x, min, max)  x < min ? min : (x > max ? max : x)
+#include "iplMath.h"
 
 namespace ipl {
     namespace utility {

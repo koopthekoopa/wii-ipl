@@ -11,9 +11,7 @@ namespace ipl {
             public:
                 Manager(EGG::Heap* pHeap);
 
-                /**
-                 * @return The message data in use.
-                 */
+                /** @return The message data in use. */
                 Message* getMessage() { return mpMessage; }
             
             private:
@@ -24,6 +22,6 @@ namespace ipl {
     }
 }
 
-#endif // IPL_MESSAGE_H
+#endif // IPL_MESSAGE_MANAGER_H
 
 

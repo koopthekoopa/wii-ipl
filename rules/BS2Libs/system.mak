@@ -1,4 +1,4 @@
-SYSTEM_OBJECTS	=	$(BS2_SPLIT_PATH)/system/enctable_stuff.o \
+SYSTEM_OBJECTS	=	$(BS2_SPLIT_PATH)/system/enc_table.o \
 					$(BS2_SPLIT_PATH)/system/rvl_dec.o \
 					$(BS2_OBJ_PATH)/system/RIPL_BoardRecord.o \
 					$(BS2_SPLIT_PATH)/system/iplSystem.o \

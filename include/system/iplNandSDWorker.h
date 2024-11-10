@@ -15,11 +15,8 @@ namespace ipl {
         private:
             /**
              * @brief Verifies if the banner header is valid.
-             * 
              * @param pBnrData The buffer containing the banner data.
              * @param hashOut Save the hash of the banner as a `u32`.
-             * 
-             * @return Boolean telling if the header is valid.
              */
             BOOL    check_header_base(const u8 *pBnrData, u32 *hashOut);
     };

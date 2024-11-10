@@ -9,6 +9,7 @@ IPL_OUTFILE	= ipl.$(VERSION).app
 
 # Directory defines (must be here)
 BUILD_ROOT				= build
+BUILD_INPUT_ROOT		= $(BUILD_ROOT)/inputs
 CONFIG_ROOT				= config/$(VERSION)
 DATA_ROOT				= data/$(VERSION)
 DATA_OUT_ROOT			= $(DATA_ROOT)/build
@@ -41,9 +42,6 @@ EZITEXT_ROOT		= $(LIBRARIES_ROOT)/RVLMiddleware/eZiText
 TMCJPEG_ROOT		= $(LIBRARIES_ROOT)/RVLMiddleware/TMC_JPEG
 
 # Checks
-ifneq ($(VERSION),43U)
-$(error Only Wii Menu 4.3U is currently supported. Sorry)
-endif
 
 ifeq (,$(wildcard $(IPL_INFILE)))
 $(error Obtain the Wii Menu's Executable file, place it in this directory and rename it to $(IPL_INFILE))
@@ -64,6 +62,8 @@ all: $(SPLIT_ROOT) $(BUILD_ROOT)/$(IPL_OUTFILE)
 # Split
 $(SPLIT_ROOT): $(SPLIT_FILE) $(SPLIT_UNITS) $(SPLIT_SYMBOLS)
 	@echo Splitting IPL executable...
+	@mkdir -p $(BUILD_INPUT_ROOT)
+	@$(TOOLS_ROOT)/$(IPL2DTK) $(IPL_INFILE) $(BUILD_INPUT_ROOT)/$(IPL_DTKFILE)
 	@$(DTK) dol split $(SPLIT_FILE) $(SPLIT_ROOT)
 
 # Link

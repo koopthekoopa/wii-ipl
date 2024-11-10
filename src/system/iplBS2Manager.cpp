@@ -24,7 +24,7 @@ namespace ipl {
         unk_0x0F(false),
         mbIsDiagDisc(false),
         unk_0x11(false),
-        mHasBanner(FALSE),
+        mbHasBanner(FALSE),
         unk_0x1C(BS2_STATE_52),
         mbStartUpdate(false),
         mEntries(NULL),
@@ -233,7 +233,7 @@ namespace ipl {
                     break;
                 }
                 case BS2_RUN_APP: {
-                    mHasBanner = BS2IsBannerAvailable();
+                    mbHasBanner = BS2IsBannerAvailable();
                     unk_0x04 = 5;
                     if (BS2IsDiagDisc()) {
                         mbIsDiagDisc = true;
@@ -245,7 +245,7 @@ namespace ipl {
                     break;
                 }
                 case BS2_STATE_69: {
-                    mHasBanner = BS2IsBannerAvailable();
+                    mbHasBanner = BS2IsBannerAvailable();
                     unk_0x1C = BS2_STATE_69;
                     unk_0x04 = 5;
                     break;

@@ -37,7 +37,7 @@ namespace ipl {
         mConsole = NULL;
         unk_0x04 = 0;
         mpBuffer = NULL;
-        unk_0x0C = 0;
+        unk_0x0C = *(sKeyInputs);
 
         nw4r::db::Exception_Init();
         nw4r::db::DirectPrint_Init();

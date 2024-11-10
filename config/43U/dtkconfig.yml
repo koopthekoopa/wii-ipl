@@ -1,4 +1,4 @@
-object: 'base.43U.dtk'
+object: 'build/inputs/base.43U.dtk'
 
 symbols: 'config/43U/symbols.txt'
 splits: 'config/43U/splits.txt'
