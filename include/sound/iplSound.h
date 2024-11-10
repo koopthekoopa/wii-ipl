@@ -3,6 +3,8 @@
 
 #include <revolution/types.h>
 
+#include "bannerSound/BannerSoundPlayer.h"
+
 namespace ipl {
     namespace snd {
         class System {
@@ -21,10 +23,15 @@ namespace ipl {
                 undefined4      unk_0x00[0x638];
         };
 
-        extern System sSystem;
+        extern System               sSystem;
+        extern BannerSoundPlayer    sBannerSoundPlayer;
 
         static System* getSystem() {
             return &sSystem;
+        }
+
+        static BannerSoundPlayer* getBannerPlayer() {
+            return &sBannerSoundPlayer;
         }
     }
 }

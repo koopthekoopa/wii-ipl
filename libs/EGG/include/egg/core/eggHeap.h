@@ -39,6 +39,7 @@ void *operator  new[](size_t size, EGG::Heap *pHeap, int align);
 void operator   delete(void *ptr);
 void operator   delete[](void *ptr);
 
+// errr
 #define BUFFER_HEAP DEFAULT_ALIGN
 #define CLASS_HEAP  4
 

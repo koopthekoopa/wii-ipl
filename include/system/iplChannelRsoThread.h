@@ -9,7 +9,7 @@ typedef void (*CalcFunc)();
 
 namespace ipl {
     namespace channel {
-        class RsoThread : utility::ut_thread {
+        class RsoThread : public utility::ut_thread {
             public:
                 /** @param pHeap The work heap used. */
                 RsoThread(EGG::Heap* pHeap);
@@ -20,6 +20,8 @@ namespace ipl {
                 void            start();
                 /** @param func The new loop function. */
                 void            setCalcFunc(CalcFunc func);
+
+                OSMessageQueue* getCalcQueue() { return &mCalcQueue; }
             
             private:
                 u8*             mpStack;        // 0x32C

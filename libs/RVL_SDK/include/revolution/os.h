@@ -75,6 +75,9 @@ void    OSShutdownSystem();
 void    OSReport(const char* msg, ...);
 void    OSVReport(const char* msg, va_list list);
 
+void    OSPanic(const char* file, int line, const char* msg);
+#define OSHalt(msg, line)   OSPanic(__FILE__, line, msg);
+
 void    OSFatal(GXColor front, GXColor back, const char* msg);
 
 OSTime  OSGetTime();

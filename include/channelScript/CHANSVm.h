@@ -7,6 +7,10 @@
 
 #include "channelScript/CHANSVmError.h"
 
+extern "C" {
+
+#define CHANS_VM_WORK_SIZE  0x40000
+
 typedef u32     CHANSClass;
 
 typedef struct  CHANSVm CHANSVm;
@@ -43,19 +47,29 @@ typedef struct CHANSPropertyEntry {
 } CHANSPropertyEntry;
 
 #define     CHANSVmMethodLength(x)  (sizeof(x) / sizeof(CHANSMethodEntry))
-#define     CHANSVmDefineMethod(x)  CHANSErr x(CHANSVm* pVm, CHANSVmObjHdr* pUnk0, CHANSVmObjHdr* pObject)
+#define     CHANSVmDefineMethod(x)  CHANSErr x(CHANSVm* vm, CHANSVmObjHdr* pUnk0, CHANSVmObjHdr* pObject)
 
-CHANSClass  CHANSVmFindNativeClass(CHANSVm* pVm, const char* clsName);
-CHANSClass  CHANSVmAddNativeClass(CHANSVm* pVm, const char* clsName, CHANSCtor clsCtor, u32 unk1);
-BOOL        CHANSVmAddNativeMethodList(CHANSVm* pVm, CHANSClass cls, CHANSMethodEntry* pMethods, u32 methodLen);
+void        CHANSVmInit(CHANSVm* vm, void* work, int size);
 
-BOOL        CHANSVmNewObjData(CHANSVm* pVm, CHANSVmObjHdr* pObject, u32 unk1);
+u32         CHANSVmGetFreeExeSize(CHANSVm* vm);
+void*       CHANSVmGetFreeExeBufp(CHANSVm* vm);
 
-CHANSErr    CHANSVmSetInteger(CHANSVm* pVm, CHANSVmObjHdr* pObject, u32 intIdx, int value);
+BOOL        CHANSVmAddExe(CHANSVm* vm, int unk0, int unk1);
+BOOL        CHANSVmLinkModules(CHANSVm* vm, int unk0);
 
-int         CHANSVmGetArgInteger(CHANSVm* pVm, int arg);
-float       CHANSVmGetArgFloat(CHANSVm* pVm, int arg);
-char*       CHANSVmGetArgString(CHANSVm* pVm, int arg);
+CHANSClass  CHANSVmFindNativeClass(CHANSVm* vm, const char* clsName);
+CHANSClass  CHANSVmAddNativeClass(CHANSVm* vm, const char* clsName, CHANSCtor clsCtor, u32 unk1);
+BOOL        CHANSVmAddNativeMethodList(CHANSVm* vm, CHANSClass cls, CHANSMethodEntry* pMethods, u32 methodLen);
+
+BOOL        CHANSVmNewObjData(CHANSVm* vm, CHANSVmObjHdr* pObject, u32 unk1);
+
+CHANSErr    CHANSVmSetInteger(CHANSVm* vm, CHANSVmObjHdr* pObject, u32 intIdx, int value);
+
+int         CHANSVmGetArgInteger(CHANSVm* vm, int arg);
+float       CHANSVmGetArgFloat(CHANSVm* vm, int arg);
+char*       CHANSVmGetArgString(CHANSVm* vm, int arg);
+
+}
 
 #endif // IPL_CHANNEL_SCRIPT_H
 

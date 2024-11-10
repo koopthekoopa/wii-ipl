@@ -4,6 +4,7 @@
 #include <egg/core/eggDisposer.h>
 #include <egg/core/eggAllocator.h>
 #include <egg/core/eggHeap.h>
+#include <egg/core/eggExpHeap.h>
 
 #include <egg/core/eggThread.h>
 
