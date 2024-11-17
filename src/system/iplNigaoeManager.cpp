@@ -14,10 +14,6 @@ namespace ipl {
     namespace nigaoe {
         #define IPL_NIGAOE_ICON_MAX 10
 
-        /**
-         * @note Address: 0x8133E984 (4.3U)
-         * @note Size: 0x110
-         */
         Manager::Manager(EGG::Heap* pHeap) {
             mResFile = System::getRFLArc();
 
@@ -48,34 +44,22 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x8133EA94 (4.3U)
-         * @note Size: 0x90
-         */
         Object* Manager::create(EGG::Heap* pHeap, int width, int height, int faceId, Object::MakeIconCallback callback, void* callbackWork) {
-            // append mii to list
+            // Create mii and append to list
             Object* obj = new(pHeap, CLASS_HEAP) Object(pHeap, width, height, faceId, callback, callbackWork);
 
             nw4r::ut::List_Append(&mObjects, obj);
             return obj;
         }
 
-        /**
-         * @note Address: 0x8133EB24 (4.3U)
-         * @note Size: 0x90
-         */
         Object* Manager::create(EGG::Heap* pHeap, int width, int height, RFLiCharData* faceData, Object::MakeIconCallback callback, void* callbackWork) {
-            // append mii to list
+            // Create mii and append to list
             Object* obj = new(pHeap, CLASS_HEAP) Object(pHeap, width, height, faceData, callback, callbackWork);
 
             nw4r::ut::List_Append(&mObjects, obj);
             return obj;
         }
 
-        /**
-         * @note Address: 0x8133EBB4 (4.3U)
-         * @note Size: 0x7C
-         */
         void Manager::makeIcon() {
             int i = 0;
 
@@ -90,24 +74,15 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x8133EC30 (4.3U)
-         * @note Size: 0x74
-         */
         void Manager::detach(Object* obj) {
             for (u16 i = 0; i < mObjects.numObjects; i++) {
                 if (obj == (Object*)nw4r::ut::List_GetNth(&mObjects, i)) {
                     nw4r::ut::List_Remove(&mObjects, obj);
-                    
                     return;
                 }
             }
         }
 
-        /**
-         * @note Address: 0x8133ECA4 (4.3U)
-         * @note Size: 0x1C
-         */
         BOOL Manager::isAvalable(u16 faceId) {
             BOOL result = FALSE;
 
@@ -118,10 +93,6 @@ namespace ipl {
             return result;
         }
 
-        /**
-         * @note Address: 0x8133ECC0 (4.3U)
-         * @note Size: 0x60
-         */
         BOOL Manager::isValid(const RFLiCharData* faceData) const {
             RFLiCharInfo info;
             BOOL result = TRUE;
@@ -138,19 +109,11 @@ namespace ipl {
             return result;
         }
 
-        /**
-         * @note Address: 0x8133ED20 (4.3U)
-         * @note Size: 0x48
-         */
         RFLErrcode Manager::addHiddenDB(const NWC24MsgObj* faceDB) {
             OSReport("wait async err %d\n", RFLWaitAsync());
             return RFLiNWC24Msg2HiddenAsync(faceDB);
         }
 
-        /**
-         * @note Address: 0x8133ED68 (4.3U)
-         * @note Size: 0x98
-         */
         void Manager::commitHiddenDB() {
             nwc24::Manager*     nwc24Mgr = System::isSafeMode() ? NULL : System::getNwc24Manager();
             

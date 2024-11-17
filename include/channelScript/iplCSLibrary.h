@@ -4,7 +4,7 @@
 #include "channelScript/CHANSVm.h"
 
 #define INIT_EXTERN(l) \
-namespace l { bool init(CHANSVm* vm); }
+namespace l { BOOL init(CHANSVm* vm); }
 
 #define CS_LIB_INITIALIZED(vm, l) \
 cs::l::init(vm)

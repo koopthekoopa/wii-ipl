@@ -23,7 +23,8 @@ namespace ipl {
                 void    init(EGG::Heap* pHeap, int width, int height);
                 void    make_icon();
 
-                BOOL    created() { return mbCreated; }
+                BOOL    created()           { return mbCreated; }
+                u8*     getIconTexture()    { return mpIconTex; }
                 
                 u8*                 mpIconTex;          // 0x00
                 u32                 mIconSize;          // 0x04
@@ -42,7 +43,7 @@ namespace ipl {
                 undefined4          unk_0x4C;
                 bool                mbCreated;          // 0x50
             
-            friend class Manager;
+                friend class Manager;
         };
     }
 }

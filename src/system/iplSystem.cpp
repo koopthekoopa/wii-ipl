@@ -7,12 +7,8 @@
 #include <cstring>
 
 namespace ipl {
-    System::Arg System::smArg;  /** @note Address 0x81089008 (4.3J/U/E) Size 0x2D8 */
-    
-    /**
-     * @note Address 0x81332C24
-     * @note Size 0x48
-    */
+    System::Arg System::smArg;
+
     System::Arg::Arg() {
         memset(&smArg, 0, sizeof(Arg));
         OSCreateAlarm(&mUnkAlarm);

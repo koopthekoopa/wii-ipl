@@ -4,10 +4,6 @@
 
 namespace ipl {
     namespace utility {
-        /**
-         * @note Address: 0x813632A8 (4.3U)
-         * @note Size: 0x9C
-         */
         Capture::Capture(EGG::Heap* pHeap, int x, int y, int width, int height, _GXTexFmt texFmt) :
         mXPos(x),
         mYPos(y),
@@ -20,19 +16,11 @@ namespace ipl {
             
             GXInitTexObj(&mTexObj, mTextureBuffer, mTextureWidth, mTextureHeight, mTextureFormat, GX_CLAMP, GX_CLAMP, GX_FALSE);
         }
-        
-        /**
-         * @note Address: 0x81363344 (4.3U)
-         * @note Size: 0x58
-         */
+
         Capture::~Capture() {
             delete[] mTextureBuffer;
         }
-        
-        /**
-         * @note Address: 0x8136339C (4.3U)
-         * @note Size: 0xC0
-         */
+
         void Capture::capture(BOOL disableFilter) {
             DCInvalidateRange(mTextureBuffer, mTextureSize);
             

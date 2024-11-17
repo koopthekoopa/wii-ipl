@@ -94,10 +94,6 @@ const unsigned long long __constants[] = {
     0x41E0000000000000,
 };
 
-/**
- * @note Address 0x815F9398
- * @note Size 0x5C
- */
 asm unsigned long __cvt_fp2unsigned(register double d) {
     nofralloc
 
@@ -133,10 +129,6 @@ asm unsigned long __cvt_fp2unsigned(register double d) {
     blr
 }
 
-/**
- * @note Address 0x815F948C
- * @note Size 0x4C
- */
 static asm void __save_fpr() {
     nofralloc
 
@@ -179,10 +171,6 @@ static asm void __save_fpr() {
         blr
 }
 
-/**
- * @note Address 0x815F9440
- * @note Size 0x4C
- */
 static asm void __restore_fpr() {
     nofralloc
     ENTRY_RESTORE_FPR(14)
@@ -224,10 +212,6 @@ static asm void __restore_fpr() {
         blr
 }
 
-/**
- * @note Address 0x815F948C
- * @note Size 0x4C
- */
 static asm void __save_gpr() {
     nofralloc
     ENTRY_SAVE_GPR(14)
@@ -269,10 +253,6 @@ static asm void __save_gpr() {
         blr
 }
 
-/**
- * @note Address 0x815F94D8
- * @note Size 0x4C
- */
 static asm void __restore_gpr() {
     nofralloc
     ENTRY_RESTORE_GPR(14)
@@ -314,10 +294,6 @@ static asm void __restore_gpr() {
         blr
 }
 
-/**
- * @note Address: 0x815F9524 (4.3U)
- * @note Size: 0xEC
- */
 asm void __div2u() {
     cmpwi r3, 0x0
     cntlzw r0, r3
@@ -389,10 +365,6 @@ L_815F9604:
     blr
 }
 
-/**
- * @note Address: 0x815F9610 (4.3U)
- * @note Size: 0x138
- */
 asm void __div2i() {
     stwu r1, -0x10(r1)
     clrrwi. r9, r3, 31
@@ -487,10 +459,6 @@ L_815F9740:
     blr
 }
 
-/**
- * @note Address: 0x815F9748 (4.3U)
- * @note Size: 0xE4
- */
 asm void __mod2u() {
     cmpwi r3, 0x0
     cntlzw r0, r3
@@ -560,10 +528,6 @@ L_815F9828:
     blr
 }
 
-/**
- * @note Address: 0x815F982C (4.3U)
- * @note Size: 0x10C
- */
 asm void __mod2i() {
     cmpwi cr7, r3, 0x0
     bge cr7, L_815F983C
@@ -646,10 +610,6 @@ L_815F9934:
     blr
 }
 
-/**
- * @note Address: 0x815F9938 (4.3U)
- * @note Size: 0x24
- */
 asm void __shl2i() {
     subfic r8, r5, 0x20
     subic r9, r5, 0x20
@@ -662,10 +622,6 @@ asm void __shl2i() {
     blr
 }
 
-/**
- * @note Address: 0x815F995C (4.3U)
- * @note Size: 0x24
- */
 asm void __shr2u() {
     subfic r8, r5, 0x20
     subic r9, r5, 0x20
@@ -678,10 +634,6 @@ asm void __shr2u() {
     blr
 }
 
-/**
- * @note Address: 0x815F9980 (4.3U)
- * @note Size: 0x28
- */
 asm void __shr2i() {
     subfic r8, r5, 0x20
     subic. r9, r5, 0x20
@@ -696,10 +648,6 @@ L_815F99A0:
     blr
 }
 
-/**
- * @note Address: 0x815F99A8 (4.3U)
- * @note Size: 0xB0
- */
 asm void __cvt_sll_dbl() {
     stwu r1, -0x10(r1)
     clrrwi. r5, r3, 31
@@ -751,10 +699,6 @@ L_815F9A44:
     blr
 }
 
-/**
- * @note Address: 0x815F9A58 (4.3U)
- * @note Size: 0x9C
- */
 asm void __cvt_ull_dbl() {
     stwu r1, -0x10(r1)
     or. r7, r3, r4
@@ -800,10 +744,6 @@ L_815F9AE0:
     blr
 }
 
-/**
- * @note Address: 0x815F9AF4 (4.3U)
- * @note Size: 0xA0
- */
 asm void __cvt_ull_flt() {
     stwu r1, -0x10(r1)
     or. r7, r3, r4
@@ -850,10 +790,6 @@ L_815F9B7C:
     blr
 }
 
-/**
- * @note Address: 0x815F9B94 (4.3U)
- * @note Size: 0xCC
- */
 asm void __cvt_dbl_usll() {
     stwu r1, -0x10(r1)
     stfd f1, 0x8(r1)
@@ -914,10 +850,6 @@ L_815F9C58:
     blr
 }
 
-/**
- * @note Address: 0x815F9C60 (4.3U)
- * @note Size: 0xAB
- */
 asm void __cvt_dbl_ull() {
     stwu r1, -0x10(r1)
     stfd f1, 0x8(r1)

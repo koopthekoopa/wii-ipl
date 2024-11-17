@@ -6,10 +6,6 @@
 
 namespace ipl {
     namespace scene {
-        /**
-         * @note Address: 0x813DA778
-         * @note Size: 0x10C
-         */
         void Reboot::calc() {
             if (System::unkBool() || (System::hasCreatedAfter() && System::isNandFull())) {
                 System::getHomeButtonMenu()->setUnk_0x05(true);

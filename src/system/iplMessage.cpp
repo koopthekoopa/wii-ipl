@@ -6,23 +6,11 @@
 
 namespace ipl {
     namespace message {
-        /**
-         * @note Address: 0x8133E6FC (4.3U)
-         * @note Size: 0x14
-         */
         Message::Message()
         : mpInfoHeader(NULL), mpInfoData(NULL), mspMessageData(NULL) {}
-        
-        /**
-         * @note Address: 0x8133E710 (4.3U)
-         * @note Size: 0x40
-         */
+
         Message::~Message() {}
 
-        /**
-         * @note Address: 0x8133E750 (4.3U)
-         * @note Size: 0x6C
-         */
         void Message::setResource(u8* msgData) {
             MESGHeader* header = (MESGHeader*)(msgData);
 
@@ -50,10 +38,6 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x8133E7BC (4.3U)
-         * @note Size: 0x18
-         */
         wchar_t* Message::getMessage(u32 id) const {
             // Get data from offset
             u32 off = (&mpInfoData->offset)[(u16)id];

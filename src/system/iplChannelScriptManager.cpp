@@ -42,7 +42,7 @@ namespace ipl {
 
             CHANSVmInit(&smCSVm, mpChansWork, CHANS_VM_WORK_SIZE);
 
-            bool result = CS_LIB_INITIALIZED(&smCSVm, system);
+            BOOL result = CS_LIB_INITIALIZED(&smCSVm, system);
             if (result == false) {
                 OSHalt("CHANSVmSystemMenuInit error\n", 101);
             }
@@ -150,7 +150,7 @@ namespace ipl {
         }
 
         void ChannelScriptManager::calc() {
-            if (smCSState == CHANS_VM_STATE_UNK2 && smpThread->IsThreadSuspended()) {
+            if (smCSState == CHANS_VM_STATE_UNK2 && smpThread->IsThreadSuspended() != FALSE) {
                 OSReceiveMessage(smpThread->getCalcQueue(), &unk_0x30, 0);
 
                 if (unk_0x30 == (OSMessage)1) {

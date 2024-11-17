@@ -49,10 +49,6 @@ namespace ipl {
             }
             s32 SecretGetFileSystemStatus(NANDFileSystemStatus *pStatus)                                { WrapperFunction(NANDSecretGetFileSystemStatus(pStatus)); }
 
-            /**
-             * @note Address: 0x813606E4 (4.3U)
-             * @note Size: 0x80
-             */
             BOOL _condition(int result, int tries) {
                 BOOL TryAgain = FALSE;
 

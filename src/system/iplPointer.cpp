@@ -15,10 +15,6 @@ namespace ipl {
     #define MIN_LENGTH    32.f
     #define MAX_LENGTH    128.f
 
-    /**
-     * @note Address: 0x816354D4 (4.3U)
-     * @note Size: 0x24
-     */
     static const char* scLayoutName[MAX_LAYOUT_FILES] = {
         #define LYT_INVALID_ID     -1
     
@@ -41,10 +37,6 @@ namespace ipl {
          "my_BScroll_a.brlyt"
     };
 
-    /**
-     * @note Address: 0x81344188 (4.3U)
-     * @note Size: 0xE8
-     */
     Pointer::Pointer(EGG::Heap* pHeap) :
     unk_0x28(-1),
     mOriginPos(0.f, 0.f),
@@ -61,10 +53,6 @@ namespace ipl {
         }
     }
 
-    /**
-     * @note Address: 0x81344270 (4.3U)
-     * @note Size: 0x174
-     */
     void Pointer::calc() {
         // Update the pointer cursor
         mCore.calc(this);
@@ -106,10 +94,6 @@ namespace ipl {
         }
     }
 
-    /**
-     * @note Address: 0x81344428 (4.3U)
-     * @note Size: 0x50
-     */
     void Pointer::draw() {
         if (mbVisible) {
             mCore.draw();
@@ -119,27 +103,15 @@ namespace ipl {
             }
         }
     }
-    
-    /**
-     * @note Address: 0x81344478 (4.3U)
-     * @note Size: 0x8
-     */
+
     void Pointer::setState(int chan, int state) {
         mCore.setState(chan, state);
     }
 
-    /**
-     * @note Address: 0x81344480 (4.3U)
-     * @note Size: 0x8
-     */
     void Pointer::changeType(int chan, int type) {
         mCore.changeType(chan, type);
     }
 
-    /**
-     * @note Address: 0x81344488 (4.3U)
-     * @note Size: 0x3C
-     */
     layout::Object* Pointer::get_layout(int chan, int type) {
         int grabId = LYT_INVALID_ID;
 

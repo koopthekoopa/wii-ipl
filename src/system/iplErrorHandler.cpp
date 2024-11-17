@@ -26,10 +26,6 @@ extern u8 ipl_error_chn_bmg[];
 extern u8 ipl_error_kor_bmg[];
 
 namespace ipl {
-    /**
-     * @note Address: 0x81356458 (4.3U)
-     * @note Size: 0xBC
-     */
     ErrorHandler::ErrorHandler(EGG::Heap* pHeap) :
     mbReady(FALSE),
     mType(NONE),
@@ -45,10 +41,6 @@ namespace ipl {
         mpLayout = new(pHeap, 4) layout::Object(pHeap, mpArcData, "arc", "my_Fatal.brlyt");
     }
 
-    /**
-     * @note Address: 0x81356514 (4.3U)
-     * @note Size: 0x98
-     */
     void ErrorHandler::set(Type type, u32 msgId, const char* arg1, int arg2, int arg3) {
         OSThread* curThread;
 
@@ -56,7 +48,7 @@ namespace ipl {
         mType = type;
         mMessageID = msgId;
 
-        // Debug related? (never used when calling this function and seems to be incomplete)
+        // Debug related? (seems to be incomplete. unused.)
         unk_0x0C = arg2;
         unk_0x10 = arg3;
         if (arg1) {
@@ -76,10 +68,6 @@ namespace ipl {
         }
     }
 
-    /**
-     * @note Address: 0x813565AC (4.3U)
-     * @note Size: 0x14C
-     */
     void ErrorHandler::check() {
         if (mType != NONE) {
             message::Message ErrorMsg = message::Message();
@@ -136,18 +124,10 @@ namespace ipl {
         }
     }
 
-    /**
-     * @note Address: 0x813566F8 (4.3U)
-     * @note Size: 0x30
-     */
     void ErrorHandler::log(const char* type, int result, const char* file, int line) {
         NANDLoggingAddMessageAsync(NULL, "%s error. [%d] %s line: %d", type, result, file, line);
     }
 
-    /**
-     * @note Address: 0x81356728 (4.3U)
-     * @note Size: 0x90
-     */
     void ErrorHandler::calc() {
         if (mbReady == FALSE && System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
             System::getFader()->fadeIn();
@@ -159,10 +139,6 @@ namespace ipl {
         }
     }
 
-    /**
-     * @note Address: 0x813567B8 (4.3U)
-     * @note Size: 0x44
-     */
     void ErrorHandler::draw() {
         if (mbReady == TRUE) {
             utility::Graphics::setDefaultOrtho();

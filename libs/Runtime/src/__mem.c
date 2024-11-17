@@ -3,10 +3,6 @@
 
 #pragma section code_type ".init"
 
-/**
- * @note Address 0x81330230 (4.3U)
- * @note Size 0x50
- */
 void* memcpy(void* pDest, const void* pSrc, size_t count) {
     char*   p;
     char*   q;
@@ -31,11 +27,6 @@ void* memcpy(void* pDest, const void* pSrc, size_t count) {
     return pDest;
 }
 
-
-/**
- * @note Address 0x81330280 (4.3U)
- * @note Size 0xB4
- */
 void  __fill_mem(void* pDest, int value, unsigned long length) {
 #define cDest ((unsigned char*)pDest)
 #define lDest ((unsigned long*)pDest)
@@ -98,10 +89,6 @@ void  __fill_mem(void* pDest, int value, unsigned long length) {
 #undef lDest
 }
 
-/**
- * @note Address 0x81330334 (4.3U)
- * @note Size 0x30
- */
 void* memset(void* pDest, int ch, size_t count) {
     __fill_mem(pDest, ch, count);
     return pDest;
@@ -109,10 +96,6 @@ void* memset(void* pDest, int ch, size_t count) {
 
 #pragma section code_type ".text"
 
-/**
- * @note Address 0x815F8EFC (4.3U)
- * @note Size 0x1C
- */
 __declspec(weak) size_t strlen(const char* str) {
     size_t          size = -1;
     unsigned char*  p = (unsigned char*)str - 1;

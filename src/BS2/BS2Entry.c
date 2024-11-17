@@ -4,10 +4,6 @@
 
 extern void mainmenu();
 
-/**
- * @note Address: 0x81379658
- * @note Size: 0xA0
- */
 void BS2Entry() {
     // Wait for Video.
     VIWaitForRetrace();

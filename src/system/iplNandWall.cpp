@@ -17,10 +17,6 @@ namespace ipl {
         u32 global_free_fsblock;
         u32 global_free_inode;
 
-        /**
-         * @note Address: 0x8133DC0C (4.3U)
-         * @note Size: 0xDC
-         */
         void throwNandCheckCommand(void* unusedBuffer) {
             NANDFileSystemStatus status;
 
@@ -31,6 +27,7 @@ namespace ipl {
 
             calcGlobalUsage_(&global_free_fsblock, &global_free_inode, &status);
 
+            // Display usage
             OSReport("**********************************************\n");
             OSReport(" NAND USAGE : [fsblock: free   / user_used] \n");
             OSReport(" NAND USAGE : [fsblock: %6d / %6d   ] \n", global_free_fsblock, user_used_fsblocks);
@@ -45,10 +42,6 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x8133DCE8 (4.3U)
-         * @note Size: 0x40
-         */
         BOOL isNandCapacity() {
             if (user_used_fsblocks <= 17408 && user_used_inodes <= 4000 && global_free_fsblock >= 3592 && global_free_inode >= 128) {
                 return TRUE;
@@ -58,10 +51,6 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x8133DD28 (4.3U)
-         * @note Size: 0x38
-         */
         void calcGlobalUsage_(u32* freeBlocks, u32* freeINodes, NANDFileSystemStatus* pStatus) {
             u32 bad = pStatus->badBlocks;
             u32 reserved = pStatus->reservedBlocks;
@@ -72,10 +61,6 @@ namespace ipl {
             *freeBlocks = (BLOCKS_MAX - size) - pStatus->usedBlocks;
         }
 
-        /**
-         * @note Address: 0x8133DD60 (4.3U)
-         * @note Size: 0xA8
-         */
         BOOL checkNandCapacityAppBootable() {
             u32 usedDirBlocks = 0;
             u32 usedDirINodes = 0;

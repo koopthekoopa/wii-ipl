@@ -17,7 +17,7 @@ BS2_ELF_ADDRESS		= 0x81330000
 BS2_IMAGE_SIZE		= 0x3B0000
 
 # for libraries
-BS2_CMN_CFLAGS	=	-O4,s -ipa file $(COMMON_CCFLAGS)
+BS2_CMN_CFLAGS	=	-O4,s -ipa file $(COMMON_CCFLAGS) -sym on
 BS2_CMN_CCPATH	=	$(CW_GC_30A52)
 
 # libraries
@@ -47,6 +47,9 @@ BS2_CMN_CCPATH	=	$(CW_GC_30A52)
 -include $(RULES_ROOT)/BS2Libs/scene/parentalDialog.mak
 -include $(RULES_ROOT)/BS2Libs/scene/sceneMisc.mak
 -include $(RULES_ROOT)/BS2Libs/scene/sdChannelSelect.mak
+-include $(RULES_ROOT)/BS2Libs/scene/sdChannelTitle.mak
+-include $(RULES_ROOT)/BS2Libs/scene/sdChannelButton.mak
+-include $(RULES_ROOT)/BS2Libs/scene/sdChannelMemory.mak
 -include $(RULES_ROOT)/BS2Libs/scene/setting.mak
 -include $(RULES_ROOT)/BS2Libs/scene/sceneSystem.mak
 -include $(RULES_ROOT)/BS2Libs/scene/textWriter.mak
@@ -80,6 +83,9 @@ BS2_ELF_LIBRARIES	=	$(BS2_BLD_PATH)/system.a \
 						$(BS2_BLD_PATH)/scene/parentalDialog.a \
 						$(BS2_BLD_PATH)/scene/sceneMisc.a \
 						$(BS2_BLD_PATH)/scene/sdChannelSelect.a \
+						$(BS2_BLD_PATH)/scene/sdChannelTitle.a \
+						$(BS2_BLD_PATH)/scene/sdChannelButton.a \
+						$(BS2_BLD_PATH)/scene/sdChannelMemory.a \
 						$(BS2_BLD_PATH)/scene/sceneSystem.a \
 						$(BS2_BLD_PATH)/scene/setting.a \
 						$(BS2_BLD_PATH)/scene/textWriter.a \

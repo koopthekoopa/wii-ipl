@@ -477,7 +477,7 @@ BS2/BS2Fatal.c:
 	.rodata     start:0x8160F628 end:0x8160F650
 	.data       start:0x81646F08 end:0x81647538
 	.sdata2     start:0x81694788 end:0x816947D0
-    .sdata      start:0x816965B8 end:0x816965C0
+	.sdata      start:0x816965B8 end:0x816965C0
 	.sbss       start:0x81698B48 end:0x81698B50
 
 scene/address/iplAddress.cpp:
@@ -592,7 +592,7 @@ scene/channelEdit/iplChanAppEdit.cpp:
 	.text       start:0x813A54DC end:0x813A6F04
 	.rodata     start:0x8160FC80 end:0x8160FCA8
 	.data       start:0x8164D2E8 end:0x8164D7C0
-    .sdata2     start:0x81694910 end:0x81694938
+	.sdata2     start:0x81694910 end:0x81694938
 	.sdata      start:0x81696860 end:0x816968A8
 
 scene/channelEdit/iplAnmController.cpp:
@@ -824,30 +824,30 @@ scene/sdChannelSelect/iplSDChannelObj.cpp:
 	.sdata2     start:0x81694B18 end:0x81694B60
 	.sdata      start:0x81696DD0 end:0x81696E40
 
-scene/sdChannelSelect/iplSDChannelTitle.cpp:
+scene/sdChannelTitle/iplSDChannelTitle.cpp:
 	.text       start:0x813E4BBC end:0x813E947C
 	.rodata     start:0x81610918 end:0x81610948
 	.data       start:0x81654F98 end:0x81655638
 	.sdata2     start:0x81694B60 end:0x81694B88
 	.sdata      start:0x81696E40 end:0x81696EF0
 
-scene/sdChannelSelect/iplSDButton.cpp:
+scene/sdChannelButton/iplSDButton.cpp:
 	.text       start:0x813E947C end:0x813EA88C
 	.data       start:0x81655638 end:0x81655A70
 	.sdata2     start:0x81694B88 end:0x81694BA0
 	.sdata      start:0x81696EF0 end:0x81696F30
 
-scene/sdChannelSelect/iplSDArrow.cpp:
+scene/sdChannelButton/iplSDArrow.cpp:
 	.text       start:0x813EA88C end:0x813EA9BC
 	.data       start:0x81655A70 end:0x81655AC0
 
-scene/sdChannelSelect/iplSDMenuButton.cpp:
+scene/sdChannelButton/iplSDMenuButton.cpp:
 	.text       start:0x813EA9BC end:0x813EB5EC
 	.data       start:0x81655AC0 end:0x81655CA0
 	.sdata2     start:0x81694BA0 end:0x81694BD0
 	.sdata      start:0x81696F30 end:0x81696F50
 
-scene/sdChannelSelect/iplSDMemory.cpp:
+scene/sdChannelMemory/iplSDMemory.cpp:
 	.text       start:0x813EB5EC end:0x813F0774
 	.data       start:0x81655CA0 end:0x816568E8
 	.sdata2     start:0x81694BD0 end:0x81694C00
@@ -1008,7 +1008,7 @@ keyboard/inputform.cpp:
 	.rodata     start:0x81614FE8 end:0x816152E0
 	.data       start:0x8165C820 end:0x8165D2D0
 	.sdata2     start:0x81694D28 end:0x81694D90
-	.sdata      start:0x81697398 end:0x816973C8
+	.sdata      start:0x81697398 end:0x816973C0
 	.sbss       start:0x81698D00 end:0x81698D20
 
 keyboard/candidatebox.cpp:
@@ -1017,7 +1017,7 @@ keyboard/candidatebox.cpp:
 	.rodata     start:0x816152E0 end:0x81615658
 	.data       start:0x8165D2D0 end:0x8165E070
 	.sdata2     start:0x81694D90 end:0x81694DE0
-	.sdata      start:0x816973C8 end:0x816973F8
+	.sdata      start:0x816973C0 end:0x816973F8
 
 keyboard/toolbar.cpp:
 	.text       start:0x8142DF10 end:0x8142F468

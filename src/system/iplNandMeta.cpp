@@ -9,11 +9,7 @@
 
 namespace ipl {
     namespace nand {
-        /**
-         * @note Address: 0x8133CC34 (4.3U)
-         * @note Size: 0x90
-         */
-        MetaFile::MetaFile(EGG::Heap* pHeap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, UnkCallback callBack, void* callBackWork, int ticketIdx) :
+        MetaFile::MetaFile(EGG::Heap* pHeap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, MetaCallback callBack, void* callBackWork, int ticketIdx) :
         File(pHeap, fileName, arc, NULL, offset, length, false),
         mDescriptor(-1),
         mTitleId(titleId),
@@ -23,20 +19,12 @@ namespace ipl {
         mCallback(callBack),
         mCallbackWork(callBackWork) {}
 
-        /**
-         * @note Address: 0x8133CCC4 (4.3U)
-         * @note Size: 0x58
-         */
         MetaFile::~MetaFile() {}
 
-        /**
-         * @note Address: 0x8133CD1C (4.3U)
-         * @note Size: 0xC4
-         */
         BOOL MetaFile::openNandFile_() {
             char fileName[48];
 
-            // Create title path
+            // Get title path
             sprintf(fileName, "/meta/%08x/%08x/title.met",  NANDTitleIdHi(mTitleId), NANDTitleIdLo(mTitleId));
 
             if (mpArc) {
@@ -55,10 +43,6 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x8133CDE0 (4.3U)
-         * @note Size: 0x8133CDE0
-         */
         void MetaFile::readNandBlock_(void* bufferOut, int length, int offset) {
             s32 result;
 
@@ -75,10 +59,6 @@ namespace ipl {
             nand_error_handling(result);
         }
 
-        /**
-         * @note Address: 0x8133CE94 (4.3U)
-         * @note Size: 0x64
-         */
         BOOL MetaFile::closeNandFile_() {
             if (mTicket) {
                 System::getUnk0CHeap()->free(mTicket);
@@ -88,10 +68,6 @@ namespace ipl {
             return nand_error_handling(result);
         }
 
-        /**
-         * @note Address: 0x8133CEF8 (4.3U)
-         * @note Size: 0x158
-         */
         BOOL MetaFile::openTicketFile_() {
             s32 line;
 
@@ -142,10 +118,6 @@ failed:
             return FALSE;
         }
 
-        /**
-         * @note Address: 0x8133D050 (4.3U)
-         * @note Size: 0xE8
-         */
         void MetaFile::readTicketBlock_(void* bufferOut, int length, int offset) {
             s32 result;
 
@@ -169,10 +141,6 @@ failed:
             }
         }
 
-        /**
-         * @note Address: 0x8133D138 (4.3U)
-         * @note Size: 0xAC
-         */
         BOOL MetaFile::closeTicketFile_() {
             s32 result = ES_CloseContentFile(mDescriptor);
             if (result >= ES_ERR_OK) {
@@ -188,18 +156,10 @@ failed:
             }
         }
 
-        /**
-         * @note Address: 0x8133D1E4 (4.3U)
-         * @note Size: 0x4
-         */
         BOOL MetaFile::open_(u8 attr) {
             return openTicketFile_();
         }
 
-        /**
-         * @note Address: 0x8133D1E8 (4.3U)
-         * @note Size: 0x14
-         */
         BOOL MetaFile::close_() {
             if (mbMetaInNand) {
                 return closeNandFile_();
@@ -209,18 +169,10 @@ failed:
             }
         }
 
-        /**
-         * @note Address: 0x8133D1FC (4.3U)
-         * @note Size: 0x8
-         */
         u32 MetaFile::getRawSize_() {
             return ARCGetLength(&mArcFile);
         }
 
-        /**
-         * @note Address: 0x8133D204 (4.3U)
-         * @note Size: 0x14
-         */
         void MetaFile::readBlock_(void* buffer, int length, int offset) {
             if (mbMetaInNand) {
                 readNandBlock_(buffer, length, offset);
@@ -230,10 +182,6 @@ failed:
             }
         }
 
-        /**
-         * @note Address: 0x8133D218 (4.3U)
-         * @note Size: 0x1C
-         */
         void MetaFile::callback_() {
             if (mCallback) {
                 mCallback(mCallbackWork);

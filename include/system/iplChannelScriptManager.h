@@ -49,9 +49,9 @@ namespace ipl {
                 enum {
                     CHANS_VM_STATE_CREATE = 0,
                     CHANS_VM_STATE_UNK1 = 1,
-                    CHANS_VM_STATE_UNK2 = 1,
-                    CHANS_VM_STATE_UNK3 = 1,
-                    CHANS_VM_STATE_UNK4 = 1,
+                    CHANS_VM_STATE_UNK2 = 2,
+                    CHANS_VM_STATE_UNK3 = 3,
+                    CHANS_VM_STATE_UNK4 = 4,
                 };
 
                 u8*                 mpChansWork;    // 0x00

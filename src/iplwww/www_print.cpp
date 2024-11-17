@@ -9,11 +9,7 @@ namespace ext_ead {
         namespace print {
             #define WWW_REPORT_LENGTH   1022
             
-            /**
-             * @note Address: 0x8136E894
-             * @note Size: 0x68
-             * @note Was stubbed out for release
-             */
+            /** @note Was stubbed out for release */
             void IPLWWWReport(int type, const char* format, ...) {
                 va_list args;
                 
@@ -24,11 +20,7 @@ namespace ext_ead {
                 va_end(args);
             }
             
-            /**
-             * @note Address: 0x8136E8FC
-             * @note Size: 0x4
-             * @note Was stubbed out for release
-             */
+            /** @note Was stubbed out for release */
             void IPLWWWVReport(int type, const char* format, va_list args) {
 #ifdef ENABLE_IPL_WWW_REPORT
                 char str[WWW_REPORT_LENGTH + 2];
@@ -37,7 +29,7 @@ namespace ext_ead {
 
                 str[WWW_REPORT_LENGTH + 1] = str[WWW_REPORT_LENGTH] = 0;
 
-                OSReport("[%s] %s", Message, str);
+                OSReport("%s %s", Message[type], str);
 #endif // ENABLE_IPL_WWW_REPORT
             }
         }

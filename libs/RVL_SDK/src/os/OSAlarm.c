@@ -22,10 +22,6 @@ static void SetTimer(const OSAlarm* alarm) {
     }
 }
 
-/**
- * @note Address 0x8152C88C (4.3U)
- * @note Size 0x58
- */
 void __OSInitAlarm() {
     if (__OSGetExceptionHandler(OS_EXCEPTION_DECREMENTER) != DecrementerExceptionHandler) {
         AlarmQueue.head = AlarmQueue.tail = NULL;
@@ -35,19 +31,11 @@ void __OSInitAlarm() {
     }
 }
 
-/**
- * @note Address 0x8152C8E4 (4.3U)
- * @note Size 0x10
- */
 void OSCreateAlarm(OSAlarm* pAlarm) {
     pAlarm->handler = NULL;
     pAlarm->tag = 0;
 }
 
-/**
- * @note Address 0x8152C8F4 (4.3U)
- * @note Size 0x250
- */
 static void InsertAlarm(OSAlarm* alarm, OSTime end, OSAlarmHandler handler) {
     OSAlarm* iter;
     OSAlarm* prev;
@@ -103,10 +91,6 @@ static void InsertAlarm(OSAlarm* alarm, OSTime end, OSAlarmHandler handler) {
     }
 }
 
-/**
- * @note Address 0x8152CB44 (4.3U)
- * @note Size 0x70
- */
 void OSSetAlarm(OSAlarm* alarm, OSTime start, OSAlarmHandler handler) {
     BOOL enabled = OSDisableInterrupts();
 
@@ -116,10 +100,6 @@ void OSSetAlarm(OSAlarm* alarm, OSTime start, OSAlarmHandler handler) {
     OSRestoreInterrupts(enabled);
 }
 
-/**
- * @note Address 0x8152CBB4 (4.3U)
- * @note Size 0x84
- */
 void OSSetPeriodicAlarm(OSAlarm* alarm, OSTime start, OSTime period, OSAlarmHandler handler) {
     BOOL enabled = OSDisableInterrupts();
 
@@ -130,10 +110,6 @@ void OSSetPeriodicAlarm(OSAlarm* alarm, OSTime start, OSTime period, OSAlarmHand
     OSRestoreInterrupts(enabled);
 }
 
-/**
- * @note Address 0x8152CC38 (4.3U)
- * @note Size 0x118
- */
 void OSCancelAlarm(OSAlarm* alarm) {
     OSAlarm* next;
 
@@ -167,10 +143,6 @@ void OSCancelAlarm(OSAlarm* alarm) {
     OSRestoreInterrupts(enabled);
 }
 
-/**
- * @note Address 0x8152CD50 (4.3U)
- * @note Size 0x22C
- */
 static void DecrementerExceptionCallback(__OSException type, OSContext* context) {
 #pragma unused(type)
     OSAlarmHandler handler;
@@ -223,10 +195,6 @@ static void DecrementerExceptionCallback(__OSException type, OSContext* context)
     OSLoadContext(context);
 }
 
-/**
- * @note Address 0x8152CF7C (4.3U)
- * @note Size 0x50
- */
 static asm void DecrementerExceptionHandler(register u8 type, register OSContext* context) {
     nofralloc
 
@@ -254,18 +222,10 @@ static asm void DecrementerExceptionHandler(register u8 type, register OSContext
     b       DecrementerExceptionCallback
 }
 
-/**
- * @note Address 0x8152CFCC (4.3U)
- * @note Size 0x8
- */
 void OSSetAlarmTag(OSAlarm* alarm, u32 tag) {
     alarm->tag = tag;
 }
 
-/**
- * @note Address 0x8152CFD4 (4.3U)
- * @note Size 0x8C
- */
 static BOOL OnReset(BOOL final, u32 event) {
     OSAlarm* iter;
     OSAlarm* next;
@@ -287,18 +247,10 @@ static BOOL OnReset(BOOL final, u32 event) {
     return TRUE;
 }
 
-/**
- * @note Address 0x8152D060 (4.3U)
- * @note Size 0x8
- */
 void OSSetAlarmUserData(OSAlarm* alarm, void* userData) {
     alarm->userData = userData;
 }
 
-/**
- * @note Address 0x8152D068 (4.3U)
- * @note Size 0x8
- */
 void* OSGetAlarmUserData(const OSAlarm* alarm) {
     return alarm->userData;
 }

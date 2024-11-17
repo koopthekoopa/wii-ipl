@@ -2,10 +2,6 @@
 
 namespace nw4r {
     namespace math {
-        /**
-         * @note Address: 0x8151E538 (4.3U)
-         * @note Size: 0x24
-         */
         f32 FrSqrt(register f32 x) {
             register f32 rsqrt;
             register f32 c_half = 0.5f, c_three = 3.0f;
@@ -23,11 +19,7 @@ namespace nw4r {
             }
             return work1;
         }
-        
-        /**
-         * @note Address: 0x8151E55C (4.3U)
-         * @note Size: 0x58
-         */
+
         u32 CntBit1(register u32 x) {
             x = x - ((x >> 1) & 0x55555555);
             x = (x & 0x33333333) + ((x >> 2) & 0x33333333);

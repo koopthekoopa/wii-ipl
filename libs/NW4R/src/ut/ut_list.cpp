@@ -14,10 +14,6 @@ namespace nw4r {
             list->numObjects++;
         }
 
-        /**
-         * @note Address: 0x8151205C (4.3U)
-         * @note Size: 0x18
-         */
         void List_Init(List* list, u16 offset) {
             list->offset = offset;
 
@@ -26,10 +22,6 @@ namespace nw4r {
             list->numObjects = NULL;
         }
 
-        /**
-         * @note Address: 0x81512074 (4.3U)
-         * @note Size: 0x70
-         */
         void List_Append(List* list, void* object) {
             if (list->headObject == NULL) {
                 SetFirstObject(list, object);
@@ -48,10 +40,6 @@ namespace nw4r {
             }
         }
 
-        /**
-         * @note Address: 0x815120E4 (4.3U)
-         * @note Size: 0x6C
-         */
         void List_Prepend(List* list, void* object) {
             if (list->headObject == NULL) {
                 SetFirstObject(list, object);
@@ -70,10 +58,6 @@ namespace nw4r {
             }
         }
 
-        /**
-         * @note Address: 0x81512150 (4.3U)
-         * @note Size: 0x120
-         */
         void List_Insert(List* list, void* pTarget, void* object) {
             if (pTarget == NULL) {
                 List_Append(list, object);
@@ -97,10 +81,6 @@ namespace nw4r {
             }
         }
 
-        /**
-         * @note Address: 0x81512270 (4.3U)
-         * @note Size: 0x6C
-         */
         void List_Remove(List* list, void* object) {
             Link* link = OBJ_TO_LINK(list, object);
 
@@ -126,10 +106,6 @@ namespace nw4r {
             list->numObjects--;
         }
 
-        /**
-         * @note Address: 0x815122DC (4.3U)
-         * @note Size: 0x20
-         */
         void* List_GetNext(const List* list, const void* object) {
             if (object == NULL) {
                 return list->headObject;
@@ -139,10 +115,6 @@ namespace nw4r {
             }
         }
 
-        /**
-         * @note Address: 0x815122FC (4.3U)
-         * @note Size: 0x1C
-         */
         void* List_GetPrev(const List* list, const void* object) {
             if (object == NULL) {
                 return list->tailObject;
@@ -152,10 +124,6 @@ namespace nw4r {
             }
         }
 
-        /**
-         * @note Address: 0x81512318 (4.3U)
-         * @note Size: 0x4C
-         */
         void* List_GetNth(const List* list, u16 n) {
             int i;
             void* it = NULL;

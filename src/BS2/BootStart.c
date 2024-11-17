@@ -23,11 +23,7 @@ extern void DBInit();
 
 void __start();
 
-/**
- * @note Address: 0x81330000 (4.3J/4.3U/4.3E)
- * @note Size: 0xA8
- * @note This must be the first function linked.
- */
+/** @note This must be the first function linked. */
 __declspec(weak) asm void __start() {
     nofralloc
 
@@ -92,10 +88,6 @@ bi2_end_arg_parse:
     b       exit
 }
 
-/**
- * @note Address: 0x813300A8 (4.3J/4.3U/4.3E)
- * @note Size: 0x90
- */
 static asm void __init_registers() {
     nofralloc
     
@@ -155,10 +147,6 @@ static void init_bss_section(void* dest, unsigned int size) {
     }
 }
 
-/**
- * @note Address: 0x81330138 (4.3J/4.3U/4.3E)
- * @note Size: 0xA0
- */
 static void __init_data() {
     __rom_copy_info* rci;
     __bss_init_info* bii;

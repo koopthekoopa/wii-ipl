@@ -5,7 +5,7 @@
 
 class BannerSoundPlayer {
     public:
-        void start(u32*, u32);
+        void start(void*, u32);
     private:
         u8 dummy[32];
 };

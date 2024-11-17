@@ -323,10 +323,6 @@ namespace nw4r {
             }
         }
 
-        /**
-         * @note Address: 0x8151E5B4 (4.3U)
-         * @note Size: 0x6C
-         */
         f32 SinFIdx(f32 fidx) {
             f32 abs_fidx = FAbs(fidx);
 
@@ -343,10 +339,6 @@ namespace nw4r {
             return (fidx < 0.0f) ? -sin : sin;
         }
 
-        /**
-         * @note Address: 0x8151E620 (4.3U)
-         * @note Size: 0x5C
-         */
         f32 CosFIdx(f32 fidx) {
             f32 abs_fidx = FAbs(fidx);
 
@@ -363,10 +355,6 @@ namespace nw4r {
             return cos;
         }
 
-        /**
-         * @note Address: 0x8151E67C (4.3U)
-         * @note Size: 0x1A8
-         */
         f32 Atan2FIdx(f32 y, f32 x) {
             f32 a, b, c;
             bool minus;

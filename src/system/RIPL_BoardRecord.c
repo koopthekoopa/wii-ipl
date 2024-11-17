@@ -11,11 +11,6 @@ const char* RBRFileType_Odh = "odh";
 const char* RBRFileType_Dat = "dat";
 const char* RBRFileType_Log = "log";
 
-/**
- * @note Address: 0x81332B48 (4.3U/4.3E)
- * @note Address: 0x813321E8 (4.3J)
- * @note Size: 0x98
- */
 u8* RBRGetPicture(u32* rbrData, s32* dataSize) {
     u8* picData = NULL;
 
@@ -40,11 +35,6 @@ u8* RBRGetPicture(u32* rbrData, s32* dataSize) {
     return picData;
 }
 
-/**
- * @note Address: 0x81332BE0 (4.3U/4.3E)
- * @note Address: 0x81332280 (4.3J)
- * @note Size: 0x44
- */
 void RBRGetPosRect(f32* left, f32* right, f32* top, f32* bottom) {
     if (left != NULL) {
         *left = -230;

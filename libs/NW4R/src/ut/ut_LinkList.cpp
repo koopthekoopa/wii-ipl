@@ -3,16 +3,8 @@
 namespace nw4r {
     namespace ut {
         namespace detail {
-            /**
-             * @note Address: 0x81512364 (4.3U)
-             * @note Size: 0x84
-             */
             LinkListImpl::~LinkListImpl() { Clear(); }
-            
-            /**
-             * @note Address: 0x815123E8 (4.3U)
-             * @note Size: 0x48
-             */
+ 
             LinkListImpl::Iterator LinkListImpl::Erase(LinkListImpl::Iterator it) {
                 Iterator clone = it;
                 return Erase(it, ++clone);
@@ -32,18 +24,10 @@ namespace nw4r {
                 return Iterator(pItLast);
             }
 
-            /**
-             * @note Address: 0x81512430 (4.3U)
-             * @note Size: 0x44
-             */
             void LinkListImpl::Clear() {
                 Erase(GetBeginIter(), GetEndIter());
             }
 
-            /**
-             * @note Address: 0x81512474 (4.3U)
-             * @note Size: 0x2C
-             */
             LinkListImpl::Iterator LinkListImpl::Insert(Iterator it, pointer p) {
                 Node* pNext = it.mPointer;
                 Node* pPrev = pNext->mPrev;
@@ -61,10 +45,6 @@ namespace nw4r {
                 return (Iterator)p;
             }
 
-            /**
-             * @note Address: 0x815124A0 (4.3U)
-             * @note Size: 0x30
-             */
             LinkListImpl::Iterator LinkListImpl::Erase(pointer p) {
                 Node* pNext = p->mNext;
                 Node* pPrev = p->mPrev;

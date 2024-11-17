@@ -23,30 +23,14 @@
 #define EXT_SIZE        0x40
 #define STANDARD_SIZE   0x20
 
-#define CHECK_MAGIC3(buffer, sig0, sig1, sig2) \
-    buffer[0] == sig0 && buffer[1] == sig1 && buffer[2] == sig2
-
-#define CHECK_MAGIC4(buffer, sig0, sig1, sig2, sig3) \
-    buffer[0] == sig0 && buffer[1] == sig1 && buffer[2] == sig2 && buffer[3] == sig3
+#define CHECK_MAGIC3(buffer, sig0, sig1, sig2)          buffer[0] == sig0 && buffer[1] == sig1 && buffer[2] == sig2
+#define CHECK_MAGIC4(buffer, sig0, sig1, sig2, sig3)    buffer[0] == sig0 && buffer[1] == sig1 && buffer[2] == sig2 && buffer[3] == sig3
 
 namespace ipl {
     namespace nand {
-        /**
-         * @note Address: 0x8133B2E4 (4.3U)
-         * @note Size: 0x10
-         */
         Base::Base() {}
-
-        /**
-         * @note Address: 0x8133B2F4 (4.3U)
-         * @note Size: 0x40
-         */
         Base::~Base() {}
 
-        /**
-         * @note Address: 0x8133B334 (4.3U)
-         * @note Size: 0xC0
-         */
         // https://decomp.me/scratch/fOAdi
         File::File(EGG::Heap* pHeap, const char* fileName, ARCHandle* arc, const char* unk2, int offset, u32 length, bool isNandFile) : Base() {
             mDoneTask = FALSE;
@@ -71,10 +55,6 @@ namespace ipl {
             memset(&mNandFile, 0, sizeof(NANDFileInfo));
         }
 
-        /**
-         * @note Address: 0x8133B3F4 (4.3U)
-         * @note Size: 0xC0
-         */
         // https://decomp.me/scratch/FjG9e
         File::File(EGG::Heap* pHeap, const char* fileName, u8* buffer, u32 length, u8 perms) : Base() {
             mDoneTask = FALSE;
@@ -100,26 +80,18 @@ namespace ipl {
             memset(&mNandFile, 0, sizeof(NANDFileInfo));
         }
 
-        /**
-         * @note Address: 0x8133B4B4 (4.3U)
-         * @note Size: 0x78
-         */
         File::~File() {
             if (mbInit == true && mpBuffer) {
                 delete[] mpBuffer;
             }
         }
 
-        /**
-         * @note Address: 0x8133B52C (4.3U)
-         * @note Size: 0xF0
-         */
         BOOL File::open_(u8 attr) {
             ARCHandle* handle;
 
             if (mpArc) {
+                // This part seems to be never used.
                 if (mbIsNandFile) {
-                    // This part seems to be never used.
                     s32 result = wrapper::PrivateOpen(msUnkFileName, &mNandFile, attr);
                     if (nand_error_handling(result) == FALSE) {
                         return FALSE;
@@ -128,11 +100,12 @@ namespace ipl {
                 return ARCOpen(mpArc, msFileName, &mArcFile) == TRUE;
             }
             else {
+                // NAND File?
                 if (mbIsNandFile) {
                     s32 result = wrapper::PrivateOpen(msFileName, &mNandFile, attr);
                     return nand_error_handling(result);
                 }
-                else {
+                else { // System Menu file?
                     if (System::getNandManager()->getDescriptor() < 0) {
                         handle = NULL;
                     }
@@ -145,10 +118,6 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x8133B61C (4.3U)
-         * @note Size: 0x1B4
-         */
         void File::readBlock_(void* buffer, int length, int offset) {
             int arcOffset;
             s32 result;
@@ -190,18 +159,14 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x8133B7D0 (4.3U)
-         * @note Size: 0xBC
-         */
         u32 File::getDecodeSize_(const u8* buffer) {
-            if (stricmp(&msFileName[strlen(msFileName) - 4], ".lz7") == 0) {
+            if (stricmp(&msFileName[strlen(msFileName) - 4], ".lz7") == 0) { // Check file extension
                 return CXGetUncompressedSize(buffer);
             }
-            else if (buffer[0] == 'Y') {
+            else if (buffer[0] == 'Y') { // See if it is Yaz0 by checking if the first letter is 'Y' (...why)
                 return Rvl_decode_szs_size(buffer);
             }
-            else if (buffer[0] == 'L') {
+            else if (buffer[0] == 'L') { // See if it is LZ77 by checking if the first letter is 'L' (again...why)
                 return CXGetUncompressedSize(&buffer[4]);
             }
             else {
@@ -209,10 +174,6 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x8133B88C (4.3U)
-         * @note Size: 0x84
-         */
         u32 File::getRawSize_() {
             u32 length = 0;
 
@@ -232,10 +193,6 @@ namespace ipl {
             return length;
         }
 
-        /**
-         * @note Address: 0x8133B910 (4.3U)
-         * @note Size: 0x30
-         */
         BOOL File::isSliCompressed(const u8* buffer) {
             return CHECK_MAGIC3(buffer, 'Y', 'a', 'z');
         }
@@ -246,26 +203,14 @@ namespace ipl {
          Which also checks the magic without the little mistake.
         */
 
-        /**
-         * @note Address: 0x8133B940 (4.3U)
-         * @note Size: 0x30
-         */
         BOOL File::isAsrCompressed(const u8* buffer) {
             return CHECK_MAGIC3(buffer, 'A','S','H');
         }
 
-        /**
-         * @note Address: 0x8133B970 (4.3U)
-         * @note Size: 0x30
-         */
         BOOL File::isAshCompressed(const u8* buffer) {
             return CHECK_MAGIC3(buffer, 'A','S','R');
         }
 
-        /**
-         * @note Address: 0x8133B9A0 (4.3U)
-         * @note Size: 0x94
-         */
         BOOL File::isLz7Compressed(const u8* buffer) {
             // Check the file extension
             if (stricmp(&msFileName[strlen(msFileName) - 4], ".lz7") == 0) {
@@ -281,10 +226,6 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x8133BA34 (4.3U)
-         * @note Size: 0xB8
-         */
         BOOL File::isCompressed(const u8* buffer) {
             if (isSliCompressed(buffer) || isAsrCompressed(buffer) || isAshCompressed(buffer) || isLz7Compressed(buffer)) {
                 return TRUE;
@@ -294,10 +235,6 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x8133BAEC (4.3U)
-         * @note Size: 0x74
-         */
         void File::uncompressLz7(const u8* src, u8* dest) {
             if (stricmp(&msFileName[strlen(msFileName) - 4], ".lz7") == 0) {
                 CXUncompressLZ(src, dest);
@@ -307,10 +244,6 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x8133BB60 (4.3U)
-         * @note Size: 0x300
-         */
         // https://decomp.me/scratch/IsA3X
         void File::read() {
             if (open_(NAND_ACCESS_READ)) {
@@ -341,11 +274,11 @@ namespace ipl {
                 u32 fileOff = 0;
                 // Check if the header is an MD5 file.
                 if (CHECK_MAGIC4(headerData, 'I','M','D','5')) {
-                    fileLen = *(u32*)(&headerData[4]);  // get file length
+                    fileLen = *(u32*)(&headerData[4]);  // Get file length
 
                     bHasMd5 = TRUE;
 
-                    memcpy(sum, &headerData[0x10], NET_MD5_DIGEST_SIZE);    // copy MD5 sum
+                    memcpy(sum, &headerData[0x10], NET_MD5_DIGEST_SIZE);    // Copy MD5 sum
 
                     fileOff = 0x20;
                     buffer += 0x20;
@@ -353,33 +286,33 @@ namespace ipl {
 
                 // Check if the file is compressed.
                 if (isCompressed(buffer)) {
-                    // read compressed data
+                    // Read compressed data
                     readBlock_(mpCmpBuffer, mpLength);
 
-                    // prepare for decompression
+                    // Prepare for decompression
                     mpLength = getDecodeSize_(&mpCmpBuffer[fileOff]);
                     mpBuffer = getBuffer_(mpLength);
 
-                    // LZ7 compressed
+                    // LZ77 compression
                     if (isLz7Compressed(buffer)) {
                         uncompressLz7(&mpCmpBuffer[fileOff], mpBuffer);
-                        u32 rawSize = getRawSize_();    // unused
+                        u32 rawSize = getRawSize_(); // Unused
                     }
-                    else { // any other compression
+                    else { // Any other compression
                         Rvl_decode(mpBuffer, &mpCmpBuffer[fileOff]);
                     }
 
-                    // calculate MD5. (result 1 = success, result 2 = failed)
+                    // Calculate MD5.
                     if (bHasMd5 == TRUE) {
                         mResult = calcMD5_(sum, &mpCmpBuffer[fileOff], fileLen);
                     }
                 }
                 else {
-                    // just read the data.
+                    // Just read the data
                     mpBuffer = getBuffer_(mpLength - fileOff);
                     readBlock_(mpBuffer, mpLength - fileOff, fileOff);
 
-                    // calculate MD5. (result 1 = success, result 2 = failed)
+                    // calculate MD5.
                     if (bHasMd5 == TRUE) {
                         mResult = calcMD5_(sum, mpBuffer, fileLen);
                     }
@@ -397,16 +330,9 @@ namespace ipl {
             callback_();
         }
 
-        /**
-         * @note Address: 0x8133BE60 (4.3U)
-         * @note Size: 0x4
-         */
+        // For derived classes.
         void File::callback_() {}
 
-        /**
-         * @note Address: 0x8133BE64 (4.3U)
-         * @note Size: 0x90
-         */
         NandErrResult File::calcMD5_(const u8* sum, const u8* buffer, u32 length) const {
             u8 calcSum[NET_MD5_DIGEST_SIZE];
 
@@ -421,10 +347,6 @@ namespace ipl {
             return IPL_NAND_RESULT_SUCCESS;
         }
 
-        /**
-         * @note Address: 0x8133BEF4 (4.3U)
-         * @note Size: 0xA8
-         */
         BOOL File::close_() {
             s32 result;
 
@@ -448,72 +370,51 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x8133BF9C (4.3U)
-         * @note Size: 0x14
-         */
         u8* File::getBuffer_(u32 length) {
             return new(mpHeap, BUFFER_HEAP) u8[length];
         }
 
-        /**
-         * @note Address: 0x8133BFB0 (4.3U)
-         * @note Size: 0x194
-         */
         LangFile::LangFile(EGG::Heap* pHeap, const char* dirName, const char* fileName, ARCHandle* arc, bool isNandFile) {
             char fullName[NAND_MAX_PATH + 1];
             
-            cmnFile = NULL;
-            langFile = NULL;
+            mpCommonFile = NULL;
+            mpLangFile = NULL;
 
+            // Open the "common" file.
             strncpy(fullName, dirName, NAND_MAX_PATH + 1);
             strncat(fullName, "/common/", (NAND_MAX_PATH + 1) - strlen(fullName));
             strncat(fullName, fileName, (NAND_MAX_PATH + 1) - strlen(fullName));
 
-            cmnFile = new(pHeap, CLASS_HEAP) File(pHeap, fullName, arc, NULL, 0, 0, isNandFile);
+            mpCommonFile = new(pHeap, CLASS_HEAP) File(pHeap, fullName, arc, NULL, 0, 0, isNandFile);
 
             char* langPath = utility::Language::getPath();
 
+            // Open the language exclusive file
             strncpy(fullName, dirName, NAND_MAX_PATH + 1);
             strncat(fullName, "/", (NAND_MAX_PATH + 1) - strlen(fullName));
             strncat(fullName, langPath, (NAND_MAX_PATH + 1) - strlen(fullName));
             strncat(fullName, "/", (NAND_MAX_PATH + 1) - strlen(fullName));
             strncat(fullName, fileName, (NAND_MAX_PATH + 1) - strlen(fullName));
 
-            langFile = new(pHeap, CLASS_HEAP) File(pHeap, fullName, arc, NULL, 0, 0, isNandFile);
+            mpLangFile = new(pHeap, CLASS_HEAP) File(pHeap, fullName, arc, NULL, 0, 0, isNandFile);
         }
 
-        /**
-         * @note Address: 0x8133C144 (4.3U)
-         * @note Size: 0xA8
-         */
         LangFile::~LangFile() {
-            if (cmnFile)  delete cmnFile;
-            if (langFile) delete langFile;
+            if (mpCommonFile)  delete mpCommonFile;
+            if (mpLangFile) delete mpLangFile;
         }
 
-        /**
-         * @note Address: 0x8133C1EC (4.3U)
-         * @note Size: 0x64
-         */
         void LangFile::read() {
-            if (cmnFile)  cmnFile->read();
-            if (langFile) langFile->read();
+            if (mpCommonFile)  mpCommonFile->read();
+            if (mpLangFile) mpLangFile->read();
         }
 
-        /**
-         * @note Address: 0x8133C250 (4.3U)
-         * @note Size: 0x3C
-         */
+        // `LayoutFile` is literally `LangFile` lol.
         LayoutFile::LayoutFile(EGG::Heap* pHeap, const char* dirName, const char* fileName, ARCHandle* arc, bool isNandFile)
         : LangFile(pHeap, dirName, fileName, arc, isNandFile) {}
 
-        /**
-         * @note Address: 0x8133C28C (4.3U)
-         * @note Size: 0x128
-         */
         void File::write() {
-            u8 unused;
+            u8 dummy;
 
             EGG::Heap* usedHeap = System::getUnk0CHeap();
             if (System::getUnk0CHeap() == NULL) {
@@ -526,9 +427,10 @@ namespace ipl {
 
             ES_SetUid(SYSMENU_TITLE_ID);
 
-            result = wrapper::PrivateGetType(msFileName, &unused);
+            result = wrapper::PrivateGetType(msFileName, &dummy);
             nand_error_handling(result);
 
+            // Create file if it does not exist.
             if (mLastError == NAND_RESULT_NOEXISTS) {
                 result = wrapper::PrivateCreate(msFileName, mFilePerms, NAND_ACCESS_NONE);
                 success = nand_error_handling(result);
@@ -538,9 +440,11 @@ namespace ipl {
                 }
             }
 
+            // Open created file.
             result = wrapper::PrivateSafeOpen(msFileName, &mNandFile, NAND_ACCESS_WRITE, buffer, BUFFER_SIZE);
             success = nand_error_handling(result);
 
+            // If successfully open, start writing the file.
             if (success) {
                 result = wrapper::Write(&mNandFile, mpCmpBuffer, mpLength);
                 nand_error_handling(result);
@@ -551,17 +455,13 @@ namespace ipl {
 
 done:
             delete[] buffer;
-
             delete[] mpCmpBuffer;
+            
             mpCmpBuffer = NULL;
 
             mDoneTask = TRUE;
         }
 
-        /**
-         * @note Address: 0x8133C3B4 (4.3U)
-         * @note Size: 0x110
-         */
         BOOL File::nand_error_handling(int errcode) {
             BOOL result = FALSE;
 
@@ -572,29 +472,35 @@ done:
             }
             else {
                 switch (errcode) {
+                    // If the file exists, move on.
                     case NAND_RESULT_EXISTS: {
                         result = TRUE;
                         break;
                     }
+                    // If it did not exist, open error occured.
                     case NAND_RESULT_NOEXISTS: {
                         mResult = IPL_NAND_RESULT_OPEN_ERROR;
                         break;
                     }
+                    // Too big to do anymore NAND stuff.
                     case NAND_RESULT_MAXFILES:
                     case NAND_RESULT_MAXBLOCKS: {
                         mbIsFullForTask = true;
                         break;
                     }
+                    // Authentication error
                     case NAND_RESULT_AUTHENTICATION:
                     case NAND_RESULT_ECC_CRIT: {
                         mResult = IPL_NAND_RESULT_VERIFY_ERROR;
                         break;
                     }
+                    // Display the system memory is damaged screen.
                     case NAND_RESULT_CORRUPT: {
                         mbFatalError = true;
                         System::err_display(MESG_ERR_NAND);
                         break;
                     }
+                    // Otherwise assume the system files are corrupted.
                     default: {
                         mbFatalError = true;
                         System::err_log(NAND, errcode, 808);
@@ -605,27 +511,19 @@ done:
             }
         }
 
-        /**
-         * @note Address: 0x8133C4C4 (4.3U)
-         * @note Size: 0x4
-         */
         void Base::write() {}
 
-        /**
-         * @note Address: 0x8133C4C8 (4.3U)
-         * @note Size: 0xA8
-         */
         bool LangFile::isFatalError() {
             bool result = true;
             bool fatalError = false;
 
-            if (cmnFile && cmnFile->isFatalError()) {
+            if (mpCommonFile && mpCommonFile->isFatalError()) {
                 fatalError = true;
             }
 
             if (!fatalError) {
                 bool fatalError = false;
-                if (langFile && langFile->isFatalError()) {
+                if (mpLangFile && mpLangFile->isFatalError()) {
                     fatalError = true;
                 }
                 if (!fatalError) {
@@ -636,39 +534,25 @@ done:
             return result;
         }
 
-        /**
-         * @note Address: 0x8133C570 (4.3U)
-         * @note Size: 0x8
-         */
-        bool File::isFatalError() {
-            return mbFatalError;
-        }
+        bool File::isFatalError() { return mbFatalError; } // weak?
 
-        /**
-         * @note Address: 0x8133C578 (4.3U)
-         * @note Size: 0x44
-         */
         bool LangFile::checkData() {
-            if (langFile) return langFile->checkData();
-            if (cmnFile)  return cmnFile->checkData();
+            if (mpLangFile) return mpLangFile->checkData();
+            if (mpCommonFile)  return mpCommonFile->checkData();
             return false;
         }
 
-        /**
-         * @note Address: 0x8133C5BC (4.3U)
-         * @note Size: 0xA8
-         */
         bool LangFile::isFinished() {
             bool result = false;
             bool finished = true;
             
-            if (cmnFile && !cmnFile->isFinished()) {
+            if (mpCommonFile && !mpCommonFile->isFinished()) {
                 finished = false;
             }
 
             if (finished) {
                 bool finished = true;
-                if (langFile && !langFile->isFinished()) {
+                if (mpLangFile && !mpLangFile->isFinished()) {
                     finished = false;
                 }
                 if (finished) {
@@ -679,10 +563,6 @@ done:
             return result;
         }
 
-        /**
-         * @note Address: 0x8133C680 (4.3U)
-         * @note Size: 0x58
-         */
         LayoutFile::~LayoutFile() {}
     }
 }

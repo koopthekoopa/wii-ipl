@@ -11,10 +11,6 @@
 
 namespace ipl {
     namespace bs2 {
-        /**
-         * @note Address: 0x813607A0
-         * @note Size: 0x94
-         */
         Manager::Manager(EGG::Heap* pHeap) :
         unk_0x04(1),
         mState(BS2_STATE_52),
@@ -35,18 +31,10 @@ namespace ipl {
             BS2SetBannerBuffer(mpBannerBuffer, BS2_DEFAULT_BANNER_SIZE);
         }
 
-        /**
-         * @note Address: 0x81360834
-         * @note Size: 0x64
-         */
         Manager::~Manager() {
             delete[] mpBannerBuffer;
         }
 
-        /**
-         * @note Address: 0x81360898
-         * @note Size: 0x10C
-         */
         int Manager::update() {
             if ((unk_0x04 - 9) <= 1) {
                 return unk_0x04;
@@ -82,19 +70,11 @@ namespace ipl {
             return unk_0x04;
         }
 
-        /**
-         * @note Address: 0x813609E8
-         * @note Size: 0x34
-         */
         u32 Manager::getDiskBannerBuffer(void** pBuffer) {
             *pBuffer = BS2GetBannerBufferAddr();
             return BS2GetBannerBufferLength();
         }
 
-        /**
-         * @note Address: 0x81360A1C
-         * @note Size: 0x9C
-         */
         void Manager::startUpdate() {
             unk_0x0D = true;
             mbStartUpdate = true;
@@ -119,47 +99,22 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x81360AB8
-         * @note Size: 0xC
-         */
         void Manager::reserveRVLGame() {
             unk_0x0C = false;
         }
 
-        /**
-         * @note Address: 0x81360AC4
-         * @note Size: 0xC
-         */
         void Manager::reserveGCGame() {
             unk_0x0C = false;
         }
 
-        /**
-         * @note Address: 0x81360AD0
-         * @note Size: 0x4
-         */
-        void Manager::startRVLGame() { bootNewSystem(); }
+        void Manager::startRVLGame()    { bootNewSystem(); }
+        void Manager::startGCGame()     { bootNewSystem(); }
 
-        /**
-         * @note Address: 0x81360AD4
-         * @note Size: 0x4
-         */
-        void Manager::startGCGame() { bootNewSystem(); }
-
-        /**
-         * @note Address: 0x81360AD8
-         * @note Size: 0x14
-         */
         void Manager::abort() {
             unk_0x0E = true;
             unk_0x0F = false;
         }
 
-        /**
-         * @note Address: 0x81360AEC
-         * @note Size: 0x14
-         */
         void Manager::restart() {
             unk_0x0E = false;
             unk_0x0F = true;
@@ -167,29 +122,18 @@ namespace ipl {
             System::checkNandOverFlowFlagAsync();
         }
 
-        /**
-         * @note Address: 0x81360B00
-         * @note Size: 0x28
-         */
         bool Manager::checkParentalControl() {
             return BS2CheckParentalControl();
         }
 
-        /**
-         * @note Address: 0x81360B28
-         * @note Size: 0x28
-         */
         void Manager::getDiskInfo(char** diskID, char** diskMaker) {
+            // Disc info is from BI read by BS2
             OSBootInfo* bi = (OSBootInfo*)OSPhysicalToCached(BS2_BOOTINFO_ADDR);
 
             if (diskID)     *diskID     = (char*)bi->DVDDiskID.gameName;
             if (diskMaker)  *diskMaker  = (char*)bi->DVDDiskID.company;
         }
 
-        /**
-         * @note Address: 0x81360B50
-         * @note Size: 0x74
-         */
         BOOL Manager::isTitleAvailable(ESTitleId titleId) const {
             u32 count = 0;
 
@@ -202,28 +146,16 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x81360BC4
-         * @note Size: 0x10
-         */
         s32 Manager::getTicketFromNand(ESTitleId titleId, ESTicketView* pTicketView) const {
             return BS2GetTicketFromNand(titleId, pTicketView);
         }
 
-        /**
-         * @note Address: 0x81360BD4
-         * @note Size: 0x48
-         */
         void Manager::loadLockedTitleAsync(ESTitleId titleId, ESTicketView& ticketView) {
             if (BS2StartLoadingTitle(titleId, &ticketView)) {
                 unk_0x1C = BS2_STATE_70;
             }
         }
 
-        /**
-         * @note Address: 0x81360C1C
-         * @note Size: 0x124
-         */
         void Manager::splashTick(BS2State state) {
             switch(state) {
                 case BS2_STATE_52:
@@ -290,10 +222,6 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x81360D40
-         * @note Size: 0xC4
-         */
         void Manager::execTick(BS2State state) {
             if (unk_0x0D) {
                 if (state == BS2_RUN_UPDATE) {
@@ -324,10 +252,6 @@ namespace ipl {
             unk_0x0E = false;
         }
 
-        /**
-         * @note Address: 0x81360E04
-         * @note Size: 0x14C
-         */
         void Manager::updateTick() {
             if (mbStartUpdate && BS2UpdateState() == 2) {
                 int i;
@@ -372,29 +296,29 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x81360F50
-         * @note Size: 0xF8
-         */
         void Manager::bootNewSystem() {
             while (WPADGetStatus() != WPAD_ERR_OK) {
                 VIWaitForRetrace();
             }
 
+            // Mute all sound
             if (System::isRsrcLoaded()) {
                 snd::getSystem()->stopAllSound();
                 snd::getSystem()->stopBannerSound();
                 snd::getSystem()->calc();
             }
 
+            // Close all content
             System::getNandManager()->closeContentsAll();
 
+            // Turn off video
             VISetBlack(TRUE);
             VIFlush();
             VIWaitForRetrace();
 
             while (!__OSSyncSram()) {}
-
+            
+            // Run app!
             if (mState == BS2_RUN_APP) {
                 BS2StartGame();
             }

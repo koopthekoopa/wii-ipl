@@ -28,10 +28,6 @@ __declspec(section ".dtors$00") extern VoidPTR  _dtors[];
 
 #pragma section code_type ".init"
 
-/**
- * @note Address 0x813301D8 (4.3U)
- * @note Size 0x24
- */
 asm void __init_hardware() {
     mfmsr r0
     ori r0, r0, 0x2000
@@ -46,10 +42,6 @@ asm void __init_hardware() {
     blr
 }
 
-/**
- * @note Address 0x813301FC (4.3U)
- * @note Size 0x34
- */
 asm void __flush_cache(void* pAddress, unsigned int size) {
     lis r5, 0xFFFF
     ori r5, r5, 0xFFF1
@@ -76,10 +68,6 @@ loop:
 
 #pragma section code_type ".text"
 
-/**
- * @note Address 0x81538608 (4.3U)
- * @note Size 0x20
- */
 asm void __init_user() {
     fralloc
 
@@ -89,11 +77,6 @@ asm void __init_user() {
     blr
 }
 
-
-/**
- * @note Address 0x81538628 (4.3U)
- * @note Size 0x48
- */
 static void __init_cpp() {
     VoidPTR *ctor;
 
@@ -114,10 +97,6 @@ static void _ExitProcess() {
     PPCHalt();
 }
 
-/**
- * @note Address 0x81538670 (4.3U)
- * @note Size 0x4C
- */
 void exit() {
     __fini_cpp();
     _ExitProcess();

@@ -618,398 +618,398 @@ scene/channelSelect/iplChannelSelect.cpp:
 	.sbss       start:0x8169A9F8 end:0x8169AA00
 
 scene/channelSelect/iplClock.cpp:
-	.text       start:0x813B0A0C end:0x813B1584
+	.text       start:0x813B0A0C end:0x813B1680
 	.rodata     start:0x816101F8 end:0x81610210
 	.data       start:0x8164E498 end:0x8164E550
 	.sdata2     start:0x81696840 end:0x81696848
-	.sdata      start:0x816987A0 end:0x81696998
+	.sdata      start:0x816987A0 end:0x81698838
 
 scene/channelSelect/iplChannelObj.cpp:
-	.text       start:0x813B1584 end:0x813B4030
-	.rodata     start:0x8160FFD0 end:0x816102E0
-	.data       start:0x8164E290 end:0x8164E768
-	.sdata2     start:0x816949A8 end:0x816949F0
-	.sdata      start:0x81696998 end:0x81696A10
-	.sbss       start:0x81698B60 end:0x81698B68
+	.text       start:0x813B1680 end:0x813B412C
+	.rodata     start:0x81610210 end:0x81610520
+	.data       start:0x8164E550 end:0x8164EA28
+	.sdata2     start:0x81696848 end:0x81696890
+	.sdata      start:0x81698838 end:0x816988B0
+	.sbss       start:0x8169AA00 end:0x8169AA08
 
 scene/channelSelect/iplChannelTitle.cpp:
 	.bss        start:0x810B7340 end:0x810B74F8
-	.text       start:0x813B4030 end:0x813BB0A4
-	.rodata     start:0x816102E0 end:0x81610310
-	.data       start:0x8164E768 end:0x8164F0B8
-	.sdata2     start:0x816949F0 end:0x81694A10
-	.sdata      start:0x81696A10 end:0x81696B00
+	.text       start:0x813B412C end:0x813BB1A0
+	.rodata     start:0x81610520 end:0x81610550
+	.data       start:0x8164EA28 end:0x8164F378
+	.sdata2     start:0x81696890 end:0x816968B0
+	.sdata      start:0x816988B0 end:0x816989A0
 
 scene/faceSelect/iplFaceSelect.cpp:
-	.text       start:0x813BB0A4 end:0x813BD5D8
-	.rodata     start:0x81610310 end:0x81610328
-	.data       start:0x8164F0B8 end:0x8164F8B8
-	.sdata2     start:0x81694A10 end:0x81694A30
-	.sdata      start:0x81696B00 end:0x81696B30
+	.text       start:0x813BB1A0 end:0x813BD6D4
+	.rodata     start:0x81610550 end:0x81610568
+	.data       start:0x8164F378 end:0x8164FB78
+	.sdata2     start:0x816968B0 end:0x816968D0
+	.sdata      start:0x816989A0 end:0x816989D0
 
 scene/health/iplHealth.cpp:
-	.text       start:0x813BD5D8 end:0x813BE010
-	.data       start:0x8164F8B8 end:0x8164FB08
-	.sdata      start:0x81696B30 end:0x81696B60
+	.text       start:0x813BD6D4 end:0x813BE10C
+	.data       start:0x8164FB78 end:0x8164FDC8
+	.sdata      start:0x816989D0 end:0x81698A00
 
 scene/kitayamaTest/iplKitayamaTest.cpp:
-	.text       start:0x813BE010 end:0x813BE9E8
-	.data       start:0x8164FB08 end:0x8164FD80
+	.text       start:0x813BE10C end:0x813BEAE4
+	.data       start:0x8164FDC8 end:0x81650040
 
 scene/kitayamaTest/nandsdworker_autotest.cpp:
-	.text       start:0x813BE9E8 end:0x813C02F8
-	.data       start:0x8164FD80 end:0x81650380
+	.text       start:0x813BEAE4 end:0x813C03F4
+	.data       start:0x81650040 end:0x81650640
 
 scene/letterWriter/iplLetterWriter.cpp:
-	.text       start:0x813C02F8 end:0x813C1AC4
-	.data       start:0x81650380 end:0x816505D8
-	.sdata2     start:0x81694A30 end:0x81694A48
-	.sdata      start:0x81696B60 end:0x81696B68
+	.text       start:0x813C03F4 end:0x813C1BC0
+	.data       start:0x81650640 end:0x81650898
+	.sdata2     start:0x816968D0 end:0x816968E8
+	.sdata      start:0x81698A00 end:0x81698A08
 
 scene/limitOver/iplLimitOver.cpp:
-	.text       start:0x813C1AC4 end:0x813C2418
-	.data       start:0x816505D8 end:0x816508D0
-	.sdata      start:0x81696B68 end:0x81696BC8
+	.text       start:0x813C1BC0 end:0x813C2514
+	.data       start:0x81650898 end:0x81650B90
+	.sdata      start:0x81698A08 end:0x81698A68
 
 scene/mailAddSel/iplMailAddressSelect.cpp:
-	.text       start:0x813C2418 end:0x813C3BCC
-	.data       start:0x816508D0 end:0x81650C90
-	.sdata      start:0x81696BC8 end:0x81696BD8
+	.text       start:0x813C2514 end:0x813C3CC8
+	.data       start:0x81650B90 end:0x81650F50
+	.sdata      start:0x81698A68 end:0x81698A78
 
 scene/memory/iplMemory.cpp:
 	.bss        start:0x810B74F8 end:0x810B7508
-	.text       start:0x813C3BCC end:0x813C6E84
-	.rodata     start:0x81610328 end:0x81610350
-	.data       start:0x81650C90 end:0x81651250
-	.sdata2     start:0x81694A48 end:0x81694A58
-	.sdata      start:0x81696BD8 end:0x81696BF8
+	.text       start:0x813C3CC8 end:0x813C6F80
+	.rodata     start:0x81610568 end:0x81610568
+	.data       start:0x81650F50 end:0x81651504
+	.sdata2     start:0x816968E8 end:0x816968F8
+	.sdata      start:0x81698A78 end:0x81698A98
 
 scene/saveDataEdit/iplSaveDataBase.cpp:
-	.text       start:0x813C6E84 end:0x813C7C70
-	.data       start:0x81651250 end:0x816516E0
-	.sdata      start:0x81696BF8 end:0x81696C20
+	.text       start:0x813C6F80 end:0x813C7D6C
+	.data       start:0x81651504 end:0x816519A0
+	.sdata      start:0x81698A98 end:0x81698AC0
 
 scene/saveDataEdit/iplSaveDataBox.cpp:
-	.text       start:0x813C7C70 end:0x813C8484
-	.data       start:0x816516E0 end:0x81651860
-	.sdata      start:0x81696C20 end:0x81696C30
+	.text       start:0x813C7D6C end:0x813C8580
+	.data       start:0x816519A0 end:0x81651B20
+	.sdata      start:0x81698AC0 end:0x81698AD0
 
 scene/saveDataEdit/iplSaveDataEdit.cpp:
-	.text       start:0x813C8484 end:0x813C98CC
-	.rodata     start:0x81610350 end:0x81610368
-	.data       start:0x81651860 end:0x81651D30
-	.sdata2     start:0x81694A58 end:0x81694A68
-	.sdata      start:0x81696C30 end:0x81696C78
+	.text       start:0x813C8580 end:0x813C99C8
+	.rodata     start:0x81610568 end:0x816105A8
+	.data       start:0x81651B20 end:0x81651FF0
+	.sdata2     start:0x816968F8 end:0x81696908
+	.sdata      start:0x81698AD0 end:0x81698B18
 
 scene/saveDataEdit/iplWiiBannerFileInfo.cpp:
-	.text       start:0x813C98CC end:0x813C9DCC
+	.text       start:0x813C99C8 end:0x813C9EC8
 
 scene/memoryCard/iplMemoryCard.cpp:
-	.text       start:0x813C9DCC end:0x813CC1FC
-	.rodata     start:0x81610368 end:0x81610480
-	.data       start:0x81651D30 end:0x81652640
-	.sdata2     start:0x81694A68 end:0x81694A80
-	.sdata      start:0x81696C78 end:0x81696CA0
+	.text       start:0x813C9EC8 end:0x813CC2F8
+	.rodata     start:0x816105A8 end:0x816106C0
+	.data       start:0x81651FF0 end:0x81652900
+	.sdata2     start:0x81696908 end:0x81696918
+	.sdata      start:0x81698B18 end:0x81698B40
 
 scene/memoryCard/iplMemoryCardBase.cpp:
-	.text       start:0x813CC1FC end:0x813CD034
-	.data       start:0x81652640 end:0x816526D0
-	.sdata2     start:0x81694A80 end:0x81694A88
+	.text       start:0x813CC2F8 end:0x813CD130
+	.data       start:0x81652900 end:0x81652990
+	.sdata2     start:0x81696918 end:0x81696928
 
 scene/memoryCard/iplMemoryCardManager.cpp:
-	.text       start:0x813CD034 end:0x813CE548
+	.text       start:0x813CD130 end:0x813CE644
 
 scene/memoryCard/iplGCSaveData.cpp:
-	.text       start:0x813CE548 end:0x813CED20
-	.rodata     start:0x81610480 end:0x816104A8
-	.data       start:0x816526D0 end:0x81652820
-	.sdata      start:0x81696CA0 end:0x81696CB0
+	.text       start:0x813CE644 end:0x813CF264
+	.rodata     start:0x816106C0 end:0x816106E8
+	.data       start:0x81652990 end:0x81652AE0
+	.sdata      start:0x81698B40 end:0x81698B50
 
 scene/memoryCard/iplGCWindow.cpp:
-	.text       start:0x813CED20 end:0x813D140C
-	.rodata     start:0x816104A8 end:0x81610558
-	.data       start:0x81652820 end:0x81652F18
-	.sdata2     start:0x81694A88 end:0x81694AA0
-	.sdata      start:0x81696CB0 end:0x81696CE0
+	.text       start:0x813CF264 end:0x813D1508
+	.rodata     start:0x816106E8 end:0x81610798
+	.data       start:0x81652AE0 end:0x816531D8
+	.sdata2     start:0x81696928 end:0x81696940
+	.sdata      start:0x81698B50 end:0x81698B80
 
 scene/memoryCard/iplGCTextBalloon.cpp:
-	.text       start:0x813D140C end:0x813D2018
-	.data       start:0x81652F18 end:0x81652F68
-	.sdata2     start:0x81694AA0 end:0x81694AC0
-	.sdata      start:0x81696CE0 end:0x81696CF8
+	.text       start:0x813D1508 end:0x813D2114
+	.data       start:0x816531D8 end:0x81653228
+	.sdata2     start:0x81696940 end:0x81696960
+	.sdata      start:0x81698B80 end:0x81698B98
 
 scene/memoryCard/CardSequence.cpp:
-	.text       start:0x813D2018 end:0x813D4694
-	.data       start:0x81652F68 end:0x81653520
-	.sdata      start:0x81696CF8 end:0x81696D00
-	.sbss       start:0x81698B68 end:0x81698B70
+	.text       start:0x813D2114 end:0x813D4790
+	.data       start:0x81653228 end:0x816537E0
+	.sdata      start:0x81698B98 end:0x81698BA0
+	.sbss       start:0x8169AA08 end:0x8169AA10
 
 scene/nakamuraTest/iplContest.c:
 	.bss        start:0x810B7508 end:0x810B8008
-	.text       start:0x813D4694 end:0x813D5564
-	.rodata     start:0x81610558 end:0x816105A0
-	.data       start:0x81653520 end:0x81653810
-	.sdata2     start:0x81694AC0 end:0x81694AC8
-	.sdata      start:0x81696D00 end:0x81696D08
+	.text       start:0x813D4790 end:0x813D5660
+	.rodata     start:0x81610798 end:0x816107E0
+	.data       start:0x816537E0 end:0x81653AD0
+	.sdata2     start:0x81696960 end:0x81696968
+	.sdata      start:0x81698BA0 end:0x81698BA8
 
 scene/nakamuraTest/gamespy/NATify.c:
-	.text       start:0x813D5564 end:0x813D5E8C
-	.sdata      start:0x81696D08 end:0x81696D18
-	.sbss       start:0x81698B70 end:0x81698B90
+	.text       start:0x813D5660 end:0x813D5F88
+	.sdata      start:0x81698BA8 end:0x81698BB8
+	.sbss       start:0x8169AA10 end:0x8169AA30
 
 scene/nakamuraTest/gamespy/darray.c:
-	.text       start:0x813D5E8C end:0x813D5FE8
+	.text       start:0x813D5F88 end:0x813D60E4
 
 scene/nakamuraTest/gamespy/gsAvailable.c:
 	.bss        start:0x810B8008 end:0x810B80E0
-	.text       start:0x813D5FE8 end:0x813D6328
-	.data       start:0x81653810 end:0x81653838
-	.sdata      start:0x81696D18 end:0x81696D20
-	.sbss       start:0x81698B90 end:0x81698B98
+	.text       start:0x813D60E4 end:0x813D6424
+	.data       start:0x81653AD0 end:0x81653AF8
+	.sdata      start:0x81698BB8 end:0x81698BC0
+	.sbss       start:0x8169AA30 end:0x8169AA38
 
 scene/nakamuraTest/gamespy/nonport.c:
 	.bss        start:0x810B80E0 end:0x810B80F0
-	.text       start:0x813D6328 end:0x813D6870
-	.data       start:0x81653838 end:0x81653858
-	.sbss       start:0x81698B98 end:0x81698BA0
+	.text       start:0x813D6424 end:0x813D696C
+	.data       start:0x81653AF8 end:0x81653B18
+	.sbss       start:0x8169AA38 end:0x8169AA40
 
 scene/nakamuraTest/gamespy/gsSHA1.c:
-	.text       start:0x813D6870 end:0x813D6E30
-	.rodata     start:0x816105A0 end:0x816105B0
+	.text       start:0x813D696C end:0x813D6F2C
+	.rodata     start:0x816107E0 end:0x816107F0
 
 scene/nakamuraTest/gamespy/natneg.c:
 	.bss        start:0x810B80F0 end:0x810B83C8
-	.text       start:0x813D6E30 end:0x813D7F90
-	.data       start:0x81653858 end:0x816538B0
-	.sdata      start:0x81696D20 end:0x81696D40
-	.sbss       start:0x81698BA0 end:0x81698BD0
+	.text       start:0x813D6F2C end:0x813D808C
+	.data       start:0x81653B18 end:0x81653B70
+	.sdata      start:0x81698BC0 end:0x81698BE0
+	.sbss       start:0x8169AA40 end:0x8169AA70
 
 scene/nakamuraTest/iplNakamuraTest.cpp:
-	.text       start:0x813D7F90 end:0x813D8D9C
-	.rodata     start:0x816105B0 end:0x816105C8
-	.data       start:0x816538B0 end:0x81653C18
-	.sdata      start:0x81696D40 end:0x81696D48
-	.sbss       start:0x81698BD0 end:0x81698BD8
+	.text       start:0x813D808C end:0x813D8E98
+	.rodata     start:0x816107F0 end:0x81610808
+	.data       start:0x81653B70 end:0x81653ED8
+	.sdata      start:0x81698BE0 end:0x81698BE8
+	.sbss       start:0x8169AA70 end:0x8169AA78
 
 scene/nakamuraTest/iplNetSetup.cpp:
 	.bss        start:0x810B83C8 end:0x810B83F0
-	.text       start:0x813D8D9C end:0x813D95BC
-	.data       start:0x81653C18 end:0x81653CE8
-	.sbss       start:0x81698BD8 end:0x81698BE0
+	.text       start:0x813D8E98 end:0x813D96B8
+	.data       start:0x81653ED8 end:0x81653FA8
+	.sbss       start:0x8169AA78 end:0x8169AA80
 
 scene/parentalDialog/iplParentalDialog.cpp:
-	.text       start:0x813D95BC end:0x813DA778
-	.data       start:0x81653CE8 end:0x81653FD8
-	.sdata      start:0x81696D48 end:0x81696D80
+	.text       start:0x813D96B8 end:0x813DA874
+	.data       start:0x81653FA8 end:0x81654298
+	.sdata      start:0x81698BE8 end:0x81698C20
 
 scene/sceneMisc/iplReboot.cpp:
-	.text       start:0x813DA778 end:0x813DA8E8
-	.data       start:0x81653FD8 end:0x81654038
+	.text       start:0x813DA874 end:0x813DA9E4
+	.data       start:0x81654298 end:0x816542F8
 
 scene/sceneMisc/iplRootScene.cpp:
-	.text       start:0x813DA8E8 end:0x813DAB08
-	.data       start:0x81654038 end:0x81654088
+	.text       start:0x813DA9E4 end:0x813DAC04
+	.data       start:0x816542F8 end:0x81654348
 
 scene/sdChannelSelect/iplSDChannelSelect.cpp:
-	.text       start:0x813DAB08 end:0x813E2F2C
-	.rodata     start:0x816105C8 end:0x81610608
-	.data       start:0x81654088 end:0x81654B38
-	.sdata2     start:0x81694AC8 end:0x81694B18
-	.sdata      start:0x81696D80 end:0x81696DD0
+	.text       start:0x813DAC04 end:0x813E3028
+	.rodata     start:0x81610808 end:0x81610848
+	.data       start:0x81654348 end:0x81654DF8
+	.sdata2     start:0x81696968 end:0x816969B8
+	.sdata      start:0x81698C20 end:0x81698C70
 
 scene/sdChannelSelect/iplSDChannelObj.cpp:
-	.text       start:0x813E2F2C end:0x813E4BBC
-	.rodata     start:0x81610608 end:0x81610918
-	.data       start:0x81654B38 end:0x81654F98
-	.sdata2     start:0x81694B18 end:0x81694B60
-	.sdata      start:0x81696DD0 end:0x81696E40
+	.text       start:0x813E3028 end:0x813E4CB8
+	.rodata     start:0x81610848 end:0x81610B58
+	.data       start:0x81654DF8 end:0x81655258
+	.sdata2     start:0x816969B8 end:0x81696A00
+	.sdata      start:0x81698C70 end:0x81698CD0
 
-scene/sdChannelSelect/iplSDChannelTitle.cpp:
-	.text       start:0x813E4BBC end:0x813E947C
-	.rodata     start:0x81610918 end:0x81610948
-	.data       start:0x81654F98 end:0x81655638
-	.sdata2     start:0x81694B60 end:0x81694B88
-	.sdata      start:0x81696E40 end:0x81696EF0
+scene/sdChannelTitle/iplSDChannelTitle.cpp:
+	.text       start:0x813E4CB8 end:0x813E9578
+	.rodata     start:0x81610B58 end:0x81610B88
+	.data       start:0x81655258 end:0x816558F8
+	.sdata2     start:0x81696A00 end:0x81696A28
+	.sdata      start:0x81698CD0 end:0x81698D90
 
-scene/sdChannelSelect/iplSDButton.cpp:
-	.text       start:0x813E947C end:0x813EA88C
-	.data       start:0x81655638 end:0x81655A70
-	.sdata2     start:0x81694B88 end:0x81694BA0
-	.sdata      start:0x81696EF0 end:0x81696F30
+scene/sdChannelButton/iplSDButton.cpp:
+	.text       start:0x813E9578 end:0x813EA988
+	.data       start:0x816558F8 end:0x81655D30
+	.sdata2     start:0x81696A28 end:0x81696A40
+	.sdata      start:0x81698D90 end:0x81698DD0
 
-scene/sdChannelSelect/iplSDArrow.cpp:
-	.text       start:0x813EA88C end:0x813EA9BC
-	.data       start:0x81655A70 end:0x81655AC0
+scene/sdChannelButton/iplSDArrow.cpp:
+	.text       start:0x813EA980 end:0x813EAAB8
+	.data       start:0x81655D30 end:0x81655D80
 
-scene/sdChannelSelect/iplSDMenuButton.cpp:
-	.text       start:0x813EA9BC end:0x813EB5EC
-	.data       start:0x81655AC0 end:0x81655CA0
-	.sdata2     start:0x81694BA0 end:0x81694BD0
-	.sdata      start:0x81696F30 end:0x81696F50
+scene/sdChannelButton/iplSDMenuButton.cpp:
+	.text       start:0x813EAAB8 end:0x813EB6E8
+	.data       start:0x81655D80 end:0x81655F60
+	.sdata2     start:0x81696A40 end:0x81696A70
+	.sdata      start:0x81698DD0 end:0x81698DF0
 
-scene/sdChannelSelect/iplSDMemory.cpp:
-	.text       start:0x813EB5EC end:0x813F0774
-	.data       start:0x81655CA0 end:0x816568E8
-	.sdata2     start:0x81694BD0 end:0x81694C00
-	.sdata      start:0x81696F50 end:0x81696FE8
+scene/sdChannelMemory/iplSDMemory.cpp:
+	.text       start:0x813EB6E8 end:0x813F0870
+	.data       start:0x81655F60 end:0x81656BA8
+	.sdata2     start:0x81696A70 end:0x81696AA0
+	.sdata      start:0x81698DF0 end:0x81698EA0
 
 scene/setting/iplSetting.cpp:
-	.text       start:0x813F0774 end:0x813F9B70
-	.rodata     start:0x81610948 end:0x81610BC8
-	.data       start:0x816568E8 end:0x81657898
-	.sdata2     start:0x81694C00 end:0x81694C40
-	.sdata      start:0x81696FE8 end:0x816971E0
-	.sbss       start:0x81698BE0 end:0x81698BF0
+	.text       start:0x813F0870 end:0x813F9C6C
+	.rodata     start:0x81610B88 end:0x81610E08
+	.data       start:0x81656BA8 end:0x81657B58
+	.sdata2     start:0x81696AA0 end:0x81696AE0
+	.sdata      start:0x81698EA0 end:0x81699080
+	.sbss       start:0x8169AA80 end:0x8169AA90
 
 scene/setting/iplSensitivity.cpp:
-	.text       start:0x813F9B70 end:0x813F9FC8
-	.sdata2     start:0x81694C40 end:0x81694C78
+	.text       start:0x813F9C6C end:0x813FA0C4
+	.sdata2     start:0x81696AE0 end:0x81696B18
 
 scene/setting/iplNCDSetting.cpp:
 	.bss        start:0x810B83F0 end:0x810BBC90
-	.text       start:0x813F9FC8 end:0x813FBA54
-	.data       start:0x81657898 end:0x81657950
-	.sbss       start:0x81698BF0 end:0x81698BF8
+	.text       start:0x813FA0C4 end:0x813FBB50
+	.data       start:0x81657B58 end:0x81657C10
+	.sbss       start:0x8169AA90 end:0x8169AA98
 
 scene/setting/iplParental.cpp:
 	.bss        start:0x810BBC90 end:0x810BC148
-	.text       start:0x813FBA54 end:0x813FC39C
-	.data       start:0x81657950 end:0x81657AA0
-	.sdata      start:0x816971E0 end:0x816971F0
-	.sbss       start:0x81698BF8 end:0x81698C08
+	.text       start:0x813FBB50 end:0x813FC498
+	.data       start:0x81657C10 end:0x81657D60
+	.sdata      start:0x81699080 end:0x81699090
+	.sbss       start:0x8169AA98 end:0x8169AAA8
 
 scene/setting/iplAPScanThread.cpp:
-	.text       start:0x813FC39C end:0x813FC520
-	.data       start:0x81657AA0 end:0x81657B08
+	.text       start:0x813FC498 end:0x813FC61C
+	.data       start:0x81657D60 end:0x81657DC8
 
 scene/setting/iplUsbAP.cpp:
 	.bss        start:0x810BC148 end:0x810BD498
-	.text       start:0x813FC520 end:0x813FC8FC
-	.data       start:0x81657B08 end:0x81657B18
-	.sbss       start:0x81698C08 end:0x81698C28
+	.text       start:0x813FC61C end:0x813FC9F8
+	.data       start:0x81657DC8 end:0x81657DD8
+	.sbss       start:0x8169AAA8 end:0x8169AAC0
 
 scene/setting/iplUsbAPThread.cpp:
-	.text       start:0x813FC8FC end:0x813FCA0C
-	.data       start:0x81657B18 end:0x81657B60
+	.text       start:0x813FC9F8 end:0x813FCB08
+	.data       start:0x81657DD8 end:0x81657E20
 
 scene/setting/iplAOSSThread.cpp:
 	.bss        start:0x810BD498 end:0x810BD4A8
-	.text       start:0x813FCA0C end:0x813FD170
-	.data       start:0x81657B60 end:0x81657B90
-	.sdata      start:0x816971F0 end:0x816971F8
-	.sbss       start:0x81698C28 end:0x81698C38
+	.text       start:0x813FCB08 end:0x813FD26C
+	.data       start:0x81657E20 end:0x81657E50
+	.sdata      start:0x81699090 end:0x81699098
+	.sbss       start:0x8169AAC0 end:0x8169AAD8
 
 scene/setting/iplAOSS.cpp:
 	.bss        start:0x810BD4A8 end:0x810BDDD0
-	.text       start:0x813FD170 end:0x813FDA04
-	.data       start:0x81657B90 end:0x81657BC0
-	.sbss       start:0x81698C38 end:0x81698C60
+	.text       start:0x813FD26C end:0x813FDB00
+	.data       start:0x81657E50 end:0x81657E80
+	.sbss       start:0x8169AAD8 end:0x8169AB00
 
 scene/setting/iplRakuRakuThread.cpp:
 	.bss        start:0x810BDDD0 end:0x810BDEF8
-	.text       start:0x813FDA04 end:0x813FE27C
-	.data       start:0x81657BC0 end:0x81657C48
-	.sdata      start:0x816971F8 end:0x81697200
-	.sbss       start:0x81698C60 end:0x81698C70
+	.text       start:0x813FDB00 end:0x813FE378
+	.data       start:0x81657E80 end:0x81657F08
+	.sdata      start:0x81699098 end:0x816990A0
+	.sbss       start:0x8169AB00 end:0x8169AB10
 
 scene/setting/iplATERM.cpp:
 	.bss        start:0x810BDEF8 end:0x810C0C80
-	.text       start:0x813FE27C end:0x81406CC0
-	.rodata     start:0x81610BC8 end:0x816133F0
-	.data       start:0x81657C48 end:0x81657ED0
-	.sdata2     start:0x81694C78 end:0x81694C88
-	.sdata      start:0x81697200 end:0x81697250
-	.sbss       start:0x81698C70 end:0x81698CE0
+	.text       start:0x813FE378 end:0x81406DBC
+	.rodata     start:0x81610E08 end:0x81613630
+	.data       start:0x81657F08 end:0x81658190
+	.sdata2     start:0x81696B18 end:0x81696B28
+	.sdata      start:0x816990A0 end:0x816990F0
+	.sbss       start:0x8169AB10 end:0x8169AB80
 
 scene/setting/iplSettingBg.cpp:
-	.text       start:0x81406CC0 end:0x81406ED0
-	.data       start:0x81657ED0 end:0x81657F40
-	.sdata      start:0x81697250 end:0x81697258
+	.text       start:0x81406DBC end:0x81406FCC
+	.data       start:0x81658190 end:0x81658200
+	.sdata      start:0x816990F0 end:0x816990F8
 
 scene/setting/iplSettingButton.cpp:
-	.text       start:0x81406ED0 end:0x81407AFC
-	.data       start:0x81657F40 end:0x816581B8
-	.sdata      start:0x81697258 end:0x81697278
+	.text       start:0x81406FCC end:0x81407BF8
+	.data       start:0x81658200 end:0x81658478
+	.sdata      start:0x816990F8 end:0x81699118
 
 scene/setting/iplSettingSelect.cpp:
-	.text       start:0x81407AFC end:0x81409BEC
-	.data       start:0x816581B8 end:0x81658788
-	.sdata      start:0x81697278 end:0x81697288
+	.text       start:0x81407BF8 end:0x81409CE8
+	.data       start:0x81658478 end:0x81658A48
+	.sdata      start:0x81699118 end:0x81699128
 
 scene/sceneSystem/iplSceneBase.cpp:
-	.text       start:0x81409BEC end:0x81409FC4
-	.data       start:0x81658788 end:0x816587D8
+	.text       start:0x81409CE8 end:0x8140A0C0
+	.data       start:0x81658A48 end:0x81658A98
 
 scene/sceneSystem/iplSceneCreator.cpp:
-	.text       start:0x81409FC4 end:0x8140A4F8
-	.data       start:0x816587D8 end:0x81658908
+	.text       start:0x8140A0C0 end:0x8140A5F4
+	.data       start:0x81658A98 end:0x81658BC8
 
 scene/sceneSystem/iplSceneManager.cpp:
-	.text       start:0x8140A4F8 end:0x8140B208
-	.data       start:0x81658908 end:0x81658930
+	.text       start:0x8140A5F4 end:0x8140B304
+	.data       start:0x81658BC8 end:0x81658BF0
 
 scene/sceneSystem/iplFaderSceneBase.cpp:
-	.text       start:0x8140B208 end:0x8140B3B0
-	.data       start:0x81658930 end:0x81658998
+	.text       start:0x8140B304 end:0x8140B4AC
+	.data       start:0x81658BF0 end:0x81658C58
 
 scene/textWriter/iplTextWriter.cpp:
-	.text       start:0x8140B3B0 end:0x8140CD54
-	.data       start:0x81658998 end:0x81658B90
-	.sdata2     start:0x81694C88 end:0x81694CA0
-	.sdata      start:0x81697288 end:0x81697290
+	.text       start:0x8140B4AC end:0x8140CE50
+	.data       start:0x81658C58 end:0x81658E50
+	.sdata2     start:0x81696B28 end:0x81696B40
+	.sdata      start:0x81699128 end:0x81699130
 
 bannerSound/AudioWavePlayer.cpp:
-	.text       start:0x8140CD54 end:0x8140DA2C
-	.data       start:0x81658B90 end:0x81658BD0
-	.sdata2     start:0x81694CA0 end:0x81694CA8
+	.text       start:0x8140CE50 end:0x8140DB28
+	.data       start:0x81658E50 end:0x81658E90
+	.sdata2     start:0x81696B40 end:0x81696B48
 
 bannerSound/AxAdpcmPlayer.cpp:
 	.bss        start:0x810C0C80 end:0x810C2580
-	.text       start:0x8140DA2C end:0x8140E63C
-	.ctors      start:0x8160D1E8 end:0x8160D1EC
-	.data       start:0x81658BD0 end:0x81658BF0
-	.sdata2     start:0x81694CA8 end:0x81694CC0
-	.sdata      start:0x81697290 end:0x81697298
-	.sbss       start:0x81698CE0 end:0x81698CF0
+	.text       start:0x8140DB28 end:0x8140E704
+	.ctors      start:0x8160D428 end:0x8160D42C
+	.data       start:0x81658E90 end:0x81658EB0
+	.sdata2     start:0x81696B48 end:0x81696B60
+	.sdata      start:0x81699130 end:0x81699138
+	.sbss       start:0x8169AB80 end:0x8169AB90
 
 bannerSound/BannerSoundPlayer.cpp:
 	.bss        start:0x810C2580 end:0x810C6580
-	.text       start:0x8140E63C end:0x8140EC60
-	.sdata2     start:0x81694CC0 end:0x81694CD0
-	.sbss       start:0x81698CF0 end:0x81698CF8
+	.text       start:0x8140E704 end:0x8140ED5C
+	.sdata2     start:0x81696B60 end:0x81696B70
+	.sbss       start:0x8169AB90 end:0x8169AB98
 
 bannerSound/AudioWaveUtility.cpp:
-	.text       start:0x8140EC60 end:0x814101D8
-	.rodata     start:0x816133F0 end:0x81613408
-	.data       start:0x81658BF0 end:0x81658D90
-	.sdata2     start:0x81694CD0 end:0x81694D18
-	.sdata      start:0x81697298 end:0x816972A0
+	.text       start:0x8140ED5C end:0x814102D4
+	.rodata     start:0x81613630 end:0x81613648
+	.data       start:0x81658EB0 end:0x81659050
+	.sdata2     start:0x81696B70 end:0x81696BB8
+	.sdata      start:0x81699138 end:0x81699140
 
 keyboard/pckeyboard.cpp:
-	.text       start:0x814101D8 end:0x8141711C
-	.ctors      start:0x8160D1EC end:0x8160D1F0
-	.rodata     start:0x81613408 end:0x81614AC0
-	.data       start:0x81658D90 end:0x8165BEB0
-	.sdata2     start:0x81694D18 end:0x81694D20
-	.sdata      start:0x816972A0 end:0x81697328
-	.sbss       start:0x81698CF8 end:0x81698D00
+	.text       start:0x814101D8 end:0x81417218
+	.ctors      start:0x8160D42C end:0x8160D430
+	.rodata     start:0x81613648 end:0x81614D00
+	.data       start:0x81659050 end:0x8165C170
+	.sdata2     start:0x81696BB8 end:0x81696BC0
+	.sdata      start:0x81699140 end:0x816991C8
+	.sbss       start:0x8169AB98 end:0x8169ABA0
 
 keyboard/cellphone.cpp:
-	.text       start:0x8141711C end:0x8141BB70
-	.ctors      start:0x8160D1F0 end:0x8160D1F4
-	.rodata     start:0x81614AC0 end:0x81614FE8
-	.data       start:0x8165BEB0 end:0x8165C820
-	.sdata2     start:0x81694D20 end:0x81694D28
-	.sdata      start:0x81697328 end:0x81697398
+	.text       start:0x81417218 end:0x8141BC6C
+	.ctors      start:0x8160D430 end:0x8160D434
+	.rodata     start:0x81614D00 end:0x81615228
+	.data       start:0x8165C170 end:0x8165CAE0
+	.sdata2     start:0x81696BC0 end:0x81696BC8
+	.sdata      start:0x816991C8 end:0x81699238
 
 keyboard/inputform.cpp:
-	.text       start:0x8141BB70 end:0x81428150
-	.ctors      start:0x8160D1F4 end:0x8160D1F8
-	.rodata     start:0x81614FE8 end:0x816152E0
-	.data       start:0x8165C820 end:0x8165D2D0
-	.sdata2     start:0x81694D28 end:0x81694D90
-	.sdata      start:0x81697398 end:0x816973C8
-	.sbss       start:0x81698D00 end:0x81698D20
+	.text       start:0x8141BC6C end:0x8142824C
+	.ctors      start:0x8160D434 end:0x8160D438
+	.rodata     start:0x81615228 end:0x81615520
+	.data       start:0x8165CAE0 end:0x8165D590
+	.sdata2     start:0x81696BC8 end:0x81696C30
+	.sdata      start:0x81699238 end:0x81699260
+	.sbss       start:0x8169ABA0 end:0x8169ABC0
 
 keyboard/candidatebox.cpp:
 	.text       start:0x81428150 end:0x8142DF10

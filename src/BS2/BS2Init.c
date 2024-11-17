@@ -14,10 +14,6 @@ extern u32 __PADFixBits;
 
 extern void __OSFPRInit();
 
-/**
- * @note Address: 0x8137AEA4 (4.3U)
- * @note Size: 0x38
- */
 static asm void ClearOtherBATs() {
     nofralloc
 
@@ -64,10 +60,6 @@ static void SetConsoleInfo() {
     rvlBi->devKitVersion    = BS2_VERSION;
 }
 
-/**
- * @note Address: 0x8137AEDC (4.3U)
- * @note Size: 0xD8
- */
 void BS2Init() {
     memset(OSPhysicalToCached(0x00000000), 0, 0x100);
     memset(OSPhysicalToCached(0x00003000), 0, 0x100);

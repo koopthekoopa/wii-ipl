@@ -13,10 +13,6 @@
 #include "iplMath.h"
 
 namespace ipl {
-    /**
-     * @note Address: 0x813444C4 (4.3U)
-     * @note Size: 0x24
-     */
     PointerCoreObject::PointerCoreObject() :
     mpLayout(NULL),
     mState(0),
@@ -24,10 +20,7 @@ namespace ipl {
     mChan(0),
     unk_0x10(0) {}
 
-    /**
-     * @note Address: 0x813444E8 (4.3U)
-     * @note Size: 0x19C
-     */
+
    void PointerCoreObject::calc(Pointer* pPointer, const controller::Interface* pController) {
         mpLayout = NULL;
         if (pController && pController->isValidDpd()) {
@@ -51,22 +44,14 @@ namespace ipl {
             mpLayout->calc();
         }
     }
-    
-    /**
-     * @note Address: 0x813446A0 (4.3U)
-     * @note Size: 0x24
-     */
+
     void PointerCoreObject::draw() {
         if (!mpLayout) return;
         if (mState != 0) return;
 
         mpLayout->draw();
     }
-    
-    /**
-     * @note Address: 0x813446C4 (4.3U)
-     * @note Size: 0x7C
-     */
+
     PointerCore::PointerCore() : mCursors() {
         int chan = 0;
         for (int i = WPAD_MAX_CONTROLLERS - 1; i >= 0; i--) {
@@ -76,28 +61,16 @@ namespace ipl {
         }
     }
 
-    /**
-     * @note Address: 0x81344740 (4.3U)
-     * @note Size: 0x10
-     */
     void PointerCore::setState(int chan, int state) {
         mCursors[chan].setState(state);
     }
 
-    /**
-     * @note Address: 0x81344750 (4.3U)
-     * @note Size: 0x64
-     */
     void PointerCore::calc(Pointer* pPointer) {
         for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
             mCursors[i].calc(pPointer, System::getController(i));
         }
     }
 
-    /**
-     * @note Address: 0x813447B4 (4.3U)
-     * @note Size: 0x54
-     */
     void PointerCore::draw() {
         utility::Graphics::setDefaultOrtho();
 
@@ -106,10 +79,6 @@ namespace ipl {
         }
     }
 
-    /**
-     * @note Address: 0x81344808 (4.3U)
-     * @note Size: 0x10
-     */
     void PointerCore::changeType(int chan, int type) {
         mCursors[chan].changeType(type);
     }

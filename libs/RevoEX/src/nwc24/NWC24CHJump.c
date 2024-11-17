@@ -18,10 +18,6 @@ static u32* NWC24iGetCHJumpEntry(u32* table, u32 idx) {
     return (u32*)(table + 2 * idx);
 }
 
-/**
- * @note Address: 0x814B1A88 (4.3U)
- * @note Size: 0xA0 (4.3U)
- */
 NWC24Err NWC24CheckCHJumpObj(const NWC24CHJumpObj* chjp, u32 dataSize) {
     u32 i;
     u32 tableSize;
@@ -60,19 +56,11 @@ NWC24Err NWC24CheckCHJumpObj(const NWC24CHJumpObj* chjp, u32 dataSize) {
     return NWC24_OK;
 }
 
-/**
- * @note Address: 0x814B1B28 (4.3U)
- * @note Size: 0x18 (4.3U)
- */
 NWC24Err NWC24GetCHJumpTitleId(const NWC24CHJumpObj* chjp, u64* titleId) {
     *titleId = chjp->header.titleId;
     return NWC24_OK;
 }
 
-/**
- * @note Address: 0x814B1B40 (4.3U)
- * @note Size: 0x30 (4.3U)
- */
 NWC24Err NWC24GetCHJumpBlockSize(const NWC24CHJumpObj *chjp, u32* size, u32 index) {
     u32* table = NWC24iGetCHJumpTable(chjp);
 
@@ -84,10 +72,6 @@ NWC24Err NWC24GetCHJumpBlockSize(const NWC24CHJumpObj *chjp, u32* size, u32 inde
     return NWC24_OK;
 }
 
-/**
- * @note Address: 0x814B1B70 (4.3U)
- * @note Size: 0xA0 (4.3U)
- */
 NWC24Err NWC24GetCHJumpBlockData(const NWC24CHJumpObj* chjp, char* data, u32 size, u32 index) {
     u32* table = NWC24iGetCHJumpTable(chjp);
     char* srcData;

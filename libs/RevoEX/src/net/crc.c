@@ -1,9 +1,5 @@
 #include <revolution.h>
 
-/**
- * @note Address: 0x8149358C (4.3U)
- * @note Size: 0x134
- */
 u16 NETCalcCRC16(const void* pData, s32 size) {
     static u16 crc16_table[] = {
         0x0000, 0xCC01, 0xD801, 0x1400,
@@ -22,10 +18,6 @@ u16 NETCalcCRC16(const void* pData, s32 size) {
     return (u16)crc;
 }
 
-/**
- * @note Address: 0x814936C0 (4.3U)
- * @note Size: 0x134
- */
 u32 NETCalcCRC32(const void* pData, s32 size) {
     static u32 crc32_table[] = {
         0x00000000, 0x1DB71064, 0x3B6E20C8, 0x26D930AC,

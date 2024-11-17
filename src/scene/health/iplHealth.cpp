@@ -30,10 +30,6 @@ namespace ipl {
             ANIM_FADE_OUT,
         };
 
-        /**
-         * @note Address: 0x8164F91C
-         * @note Size: 0x30
-         */
         // Health And Safety screen
         const char* has_pane_name[] = {
             "Has_JPN",
@@ -50,10 +46,6 @@ namespace ipl {
             "Has_CHN"
         };
 
-        /**
-         * @note Address: 0x8164F9D4
-         * @note Size: 0x30
-         */
         // "Press A to continue" text
         const char* push_pane_name[] = {
             "Push_JPN",
@@ -70,10 +62,6 @@ namespace ipl {
             "Push_CHN"
         };
 
-        /**
-         * @note Address: 0x813BD5D8
-         * @note Size: 0x74
-         */
         skHealth::skHealth(EGG::Heap *pHeap) :
         FaderSceneBase(pHeap),
         mpHasPane(NULL),
@@ -89,40 +77,20 @@ namespace ipl {
             unk_0x28 = 2;
         }
 
-        /**
-         * @note Address: 0x813BD64C
-         * @note Size: 0x5C
-         */
         skHealth::~skHealth() {}
 
-        /**
-         * @note Address: 0x813BD6A8
-         * @note Size: 0x4C
-         */
         void skHealth::prepare() {
             mpLayoutFile = System::getNandManager()->readLayoutAsync(System::getUnk28Heap(), "health.ash", true);
         }
 
-        /**
-         * @note Address: 0x813BD6F4
-         * @note Size: 0x24
-         */
         void skHealth::destroy() {
             delete mpLayoutFile;
         }
 
-        /**
-         * @note Address: 0x813BD718
-         * @note Size: 0x14
-         */
         BOOL skHealth::isReady() const {
             return mpLayoutFile->isFinished();
         }
 
-        /**
-         * @note Address: 0x813BD72C
-         * @note Size: 0x114
-         */
         u32 skHealth::getCountryIndex_() {
             u32 result = LANG_US_ENG;
             s32 language = SCGetLanguage();
@@ -192,10 +160,6 @@ namespace ipl {
             return result;
         }
 
-        /**
-         * @note Address: 0x813BD840
-         * @note Size: 0x21C
-         */
         // loading `getCountryIndex_()` to `country` for some reason is stored in `r29` and not `r26`
         // https://decomp.me/scratch/55mS2
         void skHealth::create() {
@@ -241,10 +205,6 @@ namespace ipl {
             System::getPointer()->setVisible(false);
         }
 
-        /**
-         * @note Address: 0x813BDA5C
-         * @note Size: 0x138
-         */
         SceneReturn skHealth::calcFadein() {
             SceneReturn result = SCENE_CONTINUE;
 
@@ -272,10 +232,6 @@ namespace ipl {
             return result;
         }
 
-        /**
-         * @note Address: 0x813BDB94
-         * @note Size: 0x140
-         */
         SceneReturn skHealth::calcNormal() {
             SceneReturn result  = SCENE_CONTINUE;
             u32 newWpadMask     = utility::wpad::getWpadConnectedMask();
@@ -309,10 +265,6 @@ namespace ipl {
             return result;
         }
 
-        /**
-         * @note Address: 0x813BDCD4
-         * @note Size: 0x140
-         */
         SceneReturn skHealth::calcFadeout() {
             mpLayout->calc();
 
@@ -344,10 +296,6 @@ namespace ipl {
             return SCENE_CONTINUE;
         }
 
-        /**
-         * @note Address: 0x813BDE14
-         * @note Size: 0x50
-         */
         void skHealth::draw() {
             if (System::getSceneManager()->isDrawingScene() == TRUE) {
                 utility::Graphics::setOrtho();
@@ -355,10 +303,6 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x813BDE64
-         * @note Size: 0x118
-         */
         void skHealth::check_safe_mode() {
             if (!mbHeldCombo) {
                 if (System::getMasterController()->down(KPAD_BUTTON_PLUS) && System::getMasterController()->down(KPAD_BUTTON_MINUS)) {
@@ -380,10 +324,6 @@ namespace ipl {
             }
         }
 
-        /**
-         * @note Address: 0x813BDF7C
-         * @note Size: 0x88
-         */
         BOOL skHealth::finish_safe_mode_check() const {
             BOOL result = FALSE;
 
