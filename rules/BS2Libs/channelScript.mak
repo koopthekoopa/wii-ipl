@@ -1,24 +1,24 @@
 CHANS_OBJS	=	$(BS2_SPLIT_PATH)/channelScript/CHANSVm.o \
-				$(BS2_SPLIT_PATH)/channelScript/VmSystemMenu.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSSystem.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSLayout.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSPane.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSMaterial.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSTexture.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSSavedata.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSVector.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSGX.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSUtil.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSMtx.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSTextWriter.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSFont.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSRect.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSColor.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSColorS10.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSSize.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSAnim.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSSound.o \
-				$(BS2_SPLIT_PATH)/channelScript/iplCSImage.o
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/VmSystemMenu.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSSystem.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSLayout.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSPane.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSMaterial.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSTexture.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSSavedata.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSVector.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSGX.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSUtil.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSMtx.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSTextWriter.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSFont.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSRect.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSColor.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSColorS10.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSSize.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSAnim.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSSound.o \
+				$(BS2_SPLIT_PATH)/channelScript/systemmenu/iplCSImage.o
 
 DEPENDENCIES += $(CHANS_OBJS:.o=.d)
 

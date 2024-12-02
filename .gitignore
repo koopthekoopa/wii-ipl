@@ -73,6 +73,7 @@ tools/elf2bs
 objdiff.json
 *.lnk
 *.wad
+*.swf
 
 # Scrapped :(
 .web/*

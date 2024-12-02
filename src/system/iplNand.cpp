@@ -244,7 +244,6 @@ namespace ipl {
             }
         }
 
-        // https://decomp.me/scratch/IsA3X
         void File::read() {
             if (open_(NAND_ACCESS_READ)) {
                 if (mpLength == 0) {
@@ -284,7 +283,7 @@ namespace ipl {
                     buffer += 0x20;
                 }
 
-                // Check if the file is compressed.
+                // Check if the file is compressed
                 if (isCompressed(buffer)) {
                     // Read compressed data
                     readBlock_(mpCmpBuffer, mpLength);
@@ -302,7 +301,7 @@ namespace ipl {
                         Rvl_decode(mpBuffer, &mpCmpBuffer[fileOff]);
                     }
 
-                    // Calculate MD5.
+                    // Calculate MD5
                     if (bHasMd5 == TRUE) {
                         mResult = calcMD5_(sum, &mpCmpBuffer[fileOff], fileLen);
                     }
@@ -312,19 +311,23 @@ namespace ipl {
                     mpBuffer = getBuffer_(mpLength - fileOff);
                     readBlock_(mpBuffer, mpLength - fileOff, fileOff);
 
-                    // calculate MD5.
+                    // Calculate MD5
                     if (bHasMd5 == TRUE) {
                         mResult = calcMD5_(sum, mpBuffer, fileLen);
                     }
                 }
 
-                // clear uneeded stuff
+                // Clean up no longer needed stuff
                 delete[] mpCmpBuffer;
                 mpCmpBuffer = NULL;
 
                 DCStoreRange(mpBuffer, mpLength);
 
-                close_();
+                // Seems like there was going to be logic when close_ returns false, but it seemed like it was not included on release.
+                // However it did left the compare instruction! So here is my way of generating that one instruction.
+                if (!close_()) {
+                    u32 dummy = 0;
+                }
             }
             mDoneTask = TRUE;
             callback_();
@@ -534,7 +537,7 @@ done:
             return result;
         }
 
-        bool File::isFatalError() { return mbFatalError; } // weak?
+        bool File::isFatalError() { return mbFatalError; }
 
         bool LangFile::checkData() {
             if (mpLangFile) return mpLangFile->checkData();

@@ -47,7 +47,6 @@ namespace ipl {
         Object* Manager::create(EGG::Heap* pHeap, int width, int height, int faceId, Object::MakeIconCallback callback, void* callbackWork) {
             // Create mii and append to list
             Object* obj = new(pHeap, CLASS_HEAP) Object(pHeap, width, height, faceId, callback, callbackWork);
-
             nw4r::ut::List_Append(&mObjects, obj);
             return obj;
         }
@@ -55,20 +54,17 @@ namespace ipl {
         Object* Manager::create(EGG::Heap* pHeap, int width, int height, RFLiCharData* faceData, Object::MakeIconCallback callback, void* callbackWork) {
             // Create mii and append to list
             Object* obj = new(pHeap, CLASS_HEAP) Object(pHeap, width, height, faceData, callback, callbackWork);
-
             nw4r::ut::List_Append(&mObjects, obj);
             return obj;
         }
 
         void Manager::makeIcon() {
             int i = 0;
-
+            
             if (RFLGetAsyncStatus() != RFLErrcode_Busy) {
                 Object* obj;
-                
                 for (; (obj = (Object*)nw4r::ut::List_GetFirst(&mObjects)) != NULL && i < IPL_NIGAOE_ICON_MAX; i++) {
                     obj->make_icon();
-                    
                     nw4r::ut::List_Remove(&mObjects, obj);
                 }
             }
@@ -85,11 +81,9 @@ namespace ipl {
 
         BOOL Manager::isAvalable(u16 faceId) {
             BOOL result = FALSE;
-
             if (mErrcode == RFLErrcode_Success) {
                 result = RFLIsAvailableOfficialData(faceId);
             }
-            
             return result;
         }
 
@@ -102,6 +96,7 @@ namespace ipl {
             if (!RFLiIsValidID(&info.createID)) {
                 result = FALSE;
             }
+
             if (!RFLiCheckValidInfo(&info)) {
                 result = FALSE;
             }
@@ -126,7 +121,6 @@ namespace ipl {
                         nwc24Mgr->setMsgAppId(&msgObj, TITLE_NIGAOE);
                         nwc24Mgr->commitMsg(&msgObj);
                     }
-
                     nwc24Mgr->close();
                 }
             }

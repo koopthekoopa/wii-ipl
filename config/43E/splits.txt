@@ -3,7 +3,7 @@ Sections:
 	.init       type:code align:4
 	extab       type:rodata align:32
 	extabindex  type:rodata align:16
-	.text       type:code align:16
+	.text       type:code align:4
 	.ctors      type:rodata align:4
 	.dtors      type:rodata align:4
 	.rodata     type:rodata align:16
@@ -29,7 +29,7 @@ system/iplSystem.cpp:
 	.bss        start:0x81089008 end:0x810892E0
 	.text       start:0x81332C24 end:0x81335D3C
 	.ctors      start:0x8160D404 end:0x8160D408
-	.data       start:0x81634373 end:0x81634958
+	.data       start:0x81634360 end:0x81634958
 	.sdata2     start:0x816962B0 end:0x816962E0
 	.sdata      start:0x81697F00 end:0x81697F20
 
@@ -151,7 +151,7 @@ system/iplHomeButtonMenu.cpp:
 	.text       start:0x81347B44 end:0x81348460
 	.data       start:0x81635D20 end:0x81635D38
 	.sdata2     start:0x816963E0 end:0x81696410
-    .sbss       start:0x8169A570 end:0x8169A578
+	.sbss       start:0x8169A570 end:0x8169A578
 
 system/iplNandSDWorker.cpp:
 	.text       start:0x81348460 end:0x81354D44
@@ -201,18 +201,18 @@ system/iplChannelRsoThread.cpp:
 
 system/RsoSystem.cpp:
 	.text       start:0x81359B18 end:0x8135A638
-	.data       start:0x816394E0 end:0x8163956C
+	.data       start:0x816394E0 end:0x81639528
 	.sdata2     start:0x81696438 end:0x81696440
 	.sdata      start:0x816980C0 end:0x816980D0
 
 system/iplCdbBackup.cpp:
 	.text       start:0x8135A638 end:0x8135B5E4
 	.ctors      start:0x8160D410 end:0x8160D414
-	.data       start:0x8163956C end:0x81639588
+	.data       start:0x81639528 end:0x81639588
 	.sbss       start:0x8169A590 end:0x8169A598
 
 system/odh.cpp:
-	.text       start:0x8135B53C end:0x8135EF40
+	.text       start:0x8135B5E4 end:0x8135EF40
 	.rodata     start:0x8160DBA8 end:0x8160F288
 	.data       start:0x81639588 end:0x81639758
 	.sdata2     start:0x81696440 end:0x81696468
@@ -318,13 +318,13 @@ utility/iplCSFlags.cpp:
 
 layout/GUIManager.cpp:
 	.text       start:0x813689C0 end:0x81369B64
-	.data       start:0x816429D0 end:0x81642BB4
+	.data       start:0x816429D0 end:0x81642B50
 	.sdata2     start:0x81696518 end:0x81696528
 	.sbss       start:0x8169A620 end:0x8169A628
 
 layout/iplLayout.cpp:
 	.text       start:0x81369B64 end:0x8136B034
-	.data       start:0x81642BB4 end:0x81642C08
+	.data       start:0x81642B50 end:0x81642C08
 	.sdata2     start:0x81696528 end:0x81696538
 	.sdata      start:0x81698160 end:0x81698168
 
@@ -336,7 +336,7 @@ sound/iplSound.cpp:
 	.bss        start:0x81089848 end:0x8108A480
 	.text       start:0x8136B304 end:0x8136C8CC
 	.ctors      start:0x8160D418 end:0x8160D41C
-	.rodata     start:0x8160F288 end:0x8160F298
+	.rodata     start:0x8160F288 end:0x8160F2A0
 	.data       start:0x81642C08 end:0x81642C80
 	.sdata2     start:0x81696540 end:0x81696558
 	.sbss       start:0x8169A628 end:0x8169A638
@@ -379,7 +379,7 @@ iplwww/www_transition.cpp:
 iplwww/www_wiisetting.cpp:
 	.bss        start:0x8108A4B8 end:0x8108A520
 	.text       start:0x8136FA78 end:0x81371298
-	.rodata     start:0x8160F298 end:0x8160F5B8
+	.rodata     start:0x8160F2A0 end:0x8160F5B8
 	.data       start:0x81644398 end:0x81644D70
 	.sdata2     start:0x81696558 end:0x81696578
 	.sdata      start:0x816981B0 end:0x816982F0
@@ -477,7 +477,7 @@ BS2/BS2Fatal.c:
 	.rodata     start:0x8160F868 end:0x8160F890
 	.data       start:0x816471C8 end:0x816477F8
 	.sdata2     start:0x81696628 end:0x81696670
-    .sdata      start:0x81698458 end:0x81698460
+	.sdata      start:0x81698458 end:0x81698460
 	.sbss       start:0x8169A9E8 end:0x8169A9F0
 
 scene/address/iplAddress.cpp:
@@ -592,7 +592,7 @@ scene/channelEdit/iplChanAppEdit.cpp:
 	.text       start:0x813A55D8 end:0x813A7000
 	.rodata     start:0x8160FEC0 end:0x8160FEE8
 	.data       start:0x8164D5A8 end:0x8164DA80
-    .sdata2     start:0x816967B0 end:0x816967D8
+	.sdata2     start:0x816967B0 end:0x816967D8
 	.sdata      start:0x81698700 end:0x81698748
 
 scene/channelEdit/iplAnmController.cpp:
@@ -680,13 +680,13 @@ scene/memory/iplMemory.cpp:
 	.bss        start:0x810B74F8 end:0x810B7508
 	.text       start:0x813C3CC8 end:0x813C6F80
 	.rodata     start:0x81610568 end:0x81610568
-	.data       start:0x81650F50 end:0x81651504
+	.data       start:0x81650F50 end:0x81651510
 	.sdata2     start:0x816968E8 end:0x816968F8
 	.sdata      start:0x81698A78 end:0x81698A98
 
 scene/saveDataEdit/iplSaveDataBase.cpp:
 	.text       start:0x813C6F80 end:0x813C7D6C
-	.data       start:0x81651504 end:0x816519A0
+	.data       start:0x81651510 end:0x816519A0
 	.sdata      start:0x81698A98 end:0x81698AC0
 
 scene/saveDataEdit/iplSaveDataBox.cpp:
@@ -838,7 +838,7 @@ scene/sdChannelButton/iplSDButton.cpp:
 	.sdata      start:0x81698D90 end:0x81698DD0
 
 scene/sdChannelButton/iplSDArrow.cpp:
-	.text       start:0x813EA980 end:0x813EAAB8
+	.text       start:0x813EA988 end:0x813EAAB8
 	.data       start:0x81655D30 end:0x81655D80
 
 scene/sdChannelButton/iplSDMenuButton.cpp:
@@ -986,7 +986,7 @@ bannerSound/AudioWaveUtility.cpp:
 	.sdata      start:0x81699138 end:0x81699140
 
 keyboard/pckeyboard.cpp:
-	.text       start:0x814101D8 end:0x81417218
+	.text       start:0x814102D4 end:0x81417218
 	.ctors      start:0x8160D42C end:0x8160D430
 	.rodata     start:0x81613648 end:0x81614D00
 	.data       start:0x81659050 end:0x8165C170
@@ -1012,1813 +1012,1815 @@ keyboard/inputform.cpp:
 	.sbss       start:0x8169ABA0 end:0x8169ABC0
 
 keyboard/candidatebox.cpp:
-	.text       start:0x81428150 end:0x8142DF10
-	.ctors      start:0x8160D1F8 end:0x8160D1FC
-	.rodata     start:0x816152E0 end:0x81615658
-	.data       start:0x8165D2D0 end:0x8165E070
-	.sdata2     start:0x81694D90 end:0x81694DE0
-	.sdata      start:0x816973C8 end:0x816973F8
+	.text       start:0x8142824C end:0x8142E00C
+	.ctors      start:0x8160D438 end:0x8160D43C
+	.rodata     start:0x81615520 end:0x81615898
+	.data       start:0x8165D590 end:0x8165E330
+	.sdata2     start:0x81696C30 end:0x81696C80
+	.sdata      start:0x81699260 end:0x81699280
 
 keyboard/toolbar.cpp:
-	.text       start:0x8142DF10 end:0x8142F468
-	.ctors      start:0x8160D1FC end:0x8160D200
-	.rodata     start:0x81615658 end:0x816158D8
-	.data       start:0x8165E070 end:0x8165E420
+	.text       start:0x8142E00C end:0x8142F564
+	.ctors      start:0x8160D43C end:0x8160D440
+	.rodata     start:0x81615898 end:0x81615B18
+	.data       start:0x8165E330 end:0x8165E6E0
+	.sdata      start:0x81699280 end:0x81699298
 
 keyboard/predictlang.cpp:
-	.text       start:0x8142F468 end:0x81430A08
-	.ctors      start:0x8160D200 end:0x8160D204
-	.rodata     start:0x816158D8 end:0x81615B40
-	.data       start:0x8165E420 end:0x8165EAA8
-	.sdata      start:0x816973F8 end:0x81697400
+	.text       start:0x8142F564 end:0x81430B04
+	.ctors      start:0x8160D440 end:0x8160D444
+	.rodata     start:0x81615B18 end:0x81615D80
+	.data       start:0x8165E6E0 end:0x8165ED68
+	.sdata      start:0x81699298 end:0x816992A0
 
 keyboard/signwindow.cpp:
-	.text       start:0x81430A08 end:0x81432618
-	.ctors      start:0x8160D204 end:0x8160D208
-	.rodata     start:0x81615B40 end:0x81615E50
-	.data       start:0x8165EAA8 end:0x8165F518
-	.sdata      start:0x81697400 end:0x81697408
+	.text       start:0x81430B04 end:0x81432714
+	.ctors      start:0x8160D444 end:0x8160D448
+	.rodata     start:0x81615D80 end:0x81616090
+	.data       start:0x8165ED68 end:0x8165F7D8
+	.sdata      start:0x816992A0 end:0x816992A8
 
 keyboard/stringbase.cpp:
-	.text       start:0x81432618 end:0x814339C4
-	.data       start:0x8165F518 end:0x8165F638
+	.text       start:0x81432714 end:0x81433B4C
+	.data       start:0x8165F7D8 end:0x8165F8F8
 
 keyboard/zistring.cpp:
 	.bss        start:0x810C65F0 end:0x810C8270
-	.text       start:0x814339C4 end:0x81434FD0
-	.rodata     start:0x81615E50 end:0x816163B0
-	.data       start:0x8165F638 end:0x8165F780
+	.text       start:0x81433B4C end:0x814350CC
+	.rodata     start:0x81616090 end:0x816165F0
+	.data       start:0x8165F8F8 end:0x8165FA40
 
 keyboard/textdrawer.cpp:
 	.bss        start:0x810C8270 end:0x810C87F0
-	.text       start:0x81434FD0 end:0x81435D64
-	.data       start:0x8165F780 end:0x8165F818
-	.sdata2     start:0x81694DE0 end:0x81694E28
+	.text       start:0x814350CC end:0x81435E60
+	.data       start:0x8165FA40 end:0x8165FAD8
+	.sdata2     start:0x81696C80 end:0x81696CB0
 
 keyboard/nw4rmanager.cpp:
-	.text       start:0x81435D64 end:0x81437558
-	.data       start:0x8165F818 end:0x8165F8F0
+	.text       start:0x81435E60 end:0x81437654
+	.data       start:0x8165FAD8 end:0x8165FBB0
+	.sdata2     start:0x81696CB0 end:0x81696CC8
 
 keyboard/manager.cpp:
-	.text       start:0x81437558 end:0x81439608
-	.ctors      start:0x8160D208 end:0x8160D20C
-	.data       start:0x8165F8F0 end:0x81660378
-	.sbss       start:0x81698D20 end:0x81698D28
+	.text       start:0x81437654 end:0x81439704
+	.ctors      start:0x8160D448 end:0x8160D44C
+	.data       start:0x8165FBB0 end:0x81660638
+	.sbss       start:0x8169ABC0 end:0x8169ABC8
 
 keyboard/util.cpp:
-	.text       start:0x81439608 end:0x8143A3CC
-	.ctors      start:0x8160D20C end:0x8160D210
-	.data       start:0x81660378 end:0x81660598
-	.sdata2     start:0x81694E28 end:0x81694E58
-	.sdata      start:0x81697408 end:0x81697410
-	.sbss       start:0x81698D28 end:0x81698D40
+	.text       start:0x81439704 end:0x8143A4C8
+	.ctors      start:0x8160D44C end:0x8160D450
+	.data       start:0x81660638 end:0x81660858
+	.sdata2     start:0x81696CC8 end:0x81696CF8
+	.sdata      start:0x816992A8 end:0x816992B0
+	.sbss       start:0x8169ABC8 end:0x8169ABE0
 
 keyboard/cp_data.cpp:
-	.text       start:0x8143A3CC end:0x8143A8E4
-	.ctors      start:0x8160D210 end:0x8160D214
-	.data       start:0x81660598 end:0x81664058
+	.text       start:0x8143A4C8 end:0x8143A9E0
+	.ctors      start:0x8160D450 end:0x8160D454
+	.data       start:0x81660858 end:0x81664318
 
 keyboard/sw_data.cpp:
-	.text       start:0x8143A8E4 end:0x8143B2B8
-	.ctors      start:0x8160D214 end:0x8160D218
-	.data       start:0x81664058 end:0x81666218
+	.text       start:0x8143A9E0 end:0x8143B3B4
+	.ctors      start:0x8160D454 end:0x8160D458
+	.data       start:0x81664318 end:0x816664D8
 
 keyboard/pk_data.cpp:
-	.text       start:0x8143B2B8 end:0x8143BECC
-	.ctors      start:0x8160D218 end:0x8160D21C
-	.data       start:0x81666218 end:0x81667AA8
+	.text       start:0x8143B3B4 end:0x8143BFC8
+	.ctors      start:0x8160D458 end:0x8160D45C
+	.data       start:0x816664D8 end:0x81667D68
 
 keyboard/langindependent_data.cpp:
-	.data       start:0x81667AA8 end:0x81667E18
-	.sdata      start:0x81697410 end:0x816974C8
+	.data       start:0x81667D68 end:0x816680D8
+	.sdata      start:0x816992B0 end:0x81699368
 
 keyboard/textinputbase.cpp:
-	.text       start:0x8143BECC end:0x8143BF88
-	.data       start:0x81667E18 end:0x81667E38
+	.text       start:0x8143BFC8 end:0x8143C084
+	.data       start:0x816680D8 end:0x816680F8
 
 keyboard/MyTiManager.cpp:
 	.bss        start:0x810C87F0 end:0x810C8838
-	.text       start:0x8143BF88 end:0x81440E6C
-	.ctors      start:0x8160D21C end:0x8160D220
-	.data       start:0x81667E38 end:0x81668210
-	.sdata2     start:0x81694E58 end:0x81694E78
-	.sdata      start:0x816974C8 end:0x816974E0
-	.sbss       start:0x81698D40 end:0x81698D50
+	.text       start:0x8143C084 end:0x81440F68
+	.ctors      start:0x8160D45C end:0x8160D460
+	.data       start:0x816680F8 end:0x816684D0
+	.sdata2     start:0x81696CF8 end:0x81696D18
+	.sdata      start:0x81699368 end:0x81699380
+	.sbss       start:0x8169ABE0 end:0x8169ABF0
 
 keyboard/MyTiInputForm.cpp:
-	.text       start:0x81440E6C end:0x81444730
-	.rodata     start:0x816163B0 end:0x816168B8
-	.data       start:0x81668210 end:0x81668860
-	.sdata2     start:0x81694E78 end:0x81694EB0
-	.sdata      start:0x816974E0 end:0x81697528
+	.text       start:0x81440F68 end:0x8144482C
+	.rodata     start:0x816165F0 end:0x81616AF8
+	.data       start:0x816684D0 end:0x81668B20
+	.sdata2     start:0x81696D18 end:0x81696D50
+	.sdata      start:0x81699380 end:0x816993C8
 
 keyboard/MyTiLetter.cpp:
-	.text       start:0x81444730 end:0x814454D8
-	.rodata     start:0x816168B8 end:0x81616B88
-	.data       start:0x81668860 end:0x81668D68
-	.sdata2     start:0x81694EB0 end:0x81694ED0
-	.sdata      start:0x81697528 end:0x81697570
+	.text       start:0x8144482C end:0x814455D4
+	.rodata     start:0x81616AF8 end:0x81616DC8
+	.data       start:0x81668B20 end:0x81669028
+	.sdata2     start:0x81696D50 end:0x81696D70
+	.sdata      start:0x816993C8 end:0x81699410
 
 keyboard/MyBg.cpp:
-	.text       start:0x814454D8 end:0x81445590
+	.text       start:0x814455D4 end:0x8144568C
 
 keyboard/debug.cpp:
-	.text       start:0x81445590 end:0x81445BA4
+	.text       start:0x8144568C end:0x81445E60
 
 keyboard/GUIManager.cpp:
-	.text       start:0x81445BA4 end:0x814472C0
-	.data       start:0x81668D68 end:0x81668EE0
-	.sdata2     start:0x81694ED0 end:0x81694EF8
+	.text       start:0x81445E60 end:0x814473BC
+	.data       start:0x81669028 end:0x816691A0
+	.sdata2     start:0x81696D70 end:0x81696D98
 
 keyboard/HKBManager.cpp:
 	.bss        start:0x810C8838 end:0x810C8940
-	.text       start:0x814472C0 end:0x81448AA4
-	.ctors      start:0x8160D220 end:0x8160D224
-	.data       start:0x81668EE0 end:0x81668EF8
+	.text       start:0x814473BC end:0x81448BA0
+	.ctors      start:0x8160D460 end:0x8160D464
+	.data       start:0x816691A0 end:0x816691B8
 
 keyboard/HWKeyboard.cpp:
 	.bss        start:0x810C8940 end:0x810C8950
-	.text       start:0x81448AA4 end:0x81449C98
-	.rodata     start:0x81616B88 end:0x81616C78
-	.data       start:0x81668EF8 end:0x81669050
-	.sdata2     start:0x81694EF8 end:0x81694F08
-	.sdata      start:0x81697570 end:0x81697578
+	.text       start:0x81448BA0 end:0x81449D94
+	.rodata     start:0x81616DC8 end:0x81616EB8
+	.data       start:0x816691B8 end:0x816692D8
+	.sdata2     start:0x81696D98 end:0x81696DA8
+	.sdata      start:0x81699410 end:0x81699418
 
 keyboard/layout.cpp:
-	.text       start:0x81449C98 end:0x8144A5AC
-	.data       start:0x81669050 end:0x81669070
+	.text       start:0x81449D94 end:0x8144A6A8
+	.data       start:0x816692D8 end:0x81669330
 
 channelScript/CHANSVm.c:
-	.text       start:0x8144A5AC end:0x814576E8
-	.rodata     start:0x81616C78 end:0x81617210
-	.data       start:0x81669070 end:0x8166A2B0
-	.sdata2     start:0x81694F08 end:0x81694FC0
-	.sdata      start:0x81697578 end:0x816977D0
-	.sbss       start:0x81698D50 end:0x81698D60
+	.text       start:0x8144A6A8 end:0x814577E4
+	.rodata     start:0x81616EB8 end:0x81617450
+	.data       start:0x81669330 end:0x8166A570
+	.sdata2     start:0x81696DA8 end:0x81696E60
+	.sdata      start:0x81699418 end:0x81699670
+	.sbss       start:0x8169ABF0 end:0x8169AC00
 
-channelScript/VmSystemMenu.c:
-	.text       start:0x814576E8 end:0x8145802C
-	.rodata     start:0x81617210 end:0x81617380
-	.data       start:0x8166A2B0 end:0x8166A528
-	.sdata      start:0x816977D0 end:0x816977E8
-	.sbss       start:0x81698D60 end:0x81698D68
+channelScript/systemmenu/VmSystemMenu.c:
+	.text       start:0x814577E4 end:0x81458128
+	.rodata     start:0x81617450 end:0x816175C0
+	.data       start:0x8166A570 end:0x8166A7E8
+	.sdata      start:0x81699670 end:0x81699688
+	.sbss       start:0x8169AC00 end:0x8169AC08
 
-channelScript/iplCSSystem.cpp:
-	.text       start:0x8145802C end:0x814581D0
-	.rodata     start:0x81617380 end:0x81617390
-	.data       start:0x8166A528 end:0x8166A548
-	.sdata      start:0x816977E8 end:0x816977F0
+channelScript/systemmenu/iplCSSystem.cpp:
+	.text       start:0x81458128 end:0x814582CC
+	.rodata     start:0x816175C0 end:0x816175D0
+	.data       start:0x8166A7E8 end:0x8166A808
+	.sdata      start:0x81699688 end:0x81699690
 
-channelScript/iplCSLayout.cpp:
-	.text       start:0x814581D0 end:0x81458588
-	.rodata     start:0x81617390 end:0x816173F0
-	.data       start:0x8166A548 end:0x8166A5C8
-	.sdata      start:0x816977F0 end:0x81697800
+channelScript/systemmenu/iplCSLayout.cpp:
+	.text       start:0x814582CC end:0x81458684
+	.rodata     start:0x816175D0 end:0x81617630
+	.data       start:0x8166A808 end:0x8166A888
+	.sdata      start:0x81699690 end:0x816996A0
 
-channelScript/iplCSPane.cpp:
-	.text       start:0x81458588 end:0x81459C34
-	.rodata     start:0x816173F0 end:0x816174E0
-	.data       start:0x8166A5C8 end:0x8166A728
-	.sdata2     start:0x81694FC0 end:0x81694FC8
-	.sdata      start:0x81697800 end:0x81697848
+channelScript/systemmenu/iplCSPane.cpp:
+	.text       start:0x81458684 end:0x81459D30
+	.rodata     start:0x81617630 end:0x81617720
+	.data       start:0x8166A888 end:0x8166A9E8
+	.sdata2     start:0x81696E60 end:0x81696E68
+	.sdata      start:0x816996A0 end:0x816996E8
 
-channelScript/iplCSMaterial.cpp:
-	.text       start:0x81459C34 end:0x8145A428
-	.rodata     start:0x816174E0 end:0x81617518
-	.data       start:0x8166A728 end:0x8166A798
-	.sdata      start:0x81697848 end:0x81697858
+channelScript/systemmenu/iplCSMaterial.cpp:
+	.text       start:0x81459D30 end:0x8145A524
+	.rodata     start:0x81617720 end:0x81617758
+	.data       start:0x8166A9E8 end:0x8166AA58
+	.sdata      start:0x816996E8 end:0x816996F8
 
-channelScript/iplCSTexture.cpp:
-	.text       start:0x8145A428 end:0x8145A894
-	.sdata      start:0x81697858 end:0x81697868
+channelScript/systemmenu/iplCSTexture.cpp:
+	.text       start:0x8145A524 end:0x8145A990
+	.sdata      start:0x816996F8 end:0x81699708
 
-channelScript/iplCSSavedata.cpp:
-	.text       start:0x8145A894 end:0x8145BF60
-	.rodata     start:0x81617518 end:0x816175E8
-	.data       start:0x8166A798 end:0x8166A860
-	.sdata      start:0x81697868 end:0x816978D0
+channelScript/systemmenu/iplCSSavedata.cpp:
+	.text       start:0x8145A990 end:0x8145C05C
+	.rodata     start:0x81617758 end:0x81617828
+	.data       start:0x8166AA58 end:0x8166AB20
+	.sdata      start:0x81699708 end:0x81699770
 
-channelScript/iplCSVector.cpp:
-	.text       start:0x8145BF60 end:0x8145C3E8
-	.rodata     start:0x816175E8 end:0x81617610
-	.sdata2     start:0x81694FC8 end:0x81694FD0
-	.sdata      start:0x816978D0 end:0x816978E0
+channelScript/systemmenu/iplCSVector.cpp:
+	.text       start:0x8145C05C end:0x8145C4E4
+	.rodata     start:0x81617828 end:0x81617850
+	.sdata2     start:0x81696E68 end:0x81696E70
+	.sdata      start:0x81699770 end:0x81699780
 
-channelScript/iplCSGX.cpp:
-	.text       start:0x8145C3E8 end:0x8145C528
-	.rodata     start:0x81617610 end:0x81617698
-	.data       start:0x8166A860 end:0x8166A8E0
-	.sdata      start:0x816978E0 end:0x816978E8
+channelScript/systemmenu/iplCSGX.cpp:
+	.text       start:0x8145C4E4 end:0x8145C624
+	.rodata     start:0x81617850 end:0x816178D8
+	.data       start:0x8166AB20 end:0x8166ABA0
+	.sdata      start:0x81699780 end:0x81699788
 
-channelScript/iplCSUtil.cpp:
-	.text       start:0x8145C528 end:0x8145C668
+channelScript/systemmenu/iplCSUtil.cpp:
+	.text       start:0x8145C624 end:0x8145C764
 
-channelScript/iplCSMtx.cpp:
-	.text       start:0x8145C668 end:0x8145CC3C
-	.rodata     start:0x81617698 end:0x81617738
-	.sdata2     start:0x81694FD0 end:0x81694FE0
-	.sdata      start:0x816978E8 end:0x81697920
+channelScript/systemmenu/iplCSMtx.cpp:
+	.text       start:0x8145C764 end:0x8145CD38
+	.rodata     start:0x816178D8 end:0x81617978
+	.sdata2     start:0x81696E70 end:0x81696E80
+	.sdata      start:0x81699788 end:0x816997C0
 
-channelScript/iplCSTextWriter.cpp:
-	.text       start:0x8145CC3C end:0x8145D164
-	.rodata     start:0x81617738 end:0x81617760
-	.data       start:0x8166A8E0 end:0x8166A920
-	.sdata      start:0x81697920 end:0x81697938
+channelScript/systemmenu/iplCSTextWriter.cpp:
+	.text       start:0x8145CD38 end:0x8145D260
+	.rodata     start:0x81617978 end:0x816179A0
+	.data       start:0x8166ABA0 end:0x8166ABE0
+	.sdata      start:0x816997C0 end:0x816997D8
 
-channelScript/iplCSFont.cpp:
-	.text       start:0x8145D164 end:0x8145D224
-	.sdata      start:0x81697938 end:0x81697940
+channelScript/systemmenu/iplCSFont.cpp:
+	.text       start:0x8145D260 end:0x8145D320
+	.sdata      start:0x816997D8 end:0x816997E0
 
-channelScript/iplCSRect.cpp:
-	.text       start:0x8145D224 end:0x8145D5F8
-	.rodata     start:0x81617760 end:0x81617780
-	.data       start:0x8166A920 end:0x8166A948
-	.sdata2     start:0x81694FE0 end:0x81694FE8
-	.sdata      start:0x81697940 end:0x81697948
+channelScript/systemmenu/iplCSRect.cpp:
+	.text       start:0x8145D320 end:0x8145D6F4
+	.rodata     start:0x816179A0 end:0x816179C0
+	.data       start:0x8166ABE0 end:0x8166AC08
+	.sdata2     start:0x81696E80 end:0x81696E88
+	.sdata      start:0x816997E0 end:0x816997E8
 
-channelScript/iplCSColor.cpp:
-	.text       start:0x8145D5F8 end:0x8145DC4C
-	.rodata     start:0x81617780 end:0x816177B0
-	.sdata      start:0x81697948 end:0x81697958
+channelScript/systemmenu/iplCSColor.cpp:
+	.text       start:0x8145D6F4 end:0x8145DD48
+	.rodata     start:0x816179C0 end:0x816179F0
+	.sdata      start:0x816997E8 end:0x816997F8
 
-channelScript/iplCSColorS10.cpp:
-	.text       start:0x8145DC4C end:0x8145E218
-	.rodata     start:0x816177B0 end:0x816177E0
-	.data       start:0x8166A948 end:0x8166A958
+channelScript/systemmenu/iplCSColorS10.cpp:
+	.text       start:0x8145DD48 end:0x8145E314
+	.rodata     start:0x816179F0 end:0x81617A20
+	.data       start:0x8166AC08 end:0x8166AC18
 
-channelScript/iplCSSize.cpp:
-	.text       start:0x8145E218 end:0x8145E588
-	.rodata     start:0x816177E0 end:0x816177F8
-	.sdata      start:0x81697958 end:0x81697970
+channelScript/systemmenu/iplCSSize.cpp:
+	.text       start:0x8145E314 end:0x8145E684
+	.rodata     start:0x81617A20 end:0x81617A38
+	.sdata      start:0x816997F8 end:0x81699810
 
-channelScript/iplCSAnim.cpp:
-	.text       start:0x8145E588 end:0x8145EE24
-	.rodata     start:0x816177F8 end:0x816178A0
-	.data       start:0x8166A958 end:0x8166AA08
-	.sdata2     start:0x81694FE8 end:0x81694FF8
-	.sdata      start:0x81697970 end:0x81697998
+channelScript/systemmenu/iplCSAnim.cpp:
+	.text       start:0x8145E684 end:0x8145EF20
+	.rodata     start:0x81617A38 end:0x81617AE0
+	.data       start:0x8166AC18 end:0x8166ACC8
+	.sdata2     start:0x81696E88 end:0x81696E98
+	.sdata      start:0x81699810 end:0x81699838
 
-channelScript/iplCSSound.cpp:
-	.text       start:0x8145EE24 end:0x8145EF88
-	.rodata     start:0x816178A0 end:0x816178B0
-	.data       start:0x8166AA08 end:0x8166AA20
-	.sdata      start:0x81697998 end:0x816979A8
+channelScript/systemmenu/iplCSSound.cpp:
+	.text       start:0x8145EF20 end:0x8145F084
+	.rodata     start:0x81617AE0 end:0x81617AF0
+	.data       start:0x8166ACC8 end:0x8166ACE0
+	.sdata      start:0x81699838 end:0x81699848
 
-channelScript/iplCSImage.cpp:
-	.text       start:0x8145EF88 end:0x8145EFD4
+channelScript/systemmenu/iplCSImage.cpp:
+	.text       start:0x8145F084 end:0x8145F0D0
 
 libs/RVLMiddleware/eZiText/zi8ezt.c:
-	.text       start:0x8145EFD4 end:0x8145F07C
-	.rodata     start:0x816178B0 end:0x81617900
-	.data       start:0x8166AA20 end:0x8166AA58
+	.text       start:0x8145F0D0 end:0x8145F178
+	.rodata     start:0x81617AF0 end:0x81617B40
+	.data       start:0x8166ACE0 end:0x8166AD18
 
 libs/RVLMiddleware/eZiText/zi8address.c:
 	extab       start:0x81330420 end:0x81330458
 	extabindex  start:0x81330FC0 end:0x81331014
-	.text       start:0x8145F07C end:0x8145F558
+	.text       start:0x8145F178 end:0x8145F654
 
 libs/RVLMiddleware/eZiText/zi8convert.c:
 	extab       start:0x81330458 end:0x81330478
 	extabindex  start:0x81331014 end:0x81331044
-	.text       start:0x8145F558 end:0x8145FDF8
-	.rodata     start:0x81617900 end:0x81617920
+	.text       start:0x8145F654 end:0x8145FEF4
+	.rodata     start:0x81617B40 end:0x81617B60
 
 libs/RVLMiddleware/eZiText/zi8letter.c:
 	extab       start:0x81330478 end:0x813304C8
 	extabindex  start:0x81331044 end:0x813310BC
-	.text       start:0x8145FDF8 end:0x81465200
-	.rodata     start:0x81617920 end:0x81617DA0
-	.sdata2     start:0x81694FF8 end:0x81695000
+	.text       start:0x8145FEF4 end:0x814652FC
+	.rodata     start:0x81617B60 end:0x81617FE0
+	.sdata2     start:0x81696E98 end:0x81696EA0
 
 libs/RVLMiddleware/eZiText/zi8alpha.c:
 	extab       start:0x813304C8 end:0x81330508
 	extabindex  start:0x813310BC end:0x8133111C
-	.text       start:0x81465200 end:0x8146A66C
-	.rodata     start:0x81617DA0 end:0x81617EF0
-	.data       start:0x8166AA58 end:0x8166AA88
+	.text       start:0x814652FC end:0x8146A768
+	.rodata     start:0x81617FE0 end:0x81618130
+	.data       start:0x8166AD18 end:0x8166AD48
 
 libs/RVLMiddleware/eZiText/zi8alt.c:
 	extab       start:0x81330508 end:0x81330510
 	extabindex  start:0x8133111C end:0x81331128
-	.text       start:0x8146A66C end:0x8146AB1C
+	.text       start:0x8146A768 end:0x8146AC18
 
 libs/RVLMiddleware/eZiText/zi8cand.c:
 	extab       start:0x81330510 end:0x81330540
 	extabindex  start:0x81331128 end:0x81331170
-	.text       start:0x8146AB1C end:0x814765E4
-	.data       start:0x8166AA88 end:0x8166AC10
-	.sdata2     start:0x81695000 end:0x81695010
-	.sbss2      start:0x81695FE0 end:0x81695FE8
+	.text       start:0x8146AC18 end:0x814766E0
+	.data       start:0x8166AD48 end:0x8166AED0
+	.sdata2     start:0x81696EA0 end:0x81696EB0
+	.sbss2      start:0x81697E80 end:0x81697E88
 
 libs/RVLMiddleware/eZiText/zi8cinfo.c:
 	extab       start:0x81330540 end:0x81330590
 	extabindex  start:0x81331170 end:0x813311E8
-	.text       start:0x814765E4 end:0x814790A8
-	.rodata     start:0x81617EF0 end:0x81617F10
-	.data       start:0x8166AC10 end:0x8166B260
+	.text       start:0x814766E0 end:0x814791A4
+	.rodata     start:0x81618130 end:0x81618150
+	.data       start:0x8166AED0 end:0x8166B520
 
 libs/RVLMiddleware/eZiText/zi8copy.c:
 	extab       start:0x81330590 end:0x813305A0
 	extabindex  start:0x813311E8 end:0x81331200
-	.text       start:0x814790A8 end:0x8147922C
+	.text       start:0x814791A4 end:0x81479328
 
 libs/RVLMiddleware/eZiText/zi8dawg.c:
 	extab       start:0x813305A0 end:0x813305D0
 	extabindex  start:0x81331200 end:0x81331248
-	.text       start:0x8147922C end:0x8147A530
+	.text       start:0x81479328 end:0x8147A62C
 
 libs/RVLMiddleware/eZiText/zi8getcand.c:
 	extab       start:0x813305D0 end:0x81330638
 	extabindex  start:0x81331248 end:0x813312E4
-	.text       start:0x8147A530 end:0x8147C7C4
-	.rodata     start:0x81617F10 end:0x81617F20
-	.data       start:0x8166B260 end:0x8166B2B0
-	.sdata2     start:0x81695010 end:0x81695018
-	.sbss2      start:0x81695FE8 end:0x81695FF0
+	.text       start:0x8147A62C end:0x8147C8C0
+	.rodata     start:0x81618150 end:0x81618160
+	.data       start:0x8166B520 end:0x8166B570
+	.sdata2     start:0x81696EB0 end:0x81696EB8
+	.sbss2      start:0x81697E88 end:0x81697E90
 
 libs/RVLMiddleware/eZiText/zi8init.c:
 	extab       start:0x81330638 end:0x81330640
 	extabindex  start:0x813312E4 end:0x813312F0
-	.text       start:0x8147C7C4 end:0x8147C9C4
+	.text       start:0x8147C8C0 end:0x8147CAC0
 
 libs/RVLMiddleware/eZiText/zi8is.c:
 	extab       start:0x81330640 end:0x81330650
 	extabindex  start:0x813312F0 end:0x81331308
-	.text       start:0x8147C9C4 end:0x8147CEF4
+	.text       start:0x8147CAC0 end:0x8147CFF0
 
 libs/RVLMiddleware/eZiText/zi8match.c:
 	extab       start:0x81330650 end:0x813306A0
 	extabindex  start:0x81331308 end:0x81331380
-	.text       start:0x8147CEF4 end:0x8147EF34
-	.rodata     start:0x81617F20 end:0x81618130
+	.text       start:0x8147CFF0 end:0x8147F030
+	.rodata     start:0x81618160 end:0x81618370
 
 libs/RVLMiddleware/eZiText/zi8utils.c:
 	extab       start:0x813306A0 end:0x813306C0
 	extabindex  start:0x81331380 end:0x813313B0
-	.text       start:0x8147EF34 end:0x8147F598
+	.text       start:0x8147F030 end:0x8147F694
 
 libs/RVLMiddleware/eZiText/zi8pud2.c:
 	extab       start:0x813306C0 end:0x813306F0
 	extabindex  start:0x813313B0 end:0x813313F8
-	.text       start:0x8147F598 end:0x8147FDF0
+	.text       start:0x8147F694 end:0x8147FEEC
 
 libs/RVLMiddleware/eZiText/zi8punct.c:
 	extab       start:0x813306F0 end:0x813306F8
 	extabindex  start:0x813313F8 end:0x81331404
-	.text       start:0x8147FDF0 end:0x8147FF1C
-	.rodata     start:0x81618130 end:0x81618180
+	.text       start:0x8147FEEC end:0x81480018
+	.rodata     start:0x81618370 end:0x816183C0
 
 libs/RVLMiddleware/eZiText/zi8uwd.c:
 	extab       start:0x813306F8 end:0x81330728
 	extabindex  start:0x81331404 end:0x8133144C
-	.text       start:0x8147FF1C end:0x81480D7C
+	.text       start:0x81480018 end:0x81480E78
 
 libs/RVLMiddleware/eZiText/zi8dawg2.c:
 	extab       start:0x81330728 end:0x81330748
 	extabindex  start:0x8133144C end:0x8133147C
-	.text       start:0x81480D7C end:0x814813FC
+	.text       start:0x81480E78 end:0x814814F8
 
 libs/RVLMiddleware/eZiText/zi8candkorea.c:
 	extab       start:0x81330748 end:0x813307A8
 	extabindex  start:0x8133147C end:0x8133150C
-	.text       start:0x814813FC end:0x8148447C
-	.data       start:0x8166B2B0 end:0x8166B3D0
-	.sdata2     start:0x81695018 end:0x81695020
+	.text       start:0x814814F8 end:0x81484578
+	.data       start:0x8166B570 end:0x8166B690
+	.sdata2     start:0x81696EB8 end:0x81696EC0
 
 libs/RVLMiddleware/eZiText/zi8error.c:
-	.text       start:0x8148447C end:0x81484484
+	.text       start:0x81484578 end:0x81484580
 
 libs/RVLMiddleware/eZiText/zi8keymatch.c:
 	extab       start:0x813307A8 end:0x813307C0
 	extabindex  start:0x8133150C end:0x81331530
-	.text       start:0x81484484 end:0x81484D2C
+	.text       start:0x81484580 end:0x81484E28
 
 libs/RVLMiddleware/eZiText/zi8oemdata.c:
 	extab       start:0x813307C0 end:0x813307D8
 	extabindex  start:0x81331530 end:0x81331554
-	.text       start:0x81484D2C end:0x814850FC
+	.text       start:0x81484E28 end:0x814851F8
 
 libs/RVLMiddleware/eZiText/zi8prepare.c:
 	extab       start:0x813307D8 end:0x813307E0
 	extabindex  start:0x81331554 end:0x81331560
-	.text       start:0x814850FC end:0x81485FAC
-	.data       start:0x8166B3D0 end:0x8166B400
+	.text       start:0x814851F8 end:0x814860A8
+	.data       start:0x8166B690 end:0x8166B6C0
 
 libs/RevoEX/cdb/cdb.c:
-	.text       start:0x81485FAC end:0x8148615C
-	.data       start:0x8166B400 end:0x8166B478
-	.sdata      start:0x816979A8 end:0x816979B0
+	.text       start:0x814860A8 end:0x81486258
+	.data       start:0x8166B6C0 end:0x8166B738
+	.sdata      start:0x81699848 end:0x81699850
 
 libs/RevoEX/cdb/CDBConv.c:
-	.text       start:0x8148615C end:0x814873A0
-	.data       start:0x8166B478 end:0x8166B528
-	.sdata      start:0x816979B0 end:0x816979E8
+	.text       start:0x81486258 end:0x8148749C
+	.data       start:0x8166B738 end:0x8166B7E8
+	.sdata      start:0x81699850 end:0x81699888
 
 libs/RevoEX/cdb/CDBDatabase.c:
-	.text       start:0x814873A0 end:0x8148A318
-	.data       start:0x8166B528 end:0x8166B660
+	.text       start:0x8148749C end:0x8148A414
+	.data       start:0x8166B7E8 end:0x8166B920
 
 libs/RevoEX/cdb/CDBFileSystemUtils.c:
-	.text       start:0x8148A318 end:0x8148ACC8
-	.sdata      start:0x816979E8 end:0x816979F0
+	.text       start:0x8148A414 end:0x8148ADC4
+	.sdata      start:0x81699888 end:0x81699890
 
 libs/RevoEX/cdb/CDBFileSystem.c:
 	.bss        start:0x810C8950 end:0x810C89D0
-	.text       start:0x8148ACC8 end:0x8148B350
-	.data       start:0x8166B660 end:0x8166B980
-	.sdata      start:0x816979F0 end:0x81697A00
-	.sbss       start:0x81698D68 end:0x81698D78
+	.text       start:0x8148ADC4 end:0x8148B44C
+	.data       start:0x8166B920 end:0x8166BC40
+	.sdata      start:0x81699890 end:0x816998A0
+	.sbss       start:0x8169AC08 end:0x8169AC18
 
 libs/RevoEX/cdb/CDBFileSystemVF.c:
-	.text       start:0x8148B350 end:0x8148B744
-	.data       start:0x8166B980 end:0x8166BA30
-	.sdata2     start:0x81695020 end:0x81695028
-	.sdata      start:0x81697A00 end:0x81697A18
+	.text       start:0x8148B44C end:0x8148B840
+	.data       start:0x8166BC40 end:0x8166BCF0
+	.sdata2     start:0x81696EC0 end:0x81696EC8
+	.sdata      start:0x816998A0 end:0x816998B8
 
 libs/RevoEX/cdb/CDBFileSystemSD.c:
 	.bss        start:0x810C89D0 end:0x810C8A80
-	.text       start:0x8148B744 end:0x8148BF5C
-	.data       start:0x8166BA30 end:0x8166BBC0
-	.sdata2     start:0x81695028 end:0x81695030
-	.sdata      start:0x81697A18 end:0x81697A30
+	.text       start:0x8148B840 end:0x8148C058
+	.data       start:0x8166BCF0 end:0x8166BE80
+	.sdata2     start:0x81696EC8 end:0x81696ED0
+	.sdata      start:0x816998B8 end:0x816998D0
 
 libs/RevoEX/cdb/CDBRecord.c:
 	.bss        start:0x810C8A80 end:0x810C8B00
-	.text       start:0x8148BF5C end:0x8148DB00
-	.rodata     start:0x81618180 end:0x81618190
-	.data       start:0x8166BBC0 end:0x8166C580
+	.text       start:0x8148C058 end:0x8148DBFC
+	.rodata     start:0x816183C0 end:0x816183D0
+	.data       start:0x8166BE80 end:0x8166C840
 
 libs/RevoEX/cdb/CDBRecordFile.c:
-	.text       start:0x8148DB00 end:0x8148E2E4
-	.data       start:0x8166C580 end:0x8166C5A0
+	.text       start:0x8148DBFC end:0x8148E3E0
+	.data       start:0x8166C840 end:0x8166C860
 
 libs/RevoEX/cdb/CDBRecordKey.c:
-	.text       start:0x8148E2E4 end:0x8148EC5C
-	.data       start:0x8166C5A0 end:0x8166C5C8
-	.sdata      start:0x81697A30 end:0x81697A48
+	.text       start:0x8148E3E0 end:0x8148ED58
+	.data       start:0x8166C860 end:0x8166C888
+	.sdata      start:0x816998D0 end:0x816998E8
 
 libs/RevoEX/cdb/CDBIntArray.c:
-	.text       start:0x8148EC5C end:0x8148F270
+	.text       start:0x8148ED58 end:0x8148F36C
 
 libs/RevoEX/cdb/CDBSystem.c:
 	.bss        start:0x810C8B00 end:0x810C8B60
-	.text       start:0x8148F270 end:0x81490644
-	.data       start:0x8166C5C8 end:0x8166CAE8
-	.sdata      start:0x81697A48 end:0x81697A60
-	.sbss       start:0x81698D78 end:0x81698D98
+	.text       start:0x8148F36C end:0x81490740
+	.data       start:0x8166C888 end:0x8166CDA8
+	.sdata      start:0x816998E8 end:0x81699900
+	.sbss       start:0x8169AC18 end:0x8169AC38
 
 libs/RevoEX/cdb/CDBAttr.c:
-	.text       start:0x81490644 end:0x81490D70
-	.data       start:0x8166CAE8 end:0x8166CB18
-	.sdata2     start:0x81695030 end:0x81695038
-	.sdata      start:0x81697A60 end:0x81697A68
-	.sbss       start:0x81698D98 end:0x81698DA0
+	.text       start:0x81490740 end:0x81490E6C
+	.data       start:0x8166CDA8 end:0x8166CDD8
+	.sdata2     start:0x81696ED0 end:0x81696ED8
+	.sdata      start:0x81699900 end:0x81699908
+	.sbss       start:0x8169AC38 end:0x8169AC40
 
 libs/RevoEX/cdb/CDBFBridge.c:
-	.text       start:0x81490D70 end:0x81490F68
+	.text       start:0x81490E6C end:0x81491064
 
 libs/RevoEX/cdb/CDBFBridgeVF.c:
-	.text       start:0x81490F68 end:0x81491664
-	.sdata      start:0x81697A68 end:0x81697A70
+	.text       start:0x81491064 end:0x81491760
+	.sdata      start:0x81699908 end:0x81699910
 
 libs/RevoEX/cdb/CDBFBridgeSD.c:
-	.text       start:0x81491664 end:0x814920A8
-	.data       start:0x8166CB18 end:0x8166CB30
-	.sdata      start:0x81697A70 end:0x81697A80
+	.text       start:0x81491760 end:0x814921A4
+	.data       start:0x8166CDD8 end:0x8166CDF0
+	.sdata      start:0x81699910 end:0x81699920
 
 libs/RevoEX/cdb/CDBCrypt.c:
-	.text       start:0x814920A8 end:0x814923A0
-	.data       start:0x8166CB30 end:0x8166CBA0
-	.sdata      start:0x81697A80 end:0x81697AA0
-	.sbss       start:0x81698DA0 end:0x81698DA8
+	.text       start:0x814921A4 end:0x8149249C
+	.data       start:0x8166CDF0 end:0x8166CE60
+	.sdata      start:0x81699920 end:0x81699940
+	.sbss       start:0x8169AC40 end:0x8169AC48
 
 libs/RevoEX/ncd/ncdsystem.c:
 	.bss        start:0x810C8B60 end:0x810C8BC0
-	.text       start:0x814923A0 end:0x814933F4
-	.data       start:0x8166CBA0 end:0x8166CD20
-	.sdata      start:0x81697AA0 end:0x81697AA8
-	.sbss       start:0x81698DA8 end:0x81698DB0
+	.text       start:0x8149249C end:0x814934F0
+	.data       start:0x8166CE60 end:0x8166CFE0
+	.sdata      start:0x81699940 end:0x81699948
+	.sbss       start:0x8169AC48 end:0x8169AC50
 
 libs/RevoEX/ncd/ncdsleep.c:
-	.text       start:0x814933F4 end:0x814934A8
+	.text       start:0x814934F0 end:0x814935A4
 
 libs/RevoEX/net/nettime.c:
-	.text       start:0x814934A8 end:0x8149358C
-	.sbss       start:0x81698DB0 end:0x81698DB8
+	.text       start:0x814935A4 end:0x81493688
+	.sbss       start:0x8169AC50 end:0x8169AC58
 
 libs/RevoEX/net/crc.c:
-	.text       start:0x8149358C end:0x814937F4
-	.rodata     start:0x81618190 end:0x816181F0
+	.text       start:0x81493688 end:0x814938F0
+	.rodata     start:0x816183D0 end:0x81618430
 
 libs/RevoEX/net/md5.c:
-	.text       start:0x814937F4 end:0x81493F14
-	.data       start:0x8166CD20 end:0x8166CEE0
-	.sdata      start:0x81697AA8 end:0x81697AB0
+	.text       start:0x814938F0 end:0x81494010
+	.data       start:0x8166CFE0 end:0x8166D1A0
+	.sdata      start:0x81699948 end:0x81699950
 
 libs/RevoEX/net/sha1.c:
-	.text       start:0x81493F14 end:0x814944EC
-	.rodata     start:0x816181F0 end:0x81618210
-	.sdata2     start:0x81695038 end:0x81695040
-	.sbss2      start:0x81695FF0 end:0x81695FF8
+	.text       start:0x81494010 end:0x814945E8
+	.rodata     start:0x81618430 end:0x81618450
+	.sdata2     start:0x81696ED8 end:0x81696EE0
+	.sbss2      start:0x81697E90 end:0x81697E98
 
 libs/RevoEX/net/hmac.c:
-	.text       start:0x814944EC end:0x814948DC
-	.data       start:0x8166CEE0 end:0x8166CF38
-	.sdata      start:0x81697AB0 end:0x81697AC0
+	.text       start:0x814945E8 end:0x814949D8
+	.data       start:0x8166D1A0 end:0x8166D1F8
+	.sdata      start:0x81699950 end:0x81699960
 
 libs/RevoEX/net/neterrorcode.c:
-	.text       start:0x814948DC end:0x81494D7C
-	.data       start:0x8166CF38 end:0x8166CF58
+	.text       start:0x814949D8 end:0x81494E78
+	.data       start:0x8166D1F8 end:0x8166D218
 
 libs/RevoEX/net/NETVersion.c:
-	.text       start:0x81494D7C end:0x81494D84
-	.data       start:0x8166CF58 end:0x8166CF90
-	.sdata      start:0x81697AC0 end:0x81697AC8
+	.text       start:0x81494E78 end:0x81494E80
+	.data       start:0x8166D218 end:0x8166D250
+	.sdata      start:0x81699960 end:0x81699968
 
 libs/RevoEX/net/aes.c:
-	.text       start:0x81494D84 end:0x81495844
-	.rodata     start:0x81618210 end:0x81618C30
-	.data       start:0x8166CF90 end:0x8166D058
-	.sdata2     start:0x81695040 end:0x81695048
+	.text       start:0x81494E80 end:0x81495940
+	.rodata     start:0x81618450 end:0x81618E70
+	.data       start:0x8166D250 end:0x8166D318
+	.sdata2     start:0x81696EE0 end:0x81696EE8
 
 libs/RevoEX/net/wireless_macaddr.c:
-	.text       start:0x81495844 end:0x81495848
+	.text       start:0x81495940 end:0x81495944
 
 libs/RevoEX/nhttp/NHTTP_bgnend.c:
-	.text       start:0x81495848 end:0x81495BB8
-	.data       start:0x8166D058 end:0x8166D0E0
+	.text       start:0x81495944 end:0x81495CB4
+	.data       start:0x8166D318 end:0x8166D3A0
 
 libs/RevoEX/nhttp/NHTTP_control.c:
-	.text       start:0x81495BB8 end:0x81495D5C
-	.data       start:0x8166D0E0 end:0x8166D100
+	.text       start:0x81495CB4 end:0x81495E58
+	.data       start:0x8166D3A0 end:0x8166D3C0
 
 libs/RevoEX/nhttp/NHTTP_list.c:
-	.text       start:0x81495D5C end:0x81495FAC
+	.text       start:0x81495E58 end:0x814960A8
 
 libs/RevoEX/nhttp/NHTTP_os_RVL.c:
-	.text       start:0x81495FAC end:0x814961D0
-	.data       start:0x8166D100 end:0x8166D140
-	.sdata      start:0x81697AC8 end:0x81697AD0
+	.text       start:0x814960A8 end:0x814962CC
+	.data       start:0x8166D3C0 end:0x8166D400
+	.sdata      start:0x81699968 end:0x81699970
 
 libs/RevoEX/nhttp/NHTTP_recvbuf.c:
-	.text       start:0x814961D0 end:0x8149686C
+	.text       start:0x814962CC end:0x81496968
 
 libs/RevoEX/nhttp/NHTTP_request.c:
-	.text       start:0x8149686C end:0x8149723C
-	.rodata     start:0x81618C30 end:0x81618C48
-	.data       start:0x8166D140 end:0x8166D150
-	.sdata      start:0x81697AD0 end:0x81697AD8
+	.text       start:0x81496968 end:0x81497338
+	.rodata     start:0x81618E70 end:0x81618E88
+	.data       start:0x8166D400 end:0x8166D410
+	.sdata      start:0x81699970 end:0x81699978
 
 libs/RevoEX/nhttp/NHTTP_response.c:
-	.text       start:0x8149723C end:0x81497650
-	.data       start:0x8166D150 end:0x8166D160
+	.text       start:0x81497338 end:0x8149774C
+	.data       start:0x8166D410 end:0x8166D420
 
 libs/RevoEX/nhttp/NHTTP_socket_RVL.c:
-	.text       start:0x81497650 end:0x81497EAC
+	.text       start:0x8149774C end:0x81497FA8
 
 libs/RevoEX/nhttp/NHTTP_stdlib_RVL.c:
-	.text       start:0x81497EAC end:0x81498774
-	.rodata     start:0x81618C48 end:0x81618C70
-	.data       start:0x8166D160 end:0x8166D1A8
+	.text       start:0x81497FA8 end:0x81498870
+	.rodata     start:0x81618E88 end:0x81618EB0
+	.data       start:0x8166D420 end:0x8166D468
 
 libs/RevoEX/nhttp/NHTTP_thread.c:
-	.text       start:0x81498774 end:0x8149B390
-	.rodata     start:0x81618C70 end:0x81618D48
-	.data       start:0x8166D1A8 end:0x8166D270
-	.sdata      start:0x81697AD8 end:0x81697B30
+	.text       start:0x81498870 end:0x8149B48C
+	.rodata     start:0x81618EB0 end:0x81618F88
+	.data       start:0x8166D468 end:0x8166D530
+	.sdata      start:0x81699978 end:0x816999D0
 
 libs/RevoEX/nhttp/d_nhttp_private.c:
-	.text       start:0x8149B390 end:0x8149B8B8
+	.text       start:0x8149B48C end:0x8149B9B4
 
 libs/RevoEX/nhttp/d_nhttp.c:
-	.text       start:0x8149B8B8 end:0x8149C524
-	.data       start:0x8166D270 end:0x8166D530
-	.sdata      start:0x81697B30 end:0x81697B38
-	.sbss       start:0x81698DB8 end:0x81698DC0
+	.text       start:0x8149B9B4 end:0x8149C620
+	.data       start:0x8166D530 end:0x8166D7F0
+	.sdata      start:0x816999D0 end:0x816999D8
+	.sbss       start:0x8169AC58 end:0x8169AC60
 
 libs/RevoEX/nhttp/d_nhttp_common.c:
 	.bss        start:0x810C8BC0 end:0x810C98A0
-	.text       start:0x8149C524 end:0x8149CD4C
-	.data       start:0x8166D530 end:0x8166D570
-	.sbss       start:0x81698DC0 end:0x81698DC8
+	.text       start:0x8149C620 end:0x8149CE48
+	.data       start:0x8166D7F0 end:0x8166D830
+	.sbss       start:0x8169AC60 end:0x8169AC68
 
 libs/RevoEX/nwc24/NWC24StdAPI.c:
-	.text       start:0x8149CD4C end:0x8149DC08
-	.data       start:0x8166D570 end:0x8166D5F8
+	.text       start:0x8149CE48 end:0x8149DD04
+	.data       start:0x8166D830 end:0x8166D8B8
 
 libs/RevoEX/nwc24/NWC24FileAPI.c:
-	.text       start:0x8149DC08 end:0x8149F330
-	.data       start:0x8166D5F8 end:0x8166D628
-	.sdata      start:0x81697B38 end:0x81697B50
-	.sbss       start:0x81698DC8 end:0x81698DD8
+	.text       start:0x8149DD04 end:0x8149F42C
+	.data       start:0x8166D8B8 end:0x8166D8E8
+	.sdata      start:0x816999D8 end:0x816999F0
+	.sbss       start:0x8169AC68 end:0x8169AC78
 
 libs/RevoEX/nwc24/NWC24Config.c:
-	.text       start:0x8149F330 end:0x8149FCC4
-	.data       start:0x8166D628 end:0x8166D810
-	.sdata      start:0x81697B50 end:0x81697B60
-	.sbss       start:0x81698DD8 end:0x81698DE0
+	.text       start:0x8149F42C end:0x8149FDC0
+	.data       start:0x8166D8E8 end:0x8166DAD0
+	.sdata      start:0x816999F0 end:0x81699A00
+	.sbss       start:0x8169AC78 end:0x8169AC80
 
 libs/RevoEX/nwc24/NWC24Utils.c:
-	.text       start:0x8149FCC4 end:0x8149FFDC
+	.text       start:0x8149FDC0 end:0x814A00D8
 
 libs/RevoEX/nwc24/NWC24Manage.c:
 	.bss        start:0x810C98A0 end:0x810C98C0
-	.text       start:0x8149FFDC end:0x814A0EA4
-	.data       start:0x8166D810 end:0x8166D920
-	.sdata      start:0x81697B60 end:0x81697B68
-	.sbss       start:0x81698DE0 end:0x81698DF8
+	.text       start:0x814A00D8 end:0x814A0FA0
+	.data       start:0x8166DAD0 end:0x8166DBE0
+	.sdata      start:0x81699A00 end:0x81699A08
+	.sbss       start:0x8169AC80 end:0x8169AC98
 
 libs/RevoEX/nwc24/NWC24MsgObj.c:
-	.text       start:0x814A0EA4 end:0x814A1AC0
+	.text       start:0x814A0FA0 end:0x814A1BBC
 
 libs/RevoEX/nwc24/NWC24MBoxCtrl.c:
-	.text       start:0x814A1AC0 end:0x814A35D0
-	.data       start:0x8166D920 end:0x8166D9C8
-	.sdata      start:0x81697B68 end:0x81697B78
-	.sbss       start:0x81698DF8 end:0x81698E00
+	.text       start:0x814A1BBC end:0x814A36CC
+	.data       start:0x8166DBE0 end:0x8166DC88
+	.sdata      start:0x81699A08 end:0x81699A18
+	.sbss       start:0x8169AC98 end:0x8169ACA0
 
 libs/RevoEX/nwc24/NWC24Mime.c:
-	.text       start:0x814A35D0 end:0x814A5CB8
-	.data       start:0x8166D9C8 end:0x8166DA10
-	.sdata      start:0x81697B78 end:0x81697B88
+	.text       start:0x814A36CC end:0x814A5DB4
+	.data       start:0x8166DC88 end:0x8166DCD0
+	.sdata      start:0x81699A18 end:0x81699A28
 
 libs/RevoEX/nwc24/NWC24Stream.c:
-	.text       start:0x814A5CB8 end:0x814A5EE0
+	.text       start:0x814A5DB4 end:0x814A5FDC
 
 libs/RevoEX/nwc24/NWC24Parser.c:
-	.text       start:0x814A5EE0 end:0x814A6590
-	.data       start:0x8166DA10 end:0x8166DCD0
-	.sdata      start:0x81697B88 end:0x81697BE0
+	.text       start:0x814A5FDC end:0x814A668C
+	.data       start:0x8166DCD0 end:0x8166DF90
+	.sdata      start:0x81699A28 end:0x81699A80
 
 libs/RevoEX/nwc24/NWC24MsgCommit.c:
 	.bss        start:0x810C98C0 end:0x810C9900
-	.text       start:0x814A6590 end:0x814A861C
-	.data       start:0x8166DCD0 end:0x8166DF78
-	.sdata      start:0x81697BE0 end:0x81697C70
-	.sbss       start:0x81698E00 end:0x81698E08
+	.text       start:0x814A668C end:0x814A8718
+	.data       start:0x8166DF90 end:0x8166E238
+	.sdata      start:0x81699A80 end:0x81699B10
+	.sbss       start:0x8169ACA0 end:0x8169ACA8
 
 libs/RevoEX/nwc24/NWC24MsgRead.c:
-	.text       start:0x814A861C end:0x814AAD38
-	.data       start:0x8166DF78 end:0x8166E0B0
-	.sdata      start:0x81697C70 end:0x81697CA0
+	.text       start:0x814A8718 end:0x814AAE34
+	.data       start:0x8166E238 end:0x8166E370
+	.sdata      start:0x81699B10 end:0x81699B40
 
 libs/RevoEX/nwc24/NWC24Schedule.c:
 	.bss        start:0x810C9900 end:0x810C9A80
-	.text       start:0x814AAD38 end:0x814ABD64
-	.data       start:0x8166E0B0 end:0x8166E160
-	.sdata      start:0x81697CA0 end:0x81697CA8
-	.sbss       start:0x81698E08 end:0x81698E18
+	.text       start:0x814AAE34 end:0x814ABE60
+	.data       start:0x8166E370 end:0x8166E420
+	.sdata      start:0x81699B40 end:0x81699B48
+	.sbss       start:0x8169ACA8 end:0x8169ACB8
 
 libs/RevoEX/nwc24/NWC24DateParser.c:
-	.text       start:0x814ABD64 end:0x814AC6A8
-	.rodata     start:0x81618D48 end:0x81618D80
+	.text       start:0x814ABE60 end:0x814AC7A4
+	.rodata     start:0x81618F88 end:0x81618FC0
 
 libs/RevoEX/nwc24/NWC24FriendList.c:
-	.text       start:0x814AC6A8 end:0x814ADCF8
-	.data       start:0x8166E160 end:0x8166E180
-	.sdata      start:0x81697CA8 end:0x81697CB0
+	.text       start:0x814AC7A4 end:0x814ADDF4
+	.data       start:0x8166E420 end:0x8166E440
+	.sdata      start:0x81699B48 end:0x81699B50
 
 libs/RevoEX/nwc24/NWC24SecretFList.c:
-	.text       start:0x814ADCF8 end:0x814ADFAC
-	.data       start:0x8166E180 end:0x8166E1A0
-	.sdata      start:0x81697CB0 end:0x81697CB8
+	.text       start:0x814ADDF4 end:0x814AE0A8
+	.data       start:0x8166E440 end:0x8166E460
+	.sdata      start:0x81699B50 end:0x81699B58
 
 libs/RevoEX/nwc24/NWC24UserId.c:
-	.text       start:0x814ADFAC end:0x814AE3B4
-	.rodata     start:0x81618D80 end:0x81618D90
+	.text       start:0x814AE0A8 end:0x814AE4B0
+	.rodata     start:0x81618FC0 end:0x81618FD0
 
 libs/RevoEX/nwc24/NWC24Time.c:
 	.bss        start:0x810C9A80 end:0x810C9B60
-	.text       start:0x814AE3B4 end:0x814AE844
-	.data       start:0x8166E1A0 end:0x8166E1E0
-	.sbss       start:0x81698E18 end:0x81698E30
+	.text       start:0x814AE4B0 end:0x814AE940
+	.data       start:0x8166E460 end:0x8166E4A0
+	.sbss       start:0x8169ACB8 end:0x8169ACD0
 
 libs/RevoEX/nwc24/NWC24Ipc.c:
-	.text       start:0x814AE844 end:0x814AE9B8
-	.sbss       start:0x81698E30 end:0x81698E38
+	.text       start:0x814AE940 end:0x814AEAB4
+	.sbss       start:0x8169ACD0 end:0x8169ACD8
 
 libs/RevoEX/nwc24/NWC24Download.c:
-	.text       start:0x814AE9B8 end:0x814B1A88
-	.data       start:0x8166E1E0 end:0x8166E218
-	.sdata      start:0x81697CB8 end:0x81697CC8
-	.sbss       start:0x81698E38 end:0x81698E40
+	.text       start:0x814AEAB4 end:0x814B1B84
+	.data       start:0x8166E4A0 end:0x8166E4D8
+	.sdata      start:0x81699B58 end:0x81699B68
+	.sbss       start:0x8169ACD8 end:0x8169ACE0
 
 libs/RevoEX/nwc24/NWC24CHJump.c:
-	.text       start:0x814B1A88 end:0x814B1C10
+	.text       start:0x814B1B84 end:0x814B1D0C
 
 libs/RevoEX/nwc24/NWC24System.c:
 	.bss        start:0x810C9B60 end:0x810C9BC0
-	.text       start:0x814B1C10 end:0x814B1F38
-	.data       start:0x8166E218 end:0x8166E260
-	.sdata      start:0x81697CC8 end:0x81697CD0
-	.sbss       start:0x81698E40 end:0x81698E50
+	.text       start:0x814B1D0C end:0x814B2034
+	.data       start:0x8166E4D8 end:0x8166E520
+	.sdata      start:0x81699B68 end:0x81699B70
+	.sbss       start:0x8169ACE0 end:0x8169ACF0
 
 libs/RevoEX/so/SOCommon.c:
 	.bss        start:0x810C9BC0 end:0x810C9BD8
-	.text       start:0x814B1F38 end:0x814B306C
-	.data       start:0x8166E260 end:0x8166E440
-	.sdata      start:0x81697CD0 end:0x81697CD8
-	.sbss       start:0x81698E50 end:0x81698E60
+	.text       start:0x814B2034 end:0x814B3168
+	.data       start:0x8166E520 end:0x8166E700
+	.sdata      start:0x81699B70 end:0x81699B78
+	.sbss       start:0x8169ACF0 end:0x8169AD00
 
 libs/RevoEX/so/SOBasic.c:
 	.bss        start:0x810C9BD8 end:0x810C9C00
-	.text       start:0x814B306C end:0x814B4064
-	.data       start:0x8166E440 end:0x8166E498
-	.sdata      start:0x81697CD8 end:0x81697CE0
-	.sbss       start:0x81698E60 end:0x81698E68
+	.text       start:0x814B3168 end:0x814B4160
+	.data       start:0x8166E700 end:0x8166E758
+	.sdata      start:0x81699B78 end:0x81699B80
+	.sbss       start:0x8169AD00 end:0x8169AD08
 
 libs/RevoEX/so/SOInformation.c:
-	.text       start:0x814B4064 end:0x814B4564
+	.text       start:0x814B4160 end:0x814B4660
 
 libs/RevoEX/so/SOOption.c:
-	.text       start:0x814B4564 end:0x814B4A70
+	.text       start:0x814B4660 end:0x814B4B6C
 
 libs/RevoEX/ssl/ssl_api.c:
 	.bss        start:0x810C9C00 end:0x810CCC20
-	.text       start:0x814B4A70 end:0x814B57BC
-	.data       start:0x8166E498 end:0x8166E4F0
-	.sdata      start:0x81697CE0 end:0x81697CE8
-	.sbss       start:0x81698E68 end:0x81698E70
+	.text       start:0x814B4B6C end:0x814B58B8
+	.data       start:0x8166E758 end:0x8166E7B0
+	.sdata      start:0x81699B80 end:0x81699B88
+	.sbss       start:0x8169AD08 end:0x8169AD10
 
 libs/RevoEX/ssl/ssl_mutex.c:
-	.text       start:0x814B57BC end:0x814B57C8
+	.text       start:0x814B58B8 end:0x814B58C4
 
 libs/RevoEX/vf/pf_clib.c:
-	.text       start:0x814B57C8 end:0x814B5AC8
+	.text       start:0x814B58C4 end:0x814B5BC4
 
 libs/RevoEX/vf/pf_code.c:
-	.text       start:0x814B5AC8 end:0x814B5AE4
-	.rodata     start:0x81618D90 end:0x81618DF0
+	.text       start:0x814B5BC4 end:0x814B5BE0
+	.rodata     start:0x81618FD0 end:0x81619030
 
 libs/RevoEX/vf/pf_service.c:
-	.text       start:0x814B5AE4 end:0x814B5BFC
+	.text       start:0x814B5BE0 end:0x814B5CF8
 
 libs/RevoEX/vf/pf_str.c:
-	.text       start:0x814B5BFC end:0x814B6130
+	.text       start:0x814B5CF8 end:0x814B622C
 
 libs/RevoEX/vf/pf_w_clib.c:
-	.text       start:0x814B6130 end:0x814B61C4
+	.text       start:0x814B622C end:0x814B62C0
 
 libs/RevoEX/vf/pf_driver.c:
-	.text       start:0x814B61C4 end:0x814B6CAC
+	.text       start:0x814B62C0 end:0x814B6DA8
 
 libs/RevoEX/vf/pdm_bpb.c:
-	.text       start:0x814B6CAC end:0x814B7610
+	.text       start:0x814B6DA8 end:0x814B770C
 
 libs/RevoEX/vf/pdm_disk.c:
-	.text       start:0x814B7610 end:0x814B8BE0
+	.text       start:0x814B770C end:0x814B8CDC
 
 libs/RevoEX/vf/pdm_partition.c:
-	.text       start:0x814B8BE0 end:0x814BA3BC
+	.text       start:0x814B8CDC end:0x814BA4B8
 
 libs/RevoEX/vf/pdm_mbr.c:
-	.text       start:0x814BA3BC end:0x814BA974
+	.text       start:0x814BA4B8 end:0x814BAA70
 
 libs/RevoEX/vf/pdm_dskmng.c:
 	.bss        start:0x810CCC20 end:0x810CD7F0
-	.text       start:0x814BA974 end:0x814BAB98
+	.text       start:0x814BAA70 end:0x814BAC94
 
 libs/RevoEX/vf/pf_cache.c:
-	.text       start:0x814BAB98 end:0x814BC784
+	.text       start:0x814BAC94 end:0x814BC880
 
 libs/RevoEX/vf/pf_cluster.c:
-	.text       start:0x814BC784 end:0x814BCED4
+	.text       start:0x814BC880 end:0x814BCFD0
 
 libs/RevoEX/vf/pf_dir.c:
-	.text       start:0x814BCED4 end:0x814BE2FC
-	.sdata      start:0x81697CE8 end:0x81697CF8
+	.text       start:0x814BCFD0 end:0x814BE3F8
+	.sdata      start:0x81699B88 end:0x81699B98
 
 libs/RevoEX/vf/pf_entry.c:
-	.text       start:0x814BE2FC end:0x814BFEEC
-	.data       start:0x8166E4F0 end:0x8166E500
-	.sdata2     start:0x81695048 end:0x81695050
+	.text       start:0x814BE3F8 end:0x814BFFE8
+	.data       start:0x8166E7B0 end:0x8166E7C0
+	.sdata2     start:0x81696EE8 end:0x81696EF0
 
 libs/RevoEX/vf/pf_entry_iterator.c:
-	.text       start:0x814BFEEC end:0x814C205C
-	.sdata      start:0x81697CF8 end:0x81697D20
+	.text       start:0x814BFFE8 end:0x814C2158
+	.sdata      start:0x81699B98 end:0x81699BC0
 
 libs/RevoEX/vf/pf_fat.c:
-	.text       start:0x814C205C end:0x814C5024
-	.rodata     start:0x81618DF0 end:0x81618E30
+	.text       start:0x814C2158 end:0x814C5120
+	.rodata     start:0x81619030 end:0x81619070
 
 libs/RevoEX/vf/pf_fat12.c:
-	.text       start:0x814C5024 end:0x814C5B5C
+	.text       start:0x814C5120 end:0x814C5C58
 
 libs/RevoEX/vf/pf_fat16.c:
-	.text       start:0x814C5B5C end:0x814C60E8
+	.text       start:0x814C5C58 end:0x814C61E4
 
 libs/RevoEX/vf/pf_fat32.c:
-	.text       start:0x814C60E8 end:0x814C673C
+	.text       start:0x814C61E4 end:0x814C6838
 
 libs/RevoEX/vf/pf_fatfs.c:
-	.text       start:0x814C673C end:0x814C6740
+	.text       start:0x814C6838 end:0x814C683C
 
 libs/RevoEX/vf/pf_file.c:
-	.text       start:0x814C6740 end:0x814C9E24
+	.text       start:0x814C683C end:0x814C9F20
 
 libs/RevoEX/vf/pf_path.c:
-	.text       start:0x814C9E24 end:0x814CC7B0
-	.sdata2     start:0x81695050 end:0x81695060
-	.sdata      start:0x81697D20 end:0x81697D50
+	.text       start:0x814C9F20 end:0x814CC8AC
+	.sdata2     start:0x81696EF0 end:0x81696F00
+	.sdata      start:0x81699BC0 end:0x81699BF0
 
 libs/RevoEX/vf/pf_sector.c:
-	.text       start:0x814CC7B0 end:0x814CD058
+	.text       start:0x814CC8AC end:0x814CD154
 
 libs/RevoEX/vf/pf_volume.c:
 	.bss        start:0x810CD7F0 end:0x810F5540
-	.text       start:0x814CD058 end:0x814CF108
+	.text       start:0x814CD154 end:0x814CF204
 
 libs/RevoEX/vf/pf_cp932.c:
-	.text       start:0x814CF108 end:0x814CF5EC
-	.rodata     start:0x81618E30 end:0x8161D0A8
+	.text       start:0x814CF204 end:0x814CF6E8
+	.rodata     start:0x81619070 end:0x8161D2E8
 
 libs/RevoEX/vf/pf_attach.c:
-	.text       start:0x814CF5EC end:0x814CF7DC
+	.text       start:0x814CF6E8 end:0x814CF8D8
 
 libs/RevoEX/vf/pf_chdir.c:
-	.text       start:0x814CF7DC end:0x814CF82C
+	.text       start:0x814CF8D8 end:0x814CF928
 
 libs/RevoEX/vf/pf_create.c:
-	.text       start:0x814CF82C end:0x814CF890
+	.text       start:0x814CF928 end:0x814CF98C
 
 libs/RevoEX/vf/pf_detach.c:
-	.text       start:0x814CF890 end:0x814CF8B8
+	.text       start:0x814CF98C end:0x814CF9B4
 
 libs/RevoEX/vf/pf_errnum.c:
-	.text       start:0x814CF8B8 end:0x814CF8DC
+	.text       start:0x814CF9B4 end:0x814CF9D8
 
 libs/RevoEX/vf/pf_fclose.c:
-	.text       start:0x814CF8DC end:0x814CF900
+	.text       start:0x814CF9D8 end:0x814CF9FC
 
 libs/RevoEX/vf/pf_finfo.c:
-	.text       start:0x814CF900 end:0x814CF924
+	.text       start:0x814CF9FC end:0x814CFA20
 
 libs/RevoEX/vf/pf_fopen.c:
-	.text       start:0x814CF924 end:0x814CF9D0
+	.text       start:0x814CFA20 end:0x814CFACC
 
 libs/RevoEX/vf/pf_format.c:
-	.text       start:0x814CF9D0 end:0x814CF9F8
+	.text       start:0x814CFACC end:0x814CFAF4
 
 libs/RevoEX/vf/pf_fread.c:
-	.text       start:0x814CF9F8 end:0x814CFA20
+	.text       start:0x814CFAF4 end:0x814CFB1C
 
 libs/RevoEX/vf/pf_fseek.c:
-	.text       start:0x814CFA20 end:0x814CFA44
+	.text       start:0x814CFB1C end:0x814CFB40
 
 libs/RevoEX/vf/pf_fsfirst.c:
-	.text       start:0x814CFA44 end:0x814CFAB8
+	.text       start:0x814CFB40 end:0x814CFBB4
 
 libs/RevoEX/vf/pf_fsnext.c:
-	.text       start:0x814CFAB8 end:0x814CFADC
+	.text       start:0x814CFBB4 end:0x814CFBD8
 
 libs/RevoEX/vf/pf_fwrite.c:
-	.text       start:0x814CFADC end:0x814CFB04
+	.text       start:0x814CFBD8 end:0x814CFC00
 
 libs/RevoEX/vf/pf_getdev.c:
-	.text       start:0x814CFB04 end:0x814CFB2C
+	.text       start:0x814CFC00 end:0x814CFC28
 
 libs/RevoEX/vf/pf_init_prfile2.c:
-	.text       start:0x814CFB2C end:0x814CFB6C
+	.text       start:0x814CFC28 end:0x814CFC68
 
 libs/RevoEX/vf/pf_mkdir.c:
-	.text       start:0x814CFB6C end:0x814CFBBC
+	.text       start:0x814CFC68 end:0x814CFCB8
 
 libs/RevoEX/vf/pf_remove.c:
-	.text       start:0x814CFBBC end:0x814CFC0C
+	.text       start:0x814CFCB8 end:0x814CFD08
 
 libs/RevoEX/vf/pf_rmdir.c:
-	.text       start:0x814CFC0C end:0x814CFC5C
+	.text       start:0x814CFD08 end:0x814CFD58
 
 libs/RevoEX/vf/pf_sync.c:
-	.text       start:0x814CFC5C end:0x814CFC84
+	.text       start:0x814CFD58 end:0x814CFD80
 
 libs/RevoEX/vf/pf_unmount.c:
-	.text       start:0x814CFC84 end:0x814CFCAC
+	.text       start:0x814CFD80 end:0x814CFDA8
 
 libs/RevoEX/vf/pf_filelock.c:
-	.text       start:0x814CFCAC end:0x814CFCC0
+	.text       start:0x814CFDA8 end:0x814CFDBC
 
 libs/RevoEX/vf/pf_system.c:
-	.text       start:0x814CFCC0 end:0x814CFD38
-	.sbss       start:0x81698E70 end:0x81698E78
+	.text       start:0x814CFDBC end:0x814CFE34
+	.sbss       start:0x8169AD10 end:0x8169AD18
 
 libs/RevoEX/vf/d_vf.c:
 	.bss        start:0x810F5540 end:0x810F5558
-	.text       start:0x814CFD38 end:0x814D15C0
-	.rodata     start:0x8161D0A8 end:0x8161D178
-	.data       start:0x8166E500 end:0x8166E970
-	.sdata      start:0x81697D50 end:0x81697D60
-	.sbss       start:0x81698E78 end:0x81698E80
+	.text       start:0x814CFE34 end:0x814D16BC
+	.rodata     start:0x8161D2E8 end:0x8161D3B8
+	.data       start:0x8166E7C0 end:0x8166EC30
+	.sdata      start:0x81699BF0 end:0x81699C00
+	.sbss       start:0x8169AD18 end:0x8169AD20
 
 libs/RevoEX/vf/d_vf_sys.c:
 	.bss        start:0x810F5558 end:0x810F5690
-	.text       start:0x814D15C0 end:0x814D46D8
-	.data       start:0x8166E970 end:0x8166E980
-	.sdata      start:0x81697D60 end:0x81697D70
-	.sbss       start:0x81698E80 end:0x81698EA0
+	.text       start:0x814D16BC end:0x814D47D4
+	.data       start:0x8166EC30 end:0x8166EC40
+	.sdata      start:0x81699C00 end:0x81699C10
+	.sbss       start:0x8169AD20 end:0x8169AD40
 
 libs/RevoEX/vf/d_hash.c:
 	.bss        start:0x810F5690 end:0x810F58D0
-	.text       start:0x814D46D8 end:0x814D4D58
+	.text       start:0x814D47D4 end:0x814D4E54
 
 libs/RevoEX/vf/d_time.c:
-	.text       start:0x814D4D58 end:0x814D4E38
+	.text       start:0x814D4E54 end:0x814D4F34
 
 libs/RevoEX/vf/d_common.c:
 	.bss        start:0x810F58D0 end:0x810F5AD8
-	.text       start:0x814D4E38 end:0x814D5A54
+	.text       start:0x814D4F34 end:0x814D5B50
 
 libs/RevoEX/vf/nand_drv.c:
 	.bss        start:0x810F5AD8 end:0x810F5C80
-	.text       start:0x814D5A54 end:0x814D89C4
-	.rodata     start:0x8161D178 end:0x8161D198
-	.sbss       start:0x81698EA0 end:0x81698EA8
+	.text       start:0x814D5B50 end:0x814D8AC0
+	.rodata     start:0x8161D3B8 end:0x8161D3D8
+	.sbss       start:0x8169AD40 end:0x8169AD48
 
 libs/RevoEX/vf/sd_drv.c:
 	.bss        start:0x810F5C80 end:0x810F6040
-	.text       start:0x814D89C4 end:0x814D97DC
-	.rodata     start:0x8161D198 end:0x8161D1B8
+	.text       start:0x814D8AC0 end:0x814D98D8
+	.rodata     start:0x8161D3D8 end:0x8161D3F8
 
 libs/RevoEX/wd/wd_misc.c:
-	.text       start:0x814D97DC end:0x814D98D0
-	.data       start:0x8166E980 end:0x8166E990
+	.text       start:0x814D98D8 end:0x814D99CC
+	.data       start:0x8166EC40 end:0x8166EC50
 
 libs/RevoEX/wd/wd_request.c:
-	.text       start:0x814D98D0 end:0x814D9A88
+	.text       start:0x814D99CC end:0x814D9B84
 
 libs/RevoEX/wd/wd_init.c:
-	.text       start:0x814D9A88 end:0x814D9BD8
-	.data       start:0x8166E990 end:0x8166E9A8
+	.text       start:0x814D9B84 end:0x814D9CD4
+	.data       start:0x8166EC50 end:0x8166EC68
 
 libs/RevoEX/wd/WDScan.c:
-	.text       start:0x814D9BD8 end:0x814DA45C
-	.sdata2     start:0x81695060 end:0x81695068
-	.sdata      start:0x81697D70 end:0x81697D78
+	.text       start:0x814D9CD4 end:0x814DA558
+	.sdata2     start:0x81696F00 end:0x81696F08
+	.sdata      start:0x81699C10 end:0x81699C18
 
 libs/RVLFaceLib/RFL_System.c:
 	extab       start:0x813307E0 end:0x81330818
 	extabindex  start:0x81331560 end:0x813315B4
-	.text       start:0x814DA45C end:0x814DAF9C
-	.data       start:0x8166E9A8 end:0x8166EA00
-	.sdata      start:0x81697D78 end:0x81697D80
-	.sbss       start:0x81698EA8 end:0x81698EB8
+	.text       start:0x814DA558 end:0x814DB098
+	.data       start:0x8166EC68 end:0x8166ECC0
+	.sdata      start:0x81699C18 end:0x81699C20
+	.sbss       start:0x8169AD48 end:0x8169AD58
 
 libs/RVLFaceLib/RFL_NANDLoader.c:
 	extab       start:0x81330818 end:0x81330898
 	extabindex  start:0x813315B4 end:0x81331674
-	.text       start:0x814DAF9C end:0x814DBFC8
-	.rodata     start:0x8161D1B8 end:0x8161D248
-	.data       start:0x8166EA00 end:0x8166EA20
-	.sdata      start:0x81697D80 end:0x81697D88
+	.text       start:0x814DB098 end:0x814DC0C4
+	.rodata     start:0x8161D3F8 end:0x8161D488
+	.data       start:0x8166ECC0 end:0x8166ECE0
+	.sdata      start:0x81699C20 end:0x81699C28
 
 libs/RVLFaceLib/RFL_NANDAccess.c:
 	extab       start:0x81330898 end:0x81330970
 	extabindex  start:0x81331674 end:0x813317B8
-	.text       start:0x814DBFC8 end:0x814DF45C
-	.data       start:0x8166EA20 end:0x8166EA90
-	.sdata2     start:0x81695068 end:0x81695070
-	.sbss2      start:0x81695FF8 end:0x81696000
-	.sdata      start:0x81697D88 end:0x81697D98
+	.text       start:0x814DC0C4 end:0x814DF558
+	.data       start:0x8166ECE0 end:0x8166ED50
+	.sdata2     start:0x81696F08 end:0x81696F10
+	.sbss2      start:0x81697E98 end:0x81697EA0
+	.sdata      start:0x81699C28 end:0x81699C38
 
 libs/RVLFaceLib/RFL_Model.c:
 	extab       start:0x81330970 end:0x813309C0
 	extabindex  start:0x813317B8 end:0x81331830
-	.text       start:0x814DF45C end:0x814E12C8
-	.rodata     start:0x8161D248 end:0x8161D358
-	.data       start:0x8166EA90 end:0x8166EAA0
-	.sdata2     start:0x81695070 end:0x816950B0
+	.text       start:0x814DF558 end:0x814E13C4
+	.rodata     start:0x8161D488 end:0x8161D598
+	.data       start:0x8166ED50 end:0x8166ED60
+	.sdata2     start:0x81696F10 end:0x81696F50
 
 libs/RVLFaceLib/RFL_MakeTex.c:
 	extab       start:0x813309C0 end:0x81330A00
 	extabindex  start:0x81331830 end:0x81331890
-	.text       start:0x814E12C8 end:0x814E3B64
-	.rodata     start:0x8161D358 end:0x8161D418
-	.sdata2     start:0x816950B0 end:0x81695170
+	.text       start:0x814E13C4 end:0x814E3C60
+	.rodata     start:0x8161D598 end:0x8161D658
+	.sdata2     start:0x81696F50 end:0x81697010
 
 libs/RVLFaceLib/RFL_Icon.c:
 	extab       start:0x81330A00 end:0x81330A18
 	extabindex  start:0x81331890 end:0x813318B4
-	.text       start:0x814E3B64 end:0x814E4158
-	.rodata     start:0x8161D418 end:0x8161D458
-	.sdata2     start:0x81695170 end:0x816951B0
+	.text       start:0x814E3C60 end:0x814E4254
+	.rodata     start:0x8161D658 end:0x8161D698
+	.sdata2     start:0x81697010 end:0x81697050
 
 libs/RVLFaceLib/RFL_HiddenDatabase.c:
 	extab       start:0x81330A18 end:0x81330AA0
 	extabindex  start:0x813318B4 end:0x81331980
-	.text       start:0x814E4158 end:0x814E4E74
+	.text       start:0x814E4254 end:0x814E4F70
 
 libs/RVLFaceLib/RFL_Database.c:
 	extab       start:0x81330AA0 end:0x81330BB0
 	extabindex  start:0x81331980 end:0x81331B18
-	.text       start:0x814E4E74 end:0x814E6BC8
-	.sdata2     start:0x816951B0 end:0x816951B8
+	.text       start:0x814E4F70 end:0x814E6CC4
+	.sdata2     start:0x81697050 end:0x81697058
 
 libs/RVLFaceLib/RFL_Controller.c:
 	extab       start:0x81330BB0 end:0x81330BC0
 	extabindex  start:0x81331B18 end:0x81331B30
-	.text       start:0x814E6BC8 end:0x814E6E64
+	.text       start:0x814E6CC4 end:0x814E6F60
 
 libs/RVLFaceLib/RFL_MiddleDatabase.c:
 	extab       start:0x81330BC0 end:0x81330C10
 	extabindex  start:0x81331B30 end:0x81331BA8
-	.text       start:0x814E6E64 end:0x814E7CA4
+	.text       start:0x814E6F60 end:0x814E7DA0
 
 libs/RVLFaceLib/RFL_MakeRandomFace.c:
 	extab       start:0x81330C10 end:0x81330C30
 	extabindex  start:0x81331BA8 end:0x81331BD8
-	.text       start:0x814E7CA4 end:0x814E8A7C
-	.rodata     start:0x8161D458 end:0x8161DEB0
-	.data       start:0x8166EAA0 end:0x8166F0F0
+	.text       start:0x814E7DA0 end:0x814E8B78
+	.rodata     start:0x8161D698 end:0x8161E0F0
+	.data       start:0x8166ED60 end:0x8166F3B0
 
 libs/RVLFaceLib/RFL_DefaultDatabase.c:
-	.text       start:0x814E8A7C end:0x814E8A94
-	.rodata     start:0x8161DEB0 end:0x8161E070
+	.text       start:0x814E8B78 end:0x814E8B90
+	.rodata     start:0x8161E0F0 end:0x8161E2B0
 
 libs/RVLFaceLib/RFL_DataUtility.c:
 	extab       start:0x81330C30 end:0x81330C58
 	extabindex  start:0x81331BD8 end:0x81331C14
-	.text       start:0x814E8A94 end:0x814E9358
-	.rodata     start:0x8161E070 end:0x8161E080
+	.text       start:0x814E8B90 end:0x814E9454
+	.rodata     start:0x8161E2B0 end:0x8161E2C0
 
 libs/RVLFaceLib/RFL_NWC24.c:
 	extab       start:0x81330C58 end:0x81330C78
 	extabindex  start:0x81331C14 end:0x81331C44
-	.text       start:0x814E9358 end:0x814E9F08
-	.data       start:0x8166F0F0 end:0x8166F2C8
+	.text       start:0x814E9454 end:0x814EA004
+	.data       start:0x8166F3B0 end:0x8166F588
 
 libs/RVLFaceLib/RFL_Format.c:
 	extab       start:0x81330C78 end:0x81330CC8
 	extabindex  start:0x81331C44 end:0x81331CBC
-	.text       start:0x814E9F08 end:0x814EA448
+	.text       start:0x814EA004 end:0x814EA544
 
 libs/RVLMiddleware/TMC_JPEG/decapi.c:
-	.text       start:0x814EA448 end:0x814F7024
-	.rodata     start:0x8161E080 end:0x8161E2F0
-	.sdata2     start:0x816951B8 end:0x816951C0
+	.text       start:0x814EA544 end:0x814F7120
+	.rodata     start:0x8161E2C0 end:0x8161E530
+	.sdata2     start:0x81697058 end:0x81697060
 
 libs/NW4R/snd/snd_AxManager.cpp:
 	.bss        start:0x810F6040 end:0x81100458
-	.text       start:0x814F7024 end:0x814F8900
-	.sdata2     start:0x816951C0 end:0x816951D8
-	.sbss       start:0x81698EB8 end:0x81698EC0
+	.text       start:0x814F7120 end:0x814F89FC
+	.sdata2     start:0x81697060 end:0x81697078
+	.sbss       start:0x8169AD58 end:0x8169AD60
 
 libs/NW4R/snd/snd_AxVoice.cpp:
-	.text       start:0x814F8900 end:0x814FBE00
-	.data       start:0x8166F2C8 end:0x8166F2E0
-	.sdata2     start:0x816951D8 end:0x81695228
+	.text       start:0x814F89FC end:0x814FBEFC
+	.data       start:0x8166F588 end:0x8166F5A0
+	.sdata2     start:0x81697078 end:0x816970C8
 
 libs/NW4R/snd/snd_AxfxImpl.cpp:
-	.text       start:0x814FBE00 end:0x814FBEF4
-	.sbss       start:0x81698EC0 end:0x81698EC8
+	.text       start:0x814FBEFC end:0x814FBFF0
+	.sbss       start:0x8169AD60 end:0x8169AD68
 
 libs/NW4R/snd/snd_Bank.cpp:
-	.text       start:0x814FBEF4 end:0x814FC11C
-	.sdata2     start:0x81695228 end:0x81695248
+	.text       start:0x814FBFF0 end:0x814FC218
+	.sdata2     start:0x816970C8 end:0x816970E8
 
 libs/NW4R/snd/snd_BankFile.cpp:
-	.text       start:0x814FC11C end:0x814FC524
-	.sdata2     start:0x81695248 end:0x81695250
+	.text       start:0x814FC218 end:0x814FC620
+	.sdata2     start:0x816970E8 end:0x816970F0
 
 libs/NW4R/snd/snd_BasicSound.cpp:
-	.text       start:0x814FC524 end:0x814FD65C
-	.ctors      start:0x8160D224 end:0x8160D228
-	.data       start:0x8166F2E0 end:0x8166F348
-	.sdata2     start:0x81695250 end:0x81695260
-	.sbss       start:0x81698EC8 end:0x81698ED0
+	.text       start:0x814FC620 end:0x814FD758
+	.ctors      start:0x8160D464 end:0x8160D468
+	.data       start:0x8166F5A0 end:0x8166F608
+	.sdata2     start:0x816970F0 end:0x81697100
+	.sbss       start:0x8169AD68 end:0x8169AD70
 
 libs/NW4R/snd/snd_Channel.cpp:
 	.bss        start:0x81100458 end:0x81105C70
-	.text       start:0x814FD65C end:0x814FE5E4
-	.ctors      start:0x8160D228 end:0x8160D22C
-	.sdata2     start:0x81695260 end:0x81695288
-	.sbss       start:0x81698ED0 end:0x81698ED8
+	.text       start:0x814FD758 end:0x814FE6E0
+	.ctors      start:0x8160D468 end:0x8160D46C
+	.sdata2     start:0x81697100 end:0x81697128
+	.sbss       start:0x8169AD70 end:0x8169AD78
 
 libs/NW4R/snd/snd_DisposeCallbackManager.cpp:
 	.bss        start:0x81105C70 end:0x81105C88
-	.text       start:0x814FE5E4 end:0x814FE9EC
-	.sbss       start:0x81698ED8 end:0x81698EE0
+	.text       start:0x814FE6E0 end:0x814FEAE8
+	.sbss       start:0x8169AD78 end:0x8169AD80
 
 libs/NW4R/snd/snd_DvdSoundArchive.cpp:
-	.text       start:0x814FE9EC end:0x814FF084
-	.data       start:0x8166F348 end:0x8166F3D0
-	.sbss2      start:0x81696000 end:0x81696008
-	.sbss       start:0x81698EE0 end:0x81698EE8
+	.text       start:0x814FEAE8 end:0x814FF180
+	.data       start:0x8166F608 end:0x8166F690
+	.sbss2      start:0x81697EA0 end:0x81697EA8
+	.sbss       start:0x8169AD80 end:0x8169AD88
 
 libs/NW4R/snd/snd_EnvGenerator.cpp:
-	.text       start:0x814FF084 end:0x814FF3BC
-	.rodata     start:0x8161E2F0 end:0x8161E5F0
-	.sdata2     start:0x81695288 end:0x816952B8
+	.text       start:0x814FF180 end:0x814FF4B8
+	.rodata     start:0x8161E530 end:0x8161E830
+	.sdata2     start:0x81697128 end:0x81697158
 
 libs/NW4R/snd/snd_ExternalSoundPlayer.cpp:
-	.text       start:0x814FF3BC end:0x814FF49C
+	.text       start:0x814FF4B8 end:0x814FF598
 
 libs/NW4R/snd/snd_FrameHeap.cpp:
-	.text       start:0x814FF49C end:0x814FFD6C
+	.text       start:0x814FF598 end:0x814FFE68
 
 libs/NW4R/snd/snd_FxChorus.cpp:
-	.text       start:0x814FFD6C end:0x81500138
-	.rodata     start:0x8161E5F0 end:0x8161E600
-	.data       start:0x8166F3D0 end:0x8166F3D0
-	.sdata2     start:0x816952B8 end:0x816952C0
+	.text       start:0x814FFE68 end:0x81500234
+	.rodata     start:0x8161E830 end:0x8161E840
+	.data       start:0x8166F690 end:0x8166F690
+	.sdata2     start:0x81697158 end:0x81697160
 
 libs/NW4R/snd/snd_FxDelay.cpp:
-	.text       start:0x81500138 end:0x815005D4
-	.rodata     start:0x8161E600 end:0x8161E610
-	.data       start:0x8166F3D0 end:0x8166F410
-	.sdata2     start:0x816952C0 end:0x816952C8
+	.text       start:0x81500234 end:0x815006D0
+	.rodata     start:0x8161E840 end:0x8161E850
+	.data       start:0x8166F690 end:0x8166F6D0
+	.sdata2     start:0x81697160 end:0x81697168
 
 libs/NW4R/snd/snd_FxReverbHi.cpp:
-	.text       start:0x815005D4 end:0x81500A30
-	.rodata     start:0x8161E610 end:0x8161E628
-	.data       start:0x8166F410 end:0x8166F430
-	.sdata2     start:0x816952C8 end:0x816952D8
+	.text       start:0x815006D0 end:0x81500B2C
+	.rodata     start:0x8161E850 end:0x8161E868
+	.data       start:0x8166F6D0 end:0x8166F6F0
+	.sdata2     start:0x81697168 end:0x81697178
 
 libs/NW4R/snd/snd_FxReverbHiDpl2.cpp:
-	.text       start:0x81500A30 end:0x81500E94
-	.rodata     start:0x8161E628 end:0x8161E640
-	.data       start:0x8166F430 end:0x8166F450
-	.sdata2     start:0x816952D8 end:0x816952E8
+	.text       start:0x81500B2C end:0x81500F90
+	.rodata     start:0x8161E868 end:0x8161E880
+	.data       start:0x8166F6F0 end:0x8166F710
+	.sdata2     start:0x81697178 end:0x81697188
 
 libs/NW4R/snd/snd_FxReverbStd.cpp:
-	.text       start:0x81500E94 end:0x815012B4
-	.rodata     start:0x8161E640 end:0x8161E658
-	.data       start:0x8166F450 end:0x8166F470
-	.sdata2     start:0x816952E8 end:0x816952F8
+	.text       start:0x81500F90 end:0x815013B0
+	.rodata     start:0x8161E880 end:0x8161E898
+	.data       start:0x8166F710 end:0x8166F730
+	.sdata2     start:0x81697188 end:0x81697198
 
 libs/NW4R/snd/snd_InstancePool.cpp:
-	.text       start:0x815012B4 end:0x8150151C
+	.text       start:0x815013B0 end:0x81501618
 
 libs/NW4R/snd/snd_Lfo.cpp:
-	.text       start:0x8150151C end:0x8150170C
-	.rodata     start:0x8161E658 end:0x8161E680
-	.sdata2     start:0x816952F8 end:0x81695328
+	.text       start:0x81501618 end:0x81501808
+	.rodata     start:0x8161E898 end:0x8161E8C0
+	.sdata2     start:0x81697198 end:0x816971C8
 
 libs/NW4R/snd/snd_McsSoundArchive.cpp:
-	.text       start:0x8150170C end:0x81501724
+	.text       start:0x81501808 end:0x81501820
 
 libs/NW4R/snd/snd_MemorySoundArchive.cpp:
-	.text       start:0x81501724 end:0x81501B58
-	.data       start:0x8166F470 end:0x8166F4F0
+	.text       start:0x81501820 end:0x81501C54
+	.data       start:0x8166F730 end:0x8166F7B0
 
 libs/NW4R/snd/snd_MidiSeqPlayer.cpp:
-	.text       start:0x81501B58 end:0x81501BF4
+	.text       start:0x81501C54 end:0x81501CF0
 
 libs/NW4R/snd/snd_MidiSeqTrack.cpp:
-	.text       start:0x81501BF4 end:0x81501C34
-	.data       start:0x8166F4F0 end:0x8166F500
+	.text       start:0x81501CF0 end:0x81501D30
+	.data       start:0x8166F7B0 end:0x8166F7C0
 
 libs/NW4R/snd/snd_MmlParser.cpp:
-	.text       start:0x81501C34 end:0x81502AFC
-	.data       start:0x8166F500 end:0x8166F730
-	.sdata2     start:0x81695328 end:0x81695348
-	.sdata      start:0x81697D98 end:0x81697DA8
-	.sbss       start:0x81698EE8 end:0x81698EF0
+	.text       start:0x81501D30 end:0x81502BF8
+	.data       start:0x8166F7C0 end:0x8166F9F0
+	.sdata2     start:0x816971C8 end:0x816971E8
+	.sdata      start:0x81699C38 end:0x81699C48
+	.sbss       start:0x8169AD88 end:0x8169AD90
 
 libs/NW4R/snd/snd_MmlSeqTrack.cpp:
-	.text       start:0x81502AFC end:0x81502BC8
-	.data       start:0x8166F730 end:0x8166F740
+	.text       start:0x81502BF8 end:0x81502CC4
+	.data       start:0x8166F9F0 end:0x8166FA00
 
 libs/NW4R/snd/snd_MmlSeqTrackAllocator.cpp:
-	.text       start:0x81502BC8 end:0x81502CEC
-	.data       start:0x8166F740 end:0x8166F758
+	.text       start:0x81502CC4 end:0x81502DE8
+	.data       start:0x8166FA00 end:0x8166FA18
 
 libs/NW4R/snd/snd_NandSoundArchive.cpp:
-	.text       start:0x81502CEC end:0x81503508
-	.data       start:0x8166F758 end:0x8166F7D8
-	.sbss       start:0x81698EF0 end:0x81698EF8
+	.text       start:0x81502DE8 end:0x81503604
+	.data       start:0x8166FA18 end:0x8166FA98
+	.sbss       start:0x8169AD90 end:0x8169AD98
 
 libs/NW4R/snd/snd_RemoteSpeaker.cpp:
-	.text       start:0x81503508 end:0x8150398C
+	.text       start:0x81503604 end:0x81503A88
 
 libs/NW4R/snd/snd_RemoteSpeakerManager.cpp:
 	.bss        start:0x81105C88 end:0x81105F40
-	.text       start:0x8150398C end:0x81503BE0
-	.sbss       start:0x81698EF8 end:0x81698F00
+	.text       start:0x81503A88 end:0x81503CDC
+	.sbss       start:0x8169AD98 end:0x8169ADA0
 
 libs/NW4R/snd/snd_SeqFile.cpp:
-	.text       start:0x81503BE0 end:0x81503C5C
+	.text       start:0x81503CDC end:0x81503D58
 
 libs/NW4R/snd/snd_SeqPlayer.cpp:
 	.bss        start:0x81105F40 end:0x81105F80
-	.text       start:0x81503C5C end:0x81504DD4
-	.ctors      start:0x8160D22C end:0x8160D230
-	.data       start:0x8166F7D8 end:0x8166F890
-	.sdata2     start:0x81695348 end:0x81695358
+	.text       start:0x81503D58 end:0x81504ED0
+	.ctors      start:0x8160D46C end:0x8160D470
+	.data       start:0x8166FA98 end:0x8166FB50
+	.sdata2     start:0x816971E8 end:0x816971F8
 
 libs/NW4R/snd/snd_SeqSound.cpp:
-	.text       start:0x81504DD4 end:0x815051C0
-	.ctors      start:0x8160D230 end:0x8160D234
-	.data       start:0x8166F890 end:0x8166F8F8
-	.sbss       start:0x81698F00 end:0x81698F08
+	.text       start:0x81504ED0 end:0x815052BC
+	.ctors      start:0x8160D470 end:0x8160D474
+	.data       start:0x8166FB50 end:0x8166FBB8
+	.sbss       start:0x8169ADA0 end:0x8169ADA8
 
 libs/NW4R/snd/snd_SeqSoundHandle.cpp:
-	.text       start:0x815051C0 end:0x815051F8
+	.text       start:0x815052BC end:0x815052F4
 
 libs/NW4R/snd/snd_SeqTrack.cpp:
-	.text       start:0x815051F8 end:0x8150616C
-	.rodata     start:0x8161E680 end:0x8161E6A8
-	.sdata2     start:0x81695358 end:0x81695388
+	.text       start:0x815052F4 end:0x81506268
+	.rodata     start:0x8161E8C0 end:0x8161E8E8
+	.sdata2     start:0x816971F8 end:0x81697228
 
 libs/NW4R/snd/snd_SoundArchive.cpp:
-	.text       start:0x8150616C end:0x81507514
-	.data       start:0x8166F8F8 end:0x8166F918
-	.sbss       start:0x81698F08 end:0x81698F10
+	.text       start:0x81506268 end:0x81507610
+	.data       start:0x8166FBB8 end:0x8166FBD8
+	.sbss       start:0x8169ADA8 end:0x8169ADB0
 
 libs/NW4R/snd/snd_SoundArchiveLoader.cpp:
-	.text       start:0x81507514 end:0x81507E6C
+	.text       start:0x81507610 end:0x81507F68
 
 libs/NW4R/snd/snd_SoundArchivePlayer.cpp:
 	.bss        start:0x81105F80 end:0x81106198
-	.text       start:0x81507E6C end:0x8150A82C
-	.data       start:0x8166F918 end:0x8166F9E8
-	.sdata2     start:0x81695388 end:0x81695398
-	.sbss       start:0x81698F10 end:0x81698F18
+	.text       start:0x81507F68 end:0x8150A928
+	.data       start:0x8166FBD8 end:0x8166FCA8
+	.sdata2     start:0x81697228 end:0x81697238
+	.sbss       start:0x8169ADB0 end:0x8169ADB8
 
 libs/NW4R/snd/snd_SoundHandle.cpp:
-	.text       start:0x8150A82C end:0x8150A8C8
+	.text       start:0x8150A928 end:0x8150A9C4
 
 libs/NW4R/snd/snd_SoundHeap.cpp:
-	.text       start:0x8150A8C8 end:0x8150AAC0
-	.data       start:0x8166F9E8 end:0x8166F9F8
+	.text       start:0x8150A9C4 end:0x8150ABBC
+	.data       start:0x8166FCA8 end:0x8166FCB8
 
 libs/NW4R/snd/snd_SoundPlayer.cpp:
-	.text       start:0x8150AAC0 end:0x8150BC38
-	.sdata2     start:0x81695398 end:0x816953A0
+	.text       start:0x8150ABBC end:0x8150BD34
+	.sdata2     start:0x81697238 end:0x81697240
 
 libs/NW4R/snd/snd_SoundStartable.cpp:
-	.text       start:0x8150BC38 end:0x8150BD88
+	.text       start:0x8150BD34 end:0x8150BE84
 
 libs/NW4R/snd/snd_SoundSystem.cpp:
-	.text       start:0x8150BD88 end:0x8150BE98
-	.sbss       start:0x81698F18 end:0x81698F20
+	.text       start:0x8150BE84 end:0x8150BF94
+	.sbss       start:0x8169ADB8 end:0x8169ADC0
 
 libs/NW4R/snd/snd_SoundThread.cpp:
 	.bss        start:0x81106198 end:0x81108540
-	.text       start:0x8150BE98 end:0x8150C290
-	.sbss       start:0x81698F20 end:0x81698F28
+	.text       start:0x8150BF94 end:0x8150C38C
+	.sbss       start:0x8169ADC0 end:0x8169ADC8
 
 libs/NW4R/snd/snd_StrmChannel.cpp:
-	.text       start:0x8150C290 end:0x8150C4B0
+	.text       start:0x8150C38C end:0x8150C5AC
 
 libs/NW4R/snd/snd_StrmFile.cpp:
-	.text       start:0x8150C4B0 end:0x8150C8D8
+	.text       start:0x8150C5AC end:0x8150C9D4
 
 libs/NW4R/snd/snd_StrmPlayer.cpp:
 	.bss        start:0x81108540 end:0x8110C580
-	.text       start:0x8150C8D8 end:0x8150E7C4
-	.ctors      start:0x8160D234 end:0x8160D238
-	.data       start:0x8166F9F8 end:0x8166FAA0
-	.sdata2     start:0x816953A0 end:0x816953A8
+	.text       start:0x8150C9D4 end:0x8150E8C0
+	.ctors      start:0x8160D474 end:0x8160D478
+	.data       start:0x8166FCB8 end:0x8166FD60
+	.sdata2     start:0x81697240 end:0x81697248
 
 libs/NW4R/snd/snd_StrmSound.cpp:
-	.text       start:0x8150E7C4 end:0x8150EAD8
-	.ctors      start:0x8160D238 end:0x8160D23C
-	.data       start:0x8166FAA0 end:0x8166FB08
-	.sbss       start:0x81698F28 end:0x81698F30
+	.text       start:0x8150E8C0 end:0x8150EBD4
+	.ctors      start:0x8160D478 end:0x8160D47C
+	.data       start:0x8166FD60 end:0x8166FDC8
+	.sbss       start:0x8169ADC8 end:0x8169ADD0
 
 libs/NW4R/snd/snd_StrmSoundHandle.cpp:
-	.text       start:0x8150EAD8 end:0x8150EB10
+	.text       start:0x8150EBD4 end:0x8150EC0C
 
 libs/NW4R/snd/snd_TaskManager.cpp:
 	.bss        start:0x8110C580 end:0x8110E618
-	.text       start:0x8150EB10 end:0x8150F018
-	.sbss       start:0x81698F30 end:0x81698F38
+	.text       start:0x8150EC0C end:0x8150F114
+	.sbss       start:0x8169ADD0 end:0x8169ADD8
 
 libs/NW4R/snd/snd_TaskThread.cpp:
 	.bss        start:0x8110E618 end:0x81110980
-	.text       start:0x8150F018 end:0x8150F18C
-	.sbss       start:0x81698F38 end:0x81698F40
+	.text       start:0x8150F114 end:0x8150F288
+	.sbss       start:0x8169ADD8 end:0x8169ADE0
 
 libs/NW4R/snd/snd_Util.cpp:
-	.text       start:0x8150F18C end:0x8150F4F0
-	.rodata     start:0x8161E6A8 end:0x8161FDF0
-	.sdata2     start:0x816953A8 end:0x816953F0
-	.sdata      start:0x81697DA8 end:0x81697DB0
+	.text       start:0x8150F288 end:0x8150F5EC
+	.rodata     start:0x8161E8E8 end:0x81620030
+	.sdata2     start:0x81697248 end:0x81697290
+	.sdata      start:0x81699C48 end:0x81699C50
 
 libs/NW4R/snd/snd_WaveFile.cpp:
-	.text       start:0x8150F4F0 end:0x8150F720
+	.text       start:0x8150F5EC end:0x8150F81C
 
 libs/NW4R/snd/snd_WavePlayer.cpp:
 	.bss        start:0x81110980 end:0x81110998
-	.text       start:0x8150F720 end:0x81510500
-	.ctors      start:0x8160D23C end:0x8160D240
-	.data       start:0x8166FB08 end:0x8166FB20
-	.sdata2     start:0x816953F0 end:0x81695408
+	.text       start:0x8150F81C end:0x815105FC
+	.ctors      start:0x8160D47C end:0x8160D480
+	.data       start:0x8166FDC8 end:0x8166FDE0
+	.sdata2     start:0x81697290 end:0x816972A8
 
 libs/NW4R/snd/snd_WaveSound.cpp:
-	.text       start:0x81510500 end:0x815107F4
-	.ctors      start:0x8160D240 end:0x8160D244
-	.data       start:0x8166FB20 end:0x8166FB88
-	.sbss       start:0x81698F40 end:0x81698F48
+	.text       start:0x815105FC end:0x815108F0
+	.ctors      start:0x8160D480 end:0x8160D484
+	.data       start:0x8166FDE0 end:0x8166FE48
+	.sbss       start:0x8169ADE0 end:0x8169ADE8
 
 libs/NW4R/snd/snd_WaveSoundHandle.cpp:
-	.text       start:0x815107F4 end:0x8151082C
+	.text       start:0x815108F0 end:0x81510928
 
 libs/NW4R/snd/snd_WsdFile.cpp:
-	.text       start:0x8151082C end:0x81510B74
-	.sdata2     start:0x81695408 end:0x81695410
+	.text       start:0x81510928 end:0x81510C70
+	.sdata2     start:0x816972A8 end:0x816972B0
 
 libs/NW4R/snd/snd_WsdPlayer.cpp:
 	.bss        start:0x81110998 end:0x811109B0
-	.text       start:0x81510B74 end:0x815116F4
-	.ctors      start:0x8160D244 end:0x8160D248
-	.data       start:0x8166FB88 end:0x8166FC40
-	.sdata2     start:0x81695410 end:0x81695418
+	.text       start:0x81510C70 end:0x815117F0
+	.ctors      start:0x8160D484 end:0x8160D488
+	.data       start:0x8166FE48 end:0x8166FF00
+	.sdata2     start:0x816972B0 end:0x816972B8
 
 libs/NW4R/snd/snd_WsdTrack.cpp:
-	.text       start:0x815116F4 end:0x8151205C
-	.sdata2     start:0x81695418 end:0x81695440
+	.text       start:0x815117F0 end:0x81512158
+	.sdata2     start:0x816972B8 end:0x816972E0
 
 libs/NW4R/ut/ut_list.cpp:
-	.text       start:0x8151205C end:0x81512364
+	.text       start:0x81512158 end:0x81512460
 
 libs/NW4R/ut/ut_LinkList.cpp:
-	.text       start:0x81512364 end:0x815124D0
+	.text       start:0x81512460 end:0x815125CC
 
 libs/NW4R/ut/ut_binaryFileFormat.cpp:
-	.text       start:0x815124D0 end:0x81512544
+	.text       start:0x815125CC end:0x81512640
 
 libs/NW4R/ut/ut_CharStrmReader.cpp:
-	.text       start:0x81512544 end:0x81512654
+	.text       start:0x81512640 end:0x81512750
 
 libs/NW4R/ut/ut_TagProcessorBase.cpp:
-	.text       start:0x81512654 end:0x81512E14
-	.data       start:0x8166FC40 end:0x8166FC68
-	.sdata2     start:0x81695440 end:0x81695448
+	.text       start:0x81512750 end:0x81512F10
+	.data       start:0x8166FF00 end:0x8166FF28
+	.sdata2     start:0x816972E0 end:0x816972E8
 
 libs/NW4R/ut/ut_IOStream.cpp:
-	.text       start:0x81512E14 end:0x81512E3C
-	.ctors      start:0x8160D248 end:0x8160D24C
-	.sbss       start:0x81698F48 end:0x81698F50
+	.text       start:0x81512F10 end:0x81512F38
+	.ctors      start:0x8160D488 end:0x8160D48C
+	.sbss       start:0x8169ADE8 end:0x8169ADF0
 
 libs/NW4R/ut/ut_FileStream.cpp:
-	.text       start:0x81512E3C end:0x81512FA0
-	.ctors      start:0x8160D24C end:0x8160D250
-	.sbss       start:0x81698F50 end:0x81698F58
+	.text       start:0x81512F38 end:0x8151309C
+	.ctors      start:0x8160D48C end:0x8160D490
+	.sbss       start:0x8169ADF0 end:0x8169ADF8
 
 libs/NW4R/ut/ut_DvdFileStream.cpp:
-	.text       start:0x81512FA0 end:0x81513570
-	.ctors      start:0x8160D250 end:0x8160D254
-	.data       start:0x8166FC68 end:0x8166FCD0
-	.sbss       start:0x81698F58 end:0x81698F60
+	.text       start:0x8151309C end:0x8151366C
+	.ctors      start:0x8160D490 end:0x8160D494
+	.data       start:0x8166FF28 end:0x8166FF90
+	.sbss       start:0x8169ADF8 end:0x8169AE00
 
 libs/NW4R/ut/ut_DvdLockedFileStream.cpp:
 	.bss        start:0x811109B0 end:0x811109C8
-	.text       start:0x81513570 end:0x815137A4
-	.ctors      start:0x8160D254 end:0x8160D258
-	.data       start:0x8166FCD0 end:0x8166FD38
-	.sbss       start:0x81698F60 end:0x81698F68
+	.text       start:0x8151366C end:0x815138A0
+	.ctors      start:0x8160D494 end:0x8160D498
+	.data       start:0x8166FF90 end:0x8166FFF8
+	.sbss       start:0x8169AE00 end:0x8169AE08
 
 libs/NW4R/ut/ut_NandFileStream.cpp:
-	.text       start:0x815137A4 end:0x81514424
-	.ctors      start:0x8160D258 end:0x8160D25C
-	.data       start:0x8166FD38 end:0x8166FD98
-	.sbss       start:0x81698F68 end:0x81698F70
+	.text       start:0x815138A0 end:0x81514520
+	.ctors      start:0x8160D498 end:0x8160D49C
+	.data       start:0x8166FFF8 end:0x81670058
+	.sbss       start:0x8169AE08 end:0x8169AE10
 
 libs/NW4R/ut/ut_Font.cpp:
-	.text       start:0x81514424 end:0x8151450C
-	.data       start:0x8166FD98 end:0x8166FE20
+	.text       start:0x81514520 end:0x81514608
+	.data       start:0x81670058 end:0x816700E0
 
 libs/NW4R/ut/ut_ResFontBase.cpp:
-	.text       start:0x8151450C end:0x81514BB8
-	.data       start:0x8166FE20 end:0x8166FE88
+	.text       start:0x81514608 end:0x81514CB4
+	.data       start:0x816700E0 end:0x81670148
 
 libs/NW4R/ut/ut_ResFont.cpp:
-	.text       start:0x81514BB8 end:0x81514EBC
-	.data       start:0x8166FE88 end:0x8166FEE0
+	.text       start:0x81514CB4 end:0x81514FB8
+	.data       start:0x81670148 end:0x816701A0
 
 libs/NW4R/ut/ut_ArchiveFontBase.cpp:
-	.text       start:0x81514EBC end:0x815162BC
-	.data       start:0x8166FEE0 end:0x8166FF38
-	.sbss2      start:0x81696008 end:0x81696010
+	.text       start:0x81514FB8 end:0x815163B8
+	.data       start:0x816701A0 end:0x816701F8
+	.sbss2      start:0x81697EA8 end:0x81697EB0
 
 libs/NW4R/ut/ut_ArchiveFont.cpp:
-	.text       start:0x815162BC end:0x81516BC4
-	.data       start:0x8166FF38 end:0x8166FFC8
+	.text       start:0x815163B8 end:0x81516CC0
+	.data       start:0x816701F8 end:0x81670288
 
 libs/NW4R/ut/ut_CharWriter.cpp:
 	.bss        start:0x811109C8 end:0x811109E8
-	.text       start:0x81516BC4 end:0x8151870C
-	.sdata2     start:0x81695448 end:0x81695468
-	.sbss       start:0x81698F70 end:0x81698F78
+	.text       start:0x81516CC0 end:0x81518808
+	.sdata2     start:0x816972E8 end:0x81697308
+	.sbss       start:0x8169AE10 end:0x8169AE18
 
 libs/NW4R/ut/ut_TextWriterBase.cpp:
 	.bss        start:0x811109E8 end:0x81110A00
-	.text       start:0x8151870C end:0x8151C458
-	.ctors      start:0x8160D25C end:0x8160D260
-	.sdata2     start:0x81695468 end:0x81695480
-	.sdata      start:0x81697DB0 end:0x81697DB8
-	.sbss       start:0x81698F78 end:0x81698F88
+	.text       start:0x81518808 end:0x8151C554
+	.ctors      start:0x8160D49C end:0x8160D4A0
+	.sdata2     start:0x81697308 end:0x81697320
+	.sdata      start:0x81699C50 end:0x81699C58
+	.sbss       start:0x8169AE18 end:0x8169AE28
 
 libs/NW4R/db/db_directPrint.cpp:
 	.bss        start:0x81110A00 end:0x81110A28
-	.text       start:0x8151C458 end:0x8151CEC4
-	.rodata     start:0x8161FDF0 end:0x816200A8
-	.data       start:0x8166FFC8 end:0x8166FFD8
-	.sbss       start:0x81698F88 end:0x81698F90
+	.text       start:0x8151C554 end:0x8151CFC0
+	.rodata     start:0x81620030 end:0x816202E8
+	.data       start:0x81670288 end:0x81670298
+	.sbss       start:0x8169AE28 end:0x8169AE30
 
 libs/NW4R/db/db_console.cpp:
 	.bss        start:0x81110A28 end:0x81110E40
-	.text       start:0x8151CEC4 end:0x8151D6BC
-	.sdata      start:0x81697DB8 end:0x81697DC0
-	.sbss       start:0x81698F90 end:0x81698F98
+	.text       start:0x8151CFC0 end:0x8151D7B8
+	.sdata      start:0x81699C58 end:0x81699C60
+	.sbss       start:0x8169AE30 end:0x8169AE38
 
 libs/NW4R/db/db_exception.cpp:
 	.bss        start:0x81110E40 end:0x811151A0
-	.text       start:0x8151D6BC end:0x8151E538
-	.data       start:0x8166FFD8 end:0x816705A8
-	.sdata2     start:0x81695480 end:0x81695488
-	.sdata      start:0x81697DC0 end:0x81697DF8
-	.sbss       start:0x81698F98 end:0x81698FA0
+	.text       start:0x8151D7B8 end:0x8151E634
+	.data       start:0x81670298 end:0x81670868
+	.sdata2     start:0x81697320 end:0x81697328
+	.sdata      start:0x81699C60 end:0x81699C98
+	.sbss       start:0x8169AE38 end:0x8169AE40
 
 libs/NW4R/math/math_arithmetic.cpp:
-	.text       start:0x8151E538 end:0x8151E5B4
-	.sdata2     start:0x81695488 end:0x81695490
+	.text       start:0x8151E634 end:0x8151E6B0
+	.sdata2     start:0x81697328 end:0x81697330
 
 libs/NW4R/math/math_triangular.cpp:
-	.text       start:0x8151E5B4 end:0x8151E824
-	.data       start:0x816705A8 end:0x816716C0
-	.sdata2     start:0x81695490 end:0x816954B0
+	.text       start:0x8151E6B0 end:0x8151E920
+	.data       start:0x81670868 end:0x81671980
+	.sdata2     start:0x81697330 end:0x81697350
 
 libs/NW4R/math/math_types.cpp:
-	.text       start:0x8151E824 end:0x8151E964
-	.sdata2     start:0x816954B0 end:0x816954B8
+	.text       start:0x8151E920 end:0x8151EA60
+	.sdata2     start:0x81697350 end:0x81697358
 
 libs/NW4R/lyt/lyt_pane.cpp:
-	.text       start:0x8151E964 end:0x8151FB98
-	.ctors      start:0x8160D260 end:0x8160D264
-	.data       start:0x816716C0 end:0x81671768
-	.sdata2     start:0x816954B8 end:0x816954E0
-	.sbss       start:0x81698FA0 end:0x81698FA8
+	.text       start:0x8151EA60 end:0x8151FC94
+	.ctors      start:0x8160D4A0 end:0x8160D4A4
+	.data       start:0x81671980 end:0x81671A28
+	.sdata2     start:0x81697358 end:0x81697380
+	.sbss       start:0x8169AE40 end:0x8169AE48
 
 libs/NW4R/lyt/lyt_group.cpp:
-	.text       start:0x8151FB98 end:0x8151FEB8
-	.data       start:0x81671768 end:0x81671778
+	.text       start:0x8151FC94 end:0x8151FFB4
+	.data       start:0x81671A28 end:0x81671A38
 
 libs/NW4R/lyt/lyt_layout.cpp:
-	.text       start:0x8151FEB8 end:0x81520B28
-	.data       start:0x81671778 end:0x816717B0
-	.sdata2     start:0x816954E0 end:0x816954E8
-	.sbss       start:0x81698FA8 end:0x81698FB0
+	.text       start:0x8151FFB4 end:0x81520C24
+	.data       start:0x81671A38 end:0x81671A70
+	.sdata2     start:0x81697380 end:0x81697388
+	.sbss       start:0x8169AE48 end:0x8169AE50
 
 libs/NW4R/lyt/lyt_picture.cpp:
-	.text       start:0x81520B28 end:0x8152135C
-	.ctors      start:0x8160D264 end:0x8160D268
-	.data       start:0x816717B0 end:0x81671860
-	.sdata2     start:0x816954E8 end:0x81695500
-	.sbss       start:0x81698FB0 end:0x81698FB8
+	.text       start:0x81520C24 end:0x81521458
+	.ctors      start:0x8160D4A4 end:0x8160D4A8
+	.data       start:0x81671A70 end:0x81671B20
+	.sdata2     start:0x81697388 end:0x816973A0
+	.sbss       start:0x8169AE50 end:0x8169AE58
 
 libs/NW4R/lyt/lyt_textbox.cpp:
-	.text       start:0x8152135C end:0x81522F1C
-	.ctors      start:0x8160D268 end:0x8160D26C
-	.data       start:0x81671860 end:0x816719A0
-	.sdata2     start:0x81695500 end:0x81695528
-	.sdata      start:0x81697DF8 end:0x81697E00
-	.sbss       start:0x81698FB8 end:0x81698FC0
+	.text       start:0x81521458 end:0x81523018
+	.ctors      start:0x8160D4A8 end:0x8160D4AC
+	.data       start:0x81671B20 end:0x81671C60
+	.sdata2     start:0x816973A0 end:0x816973C8
+	.sdata      start:0x81699C98 end:0x81699CA0
+	.sbss       start:0x8169AE58 end:0x8169AE60
 
 libs/NW4R/lyt/lyt_window.cpp:
-	.text       start:0x81522F1C end:0x81525B74
-	.ctors      start:0x8160D26C end:0x8160D270
-	.data       start:0x816719A0 end:0x81671AA0
-	.sdata2     start:0x81695528 end:0x81695558
-	.sbss       start:0x81698FC0 end:0x81698FC8
+	.text       start:0x81523018 end:0x81525C70
+	.ctors      start:0x8160D4AC end:0x8160D4B0
+	.data       start:0x81671C60 end:0x81671D60
+	.sdata2     start:0x816973C8 end:0x816973F8
+	.sbss       start:0x8169AE60 end:0x8169AE68
 
 libs/NW4R/lyt/lyt_bounding.cpp:
-	.text       start:0x81525B74 end:0x81525C20
-	.ctors      start:0x8160D270 end:0x8160D274
-	.data       start:0x81671AA0 end:0x81671B08
-	.sbss       start:0x81698FC8 end:0x81698FD0
+	.text       start:0x81525C70 end:0x81525D1C
+	.ctors      start:0x8160D4B0 end:0x8160D4B4
+	.data       start:0x81671D60 end:0x81671DC8
+	.sbss       start:0x8169AE68 end:0x8169AE70
 
 libs/NW4R/lyt/lyt_material.cpp:
-	.text       start:0x81525C20 end:0x815291A8
-	.data       start:0x81671B08 end:0x81671B70
-	.sdata2     start:0x81695558 end:0x81695578
-	.sbss2      start:0x81696010 end:0x81696018
+	.text       start:0x81525D1C end:0x815292A4
+	.data       start:0x81671DC8 end:0x81671E30
+	.sdata2     start:0x816973F8 end:0x81697418
+	.sbss2      start:0x81697EB0 end:0x81697EB8
 
 libs/NW4R/lyt/lyt_drawinfo.cpp:
-	.text       start:0x815291A8 end:0x8152925C
-	.data       start:0x81671B70 end:0x81671B80
-	.sdata2     start:0x81695578 end:0x81695580
+	.text       start:0x815292A4 end:0x81529358
+	.data       start:0x81671E30 end:0x81671E40
+	.sdata2     start:0x81697418 end:0x81697420
 
 libs/NW4R/lyt/lyt_animation.cpp:
-	.text       start:0x8152925C end:0x8152A0D0
-	.data       start:0x81671B80 end:0x81671C30
-	.sdata2     start:0x81695580 end:0x816955B0
+	.text       start:0x81529358 end:0x8152A1CC
+	.data       start:0x81671E40 end:0x81671EF0
+	.sdata2     start:0x81697420 end:0x81697450
 
 libs/NW4R/lyt/lyt_resourceAccessor.cpp:
-	.text       start:0x8152A0D0 end:0x8152A128
-	.data       start:0x81671C30 end:0x81671C48
+	.text       start:0x8152A1CC end:0x8152A224
+	.data       start:0x81671EF0 end:0x81671F08
 
 libs/NW4R/lyt/lyt_arcResourceAccessor.cpp:
-	.text       start:0x8152A128 end:0x8152A644
-	.data       start:0x81671C48 end:0x81671C60
-	.sdata2     start:0x816955B0 end:0x816955C0
-	.sdata      start:0x81697E00 end:0x81697E08
+	.text       start:0x8152A224 end:0x8152A740
+	.data       start:0x81671F08 end:0x81671F20
+	.sdata2     start:0x81697450 end:0x81697460
+	.sdata      start:0x81699CA0 end:0x81699CA8
 
 libs/NW4R/lyt/lyt_common.cpp:
 	.bss        start:0x811151A0 end:0x811151C0
-	.text       start:0x8152A644 end:0x8152B340
-	.sdata2     start:0x816955C0 end:0x816955D0
-	.sbss       start:0x81698FD0 end:0x81698FD8
+	.text       start:0x8152A740 end:0x8152B43C
+	.sdata2     start:0x81697460 end:0x81697470
+	.sbss       start:0x8169AE70 end:0x8169AE78
 
 libs/RVL_SDK/base/PPCArch.c:
-	.text       start:0x8152B340 end:0x8152B4B0
-	.data       start:0x81671C60 end:0x81671C98
+	.text       start:0x8152B43C end:0x8152B5AC
+	.data       start:0x81671F20 end:0x81671F58
 
 libs/RVL_SDK/os/OS.c:
 	.bss        start:0x811151C0 end:0x81115230
-	.text       start:0x8152B4B0 end:0x8152C88C
-	.data       start:0x81671C98 end:0x81672088
-	.sdata      start:0x81697E08 end:0x81697E38
-	.sbss       start:0x81698FD8 end:0x81699020
+	.text       start:0x8152B5AC end:0x8152C988
+	.data       start:0x81671F58 end:0x81672348
+	.sdata      start:0x81699CA8 end:0x81699CD8
+	.sbss       start:0x8169AE78 end:0x8169AEC0
 
 libs/RVL_SDK/os/OSAlarm.c:
-	.text       start:0x8152C88C end:0x8152D070
-	.data       start:0x81672088 end:0x81672098
-	.sbss       start:0x81699020 end:0x81699028
+	.text       start:0x8152C988 end:0x8152D16C
+	.data       start:0x81672348 end:0x81672358
+	.sbss       start:0x8169AEC0 end:0x8169AEC8
 
 libs/RVL_SDK/os/OSAlloc.c:
-	.text       start:0x8152D070 end:0x8152D378
-	.sdata      start:0x81697E38 end:0x81697E40
-	.sbss       start:0x81699028 end:0x81699038
+	.text       start:0x8152D16C end:0x8152D474
+	.sdata      start:0x81699CD8 end:0x81699CE0
+	.sbss       start:0x8169AEC8 end:0x8169AED8
 
 libs/RVL_SDK/os/OSArena.c:
-	.text       start:0x8152D378 end:0x8152D440
-	.sdata      start:0x81697E40 end:0x81697E48
-	.sbss       start:0x81699038 end:0x81699040
+	.text       start:0x8152D474 end:0x8152D53C
+	.sdata      start:0x81699CE0 end:0x81699CE8
+	.sbss       start:0x8169AED8 end:0x8169AEE0
 
 libs/RVL_SDK/os/OSAudioSystem.c:
-	.text       start:0x8152D440 end:0x8152D8F4
-	.data       start:0x81672098 end:0x81672118
+	.text       start:0x8152D53C end:0x8152D9F0
+	.data       start:0x81672358 end:0x816723D8
 
 libs/RVL_SDK/os/OSCache.c:
-	.text       start:0x8152D8F4 end:0x8152DCEC
-	.data       start:0x81672118 end:0x81672350
+	.text       start:0x8152D9F0 end:0x8152DDE8
+	.data       start:0x816723D8 end:0x81672610
 
 libs/RVL_SDK/os/OSContext.c:
-	.text       start:0x8152DCEC end:0x8152E6A0
-	.data       start:0x81672350 end:0x81672530
+	.text       start:0x8152DDE8 end:0x8152E79C
+	.data       start:0x81672610 end:0x816727F0
 
 libs/RVL_SDK/os/OSError.c:
 	.bss        start:0x81115230 end:0x81115280
-	.text       start:0x8152E6A0 end:0x8152EDD4
-	.data       start:0x81672530 end:0x81672850
-	.sdata      start:0x81697E48 end:0x81697E50
+	.text       start:0x8152E79C end:0x8152EED0
+	.data       start:0x816727F0 end:0x81672B10
+	.sdata      start:0x81699CE8 end:0x81699CF0
 
 libs/RVL_SDK/os/OSExec.c:
-	.text       start:0x8152EDD4 end:0x8152FB68
-	.data       start:0x81672850 end:0x81672BA0
-	.sdata      start:0x81697E50 end:0x81697E58
-	.sbss       start:0x81699040 end:0x81699048
+	.text       start:0x8152EED0 end:0x8152FC64
+	.data       start:0x81672B10 end:0x81672E60
+	.sdata      start:0x81699CF0 end:0x81699CF8
+	.sbss       start:0x8169AEE0 end:0x8169AEE8
 
 libs/RVL_SDK/os/OSFont.c:
-	.text       start:0x8152FB68 end:0x81530884
-	.data       start:0x81672BA0 end:0x816736B0
-	.sdata2     start:0x816955D0 end:0x816955D8
-	.sdata      start:0x81697E58 end:0x81697E60
-	.sbss       start:0x81699048 end:0x81699058
+	.text       start:0x8152FC64 end:0x81530980
+	.data       start:0x81672E60 end:0x81673970
+	.sdata2     start:0x81697470 end:0x81697478
+	.sdata      start:0x81699CF8 end:0x81699D00
+	.sbss       start:0x8169AEE8 end:0x8169AEF8
 
 libs/RVL_SDK/os/OSInterrupt.c:
-	.text       start:0x81530884 end:0x81531008
-	.data       start:0x816736B0 end:0x816736E0
-	.sbss       start:0x81699058 end:0x81699070
+	.text       start:0x81530980 end:0x81531104
+	.data       start:0x81673970 end:0x816739A0
+	.sbss       start:0x8169AEF8 end:0x8169AF10
 
 libs/RVL_SDK/os/OSLink.c:
-	.text       start:0x81531008 end:0x81531020
+	.text       start:0x81531104 end:0x8153111C
 
 libs/RVL_SDK/os/OSMessage.c:
-	.text       start:0x81531020 end:0x815312F4
+	.text       start:0x8153111C end:0x815313F0
 
 libs/RVL_SDK/os/OSMemory.c:
-	.text       start:0x815312F4 end:0x81531BD0
-	.data       start:0x816736E0 end:0x816736F0
+	.text       start:0x815313F0 end:0x81531CCC
+	.data       start:0x816739A0 end:0x816739B0
 
 libs/RVL_SDK/os/OSMutex.c:
-	.text       start:0x81531BD0 end:0x81532160
+	.text       start:0x81531CCC end:0x8153225C
 
 libs/RVL_SDK/os/OSReset.c:
-	.text       start:0x81532160 end:0x8153267C
-	.data       start:0x816736F0 end:0x81673978
-	.sdata      start:0x81697E60 end:0x81697E68
-	.sbss       start:0x81699070 end:0x81699080
+	.text       start:0x8153225C end:0x81532778
+	.data       start:0x816739B0 end:0x81673C38
+	.sdata      start:0x81699D00 end:0x81699D08
+	.sbss       start:0x8169AF10 end:0x8169AF20
 
 libs/RVL_SDK/os/OSRtc.c:
 	.bss        start:0x81115280 end:0x811152D8
-	.text       start:0x8153267C end:0x81533AB0
+	.text       start:0x81532778 end:0x81533BAC
 
 libs/RVL_SDK/os/OSSemaphore.c:
-	.text       start:0x81533AB0 end:0x81533BD8
+	.text       start:0x81533BAC end:0x81533CD4
 
 libs/RVL_SDK/os/OSSync.c:
-	.text       start:0x81533BD8 end:0x81533C58
+	.text       start:0x81533CD4 end:0x81533D54
 
 libs/RVL_SDK/os/OSThread.c:
 	.bss        start:0x811152D8 end:0x81115CE0
-	.text       start:0x81533C58 end:0x81535C80
-	.data       start:0x81673978 end:0x81674188
-	.sdata      start:0x81697E68 end:0x81697E70
-	.sbss       start:0x81699080 end:0x81699090
+	.text       start:0x81533D54 end:0x81535D7C
+	.data       start:0x81673C38 end:0x81674448
+	.sdata      start:0x81699D08 end:0x81699D10
+	.sbss       start:0x8169AF20 end:0x8169AF30
 
 libs/RVL_SDK/os/OSTime.c:
-	.text       start:0x81535C80 end:0x815363CC
-	.data       start:0x81674188 end:0x816741E8
+	.text       start:0x81535D7C end:0x815364C8
+	.data       start:0x81674448 end:0x816744A8
 
 libs/RVL_SDK/os/OSUtf.c:
-	.text       start:0x815363CC end:0x81536604
-	.data       start:0x816741E8 end:0x81680028
+	.text       start:0x815364C8 end:0x81536700
+	.data       start:0x816744A8 end:0x816802E8
 
 libs/RVL_SDK/os/OSIpc.c:
-	.text       start:0x81536604 end:0x8153662C
-	.sdata      start:0x81697E70 end:0x81697E78
-	.sbss       start:0x81699090 end:0x81699098
+	.text       start:0x81536700 end:0x81536728
+	.sdata      start:0x81699D10 end:0x81699D18
+	.sbss       start:0x8169AF30 end:0x8169AF38
 
 libs/RVL_SDK/os/OSStateTM.c:
 	.bss        start:0x81115CE0 end:0x81115DA0
-	.text       start:0x8153662C end:0x81536D78
-	.data       start:0x81680028 end:0x816800F0
-	.sbss       start:0x81699098 end:0x816990B8
+	.text       start:0x81536728 end:0x81536E74
+	.data       start:0x816802E8 end:0x816803B0
+	.sbss       start:0x8169AF38 end:0x8169AF58
 
 libs/RVL_SDK/os/time.dolphin.c:
-	.text       start:0x81536D78 end:0x81536DC4
+	.text       start:0x81536E74 end:0x81536EC0
 
 libs/RVL_SDK/os/OSPlayRecord.c:
 	.bss        start:0x81115DA0 end:0x81115FA0
-	.text       start:0x81536DC4 end:0x815376B4
-	.data       start:0x816800F0 end:0x81680138
-	.sbss       start:0x816990B8 end:0x816990D8
+	.text       start:0x81536EC0 end:0x815377B0
+	.data       start:0x816803B0 end:0x816803F8
+	.sbss       start:0x8169AF58 end:0x8169AF78
 
 libs/RVL_SDK/os/OSStateFlags.c:
 	.bss        start:0x81115FA0 end:0x81115FC0
-	.text       start:0x815376B4 end:0x8153792C
-	.data       start:0x81680138 end:0x81680160
+	.text       start:0x815377B0 end:0x81537A28
+	.data       start:0x816803F8 end:0x81680420
 
 libs/RVL_SDK/os/OSNet.c:
-	.text       start:0x8153792C end:0x815379E8
-	.data       start:0x81680160 end:0x816802C8
+	.text       start:0x81537A28 end:0x81537AE4
+	.data       start:0x81680420 end:0x81680588
 
 libs/RVL_SDK/os/OSNandbootInfo.c:
-	.text       start:0x815379E8 end:0x81537D88
-	.data       start:0x816802C8 end:0x816802E8
+	.text       start:0x81537AE4 end:0x81537E84
+	.data       start:0x81680588 end:0x816805A8
 
 libs/RVL_SDK/os/OSPlayTime.c:
 	.bss        start:0x81115FC0 end:0x81115FF0
-	.text       start:0x81537D88 end:0x81538608
-	.data       start:0x816802E8 end:0x81680328
-	.sdata2     start:0x816955D8 end:0x816955E8
-	.sdata      start:0x81697E78 end:0x81697E88
-	.sbss       start:0x816990D8 end:0x816990F0
+	.text       start:0x81537E84 end:0x81538704
+	.data       start:0x816805A8 end:0x816805E8
+	.sdata2     start:0x81697478 end:0x81697488
+	.sdata      start:0x81699D18 end:0x81699D28
+	.sbss       start:0x8169AF78 end:0x8169AF90
 
 libs/RVL_SDK/os/__ppc_eabi_init.cpp:
 	.init       start:0x813301D8 end:0x81330230
-	.text       start:0x81538608 end:0x815386BC
+	.text       start:0x81538704 end:0x815387B8
 
 libs/RVL_SDK/exi/EXIBios.c:
 	.bss        start:0x81115FF0 end:0x811160B0
-	.text       start:0x815386BC end:0x8153A154
-	.data       start:0x81680328 end:0x81680370
-	.sdata      start:0x81697E88 end:0x81697E90
-	.sbss       start:0x816990F0 end:0x816990F8
+	.text       start:0x815387B8 end:0x8153A250
+	.data       start:0x816805E8 end:0x81680630
+	.sdata      start:0x81699D28 end:0x81699D30
+	.sbss       start:0x8169AF90 end:0x8169AF98
 
 libs/RVL_SDK/exi/EXIUart.c:
-	.text       start:0x8153A154 end:0x8153A488
-	.sbss       start:0x816990F8 end:0x81699108
+	.text       start:0x8153A250 end:0x8153A584
+	.sbss       start:0x8169AF98 end:0x8169AFA8
 
 libs/RVL_SDK/exi/EXICommon.c:
-	.text       start:0x8153A488 end:0x8153A614
-	.sdata2     start:0x816955E8 end:0x816955F0
+	.text       start:0x8153A584 end:0x8153A710
+	.sdata2     start:0x81697488 end:0x81697490
 
 libs/RVL_SDK/si/SIBios.c:
 	.bss        start:0x811160B0 end:0x811162D0
-	.text       start:0x8153A614 end:0x8153BB84
-	.data       start:0x81680370 end:0x816803E0
-	.sdata      start:0x81697E90 end:0x81697E98
-	.sbss       start:0x81699108 end:0x81699118
+	.text       start:0x8153A710 end:0x8153BC80
+	.data       start:0x81680630 end:0x816806A0
+	.sdata      start:0x81699D30 end:0x81699D38
+	.sbss       start:0x8169AFA8 end:0x8169AFB8
 
 libs/RVL_SDK/si/SISamplingRate.c:
-	.text       start:0x8153BB84 end:0x8153BC64
-	.data       start:0x816803E0 end:0x81680478
-	.sbss       start:0x81699118 end:0x81699120
+	.text       start:0x8153BC80 end:0x8153BD60
+	.data       start:0x816806A0 end:0x81680738
+	.sbss       start:0x8169AFB8 end:0x8169AFC0
 
 libs/RVL_SDK/db/db.c:
-	.text       start:0x8153BC64 end:0x8153BD4C
-	.data       start:0x81680478 end:0x81680490
-	.sbss       start:0x81699120 end:0x81699128
+	.text       start:0x8153BD60 end:0x8153BE48
+	.data       start:0x81680738 end:0x81680750
+	.sbss       start:0x8169AFC0 end:0x8169AFC8
 
 libs/RVL_SDK/vi/vi.c:
 	.bss        start:0x811162D0 end:0x81116440
-	.text       start:0x8153BD4C end:0x8153E96C
-	.data       start:0x81680490 end:0x816809E8
-	.sdata      start:0x81697E98 end:0x81697EB8
-	.sbss       start:0x81699128 end:0x816991D8
+	.text       start:0x8153BE48 end:0x8153EA68
+	.data       start:0x81680750 end:0x81680CA8
+	.sdata      start:0x81699D38 end:0x81699D58
+	.sbss       start:0x8169AFC8 end:0x8169B078
 
 libs/RVL_SDK/vi/i2c.c:
-	.text       start:0x8153E96C end:0x8153F2F0
-	.sdata      start:0x81697EB8 end:0x81697EC0
-	.sbss       start:0x816991D8 end:0x816991E0
+	.text       start:0x8153EA68 end:0x8153F3EC
+	.sdata      start:0x81699D58 end:0x81699D60
+	.sbss       start:0x8169B078 end:0x8169B080
 
 libs/RVL_SDK/vi/vi3in1.c:
 	.bss        start:0x81116440 end:0x81116460
-	.text       start:0x8153F2F0 end:0x81540E30
-	.data       start:0x816809E8 end:0x81680F80
-	.sdata      start:0x81697EC0 end:0x81697ED8
-	.sbss       start:0x816991E0 end:0x816991F8
+	.text       start:0x8153F3EC end:0x81540F2C
+	.data       start:0x81680CA8 end:0x81681240
+	.sdata      start:0x81699D60 end:0x81699D78
+	.sbss       start:0x8169B080 end:0x8169B098
 
 libs/RVL_SDK/mtx/mtx.c:
-	.text       start:0x81540E30 end:0x815414BC
-	.sdata2     start:0x816955F0 end:0x816955F8
-	.sdata      start:0x81697ED8 end:0x81697EE0
+	.text       start:0x81540F2C end:0x815415B8
+	.sdata2     start:0x81697490 end:0x81697498
+	.sdata      start:0x81699D78 end:0x81699D80
 
 libs/RVL_SDK/mtx/mtxvec.c:
-	.text       start:0x815414BC end:0x81541510
+	.text       start:0x815415B8 end:0x8154160C
 
 libs/RVL_SDK/mtx/mtx44.c:
-	.text       start:0x81541510 end:0x81541694
-	.sdata2     start:0x816955F8 end:0x81695610
+	.text       start:0x8154160C end:0x81541790
+	.sdata2     start:0x81697498 end:0x816974B0
 
 libs/RVL_SDK/mtx/vec.c:
-	.text       start:0x81541694 end:0x81541714
-	.sdata2     start:0x81695610 end:0x81695618
+	.text       start:0x81541790 end:0x81541810
+	.sdata2     start:0x816974B0 end:0x816974B8
 
 libs/RVL_SDK/gx/GXInit.c:
 	.bss        start:0x81116460 end:0x81116AE0
-	.text       start:0x81541714 end:0x815428E0
-	.data       start:0x81680F80 end:0x816811C0
-	.sdata2     start:0x81695618 end:0x81695640
-	.sdata      start:0x81697EE0 end:0x81697EE8
-	.sbss       start:0x816991F8 end:0x81699220
+	.text       start:0x81541810 end:0x815429DC
+	.data       start:0x81681240 end:0x81681480
+	.sdata2     start:0x816974B8 end:0x816974E0
+	.sdata      start:0x81699D80 end:0x81699D88
+	.sbss       start:0x8169B098 end:0x8169B0C0
 
 libs/RVL_SDK/gx/GXFifo.c:
 	.bss        start:0x81116AE0 end:0x81116B28
-	.text       start:0x815428E0 end:0x8154348C
-	.data       start:0x816811C0 end:0x816811F0
-	.sbss       start:0x81699220 end:0x81699240
+	.text       start:0x815429DC end:0x81543588
+	.data       start:0x81681480 end:0x816814B0
+	.sbss       start:0x8169B0C0 end:0x8169B0E0
 
 libs/RVL_SDK/gx/GXAttr.c:
-	.text       start:0x8154348C end:0x81543F80
-	.data       start:0x816811F0 end:0x81681350
-	.sdata      start:0x81697EE8 end:0x81697EF8
+	.text       start:0x81543588 end:0x8154407C
+	.data       start:0x816814B0 end:0x81681610
+	.sdata      start:0x81699D88 end:0x81699D98
 
 libs/RVL_SDK/gx/GXMisc.c:
-	.text       start:0x81543F80 end:0x8154477C
-	.sbss       start:0x81699240 end:0x81699258
+	.text       start:0x8154407C end:0x81544878
+	.sbss       start:0x8169B0E0 end:0x8169B0F8
 
 libs/RVL_SDK/gx/GXGeometry.c:
-	.text       start:0x8154477C end:0x81544D3C
+	.text       start:0x81544878 end:0x81544E38
 
 libs/RVL_SDK/gx/GXFrameBuf.c:
-	.text       start:0x81544D3C end:0x8154577C
-	.data       start:0x81681350 end:0x81681440
-	.sdata2     start:0x81695640 end:0x81695650
+	.text       start:0x81544E38 end:0x81545878
+	.data       start:0x81681610 end:0x81681700
+	.sdata2     start:0x816974E0 end:0x816974F0
 
 libs/RVL_SDK/gx/GXLight.c:
-	.text       start:0x8154577C end:0x81545A8C
+	.text       start:0x81545878 end:0x81545B88
 
 libs/RVL_SDK/gx/GXTexture.c:
-	.text       start:0x81545A8C end:0x8154694C
-	.data       start:0x81681440 end:0x81681668
-	.sdata2     start:0x81695650 end:0x81695678
-	.sdata      start:0x81697EF8 end:0x81697F38
+	.text       start:0x81545B88 end:0x81546A48
+	.data       start:0x81681700 end:0x81681928
+	.sdata2     start:0x816974F0 end:0x81697518
+	.sdata      start:0x81699D98 end:0x81699DD8
 
 libs/RVL_SDK/gx/GXBump.c:
-	.text       start:0x8154694C end:0x81546D98
-	.sdata2     start:0x81695678 end:0x81695680
+	.text       start:0x81546A48 end:0x81546E94
+	.sdata2     start:0x81697518 end:0x81697520
 
 libs/RVL_SDK/gx/GXTev.c:
-	.text       start:0x81546D98 end:0x81547418
-	.data       start:0x81681668 end:0x816816E0
+	.text       start:0x81546E94 end:0x81547514
+	.data       start:0x81681928 end:0x816819A0
 
 libs/RVL_SDK/gx/GXPixel.c:
-	.text       start:0x81547418 end:0x81547A1C
-	.data       start:0x816816E0 end:0x81681700
-	.sdata2     start:0x81695680 end:0x816956B8
+	.text       start:0x81547514 end:0x81547B18
+	.data       start:0x816819A0 end:0x816819C0
+	.sdata2     start:0x81697520 end:0x81697558
 
 libs/RVL_SDK/gx/GXDisplayList.c:
 	.bss        start:0x81116B28 end:0x81117240
-	.text       start:0x81547A1C end:0x81547BEC
+	.text       start:0x81547B18 end:0x81547CE8
 
 libs/RVL_SDK/gx/GXTransform.c:
-	.text       start:0x81547BEC end:0x81548144
-	.sdata2     start:0x816956B8 end:0x816956D0
+	.text       start:0x81547CE8 end:0x81548240
+	.sdata2     start:0x81697558 end:0x81697570
 
 libs/RVL_SDK/gx/GXPerf.c:
-	.text       start:0x81548144 end:0x81548980
-	.data       start:0x81681700 end:0x816817F0
+	.text       start:0x81548240 end:0x81548A7C
+	.data       start:0x816819C0 end:0x81681AB0
 
 libs/RVL_SDK/dvd/dvdfs.c:
-	.text       start:0x81548980 end:0x815497D4
-	.data       start:0x816817F0 end:0x81681990
-	.sdata      start:0x81697F38 end:0x81697F48
+	.text       start:0x81548A7C end:0x815498D0
+	.data       start:0x81681AB0 end:0x81681C50
+	.sdata      start:0x81699DD8 end:0x81699DE8
 
 libs/Runtime/__mem.c:
 	.init       start:0x81330230 end:0x81330364
-	.text       start:0x815F8EFC end:0x815F8F18
+	.text       start:0x815F9154 end:0x815F9170
 
 libs/Runtime/global_destructor_chain.c:
-	.text       start:0x815F8FE0 end:0x815F9040
-	.sbss       start:0x816997D0 end:0x816997D8
+	.text       start:0x815F9238 end:0x815F9298
+	.sbss       start:0x8169B670 end:0x8169B678
 
 libs/Runtime/__init_cpp_exceptions.cpp:
-	.text       start:0x815F9D08 end:0x815F9D78
-	.ctors      start:0x8160D1C0 end:0x8160D1C4
-	.dtors      start:0x8160D280 end:0x8160D288
-	.sdata      start:0x816985F8 end:0x81698600
+	.text       start:0x815F9F60 end:0x815F9FD0
+	.ctors      start:0x8160D400 end:0x8160D404
+	.dtors      start:0x8160D4C0 end:0x8160D4C8
+	.sdata      start:0x8169A498 end:0x8169A4A0

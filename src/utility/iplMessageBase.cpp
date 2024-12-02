@@ -2,7 +2,6 @@
 
 namespace ipl {
     namespace utility {
-
         BOOL ut_message_base::SendMessage(OSMessage msg, s32 flags) {
             return OSSendMessage(&mpMsgQueue, msg, flags) != FALSE;
         }

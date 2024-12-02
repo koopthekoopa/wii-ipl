@@ -3,7 +3,7 @@
 [discord-server-link]: https://discord.gg/hKx3FJJgrV
 [discord-server-badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 This work in progress repository aims to a full 1:1 decompilation of version 4.3 of the Wii Menu.   
-Currenty supported versions:
+Currenty working supported versions:
 - 4.3U (USA)   
 - 4.3E (Europe)   
 
@@ -76,12 +76,12 @@ Here are a list of tools that get downloaded when you run `make prepare`:
 |-------------------------------|-----------------------------|
 |`ipl.43U.app` (Wii Menu 4.3U)|`26116613f624061ba99c8d1a299aaa6efa85670d`|
 |`ipl.43E.app` (Wii Menu 4.3E)|`2ebea6ed22473857ed64b12daa71ae2d1ed61708`|
+|`ipl.43J.app` (Wii Menu 4.3J)|`c94c8e671854d56fa2abd4c4c886e6c62a2c7f0e`|
+|`ipl.43K.app` (Wii Menu 4.3K)|`98496cc8467f0749d7605fc175b1911827aa1fd0`|
 
 # Tools used
 [decomp-toolkit](https://www.github.com/encounter/decomp-toolkit) - A tool that can do a lot and will make decompiling GameCube/Wii games easier and better.   
 [objdiff](https://www.github.com/encounter/objdiff) - Used to check whenever if the compiled object is matching or not.   
 [Ghidra](https://www.github.com/NationalSecurityAgency/ghidra) - Used to load executables and output a rough decompilaton of a function.   
-   
-Thanks to everyone who contributed to those tools.
 
 

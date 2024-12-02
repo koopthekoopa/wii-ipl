@@ -42,75 +42,75 @@ namespace ipl {
 
             CHANSVmInit(&smCSVm, mpChansWork, CHANS_VM_WORK_SIZE);
 
-            BOOL result = CS_LIB_INITIALIZED(&smCSVm, system);
+            BOOL result = CS_LIB_DONE(&smCSVm, system);
             if (result == false) {
                 OSHalt("CHANSVmSystemMenuInit error\n", 101);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, layout);
+            result = CS_LIB_DONE(&smCSVm, layout);
             if (result == false) {
                 OSHalt("VmLayoutInit error\n", 105);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, pane);
+            result = CS_LIB_DONE(&smCSVm, pane);
             if (result == false) {
                 OSHalt("VmPaneInit error\n", 109);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, material);
+            result = CS_LIB_DONE(&smCSVm, material);
             if (result == false) {
                 OSHalt("VmMaterialInit error\n", 113);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, texture);
+            result = CS_LIB_DONE(&smCSVm, texture);
             if (result == false) {
                 OSHalt("VmTextureInit error\n", 117);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, savedata);
+            result = CS_LIB_DONE(&smCSVm, savedata);
             if (result == false) {
                 OSHalt("VmSaveDataInit error\n", 121);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, vec3);
+            result = CS_LIB_DONE(&smCSVm, vec3);
             if (result == false) {
                 OSHalt("VmVec3Init error\n", 125);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, mtx34);
+            result = CS_LIB_DONE(&smCSVm, mtx34);
             if (result == false) {
                 OSHalt("VmMTX34Init error\n", 129);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, gx);
+            result = CS_LIB_DONE(&smCSVm, gx);
             if (result == false) {
                 OSHalt("VmGXInit error\n", 133);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, textwriter);
+            result = CS_LIB_DONE(&smCSVm, textwriter);
             if (result == false) {
                 OSHalt("VmTextWriterInit error\n", 137);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, font);
+            result = CS_LIB_DONE(&smCSVm, font);
             if (result == false) {
                 OSHalt("VmFontInit error\n", 141);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, rect);
+            result = CS_LIB_DONE(&smCSVm, rect);
             if (result == false) {
                 OSHalt("VmRectInit error\n", 145);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, color);
+            result = CS_LIB_DONE(&smCSVm, color);
             if (result == false) {
                 OSHalt("VmColorInit error\n", 149);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, color_s10);
+            result = CS_LIB_DONE(&smCSVm, color_s10);
             if (result == false) {
                 OSHalt("VmColorS10Init error\n", 153);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, size);
+            result = CS_LIB_DONE(&smCSVm, size);
             if (result == false) {
                 OSHalt("VmSizeInit error\n", 157);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, anim);
+            result = CS_LIB_DONE(&smCSVm, anim);
             if (result == false) {
                 OSHalt("VmAnimInit error\n", 161);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, sound);
+            result = CS_LIB_DONE(&smCSVm, sound);
             if (result == false) {
                 OSHalt("VmSoundInit error\n", 165);
             }
-            result = CS_LIB_INITIALIZED(&smCSVm, iplimage);
+            result = CS_LIB_DONE(&smCSVm, iplimage);
             if (result == false) {
                 OSHalt("VmIplImageInit error\n", 169);
             }

@@ -3,7 +3,7 @@ Sections:
 	.init       type:code align:4
 	extab       type:rodata align:32
 	extabindex  type:rodata align:16
-	.text       type:code align:16
+	.text       type:code align:4
 	.ctors      type:rodata align:4
 	.dtors      type:rodata align:4
 	.rodata     type:rodata align:16
@@ -986,6 +986,7 @@ bannerSound/AudioWaveUtility.cpp:
 	.sdata      start:0x81697298 end:0x816972A0
 
 keyboard/pckeyboard.cpp:
+	.bss        start:0x810C6580 end:0x810C6590
 	.text       start:0x814101D8 end:0x8141711C
 	.ctors      start:0x8160D1EC end:0x8160D1F0
 	.rodata     start:0x81613408 end:0x81614AC0
@@ -1003,6 +1004,7 @@ keyboard/cellphone.cpp:
 	.sdata      start:0x81697328 end:0x81697398
 
 keyboard/inputform.cpp:
+	.bss        start:0x810C6590 end:0x810C65F0
 	.text       start:0x8141BB70 end:0x81428150
 	.ctors      start:0x8160D1F4 end:0x8160D1F8
 	.rodata     start:0x81614FE8 end:0x816152E0
@@ -1017,13 +1019,14 @@ keyboard/candidatebox.cpp:
 	.rodata     start:0x816152E0 end:0x81615658
 	.data       start:0x8165D2D0 end:0x8165E070
 	.sdata2     start:0x81694D90 end:0x81694DE0
-	.sdata      start:0x816973C0 end:0x816973F8
+	.sdata      start:0x816973C0 end:0x816973E0
 
 keyboard/toolbar.cpp:
 	.text       start:0x8142DF10 end:0x8142F468
 	.ctors      start:0x8160D1FC end:0x8160D200
 	.rodata     start:0x81615658 end:0x816158D8
 	.data       start:0x8165E070 end:0x8165E420
+	.sdata      start:0x816973E0 end:0x816973F8
 
 keyboard/predictlang.cpp:
 	.text       start:0x8142F468 end:0x81430A08
@@ -1040,12 +1043,12 @@ keyboard/signwindow.cpp:
 	.sdata      start:0x81697400 end:0x81697408
 
 keyboard/stringbase.cpp:
-	.text       start:0x81432618 end:0x814339C4
+	.text       start:0x81432618 end:0x81433A50
 	.data       start:0x8165F518 end:0x8165F638
 
 keyboard/zistring.cpp:
 	.bss        start:0x810C65F0 end:0x810C8270
-	.text       start:0x814339C4 end:0x81434FD0
+	.text       start:0x81433A50 end:0x81434FD0
 	.rodata     start:0x81615E50 end:0x816163B0
 	.data       start:0x8165F638 end:0x8165F780
 
@@ -1053,11 +1056,12 @@ keyboard/textdrawer.cpp:
 	.bss        start:0x810C8270 end:0x810C87F0
 	.text       start:0x81434FD0 end:0x81435D64
 	.data       start:0x8165F780 end:0x8165F818
-	.sdata2     start:0x81694DE0 end:0x81694E28
+	.sdata2     start:0x81694DE0 end:0x81694E10
 
 keyboard/nw4rmanager.cpp:
 	.text       start:0x81435D64 end:0x81437558
 	.data       start:0x8165F818 end:0x8165F8F0
+	.sdata2     start:0x81694E10 end:0x81694E28
 
 keyboard/manager.cpp:
 	.text       start:0x81437558 end:0x81439608
@@ -1132,7 +1136,7 @@ keyboard/GUIManager.cpp:
 
 keyboard/HKBManager.cpp:
 	.bss        start:0x810C8838 end:0x810C8940
-	.text       start:0x814472C0 end:0x81448AA4
+	.text       start:0x814472C0 end:0x81448A64
 	.ctors      start:0x8160D220 end:0x8160D224
 	.data       start:0x81668EE0 end:0x81668EF8
 
@@ -1140,13 +1144,13 @@ keyboard/HWKeyboard.cpp:
 	.bss        start:0x810C8940 end:0x810C8950
 	.text       start:0x81448AA4 end:0x81449C98
 	.rodata     start:0x81616B88 end:0x81616C78
-	.data       start:0x81668EF8 end:0x81669050
+	.data       start:0x81668EF8 end:0x81669018
 	.sdata2     start:0x81694EF8 end:0x81694F08
 	.sdata      start:0x81697570 end:0x81697578
 
 keyboard/layout.cpp:
 	.text       start:0x81449C98 end:0x8144A5AC
-	.data       start:0x81669050 end:0x81669070
+	.data       start:0x81669018 end:0x81669070
 
 channelScript/CHANSVm.c:
 	.text       start:0x8144A5AC end:0x814576E8
@@ -1156,115 +1160,115 @@ channelScript/CHANSVm.c:
 	.sdata      start:0x81697578 end:0x816977D0
 	.sbss       start:0x81698D50 end:0x81698D60
 
-channelScript/VmSystemMenu.c:
+channelScript/systemmenu/VmSystemMenu.c:
 	.text       start:0x814576E8 end:0x8145802C
 	.rodata     start:0x81617210 end:0x81617380
 	.data       start:0x8166A2B0 end:0x8166A528
 	.sdata      start:0x816977D0 end:0x816977E8
 	.sbss       start:0x81698D60 end:0x81698D68
 
-channelScript/iplCSSystem.cpp:
+channelScript/systemmenu/iplCSSystem.cpp:
 	.text       start:0x8145802C end:0x814581D0
 	.rodata     start:0x81617380 end:0x81617390
 	.data       start:0x8166A528 end:0x8166A548
 	.sdata      start:0x816977E8 end:0x816977F0
 
-channelScript/iplCSLayout.cpp:
+channelScript/systemmenu/iplCSLayout.cpp:
 	.text       start:0x814581D0 end:0x81458588
 	.rodata     start:0x81617390 end:0x816173F0
 	.data       start:0x8166A548 end:0x8166A5C8
 	.sdata      start:0x816977F0 end:0x81697800
 
-channelScript/iplCSPane.cpp:
+channelScript/systemmenu/iplCSPane.cpp:
 	.text       start:0x81458588 end:0x81459C34
 	.rodata     start:0x816173F0 end:0x816174E0
 	.data       start:0x8166A5C8 end:0x8166A728
 	.sdata2     start:0x81694FC0 end:0x81694FC8
 	.sdata      start:0x81697800 end:0x81697848
 
-channelScript/iplCSMaterial.cpp:
+channelScript/systemmenu/iplCSMaterial.cpp:
 	.text       start:0x81459C34 end:0x8145A428
 	.rodata     start:0x816174E0 end:0x81617518
 	.data       start:0x8166A728 end:0x8166A798
 	.sdata      start:0x81697848 end:0x81697858
 
-channelScript/iplCSTexture.cpp:
+channelScript/systemmenu/iplCSTexture.cpp:
 	.text       start:0x8145A428 end:0x8145A894
 	.sdata      start:0x81697858 end:0x81697868
 
-channelScript/iplCSSavedata.cpp:
+channelScript/systemmenu/iplCSSavedata.cpp:
 	.text       start:0x8145A894 end:0x8145BF60
 	.rodata     start:0x81617518 end:0x816175E8
 	.data       start:0x8166A798 end:0x8166A860
 	.sdata      start:0x81697868 end:0x816978D0
 
-channelScript/iplCSVector.cpp:
+channelScript/systemmenu/iplCSVector.cpp:
 	.text       start:0x8145BF60 end:0x8145C3E8
 	.rodata     start:0x816175E8 end:0x81617610
 	.sdata2     start:0x81694FC8 end:0x81694FD0
 	.sdata      start:0x816978D0 end:0x816978E0
 
-channelScript/iplCSGX.cpp:
+channelScript/systemmenu/iplCSGX.cpp:
 	.text       start:0x8145C3E8 end:0x8145C528
 	.rodata     start:0x81617610 end:0x81617698
 	.data       start:0x8166A860 end:0x8166A8E0
 	.sdata      start:0x816978E0 end:0x816978E8
 
-channelScript/iplCSUtil.cpp:
+channelScript/systemmenu/iplCSUtil.cpp:
 	.text       start:0x8145C528 end:0x8145C668
 
-channelScript/iplCSMtx.cpp:
+channelScript/systemmenu/iplCSMtx.cpp:
 	.text       start:0x8145C668 end:0x8145CC3C
 	.rodata     start:0x81617698 end:0x81617738
 	.sdata2     start:0x81694FD0 end:0x81694FE0
 	.sdata      start:0x816978E8 end:0x81697920
 
-channelScript/iplCSTextWriter.cpp:
+channelScript/systemmenu/iplCSTextWriter.cpp:
 	.text       start:0x8145CC3C end:0x8145D164
 	.rodata     start:0x81617738 end:0x81617760
 	.data       start:0x8166A8E0 end:0x8166A920
 	.sdata      start:0x81697920 end:0x81697938
 
-channelScript/iplCSFont.cpp:
+channelScript/systemmenu/iplCSFont.cpp:
 	.text       start:0x8145D164 end:0x8145D224
 	.sdata      start:0x81697938 end:0x81697940
 
-channelScript/iplCSRect.cpp:
+channelScript/systemmenu/iplCSRect.cpp:
 	.text       start:0x8145D224 end:0x8145D5F8
 	.rodata     start:0x81617760 end:0x81617780
 	.data       start:0x8166A920 end:0x8166A948
 	.sdata2     start:0x81694FE0 end:0x81694FE8
 	.sdata      start:0x81697940 end:0x81697948
 
-channelScript/iplCSColor.cpp:
+channelScript/systemmenu/iplCSColor.cpp:
 	.text       start:0x8145D5F8 end:0x8145DC4C
 	.rodata     start:0x81617780 end:0x816177B0
 	.sdata      start:0x81697948 end:0x81697958
 
-channelScript/iplCSColorS10.cpp:
+channelScript/systemmenu/iplCSColorS10.cpp:
 	.text       start:0x8145DC4C end:0x8145E218
 	.rodata     start:0x816177B0 end:0x816177E0
 	.data       start:0x8166A948 end:0x8166A958
 
-channelScript/iplCSSize.cpp:
+channelScript/systemmenu/iplCSSize.cpp:
 	.text       start:0x8145E218 end:0x8145E588
 	.rodata     start:0x816177E0 end:0x816177F8
 	.sdata      start:0x81697958 end:0x81697970
 
-channelScript/iplCSAnim.cpp:
+channelScript/systemmenu/iplCSAnim.cpp:
 	.text       start:0x8145E588 end:0x8145EE24
 	.rodata     start:0x816177F8 end:0x816178A0
 	.data       start:0x8166A958 end:0x8166AA08
 	.sdata2     start:0x81694FE8 end:0x81694FF8
 	.sdata      start:0x81697970 end:0x81697998
 
-channelScript/iplCSSound.cpp:
+channelScript/systemmenu/iplCSSound.cpp:
 	.text       start:0x8145EE24 end:0x8145EF88
 	.rodata     start:0x816178A0 end:0x816178B0
 	.data       start:0x8166AA08 end:0x8166AA20
 	.sdata      start:0x81697998 end:0x816979A8
 
-channelScript/iplCSImage.cpp:
+channelScript/systemmenu/iplCSImage.cpp:
 	.text       start:0x8145EF88 end:0x8145EFD4
 
 libs/RVLMiddleware/eZiText/zi8ezt.c:

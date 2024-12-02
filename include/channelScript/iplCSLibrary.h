@@ -3,11 +3,9 @@
 
 #include "channelScript/CHANSVm.h"
 
-#define INIT_EXTERN(l) \
-namespace l { BOOL init(CHANSVm* vm); }
+#define INIT_EXTERN(l)              namespace l { BOOL init(CHANSVm* vm); }
 
-#define CS_LIB_INITIALIZED(vm, l) \
-cs::l::init(vm)
+#define CS_LIB_DONE(vm, l)          cs::l::init(vm)
 
 namespace ipl {
     namespace cs {
