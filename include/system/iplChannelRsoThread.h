@@ -5,10 +5,10 @@
 
 #include <egg/core.h>
 
-typedef void (*CalcFunc)();
-
 namespace ipl {
     namespace channel {
+        typedef void (*CalcFunc)();
+        
         class RsoThread : public utility::ut_thread {
             public:
                 /** @param pHeap The work heap used. */

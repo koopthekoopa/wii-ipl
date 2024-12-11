@@ -4,6 +4,8 @@
 
 #include "system/iplSystem.h"
 
+#include <revolution/sc.h>
+
 #include <cstring>
 
 namespace ipl {

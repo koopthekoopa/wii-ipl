@@ -2,7 +2,7 @@
 #define CDB_PRIVATE_H
 
 #define CDBReport(type, args...)    \
-    CDBReport(type);                \
+    OSReport(type);                 \
     OSReport(##args)
     
 enum {

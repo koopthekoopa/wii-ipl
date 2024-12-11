@@ -5,18 +5,27 @@
 
 #include <revolution.h>
 
+#include "scene/iplSceneCreator.h"
+
 namespace ipl {
     namespace scene {
         class Base;
 
+        enum {
+            COMMAND_NONE = 0,
+            COMMAND_CREATE_CHILD,
+            COMMAND_RESERVE_CHANGE,
+            COMMAND_RESERVE_ALL_DESTRUCT,
+        };
+
         struct Command {
-            int     unk_0x00;
-            int     unk_0x04;
-            u32     unk_0x08;
-            u32     unk_0x0C;
-            Base*   unk_0x10;
-            Base*   unk_0x14;
-            void*   unk_0x18;
+            int     mType;      // 0x00
+            int     mNextScene; // 0x04 (name unsure)
+            u32     mNandToken; // 0x08
+            u32     mNewScene;  // 0x0C (name unsure)
+            Base*   mParent;    // 0x10
+            Base*   mChild;     // 0x14
+            void*   mArgs;      // 0x18
 
             void    clear();
         };
@@ -38,9 +47,9 @@ namespace ipl {
                 BOOL        isDrawingScene() { return mDrawingScene; }
 
             private:
-                u8      unk_0x00[0x100];
+                u8      mType[0x100];
                 BOOL    mDrawingScene;
-                u8      unk_0x104[0x2C];
+                u8      mParentScene4[0x2C];
         };
     }
 }

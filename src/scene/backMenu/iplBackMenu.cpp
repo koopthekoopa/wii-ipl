@@ -7,8 +7,7 @@ namespace ipl {
         BackMenu::BackMenu(EGG::Heap* pHeap) :
         FaderSceneBase(pHeap),
         unk_0x5C(0) {
-
-            unk_0x28 = 2;
+            mFlags = 2;
         }
 
         void BackMenu::prepare() {}
@@ -17,6 +16,7 @@ namespace ipl {
         }
 
         void BackMenu::create() {
+            // Set up layout
             mpLayout = new layout::Object(mpHeap, backToWiiMenu_arc, "arc", "my_BackToWiiMenu.brlyt");
 
             mpLayout->bind("my_BackToWiiMenu.brlan");
@@ -33,18 +33,19 @@ namespace ipl {
             mpLayout->calc();
         }
 
-        SceneReturn BackMenu::calcFadein() {
+        SceneCommand BackMenu::calcFadein() {
             if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_OUT) {
-                return SCENE_DONE;
+                return SCENE_NEXT;
             }
             return SCENE_CONTINUE;
         }
 
-        SceneReturn BackMenu::calcNormal() {
-            SceneReturn result = SCENE_CONTINUE;
+        SceneCommand BackMenu::calcNormal() {
+            SceneCommand result = SCENE_CONTINUE;
 
-            if (System::isRsrcLoaded2()) {
-                result = SCENE_DONE;
+            // Get out of scene ones resources are fully loaded.
+            if (Util::resourceLoaded()) {
+                result = SCENE_NEXT;
             }
 
             return result;
@@ -54,7 +55,7 @@ namespace ipl {
             System::getFader()->fadeOut();
         }
 
-        SceneReturn BackMenu::calcFadeout() {
+        SceneCommand BackMenu::calcFadeout() {
             if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
                 System::setUnk_0x2BE(true);
                 System::setUnk_0x2BF(true);
@@ -64,9 +65,9 @@ namespace ipl {
                 System::getPointer()->setVisible(true);
                 System::getResetHandler()->enableResetToMenu(TRUE);
                 
-                reserveAllSceneDestruction(4, NULL);
+                reserveAllSceneDestruction(SCENE_BOARD, NULL);
                 
-                return SCENE_DONE;
+                return SCENE_NEXT;
             }
             return SCENE_CONTINUE;
         }
@@ -77,10 +78,6 @@ namespace ipl {
                 mpLayout->draw();
             }
         }
-
-        // TODO: sort out the ordering
-        void FaderSceneBase::calcCommonAfter() {}
-        void FaderSceneBase::initCalcNormal() {}
     }
 }
 

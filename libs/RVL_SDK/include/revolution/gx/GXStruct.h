@@ -10,15 +10,15 @@ extern "C" {
 #endif
 
 typedef struct {
-    u8  r, g, b, a; // 0x00
+    u8  r, g, b, a;                     // 0x00
 } GXColor;
 
 typedef struct {
-    s16 r, g, b, a; // 0x00
+    s16 r, g, b, a;                     // 0x00
 } GXColorS10;
 
 typedef struct {
-    u32 dummy[8];   // 0x00
+    u32 dummy[8];                       // 0x00
 } GXTexObj;
 
 typedef struct _GXRenderModeObj {

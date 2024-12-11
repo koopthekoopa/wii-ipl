@@ -98,7 +98,7 @@ namespace ipl {
                     bool                unused_0x2B5;
                     volatile bool       mbFontResLoaded;        // 0x2B6
                     volatile bool       mbSndResLoaded;         // 0x2B7
-                    volatile bool       mbDictResLoaded;        // 0x2B8
+                    volatile bool       mbZi8ResLoaded;         // 0x2B8
                     volatile bool       mbResetDisabled;        // 0x2B9
                     volatile bool       mbFoldersCreated;       // 0x2BA
                     volatile bool       mbIsNandFull;           // 0x2BB
@@ -200,22 +200,12 @@ namespace ipl {
 
             // TODO investigate this madness
             /** @return Whether the system resources have loaded */
-            static bool isRsrcLoaded() { return smArg.mbResLoaded && smArg.mbFontResLoaded && smArg.mbSndResLoaded && smArg.mbDictResLoaded; }
-            /** @remark This is just another `isRsrcLoaded` */
-            static bool isRsrcLoaded2() {
-                bool allResLoaded = false;
-                bool cmnResLoaded = false;
-                if (smArg.mbResLoaded && smArg.mbFontResLoaded && smArg.mbSndResLoaded) {
-                    cmnResLoaded = true;
-                }
-                if (cmnResLoaded && smArg.mbDictResLoaded) {
-                    allResLoaded = true;
-                }
-                if (allResLoaded) {
-                    return true;
-                }
-                return false;
-            }
+            static bool isRsrcLoaded()      { return smArg.mbResLoaded && smArg.mbFontResLoaded && smArg.mbSndResLoaded && smArg.mbZi8ResLoaded; }
+            static bool isCmnResLoaded()    { return smArg.mbResLoaded; }
+            static bool isFontResLoaded()   { return smArg.mbFontResLoaded; }
+            static bool isSndResLoaded()    { return smArg.mbSndResLoaded; }
+            static bool isRsrcZi8Loaded()   { return smArg.mbZi8ResLoaded; }
+            
             static bool unkBool() { return smArg.mbCreatedAfter && smArg.unk_0x2B4; }
         
             /**

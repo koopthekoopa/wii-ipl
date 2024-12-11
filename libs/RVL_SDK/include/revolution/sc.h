@@ -38,6 +38,7 @@ u8  SCGetLanguage();
 #define SC_PRODUCT_AREA_SAF         10
 #define SC_PRODUCT_AREA_CHN         11
 
+s8  SCGetProductArea();
 s8  SCGetRegion();
 
 #ifdef __cplusplus

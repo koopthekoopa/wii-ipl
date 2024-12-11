@@ -9,6 +9,13 @@
 
 namespace ipl {
     namespace scene {
+        #define HAS_SEC2MS(x)           (x * 1000)
+        
+        #define HAS_TIMER_FADE_IN       HAS_SEC2MS(1)   /* Seconds after fading in */
+        #define HAS_TIMER_PRESS_A       HAS_SEC2MS(2)   /* Seconds until the user can pass through the screen */
+        #define HAS_TIMER_SAFE_MODE     HAS_SEC2MS(3)   /* Seconds the user has to hold the safe mode combo on for */
+        #define HAS_TIMER_NOT_PRESS_A   HAS_SEC2MS(60)  /* Seconds for the user to do something to pass through the screen */
+        
         enum {
             LANG_JPN = 0,
             LANG_US_ENG,
@@ -73,8 +80,7 @@ namespace ipl {
         mSafeModeTick(0),
         mbHeldCombo(false),
         mbDoneSafeMode(false) {
-
-            unk_0x28 = 2;
+            mFlags = 2;
         }
 
         skHealth::~skHealth() {}
@@ -205,17 +211,20 @@ namespace ipl {
             System::getPointer()->setVisible(false);
         }
 
-        SceneReturn skHealth::calcFadein() {
-            SceneReturn result = SCENE_CONTINUE;
+        SceneCommand skHealth::calcFadein() {
+            SceneCommand result = SCENE_CONTINUE;
 
             check_safe_mode();
+
+            // We faded in? Now we wait...
             if (!mbFadedIn && !mpLayout->isPlaying(ANIM_FADE_IN)) {
                 mbFadedIn = true;
                 mWaitTick = OSGetTick();
             }
 
-            if (mbFadedIn && OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mWaitTick)) > 1000) {
-                if (System::isRsrcLoaded2()) {
+            // Done waiting? We wait again!!... For the resources to finish loading.
+            if (mbFadedIn && OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mWaitTick)) > HAS_TIMER_FADE_IN) {
+                if (Util::resourceLoaded()) {
                     mpPushPane->SetVisible(true);
 
                     mpLayout->start(ANIM_WAIT_PUSH);
@@ -223,7 +232,7 @@ namespace ipl {
                     mPushTick = OSGetTick();
                     mWpadMask = utility::wpad::getWpadConnectedMask();
 
-                    result = SCENE_DONE;
+                    result = SCENE_NEXT;
                 }
             }
 
@@ -232,30 +241,32 @@ namespace ipl {
             return result;
         }
 
-        SceneReturn skHealth::calcNormal() {
-            SceneReturn result  = SCENE_CONTINUE;
+        SceneCommand skHealth::calcNormal() {
+            SceneCommand result  = SCENE_CONTINUE;
             u32 newWpadMask     = utility::wpad::getWpadConnectedMask();
 
             check_safe_mode();
-            
-            if (OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) < 2000) {
+
+            // Finished waiting?? The user can finally pass through the screen
+            if (OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) < HAS_TIMER_PRESS_A) {
                 mWpadMask = newWpadMask;
             }
 
             if (finish_safe_mode_check()) {
-                if (System::getMasterController()->downTrg(((WPAD_BUTTON_CL_A | WPAD_BUTTON_CL_B) * 0x10000 /* ? */) | WPAD_BUTTON_B | WPAD_BUTTON_A)
-                || mWpadMask != newWpadMask
-                || OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) > 60000
-                || mbDoneSafeMode) {
-                    if (mWpadMask != newWpadMask
-                    && !utility::wpad::isIncreaseConnectedWpad(mWpadMask, newWpadMask)) {
+                // Either user pressed A (or B), connected controller, went to safe more OR was on the screen for 60 seconds? We fade out.
+                if (System::getMasterController()->downTrg(((WPAD_BUTTON_CL_A | WPAD_BUTTON_CL_B) * 0x10000 /* ? */) | WPAD_BUTTON_B | WPAD_BUTTON_A) ||
+                mWpadMask != newWpadMask ||
+                OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) > HAS_TIMER_NOT_PRESS_A ||
+                mbDoneSafeMode) {
+                    
+                    if (mWpadMask != newWpadMask && !utility::wpad::isIncreaseConnectedWpad(mWpadMask, newWpadMask)) {
                         mWpadMask = newWpadMask;
                     }
                     else {
                         snd::getSystem()->startSE("WIPL_SE_BT_PUSH");
                         mpLayout->start(ANIM_FADE_OUT);
 
-                        result = SCENE_DONE;
+                        result = SCENE_NEXT;
                     }
                 }
             }
@@ -265,7 +276,7 @@ namespace ipl {
             return result;
         }
 
-        SceneReturn skHealth::calcFadeout() {
+        SceneCommand skHealth::calcFadeout() {
             mpLayout->calc();
 
             if (!mpLayout->isPlaying(ANIM_FADE_OUT)) {
@@ -278,18 +289,16 @@ namespace ipl {
                 System::getFader()->fadeOut();
             }
 
-            if (System::unkBool()
-            || (System::hasCreatedAfter() && System::isNandFull())
-            || System::isSafeMode()) {
+            if (System::unkBool() || (System::hasCreatedAfter() && System::isNandFull()) || System::isSafeMode()) {
                 if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
                     System::getPointer()->setVisible(true);
                     System::getResetHandler()->enableResetToMenu(TRUE);
 
-                    for (int i = 0; i < 1; i++) {
-                        reserveAllSceneDestruction(4, NULL);
+                    for (int i = 0; i < 1; i++) { // :question:
+                        reserveAllSceneDestruction(SCENE_BOARD, NULL);
                     }
 
-                    return SCENE_DONE;
+                    return SCENE_NEXT;
                 }
             }
             
@@ -304,19 +313,22 @@ namespace ipl {
         }
 
         void skHealth::check_safe_mode() {
+            // If the user is holding the combo?
             if (!mbHeldCombo) {
-                if (System::getMasterController()->down(KPAD_BUTTON_PLUS) && System::getMasterController()->down(KPAD_BUTTON_MINUS)) {
+                if (System::getMasterController()->down(WPAD_BUTTON_PLUS) && System::getMasterController()->down(WPAD_BUTTON_MINUS)) {
                     mSafeModeTick = OSGetTick();
                     mbHeldCombo = true;
                 }
             }
             else {
-                if (!System::getMasterController()->down(KPAD_BUTTON_PLUS) || !System::getMasterController()->down(KPAD_BUTTON_MINUS)) {
+                // Have they let go of the combo? Restart the timer
+                if (!System::getMasterController()->down(WPAD_BUTTON_PLUS) || !System::getMasterController()->down(WPAD_BUTTON_MINUS)) {
                     mSafeModeTick = 0;
                     mbHeldCombo = false;
                 }
                 else {
-                    if (OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mSafeModeTick)) > 3000) {
+                    // Have they been holding the combo after the timer? Welcome to safe mode!
+                    if (OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mSafeModeTick)) > HAS_TIMER_SAFE_MODE) {
                         mbDoneSafeMode = true;
                         System::setSafeMode(true);
                     }
@@ -327,8 +339,7 @@ namespace ipl {
         BOOL skHealth::finish_safe_mode_check() const {
             BOOL result = FALSE;
 
-            if ((!System::getMasterController()->down(KPAD_BUTTON_PLUS) && !System::getMasterController()->down(KPAD_BUTTON_MINUS))
-            || mbDoneSafeMode) {
+            if ((!System::getMasterController()->down(WPAD_BUTTON_PLUS) && !System::getMasterController()->down(WPAD_BUTTON_MINUS)) || mbDoneSafeMode) {
                 result = TRUE;
             }
 

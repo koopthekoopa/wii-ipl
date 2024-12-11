@@ -5,8 +5,7 @@
 namespace ext_ead {
     namespace www {
         void* ut_thread::ThreadMain_(void* param) {
-            ut_thread* pThread = reinterpret_cast<ut_thread*>(param);
-            
+            ut_thread* pThread = ((ut_thread*)param);
             OSInitFastCast();
             return pThread->Run();
         }

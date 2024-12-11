@@ -20,9 +20,9 @@ namespace ipl {
 
                 virtual void        calcCommon();
 
-                virtual SceneReturn calcFadein();
-                virtual SceneReturn calcNormal();
-                virtual SceneReturn calcFadeout();
+                virtual SceneCommand calcFadein();
+                virtual SceneCommand calcNormal();
+                virtual SceneCommand calcFadeout();
             
             private:
                 layout::Object* mpLayout;   // 0x58

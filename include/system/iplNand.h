@@ -88,6 +88,7 @@ namespace ipl {
                 char            msFileName[NAND_MAX_PATH + 1];                          // 0x08
 
                 ARCHandle*      mpArc;                                                  // 0x4C
+                
                 char            msUnkFileName[NAND_MAX_PATH + 1];                       // 0x50 (this seems to be unused)
 
                 int             mFileOffset;                                            // 0x94

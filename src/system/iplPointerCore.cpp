@@ -20,8 +20,7 @@ namespace ipl {
     mChan(0),
     unk_0x10(0) {}
 
-
-   void PointerCoreObject::calc(Pointer* pPointer, const controller::Interface* pController) {
+    void PointerCoreObject::calc(Pointer* pPointer, const controller::Interface* pController) {
         mpLayout = NULL;
         if (pController && pController->isValidDpd()) {
             mpLayout = pPointer->get_layout(mChan, mLayoutType);

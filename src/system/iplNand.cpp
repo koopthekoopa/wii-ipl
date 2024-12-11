@@ -33,7 +33,7 @@ namespace ipl {
 
         // https://decomp.me/scratch/fOAdi
         File::File(EGG::Heap* pHeap, const char* fileName, ARCHandle* arc, const char* unk2, int offset, u32 length, bool isNandFile) : Base() {
-            mDoneTask = FALSE;
+            mbDoneTask = FALSE;
             mLastError = NAND_RESULT_OK;
             mpHeap = pHeap;
             mpArc = arc;
@@ -57,7 +57,7 @@ namespace ipl {
 
         // https://decomp.me/scratch/FjG9e
         File::File(EGG::Heap* pHeap, const char* fileName, u8* buffer, u32 length, u8 perms) : Base() {
-            mDoneTask = FALSE;
+            mbDoneTask = FALSE;
             mLastError = NAND_RESULT_OK;
             mpHeap = pHeap;
             mpArc = NULL;
@@ -329,7 +329,7 @@ namespace ipl {
                     u32 dummy = 0;
                 }
             }
-            mDoneTask = TRUE;
+            mbDoneTask = TRUE;
             callback_();
         }
 
@@ -462,7 +462,7 @@ done:
             
             mpCmpBuffer = NULL;
 
-            mDoneTask = TRUE;
+            mbDoneTask = TRUE;
         }
 
         BOOL File::nand_error_handling(int errcode) {

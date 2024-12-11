@@ -11,7 +11,7 @@ namespace ipl {
                 calcCommon();
             }
 
-            switch(mState) {
+            switch (mState) {
                 case FADE_STATE_FADE_IN: {
                     if (calcFadein() != SCENE_CONTINUE) {
                         mState = FADE_STATE_INIT_NORMAL;

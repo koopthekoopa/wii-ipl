@@ -5,6 +5,10 @@
 
 namespace ipl {
     namespace scene {
+        enum {
+            REBOOT_SETTINGS_SELECT = 0,
+            REBOOT_SETTINGS
+        };
         SCENE_CLASS(Reboot) {
             public:
                 virtual ~Reboot() {}
@@ -12,7 +16,7 @@ namespace ipl {
                 virtual void    calc();
             
             private:
-                BOOL    unk_0x54;
+                int     mSettingsType;
         };
     }
 }

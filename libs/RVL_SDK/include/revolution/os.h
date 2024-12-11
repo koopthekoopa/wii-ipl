@@ -14,27 +14,27 @@ extern "C" {
 typedef s64 OSTime;
 typedef u32 OSTick;
 
-#define OS_CONSOLE_MASK         0xF0000000
-#define OS_CONSOLE_MASK_RVL     0x00000000
-#define OS_CONSOLE_MASK_EMU     0x10000000
-#define OS_CONSOLE_MASK_TDEV    0x20000000
-#define OS_CONSOLE_RVL_PP_1     0x00000011
-#define OS_CONSOLE_RVL_PP_2_1   0x00000012
-#define OS_CONSOLE_RVL_PP_2_2   0x00000020
-#define OS_CONSOLE_RVL_EMU      0x10000008
-#define OS_CONSOLE_NDEV_1_0     0x10000010
-#define OS_CONSOLE_NDEV_1_1     0x10000011
-#define OS_CONSOLE_NDEV_1_2     0x10000012
-#define OS_CONSOLE_NDEV_2_0     0x10000020
-#define OS_CONSOLE_NDEV_2_1     0x10000021
-#define OS_CONSOLE_RETAIL       0x00000021
+#define OS_CONSOLE_MASK                 0xF0000000
+#define OS_CONSOLE_MASK_RVL             0x00000000
+#define OS_CONSOLE_MASK_EMU             0x10000000
+#define OS_CONSOLE_MASK_TDEV            0x20000000
+#define OS_CONSOLE_RVL_PP_1             0x00000011
+#define OS_CONSOLE_RVL_PP_2_1           0x00000012
+#define OS_CONSOLE_RVL_PP_2_2           0x00000020
+#define OS_CONSOLE_RVL_EMU              0x10000008
+#define OS_CONSOLE_NDEV_1_0             0x10000010
+#define OS_CONSOLE_NDEV_1_1             0x10000011
+#define OS_CONSOLE_NDEV_1_2             0x10000012
+#define OS_CONSOLE_NDEV_2_0             0x10000020
+#define OS_CONSOLE_NDEV_2_1             0x10000021
+#define OS_CONSOLE_RETAIL               0x00000021
 
-#define OS_CACHED_REGION_PREFIX 0x8000
-#define OS_UNCACHED_REGION_PREFIX 0xC000
-#define OS_PHYSICAL_MASK 0x3FFF
+#define OS_CACHED_REGION_PREFIX         0x8000
+#define OS_UNCACHED_REGION_PREFIX       0xC000
+#define OS_PHYSICAL_MASK                0x3FFF
 
-#define OS_BASE_CACHED (OS_CACHED_REGION_PREFIX << 16)
-#define OS_BASE_UNCACHED (OS_UNCACHED_REGION_PREFIX << 16)
+#define OS_BASE_CACHED                  (OS_CACHED_REGION_PREFIX << 16)
+#define OS_BASE_UNCACHED                (OS_UNCACHED_REGION_PREFIX << 16)
 
 #define OSPhysicalToCached(paddr)       ((void*)((u32)(paddr)  +  OS_BASE_CACHED))
 #define OSPhysicalToUncached(paddr)     ((void*)((u32)(paddr)  +  OS_BASE_UNCACHED))
@@ -43,12 +43,12 @@ typedef u32 OSTick;
 #define OSCachedToUncached(caddr)       ((void*)((u8*)(caddr)  + (OS_BASE_UNCACHED - OS_BASE_CACHED)))
 #define OSUncachedToCached(ucaddr)      ((void*)((u8*)(ucaddr) - (OS_BASE_UNCACHED - OS_BASE_CACHED)))
 
-u32 __OSBusClock        : OS_BASE_CACHED | 0x000000F8;
-u32 __OSCoreClock       : OS_BASE_CACHED | 0x000000FC;
+u32     __OSBusClock                    : OS_BASE_CACHED | 0x000000F8;
+u32     __OSCoreClock                   : OS_BASE_CACHED | 0x000000FC;
 
-#define OS_BUS_CLOCK        __OSBusClock
-#define OS_CORE_CLOCK       __OSCoreClock
-#define OS_TIMER_CLOCK      (OS_BUS_CLOCK / 4)
+#define OS_BUS_CLOCK                    __OSBusClock
+#define OS_CORE_CLOCK                   __OSCoreClock
+#define OS_TIMER_CLOCK                  (OS_BUS_CLOCK / 4)
 
 #define OSTicksToCycles(ticks)          (((ticks) * ((OS_CORE_CLOCK * 2) / OS_TIMER_CLOCK)) / 2)
 #define OSTicksToSeconds(ticks)         ((ticks) / OS_TIMER_CLOCK)
@@ -68,7 +68,7 @@ u32 __OSCoreClock       : OS_BASE_CACHED | 0x000000FC;
 #define OSSleepMicroseconds(us)         OSSleepTicks(OSMicrosecondsToTicks((OSTime)us))
 #define OSSleepNanoseconds(ns)          OSSleepTicks(OSNanosecondsToTicks((OSTime)ns))
 
-#define OSRoundUp32B(x) ROUNDUP(x, 32)
+#define OSRoundUp32B(x)                 ROUNDUP(x, 32)
 
 void    OSShutdownSystem();
 
@@ -76,7 +76,7 @@ void    OSReport(const char* msg, ...);
 void    OSVReport(const char* msg, va_list list);
 
 void    OSPanic(const char* file, int line, const char* msg);
-#define OSHalt(msg, line)   OSPanic(__FILE__, line, msg);
+#define OSHalt(msg, line) OSPanic(__FILE__, line, msg)
 
 void    OSFatal(GXColor front, GXColor back, const char* msg);
 

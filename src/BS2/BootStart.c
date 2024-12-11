@@ -23,25 +23,29 @@ extern void DBInit();
 
 void __start();
 
-/** @note This must be the first function linked. */
 __declspec(weak) asm void __start() {
     nofralloc
 
+    // Init hardware
     bl __init_registers
     bl __init_hardware
 
+    // Set up stack
     li      r0, 0xFFFF
     stwu    r1, -8(r1)
     stw     r0, 4(r1)
     stw     r0, 0(r1)
 
+    // Set up memory
     bl      __init_data
 
+    // Clear exception mask
     li      r0, 0
     lis     r6, EXCEPTION_MASK_ADDR@ha
     addi    r6, r6, EXCEPTION_MASK_ADDR@l
     stw     r0, 0(r6)
-    
+
+    // Parse BI2 args
     lis     r6, BI2_ADDR@ha
     addi    r6, r6, BI2_ADDR@l
     lwz     r5, 0(r6)
@@ -83,8 +87,10 @@ bi2_end_arg_parse:
     bl      DBInit
     bl      __init_user
 
+    // Jump to main
     bl      main
 
+    // This halts the CPU
     b       exit
 }
 
@@ -151,6 +157,7 @@ static void __init_data() {
     __rom_copy_info* rci;
     __bss_init_info* bii;
 
+    // Copy the sections to their correct addresses
     rci = _rom_copy_info;
     while(1) {
         if (rci->size == 0) {
@@ -160,6 +167,7 @@ static void __init_data() {
         rci++;
     }
 
+    // Reset BSS sections
     bii = _bss_init_info;
     while(1) {
         if (bii->size == 0) {

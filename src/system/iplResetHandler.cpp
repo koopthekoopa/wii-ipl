@@ -15,7 +15,6 @@ namespace ipl {
     mState(0),
     mbReturnToMenu(FALSE),
     mFatalState(FATAL_STATE_NONE) {
-        
         #pragma unused(pHeap)
 
         // Prepare the fade out.
@@ -52,7 +51,7 @@ namespace ipl {
 
     void ResetHandler::update() {
         if (mType != 0) {
-            switch(mState) {
+            switch (mState) {
                 case 0: {
                     // TODO!!...
                     break;
@@ -77,7 +76,7 @@ namespace ipl {
     }
 
     void ResetHandler::fatalUpdate() {
-        switch(mFatalState) {
+        switch (mFatalState) {
             // Fade out
             case FATAL_STATE_FADE: {
                 if (System::getResetFader()->fadeOut()) {

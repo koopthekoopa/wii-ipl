@@ -28,8 +28,8 @@ namespace ipl {
     #define FONT_WIDTH  46
     #define FONT_HEIGHT 48
 
-    bool exception_callback_(nw4r::db::ConsoleHandle console, void* arg) {
-        Exception* exception = ((Exception*)arg);
+    bool exception_callback_(nw4r::db::ConsoleHandle console, void* param) {
+        Exception* exception = ((Exception*)param);
         exception->exception_callback(console);
     }
 
@@ -62,6 +62,7 @@ namespace ipl {
     void Exception::key_input() {
         KPADStatus cons[WPAD_MAX_CONTROLLERS];
         memset(cons, 0, sizeof(cons));
+        
         int inputCur = 0;
 
         OSEnableInterrupts();
@@ -113,7 +114,7 @@ namespace ipl {
                 KPADRead(i, &cons[i], 1);
             }
 
-            wait(50); // a hacky way of ensuring the controllers are initialiased?
+            wait(50); // A hacky way of ensuring the controllers are initialiazed?
 
             int chan = 0;
             for (int i = WPAD_MAX_CONTROLLERS; i != 0; i--) {
@@ -154,10 +155,8 @@ namespace ipl {
     }
 }
 
-/**
- ***********************************************************************
+/***********************************************************************
  * TODO: Generate weak function nw4r::ut::Color::operator=(const Color&)
- ***********************************************************************
- */
+ ***********************************************************************/
 
 

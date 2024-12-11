@@ -74,7 +74,7 @@ namespace ipl {
             u8* pMsg;
 
             // Get the message data by language.
-            switch(System::getLanguage()) {
+            switch (System::getLanguage()) {
                 case SC_LANG_FRENCH: {
                     pMsg = ipl_error_fra_bmg;
                     break;

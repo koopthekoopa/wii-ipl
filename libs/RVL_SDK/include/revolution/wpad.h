@@ -14,6 +14,8 @@ extern "C" {
 
 #define WPAD_MAX_CONTROLLERS    4
 
+/* WIRELESS REMOTE */
+
 #define WPAD_BUTTON_LEFT        (1 << 0)
 #define WPAD_BUTTON_RIGHT       (1 << 1)
 #define WPAD_BUTTON_DOWN        (1 << 2)
@@ -25,6 +27,24 @@ extern "C" {
 #define WPAD_BUTTON_A           (1 << 11)
 #define WPAD_BUTTON_MINUS       (1 << 12)
 #define WPAD_BUTTON_HOME        (1 << 15)
+
+/* CLASSIC CONTROLLER */
+
+#define WPAD_BUTTON_CL_UP       (1 <<  0)
+#define WPAD_BUTTON_CL_LEFT     (1 <<  1)
+#define WPAD_BUTTON_CL_ZR       (1 <<  2)
+#define WPAD_BUTTON_CL_X        (1 <<  3)
+#define WPAD_BUTTON_CL_A        (1 <<  4)
+#define WPAD_BUTTON_CL_Y        (1 <<  5)
+#define WPAD_BUTTON_CL_B        (1 <<  6)
+#define WPAD_BUTTON_CL_ZL       (1 <<  7)
+#define WPAD_BUTTON_CL_FULL_R   (1 <<  9)
+#define WPAD_BUTTON_CL_PLUS     (1 << 10)
+#define WPAD_BUTTON_CL_HOME     (1 << 11)
+#define WPAD_BUTTON_CL_MINUS    (1 << 12)
+#define WPAD_BUTTON_CL_FULL_L   (1 << 13)
+#define WPAD_BUTTON_CL_DOWN     (1 << 14)
+#define WPAD_BUTTON_CL_RIGHT    (1 << 15)
 
 #define WPAD_ERR_OK              0
 #define WPAD_ERR_NO_CONTROLLER  -1

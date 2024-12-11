@@ -9,7 +9,7 @@ void mainmenu() {
     ipl::System::run();
 }
 
-// why
+// Override NANDCheck because the IPL has it's own way of doing it!
 s32 NANDCheck(u32 fsblock, u32 inode, u32 *answer) {
     *answer = 0;
     return NAND_RESULT_OK;

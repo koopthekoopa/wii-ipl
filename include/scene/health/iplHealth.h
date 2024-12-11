@@ -17,9 +17,9 @@ namespace ipl {
                 virtual void        draw();
                 virtual void        destroy();
 
-                virtual SceneReturn calcFadein();
-                virtual SceneReturn calcNormal();
-                virtual SceneReturn calcFadeout();
+                virtual SceneCommand calcFadein();
+                virtual SceneCommand calcNormal();
+                virtual SceneCommand calcFadeout();
 
             private:
                 void                check_safe_mode();

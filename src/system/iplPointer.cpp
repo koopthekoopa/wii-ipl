@@ -46,7 +46,6 @@ namespace ipl {
     mbVisible(true),
     mCore() {
         mpLayoutArchive = System::getNandManager()->readLayout(pHeap, "cursor.ash", false);
-        
         for (int i = 0; i < MAX_LAYOUT_FILES; i++) {
             mpLayout[i] = new(pHeap, CLASS_HEAP) layout::Object(pHeap, mpLayoutArchive, "arc", scLayoutName[i]);
             mpLayout[i]->finishBinding();

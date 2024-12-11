@@ -20,9 +20,7 @@ namespace ipl {
             if (mpCalcFunc != NULL) {
                 mpCalcFunc();
             }
-
             mbStarted = false;
-
             return this;
         }
 

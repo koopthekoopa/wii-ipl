@@ -12,7 +12,7 @@ namespace ipl {
         }
 
         void Manager::initMessage() {
-            switch(System::getLanguage()) {
+            switch (System::getLanguage()) {
                 case SC_LANG_ENGLISH: {
                     mpMessage->setResource(System::getEngMsg()->getBuffer());
                     break;

@@ -49,22 +49,22 @@ typedef enum _GXTexFmt {
 } GXTexFmt;
 
 typedef enum _GXCITexFmt {
-    GX_TF_C4 = 0x08,
-    GX_TF_C8 = 0x09,
+    GX_TF_C4    = 0x08,
+    GX_TF_C8    = 0x09,
     GX_TF_C14X2 = 0x0A,
 } GXCITexFmt;
 
 typedef enum _GXPosNrmMtx {
-    GX_PNMTX0 = 0,
-    GX_PNMTX1 = 3,
-    GX_PNMTX2 = 6,
-    GX_PNMTX3 = 9,
-    GX_PNMTX4 = 12,
-    GX_PNMTX5 = 15,
-    GX_PNMTX6 = 18,
-    GX_PNMTX7 = 21,
-    GX_PNMTX8 = 24,
-    GX_PNMTX9 = 27
+    GX_PNMTX0   = 0,
+    GX_PNMTX1   = 3,
+    GX_PNMTX2   = 6,
+    GX_PNMTX3   = 9,
+    GX_PNMTX4   = 12,
+    GX_PNMTX5   = 15,
+    GX_PNMTX6   = 18,
+    GX_PNMTX7   = 21,
+    GX_PNMTX8   = 24,
+    GX_PNMTX9   = 27
 } GXPosNrmMtx;
 
 typedef enum _GXTexWrapMode {

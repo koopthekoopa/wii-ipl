@@ -29,8 +29,7 @@ namespace ipl {
 
             if (mpArc) {
                 s32 result = wrapper::PrivateOpen(fileName, &mNandFile, NAND_ACCESS_READ);
-                if (nand_error_handling(result) == FALSE
-                || ARCOpen(mpArc, msFileName, &mArcFile) == FALSE) {
+                if (nand_error_handling(result) == FALSE || ARCOpen(mpArc, msFileName, &mArcFile) == FALSE) {
                     return FALSE;
                 }
                 else {
@@ -46,6 +45,7 @@ namespace ipl {
         void MetaFile::readNandBlock_(void* bufferOut, int length, int offset) {
             s32 result;
 
+            // Seek to offset
             if (mpArc) {
                 result = wrapper::Seek(&mNandFile, mFileOffset + ARCGetStartOffset(&mArcFile) + offset, 0);
                 nand_error_handling(result);
@@ -82,8 +82,8 @@ namespace ipl {
                 result = ES_OpenTitleContentFile(mTitleId, mTicket, 0);
                 mDescriptor = result;
 
-                // If it does not exist, load the meta file from the NAND instead (from the meta folder).
-                if (result == -1026) {
+                // If the file could not open for whatever reason, load the meta file from the NAND instead (from the meta folder).
+                if (result == ES_ERR_TMD_INVALID_RIGHT) {
                     mbMetaInNand = true;
                     return openNandFile_();
                 }
@@ -111,7 +111,7 @@ namespace ipl {
                     return success == TRUE;
                 }
             }
-failed:
+        failed:
             System::err_log(ES, result, line);
             System::err_display(MESG_ERR_CONTENT);
 
@@ -121,6 +121,7 @@ failed:
         void MetaFile::readTicketBlock_(void* bufferOut, int length, int offset) {
             s32 result;
 
+            // Seek to the offset
             if (mpArc) {
                 result = ES_SeekContentFile(mDescriptor, mFileOffset + ARCGetStartOffset(&mArcFile) + offset, 0);
                 if (result < ES_ERR_OK) {
@@ -134,6 +135,7 @@ failed:
                 }
             }
 
+            // Read the file
             if (ES_ReadContentFile(mDescriptor, bufferOut, length) < ES_ERR_OK) {
         failed:
                 System::err_log(ES, 0, 230);

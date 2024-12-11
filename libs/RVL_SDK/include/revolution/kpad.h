@@ -8,18 +8,6 @@ extern "C" {
 
 #include <revolution/wpad.h>
 
-#define KPAD_BUTTON_LEFT        WPAD_BUTTON_LEFT
-#define KPAD_BUTTON_RIGHT       WPAD_BUTTON_RIGHT
-#define KPAD_BUTTON_DOWN        WPAD_BUTTON_DOWN
-#define KPAD_BUTTON_UP          WPAD_BUTTON_UP
-#define KPAD_BUTTON_PLUS        WPAD_BUTTON_PLUS
-#define KPAD_BUTTON_2           WPAD_BUTTON_2
-#define KPAD_BUTTON_1           WPAD_BUTTON_1
-#define KPAD_BUTTON_B           WPAD_BUTTON_B
-#define KPAD_BUTTON_A           WPAD_BUTTON_A
-#define KPAD_BUTTON_MINUS       WPAD_BUTTON_MINUS
-#define KPAD_BUTTON_HOME        WPAD_BUTTON_HOME
-
 typedef struct Vec {
     f32 x; // 0x00
     f32 y; // 0x04

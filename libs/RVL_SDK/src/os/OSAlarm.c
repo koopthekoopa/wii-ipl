@@ -1,5 +1,7 @@
 #include <revolution/os.h>
+
 #include <revolution/dvd.h>
+
 #include <revolution/base/PPCArch.h>
 
 static BOOL OnReset(BOOL final, u32 event);

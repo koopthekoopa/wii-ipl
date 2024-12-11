@@ -28,7 +28,6 @@ namespace ipl {
                 while (pTarget->mpNext != NULL) {
                     pTarget = pTarget->mpNext;
                 }
-
                 pTarget->mpNext = pTree;
                 pTree->mpPrev = pTarget;
                 pTree->mpParent = this;
@@ -39,10 +38,10 @@ namespace ipl {
             pTree->mpParent = this;
             pTree->mpPrev = pTree2->mpPrev;
             pTree->mpNext = pTree2;
+            
             if (pTree2->mpPrev != NULL) {
                 pTree2->mpPrev->mpNext = pTree;
             }
-            
             pTree2->mpPrev = pTree;
             if (mpChild == pTree2) {
                 mpChild = pTree;
@@ -53,11 +52,9 @@ namespace ipl {
             if (mpParent != NULL && mpParent->mpChild == this) {
                 mpParent->mpChild = mpNext;
             }
-
             if (mpNext != NULL) {
                 mpNext->mpPrev = mpPrev;
             }
-
             if (mpPrev != NULL) {
                 mpPrev->mpNext = mpNext;
             }

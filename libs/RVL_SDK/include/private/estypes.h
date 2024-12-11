@@ -55,7 +55,32 @@ typedef struct ESTicketView {
     ESLpEntry           limits[8];      // 0x94
 } ESTicketView;
 
-#define ES_ERR_OK   0
+#define ES_ERR_OK                   0
+
+#define ES_ERR_DONT_EXISTS          -106
+
+// Reference: https://wiibrew.org/wiki//dev/es
+#define ES_ERR_INVALID_PUB_KEY_TYPE -1005
+#define ES_ERR_FILE_READ_FAILED     -1009
+#define ES_ERR_FILE_WRITE_FAILED    -1010
+#define ES_ERR_INVALID_SIGNATURE    -1012
+#define ES_ERR_TMD_FD_OVERFLOW      -1016
+#define ES_ERR_INVALID_ARGUMENTS    -1017
+#define ES_ERR_INVALID_DEVICE_ID    -1020
+#define ES_ERR_INVALID_CONTENT_HASH -1022
+#define ES_ERR_MEMORY_ERROR         -1024
+#define ES_ERR_TMD_INVALID_RIGHT    -1026
+#define ES_ERR_ISSUER_NOT_FOUND     -1027
+#define ES_ERR_TICKET_NOT_FOUND     -1028
+#define ES_ERR_INVALID_TICKET       -1029
+#define ES_ERR_INVALID_BOOT2        -1031
+#define ES_ERR_UNKNOWN_FATAL        -1032
+#define ES_ERR_TICKET_EXPIRED       -1033
+#define ES_ERR_INVALID_TITLE_VER    -1035
+#define ES_ERR_BAD_SYSMENU_TICKET   -1036
+#define ES_ERR_BAD_SYSMENU_CONTENTS -1037
+
+#define ES_ERR_NO_DISC_NAND_TMD     -1039
 
 #ifdef __cplusplus
 }

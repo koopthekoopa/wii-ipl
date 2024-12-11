@@ -26,7 +26,6 @@ namespace ipl {
         mEntries(NULL),
         mEntrySize(1),
         mEntryOffset(0) {
-
             mpBannerBuffer = new(pHeap, BUFFER_HEAP) u8[BS2_DEFAULT_BANNER_SIZE];
             BS2SetBannerBuffer(mpBannerBuffer, BS2_DEFAULT_BANNER_SIZE);
         }
@@ -157,7 +156,7 @@ namespace ipl {
         }
 
         void Manager::splashTick(BS2State state) {
-            switch(state) {
+            switch (state) {
                 case BS2_STATE_52:
                 case BS2_STATE_53: { 
                     unk_0x1C = BS2_STATE_52;

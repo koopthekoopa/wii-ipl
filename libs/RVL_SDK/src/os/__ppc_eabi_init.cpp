@@ -1,5 +1,7 @@
 #include <decomp_ide.h>
+
 #include <revolution/base/PPCArch.h>
+
 #include <__ppc_eabi_init.h>
 
 #ifdef __cplusplus
@@ -29,9 +31,13 @@ __declspec(section ".dtors$00") extern VoidPTR  _dtors[];
 #pragma section code_type ".init"
 
 asm void __init_hardware() {
+    nofralloc
+    
+    // Floating-point on
     mfmsr r0
-    ori r0, r0, 0x2000
+    ori r0, r0, MSR_FP
     mtmsr r0
+
     mflr r31
 
     bl __OSPSInit
@@ -80,6 +86,7 @@ asm void __init_user() {
 static void __init_cpp() {
     VoidPTR *ctor;
 
+    // Static initialization
     for (ctor = _ctors; *ctor != 0; ctor++) {
         (*ctor)();
     }

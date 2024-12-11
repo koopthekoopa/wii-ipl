@@ -11,6 +11,7 @@
 #include "layout/iplLayout.h"
 
 #include "scene/iplSceneManager.h"
+#include "scene/iplSceneUtils.h"
 
 #include <revolution.h>
 #include <revolution/gx.h>
@@ -46,7 +47,7 @@ namespace ipl {
                 /** @brief Update the scene */
                 virtual void    calc() {}
                 /** @brief Rendering the scene */
-                virtual void    draw();
+                virtual void    draw() {}
                 /** @brief Destroy the scene and clear from memory */
                 virtual void    destroy() {}
 
@@ -56,16 +57,28 @@ namespace ipl {
                 void            do_draw();
                 void            do_destroy();
 
-                void            createChildScene(int arg0, Base* pArg1, Base* pArg2, void* pArg3);
-                void            reserveSceneChange(int arg0, void* pArg1);
-                void            reserveAllSceneDestruction(int arg0, void* pArg1);
+                /**
+                 * @brief Creates a child scene.
+                 * @param sceneId The target scene.
+                 * @param arg Arguments for the scene.
+                */
+                void            createChildScene(int sceneId, Base* parent, Base* child, void* arg);
+                /**
+                 * @brief Send a request to change scene.
+                 * @param sceneId The target scene.
+                 * @param arg Arguments for the scene.
+                */
+                void            reserveSceneChange(int sceneId, void* arg);
+                void            reserveAllSceneDestruction(int newSceneId, void* arg);
                 
             protected:
                 EGG::Heap*  mpHeap;     // 0x24
-                u32         unk_0x28;
+
+                u32         mFlags;     // 0x28
                 u32         unk_0x2C;
                 u32         mNandToken; // 0x30
                 u32         unk_0x34;
+
                 Command     mCommand;   // 0x38
             
             friend class FaderSceneBase;

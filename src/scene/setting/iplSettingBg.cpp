@@ -2,12 +2,12 @@
 
 namespace ipl {
     namespace scene {
-        SettingBg::SettingBg(EGG::Heap* pHeap, int unk) : Base(pHeap) {
-            unkID = unk;
-            mpLayout = NULL;
-            mpLayoutFile = NULL;
-
-            unk_0x28 = 3;
+        SettingBg::SettingBg(EGG::Heap* pHeap, int sceneID) :
+        Base(pHeap),
+        mSceneID(sceneID),
+        mpLayout(NULL),
+        mpLayoutFile(NULL) {
+            mFlags = 3;
         }
 
         void SettingBg::prepare() {
@@ -18,8 +18,8 @@ namespace ipl {
             mpLayout = new layout::Object(mpHeap, mpLayoutFile, "arc", "it_BgSetUp_a.brlyt");
             mpLayout->finishBinding();
 
-            createChildScene(0x16 /* SettingButton */, this, NULL, (void*)unkID);
-            createChildScene(0x13 /* SettingSelect */, this, NULL, (void*)unkID);
+            createChildScene(SCENE_SETTING_BUTTON, this, NULL, (void*)mSceneID);
+            createChildScene(SCENE_SETTING_SELECT, this, NULL, (void*)mSceneID);
 
             System::getFader()->fadeIn();
         }
