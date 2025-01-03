@@ -7,7 +7,9 @@
 
 #include "channelScript/CHANSVmError.h"
 
+#ifdef __cplusplus
 extern "C" {
+#endif
 
 #define CHANS_VM_WORK_SIZE  0x40000
 
@@ -69,7 +71,9 @@ int         CHANSVmGetArgInteger(CHANSVm* vm, int arg);
 float       CHANSVmGetArgFloat(CHANSVm* vm, int arg);
 char*       CHANSVmGetArgString(CHANSVm* vm, int arg);
 
+#ifdef __cplusplus
 }
+#endif
 
 #endif // IPL_CHANNEL_SCRIPT_H
 

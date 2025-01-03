@@ -26,19 +26,19 @@ extern u8 ipl_error_chn_bmg[];
 extern u8 ipl_error_kor_bmg[];
 
 namespace ipl {
-    ErrorHandler::ErrorHandler(EGG::Heap* pHeap) :
+    ErrorHandler::ErrorHandler(EGG::Heap* heap) :
     mbReady(FALSE),
     mType(NONE),
     mMessageID(MESG_ERR_GENERIC),
     mpArcData(NULL) {
         // Decompress the archive file.
         mArcSize = Rvl_decode_ash_size(fatalDlg_ash);
-        mpArcData = new(pHeap, BUFFER_HEAP) u8[mArcSize];
+        mpArcData = new(heap, BUFFER_HEAP) u8[mArcSize];
 
         Rvl_decode(mpArcData, fatalDlg_ash);
 
         // Create the layout from archive.
-        mpLayout = new(pHeap, 4) layout::Object(pHeap, mpArcData, "arc", "my_Fatal.brlyt");
+        mpLayout = new(heap, 4) layout::Object(heap, mpArcData, "arc", "my_Fatal.brlyt");
     }
 
     void ErrorHandler::set(Type type, u32 msgId, const char* arg1, int arg2, int arg3) {
@@ -48,7 +48,7 @@ namespace ipl {
         mType = type;
         mMessageID = msgId;
 
-        // Debug related? (seems to be incomplete. unused.)
+        // Debug related? (seems to be incomplete; unused)
         unk_0x0C = arg2;
         unk_0x10 = arg3;
         if (arg1) {
@@ -115,7 +115,7 @@ namespace ipl {
             ErrorMsg.setResource(pMsg);
 
             // Set the on-screen text.
-            nw4r::lyt::TextBox* pTextBox = (nw4r::lyt::TextBox*)mpLayout->GetRootPane()->FindPaneByName("TextBox_00");
+            nw4r::lyt::TextBox* pTextBox = (nw4r::lyt::TextBox*)mpLayout->getRoot()->FindPaneByName("TextBox_00");
             pTextBox->SetString(ErrorMsg.getMessage(mMessageID));
 
             // Prepare for error screen.

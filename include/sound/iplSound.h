@@ -10,7 +10,9 @@ namespace ipl {
         class System {
             public:
                 System();
-
+                
+                void            shutup(BOOL shutUpDMA);
+                
                 virtual void    fn_815F6278(); // 0x08
                 virtual void    calc();        // 0x0C
 

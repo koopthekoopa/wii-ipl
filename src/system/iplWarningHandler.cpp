@@ -5,10 +5,10 @@
 #include "system/iplMessage.h"
 
 namespace ipl {
-    WarningHandler::WarningHandler(EGG::Heap* pHeap) :
+    WarningHandler::WarningHandler(EGG::Heap* heap) :
     mType(NONE),
     mMessageID(0) {
-        mpDialog = new(pHeap, CLASS_HEAP) DialogWindow(pHeap);
+        mpDialog = new(heap, CLASS_HEAP) DialogWindow(heap);
     }
 
     void WarningHandler::set(Type type, u32 msgId) {

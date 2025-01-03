@@ -11,7 +11,7 @@ namespace ipl {
             typedef void (*MetaCallback)(void*);
             
             public:
-                MetaFile(EGG::Heap* pHeap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, MetaCallback callBack, void* callBackWork, int ticketIdx);
+                MetaFile(EGG::Heap* heap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, MetaCallback callBack, void* callBackWork, int ticketIdx);
                 virtual ~MetaFile();
             
             protected:

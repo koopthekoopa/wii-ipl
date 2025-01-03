@@ -1,5 +1,5 @@
-#ifndef NW4R_UTILITY_RUNTIME_TYPE_INFO_H
-#define NW4R_UTILITY_RUNTIME_TYPE_INFO_H
+#ifndef NW4R_UT_RUNTIME_TYPE_INFO_H
+#define NW4R_UT_RUNTIME_TYPE_INFO_H
 
 namespace nw4r {
     namespace ut {
@@ -22,6 +22,6 @@ namespace nw4r {
     }
 }
 
-#endif // NW4R_UTILITY_RUNTIME_TYPE_INFO_H
+#endif // NW4R_UT_RUNTIME_TYPE_INFO_H
 
 

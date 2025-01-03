@@ -1,5 +1,3 @@
-#define UNIT_DOESNT_MATCH
-
 #include <decomp.h>
 
 #include <revolution/nwc24.h>
@@ -19,10 +17,7 @@ static u32* NWC24iGetCHJumpEntry(u32* table, u32 idx) {
 }
 
 NWC24Err NWC24CheckCHJumpObj(const NWC24CHJumpObj* chjp, u32 dataSize) {
-    u32 i;
-    u32 tableSize;
-    u32 num;
-    
+    u32 i, tableSize, num;
     u32* table = NWC24iGetCHJumpTable(chjp);
 
     // Verify magic
@@ -44,7 +39,6 @@ NWC24Err NWC24CheckCHJumpObj(const NWC24CHJumpObj* chjp, u32 dataSize) {
     tableSize = NWC24iGetCHJumpTableSize(chjp);
     for (i = 0; i < num; i++) {
         u32* entry = NWC24iGetCHJumpEntry(table, i);
-        
         if (entry[0] < tableSize) {
             return NWC24_ERR_FORMAT;
         }
@@ -69,13 +63,14 @@ NWC24Err NWC24GetCHJumpBlockSize(const NWC24CHJumpObj *chjp, u32* size, u32 inde
     }
 
     *size = NWC24iGetCHJumpEntry(table, index)[1];
+    
     return NWC24_OK;
 }
 
 NWC24Err NWC24GetCHJumpBlockData(const NWC24CHJumpObj* chjp, char* data, u32 size, u32 index) {
-    u32* table = NWC24iGetCHJumpTable(chjp);
+    u32*  table = NWC24iGetCHJumpTable(chjp);
     char* srcData;
-    u32 srcSize;
+    u32   srcSize;
 
     if (chjp->header.numBlocks <= index) {
         return NWC24_ERR_INVALID_VALUE;

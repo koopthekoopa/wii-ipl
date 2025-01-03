@@ -1,79 +1,40 @@
-# Prerequisites
-*.d
+# IDE folders
+.idea/
+.vs/
 
-# Compiled Object files
-*.slo
-*.lo
+# Caches
+__pycache__
+.mypy_cache
+.cache/
+
+# Original files
+orig/*/*
+!orig/*/.gitkeep
+*.dol
+*.rel
+*.elf
 *.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-*.dol
-*.elf
-
-# Exclusive for decomp
-ctx.c
-*.bat
-*.sh
-*.sln
-*.7z
-*.dump
-*.idb
-*.id0
-*.id1
-*.id2
-*.nam
-.private/*
-build/*
-data/*
-tools/GC/*
-tools/Wii/*
-tools/src/*
-tools/PPC/*
-tools/*.txt
-tools/makesel
-tools/ipl2dtk
-tools/elf2bs
-.vscode/settings.json
-*.filters
-*.vcxproj
-*.user
-.DS_Store
-*.bat
-*.img
-*.bin
 *.map
-*.log
-*.elf
-*.dol
-*.bak
-*.dtk
-objdiff.json
-*.lnk
-*.wad
-*.swf
+*.MAP
 
-# Scrapped :(
-.web/*
+# Build files
+build/
+.ninja_*
+build.ninja
+.private/*
+
+# decompctx output
+ctx.*
+*.ctx
+
+# Generated configs
+objdiff.json
+compile_commands.json
+
+# Miscellaneous
+progress/*
+/*.txt
+*.exe
+*.lnk
+*.bat
+*.log

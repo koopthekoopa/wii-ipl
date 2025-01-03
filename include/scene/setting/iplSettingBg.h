@@ -7,7 +7,7 @@ namespace ipl {
     namespace scene {
         SCENE_CLASS(SettingBg) {
             public:
-                SettingBg(EGG::Heap* pHeap, int sceneID);
+                SettingBg(EGG::Heap* heap, int sceneID);
                 virtual ~SettingBg();
 
                 virtual void    prepare();

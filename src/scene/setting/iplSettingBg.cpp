@@ -2,8 +2,8 @@
 
 namespace ipl {
     namespace scene {
-        SettingBg::SettingBg(EGG::Heap* pHeap, int sceneID) :
-        Base(pHeap),
+        SettingBg::SettingBg(EGG::Heap* heap, int sceneID) :
+        Base(heap),
         mSceneID(sceneID),
         mpLayout(NULL),
         mpLayoutFile(NULL) {
@@ -11,11 +11,11 @@ namespace ipl {
         }
 
         void SettingBg::prepare() {
-            mpLayoutFile = System::getNandManager()->readLayoutAsync(mpHeap, "setupBg.ash", false);
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(mheap, "setupBg.ash", false);
         }
 
         void SettingBg::create() {
-            mpLayout = new layout::Object(mpHeap, mpLayoutFile, "arc", "it_BgSetUp_a.brlyt");
+            mpLayout = new layout::Object(mheap, mpLayoutFile, "arc", "it_BgSetUp_a.brlyt");
             mpLayout->finishBinding();
 
             createChildScene(SCENE_SETTING_BUTTON, this, NULL, (void*)mSceneID);

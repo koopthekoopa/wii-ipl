@@ -12,10 +12,10 @@ namespace ipl {
     namespace nigaoe {
         class Manager {
             public:
-                Manager(EGG::Heap* pHeap);
+                Manager(EGG::Heap* heap);
 
-                Object*     create(EGG::Heap* pHeap, int width, int height, int faceId, Object::MakeIconCallback callback, void* callbackWork);
-                Object*     create(EGG::Heap* pHeap, int width, int height, RFLiCharData* faceData, Object::MakeIconCallback callback, void* callbackWork);
+                Object*     create(EGG::Heap* heap, int width, int height, int faceId, Object::MakeIconCallback callback, void* callbackWork);
+                Object*     create(EGG::Heap* heap, int width, int height, RFLiCharData* faceData, Object::MakeIconCallback callback, void* callbackWork);
 
                 void        makeIcon();
 

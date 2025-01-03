@@ -34,7 +34,6 @@ namespace ipl {
             OSSuspendThread(&mThread);
         }
 
-
         BOOL ut_thread::WaitForThreadExit() {
             BOOL result = FALSE;
             OSJoinThread(&mThread, (void*)&result);

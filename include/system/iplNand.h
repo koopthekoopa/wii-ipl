@@ -25,18 +25,18 @@ namespace ipl {
                 Base();
                 virtual ~Base();                                                        // 0x08
                 
-                virtual void    read() {}                                               // 0x0C
+                virtual void    read();                                                 // 0x0C
                 virtual void    write();                                                // 0x10
                 
-                virtual bool    isFinished()    { return false; }                       // 0x14
-                virtual bool    checkData()     { return false; }                       // 0x18
-                virtual bool    isFatalError()  { return false; }                       // 0x1C
+                virtual bool    isFinished();                                           // 0x14
+                virtual bool    checkData();                                            // 0x18
+                virtual bool    isFatalError();                                         // 0x1C
         };
         
-        class File : Base {
+        class File : public Base {
             public:
-                File(EGG::Heap* pHeap, const char* fileName, ARCHandle* arc, const char* unk2, int offset, u32 length, bool isInNand);
-                File(EGG::Heap* pHeap, const char* fileName, u8* buffer, u32 length, u8 perms);
+                File(EGG::Heap* heap, const char* fileName, ARCHandle* arc, const char* unk2, int offset, u32 length, bool isInNand);
+                File(EGG::Heap* heap, const char* fileName, u8* buffer, u32 length, u8 perms);
                 virtual ~File();                                                        // 0x08
 
                 /**
@@ -80,10 +80,9 @@ namespace ipl {
 
             protected:
                 NandErrResult   calcMD5_(const u8* sum, const u8* buffer, u32 length) const;
+                BOOL            nand_error_handling(int result);
 
-                BOOL            nand_error_handling(int errcode);
-
-                EGG::Heap*      mpHeap;                                                 // 0x04
+                EGG::Heap*      mheap;                                                 // 0x04
 
                 char            msFileName[NAND_MAX_PATH + 1];                          // 0x08
 
@@ -113,9 +112,9 @@ namespace ipl {
                 BOOL            mbIsNandFile;                                           // 0x18C
         };
 
-        class LangFile : Base {
+        class LangFile : public Base {
             public:
-                LangFile(EGG::Heap* pHeap, const char* dirName, const char* fileName, ARCHandle* arc, bool isInNand);
+                LangFile(EGG::Heap* heap, const char* dirName, const char* fileName, ARCHandle* arc, bool isInNand);
                 virtual ~LangFile();                                                    // 0x08
 
                 virtual void    read();                                                 // 0x0C
@@ -132,16 +131,10 @@ namespace ipl {
                 File*   mpLangFile;                                                     // 0x08
         };
 
-        class LayoutFile : LangFile {
+        class LayoutFile : public LangFile {
             public:
-                LayoutFile(EGG::Heap* pHeap, const char* dirName, const char* fileName, ARCHandle* arc, bool isNandFile);
+                LayoutFile(EGG::Heap* heap, const char* dirName, const char* fileName, ARCHandle* arc, bool isNandFile);
                 virtual ~LayoutFile();                                                  // 0x08
-
-                virtual void    read();                                                 // 0x0C
-                
-                virtual bool    isFinished();                                           // 0x14
-                virtual bool    checkData();                                            // 0x18
-                virtual bool    isFatalError();                                         // 0x1C
         };
 
         class Manager {
@@ -150,13 +143,13 @@ namespace ipl {
                 
                 /**
                  * @brief Reads an ASH compressed Layout File.
-                 * @param pHeap The memory heap used.
+                 * @param heap The memory heap used.
                  * @param archiveName The file name of the ASH compressed archive.
                  * @param unk Unkown boolean.
                  * @return The Layout File Data as `ipl::nand::LayoutFile`.
                  */
-                LayoutFile* readLayout(EGG::Heap* pHeap, const char* archiveName, bool unk);
-                LayoutFile* readLayoutAsync(EGG::Heap* pHeap, const char* archiveName, bool unk);
+                LayoutFile* readLayout(EGG::Heap* heap, const char* archiveName, bool unk);
+                LayoutFile* readLayoutAsync(EGG::Heap* heap, const char* archiveName, bool unk);
 
                 void        closeContentsAll();
                 void        sendToken(int token);

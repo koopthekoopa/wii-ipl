@@ -2,8 +2,8 @@
 
 namespace ipl {
     namespace scene {
-        Base::Base(EGG::Heap* pHeap) :
-        mpHeap(pHeap),
+        Base::Base(EGG::Heap* heap) :
+        mheap(heap),
         mFlags(0), 
         unk_0x2C(0), 
         mNandToken(0), 
@@ -24,13 +24,13 @@ namespace ipl {
         }
 
         void Base::do_calc() {
-            if ((getNext() == NULL || (mFlags & 1)) && !(unk_0x2C & 2)) {
+            if ((getChild() == NULL || (mFlags & 1)) && !(unk_0x2C & 2)) {
                 calc();
             }
         }
 
         void Base::do_draw() {
-            if ((getNext() == NULL || (mFlags & 2)) && !(unk_0x2C & 2)) {
+            if ((getChild() == NULL || (mFlags & 2)) && !(unk_0x2C & 2)) {
                 draw();
             }
         }
@@ -48,7 +48,7 @@ namespace ipl {
 
             command.clear();
             command.mType = COMMAND_CREATE_CHILD;
-            command.mNextScene = sceneId;
+            command.mUnk0Scene = sceneId;
             command.mParent = parent;
             command.mChild = child;
             command.mArgs = arg;
@@ -61,19 +61,19 @@ namespace ipl {
 
             command.clear();
             command.mType = COMMAND_RESERVE_CHANGE;
-            command.mNextScene = sceneId;
+            command.mUnk0Scene = sceneId;
             command.mNandToken = mNandToken;
-            command.mParent = (Base*)getPrev();
-            command.mChild = (Base*)getChild();
+            command.mParent = (Base*)getParent();
+            command.mChild = (Base*)getNext();
             command.mArgs = arg;
 
             System::getSceneManager()->pushCommand(command);
         }
 
-        void Base::reserveAllSceneDestruction(int newSceneId, void* arg) {
+        void Base::reserveAllSceneDestruction(int sceneId, void* arg) {
             mCommand.mType = COMMAND_RESERVE_ALL_DESTRUCT;
-            mCommand.mNextScene = SCENE_ROOT;
-            mCommand.mNewScene = newSceneId;
+            mCommand.mUnk0Scene = SCENE_ROOT;
+            mCommand.mUnk1Scene = sceneId;
             mCommand.mArgs = arg;
 
             System::getSceneManager()->setDestructSync();

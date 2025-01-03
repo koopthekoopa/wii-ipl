@@ -9,7 +9,7 @@ namespace ipl {
     namespace message {
         class Manager {
             public:
-                Manager(EGG::Heap* pHeap);
+                Manager(EGG::Heap* heap);
 
                 /** @return The message data in use. */
                 Message* getMessage() { return mpMessage; }

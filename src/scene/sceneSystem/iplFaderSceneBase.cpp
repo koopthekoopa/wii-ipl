@@ -2,8 +2,8 @@
 
 namespace ipl {
     namespace scene {
-        FaderSceneBase::FaderSceneBase(EGG::Heap* pHeap) :
-        Base(pHeap),
+        FaderSceneBase::FaderSceneBase(EGG::Heap* heap) :
+        Base(heap),
         mState(FADE_STATE_FADE_IN) {}
 
         void FaderSceneBase::calc() {

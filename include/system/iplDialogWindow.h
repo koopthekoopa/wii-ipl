@@ -9,9 +9,9 @@ namespace ipl {
     class DialogWindow {
         public:
             /**
-             * @param pHeap The work heap used.
+             * @param heap The work heap used.
              */
-            DialogWindow(EGG::Heap* pHeap);
+            DialogWindow(EGG::Heap* heap);
 
             void calc();
             void draw();

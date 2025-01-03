@@ -1,5 +1,5 @@
-#ifndef NW4R_LAYOUT_TEXTBOX_H
-#define NW4R_LAYOUT_TEXTBOX_H
+#ifndef NW4R_LYT_TEXTBOX_H
+#define NW4R_LYT_TEXTBOX_H
 
 #include <nw4r/lyt/pane.h>
 #include <nw4r/lyt/types.h>
@@ -37,6 +37,6 @@ namespace nw4r {
     }
 }
 
-#endif // NW4R_LAYOUT_PANE_H
+#endif // NW4R_LYT_TEXTBOX_H
 
 

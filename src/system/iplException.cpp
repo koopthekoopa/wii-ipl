@@ -1,5 +1,3 @@
-#define UNIT_DOESNT_MATCH
-
 #include "system/iplException.h"
 
 #include <revolution/kpad.h>
@@ -33,7 +31,7 @@ namespace ipl {
         exception->exception_callback(console);
     }
 
-    Exception::Exception(EGG::Heap* pHeap, const GXRenderModeObj& rMode) {
+    Exception::Exception(EGG::Heap* heap, const GXRenderModeObj& rMode) {
         mConsole = NULL;
         unk_0x04 = 0;
         mpBuffer = NULL;
@@ -42,7 +40,7 @@ namespace ipl {
         nw4r::db::Exception_Init();
         nw4r::db::DirectPrint_Init();
 
-        mpBuffer = new(pHeap, CLASS_HEAP) u8[NW4R_CONSOLE_BUFFER_SIZE(FONT_WIDTH, FONT_HEIGHT)];
+        mpBuffer = new(heap, CLASS_HEAP) u8[NW4R_CONSOLE_BUFFER_SIZE(FONT_WIDTH, FONT_HEIGHT)];
         mConsole = nw4r::db::Console_Create(mpBuffer, FONT_WIDTH, FONT_HEIGHT, 18, 0, 4);
 
         setConsole(rMode);

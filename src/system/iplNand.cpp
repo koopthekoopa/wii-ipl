@@ -1,5 +1,3 @@
-#define UNIT_DOESNT_MATCH
-
 #include "system/iplNand.h"
 
 #include "config.h"
@@ -32,10 +30,10 @@ namespace ipl {
         Base::~Base() {}
 
         // https://decomp.me/scratch/fOAdi
-        File::File(EGG::Heap* pHeap, const char* fileName, ARCHandle* arc, const char* unk2, int offset, u32 length, bool isNandFile) : Base() {
+        File::File(EGG::Heap* heap, const char* fileName, ARCHandle* arc, const char* unk2, int offset, u32 length, bool isNandFile) : Base() {
             mbDoneTask = FALSE;
             mLastError = NAND_RESULT_OK;
-            mpHeap = pHeap;
+            mheap = heap;
             mpArc = arc;
             mFileOffset = offset;
             mpLength = length;
@@ -56,10 +54,10 @@ namespace ipl {
         }
 
         // https://decomp.me/scratch/FjG9e
-        File::File(EGG::Heap* pHeap, const char* fileName, u8* buffer, u32 length, u8 perms) : Base() {
+        File::File(EGG::Heap* heap, const char* fileName, u8* buffer, u32 length, u8 perms) : Base() {
             mbDoneTask = FALSE;
             mLastError = NAND_RESULT_OK;
-            mpHeap = pHeap;
+            mheap = heap;
             mpArc = NULL;
             mFileOffset = 0;
             mpLength = length;
@@ -74,7 +72,7 @@ namespace ipl {
             
             strncpy(msFileName, fileName, NAND_MAX_PATH + 1);
 
-            mpCmpBuffer = new(mpHeap, -BUFFER_HEAP) u8[mpLength];
+            mpCmpBuffer = new(mheap, -BUFFER_HEAP) u8[mpLength];
             memcpy(mpCmpBuffer, mpBuffer, mpLength);
 
             memset(&mNandFile, 0, sizeof(NANDFileInfo));
@@ -146,13 +144,13 @@ namespace ipl {
 
                     result = ES_SeekContentFile(System::getNandManager()->getDescriptor(), mFileOffset + arcOffset + offset, 0);
                     if (result < 0) {
-                        System::err_log(ES, result, 229);
+                        System::err_log("ES", result, 229);
                         System::err_display(MESG_ERR_CONTENT);
                     }
 
                     result = ES_ReadContentFile(System::getNandManager()->getDescriptor(), buffer, length);
                     if (result < 0) {
-                        System::err_log(ES, result, 237);
+                        System::err_log("ES", result, 237);
                         System::err_display(MESG_ERR_CONTENT);
                     }
                 }
@@ -169,7 +167,7 @@ namespace ipl {
             else if (buffer[0] == 'L') { // See if it is LZ77 by checking if the first letter is 'L' (again...why)
                 return CXGetUncompressedSize(&buffer[4]);
             }
-            else {
+            else {                       // Otherwise, decompress it with Rvl_decode
                 return Rvl_decode_ash_size(buffer);
             }
         }
@@ -254,14 +252,14 @@ namespace ipl {
                     // Heap used to allocate the data.
                     usedHeap = System::getUnk28Heap();
                     if (System::getUnk28Heap() == NULL) {
-                        usedHeap = System::getAppHeap();
+                        usedHeap = System::getApheap();
                     }
 
                     mpCmpBuffer = new(usedHeap, -BUFFER_HEAP) u8[mpLength];
                 }
 
-                u8  headerData[EXT_SIZE]     ALIGN32;
-                u8  sum[NET_MD5_DIGEST_SIZE] ALIGN32;
+                u8  headerData[EXT_SIZE]     ATTRIBUTE_ALIGN(DEFAULT_ALIGN);
+                u8  sum[NET_MD5_DIGEST_SIZE] ATTRIBUTE_ALIGN(DEFAULT_ALIGN);
 
                 u8* buffer = headerData;
 
@@ -374,10 +372,10 @@ namespace ipl {
         }
 
         u8* File::getBuffer_(u32 length) {
-            return new(mpHeap, BUFFER_HEAP) u8[length];
+            return new(mheap, BUFFER_HEAP) u8[length];
         }
 
-        LangFile::LangFile(EGG::Heap* pHeap, const char* dirName, const char* fileName, ARCHandle* arc, bool isNandFile) {
+        LangFile::LangFile(EGG::Heap* heap, const char* dirName, const char* fileName, ARCHandle* arc, bool isNandFile) {
             char fullName[NAND_MAX_PATH + 1];
             
             mpCommonFile = NULL;
@@ -388,7 +386,7 @@ namespace ipl {
             strncat(fullName, "/common/", (NAND_MAX_PATH + 1) - strlen(fullName));
             strncat(fullName, fileName, (NAND_MAX_PATH + 1) - strlen(fullName));
 
-            mpCommonFile = new(pHeap, CLASS_HEAP) File(pHeap, fullName, arc, NULL, 0, 0, isNandFile);
+            mpCommonFile = new(heap, CLASS_HEAP) File(heap, fullName, arc, NULL, 0, 0, isNandFile);
 
             char* langPath = utility::Language::getPath();
 
@@ -399,7 +397,7 @@ namespace ipl {
             strncat(fullName, "/", (NAND_MAX_PATH + 1) - strlen(fullName));
             strncat(fullName, fileName, (NAND_MAX_PATH + 1) - strlen(fullName));
 
-            mpLangFile = new(pHeap, CLASS_HEAP) File(pHeap, fullName, arc, NULL, 0, 0, isNandFile);
+            mpLangFile = new(heap, CLASS_HEAP) File(heap, fullName, arc, NULL, 0, 0, isNandFile);
         }
 
         LangFile::~LangFile() {
@@ -413,15 +411,15 @@ namespace ipl {
         }
 
         // `LayoutFile` is literally `LangFile` lol.
-        LayoutFile::LayoutFile(EGG::Heap* pHeap, const char* dirName, const char* fileName, ARCHandle* arc, bool isNandFile)
-        : LangFile(pHeap, dirName, fileName, arc, isNandFile) {}
+        LayoutFile::LayoutFile(EGG::Heap* heap, const char* dirName, const char* fileName, ARCHandle* arc, bool isNandFile)
+        : LangFile(heap, dirName, fileName, arc, isNandFile) {}
 
         void File::write() {
             u8 dummy;
 
             EGG::Heap* usedHeap = System::getUnk0CHeap();
             if (System::getUnk0CHeap() == NULL) {
-                usedHeap = System::getAppHeap();
+                usedHeap = System::getApheap();
             }
 
             u8* buffer = new(usedHeap, -BUFFER_HEAP) u8[BUFFER_SIZE];
@@ -465,19 +463,19 @@ done:
             mbDoneTask = TRUE;
         }
 
-        BOOL File::nand_error_handling(int errcode) {
-            BOOL result = FALSE;
+        BOOL File::nand_error_handling(int result) {
+            BOOL isGood = FALSE;
 
-            mLastError = errcode;
+            mLastError = result;
 
-            if (errcode >= 0) {
+            if (result >= 0) {
                 return TRUE;
             }
             else {
-                switch (errcode) {
+                switch (result) {
                     // If the file exists, move on.
                     case NAND_RESULT_EXISTS: {
-                        result = TRUE;
+                        isGood = TRUE;
                         break;
                     }
                     // If it did not exist, open error occured.
@@ -506,11 +504,11 @@ done:
                     // Otherwise assume the system files are corrupted.
                     default: {
                         mbFatalError = true;
-                        System::err_log(NAND, errcode, 808);
+                        System::err_log("NAND", result, 808);
                         System::err_display(MESG_ERR_CONTENT);
                     }
                 }
-                return result;
+                return isGood;
             }
         }
 
@@ -565,7 +563,12 @@ done:
 
             return result;
         }
-
+        
+        bool Base::isFatalError() { return false; }
+        bool Base::checkData() { return false; }
+        bool Base::isFinished() { return false; }
+        void Base::read() {}
+        
         LayoutFile::~LayoutFile() {}
     }
 }

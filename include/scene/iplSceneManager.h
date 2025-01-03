@@ -20,9 +20,9 @@ namespace ipl {
 
         struct Command {
             int     mType;      // 0x00
-            int     mNextScene; // 0x04 (name unsure)
+            int     mUnk0Scene; // 0x04
             u32     mNandToken; // 0x08
-            u32     mNewScene;  // 0x0C (name unsure)
+            u32     mUnk1Scene; // 0x0C
             Base*   mParent;    // 0x10
             Base*   mChild;     // 0x14
             void*   mArgs;      // 0x18

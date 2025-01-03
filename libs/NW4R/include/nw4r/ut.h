@@ -1,5 +1,5 @@
-#ifndef NW4R_UTILITY_H
-#define NW4R_UTILITY_H
+#ifndef NW4R_UT_H
+#define NW4R_UT_H
 
 #include <nw4r/ut/inlines.h>
 
@@ -11,7 +11,7 @@
 #include <nw4r/ut/Color.h>
 #include <nw4r/ut/Rect.h>
 
-#endif // NW4R_UTILITY_H
+#endif // NW4R_UT_H
 
 
 

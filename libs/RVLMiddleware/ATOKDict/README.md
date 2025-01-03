@@ -1,4 +1,5 @@
-# Zi Corporation's eZiText Library Decompilation
-A decompilation of the eZiText Dictionary Library (ZI_EZITEXT) from the Wii Menu.
+JustSystem's ATOK Library Decompilation
+=======================================
+A decompilation of the ATOK Dictionary Library (JUSTSYSTEM_ATOK) from the Wii Menu.
 
 

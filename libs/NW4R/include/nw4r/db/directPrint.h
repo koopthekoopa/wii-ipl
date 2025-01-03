@@ -1,5 +1,5 @@
-#ifndef NW4R_DEBUG_DIRECT_PRINT_H
-#define NW4R_DEBUG_DIRECT_PRINT_H
+#ifndef NW4R_DB_DIRECT_PRINT_H
+#define NW4R_DB_DIRECT_PRINT_H
 
 #include <revolution.h>
 
@@ -9,6 +9,6 @@ namespace nw4r {
     }
 }
 
-#endif // NW4R_DEBUG_DIRECT_PRINT_H
+#endif // NW4R_DB_DIRECT_PRINT_H
 
 

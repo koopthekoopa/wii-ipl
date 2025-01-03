@@ -11,30 +11,48 @@
 
 #include "system/iplNand.h"
 
+#include "utility/iplFrameController.h"
+
 namespace ipl {
-    enum {
-        ANIM_TYPE_FORWARD = 0,
-        ANIM_TYPE_BACKWARD,
-        ANIM_TYPE_LOOP,
-        ANIM_TYPE_ALTERNATE
-    };
     namespace layout {
+        class Animator : utility::FrameController {
+            public:
+                Animator(nw4r::lyt::AnimTransform* animTrans, bool, bool);
+                virtual ~Animator();
+
+                virtual void    calc();
+                virtual void    setFlag(bool flag);
+                virtual void    bind();
+
+                void            setFrame();
+
+                void            initAnmFrame();
+                void            initAnmFrame(float frame);
+            private:
+                nw4r::lyt::AnimTransform*   mAnimTrans;   // 0x20
+                undefined4                  unk_0x24;
+                undefined4                  unk_0x28;
+                u32                         unk_0x2C;
+        };
+
         class Object {
             public:
                 /**
-                 * @param pHeap The work heap.
+                 * @param heap The work heap.
                  * @param pLayoutArchive The layout archive.
                  * @param layoutDirectory The directory containing the layout.
                  * @param layoutFileName The file name of the layout.
                  */
-                Object(EGG::Heap* pHeap, nand::LayoutFile* pLayoutArchive, const char* layoutDirectory, const char* layoutFileName);
+                Object(EGG::Heap* heap, nand::LayoutFile* pLayoutArchive, const char* layoutDirectory, const char* layoutFileName);
                 /**
-                 * @param pHeap The work heap.
+                 * @param heap The work heap.
                  * @param pLayoutArcBuffer The layout archive buffer.
                  * @param layoutDirectory The directory containing the layout.
                  * @param layoutFileName The file name of the layout.
                  */
-                Object(EGG::Heap* pHeap, void* pLayoutArcBuffer, const char* layoutDirectory, const char* layoutFileName);
+                Object(EGG::Heap* heap, void* pLayoutArcBuffer, const char* layoutDirectory, const char* layoutFileName);
+
+                virtual ~Object();
 
                 /** @brief Bind animation to layout */
                 void                    start(int lytId = -1);
@@ -58,18 +76,16 @@ namespace ipl {
                 void                    setAnmType(int arg0, int arg1);
                 BOOL                    isPlaying(int arg0) const;
 
-
-                /** @brief Gets the root of the Layout. */
-                nw4r::lyt::Pane*        GetRootPane() { return mpRootPane; }
+                /** @brief Gets the layout object. */
+                nw4r::lyt::Layout*      getLayout()                 { return &mLayout; }
+                /** @brief Gets the root of the layout. */
+                nw4r::lyt::Pane*        getRoot()                   { return getLayout()->GetRootPane(); }
                 
             private:
-                undefined           unk_0x00[0x14]; // 0x00
-                nw4r::lyt::Pane*    mpRootPane;     // 0x14
-                undefined           unk_0x40[1384]; // 0x40
+                nw4r::lyt::Layout mLayout;  // 0x04
+                undefined   unk_0x20[0x580 - 0x20];
         };
     }
 }
 
 #endif // IPL_LAYOUT_H
-
-

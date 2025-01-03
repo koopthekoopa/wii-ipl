@@ -16,7 +16,7 @@ namespace ipl {
         };
 
         public:
-            ResetHandler(EGG::Heap* pHeap);
+            ResetHandler(EGG::Heap* heap);
 
             void reset();
             void check();

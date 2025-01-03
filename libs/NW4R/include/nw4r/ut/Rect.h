@@ -1,7 +1,7 @@
 #ifndef NW4R_RECT_H
 #define NW4R_RECT_H
 
-#include <revolution.h>
+#include <revolution/types.h>
 
 namespace nw4r {
     namespace ut {
@@ -19,5 +19,3 @@ namespace nw4r {
 };
 
 #endif // NW4R_RECT_H
-
-

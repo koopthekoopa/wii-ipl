@@ -1,13 +1,17 @@
-#ifndef NW4R_UTILITY_LINK_LIST_H
-#define NW4R_UTILITY_LINK_LIST_H
+#ifndef NW4R_UT_LINK_LIST_H
+#define NW4R_UT_LINK_LIST_H
 
 #include <decomp.h>
 
 #include <revolution/types.h>
 
-#include <nw4r/ut/NonCopyable.h>
 #include <nw4r/ut/inlines.h>
 #include <nw4r/misc.h>
+
+#include <stddef.h>
+
+#define NW4R_CREATE_LINKLIST    nw4r::ut::LinkListNode mLink
+#define NW4R_LINKLIST(x)        nw4r::ut::LinkList<x, offsetof(x, mLink)>
 
 namespace nw4r {
     namespace ut {
@@ -23,7 +27,7 @@ namespace nw4r {
                 };
         }
 
-        class LinkListNode : public NonCopyable {
+        class LinkListNode : private NonCopyable {
             public:
                 typedef LinkListNode Self;
 
@@ -40,7 +44,7 @@ namespace nw4r {
         };
 
         namespace detail {
-            class LinkListImpl : public NonCopyable {
+            class LinkListImpl : private NonCopyable {
                 public:
                     typedef LinkListImpl Self;
                     typedef unsigned long size_type;
@@ -183,6 +187,6 @@ namespace nw4r {
     }
 }
 
-#endif // NW4R_UTILITY_LINK_LIST_H
+#endif // NW4R_UT_LINK_LIST_H
 
 

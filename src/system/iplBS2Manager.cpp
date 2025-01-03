@@ -11,7 +11,7 @@
 
 namespace ipl {
     namespace bs2 {
-        Manager::Manager(EGG::Heap* pHeap) :
+        Manager::Manager(EGG::Heap* heap) :
         unk_0x04(1),
         mState(BS2_STATE_52),
         unk_0x0C(true),
@@ -26,7 +26,7 @@ namespace ipl {
         mEntries(NULL),
         mEntrySize(1),
         mEntryOffset(0) {
-            mpBannerBuffer = new(pHeap, BUFFER_HEAP) u8[BS2_DEFAULT_BANNER_SIZE];
+            mpBannerBuffer = new(heap, BUFFER_HEAP) u8[BS2_DEFAULT_BANNER_SIZE];
             BS2SetBannerBuffer(mpBannerBuffer, BS2_DEFAULT_BANNER_SIZE);
         }
 

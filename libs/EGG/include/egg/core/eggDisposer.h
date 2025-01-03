@@ -12,7 +12,7 @@ namespace EGG {
             virtual ~Disposer();
         
         private:
-            Heap*           mpHeap; // 0x00
+            Heap*           mheap; // 0x00
             nw4r::ut::Link  mLink;  // 0x04
     };
 }

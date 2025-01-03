@@ -4,24 +4,26 @@ extern u8 backToWiiMenu_arc[];
 
 namespace ipl {
     namespace scene {
-        BackMenu::BackMenu(EGG::Heap* pHeap) :
-        FaderSceneBase(pHeap),
+        BackMenu::BackMenu(EGG::Heap* heap) :
+        FaderSceneBase(heap),
         unk_0x5C(0) {
             mFlags = 2;
         }
 
         void BackMenu::prepare() {}
+        
         BOOL BackMenu::isReady() const {
             return TRUE;
         }
 
         void BackMenu::create() {
             // Set up layout
-            mpLayout = new layout::Object(mpHeap, backToWiiMenu_arc, "arc", "my_BackToWiiMenu.brlyt");
+            mpLayout = new layout::Object(mheap, backToWiiMenu_arc, "arc", "my_BackToWiiMenu.brlyt");
 
             mpLayout->bind("my_BackToWiiMenu.brlan");
             mpLayout->finishBinding();
 
+            // Start animating
             mpLayout->start();
             mpLayout->calc();
 
@@ -61,6 +63,7 @@ namespace ipl {
                 System::setUnk_0x2BF(true);
             }
 
+            // After system initialized, we can exit out the scene
             if (System::unkBool() || (System::hasCreatedAfter() && System::isNandFull())) {
                 System::getPointer()->setVisible(true);
                 System::getResetHandler()->enableResetToMenu(TRUE);
@@ -78,6 +81,10 @@ namespace ipl {
                 mpLayout->draw();
             }
         }
+
+        // TODO: fix this
+        void FaderSceneBase::calcCommonAfter() {}
+        void FaderSceneBase::initCalcNormal() {}
     }
 }
 

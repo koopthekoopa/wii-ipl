@@ -2,6 +2,7 @@
 #define MSL_CSTDIO_H
 
 #include <size_t.h>
+#include <stdarg.h>
 
 #ifdef __cplusplus
 extern "C" {

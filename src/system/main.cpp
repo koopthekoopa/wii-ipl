@@ -2,7 +2,7 @@
 
 #include "system/iplSystem.h"
 
-extern "C" void mainmenu();
+extern "C" {
 
 void mainmenu() {
     ipl::System::init(NULL, NULL);
@@ -14,5 +14,7 @@ s32 NANDCheck(u32 fsblock, u32 inode, u32 *answer) {
     *answer = 0;
     return NAND_RESULT_OK;
 }
+
+} // extern "C" 
 
 

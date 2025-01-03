@@ -1,5 +1,3 @@
-#define UNIT_DOESNT_MATCH
-
 #include <decomp.h>
 
 #include "system/iplNandSDWorker.h"
@@ -13,7 +11,7 @@ typedef struct {
 } MetaBlockHeader;
 
 #define CHECK_MAGIC4(buffer, sig0, sig1, sig2, sig3)    buffer[0] == sig0 && buffer[1] == sig1 && buffer[2] == sig2 && buffer[3] == sig3
-#define CHECK_MAGIC4_OR(buffer, sig0, sig1, sig2, sig3) buffer[0] == sig0 || buffer[1] == sig1 || buffer[2] == sig2 || buffer[3] == sig3
+#define CHECK_MAGIC4_NOT_OR(buffer, sig0, sig1, sig2, sig3) buffer[0] != sig0 || buffer[1] != sig1 || buffer[2] != sig2 || buffer[3] != sig3
 
 namespace ipl {
     BOOL NandSDWorker::check_header_base(const u8 *bnrData, u32 *hashOut) {
@@ -25,7 +23,7 @@ namespace ipl {
         }
         
         // Check signature
-        if (CHECK_MAGIC4_OR(header->sig, 'I','M','E','T') || hash < IMET_MAX_HEADER_SIZE) {
+        if (CHECK_MAGIC4_NOT_OR(header->sig, 'I','M','E','T') || hash < IMET_MAX_HEADER_SIZE) {
             OSReport("BANNER WARNING: invalid signature or header size %d\n", hash);
             return FALSE;
         }

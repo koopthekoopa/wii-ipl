@@ -1,10 +1,5 @@
-#ifndef NW4R_LAYOUT_MATERIAL_H
-#define NW4R_LAYOUT_MATERIAL_H
-
-#include <revolution/types.h>
-#include <nw4r/lyt/types.h>
-#include <nw4r/ut/Color.h>
-#include <stddef.h>
+#ifndef NW4R_LYT_MATERIAL_H
+#define NW4R_LYT_MATERIAL_H
 
 namespace nw4r {
     namespace lyt {
@@ -15,6 +10,6 @@ namespace nw4r {
     }
 }
 
-#endif // NW4R_LAYOUT_MATERIAL_H
+#endif // NW4R_LYT_MATERIAL_H
 
 

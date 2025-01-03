@@ -20,7 +20,7 @@ namespace ipl {
             private:
                 u8      unk_0x00[0xA31];
                 bool    unk_0xA31;
-                u8      unk_0xA32[0x02];
+                u8      unk_0xA32[0xA34 - 0xA32];
         };
     }
 }

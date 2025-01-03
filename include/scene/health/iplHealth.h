@@ -7,7 +7,7 @@ namespace ipl {
     namespace scene {
         FADER_SCENE_CLASS(skHealth) {
             public:
-                skHealth(EGG::Heap* pHeap);
+                skHealth(EGG::Heap* heap);
                 virtual ~skHealth();
 
                 virtual BOOL        isReady() const;

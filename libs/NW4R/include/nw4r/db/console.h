@@ -1,5 +1,5 @@
-#ifndef NW4R_DEBUG_CONSOLE_H
-#define NW4R_DEBUG_CONSOLE_H
+#ifndef NW4R_DB_CONSOLE_H
+#define NW4R_DB_CONSOLE_H
 
 #include <revolution.h>
 
@@ -50,6 +50,6 @@ namespace nw4r {
     }
 }
 
-#endif // NW4R_DEBUG_CONSOLE_H
+#endif // NW4R_DB_CONSOLE_H
 
 

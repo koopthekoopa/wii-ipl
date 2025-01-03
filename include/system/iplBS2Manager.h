@@ -15,8 +15,8 @@ namespace ipl {
     namespace bs2 {
         class Manager {
             public:
-                /** @param pHeap The work heap used. */
-                Manager(EGG::Heap* pHeap);
+                /** @param heap The work heap used. */
+                Manager(EGG::Heap* heap);
                 virtual ~Manager();
 
                 /** @brief Initialize Disc Update */

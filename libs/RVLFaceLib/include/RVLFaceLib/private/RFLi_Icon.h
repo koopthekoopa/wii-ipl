@@ -12,13 +12,11 @@
 extern "C" {
 #endif
 
-RFLErrcode  RFLiMakeIcon(void* pBuffer, RFLiCharInfo* pCharInfo, RFLExpression expression, const RFLIconSetting* setting);
-void        RFLiMakeIconFromData(void* pBuffer, RFLiCharData* pCharData, RFLExpression expression, const RFLIconSetting* setting);
+RFLErrcode  RFLiMakeIcon(void* buffer, RFLiCharInfo* charInfo, RFLExpression expression, const RFLIconSetting* setting);
+void        RFLiMakeIconFromData(void* buffer, RFLiCharData* charInfo, RFLExpression expression, const RFLIconSetting* setting);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif // RFL_INTERVAL_ICON_H
-
-

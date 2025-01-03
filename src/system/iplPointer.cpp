@@ -14,6 +14,16 @@
 namespace ipl {
     #define MIN_LENGTH    32.f
     #define MAX_LENGTH    128.f
+    
+    enum {
+        POINT_DOWN = 0,
+        POINT_UP
+    };
+            
+    enum {
+        POINT_NOT_SCROLLING = -1,
+        POINT_SCROLLING,
+    };
 
     static const char* scLayoutName[MAX_LAYOUT_FILES] = {
         #define LYT_INVALID_ID     -1
@@ -37,17 +47,17 @@ namespace ipl {
          "my_BScroll_a.brlyt"
     };
 
-    Pointer::Pointer(EGG::Heap* pHeap) :
-    unk_0x28(-1),
+    Pointer::Pointer(EGG::Heap* heap) :
+    mIsScrolling(POINT_NOT_SCROLLING),
     mOriginPos(0.f, 0.f),
     mArrowLength(MIN_LENGTH),
     mPointDirection(POINT_DOWN),
     mbScrolling(false),
     mbVisible(true),
     mCore() {
-        mpLayoutArchive = System::getNandManager()->readLayout(pHeap, "cursor.ash", false);
+        mpLayoutArchive = System::getNandManager()->readLayout(heap, "cursor.ash", false);
         for (int i = 0; i < MAX_LAYOUT_FILES; i++) {
-            mpLayout[i] = new(pHeap, CLASS_HEAP) layout::Object(pHeap, mpLayoutArchive, "arc", scLayoutName[i]);
+            mpLayout[i] = new(heap, CLASS_HEAP) layout::Object(heap, mpLayoutArchive, "arc", scLayoutName[i]);
             mpLayout[i]->finishBinding();
         }
     }
@@ -57,19 +67,18 @@ namespace ipl {
         mCore.calc(this);
 
         // Update the scrolling cursor
-        if (unk_0x28 >= 0) {
-            nw4r::lyt::Pane* pRootPane =    mpLayout[LYT_SCROLLER_ID]->GetRootPane()->FindPaneByName("N_BArw");
-            nw4r::lyt::Pane* pLengthPane =  mpLayout[LYT_SCROLLER_ID]->GetRootPane()->FindPaneByName("W_BArw");
-            nw4r::lyt::Pane* pOriginPane =  mpLayout[LYT_SCROLLER_ID]->GetRootPane()->FindPaneByName("BArwBase");
+        if (mIsScrolling >= POINT_SCROLLING) {
+            nw4r::lyt::Pane* pRootPane   = mpLayout[LYT_SCROLLER_ID]->getRoot()->FindPaneByName("N_BArw");
+            nw4r::lyt::Pane* pLengthPane = mpLayout[LYT_SCROLLER_ID]->getRoot()->FindPaneByName("W_BArw");
+            nw4r::lyt::Pane* pOriginPane = mpLayout[LYT_SCROLLER_ID]->getRoot()->FindPaneByName("BArwBase");
 
             // Arrow Position
             pRootPane->SetTranslate(mOriginPos);
             pOriginPane->SetTranslate(mOriginPos);
 
             // Arrow Length
-            nw4r::lyt::Size arrowSize =     pLengthPane->GetSize();   
-            arrowSize.height =              IPL_MATH_CLAMP(mArrowLength, MIN_LENGTH, MAX_LENGTH);
-
+            nw4r::lyt::Size arrowSize = pLengthPane->GetSize();   
+            arrowSize.height          = IPL_MATH_CLAMP(mArrowLength, MIN_LENGTH, MAX_LENGTH);
             pLengthPane->SetSize(arrowSize);
 
             // Arrow Scale
@@ -97,7 +106,8 @@ namespace ipl {
         if (mbVisible) {
             mCore.draw();
             
-            if (unk_0x28 >= 0) {
+            // Draw the scroller
+            if (mIsScrolling >= POINT_SCROLLING) {
                 mpLayout[LYT_SCROLLER_ID]->draw();
             }
         }
@@ -115,11 +125,11 @@ namespace ipl {
         int grabId = LYT_INVALID_ID;
 
         switch (type) {
-            case LYT_POINT: {
+            case PointerType::LayoutPoint: {
                 grabId = LYT_POINT_ID;
                 break;
             }
-            case LYT_GRABBING: {
+            case PointerType::LayoutGrab: {
                 grabId = LYT_GRAB_ID;
                 break;
             }

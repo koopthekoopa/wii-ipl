@@ -27,7 +27,7 @@ namespace ipl {
         class Base : utility::Tree, EGG::Disposer {
             public:
                 /** @brief If the scene is ready */
-                Base(EGG::Heap* pHeap);
+                Base(EGG::Heap* heap);
                 virtual ~Base();
 
                 /** @brief If the scene is ready */
@@ -38,7 +38,7 @@ namespace ipl {
                 /** @brief The scene running code when powering off/resetting the system */
                 virtual void    startResetting()            {}
                 /** @brief If the scene has finished its powering off/resetting task */
-                virtual BOOL    isResetProcessDone() const  { return TRUE; }
+                virtual BOOL    isResetProcessDone()        { return TRUE; }
 
                 /** @brief Prepare to create scene */
                 virtual void    prepare() {}
@@ -47,7 +47,7 @@ namespace ipl {
                 /** @brief Update the scene */
                 virtual void    calc() {}
                 /** @brief Rendering the scene */
-                virtual void    draw() {}
+                virtual void    draw();
                 /** @brief Destroy the scene and clear from memory */
                 virtual void    destroy() {}
 
@@ -69,10 +69,15 @@ namespace ipl {
                  * @param arg Arguments for the scene.
                 */
                 void            reserveSceneChange(int sceneId, void* arg);
-                void            reserveAllSceneDestruction(int newSceneId, void* arg);
+                void            reserveAllSceneDestruction(int sceneId, void* arg);
+                
+                virtual Tree*   getParent()                 { return mpParent; }
+                virtual Tree*   getChild()                  { return mpChild; }
+                virtual Tree*   getNext()                   { return mpNext; }
+                virtual Tree*   getPrev()                   { return mpPrev; }
                 
             protected:
-                EGG::Heap*  mpHeap;     // 0x24
+                EGG::Heap*  mheap;     // 0x24
 
                 u32         mFlags;     // 0x28
                 u32         unk_0x2C;

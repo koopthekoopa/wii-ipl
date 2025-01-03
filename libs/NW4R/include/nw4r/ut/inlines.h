@@ -5,6 +5,15 @@
 
 namespace nw4r {
     namespace ut {
+        class NonCopyable {
+            protected:
+                NonCopyable()   {}
+                ~NonCopyable()  {}
+            private:
+                NonCopyable(const NonCopyable&);
+                const NonCopyable& operator=(const NonCopyable&);
+        };
+
         template<typename T> inline T Min(T a, T b) {
             return (a > b) ? b : a;
         }

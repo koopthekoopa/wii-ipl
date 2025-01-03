@@ -1,16 +1,15 @@
-#ifndef NW4R_LAYOUT_PANE_H
-#define NW4R_LAYOUT_PANE_H
+#ifndef NW4R_LYT_PANE_H
+#define NW4R_LYT_PANE_H
 
 #include <revolution/types.h>
 
 #include <nw4r/math/types.h>
 
 #include <nw4r/lyt/types.h>
+#include <nw4r/lyt/animation.h>
 #include <nw4r/lyt/material.h>
 
 #include <nw4r/ut.h>
-
-#include <stddef.h>
 
 namespace nw4r {
     namespace lyt {
@@ -19,10 +18,10 @@ namespace nw4r {
         namespace detail {
             class PaneBase {
                 public:
-                    inline PaneBase() : mNode() {}
+                    inline PaneBase() : mLink() {}
                     virtual ~PaneBase();
 
-                    ut::LinkListNode    mNode;  // 0x00
+                    NW4R_CREATE_LINKLIST;
             };
         }
 
@@ -82,32 +81,31 @@ namespace nw4r {
                 void                SetVisible(bool visible)                    { detail::SetBit(&mFlags, 0, visible); };
             
             private:
-                Pane*                               mpParent;           // 0x0C
-                ut::LinkList<detail::PaneBase, 0>   mChildList;         // 0x10
-                ut::LinkList<AnimationLink, 0>      mAnimList;          // 0x1C
+                Pane*                           mpParent;                       // 0x0C
 
-                Material*                           mpMaterial;         // 0x28
+                NW4R_LINKLIST(detail::PaneBase) mChildList;                     // 0x10
+                NW4R_LINKLIST(AnimationLink)    mAnimList;                      // 0x1C
 
-                math::VEC3                          mTranslate;         // 0x2C
-                math::VEC3                          mRotate;            // 0x38
-                math::VEC2                          mScale;             // 0x44
-                Size                                mSize;              // 0x4C
+                Material*                       mpMaterial;                     // 0x28
 
-                math::MTX34                         mMtx;               // 0x54
-                math::MTX34                         mGlobalMtx;         // 0x84
+                math::VEC3                      mTranslate;                     // 0x2C
+                math::VEC3                      mRotate;                        // 0x38
+                math::VEC2                      mScale;                         // 0x44
+                Size                            mSize;                          // 0x4C
+
+                math::MTX34                     mMtx;                           // 0x54
+                math::MTX34                     mGlobalMtx;                     // 0x84
                 
-                char                                mName[16];          // 0xB4
-                char                                mUserData[8];       // 0xC4
+                char                            mName[NW4R_RES_NAME_SIZE-1];    // 0xB4
+                char                            mUserData[8];                   // 0xC4
                 
-                u8                                  mBasePosition;      // 0xCC
-                u8                                  mAlpha;             // 0xCD
-                u8                                  mGlbAlpha;          // 0xCE
-                u8                                  mFlags;             // 0xCF
-                bool                                mbUserAllocated;    // 0xD0
+                u8                              mBasePosition;                  // 0xCC
+                u8                              mAlpha;                         // 0xCD
+                u8                              mGlbAlpha;                      // 0xCE
+                u8                              mFlags;                         // 0xCF
+                bool                            mbUserAllocated;                // 0xD0
         };
     }
 }
 
-#endif // NW4R_LAYOUT_PANE_H
-
-
+#endif // NW4R_LYT_PANE_H

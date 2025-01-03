@@ -79,6 +79,3 @@ static void OSf32tos16(const f32* in, s16* out) {
 #endif
 
 #endif  // REVOLUTION_OS_FAST_CAST_H
-
-
-

@@ -10,25 +10,25 @@
 
 namespace ipl {
     namespace nigaoe {
-        Object::Object(EGG::Heap* pHeap, int width, int height, int faceId, MakeIconCallback callback, void* callBackWork) :
+        Object::Object(EGG::Heap* heap, int width, int height, int faceId, MakeIconCallback callback, void* callBackWork) :
         mFaceId(faceId),
         mpCharData(NULL),
         mCallBack(callback),
         mpCallBackWork(callBackWork),
         mbCreated(false) {
-            init(pHeap, width, height);
+            init(heap, width, height);
         }
 
-        Object::Object(EGG::Heap* pHeap, int width, int height, RFLiCharData* charData, MakeIconCallback callback, void* callBackWork) :
+        Object::Object(EGG::Heap* heap, int width, int height, RFLiCharData* faceData, MakeIconCallback callback, void* callBackWork) :
         mFaceId(-1),
-        mpCharData(charData),
+        mpCharData(faceData),
         mCallBack(callback),
         mpCallBackWork(callBackWork),
         mbCreated(false) {
-            init(pHeap, width, height);
+            init(heap, width, height);
         }
 
-        void Object::init(EGG::Heap* pHeap, int width, int height) {
+        void Object::init(EGG::Heap* heap, int width, int height) {
             // Prepare icon settings
             mIconSettings.width = width;
             mIconSettings.height = height;
@@ -42,7 +42,7 @@ namespace ipl {
             u32 iconSize = width * height * GX_RGB5A3_SIZE;
             mIconSize = iconSize;
                 
-            mpIconTex = new(pHeap, BUFFER_HEAP) u8[iconSize];
+            mpIconTex = new(heap, BUFFER_HEAP) u8[iconSize];
         }
 
         Object::~Object() {
@@ -77,5 +77,3 @@ namespace ipl {
         }
     }
 }
-
-

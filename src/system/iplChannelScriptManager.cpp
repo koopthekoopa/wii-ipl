@@ -14,16 +14,16 @@ namespace ipl {
 
         ChannelScriptManager::ChannelScriptManager() {
             mpChansWork = NULL;
-            mpHeap = NULL;
+            mheap = NULL;
         }
 
-        void ChannelScriptManager::create(EGG::ExpHeap* heap) {
+        void ChannelScriptManager::create(EGG::Exheap* heap) {
             if (mpChansWork == NULL) {
                 mpChansWork = new(heap, CLASS_HEAP) u8[CHANS_VM_WORK_SIZE];
             }
 
-            if (mpHeap == NULL) {
-                mpHeap = heap;
+            if (mheap == NULL) {
+                mheap = heap;
             }
 
             memset(&mCSData, 0, sizeof(mCSData));
@@ -188,8 +188,8 @@ namespace ipl {
                 mpChansWork = NULL;
             }
 
-            if (mpHeap != NULL) {
-                mpHeap = NULL;
+            if (mheap != NULL) {
+                mheap = NULL;
             }
         }
 

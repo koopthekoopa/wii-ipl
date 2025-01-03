@@ -1,5 +1,3 @@
-#define UNIT_DOESNT_MATCH
-
 #include "scene/health/iplHealth.h"
 
 #include <revolution/os.h>
@@ -13,8 +11,9 @@ namespace ipl {
         
         #define HAS_TIMER_FADE_IN       HAS_SEC2MS(1)   /* Seconds after fading in */
         #define HAS_TIMER_PRESS_A       HAS_SEC2MS(2)   /* Seconds until the user can pass through the screen */
-        #define HAS_TIMER_SAFE_MODE     HAS_SEC2MS(3)   /* Seconds the user has to hold the safe mode combo on for */
         #define HAS_TIMER_NOT_PRESS_A   HAS_SEC2MS(60)  /* Seconds for the user to do something to pass through the screen */
+        
+        #define HAS_TIMER_SAFE_MODE     HAS_SEC2MS(3)   /* Seconds the user has to hold the safe mode combo on for */
         
         enum {
             LANG_JPN = 0,
@@ -69,8 +68,8 @@ namespace ipl {
             "Push_CHN"
         };
 
-        skHealth::skHealth(EGG::Heap *pHeap) :
-        FaderSceneBase(pHeap),
+        skHealth::skHealth(EGG::Heap *heap) :
+        FaderSceneBase(heap),
         mpHasPane(NULL),
         mpPushPane(NULL),
         mWaitTick(0),
@@ -172,12 +171,12 @@ namespace ipl {
             nw4r::lyt::Pane* pHasPane;
             nw4r::lyt::Pane* pPushPane;
 
-            mpLayout = new layout::Object(mpHeap, mpLayoutFile, "arc", "it_Has_a.brlyt");
+            mpLayout = new layout::Object(mheap, mpLayoutFile, "arc", "it_Has_a.brlyt");
 
             // Make all of the panes invisible
             for (int i = 0; i < ARRSIZE(has_pane_name); i++) {
-                pHasPane   = mpLayout->GetRootPane()->FindPaneByName(has_pane_name[i]);
-                pPushPane  = mpLayout->GetRootPane()->FindPaneByName(push_pane_name[i]);
+                pHasPane   = mpLayout->getRoot()->FindPaneByName(has_pane_name[i]);
+                pPushPane  = mpLayout->getRoot()->FindPaneByName(push_pane_name[i]);
 
                 pHasPane->SetVisible(false);
                 pPushPane->SetVisible(false);
@@ -185,8 +184,8 @@ namespace ipl {
 
             // Make the necessary panes visible
             u32 country = getCountryIndex_();
-            mpHasPane   = mpLayout->GetRootPane()->FindPaneByName(has_pane_name[country]);
-            mpPushPane  = mpLayout->GetRootPane()->FindPaneByName(push_pane_name[country]);
+            mpHasPane   = mpLayout->getRoot()->FindPaneByName(has_pane_name[country]);
+            mpPushPane  = mpLayout->getRoot()->FindPaneByName(push_pane_name[country]);
 
             mpHasPane->SetVisible(true);
 
@@ -195,9 +194,9 @@ namespace ipl {
             mpLayout->bindToGroup("it_Has_a_Push.brlan",    "G_Push");
             mpLayout->bindToGroup("it_Has_a_SeenOut.brlan", "G_All");
 
-            mpLayout->setAnmType(ANIM_TYPE_FORWARD,         ANIM_FADE_IN);
-            mpLayout->setAnmType(ANIM_TYPE_LOOP,            ANIM_WAIT_PUSH);
-            mpLayout->setAnmType(ANIM_TYPE_FORWARD,         ANIM_FADE_OUT);
+            mpLayout->setAnmType(ANIM_PLAYBACK_FORWARD,         ANIM_FADE_IN);
+            mpLayout->setAnmType(ANIM_PLAYBACK_LOOP,            ANIM_WAIT_PUSH);
+            mpLayout->setAnmType(ANIM_PLAYBACK_FORWARD,         ANIM_FADE_OUT);
 
             mpLayout->finishBinding();
 
@@ -254,10 +253,8 @@ namespace ipl {
 
             if (finish_safe_mode_check()) {
                 // Either user pressed A (or B), connected controller, went to safe more OR was on the screen for 60 seconds? We fade out.
-                if (System::getMasterController()->downTrg(((WPAD_BUTTON_CL_A | WPAD_BUTTON_CL_B) * 0x10000 /* ? */) | WPAD_BUTTON_B | WPAD_BUTTON_A) ||
-                mWpadMask != newWpadMask ||
-                OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) > HAS_TIMER_NOT_PRESS_A ||
-                mbDoneSafeMode) {
+                if (System::getMasterController()->downTrg(((WPAD_BUTTON_CL_A | WPAD_BUTTON_CL_B) * 0x10000 /* ? */) | WPAD_BUTTON_B | WPAD_BUTTON_A) || mWpadMask != newWpadMask ||
+                OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) > HAS_TIMER_NOT_PRESS_A || mbDoneSafeMode) {
                     
                     if (mWpadMask != newWpadMask && !utility::wpad::isIncreaseConnectedWpad(mWpadMask, newWpadMask)) {
                         mWpadMask = newWpadMask;
@@ -345,6 +342,8 @@ namespace ipl {
 
             return result;
         }
+        
+        void FaderSceneBase::initCalcFadeout() {}
     }
 }
 

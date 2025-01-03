@@ -1,0 +1,65 @@
+object: 'build/43E/base/main.dol'
+
+symbols: 'config/43E/symbols.txt'
+splits: 'config/43E/splits.txt'
+
+ldscript_template: ldscript_ipl2.lcf
+
+export_all: true
+fill_gaps: false
+
+extract:
+    - symbol: ipl_error_eng_bmg
+      binary: ipl_error_eng.bmg
+      header: ipl_error_eng_bmg.inc
+
+    - symbol: ipl_error_fra_bmg
+      binary: ipl_error_fra.bmg
+      header: ipl_error_fra_bmg.inc
+
+    - symbol: ipl_error_ger_bmg
+      binary: ipl_error_ger.bmg
+      header: ipl_error_ger_bmg.inc
+
+    - symbol: ipl_error_ita_bmg
+      binary: ipl_error_ita.bmg
+      header: ipl_error_ita_bmg.inc
+
+    - symbol: ipl_error_jpn_bmg
+      binary: ipl_error_jpn.bmg
+      header: ipl_error_jpn_bmg.inc
+
+    - symbol: ipl_error_ned_bmg
+      binary: ipl_error_ned.bmg
+      header: ipl_error_ned_bmg.inc
+
+    - symbol: ipl_error_spa_bmg
+      binary: ipl_error_spa.bmg
+      header: ipl_error_spa_bmg.inc
+
+    - symbol: ipl_error_kor_bmg
+      binary: ipl_error_kor.bmg
+      header: ipl_error_kor_bmg.inc
+
+    - symbol: ipl_error_chn_bmg
+      binary: ipl_error_chn.bmg
+      header: ipl_error_chn_bmg.inc
+
+    - symbol: fatalDlg_ash
+      binary: fatalDlg.ash
+      header: fatalDlg_ash.inc
+
+    - symbol: backToWiiMenu_arc
+      binary: backToWiiMenu.arc
+      header: backToWiiMenu_arc.inc
+
+    - symbol: axDspSlave
+      binary: axDspSlave.bin
+      header: axDspSlave.inc
+
+# fix up bss nightmare from the generated dol
+block_relocations:
+    - target: .bss:0x811B1498
+      end:    .bss:0x8132FFFF
+
+

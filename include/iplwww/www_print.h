@@ -12,7 +12,7 @@ namespace ext_ead {
             void IPLWWWVReport(int type, const char* format, va_list args);
 
             // maybe this was defined in the header?
-            char* Message[] = {
+            static char* Message[] = {
                 "[TickTimer]",
                 "[Warning]",
                 "[Info]",

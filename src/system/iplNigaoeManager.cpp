@@ -14,10 +14,10 @@ namespace ipl {
     namespace nigaoe {
         #define IPL_NIGAOE_ICON_MAX 10
 
-        Manager::Manager(EGG::Heap* pHeap) {
+        Manager::Manager(EGG::Heap* heap) {
             mResFile = System::getRFLArc();
 
-            void* work = pHeap->alloc(RFLGetWorkSize(FALSE), BUFFER_HEAP);
+            void* work = heap->alloc(RFLGetWorkSize(FALSE), BUFFER_HEAP);
 
             mErrcode = RFLInitRes(work, mResFile->getBuffer(), mResFile->getLength(), FALSE);
 
@@ -44,16 +44,16 @@ namespace ipl {
             }
         }
 
-        Object* Manager::create(EGG::Heap* pHeap, int width, int height, int faceId, Object::MakeIconCallback callback, void* callbackWork) {
+        Object* Manager::create(EGG::Heap* heap, int width, int height, int faceId, Object::MakeIconCallback callback, void* callbackWork) {
             // Create mii and append to list
-            Object* obj = new(pHeap, CLASS_HEAP) Object(pHeap, width, height, faceId, callback, callbackWork);
+            Object* obj = new(heap, CLASS_HEAP) Object(heap, width, height, faceId, callback, callbackWork);
             nw4r::ut::List_Append(&mObjects, obj);
             return obj;
         }
 
-        Object* Manager::create(EGG::Heap* pHeap, int width, int height, RFLiCharData* faceData, Object::MakeIconCallback callback, void* callbackWork) {
+        Object* Manager::create(EGG::Heap* heap, int width, int height, RFLiCharData* faceData, Object::MakeIconCallback callback, void* callbackWork) {
             // Create mii and append to list
-            Object* obj = new(pHeap, CLASS_HEAP) Object(pHeap, width, height, faceData, callback, callbackWork);
+            Object* obj = new(heap, CLASS_HEAP) Object(heap, width, height, faceData, callback, callbackWork);
             nw4r::ut::List_Append(&mObjects, obj);
             return obj;
         }

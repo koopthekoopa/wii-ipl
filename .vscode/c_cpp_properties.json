@@ -1,19 +1,58 @@
 {
     "configurations": [
         {
+            "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/include/**",
                 "${workspaceFolder}/libs/MSL/include/**",
-                "${workspaceFolder}/libs/MetroTRK/include/**",
                 "${workspaceFolder}/libs/Runtime/include/**",
                 "${workspaceFolder}/libs/RVL_SDK/include/**",
                 "${workspaceFolder}/libs/RevoEX/include/**",
                 "${workspaceFolder}/libs/NW4R/include/**",
                 "${workspaceFolder}/libs/EGG/include/**",
-                "${workspaceFolder}/libs/RVLFaceLib/include/**"
+                "${workspaceFolder}/libs/RVLFaceLib/include"
             ],
-            "cStandard": "c89",
-            "cppStandard": "c++03"
+            "cStandard": "c99",
+            "cppStandard": "c++03",
+            "intelliSenseMode": "linux-clang-x86",
+            "compilerPath": "",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/include/**",
+                "${workspaceFolder}/libs/MSL/include/**",
+                "${workspaceFolder}/libs/Runtime/include/**",
+                "${workspaceFolder}/libs/RVL_SDK/include/**",
+                "${workspaceFolder}/libs/RevoEX/include/**",
+                "${workspaceFolder}/libs/NW4R/include/**",
+                "${workspaceFolder}/libs/EGG/include/**",
+                "${workspaceFolder}/libs/RVLFaceLib/include"
+            ],
+            "cStandard": "c99",
+            "cppStandard": "c++03",
+            "intelliSenseMode": "windows-clang-x86",
+            "compilerPath": "",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        },
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/include/**",
+                "${workspaceFolder}/libs/MSL/include/**",
+                "${workspaceFolder}/libs/Runtime/include/**",
+                "${workspaceFolder}/libs/RVL_SDK/include/**",
+                "${workspaceFolder}/libs/RevoEX/include/**",
+                "${workspaceFolder}/libs/NW4R/include/**",
+                "${workspaceFolder}/libs/EGG/include/**",
+                "${workspaceFolder}/libs/RVLFaceLib/include"
+            ],
+            "cStandard": "c99",
+            "cppStandard": "c++03",
+            "intelliSenseMode": "macos-clang-x86",
+            "compilerPath": "",
+            "configurationProvider": "ms-vscode.makefile-tools"
         }
     ],
     "version": 4

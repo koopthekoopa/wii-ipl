@@ -9,8 +9,8 @@
 
 namespace ipl {
     namespace nand {
-        MetaFile::MetaFile(EGG::Heap* pHeap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, MetaCallback callBack, void* callBackWork, int ticketIdx) :
-        File(pHeap, fileName, arc, NULL, offset, length, false),
+        MetaFile::MetaFile(EGG::Heap* heap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, MetaCallback callBack, void* callBackWork, int ticketIdx) :
+        File(heap, fileName, arc, NULL, offset, length, false),
         mDescriptor(-1),
         mTitleId(titleId),
         mTicket(NULL),
@@ -82,7 +82,7 @@ namespace ipl {
                 result = ES_OpenTitleContentFile(mTitleId, mTicket, 0);
                 mDescriptor = result;
 
-                // If the file could not open for whatever reason, load the meta file from the NAND instead (from the meta folder).
+                // If we don't have the rights to open the file, load the meta file from the NAND instead (from the meta folder).
                 if (result == ES_ERR_TMD_INVALID_RIGHT) {
                     mbMetaInNand = true;
                     return openNandFile_();
@@ -112,7 +112,7 @@ namespace ipl {
                 }
             }
         failed:
-            System::err_log(ES, result, line);
+            System::err_log("ES", result, line);
             System::err_display(MESG_ERR_CONTENT);
 
             return FALSE;
@@ -138,7 +138,7 @@ namespace ipl {
             // Read the file
             if (ES_ReadContentFile(mDescriptor, bufferOut, length) < ES_ERR_OK) {
         failed:
-                System::err_log(ES, 0, 230);
+                System::err_log("ES", 0, 230);
                 System::err_display(MESG_ERR_CONTENT);
             }
         }
@@ -152,7 +152,7 @@ namespace ipl {
                 return TRUE;
             }
             else {
-                System::err_log(ES, 0, 253);
+                System::err_log("ES", 0, 253);
                 System::err_display(MESG_ERR_CONTENT);
                 return FALSE;
             }

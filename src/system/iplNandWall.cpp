@@ -14,8 +14,8 @@ namespace ipl {
 
         u32 user_used_fsblocks;
         u32 user_used_inodes;
-        u32 global_free_fsblock;
         u32 global_free_inode;
+        u32 global_free_fsblock;
 
         void calcGlobalUsage_(u32* freeBlocks, u32* freeINodes, NANDFileSystemStatus* pStatus);
         BOOL isNandCapacity();
@@ -67,10 +67,10 @@ namespace ipl {
         }
 
         BOOL checkNandCapacityAppBootable() {
-            u32 usedTmpBlocks = 0;
-            u32 usedTmpINodes = 0;
+            u32 excludedBlocks = 0;
+            u32 excludedINodes = 0;
 
-            SecretGetUsage("/tmp", &usedTmpBlocks, &usedTmpINodes);
+            SecretGetUsage("/tmp", &excludedBlocks, &excludedINodes);
 
             NANDFileSystemStatus status;
             memset(&status, 0, sizeof(status));
@@ -81,8 +81,8 @@ namespace ipl {
             calcGlobalUsage_(&freeBlocks, &freeINodes, &status);
 
             // Exclude the amount of blocks used in the "tmp" folder
-            freeBlocks += usedTmpBlocks;
-            freeINodes += usedTmpINodes - 1;
+            freeBlocks += excludedBlocks;
+            freeINodes += excludedINodes - 1;
             
             // Check if we have enough to boot an application
             if (freeBlocks >= 3584 && freeINodes >= 96) {

@@ -12,6 +12,8 @@
 #define ENTRY_SAVE_GPR(reg) entry SAVE_GPR(reg)
 #define ENTRY_RESTORE_GPR(reg) entry RESTORE_GPR(reg)
 
+#pragma force_active on /* Force. */
+
 void SAVE_FPR(14)();
 void SAVE_FPR(15)();
 void SAVE_FPR(16)();

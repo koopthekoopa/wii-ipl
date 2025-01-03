@@ -7,22 +7,27 @@ namespace ipl {
     namespace scene {
         FADER_SCENE_CLASS(BackMenu) {
             public:
-                BackMenu(EGG::Heap* pHeap);
+                BackMenu(EGG::Heap* heap);
                 virtual ~BackMenu() {}
 
-                virtual BOOL        isReady() const;
+                virtual BOOL            isReady() const;
 
-                virtual void        prepare();
-                virtual void        create();
-                virtual void        draw();
+                virtual void            prepare();
+                virtual void            create();
+                virtual void            draw();
 
-                virtual void        initCalcFadeout();
+                virtual void            initCalcFadeout();
 
-                virtual void        calcCommon();
+                virtual void            calcCommon();
 
-                virtual SceneCommand calcFadein();
-                virtual SceneCommand calcNormal();
-                virtual SceneCommand calcFadeout();
+                virtual SceneCommand    calcFadein();
+                virtual SceneCommand    calcNormal();
+                virtual SceneCommand    calcFadeout();
+
+                // :sob:
+#if defined(VERSION_43K)
+                virtual void            someUnusedVirtualMember() = 0;
+#endif
             
             private:
                 layout::Object* mpLayout;   // 0x58

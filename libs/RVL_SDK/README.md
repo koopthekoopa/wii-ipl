@@ -1,7 +1,11 @@
-# Revolution SDK Decompilation
-A decompilation of the Revolution SDK (RVL_SDK) from the Wii Menu.   
+Revolution SDK Decompilation
+============================
+A decompilation of the Revolution SDK (RVL_SDK) from the Wii Menu.  
 
-The Wii Menu has the following libraries linked:
+This version of the SDK seems to be a mess.  
+Most of the code is from the 2006/2007 version and was recompiled in 2010 with the GC 3.0a5.2 compiler.
+
+The Wii Menu has the following libraries linked (alphabetical order):
 * **AI** (Audio Interface Library)
 * **ARC** (Archive Library; for reading "U8 files")
 * **AX** (Audio Library)
@@ -10,7 +14,7 @@ The Wii Menu has the following libraries linked:
 * **BTE** (BroadCom's Bluetooth Driver Library)
 * **CARD** (GameCube Memory Card Library)
 * **CNT** (Title Content API Library)
-* **CNTCACHE** (SD Title Content Library; for SD Card Menu)
+* **CNTCACHE** (SD Title Content Library?; seems to be only used for SD Card Menu)
 * **CX** (Compression Library)
 * **DB** (Debug Library)
 * **DSP** (DSP Library)
@@ -20,28 +24,35 @@ The Wii Menu has the following libraries linked:
 * **ESP** (Public ES Library)
 * **EUART** (Externel Interface Bus UART Library; by Hudson Soft)
 * **EXI** (Externel Interface Bus Library)
-* **FA** (File Allocation Library; for SD Card. Small left overs for USB support)
+* **FA** (File Allocation Library; for SD Card. Small left overs for USB support?)
+* **FS** (NAND ISFS Library)
 * **GX** (Graphics Library)
 * **IPC** (IPC Driver and IOS Library)
-* **ISFS** (NAND ISFS Library)
 * **KBD** (Keyboard Library)
 * **KPAD** (High Level Wii Remote Library)
 * **KPR** (Key Processor Library)
 * **MEM** (Memory Manager Library)
 * **MTX** (Matrix and Vector Library)
 * **NAND** (NAND Library; Wii System Memory)
-* **NUP** (Wii NUS Library)
+* **NUP** (Wii NUS Library; **N**intendo **UP**date?)
 * **OS** (Operating System Library)
 * **PAD** (GameCube Controller Library)
 * **RSO** (RSO Module Library)
 * **SC** (System Configuration Library)
+* **SCUTIL** (System Configuration Utility Library; Seems to be related to country code)
 * **SDI** (SD Card Driver API)
 * **SI** (Serial Interface Library)
 * **TPL** (Texture Pallete Library)
 * **USB** (IUSB I/O API; written by Hudson Soft)
 * **VI** (Video Interface Library)
 * **WAD** (WAD Package Library)
+* **WENC** (Some Encoding Library)
 * **WPAD** (Low Level Wii Remote Library)
 * **WUD** (Wireless Driver Library)
+
+References
+----------
+[kiwi515/ogws](https://github.com/kiwi515/ogws)  
+[doldecomp/dolsdk2001](https://github.com/doldecomp/dolsdk2001)  
 
 

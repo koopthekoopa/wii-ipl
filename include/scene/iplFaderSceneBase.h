@@ -25,13 +25,13 @@ namespace ipl {
 
         SCENE_CLASS(FaderSceneBase) {
             public:
-                FaderSceneBase(EGG::Heap* pHeap);
+                FaderSceneBase(EGG::Heap* heap);
                 virtual ~FaderSceneBase() {}
 
                 virtual void            calc();
 
-                virtual void            initCalcNormal()    {}                      // 0x4C
-                virtual void            initCalcFadeout()   {}                      // 0x50
+                virtual void            initCalcNormal();                           // 0x4C
+                virtual void            initCalcFadeout();                          // 0x50
 
                 virtual void            calcCommon()        {}                      // 0x54
 
@@ -39,7 +39,7 @@ namespace ipl {
                 virtual SceneCommand    calcNormal()        { return SCENE_NEXT; }  // 0x5C
                 virtual SceneCommand    calcFadeout()       { return SCENE_NEXT; }  // 0x60
 
-                virtual void            calcCommonAfter()   {}                      // 0x64
+                virtual void            calcCommonAfter();                          // 0x64
                 
                 int                     getState()          { return mState; }
             

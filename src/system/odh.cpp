@@ -1,5 +1,3 @@
-#define UNIT_DOESNT_MATCH
-
 #include "system/odh.h"
 
 s32 CArGBAOdh::ScaleLimit(s32 scale) {

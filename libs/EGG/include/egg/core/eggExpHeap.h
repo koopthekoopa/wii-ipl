@@ -4,7 +4,7 @@
 #include <egg/core/eggHeap.h>
 
 namespace EGG {
-    class ExpHeap : public Heap {
+    class Exheap : public Heap {
         
     };
 }

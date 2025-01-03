@@ -11,8 +11,8 @@ namespace ipl {
         
         class RsoThread : public utility::ut_thread {
             public:
-                /** @param pHeap The work heap used. */
-                RsoThread(EGG::Heap* pHeap);
+                /** @param heap The work heap used. */
+                RsoThread(EGG::Heap* heap);
                 virtual         ~RsoThread();   // 0x08
                 
                 virtual void*   Run();          // 0x0C

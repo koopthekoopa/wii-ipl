@@ -30,11 +30,11 @@ namespace EGG {
 
 void *operator  new(size_t size);
 void *operator  new(size_t size, int align);
-void *operator  new(size_t size, EGG::Heap *pHeap, int align);
+void *operator  new(size_t size, EGG::Heap *heap, int align);
 
 void *operator  new[](size_t size);
 void *operator  new[](size_t size, int align);
-void *operator  new[](size_t size, EGG::Heap *pHeap, int align);
+void *operator  new[](size_t size, EGG::Heap *heap, int align);
 
 void operator   delete(void *ptr);
 void operator   delete[](void *ptr);

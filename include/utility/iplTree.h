@@ -12,16 +12,16 @@ namespace ipl {
 
                 virtual         ~Tree() {};                         // 0x08
 
-                virtual Tree*   getPrev()   { return mpPrev; }      // 0x0C
-                virtual Tree*   getNext()   { return mpNext; }      // 0x10
-                virtual Tree*   getChild()  { return mpChild; }     // 0x14
-                virtual Tree*   getParent() { return mpParent; }    // 0x18
+                virtual Tree*   getParent() { return mpParent; }    // 0x0C
+                virtual Tree*   getChild()  { return mpChild; }     // 0x10
+                virtual Tree*   getNext()   { return mpNext; }      // 0x14
+                virtual Tree*   getPrev()   { return mpPrev; }      // 0x18
 
                 void            attach(Tree* pTree);
                 void            insert(Tree* pTree, Tree* pTree2);
                 void            detach();
 
-            private:
+            protected:
                 Tree*   mpParent;               // 0x04
                 Tree*   mpChild;                // 0x08
                 Tree*   mpNext;                 // 0x0C

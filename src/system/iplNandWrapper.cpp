@@ -3,6 +3,8 @@
 namespace ipl {
     namespace nand {
         namespace wrapper {
+            BOOL _condition(int result, int tries);
+            
             #define MAX_TRIES   10
 
             #define WrapperFunction(r) \

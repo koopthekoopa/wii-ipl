@@ -75,8 +75,11 @@ void    OSShutdownSystem();
 void    OSReport(const char* msg, ...);
 void    OSVReport(const char* msg, va_list list);
 
-void    OSPanic(const char* file, int line, const char* msg);
-#define OSHalt(msg, line) OSPanic(__FILE__, line, msg)
+void    OSPanic(const char* file, int line, const char* msg, ...);
+#define OSHalt(msg, line)           OSPanic(__FILE__, line, msg)
+#define OSAssertMsg(exp, msg, line) if (!(exp)) OSHalt(msg, line)
+
+void    OSRegisterVersion(const char* version);
 
 void    OSFatal(GXColor front, GXColor back, const char* msg);
 
@@ -109,5 +112,3 @@ BOOL    __OSSyncSram();
 #endif
 
 #endif // REVOLUTION_OS_H
-
-

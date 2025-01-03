@@ -6,10 +6,10 @@
 
 namespace ipl {
     namespace channel {
-        RsoThread::RsoThread(EGG::Heap* pHeap) :
+        RsoThread::RsoThread(EGG::Heap* heap) :
         mbStarted(false),
         mpCalcFunc(NULL) {
-            mpStack = new(pHeap, BUFFER_HEAP) u8[STACK_SIZE];
+            mpStack = new(heap, BUFFER_HEAP) u8[STACK_SIZE];
         }
 
         RsoThread::~RsoThread() {

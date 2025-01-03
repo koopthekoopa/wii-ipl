@@ -1,87 +1,104 @@
-![Decompilation Logo Here](./misc/logo.png)
-# Wii Menu Decompilation [![Discord Server][discord-server-badge]][discord-server-link]
-[discord-server-link]: https://discord.gg/hKx3FJJgrV
-[discord-server-badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
-This work in progress repository aims to a full 1:1 decompilation of version 4.3 of the Wii Menu.   
-Currenty working supported versions:
-- 4.3U (USA)   
-- 4.3E (Europe)   
+![Logo](./misc/logo.png)  
+Wii Menu  
+[![Build Status]][actions] [![Discord Badge]][discord]
+========
 
-This repository requires a WAD of the Wii Menu.
+[Build Status]: https://github.com/koopthekoopa/wii-ipl/actions/workflows/build.yml/badge.svg
+[actions]: https://github.com/koopthekoopa/ipl/actions/workflows/build.yml
+[Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
+[discord]: https://discord.gg/hKx3FJJgrV
 
-## Dependencies
-**TODO: Build for Mac OS**   
-The following dependencies are required to build the decompilation:   
+A work-in-progress decompilation of the Wii Menu (4.3).
 
-- Git (optional)
-- Python 3
-- GCC
+This repository does **not** contain any assets or assembly of the executable whatsoever. An existing copy of the Wii Menu is required.
 
-Below is how to install the dependencies that is depending on your Operating System.   
+Supported versions:
+- `43J`: Version 4.3J (Japan)
+- `43U`: Version 4.3U (USA)
+- `43E`: Version 4.3E (Europe)
+- `43K`: Version 4.3K (Korean)
 
-### Windows
+Installing Dependencies
+=======================
 
-**If you are using WSL, you should follow the [Linux](#linux) section instead.**
+Windows
+-------
 
-With MSYS2, this is how you install the dependencies
+> [!NOTE]
+> On Windows, it's **highly recommended** to use native tooling. WSL or MSYS2 are **not** required.  
+> When running under WSL, [objdiff](#diffing) is unable to get filesystem notifications for automatic rebuilds.
 
-```
-pacman -S git make mingw-w64-x86_64-gcc mingw-w64-x86_64-python mingw-w64-i686-gcc mingw-w64-i686-python
-```
+- Install [Python](https://www.python.org/downloads/) and add it to `PATH` environment variable.
+  - Setup will ask you if you want to add python to `%PATH%`, make sure that is enabled.
+  - Python is also available from the [Windows Store](https://apps.microsoft.com/store/detail/python-311/9NRWMJP3717K).
+- Download the ninja tool [here](https://github.com/ninja-build/ninja/releases) and either add it to `PATH` environment variable **or** the repository directory.
+  - You can install ninja quickly via pip (if you have it installed via Python's setup)
+    - `pip install ninja`
 
-If you wish to not use either MSYS2 nor WSL then make sure that GCC and Make are in PATH environment variable.   
-You will also need to install Python 3 yourself [here](https://www.python.org/downloads/) (make sure that `python.exe` is in your `PATH` variable).
+macOS
+-----
 
-### Linux
+- Install the [ninja](https://github.com/ninja-build/ninja/wiki/Pre-built-Ninja-packages) tool:
 
-For Ubuntu/Debian:   
-```
-sudo apt install build-essential git python3
-```
-
-For Arch Linux:   
-```
-sudo pacman -S base-devel python git
-```
-
-### Automatically downloaded tools
-Here are a list of tools that get downloaded when you run `make prepare`:
-- [wibo](https://github.com/decompals/wibo) (when using linux)
-- [gc-wii-binutils](https://github.com/encounter/gc-wii-binutils)
-- [decomp-toolkit](https://www.github.com/encounter/decomp-toolkit)
-
-## Building the Decompilation
-**NOTE: This will not compile a working Wii Menu yet!**
-- If you have git, clone the decompilation repository by inputting this to your terminal:
+  ```sh
+  brew install ninja
   ```
+
+- Install [wine-crossover](https://github.com/Gcenx/homebrew-wine):
+
+  ```sh
+  brew install --cask --no-quarantine gcenx/wine/wine-crossover
+  ```
+
+After OS upgrades, if macOS complains about `Wine Crossover.app` being unverified, you can unquarantine it using:
+
+```sh
+sudo xattr -rd com.apple.quarantine '/Applications/Wine Crossover.app'
+```
+
+Linux
+-----
+
+- Install [ninja](https://github.com/ninja-build/ninja/wiki/Pre-built-Ninja-packages).
+- For non-x86(_64) platforms, you must install wine from your package manager.
+  - For x86(_64), [wibo](https://github.com/decompals/wibo), a minimal 32-bit Windows binary wrapper, will be automatically downloaded and used.
+
+Building the Decompilation
+==========================
+
+- Clone the repository:
+
+  ```sh
   git clone https://github.com/koopthekoopa/wii-ipl.git
   ```
-  - Otherwise download the repository by clicking on **Code** then **Download ZIP** then extract the .zip contents   
 
-- As stated above, you will need a WAD of the Wii Menu to grab its executable.
-  - Use your preferred WAD Extractor (I recommend ShowMiiWADs as it also works fine on Linux, if you have Wine) and use it to extract the Wii Menu WAD file.
-  - Then copy the executable file `00000008.app` to the decompilation directory and rename it to `base.<version>.app`
-    - Make sure the version on the filename does not include the decimal at the middle (for example `4.3U` should be `43U`)
-    - Check to make sure the file matches with the [SHA-1 Sums](#sums)!   
+- Copy the Wii Menu WAD to `orig/[Wii Menu Version]`.
+  - Rename the WAD to `base.wad`
 
-- You are now ready to build! To build you need to type in:
+- Configure:
+
+  ```sh
+  python configure.py
   ```
-  make VERSION=<version>
+
+  To use a version other than the default one, 4.3U, use the `--version` argument.
+
+- Build:
+
+  ```sh
+  ninja
   ```
-  - Where `<version>` is the chosen version to compile. (If you do not define `VERSION`, it will compile 4.3U by default)
-  - The output should be `ipl.<version>.app` in the build folder.
 
-## Sums
-|File|SHA-1|
-|-------------------------------|-----------------------------|
-|`ipl.43U.app` (Wii Menu 4.3U)|`26116613f624061ba99c8d1a299aaa6efa85670d`|
-|`ipl.43E.app` (Wii Menu 4.3E)|`2ebea6ed22473857ed64b12daa71ae2d1ed61708`|
-|`ipl.43J.app` (Wii Menu 4.3J)|`c94c8e671854d56fa2abd4c4c886e6c62a2c7f0e`|
-|`ipl.43K.app` (Wii Menu 4.3K)|`98496cc8467f0749d7605fc175b1911827aa1fd0`|
+> [!WARNING]
+> The code is not 100% shiftable, most of it works aside from a couple of things (such as Wii Settings and a few channel banners like the Forecast Channel)
 
-# Tools used
-[decomp-toolkit](https://www.github.com/encounter/decomp-toolkit) - A tool that can do a lot and will make decompiling GameCube/Wii games easier and better.   
-[objdiff](https://www.github.com/encounter/objdiff) - Used to check whenever if the compiled object is matching or not.   
-[Ghidra](https://www.github.com/NationalSecurityAgency/ghidra) - Used to load executables and output a rough decompilaton of a function.   
+Diffing
+=======
 
+Once the initial build succeeds, an `objdiff.json` should exist in the project root.
 
+Download the latest release from [encounter/objdiff](https://github.com/encounter/objdiff). Under project settings, set `Project directory`. The configuration should be loaded automatically.
+
+Select an object from the left sidebar to begin diffing. Changes to the project will rebuild automatically: changes to source files, headers, `configure.py`, `splits.txt` or `symbols.txt`.
+
+![](misc/objdiff.png)

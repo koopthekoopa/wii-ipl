@@ -6,8 +6,8 @@
 
 namespace ipl {
     namespace message {
-        Manager::Manager(EGG::Heap* pHeap) {
-            mpMessage = new(pHeap, CLASS_HEAP) Message();
+        Manager::Manager(EGG::Heap* heap) {
+            mpMessage = new(heap, CLASS_HEAP) Message();
             initMessage();
         }
 

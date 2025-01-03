@@ -9,7 +9,7 @@ namespace ipl {
     namespace nand {
         class SharedFile : File {
             public:
-                SharedFile(EGG::Heap* pHeap, const char* fileName, u32 index, int offset, u32 length, ESTitleId titleId, int ticket);
+                SharedFile(EGG::Heap* heap, const char* fileName, u32 index, int offset, u32 length, ESTitleId titleId, int ticket);
                 virtual ~SharedFile();
             
             protected:

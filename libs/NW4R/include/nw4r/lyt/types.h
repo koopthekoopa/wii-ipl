@@ -1,10 +1,14 @@
-#ifndef NW4R_LAYOUT_TYPES_H
-#define NW4R_LAYOUT_TYPES_H
+#ifndef NW4R_LYT_TYPES_H
+#define NW4R_LYT_TYPES_H
 
 #include <revolution/types.h>
+
 #include <nw4r/math/types.h>
 #include <nw4r/ut/LinkList.h>
+
 #include <stddef.h>
+
+#define NW4R_RES_NAME_SIZE  17
 
 namespace nw4r {
     namespace lyt {
@@ -32,13 +36,6 @@ namespace nw4r {
             f32 height;
         };
 
-        class AnimationLink {
-            public:
-                AnimationLink() : mNode() {}
-
-                ut::LinkListNode    mNode;
-        };
-        
         enum {
             TEXT_COLOR_FORE = 0,
             TEXT_COLOR_BACK,
@@ -47,6 +44,6 @@ namespace nw4r {
     }
 }
 
-#endif // NW4R_LAYOUT_TYPES_H
+#endif // NW4R_LYT_TYPES_H
 
 

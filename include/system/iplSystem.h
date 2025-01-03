@@ -1,6 +1,8 @@
 #ifndef IPL_SYSTEM_H
 #define IPL_SYSTEM_H
 
+#include "config.h"
+
 #include <decomp.h>
 
 #include <revolution.h>
@@ -25,6 +27,8 @@
 #include "system/iplNigaoeManager.h"
 #include "system/iplBS2Manager.h"
 
+#include "iplMath.h"
+
 #include "scene/iplSceneManager.h"
 
 namespace ipl {
@@ -35,21 +39,21 @@ namespace ipl {
                     Arg();
 
                 private:
-                    u8                  unk_0x00[0x04];
-                    EGG::Heap*          mpAppHeap;              // 0x04
+                    u8                  unk_0x00[0x04 - 0x00];
+                    EGG::Heap*          mpApheap;              // 0x04
                     EGG::Heap*          mpMem1SysHeap;          // 0x08
                     EGG::Heap*          unk_0x0C;               // 0x0C
-                    u8                  unk_0x10[0x10];
+                    u8                  unk_0x10[0x20 - 0x10];
                     EGG::Heap*          mpNandSharedHeap;       // 0x20
                     undefined4*         unk_0x24;
                     EGG::Heap*          unk_0x28;
                     EGG::Heap*          mpTreasureHeap;         // 0x2C
-                    u8                  unk_0x30[0x34];
+                    u8                  unk_0x30[0x64 - 0x30];
                     scene::Manager*     mpSceneManager;         // 0x64
                     nigaoe::Manager*    mpNigaoeManager;        // 0x68
                     nand::Manager*      mpNandManager;          // 0x6C
-                    undefined           unk_0x74[0x10];
-                    message::Message*   mpMessage;               // 0x80
+                    undefined           unk_0x70[0x80 - 0x70];
+                    message::Message*   mpMessage;              // 0x80
                     undefined4          unk_0x84;
                     undefined4          unk_0x88;
                     nwc24::Manager*     mpNwc24Manager;         // 0x8C
@@ -61,19 +65,20 @@ namespace ipl {
                     postman::Manager*   mpPostmanManager;       // 0xA4
                     bs2::Manager*       mpBS2Manager;           // 0xA8
                     DialogWindow*       mpDialog;               // 0xAC
-                    Pointer*            mpPointer;              // 0xB0
+                    Pointer*            mpointer;              // 0xB0
                     HomeButtonMenu*     mpHomeButton;           // 0xB4
                     undefined4*         unk_0xB8;
                     message::Manager*   mpMesgMgr;              // 0xBC
                     EGG::Thread*        mpUnkThread;            // 0xC0
                     EGG::ColorFader*    mpFader;                // 0xC4
-                    EGG::ColorFader*    pResetFader;            // 0xC8
+                    EGG::ColorFader*    mpResetFader;           // 0xC8
+                    math::Random*       mpRandom;               // 0xCC
 
-                    u8                  unk_0xCC[0x34];
+                    u8                  unk_0xD0[0x100 - 0xD0];
 
                     nand::File*         mpFaceArcBuffer;        // 0x100
 
-                    u8                  unk_0x104[0x2C];
+                    u8                  unk_0x104[0x130 - 0x104];
 
                     nand::File*         mpEngMsg;               // 0x130
                     nand::File*         mpFraMsg;               // 0x134
@@ -86,9 +91,9 @@ namespace ipl {
                     nand::File*         mpChnTradMsg;           // 0x150
                     nand::File*         mpKorMsg;               // 0x154
 
-                    u8                  unk_0x158[0x88];
+                    u8                  unk_0x158[0x1E0 - 0x158];
                     OSAlarm             mUnkAlarm;              // 0x1E0
-                    u8                  unk_0x20C[0xA0];
+                    u8                  unk_0x210[0x2B0 - 0x210];
 
                     volatile bool       mbResLoaded;            // 0x2B0
                     bool                unk_0x2B1;
@@ -107,12 +112,13 @@ namespace ipl {
                     volatile bool       unk_0x2BE;
                     bool                unk_0x2BF;
 
-                    u8                  unk_0x2C0[0x17];
+                    u8                  unk_0x2C0[0x2D8 - 0x2C0];
 
                 friend class System;
             };
+
             /** @return Heap used for the IPL.*/
-            static EGG::Heap*           getAppHeap()            { return smArg.mpAppHeap; }
+            static EGG::Heap*           getApheap()            { return smArg.mpApheap; }
             /** @return MEM1 Heap */
             static EGG::Heap*           getSysMEM1()            { return smArg.mpMem1SysHeap; }
             /** @return MEM2 Heap */
@@ -148,7 +154,7 @@ namespace ipl {
             /** @return The Dialog object. */
             static DialogWindow*        getDialog()             { return smArg.mpDialog; }
             /** @return The Pointer object. */
-            static Pointer*             getPointer()            { return smArg.mpPointer; }
+            static Pointer*             getPointer()            { return smArg.mpointer; }
             /** @return The Message Manager object. */
             static message::Manager*    getMessageManager()     { return smArg.mpMesgMgr; }
             /** @return something */
@@ -156,7 +162,9 @@ namespace ipl {
             /** @return The Fader object */
             static EGG::ColorFader*     getFader()              { return smArg.mpFader; }
             /** @return The fader object for the reset handler. */
-            static EGG::ColorFader*     getResetFader()         { return smArg.pResetFader; }
+            static EGG::ColorFader*     getResetFader()         { return smArg.mpResetFader; }
+            /** @return The Random Number Generator object. */
+            static math::Random*        getRndm()               { return smArg.mpRandom; }
             /** @return The Mii Archive Data */
             static nand::File*          getRFLArc()             { return smArg.mpFaceArcBuffer; }
             /** @return The English message data. */
@@ -197,16 +205,23 @@ namespace ipl {
             static void                 setUnk_0x2BE(bool val)  { smArg.unk_0x2BE = val; }
             static bool                 isUnk_0x2BF()           { return smArg.unk_0x2BF; }
             static void                 setUnk_0x2BF(bool val)  { smArg.unk_0x2BF = val; }
-
-            // TODO investigate this madness
-            /** @return Whether the system resources have loaded */
-            static bool isRsrcLoaded()      { return smArg.mbResLoaded && smArg.mbFontResLoaded && smArg.mbSndResLoaded && smArg.mbZi8ResLoaded; }
-            static bool isCmnResLoaded()    { return smArg.mbResLoaded; }
-            static bool isFontResLoaded()   { return smArg.mbFontResLoaded; }
-            static bool isSndResLoaded()    { return smArg.mbSndResLoaded; }
-            static bool isRsrcZi8Loaded()   { return smArg.mbZi8ResLoaded; }
             
-            static bool unkBool() { return smArg.mbCreatedAfter && smArg.unk_0x2B4; }
+            
+
+            static bool isCmnResLoaded()                        { return smArg.mbResLoaded; }
+            static bool isFontResLoaded()                       { return smArg.mbFontResLoaded; }
+            static bool isSndResLoaded()                        { return smArg.mbSndResLoaded; }
+            static bool isZi8ResLoaded()                        { return smArg.mbZi8ResLoaded; }
+
+            static bool isRsrcLoaded() { return smArg.mbResLoaded 
+                                    && smArg.mbFontResLoaded 
+                                    && smArg.mbSndResLoaded
+#ifdef USE_ZI8
+                                    && smArg.mbZi8ResLoaded
+#endif
+                                    ;}
+
+            static bool unkBool()       { return smArg.mbCreatedAfter && smArg.unk_0x2B4; }
         
             /**
              * @brief Initializes the system.
@@ -237,19 +252,44 @@ namespace ipl {
 
             /** @brief Prepare the system for error handler */
             static void                     err_run();
-            #define                         err_log(type, result, line) err_log_(#type, result, __FILE__, line)
-            static inline void              err_log_(const char* type, int result, const char* file, int line) {
+            /**
+             * @brief Log the result to the NAND log. (`shared2/test2/nanderr.log`)
+             * @param type The error type as a string
+             * @param result The result
+             * @param line The line number
+             */
+            #define                         err_log(type, result, line) err_log_ex(type, result, __FILE__, line)
+            /**
+             * @brief Best to use `err_log`
+             * @param type The error type as a string
+             * @param result The result
+             * @param file The source file name
+             * @param line The line number
+             */
+            static inline void              err_log_ex(const char* type, int result, const char* file, int line) {
                 smArg.mpErrorHandler->log(type, result, file, line);
             }
-            #define                         err_display err_display_
-            static inline void              err_display_(int msg) {
+            /**
+             * @brief Display the error screen.
+             * @param msg The Message ID (`iplErrorHandler.h` has the list of available IDs)
+             */
+            static inline void              err_display(int msg = MESG_ERR_GENERIC) {
                 smArg.mpErrorHandler->set(ErrorHandler::DEFAULT, msg);
             }
 
             /** @brief Prepare the system for reset handler */
             static void                     reset_run();
+            
             /** @brief Prepare the system for warning handler */
             static void                     warning_run();
+            /**
+             * @brief Display the warning dialog.
+             * @param msgId The Message ID.
+             */
+            static inline void              warning_display(int msg) {
+                smArg.mpWarningHandler->set(WarningHandler::DEFAULT, msg);
+            }
+            
             static void                     checkNandOverFlowFlagAsync();
 
         private:

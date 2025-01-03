@@ -11,10 +11,10 @@ namespace ipl {
     class Exception {
         public:
             /**
-             * @param pHeap The memory heap used.
+             * @param heap The memory heap used.
              * @param rMode Render mode used.
              */
-            Exception(EGG::Heap* pHeap, const GXRenderModeObj& rMode);
+            Exception(EGG::Heap* heap, const GXRenderModeObj& rMode);
 
             /* @note pretty please, unless you wanna crash the ipl, dont run this . */
             void    exception_callback(nw4r::db::ConsoleHandle console);

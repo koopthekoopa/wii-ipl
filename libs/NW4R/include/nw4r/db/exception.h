@@ -1,5 +1,5 @@
-#ifndef NW4R_DEBUG_EXCEPTION_H
-#define NW4R_DEBUG_EXCEPTION_H
+#ifndef NW4R_DB_EXCEPTION_H
+#define NW4R_DB_EXCEPTION_H
 
 #include <revolution.h>
 
@@ -16,6 +16,6 @@ namespace nw4r {
     }
 }
 
-#endif // NW4R_DEBUG_EXCEPTION_H
+#endif // NW4R_DB_EXCEPTION_H
 
 

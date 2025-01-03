@@ -15,12 +15,12 @@ namespace ipl {
             public:
                 typedef void (*MakeIconCallback)(Object*, void*);
 
-                Object(EGG::Heap* pHeap, int width, int height, int faceId, MakeIconCallback callback, void* callBackWork);
-                Object(EGG::Heap* pHeap, int width, int height, RFLiCharData* pCharData, MakeIconCallback callback, void* callBackWork);
+                Object(EGG::Heap* heap, int width, int height, int faceId, MakeIconCallback callback, void* callBackWork);
+                Object(EGG::Heap* heap, int width, int height, RFLiCharData* faceData, MakeIconCallback callback, void* callBackWork);
                 ~Object();
             
             private:
-                void    init(EGG::Heap* pHeap, int width, int height);
+                void    init(EGG::Heap* heap, int width, int height);
                 void    make_icon();
 
                 BOOL    created()           { return mbCreated; }
@@ -49,5 +49,3 @@ namespace ipl {
 }
 
 #endif // IPL_NIGAOE_H
-
-

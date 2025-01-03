@@ -9,6 +9,8 @@
 
 #include "layout/iplLayout.h"
 
+/*** Message IDs for the Error Message ***/
+
 /* An error has occurred. */
 #define MESG_ERR_GENERIC    0
 /* The Wii System Memory is damaged. */
@@ -22,17 +24,20 @@
 
 namespace ipl {
     class ErrorHandler {
-        public:
+        private:
             enum Type {
                 NONE = 0,
                 DEFAULT
             };
 
-            /** @param pHeap The work heap. */
-            ErrorHandler(EGG::Heap* pHeap);
+            /** @param heap The work heap. */
+            ErrorHandler(EGG::Heap* heap);
+
+            void draw();
+            void check();
+            void calc();
 
             /**
-             * @brief Display the error screen.
              * @param type The error type.
              * @param msgId The message ID that will be displayed.
              * @param arg1 Unknown. Left as `NULL`.
@@ -40,22 +45,15 @@ namespace ipl {
              * @param arg3 Unknown. Left as `-1`.
              */
             void set(Type type, u32 msgId, const char* arg1 = NULL, int arg2 = 0, int arg3 = -1);
-            
+
             /**
-             * @brief Log the error to the NAND log. (`shared2/test2/nanderr.log`)
              * @param type The error type.
              * @param result The result it thrown.
+             * @param file The source file name.
+             * @param line The source file line.
             */
             void log(const char* type, int result, const char* file, int line);
-            
-            /** @return Whenether the error handler is readty. */
-            BOOL isReady() { return mbReady; }
 
-        private:
-            void draw();
-            void check();
-            void calc();
-            
             BOOL            mbReady;    // 0x00
 
             Type            mType;      // 0x04

@@ -1,5 +1,3 @@
-#define UNIT_DOESNT_MATCH
-
 #include "system/iplResetHandler.h"
 
 #include <decomp.h>
@@ -10,12 +8,12 @@
 #include "system/iplTVRCManager.h"
 
 namespace ipl {
-    ResetHandler::ResetHandler(EGG::Heap* pHeap) :
+    ResetHandler::ResetHandler(EGG::Heap* heap) :
     mType(0), // ?
     mState(0),
     mbReturnToMenu(FALSE),
     mFatalState(FATAL_STATE_NONE) {
-        #pragma unused(pHeap)
+        #pragma unused(heap)
 
         // Prepare the fade out.
         System::getResetFader()->setStatus(EGG::Fader::STATUS_PREPARE_OUT);

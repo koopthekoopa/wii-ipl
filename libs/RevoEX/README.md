@@ -1,5 +1,6 @@
-# Revolution Extension Decompilation
-A decompilation of Revolution Extension (RevoEX) from the Wii Menu.   
+Revolution Extension Decompilation
+==================================
+A decompilation of Revolution Extension (RevoEX) from the Wii Menu.  
 
 The Wii Menu has the following libraries linked:
 * **CDB** (Message Board FileSystem Library)

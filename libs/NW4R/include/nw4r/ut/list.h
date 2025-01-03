@@ -1,5 +1,5 @@
-#ifndef NW4R_UTILITY_LIST_H
-#define NW4R_UTILITY_LIST_H
+#ifndef NW4R_UT_LIST_H
+#define NW4R_UT_LIST_H
 
 #include <revolution/types.h>
 
@@ -41,6 +41,6 @@ namespace nw4r {
     }
 }
 
-#endif // NW4R_UTILITY_LIST_H
+#endif // NW4R_UT_LIST_H
 
 

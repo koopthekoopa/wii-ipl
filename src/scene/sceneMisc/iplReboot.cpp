@@ -23,12 +23,16 @@ namespace ipl {
                     }
                 }
 
+                // Tell ChannelSelect that we initialized when startBGM returns true.
                 ChannelSelect::setInitFlag(snd::getSystem()->startBGM("WIPL_BGM_MENU"));
                 System::getFader()->fadeIn();
 
                 unk_0x2C = unk_0x2C | 2;
             }
         }
+        
+        // TODO: fix this
+        void Base::draw() {}
     }
 }
 
