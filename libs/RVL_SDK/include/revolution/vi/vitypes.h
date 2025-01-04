@@ -5,7 +5,21 @@
 extern "C" {
 #endif
 
-typedef enum {
+#define VI_DISPLAY_PIX_SZ       (2)
+
+#define VI_MAX_WIDTH_NTSC       (720)
+#define VI_MAX_HEIGHT_NTSC      (480)
+
+#define VI_MAX_WIDTH_PAL        (720)
+#define VI_MAX_HEIGHT_PAL       (574)
+
+#define VI_MAX_WIDTH_MPAL       (720)
+#define VI_MAX_HEIGHT_MPAL      (480)
+
+#define VI_MAX_WIDTH_EURGB60    VI_MAX_WIDTH_NTSC
+#define VI_MAX_HEIGHT_EURGB60   VI_MAX_HEIGHT_NTSC
+
+enum {
     VI_NTSC = 0,
     VI_PAL,
     VI_MPAL,
@@ -14,7 +28,7 @@ typedef enum {
     VI_EURGB60
 };
 
-typedef enum {
+enum {
     VI_INTERLACE = 0,
     VI_NON_INTERLACE,
     VI_PROGRESSIVE
@@ -39,7 +53,6 @@ typedef enum {
     VI_TVMODE_MPAL_PROG     = VI_TVMODE(VI_MPAL, VI_PROGRESSIVE),
     
     VI_TVMODE_DEBUG_INT     = VI_TVMODE(VI_DEBUG, VI_INTERLACE),
-
     VI_TVMODE_DEBUG_PAL_INT = VI_TVMODE(VI_DEBUG_PAL, VI_INTERLACE),
     VI_TVMODE_DEBUG_PAL_DS  = VI_TVMODE(VI_DEBUG_PAL, VI_NON_INTERLACE)
 } VITVMode;
@@ -54,5 +67,3 @@ typedef enum {
 #endif
 
 #endif // REVOLUTION_VI_TYPES_H
-
-

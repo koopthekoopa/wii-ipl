@@ -11,6 +11,9 @@ extern "C" {
 #define SC_ASPECT_RATIO_16x9    1
 
 u8  SCGetAspectRatio();
+u8  SCGetEuRgb60Mode();
+u8  SCGetProgressiveMode();
+u8  SCGetScreenSaverMode();
 
 #define SC_LANG_JAPANESE        0
 #define SC_LANG_ENGLISH         1

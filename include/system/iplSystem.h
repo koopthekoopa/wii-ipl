@@ -11,6 +11,9 @@
 
 #include <egg/core.h>
 
+#include "iplMath.h"
+
+#include "system/iplFramework.h"
 #include "system/iplNand.h"
 #include "system/iplController.h"
 #include "system/iplErrorHandler.h"
@@ -26,8 +29,6 @@
 #include "system/iplPostmanManager.h"
 #include "system/iplNigaoeManager.h"
 #include "system/iplBS2Manager.h"
-
-#include "iplMath.h"
 
 #include "scene/iplSceneManager.h"
 
@@ -52,7 +53,9 @@ namespace ipl {
                     scene::Manager*     mpSceneManager;         // 0x64
                     nigaoe::Manager*    mpNigaoeManager;        // 0x68
                     nand::Manager*      mpNandManager;          // 0x6C
-                    undefined           unk_0x70[0x80 - 0x70];
+                    undefined4          unk_0x70;
+                    Framework*          mpFramework;            // 0x74
+                    undefined           unk_0x78[0x80 - 0x78];
                     message::Message*   mpMessage;              // 0x80
                     undefined4          unk_0x84;
                     undefined4          unk_0x88;
@@ -142,6 +145,8 @@ namespace ipl {
             static nigaoe::Manager*     getMiiManager()         { return smArg.mpNigaoeManager; }
             /** @return The Content Manager object. */
             static nand::Manager*       getNandManager()        { return smArg.mpNandManager; }
+            /** @return The animation speed. */
+            static f32                  getAnimDelta()          { return smArg.mpFramework->getDelta(); }
             /** @return The WiiConnect24 Manager object. */
             static nwc24::Manager*      getNwc24Manager()       { return smArg.mpNwc24Manager; }
             /** @return The Save Data Manager object. */

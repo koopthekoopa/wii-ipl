@@ -3,25 +3,25 @@
 
 #include <nw4r/math.h>
 
+#include "utility/iplFrameController.h"
+
 namespace ipl {
     namespace math {
-        class Interporation /* : utility::FrameController */ {
+        class Interporation : utility::FrameController {
             public:
-                virtual ~Interporation();
+                virtual ~Interporation() {}
         };
         
         class LinearIntp : Interporation {
             public:
-                virtual ~LinearIntp();
+                virtual ~LinearIntp() {}
         };
         
         class HermiteIntp : Interporation {
             public:
-                virtual ~HermiteIntp();
+                virtual ~HermiteIntp() {}
         };
     }
 }
 
 #endif // IPL_MATH_INTERPORATION_H
-
-

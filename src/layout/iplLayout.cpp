@@ -40,7 +40,7 @@ namespace ipl {
         }
 
         void Animator::calc() {
-            setFlag(mStatus != ANIM_STATUS_NOTPLAY);
+            setFlag(mState != ANIM_STATE_READY);
             utility::FrameController::calc();
             setFrame();
         }
@@ -52,14 +52,14 @@ namespace ipl {
         }
 
         void Animator::initAnmFrame() {
-            mStatus = ANIM_STATUS_STOP;
+            mState = ANIM_STATE_STOP;
             utility::FrameController::initFrame();
             setFrame();
         }
 
         void Animator::initAnmFrame(float frame) {
             mFrame = frame;
-            mStatus = ANIM_STATUS_STOP;
+            mState = ANIM_STATE_STOP;
             setFrame();
         }
 
@@ -171,7 +171,7 @@ namespace ipl {
             mLayout.Build(lytBuf, &mArc);
 
             utility::Graphics::calcOrthoCamera();
-            mDrawInfo.SetViewMtx(*utility::Graphics::getUnk3C());
+            mDrawInfo.SetViewMtx(utility::Graphics::getViewMtx());
             
             nw4r::ut::Rect lytRect = mLayout.GetLayoutRect();
             mDrawInfo.SetViewRect(lytRect);
@@ -283,13 +283,13 @@ namespace ipl {
                 anim = NULL;
                 while (anim = (Animator*)nw4r::ut::List_GetNext(&mAnims, anim), anim != NULL) {
                     anim->initFrame();
-                    anim->mStatus = ANIM_STATUS_PLAY;
+                    anim->setState(ANIM_STATE_PLAY);
                 }
             }
             else {
                 anim = (Animator*)nw4r::ut::List_GetNth(&mAnims, (u16)animIdx);
                 anim->initFrame();
-                anim->mStatus = ANIM_STATUS_PLAY;
+                anim->setState(ANIM_STATE_PLAY);
             }
         }
 
@@ -298,12 +298,12 @@ namespace ipl {
             if (animIdx == -1) {
                 anim = NULL;
                 while (anim = (Animator*)nw4r::ut::List_GetNext(&mAnims, anim), anim != NULL) {
-                    anim->mMaxFrame = maxFrame;
+                    anim->setMaxFrame(maxFrame);
                 }
             }
             else {
                 anim = (Animator*)nw4r::ut::List_GetNth(&mAnims, (u16)animIdx);
-                anim->mMaxFrame = maxFrame;
+                anim->setMaxFrame(maxFrame);
             }
         }
 
@@ -312,12 +312,12 @@ namespace ipl {
             if (animIdx == -1) {
                 anim = NULL;
                 while (anim = (Animator*)nw4r::ut::List_GetNext(&mAnims, anim), anim != NULL) {
-                    anim->mMinFrame = minFrame;
+                    anim->setMinFrame(minFrame);
                 }
             }
             else {
                 anim = (Animator*)nw4r::ut::List_GetNth(&mAnims, (u16)animIdx);
-                anim->mMinFrame = minFrame;
+                anim->setMinFrame(minFrame);
             }
         }
 
@@ -326,12 +326,12 @@ namespace ipl {
             if (animIdx == -1) {
                 anim = NULL;
                 while (anim = (Animator*)nw4r::ut::List_GetNext(&mAnims, anim), anim != NULL) {
-                    anim->mAnmType = type;
+                    anim->setAnimType(type);
                 }
             }
             else {
                 anim = (Animator*)nw4r::ut::List_GetNth(&mAnims, (u16)animIdx);
-                anim->mAnmType = type;
+                anim->setAnimType(type);
             }
         }
 
@@ -342,13 +342,13 @@ namespace ipl {
             if (animIdx == -1) {
                 anim = NULL;
                 while (anim = (Animator*)nw4r::ut::List_GetNext(&mAnims, anim), anim != NULL) {
-                    // The bitwise OR on a boolean was probably a typo (luckily for them it does nothing)
-                    result |= anim->mStatus == ANIM_STATUS_PLAY;
+                    // The bitwise OR on a boolean was probably a typo (luckily for them it does nothing different)
+                    result |= anim->isPlaying();
                 }
             }
             else {
                 anim = (Animator*)nw4r::ut::List_GetNth(&mAnims, (u16)animIdx);
-                result = anim->mStatus == ANIM_STATUS_PLAY;
+                result = anim->isPlaying();
             }
 
             return result;

@@ -23,15 +23,15 @@ namespace nw4r {
                 void                SetLocationAdjustScale(const math::VEC2& scale) { mLocationAdjustScale = scale; }
 
                 bool                IsMultipleViewMtxOnDraw()                       { return mFlag.mulViewDraw; }
-                void                SetMultipleViewMtxOnDraw(bool value)            { mFlag.mulViewDraw = value; }
+                void                SetMultipleViewMtxOnDraw(bool bEnable)          { mFlag.mulViewDraw = bEnable; }
                 bool                IsInfluencedAlpha()                             { return mFlag.influencedAlpha; }
-                void                SetInfluencedAlpha(bool value)                  { mFlag.influencedAlpha = value; }
+                void                SetInfluencedAlpha(bool bEnable)                { mFlag.influencedAlpha = bEnable; }
                 bool                IsLocationAdjust()                              { return mFlag.locationAdjust; }
-                void                SetLocationAdjust(bool value)                   { mFlag.locationAdjust = value; }
+                void                SetLocationAdjust(bool bEnable)                 { mFlag.locationAdjust = bEnable; }
                 bool                IsInvisiblePaneCalculateMtx()                   { return mFlag.invisiblePaneCalculateMtx; }
-                void                SetInvisiblePaneCalculateMtx(bool value)        { mFlag.invisiblePaneCalculateMtx = value; }
+                void                SetInvisiblePaneCalculateMtx(bool bEnable)      { mFlag.invisiblePaneCalculateMtx = bEnable; }
                 bool                IsDebugDrawMode()                               { return mFlag.debugDrawMode; }
-                void                SetDebugDrawMode(bool value)                    { mFlag.debugDrawMode = value; }
+                void                SetDebugDrawMode(bool bEnable)                  { mFlag.debugDrawMode = bEnable; }
 
             protected:
                 math::MTX34 mViewMtx;               // 0x04

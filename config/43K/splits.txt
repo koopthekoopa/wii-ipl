@@ -286,11 +286,11 @@ src/utility/iplESMisc.cpp:
 	.sdata      start:0x8166A8C0 end:0x8166A8E0
 
 src/utility/iplCSFlags.cpp:
-	.text       start:0x81367658 end:0x81367CAC
+	.text       start:0x81367658 end:0x81367AEC
 	.data       start:0x81617298 end:0x816175C8
 
 src/layout/GUIManager.cpp:
-	.text       start:0x81367CAC end:0x81368E50
+	.text       start:0x81367AEC end:0x81368E50
 	.data       start:0x816175C8 end:0x81617748
 	.sdata2     start:0x81668CD8 end:0x81668CE8
 	.sbss       start:0x8166CD98 end:0x8166CDA0

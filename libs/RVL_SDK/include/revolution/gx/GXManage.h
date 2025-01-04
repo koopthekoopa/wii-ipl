@@ -9,10 +9,12 @@ extern "C" {
 
 void    GXPixModeSync();
 
+void    GXDrawDone();
+
+void    GXFlush();
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif // REVOLUTION_GX_MANAGE_H
-
-

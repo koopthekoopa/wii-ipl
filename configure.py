@@ -217,9 +217,9 @@ config.scratch_preset_id = None
 
 config.progress_all = False
 config.progress_use_fancy = True
-config.progress_code_fancy_frac = 288
+config.progress_code_fancy_frac = 288   # Maxumum amount on System Memory + Maxumum amount on SD Card
 config.progress_code_fancy_item = "Channels"
-config.progress_data_fancy_frac = 4096
+config.progress_data_fancy_frac = 4096  # Amount of Wii blocks avaiable (apparenty)
 config.progress_data_fancy_item = "Blocks"
 
 # Base flags
@@ -469,7 +469,7 @@ config.libs = [
     IPLSection("utility",
         [
             Object(Matching,    "utility/iplTree.cpp"),
-            Object(NonMatching, "utility/iplFrameController.cpp"),
+            Object(Matching,    "utility/iplFrameController.cpp"),
             Object(NonMatching, "utility/iplGraphics.cpp"),
             Object(Matching,    "utility/iplCapture.cpp"),
             Object(NonMatching, "utility/iplUtility.cpp"),
@@ -510,7 +510,7 @@ config.libs = [
             Object(NonMatching, "homebutton/HBMBase.cpp"),
             Object(NonMatching, "homebutton/HBMAnmController.cpp"),
             Object(NonMatching, "homebutton/HBMController.cpp"),
-            Object(NonMatching, "homebutton/HBMFrameController.cpp"),
+            Object(Matching,    "homebutton/HBMFrameController.cpp"),
             Object(NonMatching, "homebutton/HBMGUIManager.cpp"),
             Object(NonMatching, "homebutton/HBMRemoteSpk.cpp"),
         ]

@@ -14,7 +14,7 @@ namespace ipl {
                 class Arg {
                     private:
                         u8          unk_0x00[0x40 - 0x00];
-                        math::MTX34 unk_0x3C;
+                        math::MTX34 mViewMtx;
                         u8          unk_0x6C[0x88 - 0x6C];
                     friend class Graphics;
                 };
@@ -22,7 +22,7 @@ namespace ipl {
                 static void setDefaultOrtho(u32 ortho = GX_PNMTX0);
                 static void calcOrthoCamera();
                 
-                static math::MTX34* getUnk3C() { return &mArg.unk_0x3C; }
+                static math::MTX34& getViewMtx() { return mArg.mViewMtx; }
 
             private:
                 static Arg  mArg;

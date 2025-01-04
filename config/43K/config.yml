@@ -5,7 +5,8 @@ splits: 'config/43K/splits.txt'
 
 ldscript_template: ldscript_ipl2.lcf
 
-export_all: true
+symbols_known: false
+quick_analysis: true
 fill_gaps: false
 
 extract:

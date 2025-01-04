@@ -13,6 +13,7 @@ orig/*/*
 *.dol
 *.rel
 *.elf
+*.app
 *.o
 *.map
 *.MAP
