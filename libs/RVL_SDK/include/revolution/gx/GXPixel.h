@@ -10,6 +10,9 @@ extern "C" {
 
 void    GXSetDither(GXBool enable);
 
+void    GXSetZCompLoc(GXBool before_tex);
+void    GXSetZMode(GXBool compare_enable, GXCompare func, GXBool update_enable);
+
 #ifdef __cplusplus
 }
 #endif

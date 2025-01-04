@@ -65,7 +65,7 @@ namespace ipl {
                     postman::Manager*   mpPostmanManager;       // 0xA4
                     bs2::Manager*       mpBS2Manager;           // 0xA8
                     DialogWindow*       mpDialog;               // 0xAC
-                    Pointer*            mpointer;              // 0xB0
+                    Pointer*            mpointer;               // 0xB0
                     HomeButtonMenu*     mpHomeButton;           // 0xB4
                     undefined4*         unk_0xB8;
                     message::Manager*   mpMesgMgr;              // 0xBC
@@ -74,7 +74,14 @@ namespace ipl {
                     EGG::ColorFader*    mpResetFader;           // 0xC8
                     math::Random*       mpRandom;               // 0xCC
 
-                    u8                  unk_0xD0[0x100 - 0xD0];
+                    u8                  unk_0xD0[0xDC - 0xD0];
+
+                    nw4r::ut::Font*     mpWBFont1Data;          // 0xDC
+                    undefined4          unk_0xE0;
+                    nw4r::ut::Font*     mpWBFont2Data;          // 0xE4
+                    undefined4          unk_0xE8;
+
+                    u8                  unk_0xEC[0x100 - 0xEC];
 
                     nand::File*         mpFaceArcBuffer;        // 0x100
 
@@ -165,6 +172,10 @@ namespace ipl {
             static EGG::ColorFader*     getResetFader()         { return smArg.mpResetFader; }
             /** @return The Random Number Generator object. */
             static math::Random*        getRndm()               { return smArg.mpRandom; }
+            /** @return The Wii Bitmap Font 1 Data. (wbf1.brfna) */
+            static nw4r::ut::Font*      getWBFont1Data()        { return smArg.mpWBFont1Data; }
+            /** @return The Wii Bitmap Font 2 Data. (wbf2.brfna) */
+            static nw4r::ut::Font*      getWBFont2Data()        { return smArg.mpWBFont2Data; }
             /** @return The Mii Archive Data */
             static nand::File*          getRFLArc()             { return smArg.mpFaceArcBuffer; }
             /** @return The English message data. */
@@ -239,8 +250,13 @@ namespace ipl {
             static s32                      getLanguage();
             /** @return The region of the System. */
             static s32                      getRegion();
+            /** @return The font data of the System. */
+            static void*                    getFont();
             /** @return The Renderer of the IPL. */
             static GXRenderModeObj*         getRenderModeObj();
+
+            static void                     getProjectionRect4x3(nw4r::ut::Rect* rect);
+            static void                     getProjectionRect16x9(nw4r::ut::Rect* rect);
 
             /**
              * @return The Wii Remote being used.
@@ -298,5 +314,3 @@ namespace ipl {
 }
 
 #endif // IPL_SYSTEM_H
-
-

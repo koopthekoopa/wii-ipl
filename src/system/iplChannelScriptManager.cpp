@@ -17,7 +17,7 @@ namespace ipl {
             mheap = NULL;
         }
 
-        void ChannelScriptManager::create(EGG::Exheap* heap) {
+        void ChannelScriptManager::create(EGG::ExpHeap* heap) {
             if (mpChansWork == NULL) {
                 mpChansWork = new(heap, CLASS_HEAP) u8[CHANS_VM_WORK_SIZE];
             }

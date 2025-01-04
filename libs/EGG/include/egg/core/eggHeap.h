@@ -10,6 +10,7 @@
 #include <size_t.h>
 
 namespace EGG {
+    class Allocator;
     class Heap : Disposer {
         public:
             enum HeapKind {
@@ -17,14 +18,22 @@ namespace EGG {
                 HEAP_FRAME = 2
             };
             
-            virtual ~Heap();                                            // 0x08
+            virtual ~Heap();                                                        // 0x08
 
-            virtual HeapKind    getHeapKind() const = 0;                // 0x0C
+            virtual HeapKind    getHeapKind() const = 0;                            // 0x0C
 
-            virtual void        initAllocator(undefined4*, s32) = 0;    // 0x10
+            virtual void        initAllocator(Allocator* allocator, s32 align) = 0; // 0x10
 
-            virtual void*       alloc(u32 size, s32 align) = 0;         // 0x14
-            virtual void        free(void*) = 0;                        // 0x18
+            virtual void*       alloc(u32 size, s32 align) = 0;                     // 0x14
+            virtual void        free(void* buffer) = 0;                             // 0x18
+
+            virtual void        destroy() = 0;                                      // 0x1C
+            
+            virtual void        resizeForMBlock(void* block, u32 size) = 0;         // 0x20
+            
+            virtual u32         getAllocatableSize(long align) = 0;                 // 0x24
+
+            virtual void        adjust() = 0;                                       // 0x28
     };
 }
 
@@ -44,5 +53,3 @@ void operator   delete[](void *ptr);
 #define CLASS_HEAP  4
 
 #endif // EGG_CORE_HEAP_H
-
-

@@ -194,9 +194,9 @@ namespace ipl {
             mpLayout->bindToGroup("it_Has_a_Push.brlan",    "G_Push");
             mpLayout->bindToGroup("it_Has_a_SeenOut.brlan", "G_All");
 
-            mpLayout->setAnmType(ANIM_PLAYBACK_FORWARD,         ANIM_FADE_IN);
-            mpLayout->setAnmType(ANIM_PLAYBACK_LOOP,            ANIM_WAIT_PUSH);
-            mpLayout->setAnmType(ANIM_PLAYBACK_FORWARD,         ANIM_FADE_OUT);
+            mpLayout->setAnmType(ANIM_TYPE_FORWARD,         ANIM_FADE_IN);
+            mpLayout->setAnmType(ANIM_TYPE_LOOP,            ANIM_WAIT_PUSH);
+            mpLayout->setAnmType(ANIM_TYPE_FORWARD,         ANIM_FADE_OUT);
 
             mpLayout->finishBinding();
 

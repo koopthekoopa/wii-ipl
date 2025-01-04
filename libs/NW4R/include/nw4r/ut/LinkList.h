@@ -10,7 +10,6 @@
 
 #include <stddef.h>
 
-#define NW4R_CREATE_LINKLIST    nw4r::ut::LinkListNode mLink
 #define NW4R_LINKLIST(x)        nw4r::ut::LinkList<x, offsetof(x, mLink)>
 
 namespace nw4r {
@@ -188,5 +187,3 @@ namespace nw4r {
 }
 
 #endif // NW4R_UT_LINK_LIST_H
-
-

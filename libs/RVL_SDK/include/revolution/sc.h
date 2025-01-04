@@ -10,6 +10,8 @@ extern "C" {
 #define SC_ASPECT_RATIO_4x3     0
 #define SC_ASPECT_RATIO_16x9    1
 
+u8  SCGetAspectRatio();
+
 #define SC_LANG_JAPANESE        0
 #define SC_LANG_ENGLISH         1
 #define SC_LANG_GERMAN          2
@@ -46,5 +48,3 @@ s8  SCGetRegion();
 #endif
 
 #endif // REVOLUTION_SYSCONF_H
-
-

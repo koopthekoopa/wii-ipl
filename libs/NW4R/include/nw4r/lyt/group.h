@@ -11,21 +11,26 @@ namespace nw4r {
     namespace lyt {
         namespace detail {
             struct PaneLink {
-                NW4R_CREATE_LINKLIST;
+                ut::LinkListNode mLink;
                 
                 Pane*   mTarget;    // 0x08
             };
         }
+        class Group;
+        typedef ut::LinkList<detail::PaneLink, 0> PaneLinkList;
+        typedef ut::LinkList<Group, 0> GroupList;
         
         class Group {
             public:
                 Group();
                 virtual ~Group();
 
-                NW4R_CREATE_LINKLIST;
+                PaneLinkList&       GetPaneList() { return mPaneLinkList; };
+
+                ut::LinkListNode mLink;
                 
             protected:
-                NW4R_LINKLIST(detail::PaneLink) mPaneLinkList;              // 0x0C
+                PaneLinkList                    mPaneLinkList;              // 0x0C
                 char                            mName[NW4R_RES_NAME_SIZE];  // 0x18
                 
                 bool                            mbUserAllocated;            // 0x29
@@ -35,13 +40,15 @@ namespace nw4r {
         class GroupContainer {
             public:
                 GroupContainer();
+
+                GroupList&  GetGroupList()  { return mGroupList; }
+
+                Group*      FindGroupByName(const char* findName);
             
             protected:
-                NW4R_LINKLIST(Group)    mGroupList; // 0x00
+                GroupList   mGroupList; // 0x00
         };
     }
 }
 
 #endif // NW4R_LYT_GROUP_H
-
-

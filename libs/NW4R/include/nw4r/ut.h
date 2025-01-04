@@ -11,6 +11,9 @@
 #include <nw4r/ut/Color.h>
 #include <nw4r/ut/Rect.h>
 
+#include <nw4r/ut/binaryFileFormat.h>
+#include <nw4r/ut/Font.h>
+
 #endif // NW4R_UT_H
 
 

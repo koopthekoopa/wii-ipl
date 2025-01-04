@@ -483,7 +483,7 @@ config.libs = [
     IPLSection("layout",
         [
             Object(NonMatching, "layout/GUIManager.cpp"),
-            Object(NonMatching, "layout/iplLayout.cpp"),
+            Object(Matching,    "layout/iplLayout.cpp"),
             Object(NonMatching, "layout/iplGuiManager.cpp"),
         ]
     ),

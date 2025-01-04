@@ -3,6 +3,10 @@
 
 #include <nw4r/lyt/types.h>
 
+#include <nw4r/lyt/arcResourceAccessor.h>
+
+#include <nw4r/lyt/drawInfo.h>
+
 #include <nw4r/lyt/animation.h>
 
 #include <nw4r/lyt/pane.h>

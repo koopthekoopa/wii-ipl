@@ -15,6 +15,17 @@ typedef u8 GXBool;
 #define _GX_TF_ZTF     0x10 /* Z Texture format */
 #define _GX_TF_CTF     0x20 /* Copy texture format */
 
+typedef enum _GXCompare {
+    GX_NEVER,
+    GX_LESS,
+    GX_EQUAL,
+    GX_LEQUAL,
+    GX_GREATER,
+    GX_NEQUAL,
+    GX_GEQUAL,
+    GX_ALWAYS
+} GXCompare;
+
 typedef enum _GXTexFmt {
     GX_TF_I4     = 0x00,
     GX_TF_I8     = 0x01,
@@ -107,10 +118,46 @@ typedef enum _GXSpotFn {
     GX_SP_RING2,
 } GXSpotFn;
 
+typedef enum _GXLightID {
+    GX_LIGHT0 = (1 << 0),
+    GX_LIGHT1 = (1 << 1),
+    GX_LIGHT2 = (1 << 2),
+    GX_LIGHT3 = (1 << 3),
+    GX_LIGHT4 = (1 << 4),
+    GX_LIGHT5 = (1 << 5),
+    GX_LIGHT6 = (1 << 6),
+    GX_LIGHT7 = (1 << 7),
+
+    GX_MAX_LIGHT = (1 << 8),
+    GX_LIGHT_NULL = 0
+} GXLightID;
+
+typedef enum _GXFogType {
+    GX_FOG_NONE,
+
+    GX_FOG_PERSP_LIN = 2,
+    GX_FOG_PERSP_EXP = 4,
+    GX_FOG_PERSP_EXP2 = 5,
+    GX_FOG_PERSP_REVEXP = 6,
+    GX_FOG_PERSP_REVEXP2 = 7,
+
+    // Fourth bit is set to mark orthographic
+    GX_FOG_ORTHO_LIN = 1 << 3 | GX_FOG_PERSP_LIN,
+    GX_FOG_ORTHO_EXP = 1 << 3 | GX_FOG_PERSP_EXP,
+    GX_FOG_ORTHO_EXP2 = 1 << 3 | GX_FOG_PERSP_EXP2,
+    GX_FOG_ORTHO_REVEXP = 1 << 3 | GX_FOG_PERSP_REVEXP,
+    GX_FOG_ORTHO_REVEXP2 = 1 << 3 | GX_FOG_PERSP_REVEXP2
+} GXFogType;
+
+typedef enum _GXCullMode {
+    GX_CULL_NONE,
+    GX_CULL_FRONT,
+    GX_CULL_BACK,
+    GX_CULL_ALL
+} GXCullMode;
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif // REVOLUTION_GX_ENUM_H
-
-

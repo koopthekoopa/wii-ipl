@@ -33,7 +33,7 @@ namespace ipl {
 
                 ChannelScriptManager();
 
-                void        create(EGG::Exheap* heap);
+                void        create(EGG::ExpHeap* heap);
                 BOOL        init(nand::File* file, RsoThread* thread);
 
                 void        calc();
@@ -55,7 +55,7 @@ namespace ipl {
                 };
 
                 u8*                 mpChansWork;    // 0x00
-                EGG::Exheap*       mheap;
+                EGG::ExpHeap*       mheap;
 
                 CSData              mCSData;        // 0x08
                 u32                 unk_0x28[2];

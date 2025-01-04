@@ -6,8 +6,6 @@
 #include <nw4r/math/types.h>
 #include <nw4r/ut/LinkList.h>
 
-#include <stddef.h>
-
 #define NW4R_RES_NAME_SIZE  17
 
 namespace nw4r {
@@ -34,7 +32,7 @@ namespace nw4r {
 
             f32 width;
             f32 height;
-        };
+        } Size;
 
         enum {
             TEXT_COLOR_FORE = 0,
@@ -45,5 +43,3 @@ namespace nw4r {
 }
 
 #endif // NW4R_LYT_TYPES_H
-
-

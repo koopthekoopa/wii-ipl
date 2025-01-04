@@ -1,24 +1,25 @@
 #ifndef IPL_LAYOUT_H
 #define IPL_LAYOUT_H
 
-#include <decomp.h>
-
 #include <revolution.h>
 
+#include <nw4r/ut.h>
 #include <nw4r/lyt.h>
 
 #include <egg/core.h>
 
+#include "nw4r/lyt/drawInfo.h"
+#include "revolution/types.h"
 #include "system/iplNand.h"
 
 #include "utility/iplFrameController.h"
 
 namespace ipl {
     namespace layout {
-        class Animator : utility::FrameController {
+        class Animator : public utility::FrameController {
             public:
-                Animator(nw4r::lyt::AnimTransform* animTrans, bool, bool);
-                virtual ~Animator();
+                Animator(nw4r::lyt::AnimTransform* animTrans, bool bRecursive, bool bPlayNow);
+                virtual ~Animator() {}
 
                 virtual void    calc();
                 virtual void    setFlag(bool flag);
@@ -28,53 +29,87 @@ namespace ipl {
 
                 void            initAnmFrame();
                 void            initAnmFrame(float frame);
-            private:
+
+            protected:
                 nw4r::lyt::AnimTransform*   mAnimTrans;   // 0x20
-                undefined4                  unk_0x24;
-                undefined4                  unk_0x28;
-                u32                         unk_0x2C;
+                
+                u32                         unused_0x24;
+                u32                         unused_0x28;
+
+                u32                         mFlags;
+        };
+
+        class PaneAnimator : public Animator {
+            public:
+                PaneAnimator(nw4r::lyt::AnimTransform* animTrans, nw4r::lyt::Pane* pane, bool bRecursive, bool bPlayNow);
+                virtual ~PaneAnimator();
+
+                virtual void    setFlag(bool flag);
+                virtual void    bind();
+            
+            private:
+                nw4r::lyt::Pane* mPane;
+        };
+
+        class GroupAnimator : public Animator {
+            public:
+                GroupAnimator(nw4r::lyt::AnimTransform* animTrans, nw4r::lyt::Group* group, bool bRecursive, bool bPlayNow);
+                virtual ~GroupAnimator();
+
+                virtual void    setFlag(bool flag);
+                virtual void    bind();
+            
+            private:
+                nw4r::lyt::Group* mGroup;
         };
 
         class Object {
             public:
                 /**
                  * @param heap The work heap.
-                 * @param pLayoutArchive The layout archive.
-                 * @param layoutDirectory The directory containing the layout.
-                 * @param layoutFileName The file name of the layout.
+                 * @param arcBuffer The layout archive buffer.
+                 * @param directory The directory containing the layout.
+                 * @param fileName The file name of the layout.
                  */
-                Object(EGG::Heap* heap, nand::LayoutFile* pLayoutArchive, const char* layoutDirectory, const char* layoutFileName);
+                Object(EGG::Heap* heap, void* arcBuffer, const char* directory, const char* fileName);
                 /**
                  * @param heap The work heap.
-                 * @param pLayoutArcBuffer The layout archive buffer.
-                 * @param layoutDirectory The directory containing the layout.
-                 * @param layoutFileName The file name of the layout.
+                 * @param file The layout archive.
+                 * @param directory The directory containing the layout.
+                 * @param fileName The file name of the layout.
                  */
-                Object(EGG::Heap* heap, void* pLayoutArcBuffer, const char* layoutDirectory, const char* layoutFileName);
+                Object(EGG::Heap* heap, nand::LayoutFile* file, const char* directory, const char* fileName);
 
                 virtual ~Object();
 
-                /** @brief Bind animation to layout */
-                void                    start(int lytId = -1);
-                /**
-                 * @brief Bind an animation to the layout
-                 * @param fileName The file name of the Layout animation.
-                 */
-                void                    bind(const char* fileName, bool unk = true);
-                /** @brief Lock up until it has finished binding animation. */
+                void                    initLocationAdjust();
+
+                PaneAnimator*           bind(const char* fileName, bool bPlayNow = true);
+                PaneAnimator*           bind(const char* fileNane, const char* paneName, bool bRecursive = true, bool bPlayNow = true);
+                GroupAnimator*          bindToGroup(const char* fileName, const char* groupName, bool bRecursive = true, bool bPlayNow = true);
+                GroupAnimator*          bindToGroup(const char* fileName, nw4r::lyt::Group* group, bool bRecursive = true, bool bPlayNow = true);
                 void                    finishBinding();
-                /** @brief Updates the Layout. */
+
+                bool                    searchFile(const char* fileName);
+
                 void                    calc();
-                /** @brief Draws the Layout. */
+
                 void                    draw();
-                /**
-                 * @brief Bind an animation to a specific group from the layout
-                 * @param fileName The file name of the Layout animation.
-                 * @param groupName The group name to bind the animation to.
-                 */
-                void                    bindToGroup(const char* fileName, const char* groupName, bool unk0 = true, bool unk1 = true);
-                void                    setAnmType(int arg0, int arg1);
-                BOOL                    isPlaying(int arg0) const;
+                void                    draw(const char* paneName);
+                void                    draw(nw4r::lyt::Pane* pane);
+                
+                void                    setMaxFrame(float maxFrame, int animIdx = -1);
+                void                    setMinFrame(float minFrame, int animIdx = -1);
+                void                    setAnmType(int type, int animIdx = -1);
+                bool                    isPlaying(int animIdx = -1) const;
+
+                void                    start(int animIdx = -1);
+
+                void                    adjustHeap();
+                void                    destroyHeap();
+                
+                static Object*          create(EGG::Heap* heap, u32 unk0, nand::LayoutFile* file, const char* directory, const char* fileName);
+                static Object*          create(EGG::Heap* heap, u32 unk0, void* buffer, const char* directory, const char* fileName);
 
                 /** @brief Gets the layout object. */
                 nw4r::lyt::Layout*      getLayout()                 { return &mLayout; }
@@ -82,8 +117,33 @@ namespace ipl {
                 nw4r::lyt::Pane*        getRoot()                   { return getLayout()->GetRootPane(); }
                 
             private:
-                nw4r::lyt::Layout mLayout;  // 0x04
-                undefined   unk_0x20[0x580 - 0x20];
+                void                    init_(const char* fileName);
+
+                void                    attach(void* arcBuffer, const char* directory);
+                void                    attach_font();
+
+                PaneAnimator*           bind_(const char* fileName, nw4r::lyt::Pane* pane, bool bRecursive, bool bPlayNow);
+                GroupAnimator*          bind_(const char* fileName, nw4r::lyt::Group* group, bool bRecursive, bool bPlayNow);
+
+                nw4r::lyt::Layout                   mLayout;            // 0x04
+
+                nw4r::lyt::MultiArcResourceAccessor mArc;               // 0x28
+
+                nw4r::lyt::FontRefLink              mWBF1PrivateLink;   // 0x44
+                nw4r::lyt::FontRefLink              mWBF2PrivateLink;   // 0xD0
+
+                nw4r::lyt::FontRefLink              mWBF1PublicLink;    // 0x15C
+                nw4r::lyt::FontRefLink              mWBF2PublicLink;    // 0x1E8
+
+                EGG::Heap*                          mpHeap;             // 0x274
+                EGG::Allocator                      mAllocator;         // 0x278
+
+                nw4r::ut::List                      mAnims;             // 0x28C
+
+                nw4r::lyt::DrawInfo                 mDrawInfo;          // 0x298
+
+                s32                                 mCurLink;           // 0x2EC
+                nw4r::lyt::ArcResourceLink          mArcLinks[4];       // 0x2F0
         };
     }
 }
