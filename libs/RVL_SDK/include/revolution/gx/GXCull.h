@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-void GXSetCullMode	( GXCullMode mode );
+void GXSetCullMode(GXCullMode mode);
 
 #ifdef __cplusplus
 }

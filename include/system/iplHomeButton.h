@@ -14,7 +14,7 @@ namespace ipl {
             void    disable();
 
             void    setUnk_0x05(bool value) { unk_0x05 = value; }
-            bool    isUnk_0x05()            { return unk_0x05; }
+            bool    isUnk_0x05() const      { return unk_0x05; }
         
         private:
             undefined4  unk_0x00;

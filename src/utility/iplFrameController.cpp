@@ -11,7 +11,7 @@ namespace ipl {
 
             mSpeed = speed;
 
-            mState = 0;
+            mState = ANIM_STATE_READY;
 
             mbBounceBack = false;
 

@@ -10,6 +10,8 @@
 #include <cstdlib>
 #include <cstring>
 
+#include <stddef.h>
+
 namespace ipl {
     namespace nigaoe {
         #define IPL_NIGAOE_ICON_MAX 10
@@ -19,22 +21,25 @@ namespace ipl {
 
             void* work = heap->alloc(RFLGetWorkSize(FALSE), BUFFER_HEAP);
 
-            mErrcode = RFLInitRes(work, mResFile->getBuffer(), mResFile->getLength(), FALSE);
+            mErrcode = RFLInitRes(work,
+                                mResFile->getBuffer(),
+                                mResFile->getLength(),
+                                FALSE);
 
-            nw4r::ut::List_Init(&mObjects, 0x48);
+            nw4r::ut::List_Init(&mObjects, (u16)offsetof(Object, mLink));
             
             {
-                // init strings
+                // Init strings
                 unsigned char mac[NCD_MACADDRESS_LENGTH + 1];
                 mac[6] =  mac[5] = mac[4] = mac[3] = mac[2] = mac[1] = mac[0] = 0;
 
                 unsigned char temp[3];
                 temp[2] = temp[1] = temp[0] = 0;
 
-                // setup work
+                // Setup work
                 unsigned char* ncd_mac = ncd::NCDSetting::getMacAddr();
                 
-                // get mac values
+                // Get mac values
                 for (int i = 1; i < NCD_MACADDRESS_LENGTH; i++) {
                     memcpy(temp, &ncd_mac[i * sizeof(temp)], sizeof(temp) - 1);
                     mac[i] = strtol((char*)temp, NULL, 16);
@@ -46,14 +51,20 @@ namespace ipl {
 
         Object* Manager::create(EGG::Heap* heap, int width, int height, int faceId, Object::MakeIconCallback callback, void* callbackWork) {
             // Create mii and append to list
-            Object* obj = new(heap, CLASS_HEAP) Object(heap, width, height, faceId, callback, callbackWork);
+            Object* obj = new(heap, CLASS_HEAP) Object(heap,
+                                                        width, height,
+                                                        faceId,
+                                                        callback, callbackWork);
             nw4r::ut::List_Append(&mObjects, obj);
             return obj;
         }
 
         Object* Manager::create(EGG::Heap* heap, int width, int height, RFLiCharData* faceData, Object::MakeIconCallback callback, void* callbackWork) {
             // Create mii and append to list
-            Object* obj = new(heap, CLASS_HEAP) Object(heap, width, height, faceData, callback, callbackWork);
+            Object* obj = new(heap, CLASS_HEAP) Object(heap,
+                                                        width, height,
+                                                        faceData,
+                                                        callback, callbackWork);
             nw4r::ut::List_Append(&mObjects, obj);
             return obj;
         }
@@ -127,5 +138,3 @@ namespace ipl {
         }
     }
 }
-
-

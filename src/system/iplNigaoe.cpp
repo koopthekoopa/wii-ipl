@@ -10,20 +10,20 @@
 
 namespace ipl {
     namespace nigaoe {
-        Object::Object(EGG::Heap* heap, int width, int height, int faceId, MakeIconCallback callback, void* callBackWork) :
+        Object::Object(EGG::Heap* heap, int width, int height, int faceId, MakeIconCallback callback, void* callbackWork) :
         mFaceId(faceId),
         mpCharData(NULL),
         mCallBack(callback),
-        mpCallBackWork(callBackWork),
+        mpCallBackWork(callbackWork),
         mbCreated(false) {
             init(heap, width, height);
         }
 
-        Object::Object(EGG::Heap* heap, int width, int height, RFLiCharData* faceData, MakeIconCallback callback, void* callBackWork) :
+        Object::Object(EGG::Heap* heap, int width, int height, RFLiCharData* faceData, MakeIconCallback callback, void* callbackWork) :
         mFaceId(-1),
         mpCharData(faceData),
         mCallBack(callback),
-        mpCallBackWork(callBackWork),
+        mpCallBackWork(callbackWork),
         mbCreated(false) {
             init(heap, width, height);
         }

@@ -152,7 +152,7 @@ namespace ipl {
 
         Object::~Object() {
             Animator* anim;
-            while (anim = (Animator*)nw4r::ut::List_GetNext(&mAnims, NULL), anim != NULL) {
+            while (anim = (Animator*)nw4r::ut::List_GetFirst(&mAnims), anim != NULL) {
                 nw4r::ut::List_Remove(&mAnims, anim);
                 delete anim;
             }
@@ -161,7 +161,7 @@ namespace ipl {
         }
 
         void Object::init_(const char* fileName) {
-            nw4r::ut::List_Init(&mAnims, 36);
+            nw4r::ut::List_Init(&mAnims, (u16)offsetof(Animator, mLink));
 
             attach_font();
 

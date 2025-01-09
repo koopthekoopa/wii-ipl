@@ -5,10 +5,19 @@
 
 #include <nw4r/math.h>
 
+#define IPL_MATH_CLAMP(x, min, max) x < min ? min : (x > max ? max : x)
+
+typedef union FU32 {
+    u32 u32;
+    f32 f32;
+} FU32;
+// HACK
+#define IPL_MATH_INFINITY    0x1.FFFFFFP127f
+#define IPL_MATH_NINFINITY  -0x1.FFFFFFP127f
+#define IPL_MATH_NULL_FLOAT IPL_MATH_INFINITY
+
 namespace ipl {
     namespace math {
-        #define IPL_MATH_CLAMP(x, min, max) x < min ? min : (x > max ? max : x)
-        
         template<typename T> inline T abs(const T& x) {
             return nw4r::math::FAbs(x);
         }

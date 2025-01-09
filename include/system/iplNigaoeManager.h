@@ -36,5 +36,3 @@ namespace ipl {
 }
 
 #endif // IPL_NIGAOE_MANAGER_H
-
-

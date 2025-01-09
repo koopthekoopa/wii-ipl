@@ -1,10 +1,10 @@
 #ifndef NW4R_LYT_ANIMATION_H
 #define NW4R_LYT_ANIMATION_H
 
-#include <nw4r/ut.h>
-
 #include <nw4r/lyt/resourceAccessor.h>
 #include <nw4r/lyt/resources.h>
+
+#include <nw4r/ut.h>
 
 namespace nw4r {
     namespace lyt {

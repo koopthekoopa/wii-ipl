@@ -16,6 +16,8 @@ void    GXSetZMode(GXBool compare_enable, GXCompare func, GXBool update_enable);
 void    GXSetColorUpdate(GXBool update_enable);
 void    GXSetAlphaUpdate(GXBool update_enable);
 
+void    GXSetBlendMode(GXBlendMode type, GXBlendFactor srcFactor, GXBlendFactor destFactor, GXLogicOp op);
+
 #ifdef __cplusplus
 }
 #endif

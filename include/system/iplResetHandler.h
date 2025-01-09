@@ -24,8 +24,8 @@ namespace ipl {
             void update();
             void fatalUpdate();
 
-            u32 getType()                       { return mType; }
-            u32 getFatalState()                 { return mFatalState; }
+            u32 getType() const                 { return mType; }
+            u32 getFatalState() const           { return mFatalState; }
 
             void changeType(u32 value)          { mType = value; }
             void changeFatalState(u32 value)    { mFatalState = value; }
@@ -39,7 +39,7 @@ namespace ipl {
              * Returns whether the reset handler to return to the system menu when resetting (calling `OSReturnToMenu()`)
              * instead of rebooting the system (calling `OSRebootSystem()`)
              */
-            BOOL willResetToMenu()              { return mbReturnToMenu; }
+            BOOL willResetToMenu() const        { return mbReturnToMenu; }
 
         private:
             static void cbReset();

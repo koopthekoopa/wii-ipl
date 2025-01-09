@@ -115,7 +115,7 @@ namespace ipl {
             ErrorMsg.setResource(pMsg);
 
             // Set the on-screen text.
-            nw4r::lyt::TextBox* pTextBox = (nw4r::lyt::TextBox*)mpLayout->getRoot()->FindPaneByName("TextBox_00");
+            nw4r::lyt::TextBox* pTextBox = (nw4r::lyt::TextBox*)mpLayout->findPane("TextBox_00");
             pTextBox->SetString(ErrorMsg.getMessage(mMessageID));
 
             // Prepare for error screen.

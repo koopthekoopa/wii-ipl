@@ -263,6 +263,7 @@ else:
 cflags_ipl = [
     *cflags_base,
     "-gccinc",
+    "-fp_contract off",
     "-Cpp_exceptions off",
     "-O4,s",
 ]
@@ -431,7 +432,7 @@ config.libs = [
             Object(Matching,    "system/iplNandMeta.cpp"),
             Object(NonMatching, "system/iplNandManager.cpp"),
             Object(Matching,    "system/iplNandWall.cpp"),
-            Object(NonMatching, "system/iplFramework.cpp"),
+            Object(Matching,    "system/iplFramework.cpp"),
             Object(NonMatching, "system/iplException.cpp"),
             Object(Matching,    "system/iplMessage.cpp"),
             Object(Matching,    "system/iplMessageManager.cpp"),
@@ -482,9 +483,9 @@ config.libs = [
     ),
     IPLSection("layout",
         [
-            Object(NonMatching, "layout/GUIManager.cpp"),
+            Object(Matching,    "layout/GUIManager.cpp"),
             Object(Matching,    "layout/iplLayout.cpp"),
-            Object(NonMatching, "layout/iplGuiManager.cpp"),
+            Object(Matching,    "layout/iplGuiManager.cpp"),
         ]
     ),
     IPLSection("sound",

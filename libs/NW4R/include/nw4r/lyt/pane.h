@@ -1,16 +1,16 @@
 #ifndef NW4R_LYT_PANE_H
 #define NW4R_LYT_PANE_H
 
-#include "drawInfo.h"
 #include <revolution/types.h>
+
+#include <nw4r/ut.h>
 
 #include <nw4r/math/types.h>
 
 #include <nw4r/lyt/types.h>
+#include <nw4r/lyt/drawInfo.h>
 #include <nw4r/lyt/animation.h>
 #include <nw4r/lyt/material.h>
-
-#include <nw4r/ut.h>
 
 namespace nw4r {
     namespace lyt {
@@ -25,29 +25,29 @@ namespace nw4r {
                     ut::LinkListNode mLink;
             };
         }
-        typedef ut::LinkList<detail::PaneBase, 4> PaneBaseList;
+        typedef ut::LinkList<Pane, 4> PaneList;
 
         class Pane : detail::PaneBase {
-            NW4R_UT_RUNTIME_TYPEINFO;
-
             public:
                 Pane();
                 virtual ~Pane();                                                                                            // 0x08
+                
+                NW4R_UT_RUNTIME_TYPEINFO;
 
                 virtual void        CalculateMtx(const DrawInfo& drawInfo);                                                 // 0x10
 
                 virtual void        Draw(const DrawInfo& drawInfo);                                                         // 0x14
                 virtual void        DrawSelf(const DrawInfo& drawInfo);                                                     // 0x18
 
-                virtual void        Animate(u32 option);                                                                    // 0x1C
-                virtual void        AnimateSelf(u32 option);                                                                // 0x20
+                virtual void        Animate(u32 option = 0);                                                                // 0x1C
+                virtual void        AnimateSelf(u32 option = 0);                                                            // 0x20
 
                 virtual ut::Color   GetVtxColor(u32 idx) const;                                                             // 0x24
                 virtual void        SetVtxColor(u32 idx, ut::Color valuw);                                                  // 0x28
                 virtual u8          GetVtxColorElement(u32 idx) const;                                                      // 0x2C
                 virtual void        SetVtxColorElement(u32 idx, u8 element);                                                // 0x30
 
-                virtual undefined   GetColorElement(u32 idx) const;                                                         // 0x34
+                virtual u8          GetColorElement(u32 idx) const;                                                         // 0x34
                 virtual void        SetColorElement(u32 idx, u8 color);                                                     // 0x38
                 
                 virtual Pane*       FindPaneByName(const char* findName, bool bRecursive = true);                           // 0x3C
@@ -65,7 +65,10 @@ namespace nw4r {
 
                 virtual Material*   GetMaterial() const;                                                                    // 0x5C
 
-                virtual void*       LoadMtx(const undefined4& drawInfo);                                                    // 0x60
+                virtual void*       LoadMtx(const DrawInfo& drawInfo);                                                      // 0x60
+
+                Pane*               GetParent() const                           { return mpParent; }
+                PaneList&           GetChildList()                              { return mChildList; }
 
                 const math::VEC3&   GetTranslate()                              { return mTranslate; }
                 void                SetTranslate(const math::VEC3& translate)   { mTranslate = translate; }
@@ -80,12 +83,21 @@ namespace nw4r {
                 const Size&         GetSize() const                             { return mSize; }
                 void                SetSize(const Size& size)                   { mSize = size; }
 
+                bool                IsVisible()                                 { return detail::TestBit(mFlags, 0); };
                 void                SetVisible(bool visible)                    { detail::SetBit(&mFlags, 0, visible); };
+
+                const math::MTX34&  GetGlobalMtx() const                        { return mGlobalMtx; }
+                void                SetGlobalMtx(const math::MTX34& mtx)        { mGlobalMtx = mtx; }
+
+                u8                  GetAlpha()                                  { return mAlpha; }
+                void                SetAlpha(u8 alpha)                          { mAlpha = alpha; }
+
+                const ut::Rect      GetPaneRect(const DrawInfo& drawInfo) const;
             
             private:
                 Pane*                           mpParent;                       // 0x0C
 
-                PaneBaseList                    mChildList;                     // 0x10
+                PaneList                        mChildList;                     // 0x10
                 AnimationLinkList               mAnimList;                      // 0x1C
 
                 Material*                       mpMaterial;                     // 0x28

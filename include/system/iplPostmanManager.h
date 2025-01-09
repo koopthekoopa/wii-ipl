@@ -9,7 +9,7 @@ namespace ipl {
             public:
                 Manager();
                 
-                int getUnk0x334() { return unk_0x334; }
+                int getUnk0x334() const { return unk_0x334; }
             
             private:
                 u8      unk_0x00[0x334];

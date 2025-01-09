@@ -1,8 +1,6 @@
 #ifndef NW4R_UT_INLINE_FUNCTIONS_H
 #define NW4R_UT_INLINE_FUNCTIONS_H
 
-#include <revolution/types.h>
-
 namespace nw4r {
     namespace ut {
         class NonCopyable {

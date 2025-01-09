@@ -47,7 +47,7 @@ namespace ipl {
             void    changeType(int newLayoutType)   { mLayoutType = newLayoutType; }
             
             void    setChan(int newChan)            { mChan = newChan; }
-            int     getChan()                       { return mChan; }
+            int     getChan() const                 { return mChan; }
 
         private:
             layout::Object* mpLayout;       // 0x00

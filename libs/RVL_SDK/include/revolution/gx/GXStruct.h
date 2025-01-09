@@ -9,15 +9,15 @@
 extern "C" {
 #endif
 
-typedef struct {
+typedef struct _GXColor {
     u8  r, g, b, a;                     // 0x00
 } GXColor;
 
-typedef struct {
+typedef struct _GXColorS10 {
     s16 r, g, b, a;                     // 0x00
 } GXColorS10;
 
-typedef struct {
+typedef struct _GXTexObj {
     u32 dummy[8];                       // 0x00
 } GXTexObj;
 
@@ -42,5 +42,3 @@ typedef struct _GXRenderModeObj {
 #endif
 
 #endif // REVOLUTION_GX_STRUCTS_H
-
-

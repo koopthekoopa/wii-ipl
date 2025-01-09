@@ -10,7 +10,10 @@
 #include <nw4r/lyt/animation.h>
 
 #include <nw4r/lyt/pane.h>
+#include <nw4r/lyt/picture.h>
+#include <nw4r/lyt/bounding.h>
 #include <nw4r/lyt/textBox.h>
+#include <nw4r/lyt/window.h>
 
 #include <nw4r/lyt/material.h>
 

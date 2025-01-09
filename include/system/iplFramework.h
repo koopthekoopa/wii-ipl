@@ -21,9 +21,9 @@ namespace ipl {
 
             void                resetRenderMode();
 
-            GXRenderModeObj*    getRenderMode() { return mpRMode; }
-            BOOL                isWidescreen()  { return mWideScreen; }
-            f32                 getDelta()      { return mDelta; }
+            GXRenderModeObj*    getRenderMode() const   { return mpRMode; }
+            BOOL                isWidescreen() const    { return mWideScreen; }
+            f32                 getDelta() const        { return mDelta; }
 
         private:
             void    flip_xfb();

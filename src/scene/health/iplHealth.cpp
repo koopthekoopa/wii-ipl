@@ -175,8 +175,8 @@ namespace ipl {
 
             // Make all of the panes invisible
             for (int i = 0; i < ARRSIZE(has_pane_name); i++) {
-                pHasPane   = mpLayout->getRoot()->FindPaneByName(has_pane_name[i]);
-                pPushPane  = mpLayout->getRoot()->FindPaneByName(push_pane_name[i]);
+                pHasPane   = mpLayout->findPane(has_pane_name[i]);
+                pPushPane  = mpLayout->findPane(push_pane_name[i]);
 
                 pHasPane->SetVisible(false);
                 pPushPane->SetVisible(false);
@@ -184,8 +184,8 @@ namespace ipl {
 
             // Make the necessary panes visible
             u32 country = getCountryIndex_();
-            mpHasPane   = mpLayout->getRoot()->FindPaneByName(has_pane_name[country]);
-            mpPushPane  = mpLayout->getRoot()->FindPaneByName(push_pane_name[country]);
+            mpHasPane   = mpLayout->findPane(has_pane_name[country]);
+            mpPushPane  = mpLayout->findPane(push_pane_name[country]);
 
             mpHasPane->SetVisible(true);
 

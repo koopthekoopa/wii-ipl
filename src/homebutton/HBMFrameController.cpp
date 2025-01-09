@@ -1,5 +1,5 @@
 #include "homebutton/HBMFrameController.h"
-#pragma sym on
+
 namespace homebutton {
     void FrameController::init(int type, f32 maxFrame, f32 minFrame, f32 delta) {
         mAnmType = type;

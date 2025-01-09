@@ -12,7 +12,7 @@ namespace ipl {
                 Manager(EGG::Heap* heap);
 
                 /** @return The message data in use. */
-                Message* getMessage() { return mpMessage; }
+                Message* getMessage() const { return mpMessage; }
             
             private:
                 void initMessage();

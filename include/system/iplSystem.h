@@ -101,7 +101,9 @@ namespace ipl {
                     nand::File*         mpChnTradMsg;           // 0x150
                     nand::File*         mpKorMsg;               // 0x154
 
-                    u8                  unk_0x158[0x1E0 - 0x158];
+                    u8                  unk_0x158[0x18C - 0x158];
+                    nand::LayoutFile*   mpDlgWdwFile;           // 0x18C
+                    u8                  unk_0x190[0x1E0 - 0x190];
                     OSAlarm             mUnkAlarm;              // 0x1E0
                     u8                  unk_0x210[0x2B0 - 0x210];
 
@@ -203,6 +205,8 @@ namespace ipl {
             static nand::File*          getChnTradMsg()         { return smArg.mpChnTradMsg; }
             /** @return The Korean message data. */
             static nand::File*          getKorMsg()             { return smArg.mpKorMsg; }
+            /** @return The Dialog Window data. */
+            static nand::LayoutFile*    getDlgWdwFile()         { return smArg.mpDlgWdwFile; }
             static bool                 isUnk_0x2B1()           { return smArg.unk_0x2B1; }
             static bool                 hasCreatedAfter()       { return smArg.mbCreatedAfter; }
             /** @return Whether the libraries needed have been created. */
@@ -260,6 +264,7 @@ namespace ipl {
             /** @return The Renderer of the IPL. */
             static GXRenderModeObj*         getRenderModeObj();
 
+            static void                     getProjectionRect(nw4r::ut::Rect* rect);
             static void                     getProjectionRect4x3(nw4r::ut::Rect* rect);
             static void                     getProjectionRect16x9(nw4r::ut::Rect* rect);
 

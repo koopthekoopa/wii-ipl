@@ -5,8 +5,8 @@
 
 namespace ipl {
      typedef struct {
-         u32         unk0;       // 0x00
-         u32         unk1;       // 0x04
+         u32         unk0;       // 0x00 (x slot?)
+         u32         unk1;       // 0x04 (y slot)
          ESTitleId   titleId;    // 0x08
      } ChanEntry;
 }

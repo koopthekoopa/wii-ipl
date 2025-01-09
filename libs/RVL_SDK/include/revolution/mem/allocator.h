@@ -7,10 +7,10 @@
 extern "C" {
 #endif
 
-typedef struct MEMAllocator;
+typedef struct MEMAllocator MEMAllocator;
 
-typedef void* (*MEMAllocatorAllocFunc)(struct MEMAllocator* allocator, u32 size);
-typedef void (*MEMAllocatorFreeFunc)(struct MEMAllocator* allocator, void* block);
+typedef void* (*MEMAllocatorAllocFunc)(MEMAllocator* allocator, u32 size);
+typedef void (*MEMAllocatorFreeFunc)(MEMAllocator* allocator, void* block);
 
 typedef struct MEMAllocatorFuncs {
     MEMAllocatorAllocFunc   allocFunc;  // 0x00
@@ -26,10 +26,11 @@ typedef struct MEMAllocator {
     u32                     heapParam2; // 0x0C
 } MEMAllocator;
 
+void*   MEMAllocFromAllocator(MEMAllocator*, u32 size);
+void    MEMFreeToAllocator(MEMAllocator*, void* buffer);
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif // REVOLUTION_MEM_ALLOCATOR_H
-
-

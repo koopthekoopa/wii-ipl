@@ -51,10 +51,10 @@ namespace ipl {
                 virtual bool    checkData();                                            // 0x18
                 virtual bool    isFatalError();                                         // 0x1C
 
-                u8*             getBuffer()     { return mpBuffer; }
-                u32             getLength()     { return mpLength; }
+                u8*             getBuffer() const       { return mpBuffer; }
+                u32             getLength() const       { return mpLength; }
                 
-                bool            isFullForTask() { return mbIsFullForTask; }
+                bool            isFullForTask() const   { return mbIsFullForTask; }
 
             protected:
                 virtual BOOL    open_(u8 attr);                                         // 0x20
@@ -123,8 +123,8 @@ namespace ipl {
                 virtual bool    checkData();                                            // 0x18
                 virtual bool    isFatalError();                                         // 0x1C
 
-                File*           getCmnFile()    { return mpCommonFile; }
-                File*           getLangFile()   { return mpLangFile; }
+                File*           getCmnFile() const  { return mpCommonFile; }
+                File*           getLangFile() const { return mpLangFile; }
 
             private:
                 File*   mpCommonFile;                                                   // 0x04
@@ -154,8 +154,8 @@ namespace ipl {
                 void        closeContentsAll();
                 void        sendToken(int token);
                 
-                int         getDescriptor() { return mDescriptor; }
-                ARCHandle*  getArc()        { return &mUnkArc; }
+                int         getDescriptor() const   { return mDescriptor; }
+                ARCHandle*  getArc()                { return &mUnkArc; }
             
             private:
                 u8          unk_0x00[0x268];

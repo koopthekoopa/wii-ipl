@@ -9,6 +9,7 @@
 #include <egg/core.h>
 
 #include "nw4r/lyt/drawInfo.h"
+#include "nw4r/ut/list.h"
 #include "revolution/types.h"
 #include "system/iplNand.h"
 
@@ -31,12 +32,13 @@ namespace ipl {
                 void            initAnmFrame(float frame);
 
             protected:
-                nw4r::lyt::AnimTransform*   mAnimTrans;   // 0x20
+                nw4r::lyt::AnimTransform*   mAnimTrans; // 0x20
                 
-                u32                         unused_0x24;
-                u32                         unused_0x28;
+                nw4r::ut::Link              mLink;      // 0x24
 
-                u32                         mFlags;
+                u32                         mFlags;     // 0x2C
+            
+            friend class Object;
         };
 
         class PaneAnimator : public Animator {
@@ -112,9 +114,24 @@ namespace ipl {
                 static Object*          create(EGG::Heap* heap, u32 unk0, void* buffer, const char* directory, const char* fileName);
 
                 /** @brief Gets the layout object. */
-                nw4r::lyt::Layout*      getLayout()                 { return &mLayout; }
-                /** @brief Gets the root of the layout. */
-                nw4r::lyt::Pane*        getRoot()                   { return getLayout()->GetRootPane(); }
+                nw4r::lyt::Layout*      getLayout()                     { return &mLayout; }
+                /** @brief Gets the layout object. */
+                nw4r::lyt::DrawInfo*    getDrawInfo()                   { return &mDrawInfo; }
+                /** @brief Gets the root pane of the layout. */
+                nw4r::lyt::Pane*        getRoot()                       { return getLayout()->GetRootPane(); }
+                nw4r::lyt::Pane*        findPane(const char *findName)  { return getRoot()->FindPaneByName(findName); }
+                Animator*               getAnim(u16 idx)                { return (Animator*)nw4r::ut::List_GetNth(&mAnims, idx); }
+
+                void playAnimFrame(Animator* anim) {
+                    anim->initFrame();
+                    anim->setState(ANIM_STATE_PLAY);
+                }
+                void playAnimFrame(u16 idx) {
+                    playAnimFrame(getAnim(idx));
+                }
+                void playAnimFrame(int idx) {
+                    playAnimFrame((u16)idx);
+                }
                 
             private:
                 void                    init_(const char* fileName);

@@ -7,17 +7,7 @@ extern "C" {
 #endif // __cplusplus
 
 #include <revolution/wpad.h>
-
-typedef struct Vec {
-    f32 x; // 0x00
-    f32 y; // 0x04
-    f32 z; // 0x08
-} Vec;
-
-typedef struct Vec2 {
-    f32 x; // 0x00
-    f32 y; // 0x04
-} Vec2;
+#include <revolution/mtx/GeoTypes.h>
 
 typedef union KPADEXStatus {
     struct {
@@ -79,5 +69,3 @@ s32 KPADRead(s32 chan, KPADStatus* status, u32 length);
 #endif // __cplusplus
 
 #endif // REVOLUTION_KPAD_H
-
-

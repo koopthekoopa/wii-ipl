@@ -91,6 +91,6 @@ namespace ipl {
     }
 }
 
+#include "system/iplSystem.h"
+
 #endif // BASE_SCENE_H
-
-

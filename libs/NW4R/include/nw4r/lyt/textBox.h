@@ -2,16 +2,15 @@
 #define NW4R_LYT_TEXTBOX_H
 
 #include <nw4r/lyt/pane.h>
-#include <nw4r/lyt/types.h>
 
 #include <nw4r/db/assert.h>
-
-#include <nw4r/ut/Color.h>
 
 namespace nw4r {
     namespace lyt {
         class TextBox : public Pane {
             public:
+                NW4R_UT_RUNTIME_TYPEINFO;
+                
                 TextBox();
 
                 virtual ~TextBox();

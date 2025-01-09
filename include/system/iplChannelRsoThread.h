@@ -21,7 +21,7 @@ namespace ipl {
                 /** @param func The new loop function. */
                 void            setCalcFunc(CalcFunc func);
 
-                OSMessageQueue* getCalcQueue() { return &mCalcQueue; }
+                OSMessageQueue* getCalcQueue()  { return &mCalcQueue; }
             
             private:
                 u8*             mpStack;        // 0x32C
@@ -36,5 +36,3 @@ namespace ipl {
 }
 
 #endif // IPL_CHANNEL_RSO_THREAD_H
-
-

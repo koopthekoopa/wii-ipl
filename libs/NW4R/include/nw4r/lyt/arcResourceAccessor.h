@@ -19,8 +19,7 @@ namespace nw4r {
                 
                 void        Set(const char* name, ut::Font* pFont);
 
-                ut::Font*   GetFont() const { return mpFont; }
-                char*       GetFontName() { return mFontName; }
+                ut::Font*   GetFont() const     { return mpFont; }
 
                 ut::LinkListNode mLink;
             
@@ -37,7 +36,7 @@ namespace nw4r {
                 void        Set(void* archiveStart, const char* resRootDirectory);
                 
                 char*       GetResRootDir() { return mResRootDir; }
-                ARCHandle*  GetArcHandle() { return &mArcHandle; }
+                ARCHandle*  GetArcHandle()  { return &mArcHandle; }
 
                 ut::LinkListNode mLink;
             
