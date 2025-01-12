@@ -2,8 +2,8 @@ Revolution SDK Decompilation
 ============================
 A decompilation of the Revolution SDK (RVL_SDK) from the Wii Menu.  
 
-This version of the SDK seems to be a mess.  
-Most of the code is from the 2006/2007 version and was recompiled in 2010 with the GC 3.0a5.2 compiler.
+This version of the SDK is a mess.  
+Seems to be an SDK version from 2006 with lazily copied code from later versons and was (mostly?) recompiled in 2010 with the GC 3.0a5.2 compiler.
 
 The Wii Menu has the following libraries linked (alphabetical order):
 * **AI** (Audio Interface Library)
@@ -14,7 +14,7 @@ The Wii Menu has the following libraries linked (alphabetical order):
 * **BTE** (BroadCom's Bluetooth Driver Library)
 * **CARD** (GameCube Memory Card Library)
 * **CNT** (Title Content API Library)
-* **CNTCACHE** (SD Title Content Library?; seems to be only used for SD Card Menu)
+* **CNTCACHE** (Unknown)
 * **CX** (Compression Library)
 * **DB** (Debug Library)
 * **DSP** (DSP Library)
@@ -34,12 +34,12 @@ The Wii Menu has the following libraries linked (alphabetical order):
 * **MEM** (Memory Manager Library)
 * **MTX** (Matrix and Vector Library)
 * **NAND** (NAND Library; Wii System Memory)
-* **NUP** (Wii NUS Library; **N**intendo **UP**date?)
+* **NUP** (Wii NUS Library; **N**intendo **UP**dater?)
 * **OS** (Operating System Library)
 * **PAD** (GameCube Controller Library)
 * **RSO** (RSO Module Library)
 * **SC** (System Configuration Library)
-* **SCUTIL** (System Configuration Utility Library; Seems to be related to country code)
+* **SCUTIL** (System Configuration Utility Library)
 * **SDI** (SD Card Driver API)
 * **SI** (Serial Interface Library)
 * **TPL** (Texture Pallete Library)
@@ -50,9 +50,11 @@ The Wii Menu has the following libraries linked (alphabetical order):
 * **WPAD** (Low Level Wii Remote Library)
 * **WUD** (Wireless Driver Library)
 
-References
-----------
+Thanks to
+---------
 [kiwi515/ogws](https://github.com/kiwi515/ogws)  
+[SMGCommunity/Petari](https://github.com/SMGCommunity/Petari)  
 [doldecomp/dolsdk2001](https://github.com/doldecomp/dolsdk2001)  
+[devkitPro/libogc](https://github.com/devkitPro/libogc)  
 
 

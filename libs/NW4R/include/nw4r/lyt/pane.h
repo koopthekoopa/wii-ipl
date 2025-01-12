@@ -92,6 +92,8 @@ namespace nw4r {
                 u8                  GetAlpha()                                  { return mAlpha; }
                 void                SetAlpha(u8 alpha)                          { mAlpha = alpha; }
 
+                const char*         GetName() const                             { return mName; }
+
                 const ut::Rect      GetPaneRect(const DrawInfo& drawInfo) const;
             
             private:

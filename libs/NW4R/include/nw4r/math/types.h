@@ -98,6 +98,8 @@ namespace nw4r {
             VEC3(f32 fx, f32 fy, f32 fz)    { x = fx; y = fy; z = fz; }
 
             operator Vec*()                 { return (Vec*)this; }
+
+            VEC3& operator+=(const VEC3& rhs);
         } VEC3;
 
         struct _VEC4 {

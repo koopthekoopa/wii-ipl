@@ -1,9 +1,5 @@
 #include "system/iplMessage.h"
 
-#include <revolution/sc.h>
-
-#include "system/iplSystem.h"
-
 namespace ipl {
     namespace message {
         Message::Message()
@@ -45,5 +41,3 @@ namespace ipl {
         }
     }
 }
-
-

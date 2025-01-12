@@ -20,15 +20,15 @@ namespace gui {
 
     class Interface {
         public:
-            virtual void    create();       // 0x08 (0x02)
+            virtual void    create() {}         // 0x08 (0x02)
 
-            virtual void    init();         // 0x0C (0x03)
-            virtual void    calc();         // 0x10 (0x04)
+            virtual void    init() {}           // 0x0C (0x03)
+            virtual void    calc() {}           // 0x10 (0x04)
 
-            virtual void    draw(Mtx& mtx); // 0x14 (0x05)
-            virtual void    draw();         // 0x18 (0x06)
+            virtual void    draw(Mtx& mtx) {}   // 0x14 (0x05)
+            virtual void    draw() {}           // 0x18 (0x06)
 
-            virtual ~Interface() {}         // 0x1C (0x07)
+            virtual ~Interface() {}             // 0x1C (0x07)
     };
 
     class EventHandler {
@@ -50,7 +50,7 @@ namespace gui {
             virtual void        setManager(Manager* manager)        { mpManager = manager; }        // 0x0C (0x03)
 
             virtual void        setLatestEventCtrlNo(int ctrlNo)    { mLatestCtrlNum = ctrlNo; }    // 0x10 (0x04)
-            virtual int         getLatestEventCtrl()                { return mLatestCtrlNum; }      // 0x14 (0x05)
+            virtual int         getLatestEventCtrlNo()              { return mLatestCtrlNum; }      // 0x14 (0x05)
         
         protected:
             Manager*    mpManager;      // 0x04
@@ -69,6 +69,7 @@ namespace gui {
             }
 
             Component(u32 id) :
+            Interface(),
             mDraggingButton(0xFFFF),
             mID(id),
             mbTriggerTarget(false),
@@ -132,12 +133,13 @@ namespace gui {
 
     class Manager : public Interface {
         public:
-            virtual void        init();                                                 // 0x0C (0x03)
-            virtual void        calc();                                                 // 0x10 (0x04)
+            virtual void            init();                                                                             // 0x0C (0x03)
+            virtual void            calc();                                                                             // 0x10 (0x04)
 
-            virtual void        draw();                                                 // 0x18 (0x06)
+            virtual void            draw();                                                                             // 0x18 (0x06)
 
             Manager(EventHandler* event, MEMAllocator* allocator) :
+            Interface(),
             mpEventHandler(event),
             mpAllocator(allocator) {
                 if (mpEventHandler != NULL) {
@@ -146,27 +148,39 @@ namespace gui {
                 nw4r::ut::List_Init(&mComponents, offsetof(ComponentID, mLink));
             }
 
-            virtual ~Manager();                                                                                 // 0x1C (0x07)
+            virtual ~Manager();                                                                                     // 0x1C (0x07)
 
-            virtual void        addComponent(Component* component);                                             // 0x20 (0x08)
-            virtual Component*  getComponent(u32 id);                                                           // 0x24 (0x09)
+            virtual void            addComponent(Component* component);                                                 // 0x20 (0x08)
+            virtual Component*      getComponent(u32 id);                                                               // 0x24 (0x09)
 
-            virtual bool        update(int point, const KPADStatus* kpad, f32, f32, void* data);                 // 0x28 (0x0A)
-            virtual bool        update(int point, f32 x, f32 y, u32 trig, u32 hold, u32 release, void* data);   // 0x2C (0x0B)
+            virtual bool            update(int point, const KPADStatus* kpad, f32, f32, void* data) { return false; }   // 0x28 (0x0A)
+            virtual bool            update(int point, f32 x, f32 y, u32 trig, u32 hold, u32 release, void* data);       // 0x2C (0x0B)
 
-            virtual void        onEvent(u32 compId, u32 event, int point, void* data);                          // 0x30 (0x0C)
+            virtual void            onEvent(u32 compId, u32 event, int point, void* data) {                             // 0x30 (0x0C)
+                if (mpEventHandler) {
+                     mpEventHandler->setLatestEventCtrlNo(point);
+                     mpEventHandler->onEvent(compId, event, data);
+                }
+            }
 
-            virtual void        setAllComponentTriggerTarget(bool bEnable);                                     // 0x34 (0x0D)
+            virtual void            setAllComponentTriggerTarget(bool bEnable);                                         // 0x34 (0x0D)
 
-            virtual void        setEventHandler(EventHandler* eventHandler) {                                   // 0x38 (0x0E)
+            virtual void            setEventHandler(EventHandler* eventHandler) {                                       // 0x38 (0x0E)
                 mpEventHandler = eventHandler;
                 if (eventHandler) {
                     eventHandler->setManager(this);
                 }
             }
-            virtual void        changeEventHandler(EventHandler* event);                                        // 0x3C (0x0F)
+            virtual EventHandler*   changeEventHandler(EventHandler* eventHandler) {                                           // 0x3C (0x0F)
+                EventHandler* prevHandler = mpEventHandler;
+                mpEventHandler = eventHandler;
+                if (eventHandler) {
+                    eventHandler->setManager(this);
+                }
+                return prevHandler;
+            }
 
-            virtual void        setDraggingButton(u32 dragBtn);                                                 // 0x40 (0x10)
+            virtual void            setDraggingButton(u32 dragBtn);                                                     // 0x40 (0x10)
         
         protected:
             class ComponentID {

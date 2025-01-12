@@ -60,7 +60,7 @@ extract:
 
 # fix up bss nightmare from the generated dol
 block_relocations:
-    - target: .bss:0x811C10D8
+    - target: .bss:0x811C10D4
       end:    .bss:0x8132FFFF
 
 

@@ -165,8 +165,6 @@ namespace ipl {
             return result;
         }
 
-        // loading `getCountryIndex_()` to `country` for some reason is stored in `r29` and not `r26`
-        // https://decomp.me/scratch/55mS2
         void skHealth::create() {
             nw4r::lyt::Pane* pHasPane;
             nw4r::lyt::Pane* pPushPane;
@@ -253,7 +251,7 @@ namespace ipl {
 
             if (finish_safe_mode_check()) {
                 // Either user pressed A (or B), connected controller, went to safe more OR was on the screen for 60 seconds? We fade out.
-                if (System::getMasterController()->downTrg(((WPAD_BUTTON_CL_A | WPAD_BUTTON_CL_B) * 0x10000 /* ? */) | WPAD_BUTTON_B | WPAD_BUTTON_A) || mWpadMask != newWpadMask ||
+                if (System::getMasterController()->downTrg(IPL_BUTTON_A | IPL_BUTTON_B) || mWpadMask != newWpadMask ||
                 OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) > HAS_TIMER_NOT_PRESS_A || mbDoneSafeMode) {
                     
                     if (mWpadMask != newWpadMask && !utility::wpad::isIncreaseConnectedWpad(mWpadMask, newWpadMask)) {
@@ -346,5 +344,3 @@ namespace ipl {
         void FaderSceneBase::initCalcFadeout() {}
     }
 }
-
-

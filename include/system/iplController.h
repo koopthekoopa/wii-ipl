@@ -10,6 +10,15 @@
 
 #include "iplMath.h"
 
+#define IPL_BUTTON_A        ((WPAD_BUTTON_CL_A      << 16)  | WPAD_BUTTON_A)
+#define IPL_BUTTON_B        ((WPAD_BUTTON_CL_B      << 16)  | WPAD_BUTTON_B)
+#define IPL_BUTTON_START    ((WPAD_BUTTON_CL_PLUS   << 16)  | WPAD_BUTTON_PLUS)
+#define IPL_BUTTON_SELECT   ((WPAD_BUTTON_CL_MINUS  << 16)  | WPAD_BUTTON_MINUS)
+#define IPL_BUTTON_HOME     ((WPAD_BUTTON_CL_HOME   << 16)  | WPAD_BUTTON_HOME)
+
+#define IPL_BUTTON_1        (WPAD_BUTTON_1)
+#define IPL_BUTTON_2        (WPAD_BUTTON_2)
+
 namespace ipl {
     namespace controller {
         class Manager {
@@ -68,5 +77,3 @@ namespace ipl {
 }
 
 #endif // IPL_CONTROLLER_H
-
-

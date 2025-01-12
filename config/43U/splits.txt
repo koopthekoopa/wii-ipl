@@ -3136,3 +3136,6 @@ libs/Runtime/src/__init_cpp_exceptions.cpp:
 	.dtors      start:0x8160D280 end:0x8160D284 rename:.dtors$10
 	.dtors      start:0x8160D284 end:0x8160D288 rename:.dtors$15
 	.sdata      start:0x816985F8 end:0x81698600
+
+GARBAGE_DATA:
+	.bss        start:0x811B1494 end:0x81330000

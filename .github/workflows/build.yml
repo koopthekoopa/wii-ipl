@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    # Private repo for build
+    # This is a *private* build container.
     container: ghcr.io/koopthekoopa/wii-ipl-build:main
 
     runs-on: ubuntu-latest

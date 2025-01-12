@@ -594,7 +594,7 @@ config.libs = [
     ),
     IPLSection("health",
         [
-            Object(Equivalent,  "scene/health/iplHealth.cpp"),
+            Object(Matching,    "scene/health/iplHealth.cpp"),
         ]
     ),
     IPLSection("kitayamaTest",

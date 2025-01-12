@@ -1,5 +1,7 @@
 #include "system/iplFramework.h"
 
+#include "config.h"
+
 #include <revolution/sc.h>
 
 namespace ipl {
@@ -276,8 +278,14 @@ namespace ipl {
     }
 
     void Framework::init_xfb(EGG::Heap* heap) {
-        u32 xfbSize = VIPadFrameBufferWidth(mpRMode->fbWidth) * mpRMode->xfbHeight * VI_DISPLAY_PIX_SZ;
-        
+        // hmph
+        #ifdef VERSION_43E
+        GXRenderModeObj* rMode = &sRMO_Pal50_640x456IntDf;
+        #else
+        GXRenderModeObj* rMode = mpRMode;
+        #endif
+
+        u32 xfbSize = VIPadFrameBufferWidth(rMode->fbWidth) * rMode->xfbHeight * VI_DISPLAY_PIX_SZ;
         for (int i = 0; i < 2; i++) {
             mpXfb[i] = new(heap, BUFFER_HEAP) u8[xfbSize];
         }

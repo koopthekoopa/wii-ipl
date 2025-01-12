@@ -1,9 +1,6 @@
 #include "system/iplWarningHandler.h"
 
-#include "system/iplDialogWindow.h"
 #include "system/iplSystem.h"
-#include "system/iplHomeButton.h"
-#include "system/iplMessage.h"
 
 namespace ipl {
     WarningHandler::WarningHandler(EGG::Heap* heap) :
@@ -35,6 +32,6 @@ namespace ipl {
     }
 
     BOOL WarningHandler::check() {
-        return mpDialog->btnLastPressed();
+        return mpDialog->getLastResult();
     }
 }

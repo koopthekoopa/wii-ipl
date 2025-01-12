@@ -11,8 +11,6 @@
 
 #include <egg/core.h>
 
-#include "iplMath.h"
-
 #include "system/iplFramework.h"
 #include "system/iplNand.h"
 #include "system/iplController.h"
@@ -22,7 +20,6 @@
 #include "system/iplDialogWindow.h"
 #include "system/iplPointer.h"
 #include "system/iplHomeButton.h"
-#include "system/iplMessage.h"
 #include "system/iplMessageManager.h"
 #include "system/iplSaveData.h"
 #include "system/iplNwc24Manager.h"
@@ -56,7 +53,7 @@ namespace ipl {
                     undefined4          unk_0x70;
                     Framework*          mpFramework;            // 0x74
                     undefined           unk_0x78[0x80 - 0x78];
-                    message::Message*   mpMessage;              // 0x80
+                    message::Manager*   mpMsgMgr;               // 0x80
                     undefined4          unk_0x84;
                     undefined4          unk_0x88;
                     nwc24::Manager*     mpNwc24Manager;         // 0x8C
@@ -71,7 +68,7 @@ namespace ipl {
                     Pointer*            mpointer;               // 0xB0
                     HomeButtonMenu*     mpHomeButton;           // 0xB4
                     undefined4*         unk_0xB8;
-                    message::Manager*   mpMesgMgr;              // 0xBC
+                    undefined           mpJpegDecode;           // 0xBC
                     EGG::Thread*        mpUnkThread;            // 0xC0
                     EGG::ColorFader*    mpFader;                // 0xC4
                     EGG::ColorFader*    mpResetFader;           // 0xC8
@@ -149,6 +146,8 @@ namespace ipl {
             static nand::Manager*       getNandManager()        { return smArg.mpNandManager; }
             /** @return The animation speed. */
             static f32                  getAnimDelta()          { return smArg.mpFramework->getDelta(); }
+            /** @return The Message ID as a Wide-string. */
+            static const wchar_t*       getMessage(u32 id)      { return smArg.mpMsgMgr->getMessage(id); }
             /** @return The WiiConnect24 Manager object. */
             static nwc24::Manager*      getNwc24Manager()       { return smArg.mpNwc24Manager; }
             /** @return The Save Data Manager object. */
@@ -169,8 +168,6 @@ namespace ipl {
             static DialogWindow*        getDialog()             { return smArg.mpDialog; }
             /** @return The Pointer object. */
             static Pointer*             getPointer()            { return smArg.mpointer; }
-            /** @return The Message Manager object. */
-            static message::Manager*    getMessageManager()     { return smArg.mpMesgMgr; }
             /** @return something */
             static EGG::Thread*         getUnkThread()          { return smArg.mpUnkThread; }
             /** @return The Fader object */

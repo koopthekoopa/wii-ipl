@@ -28,10 +28,10 @@ Windows
 > On Windows, it's **highly recommended** to use native tooling. WSL or MSYS2 are **not** required.  
 > When running under WSL, [objdiff](#diffing) is unable to get filesystem notifications for automatic rebuilds.
 
-- Install [Python](https://www.python.org/downloads/) and add it to `PATH` environment variable.
-  - Setup will ask you if you want to add python to `%PATH%`, make sure that is enabled.
+- Install [Python](https://www.python.org/downloads/) and add it to the `PATH` environment variable.
+  - Setup will ask you if you want to add python to `PATH` environment variable, make sure that is enabled.
   - Python is also available from the [Windows Store](https://apps.microsoft.com/store/detail/python-311/9NRWMJP3717K).
-- Download the ninja tool [here](https://github.com/ninja-build/ninja/releases) and either add it to `PATH` environment variable **or** the repository directory.
+- Download the ninja tool [here](https://github.com/ninja-build/ninja/releases) and either add it to the `PATH` environment variable.
   - You can install ninja quickly via pip (if you have it installed via Python's setup)
     - `pip install ninja`
 
@@ -90,7 +90,7 @@ Building the Decompilation
   ```
 
 > [!WARNING]
-> The code is not 100% shiftable, most of it works aside from a couple of things (such as Wii Settings and a few channel banners like the Forecast Channel)
+> The code is not 100% shiftable, most of it works aside from a couple of things (such as Wii Settings and a few Channel Banners like the Forecast Channel)
 
 Diffing
 =======

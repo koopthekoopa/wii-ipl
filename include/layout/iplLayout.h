@@ -31,6 +31,15 @@ namespace ipl {
                 void            initAnmFrame();
                 void            initAnmFrame(float frame);
 
+                void            playAnmFrame() {
+                    initFrame();
+                    mState = ANIM_STATE_PLAY;
+                }
+
+                void            stopAnmFrame() {
+                    mState = ANIM_STATE_READY;
+                }
+
             protected:
                 nw4r::lyt::AnimTransform*   mAnimTrans; // 0x20
                 
@@ -115,24 +124,13 @@ namespace ipl {
 
                 /** @brief Gets the layout object. */
                 nw4r::lyt::Layout*      getLayout()                     { return &mLayout; }
-                /** @brief Gets the layout object. */
+                /** @brief Gets the draw info object. */
                 nw4r::lyt::DrawInfo*    getDrawInfo()                   { return &mDrawInfo; }
+                void                    calcMtx()                       { getLayout()->CalculateMtx(mDrawInfo); }
                 /** @brief Gets the root pane of the layout. */
                 nw4r::lyt::Pane*        getRoot()                       { return getLayout()->GetRootPane(); }
                 nw4r::lyt::Pane*        findPane(const char *findName)  { return getRoot()->FindPaneByName(findName); }
                 Animator*               getAnim(u16 idx)                { return (Animator*)nw4r::ut::List_GetNth(&mAnims, idx); }
-
-                void playAnimFrame(Animator* anim) {
-                    anim->initFrame();
-                    anim->setState(ANIM_STATE_PLAY);
-                }
-                void playAnimFrame(u16 idx) {
-                    playAnimFrame(getAnim(idx));
-                }
-                void playAnimFrame(int idx) {
-                    playAnimFrame((u16)idx);
-                }
-                
             private:
                 void                    init_(const char* fileName);
 

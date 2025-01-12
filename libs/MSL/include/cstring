@@ -12,6 +12,7 @@ char*   stricmp(char* dst, const char* src);
 
 char*   strncpy(char* dst, const char* src, size_t length);
 char*   strncat(char* dst, const char* src, size_t length);
+char*   strncmp(char* dst, const char* src, size_t lengt);
 
 size_t  strlen(const char* str);
 
