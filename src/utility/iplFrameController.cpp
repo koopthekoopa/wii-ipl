@@ -58,8 +58,8 @@ namespace ipl {
                         }
                         break;
                     }
-                    // Animate in a bouncy way; Once reaching the maximum frame, it then animates forward.
-                    // And once reaching the minimum frame, it animates forwards. Then repeat.
+                    // Animate in a bouncy way; Once reaching the maximum frame, it then animates forwards.
+                    // And once reaching the minimum frame, it animates backwards. Then repeat.
                     case ANIM_TYPE_BOUNCE: {
                         if (mbBounceBack == false) {
                             if ((mFrame += speed) >= mMaxFrame) {
