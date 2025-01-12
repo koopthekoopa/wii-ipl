@@ -4,7 +4,7 @@ Wii Menu
 ========
 
 [Build Status]: https://github.com/koopthekoopa/wii-ipl/actions/workflows/build.yml/badge.svg
-[actions]: https://github.com/koopthekoopa/ipl/actions/workflows/build.yml
+[actions]: https://github.com/koopthekoopa/wii-ipl/actions/workflows/build.yml
 [Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 [discord]: https://discord.gg/hKx3FJJgrV
 
