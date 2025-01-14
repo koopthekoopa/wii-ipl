@@ -18,7 +18,7 @@ namespace ipl {
 
         void BackMenu::create() {
             // Set up layout
-            mpLayout = new layout::Object(mheap, backToWiiMenu_arc, "arc", "my_BackToWiiMenu.brlyt");
+            mpLayout = new layout::Object(mpHeap, backToWiiMenu_arc, "arc", "my_BackToWiiMenu.brlyt");
 
             mpLayout->bind("my_BackToWiiMenu.brlan");
             mpLayout->finishBinding();

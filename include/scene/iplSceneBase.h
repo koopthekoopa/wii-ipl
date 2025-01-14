@@ -77,7 +77,7 @@ namespace ipl {
                 virtual Tree*   getPrev()                   { return mpPrev; }
                 
             protected:
-                EGG::Heap*  mheap;     // 0x24
+                EGG::Heap*  mpHeap;     // 0x24
 
                 u32         mFlags;     // 0x28
                 u32         unk_0x2C;

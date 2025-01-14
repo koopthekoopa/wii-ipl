@@ -5,6 +5,8 @@
 
 #include "system/iplController.h"
 
+#include "system/MESGEntries.h"
+
 #include "layout/GUIManager.h"
 #include "layout/iplLayout.h"
 
@@ -16,23 +18,23 @@ namespace ipl {
     class DialogWindow : public ::gui::EventHandler {
         public:
             enum {
-                DIALOG_RESULT_NONE = -1,
-                DIALOG_RESULT_WAIT,                                 /* For `callBtn0` */
-                DIALOG_RESULT_BUTTON,                               /* For `callBtn1` */
-                DIALOG_RESULT_RIGHT_BUTTON = DIALOG_RESULT_BUTTON,  /* For `callBtn2` */
-                DIALOG_RESULT_LEFT_BUTTON,                          /* For `callBtn2` */
-                DIALOG_RESULT_TOP_BUTTON,                           /* For `callBtn3` */
-                DIALOG_RESULT_MIDDLE_BUTTON,                        /* For `callBtn3` */
-                DIALOG_RESULT_BOTTOM_BUTTON,                        /* For `callBtn3` */
-                DIALOG_RESULT_TERMINATED,
-                DIALOG_RESULT_PROGRESS,                             /* For `callBtnPrg` */
+                RESULT_NONE = -1,
+                RESULT_WAIT,                                 /* For `callBtn0` */
+                RESULT_BUTTON,                               /* For `callBtn1` */
+                RESULT_LEFT_BUTTON = RESULT_BUTTON,          /* For `callBtn2` */
+                RESULT_RIGHT_BUTTON,                         /* For `callBtn2` */
+                RESULT_TOP_BUTTON,                           /* For `callBtn3` */
+                RESULT_MIDDLE_BUTTON,                        /* For `callBtn3` */
+                RESULT_BOTTOM_BUTTON,                        /* For `callBtn3` */
+                RESULT_TERMINATED,
+                RESULT_PROGRESS,                             /* For `callBtnPrg` */
             };
 
             typedef struct Page {
                 u32                     mMsgId;         // 0x00
                 u32                     mRBtnMsgId;     // 0x04
                 u32                     mLBtnMsgId;     // 0x08
-                bool                    mbOneBtn;       // 0x0C
+                bool                    mbTwoBtn;       // 0x0C
 
                 ipl::layout::Object*    mpLayout;       // 0x10
 
@@ -59,15 +61,15 @@ namespace ipl {
             BOOL            callBtn1Sml(u32 msgId, u32 btnId);
             BOOL            callBtn1NoShade(u32 msgId, u32 btnId);
 
-            BOOL            callBtn2(u32 msgId, u32 rBtnId, u32 lBtnId, bool bSwapSound = false);
-            BOOL            callBtn2(const wchar_t* msg, u32 rBtnId, u32 lBtnId, bool bSwapSound = false);
+            BOOL            callBtn2(u32 msgId, u32 rBtnId, u32 lBtnId, bool bSwapSound = true);
+            BOOL            callBtn2(const wchar_t* msg, u32 rBtnId, u32 lBtnId, bool bSwapSound = true);
             BOOL            callBtn2(Page* pages, int pageCount, int fadeSpeed);
-            BOOL            callBtn2NoShade(const wchar_t* msg, u32 rBtnId, u32 lBtnId, bool bSwapSound = false);
+            BOOL            callBtn2NoShade(const wchar_t* msg, u32 rBtnId, u32 lBtnId, bool bSwapSound = true);
 
             BOOL            callBtn3(u32 msgId, u32 tBtnId, u32 cBtnID, u32 bBtnId);
 
-            BOOL            callSBtn2(u32 msgId, u32 rBtnId, u32 lBtnId, bool bSwapSound = false);
-            BOOL            callS2Btn2(u32 rBtnId, u32 lBtnId, bool bSwapSound = false);
+            BOOL            callSBtn2(u32 msgId, u32 rBtnId, u32 lBtnId, bool bSwapSound = true);
+            BOOL            callS2Btn2(u32 rBtnId, u32 lBtnId, bool bSwapSound = true);
 
             BOOL            callBtnPrg(u32 msgId);
             BOOL            callBtnPrgNoShade(const wchar_t* msg);
@@ -170,7 +172,7 @@ namespace ipl {
             int                     mPrevPage;                          // 0x94
 
             bool                    mbNoShade;                          // 0x98
-            bool                    mbShowBtnA;                         // 0x99
+            bool                    mbHideBtnA;                         // 0x99
 
             static char*            mscBtnName[3];
     };

@@ -610,7 +610,7 @@ config.libs = [
     ),
     IPLSection("limitOver",
         [
-            Object(NonMatching, "scene/limitOver/iplLimitOver.cpp"),
+            Object(Matching, "scene/limitOver/iplLimitOver.cpp"),
         ]
     ),
     IPLSection("mailAddSel",

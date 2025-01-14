@@ -169,7 +169,7 @@ namespace ipl {
             nw4r::lyt::Pane* pHasPane;
             nw4r::lyt::Pane* pPushPane;
 
-            mpLayout = new layout::Object(mheap, mpLayoutFile, "arc", "it_Has_a.brlyt");
+            mpLayout = new layout::Object(mpHeap, mpLayoutFile, "arc", "it_Has_a.brlyt");
 
             // Make all of the panes invisible
             for (int i = 0; i < ARRSIZE(has_pane_name); i++) {
@@ -219,7 +219,7 @@ namespace ipl {
                 mWaitTick = OSGetTick();
             }
 
-            // Done waiting? We wait again!!... For the resources to finish loading.
+            // Done waiting? We wait again!... For the resources to finish loading.
             if (mbFadedIn && OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mWaitTick)) > HAS_TIMER_FADE_IN) {
                 if (Util::resourceLoaded()) {
                     mpPushPane->SetVisible(true);

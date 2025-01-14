@@ -3,7 +3,7 @@
 namespace ipl {
     namespace scene {
         Base::Base(EGG::Heap* heap) :
-        mheap(heap),
+        mpHeap(heap),
         mFlags(0), 
         unk_0x2C(0), 
         mNandToken(0), 

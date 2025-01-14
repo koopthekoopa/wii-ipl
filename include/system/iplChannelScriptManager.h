@@ -55,7 +55,7 @@ namespace ipl {
                 };
 
                 u8*                 mpChansWork;    // 0x00
-                EGG::ExpHeap*       mheap;
+                EGG::ExpHeap*       mpHeap;
 
                 CSData              mCSData;        // 0x08
                 u32                 unk_0x28[2];

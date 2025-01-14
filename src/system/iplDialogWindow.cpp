@@ -99,8 +99,8 @@ namespace ipl {
     DialogWindow::DialogWindow(EGG::Heap* heap) :
     ::gui::EventHandler(),
     mState(DIALOG_STATE_NONE),
-    mResult(DIALOG_RESULT_NONE),
-    mLastResult(DIALOG_RESULT_NONE),
+    mResult(RESULT_NONE),
+    mLastResult(RESULT_NONE),
     mDialogType(DIALOG_TYPE_NONE),
     mWaitTick(0),
     mbNextState(false),
@@ -115,7 +115,7 @@ namespace ipl {
     mDialogPageCount(-1),
     mCurPage(0),
     mbNoShade(false),
-    mbShowBtnA(false) {
+    mbHideBtnA(false) {
         EGG::Allocator* allocator = new(heap, CLASS_HEAP) EGG::Allocator(heap, CLASS_HEAP);
         nw4r::lyt::Layout::SetAllocator(allocator);
 
@@ -212,9 +212,9 @@ namespace ipl {
             mBtnHovered[i] = 0;
         }
 
-        mLastResult = DIALOG_RESULT_NONE;
+        mLastResult = RESULT_NONE;
         mWaitTick = 0;
-        mResult = DIALOG_RESULT_NONE;
+        mResult = RESULT_NONE;
 
         mbTerminated = false;
         mbSwapSound = false;
@@ -288,7 +288,7 @@ namespace ipl {
         if (mbTerminated) {
             mbNextState = true;
 
-            mResult = DIALOG_RESULT_TERMINATED;
+            mResult = RESULT_TERMINATED;
 
             mpCurDialog->mpLayout->getAnim(ANIM_CMN_DIALOG_OUT)->playAnmFrame();
             if (mbIsProg) {
@@ -301,7 +301,7 @@ namespace ipl {
                 if (mWaitTimer && ++mWaitTick > mWaitTimer) {
                     mbNextState = true;
 
-                    mResult = DIALOG_RESULT_WAIT;
+                    mResult = RESULT_WAIT;
 
                     mpCurDialog->mpLayout->getAnim(ANIM_CMN_DIALOG_OUT)->playAnmFrame();
                     if (mbIsProg) {
@@ -320,7 +320,7 @@ namespace ipl {
                         if (mProgBarFrame == 100) {
                             mbNextState = true;
 
-                            mResult = DIALOG_RESULT_PROGRESS;
+                            mResult = RESULT_PROGRESS;
 
                             mpCurDialog->mpLayout->getAnim(ANIM_CMN_DIALOG_OUT)->playAnmFrame();
                             if (mbIsProg) {
@@ -339,15 +339,15 @@ namespace ipl {
 
         if (mDialogType == DIALOG_TYPE_BTN3) {
             switch (mResult) {
-                case DIALOG_RESULT_TOP_BUTTON: {
+                case RESULT_TOP_BUTTON: {
                     anim = ANIM_BTN3_SELECT_BTN_A;
                     break;
                 }
-                case DIALOG_RESULT_MIDDLE_BUTTON: {
+                case RESULT_MIDDLE_BUTTON: {
                     anim = ANIM_BTN3_SELECT_BTN_B;
                     break;
                 }
-                case DIALOG_RESULT_BOTTOM_BUTTON: {
+                case RESULT_BOTTOM_BUTTON: {
                     anim = ANIM_BTN3_SELECT_BTN_C;
                     break;
                 }
@@ -355,11 +355,11 @@ namespace ipl {
         }
         else {
             switch (mResult) {
-                case DIALOG_RESULT_RIGHT_BUTTON: {
+                case RESULT_LEFT_BUTTON: {
                     anim = ANIM_BTN2_SELECT_BTN_B;
                     break;
                 }
-                case DIALOG_RESULT_LEFT_BUTTON: {
+                case RESULT_RIGHT_BUTTON: {
                     anim = ANIM_BTN2_SELECT_BTN_A;
                     break;
                 }
@@ -376,7 +376,7 @@ namespace ipl {
     void DialogWindow::stt_fadeout() {
         if (!mpCurDialog->mpLayout->getAnim(ANIM_CMN_DIALOG_OUT)->isPlaying()) {
             mLastResult = mResult;
-            mResult = DIALOG_RESULT_NONE;
+            mResult = RESULT_NONE;
 
             if (mpCurDialog->mpGui) {
                 mpCurDialog->mpGui->setEventHandler(NULL);
@@ -403,8 +403,8 @@ namespace ipl {
         }
 
         if (!mpCurDialog->mpLayout->isPlaying(ANIM_BTN2_SELECT_BTN_B) && !mpCurDialog->mpLayout->isPlaying(ANIM_BTN2_SELECT_BTN_A)) {
-            if (mResult == DIALOG_RESULT_LEFT_BUTTON) {
-                if (mBtnHovered[DIALOG_BTN_TYPE_BTN2] != 0 && mpDialogPages[mCurPage].mbOneBtn) {
+            if (mResult == RESULT_RIGHT_BUTTON) {
+                if (mBtnHovered[DIALOG_BTN_TYPE_BTN2] != 0 && mpDialogPages[mCurPage].mbTwoBtn) {
                     mpCurDialog->mpLayout->getAnim(ANIM_BTN2_FOCUS_BTN_A_ON)->playAnmFrame();
                 }
             }
@@ -431,8 +431,8 @@ namespace ipl {
                 nw4r::lyt::TextBox* textBox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpCurDialog->mpLayout->findPane("T_Dialog"));
                 textBox->SetAlpha(mPageAlpha);
 
-                if (mpDialogPages[mCurPage].mbOneBtn != mpDialogPages[mPrevPage].mbOneBtn
-                && mpDialogPages[mCurPage].mbOneBtn == true) {
+                if (mpDialogPages[mCurPage].mbTwoBtn != mpDialogPages[mPrevPage].mbTwoBtn
+                && mpDialogPages[mCurPage].mbTwoBtn == true) {
                     nw4r::lyt::Pane* pBtnA = mpCurDialog->mpLayout->findPane("N_BtnA");
                     nw4r::lyt::Pane* pBtnAPic = mpCurDialog->mpLayout->findPane("N_BtnA_Pic");
 
@@ -484,12 +484,12 @@ namespace ipl {
                 nw4r::lyt::TextBox* textBox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpCurDialog->mpLayout->findPane("T_Dialog"));
                 textBox->SetAlpha(mPageAlpha);
 
-                if (mpDialogPages[mCurPage].mbOneBtn != mpDialogPages[mPrevPage].mbOneBtn
-                && mpDialogPages[mPrevPage].mbOneBtn == true) {
+                if (mpDialogPages[mCurPage].mbTwoBtn != mpDialogPages[mPrevPage].mbTwoBtn
+                && mpDialogPages[mPrevPage].mbTwoBtn == true) {
                     nw4r::lyt::Pane* pBtnA = mpCurDialog->mpLayout->findPane("N_BtnA");
                     nw4r::lyt::Pane* pBtnAPic = mpCurDialog->mpLayout->findPane("N_BtnA_Pic");
 
-                    if ((int)((f32)(mPageAlpha / 255.f))) {
+                    if ((int)((f32)(255.f / mPageAlpha))) {
                         set_alpha(pBtnAPic, mPageAlpha);
                     }
                     else {
@@ -642,7 +642,7 @@ namespace ipl {
 
             pPane = mpCurDialog->mpLayout->findPane("N_BtnA");
             if (pPane) {
-                if (mbShowBtnA) {
+                if (mbHideBtnA) {
                     pPane->SetVisible(false);
                 }
                 else {
@@ -654,7 +654,7 @@ namespace ipl {
         }
 
         mbNoShade = false;
-        mbShowBtnA = false;
+        mbHideBtnA = false;
 
         return result;
     }
@@ -865,8 +865,8 @@ namespace ipl {
     BOOL DialogWindow::callBtn2(Page* pages, int pageCount, int fadeSpeed) {
         BOOL result = FALSE;
 
-        if (!pages[0].mbOneBtn) {
-            mbShowBtnA = true;
+        if (!pages[0].mbTwoBtn) {
+            mbHideBtnA = true;
         }
 
         if (call(DIALOG_TYPE_BTN2)) {
@@ -1038,7 +1038,7 @@ namespace ipl {
     void DialogWindow::start_point_event(const char* paneName, controller::Interface* controller) {
         int btnNo = get_button_no(paneName);
         if (mState - DIALOG_STATE_PAGE_FADE > 1 || btnNo != DIALOG_BTN_TYPE_BTN2
-        || mpDialogPages[mCurPage].mbOneBtn == mpDialogPages[mPrevPage].mbOneBtn) {
+        || mpDialogPages[mCurPage].mbTwoBtn == mpDialogPages[mPrevPage].mbTwoBtn) {
             if (btnNo != -1 && mBtnHovered[btnNo] == 0) {
                 int animIdx = -1;
 
@@ -1086,7 +1086,7 @@ namespace ipl {
 
     void DialogWindow::start_left_event(const char* paneName) {
         int btnNo = get_button_no(paneName);
-        if (mState - DIALOG_STATE_PAGE_FADE > 1 || btnNo != DIALOG_BTN_TYPE_BTN2 || mpDialogPages[mCurPage].mbOneBtn == mpDialogPages[mPrevPage].mbOneBtn) {
+        if (mState - DIALOG_STATE_PAGE_FADE > 1 || btnNo != DIALOG_BTN_TYPE_BTN2 || mpDialogPages[mCurPage].mbTwoBtn == mpDialogPages[mPrevPage].mbTwoBtn) {
             if (btnNo != -1 && mBtnHovered[btnNo] == 1) {
                 int animIdx = -1;
 
@@ -1136,19 +1136,19 @@ namespace ipl {
             if (mDialogType == DIALOG_TYPE_BTN3) {
                 switch (btnNo) {
                     case DIALOG_BTN_TYPE_BTN2: {
-                        mResult = DIALOG_RESULT_TOP_BUTTON;
+                        mResult = RESULT_TOP_BUTTON;
                         animIdx = ANIM_BTN3_SELECT_BTN_A;
                         snd::getSystem()->startSE("WIPL_SE_DECIDE");
                         break;
                     }
                     case DIALOG_BTN_TYPE_BTN1: {
-                        mResult = DIALOG_RESULT_MIDDLE_BUTTON;
+                        mResult = RESULT_MIDDLE_BUTTON;
                         animIdx = ANIM_BTN3_SELECT_BTN_B;
                         snd::getSystem()->startSE("WIPL_SE_DECIDE");
                         break;
                     }
                     case DIALOG_BTN_TYPE_BTN3: {
-                        mResult = DIALOG_RESULT_BOTTOM_BUTTON;
+                        mResult = RESULT_BOTTOM_BUTTON;
                         animIdx = ANIM_BTN3_SELECT_BTN_C;
                         snd::getSystem()->startSE("WIPL_SE_CANCEL");
                         break;
@@ -1158,7 +1158,7 @@ namespace ipl {
             else {
                 switch (btnNo) {
                     case DIALOG_BTN_TYPE_BTN2: {
-                        mResult = DIALOG_RESULT_LEFT_BUTTON;
+                        mResult = RESULT_RIGHT_BUTTON;
                         animIdx = ANIM_BTN2_SELECT_BTN_A;
                         if (mbSwapSound) {
                             snd::getSystem()->startSE("WIPL_SE_DECIDE");
@@ -1171,7 +1171,7 @@ namespace ipl {
                         break;
                     }
                     case DIALOG_BTN_TYPE_BTN1: {
-                        mResult = DIALOG_RESULT_RIGHT_BUTTON;
+                        mResult = RESULT_LEFT_BUTTON;
                         animIdx = ANIM_BTN2_SELECT_BTN_B;
                         if (mbSwapSound) {
                             snd::getSystem()->startSE("WIPL_SE_CANCEL");

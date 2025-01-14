@@ -82,7 +82,7 @@ namespace ipl {
                 NandErrResult   calcMD5_(const u8* sum, const u8* buffer, u32 length) const;
                 BOOL            nand_error_handling(int result);
 
-                EGG::Heap*      mheap;                                                 // 0x04
+                EGG::Heap*      mpHeap;                                                 // 0x04
 
                 char            msFileName[NAND_MAX_PATH + 1];                          // 0x08
 

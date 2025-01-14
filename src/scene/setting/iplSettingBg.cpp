@@ -11,11 +11,11 @@ namespace ipl {
         }
 
         void SettingBg::prepare() {
-            mpLayoutFile = System::getNandManager()->readLayoutAsync(mheap, "setupBg.ash", false);
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(mpHeap, "setupBg.ash", false);
         }
 
         void SettingBg::create() {
-            mpLayout = new layout::Object(mheap, mpLayoutFile, "arc", "it_BgSetUp_a.brlyt");
+            mpLayout = new layout::Object(mpHeap, mpLayoutFile, "arc", "it_BgSetUp_a.brlyt");
             mpLayout->finishBinding();
 
             createChildScene(SCENE_SETTING_BUTTON, this, NULL, (void*)mSceneID);

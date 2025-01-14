@@ -33,7 +33,7 @@ namespace ipl {
         File::File(EGG::Heap* heap, const char* fileName, ARCHandle* arc, const char* unk2, int offset, u32 length, bool isNandFile) : Base() {
             mbDoneTask = FALSE;
             mLastError = NAND_RESULT_OK;
-            mheap = heap;
+            mpHeap = heap;
             mpArc = arc;
             mFileOffset = offset;
             mpLength = length;
@@ -57,7 +57,7 @@ namespace ipl {
         File::File(EGG::Heap* heap, const char* fileName, u8* buffer, u32 length, u8 perms) : Base() {
             mbDoneTask = FALSE;
             mLastError = NAND_RESULT_OK;
-            mheap = heap;
+            mpHeap = heap;
             mpArc = NULL;
             mFileOffset = 0;
             mpLength = length;
@@ -72,7 +72,7 @@ namespace ipl {
             
             strncpy(msFileName, fileName, NAND_MAX_PATH + 1);
 
-            mpCmpBuffer = new(mheap, -BUFFER_HEAP) u8[mpLength];
+            mpCmpBuffer = new(mpHeap, -BUFFER_HEAP) u8[mpLength];
             memcpy(mpCmpBuffer, mpBuffer, mpLength);
 
             memset(&mNandFile, 0, sizeof(NANDFileInfo));
@@ -372,7 +372,7 @@ namespace ipl {
         }
 
         u8* File::getBuffer_(u32 length) {
-            return new(mheap, BUFFER_HEAP) u8[length];
+            return new(mpHeap, BUFFER_HEAP) u8[length];
         }
 
         LangFile::LangFile(EGG::Heap* heap, const char* dirName, const char* fileName, ARCHandle* arc, bool isNandFile) {

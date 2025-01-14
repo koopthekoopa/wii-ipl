@@ -18,7 +18,7 @@ namespace EGG {
         private:
             static nw4r::ut::List   smThreadList;
 
-            Heap*                   mheap;         // 0x04
+            Heap*                   mpHeap;         // 0x04
             OSThread*               mpThread;       // 0x08
 
             OSMessageQueue          mMesgQueue;     // 0x0C

@@ -1,6 +1,7 @@
 ![Logo](./misc/logo.png)  
 Wii Menu  
-[![Build Status]][actions] [![Discord Badge]][discord]
+[![Build Status]][actions] [![Discord Badge]][discord]  
+[![Code Progress]][progress] [![Linked Code Progress]][progress] [![Data Progress]][progress] [![Linked Data Progress]][progress]
 ========
 
 [Build Status]: https://github.com/koopthekoopa/wii-ipl/actions/workflows/build.yml/badge.svg
@@ -8,15 +9,21 @@ Wii Menu
 [Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 [discord]: https://discord.gg/hKx3FJJgrV
 
+[Code Progress]: https://decomp.dev/koopthekoopa/wii-ipl.svg?mode=shield&measure=code&label=Matched%20Code
+[Linked Code Progress]: https://decomp.dev/koopthekoopa/wii-ipl.svg?mode=shield&measure=complete_code&label=Linked%20Code
+[Data Progress]: https://decomp.dev/koopthekoopa/wii-ipl.svg?mode=shield&measure=data&label=Matched%20Data
+[Linked Data Progress]: https://decomp.dev/koopthekoopa/wii-ipl.svg?mode=shield&measure=complete_data&label=Linked%20Data
+[progress]: https://decomp.dev/koopthekoopa/wii-ipl
+
 A work-in-progress decompilation of the Wii Menu (4.3).
 
 This repository does **not** contain any assets or assembly of the executable whatsoever. An existing copy of the Wii Menu is required.
 
 Supported versions:
-- `43J`: Version 4.3J (Japan)
-- `43U`: Version 4.3U (USA)
-- `43E`: Version 4.3E (Europe)
-- `43K`: Version 4.3K (Korean)
+- `43J`: Version **4.3J** (Japan)
+- `43U`: Version **4.3U** (USA)
+- `43E`: Version **4.3E** (Europe)
+- `43K`: Version **4.3K** (Korean)
 
 Installing Dependencies
 =======================
