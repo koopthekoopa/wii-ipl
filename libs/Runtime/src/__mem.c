@@ -3,42 +3,42 @@
 
 #pragma section code_type ".init"
 
-void* memcpy(void* pDest, const void* pSrc, size_t count) {
+void* memcpy(void* dst, const void* src, size_t count) {
     char*   p;
     char*   q;
     int     i;
 
-    if (pSrc >= pDest) {
-        p = (char*)pSrc - 1;
-        q = (char*)pDest - 1;
+    if (src >= dst) {
+        p = (char*)src - 1;
+        q = (char*)dst - 1;
 
         for (i = count + 1; --i;) {
             *++q = *++p;
         }
     } else {
-        p = (char*)pSrc + count;
-        q = (char*)pDest + count;
+        p = (char*)src + count;
+        q = (char*)dst + count;
 
         for (i = count + 1; --i;) {
             *--q = *--p;
         }
     }
     
-    return pDest;
+    return dst;
 }
 
-void  __fill_mem(void* pDest, int value, unsigned long length) {
-#define cDest ((unsigned char*)pDest)
-#define lDest ((unsigned long*)pDest)
+void  __fill_mem(void* dst, int value, unsigned long length) {
+#define cDest ((unsigned char*)dst)
+#define lDest ((unsigned long*)dst)
     unsigned long val = (unsigned char)value;
     unsigned long i;
-    lDest = (unsigned long*)pDest;
-    cDest = (unsigned char*)pDest;
+    lDest = (unsigned long*)dst;
+    cDest = (unsigned char*)dst;
 
     cDest--;
 
     if (length >= 32) {
-        i = ~(unsigned long)pDest & 3;
+        i = ~(unsigned long)dst & 3;
         
         if (i) {
             length -= i;
@@ -89,9 +89,9 @@ void  __fill_mem(void* pDest, int value, unsigned long length) {
 #undef lDest
 }
 
-void* memset(void* pDest, int ch, size_t count) {
-    __fill_mem(pDest, ch, count);
-    return pDest;
+void* memset(void* dst, int ch, size_t count) {
+    __fill_mem(dst, ch, count);
+    return dst;
 }
 
 #pragma section code_type ".text"

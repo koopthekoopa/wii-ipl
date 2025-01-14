@@ -10,8 +10,6 @@
 
 #include <decomp.h>
 
-// Mostly copy and pasted code from `iplHealth`
-
 namespace ipl {
     namespace scene {
         #define LIMIT_SEC2MS(x)         (x * 1000)

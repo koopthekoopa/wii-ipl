@@ -7,13 +7,13 @@ extern "C" {
 
 typedef struct __CMap {
     char UNK_0x0[0x10];
-    const u8* to_lower_table; // at 0x10
-    const u8* to_upper_table; // at 0x14
+    const unsigned char* to_lower_table;    // 0x10
+    const unsigned char* to_upper_table;    // 0x14
 } __CMap;
 
 typedef struct __Locale {
     char UNK_0x0[0x38];
-    struct __CMap* cmap; // at 0x38
+    __CMap* cmap;   // 0x38
     char UNK_0x3C[0x44 - 0x3C];
 } __Locale;
 
@@ -36,5 +36,3 @@ inline int toupper(int x) {
 #endif
 
 #endif // MSL_CCTYPE_H
-
-
