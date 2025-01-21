@@ -21,8 +21,8 @@ namespace ipl {
                 RESULT_NONE = -1,
                 RESULT_WAIT,                                 /* For `callBtn0` */
                 RESULT_BUTTON,                               /* For `callBtn1` */
-                RESULT_LEFT_BUTTON = RESULT_BUTTON,          /* For `callBtn2` */
-                RESULT_RIGHT_BUTTON,                         /* For `callBtn2` */
+                RESULT_RIGHT_BUTTON = RESULT_BUTTON,          /* For `callBtn2` */
+                RESULT_LEFT_BUTTON,                         /* For `callBtn2` */
                 RESULT_TOP_BUTTON,                           /* For `callBtn3` */
                 RESULT_MIDDLE_BUTTON,                        /* For `callBtn3` */
                 RESULT_BOTTOM_BUTTON,                        /* For `callBtn3` */
@@ -61,15 +61,15 @@ namespace ipl {
             BOOL            callBtn1Sml(u32 msgId, u32 btnId);
             BOOL            callBtn1NoShade(u32 msgId, u32 btnId);
 
-            BOOL            callBtn2(u32 msgId, u32 rBtnId, u32 lBtnId, bool bSwapSound = true);
-            BOOL            callBtn2(const wchar_t* msg, u32 rBtnId, u32 lBtnId, bool bSwapSound = true);
+            BOOL            callBtn2(u32 msgId, u32 rBtnId, u32 lBtnId, bool bSwapSound = false);
+            BOOL            callBtn2(const wchar_t* msg, u32 rBtnId, u32 lBtnId, bool bSwapSound = false);
             BOOL            callBtn2(Page* pages, int pageCount, int fadeSpeed);
-            BOOL            callBtn2NoShade(const wchar_t* msg, u32 rBtnId, u32 lBtnId, bool bSwapSound = true);
+            BOOL            callBtn2NoShade(const wchar_t* msg, u32 rBtnId, u32 lBtnId, bool bSwapSound = false);
 
             BOOL            callBtn3(u32 msgId, u32 tBtnId, u32 cBtnID, u32 bBtnId);
 
-            BOOL            callSBtn2(u32 msgId, u32 rBtnId, u32 lBtnId, bool bSwapSound = true);
-            BOOL            callS2Btn2(u32 rBtnId, u32 lBtnId, bool bSwapSound = true);
+            BOOL            callSBtn2(u32 msgId, u32 rBtnId, u32 lBtnId, bool bSwapSound = false);
+            BOOL            callS2Btn2(u32 rBtnId, u32 lBtnId, bool bSwapSound = false);
 
             BOOL            callBtnPrg(u32 msgId);
             BOOL            callBtnPrgNoShade(const wchar_t* msg);

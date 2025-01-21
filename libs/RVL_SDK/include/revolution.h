@@ -3,7 +3,6 @@
 
 #include <revolution/types.h>
 
-#include <revolution/types.h>
 #include <revolution/base/PPCArch.h>
 #include <revolution/os.h>
 #include <revolution/dvd.h>

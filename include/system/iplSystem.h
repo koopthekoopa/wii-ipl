@@ -37,10 +37,10 @@ namespace ipl {
                     Arg();
 
                 private:
-                    u8                  unk_0x00[0x04 - 0x00];
-                    EGG::Heap*          mpApheap;              // 0x04
+                    EGG::Heap*          unk_0x00;
+                    EGG::Heap*          mpAppHeap;              // 0x04
                     EGG::Heap*          mpMem1SysHeap;          // 0x08
-                    EGG::Heap*          unk_0x0C;               // 0x0C
+                    EGG::Heap*          unk_0x0C;
                     u8                  unk_0x10[0x20 - 0x10];
                     EGG::Heap*          mpNandSharedHeap;       // 0x20
                     undefined4*         unk_0x24;
@@ -74,7 +74,8 @@ namespace ipl {
                     EGG::ColorFader*    mpResetFader;           // 0xC8
                     math::Random*       mpRandom;               // 0xCC
 
-                    u8                  unk_0xD0[0xDC - 0xD0];
+                    EGG::TaskThread*    mpTask;                 // 0xD0
+                    u8                  unk_0xD4[0xDC - 0xD4];
 
                     nw4r::ut::Font*     mpWBFont1Data;          // 0xDC
                     undefined4          unk_0xE0;
@@ -126,8 +127,15 @@ namespace ipl {
                 friend class System;
             };
 
+            /*==============================*/
+            /*       SYSTEM MENU ARG        */
+            /*==============================*/
+
+            static void                 setCurrentHeap(EGG::Heap* heap);
+
+            static EGG::Heap*           getUnk00()              { return smArg.unk_0x00; }
             /** @return Heap used for the IPL.*/
-            static EGG::Heap*           getApheap()            { return smArg.mpApheap; }
+            static EGG::Heap*           getAppHeap()            { return smArg.mpAppHeap; }
             /** @return MEM1 Heap */
             static EGG::Heap*           getSysMEM1()            { return smArg.mpMem1SysHeap; }
             /** @return MEM2 Heap */
@@ -144,7 +152,7 @@ namespace ipl {
             static nigaoe::Manager*     getMiiManager()         { return smArg.mpNigaoeManager; }
             /** @return The Content Manager object. */
             static nand::Manager*       getNandManager()        { return smArg.mpNandManager; }
-            /** @return The animation speed. */
+            /** @return The animation delta. */
             static f32                  getAnimDelta()          { return smArg.mpFramework->getDelta(); }
             /** @return The Message ID as a Wide-string. */
             static const wchar_t*       getMessage(u32 id)      { return smArg.mpMsgMgr->getMessage(id); }
@@ -176,6 +184,7 @@ namespace ipl {
             static EGG::ColorFader*     getResetFader()         { return smArg.mpResetFader; }
             /** @return The Random Number Generator object. */
             static math::Random*        getRndm()               { return smArg.mpRandom; }
+            static EGG::TaskThread*     getTask()               { return smArg.mpTask; }
             /** @return The Wii Bitmap Font 1 Data. (wbf1.brfna) */
             static nw4r::ut::Font*      getWBFont1Data()        { return smArg.mpWBFont1Data; }
             /** @return The Wii Bitmap Font 2 Data. (wbf2.brfna) */
@@ -223,7 +232,9 @@ namespace ipl {
             static bool                 isUnk_0x2BF()           { return smArg.unk_0x2BF; }
             static void                 setUnk_0x2BF(bool val)  { smArg.unk_0x2BF = val; }
             
-            
+            /*==============================*/
+            /*       RESOURCE LOADED        */
+            /*==============================*/
 
             static bool isCmnResLoaded()                        { return smArg.mbResLoaded; }
             static bool isFontResLoaded()                       { return smArg.mbFontResLoaded; }
@@ -239,6 +250,10 @@ namespace ipl {
                                     ;}
 
             static bool unkBool()       { return smArg.mbCreatedAfter && smArg.unk_0x2B4; }
+
+            /*==============================*/
+            /*        SET UP & LOOP         */
+            /*==============================*/
         
             /**
              * @brief Initializes the system.
@@ -246,18 +261,26 @@ namespace ipl {
              * @param argv Array of arguments.
              */
             static void init(int argc, char** argv);
+            static void reinit();
             /**
              * @brief Boots up the system.
              * @note Run this function after `ipl::System::init`
              */
             static void                     run();
 
+            /*==============================*/
+            /*       CONSOLE COUNTRY        */
+            /*==============================*/
+
             /** @return The language of the System. */
             static s32                      getLanguage();
             /** @return The region of the System. */
             static s32                      getRegion();
-            /** @return The font data of the System. */
-            static void*                    getFont();
+
+            /*==============================*/
+            /*       SYSTEM RENDERING       */
+            /*==============================*/
+    
             /** @return The Renderer of the IPL. */
             static GXRenderModeObj*         getRenderModeObj();
 
@@ -272,6 +295,10 @@ namespace ipl {
             static controller::Interface*   getController(int chan);
             /** @return The Master Wii Remote. */
             static controller::Interface*   getMasterController();
+
+            /*==============================*/
+            /*        ERROR HANDLING        */
+            /*==============================*/
 
             /** @brief Prepare the system for error handler */
             static void                     err_run();
@@ -313,11 +340,20 @@ namespace ipl {
                 smArg.mpWarningHandler->set(WarningHandler::DEFAULT, msg);
             }
             
+            /*==============================*/
+            /*              MISC            */
+            /*==============================*/
+
+            /** @return The font data of the System. */
+            static void*                    getFont();
+
             static void                     checkNandOverFlowFlagAsync();
 
         private:
             static Arg  smArg;
     };
 }
+
+#include "scene/iplSceneUtils.h"
 
 #endif // IPL_SYSTEM_H

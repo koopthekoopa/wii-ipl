@@ -301,7 +301,7 @@ namespace ipl {
         }
 
         void skHealth::draw() {
-            if (System::getSceneManager()->isDrawingScene() == TRUE) {
+            if (System::getSceneManager()->canDrawScene()) {
                 utility::Graphics::setOrtho();
                 mpLayout->draw();
             }

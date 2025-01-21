@@ -1299,7 +1299,7 @@ libs/RVLMiddleware/eZiText/src/zi8copy.c:
 	extabindex  start:0x813311E8 end:0x81331200
 	.text       start:0x814790A8 end:0x8147922C
 
-libs/RVLMiddleware/eZiText/src/zi8dawg.c:
+libs/RVLMiddleware/eZiText/src/zi8matchrom.c:
 	extab       start:0x813305A0 end:0x813305D0
 	extabindex  start:0x81331200 end:0x81331248
 	.text       start:0x8147922C end:0x8147A530
@@ -1334,7 +1334,7 @@ libs/RVLMiddleware/eZiText/src/zi8utils.c:
 	extabindex  start:0x81331380 end:0x813313B0
 	.text       start:0x8147EF34 end:0x8147F598
 
-libs/RVLMiddleware/eZiText/src/zi8pud2.c:
+libs/RVLMiddleware/eZiText/src/zi8pud.c:
 	extab       start:0x813306C0 end:0x813306F0
 	extabindex  start:0x813313B0 end:0x813313F8
 	.text       start:0x8147F598 end:0x8147FDF0
@@ -1350,7 +1350,7 @@ libs/RVLMiddleware/eZiText/src/zi8uwd.c:
 	extabindex  start:0x81331404 end:0x8133144C
 	.text       start:0x8147FF1C end:0x81480D7C
 
-libs/RVLMiddleware/eZiText/src/zi8dawg2.c:
+libs/RVLMiddleware/eZiText/src/zi8dawg.c:
 	extab       start:0x81330728 end:0x81330748
 	extabindex  start:0x8133144C end:0x8133147C
 	.text       start:0x81480D7C end:0x814813FC

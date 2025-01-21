@@ -5,11 +5,23 @@
 
 #include <revolution.h>
 
+#include <egg/core.h>
+
 #include "scene/iplSceneCreator.h"
+
+#include "utility/iplQueue.h"
 
 namespace ipl {
     namespace scene {
-        class Base;
+        class   Base;
+        typedef Base SceneObj;
+
+        enum {
+            DRAW_LAYER_1 = 0,
+            DRAW_LAYER_2,
+            DRAW_LAYER_3,
+            DRAW_LAYER_MAX,
+        };
 
         enum {
             COMMAND_NONE = 0,
@@ -18,40 +30,92 @@ namespace ipl {
             COMMAND_RESERVE_ALL_DESTRUCT,
         };
 
-        struct Command {
-            int     mType;      // 0x00
-            int     mUnk0Scene; // 0x04
-            u32     mNandToken; // 0x08
-            u32     mUnk1Scene; // 0x0C
-            Base*   mParent;    // 0x10
-            Base*   mChild;     // 0x14
-            void*   mArgs;      // 0x18
+        typedef struct Command {
+            int     mType;          // 0x00
 
-            void    clear();
-        };
+            int     mNewSceneID;    // 0x04
+            int     mPrevSceneID;   // 0x08
+            int     mNewRootID;     // 0x0C
+
+            Base*   mParent;        // 0x10
+            Base*   mChild;         // 0x14
+            
+            void*   mArgs;          // 0x1
+
+            void        clear();
+
+            Command()   { clear(); }
+
+            inline void operator=(const Command& rhs) {
+                /* https://decomp.me/scratch/KrtbJ */
+            }
+        } Command;
+
+        #define MAX_COMMANDS 8
+        typedef utility::Queue<Command, MAX_COMMANDS> CommandList;
 
         class Manager {
             public:
-                Manager();
+                Manager(EGG::Heap* heap);
+
+                void        init();
+
+                void        calc();
+                void        calc(SceneObj* scene);
+
+                void        draw();
+                void        draw(SceneObj* scene);
+
+                SceneObj*   createScene(int sceneId, int prevSceneId, void* args);
+                SceneObj*   createScene(int sceneId, void* args) { return createScene(sceneId, SCENE_NONE, args); }
+                void        createScene(const Command& command);
+
+                void        destroyScene(SceneObj* scene);
+                void        detach(SceneObj* scene);
 
                 void        startResetting();
-                
                 BOOL        isResetProcessDone();
                 BOOL        isResetAcceptable();
-                
-                undefined4* getScene();
 
-                void        pushCommand(const Command& pCommand);
+                BOOL        pushCommand(const Command& pCommand);
+
                 void        setDestructSync();
+                void        doDestructSync() { mbDestroySyncTask = true; }
 
-                BOOL        isDrawingScene() { return mDrawingScene; }
+                SceneObj*   getScene(int sceneId);
+                SceneObj*   getScene(int sceneId, SceneObj* obj);
 
+                bool        canDrawScene() { return mDrawMode == DRAW_LAYER_2; }
+
+                void        attachReservedScene();
+
+                BOOL        isReady(int sceneId);
+            
             private:
-                u8      mType[0x100];
-                BOOL    mDrawingScene;
-                u8      mParentScene4[0x2C];
+                void        createRootScene(int sceneId, void* args);
+
+                EGG::UnitHeap*  mpBigSceneHeap;     // 0x00
+                EGG::UnitHeap*  mpMdmSceneHeap;     // 0x04
+                EGG::UnitHeap*  mpSmlSceneHeap;     // 0x08
+
+                SceneObj*       mpRootScene;        // 0x0C
+
+                CommandList     mCommands;          // 0x10
+
+                BOOL            mDrawMode;          // 0x100
+
+                SceneObj*       mpReservedScene;    // 0x104
+                Command         mReservedCommand;   // 0x108
+                bool            mbCreatedReserved;  // 0x124
+
+                bool            mbDestroySyncTask;  // 0x125
+
+                int             mRootSceneID;       // 0x128
+                int             mPrevRootSceneID;   // 0x12C
         };
     }
 }
+
+#include "scene/iplSceneBase.h"
 
 #endif // IPL_SCENE_MANAGER_H

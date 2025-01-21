@@ -29,7 +29,7 @@ namespace ipl {
         }
 
         void SettingBg::draw() {
-            if (System::getSceneManager()->isDrawingScene() == TRUE) {
+            if (System::getSceneManager()->canDrawScene()) {
                 utility::Graphics::setOrtho();
                 mpLayout->draw();
             }
@@ -38,5 +38,3 @@ namespace ipl {
         SettingBg::~SettingBg() {}
     }
 }
-
-

@@ -252,7 +252,7 @@ namespace ipl {
                     // Heap used to allocate the data.
                     usedHeap = System::getUnk28Heap();
                     if (System::getUnk28Heap() == NULL) {
-                        usedHeap = System::getApheap();
+                        usedHeap = System::getAppHeap();
                     }
 
                     mpCmpBuffer = new(usedHeap, -BUFFER_HEAP) u8[mpLength];
@@ -419,7 +419,7 @@ namespace ipl {
 
             EGG::Heap* usedHeap = System::getUnk0CHeap();
             if (System::getUnk0CHeap() == NULL) {
-                usedHeap = System::getApheap();
+                usedHeap = System::getAppHeap();
             }
 
             u8* buffer = new(usedHeap, -BUFFER_HEAP) u8[BUFFER_SIZE];

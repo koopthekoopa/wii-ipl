@@ -278,12 +278,11 @@ namespace ipl {
     }
 
     void Framework::init_xfb(EGG::Heap* heap) {
-        // hmph
-        #ifdef VERSION_43E
+    #ifdef VERSION_43E
         GXRenderModeObj* rMode = &sRMO_Pal50_640x456IntDf;
-        #else
+    #else
         GXRenderModeObj* rMode = mpRMode;
-        #endif
+    #endif
 
         u32 xfbSize = VIPadFrameBufferWidth(rMode->fbWidth) * rMode->xfbHeight * VI_DISPLAY_PIX_SZ;
         for (int i = 0; i < 2; i++) {

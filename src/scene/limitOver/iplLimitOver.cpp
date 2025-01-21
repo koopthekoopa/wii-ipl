@@ -39,7 +39,7 @@ namespace ipl {
             ANIM_FADE_OUT,
         };
 
-        static const char* unk_pane_name[3][4] = {
+        static const char* wide_pane_names[3][4] = {
             {
                 "Fre_a",
                 "Fre_d",
@@ -185,14 +185,15 @@ namespace ipl {
 
             mpLayout = new layout::Object(mpHeap, mpLayoutFile, "arc", "my_Timer_c.brlyt");
 
+            // Change pane textures for widescreen
             if (SCGetAspectRatio() == SC_ASPECT_RATIO_16x9) {
                 mpLayout->findPane("Picture_04")->GetMaterial()->GetTexture(&texObj[0], 0);
                 mpLayout->findPane("Picture_05")->GetMaterial()->GetTexture(&texObj[1], 0);
                 mpLayout->findPane("Picture_06")->GetMaterial()->GetTexture(&texObj[2], 0);
 
-                for (int i = 0; i < (int)ARRSIZE(unk_pane_name); i++) {
-                    for (int j = 0; j < (int)ARRSIZE(unk_pane_name[0]); j++) {
-                        mpLayout->findPane(unk_pane_name[i][j])->GetMaterial()->SetTexture(0, texObj[i]);
+                for (int i = 0; i < (int)ARRSIZE(wide_pane_names); i++) {
+                    for (int j = 0; j < (int)ARRSIZE(wide_pane_names[0]); j++) {
+                        mpLayout->findPane(wide_pane_names[i][j])->GetMaterial()->SetTexture(0, texObj[i]);
                     }
                 }
             }
@@ -320,7 +321,7 @@ namespace ipl {
         }
 
         void LimitOver::draw() {
-            if (System::getSceneManager()->isDrawingScene() == TRUE) {
+            if (System::getSceneManager()->canDrawScene()) {
                 utility::Graphics::setOrtho();
                 mpLayout->draw();
             }

@@ -176,7 +176,7 @@ if not config.non_matching:
 
 # Tool versions
 config.binutils_tag = "2.42-1"
-config.compilers_tag = "20240706"
+config.compilers_tag = "latest"
 config.dtk_tag = "v1.3.0"
 config.objdiff_tag = "v2.5.0"
 config.sjiswrap_tag = "v1.2.0"
@@ -811,16 +811,16 @@ config.libs = [
             Object(NonMatching, "zi8cand.c"),
             Object(NonMatching, "zi8cinfo.c"),
             Object(NonMatching, "zi8copy.c"),
-            Object(NonMatching, "zi8dawg.c"),
+            Object(NonMatching, "zi8matchrom.c"),
             Object(NonMatching, "zi8getcand.c"),
             Object(NonMatching, "zi8init.c"),
             Object(NonMatching, "zi8is.c"),
             Object(NonMatching, "zi8match.c"),
             Object(NonMatching, "zi8utils.c"),
-            Object(NonMatching, "zi8pud2.c"),
+            Object(NonMatching, "zi8pud.c"),
             Object(NonMatching, "zi8punct.c"),
             Object(NonMatching, "zi8uwd.c"),
-            Object(NonMatching, "zi8dawg2.c"),
+            Object(NonMatching, "zi8dawg.c"),
             Object(NonMatching, "zi8candkorea.c"),
             Object(Matching,    "zi8error.c"),
             Object(NonMatching, "zi8keymatch.c"),
@@ -1135,7 +1135,7 @@ config.libs = [
             Object(NonMatching, "lyt/lyt_common.cpp"),
         ]
     ),
-    # RVL_SDK (alot here)
+    # RVL_SDK
     RVLSDKLib("base",
         [
             Object(Matching,    "base/PPCArch.c"),
@@ -1250,7 +1250,7 @@ config.libs = [
             Object(NonMatching, "ax/AXAux.c"),
             Object(NonMatching, "ax/AXCL.c"),
             Object(NonMatching, "ax/AXOut.c"),
-            Object(NonMatching, "ax/AXSPB.c"), # Technically equilavent but for some reason it makes the Wii Menu unusable, leaving it NonMatching
+            Object(NonMatching, "ax/AXSPB.c"), # Technically equilavent but for some reason it makes the Wii Menu unusable, so it's left it NonMatching
             Object(NonMatching, "ax/AXVPB.c"),
             Object(Matching,    "ax/AXProf.c"),
             Object(Matching,    "ax/DSPCode.c"),

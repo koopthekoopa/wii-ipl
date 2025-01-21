@@ -10,7 +10,7 @@ namespace ipl {
         class System {
             public:
                 System();
-                
+
                 void            shutup(BOOL shutUpDMA);
                 
                 virtual void    fn_815F6278(); // 0x08
@@ -22,7 +22,7 @@ namespace ipl {
                 int             startBGM(const char* bgmName);
             
             private:
-                undefined4      unk_0x00[0x638];
+                u32             unk_0x00[0x638];
         };
 
         extern System               sSystem;
@@ -39,5 +39,3 @@ namespace ipl {
 }
 
 #endif // IPL_SOUND_H
-
-

@@ -8,7 +8,8 @@
 namespace ipl {
     namespace scene {
         enum {
-            SCENE_ROOT = 1,             /* 0x01, 1 */
+            SCENE_NONE = 0,             /* 0x00, 0 */
+            SCENE_ROOT,                 /* 0x01, 1 */
             SCENE_CHANNEL_SELECT,       /* 0x02, 2 */
             SCENE_CHANNEL_TITLE,        /* 0x03, 3 */
             SCENE_BOARD,                /* 0x04, 4 */
@@ -46,15 +47,21 @@ namespace ipl {
             SCENE_SD_BUTTON,            /* 0x24, 36 */
             SCENE_SD_ARROW,             /* 0x25, 37 */
         };
+
+        enum {
+            SCENE_SMALL_SIZE    = 0x0000DC00,
+            SCENE_MEDIUM_SIZE   = 0x000AF000,
+            SCENE_BIG_SIZE      = 0x0012C000,
+        };
         
+        class Base;
+        typedef Base SceneObj;
         class Creator {
             public:
-                static int create(int sceneId);
-                static int size(int sceneId, EGG::Heap* heap, void* arg);
+                static SceneObj*    create(int sceneId, EGG::Heap* heap, void* arg);
+                static int          size(int sceneId);
         };
     }
 }
 
 #endif // IPL_SCENE_CREATOR_H
-
-

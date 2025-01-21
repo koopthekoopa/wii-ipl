@@ -34,6 +34,8 @@ namespace EGG {
             virtual u32         getAllocatableSize(long align) = 0;                 // 0x24
 
             virtual void        adjust() = 0;                                       // 0x28
+
+            void                becomeCurrentHeap();
     };
 }
 

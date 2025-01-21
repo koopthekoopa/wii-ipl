@@ -152,7 +152,9 @@ namespace ipl {
                 LayoutFile* readLayoutAsync(EGG::Heap* heap, const char* archiveName, bool unk);
 
                 void        closeContentsAll();
+                
                 void        sendToken(int token);
+                BOOL        receiveToken(int* token);
                 
                 int         getDescriptor() const   { return mDescriptor; }
                 ARCHandle*  getArc()                { return &mUnkArc; }
@@ -167,4 +169,3 @@ namespace ipl {
 }
 
 #endif // IPL_NAND_H
-

@@ -17,7 +17,7 @@ Wii Menu
 
 A work-in-progress decompilation of the Wii Menu (4.3).
 
-This repository does **not** contain any assets or assembly of the executable whatsoever. An existing copy of the Wii Menu is required.
+This repository does **not** contain any assets or assembly of the executable whatsoever. An existing WAD of the Wii Menu is required.
 
 Supported versions:
 - `43J`: Version **4.3J** (Japan)
@@ -95,6 +95,9 @@ Building the Decompilation
   ```sh
   ninja
   ```
+
+>  [!NOTE]
+> This does **not** prodcue a full and working WAD. You must replace the exectable with the one you built (`main.app`) manually.
 
 > [!WARNING]
 > The code is not 100% shiftable, most of it works aside from a couple of things (such as Wii Settings and a few Channel Banners like the Forecast Channel)

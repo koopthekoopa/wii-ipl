@@ -59,5 +59,3 @@ namespace ipl {
 }
 
 #endif // IPL_RESET_HANDLER_H
-
-

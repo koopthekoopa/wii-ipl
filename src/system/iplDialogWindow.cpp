@@ -10,8 +10,8 @@
 #pragma sym on
 namespace ipl {
     /**
-     * BtnB = Button 0 - Button on Btn1, Left button on Btn2, Top button on Btn3
-     * BtnA = Button 1 - Right button on Btn2, Middle button on Btn3
+     * BtnB = Button 0 - Button on Btn1, Right button on Btn2, Top button on Btn3
+     * BtnA = Button 1 - Left button on Btn2, Middle button on Btn3
      * BtnC = Button 2 - Bottom button on Btn3
      */
 
@@ -355,11 +355,11 @@ namespace ipl {
         }
         else {
             switch (mResult) {
-                case RESULT_LEFT_BUTTON: {
+                case RESULT_RIGHT_BUTTON: {
                     anim = ANIM_BTN2_SELECT_BTN_B;
                     break;
                 }
-                case RESULT_RIGHT_BUTTON: {
+                case RESULT_LEFT_BUTTON: {
                     anim = ANIM_BTN2_SELECT_BTN_A;
                     break;
                 }
@@ -403,7 +403,7 @@ namespace ipl {
         }
 
         if (!mpCurDialog->mpLayout->isPlaying(ANIM_BTN2_SELECT_BTN_B) && !mpCurDialog->mpLayout->isPlaying(ANIM_BTN2_SELECT_BTN_A)) {
-            if (mResult == RESULT_RIGHT_BUTTON) {
+            if (mResult == RESULT_LEFT_BUTTON) {
                 if (mBtnHovered[DIALOG_BTN_TYPE_BTN2] != 0 && mpDialogPages[mCurPage].mbTwoBtn) {
                     mpCurDialog->mpLayout->getAnim(ANIM_BTN2_FOCUS_BTN_A_ON)->playAnmFrame();
                 }
@@ -1158,7 +1158,7 @@ namespace ipl {
             else {
                 switch (btnNo) {
                     case DIALOG_BTN_TYPE_BTN2: {
-                        mResult = RESULT_RIGHT_BUTTON;
+                        mResult = RESULT_LEFT_BUTTON;
                         animIdx = ANIM_BTN2_SELECT_BTN_A;
                         if (mbSwapSound) {
                             snd::getSystem()->startSE("WIPL_SE_DECIDE");
@@ -1171,7 +1171,7 @@ namespace ipl {
                         break;
                     }
                     case DIALOG_BTN_TYPE_BTN1: {
-                        mResult = RESULT_LEFT_BUTTON;
+                        mResult = RESULT_BUTTON;
                         animIdx = ANIM_BTN2_SELECT_BTN_B;
                         if (mbSwapSound) {
                             snd::getSystem()->startSE("WIPL_SE_CANCEL");
