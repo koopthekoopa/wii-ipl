@@ -430,7 +430,7 @@ config.libs = [
             Object(Equivalent,  "system/iplNand.cpp"),
             Object(NonMatching, "system/iplNandShared.cpp"),
             Object(Matching,    "system/iplNandMeta.cpp"),
-            Object(NonMatching, "system/iplNandManager.cpp"),
+            Object(Matching,    "system/iplNandManager.cpp"),
             Object(Matching,    "system/iplNandWall.cpp"),
             Object(Matching,    "system/iplFramework.cpp"),
             Object(NonMatching, "system/iplException.cpp"),
@@ -702,9 +702,13 @@ config.libs = [
             Object(NonMatching, "scene/setting/iplAOSS.cpp"),
             Object(NonMatching, "scene/setting/iplRakuRakuThread.cpp"),
             Object(NonMatching, "scene/setting/iplATERM.cpp"),
-            Object(Matching,    "scene/setting/iplSettingBg.cpp"),
-            Object(NonMatching, "scene/setting/iplSettingButton.cpp"),
-            Object(NonMatching, "scene/setting/iplSettingSelect.cpp"),
+        ]
+    ),
+    IPLSection("settingSelect",
+        [
+            Object(Matching,    "scene/settingSelect/iplSettingBg.cpp"),
+            Object(NonMatching, "scene/settingSelect/iplSettingButton.cpp"),
+            Object(NonMatching, "scene/settingSelect/iplSettingSelect.cpp"),
         ]
     ),
     IPLSection("sceneSystem",

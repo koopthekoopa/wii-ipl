@@ -121,7 +121,7 @@ namespace ipl {
 
         init();
 
-        mpLayoutFile = System::getDlgWdwFile();
+        mpLayoutFile = System::getDlgArc();
 
         // Dialog with no buttons
         mDialog[DIALOG_TYPE_BTN0].mpLayout = new(heap, CLASS_HEAP) layout::Object(heap, mpLayoutFile, "arc", "my_DialogWindow_a0.brlyt");

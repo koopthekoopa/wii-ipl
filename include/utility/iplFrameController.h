@@ -8,7 +8,7 @@ namespace ipl {
         ANIM_TYPE_FORWARD = 0,
         ANIM_TYPE_BACKWARD,
         ANIM_TYPE_LOOP,
-        ANIM_TYPE_BOUNCE
+        ANIM_TYPE_ALTERNATE
     };
 
     enum {
@@ -60,7 +60,7 @@ namespace ipl {
                 int     mAnmType;       // 0x18
 
             private:
-                bool    mbBounceBack;   // 0x1C
+                bool    mbAlternateBack;   // 0x1C
         };
     }
 }

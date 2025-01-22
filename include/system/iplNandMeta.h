@@ -8,10 +8,10 @@
 namespace ipl {
     namespace nand {
         class MetaFile : File {
-            typedef void (*MetaCallback)(void*);
-            
             public:
-                MetaFile(EGG::Heap* heap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, MetaCallback callBack, void* callBackWork, int ticketIdx);
+                typedef void (*Callback)(void*);
+
+                MetaFile(EGG::Heap* heap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, Callback callBack, void* callBackWork, int ticketIdx);
                 virtual ~MetaFile();
             
             protected:
@@ -41,11 +41,10 @@ namespace ipl {
                 int             mTicketIdx;     // 0x1A0
                 bool            mbMetaInNand;   // 0x1A4
                 
-                MetaCallback    mCallback;      // 0x1A8
+                Callback    mCallback;      // 0x1A8
                 void*           mCallbackWork;  // 0x1AC
         };
     }
 }
 
 #endif // IPL_NAND_META_H
-

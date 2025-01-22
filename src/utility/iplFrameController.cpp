@@ -13,7 +13,7 @@ namespace ipl {
 
             mState = ANIM_STATE_READY;
 
-            mbBounceBack = false;
+            mbAlternateBack = false;
 
             initFrame();
         }
@@ -58,19 +58,19 @@ namespace ipl {
                         }
                         break;
                     }
-                    // Animate in a bouncy way; Once reaching the maximum frame, it then animates forwards.
+                    // Animate and alternate direction; Once reaching the maximum frame, it then animates forwards.
                     // And once reaching the minimum frame, it animates backwards. Then repeat.
-                    case ANIM_TYPE_BOUNCE: {
-                        if (mbBounceBack == false) {
+                    case ANIM_TYPE_ALTERNATE: {
+                        if (mbAlternateBack == false) {
                             if ((mFrame += speed) >= mMaxFrame) {
                                 mFrame = mMaxFrame;
-                                mbBounceBack = true;
+                                mbAlternateBack = true;
                             }
                         }
                         else {
                             if ((mFrame -= speed) <= mMinFrame) {
                                 mFrame = mMinFrame;
-                                mbBounceBack = false;
+                                mbAlternateBack = false;
                             }
                         }
                         break;

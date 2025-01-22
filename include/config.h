@@ -14,6 +14,7 @@
 // #define ENABLE_DSP_REPORT
 
 #define SYSMENU_TITLE_ID    0x0000000100000002
+#define SYSMENU_CONTENT_ID  0x00000001
 
 /* Build options (set by the version being used) */
 

@@ -4,7 +4,9 @@
 #include <decomp.h>
 
 #include <revolution.h>
+#include <revolution/nand.h>
 #include <revolution/arc.h>
+#include <revolution/es.h>
 
 #include <egg/core.h>
 
@@ -135,35 +137,6 @@ namespace ipl {
             public:
                 LayoutFile(EGG::Heap* heap, const char* dirName, const char* fileName, ARCHandle* arc, bool isNandFile);
                 virtual ~LayoutFile();                                                  // 0x08
-        };
-
-        class Manager {
-            public:
-                Manager();
-                
-                /**
-                 * @brief Reads an ASH compressed Layout File.
-                 * @param heap The memory heap used.
-                 * @param archiveName The file name of the ASH compressed archive.
-                 * @param unk Unkown boolean.
-                 * @return The Layout File Data as `ipl::nand::LayoutFile`.
-                 */
-                LayoutFile* readLayout(EGG::Heap* heap, const char* archiveName, bool unk);
-                LayoutFile* readLayoutAsync(EGG::Heap* heap, const char* archiveName, bool unk);
-
-                void        closeContentsAll();
-                
-                void        sendToken(int token);
-                BOOL        receiveToken(int* token);
-                
-                int         getDescriptor() const   { return mDescriptor; }
-                ARCHandle*  getArc()                { return &mUnkArc; }
-            
-            private:
-                u8          unk_0x00[0x268];
-                int         mDescriptor;        // 0x268
-                u8          unk_0x26C;
-                ARCHandle   mUnkArc;            // 0x270
         };
     }
 }

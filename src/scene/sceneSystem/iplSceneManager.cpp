@@ -44,7 +44,7 @@ namespace ipl {
             System::setCurrentHeap(mpRootScene->mpHeap);
             mpRootScene->do_create();
             
-            System::getUnk00()->becomeCurrentHeap();
+            System::getMem1Root()->becomeCurrentHeap();
         }
 
         void Manager::calc() {
@@ -174,7 +174,7 @@ namespace ipl {
             mbCreatedReserved = false;
             mpReservedScene->do_prepare();
             
-            System::getUnk00()->becomeCurrentHeap();
+            System::getMem1Root()->becomeCurrentHeap();
         }
 
         SceneObj* Manager::createScene(int sceneId, int prevSceneId, void* args) {
@@ -245,7 +245,7 @@ namespace ipl {
                 System::setCurrentHeap(mpReservedScene->mpHeap);
                 mpReservedScene->do_create();
 
-                System::getUnk00()->becomeCurrentHeap();
+                System::getMem1Root()->becomeCurrentHeap();
 
                 mpReservedScene = NULL;
                 mReservedCommand.clear();

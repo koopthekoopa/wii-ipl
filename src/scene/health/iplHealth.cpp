@@ -85,7 +85,7 @@ namespace ipl {
         skHealth::~skHealth() {}
 
         void skHealth::prepare() {
-            mpLayoutFile = System::getNandManager()->readLayoutAsync(System::getUnk28Heap(), "health.ash", true);
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(System::getMem2App(), "health.ash", true);
         }
 
         void skHealth::destroy() {

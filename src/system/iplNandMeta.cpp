@@ -9,7 +9,7 @@
 
 namespace ipl {
     namespace nand {
-        MetaFile::MetaFile(EGG::Heap* heap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, MetaCallback callBack, void* callBackWork, int ticketIdx) :
+        MetaFile::MetaFile(EGG::Heap* heap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, Callback callBack, void* callBackWork, int ticketIdx) :
         File(heap, fileName, arc, NULL, offset, length, false),
         mDescriptor(-1),
         mTitleId(titleId),
@@ -61,7 +61,7 @@ namespace ipl {
 
         BOOL MetaFile::closeNandFile_() {
             if (mTicket) {
-                System::getUnk0CHeap()->free(mTicket);
+                System::getMem2Sys()->free(mTicket);
             }
 
             s32 result = wrapper::Close(&mNandFile);
@@ -71,8 +71,8 @@ namespace ipl {
         BOOL MetaFile::openTicketFile_() {
             s32 line;
 
-            mTicket = (ESTicketView*)System::getUnk0CHeap()->alloc(sizeof(ESTicketView), -BUFFER_HEAP);
-            s32 result = utility::ESMisc::GetTicketView(System::getUnk0CHeap(), mTitleId, mTicket, mTicketIdx);
+            mTicket = (ESTicketView*)System::getMem2Sys()->alloc(sizeof(ESTicketView), -BUFFER_HEAP);
+            s32 result = utility::ESMisc::GetTicketView(System::getMem2Sys(), mTitleId, mTicket, mTicketIdx);
 
             if (result < 0) {
                 line = 146;
@@ -147,7 +147,7 @@ namespace ipl {
             s32 result = ES_CloseContentFile(mDescriptor);
             if (result >= ES_ERR_OK) {
                 if (mTicket) {
-                    System::getUnk0CHeap()->free(mTicket);
+                    System::getMem2Sys()->free(mTicket);
                 }
                 return TRUE;
             }
@@ -191,5 +191,3 @@ namespace ipl {
         }
     }
 }
-
-

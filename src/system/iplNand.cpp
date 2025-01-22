@@ -4,7 +4,7 @@
 
 #include "system/rvl_dec.h"
 #include "system/iplSystem.h"
-#include "system/iplErrorHandler.h"
+#include "system/iplNandManager.h"
 #include "system/iplNandWall.h"
 #include "system/iplNandWrapper.h"
 
@@ -124,7 +124,7 @@ namespace ipl {
                 arcOffset = ARCGetStartOffset(&mArcFile);
 
                 if (mbIsNandFile) {
-                    result = wrapper::Seek(&mNandFile, mFileOffset + arcOffset + offset, 0);
+                    result = wrapper::Seek(&mNandFile, mFileOffset + arcOffset + offset, NAND_SEEK_BEG);
                     nand_error_handling(result);
 
                     result = wrapper::Read(&mNandFile, buffer, length);
@@ -133,7 +133,7 @@ namespace ipl {
             }
             else {
                 if (mbIsNandFile) {
-                    result = wrapper::Seek(&mNandFile, mFileOffset + offset, 0);
+                    result = wrapper::Seek(&mNandFile, mFileOffset + offset, NAND_SEEK_BEG);
                     nand_error_handling(result);
 
                     result = wrapper::Read(&mNandFile, buffer, length);
@@ -142,7 +142,7 @@ namespace ipl {
                 else {
                     arcOffset = ARCGetStartOffset(&mArcFile);
 
-                    result = ES_SeekContentFile(System::getNandManager()->getDescriptor(), mFileOffset + arcOffset + offset, 0);
+                    result = ES_SeekContentFile(System::getNandManager()->getDescriptor(), mFileOffset + arcOffset + offset, NAND_SEEK_BEG);
                     if (result < 0) {
                         System::err_log("ES", result, 229);
                         System::err_display(MESG_ERR_CONTENT);
@@ -250,9 +250,9 @@ namespace ipl {
                     mpLength = OSRoundUp32B(getRawSize_());
 
                     // Heap used to allocate the data.
-                    usedHeap = System::getUnk28Heap();
-                    if (System::getUnk28Heap() == NULL) {
-                        usedHeap = System::getAppHeap();
+                    usedHeap = System::getMem2App();
+                    if (System::getMem2App() == NULL) {
+                        usedHeap = System::getMem2Root();
                     }
 
                     mpCmpBuffer = new(usedHeap, -BUFFER_HEAP) u8[mpLength];
@@ -417,9 +417,9 @@ namespace ipl {
         void File::write() {
             u8 dummy;
 
-            EGG::Heap* usedHeap = System::getUnk0CHeap();
-            if (System::getUnk0CHeap() == NULL) {
-                usedHeap = System::getAppHeap();
+            EGG::Heap* usedHeap = System::getMem2Sys();
+            if (System::getMem2Sys() == NULL) {
+                usedHeap = System::getMem2Root();
             }
 
             u8* buffer = new(usedHeap, -BUFFER_HEAP) u8[BUFFER_SIZE];
@@ -572,5 +572,3 @@ done:
         LayoutFile::~LayoutFile() {}
     }
 }
-
-

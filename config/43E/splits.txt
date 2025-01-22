@@ -894,17 +894,17 @@ src/scene/setting/iplATERM.cpp:
 	.sdata      start:0x816990A0 end:0x816990F0
 	.sbss       start:0x8169AB10 end:0x8169AB80
 
-src/scene/setting/iplSettingBg.cpp:
+src/scene/settingSelect/iplSettingBg.cpp:
 	.text       start:0x81406DBC end:0x81406FCC
 	.data       start:0x81658190 end:0x81658200
 	.sdata      start:0x816990F0 end:0x816990F8
 
-src/scene/setting/iplSettingButton.cpp:
+src/scene/settingSelect/iplSettingButton.cpp:
 	.text       start:0x81406FCC end:0x81407BF8
 	.data       start:0x81658200 end:0x81658478
 	.sdata      start:0x816990F8 end:0x81699118
 
-src/scene/setting/iplSettingSelect.cpp:
+src/scene/settingSelect/iplSettingSelect.cpp:
 	.text       start:0x81407BF8 end:0x81409CE8
 	.data       start:0x81658478 end:0x81658A48
 	.sdata      start:0x81699118 end:0x81699128

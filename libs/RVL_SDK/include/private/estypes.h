@@ -7,6 +7,11 @@
 extern "C" {
 #endif
 
+// Reference: https://wiibrew.org/wiki//dev/es
+//            https://github.com/devkitPro/libogc/blob/master/gc/ogc/es.h
+
+#define             ES_MAX_CONTENT  512
+
 typedef s32         ESError;
 
 typedef u32         ESId;
@@ -28,38 +33,64 @@ typedef u8          ESSysAccessMask[2];
 typedef u8          ESCidxMask[64];
 
 typedef struct {
-    u32 code;
-
-    u32 limit;
+    u32                 code;                       // 0x00
+    u32                 limit;                      // 0x04
 } ESLpEntry;
 
 typedef struct ESTicketView {
-    ESVersion           version;        // 0x00
+    ESVersion           version;                    // 0x00
 
-    ESTicketId          ticketID;       // 0x01
-    ESId                devID;          // 0x09
-    ESTitleId           titleID;        // 0x0D
+    ESTicketId          ticketId;                   // 0x04
+    ESId                deviceId;                   // 0x0C
+    ESTitleId           titleId;                    // 0x10
 
-    ESSysAccessMask     sysAccessMask;  // 0x15
+    ESSysAccessMask     sysAccessMask;              // 0x18
 
-    u16                 ticketVer;      // 0x17
+    u16                 ticketVersion;              // 0x1A
 
-    u32                 accTitleID;     // 0x19
-    u32                 accTitleMask;   // 0x1D
+    u32                 accessTitleID;              // 0x1C
+    u32                 accessTitleMask;            // 0x20
 
-    u8                  license;        // 0x21
-    ESTicketReserved    reserved;       // 0x22
-    u8                  audit;          // 0x52
+    u8                  license;                    // 0x24
+    ESTicketReserved    reserved;                   // 0x25
+    u8                  audit;                      // 0x55
 
-    ESCidxMask          cidxMask;       // 0x54
-    ESLpEntry           limits[8];      // 0x94
+    ESCidxMask          cidxMask;                   // 0x56
+    ESLpEntry           limits[8];                  // 0x98
 } ESTicketView;
+
+typedef struct ESTmdViewHeader {
+    ESVersion           version;                    // 0x00
+
+    ESSysVersion        sysVersion;                 // 0x04
+    ESTitleId           titleId;                    // 0x10
+    ESTitleType         titleType;                  // 0x14
+
+    u16                 groupId;                    // 0x18
+
+    ESTmdReserved       reserved;                   // 0x1A
+
+    ESTitleVersion      titleVerson;                // 0x58
+
+    u16                 numContents;                // 0x5A
+} ESTmdViewHeader;
+
+typedef struct ESCmdView {
+    ESContentId         cid;                        // 0x00
+    u16                 index;                      // 0x04
+    ESContentType       type;                       // 0x06
+    u64                 size;                       // 0x08
+} ESCmdView;
+
+typedef struct ESTmdView {
+    ESTmdViewHeader     head;                       // 0x00
+    ESCmdView           contents[ES_MAX_CONTENT];   // 0x5C
+} ESTmdView;
 
 #define ES_ERR_OK                   0
 
 #define ES_ERR_DONT_EXISTS          -106
 
-// Reference: https://wiibrew.org/wiki//dev/es
 #define ES_ERR_INVALID_PUB_KEY_TYPE -1005
 #define ES_ERR_FILE_READ_FAILED     -1009
 #define ES_ERR_FILE_WRITE_FAILED    -1010
@@ -87,5 +118,3 @@ typedef struct ESTicketView {
 #endif
 
 #endif // REVOLUTION_ES_TYPES_H
-
-

@@ -1,4 +1,4 @@
-#include "scene/setting/iplSettingBg.h"
+#include "scene/settingSelect/iplSettingBg.h"
 
 namespace ipl {
     namespace scene {
@@ -11,7 +11,7 @@ namespace ipl {
         }
 
         void SettingBg::prepare() {
-            mpLayoutFile = System::getNandManager()->readLayoutAsync(mpHeap, "setupBg.ash", false);
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(mpHeap, "setupBg.ash");
         }
 
         void SettingBg::create() {
