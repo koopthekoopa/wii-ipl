@@ -5,6 +5,8 @@
 
 #include <egg/core.h>
 
+#include <cstring>
+
 namespace ipl {
     namespace gui {
         class PaneManager : public ::gui::PaneManager {

@@ -11,10 +11,7 @@
 #include "layout/iplLayout.h"
 
 namespace ipl {
-    namespace gui {
-        class PaneManager;
-    }
-
+    USE_GUI_MANAGER
     class DialogWindow : public ::gui::EventHandler {
         public:
             enum {
@@ -177,7 +174,5 @@ namespace ipl {
             static char*            mscBtnName[3];
     };
 }
-
-#include "layout/iplGuiManager.h"
 
 #endif // IPL_DIALOG_WINDOW_H

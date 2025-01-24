@@ -37,10 +37,11 @@ namespace ipl {
 
                 virtual SceneCommand    calcFadein()        { return SCENE_NEXT; }  // 0x58
                 virtual SceneCommand    calcNormal()        { return SCENE_NEXT; }  // 0x5C
-                virtual SceneCommand    calcFadeout()       { return SCENE_NEXT; }  // 0x60
+                virtual SceneCommand    calcFadeout();                              // 0x60
 
                 virtual void            calcCommonAfter();                          // 0x64
-                
+            
+            protected:
                 int                     getState()          { return mState; }
             
             private:
@@ -50,5 +51,3 @@ namespace ipl {
 }
 
 #endif // BASE_SCENE_FADER_H
-
-

@@ -5,8 +5,6 @@
 
 #include "system/iplSystem.h"
 
-#include "sound/iplSound.h"
-
 #define MAX_ENTRIES 34
 
 namespace ipl {

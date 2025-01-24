@@ -9,9 +9,14 @@ namespace std {
     // MSL/memory.h
     using   ::memcpy;
     using   ::memset;
-    
+
+    using   ::strcmp;
     using   ::stricmp;
+
     using   ::strncpy;
+    using   ::strncat;
+    using   ::strncmp;
+
     using   ::strlen;
 
     using   ::sprintf;
@@ -20,6 +25,3 @@ namespace std {
 #endif
 
 #endif // MSL_STRING_H
-
-
-

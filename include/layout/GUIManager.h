@@ -263,4 +263,7 @@ namespace gui {
     };
 }
 
+#define USE_GUI_MANAGER     namespace gui { class PaneManager; }
+#define IPL_USE_GUI_MANAGER namespace ipl { USE_GUI_MANAGER }
+
 #endif // GUI_MANAGER_H

@@ -7,7 +7,7 @@ namespace ipl {
     namespace scene {
         SCENE_CLASS(SettingBg) {
             public:
-                SettingBg(EGG::Heap* heap, int sceneID);
+                SettingBg(EGG::Heap* heap, int type);
                 virtual ~SettingBg();
 
                 virtual void    prepare();
@@ -16,7 +16,7 @@ namespace ipl {
                 virtual void    draw();
             
             private:
-                int                 mSceneID;       // 0x54
+                int                 mSettingType;   // 0x54
 
                 layout::Object*     mpLayout;       // 0x58
                 nand::LayoutFile*   mpLayoutFile;   // 0x5C
@@ -25,5 +25,3 @@ namespace ipl {
 }
 
 #endif // IPL_SETTING_BG_H
-
-

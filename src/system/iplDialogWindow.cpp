@@ -2,12 +2,12 @@
 
 #include "utility/iplGraphics.h"
 
-#include "sound/iplSound.h"
-
 #include "system/iplSystem.h"
 
+#include "layout/iplGuiManager.h"
+
 #include <cstring>
-#pragma sym on
+
 namespace ipl {
     /**
      * BtnB = Button 0 - Button on Btn1, Right button on Btn2, Top button on Btn3
@@ -190,13 +190,13 @@ namespace ipl {
 
         // Dialog with two buttons (alternative)
         mDialog[DIALOG_TYPE_BTN2B].mpLayout = new(heap, CLASS_HEAP) layout::Object(heap, mpLayoutFile, "arc", "my_DialogWindow_b.brlyt");
-        mDialog[DIALOG_TYPE_BTN2B].mpLayout->bindToGroup("my_DialogWindow_b_DialogIn.brlan", "G_InOut", false);
-        mDialog[DIALOG_TYPE_BTN2B].mpLayout->bindToGroup("my_DialogWindow_b_DialogOut.brlan", "G_InOut", false, false);
-        mDialog[DIALOG_TYPE_BTN2B].mpLayout->bindToGroup("my_DialogWindow_b_FocusBtn_on.brlan", "G_FocusBtnB", false, false);
-        mDialog[DIALOG_TYPE_BTN2B].mpLayout->bindToGroup("my_DialogWindow_b_FocusBtn_off.brlan", "G_FocusBtnB", false, false);
+        mDialog[DIALOG_TYPE_BTN2B].mpLayout->bindToGroup("my_DialogWindow_b_DialogIn.brlan",     "G_InOut",      false);
+        mDialog[DIALOG_TYPE_BTN2B].mpLayout->bindToGroup("my_DialogWindow_b_DialogOut.brlan",    "G_InOut",      false, false);
+        mDialog[DIALOG_TYPE_BTN2B].mpLayout->bindToGroup("my_DialogWindow_b_FocusBtn_on.brlan",  "G_FocusBtnB",  false, false);
+        mDialog[DIALOG_TYPE_BTN2B].mpLayout->bindToGroup("my_DialogWindow_b_FocusBtn_off.brlan", "G_FocusBtnB",  false, false);
         mDialog[DIALOG_TYPE_BTN2B].mpLayout->bindToGroup("my_DialogWindow_b_SelectBtn_Ac.brlan", "G_SelectBtnB", false, false);
-        mDialog[DIALOG_TYPE_BTN2B].mpLayout->bindToGroup("my_DialogWindow_b_FocusBtn_on.brlan", "G_FocusBtnA", false, false);
-        mDialog[DIALOG_TYPE_BTN2B].mpLayout->bindToGroup("my_DialogWindow_b_FocusBtn_off.brlan", "G_FocusBtnA", false, false);
+        mDialog[DIALOG_TYPE_BTN2B].mpLayout->bindToGroup("my_DialogWindow_b_FocusBtn_on.brlan",  "G_FocusBtnA",  false, false);
+        mDialog[DIALOG_TYPE_BTN2B].mpLayout->bindToGroup("my_DialogWindow_b_FocusBtn_off.brlan", "G_FocusBtnA",  false, false);
         mDialog[DIALOG_TYPE_BTN2B].mpLayout->bindToGroup("my_DialogWindow_b_SelectBtn_Ac.brlan", "G_SelectBtnA", false, false);
         mDialog[DIALOG_TYPE_BTN2B].mpLayout->finishBinding();
         mDialog[DIALOG_TYPE_BTN2B].mpGui = new(heap, CLASS_HEAP) gui::PaneManager(NULL, mDialog[DIALOG_TYPE_BTN2B].mpLayout->getDrawInfo(), NULL, allocator);
@@ -1074,7 +1074,7 @@ namespace ipl {
                 snd::getSystem()->startSE("WIPL_SE_BT_TARGETTING");
 
                 if (controller) {
-                    controller->rumble(0);
+                    controller->rumble();
                 }
 
                 mpCurDialog->mpLayout->getAnim(animIdx)->playAnmFrame();

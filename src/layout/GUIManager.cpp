@@ -324,18 +324,18 @@ namespace gui {
             drawLine_(x - size.width / 2, y + size.height / 2, x - size.width / 2, y - size.height / 2, 0, 8, color);
         }
     }
-}
 
-static bool is_visible(nw4r::lyt::Pane* pane) {
-    if (!pane->IsVisible()) {
-        return false;
+    static bool is_visible(nw4r::lyt::Pane* pane) {
+        if (!pane->IsVisible()) {
+            return false;
+        }
+        if (pane->GetParent() == NULL) {
+            return true;
+        }
+        return is_visible(pane->GetParent());
     }
-    if (pane->GetParent() == NULL) {
-        return true;
+    
+    bool PaneComponent::isVisible() {
+        return is_visible(mpPane);
     }
-    return is_visible(pane->GetParent());
-}
-
-bool gui::PaneComponent::isVisible() {
-    return is_visible(mpPane);
 }

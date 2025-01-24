@@ -36,6 +36,10 @@
 #define MESG_CHAN_SEL_SAFE_MODE         27
 #define MESG_CHAN_SEL_NAND_FULL         154
 
+/* Settings */
+
+#define MESG_SETTING_BTN_BACK           315
+
 /* Error Messages */
 
 #define MESG_ERROR_CODE                 400
@@ -51,5 +55,3 @@
 #define MESG_ERROR_NCD_UNKNOWN          410
 
 #endif // IPL_MESSAGE_ENTRIES_H
-
-

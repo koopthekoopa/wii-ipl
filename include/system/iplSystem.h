@@ -1,6 +1,7 @@
 #ifndef IPL_SYSTEM_H
 #define IPL_SYSTEM_H
 
+#include "bannerSound/BannerSoundPlayer.h"
 #include "config.h"
 
 #include <decomp.h>
@@ -26,8 +27,9 @@
 #include "system/iplPostmanManager.h"
 #include "system/iplNigaoeManager.h"
 #include "system/iplBS2Manager.h"
-
 #include "scene/iplSceneManager.h"
+
+#include "sound/iplSound.h"
 
 namespace ipl {
     class System {

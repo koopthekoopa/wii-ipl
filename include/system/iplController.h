@@ -41,7 +41,7 @@ namespace ipl {
                 virtual int         pinchOffTrg() const;            // 0x28
                 virtual int         decide() const;                 // 0x2C
                 virtual int         repeat(u32 button) const;       // 0x30
-                virtual int         rumble(int timer) const;        // 0x34
+                virtual int         rumble(int timer = 0) const;   // 0x34
                 virtual void        cancelRumbling();               // 0x38
                 virtual int         getHoldFlag() const;            // 0x3C
                 virtual int         getTrigFlag() const;            // 0x40

@@ -8,11 +8,13 @@
 extern "C" {
 #endif
 
-char*   stricmp(char* dst, const char* src);
+int     strcmp(const char* dst, const char* src);
+
+int     stricmp(const char* dst, const char* src);
 
 char*   strncpy(char* dst, const char* src, size_t length);
 char*   strncat(char* dst, const char* src, size_t length);
-char*   strncmp(char* dst, const char* src, size_t lengt);
+int     strncmp(const char* dst, const char* src, size_t length);
 
 size_t  strlen(const char* str);
 

@@ -706,13 +706,13 @@ src/scene/memoryCard/iplGCWindow.cpp:
 	.sdata2     start:0x81669100 end:0x81669118
 	.sdata      start:0x8166B2D0 end:0x8166B300
 
-src/scene/memoryCard/iplGCTextBalloon.cpp:
+src/scene/textBalloon/iplBalloon.cpp:
 	.text       start:0x813D07C4 end:0x813D13D0
 	.data       start:0x81627DF8 end:0x81627E48
 	.sdata2     start:0x81669118 end:0x81669138
 	.sdata      start:0x8166B300 end:0x8166B318
 
-src/scene/memoryCard/CardSequence.cpp:
+src/scene/cardSequence/CardSequence.cpp:
 	.text       start:0x813D13D0 end:0x813D3A4C
 	.data       start:0x81627E48 end:0x81628400
 	.sdata      start:0x8166B318 end:0x8166B320

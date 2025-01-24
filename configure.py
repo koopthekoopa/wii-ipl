@@ -178,7 +178,7 @@ if not config.non_matching:
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "latest"
 config.dtk_tag = "v1.3.0"
-config.objdiff_tag = "v2.5.0"
+config.objdiff_tag = "v2.7.1"
 config.sjiswrap_tag = "v1.2.0"
 config.wibo_tag = "0.6.16"
 config.bstool_tag = "v1.0.1"
@@ -638,8 +638,16 @@ config.libs = [
             Object(NonMatching, "scene/memoryCard/iplMemoryCardManager.cpp"),
             Object(NonMatching, "scene/memoryCard/iplGCSaveData.cpp"),
             Object(NonMatching, "scene/memoryCard/iplGCWindow.cpp"),
-            Object(NonMatching, "scene/memoryCard/iplGCTextBalloon.cpp"),
-            Object(NonMatching, "scene/memoryCard/CardSequence.cpp"),
+        ]
+    ),
+    IPLSection("textBalloon",
+        [
+            Object(NonMatching, "scene/textBalloon/iplBalloon.cpp"),
+        ]
+    ),
+    IPLSection("cardSequence",
+        [
+            Object(NonMatching, "scene/cardSequence/CardSequence.cpp"),
         ]
     ),
     IPLSection("nakamuraTest",
@@ -707,7 +715,7 @@ config.libs = [
     IPLSection("settingSelect",
         [
             Object(Matching,    "scene/settingSelect/iplSettingBg.cpp"),
-            Object(NonMatching, "scene/settingSelect/iplSettingButton.cpp"),
+            Object(Matching,    "scene/settingSelect/iplSettingButton.cpp"),
             Object(NonMatching, "scene/settingSelect/iplSettingSelect.cpp"),
         ]
     ),

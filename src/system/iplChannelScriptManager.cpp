@@ -1,8 +1,8 @@
 #include "system/iplChannelScriptManager.h"
 
-#include "sound/iplSound.h"
-
 #include "channelScript/iplCSLibrary.h"
+
+#include "sound/iplSound.h"
 
 #include <cstring>
 
