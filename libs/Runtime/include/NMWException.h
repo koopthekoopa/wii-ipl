@@ -3,30 +3,38 @@
 
 #include <__ppc_eabi_linker.h>
 
+#include <stddef.h>
+
 typedef void (*DtorFunction)(void* obj, short method);
 
-typedef struct DtorChain {
-    struct  DtorChain* next;
+typedef struct DestructorChain {
+    struct  DestructorChain * next;
     void*   dtor;
     void*   object;
-} DtorChain;
+} DestructorChain ;
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-extern DtorChain*   __global_destructor_chain;
+#define CTORCALL_COMPLETE(ctor, objptr) (((void (*)(void*, int))ctor)(objptr, 1))
 
-void                __register_global_object(void* object, void* dtor, DtorChain* chain);
-void                __destroy_global_chain();
+#define DTORCALL_COMPLETE(dtor, objptr) (((void (*)(void*, int))dtor)(objptr, -1))
 
-int                 __register_fragment(__eti_init_info* info, char* reg);
-void                __unregister_fragment(int id);
+extern DestructorChain *    __global_destructor_chain;
+
+void*   __construct_new_array(void* block, void* ctor, void* dtor, size_t size, size_t n);
+void    __construct_array(void* ptr, void* ctor, void* dtor, size_t size, size_t n);
+void    __destroy_arr(void* block, void** dtor, size_t size, size_t n);
+
+void                        __register_global_object(void* object, void* dtor, DestructorChain* chain);
+void                        __destroy_global_chain();
+
+int                         __register_fragment(__eti_init_info* info, char* TOC);
+void                        __unregister_fragment(int id);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif // RUNTIME_NMW_EXCEPTION_H
-
-

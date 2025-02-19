@@ -51,5 +51,3 @@ __declspec(section ".ctors$10") extern void* const  __init_cpp_exceptions_refere
 __declspec(section ".dtors$10") extern void* const  __destroy_global_chain_reference = __destroy_global_chain;
 #pragma section ".dtors$15"
 __declspec(section ".dtors$15") extern void* const  __fini_cpp_exceptions_reference = __fini_cpp_exceptions;
-
-

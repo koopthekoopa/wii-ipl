@@ -1,6 +1,8 @@
 #ifndef PPC_EABI_LINKER_H
 #define PPC_EABI_LINKER_H
 
+#include <decomp.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -45,5 +47,3 @@ __declspec(section ".init") extern __eti_init_info  _eti_init_info[];
 #endif
 
 #endif // PPC_EABI_LINKER_H
-
-

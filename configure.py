@@ -1854,13 +1854,13 @@ config.libs = [
             Object(Matching,    "__mem.c"),
             Object(Matching,    "__va_arg.c"),
             Object(Matching,    "global_destructor_chain.c"),
-            Object(NonMatching, "NMWException.cpp"),
-            Object(NonMatching, "ptmf.c"),
+            Object(Matching,    "NMWException.cpp"),
+            Object(Matching,    "ptmf.c"),
             Object(Matching,    "runtime.c"),
             Object(Matching,    "__init_cpp_exceptions.cpp"),
-            Object(NonMatching, "Gecko_setjmp.c"),
-            Object(NonMatching, "Gecko_ExceptionPPC.cpp"),
-            Object(NonMatching, "GCN_mem_alloc.c"),
+            Object(Matching,    "Gecko_setjmp.c"),
+            Object(Matching,    "Gecko_ExceptionPPC.c"),
+            Object(Matching,    "GCN_mem_alloc.c"),
         ]
     ),
     # MSL Library

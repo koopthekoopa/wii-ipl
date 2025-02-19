@@ -4269,7 +4269,7 @@ libs/Runtime/src/__init_cpp_exceptions.cpp:
 libs/Runtime/src/Gecko_setjmp.c:
 	.text       start:0x815F9FD0 end:0x815FA1E4
 
-libs/Runtime/src/Gecko_ExceptionPPC.cpp:
+libs/Runtime/src/Gecko_ExceptionPPC.c:
 	.bss        start:0x811B1090 end:0x811B10A0
 	.text       start:0x815FA1E4 end:0x815FA248
 

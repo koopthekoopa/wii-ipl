@@ -1,6 +1,6 @@
 ![Logo](./misc/logo.png)  
 Wii Menu  
-[![Build Status]][actions] [![Discord Badge]][discord] [![Progress]][progress] [![Linked]][progress]
+[![Build Status]][actions] [![Discord Badge]][discord] [![Progress Badge]][progress] [![Linked Badge]][progress]
 ========
 
 [Build Status]: https://github.com/koopthekoopa/wii-ipl/actions/workflows/build.yml/badge.svg
@@ -8,8 +8,8 @@ Wii Menu
 [Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 [discord]: https://discord.gg/hKx3FJJgrV
 
-[Progress]: https://decomp.dev/koopthekoopa/wii-ipl.svg?mode=shield&measure=code&label=Progress
-[Linked]: https://decomp.dev/koopthekoopa/wii-ipl.svg?mode=shield&measure=complete_code&label=Linked
+[Progress Badge]: https://decomp.dev/koopthekoopa/wii-ipl.svg?mode=shield&measure=code&label=Progress
+[Linked Badge]: https://decomp.dev/koopthekoopa/wii-ipl.svg?mode=shield&measure=complete_code&label=Linked
 [progress]: https://decomp.dev/koopthekoopa/wii-ipl
 
 A work-in-progress decompilation of the Wii Menu (4.3).

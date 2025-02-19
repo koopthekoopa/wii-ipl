@@ -67,9 +67,17 @@ u32     __OSCoreClock                   ADDRESS(OS_BASE_CACHED + 0x000000FC);
 #define OSSleepMicroseconds(us)         OSSleepTicks(OSMicrosecondsToTicks((OSTime)us))
 #define OSSleepNanoseconds(ns)          OSSleepTicks(OSNanosecondsToTicks((OSTime)ns))
 
-#define OSRoundUp32B(x)                 ROUNDUP(x, 32)
+#define OSRoundUp32B(x)                 ROUNDUP((unsigned long)(x), 32)
+#define OSRoundDown32B(x)               ROUNDDOWN((unsigned long)(x), 32)
 
-void    OSShutdownSystem();
+/* Arena */
+
+void*   OSGetArenaHi(); 
+void*   OSGetArenaLo();
+void    OSSetArenaHi(void* newHi);
+void    OSSetArenaLo(void* newLo);
+
+/* OS Log */
 
 void    OSReport(const char* msg, ...);
 void    OSVReport(const char* msg, va_list list);
@@ -82,19 +90,28 @@ void    OSRegisterVersion(const char* version);
 
 void    OSFatal(GXColor front, GXColor back, const char* msg);
 
+/* Time and ticks */
+
 OSTime  OSGetTime();
 OSTick  OSGetTick();
 void    OSSleepTicks(OSTime ticks);
+
+/* Interupts */
 
 int     OSDisableInterrupts();
 int     OSEnableInterrupts();
 int     OSRestoreInterrupts(int level);
 
+/* Return to menu and shutdown */
+
 void    OSReturnToMenu();
 
-BOOL    __OSSyncSram();
+void    OSShutdownSystem();
+
+/* The rest of OS */
 
 #include <revolution/os/OSAlarm.h>
+#include <revolution/os/OSAlloc.h>
 #include <revolution/os/OSFastCast.h>
 #include <revolution/os/OSContext.h>
 #include <revolution/os/OSInterrupt.h>
@@ -105,6 +122,7 @@ BOOL    __OSSyncSram();
 #include <revolution/os/OSMessage.h>
 #include <revolution/os/OSReset.h>
 #include <revolution/os/OSResetSW.h>
+#include <revolution/os/OSRtc.h>
 #include <revolution/os/OSTime.h>
 
 #ifdef __cplusplus

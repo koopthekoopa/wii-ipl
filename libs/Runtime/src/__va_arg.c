@@ -1,4 +1,4 @@
-#include "decomp.h"
+#include <decomp.h>
 #include <stdarg.h>
 
 char* __va_arg(va_list args, _va_arg_type type) {

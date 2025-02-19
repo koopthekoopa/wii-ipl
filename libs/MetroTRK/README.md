@@ -1,4 +1,9 @@
 MetroWorks TRK Debugger
 =======================
 A decompilation of the MetroWorks TRK Debugger from the Wii Menu.
-The Wii Menu seems to not use the TRK Debugger ever, however some left overs still remain
+This is a rather minified version as the Wii Menu doesn't use a lot of TRK.
+
+Thanks to
+---------
+[projectPiki/pikmin2](https://github.com/projectPiki/pikmin2)  
+

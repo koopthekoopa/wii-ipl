@@ -1,16 +1,16 @@
 #include <decomp.h>
 
-#define save_restore_reg    r11
+#define save_restore_reg r11
 
-#define SAVE_FPR(reg) _savefpr_##reg
-#define RESTORE_FPR(reg) _restfpr_##reg
-#define SAVE_GPR(reg) _savegpr_##reg
-#define RESTORE_GPR(reg) _restgpr_##reg
+#define SAVE_FPR(reg)           _savefpr_##reg
+#define RESTORE_FPR(reg)        _restfpr_##reg
+#define SAVE_GPR(reg)           _savegpr_##reg
+#define RESTORE_GPR(reg)        _restgpr_##reg
 
-#define ENTRY_SAVE_FPR(reg) entry SAVE_FPR(reg)
-#define ENTRY_RESTORE_FPR(reg) entry RESTORE_FPR(reg)
-#define ENTRY_SAVE_GPR(reg) entry SAVE_GPR(reg)
-#define ENTRY_RESTORE_GPR(reg) entry RESTORE_GPR(reg)
+#define ENTRY_SAVE_FPR(reg)     entry SAVE_FPR(reg)
+#define ENTRY_RESTORE_FPR(reg)  entry RESTORE_FPR(reg)
+#define ENTRY_SAVE_GPR(reg)     entry SAVE_GPR(reg)
+#define ENTRY_RESTORE_GPR(reg)  entry RESTORE_GPR(reg)
 
 #pragma force_active on /* Force. */
 
@@ -97,6 +97,7 @@ const unsigned long long __constants[] = {
 };
 
 asm unsigned long __cvt_fp2unsigned(register double d) {
+#ifdef __MWERKS__
     nofralloc
 
     stwu    r1, -16(r1)
@@ -129,9 +130,11 @@ asm unsigned long __cvt_fp2unsigned(register double d) {
 @exit:
     addi    r1, r1, 0x10
     blr
+#endif
 }
 
 static asm void __save_fpr() {
+#ifdef __MWERKS__
     nofralloc
 
     ENTRY_SAVE_FPR(14)
@@ -171,9 +174,11 @@ static asm void __save_fpr() {
     ENTRY_SAVE_FPR(31)
         stfd    fp31, -8(save_restore_reg)
         blr
+#endif
 }
 
 static asm void __restore_fpr() {
+#ifdef __MWERKS__
     nofralloc
     ENTRY_RESTORE_FPR(14)
         lfd        fp14, -144(save_restore_reg)
@@ -212,9 +217,11 @@ static asm void __restore_fpr() {
     ENTRY_RESTORE_FPR(31)
         lfd        fp31, -8(save_restore_reg)
         blr
+#endif
 }
 
 static asm void __save_gpr() {
+#ifdef __MWERKS__
     nofralloc
     ENTRY_SAVE_GPR(14)
         stw        r14, -72(save_restore_reg)
@@ -253,9 +260,11 @@ static asm void __save_gpr() {
     ENTRY_SAVE_GPR(31)
         stw        r31, -4(save_restore_reg)
         blr
+#endif
 }
 
 static asm void __restore_gpr() {
+#ifdef __MWERKS__
     nofralloc
     ENTRY_RESTORE_GPR(14)
         lwz        r14, -72(save_restore_reg)
@@ -294,9 +303,11 @@ static asm void __restore_gpr() {
     ENTRY_RESTORE_GPR(31)
         lwz        r31, -4(save_restore_reg)
         blr
+#endif
 }
 
 asm void __div2u() {
+#ifdef __MWERKS__
     cmpwi r3, 0x0
     cntlzw r0, r3
     cntlzw r9, r4
@@ -365,9 +376,11 @@ L_815F9604:
     li r4, 0x0
     li r3, 0x0
     blr
+#endif
 }
 
 asm void __div2i() {
+#ifdef __MWERKS__
     stwu r1, -0x10(r1)
     clrrwi. r9, r3, 31
     beq L_815F9624
@@ -459,9 +472,11 @@ L_815F9738:
 L_815F9740:
     addi r1, r1, 0x10
     blr
+#endif
 }
 
 asm void __mod2u() {
+#ifdef __MWERKS__
     cmpwi r3, 0x0
     cntlzw r0, r3
     cntlzw r9, r4
@@ -528,9 +543,11 @@ L_815F9818:
     blr
 L_815F9828:
     blr
+#endif
 }
 
 asm void __mod2i() {
+#ifdef __MWERKS__
     cmpwi cr7, r3, 0x0
     bge cr7, L_815F983C
     subfic r4, r4, 0x0
@@ -610,9 +627,11 @@ L_815F9928:
     subfze r3, r3
 L_815F9934:
     blr
+#endif
 }
 
 asm void __shl2i() {
+#ifdef __MWERKS__
     subfic r8, r5, 0x20
     subic r9, r5, 0x20
     slw r3, r3, r5
@@ -622,9 +641,11 @@ asm void __shl2i() {
     or r3, r3, r10
     slw r4, r4, r5
     blr
+#endif
 }
 
 asm void __shr2u() {
+#ifdef __MWERKS__
     subfic r8, r5, 0x20
     subic r9, r5, 0x20
     srw r4, r4, r5
@@ -634,9 +655,11 @@ asm void __shr2u() {
     or r4, r4, r10
     srw r3, r3, r5
     blr
+#endif
 }
 
 asm void __shr2i() {
+#ifdef __MWERKS__
     subfic r8, r5, 0x20
     subic. r9, r5, 0x20
     srw r4, r4, r5
@@ -648,9 +671,11 @@ asm void __shr2i() {
 L_815F99A0:
     sraw r3, r3, r5
     blr
+#endif
 }
 
 asm void __cvt_sll_dbl() {
+#ifdef __MWERKS__
     stwu r1, -0x10(r1)
     clrrwi. r5, r3, 31
     beq L_815F99BC
@@ -699,9 +724,11 @@ L_815F9A44:
     lfd f1, 0x8(r1)
     addi r1, r1, 0x10
     blr
+#endif
 }
 
 asm void __cvt_ull_dbl() {
+#ifdef __MWERKS__
     stwu r1, -0x10(r1)
     or. r7, r3, r4
     li r6, 0x0
@@ -744,9 +771,11 @@ L_815F9AE0:
     lfd f1, 0x8(r1)
     addi r1, r1, 0x10
     blr
+#endif
 }
 
 asm void __cvt_ull_flt() {
+#ifdef __MWERKS__
     stwu r1, -0x10(r1)
     or. r7, r3, r4
     li r6, 0x0
@@ -790,9 +819,11 @@ L_815F9B7C:
     frsp f1, f1
     addi r1, r1, 0x10
     blr
+#endif
 }
 
 asm void __cvt_dbl_usll() {
+#ifdef __MWERKS__
     stwu r1, -0x10(r1)
     stfd f1, 0x8(r1)
     lwz r3, 0x8(r1)
@@ -850,9 +881,11 @@ L_815F9C48:
 L_815F9C58:
     addi r1, r1, 0x10
     blr
+#endif
 }
 
 asm void __cvt_dbl_ull() {
+#ifdef __MWERKS__
     stwu r1, -0x10(r1)
     stfd f1, 0x8(r1)
     lwz r3, 0x8(r1)
@@ -900,6 +933,5 @@ L_815F9CE0:
 L_815F9D00:
     addi r1, r1, 0x10
     blr
+#endif
 }
-
-
