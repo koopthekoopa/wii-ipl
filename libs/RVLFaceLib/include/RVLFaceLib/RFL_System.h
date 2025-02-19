@@ -7,9 +7,9 @@
 extern "C" {
 #endif
 
-u32			RFLGetWorkSize(BOOL useDeluxTex);
+u32         RFLGetWorkSize(BOOL useDeluxTex);
 
-RFLErrcode	RFLInitRes(void* workBuffer, void* resBuffer, u32 resSize, BOOL useDeluxTex);
+RFLErrcode  RFLInitRes(void* workBuffer, void* resBuffer, u32 resSize, BOOL useDeluxTex);
 
 RFLErrcode  RFLWaitAsync();
 RFLErrcode  RFLGetAsyncStatus();
@@ -19,5 +19,3 @@ RFLErrcode  RFLGetAsyncStatus();
 #endif
 
 #endif // REVOLUTION_FACE_SYSTEM_H
-
-

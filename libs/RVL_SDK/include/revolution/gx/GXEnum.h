@@ -312,13 +312,13 @@ typedef enum _GXTexFmt {
 } GXTexFmt;
 
 typedef enum _GXTexOffset {
-	GX_TO_ZERO      = 0,
-	GX_TO_SIXTEENTH = 1,
-	GX_TO_EIGHTH    = 2,
-	GX_TO_FOURTH    = 3,
-	GX_TO_HALF      = 4,
-	GX_TO_ONE       = 5,
-	GX_MAX_TEXOFFSET,
+    GX_TO_ZERO      = 0,
+    GX_TO_SIXTEENTH = 1,
+    GX_TO_EIGHTH    = 2,
+    GX_TO_FOURTH    = 3,
+    GX_TO_HALF      = 4,
+    GX_TO_ONE       = 5,
+    GX_MAX_TEXOFFSET,
 } GXTexOffset;
 
 typedef enum _GXCullMode {

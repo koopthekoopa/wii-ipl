@@ -97,6 +97,7 @@ BOOL    __OSSyncSram();
 #include <revolution/os/OSAlarm.h>
 #include <revolution/os/OSFastCast.h>
 #include <revolution/os/OSContext.h>
+#include <revolution/os/OSInterrupt.h>
 #include <revolution/os/OSCache.h>
 #include <revolution/os/OSException.h>
 #include <revolution/os/OSMutex.h>

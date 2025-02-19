@@ -222,6 +222,20 @@ config.progress_code_fancy_item = "Channels"
 config.progress_data_fancy_frac = 4096  # Amount of Wii blocks avaiable (apparenty)
 config.progress_data_fancy_item = "Blocks"
 
+cflags_includes = [
+    "-i include",
+    "-i include/decomp",
+    "-i libs/MetroTRK/include",
+    "-i libs/Runtime/include",
+    "-i libs/MSL/include",
+    "-i libs/RVL_SDK/include",
+    "-i libs/RevoEX/include",
+    "-i libs/NW4R/include",
+    "-i libs/RVLFaceLib/include",
+    "-i libs/EGG/include",
+    f"-i build/{config.version}/include",
+]
+
 # Base flags
 cflags_base = [
     "-nodefaults",
@@ -239,16 +253,7 @@ cflags_base = [
     "-fp_contract on",
     "-str reuse",
     "-enc SJIS",
-    "-i include",
-    "-i include/decomp",
-    "-i libs/Runtime/include",
-    "-i libs/MSL/include",
-    "-i libs/RVL_SDK/include",
-    "-i libs/RevoEX/include",
-    "-i libs/NW4R/include",
-    "-i libs/RVLFaceLib/include",
-    "-i libs/EGG/include",
-    f"-i build/{config.version}/include",
+    *cflags_includes,
     f"-DBUILD_VERSION={version_num}",
     f"-DVERSION_{config.version}",
 ]
@@ -270,6 +275,14 @@ cflags_ipl = [
 
 # Common SDK flags
 cflags_sdk = [
+    *cflags_base,
+    "-fp_contract off",
+    "-Cpp_exceptions off",
+    "-O4,p",
+]
+
+# NW4R flags
+cflags_nw4r = [
     *cflags_base,
     "-fp_contract off",
     "-Cpp_exceptions off",
@@ -298,11 +311,24 @@ cflags_runtime = [
 
 # MetroTRK library flags
 cflags_trk = [
-    *cflags_base,
-    "-use_lmw_stmw on",
+    "-nodefaults",
+    "-proc gekko",
+    "-align powerpc",
+    "-enum int",
+    "-fp hardware",
+    '-pragma "cats off"',
+    '-pragma "warn_notinlined off"',
+    "-maxerrors 1",
+    "-nosyspath",
+     "-Cpp_exceptions off",
+    "-RTTI off",
     "-str reuse,pool,readonly",
+    "-use_lmw_stmw on",
     "-inline deferred",
     "-sdata 0",
+    "-O4,p",
+    *cflags_includes,
+    f"-DVERSION_{config.version}",
 ]
 
 config.linker_version = "GC/3.0a5.2"
@@ -367,7 +393,7 @@ def NW4RLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
         "mw_version": config.linker_version,
-        "cflags": cflags_sdk,
+        "cflags": cflags_nw4r,
         "progress_category": "nw4r",
         "objects": objects,
         "src_dir": "libs/NW4R/src",
@@ -1769,7 +1795,7 @@ config.libs = [
             Object(NonMatching, "scutil/scutil.c"),
         ]
     ),
-    RVLSDKLib("usbcmn",
+    RVLSDKLib("usbutil",
         [
             Object(NonMatching, "usbutil/uh_ker_mem.c"),
             Object(NonMatching, "usbutil/uh_ker_msg.c"),
@@ -1917,14 +1943,14 @@ config.libs = [
     # MetroTRK library
     TRKLib("TRK_Hollywood_Revolution",
         [
-            Object(NonMatching, "Portable/msghndlr.c"),
+            Object(Matching,    "Portable/msghndlr.c"),
 
-            Object(NonMatching, "Export/targsupp.c"),
-            Object(NonMatching, "Export/mslsupp.c"),
+            Object(Matching,    "Export/targsupp.c"),
+            Object(Matching,    "Export/mslsupp.c"),
 
-            Object(NonMatching, "dolphin_Os/dolphin_trk.c"),
-            Object(NonMatching, "dolphin_Os/dolphin_trk_glue.c"),
-            Object(NonMatching, "dolphin_Os/target_options.c"),
+            Object(Matching,    "dolphin_Os/dolphin_trk.c"),
+            Object(Matching,    "dolphin_Os/dolphin_trk_glue.c"),
+            Object(Matching,    "dolphin_Os/target_options.c"),
         ]
     ),
 ]

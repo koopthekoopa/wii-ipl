@@ -1,4 +1,4 @@
-#include <decomp_ide.h>
+#include <decomp.h>
 
 #define save_restore_reg    r11
 
