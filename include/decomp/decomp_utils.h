@@ -8,6 +8,12 @@
 
 #define NO_INLINE           __attribute__((never_inline))
 
+#ifdef __MWERKS__
+#define ADDRESS(addr) : (addr)
+#else
+#define ADDRESS(addr)
+#endif
+
 #define DECOMP_FORCEACTIVE(module, ...)                                        \
     void fake_function(...);                                                   \
     void CONCAT(FORCEACTIVE##module, __LINE__)(void);                          \

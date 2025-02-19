@@ -14,9 +14,6 @@
 #include "system/iplNandShared.h"
 #include "system/iplNandMeta.h"
 
-#define NANDTitleIdLo(t)   (unsigned int)(((unsigned long long)(t)) & 0xFFFFFFFF)
-#define NANDTitleIdHi(t)   (unsigned int)((((unsigned long long)(t)) >> 32) & 0xFFFFFFFF)
-
 namespace ipl {
     namespace nand {
         class Manager {

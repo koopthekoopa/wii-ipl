@@ -132,5 +132,3 @@ BOOL        BS2StartLoadingTitle(ESTitleId titleId, ESTicketView* pTicketView);
 #endif
 
 #endif // BS2_H
-
-

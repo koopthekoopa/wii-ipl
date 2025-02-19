@@ -2,7 +2,7 @@
 
 #include <private/vf/pf_volume.h>
 #include <private/vf/pf_str.h>
-
+#pragma sym on
 void VFiPFSTR_SetCodeMode(PF_STR* p_str, u32 code_mode) {
     p_str->code_mode = code_mode;
 }
@@ -106,7 +106,7 @@ s32 VFiPFSTR_StrCmp(const PF_STR* p_str, const char* s) {
     s32 ret;
 
     if (p_str->code_mode == PF_STR_CODE_MODE_CHAR) {
-        ret = VFipf_strcmp(p_str->p_head,s);
+        ret = VFipf_strcmp(p_str->p_head, s);
     }
     else {
         wchar_t* wp = (wchar_t*)p_str->p_head;
@@ -114,7 +114,10 @@ s32 VFiPFSTR_StrCmp(const PF_STR* p_str, const char* s) {
 
         do {
             (VFipf_vol_set.codeset.oem2unicode)((char*)s, &wc); s++;
-        } while (*wp++ == wc && *(wp - 1) != 0 && wc != 0);
+            if (*wp++ != wc) {
+                break;
+            }
+        } while (*(wp - 1) != 0 && wc != 0);
 
         ret = *--wp - wc;
     }
@@ -128,7 +131,7 @@ s32 VFiPFSTR_StrNCmp(const PF_STR* p_str, const char* s, u32 target, s16 offset,
     if (p_str->code_mode == PF_STR_CODE_MODE_CHAR) {
         char *p1, *p2;
 
-        if (target == 1) {
+        if (target == PF_STR_TARGET_HEAD) {
             p1 = (char*)p_str->p_head + offset;
         }
         else {
@@ -142,7 +145,7 @@ s32 VFiPFSTR_StrNCmp(const PF_STR* p_str, const char* s, u32 target, s16 offset,
         wchar_t* wp;
         wchar_t wc;
 
-        if (target == 1) {
+        if (target == PF_STR_TARGET_HEAD) {
             wp = (wchar_t*)p_str->p_head + offset;
         }
         else {
@@ -151,7 +154,10 @@ s32 VFiPFSTR_StrNCmp(const PF_STR* p_str, const char* s, u32 target, s16 offset,
 
         do {
             (VFipf_vol_set.codeset.oem2unicode)((char*)s, &wc); s++; length--;
-        } while (*wp++ == wc && length > 0 && *(wp - 1) != 0 && wc != 0);
+            if (*wp++ != wc || length <= 0) {
+                break;
+            }
+        } while (*(wp - 1) != 0 && wc != 0);
 
         ret = *--wp - wc;
     }
@@ -179,7 +185,7 @@ void VFiPFSTR_ToUpperNStr(PF_STR* p_str, u16 num, char* dst) {
 
             dst += 2;
         }
-        *dst++ = '\0';
+        *dst++ = 0;
     }
-    *dst = '\0';
+    *dst = 0;
 }

@@ -3,12 +3,11 @@
 
 #include "scene/iplFaderSceneBase.h"
 
-#include "layout/GUIManager.h"
+SCENE_USING_GUI
 
 namespace ipl {
-    USE_GUI_MANAGER
     namespace scene {
-        FADER_SCENE_CLASS(SettingButton), public ::gui::EventHandler {
+        FADER_SCENE_GUI_CLASS(SettingButton) {
             public:
                 enum {
                     CANCEL = 0,
@@ -57,8 +56,8 @@ namespace ipl {
                 void                    start_trig_event(const char* paneName);
 
                 typedef struct Unk {
-                    int mCommand;   // 0x00
-                    u32 mMsgID;     // 0x04
+                    int command;    // 0x00
+                    u32 msgID;      // 0x04
                 } Unk;
 
                 Unk                 unk_0x64[64];
@@ -70,10 +69,10 @@ namespace ipl {
 
                 int                 mSettingType;   // 0x274
 
-                layout::Object*     mpLayout;
-                nand::LayoutFile*   mpLayoutFile;
+                layout::Object*     mpLayout;       // 0x278
+                nand::LayoutFile*   mpLayoutFile;   // 0x27C
 
-                gui::PaneManager*   mpGuiManager;
+                gui::PaneManager*   mpGui;          // 0x280
 
                 BOOL                mBtnHovered;    // 0x284
 

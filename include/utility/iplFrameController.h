@@ -12,9 +12,9 @@ namespace ipl {
     };
 
     enum {
-        ANIM_STATE_READY = 0,
+        ANIM_STATE_STOP = 0,
         ANIM_STATE_PLAY,
-        ANIM_STATE_STOP,
+        ANIM_STATE_STOP_REQ,
     };
     
     namespace utility {
@@ -30,6 +30,7 @@ namespace ipl {
                 
                 void            setMaxFrame(f32 value)      { mMaxFrame = value; }
                 f32             getMaxFrame() const         { return mMaxFrame; }
+                f32             getLastFrame() const        { return mMaxFrame - 1.0f; }
                 
                 void            setMinFrame(f32 value)      { mMinFrame = value; }
                 f32             getMinFrame() const         { return mMinFrame; }

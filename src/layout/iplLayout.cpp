@@ -9,8 +9,9 @@
 namespace ipl {
     namespace layout {
         enum {
-            FLAG_RECURSIVE = 1,
-            FLAG_PLAY_NOW = 2,  // unused
+            FLAG_NONE = 0,
+            FLAG_RECURSIVE,
+            FLAG_PLAY_NOW,  // Unused
         };
 
         Animator::Animator(nw4r::lyt::AnimTransform* animTrans, bool bRecursive, bool bPlayNow) :
@@ -26,21 +27,21 @@ namespace ipl {
             }
             else {
                 anmType = ANIM_TYPE_FORWARD;
-                maxFrame = animTrans->GetFrameSize() - 1.0f; // Exclude last frame to ensure no looping?
+                maxFrame = animTrans->GetFrameSize() - 1.0f; // Last frame
             }
 
-            utility::FrameController::init(anmType, maxFrame, 0.0, 1.0);
+            utility::FrameController::init(anmType, maxFrame, 0.0);
 
             if (bRecursive != FALSE) {
                 mFlags |= FLAG_RECURSIVE;
             }
             if (bPlayNow != FALSE) {
-                mFlags |= FLAG_PLAY_NOW; // unused
+                mFlags |= FLAG_PLAY_NOW;
             }
         }
 
         void Animator::calc() {
-            setFlag(mState != ANIM_STATE_READY);
+            setFlag(mState != ANIM_STATE_STOP);
             utility::FrameController::calc();
             setFrame();
         }
@@ -52,14 +53,14 @@ namespace ipl {
         }
 
         void Animator::initAnmFrame() {
-            mState = ANIM_STATE_STOP;
+            mState = ANIM_STATE_STOP_REQ;
             utility::FrameController::initFrame();
             setFrame();
         }
 
-        void Animator::initAnmFrame(float frame) {
+        void Animator::initAnmFrame(f32 frame) {
             mFrame = frame;
-            mState = ANIM_STATE_STOP;
+            mState = ANIM_STATE_STOP_REQ;
             setFrame();
         }
 
@@ -152,7 +153,7 @@ namespace ipl {
 
         Object::~Object() {
             Animator* anim;
-            while (anim = (Animator*)nw4r::ut::List_GetFirst(&mAnims), anim != NULL) {
+            while (anim = static_cast<Animator*>(nw4r::ut::List_GetFirst(&mAnims)), anim != NULL) {
                 nw4r::ut::List_Remove(&mAnims, anim);
                 delete anim;
             }
@@ -161,22 +162,27 @@ namespace ipl {
         }
 
         void Object::init_(const char* fileName) {
-            nw4r::ut::List_Init(&mAnims, (u16)offsetof(Animator, mLink));
+            nw4r::ut::List_Init(&mAnims, offsetof(Animator, mLink));
 
+            // Attach font data
             attach_font();
 
+            // Setup memory allocator
             nw4r::lyt::Layout::SetAllocator(&mAllocator);
 
+            // Create layout from file
             void* lytBuf = mArc.GetResource(0, fileName);
             mLayout.Build(lytBuf, &mArc);
 
+            // Setup view
             utility::Graphics::calcOrthoCamera();
+
             mDrawInfo.SetViewMtx(utility::Graphics::getViewMtx());
-            
             nw4r::ut::Rect lytRect = mLayout.GetLayoutRect();
             mDrawInfo.SetViewRect(lytRect);
             mDrawInfo.SetInvisiblePaneCalculateMtx(true);
 
+            // Adjust location for widescreen
             initLocationAdjust();
         }
 
@@ -207,11 +213,17 @@ namespace ipl {
         void Animator::bind() {}
 
         GroupAnimator* Object::bindToGroup(const char* fileName, const char* groupName, bool bRecursive, bool bPlayNow) {
-            return bind_(fileName, mLayout.GetGroupContainer()->FindGroupByName(groupName), bRecursive, bPlayNow);
+            return bind_(fileName,
+                    mLayout.GetGroupContainer()->FindGroupByName(groupName),
+                    bRecursive,
+                    bPlayNow);
         }
 
         GroupAnimator* Object::bindToGroup(const char* fileName, nw4r::lyt::Group* group, bool bRecursive, bool bPlayNow) {
-            return bind_(fileName, group, bRecursive, bPlayNow);
+            return bind_(fileName,
+                        group,
+                        bRecursive,
+                        bPlayNow);
         }
 
         GroupAnimator* Object::bind_(const char* fileName, nw4r::lyt::Group* group, bool bRecursive, bool bPlayNow) {
@@ -232,7 +244,7 @@ namespace ipl {
 
         void Object::finishBinding() {
             Animator* anim = NULL;
-            while (anim = (Animator*)nw4r::ut::List_GetNext(&mAnims, anim), anim != NULL) {
+            while (anim = static_cast<Animator*>(nw4r::ut::List_GetNext(&mAnims, anim)), anim != NULL) {
                 anim->initFrame();
                 anim->setFrame();
             }
@@ -249,7 +261,7 @@ namespace ipl {
             initLocationAdjust();
 
             Animator* anim = NULL;
-            while (anim = (Animator*)nw4r::ut::List_GetNext(&mAnims, anim), anim != NULL) {
+            while (anim = static_cast<Animator*>(nw4r::ut::List_GetNext(&mAnims, anim)), anim != NULL) {
                 anim->calc();
             }
 
@@ -281,13 +293,13 @@ namespace ipl {
             Animator* anim;
             if (animIdx == -1) {
                 anim = NULL;
-                while (anim = (Animator*)nw4r::ut::List_GetNext(&mAnims, anim), anim != NULL) {
+                while (anim = static_cast<Animator*>(nw4r::ut::List_GetNext(&mAnims, anim)), anim != NULL) {
                     anim->initFrame();
                     anim->setState(ANIM_STATE_PLAY);
                 }
             }
             else {
-                anim = (Animator*)nw4r::ut::List_GetNth(&mAnims, (u16)animIdx);
+                anim = static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, animIdx));
                 anim->initFrame();
                 anim->setState(ANIM_STATE_PLAY);
             }
@@ -297,12 +309,12 @@ namespace ipl {
             Animator* anim;
             if (animIdx == -1) {
                 anim = NULL;
-                while (anim = (Animator*)nw4r::ut::List_GetNext(&mAnims, anim), anim != NULL) {
+                while (anim = static_cast<Animator*>(nw4r::ut::List_GetNext(&mAnims, anim)), anim != NULL) {
                     anim->setMaxFrame(maxFrame);
                 }
             }
             else {
-                anim = (Animator*)nw4r::ut::List_GetNth(&mAnims, (u16)animIdx);
+                anim = static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, animIdx));
                 anim->setMaxFrame(maxFrame);
             }
         }
@@ -311,12 +323,12 @@ namespace ipl {
             Animator* anim;
             if (animIdx == -1) {
                 anim = NULL;
-                while (anim = (Animator*)nw4r::ut::List_GetNext(&mAnims, anim), anim != NULL) {
+                while (anim = static_cast<Animator*>(nw4r::ut::List_GetNext(&mAnims, anim)), anim != NULL) {
                     anim->setMinFrame(minFrame);
                 }
             }
             else {
-                anim = (Animator*)nw4r::ut::List_GetNth(&mAnims, (u16)animIdx);
+                anim = static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, animIdx));
                 anim->setMinFrame(minFrame);
             }
         }
@@ -325,12 +337,12 @@ namespace ipl {
             Animator* anim;
             if (animIdx == -1) {
                 anim = NULL;
-                while (anim = (Animator*)nw4r::ut::List_GetNext(&mAnims, anim), anim != NULL) {
+                while (anim = static_cast<Animator*>(nw4r::ut::List_GetNext(&mAnims, anim)), anim != NULL) {
                     anim->setAnimType(type);
                 }
             }
             else {
-                anim = (Animator*)nw4r::ut::List_GetNth(&mAnims, (u16)animIdx);
+                anim = static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, animIdx));
                 anim->setAnimType(type);
             }
         }
@@ -341,13 +353,12 @@ namespace ipl {
             Animator* anim;
             if (animIdx == -1) {
                 anim = NULL;
-                while (anim = (Animator*)nw4r::ut::List_GetNext(&mAnims, anim), anim != NULL) {
-                    // The bitwise OR on a boolean was probably a typo (luckily for them it does nothing different)
+                while (anim = static_cast<Animator*>(nw4r::ut::List_GetNext(&mAnims, anim)), anim != NULL) {
                     result |= anim->isPlaying();
                 }
             }
             else {
-                anim = (Animator*)nw4r::ut::List_GetNth(&mAnims, (u16)animIdx);
+                anim = static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, animIdx));
                 result = anim->isPlaying();
             }
 

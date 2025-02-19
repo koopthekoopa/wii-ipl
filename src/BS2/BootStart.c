@@ -24,6 +24,7 @@ extern void DBInit();
 void __start();
 
 __declspec(weak) asm void __start() {
+#ifdef __MWERKS__ 
     nofralloc
 
     // Init hardware
@@ -92,9 +93,11 @@ bi2_end_arg_parse:
 
     // This halts the CPU
     b       exit
+#endif
 }
 
-static asm void __init_registers() {
+asm void __init_registers() {
+#ifdef __MWERKS__
     nofralloc
     
     li  r0, 0
@@ -138,6 +141,7 @@ static asm void __init_registers() {
     ori r13, r13, _SDA_BASE_@l
 
     blr
+#endif
 }
 
 static void copy_rom_section(void* dest, void* source, unsigned int size) {
@@ -153,7 +157,7 @@ static void init_bss_section(void* dest, unsigned int size) {
     }
 }
 
-static void __init_data() {
+void __init_data() {
     __rom_copy_info* rci;
     __bss_init_info* bii;
 
@@ -177,5 +181,3 @@ static void __init_data() {
         bii++;
     }
 }
-
-

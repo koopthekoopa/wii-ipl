@@ -11,7 +11,7 @@ namespace ipl {
 
             mSpeed = speed;
 
-            mState = ANIM_STATE_READY;
+            mState = ANIM_STATE_STOP;
 
             mbAlternateBack = false;
 
@@ -37,7 +37,7 @@ namespace ipl {
                     case ANIM_TYPE_FORWARD: {
                         if ((mFrame += speed) >= mMaxFrame) {
                             mFrame = mMaxFrame;
-                            mState = ANIM_STATE_READY;
+                            mState = ANIM_STATE_STOP;
                         }
                         break;
                     }
@@ -45,7 +45,7 @@ namespace ipl {
                     case ANIM_TYPE_BACKWARD: {
                         if ((mFrame -= speed) <= mMinFrame) {
                             mFrame = mMinFrame;
-                            mState = ANIM_STATE_READY;
+                            mState = ANIM_STATE_STOP;
                         }
                         break;
                     }
@@ -77,8 +77,8 @@ namespace ipl {
                     }
                 }
             }
-            else if (mState == ANIM_STATE_STOP) {
-                mState = ANIM_STATE_READY;
+            else if (mState == ANIM_STATE_STOP_REQ) {
+                mState = ANIM_STATE_STOP;
             }
         }
     }

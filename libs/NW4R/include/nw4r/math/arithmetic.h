@@ -21,7 +21,9 @@ namespace nw4r {
         }
         
         inline f32 FAbs(register f32 x) {
-            asm { fabs x, x }
+            #ifdef __MWERKS__
+                asm { fabs x, x }
+            #endif
             return x;
         }
         

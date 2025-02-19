@@ -1,5 +1,3 @@
-#include <decomp.h>
-
 #include "system/iplSystem.h"
 
 #include <revolution/sc.h>
@@ -51,9 +49,9 @@ namespace ipl {
     }
     
     s32 System::getRegion() {
-        s32 region = SCGetProductArea();
+        s32 product = SCGetProductArea();
 
-        switch (region) {
+        switch (product) {
             // NTSC-J
             case SC_PRODUCT_AREA_JPN:
             case SC_PRODUCT_AREA_TWN: {
@@ -80,5 +78,3 @@ namespace ipl {
         }
     }
 }
-
-

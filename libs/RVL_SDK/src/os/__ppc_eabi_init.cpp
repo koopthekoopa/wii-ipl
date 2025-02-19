@@ -1,4 +1,4 @@
-#include <decomp_ide.h>
+#include <decomp.h>
 
 #include <revolution/base/PPCArch.h>
 
@@ -31,6 +31,7 @@ __declspec(section ".dtors$00") extern VoidPTR  _dtors[];
 #pragma section code_type ".init"
 
 asm void __init_hardware() {
+#ifdef __MWERKS__
     nofralloc
     
     // Floating-point on
@@ -46,9 +47,11 @@ asm void __init_hardware() {
 
     mtlr r31
     blr
+#endif
 }
 
 asm void __flush_cache(void* pAddress, unsigned int size) {
+#ifdef __MWERKS__
     lis r5, 0xFFFF
     ori r5, r5, 0xFFF1
 
@@ -70,17 +73,20 @@ loop:
     isync
 
     blr
+#endif
 }
 
 #pragma section code_type ".text"
 
 asm void __init_user() {
+#ifdef __MWERKS__
     fralloc
 
     bl __init_cpp
 
     frfree
     blr
+#endif
 }
 
 static void __init_cpp() {

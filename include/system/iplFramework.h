@@ -22,7 +22,7 @@ namespace ipl {
             void                resetRenderMode();
 
             GXRenderModeObj*    getRenderMode() const   { return mpRMode; }
-            BOOL                isWidescreen() const    { return mWideScreen; }
+            BOOL                getAspectRatio() const  { return mAspectRatio; }
             f32                 getDelta() const        { return mDelta; }
 
         private:
@@ -37,7 +37,7 @@ namespace ipl {
             int                 mCurXfb;        // 0x04
             u8*                 mpXfb[2];       // 0x08
 
-            BOOL                mWideScreen;    // 0x10
+            BOOL                mAspectRatio;   // 0x10
 
             f32                 mDelta;         // 0x14
     };

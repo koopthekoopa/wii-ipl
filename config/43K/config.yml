@@ -5,7 +5,6 @@ splits: 'config/43K/splits.txt'
 
 ldscript_template: ldscript_ipl2.lcf
 
-symbols_known: false
 quick_analysis: true
 fill_gaps: false
 
@@ -55,8 +54,24 @@ extract:
       header: backToWiiMenu_arc.inc
 
     - symbol: axDspSlave
-      binary: axDspSlave.bin
+      binary: ax\dspSlave.bin
       header: axDspSlave.inc
+
+    - symbol: ca_dpki
+      binary: certs\ca_dpki.cert
+      header: ca_dpki_cert.inc
+
+    - symbol: ca_ppki
+      binary: certs\ca_ppki.cert
+      header: ca_ppki_cert.inc
+
+    - symbol: ms_dpki
+      binary: certs\ms_dpki.cert
+      header: ms_dpki_cert.inc
+
+    - symbol: ms_ppki
+      binary: certs\ms_ppki.cert
+      header: ms_ppki_cert.inc
 
 # fix up bss nightmare from the generated dol
 block_relocations:

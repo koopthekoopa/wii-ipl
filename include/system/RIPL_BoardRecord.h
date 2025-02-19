@@ -1,5 +1,5 @@
-#ifndef IPL_MESSAGE_BOARD_H
-#define IPL_MESSAGE_BOARD_H
+#ifndef REVOLUTION_IPL_BOARD_H
+#define REVOLUTION_IPL_BOARD_H
 
 #include <revolution/types.h>
 
@@ -26,6 +26,4 @@ extern void         RBRGetPosRect(f32* left, f32* right, f32* top, f32* bottom);
 }
 #endif
 
-#endif // IPL_MESSAGE_BOARD_H
-
-
+#endif // REVOLUTION_IPL_BOARD_H

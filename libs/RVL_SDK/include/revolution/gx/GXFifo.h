@@ -11,7 +11,7 @@ extern "C" {
 
 #define GXFIFO_ADDR 0xCC008000
 
-volatile PPCWGPipe GXWGFifo : GXFIFO_ADDR;
+volatile PPCWGPipe GXWGFifo ADDRESS(GXFIFO_ADDR);
 
 static inline void GXPosition2f32(const f32 x, const f32 y) {
 	GXWGFifo.f32 = x;

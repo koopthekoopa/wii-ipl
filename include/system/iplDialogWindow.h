@@ -10,33 +10,40 @@
 #include "layout/GUIManager.h"
 #include "layout/iplLayout.h"
 
+#define DIALOG_WINDOW_PAGE(msgID, rBtnMsgId, lBtnMsgId, isTwoBtn) \
+    { msgID, rBtnMsgId, lBtnMsgId, isTwoBtn, NULL, 0, false }
+
+#define DIALOG_WINDOW_PAGE_EX(msgID, rBtnMsgId, lBtnMsgId, isTwoBtn, layoutObj, layoutYOff, isLytAnim) \
+    { msgID, rBtnMsgId, lBtnMsgId, isTwoBtn, layoutObj, layoutYOff, isLytAnim }
+
 namespace ipl {
-    USE_GUI_MANAGER
+    USING_GUI
     class DialogWindow : public ::gui::EventHandler {
         public:
             enum {
                 RESULT_NONE = -1,
-                RESULT_WAIT,                                 /* For `callBtn0` */
-                RESULT_BUTTON,                               /* For `callBtn1` */
-                RESULT_RIGHT_BUTTON = RESULT_BUTTON,          /* For `callBtn2` */
-                RESULT_LEFT_BUTTON,                         /* For `callBtn2` */
-                RESULT_TOP_BUTTON,                           /* For `callBtn3` */
-                RESULT_MIDDLE_BUTTON,                        /* For `callBtn3` */
-                RESULT_BOTTOM_BUTTON,                        /* For `callBtn3` */
+
+                RESULT_WAIT,                            /* For `callBtn0` */
+                RESULT_BUTTON,                          /* For `callBtn1` */
+                RESULT_RIGHT_BUTTON = RESULT_BUTTON,    /* For `callBtn2` */
+                RESULT_LEFT_BUTTON,                     /* For `callBtn2` */
+                RESULT_TOP_BUTTON,                      /* For `callBtn3` */
+                RESULT_MIDDLE_BUTTON,                   /* For `callBtn3` */
+                RESULT_BOTTOM_BUTTON,                   /* For `callBtn3` */
                 RESULT_TERMINATED,
-                RESULT_PROGRESS,                             /* For `callBtnPrg` */
+                RESULT_PROGRESS,                        /* For `callBtnPrg` */
             };
 
             typedef struct Page {
-                u32                     mMsgId;         // 0x00
-                u32                     mRBtnMsgId;     // 0x04
-                u32                     mLBtnMsgId;     // 0x08
-                bool                    mbTwoBtn;       // 0x0C
+                u32                     msgID;      // 0x00
+                u32                     rBtnMsgId;  // 0x04
+                u32                     lBtnMsgId;  // 0x08
+                bool                    isTwoBtn;   // 0x0C
 
-                ipl::layout::Object*    mpLayout;       // 0x10
+                ipl::layout::Object*    layoutObj;  // 0x10
 
-                f32                     mLayoutY;       // 0x14
-                bool                    mbAnimLayout;   // 0x18
+                f32                     layoutYOff; // 0x14
+                bool                    isLytAnim;  // 0x18
             } Page;
 
             /** @param heap The work heap used. */
@@ -60,7 +67,7 @@ namespace ipl {
 
             BOOL            callBtn2(u32 msgId, u32 rBtnId, u32 lBtnId, bool bSwapSound = false);
             BOOL            callBtn2(const wchar_t* msg, u32 rBtnId, u32 lBtnId, bool bSwapSound = false);
-            BOOL            callBtn2(Page* pages, int pageCount, int fadeSpeed);
+            BOOL            callBtn2(Page* pages, int pageCount, int fadeDelay);
             BOOL            callBtn2NoShade(const wchar_t* msg, u32 rBtnId, u32 lBtnId, bool bSwapSound = false);
 
             BOOL            callBtn3(u32 msgId, u32 tBtnId, u32 cBtnID, u32 bBtnId);
@@ -133,10 +140,11 @@ namespace ipl {
             void start_left_event(const char* paneName);
             void start_trig_event(const char* paneName);
             
-            u32                     mState;                             // 0x0C
+            int                     mState;                             // 0x0C
             ipl::nand::LayoutFile*  mpLayoutFile;                       // 0x10
 
-            int                     mBtnHovered[DIALOG_BTN_TYPE_MAX];   // 0x14
+            BOOL                    mbBtnHovered[DIALOG_BTN_TYPE_MAX];  // 0x14
+
             int                     mResult;                            // 0x20
             int                     mLastResult;                        // 0x24
         
@@ -163,8 +171,8 @@ namespace ipl {
 
             layout::Object*         mpCustomLayout;                     // 0x7C
             nw4r::math::VEC2        mCustomLayoutPos;                   // 0x80
-            Page*                   mpDialogPages;                      // 0x88
-            int                     mDialogPageCount;                   // 0x8C
+            Page*                   mpPages;                            // 0x88
+            int                     mPageCount;                         // 0x8C
             int                     mCurPage;                           // 0x90
             int                     mPrevPage;                          // 0x94
 

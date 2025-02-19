@@ -18,7 +18,7 @@ u8* RBRGetPicture(u32* rbrData, s32* dataSize) {
         u32 index = 0;
         u32 count = 2;
 
-        while(count--) {
+        while (count--) {
             RBRSomeData* data = (RBRSomeData*)&rbrData[index];
 
             if (data->type == RBR_IMAGE_TYPE) {

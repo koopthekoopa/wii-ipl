@@ -8,10 +8,10 @@ namespace ipl {
     namespace scene {
         void Command::clear() {
             memset(this, 0, sizeof(Command));
-            mType = 0;
-            mNewRootID = 0;
-            mPrevSceneID = 0;
-            mNewSceneID = 0;
+            type = 0;
+            newRootID = 0;
+            prevSceneID = 0;
+            newSceneID = 0;
         }
 
         Manager::Manager(EGG::Heap* heap) :
@@ -58,7 +58,7 @@ namespace ipl {
             else {
                 if (mCommands.get_current_index() != 0) {
                     const Command& popped = mCommands.get_popped_item();
-                    switch (popped.mType) {
+                    switch (popped.type) {
                         case COMMAND_CREATE_CHILD: {
                             createScene(popped);
                             mbCreatedReserved = true;
@@ -73,13 +73,13 @@ namespace ipl {
                         case COMMAND_RESERVE_ALL_DESTRUCT: {
                             if (mbDestroySyncTask) {
                                 mPrevRootSceneID = mRootSceneID;
-                                mRootSceneID = popped.mNewRootID;
+                                mRootSceneID = popped.newRootID;
 
                                 destroyScene(mpRootScene);
 
                                 System::reinit();
 
-                                createRootScene(popped.mNewRootID, popped.mArgs);
+                                createRootScene(popped.newRootID, popped.args);
                                 mCommands.pop();
 
                                 mbDestroySyncTask = false;
@@ -159,7 +159,7 @@ namespace ipl {
                     stack18.setPtr(stack18->getParent());
                 }
                 if ((stack10->unk_0x2C & 2) != 0) {
-                    if (mReservedCommand.mPrevSceneID == stack10->mSceneID) {
+                    if (mReservedCommand.prevSceneID == stack10->mSceneID) {
                         mbCreatedReserved = true;
                     }
                     destroyScene(&*stack10);
@@ -169,7 +169,7 @@ namespace ipl {
         }
 
         void Manager::createScene(const Command& command) {
-            mpReservedScene = createScene(command.mNewSceneID, command.mPrevSceneID, command.mArgs);
+            mpReservedScene = createScene(command.newSceneID, command.prevSceneID, command.args);
             mReservedCommand = command;
             mbCreatedReserved = false;
             mpReservedScene->do_prepare();
@@ -209,7 +209,6 @@ namespace ipl {
         }
 
         void destruct_sync_task_(void* work) {
-            #pragma unused(work)
             static_cast<Manager*>(work)->doDestructSync();
         }
 
@@ -229,14 +228,14 @@ namespace ipl {
         }
 
         void Manager::attachReservedScene() {
-            if (isReady(mReservedCommand.mNewSceneID) || mpReservedScene && mpReservedScene->isReady()) {
-                SceneObj* scene = mReservedCommand.mParent;
+            if (isReady(mReservedCommand.newSceneID) || mpReservedScene && mpReservedScene->isReady()) {
+                SceneObj* scene = mReservedCommand.parent;
                 if (!scene) {
                     scene = mpRootScene;
                 }
 
-                if (mReservedCommand.mChild) {
-                    scene->insert(mpReservedScene, mReservedCommand.mChild);
+                if (mReservedCommand.child) {
+                    scene->insert(mpReservedScene, mReservedCommand.child);
                 }
                 else {
                     scene->attach(mpReservedScene);

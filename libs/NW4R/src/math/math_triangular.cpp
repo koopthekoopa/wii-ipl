@@ -333,8 +333,7 @@ namespace nw4r {
             u16 whole = F32ToU16(abs_fidx);
             f32 frac = abs_fidx - U16ToF32(whole);
 
-            f32 sin = sSinCosTbl[whole & 255].sin_val +
-                    frac * sSinCosTbl[whole & 255].sin_delta;
+            f32 sin = sSinCosTbl[whole & 255].sin_val + frac * sSinCosTbl[whole & 255].sin_delta;
 
             return (fidx < 0.0f) ? -sin : sin;
         }
@@ -349,19 +348,35 @@ namespace nw4r {
             u16 whole = F32ToU16(abs_fidx);
             f32 frac = abs_fidx - U16ToF32(whole);
 
-            f32 cos = sSinCosTbl[whole & 255].cos_val +
-                    frac * sSinCosTbl[whole & 255].cos_delta;
+            f32 cos = sSinCosTbl[whole & 255].cos_val + frac * sSinCosTbl[whole & 255].cos_delta;
 
             return cos;
         }
 
+        f32 AtanFIdx(f32 x) {
+            if (x >= 0.0f) {
+                if (x > 1.0f) {
+                    return 64.0f - AtanFIdx_(1.0f / x);
+                } else {
+                    return AtanFIdx_(x);
+                }
+            } else {
+                if (x < -1.0f) {
+                    return AtanFIdx_(-1.0f / x) + -64.0f;
+                } else {
+                    return -AtanFIdx_(-x);
+                }
+            }
+        }
+
         f32 Atan2FIdx(f32 y, f32 x) {
-            f32 a, b, c;
+            f32 a;
+            f32 b;
+            f32 c;
             bool minus;
 
-            if (x == 0.0f && y == 0.0f) {
+            if (x == 0.0f && y == 0.0f)
                 return 0.0f;
-            }
 
             if (x >= 0.0f) {
                 if (y >= 0.0f) {
@@ -369,61 +384,70 @@ namespace nw4r {
                         a = x;
                         b = y;
                         c = 0.0f;
+
                         minus = false;
-                    } else {
+                    }
+                    else {
                         a = y;
                         b = x;
                         c = 64.0f;
+
                         minus = true;
                     }
-                } else {
+                }
+                else {
                     if (x >= -y) {
-                        a = x;
+                        a =  x;
                         b = -y;
                         c = 0.0f;
+
                         minus = true;
-                    } else {
+                    }
+                    else {
                         a = -y;
-                        b = x;
+                        b =  x;
                         c = -64.0f;
+
                         minus = false;
                     }
                 }
-            } else {
+            }
+            else {
                 if (y >= 0.0f) {
                     if (-x >= y) {
                         a = -x;
-                        b = y;
+                        b =  y;
                         c = 128.0f;
+
                         minus = true;
-                    } else {
-                        a = y;
+                    }
+                    else {
+                        a =  y;
                         b = -x;
                         c = 64.0f;
+
                         minus = false;
                     }
-                } else {
+                }
+                else {
                     if (-x >= -y) {
                         a = -x;
                         b = -y;
                         c = -128.0f;
+
                         minus = false;
-                    } else {
+                    }
+                    else {
                         a = -y;
                         b = -x;
                         c = -64.0f;
+
                         minus = true;
                     }
                 }
             }
 
-            if (minus) {
-                return c - AtanFIdx_(b / a);
-            } else {
-                return c + AtanFIdx_(b / a);
-            }
+            return minus ? c - AtanFIdx_(b / a) : c + AtanFIdx_(b / a);
         }
     }
 }
-
-

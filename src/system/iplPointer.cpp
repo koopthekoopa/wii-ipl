@@ -5,11 +5,6 @@
 #include <nw4r/lyt.h>
 
 #include "system/iplSystem.h"
-#include "system/iplNand.h"
-
-#include "utility/iplUtility.h"
-
-#include "iplMath.h"
 
 namespace ipl {
     #define MIN_LENGTH    32.f
@@ -138,5 +133,3 @@ namespace ipl {
         return mpLayout[grabId + chan];
     }
 }
-
-

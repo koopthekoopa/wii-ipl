@@ -6,18 +6,20 @@ namespace nw4r {
             register float a, b, c;
             a = 0.0f;
             b = 1.0f;
-            asm {
-                psq_st a, 8(pMtx), 0, 0
-                ps_merge01 c, a, b
-                ps_merge10 b, b, a
-                psq_st a, 24(pMtx), 0, 0
-                psq_st a, 32(pMtx), 0, 0
-                psq_st c, 16(pMtx), 0, 0
-                psq_st b, 0(pMtx), 0, 0
-                psq_st b, 40(pMtx), 0, 0
-                psq_st a, 48(pMtx), 0, 0
-                psq_st c, 56(pMtx), 0, 0
-            }
+            #ifdef __MWERKS__
+                asm {
+                    psq_st a, 8(pMtx), 0, 0
+                    ps_merge01 c, a, b
+                    ps_merge10 b, b, a
+                    psq_st a, 24(pMtx), 0, 0
+                    psq_st a, 32(pMtx), 0, 0
+                    psq_st c, 16(pMtx), 0, 0
+                    psq_st b, 0(pMtx), 0, 0
+                    psq_st b, 40(pMtx), 0, 0
+                    psq_st a, 48(pMtx), 0, 0
+                    psq_st c, 56(pMtx), 0, 0
+                }
+            #endif
         }
 
         VEC4* VEC4Transform(VEC4* pOut, const MTX44* pM, const VEC4* pV) {

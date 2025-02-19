@@ -1,14 +1,10 @@
 #include "layout/GUIManager.h"
-#include "revolution/mtx.h"
-#include "revolution/mtx/GeoTypes.h"
 
 #include <revolution/gx.h>
 
 #include <new>
 
 void drawLine_(f32 x0, f32 y0, f32 x1, f32 y1, f32 z, u8 width, GXColor& color) {
-    Mtx mtx;
-    
     GXClearVtxDesc();
     GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
     GXSetVtxDesc(GX_VA_CLR0, GX_DIRECT);
@@ -28,6 +24,7 @@ void drawLine_(f32 x0, f32 y0, f32 x1, f32 y1, f32 z, u8 width, GXColor& color) 
 
     GXSetBlendMode(GX_BM_NONE, GX_BL_ZERO, GX_BL_ZERO, GX_LO_NOOP);
 
+    Mtx mtx;
     PSMTXTrans(mtx, 0.0f, 0.0f, 0.0f);
     GXLoadPosMtxImm(mtx, 0);
 
@@ -66,7 +63,7 @@ namespace gui {
                 if (isPointed(point)) {
                     setPointed(point, false);
                     offPoint(point);
-                    mpManager->onEvent(getID(), EventHandler::ON_OFFPOINT, point, data);
+                    mpManager->onEvent(getID(), EventHandler::ON_LEFT, point, data);
                 }
             }
 
@@ -87,26 +84,26 @@ namespace gui {
     }
 
     Manager::~Manager() {
-        ComponentID* componentID = (ComponentID*)nw4r::ut::List_GetFirst(&mComponents);
-        while (componentID) {
+        IDToComponent* p = static_cast<IDToComponent*>(nw4r::ut::List_GetFirst(&mComponents));
+        while (p != NULL) {
             // Remove them from the list
-            nw4r::ut::List_Remove(&mComponents, componentID);
+            nw4r::ut::List_Remove(&mComponents, p);
             // Then delete them from memory.
             if (mpAllocator) {
-                MEMFreeToAllocator(mpAllocator, componentID);
+                MEMFreeToAllocator(mpAllocator, p);
             }
             else {
-                delete componentID;
+                delete p;
             }
             // Next component to kill!
-            componentID = (ComponentID*)nw4r::ut::List_GetFirst(&mComponents);
+            p = static_cast<IDToComponent*>(nw4r::ut::List_GetFirst(&mComponents));
         }
     }
 
     void Manager::init() {
         for (u32 i = 0; i < nw4r::ut::List_GetSize(&mComponents); i++) {
-            ComponentID* componentID = (ComponentID*)nw4r::ut::List_GetNth(&mComponents, (u16)i);
-            componentID->mpComponent->init();
+            IDToComponent* p = static_cast<IDToComponent*>(nw4r::ut::List_GetNth(&mComponents, (u16)i));
+            p->mpComponent->init();
         }
     }
 
@@ -115,33 +112,33 @@ namespace gui {
 
         component->setManager(this);
         if (mpAllocator) {
-            void* allocCompID = MEMAllocFromAllocator(mpAllocator, sizeof(ComponentID));
-            ComponentID* componentID = new(allocCompID) ComponentID(id, component);
-            nw4r::ut::List_Append(&mComponents, componentID);
+            void* pBuf = MEMAllocFromAllocator(mpAllocator, sizeof(IDToComponent));
+            IDToComponent* p = new(pBuf) IDToComponent(id, component);
+            nw4r::ut::List_Append(&mComponents, p);
         }
         else {
-            ComponentID* componentID = new ComponentID(id, component);
-            nw4r::ut::List_Append(&mComponents, componentID);
+            IDToComponent* p = new IDToComponent(id, component);
+            nw4r::ut::List_Append(&mComponents, p);
         }
     }
 
     Component* Manager::getComponent(u32 id) {
-        ComponentID* componentID = (ComponentID*)nw4r::ut::List_GetNth(&mComponents, (u16)id);
-        return componentID->mpComponent;
+        IDToComponent* p = static_cast<IDToComponent*>(nw4r::ut::List_GetNth(&mComponents, (u16)id));
+        return p->mpComponent;
     }
 
     bool Manager::update(int point, f32 x, f32 y, u32 trig, u32 hold, u32 release, void* data) {
         bool touched = false;
 
         Component* triggerCom = NULL;
-        for (ComponentID* componentID = (ComponentID*)nw4r::ut::List_GetFirst(&mComponents); componentID != NULL;
-        componentID = (ComponentID*)nw4r::ut::List_GetNext(&mComponents, componentID)) {
+        for (IDToComponent* p = static_cast<IDToComponent*>(nw4r::ut::List_GetFirst(&mComponents)); p != NULL;
+        p = static_cast<IDToComponent*>(nw4r::ut::List_GetNext(&mComponents, p))) {
 
-            bool touchedCom = componentID->mpComponent->update(point, x, y, trig, hold, release, data);
+            bool touchedCom = p->mpComponent->update(point, x, y, trig, hold, release, data);
 
             if (touchedCom) {
-                if (componentID->mpComponent->isTriggerTarger()) {
-                    triggerCom = componentID->mpComponent;
+                if (p->mpComponent->isTriggerTarger()) {
+                    triggerCom = p->mpComponent;
                 }
                 touched = true;
             }
@@ -163,54 +160,54 @@ namespace gui {
 
     void Manager::calc() {
         for (u32 i = 0; i < nw4r::ut::List_GetSize(&mComponents); i++) {
-            ComponentID* componentID = (ComponentID*)nw4r::ut::List_GetNth(&mComponents, (u16)i);
-            componentID->mpComponent->calc();
+            IDToComponent* p = static_cast<IDToComponent*>(nw4r::ut::List_GetNth(&mComponents, (u16)i));
+            p->mpComponent->calc();
         }
     }
 
     void Manager::draw() {
         for (u32 i = 0; i < nw4r::ut::List_GetSize(&mComponents); i++) {
-            ComponentID* componentID = (ComponentID*)nw4r::ut::List_GetNth(&mComponents, (u16)i);
-            componentID->mpComponent->draw();
+            IDToComponent* p = static_cast<IDToComponent*>(nw4r::ut::List_GetNth(&mComponents, (u16)i));
+            p->mpComponent->draw();
         }
     }
 
     void Manager::setAllComponentTriggerTarget(bool bEnable) {
         for (u32 i = 0; i < nw4r::ut::List_GetSize(&mComponents); i++) {
-            ComponentID* componentID = (ComponentID*)nw4r::ut::List_GetNth(&mComponents, (u16)i);
-            componentID->mpComponent->setTriggerTarget(bEnable);
+            IDToComponent* p = static_cast<IDToComponent*>(nw4r::ut::List_GetNth(&mComponents, (u16)i));
+            p->mpComponent->setTriggerTarget(bEnable);
         }
     }
 
     void Manager::setDraggingButton(u32 dragBtn) {
         for (u32 i = 0; i < nw4r::ut::List_GetSize(&mComponents); i++) {
-            ComponentID* componentID = (ComponentID*)nw4r::ut::List_GetNth(&mComponents, (u16)i);
-            componentID->mpComponent->setDraggingButton(dragBtn);
+            IDToComponent* p = static_cast<IDToComponent*>(nw4r::ut::List_GetNth(&mComponents, (u16)i));
+            p->mpComponent->setDraggingButton(dragBtn);
         }
     }
 
-    u32 PaneManager::suIDCounter = 0;
-
     PaneManager::~PaneManager() {
-        PaneComponentID* componentID = (PaneComponentID*)nw4r::ut::List_GetFirst(&mPaneComponents);
-        while (componentID) {
+        PaneToComponent* p = static_cast<PaneToComponent*>(nw4r::ut::List_GetFirst(&mPaneComponents));
+        while (p) {
             // Remove them from the list
-            nw4r::ut::List_Remove(&mPaneComponents, componentID);
+            nw4r::ut::List_Remove(&mPaneComponents, p);
             // Then delete them from memory.
             if (mpAllocator) {
-                MEMFreeToAllocator(mpAllocator, componentID->mpComponent);
-                MEMFreeToAllocator(mpAllocator, componentID);
+                MEMFreeToAllocator(mpAllocator, p->mpComponent);
+                MEMFreeToAllocator(mpAllocator, p);
             }
             else {
-                delete componentID->mpComponent;
-                delete componentID;
+                delete p->mpComponent;
+                delete p;
             }
             // Next component to kill!
-            componentID = (PaneComponentID*)nw4r::ut::List_GetFirst(&mPaneComponents);
+            p = static_cast<PaneToComponent*>(nw4r::ut::List_GetFirst(&mPaneComponents));
         }
     }
 
     Component::~Component() {} // Wouldn't auto generate
+
+    u32 PaneManager::suIDCounter = 0;
 
     void PaneManager::createLayoutScene(const nw4r::lyt::Layout& layout) {
         suIDCounter = 0;
@@ -218,46 +215,46 @@ namespace gui {
     }
 
     void PaneManager::walkInChildren(nw4r::lyt::PaneList& paneList) {
-        PaneComponent*   component;
-        PaneComponentID* componentID;
+        PaneComponent*   pPaneComponent;
+        PaneToComponent* pPaneToComponent;
 
         for (nw4r::lyt::PaneList::Iterator it = paneList.GetBeginIter(); it != paneList.GetEndIter(); it++) {
             // Create the component and it's ID
             if (mpAllocator) {
-                void* allocComp   = MEMAllocFromAllocator(mpAllocator, sizeof(PaneComponent));
-                void* allocCompID = MEMAllocFromAllocator(mpAllocator, sizeof(PaneComponentID));
-                component   = new(allocComp) PaneComponent(suIDCounter);
-                componentID = new(allocCompID) PaneComponentID(&*it, component);
+                void* pComBuf       = MEMAllocFromAllocator(mpAllocator, sizeof(PaneComponent));
+                void* pBuf          = MEMAllocFromAllocator(mpAllocator, sizeof(PaneToComponent));
+                pPaneComponent      = new(pComBuf) PaneComponent(suIDCounter);
+                pPaneToComponent    = new(pBuf) PaneToComponent(&*it, pPaneComponent);
             }
             else {
-                component   = new PaneComponent(suIDCounter);
-                componentID = new PaneComponentID(&*it, component);
+                pPaneComponent      = new PaneComponent(suIDCounter);
+                pPaneToComponent    = new PaneToComponent(&*it, pPaneComponent);
             }
 
             // Append it
-            nw4r::ut::List_Append(&mPaneComponents, componentID);
+            nw4r::ut::List_Append(&mPaneComponents, pPaneToComponent);
             suIDCounter++;
 
-            component->setPane(&*it);
+            pPaneComponent->setPane(&*it);
 
             // Trigger target for pictures panes
             if (nw4r::ut::DynamicCast<nw4r::lyt::Picture*>(&*it)) {
-                component->setTriggerTarget(true);
+                pPaneComponent->setTriggerTarget(true);
             }
             if (nw4r::ut::DynamicCast<nw4r::lyt::Window*>(&*it)) {
-                component->setTriggerTarget(true);
+                pPaneComponent->setTriggerTarget(true);
             }
 
-            addComponent(component);
+            addComponent(pPaneComponent);
             walkInChildren(it->GetChildList());
         }
     }
 
     PaneComponent* PaneManager::getPaneComponentByPane(nw4r::lyt::Pane* pane) {
         for (u32 i = 0; i < nw4r::ut::List_GetSize(&mComponents); i++) {
-            PaneComponentID* componentID = (PaneComponentID*)nw4r::ut::List_GetNth(&mPaneComponents, (u16)i);
-            if (componentID->mpPane == pane) {
-                return componentID->mpComponent;
+            PaneToComponent* p = static_cast<PaneToComponent*>(nw4r::ut::List_GetNth(&mPaneComponents, (u16)i));
+            if (p->mpPane == pane) {
+                return p->mpComponent;
             }
         }
         return NULL;
@@ -265,9 +262,9 @@ namespace gui {
 
     void PaneManager::setAllBoundingBoxComponentTriggerTarget(bool bEnable) {
         for (u32 i = 0; i < nw4r::ut::List_GetSize(&mComponents); i++) {
-            PaneComponentID* componentID = (PaneComponentID*)nw4r::ut::List_GetNth(&mPaneComponents, (u16)i);
-            if (nw4r::ut::DynamicCast<nw4r::lyt::Bounding*>(componentID->mpPane)) {
-                componentID->mpComponent->setTriggerTarget(bEnable);
+            PaneToComponent* p = static_cast<PaneToComponent*>(nw4r::ut::List_GetNth(&mPaneComponents, (u16)i));
+            if (nw4r::ut::DynamicCast<nw4r::lyt::Bounding*>(p->mpPane)) {
+                p->mpComponent->setTriggerTarget(bEnable);
             }
         }
     }
@@ -279,7 +276,7 @@ namespace gui {
         }
 
         // Abort if no draw info
-        const nw4r::lyt::DrawInfo* drawInfo = ((PaneManager*)mpManager)->getDrawInfo();
+        const nw4r::lyt::DrawInfo* drawInfo = static_cast<PaneManager*>(mpManager)->getDrawInfo();
         if (drawInfo == NULL) {
             return false;
         }
@@ -303,7 +300,7 @@ namespace gui {
     }
 
     void PaneComponent::draw() {
-        if (((PaneManager*)mpManager)->getDrawInfo()) {
+        if (static_cast<PaneManager*>(mpManager)->getDrawInfo()) {
             nw4r::lyt::Size             size = mpPane->GetSize();
             const nw4r::math::MTX34&    mtx = mpPane->GetGlobalMtx();
 
@@ -318,6 +315,7 @@ namespace gui {
                 color.b = 255;
             }
 
+            // Draw box
             drawLine_(x - size.width / 2, y - size.height / 2, x + size.width / 2, y - size.height / 2, 0, 8, color);
             drawLine_(x + size.width / 2, y - size.height / 2, x + size.width / 2, y + size.height / 2, 0, 8, color);
             drawLine_(x + size.width / 2, y + size.height / 2, x - size.width / 2, y + size.height / 2, 0, 8, color);

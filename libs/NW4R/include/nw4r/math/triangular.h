@@ -3,7 +3,7 @@
 
 #include <revolution/types.h>
 
-#include <nw4r/math/triangular.h>
+#include <nw4r/math/arithmetic.h>
 
 #include <cmath>
 
@@ -44,6 +44,14 @@ namespace nw4r {
             return CosFIdx(NW4R_MATH_RAD_TO_FIDX(rad));
         }
 
+        f32 AtanFIdx(f32 x);
+        inline f32 AtanDeg(f32 x)  {
+            return NW4R_MATH_FIDX_TO_DEG(AtanFIdx(x));
+        }
+        inline f32 AtanRad(f32 x) {
+            return NW4R_MATH_FIDX_TO_RAD(AtanFIdx(x));
+        }
+
         f32 Atan2FIdx(f32 y, f32 x);
         inline f32 Atan2Deg(f32 y, f32 x)  {
             return NW4R_MATH_FIDX_TO_DEG(Atan2FIdx(y, x));
@@ -55,5 +63,3 @@ namespace nw4r {
 }
 
 #endif // NW4R_MATH_TRIANGULAR_H
-
-

@@ -34,8 +34,12 @@ compile_commands.json
 
 # Miscellaneous
 progress/*
+hbprojs/*
 /*.txt
 *.exe
 *.lnk
 *.bat
+*.bak
 *.log
+*.zip
+*.7z

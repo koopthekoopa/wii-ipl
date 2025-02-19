@@ -24,19 +24,20 @@ namespace ipl {
             ES_SetUid(SYSMENU_TITLE_ID);
 
             s32 ret;
+
             // Open content archive
             mDescriptor = ES_OpenContentFile(SYSMENU_CONTENT_ID);
             if (mDescriptor < 0) {
                 System::err_log("ES", mDescriptor, 43);
-                System::err_display(MESG_ERR_CONTENT);
+                System::err_display(MESG_ERR_FILE);
             }
 
             // Read archive header
-            ARCHeader header ATTRIBUTE_ALIGN(DEFAULT_ALIGN);
+            ARCHeader header ALIGN32;
             ret = ES_ReadContentFile(mDescriptor, &header, sizeof(ARCHeader));
             if (ret < ES_ERR_OK) {
                 System::err_log("ES", ret, 52);
-                System::err_display(MESG_ERR_CONTENT);
+                System::err_display(MESG_ERR_FILE);
             }
 
             // @BUG Should allocate buffer with fstSize instead of fileStart
@@ -48,14 +49,14 @@ namespace ipl {
             ret = ES_SeekContentFile(mDescriptor, 0, NAND_SEEK_BEG);
             if (ret < ES_ERR_OK) {
                 System::err_log("ES", ret, 66);
-                System::err_display(MESG_ERR_CONTENT);
+                System::err_display(MESG_ERR_FILE);
             }
 
             // Read file system table
             ret = ES_ReadContentFile(mDescriptor, mpFSTBuffer, bufSize);
             if (ret < ES_ERR_OK) {
                 System::err_log("ES", ret, 72);
-                System::err_display(MESG_ERR_CONTENT);
+                System::err_display(MESG_ERR_FILE);
             }
 
             // Setup ARC with the read file system table
@@ -69,7 +70,7 @@ namespace ipl {
             s32 ret = ES_CloseContentFile(mDescriptor);
             if (ret != ES_ERR_OK) {
                 System::err_log("ES", ret, 102);
-                System::err_display(MESG_ERR_CONTENT);
+                System::err_display(MESG_ERR_FILE);
             }
             mDescriptor = -1;
         }
@@ -77,6 +78,7 @@ namespace ipl {
         File* Manager::readAsync(EGG::Heap* heap, const char* fileName, int offset, u32 length, bool bJamRequest) {
             char fullName[NAND_MAX_PATH + 1];
 
+            // Set up path
             strncpy(fullName, mNandPath, sizeof(mNandPath));
             strncat(fullName, fileName, sizeof(mNandPath) - strlen(fullName));
 
@@ -95,6 +97,7 @@ namespace ipl {
         File* Manager::read(EGG::Heap* heap, const char* fileName, int offset, u32 length, bool bJamRequest) {
             char fullName[NAND_MAX_PATH + 1];
 
+            // Set up path
             strncpy(fullName, mNandPath, sizeof(mNandPath));
             strncat(fullName, fileName, sizeof(mNandPath) - strlen(fullName));
 
@@ -116,7 +119,7 @@ namespace ipl {
         MetaFile* Manager::readMetaHeaderAsync(EGG::Heap* heap, ESTitleId titleId, int offset, u32 length, MetaFile::Callback callback, void* callbackWork, int ticketIdx) {
             MetaFile* file = new(heap, CLASS_HEAP) MetaFile(heap, "", NULL, titleId, offset, length, callback, callbackWork, ticketIdx);
 
-            System::getNandMetaTask()->request(doReadTask, file, NULL);
+            System::getNandTask()->request(doReadTask, file, NULL);
 
             return file;
         }
@@ -153,7 +156,8 @@ namespace ipl {
 
         LayoutFile* Manager::readLayout_(EGG::Heap* heap, const char* fileName, ARCHandle* arc, bool bIsNand) {
             char fullName[NAND_MAX_PATH + 1];
-            
+
+            // Set up path
             strncpy(fullName, mNandPath, sizeof(mNandPath));
             strncat(fullName, "/layout", sizeof(mNandPath) - strlen(fullName));
 
@@ -163,7 +167,7 @@ namespace ipl {
         }
 
         void Manager::doReadTask(void* work) {
-            static_cast<File*>(work)->read();
+            reinterpret_cast<File*>(work)->read();
         }
 
         File* Manager::writeAsync(EGG::Heap* heap, const char* fileName, void* buffer, u32 length, u8 perms) {
@@ -194,7 +198,7 @@ namespace ipl {
         }
 
         void Manager::doWriteTask(void* work) {
-            static_cast<File*>(work)->write();
+            reinterpret_cast<File*>(work)->write();
         }
 
         void Manager::sendToken(int token) {
@@ -207,7 +211,7 @@ namespace ipl {
             BOOL result = FALSE;
             OSMessage msg = EGG::TaskThread::waitQueueMessage(mpTask->getMessageQueue(), &result);
             if (result && msg) {
-                *token = (int)msg;
+                *token = reinterpret_cast<int>(msg);
             }
 
             return result && msg ? TRUE : FALSE;

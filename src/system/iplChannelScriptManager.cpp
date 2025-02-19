@@ -19,7 +19,7 @@ namespace ipl {
 
         void ChannelScriptManager::create(EGG::ExpHeap* heap) {
             if (mpChansWork == NULL) {
-                mpChansWork = new(heap, CLASS_HEAP) u8[CHANS_VM_WORK_SIZE];
+                mpChansWork = new(heap, CLASS_HEAP) u8[CHANS_VM_DEFAULT_WORK_SIZE];
             }
 
             if (mpHeap == NULL) {
@@ -38,9 +38,9 @@ namespace ipl {
         BOOL ChannelScriptManager::init(nand::File* file, RsoThread* thread) {
             smpThread = thread;
 
-            memset(mpChansWork, 0, CHANS_VM_WORK_SIZE);
+            memset(mpChansWork, 0, CHANS_VM_DEFAULT_WORK_SIZE);
 
-            CHANSVmInit(&smCSVm, mpChansWork, CHANS_VM_WORK_SIZE);
+            CHANSVmInit(&smCSVm, mpChansWork, CHANS_VM_DEFAULT_WORK_SIZE);
 
             BOOL result = INIT_CS_LIB(&smCSVm, system);
             if (result == false) {
@@ -120,12 +120,12 @@ namespace ipl {
                 retResult = FALSE;
             }
             else {
-                void* unused = CHANSVmGetFreeExeBufp(&smCSVm);
-                if (unused == NULL) {
+                void* freeBuf = CHANSVmGetFreeExeBufp(&smCSVm);
+                if (freeBuf == NULL) {
                     retResult = FALSE;
                 }
                 else {
-                    memcpy(unused, file->getBuffer(), file->getLength());
+                    memcpy(freeBuf, file->getBuffer(), file->getLength());
 
                     if (CHANSVmAddExe(&smCSVm, 1, 0) == FALSE) {
                         if (CHANSVmLinkModules(&smCSVm, 1) == 0) {
@@ -202,5 +202,3 @@ namespace ipl {
         }
     }
 }
-
-

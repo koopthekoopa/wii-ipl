@@ -8,6 +8,8 @@
 
 #include <cstring>
 
+#pragma sym on
+
 namespace ipl {
     /**
      * BtnB = Button 0 - Button on Btn1, Right button on Btn2, Top button on Btn3
@@ -25,8 +27,14 @@ namespace ipl {
     };
 
     enum {
-        ANIM_CMN_DIALOG_IN = 0,
-        ANIM_CMN_DIALOG_OUT,
+        ANIM_DIALOG_IN = 0,
+        ANIM_DIALOG_OUT,
+        ANIM_FOCUS_BTN_B_ON,
+        ANIM_FOCUS_BTN_B_OFF,
+        ANIM_SELECT_BTN_B,
+        ANIM_FOCUS_BTN_A_ON,
+        ANIM_FOCUS_BTN_A_OFF,
+        ANIM_SELECT_BTN_A,
     };
 
     enum {
@@ -34,25 +42,6 @@ namespace ipl {
         ANIM_BTN0_DIALOG_OUT,
         ANIM_BTN0_WAIT,
         ANIM_BTN0_PRORESS,
-    };
-
-    enum {
-        ANIM_BTN1_DIALOG_IN = 0,
-        ANIM_BTN1_DIALOG_OUT,
-        ANIM_BTN1_FOCUS_BTN_ON,
-        ANIM_BTN1_FOCUS_BTN_OFF,
-        ANIM_BTN1_SELECT_BTN,
-    };
-
-    enum {
-        ANIM_BTN2_DIALOG_IN = 0,
-        ANIM_BTN2_DIALOG_OUT,
-        ANIM_BTN2_FOCUS_BTN_B_ON,
-        ANIM_BTN2_FOCUS_BTN_B_OFF,
-        ANIM_BTN2_SELECT_BTN_B,
-        ANIM_BTN2_FOCUS_BTN_A_ON,
-        ANIM_BTN2_FOCUS_BTN_A_OFF,
-        ANIM_BTN2_SELECT_BTN_A,
     };
 
     enum {
@@ -70,18 +59,7 @@ namespace ipl {
     };
 
     enum {
-        ANIM_BTN2B_DIALOG_IN = 0,
-        ANIM_BTN2B_DIALOG_OUT,
-        ANIM_BTN2B_FOCUS_BTN_B_ON,
-        ANIM_BTN2B_FOCUS_BTN_B_OFF,
-        ANIM_BTN2B_SELECT_BTN_B,
-        ANIM_BTN2B_FOCUS_BTN_A_ON,
-        ANIM_BTN2B_FOCUS_BTN_A_OFF,
-        ANIM_BTN2B_SELECT_BTN_A,
-    };
-
-    enum {
-        DIALOG_STATE_NONE = 0,
+        DIALOG_STATE_READY = 0,
         DIALOG_STATE_FADE_IN,
         DIALOG_STATE_NORMAL,
         DIALOG_STATE_SELECT,
@@ -98,22 +76,18 @@ namespace ipl {
 
     DialogWindow::DialogWindow(EGG::Heap* heap) :
     ::gui::EventHandler(),
-    mState(DIALOG_STATE_NONE),
-    mResult(RESULT_NONE),
-    mLastResult(RESULT_NONE),
+    mState(DIALOG_STATE_READY),
+    mResult(RESULT_NONE), mLastResult(RESULT_NONE),
     mDialogType(DIALOG_TYPE_NONE),
     mWaitTick(0),
     mbNextState(false),
     mbTerminated(false),
     mbSwapSound(false),
-    mbIsProg(false),
-    mbDoProgBar(false),
-    mProgBarLen(0),
-    mProgBarFrame(0),
+    mbIsProg(false), mbDoProgBar(false),
+    mProgBarLen(0), mProgBarFrame(0),
     mpCurDialog(NULL),
     mpCustomLayout(NULL),
-    mDialogPageCount(-1),
-    mCurPage(0),
+    mPageCount(-1), mCurPage(0),
     mbNoShade(false),
     mbHideBtnA(false) {
         EGG::Allocator* allocator = new(heap, CLASS_HEAP) EGG::Allocator(heap, CLASS_HEAP);
@@ -125,10 +99,10 @@ namespace ipl {
 
         // Dialog with no buttons
         mDialog[DIALOG_TYPE_BTN0].mpLayout = new(heap, CLASS_HEAP) layout::Object(heap, mpLayoutFile, "arc", "my_DialogWindow_a0.brlyt");
-        mDialog[DIALOG_TYPE_BTN0].mpLayout->bindToGroup("my_DialogWindow_a0_DialogIn.brlan", "G_InOut", false);
+        mDialog[DIALOG_TYPE_BTN0].mpLayout->bindToGroup("my_DialogWindow_a0_DialogIn.brlan",  "G_InOut", false);
         mDialog[DIALOG_TYPE_BTN0].mpLayout->bindToGroup("my_DialogWindow_a0_DialogOut.brlan", "G_InOut", false, false);
-        mDialog[DIALOG_TYPE_BTN0].mpLayout->bindToGroup("my_DialogWindow_a0_Wait.brlan", "G_Wait", false, false);
-        mDialog[DIALOG_TYPE_BTN0].mpLayout->bindToGroup("my_DialogWindow_a0_Progres.brlan", "G_Prog", false);
+        mDialog[DIALOG_TYPE_BTN0].mpLayout->bindToGroup("my_DialogWindow_a0_Wait.brlan",      "G_Wait",  false, false);
+        mDialog[DIALOG_TYPE_BTN0].mpLayout->bindToGroup("my_DialogWindow_a0_Progres.brlan",   "G_Prog",  false);
         mDialog[DIALOG_TYPE_BTN0].mpLayout->findPane("Wait_00")->SetVisible(false);
         mDialog[DIALOG_TYPE_BTN0].mpLayout->findPane("N_Prog")->SetVisible(false);
         mDialog[DIALOG_TYPE_BTN0].mpLayout->finishBinding();
@@ -136,10 +110,10 @@ namespace ipl {
 
         // Dialog with one button
         mDialog[DIALOG_TYPE_BTN1].mpLayout = new(heap, CLASS_HEAP) layout::Object(heap, mpLayoutFile, "arc", "my_DialogWindow_a1.brlyt");
-        mDialog[DIALOG_TYPE_BTN1].mpLayout->bindToGroup("my_DialogWindow_a1_DialogIn.brlan", "G_InOut", false);
-        mDialog[DIALOG_TYPE_BTN1].mpLayout->bindToGroup("my_DialogWindow_a1_DialogOut.brlan", "G_InOut", false, false);
-        mDialog[DIALOG_TYPE_BTN1].mpLayout->bindToGroup("my_DialogWindow_a1_FocusBtn_on.brlan", "G_FocusBtnB", false, false);
-        mDialog[DIALOG_TYPE_BTN1].mpLayout->bindToGroup("my_DialogWindow_a1_FocusBtn_off.brlan", "G_FocusBtnB", false, false);
+        mDialog[DIALOG_TYPE_BTN1].mpLayout->bindToGroup("my_DialogWindow_a1_DialogIn.brlan",     "G_InOut",      false);
+        mDialog[DIALOG_TYPE_BTN1].mpLayout->bindToGroup("my_DialogWindow_a1_DialogOut.brlan",    "G_InOut",      false, false);
+        mDialog[DIALOG_TYPE_BTN1].mpLayout->bindToGroup("my_DialogWindow_a1_FocusBtn_on.brlan",  "G_FocusBtnB",  false, false);
+        mDialog[DIALOG_TYPE_BTN1].mpLayout->bindToGroup("my_DialogWindow_a1_FocusBtn_off.brlan", "G_FocusBtnB",  false, false);
         mDialog[DIALOG_TYPE_BTN1].mpLayout->bindToGroup("my_DialogWindow_a1_SelectBtn_Ac.brlan", "G_SelectBtnB", false, false);
         mDialog[DIALOG_TYPE_BTN1].mpLayout->finishBinding();
         mDialog[DIALOG_TYPE_BTN1].mpGui = new(heap, CLASS_HEAP) gui::PaneManager(NULL, mDialog[DIALOG_TYPE_BTN1].mpLayout->getDrawInfo(), NULL, allocator);
@@ -151,13 +125,13 @@ namespace ipl {
 
         // Dialog with two buttons
         mDialog[DIALOG_TYPE_BTN2].mpLayout = new(heap, CLASS_HEAP) layout::Object(heap, mpLayoutFile, "arc", "my_DialogWindow_a2.brlyt");
-        mDialog[DIALOG_TYPE_BTN2].mpLayout->bindToGroup("my_DialogWindow_a2_DialogIn.brlan", "G_InOut", false);
-        mDialog[DIALOG_TYPE_BTN2].mpLayout->bindToGroup("my_DialogWindow_a2_DialogOut.brlan", "G_InOut", false, false);
-        mDialog[DIALOG_TYPE_BTN2].mpLayout->bindToGroup("my_DialogWindow_a2_FocusBtn_on.brlan", "G_FocusBtnB", false, false);
-        mDialog[DIALOG_TYPE_BTN2].mpLayout->bindToGroup("my_DialogWindow_a2_FocusBtn_off.brlan", "G_FocusBtnB", false, false);
+        mDialog[DIALOG_TYPE_BTN2].mpLayout->bindToGroup("my_DialogWindow_a2_DialogIn.brlan",     "G_InOut",      false);
+        mDialog[DIALOG_TYPE_BTN2].mpLayout->bindToGroup("my_DialogWindow_a2_DialogOut.brlan",    "G_InOut",      false, false);
+        mDialog[DIALOG_TYPE_BTN2].mpLayout->bindToGroup("my_DialogWindow_a2_FocusBtn_on.brlan",  "G_FocusBtnB",  false, false);
+        mDialog[DIALOG_TYPE_BTN2].mpLayout->bindToGroup("my_DialogWindow_a2_FocusBtn_off.brlan", "G_FocusBtnB",  false, false);
         mDialog[DIALOG_TYPE_BTN2].mpLayout->bindToGroup("my_DialogWindow_a2_SelectBtn_Ac.brlan", "G_SelectBtnB", false, false);
-        mDialog[DIALOG_TYPE_BTN2].mpLayout->bindToGroup("my_DialogWindow_a2_FocusBtn_on.brlan", "G_FocusBtnA", false, false);
-        mDialog[DIALOG_TYPE_BTN2].mpLayout->bindToGroup("my_DialogWindow_a2_FocusBtn_off.brlan", "G_FocusBtnA", false, false);
+        mDialog[DIALOG_TYPE_BTN2].mpLayout->bindToGroup("my_DialogWindow_a2_FocusBtn_on.brlan",  "G_FocusBtnA",  false, false);
+        mDialog[DIALOG_TYPE_BTN2].mpLayout->bindToGroup("my_DialogWindow_a2_FocusBtn_off.brlan", "G_FocusBtnA",  false, false);
         mDialog[DIALOG_TYPE_BTN2].mpLayout->bindToGroup("my_DialogWindow_a2_SelectBtn_Ac.brlan", "G_SelectBtnA", false, false);
         mDialog[DIALOG_TYPE_BTN2].mpLayout->finishBinding();
         mDialog[DIALOG_TYPE_BTN2].mpGui = new(heap, CLASS_HEAP) gui::PaneManager(NULL, mDialog[DIALOG_TYPE_BTN2].mpLayout->getDrawInfo(), NULL, allocator);
@@ -169,16 +143,16 @@ namespace ipl {
 
         // Dialog with three buttons
         mDialog[DIALOG_TYPE_BTN3].mpLayout = new(heap, CLASS_HEAP) layout::Object(heap, mpLayoutFile, "arc", "my_DialogWindow_a3.brlyt");
-        mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_DialogIn.brlan", "G_InOut", false);
-        mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_DialogOut.brlan", "G_InOut", false, false);
-        mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_FocusBtn_on.brlan", "G_FocusBtnB", false, false);
-        mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_FocusBtn_off.brlan", "G_FocusBtnB", false, false);
+        mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_DialogIn.brlan",     "G_InOut",      false);
+        mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_DialogOut.brlan",    "G_InOut",      false, false);
+        mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_FocusBtn_on.brlan",  "G_FocusBtnB",  false, false);
+        mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_FocusBtn_off.brlan", "G_FocusBtnB",  false, false);
         mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_SelectBtn_Ac.brlan", "G_SelectBtnB", false, false);
-        mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_FocusBtn_on.brlan", "G_FocusBtnA", false, false);
-        mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_FocusBtn_off.brlan", "G_FocusBtnA", false, false);
+        mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_FocusBtn_on.brlan",  "G_FocusBtnA",  false, false);
+        mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_FocusBtn_off.brlan", "G_FocusBtnA",  false, false);
         mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_SelectBtn_Ac.brlan", "G_SelectBtnA", false, false);
-        mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_FocusBtn_on.brlan", "G_FocusBtnC", false, false);
-        mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_FocusBtn_off.brlan", "G_FocusBtnC", false, false);
+        mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_FocusBtn_on.brlan",  "G_FocusBtnC",  false, false);
+        mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_FocusBtn_off.brlan", "G_FocusBtnC",  false, false);
         mDialog[DIALOG_TYPE_BTN3].mpLayout->bindToGroup("my_DialogWindow_a3_SelectBtn_Ac.brlan", "G_SelectBtnC", false, false);
         mDialog[DIALOG_TYPE_BTN3].mpLayout->finishBinding();
         mDialog[DIALOG_TYPE_BTN3].mpGui = new(heap, CLASS_HEAP) gui::PaneManager(NULL, mDialog[DIALOG_TYPE_BTN3].mpLayout->getDrawInfo(), NULL, allocator);
@@ -209,7 +183,7 @@ namespace ipl {
 
     void DialogWindow::init() {
         for (int i = 0; i < DIALOG_BTN_TYPE_MAX; i++) {
-            mBtnHovered[i] = 0;
+            mbBtnHovered[i] = FALSE;
         }
 
         mLastResult = RESULT_NONE;
@@ -225,11 +199,11 @@ namespace ipl {
         mProgBarFrame = 0;
 
         if (mpCurDialog) {
-            if (mpCurDialog->mpLayout->getAnim(2)) {
-                mpCurDialog->mpLayout->getAnim(2)->initAnmFrame();
+            if (mpCurDialog->mpLayout->getAnim(ANIM_FOCUS_BTN_B_ON)) {
+                mpCurDialog->mpLayout->getAnim(ANIM_FOCUS_BTN_B_ON)->init();
             }
-            if (mpCurDialog->mpLayout->getAnim(5)) {
-                mpCurDialog->mpLayout->getAnim(5)->initAnmFrame();
+            if (mpCurDialog->mpLayout->getAnim(ANIM_FOCUS_BTN_A_ON)) {
+                mpCurDialog->mpLayout->getAnim(ANIM_FOCUS_BTN_A_ON)->init();
             }
             if (mpCurDialog->mpGui) {
                 mpCurDialog->mpGui->init();
@@ -273,7 +247,7 @@ namespace ipl {
     }
 
     void DialogWindow::stt_fadein() {
-        if (!mpCurDialog->mpLayout->getAnim(ANIM_CMN_DIALOG_IN)->isPlaying()) {
+        if (!mpCurDialog->mpLayout->getAnim(ANIM_DIALOG_IN)->isPlaying()) {
             mState = DIALOG_STATE_NORMAL;
         }
     }
@@ -284,13 +258,12 @@ namespace ipl {
             mpCurDialog->mpGui->update();
         }
 
-        // For those without a user interface
         if (mbTerminated) {
             mbNextState = true;
 
             mResult = RESULT_TERMINATED;
 
-            mpCurDialog->mpLayout->getAnim(ANIM_CMN_DIALOG_OUT)->playAnmFrame();
+            mpCurDialog->mpLayout->getAnim(ANIM_DIALOG_OUT)->play();
             if (mbIsProg) {
                 snd::getSystem()->startSE("WIPL_SE_COPY_FINISH");
             }
@@ -303,7 +276,7 @@ namespace ipl {
 
                     mResult = RESULT_WAIT;
 
-                    mpCurDialog->mpLayout->getAnim(ANIM_CMN_DIALOG_OUT)->playAnmFrame();
+                    mpCurDialog->mpLayout->getAnim(ANIM_DIALOG_OUT)->play();
                     if (mbIsProg) {
                         snd::getSystem()->startSE("WIPL_SE_COPY_FINISH");
                     }
@@ -311,8 +284,12 @@ namespace ipl {
                 }
                 else {
                     if (mbDoProgBar) {
-                        if (mProgBarFrame < mProgBarLen && (mProgBarFrame += 2) > mProgBarLen) {
-                            mProgBarFrame = mProgBarLen;
+                        if (mProgBarFrame < mProgBarLen) {
+                            mProgBarFrame += 2;
+                            if (mProgBarFrame > mProgBarLen) {
+                                mProgBarFrame = mProgBarLen;
+                            }
+                            
                         }
 
                         mpCurDialog->mpLayout->getAnim(ANIM_BTN0_PRORESS)->initAnmFrame(mProgBarFrame);
@@ -322,7 +299,7 @@ namespace ipl {
 
                             mResult = RESULT_PROGRESS;
 
-                            mpCurDialog->mpLayout->getAnim(ANIM_CMN_DIALOG_OUT)->playAnmFrame();
+                            mpCurDialog->mpLayout->getAnim(ANIM_DIALOG_OUT)->play();
                             if (mbIsProg) {
                                 snd::getSystem()->startSE("WIPL_SE_COPY_FINISH");
                             }
@@ -356,25 +333,25 @@ namespace ipl {
         else {
             switch (mResult) {
                 case RESULT_RIGHT_BUTTON: {
-                    anim = ANIM_BTN2_SELECT_BTN_B;
+                    anim = ANIM_SELECT_BTN_B;
                     break;
                 }
                 case RESULT_LEFT_BUTTON: {
-                    anim = ANIM_BTN2_SELECT_BTN_A;
+                    anim = ANIM_SELECT_BTN_A;
                     break;
                 }
             }
         }
 
+        // Play select animation
         if (!mpCurDialog->mpLayout->getAnim(anim)->isPlaying()) {
-            mpCurDialog->mpLayout->getAnim(ANIM_CMN_DIALOG_OUT)->playAnmFrame();
-
+            mpCurDialog->mpLayout->getAnim(ANIM_DIALOG_OUT)->play();
             mState = DIALOG_STATE_FADE_OUT;
         }
     }
 
     void DialogWindow::stt_fadeout() {
-        if (!mpCurDialog->mpLayout->getAnim(ANIM_CMN_DIALOG_OUT)->isPlaying()) {
+        if (!mpCurDialog->mpLayout->getAnim(ANIM_DIALOG_OUT)->isPlaying()) {
             mLastResult = mResult;
             mResult = RESULT_NONE;
 
@@ -383,14 +360,15 @@ namespace ipl {
             }
             mpCurDialog = NULL;
 
-            mState = DIALOG_STATE_NONE;
+            mState = DIALOG_STATE_READY;
 
-            mDialogPageCount = -1;
+            mPageCount = -1;
             mCurPage = 0;
         }
     }
 
     void DialogWindow::set_alpha(nw4r::lyt::Pane* pane, u8 alpha) {
+        // Sets the alpha for the pane and it's children
         for (nw4r::lyt::PaneList::Iterator it = pane->GetChildList().GetBeginIter(); it != pane->GetChildList().GetEndIter(); it++) {
             it->SetAlpha(alpha);
             set_alpha(&*it, alpha);
@@ -402,15 +380,15 @@ namespace ipl {
             mpCurDialog->mpGui->update();
         }
 
-        if (!mpCurDialog->mpLayout->isPlaying(ANIM_BTN2_SELECT_BTN_B) && !mpCurDialog->mpLayout->isPlaying(ANIM_BTN2_SELECT_BTN_A)) {
+        if (!mpCurDialog->mpLayout->isPlaying(ANIM_SELECT_BTN_B) && !mpCurDialog->mpLayout->isPlaying(ANIM_SELECT_BTN_A)) {
             if (mResult == RESULT_LEFT_BUTTON) {
-                if (mBtnHovered[DIALOG_BTN_TYPE_BTN2] != 0 && mpDialogPages[mCurPage].mbTwoBtn) {
-                    mpCurDialog->mpLayout->getAnim(ANIM_BTN2_FOCUS_BTN_A_ON)->playAnmFrame();
+                if (mbBtnHovered[DIALOG_BTN_TYPE_BTN2] != FALSE && mpPages[mCurPage].isTwoBtn) {
+                    mpCurDialog->mpLayout->getAnim(ANIM_FOCUS_BTN_A_ON)->play();
                 }
             }
             else {
-                if (mBtnHovered[DIALOG_BTN_TYPE_BTN1] != 0) {
-                    mpCurDialog->mpLayout->getAnim(ANIM_BTN1_FOCUS_BTN_ON)->playAnmFrame();
+                if (mbBtnHovered[DIALOG_BTN_TYPE_BTN1] != FALSE) {
+                    mpCurDialog->mpLayout->getAnim(ANIM_FOCUS_BTN_B_ON)->play();
                 }
             }
             mState = DIALOG_STATE_PAGE_FADE;
@@ -423,7 +401,9 @@ namespace ipl {
         }
 
         switch (mPageState) {
+            // Fade in
             case DIALOG_PAGE_FADE_IN: {
+                // Fade in text box alpha
                 mPageAlpha += mPageFadeSpeed;
                 if (mPageAlpha > 255) {
                     mPageAlpha = 255;
@@ -431,18 +411,20 @@ namespace ipl {
                 nw4r::lyt::TextBox* textBox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpCurDialog->mpLayout->findPane("T_Dialog"));
                 textBox->SetAlpha(mPageAlpha);
 
-                if (mpDialogPages[mCurPage].mbTwoBtn != mpDialogPages[mPrevPage].mbTwoBtn
-                && mpDialogPages[mCurPage].mbTwoBtn == true) {
+                // If the next page has the left button, make it visible (if it was invisible before)
+                if (mpPages[mCurPage].isTwoBtn != mpPages[mPrevPage].isTwoBtn
+                && mpPages[mCurPage].isTwoBtn == true) {
                     nw4r::lyt::Pane* pBtnA = mpCurDialog->mpLayout->findPane("N_BtnA");
                     nw4r::lyt::Pane* pBtnAPic = mpCurDialog->mpLayout->findPane("N_BtnA_Pic");
 
                     pBtnA->SetVisible(true);
 
-                    if (mPageAlpha) {
+                    if (mPageAlpha != 0) {
                         set_alpha(pBtnAPic, mPageAlpha);
+                        // If alpha faded in, init button animations
                         if (mPageAlpha == 255) {
-                            mBtnHovered[DIALOG_BTN_TYPE_BTN2] = 0;
-                            mpCurDialog->mpLayout->getAnim(ANIM_BTN2_FOCUS_BTN_A_ON)->initAnmFrame();
+                            mbBtnHovered[DIALOG_BTN_TYPE_BTN2] = FALSE;
+                            mpCurDialog->mpLayout->getAnim(ANIM_FOCUS_BTN_A_ON)->init();
                         }
                     }
                     else {
@@ -451,32 +433,38 @@ namespace ipl {
                     }
                 }
                 else {
-                    if (mpDialogPages[mCurPage].mLBtnMsgId != mpDialogPages[mPrevPage].mLBtnMsgId) {
+                    // Has the text changed? Fade in the text to the new one
+                    if (mpPages[mCurPage].lBtnMsgId != mpPages[mPrevPage].lBtnMsgId) {
                         nw4r::lyt::Pane* pPane = mpCurDialog->mpLayout->findPane("T_BtnA");
                         pPane->SetAlpha(mPageAlpha);
                     }
                 }
 
-                if (mpDialogPages[mCurPage].mRBtnMsgId != mpDialogPages[mPrevPage].mRBtnMsgId) {
+                // Has the text changed? Fade in the text to the new one
+                if (mpPages[mCurPage].rBtnMsgId != mpPages[mPrevPage].rBtnMsgId) {
                     nw4r::lyt::Pane* pPane = mpCurDialog->mpLayout->findPane("T_BtnB");
                     pPane->SetAlpha(mPageAlpha);
                 }
 
-                if (mpDialogPages[mCurPage].mpLayout != mpDialogPages[mPrevPage].mpLayout
-                && mpDialogPages[mCurPage].mpLayout) {
-                    set_alpha(mpDialogPages[mCurPage].mpLayout->getRoot(), mPageAlpha);
-                    if (mpDialogPages[mCurPage].mbAnimLayout && mPageAlpha == 255) {
-                        mpDialogPages[mCurPage].mpLayout->getAnim(ANIM_CMN_DIALOG_IN)->playAnmFrame();
+                // Has the layout changed? Fade in to the new one.
+                if (mpPages[mCurPage].layoutObj != mpPages[mPrevPage].layoutObj
+                && mpPages[mCurPage].layoutObj) {
+                    set_alpha(mpPages[mCurPage].layoutObj->getRoot(), mPageAlpha);
+                    if (mpPages[mCurPage].isLytAnim && mPageAlpha == 255) {
+                        mpPages[mCurPage].layoutObj->getAnim(ANIM_DIALOG_IN)->play();
                     }
                 }
 
+                // Faded in? We are done.
                 if (mPageAlpha == 255) {
                     mPageState = DIALOG_PAGE_NORMAL;
                     mState = DIALOG_STATE_NORMAL;
                 }
                 break;
             }
+            // Fade out
             case DIALOG_PAGE_FADE_OUT: {
+                // Fade out text box alpha
                 mPageAlpha -= mPageFadeSpeed;
                 if (mPageAlpha < 0) {
                     mPageAlpha = 0;
@@ -484,58 +472,71 @@ namespace ipl {
                 nw4r::lyt::TextBox* textBox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpCurDialog->mpLayout->findPane("T_Dialog"));
                 textBox->SetAlpha(mPageAlpha);
 
-                if (mpDialogPages[mCurPage].mbTwoBtn != mpDialogPages[mPrevPage].mbTwoBtn
-                && mpDialogPages[mPrevPage].mbTwoBtn == true) {
+                // If the previous page has no left button, make it invisible (if it was visible before)
+                if (mpPages[mCurPage].isTwoBtn != mpPages[mPrevPage].isTwoBtn
+                && mpPages[mPrevPage].isTwoBtn == true) {
                     nw4r::lyt::Pane* pBtnA = mpCurDialog->mpLayout->findPane("N_BtnA");
                     nw4r::lyt::Pane* pBtnAPic = mpCurDialog->mpLayout->findPane("N_BtnA_Pic");
 
-                    if ((int)((f32)(255.f / mPageAlpha))) {
+                    // The fuck is this?
+                    {
+                        f32 unknown_float = mPageAlpha / 255.f;
+                        math::VEC2 unknown_vec(unknown_float, unknown_float); // was it *even* a vec2 ???
+                    }
+
+                    if (mPageAlpha != 0) {
                         set_alpha(pBtnAPic, mPageAlpha);
                     }
                     else {
+                        // If the alpha faded out, make it invisible and init button animations...?
                         set_alpha(pBtnAPic, 255);
                         pBtnA->SetVisible(false);
-                        mBtnHovered[DIALOG_BTN_TYPE_BTN2] = 0;
-                        mpCurDialog->mpLayout->getAnim(ANIM_BTN2_FOCUS_BTN_A_ON)->initAnmFrame();
+                        
+                        mbBtnHovered[DIALOG_BTN_TYPE_BTN2] = FALSE;
+                        mpCurDialog->mpLayout->getAnim(ANIM_FOCUS_BTN_A_ON)->init();
                     }
                 }
                 else {
-                    if (mpDialogPages[mCurPage].mLBtnMsgId != mpDialogPages[mPrevPage].mLBtnMsgId) {
+                    // Has the text changed? Fade out the old text
+                    if (mpPages[mCurPage].lBtnMsgId != mpPages[mPrevPage].lBtnMsgId) {
                         nw4r::lyt::Pane* pPane = mpCurDialog->mpLayout->findPane("T_BtnA");
                         pPane->SetAlpha(mPageAlpha);
                     }
                 }
 
-                if (mpDialogPages[mCurPage].mRBtnMsgId != mpDialogPages[mPrevPage].mRBtnMsgId) {
+                // Has the text changed? Fade out the old text
+                if (mpPages[mCurPage].rBtnMsgId != mpPages[mPrevPage].rBtnMsgId) {
                     nw4r::lyt::Pane* pPane = mpCurDialog->mpLayout->findPane("T_BtnB");
                        pPane->SetAlpha(mPageAlpha);
                 }
 
-                if (mpDialogPages[mCurPage].mpLayout != mpDialogPages[mPrevPage].mpLayout
-                && mpDialogPages[mPrevPage].mpLayout) {
-                    nw4r::lyt::Pane* pPane = mpDialogPages[mPrevPage].mpLayout->getRoot();
-                    if (mPageAlpha) {
+                // Has the layout changed? Fade out the old layout
+                if (mpPages[mCurPage].layoutObj != mpPages[mPrevPage].layoutObj
+                && mpPages[mPrevPage].layoutObj) {
+                    nw4r::lyt::Pane* pPane = mpPages[mPrevPage].layoutObj->getRoot();
+                    if (mPageAlpha != 0) {
                         set_alpha(pPane, mPageAlpha);
                     }
                     else {
-                        if (mpDialogPages[mPrevPage].mbAnimLayout) {
-                            mpDialogPages[mPrevPage].mpLayout->getAnim(0)->initAnmFrame();
+                        if (mpPages[mPrevPage].isLytAnim) {
+                            mpPages[mPrevPage].layoutObj->getAnim(0)->init();
                         }
                         set_alpha(pPane, 255);
                     }
                 }
 
+                // Done fading in, We set the new text and layout then we are done.
                 if (mPageAlpha == 0) {
                     mPageState = DIALOG_PAGE_FADE_IN;
 
-                    set_message(mpDialogPages[mCurPage].mMsgId);
-                    set_rbtn_text(mpDialogPages[mCurPage].mRBtnMsgId);
-                    set_lbtn_text(mpDialogPages[mCurPage].mLBtnMsgId);
+                    set_message(mpPages[mCurPage].msgID);
+                    set_rbtn_text(mpPages[mCurPage].rBtnMsgId);
+                    set_lbtn_text(mpPages[mCurPage].lBtnMsgId);
 
-                    mpCustomLayout = mpDialogPages[mCurPage].mpLayout;
+                    mpCustomLayout = mpPages[mCurPage].layoutObj;
 
                     mCustomLayoutPos.x = 0.0f;
-                    mCustomLayoutPos.y = mpDialogPages[mCurPage].mLayoutY;
+                    mCustomLayoutPos.y = mpPages[mCurPage].layoutYOff;
                 }
                 break;
             }
@@ -549,10 +550,11 @@ namespace ipl {
 
             if (mpCustomLayout) {
                 const nw4r::math::VEC3 dlgPos = mpCurDialog->mpLayout->findPane("N_Dialog")->GetTranslate();
-                mpCustomLayout->getRoot()->SetTranslate(nw4r::math::VEC3(dlgPos.x + mCustomLayoutPos.x, dlgPos.y + mCustomLayoutPos.y, dlgPos.z));
+                const nw4r::math::VEC3 lytPos(dlgPos.x + mCustomLayoutPos.x, dlgPos.y + mCustomLayoutPos.y, dlgPos.z);
+                mpCustomLayout->getRoot()->SetTranslate(lytPos);
                 
                 mpCustomLayout->calcMtx();
-                if ((int)mState != DIALOG_STATE_PAGE_FADE || mPageAlpha != 0) {
+                if (mState != DIALOG_STATE_PAGE_FADE || mPageAlpha != 0) {
                     mpCustomLayout->draw();
                 }
             }
@@ -614,22 +616,27 @@ namespace ipl {
 
         mDialogType = type;
 
-        if (mState == DIALOG_STATE_NONE) {
+        // If we are ready
+        if (mState == DIALOG_STATE_READY) {
             mpCurDialog = &mDialog[type];
 
+            // Init interface
             init();
 
+            // Prepare GUI events
             if (mpCurDialog->mpGui) {
                 mpCurDialog->mpGui->setEventHandler(this);
             }
 
-            mpCurDialog->mpLayout->getAnim(ANIM_CMN_DIALOG_IN)->playAnmFrame();
-
+            // Play fade in
+            mpCurDialog->mpLayout->getAnim(ANIM_DIALOG_IN)->play();
             mState = DIALOG_STATE_FADE_IN;
 
+            // For dialog pages
             mPageState = DIALOG_PAGE_NORMAL;
             mpCustomLayout = NULL;
 
+            // Do we need the shade background?
             nw4r::lyt::Pane* pPane = mpCurDialog->mpLayout->findPane("Shade");
             if (pPane) {
                 if (mbNoShade) {
@@ -640,6 +647,7 @@ namespace ipl {
                 }
             }
 
+            // Do we need BtnA?
             pPane = mpCurDialog->mpLayout->findPane("N_BtnA");
             if (pPane) {
                 if (mbHideBtnA) {
@@ -650,9 +658,11 @@ namespace ipl {
                 }
             }
 
+            // Yes!! We are ready!!
             result = TRUE;
         }
 
+        // Reset booleans that are no longer required (until this function gets called again)
         mbNoShade = false;
         mbHideBtnA = false;
 
@@ -672,7 +682,7 @@ namespace ipl {
 
             if (mbIsProg) {
                 mpCurDialog->mpLayout->findPane("Wait_00")->SetVisible(true);
-                mpCurDialog->mpLayout->getAnim(ANIM_BTN0_WAIT)->playAnmFrame();
+                mpCurDialog->mpLayout->getAnim(ANIM_BTN0_WAIT)->play();
 
                 snd::getSystem()->startSE("WIPL_SE_COPYING");
             }
@@ -704,7 +714,7 @@ namespace ipl {
 
             if (mbIsProg) {
                 mpCurDialog->mpLayout->findPane("Wait_00")->SetVisible(true);
-                mpCurDialog->mpLayout->getAnim(ANIM_BTN0_WAIT)->playAnmFrame();
+                mpCurDialog->mpLayout->getAnim(ANIM_BTN0_WAIT)->play();
 
                 snd::getSystem()->startSE("WIPL_SE_COPYING");
             }
@@ -862,22 +872,24 @@ namespace ipl {
         return result;
     }
 
-    BOOL DialogWindow::callBtn2(Page* pages, int pageCount, int fadeSpeed) {
+    BOOL DialogWindow::callBtn2(Page* pages, int pageCount, int fadeDelay) {
         BOOL result = FALSE;
 
-        if (!pages[0].mbTwoBtn) {
+        if (!pages[0].isTwoBtn) {
             mbHideBtnA = true;
         }
 
         if (call(DIALOG_TYPE_BTN2)) {
-            mpDialogPages = pages;
-            mDialogPageCount = pageCount;
+            mpPages = pages;
+            mPageCount = pageCount;
 
-            int speed = (255.f / fadeSpeed);
-            if (speed > (255.f / fadeSpeed)) {
-                speed++;
+            float speed = (255.f / fadeDelay);
+            int speed_floor = (int)speed;
+            if (speed > speed_floor) {
+                speed_floor++;
             }
-            mPageFadeSpeed = speed;
+            mPageFadeSpeed = speed_floor;
+
             mPageAlpha = 255;
 
             mCurPage = 0;
@@ -885,15 +897,15 @@ namespace ipl {
 
             mbSwapSound = false;
 
-            set_message(mpDialogPages[mCurPage].mMsgId);
-            set_rbtn_text(mpDialogPages[mCurPage].mRBtnMsgId);
-            set_lbtn_text(mpDialogPages[mCurPage].mLBtnMsgId);
+            set_message(mpPages[mCurPage].msgID);
+            set_rbtn_text(mpPages[mCurPage].rBtnMsgId);
+            set_lbtn_text(mpPages[mCurPage].lBtnMsgId);
 
-            if (mpDialogPages[mCurPage].mpLayout) {
-                mpCustomLayout = mpDialogPages[mCurPage].mpLayout;
+            if (mpPages[mCurPage].layoutObj) {
+                mpCustomLayout = mpPages[mCurPage].layoutObj;
                 
                 mCustomLayoutPos.x = 0.0f;
-                mCustomLayoutPos.y = mpDialogPages[mCurPage].mLayoutY;
+                mCustomLayoutPos.y = mpPages[mCurPage].layoutYOff;
             }
 
             snd::getSystem()->startSE("WIPL_SE_INFO_WINDOW");
@@ -995,8 +1007,10 @@ namespace ipl {
             mpCurDialog->mpLayout->findPane("N_Prog")->SetVisible(true);
             mpCurDialog->mpLayout->findPane("Wait_00")->SetVisible(true);
 
-            mpCurDialog->mpLayout->getAnim(ANIM_BTN0_WAIT)->playAnmFrame();
-            mpCurDialog->mpLayout->getAnim(ANIM_BTN0_PRORESS)->initAnmFrame();
+            // Play waiting icon
+            mpCurDialog->mpLayout->getAnim(ANIM_BTN0_WAIT)->play();
+            // Prepare progress bar
+            mpCurDialog->mpLayout->getAnim(ANIM_BTN0_PRORESS)->init();
 
             snd::getSystem()->startSE("WIPL_SE_COPYING");
 
@@ -1024,8 +1038,10 @@ namespace ipl {
             mpCurDialog->mpLayout->findPane("N_Prog")->SetVisible(true);
             mpCurDialog->mpLayout->findPane("Wait_00")->SetVisible(true);
 
-            mpCurDialog->mpLayout->getAnim(ANIM_BTN0_WAIT)->playAnmFrame();
-            mpCurDialog->mpLayout->getAnim(ANIM_BTN0_PRORESS)->initAnmFrame();
+            // Play waiting icon
+            mpCurDialog->mpLayout->getAnim(ANIM_BTN0_WAIT)->play();
+            // Prepare progress bar
+            mpCurDialog->mpLayout->getAnim(ANIM_BTN0_PRORESS)->init();
 
             snd::getSystem()->startSE("WIPL_SE_COPYING");
 
@@ -1037,9 +1053,9 @@ namespace ipl {
 
     void DialogWindow::start_point_event(const char* paneName, controller::Interface* controller) {
         int btnNo = get_button_no(paneName);
-        if (mState - DIALOG_STATE_PAGE_FADE > 1 || btnNo != DIALOG_BTN_TYPE_BTN2
-        || mpDialogPages[mCurPage].mbTwoBtn == mpDialogPages[mPrevPage].mbTwoBtn) {
-            if (btnNo != -1 && mBtnHovered[btnNo] == 0) {
+        if ((u32)(mState - DIALOG_STATE_PAGE_FADE) > 1
+        || (btnNo != DIALOG_BTN_TYPE_BTN2 || mpPages[mCurPage].isTwoBtn == mpPages[mPrevPage].isTwoBtn)) {
+            if (btnNo != -1 && mbBtnHovered[btnNo] == FALSE) {
                 int animIdx = -1;
 
                 if (mDialogType == DIALOG_TYPE_BTN3) {
@@ -1061,11 +1077,11 @@ namespace ipl {
                 else {
                     switch (btnNo) {
                         case DIALOG_BTN_TYPE_BTN1: {
-                            animIdx = ANIM_BTN2_FOCUS_BTN_B_ON;
+                            animIdx = ANIM_FOCUS_BTN_B_ON;
                             break;
                         }
                         case DIALOG_BTN_TYPE_BTN2: {
-                            animIdx = ANIM_BTN2_FOCUS_BTN_A_ON;
+                            animIdx = ANIM_FOCUS_BTN_A_ON;
                             break;
                         }
                     }
@@ -1077,17 +1093,18 @@ namespace ipl {
                     controller->rumble();
                 }
 
-                mpCurDialog->mpLayout->getAnim(animIdx)->playAnmFrame();
+                mpCurDialog->mpLayout->getAnim(animIdx)->play();
             }
 
-            mBtnHovered[btnNo]++;
+            mbBtnHovered[btnNo]++;
         }
     }
 
     void DialogWindow::start_left_event(const char* paneName) {
         int btnNo = get_button_no(paneName);
-        if (mState - DIALOG_STATE_PAGE_FADE > 1 || btnNo != DIALOG_BTN_TYPE_BTN2 || mpDialogPages[mCurPage].mbTwoBtn == mpDialogPages[mPrevPage].mbTwoBtn) {
-            if (btnNo != -1 && mBtnHovered[btnNo] == 1) {
+        if ((u32)(mState - DIALOG_STATE_PAGE_FADE) > 1
+        || (btnNo != DIALOG_BTN_TYPE_BTN2 || mpPages[mCurPage].isTwoBtn == mpPages[mPrevPage].isTwoBtn)) {
+            if (btnNo != -1 && mbBtnHovered[btnNo] == TRUE) {
                 int animIdx = -1;
 
                 if (mDialogType == DIALOG_TYPE_BTN3) {
@@ -1109,28 +1126,28 @@ namespace ipl {
                 else {
                     switch (btnNo) {
                         case DIALOG_BTN_TYPE_BTN1: {
-                            animIdx = ANIM_BTN2_FOCUS_BTN_B_OFF;
+                            animIdx = ANIM_FOCUS_BTN_B_OFF;
                             break;
                         }
                         case DIALOG_BTN_TYPE_BTN2: {
-                            animIdx = ANIM_BTN2_FOCUS_BTN_A_OFF;
+                            animIdx = ANIM_FOCUS_BTN_A_OFF;
                             break;
                         }
                     }
                 }
 
-                mpCurDialog->mpLayout->getAnim(animIdx)->playAnmFrame();
+                mpCurDialog->mpLayout->getAnim(animIdx)->play();
             }
 
-            if (mBtnHovered[btnNo] > 0) {
-                mBtnHovered[btnNo]--;
+            if (mbBtnHovered[btnNo] > 0) {
+                mbBtnHovered[btnNo]--;
             }
         }
     }
 
     void DialogWindow::start_trig_event(const char* paneName) {
         int btnNo;
-        if ((int)mState != DIALOG_STATE_PAGE_FADE && (btnNo = get_button_no(paneName), btnNo != -1)) {
+        if (mState != DIALOG_STATE_PAGE_FADE && (btnNo = get_button_no(paneName), btnNo != -1)) {
             int animIdx = -1;
 
             if (mDialogType == DIALOG_TYPE_BTN3) {
@@ -1159,7 +1176,7 @@ namespace ipl {
                 switch (btnNo) {
                     case DIALOG_BTN_TYPE_BTN2: {
                         mResult = RESULT_LEFT_BUTTON;
-                        animIdx = ANIM_BTN2_SELECT_BTN_A;
+                        animIdx = ANIM_SELECT_BTN_A;
                         if (mbSwapSound) {
                             snd::getSystem()->startSE("WIPL_SE_DECIDE");
                         }
@@ -1172,7 +1189,7 @@ namespace ipl {
                     }
                     case DIALOG_BTN_TYPE_BTN1: {
                         mResult = RESULT_BUTTON;
-                        animIdx = ANIM_BTN2_SELECT_BTN_B;
+                        animIdx = ANIM_SELECT_BTN_B;
                         if (mbSwapSound) {
                             snd::getSystem()->startSE("WIPL_SE_CANCEL");
                         }
@@ -1186,14 +1203,14 @@ namespace ipl {
                 }
             }
 
-            mpCurDialog->mpLayout->getAnim(animIdx)->playAnmFrame();
+            mpCurDialog->mpLayout->getAnim(animIdx)->play();
 
-            if (mDialogPageCount > 0) {
-                if (mpDialogPages[mPrevPage].mbAnimLayout && mpDialogPages[mPrevPage].mpLayout) {
-                    mpDialogPages[mPrevPage].mpLayout->getAnim(0)->stopAnmFrame();
+            if (mPageCount > 0) {
+                if (mpPages[mPrevPage].isLytAnim && mpPages[mPrevPage].layoutObj) {
+                    mpPages[mPrevPage].layoutObj->getAnim(0)->stop();
                 }
 
-                if (mCurPage < 0 || mCurPage == mDialogPageCount) {
+                if (mCurPage < 0 || mCurPage == mPageCount) {
                     mbNextState = true;
                     mState = DIALOG_STATE_SELECT;
                 }
@@ -1212,7 +1229,7 @@ namespace ipl {
     int DialogWindow::get_button_no(const char* btnName) {
         int result = -1;
         for (int i = 0; i < 3; i++) {
-            if (strncmp(mscBtnName[i], btnName, 0x10) == 0) {
+            if (strncmp(mscBtnName[i], btnName, 16) == 0) {
                 result = i;
                 break;
             }
@@ -1221,22 +1238,22 @@ namespace ipl {
     }
 
     void DialogWindow::onEvent(u32 compId, u32 event, void* data) {
-        ::gui::PaneComponent* component = (::gui::PaneComponent*)mpManager->getComponent(compId);
+        gui::PaneComponent* component = static_cast<gui::PaneComponent*>(mpManager->getComponent(compId));
         const char* paneName = component->getPane()->GetName();
 
-        controller::Interface* con = (controller::Interface*)data;
+        controller::Interface* con = reinterpret_cast<controller::Interface*>(data);
 
         switch (event) {
             case ::gui::EventHandler::ON_POINT: {
                 start_point_event(paneName, con);
                 break;
             }
-            case ::gui::EventHandler::ON_OFFPOINT: {
+            case ::gui::EventHandler::ON_LEFT: {
                 start_left_event(paneName);
                 break;
             }
             case ::gui::EventHandler::ON_TRIG: {
-                if ((int)mState == DIALOG_STATE_NORMAL && con->downTrg(IPL_BUTTON_A)) {
+                if (mState == DIALOG_STATE_NORMAL && con->downTrg(IPL_BUTTON_A)) {
                     start_trig_event(paneName);
                 }
                 break;

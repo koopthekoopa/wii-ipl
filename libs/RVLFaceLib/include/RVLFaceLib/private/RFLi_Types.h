@@ -4,6 +4,8 @@
 #include <revolution/types.h>
 #include <RVLFaceLib/RFL_Types.h>
 
+#include <stddef.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -218,5 +220,3 @@ typedef struct RFLiCharData {
 #endif
 
 #endif // RFL_INTERVAL_TYPES_H
-
-

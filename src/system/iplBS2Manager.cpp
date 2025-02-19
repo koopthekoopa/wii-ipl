@@ -156,7 +156,7 @@ namespace ipl {
         void Manager::splashTick(BS2State state) {
             switch (state) {
                 case BS2_STATE_52:
-                case BS2_STATE_53: { 
+                case BS2_STATE_53: {
                     unk_0x1C = BS2_STATE_52;
                     unk_0x04 = 1;
                     break;
@@ -185,7 +185,7 @@ namespace ipl {
                 }
                 case BS2_STATE_56:
                 case BS2_STATE_59:
-                case BS2_STATE_71: {
+                case BS2_STATE_68: {
                     unk_0x1C = BS2_STATE_52;
                     unk_0x04 = 7;
                     break;
@@ -331,5 +331,3 @@ namespace ipl {
         }
     }
 }
-
-

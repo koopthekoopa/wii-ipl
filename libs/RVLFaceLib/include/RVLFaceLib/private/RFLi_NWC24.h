@@ -1,8 +1,6 @@
 #ifndef RFL_INTERVAL_NWC24_H
 #define RFL_INTERVAL_NWC24_H
 
-#include <decomp_types.h>
-
 #include <revolution/types.h>
 #include <revolution/nwc24/NWC24MsgBoard.h>
 

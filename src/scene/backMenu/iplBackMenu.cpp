@@ -4,9 +4,37 @@ extern u8 backToWiiMenu_arc[];
 
 namespace ipl {
     namespace scene {
+        static bool has_prepared_for_boot() {
+            bool bResourceDone = false;
+            bool bCommonResDone = false;
+
+            // Check is system resources are loaded.
+            // (This does not use `System::isRsrcLoaded()` for some reason)
+#ifdef USE_ZI8
+            if (System::isCmnResLoaded() && System::isFontResLoaded() && System::isSndResLoaded()) {
+                bCommonResDone = true;
+            }
+            if (bCommonResDone && System::isZi8ResLoaded()) {
+                bResourceDone = true;
+            }
+#else
+            if (System::isCmnResLoaded() && System::isFontResLoaded()) {
+                bCommonResDone = true;
+            }
+            if (bCommonResDone && System::isSndResLoaded()) {
+                bResourceDone = true;
+            }
+#endif
+            if (bResourceDone) {
+                return true;
+            }
+
+            return false;
+        }
+
         BackMenu::BackMenu(EGG::Heap* heap) :
         FaderSceneBase(heap),
-        unk_0x5C(0) {
+        unused_0x5C(0) {
             mFlags = 2;
         }
 
@@ -46,7 +74,7 @@ namespace ipl {
             SceneCommand result = SCENE_CONTINUE;
 
             // Get out of scene ones resources are fully loaded.
-            if (Util::resourceLoaded()) {
+            if (has_prepared_for_boot()) {
                 result = SCENE_NEXT;
             }
 

@@ -1,6 +1,8 @@
 #ifndef REVOLUTION_TYPES_H
 #define REVOLUTION_TYPES_H
 
+#include <decomp.h>
+
 typedef signed char         s8;
 typedef signed short        s16;
 typedef signed long         s32;
@@ -38,7 +40,9 @@ typedef int                 BOOL;
 
 #define ATTRIBUTE_ALIGN(num)    __attribute__((aligned(num)))
 
-#define DEFAULT_ALIGN       32
+#define DEFAULT_ALIGN           32
+
+#define ALIGN32                 ATTRIBUTE_ALIGN(DEFAULT_ALIGN)
 
 #endif // REVOLUTION_TYPES_H
 

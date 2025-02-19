@@ -8,18 +8,25 @@
 #include <revolution/arc.h>
 #include <revolution/es.h>
 
+#include <revolution/net/NETDigest.h>
+
 #include <egg/core.h>
 
-#define NANDTitleIdLo(t)   (unsigned int)(((unsigned long long)(t)) & 0xFFFFFFFF)
-#define NANDTitleIdHi(t)   (unsigned int)((((unsigned long long)(t)) >> 32) & 0xFFFFFFFF)
+#include "system/iplNandWrapper.h"
 
 namespace ipl {
     namespace nand {
-        enum NandErrResult {
+        enum {
             IPL_NAND_RESULT_NONE = 0,
             IPL_NAND_RESULT_SUCCESS,
             IPL_NAND_RESULT_VERIFY_ERROR,
             IPL_NAND_RESULT_OPEN_ERROR,
+        };
+
+        enum {
+            IPL_FILE_MODE_NONE = 0,
+            IPL_FILE_MODE_WRITE,
+            IPL_FILE_MODE_READ,
         };
 
         class Base {
@@ -37,8 +44,10 @@ namespace ipl {
         
         class File : public Base {
             public:
-                File(EGG::Heap* heap, const char* fileName, ARCHandle* arc, const char* unk2, int offset, u32 length, bool isInNand);
+                File(EGG::Heap* heap, const char* fileName, ARCHandle* arc, const char* nandFileName, int offset, u32 length, bool bIsInNand);
+                
                 File(EGG::Heap* heap, const char* fileName, u8* buffer, u32 length, u8 perms);
+                
                 virtual ~File();                                                        // 0x08
 
                 /**
@@ -54,9 +63,19 @@ namespace ipl {
                 virtual bool    isFatalError();                                         // 0x1C
 
                 u8*             getBuffer() const       { return mpBuffer; }
-                u32             getLength() const       { return mpLength; }
+                u32             getLength() const       { return mFileLength; }
                 
                 bool            isFullForTask() const   { return mbIsFullForTask; }
+            
+            private:
+                typedef struct MD5Head {
+                    u8          sig[4];         // 0x00 (always `IMD5`; IPL MD5?)
+                    u32         length;         // 0x04
+                    u8          reserved[8];    // 0x08
+                    NETMD5Sum   md5;            // 0x10
+                } MD5Head;
+
+                typedef s8 MD5Bool; // eh
 
             protected:
                 virtual BOOL    open_(u8 attr);                                         // 0x20
@@ -80,8 +99,8 @@ namespace ipl {
 
                 virtual void    callback_();                                            // 0x50
 
-            protected:
-                NandErrResult   calcMD5_(const u8* sum, const u8* buffer, u32 length) const;
+                int             calcMD5_(const u8* sum, const u8* buffer, u32 length) const;
+
                 BOOL            nand_error_handling(int result);
 
                 EGG::Heap*      mpHeap;                                                 // 0x04
@@ -89,34 +108,32 @@ namespace ipl {
                 char            msFileName[NAND_MAX_PATH + 1];                          // 0x08
 
                 ARCHandle*      mpArc;                                                  // 0x4C
-                
-                char            msUnkFileName[NAND_MAX_PATH + 1];                       // 0x50 (this seems to be unused)
+                char            msNandFileName[NAND_MAX_PATH + 1];                      // 0x50
 
                 int             mFileOffset;                                            // 0x94
-                u32             mpLength;                                               // 0x98
-                bool            mbInit;                                                 // 0x9C
+                u32             mFileLength;                                            // 0x98
+                u8              mFileMode;                                              // 0x9C
                 u8              mFilePerms;
 
                 u8*             mpBuffer;                                               // 0xA0
                 u8*             mpCmpBuffer;                                            // 0xA4
 
-                NandErrResult   mResult;                                                // 0xA8
+                int             mResult;                                                // 0xA8
                 volatile BOOL   mbDoneTask;                                             // 0xAC
                 
                 ARCFileInfo     mArcFile;                                               // 0xB0
-
-                u8              unk_0xBC[0x3C];                                         // unused?
-
+                u8              unused_0xBC[0x3C];
                 NANDFileInfo    mNandFile;                                              // 0xF8
-                int             mLastError;                                             // 0x184
-                bool            mbFatalError;                                           // 0x188
+
+                volatile int    mLastError;                                             // 0x184
+                volatile bool   mbFatalError;                                           // 0x188
                 bool            mbIsFullForTask;                                        // 0x189
                 BOOL            mbIsNandFile;                                           // 0x18C
         };
 
         class LangFile : public Base {
             public:
-                LangFile(EGG::Heap* heap, const char* dirName, const char* fileName, ARCHandle* arc, bool isInNand);
+                LangFile(EGG::Heap* heap, const char* dirName, const char* fileName, ARCHandle* arc, bool bIsNandFile);
                 virtual ~LangFile();                                                    // 0x08
 
                 virtual void    read();                                                 // 0x0C
@@ -135,7 +152,7 @@ namespace ipl {
 
         class LayoutFile : public LangFile {
             public:
-                LayoutFile(EGG::Heap* heap, const char* dirName, const char* fileName, ARCHandle* arc, bool isNandFile);
+                LayoutFile(EGG::Heap* heap, const char* dirName, const char* fileName, ARCHandle* arc, bool bIsNandFile);
                 virtual ~LayoutFile();                                                  // 0x08
         };
     }

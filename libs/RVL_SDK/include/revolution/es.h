@@ -16,6 +16,10 @@ ESError ES_CloseContentFile(s32 fd);
 
 ESError ES_SetUid(ESTitleId titleId); // (For System Menu only)
 
+ESError ES_ListTitlesOnCard(ESTitleId* titleIds, u32* numTitles);
+
+ESError ES_GetTicketViews(ESTitleId titleId, ESTicketView* ticketView, u32* ticketCount);
+
 BOOL    ES_VerifyCK2(); // Check for "Common Key 2" (The Korean Key)
 
 #ifdef __cplusplus

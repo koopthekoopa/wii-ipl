@@ -1,6 +1,8 @@
 #ifndef REVOLUTION_OS_TIME_H
 #define REVOLUTION_OS_TIME_H
 
+#include <revolution/types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

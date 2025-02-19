@@ -7,6 +7,8 @@
 extern "C" {
 #endif
 
+void    DCFlushRange(void* addr, u32 size);
+
 void    DCStoreRange(void* addr, u32 size);
 void    DCInvalidateRange(void* addr, u32 size);
 
@@ -15,5 +17,3 @@ void    DCInvalidateRange(void* addr, u32 size);
 #endif
 
 #endif // REVOLUTION_OS_CACHE_H
-
-

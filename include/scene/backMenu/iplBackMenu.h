@@ -31,7 +31,7 @@ namespace ipl {
             
             private:
                 layout::Object* mpLayout;   // 0x58
-                undefined4      unk_0x5C;   // 0x5C
+                u32             unused_0x5C;   // 0x5C
         };
     }
 }

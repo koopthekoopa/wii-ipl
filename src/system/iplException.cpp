@@ -7,7 +7,7 @@
 #include <cstring>
 
 namespace ipl {
-    static const s32 sKeyInputs[] = {
+    static const u32 sKeyInputs[8] = {
         // Left, down, down, 1, -, 2, +, down
         WPAD_BUTTON_LEFT,
         WPAD_BUTTON_DOWN,
@@ -31,11 +31,11 @@ namespace ipl {
         exception->exception_callback(console);
     }
 
-    Exception::Exception(EGG::Heap* heap, const GXRenderModeObj& rMode) {
-        mConsole = NULL;
-        unk_0x04 = 0;
-        mpBuffer = NULL;
-        unk_0x0C = *(sKeyInputs);
+    Exception::Exception(EGG::Heap* heap, const GXRenderModeObj& rMode) :
+    mConsole(NULL),
+    unk_0x04(0),
+    mpBuffer(),
+    unk_0x0C(0) {
 
         nw4r::db::Exception_Init();
         nw4r::db::DirectPrint_Init();
@@ -70,9 +70,20 @@ namespace ipl {
                 KPADRead(i, &cons[i], 1);
             }
             
-            wait(50);
+            wait(50); // A hacky way of ensuring the controllers are read?
 
             // todo
+            for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
+                u32 pressed = cons[i].trig;
+                if (pressed) {
+                    if (pressed & sKeyInputs[inputCur]) {
+                        inputCur++;
+                    }
+                    else {
+                        inputCur = 0;
+                    }
+                }
+            }
         }
     }
 
@@ -102,7 +113,7 @@ namespace ipl {
         KPADStatus cons[WPAD_MAX_CONTROLLERS];
         memset(cons, 0, sizeof(cons));
 
-        while (TRUE) {
+        while (true) {
             int yPrevCur = yCur;
             int xCur = mConsole->viewPosX;
             int xPrevCur = xCur;
@@ -112,7 +123,7 @@ namespace ipl {
                 KPADRead(i, &cons[i], 1);
             }
 
-            wait(50); // A hacky way of ensuring the controllers are initialiazed?
+            wait(50); // A hacky way of ensuring the controllers are read?
 
             int chan = 0;
             for (int i = WPAD_MAX_CONTROLLERS; i != 0; i--) {
@@ -156,5 +167,3 @@ namespace ipl {
 /***********************************************************************
  * TODO: Generate weak function nw4r::ut::Color::operator=(const Color&)
  ***********************************************************************/
-
-

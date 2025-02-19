@@ -26,8 +26,8 @@ struct OSAlarm {
 };
 
 typedef struct OSAlarmQueue {
-    OSAlarm* head; // 0x00
-    OSAlarm* tail; // 0x04
+    OSAlarm* head;              // 0x00
+    OSAlarm* tail;              // 0x04
 } OSAlarmQueue;
 
 void OSCreateAlarm(OSAlarm* pAlarm);

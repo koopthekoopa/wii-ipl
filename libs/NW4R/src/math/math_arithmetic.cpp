@@ -6,17 +6,19 @@ namespace nw4r {
             register f32 rsqrt;
             register f32 c_half = 0.5f, c_three = 3.0f;
             register f32 work0, work1;
-            asm {
-                // Estimate reciprocal square root
-                frsqrte rsqrt, x
-                
-                // Refine estimate using Newton-Raphson method
-                // y = 1 / sqrt(x)
-                fmuls work0, rsqrt, rsqrt         // rsqrt^2
-                fmuls work1, rsqrt, c_half        // rsqrt * 0.5
-                fnmsubs work0, work0, x, c_three  // (3 - x * rsqrt^2)
-                fmuls work1, work0, work1         // (3 - x * rsqrt^2) * (rsqrt * 0.5)
-            }
+            #ifdef __MWERKS__
+                asm {
+                    // Estimate reciprocal square root
+                    frsqrte rsqrt, x
+                    
+                    // Refine estimate using Newton-Raphson method
+                    // y = 1 / sqrt(x)
+                    fmuls work0, rsqrt, rsqrt         // rsqrt^2
+                    fmuls work1, rsqrt, c_half        // rsqrt * 0.5
+                    fnmsubs work0, work0, x, c_three  // (3 - x * rsqrt^2)
+                    fmuls work1, work0, work1         // (3 - x * rsqrt^2) * (rsqrt * 0.5)
+                }
+            #endif
             return work1;
         }
 

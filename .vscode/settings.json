@@ -10,7 +10,7 @@
     "[python]": {
       "editor.defaultFormatter": "ms-python.black-formatter"
     },
-    // "editor.tabSize": 2,
+    "editor.tabSize": 4,
     "files.autoSave": "onFocusChange",
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
@@ -18,7 +18,9 @@
       "*.inc": "c",
       ".clangd": "yaml"
     },
-    // Disable C/C++ IntelliSense, use clangd instead
     "C_Cpp.intelliSenseEngine": "disabled",
+    "clangd.arguments": [
+      "--header-insertion=never"
+    ]
   }
   

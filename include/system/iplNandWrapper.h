@@ -3,7 +3,7 @@
 
 #include <decomp.h>
 
-#include <revolution.h>
+#include <revolution/nand.h>
 
 namespace ipl {
     namespace nand {
@@ -46,4 +46,3 @@ namespace ipl {
 }
 
 #endif // IPL_NAND_WRAPPER_H
-

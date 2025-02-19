@@ -3,9 +3,10 @@
 namespace ipl {
     namespace utility {
         void* ut_thread::ThreadMain_(void* param) {
-            ut_thread* pThread = ((ut_thread*)param);
             OSInitFastCast();
-            return pThread->Run();
+            
+            ut_thread* thread = reinterpret_cast<ut_thread*>(param);
+            return thread->Run();
         }
 
         ut_thread::ut_thread() :

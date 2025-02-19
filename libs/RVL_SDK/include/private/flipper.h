@@ -1,22 +1,31 @@
 #ifndef REVOLUTION_FLIPPER_H
 #define REVOLUTION_FLIPPER_H
 
-#include <revolution/types.h>
+#include <revolution/os.h>
 
-vu16 __VIRegs[0x3B]     : 0xCC002000;
-vu32 __PIRegs[0xC]      : 0xCC003000;
-#define PI_REG(X)       (__PIRegs[X / 4])
-vu16 __DSPRegs[0x20]    : 0xCC005000;
-vu32 __AIRegs[0x8]      : 0xCD006C00;
-vu32 __EXIRegs[0x10]    : 0xCD006800;
-vu16 __MEMRegs[0x40]    : 0xCC004000;
-vu32 __DIRegs[16]       : 0xCD006000;
-vu32 __SIRegs[64]       : 0xCD006400;
-vu32 __ACRRegs[89]      : 0xCD000000;
-vu32 __IPCRegs[4]       : (0xC000 << 16) + 0x0D000000;
+#define VI_REG_ADDRESS  0x0C002000
+vu16    __VIRegs[59]    ADDRESS(OS_BASE_UNCACHED + VI_REG_ADDRESS);
 
-inline void ACRWriteReg(u32 offset, u32 val) {
-    __ACRRegs[offset >> 2] = val;
-}
+#define PI_REG_ADDRESS  0x0C003000
+vu32    __PIRegs[12]    ADDRESS(OS_BASE_UNCACHED + PI_REG_ADDRESS);
+#define PI_REG(X)       (__PIRegs[X >> 2])
+
+#define DSP_REG_ADDRESS 0x0C005000
+vu16    __DSPRegs[32]   ADDRESS(OS_BASE_UNCACHED + DSP_REG_ADDRESS);
+
+#define AI_REG_ADDRESS  0x0C006C00
+vu32    __AIRegs[8]     ADDRESS(OS_BASE_UNCACHED + AI_REG_ADDRESS);
+
+#define EXI_REG_ADDRESS 0x0D006800
+vu32    __EXIRegs[16]   ADDRESS(OS_BASE_UNCACHED + EXI_REG_ADDRESS);
+
+#define MEM_REG_ADDRESS 0x0D004000
+vu16    __MEMRegs[64]   ADDRESS(OS_BASE_UNCACHED + MEM_REG_ADDRESS);
+
+#define DI_REG_ADDRESS 0x0D006000
+vu32    __DIRegs[16]    ADDRESS(OS_BASE_UNCACHED + DI_REG_ADDRESS);
+
+#define SI_REG_ADDRESS 0x0D006400
+vu32    __SIRegs[64]    ADDRESS(OS_BASE_UNCACHED + SI_REG_ADDRESS);
 
 #endif // REVOLUTION_FLIPPER_H

@@ -11,6 +11,8 @@
 #include <nw4r/lyt.h>
 
 namespace gui {
+    /* GUI MANAGER */
+
     #define GUI_POINTS_MAX  8
 
     class Interface;
@@ -36,7 +38,7 @@ namespace gui {
             enum {
                 ON_TRIG = 0,
                 ON_POINT,
-                ON_OFFPOINT,
+                ON_LEFT,
                 ON_MOVE,
                 ON_HOLD,
                 ON_RELEASE,
@@ -145,7 +147,7 @@ namespace gui {
                 if (mpEventHandler != NULL) {
                     mpEventHandler->setManager(this);
                 }
-                nw4r::ut::List_Init(&mComponents, offsetof(ComponentID, mLink));
+                nw4r::ut::List_Init(&mComponents, offsetof(IDToComponent, mLink));
             }
 
             virtual ~Manager();                                                                                     // 0x1C (0x07)
@@ -183,9 +185,9 @@ namespace gui {
             virtual void            setDraggingButton(u32 dragBtn);                                                     // 0x40 (0x10)
         
         protected:
-            class ComponentID {
+            class IDToComponent {
                 public:
-                    ComponentID(u32 id, Component* component) :
+                    IDToComponent(u32 id, Component* component) :
                     mID(id),
                     mpComponent(component) {}
 
@@ -200,13 +202,17 @@ namespace gui {
             MEMAllocator*   mpAllocator;    // 0x14
     };
 
+    /* PANE GUI MANAGER */
+
     class PaneComponent;
+    class PaneManager;
+
     class PaneManager : public Manager {
         public:
             PaneManager(EventHandler* event, MEMAllocator* allocator, const nw4r::lyt::DrawInfo* drawInfo) :
             Manager(event, allocator),
             mpDrawInfo(drawInfo) {
-                nw4r::ut::List_Init(&mPaneComponents, offsetof(PaneComponentID, mLink));
+                nw4r::ut::List_Init(&mPaneComponents, offsetof(PaneToComponent, mLink));
             }
 
             virtual ~PaneManager();                                                                                             // 0x1C (0x07)
@@ -222,9 +228,9 @@ namespace gui {
             virtual void                        walkInChildren(nw4r::lyt::PaneList& paneList);                                  // 0x58 (0x16)
         
         protected:
-            class PaneComponentID {
+            class PaneToComponent {
                 public:
-                    PaneComponentID(nw4r::lyt::Pane* pane, PaneComponent* component) :
+                    PaneToComponent(nw4r::lyt::Pane* pane, PaneComponent* component) :
                     mpPane(pane),
                     mpComponent(component) {}
 
@@ -263,7 +269,6 @@ namespace gui {
     };
 }
 
-#define USE_GUI_MANAGER     namespace gui { class PaneManager; }
-#define IPL_USE_GUI_MANAGER namespace ipl { USE_GUI_MANAGER }
+#define USING_GUI   namespace gui { class PaneManager; }
 
 #endif // GUI_MANAGER_H

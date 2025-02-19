@@ -1,8 +1,7 @@
 #ifndef REVOLUTION_OS_H
 #define REVOLUTION_OS_H
 
-#include <decomp_utils.h>
-
+#include <revolution/types.h>
 #include <revolution/gx/GXStruct.h>
 
 #include <stdarg.h>
@@ -43,8 +42,8 @@ typedef u32 OSTick;
 #define OSCachedToUncached(caddr)       ((void*)((u8*)(caddr)  + (OS_BASE_UNCACHED - OS_BASE_CACHED)))
 #define OSUncachedToCached(ucaddr)      ((void*)((u8*)(ucaddr) - (OS_BASE_UNCACHED - OS_BASE_CACHED)))
 
-u32     __OSBusClock                    : OS_BASE_CACHED | 0x000000F8;
-u32     __OSCoreClock                   : OS_BASE_CACHED | 0x000000FC;
+u32     __OSBusClock                    ADDRESS(OS_BASE_CACHED + 0x000000F8);
+u32     __OSCoreClock                   ADDRESS(OS_BASE_CACHED + 0x000000FC);
 
 #define OS_BUS_CLOCK                    __OSBusClock
 #define OS_CORE_CLOCK                   __OSCoreClock
@@ -87,9 +86,9 @@ OSTime  OSGetTime();
 OSTick  OSGetTick();
 void    OSSleepTicks(OSTime ticks);
 
-BOOL    OSDisableInterrupts();
-BOOL    OSEnableInterrupts();
-BOOL    OSRestoreInterrupts(BOOL level);
+int     OSDisableInterrupts();
+int     OSEnableInterrupts();
+int     OSRestoreInterrupts(int level);
 
 void    OSReturnToMenu();
 

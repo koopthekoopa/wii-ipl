@@ -29,16 +29,13 @@ namespace ipl {
                 void            setFrame();
 
                 void            initAnmFrame();
-                void            initAnmFrame(float frame);
+                void            initAnmFrame(f32 frame);
 
-                void            playAnmFrame() {
-                    initFrame();
-                    mState = ANIM_STATE_PLAY;
-                }
+                inline void init()          { initAnmFrame(); }
 
-                void            stopAnmFrame() {
-                    mState = ANIM_STATE_READY;
-                }
+                inline void play()          { initFrame(); mState = ANIM_STATE_PLAY; }
+
+                inline void stop()          { mState = ANIM_STATE_STOP; }
 
             protected:
                 nw4r::lyt::AnimTransform*   mAnimTrans; // 0x20
@@ -130,7 +127,8 @@ namespace ipl {
                 /** @brief Gets the root pane of the layout. */
                 nw4r::lyt::Pane*        getRoot()                       { return getLayout()->GetRootPane(); }
                 nw4r::lyt::Pane*        findPane(const char *findName)  { return getRoot()->FindPaneByName(findName); }
-                Animator*               getAnim(u16 idx)                { return (Animator*)nw4r::ut::List_GetNth(&mAnims, idx); }
+
+                Animator*               getAnim(int idx)                { return static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, idx)); }
             private:
                 void                    init_(const char* fileName);
 

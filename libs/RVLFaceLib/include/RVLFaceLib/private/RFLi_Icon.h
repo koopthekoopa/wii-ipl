@@ -1,8 +1,6 @@
 #ifndef RFL_INTERVAL_ICON_H
 #define RFL_INTERVAL_ICON_H
 
-#include <decomp_types.h>
-
 #include <revolution/types.h>
 
 #include <RVLFacelib/private/RFLi_Types.h>

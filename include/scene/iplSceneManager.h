@@ -1,6 +1,8 @@
 #ifndef IPL_SCENE_MANAGER_H
 #define IPL_SCENE_MANAGER_H
 
+#define INCLUDED_SCENE_MANAGER
+
 #include <decomp.h>
 
 #include <revolution.h>
@@ -31,16 +33,16 @@ namespace ipl {
         };
 
         typedef struct Command {
-            int     mType;          // 0x00
+            int     type;           // 0x00
 
-            int     mNewSceneID;    // 0x04
-            int     mPrevSceneID;   // 0x08
-            int     mNewRootID;     // 0x0C
+            int     newSceneID;     // 0x04
+            int     prevSceneID;    // 0x08
+            int     newRootID;      // 0x0C
 
-            Base*   mParent;        // 0x10
-            Base*   mChild;         // 0x14
+            Base*   parent;         // 0x10
+            Base*   child;          // 0x14
             
-            void*   mArgs;          // 0x1
+            void*   args;           // 0x18
 
             void        clear();
 

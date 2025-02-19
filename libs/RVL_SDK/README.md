@@ -3,7 +3,7 @@ Revolution SDK Decompilation
 A decompilation of the Revolution SDK (RVL_SDK) from the Wii Menu.  
 
 This version of the SDK is a mess.  
-Seems to be an SDK version from 2006 with lazily copied code from later versons and was (mostly?) recompiled in 2010 with the GC 3.0a5.2 compiler.
+Seems to be an SDK version from 2006 with lazily copied code from later versons and was (mostly) recompiled with the GC 3.0a5.2 compiler.
 
 The Wii Menu has the following libraries linked (alphabetical order):
 * **AI** (Audio Interface Library)
@@ -44,9 +44,11 @@ The Wii Menu has the following libraries linked (alphabetical order):
 * **SI** (Serial Interface Library)
 * **TPL** (Texture Pallete Library)
 * **USB** (IUSB I/O API; written by Hudson Soft)
+* **USBUTIL** (USB Utilities)
+* **USBKBD** (USB Keyboard)
 * **VI** (Video Interface Library)
 * **WAD** (WAD Package Library)
-* **WENC** (Some Encoding Library)
+* **WENC** (Wii Remote Speaker Encoding Library)
 * **WPAD** (Low Level Wii Remote Library)
 * **WUD** (Wireless Driver Library)
 
@@ -56,5 +58,3 @@ Thanks to
 [SMGCommunity/Petari](https://github.com/SMGCommunity/Petari)  
 [doldecomp/dolsdk2001](https://github.com/doldecomp/dolsdk2001)  
 [devkitPro/libogc](https://github.com/devkitPro/libogc)  
-
-

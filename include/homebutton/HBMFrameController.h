@@ -12,9 +12,9 @@ namespace homebutton {
     };
 
     enum {
-        ANIM_STATE_READY = 0,
+        ANIM_STATE_STOP = 0,
         ANIM_STATE_PLAY,
-        ANIM_STATE_STOP,
+        ANIM_STATE_STOP_REQ,
     };
 
     class FrameController {

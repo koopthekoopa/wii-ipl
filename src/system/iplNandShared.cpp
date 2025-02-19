@@ -1,10 +1,5 @@
 #include "system/iplNandShared.h"
 
-#include "egg/core/eggHeap.h"
-#include "private/estypes.h"
-#include "revolution/arc.h"
-#include "revolution/es.h"
-#include "system/iplErrorHandler.h"
 #include "system/iplSystem.h"
 #include "utility/iplESMisc.h"
 
@@ -62,7 +57,7 @@ namespace ipl {
                 goto err;
             }
             
-            ARCHeader header ATTRIBUTE_ALIGN(DEFAULT_ALIGN);
+            ARCHeader header ALIGN32;
             if (ES_ReadContentFile(mDescriptor, &header, sizeof(ARCHeader)) < ES_ERR_OK) {
                 code = 500;
                 goto err;
@@ -88,7 +83,7 @@ namespace ipl {
                 sprintf(errString, "ES %d, %llx, %llx, %x", errcode, erridx, mTitleId);
                 
                 System::err_log(errString, code, 158);
-                System::err_display(MESG_ERR_CONTENT);
+                System::err_display(MESG_ERR_FILE);
 
                 return FALSE;
             }
@@ -108,7 +103,7 @@ namespace ipl {
             }
             else {
                 System::err_log("ES", 0, 189);
-                System::err_display(MESG_ERR_CONTENT);
+                System::err_display(MESG_ERR_FILE);
 
                 return FALSE;
             }
@@ -132,7 +127,7 @@ namespace ipl {
             if (ES_SeekContentFile(mDescriptor, arcOffset + offset, NAND_SEEK_BEG) < ES_ERR_OK
             || ES_ReadContentFile(mDescriptor, buffer, length) < ES_ERR_OK) {
                 System::err_log("ES", 0, 358);
-                System::err_display(MESG_ERR_CONTENT);
+                System::err_display(MESG_ERR_FILE);
             }
         }
     }

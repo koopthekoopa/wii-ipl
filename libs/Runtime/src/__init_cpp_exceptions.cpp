@@ -1,4 +1,4 @@
-#include <decomp_ide.h>
+#include <decomp.h>
 #include <__ppc_eabi_linker.h>
 #include <__ppc_eabi_init.h>
 #include <NMWException.h>
@@ -19,7 +19,9 @@ extern void __fini_cpp_exceptions();
 static inline void __exception_info_constants(__eti_init_info* info, char** R2) {
     register char*  temp;
 
+#ifdef __MWERKS__
     asm { mr temp, r2; }
+#endif
     *R2 = temp;
     
     info = _eti_init_info;

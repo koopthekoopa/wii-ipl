@@ -1,21 +1,24 @@
-#ifndef BASE_SCENE_H
-#define BASE_SCENE_H
-
-#include "sound/iplSound.h"
+#ifndef IPL_BASE_SCENE_H
+#define IPL_BASE_SCENE_H
 
 #include "utility/iplTree.h"
-#include "utility/iplGraphics.h"
 
 #include "layout/iplLayout.h"
+#include "layout/GUIManager.h"
+#include "utility/iplGraphics.h"
+
+#include "sound/iplSound.h"
 
 #include "scene/iplSceneManager.h"
 
 #include <revolution.h>
-#include <revolution/gx.h>
 #include <revolution/kpad.h>
 #include <revolution/sc.h>
 
-#define SCENE_CLASS(x)  class x : public ipl::scene::Base
+#define SCENE_USING_GUI     namespace ipl { USING_GUI }
+
+#define SCENE_CLASS(x)      class x : public ipl::scene::Base
+#define SCENE_GUI_CLASS(x)  class x : public ipl::scene::Base,  public ::gui::EventHandler
 
 namespace ipl {
     namespace scene {
@@ -57,14 +60,14 @@ namespace ipl {
                  * @param sceneId The target scene.
                  * @param arg Arguments for the scene.
                 */
-                void            createChildScene(int sceneId, Base* parent, Base* child, void* arg);
+                void            createChildScene(int sceneId, Base* parent, Base* child, void* args);
                 /**
                  * @brief Send a request to change scene.
                  * @param sceneId The target scene.
                  * @param arg Arguments for the scene.
                 */
-                void            reserveSceneChange(int sceneId, void* arg);
-                void            reserveAllSceneDestruction(int sceneId, void* arg);
+                void            reserveSceneChange(int sceneId, void* args);
+                void            reserveAllSceneDestruction(int sceneId, void* args);
                 
                 virtual Base*   getParent()                 { return (Base*)mpParent; }
                 virtual Base*   getChild()                  { return (Base*)mpChild; }
@@ -119,4 +122,4 @@ namespace ipl {
 
 #include "system/iplSystem.h"
 
-#endif // BASE_SCENE_H
+#endif // IPL_BASE_SCENE_H

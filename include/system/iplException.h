@@ -30,10 +30,8 @@ namespace ipl {
             
             u8*                             mpBuffer;   // 0x08
             
-            undefined4                      unk_0x0C;
+            int                             unk_0x0C;
     };
 }
 
 #endif // IPL_MESSAGE_H
-
-

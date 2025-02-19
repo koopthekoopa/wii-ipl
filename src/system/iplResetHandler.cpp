@@ -14,7 +14,6 @@ namespace ipl {
     mbReturnToMenu(FALSE),
     mFatalState(FATAL_STATE_NONE) {
         #pragma unused(heap)
-
         // Prepare the fade out.
         System::getResetFader()->setStatus(EGG::Fader::STATUS_PREPARE_OUT);
         System::getResetFader()->calc();
@@ -109,5 +108,3 @@ namespace ipl {
         }
     }
 }
-
-

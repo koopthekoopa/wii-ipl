@@ -1,6 +1,8 @@
 #ifndef PPC_EABI_INIT_H
 #define PPC_EABI_INIT_H
 
+#include <decomp.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -18,5 +20,3 @@ extern void __init_user();
 #endif
 
 #endif // PPC_EABI_INIT_H
-
-

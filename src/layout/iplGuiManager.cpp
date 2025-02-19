@@ -7,7 +7,6 @@
 
 namespace ipl {
     namespace gui {
-        #pragma sym on
         void PaneManager::update() {
             mbDoneUpdateWithCon = false;
             for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {

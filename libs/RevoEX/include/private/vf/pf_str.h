@@ -4,7 +4,6 @@
 #include <revolution/types.h>
 
 enum {
-    /* ? */
     PF_STR_TARGET_HEAD = 1,
     PF_STR_TARGET_TAIL,
 };
@@ -17,7 +16,7 @@ enum {
 typedef struct PF_STR {
     const char* p_head;     // 0x00
     const char* p_tail;     // 0x04
-    
+
     u32         code_mode;  // 0x08
 } PF_STR;
 

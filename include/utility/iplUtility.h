@@ -25,5 +25,3 @@ namespace ipl {
 }
 
 #endif // IPL_UTILITY_H
-
-

@@ -7,8 +7,8 @@
 extern "C" {
 #endif
 
-u16 NETCalcCRC16(const void* pData, s32 size);
-u32 NETCalcCRC32(const void* pData, s32 size);
+u16 NETCalcCRC16(const void* data, s32 size);
+u32 NETCalcCRC32(const void* data, s32 size);
 
 typedef struct NETMD5Context {
     union {
@@ -29,6 +29,8 @@ typedef struct NETMD5Context {
 
 #define NET_MD5_DIGEST_SIZE 16
 
+typedef u8 NETMD5Sum[NET_MD5_DIGEST_SIZE];
+
 void NETMD5Init(NETMD5Context* context);
 void NETMD5Update(NETMD5Context* context, const void* input, u32 length);
 void NETMD5GetDigest(NETMD5Context* context, void* digest);
@@ -46,5 +48,3 @@ static void NETCalcMD5(void* digest, const void* input, u32 length) {
 #endif
 
 #endif // REVOEX_NET_DIGEST_H
-
-

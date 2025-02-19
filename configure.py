@@ -177,7 +177,7 @@ if not config.non_matching:
 # Tool versions
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "latest"
-config.dtk_tag = "v1.3.0"
+config.dtk_tag = "v1.4.1"
 config.objdiff_tag = "v2.7.1"
 config.sjiswrap_tag = "v1.2.0"
 config.wibo_tag = "0.6.16"
@@ -284,15 +284,25 @@ cflags_sdk_except = [
     "-O4,p",
 ]
 
-# Metrowerks library flags
+# Runtime & MSL library flags
 cflags_runtime = [
     *cflags_base,
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
     "-fp_contract off",
-    "-gccinc",
     "-Cpp_exceptions off",
+    "-gccinc",
+    "-D_IEEE_LIBM",
     "-O4,p",
+]
+
+# MetroTRK library flags
+cflags_trk = [
+    *cflags_base,
+    "-use_lmw_stmw on",
+    "-str reuse,pool,readonly",
+    "-inline deferred",
+    "-sdata 0",
 ]
 
 config.linker_version = "GC/3.0a5.2"
@@ -301,7 +311,7 @@ config.linker_version = "GC/3.0a5.2"
 def IPLSection(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
-        "mw_version": "GC/3.0a5.2",
+        "mw_version": config.linker_version,
         "cflags": cflags_ipl,
         "progress_category": "main",
         "objects": objects,
@@ -311,7 +321,7 @@ def IPLSection(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
 def ZI8Lib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
-        "mw_version": "GC/3.0a5.2",
+        "mw_version": config.linker_version,
         "cflags": cflags_sdk_except,
         "progress_category": "rvlmwm",
         "objects": objects,
@@ -323,7 +333,7 @@ def ZI8Lib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
 def ATOKLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
-        "mw_version": "GC/3.0a5.2",
+        "mw_version": config.linker_version,
         "cflags": cflags_sdk,
         "progress_category": "rvlmwm",
         "objects": objects,
@@ -334,7 +344,7 @@ def ATOKLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
 def RVLFaceLib(objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": "RVLFaceLib",
-        "mw_version": "GC/3.0a5.2",
+        "mw_version": config.linker_version,
         "cflags": cflags_sdk,
         "progress_category": "rvlfacelib",
         "objects": objects,
@@ -345,7 +355,7 @@ def RVLFaceLib(objects: List[Object]) -> Dict[str, Any]:
 def TMCJpegLib(objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": "TMC_JPEG",
-        "mw_version": "GC/3.0a5.2",
+        "mw_version": config.linker_version,
         "cflags": cflags_sdk,
         "progress_category": "rvlmwm",
         "objects": objects,
@@ -356,7 +366,7 @@ def TMCJpegLib(objects: List[Object]) -> Dict[str, Any]:
 def NW4RLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
-        "mw_version": "GC/3.0a5.2",
+        "mw_version": config.linker_version,
         "cflags": cflags_sdk,
         "progress_category": "nw4r",
         "objects": objects,
@@ -367,7 +377,7 @@ def NW4RLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
 def EGGLib(objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": "EGG",
-        "mw_version": "GC/3.0a5.2",
+        "mw_version": config.linker_version,
         "cflags": cflags_sdk,
         "progress_category": "egg",
         "objects": objects,
@@ -378,7 +388,7 @@ def EGGLib(objects: List[Object]) -> Dict[str, Any]:
 def RVLSDKLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
-        "mw_version": "GC/3.0a5.2",
+        "mw_version": config.linker_version,
         "cflags": cflags_sdk,
         "progress_category": "rvlsdk",
         "objects": objects,
@@ -389,22 +399,44 @@ def RVLSDKLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
 def RevoEXLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
-        "mw_version": "GC/3.0a5.2",
+        "mw_version": config.linker_version,
         "cflags": cflags_sdk,
         "progress_category": "revoex",
         "objects": objects,
         "src_dir": "libs/RevoEX/src",
     }
 
-# Helper function for Runtime libraries
+# Helper function for Runtime
 def RuntimeLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
-        "mw_version": "GC/3.0a5.2",
+        "mw_version": config.linker_version,
         "cflags": cflags_runtime,
         "progress_category": "mw",
         "objects": objects,
         "src_dir": "libs/Runtime/src",
+    }
+
+# Helper function for MSL
+def MSLLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
+    return {
+        "lib": lib_name,
+        "mw_version": "GC/3.0a3",
+        "cflags": cflags_runtime,
+        "progress_category": "mw",
+        "objects": objects,
+        "src_dir": "libs/MSL/src",
+    }
+ 
+ # Helper function for MetroTRK
+def TRKLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
+    return {
+        "lib": lib_name,
+        "mw_version": "GC/2.7",
+        "cflags": cflags_trk,
+        "progress_category": "mw",
+        "objects": objects,
+        "src_dir": "libs/MetroTRK/src",
     }
 
 Matching = True                   # Object matches and should be linked
@@ -427,7 +459,7 @@ config.libs = [
             Object(NonMatching, "system/iplController.cpp"),
             Object(NonMatching, "system/iplChannelManager.cpp"),
             Object(NonMatching, "system/iplChannelScriptManager.cpp"),
-            Object(Equivalent,  "system/iplNand.cpp"),
+            Object(Matching,    "system/iplNand.cpp"),
             Object(NonMatching, "system/iplNandShared.cpp"),
             Object(Matching,    "system/iplNandMeta.cpp"),
             Object(Matching,    "system/iplNandManager.cpp"),
@@ -444,7 +476,7 @@ config.libs = [
             Object(NonMatching, "system/iplNwc24Manager.cpp"),
             Object(Matching,    "system/iplPointer.cpp"),
             Object(Matching,    "system/iplPointerCore.cpp"),
-            Object(NonMatching, "system/iplDialogWindow.cpp"),
+            Object(Equivalent,  "system/iplDialogWindow.cpp"),
             Object(NonMatching, "system/iplHomeButtonMenu.cpp"),
             Object(NonMatching, "system/iplNandSDWorker.cpp"),
             Object(NonMatching, "system/iplKeyboard.cpp"),
@@ -461,7 +493,7 @@ config.libs = [
             Object(NonMatching, "system/iplSDVFWorker.cpp"),
             Object(Matching,    "system/iplNandWrapper.cpp"),
             Object(Matching,    "system/main.cpp"),
-            Object(NonMatching, "system/iplBS2Manager.cpp"),
+            Object(Matching,    "system/iplBS2Manager.cpp"),
             Object(NonMatching, "system/TVRC.cpp"),
             Object(NonMatching, "system/iplTVRCManager.cpp"),
             Object(Matching,    "system/_DATA_.c"),
@@ -1126,7 +1158,7 @@ config.libs = [
     NW4RLib("math",
         [
             Object(Matching,    "math/math_arithmetic.cpp"),
-            Object(Equivalent,  "math/math_triangular.cpp"),
+            Object(Matching,    "math/math_triangular.cpp"),
             Object(Matching,    "math/math_types.cpp"),
         ]
     ),
@@ -1246,7 +1278,7 @@ config.libs = [
             Object(NonMatching, "dvd/dvdqueue.c"),
             Object(NonMatching, "dvd/dvderror.c"),
             Object(NonMatching, "dvd/dvdidutils.c"),
-            Object(NonMatching, "dvd/dvdFatal.c"),
+            Object(Matching,    "dvd/dvdFatal.c"),
             Object(NonMatching, "dvd/dvd_broadway.c"),
         ]
     ),
@@ -1262,7 +1294,7 @@ config.libs = [
             Object(NonMatching, "ax/AXAux.c"),
             Object(NonMatching, "ax/AXCL.c"),
             Object(NonMatching, "ax/AXOut.c"),
-            Object(NonMatching, "ax/AXSPB.c"), # Technically equilavent but for some reason it makes the Wii Menu unusable, so it's left it NonMatching
+            Object(Matching,    "ax/AXSPB.c"),
             Object(NonMatching, "ax/AXVPB.c"),
             Object(Matching,    "ax/AXProf.c"),
             Object(Matching,    "ax/DSPCode.c"),
@@ -1369,19 +1401,530 @@ config.libs = [
             Object(NonMatching, "esp/esp.c"),
         ]
     ),
-    EGGLib(
+    RVLSDKLib("ipc",
         [
-            Object(NonMatching, "eggAllocator.cpp"),
-            Object(NonMatching, "eggAudioArcPlayerMgr.cpp"),
+            Object(NonMatching, "ipc/ipcMain.c"),
+            Object(NonMatching, "ipc/ipcclt.c"),
+            Object(NonMatching, "ipc/memory.c"),
+            Object(NonMatching, "ipc/ipcProfile.c"),
         ]
     ),
+    RVLSDKLib("fs",
+        [
+            Object(NonMatching, "fs/fs.c"),
+        ]
+    ),
+    RVLSDKLib("pad",
+        [
+            Object(NonMatching, "pad/Pad.c"),
+        ]
+    ),
+    RVLSDKLib("wpad",
+        [
+            Object(NonMatching, "wpad/WPAD.c"),
+            Object(NonMatching, "wpad/WPADHIDParser.c"),
+            Object(NonMatching, "wpad/WPADMem.c"),
+            Object(NonMatching, "wpad/WPADEncrypt.c"),
+            Object(NonMatching, "wpad/WPADEncrypt.c"),
+            Object(NonMatching, "wpad/debug_msg.c"),
+        ]
+    ),
+    RVLSDKLib("kpad",
+        [
+            Object(NonMatching, "kpad/KPAD.c"),
+        ]
+    ),
+    RVLSDKLib("euart",
+        [
+            Object(NonMatching, "euart/euart.c"),
+        ]
+    ),
+    RVLSDKLib("usb",
+        [
+            Object(NonMatching, "usb/usb.c"),
+        ]
+    ),
+    RVLSDKLib("wud",
+        [
+            Object(NonMatching, "wud/WUD.c"),
+            Object(NonMatching, "wud/WUDHidHost.c"),
+            Object(NonMatching, "wud/debug_msg.c"),
+        ]
+    ),
+    RVLSDKLib("bte",
+        [
+            Object(NonMatching, "bte/gki_buffer.c"),
+            Object(NonMatching, "bte/gki_time.c"),
+            Object(NonMatching, "bte/gki_ppc.c"),
+
+            Object(NonMatching, "bte/hcisu_h2.c"),
+            Object(NonMatching, "bte/uusb_ppc.c"),
+            Object(NonMatching, "bte/bta_dm_cfg.c"),
+            Object(NonMatching, "bte/bta_hh_cfg.c"),
+            Object(NonMatching, "bte/bta_sys_cfg.c"),
+            Object(NonMatching, "bte/bte_hcisu.c"),
+            Object(NonMatching, "bte/bte_init.c"),
+            Object(NonMatching, "bte/bte_logmsg.c"),
+            Object(NonMatching, "bte/bte_main.c"),
+            Object(NonMatching, "bte/btu_task1.c"),
+            Object(NonMatching, "bte/bd.c"),
+            Object(NonMatching, "bte/bta_sys_conn.c"),
+            Object(NonMatching, "bte/bta_sys_main.c"),
+            Object(NonMatching, "bte/ptim.c"),
+            Object(NonMatching, "bte/utl.c"),
+
+            Object(NonMatching, "bte/bta_dm_act.c"),
+            Object(NonMatching, "bte/bta_dm_api.c"),
+            Object(NonMatching, "bte/bta_dm_main.c"),
+            Object(NonMatching, "bte/bta_dm_pm.c"),
+
+            Object(NonMatching, "bte/bta_hh_act.c"),
+            Object(NonMatching, "bte/bta_hh_api.c"),
+            Object(NonMatching, "bte/bta_hh_main.c"),
+            Object(NonMatching, "bte/bta_hh_utils.c"),
+
+            Object(NonMatching, "bte/btm_acl.c"),
+            Object(NonMatching, "bte/btm_dev.c"),
+            Object(NonMatching, "bte/btm_devctl.c"),
+            Object(NonMatching, "bte/btm_discovery.c"),
+            Object(NonMatching, "bte/btm_inq.c"),
+            Object(NonMatching, "bte/btm_main.c"),
+            Object(NonMatching, "bte/btm_pm.c"),
+            Object(NonMatching, "bte/btm_sco.c"),
+            Object(NonMatching, "bte/btm_sec.c"),
+
+            Object(NonMatching, "bte/btu_hcif.c"),
+            Object(NonMatching, "bte/btu_init.c"),
+
+            Object(NonMatching, "bte/wbt_ext.c"),
+
+            Object(NonMatching, "bte/gap_api.c"),
+            Object(NonMatching, "bte/gap_conn.c"),
+            Object(NonMatching, "bte/gap_utils.c"),
+
+            Object(NonMatching, "bte/hcicmds.c"),
+
+            Object(NonMatching, "bte/hidd_api.c"),
+            Object(NonMatching, "bte/hidd_conn.c"),
+            Object(NonMatching, "bte/hidd_mgmt.c"),
+            Object(NonMatching, "bte/hidd_pm.c"),
+            Object(NonMatching, "bte/hidh_api.c"),
+            Object(NonMatching, "bte/hidh_conn.c"),
+
+            Object(NonMatching, "bte/l2c_api.c"),
+            Object(NonMatching, "bte/l2c_csm.c"),
+            Object(NonMatching, "bte/l2c_link.c"),
+            Object(NonMatching, "bte/l2c_main.c"),
+            Object(NonMatching, "bte/l2c_utils.c"),
+
+            Object(NonMatching, "bte/port_api.c"),
+            Object(NonMatching, "bte/port_rfc.c"),
+            Object(NonMatching, "bte/port_utils.c"),
+
+            Object(NonMatching, "bte/rfc_l2cap_if.c"),
+            Object(NonMatching, "bte/rfc_mx_fsm.c"),
+            Object(NonMatching, "bte/rfc_port_fsm.c"),
+            Object(NonMatching, "bte/rfc_port_if.c"),
+            Object(NonMatching, "bte/rfc_ts_frames.c"),
+            Object(NonMatching, "bte/rfc_utils.c"),
+
+            Object(NonMatching, "bte/sdp_api.c"),
+            Object(NonMatching, "bte/sdp_db.c"),
+            Object(NonMatching, "bte/sdp_discovery.c"),
+            Object(NonMatching, "bte/sdp_main.c"),
+            Object(NonMatching, "bte/sdp_server.c"),
+            Object(NonMatching, "bte/sdp_utils.c"),
+        ]
+    ),
+    RVLSDKLib("TPL",
+        [
+            Object(NonMatching, "tpl/TPL.c"),
+        ]
+    ),
+    RVLSDKLib("rso",
+        [
+            Object(NonMatching, "rso/RSOLink.c"),
+        ]
+    ),
+    RVLSDKLib("es",
+        [
+            Object(NonMatching, "es/es.c"),
+        ]
+    ),
+    RVLSDKLib("wad",
+        [
+            Object(Matching,    "wad/certs.c"),
+            Object(NonMatching, "wad/wad.c"),
+        ]
+    ),
+    RVLSDKLib("cnt",
+        [
+            Object(NonMatching, "cnt/cnt.c"),
+        ]
+    ),
+    RVLSDKLib("fa",
+        [
+            Object(NonMatching, "fa/pf_clib.c"),
+            Object(NonMatching, "fa/pf_code.c"),
+            Object(NonMatching, "fa/pf_service.c"),
+            Object(NonMatching, "fa/pf_str.c"),
+            Object(NonMatching, "fa/pf_driver.c"),
+
+            Object(NonMatching, "fa/pdm_api.c"),
+            Object(NonMatching, "fa/pdm_bpb.c"),
+            Object(NonMatching, "fa/pdm_disk.c"),
+            Object(NonMatching, "fa/pdm_partition.c"),
+
+            Object(NonMatching, "fa/pf_cache.c"),
+            Object(NonMatching, "fa/pf_cluster.c"),
+            Object(NonMatching, "fa/pf_dir.c"),
+            Object(NonMatching, "fa/pf_entry.c"),
+            Object(NonMatching, "fa/pf_entry_iterator.c"),
+            Object(NonMatching, "fa/pf_fat.c"),
+            Object(NonMatching, "fa/pf_fat12.c"),
+            Object(NonMatching, "fa/pf_fat16.c"),
+            Object(NonMatching, "fa/pf_fat32.c"),
+            Object(NonMatching, "fa/pf_fatfs.c"),
+            Object(NonMatching, "fa/pf_file.c"),
+            Object(NonMatching, "fa/pf_path.c"),
+            Object(NonMatching, "fa/pf_sector.c"),
+            Object(NonMatching, "fa/pf_volume.c"),
+            Object(NonMatching, "fa/pf_volume_apiadd.c"),
+            Object(NonMatching, "fa/pf_cp932.c"),
+            Object(NonMatching, "fa/pf_api_util.c"),
+
+            Object(NonMatching, "fa/pf_attach.c"),
+            Object(NonMatching, "fa/pf_buffering.c"),
+            Object(NonMatching, "fa/pf_cdelete.c"),
+            Object(NonMatching, "fa/pf_chdir.c"),
+            Object(NonMatching, "fa/pf_chdmod.c"),
+            Object(NonMatching, "fa/pf_chmod.c"),
+            Object(NonMatching, "fa/pf_cinsert.c"),
+            Object(NonMatching, "fa/pf_closedir.c"),
+            Object(NonMatching, "fa/pf_combine.c"),
+            Object(NonMatching, "fa/pf_create.c"),
+            Object(NonMatching, "fa/pf_createdir.c"),
+            Object(NonMatching, "fa/pf_cut.c"),
+            Object(NonMatching, "fa/pf_derrnum.c"),
+            Object(NonMatching, "fa/pf_detach.c"),
+            Object(NonMatching, "fa/pf_divide.c"),
+            Object(NonMatching, "fa/pf_errnum.c"),
+            Object(NonMatching, "fa/pf_fadjust.c"),
+            Object(NonMatching, "fa/pf_fappend.c"),
+            Object(NonMatching, "fa/pf_fchdir.c"),
+            Object(NonMatching, "fa/pf_fclose.c"),
+            Object(NonMatching, "fa/pf_fconcat.c"),
+            Object(NonMatching, "fa/pf_feof.c"),
+            Object(NonMatching, "fa/pf_ferror.c"),
+            Object(NonMatching, "fa/pf_finfo.c"),
+            Object(NonMatching, "fa/pf_flock.c"),
+            Object(NonMatching, "fa/pf_fopen.c"),
+            Object(NonMatching, "fa/pf_format.c"),
+            Object(NonMatching, "fa/pf_fread.c"),
+            Object(NonMatching, "fa/pf_fseek.c"),
+            Object(NonMatching, "fa/pf_fsetclstlink.c"),
+            Object(NonMatching, "fa/pf_fsexec.c"),
+            Object(NonMatching, "fa/pf_fsfirst.c"),
+            Object(NonMatching, "fa/pf_fsnext.c"),
+            Object(NonMatching, "fa/pf_fstat.c"),
+            Object(NonMatching, "fa/pf_fsync.c"),
+            Object(NonMatching, "fa/pf_fwrite.c"),
+            Object(NonMatching, "fa/pf_getdev.c"),
+            Object(NonMatching, "fa/pf_getvol.c"),
+            Object(NonMatching, "fa/pf_getvolcfg.c"),
+            Object(NonMatching, "fa/pf_init_prfile2.c"),
+            Object(NonMatching, "fa/pf_insert.c"),
+            Object(NonMatching, "fa/pf_iswriteprotected.c"),
+            Object(NonMatching, "fa/pf_mkdir.c"),
+            Object(NonMatching, "fa/pf_mount.c"),
+            Object(NonMatching, "fa/pf_move.c"),
+            Object(NonMatching, "fa/pf_opendir.c"),
+            Object(NonMatching, "fa/pf_readdir.c"),
+            Object(NonMatching, "fa/pf_regctx.c"),
+            Object(NonMatching, "fa/pf_remove.c"),
+            Object(NonMatching, "fa/pf_rename.c"),
+            Object(NonMatching, "fa/pf_rewinddir.c"),
+            Object(NonMatching, "fa/pf_rmdir.c"),
+            Object(NonMatching, "fa/pf_rmvvol.c"),
+            Object(NonMatching, "fa/pf_seekdir.c"),
+            Object(NonMatching, "fa/pf_setclstlink.c"),
+            Object(NonMatching, "fa/pf_setcode.c"),
+            Object(NonMatching, "fa/pf_setencode.c"),
+            Object(NonMatching, "fa/pf_settailbuf.c"),
+            Object(NonMatching, "fa/pf_setupfsi.c"),
+            Object(NonMatching, "fa/pf_setvol.c"),
+            Object(NonMatching, "fa/pf_setvolcfg.c"),
+            Object(NonMatching, "fa/pf_sync.c"),
+            Object(NonMatching, "fa/pf_telldir.c"),
+            Object(NonMatching, "fa/pf_unmount.c"),
+            Object(NonMatching, "fa/pf_unregctx.c"),
+            Object(NonMatching, "fa/pf_xdivide.c"),
+
+            Object(NonMatching, "fa/pf_w_api_util.c"),
+            Object(NonMatching, "fa/pf_w_cdelete.c"),
+            Object(NonMatching, "fa/pf_w_chdir.c"),
+            Object(NonMatching, "fa/pf_w_chdmod.c"),
+            Object(NonMatching, "fa/pf_w_chmod.c"),
+            Object(NonMatching, "fa/pf_w_cinsert.c"),
+            Object(NonMatching, "fa/pf_w_combine.c"),
+            Object(NonMatching, "fa/pf_w_create.c"),
+            Object(NonMatching, "fa/pf_w_createdir.c"),
+            Object(NonMatching, "fa/pf_w_cut.c"),
+            Object(NonMatching, "fa/pf_w_divide.c"),
+            Object(NonMatching, "fa/pf_w_fconcat.c"),
+            Object(NonMatching, "fa/pf_w_fopen.c"),
+            Object(NonMatching, "fa/pf_w_fsexec.c"),
+            Object(NonMatching, "fa/pf_w_fsfirst.c"),
+            Object(NonMatching, "fa/pf_w_fsnext.c"),
+            Object(NonMatching, "fa/pf_w_fstat.c"),
+            Object(NonMatching, "fa/pf_w_insert.c"),
+            Object(NonMatching, "fa/pf_w_mkdir.c"),
+            Object(NonMatching, "fa/pf_w_move.c"),
+            Object(NonMatching, "fa/pf_w_opendir.c"),
+            Object(NonMatching, "fa/pf_w_remove.c"),
+            Object(NonMatching, "fa/pf_w_rename.c"),
+            Object(NonMatching, "fa/pf_w_rmdir.c"),
+            Object(NonMatching, "fa/pf_w_xdivide.c"),
+            Object(NonMatching, "fa/pf_filelock.c"),
+
+            Object(NonMatching, "fa/pf_stub.c"),
+            Object(NonMatching, "fa/pf_system.c"),
+            Object(NonMatching, "fa/pf_stub_standard.c"),
+            Object(NonMatching, "fa/pfs_attach.c"),
+            Object(NonMatching, "fa/pfs_buffering.c"),
+            Object(NonMatching, "fa/pfs_create.c"),
+            Object(NonMatching, "fa/pfs_createdir.c"),
+            Object(NonMatching, "fa/pfs_detach.c"),
+            Object(NonMatching, "fa/pfs_errnum.c"),
+            Object(NonMatching, "fa/pfs_fclose.c"),
+            Object(NonMatching, "fa/pfs_finfot.c"),
+            Object(NonMatching, "fa/pfs_fopen.c"),
+            Object(NonMatching, "fa/pfs_format.c"),
+            Object(NonMatching, "fa/pfs_fread.c"),
+            Object(NonMatching, "fa/pfs_fseek.c"),
+            Object(NonMatching, "fa/pfs_fsfirst.c"),
+            Object(NonMatching, "fa/pfs_fsnext.c"),
+            Object(NonMatching, "fa/pfs_fstat.c"),
+            Object(NonMatching, "fa/pfs_fwrite.c"),
+            Object(NonMatching, "fa/pfs_getdev.c"),
+            Object(NonMatching, "fa/pfs_init_prfile2.c"),
+            Object(NonMatching, "fa/pfs_mount.c"),
+            Object(NonMatching, "fa/pfs_remove.c"),
+            Object(NonMatching, "fa/pfs_unmount.c"),
+            Object(NonMatching, "fa/pf_stub_unicode.c"),
+
+            Object(NonMatching, "fa/FAAttach.c"),
+            Object(NonMatching, "fa/FABuffering.c"),
+            Object(NonMatching, "fa/FACreate.c"),
+            Object(NonMatching, "fa/FACreatedir.c"),
+            Object(NonMatching, "fa/FADetach.c"),
+            Object(NonMatching, "fa/FAErrnum.c"),
+            Object(NonMatching, "fa/FAFclose.c"),
+            Object(NonMatching, "fa/FAFinfo.c"),
+            Object(NonMatching, "fa/FAFopen.c"),
+            Object(NonMatching, "fa/FAFormat.c"),
+            Object(NonMatching, "fa/FAFread.c"),
+            Object(NonMatching, "fa/FAFseek.c"),
+            Object(NonMatching, "fa/FAFsfirst.c"),
+            Object(NonMatching, "fa/FAFsnext.c"),
+            Object(NonMatching, "fa/FAFstat.c"),
+            Object(NonMatching, "fa/FAFwrite.c"),
+            Object(NonMatching, "fa/FAGetdev.c"),
+            Object(NonMatching, "fa/FAInit.c"),
+            Object(NonMatching, "fa/FAInitDiskManager.c"),
+            Object(NonMatching, "fa/FAMount.c"),
+            Object(NonMatching, "fa/FARegistCB.c"),
+            Object(NonMatching, "fa/FARemove.c"),
+            Object(NonMatching, "fa/FASetThreadPriority.c"),
+            Object(NonMatching, "fa/FAUnmount.c"),
+
+            Object(NonMatching, "fa/pfk_api.c"),
+
+            Object(NonMatching, "fa/nand_drv.c"),
+            Object(NonMatching, "fa/sd_drv.c"),
+
+            Object(NonMatching, "fa/pfd_cmn.c"),
+
+            Object(NonMatching, "fa/msc_drv.c"),
+
+            Object(NonMatching, "fa/puh_msc.c"),
+            Object(NonMatching, "fa/puh_msc_cmd.c"),
+            Object(NonMatching, "fa/puh_msc_blk.c"),
+        ]
+    ),
+    RVLSDKLib("sdi",
+        [
+            Object(NonMatching, "sdi/sdi_api.c"),
+        ]
+    ),
+    RVLSDKLib("nup",
+        [
+            Object(NonMatching, "nup/nup.cpp"),
+            Object(NonMatching, "nup/nup_nhttp.cpp"),
+            Object(NonMatching, "nup/nup_mem.cpp"),
+        ]
+    ),
+    RVLSDKLib("scutil",
+        [
+            Object(NonMatching, "scutil/scutil.c"),
+        ]
+    ),
+    RVLSDKLib("usbcmn",
+        [
+            Object(NonMatching, "usbutil/uh_ker_mem.c"),
+            Object(NonMatching, "usbutil/uh_ker_msg.c"),
+            Object(NonMatching, "usbutil/uh_ker_sem.c"),
+            Object(NonMatching, "usbutil/uh_ker_tsk.c"),
+        ]
+    ),
+    RVLSDKLib("kbd",
+        [
+            Object(NonMatching, "kbd/kbd_lib.c"),
+            Object(NonMatching, "kbd/kbd_lib_map_jp.c"),
+            Object(NonMatching, "kbd/kbd_lib_map_us.c"),
+            Object(NonMatching, "kbd/kbd_lib_map_eu.c"),
+        ]
+    ),
+    RVLSDKLib("kpr",
+        [
+            Object(NonMatching, "kpr/kpr_lib.c"),
+        ]
+    ),
+    RVLSDKLib("usbkbd",
+        [
+            Object(NonMatching, "usbkbd/usb_kbd.c"),
+        ]
+    ),
+    RVLSDKLib("cntcache",
+        [
+            Object(NonMatching, "cntcache/cntcache.c"),
+        ]
+    ),
+    # EGG library (for Nintendo EAD software)
+    EGGLib(
+        [
+            Object(NonMatching, "core/eggAllocator.cpp"),
+            Object(NonMatching, "core/eggAudioArcPlayerMgr.cpp"),
+            Object(NonMatching, "core/eggAudioExpMgr.cpp"),
+            Object(NonMatching, "core/eggAudioFxMgr.cpp"),
+            Object(NonMatching, "core/eggAudioMgr.cpp"),
+            Object(NonMatching, "core/eggAudioHeapMgr.cpp"),
+            Object(NonMatching, "core/eggColorFader.cpp"),
+            Object(NonMatching, "core/eggDisposer.cpp"),
+            Object(NonMatching, "core/eggExpHeap.cpp"),
+            Object(NonMatching, "core/eggFrmHeap.cpp"),
+            Object(NonMatching, "core/eggGraphicsFifo.cpp"),
+            Object(NonMatching, "core/eggHeap.cpp"),
+            Object(NonMatching, "core/eggTaskThread.cpp"),
+            Object(NonMatching, "core/eggThread.cpp"),
+            Object(NonMatching, "core/eggUnitHeap.cpp"),
+
+            Object(NonMatching, "prim/eggAssert.cpp"),
+        ]
+    ),
+    # Runtime library
     RuntimeLib("Runtime.PPCEABI.H",
         [
             Object(Matching,    "__mem.c"),
             Object(Matching,    "__va_arg.c"),
             Object(Matching,    "global_destructor_chain.c"),
+            Object(NonMatching, "NMWException.cpp"),
+            Object(NonMatching, "ptmf.c"),
             Object(Matching,    "runtime.c"),
             Object(Matching,    "__init_cpp_exceptions.cpp"),
+            Object(NonMatching, "Gecko_setjmp.c"),
+            Object(NonMatching, "Gecko_ExceptionPPC.cpp"),
+            Object(NonMatching, "GCN_mem_alloc.c"),
+        ]
+    ),
+    # MSL Library
+    MSLLib("MSL_C.PPCEABI.bare.H",
+        [
+            Object(NonMatching, "alloc.c"),
+            Object(NonMatching, "errno.c"),
+            Object(NonMatching, "ansi_files.c"),
+            Object(NonMatching, "ansi_fp.c"),
+            Object(NonMatching, "ctype.c"),
+            Object(NonMatching, "locale.c"),
+            Object(NonMatching, "arith.c"),
+            Object(NonMatching, "bsearch.c"),
+            Object(NonMatching, "buffer_io.c"),
+            Object(NonMatching, "direct_io.c"),
+            Object(NonMatching, "file_io.c"),
+            Object(NonMatching, "FILE_POS.c"),
+            Object(NonMatching, "mbstring.c"),
+            Object(NonMatching, "mem.c"),
+            Object(NonMatching, "mem_funcs.c"),
+            Object(NonMatching, "math_api.c"),
+            Object(NonMatching, "misc_io.c"),
+            Object(NonMatching, "printf.c"),
+            Object(NonMatching, "qsort.c"),
+            Object(NonMatching, "rand.c"),
+            Object(NonMatching, "scanf.c"),
+            Object(NonMatching, "signal.c"),
+            Object(NonMatching, "string.c"),
+            Object(NonMatching, "strtold.c"),
+            Object(NonMatching, "strtoul.c"),
+            Object(NonMatching, "float.c"),
+            Object(NonMatching, "time.c"),
+            Object(NonMatching, "wctype.c"),
+            Object(NonMatching, "wmem.c"),
+            Object(NonMatching, "wprintf.c"),
+            Object(NonMatching, "wstring.c"),
+            Object(NonMatching, "wchar_io.c"),
+            Object(NonMatching, "time.dolphin.c"),
+            Object(NonMatching, "sysenv.GCN.c"),
+            Object(NonMatching, "uart_console_io_gcn.c"),
+            Object(NonMatching, "abort_exit_ppc_eabi.c"),
+            Object(NonMatching, "math_sun.c"),
+            Object(NonMatching, "extras.c"),
+
+            Object(NonMatching, "math/e_acos.c"),
+            Object(NonMatching, "math/e_asin.c"),
+            Object(NonMatching, "math/e_atan2.c"),
+            Object(NonMatching, "math/e_exp.c"),
+            Object(NonMatching, "math/e_fmod.c"),
+            Object(NonMatching, "math/e_log.c"),
+            Object(NonMatching, "math/e_pow.c"),
+            Object(NonMatching, "math/e_rem_pio2.c"),
+            Object(NonMatching, "math/s_fmin.c"),
+            Object(NonMatching, "math/s_fmax.c"),
+            Object(NonMatching, "math/k_cos.c"),
+            Object(NonMatching, "math/k_rem_pio2.c"),
+            Object(NonMatching, "math/k_sin.c"),
+            Object(NonMatching, "math/k_tan.c"),
+            Object(NonMatching, "math/s_atan.c"),
+            Object(NonMatching, "math/s_ceil.c"),
+            Object(NonMatching, "math/s_copysign.c"),
+            Object(NonMatching, "math/s_cos.c"),
+            Object(NonMatching, "math/s_floor.c"),
+            Object(NonMatching, "math/s_frexp.c"),
+            Object(NonMatching, "math/s_ldexp.c"),
+            Object(NonMatching, "math/s_sin.c"),
+            Object(NonMatching, "math/s_tan.c"),
+            Object(NonMatching, "math/w_acos.c"),
+            Object(NonMatching, "math/w_asin.c"),
+            Object(NonMatching, "math/w_atan2.c"),
+            Object(NonMatching, "math/w_exp.c"),
+            Object(NonMatching, "math/w_fmod.c"),
+            Object(NonMatching, "math/w_log.c"),
+            Object(NonMatching, "math/w_pow.c"),
+            Object(NonMatching, "math/e_sqrt.c"),
+            Object(NonMatching, "math/math_ppc.c"),
+            Object(NonMatching, "math/w_sqrt.c"),
+        ]
+    ),
+    # MetroTRK library
+    TRKLib("TRK_Hollywood_Revolution",
+        [
+            Object(NonMatching, "Portable/msghndlr.c"),
+
+            Object(NonMatching, "Export/targsupp.c"),
+            Object(NonMatching, "Export/mslsupp.c"),
+
+            Object(NonMatching, "dolphin_Os/dolphin_trk.c"),
+            Object(NonMatching, "dolphin_Os/dolphin_trk_glue.c"),
+            Object(NonMatching, "dolphin_Os/target_options.c"),
         ]
     ),
 ]

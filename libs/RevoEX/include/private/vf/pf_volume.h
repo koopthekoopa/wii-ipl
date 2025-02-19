@@ -18,10 +18,10 @@ typedef struct PF_CUR_DIR {
 } PF_CUR_DIR;
 
 typedef struct PF_CURSOR {
-    u32 position;           // 0x0
-    u32 sector;             // 0x4
-    u32 file_sector_index;  // 0x8
-    u16 offset_in_sector;   // 0xC
+    u32 position;           // 0x00
+    u32 sector;             // 0x04
+    u32 file_sector_index;  // 0x08
+    u16 offset_in_sector;   // 0x0C
 } PF_CURSOR;
 
 typedef struct PF_DIR_CURSOR {

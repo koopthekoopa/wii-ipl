@@ -1,7 +1,6 @@
 ![Logo](./misc/logo.png)  
 Wii Menu  
-[![Build Status]][actions] [![Discord Badge]][discord]  
-[![Code Progress]][progress] [![Linked Code Progress]][progress] [![Data Progress]][progress] [![Linked Data Progress]][progress]
+[![Build Status]][actions] [![Discord Badge]][discord] [![Progress]][progress] [![Linked]][progress]
 ========
 
 [Build Status]: https://github.com/koopthekoopa/wii-ipl/actions/workflows/build.yml/badge.svg
@@ -9,10 +8,8 @@ Wii Menu
 [Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 [discord]: https://discord.gg/hKx3FJJgrV
 
-[Code Progress]: https://decomp.dev/koopthekoopa/wii-ipl.svg?mode=shield&measure=code&label=Matched%20Code
-[Linked Code Progress]: https://decomp.dev/koopthekoopa/wii-ipl.svg?mode=shield&measure=complete_code&label=Linked%20Code
-[Data Progress]: https://decomp.dev/koopthekoopa/wii-ipl.svg?mode=shield&measure=data&label=Matched%20Data
-[Linked Data Progress]: https://decomp.dev/koopthekoopa/wii-ipl.svg?mode=shield&measure=complete_data&label=Linked%20Data
+[Progress]: https://decomp.dev/koopthekoopa/wii-ipl.svg?mode=shield&measure=code&label=Progress
+[Linked]: https://decomp.dev/koopthekoopa/wii-ipl.svg?mode=shield&measure=complete_code&label=Linked
 [progress]: https://decomp.dev/koopthekoopa/wii-ipl
 
 A work-in-progress decompilation of the Wii Menu (4.3).
@@ -36,7 +33,6 @@ Windows
 > When running under WSL, [objdiff](#diffing) is unable to get filesystem notifications for automatic rebuilds.
 
 - Install [Python](https://www.python.org/downloads/) and add it to the `PATH` environment variable.
-  - Setup will ask you if you want to add python to `PATH` environment variable, make sure that is enabled.
   - Python is also available from the [Windows Store](https://apps.microsoft.com/store/detail/python-311/9NRWMJP3717K).
 - Download the ninja tool [here](https://github.com/ninja-build/ninja/releases) and either add it to the `PATH` environment variable.
   - You can install ninja quickly via pip (if you have it installed via Python's setup)
@@ -70,8 +66,8 @@ Linux
 - For non-x86(_64) platforms, you must install wine from your package manager.
   - For x86(_64), [wibo](https://github.com/decompals/wibo), a minimal 32-bit Windows binary wrapper, will be automatically downloaded and used.
 
-Building the Decompilation
-==========================
+Building
+========
 
 - Clone the repository:
 
@@ -97,7 +93,7 @@ Building the Decompilation
   ```
 
 >  [!NOTE]
-> This does **not** prodcue a full and working WAD. You must replace the exectable with the one you built (`main.app`) manually.
+> This does **not** prodcue a WAD file. You must replace the exectable with the one you built (`main.app`) manually.
 
 > [!WARNING]
 > The code is not 100% shiftable, most of it works aside from a couple of things (such as Wii Settings and a few Channel Banners like the Forecast Channel)

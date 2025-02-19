@@ -26,7 +26,7 @@ namespace ipl {
                                 mResFile->getLength(),
                                 FALSE);
 
-            nw4r::ut::List_Init(&mObjects, (u16)offsetof(Object, mLink));
+            nw4r::ut::List_Init(&mObjects, offsetof(Object, mLink));
             
             {
                 // Init strings
@@ -74,7 +74,7 @@ namespace ipl {
             
             if (RFLGetAsyncStatus() != RFLErrcode_Busy) {
                 Object* obj;
-                for (; (obj = (Object*)nw4r::ut::List_GetFirst(&mObjects)) != NULL && i < IPL_NIGAOE_ICON_MAX; i++) {
+                for (; (obj = reinterpret_cast<Object*>(nw4r::ut::List_GetFirst(&mObjects))) != NULL && i < IPL_NIGAOE_ICON_MAX; i++) {
                     obj->make_icon();
                     nw4r::ut::List_Remove(&mObjects, obj);
                 }
@@ -83,7 +83,7 @@ namespace ipl {
 
         void Manager::detach(Object* obj) {
             for (u16 i = 0; i < mObjects.numObjects; i++) {
-                if (obj == (Object*)nw4r::ut::List_GetNth(&mObjects, i)) {
+                if (obj == static_cast<Object*>(nw4r::ut::List_GetNth(&mObjects, i))) {
                     nw4r::ut::List_Remove(&mObjects, obj);
                     return;
                 }
@@ -129,7 +129,7 @@ namespace ipl {
             if (nwc24Mgr) {
                 if (nwc24Mgr->open()) {
                     if (RFLiMakeNWC24MsgforExchange(&msgObj, &work) == RFLErrcode_Success) {
-                        nwc24Mgr->setMsgAppId(&msgObj, TITLE_NIGAOE);
+                        nwc24Mgr->setMsgAppId(&msgObj, ES_TITLE_ID(TITLE_NIGAOE_ALL));
                         nwc24Mgr->commitMsg(&msgObj);
                     }
                     nwc24Mgr->close();

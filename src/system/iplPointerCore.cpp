@@ -10,8 +10,6 @@
 #include "utility/iplUtility.h"
 #include "utility/iplGraphics.h"
 
-#include "iplMath.h"
-
 namespace ipl {
     PointerCoreObject::PointerCoreObject() :
     mpLayout(NULL),
@@ -87,5 +85,3 @@ namespace ipl {
         mCursors[chan].changeType(type);
     }
 }
-
-

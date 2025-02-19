@@ -12,5 +12,3 @@ The Wii Menu has the following libraries linked:
 * **SSL** (SSL Library)
 * **VF** (Virtual FileSystem Library)
 * **WD** (Wireless Driver Library)
-
-

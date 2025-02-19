@@ -36,42 +36,42 @@ namespace ipl {
 
         void Base::do_destroy() {
             destroy();
-            if (mCommand.mType != COMMAND_NONE) {
+            if (mCommand.type != COMMAND_NONE) {
                 System::getSceneManager()->pushCommand(mCommand);
                 mCommand.clear();
             }
         }
 
-        void Base::createChildScene(int sceneId, Base* parent, Base* child, void* arg) {
+        void Base::createChildScene(int sceneId, Base* parent, Base* child, void* args) {
             Command command;
 
-            command.mType           = COMMAND_CREATE_CHILD;
-            command.mNewSceneID     = sceneId;
-            command.mParent         = parent;
-            command.mChild          = child;
-            command.mArgs           = arg;
+            command.type            = COMMAND_CREATE_CHILD;
+            command.newSceneID      = sceneId;
+            command.parent          = parent;
+            command.child           = child;
+            command.args            = args;
 
             System::getSceneManager()->pushCommand(command);
         }
 
-        void Base::reserveSceneChange(int sceneId, void* arg) {
+        void Base::reserveSceneChange(int sceneId, void* args) {
             Command command;
 
-            command.mType           = COMMAND_RESERVE_CHANGE;
-            command.mNewSceneID     = sceneId;
-            command.mPrevSceneID    = mSceneID;
-            command.mParent         = getParent();
-            command.mChild          = getNext();
-            command.mArgs           = arg;
+            command.type            = COMMAND_RESERVE_CHANGE;
+            command.newSceneID      = sceneId;
+            command.prevSceneID     = mSceneID;
+            command.parent          = getParent();
+            command.child           = getNext();
+            command.args            = args;
 
             System::getSceneManager()->pushCommand(command);
         }
 
-        void Base::reserveAllSceneDestruction(int sceneId, void* arg) {
-            mCommand.mType          = COMMAND_RESERVE_ALL_DESTRUCT;
-            mCommand.mNewSceneID    = SCENE_ROOT;
-            mCommand.mNewRootID     = sceneId;
-            mCommand.mArgs          = arg;
+        void Base::reserveAllSceneDestruction(int sceneId, void* args) {
+            mCommand.type           = COMMAND_RESERVE_ALL_DESTRUCT;
+            mCommand.newSceneID     = SCENE_ROOT;
+            mCommand.newRootID      = sceneId;
+            mCommand.args           = args;
 
             System::getSceneManager()->setDestructSync();
         }

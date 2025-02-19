@@ -2,17 +2,13 @@
 
 #include "layout/iplGuiManager.h"
 
-// !!=================================!!
-// !!FIXING: ORDER OF VTABLE FOR MATCH!!
-// !!=================================!!
-
-static const char* lbl_81697258[2] = {
-    "WIPL_SE_CANCEL",
-    "WIPL_SE_DECIDE",
-};
-
 namespace ipl {
     namespace scene {
+        static const char* scBtnSoundType[2] = {
+            "WIPL_SE_CANCEL",
+            "WIPL_SE_DECIDE",
+        };
+
         enum {
             ANIM_SEEN_IN = 0,
             ANIM_BTN_FOCUS_IN,
@@ -34,7 +30,7 @@ namespace ipl {
             mSettingType = type;
             mpLayout = NULL;
             mpLayoutFile = NULL;
-            mpGuiManager = NULL;
+            mpGui = NULL;
             mBtnHovered = FALSE;
             mSoundType = CANCEL;
             mbShowBtn = true;
@@ -59,20 +55,20 @@ namespace ipl {
             mpLayout->bindToGroup("it_Button_a_AlphOut.brlan",      "G_FocusBtnA",  false, false);
             mpLayout->finishBinding();
 
-            mpGuiManager = new gui::PaneManager(this, mpLayout->getDrawInfo(), NULL, NULL, true);
-            mpGuiManager->createLayoutScene(*mpLayout->getLayout());
-            mpGuiManager->setAllComponentTriggerTarget(false);
-            mpGuiManager->setTriggerTarget(mpLayout->findPane("B_Button_00"), true);
+            mpGui = new gui::PaneManager(this, mpLayout->getDrawInfo(), NULL, NULL, true);
+            mpGui->createLayoutScene(*mpLayout->getLayout());
+            mpGui->setAllComponentTriggerTarget(false);
+            mpGui->setTriggerTarget(mpLayout->findPane("B_Button_00"), true);
 
             setText(MESG_SETTING_BTN_BACK);
 
             if (mSettingType == 1) {
                 mbShowBtn = false;
-                mpLayout->getAnim(ANIM_ALPHA_IN)->initAnmFrame();
+                mpLayout->getAnim(ANIM_ALPHA_IN)->init();
             }
             else {
                 mbShowBtn = true;
-                mpLayout->getAnim(ANIM_ALPHA_OUT)->initAnmFrame();
+                mpLayout->getAnim(ANIM_ALPHA_OUT)->init();
             }
         }
 
@@ -81,7 +77,7 @@ namespace ipl {
             if (!mbFadedIn) {
                 if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_OUT) {
                     mbFadedIn = true;
-                    mpLayout->getAnim(ANIM_SEEN_IN)->playAnmFrame();
+                    mpLayout->getAnim(ANIM_SEEN_IN)->play();
                 }
             }
             else {
@@ -99,7 +95,7 @@ namespace ipl {
             && !mpLayout->getAnim(ANIM_BTN_FLASH)->isPlaying()
             && unk_0x268 != 0) {
                 Unk unk = unk_0x64[unk_0x26C];
-                switch (unk.mCommand) {
+                switch (unk.command) {
                     case CMD_SHOW_BTN: {
                         showBtn();
                         break;
@@ -109,7 +105,7 @@ namespace ipl {
                         break;
                     }
                     case CMD_SET_TEXT: {
-                        setText(unk.mMsgID);
+                        setText(unk.msgID);
                         break;
                     }
                 }
@@ -128,7 +124,7 @@ namespace ipl {
 
         void SettingButton::calcCommonAfter() {
             mpLayout->calc();
-            mpGuiManager->calc();
+            mpGui->calc();
         }
 
         void SettingButton::draw() {
@@ -149,7 +145,7 @@ namespace ipl {
                     if (controller) {
                         controller->rumble();
                     }
-                    mpLayout->getAnim(ANIM_BTN_FOCUS_IN)->playAnmFrame();
+                    mpLayout->getAnim(ANIM_BTN_FOCUS_IN)->play();
                 }
                 mBtnHovered++;
             }
@@ -158,7 +154,7 @@ namespace ipl {
         void SettingButton::start_left_event(const char* paneName) {
             if (isPane(paneName, "B_Button_00")) {
                 if (mBtnHovered == TRUE) {
-                    mpLayout->getAnim(ANIM_BTN_FOCUS_OUT)->playAnmFrame();
+                    mpLayout->getAnim(ANIM_BTN_FOCUS_OUT)->play();
                 }
                 mBtnHovered--;
             }
@@ -166,29 +162,29 @@ namespace ipl {
 
         void SettingButton::start_trig_event(const char* paneName) {
             if (isPane(paneName, "B_Button_00")) {
-                snd::getSystem()->startSE(lbl_81697258[mSoundType]);
+                snd::getSystem()->startSE(scBtnSoundType[mSoundType]);
 
-                mpLayout->getAnim(ANIM_BTN_FLASH)->playAnmFrame();
+                mpLayout->getAnim(ANIM_BTN_FLASH)->play();
 
                 mbTrigBtn = true;
-                mpGuiManager->init();
+                mpGui->init();
                 
                 mBtnHovered = FALSE;
             }
         }
 
         void SettingButton::onEvent(u32 compId, u32 event, void* data) {
-            ::gui::PaneComponent* component = (::gui::PaneComponent*)mpManager->getComponent(compId);
+            gui::PaneComponent* component = static_cast<gui::PaneComponent*>(mpManager->getComponent(compId));
             const char* paneName = component->getPane()->GetName();
     
-            controller::Interface* controller = static_cast<controller::Interface*>(data);
+            controller::Interface* controller = reinterpret_cast<controller::Interface*>(data);
     
             switch (event) {
                 case ::gui::EventHandler::ON_POINT: {
                     start_point_event(paneName, controller);
                     break;
                 }
-                case ::gui::EventHandler::ON_OFFPOINT: {
+                case ::gui::EventHandler::ON_LEFT: {
                     start_left_event(paneName);
                     break;
                 }
@@ -205,7 +201,7 @@ namespace ipl {
             bool result = false;
             if (getState() == FADE_STATE_NORMAL && mbShowBtn
             && !mpLayout->getAnim(ANIM_ALPHA_IN)->isPlaying()) {
-                mpGuiManager->update();
+                mpGui->update();
 
                 result = mbTrigBtn;
                 mbTrigBtn = false;
@@ -215,24 +211,24 @@ namespace ipl {
         }
 
         void SettingButton::showWii() {
-            mpLayout->getAnim(ANIM_WII_APPEAR)->playAnmFrame();
+            mpLayout->getAnim(ANIM_WII_APPEAR)->play();
         }
 
         void SettingButton::hideWii() {
-            mpLayout->getAnim(ANIM_WII_LOST)->playAnmFrame();
+            mpLayout->getAnim(ANIM_WII_LOST)->play();
         }
 
         void SettingButton::showBtn() {
             if (mbShowBtn == false) {
                 mbShowBtn = true;
-                mpLayout->getAnim(ANIM_ALPHA_IN)->playAnmFrame();
+                mpLayout->getAnim(ANIM_ALPHA_IN)->play();
             }
         }
 
         void SettingButton::hideBtn() {
             if (mbShowBtn == true) {
                 mbShowBtn = false;
-                mpLayout->getAnim(ANIM_ALPHA_OUT)->playAnmFrame();
+                mpLayout->getAnim(ANIM_ALPHA_OUT)->play();
             }
         }
 
@@ -245,8 +241,8 @@ namespace ipl {
         void SettingButton::reserve(int command, u32 msgId) {
             if (unk_0x264 != unk_0x268) {
                 int unk = unk_0x270;
-                unk_0x64[unk].mCommand = command;
-                unk_0x64[unk].mMsgID = msgId;
+                unk_0x64[unk].command = command;
+                unk_0x64[unk].msgID = msgId;
                 unk_0x270++;
 
                 if (unk_0x270 >= unk_0x264) {

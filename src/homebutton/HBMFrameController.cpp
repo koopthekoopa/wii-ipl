@@ -9,7 +9,7 @@ namespace homebutton {
 
         mDelta = delta;
 
-        mState = ANIM_STATE_READY;
+        mState = ANIM_STATE_STOP;
 
         mbAlternateBack = false;
 
@@ -34,7 +34,7 @@ namespace homebutton {
                 case ANIM_TYPE_FORWARD: {
                     if ((mFrame += mDelta) >= getLastFrame()) {
                         mFrame = getLastFrame();
-                        mState = ANIM_STATE_READY;
+                        mState = ANIM_STATE_STOP;
                     }
                     break;
                 }
@@ -42,7 +42,7 @@ namespace homebutton {
                 case ANIM_TYPE_BACKWARD: {
                     if ((mFrame -= mDelta) <= mMinFrame) {
                         mFrame = mMinFrame;
-                        mState = ANIM_STATE_READY;
+                        mState = ANIM_STATE_STOP;
                     }
                     break;
                 }

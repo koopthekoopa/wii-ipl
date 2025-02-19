@@ -16,7 +16,7 @@
 /* The Wii System Memory is damaged. */
 #define MESG_ERR_NAND       1
 /* The system files are corrupted. */
-#define MESG_ERR_CONTENT    2
+#define MESG_ERR_FILE       2
 /* This channel can't be used. */
 #define MESG_ERR_CHANNEL    3
 /* Error:003 unauthorized device has been detected. */
@@ -74,5 +74,3 @@ namespace ipl {
 }
 
 #endif // IPL_ERROR_HANDLER_H
-
-

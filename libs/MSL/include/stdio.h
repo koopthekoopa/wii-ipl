@@ -7,11 +7,10 @@
 
 namespace std {
     using   ::sprintf;
+    using   ::snprintf;
     using   ::vsnprintf;
 } // namespace std
 
 #endif
 
 #endif // MSL_STDIO_H
-
-

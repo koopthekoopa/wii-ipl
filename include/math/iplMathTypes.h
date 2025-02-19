@@ -11,7 +11,8 @@ typedef union FU32 {
     u32 u32;
     f32 f32;
 } FU32;
-// HACK
+
+// **HACK**
 #define IPL_MATH_INFINITY    0x1.FFFFFFP127f
 #define IPL_MATH_NINFINITY  -0x1.FFFFFFP127f
 #define IPL_MATH_NULL_FLOAT IPL_MATH_INFINITY

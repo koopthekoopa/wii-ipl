@@ -7,13 +7,47 @@
 
 namespace ipl {
     namespace scene {
+        static bool has_prepared_for_boot() {
+            bool bResourceDone = false;
+            bool bCommonResDone = false;
+
+            // Check is system resources are loaded.
+            // (This does not use `System::isRsrcLoaded()` for some reason)
+#ifdef USE_ZI8
+            if (System::isCmnResLoaded() && System::isFontResLoaded() && System::isSndResLoaded()) {
+                bCommonResDone = true;
+            }
+            if (bCommonResDone && System::isZi8ResLoaded()) {
+                bResourceDone = true;
+            }
+#else
+            if (System::isCmnResLoaded() && System::isFontResLoaded()) {
+                bCommonResDone = true;
+            }
+            if (bCommonResDone && System::isSndResLoaded()) {
+                bResourceDone = true;
+            }
+#endif
+            if (bResourceDone) {
+                return true;
+            }
+
+            return false;
+        }
+        
         #define HAS_SEC2MS(x)           (x * 1000)
         
-        #define HAS_TIMER_FADE_IN       HAS_SEC2MS(1)   /* Seconds after fading in */
-        #define HAS_TIMER_PRESS_A       HAS_SEC2MS(2)   /* Seconds until the user can pass through the screen */
-        #define HAS_TIMER_NOT_PRESS_A   HAS_SEC2MS(60)  /* Seconds for the user to do something to pass through the screen */
+        #define HAS_TIMER_FADE_IN       HAS_SEC2MS(1)                   /* Seconds after fading in */
+        #define HAS_TIMER_PRESS_A       HAS_SEC2MS(2)                   /* Seconds until the user can pass through the screen */
+        #define HAS_TIMER_NOT_PRESS_A   HAS_SEC2MS(60)                  /* Seconds for the user to do something to pass through the screen */
         
-        #define HAS_TIMER_SAFE_MODE     HAS_SEC2MS(3)   /* Seconds the user has to hold the safe mode combo on for */
+        #define HAS_TIMER_SAFE_MODE     HAS_SEC2MS(3)                   /* Seconds the user has to hold the safe mode combo on for */
+
+        #define HAS_PRESS_A_BUTTON      (IPL_BUTTON_A | IPL_BUTTON_B)   /* Buttons the user can press to goto the main menu */
+    
+        /* Macros for Maintenance mode combo */
+        #define HAS_SAFE_COMBO          (System::getMasterController()->down(WPAD_BUTTON_PLUS) && System::getMasterController()->down(WPAD_BUTTON_MINUS))
+        #define HAS_ONE_OF_SAFE_COMBO   (System::getMasterController()->down(WPAD_BUTTON_PLUS) || System::getMasterController()->down(WPAD_BUTTON_MINUS))
         
         enum {
             LANG_JPN = 0,
@@ -221,7 +255,7 @@ namespace ipl {
 
             // Done waiting? We wait again!... For the resources to finish loading.
             if (mbFadedIn && OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mWaitTick)) > HAS_TIMER_FADE_IN) {
-                if (Util::resourceLoaded()) {
+                if (has_prepared_for_boot()) {
                     mpPushPane->SetVisible(true);
 
                     mpLayout->start(ANIM_WAIT_PUSH);
@@ -251,9 +285,8 @@ namespace ipl {
 
             if (finish_safe_mode_check()) {
                 // Either user pressed A (or B), connected controller, went to safe more OR was on the screen for 60 seconds? We fade out.
-                if (System::getMasterController()->downTrg(IPL_BUTTON_A | IPL_BUTTON_B) || mWpadMask != newWpadMask ||
-                OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) > HAS_TIMER_NOT_PRESS_A || mbDoneSafeMode) {
-                    
+                if (System::getMasterController()->downTrg(HAS_PRESS_A_BUTTON) || mWpadMask != newWpadMask
+                || OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) > HAS_TIMER_NOT_PRESS_A || mbDoneSafeMode) {
                     if (mWpadMask != newWpadMask && !utility::wpad::isIncreaseConnectedWpad(mWpadMask, newWpadMask)) {
                         mWpadMask = newWpadMask;
                     }
@@ -310,7 +343,7 @@ namespace ipl {
         void skHealth::check_safe_mode() {
             // If the user is holding the combo?
             if (!mbHeldCombo) {
-                if (System::getMasterController()->down(WPAD_BUTTON_PLUS) && System::getMasterController()->down(WPAD_BUTTON_MINUS)) {
+                if (HAS_SAFE_COMBO) {
                     mSafeModeTick = OSGetTick();
                     mbHeldCombo = true;
                 }
@@ -334,7 +367,7 @@ namespace ipl {
         BOOL skHealth::finish_safe_mode_check() const {
             BOOL result = FALSE;
 
-            if ((!System::getMasterController()->down(WPAD_BUTTON_PLUS) && !System::getMasterController()->down(WPAD_BUTTON_MINUS)) || mbDoneSafeMode) {
+            if (!HAS_ONE_OF_SAFE_COMBO || mbDoneSafeMode) {
                 result = TRUE;
             }
 

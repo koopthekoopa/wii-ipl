@@ -1,7 +1,6 @@
 #ifndef IPL_SYSTEM_H
 #define IPL_SYSTEM_H
 
-#include "bannerSound/BannerSoundPlayer.h"
 #include "config.h"
 
 #include <decomp.h>
@@ -22,7 +21,7 @@
 #include "system/iplPointer.h"
 #include "system/iplHomeButton.h"
 #include "system/iplMessageManager.h"
-#include "system/iplSaveData.h"
+#include "system/iplSaveDataManager.h"
 #include "system/iplNwc24Manager.h"
 #include "system/iplPostmanManager.h"
 #include "system/iplNigaoeManager.h"
@@ -77,7 +76,7 @@ namespace ipl {
                     Pointer*            mpPointer;              // 0xB0
                     HomeButtonMenu*     mpHomeButton;           // 0xB4
                     undefined4*         unk_0xB8;
-                    undefined           mpJpegDecode;           // 0xBC
+                    undefined4*         mpJpegDecoder;          // 0xBC
                     EGG::Thread*        mpUnkThread;            // 0xC0
                     EGG::ColorFader*    mpFader;                // 0xC4
                     EGG::ColorFader*    mpResetFader;           // 0xC8
@@ -85,7 +84,7 @@ namespace ipl {
 
                     EGG::TaskThread*    mpTask;                 // 0xD0
                     EGG::TaskThread*    unk_0xD4;               // 0xD4
-                    EGG::TaskThread*    mpNandMetaTask;         // 0xD8
+                    EGG::TaskThread*    mpNandTask;             // 0xD8
     
                     nw4r::ut::Font*     mpWBFont1Data;          // 0xDC
                     undefined4          unk_0xE0;
@@ -143,7 +142,7 @@ namespace ipl {
             
             static EGG::Thread*             getUnkThread()          { return smArg.mpUnkThread; }
             static EGG::TaskThread*         getTask()               { return smArg.mpTask; }
-            static EGG::TaskThread*         getNandMetaTask()       { return smArg.mpNandMetaTask; }
+            static EGG::TaskThread*         getNandTask()           { return smArg.mpNandTask; }
             static bool                     isUnk_0x2B1()           { return smArg.unk_0x2B1; }
             static bool                     isUnk_0x2B4()           { return smArg.unk_0x2B4; }
             static bool                     isUnk_0x2BD()           { return smArg.unk_0x2BD; }
@@ -428,7 +427,5 @@ namespace ipl {
             static Arg  smArg;
     };
 }
-
-#include "scene/iplSceneUtils.h"
 
 #endif // IPL_SYSTEM_H

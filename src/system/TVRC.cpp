@@ -13,7 +13,7 @@ namespace LibTVRC {
     u32             __tienHoseiNsec = 1100;
     u32             _limitMilli = 400;
 
-    ARCHandle       _database ATTRIBUTE_ALIGN(DEFAULT_ALIGN);
+    ARCHandle       _database ALIGN32;
     OSAlarm         _alarm;
 
     BOOL            _isRepeatActive;

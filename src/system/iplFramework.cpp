@@ -185,24 +185,24 @@ namespace ipl {
     }
 
     void Framework::reset_render_mode() {
-        u32 wideScreen = SCGetAspectRatio();
+        u32 aspectRatio = SCGetAspectRatio();
         u32 progressive = SCGetProgressiveMode();
         u32 pal60 = SCGetEuRgb60Mode();
 
-        mWideScreen = wideScreen;
+        mAspectRatio = aspectRatio;
         mDelta = DELTA_60;
 
         switch (VIGetTvFormat()) {
             // NTSC Progressive and Interlaced
             case VI_MPAL:
             case VI_NTSC: {
-                if (VIGetDTVStatus() == TRUE && progressive == TRUE) {
+                if (VIGetDTVStatus() == TRUE && progressive == SC_PROGRESSIVE_MODE_ON) {
                     mpRMode = &sRMO_Ntsc_640x456Prog;
                 }
                 else {
                     mpRMode = &sRMO_Ntsc_640x456IntDf;
                 }
-                if (wideScreen == TRUE) {
+                if (aspectRatio == SC_ASPECT_RATIO_16x9) {
                     mpRMode->viWidth = 686;
                 }
                 else {
@@ -214,9 +214,9 @@ namespace ipl {
             case VI_PAL:
             case VI_EURGB60: {
                 // PAL60 Progressive
-                if (VIGetDTVStatus() == TRUE && progressive == TRUE) {
+                if (VIGetDTVStatus() == TRUE && progressive == SC_PROGRESSIVE_MODE_ON) {
                     mpRMode = &sRMO_Pal60_640x456Prog;
-                    if (wideScreen == TRUE) {
+                    if (aspectRatio == SC_ASPECT_RATIO_16x9) {
                         sRMO_Pal60_640x456Prog.viWidth = 686;
                     }
                     else {
@@ -225,9 +225,9 @@ namespace ipl {
                     mpRMode->viXOrigin = (VI_MAX_WIDTH_EURGB60 - mpRMode->viWidth) / 2;
                 }
                 // PAL60 Interlaced
-                else if (pal60 == TRUE) {
+                else if (pal60 == SC_EURGB60_MODE_ON) {
                     mpRMode = &sRMO_Pal60_640x456IntDf;
-                    if (wideScreen == TRUE) {
+                    if (aspectRatio == SC_ASPECT_RATIO_16x9) {
                         sRMO_Pal60_640x456IntDf.viWidth = 686;
                     }
                     else {
@@ -238,7 +238,7 @@ namespace ipl {
                 // PAL50 Interlaced
                 else {
                     mpRMode = &sRMO_Pal50_640x456IntDf;
-                    if (wideScreen == TRUE) {
+                    if (aspectRatio == SC_ASPECT_RATIO_16x9) {
                         sRMO_Pal50_640x456IntDf.viWidth = 682;
                     }
                     else {

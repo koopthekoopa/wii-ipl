@@ -9,6 +9,7 @@
 
 namespace ipl {
     namespace gui {
+        class PaneComponent : public ::gui::PaneComponent {};
         class PaneManager : public ::gui::PaneManager {
             public:
                 PaneManager(::gui::EventHandler* event, const nw4r::lyt::DrawInfo* drawInfo, EGG::Heap* heap, EGG::Allocator* allocator, bool bDisableCon = false) :
