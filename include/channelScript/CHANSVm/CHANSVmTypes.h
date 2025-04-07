@@ -3,7 +3,7 @@
 
 #include <revolution/types.h>
 
-#include <stddef.h>
+#include <wchar.h>
 #include <size_t.h>
 
 typedef u8              CHANSVmU8;

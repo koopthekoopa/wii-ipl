@@ -4,7 +4,7 @@
 #include <revolution/types.h>
 #include <RVLFaceLib/RFL_Types.h>
 
-#include <stddef.h>
+#include <wchar.h>
 
 #ifdef __cplusplus
 extern "C" {

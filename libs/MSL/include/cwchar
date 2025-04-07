@@ -1,0 +1,20 @@
+#ifndef MSL_CWCHAR_H
+#define MSL_CWCHAR_H
+
+#include <size_t.h>
+
+#ifndef __cplusplus
+typedef unsigned short wchar_t;
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+wchar_t* wmemset(wchar_t* dest, wchar_t ch, size_t count);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // MSL_CWCHAR_H

@@ -678,7 +678,7 @@ config.libs = [
             Object(NonMatching, "scene/saveDataEdit/iplSaveDataBase.cpp"),
             Object(NonMatching, "scene/saveDataEdit/iplSaveDataBox.cpp"),
             Object(NonMatching, "scene/saveDataEdit/iplSaveDataEdit.cpp"),
-            Object(NonMatching, "scene/saveDataEdit/iplWiiBannerFileInfo.cpp"),
+            Object(Matching,    "scene/saveDataEdit/iplWiiBannerFileInfo.cpp"),
         ]
     ),
     IPLSection("memoryCard",

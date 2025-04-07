@@ -3,7 +3,7 @@
 
 #include <revolution/types.h>
 
-#include <stddef.h>
+#include <wchar.h>
 
 typedef struct PF_CHARCODE {
     s32 (*oem2unicode)(char*, wchar_t*);        // 0x00

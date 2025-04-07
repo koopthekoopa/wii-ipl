@@ -3,7 +3,7 @@
 
 #include <revolution/types.h>
 
-#include <stddef.h>
+#include <wchar.h>
 
 u32         VFipf_w_strlen(const wchar_t* s);
 wchar_t*    VFipf_w_strcpy(wchar_t* dst, const wchar_t* src);
