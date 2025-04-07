@@ -91,6 +91,8 @@ u32         EXIGetState(s32 chan);
 BOOL        EXIGetID(s32 chan, u32 dev, u32* id);
 BOOL        EXIGetIDEx(s32 chan, u32 dev, u32* id);
 
+BOOL        EXIWriteReg(s32 chan, u32 dev, u32 exiCmd, void* reg, s32 size);
+
 void        __OSEnableBarnacle(s32 chan, u32 dev);
 
 typedef struct EXIQueue {

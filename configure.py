@@ -1475,7 +1475,7 @@ config.libs = [
     ),
     RVLSDKLib("euart",
         [
-            Object(NonMatching, "euart/euart.c"),
+            Object(Matching,    "euart/euart.c"),
         ]
     ),
     RVLSDKLib("usb",
