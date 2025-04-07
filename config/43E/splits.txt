@@ -243,7 +243,7 @@ src/system/TVRC.cpp:
 	.sbss       start:0x8169A5A0 end:0x8169A618
 
 src/system/iplTVRCManager.cpp:
-	.text       start:0x813619F8 end:0x81362794
+	.text       start:0x813619F8 end:0x813627B4
 	.data       start:0x81639B40 end:0x81639BC0
 	.sbss       start:0x8169A618 end:0x8169A620
 
@@ -251,7 +251,7 @@ src/system/_DATA_.c:
 	.data       start:0x81639BC0 end:0x816414A8
 
 src/utility/iplTree.cpp:
-	.text       start:0x81362794 end:0x813628F8
+	.text       start:0x813627B4 end:0x813628F8
 	.data       start:0x816414A8 end:0x816414C8
 
 src/utility/iplFrameController.cpp:
@@ -1244,7 +1244,7 @@ src/channelScript/systemmenu/iplCSSound.cpp:
 src/channelScript/systemmenu/iplCSImage.cpp:
 	.text       start:0x8145F084 end:0x8145F0D0
 
-libs/RVLMiddleware/eZiText/src/zi8ezt.c:
+libs/RVLMiddleware/eZiText/src/eztx.c:
 	.text       start:0x8145F0D0 end:0x8145F178
 	.rodata     start:0x81617AF0 end:0x81617B40
 	.data       start:0x8166ACE0 end:0x8166AD18
@@ -1720,162 +1720,162 @@ libs/RevoEX/src/ssl/ssl_api.c:
 libs/RevoEX/src/ssl/ssl_mutex.c:
 	.text       start:0x814B58B8 end:0x814B58C4
 
-libs/RevoEX/src/vf/pf_clib.c:
+libs/RevoEX/src/vf/api/pf_clib.c:
 	.text       start:0x814B58C4 end:0x814B5BC4
 
-libs/RevoEX/src/vf/pf_code.c:
+libs/RevoEX/src/vf/api/pf_code.c:
 	.text       start:0x814B5BC4 end:0x814B5BE0
 	.rodata     start:0x81618FD0 end:0x81619030
 
-libs/RevoEX/src/vf/pf_service.c:
+libs/RevoEX/src/vf/api/pf_service.c:
 	.text       start:0x814B5BE0 end:0x814B5CF8
 
-libs/RevoEX/src/vf/pf_str.c:
+libs/RevoEX/src/vf/api/pf_str.c:
 	.text       start:0x814B5CF8 end:0x814B622C
 
-libs/RevoEX/src/vf/pf_w_clib.c:
+libs/RevoEX/src/vf/api/pf_w_clib.c:
 	.text       start:0x814B622C end:0x814B62C0
 
-libs/RevoEX/src/vf/pf_driver.c:
+libs/RevoEX/src/vf/api/pf_driver.c:
 	.text       start:0x814B62C0 end:0x814B6DA8
 
-libs/RevoEX/src/vf/pdm_bpb.c:
+libs/RevoEX/src/vf/api/pdm_bpb.c:
 	.text       start:0x814B6DA8 end:0x814B770C
 
-libs/RevoEX/src/vf/pdm_disk.c:
+libs/RevoEX/src/vf/api/pdm_disk.c:
 	.text       start:0x814B770C end:0x814B8CDC
 
-libs/RevoEX/src/vf/pdm_partition.c:
+libs/RevoEX/src/vf/api/pdm_partition.c:
 	.text       start:0x814B8CDC end:0x814BA4B8
 
-libs/RevoEX/src/vf/pdm_mbr.c:
+libs/RevoEX/src/vf/api/pdm_mbr.c:
 	.text       start:0x814BA4B8 end:0x814BAA70
 
-libs/RevoEX/src/vf/pdm_dskmng.c:
+libs/RevoEX/src/vf/api/pdm_dskmng.c:
 	.bss        start:0x810CCC20 end:0x810CD7F0
 	.text       start:0x814BAA70 end:0x814BAC94
 
-libs/RevoEX/src/vf/pf_cache.c:
+libs/RevoEX/src/vf/api/pf_cache.c:
 	.text       start:0x814BAC94 end:0x814BC880
 
-libs/RevoEX/src/vf/pf_cluster.c:
+libs/RevoEX/src/vf/api/pf_cluster.c:
 	.text       start:0x814BC880 end:0x814BCFD0
 
-libs/RevoEX/src/vf/pf_dir.c:
+libs/RevoEX/src/vf/api/pf_dir.c:
 	.text       start:0x814BCFD0 end:0x814BE3F8
 	.sdata      start:0x81699B88 end:0x81699B98
 
-libs/RevoEX/src/vf/pf_entry.c:
+libs/RevoEX/src/vf/api/pf_entry.c:
 	.text       start:0x814BE3F8 end:0x814BFFE8
 	.data       start:0x8166E7B0 end:0x8166E7C0
 	.sdata2     start:0x81696EE8 end:0x81696EF0
 
-libs/RevoEX/src/vf/pf_entry_iterator.c:
+libs/RevoEX/src/vf/api/pf_entry_iterator.c:
 	.text       start:0x814BFFE8 end:0x814C2158
 	.sdata      start:0x81699B98 end:0x81699BC0
 
-libs/RevoEX/src/vf/pf_fat.c:
+libs/RevoEX/src/vf/api/pf_fat.c:
 	.text       start:0x814C2158 end:0x814C5120
 	.rodata     start:0x81619030 end:0x81619070
 
-libs/RevoEX/src/vf/pf_fat12.c:
+libs/RevoEX/src/vf/api/pf_fat12.c:
 	.text       start:0x814C5120 end:0x814C5C58
 
-libs/RevoEX/src/vf/pf_fat16.c:
+libs/RevoEX/src/vf/api/pf_fat16.c:
 	.text       start:0x814C5C58 end:0x814C61E4
 
-libs/RevoEX/src/vf/pf_fat32.c:
+libs/RevoEX/src/vf/api/pf_fat32.c:
 	.text       start:0x814C61E4 end:0x814C6838
 
-libs/RevoEX/src/vf/pf_fatfs.c:
+libs/RevoEX/src/vf/api/pf_fatfs.c:
 	.text       start:0x814C6838 end:0x814C683C
 
-libs/RevoEX/src/vf/pf_file.c:
+libs/RevoEX/src/vf/api/pf_file.c:
 	.text       start:0x814C683C end:0x814C9F20
 
-libs/RevoEX/src/vf/pf_path.c:
+libs/RevoEX/src/vf/api/pf_path.c:
 	.text       start:0x814C9F20 end:0x814CC8AC
 	.sdata2     start:0x81696EF0 end:0x81696F00
 	.sdata      start:0x81699BC0 end:0x81699BF0
 
-libs/RevoEX/src/vf/pf_sector.c:
+libs/RevoEX/src/vf/api/pf_sector.c:
 	.text       start:0x814CC8AC end:0x814CD154
 
-libs/RevoEX/src/vf/pf_volume.c:
+libs/RevoEX/src/vf/api/pf_volume.c:
 	.bss        start:0x810CD7F0 end:0x810F5540
 	.text       start:0x814CD154 end:0x814CF204
 
-libs/RevoEX/src/vf/pf_cp932.c:
+libs/RevoEX/src/vf/api/pf_cp932.c:
 	.text       start:0x814CF204 end:0x814CF6E8
 	.rodata     start:0x81619070 end:0x8161D2E8
 
-libs/RevoEX/src/vf/pf_attach.c:
+libs/RevoEX/src/vf/api/pf_attach.c:
 	.text       start:0x814CF6E8 end:0x814CF8D8
 
-libs/RevoEX/src/vf/pf_chdir.c:
+libs/RevoEX/src/vf/api/pf_chdir.c:
 	.text       start:0x814CF8D8 end:0x814CF928
 
-libs/RevoEX/src/vf/pf_create.c:
+libs/RevoEX/src/vf/api/pf_create.c:
 	.text       start:0x814CF928 end:0x814CF98C
 
-libs/RevoEX/src/vf/pf_detach.c:
+libs/RevoEX/src/vf/api/pf_detach.c:
 	.text       start:0x814CF98C end:0x814CF9B4
 
-libs/RevoEX/src/vf/pf_errnum.c:
+libs/RevoEX/src/vf/api/pf_errnum.c:
 	.text       start:0x814CF9B4 end:0x814CF9D8
 
-libs/RevoEX/src/vf/pf_fclose.c:
+libs/RevoEX/src/vf/api/pf_fclose.c:
 	.text       start:0x814CF9D8 end:0x814CF9FC
 
-libs/RevoEX/src/vf/pf_finfo.c:
+libs/RevoEX/src/vf/api/pf_finfo.c:
 	.text       start:0x814CF9FC end:0x814CFA20
 
-libs/RevoEX/src/vf/pf_fopen.c:
+libs/RevoEX/src/vf/api/pf_fopen.c:
 	.text       start:0x814CFA20 end:0x814CFACC
 
-libs/RevoEX/src/vf/pf_format.c:
+libs/RevoEX/src/vf/api/pf_format.c:
 	.text       start:0x814CFACC end:0x814CFAF4
 
-libs/RevoEX/src/vf/pf_fread.c:
+libs/RevoEX/src/vf/api/pf_fread.c:
 	.text       start:0x814CFAF4 end:0x814CFB1C
 
-libs/RevoEX/src/vf/pf_fseek.c:
+libs/RevoEX/src/vf/api/pf_fseek.c:
 	.text       start:0x814CFB1C end:0x814CFB40
 
-libs/RevoEX/src/vf/pf_fsfirst.c:
+libs/RevoEX/src/vf/api/pf_fsfirst.c:
 	.text       start:0x814CFB40 end:0x814CFBB4
 
-libs/RevoEX/src/vf/pf_fsnext.c:
+libs/RevoEX/src/vf/api/pf_fsnext.c:
 	.text       start:0x814CFBB4 end:0x814CFBD8
 
-libs/RevoEX/src/vf/pf_fwrite.c:
+libs/RevoEX/src/vf/api/pf_fwrite.c:
 	.text       start:0x814CFBD8 end:0x814CFC00
 
-libs/RevoEX/src/vf/pf_getdev.c:
+libs/RevoEX/src/vf/api/pf_getdev.c:
 	.text       start:0x814CFC00 end:0x814CFC28
 
-libs/RevoEX/src/vf/pf_init_prfile2.c:
+libs/RevoEX/src/vf/api/pf_init_prfile2.c:
 	.text       start:0x814CFC28 end:0x814CFC68
 
-libs/RevoEX/src/vf/pf_mkdir.c:
+libs/RevoEX/src/vf/api/pf_mkdir.c:
 	.text       start:0x814CFC68 end:0x814CFCB8
 
-libs/RevoEX/src/vf/pf_remove.c:
+libs/RevoEX/src/vf/api/pf_remove.c:
 	.text       start:0x814CFCB8 end:0x814CFD08
 
-libs/RevoEX/src/vf/pf_rmdir.c:
+libs/RevoEX/src/vf/api/pf_rmdir.c:
 	.text       start:0x814CFD08 end:0x814CFD58
 
-libs/RevoEX/src/vf/pf_sync.c:
+libs/RevoEX/src/vf/api/pf_sync.c:
 	.text       start:0x814CFD58 end:0x814CFD80
 
-libs/RevoEX/src/vf/pf_unmount.c:
+libs/RevoEX/src/vf/api/pf_unmount.c:
 	.text       start:0x814CFD80 end:0x814CFDA8
 
-libs/RevoEX/src/vf/pf_filelock.c:
+libs/RevoEX/src/vf/api/pf_filelock.c:
 	.text       start:0x814CFDA8 end:0x814CFDBC
 
-libs/RevoEX/src/vf/pf_system.c:
+libs/RevoEX/src/vf/api/pf_system.c:
 	.text       start:0x814CFDBC end:0x814CFE34
 	.sbss       start:0x8169AD10 end:0x8169AD18
 
@@ -1905,13 +1905,13 @@ libs/RevoEX/src/vf/d_common.c:
 	.bss        start:0x810F58D0 end:0x810F5AD8
 	.text       start:0x814D4F34 end:0x814D5B50
 
-libs/RevoEX/src/vf/nand_drv.c:
+libs/RevoEX/src/vf/driver/nand_drv.c:
 	.bss        start:0x810F5AD8 end:0x810F5C80
 	.text       start:0x814D5B50 end:0x814D8AC0
 	.rodata     start:0x8161D3B8 end:0x8161D3D8
 	.sbss       start:0x8169AD40 end:0x8169AD48
 
-libs/RevoEX/src/vf/sd_drv.c:
+libs/RevoEX/src/vf/driver/sd_drv.c:
 	.bss        start:0x810F5C80 end:0x810F6040
 	.text       start:0x814D8AC0 end:0x814D98D8
 	.rodata     start:0x8161D3D8 end:0x8161D3F8
@@ -2028,10 +2028,52 @@ libs/RVLFaceLib/src/RFL_Format.c:
 	extabindex  start:0x81331C44 end:0x81331CBC
 	.text       start:0x814EA004 end:0x814EA544
 
-libs/RVLMiddleware/TMC_JPEG/src/decapi.c:
-	.text       start:0x814EA544 end:0x814F7120
-	.rodata     start:0x8161E2C0 end:0x8161E530
+libs/RVLMiddleware/TMC_JPEG/src/buffer/mkhdec3.c:
+	.text       start:0x814EA544 end:0x814EAA10
+
+libs/RVLMiddleware/TMC_JPEG/src/buffer/buffer_system.c:
+	.text       start:0x814EAA10 end:0x814EB39C
+
+libs/RVLMiddleware/TMC_JPEG/src/buffer/getcode.c:
+	.text       start:0x814EB39C end:0x814EB4D8
+
+libs/RVLMiddleware/TMC_JPEG/src/buffer/idct_block_var.c:
+	.text       start:0x814EB4D8 end:0x814EBFF4
+
+libs/RVLMiddleware/TMC_JPEG/src/api/decapi.c:
+	.text       start:0x814EBFF4 end:0x814EC440
+
+libs/RVLMiddleware/TMC_JPEG/src/jpegdec/jdec.c:
+	.text       start:0x814EC440 end:0x814EC83C
+
+libs/RVLMiddleware/TMC_JPEG/src/jpegdec/jdec_main.c:
+	.text       start:0x814EC83C end:0x814EDE20
+	.rodata     start:0x8161E2C0 end:0x8161E3C0
+
+libs/RVLMiddleware/TMC_JPEG/src/jpegdec/jpformat.c:
+	.rodata     start:0x8161E3C0 end:0x8161E530
 	.sdata2     start:0x81697058 end:0x81697060
+
+libs/RVLMiddleware/TMC_JPEG/src/exif/exif_parse.c:
+	.text       start:0x814EDE20 end:0x814EF200
+
+libs/RVLMiddleware/TMC_JPEG/src/reschange/iqdec_resolution_change_a3.c:
+	.text       start:0x814EF200 end:0x814EF58C
+
+libs/RVLMiddleware/TMC_JPEG/src/reschange/idct_resolution_change_var.c:
+	.text       start:0x814EF58C end:0x814EFC98
+
+libs/RVLMiddleware/TMC_JPEG/src/texturecvtr/Texture_MCUtoY8U8V8.c:
+	.text       start:0x814EFC98 end:0x814F3AE4
+
+libs/RVLMiddleware/TMC_JPEG/src/texturecvtr/Texture_MCUtoRGB565.c:
+	.text       start:0x814F3AE4 end:0x814F530C
+
+libs/RVLMiddleware/TMC_JPEG/src/texturecvtr/Texture_MCUtoRGBA8.c:
+	.text       start:0x814F530C end:0x814F6CD0
+
+libs/RVLMiddleware/TMC_JPEG/src/b65/iqdec_b65_frv32.c:
+	.text       start:0x814F6CD0 end:0x814F7120
 
 libs/NW4R/src/snd/snd_AxManager.cpp:
 	.bss        start:0x810F6040 end:0x81100458
@@ -2622,6 +2664,7 @@ libs/RVL_SDK/src/os/OSPlayRecord.c:
 	.bss        start:0x81115DA0 end:0x81115FA0
 	.text       start:0x81536EC0 end:0x815377B0
 	.data       start:0x816803B0 end:0x816803F8
+	.sdata      start:0x81699D18 end:0x81699D20
 	.sbss       start:0x8169AF58 end:0x8169AF78
 
 libs/RVL_SDK/src/os/OSStateFlags.c:
@@ -2642,7 +2685,7 @@ libs/RVL_SDK/src/os/OSPlayTime.c:
 	.text       start:0x81537E84 end:0x81538704
 	.data       start:0x816805A8 end:0x816805E8
 	.sdata2     start:0x81697478 end:0x81697488
-	.sdata      start:0x81699D18 end:0x81699D28
+	.sdata      start:0x81699D20 end:0x81699D28
 	.sbss       start:0x8169AF78 end:0x8169AF90
 
 libs/RVL_SDK/src/os/__ppc_eabi_init.cpp:
@@ -3527,451 +3570,451 @@ libs/RVL_SDK/src/cnt/cnt.c:
 	.rodata     start:0x8162E678 end:0x8162E8F0
 	.data       start:0x81690940 end:0x81690A40
 
-libs/RVL_SDK/src/fa/pf_clib.c:
+libs/RVL_SDK/src/fa/api/pf_clib.c:
 	.text       start:0x815C6098 end:0x815C64D4
 
-libs/RVL_SDK/src/fa/pf_code.c:
+libs/RVL_SDK/src/fa/api/pf_code.c:
 	.text       start:0x815C64D4 end:0x815C64F0
 	.rodata     start:0x8162E8F0 end:0x8162E950
 
-libs/RVL_SDK/src/fa/pf_service.c:
+libs/RVL_SDK/src/fa/api/pf_service.c:
 	.text       start:0x815C64F0 end:0x815C6628
 
-libs/RVL_SDK/src/fa/pf_str.c:
+libs/RVL_SDK/src/fa/api/pf_str.c:
 	.text       start:0x815C6628 end:0x815C6B8C
 
-libs/RVL_SDK/src/fa/pf_driver.c:
+libs/RVL_SDK/src/fa/api/pf_driver.c:
 	.text       start:0x815C6B8C end:0x815C7490
 
-libs/RVL_SDK/src/fa/pdm_api.c:
+libs/RVL_SDK/src/fa/api/pdm_api.c:
 	.text       start:0x815C7490 end:0x815C7538
 
-libs/RVL_SDK/src/fa/pdm_bpb.c:
+libs/RVL_SDK/src/fa/api/pdm_bpb.c:
 	.text       start:0x815C7538 end:0x815C7A24
 
-libs/RVL_SDK/src/fa/pdm_disk.c:
+libs/RVL_SDK/src/fa/api/pdm_disk.c:
 	.bss        start:0x81177818 end:0x811781E0
 	.text       start:0x815C7A24 end:0x815C8210
 
-libs/RVL_SDK/src/fa/pdm_partition.c:
+libs/RVL_SDK/src/fa/api/pdm_partition.c:
 	.text       start:0x815C8210 end:0x815C9094
 
-libs/RVL_SDK/src/fa/pf_cache.c:
+libs/RVL_SDK/src/fa/api/pf_cache.c:
 	.text       start:0x815C9094 end:0x815CAD78
 
-libs/RVL_SDK/src/fa/pf_cluster.c:
+libs/RVL_SDK/src/fa/api/pf_cluster.c:
 	.text       start:0x815CAD78 end:0x815CBF40
 
-libs/RVL_SDK/src/fa/pf_dir.c:
+libs/RVL_SDK/src/fa/api/pf_dir.c:
 	.text       start:0x815CBF40 end:0x815D0960
 	.sdata2     start:0x81697828 end:0x81697830
 	.sdata      start:0x8169A1D0 end:0x8169A1F0
 
-libs/RVL_SDK/src/fa/pf_entry.c:
+libs/RVL_SDK/src/fa/api/pf_entry.c:
 	.text       start:0x815D0960 end:0x815D22E4
 	.data       start:0x81690A40 end:0x81690A50
 	.sdata2     start:0x81697830 end:0x81697838
 
-libs/RVL_SDK/src/fa/pf_entry_iterator.c:
+libs/RVL_SDK/src/fa/api/pf_entry_iterator.c:
 	.text       start:0x815D22E4 end:0x815D41AC
 	.sdata      start:0x8169A1F0 end:0x8169A208
 
-libs/RVL_SDK/src/fa/pf_fat.c:
+libs/RVL_SDK/src/fa/api/pf_fat.c:
 	.text       start:0x815D41AC end:0x815D72C8
 	.rodata     start:0x8162E950 end:0x8162E990
 
-libs/RVL_SDK/src/fa/pf_fat12.c:
+libs/RVL_SDK/src/fa/api/pf_fat12.c:
 	.text       start:0x815D72C8 end:0x815D7B3C
 
-libs/RVL_SDK/src/fa/pf_fat16.c:
+libs/RVL_SDK/src/fa/api/pf_fat16.c:
 	.text       start:0x815D7B3C end:0x815D7F80
 
-libs/RVL_SDK/src/fa/pf_fat32.c:
+libs/RVL_SDK/src/fa/api/pf_fat32.c:
 	.text       start:0x815D7F80 end:0x815D8470
 
-libs/RVL_SDK/src/fa/pf_fatfs.c:
+libs/RVL_SDK/src/fa/api/pf_fatfs.c:
 	.text       start:0x815D8470 end:0x815D8474
 
-libs/RVL_SDK/src/fa/pf_file.c:
+libs/RVL_SDK/src/fa/api/pf_file.c:
 	.text       start:0x815D8474 end:0x815DCA10
 
-libs/RVL_SDK/src/fa/pf_path.c:
+libs/RVL_SDK/src/fa/api/pf_path.c:
 	.text       start:0x815DCA10 end:0x815DF870
 	.sdata2     start:0x81697838 end:0x81697840
 	.sdata      start:0x8169A208 end:0x8169A238
 
-libs/RVL_SDK/src/fa/pf_sector.c:
+libs/RVL_SDK/src/fa/api/pf_sector.c:
 	.text       start:0x815DF870 end:0x815DFF98
 
-libs/RVL_SDK/src/fa/pf_volume.c:
+libs/RVL_SDK/src/fa/api/pf_volume.c:
 	.bss        start:0x811781E0 end:0x811AB9E0
 	.text       start:0x815DFF98 end:0x815E45E0
 	.data       start:0x81690A50 end:0x81690A60
 	.sdata2     start:0x81697840 end:0x81697848
 	.sdata      start:0x8169A238 end:0x8169A240
 
-libs/RVL_SDK/src/fa/pf_volume_apiadd.c:
+libs/RVL_SDK/src/fa/api/pf_volume_apiadd.c:
 	.text       start:0x815E45E0 end:0x815E4658
 
-libs/RVL_SDK/src/fa/pf_cp932.c:
+libs/RVL_SDK/src/fa/api/pf_cp932.c:
 	.text       start:0x815E4658 end:0x815E4B68
 	.rodata     start:0x8162E990 end:0x81632C08
 
-libs/RVL_SDK/src/fa/pf_api_util.c:
+libs/RVL_SDK/src/fa/api/pf_api_util.c:
 	.text       start:0x815E4B68 end:0x815E4D18
 	.data       start:0x81690A60 end:0x81690B00
 
-libs/RVL_SDK/src/fa/pf_attach.c:
+libs/RVL_SDK/src/fa/api/pf_attach.c:
 	.text       start:0x815E4D18 end:0x815E4DC8
 
-libs/RVL_SDK/src/fa/pf_buffering.c:
+libs/RVL_SDK/src/fa/api/pf_buffering.c:
 	.text       start:0x815E4DC8 end:0x815E4DF4
 
-libs/RVL_SDK/src/fa/pf_cdelete.c:
+libs/RVL_SDK/src/fa/api/pf_cdelete.c:
 	.text       start:0x815E4DF4 end:0x815E4E70
 
-libs/RVL_SDK/src/fa/pf_chdir.c:
+libs/RVL_SDK/src/fa/api/pf_chdir.c:
 	.text       start:0x815E4E70 end:0x815E4EC0
 
-libs/RVL_SDK/src/fa/pf_chdmod.c:
+libs/RVL_SDK/src/fa/api/pf_chdmod.c:
 	.text       start:0x815E4EC0 end:0x815E4F20
 
-libs/RVL_SDK/src/fa/pf_chmod.c:
+libs/RVL_SDK/src/fa/api/pf_chmod.c:
 	.text       start:0x815E4F20 end:0x815E4F80
 
-libs/RVL_SDK/src/fa/pf_cinsert.c:
+libs/RVL_SDK/src/fa/api/pf_cinsert.c:
 	.text       start:0x815E4F80 end:0x815E4FFC
 
-libs/RVL_SDK/src/fa/pf_closedir.c:
+libs/RVL_SDK/src/fa/api/pf_closedir.c:
 	.text       start:0x815E4FFC end:0x815E5020
 
-libs/RVL_SDK/src/fa/pf_combine.c:
+libs/RVL_SDK/src/fa/api/pf_combine.c:
 	.text       start:0x815E5020 end:0x815E509C
 
-libs/RVL_SDK/src/fa/pf_create.c:
+libs/RVL_SDK/src/fa/api/pf_create.c:
 	.text       start:0x815E509C end:0x815E50F8
 
-libs/RVL_SDK/src/fa/pf_createdir.c:
+libs/RVL_SDK/src/fa/api/pf_createdir.c:
 	.text       start:0x815E50F8 end:0x815E516C
 
-libs/RVL_SDK/src/fa/pf_cut.c:
+libs/RVL_SDK/src/fa/api/pf_cut.c:
 	.text       start:0x815E516C end:0x815E51F4
 
-libs/RVL_SDK/src/fa/pf_derrnum.c:
+libs/RVL_SDK/src/fa/api/pf_derrnum.c:
 	.text       start:0x815E51F4 end:0x815E521C
 
-libs/RVL_SDK/src/fa/pf_detach.c:
+libs/RVL_SDK/src/fa/api/pf_detach.c:
 	.text       start:0x815E521C end:0x815E5244
 
-libs/RVL_SDK/src/fa/pf_divide.c:
+libs/RVL_SDK/src/fa/api/pf_divide.c:
 	.text       start:0x815E5244 end:0x815E52D4
 
-libs/RVL_SDK/src/fa/pf_errnum.c:
+libs/RVL_SDK/src/fa/api/pf_errnum.c:
 	.text       start:0x815E52D4 end:0x815E52F8
 
-libs/RVL_SDK/src/fa/pf_fadjust.c:
+libs/RVL_SDK/src/fa/api/pf_fadjust.c:
 	.text       start:0x815E52F8 end:0x815E531C
 
-libs/RVL_SDK/src/fa/pf_fappend.c:
+libs/RVL_SDK/src/fa/api/pf_fappend.c:
 	.text       start:0x815E531C end:0x815E5344
 
-libs/RVL_SDK/src/fa/pf_fchdir.c:
+libs/RVL_SDK/src/fa/api/pf_fchdir.c:
 	.text       start:0x815E5344 end:0x815E5368
 
-libs/RVL_SDK/src/fa/pf_fclose.c:
+libs/RVL_SDK/src/fa/api/pf_fclose.c:
 	.text       start:0x815E5368 end:0x815E538C
 
-libs/RVL_SDK/src/fa/pf_fconcat.c:
+libs/RVL_SDK/src/fa/api/pf_fconcat.c:
 	.text       start:0x815E538C end:0x815E5408
 
-libs/RVL_SDK/src/fa/pf_feof.c:
+libs/RVL_SDK/src/fa/api/pf_feof.c:
 	.text       start:0x815E5408 end:0x815E542C
 
-libs/RVL_SDK/src/fa/pf_ferror.c:
+libs/RVL_SDK/src/fa/api/pf_ferror.c:
 	.text       start:0x815E542C end:0x815E5450
 
-libs/RVL_SDK/src/fa/pf_finfo.c:
+libs/RVL_SDK/src/fa/api/pf_finfo.c:
 	.text       start:0x815E5450 end:0x815E5474
 
-libs/RVL_SDK/src/fa/pf_flock.c:
+libs/RVL_SDK/src/fa/api/pf_flock.c:
 	.text       start:0x815E5474 end:0x815E549C
 
-libs/RVL_SDK/src/fa/pf_fopen.c:
+libs/RVL_SDK/src/fa/api/pf_fopen.c:
 	.text       start:0x815E549C end:0x815E5538
 
-libs/RVL_SDK/src/fa/pf_format.c:
+libs/RVL_SDK/src/fa/api/pf_format.c:
 	.text       start:0x815E5538 end:0x815E5560
 
-libs/RVL_SDK/src/fa/pf_fread.c:
+libs/RVL_SDK/src/fa/api/pf_fread.c:
 	.text       start:0x815E5560 end:0x815E5588
 
-libs/RVL_SDK/src/fa/pf_fseek.c:
+libs/RVL_SDK/src/fa/api/pf_fseek.c:
 	.text       start:0x815E5588 end:0x815E55AC
 
-libs/RVL_SDK/src/fa/pf_fsetclstlink.c:
+libs/RVL_SDK/src/fa/api/pf_fsetclstlink.c:
 	.text       start:0x815E55AC end:0x815E55D0
 
-libs/RVL_SDK/src/fa/pf_fsexec.c:
+libs/RVL_SDK/src/fa/api/pf_fsexec.c:
 	.text       start:0x815E55D0 end:0x815E55F4
 
-libs/RVL_SDK/src/fa/pf_fsfirst.c:
+libs/RVL_SDK/src/fa/api/pf_fsfirst.c:
 	.text       start:0x815E55F4 end:0x815E5668
 
-libs/RVL_SDK/src/fa/pf_fsnext.c:
+libs/RVL_SDK/src/fa/api/pf_fsnext.c:
 	.text       start:0x815E5668 end:0x815E568C
 
-libs/RVL_SDK/src/fa/pf_fstat.c:
+libs/RVL_SDK/src/fa/api/pf_fstat.c:
 	.text       start:0x815E568C end:0x815E56EC
 
-libs/RVL_SDK/src/fa/pf_fsync.c:
+libs/RVL_SDK/src/fa/api/pf_fsync.c:
 	.text       start:0x815E56EC end:0x815E5710
 
-libs/RVL_SDK/src/fa/pf_fwrite.c:
+libs/RVL_SDK/src/fa/api/pf_fwrite.c:
 	.text       start:0x815E5710 end:0x815E5738
 
-libs/RVL_SDK/src/fa/pf_getdev.c:
+libs/RVL_SDK/src/fa/api/pf_getdev.c:
 	.text       start:0x815E5738 end:0x815E5760
 
-libs/RVL_SDK/src/fa/pf_getvol.c:
+libs/RVL_SDK/src/fa/api/pf_getvol.c:
 	.text       start:0x815E5760 end:0x815E5788
 
-libs/RVL_SDK/src/fa/pf_getvolcfg.c:
+libs/RVL_SDK/src/fa/api/pf_getvolcfg.c:
 	.text       start:0x815E5788 end:0x815E57B0
 
-libs/RVL_SDK/src/fa/pf_init_prfile2.c:
+libs/RVL_SDK/src/fa/api/pf_init_prfile2.c:
 	.text       start:0x815E57B0 end:0x815E57F0
 
-libs/RVL_SDK/src/fa/pf_insert.c:
+libs/RVL_SDK/src/fa/api/pf_insert.c:
 	.text       start:0x815E57F0 end:0x815E58B8
 
-libs/RVL_SDK/src/fa/pf_iswriteprotected.c:
+libs/RVL_SDK/src/fa/api/pf_iswriteprotected.c:
 	.text       start:0x815E58B8 end:0x815E58FC
 
-libs/RVL_SDK/src/fa/pf_mkdir.c:
+libs/RVL_SDK/src/fa/api/pf_mkdir.c:
 	.text       start:0x815E58FC end:0x815E594C
 
-libs/RVL_SDK/src/fa/pf_mount.c:
+libs/RVL_SDK/src/fa/api/pf_mount.c:
 	.text       start:0x815E594C end:0x815E5974
 
-libs/RVL_SDK/src/fa/pf_move.c:
+libs/RVL_SDK/src/fa/api/pf_move.c:
 	.text       start:0x815E5974 end:0x815E59F0
 
-libs/RVL_SDK/src/fa/pf_opendir.c:
+libs/RVL_SDK/src/fa/api/pf_opendir.c:
 	.text       start:0x815E59F0 end:0x815E5A48
 
-libs/RVL_SDK/src/fa/pf_readdir.c:
+libs/RVL_SDK/src/fa/api/pf_readdir.c:
 	.text       start:0x815E5A48 end:0x815E5A6C
 
-libs/RVL_SDK/src/fa/pf_regctx.c:
+libs/RVL_SDK/src/fa/api/pf_regctx.c:
 	.text       start:0x815E5A6C end:0x815E5A90
 
-libs/RVL_SDK/src/fa/pf_remove.c:
+libs/RVL_SDK/src/fa/api/pf_remove.c:
 	.text       start:0x815E5A90 end:0x815E5AE0
 
-libs/RVL_SDK/src/fa/pf_rename.c:
+libs/RVL_SDK/src/fa/api/pf_rename.c:
 	.text       start:0x815E5AE0 end:0x815E5B5C
 
-libs/RVL_SDK/src/fa/pf_rewinddir.c:
+libs/RVL_SDK/src/fa/api/pf_rewinddir.c:
 	.text       start:0x815E5B5C end:0x815E5B84
 
-libs/RVL_SDK/src/fa/pf_rmdir.c:
+libs/RVL_SDK/src/fa/api/pf_rmdir.c:
 	.text       start:0x815E5B84 end:0x815E5BD4
 
-libs/RVL_SDK/src/fa/pf_rmvvol.c:
+libs/RVL_SDK/src/fa/api/pf_rmvvol.c:
 	.text       start:0x815E5BD4 end:0x815E5BFC
 
-libs/RVL_SDK/src/fa/pf_seekdir.c:
+libs/RVL_SDK/src/fa/api/pf_seekdir.c:
 	.text       start:0x815E5BFC end:0x815E5C20
 
-libs/RVL_SDK/src/fa/pf_setclstlink.c:
+libs/RVL_SDK/src/fa/api/pf_setclstlink.c:
 	.text       start:0x815E5C20 end:0x815E5C48
 
-libs/RVL_SDK/src/fa/pf_setcode.c:
+libs/RVL_SDK/src/fa/api/pf_setcode.c:
 	.text       start:0x815E5C48 end:0x815E5C6C
 
-libs/RVL_SDK/src/fa/pf_setencode.c:
+libs/RVL_SDK/src/fa/api/pf_setencode.c:
 	.text       start:0x815E5C6C end:0x815E5C90
 
-libs/RVL_SDK/src/fa/pf_settailbuf.c:
+libs/RVL_SDK/src/fa/api/pf_settailbuf.c:
 	.text       start:0x815E5C90 end:0x815E5CB8
 
-libs/RVL_SDK/src/fa/pf_setupfsi.c:
+libs/RVL_SDK/src/fa/api/pf_setupfsi.c:
 	.text       start:0x815E5CB8 end:0x815E5CE4
 
-libs/RVL_SDK/src/fa/pf_setvol.c:
+libs/RVL_SDK/src/fa/api/pf_setvol.c:
 	.text       start:0x815E5CE4 end:0x815E5D40
 
-libs/RVL_SDK/src/fa/pf_setvolcfg.c:
+libs/RVL_SDK/src/fa/api/pf_setvolcfg.c:
 	.text       start:0x815E5D40 end:0x815E5D68
 
-libs/RVL_SDK/src/fa/pf_sync.c:
+libs/RVL_SDK/src/fa/api/pf_sync.c:
 	.text       start:0x815E5D68 end:0x815E5D90
 
-libs/RVL_SDK/src/fa/pf_telldir.c:
+libs/RVL_SDK/src/fa/api/pf_telldir.c:
 	.text       start:0x815E5D90 end:0x815E5DB4
 
-libs/RVL_SDK/src/fa/pf_unmount.c:
+libs/RVL_SDK/src/fa/api/pf_unmount.c:
 	.text       start:0x815E5DB4 end:0x815E5DDC
 
-libs/RVL_SDK/src/fa/pf_unregctx.c:
+libs/RVL_SDK/src/fa/api/pf_unregctx.c:
 	.text       start:0x815E5DDC end:0x815E5E00
 
-libs/RVL_SDK/src/fa/pf_xdivide.c:
+libs/RVL_SDK/src/fa/api/pf_xdivide.c:
 	.text       start:0x815E5E00 end:0x815E5E90
 
-libs/RVL_SDK/src/fa/pf_w_api_util.c:
+libs/RVL_SDK/src/fa/api/pf_w_api_util.c:
 	.text       start:0x815E5E90 end:0x815E5F60
 
-libs/RVL_SDK/src/fa/pf_w_cdelete.c:
+libs/RVL_SDK/src/fa/api/pf_w_cdelete.c:
 	.text       start:0x815E5F60 end:0x815E5FDC
 
-libs/RVL_SDK/src/fa/pf_w_chdir.c:
+libs/RVL_SDK/src/fa/api/pf_w_chdir.c:
 	.text       start:0x815E5FDC end:0x815E602C
 
-libs/RVL_SDK/src/fa/pf_w_chdmod.c:
+libs/RVL_SDK/src/fa/api/pf_w_chdmod.c:
 	.text       start:0x815E602C end:0x815E608C
 
-libs/RVL_SDK/src/fa/pf_w_chmod.c:
+libs/RVL_SDK/src/fa/api/pf_w_chmod.c:
 	.text       start:0x815E608C end:0x815E60EC
 
-libs/RVL_SDK/src/fa/pf_w_cinsert.c:
+libs/RVL_SDK/src/fa/api/pf_w_cinsert.c:
 	.text       start:0x815E60EC end:0x815E6168
 
-libs/RVL_SDK/src/fa/pf_w_combine.c:
+libs/RVL_SDK/src/fa/api/pf_w_combine.c:
 	.text       start:0x815E6168 end:0x815E61E4
 
-libs/RVL_SDK/src/fa/pf_w_create.c:
+libs/RVL_SDK/src/fa/api/pf_w_create.c:
 	.text       start:0x815E61E4 end:0x815E6240
 
-libs/RVL_SDK/src/fa/pf_w_createdir.c:
+libs/RVL_SDK/src/fa/api/pf_w_createdir.c:
 	.text       start:0x815E6240 end:0x815E62B4
 
-libs/RVL_SDK/src/fa/pf_w_cut.c:
+libs/RVL_SDK/src/fa/api/pf_w_cut.c:
 	.text       start:0x815E62B4 end:0x815E633C
 
-libs/RVL_SDK/src/fa/pf_w_divide.c:
+libs/RVL_SDK/src/fa/api/pf_w_divide.c:
 	.text       start:0x815E633C end:0x815E63CC
 
-libs/RVL_SDK/src/fa/pf_w_fconcat.c:
+libs/RVL_SDK/src/fa/api/pf_w_fconcat.c:
 	.text       start:0x815E63CC end:0x815E6448
 
-libs/RVL_SDK/src/fa/pf_w_fopen.c:
+libs/RVL_SDK/src/fa/api/pf_w_fopen.c:
 	.text       start:0x815E6448 end:0x815E64E4
 
-libs/RVL_SDK/src/fa/pf_w_fsexec.c:
+libs/RVL_SDK/src/fa/api/pf_w_fsexec.c:
 	.text       start:0x815E64E4 end:0x815E6508
 
-libs/RVL_SDK/src/fa/pf_w_fsfirst.c:
+libs/RVL_SDK/src/fa/api/pf_w_fsfirst.c:
 	.text       start:0x815E6508 end:0x815E657C
 
-libs/RVL_SDK/src/fa/pf_w_fsnext.c:
+libs/RVL_SDK/src/fa/api/pf_w_fsnext.c:
 	.text       start:0x815E657C end:0x815E65A0
 
-libs/RVL_SDK/src/fa/pf_w_fstat.c:
+libs/RVL_SDK/src/fa/api/pf_w_fstat.c:
 	.text       start:0x815E65A0 end:0x815E6600
 
-libs/RVL_SDK/src/fa/pf_w_insert.c:
+libs/RVL_SDK/src/fa/api/pf_w_insert.c:
 	.text       start:0x815E6600 end:0x815E66C8
 
-libs/RVL_SDK/src/fa/pf_w_mkdir.c:
+libs/RVL_SDK/src/fa/api/pf_w_mkdir.c:
 	.text       start:0x815E66C8 end:0x815E6718
 
-libs/RVL_SDK/src/fa/pf_w_move.c:
+libs/RVL_SDK/src/fa/api/pf_w_move.c:
 	.text       start:0x815E6718 end:0x815E6794
 
-libs/RVL_SDK/src/fa/pf_w_opendir.c:
+libs/RVL_SDK/src/fa/api/pf_w_opendir.c:
 	.text       start:0x815E6794 end:0x815E67EC
 
-libs/RVL_SDK/src/fa/pf_w_remove.c:
+libs/RVL_SDK/src/fa/api/pf_w_remove.c:
 	.text       start:0x815E67EC end:0x815E683C
 
-libs/RVL_SDK/src/fa/pf_w_rename.c:
+libs/RVL_SDK/src/fa/api/pf_w_rename.c:
 	.text       start:0x815E683C end:0x815E68B8
 
-libs/RVL_SDK/src/fa/pf_w_rmdir.c:
+libs/RVL_SDK/src/fa/api/pf_w_rmdir.c:
 	.text       start:0x815E68B8 end:0x815E6908
 
-libs/RVL_SDK/src/fa/pf_w_xdivide.c:
+libs/RVL_SDK/src/fa/api/pf_w_xdivide.c:
 	.text       start:0x815E6908 end:0x815E6998
 
-libs/RVL_SDK/src/fa/pf_filelock.c:
+libs/RVL_SDK/src/fa/api/pf_filelock.c:
 	.text       start:0x815E6998 end:0x815E6AFC
 
-libs/RVL_SDK/src/fa/pf_stub.c:
+libs/RVL_SDK/src/fa/api/pf_stub.c:
 	.text       start:0x815E6AFC end:0x815E6EE4
 
-libs/RVL_SDK/src/fa/pf_system.c:
+libs/RVL_SDK/src/fa/api/pf_system.c:
 	.bss        start:0x811AB9E0 end:0x811ADD80
 	.text       start:0x815E6EE4 end:0x815E6F7C
 
-libs/RVL_SDK/src/fa/pf_stub_standard.c:
+libs/RVL_SDK/src/fa/api/pf_stub_standard.c:
 	.text       start:0x815E6F7C end:0x815E7500
 	.data       start:0x81690B00 end:0x81690C48
 
-libs/RVL_SDK/src/fa/pfs_attach.c:
+libs/RVL_SDK/src/fa/api/pfs_attach.c:
 	.text       start:0x815E7500 end:0x815E7550
 
-libs/RVL_SDK/src/fa/pfs_buffering.c:
+libs/RVL_SDK/src/fa/api/pfs_buffering.c:
 	.text       start:0x815E7550 end:0x815E75A0
 
-libs/RVL_SDK/src/fa/pfs_create.c:
+libs/RVL_SDK/src/fa/api/pfs_create.c:
 	.text       start:0x815E75A0 end:0x815E75EC
 
-libs/RVL_SDK/src/fa/pfs_createdir.c:
+libs/RVL_SDK/src/fa/api/pfs_createdir.c:
 	.text       start:0x815E75EC end:0x815E7640
 
-libs/RVL_SDK/src/fa/pfs_detach.c:
+libs/RVL_SDK/src/fa/api/pfs_detach.c:
 	.text       start:0x815E7640 end:0x815E768C
 
-libs/RVL_SDK/src/fa/pfs_errnum.c:
+libs/RVL_SDK/src/fa/api/pfs_errnum.c:
 	.text       start:0x815E768C end:0x815E76D4
 
-libs/RVL_SDK/src/fa/pfs_fclose.c:
+libs/RVL_SDK/src/fa/api/pfs_fclose.c:
 	.text       start:0x815E76D4 end:0x815E7720
 
-libs/RVL_SDK/src/fa/pfs_finfot.c:
+libs/RVL_SDK/src/fa/api/pfs_finfot.c:
 	.text       start:0x815E7720 end:0x815E7770
 
-libs/RVL_SDK/src/fa/pfs_fopen.c:
+libs/RVL_SDK/src/fa/api/pfs_fopen.c:
 	.text       start:0x815E7770 end:0x815E77C0
 
-libs/RVL_SDK/src/fa/pfs_format.c:
+libs/RVL_SDK/src/fa/api/pfs_format.c:
 	.text       start:0x815E77C0 end:0x815E7810
 
-libs/RVL_SDK/src/fa/pfs_fread.c:
+libs/RVL_SDK/src/fa/api/pfs_fread.c:
 	.text       start:0x815E7810 end:0x815E7868
 
-libs/RVL_SDK/src/fa/pfs_fseek.c:
+libs/RVL_SDK/src/fa/api/pfs_fseek.c:
 	.text       start:0x815E7868 end:0x815E78BC
 
-libs/RVL_SDK/src/fa/pfs_fsfirst.c:
+libs/RVL_SDK/src/fa/api/pfs_fsfirst.c:
 	.text       start:0x815E78BC end:0x815E7910
 
-libs/RVL_SDK/src/fa/pfs_fsnext.c:
+libs/RVL_SDK/src/fa/api/pfs_fsnext.c:
 	.text       start:0x815E7910 end:0x815E795C
 
-libs/RVL_SDK/src/fa/pfs_fstat.c:
+libs/RVL_SDK/src/fa/api/pfs_fstat.c:
 	.text       start:0x815E795C end:0x815E79AC
 
-libs/RVL_SDK/src/fa/pfs_fwrite.c:
+libs/RVL_SDK/src/fa/api/pfs_fwrite.c:
 	.text       start:0x815E79AC end:0x815E7A04
 
-libs/RVL_SDK/src/fa/pfs_getdev.c:
+libs/RVL_SDK/src/fa/api/pfs_getdev.c:
 	.text       start:0x815E7A04 end:0x815E7A54
 
-libs/RVL_SDK/src/fa/pfs_init_prfile2.c:
+libs/RVL_SDK/src/fa/api/pfs_init_prfile2.c:
 	.text       start:0x815E7A54 end:0x815E7A58
 
-libs/RVL_SDK/src/fa/pfs_mount.c:
+libs/RVL_SDK/src/fa/api/pfs_mount.c:
 	.text       start:0x815E7A58 end:0x815E7AA4
 
-libs/RVL_SDK/src/fa/pfs_remove.c:
+libs/RVL_SDK/src/fa/api/pfs_remove.c:
 	.text       start:0x815E7AA4 end:0x815E7AF0
 
-libs/RVL_SDK/src/fa/pfs_unmount.c:
+libs/RVL_SDK/src/fa/api/pfs_unmount.c:
 	.text       start:0x815E7AF0 end:0x815E7B40
 
-libs/RVL_SDK/src/fa/pf_stub_unicode.c:
+libs/RVL_SDK/src/fa/api/pf_stub_unicode.c:
 	.text       start:0x815E7B40 end:0x815E7D80
 	.data       start:0x81690C48 end:0x81690CA8
 
@@ -4054,39 +4097,39 @@ libs/RVL_SDK/src/fa/FASetThreadPriority.c:
 libs/RVL_SDK/src/fa/FAUnmount.c:
 	.text       start:0x815E8538 end:0x815E8588
 
-libs/RVL_SDK/src/fa/pfk_api.c:
+libs/RVL_SDK/src/fa/kernel/pfk_api.c:
 	.text       start:0x815E8588 end:0x815E89F0
 	.data       start:0x81690D08 end:0x81690FD8
 
-libs/RVL_SDK/src/fa/nand_drv.c:
+libs/RVL_SDK/src/fa/driver/nand_drv.c:
 	.bss        start:0x811ADE68 end:0x811AF460
 	.text       start:0x815E89F0 end:0x815EA518
 	.rodata     start:0x81632C08 end:0x81632C28
 	.sdata      start:0x8169A250 end:0x8169A258
 	.sbss       start:0x8169B560 end:0x8169B580
 
-libs/RVL_SDK/src/fa/sd_drv.c:
+libs/RVL_SDK/src/fa/driver/sd_drv.c:
 	.bss        start:0x811AF460 end:0x811AF6C0
 	.text       start:0x815EA518 end:0x815ED308
 	.rodata     start:0x81632C28 end:0x81632D98
 	.data       start:0x81690FD8 end:0x816919E8
 	.sbss       start:0x8169B580 end:0x8169B5A8
 
-libs/RVL_SDK/src/fa/pfd_cmn.c:
+libs/RVL_SDK/src/fa/driver/pfd_cmn.c:
 	.text       start:0x815ED308 end:0x815ED420
 
-libs/RVL_SDK/src/fa/msc_drv.c:
+libs/RVL_SDK/src/fa/driver/msc_drv.c:
 	.text       start:0x815ED420 end:0x815ED434
 	.sbss       start:0x8169B5A8 end:0x8169B5B0
 
-libs/RVL_SDK/src/fa/puh_msc.c:
+libs/RVL_SDK/src/fa/msc/puh_msc.c:
 	.text       start:0x815ED434 end:0x815ED6EC
 	.sbss       start:0x8169B5B0 end:0x8169B5C0
 
-libs/RVL_SDK/src/fa/puh_msc_cmd.c:
+libs/RVL_SDK/src/fa/msc/puh_msc_cmd.c:
 	.text       start:0x815ED6EC end:0x815EDAC8
 
-libs/RVL_SDK/src/fa/puh_msc_blk.c:
+libs/RVL_SDK/src/fa/msc/puh_msc_blk.c:
 	.bss        start:0x811AF6C0 end:0x811AF840
 	.text       start:0x815EDAC8 end:0x815EE2E0
 	.data       start:0x816919E8 end:0x81691A08
@@ -4115,24 +4158,24 @@ libs/RVL_SDK/src/nup/nup_mem.cpp:
 	.text       start:0x815F2E44 end:0x815F2F4C
 	.sbss       start:0x8169B5F0 end:0x8169B5F8
 
-libs/RVL_SDK/src/scutil/scutil.c:
+libs/RVL_SDK/src/scutil/idToIsoA2.c:
 	.text       start:0x815F2F4C end:0x815F2FA4
 	.data       start:0x81692108 end:0x816923D0
 	.sdata      start:0x8169A298 end:0x8169A468
 
-libs/RVL_SDK/src/usbutil/uh_ker_mem.c:
+libs/RVL_SDK/src/usbcmn/puh_ker_mem.c:
 	.text       start:0x815F2FA4 end:0x815F3008
 
-libs/RVL_SDK/src/usbutil/uh_ker_msg.c:
+libs/RVL_SDK/src/usbcmn/puh_ker_msg.c:
 	.bss        start:0x811AF8C0 end:0x811AF8D8
 	.text       start:0x815F3008 end:0x815F308C
 
-libs/RVL_SDK/src/usbutil/uh_ker_sem.c:
+libs/RVL_SDK/src/usbcmn/puh_ker_sem.c:
 	.bss        start:0x811AF8D8 end:0x811AFA10
 	.text       start:0x815F308C end:0x815F338C
 	.sbss       start:0x8169B5F8 end:0x8169B600
 
-libs/RVL_SDK/src/usbutil/uh_ker_tsk.c:
+libs/RVL_SDK/src/usbcmn/puh_ker_tsk.c:
 	.bss        start:0x811AFA10 end:0x811B00A0
 	.text       start:0x815F338C end:0x815F3414
 
@@ -4507,11 +4550,8 @@ libs/MSL/src/math/e_rem_pio2.c:
 	.rodata     start:0x81634070 end:0x816341F8
 	.sdata2     start:0x81697C80 end:0x81697CD8
 
-libs/MSL/src/math/s_fmin.c:
-	.text       start:0x8160AA5C end:0x8160AAC8
-
-libs/MSL/src/math/s_fmax.c:
-	.text       start:0x8160AAC8 end:0x8160AB34
+libs/MSL/src/math/fminmaxdim.c:
+	.text       start:0x8160AA5C end:0x8160AB34
 
 libs/MSL/src/math/k_cos.c:
 	.text       start:0x8160AB34 end:0x8160AC44

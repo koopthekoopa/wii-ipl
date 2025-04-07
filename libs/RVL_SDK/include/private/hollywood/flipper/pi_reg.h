@@ -1,0 +1,29 @@
+#ifndef PRIVATE_HOLLYWOOD_FLIPPER_PI_REGS_H
+#define PRIVATE_HOLLYWOOD_FLIPPER_PI_REGS_H
+
+#define PI_INTERRUPT_CAUSE      0x0000
+#define PI_INTERRUPT_ERROR      0
+#define PI_INTERRUPT_RSW        1
+#define PI_INTERRUPT_DI         2
+#define PI_INTERRUPT_SI         3
+#define PI_INTERRUPT_EXI        4
+#define PI_INTERRUPT_AI         5
+#define PI_INTERRUPT_DSP        6
+#define PI_INTERRUPT_MEM        7
+#define PI_INTERRUPT_VI         8
+#define PI_INTERRUPT_PE_TOKEN   9
+#define PI_INTERRUPT_PE_FINISH  10
+#define PI_INTERRUPT_CP         11
+#define PI_INTERRUPT_DEBUG      12
+#define PI_INTERRUPT_HSP        13
+#define PI_INTERRUPT_ACR        14 /* HOLLYWOOD EXCLUSIVE */
+#define PI_INTERRUPT_RSW_STATE  16
+
+#define PI_INTERRUPT_MASK       0x0004
+
+#define PI_RESET_REQUEST        0x0024
+#define PI_UNIT_INFO            0x002C
+#define PI_UNIT_INFO_TYPE       28
+#define PI_UNIT_INFO_TYPE_EB    31
+
+#endif // PRIVATE_HOLLYWOOD_FLIPPER_PI_REGS_H

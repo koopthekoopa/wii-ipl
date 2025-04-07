@@ -1,9 +1,9 @@
-Revolution SDK Decompilation
-============================
+Revolution SDK
+==============
 A decompilation of the Revolution SDK (RVL_SDK) from the Wii Menu.  
 
 This version of the SDK is a mess.  
-Seems to be an SDK version from 2006 with lazily copied code from later versons and was (mostly) recompiled with the GC 3.0a5.2 compiler.
+Seems to be an early SDK revision recompiled when then IPL was being built.
 
 The Wii Menu has the following libraries linked (alphabetical order):
 * **AI** (Audio Interface Library)
@@ -11,7 +11,7 @@ The Wii Menu has the following libraries linked (alphabetical order):
 * **AX** (Audio Library)
 * **AXFX** (Audio Effects Library)
 * **BASE** (PowerPC architecture Library)
-* **BTE** (BroadCom's Bluetooth Driver Library)
+* **BTE** (Bluetooth Driver Library; written by BroadCom)
 * **CARD** (GameCube Memory Card Library)
 * **CNT** (Title Content API Library)
 * **CNTCACHE** (Unknown)
@@ -22,9 +22,9 @@ The Wii Menu has the following libraries linked (alphabetical order):
 * **ENC** (Character Encoding Library)
 * **ES** (Private ES Library)
 * **ESP** (Public ES Library)
-* **EUART** (Externel Interface Bus UART Library; by Hudson Soft)
+* **EUART** (Externel Interface Bus UART Library; written by Hudson Soft)
 * **EXI** (Externel Interface Bus Library)
-* **FA** (File Allocation Library; for SD Card. Small left overs for USB support?)
+* **FA** (File Allocation Library; for SD Card)
 * **FS** (NAND ISFS Library)
 * **GX** (Graphics Library)
 * **IPC** (IPC Driver and IOS Library)
@@ -44,7 +44,7 @@ The Wii Menu has the following libraries linked (alphabetical order):
 * **SI** (Serial Interface Library)
 * **TPL** (Texture Pallete Library)
 * **USB** (IUSB I/O API; written by Hudson Soft)
-* **USBUTIL** (USB Utilities)
+* **USBCMN** (USB Common Utilities)
 * **USBKBD** (USB Keyboard)
 * **VI** (Video Interface Library)
 * **WAD** (WAD Package Library)
@@ -56,5 +56,8 @@ Thanks to
 ---------
 [kiwi515/ogws](https://github.com/kiwi515/ogws)  
 [SMGCommunity/Petari](https://github.com/SMGCommunity/Petari)  
-[doldecomp/dolsdk2001](https://github.com/doldecomp/dolsdk2001)  
+[doldecomp/dolsdk2001](https://github.com/doldecomp/dolsdk2004)  
+[projectPiki/pikmin2](https://github.com/projectPiki/pikmin2)  
 [devkitPro/libogc](https://github.com/devkitPro/libogc)  
+[wiibrew.org](https://wiibrew.org)  
+[Yet Another GameCube Documentation](https://www.gc-forever.com/yagcd)  

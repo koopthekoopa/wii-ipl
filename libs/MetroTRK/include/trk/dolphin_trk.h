@@ -1,7 +1,7 @@
 #ifndef TRK_DOLPHIN_OS_H
 #define TRK_DOLPHIN_OS_H
 
-#include <revolution/os/OSInterrupt.h>
+#include <private/os/OSInterrupt.h>
 
 typedef void            (*DBCommFunc)();
 typedef unsigned int    (*DBPollFunc)();
@@ -26,6 +26,6 @@ typedef struct DBCommTable {
     DBCommFunc      post_stop_func;         // 0x24
 } DBCommTable;
 
-void    EnableEXI2Interrupts();
+void    EnableMetroTRKInterrupts();
 
 #endif // TRK_DOLPHIN_OS_H

@@ -24,31 +24,37 @@ extern "C" {
 // Amount of nibbles in a frame
 #define AX_ADPCM_NIBBLES_PER_FRAME (AX_ADPCM_FRAME_SIZE * 2)
 
-typedef enum { AX_VOICE_NORMAL, AX_VOICE_STREAM } AXVOICETYPE;
+enum {
+    AX_VOICE_NORMAL,
+    AX_VOICE_STREAM
+};
 
-typedef enum { AX_VOICE_STOP, AX_VOICE_RUN } AXVOICESTATE;
+enum {
+    AX_VOICE_STOP,
+    AX_VOICE_RUN
+};
 
-typedef enum {
+enum {
     AX_SAMPLE_FORMAT_DSP_ADPCM = 0,
     AX_SAMPLE_FORMAT_PCM_S16 = 10,
     AX_SAMPLE_FORMAT_PCM_S8 = 25,
-} AXSAMPLETYPE;
+};
 
-typedef enum {
+enum {
     AX_PB_LPF_ON = 1,
     AX_PB_BIQUAD_ON,
 };
 
-typedef enum {
+enum {
     AX_SRC_TYPE_NONE,
     AX_SRC_TYPE_LINEAR,
     AX_SRC_TYPE_4TAP_8K,
     AX_SRC_TYPE_4TAP_12K,
     AX_SRC_TYPE_4TAP_16K,
     AX_SRC_TYPE_4TAP_AUTO
-} AXPBSRCTYPE;
+} ;
 
-typedef enum {
+enum {
     AX_MIXER_CTRL_L = (1 << 0),
     AX_MIXER_CTRL_R = (1 << 1),
     AX_MIXER_CTRL_DELTA = (1 << 2),
@@ -74,7 +80,7 @@ typedef enum {
     AX_MIXER_CTRL_DELTA_CS = (1 << 30)
 };
 
-typedef enum {
+enum {
     AX_MIXER_CTRL_RMT_M0 = (1 << 0),
     AX_MIXER_CTRL_RMT_DELTA_M0 = (1 << 1),
     AX_MIXER_CTRL_RMT_A0 = (1 << 2),
@@ -220,14 +226,17 @@ typedef struct _AXPBRMTMIX {
     u16 vDeltaMain0;    // 0x02
     u16 vAux0;          // 0x04
     u16 vDeltaAux0;     // 0x06
+
     u16 vMain1;         // 0x08
     u16 vDeltaMain1;    // 0x0A
     u16 vAux1;          // 0x0C
     u16 vDeltaAux1;     // 0x0E
+
     u16 vMain2;         // 0x10
     u16 vDeltaMain2;    // 0x12
     u16 vAux2;          // 0x14
     u16 vDeltaAux2;     // 0x16
+
     u16 vMain3;         // 0x18
     u16 vDeltaMain3;    // 0x1A
     u16 vAux3;          // 0x1C
@@ -239,6 +248,7 @@ typedef struct _AXPBRMTDPOP {
     s16 aMain1; // 0x02
     s16 aMain2; // 0x04
     s16 aMain3; // 0x06
+
     s16 aAux0;  // 0x08
     s16 aAux1;  // 0x0A
     s16 aAux2;  // 0x0C
@@ -296,5 +306,3 @@ typedef struct _AXPB {
 #endif
 
 #endif // REVOLUTION_AX_PB_H
-
-

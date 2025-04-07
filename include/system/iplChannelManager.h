@@ -3,7 +3,7 @@
 
 #include <revolution/types.h>
 
-#include <revolution/es.h>
+#include <private/es.h>
 
 #define CHANNEL_INFO(primary, second, flags, titleId) \
     { primary, second, 0, 0, flags, ES_CHANNEL_ID(titleId), ES_TITLE_ID(titleId) }
@@ -32,15 +32,15 @@ namespace ipl {
         };
         
         typedef struct SChannelInfo {
-            u8      primaryType;    // 0x00
-            u8      secondaryType;  // 0x01
+            u8          primaryType;    // 0x00
+            u8          secondaryType;  // 0x01
 
-            u8      reserved[2];    // 0x02
+            u8          reserved[2];    // 0x02
 
-            u32     flags;          // 0x04
+            u32         flags;          // 0x04
 
-            ESId    titleType;      // 0x08
-            ESId    titleId;        // 0x0C
+            ESTitleId32 titleType;      // 0x08
+            ESTitleId32 titleCode;      // 0x0C
         } SInfo;
     }
 }

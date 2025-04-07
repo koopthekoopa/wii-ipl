@@ -35,15 +35,24 @@ void CHANSVmDebugPrintf(const CHANSVmStr format, ...) {
 /************************/
 
 static void VmStrToU16FromU8(CHANSVmWStr output, CHANSVmStr input, CHANSVmSize length) NO_INLINE {
-    /* todo */
+    CHANSVmInt i;
+    CHANSVmInt outLength = length << 1;
+
+    for (i = length; i != 0; i--) {
+        CHANSVmStrCh* outChar = (CHANSVmStrCh*)(output + outLength);
+        outLength -= 2;
+        outChar--; *outChar = *--input;
+        outChar--; *outChar = 0;
+        
+    }
 }
 
 /************************/
 /*     OBJECT DATA      */
 /************************/
 
-static inline int VmToStrFromIntCommon(CHANSVmWStr output, CHANSVmSize length, CHANSVmInt64 integer) {
-    int len = snprintf((CHANSVmStr)output, length, "%lld", integer);
+static inline CHANSVmInt VmToStrFromIntCommon(CHANSVmWStr output, CHANSVmSize length, CHANSVmInt64 integer) {
+    CHANSVmInt len = snprintf((CHANSVmStr)output, length, "%lld", integer);
     VmStrToU16FromU8(output, (CHANSVmStr)output, len);
     return len;
 }
@@ -51,7 +60,7 @@ static inline int VmToStrFromIntCommon(CHANSVmWStr output, CHANSVmSize length, C
 CHANSVmObjHdr* CHANSVmConvertToStrFromInt(CHANSVm*vm, CHANSVmObjType type, CHANSVmObjHdr* object) {
     CHANSVmObjHdr* newObject = CHANSVmNewObject(vm, 0, NULL, CHANS_VM_OBJ_TYPE_STRING, CHANSVmWStrLength(64));
     if (newObject) {
-        int len = VmToStrFromIntCommon(*newObject->value.wstring_v.str, 64, object->value.int64_v);
+        CHANSVmInt len = VmToStrFromIntCommon(*newObject->value.wstring_v.str, 64, object->value.int64_v);
 
         *newObject->value.wstring_v.len = CHANSVmWStrLength(len);
         if (*newObject->value.wstring_v.len == 0) {
@@ -61,34 +70,34 @@ CHANSVmObjHdr* CHANSVmConvertToStrFromInt(CHANSVm*vm, CHANSVmObjType type, CHANS
     return newObject;
 }
 
-static CHANSVmBool VmGetEnumedType(CHANSVmObjType* type, int intType) NO_INLINE {
-    CHANSVmObjType eType;
-    switch (intType) {
+static CHANSVmBool VmGetEnumedType(CHANSVmObjType* eType, CHANSVmInt iType) NO_INLINE {
+    CHANSVmObjType type;
+    switch (iType) {
         case 0: {
-            eType = CHANS_VM_OBJ_TYPE_BLANK;
+            type = CHANS_VM_OBJ_TYPE_BLANK;
             break;
         }
         case 1: {
-            eType = CHANS_VM_OBJ_TYPE_INTEGER;
+            type = CHANS_VM_OBJ_TYPE_INTEGER;
             break;
         }
         case 2: {
-            eType = CHANS_VM_OBJ_TYPE_FLOAT;
+            type = CHANS_VM_OBJ_TYPE_FLOAT;
             break;
         }
         case 3: {
-            eType = CHANS_VM_OBJ_TYPE_STRING;
+            type = CHANS_VM_OBJ_TYPE_STRING;
             break;
         }
         case 4: {
-            eType = CHANS_VM_TYPE_UNK4;
+            type = CHANS_VM_TYPE_UNK4;
             break;
         }
         case 6:
         case 7:
         case 8:
         case 9: {
-            eType = CHANS_VM_TYPE_UNK5;
+            type = CHANS_VM_TYPE_UNK5;
             break;
         }
         default: {
@@ -96,8 +105,8 @@ static CHANSVmBool VmGetEnumedType(CHANSVmObjType* type, int intType) NO_INLINE 
         }
     }
 
-    if (type) {
-        *type = eType;
+    if (eType) {
+        *eType = type;
     }
     return CHANSVmTrue;
 }
@@ -105,8 +114,8 @@ static CHANSVmBool VmGetEnumedType(CHANSVmObjType* type, int intType) NO_INLINE 
 CHANSVmErr CHANSVmSetInteger(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmInt hiVal, CHANSVmInt loVal) {
     CHANSVmErr ret = CHANSVmDeleteObject(vm, object);
     if (ret == CHANS_VM_OK) {
-        object->value.int_v.lo = loVal;
         object->type = CHANS_VM_OBJ_TYPE_INTEGER;
+        object->value.int_v.lo = loVal;
         object->value.int_v.hi = hiVal;
     }
     return ret;
@@ -127,7 +136,7 @@ CHANSVmErr CHANSVmSetFloat(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmFloat valu
 CHANSVmErr CHANSVmSetU16String(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmWStr str, CHANSVmSize strLen) {
     CHANSVmErr ret = CHANSVmDeleteObject(vm, object);
     if (ret == CHANS_VM_OK) {
-        // Set up object with `CHANSVmNewObject` so t allocates needed memory size for the string.
+        // Set up object with `CHANSVmNewObject` so it allocates needed memory size for the string.
         if (CHANSVmNewObject(vm, 0, object, CHANS_VM_OBJ_TYPE_STRING, strLen) == CHANSVmNull) {
             return CHANS_VM_ERR_SET_STRING;
         }
@@ -142,7 +151,7 @@ CHANSVmErr CHANSVmSetU16String(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmWStr s
 CHANSVmErr CHANSVmSetU16StringFromU8(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmStr str, CHANSVmSize strLen) {
     CHANSVmErr ret = CHANSVmDeleteObject(vm, object);
     if (ret == CHANS_VM_OK) {
-        // Set up object with `CHANSVmNewObject` so t allocates needed memory size for the string.
+        // Set up object with `CHANSVmNewObject` so it allocates needed memory size for the string.
         if (CHANSVmNewObject(vm, 0, object, CHANS_VM_OBJ_TYPE_STRING, CHANSVmWStrLength(strLen)) == CHANSVmNull) {
             return CHANS_VM_ERR_SET_STRING;
         }

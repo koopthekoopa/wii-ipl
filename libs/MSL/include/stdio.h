@@ -8,6 +8,7 @@
 namespace std {
     using   ::sprintf;
     using   ::snprintf;
+    using   ::vprintf;
     using   ::vsnprintf;
 } // namespace std
 

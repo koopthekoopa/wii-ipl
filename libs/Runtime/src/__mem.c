@@ -15,7 +15,8 @@ void* memcpy(void* dst, const void* src, size_t count) {
         for (i = count + 1; --i;) {
             *++q = *++p;
         }
-    } else {
+    }
+    else {
         p = (char*)src + count;
         q = (char*)dst + count;
 

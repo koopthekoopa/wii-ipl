@@ -1,6 +1,8 @@
 #ifndef REVOLUTION_OS_RESET_H
 #define REVOLUTION_OS_RESET_H
 
+#include <revolution/types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -8,12 +10,11 @@ extern "C" {
 typedef BOOL (*OSShutdownFunction)(BOOL, u32);
 
 typedef struct OSShutdownFunctionInfo OSShutdownFunctionInfo;
-
 struct OSShutdownFunctionInfo {
     OSShutdownFunction func;        // 0x00
-    
+
     u32 priority;                   // 0x04
-    
+
     OSShutdownFunctionInfo* next;   // 0x08
     OSShutdownFunctionInfo* prev;   // 0x0C
 };
@@ -26,10 +27,13 @@ typedef struct OSShutdownFunctionQueue {
 void    OSRegisterShutdownFunction(OSShutdownFunctionInfo* info);
 void    OSUnregisterShutdownFunction(OSShutdownFunctionInfo* info);
 
+u32     OSGetResetCode();
+
+void    OSReturnToMenu();
+void    OSShutdownSystem();
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif  // REVOLUTION_OS_RESET_H
-
-

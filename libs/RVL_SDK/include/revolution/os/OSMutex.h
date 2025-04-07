@@ -18,6 +18,13 @@ struct OSCond {
     OSThreadQueue   queue;  // 0x00
 };
 
+void    OSInitMutex(OSMutex* mutex);
+void    OSLockMutex(OSMutex* mutex);
+void    OSUnlockMutex(OSMutex* mutex);
+BOOL    OSTryLockMutex(OSMutex* mutex);
+
+#include <revolution/os/OSCond.h>
+
 #ifdef __cplusplus
 }
 #endif

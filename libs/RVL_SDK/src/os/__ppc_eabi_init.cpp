@@ -35,40 +35,40 @@ asm void __init_hardware() {
     nofralloc
     
     // Floating-point on
-    mfmsr r0
-    ori r0, r0, MSR_FP
-    mtmsr r0
+    mfmsr   r0
+    ori     r0, r0, MSR_FP
+    mtmsr   r0
 
-    mflr r31
+    mflr    r31
 
-    bl __OSPSInit
-    bl __OSFPRInit
-    bl __OSCacheInit
+    bl      __OSPSInit
+    bl      __OSFPRInit
+    bl      __OSCacheInit
 
-    mtlr r31
+    mtlr    r31
     blr
 #endif
 }
 
 asm void __flush_cache(void* pAddress, unsigned int size) {
 #ifdef __MWERKS__
-    lis r5, 0xFFFF
-    ori r5, r5, 0xFFF1
+    lis     r5, 0xFFFF
+    ori     r5, r5, 0xFFF1
 
-    and r5, r5, r3
+    and     r5, r5, r3
 
-    subf r3, r5, r3
-    add r4, r4, r3
+    subf    r3, r5, r3
+    add     r4, r4, r3
 
 loop:
-    dcbst r0, r5
+    dcbst   r0, r5
     sync
 
-    icbi r0, r5
-    addic r5, r5, 8
-    subic. r4, r4, 8
+    icbi    r0, r5
+    addic   r5, r5, 8
+    subic.  r4, r4, 8
 
-    bge loop
+    bge     loop
 
     isync
 
@@ -91,8 +91,6 @@ asm void __init_user() {
 
 static void __init_cpp() {
     VoidPTR *ctor;
-
-    // Static initialization
     for (ctor = _ctors; *ctor != 0; ctor++) {
         (*ctor)();
     }
@@ -100,7 +98,6 @@ static void __init_cpp() {
 
 static void __fini_cpp() {
     VoidPTR *dtor;
-
     for (dtor = _dtors; *dtor != 0; dtor++) {
         (*dtor)();
     }
@@ -114,5 +111,3 @@ void exit() {
     __fini_cpp();
     _ExitProcess();
 }
-
-

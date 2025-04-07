@@ -4,14 +4,14 @@
 
 namespace ipl {
     namespace utility {
-        Capture::Capture(EGG::Heap* pHeap, int x, int y, int width, int height, _GXTexFmt texFmt) :
+        Capture::Capture(EGG::Heap* heap, int x, int y, int width, int height, GXTexFmt texFmt) :
         mXPos(x),
         mYPos(y),
         mTextureWidth(width),
         mTextureHeight(height),
         mTextureFormat(texFmt) {
             mTextureSize = GXGetTexBufferSize(width, height, texFmt, GX_FALSE, 1);
-            mTextureBuffer = new(pHeap, BUFFER_HEAP) u8[mTextureSize];
+            mTextureBuffer = new(heap, BUFFER_HEAP) u8[mTextureSize];
 
             GXInitTexObj(&mTexObj, mTextureBuffer, mTextureWidth, mTextureHeight, mTextureFormat, GX_CLAMP, GX_CLAMP, GX_FALSE);
         }
@@ -24,7 +24,7 @@ namespace ipl {
             DCInvalidateRange(mTextureBuffer, mTextureSize);
             
             if (!disableFilter) {
-                GXRenderModeObj *pRmode = System::getRenderModeObj();
+                GXRenderModeObj* pRmode = System::getRenderModeObj();
                 GXSetCopyFilter(GX_FALSE, pRmode->sample_pattern, GX_FALSE, pRmode->vfilter);
             }
             
@@ -35,11 +35,9 @@ namespace ipl {
             GXPixModeSync();
             
             if (!disableFilter) {
-                GXRenderModeObj *pRmode = System::getRenderModeObj();
+                GXRenderModeObj* pRmode = System::getRenderModeObj();
                 GXSetCopyFilter(pRmode->aa, pRmode->sample_pattern, GX_TRUE, pRmode->vfilter);
             }
         }
     }
 }
-
-

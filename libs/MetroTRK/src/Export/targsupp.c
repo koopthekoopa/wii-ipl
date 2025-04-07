@@ -8,6 +8,8 @@
 
 #include <TRK_Hollywood_Revolution.h>
 
+#pragma force_active on
+
 // Encapsulating function to get the file to align properly
 asm void __targsupp() {
 #ifdef __MWERKS__ // clang-format off

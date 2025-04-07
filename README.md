@@ -1,26 +1,73 @@
-![Logo](./misc/logo.png)  
-Wii Menu  
-[![Build Status]][actions] [![Discord Badge]][discord] [![Progress Badge]][progress] [![Linked Badge]][progress]
-========
+<!--- Github Actions Badge -->
 
 [Build Status]: https://github.com/koopthekoopa/wii-ipl/actions/workflows/build.yml/badge.svg
 [actions]: https://github.com/koopthekoopa/wii-ipl/actions/workflows/build.yml
+
+<!--- Discord Badge -->
+
 [Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 [discord]: https://discord.gg/hKx3FJJgrV
 
-[Progress Badge]: https://decomp.dev/koopthekoopa/wii-ipl.svg?mode=shield&measure=code&label=Progress
-[Linked Badge]: https://decomp.dev/koopthekoopa/wii-ipl.svg?mode=shield&measure=complete_code&label=Linked
-[progress]: https://decomp.dev/koopthekoopa/wii-ipl
+<!-- Progress links -->
+
+[V43U]: https://decomp.dev/koopthekoopa/wii-ipl/43U
+[V43E]: https://decomp.dev/koopthekoopa/wii-ipl/43E
+[V43J]: https://decomp.dev/koopthekoopa/wii-ipl/43J
+[V43K]: https://decomp.dev/koopthekoopa/wii-ipl/43K
+
+<!--- Version 4.3U progress Badge -->
+
+[DecompBadgeV43U]: https://decomp.dev/koopthekoopa/wii-ipl/43U.svg?mode=shield&measure=code&label=Decompiled&color=rgb(16,175,232)
+[LinkBadgeV43U]: https://decomp.dev/koopthekoopa/wii-ipl/43U.svg?mode=shield&measure=complete_code&label=Linked&color=rgb(16,175,232)
+[FuncBadgeV43U]: https://decomp.dev/koopthekoopa/wii-ipl/43U.svg?mode=shield&measure=functions&label=Functions&color=rgb(16,175,232)
+
+<!--- Version 4.3E progress Badge -->
+
+[DecompBadgeV43E]: https://decomp.dev/koopthekoopa/wii-ipl/43E.svg?mode=shield&measure=code&label=Decompiled&color=rgb(16,175,232)
+[LinkBadgeV43E]: https://decomp.dev/koopthekoopa/wii-ipl/43E.svg?mode=shield&measure=complete_code&label=Linked&color=rgb(16,175,232)
+[FuncBadgeV43E]: https://decomp.dev/koopthekoopa/wii-ipl/43E.svg?mode=shield&measure=functions&label=Functions&color=rgb(16,175,232)
+
+<!--- Version 4.3J progress Badge -->
+
+[DecompBadgeV43J]: https://decomp.dev/koopthekoopa/wii-ipl/43J.svg?mode=shield&measure=code&label=Decompiled&color=rgb(16,175,232)
+[LinkBadgeV43J]: https://decomp.dev/koopthekoopa/wii-ipl/43J.svg?mode=shield&measure=complete_code&label=Linked&color=rgb(16,175,232)
+[FuncBadgeV43J]: https://decomp.dev/koopthekoopa/wii-ipl/43J.svg?mode=shield&measure=functions&label=Functions&color=rgb(16,175,232)
+
+<!--- Version 4.3K progress Badge -->
+
+[DecompBadgeV43K]: https://decomp.dev/koopthekoopa/wii-ipl/43K.svg?mode=shield&measure=code&label=Decompiled&color=rgb(16,175,232)
+[LinkBadgeV43K]: https://decomp.dev/koopthekoopa/wii-ipl/43K.svg?mode=shield&measure=complete_code&label=Linked&color=rgb(16,175,232)
+[FuncBadgeV43K]: https://decomp.dev/koopthekoopa/wii-ipl/43K.svg?mode=shield&measure=functions&label=Functions&color=rgb(16,175,232)
+
+<!--- Header -->
+
+![](./misc/logo.png)  
+Wii Menu  
+[![Build Status]][actions] [![Discord Badge]][discord]
+========
+
+<!--- Contents -->
 
 A work-in-progress decompilation of the Wii Menu (4.3).
 
 This repository does **not** contain any assets or assembly of the executable whatsoever. An existing WAD of the Wii Menu is required.
 
 Supported versions:
-- `43J`: Version **4.3J** (Japan)
-- `43U`: Version **4.3U** (USA)
-- `43E`: Version **4.3E** (Europe)
-- `43K`: Version **4.3K** (Korean)
+- `43U` - Version **4.3U** (USA)
+- `43E` - Version **4.3E** (Europe)
+- `43J` - Version **4.3J** (Japan)
+- `43K` - Version **4.3K** (Korean)
+
+Progress
+========
+|        Version        |      Functions Done      |         Decompiled         |          Linked          |
+|-----------------------|--------------------------|----------------------------|--------------------------|
+| [Wii Menu 4.3U][V43U] | [![FuncBadgeV43U]][V43U] | [![DecompBadgeV43U]][V43U] | [![LinkBadgeV43U]][V43U] |
+| [Wii Menu 4.3E][V43E] | [![FuncBadgeV43E]][V43E] | [![DecompBadgeV43E]][V43E] | [![LinkBadgeV43E]][V43E] |
+| [Wii Menu 4.3J][V43J] | [![FuncBadgeV43J]][V43J] | [![DecompBadgeV43J]][V43J] | [![LinkBadgeV43J]][V43J] |
+| [Wii Menu 4.3K][V43K] | [![FuncBadgeV43K]][V43K] | [![DecompBadgeV43K]][V43K] | [![LinkBadgeV43K]][V43K] |
+  
+> You can see the full progress and its history by clicking on one of the versions in the table.
 
 Installing Dependencies
 =======================
@@ -75,8 +122,7 @@ Building
   git clone https://github.com/koopthekoopa/wii-ipl.git
   ```
 
-- Copy the Wii Menu WAD to `orig/[Wii Menu Version]`.
-  - Rename the WAD to `base.wad`
+- Copy your WAD to `orig/[Wii Menu Version]`.
 
 - Configure:
 
@@ -93,7 +139,7 @@ Building
   ```
 
 >  [!NOTE]
-> This does **not** prodcue a WAD file. You must replace the exectable with the one you built (`main.app`) manually.
+> This does **not** produce a WAD file. You must replace the exectable with the one you built (`main.app`) manually into a WAD file.
 
 > [!WARNING]
 > The code is not 100% shiftable, most of it works aside from a couple of things (such as Wii Settings and a few Channel Banners like the Forecast Channel)

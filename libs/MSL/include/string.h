@@ -6,11 +6,13 @@
 #ifdef __cplusplus
 
 namespace std {
-    // MSL/memory.h
     using   ::memcpy;
     using   ::memset;
+    using   ::memove;
 
+    using   ::strcpy;
     using   ::strcmp;
+
     using   ::stricmp;
 
     using   ::strncpy;

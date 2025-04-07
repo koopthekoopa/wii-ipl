@@ -1,6 +1,8 @@
 #include "system/iplBS2Manager.h"
 
 #include <revolution/os/OSBootInfo.h>
+#include <private/os.h>
+
 #include <revolution/wpad.h>
 
 #include "system/iplSystem.h"
@@ -33,7 +35,7 @@ namespace ipl {
         }
 
         int Manager::update() {
-            if ((unk_0x04 - 9) <= 1) {
+            if (unk_0x04 == 9 || unk_0x04 == 10) {
                 return unk_0x04;
             }
 
@@ -125,7 +127,7 @@ namespace ipl {
 
         void Manager::getDiskInfo(char** diskID, char** diskMaker) {
             // Disc info is from BI read by BS2
-            OSBootInfo* bi = (OSBootInfo*)OSPhysicalToCached(BS2_BOOTINFO_ADDR);
+            OSBootInfo* bi = (OSBootInfo*)OSPhysicalToCached(OS_ADDR_BOOT_INFO);
 
             if (diskID)     *diskID     = (char*)bi->DVDDiskID.gameName;
             if (diskMaker)  *diskMaker  = (char*)bi->DVDDiskID.company;
@@ -230,13 +232,15 @@ namespace ipl {
             }
             else if (unk_0x0E) {
                 if (state == BS2_STATE_52
-                || state == BS2_STATE_53
-                || state == BS2_STATE_55
-                || state == BS2_STATE_56
-                || state == BS2_STATE_66
-                || state == BS2_STATE_67
-                || state == BS2_STATE_68
-                || (u32)(state - BS2_STATE_57) <= BS2_STATE_2) {
+                 || state == BS2_STATE_53
+                 || state == BS2_STATE_55
+                 || state == BS2_STATE_56
+                 || state == BS2_STATE_66
+                 || state == BS2_STATE_67
+                 || state == BS2_STATE_68
+                 || state == BS2_STATE_57
+                 || state == BS2_STATE_58
+                 || state == BS2_STATE_59) {
                     unk_0x0C = false;
                     unk_0x04 = 8;
                 }

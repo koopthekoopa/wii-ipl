@@ -7,6 +7,8 @@
 extern "C" {
 #endif
 
+#define OS_CONTEXT_STATE_FPSAVED    (1<<0)
+
 typedef struct OSContext {
     u32 gpr[32];    // 0x00
     u32 cr;         // 0x80
@@ -29,10 +31,31 @@ typedef struct OSContext {
     f64 psf[32];    // 0x1C8
 } OSContext;
 
+void        OSLoadFPUContext(OSContext* fpucontext);
+void        OSSaveFPUContext(OSContext* fpucontext);
+
+void        OSFillFPUContext(OSContext* context);
+
+void        OSInitContext(OSContext* context, u32 pc, u32 newsp);
+
+void        OSSetCurrentContext(OSContext* context);
+OSContext*  OSGetCurrentContext();
+
+u32         OSSaveContext(OSContext* context);
+void        OSLoadContext(OSContext* context);
+
+void        OSClearContext(OSContext* context);
+
+void        OSDumpContext(OSContext* context);
+
+u32         OSGetStackPointer();
+u32         OSSwitchStack(u32 newsp);
+
+int         OSSwitchFiber(u32 pc, u32 newsp);
+void        OSSwitchFiberEx(u32 r3, u32 r4, u32 r5, u32 r6, void* pc, void* newsp);
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif // REVOLUTION_OS_CONTEXT_H
-
-

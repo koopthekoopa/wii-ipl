@@ -1192,19 +1192,19 @@ def generate_build_ninja(
         dol_elf_path = dol_link_step.partial_output()
         n.comment("Check for mismatching symbols")
         n.rule(
-            name="bs2_diff",
+            name="dol_diff",
             command=f"{dtk} -L error dol diff $in",
             description=f"DIFF {dol_elf_path}",
         )
         n.build(
             inputs=[config.config_path, dol_elf_path],
-            outputs="bs2_diff",
-            rule="bs2_diff",
+            outputs="dol_diff",
+            rule="dol_diff",
         )
         n.build(
             outputs="diff",
             rule="phony",
-            inputs="bs2_diff",
+            inputs="dol_diff",
         )
         n.newline()
 

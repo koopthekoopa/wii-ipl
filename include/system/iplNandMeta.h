@@ -3,7 +3,7 @@
 
 #include "system/iplNand.h"
 
-#include <revolution/es.h>
+#include <private/es.h>
 
 namespace ipl {
     namespace nand {

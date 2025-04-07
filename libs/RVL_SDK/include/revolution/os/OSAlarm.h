@@ -3,6 +3,7 @@
 
 #include <revolution/types.h>
 
+#include <revolution/os/OSTime.h>
 #include <revolution/os/OSContext.h>
 
 #ifdef __cplusplus
@@ -31,8 +32,16 @@ typedef struct OSAlarmQueue {
     OSAlarm*    tail;           // 0x04
 } OSAlarmQueue;
 
-void    OSCreateAlarm(OSAlarm* pAlarm);
-void    OSSetAlarm(OSAlarm* alarm, OSTime tick, OSAlarmHandler handler);
+void    OSCreateAlarm(OSAlarm* alarm);
+void    OSSetAlarm(OSAlarm* alarm, OSTime start, OSAlarmHandler handler);
+void    OSCancelAlarm(OSAlarm* alarm);
+
+void    OSSetPeriodicAlarm(OSAlarm* alarm, OSTime start, OSTime period, OSAlarmHandler handler);
+
+void    OSSetAlarmTag(OSAlarm* alarm, u32 tag);
+
+void    OSSetAlarmUserData(OSAlarm* alarm, void* userData);
+void*   OSGetAlarmUserData(OSAlarm* alarm);
 
 #ifdef __cplusplus
 }

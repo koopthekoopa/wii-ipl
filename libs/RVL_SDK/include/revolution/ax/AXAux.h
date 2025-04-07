@@ -16,22 +16,22 @@ extern "C" {
  * Stereo: Left, Right, Surround
  * DPL2:   Left, Right, Left Surround, Right Surround
  */
-typedef enum {
+enum {
     AX_STEREO_L,
     AX_STEREO_R,
     AX_STEREO_S,
 
     AX_STEREO_MAX
-} AXStereoChannel;
+};
 
-typedef enum {
+enum {
     AX_DPL2_L,
     AX_DPL2_R,
     AX_DPL2_LS,
     AX_DPL2_RS,
 
     AX_DPL2_MAX
-} AXDPL2Channel;
+};
 
 typedef void (*AXAuxCallback)(void* chans, void* context);
 
@@ -40,5 +40,3 @@ typedef void (*AXAuxCallback)(void* chans, void* context);
 #endif
 
 #endif // REVOLUTION_AX_AUX_H
-
-

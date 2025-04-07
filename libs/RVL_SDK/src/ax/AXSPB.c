@@ -33,7 +33,8 @@ void __AXDepopFadeMain(s32* all, s32* value, s16* depop) {
         *value = *all;
         *all -= avg * AX_SAMPLES_PER_FRAME;
         *depop = -avg;
-    } else {
+    }
+    else {
         *all = 0;
         *value = 0;
         *depop = 0;
@@ -56,7 +57,8 @@ void __AXDepopFadeRmt(s32* all, s32* value, s16* depop) {
         *value = *all;
         *all -= avg * AX_SAMPLES_PER_FRAME_RMT;
         *depop = -avg;
-    } else {
+    }
+    else {
         *all = 0;
         *value = 0;
         *depop = 0;

@@ -37,17 +37,15 @@ u8* RBRGetPicture(u32* rbrData, s32* dataSize) {
 
 void RBRGetPosRect(f32* left, f32* right, f32* top, f32* bottom) {
     if (left != NULL) {
-        *left = -230;
+        *left   = -230.0f;
     }
     if (right != NULL) {
-        *right = 230;
+        *right  = 230.0f;
     }
     if (top != NULL) {
-        *top = 180;
+        *top    = 180;
     }
     if (bottom != NULL) {
-        *bottom = -80;
+        *bottom = -80.0f;
     }
 }
-
-

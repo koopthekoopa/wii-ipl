@@ -19,15 +19,14 @@ namespace ipl {
                  * @param height The height position of the capture.
                  * @param texFmt Texture format of the capture. (RGB5A3 by default)
                  */
-                Capture(EGG::Heap* heap, int x, int y, int width, int height, _GXTexFmt texFmt = GX_TF_RGB5A3);
+                Capture(EGG::Heap* heap, int x, int y, int width, int height, GXTexFmt texFmt = GX_TF_RGB5A3);
                 ~Capture();
 
                 /**
                  * @brief Capture the screen
-                 * 
                  * @param disableFilter Disable the GX filter on capture.
                  */
-                void    capture(BOOL disableFilter);
+                void    capture(BOOL disableFilter = FALSE);
             
             private:
                 u16         mXPos;          // 0x00
@@ -47,5 +46,3 @@ namespace ipl {
 }
 
 #endif // IPL_CAPTURE_H
-
-

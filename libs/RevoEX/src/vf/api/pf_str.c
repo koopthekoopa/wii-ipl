@@ -2,7 +2,7 @@
 
 #include <private/vf/pf_volume.h>
 #include <private/vf/pf_str.h>
-#pragma sym on
+
 void VFiPFSTR_SetCodeMode(PF_STR* p_str, u32 code_mode) {
     p_str->code_mode = code_mode;
 }

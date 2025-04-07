@@ -9,8 +9,6 @@
 #include "system/rvl_dec.h"
 #include "system/iplSystem.h"
 
-#include "utility/iplGraphics.h"
-
 /** These declarations are auto generated **/
 
 extern u8 fatalDlg_ash[];
@@ -141,7 +139,7 @@ namespace ipl {
 
     void ErrorHandler::draw() {
         if (mbReady == TRUE) {
-            utility::Graphics::setDefaultOrtho();
+            layout::Object::setCamera();
             mpLayout->draw();
         }
     }

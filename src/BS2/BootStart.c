@@ -1,18 +1,16 @@
 #include <decomp.h>
 
+#include <revolution/os.h>
+#include <revolution/os/OSBootInfo.h>
+#include <private/os.h>
+
 #include <__ppc_eabi_linker.h>
 #include <__ppc_eabi_init.h>
 
 #include <string.h>
 
-#define EXCEPTION_MASK_ADDR 0x80000044
-#define BI2_ADDR            0x800000F4
-#define BI2_ARGOFFSET       0x0008
-#define ARENAHI_ADDR        0x80000034
-
-#ifdef __cplusplus
-extern "C" {
-#endif
+#define ARENA_HI_ADDR       (OS_BASE_CACHED + 0x00034)
+#define EXCEPTION_MASK_ADDR (OS_BASE_CACHED + 0x00044)
 
 extern int  main(int argc, char** argv);
 extern void exit();
@@ -20,8 +18,6 @@ extern void exit();
 extern void DBInit();
 
 #pragma section code_type ".init"
-
-void __start();
 
 __declspec(weak) asm void __start() {
 #ifdef __MWERKS__ 
@@ -47,13 +43,13 @@ __declspec(weak) asm void __start() {
     stw     r0, 0(r6)
 
     // Parse BI2 args
-    lis     r6, BI2_ADDR@ha
-    addi    r6, r6, BI2_ADDR@l
+    lis     r6, OS_CACHED_REGION_PREFIX
+    addi    r6, r6, BI2_ADDR
     lwz     r5, 0(r6)
     cmplwi  r5, 0
     beq+    bi2_no_args
     
-    addi    r6, r5, BI2_ARGOFFSET
+    addi    r6, r5, BI2_OFFSET_ARGOFFSET
     lwz     r6, 0(r6)
     cmplwi  r6, 0
     beq+    bi2_no_args
@@ -74,8 +70,8 @@ loop:
     stw     r7, 0(r6)
     bdnz    loop
 
-    lis     r5, ARENAHI_ADDR@ha
-    addi    r5, r5, ARENAHI_ADDR@l
+    lis     r5, ARENA_HI_ADDR@ha
+    addi    r5, r5, ARENA_HI_ADDR@l
     clrrwi  r7, r4, 5
     stw     r7, 0(r5)
     b       bi2_end_arg_parse
@@ -163,7 +159,7 @@ void __init_data() {
 
     // Copy the sections to their correct addresses
     rci = _rom_copy_info;
-    while(1) {
+    while (TRUE) {
         if (rci->size == 0) {
             break;
         }
@@ -173,7 +169,7 @@ void __init_data() {
 
     // Reset BSS sections
     bii = _bss_init_info;
-    while(1) {
+    while (TRUE) {
         if (bii->size == 0) {
             break;
         }

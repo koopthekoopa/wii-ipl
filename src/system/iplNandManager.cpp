@@ -7,9 +7,16 @@
 
 #include <cstring>
 
+#ifdef STAND_ALONE_BUILD
+#include "utility/iplESMisc.h"
+#endif // STAND_ALONE_BUILD
+
 namespace ipl {
     namespace nand {
+        static ESTicketView* spSysMenuTik = NULL;
         Manager::Manager(EGG::Heap* heap) {
+            s32 ret;
+
             mDescriptor = -1;
             mpFSTBuffer = NULL;
 
@@ -23,11 +30,20 @@ namespace ipl {
 
             ES_SetUid(SYSMENU_TITLE_ID);
 
-            s32 ret;
-
             // Open content archive
+#ifdef STAND_ALONE_BUILD
+            spSysMenuTik = (ESTicketView*)System::getMem2Sys()->alloc(OSRoundUp32B(sizeof(ESTicketView)), -BUFFER_HEAP);
+            ret = utility::ESMisc::GetTicketView(System::getMem2Sys(), SYSMENU_TITLE_ID, spSysMenuTik, 0);
+            if (ret < ES_ERR_OK) {
+                System::err_log("ES", mDescriptor, 0xBAD);
+                System::err_display(MESG_ERR_FILE);
+            }
+
+            mDescriptor = ES_OpenTitleContentFile(SYSMENU_TITLE_ID, spSysMenuTik, SYSMENU_CONTENT_ID);
+#else
             mDescriptor = ES_OpenContentFile(SYSMENU_CONTENT_ID);
-            if (mDescriptor < 0) {
+#endif // STAND_ALONE_BUILD
+            if (mDescriptor < ES_ERR_OK) {
                 System::err_log("ES", mDescriptor, 43);
                 System::err_display(MESG_ERR_FILE);
             }
@@ -40,12 +56,10 @@ namespace ipl {
                 System::err_display(MESG_ERR_FILE);
             }
 
-            // @BUG Should allocate buffer with fstSize instead of fileStart
             u32 bufSize = OSRoundUp32B(header.fileStart);
             mpFSTBuffer = new(BUFFER_HEAP) u8[bufSize];
 
             // Seek to file system table offset
-            // @BUG Should seek to fstStart instead of the beginning
             ret = ES_SeekContentFile(mDescriptor, 0, NAND_SEEK_BEG);
             if (ret < ES_ERR_OK) {
                 System::err_log("ES", ret, 66);
@@ -67,6 +81,9 @@ namespace ipl {
         void Manager::openContentsAll() {}
 
         void Manager::closeContentsAll() {
+#ifdef STAND_ALONE_BUILD
+            System::getMem2Sys()->free(spSysMenuTik);
+#endif
             s32 ret = ES_CloseContentFile(mDescriptor);
             if (ret != ES_ERR_OK) {
                 System::err_log("ES", ret, 102);
@@ -76,7 +93,7 @@ namespace ipl {
         }
 
         File* Manager::readAsync(EGG::Heap* heap, const char* fileName, int offset, u32 length, bool bJamRequest) {
-            char fullName[NAND_MAX_PATH + 1];
+            char fullName[NAND_MAX_PATH+1];
 
             // Set up path
             strncpy(fullName, mNandPath, sizeof(mNandPath));
@@ -95,7 +112,7 @@ namespace ipl {
         }
 
         File* Manager::read(EGG::Heap* heap, const char* fileName, int offset, u32 length, bool bJamRequest) {
-            char fullName[NAND_MAX_PATH + 1];
+            char fullName[NAND_MAX_PATH+1];
 
             // Set up path
             strncpy(fullName, mNandPath, sizeof(mNandPath));
@@ -155,7 +172,7 @@ namespace ipl {
         }
 
         LayoutFile* Manager::readLayout_(EGG::Heap* heap, const char* fileName, ARCHandle* arc, bool bIsNand) {
-            char fullName[NAND_MAX_PATH + 1];
+            char fullName[NAND_MAX_PATH+1];
 
             // Set up path
             strncpy(fullName, mNandPath, sizeof(mNandPath));
@@ -187,7 +204,7 @@ namespace ipl {
         }
 
         File* Manager::write_(EGG::Heap* heap, const char* fileName, void* buffer, u32 length, u8 perms) {
-            char fullName[NAND_MAX_PATH + 1];
+            char fullName[NAND_MAX_PATH+1];
 
             strncpy(fullName, mNandPath, sizeof(mNandPath));
             strncat(fullName, fileName, sizeof(mNandPath) - strlen(fullName));
@@ -210,11 +227,11 @@ namespace ipl {
         BOOL Manager::receiveToken(int* token) {
             BOOL result = FALSE;
             OSMessage msg = EGG::TaskThread::waitQueueMessage(mpTask->getMessageQueue(), &result);
-            if (result && msg) {
+            if (result && msg != NULL) {
                 *token = reinterpret_cast<int>(msg);
             }
 
-            return result && msg ? TRUE : FALSE;
+            return (result && msg != NULL) ? TRUE : FALSE;
         }
     }
 }

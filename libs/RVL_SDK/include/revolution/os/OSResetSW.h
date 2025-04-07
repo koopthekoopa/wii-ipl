@@ -16,5 +16,3 @@ OSPowerCallback OSSetPowerCallback(OSPowerCallback callback);
 #endif
 
 #endif  // REVOLUTION_OS_RESET_SOFTWARE_H
-
-

@@ -61,7 +61,13 @@ s8      SCGetRegion();
 u64     SCGetTmpTitleID();
 void    SCSetTmpTitleID(u64 titleId);
 
+s8      SCGetProductGameRegion();
+
+void    SCInit();
+
 void    SCFlush();
+
+u32     SCCheckStatus();
 
 #ifdef __cplusplus
 }

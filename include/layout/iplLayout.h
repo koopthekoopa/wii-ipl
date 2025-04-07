@@ -8,18 +8,16 @@
 
 #include <egg/core.h>
 
-#include "nw4r/lyt/drawInfo.h"
-#include "nw4r/ut/list.h"
-#include "revolution/types.h"
 #include "system/iplNand.h"
 
 #include "utility/iplFrameController.h"
+#include "utility/iplGraphics.h"
 
 namespace ipl {
     namespace layout {
         class Animator : public utility::FrameController {
             public:
-                Animator(nw4r::lyt::AnimTransform* animTrans, bool bRecursive, bool bPlayNow);
+                Animator(nw4r::lyt::AnimTransform* animTrans, bool bRecursive, bool bUnused);
                 virtual ~Animator() {}
 
                 virtual void    calc();
@@ -49,7 +47,7 @@ namespace ipl {
 
         class PaneAnimator : public Animator {
             public:
-                PaneAnimator(nw4r::lyt::AnimTransform* animTrans, nw4r::lyt::Pane* pane, bool bRecursive, bool bPlayNow);
+                PaneAnimator(nw4r::lyt::AnimTransform* animTrans, nw4r::lyt::Pane* pane, bool bRecursive, bool bUnused);
                 virtual ~PaneAnimator();
 
                 virtual void    setFlag(bool flag);
@@ -61,7 +59,7 @@ namespace ipl {
 
         class GroupAnimator : public Animator {
             public:
-                GroupAnimator(nw4r::lyt::AnimTransform* animTrans, nw4r::lyt::Group* group, bool bRecursive, bool bPlayNow);
+                GroupAnimator(nw4r::lyt::AnimTransform* animTrans, nw4r::lyt::Group* group, bool bRecursive, bool bUnused);
                 virtual ~GroupAnimator();
 
                 virtual void    setFlag(bool flag);
@@ -92,10 +90,22 @@ namespace ipl {
 
                 void                    initLocationAdjust();
 
-                PaneAnimator*           bind(const char* fileName, bool bPlayNow = true);
-                PaneAnimator*           bind(const char* fileNane, const char* paneName, bool bRecursive = true, bool bPlayNow = true);
-                GroupAnimator*          bindToGroup(const char* fileName, const char* groupName, bool bRecursive = true, bool bPlayNow = true);
-                GroupAnimator*          bindToGroup(const char* fileName, nw4r::lyt::Group* group, bool bRecursive = true, bool bPlayNow = true);
+                /**
+                 * Bind an animation to the Layout by BRLAN file.
+                 * @param fileName The BRLAN filename
+                 * @param bUnused Unused. Default is true.
+                 */
+                PaneAnimator*           bind(const char* fileName, bool bUnused = true);
+                /**
+                 * Bind an animation to the Layout by BRLAN file.
+                 * @param fileName The BRLAN filename
+                 * @param paneName The Pane to bind by name
+                 * @param bRecursive Recursive animation. Default is true.
+                 * @param bUnused Unused. Default is true.
+                 */
+                PaneAnimator*           bind(const char* fileName, const char* paneName, bool bRecursive = true, bool bUnused = true);
+                GroupAnimator*          bindToGroup(const char* fileName, const char* groupName, bool bRecursive = true, bool bUnused = true);
+                GroupAnimator*          bindToGroup(const char* fileName, nw4r::lyt::Group* group, bool bRecursive = true, bool bUnused = true);
                 void                    finishBinding();
 
                 bool                    searchFile(const char* fileName);
@@ -123,6 +133,9 @@ namespace ipl {
                 nw4r::lyt::Layout*      getLayout()                     { return &mLayout; }
                 /** @brief Gets the draw info object. */
                 nw4r::lyt::DrawInfo*    getDrawInfo()                   { return &mDrawInfo; }
+                /** @brief Prepare the camera for the layout.. */
+                static void             setCamera()                     { utility::Graphics::setDefaultOrtho(); }
+                /** @brief Calculate the Layout matrix for rendering. */
                 void                    calcMtx()                       { getLayout()->CalculateMtx(mDrawInfo); }
                 /** @brief Gets the root pane of the layout. */
                 nw4r::lyt::Pane*        getRoot()                       { return getLayout()->GetRootPane(); }
@@ -135,8 +148,8 @@ namespace ipl {
                 void                    attach(void* arcBuffer, const char* directory);
                 void                    attach_font();
 
-                PaneAnimator*           bind_(const char* fileName, nw4r::lyt::Pane* pane, bool bRecursive, bool bPlayNow);
-                GroupAnimator*          bind_(const char* fileName, nw4r::lyt::Group* group, bool bRecursive, bool bPlayNow);
+                PaneAnimator*           bind_(const char* fileName, nw4r::lyt::Pane* pane, bool bRecursive, bool bUnused);
+                GroupAnimator*          bind_(const char* fileName, nw4r::lyt::Group* group, bool bRecursive, bool bUnused);
 
                 nw4r::lyt::Layout                   mLayout;            // 0x04
 

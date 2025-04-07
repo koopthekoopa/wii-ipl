@@ -15,7 +15,7 @@ namespace nw4r {
 
                 bool IsDerivedFrom(const RuntimeTypeInfo* pBase) const {
                     for (const RuntimeTypeInfo* pIt = this; pIt != NULL;
-                         pIt = pIt->mParentTypeInfo) {
+                        pIt = pIt->mParentTypeInfo) {
                         if (pIt == pBase) {
                             return true;
                         }
@@ -31,8 +31,7 @@ namespace nw4r {
         }
         
         template <typename TDerived, typename TBase> inline TDerived DynamicCast(TBase* pPtr) {
-            const detail::RuntimeTypeInfo* pDerivedTypeInfo =
-                detail::GetTypeInfoFromPtr_(static_cast<TDerived>(NULL));
+            const detail::RuntimeTypeInfo* pDerivedTypeInfo = detail::GetTypeInfoFromPtr_(static_cast<TDerived>(NULL));
             if (pPtr->GetRuntimeTypeInfo()->IsDerivedFrom(pDerivedTypeInfo)) {
                 return static_cast<TDerived>(pPtr);
             }

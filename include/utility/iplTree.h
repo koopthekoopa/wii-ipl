@@ -1,9 +1,5 @@
-#ifndef IPL_TREE
-#define IPL_TREE
-
-#include "nw4r/ut/inlines.h"
-#include <revolution/types.h>
-#include <revolution/os.h>
+#ifndef IPL_TREE_NODE_H
+#define IPL_TREE_NODE_H
 
 namespace ipl {
     namespace utility {
@@ -18,9 +14,11 @@ namespace ipl {
                 virtual Tree*   getNext()   { return mpNext; }      // 0x14
                 virtual Tree*   getPrev()   { return mpPrev; }      // 0x18
 
-                void            attach(Tree* pTree);
-                void            insert(Tree* pTree, Tree* pTree2);
+                void            attach(Tree* tree);
+                void            insert(Tree* tree, Tree* childTree);
                 void            detach();
+
+                static Tree*    empty()     { return (Tree*)0; }
 
                 class iterator {
                     typedef Tree        value_type;
@@ -46,8 +44,10 @@ namespace ipl {
                                     mPtr = mPtr->getNext();
                                 }
                                 else {
-                                    while (TRUE) {
-                                        if (!mPtr->getNext()) break;
+                                    while (1) {
+                                        if (!mPtr->getNext()) {
+                                            break;
+                                        }
                                         mPtr = mPtr->getNext();
                                     }
                                     mPtr = mPtr->getParent();
@@ -94,4 +94,4 @@ namespace ipl {
     }
 }
 
-#endif // IPL_TREE
+#endif // IPL_TREE_NODE_H

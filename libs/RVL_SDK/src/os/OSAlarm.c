@@ -1,6 +1,7 @@
 #include <revolution/os.h>
+#include <private/os.h>
 
-#include <revolution/dvd.h>
+#include <private/dvd.h>
 
 #include <revolution/base/PPCArch.h>
 
@@ -8,7 +9,7 @@ static BOOL OnReset(BOOL final, u32 event);
 static void DecrementerExceptionHandler(u8 type, OSContext* context);
 
 static OSAlarmQueue AlarmQueue;
-static OSShutdownFunctionInfo ShutdownFunctionInfo = {OnReset, 0xFFFFFFFF, 0, 0};
+static OSShutdownFunctionInfo ShutdownFunctionInfo = {OnReset, (u32)-1, 0, 0};
 
 static void SetTimer(const OSAlarm* alarm) {
     OSTime timeLeft = alarm->fire - __OSGetSystemTime();
@@ -33,9 +34,9 @@ void __OSInitAlarm() {
     }
 }
 
-void OSCreateAlarm(OSAlarm* pAlarm) {
-    pAlarm->handler = NULL;
-    pAlarm->tag = 0;
+void OSCreateAlarm(OSAlarm* alarm) {
+    alarm->handler = NULL;
+    alarm->tag = 0;
 }
 
 static void InsertAlarm(OSAlarm* alarm, OSTime end, OSAlarmHandler handler) {
@@ -197,7 +198,8 @@ static void DecrementerExceptionCallback(__OSException type, OSContext* context)
     OSLoadContext(context);
 }
 
-static asm void DecrementerExceptionHandler(register u8 type, register OSContext* context) {
+static asm void DecrementerExceptionHandler(register __OSException exception, register OSContext* context) {
+#ifdef __MWERKS__
     nofralloc
 
     stw     r0, context->gpr[0]
@@ -222,6 +224,7 @@ static asm void DecrementerExceptionHandler(register u8 type, register OSContext
 
     stwu    r1, -0x08(r1)
     b       DecrementerExceptionCallback
+#endif // __MWERKS__
 }
 
 void OSSetAlarmTag(OSAlarm* alarm, u32 tag) {
@@ -253,8 +256,6 @@ void OSSetAlarmUserData(OSAlarm* alarm, void* userData) {
     alarm->userData = userData;
 }
 
-void* OSGetAlarmUserData(const OSAlarm* alarm) {
+void* OSGetAlarmUserData(OSAlarm* alarm) {
     return alarm->userData;
 }
-
-

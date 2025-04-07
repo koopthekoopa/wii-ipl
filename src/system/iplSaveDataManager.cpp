@@ -74,9 +74,9 @@ namespace ipl {
     namespace savedata {
         Manager::Manager(EGG::Heap* heap) {
             mpHeap = heap;
-            unk_0x4E0 = 0;
-            unk_0x4E4 = 0;
-            unk_0x4E8 = 1;
+            mLastPrevPage = 0;
+            mLastSDPrevPage = 0;
+            mbBadSDPrevPage = true;
 
             mpFile = NULL;
 
@@ -144,7 +144,7 @@ namespace ipl {
             for (int page = 0; page < MAX_CHANNEL_PAGE; page++) {
                 for (int i = 0; i < MAX_CHANNEL_INDEX; i++) {
                     if (mData.chanInfo[page][i].primaryType != channel::PRIMARY_TYPE_CHANNEL) {
-                        ESTitleId tId = TITLE_ESTITLE(mData.chanInfo[page][i].titleType, mData.chanInfo[page][i].titleId) & mask;
+                        ESTitleId tId = TITLE_ESTITLE(mData.chanInfo[page][i].titleType, mData.chanInfo[page][i].titleCode) & mask;
                         if (titleId == tId
                         || TITLE_NO_REGION(titleId) == TITLE_NO_REGION(tId)
                         || TITLE_REGION(titleId) == TITLE_REGION_ALL) {
@@ -295,15 +295,19 @@ namespace ipl {
                     }
                 }
 
+                // Previous page on ChannelSelect
                 if (manager->mData.prevPage != 0) {
-                    manager->unk_0x4E0 = manager->mData.prevPage;
+                    manager->mLastPrevPage = manager->mData.prevPage;
                     bNeedFlush = TRUE;
                     manager->mData.prevPage = 0;
                 }
 
-                if (manager->mData.unk_0x4A0 >= 0 && manager->mData.unk_0x4A0 < 20 && manager->unk_0x4E8) {
-                    manager->unk_0x4E4 = manager->mData.unk_0x4A0;
-                    manager->unk_0x4E8 = false;
+                // Prevous page on SDChannelSelect
+                if (manager->mData.prevSDPage >= 0 && manager->mData.prevSDPage < 20) {
+                    if (manager->mbBadSDPrevPage) {
+                        manager->mLastSDPrevPage = manager->mData.prevSDPage;
+                        manager->mbBadSDPrevPage = false;
+                    }
                 }
             }
 
@@ -412,7 +416,8 @@ namespace ipl {
                 && ES_CHANNEL_ID(titleIds[i]) != TITLE_TYPE_UNK6
                 && ES_CHANNEL_ID(titleIds[i]) != TITLE_TYPE_UNK3) {
                     titleIds[i] = TITLE_NULL;
-                } else {
+                }
+                else {
                     ESTmdView* tmd = NULL;
                     ret = utility::ESMisc::GetTmdView(mpHeap, titleIds[i], &tmd);
                     if (ret == ES_ERR_OK) {
@@ -597,9 +602,9 @@ namespace ipl {
             }
         }
 
-        int Manager::isDefaultChannel(ESId titleType, ESId titleId) {
+        int Manager::isDefaultChannel(ESTitleId32 titleType, ESTitleId32 titleCode) {
             for (int i = 0; i < DEFAULT_CHANNEL_COUNT; i++) {
-                if (cDefaultChanList[i].titleType == titleType && (cDefaultChanList[i].titleId & 0xFFFFFF00) == (titleId & 0xFFFFFF00)) {
+                if (cDefaultChanList[i].titleType == titleType && (cDefaultChanList[i].titleCode & 0xFFFFFF00) == (titleCode & 0xFFFFFF00)) {
                     return i;
                 }
             }
@@ -636,9 +641,9 @@ namespace ipl {
         }
 
         void Manager::setDefaultTitleCache() {
-            mData.unk_0x31C = 1;
+            mData.didntGotoSDMenu = TRUE;
             memset(mData.titleCache, 0, sizeof(mData.titleCache));
-            mData.unk_0x4A0 = 0;
+            mData.prevSDPage = 0;
         }
 
         BOOL Manager::nand_error_handling(int code) {

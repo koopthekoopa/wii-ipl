@@ -71,10 +71,10 @@ namespace ipl {
         BOOL MetaFile::openTicketFile_() {
             s32 line;
 
-            mTicket = (ESTicketView*)System::getMem2Sys()->alloc(sizeof(ESTicketView), -BUFFER_HEAP);
+            mTicket = (ESTicketView*)System::getMem2Sys()->alloc(OSRoundUp32B(sizeof(ESTicketView)), -BUFFER_HEAP);
             s32 result = utility::ESMisc::GetTicketView(System::getMem2Sys(), mTitleId, mTicket, mTicketIdx);
 
-            if (result < 0) {
+            if (result < ES_ERR_OK) {
                 line = 146;
             }
             else {
@@ -89,7 +89,7 @@ namespace ipl {
                 }
 
                 // Otherwise if it could not open the file for any reason, abort.
-                if (result < 0) {
+                if (result < ES_ERR_OK) {
                     line = 163;
                 }
                 else {

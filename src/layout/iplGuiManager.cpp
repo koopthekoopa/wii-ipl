@@ -20,7 +20,7 @@ namespace ipl {
             if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_OUT) {
                 if (con && (!mbDisableCon || !mbDoneUpdateWithCon)) {
                     // Get Projection Area
-                    nw4r::ut::Rect  projRect(0.0f ,0.0f, 0.0f, 0.0f);
+                    nw4r::ut::Rect  projRect(0.0f, 0.0f, 0.0f, 0.0f);
                     System::getProjectionRect(&projRect);
 
                     // Get Cursor Position

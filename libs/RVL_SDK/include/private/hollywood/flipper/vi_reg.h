@@ -1,0 +1,55 @@
+#ifndef PRIVATE_HOLLYWOOD_FLIPPER_VI_REGS_H
+#define PRIVATE_HOLLYWOOD_FLIPPER_VI_REGS_H
+
+#define VI_VERTICAL_TIME            0x0000
+
+#define VI_DISPLAY_CONFIG           0x0002
+
+#define VI_HORIZONTAL_TIME0         0x0004
+#define VI_HORIZONTAL_TIME1         0x0008
+
+#define VI_VERTICAL_TIME_ODD_FIELD  0x000C
+#define VI_VERTICAL_TIME_EVEN_FIELD 0x0010
+
+#define VI_BURST_BLANK_ODD_FIELD    0x0014
+#define VI_BURST_BLANK_EVEN_FIELD   0x0018
+
+#define VI_TOP_FIELD_BASE_L         0x001C
+#define VI_TOP_FIELD_BASE_R         0x0020
+
+#define VI_BOTTOM_FIELD_BASE_L      0x0024
+#define VI_BOTTOM_FIELD_BASE_R      0x0028
+
+#define VI_VERTICAL_POSITION        0x002C
+#define VI_HORIZONTAL_POSITION      0x002E
+
+#define VI_DISPLAY_INTERRUPT_0      0x0030
+#define VI_DISPLAY_INTERRUPT_1      0x0034
+#define VI_DISPLAY_INTERRUPT_2      0x0038
+#define VI_DISPLAY_INTERRUPT_3      0x003C
+
+#define VI_DISPLAY_L_INTERRUPT_0    0x0040
+#define VI_DISPLAY_L_INTERRUPT_1    0x0044
+
+#define VI_SCALE_WIDTH              0x0048
+#define VI_HORIZONTAL_SCALE         0x004A
+
+#define VI_FILTER_TABLE_0           0x004C
+#define VI_FILTER_TABLE_1           0x0050
+#define VI_FILTER_TABLE_2           0x0054
+#define VI_FILTER_TABLE_3           0x0058
+#define VI_FILTER_TABLE_4           0x005C
+#define VI_FILTER_TABLE_5           0x0060
+#define VI_FILTER_TABLE_6           0x0064
+
+#define VI_UNKNOWN_AA_STUFF         0x0068
+
+#define VI_CLOCK_SELECT             0x006C
+#define VI_DTV_STATUS               0x006E
+
+#define VI_UNKNOWN_70               0x0070
+
+#define VI_HBE_BOEDER               0x0072
+#define VI_HBS_BOEDER               0x0074
+
+#endif // PRIVATE_HOLLYWOOD_FLIPPER_VI_REGS_H

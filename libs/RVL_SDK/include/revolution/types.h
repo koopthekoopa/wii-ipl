@@ -27,7 +27,11 @@ typedef volatile f32        vf32;
 typedef volatile f64        vf64;
 
 typedef char*               Ptr;
+
 typedef int                 BOOL;
+typedef unsigned int        uBOOL;
+typedef volatile BOOL       vBOOL;
+typedef volatile uBOOL      vuBOOL;
 
 #define TRUE                1
 #define FALSE               0
@@ -45,5 +49,3 @@ typedef int                 BOOL;
 #define ALIGN32                 ATTRIBUTE_ALIGN(DEFAULT_ALIGN)
 
 #endif // REVOLUTION_TYPES_H
-
-

@@ -3,9 +3,14 @@
 #include <decomp.h>
 
 #include <revolution.h>
-#include <revolution/base/PPCArch.h>
 #include <revolution/os/OSBootInfo.h>
-#include <private/flipper.h>
+
+#include <private/os.h>
+
+#include <revolution/base/PPCArch.h>
+
+#include <private/bus.h>
+#include <private/hollywood.h>
 
 #include <string.h>
 
@@ -15,6 +20,7 @@ extern u32 __PADFixBits;
 extern void __OSFPRInit();
 
 static asm void ClearOtherBATs() {
+#ifdef __MWERKS__
     nofralloc
 
     isync
@@ -35,50 +41,50 @@ static asm void ClearOtherBATs() {
     isync
 
     blr
+#endif // __MWERKS__
 }
 
 static void SetConsoleInfo() {
-    OSBootInfo*  bi     = (OSBootInfo*)OSPhysicalToCached(BS2_BOOTINFO_ADDR);
-    RVLBootInfo* rvlBi  = (RVLBootInfo*)OSPhysicalToCached(BS2_RVL_BOOTINFO_ADDR);
+    OSBootInfo* bi = (OSBootInfo*)OSPhysicalToCached(OS_ADDR_BOOT_INFO);
 
     // Memory
     bi->arenaLo             = NULL;
-    bi->memorySize          = rvlBi->physicalMem1Size;
+    bi->memorySize          = RAMRead32(OSPhysicalToCached(OS_ADDR_PHYSICAL_MEM1_SIZE));
 
     // Console type
-    bi->consoleType         = OS_CONSOLE_RETAIL;
-    bi->consoleType         += PI_REG(0x2C) >> 0x1C;
+    bi->consoleType         =  OS_CONSOLE_RETAIL;
+    bi->consoleType         += PI_READ_REG(PI_UNIT_INFO) >> PI_UNIT_INFO_TYPE;
 
-    *(u32*)(OS_BASE_CACHED + 0x00F0) = bi->memorySize;
+    // Simulated memory size
+    RAMWrite32(OSPhysicalToCached(OS_ADDR_SIMULATED_MEMORY_SIZE), bi->memorySize);
 
-    // Main Memory
-    rvlBi->mem1Start        = NULL;
-    rvlBi->mem1End          = NULL;
+    // MEM1
+    RAMWrite32(OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM1_START), NULL);
+    RAMWrite32(OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM1_END),   NULL);
     
     // BS2 stuff
-    rvlBi->bootTarget       = 0x80;
-    rvlBi->devKitVersion    = BS2_VERSION;
+    RAMWrite8(OSPhysicalToCached(OS_ADDR_BOOT_PROGRAM_TARGET),   0x80);
+    RAMWrite16(OSPhysicalToCached(OS_ADDR_DEV_KIT_VERSION),      BS2_VERSION);
 }
 
 void BS2Init() {
-    memset(OSPhysicalToCached(0x00000000), 0, 0x100);
-    memset(OSPhysicalToCached(0x00003000), 0, 0x100);
+    // Clear memorys
+    memset(OSPhysicalToCached(OS_ADDR_MEMORY_MAP_PART_1), 0, OS_ADDR_MEMORY_MAP_SIZE);
+    memset(OSPhysicalToCached(OS_ADDR_MEMORY_MAP_PART_2), 0, OS_ADDR_MEMORY_MAP_SIZE);
 
     ClearOtherBATs();
     SetConsoleInfo();
 
     __PADFixBits    = -1;
-    __OSInIPL       = TRUE; // Yes we are in the IPL!
+    __OSInIPL       = TRUE; // Yes, we are in the IPL!
     
     __OSFPRInit();
 
-    PPCMtmmcr0(0);
-    PPCMtmmcr1(0);
+    PPCMtmmcr0(MMCR0_PMC1_HOLD | MMCR0_PMC2_HOLD);
+    PPCMtmmcr1(MMCR1_PMC3_HOLD | MMCR1_PMC4_HOLD);
 
     PPCMtpmc1(0);
     PPCMtpmc2(0);
     PPCMtpmc3(0);
     PPCMtpmc4(0);
 }
-
-

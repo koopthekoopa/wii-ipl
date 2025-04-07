@@ -1,8 +1,8 @@
-#ifndef REVOLUTION_ES_H
-#define REVOLUTION_ES_H
+#ifndef PRIVATE_ES_H
+#define PRIVATE_ES_H
 
 #include <revolution/types.h>
-#include <private/estypes.h>
+#include <private/es/types.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -26,4 +26,4 @@ BOOL    ES_VerifyCK2(); // Check for "Common Key 2" (The Korean Key)
 }
 #endif
 
-#endif // REVOLUTION_ES_H
+#endif // PRIVATE_ES_H

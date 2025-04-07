@@ -3,7 +3,6 @@
 
 #include <revolution/nwc24/NWC24Err.h>
 #include <revolution/nwc24/NWC24MsgBoard.h>
+#include <revolution/nwc24/NWC24Schedule.h>
 
 #endif  // REVOLUTION_NWC24_H
-
-

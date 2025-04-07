@@ -2,7 +2,7 @@
 #define BS2_H
 
 #include <revolution/types.h>
-#include <revolution/es.h>
+#include <private/es.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -102,9 +102,6 @@ typedef enum {
 #define     BS2_VERSION             0x0113
 
 #define     BS2_DEFAULT_BANNER_SIZE 0x80000
-
-#define     BS2_BOOTINFO_ADDR       0x0000
-#define     BS2_RVL_BOOTINFO_ADDR   0x3100
 
 BS2State    BS2Tick();
 

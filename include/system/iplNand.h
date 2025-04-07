@@ -6,13 +6,16 @@
 #include <revolution.h>
 #include <revolution/nand.h>
 #include <revolution/arc.h>
-#include <revolution/es.h>
+#include <private/es.h>
 
 #include <revolution/net/NETDigest.h>
 
 #include <egg/core.h>
 
 #include "system/iplNandWrapper.h"
+
+#define NAND_CHECK_MAGIC3(x,a,b,c)      ((x)[0] == (a) && (x)[1] == (b) && (x)[2] == (c))
+#define NAND_CHECK_MAGIC4(x,a,b,c,d)    ((x)[0] == (a) && (x)[1] == (b) && (x)[2] == (c) && (x)[3] == (d))
 
 namespace ipl {
     namespace nand {
@@ -69,7 +72,7 @@ namespace ipl {
             
             private:
                 typedef struct MD5Head {
-                    u8          sig[4];         // 0x00 (always `IMD5`; IPL MD5?)
+                    u8          sig[4];         // 0x00 (always `IMD5`; "IPL MD5"?)
                     u32         length;         // 0x04
                     u8          reserved[8];    // 0x08
                     NETMD5Sum   md5;            // 0x10
@@ -105,10 +108,10 @@ namespace ipl {
 
                 EGG::Heap*      mpHeap;                                                 // 0x04
 
-                char            msFileName[NAND_MAX_PATH + 1];                          // 0x08
+                char            msFileName[NAND_MAX_PATH+1];                            // 0x08
 
                 ARCHandle*      mpArc;                                                  // 0x4C
-                char            msNandFileName[NAND_MAX_PATH + 1];                      // 0x50
+                char            msNandFileName[NAND_MAX_PATH+1];                        // 0x50
 
                 int             mFileOffset;                                            // 0x94
                 u32             mFileLength;                                            // 0x98
@@ -119,7 +122,7 @@ namespace ipl {
                 u8*             mpCmpBuffer;                                            // 0xA4
 
                 int             mResult;                                                // 0xA8
-                volatile BOOL   mbDoneTask;                                             // 0xAC
+                vBOOL           mbDoneTask;                                             // 0xAC
                 
                 ARCFileInfo     mArcFile;                                               // 0xB0
                 u8              unused_0xBC[0x3C];

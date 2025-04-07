@@ -1,5 +1,5 @@
-#ifndef REVOLUTION_ES_TYPES_H
-#define REVOLUTION_ES_TYPES_H
+#ifndef PRIVATE_ES_TYPES_H
+#define PRIVATE_ES_TYPES_H
 
 #include <revolution/types.h>
 
@@ -12,28 +12,50 @@ extern "C" {
 
 typedef s32         ESError;
 
-typedef u32         ESId;
+typedef u32         ESDeviceId;
 typedef u32         ESContentId;
+
+typedef u32         ESTitleId32;
 typedef u64         ESTitleId;
+
 typedef u64         ESTicketId;
 
 typedef u8          ESVersion;
 typedef u16         ESTitleVersion;
-typedef ESTitleId   ESSysVersion;
+typedef u64         ESSysVersion;
 
 typedef u32         ESTitleType;
 typedef u16         ESContentType;
 
-typedef u8          ESTmdReserved[62];
-typedef u8          ESTicketReserved[48];
-
 typedef u8          ESSysAccessMask[2];
-typedef u8          ESCidxMask[64];
 
-#define             ES_CHANNEL_ID(t64)  ((ESId)(((ESTitleId)t64 & 0xFFFFFFFF00000000) >> 32))
-#define             ES_TITLE_ID(t64)    ((ESId)((ESTitleId)t64 & 0x00000000FFFFFFFF))
+#define             ES_CHANNEL_ID(t64)  ((ESTitleId32)(((ESTitleId)t64 & 0xFFFFFFFF00000000) >> 32))
+#define             ES_TITLE_ID(t64)    ((ESTitleId32)((ESTitleId)t64 & 0x00000000FFFFFFFF))
 
 #define             ES_MAX_CONTENT  512
+
+#define             ES_REGION_JPN   0
+#define             ES_REGION_USA   1
+#define             ES_REGION_PAL   2
+#define             ES_REGION_ALL   3
+#define             ES_REGION_KOR   4
+
+#pragma pack(push, 1)
+
+typedef struct ESTmdReserved {
+    u32                 region;                     // 0x00
+    u8                  ratings[16];                // 0x04
+    u8                  empty_0x14[4];
+
+    u8                  driveSpin;                  // 0x18
+    u8                  empty_0x19[7];
+
+    u8                  ipcMask[12];                // 0x20
+    u8                  empty_0x2C[18];             // 0x2C
+} ESTmdReserved;
+
+#pragma pack(pop)
+#pragma pack(push, 4)
 
 typedef struct {
     u32                 code;                       // 0x00
@@ -44,7 +66,7 @@ typedef struct ESTicketView {
     ESVersion           version;                    // 0x00
 
     ESTicketId          ticketId;                   // 0x04
-    ESId                deviceId;                   // 0x0C
+    ESDeviceId          deviceId;                   // 0x0C
     ESTitleId           titleId;                    // 0x10
 
     ESSysAccessMask     sysAccessMask;              // 0x18
@@ -55,14 +77,14 @@ typedef struct ESTicketView {
     u32                 accessTitleMask;            // 0x20
 
     u8                  license;                    // 0x24
-    ESTicketReserved    reserved;                   // 0x25
+    u8                  reserved[0x30];             // 0x25
     u8                  audit;                      // 0x55
 
-    ESCidxMask          cidxMask;                   // 0x56
+    u8                  cidxMask[0x40];             // 0x56
     ESLpEntry           limits[8];                  // 0x98
 } ESTicketView;
 
-#pragma pack(push, 4)
+/* TMD */
 
 typedef struct ESTmdViewHeader {
     ESVersion           version;                    // 0x00
@@ -94,35 +116,37 @@ typedef struct ESTmdView {
 
 #pragma pack(pop)
 
-#define ES_ERR_OK                   0
+enum {
+    ES_ERR_OK                    = 0,
 
-#define ES_ERR_DONT_EXISTS          -106
+    ES_ERR_DONT_EXISTS           = -106,
 
-#define ES_ERR_INVALID_PUB_KEY_TYPE -1005
-#define ES_ERR_FILE_READ_FAILED     -1009
-#define ES_ERR_FILE_WRITE_FAILED    -1010
-#define ES_ERR_INVALID_SIGNATURE    -1012
-#define ES_ERR_TMD_FD_OVERFLOW      -1016
-#define ES_ERR_INVALID_ARGUMENTS    -1017
-#define ES_ERR_INVALID_DEVICE_ID    -1020
-#define ES_ERR_INVALID_CONTENT_HASH -1022
-#define ES_ERR_MEMORY_ERROR         -1024
-#define ES_ERR_NO_TMD_FILE_FOUND    -1025
-#define ES_ERR_TMD_INVALID_RIGHT    -1026
-#define ES_ERR_ISSUER_NOT_FOUND     -1027
-#define ES_ERR_TICKET_NOT_FOUND     -1028
-#define ES_ERR_INVALID_TICKET       -1029
-#define ES_ERR_INVALID_BOOT2        -1031
-#define ES_ERR_UNKNOWN_FATAL        -1032
-#define ES_ERR_TICKET_EXPIRED       -1033
-#define ES_ERR_INVALID_TITLE_VER    -1035
-#define ES_ERR_BAD_SYSMENU_TICKET   -1036
-#define ES_ERR_BAD_SYSMENU_CONTENTS -1037
+    ES_ERR_INVALID_PUB_KEY_TYPE  = -1005,
+    ES_ERR_FILE_READ_FAILED      = -1009,
+    ES_ERR_FILE_WRITE_FAILED     = -1010,
+    ES_ERR_INVALID_SIGNATURE     = -1012,
+    ES_ERR_TMD_FD_OVERFLOW       = -1016,
+    ES_ERR_INVALID_ARGUMENTS     = -1017,
+    ES_ERR_INVALID_DEVICE_ID     = -1020,
+    ES_ERR_INVALID_CONTENT_HASH  = -1022,
+    ES_ERR_MEMORY_ERROR          = -1024,
+    ES_ERR_NO_TMD_FILE_FOUND     = -1025,
+    ES_ERR_TMD_INVALID_RIGHT     = -1026,
+    ES_ERR_ISSUER_NOT_FOUND      = -1027,
+    ES_ERR_TICKET_NOT_FOUND      = -1028,
+    ES_ERR_INVALID_TICKET        = -1029,
+    ES_ERR_INVALID_BOOT2         = -1031,
+    ES_ERR_UNKNOWN_FATAL         = -1032,
+    ES_ERR_TICKET_EXPIRED        = -1033,
+    ES_ERR_INVALID_TITLE_VER     = -1035,
+    ES_ERR_BAD_SYSMENU_TICKET    = -1036,
+    ES_ERR_BAD_SYSMENU_CONTENTS  = -1037,
 
-#define ES_ERR_NO_DISC_NAND_TMD     -1039
+    ES_ERR_NO_DISC_NAND_TMD      = -1039,
+};
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // REVOLUTION_ES_TYPES_H
+#endif // PRIVATE_ES_TYPES_H

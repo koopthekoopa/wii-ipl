@@ -38,7 +38,7 @@ typedef char            CHANSVmStrCh;
 #define                 CHANSVmStrLength(str)  (str / sizeof(CHANSVmWStrCh))
 
 typedef enum CHANSVmObjType {
-    CHANS_VM_OBJ_TYPE_BLANK = 0,
+    CHANS_VM_OBJ_TYPE_BLANK /*hmm*/ = 0,
     CHANS_VM_OBJ_TYPE_INTEGER,
     CHANS_VM_OBJ_TYPE_FLOAT,
     CHANS_VM_OBJ_TYPE_STRING,

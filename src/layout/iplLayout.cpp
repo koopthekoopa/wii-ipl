@@ -9,12 +9,11 @@
 namespace ipl {
     namespace layout {
         enum {
-            FLAG_NONE = 0,
-            FLAG_RECURSIVE,
-            FLAG_PLAY_NOW,  // Unused
+            FLAG_RECURSIVE = 0,
+            FLAG_UNUSED,
         };
 
-        Animator::Animator(nw4r::lyt::AnimTransform* animTrans, bool bRecursive, bool bPlayNow) :
+        Animator::Animator(nw4r::lyt::AnimTransform* animTrans, bool bRecursive, bool bUnused) :
         mAnimTrans(animTrans) {
             mFlags = 0;
 
@@ -30,13 +29,13 @@ namespace ipl {
                 maxFrame = animTrans->GetFrameSize() - 1.0f; // Last frame
             }
 
-            utility::FrameController::init(anmType, maxFrame, 0.0);
+            utility::FrameController::init(anmType, maxFrame, 0.0f);
 
             if (bRecursive != FALSE) {
-                mFlags |= FLAG_RECURSIVE;
+                mFlags |= (1<<FLAG_RECURSIVE);
             }
-            if (bPlayNow != FALSE) {
-                mFlags |= FLAG_PLAY_NOW;
+            if (bUnused != FALSE) {
+                mFlags |= (1<<FLAG_UNUSED);
             }
         }
 
@@ -64,27 +63,27 @@ namespace ipl {
             setFrame();
         }
 
-        PaneAnimator::PaneAnimator(nw4r::lyt::AnimTransform* animTrans, nw4r::lyt::Pane* pane, bool bRecursive, bool bPlayNow) :
-        Animator(animTrans, bRecursive, bPlayNow),
+        PaneAnimator::PaneAnimator(nw4r::lyt::AnimTransform* animTrans, nw4r::lyt::Pane* pane, bool bRecursive, bool bUnused) :
+        Animator(animTrans, bRecursive, bUnused),
         mPane(pane) {}
 
         void PaneAnimator::bind() {
-            mPane->BindAnimation(mAnimTrans, mFlags & FLAG_RECURSIVE);
+            mPane->BindAnimation(mAnimTrans, mFlags & (1<<FLAG_RECURSIVE));
         }
 
         void PaneAnimator::setFlag(bool flag) {
-            mPane->SetAnimationEnable(mAnimTrans, flag, mFlags & FLAG_RECURSIVE);
+            mPane->SetAnimationEnable(mAnimTrans, flag, mFlags & (1<<FLAG_RECURSIVE));
         }
 
-        GroupAnimator::GroupAnimator(nw4r::lyt::AnimTransform* animTrans, nw4r::lyt::Group* group, bool bRecursive, bool arg1) :
-        Animator(animTrans, bRecursive, arg1),
+        GroupAnimator::GroupAnimator(nw4r::lyt::AnimTransform* animTrans, nw4r::lyt::Group* group, bool bRecursive, bool bUnused) :
+        Animator(animTrans, bRecursive, bUnused),
         mGroup(group) {}
 
         void GroupAnimator::bind() {
             // Bind all panes contained in the group
             nw4r::lyt::PaneLinkList& list = mGroup->GetPaneList();
             for (nw4r::lyt::PaneLinkList::Iterator it = list.GetBeginIter(); it != list.GetEndIter(); ++it) {
-                it->mTarget->BindAnimation(mAnimTrans, mFlags & FLAG_RECURSIVE);
+                it->mTarget->BindAnimation(mAnimTrans, mFlags & (1<<FLAG_RECURSIVE));
             }
         }
 
@@ -92,7 +91,7 @@ namespace ipl {
             // Enable Animation on all panes contained in the group
             nw4r::lyt::PaneLinkList& list = mGroup->GetPaneList();
             for (nw4r::lyt::PaneLinkList::Iterator it = list.GetBeginIter(); it != list.GetEndIter(); ++it) {
-                it->mTarget->SetAnimationEnable(mAnimTrans, flag, mFlags & FLAG_RECURSIVE);
+                it->mTarget->SetAnimationEnable(mAnimTrans, flag, mFlags & (1<<FLAG_RECURSIVE));
             }
         }
 
@@ -186,24 +185,24 @@ namespace ipl {
             initLocationAdjust();
         }
 
-        PaneAnimator* Object::bind(const char* fileName, bool bPlayNow) {
-            return bind_(fileName, mLayout.GetRootPane(), true, bPlayNow);
+        PaneAnimator* Object::bind(const char* fileName, bool bUnused) {
+            return bind_(fileName, mLayout.GetRootPane(), true, bUnused);
         }
 
-        PaneAnimator* Object::bind(const char* fileName, const char* paneName, bool bRecursive, bool bPlayNow) {
-            return bind_(fileName, mLayout.GetRootPane()->FindPaneByName(paneName), bRecursive, bPlayNow);
+        PaneAnimator* Object::bind(const char* fileName, const char* paneName, bool bRecursive, bool bUnused) {
+            return bind_(fileName, mLayout.GetRootPane()->FindPaneByName(paneName), bRecursive, bUnused);
         }
 
-        PaneAnimator* Object::bind_(const char* fileName, nw4r::lyt::Pane* pane, bool bRecursive, bool bPlayNow) {
+        PaneAnimator* Object::bind_(const char* fileName, nw4r::lyt::Pane* pane, bool bRecursive, bool bUnused) {
             void* animBuf = mArc.GetResource(0, fileName);
 
             PaneAnimator* anim = new(mpHeap, CLASS_HEAP) PaneAnimator(mLayout.CreateAnimTransform(animBuf, &mArc),
                                                                       pane,
                                                                       bRecursive,
-                                                                      bPlayNow);
+                                                                      bUnused);
         
             anim->bind();
-            anim->setFlag(bPlayNow);
+            anim->setFlag(bUnused);
 
             nw4r::ut::List_Append(&mAnims, anim);
 
@@ -212,30 +211,30 @@ namespace ipl {
 
         void Animator::bind() {}
 
-        GroupAnimator* Object::bindToGroup(const char* fileName, const char* groupName, bool bRecursive, bool bPlayNow) {
+        GroupAnimator* Object::bindToGroup(const char* fileName, const char* groupName, bool bRecursive, bool bUnused) {
             return bind_(fileName,
                     mLayout.GetGroupContainer()->FindGroupByName(groupName),
                     bRecursive,
-                    bPlayNow);
+                    bUnused);
         }
 
-        GroupAnimator* Object::bindToGroup(const char* fileName, nw4r::lyt::Group* group, bool bRecursive, bool bPlayNow) {
+        GroupAnimator* Object::bindToGroup(const char* fileName, nw4r::lyt::Group* group, bool bRecursive, bool bUnused) {
             return bind_(fileName,
                         group,
                         bRecursive,
-                        bPlayNow);
+                        bUnused);
         }
 
-        GroupAnimator* Object::bind_(const char* fileName, nw4r::lyt::Group* group, bool bRecursive, bool bPlayNow) {
+        GroupAnimator* Object::bind_(const char* fileName, nw4r::lyt::Group* group, bool bRecursive, bool bUnused) {
             void* animBuf = mArc.GetResource(0, fileName);
 
             GroupAnimator* anim = new(mpHeap, CLASS_HEAP) GroupAnimator(mLayout.CreateAnimTransform(animBuf, &mArc),
                                                                         group,
                                                                         bRecursive,
-                                                                        bPlayNow);
+                                                                        bUnused);
         
             anim->bind();
-            anim->setFlag(bPlayNow);
+            anim->setFlag(bUnused);
 
             nw4r::ut::List_Append(&mAnims, anim);
 

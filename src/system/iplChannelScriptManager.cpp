@@ -42,78 +42,24 @@ namespace ipl {
 
             CHANSVmInit(&smCSVm, mpChansWork, CHANS_VM_DEFAULT_WORK_SIZE);
 
-            BOOL result = INIT_CS_LIB(&smCSVm, system);
-            if (result == false) {
-                OSHalt("CHANSVmSystemMenuInit error\n", 101);
-            }
-            result = INIT_CS_LIB(&smCSVm, layout);
-            if (result == false) {
-                OSHalt("VmLayoutInit error\n", 105);
-            }
-            result = INIT_CS_LIB(&smCSVm, pane);
-            if (result == false) {
-                OSHalt("VmPaneInit error\n", 109);
-            }
-            result = INIT_CS_LIB(&smCSVm, material);
-            if (result == false) {
-                OSHalt("VmMaterialInit error\n", 113);
-            }
-            result = INIT_CS_LIB(&smCSVm, texture);
-            if (result == false) {
-                OSHalt("VmTextureInit error\n", 117);
-            }
-            result = INIT_CS_LIB(&smCSVm, savedata);
-            if (result == false) {
-                OSHalt("VmSaveDataInit error\n", 121);
-            }
-            result = INIT_CS_LIB(&smCSVm, vec3);
-            if (result == false) {
-                OSHalt("VmVec3Init error\n", 125);
-            }
-            result = INIT_CS_LIB(&smCSVm, mtx34);
-            if (result == false) {
-                OSHalt("VmMTX34Init error\n", 129);
-            }
-            result = INIT_CS_LIB(&smCSVm, gx);
-            if (result == false) {
-                OSHalt("VmGXInit error\n", 133);
-            }
-            result = INIT_CS_LIB(&smCSVm, textwriter);
-            if (result == false) {
-                OSHalt("VmTextWriterInit error\n", 137);
-            }
-            result = INIT_CS_LIB(&smCSVm, font);
-            if (result == false) {
-                OSHalt("VmFontInit error\n", 141);
-            }
-            result = INIT_CS_LIB(&smCSVm, rect);
-            if (result == false) {
-                OSHalt("VmRectInit error\n", 145);
-            }
-            result = INIT_CS_LIB(&smCSVm, color);
-            if (result == false) {
-                OSHalt("VmColorInit error\n", 149);
-            }
-            result = INIT_CS_LIB(&smCSVm, color_s10);
-            if (result == false) {
-                OSHalt("VmColorS10Init error\n", 153);
-            }
-            result = INIT_CS_LIB(&smCSVm, size);
-            if (result == false) {
-                OSHalt("VmSizeInit error\n", 157);
-            }
-            result = INIT_CS_LIB(&smCSVm, anim);
-            if (result == false) {
-                OSHalt("VmAnimInit error\n", 161);
-            }
-            result = INIT_CS_LIB(&smCSVm, sound);
-            if (result == false) {
-                OSHalt("VmSoundInit error\n", 165);
-            }
-            result = INIT_CS_LIB(&smCSVm, iplimage);
-            if (result == false) {
-                OSHalt("VmIplImageInit error\n", 169);
-            }
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, system),       "CHANSVmSystemMenuInit error\n",    101);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, layout),       "VmLayoutInit error\n",             105);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, pane),         "VmPaneInit error\n",               109);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, material),     "VmMaterialInit error\n",           113);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, texture),      "VmTextureInit error\n",            117);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, savedata),     "VmSaveDataInit error\n",           121);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, vec3),         "VmVec3Init error\n",               125);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, mtx34),        "VmMTX34Init error\n",              129);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, gx),           "VmGXInit error\n",                 133);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, textwriter),   "VmTextWriterInit error\n",         137);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, font),         "VmFontInit error\n",               141);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, rect),         "VmRectInit error\n",               145);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, color),        "VmColorInit error\n",              149);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, color_s10),    "VmColorS10Init error\n",           153);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, size),         "VmSizeInit error\n",               157);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, anim),         "VmAnimInit error\n",               161);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, sound),        "VmSoundInit error\n",              165);
+            OSAssertMsg(INIT_CS_LIB(&smCSVm, iplimage),     "VmIplImageInit error\n",           169);
 
             BOOL retResult;
             if (CHANSVmGetFreeExeSize(&smCSVm) == 0) {

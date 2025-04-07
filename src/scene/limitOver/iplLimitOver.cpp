@@ -5,7 +5,7 @@
 
 #include "config.h"
 
-#include <revolution/es.h>
+#include <private/es.h>
 #include <revolution/sc.h>
 
 namespace ipl {
@@ -16,7 +16,7 @@ namespace ipl {
         #define LIMIT_TIMER_PRESS_A     LIMIT_SEC2MS(2)                 /* Seconds until the user can pass through the screen */
         #define LIMIT_TIMER_NOT_PRESS_A LIMIT_SEC2MS(60)                /* Seconds for the user to do something to pass through the screen */
 
-        #define LIMIT_PRESS_A_BUTTON    (IPL_BUTTON_A | IPL_BUTTON_B)   /* Buttons the user can press to goto the main menu */
+        #define LIMIT_PRESS_A_BUTTON    (controller::BTN_A | controller::BTN_B)   /* Buttons the user can press to goto the main menu */
 
         enum {
             LANG_JPN = 0,

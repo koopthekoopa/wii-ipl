@@ -2,7 +2,7 @@
 #define IPL_SAVE_DATA_MANAGER_H
 
 #include <revolution.h>
-#include <revolution/es.h>
+#include <private/es.h>
 #include <revolution/net/NETDigest.h>
 
 #include <egg/core.h>
@@ -40,6 +40,8 @@ namespace ipl {
                 void        updateVersion(u32 newVersion, u32 oldVersion);
 
                 BOOL        updateChanInfos();
+                
+                int         getPrevPage()           { return mLastPrevPage; }
 
                 bool        hasPhotoMP3Dummy()      { return mbPhotoMP3; }
                 bool        hasPhoto2Title()        { return mbPhoto2; }
@@ -66,7 +68,7 @@ namespace ipl {
                 int         getAvailableNumInList(const ESTitleId* titleIds, u32 titleCount);
                 
                 int         isEqualChannel(ESTitleId titleId0, ESTitleId titleId1);
-                int         isDefaultChannel(ESId titleIdHi, ESId titleIdLo);
+                int         isDefaultChannel(ESTitleId32 titleType, ESTitleId32 titleCode);
 
                 void        makePriorTitleIDList(ESTitleId* titleIdsOut, ESTitleId* titleIdsIn, u32 titleCount);
                 void        integrateTitleIDList(ESTitleId* titleIdsOut, ESTitleId* titleIdsIn, u32 titleCount);
@@ -79,8 +81,8 @@ namespace ipl {
                  * VERSION HISTORY
                  * ===============
                  * Version 1 - Initial version
-                 * Version 2 - Same as version 1 but memoSetting is initialised with different settings.
-                 * Version 3 - Add title caching
+                 * Version 2 - Same as version 1 but memoSetting is initialized with different settings.
+                 * Version 3 - Add SD Card menu save data and `titleCache`
                  */
                 // CURRENT VERSION IS 3 !!
                 typedef struct Data {
@@ -90,7 +92,7 @@ namespace ipl {
                     u32                                         version;                                            // 0x08
 
                     // Channel related
-                    u32                                         prevPage;                                           // 0x0C
+                    int                                         prevPage;                                           // 0x0C
                     channel::SInfo                              chanInfo[MAX_CHANNEL_PAGE][MAX_CHANNEL_INDEX];      // 0x10
 
                     // Keyboard
@@ -99,11 +101,13 @@ namespace ipl {
                     // TVRC Data
                     u8                                          tvrcData[4];                                        // 0x318
 
-                    u32                                         unk_0x31C;
-
-                    // Title Cache
+                    /* VERSION 3 DATA */
+                    
+                    BOOL                                        didntGotoSDMenu;                                    // 0x31C
                     ESTitleId                                   titleCache[MAX_CHANNEL_PAGE][MAX_CHANNEL_INDEX];    // 0x320
-                    int                                         unk_0x4A0;
+                    int                                         prevSDPage;                                         // 0x4A0
+                    
+                    /* END OF VERSION 3 DATA */
 
                     u8                                          padding[0x0C];
 
@@ -111,28 +115,28 @@ namespace ipl {
                     u8                                          MD5Sum[NET_MD5_DIGEST_SIZE];                        // 0x4B0
                 } Data;
                 
-                EGG::Heap*  mpHeap;         // 0x04
-                u8          unk_0x08[24];
+                EGG::Heap*  mpHeap;             // 0x04
+                u8          unused_0x08[24];       
 
-                Data        mData;          // 0x20
+                Data        mData;              // 0x20
 
-                int         unk_0x4E0;
-                int         unk_0x4E4;
-                bool        unk_0x4E8;
+                int         mLastPrevPage;      // 0x4E0
+                int         mLastSDPrevPage;    // 0x4E4
+                bool        mbBadSDPrevPage;    // 0x4E8
 
-                nand::File* mpFile;         // 0x4EC
-                nand::File* mpUpdatedFile;  // 0x4F0
+                nand::File* mpFile;             // 0x4EC
+                nand::File* mpUpdatedFile;      // 0x4F0
 
-                bool        mbInit;         // 0x4F4
+                bool        mbInit;             // 0x4F4
 
-                bool        mbPhoto2;       // 0x4F5
-                bool        mbPhoto2Check;  // 0x4F6
-                bool        mbPhotoMP3;     // 0x4F7
-                ESTitleId   mPhotoId;       // 0x4F8
+                bool        mbPhoto2;           // 0x4F5
+                bool        mbPhoto2Check;      // 0x4F6
+                bool        mbPhotoMP3;         // 0x4F7
+                ESTitleId   mPhotoId;           // 0x4F8
 
-                int         mLastError;     // 0x500
+                int         mLastError;         // 0x500
 
-                u8          dummy[28];      // 0x504
+                u8          unused_0x504[28];
         };
     }
 }

@@ -53,6 +53,10 @@ extract:
       binary: backToWiiMenu.arc
       header: backToWiiMenu_arc.inc
 
+    - symbol: DSPInitCode
+      binary: dsp\initCode.bin
+      header: DSPInitCode.inc
+
     - symbol: axDspSlave
       binary: ax\dspSlave.bin
       header: axDspSlave.inc

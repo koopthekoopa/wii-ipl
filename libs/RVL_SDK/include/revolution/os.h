@@ -2,31 +2,36 @@
 #define REVOLUTION_OS_H
 
 #include <revolution/types.h>
-#include <revolution/gx/GXStruct.h>
-
-#include <stdarg.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef s64 OSTime;
-typedef u32 OSTick;
+#include <revolution/os/OSMemMap.h>
 
-#define OS_CONSOLE_MASK                 0xF0000000
-#define OS_CONSOLE_MASK_RVL             0x00000000
-#define OS_CONSOLE_MASK_EMU             0x10000000
-#define OS_CONSOLE_MASK_TDEV            0x20000000
-#define OS_CONSOLE_RVL_PP_1             0x00000011
-#define OS_CONSOLE_RVL_PP_2_1           0x00000012
-#define OS_CONSOLE_RVL_PP_2_2           0x00000020
-#define OS_CONSOLE_RVL_EMU              0x10000008
-#define OS_CONSOLE_NDEV_1_0             0x10000010
-#define OS_CONSOLE_NDEV_1_1             0x10000011
-#define OS_CONSOLE_NDEV_1_2             0x10000012
-#define OS_CONSOLE_NDEV_2_0             0x10000020
-#define OS_CONSOLE_NDEV_2_1             0x10000021
-#define OS_CONSOLE_RETAIL               0x00000021
+#include <revolution/os/OSTime.h>
+
+#define OS_CONSOLE_MASK                 (0xF000 << 16)
+#define OS_CONSOLE_MASK_RVL             (0x0000 << 16)
+#define OS_CONSOLE_MASK_DEV             (0x1000 << 16)
+#define OS_CONSOLE_MASK_TDEV            (0x2000 << 16)
+
+#define OS_CONSOLE_RVL_PP_0             (OS_CONSOLE_MASK_RVL + 0x0010)
+#define OS_CONSOLE_RVL_PP_1             (OS_CONSOLE_MASK_RVL + 0x0011)
+#define OS_CONSOLE_RVL_PP_2_1           (OS_CONSOLE_MASK_RVL + 0x0012)
+#define OS_CONSOLE_RVL_PP_2_2           (OS_CONSOLE_MASK_RVL + 0x0020)
+#define OS_CONSOLE_RETAIL               (OS_CONSOLE_MASK_RVL + 0x0021)
+#define OS_CONSOLE_RETAIL_RVA           (OS_CONSOLE_MASK_RVL + 0x0100)
+
+#define OS_CONSOLE_UNK                  (OS_CONSOLE_MASK_DEV + 0x0002)
+#define OS_CONSOLE_RVL_EMU              (OS_CONSOLE_MASK_DEV + 0x0008)
+#define OS_CONSOLE_NDEV_1_0             (OS_CONSOLE_MASK_DEV + 0x0010)
+#define OS_CONSOLE_NDEV_1_1             (OS_CONSOLE_MASK_DEV + 0x0011)
+#define OS_CONSOLE_NDEV_1_2             (OS_CONSOLE_MASK_DEV + 0x0012)
+#define OS_CONSOLE_NDEV_2_0             (OS_CONSOLE_MASK_DEV + 0x0020)
+#define OS_CONSOLE_NDEV_2_1             (OS_CONSOLE_MASK_DEV + 0x0021)
+
+#define OS_CONSOLE_TDEV_EMU             (OS_CONSOLE_MASK_TDEV + 0x0000)
 
 #define OS_CACHED_REGION_PREFIX         0x8000
 #define OS_UNCACHED_REGION_PREFIX       0xC000
@@ -37,21 +42,24 @@ typedef u32 OSTick;
 
 #define OSPhysicalToCached(paddr)       ((void*)((u32)(paddr)  +  OS_BASE_CACHED))
 #define OSPhysicalToUncached(paddr)     ((void*)((u32)(paddr)  +  OS_BASE_UNCACHED))
-#define OSCachedToPhysical(caddr)       ((u32)  ((u8*)(caddr)  -  OS_BASE_CACHED))
-#define OSUncachedToPhysical(ucaddr)    ((u32)  ((u8*)(ucaddr) -  OS_BASE_UNCACHED))
+#define OSCachedToPhysical(caddr)       (  (u32)((u8*)(caddr)  -  OS_BASE_CACHED))
+#define OSUncachedToPhysical(ucaddr)    (  (u32)((u8*)(ucaddr) -  OS_BASE_UNCACHED))
 #define OSCachedToUncached(caddr)       ((void*)((u8*)(caddr)  + (OS_BASE_UNCACHED - OS_BASE_CACHED)))
 #define OSUncachedToCached(ucaddr)      ((void*)((u8*)(ucaddr) - (OS_BASE_UNCACHED - OS_BASE_CACHED)))
 
-u32     __OSBusClock                    ADDRESS(OS_BASE_CACHED + 0x000000F8);
-u32     __OSCoreClock                   ADDRESS(OS_BASE_CACHED + 0x000000FC);
+#define OSRoundUp32B(x)                 ROUNDUP((unsigned long)(x), 32)
+#define OSRoundDown32B(x)               ROUNDDOWN((unsigned long)(x), 32)
+
+u32     __OSBusClock                    ADDRESS(OS_BASE_CACHED + OS_ADDR_BUS_CLOCK_SPEED);
+u32     __OSCoreClock                   ADDRESS(OS_BASE_CACHED + OS_ADDR_CPU_CLOCK_SPEED);
 
 #define OS_BUS_CLOCK                    __OSBusClock
 #define OS_CORE_CLOCK                   __OSCoreClock
 #define OS_TIMER_CLOCK                  (OS_BUS_CLOCK / 4)
 
 #define OSTicksToCycles(ticks)          (((ticks) * ((OS_CORE_CLOCK * 2) / OS_TIMER_CLOCK)) / 2)
-#define OSTicksToSeconds(ticks)         ((ticks) / OS_TIMER_CLOCK)
-#define OSTicksToMilliseconds(ticks)    ((ticks) / (OS_TIMER_CLOCK / 1000))
+#define OSTicksToSeconds(ticks)         ((ticks)  /  OS_TIMER_CLOCK)
+#define OSTicksToMilliseconds(ticks)    ((ticks)  / (OS_TIMER_CLOCK / 1000))
 #define OSTicksToMicroseconds(ticks)    (((ticks) * 8) / (OS_TIMER_CLOCK / 125000))
 #define OSTicksToNanoseconds(ticks)     (((ticks) * 8000) / (OS_TIMER_CLOCK / 125000))
 
@@ -67,63 +75,30 @@ u32     __OSCoreClock                   ADDRESS(OS_BASE_CACHED + 0x000000FC);
 #define OSSleepMicroseconds(us)         OSSleepTicks(OSMicrosecondsToTicks((OSTime)us))
 #define OSSleepNanoseconds(ns)          OSSleepTicks(OSNanosecondsToTicks((OSTime)ns))
 
-#define OSRoundUp32B(x)                 ROUNDUP((unsigned long)(x), 32)
-#define OSRoundDown32B(x)               ROUNDDOWN((unsigned long)(x), 32)
-
-/* Arena */
-
-void*   OSGetArenaHi(); 
-void*   OSGetArenaLo();
-void    OSSetArenaHi(void* newHi);
-void    OSSetArenaLo(void* newLo);
-
-/* OS Log */
-
-void    OSReport(const char* msg, ...);
-void    OSVReport(const char* msg, va_list list);
-
-void    OSPanic(const char* file, int line, const char* msg, ...);
-#define OSHalt(msg, line)           OSPanic(__FILE__, line, msg)
-#define OSAssertMsg(exp, msg, line) if (!(exp)) OSHalt(msg, line)
-
-void    OSRegisterVersion(const char* version);
-
-void    OSFatal(GXColor front, GXColor back, const char* msg);
-
-/* Time and ticks */
-
-OSTime  OSGetTime();
-OSTick  OSGetTick();
-void    OSSleepTicks(OSTime ticks);
-
-/* Interupts */
-
-int     OSDisableInterrupts();
-int     OSEnableInterrupts();
-int     OSRestoreInterrupts(int level);
-
-/* Return to menu and shutdown */
-
-void    OSReturnToMenu();
-
-void    OSShutdownSystem();
-
-/* The rest of OS */
+u8      OSGetAppType();
+u32     OSGetConsoleType();
 
 #include <revolution/os/OSAlarm.h>
 #include <revolution/os/OSAlloc.h>
-#include <revolution/os/OSFastCast.h>
-#include <revolution/os/OSContext.h>
-#include <revolution/os/OSInterrupt.h>
+#include <revolution/os/OSArena.h>
+#include <revolution/os/OSMemory.h>
 #include <revolution/os/OSCache.h>
+#include <revolution/os/OSContext.h>
+#include <revolution/os/OSError.h>
 #include <revolution/os/OSException.h>
+#include <revolution/os/OSFastCast.h>
+#include <revolution/os/OSL2.h>
+#include <revolution/os/OSInterrupt.h>
 #include <revolution/os/OSMutex.h>
 #include <revolution/os/OSThread.h>
+#include <revolution/os/OSRtc.h>
+#include <revolution/os/OSSemaphore.h>
 #include <revolution/os/OSMessage.h>
+#include <revolution/os/OSUtf.h>
+
 #include <revolution/os/OSReset.h>
 #include <revolution/os/OSResetSW.h>
-#include <revolution/os/OSRtc.h>
-#include <revolution/os/OSTime.h>
+#include <revolution/os/OSFont.h>
 
 #ifdef __cplusplus
 }

@@ -8,7 +8,6 @@
 #include "system/iplSystem.h"
 
 #include "utility/iplUtility.h"
-#include "utility/iplGraphics.h"
 
 namespace ipl {
     PointerCoreObject::PointerCoreObject() :
@@ -75,7 +74,7 @@ namespace ipl {
     }
 
     void PointerCore::draw() {
-        utility::Graphics::setDefaultOrtho();
+        layout::Object::setCamera();
         for (int i = WPAD_MAX_CONTROLLERS - 1; i >= 0; i--) {
             mCursors[i].draw();
         }

@@ -37,7 +37,7 @@ namespace ipl {
             OSReport(" NAND USAGE : [i-nodes: %6d / %6d   ] \n", global_free_inode, user_used_inodes);
             OSReport("**********************************************\n");
 
-            // Check is NAND is full
+            // Check if NAND is full
             if (!isNandCapacity()){
                 System::setNandFull(true);
             }
@@ -49,10 +49,10 @@ namespace ipl {
         BOOL isNandCapacity() {
             if (user_used_fsblocks <= 17408 && user_used_inodes <= 4000 &&
                 global_free_fsblock >= 3592 && global_free_inode >= 128) {
-                return TRUE;  // We have enough free space
+                return TRUE;  // We have enough free space!
             }
             else {
-                return FALSE; // We do not have enough free space
+                return FALSE; // We do not have enough free space!
             }
         }
 

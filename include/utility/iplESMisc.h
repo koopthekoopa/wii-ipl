@@ -1,7 +1,7 @@
 #ifndef IPL_ES_MISC_H
 #define IPL_ES_MISC_H
 
-#include <revolution/es.h>
+#include <private/es.h>
 
 #include <egg/core.h>
 

@@ -6,7 +6,7 @@
 #include <revolution.h>
 #include <revolution/nand.h>
 #include <revolution/arc.h>
-#include <revolution/es.h>
+#include <private/es.h>
 
 #include <egg/core.h>
 
@@ -60,7 +60,7 @@ namespace ipl {
                 // Big garbage data
                 u8                  unused_0x28[0x1FC];
 
-                char                mNandPath[NAND_MAX_PATH + 1];   // 0x224
+                char                mNandPath[NAND_MAX_PATH+1];     // 0x224
                 int                 mDescriptor;                    // 0x268
                 u8*                 mpFSTBuffer;                    // 0x26C
                 ARCHandle           mArc;                           // 0x270

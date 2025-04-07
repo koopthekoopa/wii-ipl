@@ -357,13 +357,16 @@ namespace nw4r {
             if (x >= 0.0f) {
                 if (x > 1.0f) {
                     return 64.0f - AtanFIdx_(1.0f / x);
-                } else {
+                }
+                else {
                     return AtanFIdx_(x);
                 }
-            } else {
+            }
+            else {
                 if (x < -1.0f) {
                     return AtanFIdx_(-1.0f / x) + -64.0f;
-                } else {
+                }
+                else {
                     return -AtanFIdx_(-x);
                 }
             }

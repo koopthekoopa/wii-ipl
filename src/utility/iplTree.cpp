@@ -2,64 +2,51 @@
 
 namespace ipl {
     namespace utility {
-        BOOL RangeCheckGELTS32(s32 value, s32 min, s32 max) {
-            BOOL result = FALSE;
-            // if the input value was max, it woule be false cause of a silly typo.
-            if (value >= min && value < max) {
-                result = TRUE;
-            }
-            return result;
-        }
-
         Tree::Tree() :
-        mpParent(NULL),
-        mpChild(NULL),
-        mpNext(NULL),
-        mpPrev(NULL) {}
+        mpParent(), mpChild(),
+        mpNext(),   mpPrev() {}
 
-        void Tree::attach(Tree* pTree) {
-            Tree* pTarget = mpChild;
+        void Tree::attach(Tree* tree) {
+            Tree* child = mpChild;
 
-            if (pTarget == NULL) {
-                mpChild = pTree;
-                pTree->mpParent = this;
+            if (child == empty()) {
+                mpChild = tree;
+                tree->mpParent = this;
             }
             else {
-                while (pTarget->mpNext != NULL) {
-                    pTarget = pTarget->mpNext;
+                while (child->mpNext != empty()) {
+                    child = child->mpNext;
                 }
-                pTarget->mpNext = pTree;
-                pTree->mpPrev = pTarget;
-                pTree->mpParent = this;
+                child->mpNext = tree;
+                tree->mpPrev = child;
+                tree->mpParent = this;
             }
         }
 
-        void Tree::insert(Tree* pTree, Tree* pTree2) {
-            pTree->mpParent = this;
-            pTree->mpPrev = pTree2->mpPrev;
-            pTree->mpNext = pTree2;
-            
-            if (pTree2->mpPrev != NULL) {
-                pTree2->mpPrev->mpNext = pTree;
+        void Tree::insert(Tree* tree, Tree* childTree) {
+            tree->mpParent = this;
+            tree->mpPrev = childTree->mpPrev;
+            tree->mpNext = childTree;
+
+            if (childTree->mpPrev != empty()) {
+                childTree->mpPrev->mpNext = tree;
             }
-            pTree2->mpPrev = pTree;
-            if (mpChild == pTree2) {
-                mpChild = pTree;
+            childTree->mpPrev = tree;
+            if (mpChild == childTree) {
+                mpChild = tree;
             }
         }
 
         void Tree::detach() {
-            if (mpParent != NULL && mpParent->mpChild == this) {
+            if (mpParent != empty() && mpParent->mpChild == this) {
                 mpParent->mpChild = mpNext;
             }
-            if (mpNext != NULL) {
+            if (mpNext != empty()) {
                 mpNext->mpPrev = mpPrev;
             }
-            if (mpPrev != NULL) {
+            if (mpPrev != empty()) {
                 mpPrev->mpNext = mpNext;
             }
         }
     }
 }
-
-

@@ -37,18 +37,14 @@ namespace ipl {
         
         #define HAS_SEC2MS(x)           (x * 1000)
         
-        #define HAS_TIMER_FADE_IN       HAS_SEC2MS(1)                   /* Seconds after fading in */
-        #define HAS_TIMER_PRESS_A       HAS_SEC2MS(2)                   /* Seconds until the user can pass through the screen */
-        #define HAS_TIMER_NOT_PRESS_A   HAS_SEC2MS(60)                  /* Seconds for the user to do something to pass through the screen */
+        #define HAS_TIMER_FADE_IN       HAS_SEC2MS(1)                           /* Seconds after fading in */
+        #define HAS_TIMER_PRESS_A       HAS_SEC2MS(2)                           /* Seconds until the user can pass through the screen */
+        #define HAS_TIMER_NOT_PRESS_A   HAS_SEC2MS(60)                          /* Seconds for the user to do something to pass through the screen */
         
-        #define HAS_TIMER_SAFE_MODE     HAS_SEC2MS(3)                   /* Seconds the user has to hold the safe mode combo on for */
+        #define HAS_TIMER_SAFE_MODE     HAS_SEC2MS(3)                           /* Seconds the user has to hold the safe mode combo on for */
 
-        #define HAS_PRESS_A_BUTTON      (IPL_BUTTON_A | IPL_BUTTON_B)   /* Buttons the user can press to goto the main menu */
-    
-        /* Macros for Maintenance mode combo */
-        #define HAS_SAFE_COMBO          (System::getMasterController()->down(WPAD_BUTTON_PLUS) && System::getMasterController()->down(WPAD_BUTTON_MINUS))
-        #define HAS_ONE_OF_SAFE_COMBO   (System::getMasterController()->down(WPAD_BUTTON_PLUS) || System::getMasterController()->down(WPAD_BUTTON_MINUS))
-        
+        #define HAS_PRESS_A_BUTTON      (controller::BTN_A | controller::BTN_B) /* Buttons the user can press to goto the main menu */
+
         enum {
             LANG_JPN = 0,
             LANG_US_ENG,
@@ -343,14 +339,16 @@ namespace ipl {
         void skHealth::check_safe_mode() {
             // If the user is holding the combo?
             if (!mbHeldCombo) {
-                if (HAS_SAFE_COMBO) {
+                if (System::getMasterController()->down(controller::REVO_BTN_PLUS)
+                    && System::getMasterController()->down(controller::REVO_BTN_MINUS)) {
                     mSafeModeTick = OSGetTick();
                     mbHeldCombo = true;
                 }
             }
             else {
                 // Have they let go of the combo? Restart the timer
-                if (!System::getMasterController()->down(WPAD_BUTTON_PLUS) || !System::getMasterController()->down(WPAD_BUTTON_MINUS)) {
+                if (!System::getMasterController()->down(controller::REVO_BTN_PLUS)
+                    || !System::getMasterController()->down(controller::REVO_BTN_MINUS)) {
                     mSafeModeTick = 0;
                     mbHeldCombo = false;
                 }
@@ -367,7 +365,8 @@ namespace ipl {
         BOOL skHealth::finish_safe_mode_check() const {
             BOOL result = FALSE;
 
-            if (!HAS_ONE_OF_SAFE_COMBO || mbDoneSafeMode) {
+            if (!(System::getMasterController()->down(controller::REVO_BTN_PLUS)
+                || System::getMasterController()->down(controller::REVO_BTN_MINUS)) || mbDoneSafeMode) {
                 result = TRUE;
             }
 

@@ -189,7 +189,7 @@ namespace ipl {
                     break;
                 }
                 case ::gui::EventHandler::ON_TRIG: {
-                    if (controller->downTrg(IPL_BUTTON_A)) {
+                    if (controller->downTrg(controller::BTN_A)) {
                         start_trig_event(paneName);
                     }
                     break;

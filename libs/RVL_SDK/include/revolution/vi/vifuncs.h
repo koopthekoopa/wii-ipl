@@ -21,6 +21,7 @@ void    VISetNextFrameBuffer(void *fb);
 void    VISetBlack(BOOL setBlack);
 
 void    VISetTrapFilter(BOOL setTrap);
+void    VIResetDimmingCount();
 void    VIEnableDimming(BOOL enableDim);
 
 u32     VIGetRetraceCount();

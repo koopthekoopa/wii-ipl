@@ -1,7 +1,7 @@
 #ifndef IPL_TITLE_ID_DATABASE
 #define IPL_TITLE_ID_DATABASE
 
-#include <private/estypes.h>
+#include <private/es.h>
 
 #define TITLE_TYPE_SYSTEM           0x00000001
 #define TITLE_TYPE_DISC             0x00010000

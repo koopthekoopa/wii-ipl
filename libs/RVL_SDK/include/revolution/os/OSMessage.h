@@ -19,15 +19,13 @@ typedef struct {
     s32             usedCount;      // 0x1C
 } OSMessageQueue;
 
-void    OSInitMessageQueue(OSMessageQueue* queue, OSMessage* msg, s32 msgCount);
+void    OSInitMessageQueue(OSMessageQueue* queue, OSMessage* msgArray, s32 msgCount);
 BOOL    OSSendMessage(OSMessageQueue* queue, OSMessage msg, s32 flags);
 BOOL    OSJamMessage(OSMessageQueue* queue, OSMessage msg, s32 flags);
-BOOL    OSReceiveMessage(OSMessageQueue* queue, OSMessage* msg, s32 flags);
+BOOL    OSReceiveMessage(OSMessageQueue* queue, OSMessage* msgArray, s32 flags);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif // REVOLUTION_OS_MESSAGE_H
-
-

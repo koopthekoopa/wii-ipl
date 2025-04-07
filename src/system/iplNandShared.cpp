@@ -32,11 +32,11 @@ namespace ipl {
             }
             else {
                 ESTicketView* tik;
-                u32 tikLen;
+                u32 tikCount;
 
-                if (utility::ESMisc::GetTicketViewList(System::getSharedHeap(), mTitleId, &tik, &tikLen) != ES_ERR_OK) {
-                    int tikIdx = utility::ESMisc::GetValidTicketIndex(System::getSharedHeap(), mTitleId, tik, tikLen);
-                    if (tikIdx >= 0 && tikIdx <= tikLen) {
+                if (utility::ESMisc::GetTicketViewList(System::getSharedHeap(), mTitleId, &tik, &tikCount) != ES_ERR_OK) {
+                    int tikIdx = utility::ESMisc::GetValidTicketIndex(System::getSharedHeap(), mTitleId, tik, tikCount);
+                    if (tikIdx >= 0 && tikIdx <= tikCount) {
                         mTicketIdx = tikIdx;
                         memcpy(mTicket, &tik[tikIdx], sizeof(ESTicketView));
                         System::getSharedHeap()->free(tik);

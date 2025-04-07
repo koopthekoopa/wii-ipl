@@ -2,13 +2,14 @@
 #define MSL_CSTRING_H
 
 #include <size_t.h>
-#include <MSL/memory.h>
+#include <internal/mem.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 int     strcmp(const char* dst, const char* src);
+int     strcpy(char* dst, const char* src);
 
 int     stricmp(const char* dst, const char* src);
 

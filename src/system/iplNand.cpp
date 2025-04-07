@@ -9,7 +9,7 @@
 #include "utility/iplUtility.h"
 
 #include <revolution/cx.h>
-#include <revolution/es.h>
+#include <private/es.h>
 
 #include <cstring>
 
@@ -17,9 +17,6 @@
 
 #define STANDARD_SIZE   sizeof(MD5Head)
 #define EXT_SIZE        sizeof(MD5Head) + 0x20
-
-#define CHECK_MAGIC3(b, c0, c1, c2)     (b[0] == c0 && b[1] == c1 && b[2] == c2)
-#define CHECK_MAGIC4(b, c0, c1, c2, c3) (b[0] == c0 && b[1] == c1 && b[2] == c2 && b[3] == c3)
 
 namespace ipl {
     namespace nand {
@@ -41,9 +38,9 @@ namespace ipl {
         mbFatalError(false),
         mbIsFullForTask(false),
         mbIsNandFile(bIsInNand) {
-            strncpy(msFileName, fileName, NAND_MAX_PATH + 1);
+            strncpy(msFileName, fileName, NAND_MAX_PATH+1);
             if (nandFileName) {
-                strncpy(msNandFileName, nandFileName, NAND_MAX_PATH + 1);
+                strncpy(msNandFileName, nandFileName, NAND_MAX_PATH+1);
             }
             memset(&mNandFile, 0, sizeof(NANDFileInfo));
         }
@@ -63,7 +60,7 @@ namespace ipl {
         mbFatalError(false),
         mbIsFullForTask(false),
         mbIsNandFile(TRUE) {
-            strncpy(msFileName, fileName, NAND_MAX_PATH + 1);
+            strncpy(msFileName, fileName, NAND_MAX_PATH+1);
 
             mpCmpBuffer = new(mpHeap, -BUFFER_HEAP) u8[mFileLength];
             memcpy(mpCmpBuffer, mpBuffer, mFileLength);
@@ -135,13 +132,13 @@ namespace ipl {
                     arcOffset = ARCGetStartOffset(&mArcFile);
 
                     result = ES_SeekContentFile(System::getNandManager()->getDescriptor(), mFileOffset + arcOffset + offset, NAND_SEEK_BEG);
-                    if (result < 0) {
+                    if (result < ES_ERR_OK) {
                         System::err_log("ES", result, 229);
                         System::err_display(MESG_ERR_FILE);
                     }
 
                     result = ES_ReadContentFile(System::getNandManager()->getDescriptor(), buffer, length);
-                    if (result < 0) {
+                    if (result < ES_ERR_OK) {
                         System::err_log("ES", result, 237);
                         System::err_display(MESG_ERR_FILE);
                     }
@@ -153,13 +150,13 @@ namespace ipl {
             if (stricmp(&msFileName[strlen(msFileName) - 4], ".lz7") == 0) { // Check file extension
                 return CXGetUncompressedSize(buffer);
             }
-            else if (buffer[0] == 'Y') { // See if it is Yaz0 by checking if the first letter is 'Y'
+            else if (buffer[0] == 'Y') { // Is Yaz0? (.szs; horrible way to check)
                 return Rvl_decode_szs_size(buffer);
             }
-            else if (buffer[0] == 'L') { // See if it is LZ77 by checking if the first letter is 'L'
+            else if (buffer[0] == 'L') { // Is LZ77? (horrible way to check)
                 return CXGetUncompressedSize(&buffer[4]);
             }
-            else { // Otherwise, decompress it with Rvl_decode
+            else { // Otherwise, it's an ASH file.
                 return Rvl_decode_ash_size(buffer);
             }
         }
@@ -184,7 +181,7 @@ namespace ipl {
         }
 
         BOOL File::isSliCompressed(const u8* buffer) {
-            return CHECK_MAGIC3(buffer, 'Y', 'a', 'z');
+            return NAND_CHECK_MAGIC3(buffer, 'Y','a','z');
         }
 
         /*
@@ -194,11 +191,11 @@ namespace ipl {
         */
 
         BOOL File::isAsrCompressed(const u8* buffer) {
-            return CHECK_MAGIC3(buffer, 'A','S','H');
+            return NAND_CHECK_MAGIC3(buffer, 'A','S','H');
         }
 
         BOOL File::isAshCompressed(const u8* buffer) {
-            return CHECK_MAGIC3(buffer, 'A','S','R');
+            return NAND_CHECK_MAGIC3(buffer, 'A','S','R');
         }
 
         BOOL File::isLz7Compressed(const u8* buffer) {
@@ -209,7 +206,7 @@ namespace ipl {
             // Check the magic
             else {
                 BOOL result = FALSE;
-                if (CHECK_MAGIC4(buffer, 'L','Z','7','7')) {
+                if (NAND_CHECK_MAGIC4(buffer, 'L','Z','7','7')) {
                     result = TRUE;
                 }
                 return result;
@@ -263,7 +260,7 @@ namespace ipl {
                 u32 fileLen, fileOff = 0;
 
                 // Check if the header is an MD5 file.
-                if (CHECK_MAGIC4(md5Head->sig, 'I','M','D','5')) {
+                if (NAND_CHECK_MAGIC4(md5Head->sig, 'I','M','D','5')) {
                     fileLen = md5Head->length;
 
                     bHasMd5 = true;
@@ -369,26 +366,26 @@ namespace ipl {
         }
 
         LangFile::LangFile(EGG::Heap* heap, const char* dirName, const char* fileName, ARCHandle* arc, bool bIsNandFile) {
-            char fullName[NAND_MAX_PATH + 1];
+            char fullName[NAND_MAX_PATH+1];
             
             mpCommonFile = NULL;
             mpLangFile = NULL;
 
             // Open the "common" file.
-            strncpy(fullName, dirName, NAND_MAX_PATH + 1);
-            strncat(fullName, "/common/", (NAND_MAX_PATH + 1) - strlen(fullName));
-            strncat(fullName, fileName, (NAND_MAX_PATH + 1) - strlen(fullName));
+            strncpy(fullName, dirName, NAND_MAX_PATH+1);
+            strncat(fullName, "/common/", (NAND_MAX_PATH+1) - strlen(fullName));
+            strncat(fullName, fileName, (NAND_MAX_PATH+1) - strlen(fullName));
 
             mpCommonFile = new(heap, CLASS_HEAP) File(heap, fullName, arc, NULL, 0, 0, bIsNandFile);
 
             char* langPath = utility::Language::getPath();
 
             // Open the language exclusive file
-            strncpy(fullName, dirName, NAND_MAX_PATH + 1);
-            strncat(fullName, "/", (NAND_MAX_PATH + 1) - strlen(fullName));
-            strncat(fullName, langPath, (NAND_MAX_PATH + 1) - strlen(fullName));
-            strncat(fullName, "/", (NAND_MAX_PATH + 1) - strlen(fullName));
-            strncat(fullName, fileName, (NAND_MAX_PATH + 1) - strlen(fullName));
+            strncpy(fullName, dirName, NAND_MAX_PATH+1);
+            strncat(fullName, "/", (NAND_MAX_PATH+1) - strlen(fullName));
+            strncat(fullName, langPath, (NAND_MAX_PATH+1) - strlen(fullName));
+            strncat(fullName, "/", (NAND_MAX_PATH+1) - strlen(fullName));
+            strncat(fullName, fileName, (NAND_MAX_PATH+1) - strlen(fullName));
 
             mpLangFile = new(heap, CLASS_HEAP) File(heap, fullName, arc, NULL, 0, 0, bIsNandFile);
         }

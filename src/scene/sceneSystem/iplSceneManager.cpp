@@ -137,7 +137,8 @@ namespace ipl {
         BOOL Manager::isResetProcessDone() {
             if (!mpRootScene) {
                 return TRUE;
-            } else {
+            }
+            else {
                 for (SceneObj::iterator it = SceneObj::iterator(mpRootScene); it.getPtr() != NULL; ++it) {
                     if (it->isResetProcessDone() == FALSE) {
                         return FALSE;
