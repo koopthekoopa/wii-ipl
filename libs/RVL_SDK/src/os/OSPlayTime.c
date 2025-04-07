@@ -378,8 +378,6 @@ void __OSInitPlayTime() {
         goto out;
     }
     else if (type == OS_PLAYTIME_TIME_LIMIT) {
-        // User still trying to launch the app even though it had expired? Hah I don't think so...
-        // The fact this only happens on channels with a time limit...
         OSAssertMsg(limit != 0, "Expired", 775);
 
         OSCreateAlarm(&__OSExpireAlarm);

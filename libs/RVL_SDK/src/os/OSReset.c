@@ -58,7 +58,8 @@ vBOOL                           __OSIsReturnToIdle;
         (info)->prev = __prev;                   \
         if (__prev == 0) {                       \
             (queue)->head = (info);              \
-        } else {                                 \
+        }                                        \
+        else {                                   \
             __prev->next = (info);               \
         }                                        \
     }                                            \
@@ -79,8 +80,8 @@ static void KillThreads() {
         next = thread->linkActive.next;
 
         switch (thread->state) {
-            case 1:
-            case 4: {
+            case OS_THREAD_STATE_READY:
+            case OS_THREAD_STATE_WAITING: {
                 OSCancelThread(thread);
                 break;
             }

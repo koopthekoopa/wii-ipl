@@ -304,35 +304,39 @@ void LaunchCommon(ESTitleId titleId, u32 launchArg, const char** argv, BOOL laun
 
     ESTitleId   title ALIGN32;
     ESTmdView*  tmd = NULL;
-    u32         tmdSize = 0;
+    u32         tmdCount = 0;
 
     int ret = ES_ERR_OK;
 
+    // Setup ES
     ret = ESP_InitLib();
     if (ret != ES_ERR_OK) {
         __OSReturnToMenuForError();
     }
 
-    ret = ESP_GetTmdView(titleId, NULL, &tmdSize);
+    // Get TMD count
+    ret = ESP_GetTmdView(titleId, NULL, &tmdCount);
     if (ret != ES_ERR_OK) {
         __OSReturnToMenuForError();
     }
 
-    tmd = (ESTmdView*)OSAllocFromMEM1ArenaLo(OSRoundUp32B(tmdSize), 64);
+    // Get TMD
+    tmd = (ESTmdView*)OSAllocFromMEM1ArenaLo(OSRoundUp32B(tmdCount), 64);
     if (tmd == NULL) {
         __OSReturnToMenuForError();
     }
-
-    ret = ESP_GetTmdView(titleId, tmd, &tmdSize);
+    ret = ESP_GetTmdView(titleId, tmd, &tmdCount);
     if (ret != ES_ERR_OK) {
         __OSReturnToMenuForError();
     }
 
+    // Get firmware (IOS) from TMD
     if (!__OSCheckTmdSysVersion(tmd)) {
         OSReport("OSLaunchTitle(): Firmware is not installed\n");
         __OSReturnToMenuForError();
     }
-    
+
+    // Verification
     if (launchCheck) {
         if (!__OSCheckCompanyCode(titleId, FALSE)) {
             OSReport("OSLaunchTitle(): Company code is not correct\n");
@@ -345,8 +349,9 @@ void LaunchCommon(ESTitleId titleId, u32 launchArg, const char** argv, BOOL laun
         }
     }
 
+    // Check if TMD wants the disc to spin
     if (!__OSCheckTmdDriveSpinFlag(tmd)) {
-        if (__DVDGetCoverStatus() == 2) {
+        if (__DVDGetCoverStatus() == DVD_COVER_CLOSED) {
             __DVDResetWithNoSpinup();
         }
     }
@@ -356,8 +361,10 @@ void LaunchCommon(ESTitleId titleId, u32 launchArg, const char** argv, BOOL laun
         info = (OSNandbootInfo*)((u32)bi2 + (0x2000 - sizeof(OSNandbootInfo)));
 
         sprintf(titleIdString, "%016llx", titleId);
-        argLen = 0;
 
+        // Setup launch arguments
+        
+        argLen = 0;
         if (argv) {
             while (argv[argLen])
             argLen++;

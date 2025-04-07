@@ -1577,7 +1577,7 @@ config.libs = [
     ),
     RVLSDKLib("TPL",
         [
-            Object(NonMatching, "tpl/TPL.c"),
+            Object(Matching,    "tpl/TPL.c"),
         ]
     ),
     RVLSDKLib("rso",
