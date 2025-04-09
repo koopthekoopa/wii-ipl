@@ -70,8 +70,8 @@ namespace ipl {
                 int                 mSettingType;   // 0x274
 
                 layout::Object*     mpLayout;       // 0x278
-                nand::LayoutFile*   mpLayoutFile;   // 0x27C
 
+                nand::LayoutFile*   mpLayoutFile;   // 0x27C
                 gui::PaneManager*   mpGui;          // 0x280
 
                 BOOL                mBtnHovered;    // 0x284

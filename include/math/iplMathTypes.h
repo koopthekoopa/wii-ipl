@@ -26,7 +26,7 @@ namespace ipl {
         } VEC2;
         
         typedef struct VEC3 : public nw4r::math::VEC3 {
-            VEC3()                          {}
+            VEC3()                          { x = 0.0f; y = 0.0f; z = 0.0f; }
 
             VEC3(const f32* pF)             { x = pF[0]; y = pF[1]; z = pF[2]; }
             VEC3(f32 fx, f32 fy, f32 fz)    { x = fx; y = fy; z = fz; }

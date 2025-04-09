@@ -1,7 +1,7 @@
 #ifndef IPL_SCENE_CREATOR_H
 #define IPL_SCENE_CREATOR_H
 
-#include <revolution.h>
+#include <revolution/types.h>
 
 #include <egg/core.h>
 

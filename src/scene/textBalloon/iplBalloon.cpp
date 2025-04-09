@@ -8,7 +8,7 @@
 #pragma sym on
 namespace ipl {
     namespace scene {
-        TextBalloon::TextBalloon(EGG::Heap* heap, nand::LayoutFile* file, const char* unk0, const char* unk1, const math::VEC3& unk2, f32 unk3, f32 unk4) :
+        TextBalloon::TextBalloon(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* directory, const char* fileName, const math::VEC3& unk2, f32 unk3, f32 unk4) :
         unk_0x08(FALSE),
         mpText(NULL),
         mTextLen(0),
@@ -18,7 +18,7 @@ namespace ipl {
         unk_0x30(unk3),
         unk_0x34(unk4),
         unk_0x38(0) {
-            mpLayout = new(heap, CLASS_HEAP) layout::Object(heap, file, unk0, unk1);
+            mpLayout = new(heap, CLASS_HEAP) layout::Object(heap, layoutFile, directory, fileName);
             mpLayout->bind("my_IplTopBalloon_a_BalloonInOut.brlan");
             mpLayout->finishBinding();
 
@@ -287,11 +287,14 @@ namespace ipl {
 
             f32 temp1 = proj16x9.GetWidth() / proj4x3.GetWidth();
 
-            if (SCGetAspectRatio() == SC_ASPECT_RATIO_16x9) {
-                temp1 = 1.0f;
-            }
-            else {
-                u32 dummy = 1;
+            switch (SCGetAspectRatio()) {
+                case SC_ASPECT_RATIO_16x9: {
+                    temp1 = 1.0f;
+                    break;
+                }
+                default: {
+                    break;
+                }
             }
 
             nw4r::ut::Rect textRect  = textPane->GetTextDrawRect(*mpLayout->getDrawInfo());

@@ -9,7 +9,7 @@ namespace ipl {
     namespace scene {
         class TextBalloon {
             public:
-                TextBalloon(EGG::Heap* heap, nand::LayoutFile* file, const char* unk0, const char* unk1, const ipl::math::VEC3& unk2, f32 unk3, f32 unk4);
+                TextBalloon(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* directory, const char* fileName, const ipl::math::VEC3& unk2, f32 unk3, f32 unk4);
                 ~TextBalloon();
 
                 void    calc();
@@ -28,12 +28,14 @@ namespace ipl {
                 void    setPos(const math::VEC3& pos, bool unk0, int unk1);
                 void    updatePos(const math::VEC3& pos);
 
+                void    set_translate(const math::VEC3& trans);
+                void    set_textbox(const wchar_t* text, BOOL bNoLimit = FALSE);
+
+                wchar_t* get_text() const { return mpText; }
+
             private:
                 void                    on_pre_fadein();
                 void                    anm_fadein();
-
-                void                    set_translate(const math::VEC3& trans);
-                void                    set_textbox(const wchar_t* text, BOOL bNoLimit = FALSE);
 
                 void                    set_size(const char* paneName, const nw4r::lyt::Size& size);
                 const nw4r::lyt::Size*  get_size(const char* paneName);

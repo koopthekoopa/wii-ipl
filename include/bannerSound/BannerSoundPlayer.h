@@ -1,7 +1,7 @@
 #ifndef BANNER_SOUND_PLAYER_H
 #define BANNER_SOUND_PLAYER_H
 
-#include <revolution.h>
+#include <revolution/types.h>
 
 class BannerSoundPlayer {
     public:
@@ -11,5 +11,3 @@ class BannerSoundPlayer {
 };
 
 #endif // BANNER_SOUND_PLAYER_H
-
-

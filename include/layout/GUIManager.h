@@ -61,7 +61,7 @@ namespace gui {
 
     class Component : public Interface {
         public:
-            virtual void    init() {                                                                            // 0x0C (0x03)
+            virtual void    init() {                        // 0x0C (0x03)
                 for (int i = 0; i < GUI_POINTS_MAX; i++) {
                     mbPointed[i] = false;
                     mDraggingPos[i].z = mDraggingPos[i].y = mDraggingPos[i].x = 0;
@@ -150,7 +150,7 @@ namespace gui {
                 nw4r::ut::List_Init(&mComponents, offsetof(IDToComponent, mLink));
             }
 
-            virtual ~Manager();                                                                                     // 0x1C (0x07)
+            virtual ~Manager();                                                                                         // 0x1C (0x07)
 
             virtual void            addComponent(Component* component);                                                 // 0x20 (0x08)
             virtual Component*      getComponent(u32 id);                                                               // 0x24 (0x09)
@@ -173,7 +173,7 @@ namespace gui {
                     eventHandler->setManager(this);
                 }
             }
-            virtual EventHandler*   changeEventHandler(EventHandler* eventHandler) {                                           // 0x3C (0x0F)
+            virtual EventHandler*   changeEventHandler(EventHandler* eventHandler) {                                    // 0x3C (0x0F)
                 EventHandler* prevHandler = mpEventHandler;
                 mpEventHandler = eventHandler;
                 if (eventHandler) {

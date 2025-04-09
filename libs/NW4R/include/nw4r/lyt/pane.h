@@ -86,6 +86,12 @@ namespace nw4r {
                 bool                IsVisible()                                 { return detail::TestBit(mFlags, 0); };
                 void                SetVisible(bool visible)                    { detail::SetBit(&mFlags, 0, visible); };
 
+                bool                IsInfluencedAlpha()                         { return detail::TestBit(mFlags, 2); };
+                void                SetInfluencedAlpha(bool visible)            { detail::SetBit(&mFlags, 2, visible); };
+
+                bool                IsLocationAdjust()                          { return detail::TestBit(mFlags, 2); };
+                void                SetLocationAdjust(bool visible)             { detail::SetBit(&mFlags, 2, visible); };
+
                 const math::MTX34&  GetGlobalMtx() const                        { return mGlobalMtx; }
                 void                SetGlobalMtx(const math::MTX34& mtx)        { mGlobalMtx = mtx; }
 

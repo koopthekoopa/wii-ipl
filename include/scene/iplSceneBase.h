@@ -5,7 +5,6 @@
 
 #include "layout/iplLayout.h"
 #include "layout/GUIManager.h"
-#include "utility/iplGraphics.h"
 
 #include "sound/iplSound.h"
 
@@ -18,7 +17,7 @@
 #define SCENE_USING_GUI     namespace ipl { USING_GUI }
 
 #define SCENE_CLASS(x)      class x : public ipl::scene::Base
-#define SCENE_GUI_CLASS(x)  class x : public ipl::scene::Base,  public ::gui::EventHandler
+#define SCENE_GUI_CLASS(x)  SCENE_CLASS(x), public ::gui::EventHandler
 
 namespace ipl {
     namespace scene {

@@ -1,7 +1,8 @@
 #ifndef EGG_CORE_THREAD_H
 #define EGG_CORE_THREAD_H
 
-#include <revolution.h>
+#include <revolution/os.h>
+#include <revolution/types.h>
 
 #include <nw4r/ut/list.h>
 

@@ -118,6 +118,8 @@ namespace ipl {
     }
 }
 
+#ifndef IPL_BASE_SCENE_H
 #include "scene/iplSceneBase.h"
+#endif // IPL_BASE_SCENE_H
 
 #endif // IPL_SCENE_MANAGER_H
