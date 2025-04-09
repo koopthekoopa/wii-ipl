@@ -94,8 +94,8 @@ namespace ipl {
         mDialog[DIALOG_TYPE_BTN0].gLayout->bindToGroup("my_DialogWindow_a0_DialogOut.brlan", "G_InOut", false, false);
         mDialog[DIALOG_TYPE_BTN0].gLayout->bindToGroup("my_DialogWindow_a0_Wait.brlan",      "G_Wait",  false, false);
         mDialog[DIALOG_TYPE_BTN0].gLayout->bindToGroup("my_DialogWindow_a0_Progres.brlan",   "G_Prog",  false);
-        mDialog[DIALOG_TYPE_BTN0].gLayout->findPane("Wait_00")->SetVisible(false);
-        mDialog[DIALOG_TYPE_BTN0].gLayout->findPane("N_Prog")->SetVisible(false);
+        mDialog[DIALOG_TYPE_BTN0].gLayout->FindPaneByName("Wait_00")->SetVisible(false);
+        mDialog[DIALOG_TYPE_BTN0].gLayout->FindPaneByName("N_Prog")->SetVisible(false);
         mDialog[DIALOG_TYPE_BTN0].gLayout->finishBinding();
         mDialog[DIALOG_TYPE_BTN0].guiMgr = NULL;  // No user interaction for progress dialog
 
@@ -111,7 +111,7 @@ namespace ipl {
         mDialog[DIALOG_TYPE_BTN1].guiMgr->createLayoutScene(*mDialog[DIALOG_TYPE_BTN1].gLayout->getLayout());
         mDialog[DIALOG_TYPE_BTN1].guiMgr->setAllComponentTriggerTarget(false);
         for (int i = 0; i <= (BUTTON_ONE_MAX - 1); i++) {
-            mDialog[DIALOG_TYPE_BTN1].guiMgr->setTriggerTarget(mDialog[DIALOG_TYPE_BTN1].gLayout->findPane(mscBtnName[i]), true);
+            mDialog[DIALOG_TYPE_BTN1].guiMgr->setTriggerTarget(mDialog[DIALOG_TYPE_BTN1].gLayout->FindPaneByName(mscBtnName[i]), true);
         }
 
         // Dialog with two buttons
@@ -129,7 +129,7 @@ namespace ipl {
         mDialog[DIALOG_TYPE_BTN2].guiMgr->createLayoutScene(*mDialog[DIALOG_TYPE_BTN2].gLayout->getLayout());
         mDialog[DIALOG_TYPE_BTN2].guiMgr->setAllComponentTriggerTarget(false);
         for (int i = 0; i <= (BUTTON_TWO_MAX - 1); i++) {
-            mDialog[DIALOG_TYPE_BTN2].guiMgr->setTriggerTarget(mDialog[DIALOG_TYPE_BTN2].gLayout->findPane(mscBtnName[i]), true);
+            mDialog[DIALOG_TYPE_BTN2].guiMgr->setTriggerTarget(mDialog[DIALOG_TYPE_BTN2].gLayout->FindPaneByName(mscBtnName[i]), true);
         }
 
         // Dialog with three buttons
@@ -150,7 +150,7 @@ namespace ipl {
         mDialog[DIALOG_TYPE_BTN3].guiMgr->createLayoutScene(*mDialog[DIALOG_TYPE_BTN3].gLayout->getLayout());
         mDialog[DIALOG_TYPE_BTN3].guiMgr->setAllComponentTriggerTarget(false);
         for (int i = 0; i <= (BUTTON_THREE_MAX - 1); i++) {
-            mDialog[DIALOG_TYPE_BTN3].guiMgr->setTriggerTarget(mDialog[DIALOG_TYPE_BTN3].gLayout->findPane(mscBtnName[i]), true);
+            mDialog[DIALOG_TYPE_BTN3].guiMgr->setTriggerTarget(mDialog[DIALOG_TYPE_BTN3].gLayout->FindPaneByName(mscBtnName[i]), true);
         }
 
         // Dialog with two buttons (alternative)
@@ -168,7 +168,7 @@ namespace ipl {
         mDialog[DIALOG_TYPE_BTNS2].guiMgr->createLayoutScene(*mDialog[DIALOG_TYPE_BTNS2].gLayout->getLayout());
         mDialog[DIALOG_TYPE_BTNS2].guiMgr->setAllComponentTriggerTarget(false);
         for (int i = 0; i <= (BUTTON_TWO_MAX - 1); i++) {
-            mDialog[DIALOG_TYPE_BTNS2].guiMgr->setTriggerTarget(mDialog[DIALOG_TYPE_BTNS2].gLayout->findPane(mscBtnName[i]), true);
+            mDialog[DIALOG_TYPE_BTNS2].guiMgr->setTriggerTarget(mDialog[DIALOG_TYPE_BTNS2].gLayout->FindPaneByName(mscBtnName[i]), true);
         }
     }
 
@@ -431,14 +431,14 @@ namespace ipl {
                 if (mPageAlpha > 255) {
                     mPageAlpha = 255;
                 }
-                nw4r::lyt::TextBox* textBox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpCurDialog->gLayout->findPane("T_Dialog"));
+                nw4r::lyt::TextBox* textBox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpCurDialog->gLayout->FindPaneByName("T_Dialog"));
                 textBox->SetAlpha(mPageAlpha);
 
                 // If the next page has the left button, make it visible (if it was invisible before)
                 if (mpPages[mCurPage].isTwoBtn != mpPages[mPrevPage].isTwoBtn
                 && mpPages[mCurPage].isTwoBtn == true) {
-                    nw4r::lyt::Pane* pBtnA = mpCurDialog->gLayout->findPane("N_BtnA");
-                    nw4r::lyt::Pane* pBtnAPic = mpCurDialog->gLayout->findPane("N_BtnA_Pic");
+                    nw4r::lyt::Pane* pBtnA = mpCurDialog->gLayout->FindPaneByName("N_BtnA");
+                    nw4r::lyt::Pane* pBtnAPic = mpCurDialog->gLayout->FindPaneByName("N_BtnA_Pic");
 
                     pBtnA->SetVisible(true);
 
@@ -458,14 +458,14 @@ namespace ipl {
                 else {
                     // Has the text changed? Fade in the text to the new one
                     if (mpPages[mCurPage].lBtnMsgId != mpPages[mPrevPage].lBtnMsgId) {
-                        nw4r::lyt::Pane* pPane = mpCurDialog->gLayout->findPane("T_BtnA");
+                        nw4r::lyt::Pane* pPane = mpCurDialog->gLayout->FindPaneByName("T_BtnA");
                         pPane->SetAlpha(mPageAlpha);
                     }
                 }
 
                 // Has the text changed? Fade in the text to the new one
                 if (mpPages[mCurPage].rBtnMsgId != mpPages[mPrevPage].rBtnMsgId) {
-                    nw4r::lyt::Pane* pPane = mpCurDialog->gLayout->findPane("T_BtnB");
+                    nw4r::lyt::Pane* pPane = mpCurDialog->gLayout->FindPaneByName("T_BtnB");
                     pPane->SetAlpha(mPageAlpha);
                 }
 
@@ -492,14 +492,14 @@ namespace ipl {
                 if (mPageAlpha < 0) {
                     mPageAlpha = 0;
                 }
-                nw4r::lyt::TextBox* textBox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpCurDialog->gLayout->findPane("T_Dialog"));
+                nw4r::lyt::TextBox* textBox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpCurDialog->gLayout->FindPaneByName("T_Dialog"));
                 textBox->SetAlpha(mPageAlpha);
 
                 // If the previous page has no left button, make it invisible (if it was visible before)
                 if (mpPages[mCurPage].isTwoBtn != mpPages[mPrevPage].isTwoBtn
                 && mpPages[mPrevPage].isTwoBtn == true) {
-                    nw4r::lyt::Pane* pBtnA = mpCurDialog->gLayout->findPane("N_BtnA");
-                    nw4r::lyt::Pane* pBtnAPic = mpCurDialog->gLayout->findPane("N_BtnA_Pic");
+                    nw4r::lyt::Pane* pBtnA = mpCurDialog->gLayout->FindPaneByName("N_BtnA");
+                    nw4r::lyt::Pane* pBtnAPic = mpCurDialog->gLayout->FindPaneByName("N_BtnA_Pic");
 
                     // The fuck is this?
                     {
@@ -522,14 +522,14 @@ namespace ipl {
                 else {
                     // Has the text changed? Fade out the old text
                     if (mpPages[mCurPage].lBtnMsgId != mpPages[mPrevPage].lBtnMsgId) {
-                        nw4r::lyt::Pane* pPane = mpCurDialog->gLayout->findPane("T_BtnA");
+                        nw4r::lyt::Pane* pPane = mpCurDialog->gLayout->FindPaneByName("T_BtnA");
                         pPane->SetAlpha(mPageAlpha);
                     }
                 }
 
                 // Has the text changed? Fade out the old text
                 if (mpPages[mCurPage].rBtnMsgId != mpPages[mPrevPage].rBtnMsgId) {
-                    nw4r::lyt::Pane* pPane = mpCurDialog->gLayout->findPane("T_BtnB");
+                    nw4r::lyt::Pane* pPane = mpCurDialog->gLayout->FindPaneByName("T_BtnB");
                        pPane->SetAlpha(mPageAlpha);
                 }
 
@@ -574,7 +574,7 @@ namespace ipl {
 
             // Draw custom layout for page
             if (mpCustomLayout) {
-                nw4r::math::VEC3 dlgPos = mpCurDialog->gLayout->findPane("N_Dialog")->GetTranslate();
+                nw4r::math::VEC3 dlgPos = mpCurDialog->gLayout->FindPaneByName("N_Dialog")->GetTranslate();
                 dlgPos.x += mCustomLayoutPos.x;
                 dlgPos.y += mCustomLayoutPos.y;
                 mpCustomLayout->getRoot()->SetTranslate(dlgPos);
@@ -632,7 +632,7 @@ namespace ipl {
     }
 
     void DialogWindow::set_dialog_size(const nw4r::lyt::Size& size) {
-        nw4r::lyt::TextBox* pPane = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpCurDialog->gLayout->findPane("T_Dialog"));
+        nw4r::lyt::TextBox* pPane = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpCurDialog->gLayout->FindPaneByName("T_Dialog"));
         pPane->SetFontSize(size);
     }
 
@@ -662,7 +662,7 @@ namespace ipl {
             mpCustomLayout = NULL;
 
             // Do we need the shade background?
-            nw4r::lyt::Pane* pPane = mpCurDialog->gLayout->findPane("Shade");
+            nw4r::lyt::Pane* pPane = mpCurDialog->gLayout->FindPaneByName("Shade");
             if (pPane) {
                 if (mbNoShade) {
                     pPane->SetVisible(false);
@@ -673,7 +673,7 @@ namespace ipl {
             }
 
             // Do we need BtnA?
-            pPane = mpCurDialog->gLayout->findPane("N_BtnA");
+            pPane = mpCurDialog->gLayout->FindPaneByName("N_BtnA");
             if (pPane) {
                 if (mbHideBtnA) {
                     pPane->SetVisible(false);
@@ -703,16 +703,16 @@ namespace ipl {
             mbDoProgBar = false;
             set_message(msgId);
 
-            mpCurDialog->gLayout->findPane("N_Prog")->SetVisible(false);
+            mpCurDialog->gLayout->FindPaneByName("N_Prog")->SetVisible(false);
 
             if (mbIsProg) {
-                mpCurDialog->gLayout->findPane("Wait_00")->SetVisible(true);
+                mpCurDialog->gLayout->FindPaneByName("Wait_00")->SetVisible(true);
                 mpCurDialog->gLayout->getAnim(ANIM_BTN0_WAIT)->play();
 
                 snd::getSystem()->startSE("WIPL_SE_COPYING");
             }
             else {
-                mpCurDialog->gLayout->findPane("Wait_00")->SetVisible(false);
+                mpCurDialog->gLayout->FindPaneByName("Wait_00")->SetVisible(false);
                 
                 snd::getSystem()->startSE("WIPL_SE_INFO_WINDOW");
             }
@@ -735,16 +735,16 @@ namespace ipl {
 
             set_message(msgId);
 
-            mpCurDialog->gLayout->findPane("N_Prog")->SetVisible(false);
+            mpCurDialog->gLayout->FindPaneByName("N_Prog")->SetVisible(false);
 
             if (mbIsProg) {
-                mpCurDialog->gLayout->findPane("Wait_00")->SetVisible(true);
+                mpCurDialog->gLayout->FindPaneByName("Wait_00")->SetVisible(true);
                 mpCurDialog->gLayout->getAnim(ANIM_BTN0_WAIT)->play();
 
                 snd::getSystem()->startSE("WIPL_SE_COPYING");
             }
             else {
-                mpCurDialog->gLayout->findPane("Wait_00")->SetVisible(false);
+                mpCurDialog->gLayout->FindPaneByName("Wait_00")->SetVisible(false);
                 
                 snd::getSystem()->startSE("WIPL_SE_INFO_WINDOW");
             }
@@ -982,7 +982,7 @@ namespace ipl {
         if (call(DIALOG_TYPE_BTNS2)) {
             mbSwapSound = bSwapSound;
 
-            mpCurDialog->gLayout->findPane("N_Top")->SetVisible(true);
+            mpCurDialog->gLayout->FindPaneByName("N_Top")->SetVisible(true);
 
             set_message(msgId);
             set_rbtn_text(rBtnId);
@@ -1002,7 +1002,7 @@ namespace ipl {
         if (call(DIALOG_TYPE_BTNS2)) {
             mbSwapSound = bSwapSound;
 
-            mpCurDialog->gLayout->findPane("N_Top")->SetVisible(false);
+            mpCurDialog->gLayout->FindPaneByName("N_Top")->SetVisible(false);
 
             set_rbtn_text(rBtnId);
             set_lbtn_text(lBtnId);
@@ -1029,8 +1029,8 @@ namespace ipl {
 
             set_message(msgId);
 
-            mpCurDialog->gLayout->findPane("N_Prog")->SetVisible(true);
-            mpCurDialog->gLayout->findPane("Wait_00")->SetVisible(true);
+            mpCurDialog->gLayout->FindPaneByName("N_Prog")->SetVisible(true);
+            mpCurDialog->gLayout->FindPaneByName("Wait_00")->SetVisible(true);
 
             // Play waiting icon
             mpCurDialog->gLayout->getAnim(ANIM_BTN0_WAIT)->play();
@@ -1060,8 +1060,8 @@ namespace ipl {
 
             set_text("T_Dialog", msg);
 
-            mpCurDialog->gLayout->findPane("N_Prog")->SetVisible(true);
-            mpCurDialog->gLayout->findPane("Wait_00")->SetVisible(true);
+            mpCurDialog->gLayout->FindPaneByName("N_Prog")->SetVisible(true);
+            mpCurDialog->gLayout->FindPaneByName("Wait_00")->SetVisible(true);
 
             // Play waiting icon
             mpCurDialog->gLayout->getAnim(ANIM_BTN0_WAIT)->play();

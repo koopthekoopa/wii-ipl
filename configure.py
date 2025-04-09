@@ -605,7 +605,7 @@ config.libs = [
             Object(NonMatching, "scene/button/iplUrlProcessor.cpp"),
             Object(NonMatching, "scene/button/iplLetterButton.cpp"),
             Object(NonMatching, "scene/button/iplButton.cpp"),
-            Object(NonMatching, "scene/button/iplArrow.cpp"),
+            Object(Matching,    "scene/button/iplArrow.cpp"),
         ]
     ),
     IPLSection("calendar",

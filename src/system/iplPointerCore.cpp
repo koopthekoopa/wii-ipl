@@ -24,14 +24,14 @@ namespace ipl {
             mpLayout = pointer->get_layout(mChan, mLayoutType);
 
             // Move
-            nw4r::lyt::Pane* pMovePane = mpLayout->findPane("N_Trans");
+            nw4r::lyt::Pane* pMovePane = mpLayout->FindPaneByName("N_Trans");
             pMovePane->SetTranslate(utility::get_cursor_pos(pController->getDpdProjectionPos()));
 
             // Rotation
             math::VEC2 cursorHorizon(pController->getHorizon());
             math::VEC3 cursorRotateVec(0.f, 0.f, nw4r::math::Atan2Deg(-cursorHorizon.y, cursorHorizon.x));
-            nw4r::lyt::Pane *pRotatePane = mpLayout->findPane("N_Rot");
-            nw4r::lyt::Pane* pRotateShadowPane = mpLayout->findPane("N_SRot");
+            nw4r::lyt::Pane *pRotatePane = mpLayout->FindPaneByName("N_Rot");
+            nw4r::lyt::Pane* pRotateShadowPane = mpLayout->FindPaneByName("N_SRot");
 
             pRotatePane->SetRotate(cursorRotateVec);
             pRotateShadowPane->SetRotate(cursorRotateVec);

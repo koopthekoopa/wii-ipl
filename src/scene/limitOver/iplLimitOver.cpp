@@ -187,21 +187,21 @@ namespace ipl {
 
             // Change pane textures for widescreen
             if (SCGetAspectRatio() == SC_ASPECT_RATIO_16x9) {
-                mpLayout->findPane("Picture_04")->GetMaterial()->GetTexture(&texObj[0], 0);
-                mpLayout->findPane("Picture_05")->GetMaterial()->GetTexture(&texObj[1], 0);
-                mpLayout->findPane("Picture_06")->GetMaterial()->GetTexture(&texObj[2], 0);
+                mpLayout->FindPaneByName("Picture_04")->GetMaterial()->GetTexture(&texObj[0], 0);
+                mpLayout->FindPaneByName("Picture_05")->GetMaterial()->GetTexture(&texObj[1], 0);
+                mpLayout->FindPaneByName("Picture_06")->GetMaterial()->GetTexture(&texObj[2], 0);
 
                 for (int i = 0; i < (int)ARRSIZE(wide_pane_names); i++) {
                     for (int j = 0; j < (int)ARRSIZE(wide_pane_names[0]); j++) {
-                        mpLayout->findPane(wide_pane_names[i][j])->GetMaterial()->SetTexture(0, texObj[i]);
+                        mpLayout->FindPaneByName(wide_pane_names[i][j])->GetMaterial()->SetTexture(0, texObj[i]);
                     }
                 }
             }
 
             // Make all of the panes invisible
             for (int i = 0; i < ARRSIZE(lo_pane_name); i++) {
-                nw4r::lyt::Pane* pTextPane = mpLayout->findPane(lo_pane_name[i]);
-                nw4r::lyt::Pane* pPushPane = mpLayout->findPane(lopush_pane_name[i]);
+                nw4r::lyt::Pane* pTextPane = mpLayout->FindPaneByName(lo_pane_name[i]);
+                nw4r::lyt::Pane* pPushPane = mpLayout->FindPaneByName(lopush_pane_name[i]);
 
                 pTextPane->SetVisible(false);
                 pPushPane->SetVisible(false);
@@ -209,8 +209,8 @@ namespace ipl {
 
             // Make the necessary panes visible
             u32 country = getCountryIndex_();
-            mpTextPane = mpLayout->findPane(lo_pane_name[country]);
-            mpPushPane = mpLayout->findPane(lopush_pane_name[country]);
+            mpTextPane = mpLayout->FindPaneByName(lo_pane_name[country]);
+            mpPushPane = mpLayout->FindPaneByName(lopush_pane_name[country]);
 
             mpTextPane->SetVisible(true);
 

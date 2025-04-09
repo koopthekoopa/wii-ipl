@@ -5,7 +5,7 @@
 #include <revolution/sc.h>
 
 #include <cwchar>
-#pragma sym on
+
 namespace ipl {
     namespace scene {
         TextBalloon::TextBalloon(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* directory, const char* fileName, const math::VEC3& unk2, f32 unk3, f32 unk4) :
@@ -22,9 +22,9 @@ namespace ipl {
             mpLayout->bind("my_IplTopBalloon_a_BalloonInOut.brlan");
             mpLayout->finishBinding();
 
-            mpLayout->findPane("N_Balloon")->SetVisible(false);
+            mpLayout->FindPaneByName("N_Balloon")->SetVisible(false);
 
-            nw4r::lyt::TextBox* textBox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpLayout->findPane("T_Balloon"));
+            nw4r::lyt::TextBox* textBox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpLayout->FindPaneByName("T_Balloon"));
             textBox->SetString(L"");
         }
 
@@ -66,7 +66,7 @@ namespace ipl {
             set_textbox(L" ");
             mpText = NULL;
 
-            nw4r::lyt::Pane* balloonPane = mpLayout->findPane("N_Balloon");
+            nw4r::lyt::Pane* balloonPane = mpLayout->FindPaneByName("N_Balloon");
 
             unk_0x38 = 0;
 
@@ -82,7 +82,7 @@ namespace ipl {
 
         void TextBalloon::fadein() {
             if (mpText != NULL) {
-                mpLayout->findPane("N_Balloon")->SetVisible(false);
+                mpLayout->FindPaneByName("N_Balloon")->SetVisible(false);
 
                 unk_0x38 = 0;
                 unk_0x08 = TRUE;
@@ -163,7 +163,7 @@ namespace ipl {
         }
 
         void TextBalloon::anm_fadein() {
-            mpLayout->findPane("N_Balloon")->SetVisible(true);
+            mpLayout->FindPaneByName("N_Balloon")->SetVisible(true);
             mpLayout->setAnmType(ANIM_TYPE_FORWARD);
             mpLayout->start();
         }
@@ -177,7 +177,7 @@ namespace ipl {
                 temp0 = unk_0x34;
             }
 
-            nw4r::lyt::Pane* balloonPane = mpLayout->findPane("N_Balloon");
+            nw4r::lyt::Pane* balloonPane = mpLayout->FindPaneByName("N_Balloon");
 
             f32 temp1 = 0.0f;
 
@@ -245,7 +245,7 @@ namespace ipl {
             }
             wcsncpy(fullStr, text, 32);
 
-            nw4r::lyt::TextBox* textPane = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpLayout->findPane("T_Balloon"));
+            nw4r::lyt::TextBox* textPane = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpLayout->FindPaneByName("T_Balloon"));
 
             if (!bNoLimit) {
                 f32 temp1 = 0.0f;
@@ -255,7 +255,7 @@ namespace ipl {
                     textPane->SetString(fullStr, 0, i + extraLen);
                     textPane->CalculateMtx(*mpLayout->getDrawInfo());
 
-                    nw4r::ut::Rect textRect = textPane->GetTextDrawRect(*mpLayout->getDrawInfo());
+                    nw4r::ut::Rect textRect = mpLayout->getTextDrawRect(textPane);
                     if (textRect.GetWidth() <= temp1 + 391.5f && i <= 20) {
                         break;
                     }
@@ -287,17 +287,11 @@ namespace ipl {
 
             f32 temp1 = proj16x9.GetWidth() / proj4x3.GetWidth();
 
-            switch (SCGetAspectRatio()) {
-                case SC_ASPECT_RATIO_16x9: {
-                    temp1 = 1.0f;
-                    break;
-                }
-                default: {
-                    break;
-                }
+            if (SCGetAspectRatio() == SC_ASPECT_RATIO_16x9) {
+                temp1 = 1.0f;
             }
 
-            nw4r::ut::Rect textRect  = textPane->GetTextDrawRect(*mpLayout->getDrawInfo());
+            nw4r::ut::Rect textRect  = mpLayout->getTextDrawRect(textPane);
             const nw4r::lyt::Size* baseSize = get_size("W_Base");
 
             nw4r::lyt::Size newSize(textRect.GetWidth() + 40.0f, baseSize->height);
@@ -311,11 +305,11 @@ namespace ipl {
         }
 
         void TextBalloon::set_size(const char* paneName, const nw4r::lyt::Size& size) {
-            mpLayout->findPane(paneName)->SetSize(size);
+            mpLayout->FindPaneByName(paneName)->SetSize(size);
         }
 
         const nw4r::lyt::Size* TextBalloon::get_size(const char* paneName) {
-            const nw4r::lyt::Size& size = mpLayout->findPane(paneName)->GetSize();
+            const nw4r::lyt::Size& size = mpLayout->FindPaneByName(paneName)->GetSize();
             return &size;
         }
     }

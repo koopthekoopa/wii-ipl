@@ -1,4 +1,4 @@
-#include "scene/sdChannelButton/iplSDMenuButton.h"
+#include "scene/button/iplButton.h"
 
 #include "layout/iplGuiManager.h"
 
@@ -47,10 +47,10 @@ namespace ipl {
             mpGui = new gui::PaneManager(NULL, mpLayout->getDrawInfo(), NULL, NULL);
             mpGui->createLayoutScene(*mpLayout->getLayout());
             mpGui->setAllComponentTriggerTarget(false);
-            mpGui->setTriggerTarget(mpLayout->findPane(scBtnName[0]), true);
+            mpGui->setTriggerTarget(mpLayout->FindPaneByName(scBtnName[0]), true);
 
-            mpLayout->findPane("N_Btn_On")->SetVisible(false);
-            set_pane_visible_0(mpLayout->findPane("N_Btn_Off"));
+            mpLayout->FindPaneByName("N_Btn_On")->SetVisible(false);
+            set_pane_visible_0(mpLayout->FindPaneByName("N_Btn_Off"));
 
             nw4r::math::VEC3 newPos(SCGetAspectRatio() == SC_ASPECT_RATIO_16x9 ? -245.0f : 152.0f,
                                     -172.0f,
@@ -230,7 +230,7 @@ namespace ipl {
                     mbHovered[i] = FALSE;
                     mpLayout->getAnim(ANIM_BTN_ROLL_OUT)->play();
                 }
-                mpGui->initPane(mpLayout->findPane(scBtnName[i]));
+                mpGui->initPane(mpLayout->FindPaneByName(scBtnName[i]));
             }
         }
 
@@ -241,12 +241,12 @@ namespace ipl {
 
         void SDMenuButton::toggle_insert(BOOL bInserted) {
             if (bInserted) {
-                set_pane_visible_2(mpLayout->findPane("N_Btn_On"));
-                mpLayout->findPane("N_Btn_Off")->SetVisible(false);
+                set_pane_visible_2(mpLayout->FindPaneByName("N_Btn_On"));
+                mpLayout->FindPaneByName("N_Btn_Off")->SetVisible(false);
             }
             else {
-                mpLayout->findPane("N_Btn_On")->SetVisible(false);
-                set_pane_visible_1(mpLayout->findPane("N_Btn_Off"));
+                mpLayout->FindPaneByName("N_Btn_On")->SetVisible(false);
+                set_pane_visible_1(mpLayout->FindPaneByName("N_Btn_Off"));
 
                 // Force stop the insert animation.
                 if (mpLayout->isPlaying(ANIM_BTN_INSERT)) {
@@ -258,7 +258,7 @@ namespace ipl {
 
         void SDMenuButton::fn_813EB464(int unk0, const char* unk1) {
             if (unk0 < 0) {
-                nw4r::lyt::Pane* pane = mpLayout->findPane(unk1);
+                nw4r::lyt::Pane* pane = mpLayout->FindPaneByName(unk1);
                 math::VEC3 pos(0.0f, 0.0f, 0.0f);
 
                 PSMTXMultVec(pane->GetGlobalMtx(), (Vec*)&pos, (Vec*)&pos);

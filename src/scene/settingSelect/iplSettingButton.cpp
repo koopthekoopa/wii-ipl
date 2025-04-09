@@ -58,7 +58,7 @@ namespace ipl {
             mpGui = new gui::PaneManager(this, mpLayout->getDrawInfo(), NULL, NULL, true);
             mpGui->createLayoutScene(*mpLayout->getLayout());
             mpGui->setAllComponentTriggerTarget(false);
-            mpGui->setTriggerTarget(mpLayout->findPane("B_Button_00"), true);
+            mpGui->setTriggerTarget(mpLayout->FindPaneByName("B_Button_00"), true);
 
             setText(MESG_SETTING_BTN_BACK);
 
@@ -233,7 +233,7 @@ namespace ipl {
         }
 
         void SettingButton::setText(u32 msgId) {
-            nw4r::lyt::Pane* pane = mpLayout->findPane("T_Button_00");
+            nw4r::lyt::Pane* pane = mpLayout->FindPaneByName("T_Button_00");
             nw4r::lyt::TextBox* textBox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(pane);
             textBox->SetString(System::getMessage(msgId));
         }

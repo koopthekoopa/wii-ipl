@@ -63,9 +63,9 @@ namespace ipl {
 
         // Update the scrolling cursor
         if (mIsScrolling >= POINT_SCROLLING) {
-            nw4r::lyt::Pane* pRootPane   = mpLayout[LYT_SCROLLER_ID]->findPane("N_BArw");
-            nw4r::lyt::Pane* pLengthPane = mpLayout[LYT_SCROLLER_ID]->findPane("W_BArw");
-            nw4r::lyt::Pane* pOriginPane = mpLayout[LYT_SCROLLER_ID]->findPane("BArwBase");
+            nw4r::lyt::Pane* pRootPane   = mpLayout[LYT_SCROLLER_ID]->FindPaneByName("N_BArw");
+            nw4r::lyt::Pane* pLengthPane = mpLayout[LYT_SCROLLER_ID]->FindPaneByName("W_BArw");
+            nw4r::lyt::Pane* pOriginPane = mpLayout[LYT_SCROLLER_ID]->FindPaneByName("BArwBase");
 
             // Arrow Position
             pRootPane->SetTranslate(mOriginPos);

@@ -326,7 +326,7 @@ namespace ipl {
 
                 // This changes the ordering of the auto generated nw4r::ut::DynamicCast weaks
                 inline void setString(const char *findName, const wchar_t* text) { 
-                    nw4r::lyt::TextBox* pane = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(gLayout->findPane(findName));
+                    nw4r::lyt::TextBox* pane = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(gLayout->FindPaneByName(findName));
                     pane->SetString(text);
                 }
             };

@@ -130,18 +130,20 @@ namespace ipl {
                 static Object*          create(EGG::Heap* heap, u32 unk0, void* buffer, const char* directory, const char* fileName);
 
                 /** @brief Gets the layout object. */
-                nw4r::lyt::Layout*      getLayout()                     { return &mLayout; }
+                nw4r::lyt::Layout*      getLayout()                                     { return &mLayout; }
                 /** @brief Gets the draw info object. */
-                nw4r::lyt::DrawInfo*    getDrawInfo()                   { return &mDrawInfo; }
+                nw4r::lyt::DrawInfo*    getDrawInfo()                                   { return &mDrawInfo; }
                 /** @brief Prepare the camera for the layout.. */
-                static void             setCamera()                     { utility::Graphics::setDefaultOrtho(); }
+                static void             setCamera()                                     { utility::Graphics::setDefaultOrtho(); }
                 /** @brief Calculate the Layout matrix for rendering. */
-                void                    calcMtx()                       { getLayout()->CalculateMtx(mDrawInfo); }
+                void                    calcMtx()                                       { getLayout()->CalculateMtx(mDrawInfo); }
                 /** @brief Gets the root pane of the layout. */
-                nw4r::lyt::Pane*        getRoot()                       { return getLayout()->GetRootPane(); }
-                nw4r::lyt::Pane*        findPane(const char *findName)  { return getRoot()->FindPaneByName(findName); }
+                nw4r::lyt::Pane*        getRoot()                                       { return getLayout()->GetRootPane(); }
+                nw4r::lyt::Pane*        FindPaneByName(const char *findName)            { return getRoot()->FindPaneByName(findName); }
 
-                Animator*               getAnim(int idx = 0)            { return static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, idx)); }
+                nw4r::ut::Rect          getTextDrawRect(nw4r::lyt::TextBox* textBox)    { return textBox->GetTextDrawRect(mDrawInfo); }
+
+                Animator*               getAnim(int idx = 0)                            { return static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, idx)); }
             private:
                 void                    init_(const char* fileName);
 

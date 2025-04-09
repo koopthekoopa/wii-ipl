@@ -522,14 +522,14 @@ src/scene/button/iplButton.cpp:
 
 src/scene/button/iplArrow.cpp:
 	.text       start:0x8139CD48 end:0x8139CE9C
-	.data       start:0x8167CBD8 end:0x8167CBD8
+	.data       start:0x8167CBD8 end:0x8167CC28
 
 src/scene/calendar/iplCalendar.cpp:
 	.bss        start:0x810B7300 end:0x810B7318
 	.text       start:0x8139CE9C end:0x8139EBB8
 	.ctors      start:0x816363E0 end:0x816363E4
 	.rodata     start:0x81638BE0 end:0x81638DA0
-	.data       start:0x8167CBD8 end:0x8167CF00
+	.data       start:0x8167CC28 end:0x8167CF00
 	.sdata2     start:0x816C3FD8 end:0x816C3FE8
 	.sdata      start:0x816C5EC0 end:0x816C5ED8
 
