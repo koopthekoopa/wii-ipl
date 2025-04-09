@@ -2,6 +2,7 @@
 #define NW4R_UT_FONT_H
 
 #include <revolution/types.h>
+#include <revolution/gx/GXEnum.h>
 
 #include <nw4r/ut/fontResourceFormat.h>
 
@@ -66,5 +67,3 @@ namespace nw4r {
 }
 
 #endif // NW4R_UT_CHAR_STREAM_READER_H
-
-

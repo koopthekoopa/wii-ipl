@@ -11,7 +11,11 @@ typedef unsigned short wchar_t;
 extern "C" {
 #endif
 
-wchar_t* wmemset(wchar_t* dest, wchar_t ch, size_t count);
+wchar_t*    wmemset(wchar_t* dest, wchar_t ch, size_t count);
+
+size_t      wcslen(const wchar_t *str);
+
+wchar_t*    wcsncpy(wchar_t* dest, const wchar_t* src, size_t count);
 
 #ifdef __cplusplus
 }

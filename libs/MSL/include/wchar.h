@@ -7,6 +7,10 @@
 
 namespace std {
     using   ::wmemset;
+
+    using   ::wcslen;
+
+    using   ::wcsncpy;
 } // namespace std
 
 #endif

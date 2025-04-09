@@ -542,7 +542,7 @@ namespace ipl {
                     }
                     else {
                         if (mpPages[mPrevPage].isLytAnim) {
-                            mpPages[mPrevPage].layoutObj->getAnim(0)->init();
+                            mpPages[mPrevPage].layoutObj->getAnim()->init();
                         }
                         set_alpha(pPane, 255);
                     }
@@ -1240,7 +1240,7 @@ namespace ipl {
             // Change page
             if (mPageCount > 0) {
                 if (mpPages[mPrevPage].isLytAnim && mpPages[mPrevPage].layoutObj) {
-                    mpPages[mPrevPage].layoutObj->getAnim(0)->stop();
+                    mpPages[mPrevPage].layoutObj->getAnim()->stop();
                 }
 
                 if (mCurPage < 0 || mCurPage == mPageCount) {

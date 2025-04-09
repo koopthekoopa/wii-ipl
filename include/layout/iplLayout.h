@@ -141,7 +141,7 @@ namespace ipl {
                 nw4r::lyt::Pane*        getRoot()                       { return getLayout()->GetRootPane(); }
                 nw4r::lyt::Pane*        findPane(const char *findName)  { return getRoot()->FindPaneByName(findName); }
 
-                Animator*               getAnim(int idx)                { return static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, idx)); }
+                Animator*               getAnim(int idx = 0)            { return static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, idx)); }
             private:
                 void                    init_(const char* fileName);
 

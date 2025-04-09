@@ -27,11 +27,9 @@ namespace nw4r {
             return x;
         }
         
-        f32 FrSqrt(register f32 x);
-        u32 CntBit1(register u32 x);
+        f32 FrSqrt(f32 x);
+        u32 CntBit1(u32 x);
     }
 }
 
 #endif // NW4R_MATH_ARITHMETIC_H
-
-
