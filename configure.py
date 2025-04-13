@@ -604,7 +604,7 @@ config.libs = [
         [
             Object(NonMatching, "scene/button/iplUrlProcessor.cpp"),
             Object(NonMatching, "scene/button/iplLetterButton.cpp"),
-            Object(NonMatching, "scene/button/iplButton.cpp"),
+            Object(Equivalent,  "scene/button/iplButton.cpp"),
             Object(Matching,    "scene/button/iplArrow.cpp"),
         ]
     ),

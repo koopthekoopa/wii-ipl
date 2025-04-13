@@ -1,6 +1,14 @@
 #ifndef IPL_MESSAGE_ENTRIES_H
 #define IPL_MESSAGE_ENTRIES_H
 
+/* Button */
+
+#define MESG_BUTTON_SETTING             14
+#define MESG_BUTTON_BBS_BOARD           15
+#define MESG_BUTTON_CH_SEL              16
+#define MESG_BUTTON_CALENDAR            17
+#define MESG_BUTTON_CREATE              18
+
 /* Play Time Log */
 
 #define MESG_PLAYTIME_TITLE             132
@@ -21,7 +29,7 @@
 #define MESG_ADDRESS_WII_ID             66
 #define MESG_ADDRESS_CHOOSE             78
 
-/* Friend List Cache (awaiting friends?) */
+/* Friend List Cache (awaiting friends by email) */
 
 #define MESG_FRIEND_CACHE_EMAIL_TITLE   385
 #define MESG_FRIEND_CACHE_EMAIL_BODY    386

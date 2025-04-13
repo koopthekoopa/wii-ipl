@@ -4,18 +4,17 @@
 
 namespace ipl {
     namespace scene {
-        enum {
-            ANIM_ON_LOOP,
-            ANIM_BTN_IN,
-            ANIM_BTN_OUT,
-            ANIM_BTN_INSERT,
-            ANIM_BTN_SELECT,
-            ANIM_BTN_ROLL_OVER,
-            ANIM_BTN_ROLL_OUT,
-        };
-
         static const char* scBtnName[] = {
             "Ac",
+        };
+
+        static const u32 scBalloonMsg[] = {
+            161,
+        };
+
+        static const f32 scBtnPos[] = {
+            -152.0f,
+            -245.0f
         };
 
         /* TODO: get rid of this absolutely disgusting fakematching. */
@@ -52,20 +51,24 @@ namespace ipl {
             mpLayout->FindPaneByName("N_Btn_On")->SetVisible(false);
             set_pane_visible_0(mpLayout->FindPaneByName("N_Btn_Off"));
 
-            nw4r::math::VEC3 newPos(SCGetAspectRatio() == SC_ASPECT_RATIO_16x9 ? -245.0f : 152.0f,
+            nw4r::math::VEC3 newPos(SCGetAspectRatio() == SC_ASPECT_RATIO_16x9 ? scBtnPos[SC_ASPECT_RATIO_16x9] : scBtnPos[SC_ASPECT_RATIO_4x3],
                                     -172.0f,
                                     -172.0f);
             mpLayout->getRoot()->SetTranslate(newPos);
 
-            mpBalloon = new TextBalloon(heap, balloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 200.0f, 110.0f);
-            mpBalloon->init(System::getMessage(161), 0);
-            mpBalloon->set_textbox(mpBalloon->get_text());
+            for (int i = 0; i < BTN_MAX; i++) {
+                mpBalloons[i] = new TextBalloon(heap, balloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 200.0f, 110.0f);
+                mpBalloons[i]->init(System::getMessage(scBalloonMsg[i]), 0);
+                mpBalloons[i]->init_textbox();
+            }
         }
 
         void SDMenuButton::calc() {
             mpLayout->calc();
             mpGui->calc();
-            mpBalloon->calc();
+            for (int i = 0; i < BTN_MAX; i++) {
+                mpBalloons[i]->calc();
+            }
         }
 
         void SDMenuButton::draw() {
@@ -74,7 +77,9 @@ namespace ipl {
 
         void SDMenuButton::drawBalloon() {
             utility::Graphics::setOrtho();
-            mpBalloon->draw();
+            for (int i = 0; i < BTN_MAX; i++) {
+                mpBalloons[i]->draw();
+            }
         }
 
         void SDMenuButton::update() {
@@ -91,7 +96,7 @@ namespace ipl {
         }
 
         void SDMenuButton::startPointEvent(const char* paneName, controller::Interface* con) {
-            int btnNo = get_button_no(paneName);
+            int btnNo = getButtonNo(paneName);
             if (btnNo != -1 && mbEnabled) {
                 if (!mbHovered[btnNo]) {
                     layout::Animator* anim = NULL;
@@ -111,7 +116,7 @@ namespace ipl {
                         anim->play();
                     }
 
-                    fn_813EB464(btnNo, paneName);
+                    show_balloon(btnNo, paneName);
                     snd::getSystem()->startSE("WIPL_SE_BT_TARGETTING");
                     if (con) {
                         con->rumble();
@@ -125,7 +130,7 @@ namespace ipl {
         }
 
         void SDMenuButton::startLeftEvent(const char* paneName) {
-            int btnNo = get_button_no(paneName);
+            int btnNo = getButtonNo(paneName);
             if (btnNo != -1 && mbEnabled) {
                 layout::Animator* anim = NULL;
                 if (mbHovered[btnNo] == TRUE) {
@@ -140,7 +145,7 @@ namespace ipl {
                     }
 
                     if (btnNo < BTN_MAX) {
-                        mpBalloon->fadeoutForce();
+                        mpBalloons[btnNo]->fadeoutForce();
                     }
                 }
 
@@ -160,10 +165,10 @@ namespace ipl {
             mpGui->setEventHandler(event);
         }
 
-        void SDMenuButton::fn_813EB040(int unk) {
+        void SDMenuButton::animation(int animId) {
             layout::Animator* anim = NULL;
             bool backwards = false;
-            switch (unk) {
+            switch (animId) {
                 case 1: {
                     anim = mpLayout->getAnim(ANIM_BTN_OUT);
                     backwards = true;
@@ -172,7 +177,7 @@ namespace ipl {
                     break;
                 }
                 case 2: {
-                    mpBalloon->fadeoutForce();
+                    mpBalloons[BTN_SD_CARD]->fadeoutForce();
                     initGui();
                     if (mpLayout->isPlaying(ANIM_BTN_OUT)) {
                         f32 frame = mpLayout->getAnim(ANIM_BTN_OUT)->getCurrentFrame();
@@ -180,7 +185,7 @@ namespace ipl {
 
                         if (frame > 0.0f) {
                             anim = mpLayout->getAnim(ANIM_BTN_OUT);
-                            anim->setMinFrame(frame);
+                            anim->setMinFrame(static_cast<u32>(frame));
                             anim->setMaxFrame(15.0f);
                         }
                     }
@@ -213,11 +218,12 @@ namespace ipl {
             }
         }
 
-        int SDMenuButton::get_button_no(const char* paneName) {
+        int SDMenuButton::getButtonNo(const char* paneName) {
             int num = -1;
             for (int i = 0; i < BTN_MAX; i++) {
                 if (strcmp(paneName, scBtnName[i]) == 0) {
                     num = i;
+                    break;
                 }
             }
             return num;
@@ -235,7 +241,9 @@ namespace ipl {
         }
 
         void SDMenuButton::disableBtn() {
-            mpBalloon->fadeoutForce();
+            for (int i = 0; i < BTN_MAX; i++) {
+                mpBalloons[i]->fadeoutForce();
+            }
             mbEnabled = false;
         }
 
@@ -256,42 +264,39 @@ namespace ipl {
             }
         }
 
-        void SDMenuButton::fn_813EB464(int unk0, const char* unk1) {
-            if (unk0 < 0) {
-                nw4r::lyt::Pane* pane = mpLayout->FindPaneByName(unk1);
+        void SDMenuButton::show_balloon(int balloonId, const char* targetPaneName) {
+            if (balloonId < BTN_MAX) {
+                nw4r::lyt::Pane* pane = mpLayout->FindPaneByName(targetPaneName);
                 math::VEC3 pos(0.0f, 0.0f, 0.0f);
 
-                PSMTXMultVec(pane->GetGlobalMtx(), (Vec*)&pos, (Vec*)&pos);
+                math::VEC3Transform(&pos, &pane->GetGlobalMtx(), &pos);
                 pos.y += 50.0f;
 
-                mpBalloon->setPos(pos, true, 0);
-                mpBalloon->fadeinNoSetTextbox();
+                mpBalloons[balloonId]->setPos(pos, true, 0);
+                mpBalloons[balloonId]->fadeinNoSetTextbox();
             }
         }
 
-        void SDMenuSelEventHandler::onEvent(u32 compId, u32 event, void* data) {
+        void SDMenuEventHandlerBase::onEvent(u32 compId, u32 event, void* data) {
             gui::PaneComponent* component = static_cast<gui::PaneComponent*>(mpManager->getComponent(compId));
-            nw4r::lyt::Pane* compPane = component->getPane();
+            const char* paneName = component->getPane()->GetName();
 
-            controller::Interface* con = static_cast<controller::Interface*>(data);
-            Button* button = static_cast<Button*>(System::getSceneManager()->getScene(SCENE_BUTTON));
-
-            SDMenuButton* sdMenuButton = button->getSdMenuButton();
+            SDMenuButton* sdMenuButton = static_cast<Button*>(System::getSceneManager()->getScene(SCENE_BUTTON))->get_sd_menu_btn();
 
             switch (event) {
                 case ON_POINT: {
-                    sdMenuButton->startPointEvent(compPane->GetName(), con);
+                    sdMenuButton->startPointEvent(paneName, static_cast<controller::Interface*>(data));
                     break;
                 }
                 case ON_LEFT: {
-                    sdMenuButton->startLeftEvent(compPane->GetName());
+                    sdMenuButton->startLeftEvent(paneName);
                     break;
                 }
             }
 
-            onEventDerived(compId, event, con);
+            onEventDerived(compId, event, static_cast<controller::Interface*>(data));
         }
 
-        void SDMenuSelEventHandler::onEventDerived(u32 compId, u32 event, const controller::Interface* con) {}
+        void SDMenuEventHandlerBase::onEventDerived(u32 compId, u32 event, const controller::Interface* con) {}
     }
 }

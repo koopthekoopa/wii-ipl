@@ -587,8 +587,9 @@ namespace ipl {
         }
     }
 
-    void DialogWindow::set_text(const char* pane, const wchar_t* text) {
-        mpCurDialog->setString(pane, text);
+    void DialogWindow::set_text(const char* findName, const wchar_t* text) {
+        nw4r::lyt::TextBox* pane = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpCurDialog->gLayout->FindPaneByName(findName));
+        pane->SetString(text);
     }
 
     void DialogWindow::set_message(u32 id) {

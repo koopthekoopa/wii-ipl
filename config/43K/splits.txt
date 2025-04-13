@@ -510,14 +510,14 @@ src/scene/button/iplLetterButton.cpp:
 	.text       start:0x81395F54 end:0x8139AEC0
 	.rodata     start:0x815E82C8 end:0x815E8378
 	.data       start:0x81620590 end:0x81620E08
-	.sdata2     start:0x81668ED8 end:0x81668F10
+	.sdata2     start:0x81668ED8 end:0x81668F08
 	.sdata      start:0x8166AC70 end:0x8166AD20
 
 src/scene/button/iplButton.cpp:
 	.text       start:0x8139AEC0 end:0x8139CD9C
 	.rodata     start:0x815E8378 end:0x815E85A0
 	.data       start:0x81620E08 end:0x816211C0
-	.sdata2     start:0x81668F10 end:0x81668F40
+	.sdata2     start:0x81668F08 end:0x81668F40
 	.sdata      start:0x8166AD20 end:0x8166ADE0
 
 src/scene/button/iplArrow.cpp:

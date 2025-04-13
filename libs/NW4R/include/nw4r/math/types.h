@@ -36,20 +36,16 @@ namespace nw4r {
         };
 
         typedef struct MTX34 : public _MTX34 {
-            typedef const f32 (*ConstMtxPtr)[4];
-
             MTX34() {}
 
             MTX34(const f32*);
             MTX34(const Mtx &rhs);
 
             operator f32*()                 { return &_00; }
-
             operator const f32*() const     { return &_00; }
 
             operator MtxPtr()               { return (MtxPtr)&_00; }
-
-            operator ConstMtxPtr() const    { return (ConstMtxPtr)&_00; }
+            operator const MtxPtr() const   { return (const MtxPtr)&_00; }
         } MTX34;
 
         struct _MTX44 {
@@ -97,7 +93,8 @@ namespace nw4r {
             VEC3(const f32* pF)             { x = pF[0]; y = pF[1]; z = pF[2]; }
             VEC3(f32 fx, f32 fy, f32 fz)    { x = fx; y = fy; z = fz; }
 
-            operator Vec*()                 { return (Vec*)this; }
+            operator Vec*()             { return reinterpret_cast<Vec*>(this); }
+            operator const Vec*() const { return reinterpret_cast<const Vec*>(this); }
 
             VEC3& operator+=(const VEC3& rhs);
         } VEC3;
@@ -116,6 +113,10 @@ namespace nw4r {
             VEC4(f32 fx, f32 fy, f32 fz, f32 fw)    { x = fx; y = fy; z = fz; w = fw; }
         } VEC4;
 
+        inline VEC3* VEC3Transform(VEC3* pOut, const MTX34* pMtx, const VEC3* pVec) {
+            PSMTXMultVec(*pMtx, *pVec, *pOut);
+            return pOut;
+        }
         VEC4* VEC4Transform(VEC4* pOut, const MTX44* pM, const VEC4* pV);
     }
 }

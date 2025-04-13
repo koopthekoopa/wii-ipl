@@ -9,7 +9,7 @@ namespace ipl {
                 layout::Object::setCamera();
 
                 for (int i = 0; i < Button::ARROW_BTN_MAX; i++) {
-                    layout::Object* arrowLayout = button->get_arrow_layout();
+                    layout::Object* arrowLayout = button->get_layout();
                     nw4r::lyt::Pane* pane = arrowLayout->FindPaneByName(Button::mscArrowBtnName[i]);
                     
                     pane->SetVisible(true);
@@ -19,15 +19,13 @@ namespace ipl {
 
                 button->drawBalloon();
                 if (!System::isSafeMode()) {
-                    SDMenuButton* sdMenuButton = button->getSdMenuButton();
-                    sdMenuButton->drawBalloon();
+                    button->get_sd_menu_btn()->drawBalloon();
                 }
             }
         }
 
+        // TODO!!: fix weak ordering!!
         void Base::calc() {}
         void Base::create() {}
-
-        Arrow::~Arrow() {}
     }
 }

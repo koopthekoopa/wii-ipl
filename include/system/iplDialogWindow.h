@@ -323,12 +323,6 @@ namespace ipl {
             struct Interface {
                 layout::Object*     gLayout;    // 0x00
                 gui::PaneManager*   guiMgr;     // 0x04
-
-                // This changes the ordering of the auto generated nw4r::ut::DynamicCast weaks
-                inline void setString(const char *findName, const wchar_t* text) { 
-                    nw4r::lyt::TextBox* pane = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(gLayout->FindPaneByName(findName));
-                    pane->SetString(text);
-                }
             };
 
             BOOL call(int type);
@@ -342,7 +336,7 @@ namespace ipl {
             void stt_pagefade();
             void stt_prepare_pagefade();
 
-            void set_text(const char* pane, const wchar_t* text);
+            void set_text(const char* findName, const wchar_t* text);
             void set_title(const wchar_t* text);
             void set_message(u32 id);
 

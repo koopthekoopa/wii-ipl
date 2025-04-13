@@ -7,42 +7,46 @@
 
 namespace ipl {
     namespace utility {
-        template<typename T, int count> class Queue {
+        template<typename T, int c> class Queue {
             public:
-                inline Queue<T, count>() :
-                mCount(count),
-                mCurIdx(0),
-                mPopped(0), mPushed(0) {}
+                inline Queue<T, c>() :
+                count(c),
+                current(0),
+                popped(0), pushed(0) {}
+
+                inline BOOL push(const T& item) {
+                    if (count == current) { return FALSE; }
+                    items[pushed] = item;
+                    if (++pushed >= count) { pushed = 0; } current++;
+                    return TRUE;
+                }
 
                 inline BOOL pop() {
                     BOOL result = TRUE;
-                    if (!mCurIdx) { result = FALSE; goto done; }
-                    if (++mPopped >= mCount) { mPopped = 0; } mCurIdx--;
+                    if (current == 0) { result = FALSE; goto done; }
+                    if (++popped >= count) { popped = 0; } current--;
                 done:
                     return result;
                 }
 
-                inline BOOL push(const T& item) {
-                    if (!mCurIdx) { return FALSE; }
-                    mItems[mPushed] = item;
-                    if (++mPushed >= mCount) { mPushed = 0; } mCurIdx++;
-                    return TRUE;
-                }
+                inline int  get_current_index() { return current; }
+                inline T&   get_current_item()  { return items[get_current_index()]; }
 
-                inline int  get_current_index() { return mCurIdx; }
-                inline T&   get_current_item()  { return mItems[get_current_index()]; }
+                inline int  get_popped_index()  { return popped; }
+                inline T&   get_popped_item()   { return items[get_popped_index()]; }
 
-                inline int  get_popped_index()  { return mPopped; }
-                inline T&   get_popped_item()   { return mItems[get_popped_index()]; }
+                inline void next_popped_item()  { popped++; }
+                inline void no_popped_item()    { popped = 0; }
 
-                inline int  get_pushed_index()  { return mPushed; }
-                inline T&   get_pushed_item()   { return mItems[get_pushed_index()]; }
-            private:
-                T   mItems[count];          // 0x00
-                int mCount;                 // (sizeof(mItems) * count) + 0x00
+                inline int  get_pushed_index()  { return pushed; }
+                inline T&   get_pushed_item()   { return items[get_pushed_index()]; }
+
+                T   items[c];       // 0x00
+            public:
+                int count;          // (sizeof(items) * count) + 0x00
                 
-                int mCurIdx;                // (sizeof(mItems) * count) + 0x04
-                int mPopped, mPushed;       // (sizeof(mItems) * count) + 0x08
+                int current;        // (sizeof(items) * count) + 0x04
+                int popped, pushed; // (sizeof(items) * count) + 0x08
         };
     }
 }

@@ -17,7 +17,7 @@
 // #define ENABLE_DSP_REPORT
 
 /** @brief Load IPL content by loading the System Menu TMD manually. */
-//#define STAND_ALONE_BUILD
+// #define STAND_ALONE_BUILD
 
 /* Build options (set by the version being used) */
 

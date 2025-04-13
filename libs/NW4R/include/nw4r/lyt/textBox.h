@@ -30,6 +30,10 @@ namespace nw4r {
                     mTextColor[i] = color;
                 }
 
+                const Size& GetFontSize() const {
+                    return mFontSize;
+                }
+
                 void SetFontSize(const Size& fontSize) {
                     mFontSize = fontSize;
                 }
@@ -37,11 +41,11 @@ namespace nw4r {
                 ut::Rect    GetTextDrawRect(const DrawInfo& drawInfo) const;
 
             private:
-                wchar_t*    mTextBuf;                   // 0xD8
-                ut::Color   mTextColor[TEXT_COLOR_MAX]; // 0xDC
+                wchar_t*    mTextBuf;                   // 0xD4
+                ut::Color   mTextColor[TEXT_COLOR_MAX]; // 0xD8
 
-                ut::Font*   mpFont;                     // 0xE4
-                Size        mFontSize;                  // 0xE8
+                ut::Font*   mpFont;                     // 0xE0
+                Size        mFontSize;                  // 0xE4
         };
     }
 }

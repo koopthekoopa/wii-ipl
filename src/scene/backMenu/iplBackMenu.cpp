@@ -110,7 +110,7 @@ namespace ipl {
             }
         }
 
-        // TODO: fix this
+        // TODO!!: fix weak ordering!!
         void FaderSceneBase::calcCommonAfter() {}
         void FaderSceneBase::initCalcNormal() {}
     }

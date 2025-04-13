@@ -16,8 +16,8 @@
 
 #define SCENE_USING_GUI     namespace ipl { USING_GUI }
 
-#define SCENE_CLASS(x)      class x : public ipl::scene::Base
-#define SCENE_GUI_CLASS(x)  SCENE_CLASS(x), public ::gui::EventHandler
+#define SCENE_CLASS(x)      class x : public scene::Base
+#define SCENE_GUI_CLASS(x)  class x : public scene::Base, public ::gui::EventHandler
 
 namespace ipl {
     namespace scene {
@@ -38,7 +38,7 @@ namespace ipl {
                 virtual BOOL    isResetProcessDone()        { return TRUE; }
 
                 /** @brief Prepare to create scene */
-                virtual void    prepare() {}
+                virtual void    prepare()   {}
                 /** @brief Creating the scene */
                 virtual void    create();
                 /** @brief Update the scene */
@@ -46,7 +46,7 @@ namespace ipl {
                 /** @brief Rendering the scene */
                 virtual void    draw();
                 /** @brief Destroy the scene and clear from memory */
-                virtual void    destroy() {}
+                virtual void    destroy()   {}
 
                 void            do_prepare();
                 void            do_create();

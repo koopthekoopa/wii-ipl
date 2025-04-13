@@ -3,8 +3,8 @@
 
 #include "scene/iplSceneBase.h"
 
-#define FADER_SCENE_CLASS(x)        class x : public ipl::scene::FaderSceneBase
-#define FADER_SCENE_GUI_CLASS(x)    class x : public ipl::scene::FaderSceneBase, public ::gui::EventHandler
+#define FADER_SCENE_CLASS(x)        class x : public scene::FaderSceneBase
+#define FADER_SCENE_GUI_CLASS(x)    class x : public scene::FaderSceneBase, public ::gui::EventHandler
 
 namespace ipl {
     namespace scene {
@@ -32,7 +32,7 @@ namespace ipl {
                 virtual void            calc();
 
                 virtual void            initCalcNormal();                           // 0x4C
-                virtual void            initCalcFadeout();                          // 0x50
+                virtual void            initCalcFadeout()   {}                      // 0x50
 
                 virtual void            calcCommon()        {}                      // 0x54
 

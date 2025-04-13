@@ -18,6 +18,15 @@ namespace ipl {
             return nw4r::math::FAbs(x);
         }
 
+        typedef struct MTX33 : public nw4r::math::MTX33 {
+        } MTX33;
+
+        typedef struct MTX34 : public nw4r::math::MTX34 {
+        } MTX34;
+
+        typedef struct MTX44 : public nw4r::math::MTX44 {
+        } MTX44;
+
         typedef struct VEC2 : public nw4r::math::VEC2 {
             VEC2()                          {}
 
@@ -32,14 +41,10 @@ namespace ipl {
             VEC3(f32 fx, f32 fy, f32 fz)    { x = fx; y = fy; z = fz; }
         } VEC3;
 
-        typedef struct MTX33 : public nw4r::math::MTX33 {
-        } MTX33;
-
-        typedef struct MTX34 : public nw4r::math::MTX34 {
-        } MTX34;
-
-        typedef struct MTX44 : public nw4r::math::MTX44 {
-        } MTX44;
+        inline VEC3* VEC3Transform(VEC3* pOut, const nw4r::math::MTX34* pMtx, const VEC3* pVec) {
+            PSMTXMultVec(*pMtx, *pVec, *pOut);
+            return pOut;
+        }
     }
 }
 

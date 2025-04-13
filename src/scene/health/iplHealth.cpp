@@ -372,7 +372,5 @@ namespace ipl {
 
             return result;
         }
-        
-        void FaderSceneBase::initCalcFadeout() {}
     }
 }

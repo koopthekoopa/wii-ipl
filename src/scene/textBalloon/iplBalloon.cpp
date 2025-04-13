@@ -17,7 +17,7 @@ namespace ipl {
         unk_0x2C(1),
         unk_0x30(unk3),
         unk_0x34(unk4),
-        unk_0x38(0) {
+        mWaitUntilFadeIn(0) {
             mpLayout = new(heap, CLASS_HEAP) layout::Object(heap, layoutFile, directory, fileName);
             mpLayout->bind("my_IplTopBalloon_a_BalloonInOut.brlan");
             mpLayout->finishBinding();
@@ -54,7 +54,7 @@ namespace ipl {
         void TextBalloon::init(const wchar_t* text, u32 unk0) {
             mpText = (wchar_t*)text;
             mTextLen = unk0;
-            unk_0x38 = 0;
+            mWaitUntilFadeIn = 0;
 
             mpLayout->setAnmType(ANIM_TYPE_FORWARD);
             mpLayout->getAnim()->initAnmFrame(0.0f);
@@ -68,7 +68,7 @@ namespace ipl {
 
             nw4r::lyt::Pane* balloonPane = mpLayout->FindPaneByName("N_Balloon");
 
-            unk_0x38 = 0;
+            mWaitUntilFadeIn = 0;
 
             mpLayout->setAnmType(ANIM_TYPE_FORWARD);
             mpLayout->getAnim()->initAnmFrame(0.0f);
@@ -84,7 +84,7 @@ namespace ipl {
             if (mpText != NULL) {
                 mpLayout->FindPaneByName("N_Balloon")->SetVisible(false);
 
-                unk_0x38 = 0;
+                mWaitUntilFadeIn = 0;
                 unk_0x08 = TRUE;
 
                 set_textbox(mpText);
@@ -94,7 +94,7 @@ namespace ipl {
 
         void TextBalloon::fadeinNoSetTextbox() {
             if (mpText != NULL) {
-                unk_0x38 = 0;
+                mWaitUntilFadeIn = 0;
                 unk_0x08 = TRUE;
 
                 set_translate(mBalloonPos);
@@ -134,7 +134,7 @@ namespace ipl {
         }
 
         void TextBalloon::on_pre_fadein() {
-            if (unk_0x38++ > 15) {
+            if (mWaitUntilFadeIn++ > WAIT_UNTIL_FADE_IN) {
                 anm_fadein();
                 snd::getSystem()->startSE("WIPL_SE_BALLOON");
                 unk_0x08 = FALSE;
@@ -157,7 +157,7 @@ namespace ipl {
                 }
             }
             else if (unk_0x08 == TRUE) {
-                unk_0x38 = 0;
+                mWaitUntilFadeIn = 0;
                 unk_0x08 = FALSE;
             }
         }

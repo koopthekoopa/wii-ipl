@@ -30,12 +30,10 @@ namespace ipl {
 #endif
             
             private:
-                layout::Object* mpLayout;   // 0x58
-                u32             unused_0x5C;   // 0x5C
+                layout::Object* mpLayout;       // 0x58
+                u32             unused_0x5C;    // 0x5C
         };
     }
 }
 
 #endif // IPL_BACK_MENU_H
-
-
