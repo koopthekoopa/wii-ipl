@@ -1,8 +1,8 @@
 #ifndef DECOMP_UTILS_H
 #define DECOMP_UTILS_H
 
-#define __CONCAT(x, y) x##y
-#define CONCAT(x, y) __CONCAT(x, y)
+#define __CONCAT(x, y)          x##y
+#define   CONCAT(x, y)          __CONCAT(x, y)
 
 #define ARRSIZE(x)              (sizeof(x) / sizeof(x[0]))
 
@@ -12,7 +12,7 @@
 #define ROUNDDOWN(x, a)         (((unsigned long)(x)) & ~((a) - 1))
 #define PTR_ROUNDDOWN(x, a)     ((void*)ROUNDDOWN(x, a))
 
-#define NO_INLINE           __attribute__((never_inline))
+#define NO_INLINE               __attribute__((never_inline))
 
 #ifdef __MWERKS__
 #define ADDRESS(addr) : (addr)
