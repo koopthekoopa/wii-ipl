@@ -1357,12 +1357,12 @@ config.libs = [
     ),
     RVLSDKLib("mem",
         [
-            Object(NonMatching, "mem/mem_heapCommon.c"),
+            Object(Matching,    "mem/mem_heapCommon.c"),
             Object(NonMatching, "mem/mem_expHeap.c"),
             Object(NonMatching, "mem/mem_frameHeap.c"),
             Object(NonMatching, "mem/mem_unitHeap.c"),
-            Object(NonMatching, "mem/mem_allocator.c"),
-            Object(NonMatching, "mem/mem_list.c"),
+            Object(Matching,    "mem/mem_allocator.c"),
+            Object(Matching,    "mem/mem_list.c"),
         ]
     ),
     RVLSDKLib("cx",

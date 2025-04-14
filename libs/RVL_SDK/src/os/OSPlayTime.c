@@ -129,18 +129,18 @@ BOOL __OSWriteExpiredFlag() {
         goto close;
     }
 
-    memset(titleId, 0, 32);
+    memset(titleId, 0, sizeof(titleId));
     ret = ESP_GetTitleId((ESTitleId*)titleId);
 
     if (ret != ES_ERR_OK) {
         goto close;
     }
 
-    ret = NANDWrite(&nInfo, titleId, 32);
+    ret = NANDWrite(&nInfo, titleId, sizeof(titleId));
     if (ret < NAND_RESULT_OK) {
         goto close;
     }
-    else if (ret != 32) {
+    else if (ret != (int)sizeof(titleId)) {
         ret = NAND_RESULT_INVALID;
         goto close;
     }
@@ -165,7 +165,8 @@ BOOL __OSWriteExpiredFlagIfSet() {
 
 void* __OSPlayTimeRebootThread(void* args) {
     BOOL enabled;
-    u32 frames, fadeShift = 1;
+    u32 frames = 1;
+    u32 fadeShift = 1;
     __OSExpireAIFadeStruct aiFade ALIGN32;
 
     // Setup sound fade out
@@ -252,7 +253,7 @@ s32 __OSPlayTimeGetConsumption(ESTicketView *ticket, ESLpEntry *lpEntry, u32 *en
 
 	if (ret != ES_ERR_OK) {
         ret = ret;
-		goto getout;
+		return ret;
 	}
 
 	if (*entries != 0) {
@@ -270,7 +271,7 @@ getout:
 
 s32 __OSGetPlayTime(ESTicketView *ticket, OSPlayTimeType *type, u32 *playTime) {
 	s32 ret;
-	u32 i, numCc = 0, seenOther = 0;
+	u32 i, numEntries = 0, seenOther = 0;
 
 	ESTicketView    ticketAligned ALIGN32;
     ESLpEntry       lpEntry[8] ALIGN32;
@@ -280,7 +281,7 @@ s32 __OSGetPlayTime(ESTicketView *ticket, OSPlayTimeType *type, u32 *playTime) {
 		ticket = &ticketAligned;
 	}
 
-	ret = __OSPlayTimeGetConsumption(ticket, lpEntry, &numCc);
+	ret = __OSPlayTimeGetConsumption(ticket, lpEntry, &numEntries);
 	if (ret != ES_ERR_OK) {
 		goto getout;
     }
@@ -289,7 +290,7 @@ s32 __OSGetPlayTime(ESTicketView *ticket, OSPlayTimeType *type, u32 *playTime) {
 		if (ticket->limits[i].code == OS_PLAYTIME_TIME_LIMIT) {
 			*type = OS_PLAYTIME_TIME_LIMIT;
 			
-            if (numCc == 0) {
+            if (numEntries == 0) {
 				*playTime = ticket->limits[i].limit;
                 goto getout;
 			}
@@ -316,7 +317,7 @@ s32 __OSGetPlayTime(ESTicketView *ticket, OSPlayTimeType *type, u32 *playTime) {
 			*type = OS_PLAYTIME_LAUNCH_LIMIT;
 			*playTime = ticket->limits[seenOther].limit;
     
-			if (numCc > 0) {
+			if (numEntries > 0) {
 				*playTime -= lpEntry[seenOther].limit;
             }
 		}
