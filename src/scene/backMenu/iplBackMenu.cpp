@@ -105,7 +105,7 @@ namespace ipl {
 
         void BackMenu::draw() {
             if (System::getSceneManager()->canDrawScene()) {
-                utility::Graphics::setOrtho();
+                layout::Object::setCamera();
                 mpLayout->draw();
             }
         }

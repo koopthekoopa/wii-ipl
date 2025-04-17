@@ -322,7 +322,7 @@ namespace ipl {
 
         void LimitOver::draw() {
             if (System::getSceneManager()->canDrawScene()) {
-                utility::Graphics::setOrtho();
+                layout::Object::setCamera();
                 mpLayout->draw();
             }
         }

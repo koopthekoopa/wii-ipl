@@ -1442,10 +1442,10 @@ config.libs = [
     ),
     RVLSDKLib("ipc",
         [
-            Object(NonMatching, "ipc/ipcMain.c"),
-            Object(NonMatching, "ipc/ipcclt.c"),
-            Object(NonMatching, "ipc/memory.c"),
-            Object(NonMatching, "ipc/ipcProfile.c"),
+            Object(Matching,    "ipc/ipcMain.c"),
+            Object(Matching,    "ipc/ipcclt.c"),
+            Object(Matching,    "ipc/memory.c"),
+            Object(Matching,    "ipc/ipcProfile.c"),
         ]
     ),
     RVLSDKLib("fs",
@@ -1805,7 +1805,7 @@ config.libs = [
     ),
     RVLSDKLib("scutil",
         [
-            Object(NonMatching, "scutil/idToIsoA2.c"),
+            Object(Matching,    "scutil/idToIsoA2.c"),
         ]
     ),
     RVLSDKLib("usbcmn",

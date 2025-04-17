@@ -3,7 +3,7 @@ Revolution SDK
 A decompilation of the Revolution SDK (RVL_SDK) from the Wii Menu.  
 
 This version of the SDK is a mess.  
-Seems to be an early SDK revision recompiled when then IPL was being built.
+Seems to be an early SDK revision (2006 or 2007) recompiled when then IPL was being built.
 
 The Wii Menu has the following libraries linked (alphabetical order):
 * **AI** (Audio Interface Library)

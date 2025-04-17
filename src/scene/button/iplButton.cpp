@@ -338,7 +338,7 @@ namespace ipl {
         void Button::draw() {
             if (System::getSceneManager()->canDrawScene()) {
                 // Setup camera
-                utility::Graphics::setOrtho();
+                layout::Object::setCamera();
 
                 // Draw SD Menu Icon (if we are not in maintenance mode)
                 if (!System::isSafeMode()) {
@@ -354,7 +354,7 @@ namespace ipl {
         }
 
         void Button::drawBalloon() {
-            utility::Graphics::setOrtho();
+            layout::Object::setCamera();
             for (int i = 0; i < BALLOON_MAX; i++) {
                 mpBalloons[i]->draw();
             }

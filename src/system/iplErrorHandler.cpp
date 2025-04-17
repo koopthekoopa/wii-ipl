@@ -139,7 +139,7 @@ namespace ipl {
 
     void ErrorHandler::draw() {
         if (mbReady == TRUE) {
-            layout::Object::setCamera();
+            layout::Object::setDefaultCamera();
             mpLayout->draw();
         }
     }

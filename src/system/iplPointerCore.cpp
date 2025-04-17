@@ -59,6 +59,7 @@ namespace ipl {
         for (int i = WPAD_MAX_CONTROLLERS - 1; i >= 0; i--) {
             mCursors[chan].changeType(PointerType::LayoutPoint);
             mCursors[chan].setChan(chan);
+
             chan++;
         }
     }
@@ -74,7 +75,7 @@ namespace ipl {
     }
 
     void PointerCore::draw() {
-        layout::Object::setCamera();
+        layout::Object::setDefaultCamera();
         for (int i = WPAD_MAX_CONTROLLERS - 1; i >= 0; i--) {
             mCursors[i].draw();
         }

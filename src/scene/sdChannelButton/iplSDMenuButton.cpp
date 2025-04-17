@@ -76,7 +76,7 @@ namespace ipl {
         }
 
         void SDMenuButton::drawBalloon() {
-            utility::Graphics::setOrtho();
+            layout::Object::setCamera();
             for (int i = 0; i < BTN_MAX; i++) {
                 mpBalloons[i]->draw();
             }

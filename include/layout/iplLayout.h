@@ -129,12 +129,26 @@ namespace ipl {
                 static Object*          create(EGG::Heap* heap, u32 unk0, nand::LayoutFile* file, const char* directory, const char* fileName);
                 static Object*          create(EGG::Heap* heap, u32 unk0, void* buffer, const char* directory, const char* fileName);
 
+                /** @brief Prepare the camera for the layout. */
+                static void             setCamera()                                     { utility::Graphics::setOrtho(); }
+                /**
+                 * @brief Prepare the camera for the layout.
+                 * @param ortho Orthographic view
+                 */
+                static void             setCamera(u32 ortho)                            { utility::Graphics::setOrtho(ortho); }
+                /** @brief Prepare the default camera for the layout. */
+                static void             setDefaultCamera()                              { utility::Graphics::setDefaultOrtho(); }
+                /**
+                 * @brief Prepare the default camera for the layout.
+                 * @param ortho Orthographic view
+                 */
+                static void             setDefaultCamera(u32 ortho)                     { utility::Graphics::setDefaultOrtho(ortho); }
+
                 /** @brief Gets the layout object. */
                 nw4r::lyt::Layout*      getLayout()                                     { return &mLayout; }
                 /** @brief Gets the draw info object. */
                 nw4r::lyt::DrawInfo*    getDrawInfo()                                   { return &mDrawInfo; }
-                /** @brief Prepare the camera for the layout.. */
-                static void             setCamera()                                     { utility::Graphics::setDefaultOrtho(); }
+
                 /** @brief Calculate the Layout matrix for rendering. */
                 void                    calcMtx()                                       { getLayout()->CalculateMtx(mDrawInfo); }
                 /** @brief Gets the root pane of the layout. */

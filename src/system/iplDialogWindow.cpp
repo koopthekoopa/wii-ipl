@@ -569,7 +569,7 @@ namespace ipl {
     void DialogWindow::draw() {
         if (mpCurDialog) {
             // Draw layout
-            layout::Object::setCamera();
+            layout::Object::setDefaultCamera();
             mpCurDialog->gLayout->draw();
 
             // Draw custom layout for page

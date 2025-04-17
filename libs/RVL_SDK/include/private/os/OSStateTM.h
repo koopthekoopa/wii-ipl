@@ -19,7 +19,7 @@ void        __OSHotReset();
 
 void        __OSShutdownToSBY();
 void        __OSShutdownToIDL();
-BOOL        __OSSetVIForceDimming(BOOL enable, u32 shiftY, u32 shiftX);
+int         __OSSetVIForceDimming(BOOL enable, u32 shiftY, u32 shiftX);
 
 s32         __OSSetIdleLEDMode(u32 mode);
 

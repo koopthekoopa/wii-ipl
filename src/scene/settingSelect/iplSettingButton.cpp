@@ -129,7 +129,7 @@ namespace ipl {
 
         void SettingButton::draw() {
             if (System::getSceneManager()->canDrawScene()) {
-                utility::Graphics::setOrtho();
+                layout::Object::setCamera();
                 mpLayout->draw();
             }
         }

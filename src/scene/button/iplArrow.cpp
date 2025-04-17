@@ -6,7 +6,7 @@ namespace ipl {
             Button* button;
             if (System::getSceneManager()->canDrawScene()
             && (button = static_cast<Button*>(System::getSceneManager()->getScene(SCENE_BUTTON)), button != NULL)) {
-                layout::Object::setCamera();
+                layout::Object::setDefaultCamera();
 
                 for (int i = 0; i < Button::ARROW_BTN_MAX; i++) {
                     layout::Object* arrowLayout = button->get_layout();

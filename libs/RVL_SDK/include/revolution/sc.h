@@ -63,6 +63,8 @@ void    SCSetTmpTitleID(u64 titleId);
 
 s8      SCGetProductGameRegion();
 
+u32     SCGetSimpleAddressID();
+
 void    SCInit();
 
 void    SCFlush();
