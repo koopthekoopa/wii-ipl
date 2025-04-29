@@ -205,8 +205,6 @@ namespace gui {
         }
     }
 
-    Component::~Component() {} // Wouldn't auto generate
-
     u32 PaneManager::suIDCounter = 0;
 
     void PaneManager::createLayoutScene(const nw4r::lyt::Layout& layout) {

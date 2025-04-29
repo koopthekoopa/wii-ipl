@@ -5,8 +5,6 @@
 
 #include <revolution/types.h>
 
-#include <egg/core.h>
-
 namespace ipl {
     namespace message {
         class Message {
@@ -27,30 +25,30 @@ namespace ipl {
                 wchar_t*    getMessage(u32 id) const;
             
             private:
-                typedef struct {
-                    u32 signatureMsg;           // 0x00 (unused in IPL)
-                    u32 signatureBmg;           // 0x04 (unused in IPL)
-                    u32 size;                   // 0x08 (unused in IPL)
+                typedef struct MESGHeader {
+                    u32 signatureMsg;           // 0x00
+                    u32 signatureBmg;           // 0x04
+                    u32 size;                   // 0x08
                     u32 sectionCount;           // 0x0C
-                    u8 encoding;                // 0x10 (unused in IPL)
-                    u8 padding[15];             // 0x11 (unused in IPL)
+                    u8  encoding;               // 0x10
+                    u8  padding[15];            // 0x11
                 } MESGHeader;
 
-                typedef struct {
+                typedef struct MESGInfoHeader {
                     u32 signature;              // 0x00
                     u32 size;                   // 0x04
                     u16 msgCount;               // 0x08
-                    u16 infoSize;               // 0x0A (unused in IPL)
-                    u32 padding;                // 0x0C (unused in IPL)
+                    u16 infoSize;               // 0x0A
+                    u8  padding[4];             // 0x0C
                 } MESGInfoHeader;
 
-                typedef struct {
+                typedef struct MESGInfoBlock {
                     u32 offset;                 // 0x00
-                    u32 flags;                  // 0x04 (unused in IPL)
-                    u32 unk;                    // 0x08 (unused in IPL)
+                    u32 flags;                  // 0x04
+                    u32 unk_0x08;               // 0x08
                 } MESGInfoBlock;
 
-                typedef struct {
+                typedef struct MESGDataHeader {
                     u32 signature;              // 0x00
                     u32 size;                   // 0x04
                 } MESGDataHeader;
@@ -64,5 +62,3 @@ namespace ipl {
 }
 
 #endif // IPL_MESSAGE_H
-
-

@@ -14,6 +14,8 @@
 
 #define NO_INLINE               __attribute__((never_inline))
 
+#define MEM_CLEAR(x)            __memclr((x), sizeof(*(x)))
+
 #ifdef __MWERKS__
 #define ADDRESS(addr) : (addr)
 #else

@@ -1,7 +1,10 @@
 #ifndef IPL_NAND_WALL_H
 #define IPL_NAND_WALL_H
 
-#include <revolution.h>
+#include <revolution/types.h>
+
+#include <revolution/nand.h>
+#include <private/nand.h>
 
 namespace ipl {
     namespace nandwall {
@@ -13,4 +16,3 @@ namespace ipl {
 }
 
 #endif // IPL_NAND_WALL_H
-

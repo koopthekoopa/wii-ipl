@@ -41,7 +41,7 @@ namespace ipl {
                 int             mTicketIdx;     // 0x1A0
                 bool            mbMetaInNand;   // 0x1A4
                 
-                Callback    mCallback;      // 0x1A8
+                Callback        mCallback;      // 0x1A8
                 void*           mCallbackWork;  // 0x1AC
         };
     }

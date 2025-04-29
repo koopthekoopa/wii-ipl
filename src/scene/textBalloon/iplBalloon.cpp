@@ -167,9 +167,10 @@ namespace ipl {
             mpLayout->setAnmType(ANIM_TYPE_FORWARD);
             mpLayout->start();
         }
-
+#pragma sym on
         void TextBalloon::set_translate(const math::VEC3& trans) {
             f32 temp0;
+
             if (SCGetAspectRatio() == SC_ASPECT_RATIO_16x9) {
                 temp0 = unk_0x30;
             }
@@ -191,12 +192,12 @@ namespace ipl {
             switch(unk_0x28) {
                 case 1: {
                     baseSize = get_size("W_Base");
-                    temp0 = baseSize->width / 2;
+                    temp1 = baseSize->width / 2;
                     break;
                 }
                 case 2: {
                     baseSize = get_size("W_Base");
-                    temp0 = -baseSize->width / 2;
+                    temp1 = -baseSize->width / 2;
                     break;
                 }
             }

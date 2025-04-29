@@ -2,6 +2,7 @@
 #define REVOLUTION_ESP_H
 
 #include <revolution/types.h>
+
 #include <private/es/types.h>
 
 #ifdef __cplusplus
@@ -22,7 +23,10 @@ s32 ESP_ListTitleContentsOnCard(ESTitleId titleId, ESContentId* cIds, u32* cntCo
 
 s32 ESP_GetConsumption(ESTicketId ticket, ESLpEntry* lpEntry, u32* entries);
 
+s32 ESP_GetDataDir(ESTitleId titleId, char* directory);
+
 s32 ESP_DiGetTicketView(const void*, ESTicketView*);
+s32 ESP_DiGetTmd(ESTitleMeta*, u32*);
 
 #ifdef __cplusplus
 }

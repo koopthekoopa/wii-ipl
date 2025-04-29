@@ -19,7 +19,7 @@ typedef void (*OSPlayTimeCallbackFunc)();
 BOOL    __OSWriteExpiredFlag();
 BOOL    __OSWriteExpiredFlagIfSet();
 
-s32     __OSPlayTimeGetConsumption(ESTicketView *ticket, ESLpEntry *lpEntry, u32 *entries);
+s32     __OSPlayTimeGetConsumption(ESTicketView* ticket, ESLpEntry* lpEntry, u32* entries);
 
 s32     __OSGetPlayTime(ESTicketView* ticket, OSPlayTimeType* type, u32* arg);
 

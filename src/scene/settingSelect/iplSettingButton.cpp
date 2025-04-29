@@ -255,11 +255,5 @@ namespace ipl {
         bool SettingButton::isPlaying() const {
             return mpLayout->getAnim(ANIM_BTN_FLASH)->isPlaying();
         }
-
-        SceneCommand FaderSceneBase::calcFadeout() {
-            return SCENE_NEXT;
-        }
-
-        SettingButton::~SettingButton() {}
     }
 }

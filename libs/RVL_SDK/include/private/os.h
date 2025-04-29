@@ -51,6 +51,10 @@ OSExecParams*       __OSExecParamsAddr      ADDRESS(OS_BASE_CACHED | OS_ADDR_LAU
 
 OSTime              __OSSystemTime          ADDRESS(OS_BASE_CACHED | OS_ADDR_SYSTEM_TIME);
 
+vu8                 __OSLockedAppType       ADDRESS(OS_BASE_CACHED | OS_ADDR_LOCKED_APP_TYPE);
+vu32                __OSLaunchPartitionType ADDRESS(OS_BASE_CACHED | OS_ADDR_BOOT_PART_TYPE);
+
+
 /* Revision get */
 
 u32     __OSGetHollywoodRev();

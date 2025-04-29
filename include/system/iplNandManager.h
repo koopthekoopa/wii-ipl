@@ -40,7 +40,7 @@ namespace ipl {
                 void        sendToken(int token);
                 BOOL        receiveToken(int* token);
                 
-                int         getDescriptor() const   { return mDescriptor; }
+                ESFd        getDescriptor() const   { return mDescriptor; }
                 ARCHandle*  getArc()                { return &mArc; }
             
             private:
@@ -61,7 +61,7 @@ namespace ipl {
                 u8                  unused_0x28[0x1FC];
 
                 char                mNandPath[NAND_MAX_PATH+1];     // 0x224
-                int                 mDescriptor;                    // 0x268
+                ESFd                mDescriptor;                    // 0x268
                 u8*                 mpFSTBuffer;                    // 0x26C
                 ARCHandle           mArc;                           // 0x270
         };

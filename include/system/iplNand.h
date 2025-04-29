@@ -4,8 +4,12 @@
 #include <decomp.h>
 
 #include <revolution.h>
+
 #include <revolution/nand.h>
+#include <private/nand.h>
+
 #include <revolution/arc.h>
+
 #include <private/es.h>
 
 #include <revolution/net/NETDigest.h>
@@ -72,13 +76,13 @@ namespace ipl {
             
             private:
                 typedef struct MD5Head {
-                    u8          sig[4];         // 0x00 (always `IMD5`; "IPL MD5"?)
+                    u8          sig[4];         // 0x00 (`IMD5`; "IPL MD5"?)
                     u32         length;         // 0x04
                     u8          reserved[8];    // 0x08
                     NETMD5Sum   md5;            // 0x10
                 } MD5Head;
 
-                typedef s8 MD5Bool; // eh
+                typedef s8 MD5Bool; // ehhhh...
 
             protected:
                 virtual BOOL    open_(u8 attr);                                         // 0x20
@@ -116,7 +120,7 @@ namespace ipl {
                 int             mFileOffset;                                            // 0x94
                 u32             mFileLength;                                            // 0x98
                 u8              mFileMode;                                              // 0x9C
-                u8              mFilePerms;
+                u8              mFilePerms;                                             // 0x9D
 
                 u8*             mpBuffer;                                               // 0xA0
                 u8*             mpCmpBuffer;                                            // 0xA4

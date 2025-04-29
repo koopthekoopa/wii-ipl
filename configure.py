@@ -26,11 +26,11 @@ from tools.project import (
     is_windows,
 )
 
-VERSION_CONFIG   = 0
+VERSION_CONFIG = 0
 VERSION_ARGUMENT = 1
-VERSION_CONTENT  = 2
+VERSION_CONTENT = 2
 
-DEFAULT_VERSION = 0 # 43U
+DEFAULT_VERSION = 0  # 43U
 VERSION_INFO = [
     # Config name
     [
@@ -54,6 +54,13 @@ VERSION_INFO = [
         6,  # 4.3K
     ],
 ]
+
+
+def getFirstFile(path_find):
+    for filename in Path(path_find).iterdir():
+        if filename.is_file() and filename.suffix == '.wad':
+            return Path(filename)
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -148,6 +155,13 @@ parser.add_argument(
     action="store_false",
     help="disable progress calculation",
 )
+# custom
+parser.add_argument(
+    "--stand-alone",
+    dest="standalone",
+    action="store_true",
+    help="stand alone build",
+)
 args = parser.parse_args()
 
 config = ProjectConfig()
@@ -183,10 +197,6 @@ config.sjiswrap_tag = "v1.2.0"
 config.wibo_tag = "0.6.16"
 config.bstool_tag = "v1.0.1"
 
-def getFirstFile(path_find):
-    for filename in Path(path_find).iterdir():
-        if filename.is_file() and filename.suffix == '.wad':
-            return Path(filename)
 # Project
 config.wad_path = getFirstFile(Path("orig") / config.version)
 config.app_name = "0000000" + str(VERSION_INFO[VERSION_CONTENT][version_num]) + ".app"
@@ -279,6 +289,9 @@ cflags_ipl = [
     "-enc SJIS",
 ]
 
+if args.standalone:
+    cflags_ipl.append("-DSTAND_ALONE_BUILD")
+
 # Common SDK flags
 cflags_sdk = [
     *cflags_base,
@@ -325,6 +338,7 @@ cflags_trk = [
 
 config.linker_version = "GC/3.0a5.2"
 
+
 # Helper function for IPL
 def IPLSection(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
@@ -334,6 +348,7 @@ def IPLSection(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
         "progress_category": "main",
         "objects": objects,
     }
+
 
 # Helper function for Zi Corp libraries
 def ZI8Lib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
@@ -358,6 +373,7 @@ def ATOKLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
         "src_dir": "libs/RVLMiddleware/ATOKDict/src",
     }
 
+
 # Helper function for RVLFaceLib library
 def RVLFaceLib(objects: List[Object]) -> Dict[str, Any]:
     return {
@@ -368,6 +384,7 @@ def RVLFaceLib(objects: List[Object]) -> Dict[str, Any]:
         "objects": objects,
         "src_dir": "libs/RVLFaceLib/src",
     }
+
 
 # Helper function for TMC_JPEG library
 def TMCJpegLib(objects: List[Object]) -> Dict[str, Any]:
@@ -380,6 +397,7 @@ def TMCJpegLib(objects: List[Object]) -> Dict[str, Any]:
         "src_dir": "libs/RVLMiddleware/TMC_JPEG/src",
     }
 
+
 # Helper function for NW4R libraries
 def NW4RLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
@@ -390,6 +408,7 @@ def NW4RLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
         "objects": objects,
         "src_dir": "libs/NW4R/src",
     }
+
 
 # Helper function for EGG library
 def EGGLib(objects: List[Object]) -> Dict[str, Any]:
@@ -402,6 +421,7 @@ def EGGLib(objects: List[Object]) -> Dict[str, Any]:
         "src_dir": "libs/EGG/src",
     }
 
+
 # Helper function for RVL_SDK libraries
 def RVLSDKLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
@@ -412,6 +432,7 @@ def RVLSDKLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
         "objects": objects,
         "src_dir": "libs/RVL_SDK/src",
     }
+
 
 # Helper function for RevoEX libraries
 def RevoEXLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
@@ -424,6 +445,7 @@ def RevoEXLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
         "src_dir": "libs/RevoEX/src",
     }
 
+
 # Helper function for Runtime
 def RuntimeLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
@@ -435,6 +457,7 @@ def RuntimeLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
         "src_dir": "libs/Runtime/src",
     }
 
+
 # Helper function for MSL
 def MSLLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
@@ -445,8 +468,9 @@ def MSLLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
         "objects": objects,
         "src_dir": "libs/MSL/src",
     }
- 
- # Helper function for MetroTRK
+
+
+# Helper function for MetroTRK
 def TRKLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
@@ -457,19 +481,21 @@ def TRKLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
         "src_dir": "libs/MetroTRK/src",
     }
 
+
 Matching = True                   # Object matches and should be linked
 NonMatching = False               # Object does not match and should not be linked
 Equivalent = config.non_matching  # Object should be linked when configured with --non-Equivalent
 
+
 def EquivalentFor(*versions):
     return config.version in versions
+
 
 config.warn_missing_config = True
 config.warn_missing_source = False
 config.libs = [
     # Main
-    IPLSection("system",
-        [
+    IPLSection("system", [
             Object(Matching,    "system/enc_dummy.c"),
             Object(NonMatching, "system/rvl_dec.c"),
             Object(Matching,    "system/RIPL_BoardRecord.c"),
@@ -517,8 +543,7 @@ config.libs = [
             Object(Matching,    "system/_DATA_.c"),
         ]
     ),
-    IPLSection("utility",
-        [
+    IPLSection("utility", [
             Object(Matching,    "utility/iplTree.cpp"),
             Object(Matching,    "utility/iplFrameController.cpp"),
             Object(NonMatching, "utility/iplGraphics.cpp"),
@@ -531,20 +556,17 @@ config.libs = [
             Object(NonMatching, "utility/iplCSFlags.cpp"),
         ]
     ),
-    IPLSection("layout",
-        [
+    IPLSection("layout", [
             Object(Matching,    "layout/GUIManager.cpp"),
             Object(Matching,    "layout/iplLayout.cpp"),
             Object(Matching,    "layout/iplGuiManager.cpp"),
         ]
     ),
-    IPLSection("sound",
-        [
+    IPLSection("sound", [
             Object(NonMatching, "sound/iplSound.cpp"),
         ]
     ),
-    IPLSection("iplwww",
-        [
+    IPLSection("iplwww", [
             Object(NonMatching, "iplwww/www_browser.cpp"),
             Object(Matching,    "iplwww/www_message.cpp"),
             Object(NonMatching, "iplwww/www_surface.cpp"),
@@ -556,8 +578,7 @@ config.libs = [
             Object(NonMatching, "iplwww/www_arcreader.cpp"),
         ]
     ),
-    IPLSection("homebutton",
-        [
+    IPLSection("homebutton", [
             Object(NonMatching, "homebutton/HBMBase.cpp"),
             Object(NonMatching, "homebutton/HBMAnmController.cpp"),
             Object(NonMatching, "homebutton/HBMController.cpp"),
@@ -566,8 +587,7 @@ config.libs = [
             Object(NonMatching, "homebutton/HBMRemoteSpk.cpp"),
         ]
     ),
-    IPLSection("BS2",
-        [
+    IPLSection("BS2", [
             Object(Matching,    "BS2/BootStart.c"),
             Object(Matching,    "BS2/BS2Entry.c"),
             Object(NonMatching, "BS2/BS2.c"),
@@ -575,47 +595,41 @@ config.libs = [
             Object(NonMatching, "BS2/BS2Mach.c"),
             Object(NonMatching, "BS2/BS2Update.c"),
             Object(NonMatching, "BS2/BS2ParentalControl.c"),
-            Object(NonMatching, "BS2/BringUp.c"),
+            Object(NonMatching, "BS2/BS2BringUp.c"),
             Object(NonMatching, "BS2/BS2Reset.c"),
             Object(NonMatching, "BS2/BS2Fatal.c"),
         ]
     ),
-    IPLSection("address",
-        [
+    IPLSection("address", [
             Object(NonMatching, "scene/address/iplAddress.cpp"),
             Object(NonMatching, "scene/address/iplAddressAddSel.cpp"),
             Object(NonMatching, "scene/address/iplAddressEdit.cpp"),
         ]
     ),
-    IPLSection("backMenu",
-        [
+    IPLSection("backMenu", [
             Object(Matching,    "scene/backMenu/iplBackMenu.cpp"),
             Object(Matching,    "scene/backMenu/_DATA_.c"),
         ]
     ),
-    IPLSection("board",
-        [
+    IPLSection("board", [
             Object(NonMatching, "scene/board/iplBoard.cpp"),
             Object(NonMatching, "scene/board/iplBoardObject.cpp"),
             Object(NonMatching, "scene/board/iplBoardSD.cpp"),
         ]
     ),
-    IPLSection("button",
-        [
+    IPLSection("button", [
             Object(NonMatching, "scene/button/iplUrlProcessor.cpp"),
             Object(NonMatching, "scene/button/iplLetterButton.cpp"),
             Object(Equivalent,  "scene/button/iplButton.cpp"),
             Object(Matching,    "scene/button/iplArrow.cpp"),
         ]
     ),
-    IPLSection("calendar",
-        [
+    IPLSection("calendar", [
             Object(NonMatching, "scene/calendar/iplCalendar.cpp"),
             Object(NonMatching, "scene/calendar/iplDate.cpp"),
         ]
     ),
-    IPLSection("channelEdit",
-        [
+    IPLSection("channelEdit", [
             Object(NonMatching, "scene/channelEdit/iplChannelEdit.cpp"),
             Object(NonMatching, "scene/channelEdit/iplChanAppBase.cpp"),
             Object(NonMatching, "scene/channelEdit/iplChanAppBox.cpp"),
@@ -625,64 +639,53 @@ config.libs = [
             Object(NonMatching, "scene/channelEdit/iplThumbnail.cpp"),
         ]
     ),
-    IPLSection("channelSelect",
-        [
+    IPLSection("channelSelect", [
             Object(NonMatching, "scene/channelSelect/iplChannelSelect.cpp"),
             Object(NonMatching, "scene/channelSelect/iplClock.cpp"),
             Object(NonMatching, "scene/channelSelect/iplChannelObj.cpp"),
         ]
     ),
-    IPLSection("channelTitle",
-        [
+    IPLSection("channelTitle", [
             Object(NonMatching, "scene/channelTitle/iplChannelTitle.cpp"),
         ]
     ),
-    IPLSection("faceSelect",
-        [
+    IPLSection("faceSelect", [
             Object(NonMatching, "scene/faceSelect/iplFaceSelect.cpp"),
         ]
     ),
-    IPLSection("health",
-        [
+    IPLSection("health", [
             Object(Matching,    "scene/health/iplHealth.cpp"),
         ]
     ),
-    IPLSection("kitayamaTest",
-        [
+    IPLSection("kitayamaTest", [
             Object(NonMatching, "scene/kitayamaTest/iplKitayamaTest.cpp"),
             Object(NonMatching, "scene/kitayamaTest/nandsdworker_autotest.cpp"),
         ]
     ),
-    IPLSection("letterWriter",
-        [
+    IPLSection("letterWriter", [
             Object(NonMatching, "scene/letterWriter/iplLetterWriter.cpp"),
         ]
     ),
-    IPLSection("limitOver",
-        [
+    IPLSection("limitOver", [
             Object(Matching, "scene/limitOver/iplLimitOver.cpp"),
         ]
     ),
-    IPLSection("mailAddSel",
-        [
+    IPLSection("mailAddSel", [
             Object(NonMatching, "scene/mailAddSel/iplMailAddressSelect.cpp"),
         ]
     ),
-    IPLSection("memory",
-        [
+    IPLSection("memory", [
             Object(NonMatching, "scene/memory/iplMemory.cpp"),
         ]
     ),
-    IPLSection("saveDataEdit",
-        [
+    IPLSection("saveDataEdit", [
             Object(NonMatching, "scene/saveDataEdit/iplSaveDataBase.cpp"),
             Object(NonMatching, "scene/saveDataEdit/iplSaveDataBox.cpp"),
             Object(NonMatching, "scene/saveDataEdit/iplSaveDataEdit.cpp"),
             Object(Matching,    "scene/saveDataEdit/iplWiiBannerFileInfo.cpp"),
         ]
     ),
-    IPLSection("memoryCard",
-        [
+    IPLSection("memoryCard", [
             Object(NonMatching, "scene/memoryCard/iplMemoryCard.cpp"),
             Object(NonMatching, "scene/memoryCard/iplMemoryCardBase.cpp"),
             Object(NonMatching, "scene/memoryCard/iplMemoryCardManager.cpp"),
@@ -690,18 +693,15 @@ config.libs = [
             Object(NonMatching, "scene/memoryCard/iplGCWindow.cpp"),
         ]
     ),
-    IPLSection("textBalloon",
-        [
+    IPLSection("textBalloon", [
             Object(NonMatching, "scene/textBalloon/iplBalloon.cpp"),
         ]
     ),
-    IPLSection("cardSequence",
-        [
+    IPLSection("cardSequence", [
             Object(NonMatching, "scene/cardSequence/CardSequence.cpp"),
         ]
     ),
-    IPLSection("nakamuraTest",
-        [
+    IPLSection("nakamuraTest", [
             Object(NonMatching, "scene/nakamuraTest/iplContest.c"),
             Object(NonMatching, "scene/nakamuraTest/gamespy/NATify.c"),
             Object(NonMatching, "scene/nakamuraTest/gamespy/darray.c"),
@@ -713,42 +713,35 @@ config.libs = [
             Object(NonMatching, "scene/nakamuraTest/iplNetSetup.cpp"),
         ]
     ),
-    IPLSection("parentalDialog",
-        [
+    IPLSection("parentalDialog", [
             Object(NonMatching, "scene/parentalDialog/iplParentalDialog.cpp"),
         ]
     ),
-    IPLSection("sceneMisc",
-        [
+    IPLSection("sceneMisc", [
             Object(Matching,    "scene/sceneMisc/iplReboot.cpp"),
             Object(NonMatching, "scene/sceneMisc/iplRootScene.cpp"),
         ]
     ),
-    IPLSection("sdChannelSelect",
-        [
+    IPLSection("sdChannelSelect", [
             Object(NonMatching, "scene/sdChannelSelect/iplSDChannelSelect.cpp"),
             Object(NonMatching, "scene/sdChannelSelect/iplSDChannelObj.cpp"),
         ]
     ),
-    IPLSection("sdChannelTitle",
-        [
+    IPLSection("sdChannelTitle", [
             Object(NonMatching, "scene/sdChannelTitle/iplSDChannelTitle.cpp"),
         ]
     ),
-    IPLSection("sdChannelButton",
-        [
+    IPLSection("sdChannelButton", [
             Object(NonMatching, "scene/sdChannelButton/iplSDButton.cpp"),
             Object(NonMatching, "scene/sdChannelButton/iplSDArrow.cpp"),
             Object(NonMatching, "scene/sdChannelButton/iplSDMenuButton.cpp"),
         ]
     ),
-    IPLSection("sdChannelMemory",
-        [
+    IPLSection("sdChannelMemory", [
             Object(NonMatching, "scene/sdChannelMemory/iplSDMemory.cpp"),
         ]
     ),
-    IPLSection("setting",
-        [
+    IPLSection("setting", [
             Object(NonMatching, "scene/setting/iplSetting.cpp"),
             Object(NonMatching, "scene/setting/iplSensitivity.cpp"),
             Object(NonMatching, "scene/setting/iplNCDSetting.cpp"),
@@ -762,36 +755,31 @@ config.libs = [
             Object(NonMatching, "scene/setting/iplATERM.cpp"),
         ]
     ),
-    IPLSection("settingSelect",
-        [
+    IPLSection("settingSelect", [
             Object(Matching,    "scene/settingSelect/iplSettingBg.cpp"),
             Object(Matching,    "scene/settingSelect/iplSettingButton.cpp"),
             Object(NonMatching, "scene/settingSelect/iplSettingSelect.cpp"),
         ]
     ),
-    IPLSection("sceneSystem",
-        [
+    IPLSection("sceneSystem", [
             Object(Matching,    "scene/sceneSystem/iplSceneBase.cpp"),
             Object(NonMatching, "scene/sceneSystem/iplSceneCreator.cpp"),
             Object(NonMatching, "scene/sceneSystem/iplSceneManager.cpp"),
             Object(Matching,    "scene/sceneSystem/iplFaderSceneBase.cpp"),
         ]
     ),
-    IPLSection("textWriter",
-        [
+    IPLSection("textWriter", [
             Object(NonMatching, "scene/textWriter/iplTextWriter.cpp"),
         ]
     ),
-    IPLSection("bannerSound",
-        [
+    IPLSection("bannerSound", [
             Object(NonMatching, "bannerSound/AudioWavePlayer.cpp"),
             Object(NonMatching, "bannerSound/AxAdpcmPlayer.cpp"),
             Object(NonMatching, "bannerSound/BannerSoundPlayer.cpp"),
             Object(NonMatching, "bannerSound/AudioWaveUtility.cpp"),
         ]
     ),
-    IPLSection("keyboard",
-        [
+    IPLSection("keyboard", [
             Object(NonMatching, "keyboard/pckeyboard.cpp"),
             Object(NonMatching, "keyboard/cellphone.cpp"),
             Object(NonMatching, "keyboard/inputform.cpp"),
@@ -800,8 +788,8 @@ config.libs = [
             Object(NonMatching, "keyboard/predictlang.cpp"),
             Object(NonMatching, "keyboard/signwindow.cpp"),
             Object(NonMatching, "keyboard/stringbase.cpp"),
-            Object(NonMatching, "keyboard/atokstring.cpp"), # for 4.3J
-            Object(NonMatching, "keyboard/zistring.cpp"),   # for 4.3U and 4.3E
+            Object(NonMatching, "keyboard/atokstring.cpp"),  # for 4.3J
+            Object(NonMatching, "keyboard/zistring.cpp"),    # for 4.3U and 4.3E
             Object(NonMatching, "keyboard/textdrawer.cpp"),
             Object(NonMatching, "keyboard/nw4rmanager.cpp"),
             Object(NonMatching, "keyboard/manager.cpp"),
@@ -820,11 +808,10 @@ config.libs = [
             Object(NonMatching, "keyboard/HKBManager.cpp"),
             Object(NonMatching, "keyboard/HWKeyboard.cpp"),
             Object(NonMatching, "keyboard/layout.cpp"),
-            Object(NonMatching, "keyboard/MyHangulStream.cpp"), # for 4.3K
+            Object(NonMatching, "keyboard/MyHangulStream.cpp"),  # for 4.3K
         ]
     ),
-    IPLSection("channelScript",
-        [
+    IPLSection("channelScript", [
             Object(NonMatching, "channelScript/CHANSVm.c"),
             Object(NonMatching, "channelScript/systemmenu/VmSystemMenu.c"),
             Object(NonMatching, "channelScript/systemmenu/iplCSSystem.cpp"),
@@ -849,8 +836,7 @@ config.libs = [
         ]
     ),
     # ATOKDictionary (for 4.3J only)
-    ATOKLib("ATOKDict",
-        [
+    ATOKLib("ATOKDict", [
             Object(NonMatching, "atok.c"),
             Object(NonMatching, "atok_eng.c"),
             Object(NonMatching, "MonPE/ApLib.c"),
@@ -862,8 +848,7 @@ config.libs = [
         ]
     ),
     # eZiText (for 4.3U and 4.3E only)
-    ZI8Lib("eZiText",
-        [
+    ZI8Lib("eZiText", [
             Object(NonMatching, "eztx.c"),
             Object(NonMatching, "zi8address.c"),
             Object(NonMatching, "zi8convert.c"),
@@ -891,8 +876,7 @@ config.libs = [
         ]
     ),
     # RevoEX
-    RevoEXLib("cdb",
-        [
+    RevoEXLib("cdb", [
             Object(Matching,    "cdb/cdb.c"),
             Object(NonMatching, "cdb/CDBConv.c"),
             Object(NonMatching, "cdb/CDBDatabase.c"),
@@ -912,14 +896,12 @@ config.libs = [
             Object(NonMatching, "cdb/CDBCrypt.c"),
         ]
     ),
-    RevoEXLib("ncd",
-        [
+    RevoEXLib("ncd", [
             Object(NonMatching, "ncd/ncdsystem.c"),
             Object(NonMatching, "ncd/ncdsleep.c"),
         ]
     ),
-    RevoEXLib("net",
-        [
+    RevoEXLib("net", [
             Object(NonMatching, "net/nettime.c"),
             Object(Matching,    "net/crc.c"),
             Object(NonMatching, "net/md5.c"),
@@ -931,8 +913,7 @@ config.libs = [
             Object(Matching,    "net/wireless_macaddr.c"),
         ]
     ),
-    RevoEXLib("nhttp",
-        [
+    RevoEXLib("nhttp", [
             Object(NonMatching, "nhttp/NHTTP_bgnend.c"),
             Object(NonMatching, "nhttp/NHTTP_control.c"),
             Object(NonMatching, "nhttp/NHTTP_list.c"),
@@ -948,8 +929,7 @@ config.libs = [
             Object(NonMatching, "nhttp/d_nhttp_common.c"),
         ]
     ),
-    RevoEXLib("nwc24",
-        [
+    RevoEXLib("nwc24", [
             Object(NonMatching, "nwc24/NWC24StdAPI.c"),
             Object(NonMatching, "nwc24/NWC24FileAPI.c"),
             Object(NonMatching, "nwc24/NWC24Config.c"),
@@ -974,22 +954,19 @@ config.libs = [
             Object(NonMatching, "nwc24/NWC24System.c"),
         ]
     ),
-    RevoEXLib("so",
-        [
+    RevoEXLib("so", [
             Object(NonMatching, "so/SOCommon.c"),
             Object(NonMatching, "so/SOBasic.c"),
             Object(NonMatching, "so/SOInformation.c"),
             Object(NonMatching, "so/SOOption.c"),
         ]
     ),
-    RevoEXLib("ssl",
-        [
+    RevoEXLib("ssl", [
             Object(NonMatching, "ssl/ssl_api.c"),
             Object(NonMatching, "ssl/ssl_mutex.c"),
         ]
     ),
-    RevoEXLib("vf",
-        [
+    RevoEXLib("vf", [
             Object(Matching,    "vf/api/pf_clib.c"),
             Object(Matching,    "vf/api/pf_code.c"),
             Object(Matching,    "vf/api/pf_service.c"),
@@ -1048,8 +1025,7 @@ config.libs = [
             Object(NonMatching, "vf/driver/sd_drv.c"),
         ]
     ),
-    RevoEXLib("wd",
-        [
+    RevoEXLib("wd", [
             Object(NonMatching, "wd/wd_misc.c"),
             Object(NonMatching, "wd/wd_request.c"),
             Object(NonMatching, "wd/wd_init.c"),
@@ -1104,8 +1080,7 @@ config.libs = [
         ]
     ),
     # NW4R
-    NW4RLib("snd",
-        [
+    NW4RLib("snd", [
             Object(NonMatching, "snd/snd_AxManager.cpp"),
             Object(NonMatching, "snd/snd_AxVoice.cpp"),
             Object(NonMatching, "snd/snd_AxfxImpl.cpp"),
@@ -1166,8 +1141,7 @@ config.libs = [
             Object(NonMatching, "snd/snd_WsdTrack.cpp"),
         ]
     ),
-    NW4RLib("ut",
-        [
+    NW4RLib("ut", [
             Object(Matching,    "ut/ut_list.cpp"),
             Object(Matching,    "ut/ut_LinkList.cpp"),
             Object(NonMatching, "ut/ut_binaryFileFormat.cpp"),
@@ -1187,22 +1161,19 @@ config.libs = [
             Object(NonMatching, "ut/ut_TextWriterBase.cpp"),
         ]
     ),
-    NW4RLib("db",
-        [
+    NW4RLib("db", [
             Object(NonMatching, "db/db_directPrint.cpp"),
             Object(NonMatching, "db/db_console.cpp"),
             Object(NonMatching, "db/db_exception.cpp"),
         ]
     ),
-    NW4RLib("math",
-        [
+    NW4RLib("math", [
             Object(Matching,    "math/math_arithmetic.cpp"),
             Object(Matching,    "math/math_triangular.cpp"),
             Object(Matching,    "math/math_types.cpp"),
         ]
     ),
-    NW4RLib("lyt",
-        [
+    NW4RLib("lyt", [
             Object(NonMatching, "lyt/lyt_pane.cpp"),
             Object(NonMatching, "lyt/lyt_group.cpp"),
             Object(NonMatching, "lyt/lyt_layout.cpp"),
@@ -1219,13 +1190,11 @@ config.libs = [
         ]
     ),
     # RVL_SDK
-    RVLSDKLib("base",
-        [
+    RVLSDKLib("base", [
             Object(Matching,    "base/PPCArch.c"),
         ]
     ),
-    RVLSDKLib("os",
-        [
+    RVLSDKLib("os", [
             Object(Matching,    "os/OS.c"),
             Object(Matching,    "os/OSAlarm.c"),
             Object(Matching,    "os/OSAlloc.c"),
@@ -1259,41 +1228,35 @@ config.libs = [
             Object(Matching,    "os/__ppc_eabi_init.cpp"),
         ]
     ),
-    RVLSDKLib("exi",
-        [
+    RVLSDKLib("exi", [
             Object(Matching, "exi/EXIBios.c", extra_cflags=["-schedule off -volatileasm"]),
             Object(Matching, "exi/EXIUart.c"),
             Object(Matching, "exi/EXICommon.c"),
         ]
     ),
-    RVLSDKLib("si",
-        [
+    RVLSDKLib("si", [
             Object(NonMatching, "si/SIBios.c"),
             Object(NonMatching, "si/SISamplingRate.c"),
         ]
     ),
-    RVLSDKLib("db",
-        [
+    RVLSDKLib("db", [
             Object(NonMatching, "db/db.c"),
         ]
     ),
-    RVLSDKLib("vi",
-        [
+    RVLSDKLib("vi", [
             Object(NonMatching, "vi/vi.c"),
             Object(NonMatching, "vi/i2c.c"),
             Object(NonMatching, "vi/vi3in1.c"),
         ]
     ),
-    RVLSDKLib("mtx",
-        [
+    RVLSDKLib("mtx", [
             Object(NonMatching, "mtx/mtx.c"),
             Object(NonMatching, "mtx/mtxvec.c"),
             Object(NonMatching, "mtx/mtx44.c"),
             Object(NonMatching, "mtx/vec.c"),
         ]
     ),
-    RVLSDKLib("gx",
-        [
+    RVLSDKLib("gx", [
             Object(NonMatching, "gx/GXInit.c"),
             Object(NonMatching, "gx/GXFifo.c"),
             Object(NonMatching, "gx/GXAttr.c"),
@@ -1310,24 +1273,21 @@ config.libs = [
             Object(NonMatching, "gx/GXPerf.c"),
         ]
     ),
-    RVLSDKLib("dvd",
-        [
+    RVLSDKLib("dvd", [
             Object(NonMatching, "dvd/dvdfs.c"),
             Object(NonMatching, "dvd/dvd.c"),
             Object(NonMatching, "dvd/dvdqueue.c"),
             Object(NonMatching, "dvd/dvderror.c"),
-            Object(NonMatching, "dvd/dvdidutils.c"),
+            Object(Matching,    "dvd/dvdidutils.c"),
             Object(Matching,    "dvd/dvdFatal.c"),
             Object(NonMatching, "dvd/dvd_broadway.c"),
         ]
     ),
-    RVLSDKLib("ai",
-        [
+    RVLSDKLib("ai", [
             Object(NonMatching, "ai/ai.c"),
         ]
     ),
-    RVLSDKLib("ax",
-        [
+    RVLSDKLib("ax", [
             Object(Matching,    "ax/AX.c"),
             Object(NonMatching, "ax/AXAlloc.c"),
             Object(NonMatching, "ax/AXAux.c"),
@@ -1339,8 +1299,7 @@ config.libs = [
             Object(Matching,    "ax/DSPCode.c"),
         ]
     ),
-    RVLSDKLib("axfx",
-        [
+    RVLSDKLib("axfx", [
             Object(NonMatching, "axfx/AXFXReverbHi.c"),
             Object(NonMatching, "axfx/AXFXReverbHiDpl2.c"),
             Object(NonMatching, "axfx/AXFXReverbHiExp.c"),
@@ -1355,8 +1314,7 @@ config.libs = [
             Object(NonMatching, "axfx/AXFXHooks.c"),
         ]
     ),
-    RVLSDKLib("mem",
-        [
+    RVLSDKLib("mem", [
             Object(Matching,    "mem/mem_heapCommon.c"),
             Object(NonMatching, "mem/mem_expHeap.c"),
             Object(NonMatching, "mem/mem_frameHeap.c"),
@@ -1365,22 +1323,19 @@ config.libs = [
             Object(Matching,    "mem/mem_list.c"),
         ]
     ),
-    RVLSDKLib("cx",
-        [
+    RVLSDKLib("cx", [
             Object(NonMatching, "cx/CXStreamingUncompression.c"),
             Object(NonMatching, "cx/CXUncompression.c"),
             Object(NonMatching, "cx/CXSecureUncompression.c"),
         ]
     ),
-    RVLSDKLib("dsp",
-        [
+    RVLSDKLib("dsp", [
             Object(NonMatching, "dsp/dsp.c"),
             Object(Matching,    "dsp/dsp_debug.c"),
             Object(NonMatching, "dsp/dsp_task.c"),
         ]
     ),
-    RVLSDKLib("card",
-        [
+    RVLSDKLib("card", [
             Object(NonMatching, "card/CARDBios.c"),
             Object(NonMatching, "card/CARDUnlock.c"),
             Object(NonMatching, "card/CARDRdwr.c"),
@@ -1398,29 +1353,26 @@ config.libs = [
             Object(NonMatching, "card/CARDNet.c"),
         ]
     ),
-    RVLSDKLib("nand",
-        [
-            Object(NonMatching, "nand/nand.c"),
-            Object(NonMatching, "nand/NANDOpenClose.c"),
-            Object(NonMatching, "nand/NANDCore.c"),
-            Object(NonMatching, "nand/NANDSecret.c"),
-            Object(NonMatching, "nand/NANDLogging.c"),
+    RVLSDKLib("nand", [
+            Object(Matching,    "nand/nand.c"),
+            Object(Matching,    "nand/NANDOpenClose.c"),
+            Object(Matching,    "nand/NANDCore.c"),
+            Object(Matching,    "nand/NANDSecret.c"),
+            Object(Matching,    "nand/NANDCheck.c"),
+            Object(Matching,    "nand/NANDLogging.c"),
         ]
     ),
-    RVLSDKLib("sc",
-        [
+    RVLSDKLib("sc", [
             Object(NonMatching, "sc/scsystem.c"),
             Object(NonMatching, "sc/scapi.c"),
             Object(NonMatching, "sc/scapi_prdinfo.c"),
         ]
     ),
-    RVLSDKLib("wenc",
-        [
+    RVLSDKLib("wenc", [
             Object(NonMatching, "wenc/wenc.c"),
         ]
     ),
-    RVLSDKLib("enc",
-        [
+    RVLSDKLib("enc", [
             Object(NonMatching, "enc/encutility.c"),
             Object(NonMatching, "enc/encunicode.c"),
             Object(NonMatching, "enc/encjapanese.c"),
@@ -1430,36 +1382,30 @@ config.libs = [
             Object(NonMatching, "enc/enckorean.c"),
         ]
     ),
-    RVLSDKLib("arc",
-        [
+    RVLSDKLib("arc", [
             Object(Matching, "arc/arc.c"),
         ]
     ),
-    RVLSDKLib("esp",
-        [
+    RVLSDKLib("esp", [
             Object(NonMatching, "esp/esp.c"),
         ]
     ),
-    RVLSDKLib("ipc",
-        [
+    RVLSDKLib("ipc", [
             Object(Matching,    "ipc/ipcMain.c"),
             Object(Matching,    "ipc/ipcclt.c"),
             Object(Matching,    "ipc/memory.c"),
             Object(Matching,    "ipc/ipcProfile.c"),
         ]
     ),
-    RVLSDKLib("fs",
-        [
-            Object(NonMatching, "fs/fs.c"),
+    RVLSDKLib("fs", [
+            Object(Matching,    "fs/fs.c"),
         ]
     ),
-    RVLSDKLib("pad",
-        [
+    RVLSDKLib("pad", [
             Object(NonMatching, "pad/Pad.c"),
         ]
     ),
-    RVLSDKLib("wpad",
-        [
+    RVLSDKLib("wpad", [
             Object(NonMatching, "wpad/WPAD.c"),
             Object(NonMatching, "wpad/WPADHIDParser.c"),
             Object(NonMatching, "wpad/WPADMem.c"),
@@ -1468,30 +1414,25 @@ config.libs = [
             Object(NonMatching, "wpad/debug_msg.c"),
         ]
     ),
-    RVLSDKLib("kpad",
-        [
+    RVLSDKLib("kpad", [
             Object(NonMatching, "kpad/KPAD.c"),
         ]
     ),
-    RVLSDKLib("euart",
-        [
+    RVLSDKLib("euart", [
             Object(Matching,    "euart/euart.c"),
         ]
     ),
-    RVLSDKLib("usb",
-        [
+    RVLSDKLib("usb", [
             Object(NonMatching, "usb/usb.c"),
         ]
     ),
-    RVLSDKLib("wud",
-        [
+    RVLSDKLib("wud", [
             Object(NonMatching, "wud/WUD.c"),
             Object(NonMatching, "wud/WUDHidHost.c"),
             Object(NonMatching, "wud/debug_msg.c"),
         ]
     ),
-    RVLSDKLib("bte",
-        [
+    RVLSDKLib("bte", [
             Object(NonMatching, "bte/gki_buffer.c"),
             Object(NonMatching, "bte/gki_time.c"),
             Object(NonMatching, "bte/gki_ppc.c"),
@@ -1575,34 +1516,28 @@ config.libs = [
             Object(NonMatching, "bte/sdp_utils.c"),
         ]
     ),
-    RVLSDKLib("TPL",
-        [
+    RVLSDKLib("TPL", [
             Object(Matching,    "tpl/TPL.c"),
         ]
     ),
-    RVLSDKLib("rso",
-        [
+    RVLSDKLib("rso", [
             Object(NonMatching, "rso/RSOLink.c"),
         ]
     ),
-    RVLSDKLib("es",
-        [
+    RVLSDKLib("es", [
             Object(NonMatching, "es/es.c"),
         ]
     ),
-    RVLSDKLib("wad",
-        [
+    RVLSDKLib("wad", [
             Object(Matching,    "wad/certs.c"),
             Object(NonMatching, "wad/wad.c"),
         ]
     ),
-    RVLSDKLib("cnt",
-        [
+    RVLSDKLib("cnt", [
             Object(NonMatching, "cnt/cnt.c"),
         ]
     ),
-    RVLSDKLib("fa",
-        [
+    RVLSDKLib("fa", [
             Object(NonMatching, "fa/api/pf_clib.c"),
             Object(NonMatching, "fa/api/pf_code.c"),
             Object(NonMatching, "fa/api/pf_service.c"),
@@ -1791,51 +1726,43 @@ config.libs = [
             Object(NonMatching, "fa/msc/puh_msc_blk.c"),
         ]
     ),
-    RVLSDKLib("sdi",
-        [
+    RVLSDKLib("sdi", [
             Object(NonMatching, "sdi/sdi_api.c"),
         ]
     ),
-    RVLSDKLib("nup",
-        [
+    RVLSDKLib("nup", [
             Object(NonMatching, "nup/nup.cpp"),
             Object(NonMatching, "nup/nup_nhttp.cpp"),
             Object(NonMatching, "nup/nup_mem.cpp"),
         ]
     ),
-    RVLSDKLib("scutil",
-        [
+    RVLSDKLib("scutil", [
             Object(Matching,    "scutil/idToIsoA2.c"),
         ]
     ),
-    RVLSDKLib("usbcmn",
-        [
+    RVLSDKLib("usbcmn", [
             Object(NonMatching, "usbcmn/puh_ker_mem.c"),
             Object(NonMatching, "usbcmn/puh_ker_msg.c"),
             Object(NonMatching, "usbcmn/puh_ker_sem.c"),
             Object(NonMatching, "usbcmn/puh_ker_tsk.c"),
         ]
     ),
-    RVLSDKLib("kbd",
-        [
+    RVLSDKLib("kbd", [
             Object(NonMatching, "kbd/kbd_lib.c"),
             Object(NonMatching, "kbd/kbd_lib_map_jp.c"),
             Object(NonMatching, "kbd/kbd_lib_map_us.c"),
             Object(NonMatching, "kbd/kbd_lib_map_eu.c"),
         ]
     ),
-    RVLSDKLib("kpr",
-        [
+    RVLSDKLib("kpr", [
             Object(NonMatching, "kpr/kpr_lib.c"),
         ]
     ),
-    RVLSDKLib("usbkbd",
-        [
+    RVLSDKLib("usbkbd", [
             Object(NonMatching, "usbkbd/usb_kbd.c"),
         ]
     ),
-    RVLSDKLib("cntcache",
-        [
+    RVLSDKLib("cntcache", [
             Object(NonMatching, "cntcache/cntcache.c"),
         ]
     ),
@@ -1862,8 +1789,7 @@ config.libs = [
         ]
     ),
     # Runtime library
-    RuntimeLib("Runtime.PPCEABI.H",
-        [
+    RuntimeLib("Runtime.PPCEABI.H", [
             Object(Matching,    "__mem.c"),
             Object(Matching,    "__va_arg.c"),
             Object(Matching,    "global_destructor_chain.c"),
@@ -1877,8 +1803,7 @@ config.libs = [
         ]
     ),
     # MSL Library
-    MSLLib("MSL_C.PPCEABI.bare.H",
-        [
+    MSLLib("MSL_C.PPCEABI.bare.H", [
             Object(NonMatching, "alloc.c"),
             Object(NonMatching, "errno.c"),
             Object(NonMatching, "ansi_files.c"),
@@ -1954,8 +1879,7 @@ config.libs = [
         ]
     ),
     # MetroTRK library
-    TRKLib("TRK_Hollywood_Revolution",
-        [
+    TRKLib("TRK_Hollywood_Revolution", [
             Object(Matching,    "Portable/msghndlr.c"),
 
             Object(Matching,    "Export/targsupp.c"),

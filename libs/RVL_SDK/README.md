@@ -2,8 +2,7 @@ Revolution SDK
 ==============
 A decompilation of the Revolution SDK (RVL_SDK) from the Wii Menu.  
 
-This version of the SDK is a mess.  
-Seems to be an early SDK revision (2006 or 2007) recompiled when then IPL was being built.
+Seems to be an early SDK revision around 2006 or early 2007 but recompiled when then IPL was being built.
 
 The Wii Menu has the following libraries linked (alphabetical order):
 * **AI** (Audio Interface Library)
@@ -58,6 +57,5 @@ Thanks to
 [SMGCommunity/Petari](https://github.com/SMGCommunity/Petari)  
 [doldecomp/dolsdk2001](https://github.com/doldecomp/dolsdk2004)  
 [projectPiki/pikmin2](https://github.com/projectPiki/pikmin2)  
-[devkitPro/libogc](https://github.com/devkitPro/libogc)  
 [wiibrew.org](https://wiibrew.org)  
 [Yet Another GameCube Documentation](https://www.gc-forever.com/yagcd)  

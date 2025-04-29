@@ -66,31 +66,31 @@ void __AXDepopFadeRmt(s32* all, s32* value, s16* depop) {
 }
 
 void __AXPrintStudio() {
-    __AXDepopFadeMain(&__AXSpbAL,  (void*)&__AXStudio.dpopLHi,  &__AXStudio.dpopLDelta);
-    __AXDepopFadeMain(&__AXSpbAR,  (void*)&__AXStudio.dpopRHi,  &__AXStudio.dpopRDelta);
-    __AXDepopFadeMain(&__AXSpbAS,  (void*)&__AXStudio.dpopSHi,  &__AXStudio.dpopSDelta);
+    __AXDepopFadeMain(&__AXSpbAL,  (void*)&__AXStudio.dLHi,  &__AXStudio.dLDelta);
+    __AXDepopFadeMain(&__AXSpbAR,  (void*)&__AXStudio.dRHi,  &__AXStudio.dRDelta);
+    __AXDepopFadeMain(&__AXSpbAS,  (void*)&__AXStudio.dSHi,  &__AXStudio.dSDelta);
 
-    __AXDepopFadeMain(&__AXSpbAAL, (void*)&__AXStudio.dpopALHi, &__AXStudio.dpopALDelta);
-    __AXDepopFadeMain(&__AXSpbAAR, (void*)&__AXStudio.dpopARHi, &__AXStudio.dpopARDelta);
-    __AXDepopFadeMain(&__AXSpbAAS, (void*)&__AXStudio.dpopASHi, &__AXStudio.dpopASDelta);
+    __AXDepopFadeMain(&__AXSpbAAL, (void*)&__AXStudio.dALHi, &__AXStudio.dALDelta);
+    __AXDepopFadeMain(&__AXSpbAAR, (void*)&__AXStudio.dARHi, &__AXStudio.dARDelta);
+    __AXDepopFadeMain(&__AXSpbAAS, (void*)&__AXStudio.dASHi, &__AXStudio.dASDelta);
 
-    __AXDepopFadeMain(&__AXSpbABL, (void*)&__AXStudio.dpopBLHi, &__AXStudio.dpopBLDelta);
-    __AXDepopFadeMain(&__AXSpbABR, (void*)&__AXStudio.dpopBRHi, &__AXStudio.dpopBRDelta);
-    __AXDepopFadeMain(&__AXSpbABS, (void*)&__AXStudio.dpopBSHi, &__AXStudio.dpopBSDelta);
+    __AXDepopFadeMain(&__AXSpbABL, (void*)&__AXStudio.dBLHi, &__AXStudio.dBLDelta);
+    __AXDepopFadeMain(&__AXSpbABR, (void*)&__AXStudio.dBRHi, &__AXStudio.dBRDelta);
+    __AXDepopFadeMain(&__AXSpbABS, (void*)&__AXStudio.dBSHi, &__AXStudio.dBSDelta);
 
-    __AXDepopFadeMain(&__AXSpbACL, (void*)&__AXStudio.dpopCLHi, &__AXStudio.dpopCLDelta);
-    __AXDepopFadeMain(&__AXSpbACR, (void*)&__AXStudio.dpopCRHi, &__AXStudio.dpopCRDelta);
-    __AXDepopFadeMain(&__AXSpbACS, (void*)&__AXStudio.dpopCSHi, &__AXStudio.dpopCSDelta);
+    __AXDepopFadeMain(&__AXSpbACL, (void*)&__AXStudio.dCLHi, &__AXStudio.dCLDelta);
+    __AXDepopFadeMain(&__AXSpbACR, (void*)&__AXStudio.dCRHi, &__AXStudio.dCRDelta);
+    __AXDepopFadeMain(&__AXSpbACS, (void*)&__AXStudio.dCSHi, &__AXStudio.dCSDelta);
     
-    __AXDepopFadeRmt(&__AXSpbMain0, (void*)&__AXStudio.dpopMain0Hi, &__AXStudio.dpopMain0Delta);
-    __AXDepopFadeRmt(&__AXSpbMain1, (void*)&__AXStudio.dpopMain1Hi, &__AXStudio.dpopMain1Delta);
-    __AXDepopFadeRmt(&__AXSpbMain2, (void*)&__AXStudio.dpopMain2Hi, &__AXStudio.dpopMain2Delta);
-    __AXDepopFadeRmt(&__AXSpbMain3, (void*)&__AXStudio.dpopMain3Hi, &__AXStudio.dpopMain3Delta);
+    __AXDepopFadeRmt(&__AXSpbMain0, (void*)&__AXStudio.dMain0Hi, &__AXStudio.dMain0Delta);
+    __AXDepopFadeRmt(&__AXSpbMain1, (void*)&__AXStudio.dMain1Hi, &__AXStudio.dMain1Delta);
+    __AXDepopFadeRmt(&__AXSpbMain2, (void*)&__AXStudio.dMain2Hi, &__AXStudio.dMain2Delta);
+    __AXDepopFadeRmt(&__AXSpbMain3, (void*)&__AXStudio.dMain3Hi, &__AXStudio.dMain3Delta);
 
-    __AXDepopFadeRmt(&__AXSpbAux0, (void*)&__AXStudio.dpopAux0Hi, &__AXStudio.dpopAux0Delta);
-    __AXDepopFadeRmt(&__AXSpbAux1, (void*)&__AXStudio.dpopAux1Hi, &__AXStudio.dpopAux1Delta);
-    __AXDepopFadeRmt(&__AXSpbAux2, (void*)&__AXStudio.dpopAux2Hi, &__AXStudio.dpopAux2Delta);
-    __AXDepopFadeRmt(&__AXSpbAux3, (void*)&__AXStudio.dpopAux3Hi, &__AXStudio.dpopAux3Delta);
+    __AXDepopFadeRmt(&__AXSpbAux0, (void*)&__AXStudio.dAux0Hi, &__AXStudio.dAux0Delta);
+    __AXDepopFadeRmt(&__AXSpbAux1, (void*)&__AXStudio.dAux1Hi, &__AXStudio.dAux1Delta);
+    __AXDepopFadeRmt(&__AXSpbAux2, (void*)&__AXStudio.dAux2Hi, &__AXStudio.dAux2Delta);
+    __AXDepopFadeRmt(&__AXSpbAux3, (void*)&__AXStudio.dAux3Hi, &__AXStudio.dAux3Delta);
 
     DCFlushRange(&__AXStudio, sizeof(AXSPB));
 }

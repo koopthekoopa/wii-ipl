@@ -34,7 +34,7 @@ BOOL PackArgs(void *addr, int argc, char** argv) {
     memset(bootInfo2, 0, BI2_SIZE);
 
     if (argc == 0) {
-        RAMWrite32(&bootInfo2[BI2_OFFSET_ARGOFFSET], 0);
+        *(u32*)&bootInfo2[BI2_OFFSET_ARGOFFSET] = 0;
     }
     else {
         argCount = argc;
@@ -62,8 +62,8 @@ BOOL PackArgs(void *addr, int argc, char** argv) {
 
         // Write copied arguments to BI2
         argPtr -= sizeof(argCount);
-        RAMWrite32(argPtr, argCount);
-        RAMWrite32(&bootInfo2[BI2_OFFSET_ARGOFFSET], argPtr - bootInfo2);
+        *(u32*)argPtr = argCount;
+        *(u32*)&bootInfo2[BI2_OFFSET_ARGOFFSET] = argPtr - bootInfo2;
     }
 
     return TRUE;
@@ -173,8 +173,8 @@ int __OSGetValidTicketIndex(ESTicketView *ticketViewList, u32 numTickets) {
                 }
 
                 // Get bits to access.
-                accessMask = (u16)((ticketViewList[i].sysAccessMask[1] << 8)
-                                  | ticketViewList[i].sysAccessMask[0]);
+                accessMask = (u16)((ticketViewList[i].accessMask[1] << 8) | ticketViewList[i].accessMask[0]);
+
                 for (j = 0; j < 16; j++) {
                     if (accessMask & (1 << j)) bits++;
                 }
@@ -261,7 +261,7 @@ void __OSLaunchTitle(ESTitleId titleId) {
 }
 
 inline BOOL __OSCheckTmdSysVersion(ESTmdView* tmd) {
-    ESSysVersion systemId = 0x0000000100000003;
+    ESTitleId systemId = 0x0000000100000003;
 
     char syspath[NAND_MAX_PATH+1] ALIGN32;
 

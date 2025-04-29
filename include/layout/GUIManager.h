@@ -78,7 +78,7 @@ namespace gui {
             mpManager(NULL) {
                 init();
             }
-            virtual ~Component();                                                                               // 0x1C (0x07)
+            virtual ~Component() {}                                                                             // 0x1C (0x07)
 
             virtual u32     getID() { return mID; }                                                             // 0x20 (0x08)
 

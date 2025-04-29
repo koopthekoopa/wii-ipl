@@ -13,10 +13,8 @@ namespace nw4r {
             f32 GetWidth() const    { return right - left; }
             f32 GetHeight() const   { return bottom - top; }
 
-            f32 left;
-            f32 top;
-            f32 right;
-            f32 bottom;
+            f32 left, top;      // 0x00
+            f32 right, bottom;  // 0x08
         };
     };
 };

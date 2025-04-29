@@ -13,11 +13,14 @@ int     strcpy(char* dst, const char* src);
 
 int     stricmp(const char* dst, const char* src);
 
+char*   strcat(char* dst, const char* src);
+
 char*   strncpy(char* dst, const char* src, size_t length);
 char*   strncat(char* dst, const char* src, size_t length);
 int     strncmp(const char* dst, const char* src, size_t length);
 
 size_t  strlen(const char* str);
+size_t  strnlen(const char* str, size_t length);
 
 int     sprintf(char* buffer, const char* format, ...);
 

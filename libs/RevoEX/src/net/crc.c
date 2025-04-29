@@ -1,4 +1,4 @@
-#include <revolution.h>
+#include <revolution/types.h>
 
 static const u16 crc16_table[] = {
     0x0000, 0xCC01, 0xD801, 0x1400,

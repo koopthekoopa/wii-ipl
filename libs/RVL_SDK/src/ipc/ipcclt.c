@@ -204,7 +204,7 @@ IOSError IPCCltInit() {
     bufferLo = IPCGetBufferLo();
 
     if ((void*)((u8*)bufferLo + i) > IPCGetBufferHi()) {
-        ret = IPC_RESULT_ALLOC_FAILED;
+        ret = IPC_RESULT_FAIL_ALLOC;
         goto out;
     }
 
@@ -230,7 +230,7 @@ IOSError IPCCltReInit() {
     bufferLo = IPCGetBufferLo();
 
     if ((void*)((u8*)bufferLo + i) > IPCGetBufferHi()) {
-        ret = IPC_RESULT_ALLOC_FAILED;
+        ret = IPC_RESULT_FAIL_ALLOC;
         goto out;
     }
 
@@ -249,7 +249,7 @@ static inline IOSError __ipcQueueRequest(IOSResourceRequest* req) {
     IOSError ret = IPC_RESULT_OK;
 
     if (DIFFERENTIATE(__responses.wcount, __responses.rcount) >= ARRSIZE(__responses.buf)) {
-        ret = IPC_RESULT_BUSY_INTERNAL;
+        ret = IPL_RESULT_FULLQUEUE;
     }
     else {
         __responses.buf[__responses.wptr] = req;
@@ -266,7 +266,7 @@ static inline IOSError __ios_Open(IOSRpcRequest* rpc, const char* path, u32 flag
     IOSResourceRequest* req;
 
     if (!rpc) {
-        ret = IPC_RESULT_INVALID_INTERNAL;
+        ret = IPC_RESULT_INVALID;
         goto error;
     }
 
@@ -284,14 +284,14 @@ static inline IOSError __ios_Ipc1(IOSFd fd, u32 cmd, IOSIpcCb callback, void* ca
     IOSResourceRequest* req;
 
     if (rpc == 0) {
-        ret = IPC_RESULT_INVALID_INTERNAL;
+        ret = IPC_RESULT_INVALID;
         goto error;
     }
     
     *rpc = (IOSRpcRequest*)ipcAllocReq();
     
     if (*rpc == 0) {
-        ret = IPC_RESULT_ALLOC_FAILED;
+        ret = IPC_RESULT_FAIL_ALLOC;
         goto error;
     }
 
@@ -312,7 +312,7 @@ static IOSError __ios_Ipc2(IOSRpcRequest* rpc, IOSIpcCb callback) {
     IOSResourceRequest* req;
 
     if (rpc == NULL) {
-        ret = IPC_RESULT_INVALID_INTERNAL;
+        ret = IPC_RESULT_INVALID;
     }
     else {
         req = &rpc->request;
@@ -405,7 +405,7 @@ IOSError IOS_CloseAsync(IOSFd fd, IOSIpcCb callback, void* callbackArg) {
 
     ret = __ios_Ipc1(fd, IPC_REQ_CLOSE, callback, callbackArg, &rpc);
 
-    if (ret == 0) {
+    if (ret == IPC_RESULT_OK) {
         ret = __ios_Ipc2(rpc, callback);
     }
 
@@ -418,7 +418,7 @@ IOSError IOS_Close(IOSFd fd) {
 
     ret = __ios_Ipc1(fd, IPC_REQ_CLOSE, NULL, NULL, &rpc);
 
-    if (ret == 0) {
+    if (ret == IPC_RESULT_OK) {
         ret = __ios_Ipc2(rpc, NULL);
     }
 
@@ -430,7 +430,7 @@ static IOSError __ios_Read(IOSRpcRequest* rpc, void* buf, u32 len) {
     IOSError            ret = IPC_RESULT_OK;
 
     if (!rpc) {
-        ret = IPC_RESULT_INVALID_INTERNAL;
+        ret = IPC_RESULT_INVALID;
         goto error;
     }
 
@@ -493,7 +493,7 @@ static IOSError __ios_Write(IOSRpcRequest* rpc, void* buf, u32 len) {
     IOSError            ret = IPC_RESULT_OK;
 
     if (!rpc) {
-        ret = IPC_RESULT_INVALID_INTERNAL;
+        ret = IPC_RESULT_INVALID;
         goto error;
     }
 
@@ -555,7 +555,7 @@ static IOSError __ios_Seek(IOSRpcRequest* rpc, s32 offset, u32 whence) {
     IOSError            ret = IPC_RESULT_OK;
 
     if (!rpc) {
-        ret = IPC_RESULT_INVALID_INTERNAL;
+        ret = IPC_RESULT_INVALID;
         goto error;
     }
 
@@ -616,7 +616,7 @@ static IOSError __ios_Ioctl(IOSRpcRequest* rpc, s32 cmd, void* input, u32 inputL
     IOSError            ret = IPC_RESULT_OK;
 
     if (!rpc) {
-        ret = IPC_RESULT_INVALID_INTERNAL;
+        ret = IPC_RESULT_INVALID;
         goto error;
     }
 
@@ -688,7 +688,7 @@ static IOSError __ios_Ioctlv(IOSRpcRequest* rpc, s32 cmd, u32 readCount, u32 wri
     u32 i, j;
 
     if (!rpc) {
-        ret = IPC_RESULT_INVALID_INTERNAL;
+        ret = IPC_RESULT_INVALID;
         goto err;
     }
 

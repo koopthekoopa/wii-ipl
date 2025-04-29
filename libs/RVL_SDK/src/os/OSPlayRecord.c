@@ -28,7 +28,7 @@ static s32              PlayRecordLastError = NAND_RESULT_OK;
 #define PLAY_RECORD_TICK(x) ((OSTime)(x)*(OSTime)OSSecondsToTicks(1))
 
 static u32 RecordCheckSum(OSPlayRecord* record) {
-    u32* ptr = (u32*)(record->titleName);
+    u32* ptr = (u32*)record->titleName;
     u32 sum = 0;
 
     u32 i;

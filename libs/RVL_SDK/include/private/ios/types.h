@@ -8,53 +8,50 @@ typedef s32 IOSError;
 typedef s32 IOSFd;
 typedef s32 IOSHeapId;
 
-typedef u32 IOSUid;
-typedef u16 IOSGid;
-
 #define IOS_REQUEST_MAX 48
 
 typedef IOSError (*IOSIpcCb)(IOSError ret, void *context);
 
 typedef struct IOSIoVector {
-    u8* base;   // 0x00
+    u8 *base;   // 0x00
     u32 length; // 0x04
 } IOSIoVector;
 
 typedef struct {
-    u8  *path;      // 0x00
+    u8* path;       // 0x00
     u32 flags;      // 0x04
     u32 ownerId;    // 0x08
     u16 groudId;    // 0x0C
 } IOSResourceOpen;
 
 typedef struct {
-    u8 *outPtr;     // 0x00
-    u32 outLen;     // 0x04
+    u8* outPtr; // 0x00
+    u32 outLen; // 0x04
 } IOSResourceRead;
 
 typedef struct {
-    u8 *inPtr;      // 0x00
-    u32 inLen;      // 0x04
+    u8* inPtr;  // 0x00
+    u32 inLen;  // 0x04
 } IOSResourceWrite;
 
 typedef struct {
-    s32 offset;     // 0x00
-    u32 whence;     // 0x04
+    s32 offset; // 0x00
+    u32 whence; // 0x04
 } IOSResourceSeek;
 
 typedef struct {
-    u32 cmd;        // 0x00
-    u8  *inPtr;     // 0x04
-    u32 inLen;      // 0x08
-    u8  *outPtr;    // 0x0C
-    u32 outLen;     // 0x10
+    u32 cmd;    // 0x00
+    u8* inPtr;  // 0x04
+    u32 inLen;  // 0x08
+    u8* outPtr; // 0x0C
+    u32 outLen; // 0x10
 } IOSResourceIoctl;
 
 typedef struct {
     u32         cmd;        // 0x00
     u32         readCount;  // 0x04
     u32         writeCount; // 0x08
-    IOSIoVector *vector;    // 0x0C
+    IOSIoVector* vector;    // 0x0C
 } IOSResourceIoctlv;
 
 typedef struct IOSResourceRequest {

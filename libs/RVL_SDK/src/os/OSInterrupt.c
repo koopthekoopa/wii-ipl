@@ -94,8 +94,8 @@ void __OSInterruptInit() {
     InterruptHandlerTable = (void*)OSPhysicalToCached(OS_ADDR_INTERRUPT_TABLE);
     memset(InterruptHandlerTable, 0, __OS_INTERRUPT_MAX * sizeof(__OSInterruptHandler));
 
-    RAMWrite32(OSPhysicalToCached(OS_ADDR_PREVIOUS_INTERRUPT), 0);
-    RAMWrite32(OSPhysicalToCached(OS_ADDR_CURRENT_INTERRUPT), 0);
+    *(u32*)OSPhysicalToCached(OS_ADDR_PREVIOUS_INTERRUPT)   = 0;
+    *(u32*)OSPhysicalToCached(OS_ADDR_CURRENT_INTERRUPT)    = 0;
 
     PI_WRITE_REG(PI_INTERRUPT_MASK, (1<<PI_INTERRUPT_MEM) | (1<<PI_INTERRUPT_DSP) | (1<<PI_INTERRUPT_AI) | (1<<PI_INTERRUPT_EXI));
     ACR_WRITE_REG32(HW_PPCIRQMASK, 0x40000000);
@@ -302,11 +302,11 @@ OSInterruptMask __OSMaskInterrupts(OSInterruptMask global) {
     BOOL enabled = OSDisableInterrupts();
     OSInterruptMask prev, curr, mask;
 
-    prev = RAMRead32(OSPhysicalToCached(OS_ADDR_PREVIOUS_INTERRUPT));
-    curr = RAMRead32(OSPhysicalToCached(OS_ADDR_CURRENT_INTERRUPT));
+    prev = *(u32*)OSPhysicalToCached(OS_ADDR_PREVIOUS_INTERRUPT);
+    curr = *(u32*)OSPhysicalToCached(OS_ADDR_CURRENT_INTERRUPT);
     mask = ~(prev | curr) & global;
     global |= prev;
-    RAMWrite32(OSPhysicalToCached(OS_ADDR_PREVIOUS_INTERRUPT), global);
+    *(u32*)OSPhysicalToCached(OS_ADDR_PREVIOUS_INTERRUPT) = global;
     while (mask) {
         mask = SetInterruptMask(mask, global | curr);
     }
@@ -319,11 +319,11 @@ OSInterruptMask __OSUnmaskInterrupts(OSInterruptMask global) {
     BOOL enabled = OSDisableInterrupts();
     OSInterruptMask prev, curr, mask;
 
-    prev = RAMRead32(OSPhysicalToCached(OS_ADDR_PREVIOUS_INTERRUPT));
-    curr = RAMRead32(OSPhysicalToCached(OS_ADDR_CURRENT_INTERRUPT));
+    prev = *(u32*)OSPhysicalToCached(OS_ADDR_PREVIOUS_INTERRUPT);
+    curr = *(u32*)OSPhysicalToCached(OS_ADDR_CURRENT_INTERRUPT);
     mask = (prev | curr) & global;
     global = prev & ~global;
-    RAMWrite32(OSPhysicalToCached(OS_ADDR_PREVIOUS_INTERRUPT), global);
+    *(u32*)OSPhysicalToCached(OS_ADDR_PREVIOUS_INTERRUPT) = global;
     while (mask) {
         mask = SetInterruptMask(mask, global | curr);
     }
@@ -426,39 +426,39 @@ void __OSDispatchInterrupt(__OSException exception, OSContext* context) {
     /* Processor Interface*/
     if (HAS_FLAG(instr, (1<<PI_INTERRUPT_HSP))) {
         SET_FLAG(cause, OS_INTERRUPTMASK_PI_HSP);
-	}
-	if (HAS_FLAG(instr, (1<<PI_INTERRUPT_DEBUG))) {
+    }
+    if (HAS_FLAG(instr, (1<<PI_INTERRUPT_DEBUG))) {
         SET_FLAG(cause, OS_INTERRUPTMASK_PI_DEBUG);
-	}
-	if (HAS_FLAG(instr, (1<<PI_INTERRUPT_PE_FINISH))) {
+    }
+    if (HAS_FLAG(instr, (1<<PI_INTERRUPT_PE_FINISH))) {
         SET_FLAG(cause, OS_INTERRUPTMASK_PI_PE_FINISH);
-	}
-	if (HAS_FLAG(instr, (1<<PI_INTERRUPT_PE_TOKEN))) {
+    }
+    if (HAS_FLAG(instr, (1<<PI_INTERRUPT_PE_TOKEN))) {
         SET_FLAG(cause, OS_INTERRUPTMASK_PI_PE_TOKEN);
-	}
-	if (HAS_FLAG(instr, (1<<PI_INTERRUPT_VI))) {
+    }
+    if (HAS_FLAG(instr, (1<<PI_INTERRUPT_VI))) {
         SET_FLAG(cause, OS_INTERRUPTMASK_PI_VI);
-	}
-	if (HAS_FLAG(instr, (1<<PI_INTERRUPT_SI))) {
+    }
+    if (HAS_FLAG(instr, (1<<PI_INTERRUPT_SI))) {
         SET_FLAG(cause, OS_INTERRUPTMASK_PI_SI);
-	}
-	if (HAS_FLAG(instr, (1<<PI_INTERRUPT_DI))) {
+    }
+    if (HAS_FLAG(instr, (1<<PI_INTERRUPT_DI))) {
         SET_FLAG(cause, OS_INTERRUPTMASK_PI_DI);
-	}
-	if (HAS_FLAG(instr, (1<<PI_INTERRUPT_RSW))) {
+    }
+    if (HAS_FLAG(instr, (1<<PI_INTERRUPT_RSW))) {
         SET_FLAG(cause, OS_INTERRUPTMASK_PI_RSW);
-	}
-	if (HAS_FLAG(instr, (1<<PI_INTERRUPT_CP))) {
-	    SET_FLAG(cause, OS_INTERRUPTMASK_PI_CP);
-	}
-	if (HAS_FLAG(instr, (1<<PI_INTERRUPT_ERROR))) {
-	    SET_FLAG(cause, OS_INTERRUPTMASK_PI_ERROR);
-	}
-	if (HAS_FLAG(instr, (1<<PI_INTERRUPT_ACR))) {
-	    SET_FLAG(cause, OS_INTERRUPTMASK_PI_ACR);
-	}
+    }
+    if (HAS_FLAG(instr, (1<<PI_INTERRUPT_CP))) {
+        SET_FLAG(cause, OS_INTERRUPTMASK_PI_CP);
+    }
+    if (HAS_FLAG(instr, (1<<PI_INTERRUPT_ERROR))) {
+        SET_FLAG(cause, OS_INTERRUPTMASK_PI_ERROR);
+    }
+    if (HAS_FLAG(instr, (1<<PI_INTERRUPT_ACR))) {
+        SET_FLAG(cause, OS_INTERRUPTMASK_PI_ACR);
+    }
 
-    unmasked = cause & ~(RAMRead32(OSPhysicalToCached(OS_ADDR_PREVIOUS_INTERRUPT)) | RAMRead32(OSPhysicalToCached(OS_ADDR_CURRENT_INTERRUPT)));
+    unmasked = cause & ~(*(u32*)OSPhysicalToCached(OS_ADDR_PREVIOUS_INTERRUPT) | *(u32*)OSPhysicalToCached(OS_ADDR_CURRENT_INTERRUPT));
 
     if (unmasked) {
         for (prio = InterruptPrioTable; ; ++prio) {

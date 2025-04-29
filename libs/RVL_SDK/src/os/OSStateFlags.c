@@ -5,7 +5,7 @@
 
 #include <string.h>
 
-static OSStateFlags StateFlags __attribute__ ((aligned(32)));
+static OSStateFlags StateFlags  ALIGN32;
 
 static u32 checkSum(OSStateFlags* flags) {
     u32  *ptr, i, sum;

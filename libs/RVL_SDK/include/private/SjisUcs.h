@@ -1,3 +1,8 @@
+#ifndef OS_SJIS_UCS_H
+#define OS_SJIS_UCS_H
+
+#include <revolution/types.h>
+
 static u16 Ucs00[] = {
     0x0,    0x0,    0x0,    0x0,    0x0,    0x0,    0x0,    0x0,
     0x0,    0x0,    0x0,    0x0,    0x0,    0x0,    0x0,    0x0,
@@ -3287,3 +3292,5 @@ static u16* UcsSjisTable[] = {
     NULL,   NULL,   NULL,   NULL,   NULL,   NULL,   NULL,   NULL,
     NULL,   NULL,   NULL,   NULL,   NULL,   NULL,   NULL,   UcsFF
 };
+
+#endif // OS_SJIS_UCS_H

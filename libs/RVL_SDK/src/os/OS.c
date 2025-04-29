@@ -170,15 +170,14 @@ skipPairedSingleInit:
 }
 
 u32 __OSGetHollywoodRev() {
-    return RAMRead32(OSPhysicalToCached((OS_ADDR_HOLLYWOOD_REVISION)));
+    return *(u32*)OSPhysicalToCached(OS_ADDR_HOLLYWOOD_REVISION);
 }
-
 
 void __OSGetIOSRev(OSIOSRev* rev) {
     u32 iosVer, iosBuild;
     // Read form RAM
-    iosVer = RAMRead32(OSPhysicalToUncached(OS_ADDR_IOS_REVISION));
-    iosBuild = RAMRead32(OSPhysicalToUncached(OS_ADDR_IOS_BUILD_DATE));
+    iosVer = *(u32*)OSPhysicalToUncached(OS_ADDR_IOS_REVISION);
+    iosBuild = *(u32*)OSPhysicalToUncached(OS_ADDR_IOS_BUILD_DATE);
 
     // Sort
     rev->reserved = ((iosVer >> 24) & 0xFF);
@@ -477,7 +476,7 @@ static void ReportOSInfo() {
 }
 
 static void CheckTargets() {
-    switch (RAMRead8(OSPhysicalToCached(OS_ADDR_BOOT_PROGRAM_TARGET))) {
+    switch (*(u8*)OSPhysicalToCached(OS_ADDR_BOOT_PROGRAM_TARGET)) {
         case 0x80: {
             break;
         }
@@ -491,7 +490,7 @@ static void CheckTargets() {
         }
     }
 
-    switch (RAMRead8(OSPhysicalToCached(OS_ADDR_APP_LOADER_TARGET))) {
+    switch (*(u8*)OSPhysicalToCached(OS_ADDR_APP_LOADER_TARGET)) {
         case 0x80: {
             break;
         }
@@ -560,20 +559,20 @@ void OSInit() {
             BI2DebugFlag = (u32*)((u32)bi2StartAddr + BI2_OFFSET_DEBUGFLAG);
             __PADSpec = *(u32*)((u32)bi2StartAddr + BI2_OFFSET_PADSPEC);
 
-            RAMWrite8(OSPhysicalToCached(OS_ADDR_BI2_DEBUG_FLAG), *BI2DebugFlag);
-            RAMWrite8(OSPhysicalToCached(OS_ADDR_BI2_PAD_SPEC), __PADSpec);
+            *(u8*)OSPhysicalToCached(OS_ADDR_BI2_DEBUG_FLAG)    = *BI2DebugFlag;
+            *(u8*)OSPhysicalToCached(OS_ADDR_BI2_PAD_SPEC)      = __PADSpec;
         }
         else {
             if (((OSBootInfo*)OSPhysicalToCached(OS_ADDR_BOOT_INFO))->arenaHi != NULL) {
-                BI2DebugFlagHolder = RAMRead8(OSPhysicalToCached(OS_ADDR_BI2_DEBUG_FLAG));
+                BI2DebugFlagHolder = *(u8*)OSPhysicalToCached(OS_ADDR_BI2_DEBUG_FLAG);
                 BI2DebugFlag = &BI2DebugFlagHolder;
-                __PADSpec = RAMRead8(OSPhysicalToCached(OS_ADDR_BI2_PAD_SPEC));
+                __PADSpec = *(u8*)OSPhysicalToCached(OS_ADDR_BI2_PAD_SPEC);
             }
         }
 
         __DVDLongFileNameFlag = TRUE;
 
-        arenaAddr = RAMReadPtr32(OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM1_START));
+        arenaAddr = RAMReadPtr(OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM1_START));
 
         if (arenaAddr == NULL) {
             if (OSIsMEM1Region(__ArenaLo)) {
@@ -591,7 +590,7 @@ void OSInit() {
 
         OSSetMEM1ArenaLo(arenaAddr);
 
-        arenaAddr = RAMReadPtr32(OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM1_END));
+        arenaAddr = RAMReadPtr(OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM1_END));
 
         if (arenaAddr == NULL) {
             void* tmp = BootInfo->arenaHi;
@@ -600,7 +599,7 @@ void OSInit() {
 
         OSSetMEM1ArenaHi(arenaAddr);
 
-        arenaAddr = RAMReadPtr32(OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM2_START));
+        arenaAddr = RAMReadPtr(OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM2_START));
 
         if (arenaAddr != NULL) {
             if (OSIsMEM2Region(__ArenaLo)) {
@@ -619,7 +618,7 @@ void OSInit() {
             OSSetMEM2ArenaLo(arenaAddr);
         }
 
-        arenaAddr = RAMReadPtr32(OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM2_END));
+        arenaAddr = RAMReadPtr(OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM2_END));
 
         if (arenaAddr != NULL) {
             OSSetMEM2ArenaHi(arenaAddr);

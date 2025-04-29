@@ -2,13 +2,12 @@
 #define PRIVATE_IPC_H
 
 #include <private/ipc/types.h>
+
 #include <private/ios/types.h>
 
 /* Main */
 
 void        IPCInit();
-void        IPCReInit();
-
 void        IPCReInit();
 
 u32         IPCReadReg(u32 regIdx);
@@ -34,5 +33,6 @@ void        IPCiProfReply(void* req, s32 fd);
 /* Clt */
 
 IOSError    IPCCltInit();
+IOSError    IPCCltReInit();
 
 #endif // PRIVATE_IPC_H

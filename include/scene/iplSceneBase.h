@@ -40,11 +40,11 @@ namespace ipl {
                 /** @brief Prepare to create scene */
                 virtual void    prepare()   {}
                 /** @brief Creating the scene */
-                virtual void    create();
+                virtual void    create()    {}
                 /** @brief Update the scene */
-                virtual void    calc();
+                virtual void    calc()      {}
                 /** @brief Rendering the scene */
-                virtual void    draw();
+                virtual void    draw()      {}
                 /** @brief Destroy the scene and clear from memory */
                 virtual void    destroy()   {}
 

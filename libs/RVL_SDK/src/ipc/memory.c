@@ -23,7 +23,7 @@ typedef struct IOSHeap {
 static IOSHeap __heaps[MAX_HEAPS];
 
 IOSHeapId iosCreateHeap(void *ptr, u32 size) {
-    IOSError    ret = IPC_RESULT_INVALID_INTERNAL;
+    IOSError    ret = IPC_RESULT_INVALID;
     u32         mask;
     s32         i;
     IOSHeap*    h;
@@ -41,7 +41,7 @@ IOSHeapId iosCreateHeap(void *ptr, u32 size) {
     }
 
     if (i == MAX_HEAPS) {
-        ret = IPC_RESULT_CONN_MAX_INTERNAL;
+        ret = IPC_RESULT_MAX;
         goto finish;
     }
 
@@ -61,19 +61,19 @@ finish:
 }
 
 IOSError iosDestroyHeap(IOSHeapId id) {
-    IOSError ret = IPC_RESULT_ACCESS_INTERNAL;
+    IOSError ret = IPC_RESULT_ACCESS;
     IOSHeap *h;
 
     int enabled = OSDisableInterrupts();
 
     if (id < 0 || id >= MAX_HEAPS || __heaps[id].base == NULL) {
-        ret = IPC_RESULT_INVALID_INTERNAL;
+        ret = IPC_RESULT_INVALID;
         goto finish;
     }
     h = __heaps + id;
 
     if (0 == id) {
-        ret = IPC_RESULT_ACCESS_INTERNAL;
+        ret = IPC_RESULT_ACCESS;
         goto finish;
     }
     
@@ -210,7 +210,7 @@ IOSError iosFree(IOSHeapId id, void* ptr) {
     u32         mask;
     IOSChunk*   p;
     IOSHeap*    h;
-    IOSError    ret = IPC_RESULT_INVALID_INTERNAL;
+    IOSError    ret = IPC_RESULT_INVALID;
     IOSChunk*   prev;
 
     mask = OSDisableInterrupts();
@@ -220,7 +220,7 @@ IOSError iosFree(IOSHeapId id, void* ptr) {
     }
 
     if (id < 0 || id >= MAX_HEAPS || __heaps[id].base == NULL) {
-        ret = IPC_RESULT_INVALID_INTERNAL;
+        ret = IPC_RESULT_INVALID;
         goto finish;
     }
     h = __heaps + id;

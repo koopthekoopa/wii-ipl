@@ -8,7 +8,6 @@ namespace ipl {
         FADER_SCENE_CLASS(BackMenu) {
             public:
                 BackMenu(EGG::Heap* heap);
-                virtual ~BackMenu() {}
 
                 virtual BOOL            isReady() const;
 

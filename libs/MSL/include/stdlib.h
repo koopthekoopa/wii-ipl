@@ -7,6 +7,8 @@
 
 namespace std {
     using   ::strtol;
+    
+    using   ::atoi;
 } // namespace std
 
 #endif

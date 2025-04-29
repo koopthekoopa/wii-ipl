@@ -5,19 +5,22 @@
 
 #include <cstring>
 
-#define INODE_MAX   0x1800
-#define BLOCKS_MAX  0x8000
+#define MINIMUM_GLOBAL_NAND_BLOCKS  3592 /* 449 data management blocks */
+#define MINIMUM_GLOBAL_NAND_INODES  128
+
+#define REQUIRED_BOOT_NAND_BLOCKS   3584 /* 448 data management blocks */
+#define REQUIRED_BOOT_NAND_INODES   96
 
 namespace ipl {
     namespace nandwall {
         using namespace nand::wrapper;
 
-        u32 user_used_fsblocks;
-        u32 user_used_inodes;
-        u32 global_free_inode;
-        u32 global_free_fsblock;
+        // Blocks used for the user area of the NAND (272 MB)
+        u32 user_used_fsblocks, user_used_inodes;
+        // Blocks used for the entire area of the NAND (512 MB)
+        u32 global_free_inode, global_free_fsblock;
 
-        void calcGlobalUsage_(u32* freeBlocks, u32* freeINodes, NANDFileSystemStatus* pStatus);
+        void calcGlobalUsage_(u32* freeBlocks, u32* freeINodes, NANDFileSystemStatus* status);
         BOOL isNandCapacity();
 
         void throwNandCheckCommand(void* work) {
@@ -47,8 +50,8 @@ namespace ipl {
         }
 
         BOOL isNandCapacity() {
-            if (user_used_fsblocks <= 17408 && user_used_inodes <= 4000 &&
-                global_free_fsblock >= 3592 && global_free_inode >= 128) {
+            if (user_used_fsblocks <= NAND_MAX_USER_BLOCKS && user_used_inodes <= NAND_MAX_USER_INODES &&
+                global_free_fsblock >= MINIMUM_GLOBAL_NAND_BLOCKS && global_free_inode >= MINIMUM_GLOBAL_NAND_INODES) {
                 return TRUE;  // We have enough free space!
             }
             else {
@@ -56,14 +59,14 @@ namespace ipl {
             }
         }
 
-        void calcGlobalUsage_(u32* freeBlocks, u32* freeINodes, NANDFileSystemStatus* pStatus) {
-            u32 bad = pStatus->badBlocks;
-            u32 reserved = pStatus->reservedBlocks;
-            u32 used = pStatus->usedBlocks;
-            u32 size = bad + reserved + 0x140;
+        void calcGlobalUsage_(u32* freeBlocks, u32* freeINodes, NANDFileSystemStatus* status) {
+            u32 bad = status->badBlocks;
+            u32 reserved = status->reservedBlocks;
+            u32 used = status->usedBlocks;
+            u32 exclude = bad + reserved + NAND_CRITICAL_BLOCKS;
 
-            *freeINodes = (INODE_MAX - 1) - pStatus->usedInodes;
-            *freeBlocks = (BLOCKS_MAX - size) - pStatus->usedBlocks;
+            *freeINodes = (NAND_MAX_INODES) - status->usedInodes;
+            *freeBlocks = (NAND_MAX_BLOCKS - exclude) - status->usedBlocks;
         }
 
         BOOL checkNandCapacityAppBootable() {
@@ -85,7 +88,7 @@ namespace ipl {
             freeINodes += excludedINodes - 1;
             
             // Check if we have enough to boot an application
-            if (freeBlocks >= 3584 && freeINodes >= 96) {
+            if (freeBlocks >= REQUIRED_BOOT_NAND_BLOCKS && freeINodes >= REQUIRED_BOOT_NAND_INODES) {
                 return TRUE;
             }
             else {

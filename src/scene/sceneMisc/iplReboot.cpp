@@ -30,8 +30,5 @@ namespace ipl {
                 unk_0x2C = unk_0x2C | 2;
             }
         }
-        
-        /// TODO!!: fix weak ordering!!
-        void Base::draw() {}
     }
 }

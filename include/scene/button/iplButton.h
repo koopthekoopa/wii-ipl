@@ -25,7 +25,6 @@ namespace ipl {
 
         SCENE_CLASS(Arrow) {
             public:
-                virtual ~Arrow() {}
                 virtual void draw();
         };
 
@@ -163,8 +162,8 @@ namespace ipl {
                     IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON,
                     IDANIM_APPEAR_ALL_BUTTONS,
                     IDANIM_DISPPEAR_ALL_BUTTONS,
-                    IDANIM_ARROW_RIGHT_UNKNOWN_19,
-                    IDANIM_ARROW_LEFT_UNKNOWN_20,
+                    IDANIM_ARROW_RIGHT_SELECT,
+                    IDANIM_ARROW_LEFT_SELECT,
                     IDANIM_ARROW_RIGHT_SELECT_ALT, // unused
                     IDANIM_ARROW_LEFT_SELECT_ALT,  // unused
                     IDANIM_ARROW_RIGHT_APPEAR,
@@ -280,12 +279,27 @@ namespace ipl {
 
             protected:
                 typedef struct Command {
+                    enum {
+                        TYPE_ANIM = 0,
+                        TYPE_TEXT
+                    };
                     int type;   // 0x00
-                    int animId; // 0x04
-                    u32 msgId;  // 0x08
+
+                    /* First argument (SIGNED) */
+                    union {
+                        s32 firstArg;
+                        s32 animId;
+                        s32 paneId;
+                    };          // 0x04
+
+                    /* Second argument (UNSIGNED)*/
+                    union {
+                        u32 secondArg;
+                        u32 msgId;
+                    };          // 0x08
                 } Command;
                 
-                EGG::Heap*                  get_heap()           { return mpHeap; }
+                EGG::Heap*                  get_heap()          { return mpHeap; }
 
                 SDMenuButton*               get_sd_menu_btn()   { return &mSdMenuBtn; } 
                 OptOutButton*               get_opt_out_btn()   { return &mOptOutBtn; } 

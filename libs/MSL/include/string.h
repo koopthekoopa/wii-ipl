@@ -10,16 +10,21 @@ namespace std {
     using   ::memset;
     using   ::memove;
 
+    using   ::memcmp;
+
     using   ::strcpy;
     using   ::strcmp;
 
     using   ::stricmp;
+    
+    using   ::strcat;
 
     using   ::strncpy;
     using   ::strncat;
     using   ::strncmp;
 
     using   ::strlen;
+    using   ::strnlen;
 
     using   ::sprintf;
 } // namespace std

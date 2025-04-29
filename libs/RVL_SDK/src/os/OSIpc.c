@@ -3,7 +3,7 @@
 #include <private/bus.h>
 
 static void* IpcBufferHi;
-static void* IpcBufferLo = (void*)0xFFFFFFFF;
+static void* IpcBufferLo = (void*)-1;
 
 void* __OSGetIPCBufferHi() {
     return IpcBufferHi;
@@ -14,6 +14,6 @@ void* __OSGetIPCBufferLo() {
 }
 
 void __OSInitIPCBuffer() {
-    IpcBufferLo = (void*)RAMRead32(OSPhysicalToCached(OS_ADDR_IPC_BUFFER_START));
-    IpcBufferHi = (void*)RAMRead32(OSPhysicalToCached(OS_ADDR_IPC_BUFFER_END));
+    IpcBufferLo = RAMReadPtr(OSPhysicalToCached(OS_ADDR_IPC_BUFFER_START));
+    IpcBufferHi = RAMReadPtr(OSPhysicalToCached(OS_ADDR_IPC_BUFFER_END));
 } 

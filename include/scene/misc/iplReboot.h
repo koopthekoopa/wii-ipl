@@ -11,8 +11,6 @@ namespace ipl {
         };
         SCENE_CLASS(Reboot) {
             public:
-                virtual ~Reboot() {}
-
                 virtual void    calc();
             
             private:
@@ -22,5 +20,3 @@ namespace ipl {
 }
 
 #endif // IPL_REBOOT_H
-
-

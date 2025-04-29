@@ -109,9 +109,5 @@ namespace ipl {
                 mpLayout->draw();
             }
         }
-
-        // TODO!!: fix weak ordering!!
-        void FaderSceneBase::calcCommonAfter() {}
-        void FaderSceneBase::initCalcNormal() {}
     }
 }

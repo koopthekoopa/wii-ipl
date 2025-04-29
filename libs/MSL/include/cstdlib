@@ -5,12 +5,12 @@
 extern "C" {
 #endif
 
-long int strtol(const char* str, char** endptr, int base);
+long int    strtol(const char* str, char** endptr, int base);
+
+int         atoi(const char * str);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif // MSL_CSTDLIB_H
-
-

@@ -6,8 +6,9 @@
 #define __attribute__(x)
 #define __declspec(x)
 
-extern void __sync();
+extern void         __sync();
 extern unsigned int __cntlzw(unsigned int value);
+extern void         __memclr(void* buffer, int len);
 #endif
 
 #endif // DECOMP_SHUT_UP_IDE_H

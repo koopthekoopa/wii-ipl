@@ -360,17 +360,17 @@ void PPCDisableSpeculation() {
 
 asm void PPCSetFpIEEEMode() {
 #ifdef __MWERKS__
-	nofralloc
-	mtfsb0 FPSCR_NI_BIT
-	blr
+    nofralloc
+    mtfsb0 FPSCR_NI_BIT
+    blr
 #endif // __MWERKS__
 }
 
 asm void PPCSetFpNonIEEEMode() {
 #ifdef __MWERKS__
-	nofralloc
-	mtfsb1 FPSCR_NI_BIT
-	blr
+    nofralloc
+    mtfsb1 FPSCR_NI_BIT
+    blr
 #endif // __MWERKS__
 }
 

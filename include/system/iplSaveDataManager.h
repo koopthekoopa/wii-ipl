@@ -81,7 +81,7 @@ namespace ipl {
                  * VERSION HISTORY
                  * ===============
                  * Version 1 - Initial version
-                 * Version 2 - Same as version 1 but memoSetting is initialized with different settings.
+                 * Version 2 - Same as version 1 but memoSetting is initialized differently.
                  * Version 3 - Add SD Card menu save data and `titleCache`
                  */
                 // CURRENT VERSION IS 3 !!
@@ -109,7 +109,7 @@ namespace ipl {
                     
                     /* END OF VERSION 3 DATA */
 
-                    u8                                          padding[0x0C];
+                    u8                                          padding[0x0C];                                      // 0x4A4
 
                     // Sums
                     u8                                          MD5Sum[NET_MD5_DIGEST_SIZE];                        // 0x4B0

@@ -28,8 +28,8 @@ namespace ipl {
             /*IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON*/{ /*start=*/3413.0f,  /*end=*/3426.0f },
             /*IDANIM_APPEAR_ALL_BUTTONS*/             { /*start=*/3640.0f,  /*end=*/3653.0f },
             /*IDANIM_DISPPEAR_ALL_BUTTONS*/           { /*start=*/3660.0f,  /*end=*/3673.0f },
-            /*IDANIM_ARROW_RIGHT_UNKNOWN_19*/         { /*start=*/10700.0f, /*end=*/10730.0f },
-            /*IDANIM_ARROW_LEFT_UNKNOWN_20*/          { /*start=*/10700.0f, /*end=*/10730.0f },
+            /*IDANIM_ARROW_RIGHT_SELECT*/             { /*start=*/10700.0f, /*end=*/10730.0f },
+            /*IDANIM_ARROW_LEFT_SELECT*/              { /*start=*/10700.0f, /*end=*/10730.0f },
             /*IDANIM_ARROW_RIGHT_SELECT_ALT*/         { /*start=*/10500.0f, /*end=*/10580.0f },
             /*IDANIM_ARROW_LEFT_SELECT_ALT*/          { /*start=*/10500.0f, /*end=*/10580.0f },
             /*IDANIM_ARROW_RIGHT_APPEAR*/             { /*start=*/10150.0f, /*end=*/10160.0f },
@@ -289,11 +289,11 @@ namespace ipl {
                 case 0: {
                     if (mButtonCmd.get_current_index() != 0) {
                         Command popped = mButtonCmd.get_popped_item();
-                        if (popped.type == 0) {
+                        if (popped.type == Command::TYPE_ANIM) {
                             animation(popped.animId);
                         }
                         else {
-                            const char* pane = mscButtonTextName[popped.animId];
+                            const char* pane = mscButtonTextName[popped.paneId];
                             setText(pane, System::getMessage(popped.msgId));
                         }
 
@@ -367,7 +367,7 @@ namespace ipl {
             // Update Opt Out button
             mOptOutBtn.update();
 
-            // Update SD Menu Icon  (if we are not in maintenance mode)
+            // Update SD Menu Icon (if we are not in maintenance mode)
             if (!System::isSafeMode()) {
                 mSdMenuBtn.update();
             }
@@ -498,11 +498,11 @@ namespace ipl {
         void Button::animation(int animNo) {
             layout::Animator* anim = NULL;
             switch(animNo) {
-                case IDANIM_ARROW_RIGHT_UNKNOWN_19: {
+                case IDANIM_ARROW_RIGHT_SELECT: {
                     anim = mpButtonAnim[ANIM_ARROW_R_AC];
                     break;
                 }
-                case IDANIM_ARROW_LEFT_UNKNOWN_20: {
+                case IDANIM_ARROW_LEFT_SELECT: {
                     anim = mpButtonAnim[ANIM_ARROW_L_AC];
                     break;
                 }

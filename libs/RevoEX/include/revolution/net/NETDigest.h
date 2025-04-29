@@ -19,12 +19,12 @@ typedef struct NETMD5Context {
             u32 d;
         };
         u32 state[4];
-    };
-    u64 length;
+    };          // 0x00
+    u64 length; // 0x04
     union {
         u32 buffer32[16];
-        u8 buffer8[64];
-    };
+        u8  buffer8[64];
+    };          // 0x0C
 } NETMD5Context;
 
 #define NET_MD5_DIGEST_SIZE 16

@@ -23,9 +23,5 @@ namespace ipl {
                 }
             }
         }
-
-        // TODO!!: fix weak ordering!!
-        void Base::calc() {}
-        void Base::create() {}
     }
 }

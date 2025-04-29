@@ -435,7 +435,7 @@ src/BS2/BS2ParentalControl.c:
 	.text       start:0x8137F690 end:0x8137F8A4
 	.data       start:0x81677788 end:0x816777A8
 
-src/BS2/BringUp.c:
+src/BS2/BS2BringUp.c:
 	.text       start:0x8137F8A4 end:0x8137F950
 
 src/BS2/BS2Reset.c:
@@ -2958,11 +2958,12 @@ libs/RVL_SDK/src/card/CARDStatEx.c:
 
 libs/RVL_SDK/src/nand/nand.c:
 	.text       start:0x8158CAB0 end:0x8158E098
+	.sdata      start:0x816C76B0 end:0x816C76B8
 
 libs/RVL_SDK/src/nand/NANDOpenClose.c:
 	.text       start:0x8158E098 end:0x8158F458
 	.data       start:0x816B6EA0 end:0x816B6EE0
-	.sdata      start:0x816C76B0 end:0x816C76C8
+	.sdata      start:0x816C76B8 end:0x816C76C8
 	.sbss       start:0x816C8C00 end:0x816C8C08
 
 libs/RVL_SDK/src/nand/NANDCore.c:
@@ -2975,12 +2976,15 @@ libs/RVL_SDK/src/nand/NANDCore.c:
 
 libs/RVL_SDK/src/nand/NANDSecret.c:
 	.text       start:0x815905D0 end:0x81590774
+
+libs/RVL_SDK/src/nand/NANDCheck.c:
+	.text       start:0x81590774 end:0x81590930
 	.data       start:0x816B7030 end:0x816B70E0
 	.sdata      start:0x816C76E8 end:0x816C76F8
 
 libs/RVL_SDK/src/nand/NANDLogging.c:
 	.bss        start:0x81141B40 end:0x81141E40
-	.text       start:0x81590774 end:0x815911E4
+	.text       start:0x81590930 end:0x815911E4
 	.data       start:0x816B70E0 end:0x816B71E8
 	.sdata      start:0x816C76F8 end:0x816C7700
 	.sbss       start:0x816C8C10 end:0x816C8C18
@@ -4558,4 +4562,4 @@ libs/MetroTRK/src/dolphin_Os/target_options.c:
 	.text       start:0x816363B0 end:0x816363C0
 
 GARBAGE_DATA:
-	.bss        start:0x811C10D4 end:0x81330000
+	.bss        start:0x811C10D4 end:0x81330000 align:4

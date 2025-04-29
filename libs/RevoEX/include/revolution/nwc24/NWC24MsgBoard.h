@@ -17,11 +17,11 @@ typedef struct NWC24MsgObj {
 #define NWC24_MAX_CHJP_SIZE     (NWC24_MAX_CHJP_BLOCKS * 64) + (NWC24_MAX_CHJP_BLOCKS * 8)
 
 typedef struct NWC224CHJumpHeader {
-    u32                 magic;                      // 0x00
-    u32                 totalSize;                  // 0x04
-    u32                 numBlocks;                  // 0x08
-    u32                 option;                     // 0x10
-    u64                 titleId;                    // 0x14
+    u32 magic;      // 0x00
+    u32 totalSize;  // 0x04
+    u32 numBlocks;  // 0x08
+    u32 option;     // 0x10
+    u64 titleId;    // 0x14
 } NWC24CHJumpHeader;
 
 #define NWC24_MAX_CHJP_SIZE     (NWC24_MAX_CHJP_BLOCKS * 64) + (NWC24_MAX_CHJP_BLOCKS * 8)

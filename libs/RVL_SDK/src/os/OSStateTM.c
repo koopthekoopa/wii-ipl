@@ -114,14 +114,14 @@ BOOL __OSInitSTM() {
     }
 
     StmVdInUse = FALSE;
-    StmImDesc = IOS_Open("/dev/stm/immediate", IPC_OPEN_NONE);
+    StmImDesc = IOS_Open("/dev/stm/immediate", IPC_ACCESS_NONE);
 
     if (StmImDesc < IPC_RESULT_OK) {
         StmReady = FALSE;
         return FALSE;
     }
 
-    StmEhDesc = IOS_Open("/dev/stm/eventhook", IPC_OPEN_NONE);
+    StmEhDesc = IOS_Open("/dev/stm/eventhook", IPC_ACCESS_NONE);
 
     if (StmEhDesc < IPC_RESULT_OK) {
         StmReady = FALSE;

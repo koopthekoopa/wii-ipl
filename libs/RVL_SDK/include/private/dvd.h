@@ -2,24 +2,27 @@
 #define PRIVATE_DVD_H
 
 #include <revolution/types.h>
+
+#include <revolution/dvd.h>
+#include <revolution/esp.h>
+
 #include <revolution/os/OSAlarm.h>
+
+#include <revolution/esp.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+#define DVD_DEVICE_CODE (1 << 15)
+
 u32     __DVDGetCoverStatus();
 void    __DVDResetWithNoSpinup();
 
 BOOL    __DVDTestAlarm(OSAlarm* alarm);
+BOOL    __DVDLowTestAlarm(OSAlarm* alarm);
 
-enum {
-    DVD_COVER_BUSY = 0,
-    DVD_COVER_OPENED,
-    DVD_COVER_CLOSED,
-};
-
-#define DVD_DEVICE_CODE (1 << 15)
+/* DVD PRIVATE */
 
 #ifdef __cplusplus
 }

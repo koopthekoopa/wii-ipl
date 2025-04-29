@@ -22,7 +22,6 @@ namespace ipl {
                 };
 
                 SettingButton(EGG::Heap* heap, int type);
-                virtual ~SettingButton();
 
                 virtual void            prepare();
                 virtual void            create();

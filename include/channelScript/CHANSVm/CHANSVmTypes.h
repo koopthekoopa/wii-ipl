@@ -17,7 +17,7 @@ typedef s64             CHANSVmS64;
 
 typedef int             CHANSVmInt;
 typedef long long int   CHANSVmInt64;
-typedef f64             CHANSVmFloat;
+typedef double          CHANSVmFloat;
 typedef size_t          CHANSVmSize;
 
 typedef int             CHANSVmBool;

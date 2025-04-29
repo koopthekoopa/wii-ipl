@@ -49,22 +49,22 @@ static void SetConsoleInfo() {
 
     // Memory
     bi->arenaLo             = NULL;
-    bi->memorySize          = RAMRead32(OSPhysicalToCached(OS_ADDR_PHYSICAL_MEM1_SIZE));
+    bi->memorySize          = *(u32*)OSPhysicalToCached(OS_ADDR_PHYSICAL_MEM1_SIZE);
 
     // Console type
     bi->consoleType         =  OS_CONSOLE_RETAIL;
     bi->consoleType         += PI_READ_REG(PI_UNIT_INFO) >> PI_UNIT_INFO_TYPE;
 
     // Simulated memory size
-    RAMWrite32(OSPhysicalToCached(OS_ADDR_SIMULATED_MEMORY_SIZE), bi->memorySize);
+    *(u32*)OSPhysicalToCached(OS_ADDR_SIMULATED_MEMORY_SIZE) = bi->memorySize;
 
     // MEM1
-    RAMWrite32(OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM1_START), NULL);
-    RAMWrite32(OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM1_END),   NULL);
+    *(u32*)OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM1_START) = 0;
+    *(u32*)OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM1_END)   = 0;
     
     // BS2 stuff
-    RAMWrite8(OSPhysicalToCached(OS_ADDR_BOOT_PROGRAM_TARGET),   0x80);
-    RAMWrite16(OSPhysicalToCached(OS_ADDR_DEV_KIT_VERSION),      BS2_VERSION);
+    *(u8*) OSPhysicalToCached(OS_ADDR_BOOT_PROGRAM_TARGET)  = 0x80;
+    *(u16*)OSPhysicalToCached(OS_ADDR_DEV_KIT_VERSION)      = BS2_VERSION;
 }
 
 void BS2Init() {

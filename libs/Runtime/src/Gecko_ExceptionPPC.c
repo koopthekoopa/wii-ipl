@@ -3,7 +3,7 @@
 #define NUM_FRAGMENT    1
 
 typedef int Bool;
-#define False 0
+#define False   0
 #define True    1
 
 #define Null    0

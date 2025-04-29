@@ -49,7 +49,7 @@ namespace nw4r {
 
                 Size                        mLayoutSize;        // 0x18
 
-                u8                          mOrigin;            // (?) 0x20
+                u8                          mOriginType;        // 0x20
 
                 static MEMAllocator*        mspAllocator;
         };
