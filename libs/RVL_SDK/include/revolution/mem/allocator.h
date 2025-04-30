@@ -17,14 +17,14 @@ typedef struct MEMAllocatorFunc {
     MEMAllocatorFreeFunc    freeFunc;   // 0x04
 } MEMAllocatorFunc;
 
-typedef struct MEMAllocator {
+struct MEMAllocator {
     const MEMAllocatorFunc* func;       // 0x00
     
     void*                   heap;       // 0x04
     
     u32                     heapParam1; // 0x08
     u32                     heapParam2; // 0x0C
-} MEMAllocator;
+};
 
 void*   MEMAllocFromAllocator(MEMAllocator*, u32 size);
 void    MEMFreeToAllocator(MEMAllocator*, void* buffer);

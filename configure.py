@@ -553,7 +553,7 @@ config.libs = [
             Object(Matching,    "utility/iplMessageBase.cpp"),
             Object(NonMatching, "utility/iplJpegDecoder.cpp"),
             Object(NonMatching, "utility/iplESMisc.cpp"),
-            Object(NonMatching, "utility/iplCSFlags.cpp"),
+            Object(Matching,    "utility/iplCSFlags.cpp"),
         ]
     ),
     IPLSection("layout", [

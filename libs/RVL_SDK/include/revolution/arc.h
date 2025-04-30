@@ -8,11 +8,14 @@ extern "C" {
 #endif
 
 typedef struct ARCHeader {
-    unsigned int    magic;      // 0x00
-    int             fstStart;   // 0x04
-    int             fstSize;    // 0x08
-    int             fileStart;  // 0x0C
-    int             pad[4];     // 0x10
+    u32 magic;      // 0x00
+
+    int fstStart;   // 0x04
+    int fstSize;    // 0x08
+
+    int fileStart;  // 0x0C
+
+    int pad[4];     // 0x10
 } ARCHeader;
 
 typedef struct ARCHandle {
@@ -20,18 +23,20 @@ typedef struct ARCHandle {
     void*   FSTStart;           // 0x04
     void*   fileStart;          // 0x08
     u32     entryNum;           // 0x0C
+
     char*   FSTStringStart;     // 0x10
     u32     FSTLength;          // 0x14
+
     u32     currDir;            // 0x18
 } ARCHandle;
 
-typedef struct {
+typedef struct ARCFileInfo {
     ARCHandle*  handle;         // 0x00
     u32         startOffset;    // 0x04
     u32         length;         // 0x08
 } ARCFileInfo;
 
-typedef struct {
+typedef struct ARCDir {
     ARCHandle*  handle;         // 0x00
     u32         entryNum;       // 0x04
     u32         location;       // 0x08
@@ -70,5 +75,3 @@ BOOL    ARCCloseDir(ARCDir* dir);
 #endif
 
 #endif // REVOLUTION_ARC_H
-
-

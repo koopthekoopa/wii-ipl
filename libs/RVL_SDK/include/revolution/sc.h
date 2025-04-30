@@ -7,6 +7,8 @@
 extern "C" {
 #endif
 
+BOOL    SCGetEULA();
+
 #define SC_ASPECT_RATIO_4x3         0
 #define SC_ASPECT_RATIO_16x9        1
 
@@ -66,9 +68,7 @@ s8      SCGetProductGameRegion();
 u32     SCGetSimpleAddressID();
 
 void    SCInit();
-
 void    SCFlush();
-
 u32     SCCheckStatus();
 
 #ifdef __cplusplus

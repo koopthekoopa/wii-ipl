@@ -6,6 +6,8 @@
 #include <revolution.h>
 #include <revolution/wpad.h>
 
+#include <private/bus.h>
+
 #include "iplMath.h"
 
 namespace ipl {
@@ -21,6 +23,14 @@ namespace ipl {
             public:
                 static char* getPath();
         };
+        template<typename T> inline void setBit(T* b, int pos) {
+            const T mask = (T)(1 << pos);
+            *b |= mask;
+        }
+
+        template<typename T> inline void clearBit(T* b, int pos) {
+            *b &= ~(T)(1 << pos);
+        }
     }
 }
 
