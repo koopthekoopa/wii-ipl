@@ -19,12 +19,21 @@ namespace nw4r {
                 return rval;
             }
         }
+
+        inline f32 FSelect(register f32 cond, register f32 ifPos, register f32 ifNeg) {
+            register f32 ret;
+            #ifdef __MWERKS__
+            asm { fsel ret, cond, ifPos, ifNeg };
+            #endif // __MWERKS__
+            return ret;
+        }
         
         inline f32 FAbs(register f32 x) {
+            register f32 ret;
             #ifdef __MWERKS__
-                asm { fabs x, x }
-            #endif
-            return x;
+                asm { fabs ret, x }
+            #endif // __MWERKS__
+            return ret;
         }
         
         f32 FrSqrt(f32 x);

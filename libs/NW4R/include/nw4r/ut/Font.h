@@ -8,20 +8,20 @@
 
 namespace nw4r {
     namespace ut {
-        enum FontMapMethod {
+        typedef enum FontMapMethod {
             FONT_MAP_DIRECT = 0,
             FONT_MAP_TABLE,
             FONT_MAP_SCAN,
-        };
+        } FontMapMethod;
 
-        enum FontEncoding {
+        typedef enum FontEncoding {
             FONT_ENCODING_UTF8 = 0,
             FONT_ENCODING_UTF16,
             FONT_ENCODING_SJIS,
             FONT_ENCODING_CP1252,
 
             NUM_OF_FONT_ENCODING
-        };
+        } FontEncoding;
 
         typedef struct CharWidths {
             s8  left;       // 0x00
@@ -99,15 +99,15 @@ namespace nw4r {
 
         class Font {
             public:
-                enum Type {
+                typedef enum Type {
                     TYPE_NULL = 0,
                     TYPE_ROM,
                     TYPE_RESOURCE,
-                };
+                } Type;
 
             public:
                 Font() : mReaderFunc(&CharStrmReader::ReadNextCharCP1252) {}
-                virtual ~Font()/* {}*/;
+                virtual ~Font() {}
 
                 virtual int             GetWidth() const = 0;
                 virtual int             GetHeight() const = 0;
@@ -135,19 +135,18 @@ namespace nw4r {
                 virtual int             GetCharWidth(u16 c) const = 0;
                 virtual CharWidths      GetCharWidths(u16 c) const = 0;
 
-                virtual void            GetGlyph(Glyph *glyph, u16 c) const = 0;
+                virtual void            GetGlyph(Glyph* glyph, u16 c) const = 0;
 
                 virtual FontEncoding    GetEncoding() const = 0;
 
                 void InitReaderFunc(FontEncoding encoding);
 
-                CharStrmReader GetCharStrmReader() const {
-                    CharStrmReader reader(mReaderFunc);
-                    return reader;
+                CharStrmReader GetCharStrmReader() const NO_INLINE /* This... isn't right??? */ {
+                    return CharStrmReader(mReaderFunc);
                 }
 
             private:
-                CharStrmReader::ReadRoutine mReaderFunc;    // 0x04
+                CharStrmReader::ReadFunc    mReaderFunc;    // 0x04
         };
     }
 }

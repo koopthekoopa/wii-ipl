@@ -1,0 +1,15 @@
+#ifndef MSL_CSTDARG_H
+#define MSL_CSTDARG_H
+
+#include <stdarg.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // MSL_CSTDARG_H

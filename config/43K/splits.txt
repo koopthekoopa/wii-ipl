@@ -2258,8 +2258,12 @@ libs/NW4R/src/ut/ut_NandFileStream.cpp:
 	.sbss       start:0x8166D580 end:0x8166D588
 
 libs/NW4R/src/ut/ut_Font.cpp:
-	.text       start:0x814ED1DC end:0x814ED2C4
-	.data       start:0x816443E8 end:0x81644470
+	.text       start:0x814ED1DC end:0x814ED284
+	.data       start:0x816443E8 end:0x81644418
+
+libs/NW4R/src/ut/ut_RomFont.cpp:
+	.text       start:0x814ED284 end:0x814ED2C4
+	.data       start:0x81644418 end:0x81644470
 
 libs/NW4R/src/ut/ut_ResFontBase.cpp:
 	.text       start:0x814ED2C4 end:0x814ED970

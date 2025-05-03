@@ -3,28 +3,22 @@
 
 #include <revolution/types.h>
 
-#define NW4R_UT_MAKE_SIGWORD(a, b, c, d)   \
-    static_cast<u32>(                       \
-          (static_cast<u8>(a) << 24)        \
-        | (static_cast<u8>(b) << 16)        \
-        | (static_cast<u8>(c) <<  8)        \
-        | (static_cast<u8>(d) <<  0)        \
-    )
-
 namespace nw4r {
     namespace ut {
         typedef struct BinaryFileHeader {
-            u32 signature;
-            u16 byteOrder;
-            u16 version;
-            u32 fileSize;
-            u16 headerSize;
-            u16 dataBlocks;
+            u32 signature;  // 0x00
+            u16 byteOrder;  // 0x04
+            u16 version;    // 0x06
+
+            u32 fileSize;   // 0x08
+            u16 headerSize; // 0x0C
+
+            u16 dataBlocks; // 0x0E
         } BinaryFileHeader;
 
         typedef struct BinaryBlockHeader {
-            u32 kind;
-            u32 size;
+            u32 kind;   // 0x00
+            u32 size;   // 0x04
         } BinaryBlockHeader;
 
         bool IsValidBinaryFile(const BinaryFileHeader* header, u32 signature, u16 version, u16 minBlocks);
@@ -32,5 +26,3 @@ namespace nw4r {
 }
 
 #endif // NW4R_UT_BINARY_FILE_FORMAT_H
-
-

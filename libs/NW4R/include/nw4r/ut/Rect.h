@@ -3,6 +3,8 @@
 
 #include <revolution/types.h>
 
+#include <nw4r/math/arithmetic.h>
+
 namespace nw4r {
     namespace ut {
         class Rect {
@@ -12,6 +14,26 @@ namespace nw4r {
 
             f32 GetWidth() const    { return right - left; }
             f32 GetHeight() const   { return bottom - top; }
+
+            void MoveTo(f32 x, f32 y) {
+                right   = x + GetWidth();
+                left    = x;
+
+                bottom  = y + GetHeight();
+                top     = y;
+            }
+
+            void Normalize() {
+                f32 l = left;
+                f32 t = top;
+                f32 r = right;
+                f32 b = bottom;
+
+                left    = math::FSelect(r - l, l, r);
+                right   = math::FSelect(r - l, r, l);
+                top     = math::FSelect(b - t, t, b);
+                bottom  = math::FSelect(b - t, b, t);
+            }
 
             f32 left, top;      // 0x00
             f32 right, bottom;  // 0x08

@@ -11,6 +11,8 @@ namespace std {
     using   ::wcslen;
 
     using   ::wcsncpy;
+
+    using   ::vswprintf;
 } // namespace std
 
 #endif

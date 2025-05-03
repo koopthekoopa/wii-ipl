@@ -7,27 +7,34 @@ namespace nw4r {
     namespace ut {
         class CharStrmReader {
             public:
-                typedef u16 (CharStrmReader::*ReadRoutine)();
+                typedef u16 (CharStrmReader::*ReadFunc)();
 
-                explicit CharStrmReader(ReadRoutine func) : mCharStrm(NULL), mReadFunc(func) {}
+                CharStrmReader(ReadFunc func) : mCharStrm(NULL), mReadFunc(func) {}
+
+                const void* GetCurrentPos() const       { return mCharStrm; }
+
+                void        Set(const char* stream)     { mCharStrm = stream; }
+                void        Set(const wchar_t* stream)  { mCharStrm = stream; }
+
+                u16         ReadNextCharUTF8();
+                u16         ReadNextCharUTF16();
+                u16         ReadNextCharCP1252();
+                u16         ReadNextCharSJIS();
+
+                u16         Next()                      { return (this->*mReadFunc)(); }
 
                 template<typename T> T GetChar(int offset) const {
-                    const T* charStrm = reinterpret_cast<const T*>(mCharStrm);
-                    return *(charStrm + offset);
+                    const T* const charStrm = static_cast<const T* const>(mCharStrm);
+                    return charStrm[offset];
                 }
 
                 template<typename T> void StepStrm(int step) {
-                    const T*& charStrm = reinterpret_cast<const T*&>(mCharStrm);
+                    const T* &charStrm = *reinterpret_cast<const T**>(&mCharStrm);
                     charStrm += step;
                 }
 
-                u16 ReadNextCharUTF8();
-                u16 ReadNextCharUTF16();
-                u16 ReadNextCharCP1252();
-                u16 ReadNextCharSJIS();
-
-                const void*         mCharStrm;  // 0x00
-                const ReadRoutine   mReadFunc;  // 0x04
+                const void*     mCharStrm;  // 0x00
+                const ReadFunc  mReadFunc;  // 0x04
         };
     }
 }

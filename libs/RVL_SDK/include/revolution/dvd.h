@@ -63,6 +63,18 @@ typedef struct DVDDriveInfo {
     u8  padding_0x8[24];
 } DVDDriveInfo;
 
+enum {
+    DVD_COVER_BUSY = 0,
+    DVD_COVER_OPENED,
+    DVD_COVER_CLOSED,
+};
+
+enum {
+    DVD_RESULT_OK = 0,
+};
+
+// Main DVD stuff
+
 void        DVDInit();
 
 BOOL        DVDReadDiskID(DVDCommandBlock* block, DVDDiskID* diskID, DVDCommandCallback callback);
@@ -85,11 +97,38 @@ BOOL        DVDCancelAllAsync(DVDCommandCallback callback);
 
 DVDDiskID*  DVDGetCurrentDiskID();
 
-enum {
-    DVD_COVER_BUSY = 0,
-    DVD_COVER_OPENED,
-    DVD_COVER_CLOSED,
+// DVD Filesystem
+
+typedef struct DVDFileInfo DVDFileInfo;
+typedef void (*DVDCallback)(s32 result, DVDFileInfo* fileInfo);
+
+struct DVDFileInfo {
+    DVDCommandBlock cb;         // 0x00
+
+    u32             startAddr;  // 0x04
+    u32             length;     // 0x08
+
+    DVDCallback     callback;   // 0x0C
 };
+
+typedef struct DVDDir {
+    u32 entryNum;   // 0x00
+    u32 location;   // 0x04
+    u32 next;       // 0x08
+} DVDDir;
+
+typedef struct DVDDirEntry {
+    u32     entryNum;   // 0x00
+    BOOL    isDir;      // 0x04
+    char*   name;       // 0x08
+} DVDDirEntry;
+
+BOOL    DVDFastOpen(s32 entrynum, DVDFileInfo* fileInfo);
+
+s32     DVDReadPrio(DVDFileInfo* fileInfo, void* addr, s32 length, s32 offset, s32 prio);
+BOOL    DVDReadAsyncPrio(DVDFileInfo* fileInfo, void* addr, s32 length, s32 offset, DVDCallback callback, s32 prio);
+
+BOOL    DVDClose(DVDFileInfo* fileInfo);
 
 #ifdef __cplusplus
 }
