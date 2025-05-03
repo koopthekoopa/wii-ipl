@@ -279,6 +279,9 @@ if args.debug:
 else:
     cflags_base.append("-DNDEBUG=1")
 
+if args.non_matching:
+    cflags_base.append("-DNON_MATCHING")
+
 # Main IPL flags
 cflags_ipl = [
     *cflags_base,
@@ -1250,27 +1253,27 @@ config.libs = [
         ]
     ),
     RVLSDKLib("mtx", [
-            Object(NonMatching, "mtx/mtx.c"),
-            Object(NonMatching, "mtx/mtxvec.c"),
-            Object(NonMatching, "mtx/mtx44.c"),
-            Object(NonMatching, "mtx/vec.c"),
+            Object(Matching,    "mtx/mtx.c"),
+            Object(Matching,    "mtx/mtxvec.c"),
+            Object(Matching,    "mtx/mtx44.c"),
+            Object(Matching,    "mtx/vec.c"),
         ]
     ),
     RVLSDKLib("gx", [
-            Object(NonMatching, "gx/GXInit.c"),
-            Object(NonMatching, "gx/GXFifo.c"),
-            Object(NonMatching, "gx/GXAttr.c"),
-            Object(NonMatching, "gx/GXMisc.c"),
-            Object(NonMatching, "gx/GXGeometry.c"),
-            Object(NonMatching, "gx/GXFrameBuf.c"),
-            Object(NonMatching, "gx/GXLight.c"),
-            Object(NonMatching, "gx/GXTexture.c"),
-            Object(NonMatching, "gx/GXBump.c"),
-            Object(NonMatching, "gx/GXTev.c"),
-            Object(NonMatching, "gx/GXPixel.c"),
-            Object(NonMatching, "gx/GXDisplayList.c"),
-            Object(NonMatching, "gx/GXTransform.c"),
-            Object(NonMatching, "gx/GXPerf.c"),
+            Object(Matching,    "gx/GXInit.c"),
+            Object(Matching,    "gx/GXFifo.c"),
+            Object(Matching,    "gx/GXAttr.c"),
+            Object(Matching,    "gx/GXMisc.c"),
+            Object(Matching,    "gx/GXGeometry.c"),
+            Object(Matching,    "gx/GXFrameBuf.c"),
+            Object(Matching,    "gx/GXLight.c"),
+            Object(Matching,    "gx/GXTexture.c"),
+            Object(Matching,    "gx/GXBump.c"),
+            Object(Matching,    "gx/GXTev.c"),
+            Object(Matching,    "gx/GXPixel.c"),
+            Object(Matching,    "gx/GXDisplayList.c"),
+            Object(Matching,    "gx/GXTransform.c"),
+            Object(Matching,    "gx/GXPerf.c"),
         ]
     ),
     RVLSDKLib("dvd", [

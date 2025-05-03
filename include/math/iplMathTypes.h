@@ -7,10 +7,7 @@
 
 #define IPL_MATH_CLAMP(x, min, max) x < min ? min : (x > max ? max : x)
 
-// **(dirty fucking) HACK**
-#define IPL_MATH_INFINITY    0x1.FFFFFFP127f
-#define IPL_MATH_NINFINITY  -0x1.FFFFFFP127f
-#define IPL_MATH_NULL_FLOAT IPL_MATH_INFINITY
+#define IPL_MATH_NULL_FLOAT ((1.0f / 0.0f))
 
 namespace ipl {
     namespace math {

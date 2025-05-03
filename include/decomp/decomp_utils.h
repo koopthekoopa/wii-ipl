@@ -12,9 +12,9 @@
 #define ROUNDDOWN(x, a)         (((unsigned long)(x)) & ~((a) - 1))
 #define PTR_ROUNDDOWN(x, a)     ((void*)ROUNDDOWN(x, a))
 
-#define NO_INLINE               __attribute__((never_inline))
-
 #define MEM_CLEAR(x)            __memclr((x), sizeof(*(x)))
+
+#define NO_INLINE               __attribute__((never_inline))
 
 #ifdef __MWERKS__
 #define ADDRESS(addr) : (addr)
@@ -28,5 +28,12 @@
     void CONCAT(FORCEACTIVE##module, __LINE__)() {  \
         fake_function(0, args);                        \
     }
+
+#define DECOMP_FORCE_LITERAL(module, ...)                                       \
+    void CONCAT(FORCELITERAL##module, __LINE__)(void);                         \
+    void CONCAT(FORCELITERAL##module, __LINE__)(void) {                        \
+        (__VA_ARGS__);                                                         \
+    }
+
 
 #endif // DECOMP_UTILS_H

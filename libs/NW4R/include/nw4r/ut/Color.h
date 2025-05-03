@@ -19,6 +19,8 @@ namespace nw4r {
             static const u32 GRAY  = 0x808080FF;
             static const u32 WHITE = 0xFFFFFFFF;
 
+            static const u32 NOCOLOR = 0x00000000;
+
             Color() {
                 operator=(WHITE);
             }
@@ -60,6 +62,7 @@ namespace nw4r {
             operator u32() const {
                 return ToU32ref();
             }
+        
         protected:
             u32& ToU32ref() {
                 return *reinterpret_cast<u32*>(this);
@@ -67,10 +70,8 @@ namespace nw4r {
             const u32& ToU32ref() const {
                 return *reinterpret_cast<const u32*>(this);
             }
-        };
+        } Color;
     }
 }
 
 #endif // NW4R_UT_COLOR_H
-
-

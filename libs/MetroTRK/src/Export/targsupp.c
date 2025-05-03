@@ -1,6 +1,6 @@
 
 // Yes, versions other than 4.3U align by 8.
-#ifdef VERSION_43U
+#if defined(VERSION_43U)
 #pragma function_align 32
 #else
 #pragma function_align 8

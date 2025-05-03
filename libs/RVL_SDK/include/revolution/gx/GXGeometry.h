@@ -9,18 +9,26 @@
 extern "C" {
 #endif
 
-void                GXBegin(GXPrimitive type, GXVtxFmt format, u16 numVertices);
-
-void                GXClearVtxDesc();
 void                GXSetVtxDesc(GXAttr attr, GXAttrType type);
-void                GXSetVtxAttrFmt(GXVtxFmt format, GXAttr attr, GXCompCnt count, GXCompType type, u8 frac);
+void                GXClearVtxDesc();
+void                GXSetVtxAttrFmt(GXVtxFmt vtxfmt, GXAttr attr, GXCompCnt cnt, GXCompType type, u8 frac);
+void                GXSetVtxAttrFmtv(GXVtxFmt vtxfmt, const GXVtxAttrFmtList* list);
+void                GXSetArray(GXAttr attr, void* base_ptr, u8 stride);
+void                GXInvalidateVtxCache();
+void                GXSetTexCoordGen2(GXTexCoordID dst_coord, GXTexGenType func, GXTexGenSrc src_param, u32 mtx, GXBool normalize, u32 pt_texmtx);
+void                GXSetNumTexGens(u8 nTexGens);
 
-void                GXSetNumTexGens(u8 count);
+static inline void  GXSetTexCoordGen(GXTexCoordID dst_coord, GXTexGenType func, GXTexGenSrc src_param, u32 mtx) {
+    GXSetTexCoordGen2(dst_coord, func, src_param, mtx, GX_FALSE, GX_PTIDENTITY);
+}
 
-void                GXSetLineWidth(u8 width, GXTexOffset offset);
-void                GXSetPointSize(u8 pointSize, GXTexOffset offset);
+void                GXBegin(GXPrimitive type, GXVtxFmt vtxfmt, u16 nverts);
 
 static inline void  GXEnd() {}
+
+void                GXSetLineWidth(u8 width, GXTexOffset texOffsets);
+void                GXSetPointSize(u8 pointSize, GXTexOffset texOffsets);
+void                GXEnableTexOffsets(GXTexCoordID coord, u8 line_enable, u8 point_enable);
 
 #ifdef __cplusplus
 }

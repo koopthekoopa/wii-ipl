@@ -54,8 +54,7 @@ The Wii Menu has the following libraries linked (alphabetical order):
 Thanks to
 ---------
 [kiwi515/ogws](https://github.com/kiwi515/ogws)  
+[doldecomp/dolsdk2004](https://github.com/doldecomp/dolsdk2004)  
 [SMGCommunity/Petari](https://github.com/SMGCommunity/Petari)  
-[doldecomp/dolsdk2001](https://github.com/doldecomp/dolsdk2004)  
-[projectPiki/pikmin2](https://github.com/projectPiki/pikmin2)  
 [wiibrew.org](https://wiibrew.org)  
 [Yet Another GameCube Documentation](https://www.gc-forever.com/yagcd)  

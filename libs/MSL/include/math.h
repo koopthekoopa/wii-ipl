@@ -7,10 +7,17 @@
 
 namespace std {
     using   ::abs;
+    using   ::fabs;
+
+    using   ::sin;
+    using   ::cos;
+    using   ::tan;
+
+    using   ::sinf;
+    using   ::cosf;
+    using   ::tanf;
 } // namespace std
 
 #endif
 
 #endif // MSL_MATH_H
-
-
