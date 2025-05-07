@@ -4,9 +4,12 @@ A decompilation of EGG from the Wii Menu.
 
 This may possibly be an earlier version as, according to the link order, the `audio` section is in the `core` section.
 
-The Wii Menu has the following libraries linked:
-* **core** (Main core and audio features)
-* **prim** (Types?; only contains assert here)
+List of libraries that are linked (in alphabetical order):
+
+|   Name   |             Description           |      Matched?      |
+|----------|-----------------------------------|--------------------|
+| **core** | Main core with audio features     | :x: |
+| **prim** | Types?; only contains assert here | :x: |
 
 Thanks to
 ---------
