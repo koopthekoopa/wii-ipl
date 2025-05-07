@@ -6,7 +6,7 @@ The build dates refer to when the program was built as they were recompiled.
 
 List of libraries that are linked (in alphabetical order):
 
-|     Name     |                          Description                        |      Matched?      |
+|     Name     |                          Description                        |      Matched       |
 |--------------|-------------------------------------------------------------|--------------------|
 | **AI**       | Audio Inerface Library                                      | :x: |
 | **ARC**      | Archive Library; for reading "U8 files"                     | :heavy_check_mark: |
@@ -19,7 +19,7 @@ List of libraries that are linked (in alphabetical order):
 | **CNTCACHE** | Unknown; Provides a file with commands to do                | :x: |
 | **CX**       | Compression Library; for LZ, Huffman and RunLength          | :x: |
 | **DB**       | Debug Interface Library                                     | :x: |
-| **DSP**      | Digital Signal Processor Driver Library                     | :x: |
+| **DSP**      | Digital Signal Processor Driver Library                     | :heavy_check_mark: |
 | **DVD**      | DVD Drive Library                                           | :x: |
 | **ENC**      | Character Encoding Library                                  | :x: |
 | **ES**       | Private eTicket Services Library                            | :x: |
@@ -50,7 +50,7 @@ List of libraries that are linked (in alphabetical order):
 | **USBKBD**   | USB Keyboard Driver Library                                 | :x: |
 | **VI**       | Video Interface Library                                     | :x: |
 | **WAD**      | WAD Package Library                                         | :x: |
-| **WENC**     | Wii Remote Speaker Encoding Library                         | :x: |
+| **WENC**     | Wii Remote Speaker Encoding Library                         | :heavy_check_mark: |
 | **WPAD**     | Low Level Wii Remote Library                                | :x: |
 | **WUD**      | Wireless Driver Library                                     | :x: |
 

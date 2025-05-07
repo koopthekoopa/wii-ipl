@@ -6,7 +6,7 @@ This may possibly be an earlier version as, according to the link order, the `au
 
 List of libraries that are linked (in alphabetical order):
 
-|   Name   |             Description           |      Matched?      |
+|   Name   |             Description           |      Matched       |
 |----------|-----------------------------------|--------------------|
 | **core** | Main core with audio features     | :x: |
 | **prim** | Types?; only contains assert here | :x: |

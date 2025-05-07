@@ -122,7 +122,8 @@ namespace nw4r {
         
             if (success) {
                 mFilePosition.Skip(size);
-            } else {
+            }
+            else {
                 mIsBusy = false;
             }
         

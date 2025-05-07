@@ -1330,9 +1330,9 @@ config.libs = [
         ]
     ),
     RVLSDKLib("dsp", [
-            Object(NonMatching, "dsp/dsp.c"),
+            Object(Matching,    "dsp/dsp.c"),
             Object(Matching,    "dsp/dsp_debug.c"),
-            Object(NonMatching, "dsp/dsp_task.c"),
+            Object(Matching,    "dsp/dsp_task.c"),
         ]
     ),
     RVLSDKLib("card", [
@@ -1369,7 +1369,7 @@ config.libs = [
         ]
     ),
     RVLSDKLib("wenc", [
-            Object(NonMatching, "wenc/wenc.c"),
+            Object(Matching,    "wenc/wenc.c"),
         ]
     ),
     RVLSDKLib("enc", [

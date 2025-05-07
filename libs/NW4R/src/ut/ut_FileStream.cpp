@@ -26,7 +26,8 @@ namespace nw4r {
         
             if (newOffset < 0) {
                 mPosition = 0;
-            } else {
+            }
+            else {
                 mPosition = newOffset;
                 mFileSize = Max(mPosition, mFileSize);
             }

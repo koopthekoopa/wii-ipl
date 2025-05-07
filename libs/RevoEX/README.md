@@ -4,7 +4,7 @@ A decompilation of Revolution Extension (RevoEX) from the Wii Menu.
 
 List of libraries that are linked (in alphabetical order):
 
-|   Name    |             Description           |      Matched?      |
+|   Name    |             Description           |      Matched       |
 |-----------|-----------------------------------|--------------------|
 | **CDB**   | Message Board File System Library | :x: |
 | **NCD**   | Network Settings Library          | :x: |

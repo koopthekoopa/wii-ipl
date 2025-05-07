@@ -12,6 +12,7 @@ extern unsigned int __cntlzw(unsigned int value);
 extern void         __memclr(void* buffer, int len);
 extern unsigned int __rlwimi(unsigned int a, unsigned int b, unsigned int c, unsigned int d, unsigned int e);
 extern void*        __alloca(unsigned int blockSize);
+extern int          __abs(int n);
 
 #endif
 
