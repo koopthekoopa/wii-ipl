@@ -18,7 +18,7 @@ List of libraries that are linked (in alphabetical order):
 | **CNT**      | Content API Library for Channel Titles                      | :x: |
 | **CNTCACHE** | Unknown; Provides a file with commands to do                | :x: |
 | **CX**       | Compression Library; for LZ, Huffman and RunLength          | :x: |
-| **DB**       | Debug Interface Library                                     | :x: |
+| **DB**       | Debug Interface Library                                     | :heavy_check_mark: |
 | **DSP**      | Digital Signal Processor Driver Library                     | :heavy_check_mark: |
 | **DVD**      | DVD Drive Library                                           | :x: |
 | **ENC**      | Character Encoding Library                                  | :x: |

@@ -4,6 +4,16 @@
 #include <revolution/types.h>
 #include <revolution/os/OSException.h>
 
+typedef struct DBInterface {
+    u32     bPresent;                   // 0x00
+    u32     exceptionMask;              // 0x04
+    void    (*ExceptionDestination)();  // 0x08
+    void*   exceptionReturn;            // 0x0C
+} DBInterface;
+
+extern DBInterface* __DBInterface;
+
+void    __DBExceptionDestination();
 BOOL    __DBIsExceptionMarked(__OSException exception);
 
 void    DBPrintf(const char* format, ...);

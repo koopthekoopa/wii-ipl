@@ -1240,7 +1240,7 @@ config.libs = [
         ]
     ),
     RVLSDKLib("db", [
-            Object(NonMatching, "db/db.c"),
+            Object(Matching,    "db/db.c"),
         ]
     ),
     RVLSDKLib("vi", [

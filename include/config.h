@@ -16,6 +16,9 @@
 /** @brief Enables OSReport for DSP */
 // #define ENABLE_DSP_REPORT
 
+/** @brief Enables OSReport for debug logs from SDK */
+// #define ENABLE_DB_REPORT
+
 /** @brief Load IPL content by loading the System Menu TMD manually. */
 // #define STAND_ALONE_BUILD
 
