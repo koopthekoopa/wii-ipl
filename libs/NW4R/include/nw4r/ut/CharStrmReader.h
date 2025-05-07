@@ -29,7 +29,7 @@ namespace nw4r {
                 }
 
                 template<typename T> void StepStrm(int step) {
-                    const T* &charStrm = *reinterpret_cast<const T**>(&mCharStrm);
+                    const T*& charStrm = *reinterpret_cast<const T**>(&mCharStrm);
                     charStrm += step;
                 }
 

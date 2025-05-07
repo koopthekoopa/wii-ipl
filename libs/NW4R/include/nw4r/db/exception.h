@@ -1,9 +1,9 @@
 #ifndef NW4R_DB_EXCEPTION_H
 #define NW4R_DB_EXCEPTION_H
 
-#include <revolution.h>
-
 #include <nw4r/db/console.h>
+
+#include <revolution/gx/GXStruct.h>
 
 namespace nw4r {
     namespace db {
@@ -17,5 +17,3 @@ namespace nw4r {
 }
 
 #endif // NW4R_DB_EXCEPTION_H
-
-

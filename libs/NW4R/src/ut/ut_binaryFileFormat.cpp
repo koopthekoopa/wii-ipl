@@ -1,5 +1,7 @@
 #include <nw4r/ut/binaryFileFormat.h>
 
+#include <nw4r/config.h>
+
 namespace nw4r {
     namespace ut {
         bool IsValidBinaryFile(const BinaryFileHeader* header, u32 signature, u16 version, u16 minBlocks) {
@@ -8,7 +10,7 @@ namespace nw4r {
                 return false;
             }
             // Compare BOM
-            if (header->byteOrder != 0xFEFF) {
+            if (header->byteOrder != NW4R_BYTEORDER_NATIVE) {
                 return false;
             }
             // Compare version

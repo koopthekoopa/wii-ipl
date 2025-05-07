@@ -34,7 +34,7 @@ namespace nw4r {
                     virtual int             GetLineFeed() const;
 
                     virtual CharWidths      GetDefaultCharWidths() const;
-                    virtual void            SetDefaultCharWidths(const CharWidths &widths);
+                    virtual void            SetDefaultCharWidths(const CharWidths& widths);
 
                     virtual bool            SetAlternateChar(u16 c);
                     virtual void            SetLineFeed(int linefeed);
@@ -69,9 +69,19 @@ namespace nw4r {
                 ResFont();
                 virtual ~ResFont();
 
-                bool SetResource(void* brfnt);
-
+                bool                    SetResource(void* brfnt);
                 static FontInformation* Rebuild(BinaryFileHeader* fileHeader);
+
+            private:
+                static const u32 SIGNATURE_FONT             = 'RFNT';   /* Revolution FoNT */
+                static const u32 SIGNATURE_FONT_UNPACKED    = 'RFNU';   /* Revolution FoNt Unpacked */
+            
+                static const u32 SIGNATURE_FONT_INFO        = 'FINF';   /* Font INFormation */
+                static const u32 SIGNATURE_TEX_GLYPH        = 'TGLP';   /* Texture GLyPh */
+                static const u32 SIGNATURE_CHAR_WIDTH       = 'CWDH';   /* Character WiDtH */
+                static const u32 SIGNATURE_CODE_MAP         = 'CMAP';   /* Code MAP */
+
+                static const u32 SIGNATURE_GLGR             = 'GLGR';   /* Uhhh what is this?.... Something related to GLyPh??? */
         };
     }
 }

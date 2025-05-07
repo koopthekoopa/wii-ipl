@@ -33,20 +33,20 @@ namespace nw4r {
                 virtual void    Cancel();                                                                           // 0x48
                 virtual bool    CancelAsync(IOStreamCallback pCallback, void* pCallbackArg);                        // 0x4C
             
-                virtual bool    IsBusy() const { return mIsBusy; }                                                  // 0x24
+                virtual bool    IsBusy() const          { return mIsBusy; }                                         // 0x24
             
-                virtual u32     Tell() const { return mFilePosition.Tell(); }                                       // 0x58
-                virtual u32     GetSize() const { return mFilePosition.GetFileSize(); }                             // 0x40
+                virtual u32     Tell() const            { return mFilePosition.Tell(); }                            // 0x58
+                virtual u32     GetSize() const         { return mFilePosition.GetFileSize(); }                     // 0x40
             
-                virtual bool    CanAsync() const { return true; }                                                   // 0x28
-                virtual bool    CanSeek() const { return true; }                                                    // 0x50
-                virtual bool    CanRead() const { return true; }                                                    // 0x2C
-                virtual bool    CanWrite() const { return false; }                                                  // 0x30
-                virtual bool    CanCancel() const { return true; }                                                  // 0x54
+                virtual bool    CanAsync() const        { return true; }                                            // 0x28
+                virtual bool    CanSeek() const         { return true; }                                            // 0x50
+                virtual bool    CanRead() const         { return true; }                                            // 0x2C
+                virtual bool    CanWrite() const        { return false; }                                           // 0x30
+                virtual bool    CanCancel() const       { return true; }                                            // 0x54
             
-                virtual u32     GetOffsetAlign() const { return 4; }                                                // 0x34
-                virtual u32     GetSizeAlign() const { return DEFAULT_ALIGN; }                                      // 0x38
-                virtual u32     GetBufferAlign() const { return DEFAULT_ALIGN; }                                    // 0x3C
+                virtual u32     GetOffsetAlign() const  { return 4; }                                               // 0x34
+                virtual u32     GetSizeAlign() const    { return DEFAULT_ALIGN; }                                   // 0x38
+                virtual u32     GetBufferAlign() const  { return DEFAULT_ALIGN; }                                   // 0x3C
             
             private:
                 typedef struct DvdFileStreamInfo {

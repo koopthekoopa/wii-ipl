@@ -30,6 +30,8 @@ typedef u64         ESTicketId;
 
 typedef u8          ESVersion;
 
+typedef u8          ESContentMask[64];
+
 #define             ES_CHANNEL_ID(t64)  ((ESTitleId32)(((ESTitleId)t64 & 0xFFFFFFFF00000000) >> 32))
 #define             ES_TITLE_ID(t64)    ((ESTitleId32)((ESTitleId)t64 & 0x00000000FFFFFFFF))
 
@@ -112,7 +114,7 @@ typedef struct ESTicketView {
     ESTicketReserved    reserved;               // 0x25
 
     u8                  audit;                  // 0x55
-    u8                  cidxMask[64];           // 0x56
+    ESContentMask       texSize;               // 0x56
     ESLpEntry           limits[ES_LIMIT_MAX];   // 0x98
 } ESTicketView;
 
@@ -143,7 +145,7 @@ typedef struct ESTicket {
     ESTicketReserved    reserved;               // 0x1F1
 
     u8                  audit;                  // 0x221
-    u8                  cidxMask[64];           // 0x222
+    ESContentMask       cidxMask;               // 0x222
     ESLpEntry           limits[ES_LIMIT_MAX];   // 0x264
 } ESTicket;
 

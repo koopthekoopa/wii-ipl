@@ -40,8 +40,8 @@ namespace nw4r {
                 virtual bool    CanCancel() const       { return false; }                                               // 0x54
 
                 virtual u32     GetOffsetAlign() const  { return 1; }                                                   // 0x34
-                virtual u32     GetSizeAlign() const    { return 32; }                                                  // 0x38
-                virtual u32     GetBufferAlign() const  { return 32; }                                                  // 0x3C
+                virtual u32     GetSizeAlign() const    { return DEFAULT_ALIGN; }                                       // 0x38
+                virtual u32     GetBufferAlign() const  { return DEFAULT_ALIGN; }                                       // 0x3C
 
             private:
                 typedef struct NandFileStreamInfo {

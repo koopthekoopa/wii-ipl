@@ -2487,14 +2487,14 @@ libs/NW4R/src/lyt/lyt_layout.cpp:
 libs/NW4R/src/lyt/lyt_picture.cpp:
 	.text       start:0x81520C24 end:0x81521458
 	.ctors      start:0x8160D4A4 end:0x8160D4A8
-	.data       start:0x81671A70 end:0x81671B20
+	.data       start:0x81671A70 end:0x81671BA8
 	.sdata2     start:0x81697388 end:0x816973A0
 	.sbss       start:0x8169AE50 end:0x8169AE58
 
-libs/NW4R/src/lyt/lyt_textbox.cpp:
+libs/NW4R/src/lyt/lyt_textBox.cpp:
 	.text       start:0x81521458 end:0x81523018
 	.ctors      start:0x8160D4A8 end:0x8160D4AC
-	.data       start:0x81671B20 end:0x81671C60
+	.data       start:0x81671BA8 end:0x81671C60
 	.sdata2     start:0x816973A0 end:0x816973C8
 	.sdata      start:0x81699C98 end:0x81699CA0
 	.sbss       start:0x8169AE58 end:0x8169AE60
@@ -2526,7 +2526,7 @@ libs/NW4R/src/lyt/lyt_drawinfo.cpp:
 libs/NW4R/src/lyt/lyt_animation.cpp:
 	.text       start:0x81529358 end:0x8152A1CC
 	.data       start:0x81671E40 end:0x81671EF0
-	.sdata2     start:0x81697420 end:0x81697450
+	.sdata2     start:0x81697420 end:0x81697460
 
 libs/NW4R/src/lyt/lyt_resourceAccessor.cpp:
 	.text       start:0x8152A1CC end:0x8152A224
@@ -2535,7 +2535,6 @@ libs/NW4R/src/lyt/lyt_resourceAccessor.cpp:
 libs/NW4R/src/lyt/lyt_arcResourceAccessor.cpp:
 	.text       start:0x8152A224 end:0x8152A740
 	.data       start:0x81671F08 end:0x81671F20
-	.sdata2     start:0x81697450 end:0x81697460
 	.sdata      start:0x81699CA0 end:0x81699CA8
 
 libs/NW4R/src/lyt/lyt_common.cpp:

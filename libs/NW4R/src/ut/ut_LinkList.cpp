@@ -11,10 +11,10 @@ namespace nw4r {
             }
 
             LinkListImpl::Iterator LinkListImpl::Erase(Iterator itFirst, Iterator itLast) {
-                Node* pIt = itFirst.mPointer;
-                Node* pItLast = itLast.mPointer;
+                LinkListNode* pIt = itFirst.mPointer;
+                LinkListNode* pItLast = itLast.mPointer;
 
-                Node* pNext;
+                LinkListNode* pNext;
 
                 for (; pIt != pItLast; pIt = pNext) {
                     pNext = pIt->mNext;
@@ -28,9 +28,9 @@ namespace nw4r {
                 Erase(GetBeginIter(), GetEndIter());
             }
 
-            LinkListImpl::Iterator LinkListImpl::Insert(Iterator it, pointer p) {
-                Node* pNext = it.mPointer;
-                Node* pPrev = pNext->mPrev;
+            LinkListImpl::Iterator LinkListImpl::Insert(Iterator it, LinkListNode* p) {
+                LinkListNode* pNext = it.mPointer;
+                LinkListNode* pPrev = pNext->mPrev;
 
                 // pPrev <- p -> pNext
                 p->mNext = pNext;
@@ -45,17 +45,17 @@ namespace nw4r {
                 return (Iterator)p;
             }
 
-            LinkListImpl::Iterator LinkListImpl::Erase(pointer p) {
-                Node* pNext = p->mNext;
-                Node* pPrev = p->mPrev;
+            LinkListImpl::Iterator LinkListImpl::Erase(LinkListNode* p) {
+                LinkListNode* pNext = p->mNext;
+                LinkListNode* pPrev = p->mPrev;
 
-                // Remove connections to node
+                // Remove connections to LinkListNode
                 pNext->mPrev = pPrev;
                 pPrev->mNext = pNext;
 
                 mSize--;
 
-                // Isolate node
+                // Isolate LinkListNode
                 p->mNext = NULL;
                 p->mPrev = NULL;
 
@@ -64,5 +64,3 @@ namespace nw4r {
         }
     }
 }
-
-

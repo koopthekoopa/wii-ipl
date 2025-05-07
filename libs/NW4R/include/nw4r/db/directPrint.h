@@ -1,7 +1,7 @@
 #ifndef NW4R_DB_DIRECT_PRINT_H
 #define NW4R_DB_DIRECT_PRINT_H
 
-#include <revolution.h>
+#include <revolution/types.h>
 
 namespace nw4r {
     namespace db {
@@ -10,5 +10,3 @@ namespace nw4r {
 }
 
 #endif // NW4R_DB_DIRECT_PRINT_H
-
-

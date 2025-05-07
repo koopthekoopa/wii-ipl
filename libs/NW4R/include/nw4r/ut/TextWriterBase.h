@@ -8,7 +8,9 @@
 
 #include <cstring>
 #include <cstdio>
+
 #include <cwchar>
+
 #include <cstdarg>
 
 namespace nw4r {
@@ -16,6 +18,34 @@ namespace nw4r {
         template<typename> class TagProcessorBase;
         template<typename T> class TextWriterBase : public CharWriter {
             public:
+                enum DrawFlag {
+                    // Align text lines
+                    DRAWFLAG_ALIGN_TEXT_BASELINE = 0,
+                    DRAWFLAG_ALIGN_TEXT_CENTER = (1 << 0),
+                    DRAWFLAG_ALIGN_TEXT_RIGHT = (1 << 1),
+            
+                    // Align text block (horizontal)
+                    DRAWFLAG_ALIGN_H_BASELINE = 0,
+                    DRAWFLAG_ALIGN_H_CENTER = (1 << 4),
+                    DRAWFLAG_ALIGN_H_RIGHT = (1 << 5),
+            
+                    // Align text block (vertical)
+                    DRAWFLAG_ALIGN_V_BASELINE = 0,
+                    DRAWFLAG_ALIGN_V_CENTER = (1 << 8),
+                    DRAWFLAG_ALIGN_V_TOP = (1 << 9),
+            
+                    // Mask constants
+                    DRAWFLAG_MASK_ALIGN_TEXT =  DRAWFLAG_ALIGN_TEXT_BASELINE |
+                                                DRAWFLAG_ALIGN_TEXT_CENTER |
+                                                DRAWFLAG_ALIGN_TEXT_RIGHT,
+            
+                    DRAWFLAG_MASK_ALIGN_H = DRAWFLAG_ALIGN_H_BASELINE |
+                                            DRAWFLAG_ALIGN_H_CENTER |
+                                            DRAWFLAG_ALIGN_H_RIGHT,
+            
+                    DRAWFLAG_MASK_ALIGN_V = DRAWFLAG_ALIGN_V_BASELINE |
+                                            DRAWFLAG_ALIGN_V_CENTER | DRAWFLAG_ALIGN_V_TOP,
+                };
                 TextWriterBase();
                 ~TextWriterBase();
 
@@ -80,7 +110,7 @@ namespace nw4r {
 
                 f32     AdjustCursor(f32* xOrigin, f32* yOrigin, const T* str, int length);
 
-                bool    IsDrawFlagSet(u32 mask, u32 flag) const { return (mDrawFlag & mask) == flag; }
+                bool    IsDrawFlagSet(u32 mask, u32 flag) const { return (mDrawFlag&  mask) == flag; }
 
             private:
                 f32                     mCharSpace;     // 0x4C
@@ -97,6 +127,12 @@ namespace nw4r {
                 static u32  mFormatBufferSize;
 
                 static TagProcessorBase<T> mDefaultTagProcessor;
+
+                static const int DEFAULT_FORMAT_BUFFER_SIZE = 256;
+
+                static const u32 DRAWFLAG_MASK_ALL = DRAWFLAG_MASK_ALIGN_TEXT |
+                                                    DRAWFLAG_MASK_ALIGN_H |
+                                                    DRAWFLAG_MASK_ALIGN_V;
         };
     }
 }

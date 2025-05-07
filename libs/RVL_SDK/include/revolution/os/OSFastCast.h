@@ -29,6 +29,8 @@ static void OSInitFastCast() {
 #endif
 }
 
+/*** TO F32 ***/
+
 static f32 __OSu16tof32(register const u16* arg) {
     register f32 ret;
 #ifdef __MWERKS__
@@ -39,6 +41,25 @@ static f32 __OSu16tof32(register const u16* arg) {
 
 static void OSu16tof32(const u16* in, f32* out) {
     *out = __OSu16tof32(in);
+}
+
+/*** FROM F32 ***/
+
+static u8 __OSf32tou8(register f32 arg) {
+    f32 a;
+    register f32* ptr = &a;
+    u8 r;
+    #ifdef __MWERKS__
+    asm {
+        psq_st arg, 0(ptr), 1, 2
+    }
+    #endif
+    r = *(u8*)ptr;
+    return r;
+}
+
+static void OSf32tou8(f32* in, volatile u8* out) {
+    *out = __OSf32tou8(*in);
 }
 
 static u16 __OSf32tou16(register f32 arg) {

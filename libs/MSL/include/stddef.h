@@ -3,6 +3,6 @@
 
 #include <size_t.h>
 
-#define offsetof(st, m) ((size_t)&(((st*)0)->m))
+#define offsetof(type, member) ((size_t) &(((type *) 0)->member))
 
 #endif // MSL_STDDEF_H

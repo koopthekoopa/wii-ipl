@@ -5,6 +5,10 @@
 #include <revolution/gx/GXEnum.h>
 #include <revolution/gx/GXStruct.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct TPLHeader {
     u16             height;         // 0x00
     u16             width;          // 0x02
@@ -49,5 +53,9 @@ void            TPLBind(TPLPalette* pal);
 
 TPLDescriptor*  TPLGet(TPLPalette* pal, u32 id);
 void            TPLGetGXTexObjFromPalette(TPLPalette* pal, GXTexObj* texObj, u32 id);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // REVOLUTION_TPL_H

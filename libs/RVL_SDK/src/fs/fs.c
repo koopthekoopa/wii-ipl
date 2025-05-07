@@ -287,6 +287,7 @@ out:
     if (isfsCallbackArg != NULL) {
         FS_FREE(isfsCallbackArg);
     }
+
     return ret;
 }
 

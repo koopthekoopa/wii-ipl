@@ -167,7 +167,7 @@ namespace ipl {
             mpLayout->setAnmType(ANIM_TYPE_FORWARD);
             mpLayout->start();
         }
-#pragma sym on
+
         void TextBalloon::set_translate(const math::VEC3& trans) {
             f32 temp0;
 
@@ -256,7 +256,7 @@ namespace ipl {
                     textPane->SetString(fullStr, 0, i + extraLen);
                     textPane->CalculateMtx(*mpLayout->getDrawInfo());
 
-                    nw4r::ut::Rect textRect = mpLayout->getTextDrawRect(textPane);
+                    nw4r::ut::Rect textRect = textPane->GetTextDrawRect(*mpLayout->getDrawInfo());
                     if (textRect.GetWidth() <= temp1 + 391.5f && i <= 20) {
                         break;
                     }
@@ -292,7 +292,7 @@ namespace ipl {
                 temp1 = 1.0f;
             }
 
-            nw4r::ut::Rect textRect  = mpLayout->getTextDrawRect(textPane);
+            nw4r::ut::Rect textRect = textPane->GetTextDrawRect(*mpLayout->getDrawInfo());
             const nw4r::lyt::Size* baseSize = get_size("W_Base");
 
             nw4r::lyt::Size newSize(textRect.GetWidth() + 40.0f, baseSize->height);

@@ -1,5 +1,8 @@
 #include <nw4r/ut/TagProcessorBase.h>
 
+#include <nw4r/ut/TagProcessor.h>
+#include <nw4r/ut/WideTagProcessor.h>
+
 namespace nw4r {
     namespace ut {
         template<typename T>TagProcessorBase<T>::TagProcessorBase() {}
@@ -75,9 +78,9 @@ namespace nw4r {
             if (tabWidth > 0) {
                 f32 aCharWidth = writer.IsWidthFixed() ? writer.GetFixedWidth() : writer.GetFontWidth();
                 f32 dx = writer.GetCursorX() - context->xOrigin;
-                f32 tabPixel = static_cast<f32>(tabWidth)*  aCharWidth;
+                f32 tabPixel = static_cast<f32>(tabWidth) * aCharWidth;
                 int numTab = static_cast<int>(dx / tabPixel) + 1;
-                f32 x = tabPixel*  static_cast<f32>(numTab) + context->xOrigin;
+                f32 x = tabPixel * static_cast<f32>(numTab) + context->xOrigin;
 
                 writer.SetCursorX(x);
             }

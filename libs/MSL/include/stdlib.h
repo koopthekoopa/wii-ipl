@@ -1,16 +1,16 @@
 #ifndef MSL_STDLIB_H
 #define MSL_STDLIB_H
 
-#include <cstdlib>
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+long int    strtol(const char* str, char** endptr, int base);
+
+int         atoi(const char * str);
 
 #ifdef __cplusplus
-
-namespace std {
-    using   ::strtol;
-    
-    using   ::atoi;
-} // namespace std
-
+}
 #endif
 
 #endif // MSL_STDLIB_H

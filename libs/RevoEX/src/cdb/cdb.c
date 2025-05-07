@@ -3,8 +3,6 @@
 
 #include <revolution/vf.h>
 
-#pragma sym on
-
 CDBErr CDBInit(void *work) {
     return CDBInitEx(work, 0, 0);
 }

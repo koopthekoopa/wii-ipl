@@ -35,7 +35,7 @@ namespace nw4r {
 
                 typedef struct TextureFilter {
                     public:
-                        bool operator !=(const TextureFilter &rhs) const { return atSmall != rhs.atSmall || atLarge != rhs.atLarge; }
+                        bool operator !=(const TextureFilter& rhs) const { return atSmall != rhs.atSmall || atLarge != rhs.atLarge; }
 
                         GXTexFilter atSmall;    // 0x00
                         GXTexFilter atLarge;    // 0x04
@@ -49,7 +49,7 @@ namespace nw4r {
 
                 typedef struct LoadingTexture {
                     public:
-                        bool operator !=(const LoadingTexture &rhs) const {
+                        bool operator !=(const LoadingTexture& rhs) const {
                             return slot != rhs.slot || texture != rhs.texture || filter != rhs.filter;
                         }
 
@@ -75,7 +75,7 @@ namespace nw4r {
                 f32         GetCursorX() const;
                 f32         GetCursorY() const;
 
-                void        SetFont(const Font &font);
+                void        SetFont(const Font& font);
                 void        SetColorMapping(Color min, Color max);
 
                 void        SetScale(f32 hScale, f32 vScale);
@@ -117,9 +117,9 @@ namespace nw4r {
                 void        MoveCursorX(f32 dx);
                 void        MoveCursorY(f32 dy);
 
-                void        PrintGlyph(f32 x, f32 y, f32 z, const Glyph &glyph);
+                void        PrintGlyph(f32 x, f32 y, f32 z, const Glyph& glyph);
 
-                void        LoadTexture(const Glyph &glyph, GXTexMapID slot);
+                void        LoadTexture(const Glyph& glyph, GXTexMapID slot);
 
                 void        UpdateVertexColor();
 
@@ -146,6 +146,9 @@ namespace nw4r {
                 f32             mFixedWidth;    // 0x44
 
                 const Font*     mFont;          // 0x48
+
+                static const u32 DEFAULT_COLOR_MAPPING_MIN = 0x00000000;
+                static const u32 DEFAULT_COLOR_MAPPING_MAX = 0xFFFFFFFF;
 
             private:
                 static LoadingTexture mLoadingTexture;

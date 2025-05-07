@@ -17,7 +17,7 @@ namespace nw4r {
         GXSetChanCtrl(GX_COLOR1A1, GX_FALSE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE);
     
         GXSetNumTexGens(1);
-        GXSetTexCoordGen(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, 60);
+        GXSetTexCoordGen(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY);
         GXSetNumIndStages(0);
         GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_SET);
     }
@@ -33,7 +33,7 @@ namespace nw4r {
             mLoadingTexture.Reset();
             ResetColorMapping();
             SetGradationMode(GRADMODE_NONE);
-            SetTextColor(0xFFFFFFFF);
+            SetTextColor(Color::WHITE);
             SetScale(1.0f, 1.0f);
             SetCursor(0.0f, 0.0f, 0.0f);
             EnableLinearFilter(true, true);
@@ -51,7 +51,8 @@ namespace nw4r {
         void CharWriter::SetupGX() {
             ResetTextureCache();
 
-            if (mColorMapping.min != 0x00000000 || mColorMapping.max != 0xFFFFFFFF) {
+            if (mColorMapping.min != DEFAULT_COLOR_MAPPING_MIN
+            || mColorMapping.max != DEFAULT_COLOR_MAPPING_MAX) {
                 SetupGXWithColorMapping(mColorMapping.min, mColorMapping.max);
             }
             else if (mFont) {

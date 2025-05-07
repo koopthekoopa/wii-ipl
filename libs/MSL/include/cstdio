@@ -1,21 +1,17 @@
 #ifndef MSL_CSTDIO_H
 #define MSL_CSTDIO_H
 
-#include <size_t.h>
-#include <stdarg.h>
+#include <stdio.h>
 
 #ifdef __cplusplus
-extern "C" {
-#endif
 
-int sprintf(char* s, const char* format, ...);
-int snprintf(char* s, size_t n, const char* format, ...);
+namespace std {
+    using   ::sprintf;
+    using   ::snprintf;
+    using   ::vprintf;
+    using   ::vsnprintf;
+} // namespace std
 
-int vprintf(const char* format, va_list arg);
-int vsnprintf(char* s, size_t n, const char* format, va_list arg);
-
-#ifdef __cplusplus
-}
 #endif
 
 #endif // MSL_CSTDIO_H

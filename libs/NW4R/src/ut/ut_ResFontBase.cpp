@@ -125,7 +125,6 @@ namespace nw4r {
                         return FindGlyphIndex(pMap, c);
                     }
                 }
-
                 return GLYPH_INDEX_NOT_FOUND;
             }
 
@@ -136,20 +135,17 @@ namespace nw4r {
                     case FONT_MAP_DIRECT: {
                         u16 offset = *pMap->mapInfo;
                         index = c - pMap->ccodeBegin + offset;
-                    
                         break;
                     }
                     case FONT_MAP_TABLE: {
                         int table_index = c - pMap->ccodeBegin;
                         index = pMap->mapInfo[table_index];
-                    
                         break;
                     }
                     case FONT_MAP_SCAN: {
-                        const CMapInfoScan* scanInfo = reinterpret_cast<const CMapInfoScan*>(pMap->mapInfo);
-
-                        const CMapScanEntry* first = scanInfo->entries;
-                        const CMapScanEntry* last = scanInfo->entries + (scanInfo->num - 1);
+                        const CMapInfoScan*     scanInfo = reinterpret_cast<const CMapInfoScan*>(pMap->mapInfo);
+                        const CMapScanEntry*    first = scanInfo->entries;
+                        const CMapScanEntry*    last = scanInfo->entries + (scanInfo->num - 1);
 
                         while (first <= last) {
                             const CMapScanEntry* mid = first + (last - first) / 2;
@@ -165,7 +161,6 @@ namespace nw4r {
                                 break;
                             }
                         }
-                    
                         break;
                     }
                     default: {

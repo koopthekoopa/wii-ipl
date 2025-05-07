@@ -300,7 +300,6 @@ cflags_sdk = [
     *cflags_base,
     "-ipa file",
     "-fp_contract off",
-    "-O4,p",
 ]
 
 # NW4R flags
@@ -309,7 +308,6 @@ cflags_nw4r = [
     "-ipa file",
     "-fp_contract off",
     "-Cpp_exceptions off",
-    "-O4,p",
 ]
 
 # Common SDK flags (with exceptions on)
@@ -318,7 +316,6 @@ cflags_sdk_except = [
     "-ipa file",
     "-fp_contract off",
     "-Cpp_exceptions on",
-    "-O4,p",
 ]
 
 # Runtime & MSL library flags
@@ -329,7 +326,6 @@ cflags_runtime = [
     "-fp_contract off",
     "-gccinc",
     "-D_IEEE_LIBM",
-    "-O4,p",
 ]
 
 # MetroTRK library flags
@@ -1178,19 +1174,19 @@ config.libs = [
         ]
     ),
     NW4RLib("lyt", [
-            Object(NonMatching, "lyt/lyt_pane.cpp"),
-            Object(NonMatching, "lyt/lyt_group.cpp"),
-            Object(NonMatching, "lyt/lyt_layout.cpp"),
-            Object(NonMatching, "lyt/lyt_picture.cpp"),
-            Object(NonMatching, "lyt/lyt_textbox.cpp"),
-            Object(NonMatching, "lyt/lyt_window.cpp"),
-            Object(NonMatching, "lyt/lyt_bounding.cpp"),
-            Object(NonMatching, "lyt/lyt_material.cpp"),
-            Object(NonMatching, "lyt/lyt_drawinfo.cpp"),
-            Object(NonMatching, "lyt/lyt_animation.cpp"),
-            Object(NonMatching, "lyt/lyt_resourceAccessor.cpp"),
-            Object(NonMatching, "lyt/lyt_arcResourceAccessor.cpp"),
-            Object(NonMatching, "lyt/lyt_common.cpp"),
+            Object(Matching,    "lyt/lyt_pane.cpp"),
+            Object(Matching,    "lyt/lyt_group.cpp"),
+            Object(Matching,    "lyt/lyt_layout.cpp"),
+            Object(Matching,    "lyt/lyt_picture.cpp"),
+            Object(Matching,    "lyt/lyt_textBox.cpp"),
+            Object(Equivalent,  "lyt/lyt_window.cpp"),
+            Object(Matching,    "lyt/lyt_bounding.cpp"),
+            Object(Matching,    "lyt/lyt_material.cpp"),
+            Object(Matching,    "lyt/lyt_drawinfo.cpp"),
+            Object(Matching,    "lyt/lyt_animation.cpp"),
+            Object(Matching,    "lyt/lyt_resourceAccessor.cpp"),
+            Object(Matching,    "lyt/lyt_arcResourceAccessor.cpp"),
+            Object(Matching,    "lyt/lyt_common.cpp"),
         ]
     ),
     # RVL_SDK

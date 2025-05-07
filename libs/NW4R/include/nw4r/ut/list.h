@@ -14,12 +14,13 @@ namespace nw4r {
             void*   headObject; // 0x00
             void*   tailObject; // 0x04
             u16     numObjects; // 0x08
+
             u16     offset;     // 0x0A
         } List;
         
         void List_Init(List* list, u16 offset);
         void List_Append(List* list, void* object);
-        void List_Prepend(List* list, void* pobject);
+        void List_Prepend(List* list, void* object);
         void List_Insert(List* list, void* target, void* object);
         void List_Remove(List* list, void* object);
         
@@ -42,5 +43,3 @@ namespace nw4r {
 }
 
 #endif // NW4R_UT_LIST_H
-
-

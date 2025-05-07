@@ -1,34 +1,31 @@
 #ifndef MSL_STRING_H
 #define MSL_STRING_H
 
-#include <cstring>
+#include <size_t.h>
+#include <internal/mem.h>
 
 #ifdef __cplusplus
+extern "C" {
+#endif
 
-namespace std {
-    using   ::memcpy;
-    using   ::memset;
-    using   ::memove;
+int     strcmp(const char* dst, const char* src);
+int     strcpy(char* dst, const char* src);
 
-    using   ::memcmp;
+int     stricmp(const char* dst, const char* src);
 
-    using   ::strcpy;
-    using   ::strcmp;
+char*   strcat(char* dst, const char* src);
 
-    using   ::stricmp;
-    
-    using   ::strcat;
+char*   strncpy(char* dst, const char* src, size_t length);
+char*   strncat(char* dst, const char* src, size_t length);
+int     strncmp(const char* dst, const char* src, size_t length);
 
-    using   ::strncpy;
-    using   ::strncat;
-    using   ::strncmp;
+size_t  strlen(const char* str);
+size_t  strnlen(const char* str, size_t length);
 
-    using   ::strlen;
-    using   ::strnlen;
+int     sprintf(char* buffer, const char* format, ...);
 
-    using   ::sprintf;
-} // namespace std
-
+#ifdef __cplusplus
+}
 #endif
 
 #endif // MSL_STRING_H

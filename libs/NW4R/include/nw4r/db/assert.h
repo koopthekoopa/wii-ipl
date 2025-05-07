@@ -1,10 +1,17 @@
-#ifndef NW4R_ASSERT_H
-#define NW4R_ASSERT_H
+#ifndef NW4R_DB_ASSERT_H
+#define NW4R_DB_ASSERT_H
 
-#include <nw4r/ipl.h>
+#include <revolution/os/OSError.h>
 
-#define NW4R_ASSERT(x)  (!!x || (nw4r::ipl::Panic(__FILE__, __LINE__, #x), 0))
+#include <revolution/gx/GXStruct.h>
 
-#endif // NW4R_ASSERT_H
+#define NW4R_ASSERT(x) \
+    if (!(x)) { \
+        GXColor front = {255,255,255,0}; \
+        GXColor back  = {0,0,0,0}; \
+        OSFatal((GXColor)front, \
+                (GXColor)back, \
+                "Error#004\nAn error has occurred.\nThe system files are corrupted."); \
+    }
 
-
+#endif // NW4R_DB_ASSERT_H

@@ -9,11 +9,17 @@ namespace nw4r {
     namespace ut {
         class Rect {
             public:
-            Rect() : left(0), top(0), right(0), bottom(0) {}
-            Rect(f32 left, f32 top, f32 right, f32 bottom) : left(left), top(top), right(right), bottom(bottom) {}
 
-            f32 GetWidth() const    { return right - left; }
-            f32 GetHeight() const   { return bottom - top; }
+            Rect() : left(), top(), right(), bottom() {}
+            Rect(f32 l, f32 t, f32 r, f32 b) : left(l), top(t), right(r), bottom(b) {}
+
+            ~Rect() {}
+
+            void    SetWidth(f32 width)     { right = left + width; }
+            void    SetHeight(f32 height)   { bottom = top + height; }
+
+            f32     GetWidth() const        { return right - left; }
+            f32     GetHeight() const       { return bottom - top; }
 
             void MoveTo(f32 x, f32 y) {
                 right   = x + GetWidth();

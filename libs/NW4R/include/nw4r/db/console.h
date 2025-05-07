@@ -1,44 +1,44 @@
 #ifndef NW4R_DB_CONSOLE_H
 #define NW4R_DB_CONSOLE_H
 
-#include <revolution.h>
+#include <revolution/types.h>
+
+#include <nw4r/ut/TextWriter.h>
 
 namespace nw4r {
     namespace db {
         namespace detail {
-            class TextWriterBase; // temp
+        #define NW4R_CONSOLE_BUFFER_SIZE(width, height)  (sizeof(nw4r::db::detail::ConsoleHead) + ((width) + 1) * (height))
+        
+        typedef struct ConsoleHead ConsoleHead;
+        struct ConsoleHead {
+            u8*             textBuf;        // 0x00
 
-            #define NW4R_CONSOLE_BUFFER_SIZE(width, height)  (sizeof(nw4r::db::detail::ConsoleHead) + ((width) + 1) * (height))
-            
-            typedef struct ConsoleHead ConsoleHead;
-            struct ConsoleHead {
-                u8*             textBuf;        // 0x00
+            u16             width;          // 0x04
+            u16             height;         // 0x06
 
-                u16             width;          // 0x04
-                u16             height;         // 0x06
+            u16             priority;       // 0x08
+            u16             attr;           // 0x0A
 
-                u16             priority;       // 0x08
-                u16             attr;           // 0x0A
+            u16             printTop;       // 0x0C
+            u16             printXPos;      // 0x0E
 
-                u16             printTop;       // 0x0C
-                u16             printXPos;      // 0x0E
+            u16             ringTop;        // 0x10
+            s32             ringTopLineCnt; // 0x14
+            s32             viewTopLine;    // 0x18
 
-                u16             ringTop;        // 0x10
-                s32             ringTopLineCnt; // 0x14
-                s32             viewTopLine;    // 0x18
+            s16             viewPosX;       // 0x1C
+            s16             viewPosY;       // 0x1E
+            u16             viewLines;      // 0x20
 
-                s16             viewPosX;       // 0x1C
-                s16             viewPosY;       // 0x1E
-                u16             viewLines;      // 0x20
+            bool            isVisible;      // 0x22
 
-                bool            isVisible;      // 0x22
+            u8              padding_[1];    // 0x23
 
-                u8              padding_[1];    // 0x23
+            ut::TextWriter* writer;         // 0x24
 
-                TextWriterBase* writer;         // 0x24
-
-                ConsoleHead*    next;           // 0x28
-            };
+            ConsoleHead*    next;           // 0x28
+        };
         }
         typedef detail::ConsoleHead* ConsoleHandle;
         
@@ -51,5 +51,3 @@ namespace nw4r {
 }
 
 #endif // NW4R_DB_CONSOLE_H
-
-

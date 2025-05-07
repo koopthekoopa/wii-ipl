@@ -6,7 +6,7 @@
 namespace nw4r {
     namespace ut {
         #define NW4R_UT_RUNTIME_TYPEINFO \
-            virtual const nw4r::ut::detail::RuntimeTypeInfo*    GetRuntimeTypeInfo() const { return &typeInfo; } \
+            virtual const nw4r::ut::detail::RuntimeTypeInfo*    GetRuntimeTypeInfo() const { return& typeInfo; } \
             static  const nw4r::ut::detail::RuntimeTypeInfo     typeInfo
         
         #define NW4R_UT_GET_RUNTIME_TYPEINFO(T) \
@@ -32,7 +32,7 @@ namespace nw4r {
             };
 
             template<typename T> inline const RuntimeTypeInfo* GetTypeInfoFromPtr_(T* pPtr) {
-                return &pPtr->typeInfo;
+                return& pPtr->typeInfo;
             }
         }
         

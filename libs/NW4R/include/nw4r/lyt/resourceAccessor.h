@@ -8,12 +8,12 @@
 namespace nw4r {
     namespace lyt {
         class ResourceAccessor {
-            public:
-                ResourceAccessor();
-                virtual ~ResourceAccessor();
-                
-                virtual void*       GetResource(u32 resType, const char* name, u32* pSize) = 0;
-                virtual ut::Font*   GetFont(const char* name);
+        public:
+            ResourceAccessor();
+            virtual ~ResourceAccessor();
+            
+            virtual void*       GetResource(u32 resType, const char* name, u32* pSize) = 0;
+            virtual ut::Font*   GetFont(const char* name);
         };
     }
 }

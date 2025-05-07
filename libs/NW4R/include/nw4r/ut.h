@@ -12,9 +12,14 @@
 #include <nw4r/ut/Rect.h>
 
 #include <nw4r/ut/binaryFileFormat.h>
+
 #include <nw4r/ut/Font.h>
+#include <nw4r/ut/ResFont.h>
+
+#include <nw4r/ut/TagProcessor.h>
+#include <nw4r/ut/WideTagProcessor.h>
+
+#include <nw4r/ut/TextWriter.h>
+#include <nw4r/ut/WideTextWriter.h>
 
 #endif // NW4R_UT_H
-
-
-

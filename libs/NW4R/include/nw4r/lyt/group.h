@@ -10,39 +10,48 @@
 namespace nw4r {
     namespace lyt {
         namespace detail {
-            struct PaneLink {
-                ut::LinkListNode mLink;
+            typedef struct PaneLink {
+                ut::LinkListNode    mLink;
                 
-                Pane*   mTarget;    // 0x08
-            };
+                Pane*               mTarget;    // 0x08
+            } PaneLink;
         }
-        class Group;
         typedef ut::LinkList<detail::PaneLink, 0> PaneLinkList;
-        typedef ut::LinkList<Group, 0> GroupList;
         
         class Group {
             public:
                 Group();
+                Group(const res::Group* pResGroup, Pane* pRootPane);
                 virtual ~Group();
 
-                PaneLinkList&       GetPaneList() { return mPaneLinkList; };
+                const char*     GetName() const         { return mName; }
+                bool            IsUserAllocated() const { return mbUserAllocated; }
 
-                ut::LinkListNode mLink;
+                PaneLinkList&   GetPaneList()           { return mPaneLinkList; };
+
+                void            Init();
+                void            AppendPane(Pane* pPane);
+
+                ut::LinkListNode mLink; // 0x04
                 
             protected:
-                PaneLinkList                    mPaneLinkList;              // 0x0C
-                char                            mName[NW4R_RES_NAME_SIZE];  // 0x18
+                PaneLinkList    mPaneLinkList;      // 0x0C
+                char            mName[16];          // 0x18
                 
-                bool                            mbUserAllocated;            // 0x29
-                u8                              mPadding[2];                // 0x2A
+                bool            mbUserAllocated;    // 0x29
+
+                u8              mPadding[2];        // 0x2A
         };
+        typedef ut::LinkList<Group, 4> GroupList;
         
         class GroupContainer {
             public:
-                GroupContainer();
+                GroupContainer() {}
+                ~GroupContainer();
 
                 GroupList&  GetGroupList()  { return mGroupList; }
 
+                void        AppendGroup(Group* pGroup);
                 Group*      FindGroupByName(const char* findName);
             
             protected:

@@ -8,6 +8,3 @@
 #include <nw4r/db/directPrint.h>
 
 #endif // NW4R_DB_H
-
-
-

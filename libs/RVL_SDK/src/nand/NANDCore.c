@@ -12,6 +12,7 @@
 #include <revolution/verdefs.h>
 
 #include <string.h>
+#include <stddef.h>
 
 SDKDefineVersion(NAND, "Apr 20 2010", "11:21:16");
 
@@ -350,8 +351,7 @@ s32 NANDInit() {
         }
     }
 }
-#include <private/es/types.h>
-#include <stddef.h>
+
 static BOOL nandOnShutdown(BOOL final, u32 event) {
     if (!final) {
         if (event == OS_SHUTDOWN_STANDBY) {

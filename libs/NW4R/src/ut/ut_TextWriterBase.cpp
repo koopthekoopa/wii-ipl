@@ -23,14 +23,14 @@ namespace nw4r {
             const Font* font = GetFont();
             int linefeed = font ? font->GetLineFeed() : 0;
 
-            mLineSpace = lineHeight - linefeed*  GetScaleV();
+            mLineSpace = lineHeight - linefeed * GetScaleV();
         }
 
         template<typename T> f32 TextWriterBase<T>::GetLineHeight() const {
             const Font* font = GetFont();
             int linefeed = font ? font->GetLineFeed() : 0;
 
-            return mLineSpace + linefeed*  GetScaleV();
+            return mLineSpace + linefeed * GetScaleV();
         }
 
         template<typename T> void TextWriterBase<T>::SetLineSpace(f32 lineSpace) {
@@ -108,10 +108,10 @@ namespace nw4r {
         }
 
         template<typename T> f32 TextWriterBase<T>::AdjustCursor(float* xOrigin, float* yOrigin, const T* str, int length) {
-            f32 textWidth = 0.0f;
-            f32 textHeight = 0.0f;
+            f32 textWidth   = 0.0f;
+            f32 textHeight  = 0.0f;
 
-            if (!IsDrawFlagSet(0x333, 0x300) && !IsDrawFlagSet(0x333, 0x0)) {
+            if (!IsDrawFlagSet(DRAWFLAG_MASK_ALL, DRAWFLAG_MASK_ALIGN_V) && !IsDrawFlagSet(DRAWFLAG_MASK_ALL, 0)) {
                 Rect textRect;
 
                 CalcStringRect(&textRect, str, length);
@@ -119,26 +119,26 @@ namespace nw4r {
                 textHeight = textRect.top + textRect.bottom;
             }
 
-            if (IsDrawFlagSet(0x30, 0x10)) {
+            if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_H, DRAWFLAG_ALIGN_H_CENTER)) {
                 *xOrigin -= textWidth / 2.0f;
             }
-            else if (IsDrawFlagSet(0x30, 0x20)) {
+            else if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_H, DRAWFLAG_ALIGN_H_RIGHT)) {
                 *xOrigin -= textWidth;
             }
 
-            if (IsDrawFlagSet(0x300, 0x100)) {
+            if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_V, DRAWFLAG_ALIGN_V_CENTER)) {
                 *yOrigin -= textHeight / 2.0f;
             }
-            else if (IsDrawFlagSet(0x300, 0x200)) {
+            else if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_V, DRAWFLAG_ALIGN_V_TOP)) {
                 *yOrigin -= textHeight;
             }
 
-            if (IsDrawFlagSet(0x3, 0x1)) {
+            if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_TEXT, DRAWFLAG_ALIGN_TEXT_CENTER)) {
                 f32 width = CalcLineWidth(str, length);
                 f32 offset = (textWidth - width) / 2.0f;
                 SetCursorX(*xOrigin + offset);
             }
-            else if (IsDrawFlagSet(0x3, 0x2)) {
+            else if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_TEXT, DRAWFLAG_ALIGN_TEXT_RIGHT)) {
                 f32 width = CalcLineWidth(str, length);
                 f32 offset = textWidth - width;
                 SetCursorX(*xOrigin + offset);
@@ -147,7 +147,7 @@ namespace nw4r {
                 SetCursorX(*xOrigin);
             }
 
-            if (IsDrawFlagSet(0x300, 0x300)) {
+            if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_V, DRAWFLAG_ALIGN_V_CENTER | DRAWFLAG_ALIGN_V_TOP)) {
                 SetCursorY(*yOrigin);
             }
             else {
@@ -189,14 +189,14 @@ namespace nw4r {
                     Operation operation = mTagProcessor->Process(code, &context);
 
                     if (operation == OPERATION_NEXT_LINE) {
-                        if (IsDrawFlagSet(0x3, 0x1)) {
+                        if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_TEXT, DRAWFLAG_ALIGN_TEXT_CENTER)) {
                             int remain = length - (context.str - str);
                             f32 width = CalcLineWidth(context.str, remain);
                             f32 offset = (textWidth - width) / 2.0f;
 
                             SetCursorX(context.xOrigin + offset);
                         }
-                        else if (IsDrawFlagSet(0x3, 0x2)) {
+                        else if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_TEXT, DRAWFLAG_ALIGN_TEXT_RIGHT)) {
                             int remain = length - (context.str - str);
                             f32 width = CalcLineWidth(context.str, remain);
                             f32 offset = textWidth - width;
@@ -205,8 +205,8 @@ namespace nw4r {
                         }
                         else {
                             f32 width = GetCursorX() - context.xOrigin;
-
                             textWidth = Max(textWidth, width);
+
                             SetCursorX(context.xOrigin);
                         }
                         bCharSpace = false;
@@ -234,7 +234,7 @@ namespace nw4r {
 
                     {
                         const Font* pFont = GetFont();
-                        f32 adj = -pFont->GetBaselinePos()*  GetScaleV();
+                        f32 adj = -pFont->GetBaselinePos() * GetScaleV();
 
                         MoveCursorY(adj);
                     }
@@ -244,7 +244,7 @@ namespace nw4r {
                 }
             }
 
-            if (IsDrawFlagSet(0x300, 0x100) || IsDrawFlagSet(0x300, 0x200)) {
+            if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_V, DRAWFLAG_ALIGN_V_CENTER) || IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_V, DRAWFLAG_ALIGN_V_TOP)) {
                 SetCursorY(orgCursorY);
             }
             else {
@@ -344,7 +344,7 @@ namespace nw4r {
                         x += GetFixedWidth();
                     }
                     else {
-                        x += GetFont()->GetCharWidth(code)*  GetScaleH();
+                        x += GetFont()->GetCharWidth(code) * GetScaleH();
                     }
 
                     pRect->left = Min(pRect->left, x);

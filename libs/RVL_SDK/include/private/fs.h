@@ -73,10 +73,13 @@ typedef struct ISFSFileStats {
 typedef struct ISFSPathAttrArgs {
     u32 ownerId;            // 0x00
     u16 groupId;            // 0x04
+
     u8  path[FS_MAX_PATH];  // 0x06
+
     u8  ownerAccess;        // 0x46
     u8  groupAccess;        // 0x47
     u8  othersAccess;       // 0x48
+
     u8  attr;               // 0x49
 } ISFSPathAttrArgs;
 

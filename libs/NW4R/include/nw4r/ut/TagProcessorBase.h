@@ -9,7 +9,7 @@
 namespace nw4r {
     namespace ut {
         typedef enum Operation {
-            OPERATION_DEFAULT,
+            OPERATION_DEFAULT = 0,
             OPERATION_NO_CHAR_SPACE,
             OPERATION_CHAR_SPACE,
             OPERATION_NEXT_LINE,

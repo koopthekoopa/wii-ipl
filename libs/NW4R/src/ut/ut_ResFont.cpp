@@ -2,17 +2,10 @@
 #include <nw4r/ut/Font.h>
 #include <nw4r/ut/binaryFileFormat.h>
 
+#include <nw4r/config.h>
+
 namespace nw4r {
     namespace ut {
-        #define MAGIC_FONT                'RFNT' // Revolution Font
-        #define MAGIC_FONT_UNPACKED        'RFNU' // Revolution Font, unpacked
-
-        #define MAGIC_FONT_INFO            'FINF' // FontInformation
-        #define MAGIC_FONT_TEX_GLYPH    'TGLP' // FontTextureGlyph
-        #define MAGIC_FONT_CHAR_WIDTH    'CWDH' // Font[Char]Width
-        #define MAGIC_FONT_CODE_MAP        'CMAP' // FontCodeMap
-        #define MAGIC_FONT_GLGR            'GLGR' // ???
-
         #define CONVERT_OFFSET_TO_PTR(type_, ptr_, offset_) reinterpret_cast<type_ *>(reinterpret_cast<u32>(ptr_) + offset_)
 
         namespace {
@@ -33,7 +26,7 @@ namespace nw4r {
                 return false;
             }
 
-            if (fileHeader->signature == MAGIC_FONT_UNPACKED) {
+            if (fileHeader->signature == SIGNATURE_FONT_UNPACKED) {
                 BinaryBlockHeader* blockHeader;
 
                 int nBlocks = 0;
@@ -41,7 +34,7 @@ namespace nw4r {
                 blockHeader = CONVERT_OFFSET_TO_PTR(BinaryBlockHeader, fileHeader, fileHeader->headerSize);
 
                 while (nBlocks < fileHeader->dataBlocks) {
-                    if (blockHeader->kind == MAGIC_FONT_INFO) {
+                    if (blockHeader->kind == SIGNATURE_FONT_INFO) {
                         pFontInfo = CONVERT_OFFSET_TO_PTR(FontInformation, blockHeader, sizeof(*blockHeader));
                         break;
                     }
@@ -51,13 +44,13 @@ namespace nw4r {
                 }
             }
             else {
-                if (fileHeader->version == 0x104) {
-                    if (!IsValidBinaryFile(fileHeader, MAGIC_FONT, 0x104, 2)) {
+                if (fileHeader->version == NW4R_VERSION(1, 4)) {
+                    if (!IsValidBinaryFile(fileHeader, SIGNATURE_FONT, NW4R_VERSION(1, 4), 2)) {
                         return false;
                     }
                 }
                 else {
-                    if (!IsValidBinaryFile(fileHeader, MAGIC_FONT, 0x102, 2)) {
+                    if (!IsValidBinaryFile(fileHeader, SIGNATURE_FONT, NW4R_VERSION(1, 2), 2)) {
                         return false;
                     }
                 }
@@ -85,7 +78,7 @@ namespace nw4r {
 
             while (nBlocks < fileHeader->dataBlocks) {
                 switch (blockHeader->kind) {
-                    case MAGIC_FONT_INFO: {
+                    case SIGNATURE_FONT_INFO: {
                         info = CONVERT_OFFSET_TO_PTR(FontInformation, blockHeader, sizeof(*blockHeader));
 
                         ResolveOffset(info->pGlyph, fileHeader);
@@ -96,36 +89,30 @@ namespace nw4r {
                         if (info->pMap) {
                             ResolveOffset(info->pMap, fileHeader);
                         }
-
                         break;
                     }
-                    case MAGIC_FONT_TEX_GLYPH: {
+                    case SIGNATURE_TEX_GLYPH: {
                         FontTextureGlyph* glyph = CONVERT_OFFSET_TO_PTR(FontTextureGlyph, blockHeader, sizeof(*blockHeader));
                         ResolveOffset(glyph->sheetImage, fileHeader);
-
                         break;
                     }
 
-                    case MAGIC_FONT_CHAR_WIDTH: {
+                    case SIGNATURE_CHAR_WIDTH: {
                         FontWidth* width = CONVERT_OFFSET_TO_PTR(FontWidth, blockHeader, sizeof(*blockHeader));
-
                         if (width->pNext) {
                             ResolveOffset(width->pNext, fileHeader);
                         }
-                    
                         break;
                     }
 
-                    case MAGIC_FONT_CODE_MAP: {
+                    case SIGNATURE_CODE_MAP: {
                         FontCodeMap* map = CONVERT_OFFSET_TO_PTR(FontCodeMap, blockHeader, sizeof(*blockHeader));
-
                         if (map->pNext) {
                             ResolveOffset(map->pNext, fileHeader);
                         }
-
                         break;
                     }
-                    case MAGIC_FONT_GLGR: {
+                    case SIGNATURE_GLGR: {
                         break;
                     }
                     default: {
@@ -137,7 +124,7 @@ namespace nw4r {
                 nBlocks++;
             }
 
-            fileHeader->signature = MAGIC_FONT_UNPACKED;
+            fileHeader->signature = SIGNATURE_FONT_UNPACKED;
 
             return info;
         }

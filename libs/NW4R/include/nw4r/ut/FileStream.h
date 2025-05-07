@@ -32,11 +32,11 @@ namespace nw4r {
                     public:
                         FilePosition() : mFileSize(0), mPosition(0) {}
                 
-                        u32 GetFileSize() const { return mFileSize;
+                        u32 GetFileSize() const     { return mFileSize;
                         }
-                        void SetFileSize(u32 size) { mFileSize = size; }
+                        void SetFileSize(u32 size)  { mFileSize = size; }
                 
-                        u32 Tell() const { return mPosition; }
+                        u32 Tell() const            { return mPosition; }
                 
                         u32 Skip(s32 offset);
                         u32 Append(s32 offset);
