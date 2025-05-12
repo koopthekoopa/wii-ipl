@@ -238,7 +238,6 @@ DisplayListFifo = .bss:0x81116B28; // type:object size:0x80 scope:local data:4by
 ...bss.0 = .bss:0x81116B28; // type:label scope:local
 __savedGXdata = .bss:0x81116BA8; // type:object size:0x600 scope:local data:4byte
 OldCPUFifo = .bss:0x811171A8; // type:object size:0x80 scope:local data:4byte
-alignMe = .bss:0x81117228; // type:object size:0x14 scope:global
 __DVDTicketViewBuffer = .bss:0x81117240; // type:object size:0xD8 scope:local
 ...bss.0 = .bss:0x81117240; // type:label scope:local
 __DVDTmdBuffer = .bss:0x81117340; // type:object size:0x49E4 scope:local

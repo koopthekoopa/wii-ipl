@@ -629,7 +629,7 @@ src/scene/kitayamaTest/iplKitayamaTest.cpp:
 	.text       start:0x813BE10C end:0x813BEAE4
 	.data       start:0x8164FDC8 end:0x81650040
 
-src/scene/kitayamaTest/nandsdworker_autotest.cpp:
+src/scene/kitayamaTest/iplNandSDWorker_AutoTest.cpp:
 	.text       start:0x813BEAE4 end:0x813C03F4
 	.data       start:0x81650040 end:0x81650640
 
@@ -711,13 +711,13 @@ src/scene/textBalloon/iplBalloon.cpp:
 	.sdata2     start:0x81696940 end:0x81696960
 	.sdata      start:0x81698B80 end:0x81698B98
 
-src/scene/cardSequence/CardSequence.cpp:
+src/scene/cardSequence/iplCardSequence.cpp:
 	.text       start:0x813D2114 end:0x813D4790
 	.data       start:0x81653228 end:0x816537E0
 	.sdata      start:0x81698B98 end:0x81698BA0
 	.sbss       start:0x8169AA08 end:0x8169AA10
 
-src/scene/nakamuraTest/iplContest.c:
+src/scene/nakamuraTest/iplContest.cpp:
 	.bss        start:0x810B7508 end:0x810B8008
 	.text       start:0x813D4790 end:0x813D5660
 	.rodata     start:0x81610798 end:0x816107E0
@@ -872,7 +872,7 @@ src/scene/setting/iplAOSSThread.cpp:
 	.sdata      start:0x81699090 end:0x81699098
 	.sbss       start:0x8169AAC0 end:0x8169AAD8
 
-src/scene/setting/iplAOSS.cpp:
+src/scene/setting/AOSS.cpp:
 	.bss        start:0x810BD4A8 end:0x810BDDD0
 	.text       start:0x813FD26C end:0x813FDB00
 	.data       start:0x81657E50 end:0x81657E80
@@ -885,7 +885,7 @@ src/scene/setting/iplRakuRakuThread.cpp:
 	.sdata      start:0x81699098 end:0x816990A0
 	.sbss       start:0x8169AB00 end:0x8169AB10
 
-src/scene/setting/iplATERM.cpp:
+src/scene/setting/ATERM.cpp:
 	.bss        start:0x810BDEF8 end:0x810C0C80
 	.text       start:0x813FE378 end:0x81406DBC
 	.rodata     start:0x81610E08 end:0x81613630
@@ -1247,7 +1247,7 @@ src/channelScript/systemmenu/iplCSImage.cpp:
 libs/RVLMiddleware/eZiText/src/rvl/eztx.c:
 	.text       start:0x8145F0D0 end:0x8145F178
 	.rodata     start:0x81617AF0 end:0x81617B40
-	.data       start:0x8166ACE0 end:0x8166AD18
+	.data       start:0x8166ACE0 end:0x8166ACE8
 
 libs/RVLMiddleware/eZiText/src/clib/zaddress.c:
 	extab       start:0x81330420 end:0x81330458
@@ -1265,6 +1265,7 @@ libs/RVLMiddleware/eZiText/src/clib/zi81key.c:
 	extabindex  start:0x81331044 end:0x813310BC
 	.text       start:0x8145FEF4 end:0x814652FC
 	.rodata     start:0x81617B60 end:0x81617FE0
+	.data       start:0x8166ACE8 end:0x8166AD18
 	.sdata2     start:0x81696E98 end:0x81696EA0
 
 libs/RVLMiddleware/eZiText/src/clib/zi8alpha.c:

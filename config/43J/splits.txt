@@ -629,7 +629,7 @@ src/scene/kitayamaTest/iplKitayamaTest.cpp:
 	.text       start:0x813BD2F0 end:0x813BDCC8
 	.data       start:0x816803E8 end:0x81680660
 
-src/scene/kitayamaTest/nandsdworker_autotest.cpp:
+src/scene/kitayamaTest/iplNandSDWorker_AutoTest.cpp:
 	.text       start:0x813BDCC8 end:0x813BF5D8
 	.data       start:0x81680660 end:0x81680C60
 
@@ -711,13 +711,13 @@ src/scene/textBalloon/iplBalloon.cpp:
 	.sdata2     start:0x816C41A0 end:0x816C41C0
 	.sdata      start:0x816C63E0 end:0x816C63F8
 
-src/scene/cardSequence/CardSequence.cpp:
+src/scene/cardSequence/iplCardSequence.cpp:
 	.text       start:0x813D1368 end:0x813D39E4
 	.data       start:0x81683848 end:0x81683E00
 	.sdata      start:0x816C63F8 end:0x816C6400
 	.sbss       start:0x816C8268 end:0x816C8270
 
-src/scene/nakamuraTest/iplContest.c:
+src/scene/nakamuraTest/iplContest.cpp:
 	.bss        start:0x810B7508 end:0x810B8008
 	.text       start:0x813D39E4 end:0x813D48B4
 	.rodata     start:0x81639758 end:0x816397A0
@@ -872,7 +872,7 @@ src/scene/setting/iplAOSSThread.cpp:
 	.sdata      start:0x816C68F0 end:0x816C68F8
 	.sbss       start:0x816C8328 end:0x816C8338
 
-src/scene/setting/iplAOSS.cpp:
+src/scene/setting/AOSS.cpp:
 	.bss        start:0x810BD4A8 end:0x810BDDD0
 	.text       start:0x813FC45C end:0x813FCCF0
 	.data       start:0x81688470 end:0x816884A0
@@ -885,7 +885,7 @@ src/scene/setting/iplRakuRakuThread.cpp:
 	.sdata      start:0x816C68F8 end:0x816C6900
 	.sbss       start:0x816C8360 end:0x816C8370
 
-src/scene/setting/iplATERM.cpp:
+src/scene/setting/ATERM.cpp:
 	.bss        start:0x810BDEF8 end:0x810C0C80
 	.text       start:0x813FD568 end:0x81405FAC
 	.rodata     start:0x81639DC8 end:0x8163C5F0

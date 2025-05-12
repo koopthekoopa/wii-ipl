@@ -45,7 +45,7 @@ enum {
 };
 
 enum {
-    DVD_COVER_BUSY,
+    DVD_COVER_BUSY = 0,
     DVD_COVER_OPENED,
     DVD_COVER_CLOSED,
 };

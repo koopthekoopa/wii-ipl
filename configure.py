@@ -245,6 +245,7 @@ cflags_includes = [
     "-i libs/RVL_SDK/include",
     "-i libs/RevoEX/include",
     "-i libs/NW4R/include",
+    "-i libs/RVLMiddleware/eZiText/include",
     "-i libs/RVLFaceLib/include",
     "-i libs/EGG/include",
     f"-i build/{config.version}/include",
@@ -325,6 +326,24 @@ cflags_sdk_except = [
     "-Cpp_exceptions on",
 ]
 
+# Zi8 C Library
+cflags_zi8 = [
+    *cflags_base,
+    "-ipa file",
+    "-fp_contract off",
+    "-Cpp_exceptions on",
+]
+
+# EZTX Library
+cflags_eztx = [
+    *cflags_sdk,
+    "-ipa file",
+    "-str readonly",
+    "-sdata 0",
+    "-fp_contract off",
+    "-Cpp_exceptions off",
+]
+
 # Runtime & MSL library flags
 cflags_runtime = [
     *cflags_base,
@@ -361,12 +380,22 @@ def ZI8Lib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
         "mw_version": config.linker_version,
-        "cflags": cflags_sdk_except,
+        "cflags": cflags_zi8,
         "progress_category": "rvlmwm",
         "objects": objects,
         "src_dir": "libs/RVLMiddleware/eZiText/src",
     }
 
+# Helper function for EZTX
+def EZTXLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
+    return {
+        "lib": lib_name,
+        "mw_version": config.linker_version,
+        "cflags": cflags_eztx,
+        "progress_category": "rvlmwm",
+        "objects": objects,
+        "src_dir": "libs/RVLMiddleware/eZiText/src",
+    }
 
 # Helper function for ATOK library
 def ATOKLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
@@ -677,7 +706,7 @@ config.libs = [
     ),
     IPLSection("kitayamaTest", [
             Object(NonMatching, "scene/kitayamaTest/iplKitayamaTest.cpp"),
-            Object(NonMatching, "scene/kitayamaTest/nandsdworker_autotest.cpp"),
+            Object(NonMatching, "scene/kitayamaTest/iplNandSDWorker_AutoTest.cpp"),
         ]
     ),
     IPLSection("letterWriter", [
@@ -716,11 +745,11 @@ config.libs = [
         ]
     ),
     IPLSection("cardSequence", [
-            Object(NonMatching, "scene/cardSequence/CardSequence.cpp"),
+            Object(NonMatching, "scene/cardSequence/iplCardSequence.cpp"),
         ]
     ),
     IPLSection("nakamuraTest", [
-            Object(NonMatching, "scene/nakamuraTest/iplContest.c"),
+            Object(NonMatching, "scene/nakamuraTest/iplContest.cpp"),
             Object(NonMatching, "scene/nakamuraTest/gamespy/NATify.c"),
             Object(NonMatching, "scene/nakamuraTest/gamespy/darray.c"),
             Object(NonMatching, "scene/nakamuraTest/gamespy/gsAvailable.c"),
@@ -768,9 +797,9 @@ config.libs = [
             Object(NonMatching, "scene/setting/iplUsbAP.cpp"),
             Object(NonMatching, "scene/setting/iplUsbAPThread.cpp"),
             Object(NonMatching, "scene/setting/iplAOSSThread.cpp"),
-            Object(NonMatching, "scene/setting/iplAOSS.cpp"),
+            Object(NonMatching, "scene/setting/AOSS.cpp"),
             Object(NonMatching, "scene/setting/iplRakuRakuThread.cpp"),
-            Object(NonMatching, "scene/setting/iplATERM.cpp"),
+            Object(NonMatching, "scene/setting/ATERM.cpp"),
         ]
     ),
     IPLSection("settingSelect", [
@@ -866,7 +895,7 @@ config.libs = [
         ]
     ),
     # eZiText (for 4.3U and 4.3E only)
-    ZI8Lib("zi8rvl", [
+    EZTXLib("zi8rvl", [
             Object(NonMatching, "rvl/eztx.c"),
         ]
     ),
