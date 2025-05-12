@@ -618,7 +618,7 @@ void EXIInit() {
         __OSEnableBarnacle(EXI_CHAN_0, EXI_DEV_NET);
     }
 
-    OSRegisterVersion(__EXIVersion);
+    OSRegisterVersion(GetVersion(EXI));
 }
 
 BOOL EXILock(s32 chan, u32 dev, EXICallback unlockedCallback) {

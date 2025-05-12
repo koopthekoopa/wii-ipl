@@ -33,7 +33,7 @@ typedef struct NWC24CHJumpObj {
 
 NWC24Err    NWC24CheckCHJumpObj(const NWC24CHJumpObj* chjp, u32 dataSize);
 NWC24Err    NWC24GetCHJumpTitleId(const NWC24CHJumpObj* chjp, u64* titleId);
-NWC24Err    NWC24GetCHJumpBlockSize(const NWC24CHJumpObj *chjp, u32* size, u32 index);
+NWC24Err    NWC24GetCHJumpBlockSize(const NWC24CHJumpObj* chjp, u32* size, u32 index);
 NWC24Err    NWC24GetCHJumpBlockData(const NWC24CHJumpObj* chjp, char* data, u32 size, u32 index);
 
 #endif  // REVOLUTION_NWC24_MSG_BOARD_H

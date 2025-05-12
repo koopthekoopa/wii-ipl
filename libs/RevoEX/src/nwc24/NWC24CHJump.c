@@ -14,7 +14,7 @@ static inline u32* NWC24iGetCHJumpTable(const NWC24CHJumpObj* chjp) {
 }
 
 static inline ChJumpEntry* NWC24iGetCHJumpEntry(const u32* table, u32 idx) {
-    return (ChJumpEntry*)(table + (idx * (sizeof(ChJumpEntry)/4)));
+    return (ChJumpEntry*)(table + (idx * (sizeof(ChJumpEntry) / sizeof(u32))));
 }
 
 static inline u32 NWC24iGetCHJumpTableSize(const NWC24CHJumpObj* chjp) {
@@ -22,7 +22,9 @@ static inline u32 NWC24iGetCHJumpTableSize(const NWC24CHJumpObj* chjp) {
 }
 
 NWC24Err NWC24CheckCHJumpObj(const NWC24CHJumpObj* chjp, u32 dataSize) {
-    u32 i, tableSize, num;
+    u32 tableSize;
+    u32 num;
+    u32 i;
     u32* table = NWC24iGetCHJumpTable(chjp);
 
     // Verify magic
@@ -44,7 +46,8 @@ NWC24Err NWC24CheckCHJumpObj(const NWC24CHJumpObj* chjp, u32 dataSize) {
     tableSize = NWC24iGetCHJumpTableSize(chjp);
     for (i = 0; i < num; i++) {
         ChJumpEntry* entry = NWC24iGetCHJumpEntry(table, i);
-        if (entry->offset < tableSize) {
+        int offset = entry->offset;
+        if (offset < tableSize) {
             return NWC24_ERR_FORMAT;
         }
         if (entry->offset + entry->size > chjp->header.totalSize) {
@@ -60,7 +63,7 @@ NWC24Err NWC24GetCHJumpTitleId(const NWC24CHJumpObj* chjp, u64* titleId) {
     return NWC24_OK;
 }
 
-NWC24Err NWC24GetCHJumpBlockSize(const NWC24CHJumpObj *chjp, u32* size, u32 index) {
+NWC24Err NWC24GetCHJumpBlockSize(const NWC24CHJumpObj* chjp, u32* size, u32 index) {
     u32* table = NWC24iGetCHJumpTable(chjp);
     ChJumpEntry* entry;
 

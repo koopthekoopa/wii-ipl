@@ -213,37 +213,37 @@ namespace gui {
     }
 
     void PaneManager::walkInChildren(nw4r::lyt::PaneList& paneList) {
-        PaneComponent*   pPaneComponent;
-        PaneToComponent* pPaneToComponent;
+        PaneComponent*   pComponent;
+        PaneToComponent* pToComponent;
 
         for (nw4r::lyt::PaneList::Iterator it = paneList.GetBeginIter(); it != paneList.GetEndIter(); it++) {
-            // Create the component and it's ID
+            // Create the component
             if (mpAllocator) {
-                void* pComBuf       = MEMAllocFromAllocator(mpAllocator, sizeof(PaneComponent));
-                void* pBuf          = MEMAllocFromAllocator(mpAllocator, sizeof(PaneToComponent));
-                pPaneComponent      = new(pComBuf) PaneComponent(suIDCounter);
-                pPaneToComponent    = new(pBuf) PaneToComponent(&*it, pPaneComponent);
+                void* pComBuf   = MEMAllocFromAllocator(mpAllocator, sizeof(PaneComponent));
+                void* pBuf      = MEMAllocFromAllocator(mpAllocator, sizeof(PaneToComponent));
+                pComponent      = new(pComBuf) PaneComponent(suIDCounter);
+                pToComponent    = new(pBuf) PaneToComponent(&*it, pComponent);
             }
             else {
-                pPaneComponent      = new PaneComponent(suIDCounter);
-                pPaneToComponent    = new PaneToComponent(&*it, pPaneComponent);
+                pComponent      = new PaneComponent(suIDCounter);
+                pToComponent    = new PaneToComponent(&*it, pComponent);
             }
 
             // Append it
-            nw4r::ut::List_Append(&mPaneComponents, pPaneToComponent);
+            nw4r::ut::List_Append(&mPaneComponents, pToComponent);
             suIDCounter++;
 
-            pPaneComponent->setPane(&*it);
+            pComponent->setPane(&*it);
 
             // Trigger target for pictures panes
             if (nw4r::ut::DynamicCast<nw4r::lyt::Picture*>(&*it)) {
-                pPaneComponent->setTriggerTarget(true);
+                pComponent->setTriggerTarget(true);
             }
             if (nw4r::ut::DynamicCast<nw4r::lyt::Window*>(&*it)) {
-                pPaneComponent->setTriggerTarget(true);
+                pComponent->setTriggerTarget(true);
             }
 
-            addComponent(pPaneComponent);
+            addComponent(pComponent);
             walkInChildren(it->GetChildList());
         }
     }

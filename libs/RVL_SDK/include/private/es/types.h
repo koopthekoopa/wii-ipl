@@ -53,19 +53,6 @@ enum {
     ES_CK_CAFEWII       // Wii U's Wii Mode common key
 };
 
-typedef enum ESCertSigType {
-    ES_SIG_RSA4096 = 0x00010000,
-    ES_SIG_RSA2048,
-    ES_SIG_ECC,
-} ESCertSigType;
-
-typedef struct ESCertSignature {
-    ESCertSigType   sigType;        // 0x00
-    u8              sig[256];       // 0x04
-    u8              reserved[60];   // 0x104
-    u8              issuer[64];     // 0x140
-} ESCertSignature;
-
 // No alignment!!
 #pragma pack(push, 1)
 
@@ -83,10 +70,24 @@ typedef struct ESTmdReserved {
     u8  empty_0x19[7];
 
     u8  ipcMask[12];    // 0x20
-    u8  empty_0x2C[20]; // 0x2C
+    u8  empty_0x2C[18]; // 0x2C
 } ESTmdReserved;
 
 #pragma pack(pop)
+
+typedef enum ESCertSigType {
+    ES_SIG_RSA4096 = 0x00010000,
+    ES_SIG_RSA2048,
+    ES_SIG_ECC,
+} ESCertSigType;
+
+typedef struct ESCertSignature {
+    ESCertSigType   sigType;        // 0x00
+    u8              sig[256];       // 0x04
+    u8              reserved[60];   // 0x104
+    u8              issuer[64];     // 0x140
+} ESCertSignature;
+
 #pragma pack(push, 4)
 
 /* Ticket */

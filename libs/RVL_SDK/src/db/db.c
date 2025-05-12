@@ -3,6 +3,8 @@
 
 #include <stdarg.h>
 
+#include <config.h>
+
 BOOL            DBVerbose;
 DBInterface*    __DBInterface;
 

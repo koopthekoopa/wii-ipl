@@ -53,7 +53,7 @@ void DSPInit() {
         return;
     }
 
-    OSRegisterVersion(__DSPVersion);
+    OSRegisterVersion(GetVersion(DSP));
 
     old = OSDisableInterrupts();
     __OSSetInterruptHandler(__OS_INTERRUPT_DSP_DSP, __DSPHandler);

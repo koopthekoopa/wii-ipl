@@ -26,8 +26,8 @@ namespace ipl {
             nw4r::ut::List_Init(&mObjects, offsetof(Object, mLink));
             
             {
-                // Init strings
-                unsigned char mac[NCD_MACADDRESS_LENGTH + 1];
+                // Init arrays
+                unsigned char mac[NCD_MAC_ADDRESS_LENGTH + 1];
                 mac[6] =  mac[5] = mac[4] = mac[3] = mac[2] = mac[1] = mac[0] = 0;
 
                 unsigned char temp[3];
@@ -37,8 +37,8 @@ namespace ipl {
                 unsigned char* ncd_mac = ncd::NCDSetting::getMacAddr();
                 
                 // Get mac values
-                for (int i = 1; i < NCD_MACADDRESS_LENGTH; i++) {
-                    memcpy(temp, &ncd_mac[i * sizeof(temp)], sizeof(temp) - 1);
+                for (int i = 1; i < NCD_MAC_ADDRESS_LENGTH; i++) {
+                    memcpy(temp, &ncd_mac[i * ARRSIZE(temp)], sizeof(temp) - 1);
                     mac[i] = strtol((char*)temp, NULL, 16);
                 }
 

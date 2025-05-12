@@ -1,5 +1,7 @@
-#include <revolution/os.h>
 #include <revolution/dvd.h>
+#include <private/dvd.h>
+
+#include <revolution/os.h>
 
 typedef struct Queue {
     DVDCommandBlock* next;  // 0x00

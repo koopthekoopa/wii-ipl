@@ -61,7 +61,7 @@ namespace gui {
 
     class Component : public Interface {
         public:
-            virtual void    init() {                        // 0x0C (0x03)
+            virtual void init() {                                                                               // 0x0C (0x03)
                 for (int i = 0; i < GUI_POINTS_MAX; i++) {
                     mbPointed[i] = false;
                     mDraggingPos[i].z = mDraggingPos[i].y = mDraggingPos[i].x = 0;
@@ -92,7 +92,7 @@ namespace gui {
 
             virtual void    onDrag(f32 x, f32 y) {}                                                             // 0x38 (0x0E)
             virtual void    onMove(int point, f32 x, f32 y)             { mFlightDuration[point]++; }           // 0x3C (0x0F)
-            virtual void    onTrig(int point, u32 trig, Vec& dragPos) {                                         // 0x40 (0x10)
+            virtual void onTrig(int point, u32 trig, Vec& dragPos) {                                            // 0x40 (0x10)
                 if (trig & mDraggingButton) {
                     mDraggingPos[point] = dragPos;
                     mbDragging[point] = true;
@@ -158,7 +158,7 @@ namespace gui {
             virtual bool            update(int point, const KPADStatus* kpad, f32, f32, void* data) { return false; }   // 0x28 (0x0A)
             virtual bool            update(int point, f32 x, f32 y, u32 trig, u32 hold, u32 release, void* data);       // 0x2C (0x0B)
 
-            virtual void            onEvent(u32 compId, u32 event, int point, void* data) {                             // 0x30 (0x0C)
+            virtual void onEvent(u32 compId, u32 event, int point, void* data) {                                        // 0x30 (0x0C)
                 if (mpEventHandler) {
                      mpEventHandler->setLatestEventCtrlNo(point);
                      mpEventHandler->onEvent(compId, event, data);
@@ -167,13 +167,13 @@ namespace gui {
 
             virtual void            setAllComponentTriggerTarget(bool bEnable);                                         // 0x34 (0x0D)
 
-            virtual void            setEventHandler(EventHandler* eventHandler) {                                       // 0x38 (0x0E)
+            virtual void setEventHandler(EventHandler* eventHandler) {                                                  // 0x38 (0x0E)
                 mpEventHandler = eventHandler;
                 if (eventHandler) {
                     eventHandler->setManager(this);
                 }
             }
-            virtual EventHandler*   changeEventHandler(EventHandler* eventHandler) {                                    // 0x3C (0x0F)
+            virtual EventHandler* changeEventHandler(EventHandler* eventHandler) {                                      // 0x3C (0x0F)
                 EventHandler* prevHandler = mpEventHandler;
                 mpEventHandler = eventHandler;
                 if (eventHandler) {

@@ -1,6 +1,6 @@
 Revolution Extension
 ====================
-A decompilation of Revolution Extension (RevoEX) from the Wii Menu.  
+A decompilation of Revolution Extension (RevoEX; Version 2.0PR4) from the Wii Menu.  
 
 List of libraries that are linked (in alphabetical order):
 

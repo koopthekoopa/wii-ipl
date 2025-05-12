@@ -176,50 +176,50 @@ BOOL nandIsInitialized() {
 void nandReportErrorCode(ISFSError result) {}
 
 s32 nandConvertErrorCode(ISFSError result) {
-    int errorMap[]= {
-        ISFS_ERROR_OK,              NAND_RESULT_OK,
-        ISFS_ERROR_ACCESS,          NAND_RESULT_ACCESS,
-        ISFS_ERROR_CORRUPT,         NAND_RESULT_CORRUPT,
-        ISFS_ERROR_ECC_CRIT,        NAND_RESULT_ECC_CRIT,
-        ISFS_ERROR_EXISTS,          NAND_RESULT_EXISTS,
-        ISFS_ERROR_HMAC,           NAND_RESULT_AUTHENTICATION,
-        ISFS_ERROR_INVALID,        NAND_RESULT_INVALID,
-        ISFS_ERROR_MAXBLOCKS,      NAND_RESULT_MAXBLOCKS,
-        ISFS_ERROR_MAXFD,          NAND_RESULT_MAXFD,
-        ISFS_ERROR_MAXFILES,       NAND_RESULT_MAXFILES,
-        ISFS_ERROR_MAXDEPTH,       NAND_RESULT_MAXDEPTH,
-        ISFS_ERROR_NOEXISTS,       NAND_RESULT_NOEXISTS,
-        ISFS_ERROR_NOTEMPTY,       NAND_RESULT_NOTEMPTY,
-        ISFS_ERROR_NOTREADY,       NAND_RESULT_UNKNOWN,
-        ISFS_ERROR_OPENFD,         NAND_RESULT_OPENFD,
-        ISFS_ERROR_UNKNOWN,        NAND_RESULT_UNKNOWN,
-        ISFS_ERROR_BUSY,           NAND_RESULT_BUSY,
-        ISFS_ERROR_SHUTDOWN,       NAND_RESULT_FATAL_ERROR,
+    int errorMap[] = {
+        ISFS_ERROR_OK,                  NAND_RESULT_OK,
+        ISFS_ERROR_ACCESS,              NAND_RESULT_ACCESS,
+        ISFS_ERROR_CORRUPT,             NAND_RESULT_CORRUPT,
+        ISFS_ERROR_ECC_CRIT,            NAND_RESULT_ECC_CRIT,
+        ISFS_ERROR_EXISTS,              NAND_RESULT_EXISTS,
+        ISFS_ERROR_HMAC,                NAND_RESULT_AUTHENTICATION,
+        ISFS_ERROR_INVALID,             NAND_RESULT_INVALID,
+        ISFS_ERROR_MAXBLOCKS,           NAND_RESULT_MAXBLOCKS,
+        ISFS_ERROR_MAXFD,               NAND_RESULT_MAXFD,
+        ISFS_ERROR_MAXFILES,            NAND_RESULT_MAXFILES,
+        ISFS_ERROR_MAXDEPTH,            NAND_RESULT_MAXDEPTH,
+        ISFS_ERROR_NOEXISTS,            NAND_RESULT_NOEXISTS,
+        ISFS_ERROR_NOTEMPTY,            NAND_RESULT_NOTEMPTY,
+        ISFS_ERROR_NOTREADY,            NAND_RESULT_UNKNOWN,
+        ISFS_ERROR_OPENFD,              NAND_RESULT_OPENFD,
+        ISFS_ERROR_UNKNOWN,             NAND_RESULT_UNKNOWN,
+        ISFS_ERROR_BUSY,                NAND_RESULT_BUSY,
+        ISFS_ERROR_SHUTDOWN,            NAND_RESULT_FATAL_ERROR,
 
-        IPC_RESULT_ACCESS,          NAND_RESULT_ACCESS,
-        IPC_RESULT_EXISTS,          NAND_RESULT_EXISTS,
-        IPC_RESULT_INTR,            NAND_RESULT_UNKNOWN,
-        IPC_RESULT_INVALID,         NAND_RESULT_INVALID,
-        IPC_RESULT_MAX,             NAND_RESULT_UNKNOWN,
-        IPC_RESULT_NOEXISTS,        NAND_RESULT_NOEXISTS,
-        IPC_RESULT_EMPTYQUEUE,      NAND_RESULT_UNKNOWN,
-        IPL_RESULT_FULLQUEUE,       NAND_RESULT_BUSY,
-        IPC_RESULT_UNKNOWN,         NAND_RESULT_UNKNOWN,
-        IPC_RESULT_NOTREADY,        NAND_RESULT_UNKNOWN,
-        IPC_RESULT_ECC,             NAND_RESULT_UNKNOWN,
-        IPC_RESULT_ECC_CRIT,        NAND_RESULT_ECC_CRIT,
-        IPC_RESULT_BADBLOCK,        NAND_RESULT_UNKNOWN,
+        IPC_RESULT_ACCESS,              NAND_RESULT_ACCESS,
+        IPC_RESULT_EXISTS,              NAND_RESULT_EXISTS,
+        IPC_RESULT_INTR,                NAND_RESULT_UNKNOWN,
+        IPC_RESULT_INVALID,             NAND_RESULT_INVALID,
+        IPC_RESULT_MAX,                 NAND_RESULT_UNKNOWN,
+        IPC_RESULT_NOEXISTS,            NAND_RESULT_NOEXISTS,
+        IPC_RESULT_EMPTYQUEUE,          NAND_RESULT_UNKNOWN,
+        IPL_RESULT_FULLQUEUE,           NAND_RESULT_BUSY,
+        IPC_RESULT_UNKNOWN,             NAND_RESULT_UNKNOWN,
+        IPC_RESULT_NOTREADY,            NAND_RESULT_UNKNOWN,
+        IPC_RESULT_ECC,                 NAND_RESULT_UNKNOWN,
+        IPC_RESULT_ECC_CRIT,            NAND_RESULT_ECC_CRIT,
+        IPC_RESULT_BADBLOCK,            NAND_RESULT_UNKNOWN,
 
-        IPC_RESULT_INVALID_OBJTYPE, NAND_RESULT_UNKNOWN,
-        IPC_RESULT_INVALID_RNG,     NAND_RESULT_UNKNOWN,
-        IPC_RESULT_INVALID_FLAG,    NAND_RESULT_UNKNOWN,
-        IPC_RESULT_INVALID_FORMAT,  NAND_RESULT_UNKNOWN,
-        IPC_RESULT_INVALID_VERSION, NAND_RESULT_UNKNOWN,
-        IPC_RESULT_INVALID_SIGNER,  NAND_RESULT_UNKNOWN,
-        IPC_RESULT_FAIL_CHECKVALUE, NAND_RESULT_UNKNOWN,
-        IPC_RESULT_FAIL_INTERNAL,   NAND_RESULT_UNKNOWN,
-        IPC_RESULT_FAIL_ALLOC,      NAND_RESULT_ALLOC_FAILED,
-        IPC_RESULT_INVALID_SIZE,    NAND_RESULT_UNKNOWN,
+        IPC_RESULT_INVALID_OBJTYPE,     NAND_RESULT_UNKNOWN,
+        IPC_RESULT_INVALID_RNG,         NAND_RESULT_UNKNOWN,
+        IPC_RESULT_INVALID_FLAG,        NAND_RESULT_UNKNOWN,
+        IPC_RESULT_INVALID_FORMAT,      NAND_RESULT_UNKNOWN,
+        IPC_RESULT_INVALID_VERSION,     NAND_RESULT_UNKNOWN,
+        IPC_RESULT_INVALID_SIGNATURE,   NAND_RESULT_UNKNOWN,
+        IPC_RESULT_VERIFY_FAILED,       NAND_RESULT_UNKNOWN,
+        IPC_RESULT_INTERNAL_FAILURE,    NAND_RESULT_UNKNOWN,
+        IPC_RESULT_ALLOC_FAILED,        NAND_RESULT_ALLOC_FAILED,
+        IPC_RESULT_INVALID_SIZE,        NAND_RESULT_UNKNOWN,
     };
 
     int i = 0;
@@ -231,7 +231,7 @@ s32 nandConvertErrorCode(ISFSError result) {
     for (; i < ARRSIZE(errorMap); i += 2) {
         if (errorMap[i] == result) {
             if (result == ISFS_ERROR_ECC_CRIT || result == ISFS_ERROR_HMAC || result == ISFS_ERROR_UNKNOWN || result == IPC_RESULT_UNKNOWN || result == IPC_RESULT_ECC_CRIT) {
-                char buf[128] ATTRIBUTE_ALIGN(64);
+                char buf[128] ALIGN64;
                 sprintf(buf, "ISFS error code: %d", result);
                 NANDLoggingAddMessageAsync(0, buf);
             }
@@ -241,9 +241,8 @@ s32 nandConvertErrorCode(ISFSError result) {
         }
     }
 
-    OSReport("CAUTION!  Unexpected error code [%d] was found.\n", result);
-    {
-        char buf[128] ATTRIBUTE_ALIGN(64);
+    OSReport("CAUTION!  Unexpected error code [%d] was found.\n", result); {
+        char buf[128] ALIGN64;
         sprintf(buf, "ISFS unexpected error code: %d", result);
         NANDLoggingAddMessageAsync(0, buf);
     }

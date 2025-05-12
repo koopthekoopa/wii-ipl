@@ -17,27 +17,27 @@
 
 <!--- Version 4.3U progress Badge -->
 
-[DecompBadgeV43U]: https://decomp.dev/koopthekoopa/wii-ipl/43U.svg?mode=shield&measure=code&label=Decompiled&color=rgb(16,175,232)
-[LinkBadgeV43U]: https://decomp.dev/koopthekoopa/wii-ipl/43U.svg?mode=shield&measure=complete_code&label=Linked&color=rgb(16,175,232)
-[FuncBadgeV43U]: https://decomp.dev/koopthekoopa/wii-ipl/43U.svg?mode=shield&measure=functions&label=Functions&color=rgb(16,175,232)
+[DecompBadgeV43U]: https://decomp.dev/koopthekoopa/wii-ipl/43U.svg?&measure=code&label=Decompiled&mode=shield&labelColor=%237c7c7c&color=%2333b8ff&style=plastic
+[LinkBadgeV43U]: https://decomp.dev/koopthekoopa/wii-ipl/43U.svg?&measure=complete_code&label=Linked&mode=shield&labelColor=%237c7c7c&color=%2333b8ff&style=plastic
+[FuncBadgeV43U]: https://decomp.dev/koopthekoopa/wii-ipl/43U.svg?&measure=functions&label=Functions&mode=shield&labelColor=%237c7c7c&color=%2333b8ff&style=plastic
 
 <!--- Version 4.3E progress Badge -->
 
-[DecompBadgeV43E]: https://decomp.dev/koopthekoopa/wii-ipl/43E.svg?mode=shield&measure=code&label=Decompiled&color=rgb(16,175,232)
-[LinkBadgeV43E]: https://decomp.dev/koopthekoopa/wii-ipl/43E.svg?mode=shield&measure=complete_code&label=Linked&color=rgb(16,175,232)
-[FuncBadgeV43E]: https://decomp.dev/koopthekoopa/wii-ipl/43E.svg?mode=shield&measure=functions&label=Functions&color=rgb(16,175,232)
+[DecompBadgeV43E]: https://decomp.dev/koopthekoopa/wii-ipl/43E.svg?measure=code&label=Decompiled&mode=shield&labelColor=%237c7c7c&color=%2333b8ff&style=plastic
+[LinkBadgeV43E]: https://decomp.dev/koopthekoopa/wii-ipl/43E.svg?measure=complete_code&label=Linked&mode=shield&labelColor=%237c7c7c&color=%2333b8ff&style=plastic
+[FuncBadgeV43E]: https://decomp.dev/koopthekoopa/wii-ipl/43E.svg?measure=functions&label=Functions&mode=shield&labelColor=%237c7c7c&color=%2333b8ff&style=plastic
 
 <!--- Version 4.3J progress Badge -->
 
-[DecompBadgeV43J]: https://decomp.dev/koopthekoopa/wii-ipl/43J.svg?mode=shield&measure=code&label=Decompiled&color=rgb(16,175,232)
-[LinkBadgeV43J]: https://decomp.dev/koopthekoopa/wii-ipl/43J.svg?mode=shield&measure=complete_code&label=Linked&color=rgb(16,175,232)
-[FuncBadgeV43J]: https://decomp.dev/koopthekoopa/wii-ipl/43J.svg?mode=shield&measure=functions&label=Functions&color=rgb(16,175,232)
+[DecompBadgeV43J]: https://decomp.dev/koopthekoopa/wii-ipl/43J.svg?&measure=code&label=Decompiled&mode=shield&labelColor=%237c7c7c&color=%2333b8ff&style=plastic
+[LinkBadgeV43J]: https://decomp.dev/koopthekoopa/wii-ipl/43J.svg?&measure=complete_code&label=Linked&mode=shield&labelColor=%237c7c7c&color=%2333b8ff&style=plastic
+[FuncBadgeV43J]: https://decomp.dev/koopthekoopa/wii-ipl/43J.svg?&measure=functions&label=Functions&mode=shield&labelColor=%237c7c7c&color=%2333b8ff&style=plastic
 
 <!--- Version 4.3K progress Badge -->
 
-[DecompBadgeV43K]: https://decomp.dev/koopthekoopa/wii-ipl/43K.svg?mode=shield&measure=code&label=Decompiled&color=rgb(16,175,232)
-[LinkBadgeV43K]: https://decomp.dev/koopthekoopa/wii-ipl/43K.svg?mode=shield&measure=complete_code&label=Linked&color=rgb(16,175,232)
-[FuncBadgeV43K]: https://decomp.dev/koopthekoopa/wii-ipl/43K.svg?mode=shield&measure=functions&label=Functions&color=rgb(16,175,232)
+[DecompBadgeV43K]: https://decomp.dev/koopthekoopa/wii-ipl/43K.svg?&measure=code&label=Decompiled&mode=shield&labelColor=%237c7c7c&color=%2333b8ff&style=plastic
+[LinkBadgeV43K]: https://decomp.dev/koopthekoopa/wii-ipl/43K.svg?&measure=complete_code&label=Linked&mode=shield&labelColor=%237c7c7c&color=%2333b8ff&style=plastic
+[FuncBadgeV43K]: https://decomp.dev/koopthekoopa/wii-ipl/43K.svg?&measure=functions&label=Functions&mode=shield&labelColor=%237c7c7c&color=%2333b8ff&style=plastic
 
 <!--- Header -->
 
@@ -60,14 +60,14 @@ Supported versions:
 
 Progress
 ========
-|        Version        |      Functions Done      |         Decompiled         |          Linked          |
-|-----------------------|--------------------------|----------------------------|--------------------------|
-| [Wii Menu 4.3U][V43U] | [![FuncBadgeV43U]][V43U] | [![DecompBadgeV43U]][V43U] | [![LinkBadgeV43U]][V43U] |
-| [Wii Menu 4.3E][V43E] | [![FuncBadgeV43E]][V43E] | [![DecompBadgeV43E]][V43E] | [![LinkBadgeV43E]][V43E] |
-| [Wii Menu 4.3J][V43J] | [![FuncBadgeV43J]][V43J] | [![DecompBadgeV43J]][V43J] | [![LinkBadgeV43J]][V43J] |
-| [Wii Menu 4.3K][V43K] | [![FuncBadgeV43K]][V43K] | [![DecompBadgeV43K]][V43K] | [![LinkBadgeV43K]][V43K] |
+|        Version        |                                  Progress                                    |
+|-----------------------|------------------------------------------------------------------------------|
+| [Wii Menu 4.3U][V43U] | [![FuncBadgeV43U]][V43U] [![DecompBadgeV43U]][V43U] [![LinkBadgeV43U]][V43U] |
+| [Wii Menu 4.3E][V43E] | [![FuncBadgeV43E]][V43E] [![DecompBadgeV43E]][V43E] [![LinkBadgeV43E]][V43E] |
+| [Wii Menu 4.3J][V43J] | [![FuncBadgeV43J]][V43J] [![DecompBadgeV43J]][V43J] [![LinkBadgeV43J]][V43J] |
+| [Wii Menu 4.3K][V43K] | [![FuncBadgeV43K]][V43K] [![DecompBadgeV43K]][V43K] [![LinkBadgeV43K]][V43K] |
   
-> You can see the full progress and its history by clicking on one of the versions in the table.
+> You can see the full progress and its history by clicking on one of the versions in the table.  
 
 Installing Dependencies
 =======================

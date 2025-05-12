@@ -367,7 +367,7 @@ static void ClearMEM2Arena() NO_INLINE {
 
 void InquiryCallback(s32 res, DVDCommandBlock *block) {
     switch (block->state) {
-        case DVD_COMMAND_STATE_IDLE: {
+        case DVD_STATE_IDLE: {
             __OSDeviceCode = DriveInfo.deviceCode | DVD_DEVICE_CODE;
             break;
         }
@@ -477,12 +477,12 @@ static void ReportOSInfo() {
 
 static void CheckTargets() {
     switch (*(u8*)OSPhysicalToCached(OS_ADDR_BOOT_PROGRAM_TARGET)) {
-        case 0x80: {
+        case OS_APP_TYPE_DVD: {
             break;
         }
-        case 0x81: {
+        case OS_APP_TYPE_CHANNEL: {
             OSReport("OS ERROR: boot program is not for RVL target. Please use correct boot program.\n");
-            OSPanic(__FILE__, 1138, "Failed to run app");
+            OSHalt("Failed to run app", 1138);
             break;
         }
         default: {
@@ -491,12 +491,12 @@ static void CheckTargets() {
     }
 
     switch (*(u8*)OSPhysicalToCached(OS_ADDR_APP_LOADER_TARGET)) {
-        case 0x80: {
+        case OS_APP_TYPE_DVD: {
             break;
         }
-        case 0x81: {
+        case OS_APP_TYPE_CHANNEL: {
             OSReport("OS ERROR: apploader[D].img is not for RVL target. Please use correct apploader[D].img.\n");
-            OSPanic(__FILE__, 1156, "Failed to run app");
+            OSHalt("Failed to run app", 1156);
             break;
         }
         default: {
@@ -644,7 +644,7 @@ void OSInit() {
         }
 
         ReportOSInfo();
-        OSRegisterVersion(__OSVersion);
+        OSRegisterVersion(GetVersion(OS));
 
         if (BI2DebugFlag && *BI2DebugFlag >= 2) {
             EnableMetroTRKInterrupts();
@@ -948,7 +948,7 @@ const char* OSGetAppGamename() {
 
 u8 OSGetAppType() {
     if (__OSInIPL) {
-        return 0x40;
+        return OS_APP_TYPE_IPL;
     }
     return *((u8*)OSPhysicalToCached(OS_ADDR_CURRENT_APP_TYPE));
 }

@@ -16,7 +16,7 @@ namespace ipl {
         System::getHomeButtonMenu()->disable();
 
         if (mType != NONE) {
-            mpDialog->callBtn1(msgId, MESG_WARN_ACCEPT); // Show dialog with one button
+            mpDialog->callBtn1(msgId, MESG_WARN_ACCEPT);
             System::warning_run();
         }
 
@@ -32,6 +32,6 @@ namespace ipl {
     }
 
     BOOL WarningHandler::check() {
-        return mpDialog->getLastResult();
+        return mpDialog->getLastResult() /* == DialogWindow::RESULT_WAIT */;
     }
 }

@@ -6,9 +6,11 @@ s32 WENCGetEncodeData(WENCInfo* info, u32 flag, const s16* pcmData, s32 samples,
     const f64 table[] = {0.89843750, 0.89843750, 0.89843750, 0.89843750,
                          1.19921875, 1.59765625, 2.00000000, 2.39843750};
 
-    u8* dst;
-    const s16* src;
+    u8*         dst;
+    const s16*  src;
+
     int i;
+
     s32 da;
     s32 l3, l2, l1, l0;
     s32 dlx;

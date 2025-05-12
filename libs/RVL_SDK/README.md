@@ -20,7 +20,7 @@ List of libraries that are linked (in alphabetical order):
 | **CX**       | Compression Library; for LZ, Huffman and RunLength          | :x: |
 | **DB**       | Debug Interface Library                                     | :heavy_check_mark: |
 | **DSP**      | Digital Signal Processor Driver Library                     | :heavy_check_mark: |
-| **DVD**      | DVD Drive Library                                           | :x: |
+| **DVD**      | DVD Drive Library                                           | :heavy_check_mark: |
 | **ENC**      | Character Encoding Library                                  | :x: |
 | **ES**       | Private eTicket Services Library                            | :x: |
 | **ESP**      | Public eTicket Services Library; for use from the SDK       | :x: |

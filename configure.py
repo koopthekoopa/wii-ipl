@@ -302,6 +302,13 @@ cflags_sdk = [
     "-fp_contract off",
 ]
 
+# VF flags
+cflags_vf = [
+    *cflags_base,
+    "-ipa program",
+    "-fp_contract off",
+]
+
 # NW4R flags
 cflags_nw4r = [
     *cflags_base,
@@ -439,6 +446,18 @@ def RevoEXLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
         "lib": lib_name,
         "mw_version": config.linker_version,
         "cflags": cflags_sdk,
+        "progress_category": "revoex",
+        "objects": objects,
+        "src_dir": "libs/RevoEX/src",
+    }
+
+
+# Helper function for VF library from RevoEX
+def RevoEXVFLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
+    return {
+        "lib": lib_name,
+        "mw_version": config.linker_version,
+        "cflags": cflags_vf,
         "progress_category": "revoex",
         "objects": objects,
         "src_dir": "libs/RevoEX/src",
@@ -847,31 +866,36 @@ config.libs = [
         ]
     ),
     # eZiText (for 4.3U and 4.3E only)
-    ZI8Lib("eZiText", [
-            Object(NonMatching, "eztx.c"),
-            Object(NonMatching, "zi8address.c"),
-            Object(NonMatching, "zi8convert.c"),
-            Object(NonMatching, "zi8letter.c"),
-            Object(NonMatching, "zi8alpha.c"),
-            Object(NonMatching, "zi8alt.c"),
-            Object(NonMatching, "zi8cand.c"),
-            Object(NonMatching, "zi8cinfo.c"),
-            Object(NonMatching, "zi8copy.c"),
-            Object(NonMatching, "zi8matchrom.c"),
-            Object(NonMatching, "zi8getcand.c"),
-            Object(NonMatching, "zi8init.c"),
-            Object(NonMatching, "zi8is.c"),
-            Object(NonMatching, "zi8match.c"),
-            Object(NonMatching, "zi8utils.c"),
-            Object(NonMatching, "zi8pud.c"),
-            Object(NonMatching, "zi8punct.c"),
-            Object(NonMatching, "zi8uwd.c"),
-            Object(NonMatching, "zi8dawg.c"),
-            Object(NonMatching, "zi8candkorea.c"),
-            Object(Matching,    "zi8error.c"),
-            Object(NonMatching, "zi8keymatch.c"),
-            Object(NonMatching, "zi8oemdata.c"),
-            Object(NonMatching, "zi8prepare.c"),
+    ZI8Lib("zi8rvl", [
+            Object(NonMatching, "rvl/eztx.c"),
+        ]
+    ),
+    ZI8Lib("zi8clib", [
+            Object(NonMatching, "clib/zaddress.c"),
+            Object(NonMatching, "clib/zconvert.c"),
+            Object(NonMatching, "clib/zi81key.c"),
+            Object(NonMatching, "clib/zi8alpha.c"),
+            Object(NonMatching, "clib/zi8alts.c"),
+            Object(NonMatching, "clib/zi8cgetc.c"),
+            Object(NonMatching, "clib/zi8cinfo.c"),
+            Object(NonMatching, "clib/zi8copy.c"),
+            Object(NonMatching, "clib/zi8dawg.c"),
+            Object(NonMatching, "clib/zi8getc.c"),
+            Object(NonMatching, "clib/zi8getc2.c"),
+            Object(NonMatching, "clib/zi8getSW.c"),
+            Object(NonMatching, "clib/zi8initd.c"),
+            Object(NonMatching, "clib/zi8is.c"),
+            Object(NonMatching, "clib/zi8match.c"),
+            Object(NonMatching, "clib/zi8misc.c"),
+            Object(NonMatching, "clib/zi8pud2.c"),
+            Object(NonMatching, "clib/zi8punct.c"),
+            Object(NonMatching, "clib/zi8uwd.c"),
+            Object(NonMatching, "clib/zidawg1.c"),
+            Object(NonMatching, "clib/zi_unknown_tu.c"),
+            Object(Matching,    "clib/zierror.c"),
+            Object(NonMatching, "clib/zmtkey.c"),
+            Object(NonMatching, "clib/zoemdata.c"),
+            Object(NonMatching, "clib/zprepare.c"),
         ]
     ),
     # RevoEX
@@ -1274,13 +1298,13 @@ config.libs = [
         ]
     ),
     RVLSDKLib("dvd", [
-            Object(NonMatching, "dvd/dvdfs.c"),
-            Object(NonMatching, "dvd/dvd.c"),
-            Object(NonMatching, "dvd/dvdqueue.c"),
-            Object(NonMatching, "dvd/dvderror.c"),
+            Object(Matching,    "dvd/dvdfs.c"),
+            Object(Matching,    "dvd/dvd.c"),
+            Object(Matching,    "dvd/dvdqueue.c"),
+            Object(Matching,    "dvd/dvderror.c"),
             Object(Matching,    "dvd/dvdidutils.c"),
             Object(Matching,    "dvd/dvdFatal.c"),
-            Object(NonMatching, "dvd/dvd_broadway.c"),
+            Object(Matching,    "dvd/dvd_broadway.c"),
         ]
     ),
     RVLSDKLib("ai", [

@@ -25,6 +25,12 @@
 #include <private/os/OSNandbootInfo.h>
 #include <private/os/OSStateFlags.h>
 
+enum {
+    OS_APP_TYPE_IPL = 0x40,
+    OS_APP_TYPE_DVD = 0x80,
+    OS_APP_TYPE_CHANNEL = 0x81,
+};
+
 /* Global declarations */
 
 extern BOOL         __OSInIPL;

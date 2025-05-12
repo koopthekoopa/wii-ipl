@@ -216,7 +216,7 @@ GXFifoObj* GXInit(void* base, u32 size) {
     u32 reg;
     u32 freqBase;
 
-    OSRegisterVersion(__GXVersion);
+    OSRegisterVersion(GetVersion(GX));
 
     __GXData->inDispList = FALSE;
     __GXData->dlSaveContext = TRUE;

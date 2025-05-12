@@ -81,7 +81,3 @@ void GXCallDisplayList(void* list, u32 nbytes) {
     GX_WRITE_U32(list);
     GX_WRITE_U32(nbytes);
 }
-
-// Temporary. If the next unit gets matched, in this case dvd.c, then this is no longer needed.
-#pragma force_active on
-u32 alignMe[5];

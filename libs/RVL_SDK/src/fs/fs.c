@@ -24,7 +24,7 @@ enum {
     ISFS_CB_STATE_READ_DIR,
     ISFS_CB_STATE_GET_ATTR,
     ISFS_CB_STATE_GET_USAGE,
-    ISFS_CB_STATE_GET_FILE_STATS,
+    ISFS_CB_STATE_GET_FILE_STATS
 };
 
 enum {
@@ -37,25 +37,25 @@ enum {
     ISFS_IOCTL_RENAME_PATH      = 8,
     ISFS_IOCTL_CREATE_FILE      = 9,
     ISFS_IOCTL_GET_FILE_STATS   = 11,
-    ISFS_IOCTL_SHUTDOWN_FS      = 13,
-    ISFS_IOCTLV_GET_USAGE       = 12
+    ISFS_IOCTLV_GET_USAGE       = 12,
+    ISFS_IOCTL_SHUTDOWN_FS      = 13
 };
 
-typedef struct isfs_GetAttr {
+typedef struct FS_GetAttr {
     u32* ownerId;   // 0x00
     u16* groupId;   // 0x04
     u32* attr;      // 0x08
     u32* ownerAcc;  // 0x0C
     u32* groupAcc;  // 0x10
     u32* othersAcc; // 0x14
-} isfs_GetAttr;
+} FS_GetAttr;
 
-typedef struct isfs_GetUsage {
+typedef struct FS_GetUsage {
     u32* blocks;    // 0x00
     u32* iNodes;    // 0x04
-} isfs_GetUsage;
+} FS_GetUsage;
 
-typedef struct isfs_Callback {
+typedef struct FS_Callback {
     u8              ioBuf[0x100] ALIGN32;   // 0x00
     ISFSCallback    callback;               // 0x100
     void*           callbackArg;            // 0x104
@@ -64,14 +64,16 @@ typedef struct isfs_Callback {
     union {
         ISFSStats*      stats;
         ISFSFileStats*  fstats;
+
         u32*            num;
-        isfs_GetAttr    getAttr;
-        isfs_GetUsage   getUsage;
+
+        FS_GetAttr      getAttr;
+        FS_GetUsage     getUsage;
     } args;                                 // 0x10C
-} isfs_Callback;
+} FS_Callback;
 
 #define FS_HEAP_BLOCK   16
-#define FS_HEAP_SIZE    ((FS_HEAP_BLOCK+1) * OSRoundUp32B(sizeof(isfs_Callback)))
+#define FS_HEAP_SIZE    ((FS_HEAP_BLOCK+1) * OSRoundUp32B(sizeof(FS_Callback)))
 
 #define FS_ALLOC(p)     iosAllocAligned(hId, sizeof(*p), DEFAULT_ALIGN)
 #define FS_FREE(p)      if (p != NULL) { iosFree(hId, p); }
@@ -82,7 +84,7 @@ ISFSError ISFS_OpenLib() {
     static void*    lo = NULL;
     static void*    hi = NULL;
 
-    isfs_Callback*  __fsCtxt = NULL;
+    FS_Callback*    __fsCtxt = NULL;
 
     if (!__fsInitialized) {
         lo = IPCGetBufferLo();
@@ -92,7 +94,7 @@ ISFSError ISFS_OpenLib() {
     __devfs = (char*)OSRoundUp32B(lo);
     if (!__fsInitialized && ((u32)__devfs + OSRoundUp32B(FS_MAX_PATH)) > (u32)hi) {
         OSReport("APP ERROR: Not enough IPC arena\n");
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto out;
     }
 
@@ -104,11 +106,11 @@ ISFSError ISFS_OpenLib() {
         goto out;
     }
 
-    __fsCtxt = (isfs_Callback*)((u32)__devfs);
+    __fsCtxt = (FS_Callback*)__devfs;
 
     if (!__fsInitialized && ((u32)__fsCtxt + FS_HEAP_SIZE) > (u32)hi) {
         OSReport("APP ERROR: Not enough IPC arena\n");
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto out;
     }
 
@@ -120,7 +122,7 @@ ISFSError ISFS_OpenLib() {
     hId = iosCreateHeap(__fsCtxt, FS_HEAP_SIZE);
 
     if (hId < 0) {
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto out;
     }
 
@@ -151,7 +153,7 @@ out:
 }
 
 static IOSError _FSGetStatsCb(IOSError result, void* isfsCallbackArg) {
-    isfs_Callback* _context = (isfs_Callback*)isfsCallbackArg;
+    FS_Callback* _context = (FS_Callback*)isfsCallbackArg;
 
     if (result == IPC_RESULT_OK) {
         memcpy(_context->args.stats, _context->ioBuf, sizeof(*_context->args.stats));
@@ -161,7 +163,7 @@ static IOSError _FSGetStatsCb(IOSError result, void* isfsCallbackArg) {
 }
 
 static IOSError _FSReadDirCb(IOSError result, void* isfsCallbackArg) {
-    isfs_Callback* _context = (isfs_Callback*)isfsCallbackArg;
+    FS_Callback* _context = (FS_Callback*)isfsCallbackArg;
 
     if (result == IPC_RESULT_OK) {
         u8* ptr;
@@ -176,14 +178,14 @@ static IOSError _FSReadDirCb(IOSError result, void* isfsCallbackArg) {
 
 static IOSError _FSGetAttrCb(IOSError result, void* isfsCallbackArg) {
     if (result == IPC_RESULT_OK) {
-        isfs_Callback* _context = (isfs_Callback*)isfsCallbackArg;
-        ISFSPathAttrArgs* pathAttrArgs = (ISFSPathAttrArgs*)OSRoundUp32B(_context->ioBuf + FS_MAX_PATH);
+        FS_Callback*        _context = (FS_Callback*)isfsCallbackArg;
+        ISFSPathAttrArgs*   pathAttrArgs = (ISFSPathAttrArgs*)OSRoundUp32B(_context->ioBuf + FS_MAX_PATH);
     
         *_context->args.getAttr.ownerId     = pathAttrArgs->ownerId;
         *_context->args.getAttr.groupId     = pathAttrArgs->groupId;
         *_context->args.getAttr.attr        = pathAttrArgs->attr; 
         *_context->args.getAttr.ownerAcc    = pathAttrArgs->ownerAccess;
-        *_context->args.getAttr.groupAcc    =   pathAttrArgs->groupAccess;
+        *_context->args.getAttr.groupAcc    = pathAttrArgs->groupAccess;
         *_context->args.getAttr.othersAcc   = pathAttrArgs->othersAccess;
     }
 
@@ -191,7 +193,7 @@ static IOSError _FSGetAttrCb(IOSError result, void* isfsCallbackArg) {
 }
 
 static IOSError _FSGetUsageCb(IOSError result, void* isfsCallbackArg) {
-    isfs_Callback* _context = (isfs_Callback*)isfsCallbackArg;
+    FS_Callback* _context = (FS_Callback*)isfsCallbackArg;
 
     if (result == IPC_RESULT_OK) {
         u8* ptr;
@@ -207,7 +209,7 @@ static IOSError _FSGetUsageCb(IOSError result, void* isfsCallbackArg) {
 }
 
 static IOSError _FSGetFileStatsCb(IOSError result, void* isfsCallbackArg) {
-    isfs_Callback* _context = (isfs_Callback*)isfsCallbackArg;
+    FS_Callback* _context = (FS_Callback*)isfsCallbackArg;
 
     if (result == IPC_RESULT_OK) {
         memcpy(_context->args.fstats, _context->ioBuf, sizeof(*_context->args.fstats));
@@ -217,8 +219,8 @@ static IOSError _FSGetFileStatsCb(IOSError result, void* isfsCallbackArg) {
 }
 
 IOSError _isfsFuncCb(IOSError result, void* isfsCallbackArg) {
-    isfs_Callback* _context = (isfs_Callback*)isfsCallbackArg;
-    ISFSError ret = result;
+    FS_Callback*    _context = (FS_Callback*)isfsCallbackArg;
+    ISFSError       ret = result;
 
     if (ret >= IPC_RESULT_OK) {
         switch (_context->func) {
@@ -261,7 +263,7 @@ IOSError _isfsFuncCb(IOSError result, void* isfsCallbackArg) {
 
 ISFSError ISFS_GetStats(ISFSStats* stats) {
     ISFSError       ret = ISFS_ERROR_OK;
-    isfs_Callback*  isfsCallbackArg = NULL;
+    FS_Callback*    isfsCallbackArg = NULL;
 
     if (__fsFd < 0 || stats == NULL) {
         ret = ISFS_ERROR_INVALID;
@@ -270,7 +272,7 @@ ISFSError ISFS_GetStats(ISFSStats* stats) {
 
     isfsCallbackArg = FS_ALLOC(isfsCallbackArg);
     if (isfsCallbackArg == NULL) {
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto out;
     }
 
@@ -297,7 +299,7 @@ ISFSError ISFS_CreateDir(const char* dirName, u32 dirAttr, u32 ownerAcc, u32 gro
 
     ISFSPathAttrArgs*   pathAttrArgs;
 
-    isfs_Callback*      isfsCallbackArg = NULL;
+    FS_Callback*      isfsCallbackArg = NULL;
     
 
     if (dirName == NULL || __fsFd < 0 || (len = strnlen(dirName, FS_MAX_PATH)) == FS_MAX_PATH) {
@@ -308,7 +310,7 @@ ISFSError ISFS_CreateDir(const char* dirName, u32 dirAttr, u32 ownerAcc, u32 gro
     isfsCallbackArg = FS_ALLOC(isfsCallbackArg);
 
     if (isfsCallbackArg == NULL) {
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto out;
     }
 
@@ -336,7 +338,7 @@ ISFSError ISFS_CreateDirAsync(const char* dirName, u32 dirAttr, u32 ownerAcc, u3
 
     ISFSPathAttrArgs*   pathAttrArgs;
 
-    isfs_Callback*      isfsCallbackArg;
+    FS_Callback*      isfsCallbackArg;
 
     if (dirName == NULL || __fsFd < 0 || (len = strnlen(dirName, FS_MAX_PATH)) == FS_MAX_PATH) {
         ret = ISFS_ERROR_INVALID;
@@ -374,7 +376,7 @@ ISFSError ISFS_ReadDir(const char* dirName, char* nameList, u32* num) {
     IOSIoVector*    vec = NULL;
     char*           dnPtr;
 
-    isfs_Callback*  isfsCallbackArg = NULL;
+    FS_Callback*  isfsCallbackArg = NULL;
 
     if (dirName == NULL || num == NULL || __fsFd < 0 || ((u32)nameList & 31) || (len = strnlen(dirName, FS_MAX_PATH)) == FS_MAX_PATH) {
         ret = ISFS_ERROR_INVALID;
@@ -383,7 +385,7 @@ ISFSError ISFS_ReadDir(const char* dirName, char* nameList, u32* num) {
 
     isfsCallbackArg = FS_ALLOC(isfsCallbackArg);
     if (isfsCallbackArg == NULL) {
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto out;
     }
 
@@ -435,7 +437,7 @@ ISFSError ISFS_ReadDirAsync(const char* dirName, char* nameList, u32* num, ISFSC
     ISFSError       ret = ISFS_ERROR_OK;
     u32             len, numInputs, numOutputs, *numPtr;
 
-    isfs_Callback*  isfsCallbackArg = NULL;
+    FS_Callback*  isfsCallbackArg = NULL;
 
     IOSIoVector*    vec = NULL;
     char*           dnPtr;
@@ -497,7 +499,7 @@ ISFSError ISFS_SetAttr(const char* fileName, u32 ownerId, u16 groupId, u32 attr,
 
     u32                 len;
 
-    isfs_Callback*      isfsCallbackArg = NULL;
+    FS_Callback*      isfsCallbackArg = NULL;
 
     if (fileName == NULL || __fsFd < 0 || (len = strnlen(fileName, FS_MAX_PATH)) == FS_MAX_PATH) {
         ret = ISFS_ERROR_INVALID;
@@ -506,7 +508,7 @@ ISFSError ISFS_SetAttr(const char* fileName, u32 ownerId, u16 groupId, u32 attr,
 
     isfsCallbackArg = FS_ALLOC(isfsCallbackArg);
     if (isfsCallbackArg == NULL) {
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto out;
     }
 
@@ -536,7 +538,7 @@ ISFSError ISFS_SetAttrAsync(const char* fileName, u32 ownerId, u16 groupId, u32 
 
     u32                 len;
 
-    isfs_Callback*      isfsCallbackArg;
+    FS_Callback*      isfsCallbackArg;
 
     if (fileName == NULL || __fsFd < 0 || (len = strnlen(fileName, FS_MAX_PATH)) == FS_MAX_PATH) {
         ret = ISFS_ERROR_INVALID;
@@ -575,7 +577,7 @@ ISFSError ISFS_GetAttr(const char* fileName, u32* ownerId, u16* groupId, u32* at
     u8*                 ptr;
     u32                 len;
 
-    isfs_Callback* isfsCallbackArg = NULL;
+    FS_Callback* isfsCallbackArg = NULL;
 
     if (fileName == NULL || __fsFd < 0 || (len = strnlen(fileName, FS_MAX_PATH)) == FS_MAX_PATH
     || ownerId == NULL || groupId == NULL || attr == NULL || ownerAcc == NULL || groupAcc == NULL || othersAcc == NULL) {
@@ -585,7 +587,7 @@ ISFSError ISFS_GetAttr(const char* fileName, u32* ownerId, u16* groupId, u32* at
 
     isfsCallbackArg = FS_ALLOC(isfsCallbackArg);
     if (isfsCallbackArg == NULL) {
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto out;
     }
 
@@ -615,7 +617,7 @@ out:
 
 ISFSError ISFS_GetAttrAsync(const char* fileName, u32* ownerId, u16* groupId, u32* attr, u32* ownerAcc, u32* groupAcc, u32* othersAcc, ISFSCallback callback, void* callbackArg) {
     ISFSError ret = ISFS_ERROR_OK;
-    isfs_Callback *isfsCallbackArg;
+    FS_Callback *isfsCallbackArg;
     ISFSPathAttrArgs *pathAttrArgs;
     u8 *ptr;
     u32 len;
@@ -654,7 +656,7 @@ out:
 ISFSError ISFS_Delete(const char* fileName) {
     ISFSError       ret = ISFS_ERROR_OK;
     u32             len;
-    isfs_Callback*  isfsCallbackArg = NULL;
+    FS_Callback*  isfsCallbackArg = NULL;
 
     if (fileName == NULL || __fsFd < 0 || (len = strnlen(fileName, FS_MAX_PATH)) == FS_MAX_PATH) {
         ret = ISFS_ERROR_INVALID;
@@ -663,7 +665,7 @@ ISFSError ISFS_Delete(const char* fileName) {
 
     isfsCallbackArg = FS_ALLOC(isfsCallbackArg);
     if (isfsCallbackArg == NULL) {
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto out;
     }
 
@@ -681,7 +683,7 @@ out:
 ISFSError ISFS_DeleteAsync(const char* fileName, ISFSCallback callback, void* callbackArg) {
     ISFSError ret = ISFS_ERROR_OK;
     u32 len;
-    isfs_Callback* isfsCallbackArg;
+    FS_Callback* isfsCallbackArg;
 
     if (fileName == NULL || __fsFd < 0 || (len = strnlen(fileName, FS_MAX_PATH)) == FS_MAX_PATH) {
         ret = ISFS_ERROR_INVALID;
@@ -710,7 +712,7 @@ ISFSError ISFS_Rename(const char* oldName, const char* newName) {
 
     u32             oldLen, newLen;
 
-    isfs_Callback*  isfsCallbackArg = NULL;
+    FS_Callback*  isfsCallbackArg = NULL;
 
     if (oldName == NULL || newName == NULL || __fsFd < 0
     || (oldLen = strnlen(oldName, FS_MAX_PATH)) == FS_MAX_PATH || (newLen = strnlen(newName, FS_MAX_PATH)) == FS_MAX_PATH) {
@@ -720,7 +722,7 @@ ISFSError ISFS_Rename(const char* oldName, const char* newName) {
     
     isfsCallbackArg = FS_ALLOC(isfsCallbackArg);
     if (isfsCallbackArg == NULL) {
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto out;
     }
 
@@ -743,7 +745,7 @@ ISFSError ISFS_RenameAsync(const char* oldName, const char* newName, ISFSCallbac
 
     u32             oldLen, newLen;
 
-    isfs_Callback*  isfsCallbackArg;
+    FS_Callback*  isfsCallbackArg;
 
     if (oldName == NULL || newName == NULL || __fsFd < 0
     || (oldLen = strnlen(oldName, FS_MAX_PATH)) == FS_MAX_PATH || (newLen = strnlen(newName, FS_MAX_PATH)) == FS_MAX_PATH) {
@@ -778,7 +780,7 @@ ISFSError ISFS_GetUsage(const char* dirName, u32* blocks, u32* iNodes) {
     IOSIoVector*    vec = NULL;
     char*           dnPtr;
 
-    isfs_Callback*  isfsCallbackArg = NULL;
+    FS_Callback*  isfsCallbackArg = NULL;
 
     if (dirName == NULL || __fsFd < 0 || blocks == NULL || iNodes == NULL || (len = strnlen(dirName, FS_MAX_PATH)) == FS_MAX_PATH) {
         ret = ISFS_ERROR_INVALID;
@@ -787,7 +789,7 @@ ISFSError ISFS_GetUsage(const char* dirName, u32* blocks, u32* iNodes) {
 
     isfsCallbackArg = FS_ALLOC(isfsCallbackArg);
     if (isfsCallbackArg == NULL) {
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto out;
     }
 
@@ -829,7 +831,7 @@ ISFSError ISFS_CreateFile(const char* fileName, u32 fileAttr, u32 ownerAcc, u32 
 
     u32                 len;
 
-    isfs_Callback*      isfsCallbackArg = NULL;
+    FS_Callback*      isfsCallbackArg = NULL;
 
     if (fileName == NULL || __fsFd < 0 || (len = strnlen(fileName, FS_MAX_PATH)) == FS_MAX_PATH) {
         ret = ISFS_ERROR_INVALID;
@@ -838,7 +840,7 @@ ISFSError ISFS_CreateFile(const char* fileName, u32 fileAttr, u32 ownerAcc, u32 
 
     isfsCallbackArg = FS_ALLOC(isfsCallbackArg);
     if (isfsCallbackArg == NULL) {
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto out;
     }
 
@@ -866,7 +868,7 @@ ISFSError ISFS_CreateFileAsync(const char* fileName, u32 fileAttr, u32 ownerAcc,
 
     u32                 len;
 
-    isfs_Callback*      isfsCallbackArg;
+    FS_Callback*      isfsCallbackArg;
 
     if (fileName == NULL || __fsFd < 0 || (len = strnlen(fileName, FS_MAX_PATH)) == FS_MAX_PATH) {
         ret = ISFS_ERROR_INVALID;
@@ -898,7 +900,7 @@ out:
 IOSFd ISFS_Open(const char* fileName, u32 access) {
     ISFSError       ret = ISFS_ERROR_OK;
     u32             len;
-    isfs_Callback*  isfsCallbackArg = NULL;
+    FS_Callback*  isfsCallbackArg = NULL;
 
     if (fileName == NULL || (len = strnlen(fileName, FS_MAX_PATH)) == FS_MAX_PATH) {
         ret = ISFS_ERROR_INVALID;
@@ -907,7 +909,7 @@ IOSFd ISFS_Open(const char* fileName, u32 access) {
 
     isfsCallbackArg = FS_ALLOC(isfsCallbackArg);
     if (isfsCallbackArg == NULL) {
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto out;
     }
 
@@ -925,7 +927,7 @@ out:
 IOSFd ISFS_OpenAsync(const char* fileName, u32 access, ISFSCallback callback, void* callbackArg) {
     ISFSError       ret = ISFS_ERROR_OK;
     u32             len;
-    isfs_Callback*  isfsCallbackArg;
+    FS_Callback*  isfsCallbackArg;
 
     if (fileName == NULL || (len = strnlen(fileName, FS_MAX_PATH)) == FS_MAX_PATH) {
         ret = ISFS_ERROR_INVALID;
@@ -950,7 +952,7 @@ out:
 
 ISFSError ISFS_GetFileStats(IOSFd fd, ISFSFileStats* stats) {
     ISFSError       ret = ISFS_ERROR_OK;
-    isfs_Callback*  isfsCallbackArg = NULL;
+    FS_Callback*  isfsCallbackArg = NULL;
 
     if (stats == NULL || ((u32)stats & 31)) {
         ret = ISFS_ERROR_INVALID;
@@ -959,7 +961,7 @@ ISFSError ISFS_GetFileStats(IOSFd fd, ISFSFileStats* stats) {
 
     isfsCallbackArg = FS_ALLOC(isfsCallbackArg);
     if (isfsCallbackArg == NULL) {
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto out;
     }
 
@@ -981,7 +983,7 @@ out:
 
 ISFSError ISFS_GetFileStatsAsync(IOSFd fd, ISFSFileStats* stats, ISFSCallback callback, void* callbackArg) {
     ISFSError       ret = ISFS_ERROR_OK;
-    isfs_Callback*  isfsCallbackArg;
+    FS_Callback*  isfsCallbackArg;
 
     if (stats == NULL || ((u32)stats & 31)) {
         ret = ISFS_ERROR_INVALID;
@@ -1010,7 +1012,7 @@ ISFSError ISFS_Seek(IOSFd fd, s32 offset, u32 whence) {
 
 ISFSError ISFS_SeekAsync(IOSFd fd, s32 offset, u32 whence, ISFSCallback callback, void* callbackArg) {
     ISFSError       ret;
-    isfs_Callback*  isfsCallbackArg;
+    FS_Callback*  isfsCallbackArg;
 
     isfsCallbackArg = FS_ALLOC(isfsCallbackArg);
     if (isfsCallbackArg == NULL) {
@@ -1037,7 +1039,7 @@ ISFSError ISFS_Read(s32 fd, u8* buffer, u32 bufferLen) {
 
 ISFSError ISFS_ReadAsync(IOSFd fd, u8* buffer, u32 size, ISFSCallback callback, void* callbackArg) {
     ISFSError       ret = ISFS_ERROR_OK;
-    isfs_Callback*  isfsCallbackArg;
+    FS_Callback*  isfsCallbackArg;
 
     if (buffer == NULL || ((u32)buffer & 31)) {
         ret = ISFS_ERROR_INVALID;
@@ -1074,7 +1076,7 @@ out:
 
 ISFSError ISFS_WriteAsync(IOSFd fd, const char* buffer, u32 size, ISFSCallback callback, void* callbackArg) {
     ISFSError       ret = ISFS_ERROR_OK;
-    isfs_Callback*  isfsCallbackArg;
+    FS_Callback*  isfsCallbackArg;
 
     if (buffer == NULL || ((u32)buffer & 31)) {
         ret = ISFS_ERROR_INVALID;
@@ -1102,7 +1104,7 @@ ISFSError ISFS_Close(IOSFd fd) {
 
 ISFSError ISFS_CloseAsync(IOSFd fd, ISFSCallback callback, void* callbackArg) {
     ISFSError       ret;
-    isfs_Callback*  isfsCallbackArg;
+    FS_Callback*  isfsCallbackArg;
 
     isfsCallbackArg = FS_ALLOC(isfsCallbackArg);
 
@@ -1122,7 +1124,7 @@ out:
 
 ISFSError ISFS_ShutdownAsync(ISFSCallback callback, void* callbackArg) {
     ISFSError       ret = ISFS_ERROR_OK;
-    isfs_Callback*  isfsCallbackArg;
+    FS_Callback*  isfsCallbackArg;
 
     isfsCallbackArg = FS_ALLOC(isfsCallbackArg);
 

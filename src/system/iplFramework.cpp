@@ -140,7 +140,7 @@ namespace ipl {
     }
 
     void Framework::endRender() {
-        GXColor clrColor = {0x00, 0x00, 0x00, 0x00};
+        GXColor clrColor = {0, 0, 0, 0};
         GXSetCopyClear(clrColor, 0xFFFFFF);
 
         GXSetZMode(GX_TRUE, GX_ALWAYS, GX_TRUE);

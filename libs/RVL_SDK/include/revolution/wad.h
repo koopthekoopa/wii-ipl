@@ -2,6 +2,7 @@
 #define REVOLUTION_WAD_H
 
 #include <revolution/types.h>
+
 #include <private/es/types.h>
 
 #ifdef __cplusplus

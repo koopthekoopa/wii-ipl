@@ -100,7 +100,7 @@ BOOL __OSCheckCompanyCode(ESTitleId titleId, BOOL diskApp) {
 
     curGroupId = status.groupId;
     if (curGroupId == 2) {
-        if (OSGetAppType() == 0x80 && (OSGetConsoleType() & OS_CONSOLE_MASK) == OS_CONSOLE_MASK_DEV) {
+        if (OSGetAppType() == OS_APP_TYPE_DVD && (OSGetConsoleType() & OS_CONSOLE_MASK) == OS_CONSOLE_MASK_DEV) {
             DVDDiskID* diskId = DVDGetCurrentDiskID();
             curGroupId = *(u16*)diskId->company;
         }

@@ -204,7 +204,7 @@ IOSError IPCCltInit() {
     bufferLo = IPCGetBufferLo();
 
     if ((void*)((u8*)bufferLo + i) > IPCGetBufferHi()) {
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto out;
     }
 
@@ -230,7 +230,7 @@ IOSError IPCCltReInit() {
     bufferLo = IPCGetBufferLo();
 
     if ((void*)((u8*)bufferLo + i) > IPCGetBufferHi()) {
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto out;
     }
 
@@ -291,7 +291,7 @@ static inline IOSError __ios_Ipc1(IOSFd fd, u32 cmd, IOSIpcCb callback, void* ca
     *rpc = (IOSRpcRequest*)ipcAllocReq();
     
     if (*rpc == 0) {
-        ret = IPC_RESULT_FAIL_ALLOC;
+        ret = IPC_RESULT_ALLOC_FAILED;
         goto error;
     }
 
