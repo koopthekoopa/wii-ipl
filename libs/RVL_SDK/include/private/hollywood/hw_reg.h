@@ -82,6 +82,8 @@
 #define HW_GPIO_STRAPS          0x0F8
 #define HW_GPIO_OWNER           0x0FC
 
+#define HW_GPIOPIN_EJECT_DISC   9
+
 /* AHB related? */
 #define HW_ARB_CFG_M0           0x100
 #define HW_ARB_CFG_M1           0x104

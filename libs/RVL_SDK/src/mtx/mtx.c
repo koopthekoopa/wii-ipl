@@ -164,56 +164,56 @@ skip_return:
 }
 
 asm u32 PSMTXInvXpose(const register Mtx src, register Mtx invX) {
-	psq_l f0, 0(src), 1, 0
-	psq_l f1, 4(src), 0, 0
-	psq_l f2, 16(src), 1, 0
-	ps_merge10 f6, f1, f0
-	psq_l f3, 20(src), 0, 0
-	psq_l f4, 32(src), 1, 0
-	ps_merge10 f7, f3, f2
-	psq_l f5, 36(src), 0, 0
-	ps_mul f11, f3, f6
-	ps_merge10 f8, f5, f4
-	ps_mul f13, f5, f7
-	ps_msub f11, f1, f7, f11
-	ps_mul f12, f1, f8
-	ps_msub f13, f3, f8, f13
-	ps_msub f12, f5, f6, f12
-	ps_mul f10, f3, f4
-	ps_mul f9, f0, f5
-	ps_mul f8, f1, f2
-	ps_msub f10, f2, f5, f10
-	ps_msub f9, f1, f4, f9
-	ps_msub f8, f0, f3, f8
-	ps_mul f7, f0, f13
-	ps_sub f1, f1, f1
-	ps_madd f7, f2, f12, f7
-	ps_madd f7, f4, f11, f7
-	ps_cmpo0 cr0, f7, f1
-	bne skip_return
-	li r3, 0
-	blr
+    psq_l f0, 0(src), 1, 0
+    psq_l f1, 4(src), 0, 0
+    psq_l f2, 16(src), 1, 0
+    ps_merge10 f6, f1, f0
+    psq_l f3, 20(src), 0, 0
+    psq_l f4, 32(src), 1, 0
+    ps_merge10 f7, f3, f2
+    psq_l f5, 36(src), 0, 0
+    ps_mul f11, f3, f6
+    ps_merge10 f8, f5, f4
+    ps_mul f13, f5, f7
+    ps_msub f11, f1, f7, f11
+    ps_mul f12, f1, f8
+    ps_msub f13, f3, f8, f13
+    ps_msub f12, f5, f6, f12
+    ps_mul f10, f3, f4
+    ps_mul f9, f0, f5
+    ps_mul f8, f1, f2
+    ps_msub f10, f2, f5, f10
+    ps_msub f9, f1, f4, f9
+    ps_msub f8, f0, f3, f8
+    ps_mul f7, f0, f13
+    ps_sub f1, f1, f1
+    ps_madd f7, f2, f12, f7
+    ps_madd f7, f4, f11, f7
+    ps_cmpo0 cr0, f7, f1
+    bne skip_return
+    li r3, 0
+    blr
 skip_return:
-	fres f0, f7
-	psq_st f1, 12(invX), 1, 0
-	ps_add f6, f0, f0
-	ps_mul f5, f0, f0
-	psq_st f1, 28(invX), 1, 0
-	ps_nmsub f0, f7, f5, f6
-	psq_st f1, 44(invX), 1, 0
-	ps_muls0 f13, f13, f0
-	ps_muls0 f12, f12, f0
-	ps_muls0 f11, f11, f0
+    fres f0, f7
+    psq_st f1, 12(invX), 1, 0
+    ps_add f6, f0, f0
+    ps_mul f5, f0, f0
+    psq_st f1, 28(invX), 1, 0
+    ps_nmsub f0, f7, f5, f6
+    psq_st f1, 44(invX), 1, 0
+    ps_muls0 f13, f13, f0
+    ps_muls0 f12, f12, f0
+    ps_muls0 f11, f11, f0
     psq_st f13, 0(invX), 0, 0
-	psq_st f12, 16(invX), 0, 0
-	ps_muls0 f10, f10, f0
+    psq_st f12, 16(invX), 0, 0
+    ps_muls0 f10, f10, f0
     ps_muls0 f9, f9, f0
-	psq_st f11, 32(invX), 0, 0
-	psq_st f10, 8(invX), 1, 0
-	ps_muls0 f8, f8, f0
-	li r3, 1
+    psq_st f11, 32(invX), 0, 0
+    psq_st f10, 8(invX), 1, 0
+    ps_muls0 f8, f8, f0
+    li r3, 1
     psq_st f9, 24(invX), 1, 0
-	psq_st f8, 40(invX), 1, 0
+    psq_st f8, 40(invX), 1, 0
 }
 
 void PSMTXRotTrig(Mtx m, char axis, f32 sinA, f32 cosA);
@@ -229,81 +229,81 @@ void PSMTXRotTrig(register Mtx m, register char axis, register f32 sinA, registe
     register f32 fc0, fc1, nsinA;
     register f32 fw0, fw1, fw2, fw3;
 
-	asm {
-		frsp        sinA, sinA
-		frsp        cosA, cosA
-	}
+    asm {
+        frsp        sinA, sinA
+        frsp        cosA, cosA
+    }
 
     fc0 = 0.0f;
     fc1 = 1.0f;
 
-	asm {
-		ori         axis, axis, 0x20
-		ps_neg      nsinA, sinA
-		cmplwi      axis, 'x'
-		beq         _case_x
-		cmplwi      axis, 'y'
-		beq         _case_y
-		cmplwi      axis, 'z'
-		beq         _case_z
-		b           _end
+    asm {
+        ori         axis, axis, 0x20
+        ps_neg      nsinA, sinA
+        cmplwi      axis, 'x'
+        beq         _case_x
+        cmplwi      axis, 'y'
+        beq         _case_y
+        cmplwi      axis, 'z'
+        beq         _case_z
+        b           _end
 
-	_case_x:
-		psq_st      fc1,  0(m), 1, 0
-		psq_st      fc0,  4(m), 0, 0
-		ps_merge00  fw0, sinA, cosA
-		psq_st      fc0, 12(m), 0, 0
-		ps_merge00  fw1, cosA, nsinA
-		psq_st      fc0, 28(m), 0, 0
-		psq_st      fc0, 44(m), 1, 0
-		psq_st      fw0, 36(m), 0, 0
-		psq_st      fw1, 20(m), 0, 0
-		b           _end;
+    _case_x:
+        psq_st      fc1,  0(m), 1, 0
+        psq_st      fc0,  4(m), 0, 0
+        ps_merge00  fw0, sinA, cosA
+        psq_st      fc0, 12(m), 0, 0
+        ps_merge00  fw1, cosA, nsinA
+        psq_st      fc0, 28(m), 0, 0
+        psq_st      fc0, 44(m), 1, 0
+        psq_st      fw0, 36(m), 0, 0
+        psq_st      fw1, 20(m), 0, 0
+        b           _end;
 
-	_case_y:
-		ps_merge00  fw0, cosA, fc0
-		ps_merge00  fw1, fc0, fc1
-		psq_st      fc0, 24(m), 0, 0
-		psq_st      fw0,  0(m), 0, 0
-		ps_merge00  fw2, nsinA, fc0
-		ps_merge00  fw3, sinA, fc0
-		psq_st      fw0, 40(m), 0, 0;
-		psq_st      fw1, 16(m), 0, 0;
-		psq_st      fw3,  8(m), 0, 0;
-		psq_st      fw2, 32(m), 0, 0;
-		b           _end;
+    _case_y:
+        ps_merge00  fw0, cosA, fc0
+        ps_merge00  fw1, fc0, fc1
+        psq_st      fc0, 24(m), 0, 0
+        psq_st      fw0,  0(m), 0, 0
+        ps_merge00  fw2, nsinA, fc0
+        ps_merge00  fw3, sinA, fc0
+        psq_st      fw0, 40(m), 0, 0;
+        psq_st      fw1, 16(m), 0, 0;
+        psq_st      fw3,  8(m), 0, 0;
+        psq_st      fw2, 32(m), 0, 0;
+        b           _end;
 
-	_case_z:
-		psq_st      fc0,  8(m), 0, 0
-		ps_merge00  fw0, sinA, cosA
-		ps_merge00  fw2, cosA, nsinA
-		psq_st      fc0, 24(m), 0, 0
-		psq_st      fc0, 32(m), 0, 0
-		ps_merge00  fw1, fc1, fc0
-		psq_st      fw0, 16(m), 0, 0
-		psq_st      fw2,  0(m), 0, 0
-		psq_st      fw1, 40(m), 0, 0
+    _case_z:
+        psq_st      fc0,  8(m), 0, 0
+        ps_merge00  fw0, sinA, cosA
+        ps_merge00  fw2, cosA, nsinA
+        psq_st      fc0, 24(m), 0, 0
+        psq_st      fc0, 32(m), 0, 0
+        ps_merge00  fw1, fc1, fc0
+        psq_st      fw0, 16(m), 0, 0
+        psq_st      fw2,  0(m), 0, 0
+        psq_st      fw1, 40(m), 0, 0
 
-	_end:
-	}
+    _end:
+    }
 }
 
 void PSMTXTrans(register Mtx m, register f32 xT, register f32 yT, register f32 zT) {
     register f32 c0 = 0.0f;
     register f32 c1 = 1.0f;
 
-	asm {
-		stfs xT, 12(m)
-		stfs yT, 28(m)
-		psq_st c0, 4(m), 0, 0
-		psq_st c0, 32(m), 0, 0
-		stfs c0, 16(m)
-		stfs c1, 20(m)
-		stfs c0, 24(m)
-		stfs c1, 40(m)
-		stfs zT, 44(m)
-		stfs c1, 0(m)
-	}
+    asm {
+        stfs xT, 12(m)
+        stfs yT, 28(m)
+        psq_st c0, 4(m), 0, 0
+        psq_st c0, 32(m), 0, 0
+        stfs c0, 16(m)
+        stfs c1, 20(m)
+        stfs c0, 24(m)
+        stfs c1, 40(m)
+        stfs zT, 44(m)
+        stfs c1, 0(m)
+    }
 }
 
 asm void PSMTXTransApply(const register Mtx src, register Mtx dst, register f32 xT, register f32 yT, register f32 zT) {
@@ -332,16 +332,16 @@ asm void PSMTXTransApply(const register Mtx src, register Mtx dst, register f32 
 void PSMTXScale(register Mtx m, register f32 xS, register f32 yS, register f32 zS) {
     register f32 c0 = 0.0f;
 
-	asm {
-		stfs xS, 0(m)
-		psq_st c0, 4(m), 0, 0
-		psq_st c0, 12(m), 0, 0
-		stfs yS, 20(m)
-		psq_st c0, 24(m), 0, 0
-		psq_st c0, 32(m), 0, 0
-		stfs zS, 40(m)
-		stfs c0, 44(m)
-	}
+    asm {
+        stfs xS, 0(m)
+        psq_st c0, 4(m), 0, 0
+        psq_st c0, 12(m), 0, 0
+        stfs yS, 20(m)
+        psq_st c0, 24(m), 0, 0
+        psq_st c0, 32(m), 0, 0
+        stfs zS, 40(m)
+        stfs c0, 44(m)
+    }
 }
 
 asm void PSMTXScaleApply(const register Mtx src, register Mtx dst, register f32 xS, register f32 yS, register f32 zS) {

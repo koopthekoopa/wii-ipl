@@ -99,4 +99,6 @@ u32     __OSGetDIConfig();
 
 BOOL    __OSSetVIForceDimming(BOOL enable, u32 shiftY, u32 shiftX);
 
+void    OSDefaultExceptionHandler(u8 type, register OSContext* context);
+
 #endif // PRIVATE_OS_H

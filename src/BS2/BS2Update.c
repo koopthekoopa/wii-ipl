@@ -5,5 +5,3 @@
 
 static BS2UpdateEntry Entries[BS2_ENTRY_COUNT]         ADDRESS(BS2_UPDATE_ADDRESS);
 static BS2UpdateEntry EntriesToImport[BS2_ENTRY_COUNT] ADDRESS(BS2_UPDATE_IMPORT_ADDRESS);
-
-

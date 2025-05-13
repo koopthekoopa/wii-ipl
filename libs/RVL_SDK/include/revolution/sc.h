@@ -7,6 +7,13 @@
 extern "C" {
 #endif
 
+typedef struct SCIdleModeInfo {
+    u8 mode;    // 0x00
+    u8 led;     // 0x01
+} SCIdleModeInfo;
+
+BOOL    SCGetIdleMode(SCIdleModeInfo* info);
+
 BOOL    SCGetEULA();
 
 #define SC_ASPECT_RATIO_4x3         0

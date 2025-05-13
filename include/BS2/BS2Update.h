@@ -7,6 +7,16 @@
 extern "C" {
 #endif
 
+enum {
+    BS2_UPDATE_ATTR_CRITICAL = (1 << 0)
+};
+
+typedef struct BS2UpdateHeader {
+    char timestamp[16];     // 0x00
+    u32  wadCount;          // 0x10
+    u32  reserved[3];       // 0x14
+} BS2UpdateHeader;
+
 typedef struct BS2UpdateEntry {
     // Update Meta Data
     u32  type;              // 0x00

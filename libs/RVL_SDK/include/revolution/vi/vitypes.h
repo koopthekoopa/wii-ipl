@@ -1,6 +1,8 @@
 #ifndef REVOLUTION_VI_TYPES_H
 #define REVOLUTION_VI_TYPES_H
 
+#include <revolution/types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -61,6 +63,8 @@ typedef enum {
     VI_XFBMODE_SF           = 0,
     VI_XFBMODE_DF
 } VIXFBMode;
+
+typedef void (*VIRetraceCallback)(u32 retraceCount);
 
 #ifdef __cplusplus
 }

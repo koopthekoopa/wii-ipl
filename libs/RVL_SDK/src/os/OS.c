@@ -3,6 +3,7 @@
 #include <revolution/os.h>
 #include <revolution/os/OSBootInfo.h>
 #include <private/os.h>
+
 #include <private/hollywood.h>
 
 #include <revolution/dvd.h>
@@ -208,16 +209,21 @@ u32 OSGetConsoleType() {
             case 0x0003:
             case 0x0203: {
                 switch (hwRev) {
-                    case HOLLYWOOD_ES_1_0:
+                    case HOLLYWOOD_ES_1_0: {
                         return OS_CONSOLE_RVL_PP_0;
-                    case HOLLYWOOD_ES_1_1:
+                    }
+                    case HOLLYWOOD_ES_1_1: {
                         return OS_CONSOLE_RVL_PP_1;
-                    case HOLLYWOOD_ES_1_2:
+                    }
+                    case HOLLYWOOD_ES_1_2: {
                         return OS_CONSOLE_RVL_PP_2_1;
-                    case HOLLYWOOD_ES_2_0:
+                    }
+                    case HOLLYWOOD_ES_2_0: {
                         return OS_CONSOLE_RVL_PP_2_2;
-                    case HOLLYWOOD_ES_2_1:
+                    }
+                    case HOLLYWOOD_ES_2_1: {
                         return OS_CONSOLE_RETAIL;
+                    }
                 }
 
                 if (hwRev > HOLLYWOOD_ES_2_1) {
@@ -228,16 +234,21 @@ u32 OSGetConsoleType() {
             case 0x0202:
             case 0x0201: {
                 switch (hwRev) {
-                    case HOLLYWOOD_ES_1_0:
+                    case HOLLYWOOD_ES_1_0: {
                         return OS_CONSOLE_NDEV_1_0;
-                    case HOLLYWOOD_ES_1_1:
+                    }
+                    case HOLLYWOOD_ES_1_1: {
                         return OS_CONSOLE_NDEV_1_1;
-                    case HOLLYWOOD_ES_1_2:
+                    }
+                    case HOLLYWOOD_ES_1_2: {
                         return OS_CONSOLE_NDEV_1_2;
-                    case HOLLYWOOD_ES_2_0:
+                    }
+                    case HOLLYWOOD_ES_2_0: {
                         return OS_CONSOLE_NDEV_2_0;
-                    case HOLLYWOOD_ES_2_1:
+                    }
+                    case HOLLYWOOD_ES_2_1: {
                         return OS_CONSOLE_NDEV_2_1;
+                    }
                 }
                 if (hwRev > HOLLYWOOD_ES_2_1) {
                     return OS_CONSOLE_NDEV_2_1;

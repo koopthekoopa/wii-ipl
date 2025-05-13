@@ -175,7 +175,7 @@ next_in_hier:
 }
 
 BOOL DVDEntrynumIsDir(s32 entry) {
-	return IS_ENTRY_DIR(FstStart, entry);
+    return IS_ENTRY_DIR(FstStart, entry);
 }
 
 BOOL DVDFastOpen(s32 entry, DVDFileInfo* fileInfo) {

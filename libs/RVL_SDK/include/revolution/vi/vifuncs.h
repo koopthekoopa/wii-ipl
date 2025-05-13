@@ -1,7 +1,7 @@
 #ifndef REVOLUTION_VI_FUNCTIONS_H
 #define REVOLUTION_VI_FUNCTIONS_H
 
-#include <revolution/types.h>
+#include <revolution/vi/vitypes.h>
 #include <revolution/gx/GXStruct.h>
 
 #ifdef __cplusplus
@@ -14,6 +14,10 @@ void    VIInit();
 void    VIWaitForRetrace();
 
 void    VIConfigure(GXRenderModeObj *rm);
+void    VIConfigurePan(u16 xOrg, u16 yOrg, u16 width, u16 height);
+
+VIRetraceCallback VISetPreRetraceCallback(VIRetraceCallback cb);
+VIRetraceCallback VISetPostRetraceCallback(VIRetraceCallback cb);
 
 void    VIFlush();
 void    VISetNextFrameBuffer(void *fb);

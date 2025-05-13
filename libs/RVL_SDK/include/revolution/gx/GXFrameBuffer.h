@@ -9,7 +9,7 @@
 extern "C" {
 #endif
 
-#define	GX_MAX_Z24	0x00ffffff
+#define GX_MAX_Z24  0x00ffffff
 
 extern GXRenderModeObj GXNtsc480IntDf;
 extern GXRenderModeObj GXMpal480IntDf;

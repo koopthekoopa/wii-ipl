@@ -4,10 +4,12 @@
 #include <revolution/esp.h>
 
 enum {
-    OS_SHUTDOWN_STANDBY = 2, /* or idle */
+    OS_SHUTDOWN_FATAL = 0,
+    OS_SHUTDOWN_RESTART_PRIVATE = 1, /* ????? */
+    OS_SHUTDOWN_STANDBY = 2,
     OS_SHUTDOWN_RESTART = 4,
     OS_SHUTDOWN_RETURN_MENU = 5,
-    OS_SHUTDOWN_LAUNCH = 6,
+    OS_SHUTDOWN_LAUNCH = 6
 };
 
 enum {
@@ -18,7 +20,7 @@ enum {
     OS_SETTING_PARENTAL_CONTROL,
     OS_SETTING_INTERNET,
     OS_SETTING_WIICONNECT24,
-    OS_SETTING_UPDATE,
+    OS_SETTING_UPDATE
 };
 
 BOOL    __OSCallShutdownFunctions(BOOL final, u32 event);
