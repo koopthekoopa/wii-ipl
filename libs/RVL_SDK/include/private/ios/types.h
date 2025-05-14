@@ -17,29 +17,29 @@ typedef struct IOSIoVector {
     u32 length; // 0x04
 } IOSIoVector;
 
-typedef struct {
+typedef struct IOSResourceOpen {
     u8* path;       // 0x00
     u32 flags;      // 0x04
     u32 ownerId;    // 0x08
     u16 groudId;    // 0x0C
 } IOSResourceOpen;
 
-typedef struct {
+typedef struct IOSResourceRead {
     u8* outPtr; // 0x00
     u32 outLen; // 0x04
 } IOSResourceRead;
 
-typedef struct {
+typedef struct IOSResourceWrite {
     u8* inPtr;  // 0x00
     u32 inLen;  // 0x04
 } IOSResourceWrite;
 
-typedef struct {
+typedef struct IOSResourceSeek {
     s32 offset; // 0x00
     u32 whence; // 0x04
 } IOSResourceSeek;
 
-typedef struct {
+typedef struct IOSResourceIoctl {
     u32 cmd;    // 0x00
     u8* inPtr;  // 0x04
     u32 inLen;  // 0x08
@@ -47,11 +47,11 @@ typedef struct {
     u32 outLen; // 0x10
 } IOSResourceIoctl;
 
-typedef struct {
-    u32         cmd;        // 0x00
-    u32         readCount;  // 0x04
-    u32         writeCount; // 0x08
-    IOSIoVector* vector;    // 0x0C
+typedef struct IOSResourceIoctlv {
+    u32             cmd;        // 0x00
+    u32             readCount;  // 0x04
+    u32             writeCount; // 0x08
+    IOSIoVector*    vector;     // 0x0C
 } IOSResourceIoctlv;
 
 typedef struct IOSResourceRequest {

@@ -1436,11 +1436,11 @@ config.libs = [
         ]
     ),
     RVLSDKLib("arc", [
-            Object(Matching, "arc/arc.c"),
+            Object(Matching,    "arc/arc.c"),
         ]
     ),
     RVLSDKLib("esp", [
-            Object(NonMatching, "esp/esp.c"),
+            Object(Matching,    "esp/esp.c"),
         ]
     ),
     RVLSDKLib("ipc", [

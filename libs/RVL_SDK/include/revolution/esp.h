@@ -9,24 +9,29 @@
 extern "C" {
 #endif
 
-s32 ESP_InitLib();
-s32 ESP_CloseLib();
+ESError ESP_InitLib();
+ESError ESP_CloseLib();
 
-s32 ESP_GetTmdView(ESTitleId titleId, ESTmdView* tmdView, u32* tmdCount);
-s32 ESP_GetTicketViews(ESTitleId titleId, ESTicketView* ticketView, u32* ticketCount);
+ESError ESP_LaunchTitle(ESTitleId titleId, ESTicketView* ticket);
 
-s32 ESP_GetTitleId(ESTitleId* titleId);
+s32     ESP_OpenContentFile(u32 index);
+ESError ESP_ReadContentFile(s32 fd, void* buffer, u32 size);
+ESError ESP_SeekContentFile(s32 fd, s32 offset, u32 whence);
+ESError ESP_CloseContentFile(int fd);
 
-s32 ESP_LaunchTitle(ESTitleId titleId, ESTicketView* ticketView);
+ESError ESP_ListTitleContentsOnCard(ESTitleId titleId, ESContentId* contentIds, u32* numContents);
 
-s32 ESP_ListTitleContentsOnCard(ESTitleId titleId, ESContentId* cIds, u32* cntCount);
+ESError ESP_GetTicketViews(ESTitleId titleId,  ESTicketView* ticketViewList, u32* numTicketViews);
 
-s32 ESP_GetConsumption(ESTicketId ticket, ESLpEntry* lpEntry, u32* entries);
+ESError ESP_DiGetTicketView(void* ticket, ESTicketView* ticketView);
 
-s32 ESP_GetDataDir(ESTitleId titleId, char* directory);
+ESError ESP_DiGetTmd(ESTitleMeta* tmd, u32* tmdSize);
+ESError ESP_GetTmdView(ESTitleId titleId, ESTmdView* tmdView, u32* tmdSize);
 
-s32 ESP_DiGetTicketView(const void*, ESTicketView*);
-s32 ESP_DiGetTmd(ESTitleMeta*, u32*);
+ESError ESP_GetDataDir(ESTitleId titleId, char* dataDir);
+ESError ESP_GetTitleId(ESTitleId* titleId);
+
+ESError ESP_GetConsumption(ESTicketId ticketId, ESLpEntry* limitEntries, u32* numEntries);
 
 #ifdef __cplusplus
 }

@@ -463,7 +463,7 @@ static void ReportOSInfo() {
             break;
         }
         case OS_CONSOLE_TDEV_EMU: {
-            OSReport("TDEV-based emulation HW%d\n", (consoleType & ~OS_CONSOLE_MASK) - 3);
+            OSReport("TDEV-based emulation HW%d\n", (consoleType & ~OS_CONSOLE_MASK/*???*/) - 3);
             break;
         }
         default: {

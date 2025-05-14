@@ -23,7 +23,7 @@ List of libraries that are linked (in alphabetical order):
 | **DVD**      | DVD Drive Library                                           | :heavy_check_mark: |
 | **ENC**      | Character Encoding Library                                  | :x: |
 | **ES**       | Private eTicket Services Library                            | :x: |
-| **ESP**      | Public eTicket Services Library; for use from the SDK       | :x: |
+| **ESP**      | Public eTicket Services Library; for use from the SDK       | :heavy_check_mark: |
 | **EUART**    | Externel Interface Bus UART Library; written by Hudson Soft | :heavy_check_mark: |
 | **EXI**      | Externel Interface Bus Library                              | :heavy_check_mark: |
 | **FA**       | File Allocation Library; for SD Card and possibly USB       | :x: |
@@ -36,7 +36,7 @@ List of libraries that are linked (in alphabetical order):
 | **MEM**      | Memory Management Library                                   | :x: |
 | **MTX**      | Matrix and Vector Library                                   | :heavy_check_mark: |
 | **NAND**     | NAND Library; Small wrapper of FS                           | :heavy_check_mark: |
-| **NUP**      | Wii NUS Library; *N**intendo **UP**dater?                   | :x: |
+| **NUP**      | Wii NUS Library; **N**intendo **UP**dater?                   | :x: |
 | **OS**       | Main Operating System library                               | :heavy_check_mark: |
 | **PAD**      | GameCube Controller Library                                 | :x: |
 | **RSO**      | Relocated Static Object Library                             | :x: |
