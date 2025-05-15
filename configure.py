@@ -1578,7 +1578,7 @@ config.libs = [
         ]
     ),
     RVLSDKLib("es", [
-            Object(NonMatching, "es/es.c"),
+            Object(Matching,    "es/es.c"),
         ]
     ),
     RVLSDKLib("wad", [

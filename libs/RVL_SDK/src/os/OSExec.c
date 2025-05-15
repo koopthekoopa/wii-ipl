@@ -147,7 +147,7 @@ int __OSGetValidTicketIndex(ESTicketView *ticketViewList, u32 numTickets) {
     // Check if there are any tickets
     if (ticketViewList == NULL) {
         OSReport("NULL pointer detected: line %d in %s\n", 1339, __FILE__);
-        return ES_ERR_INVALID_ARGUMENTS;
+        return ES_ERR_INVALID;
     }
 
     for (i = 0; i < numTickets; i++) {

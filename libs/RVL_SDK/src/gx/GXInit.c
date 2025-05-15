@@ -486,8 +486,9 @@ void __GXInitGX() {
     GXSetTevSwapModeTable(GX_TEV_SWAP2, GX_CH_GREEN, GX_CH_GREEN, GX_CH_GREEN, GX_CH_ALPHA);
     GXSetTevSwapModeTable(GX_TEV_SWAP3, GX_CH_BLUE, GX_CH_BLUE, GX_CH_BLUE, GX_CH_ALPHA);
 
-    for (i = GX_TEVSTAGE0; i < GX_MAX_TEVSTAGE; i++)
+    for (i = GX_TEVSTAGE0; i < GX_MAX_TEVSTAGE; i++) {
         GXSetTevDirect((GXTevStageID)i);
+    }
 
     GXSetNumIndStages(0);
     GXSetIndTexCoordScale(GX_INDTEXSTAGE0, GX_ITS_1, GX_ITS_1);

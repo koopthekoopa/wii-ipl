@@ -337,7 +337,7 @@ s32 __OSGetPlayTimeCurrent(OSPlayTimeType* type, u32* playTime) {
 
     ret = ESP_DiGetTicketView(NULL, &ticket);
 
-    if (ret == ES_ERR_INVALID_ARGUMENTS) {
+    if (ret == ES_ERR_INVALID) {
         goto out;
     }
     if (ret != ES_ERR_OK) {
@@ -370,7 +370,7 @@ void __OSInitPlayTime() {
     ret = __OSGetPlayTimeCurrent(&type, &limit);
 
     if (ret != ES_ERR_OK) {
-        if (ret != ES_ERR_INVALID_ARGUMENTS) {
+        if (ret != ES_ERR_INVALID) {
             ret = ret;
         }
         goto out;

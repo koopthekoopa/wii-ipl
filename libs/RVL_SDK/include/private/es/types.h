@@ -31,6 +31,9 @@ typedef u64         ESTicketId;
 typedef u8          ESVersion;
 
 typedef u8          ESContentMask[64];
+typedef u8          ESSignature[60];
+
+typedef u8          ESHash[20];
 
 #define             ES_CHANNEL_ID(t64)  ((ESTitleId32)(((ESTitleId)t64 & 0xFFFFFFFF00000000) >> 32))
 #define             ES_TITLE_ID(t64)    ((ESTitleId32)((ESTitleId)t64 & 0x00000000FFFFFFFF))
@@ -73,6 +76,7 @@ typedef struct ESTmdReserved {
     u8  empty_0x2C[18]; // 0x2C
 } ESTmdReserved;
 
+// Hello alignment!
 #pragma pack(pop)
 
 typedef enum ESCertSigType {
@@ -115,7 +119,7 @@ typedef struct ESTicketView {
     ESTicketReserved    reserved;               // 0x25
 
     u8                  audit;                  // 0x55
-    ESContentMask       texSize;               // 0x56
+    ESContentMask       cidxMask;               // 0x56
     ESLpEntry           limits[ES_LIMIT_MAX];   // 0x98
 } ESTicketView;
 
@@ -189,7 +193,7 @@ typedef struct ESContentMeta {
 
     u64         size;       // 0x08
 
-    u8          hash[20];   // 0x10
+    ESHash      hash;   // 0x10
 } ESContentMeta;
 
 typedef struct ESTitleMetaHeader {
@@ -222,30 +226,31 @@ typedef struct ESTitleMeta {
 #pragma pack(pop)
 
 enum {
-    ES_ERR_OK                    = 0,
+    ES_ERR_OK                   = 0,
 
-    ES_ERR_DONT_EXISTS           = -106,
+    ES_ERR_DONT_EXISTS          = -106,
 
-    ES_ERR_INVALID_PUB_KEY_TYPE  = -1005,
-    ES_ERR_FILE_READ_FAILED      = -1009,
-    ES_ERR_FILE_WRITE_FAILED     = -1010,
-    ES_ERR_INVALID_SIGNATURE     = -1012,
-    ES_ERR_TMD_FD_OVERFLOW       = -1016,
-    ES_ERR_INVALID_ARGUMENTS     = -1017,
-    ES_ERR_INVALID_DEVICE_ID     = -1020,
-    ES_ERR_INVALID_CONTENT_HASH  = -1022,
-    ES_ERR_MEMORY_ERROR          = -1024,
-    ES_ERR_NO_TMD_FILE_FOUND     = -1025,
-    ES_ERR_TMD_INVALID_RIGHT     = -1026,
-    ES_ERR_ISSUER_NOT_FOUND      = -1027,
-    ES_ERR_TICKET_NOT_FOUND      = -1028,
-    ES_ERR_INVALID_TICKET        = -1029,
-    ES_ERR_INVALID_BOOT2         = -1031,
-    ES_ERR_UNKNOWN_FATAL         = -1032,
-    ES_ERR_TICKET_EXPIRED        = -1033,
-    ES_ERR_INVALID_TITLE_VER     = -1035,
-    ES_ERR_BAD_SYSMENU_TICKET    = -1036,
-    ES_ERR_BAD_SYSMENU_CONTENTS  = -1037,
+    ES_ERR_INVALID_PUB_KEY_TYPE = -1005,
+    ES_ERR_FILE_READ_FAILED     = -1009,
+    ES_ERR_FILE_WRITE_FAILED    = -1010,
+    ES_ERR_INVALID_SIGNATURE    = -1012,
+    ES_ERR_TMD_FD_OVERFLOW      = -1016,
+    ES_ERR_INVALID              = -1017,
+    ES_ERR_INVALID_UNKNOWN      = -1019,
+    ES_ERR_INVALID_DEVICE_ID    = -1020,
+    ES_ERR_INVALID_CONTENT_HASH = -1022,
+    ES_ERR_MEMORY_ERROR         = -1024,
+    ES_ERR_NO_TMD_FILE_FOUND    = -1025,
+    ES_ERR_TMD_INVALID_RIGHT    = -1026,
+    ES_ERR_ISSUER_NOT_FOUND     = -1027,
+    ES_ERR_TICKET_NOT_FOUND     = -1028,
+    ES_ERR_INVALID_TICKET       = -1029,
+    ES_ERR_INVALID_BOOT2        = -1031,
+    ES_ERR_UNKNOWN_FATAL        = -1032,
+    ES_ERR_TICKET_EXPIRED       = -1033,
+    ES_ERR_INVALID_TITLE_VER    = -1035,
+    ES_ERR_BAD_SYSMENU_TICKET   = -1036,
+    ES_ERR_BAD_SYSMENU_CONTENTS = -1037,
 
     ES_ERR_NO_DISC_NAND_TMD      = -1039,
 };

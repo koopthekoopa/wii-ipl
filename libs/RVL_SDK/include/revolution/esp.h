@@ -14,10 +14,10 @@ ESError ESP_CloseLib();
 
 ESError ESP_LaunchTitle(ESTitleId titleId, ESTicketView* ticket);
 
-s32     ESP_OpenContentFile(u32 index);
-ESError ESP_ReadContentFile(s32 fd, void* buffer, u32 size);
-ESError ESP_SeekContentFile(s32 fd, s32 offset, u32 whence);
-ESError ESP_CloseContentFile(int fd);
+ESFd    ESP_OpenContentFile(ESContentId contentId);
+ESError ESP_ReadContentFile(ESFd fd, void* buffer, u32 size);
+ESError ESP_SeekContentFile(ESFd fd, s32 offset, u32 whence);
+ESError ESP_CloseContentFile(ESFd fd);
 
 ESError ESP_ListTitleContentsOnCard(ESTitleId titleId, ESContentId* contentIds, u32* numContents);
 
