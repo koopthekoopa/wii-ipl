@@ -432,7 +432,7 @@ namespace ipl {
                     if (TITLE_NO_REGION(titleIds[i]) == TITLE_PHOTO) {
                         ESTmdView* tmd = NULL;
                         ret = utility::ESMisc::GetTmdView(mpHeap, titleIds[i], &tmd);
-                        if (ret == ES_ERR_OK && tmd->head.titleVerson == 65280) {
+                        if (ret == ES_ERR_OK && tmd->head.titleVersion == 65280) {
                             mbPhotoMP3 = true;
                         }
                         if (tmd) {

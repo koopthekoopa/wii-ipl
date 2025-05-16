@@ -13,6 +13,7 @@
 #include <private/bus.h>
 
 #include <string.h>
+#include <stdio.h>
 
 /* some string pooling (the first one is used but is just pooled first...)*/
 DECOMP_FORCE_ACTIVE(OSExec_c, "\nOSExec(): Failed to exec %d in %d\n");

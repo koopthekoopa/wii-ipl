@@ -15,9 +15,13 @@ extern "C" {
 #endif
 
 enum {
-    DVD_COMMAND_STATE_IDLE = 0
-};
+    DVD_PRIO_HIGHEST = 0,
+    DVD_PRIO_HIGH,
+    DVD_PRIO_MEDIUM,
+    DVD_PRIO_LOW,
 
+    DVD_PRIO_MAX,
+};
 
 enum {
     DVD_RESULT_COVER_CLOSED = -4,

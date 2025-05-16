@@ -15,8 +15,8 @@ List of libraries that are linked (in alphabetical order):
 | **BASE**     | PowerPC Architecture Library                                | :heavy_check_mark: |
 | **BTE**      | Bluetooth Driver Library; written by BroadCom               | :x: |
 | **CARD**     | GameCube Memory Card Library                                | :x: |
-| **CNT**      | Content API Library for Channel Titles                      | :x: |
-| **CNTCACHE** | Unknown; Provides a file with commands to do                | :x: |
+| **CNT**      | Content API Library for Channel Titles                      | :heavy_check_mark: |
+| **CNTCACHE** | Library that automatically delete temporary titles?         | :x: |
 | **CX**       | Compression Library; for LZ, Huffman and RunLength          | :x: |
 | **DB**       | Debug Interface Library                                     | :heavy_check_mark: |
 | **DSP**      | Digital Signal Processor Driver Library                     | :heavy_check_mark: |

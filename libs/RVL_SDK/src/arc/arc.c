@@ -31,7 +31,7 @@ static BOOL isSame(const char* path, const char* string) {
             return FALSE;
         }
     }
-    if ((*path == '/') || (*path == 0)) {
+    if (*path == '/' || *path == 0) {
         return TRUE;
     }
     return FALSE;
@@ -172,8 +172,9 @@ loop_back:
                 continue;
             }
 
-            // Skip empty entries
             name = handle->FSTStringStart + FILE_STRING_OFF(FSTEntries, i);
+
+            // Skip empty entries
             if (*name == '.' && *(name+1) == 0) {
                 i++;
                 goto loop_back;

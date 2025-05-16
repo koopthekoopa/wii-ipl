@@ -6,6 +6,7 @@
 #include <private/ipc.h>
 
 #include <string.h>
+#include <stdio.h>
 
 static BOOL nandInspectPermission(u8 perm);
 static void nandSplitPerm(u8 perm, u32* owner, u32* group, u32* others);

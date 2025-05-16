@@ -71,14 +71,14 @@ static BOOL isSame(const char* path, const char* str) {
     return FALSE;
 }
 
-s32 DVDConvertPathToEntrynum(const char* pathPtr) {
+s32 DVDConvertPathToEntrynum(const char* path) {
     const char* ptrPath;
-    char*       stringPtr;
+    char*       name;
 
     BOOL isDir;
     s32  pathLen, dirLookAt, i;
 
-    const char* origPathPtr = pathPtr;
+    const char* origPathPtr = path;
     const char* hasExtensionStart;
     
     BOOL isInvalid, hasExtension;
@@ -86,30 +86,37 @@ s32 DVDConvertPathToEntrynum(const char* pathPtr) {
     dirLookAt = currentDirectory;
 
     while (TRUE) {
-        if (*pathPtr == '\0') {
+        // End of path? Done!
+        if (*path == 0) {
             return dirLookAt;
         } 
-        else if (*pathPtr == '/') {
+        // Ignore initial slash.
+        else if (*path == '/') {
             dirLookAt = 0;
-            pathPtr++;
+            path++;
             continue;
         }
-        else if (*pathPtr == '.') {
-            if (*(pathPtr + 1) == '.') {
-                if (*(pathPtr + 2) == '/') {
+        // Special cases
+        else if (*path == '.') {
+            if (*(path + 1) == '.') {
+                // Found `../`? Seek to parent.
+                if (*(path + 2) == '/') {
                     dirLookAt = FstStart[dirLookAt].dir.parent;
-                    pathPtr += 3;
+                    path += 3;
                     continue;
                 }
-                else if (*(pathPtr + 2) == '\0') {
+                // If the input path was literally just `../`, then return the parent.
+                else if (*(path+2) == 0) {
                     return FstStart[dirLookAt].dir.parent;
                 }
             }
-            else if (*(pathPtr + 1) == '/') {
-                pathPtr += 2;
+            // "." directory does nothing
+            else if (*(path+1) == '/') {
+                path += 2;
                 continue;
             }
-            else if (*(pathPtr + 1) == '\0') {
+            // Ignore trailing dot
+            else if (*(path+1) == 0) {
                 return dirLookAt;
             }
         }
@@ -118,9 +125,9 @@ s32 DVDConvertPathToEntrynum(const char* pathPtr) {
             hasExtension = FALSE;
             isInvalid = FALSE;
 
-            for (ptrPath = pathPtr; *ptrPath != '\0' && *ptrPath != '/'; ptrPath++) {
+            for (ptrPath = path; *ptrPath != '\0' && *ptrPath != '/'; ptrPath++) {
                 if (*ptrPath == '.') {
-                    if (ptrPath - pathPtr > 8 || hasExtension == TRUE) {
+                    if (ptrPath - path > 8 || hasExtension == TRUE) {
                         isInvalid = TRUE;
                         break;
                     }
@@ -142,22 +149,24 @@ s32 DVDConvertPathToEntrynum(const char* pathPtr) {
             OSAssertVMsg(!isInvalid, 443, "DVDConvertEntrynumToPath(possibly DVDOpen or DVDChangeDir or DVDOpenDir): specified directory or file (%s) doesn't match standard 8.3 format. This is a temporary restriction and will be removed soon\n", origPathPtr);
         }
         else {
-            for (ptrPath = pathPtr; (*ptrPath != '\0') && (*ptrPath != '/'); ptrPath++) {}
+            for (ptrPath = path; (*ptrPath != '\0') && (*ptrPath != '/'); ptrPath++) {}
         }
 
         isDir = (*ptrPath == '\0') ? FALSE : TRUE;
-        pathLen = (u32)(ptrPath - pathPtr);
+        pathLen = (u32)(ptrPath - path);
 
-        ptrPath = pathPtr;
+        ptrPath = path;
 
         for (i = dirLookAt+1; i < FstStart[dirLookAt].dir.next; i = IS_ENTRY_DIR(FstStart, i) ? FstStart[i].dir.next : (i + 1)) {
+            // Skip directories
             if (IS_ENTRY_DIR(FstStart, i) == FALSE && isDir == TRUE) {
                 continue;
             }
 
-            stringPtr = FstStringStart + FILE_STRING_OFF(FstStart, i);
+            name = FstStringStart + FILE_STRING_OFF(FstStart, i);
 
-            if (isSame(ptrPath, stringPtr) == TRUE) {
+            // Advance to next file in hierarchy
+            if (isSame(ptrPath, name) == TRUE) {
                 goto next_in_hier;
             }
         }
@@ -170,7 +179,7 @@ next_in_hier:
         }
 
         dirLookAt = i;
-        pathPtr += pathLen + 1;
+        path += pathLen + 1;
     }
 }
 

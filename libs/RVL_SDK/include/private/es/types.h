@@ -56,6 +56,12 @@ enum {
     ES_CK_CAFEWII       // Wii U's Wii Mode common key
 };
 
+enum {
+    ES_SEEK_BEG = 0,
+    ES_SEEK_CUR,
+    ES_SEEK_END
+};
+
 // No alignment!!
 #pragma pack(push, 1)
 
@@ -167,9 +173,9 @@ typedef struct ESTmdViewHeader {
 
     ESTmdReserved   reserved;       // 0x1A
 
-    u16             titleVerson;    // 0x5A
+    u16             titleVersion;   // 0x58
 
-    u16             numContents;    // 0x5C
+    u16             numContents;    // 0x5A
 } ESTmdViewHeader;
 
 typedef struct ESCmdView {
@@ -208,13 +214,13 @@ typedef struct ESTitleMetaHeader {
 
     ESTmdReserved   reserved;           // 0x1A
 
-    u32             accessRights;       // 0x5C
+    u32             accessRights;       // 0x58
 
-    u16             titleVersion;       // 0x60
+    u16             titleVersion;       // 0x5C
 
-    u16             numContents;        // 0x62
+    u16             numContents;        // 0x5E
 
-    u16             bootIndex;          // 0x64
+    u16             bootIndex;          // 0x60
 } ESTitleMetaHeader;
 
 typedef struct ESTitleMeta {
@@ -234,7 +240,7 @@ enum {
     ES_ERR_FILE_READ_FAILED     = -1009,
     ES_ERR_FILE_WRITE_FAILED    = -1010,
     ES_ERR_INVALID_SIGNATURE    = -1012,
-    ES_ERR_TMD_FD_OVERFLOW      = -1016,
+    ES_ERR_TMD_MAXFD            = -1016,
     ES_ERR_INVALID              = -1017,
     ES_ERR_INVALID_UNKNOWN      = -1019,
     ES_ERR_INVALID_DEVICE_ID    = -1020,

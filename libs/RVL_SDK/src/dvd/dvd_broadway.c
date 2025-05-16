@@ -60,11 +60,8 @@ typedef struct DVDLowRegValues {
 
 typedef struct DVDLowCommand {
     u8  diCmd;
-
     u8  pad1[3];
-
     u32 arg[5];
-
     u32 pad2[2];
 } DVDLowCommand;
 

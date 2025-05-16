@@ -179,14 +179,6 @@ void __DVDPrintFatalMessage();
 BOOL __DVDGetAutoFatalMessaging();
 
 /* Queue stuff */
-enum {
-    DVD_PRIO_HIGHEST = 0,
-    DVD_PRIO_HIGH,
-    DVD_PRIO_MEDIUM,
-    DVD_PRIO_LOW,
-
-    DVD_PRIO_MAX,
-};
 
 void                __DVDClearWaitingQueue();
 

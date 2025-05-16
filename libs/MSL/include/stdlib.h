@@ -5,7 +5,8 @@
 extern "C" {
 #endif
 
-long int    strtol(const char* str, char** endptr, int base);
+long int                strtol(const char* str, char** endptr, int base);
+unsigned long long int  strtoull(const char* str, char** endptr, int base);
 
 int         atoi(const char * str);
 

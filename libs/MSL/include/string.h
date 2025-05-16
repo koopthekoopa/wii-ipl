@@ -22,7 +22,7 @@ int     strncmp(const char* dst, const char* src, size_t length);
 size_t  strlen(const char* str);
 size_t  strnlen(const char* str, size_t length);
 
-int     sprintf(char* buffer, const char* format, ...);
+char*   strtok(char* str, const char* delimiters);
 
 #ifdef __cplusplus
 }

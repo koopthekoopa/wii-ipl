@@ -11,6 +11,7 @@
 
 #include <revolution/verdefs.h>
 
+#include <stdio.h>
 #include <string.h>
 #include <stddef.h>
 
@@ -177,12 +178,13 @@ void nandReportErrorCode(ISFSError result) {}
 
 s32 nandConvertErrorCode(ISFSError result) {
     int errorMap[] = {
+        // FS codes
         ISFS_ERROR_OK,                  NAND_RESULT_OK,
         ISFS_ERROR_ACCESS,              NAND_RESULT_ACCESS,
         ISFS_ERROR_CORRUPT,             NAND_RESULT_CORRUPT,
         ISFS_ERROR_ECC_CRIT,            NAND_RESULT_ECC_CRIT,
         ISFS_ERROR_EXISTS,              NAND_RESULT_EXISTS,
-        ISFS_ERROR_HMAC,                NAND_RESULT_AUTHENTICATION,
+        ISFS_ERROR_AUTHENTICATION,      NAND_RESULT_AUTHENTICATION,
         ISFS_ERROR_INVALID,             NAND_RESULT_INVALID,
         ISFS_ERROR_MAXBLOCKS,           NAND_RESULT_MAXBLOCKS,
         ISFS_ERROR_MAXFD,               NAND_RESULT_MAXFD,
@@ -196,6 +198,7 @@ s32 nandConvertErrorCode(ISFSError result) {
         ISFS_ERROR_BUSY,                NAND_RESULT_BUSY,
         ISFS_ERROR_SHUTDOWN,            NAND_RESULT_FATAL_ERROR,
 
+        // IPC codes
         IPC_RESULT_ACCESS,              NAND_RESULT_ACCESS,
         IPC_RESULT_EXISTS,              NAND_RESULT_EXISTS,
         IPC_RESULT_INTR,                NAND_RESULT_UNKNOWN,
@@ -209,7 +212,6 @@ s32 nandConvertErrorCode(ISFSError result) {
         IPC_RESULT_ECC,                 NAND_RESULT_UNKNOWN,
         IPC_RESULT_ECC_CRIT,            NAND_RESULT_ECC_CRIT,
         IPC_RESULT_BADBLOCK,            NAND_RESULT_UNKNOWN,
-
         IPC_RESULT_INVALID_OBJTYPE,     NAND_RESULT_UNKNOWN,
         IPC_RESULT_INVALID_RNG,         NAND_RESULT_UNKNOWN,
         IPC_RESULT_INVALID_FLAG,        NAND_RESULT_UNKNOWN,
@@ -230,10 +232,11 @@ s32 nandConvertErrorCode(ISFSError result) {
 
     for (; i < ARRSIZE(errorMap); i += 2) {
         if (errorMap[i] == result) {
-            if (result == ISFS_ERROR_ECC_CRIT || result == ISFS_ERROR_HMAC || result == ISFS_ERROR_UNKNOWN || result == IPC_RESULT_UNKNOWN || result == IPC_RESULT_ECC_CRIT) {
+            if (result == ISFS_ERROR_ECC_CRIT || result == ISFS_ERROR_AUTHENTICATION || result == ISFS_ERROR_UNKNOWN
+            || result == IPC_RESULT_UNKNOWN || result == IPC_RESULT_ECC_CRIT) {
                 char buf[128] ALIGN64;
                 sprintf(buf, "ISFS error code: %d", result);
-                NANDLoggingAddMessageAsync(0, buf);
+                NANDLoggingAddMessageAsync(NULL, buf);
             }
 
             nandReportErrorCode(result);
@@ -244,7 +247,7 @@ s32 nandConvertErrorCode(ISFSError result) {
     OSReport("CAUTION!  Unexpected error code [%d] was found.\n", result); {
         char buf[128] ALIGN64;
         sprintf(buf, "ISFS unexpected error code: %d", result);
-        NANDLoggingAddMessageAsync(0, buf);
+        NANDLoggingAddMessageAsync(NULL, buf);
     }
 
     nandReportErrorCode(result);

@@ -1587,7 +1587,7 @@ config.libs = [
         ]
     ),
     RVLSDKLib("cnt", [
-            Object(NonMatching, "cnt/cnt.c"),
+            Object(Matching,    "cnt/cnt.c"),
         ]
     ),
     RVLSDKLib("fa", [
