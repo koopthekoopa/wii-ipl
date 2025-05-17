@@ -593,7 +593,7 @@ config.libs = [
     IPLSection("utility", [
             Object(Matching,    "utility/iplTree.cpp"),
             Object(Matching,    "utility/iplFrameController.cpp"),
-            Object(NonMatching, "utility/iplGraphics.cpp"),
+            Object(Equivalent,  "utility/iplGraphics.cpp"),
             Object(Matching,    "utility/iplCapture.cpp"),
             Object(NonMatching, "utility/iplUtility.cpp"),
             Object(Matching,    "utility/iplThread.cpp"),

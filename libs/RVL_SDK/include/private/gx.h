@@ -86,8 +86,8 @@ typedef struct __GXData_struct {
 
     GXTlutRegion    TlutRegions[20];
 
-    GXTexRegion* (*texRegionCallback)(GXTexObj*, GXTexMapID);
-    GXTlutRegion* (*tlutRegionCallback)(u32);
+    GXTexRegion*    (*texRegionCallback)(const GXTexObj*, GXTexMapID);
+    GXTlutRegion*   (*tlutRegionCallback)(u32);
 
     GXAttrType      nrmType;
     GXBool          hasNrms;

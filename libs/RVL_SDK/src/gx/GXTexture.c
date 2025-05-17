@@ -126,7 +126,7 @@ void __GetImageTileCount(GXTexFmt fmt, u16 wd, u16 ht, u32* rowTiles, u32* colTi
     *cmpTiles = (fmt == GX_TF_RGBA8 || fmt == GX_TF_Z24X8) ? 2 : 1;
 }
 
-void GXInitTexObj(GXTexObj* obj, void* image_ptr, u16 width, u16 height, GXTexFmt format, GXTexWrapMode wrap_s, GXTexWrapMode wrap_t, GXBool mipmap) {
+void GXInitTexObj(const GXTexObj* obj, void* image_ptr, u16 width, u16 height, GXTexFmt format, GXTexWrapMode wrap_s, GXTexWrapMode wrap_t, GXBool mipmap) {
     u32 imageBase;
     u32 maxLOD;
     u16 rowT, colT;
@@ -271,20 +271,20 @@ void GXInitTexObjLOD(GXTexObj* obj, GXTexFilter min_filt, GXTexFilter mag_filt, 
     SET_REG_FIELD(t->mode1, 8, 8, lmax);
 }
 
-void GXInitTexObjWrapMode(GXTexObj* obj, GXTexWrapMode sm, GXTexWrapMode tm) {
+void GXInitTexObjWrapMode(const GXTexObj* obj, GXTexWrapMode sm, GXTexWrapMode tm) {
     __GXTexObjInt* t = (__GXTexObjInt*)obj;
 
     SET_REG_FIELD(t->mode0, 2, 0, sm);
     SET_REG_FIELD(t->mode0, 2, 2, tm);
 }
 
-void GXInitTexObjTlut(GXTexObj* obj, u32 tlut_name) {
+void GXInitTexObjTlut(const GXTexObj* obj, u32 tlut_name) {
     __GXTexObjInt* t = (__GXTexObjInt*)obj;
 
     t->tlutName = tlut_name;
 }
 
-void GXInitTexObjUserData(GXTexObj* obj, void* user_data) {
+void GXInitTexObjUserData(const GXTexObj* obj, void* user_data) {
     __GXTexObjInt* t = (__GXTexObjInt*)obj;
 
     t->userData = user_data;
@@ -374,14 +374,14 @@ void GXLoadTexObjPreLoaded(const GXTexObj *obj, const GXTexRegion *region, GXTex
     __GXData->bpSentNot = GX_FALSE;
 }
 
-void GXLoadTexObj(GXTexObj* obj, GXTexMapID id) {
+void GXLoadTexObj(const GXTexObj* obj, GXTexMapID id) {
     GXTexRegion* r;
 
     r = __GXData->texRegionCallback(obj, id);
     GXLoadTexObjPreLoaded(obj, r, id);
 }
 
-void GXInitTlutObj(GXTlutObj* tlut_obj, void* lut, GXTlutFmt fmt, u16 n_entries) {
+void GXInitTlutObj(const GXTlutObj* tlut_obj, void* lut, GXTlutFmt fmt, u16 n_entries) {
     __GXTlutObjInt* t = (__GXTlutObjInt *)tlut_obj;
 
     t->tlut = 0;

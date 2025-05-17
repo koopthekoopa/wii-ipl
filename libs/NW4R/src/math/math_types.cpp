@@ -2,7 +2,7 @@
 
 namespace nw4r {
     namespace math {
-        void MTX44Identity(register MTX44 *pMtx) {
+        void MTX44Identity(register MTX44* pMtx) {
             register float a, b, c;
             a = 0.0f;
             b = 1.0f;
@@ -37,5 +37,3 @@ namespace nw4r {
         }
     }
 }
-
-

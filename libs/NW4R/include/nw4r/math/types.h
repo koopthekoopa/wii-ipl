@@ -63,6 +63,16 @@ namespace nw4r {
         };
 
         typedef struct MTX44 : public _MTX44 {
+            MTX44() {}
+
+            MTX44(const f32*);
+            MTX44(const Mtx44& rhs);
+
+            operator f32*()                 { return& _00; }
+            operator const f32*() const     { return& _00; }
+
+            operator MtxPtr()               { return (MtxPtr)&_00; }
+            operator const MtxPtr() const   { return (const MtxPtr)&_00; }
         } MTX44;
 
         void MTX44Identity(MTX44 *pMtx);
@@ -159,6 +169,8 @@ namespace nw4r {
             PSMTXIdentity(*pOut);
             return pOut;
         }
+
+        void MTX44Identity(MTX44* pMtx);
     }
 }
 
