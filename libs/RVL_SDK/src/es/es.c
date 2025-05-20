@@ -232,7 +232,7 @@ ESError ES_GetDeviceId(ESDeviceId* deviceId) {
     return ret;
 }
 
-ESError ES_ImportTitleInit(ESTitleMeta* tmd, u32 tmdSize, void* certs, u32 certSize, void* crls, u32 crlSize, int unknown0, int unknown1) {
+ESError ES_ImportTitleInit(void* tmd, u32 tmdSize, void* certs, u32 certSize, void* crls, u32 crlSize, int unknown0, int unknown1) {
     ESWork;
 
     IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);

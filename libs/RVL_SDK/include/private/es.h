@@ -19,7 +19,7 @@ ESError ES_GetTmdSizeFromView(ESTmdView* tmd, u32* tmdSize);
 
 ESError ES_GetDeviceId(ESDeviceId* deviceId);
 
-ESError ES_ImportTitleInit(ESTitleMeta* tmd, u32 tmdSize, void* certs, u32 certSize, void* crls, u32 crlSize, int unknown0, int unknown1);
+ESError ES_ImportTitleInit(void* tmd, u32 tmdSize, void* certs, u32 certSize, void* crls, u32 crlSize, int unknown0, int unknown1);
 ESFd    ES_ImportContentBegin(ESTitleId titleId, ESContentId contentId);
 ESError ES_ImportContentData(ESFd fd, void* data, u32 dataSize);
 ESError ES_ImportContentEnd(ESFd fd);

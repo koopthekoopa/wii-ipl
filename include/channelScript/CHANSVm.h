@@ -36,11 +36,12 @@ struct CHANSVm {
 
 struct CHANSVmObjHdr {
     union {
+        // This struct is likely not needed.
         struct {
             CHANSVmInt      hi;
             CHANSVmInt      lo;
-        } int_v;
-        CHANSVmInt64    int64_v;
+        } int32_v;
+        CHANSVmInt64    int_v;
 
         CHANSVmFloat    float_v;
 
@@ -48,6 +49,7 @@ struct CHANSVmObjHdr {
             CHANSVmWStr*    str;
             CHANSVmSize*    len;
         } wstring_v;
+
         struct {
             CHANSVmStr*     str;
             CHANSVmSize*    len;
@@ -86,21 +88,21 @@ CHANSVmBool CHANSVmAddExe(CHANSVm* vm, int unk0, int unk1);
 CHANSVmObjHdr*  CHANSVmNewObject(CHANSVm* vm, int unk, CHANSVmObjHdr* object, CHANSVmObjType type, CHANSVmSize length);
 CHANSVmErr      CHANSVmDeleteObject(CHANSVm* vm, CHANSVmObjHdr* object);
 
-CHANSVmErr      CHANSVmSetInteger(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmInt hiVal, CHANSVmInt loVal);
+CHANSVmErr      CHANSVmSetInteger(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmInt64 val);
 CHANSVmErr      CHANSVmSetFloat(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmFloat value);
 CHANSVmErr      CHANSVmSetU16String(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmWStr str, CHANSVmSize strLen);
 
 static inline CHANSVmErr CHANSVmSetInt8(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmS8 value) {
-    return CHANSVmSetInteger(vm, object, 0, (CHANSVmInt)(value & 0xFF));
+    return CHANSVmSetInteger(vm, object, (CHANSVmS8)(value));
 }
 static inline CHANSVmErr CHANSVmSetInt16(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmS16 value) {
-    return CHANSVmSetInteger(vm, object, 0, (CHANSVmInt)(value & 0xFFFF));
+    return CHANSVmSetInteger(vm, object, (CHANSVmS16)(value));
 }
 static inline CHANSVmErr CHANSVmSetInt32(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmS32 value) {
-    return CHANSVmSetInteger(vm, object, 0, (CHANSVmInt)(value));
+    return CHANSVmSetInteger(vm, object, (CHANSVmInt)(value));
 }
 static inline CHANSVmErr CHANSVmSetInt64(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmS64 value) {
-    return CHANSVmSetInteger(vm, object, (CHANSVmInt)((value >> 32) & 0xFFFFFFFF), (CHANSVmInt)(value & 0xFFFFFFFF));
+    return CHANSVmSetInteger(vm, object, value);
 }
 
 typedef struct  CHANSVmNativeClass CHANSVmNativeClass;

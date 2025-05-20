@@ -741,7 +741,7 @@ config.libs = [
         ]
     ),
     IPLSection("textBalloon", [
-            Object(NonMatching, "scene/textBalloon/iplBalloon.cpp"),
+            Object(Equivalent,  "scene/textBalloon/iplBalloon.cpp"),
         ]
     ),
     IPLSection("cardSequence", [
@@ -896,7 +896,7 @@ config.libs = [
     ),
     # eZiText (for 4.3U and 4.3E only)
     EZTXLib("zi8rvl", [
-            Object(NonMatching, "rvl/eztx.c"),
+            Object(Matching,    "rvl/eztx.c"),
         ]
     ),
     ZI8Lib("zi8clib", [

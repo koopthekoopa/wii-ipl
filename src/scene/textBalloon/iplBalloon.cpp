@@ -207,12 +207,11 @@ namespace ipl {
             }
 
             baseSize = get_size("W_Base");
-            //f32 temp2 = (baseSize->width / 2) - (trans.x + temp1) - proj16x9.left;
-            f32 temp2 = ((baseSize->width / 2) - (trans.x + temp1)) - proj16x9.left;
+            f32 temp2 = (trans.x + temp1) - (baseSize->width / 2) - proj16x9.left;
 
             baseSize = get_size("W_Base");
             f32 temp3 = 0.0f;
-            f32 temp4 = proj16x9.right - ((baseSize->width / 2) + (trans.x + temp1));
+            f32 temp4 = proj16x9.right - (trans.x + temp1 + baseSize->width / 2);
 
             if (temp2 < temp0) {
                 temp3 = temp0 - temp2;
@@ -227,7 +226,6 @@ namespace ipl {
 
         void TextBalloon::set_textbox(const wchar_t* text, BOOL bNoLimit) {
             u32 strLen;
-            wchar_t fullStr[(32+3)];
 
             strLen = mTextLen;
             if (strLen == 0) {
@@ -237,13 +235,8 @@ namespace ipl {
                 strLen = 32;
             }
 
-            int i = 17;
-            wchar_t* fullStrPtr = fullStr;
-            for (; i != 0; i--) {
-                fullStrPtr[1] = NULL;
-                fullStrPtr += 2;
-                fullStrPtr[0] = NULL;
-            }
+            wchar_t fullStr[(32+3)] = L"";
+
             wcsncpy(fullStr, text, 32);
 
             nw4r::lyt::TextBox* textPane = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpLayout->FindPaneByName("T_Balloon"));
@@ -286,11 +279,10 @@ namespace ipl {
             nw4r::ut::Rect proj16x9;
             System::getProjectionRect16x9(&proj16x9);
 
-            f32 temp1 = proj16x9.GetWidth() / proj4x3.GetWidth();
-
-            if (SCGetAspectRatio() == SC_ASPECT_RATIO_16x9) {
-                temp1 = 1.0f;
-            }
+            f32 temp0 = proj16x9.GetWidth() / proj4x3.GetWidth();
+            f32 temp1 = SCGetAspectRatio() == SC_ASPECT_RATIO_16x9 ?
+                                                temp0 :
+                                                1.0f;
 
             nw4r::ut::Rect textRect = textPane->GetTextDrawRect(*mpLayout->getDrawInfo());
             const nw4r::lyt::Size* baseSize = get_size("W_Base");

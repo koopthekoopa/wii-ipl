@@ -4,7 +4,7 @@
 
 namespace ipl {
     namespace scene {
-        static const char* scBtnName[] = {
+        const char* scSDBtnName[] = {
             "Ac",
         };
 
@@ -46,7 +46,7 @@ namespace ipl {
             mpGui = new gui::PaneManager(NULL, mpLayout->getDrawInfo(), NULL, NULL);
             mpGui->createLayoutScene(*mpLayout->getLayout());
             mpGui->setAllComponentTriggerTarget(false);
-            mpGui->setTriggerTarget(mpLayout->FindPaneByName(scBtnName[0]), true);
+            mpGui->setTriggerTarget(mpLayout->FindPaneByName(scSDBtnName[0]), true);
 
             mpLayout->FindPaneByName("N_Btn_On")->SetVisible(false);
             set_pane_visible_0(mpLayout->FindPaneByName("N_Btn_Off"));
@@ -221,7 +221,7 @@ namespace ipl {
         int SDMenuButton::getButtonNo(const char* paneName) {
             int num = -1;
             for (int i = 0; i < BTN_MAX; i++) {
-                if (strcmp(paneName, scBtnName[i]) == 0) {
+                if (strcmp(paneName, scSDBtnName[i]) == 0) {
                     num = i;
                     break;
                 }
@@ -231,12 +231,18 @@ namespace ipl {
 
         void SDMenuButton::enableBtn() {
             mbEnabled = true;
-            for (int i = 0; i < BTN_MAX; i++) {
+
+            for (int i = 0; i < 1; i++) {
                 if (mbHovered[i]) {
                     mbHovered[i] = FALSE;
-                    mpLayout->getAnim(ANIM_BTN_ROLL_OUT)->play();
+
+                    // Play hover out animation
+                    layout::Animator* anim = mpLayout->getAnim(ANIM_BTN_ROLL_OUT);
+                    anim->play();
                 }
-                mpGui->initPane(mpLayout->FindPaneByName(scBtnName[i]));
+
+                // Init button pane
+                mpGui->initPane(mpLayout->FindPaneByName(scSDBtnName[i]));
             }
         }
 

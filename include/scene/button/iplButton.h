@@ -298,7 +298,7 @@ namespace ipl {
                         u32 msgId;
                     };          // 0x08
                 } Command;
-                
+
                 EGG::Heap*                  get_heap()          { return mpHeap; }
 
                 SDMenuButton*               get_sd_menu_btn()   { return &mSdMenuBtn; } 
