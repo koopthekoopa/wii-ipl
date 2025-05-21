@@ -1,6 +1,6 @@
 #include "system/iplWarningHandler.h"
 
-#include "system/iplSystem.h"
+#include "iplSystem.h"
 
 namespace ipl {
     WarningHandler::WarningHandler(EGG::Heap* heap) :

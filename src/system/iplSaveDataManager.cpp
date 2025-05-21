@@ -1,9 +1,10 @@
 #include "system/iplSaveDataManager.h"
 
 #include "system/iplChannelManager.h"
-#include "system/iplSystem.h"
 
-#include "utility/iplESMisc.h"
+#include "iplSystem.h"
+
+#include "iplUtility.h"
 
 #include <revolution.h>
 #include <revolution/sc.h>

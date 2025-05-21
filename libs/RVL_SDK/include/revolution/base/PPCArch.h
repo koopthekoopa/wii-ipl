@@ -15,39 +15,39 @@ typedef union FpscrUnion {
     } u;
 } FpscrUnion;
 
-u32 PPCMfmsr();
-void PPCMtmsr(u32 val);
+u32     PPCMfmsr();
+void    PPCMtmsr(u32 val);
 
-u32 PPCMfhid0();
-void PPCMthid0(u32 val);
+u32     PPCMfhid0();
+void    PPCMthid0(u32 val);
 
-u32 PPCMfl2cr();
-void PPCMtl2cr(u32 val);
+u32     PPCMfl2cr();
+void    PPCMtl2cr(u32 val);
 
-void PPCMtdec(u32 val);
+void    PPCMtdec(u32 val);
 
-void PPCSync();
-void PPCHalt();
+void    PPCSync();
+void    PPCHalt();
 
-void PPCMtmmcr0(u32 val);
-void PPCMtmmcr1(u32 val);
+void    PPCMtmmcr0(u32 val);
+void    PPCMtmmcr1(u32 val);
 
-void PPCMtpmc1(u32 val);
-void PPCMtpmc2(u32 val);
-void PPCMtpmc3(u32 val);
-void PPCMtpmc4(u32 val);
+void    PPCMtpmc1(u32 val);
+void    PPCMtpmc2(u32 val);
+void    PPCMtpmc3(u32 val);
+void    PPCMtpmc4(u32 val);
 
-u32 PPCMffpscr();
-void PPCMtfpscr(u32 val);
+u32     PPCMffpscr();
+void    PPCMtfpscr(u32 val);
 
-u32 PPCMfhid2();
-void PPCMthid2(u32 val);
+u32     PPCMfhid2();
+void    PPCMthid2(u32 val);
 
-u32 PPCMfwpar();
-void PPCMtwpar(u32 val);
+u32     PPCMfwpar();
+void    PPCMtwpar(u32 val);
 
-void PPCDisableSpeculation();
-void PPCSetFpNonIEEEMode();
+void    PPCDisableSpeculation();
+void    PPCSetFpNonIEEEMode();
 
 void PPCMthid4(u32 val);
 

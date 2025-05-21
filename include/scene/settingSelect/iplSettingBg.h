@@ -1,7 +1,7 @@
-#ifndef IPL_SETTING_BG_H
-#define IPL_SETTING_BG_H
+#ifndef IPL_SCENE_SETTING_BG_H
+#define IPL_SCENE_SETTING_BG_H
 
-#include "scene/iplFaderSceneBase.h"
+#include "iplSceneHeader.h"
 
 namespace ipl {
     namespace scene {
@@ -24,4 +24,4 @@ namespace ipl {
     }
 }
 
-#endif // IPL_SETTING_BG_H
+#endif // IPL_SCENE_SETTING_BG_H

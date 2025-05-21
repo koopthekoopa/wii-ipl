@@ -1,5 +1,9 @@
 #include "scene/settingSelect/iplSettingBg.h"
 
+#include "iplScene.h"
+
+#include "iplSystem.h"
+
 namespace ipl {
     namespace scene {
         SettingBg::SettingBg(EGG::Heap* heap, int type) :

@@ -1,13 +1,17 @@
 #include "scene/health/iplHealth.h"
 
+#include "iplScene.h"
+
+#include "iplUtility.h"
+
+#include "iplSystem.h"
+
 #include <revolution/os.h>
 #include <revolution/sc.h>
 
-#include "utility/iplWpad.h"
-
 namespace ipl {
     namespace scene {
-        static bool has_prepared_for_boot() {
+        static bool has_prepared() {
             bool bResourceDone = false;
             bool bCommonResDone = false;
 
@@ -251,7 +255,7 @@ namespace ipl {
 
             // Done waiting? We wait again!... For the resources to finish loading.
             if (mbFadedIn && OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mWaitTick)) > HAS_TIMER_FADE_IN) {
-                if (has_prepared_for_boot()) {
+                if (has_prepared()) {
                     mpPushPane->SetVisible(true);
 
                     mpLayout->start(ANIM_WAIT_PUSH);

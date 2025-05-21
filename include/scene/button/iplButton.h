@@ -1,15 +1,14 @@
 #ifndef IPL_SCENE_BUTTON_H
 #define IPL_SCENE_BUTTON_H
 
-#include "scene/iplSceneBase.h"
+#include "iplSceneUIHeader.h"
+
 #include "scene/textBalloon/iplBalloon.h"
 
 #include "utility/iplTimer.h"
 #include "utility/iplQueue.h"
 
 #define BUTTON_EVENT_HANDLER(x) class x : public ButtonEventHandlerBase
-
-SCENE_USING_GUI
 
 namespace ipl {
     namespace scene {

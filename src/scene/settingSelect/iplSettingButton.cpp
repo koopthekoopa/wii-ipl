@@ -1,6 +1,8 @@
 #include "scene/settingSelect/iplSettingButton.h"
 
-#include "layout/iplGuiManager.h"
+#include "iplSceneUI.h"
+
+#include "iplSystem.h"
 
 namespace ipl {
     namespace scene {

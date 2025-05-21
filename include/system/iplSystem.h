@@ -28,8 +28,6 @@
 #include "system/iplBS2Manager.h"
 #include "scene/iplSceneManager.h"
 
-#include "sound/iplSound.h"
-
 namespace ipl {
     class System {
         public:

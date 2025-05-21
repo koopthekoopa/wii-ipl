@@ -10,6 +10,7 @@ namespace {
         BOOL bSuccess = ARCOpenDir(pArcHandle, ".", &dir);
     
         ARCDirEntry dirEntry;
+
         while (ARCReadDir(&dir, &dirEntry)) {
             if (dirEntry.isDir) {
                 bSuccess = ARCChangeDir(pArcHandle, dirEntry.name);

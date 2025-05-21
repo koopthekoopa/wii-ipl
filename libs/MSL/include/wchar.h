@@ -14,10 +14,10 @@ extern "C" {
 
 wchar_t*    wmemset(wchar_t* dest, wchar_t ch, size_t count);
 
-size_t      wcslen(const wchar_t *str);
+size_t      wcslen(const wchar_t* str);
 wchar_t*    wcsncpy(wchar_t* dest, const wchar_t* src, size_t count);
 
-int         vswprintf(wchar_t * ws, size_t len, const wchar_t * format, va_list arg);
+int         vswprintf(wchar_t* ws, size_t len, const wchar_t* format, va_list arg);
 
 #ifdef __cplusplus
 }

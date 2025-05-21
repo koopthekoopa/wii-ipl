@@ -102,7 +102,7 @@ ISFSError   ISFS_ReadDir(const char* dirName, char* nameList, u32* num);
 ISFSError   ISFS_ReadDirAsync(const char* dirName, char* nameList, u32* num, ISFSCallback callback, void* callbackArg);
 
 ISFSError   ISFS_SetAttr(const char* fileName, u32 ownerId, u16 groupId, u32 attr, u32 ownerAcc, u32 groupAcc, u32 othersAcc);
-ISFSError   ISFS_SetAttrAsync(const char* fileName, u32 ownerId, u16 groupId, u32 attr, u32 ownerAcc, u32 groupAcc, u32 othersAcc, ISFSCallback callback, void *callbackArg);
+ISFSError   ISFS_SetAttrAsync(const char* fileName, u32 ownerId, u16 groupId, u32 attr, u32 ownerAcc, u32 groupAcc, u32 othersAcc, ISFSCallback callback, void* callbackArg);
 
 ISFSError   ISFS_GetAttr(const char* fileName, u32* ownerId, u16* groupId, u32* attr, u32* ownerAcc, u32* groupAcc, u32* othersAcc);
 ISFSError   ISFS_GetAttrAsync(const char* fileName, u32* ownerId, u16* groupId, u32* attr, u32* ownerAcc, u32* groupAcc, u32* othersAcc, ISFSCallback callback, void* callbackArg);

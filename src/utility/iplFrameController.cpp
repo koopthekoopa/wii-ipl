@@ -1,4 +1,4 @@
-#include "system/iplSystem.h"
+#include "iplSystem.h"
 #include "utility/iplFrameController.h"
 
 namespace ipl {

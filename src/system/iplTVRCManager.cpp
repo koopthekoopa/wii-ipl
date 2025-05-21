@@ -1,6 +1,6 @@
 #include <revolution/types.h>
 
-#include "utility/iplUtility.h"
+#include "iplUtility.h"
 
 namespace ipl {
     namespace utility {

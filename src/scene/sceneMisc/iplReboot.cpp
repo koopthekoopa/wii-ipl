@@ -1,8 +1,10 @@
 #include "scene/misc/iplReboot.h"
 
+#include "iplScene.h"
+
 #include "scene/channelSelect/iplChannelSelect.h"
 
-#include "system/iplHomeButton.h"
+#include "iplSystem.h"
 
 namespace ipl {
     namespace scene {

@@ -61,8 +61,8 @@ struct CHANSVmObjHdr {
     CHANSVmU8   type;   // 0x08
 
     struct {
-        CHANSVmU8       readonly : 1;
-        CHANSVmU8       reserved : 7;
+        CHANSVmU8       readonly : 1;   // 10000000
+        CHANSVmU8       reserved : 7;   // 01111111
     } flags;            // 0x08
     CHANSVmU8   unk_0x0A;
     CHANSVmU8   unk_0x0B;

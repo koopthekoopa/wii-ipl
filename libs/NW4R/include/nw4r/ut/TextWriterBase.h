@@ -13,9 +13,10 @@
 
 #include <cstdarg>
 
+#include <nw4r/ut/TagProcessorBase.h>
+
 namespace nw4r {
     namespace ut {
-        template<typename> class TagProcessorBase;
         template<typename T> class TextWriterBase : public CharWriter {
             public:
                 enum DrawFlag {
@@ -138,5 +139,3 @@ namespace nw4r {
 }
 
 #endif // NW4R_UT_TEXT_WRITER_BASE_H
-
-#include <nw4r/ut/TagProcessorBase.h>

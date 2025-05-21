@@ -5,9 +5,9 @@
 #include <nw4r/math.h>
 #include <nw4r/lyt.h>
 
-#include "system/iplSystem.h"
+#include "iplSystem.h"
 
-#include "utility/iplUtility.h"
+#include "iplUtility.h"
 
 namespace ipl {
     PointerCoreObject::PointerCoreObject() :

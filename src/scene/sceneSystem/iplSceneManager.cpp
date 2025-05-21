@@ -2,6 +2,8 @@
 
 #include "scene/iplRootScene.h"
 
+#include "iplSystem.h"
+
 #include <cstring>
 
 namespace ipl {
@@ -21,7 +23,7 @@ namespace ipl {
         mReservedCommand(),
         mbCreatedReserved(false),
         mbDestroySyncTask(false) {
-            // Setup ze heaps.
+            // Setup the heaps!!
             mpBigSceneHeap = EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_BIG_SIZE,    3, 4), SCENE_BIG_SIZE,    heap, 4, 2);
             mpMdmSceneHeap = EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_MEDIUM_SIZE, 4, 4), SCENE_MEDIUM_SIZE, heap, 4, 2);
             mpSmlSceneHeap = EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_SMALL_SIZE,  6, 4), SCENE_SMALL_SIZE,  heap, 4, 2);

@@ -1,6 +1,8 @@
 #include "scene/textBalloon/iplBalloon.h"
 
-#include "system/iplSystem.h"
+#include "iplSystem.h"
+
+#include "iplSound.h"
 
 #include <revolution/sc.h>
 

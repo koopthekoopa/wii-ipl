@@ -6,7 +6,6 @@
 #include <revolution/types.h>
 
 #include <nw4r/ut/inlines.h>
-#include <nw4r/misc.h>
 
 #include <stddef.h>
 
@@ -46,7 +45,7 @@ namespace nw4r {
 
                             Iterator& operator ++() {
                                 mPointer = mPointer->GetNext();
-                                return* this;
+                                return *this;
                             }
 
                             LinkListNode* operator ->() const { return mPointer; }

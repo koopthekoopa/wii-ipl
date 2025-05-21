@@ -10,6 +10,7 @@
 #include <egg/core.h>
 
 #include "scene/iplSceneCreator.h"
+#include "scene/iplSceneBase.h"
 
 #include "utility/iplQueue.h"
 
@@ -24,34 +25,6 @@ namespace ipl {
             DRAW_LAYER_3,
             DRAW_LAYER_MAX,
         };
-
-        enum {
-            COMMAND_NONE = 0,
-            COMMAND_CREATE_CHILD,
-            COMMAND_RESERVE_CHANGE,
-            COMMAND_RESERVE_ALL_DESTRUCT,
-        };
-
-        typedef struct Command {
-            int     type;           // 0x00
-
-            int     newSceneID;     // 0x04
-            int     prevSceneID;    // 0x08
-            int     newRootID;      // 0x0C
-
-            Base*   parent;         // 0x10
-            Base*   child;          // 0x14
-            
-            void*   args;           // 0x18
-
-            void        clear();
-
-            Command()   { clear(); }
-
-            inline void operator=(const Command& rhs) {
-                /* https://decomp.me/scratch/KrtbJ */
-            }
-        } Command;
 
         #define MAX_COMMANDS 8
         typedef utility::Queue<Command, MAX_COMMANDS> CommandList;
@@ -117,9 +90,5 @@ namespace ipl {
         };
     }
 }
-
-#ifndef IPL_BASE_SCENE_H
-#include "scene/iplSceneBase.h"
-#endif // IPL_BASE_SCENE_H
 
 #endif // IPL_SCENE_MANAGER_H

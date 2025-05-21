@@ -1,5 +1,7 @@
 #include "scene/iplSceneBase.h"
 
+#include "iplSystem.h"
+
 namespace ipl {
     namespace scene {
         Base::Base(EGG::Heap* heap) :

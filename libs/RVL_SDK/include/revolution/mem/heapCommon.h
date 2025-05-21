@@ -31,8 +31,8 @@ typedef struct MEMiHeapHead {
     union {
         u32 attr;
         struct {
-            u32 reserved    : 24;   // 00
-            u32 optFlag     : 8;    // 24
+            u32 reserved    : 24;   // 11111111111111111111111100000000
+            u32 optFlag     : 8;    // 00000000000000000000000011111111
         };
     };                  // 0x38
 } MEMiHeapHead;

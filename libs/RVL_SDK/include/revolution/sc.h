@@ -78,7 +78,6 @@ u8      SCGetLanguage();
 #define SC_PRODUCT_AREA_CHN         11  /* China */
 
 s8      SCGetProductArea();
-s8      SCGetRegion();
 
 u64     SCGetTmpTitleID();
 void    SCSetTmpTitleID(u64 titleId);

@@ -1,7 +1,7 @@
 #ifndef IPL_REBOOT_H
 #define IPL_REBOOT_H
 
-#include "scene/iplSceneBase.h"
+#include "iplSceneHeader.h"
 
 namespace ipl {
     namespace scene {

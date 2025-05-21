@@ -1,5 +1,5 @@
 #include "utility/iplGraphics.h"
-#include "system/iplSystem.h"
+#include "iplSystem.h"
 
 #include <revolution/gx.h>
 #include <revolution/mtx.h>

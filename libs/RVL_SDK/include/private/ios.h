@@ -29,7 +29,7 @@ IOSError    IOS_IoctlvReboot(IOSFd fd, s32 cmd, u32 readCount, u32 writeCount, I
 
 /* Heap */
 
-IOSHeapId   iosCreateHeap(void *ptr, u32 size);
+IOSHeapId   iosCreateHeap(void* ptr, u32 size);
 IOSError    iosDestroyHeap(IOSHeapId id);
 
 void*       iosAlloc(IOSHeapId id, u32 size);

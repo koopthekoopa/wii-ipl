@@ -1,9 +1,7 @@
 #ifndef IPL_SETTING_BUTTON_H
 #define IPL_SETTING_BUTTON_H
 
-#include "scene/iplFaderSceneBase.h"
-
-SCENE_USING_GUI
+#include "iplSceneUIHeader.h"
 
 namespace ipl {
     namespace scene {

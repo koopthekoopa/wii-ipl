@@ -13,7 +13,7 @@ namespace nw4r {
                 NW4R_UT_RUNTIME_TYPEINFO;
 
                 TextBox(u16 allocStrLen, const wchar_t* str, const ut::Font* pFont);
-                TextBox(const res::TextBox *pBlock, const ResBlockSet& resBlockSet);
+                TextBox(const res::TextBox* pBlock, const ResBlockSet& resBlockSet);
 
                 virtual ~TextBox();
 

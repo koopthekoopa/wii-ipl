@@ -1,5 +1,7 @@
 #include "scene/button/iplButton.h"
 
+#include "iplSystem.h"
+
 namespace ipl {
     namespace scene {
         void Arrow::draw() {

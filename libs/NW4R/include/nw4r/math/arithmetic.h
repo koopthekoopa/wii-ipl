@@ -2,6 +2,7 @@
 #define NW4R_MATH_ARITHMETIC_H
 
 #include <revolution/types.h>
+
 #include <revolution/os/OSFastCast.h>
 
 namespace nw4r {
@@ -20,6 +21,8 @@ namespace nw4r {
             }
         }
 
+#ifdef TARGET_RVL
+
         inline f32 FSelect(register f32 cond, register f32 ifPos, register f32 ifNeg) {
             register f32 ret;
             #ifdef __MWERKS__
@@ -27,7 +30,7 @@ namespace nw4r {
             #endif // __MWERKS__
             return ret;
         }
-        
+
         inline f32 FAbs(register f32 x) {
             register f32 ret;
             #ifdef __MWERKS__
@@ -35,6 +38,11 @@ namespace nw4r {
             #endif // __MWERKS__
             return ret;
         }
+
+#else
+        inline f32 FAbs(f32 x) {}
+        inline f32 FSelect(f32 cond, f32 ifPos, f32 ifNeg) {}
+#endif // TARGET_RVL
         
         f32 FrSqrt(f32 x);
         u32 CntBit1(u32 x);

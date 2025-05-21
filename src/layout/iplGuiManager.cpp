@@ -3,7 +3,7 @@
 #include "iplMath.h"
 
 #include "system/iplController.h"
-#include "system/iplSystem.h"
+#include "iplSystem.h"
 
 namespace ipl {
     namespace gui {

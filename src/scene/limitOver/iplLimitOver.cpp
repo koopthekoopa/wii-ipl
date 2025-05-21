@@ -1,7 +1,10 @@
 #include "scene/limitOver/iplLimitOver.h"
 
-#include "utility/iplWpad.h"
-#include "utility/iplESMisc.h"
+#include "iplScene.h"
+
+#include "iplUtility.h"
+
+#include "iplSystem.h"
 
 #include "config.h"
 

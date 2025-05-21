@@ -56,6 +56,7 @@ namespace nw4r {
             private:
                 InflationLRTB   mContentInflation;  // 0x0D4
                 Content         mContent;           // 0x0E4
+
                 Frame*          mFrames;            // 0x0FC
                 u8              mFrameNum;          // 0x100
         };

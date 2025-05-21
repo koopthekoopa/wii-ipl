@@ -67,7 +67,7 @@ namespace nw4r {
         Group* GroupContainer::FindGroupByName(const char* findName) {
             for (GroupList::Iterator it = mGroupList.GetBeginIter(); it != mGroupList.GetEndIter(); it++) {
                 if (detail::EqualsPaneName(it->GetName(), findName)) {
-                    return &*it;
+                    return &(*it);
                 }
             }
 

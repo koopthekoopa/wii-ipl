@@ -24,7 +24,7 @@ void        IPCSetBufferLo(void* lo);
 
 void        IPCiProfInit();
 
-void        IPCiProfQueueReq(void *req, s32 fd);
+void        IPCiProfQueueReq(void* req, s32 fd);
 
 void        IPCiProfAck();
 

@@ -1,6 +1,6 @@
 #include "system/iplNigaoeManager.h"
 
-#include "system/iplSystem.h"
+#include "iplSystem.h"
 #include "system/iplNwc24Manager.h"
 
 #include "scene/setting/iplNCDSetting.h"

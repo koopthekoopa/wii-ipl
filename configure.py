@@ -26,6 +26,8 @@ from tools.project import (
     is_windows,
 )
 
+TARGET_RVL = 1
+
 VERSION_CONFIG = 0
 VERSION_ARGUMENT = 1
 VERSION_CONTENT = 2
@@ -238,7 +240,7 @@ config.progress_data_fancy_item = "Blocks"
 
 cflags_includes = [
     "-i include",
-    "-i include/decomp",
+    "-i include/global",
     "-i libs/MetroTRK/include",
     "-i libs/Runtime/include",
     "-i libs/MSL/include",
@@ -280,8 +282,16 @@ if args.debug:
 else:
     cflags_base.append("-DNDEBUG=1")
 
+
+# Wii Build
+if TARGET_RVL:
+    cflags_base.append("-DTARGET_RVL")
+
+
+# For non matching build
 if args.non_matching:
     cflags_base.append("-DNON_MATCHING")
+
 
 # Main IPL flags
 cflags_ipl = [

@@ -1,9 +1,10 @@
-#ifndef DECOMP_SHUT_UP_IDE_H
-#define DECOMP_SHUT_UP_IDE_H
+#ifndef GLOBAL_HEADERS_DECOMP_SHUT_UP_IDE_H
+#define DGLOBAL_HEADERS_ECOMP_SHUT_UP_IDE_H
 
 #ifndef __MWERKS__
 
 #define asm
+#define register
 #define __attribute__(x)
 #define __declspec(x)
 
@@ -16,4 +17,4 @@ extern int          __abs(int n);
 
 #endif
 
-#endif // DECOMP_SHUT_UP_IDE_H
+#endif // GLOBAL_HEADERS_DECOMP_SHUT_UP_IDE_H

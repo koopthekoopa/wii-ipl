@@ -1,6 +1,6 @@
 #include "utility/iplCapture.h"
 
-#include "system/iplSystem.h"
+#include "iplSystem.h"
 
 namespace ipl {
     namespace utility {

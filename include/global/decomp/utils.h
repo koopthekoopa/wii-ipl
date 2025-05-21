@@ -1,5 +1,5 @@
-#ifndef DECOMP_UTILS_H
-#define DECOMP_UTILS_H
+#ifndef GLOBAL_HEADERS_DECOMP_UTILS_H
+#define GLOBAL_HEADERS_DECOMP_UTILS_H
 
 #define __CONCAT(x, y)          x##y
 #define   CONCAT(x, y)          __CONCAT(x, y)
@@ -36,4 +36,4 @@
     }
 
 
-#endif // DECOMP_UTILS_H
+#endif // GLOBAL_HEADERS_DECOMP_UTILS_H

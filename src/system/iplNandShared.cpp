@@ -1,7 +1,7 @@
 #include "system/iplNandShared.h"
 
-#include "system/iplSystem.h"
-#include "utility/iplESMisc.h"
+#include "iplSystem.h"
+#include "iplUtility.h"
 
 #include <cstring>
 

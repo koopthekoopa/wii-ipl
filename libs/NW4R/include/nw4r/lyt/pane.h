@@ -27,7 +27,7 @@ namespace nw4r {
                     ut::LinkListNode mLink;
             };
         }
-        typedef ut::LinkList<Pane, 4> PaneList;
+        typedef ut::LinkList<Pane, 4 /*mLink*/> PaneList;
 
         enum {
             ANIMOPTION_SKIP_INVISIBLE = (1 << 0),

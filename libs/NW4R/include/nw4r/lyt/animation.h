@@ -13,7 +13,7 @@ namespace nw4r {
         class Material;
 
         enum {
-            ANIMTARGET_PANE_TRANSX,
+            ANIMTARGET_PANE_TRANSX = 0,
             ANIMTARGET_PANE_TRANSY,
             ANIMTARGET_PANE_TRANSZ,
         
@@ -34,7 +34,7 @@ namespace nw4r {
         };
 
         enum {
-            ANIMTARGET_VERTEXCOLOR_LT_RED,
+            ANIMTARGET_VERTEXCOLOR_LT_RED = 0,
             ANIMTARGET_VERTEXCOLOR_LT_GREEN,
             ANIMTARGET_VERTEXCOLOR_LT_BLUE,
             ANIMTARGET_VERTEXCOLOR_LT_ALPHA,
@@ -58,7 +58,7 @@ namespace nw4r {
         };
 
         enum {
-            ANIMTARGET_MATCOLOR_MATR,
+            ANIMTARGET_MATCOLOR_MATR = 0,
             ANIMTARGET_MATCOLOR_MATG,
             ANIMTARGET_MATCOLOR_MATB,
             ANIMTARGET_MATCOLOR_MATA,
@@ -102,7 +102,7 @@ namespace nw4r {
         };
 
         enum {
-            ANIMTARGET_TEXSRT_TRANSX,
+            ANIMTARGET_TEXSRT_TRANSX = 0,
             ANIMTARGET_TEXSRT_TRANSY,
         
             ANIMTARGET_TEXSRT_ROT,
@@ -114,7 +114,7 @@ namespace nw4r {
         };
 
         enum {
-            ANIMTARGET_TEXPATTURN_IMAGE,
+            ANIMTARGET_TEXPATTURN_IMAGE = 0,
         
             ANIMTARGET_TEXPATTURN_MAX
         };
@@ -153,7 +153,7 @@ namespace nw4r {
                 const res::AnimationBlock*  mpRes;  // 0x0C
                 f32                         mFrame; // 0x10
         };
-        typedef ut::LinkList<AnimTransform, 4> AnimTransformList;
+        typedef ut::LinkList<AnimTransform, 4 /*mLink*/> AnimTransformList;
         
         class AnimationLink {
             public:
@@ -179,7 +179,7 @@ namespace nw4r {
                 u16             mIdx;       // 0x0C
                 bool            mbDisable;  // 0x0E
         };
-        typedef ut::LinkList<AnimationLink, 0> AnimationLinkList;
+        typedef ut::LinkList<AnimationLink, 0 /*mLink*/> AnimationLinkList;
 
         class AnimTransformBasic : public AnimTransform {
             public:

@@ -10,7 +10,7 @@ typedef s32 IOSHeapId;
 
 #define IOS_REQUEST_MAX 48
 
-typedef IOSError (*IOSIpcCb)(IOSError ret, void *context);
+typedef IOSError (*IOSIpcCb)(IOSError, void*);
 
 typedef struct IOSIoVector {
     u8 *base;   // 0x00

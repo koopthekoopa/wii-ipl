@@ -55,7 +55,7 @@ namespace {
             pTextBox->SetTagProcessor(pTagProcessor);
         }
         for (PaneList::Iterator it = pPane->GetChildList().GetBeginIter(); it != pPane->GetChildList().GetEndIter(); it++) {
-            SetTagProcessorImpl(&*it, pTagProcessor);
+            SetTagProcessorImpl(&(*it), pTagProcessor);
         }
     }
 }

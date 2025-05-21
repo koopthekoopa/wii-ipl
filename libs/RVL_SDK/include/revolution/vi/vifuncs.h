@@ -20,7 +20,7 @@ VIRetraceCallback VISetPreRetraceCallback(VIRetraceCallback cb);
 VIRetraceCallback VISetPostRetraceCallback(VIRetraceCallback cb);
 
 void    VIFlush();
-void    VISetNextFrameBuffer(void *fb);
+void    VISetNextFrameBuffer(void* fb);
 
 void    VISetBlack(BOOL setBlack);
 

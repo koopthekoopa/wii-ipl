@@ -4,7 +4,6 @@
 #include <revolution/types.h>
 
 #include <nw4r/ut/Rect.h>
-#include <nw4r/ut/TextWriterBase.h>
 
 namespace nw4r {
     namespace ut {
@@ -17,6 +16,8 @@ namespace nw4r {
 
             NUM_OF_OPERATION
         } Operation;
+
+        template<typename> class TextWriterBase;
 
         template<typename T> struct PrintContext {
             TextWriterBase<T>*  writer;     // 0x00

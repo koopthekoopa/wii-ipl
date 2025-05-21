@@ -7,7 +7,7 @@ namespace nw4r {
     namespace lyt {
         class Bounding : public Pane {
             public:
-                Bounding(const res::Bounding *pBlock, const ResBlockSet& resBlockSet);
+                Bounding(const res::Bounding* pBlock, const ResBlockSet& resBlockSet);
                 virtual ~Bounding();
 
                 NW4R_UT_RUNTIME_TYPEINFO;

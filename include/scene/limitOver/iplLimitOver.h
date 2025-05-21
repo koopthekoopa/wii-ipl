@@ -1,7 +1,7 @@
 #ifndef IPL_LIMIT_OVER_H
 #define IPL_LIMIT_OVER_H
 
-#include "scene/iplFaderSceneBase.h"
+#include "iplSceneHeader.h"
 
 namespace ipl {
     namespace scene {

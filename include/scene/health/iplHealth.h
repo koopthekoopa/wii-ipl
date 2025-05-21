@@ -1,7 +1,7 @@
 #ifndef IPL_HEALTH_H
 #define IPL_HEALTH_H
 
-#include "scene/iplFaderSceneBase.h"
+#include "iplSceneHeader.h"
 
 namespace ipl {
     namespace scene {
@@ -48,5 +48,3 @@ namespace ipl {
 }
 
 #endif // IPL_HEALTH_H
-
-

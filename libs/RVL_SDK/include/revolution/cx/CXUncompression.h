@@ -7,13 +7,11 @@ extern "C" {
 
 #include <revolution/types.h>
 
-u32     CXGetUncompressedSize(const void *srcp);
-void    CXUncompressLZ(const void *src, void *dest);
+u32     CXGetUncompressedSize(const void* srcp);
+void    CXUncompressLZ(const void* src, void* dest);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif // REVOLUTION_CX_UNCOMPRESS_H
-
-

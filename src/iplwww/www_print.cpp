@@ -35,5 +35,3 @@ namespace ext_ead {
         }
     }
 }
-
-

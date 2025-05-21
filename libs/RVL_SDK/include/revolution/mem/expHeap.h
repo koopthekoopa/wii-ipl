@@ -20,9 +20,9 @@ struct MEMiExpHeapMBlockHead {
     union {
         u16 attr;
         struct {
-            u16 allocDir    : 1;    // 00
-            u16 alignment   : 7;    // 01
-            u16 groupID     : 8;    // 08
+            u16 allocDir    : 1;    // 1000000000000000
+            u16 alignment   : 7;    // 0111111100000000
+            u16 groupID     : 8;    // 0000000011111111
         } fields;
     } attribute;                    // 0x02
 

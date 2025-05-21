@@ -193,7 +193,7 @@ namespace nw4r {
 
         class TevSwapMode {
             public:
-                GXTevColorChan GetR() const { return static_cast<GXTevColorChan>(swap & 0x03); }
+                GXTevColorChan GetR() const { return static_cast<GXTevColorChan>((swap)      & 0x03); }
                 GXTevColorChan GetG() const { return static_cast<GXTevColorChan>((swap >> 2) & 0x03); }
                 GXTevColorChan GetB() const { return static_cast<GXTevColorChan>((swap >> 4) & 0x03); }
                 GXTevColorChan GetA() const { return static_cast<GXTevColorChan>((swap >> 6) & 0x03); }
@@ -209,14 +209,14 @@ namespace nw4r {
         class TevStageInOp {
             public:
 
-                u8      GetA() const        { return ab & 0x0F; }
+                u8      GetA() const        { return  ab & 0x0F; }
                 u8      GetB() const        { return (ab >> 4) & 0x0F; }
-                u8      GetC() const        { return cd & 0x0F; }
+                u8      GetC() const        { return  cd & 0x0F; }
                 u8      GetD() const        { return (cd >> 4) & 0x0F; }
 
                 u8      GetScale() const    { return (op >> 6) & 0x03; }
                 u8      GetBias() const     { return (op >> 4) & 0x03; }
-                u8      GetOp() const       { return op & 0x0F; }
+                u8      GetOp() const       { return  op & 0x0F; }
 
                 u8      GetKSel() const     { return (cl >> 3) & 0x1F; }
                 u8      GetOutReg() const   { return (cl >> 1) & 0x03; }

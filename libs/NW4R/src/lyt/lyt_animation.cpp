@@ -110,7 +110,7 @@ namespace {
         for (int i = 0; i < pAnimInfo->num; i++) {
             const res::AnimationTarget* pAnimTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(pAnimInfo, animTargetOffsets[i]);
 
-            NW4R_ASSERT(pAnimTarget->target < 10);
+            NW4R_ASSERT(pAnimTarget->target < ANIMTARGET_PANE_MAX);
 
             const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(pAnimTarget,
                                                                                     pAnimTarget->keysOffset);
@@ -125,7 +125,7 @@ namespace {
             const res::AnimationTarget* pAnimTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(pAnimInfo,
                                                                                                     animTargetOffsets[i]);
 
-            NW4R_ASSERT(pAnimTarget->target < 10);
+            NW4R_ASSERT(pAnimTarget->target < ANIMTARGET_PANE_MAX);
 
             const res::StepKey* keys = detail::ConvertOffsToPtr<res::StepKey>(pAnimTarget,
                                                                             pAnimTarget->keysOffset);
@@ -142,7 +142,7 @@ namespace {
             const res::AnimationTarget* pAnimTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(pAnimInfo,
                                                                                                     animTargetOffsets[i]);
 
-            NW4R_ASSERT(pAnimTarget->target < 16+1);
+            NW4R_ASSERT(pAnimTarget->target < ANIMTARGET_PANE_COLOR_MAX);
 
             const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(pAnimTarget,
                                                                                     pAnimTarget->keysOffset);
@@ -163,7 +163,7 @@ namespace {
             const res::AnimationTarget* pAnimTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(pAnimInfo,
                                                                                                     animTargetOffsets[i]);
 
-            NW4R_ASSERT(pAnimTarget->target < 32);
+            NW4R_ASSERT(pAnimTarget->target < ANIMTARGET_MATCOLOR_MAX);
 
             const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(pAnimTarget,
                                                                                     pAnimTarget->keysOffset);
@@ -186,7 +186,7 @@ namespace {
                                                                                                     animTargetOffsets[i]);
 
             if (pAnimTarget->id < pMaterial->GetTexSRTCap()) {
-                NW4R_ASSERT(pAnimTarget->target < 5);
+                NW4R_ASSERT(pAnimTarget->target < ANIMTARGET_TEXSRT_MAX);
 
                 const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(pAnimTarget,
                                                                                         pAnimTarget->keysOffset);
@@ -224,7 +224,7 @@ namespace {
                                                                                                     animTargetOffsets[i]);
 
             if (pAnimTarget->id < pMaterial->GetIndTexSRTCap()) {
-                NW4R_ASSERT(pAnimTarget->target < 5);
+                NW4R_ASSERT(pAnimTarget->target < ANIMTARGET_TEXSRT_MAX);
 
                 const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(pAnimTarget,
                                                                                         pAnimTarget->keysOffset);
@@ -406,7 +406,7 @@ namespace nw4r {
         AnimationLink* detail::FindAnimationLink(AnimationLinkList* pAnimList, AnimTransform* pAnimTrans) {
             for (AnimationLinkList::Iterator it = pAnimList->GetBeginIter(); it != pAnimList->GetEndIter(); it++) {
                 if (pAnimTrans == it->GetAnimTransform()) {
-                    return &*it;
+                    return &(*it);
                 }
             }
             return NULL;

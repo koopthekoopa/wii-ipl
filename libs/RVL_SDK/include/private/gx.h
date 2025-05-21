@@ -158,53 +158,56 @@ typedef struct __GXLightObjInt_struct {
 } __GXLightObjInt;
 
 typedef struct TEVCOpTable {
-    u32 rid : 8;
-    u32 dest : 2;
-    u32 shift : 2;
-    u32 clamp : 1;
-    u32 sub : 1;
-    u32 bias : 2;
-    u32 sela : 4;
-    u32 selb : 4;
-    u32 selc : 4;
-    u32 seld : 4;
+    u32 rid     : 8;
+    u32 dest    : 2;
+    u32 shift   : 2;
+    u32 clamp   : 1;
+    u32 sub     : 1;
+    u32 bias    : 2;
+    u32 sela    : 4;
+    u32 selb    : 4;
+    u32 selc    : 4;
+    u32 seld    : 4;
 } TEVCOpTable;
 
 typedef struct TEVAOpTable {
-    u32 rid : 8;
-    u32 dest : 2;
-    u32 shift : 2;
-    u32 clamp : 1;
-    u32 sub : 1;
-    u32 bias : 2;
-    u32 sela : 3;
-    u32 selb : 3;
-    u32 selc : 3;
-    u32 seld : 3;
-    u32 swap : 2;
-    u32 mode : 2;
+    u32 rid     : 8;
+    u32 dest    : 2;
+    u32 shift   : 2;
+    u32 clamp   : 1;
+    u32 sub     : 1;
+    u32 bias    : 2;
+    u32 sela    : 3;
+    u32 selb    : 3;
+    u32 selc    : 3;
+    u32 seld    : 3;
+    u32 swap    : 2;
+    u32 mode    : 2;
 } TEVAOpTable;
 
 typedef struct __GXTexObjInt_struct {
-    u32 mode0;
-    u32 mode1;
-    u32 image0;
-    u32 image3;
-    void* userData;
-    GXTexFmt fmt;
-    u32 tlutName;
-    u16 loadCnt;
-    u8 loadFmt;
-    u8 flags;
+    u32         mode0, mode1;
+    u32         image0, image1;
+
+    void*       userData;
+
+    GXTexFmt    fmt;
+    u32         tlutName;
+
+    u16         loadCnt;
+    u8          loadFmt;
+
+    u8          flags;
 } __GXTexObjInt;
 
 typedef struct __GXTexRegionInt_struct {
-    u32 image1;
-    u32 image2;
+    u32 image1, image2;
+
     u16 sizeEven;
     u16 sizeOdd;
-    u8 is32bMipmap;
-    u8 isCached;
+
+    u8  is32bMipmap;
+    u8  isCached;
 } __GXTexRegionInt;
 
 typedef struct __GXTlutObjInt_struct {
@@ -214,8 +217,8 @@ typedef struct __GXTlutObjInt_struct {
 } __GXTlutObjInt;
 
 typedef struct __GXTlutRegionInt_struct {
-    u32 loadTlut1;
-    __GXTlutObjInt tlutObj;
+    u32             loadTlut1;
+    __GXTlutObjInt  tlutObj;
 } __GXTlutRegionInt;
 
 // Private functions

@@ -1,14 +1,9 @@
 #ifndef IPL_BASE_SCENE_H
 #define IPL_BASE_SCENE_H
 
+#include <egg/core.h>
+
 #include "utility/iplTree.h"
-
-#include "layout/iplLayout.h"
-#include "layout/GUIManager.h"
-
-#include "sound/iplSound.h"
-
-#include "scene/iplSceneManager.h"
 
 #include <revolution.h>
 #include <revolution/kpad.h>
@@ -21,6 +16,35 @@
 
 namespace ipl {
     namespace scene {
+        class Base;
+        enum {
+            COMMAND_NONE = 0,
+            COMMAND_CREATE_CHILD,
+            COMMAND_RESERVE_CHANGE,
+            COMMAND_RESERVE_ALL_DESTRUCT,
+        };
+
+        typedef struct Command {
+            int     type;           // 0x00
+
+            int     newSceneID;     // 0x04
+            int     prevSceneID;    // 0x08
+            int     newRootID;      // 0x0C
+
+            Base*   parent;         // 0x10
+            Base*   child;          // 0x14
+            
+            void*   args;           // 0x18
+
+            void        clear();
+
+            Command()   { clear(); }
+
+            inline void operator=(const Command& rhs) {
+                /* https://decomp.me/scratch/KrtbJ */
+            }
+        } Command;
+
         class Base : public utility::Tree, EGG::Disposer {
             public:
                 /** @brief If the scene is ready */
@@ -118,7 +142,5 @@ namespace ipl {
         };
     }
 }
-
-#include "system/iplSystem.h"
 
 #endif // IPL_BASE_SCENE_H

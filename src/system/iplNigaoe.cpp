@@ -4,7 +4,7 @@
 
 #include <cstring>
 
-#include "system/iplSystem.h"
+#include "iplSystem.h"
 
 #define GX_RGB5A3_SIZE 2
 

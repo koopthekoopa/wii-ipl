@@ -13,10 +13,10 @@ namespace EGG {
     class Allocator;
     class Heap : Disposer {
         public:
-            enum HeapKind {
+            typedef enum HeapKind {
                 HEAP_EXPANDED = 1,
                 HEAP_FRAME = 2
-            };
+            } HeapKind;
             
             virtual ~Heap();                                                        // 0x08
 
@@ -39,16 +39,16 @@ namespace EGG {
     };
 }
 
-void *operator  new(size_t size);
-void *operator  new(size_t size, int align);
-void *operator  new(size_t size, EGG::Heap *heap, int align);
+void* operator  new(size_t size);
+void* operator  new(size_t size, int align);
+void* operator  new(size_t size, EGG::Heap *heap, int align);
 
-void *operator  new[](size_t size);
-void *operator  new[](size_t size, int align);
-void *operator  new[](size_t size, EGG::Heap *heap, int align);
+void* operator  new[](size_t size);
+void* operator  new[](size_t size, int align);
+void* operator  new[](size_t size, EGG::Heap *heap, int align);
 
-void operator   delete(void *ptr);
-void operator   delete[](void *ptr);
+void operator   delete(void* ptr);
+void operator   delete[](void* ptr);
 
 // errr
 #define BUFFER_HEAP DEFAULT_ALIGN

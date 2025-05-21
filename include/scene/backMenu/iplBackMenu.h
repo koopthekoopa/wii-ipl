@@ -1,7 +1,7 @@
-#ifndef IPL_BACK_MENU_H
-#define IPL_BACK_MENU_H
+#ifndef IPL_SCENE_BACK_MENU_H
+#define IPL_SCENE_BACK_MENU_H
 
-#include "scene/iplFaderSceneBase.h"
+#include "iplSceneHeader.h"
 
 namespace ipl {
     namespace scene {
@@ -35,4 +35,4 @@ namespace ipl {
     }
 }
 
-#endif // IPL_BACK_MENU_H
+#endif // IPL_SCENE_BACK_MENU_H

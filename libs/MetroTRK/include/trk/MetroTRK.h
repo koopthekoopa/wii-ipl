@@ -9,7 +9,7 @@ typedef unsigned char DSBool;
 #define TRUE    1
 #endif // TRUE
 
-typedef enum {
+typedef enum DSError {
     DS_NoError                  = 0x00,
     DS_StepError                = 0x01,
     DS_ParameterError           = 0x02,
@@ -33,20 +33,20 @@ typedef enum {
     DS_Error800                 = 0x800,
 } DSError;
 
-typedef enum {
+typedef enum DSFileHandle {
     DS_Stdin  = 0,
     DS_Stdout = 1,
     DS_Stderr = 2,
 } DSFileHandle;
 
 // IO returns.
-typedef enum {
+typedef enum DSIOResult {
     DS_IONoError = 0,
     DS_IOError   = 1,
     DS_IOEOF     = 2,
 } DSIOResult;
 
-typedef enum {
+typedef enum MessageCommandID {
     DSMSG_Ping              = 0x00,
     DSMSG_Connect           = 0x01,
     DSMSG_Disconnect        = 0x02,

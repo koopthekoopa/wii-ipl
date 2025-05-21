@@ -222,24 +222,24 @@ namespace gui {
                 void* pComBuf   = MEMAllocFromAllocator(mpAllocator, sizeof(PaneComponent));
                 void* pBuf      = MEMAllocFromAllocator(mpAllocator, sizeof(PaneToComponent));
                 pComponent      = new(pComBuf) PaneComponent(suIDCounter);
-                pToComponent    = new(pBuf) PaneToComponent(&*it, pComponent);
+                pToComponent    = new(pBuf) PaneToComponent(&(*it), pComponent);
             }
             else {
                 pComponent      = new PaneComponent(suIDCounter);
-                pToComponent    = new PaneToComponent(&*it, pComponent);
+                pToComponent    = new PaneToComponent(&(*it), pComponent);
             }
 
             // Append it
             nw4r::ut::List_Append(&mPaneComponents, pToComponent);
             suIDCounter++;
 
-            pComponent->setPane(&*it);
+            pComponent->setPane(&(*it));
 
             // Trigger target for pictures panes
-            if (nw4r::ut::DynamicCast<nw4r::lyt::Picture*>(&*it)) {
+            if (nw4r::ut::DynamicCast<nw4r::lyt::Picture*>(&(*it))) {
                 pComponent->setTriggerTarget(true);
             }
-            if (nw4r::ut::DynamicCast<nw4r::lyt::Window*>(&*it)) {
+            if (nw4r::ut::DynamicCast<nw4r::lyt::Window*>(&(*it))) {
                 pComponent->setTriggerTarget(true);
             }
 

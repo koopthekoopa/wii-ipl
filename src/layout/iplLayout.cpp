@@ -1,8 +1,8 @@
 #include "layout/iplLayout.h"
 
-#include "utility/iplGraphics.h"
+#include "iplUtility.h"
 
-#include "system/iplSystem.h"
+#include "iplSystem.h"
 
 #include <revolution/sc.h>
 

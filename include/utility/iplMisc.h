@@ -1,12 +1,10 @@
-#ifndef IPL_UTILITY_H
-#define IPL_UTILITY_H
+#ifndef IPL_UTILITY_MISC_H
+#define IPL_UTILITY_MISC_H
 
 #include <decomp.h>
 
 #include <revolution.h>
 #include <revolution/wpad.h>
-
-#include <private/bus.h>
 
 #include "iplMath.h"
 
@@ -34,4 +32,4 @@ namespace ipl {
     }
 }
 
-#endif // IPL_UTILITY_H
+#endif // IPL_UTILITY_MISC_H

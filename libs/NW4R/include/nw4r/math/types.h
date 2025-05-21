@@ -6,7 +6,7 @@
 
 namespace nw4r {
     namespace math {
-        struct _MTX33 {
+        typedef struct _MTX33 {
             union {
                 struct {
                     f32 _00, _01, _02;
@@ -16,12 +16,12 @@ namespace nw4r {
                 f32 m[3][3];
                 f32 a[3 * 3];
             };
-        };
+        } _MTX33;
 
         typedef struct MTX33 : public _MTX33 {
         } MTX33;
 
-        struct _MTX34 {
+        typedef struct _MTX34 {
             union {
                 struct {
                     f32 _00, _01, _02, _03;
@@ -33,7 +33,7 @@ namespace nw4r {
                 f32 a[3 * 4];
                 Mtx mtx;
             };
-        };
+        } _MTX34;
 
         typedef struct MTX34 : public _MTX34 {
             MTX34() {}
@@ -41,14 +41,14 @@ namespace nw4r {
             MTX34(const f32*);
             MTX34(const Mtx& rhs);
 
-            operator f32*()                 { return& _00; }
-            operator const f32*() const     { return& _00; }
+            operator f32*()                 { return &_00; }
+            operator const f32*() const     { return &_00; }
 
             operator MtxPtr()               { return (MtxPtr)&_00; }
             operator const MtxPtr() const   { return (const MtxPtr)&_00; }
         } MTX34;
 
-        struct _MTX44 {
+        typedef struct _MTX44 {
             union {
                 struct {
                     f32 _00, _01, _02, _03;
@@ -60,7 +60,7 @@ namespace nw4r {
                 f32 a[4 * 4];
                 Mtx44 mtx;
             };
-        };
+        } _MTX44;
 
         typedef struct MTX44 : public _MTX44 {
             MTX44() {}
@@ -68,19 +68,18 @@ namespace nw4r {
             MTX44(const f32*);
             MTX44(const Mtx44& rhs);
 
-            operator f32*()                 { return& _00; }
-            operator const f32*() const     { return& _00; }
+            operator f32*()                 { return &_00; }
+            operator const f32*() const     { return &_00; }
 
             operator MtxPtr()               { return (MtxPtr)&_00; }
             operator const MtxPtr() const   { return (const MtxPtr)&_00; }
         } MTX44;
 
-        void MTX44Identity(MTX44 *pMtx);
+        void MTX44Identity(MTX44* pMtx);
         
-        struct _VEC2 {
-            f32 x;
-            f32 y;
-        };
+        typedef struct _VEC2 {
+            f32 x, y;
+        } _VEC2;
         
         typedef struct VEC2 : public _VEC2 {
             VEC2()                      {}
@@ -117,11 +116,9 @@ namespace nw4r {
             }
         } VEC2;
 
-        struct _VEC3 {
-            f32 x;
-            f32 y;
-            f32 z;
-        };
+        typedef struct _VEC3 {
+            f32 x, y, z;
+        } _VEC3;
         
         typedef struct VEC3 : public _VEC3 {
             VEC3()                          {}
@@ -135,12 +132,10 @@ namespace nw4r {
             VEC3& operator+=(const VEC3& rhs);
         } VEC3;
 
-        struct _VEC4 {
-            f32 x;
-            f32 y;
-            f32 z;
+        typedef struct _VEC4 {
+            f32 x, y, z;
             f32 w;
-        };
+        } _VEC4;
 
         typedef struct VEC4 : public _VEC4 {
             VEC4()                                  {}
@@ -160,7 +155,7 @@ namespace nw4r {
             return pOut;
         }
 
-        inline MTX34* MTX34Mult(MTX34* pOut, const MTX34 *p1, const MTX34 *p2) {
+        inline MTX34* MTX34Mult(MTX34* pOut, const MTX34* p1, const MTX34* p2) {
             PSMTXConcat(*p1, *p2, *pOut);
             return pOut;
         }

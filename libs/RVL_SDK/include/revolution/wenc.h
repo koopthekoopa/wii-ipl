@@ -7,9 +7,9 @@
 extern "C" {
 #endif
 
-typedef enum {
+enum {
     WENC_FLAG_USER_INFO = (1 << 0),
-} WENCFlag;
+};
 
 typedef struct WENCInfo {
     s32 xn;         // 0x00

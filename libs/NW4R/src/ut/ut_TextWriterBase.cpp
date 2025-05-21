@@ -74,7 +74,7 @@ namespace nw4r {
         }
 
         template<typename T> TagProcessorBase<T>& TextWriterBase<T>::GetTagProcessor() const {
-            return* mTagProcessor;
+            return *mTagProcessor;
         }
 
         template<typename T> f32 TextWriterBase<T>::CalcFormatStringWidth(const T* format, ...) const {

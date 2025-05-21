@@ -54,35 +54,35 @@ namespace nw4r {
         } FontTextureGlyph;
 
         typedef struct FontCodeMap {
-            u16         ccodeBegin;     // 0x00
-            u16         ccodeEnd;       // 0x02
+            u16             ccodeBegin;     // 0x00
+            u16             ccodeEnd;       // 0x02
 
-            u16         mappingMethod;  // 0x04
+            u16             mappingMethod;  // 0x04
 
-            u16         reserved;       // 0x06
+            u16             reserved;       // 0x06
 
             FontCodeMap*    pNext;          // 0x08
 
-            u16         mapInfo[];      // 0x0C
+            u16             mapInfo[];      // 0x0C
         } FontCodeMap;
 
         typedef struct FontInformation {
-            u8              fontType;       // 0x00
-            s8              linefeed;       // 0x01
+            u8                  fontType;       // 0x00
+            s8                  linefeed;       // 0x01
 
-            u16             alterCharIndex; // 0x02
+            u16                 alterCharIndex; // 0x02
 
             CharWidths          defaultWidth;   // 0x04
-            u8              encoding;       // 0x07
+            u8                  encoding;       // 0x07
 
             FontTextureGlyph*   pGlyph;         // 0x08
             FontWidth*          pWidth;         // 0x0C
             FontCodeMap*        pMap;           // 0x10
 
-            u8              height;         // 0x14
-            u8              width;          // 0x15
-            u8              ascent;         // 0x16
-            u8              padding_[1];    // 0x17
+            u8                  height;         // 0x14
+            u8                  width;          // 0x15
+            u8                  ascent;         // 0x16
+            u8                  padding_[1];    // 0x17
         } FontInformation;
     }
 }

@@ -1,4 +1,5 @@
 #include <nw4r/ut/TagProcessorBase.h>
+#include <nw4r/ut/TextWriterBase.h>
 
 #include <nw4r/ut/TagProcessor.h>
 #include <nw4r/ut/WideTagProcessor.h>

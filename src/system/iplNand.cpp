@@ -3,10 +3,10 @@
 #include "config.h"
 
 #include "system/rvl_dec.h"
-#include "system/iplSystem.h"
+#include "iplSystem.h"
 #include "system/iplNandManager.h"
 
-#include "utility/iplUtility.h"
+#include "iplUtility.h"
 
 #include <revolution/cx.h>
 #include <private/es.h>

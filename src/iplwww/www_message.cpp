@@ -19,5 +19,3 @@ namespace ext_ead {
         }
     }
 }
-
-

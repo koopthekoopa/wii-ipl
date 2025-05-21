@@ -17,17 +17,17 @@ namespace nw4r {
 
         namespace detail {
             struct BitGXNums {
-                u32 texMap      : 4;
-                u32 texSRT      : 4;
-                u32 texCoordGen : 4;
-                u32 indSRT      : 2;
-                u32 indStage    : 3;
-                u32 tevSwap     : 1;
-                u32 tevStage    : 5;
-                u32 chanCtrl    : 1;
-                u32 matCol      : 1;
-                u32 alpComp     : 1;
-                u32 blendMode   : 1;
+                u32 texMap      : 4;    // 11110000000000000000000000000000
+                u32 texSRT      : 4;    // 00001111000000000000000000000000
+                u32 texCoordGen : 4;    // 00000000111100000000000000000000
+                u32 indSRT      : 2;    // 00000000000011000000000000000000
+                u32 indStage    : 3;    // 00000000000000111000000000000000
+                u32 tevSwap     : 1;    // 00000000000000000100000000000000
+                u32 tevStage    : 5;    // 00000000000000000011111000000000
+                u32 chanCtrl    : 1;    // 00000000000000000000000100000000
+                u32 matCol      : 1;    // 00000000000000000000000010000000
+                u32 alpComp     : 1;    // 00000000000000000000000001000000
+                u32 blendMode   : 1;    // 00000000000000000000000000100000
             };
             Size GetTextureSize(Material* pMaterial, u8 texMapIdx);
         }

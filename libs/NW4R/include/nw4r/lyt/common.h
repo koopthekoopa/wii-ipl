@@ -23,17 +23,17 @@ namespace nw4r {
                     u8                  GetSize() const     { return mNum; }
                     const TexCoords*    GetArray() const    { return mpData; }
 
-                    void            SetSize(u8 num);
+                    void                SetSize(u8 num);
 
-                    bool            IsEmpty() const         { return mCap == 0; }
+                    bool                IsEmpty() const     { return mCap == 0; }
 
-                    void            Reserve(u8 num);
+                    void                Reserve(u8 num);
 
-                    void            Free();
-                    void            Copy(const void* pResTexCoord, u8 texCoordNum);
+                    void                Free();
+                    void                Copy(const void* pResTexCoord, u8 texCoordNum);
 
-                    void            SetCoord(u32 idx, const math::VEC2* vec);
-                    void            GetCoord(u32 idx, math::VEC2* vec) const;
+                    void                SetCoord(u32 idx, const math::VEC2* vec);
+                    void                GetCoord(u32 idx, math::VEC2* vec) const;
 
                 private:
                     u8          mCap;   // 0x00
@@ -62,15 +62,15 @@ namespace nw4r {
 
             void        InitGXTexObjFromTPL(GXTexObj* to, TPLPalette* pal, u32 id);
 
-            inline long GetSignatureInt(const char* sig) {
-                return* reinterpret_cast<const long*>(sig);
+            inline s32 GetSignatureInt(const char* sig) {
+                return *reinterpret_cast<const s32*>(sig);
             }
 
             inline const char* GetStrTableStr(const void* pStrTable, int index) {
                 const u32* offsets = static_cast<const u32*>(pStrTable);
                 const char* stringPool = static_cast<const char*>(pStrTable);
 
-                return& stringPool[offsets[index]];
+                return &stringPool[offsets[index]];
             }
 
             inline u8 GetVtxColorElement(const ut::Color* cols, u32 idx) {

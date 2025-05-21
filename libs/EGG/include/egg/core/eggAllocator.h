@@ -14,7 +14,7 @@ namespace EGG {
             virtual void* alloc(u32 size);
             virtual void free(void* buffer);
 
-            operator MEMAllocator*() { return this; }
+            operator MEMAllocator*()    { return this; }
     };
 }
 

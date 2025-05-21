@@ -1,4 +1,4 @@
-#include <decomp_ide.h>
+#include <decomp.h>
 #include <size_t.h>
 
 #pragma section code_type ".init"

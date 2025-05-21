@@ -1,7 +1,7 @@
-#ifndef IPL_CAHNNEL_SELECT_H
-#define IPL_CAHNNEL_SELECT_H
+#ifndef IPL_SCENE_CAHNNEL_SELECT_H
+#define IPL_SCENE_CAHNNEL_SELECT_H
 
-#include "scene/iplFaderSceneBase.h"
+#include "iplSceneHeader.h"
 
 namespace ipl {
     namespace scene {
@@ -17,6 +17,4 @@ namespace ipl {
     }
 }
 
-#endif // IPL_CAHNNEL_SELECT_H
-
-
+#endif // IPL_SCENE_CAHNNEL_SELECT_H

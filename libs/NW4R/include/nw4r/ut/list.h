@@ -5,12 +5,12 @@
 
 namespace nw4r {
     namespace ut {
-        typedef struct {
+        typedef struct Link {
             void*   prevObject; // 0x00
             void*   nextObject; // 0x04
         } Link;
         
-        typedef struct {
+        typedef struct List {
             void*   headObject; // 0x00
             void*   tailObject; // 0x04
             u16     numObjects; // 0x08

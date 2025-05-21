@@ -1,6 +1,6 @@
 #include "system/iplNandWall.h"
 
-#include "system/iplSystem.h"
+#include "iplSystem.h"
 #include "system/iplNandWrapper.h"
 
 #include <cstring>

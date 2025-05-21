@@ -1,9 +1,9 @@
 #include "system/iplNandMeta.h"
 
-#include "system/iplSystem.h"
+#include "iplSystem.h"
 #include "system/iplNandWrapper.h"
 
-#include "utility/iplESMisc.h"
+#include "iplUtility.h"
 
 #include <cstring>
 

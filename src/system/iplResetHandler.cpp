@@ -4,7 +4,7 @@
 
 #include <revolution.h>
 
-#include "system/iplSystem.h"
+#include "iplSystem.h"
 #include "system/iplTVRCManager.h"
 
 namespace ipl {

@@ -1,11 +1,13 @@
 #include "system/iplBS2Manager.h"
 
+#include "iplSystem.h"
+
+#include "iplSound.h"
+
 #include <revolution/os/OSBootInfo.h>
 #include <private/os.h>
 
 #include <revolution/wpad.h>
-
-#include "system/iplSystem.h"
 
 #define MAX_ENTRIES 34
 

@@ -1,11 +1,12 @@
+#include "system/iplDialogWindow.h"
+
+#include "iplSystem.h"
+
 #include <revolution/gx.h>
 #include <nw4r/lyt.h>
 
-#include "system/iplDialogWindow.h"
-
-#include "system/iplSystem.h"
-
-#include "layout/iplGuiManager.h"
+#include "iplLayoutUI.h"
+#include "iplSound.h"
 
 #include <cstring>
 
@@ -392,7 +393,7 @@ namespace ipl {
         // Sets the alpha for the pane and it's children
         for (nw4r::lyt::PaneList::Iterator it = pane->GetChildList().GetBeginIter(); it != pane->GetChildList().GetEndIter(); it++) {
             it->SetAlpha(alpha);
-            set_alpha(&*it, alpha);
+            set_alpha(&(*it), alpha);
         }
     }
 

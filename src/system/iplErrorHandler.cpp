@@ -7,7 +7,7 @@
 #include <cstring>
 
 #include "system/rvl_dec.h"
-#include "system/iplSystem.h"
+#include "iplSystem.h"
 
 /** These declarations are auto generated **/
 

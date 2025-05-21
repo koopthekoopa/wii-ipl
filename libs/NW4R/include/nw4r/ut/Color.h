@@ -7,20 +7,20 @@
 namespace nw4r {
     namespace ut {
         typedef struct Color : public GXColor {
-            static const u32 RED   = 0xFF0000FF;
-            static const u32 GREEN = 0x00FF00FF;
-            static const u32 BLUE  = 0x0000FFFF;
+            static const u32 RED        = 0xFF0000FF;
+            static const u32 GREEN      = 0x00FF00FF;
+            static const u32 BLUE       = 0x0000FFFF;
 
-            static const u32 CYAN    = 0x00FFFFFF;
-            static const u32 MAGENTA = 0xFF00FFFF;
-            static const u32 YELLOW  = 0xFFFF00FF;
+            static const u32 CYAN       = 0x00FFFFFF;
+            static const u32 MAGENTA    = 0xFF00FFFF;
+            static const u32 YELLOW     = 0xFFFF00FF;
 
-            static const u32 BLACK = 0x000000FF;
-            static const u32 GRAY  = 0x808080FF;
-            static const u32 WHITE = 0xFFFFFFFF;
+            static const u32 BLACK      = 0x000000FF;
+            static const u32 GRAY       = 0x808080FF;
+            static const u32 WHITE      = 0xFFFFFFFF;
 
-            static const u32 NOCOLOR = 0x00000000;
-            static const u32 MAXCOLOR = 0xFFFFFFFF;
+            static const u32 NOCOLOR    = 0x00000000;
+            static const u32 MAXCOLOR   = 0xFFFFFFFF;
 
             // Constructor
 
@@ -37,10 +37,10 @@ namespace nw4r {
 
             Color&      operator=(u32 color)            { ToU32ref() = color; return *this; }
 
-            Color&      operator=(const GXColor& color) { return *this = *reinterpret_cast<const u32 *>(&color); }
+            Color&      operator=(const GXColor& color) { return *this = *reinterpret_cast<const u32*>(&color); }
 
             Color       operator|(u32 color) const      { return Color(ToU32() | color); }
-            Color       operator&(u32 color) const      { return Color(ToU32()&  color);}
+            Color       operator&(u32 color) const      { return Color(ToU32() & color);}
 
             u32&        ToU32ref()                      { return *reinterpret_cast<u32*>(this); }
             const u32&  ToU32ref() const                { return *reinterpret_cast<const u32*>(this); }

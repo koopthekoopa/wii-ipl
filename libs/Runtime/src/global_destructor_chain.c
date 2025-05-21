@@ -1,4 +1,4 @@
-#include <decomp_ide.h>
+#include <decomp.h>
 #include <NMWException.h>
 
 DestructorChain*    __global_destructor_chain;

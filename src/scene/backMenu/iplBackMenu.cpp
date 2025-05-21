@@ -1,10 +1,14 @@
 #include "scene/backMenu/iplBackMenu.h"
 
+#include "iplScene.h"
+
+#include "iplSystem.h"
+
 extern u8 backToWiiMenu_arc[];
 
 namespace ipl {
     namespace scene {
-        static bool has_prepared_for_boot() {
+        static bool has_prepared() {
             bool bResourceDone = false;
             bool bCommonResDone = false;
 
@@ -73,8 +77,8 @@ namespace ipl {
         SceneCommand BackMenu::calcNormal() {
             SceneCommand result = SCENE_CONTINUE;
 
-            // Get out of scene ones resources are fully loaded.
-            if (has_prepared_for_boot()) {
+            // Get out of scene once resources are fully loaded.
+            if (has_prepared()) {
                 result = SCENE_NEXT;
             }
 

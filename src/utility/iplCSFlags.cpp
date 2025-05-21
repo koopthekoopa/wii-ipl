@@ -1,5 +1,6 @@
 #include "utility/iplCSFlags.h"
-#include "utility/iplUtility.h"
+
+#include "utility/iplMisc.h"
 
 #include <revolution/nand.h>
 #include <private/nand.h>

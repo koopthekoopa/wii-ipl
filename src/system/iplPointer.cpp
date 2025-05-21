@@ -4,7 +4,7 @@
 #include <nw4r/ut.h>
 #include <nw4r/lyt.h>
 
-#include "system/iplSystem.h"
+#include "iplSystem.h"
 
 namespace ipl {
     #define MIN_LENGTH    32.f

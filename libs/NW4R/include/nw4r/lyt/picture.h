@@ -10,7 +10,7 @@ namespace nw4r {
         class Picture : public Pane {
             public:
                 Picture(u8 num);
-                Picture(const res::Picture *pResPic, const ResBlockSet& resBlockSet);
+                Picture(const res::Picture* pResPic, const ResBlockSet& resBlockSet);
                 virtual ~Picture();
 
                 NW4R_UT_RUNTIME_TYPEINFO;
@@ -23,7 +23,7 @@ namespace nw4r {
                 virtual u8          GetVtxColorElement(u32 idx) const;
                 virtual void        SetVtxColorElement(u32 idx, u8 value);
 
-                virtual void        Append(TPLPalette *pTplRes);
+                virtual void        Append(TPLPalette* pTplRes);
                 virtual void        Append(const GXTexObj& texObj);
 
                 void                SetTexCoordNum(u8 num);

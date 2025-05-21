@@ -51,7 +51,7 @@ BOOL        __OSSyncSram();
 
 BOOL        __OSCheckSram();
 
-BOOL        __OSReadROM(void * buffer, s32 length, s32 offset);
+BOOL        __OSReadROM(void* buffer, s32 length, s32 offset);
 
 #ifdef __cplusplus
 }

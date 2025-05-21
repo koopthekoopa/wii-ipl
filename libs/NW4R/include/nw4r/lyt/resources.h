@@ -46,7 +46,7 @@ namespace nw4r {
                 u8      GetMatColNum() const        { return detail::GetBits<>(bits, 27, 1); }
 
             private:
-                u32 bits;
+                u32 bits;   // 0x00
         };
 
         namespace res {
@@ -208,7 +208,7 @@ namespace nw4r {
             } Pane;
 
             typedef struct Bounding : Pane {
-
+                // Nothing here
             } Bounding;
 
             typedef struct Picture : public Pane {
@@ -227,7 +227,7 @@ namespace nw4r {
                 u8  padding[3];
             } Font;
 
-            struct TextBox : public Pane {
+            typedef struct TextBox : public Pane {
                 u16     textBufBytes;               // 0x4C
                 u16     textStrBytes;               // 0x4E
 
@@ -244,7 +244,7 @@ namespace nw4r {
                 Size    fontSize;                   // 0x64
                 f32     charSpace;                  // 0x6C
                 f32     lineSpace;                  // 0x70
-            };
+            } TextBox;
 
             typedef struct WindowFrame {
                 u16 materialIdx;    // 0x00
