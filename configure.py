@@ -807,9 +807,10 @@ config.libs = [
             Object(NonMatching, "scene/setting/iplUsbAP.cpp"),
             Object(NonMatching, "scene/setting/iplUsbAPThread.cpp"),
             Object(NonMatching, "scene/setting/iplAOSSThread.cpp"),
-            Object(NonMatching, "scene/setting/AOSS.cpp"),
+            Object(NonMatching, "scene/setting/AOSSLink.c"),
             Object(NonMatching, "scene/setting/iplRakuRakuThread.cpp"),
-            Object(NonMatching, "scene/setting/ATERM.cpp"),
+            Object(NonMatching, "scene/setting/AOSS.c"),
+            Object(NonMatching, "scene/setting/ATERM.c"),
         ]
     ),
     IPLSection("settingSelect", [
@@ -870,7 +871,7 @@ config.libs = [
     ),
     IPLSection("channelScript", [
             Object(NonMatching, "channelScript/CHANSVm.c"),
-            Object(NonMatching, "channelScript/systemmenu/VmSystemMenu.c"),
+            Object(NonMatching, "channelScript/systemmenu/VmSystem.c"),
             Object(NonMatching, "channelScript/systemmenu/iplCSSystem.cpp"),
             Object(NonMatching, "channelScript/systemmenu/iplCSLayout.cpp"),
             Object(NonMatching, "channelScript/systemmenu/iplCSPane.cpp"),

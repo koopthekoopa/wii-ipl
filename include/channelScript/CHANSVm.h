@@ -36,25 +36,18 @@ struct CHANSVm {
 
 struct CHANSVmObjHdr {
     union {
-        // This struct is likely not needed.
-        struct {
-            CHANSVmInt      hi;
-            CHANSVmInt      lo;
-        } int32_v;
-        CHANSVmInt64    int_v;
-
+        CHANSVmU8**     unknown;
+        CHANSVmInt      int_v;
+        CHANSVmInt32    int32_v;
         CHANSVmFloat    float_v;
-
         struct {
-            CHANSVmWStr*    str;
+            CHANSVmStr16*   str;
             CHANSVmSize*    len;
         } wstring_v;
-
         struct {
-            CHANSVmStr*     str;
+            CHANSVmStr8*    str;
             CHANSVmSize*    len;
         } string_v;
-
         CHANSVmPtr      ptr_v;
     } value;            // 0x00
 
@@ -70,7 +63,7 @@ struct CHANSVmObjHdr {
     undefined4  unk_0x0C;
 };
 
-void    CHANSVmInit(CHANSVm* vm, CHANSVmPtr work, CHANSVmInt size);
+void    CHANSVmInit(CHANSVm* vm, CHANSVmPtr work, CHANSVmU32 size);
 
 /************************/
 /*** CHANS Executable ***/
@@ -88,22 +81,9 @@ CHANSVmBool CHANSVmAddExe(CHANSVm* vm, int unk0, int unk1);
 CHANSVmObjHdr*  CHANSVmNewObject(CHANSVm* vm, int unk, CHANSVmObjHdr* object, CHANSVmObjType type, CHANSVmSize length);
 CHANSVmErr      CHANSVmDeleteObject(CHANSVm* vm, CHANSVmObjHdr* object);
 
-CHANSVmErr      CHANSVmSetInteger(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmInt64 val);
+CHANSVmErr      CHANSVmSetInteger(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmInt val);
 CHANSVmErr      CHANSVmSetFloat(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmFloat value);
-CHANSVmErr      CHANSVmSetU16String(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmWStr str, CHANSVmSize strLen);
-
-static inline CHANSVmErr CHANSVmSetInt8(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmS8 value) {
-    return CHANSVmSetInteger(vm, object, (CHANSVmS8)(value));
-}
-static inline CHANSVmErr CHANSVmSetInt16(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmS16 value) {
-    return CHANSVmSetInteger(vm, object, (CHANSVmS16)(value));
-}
-static inline CHANSVmErr CHANSVmSetInt32(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmS32 value) {
-    return CHANSVmSetInteger(vm, object, (CHANSVmInt)(value));
-}
-static inline CHANSVmErr CHANSVmSetInt64(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmS64 value) {
-    return CHANSVmSetInteger(vm, object, value);
-}
+CHANSVmErr      CHANSVmSetU16String(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmStr16 str, CHANSVmSize strLen);
 
 typedef struct  CHANSVmNativeClass CHANSVmNativeClass;
 
@@ -112,7 +92,7 @@ typedef struct  CHANSVmNativeClass CHANSVmNativeClass;
 /************************/
 
 typedef struct CHANSVmMethodList {
-    CHANSVmStr      name;   // 0x00
+    CHANSVmStr8      name;   // 0x00
     CHANSVmFunction method; // 0x04
 } CHANSVmMethodList;
 
@@ -129,7 +109,7 @@ CHANSVmBool CHANSVmAddNativeMethodList(CHANSVm* vm, CHANSVmNativeClass* cls, CHA
 /************************/
 
 typedef struct CHANSVmPropertyList {
-    CHANSVmStr      name;       // 0x00
+    CHANSVmStr8      name;       // 0x00
     CHANSVmFunction unk_0x04;
     CHANSVmFunction unk_0x08;
 } CHANSVmPropertyList;
@@ -155,18 +135,20 @@ struct CHANSVmNativeClass {
     CHANSVmNativeProperty*  nativProperties;    // 0x14
 
     CHANSVmSize             clsNameLength;      // 0x18
-    CHANSVmStr              clsName;            // 0x1C
+    CHANSVmStr8              clsName;            // 0x1C
 
     undefined               unk_0x20[0x1C];
 };
 
-CHANSVmNativeClass* CHANSVmAddNativeClass(CHANSVm* vm, const CHANSVmStr clsName, CHANSVmFunction clsCtor, CHANSVmFunction clsDtor);
+CHANSVmNativeClass* CHANSVmAddNativeClass(CHANSVm* vm, const CHANSVmStr8 clsName, CHANSVmFunction clsCtor, CHANSVmFunction clsDtor);
 
 /************************/
 /***   Here for now   ***/
 /************************/
 
 CHANSVmBool         CHANSVmLinkModules(CHANSVm* vm, int unk0);
+
+void                CHANSVmSetSignal(CHANSVm* vm, CHANSVmBool* signal);
 
 #ifdef __cplusplus
 }

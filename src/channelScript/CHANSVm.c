@@ -7,14 +7,10 @@
 
 #include <revolution.h>
 
-/************************/
-/* GLOBAL DELCARATIONS  */
-/************************/
-
 #define CHANSVmDebugLength  1024
 
 #define AS_STR(x)   #x
-static CHANSVmStr errorsMap[] = {
+static CHANSVmStr8 errorsMap[] = {
     AS_STR(CHANS_VM_ERR_NO_1000),
     AS_STR(CHANS_VM_ERR_EXIT),
     AS_STR(CHANS_VM_ERR_NO_MEMORY),
@@ -98,11 +94,7 @@ static CHANSVmStr errorsMap[] = {
 
 BOOL CHANSVmDebugVerboseMode = FALSE;
 
-/************************/
-/*         DEBUG        */
-/************************/
-
-void CHANSVmDebugPrintf(const CHANSVmStr format, ...) {
+void CHANSVmDebugPrintf(const CHANSVmStr8 format, ...) {
     va_list args;
     char str[CHANSVmDebugLength];
     
@@ -115,57 +107,30 @@ void CHANSVmDebugPrintf(const CHANSVmStr format, ...) {
     OSReport("%s", str);
 }
 
-/************************/
-/*      MISC UTILS      */
-/************************/
-
-// This function is stripped out with left over pooled data.
-// But I love to recreate it.
-char* VmGetResultType(CHANSVmErr code) {
-    if (code == CHANS_VM_OK) {
-        return "CHANS_VM_OK";
-    }
-    else if (code > CHANS_VM_ERR_NO_1000) {
-        return "(unknown)";
-    }
-    else {
-        return errorsMap[code - CHANS_VM_ERR_NO_1000];
-    }
-}
-
-/************************/
-/*     STRING UTILS     */
-/************************/
-
-static void VmStrToU16FromU8(CHANSVmWStr output, CHANSVmStr input, CHANSVmSize length) NO_INLINE {
-    CHANSVmInt i;
-    CHANSVmInt outLength = length << 1;
+void CHANSVmStrCpyToU16FromU8(CHANSVmStr16 output, CHANSVmStr8 input, CHANSVmSize length) {
+    int i;
+    int outLength = length << 1;
 
     for (i = length; i != 0; i--) {
-        CHANSVmStrCh* outChar = (CHANSVmStrCh*)(output + outLength);
+        CHANSVmStr8Ch* outChar = (CHANSVmStr8Ch*)(output + outLength);
         outLength -= 2;
         outChar--; *outChar = *--input;
         outChar--; *outChar = 0;
-        
     }
 }
 
-/************************/
-/*     OBJECT DATA      */
-/************************/
-
-static inline CHANSVmInt VmToStrFromInt(CHANSVmWStr output, CHANSVmSize length, CHANSVmInt64 integer) {
-    CHANSVmInt len = snprintf((CHANSVmStr)output, length, "%lld", integer);
-    VmStrToU16FromU8(output, (CHANSVmStr)output, len);
+static inline int VmToStrFromInt(CHANSVmStr16 output, CHANSVmSize length, CHANSVmInt integer) {
+    int len = snprintf((CHANSVmStr8)output, length, "%lld", integer);
+    CHANSVmStrCpyToU16FromU8(output, (CHANSVmStr8)output, len);
     return len;
 }
 
 CHANSVmObjHdr* CHANSVmConvertToStrFromInt(CHANSVm*vm, CHANSVmObjType type, CHANSVmObjHdr* object) {
-    CHANSVmObjHdr* newObject = CHANSVmNewObject(vm, 0, NULL, CHANS_VM_OBJ_TYPE_STRING, CHANSVmWStrLength(64));
+    CHANSVmObjHdr* newObject = CHANSVmNewObject(vm, 0, NULL, CHANS_VM_OBJ_TYPE_STRING, CHANSVmStr16Length(64));
     if (newObject) {
-        CHANSVmInt len = VmToStrFromInt(*newObject->value.wstring_v.str, 64, object->value.int_v);
+        int len = VmToStrFromInt(*newObject->value.wstring_v.str, 64, object->value.int_v);
 
-        *newObject->value.wstring_v.len = CHANSVmWStrLength(len);
+        *newObject->value.wstring_v.len = CHANSVmStr16Length(len);
         if (*newObject->value.wstring_v.len == 0) {
             return NULL;
         }
@@ -173,7 +138,7 @@ CHANSVmObjHdr* CHANSVmConvertToStrFromInt(CHANSVm*vm, CHANSVmObjType type, CHANS
     return newObject;
 }
 
-static CHANSVmBool VmGetEnumedType(CHANSVmObjType* eType, CHANSVmInt iType) NO_INLINE {
+static CHANSVmBool VmGetEnumedType(CHANSVmObjType* eType, int iType) NO_INLINE {
     CHANSVmObjType type;
     switch (iType) {
         case 0: {
@@ -214,7 +179,7 @@ static CHANSVmBool VmGetEnumedType(CHANSVmObjType* eType, CHANSVmInt iType) NO_I
     return CHANSVmTrue;
 }
 
-CHANSVmErr CHANSVmSetInteger(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmInt64 val) {
+CHANSVmErr CHANSVmSetInteger(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmInt val) {
     CHANSVmErr ret = CHANSVmDeleteObject(vm, object);
     if (ret == CHANS_VM_OK) {
         object->type = CHANS_VM_OBJ_TYPE_INTEGER;
@@ -235,7 +200,7 @@ CHANSVmErr CHANSVmSetFloat(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmFloat valu
     return ret;
 }
 
-CHANSVmErr CHANSVmSetU16String(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmWStr str, CHANSVmSize strLen) {
+CHANSVmErr CHANSVmSetU16String(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmStr16 str, CHANSVmSize strLen) {
     CHANSVmErr ret = CHANSVmDeleteObject(vm, object);
     if (ret == CHANS_VM_OK) {
         // Set up object with `CHANSVmNewObject` so it allocates needed memory size for the string.
@@ -250,17 +215,52 @@ CHANSVmErr CHANSVmSetU16String(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmWStr s
     return ret;
 }
 
-CHANSVmErr CHANSVmSetU16StringFromU8(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmStr str, CHANSVmSize strLen) {
+CHANSVmErr CHANSVmSetU16StringFromU8(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVmStr8 str, CHANSVmSize strLen) {
     CHANSVmErr ret = CHANSVmDeleteObject(vm, object);
     if (ret == CHANS_VM_OK) {
         // Set up object with `CHANSVmNewObject` so it allocates needed memory size for the string.
-        if (CHANSVmNewObject(vm, 0, object, CHANS_VM_OBJ_TYPE_STRING, CHANSVmWStrLength(strLen)) == CHANSVmNull) {
+        if (CHANSVmNewObject(vm, 0, object, CHANS_VM_OBJ_TYPE_STRING, CHANSVmStr16Length(strLen)) == CHANSVmNull) {
             return CHANS_VM_ERR_SET_STRING;
         }
         
         if (strLen != 0) {
-            VmStrToU16FromU8(*object->value.wstring_v.str, str, strLen);
+            CHANSVmStrCpyToU16FromU8(*object->value.wstring_v.str, str, strLen);
         }
     }
     return ret;
+}
+
+VmMethodDefine(Math, E) {
+    return CHANSVmSetFloat(vm, out, 2.718282) == CHANS_VM_OK;
+}
+VmMethodDefine(Math, LN10) {
+    return CHANSVmSetFloat(vm, out, 2.302585) == CHANS_VM_OK;
+}
+VmMethodDefine(Math, LBN2) {
+    return CHANSVmSetFloat(vm, out, 0.6931472) == CHANS_VM_OK;
+}
+VmMethodDefine(Math, LOG2E) {
+    return CHANSVmSetFloat(vm, out, 1.442695) == CHANS_VM_OK;
+}
+VmMethodDefine(Math, LOG10E) {
+    return CHANSVmSetFloat(vm, out, 0.4342945) == CHANS_VM_OK;
+}
+VmMethodDefine(Math, PI) {
+    return CHANSVmSetFloat(vm, out, 3.141593) == CHANS_VM_OK;
+}
+VmMethodDefine(Math, SQRT1_2) {
+    return CHANSVmSetFloat(vm, out, 0.7071068) == CHANS_VM_OK;
+}
+VmMethodDefine(Math, SQRT2) {
+    return CHANSVmSetFloat(vm, out, 1.414214) == CHANS_VM_OK;
+}
+
+CHANSVmStr8 VmGetStrFromObjHdr(CHANSVmObjHdr* object) {
+    if (object != NULL) {
+        CHANSVmStr8* out = object->value.string_v.str;
+        if (out != NULL) {
+            return *out;
+        }
+    }
+    return NULL;
 }

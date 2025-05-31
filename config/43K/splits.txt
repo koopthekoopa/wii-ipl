@@ -873,7 +873,7 @@ src/scene/setting/iplAOSSThread.cpp:
 	.sdata      start:0x8166B810 end:0x8166B818
 	.sbss       start:0x8166D240 end:0x8166D250
 
-src/scene/setting/AOSS.cpp:
+src/scene/setting/AOSSLink.c:
 	.bss        start:0x810BD4A8 end:0x810BDDD0
 	.text       start:0x813FC604 end:0x813FCE98
 	.data       start:0x8162CA78 end:0x8162CAA8
@@ -886,14 +886,22 @@ src/scene/setting/iplRakuRakuThread.cpp:
 	.sdata      start:0x8166B818 end:0x8166B820
 	.sbss       start:0x8166D278 end:0x8166D288
 
-src/scene/setting/ATERM.cpp:
-	.bss        start:0x810BDEF8 end:0x810C0C80
-	.text       start:0x813FD710 end:0x81406154
+src/scene/setting/AOSS.c:
+	.bss        start:0x810BDEF8 end:0x810BECA0
+	.text       start:0x813FD710 end:0x81401650
+	.data       start:0x8162CB30 end:0x8162CCA0
+	.sdata2     start:0x816692F8 end:0x81669300
+	.sdata      start:0x8166B820 end:0x8166B838
+	.sbss       start:0x8166D288 end:0x8166D2A8
+
+src/scene/setting/ATERM.c:
+	.bss        start:0x810BECA0 end:0x810C0C80
+	.text       start:0x81401650 end:0x81406154
 	.rodata     start:0x815E9788 end:0x815EBFB0
-	.data       start:0x8162CB30 end:0x8162CDB8
-	.sdata2     start:0x816692F8 end:0x81669308
-	.sdata      start:0x8166B820 end:0x8166B870
-	.sbss       start:0x8166D288 end:0x8166D2F8
+	.data       start:0x8162CCA0 end:0x8162CDB8
+	.sdata2     start:0x81669300 end:0x81669308
+	.sdata      start:0x8166B838 end:0x8166B870
+	.sbss       start:0x8166D2A8 end:0x8166D2F8
 
 src/scene/settingSelect/iplSettingBg.cpp:
 	.text       start:0x81406154 end:0x81406364
@@ -1133,7 +1141,7 @@ src/channelScript/CHANSVm.c:
 	.sdata      start:0x8166BB98 end:0x8166BDF0
 	.sbss       start:0x8166D368 end:0x8166D378
 
-src/channelScript/systemmenu/VmSystemMenu.c:
+src/channelScript/systemmenu/VmSystem.c:
 	.text       start:0x81457478 end:0x81457DBC
 	.rodata     start:0x815F12D0 end:0x815F1440
 	.data       start:0x8163F2E0 end:0x8163F558
