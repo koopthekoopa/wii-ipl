@@ -47,8 +47,9 @@ static void ScreenReport(void* xfb, u16 xfbW, u16 xfbH, GXColor yuv, s32 x, s32 
     u32 i, j;
     u32 image[72];
     u32 k, l;
-    u8 Y;
-    u32 pixel, col;
+    u8  Y;
+    u32 pixel;
+    s32 col;
 
 loop:
     if (xfbH - 24 >= y) {
@@ -58,7 +59,7 @@ loop:
         while (*string != 0) {
             if (*string == '\n') {
                 string++;
-                y += leading;
+                y += (u32)leading;
                 goto loop;
             }
 
@@ -311,8 +312,22 @@ const char* const __DVDErrorMessage[] = {
     " speldisk en zet het systeem uit. Lees\n"
     "de Wii-handleiding voor meer informatie.",
 
-    // Error #104???????
-    // For korean language
+    "\n\n"
+    "                Error #104,\n"
+    "          An error has occurred.\n"
+    "    Press the EJECT Button, remove the\n"
+    "    Game Disc, and turn the power off.\n"
+    "   Please read the Wii operations manual\n"
+    "           for more information.",
+
+    "\n\n"
+    "                Error #104,\n"
+    "          An error has occurred.\n"
+    "    Press the EJECT Button, remove the\n"
+    "    Game Disc, and turn the power off.\n"
+    "   Please read the Wii operations manual\n"
+    "           for more information.",
+
     "\n\n"
     "                Error #104,\n"
     "          An error has occurred.\n"

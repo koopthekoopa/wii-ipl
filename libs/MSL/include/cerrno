@@ -1,0 +1,6 @@
+#ifndef MSL_CERRNO_H
+#define MSL_CERRNO_H
+
+#include <errno.h>
+
+#endif // MSL_CERRNO_H

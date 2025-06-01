@@ -5,6 +5,8 @@
 #include <string.h>
 #include <stdarg.h>
 
+#include <math.h>
+
 #include <revolution.h>
 
 #define CHANSVmDebugLength  1024
@@ -231,28 +233,28 @@ CHANSVmErr CHANSVmSetU16StringFromU8(CHANSVm* vm, CHANSVmObjHdr* object, CHANSVm
 }
 
 VmMethodDefine(Math, E) {
-    return CHANSVmSetFloat(vm, out, 2.718282) == CHANS_VM_OK;
+    return CHANSVmSetFloat(vm, out, M_E) == CHANS_VM_OK;
 }
 VmMethodDefine(Math, LN10) {
-    return CHANSVmSetFloat(vm, out, 2.302585) == CHANS_VM_OK;
+    return CHANSVmSetFloat(vm, out, M_LN10) == CHANS_VM_OK;
 }
-VmMethodDefine(Math, LBN2) {
-    return CHANSVmSetFloat(vm, out, 0.6931472) == CHANS_VM_OK;
+VmMethodDefine(Math, LN2) {
+    return CHANSVmSetFloat(vm, out, M_LN2) == CHANS_VM_OK;
 }
 VmMethodDefine(Math, LOG2E) {
-    return CHANSVmSetFloat(vm, out, 1.442695) == CHANS_VM_OK;
+    return CHANSVmSetFloat(vm, out, M_LOG2E) == CHANS_VM_OK;
 }
 VmMethodDefine(Math, LOG10E) {
-    return CHANSVmSetFloat(vm, out, 0.4342945) == CHANS_VM_OK;
+    return CHANSVmSetFloat(vm, out, M_LOG10E) == CHANS_VM_OK;
 }
 VmMethodDefine(Math, PI) {
-    return CHANSVmSetFloat(vm, out, 3.141593) == CHANS_VM_OK;
+    return CHANSVmSetFloat(vm, out, M_PI) == CHANS_VM_OK;
 }
 VmMethodDefine(Math, SQRT1_2) {
-    return CHANSVmSetFloat(vm, out, 0.7071068) == CHANS_VM_OK;
+    return CHANSVmSetFloat(vm, out, M_SQRT1_2) == CHANS_VM_OK;
 }
 VmMethodDefine(Math, SQRT2) {
-    return CHANSVmSetFloat(vm, out, 1.414214) == CHANS_VM_OK;
+    return CHANSVmSetFloat(vm, out, M_SQRT2) == CHANS_VM_OK;
 }
 
 CHANSVmStr8 VmGetStrFromObjHdr(CHANSVmObjHdr* object) {

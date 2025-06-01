@@ -1,0 +1,6 @@
+#ifndef MSL_CSTDBOOL_H
+#define MSL_CSTDBOOL_H
+
+#include <stdbool.h>
+
+#endif // MSL_CSTDBOOL_H

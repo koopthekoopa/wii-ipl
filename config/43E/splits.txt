@@ -4346,7 +4346,7 @@ libs/Runtime/src/GCN_mem_alloc.c:
 	.text       start:0x815FA248 end:0x815FA3B8
 	.rodata     start:0x816331F8 end:0x81633268
 
-libs/MSL/src/alloc.c:
+libs/MSL/src/MSL_Common/alloc.c:
 	.bss        start:0x811B10A0 end:0x811B10D8
 	extab       start:0x81330D08 end:0x81330D58
 	extabindex  start:0x81331CEC end:0x81331D64
@@ -4354,17 +4354,17 @@ libs/MSL/src/alloc.c:
 	.rodata     start:0x81633268 end:0x81633280
 	.sbss       start:0x8169B678 end:0x8169B680
 
-libs/MSL/src/errno.c:
+libs/MSL/src/MSL_Common/errno.c:
 	.sbss       start:0x8169B680 end:0x8169B688
 
-libs/MSL/src/ansi_files.c:
+libs/MSL/src/MSL_Common/ansi_files.c:
 	.bss        start:0x811B10D8 end:0x811B13D8
 	extab       start:0x81330D58 end:0x81330D68
 	extabindex  start:0x81331D64 end:0x81331D7C
 	.text       start:0x815FB7F0 end:0x815FB900
 	.data       start:0x816955C8 end:0x81695708
 
-libs/MSL/src/ansi_fp.c:
+libs/MSL/src/MSL_Common/ansi_fp.c:
 	extab       start:0x81330D68 end:0x81330DA0
 	extabindex  start:0x81331D7C end:0x81331DD0
 	.text       start:0x815FB900 end:0x815FD270
@@ -4372,66 +4372,66 @@ libs/MSL/src/ansi_fp.c:
 	.data       start:0x81695708 end:0x81695870
 	.sdata2     start:0x81697850 end:0x81697888
 
-libs/MSL/src/ctype.c:
+libs/MSL/src/MSL_Common/ctype.c:
 	.rodata     start:0x81633360 end:0x81633760
 
-libs/MSL/src/locale.c:
+libs/MSL/src/MSL_Common/locale.c:
 	.rodata     start:0x81633760 end:0x81633868
 	.data       start:0x81695870 end:0x81695A68
 	.sdata2     start:0x81697888 end:0x816978A0
 
-libs/MSL/src/arith.c:
+libs/MSL/src/MSL_Common/arith.c:
 	extab       start:0x81330DA0 end:0x81330DB0
 	extabindex  start:0x81331DD0 end:0x81331DE8
 	.text       start:0x815FD270 end:0x815FD4E4
 
-libs/MSL/src/bsearch.c:
+libs/MSL/src/MSL_Common/bsearch.c:
 	extab       start:0x81330DB0 end:0x81330DB8
 	extabindex  start:0x81331DE8 end:0x81331DF4
 	.text       start:0x815FD4E4 end:0x815FD5D4
 
-libs/MSL/src/buffer_io.c:
+libs/MSL/src/MSL_Common/buffer_io.c:
 	extab       start:0x81330DB8 end:0x81330DC8
 	extabindex  start:0x81331DF4 end:0x81331E0C
 	.text       start:0x815FD5D4 end:0x815FD7F8
 
-libs/MSL/src/direct_io.c:
+libs/MSL/src/MSL_Common/direct_io.c:
 	extab       start:0x81330DC8 end:0x81330DD0
 	extabindex  start:0x81331E0C end:0x81331E18
 	.text       start:0x815FD7F8 end:0x815FDB00
 
-libs/MSL/src/file_io.c:
+libs/MSL/src/MSL_Common/file_io.c:
 	extab       start:0x81330DD0 end:0x81330DE8
 	extabindex  start:0x81331E18 end:0x81331E3C
 	.text       start:0x815FDB00 end:0x815FDEA0
 
-libs/MSL/src/FILE_POS.c:
+libs/MSL/src/MSL_Common/FILE_POS.c:
 	extab       start:0x81330DE8 end:0x81330DF0
 	extabindex  start:0x81331E3C end:0x81331E48
 	.text       start:0x815FDEA0 end:0x815FE110
 
-libs/MSL/src/mbstring.c:
+libs/MSL/src/MSL_Common/mbstring.c:
 	extab       start:0x81330DF0 end:0x81330E00
 	extabindex  start:0x81331E48 end:0x81331E60
 	.text       start:0x815FE110 end:0x815FE308
 
-libs/MSL/src/mem.c:
+libs/MSL/src/MSL_Common/mem.c:
 	extab       start:0x81330E00 end:0x81330E08
 	extabindex  start:0x81331E60 end:0x81331E6C
 	.text       start:0x815FE308 end:0x815FE478
 
-libs/MSL/src/mem_funcs.c:
+libs/MSL/src/MSL_Common/mem_funcs.c:
 	.text       start:0x815FE478 end:0x815FE748
 
-libs/MSL/src/math_api.c:
+libs/MSL/src/MSL_Common/math_api.c:
 	extab       start:0x81330E08 end:0x81330E20
 	extabindex  start:0x81331E6C end:0x81331E90
 	.text       start:0x815FE748 end:0x815FE844
 
-libs/MSL/src/misc_io.c:
+libs/MSL/src/MSL_Common/misc_io.c:
 	.text       start:0x815FE844 end:0x815FE854
 
-libs/MSL/src/printf.c:
+libs/MSL/src/MSL_Common/printf.c:
 	extab       start:0x81330E20 end:0x81330E90
 	extabindex  start:0x81331E90 end:0x81331F38
 	.text       start:0x815FE854 end:0x81600DA8
@@ -4440,52 +4440,52 @@ libs/MSL/src/printf.c:
 	.sdata2     start:0x816978A0 end:0x816978A8
 	.sdata      start:0x8169A4A0 end:0x8169A4A8
 
-libs/MSL/src/qsort.c:
+libs/MSL/src/MSL_Common/qsort.c:
 	extab       start:0x81330E90 end:0x81330E98
 	extabindex  start:0x81331F38 end:0x81331F44
 	.text       start:0x81600DA8 end:0x81600F18
 
-libs/MSL/src/rand.c:
+libs/MSL/src/MSL_Common/rand.c:
 	.text       start:0x81600F18 end:0x81600F40
 	.sdata      start:0x8169A4A8 end:0x8169A4B0
 
-libs/MSL/src/scanf.c:
+libs/MSL/src/MSL_Common/scanf.c:
 	extab       start:0x81330E98 end:0x81330EB0
 	extabindex  start:0x81331F44 end:0x81331F68
 	.text       start:0x81600F40 end:0x816024AC
 	.rodata     start:0x81633898 end:0x816338C0
 	.data       start:0x81695CB8 end:0x81695DD8
 
-libs/MSL/src/signal.c:
+libs/MSL/src/MSL_Common/signal.c:
 	.bss        start:0x811B13D8 end:0x811B13F8
 	extab       start:0x81330EB0 end:0x81330EB8
 	extabindex  start:0x81331F68 end:0x81331F74
 	.text       start:0x816024AC end:0x8160255C
 
-libs/MSL/src/string.c:
+libs/MSL/src/MSL_Common/string.c:
 	extab       start:0x81330EB8 end:0x81330ED8
 	extabindex  start:0x81331F74 end:0x81331FA4
 	.text       start:0x8160255C end:0x81602C2C
 	.sdata2     start:0x816978A8 end:0x816978B0
 	.sdata      start:0x8169A4B0 end:0x8169A4B8
 
-libs/MSL/src/float.c:
+libs/MSL/src/MSL_Common/float.c:
 	.sdata      start:0x8169A4B8 end:0x8169A4C8
 
-libs/MSL/src/strtold.c:
+libs/MSL/src/MSL_Common/strtold.c:
 	extab       start:0x81330ED8 end:0x81330EE8
 	extabindex  start:0x81331FA4 end:0x81331FBC
 	.text       start:0x81602C2C end:0x816040D0
 	.rodata     start:0x816338C0 end:0x816338D0
 	.sdata2     start:0x816978B0 end:0x816978E8
 
-libs/MSL/src/strtoul.c:
+libs/MSL/src/MSL_Common/strtoul.c:
 	extab       start:0x81330EE8 end:0x81330F20
 	extabindex  start:0x81331FBC end:0x81332010
 	.text       start:0x816040D0 end:0x81604D90
 	.data       start:0x81695DD8 end:0x81695E60
 
-libs/MSL/src/time.c:
+libs/MSL/src/MSL_Common/time.c:
 	.bss        start:0x811B13F8 end:0x811B1480
 	extab       start:0x81330F20 end:0x81330F68
 	extabindex  start:0x81332010 end:0x8133207C
@@ -4494,13 +4494,13 @@ libs/MSL/src/time.c:
 	.data       start:0x81695E60 end:0x81695FB8
 	.sdata2     start:0x816978E8 end:0x81697908
 
-libs/MSL/src/wctype.c:
+libs/MSL/src/MSL_Common/wctype.c:
 	.rodata     start:0x816339F8 end:0x81633FF8
 
-libs/MSL/src/wmem.c:
+libs/MSL/src/MSL_Common/wmem.c:
 	.text       start:0x816066B8 end:0x81606748
 
-libs/MSL/src/wprintf.c:
+libs/MSL/src/MSL_Common/wprintf.c:
 	extab       start:0x81330F68 end:0x81330FA0
 	extabindex  start:0x8133207C end:0x813320D0
 	.text       start:0x81606748 end:0x81608904
@@ -4508,160 +4508,160 @@ libs/MSL/src/wprintf.c:
 	.data       start:0x81695FB8 end:0x81696260
 	.sdata2     start:0x81697908 end:0x81697910
 
-libs/MSL/src/wstring.c:
+libs/MSL/src/MSL_Common/wstring.c:
 	.text       start:0x81608904 end:0x81608AC8
 
-libs/MSL/src/wchar_io.c:
+libs/MSL/src/MSL_Common/wchar_io.c:
 	.text       start:0x81608AC8 end:0x81608B4C
 
-libs/MSL/src/time.dolphin.c:
+libs/MSL/src/PPC_EABI/time.dolphin.c:
 	.text       start:0x81608B4C end:0x81608B54
 
-libs/MSL/src/sysenv.GCN.c:
+libs/MSL/src/PPC_EABI/sysenv.GCN.c:
 	.text       start:0x81608B54 end:0x81608B5C
 
-libs/MSL/src/uart_console_io_gcn.c:
+libs/MSL/src/PPC_EABI/uart_console_io_gcn.c:
 	extab       start:0x81330FA0 end:0x81330FA8
 	extabindex  start:0x813320D0 end:0x813320DC
 	.text       start:0x81608B5C end:0x81608C34
 	.sbss       start:0x8169B688 end:0x8169B690
 
-libs/MSL/src/abort_exit_ppc_eabi.c:
+libs/MSL/src/PPC_EABI/abort_exit_ppc_eabi.c:
 	extab       start:0x81330FA8 end:0x81330FB0
 	extabindex  start:0x813320DC end:0x813320E8
 	.text       start:0x81608C34 end:0x81608C68
 	.sbss       start:0x8169B690 end:0x8169B698
 
-libs/MSL/src/math_sun.c:
+libs/MSL/src/MSL_Common/math_sun.c:
 	extab       start:0x81330FB0 end:0x81330FB8
 	extabindex  start:0x813320E8 end:0x813320F4
 	.text       start:0x81608C68 end:0x81608CA8
 
-libs/MSL/src/extras.c:
+libs/MSL/src/MSL_Common/extras.c:
 	.text       start:0x81608CA8 end:0x81608E98
 
-libs/MSL/src/math/e_acos.c:
+libs/MSL/src/PPC_EABI/Math/e_acos.c:
 	.text       start:0x81608E98 end:0x8160915C
 	.sdata2     start:0x81697910 end:0x81697998
 
-libs/MSL/src/math/e_asin.c:
+libs/MSL/src/PPC_EABI/Math/e_asin.c:
 	.text       start:0x8160915C end:0x816093F4
 	.sdata2     start:0x81697998 end:0x81697A20
 
-libs/MSL/src/math/e_atan2.c:
+libs/MSL/src/PPC_EABI/Math/e_atan2.c:
 	.text       start:0x816093F4 end:0x81609664
 	.sdata2     start:0x81697A20 end:0x81697A78
 
-libs/MSL/src/math/e_exp.c:
+libs/MSL/src/PPC_EABI/Math/e_exp.c:
 	.text       start:0x81609664 end:0x81609898
 	.rodata     start:0x81634000 end:0x81634030
 	.sdata2     start:0x81697A78 end:0x81697AF0
 
-libs/MSL/src/math/e_fmod.c:
+libs/MSL/src/PPC_EABI/Math/e_fmod.c:
 	.text       start:0x81609898 end:0x81609BC8
 	.rodata     start:0x81634030 end:0x81634040
 
-libs/MSL/src/math/e_log.c:
+libs/MSL/src/PPC_EABI/Math/e_log.c:
 	.text       start:0x81609BC8 end:0x81609E7C
 	.sdata2     start:0x81697AF0 end:0x81697B70
 	.sbss       start:0x8169B698 end:0x8169B6A0
 
-libs/MSL/src/math/e_pow.c:
+libs/MSL/src/PPC_EABI/Math/e_pow.c:
 	.text       start:0x81609E7C end:0x8160A6C4
 	.rodata     start:0x81634040 end:0x81634070
 	.sdata2     start:0x81697B70 end:0x81697C80
 
-libs/MSL/src/math/e_rem_pio2.c:
+libs/MSL/src/PPC_EABI/Math/e_rem_pio2.c:
 	.text       start:0x8160A6C4 end:0x8160AA5C
 	.rodata     start:0x81634070 end:0x816341F8
 	.sdata2     start:0x81697C80 end:0x81697CD8
 
-libs/MSL/src/math/fminmaxdim.c:
+libs/MSL/src/PPC_EABI/Math/fminmaxdim.c:
 	.text       start:0x8160AA5C end:0x8160AB34
 
-libs/MSL/src/math/k_cos.c:
+libs/MSL/src/PPC_EABI/Math/k_cos.c:
 	.text       start:0x8160AB34 end:0x8160AC44
 	.sdata2     start:0x81697CD8 end:0x81697D20
 
-libs/MSL/src/math/k_rem_pio2.c:
+libs/MSL/src/PPC_EABI/Math/k_rem_pio2.c:
 	.text       start:0x8160AC44 end:0x8160C350
 	.rodata     start:0x816341F8 end:0x81634248
 	.sdata2     start:0x81697D20 end:0x81697D60
 
-libs/MSL/src/math/k_sin.c:
+libs/MSL/src/PPC_EABI/Math/k_sin.c:
 	.text       start:0x8160C350 end:0x8160C410
 	.sdata2     start:0x81697D60 end:0x81697D98
 
-libs/MSL/src/math/k_tan.c:
+libs/MSL/src/PPC_EABI/Math/k_tan.c:
 	.text       start:0x8160C410 end:0x8160C668
 	.rodata     start:0x81634248 end:0x816342B0
 	.sdata2     start:0x81697D98 end:0x81697DD0
 
-libs/MSL/src/math/s_atan.c:
+libs/MSL/src/PPC_EABI/Math/s_atan.c:
 	.text       start:0x8160C668 end:0x8160C8A8
 	.rodata     start:0x816342B0 end:0x81634348
 	.sdata2     start:0x81697DD0 end:0x81697DF8
 
-libs/MSL/src/math/s_ceil.c:
+libs/MSL/src/PPC_EABI/Math/s_ceil.c:
 	.text       start:0x8160C8A8 end:0x8160C9E8
 	.sdata2     start:0x81697DF8 end:0x81697E08
 
-libs/MSL/src/math/s_copysign.c:
+libs/MSL/src/PPC_EABI/Math/s_copysign.c:
 	.text       start:0x8160C9E8 end:0x8160CA14
 
-libs/MSL/src/math/s_cos.c:
+libs/MSL/src/PPC_EABI/Math/s_cos.c:
 	.text       start:0x8160CA14 end:0x8160CAE8
 	.sdata2     start:0x81697E08 end:0x81697E10
 
-libs/MSL/src/math/s_floor.c:
+libs/MSL/src/PPC_EABI/Math/s_floor.c:
 	.text       start:0x8160CAE8 end:0x8160CC2C
 	.sdata2     start:0x81697E10 end:0x81697E20
 
-libs/MSL/src/math/s_frexp.c:
+libs/MSL/src/PPC_EABI/Math/s_frexp.c:
 	.text       start:0x8160CC2C end:0x8160CCB4
 	.sdata2     start:0x81697E20 end:0x81697E28
 
-libs/MSL/src/math/s_ldexp.c:
+libs/MSL/src/PPC_EABI/Math/s_ldexp.c:
 	.text       start:0x8160CCB4 end:0x8160CE20
 	.sdata2     start:0x81697E28 end:0x81697E50
 
-libs/MSL/src/math/s_sin.c:
+libs/MSL/src/PPC_EABI/Math/s_sin.c:
 	.text       start:0x8160CE20 end:0x8160CEF8
 	.sdata2     start:0x81697E50 end:0x81697E58
 
-libs/MSL/src/math/s_tan.c:
+libs/MSL/src/PPC_EABI/Math/s_tan.c:
 	.text       start:0x8160CEF8 end:0x8160CF70
 	.sdata2     start:0x81697E58 end:0x81697E60
 
-libs/MSL/src/math/w_acos.c:
+libs/MSL/src/PPC_EABI/Math/w_acos.c:
 	.text       start:0x8160CF70 end:0x8160CF74
 
-libs/MSL/src/math/w_asin.c:
+libs/MSL/src/PPC_EABI/Math/w_asin.c:
 	.text       start:0x8160CF74 end:0x8160CF78
 
-libs/MSL/src/math/w_atan2.c:
+libs/MSL/src/PPC_EABI/Math/w_atan2.c:
 	.text       start:0x8160CF78 end:0x8160CF7C
 
-libs/MSL/src/math/w_exp.c:
+libs/MSL/src/PPC_EABI/Math/w_exp.c:
 	.text       start:0x8160CF7C end:0x8160CF80
 
-libs/MSL/src/math/w_fmod.c:
+libs/MSL/src/PPC_EABI/Math/w_fmod.c:
 	.text       start:0x8160CF80 end:0x8160CF84
 
-libs/MSL/src/math/w_log.c:
+libs/MSL/src/PPC_EABI/Math/w_log.c:
 	.text       start:0x8160CF84 end:0x8160CF88
 
-libs/MSL/src/math/w_pow.c:
+libs/MSL/src/PPC_EABI/Math/w_pow.c:
 	.text       start:0x8160CF88 end:0x8160CF8C
 
-libs/MSL/src/math/e_sqrt.c:
+libs/MSL/src/PPC_EABI/Math/e_sqrt.c:
 	.text       start:0x8160CF8C end:0x8160D1D4
 	.sdata2     start:0x81697E60 end:0x81697E68
 
-libs/MSL/src/math/math_ppc.c:
+libs/MSL/src/PPC_EABI/Math/math_ppc.c:
 	.text       start:0x8160D1D4 end:0x8160D1D8
 
-libs/MSL/src/math/w_sqrt.c:
+libs/MSL/src/PPC_EABI/Math/w_sqrt.c:
 	.text       start:0x8160D1D8 end:0x8160D1DC
 
 libs/MetroTRK/src/Portable/msghndlr.c:

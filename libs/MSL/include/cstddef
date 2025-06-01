@@ -1,0 +1,16 @@
+#ifndef MSL_CSTDDEF_H
+#define MSL_CSTDDEF_H
+
+#include <stddef.h>
+
+#ifdef __cplusplus
+
+namespace std {
+    using   ::size_t;
+    using   ::clock_t;
+    using   ::time_t;
+} // namespace std
+
+#endif
+
+#endif // MSL_CSTDDEF_H

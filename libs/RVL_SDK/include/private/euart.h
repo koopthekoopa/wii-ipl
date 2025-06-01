@@ -18,7 +18,7 @@ enum {
 
 BOOL        EUARTInit();
 
-EUARTError  InitializeUART();
+EUARTError  InitializeUART(int unused);
 EUARTError  WriteUARTN(const char* msg, u32 n);
 
 #ifdef __cplusplus

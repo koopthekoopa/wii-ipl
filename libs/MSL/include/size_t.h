@@ -1,8 +1,8 @@
-#ifndef MSL_SIZE_T_H
-#define MSL_SIZE_T_H
+#ifndef MSL_STDDEF_H
+#define MSL_STDDEF_H
 
-typedef unsigned long   size_t;
+typedef unsigned long int   size_t;
+typedef long int            clock_t;
+typedef long int            time_t;
 
-#endif // MSL_SIZE_T_H
-
-
+#endif // MSL_STDDEF_H

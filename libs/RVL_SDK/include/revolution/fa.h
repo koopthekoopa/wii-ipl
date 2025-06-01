@@ -3,7 +3,7 @@
 
 #include <revolution/fa/types.h>
 
-#include <size_t.h>
+#include <stddef.h>
 
 #ifdef __cplusplus
 extern "C" {

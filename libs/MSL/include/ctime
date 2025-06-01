@@ -1,0 +1,19 @@
+#ifndef MSL_CTIME_H
+#define MSL_CTIME_H
+
+#include <time.h>
+
+#ifdef __cplusplus
+
+namespace std {
+    using   ::clock;
+
+    using   ::mktime;
+    using   ::localtime;
+
+    using   ::strftime;
+} // namespace std
+
+#endif
+
+#endif // MSL_CTIME_H

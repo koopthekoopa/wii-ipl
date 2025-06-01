@@ -1,0 +1,14 @@
+#ifndef MSL_CSIGNAL_H
+#define MSL_CSIGNAL_H
+
+#include <signal.h>
+
+#ifdef __cplusplus
+
+namespace std {
+    using   ::raise;
+} // namespace std
+
+#endif
+
+#endif // MSL_CSIGNAL_H

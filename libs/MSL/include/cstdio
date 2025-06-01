@@ -6,9 +6,20 @@
 #ifdef __cplusplus
 
 namespace std {
+    using   ::setvbuf;
+
+    using   ::fclose;
+    using   ::fflush;
+    using   ::ftell;
+
+    using   ::printf;
+    using   ::fprintf;
+    using   ::vprintf;
+
     using   ::sprintf;
     using   ::snprintf;
-    using   ::vprintf;
+
+    using   ::vsprintf;
     using   ::vsnprintf;
 } // namespace std
 

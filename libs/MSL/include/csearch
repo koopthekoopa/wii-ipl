@@ -1,0 +1,16 @@
+#ifndef MSL_CSEARCH_H
+#define MSL_CSEARCH_H
+
+#include <search.h>
+
+#ifdef __cplusplus
+
+namespace std {
+    using   ::bsearch;
+
+    using   ::qsort;
+} // namespace std
+
+#endif
+
+#endif // MSL_CSEARCH_H

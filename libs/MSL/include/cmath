@@ -7,15 +7,68 @@
 
 namespace std {
     using   ::abs;
+    using   ::labs;
     using   ::fabs;
+    using   ::fabsf;
+
+    using   ::fmax;
+    using   ::fmaxf;
+
+    using   ::fmin;
+    using   ::fminf;
+
+    using   ::div;
+
+    using   ::scalbn;
+    using   ::scalbnf;
+
+    using   ::asin;
+    using   ::asinf;
 
     using   ::sin;
-    using   ::cos;
-    using   ::tan;
-
     using   ::sinf;
+
+    using   ::acos;
+    using   ::acosf;
+
+    using   ::cos;
     using   ::cosf;
+
+    using   ::atan;
+    using   ::atanf;
+
+    using   ::atan2;
+    using   ::atan2f;
+
+    using   ::tan;
     using   ::tanf;
+
+    using   ::exp;
+    using   ::expf;
+
+    using   ::fmod;
+    using   ::fmodf;
+
+    using   ::log;
+    using   ::logf;
+
+    using   ::pow;
+    using   ::powf;
+
+    using   ::sqrt;
+    using   ::sqrtf;
+
+    using   ::ceil;
+    using   ::ceilf;
+
+    using   ::copysign;
+    using   ::copysignf;
+
+    using   ::frexp;
+    using   ::frexpf;
+
+    using   ::ldexp;
+    using   ::ldexpf;
 } // namespace std
 
 #endif

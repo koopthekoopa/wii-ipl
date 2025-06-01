@@ -9,22 +9,30 @@ namespace std {
     using   ::memcpy;
     using   ::memset;
     using   ::memmove;
-
+    using   ::memchr;
     using   ::memcmp;
 
     using   ::strcpy;
-    using   ::strcmp;
-
-    using   ::stricmp;
-    
     using   ::strcat;
+    using   ::strlen;
+    using   ::strchr;
+    using   ::strrchr;
+    using   ::strcmp;
+    using   ::strpbrk;
+    using   ::strspn;
+    using   ::strtok;
+    using   ::strstr;
 
     using   ::strncpy;
     using   ::strncat;
+    using   ::strnlen;
     using   ::strncmp;
 
-    using   ::strlen;
-    using   ::strnlen;
+    using   ::strcspn;
+
+    using   ::stricmp;
+    using   ::strnicmp;
+    using   ::strcmpi;
 } // namespace std
 
 #endif

@@ -1,0 +1,18 @@
+#ifndef MSL_CMALLOC_H
+#define MSL_CMALLOC_H
+
+#include <malloc.h>
+
+#ifdef __cplusplus
+
+namespace std {
+    using   ::malloc;
+    using   ::realloc;
+    using   ::calloc;
+
+    using   ::free;
+} // namespace std
+
+#endif
+
+#endif // MSL_CMALLOC_H

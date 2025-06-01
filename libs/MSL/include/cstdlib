@@ -3,12 +3,28 @@
 
 #include <stdlib.h>
 
+#include <cmalloc>
+#include <cmath>
+#include <csearch>
+
 #ifdef __cplusplus
 
 namespace std {
+    using   ::rand;
+    using   ::srand;
+
+    using   ::mbtowc;
+    using   ::mbstowcs;
+
+    using   ::wcstombs;
+
     using   ::strtol;
+    using   ::strtoull;
     
     using   ::atoi;
+    using   ::atol;
+
+    using   ::itoa;
 } // namespace std
 
 #endif

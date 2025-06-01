@@ -7,7 +7,7 @@
 
 #include <revolution/types.h>
 
-#include <size_t.h>
+#include <cstddef>
 
 namespace EGG {
     class Allocator;

@@ -8,7 +8,7 @@
 #include <private/os.h>
 
 #include <string.h>
-#include <size_t.h>
+#include <stddef.h>
 
 #define DIFFERENTIATE(a, b) ((a) < (b)) ? ((u32)0xFFFFFFFF - (b) + (a) + 1) : ((a) - (b))
 

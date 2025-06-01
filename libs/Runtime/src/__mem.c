@@ -1,5 +1,5 @@
 #include <decomp.h>
-#include <size_t.h>
+#include <stddef.h>
 
 #pragma section code_type ".init"
 
