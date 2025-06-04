@@ -19,8 +19,13 @@ typedef struct MEMiUntHeapHead {
     u32                     blockSize;  // 0x04
 } MEMiUntHeapHead;
 
-void*   MEMAllocFromUnitHeap(MEMHeapHandle heap);
-void    MEMFreeToUnitHeap(MEMHeapHandle heap, void* memBlock);
+MEMHeapHandle   MEMCreateUnitHeapEx(void* start, u32 heapSize, u32 memBlockSize, int align, u16 flags);
+void*           MEMDestroyUnitHeap(MEMHeapHandle heap);
+
+void*           MEMAllocFromUnitHeap(MEMHeapHandle heap);
+void            MEMFreeToUnitHeap(MEMHeapHandle heap, void* addr);
+
+u32             MEMCalcHeapSizeForUnitHeap(u32 unit_size, u32 unit_count, int align);
 
 static u32 MEMGetMemBlockSizeForUnitHeap(MEMHeapHandle heap) {
     return ((MEMiUntHeapHead*)((u8*)heap + sizeof(MEMiHeapHead)))->blockSize;

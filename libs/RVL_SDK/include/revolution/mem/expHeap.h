@@ -12,28 +12,66 @@
 extern "C" {
 #endif
 
+typedef struct MEMiExpHeapBlockHead MEMiExpHeapBlockHead;
+
 typedef struct MEMiExpHeapMBlockHead MEMiExpHeapMBlockHead;
 
+typedef struct MEMiExpBlockLink {
+    MEMiExpHeapMBlockHead *prev;
+    MEMiExpHeapMBlockHead *next;
+} MEMiExpBlockLink;
+
+typedef struct MEMiExpBlockList {
+    MEMiExpHeapMBlockHead *head;
+    MEMiExpHeapMBlockHead *tail;
+} MEMiExpBlockList;
+
 struct MEMiExpHeapMBlockHead {
-    u16     magic;                  // 0x00
+    u16     signature;              // 0x00
 
     union {
-        u16 attr;
+        u16 val;
         struct {
-            u16 allocDir    : 1;    // 1000000000000000
-            u16 alignment   : 7;    // 0111111100000000
+            u16 dir         : 1;    // 1000000000000000
+            u16 align       : 7;    // 0111111100000000
             u16 groupID     : 8;    // 0000000011111111
         } fields;
     } attribute;                    // 0x02
 
     u32 blockSize;                  // 0x04
 
-    MEMiExpHeapMBlockHead*  prev;   // 0x08
-    MEMiExpHeapMBlockHead*  next;   // 0x0C
+    MEMiExpBlockLink    link;       // 0x08
 };
 
-void*   MEMAllocFromExpHeapEx(MEMHeapHandle heap, u32 size, s32 align);
-void    MEMFreeToExpHeap(MEMHeapHandle heap, void* memBlock);
+
+typedef struct MEMiExpHeapHead {
+    MEMiExpBlockList freeBlocks;    // 0x00
+    MEMiExpBlockList usedBlocks;    // 0x08
+
+    u16 groupID;                    // 0x10
+
+    union {
+        u16 val;
+        struct {
+            u16 _reserved : 15;     // 1111111111111110
+            u16 allocMode : 1;      // 0000000000000001
+        } fields;
+    } attribute;                    // 0x12
+} MEMiExpHeapHead;
+
+MEMHeapHandle   MEMCreateExpHeapEx(void* startAddress, u32 size, u16 opt);
+void*           MEMDestroyExpHeap(MEMHeapHandle heap);
+
+void*           MEMAllocFromExpHeapEx(MEMHeapHandle heap, u32 size, int align);
+u32             MEMResizeForMBlockExpHeap(MEMHeapHandle heap, void* block, u32 size);
+void            MEMFreeToExpHeap(MEMHeapHandle heap, void* block);
+
+u32             MEMGetTotalFreeSizeForExpHeap(MEMHeapHandle heap);
+u32             MEMGetAllocatableSizeForExpHeapEx(MEMHeapHandle heap, int align);
+
+void            MEMVisitAllocatedForExpHeap(MEMHeapHandle heap, void (*visitor)(void* , MEMHeapHandle , u32), u32 param);
+
+u32             MEMAdjustExpHeap(MEMHeapHandle heap);
 
 #ifdef __cplusplus
 }

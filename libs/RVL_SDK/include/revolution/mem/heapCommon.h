@@ -43,6 +43,18 @@ void            MEMiInitHeapHead(MEMHeapHandle heap, u32 magic, void* heapStart,
 void            MEMiFinalizeHeap(MEMHeapHandle heap);
 MEMHeapHandle   MEMFindContainHeap(const void* memBlock);
 
+static inline void* MEMGetHeapStartAddress(MEMHeapHandle heap) {
+    return heap->heapStart;
+}
+
+static inline void* MEMGetHeapEndAddress(MEMHeapHandle heap) {
+    return heap->heapEnd;
+}
+
+static s32 MEMGetHeapTotalSize(const MEMiHeapHead* heap) {
+    return (u32)(heap->heapEnd) - (u32)(heap->heapStart);
+}
+
 #ifdef __cplusplus
 }
 #endif

@@ -33,7 +33,7 @@ List of libraries that are linked (in alphabetical order):
 | **KBD**      | Keyboard Driver Library                                     | :x: |
 | **KPAD**     | High Level Wii Remote Library                               | :x: |
 | **KPR**      | Key Procesor Library                                        | :x: |
-| **MEM**      | Memory Management Library                                   | :x: |
+| **MEM**      | Memory Management Library                                   | :heavy_check_mark: |
 | **MTX**      | Matrix and Vector Library                                   | :heavy_check_mark: |
 | **NAND**     | NAND Library; Small wrapper of FS                           | :heavy_check_mark: |
 | **NUP**      | Wii NUS Library; **N**intendo **UP**dater?                  | :x: |
@@ -57,6 +57,8 @@ List of libraries that are linked (in alphabetical order):
 Thanks to
 ---------
 [kiwi515/ogws](https://github.com/kiwi515/ogws)  
+[riidef/mkw](https://github.com/riidefi/mkw)  
+[vabold/bba-wd](https://github.com/vabold/bba-wd)  
 [doldecomp/dolsdk2004](https://github.com/doldecomp/dolsdk2004)  
 [SMGCommunity/Petari](https://github.com/SMGCommunity/Petari)  
 [wiibrew.org](https://wiibrew.org)  

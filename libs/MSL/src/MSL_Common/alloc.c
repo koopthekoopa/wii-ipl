@@ -135,7 +135,8 @@ void Block_link(Block* ths, SubBlock* sb) {
 		*st            = sb;
 		*st            = SubBlock_merge_prev(*st, st);
 		SubBlock_merge_next(*st, st);
-	} else {
+	}
+    else {
 		*st      = sb;
 		sb->prev = sb;
 		sb->next = sb;
@@ -182,7 +183,8 @@ static void SubBlock_merge_next(SubBlock* pBlock, SubBlock** pStart) {
 
 		if (!(pBlock->size & 2)) {
 			*(unsigned int*)((char*)pBlock + this_cur_size) &= ~4;
-		} else {
+		}
+        else {
 			*(unsigned int*)((char*)pBlock + this_cur_size) |= 4;
 		}
 
@@ -263,7 +265,8 @@ void deallocate_from_fixed_pools(__mem_pool_obj* pool_obj, void* ptr, unsigned i
 		if (fs->tail_ == b) {
 			fs->head_ = fs->head_->prev_;
 			fs->tail_ = fs->tail_->prev_;
-		} else {
+		}
+        else {
 			b->prev_->next_ = b->next_;
 			b->next_->prev_ = b->prev_;
 			b->next_        = fs->head_;

@@ -59,7 +59,7 @@ void OSProtectRange(u32 chan, void *addr, u32 nBytes, u32 control) {
 
     control &= 3;
     end = (u32)addr + nBytes;
-    start = ROUNDDOWN(addr, 1 << 10);
+    start = ROUNDDOWN((u32)addr, 1 << 10);
     end = ROUNDUP(end, 1 << 10);
     DCFlushRange((void*)start, end - start);
 

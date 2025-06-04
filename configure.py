@@ -1388,9 +1388,9 @@ config.libs = [
     ),
     RVLSDKLib("mem", [
             Object(Matching,    "mem/mem_heapCommon.c"),
-            Object(NonMatching, "mem/mem_expHeap.c"),
-            Object(NonMatching, "mem/mem_frameHeap.c"),
-            Object(NonMatching, "mem/mem_unitHeap.c"),
+            Object(Matching,    "mem/mem_expHeap.c"),
+            Object(Matching,    "mem/mem_frameHeap.c"),
+            Object(Matching,    "mem/mem_unitHeap.c"),
             Object(Matching,    "mem/mem_allocator.c"),
             Object(Matching,    "mem/mem_list.c"),
         ]

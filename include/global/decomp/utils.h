@@ -6,11 +6,11 @@
 
 #define ARRSIZE(x)              (sizeof(x) / sizeof(x[0]))
 
-#define ROUNDUP(x, a)           (((unsigned long)(x) + ((a) - 1)) & ~((a) - 1))
-#define PTR_ROUNDUP(x, a)       ((void*)ROUNDUP(x, a))
+#define ROUNDUP(x, a)           (((x) + ((a) - 1)) & ~((a) - 1))
+#define PTR_ROUNDUP(x, a)       ((void*)ROUNDUP((unsigned long)x, a))
 
-#define ROUNDDOWN(x, a)         (((unsigned long)(x)) & ~((a) - 1))
-#define PTR_ROUNDDOWN(x, a)     ((void*)ROUNDDOWN(x, a))
+#define ROUNDDOWN(x, a)         (((x)) & ~((a) - 1))
+#define PTR_ROUNDDOWN(x, a)     ((void*)ROUNDDOWN((unsigned long)x, a))
 
 #define MEM_CLEAR(x)            __memclr((x), sizeof(*(x)))
 

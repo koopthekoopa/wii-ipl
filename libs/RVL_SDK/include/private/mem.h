@@ -12,8 +12,14 @@
 extern "C" {
 #endif
 
-static u32* GetUIntPtr(const void* p) {
-    return (u32*)p;
+#define MEM_ROUNDUP(x, align)       (((x) + (align)-1) & (-(align)))
+#define MEM_PTR_ROUNDUP(x, align)   ((void*)((((u32)(x)) + (align)-1) & (~((align)-1))))
+
+#define MEM_ROUNDDOWN(x, align)     ((x) & (-(align)))
+#define MEM_PTR_ROUNDDOWN(x, align) ((void*)(((u32)(x)) & (~((align)-1))))
+
+static u32 GetUIntPtr(const void* p) {
+    return (u32)p;
 }
 
 static void* AddU32ToPtr(const void* p, u32 ofs) {
@@ -32,38 +38,44 @@ static const void* SubU32ToCPtr(const void* p, u32 ofs) {
     return (const void*)(GetUIntPtr(p) - ofs);
 }
 
-static s32 GetOffsetFromPtr(const void* heapStart, const void* heapEnd) {
-    return GetUIntPtr(heapEnd) - GetUIntPtr(heapStart);
+static u32 GetOffsetFromPtr(const void* start, const void* end) {
+    return GetUIntPtr(end) - GetUIntPtr(start);
 }
 
-static u16 GetOptForHeap(const MEMHeapHandle heap) {
+static u16 GetOptForHeap(const MEMiHeapHead* heap) {
     return heap->optFlag;
 }
 
-static void SetOptForHeap(MEMHeapHandle heap, u16 optFlag) {
-    heap->optFlag = (u8)optFlag;
+static void SetOptForHeap(MEMiHeapHead* heap, u16 opt) {
+    heap->optFlag = (u8)opt;
 }
 
-static void LockHeap(MEMHeapHandle heap) {
+static void LockHeap(MEMiHeapHead* heap) {
     if (GetOptForHeap(heap) & MEM_HEAP_OPT_CAN_LOCK) {
         OSLockMutex(&heap->mutex);
     }
 }
 
-static void UnlockHeap(MEMHeapHandle heap) {
+static void UnlockHeap(MEMiHeapHead* heap) {
     if (GetOptForHeap(heap) & MEM_HEAP_OPT_CAN_LOCK) {
         OSUnlockMutex(&heap->mutex);
     }
 }
 
-static void FillAllocMemory(MEMHeapHandle heap, void* memBlock, u32 size) {
+static void FillAllocMemory(MEMiHeapHead* heap, void* memBlock, u32 size) {
     if (GetOptForHeap(heap) & MEM_HEAP_OPT_CLEAR_ALLOC) {
         memset(memBlock, 0, size);
     }
 }
 
-static s32 MEMGetHeapTotalSize(MEMHeapHandle heap) {
-    return GetOffsetFromPtr(heap, heap->heapEnd);
+static void FillFreeMemory(MEMiHeapHead* heap, void* memBlock, u32 size) {
+    if (GetOptForHeap(heap) & MEM_HEAP_OPT_CLEAR_ALLOC) {
+        memset(memBlock, 0, size);
+    }
+}
+
+static inline s32 ComparePtr(void *p0, void *p1) {
+    return (u32)p0 - (u32)p1;
 }
 
 #ifdef __cplusplus

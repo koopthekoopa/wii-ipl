@@ -23,9 +23,9 @@ void  OSSetMEM2ArenaLo(void* lo)    { s_mem2ArenaLo = lo; }
 void  OSSetArenaLo(void* lo)        { OSSetMEM1ArenaLo(lo); }
 
 void* OSAllocFromMEM1ArenaLo(u32 size, u32 align) {
-    u8* begin = (void*)ROUNDUP(OSGetMEM1ArenaLo(), align);
+    u8* begin = PTR_ROUNDUP(OSGetMEM1ArenaLo(), align);
     u8* end = begin + size;
-    end = (void*)ROUNDUP(end, align);
+    end = PTR_ROUNDUP(end, align);
 
     OSSetMEM1ArenaLo(end);
 
@@ -33,9 +33,9 @@ void* OSAllocFromMEM1ArenaLo(u32 size, u32 align) {
 }
 
 void* OSAllocFromMEM2ArenaLo(u32 size, u32 align) {
-    u8* begin = (void*)ROUNDUP(OSGetMEM2ArenaLo(), align);
+    u8* begin = PTR_ROUNDUP(OSGetMEM2ArenaLo(), align);
     u8* end = begin + size;
-    end = (void*)ROUNDUP(end, align);
+    end = PTR_ROUNDUP(end, align);
 
     OSSetMEM2ArenaLo(end);
 
