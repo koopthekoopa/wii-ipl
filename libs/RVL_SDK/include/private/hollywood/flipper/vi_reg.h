@@ -49,7 +49,7 @@
 
 #define VI_UNKNOWN_70               0x0070
 
-#define VI_HBE_BOEDER               0x0072
-#define VI_HBS_BOEDER               0x0074
+#define VI_HBE_BORDER               0x0072
+#define VI_HBS_BORDER               0x0074
 
 #endif // PRIVATE_HOLLYWOOD_FLIPPER_VI_REGS_H

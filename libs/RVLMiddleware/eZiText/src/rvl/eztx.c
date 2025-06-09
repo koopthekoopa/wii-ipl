@@ -6,16 +6,19 @@
 #include <zi8clib/zi8copy.h>
 #include <zi8clib/zoemdata.h>
 
+#include <revolution/os.h>
+#include <revolution/verdefs.h>
+
 #include <wchar.h>
 
-const char* __ZI_EZITEXTVersion = "<< RVL_MWM - ZI_EZITEXT \trelease build: Jan 15 2008 18:59:50 (0x4199_60831) >>";
+DefineVersion(RVL_MWM, ZI_EZITEXT, "Jan 15 2008", "18:59:50");
 
 u16 EZTXGetGlobalDataSize() {
     return Zi8GetGlobalDataSize();
 }
 
 BOOL EZTXInitialize(ziVoid* data, ziVoid* workData) {
-    OSRegisterVersion(__ZI_EZITEXTVersion);
+    OSRegisterVersion(GetVersion(ZI_EZITEXT));
     return Zi8InitializeDynamic(data, workData);
 }
 

@@ -1301,14 +1301,14 @@ config.libs = [
         ]
     ),
     RVLSDKLib("exi", [
-            Object(Matching, "exi/EXIBios.c", extra_cflags=["-schedule off -volatileasm"]),
-            Object(Matching, "exi/EXIUart.c"),
-            Object(Matching, "exi/EXICommon.c"),
+            Object(Matching,    "exi/EXIBios.c", extra_cflags=["-schedule off -volatileasm"]),
+            Object(Matching,    "exi/EXIUart.c"),
+            Object(Matching,    "exi/EXICommon.c"),
         ]
     ),
     RVLSDKLib("si", [
-            Object(NonMatching, "si/SIBios.c"),
-            Object(NonMatching, "si/SISamplingRate.c"),
+            Object(Matching,    "si/SIBios.c"),
+            Object(Matching,    "si/SISamplingRate.c"),
         ]
     ),
     RVLSDKLib("db", [

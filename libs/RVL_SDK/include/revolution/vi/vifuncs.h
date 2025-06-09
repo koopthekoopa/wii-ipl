@@ -33,6 +33,8 @@ u32     VIGetDTVStatus();
 
 u32     VIGetTvFormat();
 
+u32     VIGetCurrentLine();
+
 #ifdef __cplusplus
 }
 #endif

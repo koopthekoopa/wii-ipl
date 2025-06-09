@@ -8,7 +8,7 @@ List of libraries that are linked (in alphabetical order):
 
 |     Name     |                          Description                        |      Matched       |
 |--------------|-------------------------------------------------------------|--------------------|
-| **AI**       | Audio Inerface Library                                      | :x: |
+| **AI**       | Audio Interface Library                                     | :x: |
 | **ARC**      | Archive Library; for reading "U8 files"                     | :heavy_check_mark: |
 | **AX**       | Audio Mixing Library                                        | :x: |
 | **AXFX**     | Auxillary Effects Library for AX                            | :x: |
@@ -43,7 +43,7 @@ List of libraries that are linked (in alphabetical order):
 | **SC**       | System Configuration Library                                | :x: |
 | **SCUTIL**   | Small Utilities Library for System Configuration            | :heavy_check_mark: |
 | **SDI**      | SD Card Driver API                                          | :x: |
-| **SI**       | Serial Interface Library; for PAD                           | :x: |
+| **SI**       | Serial Interface Library; for PAD                           | :heavy_check_mark: |
 | **TPL**      | Texture Palette File Library                                | :heavy_check_mark: |
 | **USB**      | IUSB Input/Output API; written by Hudson Soft               | :x: |
 | **USBCMN**   | Small utilities for USB?                                    | :x: |

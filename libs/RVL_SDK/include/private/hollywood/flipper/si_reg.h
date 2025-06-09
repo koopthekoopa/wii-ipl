@@ -1,6 +1,12 @@
 #ifndef PRIVATE_HOLLYWOOD_FLIPPER_SI_REGS_H
 #define PRIVATE_HOLLYWOOD_FLIPPER_SI_REGS_H
 
+#define SI_OUT_BUFFER           0x0000
+#define SI_BUTTON_BUFFER        0x0004
+#define SI_BUTTON_2_BUFFER      0x0008
+
+#define SI_BUFFER_SIZE          0x000C
+
 #define SI_0_OUT_BUFFER         0x0000
 #define SI_0_BUTTON_BUFFER      0x0004
 #define SI_0_BUTTON_2_BUFFER    0x0008
