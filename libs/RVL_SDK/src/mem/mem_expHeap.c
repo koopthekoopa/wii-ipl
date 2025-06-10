@@ -2,6 +2,7 @@
 #include <revolution/os.h>
 
 #include <string.h>
+#include <math.h>
 
 #include <private/mem.h>
 

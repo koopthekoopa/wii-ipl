@@ -49,6 +49,8 @@
 
 #define OS_ADDR_SYSTEM_TIME             0x30D8
 
+#define OS_ADDR_PAD_WIRELESS_FIX_MODE   0x30E0
+#define OS_ADDR_PAD_BUTTON              0x30E3
 #define OS_ADDR_DEVICE_CODE             0x30E6
 #define OS_ADDR_BI2_DEBUG_FLAG          0x30E8
 #define OS_ADDR_BI2_PAD_SPEC            0x30E9

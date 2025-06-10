@@ -1474,7 +1474,7 @@ config.libs = [
         ]
     ),
     RVLSDKLib("pad", [
-            Object(NonMatching, "pad/Pad.c"),
+            Object(Matching,    "pad/Pad.c"),
         ]
     ),
     RVLSDKLib("wpad", [

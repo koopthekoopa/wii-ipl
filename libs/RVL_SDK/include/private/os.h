@@ -60,6 +60,8 @@ OSTime              __OSSystemTime          ADDRESS(OS_BASE_CACHED | OS_ADDR_SYS
 vu8                 __OSLockedAppType       ADDRESS(OS_BASE_CACHED | OS_ADDR_LOCKED_APP_TYPE);
 vu32                __OSLaunchPartitionType ADDRESS(OS_BASE_CACHED | OS_ADDR_BOOT_PART_TYPE);
 
+u16                 __OSWirelessPadFixMode  ADDRESS(OS_BASE_CACHED | OS_ADDR_PAD_WIRELESS_FIX_MODE);
+u8                  __OSPADButton           ADDRESS(OS_BASE_CACHED | OS_ADDR_PAD_BUTTON);
 
 /* Revision get */
 

@@ -61,8 +61,8 @@ static void SIClearTCInterrupt() {
     u32 reg;
 
     reg = SI_READ_REG(SI_CONTROL_STATUS);
-    reg |= SI_COMCSR_TCINT_MASK;
-    reg &= ~SI_COMCSR_TSTART_MASK;
+    reg |= (1<<SI_CONTROL_STATUS_TCINT);
+    reg &= ~(1<<SI_CONTROL_STATUS_TSTART);
     SI_WRITE_REG(SI_CONTROL_STATUS, reg);
 }
 
@@ -92,7 +92,7 @@ static u32 CompleteTransfer() {
             }
         }
 
-        if (SI_READ_REG(SI_CONTROL_STATUS) & SI_COMCSR_COMERR_MASK) {
+        if (SI_READ_REG(SI_CONTROL_STATUS) & (1<<SI_CONTROL_STATUS_COMERR)) {
             sr >>= (3 - Si.chan) * 8;
             sr &= 0xF;
             if ((sr & 8) != 0 && (Type[Si.chan] & 0x80) == 0) {
@@ -124,7 +124,7 @@ static void SIInterruptHandler(__OSInterrupt interrupt, OSContext* context) {
     u32 x;
 
     reg = SI_READ_REG(SI_CONTROL_STATUS);
-    if ((reg & (SI_COMCSR_TCINT_MASK | SI_COMCSR_TCINTMSK_MASK)) == (SI_COMCSR_TCINT_MASK | SI_COMCSR_TCINTMSK_MASK)) {
+    if ((reg & ((1<<SI_CONTROL_STATUS_TCINT) | (1<<SI_CONTROL_STATUS_TCINTMSK))) == ((1<<SI_CONTROL_STATUS_TCINT) | (1<<SI_CONTROL_STATUS_TCINTMSK))) {
         chan = Si.chan;
         sr = CompleteTransfer();
         callback = Si.callback;
@@ -146,7 +146,7 @@ static void SIInterruptHandler(__OSInterrupt interrupt, OSContext* context) {
         }
     }
 
-    if ((reg & (SI_COMCSR_RDSTINT_MASK | SI_COMCSR_RDSTINTMSK_MASK)) == (SI_COMCSR_RDSTINT_MASK | SI_COMCSR_RDSTINTMSK_MASK)) {
+    if ((reg & ((1<<SI_CONTROL_STATUS_RDSTINT) | (1<<SI_CONTROL_STATUS_RDSTINTMSK))) == ((1<<SI_CONTROL_STATUS_RDSTINT) | (1<<SI_CONTROL_STATUS_RDSTINTMSK))) {
         vcount = 1 + VIGetCurrentLine();
         x = (Si.poll & (0x3FF << 16)) >> 16;
 
@@ -205,20 +205,20 @@ static BOOL SIEnablePollingInterrupt(BOOL enable) {
 
     enabled = OSDisableInterrupts();
     reg = SI_READ_REG(SI_CONTROL_STATUS);
-    rc = ((reg & SI_COMCSR_RDSTINTMSK_MASK) != 0) ? TRUE : FALSE;
+    rc = ((reg & (1<<SI_CONTROL_STATUS_RDSTINTMSK)) != 0) ? TRUE : FALSE;
 
     if (enable) {
-        reg |= SI_COMCSR_RDSTINTMSK_MASK;
+        reg |= (1<<SI_CONTROL_STATUS_RDSTINTMSK);
         
         for (i = 0; i < SI_CHAN_MAX; i++) {
             InputBufferVcount[i] = 0;
         }
     }
     else {
-        reg &= ~SI_COMCSR_RDSTINTMSK_MASK;
+        reg &= ~(1<<SI_CONTROL_STATUS_RDSTINTMSK);
     }
 
-    reg &= ~(SI_COMCSR_TCINT_MASK | SI_COMCSR_TSTART_MASK);
+    reg &= ~((1<<SI_CONTROL_STATUS_TCINT) | (1<<SI_CONTROL_STATUS_TSTART));
     SI_WRITE_REG(SI_CONTROL_STATUS, reg);
 
     OSRestoreInterrupts(enabled);
@@ -263,9 +263,9 @@ void SIInit() {
         Si.poll = 0;
         SISetSamplingRate(0);
 
-        do {} while(SI_READ_REG(SI_CONTROL_STATUS) & SI_COMCSR_TSTART_MASK);
+        do {} while(SI_READ_REG(SI_CONTROL_STATUS) & (1<<SI_CONTROL_STATUS_TSTART));
 
-        SI_WRITE_REG(SI_CONTROL_STATUS, SI_COMCSR_TCINT_MASK);
+        SI_WRITE_REG(SI_CONTROL_STATUS, (1<<SI_CONTROL_STATUS_TCINT));
         __OSSetInterruptHandler(__OS_INTERRUPT_PI_SI, SIInterruptHandler);
         __OSUnmaskInterrupts(OS_INTERRUPTMASK_PI_SI);
 
@@ -359,7 +359,7 @@ void SISetCommand(s32 chan, u32 command) {
 }
 
 void SITransferCommands() {
-    SI_WRITE_REG(SI_STATUS, SI_COMCSR_TCINT_MASK);
+    SI_WRITE_REG(SI_STATUS, (1<<SI_CONTROL_STATUS_TCINT));
 }
 
 u32 SISetXY(u32 x, u32 y) {

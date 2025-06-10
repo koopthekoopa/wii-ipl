@@ -26,6 +26,13 @@
 #define SI_JOY_POLL             0x0030
 
 #define SI_CONTROL_STATUS       0x0034
+#define SI_CONTROL_STATUS_TCINT         31
+#define SI_CONTROL_STATUS_TCINTMSK      30
+#define SI_CONTROL_STATUS_COMERR        29
+#define SI_CONTROL_STATUS_RDSTINT       28
+#define SI_CONTROL_STATUS_RDSTINTMSK    27
+
+#define SI_CONTROL_STATUS_TSTART        0
 
 #define SI_STATUS               0x0038
 

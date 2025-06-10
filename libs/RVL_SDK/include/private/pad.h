@@ -3,6 +3,6 @@
 
 #include <revolution/types.h>
 
-BOOL    __PADDisableRecalibration(BOOL disableCal);
+BOOL    __PADDisableRecalibration(BOOL disable);
 
 #endif // PRIVATE_PAD_H

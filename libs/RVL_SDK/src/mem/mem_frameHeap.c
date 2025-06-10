@@ -2,6 +2,7 @@
 #include <revolution/os.h>
 
 #include <string.h>
+#include <math.h>
 
 #include <private/mem.h>
 
@@ -111,7 +112,7 @@ u32 MEMGetAllocatableSizeForFrmHeapEx(MEMHeapHandle heap, int align) {
     MEMiFrmHeapHead* frmHeap;
     void* block;
     
-    align = __abs(align);
+    align = abs(align);
     enabled = OSDisableInterrupts();
     frmHeap = (MEMiFrmHeapHead*)AddU32ToPtr(heap, sizeof(MEMiHeapHead));
     block = MEM_PTR_ROUNDUP(frmHeap->head, align);

@@ -41,7 +41,11 @@ extern int __double_huge[];
 #define isnan(x)    (__fpclassifyd(x) == 1)
 #define isfinite(x) (__fpclassifyd(x) > 2)
 
-int             abs(int x);
+inline int      abs(int x) {
+#ifdef __MWERKS__
+    return __abs(x);
+#endif // __MWERKS__
+}
 long int        labs(long n);
 inline double   fabs(double x) {
 #ifdef __MWERKS__
