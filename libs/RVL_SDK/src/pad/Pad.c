@@ -11,6 +11,8 @@
 
 #include <revolution/verdefs.h>
 
+SDKDefineVersion(PAD, "Apr 20 2010", "11:20:52");
+
 #define PAD_ALL             \
     (                      \
         PAD_BUTTON_LEFT  | \
@@ -29,7 +31,6 @@
         0x0080             \
     )
 
-SDKDefineVersion(PAD, "Apr 20 2010", "11:20:52");
 
 static BOOL OnShutdown(BOOL final, u32 code);
 
