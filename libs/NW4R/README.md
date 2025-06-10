@@ -7,13 +7,17 @@ This NW4R build would later be used for `NW4HBM` (a variant of NW4R for the HOME
 
 List of libraries that are linked (in alphabetical order):
 
-|   Name   |                    Description                     |      Matched       |
-|----------|----------------------------------------------------|--------------------|
-| **DB**   | Debug library; in this case, for the crash handler | :x: |
-| **MATH** | Math utilities library                             | :heavy_check_mark: |
-| **UT**   | Utilities library                                  | :x: |
-| **SND**  | Sound Library; for ".brsar" files                  | :x: |
-| **LYT**  | Layout Library; for ".brlyt" files                 | :warning: |
+✔️ = Matching  
+⚠️ = Equivalent  
+❌ = Not matching  
+
+|   Name   |                    Description                     |    |
+|----------|----------------------------------------------------|----|
+| **DB**   | Debug library; in this case, for the crash handler | ❌ |
+| **MATH** | Math utilities library                             | ✔️ |
+| **UT**   | Utilities library                                  | ❌ |
+| **SND**  | Sound Library; for ".brsar" files                  | ❌ |
+| **LYT**  | Layout Library; for ".brlyt" files                 | ⚠️ |
 
 Thanks to
 ---------

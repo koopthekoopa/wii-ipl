@@ -4,14 +4,18 @@ A decompilation of Revolution Extension (RevoEX; Version 2.0PR4) from the Wii Me
 
 List of libraries that are linked (in alphabetical order):
 
-|   Name    |             Description           |      Matched       |
-|-----------|-----------------------------------|--------------------|
-| **CDB**   | Message Board File System Library | :x: |
-| **NCD**   | Network Settings Library          | :x: |
-| **NET**   | Network Utilities Library         | :x: |
-| **NHTTP** | HTTP Library                      | :x: |
-| **NWC24** | WiiConnect24 Library              | :x: |
-| **SO**    | Socket Library                    | :x: |
-| **SSL**   | SSL Library                       | :x: |
-| **VF**    | Virtual File System Library       | :x: |
-| **WD**    | Wireless Driver Library           | :x: |
+✔️ = Matching  
+⚠️ = Equivalent  
+❌ = Not matching  
+
+|   Name    |             Description           |    |
+|-----------|-----------------------------------|----|
+| **CDB**   | Message Board File System Library | ❌ |
+| **NCD**   | Network Settings Library          | ❌ |
+| **NET**   | Network Utilities Library         | ❌ |
+| **NHTTP** | HTTP Library                      | ❌ |
+| **NWC24** | WiiConnect24 Library              | ❌ |
+| **SO**    | Socket Library                    | ❌ |
+| **SSL**   | SSL Library                       | ❌ |
+| **VF**    | Virtual File System Library       | ❌ |
+| **WD**    | Wireless Driver Library           | ❌ |
