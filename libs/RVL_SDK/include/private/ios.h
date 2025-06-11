@@ -3,6 +3,10 @@
 
 #include <private/ios/types.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Clt */
 
 IOSError    IOS_OpenAsync(const char* pPath, u32 flags, IOSIpcCb callback, void* callback_arg);
@@ -36,5 +40,9 @@ void*       iosAlloc(IOSHeapId id, u32 size);
 void*       iosAllocAligned(IOSHeapId id, u32 size, u32 alignment);
 
 IOSError    iosFree(IOSHeapId id, void* ptr);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // PRIVATE_IPC_PRIVATE_IOS_HH

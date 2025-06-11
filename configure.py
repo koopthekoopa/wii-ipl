@@ -1495,7 +1495,7 @@ config.libs = [
         ]
     ),
     RVLSDKLib("usb", [
-            Object(NonMatching, "usb/usb.c"),
+            Object(Matching,    "usb/usb.c"),
         ]
     ),
     RVLSDKLib("wud", [

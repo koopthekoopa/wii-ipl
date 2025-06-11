@@ -9,6 +9,10 @@
 #include <private/nand/nandsecret.h>
 #include <private/nand/NANDLog.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 BOOL        nandIsInitialized();
 
 void        nandCallback(ISFSError result, void* arg);
@@ -31,5 +35,9 @@ void        nandGenerateAbsPath(char* absPath, const char* path);
 void        nandGetParentDirectory(char* parentDir, const char* absPath);
 
 const char* nandGetHomeDir();
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // PRIVATE_NAND_H

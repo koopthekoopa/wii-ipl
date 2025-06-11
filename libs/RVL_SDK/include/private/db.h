@@ -4,6 +4,10 @@
 #include <revolution/types.h>
 #include <revolution/os/OSException.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct DBInterface {
     u32     bPresent;                   // 0x00
     u32     exceptionMask;              // 0x04
@@ -22,5 +26,9 @@ void    DBPrintf(const char* format, ...);
 #define DB_EXCEPTIONOFFSET_MASK         0x04
 #define DB_EXCEPTIONOFFSET_HOOK         0x08
 #define DB_EXCEPTIONOFFSET_HOOKLR       0x0C
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // REVOLUTION_DB_H

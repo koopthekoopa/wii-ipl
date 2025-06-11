@@ -5,6 +5,10 @@
 
 #include <private/ios/types.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Main */
 
 void        IPCInit();
@@ -34,5 +38,9 @@ void        IPCiProfReply(void* req, s32 fd);
 
 IOSError    IPCCltInit();
 IOSError    IPCCltReInit();
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // PRIVATE_IPC_H

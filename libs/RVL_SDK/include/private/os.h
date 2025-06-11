@@ -25,6 +25,10 @@
 #include <private/os/OSNandbootInfo.h>
 #include <private/os/OSStateFlags.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 enum {
     OS_APP_TYPE_IPL = 0x40,
     OS_APP_TYPE_DVD = 0x80,
@@ -102,5 +106,9 @@ u32     __OSGetDIConfig();
 BOOL    __OSSetVIForceDimming(BOOL enable, u32 shiftY, u32 shiftX);
 
 void    OSDefaultExceptionHandler(u8 type, register OSContext* context);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // PRIVATE_OS_H

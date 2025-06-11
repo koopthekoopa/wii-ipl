@@ -1,6 +1,8 @@
 #ifndef PRIVATE_EUART_H
 #define PRIVATE_EUART_H
+
 #include <revolution/types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -24,4 +26,5 @@ EUARTError  WriteUARTN(const char* msg, u32 n);
 #ifdef __cplusplus
 }
 #endif
-#endif
+
+#endif // PRIVATE_EUART_H

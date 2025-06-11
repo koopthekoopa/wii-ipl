@@ -8,6 +8,10 @@
 #include <revolution/os/OSThread.h>
 #include <revolution/nand.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define SC_CONFIG_FILE_PHYS_ADDRESS 0x3800
 #define SC_CONFIG_FILE_LENGTH       0x100
 
@@ -130,5 +134,9 @@ BOOL SCReplaceS8Item(s8 dst, SCItemID id);
 BOOL SCReplaceU32Item(u32 dst, SCItemID id);
 BOOL SCReplaceU64Item(u64 dst, SCItemID id);
 BOOL SCReplaceBoolItem(BOOL dst, SCItemID id);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // PRIVATE_SC_H
