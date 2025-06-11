@@ -1435,9 +1435,9 @@ config.libs = [
         ]
     ),
     RVLSDKLib("sc", [
-            Object(NonMatching, "sc/scsystem.c"),
-            Object(NonMatching, "sc/scapi.c"),
-            Object(NonMatching, "sc/scapi_prdinfo.c"),
+            Object(Matching,    "sc/scsystem.c"),
+            Object(Matching,    "sc/scapi.c"),
+            Object(Matching,    "sc/scapi_prdinfo.c"),
         ]
     ),
     RVLSDKLib("wenc", [

@@ -187,7 +187,7 @@ char* SCUTILGetISOCountryCodeA2() {
         return NULL;
     }
 
-    countryID = addressID >> 24;
+    countryID = addressID >> SC_SIMPLE_ADDRESS_ID_COUNTRY;
     if (countryID >= ARRSIZE(countryIdToISOA2)) {
         return NULL;
     }

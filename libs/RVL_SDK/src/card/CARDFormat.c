@@ -21,13 +21,15 @@ static void FormatCallback(s32 chan, s32 result) {
         result = __CARDEraseSector(chan, (u32)card->sectorSize * card->formatStep, FormatCallback);
         if (result >= 0)
             return;
-    } else if (card->formatStep < 2 * CARD_NUM_SYSTEM_BLOCK) {
+    }
+    else if (card->formatStep < 2 * CARD_NUM_SYSTEM_BLOCK) {
         int step = card->formatStep - CARD_NUM_SYSTEM_BLOCK;
         result = __CARDWrite(chan, (u32)card->sectorSize * step, CARD_SYSTEM_BLOCK_SIZE,
                              (u8* )card->workArea + (CARD_SYSTEM_BLOCK_SIZE * step), FormatCallback);
         if (result >= 0)
             return;
-    } else {
+    }
+    else {
         card->currentDir = (CARDDir*)((u8*)card->workArea + (1 + 0) * CARD_SYSTEM_BLOCK_SIZE);
         memcpy(card->currentDir, (u8*)card->workArea + (1 + 1) * CARD_SYSTEM_BLOCK_SIZE, CARD_SYSTEM_BLOCK_SIZE);
         card->currentFat = (u16*)((u8*)card->workArea + (3 + 0) * CARD_SYSTEM_BLOCK_SIZE);

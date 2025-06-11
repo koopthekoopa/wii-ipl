@@ -44,7 +44,7 @@ List of libraries that are linked (in alphabetical order):
 | **OS**       | Main Operating System library                               | ✔️ |
 | **PAD**      | GameCube Controller Library                                 | ✔️ |
 | **RSO**      | Relocated Static Object Library                             | ❌ |
-| **SC**       | System Configuration Library                                | ❌ |
+| **SC**       | System Configuration Library                                | ✔️ |
 | **SCUTIL**   | Small Utilities Library for System Configuration            | ✔️ |
 | **SDI**      | SD Card Driver API                                          | ❌ |
 | **SI**       | Serial Interface Library; for PAD                           | ✔️ |
