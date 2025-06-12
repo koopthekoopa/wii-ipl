@@ -45,10 +45,10 @@ vu32    __PIRegs[64]            ADDRESS(OS_BASE_UNCACHED + PI_REG_ADDRESS);
 #define DSP_REG_ADDRESS         0x0C005000
 vu16    __DSPRegs[128]          ADDRESS(OS_BASE_UNCACHED + DSP_REG_ADDRESS);
 
-#define DSP_WRITE_REG(x, v)     __DSPRegs[(x) >> 1] = ((u16)v)
+#define DSP_WRITE_REG(x, v)     __DSPRegs[(x) >> 1] = (v)
 #define DSP_READ_REG(x)         __DSPRegs[(x) >> 1]
 
-#define DSP_WRITE_REG32(x, v)   *(u32*)&__DSPRegs[(x) >> 1] = ((u32)v)
+#define DSP_WRITE_REG32(x, v)   *(u32*)&__DSPRegs[(x) >> 1] = (v)
 #define DSP_READ_REG32(x)       *(u32*)&__DSPRegs[(x) >> 1]
 
 #define DSP_SET_REG_F(x, v)     __flipper_set_bit  (__DSPRegs[(x) >> 1], v)

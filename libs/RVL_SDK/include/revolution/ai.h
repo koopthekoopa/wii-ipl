@@ -3,12 +3,28 @@
 
 #include <revolution/types.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef void (*AIDCallback)();
+
+enum {
+    AI_DSP_SAMPLE_RATE_32KHZ = 0,
+    AI_DSP_SAMPLE_RATE_48KHZ,
+};
 
 AIDCallback AIRegisterDMACallback(AIDCallback callback);
 
 void        AIInitDMA(u32 startAddr, u32 length);
 u32         AIGetDMALength();
 u32         AIGetDMAStartAddr();
+
+void        AISetDSPSampleRate(u32 rate);
+u32         AIGetDSPSampleRate();
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // REVOLUTION_AI_H

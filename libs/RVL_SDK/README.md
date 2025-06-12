@@ -12,7 +12,7 @@ List of libraries that are linked (in alphabetical order):
 
 |     Name     |                          Description                        |    |
 |--------------|-------------------------------------------------------------|----|
-| **AI**       | Audio Interface Library                                     | ❌ |
+| **AI**       | Audio Interface Library                                     | ✔️ |
 | **ARC**      | Archive Library; for reading "U8 files"                     | ✔️ |
 | **AX**       | Audio Mixing Library                                        | ❌ |
 | **AXFX**     | Auxillary Effects Library for AX                            | ❌ |

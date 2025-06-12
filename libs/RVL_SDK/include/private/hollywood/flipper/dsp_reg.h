@@ -27,7 +27,7 @@
 
 #define DSP_AR_SIZE             0x0012
 #define DSP_AR_MODE             0x0016
-#define DSP_AR_REFRESH          0x001A
+#define DSP_AR_REFRESH          0x0018
 #define DSP_AR_DMA_MMADDR       0x0020
 #define DSP_AR_DMA_MMADDR_H     0x0020
 #define DSP_AR_DMA_MMADDR_L     0x0022

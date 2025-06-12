@@ -1356,7 +1356,7 @@ config.libs = [
         ]
     ),
     RVLSDKLib("ai", [
-            Object(NonMatching, "ai/ai.c"),
+            Object(Matching,    "ai/ai.c"),
         ]
     ),
     RVLSDKLib("ax", [
