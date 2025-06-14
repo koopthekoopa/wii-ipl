@@ -1373,18 +1373,18 @@ config.libs = [
         ]
     ),
     RVLSDKLib("axfx", [
-            Object(NonMatching, "axfx/AXFXReverbHi.c"),
-            Object(NonMatching, "axfx/AXFXReverbHiDpl2.c"),
+            Object(Matching,    "axfx/AXFXReverbHi.c"),
+            Object(Matching,    "axfx/AXFXReverbHiDpl2.c"),
             Object(NonMatching, "axfx/AXFXReverbHiExp.c"),
             Object(NonMatching, "axfx/AXFXReverbHiExpDpl2.c"),
-            Object(NonMatching, "axfx/AXFXDelay.c"),
-            Object(NonMatching, "axfx/AXFXReverbStd.c"),
+            Object(Matching,    "axfx/AXFXDelay.c"),
+            Object(Matching,    "axfx/AXFXReverbStd.c"),
             Object(NonMatching, "axfx/AXFXReverbStdExp.c"),
-            Object(NonMatching, "axfx/AXFXChorus.c"),
+            Object(Matching,    "axfx/AXFXChorus.c"),
             Object(NonMatching, "axfx/AXFXChorusExp.c"),
             Object(Matching,    "axfx/AXFXLfoTable.c"),
             Object(Matching,    "axfx/AXFXSrcCoef.c"),
-            Object(NonMatching, "axfx/AXFXHooks.c"),
+            Object(Matching,    "axfx/AXFXHooks.c"),
         ]
     ),
     RVLSDKLib("mem", [
