@@ -1,4 +1,4 @@
-#include <revolution/ax.h>
+#include <private/ax.h>
 
 static AXPROFILE*   __AXProfile;
 

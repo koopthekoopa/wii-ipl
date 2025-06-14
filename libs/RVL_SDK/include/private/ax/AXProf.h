@@ -1,5 +1,5 @@
-#ifndef REVOLUTION_AX_PROFILE_H
-#define REVOLUTION_AX_PROFILE_H
+#ifndef PRIVATE_AX_PROFILE_H
+#define PRIVATE_AX_PROFILE_H
 
 #include <revolution/types.h>
 
@@ -29,6 +29,4 @@ AXPROFILE*  __AXGetCurrentProfile();
 }
 #endif
 
-#endif // REVOLUTION_AX_PROFILE_H
-
-
+#endif // PRIVATE_AX_PROFILE_H

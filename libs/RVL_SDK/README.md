@@ -14,7 +14,7 @@ List of libraries that are linked (in alphabetical order):
 |--------------|-------------------------------------------------------------|----|
 | **AI**       | Audio Interface Library                                     | ✔️ |
 | **ARC**      | Archive Library; for reading "U8 files"                     | ✔️ |
-| **AX**       | Audio Mixing Library                                        | ❌ |
+| **AX**       | Audio Mixing Library                                        | ✔️ |
 | **AXFX**     | Auxillary Effects Library for AX                            | ❌ |
 | **BASE**     | PowerPC Architecture Library                                | ✔️ |
 | **BTE**      | Bluetooth Driver Library; written by BroadCom               | ❌ |

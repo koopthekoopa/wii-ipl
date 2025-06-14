@@ -16,24 +16,32 @@ extern "C" {
  * Stereo: Left, Right, Surround
  * DPL2:   Left, Right, Left Surround, Right Surround
  */
-enum {
+typedef enum {
     AX_STEREO_L,
     AX_STEREO_R,
     AX_STEREO_S,
 
     AX_STEREO_MAX
-};
+} AXStereoChannel;
 
-enum {
+typedef enum {
     AX_DPL2_L,
     AX_DPL2_R,
     AX_DPL2_LS,
     AX_DPL2_RS,
 
     AX_DPL2_MAX
-};
+} AXDPL2Channel;
 
-typedef void (*AXAuxCallback)(void* chans, void* context);
+typedef void (*AXAuxCallback)(void*, void*);
+
+void    AXRegisterAuxACallback(AXAuxCallback callback, void* context);
+void    AXRegisterAuxBCallback(AXAuxCallback callback, void* context);
+void    AXRegisterAuxCCallback(AXAuxCallback callback, void* context);
+
+void    AXGetAuxACallback(AXAuxCallback* callback, void** context);
+void    AXGetAuxBCallback(AXAuxCallback* callback, void** context);
+void    AXGetAuxCCallback(AXAuxCallback* callback, void** context);
 
 #ifdef __cplusplus
 }

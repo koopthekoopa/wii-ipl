@@ -19,40 +19,38 @@ extern "C" {
 #define AX_ADPCM_SAMPLES_PER_BYTE 2
 
 // Amount of audio samples in a frame
-#define AX_ADPCM_SAMPLES_PER_FRAME      (AX_ADPCM_SAMPLE_BYTES_PER_FRAME * AX_ADPCM_SAMPLES_PER_BYTE)
+#define AX_ADPCM_SAMPLES_PER_FRAME                                             \
+    (AX_ADPCM_SAMPLE_BYTES_PER_FRAME * AX_ADPCM_SAMPLES_PER_BYTE)
 
 // Amount of nibbles in a frame
 #define AX_ADPCM_NIBBLES_PER_FRAME (AX_ADPCM_FRAME_SIZE * 2)
 
-enum {
+typedef enum {
     AX_VOICE_NORMAL,
     AX_VOICE_STREAM
-};
+} AXVOICETYPE;
 
-enum {
-    AX_VOICE_STOP,
-    AX_VOICE_RUN
-};
+typedef enum { AX_VOICE_STOP, AX_VOICE_RUN } AXVOICESTATE;
 
-enum {
+typedef enum {
     AX_SAMPLE_FORMAT_DSP_ADPCM = 0,
     AX_SAMPLE_FORMAT_PCM_S16 = 10,
     AX_SAMPLE_FORMAT_PCM_S8 = 25,
-};
+} AXSAMPLETYPE;
 
 enum {
     AX_PB_LPF_ON = 1,
     AX_PB_BIQUAD_ON,
 };
 
-enum {
+typedef enum {
     AX_SRC_TYPE_NONE,
     AX_SRC_TYPE_LINEAR,
     AX_SRC_TYPE_4TAP_8K,
     AX_SRC_TYPE_4TAP_12K,
     AX_SRC_TYPE_4TAP_16K,
     AX_SRC_TYPE_4TAP_AUTO
-} ;
+} AXPBSRCTYPE;
 
 enum {
     AX_MIXER_CTRL_L = (1 << 0),
@@ -242,6 +240,10 @@ typedef struct _AXPBRMTMIX {
     u16 vAux3;          // 0x1C
     u16 vDeltaAux3;     // 0x1E
 } AXPBRMTMIX;
+
+typedef struct _AXPBITDBUFFER {
+    s16 buffer[32]; // 0x00
+} AXPBITDBUFFER;
 
 typedef struct _AXPBRMTDPOP {
     s16 aMain0; // 0x00

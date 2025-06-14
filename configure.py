@@ -1361,12 +1361,13 @@ config.libs = [
     ),
     RVLSDKLib("ax", [
             Object(Matching,    "ax/AX.c"),
-            Object(NonMatching, "ax/AXAlloc.c"),
-            Object(NonMatching, "ax/AXAux.c"),
-            Object(NonMatching, "ax/AXCL.c"),
-            Object(NonMatching, "ax/AXOut.c"),
+            Object(Matching,    "ax/AXAlloc.c"),
+            Object(Matching,    "ax/AXAux.c"),
+            Object(Matching,    "ax/AXCL.c"),
+            Object(Matching,    "ax/AXOut.c"),
             Object(Matching,    "ax/AXSPB.c"),
-            Object(NonMatching, "ax/AXVPB.c"),
+            Object(Matching,    "ax/AXVPB.c"),
+            Object(Matching,    "ax/AXComp.c"),
             Object(Matching,    "ax/AXProf.c"),
             Object(Matching,    "ax/DSPCode.c"),
         ]

@@ -2923,9 +2923,12 @@ libs/RVL_SDK/src/ax/AXSPB.c:
 libs/RVL_SDK/src/ax/AXVPB.c:
 	.bss        start:0x81120520 end:0x81131C20
 	.text       start:0x815544F4 end:0x81555B04
-	.data       start:0x81682F40 end:0x81683FA0
+	.data       start:0x81682F40 end:0x81682FE0
 	.sdata2     start:0x81697570 end:0x81697590
 	.sbss       start:0x8169B340 end:0x8169B360
+
+libs/RVL_SDK/src/ax/AXComp.c:
+	.data       start:0x81682FE0 end:0x81683FA0
 
 libs/RVL_SDK/src/ax/DSPCode.c:
 	.data       start:0x81683FA0 end:0x81685FA0

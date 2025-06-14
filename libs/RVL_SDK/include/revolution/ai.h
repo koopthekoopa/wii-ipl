@@ -20,8 +20,13 @@ void        AIInitDMA(u32 startAddr, u32 length);
 u32         AIGetDMALength();
 u32         AIGetDMAStartAddr();
 
+void        AIStartDMA();
+void        AIStopDMA();
+
 void        AISetDSPSampleRate(u32 rate);
 u32         AIGetDSPSampleRate();
+
+u32         AIGetDMABytesLeft();
 
 #ifdef __cplusplus
 }
