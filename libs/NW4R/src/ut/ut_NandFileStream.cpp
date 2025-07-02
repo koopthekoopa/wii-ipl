@@ -32,14 +32,14 @@ namespace nw4r {
             mFileInfo.stream = this;
         }
         
-        NandFileStream::NandFileStream(const char* pPath, u32 mode) {
+        NandFileStream::NandFileStream(const char* path, u32 mode) {
             Initialize_();
-            Open(pPath, mode);
+            Open(path, mode);
         }
         
-        NandFileStream::NandFileStream(const NANDFileInfo* pInfo, u32 mode, bool enableClose) {
+        NandFileStream::NandFileStream(const NANDFileInfo* info, u32 mode, bool enableClose) {
             Initialize_();
-            Open(pInfo, mode, enableClose);
+            Open(info, mode, enableClose);
         }
         
         NandFileStream::~NandFileStream() {
@@ -48,7 +48,7 @@ namespace nw4r {
             }
         }
         
-        bool NandFileStream::Open(const char* pPath, u32 mode) {
+        bool NandFileStream::Open(const char* path, u32 mode) {
             if (mCloseOnDestroyFlg) {
                 Close();
             }
@@ -56,7 +56,7 @@ namespace nw4r {
             mCanRead = mode & NAND_ACCESS_READ;
             mCanWrite = mode & NAND_ACCESS_WRITE;
         
-            if (NANDOpen(pPath, &mFileInfo.nandInfo, mode) != NAND_RESULT_OK) {
+            if (NANDOpen(path, &mFileInfo.nandInfo, mode) != NAND_RESULT_OK) {
                 return false;
             }
         
@@ -80,7 +80,7 @@ namespace nw4r {
             return true;
         }
         
-        bool NandFileStream::Open(const NANDFileInfo* pInfo, u32 mode, bool enableClose) {
+        bool NandFileStream::Open(const NANDFileInfo* info, u32 mode, bool enableClose) {
             if (mCloseOnDestroyFlg) {
                 Close();
             }
@@ -88,7 +88,7 @@ namespace nw4r {
             mCanRead = mode & NAND_ACCESS_READ;
             mCanWrite = mode & NAND_ACCESS_WRITE;
         
-            mFileInfo.nandInfo = *pInfo;
+            mFileInfo.nandInfo = *info;
         
             u32 fileSize;
             if (NANDGetLength(&mFileInfo.nandInfo, &fileSize) != NAND_RESULT_OK) {
@@ -126,9 +126,9 @@ namespace nw4r {
             return result;
         }
         
-        bool NandFileStream::ReadAsync(void* pDst, u32 size, IOStreamCallback pCallback, void* pCallbackArg) {
-            mCallback = pCallback;
-            mArg = pCallbackArg;
+        bool NandFileStream::ReadAsync(void* pDst, u32 size, IOStreamCallback callback, void* callbackArg) {
+            mCallback = callback;
+            mArg = callbackArg;
             mIsBusy = true;
         
             NANDSeek(&mFileInfo.nandInfo, mFilePosition.Tell(), NAND_SEEK_BEG);
@@ -153,9 +153,9 @@ namespace nw4r {
             mFilePosition.Append(result);
         }
         
-        bool NandFileStream::WriteAsync(const void* pSrc, u32 size, IOStreamCallback pCallback, void* pCallbackArg) {
-            mCallback = pCallback;
-            mArg = pCallbackArg;
+        bool NandFileStream::WriteAsync(const void* pSrc, u32 size, IOStreamCallback callback, void* callbackArg) {
+            mCallback = callback;
+            mArg = callbackArg;
             mIsBusy = true;
         
             NANDSeek(&mFileInfo.nandInfo, mFilePosition.Tell(), NAND_SEEK_BEG);

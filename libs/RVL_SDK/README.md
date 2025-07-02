@@ -3,6 +3,7 @@ Revolution SDK
 A decompilation of the Revolution SDK (RVL_SDK) from the Wii Menu.  
 
 The build dates refer to when the program was built as they were recompiled.
+The actual version is likely from around 2008.
 
 List of libraries that are linked (in alphabetical order):
 

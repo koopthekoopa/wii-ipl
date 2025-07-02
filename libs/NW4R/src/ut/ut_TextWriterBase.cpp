@@ -107,7 +107,7 @@ namespace nw4r {
             va_end(vargs);
         }
 
-        template<typename T> f32 TextWriterBase<T>::AdjustCursor(float* xOrigin, float* yOrigin, const T* str, int length) {
+        template<typename T> f32 TextWriterBase<T>::AdjustCursor(f32* xOrigin, f32* yOrigin, const T* str, int length) {
             f32 textWidth   = 0.0f;
             f32 textHeight  = 0.0f;
 

@@ -15,11 +15,13 @@ List of libraries that are linked (in alphabetical order):
 |----------|----------------------------------------------------|----|
 | **DB**   | Debug library; in this case, for the crash handler | ❌ |
 | **MATH** | Math utilities library                             | ✔️ |
-| **UT**   | Utilities library                                  | ❌ |
-| **SND**  | Sound Library; for ".brsar" files                  | ❌ |
-| **LYT**  | Layout Library; for ".brlyt" files                 | ⚠️ |
+| **UT**   | Utilities/Core library                             | ❌ |
+| **SND**  | Sound Library; for ".brsar" files                  | ✔️ |
+| **LYT**  | Layout Library; for ".brlyt" and ".brlan" files    | ⚠️ |
 
 Thanks to
 ---------
 [kiwi515/ogws](https://github.com/kiwi515/ogws)  
 [muff1n1634/hbm_2009-12-10](https://github.com/muff1n1634/hbm_2009-12-10)  
+[zeldaret/ss](https://github.com/zeldaret/ss)  
+[muff1n1634/db-assorted](https://github.com/muff1n1634/db-assorted)  

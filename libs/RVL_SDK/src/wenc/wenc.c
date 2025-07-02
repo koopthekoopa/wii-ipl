@@ -3,123 +3,138 @@
 #include <string.h>
 #include <math.h>
 
-s32 WENCGetEncodeData(WENCInfo* info, u32 flag, const s16* pcmData, s32 samples, u8* adpcmData) {
-    const f64 table[] = {0.89843750, 0.89843750, 0.89843750, 0.89843750,
-                         1.19921875, 1.59765625, 2.00000000, 2.39843750};
+typedef struct {
+    s32 nXN;         // 0x00
+    s32 nDL;         // 0x04
+    s32 nQN;         // 0x08
+    s32 nDN;         // 0x0C
+    s32 nDLH;        // 0x10
+    s32 nDLQ;        // 0x14
 
-    u8*         dst;
-    const s16*  src;
+    u8 padding[8];  // 0x18
+} WENCBlock;
 
-    int i;
+s32 WENCGetEncodeData(WENCInfo* info, u32 flag, const s16* pbyPcmData, s32 nSampleNum, u8* pbyAdpcmData) {
+    const f64 dTable[] = {0.89843750, 0.89843750, 0.89843750, 0.89843750,
+                         1.19921875, 1.59765625,
+                         2.00000000, 2.39843750};
 
-    s32 da;
-    s32 l3, l2, l1, l0;
-    s32 dlx;
-    s32 xnc;
-    s32 offset;
-    s32 index;
-    s32 encodeSize;
-    s32 xn;
-    s32 dl;
-    s32 qn;
-    s32 dn;
-    s32 dlh;
-    s32 dlq;
     u8 by;
+    u8* pDst;
+    s16* pSrc;
+    s32 ii;
+    s32 nDA;
+    s32 nL3;
+    s32 nL2;
+    s32 nL1;
+    s32 nL0;
+    s32 nDLX;
+    s32 nXNC;
+    s32 nOffset;
+    s32 nIndex;
+    s32 nEncodeSize;
+    s32 nXN;
+    s32 nDL;
+    s32 nQN;
+    s32 nDN;
+    s32 nDLH;
+    s32 nDLQ;
 
-    encodeSize = (samples + 1) / 2;
-    memset(adpcmData, 0, encodeSize);
+    WENCBlock* block = (WENCBlock*)info;
 
-    src = pcmData;
-    dst = adpcmData;
+    nEncodeSize = (nSampleNum + 1) / 2;
+    memset(pbyAdpcmData, 0, nEncodeSize);
+
+    pSrc = (s16*)pbyPcmData;
+    pDst = pbyAdpcmData;
 
     if ((flag & WENC_FLAG_USER_INFO) == 0) {
-        xn = 0;
-        dl = 127;
-        qn = 0;
-        dn = 0;
-        dlh = 0;
-        dlq = 0;
+        nXN = 0;
+        nDL = 127;
+        nQN = 0;
+        nDN = 0;
+        nDLH = 0;
+        nDLQ = 0;
     }
     else {
-        xn = info->xn;
-        dl = info->dl;
-        qn = info->qn;
-        dn = info->dn;
-        dlh = info->dlh;
-        dlq = info->dlq;
+        nXN = block->nXN;
+        nDL = block->nDL;
+        nQN = block->nQN;
+        nDN = block->nDN;
+        nDLH = block->nDLH;
+        nDLQ = block->nDLQ;
     }
 
-    for (i = 0; i < samples; i++) {
-        l0 = 0;
-        l1 = 0;
-        l2 = 0;
-        l3 = 0;
+    for (ii = 0; ii < nSampleNum; ii++) {
+        nL0 = 0;
+        nL1 = 0;
+        nL2 = 0;
+        nL3 = 0;
 
-        da = *src++;
-        if (da < xn) {
-            l3 = 1;
+        nDA = *pSrc++;
+        if (nDA < nXN) {
+            nL3 = 1;
         }
 
-        dn = __abs(da - xn);
-        if (dn >= dl) {
-            l2 = 1;
-            dn -= dl;
+        nDN = __abs(nDA - nXN);
+        if (nDN >= nDL) {
+            nL2 = 1;
+            nDN -= nDL;
         }
 
-        dlh = dl / 2;
-        if (dn >= dlh) {
-            l1 = 1;
-            dn -= dlh;
+        nDLH = nDL / 2;
+        if (nDN >= nDLH) {
+            nL1 = 1;
+            nDN -= nDLH;
         }
 
-        dlq = dlh / 2;
-        if (dn >= dlq) {
-            l0 = 1;
-            dn -= dlq;
+        nDLQ = nDLH / 2;
+        if (nDN >= nDLQ) {
+            nL0 = 1;
+            nDN -= nDLQ;
         }
 
-        dlx = dlq / 2;
-        qn = (1 - l3 * 2) * (dl * l2 + dlh * l1 + dlq * l0 + dlx);
+        nDLX = nDLQ / 2;
+        nQN = (1 - nL3 * 2) * (nDL * nL2 + nDLH * nL1 + nDLQ * nL0 + nDLX);
 
-        if (qn > 0xFFFF) {
-            qn = 0xFFFF;
+        if (nQN > 0xFFFF) {
+            nQN = 0xFFFF;
         }
-        if (qn < -0x10000) {
-            qn = -0x10000;
-        }
-
-        xnc = xn + qn;
-        if (xnc > 0x7FFF) {
-            xnc = 0x7FFF;
-        }
-        if (xnc < -0x8000) {
-            xnc = -0x8000;
+        if (nQN < -0x10000) {
+            nQN = -0x10000;
         }
 
-        xn = xnc;
-        offset = (i & 1) == 0 ? 4 : 0;
-
-        by = l3 * 8 + l2 * 4 + l1 * 2 + l0;
-        dst[i / 2] |= by << offset;
-
-        index = l2 * 4 + l1 * 2 + l0;
-        dl *= table[index];
-
-        if (dl <= 127) {
-            dl = 127;
+        nXNC = nXN + nQN;
+        if (nXNC > 0x7FFF) {
+            nXNC = 0x7FFF;
         }
-        if (dl >= 0x6000) {
-            dl = 0x6000;
+        if (nXNC < -0x8000) {
+            nXNC = -0x8000;
+        }
+
+        nXN = nXNC;
+        nOffset = (ii & 1) == 0 ? 4 : 0;
+
+        by = nL3 * 8 + nL2 * 4 + nL1 * 2 + nL0;
+        pDst[ii / 2] |= by << nOffset;
+
+        nIndex = nL2 * 4 + nL1 * 2 + nL0;
+        nDL *= dTable[nIndex];
+
+        if (nDL <= 127) {
+            nDL = 127;
+        }
+        if (nDL >= 0x6000) {
+            nDL = 0x6000;
         }
     }
 
-    info->xn = xn;
-    info->dl = dl;
-    info->qn = qn;
-    info->dn = dn;
-    info->dlh = dlh;
-    info->dlq = dlq;
+    block->nXN = nXN;
+    block->nDL = nDL;
+    block->nQN = nQN;
+    block->nDN = nDN;
+    block->nDLH = nDLH;
+    block->nDLQ = nDLQ;
 
-    return samples;
+    return nSampleNum;
 }

@@ -13,7 +13,7 @@ extern "C" {
 void    VIInit();
 void    VIWaitForRetrace();
 
-void    VIConfigure(GXRenderModeObj *rm);
+void    VIConfigure(const GXRenderModeObj *rm);
 void    VIConfigurePan(u16 xOrg, u16 yOrg, u16 width, u16 height);
 
 VIRetraceCallback VISetPreRetraceCallback(VIRetraceCallback cb);
@@ -34,6 +34,8 @@ u32     VIGetDTVStatus();
 u32     VIGetTvFormat();
 
 u32     VIGetCurrentLine();
+
+void*   VIGetCurrentFrameBuffer();
 
 #ifdef __cplusplus
 }

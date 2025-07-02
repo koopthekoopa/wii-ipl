@@ -34,12 +34,23 @@ extern int __float_nan[];
 extern int __float_huge[];
 extern int __double_huge[];
 
+#define FP_NAN 1
+#define FP_INFINITE 2
+#define FP_ZERO 3
+#define FP_NORMAL 4
+#define FP_SUBNORMAL 5
+
+#define HUGE_VALF   (*(float*) __float_huge )
 #define INFINITY    (*(float*) __float_huge )
 #define NAN         (*(float*) __float_nan  )
 #define HUGE_VAL    (*(double*)__double_huge)
 
-#define isnan(x)    (__fpclassifyd(x) == 1)
-#define isfinite(x) (__fpclassifyd(x) > 2)
+#define isnormal(x) (fpclassify(x) == FP_NORMAL)
+#define iszero(x)   (fpclassify(x) == FP_ZERO)
+#define isnan(x)    (fpclassify(x) == FP_NAN)
+#define isinf(x)    (fpclassify(x) == FP_INFINITE)
+#define isfinite(x) (fpclassify(x) >  FP_INFINITE)
+
 
 inline int      abs(int x) {
 #ifdef __MWERKS__

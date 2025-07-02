@@ -28,11 +28,11 @@ namespace nw4r {
             
             virtual AnimTransform*  CreateAnimTransform(const void* anmResBuf, ResourceAccessor* pResAcsr);
 
-            virtual void            BindAnimation(AnimTransform* pAnimTrans);
-            virtual void            UnbindAnimation(AnimTransform* pAnimTrans);
+            virtual void            BindAnimation(AnimTransform* animTrans);
+            virtual void            UnbindAnimation(AnimTransform* animTrans);
             virtual void            UnbindAllAnimation();
 
-            virtual void            SetAnimationEnable(AnimTransform* pAnimTrans, bool bEnable = true);
+            virtual void            SetAnimationEnable(AnimTransform* animTrans, bool bEnable = true);
 
             virtual void            CalculateMtx(const DrawInfo& drawInfo);
             virtual void            Draw(const DrawInfo& drawInfo);
@@ -45,7 +45,7 @@ namespace nw4r {
             GroupContainer*         GetGroupContainer() const               { return mpGroupContainer; }
 
             static MEMAllocator*    GetAllocator()                          { return mspAllocator; }
-            static void             SetAllocator(MEMAllocator* pAllocator)  { mspAllocator = pAllocator; }
+            static void             SetAllocator(MEMAllocator* allocator)  { mspAllocator = allocator; }
         
             static void*            AllocMemory(u32 size)                   { return MEMAllocFromAllocator(mspAllocator, size); }
             static void             FreeMemory(void* ptr)                   { MEMFreeToAllocator(mspAllocator, ptr); }

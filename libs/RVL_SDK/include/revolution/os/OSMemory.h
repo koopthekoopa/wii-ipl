@@ -15,6 +15,8 @@ u32     OSGetPhysicalMem2Size();
 u32     OSGetConsoleSimulatedMem1Size();
 u32     OSGetConsoleSimulatedMem2Size();
 
+void    OSProtectRange(u32 chan, void *addr, u32 nBytes, u32 control);
+
 #define OSIsMEM1Region(addr) (((u32)(addr) & 0x30000000) == 0)
 #define OSIsMEM2Region(addr) (((u32)(addr) & 0x30000000) == 0x10000000)
 

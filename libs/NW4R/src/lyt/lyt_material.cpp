@@ -537,7 +537,7 @@ namespace nw4r {
         }
 
         const IndirectStage* Material::GetIndirectStageAry() const {
-            return detail::ConvertOffsToPtr<IndirectStage>( mpGXMem, CalcOffsetIndirectStageAry(mGXMemCap));
+            return detail::ConvertOffsToPtr<IndirectStage>(mpGXMem, CalcOffsetIndirectStageAry(mGXMemCap));
         }
 
         IndirectStage* Material::GetIndirectStageAry() {
@@ -1051,15 +1051,15 @@ namespace nw4r {
             return bUseRasStage && bUseVtxCol;
         }
 
-        void Material::BindAnimation(AnimTransform* pAnimTrans) {
-            pAnimTrans->Bind(this);
+        void Material::BindAnimation(AnimTransform* animTrans) {
+            animTrans->Bind(this);
         }
 
-        void Material::UnbindAnimation(AnimTransform* pAnimTrans) {
+        void Material::UnbindAnimation(AnimTransform* animTrans) {
             for (AnimationLinkList::Iterator it = mAnimList.GetBeginIter(); it != mAnimList.GetEndIter();) {
                 AnimationLinkList::Iterator currIt = it++;
 
-                if (pAnimTrans == NULL || currIt->GetAnimTransform() == pAnimTrans) {
+                if (animTrans == NULL || currIt->GetAnimTransform() == animTrans) {
                     mAnimList.Erase(currIt);
                     currIt->Reset();
                 }
@@ -1079,17 +1079,17 @@ namespace nw4r {
             }
         }
 
-        void Material::AddAnimationLink(AnimationLink* pAnimationLink) {
-            mAnimList.PushBack(pAnimationLink);
+        void Material::AddAnimationLink(AnimationLink* animationLink) {
+            mAnimList.PushBack(animationLink);
         }
 
-        AnimationLink* Material::FindAnimationLink(AnimTransform* pAnimTrans) {
-            return detail::FindAnimationLink(&mAnimList, pAnimTrans);
+        AnimationLink* Material::FindAnimationLink(AnimTransform* animTrans) {
+            return detail::FindAnimationLink(&mAnimList, animTrans);
         }
 
-        void Material::SetAnimationEnable(AnimTransform* pAnimTrans, bool bEnable) {
-            if (AnimationLink* pAnimLink = FindAnimationLink(pAnimTrans)) {
-                pAnimLink->SetEnable(bEnable);
+        void Material::SetAnimationEnable(AnimTransform* animTrans, bool bEnable) {
+            if (AnimationLink* animLink = FindAnimationLink(animTrans)) {
+                animLink->SetEnable(bEnable);
             }
         }
 

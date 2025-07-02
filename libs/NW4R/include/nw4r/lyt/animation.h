@@ -134,10 +134,10 @@ namespace nw4r {
 
                 virtual void    SetResource(const res::AnimationBlock* pRes, ResourceAccessor* pResAccessor);
 
-                virtual void    Bind(Pane* pPane, bool bRecursive);
+                virtual void    Bind(Pane* pane, bool bRecursive);
                 virtual void    Bind(Material* pMaterial);
 
-                virtual void    Animate(u32 idx, Pane* pPane);
+                virtual void    Animate(u32 idx, Pane* pane);
                 virtual void    Animate(u32 idx, Material* pMaterial);
 
                 f32             GetFrameMax() const { return GetFrameSize(); }
@@ -153,7 +153,7 @@ namespace nw4r {
                 const res::AnimationBlock*  mpRes;  // 0x0C
                 f32                         mFrame; // 0x10
         };
-        typedef ut::LinkList<AnimTransform, 4 /*mLink*/> AnimTransformList;
+        typedef ut::LinkList<AnimTransform, offsetof(AnimTransform, mLink)> AnimTransformList;
         
         class AnimationLink {
             public:
@@ -179,7 +179,7 @@ namespace nw4r {
                 u16             mIdx;       // 0x0C
                 bool            mbDisable;  // 0x0E
         };
-        typedef ut::LinkList<AnimationLink, 0 /*mLink*/> AnimationLinkList;
+        typedef ut::LinkList<AnimationLink, offsetof(AnimationLink, mLink)> AnimationLinkList;
 
         class AnimTransformBasic : public AnimTransform {
             public:
@@ -188,10 +188,10 @@ namespace nw4r {
 
                 virtual void    SetResource(const res::AnimationBlock* pRes, ResourceAccessor* pResAccessor);
 
-                virtual void    Bind(Pane* pPane, bool bRecursive);
+                virtual void    Bind(Pane* pane, bool bRecursive);
                 virtual void    Bind(Material* pMaterial);
 
-                virtual void    Animate(u32 idx, Pane* pPane);
+                virtual void    Animate(u32 idx, Pane* pane);
                 virtual void    Animate(u32 idx, Material* pMaterial);
 
             private:
@@ -202,7 +202,7 @@ namespace nw4r {
         };
 
         namespace detail {
-            AnimationLink* FindAnimationLink(AnimationLinkList* pAnimList, AnimTransform* pAnimTrans);
+            AnimationLink* FindAnimationLink(AnimationLinkList* animList, AnimTransform* animTrans);
         }
     }
 }

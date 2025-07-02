@@ -3,4 +3,12 @@
 
 #include <stdarg.h>
 
+#ifdef __cplusplus
+
+namespace std {
+    using   ::va_list;
+} // namespace std
+
+#endif
+
 #endif // MSL_CSTDARG_H

@@ -5,7 +5,7 @@
 
 ziUShort    Zi8GetGlobalDataSize();
 
-ziUChar     Zi8GetCandidates(ziUChar* cands, ziVoid* workData);
+ziUChar     Zi8GetCandidates(ziUChar* cands, ziPtr workData);
 
 ziBool      Zi8SetLatinSearchOrder(ziUChar* searchArray, ziUChar searchSize, ziVoid* workData);
 

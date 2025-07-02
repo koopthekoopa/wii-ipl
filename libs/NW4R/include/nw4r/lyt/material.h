@@ -16,7 +16,7 @@ namespace nw4r {
         class Material;
 
         namespace detail {
-            struct BitGXNums {
+            typedef struct BitGXNums {
                 u32 texMap      : 4;    // 11110000000000000000000000000000
                 u32 texSRT      : 4;    // 00001111000000000000000000000000
                 u32 texCoordGen : 4;    // 00000000111100000000000000000000
@@ -28,7 +28,7 @@ namespace nw4r {
                 u32 matCol      : 1;    // 00000000000000000000000010000000
                 u32 alpComp     : 1;    // 00000000000000000000000001000000
                 u32 blendMode   : 1;    // 00000000000000000000000000100000
-            };
+            } BitGXNums;
             Size GetTextureSize(Material* pMaterial, u8 texMapIdx);
         }
 
@@ -40,15 +40,15 @@ namespace nw4r {
 
                 virtual bool            SetupGX(bool bModVtxCol, u8 alpha);
 
-                virtual void            BindAnimation(AnimTransform* pAnimTrans);
-                virtual void            UnbindAnimation(AnimTransform* pAnimTrans);
+                virtual void            BindAnimation(AnimTransform* animTrans);
+                virtual void            UnbindAnimation(AnimTransform* animTrans);
                 virtual void            UnbindAllAnimation();
 
                 virtual void            Animate();
 
-                virtual AnimationLink*  FindAnimationLink(AnimTransform* pAnimTrans);
+                virtual AnimationLink*  FindAnimationLink(AnimTransform* animTrans);
 
-                virtual void            SetAnimationEnable(AnimTransform* pAnimTrans, bool bEnable);
+                virtual void            SetAnimationEnable(AnimTransform* animTrans, bool bEnable);
 
                 const char*             GetName() const             { return mName; }
                 GXColorS10              GetTevColor(u32 idx) const  { return mTevCols[idx]; }
@@ -133,7 +133,7 @@ namespace nw4r {
                                   u8 indSRTNum, bool allocChanCtrl, bool allocMatCol,
                                   bool allocAlpComp, bool allocBlendMode);
 
-                void AddAnimationLink(AnimationLink* pAnimationLink);
+                void AddAnimationLink(AnimationLink* animationLink);
 
             private:
                 static const int MAX_TEX_SRT = (GX_TEXMTX9 - GX_TEXMTX0) / 3 + 1;

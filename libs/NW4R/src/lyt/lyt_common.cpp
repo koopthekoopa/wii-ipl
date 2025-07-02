@@ -80,13 +80,13 @@ namespace nw4r {
             }
 
             void TexCoordAry::GetCoord(u32 idx, math::VEC2* vec) const {
-                for (int i = 0; i < VERTEXCOLOR_MAX; ++i) {
+                for (int i = 0; i < VERTEXCOLOR_MAX; i++) {
                     vec[i] = mpData[idx][i];
                 }
             }
 
             void TexCoordAry::SetCoord(u32 idx, const math::VEC2* vec) {
-                for (int i = 0; i < VERTEXCOLOR_MAX; ++i) {
+                for (int i = 0; i < VERTEXCOLOR_MAX; i++) {
                     mpData[idx][i] = vec[i];
                 }
             }
@@ -228,11 +228,11 @@ namespace nw4r {
                 GXSetLineWidth(6, GX_TO_ZERO);
 
                 GXBegin(GX_LINESTRIP, GX_VTXFMT0, 5); {
-                    GXPosition2f32(pos.x,               pos.y              );
-                    GXPosition2f32(pos.x + size.width,  pos.y              );
+                    GXPosition2f32(pos.x,               pos.y            );
+                    GXPosition2f32(pos.x + size.width,  pos.y            );
                     GXPosition2f32(pos.x + size.width,  pos.y + size.height);
                     GXPosition2f32(pos.x,               pos.y + size.height);
-                    GXPosition2f32(pos.x,               pos.y              );
+                    GXPosition2f32(pos.x,               pos.y            );
                 } GXEnd();
             }
 

@@ -17,12 +17,12 @@ namespace nw4r {
 
         namespace detail {
             struct RuntimeTypeInfo {
-                explicit RuntimeTypeInfo(const RuntimeTypeInfo* pBase) : mParentTypeInfo(pBase) {}
+                explicit RuntimeTypeInfo(const RuntimeTypeInfo* base) : mParentTypeInfo(base) {}
 
-                bool IsDerivedFrom(const RuntimeTypeInfo* pBase) const {
-                    for (const RuntimeTypeInfo* pIt = this; pIt != NULL;
-                        pIt = pIt->mParentTypeInfo) {
-                        if (pIt == pBase) {
+                bool IsDerivedFrom(const RuntimeTypeInfo* base) const {
+                    for (const RuntimeTypeInfo* it = this; it != NULL;
+                        it = it->mParentTypeInfo) {
+                        if (it == base) {
                             return true;
                         }
                     }

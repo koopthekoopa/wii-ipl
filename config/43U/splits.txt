@@ -2156,13 +2156,13 @@ libs/NW4R/src/snd/snd_FrameHeap.cpp:
 libs/NW4R/src/snd/snd_FxChorus.cpp:
 	.text       start:0x814FFD6C end:0x81500138
 	.rodata     start:0x8161E5F0 end:0x8161E600
-	.data       start:0x8166F3D0 end:0x8166F3D0
+	.data       start:0x8166F3D0 end:0x8166F3F0
 	.sdata2     start:0x816952B8 end:0x816952C0
 
 libs/NW4R/src/snd/snd_FxDelay.cpp:
 	.text       start:0x81500138 end:0x815005D4
 	.rodata     start:0x8161E600 end:0x8161E610
-	.data       start:0x8166F3D0 end:0x8166F410
+	.data       start:0x8166F3F0 end:0x8166F410
 	.sdata2     start:0x816952C0 end:0x816952C8
 
 libs/NW4R/src/snd/snd_FxReverbHi.cpp:
@@ -2258,8 +2258,11 @@ libs/NW4R/src/snd/snd_SeqTrack.cpp:
 	.sdata2     start:0x81695358 end:0x81695388
 
 libs/NW4R/src/snd/snd_SoundArchive.cpp:
-	.text       start:0x8150616C end:0x81507514
+	.text       start:0x8150616C end:0x81506764
 	.data       start:0x8166F8F8 end:0x8166F918
+
+libs/NW4R/src/snd/snd_SoundArchiveFile.cpp:
+	.text       start:0x81506764 end:0x81507514
 	.sbss       start:0x81698F08 end:0x81698F10
 
 libs/NW4R/src/snd/snd_SoundArchiveLoader.cpp:

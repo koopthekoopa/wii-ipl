@@ -3,13 +3,11 @@
 
 #include <revolution/axfx/AXFXCommon.h>
 
-#include <size_t.h>
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef void*   (*AXFXAllocHook)(size_t);
+typedef void*   (*AXFXAllocHook)(u32);
 typedef void    (*AXFXFreeHook)(void*);
 
 void    AXFXSetHooks(AXFXAllocHook alloc, AXFXFreeHook free);

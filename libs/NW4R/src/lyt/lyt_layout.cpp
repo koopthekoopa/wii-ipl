@@ -49,12 +49,12 @@ namespace {
         }
     }
 
-    void SetTagProcessorImpl(Pane* pPane, ut::WideTagProcessor* pTagProcessor) {
-        TextBox* pTextBox = ut::DynamicCast<TextBox*>(pPane);
+    void SetTagProcessorImpl(Pane* pane, ut::WideTagProcessor* pTagProcessor) {
+        TextBox* pTextBox = ut::DynamicCast<TextBox*>(pane);
         if (pTextBox != NULL) {
             pTextBox->SetTagProcessor(pTagProcessor);
         }
-        for (PaneList::Iterator it = pPane->GetChildList().GetBeginIter(); it != pPane->GetChildList().GetEndIter(); it++) {
+        for (PaneList::Iterator it = pane->GetChildList().GetBeginIter(); it != pane->GetChildList().GetEndIter(); it++) {
             SetTagProcessorImpl(&(*it), pTagProcessor);
         }
     }
@@ -145,16 +145,16 @@ namespace nw4r {
                     case res::OBJECT_SIGNATURE_PICTURE:
                     case res::OBJECT_SIGNATURE_TEXT_BOX:
                     case res::OBJECT_SIGNATURE_WINDOW: {
-                        Pane* pPane = BuildPaneObj(detail::GetSignatureInt(pDataBlockHead->kind), dataPtr, resBlockSet);
-                        if (pPane != NULL) {
+                        Pane* pane = BuildPaneObj(detail::GetSignatureInt(pDataBlockHead->kind), dataPtr, resBlockSet);
+                        if (pane != NULL) {
                             if (mpRootPane == NULL) {
-                                mpRootPane = pPane;
+                                mpRootPane = pane;
                             }
                             if (pParentPane != NULL) {
-                                pParentPane->AppendChild(pPane);
+                                pParentPane->AppendChild(pane);
                             }
 
-                            pLastPane = pPane;
+                            pLastPane = pane;
                         }
                         break;
                     }
@@ -228,12 +228,12 @@ namespace nw4r {
                             case res::AnimationInfo::ANIM_INFO_MATERIAL_COLOR:
                             case res::AnimationInfo::ANIM_INFO_MATERIAL_TEXTURE_SRT:
                             case res::AnimationInfo::ANIM_INFO_MATERIAL_TEXTURE_PATTERN: {
-                                AnimTransformBasic* pAnimTrans = CreateObject<AnimTransformBasic>();
-                                if (pAnimTrans != NULL) {
+                                AnimTransformBasic* animTrans = CreateObject<AnimTransformBasic>();
+                                if (animTrans != NULL) {
                                     pInfoBlock = reinterpret_cast<const res::AnimationBlock*>(pDataBlockHead);
 
-                                    pAnimTrans->SetResource(pInfoBlock, pResAcsr);
-                                    ret = pAnimTrans;
+                                    animTrans->SetResource(pInfoBlock, pResAcsr);
+                                    ret = animTrans;
                                 }
                             }
                         }
@@ -251,15 +251,15 @@ namespace nw4r {
             return ret;
         }
 
-        void Layout::BindAnimation(AnimTransform* pAnimTrans) {
+        void Layout::BindAnimation(AnimTransform* animTrans) {
             if (mpRootPane != NULL) {
-                mpRootPane->BindAnimation(pAnimTrans, true);
+                mpRootPane->BindAnimation(animTrans, true);
             }
         }
 
-        void Layout::UnbindAnimation(AnimTransform* pAnimTrans) {
+        void Layout::UnbindAnimation(AnimTransform* animTrans) {
             if (mpRootPane != NULL) {
-                mpRootPane->UnbindAnimation(pAnimTrans, true);
+                mpRootPane->UnbindAnimation(animTrans, true);
             }
         }
 
@@ -267,9 +267,9 @@ namespace nw4r {
             UnbindAnimation(NULL);
         }
 
-        void Layout::SetAnimationEnable(AnimTransform* pAnimTrans, bool bEnable) {
+        void Layout::SetAnimationEnable(AnimTransform* animTrans, bool bEnable) {
             if (mpRootPane != NULL) {
-                mpRootPane->SetAnimationEnable(pAnimTrans, bEnable, true);
+                mpRootPane->SetAnimationEnable(animTrans, bEnable, true);
             }
         }
 

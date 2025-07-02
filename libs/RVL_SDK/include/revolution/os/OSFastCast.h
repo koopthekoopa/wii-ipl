@@ -58,7 +58,7 @@ static u8 __OSf32tou8(register f32 arg) {
     return r;
 }
 
-static void OSf32tou8(f32* in, volatile u8* out) {
+static void OSf32tou8(f32* in, vu8* out) {
     *out = __OSf32tou8(*in);
 }
 

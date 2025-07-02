@@ -100,138 +100,138 @@ namespace {
         f32 t1t1t1t2t2t2 = t1t1t1t2t2 * t2;
 
         // oh god
-        return v0 * (( 2.0f * t1t1t1t2t2t2) - (3.0f * t1t1t2t2) + 1.0f)
-             + v1 * ((-2.0f * t1t1t1t2t2t2) + (3.0f * t1t1t2t2)       )
-             + s0 * ((        t1t1t1t2t2 )  - (2.0f * t1t1t2  ) + t1  )
-             + s1 * ((        t1t1t1t2t2 )  - (      t1t1t2   )       );
+        return v0 * ((2.0f * t1t1t1t2t2t2) - (3.0f * t1t1t2t2) + 1.0f)
+             + v1 * ((-2.0f * t1t1t1t2t2t2) + (3.0f * t1t1t2t2)     )
+             + s0 * ((      t1t1t1t2t2)  - (2.0f * t1t1t2) + t1)
+             + s1 * ((      t1t1t1t2t2)  - (    t1t1t2 )     );
     }
 
-    void AnimatePainSRT(Pane* pPane, const res::AnimationInfo* pAnimInfo, const u32* animTargetOffsets, f32 frame) {
-        for (int i = 0; i < pAnimInfo->num; i++) {
-            const res::AnimationTarget* pAnimTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(pAnimInfo, animTargetOffsets[i]);
+    void AnimatePainSRT(Pane* pane, const res::AnimationInfo* animInfo, const u32* animTargetOffsets, f32 frame) {
+        for (int i = 0; i < animInfo->num; i++) {
+            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo, animTargetOffsets[i]);
 
-            NW4R_ASSERT(pAnimTarget->target < ANIMTARGET_PANE_MAX);
+            NW4R_ASSERT(animTarget->target < ANIMTARGET_PANE_MAX);
 
-            const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(pAnimTarget,
-                                                                                    pAnimTarget->keysOffset);
+            const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(animTarget,
+                                                                                    animTarget->keysOffset);
  
-            pPane->SetSRTElement(pAnimTarget->target,
-                                GetHermiteCurveValue(frame, keys, pAnimTarget->keyNum));
+            pane->SetSRTElement(animTarget->target,
+                                GetHermiteCurveValue(frame, keys, animTarget->keyNum));
         }
     }
 
-    void AnimateVisibility(Pane* pPane, const res::AnimationInfo* pAnimInfo, const u32* animTargetOffsets, f32 frame) {
-        for (int i = 0; i < pAnimInfo->num; i++) {
-            const res::AnimationTarget* pAnimTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(pAnimInfo,
+    void AnimateVisibility(Pane* pane, const res::AnimationInfo* animInfo, const u32* animTargetOffsets, f32 frame) {
+        for (int i = 0; i < animInfo->num; i++) {
+            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo,
                                                                                                     animTargetOffsets[i]);
 
-            NW4R_ASSERT(pAnimTarget->target < ANIMTARGET_PANE_MAX);
+            NW4R_ASSERT(animTarget->target < ANIMTARGET_PANE_MAX);
 
-            const res::StepKey* keys = detail::ConvertOffsToPtr<res::StepKey>(pAnimTarget,
-                                                                            pAnimTarget->keysOffset);
+            const res::StepKey* keys = detail::ConvertOffsToPtr<res::StepKey>(animTarget,
+                                                                            animTarget->keysOffset);
                 
 
-            pPane->SetVisible(GetStepCurveValue(frame,
+            pane->SetVisible(GetStepCurveValue(frame,
                                                 keys,
-                                                pAnimTarget->keyNum) != 0);
+                                                animTarget->keyNum) != 0);
         }
     }
 
-    void AnimateVertexColor(Pane* pPane, const res::AnimationInfo* pAnimInfo, const u32* animTargetOffsets, f32 frame) NO_INLINE {
-        for (int i = 0; i < pAnimInfo->num; i++) {
-            const res::AnimationTarget* pAnimTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(pAnimInfo,
+    void AnimateVertexColor(Pane* pane, const res::AnimationInfo* animInfo, const u32* animTargetOffsets, f32 frame) NO_INLINE {
+        for (int i = 0; i < animInfo->num; i++) {
+            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo,
                                                                                                     animTargetOffsets[i]);
 
-            NW4R_ASSERT(pAnimTarget->target < ANIMTARGET_PANE_COLOR_MAX);
+            NW4R_ASSERT(animTarget->target < ANIMTARGET_PANE_COLOR_MAX);
 
-            const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(pAnimTarget,
-                                                                                    pAnimTarget->keysOffset);
+            const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(animTarget,
+                                                                                    animTarget->keysOffset);
 
-            f32 value = GetHermiteCurveValue(frame, keys, pAnimTarget->keyNum);
+            f32 value = GetHermiteCurveValue(frame, keys, animTarget->keyNum);
             value += 0.5f;
 
             u8 u8Val;
             OSf32tou8(&value, &u8Val);
 
-            pPane->SetColorElement(pAnimTarget->target,
+            pane->SetColorElement(animTarget->target,
                                     u8Val);
         }
     }
 
-    void AnimateMaterialColor(Material* pMaterial, const res::AnimationInfo* pAnimInfo, const u32* animTargetOffsets, f32 frame) NO_INLINE {
-        for (int i = 0; i < pAnimInfo->num; i++) {
-            const res::AnimationTarget* pAnimTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(pAnimInfo,
+    void AnimateMaterialColor(Material* pMaterial, const res::AnimationInfo* animInfo, const u32* animTargetOffsets, f32 frame) NO_INLINE {
+        for (int i = 0; i < animInfo->num; i++) {
+            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo,
                                                                                                     animTargetOffsets[i]);
 
-            NW4R_ASSERT(pAnimTarget->target < ANIMTARGET_MATCOLOR_MAX);
+            NW4R_ASSERT(animTarget->target < ANIMTARGET_MATCOLOR_MAX);
 
-            const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(pAnimTarget,
-                                                                                    pAnimTarget->keysOffset);
+            const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(animTarget,
+                                                                                    animTarget->keysOffset);
 
-            f32 value = GetHermiteCurveValue(frame, keys, pAnimTarget->keyNum);
+            f32 value = GetHermiteCurveValue(frame, keys, animTarget->keyNum);
             value += 0.5f;
 
             s16 s16Val;
             OSf32tos16(&value, &s16Val);
             s16Val = ut::Min<s16>(ut::Max<s16>(s16Val, -1024), 1023);
 
-            pMaterial->SetColorElement(pAnimTarget->target,
+            pMaterial->SetColorElement(animTarget->target,
                                         s16Val);
         }
     }
 
-    void AnimateTextureSRT(Material* pMaterial, const res::AnimationInfo* pAnimInfo, const u32* animTargetOffsets, f32 frame) {
-        for (int i = 0; i < pAnimInfo->num; i++) {
-            const res::AnimationTarget* pAnimTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(pAnimInfo,
+    void AnimateTextureSRT(Material* pMaterial, const res::AnimationInfo* animInfo, const u32* animTargetOffsets, f32 frame) {
+        for (int i = 0; i < animInfo->num; i++) {
+            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo,
                                                                                                     animTargetOffsets[i]);
 
-            if (pAnimTarget->id < pMaterial->GetTexSRTCap()) {
-                NW4R_ASSERT(pAnimTarget->target < ANIMTARGET_TEXSRT_MAX);
+            if (animTarget->id < pMaterial->GetTexSRTCap()) {
+                NW4R_ASSERT(animTarget->target < ANIMTARGET_TEXSRT_MAX);
 
-                const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(pAnimTarget,
-                                                                                        pAnimTarget->keysOffset);
+                const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(animTarget,
+                                                                                        animTarget->keysOffset);
 
-                pMaterial->SetTexSRTElement(pAnimTarget->id,
-                                            pAnimTarget->target,
-                                            GetHermiteCurveValue(frame, keys, pAnimTarget->keyNum));
+                pMaterial->SetTexSRTElement(animTarget->id,
+                                            animTarget->target,
+                                            GetHermiteCurveValue(frame, keys, animTarget->keyNum));
             }
         }
     }
 
-    void AnimateTexturePattern(Material* pMaterial, const res::AnimationInfo* pAnimInfo, const u32* animTargetOffsets, f32 frame, void* *tpls) {
+    void AnimateTexturePattern(Material* pMaterial, const res::AnimationInfo* animInfo, const u32* animTargetOffsets, f32 frame, void* *tpls) {
         // Not `i`?
-        for (int j = 0; j < pAnimInfo->num; j++) {
-            const res::AnimationTarget* pAnimTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(pAnimInfo,
+        for (int j = 0; j < animInfo->num; j++) {
+            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo,
                                                                                                     animTargetOffsets[j]);
 
-            if (pAnimTarget->id < pMaterial->GetTextureNum() && pAnimTarget->target == ANIMTARGET_TEXPATTURN_IMAGE) {
-                const res::StepKey* keys = detail::ConvertOffsToPtr<res::StepKey>(pAnimTarget,
-                                                                                pAnimTarget->keysOffset);
+            if (animTarget->id < pMaterial->GetTextureNum() && animTarget->target == ANIMTARGET_TEXPATTURN_IMAGE) {
+                const res::StepKey* keys = detail::ConvertOffsToPtr<res::StepKey>(animTarget,
+                                                                                animTarget->keysOffset);
 
                 u16 fileIdx = GetStepCurveValue(frame,
                                                 keys,
-                                                pAnimTarget->keyNum);
+                                                animTarget->keyNum);
 
-                pMaterial->SetTextureNoWrap(pAnimTarget->id,
+                pMaterial->SetTextureNoWrap(animTarget->id,
                                             static_cast<TPLPalette*>(tpls[fileIdx]));
             }
         }
     }
 
-    void AnimateIndTexSRT(Material* pMaterial, const res::AnimationInfo* pAnimInfo, const u32* animTargetOffsets, f32 frame) {
-        for (int i = 0; i < pAnimInfo->num; i++) {
-            const res::AnimationTarget* pAnimTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(pAnimInfo,
+    void AnimateIndTexSRT(Material* pMaterial, const res::AnimationInfo* animInfo, const u32* animTargetOffsets, f32 frame) {
+        for (int i = 0; i < animInfo->num; i++) {
+            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo,
                                                                                                     animTargetOffsets[i]);
 
-            if (pAnimTarget->id < pMaterial->GetIndTexSRTCap()) {
-                NW4R_ASSERT(pAnimTarget->target < ANIMTARGET_TEXSRT_MAX);
+            if (animTarget->id < pMaterial->GetIndTexSRTCap()) {
+                NW4R_ASSERT(animTarget->target < ANIMTARGET_TEXSRT_MAX);
 
-                const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(pAnimTarget,
-                                                                                        pAnimTarget->keysOffset);
+                const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(animTarget,
+                                                                                        animTarget->keysOffset);
 
-                pMaterial->SetIndTexSRTElement(pAnimTarget->id,
-                                                pAnimTarget->target,
-                                                GetHermiteCurveValue(frame, keys, pAnimTarget->keyNum));
+                pMaterial->SetIndTexSRTElement(animTarget->id,
+                                                animTarget->target,
+                                                GetHermiteCurveValue(frame, keys, animTarget->keyNum));
             }
         }
     }
@@ -297,14 +297,14 @@ namespace nw4r {
             }
         }
 
-        void AnimTransformBasic::Bind(Pane* pPane, bool bRecursive) {
+        void AnimTransformBasic::Bind(Pane* pane, bool bRecursive) {
             const u32* animContOffsets = detail::ConvertOffsToPtr<u32>(mpRes, mpRes->animContOffsetsOffset);
 
             for (u16 i = 0; i < mpRes->animContNum; i++) {
-                const res::AnimationContent* pAnimCont = detail::ConvertOffsToPtr<res::AnimationContent>(mpRes, animContOffsets[i]);
+                const res::AnimationContent* animCont = detail::ConvertOffsToPtr<res::AnimationContent>(mpRes, animContOffsets[i]);
 
-                if (pAnimCont->type == res::AnimationContent::ANIMTYPE_PANE) {
-                    Pane* pFindPane = pPane->FindPaneByName(pAnimCont->name, bRecursive);
+                if (animCont->type == res::AnimationContent::ANIMTYPE_PANE) {
+                    Pane* pFindPane = pane->FindPaneByName(animCont->name, bRecursive);
 
                     if (pFindPane != NULL) {
                         mAnimLinkAry[i].SetAnimTransform(this, i);
@@ -312,7 +312,7 @@ namespace nw4r {
                     }
                 }
                 else {
-                    Material* pFindMat = pPane->FindMaterialByName(pAnimCont->name, bRecursive);
+                    Material* pFindMat = pane->FindMaterialByName(animCont->name, bRecursive);
 
                     if (pFindMat != NULL) {
                         mAnimLinkAry[i].SetAnimTransform(this, i);
@@ -326,42 +326,42 @@ namespace nw4r {
             const u32* animContOffsets = detail::ConvertOffsToPtr<u32>(mpRes, mpRes->animContOffsetsOffset);
 
             for (u16 i = 0; i < mpRes->animContNum; i++) {
-                const res::AnimationContent* pAnimCont = detail::ConvertOffsToPtr<res::AnimationContent>(mpRes, animContOffsets[i]);
+                const res::AnimationContent* animCont = detail::ConvertOffsToPtr<res::AnimationContent>(mpRes, animContOffsets[i]);
 
-                if (pAnimCont->type != res::AnimationContent::ANIMTYPE_MATERIAL) {
+                if (animCont->type != res::AnimationContent::ANIMTYPE_MATERIAL) {
                     continue;
                 }
 
-                if (detail::EqualsMaterialName(pMaterial->GetName(), pAnimCont->name)) {
+                if (detail::EqualsMaterialName(pMaterial->GetName(), animCont->name)) {
                     mAnimLinkAry[i].SetAnimTransform(this, i);
                     pMaterial->AddAnimationLink(&mAnimLinkAry[i]);
                 }
             }
         }
 
-        void AnimTransformBasic::Animate(u32 idx, Pane* pPane) {
+        void AnimTransformBasic::Animate(u32 idx, Pane* pane) {
             u32 animContOffsets = detail::ConvertOffsToPtr<u32>(mpRes, mpRes->animContOffsetsOffset)[idx];
 
-            const res::AnimationContent* pAnimCont = detail::ConvertOffsToPtr<res::AnimationContent>(mpRes, animContOffsets);
+            const res::AnimationContent* animCont = detail::ConvertOffsToPtr<res::AnimationContent>(mpRes, animContOffsets);
 
-            const u32* animInfoOffsets = detail::ConvertOffsToPtr<u32>(pAnimCont, sizeof(*pAnimCont));
+            const u32* animInfoOffsets = detail::ConvertOffsToPtr<u32>(animCont, sizeof(*animCont));
 
-            for (int i = 0; i < pAnimCont->num; i++) {
-                const res::AnimationInfo* pAnimInfo = detail::ConvertOffsToPtr<res::AnimationInfo>(pAnimCont, animInfoOffsets[i]);
+            for (int i = 0; i < animCont->num; i++) {
+                const res::AnimationInfo* animInfo = detail::ConvertOffsToPtr<res::AnimationInfo>(animCont, animInfoOffsets[i]);
 
-                const u32* animTargetOffsets = detail::ConvertOffsToPtr<u32>(pAnimInfo, sizeof(*pAnimInfo));
+                const u32* animTargetOffsets = detail::ConvertOffsToPtr<u32>(animInfo, sizeof(*animInfo));
 
-                switch (pAnimInfo->kind) {
+                switch (animInfo->kind) {
                     case res::AnimationInfo::ANIM_INFO_PANE_PAIN_SRT: {
-                        AnimatePainSRT(pPane, pAnimInfo, animTargetOffsets, mFrame);
+                        AnimatePainSRT(pane, animInfo, animTargetOffsets, mFrame);
                         break;
                     }
                     case res::AnimationInfo::ANIM_INFO_PANE_VISIBILITY: {
-                        AnimateVisibility(pPane, pAnimInfo, animTargetOffsets, mFrame);
+                        AnimateVisibility(pane, animInfo, animTargetOffsets, mFrame);
                         break;
                     }
                     case res::AnimationInfo::ANIM_INFO_PANE_VERTEX_COLOR: {
-                        AnimateVertexColor(pPane, pAnimInfo, animTargetOffsets, mFrame);
+                        AnimateVertexColor(pane, animInfo, animTargetOffsets, mFrame);
                         break;
                     }
                 }
@@ -371,41 +371,41 @@ namespace nw4r {
         void AnimTransformBasic::Animate(u32 idx, Material* pMaterial) {
             u32 animContOffsets = detail::ConvertOffsToPtr<u32>(mpRes, mpRes->animContOffsetsOffset)[idx];
 
-            const res::AnimationContent* pAnimCont = detail::ConvertOffsToPtr<res::AnimationContent>(mpRes, animContOffsets);
+            const res::AnimationContent* animCont = detail::ConvertOffsToPtr<res::AnimationContent>(mpRes, animContOffsets);
 
-            const u32* animInfoOffsets = detail::ConvertOffsToPtr<u32>(pAnimCont, sizeof(*pAnimCont));
+            const u32* animInfoOffsets = detail::ConvertOffsToPtr<u32>(animCont, sizeof(*animCont));
 
-            for (int i = 0; i < pAnimCont->num; i++) {
-                const res::AnimationInfo* pAnimInfo = detail::ConvertOffsToPtr<res::AnimationInfo>(pAnimCont, animInfoOffsets[i]);
+            for (int i = 0; i < animCont->num; i++) {
+                const res::AnimationInfo* animInfo = detail::ConvertOffsToPtr<res::AnimationInfo>(animCont, animInfoOffsets[i]);
 
-                const u32* animTargetOffsets = detail::ConvertOffsToPtr<u32>(pAnimInfo, sizeof(*pAnimInfo));
+                const u32* animTargetOffsets = detail::ConvertOffsToPtr<u32>(animInfo, sizeof(*animInfo));
 
-                switch (pAnimInfo->kind) {
+                switch (animInfo->kind) {
                     case res::AnimationInfo::ANIM_INFO_MATERIAL_COLOR: {
-                        AnimateMaterialColor(pMaterial, pAnimInfo, animTargetOffsets, mFrame);
+                        AnimateMaterialColor(pMaterial, animInfo, animTargetOffsets, mFrame);
                         break;
                     }
                     case res::AnimationInfo::ANIM_INFO_MATERIAL_TEXTURE_SRT: {
-                        AnimateTextureSRT(pMaterial, pAnimInfo, animTargetOffsets, mFrame);
+                        AnimateTextureSRT(pMaterial, animInfo, animTargetOffsets, mFrame);
                         break;
                     }
                     case res::AnimationInfo::ANIM_INFO_MATERIAL_TEXTURE_PATTERN: {
                         if (mpFileResAry != NULL) {
-                            AnimateTexturePattern(pMaterial, pAnimInfo, animTargetOffsets, mFrame, mpFileResAry);
+                            AnimateTexturePattern(pMaterial, animInfo, animTargetOffsets, mFrame, mpFileResAry);
                         }
                         break;
                     }
                     case res::AnimationInfo::ANIM_INFO_MATERIAL_IND_TEX_SRT: {
-                        AnimateIndTexSRT(pMaterial, pAnimInfo, animTargetOffsets, mFrame);
+                        AnimateIndTexSRT(pMaterial, animInfo, animTargetOffsets, mFrame);
                         break;
                     }
                 }
             }
         }
 
-        AnimationLink* detail::FindAnimationLink(AnimationLinkList* pAnimList, AnimTransform* pAnimTrans) {
-            for (AnimationLinkList::Iterator it = pAnimList->GetBeginIter(); it != pAnimList->GetEndIter(); it++) {
-                if (pAnimTrans == it->GetAnimTransform()) {
+        AnimationLink* detail::FindAnimationLink(AnimationLinkList* animList, AnimTransform* animTrans) {
+            for (AnimationLinkList::Iterator it = animList->GetBeginIter(); it != animList->GetEndIter(); it++) {
+                if (animTrans == it->GetAnimTransform()) {
                     return &(*it);
                 }
             }

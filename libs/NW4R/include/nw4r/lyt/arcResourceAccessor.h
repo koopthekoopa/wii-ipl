@@ -30,7 +30,7 @@ namespace nw4r {
                 char        mFontName[RESOURCE_NAME_MAX]; // 0x08
                 ut::Font*   mpFont;         // 0x88
         };
-        typedef ut::LinkList<FontRefLink, 0 /*mLink*/> FontRefLinkList;
+        typedef ut::LinkList<FontRefLink, offsetof(FontRefLink, mLink)> FontRefLinkList;
         
         class ArcResourceLink {
             public:
@@ -48,7 +48,7 @@ namespace nw4r {
 
                 char        mResRootDir[RESOURCE_NAME_MAX]; // 0x24
         };
-        typedef ut::LinkList<ArcResourceLink, 0 /*mLink*/> ArcResourceLinkList;
+        typedef ut::LinkList<ArcResourceLink, offsetof(ArcResourceLink, mLink)> ArcResourceLinkList;
 
         class ArcResourceAccessor : public ResourceAccessor {
             public:

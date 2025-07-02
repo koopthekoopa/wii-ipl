@@ -11,14 +11,14 @@ namespace nw4r {
             }
 
             LinkListImpl::Iterator LinkListImpl::Erase(Iterator itFirst, Iterator itLast) {
-                LinkListNode* pIt = itFirst.mPointer;
-                LinkListNode* pItLast = itLast.mPointer;
+                LinkListNode* it = itFirst.mNode;
+                LinkListNode* pItLast = itLast.mNode;
 
                 LinkListNode* pNext;
 
-                for (; pIt != pItLast; pIt = pNext) {
-                    pNext = pIt->mNext;
-                    Erase(pIt);
+                for (; it != pItLast; it = pNext) {
+                    pNext = it->mNext;
+                    Erase(it);
                 }
 
                 return Iterator(pItLast);
@@ -29,7 +29,7 @@ namespace nw4r {
             }
 
             LinkListImpl::Iterator LinkListImpl::Insert(Iterator it, LinkListNode* p) {
-                LinkListNode* pNext = it.mPointer;
+                LinkListNode* pNext = it.mNode;
                 LinkListNode* pPrev = pNext->mPrev;
 
                 // pPrev <- p -> pNext

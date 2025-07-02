@@ -48,17 +48,17 @@ enum {
 typedef void (*AXVoiceCallback)(void*);
 
 typedef struct _AXVPB {
-    void*   next;               // 0x00
-    void*   prev;               // 0x04
-    void*   next1;              // 0x08
-    u32     priority;           // 0x0C
-    AXVoiceCallback callback; // 0x10
-    u32     userContext;        // 0x14
-    u32     index;              // 0x18
-    u32     sync;               // 0x1C
-    u32     depop;              // 0x20
-    void*   itdBuffer;          // 0x24
-    AXPB    pb;                 // 0x28
+    void*           next;           // 0x00
+    void*           prev;           // 0x04
+    void*           next1;          // 0x08
+    u32             priority;       // 0x0C
+    AXVoiceCallback callback;       // 0x10
+    u32             userContext;    // 0x14
+    u32             index;          // 0x18
+    u32             sync;           // 0x1C
+    u32             depop;          // 0x20
+    void*           itdBuffer;      // 0x24
+    AXPB            pb;             // 0x28
 } AXVPB;
 
 void    AXSetVoiceSrcType(AXVPB* vpb, u32 type);

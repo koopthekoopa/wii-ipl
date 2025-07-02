@@ -254,13 +254,13 @@ namespace nw4r {
             return NULL;
         }
 
-        AnimationLink* Window::FindAnimationLink(AnimTransform* pAnimTrans) {
-            if (AnimationLink* ret = Pane::FindAnimationLink(pAnimTrans)) {
+        AnimationLink* Window::FindAnimationLink(AnimTransform* animTrans) {
+            if (AnimationLink* ret = Pane::FindAnimationLink(animTrans)) {
                 return ret;
             }
 
             for (int i = 0; i < mFrameNum; i++) {
-                if (AnimationLink* ret = mFrames[i].pMaterial->FindAnimationLink(pAnimTrans)) {
+                if (AnimationLink* ret = mFrames[i].pMaterial->FindAnimationLink(animTrans)) {
                     return ret;
                 }
             }
@@ -268,12 +268,12 @@ namespace nw4r {
             return NULL;
         }
 
-        void Window::SetAnimationEnable(AnimTransform* pAnimTrans, bool bEnable, bool bRecursive) {
+        void Window::SetAnimationEnable(AnimTransform* animTrans, bool bEnable, bool bRecursive) {
             for (int i = 0; i < mFrameNum; i++) {
-                mFrames[i].pMaterial->SetAnimationEnable(pAnimTrans, bEnable);
+                mFrames[i].pMaterial->SetAnimationEnable(animTrans, bEnable);
             }
 
-            Pane::SetAnimationEnable(pAnimTrans, bEnable, bRecursive);
+            Pane::SetAnimationEnable(animTrans, bEnable, bRecursive);
         }
 
         ut::Color Window::GetVtxColor(u32 idx) const {
@@ -328,12 +328,12 @@ namespace nw4r {
             }
         }
 
-        void Window::UnbindAnimationSelf(AnimTransform* pAnimTrans) {
+        void Window::UnbindAnimationSelf(AnimTransform* animTrans) {
             for (int i = 0; i < mFrameNum; i++) {
-                mFrames[i].pMaterial->UnbindAnimation(pAnimTrans);
+                mFrames[i].pMaterial->UnbindAnimation(animTrans);
             }
 
-            Pane::UnbindAnimationSelf(pAnimTrans);
+            Pane::UnbindAnimationSelf(animTrans);
         }
 
         void Window::DrawContent(const math::VEC2& basePt, const WindowFrameSize& frameSize, u8 alpha) {

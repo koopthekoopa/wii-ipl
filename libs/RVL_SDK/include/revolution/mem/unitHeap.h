@@ -31,6 +31,10 @@ static u32 MEMGetMemBlockSizeForUnitHeap(MEMHeapHandle heap) {
     return ((MEMiUntHeapHead*)((u8*)heap + sizeof(MEMiHeapHead)))->blockSize;
 }
 
+static inline MEMHeapHandle MEMCreateUnitHeap(void* start, u32 heapSize, u32 memBlockSize) {
+    return MEMCreateUnitHeapEx(start, heapSize, memBlockSize, 4, 0);
+}
+
 #ifdef __cplusplus
 }
 #endif

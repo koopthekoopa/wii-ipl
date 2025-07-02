@@ -10,7 +10,7 @@ namespace nw4r {
                 NW4R_UT_RUNTIME_TYPEINFO;
 
                 explicit DvdLockedFileStream(s32 entrynum);
-                DvdLockedFileStream(const DVDFileInfo* pInfo, bool close);
+                DvdLockedFileStream(const DVDFileInfo* info, bool close);
                 virtual ~DvdLockedFileStream();                                                                                     // 0x0C
 
                 virtual s32     Read(void* pDst, u32 size);                                                                         // 0x14

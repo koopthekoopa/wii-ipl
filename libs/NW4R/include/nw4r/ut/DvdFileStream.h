@@ -12,11 +12,11 @@ namespace nw4r {
                 NW4R_UT_RUNTIME_TYPEINFO;
 
                 explicit DvdFileStream(s32 entrynum);
-                DvdFileStream(const DVDFileInfo* pInfo, bool close);
+                DvdFileStream(const DVDFileInfo* info, bool close);
                 virtual ~DvdFileStream();                                                                           // 0x0C
 
                 bool            Open(s32 entrynum);
-                bool            Open(const DVDFileInfo* pInfo, bool close);
+                bool            Open(const DVDFileInfo* info, bool close);
             
                 void            SetPriority(s32 priority) { mPriority = priority; }
             
@@ -55,7 +55,7 @@ namespace nw4r {
                 } DvdFileStreamInfo;
             
             private:
-                static void     DvdAsyncCallback_(s32 result, DVDFileInfo* pInfo);
+                static void     DvdAsyncCallback_(s32 result, DVDFileInfo* info);
                 static void     DvdCBAsyncCallback_(s32 result, DVDCommandBlock* pBlock);
             
                 void            Initialize_();

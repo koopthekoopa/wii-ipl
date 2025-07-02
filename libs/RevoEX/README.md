@@ -8,14 +8,14 @@ List of libraries that are linked (in alphabetical order):
 ⚠️ = Equivalent  
 ❌ = Not matching  
 
-|   Name    |             Description           |    |
-|-----------|-----------------------------------|----|
-| **CDB**   | Message Board File System Library | ❌ |
-| **NCD**   | Network Settings Library          | ❌ |
-| **NET**   | Network Utilities Library         | ❌ |
-| **NHTTP** | HTTP Library                      | ❌ |
-| **NWC24** | WiiConnect24 Library              | ❌ |
-| **SO**    | Socket Library                    | ❌ |
-| **SSL**   | SSL Library                       | ❌ |
-| **VF**    | Virtual File System Library       | ❌ |
-| **WD**    | Wireless Driver Library           | ❌ |
+|   Name    |                    Description                 |    |
+|-----------|------------------------------------------------|----|
+| **CDB**   | Message Board File System Library; for cdb.vff | ❌ |
+| **NCD**   | Network Settings Library                       | ❌ |
+| **NET**   | Network Utilities Library                      | ❌ |
+| **NHTTP** | HTTP Library                                   | ❌ |
+| **NWC24** | WiiConnect24 Library                           | ❌ |
+| **SO**    | Socket Library                                 | ❌ |
+| **SSL**   | SSL Library                                    | ❌ |
+| **VF**    | Virtual File System Library; for .vff files    | ❌ |
+| **WD**    | Wireless Driver Library; Wifi?                 | ❌ |

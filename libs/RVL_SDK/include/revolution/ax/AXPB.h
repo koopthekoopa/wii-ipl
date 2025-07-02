@@ -30,7 +30,10 @@ typedef enum {
     AX_VOICE_STREAM
 } AXVOICETYPE;
 
-typedef enum { AX_VOICE_STOP, AX_VOICE_RUN } AXVOICESTATE;
+typedef enum {
+    AX_VOICE_STOP,
+    AX_VOICE_RUN
+} AXVOICESTATE;
 
 typedef enum {
     AX_SAMPLE_FORMAT_DSP_ADPCM = 0,

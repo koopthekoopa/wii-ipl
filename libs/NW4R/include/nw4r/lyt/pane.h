@@ -27,7 +27,7 @@ namespace nw4r {
                     ut::LinkListNode mLink;
             };
         }
-        typedef ut::LinkList<Pane, 4 /*mLink*/> PaneList;
+        typedef ut::LinkList<Pane, offsetof(detail::PaneBase, mLink)> PaneList;
 
         enum {
             ANIMOPTION_SKIP_INVISIBLE = (1 << 0),
@@ -67,15 +67,15 @@ namespace nw4r {
                 virtual Pane*           FindPaneByName(const char* findName, bool bRecursive = true);                           // 0x3C
                 virtual Material*       FindMaterialByName(const char* findName, bool bRecursive = true);                       // 0x40
 
-                virtual void            BindAnimation(AnimTransform* pAnimTrans, bool bRecursive = true);                       // 0x44
+                virtual void            BindAnimation(AnimTransform* animTrans, bool bRecursive = true);                       // 0x44
                 
-                virtual void            UnbindAnimation(AnimTransform* pAnimTrans, bool bRecursive = true);                     // 0x48
+                virtual void            UnbindAnimation(AnimTransform* animTrans, bool bRecursive = true);                     // 0x48
                 virtual void            UnbindAllAnimation(bool bRecursive = true);                                             // 0x4C
-                virtual void            UnbindAnimationSelf(AnimTransform* pAnimTrans);                                         // 0x50
+                virtual void            UnbindAnimationSelf(AnimTransform* animTrans);                                         // 0x50
                 
-                virtual AnimationLink*  FindAnimationLink(AnimTransform* pAnimTrans);                                           // 0x54
+                virtual AnimationLink*  FindAnimationLink(AnimTransform* animTrans);                                           // 0x54
 
-                virtual void            SetAnimationEnable(AnimTransform* pAnimTrans, bool bEnable, bool bRecursive = true);    // 0x58
+                virtual void            SetAnimationEnable(AnimTransform* animTrans, bool bEnable, bool bRecursive = true);    // 0x58
 
                 virtual Material*       GetMaterial() const;                                                                    // 0x5C
 
@@ -137,7 +137,7 @@ namespace nw4r {
 
                 void                    CalculateMtxChild(const DrawInfo& drawInfo);
 
-                void                    AddAnimationLink(AnimationLink* pAnimationLink);
+                void                    AddAnimationLink(AnimationLink* animationLink);
             
             protected:
                 Pane*                           mpParent;           // 0x0C

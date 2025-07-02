@@ -25,8 +25,8 @@ namespace nw4r {
             InitMutex_();
         }
 
-        DvdLockedFileStream::DvdLockedFileStream(const DVDFileInfo* pInfo, bool close) :
-        DvdFileStream(pInfo, close) {
+        DvdLockedFileStream::DvdLockedFileStream(const DVDFileInfo* info, bool close) :
+        DvdFileStream(info, close) {
             InitMutex_();
         }
 

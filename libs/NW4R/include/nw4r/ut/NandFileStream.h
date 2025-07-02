@@ -11,12 +11,12 @@ namespace nw4r {
             public:
                 NW4R_UT_RUNTIME_TYPEINFO;
 
-                NandFileStream(const char* pPath, u32 mode);
-                NandFileStream(const NANDFileInfo* pInfo, u32 mode, bool enableClose);
+                NandFileStream(const char* path, u32 mode);
+                NandFileStream(const NANDFileInfo* info, u32 mode, bool enableClose);
                 virtual ~NandFileStream();                                                                              // 0x0C
 
-                bool            Open(const char* pPath, u32 mode);
-                bool            Open(const NANDFileInfo* pInfo, u32 mode, bool enableClose) NO_INLINE;
+                bool            Open(const char* path, u32 mode);
+                bool            Open(const NANDFileInfo* info, u32 mode, bool enableClose) NO_INLINE;
 
                 virtual void    Close();                                                                                // 0x10
 

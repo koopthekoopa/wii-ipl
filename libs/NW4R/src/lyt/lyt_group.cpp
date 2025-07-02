@@ -38,12 +38,12 @@ namespace nw4r {
             }
         }
 
-        void Group::AppendPane(Pane* pPane) {
+        void Group::AppendPane(Pane* pane) {
             if (void* pMem = Layout::AllocMemory(sizeof(detail::PaneLink))) {
-                detail::PaneLink* pPaneLink = new(pMem) detail::PaneLink();
+                detail::PaneLink* paneLink = new(pMem) detail::PaneLink();
 
-                pPaneLink->mTarget = pPane;
-                mPaneLinkList.PushBack(pPaneLink);
+                paneLink->mTarget = pane;
+                mPaneLinkList.PushBack(paneLink);
             }
         }
 

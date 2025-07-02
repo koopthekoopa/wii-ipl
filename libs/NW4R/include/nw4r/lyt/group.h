@@ -16,7 +16,7 @@ namespace nw4r {
                 Pane*               mTarget;    // 0x08
             } PaneLink;
         }
-        typedef ut::LinkList<detail::PaneLink, 0> PaneLinkList;
+        typedef ut::LinkList<detail::PaneLink, offsetof(detail::PaneLink, mLink)> PaneLinkList;
         
         class Group {
             public:
@@ -30,7 +30,7 @@ namespace nw4r {
                 PaneLinkList&   GetPaneList()           { return mPaneLinkList; };
 
                 void            Init();
-                void            AppendPane(Pane* pPane);
+                void            AppendPane(Pane* pane);
 
                 ut::LinkListNode mLink; // 0x04
                 
@@ -42,7 +42,7 @@ namespace nw4r {
 
                 u8              mPadding[2];        // 0x2A
         };
-        typedef ut::LinkList<Group, 4> GroupList;
+        typedef ut::LinkList<Group, offsetof(Group, mLink)> GroupList;
         
         class GroupContainer {
             public:

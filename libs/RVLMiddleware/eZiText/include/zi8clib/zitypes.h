@@ -12,5 +12,6 @@ typedef signed long     ziLong;
 typedef unsigned short  ziWChar;
 typedef void            ziVoid;
 typedef unsigned char   ziBool;
+typedef void*           ziPtr;
 
 #endif // ZI8_CLIB_TYPES_H

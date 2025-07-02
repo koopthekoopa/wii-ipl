@@ -36,11 +36,11 @@ namespace nw4r {
 
                 virtual Material*       FindMaterialByName(const char* findName, bool bRecursive);
 
-                virtual void            UnbindAnimationSelf(AnimTransform* pAnimTrans);
+                virtual void            UnbindAnimationSelf(AnimTransform* animTrans);
 
-                virtual AnimationLink*  FindAnimationLink(AnimTransform* pAnimTrans);
+                virtual AnimationLink*  FindAnimationLink(AnimTransform* animTrans);
 
-                virtual void            SetAnimationEnable(AnimTransform* pAnimTrans, bool bEnable, bool bRecursive);
+                virtual void            SetAnimationEnable(AnimTransform* animTrans, bool bEnable, bool bRecursive);
 
                 virtual Material*       GetContentMaterial() const;
                 virtual Material*       GetFrameMaterial(u32 frameIdx) const;

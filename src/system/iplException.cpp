@@ -36,7 +36,6 @@ namespace ipl {
     unk_0x04(0),
     mpBuffer(),
     unk_0x0C(0) {
-
         nw4r::db::Exception_Init();
         nw4r::db::DirectPrint_Init();
 
@@ -50,9 +49,10 @@ namespace ipl {
 
     void Exception::setConsole(const GXRenderModeObj& rMode) {
         nw4r::db::Exception_SetConsole(mConsole, &rMode);
-        mConsole->isVisible = false;
+        nw4r::db::Console_SetVisible(mConsole, false);
 
         nw4r::db::ConsoleHandle handle = mConsole;
+        // Using Console_SetPosition turns it into a weak...
         handle->viewPosX = 14;
         handle->viewPosY = 30;
     }
@@ -70,7 +70,7 @@ namespace ipl {
                 KPADRead(i, &cons[i], 1);
             }
             
-            wait(50); // A hacky way of ensuring the controllers are read?
+            wait(50);
 
             // todo
             for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
@@ -88,23 +88,23 @@ namespace ipl {
     }
 
     void Exception::exception_callback(nw4r::db::ConsoleHandle console) {
-        console->isVisible = true;
+        nw4r::db::Console_SetVisible(console, true);
 
-        s32 line = mConsole->ringTopLineCnt;
+        s32 line = nw4r::db::Console_GetBufferHeadLine(mConsole);
         s32 lineScrollMax = nw4r::db::Console_GetTotalLines(mConsole) - LINES_ON_SCREEN_HEIGHT;
 
         key_input(); // Wait until they pressed key input
 
         // Scroll through the exception.
         for (; line <= lineScrollMax; line++) {
-            mConsole->viewTopLine = line;
+            nw4r::db::Console_SetViewBaseLine(mConsole, line);
             nw4r::db::Console_DrawDirect(mConsole);
             wait(250);
         }
 
         // Go back to the first line
         int yCur = 0;
-        mConsole->viewTopLine = 0;
+        nw4r::db::Console_SetViewBaseLine(mConsole, 0);
         nw4r::db::Console_DrawDirect(mConsole);
 
         OSEnableInterrupts();
@@ -115,7 +115,7 @@ namespace ipl {
 
         while (true) {
             int yPrevCur = yCur;
-            int xCur = mConsole->viewPosX;
+            int xCur = nw4r::db::Console_GetPositionX(mConsole);
             int xPrevCur = xCur;
 
             // Read controllers
@@ -123,7 +123,7 @@ namespace ipl {
                 KPADRead(i, &cons[i], 1);
             }
 
-            wait(50); // A hacky way of ensuring the controllers are read?
+            wait(50);
 
             int chan = 0;
             for (int i = WPAD_MAX_CONTROLLERS; i != 0; i--) {
@@ -149,8 +149,8 @@ namespace ipl {
 
             // Refresh screen
             if (yCur != yPrevCur || xCur != xPrevCur) {
-                mConsole->viewPosX = xCur;
-                mConsole->viewTopLine = yCur;
+                nw4r::db::Console_SetPosition(mConsole, xCur, nw4r::db::Console_GetPositionY(mConsole));
+                nw4r::db::Console_SetViewBaseLine(mConsole, yCur);
                 nw4r::db::Console_DrawDirect(mConsole);
             }
         }
@@ -158,7 +158,7 @@ namespace ipl {
 
     void Exception::wait(u32 tick) {
         OSTick prevTick = OSGetTick();
-        while (OSTicksToMilliseconds(OSGetTick() - prevTick) < tick) {
+        while (OSTicksToMilliseconds(OSDiffTick(OSGetTick(), prevTick)) < tick) {
             // do nothing until it finished
         }
     }

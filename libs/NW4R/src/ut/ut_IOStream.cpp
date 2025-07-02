@@ -4,13 +4,13 @@ namespace nw4r {
     namespace ut {
         NW4R_UT_GET_RUNTIME_TYPEINFO(IOStream);
 
-        bool IOStream::ReadAsync(void* pDst, u32 size, IOStreamCallback pCallback, void* pCallbackArg) {
+        bool IOStream::ReadAsync(void* pDst, u32 size, IOStreamCallback callback, void* callbackArg) {
             return false;
         }
 
         void IOStream::Write(const void* pSrc, u32 size) {}
 
-        bool IOStream::WriteAsync(const void* pSrc, u32 size, IOStreamCallback pCallback, void* pCallbackArg) {
+        bool IOStream::WriteAsync(const void* pSrc, u32 size, IOStreamCallback callback, void* callbackArg) {
             return false;
         }
 

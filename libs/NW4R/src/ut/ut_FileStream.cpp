@@ -8,7 +8,7 @@ namespace nw4r {
 
         void FileStream::Cancel() {}
         
-        bool FileStream::CancelAsync(IOStreamCallback pCallback, void* pCallbackArg) {
+        bool FileStream::CancelAsync(IOStreamCallback callback, void* callbackArg) {
             return true;
         }
         

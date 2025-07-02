@@ -183,8 +183,8 @@ namespace nw4r {
 
             if (bRecursive) {
                 for (PaneList::Iterator it = mChildList.GetBeginIter(); it != mChildList.GetEndIter(); it++) {
-                    if (Pane* pPane = it->FindPaneByName(findName, true)) {
-                        return pPane;
+                    if (Pane* pane = it->FindPaneByName(findName, true)) {
+                        return pane;
                     }
                 }
             }
@@ -324,16 +324,16 @@ namespace nw4r {
             }
         }
 
-        void Pane::BindAnimation(AnimTransform *pAnimTrans, bool bRecursive) {
-            pAnimTrans->Bind(this, bRecursive);
+        void Pane::BindAnimation(AnimTransform *animTrans, bool bRecursive) {
+            animTrans->Bind(this, bRecursive);
         }
 
-        void Pane::UnbindAnimation(AnimTransform *pAnimTrans, bool bRecursive) {
-            UnbindAnimationSelf(pAnimTrans);
+        void Pane::UnbindAnimation(AnimTransform *animTrans, bool bRecursive) {
+            UnbindAnimationSelf(animTrans);
 
             if (bRecursive) {
                 for (PaneList::Iterator it = mChildList.GetBeginIter(); it != mChildList.GetEndIter(); it++) {
-                    it->UnbindAnimation(pAnimTrans, bRecursive);
+                    it->UnbindAnimation(animTrans, bRecursive);
                 }
             }
         }
@@ -342,32 +342,32 @@ namespace nw4r {
             UnbindAnimation(NULL, bRecursive);
         }
 
-        void Pane::UnbindAnimationSelf(AnimTransform *pAnimTrans) {
+        void Pane::UnbindAnimationSelf(AnimTransform *animTrans) {
             if (mpMaterial != NULL) {
-                mpMaterial->UnbindAnimation(pAnimTrans);
+                mpMaterial->UnbindAnimation(animTrans);
             }
 
             for (AnimationLinkList::Iterator it = mAnimList.GetBeginIter(); it != mAnimList.GetEndIter();) {
                 AnimationLinkList::Iterator currIt = it++;
 
-                if (pAnimTrans == NULL || currIt->GetAnimTransform() == pAnimTrans) {
+                if (animTrans == NULL || currIt->GetAnimTransform() == animTrans) {
                     mAnimList.Erase(currIt);
                     currIt->Reset();
                 }
             }
         }
 
-        void Pane::AddAnimationLink(AnimationLink *pAnimationLink) {
-            mAnimList.PushBack(pAnimationLink);
+        void Pane::AddAnimationLink(AnimationLink *animationLink) {
+            mAnimList.PushBack(animationLink);
         }
 
-        AnimationLink *Pane::FindAnimationLink(AnimTransform *pAnimTrans) {
-            if (AnimationLink *ret = detail::FindAnimationLink(&mAnimList, pAnimTrans)) {
+        AnimationLink *Pane::FindAnimationLink(AnimTransform *animTrans) {
+            if (AnimationLink *ret = detail::FindAnimationLink(&mAnimList, animTrans)) {
                 return ret;
             }
 
             if (mpMaterial != NULL) {
-                if (AnimationLink *ret = mpMaterial->FindAnimationLink(pAnimTrans)) {
+                if (AnimationLink *ret = mpMaterial->FindAnimationLink(animTrans)) {
                     return ret;
                 }
             }
@@ -375,18 +375,18 @@ namespace nw4r {
             return NULL;
         }
 
-        void Pane::SetAnimationEnable(AnimTransform *pAnimTrans, bool bEnable, bool bRecursive) {
-            if (AnimationLink *pAnimLink = detail::FindAnimationLink(&mAnimList, pAnimTrans)) {
-                pAnimLink->SetEnable(bEnable);
+        void Pane::SetAnimationEnable(AnimTransform *animTrans, bool bEnable, bool bRecursive) {
+            if (AnimationLink *animLink = detail::FindAnimationLink(&mAnimList, animTrans)) {
+                animLink->SetEnable(bEnable);
             }
 
             if (mpMaterial != NULL) {
-                mpMaterial->SetAnimationEnable(pAnimTrans, bEnable);
+                mpMaterial->SetAnimationEnable(animTrans, bEnable);
             }
 
             if (bRecursive) {
                 for (PaneList::Iterator it = mChildList.GetBeginIter(); it != mChildList.GetEndIter(); it++) {
-                    it->SetAnimationEnable(pAnimTrans, bEnable, bRecursive);
+                    it->SetAnimationEnable(animTrans, bEnable, bRecursive);
                 }
             }
         }

@@ -8,6 +8,8 @@
 #include <nw4r/ut/LinkList.h>
 #include <nw4r/ut/list.h>
 
+#include <nw4r/ut/Lock.h>
+
 #include <nw4r/ut/Color.h>
 #include <nw4r/ut/Rect.h>
 
@@ -21,5 +23,9 @@
 
 #include <nw4r/ut/TextWriter.h>
 #include <nw4r/ut/WideTextWriter.h>
+
+#include <nw4r/ut/FileStream.h>
+#include <nw4r/ut/DvdLockedFileStream.h>
+#include <nw4r/ut/NandFileStream.h>
 
 #endif // NW4R_UT_H
