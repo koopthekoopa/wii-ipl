@@ -25,7 +25,10 @@ namespace nw4r {
                 OSInitThreadQueue(&mThreadQueue);
                 OSInitMutex(&mMutex);
 
-                BOOL success = OSCreateThread(&mThread, SoundThreadFunc, &GetInstance(), mThreadStack + 1024, 1024 * 8, priority, 0);
+                BOOL success = OSCreateThread(&mThread, SoundThreadFunc, &GetInstance(),
+                                            mThreadStack + THREAD_STACK_SIZE,
+                                            THREAD_STACK_SIZE * 8,
+                                            priority, 0);
 
                 if (success) {
                     OSResumeThread(&mThread);

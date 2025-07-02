@@ -1,12 +1,13 @@
 #ifndef NW4R_SND_SOUND_THREAD_H
 #define NW4R_SND_SOUND_THREAD_H
+
 #include <nw4r/snd/types.h>
 
 #include <nw4r/snd/AxManager.h>
 
 #include <nw4r/ut.h>
 
-#include <revolution/OS.h>
+#include <revolution/os.h>
 
 namespace nw4r {
     namespace snd {
@@ -53,20 +54,20 @@ namespace nw4r {
                     void            Unlock()    { OSUnlockMutex(&mMutex); }
 
                 private:
-                    OSThread                    mThread;                        // 0x00
-                    u64                         mThreadStack[1024];             // 0x318
-                    OSThreadQueue               mThreadQueue;                   // 0x2318
+                    OSThread                    mThread;                            // 0x00
+                    u64                         mThreadStack[THREAD_STACK_SIZE];    // 0x318
+                    OSThreadQueue               mThreadQueue;                       // 0x2318
 
-                    mutable OSMutex             mMutex;                         // 0x2320
+                    mutable OSMutex             mMutex;                             // 0x2320
 
-                    OSMessageQueue              mMsgQueue;                      // 0x2338
-                    OSMessage                   mMsgBuffer[MSG_QUEUE_CAPACITY]; // 0x2358
+                    OSMessageQueue              mMsgQueue;                          // 0x2338
+                    OSMessage                   mMsgBuffer[MSG_QUEUE_CAPACITY];     // 0x2358
 
-                    AxManager::CallbackListNode mAxCallbackNode;                // 0x2378
-                    CallbackList                mCallbackList;                  // 0x2384
+                    AxManager::CallbackListNode mAxCallbackNode;                    // 0x2378
+                    CallbackList                mCallbackList;                      // 0x2384
 
-                    u32                         mProcessTick;                   // 0x2390
-                    bool                        mCreateFlag;                    // 0x2394
+                    u32                         mProcessTick;                       // 0x2390
+                    bool                        mCreateFlag;                        // 0x2394
             };
         }
     }

@@ -13,7 +13,7 @@ List of libraries that are linked (in alphabetical order):
 
 |   Name   |                    Description                     |    |
 |----------|----------------------------------------------------|----|
-| **DB**   | Debug library; in this case, for the crash handler | ❌ |
+| **DB**   | Debug library; in this case, for the crash handler | ✔️ |
 | **MATH** | Math utilities library                             | ✔️ |
 | **UT**   | Utilities/Core library                             | ❌ |
 | **SND**  | Sound Library; for ".brsar" files                  | ✔️ |

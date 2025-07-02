@@ -45,6 +45,9 @@ namespace nw4r {
                 ut::LinkList<T, Ofs>    mActiveList;    // 0x0C
         };
 
+        static const int THREAD_STACK_SIZE = 1024;
+        static const int STREAM_BUFFER_SIZE = 512;
+
         static const int CHANNEL_MAX = 2;
 
         static const int VOICE_MAX = 4;

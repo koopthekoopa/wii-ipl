@@ -109,7 +109,7 @@ namespace nw4r {
             }
 
             f32 val = ((bufSize * 1000) / mSampleRate);
-            if (val < (6 * mPitchMax)) {
+            if (val < (6.0f * mPitchMax)) {
                 return false;
             }
 

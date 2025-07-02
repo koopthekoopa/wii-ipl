@@ -18,7 +18,10 @@ namespace nw4r {
 
                 OSInitThreadQueue(&mThreadQueue);
 
-                BOOL result = OSCreateThread(&mThread, ThreadFunc, &GetInstance(), mThreadStack + 1024, 1024 * 8, threadPrio, 0);
+                BOOL result = OSCreateThread(&mThread, ThreadFunc, &GetInstance(),
+                                            mThreadStack + THREAD_STACK_SIZE,
+                                            THREAD_STACK_SIZE * 8,
+                                            threadPrio, 0);
                 if (result) {
                     OSResumeThread(&mThread);
                 }

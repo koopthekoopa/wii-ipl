@@ -1236,9 +1236,9 @@ config.libs = [
         ]
     ),
     NW4RLib("db", [
-            Object(NonMatching, "db/db_directPrint.cpp"),
-            Object(NonMatching, "db/db_console.cpp"),
-            Object(NonMatching, "db/db_exception.cpp"),
+            Object(Matching,    "db/db_directPrint.cpp"),
+            Object(Matching,    "db/db_console.cpp"),
+            Object(Matching,    "db/db_exception.cpp"),
         ]
     ),
     NW4RLib("math", [

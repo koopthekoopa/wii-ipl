@@ -557,16 +557,16 @@ namespace nw4r {
                 }
             }
 
-            bool StrmPlayer::SetupPlayer(const StrmHeader* pStrmHeader) {
+            bool StrmPlayer::SetupPlayer(const StrmHeader* strmHeader) {
                 u32 poolBlockSize = mBufferPool->GetBlockSize();
-                mStrmInfo = pStrmHeader->strmInfo;
+                mStrmInfo = strmHeader->strmInfo;
 
                 u32 blockOffset = 0;
                 s32 loopCount = 0;
 
                 if (mStrmInfo.format == WaveFile::FORMAT_ADPCM) {
                     for (int i = 0; i < mStrmInfo.numChannels; i++) {
-                        mChannels[i].mAdpcmInfo = pStrmHeader->adpcmInfo[i];
+                        mChannels[i].mAdpcmInfo = strmHeader->adpcmInfo[i];
                     }
                 }
 
@@ -736,19 +736,19 @@ namespace nw4r {
             }
 
             void StrmPlayer::VoiceCallbackFunc(AxVoice* dropVoice, AxVoice::CallbackStatus status, void* arg) {
-                StrmPlayer* pStrmPlayer = static_cast<StrmPlayer*>(arg);
+                StrmPlayer* strmPlayer = static_cast<StrmPlayer*>(arg);
 
                 switch (status) {
                     case AxVoice::CALLBACK_STATUS_FINISH_WAVE:
                     case AxVoice::CALLBACK_STATUS_INVALIDATE_WAVE: {
                         dropVoice->Free();
-                        pStrmPlayer->FreeChannels();
+                        strmPlayer->FreeChannels();
                         break;
                     }
                     case AxVoice::CALLBACK_STATUS_DROP_VOICE:
                     case AxVoice::CALLBACK_STATUS_DROP_DSP: {
-                        pStrmPlayer->mVoice = NULL;
-                        pStrmPlayer->FreeChannels();
+                        strmPlayer->mVoice = NULL;
+                        strmPlayer->FreeChannels();
                         break;
                     }
                     default: {

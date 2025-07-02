@@ -35,15 +35,15 @@ namespace nw4r {
                 private:
                     static const int MSG_QUEUE_CAPACITY = 8;
 
-                    OSThread        mThread;                        // 0x00
-                    u64             mThreadStack[1024];             // 0x318
-                    OSThreadQueue   mThreadQueue;                   // 0x2318
+                    OSThread        mThread;                            // 0x00
+                    u64             mThreadStack[THREAD_STACK_SIZE];    // 0x318
+                    OSThreadQueue   mThreadQueue;                       // 0x2318
 
-                    OSMessageQueue  mMsgQueue;                      // 0x2320
-                    OSMessage       mMsgBuffer[MSG_QUEUE_CAPACITY]; // 0x2340
+                    OSMessageQueue  mMsgQueue;                          // 0x2320
+                    OSMessage       mMsgBuffer[MSG_QUEUE_CAPACITY];     // 0x2340
 
-                    bool            mCreateFlag;                    // 0x2360
-                    u8              mPadding[3];                    // 0x2361
+                    bool            mCreateFlag;                        // 0x2360
+                    u8              mPadding[3];                        // 0x2361
             };
         }
     }

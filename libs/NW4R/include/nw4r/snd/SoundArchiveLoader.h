@@ -12,7 +12,6 @@ namespace nw4r {
         class SoundArchive;
         class SoundMemoryAllocatable;
         namespace detail {
-
             class FileStreamHandle {
                 public:
                     FileStreamHandle(ut::FileStream* pStream) :
@@ -46,10 +45,10 @@ namespace nw4r {
                     void    Cancel();
 
                 private:
-                    mutable OSMutex     mMutex;             // 0x00
-                    const SoundArchive& mArc;               // 0x18
-                    u8                  mStreamArea[512];   // 0x1C
-                    ut::FileStream*     mStream;            // 0x21C
+                    mutable OSMutex     mMutex;                             // 0x00
+                    const SoundArchive& mArc;                               // 0x18
+                    u8                  mStreamArea[STREAM_BUFFER_SIZE];    // 0x1C
+                    ut::FileStream*     mStream;                            // 0x21C
             };
         }
     }

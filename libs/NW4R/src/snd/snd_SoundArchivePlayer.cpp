@@ -476,7 +476,7 @@ namespace nw4r {
         SoundStartable::StartResult SoundArchivePlayer::detail_SetupSound(SoundHandle* handle, u32 soundId,
                                                                         detail::BasicSound::AmbientArgInfo* ambientArgInfo, detail::ExternalSoundPlayer* extPlayer,
                                                                         bool holdFlag, const StartInfo* startInfo) {
-            u8 streamBuffer[512];
+            u8 streamBuffer[STREAM_BUFFER_SIZE];
             
             if (!IsAvailable()) {
                 return SoundStartable::START_ERR_NOT_AVAILABLE;
@@ -613,7 +613,7 @@ namespace nw4r {
         }
 
         SoundStartable::StartResult SoundArchivePlayer::PrepareSeqImpl(detail::SeqSound* sound, const SoundArchive::SoundInfo* soundInfo, const SoundArchive::SeqSoundInfo* info, int voices) {
-            u8 streamBuffer[512];
+            u8 streamBuffer[STREAM_BUFFER_SIZE];
 
             const void* seqData = detail_GetFileAddress(soundInfo->fileId);
 
@@ -980,12 +980,12 @@ namespace nw4r {
         mMutex(mutex) {}
 
         void SoundArchivePlayer::StrmHeaderLoadTask::Execute() {
-            static u8 buffer[512] ALIGN32;
+            static u8 buffer[STREAM_BUFFER_SIZE] ALIGN32;
             static OSMutex mutex;
 
             static bool initFlag = false;
 
-            u8 streamBuffer[512];
+            u8 streamBuffer[STREAM_BUFFER_SIZE];
 
             {
                 ut::AutoMutexLock lock(mMutex);
@@ -1082,7 +1082,7 @@ namespace nw4r {
         void SoundArchivePlayer::StrmDataLoadTask::Execute() {
             DCInvalidateRange(mAddr, mSize);
 
-            u8 streamBuffer[512];
+            u8 streamBuffer[STREAM_BUFFER_SIZE];
             {
                 ut::AutoMutexLock lock(mMutex);
                 mStream = mSoundArchive.detail_OpenFileStream(mFileId, streamBuffer, sizeof(streamBuffer));
