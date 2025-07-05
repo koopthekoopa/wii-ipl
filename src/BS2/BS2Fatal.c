@@ -345,9 +345,9 @@ const char* const __DVDErrorMessage[] = {
 
 static void (*FatalFunc)();
 
-void __DVDShowFatalMessage(void) {
+void __DVDShowFatalMessage() {
     const char* message;
-    GXColor bg = { 0,   0,   0,   0 };
+    GXColor bg = {  0,   0,   0,  0 };
     GXColor fg = { 255, 255, 255, 0 };
 
     if (SCGetLanguage() == SC_LANG_JAPANESE) {

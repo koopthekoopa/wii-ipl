@@ -9,6 +9,9 @@
 #include <revolution/mem/allocator.h>
 #include <revolution/gx/GXStruct.h>
 
+#include <private/os/OSBootInfo2.h>
+#include <private/os/OSBootInfo3.h>
+
 #include <stdarg.h>
 #include <stdio.h>
 
@@ -121,6 +124,8 @@ enum {
 #define     BS2_DEFAULT_BANNER_SIZE 0x80000
 
 #define     BS2_CACHE_BOOT_SIZE     0xB00000
+
+extern OSBootInfo3  bi3;
 
 BS2State    BS2Tick();
 

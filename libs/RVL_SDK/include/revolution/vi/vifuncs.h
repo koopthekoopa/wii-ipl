@@ -19,6 +19,8 @@ void    VIConfigurePan(u16 xOrg, u16 yOrg, u16 width, u16 height);
 VIRetraceCallback VISetPreRetraceCallback(VIRetraceCallback cb);
 VIRetraceCallback VISetPostRetraceCallback(VIRetraceCallback cb);
 
+#define VI_DTV_COMPONENT    (1 << 0)
+
 void    VIFlush();
 void    VISetNextFrameBuffer(void* fb);
 

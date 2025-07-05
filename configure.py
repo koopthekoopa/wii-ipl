@@ -660,7 +660,7 @@ config.libs = [
             Object(Matching,    "BS2/BS2Init.c"),
             Object(NonMatching, "BS2/BS2Mach.c"),
             Object(NonMatching, "BS2/BS2Update.c"),
-            Object(NonMatching, "BS2/BS2ParentalControl.c"),
+            Object(Matching,    "BS2/BS2ParentalControl.c"),
             Object(Matching,    "BS2/BS2BringUp.c"),
             Object(Matching,    "BS2/BS2Reset.c"),
             Object(Equivalent,  "BS2/BS2Fatal.c"),

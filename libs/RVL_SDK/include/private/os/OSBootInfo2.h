@@ -8,6 +8,21 @@
 extern "C" {
 #endif
 
+typedef struct OSBootInfo2 {
+    u32 dbMonitorSize;      // 0x00
+    u32 simulatedMem1Size;  // 0x04
+    u32 argsOffset;         // 0x08
+    u32 debugFlag;          // 0x0C
+    u32 trackLocation;      // 0x10
+    u32 trackSize;          // 0x14
+    u32 countryCode;        // 0x18
+    u32 unk_0x1C;
+    u32 unk_0x20;
+    u32 padSpec;            // 0x24
+    u32 codeLimit;          // 0x28
+    u32 simulatedMem2Size;  // 0x2C
+} OSBootInfo2;
+
 #define BI2_SIZE                        0x2000
 
 #define BI2_ADDR                        OS_ADDR_BOOT_INFO_2

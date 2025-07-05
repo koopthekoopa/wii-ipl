@@ -100,8 +100,6 @@ vu32    BS2VideoMode;
 
 static u8 SRAMtoSCLang[9];
 
-/* STATICS FOR ENTRY POINT */
-
 // Get some device from EXI.
 static void GetSomeDevFromExi() {
     u32 cmd;
@@ -143,8 +141,8 @@ static void FixUpParentalInfo() {
     SCParentalControlsInfo parentalInfo;
     SCGetParentalControl(&parentalInfo);
 
-    if (parentalInfo.org == 5) {
-        parentalInfo.org = 4;
+    if (parentalInfo.org == BI3_PARENTALCONTROL_PEGI_FINLAND) {
+        parentalInfo.org = BI3_PARENTALCONTROL_PEGI;
 
         switch (parentalInfo.ageRating) {
             case 11: {
@@ -456,7 +454,7 @@ static void SetupVideo() {
     *(u32*)OSPhysicalToCached(OS_ADDR_TV_VIDEO_FORMAT) = BS2VideoMode;
 
     if (!BS2ReturnToMenu && !BS2ReturnToDataManager) {
-        if (SCGetProgressiveMode() == SC_PROGRESSIVE_MODE_ON && VIGetDTVStatus() == 1) {
+        if (SCGetProgressiveMode() == SC_PROGRESSIVE_MODE_ON && VIGetDTVStatus() == VI_DTV_COMPONENT) {
             switch (BS2VideoMode) {
                 case VI_PAL:
                 case VI_EURGB60: {
@@ -475,7 +473,7 @@ static void SetupVideo() {
     }
     else {
         if (VIGetScanMode() == VI_NON_INTERLACE) {
-            if (SCGetProgressiveMode() == SC_PROGRESSIVE_MODE_ON && VIGetDTVStatus() == 1) {
+            if (SCGetProgressiveMode() == SC_PROGRESSIVE_MODE_ON && VIGetDTVStatus() == VI_DTV_COMPONENT) {
                 switch (BS2VideoMode) {
                     case VI_PAL:
                     case VI_EURGB60: {
@@ -724,13 +722,14 @@ void BS2BootIRD() {
     GXColor verBG = {  0,   0,   0,  0 };
     GXColor verFG = { 255, 255, 255, 0 };
 
+    // Setup heap for BS2
     arenaHi = OSGetMEM2ArenaHi();
     heap = MEMCreateExpHeap((void*)(arenaHi-IRD_MODE_HEAP_SIZE), IRD_MODE_HEAP_SIZE);
-
     if (heap == NULL) {
         OSHalt("MEM2 heap allocation error.\n", 885);
     }
 
+    // Setup allocators for BS2
     OSSetMEM2ArenaHi((void*)(arenaHi-IRD_MODE_HEAP_SIZE));
     MEMInitAllocatorForExpHeap(&allocator, heap, DEFAULT_ALIGN);
     BS2SetMemAllocator(&allocator);
@@ -1035,11 +1034,13 @@ int main(int argc, char** argv) {
                 arenaLo = OSGetMEM2ArenaLo();
                 arenaHi = OSGetMEM2ArenaHi();
 
-                // Create allocators
+                // Setup heap
                 heap = MEMCreateExpHeap(arenaLo, (u32)arenaHi - (u32)arenaLo);
                 if (heap == 0) {
                     OSHalt("MEM2 heap allocation error.\n", 2038);
                 }
+
+                // Setup allocators
                 OSSetMEM2ArenaLo(arenaHi);
                 MEMInitAllocatorForExpHeap(&BS2Allocator, heap, DEFAULT_ALIGN);
 
