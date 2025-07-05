@@ -15,7 +15,7 @@ namespace ipl {
     namespace bs2 {
         Manager::Manager(EGG::Heap* heap) :
         unk_0x04(1),
-        mState(BS2_STATE_52),
+        mState(BS2_NO_DISK),
         unk_0x0C(true),
         unk_0x0D(false),
         unk_0x0E(false),
@@ -23,7 +23,7 @@ namespace ipl {
         mbIsDiagDisc(false),
         unk_0x11(false),
         mbHasBanner(FALSE),
-        unk_0x1C(BS2_STATE_52),
+        unk_0x1C(BS2_NO_DISK),
         mbStartUpdate(false),
         mEntries(NULL),
         mEntrySize(1),
@@ -159,9 +159,9 @@ namespace ipl {
 
         void Manager::splashTick(BS2State state) {
             switch (state) {
-                case BS2_STATE_52:
-                case BS2_STATE_53: {
-                    unk_0x1C = BS2_STATE_52;
+                case BS2_NO_DISK:
+                case BS2_COVER_OPEN: {
+                    unk_0x1C = BS2_NO_DISK;
                     unk_0x04 = 1;
                     break;
                 }
@@ -177,9 +177,9 @@ namespace ipl {
                     unk_0x04 = 6;
                     break;
                 }
-                case BS2_STATE_69: {
+                case BS2_DATA_DISK: {
                     mbHasBanner = BS2IsBannerAvailable();
-                    unk_0x1C = BS2_STATE_69;
+                    unk_0x1C = BS2_DATA_DISK;
                     unk_0x04 = 5;
                     break;
                 }
@@ -187,10 +187,10 @@ namespace ipl {
                     unk_0x1C = BS2_RUN_LOCKED_APP;
                     break;
                 }
-                case BS2_STATE_56:
-                case BS2_STATE_59:
+                case BS2_WRONG_DISK:
+                case BS2_DIRTY_DISK:
                 case BS2_STATE_68: {
-                    unk_0x1C = BS2_STATE_52;
+                    unk_0x1C = BS2_NO_DISK;
                     unk_0x04 = 7;
                     break;
                 }
@@ -207,12 +207,12 @@ namespace ipl {
                     unk_0x04 = 8;
                     break;
                 }
-                case BS2_STATE_58: {
+                case BS2_UPDATE_FAILED: {
                     unk_0x04 = 9;
                     break;
                 }
-                case BS2_STATE_57: {
-                    unk_0x1C = BS2_STATE_52;
+                case BS2_FATAL_ERROR: {
+                    unk_0x1C = BS2_NO_DISK;
                     unk_0x04 = 10;
                     break;
                 }
@@ -233,16 +233,16 @@ namespace ipl {
                 }
             }
             else if (unk_0x0E) {
-                if (state == BS2_STATE_52
-                 || state == BS2_STATE_53
+                if (state == BS2_NO_DISK
+                 || state == BS2_COVER_OPEN
                  || state == BS2_STATE_55
-                 || state == BS2_STATE_56
+                 || state == BS2_WRONG_DISK
                  || state == BS2_STATE_66
                  || state == BS2_STATE_67
                  || state == BS2_STATE_68
-                 || state == BS2_STATE_57
-                 || state == BS2_STATE_58
-                 || state == BS2_STATE_59) {
+                 || state == BS2_FATAL_ERROR
+                 || state == BS2_UPDATE_FAILED
+                 || state == BS2_DIRTY_DISK) {
                     unk_0x0C = false;
                     unk_0x04 = 8;
                 }

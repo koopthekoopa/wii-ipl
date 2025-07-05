@@ -50,6 +50,7 @@ namespace nw4r {
                         mSound->StartPrepared();
                     }
                 }
+
                 void Stop(int frames) {
                     if (IsAttachedSound()) {
                         mSound->Stop(frames);

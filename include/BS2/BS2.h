@@ -2,11 +2,21 @@
 #define BS2_H
 
 #include <revolution/types.h>
+
 #include <private/es.h>
+
+#include <revolution/nand.h>
+#include <revolution/mem/allocator.h>
+#include <revolution/gx/GXStruct.h>
+
+#include <stdarg.h>
+#include <stdio.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+extern NANDFileInfo BS2CacheFileInfo;
 
 typedef enum {
     BS2_START = 0,
@@ -46,7 +56,7 @@ typedef enum {
     BS2_STATE_31,
     BS2_STATE_32,
     BS2_RUN_UPDATE,
-    BS2_STATE_34,
+    BS2_RUNNING_UPDATE,
     BS2_STATE_35,
     BS2_STATE_36,
     BS2_STATE_37,
@@ -63,17 +73,17 @@ typedef enum {
     BS2_STATE_47,
     BS2_STATE_48,
     BS2_RUN_APP,
-
     BS2_RUN_GC_APP,
-    BS2_STATE_51,
-    BS2_STATE_52,
-    BS2_STATE_53,
+
+    BS2_COVER_CLOSED,
+    BS2_NO_DISK,
+    BS2_COVER_OPEN,
     BS2_STATE_54,
     BS2_STATE_55,
-    BS2_STATE_56,
-    BS2_STATE_57,
-    BS2_STATE_58,
-    BS2_STATE_59,
+    BS2_WRONG_DISK,
+    BS2_FATAL_ERROR,
+    BS2_UPDATE_FAILED,
+    BS2_DIRTY_DISK,
 
     BS2_STATE_60,
     BS2_STATE_61,
@@ -84,7 +94,7 @@ typedef enum {
     BS2_STATE_66,
     BS2_STATE_67,
     BS2_STATE_68,
-    BS2_STATE_69,
+    BS2_DATA_DISK,
 
     BS2_STATE_70,
     BS2_STATE_71,
@@ -96,6 +106,13 @@ typedef enum {
     BS2_MAX_STATE
 } BS2State;
 
+enum {
+    BS2_BOOT_TYPE_POWER_ON = 0,
+    BS2_BOOT_TYPE_RETURN_TO_MENU,
+    BS2_BOOT_TYPE_RETURN_TO_DATA_MANAGER,
+    BS2_BOOT_TYPE_RETURN_ARGS
+};
+
 // Version "1.13"
 #define     BS2_MAJOR_VERSION       0x01
 #define     BS2_MINOR_VERSION       0x13
@@ -103,7 +120,28 @@ typedef enum {
 
 #define     BS2_DEFAULT_BANNER_SIZE 0x80000
 
+#define     BS2_CACHE_BOOT_SIZE     0xB00000
+
 BS2State    BS2Tick();
+
+void        BS2Init();
+
+void        BS2Report(const char* format, ...);
+void        BS2ScreenReport(GXColor fg, GXColor bg, const char* msg);
+static inline void BS2ScreenReportFormat(GXColor fg, GXColor bg, const char* msg, ...) {
+    char str[512];
+    va_list marker;
+    va_start(marker, msg);
+    vsprintf(str, msg, marker);
+    va_end(marker);
+    BS2ScreenReport(fg, bg, str);
+}
+
+u32         BS2GetBootType();
+
+void        BS2SetMemAllocator(MEMAllocator* allocator);
+
+void        BS2SetStateFlags();
 
 void        BS2StartGame();
 void        BS2StartGCGame();

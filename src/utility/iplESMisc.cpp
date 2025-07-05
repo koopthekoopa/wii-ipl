@@ -1,4 +1,5 @@
 #include "utility/iplESMisc.h"
+#include "BS2/BS2.h"
 
 #include <private/es.h>
 
@@ -12,8 +13,6 @@
 #include <cstring>
 
 #include "config.h"
-
-extern "C" u32 BS2GetBootType();
 
 #define TMD_FILE    "/title/00000001/00000002/data/tmds.sys"
 

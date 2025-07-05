@@ -139,7 +139,7 @@ BOOL __OSCheckTmdCountryCode(ESTmdView* tmd) {
     }
 }
 
-int __OSGetValidTicketIndex(ESTicketView *ticketViewList, u32 numTickets) {
+int __OSGetValidTicketIndex(ESTicketView* ticketViewList, u32 numTickets) {
     int  ret, i;
     int  bestIdx = 0;
     BOOL permanent = FALSE;

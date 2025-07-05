@@ -212,7 +212,7 @@ s32     NANDTell(NANDFileInfo* info, u32* pos);
 s32     NANDGetLength(NANDFileInfo* info, u32* length);
 s32     NANDGetLengthAsync(NANDFileInfo* info, u32* length, NANDCallback callback, NANDCommandBlock* block);
 
-s32     NANDGetStatus(const char* path, NANDStatus *status);
+s32     NANDGetStatus(const char* path, NANDStatus* status);
 s32     NANDSetStatus(const char* path, NANDStatus* status);
 
 s32     NANDClose(NANDFileInfo* info);

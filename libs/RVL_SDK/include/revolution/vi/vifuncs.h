@@ -30,6 +30,7 @@ void    VIEnableDimming(BOOL enableDim);
 
 u32     VIGetRetraceCount();
 u32     VIGetDTVStatus();
+u32     VIGetScanMode();
 
 u32     VIGetTvFormat();
 

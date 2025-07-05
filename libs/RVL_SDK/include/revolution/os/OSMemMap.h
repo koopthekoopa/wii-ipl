@@ -84,6 +84,8 @@
 #define OS_ADDR_APP_LOADER_TARGET       0x315D
 #define OS_ADDR_DEV_KIT_VERSION         0x315E
 
+#define OS_ADDR_SEMAPHORE_BUSY          0x3160
+
 #define OS_ADDR_MIOS_SHUTDOWN_FLAG      0x3164
 
 #define OS_ADDR_CURRENT_APP_NAME        0x3180

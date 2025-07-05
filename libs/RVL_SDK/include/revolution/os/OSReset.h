@@ -29,6 +29,7 @@ void    OSUnregisterShutdownFunction(OSShutdownFunctionInfo* info);
 
 u32     OSGetResetCode();
 
+void    OSRebootSystem();
 void    OSReturnToMenu();
 void    OSShutdownSystem();
 

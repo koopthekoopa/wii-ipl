@@ -31,7 +31,7 @@ void    __OSGetExecParams(OSExecParams *params);
 BOOL    __OSCheckCompanyCode(ESTitleId titleId, BOOL diskApp);
 BOOL    __OSCheckTmdCountryCode(ESTmdView* tmd);
 
-int     __OSGetValidTicketIndex(ESTicketView *ticketViewList, u32 numTickets);
+int     __OSGetValidTicketIndex(ESTicketView* ticketViewList, u32 numTickets);
 
 void    __OSLaunchMenu();
 void    __OSLaunchTitle(ESTitleId titleId);
@@ -39,7 +39,7 @@ void    __OSLaunchTitle(ESTitleId titleId);
 void    __OSLaunchTitlevForSystem(ESTitleId titleId, u32 launchCode, const char** argv);
 void    __OSLaunchTitlelForSystem(ESTitleId titleId, u32 launchCode, const char* arg0, ...);
 
-void    __OSReturnToMenul(u32 launchArg, const char *arg0, ...);
+void    __OSReturnToMenul(u32 launchArg, const char* arg0, ...);
 
 #ifdef __cplusplus
 }

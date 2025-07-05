@@ -30,6 +30,10 @@ int     vsnprintf(char* s, size_t n, const char* format, va_list arg);
 
 #define stdout  (&__files[1])
 
+#define _IONBF  0
+#define _IOLBF  1
+#define _IOFBF  2
+
 #ifdef __cplusplus
 }
 #endif

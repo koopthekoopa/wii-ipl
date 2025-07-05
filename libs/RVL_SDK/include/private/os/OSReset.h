@@ -23,6 +23,8 @@ enum {
     OS_SETTING_UPDATE
 };
 
+void    OSShutdownSystemForBS();
+
 BOOL    __OSCallShutdownFunctions(BOOL final, u32 event);
 
 void    __OSShutdownDevices(u32 id);

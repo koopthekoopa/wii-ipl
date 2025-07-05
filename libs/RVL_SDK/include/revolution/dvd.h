@@ -15,23 +15,6 @@ extern "C" {
 #endif
 
 enum {
-    DVD_PRIO_HIGHEST = 0,
-    DVD_PRIO_HIGH,
-    DVD_PRIO_MEDIUM,
-    DVD_PRIO_LOW,
-
-    DVD_PRIO_MAX,
-};
-
-enum {
-    DVD_RESULT_COVER_CLOSED = -4,
-    DVD_RESULT_CANCELED,
-    DVD_RESULT_M2,
-    DVD_RESULT_FATAL,
-    DVD_RESULT_OK,
-};
-
-enum {
     DVD_STATE_FATAL = -1,
     DVD_STATE_IDLE,
     DVD_STATE_BUSY,
@@ -49,9 +32,20 @@ enum {
 };
 
 enum {
-    DVD_COVER_BUSY = 0,
-    DVD_COVER_OPENED,
-    DVD_COVER_CLOSED,
+    DVD_PRIO_HIGHEST = 0,
+    DVD_PRIO_HIGH,
+    DVD_PRIO_MEDIUM,
+    DVD_PRIO_LOW,
+
+    DVD_PRIO_MAX,
+};
+
+enum {
+    DVD_RESULT_COVER_CLOSED = -4,
+    DVD_RESULT_CANCELED,
+    DVD_RESULT_M2,
+    DVD_RESULT_FATAL,
+    DVD_RESULT_OK,
 };
 
 typedef struct DVDDiskID {

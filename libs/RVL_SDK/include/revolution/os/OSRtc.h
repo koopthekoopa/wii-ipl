@@ -7,6 +7,19 @@
 extern "C" {
 #endif
 
+#define OS_SOUND_MODE_MONO          0
+#define OS_SOUND_MODE_STEREO        1
+
+#define OS_VIDEO_MODE_NTSC          0
+#define OS_VIDEO_MODE_PAL           1
+#define OS_VIDEO_MODE_MPAL          2
+
+#define OS_PROGRESSIVE_MODE_OFF     0
+#define OS_PROGRESSIVE_MODE_ON      1
+
+#define OS_EURGB60_OFF              0
+#define OS_EURGB60_ON               1
+
 u16     OSGetGbsMode();
 void    OSSetGbsMode(u16 mode);
 

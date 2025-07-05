@@ -28,6 +28,12 @@ enum {
     DVD_INTTYPE_ARGS = (1 << 7), 
 };
 
+enum {
+    DVD_COVER_BUSY = 0,
+    DVD_COVER_OPENED,
+    DVD_COVER_CLOSED,
+};
+
 #define DVD_DICVR_CVR (1 << 0)
 #define DVD_DICVR_CVRINTMASK (1 << 1)
 #define DVD_DICVR_CVRINT (1 << 2)

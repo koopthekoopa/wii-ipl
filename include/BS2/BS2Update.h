@@ -50,12 +50,13 @@ void            BS2StartUpdate();
 #define BS2_UPDATE_IMPORT_ADDRESS   0x804C0000
 #define BS2_UPDATE_LENGTH           0x00100000
 
-#define BS2_ENTRY_COUNT             512
+#define BS2_UPDATE_ENTRY_COUNT      512
+
+BS2UpdateEntry  Entries[BS2_UPDATE_ENTRY_COUNT]         ADDRESS(BS2_UPDATE_ADDRESS);
+BS2UpdateEntry  EntriesToImport[BS2_UPDATE_ENTRY_COUNT] ADDRESS(BS2_UPDATE_IMPORT_ADDRESS);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif // BS2_UPDATE_H
-
-

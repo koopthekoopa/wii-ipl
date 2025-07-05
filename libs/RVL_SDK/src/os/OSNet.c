@@ -34,7 +34,7 @@ void __OSInitNet() {
     }
 }
 
-NWC24Err __OSSyncTimeWithNetRM() {
+s32 __OSSyncTimeWithNetRM() {
     return NWC24iSynchronizeRtcCounter(FALSE);
 }
 

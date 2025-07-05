@@ -5,8 +5,6 @@
 
 #include <revolution/os.h>
 
-#pragma sym on
-
 namespace nw4r {
     namespace db {
         static OSMutex          sMutex;

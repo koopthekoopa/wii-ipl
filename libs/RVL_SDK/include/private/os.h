@@ -107,6 +107,8 @@ BOOL    __OSSetVIForceDimming(BOOL enable, u32 shiftY, u32 shiftX);
 
 void    OSDefaultExceptionHandler(u8 type, register OSContext* context);
 
+s32     __OSSyncTimeWithNetRM();
+
 #ifdef __cplusplus
 }
 #endif

@@ -656,7 +656,7 @@ config.libs = [
     IPLSection("BS2", [
             Object(Matching,    "BS2/BootStart.c"),
             Object(Matching,    "BS2/BS2Entry.c"),
-            Object(NonMatching, "BS2/BS2.c"),
+            Object(Matching,    "BS2/BS2.c"),
             Object(Matching,    "BS2/BS2Init.c"),
             Object(NonMatching, "BS2/BS2Mach.c"),
             Object(NonMatching, "BS2/BS2Update.c"),

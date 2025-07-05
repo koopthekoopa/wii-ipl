@@ -14,6 +14,12 @@
 
 #include <string.h>
 
+#define FATAL_REPORT_X_POS  48
+#define FATAL_REPORT_Y_POS  100
+
+#define BS2_REPORT_X_POS    480
+#define BS2_REPORT_Y_POS    420
+
 typedef struct OSFatalParam {
     GXColor     fg;     // 0x00
     GXColor     bg;     // 0x04
@@ -249,7 +255,7 @@ static void Halt() {
     count = VIGetRetraceCount();
     while ((s32)VIGetRetraceCount() - (s32)count < 2);
 
-    ScreenReport(xfb, 640, 480, RGB2YUV(fp->fg), 48, 100, fontData->leading, fp->msg);
+    ScreenReport(xfb, 640, 480, RGB2YUV(fp->fg), FATAL_REPORT_X_POS, FATAL_REPORT_Y_POS, fontData->leading, fp->msg);
     DCFlushRange(xfb, 640 * 480 * VI_DISPLAY_PIX_SZ);
     VISetBlack(FALSE);
     VIFlush();
@@ -407,7 +413,7 @@ void BS2ScreenReport(GXColor fg, GXColor bg, const char* msg) {
     count = VIGetRetraceCount();
     while ((s32)VIGetRetraceCount() - (s32)count < 2);
 
-    ScreenReport(xfb, 640, 480, RGB2YUV(fp->fg), 480, 420, fontData->leading, fp->msg);
+    ScreenReport(xfb, 640, 480, RGB2YUV(fp->fg), BS2_REPORT_X_POS, BS2_REPORT_Y_POS, fontData->leading, fp->msg);
     DCFlushRange(xfb, 640 * 480 * VI_DISPLAY_PIX_SZ);
     VISetBlack(FALSE);
     VIFlush();

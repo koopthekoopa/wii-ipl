@@ -4,14 +4,10 @@
 
 extern void mainmenu();
 
-void BS2Entry() {
-    // Wait for Video.
-    VIWaitForRetrace();
-    VIWaitForRetrace();
-
-    // Print "NDEV Boot Program" information. (Including Video type.)
+// Print "NDEV Boot Program" information. (Including Video type)
+static void PrintBootProgramInfo() {
     OSReport("\n--- NDEV BOOT PROGRAM v%X.%02X (SYSTEM MENU: ", BS2_MAJOR_VERSION, BS2_MINOR_VERSION);
-    switch(VIGetTvFormat()) {
+    switch (VIGetTvFormat()) {
         case VI_NTSC: {
             OSReport("NTSC");
             break;
@@ -26,9 +22,15 @@ void BS2Entry() {
         }
     }
     OSReport(") ---\n");
+}
+
+void BS2Entry() {
+    // Wait for Video.
+    VIWaitForRetrace();
+    VIWaitForRetrace();
+
+    PrintBootProgramInfo();
 
     // Jump to the main menu code!
     mainmenu();
 }
-
-

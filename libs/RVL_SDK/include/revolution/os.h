@@ -63,8 +63,8 @@ u32     __OSCoreClock                   ADDRESS(OS_BASE_CACHED + OS_ADDR_CPU_CLO
 #define OSTicksToMicroseconds(ticks)    (((ticks) * 8) / (OS_TIMER_CLOCK / 125000))
 #define OSTicksToNanoseconds(ticks)     (((ticks) * 8000) / (OS_TIMER_CLOCK / 125000))
 
-#define OSSecondsToTicks(s)             ((s) * OS_TIMER_CLOCK) 
-#define OSMillisecondsToTicks(ms)       ((ms) * (OS_TIMER_CLOCK / 1000))
+#define OSSecondsToTicks(s)             ((s) *    OS_TIMER_CLOCK) 
+#define OSMillisecondsToTicks(ms)       ((ms) *  (OS_TIMER_CLOCK / 1000))
 #define OSMicrosecondsToTicks(us)       (((us) * (OS_TIMER_CLOCK / 125000)) / 8)
 #define OSNanosecondsToTicks(ns)        (((ns) * (OS_TIMER_CLOCK / 125000)) / 8000)
 
@@ -74,6 +74,8 @@ u32     __OSCoreClock                   ADDRESS(OS_BASE_CACHED + OS_ADDR_CPU_CLO
 #define OSSleepMilliseconds(ms)         OSSleepTicks(OSMillisecondsToTicks((OSTime)ms))
 #define OSSleepMicroseconds(us)         OSSleepTicks(OSMicrosecondsToTicks((OSTime)us))
 #define OSSleepNanoseconds(ns)          OSSleepTicks(OSNanosecondsToTicks((OSTime)ns))
+
+void    OSInit();
 
 u8      OSGetAppType();
 u32     OSGetConsoleType();

@@ -6,16 +6,16 @@ void enableLegacyDI() {
     ACRIOP_DEL_REG_F(HW_ARMIRQMASK, (1<<18));
 }
 
-void setVI1Cfg(int val) {
+void setVI1Cfg(u32 val) {
     ACRIOP_WRITE_REG32(HW_VI1CFG, (ACRIOP_READ_REG32(HW_VI1CFG) & 0xFFFDFFFF) | (val<<17));
 }
 
-void setVISolidClrYCol(int val) {
+void setVISolidClrYCol(u32 val) {
     ACRIOP_WRITE_REG32(HW_VISOLID, (ACRIOP_READ_REG32(HW_VISOLID) & 0xFFFF00FF) | (val<<8));
 }
 
-u8 getVISolidClrYCol(int val) {
-    return (ACRIOP_READ_REG32(HW_VISOLID)>>8);
+u32 getVISolidClrYCol() {
+    return (u8)(ACRIOP_READ_REG32(HW_VISOLID)>>8);
 }
 
 #define ACR_IOP_ADDR (OS_BASE_UNCACHED + ACR_REG_ADDRESS + AHB_TRUSTED_OFFSET)

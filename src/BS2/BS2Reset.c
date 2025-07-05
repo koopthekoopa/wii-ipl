@@ -69,17 +69,17 @@ void OSRebootSystem() {
         state.lastBootApp |= OS_APP_TYPE_IPL;
     }
     if (__DVDGetCoverStatus() != DVD_COVER_CLOSED) {
-        state.lastDiscState = 3;
+        state.lastDiscState = OS_STATE_FLAGS_DISC_NONE;
     }
     else {
         if (!BS2BootFromCache || (__OSGetRTCFlags(&flags) && flags)) {
-            state.lastDiscState = 2;
+            state.lastDiscState = OS_STATE_FLAGS_DISC_CHANGED;
         }
         else {
-            state.lastDiscState = 1;
+            state.lastDiscState = OS_STATE_FLAGS_DISC_IN;
         }
     }
-    state.lastShutdown = 2;
+    state.lastShutdown = OS_STATE_FLAGS_DISC_CHANGED;
     __OSClearRTCFlags();
     __OSWriteStateFlags(&state);
 
@@ -100,7 +100,7 @@ void OSShutdownSystem() {
     memset(&idleModeInfo, 0, sizeof(SCIdleModeInfo));
 
     SCInit();
-    while (SCCheckStatus() == 1) {}
+    while (SCCheckStatus() == SC_STATUS_BUSY) {}
 
     SCGetIdleMode(&idleModeInfo);
 
@@ -116,29 +116,29 @@ void OSShutdownSystem() {
         state.lastBootApp |= OS_APP_TYPE_IPL;
     }
     if (__DVDGetCoverStatus() != DVD_COVER_CLOSED) {
-        state.lastDiscState = 3;
+        state.lastDiscState = OS_STATE_FLAGS_DISC_NONE;
     }
     else {
         if (!BS2BootFromCache || (__OSGetRTCFlags(&flags) && flags)) {
-            state.lastDiscState = 2;
+            state.lastDiscState = OS_STATE_FLAGS_DISC_CHANGED;
         }
         else {
-            state.lastDiscState = 1;
+            state.lastDiscState = OS_STATE_FLAGS_DISC_IN;
         }
     }
 
-    if (idleModeInfo.mode == 1) {
-        state.lastShutdown = 5;
+    if (idleModeInfo.standby == SC_IDLE_MODE_STANDBY_ON) {
+        state.lastShutdown = OS_STATE_FLAGS_SHUTDOWN_IDLE;
     }
     else {
-        state.lastShutdown = 1;
+        state.lastShutdown = OS_STATE_FLAGS_SHUTDOWN_EJECTDISC;
     }
     __OSClearRTCFlags();
     __OSWriteStateFlags(&state);
 
     __OSGetIOSRev(&iosRev);
 
-    if (idleModeInfo.mode == 1) {
+    if (idleModeInfo.standby == SC_IDLE_MODE_STANDBY_ON) {
         __OSIsReturnToIdle = TRUE;
 
         OSDisableScheduler();
@@ -163,7 +163,7 @@ void OSShutdownSystemForBS() {
     memset(&idleModeInfo, 0, sizeof(SCIdleModeInfo));
 
     SCInit();
-    while (SCCheckStatus() == 1) {}
+    while (SCCheckStatus() == SC_STATUS_BUSY) {}
 
     SCGetIdleMode(&idleModeInfo);
 
@@ -179,30 +179,30 @@ void OSShutdownSystemForBS() {
         state.lastBootApp |= OS_APP_TYPE_IPL;
     }
     if (__DVDGetCoverStatus() != DVD_COVER_CLOSED) {
-        state.lastDiscState = 3;
+        state.lastDiscState = OS_STATE_FLAGS_DISC_NONE;
     }
     else {
         if (!BS2BootFromCache || (__OSGetRTCFlags(&flags) && flags)) {
-            state.lastDiscState = 2;
+            state.lastDiscState = OS_STATE_FLAGS_DISC_CHANGED;
         }
         else {
-            state.lastDiscState = 1;
+            state.lastDiscState = OS_STATE_FLAGS_DISC_IN;
         }
     }
     __OSGetIOSRev(&iosRev);
-    if (idleModeInfo.mode == 1 && iosRev.major != 9) {
-        state.lastShutdown = 4;
+    if (idleModeInfo.standby == SC_IDLE_MODE_STANDBY_ON && iosRev.major != 9) {
+        state.lastShutdown = OS_STATE_FLAGS_SHUTDOWN_LAUNCH_TITLE;
     }
     else {
-        state.lastShutdown = 1;
+        state.lastShutdown = OS_STATE_FLAGS_SHUTDOWN_EJECTDISC;
     }
     __OSClearRTCFlags();
     __OSWriteStateFlags(&state);
 
     __VISetVolume(0, 0);
 
-    if (idleModeInfo.mode == 1 && iosRev.major != 9) {
-        if (state.lastDiscState != 3) {
+    if (idleModeInfo.standby == SC_IDLE_MODE_STANDBY_ON && iosRev.major != 9) {
+        if (state.lastDiscState != OS_STATE_FLAGS_DISC_NONE) {
             __DVDResetWithNoSpinup();
         }
 
@@ -235,17 +235,17 @@ void OSReturnToMenu() {
         state.lastBootApp |= OS_APP_TYPE_IPL;
     }
     if (__DVDGetCoverStatus() != DVD_COVER_CLOSED) {
-        state.lastDiscState = 3;
+        state.lastDiscState = OS_STATE_FLAGS_DISC_NONE;
     }
     else {
         if (!BS2BootFromCache || (__OSGetRTCFlags(&flags) && flags)) {
-            state.lastDiscState = 2;
+            state.lastDiscState = OS_STATE_FLAGS_DISC_CHANGED;
         }
         else {
-            state.lastDiscState = 1;
+            state.lastDiscState = OS_STATE_FLAGS_DISC_IN;
         }
     }
-    state.lastShutdown = 3;
+    state.lastShutdown = OS_STATE_FLAGS_DISC_NONE;
     __OSClearRTCFlags();
     __OSWriteStateFlags(&state);
 
@@ -273,16 +273,16 @@ void BS2SetStateFlags() {
     if (BS2BootFromCache) {
         state.lastBootApp |= OS_APP_TYPE_IPL;
     }
-    state.lastShutdown = 0xFF;
+    state.lastShutdown = OS_STATE_FLAGS_SHUTDOWN_BAD;
     if (__DVDGetCoverStatus() != DVD_COVER_CLOSED) {
-        state.lastDiscState = 3;
+        state.lastDiscState = OS_STATE_FLAGS_DISC_NONE;
     }
     else {
         if (!BS2BootFromCache || (__OSGetRTCFlags(&flags) && flags)) {
-            state.lastDiscState = 2;
+            state.lastDiscState = OS_STATE_FLAGS_DISC_CHANGED;
         }
         else {
-            state.lastDiscState = 1;
+            state.lastDiscState = OS_STATE_FLAGS_DISC_IN;
         }
     }
     __OSWriteStateFlags(&state);

@@ -2,13 +2,15 @@
 #include <private/os.h>
 
 #include <revolution/nand.h>
+#include <private/nand.h>
 
 #include <string.h>
 
 static u32 checkSum(OSNandbootInfo* info) {
-    u32 *ptr, i, sum;
+    u32* ptr;
+    u32 i, sum;
     
-    ptr = (u32*)&(info->argsOff);
+    ptr = (u32*)&info->argsOff;
     sum = 0;
     for (i = 0; i < OS_NANDBOOT_CHECKSUM_SIZE / sizeof(u32); i++) {
         sum = sum + *ptr;
@@ -33,10 +35,7 @@ BOOL __OSCreateNandbootInfo() {
             return FALSE;
         }
     }
-    else if (result == NAND_RESULT_NOEXISTS) {
-        // Seems to be some code stripped out but this now blank condition still exists.
-    }
-    else {
+    else if (result != NAND_RESULT_NOEXISTS) {
         return FALSE;
     }
 
@@ -49,11 +48,11 @@ BOOL __OSCreateNandbootInfo() {
     return TRUE;
 }
 
-BOOL __OSWriteNandbootInfo(OSNandbootInfo *info) {
+BOOL __OSWriteNandbootInfo(OSNandbootInfo* info) {
     NANDFileInfo fileInfo;
     s32 result;
     info->checkSum = checkSum(info);
-    result = NANDPrivateOpen("/shared2/sys/NANDBOOTINFO", &fileInfo, 2);
+    result = NANDPrivateOpen("/shared2/sys/NANDBOOTINFO", &fileInfo, NAND_ACCESS_WRITE);
     
     if (result == NAND_RESULT_OK) {
         result = NANDWrite(&fileInfo, info, sizeof(OSNandbootInfo));
@@ -75,7 +74,7 @@ BOOL __OSWriteNandbootInfo(OSNandbootInfo *info) {
     return TRUE;
 }
 
-BOOL __OSReadNandbootInfo(OSNandbootInfo *info) {
+BOOL __OSReadNandbootInfo(OSNandbootInfo* info) {
     NANDFileInfo fileInfo;
     s32 result;
 

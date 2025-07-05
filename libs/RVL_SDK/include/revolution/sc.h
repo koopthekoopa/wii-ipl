@@ -83,8 +83,15 @@ BOOL    SCSetDisplayOffsetH(s8 displayOffsetH);
 u8      SCGetEuRgb60Mode();
 BOOL    SCSetEuRgb60Mode(u8 eurgb60Mode);
 
+#define SC_IDLE_MODE_STANDBY_OFF    0
+#define SC_IDLE_MODE_STANDBY_ON     1
+
+#define SC_IDLE_MODE_LED_OFF    0
+#define SC_IDLE_MODE_LED_DIM    1
+#define SC_IDLE_MODE_LED_BRIGHT 2
+
 typedef struct SCIdleModeInfo {
-    u8 mode;    // 0x00
+    u8 standby; // 0x00
     u8 led;     // 0x01
 } SCIdleModeInfo;
 
