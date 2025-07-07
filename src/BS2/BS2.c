@@ -2,6 +2,7 @@
 #include "BS2/BS2BringUp.h"
 #include "BS2/BS2Update.h"
 #include "BS2/sysmenu.h"
+#include "config.h"
 
 #include <revolution/os.h>
 #include <revolution/os/OSBootInfo.h>
@@ -788,8 +789,11 @@ static void BS2TickIRD() {
             // Make sure SRAM is up to date
             while (!__OSSyncSram()) {}
 
-            // Launch the game
-            if (BS2IsDiagDisc()) {
+            // Launch the game (if it is a diagnostic disc; without IRD_DIAG_RESTRICT_OFF)
+#ifndef IRD_DIAG_RESTRICT_OFF
+            if (BS2IsDiagDisc())
+#endif // IRD_DIAG_RESTRICT_OFF
+            {
                 BS2StartGame();
             }
 
@@ -824,6 +828,12 @@ static void BS2TickIRD() {
 
             // Make sure SRAM is up to date
             while (!__OSSyncSram()) {}
+
+            // Don't launch game (without IRD_DIAG_RESTRICT_OFF)
+#ifdef IRD_DIAG_RESTRICT_OFF
+            // Launch the game
+            BS2StartGCGame();
+#endif // IRD_DIAG_RESTRICT_OFF
 
             OSHalt("", 795);
 

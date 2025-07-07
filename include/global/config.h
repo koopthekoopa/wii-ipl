@@ -14,7 +14,13 @@
  */
 // #define ENABLE_BS2_REPORT
 
-/** @brief Enables OSReport for IPL's WWW */
+/** @brief IRD Mode (recovery mode) will boot up any Wii/GC game. */
+// #define IRD_DIAG_RESTRICT_OFF
+
+/** @brief BS2ScreenReport will allocate memory only once since its first use */
+#define BS2_SCREEN_REPORT_ALLOCATE_ONCE
+
+/** @brief Enables OSReport for IPL's WWW (untested) */
 // #define ENABLE_IPL_WWW_REPORT
 
 /** @brief Load IPL content by loading the System Menu TMD manually. */

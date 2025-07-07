@@ -1,14 +1,6 @@
 #ifndef IPL_MESSAGE_ENTRIES_H
 #define IPL_MESSAGE_ENTRIES_H
 
-/* Button */
-
-#define MESG_BUTTON_SETTING             14
-#define MESG_BUTTON_BBS_BOARD           15
-#define MESG_BUTTON_CH_SEL              16
-#define MESG_BUTTON_CALENDAR            17
-#define MESG_BUTTON_CREATE              18
-
 /* Play Time Log */
 
 #define MESG_PLAYTIME_TITLE             132
@@ -34,6 +26,14 @@
 #define MESG_FRIEND_CACHE_EMAIL_TITLE   385
 #define MESG_FRIEND_CACHE_EMAIL_BODY    386
 
+/* Button */
+
+#define MESG_BUTTON_SETTING             14
+#define MESG_BUTTON_BBS_BOARD           15
+#define MESG_BUTTON_CH_SEL              16
+#define MESG_BUTTON_CALENDAR            17
+#define MESG_BUTTON_CREATE              18
+
 /* Channel Edit */
 
 #define MESG_CHAN_EDIT_BLOCKS_OPEN      156
@@ -43,6 +43,10 @@
 
 #define MESG_CHAN_SEL_SAFE_MODE         27
 #define MESG_CHAN_SEL_NAND_FULL         154
+
+/* Clock */
+
+#define MESG_CLOCK_WII_MENU             16
 
 /* Settings */
 

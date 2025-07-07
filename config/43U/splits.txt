@@ -596,6 +596,7 @@ src/scene/channelSelect/iplClock.cpp:
 	.data       start:0x8164E1D8 end:0x8164E290
 	.sdata2     start:0x816949A0 end:0x816949A8
 	.sdata      start:0x81696900 end:0x81696998
+	.sbss       start:0x81698B60 end:0x81698B68
 
 src/scene/channelSelect/iplChannelObj.cpp:
 	.text       start:0x813B1584 end:0x813B4030
@@ -603,7 +604,6 @@ src/scene/channelSelect/iplChannelObj.cpp:
 	.data       start:0x8164E290 end:0x8164E768
 	.sdata2     start:0x816949A8 end:0x816949F0
 	.sdata      start:0x81696998 end:0x81696A10
-	.sbss       start:0x81698B60 end:0x81698B68
 
 src/scene/channelTitle/iplChannelTitle.cpp:
 	.bss        start:0x810B7340 end:0x810B74F8

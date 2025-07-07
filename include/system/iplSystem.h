@@ -52,7 +52,8 @@ namespace ipl {
                     EGG::Heap*          mpFontHeap;             // 0x34
                     EGG::Heap*          mpNwc24Heap;            // 0x38
 
-                    u8                  unk_0x3C[0x64 - 0x3C];
+                    OSCalendarTime      mCurrentTime;           // 0x3C
+
                     scene::Manager*     mpSceneManager;         // 0x64
                     nigaoe::Manager*    mpMiiManager;           // 0x68
                     nand::Manager*      mpNandManager;          // 0x6C
@@ -415,7 +416,7 @@ namespace ipl {
 
             /** @return The Random Number Generator object. */
             static math::Random*            getRndm()               { return smArg.mpRandom; }
-            
+            static OSCalendarTime&          getCurrentTime()        { return smArg.mCurrentTime; }
             /*==============================*/
             /*              MISC            */
             /*==============================*/

@@ -39,10 +39,6 @@ namespace ipl {
             void        clear();
 
             Command()   { clear(); }
-
-            inline void operator=(const Command& rhs) {
-                /* https://decomp.me/scratch/KrtbJ */
-            }
         } Command;
 
         class Base : public utility::Tree, EGG::Disposer {

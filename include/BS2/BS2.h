@@ -133,13 +133,11 @@ void        BS2Init();
 
 void        BS2Report(const char* format, ...);
 void        BS2ScreenReport(GXColor fg, GXColor bg, const char* msg);
-static inline void BS2ScreenReportFormat(GXColor fg, GXColor bg, const char* msg, ...) {
-    char str[512];
-    va_list marker;
-    va_start(marker, msg);
-    vsprintf(str, msg, marker);
-    va_end(marker);
-    BS2ScreenReport(fg, bg, str);
+
+static inline void BS2ScreenReportNoColor(const char* msg) {
+    static GXColor BS2ScreenReportFG = (GXColor){255,255,255,255};
+    static GXColor BS2ScreenReportBG = (GXColor){0,0,0,0};
+    BS2ScreenReport(BS2ScreenReportFG, BS2ScreenReportBG, msg);
 }
 
 u32         BS2GetBootType();

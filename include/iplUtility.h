@@ -13,6 +13,7 @@
 #include "utility/iplMessageBase.h"
 #include "utility/iplThread.h"
 #include "utility/iplWpad.h"
+#include "utility/iplLayout.h"
 
 #include "utility/iplMisc.h"
 
