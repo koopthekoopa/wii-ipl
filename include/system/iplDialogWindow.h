@@ -53,7 +53,15 @@
 /** MAIN CLASS */
 
 namespace ipl {
-    USING_GUI
+    namespace gui {
+        class PaneManager;
+    }
+}
+namespace gui {
+    class EventHandler;
+}
+
+namespace ipl {   
     class DialogWindow : public ::gui::EventHandler {
         /* ROUTINES AVAILABLE FOR USER */
         public:
@@ -73,15 +81,15 @@ namespace ipl {
 
             /* Multi-Dialog Page */
             typedef struct Page {
-                u32                     msgID;      // 0x00 (Message ID)
-                u32                     rBtnMsgId;  // 0x04 (Right button ID)
-                u32                     lBtnMsgId;  // 0x08 (Left button ID)
-                bool                    isTwoBtn;   // 0x0C (Has two buttons)
+                u32             msgID;      // 0x00 (Message ID)
+                u32             rBtnMsgId;  // 0x04 (Right button ID)
+                u32             lBtnMsgId;  // 0x08 (Left button ID)
+                bool            isTwoBtn;   // 0x0C (Has two buttons)
 
-                ipl::layout::Object*    layoutObj;  // 0x10 (Layout object to display)
+                layout::Object* layoutObj;  // 0x10 (Layout object to display)
 
-                f32                     layoutYOff; // 0x14 (Layout object Y offset)
-                bool                    isLytAnim;  // 0x18 (If the Layout object can animate)
+                f32             layoutYOff; // 0x14 (Layout object Y offset)
+                bool            isLytAnim;  // 0x18 (If the Layout object can animate)
             } Page;
 
             /*=============*/

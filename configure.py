@@ -797,10 +797,10 @@ config.libs = [
             Object(NonMatching, "scene/sdChannelTitle/iplSDChannelTitle.cpp"),
         ]
     ),
-    IPLSection("sdChannelButton", [
-            Object(NonMatching, "scene/sdChannelButton/iplSDButton.cpp"),
-            Object(NonMatching, "scene/sdChannelButton/iplSDArrow.cpp"),
-            Object(NonMatching, "scene/sdChannelButton/iplSDMenuButton.cpp"),
+    IPLSection("sdButton", [
+            Object(Matching,    "scene/sdButton/iplSDButton.cpp"),
+            Object(NonMatching, "scene/sdButton/iplSDArrow.cpp"),
+            Object(NonMatching, "scene/sdButton/iplSDMenuButton.cpp"),
         ]
     ),
     IPLSection("sdChannelMemory", [

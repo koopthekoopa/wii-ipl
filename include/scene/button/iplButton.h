@@ -3,6 +3,8 @@
 
 #include "iplSceneUIHeader.h"
 
+#include "layout/iplGuiManager.h"
+
 #include "scene/textBalloon/iplBalloon.h"
 
 #include "utility/iplTimer.h"
@@ -320,34 +322,35 @@ namespace ipl {
                     ANIM_ARROW_LETTER_L,
                     ANIM_BOARD_BBS_NUM_LOOP,
                     ANIM_BOARD_BBS_NEW,
+                    ANIM_MAX,
                 };
 
                 int                         unk_0x54;
 
-                layout::Object*             mpLayout;           // 0x58
-                nand::LayoutFile*           mpLayoutFile;       // 0x5C
-                gui::PaneManager*           mpGui;              // 0x60
+                layout::Object*             mpLayout;                       // 0x58
+                nand::LayoutFile*           mpLayoutFile;                   // 0x5C
+                gui::PaneManager*           mpGui;                          // 0x60
 
-                OptOutButton                mOptOutBtn;         // 0x64
-                SDMenuButton                mSdMenuBtn;         // 0x70
+                OptOutButton                mOptOutBtn;                     // 0x64
+                SDMenuButton                mSdMenuBtn;                     // 0x70
 
-                TextBalloon*                mpBalloons[5];      // 0x84
+                TextBalloon*                mpBalloons[BALLOON_MAX];        // 0x84
                 
-                nand::LayoutFile*           mpBalloonFile;      // 0x98
+                nand::LayoutFile*           mpBalloonFile;                  // 0x98
 
-                layout::GroupAnimator*      mpButtonAnim[14];   // 0x9C
+                layout::GroupAnimator*      mpButtonAnim[ANIM_MAX];         // 0x9C
 
-                bool                        mbArrowVisible[2];  // 0xD4
+                bool                        mbArrowVisible[ARROW_BTN_MAX];  // 0xD4
 
-                BOOL                        mbHovered[11];      // 0xD8
+                BOOL                        mbHovered[BTN_MAX];             // 0xD8
 
                 bool                        unk_0x104;
                 bool                        unk_0x105;
 
-                utility::timer              mTimer;             // 0x108
-                bool                        mbEnabled;          // 0x110
+                utility::timer              mTimer;                         // 0x108
+                bool                        mbEnabled;                      // 0x110
 
-                utility::Queue<Command, 8>  mButtonCmd;         // 0x114
+                utility::Queue<Command, 8>  mButtonCmd;                     // 0x114
 
                 int                         unused_0x184;
 

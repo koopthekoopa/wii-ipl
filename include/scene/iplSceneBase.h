@@ -9,7 +9,15 @@
 #include <revolution/kpad.h>
 #include <revolution/sc.h>
 
-#define SCENE_USING_GUI     namespace ipl { USING_GUI }
+#define SCENE_USING_GUI     \
+namespace ipl {             \
+    namespace gui {         \
+        class PaneManager;  \
+    }                       \
+}                           \
+namespace gui {             \
+    class EventHandler;     \
+}                           
 
 #define SCENE_CLASS(x)      class x : public scene::Base
 #define SCENE_GUI_CLASS(x)  class x : public scene::Base, public ::gui::EventHandler

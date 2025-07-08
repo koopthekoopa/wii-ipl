@@ -245,17 +245,17 @@ namespace ipl {
             arrowLoop->setAnimType(ANIM_TYPE_LOOP);
             arrowLoop->play();
 
-            // Finished binding.
+            // Finished binding
             mpLayout->finishBinding();
 
             // Setup interface
             mpGui = new gui::PaneManager(NULL, mpLayout->getDrawInfo(), NULL, NULL);
             mpGui->createLayoutScene(*mpLayout->getLayout());
             mpGui->setAllComponentTriggerTarget(false);
+
             for (int i = 0; i < BTN_MAX; i++) {
                 mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[i]), true);
             }
-
             for (int i = 0; i < ARROW_BTN_MAX; i++) {
                 mpLayout->FindPaneByName(mscArrowBtnName[i])->SetVisible(false);
             }
@@ -348,7 +348,7 @@ namespace ipl {
                 if (!System::isSafeMode()) {
                     mSdMenuBtn.draw();
                 }
-                
+
                 // Draw main layout
                 mpLayout->draw();
 
@@ -398,8 +398,8 @@ namespace ipl {
 
         void Button::startPointEvent(const char* paneName, controller::Interface* con) {
             int btnNo = getButtonNo(paneName);
-            if ((btnNo != BTN_BBS_BOARD || !System::isSafeMode())
-            && btnNo != -1 && (mbEnabled || btnNo == BTN_ARROW_RIGHT || btnNo == BTN_ARROW_LEFT)
+            if ((btnNo != BTN_BBS_BOARD || !System::isSafeMode()) && btnNo != -1
+            && (mbEnabled || btnNo == BTN_ARROW_RIGHT || btnNo == BTN_ARROW_LEFT)
             && (btnNo != BTN_ARROW_RIGHT || mbArrowVisible[ARROW_BTN_RIGHT] == true)
             && (btnNo != BTN_ARROW_LEFT || mbArrowVisible[ARROW_BTN_LEFT] == true)) {
                 if (mbHovered[btnNo] == FALSE) {
@@ -430,8 +430,8 @@ namespace ipl {
 
         void Button::startLeftEvent(const char* paneName) {
             int btnNo = getButtonNo(paneName);
-            if ((btnNo != BTN_BBS_BOARD || !System::isSafeMode())
-            && btnNo != -1 && (mbEnabled |  btnNo == BTN_ARROW_RIGHT /*TYPO!!*/ || btnNo == BTN_ARROW_LEFT)
+            if ((btnNo != BTN_BBS_BOARD || !System::isSafeMode()) && btnNo != -1
+            && (mbEnabled | btnNo == BTN_ARROW_RIGHT /*TYPO!!*/ || btnNo == BTN_ARROW_LEFT)
             && (btnNo != BTN_ARROW_RIGHT || mbArrowVisible[ARROW_BTN_RIGHT] == true)
             && (btnNo != BTN_ARROW_LEFT || mbArrowVisible[ARROW_BTN_LEFT] == true)) {
                 if (mbHovered[btnNo] == TRUE) {
@@ -501,7 +501,7 @@ namespace ipl {
 
         void Button::animation(int animNo) {
             layout::Animator* anim = NULL;
-            switch(animNo) {
+            switch (animNo) {
                 case IDANIM_ARROW_RIGHT_SELECT: {
                     anim = mpButtonAnim[ANIM_ARROW_R_AC];
                     break;
@@ -702,6 +702,7 @@ namespace ipl {
             }
 
             anim->initAnmFrame(frame);
+
             mbArrowVisible[arrowType] = bAppear;
         }
 

@@ -805,17 +805,17 @@ src/scene/sdChannelTitle/iplSDChannelTitle.cpp:
 	.sdata2     start:0x816691D8 end:0x81669208
 	.sdata      start:0x8166B460 end:0x8166B510
 
-src/scene/sdChannelButton/iplSDButton.cpp:
+src/scene/sdButton/iplSDButton.cpp:
 	.text       start:0x813E8974 end:0x813E9D84
 	.data       start:0x8162A520 end:0x8162A958
 	.sdata2     start:0x81669208 end:0x81669220
 	.sdata      start:0x8166B510 end:0x8166B550
 
-src/scene/sdChannelButton/iplSDArrow.cpp:
+src/scene/sdButton/iplSDArrow.cpp:
 	.text       start:0x813E9D84 end:0x813E9EB4
 	.data       start:0x8162A958 end:0x8162A9A8
 
-src/scene/sdChannelButton/iplSDMenuButton.cpp:
+src/scene/sdButton/iplSDMenuButton.cpp:
 	.text       start:0x813E9EB4 end:0x813EAAE4
 	.data       start:0x8162A9A8 end:0x8162AB88
 	.sdata2     start:0x81669220 end:0x81669250

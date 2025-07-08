@@ -269,6 +269,4 @@ namespace gui {
     };
 }
 
-#define USING_GUI   namespace gui { class PaneManager; }
-
 #endif // GUI_MANAGER_H

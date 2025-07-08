@@ -48,7 +48,13 @@
 
 #define MESG_CLOCK_WII_MENU             16
 
-/* Settings */
+/* SD Button */
+
+#define MESG_SD_BUTTON_PAGE             160
+#define MESG_SD_BUTTON_HELP             166
+#define MESG_SD_BUTTON_WII_MENU         168
+
+/* Settings Select Button */
 
 #define MESG_SETTING_BTN_BACK           315
 
