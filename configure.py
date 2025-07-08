@@ -799,7 +799,7 @@ config.libs = [
     ),
     IPLSection("sdButton", [
             Object(Matching,    "scene/sdButton/iplSDButton.cpp"),
-            Object(NonMatching, "scene/sdButton/iplSDArrow.cpp"),
+            Object(Matching,    "scene/sdButton/iplSDArrow.cpp"),
             Object(NonMatching, "scene/sdButton/iplSDMenuButton.cpp"),
         ]
     ),

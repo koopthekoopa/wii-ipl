@@ -17,6 +17,15 @@ namespace ipl {
                 virtual void    onEventDerived(u32 compId, u32 event, const controller::Interface* con);
         };
 
+        /* Arrow Button */
+
+        SCENE_CLASS(SDArrow) {
+            public:
+                virtual void draw();
+        };
+
+        /* Main Button */
+
         SCENE_CLASS(SDButton) {
             public:
                 enum {
@@ -97,7 +106,8 @@ namespace ipl {
 
                 static int      getButtonNo(const char* paneName);
             protected:
-                EGG::Heap*      get_heap()  { return mpHeap; }
+                EGG::Heap*      get_heap()      { return mpHeap; }
+                layout::Object* get_layout()    { return mpLayout; } 
 
             private:
                 enum {
@@ -139,6 +149,9 @@ namespace ipl {
 
                 static const char*  mscButtonName[BTN_MAX];
                 static const char*  mscArrowBtnName[ARROW_BTN_MAX];
+
+                friend class SDArrow;
+                friend class SDButtonEventHandlerBase;
         };
     }
 }
