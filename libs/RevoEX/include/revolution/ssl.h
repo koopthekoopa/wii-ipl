@@ -3,6 +3,10 @@
 
 #include <revolution/types.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif // __cplusplus
+
 typedef int SSLResult;
 
 typedef int SSLId;
@@ -38,5 +42,9 @@ SSLResult   SSLSetRootCA(SSLId i_sslId, const char* i_rootCAData, u32 i_rootCASi
 
 SSLResult   SSLSetBuiltinRootCA(SSLId i_sslId, u32 i_rootCAId);
 SSLResult   SSLSetBuiltinClientCert(SSLId i_sslId, u32 i_clientCertId);
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
 
 #endif // REVOLUTION_SSL_H

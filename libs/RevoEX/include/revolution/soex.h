@@ -6,8 +6,12 @@
 #include <revolution/so/SOBasic.h>
 #include <revolution/so/SOOption.h>
 
-typedef void (*SOAlloc)(u32, s32);
-typedef void (*SOFree)(u32, void*, s32);
+#ifdef __cplusplus
+extern "C" {
+#endif // __cplusplus
+
+typedef void* (*SOAlloc)(u32, s32);
+typedef void  (*SOFree)(u32, void*, s32);
 
 typedef struct SOLibraryConfig {
     SOAlloc alloc;  // 0x00
@@ -24,5 +28,9 @@ int SOStartupEx(int timeOut);
 int SOCleanup();
 
 int SOGetLastError();
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
 
 #endif  // REVOLUTION_SO_EX_H

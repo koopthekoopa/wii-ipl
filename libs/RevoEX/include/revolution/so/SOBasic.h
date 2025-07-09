@@ -3,6 +3,10 @@
 
 #include <revolution/types.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif // __cplusplus
+
 #define SO_SOL_SOCKET                   0xFFFF
 #define SO_SOL_IP                       0
 #define SO_SOL_ICMP                     1
@@ -18,7 +22,6 @@
 
 #define SO_CONFIG_FILTER_INPUT          0x1001
 #define SO_CONFIG_FILTER_OUTPUT         0x1002
-
 #define SO_CONFIG_ERROR                 0x1003
 #define SO_CONFIG_MAC_ADDRESS           0x1004
 #define SO_CONFIG_LINK_STATE            0x1005
@@ -123,5 +126,9 @@ s32         SOGetHostID();
 SOHostEnt*  SOGetHostByName(const char* name);
 int         SOGetAddrInfo(const char* nodeName, const char* servName, const SOAddrInfo* hints, SOAddrInfo** res);
 void        SOFreeAddrInfo(SOAddrInfo* head);
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
 
 #endif  // REVOLUTION_SO_BASIC_H
