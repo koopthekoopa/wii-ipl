@@ -272,9 +272,11 @@ cflags_base = [
     "-RTTI off",
     "-fp_contract on",
     "-str reuse",
+    "-D_REVOLUTION", # for GameSpy
+    "-DMEM_MANAGER_DIRECT", # for GameSpy
     *cflags_includes,
     f"-DBUILD_VERSION={version_num}",
-    f"-DVERSION_{config.version}",
+    f"-DVERSION_{config.version}"
 ]
 
 # Debug flags
@@ -769,12 +771,12 @@ config.libs = [
     ),
     IPLSection("nakamuraTest", [
             Object(NonMatching, "scene/nakamuraTest/iplContest.cpp"),
-            Object(NonMatching, "scene/nakamuraTest/gamespy/NATify.c"),
-            Object(NonMatching, "scene/nakamuraTest/gamespy/darray.c"),
-            Object(NonMatching, "scene/nakamuraTest/gamespy/gsAvailable.c"),
-            Object(NonMatching, "scene/nakamuraTest/gamespy/nonport.c"),
-            Object(NonMatching, "scene/nakamuraTest/gamespy/gsSHA1.c"),
-            Object(NonMatching, "scene/nakamuraTest/gamespy/natneg.c"),
+            Object(Matching,    "scene/nakamuraTest/gamespy/natneg/NATify.c"),
+            Object(Matching,    "scene/nakamuraTest/gamespy/darray.c"),
+            Object(Matching,    "scene/nakamuraTest/gamespy/common/gsAvailable.c"),
+            Object(Matching,    "scene/nakamuraTest/gamespy/nonport.c"),
+            Object(Matching,    "scene/nakamuraTest/gamespy/common/gsSHA1.c"),
+            Object(Matching,    "scene/nakamuraTest/gamespy/natneg/natneg.c"),
             Object(NonMatching, "scene/nakamuraTest/iplNakamuraTest.cpp"),
             Object(NonMatching, "scene/nakamuraTest/iplNetSetup.cpp"),
         ]

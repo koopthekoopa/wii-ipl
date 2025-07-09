@@ -68,17 +68,13 @@ struct OSThread {
     void*           specific[OS_THREAD_SPECIFIC_MAX];   // 0x310
 };
 
-enum {
-    OS_THREAD_STATE_EXITED = 0,
-    OS_THREAD_STATE_READY = 1,
-    OS_THREAD_STATE_RUNNING = 2,
-    OS_THREAD_STATE_WAITING = 4,
-    OS_THREAD_STATE_MORIBUND = 8,
-};
+#define OS_THREAD_STATE_UNINITIALIZED   0
+#define OS_THREAD_STATE_READY           1
+#define OS_THREAD_STATE_RUNNING         2
+#define OS_THREAD_STATE_WAITING         4
+#define OS_THREAD_STATE_DEAD            8
 
-enum {
-    OS_ATTR_DETATCHED = 1,
-};
+#define OS_THREAD_ATTR_DETACH           1
 
 typedef void (*OSIdleFunction)(void* param);
 typedef void (*OSSwitchThreadCallback)(OSThread* from, OSThread* to);

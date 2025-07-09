@@ -142,7 +142,7 @@ void __OSThreadInit() {
 
     // Setup default thread
     thread->state = OS_THREAD_STATE_RUNNING;
-    thread->attr = OS_ATTR_DETATCHED;
+    thread->attr = OS_THREAD_ATTR_DETACH;
     thread->base = 16;
     thread->priority = 16;
     thread->suspend = 0;
@@ -210,12 +210,12 @@ BOOL OSIsThreadSuspended(OSThread *thread) {
 }
 
 BOOL OSIsThreadTerminated(OSThread* thread) {
-    return thread->state == OS_THREAD_STATE_MORIBUND || thread->state == OS_THREAD_STATE_EXITED ? TRUE : FALSE;
+    return thread->state == OS_THREAD_STATE_DEAD || thread->state == OS_THREAD_STATE_UNINITIALIZED ? TRUE : FALSE;
 }
 
 BOOL __OSIsThreadActive(OSThread* thread) {
     OSThread* active;
-    if (thread->state == OS_THREAD_STATE_EXITED) {
+    if (thread->state == OS_THREAD_STATE_UNINITIALIZED) {
         return FALSE;
     }
     for (active = __OSActiveThreadQueue.head; active; active = active->linkActive.next) {
@@ -414,7 +414,7 @@ BOOL OSCreateThread(OSThread* thread, void* (*ThreadFunc)(void*), void* param, v
     }
 
     thread->state = OS_THREAD_STATE_READY;
-    thread->attr = attr & OS_ATTR_DETATCHED;
+    thread->attr = attr & OS_THREAD_ATTR_DETACH;
     thread->priority = thread->base = priority;
     thread->suspend = 1;
     thread->value = (void*)-1;
@@ -467,12 +467,12 @@ void OSExitThread(void* val) {
     currentThread = OSGetCurrentThread();
     OSClearContext(&currentThread->context);
 
-    if (currentThread->attr & OS_ATTR_DETATCHED) {
+    if (currentThread->attr & OS_THREAD_ATTR_DETACH) {
         DEQUEUE_THREAD(currentThread, &__OSActiveThreadQueue, linkActive);
-        currentThread->state = OS_THREAD_STATE_EXITED;
+        currentThread->state = OS_THREAD_STATE_UNINITIALIZED;
     }
     else {
-        currentThread->state = OS_THREAD_STATE_MORIBUND;
+        currentThread->state = OS_THREAD_STATE_DEAD;
         currentThread->value = val;
     }
 
@@ -515,12 +515,12 @@ void OSCancelThread(OSThread* thread) {
     }
 
     OSClearContext(&thread->context);
-    if (thread->attr & OS_ATTR_DETATCHED) {
+    if (thread->attr & OS_THREAD_ATTR_DETACH) {
         DEQUEUE_THREAD(thread, &__OSActiveThreadQueue, linkActive);
-        thread->state = OS_THREAD_STATE_EXITED;
+        thread->state = OS_THREAD_STATE_UNINITIALIZED;
     } 
     else {
-        thread->state = OS_THREAD_STATE_MORIBUND;
+        thread->state = OS_THREAD_STATE_DEAD;
     }
 
     __OSUnlockAllMutex(thread);
@@ -533,7 +533,7 @@ void OSCancelThread(OSThread* thread) {
 BOOL OSJoinThread(OSThread* thread, void* val) {
     BOOL enabled = OSDisableInterrupts();
 
-    if (!(thread->attr & OS_ATTR_DETATCHED) && thread->state != OS_THREAD_STATE_MORIBUND && thread->queueJoin.head == NULL) {
+    if (!(thread->attr & OS_THREAD_ATTR_DETACH) && thread->state != OS_THREAD_STATE_DEAD && thread->queueJoin.head == NULL) {
         OSSleepThread(&thread->queueJoin);
         if (!__OSIsThreadActive(thread)) {
             OSRestoreInterrupts(enabled);
@@ -541,12 +541,12 @@ BOOL OSJoinThread(OSThread* thread, void* val) {
         }
     }
 
-    if (((volatile OSThread*)thread)->state == OS_THREAD_STATE_MORIBUND) {
+    if (((volatile OSThread*)thread)->state == OS_THREAD_STATE_DEAD) {
         if (val != NULL) {
             *(u32*)val = (u32)thread->value;
         }
         DEQUEUE_THREAD(thread, &__OSActiveThreadQueue, linkActive);
-        thread->state = OS_THREAD_STATE_EXITED;
+        thread->state = OS_THREAD_STATE_UNINITIALIZED;
         OSRestoreInterrupts(enabled);
         return TRUE;
     }
@@ -558,10 +558,10 @@ BOOL OSJoinThread(OSThread* thread, void* val) {
 void OSDetachThread(OSThread* thread) {
     BOOL enabled = OSDisableInterrupts();
 
-    thread->attr |= OS_ATTR_DETATCHED;
-    if (thread->state == OS_THREAD_STATE_MORIBUND) {
+    thread->attr |= OS_THREAD_ATTR_DETACH;
+    if (thread->state == OS_THREAD_STATE_DEAD) {
         DEQUEUE_THREAD(thread, &__OSActiveThreadQueue, linkActive);
-        thread->state = OS_THREAD_STATE_EXITED;
+        thread->state = OS_THREAD_STATE_UNINITIALIZED;
     }
 
     OSWakeupThread(&thread->queueJoin);
@@ -801,7 +801,7 @@ s32 OSCheckActiveThreads() {
                 OS_ACTIVE_THREAD_ASSERT(!__OSCheckDeadLock(thread), 1573);
                 break;
             }
-            case OS_THREAD_STATE_MORIBUND: {
+            case OS_THREAD_STATE_DEAD: {
                 OS_ACTIVE_THREAD_ASSERT(thread->queueMutex.head == NULL && thread->queueMutex.tail == NULL, 1577);
                 break;
             }

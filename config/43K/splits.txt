@@ -719,14 +719,15 @@ src/scene/cardSequence/iplCardSequence.cpp:
 	.sbss       start:0x8166D180 end:0x8166D188
 
 src/scene/nakamuraTest/iplContest.cpp:
-	.bss        start:0x810B7508 end:0x810B8008
+	.bss        start:0x810B7508 end:0x810B7DD8
 	.text       start:0x813D3A4C end:0x813D491C
 	.rodata     start:0x815E9118 end:0x815E9160
 	.data       start:0x81628400 end:0x816286F0
 	.sdata2     start:0x81669138 end:0x81669140
 	.sdata      start:0x8166B320 end:0x8166B328
 
-src/scene/nakamuraTest/gamespy/NATify.c:
+src/scene/nakamuraTest/gamespy/natneg/NATify.c:
+	.bss        start:0x810B7DD8 end:0x810B8008
 	.text       start:0x813D491C end:0x813D5244
 	.sdata      start:0x8166B328 end:0x8166B338
 	.sbss       start:0x8166D188 end:0x8166D1A8
@@ -734,7 +735,7 @@ src/scene/nakamuraTest/gamespy/NATify.c:
 src/scene/nakamuraTest/gamespy/darray.c:
 	.text       start:0x813D5244 end:0x813D53A0
 
-src/scene/nakamuraTest/gamespy/gsAvailable.c:
+src/scene/nakamuraTest/gamespy/common/gsAvailable.c:
 	.bss        start:0x810B8008 end:0x810B80E0
 	.text       start:0x813D53A0 end:0x813D56E0
 	.data       start:0x816286F0 end:0x81628718
@@ -747,11 +748,11 @@ src/scene/nakamuraTest/gamespy/nonport.c:
 	.data       start:0x81628718 end:0x81628738
 	.sbss       start:0x8166D1B0 end:0x8166D1B8
 
-src/scene/nakamuraTest/gamespy/gsSHA1.c:
+src/scene/nakamuraTest/gamespy/common/gsSHA1.c:
 	.text       start:0x813D5C28 end:0x813D61E8
 	.rodata     start:0x815E9160 end:0x815E9170
 
-src/scene/nakamuraTest/gamespy/natneg.c:
+src/scene/nakamuraTest/gamespy/natneg/natneg.c:
 	.bss        start:0x810B80F0 end:0x810B83C8
 	.text       start:0x813D61E8 end:0x813D7348
 	.data       start:0x81628738 end:0x81628790
@@ -1494,13 +1495,13 @@ libs/RevoEX/src/nwc24/NWC24Stream.c:
 	.text       start:0x8147EA70 end:0x8147EC98
 
 libs/RevoEX/src/nwc24/NWC24Parser.c:
-	.text       start:0x8147EC98 end:0x8147F348
+	.text       start:0x8147EC98 end:0x8147F280
 	.data       start:0x81642060 end:0x81642320
 	.sdata      start:0x8166C1A8 end:0x8166C200
 
 libs/RevoEX/src/nwc24/NWC24MsgCommit.c:
 	.bss        start:0x810C7C40 end:0x810C7C80
-	.text       start:0x8147F348 end:0x814813D4
+	.text       start:0x8147F280 end:0x814813D4
 	.data       start:0x81642320 end:0x816425C8
 	.sdata      start:0x8166C200 end:0x8166C290
 	.sbss       start:0x8166D418 end:0x8166D420
