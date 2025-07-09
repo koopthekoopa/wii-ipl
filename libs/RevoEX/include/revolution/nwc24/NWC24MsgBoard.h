@@ -8,7 +8,7 @@
 #include <revolution/nwc24/NWC24Err.h>
 
 typedef struct NWC24MsgObj {
-    u8 dummy[0x100]; // todo
+    u32 data[64]; // 0x00
 } NWC24MsgObj;
 
 /* NWC24 Channel Jump */

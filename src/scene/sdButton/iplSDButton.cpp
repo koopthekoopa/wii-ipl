@@ -6,8 +6,6 @@
 
 #include "iplSystem.h"
 
-#pragma sym on
-
 namespace ipl {
     namespace scene {
         /* =========== */
