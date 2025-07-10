@@ -24,6 +24,8 @@ CDBErr  CDBUninit();
 
 s32     CDBGetFreeSize();
 
+s32     CDBGetLastNANDError();
+
 #ifdef __cplusplus
 }
 #endif // __cplusplus

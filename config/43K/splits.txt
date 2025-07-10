@@ -1335,8 +1335,11 @@ libs/RevoEX/src/cdb/CDBFBridgeSD.c:
 	.data       start:0x81641168 end:0x81641180
 	.sdata      start:0x8166C090 end:0x8166C0A0
 
+libs/RevoEX/src/cdb/CDBId.c:
+	.text       start:0x8146AE60 end:0x8146B030
+
 libs/RevoEX/src/cdb/CDBCrypt.c:
-	.text       start:0x8146AE60 end:0x8146B158
+	.text       start:0x8146B030 end:0x8146B158
 	.data       start:0x81641180 end:0x816411F0
 	.sdata      start:0x8166C0A0 end:0x8166C0C0
 	.sbss       start:0x8166D3B8 end:0x8166D3C0

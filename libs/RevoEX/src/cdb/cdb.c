@@ -3,11 +3,11 @@
 
 #include <revolution/vf.h>
 
-CDBErr CDBInit(void *work) {
+CDBErr CDBInit(void* work) {
     return CDBInitEx(work, 0, 0);
 }
 
-CDBErr CDBInitEx(void *work, int unk0, int unk1) {
+CDBErr CDBInitEx(void* work, int unk0, int unk1) {
     CDBErr ret;
 
     if (VFIsAvailable() != TRUE) {

@@ -78,10 +78,10 @@ typedef struct SOInAddr {
 } SOInAddr;
 
 typedef struct SOSockAddrIn {
-    u8          len;   // 0x00
-    u8          family;// 0x01
-    u16         port;  // 0x02
-    SOInAddr    addr;  // 0x04
+    u8          len;       // 0x00
+    u8          family;    // 0x01
+    u16         port;      // 0x02
+    SOInAddr    addr;      // 0x04
 } SOSockAddrIn;
 
 typedef struct SOSockAddr {
