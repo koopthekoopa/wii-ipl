@@ -7,6 +7,34 @@
 
 #include <revolution/nwc24/NWC24Err.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef enum NWC24MsgType {
+    NWC24_MSGTYPE_RVL_MENU_SHARED   = 0,
+    NWC24_MSGTYPE_WII_MENU_SHARED   = 0,
+
+    NWC24_MSGTYPE_RVL               = 1,
+    NWC24_MSGTYPE_RVL_APPZ          = 1,
+    NWC24_MSGTYPE_RVL_APP_ONLY      = 1,
+    NWC24_MSGTYPE_WII               = 1,
+    NWC24_MSGTYPE_WII_APP           = 1,
+    NWC24_MSGTYPE_WII_APP_ONLY      = 1,
+
+    NWC24_MSGTYPE_RVL_MENU          = 2,
+    NWC24_MSGTYPE_RVL_MENU_ONLY     = 2,
+    NWC24_MSGTYPE_WII_MENU          = 2,
+    NWC24_MSGTYPE_WII_MENU_ONLY     = 2,
+
+    NWC24_MSGTYPE_RVL_APP_HIDDEN    = 3,
+    NWC24_MSGTYPE_RVL_HIDDEN        = 3,
+    NWC24_MSGTYPE_WII_APP_HIDDEN    = 3,
+    NWC24_MSGTYPE_WII_HIDDEN        = 3,
+
+    NWC24_MSGTYPE_PUBLIC            = 4
+} NWC24MsgType;
+
 typedef struct NWC24MsgObj {
     u32 data[64]; // 0x00
 } NWC24MsgObj;
@@ -35,5 +63,9 @@ NWC24Err    NWC24CheckCHJumpObj(const NWC24CHJumpObj* chjp, u32 dataSize);
 NWC24Err    NWC24GetCHJumpTitleId(const NWC24CHJumpObj* chjp, u64* titleId);
 NWC24Err    NWC24GetCHJumpBlockSize(const NWC24CHJumpObj* chjp, u32* size, u32 index);
 NWC24Err    NWC24GetCHJumpBlockData(const NWC24CHJumpObj* chjp, char* data, u32 size, u32 index);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // REVOLUTION_NWC24_MSG_BOARD_H

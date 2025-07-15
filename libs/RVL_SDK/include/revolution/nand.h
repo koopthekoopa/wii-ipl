@@ -236,6 +236,19 @@ s32     NANDReadDir(const char* path, char* nameList, u32* num);
 
 s32     NANDGetHomeDir(char* path);
 
+/* NANDCheck */
+
+enum {
+    NAND_CHECK_SUCCESS          = 0,
+
+    NAND_CHECK_HOME_INSSPACE    = (1 << 0),
+    NAND_CHECK_HOME_INSINODE    = (1 << 1),
+    NAND_CHECK_SYS_INSSPACE     = (1 << 2),
+    NAND_CHECK_SYS_INSINODE     = (1 << 3),
+};
+
+s32     NANDCheck(u32 fsblock, u32 inode, u32* answer);
+
 #ifdef __cplusplus
 }
 #endif

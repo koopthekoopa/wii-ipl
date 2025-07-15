@@ -64,7 +64,7 @@ void OSRebootSystem() {
     __DVDPrepareReset();
 
     __OSReadStateFlags(&state);
-    state.lastBootApp = 0x84;
+    state.lastBootApp = OS_APP_TYPE_84;
     if (BS2BootFromCache) {
         state.lastBootApp |= OS_APP_TYPE_IPL;
     }
@@ -111,7 +111,7 @@ void OSShutdownSystem() {
     __DVDPrepareReset();
 
     __OSReadStateFlags(&state);
-    state.lastBootApp = 0x84;
+    state.lastBootApp = OS_APP_TYPE_84;
     if (BS2BootFromCache) {
         state.lastBootApp |= OS_APP_TYPE_IPL;
     }
@@ -174,7 +174,7 @@ void OSShutdownSystemForBS() {
     __DVDPrepareReset();
 
     __OSReadStateFlags(&state);
-    state.lastBootApp = 0x84;
+    state.lastBootApp = OS_APP_TYPE_84;
     if (BS2BootFromCache) {
         state.lastBootApp |= OS_APP_TYPE_IPL;
     }
@@ -230,7 +230,7 @@ void OSReturnToMenu() {
     __DVDPrepareReset();
 
     __OSReadStateFlags(&state);
-    state.lastBootApp = 0x84;
+    state.lastBootApp = OS_APP_TYPE_84;
     if (BS2BootFromCache) {
         state.lastBootApp |= OS_APP_TYPE_IPL;
     }

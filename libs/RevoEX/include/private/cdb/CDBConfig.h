@@ -1,0 +1,12 @@
+#ifndef PRIVATE_CDB_CONFIGURATION_H
+#define PRIVATE_CDB_CONFIGURATION_H
+
+#define CDB_CFG_VF_DRIVE_LETTER     "CDB"
+#define CDB_CFG_VF_DRIVE_ROOT       "CDB:"
+
+#define CDB_CFG_SD_VF_DRIVE_LETTER  "SD"
+#define CDB_CFG_SD_VF_DRIVE_ROOT    "SD:"
+
+#define CDB_CFG_CDBID_FILE          "cdb.conf"
+
+#endif // PRIVATE_CDB_CONFIGURATION_H

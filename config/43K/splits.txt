@@ -1276,7 +1276,7 @@ libs/RevoEX/src/cdb/CDBFileSystem.c:
 	.text       start:0x81463A80 end:0x81464108
 	.data       start:0x8163FCB0 end:0x8163FFD0
 	.sdata      start:0x8166C010 end:0x8166C020
-	.sbss       start:0x8166D380 end:0x8166D390
+	.sbss       start:0x8166D380 end:0x8166D388
 
 libs/RevoEX/src/cdb/CDBFileSystemVF.c:
 	.text       start:0x81464108 end:0x814644FC
@@ -1290,6 +1290,7 @@ libs/RevoEX/src/cdb/CDBFileSystemSD.c:
 	.data       start:0x81640080 end:0x81640210
 	.sdata2     start:0x81669680 end:0x81669688
 	.sdata      start:0x8166C038 end:0x8166C050
+	.sbss       start:0x8166D388 end:0x8166D390
 
 libs/RevoEX/src/cdb/CDBRecord.c:
 	.bss        start:0x810C6E00 end:0x810C6E80
@@ -1337,11 +1338,12 @@ libs/RevoEX/src/cdb/CDBFBridgeSD.c:
 
 libs/RevoEX/src/cdb/CDBId.c:
 	.text       start:0x8146AE60 end:0x8146B030
+	.data       start:0x81641180 end:0x816411A8
+	.sdata      start:0x8166C0A0 end:0x8166C0C0
 
 libs/RevoEX/src/cdb/CDBCrypt.c:
 	.text       start:0x8146B030 end:0x8146B158
-	.data       start:0x81641180 end:0x816411F0
-	.sdata      start:0x8166C0A0 end:0x8166C0C0
+	.data       start:0x816411A8 end:0x816411F0
 	.sbss       start:0x8166D3B8 end:0x8166D3C0
 
 libs/RevoEX/src/ncd/ncdsystem.c:

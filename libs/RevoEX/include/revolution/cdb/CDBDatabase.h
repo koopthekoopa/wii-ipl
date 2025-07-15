@@ -9,8 +9,6 @@
 extern "C" {
 #endif // __cplusplus
 
-void    CDBDatabaseInstancePoolInit(void* work);
-
 CDBErr  CDBDatabaseCheckOpenRecord();
 CDBErr  CDBDatabaseCheckOpenDatabase();
 

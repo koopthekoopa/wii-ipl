@@ -23,7 +23,7 @@ namespace ipl {
             BOOL _condition(CDBErr result, int tries) {
                 BOOL bTryAgain = FALSE;
 
-                if (result == CDB_ERROR_13) {
+                if (result == CDB_ERROR_NAND_ERROR) {
                     int nandResult = CDBGetLastNANDError();
 
                     bTryAgain = FALSE;

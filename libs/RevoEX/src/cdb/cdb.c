@@ -4,18 +4,20 @@
 #include <revolution/vf.h>
 
 CDBErr CDBInit(void* work) {
-    return CDBInitEx(work, 0, 0);
+    return CDBInitEx(work, NULL, 0);
 }
 
-CDBErr CDBInitEx(void* work, int unk0, int unk1) {
+CDBErr CDBInitEx(void* work, void* fsCacheBuffer, u32 fsCacheSize) {
     CDBErr ret;
 
-    if (VFIsAvailable() != TRUE) {
+    // Check is VF is initialized
+    if (VFIsAvailable() != VF_IS_AVAILABLE) {
         CDBReportFatal("VF is not initialized\n");
         return CDB_ERROR_VF_INIT_FAIL;
     }
 
-    ret = CDBFSInit(unk0, unk1);
+    // Filesystem init
+    ret = CDBFSInit(fsCacheBuffer, fsCacheSize);
     if (ret != CDB_ERROR_OK) {
         return ret;
     }
@@ -55,6 +57,7 @@ CDBErr CDBUninit() {
         return ret;
     }
 
+    // Goodbye Filesystem
     ret = CDBFSUninit();
     if (ret != CDB_ERROR_OK) {
         return ret;
@@ -66,5 +69,5 @@ CDBErr CDBUninit() {
 }
 
 s32 CDBGetFreeSize() {
-    return VFGetDriveFreeSize("CDB");
+    return VFGetDriveFreeSize(CDB_CFG_VF_DRIVE_LETTER);
 }

@@ -10,6 +10,8 @@ extern "C" {
 u16 NETCalcCRC16(const void* data, s32 size);
 u32 NETCalcCRC32(const void* data, s32 size);
 
+/* == MD5 == */
+
 typedef struct NETMD5Context {
     union {
         struct {
@@ -41,6 +43,28 @@ static void NETCalcMD5(void* digest, const void* input, u32 length) {
     NETMD5Init(&context);
     NETMD5Update(&context, input, length);
     NETMD5GetDigest(&context, digest);
+}
+
+/* == SHA1 == */
+
+typedef struct NETSHA1Context {
+    u8  unk_0x00[0x60]; // 0x00
+} NETSHA1Context;
+
+#define NET_SHA1_DIGEST_SIZE    20
+
+typedef u8 NETSHA1Sum[NET_SHA1_DIGEST_SIZE];
+
+void NETSHA1Init(NETSHA1Context* context);
+void NETSHA1Update(NETSHA1Context* context, const void* input, u32 length);
+void NETSHA1GetDigest(NETSHA1Context* context, void* digest);
+
+static void NETCalcSHA1(void* digest, const void* input, u32 length) {
+    NETSHA1Context context;
+
+    NETSHA1Init(&context);
+    NETSHA1Update(&context, input, length);
+    NETSHA1GetDigest(&context, digest);
 }
 
 #ifdef __cplusplus

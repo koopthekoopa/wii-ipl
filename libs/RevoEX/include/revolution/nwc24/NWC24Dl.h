@@ -1,0 +1,71 @@
+#ifndef NWC24_DL_H
+#define NWC24_DL_H
+
+#include <revolution/types.h>
+
+#include <revolution/nwc24/NWC24Err.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#define NWC24_DL_TASK_MAX 120
+#define NWC24_DL_SUBTASK_MAX 32
+
+typedef enum NWC24DLStep {
+    DL24STEP_NULL = 0,
+    DL24STEP_FIRST,
+    DL24STEP_FIRST_WAIT ,
+    DL24STEP_INIT,
+    DL24STEP_OPEN,
+    DL24STEP_CHECK,
+    DL24STEP_UPDATE_CHECK,
+    DL24STEP_UPDATE_TASK,
+    DL24STEP_MAKE_TASK,
+    DL24STEP_DUMP,
+    DL24STEP_DOWNLOAD_CHECK,
+    DL24STEP_FILE_OPEN,
+    DL24STEP_FILE_CREATE,
+    DL24STEP_WAIT,
+    DL24STEP_ERROR,
+    DL24STEP_CLOSE,
+    DL24STEP_END,
+} NWC24DLStep;
+
+typedef enum {
+    NWC24_DLTYPE_MULTIPART_V1,
+    NWC24_DLTYPE_OCTETSTREAM_V1,
+    NWC24_DLTYPE_MULTIPART_V2,
+    NWC24_DLTYPE_OCTETSTREAM_V2
+} NWC24DlType;
+
+typedef enum {
+    NWC24_DL_STTYPE_NONE,
+    NWC24_DL_STTYPE_INCREMENT,
+    NWC24_DL_STTYPE_TIME_HOUR,
+    NWC24_DL_STTYPE_TIME_DAYOFWEEK,
+    NWC24_DL_STTYPE_TIME_DAY
+} NWC24DlSubTaskType;
+
+typedef enum {
+    NWC24_DL_STFLAG_TRAILING_FILENAME = (1 << 0),
+    NWC24_DL_STFLAG_TRAILING_URL = (1 << 1),
+    NWC24_DL_STFLAG_INTELLIGENT_UPDATE = (1 << 8),
+    NWC24_DL_STFLAG_RETICENT_UPDATE = (1 << 9)
+} NWC24DlSubTaskFlags;
+
+typedef struct NWC24DlTask {
+    u8  data[512];  // 0x00
+} NWC24DlTask;
+
+NWC24Err    NWC24CheckDlTask(NWC24DlTask* dlTask);
+NWC24Err    NWC24DeleteDlTaskForced(NWC24DlTask* dlTask);
+NWC24Err    NWC24GetDlTask(NWC24DlTask* dlTask, u16 id);
+
+NWC24Err    NWC24IterateDlTask(u16* id, BOOL begin);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // NWC24_DL_H

@@ -12,6 +12,8 @@ s32 NCDSetIfConfig(NCDIfConfig* ifConfig);
 
 s32 NCDGetLinkStatus();
 
+s32 NCDGetWirelessMacAddress(u8* macAddr);
+
 #ifdef __cplusplus
 }
 #endif // __cplusplus

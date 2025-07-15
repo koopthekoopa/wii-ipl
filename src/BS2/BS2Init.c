@@ -63,7 +63,7 @@ static void SetConsoleInfo() {
     *(u32*)OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM1_END)   = 0;
     
     // BS2 stuff
-    *(u8*) OSPhysicalToCached(OS_ADDR_BOOT_PROGRAM_TARGET)  = 0x80;
+    *(u8*) OSPhysicalToCached(OS_ADDR_BOOT_PROGRAM_TARGET)  = OS_APP_TYPE_DVD;
     *(u16*)OSPhysicalToCached(OS_ADDR_DEV_KIT_VERSION)      = BS2_VERSION;
 }
 

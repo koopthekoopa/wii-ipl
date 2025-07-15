@@ -262,15 +262,15 @@ s32 contentGetLengthNAND(CNTFileInfoNAND* cntFileInfo) {
 CNTError contentSeekNAND(CNTFileInfoNAND* cntFileInfo, s32 offset, u32 whence) {
     s32 seekOff;
     switch (whence) {
-        case 0: {
+        case CNT_SEEK_BEG: {
             seekOff = offset;
             break;
         }
-        case 1: {
+        case CNT_SEEK_CUR: {
             seekOff = cntFileInfo->readOffset + offset;
             break;
         }
-        case 2: {
+        case CNT_SEEK_END: {
             seekOff = cntFileInfo->length + offset;
             break;
         }

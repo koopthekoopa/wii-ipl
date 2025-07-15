@@ -210,8 +210,8 @@ static void UpdateStateFlagsAndBootCache() {
     }
     else {
         u32 lastBootApp = BS2StateFlags.lastBootApp;
-        if (lastBootApp & 0x80) {
-            switch (lastBootApp & ~0xC0) {
+        if (lastBootApp & OS_APP_TYPE_DVD) {
+            switch (lastBootApp & ~(OS_APP_TYPE_IPL | OS_APP_TYPE_DVD)) {
                 case 1: {
                     BS2LastMode = 1;
                     break;
@@ -279,7 +279,7 @@ static void UpdateStateFlagsAndBootCache() {
                 }
             }
 
-            if (BS2StateFlags.lastDiscState == OS_STATE_FLAGS_DISC_IN && (BS2StateFlags.lastBootApp & 0x40)
+            if (BS2StateFlags.lastDiscState == OS_STATE_FLAGS_DISC_IN && (BS2StateFlags.lastBootApp & OS_APP_TYPE_IPL)
             && !BS2NoDisk && (BS2LastMode == 1 || BS2LastMode == 4)) {
                 OSReport("Boot from cache\n");
                 BS2BootFromCache = TRUE;

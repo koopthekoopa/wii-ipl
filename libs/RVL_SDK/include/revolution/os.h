@@ -75,10 +75,18 @@ u32     __OSCoreClock                   ADDRESS(OS_BASE_CACHED + OS_ADDR_CPU_CLO
 #define OSSleepMicroseconds(us)         OSSleepTicks(OSMicrosecondsToTicks((OSTime)us))
 #define OSSleepNanoseconds(ns)          OSSleepTicks(OSNanosecondsToTicks((OSTime)ns))
 
-void    OSInit();
+void        OSInit();
 
-u8      OSGetAppType();
-u32     OSGetConsoleType();
+enum {
+    OS_APP_TYPE_IPL = 0x40,
+    OS_APP_TYPE_DVD = 0x80,
+    OS_APP_TYPE_CHANNEL = 0x81,
+    OS_APP_TYPE_84 = 0x84,
+};
+
+u8          OSGetAppType();
+u32         OSGetConsoleType();
+const char* OSGetAppGamename();
 
 #include <revolution/os/OSAlarm.h>
 #include <revolution/os/OSAlloc.h>

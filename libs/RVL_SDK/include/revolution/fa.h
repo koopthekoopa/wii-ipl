@@ -9,15 +9,41 @@
 extern "C" {
 #endif
 
-s32     FAInit(int unk);
+FAError FAInit(int flag);
+FAError FARegistCB(u8 device, FAInsertCallback insertCallback, FAEjectCallback ejectCallback);
 
-FAFILE  FACreate(const char* fileName, int unk);
-FAFILE  FAOpen(const char* fileName, const char* mode);
+FAError FABuffering(char drive, s32 mode);
 
-size_t  FAFRead(void* buffer, size_t size, size_t count, FAFILE stream);
-size_t  FAFWrite(void* buffer, size_t size, size_t count, FAFILE stream);
+FAError FASetThreadPriority(s32 priority);
 
-s32     FAFclose(FAFILE stream);
+FAError FAAttach(u8 device, char* fsPathNAND, u32 fsSizeNAND, FADrvTbl* driveTable);
+FAError FADetach(char drive);
+
+FAError FAMount(char drive);
+FAError FAUnmount(char drive, u32 unk);
+
+FAError FAFormat(char drive, u32 unk);
+
+FAError FAErrnum();
+
+FAFILE* FACreate(const char* fileName, int unk);
+
+FAFILE* FAFopen(const char* fileName, const char* mode);
+size_t  FAFread(void* buffer, size_t size, size_t count, FAFILE* stream);
+size_t  FAFwrite(void* buffer, size_t size, size_t count, FAFILE* stream);
+FAError FAFseek(FAFILE* stream, s32 offset, int origin);
+FAError FAFinfo(FAFILE* stream, FAFileInfo* info);
+
+FAError FAFsfirst(const char* dirName, u8 attr, FADta* dta);
+FAError FAFsnext(FADta* dta);
+
+FAError FAFstat(const char* fileName, FAFileStat* stat);
+
+FAError FAFclose(FAFILE* stream);
+
+FAError FARemove(const char* fileName);
+
+FAError FACreatedir(const char* dirName, s32 unk, FADta* dta);
 
 #ifdef __cplusplus
 }

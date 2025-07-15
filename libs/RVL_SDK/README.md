@@ -31,7 +31,7 @@ List of libraries that are linked (in alphabetical order):
 | **ESP**      | Public eTicket Services Library; for use from the SDK       | ✔️ |
 | **EUART**    | Externel Interface Bus UART Library; written by Hudson Soft | ✔️ |
 | **EXI**      | Externel Interface Bus Library                              | ✔️ |
-| **FA**       | File Allocation Library; for SD Card and possibly USB       | ❌ |
+| **FA**       | File Allocation Library; SD Card, USB (unusable) and NAND   | ❌ |
 | **FS**       | ISFS Library; File System for IOS                           | ✔️ |
 | **GX**       | Graphics Library                                            | ✔️ |
 | **IPC**      | Hollywood IPC Library; for communicating with IOS           | ✔️ |
