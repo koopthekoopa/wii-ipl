@@ -14,7 +14,7 @@ enum {
     VF_ERR_SUCCESS                      = 0,        // Success
     VF_ERR_EPERM                        = 1,        // "Operation is not possible"
     VF_ERR_ENOENT                       = 2,        // "No such file or directory"
-    VF_ERR_EIO                          = 5,        // "I/O Error(Driver Error"
+    VF_ERR_EIO                          = 5,        // "I/O Error(Driver Error)"
     VF_ERR_ENOEXEC                      = 8,        // "Not Executable by internal"
     VF_ERR_EBADF                        = 9,        // "Bad file descripto"
     VF_ERR_ENOMEM                       = 12,       // "Not enough system memory"

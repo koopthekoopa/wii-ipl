@@ -12,17 +12,17 @@ extern "C" {
 FAError FAInit(int flag);
 FAError FARegistCB(u8 device, FAInsertCallback insertCallback, FAEjectCallback ejectCallback);
 
-FAError FABuffering(char drive, s32 mode);
+FAError FABuffering(s8 drive, s32 mode);
 
 FAError FASetThreadPriority(s32 priority);
 
 FAError FAAttach(u8 device, char* fsPathNAND, u32 fsSizeNAND, FADrvTbl* driveTable);
-FAError FADetach(char drive);
+FAError FADetach(s8 drive);
 
-FAError FAMount(char drive);
-FAError FAUnmount(char drive, u32 unk);
+FAError FAMount(s8 drive);
+FAError FAUnmount(s8 drive, u32 force);
 
-FAError FAFormat(char drive, u32 unk);
+FAError FAFormat(s8 drive, u32 unk);
 
 FAError FAErrnum();
 

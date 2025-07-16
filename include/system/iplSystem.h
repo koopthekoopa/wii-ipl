@@ -26,6 +26,7 @@
 #include "system/iplPostmanManager.h"
 #include "system/iplNigaoeManager.h"
 #include "system/iplBS2Manager.h"
+#include "system/iplCdbManager.h"
 #include "scene/iplSceneManager.h"
 
 namespace ipl {
@@ -59,7 +60,8 @@ namespace ipl {
                     nand::Manager*      mpNandManager;          // 0x6C
                     undefined4          unk_0x70;
                     Framework*          mpFramework;            // 0x74
-                    undefined           unk_0x78[0x80 - 0x78];
+                    undefined           unk_0x78[0x7C - 0x78];
+                    cdb::Manager*       mpCdbManager;           // 0x7C
                     message::Manager*   mpMessageMgr;           // 0x80
                     undefined4          unk_0x84;
                     undefined4          unk_0x88;
@@ -183,7 +185,7 @@ namespace ipl {
 #ifdef USE_ZI8
                                     && smArg.mbZi8ResLoaded
 #endif // USE_ZI8
-                                    ;}
+                                    ; }
 
             static bool                     unkBool()               { return smArg.mbCreatedAfter && smArg.unk_0x2B4; }
 
@@ -280,13 +282,15 @@ namespace ipl {
             static nand::File*              getKorMsg()             { return smArg.mpKorMsg; }
 
             /*==============================*/
-            /*         WIICONNECT24         */
+            /*      WIICONNECT24 & CDB      */
             /*==============================*/
 
             /** @return The WiiConnect24 Manager object. */
-            static nwc24::Manager*          getNwc24Manager()       { return smArg.mpNwc24Manager; }
+            static nwc24::Manager*          getNwc24Manager()       { return smArg.mbSafeMode ? NULL : smArg.mpNwc24Manager; }
             /** @return The Postman Handler object. */
             static postman::Manager*        getPostmanManager()     { return smArg.mpPostmanManager; }
+            /** @return The CDB Manager object. */
+            static cdb::Manager*            getCdbManager()         { return smArg.mbSafeMode ? NULL : smArg.mpCdbManager; }
 
             /*==============================*/
             /*              MII              */

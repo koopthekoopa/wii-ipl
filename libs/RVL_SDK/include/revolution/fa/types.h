@@ -10,12 +10,11 @@ extern "C" {
 typedef s32     FAError;
 
 /* From VF ErrInfoTbl */
-/* Unsure; These were copied from VF */
 enum {
     FA_ERR_SUCCESS      = 0,        // Success
     FA_ERR_EPERM        = 1,        // "Operation is not possible"
     FA_ERR_ENOENT       = 2,        // "No such file or directory"
-    FA_ERR_EIO          = 5,        // "I/O Error(Driver Error"
+    FA_ERR_EIO          = 5,        // "I/O Error(Driver Error)"
     FA_ERR_ENOEXEC      = 8,        // "Not Executable by internal"
     FA_ERR_EBADF        = 9,        // "Bad file descripto"
     FA_ERR_ENOMEM       = 12,       // "Not enough system memory"
@@ -31,6 +30,8 @@ enum {
     FA_ERR_ENOLCK       = 46,       // "Can not lock the file"
     FA_ERR_ENOSYS       = 88,       // "Not implement function"
     FA_ERR_ENOTEMPTY    = 90,       // "Directory is not empty"
+
+    FA_ERR_EWRTPROTECT  = 201,      // Is Write Protected
 
     FA_ERR_SYSTEM       = -1        // "system error(general error)"
 };
@@ -68,8 +69,8 @@ typedef struct      FAPartition  FAPartition;
 typedef u8          FASector[512];
 typedef FASector    FACacheBuf;
 
-typedef void        (*FAInsertCallback)(char);
-typedef void        (*FAEjectCallback)(char);
+typedef void        (*FAInsertCallback)(s8);
+typedef void        (*FAEjectCallback)(s8);
 
 typedef FAError     (*FAInitDiskFunc)(FADisk*);
 typedef FAError     (*FAFinalizeDiskFunc)(FADisk*);

@@ -112,7 +112,7 @@ namespace ipl {
         }
 
         void Manager::commitHiddenDB() {
-            nwc24::Manager*     nwc24Mgr = System::isSafeMode() ? NULL : System::getNwc24Manager();
+            nwc24::Manager*     nwc24Mgr = System::getNwc24Manager();
             
             RFLiNWC24MsgWork    work;
             NWC24MsgObj         msgObj;

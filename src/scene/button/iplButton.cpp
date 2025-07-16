@@ -13,25 +13,25 @@ namespace ipl {
         /* =========== */
 
         static const AnmFrame scAnmFrame[Button::IDANIM_MAX] = {
-            /*IDANIM_FROM_CH_SEL_TO_BOARD*/           { /*start=*/1000.0f,  /*end=*/1040.0f },
-            /*IDANIM_FROM_CH_SEL_TO_SETTING*/         { /*start=*/7000.0f,  /*end=*/7040.0f },
-            /*IDANIM_FROM_SETTING_TO_CH_SEL*/         { /*start=*/8000.0f,  /*end=*/8040.0f },
-            /*IDANIM_FROM_BOARD_TO_CH_SEL*/           { /*start=*/6000.0f,  /*end=*/6040.0f },
-            /*IDANIM_FROM_BOARD_TO_CALENDAR*/         { /*start=*/2000.0f,  /*end=*/2050.0f },
-            /*IDANIM_BACK_TO_BOARD*/                  { /*start=*/3000.0f,  /*end=*/3050.0f },
-            /*IDANIM_BACK_TO_BOARD_ALT*/              { /*start=*/3500.0f,  /*end=*/3550.0f },
-            /*IDANIM_UNKNOWN_7*/                      { /*start=*/4000.0f,  /*end=*/4026.0f },
-            /*IDANIM_SELECT_LEFT_BUTTON*/             { /*start=*/5000.0f,  /*end=*/5050.0f },
-            /*IDANIM_DISAPPEAR_BOARD_BUTTON*/         { /*start=*/3100.0f,  /*end=*/3113.0f },
-            /*IDANIM_APPEAR_BOARD_BUTTON*/            { /*start=*/3426.0f,  /*end=*/3439.0f },
-            /*IDANIM_APPEAR_LEFT_BUTTON*/             { /*start=*/3113.0f,  /*end=*/3126.0f },
-            /*IDANIM_DISAPPEAR_LEFT_BUTTON*/          { /*start=*/3213.0f,  /*end=*/3226.0f },
-            /*IDANIM_APPEAR_LEFT_AND_TRASH_BUTTON*/   { /*start=*/3600.0f,  /*end=*/3613.0f },
-            /*IDANIM_DISAPPEAR_LEFT_AND_TRASH_BUTTON*/{ /*start=*/3620.0f,  /*end=*/3633.0f },
-            /*IDANIM_APPEAR_LEFT_AND_RIGHT_BUTTON*/   { /*start=*/3313.0f,  /*end=*/3326.0f },
-            /*IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON*/{ /*start=*/3413.0f,  /*end=*/3426.0f },
-            /*IDANIM_APPEAR_ALL_BUTTONS*/             { /*start=*/3640.0f,  /*end=*/3653.0f },
-            /*IDANIM_DISPPEAR_ALL_BUTTONS*/           { /*start=*/3660.0f,  /*end=*/3673.0f },
+            /*IDANIM_FROM_CH_SEL_TO_BOARD*/           { /*start=*/1000.0f,  /*end=*/1040.0f  },
+            /*IDANIM_FROM_CH_SEL_TO_SETTING*/         { /*start=*/7000.0f,  /*end=*/7040.0f  },
+            /*IDANIM_FROM_SETTING_TO_CH_SEL*/         { /*start=*/8000.0f,  /*end=*/8040.0f  },
+            /*IDANIM_FROM_BOARD_TO_CH_SEL*/           { /*start=*/6000.0f,  /*end=*/6040.0f  },
+            /*IDANIM_FROM_BOARD_TO_CALENDAR*/         { /*start=*/2000.0f,  /*end=*/2050.0f  },
+            /*IDANIM_BACK_TO_BOARD*/                  { /*start=*/3000.0f,  /*end=*/3050.0f  },
+            /*IDANIM_BACK_TO_BOARD_ALT*/              { /*start=*/3500.0f,  /*end=*/3550.0f  },
+            /*IDANIM_UNKNOWN_7*/                      { /*start=*/4000.0f,  /*end=*/4026.0f  },
+            /*IDANIM_SELECT_LEFT_BUTTON*/             { /*start=*/5000.0f,  /*end=*/5050.0f  },
+            /*IDANIM_DISAPPEAR_BOARD_BUTTON*/         { /*start=*/3100.0f,  /*end=*/3113.0f  },
+            /*IDANIM_APPEAR_BOARD_BUTTON*/            { /*start=*/3426.0f,  /*end=*/3439.0f  },
+            /*IDANIM_APPEAR_LEFT_BUTTON*/             { /*start=*/3113.0f,  /*end=*/3126.0f  },
+            /*IDANIM_DISAPPEAR_LEFT_BUTTON*/          { /*start=*/3213.0f,  /*end=*/3226.0f  },
+            /*IDANIM_APPEAR_LEFT_AND_TRASH_BUTTON*/   { /*start=*/3600.0f,  /*end=*/3613.0f  },
+            /*IDANIM_DISAPPEAR_LEFT_AND_TRASH_BUTTON*/{ /*start=*/3620.0f,  /*end=*/3633.0f  },
+            /*IDANIM_APPEAR_LEFT_AND_RIGHT_BUTTON*/   { /*start=*/3313.0f,  /*end=*/3326.0f  },
+            /*IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON*/{ /*start=*/3413.0f,  /*end=*/3426.0f  },
+            /*IDANIM_APPEAR_ALL_BUTTONS*/             { /*start=*/3640.0f,  /*end=*/3653.0f  },
+            /*IDANIM_DISPPEAR_ALL_BUTTONS*/           { /*start=*/3660.0f,  /*end=*/3673.0f  },
             /*IDANIM_ARROW_RIGHT_SELECT*/             { /*start=*/10700.0f, /*end=*/10730.0f },
             /*IDANIM_ARROW_LEFT_SELECT*/              { /*start=*/10700.0f, /*end=*/10730.0f },
             /*IDANIM_ARROW_RIGHT_SELECT_ALT*/         { /*start=*/10500.0f, /*end=*/10580.0f },
@@ -40,23 +40,23 @@ namespace ipl {
             /*IDANIM_ARROW_LEFT_APPEAR*/              { /*start=*/10150.0f, /*end=*/10160.0f },
             /*IDANIM_ARROW_RIGHT_DISAPPEAR*/          { /*start=*/10100.0f, /*end=*/10110.0f },
             /*IDANIM_ARROW_LEFT_DISAPPEAR*/           { /*start=*/10100.0f, /*end=*/10110.0f },
-            /*IDANIM_SELECT_CALENDAR_EXIT*/           { /*start=*/3000.0f,  /*end=*/3020.0f },
-            /*IDANIM_SELECT_TRASH_BUTTON*/            { /*start=*/2800.0f,  /*end=*/2820.0f },
-            /*IDANIM_SELECT_CREATE_R*/                { /*start=*/3000.0f,  /*end=*/3020.0f },
-            /*IDANIM_RIGHT_ARROW_SHOW_LETTER*/        { /*start=*/0.0f,     /*end=*/10.0f },
-            /*IDANIM_RIGHT_ARROW_HIDE_LETTER*/        { /*start=*/30.0f,    /*end=*/40.0f },
-            /*IDANIM_LEFT_ARROW_SHOW_LETTER*/         { /*start=*/0.0f,     /*end=*/10.0f },
-            /*IDANIM_LEFT_ARROW_HIDE_LETTER*/         { /*start=*/30.0f,    /*end=*/40.0f },
-            /*IDANIM_OPTOUT_IN*/                      { /*start=*/0.0f,     /*end=*/0.0f }, // left out blank for OptOutButton
-            /*IDANIM_OPTOUT_OUT*/                     { /*start=*/0.0f,     /*end=*/0.0f }, // left out blank for OptOutButton
-            /*IDANIM_OPTOUT_IN_ALT*/                  { /*start=*/0.0f,     /*end=*/0.0f }, // left out blank for OptOutButton
-            /*IDANIM_OPTOUT_OUT_ALT*/                 { /*start=*/0.0f,     /*end=*/0.0f }, // left out blank for OptOutButton
-            /*IDANIM_OPTOUT_SELECT*/                  { /*start=*/0.0f,     /*end=*/0.0f }, // left out blank for OptOutButton
-            /*IDANIM_SD_BUTTON_LOOP*/                 { /*start=*/0.0f,     /*end=*/0.0f }, // left out blank for SDMenuButton
-            /*IDANIM_SD_BUTTON_BTN_IN*/               { /*start=*/0.0f,     /*end=*/0.0f }, // left out blank for SDMenuButton
-            /*IDANIM_SD_BUTTON_BTN_OUT*/              { /*start=*/0.0f,     /*end=*/0.0f }, // left out blank for SDMenuButton
-            /*IDANIM_SD_BUTTON_INSERT*/               { /*start=*/0.0f,     /*end=*/0.0f }, // left out blank for SDMenuButton
-            /*IDANIM_SD_BUTTON_SELECT*/               { /*start=*/0.0f,     /*end=*/0.0f }, // left out blank for SDMenuButton
+            /*IDANIM_SELECT_CALENDAR_EXIT*/           { /*start=*/3000.0f,  /*end=*/3020.0f  },
+            /*IDANIM_SELECT_TRASH_BUTTON*/            { /*start=*/2800.0f,  /*end=*/2820.0f  },
+            /*IDANIM_SELECT_CREATE_R*/                { /*start=*/3000.0f,  /*end=*/3020.0f  },
+            /*IDANIM_RIGHT_ARROW_SHOW_LETTER*/        { /*start=*/0.0f,     /*end=*/10.0f    },
+            /*IDANIM_RIGHT_ARROW_HIDE_LETTER*/        { /*start=*/30.0f,    /*end=*/40.0f    },
+            /*IDANIM_LEFT_ARROW_SHOW_LETTER*/         { /*start=*/0.0f,     /*end=*/10.0f    },
+            /*IDANIM_LEFT_ARROW_HIDE_LETTER*/         { /*start=*/30.0f,    /*end=*/40.0f    },
+            /*IDANIM_OPTOUT_IN*/                      { /*start=*/0.0f,     /*end=*/0.0f     }, // left out blank for OptOutButton
+            /*IDANIM_OPTOUT_OUT*/                     { /*start=*/0.0f,     /*end=*/0.0f     }, // left out blank for OptOutButton
+            /*IDANIM_OPTOUT_IN_ALT*/                  { /*start=*/0.0f,     /*end=*/0.0f     }, // left out blank for OptOutButton
+            /*IDANIM_OPTOUT_OUT_ALT*/                 { /*start=*/0.0f,     /*end=*/0.0f     }, // left out blank for OptOutButton
+            /*IDANIM_OPTOUT_SELECT*/                  { /*start=*/0.0f,     /*end=*/0.0f     }, // left out blank for OptOutButton
+            /*IDANIM_SD_BUTTON_LOOP*/                 { /*start=*/0.0f,     /*end=*/0.0f     }, // left out blank for SDMenuButton
+            /*IDANIM_SD_BUTTON_BTN_IN*/               { /*start=*/0.0f,     /*end=*/0.0f     }, // left out blank for SDMenuButton
+            /*IDANIM_SD_BUTTON_BTN_OUT*/              { /*start=*/0.0f,     /*end=*/0.0f     }, // left out blank for SDMenuButton
+            /*IDANIM_SD_BUTTON_INSERT*/               { /*start=*/0.0f,     /*end=*/0.0f     }, // left out blank for SDMenuButton
+            /*IDANIM_SD_BUTTON_SELECT*/               { /*start=*/0.0f,     /*end=*/0.0f     }, // left out blank for SDMenuButton
         };
 
         static const BtnAnmFrame scBtnFadeFrame[Button::BTN_MAX] = {

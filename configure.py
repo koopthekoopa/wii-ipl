@@ -602,7 +602,7 @@ config.libs = [
             Object(NonMatching, "system/RsoSystem.cpp"),
             Object(NonMatching, "system/iplCdbBackup.cpp"),
             Object(NonMatching, "system/odh.cpp"),
-            Object(NonMatching, "system/iplSDVFWorker.cpp"),
+            Object(Matching,    "system/iplSDVFWorker.cpp"),
             Object(Matching,    "system/iplNandWrapper.cpp"),
             Object(Matching,    "system/main.cpp"),
             Object(Matching,    "system/iplBS2Manager.cpp"),
