@@ -7,8 +7,6 @@
 #include <revolution/fa.h>
 #include <revolution/cdb.h>
 
-#include "system/iplSystem.h"
-
 namespace ipl {
     #define FAT_PAGES    4
     #define DATA_PAGES   4
@@ -32,7 +30,6 @@ namespace ipl {
                 STATE_WORKING,
             } WorkState;
 
-            // verify
             typedef enum WorkSDState {
                SD_STATE_UNAVAILABLE = 0,
                SD_STATE_EJECTED,
@@ -42,17 +39,44 @@ namespace ipl {
                SD_STATE_AVAILABLE,
             } WorkSDState;
 
-            // verify
             enum {
                 RESULT_SUCCESS = 0,
                 RESULT_STILL_WORKING = -1,
-                RESULT_FATAL_ERROR = -2,
+                RESULT_FATAL_SD_ERROR = -2,
                 RESULT_OUT_OF_SPACE = -7,
                 RESULT_FA_ERROR = -8,
-                RESULT_SD_ALREADY_INIT = -9,
-                RESULT_SD_CANNOT_INIT = -10,
+                RESULT_SD_BROKEN = -9,
+                RESULT_SD_ERROR = -10,
                 RESULT_WRITE_PROTECTED = -11,
             };
+
+        private:
+            typedef struct Work {
+                FACacheBuf      cacheBuf[TOTAl_PAGES];   // 0x00
+                FACachePage     cachePages[TOTAl_PAGES]; // 0x1000
+
+                FADrvTbl        driveTable;                         // 0x1140
+
+                FACacheSetting  cacheSetting;                       // 0x114C
+
+                u8              threadStack[STACK_SIZE]; // 0x1160
+                OSThread        thread;                             // 0x21160
+
+                OSMutex         mutex;                              // 0x21478
+
+                OSMessageQueue  msgQueue;                           // 0x21490
+                OSMessage       messages[8];                        // 0x214B0
+
+                WorkState       workState;                          // 0x214D0
+                int             asyncResult;                        // 0x214D4
+                BOOL            isWriteProtected;                   // 0x214D8
+                int             prevAsyncResult;                    // 0x214DC
+                int             priority;                           // 0x214E0
+                int             unused_0x214E4;
+            } Work;
+
+        public:
+            static const int WORK_SIZE = sizeof(Work);
 
             SDVFWorker();
 
@@ -84,29 +108,6 @@ namespace ipl {
             void        set_state(WorkState state);
 
         private:
-            typedef struct Work {
-                FACacheBuf      cacheBuf[TOTAl_PAGES];   // 0x00
-                FACachePage     cachePages[TOTAl_PAGES]; // 0x1000
-
-                FADrvTbl        driveTable;                         // 0x1140
-
-                FACacheSetting  cacheSetting;                       // 0x114C
-
-                u8              threadStack[STACK_SIZE]; // 0x1160
-                OSThread        thread;                             // 0x21160
-
-                OSMutex         mutex;                              // 0x21478
-
-                OSMessageQueue  msgQueue;                           // 0x21490
-                OSMessage       messages[8];                        // 0x214B0
-
-                WorkState       workState;                          // 0x214D0
-                int             asyncResult;                        // 0x214D4
-                BOOL            isWriteProtected;                   // 0x214D8
-                int             prevAsyncResult;                    // 0x214DC
-                int             priority;                           // 0x214E0
-            } Work;
-
             void*           run();
 
             static void     sd_insert_callback(s8 drive);

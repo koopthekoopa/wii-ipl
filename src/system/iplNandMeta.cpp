@@ -112,8 +112,7 @@ namespace ipl {
                 }
             }
         failed:
-            System::err_log("ES", result, line);
-            System::err_display(MESG_ERR_FILE);
+            IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", result, line);
 
             return FALSE;
         }
@@ -138,8 +137,7 @@ namespace ipl {
             // Read the file
             if (ES_ReadContentFile(mDescriptor, bufferOut, length) < ES_ERR_OK) {
         failed:
-                System::err_log("ES", 0, 230);
-                System::err_display(MESG_ERR_FILE);
+                IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", 0, 230);
             }
         }
 
@@ -152,8 +150,7 @@ namespace ipl {
                 return TRUE;
             }
             else {
-                System::err_log("ES", 0, 253);
-                System::err_display(MESG_ERR_FILE);
+                IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", 0, 253);
                 return FALSE;
             }
         }

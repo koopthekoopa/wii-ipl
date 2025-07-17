@@ -31,6 +31,11 @@ s32     CDBGetFreeSize();
 s32     CDBGetLastNANDError();
 s32     CDBGetLastVFError();
 
+BOOL    CDBGetFatalVFErrorFlag();
+
+CDBErr  CDBMountSD();
+CDBErr  CDBUnmountSDForce();
+
 static inline void CDBSetVerboseLevel(CDBVerboseLevel verbose) {
     extern s32 CDBPrintDebugLevel;
     CDBPrintDebugLevel = (s32)verbose;

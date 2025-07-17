@@ -1,8 +1,6 @@
 #ifndef REVOLUTION_NWC24_MSG_BOARD_H
 #define REVOLUTION_NWC24_MSG_BOARD_H
 
-#include <decomp.h>
-
 #include <revolution/types.h>
 
 #include <revolution/nwc24/NWC24Err.h>
@@ -10,6 +8,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/* NWC24 Message */
 
 typedef enum NWC24MsgType {
     NWC24_MSGTYPE_RVL_MENU_SHARED   = 0,
@@ -38,6 +38,8 @@ typedef enum NWC24MsgType {
 typedef struct NWC24MsgObj {
     u32 data[64]; // 0x00
 } NWC24MsgObj;
+
+#define NWC24_FACE_DATA_SIZE    0x4A /* sizeof(RFLCharData) */
 
 /* NWC24 Channel Jump */
 

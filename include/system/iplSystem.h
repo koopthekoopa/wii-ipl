@@ -29,6 +29,30 @@
 #include "system/iplCdbManager.h"
 #include "scene/iplSceneManager.h"
 
+/**
+ * @brief Log the result to the NAND log. (`shared2/test2/nanderr.log`)
+ * @param type The error type as a string
+ * @param result The result
+ * @param line The line number
+ */
+#define IPLErrorLog(type, result, line) ipl::System::getErrorHandler()->log(type, result, __FILE__, line)
+/**
+ * @brief Display the error screen.
+ * @param msg The Message ID (`iplErrorHandler.h` has the list of available IDs)
+ */
+#define IPLErrorDisplay(msgId)          ipl::System::getErrorHandler()->set(ipl::ErrorHandler::DEFAULT, msgId)
+/**
+ * @brief Log the result to the NAND log. (`shared2/test2/nanderr.log`) and then displays error screen.
+ * @param msg The Message ID (`iplErrorHandler.h` has the list of available IDs)
+ * @param type The error type as a string
+ * @param result The result
+ * @param line The line number
+ */
+#define IPLErrorLogAndDisplay(msgId, type, result, line) {  \
+    IPLErrorLog(type, result, line);                        \
+    IPLErrorDisplay(msgId);                                 \
+}
+
 namespace ipl {
     class System {
         public:
@@ -51,7 +75,7 @@ namespace ipl {
                     EGG::Heap*          mpTreasureHeap;         // 0x2C
                     EGG::Heap*          mpChannelSelectHeap;    // 0x30
                     EGG::Heap*          mpFontHeap;             // 0x34
-                    EGG::Heap*          mpNwc24Heap;            // 0x38
+                    EGG::Heap*          mpCdbHeap;              // 0x38
 
                     OSCalendarTime      mCurrentTime;           // 0x3C
 
@@ -166,6 +190,7 @@ namespace ipl {
             static EGG::Heap*               getMem2App()            { return smArg.mpMem2App; }
             static EGG::Heap*               getSharedHeap()         { return smArg.mpSharedHeap; }
             static EGG::Heap*               getTreasureHeap()       { return smArg.mpTreasureHeap; }
+            static EGG::Heap*               getCdbHeap()            { return smArg.mpCdbHeap; }
 
             /*==============================*/
             /*       SYSTEM RESOURCES       */
@@ -357,31 +382,6 @@ namespace ipl {
 
             /** @brief Prepare the system for error handler */
             static void                     err_run();
-            /**
-             * @brief Log the result to the NAND log. (`shared2/test2/nanderr.log`)
-             * @param type The error type as a string
-             * @param result The result
-             * @param line The line number
-             */
-            #define                         err_log(type, result, line) err_log_ex(type, result, __FILE__, line)
-            /**
-             * @brief Best to use `err_log`
-             * @param type The error type as a string
-             * @param result The result
-             * @param file The source file name
-             * @param line The line number
-             */
-            static inline void              err_log_ex(const char* type, int result, const char* file, int line) {
-                smArg.mpErrorHandler->log(type, result, file, line);
-            }
-
-            /**
-             * @brief Display the error screen.
-             * @param msg The Message ID (`iplErrorHandler.h` has the list of available IDs)
-             */
-            static inline void              err_display(int msg = MESG_ERR_GENERIC) {
-                smArg.mpErrorHandler->set(ErrorHandler::DEFAULT, msg);
-            }
 
             /*==============================*/
             /*         RESET HANDLER        */

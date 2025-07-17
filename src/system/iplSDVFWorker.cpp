@@ -1,5 +1,7 @@
 #include "system/iplSDVFWorker.h"
 
+#include "utility/iplLock.h"
+
 #include "iplSystem.h"
 
 namespace ipl {
@@ -149,7 +151,7 @@ namespace ipl {
                     }
                     else {
                         OSReport("SDVFWorker: CDBMountSD failed [%d]\n", cdbErr);
-                        myWork->asyncResult = RESULT_FATAL_ERROR;
+                        myWork->asyncResult = RESULT_FATAL_SD_ERROR;
                     }
 
                     break;
@@ -163,7 +165,7 @@ namespace ipl {
                     }
                     else {
                         OSReport("SDVFWorker: CDBUnmountSD failed [%d]\n", cdbErr);
-                        myWork->asyncResult = RESULT_FATAL_ERROR;
+                        myWork->asyncResult = RESULT_FATAL_SD_ERROR;
                     }
 
                     break;
@@ -211,10 +213,10 @@ namespace ipl {
                     if (result == RESULT_SUCCESS) {
                         s_sd_state = SD_STATE_AVAILABLE;
                     }
-                    else if (result == RESULT_SD_ALREADY_INIT) {
+                    else if (result == RESULT_SD_BROKEN) {
                         s_sd_state = SD_STATE_ALREADY_INSERTED;
                     }
-                    else if (result == RESULT_SD_CANNOT_INIT) {
+                    else if (result == RESULT_SD_ERROR) {
                         s_sd_state = SD_STATE_ERROR;
                     }
                     else {
@@ -232,7 +234,7 @@ namespace ipl {
             }
             case SD_STATE_EJECTED: {
                 if (myWork->prevAsyncResult == RESULT_STILL_WORKING) {
-                    myWork->asyncResult = RESULT_FATAL_ERROR;
+                    myWork->asyncResult = RESULT_FATAL_SD_ERROR;
                 }
                 else {
                     myWork->asyncResult = myWork->prevAsyncResult;
@@ -244,11 +246,11 @@ namespace ipl {
                 if (result == RESULT_SUCCESS) {
                     s_sd_state = SD_STATE_AVAILABLE;
                 }
-                else if (result == RESULT_SD_ALREADY_INIT) {
+                else if (result == RESULT_SD_BROKEN) {
                     s_sd_state = SD_STATE_ALREADY_INSERTED;
                 }
                 else {
-                    s_sd_state = result == RESULT_SD_CANNOT_INIT ? SD_STATE_ERROR : SD_STATE_EJECTED;
+                    s_sd_state = result == RESULT_SD_ERROR ? SD_STATE_ERROR : SD_STATE_EJECTED;
                 }
                 myWork->asyncResult = result;
                 break;
@@ -300,27 +302,27 @@ namespace ipl {
             faErr = FAErrnum();
             OSReport("SDVFWorker: FAMount failed.[%d]\n", faErr);
             if (faErr == FA_ERR_ENOEXEC) {
-                result = RESULT_FATAL_ERROR;
+                result = RESULT_FATAL_SD_ERROR;
                 if (FA_INSERTED(myWork->driveTable)) {
-                    result = RESULT_SD_ALREADY_INIT;
+                    result = RESULT_SD_BROKEN;
                 }
             }
             else if (faErr == FA_ERR_EINVAL) {
-                result = RESULT_FATAL_ERROR;
+                result = RESULT_FATAL_SD_ERROR;
             }
             else if (faErr == FA_ERR_EIO) {
                 if (s_sd_state == SD_STATE_EJECTED) {
-                    result = RESULT_FATAL_ERROR;
+                    result = RESULT_FATAL_SD_ERROR;
                 }
                 else {
-                    result = RESULT_FATAL_ERROR;
+                    result = RESULT_FATAL_SD_ERROR;
                     if (s_sd_inserted) {
-                        result = RESULT_SD_CANNOT_INIT;
+                        result = RESULT_SD_ERROR;
                     }
                 }
             }
             else {
-                result = RESULT_SD_CANNOT_INIT;
+                result = RESULT_SD_ERROR;
             }
         }
 
@@ -332,14 +334,14 @@ namespace ipl {
 
         if (s_sd_state != SD_STATE_AVAILABLE && s_sd_state != SD_STATE_ALREADY_INSERTED) {
             OSReport("SDVFWorker: cannot format sd because of illegal sd state.[%d]\n", s_sd_state);
-            myWork->asyncResult = RESULT_FATAL_ERROR;
+            myWork->asyncResult = RESULT_FATAL_SD_ERROR;
             return;
         }
 
         faErr = FAFormat(myWork->driveTable.drive, 0);
         if (faErr != FA_ERR_SUCCESS && FAErrnum() == FA_ERR_ENOEXEC) {
             OSReport("SDVFWorker: SD card MBR is broken. cannot use this media.\n");
-            myWork->asyncResult = RESULT_SD_ALREADY_INIT;
+            myWork->asyncResult = RESULT_SD_BROKEN;
             return;
         }
 
@@ -370,17 +372,17 @@ namespace ipl {
     }
 
     SDVFWorker::WorkState SDVFWorker::get_state() {
-        OSLockMutex(&this->myWork->mutex);
+        OSLockMutex(&myWork->mutex);
         SDVFWorker::WorkState state = myWork->workState;
-        OSUnlockMutex(&this->myWork->mutex);
+        OSUnlockMutex(&myWork->mutex);
 
         return state;
     }
 
     void SDVFWorker::set_state(SDVFWorker::WorkState state) {
-        OSLockMutex(&this->myWork->mutex);
+        OSLockMutex(&myWork->mutex);
         myWork->workState = state;
-        OSUnlockMutex(&this->myWork->mutex);
+        OSUnlockMutex(&myWork->mutex);
     }
 
     void SDVFWorker::sd_insert_callback(s8 drive) {
@@ -408,7 +410,7 @@ namespace ipl {
             return RESULT_SUCCESS;
         }
 
-        result = RESULT_FATAL_ERROR;
+        result = RESULT_FATAL_SD_ERROR;
         switch (FAErrnum()) {
             case FA_ERR_EPERM:
             case FA_ERR_ENOENT:
@@ -439,7 +441,7 @@ namespace ipl {
             }
             case FA_ERR_EIO:
             case FA_ERR_ENOEXEC: {
-                result = RESULT_FATAL_ERROR;
+                result = RESULT_FATAL_SD_ERROR;
                 break;
             }
         }

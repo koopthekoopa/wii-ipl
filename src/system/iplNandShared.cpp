@@ -81,10 +81,9 @@ namespace ipl {
         err:
                 char errString[192];
                 sprintf(errString, "ES %d, %llx, %llx, %x", errcode, erridx, mTitleId);
-                
-                System::err_log(errString, code, 158);
-                System::err_display(MESG_ERR_FILE);
 
+                IPLErrorLogAndDisplay(MESG_ERR_FILE, errString, code, 158);
+  
                 return FALSE;
             }
         }
@@ -102,8 +101,7 @@ namespace ipl {
                 return TRUE;
             }
             else {
-                System::err_log("ES", 0, 189);
-                System::err_display(MESG_ERR_FILE);
+                IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", 0, 189);
 
                 return FALSE;
             }
@@ -126,8 +124,7 @@ namespace ipl {
 
             if (ES_SeekContentFile(mDescriptor, arcOffset + offset, NAND_SEEK_BEG) < ES_ERR_OK
             || ES_ReadContentFile(mDescriptor, buffer, length) < ES_ERR_OK) {
-                System::err_log("ES", 0, 358);
-                System::err_display(MESG_ERR_FILE);
+                IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", 0, 358);
             }
         }
     }

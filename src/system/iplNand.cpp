@@ -133,14 +133,12 @@ namespace ipl {
 
                     result = ES_SeekContentFile(System::getNandManager()->getDescriptor(), mFileOffset + arcOffset + offset, NAND_SEEK_BEG);
                     if (result < ES_ERR_OK) {
-                        System::err_log("ES", result, 229);
-                        System::err_display(MESG_ERR_FILE);
+                        IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", result, 229);
                     }
 
                     result = ES_ReadContentFile(System::getNandManager()->getDescriptor(), buffer, length);
                     if (result < ES_ERR_OK) {
-                        System::err_log("ES", result, 237);
-                        System::err_display(MESG_ERR_FILE);
+                        IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", result, 237);
                     }
                 }
             }
@@ -488,14 +486,13 @@ done:
                     // Display the system memory is damaged screen.
                     case NAND_RESULT_CORRUPT: {
                         mbFatalError = true;
-                        System::err_display(MESG_ERR_NAND);
+                        IPLErrorDisplay(MESG_ERR_NAND);
                         break;
                     }
                     // Otherwise assume the system files are corrupted.
                     default: {
                         mbFatalError = true;
-                        System::err_log("NAND", result, 808);
-                        System::err_display(MESG_ERR_FILE);
+                        IPLErrorLogAndDisplay(MESG_ERR_FILE, "NAND", result, 808);
                     }
                 }
                 return isGood;

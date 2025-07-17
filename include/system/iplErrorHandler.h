@@ -24,7 +24,7 @@
 
 namespace ipl {
     class ErrorHandler {
-        private:
+        public:
             enum Type {
                 NONE = 0,
                 DEFAULT
@@ -54,6 +54,7 @@ namespace ipl {
             */
             void log(const char* type, int result, const char* file, int line);
 
+        private:
             BOOL            mbReady;    // 0x00
 
             Type            mType;      // 0x04

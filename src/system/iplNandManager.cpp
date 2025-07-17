@@ -35,8 +35,7 @@ namespace ipl {
             spSysMenuTik = (ESTicketView*)System::getMem2Sys()->alloc(OSRoundUp32B(sizeof(ESTicketView)), -BUFFER_HEAP);
             ret = utility::ESMisc::GetTicketView(System::getMem2Sys(), SYSMENU_TITLE_ID, spSysMenuTik, 0);
             if (ret < ES_ERR_OK) {
-                System::err_log("ES", mDescriptor, 0xBAD);
-                System::err_display(MESG_ERR_FILE);
+                IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", mDescriptor, 0xBAD);
             }
 
             mDescriptor = ES_OpenTitleContentFile(SYSMENU_TITLE_ID, spSysMenuTik, SYSMENU_CONTENT_ID);
@@ -44,16 +43,14 @@ namespace ipl {
             mDescriptor = ES_OpenContentFile(SYSMENU_CONTENT_ID);
 #endif // STAND_ALONE_BUILD
             if (mDescriptor < ES_ERR_OK) {
-                System::err_log("ES", mDescriptor, 43);
-                System::err_display(MESG_ERR_FILE);
+               IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", mDescriptor, 43);
             }
 
             // Read archive header
             ARCHeader header ALIGN32;
             ret = ES_ReadContentFile(mDescriptor, &header, sizeof(ARCHeader));
             if (ret < ES_ERR_OK) {
-                System::err_log("ES", ret, 52);
-                System::err_display(MESG_ERR_FILE);
+                IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", ret, 52);
             }
 
             u32 bufSize = OSRoundUp32B(header.fileStart);
@@ -62,15 +59,13 @@ namespace ipl {
             // Seek to file system table offset
             ret = ES_SeekContentFile(mDescriptor, 0, NAND_SEEK_BEG);
             if (ret < ES_ERR_OK) {
-                System::err_log("ES", ret, 66);
-                System::err_display(MESG_ERR_FILE);
+                IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", ret, 66);
             }
 
             // Read file system table
             ret = ES_ReadContentFile(mDescriptor, mpFSTBuffer, bufSize);
             if (ret < ES_ERR_OK) {
-                System::err_log("ES", ret, 72);
-                System::err_display(MESG_ERR_FILE);
+                IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", ret, 72);
             }
 
             // Setup ARC with the read file system table
@@ -86,8 +81,7 @@ namespace ipl {
 #endif
             s32 ret = ES_CloseContentFile(mDescriptor);
             if (ret != ES_ERR_OK) {
-                System::err_log("ES", ret, 102);
-                System::err_display(MESG_ERR_FILE);
+                IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", ret, 102);
             }
             mDescriptor = -1;
         }

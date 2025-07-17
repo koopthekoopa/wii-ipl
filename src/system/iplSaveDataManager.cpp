@@ -279,8 +279,7 @@ namespace ipl {
                     }
                     else {
                         // Otherwise something is wrong
-                        System::err_log("NAND", manager->mLastError, 450);
-                        System::err_display(MESG_ERR_FILE);
+                        IPLErrorLogAndDisplay(MESG_ERR_FILE, "NAND", manager->mLastError, 450);
                     }
                 }
 
@@ -383,8 +382,7 @@ namespace ipl {
 
             s32 ret = ES_ListTitlesOnCard(titleIds, &titleCount);
             if (ret != ES_ERR_OK) {
-                System::err_log("ES", ret, 637);
-                System::err_display(MESG_ERR_FILE);
+                IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", ret, 637);
             }
 
             mbPhoto2 = false;
@@ -541,14 +539,12 @@ namespace ipl {
                     ESTmdView* tmd = NULL;
                     ret = utility::ESMisc::GetTmdView(mpHeap, titleId, &tmd);
                     if (ret != ES_ERR_OK && ret != ES_ERR_NO_TMD_FILE_FOUND) {
-                        System::err_log("ES", ret, 1138);
-                        System::err_display(MESG_ERR_FILE);
+                        IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", ret, 1138);
                     }
 
                     if (ret == ES_ERR_NO_TMD_FILE_FOUND || utility::ESMisc::checkContentsNum(titleId, tmd)) {
                         if (ret != ES_ERR_OK && ret != ES_ERR_NO_TMD_FILE_FOUND) {
-                            System::err_log("ES", ret, 1149);
-                            System::err_display(MESG_ERR_FILE);
+                            IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", ret, 1149);
                         }
                         result = FALSE;
                     }
@@ -666,7 +662,7 @@ namespace ipl {
                         break;
                     }
                     case NAND_RESULT_CORRUPT: {
-                        System::err_display(MESG_ERR_NAND);
+                        IPLErrorDisplay(MESG_ERR_NAND);
                         break;
                     }
                     case NAND_RESULT_OPENFD:
@@ -677,8 +673,7 @@ namespace ipl {
                     case NAND_RESULT_INVALID:
                     case NAND_RESULT_INIT_FAIL:
                     default: {
-                        System::err_log("NAND", code, 1503);
-                        System::err_display(MESG_ERR_FILE);
+                        IPLErrorLogAndDisplay(MESG_ERR_FILE, "NAND", code, 1503);
                         break;
                     }
                 }

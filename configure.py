@@ -582,7 +582,7 @@ config.libs = [
             Object(Matching,    "system/iplMessageManager.cpp"),
             Object(Matching,    "system/iplNigaoeManager.cpp"),
             Object(Matching,    "system/iplNigaoe.cpp"),
-            Object(NonMatching, "system/iplCdbManager.cpp"),
+            Object(Matching,    "system/iplCdbManager.cpp"),
             Object(Matching,    "system/iplCdbWrapper.cpp"),
             Object(NonMatching, "system/iplPlayTimeLog.cpp"),
             Object(NonMatching, "system/iplNwc24Manager.cpp"),
