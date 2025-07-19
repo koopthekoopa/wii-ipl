@@ -40,13 +40,13 @@ static u32 RecordCheckSum(OSPlayRecord* record) {
     return sum;
 }
 
-void __OSCreatePlayRecord(wchar_t* titleName, char* gameCode, char* companyCode) {
+void __OSCreatePlayRecord(wchar_t* titleName, char* gameCode, char* makerCode) {
     NANDFileInfo recFile;
     s32 ret;
 
     memcpy(PlayRecord.titleName, titleName, sizeof(PlayRecord.titleName));
     memcpy(PlayRecord.gameCode, gameCode, sizeof(PlayRecord.gameCode));
-    memcpy(PlayRecord.companyCode, companyCode, sizeof(PlayRecord.companyCode));
+    memcpy(PlayRecord.makerCode, makerCode, sizeof(PlayRecord.makerCode));
 
     PlayRecord.playStartTime = OSGetTime();
     PlayRecord.playTime = PlayRecord.playStartTime;

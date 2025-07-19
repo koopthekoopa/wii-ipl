@@ -13,10 +13,6 @@ namespace ipl {
         };
 
         enum {
-            /*
-                Forward -> fade out
-                Backward -> fade in
-            */
             ANIM_WII_MENU_CHANGE = 0,
             ANIM_CLOCK_CHANGE,
 

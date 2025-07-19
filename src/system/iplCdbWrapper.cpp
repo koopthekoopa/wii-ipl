@@ -41,9 +41,4 @@ namespace ipl {
             }
         }
     }
-
-    void search_cb_(void* playTime, CDBRecord* record) {
-        PlayTimeLog* playTimeLog = reinterpret_cast<PlayTimeLog*>(playTime);
-        playTimeLog->check(record);
-    }
 }

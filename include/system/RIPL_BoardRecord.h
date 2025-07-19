@@ -1,5 +1,5 @@
-#ifndef REVOLUTION_IPL_BOARD_RECORD_H
-#define REVOLUTION_IPL_BOARD_RECORD_H
+#ifndef RIPL_BOARD_RECORD_H
+#define RIPL_BOARD_RECORD_H
 
 #include <revolution/types.h>
 
@@ -18,27 +18,34 @@ extern "C" {
 
 #define RBR_ATTACHMENT_MAX  2
 
-extern const char*  RBRFileType_Txt;
-extern const char*  RBRFileType_Odh;
-extern const char*  RBRFileType_Dat;
-extern const char*  RBRFileType_Log;
-
 #define RBR_FILETYPE_LENGTH 8
 
 static inline int RBRCompareFileType(const char* type, const char* type2) {
     return strncmp(type, type2, RBR_FILETYPE_LENGTH);
 }
 
-#define RBR_CDB_TYPE_MEMO           0
-#define RBR_CDB_TYPE_LETTER         1
-#define RBR_CDB_TYPE_PLAYTIMELOG    2
-
 #define RBR_TITLE_LENGTH_LIMIT      8
 #define RBR_BODY_LENGTH_LIMIT       8
 
+extern const char*  RBRFileType_Txt;
+extern const char*  RBRFileType_Odh;
+extern const char*  RBRFileType_Dat;
+extern const char*  RBRFileType_Log;
+
+typedef enum RBRRecordType {
+    RBRRecordType_Memo = 0,
+    RBRRecordType_Letter,
+    RBRRecordType_PlayTimeLog,
+    RBRRecordType_Max,
+} RBRRecordType;
+
 typedef enum RBRAttachmentType {
-    RBR_ATTACHMENT_ARCHIVE = 0,
-    RBR_ATTACHMENT_IMAGE,
+    RBRAttachmentType_None = 0,
+    RBRAttachmentType_Picture,
+    RBRAttachmentType_UserData,
+    RBRAttachmentType_LetterArc = RBRAttachmentType_UserData, // can't decide
+    RBRAttachmentType_PlayTimeLog,
+    RBRAttachmentType_Max,
 } RBRAttachmentType;
 
 typedef struct RBRAttachment {
@@ -48,16 +55,15 @@ typedef struct RBRAttachment {
 } RBRAttachment;
 
 typedef struct RBRHeader {
-    u32             magic;                              // 0x00
+    u32             magic;                              // 0x00 (Always 0x52495F35)
     f32             xPos;                               // 0x04
     f32             yPos;                               // 0x08
-    u32             cdbType;                            // 0x0C
+    RBRRecordType   recordType;                         // 0x0C
     OSTime          time;                               // 0x10
 
     NWC24FriendAddr friendAttr;                         // 0x18
-
-    u16             unk_0x118;
-    u16             nwc24Type;                          // 0x11A
+    u16             friendType;                         // 0x118
+    u16             msgType;                            // 0x11A
 
     u32             titleOffset;                        // 0x11C
     u32             bodyOffset;                         // 0x120
@@ -69,11 +75,11 @@ typedef struct RBRHeader {
     u32             reserved; /* ? */                   // 0x148
 } RBRHeader;
 
-u8*     RBRGetPicture(RBRHeader* rbrHead, u32* dataSize);
+u8*     RBRGetPicture(u8* data, u32* pictureSize);
 void    RBRGetPosRect(f32* left, f32* right, f32* top, f32* bottom);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // REVOLUTION_IPL_BOARD_RECORD_H
+#endif // RIPL_BOARD_RECORD_H

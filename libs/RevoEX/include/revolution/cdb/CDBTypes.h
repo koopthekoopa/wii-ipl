@@ -62,7 +62,7 @@ typedef enum CDBLocation {
     CDB_FS_LOCATION_VF = 1,
     CDB_FS_LOCATION_SD,
     CDB_FS_LOCATION_3,
-    CDB_FS_LOCATION_4,
+    CDB_FS_LOCATION_4
 } CDBLocation;
 
 typedef enum CDBSeek {

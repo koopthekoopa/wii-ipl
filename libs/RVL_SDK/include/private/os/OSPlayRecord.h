@@ -2,6 +2,7 @@
 #define PRIVATE_OS_PLAY_RECORD_H
 
 #include <revolution/types.h>
+#include <revolution/os/OSTime.h>
 
 #include <wchar.h>
 
@@ -19,12 +20,12 @@ typedef struct OSPlayRecord {
     u32     checkSum;                               // 0x00
     wchar_t titleName[2][OS_RECORD_TITLE_LENGTH];   // 0x04
 
-    s64     playStartTime;                          // 0x58
-    s64     playTime;                               // 0x60
+    OSTime  playStartTime;                          // 0x58
+    OSTime  playTime;                               // 0x60
 
     char    gameCode[4];                            // 0x68
-    char    companyCode[2];                         // 0x6C
-    char    padding[0x12];                          // 0x6E
+    char    makerCode[2];                           // 0x6C
+    u8      padding[0x12];                          // 0x6E
 } OSPlayRecord;
 
 enum {
@@ -40,7 +41,7 @@ enum {
     OS_RECORD_STATE_STOPPED 
 };
 
-void    __OSCreatePlayRecord(wchar_t* titleName, char* gameCode, char* companyCode);
+void    __OSCreatePlayRecord(wchar_t* titleName, char* gameCode, char* makerCode);
 BOOL    __OSReadPlayRecord(OSPlayRecord *record);
 
 void    __OSStartPlayRecord();

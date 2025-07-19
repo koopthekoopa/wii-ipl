@@ -4,9 +4,9 @@
 #include <revolution/cdb.h>
 
 namespace ipl {
-    void    search_cb_(void* playTime, CDBRecord* record);
     namespace cdb {
         namespace wrapper {
+            // only one
             CDBErr  init(void* work);
         }
     }

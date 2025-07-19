@@ -4,6 +4,7 @@
 #include <revolution/nwc24.h>
 
 #include <private/nwc24/NWC24Time.h>
+#include <private/nwc24/NWC24MsgBoard.h>
 
 NWC24Err    NWC24iPrepareShutdown();
 

@@ -23,10 +23,9 @@ extern "C" {
 #define CDB_KEYSTR_TYPE_EXT_SIZE        4
 #define CDB_KEYSTR_TYPE_SIZE            3
 
-// Is it the same as CDBLocation?
 typedef enum CDBRecordLocation {
-    CDB_RECORD_LOCATION_0 = 0,
-    CDB_RECORD_LOCATION_1,
+    CDB_RECORD_LOCATION_VF = 1,
+    CDB_RECORD_LOCATION_SD,
 } CDBRecordLocation;
 
 /* The way the "serial number" is handled is some sort of count from 0 - 1000 */
@@ -58,7 +57,7 @@ typedef struct _CDBRecordKey {
     };
     u64         wiiId;                                  // 0x20
     CDBLocation location;                               // 0x28
-    int         unused_0x2C;
+    int         unk_0x2C;
 } CDBRecordKey;
 
 typedef struct _CDBRecord {
@@ -85,6 +84,8 @@ CDBErr  CDBRecordClose(CDBRecord* record);
 
 CDBErr  CDBRecordGetDataSize(CDBRecord* record, u32* recordSize);
 CDBErr  CDBRecordGetId(CDBRecord* record, CDBId* id);
+
+CDBErr  CDBRecordGetTypeForce(CDBRecord* record, char* type);
 
 CDBErr  CDBRecordRemove(CDBRecord* record);
 

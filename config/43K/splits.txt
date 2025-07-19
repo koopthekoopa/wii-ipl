@@ -113,11 +113,11 @@ src/system/iplCdbManager.cpp:
 	.sdata      start:0x8166A6F0 end:0x8166A6F8
 
 src/system/iplCdbWrapper.cpp:
-	.text       start:0x8133FA1C end:0x8133FB20
+	.text       start:0x8133FA1C end:0x8133FB1C
 
 src/system/iplPlayTimeLog.cpp:
 	.bss        start:0x81089550 end:0x81089620
-	.text       start:0x8133FB20 end:0x81340E14
+	.text       start:0x8133FB1C end:0x81340E14
 	.ctors      start:0x815E5DA8 end:0x815E5DAC
 	.rodata     start:0x815E61E0 end:0x815E61F8
 	.data       start:0x8160D3B0 end:0x8160D408
@@ -1492,12 +1492,12 @@ libs/RevoEX/src/nwc24/NWC24MBoxCtrl.c:
 	.sbss       start:0x8166D410 end:0x8166D418
 
 libs/RevoEX/src/nwc24/NWC24Mime.c:
-	.text       start:0x8147C388 end:0x8147EA70
+	.text       start:0x8147C388 end:0x8147E9D0
 	.data       start:0x81642018 end:0x81642060
 	.sdata      start:0x8166C198 end:0x8166C1A8
 
 libs/RevoEX/src/nwc24/NWC24Stream.c:
-	.text       start:0x8147EA70 end:0x8147EC98
+	.text       start:0x8147E9D0 end:0x8147EC98
 
 libs/RevoEX/src/nwc24/NWC24Parser.c:
 	.text       start:0x8147EC98 end:0x8147F280

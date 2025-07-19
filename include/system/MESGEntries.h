@@ -3,14 +3,14 @@
 
 /* Play Time Log */
 
-#define MESG_PLAYTIME_TITLE             132
-#define MESG_PLAYTIME_TOTAL             135
-#define MESG_PLAYTIME_HEADER            136
-#define MESG_PLAYTIME_MISC_TITLES       137
-#define MESG_PLAYTIME_COLON             138
-#define MESG_PLAYTIME_SENT              144
-#define MESG_PLAYTIME_AND               145
-#define MESG_PLAYTIME_MORE              146
+#define MESG_PLAY_TIME_LOG_TITLE        132
+#define MESG_PLAY_TIME_LOG_TOTAL        135
+#define MESG_PLAY_TIME_TITLE            136
+#define MESG_PLAY_TIME_LOG_EXTRA        137
+#define MESG_PLAY_TIME_TIME_SEPERATOR   138
+#define MESG_PLAY_TIME_SENDMSG_TOTAL    144
+#define MESG_PLAY_TIME_SENDMSG_AND      145
+#define MESG_PLAY_TIME_SENDMSG_MORE     146
 
 /* Warning Handler */
 

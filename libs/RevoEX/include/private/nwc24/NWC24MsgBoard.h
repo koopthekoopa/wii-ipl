@@ -4,6 +4,10 @@
 #include <revolution/types.h>
 
 #include <revolution/nwc24/NWC24Err.h>
+#include <revolution/nwc24/NWC24Types.h>
+#include <revolution/nwc24/NWC24Friend.h>
+
+#include <private/nwc24/NWC24Private.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -20,7 +24,7 @@ typedef struct NWC24MsgObjPrivate {
     u8              unk_0x10[0x4];
     u32             tag;                                    // 0x14
     u32             ledPattern;                             // 0x18
-    u64             fromId;                                 // 0x20
+    NWC24UserId     fromId;                                 // 0x20
     u32             unk_0x28;
     u32             unk_0x2C;
     NWC24Data       unk_0x30;
@@ -35,7 +39,7 @@ typedef struct NWC24MsgObjPrivate {
     u32             attachedSize[NWC24_MSG_ATTACHMENT_MAX]; // 0x78
     NWC24MIMEType   attachedType[NWC24_MSG_ATTACHMENT_MAX]; // 0x80
     union {
-        u64         toIds[NWC24_MSG_RECIPIENT_MAX];
+        NWC24UserId toIds[NWC24_MSG_RECIPIENT_MAX];
         NWC24Data   toAddrs[NWC24_MSG_RECIPIENT_MAX];
     };                                                      // 0x88
     u8              numTo;                                  // 0xC8

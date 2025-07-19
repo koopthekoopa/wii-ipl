@@ -17,13 +17,14 @@ typedef struct _CDBDatabase {
 } CDBDatabase;
 
 typedef enum CDBSearchDirection {
-    CDB_SEARCH_DIRECTION_0 = 0,
-    CDB_SEARCH_DIRECTION_1,
+    // ???
+    CDB_SEARCH_DIRECTION_LEFT = 0,
+    CDB_SEARCH_DIRECTION_RIGHT,
 } CDBSearchDirection;
 
 #define CDB_RECORD_BUFFER_SIZE  0x400
 
-typedef int (CDBSearchRecordCB)(void*, CDBRecord*);
+typedef BOOL (CDBSearchRecordCB)(void*, CDBRecord*);
 
 CDBErr  CDBDatabaseInit(CDBDatabase* database);
 
@@ -38,7 +39,7 @@ CDBErr  CDBDatabaseCreateRecordAtOnceEx(CDBDatabase* database, CDBRecord* record
 
 CDBErr  CDBDatabaseFindByKey(CDBDatabase* database, CDBRecord* record, CDBRecordKey* recordKey);
 
-CDBErr  CDBDatabaseSearch(CDBDatabase* database, u32 unk2, u32 unk3, CDBSearchDirection searchDirection, char* makerCode, char* gameCode, int unk7, CDBRecordLocation recordLocation, int unk9, CDBSearchRecordCB searchRecordCB, void* unk11);
+CDBErr  CDBDatabaseSearch(CDBDatabase* database, CDBDate beginDate, CDBDate endDate, CDBSearchDirection searchDirection, char* makerCode, char* gameCode, int unk7, CDBRecordLocation recordLocation, int unk9, CDBSearchRecordCB searchRecordCB, void* searchRecordArg);
 
 CDBErr  CDBDatabaseCleanUpEmptyDirectories(CDBDatabase* database, CDBRecordLocation recordLocation);
 

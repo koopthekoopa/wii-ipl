@@ -162,7 +162,7 @@ parser.add_argument(
     "--stand-alone",
     dest="standalone",
     action="store_true",
-    help="stand alone build",
+    help="Stand Alone build",
 )
 args = parser.parse_args()
 
@@ -584,7 +584,7 @@ config.libs = [
             Object(Matching,    "system/iplNigaoe.cpp"),
             Object(Matching,    "system/iplCdbManager.cpp"),
             Object(Matching,    "system/iplCdbWrapper.cpp"),
-            Object(NonMatching, "system/iplPlayTimeLog.cpp"),
+            Object(Equivalent,  "system/iplPlayTimeLog.cpp"),
             Object(NonMatching, "system/iplNwc24Manager.cpp"),
             Object(Matching,    "system/iplPointer.cpp"),
             Object(Matching,    "system/iplPointerCore.cpp"),
@@ -952,7 +952,7 @@ config.libs = [
     # RevoEX
     RevoEXLib("cdb", [
             Object(Matching,    "cdb/cdb.c"),
-            Object(Equivalent,  "cdb/CDBConv.c"),
+            Object(Equivalent,  "cdb/CDBConv.c"), # hmm
             Object(NonMatching, "cdb/CDBDatabase.c"),
             Object(Equivalent,  "cdb/CDBFileSystemUtils.c"),
             Object(Matching,    "cdb/CDBFileSystem.c"),

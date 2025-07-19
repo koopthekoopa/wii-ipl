@@ -66,8 +66,7 @@ typedef struct      FADisk       FADisk;
 typedef struct      FADiskInfo   FADiskInfo;
 typedef struct      FAPartition  FAPartition;
 
-typedef u8          FASector[512];
-typedef FASector    FACacheBuf;
+typedef u8          FACacheBuf[512];
 
 typedef void        (*FAInsertCallback)(s8);
 typedef void        (*FAEjectCallback)(s8);
@@ -203,7 +202,7 @@ typedef struct FAFileInfo {
     u8  unknown[32];
 } FAFileInfo;
 
-/* Unsure; These were copied from VF */
+/* Unsure; This were copied from VF */
 typedef struct FADta {
     FAFILE*     file;               // 0x00
     FADIR*      dir;                // 0x04
@@ -228,7 +227,7 @@ typedef struct FADta {
     s8          pad[2];             // 0x442
 } FADta;
 
-/* Unsure; These were copied from VF */
+/* Unsure; This were copied from VF */
 typedef struct FAFileStat {
     u32 size;       // 0x00
 

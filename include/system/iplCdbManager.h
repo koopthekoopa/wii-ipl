@@ -16,25 +16,25 @@ namespace ipl {
     namespace cdb {
         class Manager {
             public:
-                static const u32    UNKNOWN_VALUE;
+                static const u32 UNKNOWN_VALUE;
 
                 Manager(EGG::Heap* heap);
 
                 void    closeDatabase();
 
                 BOOL    createNewRecord(const char* riplType, const char* rbrFileType, const OSCalendarTime* dateTime, u32* gameCode, u16* makerCode,
-                                        const math::VEC2& rbrPos, u32 cdbType, const NWC24FriendAddr& friendAddr, u16 unk, u16 nwc24Type,
+                                        const math::VEC2& rbrPos, u32 recordType, const NWC24FriendAddr& friendAddr, u16 unk, u16 nwc24Type,
                                         const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
-                                        const void** attachData, u32* attachSize, RBRAttachmentType* rbrAttach);
+                                        const void** attachData, u32* attachSize, RBRAttachmentType* attachType);
 
-                u8*     makeBuffer(const math::VEC2& rbrPos, u32 cdbType, const NWC24FriendAddr& friendAttr, u16 unk, u16 nwc24Type,
+                u8*     makeBuffer(const math::VEC2& rbrPos, u32 recordType, const NWC24FriendAddr& friendAttr, u16 unk, u16 nwc24Type,
                                 const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
-                                const void** attachData, u32* attachSize, RBRAttachmentType* rbrAttach,
+                                const void** attachData, u32* attachSize, RBRAttachmentType* attachType,
                                 u32* bufferSize);
 
-                BOOL    writeRecord(CDBRecord* record, const math::VEC2& rbrPos, u32 cdbType, const NWC24FriendAddr& friendAttr, u16 unk, u16 nwc24Type,
+                BOOL    writeRecord(CDBRecord* record, const math::VEC2& rbrPos, u32 recordType, const NWC24FriendAddr& friendAttr, u16 unk, u16 nwc24Type,
                                     const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
-                                    const void** attachData, u32* attachSize, RBRAttachmentType* rbrAttach);
+                                    const void** attachData, u32* attachSize, RBRAttachmentType* attachType);
 
                 BOOL    createAtOnce(CDBRecord* record, const char* riplType, const char* rbrFileType,
                                     u32* gameCode, u16* makerCode, const OSCalendarTime* dateTime,
@@ -52,7 +52,9 @@ namespace ipl {
                 BOOL    isUnderFlow() const;
 
                 BOOL    findByKey(CDBRecord* record, CDBRecordKey* recordKey);
-                BOOL    search(const u32& unk0, const u32& unk1, CDBSearchDirection searchDirection, CDBRecordLocation recordLocation, int unk2, CDBSearchRecordCB searchRecordCB, void* faceData);
+                BOOL    search(const CDBDate& begin, const CDBDate& end,
+                                CDBSearchDirection searchDirection, CDBRecordLocation recordLocation, int unk2,
+                                CDBSearchRecordCB searchRecordCB, void* searchRecordWork);
 
                 BOOL    getDataSize(CDBRecord* record, u32* recordDataSize);
                 BOOL    getCDBId(CDBRecord* record, CDBId* recordCDBId);
