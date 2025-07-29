@@ -27,12 +27,12 @@ namespace ipl {
                                         const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
                                         const void** attachData, u32* attachSize, RBRAttachmentType* attachType);
 
-                u8*     makeBuffer(const math::VEC2& rbrPos, u32 recordType, const NWC24FriendAddr& friendAttr, u16 unk, u16 nwc24Type,
+                u8*     makeBuffer(const math::VEC2& rbrPos, u32 recordType, const NWC24FriendAddr& friendAddr, u16 unk, u16 nwc24Type,
                                 const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
                                 const void** attachData, u32* attachSize, RBRAttachmentType* attachType,
                                 u32* bufferSize);
 
-                BOOL    writeRecord(CDBRecord* record, const math::VEC2& rbrPos, u32 recordType, const NWC24FriendAddr& friendAttr, u16 unk, u16 nwc24Type,
+                BOOL    writeRecord(CDBRecord* record, const math::VEC2& rbrPos, u32 recordType, const NWC24FriendAddr& friendAddr, u16 unk, u16 nwc24Type,
                                     const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
                                     const void** attachData, u32* attachSize, RBRAttachmentType* attachType);
 

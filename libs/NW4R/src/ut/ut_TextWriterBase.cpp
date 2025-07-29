@@ -1,9 +1,6 @@
 #include <nw4r/ut/TextWriterBase.h>
 #include <nw4r/ut/inlines.h>
 
-// TODO: Force nw4r::ut::Font::GetCharStrmReader() to generate a weak to match!!!
-// (I cannot believe it DID NOT...)
-
 namespace nw4r {
     namespace ut {
         template<typename T> u32 TextWriterBase<T>::mFormatBufferSize = 0x100;

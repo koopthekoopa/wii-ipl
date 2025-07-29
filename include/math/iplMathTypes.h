@@ -1,7 +1,7 @@
 #ifndef IPL_MATH_TYPES_H
 #define IPL_MATH_TYPES_H
 
-#include <revolution.h>
+#ifdef __cplusplus
 
 #include <nw4r/math.h>
 
@@ -25,10 +25,10 @@ namespace ipl {
         } MTX44;
 
         typedef struct VEC2 : public nw4r::math::VEC2 {
-            VEC2()                          {}
+            VEC2() :nw4r::math::VEC2()       {}
 
-            VEC2(const f32* pF)             { x = pF[0]; y = pF[1]; }
-            VEC2(f32 fx, f32 fy)            { x = fx; y = fy; }
+            VEC2(const f32* pF)  : nw4r::math::VEC2(pF) {}
+            VEC2(f32 fx, f32 fy) : nw4r::math::VEC2(fx, fy) {}
         } VEC2;
         
         typedef struct VEC3 : public nw4r::math::VEC3 {
@@ -44,5 +44,7 @@ namespace ipl {
         }
     }
 }
+
+#endif // __cplusplus
 
 #endif // IPL_MATH_TYPES_H

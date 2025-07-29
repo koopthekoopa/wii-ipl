@@ -14,8 +14,8 @@ enum {
 };
 
 typedef struct PF_STR {
-    const char* p_head;     // 0x00
-    const char* p_tail;     // 0x04
+    const s8*   p_head;     // 0x00
+    const s8*   p_tail;     // 0x04
 
     u32         code_mode;  // 0x08
 } PF_STR;

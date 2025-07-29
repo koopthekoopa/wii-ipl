@@ -242,6 +242,7 @@ out:
             return __OSCheckTmdCountryCode(tmdView);
         }
 
+        // Copied from BS2
         BOOL ESMisc::__IsPCEnable() {
             switch (SCGetProductArea()) {
                 case SC_PRODUCT_AREA_JPN:

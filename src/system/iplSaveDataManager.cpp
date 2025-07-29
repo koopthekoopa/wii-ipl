@@ -295,7 +295,7 @@ namespace ipl {
                     }
                 }
 
-                // Previous page on ChannelSelect
+                // Previous page of ChannelSelect
                 if (manager->mData.prevPage != 0) {
                     manager->mLastPrevPage = manager->mData.prevPage;
                     bNeedFlush = TRUE;
@@ -328,7 +328,7 @@ namespace ipl {
             memcpy(mData.chanInfo, cDefaultChanList, MAX_CHANNEL_INFO_SIZE);
             setDefaultKeyboard();
             setDefaultTVRC();
-            setDefaultTitleCache();
+            setDefaultSDMenu();
 
             for (int i = 0; i < 0x0C; i++) {
                 mData.padding[i] = 0;
@@ -631,13 +631,13 @@ namespace ipl {
                             setDefaultKeyboard();
                         }
                     }
-                    setDefaultTitleCache();
+                    setDefaultSDMenu();
                     break;
                 }
             }
         }
 
-        void Manager::setDefaultTitleCache() {
+        void Manager::setDefaultSDMenu() {
             mData.didntGotoSDMenu = TRUE;
             memset(mData.titleCache, 0, sizeof(mData.titleCache));
             mData.prevSDPage = 0;

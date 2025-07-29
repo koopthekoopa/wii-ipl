@@ -56,7 +56,7 @@ namespace ipl {
                 static void initManagerTask_();
 
                 void        setDefaultHeader();
-                void        setDefaultTitleCache();
+                void        setDefaultSDMenu();
                 void        setDefaultKeyboard();
                 void        setDefaultTVRC();
 

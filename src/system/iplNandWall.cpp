@@ -41,7 +41,7 @@ namespace ipl {
             OSReport("**********************************************\n");
 
             // Check if NAND is full
-            if (!isNandCapacity()){
+            if (!isNandCapacity()) {
                 System::setNandFull(true);
             }
             else {
@@ -50,6 +50,9 @@ namespace ipl {
         }
 
         BOOL isNandCapacity() {
+            // If the user has used under 17408 NAND blocks (2176 data management blocks) and 4000 user nodes
+            // And if the entire nand has at least 3592 free blocks (449 data management blocks) and 128 free nodes
+            // Then we can say the NAND has enough free space!
             if (user_used_fsblocks <= NAND_MAX_USER_BLOCKS && user_used_inodes <= NAND_MAX_USER_INODES &&
                 global_free_fsblock >= MINIMUM_GLOBAL_NAND_BLOCKS && global_free_inode >= MINIMUM_GLOBAL_NAND_INODES) {
                 return TRUE;  // We have enough free space!

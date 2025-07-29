@@ -1,6 +1,6 @@
 #include <revolution/types.h>
 
-void VFiPF_LE16_TO_U16_STR(unsigned char *src, u32 length) {
+void VFiPF_LE16_TO_U16_STR(u8* src, u32 length) {
     u32  cnt;
     char tmpSrc;
 

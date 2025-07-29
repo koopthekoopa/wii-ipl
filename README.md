@@ -69,8 +69,8 @@ Progress
   
 > You can see the full progress and its history by clicking on one of the versions in the table.  
 
-Installing Dependencies
-=======================
+Dependencies
+============
 
 Windows
 -------
@@ -139,10 +139,11 @@ Building
   ```
 
 >  [!NOTE]
-> This does **not** produce a WAD file. You must replace the exectable with the one you built (`main.app`) manually into a WAD file.
+> This does **not** produce a WAD file, only the executable file, `main.app`.
 
 > [!WARNING]
-> The code is not 100% shiftable, most of it works aside from a couple of things (such as Wii Settings and a few Channel Banners like the Forecast Channel)
+> Due to the SEL file not being generated on build, the code is not 100% shiftable.  
+> Most of it works aside from a couple of things, such as Wii Settings and a couple of Channel Banners like the Forecast Channel.
 
 Diffing
 =======

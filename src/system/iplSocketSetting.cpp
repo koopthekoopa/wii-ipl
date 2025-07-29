@@ -6,8 +6,6 @@
 
 #include <cstdio>
 
-#pragma sym on
-
 #define HEAP_BUFFER_SIZE    0x4000
 
 namespace ipl {

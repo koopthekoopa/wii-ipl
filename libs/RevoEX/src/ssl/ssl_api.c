@@ -10,7 +10,7 @@
 #include <string.h>
 
 #define MAX_VECTOR_ARGS 4
-#define OPEN_SSL_IOS()  IOS_Open("/dev/net/ssl", IPC_REQ_NONE)
+#define OPEN_SSL_IOS()  IOS_Open("/dev/net/ssl", 0)
 
 enum {
     SSL_IOCTVL_NEW = 1,

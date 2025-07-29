@@ -19,3 +19,8 @@ List of libraries that are linked (in alphabetical order):
 | **SSL**   | SSL Library                                             | ✔️ |
 | **VF**    | Virtual File System Library; for .vff files and SD Card | ❌ |
 | **WD**    | Wireless Driver Library; Wifi?                          | ❌ |
+
+Thanks to
+---------
+[kiwi515/ogws](https://github.com/kiwi515/ogws)  
+[riidef/mkw](https://github.com/riidefi/mkw)  

@@ -65,7 +65,7 @@ namespace ipl {
             return result;
         }
 
-        BOOL Manager::writeRecord(CDBRecord* record, const math::VEC2& boardPos, u32 recordType, const NWC24FriendAddr& friendAttr, u16 friendType, u16 msgType,
+        BOOL Manager::writeRecord(CDBRecord* record, const math::VEC2& boardPos, u32 recordType, const NWC24FriendAddr& friendAddr, u16 friendType, u16 msgType,
         const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
         const void** attachData, u32* attachSize, RBRAttachmentType* attachType) {
             RBRHeader   rbrHeader;
@@ -86,7 +86,7 @@ namespace ipl {
             rbrHeader.yPos = boardPos.y;
             rbrHeader.recordType = (RBRRecordType)recordType;
             rbrHeader.time = OSGetTime();
-            rbrHeader.friendAttr = friendAttr;
+            rbrHeader.friendAddr = friendAddr;
             rbrHeader.friendType = friendType;
             rbrHeader.msgType = msgType;
 
@@ -179,7 +179,7 @@ namespace ipl {
             return result;
         }
 
-        u8* Manager::makeBuffer(const math::VEC2& boardPos, u32 recordType, const NWC24FriendAddr& friendAttr, u16 friendType, u16 msgType,
+        u8* Manager::makeBuffer(const math::VEC2& boardPos, u32 recordType, const NWC24FriendAddr& friendAddr, u16 friendType, u16 msgType,
         const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
         const void** attachData, u32* attachSize, RBRAttachmentType* attachType,
         u32* bufferSize) {
@@ -199,7 +199,7 @@ namespace ipl {
             rbrHeader.yPos = boardPos.y;
             rbrHeader.recordType = (RBRRecordType)recordType;
             rbrHeader.time = OSGetTime();
-            rbrHeader.friendAttr = friendAttr;
+            rbrHeader.friendAddr = friendAddr;
             rbrHeader.friendType = friendType;
             rbrHeader.msgType = msgType;
 

@@ -57,7 +57,12 @@ typedef struct NWC24MsgObjPrivate {
     NWC24Data       unk_0xD0;
     NWC24Data       faceData;                               // 0xD8
     NWC24Data       altName;                                // 0xE0
-    char            unk_0xE8[0x100 - 0xE8];
+    u32             textSize;                               // 0xE4
+    u32             dwcId;                                  // 0xEC
+    u32             iconNew;                                // 0xF0
+    u32             unk_0xF4;
+    u32             unk_0xF8;
+    u32             unk_0xFC;
 } NWC24MsgObjPrivate;
 
 #ifdef __cplusplus

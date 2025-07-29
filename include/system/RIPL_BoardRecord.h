@@ -36,15 +36,16 @@ typedef enum RBRRecordType {
     RBRRecordType_Memo = 0,
     RBRRecordType_Letter,
     RBRRecordType_PlayTimeLog,
+
     RBRRecordType_Max,
 } RBRRecordType;
 
 typedef enum RBRAttachmentType {
     RBRAttachmentType_None = 0,
     RBRAttachmentType_Picture,
-    RBRAttachmentType_UserData,
-    RBRAttachmentType_LetterArc = RBRAttachmentType_UserData, // can't decide
+    RBRAttachmentType_Archive, // ??
     RBRAttachmentType_PlayTimeLog,
+
     RBRAttachmentType_Max,
 } RBRAttachmentType;
 
@@ -61,7 +62,7 @@ typedef struct RBRHeader {
     RBRRecordType   recordType;                         // 0x0C
     OSTime          time;                               // 0x10
 
-    NWC24FriendAddr friendAttr;                         // 0x18
+    NWC24FriendAddr friendAddr;                         // 0x18
     u16             friendType;                         // 0x118
     u16             msgType;                            // 0x11A
 

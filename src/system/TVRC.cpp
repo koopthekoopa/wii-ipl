@@ -99,12 +99,12 @@ BOOL TVRCSetModelType(int makerID, int typeNo, void* pFileData, int length) {
     }
 
     sprintf(dirName, "/%04d", makerID);
-    if (ARCOpenDir(&_database, dirName, &dir) == FALSE) {
+    if (!ARCOpenDir(&_database, dirName, &dir)) {
         _lastError = 6;
         return FALSE;
     }
     for (; typeNo != 0; typeNo--) {
-        if (ARCReadDir(&dir, &dirEntry) == FALSE) {
+        if (!ARCReadDir(&dir, &dirEntry)) {
             break;
         }
     }
@@ -147,5 +147,3 @@ BOOL TVRCSendStopAsync() {
 BOOL TVRCIsActive() {
     return _isActive;
 }
-
-

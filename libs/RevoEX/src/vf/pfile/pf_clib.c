@@ -54,25 +54,25 @@ void* VFipf_memset(void* dst, s32 c, u32 length) {
     return dst;
 }
 
-u32 VFipf_strlen(const char* s) {
-    char* t = (char*)s;
+u32 VFipf_strlen(const s8* s) {
+    s8* t = (s8*)s;
     while (*t) { t++; }
     return t - s;
 }
 
-char* VFipf_strcpy(char* dst, const char* src) {
-    char* d = dst;
+s8* VFipf_strcpy(s8* dst, const s8* src) {
+    s8* d = dst;
     while((*d = *src) != 0) { src++; d++; }
     return dst;
 }
 
-s32 VFipf_strcmp(const char* s1, const char* s2) {
+s32 VFipf_strcmp(const s8* s1, const s8* s2) {
     u8 *p1 = (u8*)s1, *p2 = (u8*)s2;
     while ((*p1 != '\0' && *p2 != '\0') && *p1 == *p2) { p1++; p2++; }
     return *p1 - *p2;
 }
 
-s32 VFipf_strncmp(const char* s1, const char* s2, u32 length) {
+s32 VFipf_strncmp(const s8* s1, const s8* s2, u32 length) {
     u8 *p1 = (u8*)s1, *p2 = (u8*)s2;
     while (length-- > 0) {
         if (*p1 == '\0' || *p2 == '\0' || *p1 != *p2) { return (*p1 - *p2); }

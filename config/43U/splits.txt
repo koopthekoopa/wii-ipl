@@ -967,7 +967,7 @@ src/bannerSound/AudioWaveUtility.cpp:
 	.sdata2     start:0x81694CD0 end:0x81694D18
 	.sdata      start:0x81697298 end:0x816972A0
 
-src/keyboard/pckeyboard.cpp:
+src/keyboard/tiPcKeyboard.cpp:
 	.bss        start:0x810C6580 end:0x810C6590
 	.text       start:0x814101D8 end:0x8141711C
 	.ctors      start:0x8160D1EC end:0x8160D1F0
@@ -977,7 +977,7 @@ src/keyboard/pckeyboard.cpp:
 	.sdata      start:0x816972A0 end:0x81697328
 	.sbss       start:0x81698CF8 end:0x81698D00
 
-src/keyboard/cellphone.cpp:
+src/keyboard/tiCellPhone.cpp:
 	.text       start:0x8141711C end:0x8141BB70
 	.ctors      start:0x8160D1F0 end:0x8160D1F4
 	.rodata     start:0x81614AC0 end:0x81614FE8
@@ -985,7 +985,7 @@ src/keyboard/cellphone.cpp:
 	.sdata2     start:0x81694D20 end:0x81694D28
 	.sdata      start:0x81697328 end:0x81697398
 
-src/keyboard/inputform.cpp:
+src/keyboard/tiInputForm.cpp:
 	.bss        start:0x810C6590 end:0x810C65F0
 	.text       start:0x8141BB70 end:0x81428150
 	.ctors      start:0x8160D1F4 end:0x8160D1F8
@@ -995,7 +995,7 @@ src/keyboard/inputform.cpp:
 	.sdata      start:0x81697398 end:0x816973C0
 	.sbss       start:0x81698D00 end:0x81698D20
 
-src/keyboard/candidatebox.cpp:
+src/keyboard/tiCandidateBox.cpp:
 	.text       start:0x81428150 end:0x8142DF10
 	.ctors      start:0x8160D1F8 end:0x8160D1FC
 	.rodata     start:0x816152E0 end:0x81615658
@@ -1003,55 +1003,55 @@ src/keyboard/candidatebox.cpp:
 	.sdata2     start:0x81694D90 end:0x81694DE0
 	.sdata      start:0x816973C0 end:0x816973E0
 
-src/keyboard/toolbar.cpp:
+src/keyboard/tiToolBar.cpp:
 	.text       start:0x8142DF10 end:0x8142F468
 	.ctors      start:0x8160D1FC end:0x8160D200
 	.rodata     start:0x81615658 end:0x816158D8
 	.data       start:0x8165E070 end:0x8165E420
 	.sdata      start:0x816973E0 end:0x816973F8
 
-src/keyboard/predictlang.cpp:
+src/keyboard/tiPredictLang.cpp:
 	.text       start:0x8142F468 end:0x81430A08
 	.ctors      start:0x8160D200 end:0x8160D204
 	.rodata     start:0x816158D8 end:0x81615B40
 	.data       start:0x8165E420 end:0x8165EAA8
 	.sdata      start:0x816973F8 end:0x81697400
 
-src/keyboard/signwindow.cpp:
+src/keyboard/tiSignWindow.cpp:
 	.text       start:0x81430A08 end:0x81432618
 	.ctors      start:0x8160D204 end:0x8160D208
 	.rodata     start:0x81615B40 end:0x81615E50
 	.data       start:0x8165EAA8 end:0x8165F518
 	.sdata      start:0x81697400 end:0x81697408
 
-src/keyboard/stringbase.cpp:
+src/keyboard/tiString.cpp:
 	.text       start:0x81432618 end:0x81433A50
 	.data       start:0x8165F518 end:0x8165F638
 
-src/keyboard/zistring.cpp:
+src/keyboard/tiZiString.cpp:
 	.bss        start:0x810C65F0 end:0x810C8270
 	.text       start:0x81433A50 end:0x81434FD0
 	.rodata     start:0x81615E50 end:0x816163B0
 	.data       start:0x8165F638 end:0x8165F780
 
-src/keyboard/textdrawer.cpp:
+src/keyboard/tiTextDrawer.cpp:
 	.bss        start:0x810C8270 end:0x810C87F0
 	.text       start:0x81434FD0 end:0x81435D64
 	.data       start:0x8165F780 end:0x8165F818
 	.sdata2     start:0x81694DE0 end:0x81694E10
 
-src/keyboard/nw4rmanager.cpp:
+src/keyboard/tiNw4rManager.cpp:
 	.text       start:0x81435D64 end:0x81437558
 	.data       start:0x8165F818 end:0x8165F8F0
 	.sdata2     start:0x81694E10 end:0x81694E28
 
-src/keyboard/manager.cpp:
+src/keyboard/tiManager.cpp:
 	.text       start:0x81437558 end:0x81439608
 	.ctors      start:0x8160D208 end:0x8160D20C
 	.data       start:0x8165F8F0 end:0x81660378
 	.sbss       start:0x81698D20 end:0x81698D28
 
-src/keyboard/util.cpp:
+src/keyboard/tiUtil.cpp:
 	.text       start:0x81439608 end:0x8143A3CC
 	.ctors      start:0x8160D20C end:0x8160D210
 	.data       start:0x81660378 end:0x81660598
@@ -1059,26 +1059,26 @@ src/keyboard/util.cpp:
 	.sdata      start:0x81697408 end:0x81697410
 	.sbss       start:0x81698D28 end:0x81698D40
 
-src/keyboard/cp_data.cpp:
+src/keyboard/tiCpData.cpp:
 	.text       start:0x8143A3CC end:0x8143A8E4
 	.ctors      start:0x8160D210 end:0x8160D214
 	.data       start:0x81660598 end:0x81664058
 
-src/keyboard/sw_data.cpp:
+src/keyboard/tiSwData.cpp:
 	.text       start:0x8143A8E4 end:0x8143B2B8
 	.ctors      start:0x8160D214 end:0x8160D218
 	.data       start:0x81664058 end:0x81666218
 
-src/keyboard/pk_data.cpp:
+src/keyboard/tiPkData.cpp:
 	.text       start:0x8143B2B8 end:0x8143BECC
 	.ctors      start:0x8160D218 end:0x8160D21C
 	.data       start:0x81666218 end:0x81667AA8
 
-src/keyboard/langindependent_data.cpp:
+src/keyboard/tiLanguageIndependentData.cpp:
 	.data       start:0x81667AA8 end:0x81667E18
 	.sdata      start:0x81697410 end:0x816974C8
 
-src/keyboard/textinputbase.cpp:
+src/keyboard/tiTextInputBase.cpp:
 	.text       start:0x8143BECC end:0x8143BF88
 	.data       start:0x81667E18 end:0x81667E38
 
@@ -1098,31 +1098,31 @@ src/keyboard/MyTiInputForm.cpp:
 	.sdata2     start:0x81694E78 end:0x81694EB0
 	.sdata      start:0x816974E0 end:0x81697528
 
-src/keyboard/MyTiLetter.cpp:
+src/keyboard/MyTiLetterForm.cpp:
 	.text       start:0x81444730 end:0x814454D8
 	.rodata     start:0x816168B8 end:0x81616B88
 	.data       start:0x81668860 end:0x81668D68
 	.sdata2     start:0x81694EB0 end:0x81694ED0
 	.sdata      start:0x81697528 end:0x81697570
 
-src/keyboard/MyBg.cpp:
+src/keyboard/MyTiBg.cpp:
 	.text       start:0x814454D8 end:0x81445590
 
-src/keyboard/debug.cpp:
+src/keyboard/tiDebug.cpp:
 	.text       start:0x81445590 end:0x81445BA4
 
-src/keyboard/GUIManager.cpp:
+src/keyboard/tiGUIManager.cpp:
 	.text       start:0x81445BA4 end:0x814472C0
 	.data       start:0x81668D68 end:0x81668EE0
 	.sdata2     start:0x81694ED0 end:0x81694EF8
 
-src/keyboard/HKBManager.cpp:
+src/keyboard/tiHKBManager.cpp:
 	.bss        start:0x810C8838 end:0x810C8940
 	.text       start:0x814472C0 end:0x81448AA4
 	.ctors      start:0x8160D220 end:0x8160D224
 	.data       start:0x81668EE0 end:0x81668EF8
 
-src/keyboard/HWKeyboard.cpp:
+src/keyboard/tiHwKeyboard.cpp:
 	.bss        start:0x810C8940 end:0x810C8950
 	.text       start:0x81448AA4 end:0x81449C98
 	.rodata     start:0x81616B88 end:0x81616C78
@@ -1130,7 +1130,7 @@ src/keyboard/HWKeyboard.cpp:
 	.sdata2     start:0x81694EF8 end:0x81694F08
 	.sdata      start:0x81697570 end:0x81697578
 
-src/keyboard/layout.cpp:
+src/keyboard/tiLayout.cpp:
 	.text       start:0x81449C98 end:0x8144A5AC
 	.data       start:0x81669018 end:0x81669070
 
@@ -1634,13 +1634,13 @@ libs/RevoEX/src/nwc24/NWC24MsgObj.c:
 	.text       start:0x814A0EA4 end:0x814A1AC0
 
 libs/RevoEX/src/nwc24/NWC24MBoxCtrl.c:
-	.text       start:0x814A1AC0 end:0x814A35D0
+	.text       start:0x814A1AC0 end:0x814A442C
 	.data       start:0x8166D920 end:0x8166D9C8
 	.sdata      start:0x81697B68 end:0x81697B78
 	.sbss       start:0x81698DF8 end:0x81698E00
 
 libs/RevoEX/src/nwc24/NWC24Mime.c:
-	.text       start:0x814A35D0 end:0x814A5C18
+	.text       start:0x814A442C end:0x814A5C18
 	.data       start:0x8166D9C8 end:0x8166DA10
 	.sdata      start:0x81697B78 end:0x81697B88
 
@@ -1650,18 +1650,22 @@ libs/RevoEX/src/nwc24/NWC24Stream.c:
 libs/RevoEX/src/nwc24/NWC24Parser.c:
 	.text       start:0x814A5EE0 end:0x814A64C8
 	.data       start:0x8166DA10 end:0x8166DCD0
-	.sdata      start:0x81697B88 end:0x81697BE0
+	.sdata      start:0x81697B88 end:0x81697BD8
 
 libs/RevoEX/src/nwc24/NWC24MsgCommit.c:
 	.bss        start:0x810C98C0 end:0x810C9900
 	.text       start:0x814A64C8 end:0x814A861C
 	.data       start:0x8166DCD0 end:0x8166DF78
-	.sdata      start:0x81697BE0 end:0x81697C70
+	.sdata      start:0x81697BD8 end:0x81697C70
 	.sbss       start:0x81698E00 end:0x81698E08
 
 libs/RevoEX/src/nwc24/NWC24MsgRead.c:
-	.text       start:0x814A861C end:0x814AAD38
-	.data       start:0x8166DF78 end:0x8166E0B0
+	.text       start:0x814A861C end:0x814A9850
+	.data       start:0x8166DF78 end:0x8166DFF8
+
+libs/RevoEX/src/nwc24/NWC24MsgSubject.c:
+	.text       start:0x814A9850 end:0x814AAD38
+	.data       start:0x8166DFF8 end:0x8166E0B0
 	.sdata      start:0x81697C70 end:0x81697CA0
 
 libs/RevoEX/src/nwc24/NWC24Schedule.c:
@@ -1673,10 +1677,11 @@ libs/RevoEX/src/nwc24/NWC24Schedule.c:
 
 libs/RevoEX/src/nwc24/NWC24DateParser.c:
 	.text       start:0x814ABD64 end:0x814AC6A8
-	.rodata     start:0x81618D48 end:0x81618D80
+	.rodata     start:0x81618D48 end:0x81618D70
 
 libs/RevoEX/src/nwc24/NWC24FriendList.c:
 	.text       start:0x814AC6A8 end:0x814ADCF8
+	.rodata     start:0x81618D70 end:0x81618D80
 	.data       start:0x8166E160 end:0x8166E180
 	.sdata      start:0x81697CA8 end:0x81697CB0
 
@@ -4376,7 +4381,7 @@ libs/MSL/src/MSL_Common/ansi_files.c:
 	.text       start:0x815FB598 end:0x815FB6A8
 	.data       start:0x81693730 end:0x81693870
 
-libs/MSL/src/MSL_Common/ansi_fp.c:
+libs/MSL/src/MSL_Common_Embedded/ansi_fp.c:
 	extab       start:0x81330D68 end:0x81330DA0
 	extabindex  start:0x81331D7C end:0x81331DD0
 	.text       start:0x815FB6A8 end:0x815FD018
@@ -4552,128 +4557,128 @@ libs/MSL/src/MSL_Common/math_sun.c:
 libs/MSL/src/MSL_Common/extras.c:
 	.text       start:0x81608A50 end:0x81608C40
 
-libs/MSL/src/PPC_EABI/Math/e_acos.c:
+libs/MSL/src/MSL_Common_Embedded/Math/e_acos.c:
 	.text       start:0x81608C40 end:0x81608F04
 	.sdata2     start:0x81695A70 end:0x81695AF8
 
-libs/MSL/src/PPC_EABI/Math/e_asin.c:
+libs/MSL/src/MSL_Common_Embedded/Math/e_asin.c:
 	.text       start:0x81608F04 end:0x8160919C
 	.sdata2     start:0x81695AF8 end:0x81695B80
 
-libs/MSL/src/PPC_EABI/Math/e_atan2.c:
+libs/MSL/src/MSL_Common_Embedded/Math/e_atan2.c:
 	.text       start:0x8160919C end:0x8160940C
 	.sdata2     start:0x81695B80 end:0x81695BD8
 
-libs/MSL/src/PPC_EABI/Math/e_exp.c:
+libs/MSL/src/MSL_Common_Embedded/Math/e_exp.c:
 	.text       start:0x8160940C end:0x81609640
 	.rodata     start:0x81633DC0 end:0x81633DF0
 	.sdata2     start:0x81695BD8 end:0x81695C50
 
-libs/MSL/src/PPC_EABI/Math/e_fmod.c:
+libs/MSL/src/MSL_Common_Embedded/Math/e_fmod.c:
 	.text       start:0x81609640 end:0x81609970
 	.rodata     start:0x81633DF0 end:0x81633E00
 
-libs/MSL/src/PPC_EABI/Math/e_log.c:
+libs/MSL/src/MSL_Common_Embedded/Math/e_log.c:
 	.text       start:0x81609970 end:0x81609C24
 	.sdata2     start:0x81695C50 end:0x81695CD0
 	.sbss       start:0x816997F8 end:0x81699800
 
-libs/MSL/src/PPC_EABI/Math/e_pow.c:
+libs/MSL/src/MSL_Common_Embedded/Math/e_pow.c:
 	.text       start:0x81609C24 end:0x8160A46C
 	.rodata     start:0x81633E00 end:0x81633E30
 	.sdata2     start:0x81695CD0 end:0x81695DE0
 
-libs/MSL/src/PPC_EABI/Math/e_rem_pio2.c:
+libs/MSL/src/MSL_Common_Embedded/Math/e_rem_pio2.c:
 	.text       start:0x8160A46C end:0x8160A804
 	.rodata     start:0x81633E30 end:0x81633FB8
 	.sdata2     start:0x81695DE0 end:0x81695E38
 
-libs/MSL/src/PPC_EABI/Math/fminmaxdim.c:
+libs/MSL/src/MSL_Common_Embedded/Math/fminmaxdim.c:
 	.text       start:0x8160A804 end:0x8160A8DC
 
-libs/MSL/src/PPC_EABI/Math/k_cos.c:
+libs/MSL/src/MSL_Common_Embedded/Math/k_cos.c:
 	.text       start:0x8160A8DC end:0x8160A9EC
 	.sdata2     start:0x81695E38 end:0x81695E80
 
-libs/MSL/src/PPC_EABI/Math/k_rem_pio2.c:
+libs/MSL/src/MSL_Common_Embedded/Math/k_rem_pio2.c:
 	.text       start:0x8160A9EC end:0x8160C0F8
 	.rodata     start:0x81633FB8 end:0x81634008
 	.sdata2     start:0x81695E80 end:0x81695EC0
 
-libs/MSL/src/PPC_EABI/Math/k_sin.c:
+libs/MSL/src/MSL_Common_Embedded/Math/k_sin.c:
 	.text       start:0x8160C0F8 end:0x8160C1B8
 	.sdata2     start:0x81695EC0 end:0x81695EF8
 
-libs/MSL/src/PPC_EABI/Math/k_tan.c:
+libs/MSL/src/MSL_Common_Embedded/Math/k_tan.c:
 	.text       start:0x8160C1B8 end:0x8160C410
 	.rodata     start:0x81634008 end:0x81634070
 	.sdata2     start:0x81695EF8 end:0x81695F30
 
-libs/MSL/src/PPC_EABI/Math/s_atan.c:
+libs/MSL/src/MSL_Common_Embedded/Math/s_atan.c:
 	.text       start:0x8160C410 end:0x8160C650
 	.rodata     start:0x81634070 end:0x81634108
 	.sdata2     start:0x81695F30 end:0x81695F58
 
-libs/MSL/src/PPC_EABI/Math/s_ceil.c:
+libs/MSL/src/MSL_Common_Embedded/Math/s_ceil.c:
 	.text       start:0x8160C650 end:0x8160C790
 	.sdata2     start:0x81695F58 end:0x81695F68
 
-libs/MSL/src/PPC_EABI/Math/s_copysign.c:
+libs/MSL/src/MSL_Common_Embedded/Math/s_copysign.c:
 	.text       start:0x8160C790 end:0x8160C7BC
 
-libs/MSL/src/PPC_EABI/Math/s_cos.c:
+libs/MSL/src/MSL_Common_Embedded/Math/s_cos.c:
 	.text       start:0x8160C7BC end:0x8160C890
 	.sdata2     start:0x81695F68 end:0x81695F70
 
-libs/MSL/src/PPC_EABI/Math/s_floor.c:
+libs/MSL/src/MSL_Common_Embedded/Math/s_floor.c:
 	.text       start:0x8160C890 end:0x8160C9D4
 	.sdata2     start:0x81695F70 end:0x81695F80
 
-libs/MSL/src/PPC_EABI/Math/s_frexp.c:
+libs/MSL/src/MSL_Common_Embedded/Math/s_frexp.c:
 	.text       start:0x8160C9D4 end:0x8160CA5C
 	.sdata2     start:0x81695F80 end:0x81695F88
 
-libs/MSL/src/PPC_EABI/Math/s_ldexp.c:
+libs/MSL/src/MSL_Common_Embedded/Math/s_ldexp.c:
 	.text       start:0x8160CA5C end:0x8160CBC8
 	.sdata2     start:0x81695F88 end:0x81695FB0
 
-libs/MSL/src/PPC_EABI/Math/s_sin.c:
+libs/MSL/src/MSL_Common_Embedded/Math/s_sin.c:
 	.text       start:0x8160CBC8 end:0x8160CCA0
 	.sdata2     start:0x81695FB0 end:0x81695FB8
 
-libs/MSL/src/PPC_EABI/Math/s_tan.c:
+libs/MSL/src/MSL_Common_Embedded/Math/s_tan.c:
 	.text       start:0x8160CCA0 end:0x8160CD18
 	.sdata2     start:0x81695FB8 end:0x81695FC0
 
-libs/MSL/src/PPC_EABI/Math/w_acos.c:
+libs/MSL/src/MSL_Common_Embedded/Math/w_acos.c:
 	.text       start:0x8160CD18 end:0x8160CD1C
 
-libs/MSL/src/PPC_EABI/Math/w_asin.c:
+libs/MSL/src/MSL_Common_Embedded/Math/w_asin.c:
 	.text       start:0x8160CD1C end:0x8160CD20
 
-libs/MSL/src/PPC_EABI/Math/w_atan2.c:
+libs/MSL/src/MSL_Common_Embedded/Math/w_atan2.c:
 	.text       start:0x8160CD20 end:0x8160CD24
 
-libs/MSL/src/PPC_EABI/Math/w_exp.c:
+libs/MSL/src/MSL_Common_Embedded/Math/w_exp.c:
 	.text       start:0x8160CD24 end:0x8160CD28
 
-libs/MSL/src/PPC_EABI/Math/w_fmod.c:
+libs/MSL/src/MSL_Common_Embedded/Math/w_fmod.c:
 	.text       start:0x8160CD28 end:0x8160CD2C
 
-libs/MSL/src/PPC_EABI/Math/w_log.c:
+libs/MSL/src/MSL_Common_Embedded/Math/w_log.c:
 	.text       start:0x8160CD2C end:0x8160CD30
 
-libs/MSL/src/PPC_EABI/Math/w_pow.c:
+libs/MSL/src/MSL_Common_Embedded/Math/w_pow.c:
 	.text       start:0x8160CD30 end:0x8160CD34
 
-libs/MSL/src/PPC_EABI/Math/e_sqrt.c:
+libs/MSL/src/MSL_Common_Embedded/Math/e_sqrt.c:
 	.text       start:0x8160CD34 end:0x8160CF7C
 	.sdata2     start:0x81695FC0 end:0x81695FC8
 
-libs/MSL/src/PPC_EABI/Math/math_ppc.c:
+libs/MSL/src/MSL_Common_Embedded/Math/math_ppc.c:
 	.text       start:0x8160CF7C end:0x8160CF80
 
-libs/MSL/src/PPC_EABI/Math/w_sqrt.c:
+libs/MSL/src/MSL_Common_Embedded/Math/w_sqrt.c:
 	.text       start:0x8160CF80 end:0x8160CF84
 
 libs/MetroTRK/src/Portable/msghndlr.c:

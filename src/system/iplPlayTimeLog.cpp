@@ -471,7 +471,7 @@ namespace ipl {
 
         cdbManager->seek(record, 0, CDB_SEEK_BEGIN);
         cdbManager->writeRecord(record, math::VEC2(header->xPos, header->yPos), header->recordType,
-                                header->friendAttr, header->friendType, header->msgType,
+                                header->friendAddr, header->friendType, header->msgType,
                                 (wchar_t*)&buffer[header->titleOffset], bodyText, NULL,
                                 attachData, attachSize, attachType);
 

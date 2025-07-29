@@ -7,51 +7,51 @@
 extern "C" {
 #endif // __cplusplus
 
-void    VFInitEx(void* i_heap_start_address_p, u32 i_size);
+void    VFInitEx(void* heap_start_address, u32 size);
 s32     VFIsAvailable();
 
-VFError VFCreateSystemFileNANDFlashEx(const char* i_sys_file_name_p, u32 i_file_size);
+VFError VFCreateSystemFileNANDFlashEx(const char* sys_file_name, u32 file_size);
 
-VFError VFMountDriveNANDFlash(const char* i_drive, const char* i_sys_file_name_p);
-VFError VFMountDriveNANDFlashEx(const char* i_drive, const char* i_sys_file_name_p);
-VFError VFMountDriveNANDFlashCacheEx(const char* i_drive, const char* i_sys_file_name_p, void* i_cache_address_p, u32 i_cache_size);
+VFError VFMountDriveNANDFlash(const char* drive, const char* sys_file_name);
+VFError VFMountDriveNANDFlashEx(const char* drive, const char* sys_file_name);
+VFError VFMountDriveNANDFlashCacheEx(const char* drive, const char* sys_file_name, void* cache_address, u32 cache_size);
 
-VFError VFMountDriveSDDirectEx(const char* i_drive, u32 i_slot_no, VFEventCallback i_eventCallback);
+VFError VFMountDriveSDDirectEx(const char* drive, u32 slot_no, VFEventCallback eventCallback);
 
-VFError VFUnmountDrive(const char* i_drive);
-VFError VFUnmountDriveForce(const char* i_drive);
+VFError VFUnmountDrive(const char* drive);
+VFError VFUnmountDriveForce(const char* drive);
 
-VFFILE* VFCreateFile(const char* i_path_p, u32 i_attr);
-VFFILE* VFOpenFile(const char* i_path_p, const char* i_mode, u32 i_attr);
-VFError VFCloseFile(VFFILE* i_file_p);
+VFFILE* VFCreateFile(const char* path, u32 attr);
+VFFILE* VFOpenFile(const char* path, const char* mode, u32 attr);
+VFError VFCloseFile(VFFILE* file);
 
-VFError VFSeekFile(VFFILE* i_file_p, s32 i_offset, s32 i_origin);
-VFError VFReadFile(VFFILE* i_file_p, void* o_buf_p, u32 i_size, u32* o_read_size_p);
-VFError VFWriteFile(VFFILE* i_file_p, void* i_buf_p, u32 i_size);
-VFError VFDeleteFile(const char* i_path_p);
+VFError VFSeekFile(VFFILE* file, s32 offset, s32 origin);
+VFError VFReadFile(VFFILE* file, void* buf, u32 size, u32* read_size);
+VFError VFWriteFile(VFFILE* file, const void* buf, u32 size);
+VFError VFDeleteFile(const char* path);
 
-VFError VFCreateDir(const char* i_dir_name_p);
-VFError VFChangeDir(const char* i_dir_name_p);
-VFError VFDeleteDir(const char* i_dir_name_p);
+VFError VFCreateDir(const char* dir_name);
+VFError VFChangeDir(const char* dir_name);
+VFError VFDeleteDir(const char* dir_name);
 
-s32     VFGetFileSizeByFd(VFFILE* i_file_p);
-s32     VFGetOffsetByFd(VFFILE* i_file_p);
+s32     VFGetFileSizeByFd(VFFILE* file);
+s32     VFGetOffsetByFd(VFFILE* file);
 
-VFError VFGetDriveFreeSize(const char* i_drive);
+VFError VFGetDriveFreeSize(const char* drive);
 
-VFError VFFormatDrive(const char* i_drive);
+VFError VFFormatDrive(const char* drive);
 
-VFError VFGetSDDirectStatus(const char* i_drive, u32* o_status_p);
+VFError VFGetSDDirectStatus(const char* drive, u32* status);
 
-VFError VFFileSearchFirst(VFDta* o_dta_p, const char* i_path_p, u8 i_attr);
-VFError VFFileSearchNext(VFDta* o_dta_p);
+VFError VFFileSearchFirst(VFDta* dta, const char* path, u8 attr);
+VFError VFFileSearchNext(VFDta* dta);
 
-VFError VFBuffering(const char* i_drive, s32 i_mode);
+VFError VFBuffering(const char* drive, s32 mode);
 
-VFError VFSync(const char* i_drive, s32 i_mode);
+VFError VFSync(const char* drive, s32 mode);
 
 VFError VFGetLastError();
-VFError VFGetLastDeviceError(const char* i_drive);
+VFError VFGetLastDeviceError(const char* drive);
 char*   VFGetApiErrorString(VFError error);
 
 #ifdef __cplusplus

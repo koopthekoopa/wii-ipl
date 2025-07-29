@@ -1,56 +1,63 @@
-#include <decomp.h>
-
 #include <revolution/nwc24.h>
 
 #include <string.h>
 
-typedef struct ChJumpEntry {
+typedef struct CHJumpBlock {
     u32 offset; // 0x00
     u32 size;   // 0x04
-} ChJumpEntry;
+} CHJumpBlock;
 
-static inline u32* NWC24iGetCHJumpTable(const NWC24CHJumpObj* chjp) {
-    return ((u32*)(chjp->data));
+static const u8* GetCHDataPtr(const NWC24CHJumpObj* chjp) {
+    return (u8*)(chjp->data);
 }
 
-static inline ChJumpEntry* NWC24iGetCHJumpEntry(const u32* table, u32 idx) {
-    return (ChJumpEntry*)(table + (idx * (sizeof(ChJumpEntry) / sizeof(u32))));
+static const CHJumpBlock* GetCHJumpBlock(const u8* table, u32 idx) {
+    return (CHJumpBlock*)(&table[idx * sizeof(CHJumpBlock)]);
 }
 
-static inline u32 NWC24iGetCHJumpTableSize(const NWC24CHJumpObj* chjp) {
-    return (chjp->header.numBlocks * sizeof(ChJumpEntry)) + sizeof(NWC24CHJumpHeader);
+static u32 GetCHJumpBlockTableSize(const NWC24CHJumpObj* chjp) {
+    return (chjp->numBlocks * sizeof(CHJumpBlock)) + NWC24_CHJP_HEADER_SIZE;
 }
 
 NWC24Err NWC24CheckCHJumpObj(const NWC24CHJumpObj* chjp, u32 dataSize) {
-    u32 tableSize;
-    u32 num;
-    u32 i;
-    u32* table = NWC24iGetCHJumpTable(chjp);
+    u32                 blockTblSize;
+    u32                 num;
+    u32                 i;
+    int                 offset;
+    int                 size;
+
+    const CHJumpBlock*  block;
+    const u8*           blockTbl = GetCHDataPtr(chjp);
 
     // Verify magic
-    if (chjp->header.magic != 'ChJp') {
+    if (chjp->magic != NWC24_CHJP_HEADER_MAGIC) {
         return NWC24_ERR_FORMAT;
     }
 
     // Check if the data exceeds the limit provided by `dataSize`
-    if (chjp->header.totalSize > dataSize) {
+    if (chjp->totalSize > dataSize) {
         return NWC24_ERR_OVERFLOW;
     }
 
     // Check the limit of the amount of blocks
-    num = chjp->header.numBlocks;
+    num = chjp->numBlocks;
     if (num == 0 || num > NWC24_MAX_CHJP_BLOCKS) {
         return NWC24_ERR_FORMAT;
     }
 
-    tableSize = NWC24iGetCHJumpTableSize(chjp);
+    blockTblSize = GetCHJumpBlockTableSize(chjp);
     for (i = 0; i < num; i++) {
-        ChJumpEntry* entry = NWC24iGetCHJumpEntry(table, i);
-        int offset = entry->offset;
-        if (offset < tableSize) {
+        block = GetCHJumpBlock(blockTbl, i);
+
+        // Check if block data is not outside of the area
+        offset = block->offset;
+        if (offset < blockTblSize) {
             return NWC24_ERR_FORMAT;
         }
-        if (entry->offset + entry->size > chjp->header.totalSize) {
+    
+        // Check if block does not exceed total CHJump size
+        size = block->size;
+        if (offset + size > chjp->totalSize) {
             return NWC24_ERR_FORMAT;
         }
     }
@@ -59,40 +66,47 @@ NWC24Err NWC24CheckCHJumpObj(const NWC24CHJumpObj* chjp, u32 dataSize) {
 }
 
 NWC24Err NWC24GetCHJumpTitleId(const NWC24CHJumpObj* chjp, u64* titleId) {
-    *titleId = chjp->header.titleId;
+    *titleId = chjp->titleId;
     return NWC24_OK;
 }
 
 NWC24Err NWC24GetCHJumpBlockSize(const NWC24CHJumpObj* chjp, u32* size, u32 index) {
-    u32* table = NWC24iGetCHJumpTable(chjp);
-    ChJumpEntry* entry;
+    const CHJumpBlock*  block;
+    const u8*           blockTbl = GetCHDataPtr(chjp);
 
-    if (chjp->header.numBlocks <= index) {
+    if (chjp->numBlocks <= index) {
         return NWC24_ERR_INVALID_VALUE;
     }
 
-    entry = NWC24iGetCHJumpEntry(table, index);
-    *size = entry->size;
+    block = GetCHJumpBlock(blockTbl, index);
+    *size = block->size;
     
     return NWC24_OK;
 }
 
-NWC24Err NWC24GetCHJumpBlockData(const NWC24CHJumpObj* chjp, char* data, u32 size, u32 index) {
-    u32*  table = NWC24iGetCHJumpTable(chjp);
-    char* srcData;
-    u32   srcSize;
+NWC24Err NWC24GetCHJumpBlockData(const NWC24CHJumpObj* chjp, u8* data, u32 size, u32 index) {
+    const CHJumpBlock*  block;
+    const u8*           blockTbl = GetCHDataPtr(chjp);
 
-    if (chjp->header.numBlocks <= index) {
+    u8* srcData;
+    u32 srcSize;
+
+    if (chjp->numBlocks <= index) {
         return NWC24_ERR_INVALID_VALUE;
     }
 
-    srcData = (char*)(NWC24iGetCHJumpEntry(table, index));
-    srcSize = NWC24iGetCHJumpEntry(table, index)->size;
+    block = GetCHJumpBlock(blockTbl, index);
 
+    // Get block data and size
+    srcData = (u8*)&blockTbl[block->offset];
+    srcSize = block->size;
+
+    // Make sure they do not overflow
     if (srcSize > size) {
         return NWC24_ERR_OVERFLOW;
     }
 
+    // Copy block data to arguments
     memcpy(data, srcData, srcSize);
     if (srcSize < size) {
         memset(&data[srcSize], 0, size - srcSize);

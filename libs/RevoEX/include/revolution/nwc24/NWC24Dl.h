@@ -9,8 +9,32 @@
 extern "C" {
 #endif
 
-#define NWC24_DL_TASK_MAX 120
-#define NWC24_DL_SUBTASK_MAX 32
+#define NWC24_DL_TASK_MAX       120
+#define NWC24_DL_SUBTASK_MAX    32
+
+typedef u16 NWC24DLTaskId;
+
+typedef enum NWC24DLError {
+    DL24ERR_MESS_00,
+    DL24ERR_MESS_01,
+    DL24ERR_MESS_02,
+    DL24ERR_MESS_03,
+    DL24ERR_MESS_04,
+    DL24ERR_MESS_05,
+    DL24ERR_MESS_06,
+    DL24ERR_MESS_07,
+    DL24ERR_MESS_08,
+    DL24ERR_MESS_09,
+    DL24ERR_MESS_10,
+    DL24ERR_MESS_11,
+    DL24ERR_MESS_12,
+    DL24WAR_MESS_01,
+    NANDERR_MESS_01,
+    NANDERR_MESS_02,
+    NANDERR_MESS_03,
+
+    DL24ERR_MESS_MAX
+} NWC24DLError;
 
 typedef enum NWC24DLStep {
     DL24STEP_NULL = 0,
@@ -37,7 +61,7 @@ typedef enum {
     NWC24_DLTYPE_OCTETSTREAM_V1,
     NWC24_DLTYPE_MULTIPART_V2,
     NWC24_DLTYPE_OCTETSTREAM_V2
-} NWC24DlType;
+} NWC24DLType;
 
 typedef enum {
     NWC24_DL_STTYPE_NONE,
@@ -45,24 +69,56 @@ typedef enum {
     NWC24_DL_STTYPE_TIME_HOUR,
     NWC24_DL_STTYPE_TIME_DAYOFWEEK,
     NWC24_DL_STTYPE_TIME_DAY
-} NWC24DlSubTaskType;
+} NWC24DLSubTaskType;
 
-typedef enum {
+typedef enum  {
     NWC24_DL_STFLAG_TRAILING_FILENAME = (1 << 0),
     NWC24_DL_STFLAG_TRAILING_URL = (1 << 1),
     NWC24_DL_STFLAG_INTELLIGENT_UPDATE = (1 << 8),
     NWC24_DL_STFLAG_RETICENT_UPDATE = (1 << 9)
-} NWC24DlSubTaskFlags;
+} NWC24DLSubTaskFlags;
 
 typedef struct NWC24DlTask {
     u8  data[512];  // 0x00
 } NWC24DlTask;
 
-NWC24Err    NWC24CheckDlTask(NWC24DlTask* dlTask);
-NWC24Err    NWC24DeleteDlTaskForced(NWC24DlTask* dlTask);
-NWC24Err    NWC24GetDlTask(NWC24DlTask* dlTask, u16 id);
+typedef struct NWC24DlIterateWork {
+    int unk_0x00;
+    int unk_0x04;
+    int unk_0x08;
+    int unk_0x0C;
+    int unk_0x10;
+    int unk_0x14;
+} NWC24DlIterateWork;
 
-NWC24Err    NWC24IterateDlTask(u16* id, BOOL begin);
+NWC24Err    NWC24InitDlTask(NWC24DlTask* dlTask, NWC24DLType dlType);
+
+NWC24Err    NWC24SetDlId(NWC24DlTask* dlTask, NWC24DLTaskId dlTaskId);
+NWC24Err    NWC24SetDlPriority(NWC24DlTask* dlTask, u8 dlPrio);
+NWC24Err    NWC24SetDlInterval(NWC24DlTask* dlTask, u16 dlInterval);
+NWC24Err    NWC24SetDlUrl(NWC24DlTask* dlTask, const char* dlUrl);
+NWC24Err    NWC24SetDlFlags(NWC24DlTask* dlTask, u32 dlFlags);
+
+NWC24Err    NWC24GetDlAppId(NWC24DlTask* dlTask, u32* dlAppId);
+
+NWC24Err    NWC24DumpDlTask(NWC24DlTask* dlTask);
+
+NWC24Err    NWC24IterateDlTask(NWC24DLTaskId* dlTaskId, BOOL begin);
+NWC24Err    NWC24IterateDlTaskEx(NWC24DlIterateWork* dlIterateWork, NWC24DLTaskId* dlTaskId);
+
+NWC24Err    NWC24UpdateDlTask(NWC24DlTask* dlTask);
+
+NWC24Err    NWC24DeleteDlTask(NWC24DlTask* dlTask);
+NWC24Err    NWC24AddDlTask(NWC24DlTask* dlTask);
+
+NWC24Err    NWC24GetDlTask(NWC24DlTask* dlTask, NWC24DLTaskId dlTaskId);
+
+NWC24Err    NWC24PurgeOldestDlTask();
+NWC24Err    NWC24ManageDlTaskListForMenu();
+
+NWC24Err    NWC24ExtendDlTaskList(u32 num);
+
+NWC24Err    NWC24GetDlOptOutFlags(NWC24DlTask* dlTask, u8* dlOptOutFlags);
 
 #ifdef __cplusplus
 }

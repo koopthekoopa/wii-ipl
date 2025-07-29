@@ -258,7 +258,7 @@ enum {
     ES_ERR_BAD_SYSMENU_TICKET   = -1036,
     ES_ERR_BAD_SYSMENU_CONTENTS = -1037,
 
-    ES_ERR_NO_DISC_NAND_TMD      = -1039,
+    ES_ERR_NO_DISC_NAND_TMD     = -1039,
 };
 
 #ifdef __cplusplus

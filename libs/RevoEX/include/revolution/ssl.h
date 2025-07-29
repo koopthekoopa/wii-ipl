@@ -27,21 +27,21 @@ typedef int SSLId;
 
 #define SSL_SERVER_NAME_LENGTH  256
 
-SSLId       SSLNew(u32 i_verifyOption, const char* i_serverName);
+SSLId       SSLNew(u32 verifyOption, const char* serverName);
 
-SSLResult   SSLConnect(SSLId i_sslId, int i_socket);
-SSLResult   SSLDoHandshake(SSLId i_sslId);
+SSLResult   SSLConnect(SSLId sslId, int socket);
+SSLResult   SSLDoHandshake(SSLId sslId);
 
-SSLResult   SSLRead(SSLId i_sslId, char* o_buf, u32 i_bufSize);
-SSLResult   SSLWrite(SSLId i_sslId, const char* i_buf, u32 i_bufSize);
+SSLResult   SSLRead(SSLId sslId, char* buf, u32 bufSize);
+SSLResult   SSLWrite(SSLId sslId, const char* buf, u32 bufSize);
 
-SSLResult   SSLShutdown(SSLId i_sslId);
+SSLResult   SSLShutdown(SSLId sslId);
 
-SSLResult   SSLSetClientCert(SSLId i_sslId, const char* i_clientCertData, u32 i_clientCertSize, const char* i_privateKeyData, u32 i_privateKeySize);
-SSLResult   SSLSetRootCA(SSLId i_sslId, const char* i_rootCAData, u32 i_rootCASize);
+SSLResult   SSLSetClientCert(SSLId sslId, const char* clientCertData, u32 clientCertSize, const char* privateKeyData, u32 privateKeySize);
+SSLResult   SSLSetRootCA(SSLId sslId, const char* rootCAData, u32 rootCASize);
 
-SSLResult   SSLSetBuiltinRootCA(SSLId i_sslId, u32 i_rootCAId);
-SSLResult   SSLSetBuiltinClientCert(SSLId i_sslId, u32 i_clientCertId);
+SSLResult   SSLSetBuiltinRootCA(SSLId sslId, u32 rootCAId);
+SSLResult   SSLSetBuiltinClientCert(SSLId sslId, u32 clientCertId);
 
 #ifdef __cplusplus
 }

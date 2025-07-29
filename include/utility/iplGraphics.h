@@ -2,7 +2,7 @@
 #define IPL_GRAPHICS_H
 
 #include <revolution/types.h>
-#include <revolution/gx/GXEnum.h>
+#include <revolution/gx/GXStruct.h>
 
 #include <nw4r/math/types.h>
 #include <nw4r/ut/Rect.h>

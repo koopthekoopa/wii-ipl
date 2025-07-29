@@ -18,7 +18,7 @@ namespace ipl {
                 
                 void        initMsgObj(NWC24MsgObj* msgObj, NWC24MsgType msgType);
                 void        setMsgToId(NWC24MsgObj* msgObj, u64 id);
-                void        setMsgToAddr(NWC24MsgObj* msgObj, const char* unk0, u32 unk1);
+                void        setMsgToAddr(NWC24MsgObj* msgObj, const char* addr, u32 addrLen);
                 void        setMsgText(NWC24MsgObj* msgObj, const char* text, u32 textLen, NWC24Charset charset, NWC24Encoding encoding);
                 void        setMsgSubjectAndTextPublic(NWC24MsgObj* msgObj, const u16* subject, u32 subjectLen, const u16* text, u32 textLen, u8* work, u32 workSize);
                 void        setMsgMBNoReply(NWC24MsgObj* msgObj, BOOL bNoReply);
