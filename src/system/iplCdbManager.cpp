@@ -40,15 +40,15 @@ namespace ipl {
             error_handling(err, 77);
         }
 
-        BOOL Manager::createNewRecord(const char* strType, const char* fileType, const OSCalendarTime* dateTime, u32* gameCode, u16* makerCode, 
-        const math::VEC2& boardPos, u32 recordType, const NWC24FriendAddr& friendAddr, u16 friendType, u16 msgType, 
+        BOOL Manager::createNewRecord(const char* recordName, const char* recordFileType, const OSCalendarTime* dateTime, u32* gameCode, u16* makerCode, 
+        const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& friendAddr, u16 friendType, u16 replyFlag, 
         const wchar_t* titleText, const wchar_t* bodyText, const void* faceData, 
         const void** attachData, u32* attachSize, RBRAttachmentType* attachType) {
             BOOL result = FALSE;
             u32 bufferSize = 0;
 
             // Create RBR buffer
-            u8* buffer = makeBuffer(boardPos, recordType, friendAddr, friendType, msgType, 
+            u8* buffer = makeBuffer(recordPos, recordFlags, friendAddr, friendType, replyFlag, 
                                     titleText, bodyText, faceData, 
                                     attachData, attachSize, attachType, 
                                     &bufferSize);
@@ -56,7 +56,7 @@ namespace ipl {
             // Create record with RBR buffer
             if (buffer != NULL) {
                 CDBRecord dummyRecord;
-                result = createAtOnce(&dummyRecord, strType, fileType, gameCode, makerCode, dateTime, buffer, bufferSize);
+                result = createAtOnce(&dummyRecord, recordName, recordFileType, gameCode, makerCode, dateTime, buffer, bufferSize);
                 delete[] buffer;
             }
 
@@ -65,7 +65,7 @@ namespace ipl {
             return result;
         }
 
-        BOOL Manager::writeRecord(CDBRecord* record, const math::VEC2& boardPos, u32 recordType, const NWC24FriendAddr& friendAddr, u16 friendType, u16 msgType,
+        BOOL Manager::writeRecord(CDBRecord* record, const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& friendAddr, u16 friendType, u16 replyFlag,
         const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
         const void** attachData, u32* attachSize, RBRAttachmentType* attachType) {
             RBRHeader   rbrHeader;
@@ -82,13 +82,13 @@ namespace ipl {
 
             // Set header
             rbrHeader.magic = RBR_MAGIC;
-            rbrHeader.xPos = boardPos.x;
-            rbrHeader.yPos = boardPos.y;
-            rbrHeader.recordType = (RBRRecordType)recordType;
+            rbrHeader.xPos = recordPos.x;
+            rbrHeader.yPos = recordPos.y;
+            rbrHeader.flags = recordFlags;
             rbrHeader.time = OSGetTime();
             rbrHeader.friendAddr = friendAddr;
             rbrHeader.friendType = friendType;
-            rbrHeader.msgType = msgType;
+            rbrHeader.replyFlag = replyFlag;
 
             // Set offset after header
             rbrCurOffset = sizeof(RBRHeader);
@@ -134,7 +134,7 @@ namespace ipl {
             // The current offset is the size of the board record
             rbrSize = rbrCurOffset;
 
-            u8* buffer = new (System::getCdbHeap(), BUFFER_HEAP) u8[rbrSize];
+            u8* buffer = new (System::getMailWorkHeap(), BUFFER_HEAP) u8[rbrSize];
 
             if (buffer != NULL) {
                 u8* rbrBuffer = &buffer[0];
@@ -179,7 +179,7 @@ namespace ipl {
             return result;
         }
 
-        u8* Manager::makeBuffer(const math::VEC2& boardPos, u32 recordType, const NWC24FriendAddr& friendAddr, u16 friendType, u16 msgType,
+        u8* Manager::makeBuffer(const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& friendAddr, u16 friendType, u16 replyFlag,
         const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
         const void** attachData, u32* attachSize, RBRAttachmentType* attachType,
         u32* bufferSize) {
@@ -195,13 +195,13 @@ namespace ipl {
 
             // Set header
             rbrHeader.magic = RBR_MAGIC;
-            rbrHeader.xPos = boardPos.x;
-            rbrHeader.yPos = boardPos.y;
-            rbrHeader.recordType = (RBRRecordType)recordType;
+            rbrHeader.xPos = recordPos.x;
+            rbrHeader.yPos = recordPos.y;
+            rbrHeader.flags = recordFlags;
             rbrHeader.time = OSGetTime();
             rbrHeader.friendAddr = friendAddr;
             rbrHeader.friendType = friendType;
-            rbrHeader.msgType = msgType;
+            rbrHeader.replyFlag = replyFlag;
 
             // Set offset after header
             rbrCurOffset = sizeof(RBRHeader);
@@ -250,7 +250,7 @@ namespace ipl {
             // Add up the board record size with the record attribute to add up the total buffer size
             *bufferSize = rbrSize + CDB_RECORD_BUFFER_SIZE;
 
-            u8* buffer = new (System::getCdbHeap(), BUFFER_HEAP) u8[rbrSize + CDB_RECORD_BUFFER_SIZE];
+            u8* buffer = new (System::getMailWorkHeap(), BUFFER_HEAP) u8[rbrSize + CDB_RECORD_BUFFER_SIZE];
 
             if (buffer == NULL) {
                 return NULL;
@@ -345,14 +345,14 @@ namespace ipl {
             return ((mCDBFreeSize * 100) / 0x1400000) > 50;
         }
 
-        BOOL Manager::createAtOnce(CDBRecord* record, const char* strType, const char* fileType, 
+        BOOL Manager::createAtOnce(CDBRecord* record, const char* recordName, const char* recordFileType, 
         u32* gameCode, u16* makerCode, const OSCalendarTime* dateTime, u8* buffer, u32 bufferSize) {
             utility::autoMutexLock lock(mMutex);
 
             CDBErr err;
 
-            char makerCodeStr[3]="";
-            char gameCodeStr[5]="";
+            char makerCodeStr[sizeof(u16)+1]="";
+            char gameCodeStr[sizeof(u32)+1]="";
 
             if (makerCode != NULL) {
                 char* pMCStr = (char*)makerCode;
@@ -370,22 +370,22 @@ namespace ipl {
 
             if (dateTime == NULL) {
                 if (gameCode != NULL && makerCode != NULL) {
-                    err = CDBDatabasePrivateCreateRecordAtOnce(&mDatabase, record, strType, fileType,
+                    err = CDBDatabasePrivateCreateRecordAtOnce(&mDatabase, record, recordName, recordFileType,
                                                             buffer, bufferSize, makerCodeStr, gameCodeStr);
                 }
                 else {
-                    err = CDBDatabaseCreateRecordAtOnce(&mDatabase, record, strType, fileType, buffer, bufferSize);
+                    err = CDBDatabaseCreateRecordAtOnce(&mDatabase, record, recordName, recordFileType, buffer, bufferSize);
                 }
             }
             else {
                 if (gameCode != NULL && makerCode != NULL) {
-                    err = CDBDatabasePrivateCreateRecordAtOnceEx(&mDatabase, record, strType, fileType,
+                    err = CDBDatabasePrivateCreateRecordAtOnceEx(&mDatabase, record, recordName, recordFileType,
                                                                 dateTime->year, dateTime->mon, dateTime->mday,
                                                                 dateTime->hour, dateTime->min, dateTime->sec,
                                                                 buffer, bufferSize, makerCodeStr, gameCodeStr);
                 }
                 else {
-                    err = CDBDatabaseCreateRecordAtOnceEx(&mDatabase, record, strType, fileType,
+                    err = CDBDatabaseCreateRecordAtOnceEx(&mDatabase, record, recordName, recordFileType,
                                                             buffer, bufferSize,
                                                             dateTime->year, dateTime->mon, dateTime->mday,
                                                             dateTime->hour, dateTime->min, dateTime->sec);
@@ -556,6 +556,7 @@ namespace ipl {
                     }
                     break;
                 }
+                // to generate jumptable
                 case CDB_ERROR_1:
                 case CDB_ERROR_2:
                 case CDB_ERROR_3:

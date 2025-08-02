@@ -11,16 +11,15 @@ extern "C" {
 #endif
 
 typedef struct {
-    u8  data[76]; // 0x00
+    u8  data[77]; // 0x00
 } RFLiNWC24MsgWork;
 
+BOOL        RFLiNWC24Msg2CharData(RFLiCharData* rawdata, const NWC24MsgObj* obj);
 RFLErrcode  RFLiNWC24Msg2HiddenAsync(const NWC24MsgObj* obj);
-RFLErrcode  RFLiMakeNWC24MsgforExchange(const NWC24MsgObj* obj, RFLiNWC24MsgWork* work);
+RFLErrcode  RFLiMakeNWC24MsgforExchange(const NWC24MsgObj* obj, RFLiCharData* work);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif // RFL_INTERVAL_NWC24_H
-
-

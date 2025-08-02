@@ -70,7 +70,7 @@ u32     __OSCoreClock                   ADDRESS(OS_BASE_CACHED + OS_ADDR_CPU_CLO
 
 #define OSDiffTick(tick1, tick0)        ((s32)(tick1) - (s32)(tick0))
 
-#define OSSleepSeconds(sec)             OSSleepTicks(OSSecondsToTicks((OSTime)s))
+#define OSSleepSeconds(s)               OSSleepTicks(OSSecondsToTicks((OSTime)s))
 #define OSSleepMilliseconds(ms)         OSSleepTicks(OSMillisecondsToTicks((OSTime)ms))
 #define OSSleepMicroseconds(us)         OSSleepTicks(OSMicrosecondsToTicks((OSTime)us))
 #define OSSleepNanoseconds(ns)          OSSleepTicks(OSNanosecondsToTicks((OSTime)ns))

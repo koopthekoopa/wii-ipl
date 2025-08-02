@@ -7,7 +7,7 @@ namespace ipl {
     namespace utility {
         class autoMutexLock {
             public:
-                autoMutexLock(OSMutex& lockObj) : mLockObj(lockObj) {
+                autoMutexLock(OSMutex& lockObj, bool tryLock = false) : mLockObj(lockObj) {
                     OSLockMutex(&lockObj);
                 }
                 ~autoMutexLock() {

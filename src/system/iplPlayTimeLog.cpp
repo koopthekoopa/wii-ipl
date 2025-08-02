@@ -173,7 +173,7 @@ namespace ipl {
     }
 
     wchar_t* PlayTimeLog::create_text(const EventBuffer* event) {
-        wchar_t* string = new(System::getCdbHeap(), CLASS_HEAP) wchar_t[STRINGBUF_LIMIT];
+        wchar_t* string = new(System::getMailWorkHeap(), CLASS_HEAP) wchar_t[STRINGBUF_LIMIT];
         memset(string, 0, STRINGBUF_LIMIT * sizeof(wchar_t));
 
         // Create log buffer
@@ -346,7 +346,7 @@ namespace ipl {
         const wchar_t*  bodyText = create_text(event);
         const wchar_t*  titleText = System::getMessage(MESG_PLAY_TIME_TITLE);
 
-        math::VEC2      boardPos(0, 0);
+        math::VEC2      recordPos(0, 0);
 
         const void* attachData[RBR_ATTACHMENT_MAX] = {
             (void*)event,
@@ -366,9 +366,18 @@ namespace ipl {
         NWC24FriendAddr friendAddr;
         memset(&friendAddr, 0, sizeof(NWC24FriendAddr));
 
-        cdbManager->createNewRecord("playtimelog", RBRFileType_Log,
-                                    &mDateTime, NULL, NULL, boardPos, RBRRecordType_PlayTimeLog,
-                                    friendAddr, NWC24_FRIENDTYPE_NONE, NWC24_MSGTYPE_RVL, titleText, bodyText, NULL,
+        cdbManager->createNewRecord("playtimelog",
+                                    RBRFileType_Log,
+                                    &mDateTime,
+                                    NULL,
+                                    NULL,
+                                    recordPos,
+                                    RBR_MAKE_RECORDFLAGS(RBRRecordType_PlayTimeLog, FALSE),
+                                    friendAddr,
+                                    NWC24_FRIENDTYPE_NONE,
+                                    RBRReplyFlag_NotAvailable,
+                                    titleText, bodyText,
+                                    NULL,
                                     attachData, attachSize, attachType);
 
         delete[] bodyText;
@@ -439,7 +448,7 @@ namespace ipl {
             u32 recordSize;
             cdbManager->getDataSize(record, &recordSize);
 
-            buffer = new (System::getCdbHeap(), CLASS_HEAP) u8[recordSize];
+            buffer = new (System::getMailWorkHeap(), CLASS_HEAP) u8[recordSize];
             cdbManager->read(record, buffer, recordSize);
 
             RBRHeader* header = (RBRHeader*)buffer;
@@ -470,9 +479,14 @@ namespace ipl {
         RBRHeader*          header = (RBRHeader*)buffer;
 
         cdbManager->seek(record, 0, CDB_SEEK_BEGIN);
-        cdbManager->writeRecord(record, math::VEC2(header->xPos, header->yPos), header->recordType,
-                                header->friendAddr, header->friendType, header->msgType,
-                                (wchar_t*)&buffer[header->titleOffset], bodyText, NULL,
+        cdbManager->writeRecord(record, math::VEC2(header->xPos, header->yPos),
+                                header->flags,
+                                header->friendAddr,
+                                header->friendType,
+                                header->replyFlag,
+                                (wchar_t*)&buffer[header->titleOffset],
+                                bodyText,
+                                NULL,
                                 attachData, attachSize, attachType);
 
         delete[] bodyText;

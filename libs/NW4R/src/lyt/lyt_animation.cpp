@@ -100,10 +100,10 @@ namespace {
         f32 t1t1t1t2t2t2 = t1t1t1t2t2 * t2;
 
         // oh god
-        return v0 * ((2.0f * t1t1t1t2t2t2) - (3.0f * t1t1t2t2) + 1.0f)
-             + v1 * ((-2.0f * t1t1t1t2t2t2) + (3.0f * t1t1t2t2)     )
-             + s0 * ((      t1t1t1t2t2)  - (2.0f * t1t1t2) + t1)
-             + s1 * ((      t1t1t1t2t2)  - (    t1t1t2 )     );
+        return v0 * (( 2.0f * t1t1t1t2t2t2) - (3.0f * t1t1t2t2) + 1.0f)
+             + v1 * ((-2.0f * t1t1t1t2t2t2) + (3.0f * t1t1t2t2)       )
+             + s0 * ((        t1t1t1t2t2)   - (2.0f * t1t1t2  ) + t1  )
+             + s1 * ((        t1t1t1t2t2)   - (       t1t1t2  )       );
     }
 
     void AnimatePainSRT(Pane* pane, const res::AnimationInfo* animInfo, const u32* animTargetOffsets, f32 frame) {

@@ -52,19 +52,19 @@ typedef struct NWC24SecretFriendInfo {
 
 
 NWC24Err    NWC24ReadFriendInfo(NWC24FriendInfo* info, u32 index);
-NWC24Err    NWC24WriteFriendInfo(NWC24FriendInfo* friendInfo, u32 index);
+NWC24Err    NWC24WriteFriendInfo(const NWC24FriendInfo* friendInfo, u32 index);
 NWC24Err    NWC24DeleteFriendInfo(u32 index);
-NWC24Err    NWC24UpdateFriendInfo(NWC24FriendInfo* friendInfo, u32 index);
+NWC24Err    NWC24UpdateFriendInfo(const NWC24FriendInfo* friendInfo, u32 index);
 NWC24Err    NWC24SwapFriendInfos(u32 index1, u32 index2);
 NWC24Err    NWC24SearchFriendInfoById(NWC24UserId id, u32* index);
-NWC24Err    NWC24SearchFriendInfoByAddr(NWC24FriendAddr* addr, u32* index);
+NWC24Err    NWC24SearchFriendInfoByAddr(const NWC24FriendAddr* addr, u32* index);
 NWC24Err    NWC24GetNumFriendInfos(u32* numFriendInfo);
 NWC24Err    NWC24GetNumRegFriendInfos(u32* numRegFriendInfo);
 
 BOOL        NWC24IsFriendInfoThere(u32 index); // This also returns NWC24Err
 
 NWC24Err    NWC24CheckPublicMailAddr(const char* addr);
-NWC24Err    NWC24CheckFriendInfo(NWC24FriendInfo* friendInfo);
+NWC24Err    NWC24CheckFriendInfo(const NWC24FriendInfo* friendInfo);
 
 #ifdef __cplusplus
 }

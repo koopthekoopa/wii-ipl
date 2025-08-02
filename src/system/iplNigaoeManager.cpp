@@ -112,14 +112,14 @@ namespace ipl {
         }
 
         void Manager::commitHiddenDB() {
-            nwc24::Manager*     nwc24Mgr = System::getNwc24Manager();
+            nwc24::Manager* nwc24Mgr = System::getNwc24Manager();
             
-            RFLiNWC24MsgWork    work;
-            NWC24MsgObj         msgObj;
+            RFLiCharData    charData;
+            NWC24MsgObj     msgObj;
 
             if (nwc24Mgr) {
                 if (nwc24Mgr->open()) {
-                    if (RFLiMakeNWC24MsgforExchange(&msgObj, &work) == RFLErrcode_Success) {
+                    if (RFLiMakeNWC24MsgforExchange(&msgObj, &charData) == RFLErrcode_Success) {
                         nwc24Mgr->setMsgAppId(&msgObj, ES_TITLE_ID(TITLE_NIGAOE_ALL));
                         nwc24Mgr->commitMsg(&msgObj);
                     }

@@ -123,6 +123,9 @@ namespace ipl {
     }
 
     void ErrorHandler::log(const char* type, int result, const char* file, int line) {
+    #ifdef NAND_LOG_TO_OSREPORT
+        OSReport("ErrorHandler::log(%s error. [%d] %s line: %d)\n", type, result, file, line);
+    #endif
         NANDLoggingAddMessageAsync(NULL, "%s error. [%d] %s line: %d", type, result, file, line);
     }
 

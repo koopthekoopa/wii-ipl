@@ -63,7 +63,7 @@ static NWC24Err SetUnkFlag2(int flag) {
     return NWC24_OK;
 }
 
-static NWC24Err ConvAddrToCheckValue(NWC24FriendAddr* addr, NWC24UserId* value) {
+static NWC24Err ConvAddrToCheckValue(const NWC24FriendAddr* addr, NWC24UserId* value) {
     int i;
     int strLen;
 
@@ -105,7 +105,7 @@ NWC24Err NWC24ReadFriendInfo(NWC24FriendInfo* info, u32 index) {
     return NWC24_OK;
 }
 
-NWC24Err NWC24WriteFriendInfo(NWC24FriendInfo* friendInfo, u32 index) {
+NWC24Err NWC24WriteFriendInfo(const NWC24FriendInfo* friendInfo, u32 index) {
     NWC24Err            result;
     NWC24Err            resultFile;
 
@@ -183,7 +183,7 @@ NWC24Err NWC24WriteFriendInfo(NWC24FriendInfo* friendInfo, u32 index) {
         }
 
         header->friendIds[index] = friendValue;
-        tmpFriendAddr = &friendInfo->addr;
+        tmpFriendAddr = (NWC24FriendAddr*)&friendInfo->addr;
     }
 
     SetUnkFlag2(1);
@@ -277,7 +277,7 @@ NWC24Err NWC24DeleteFriendInfo(u32 index) {
     return result;
 }
 
-NWC24Err NWC24UpdateFriendInfo(NWC24FriendInfo* friendInfo, u32 index) {
+NWC24Err NWC24UpdateFriendInfo(const NWC24FriendInfo* friendInfo, u32 index) {
     NWC24Err            result;
     NWC24Err            resultFile;
 
@@ -475,7 +475,7 @@ NWC24Err NWC24SearchFriendInfoById(NWC24UserId id, u32* index) {
     return NWC24_ERR_NOT_FOUND;
 }
 
-NWC24Err NWC24SearchFriendInfoByAddr(NWC24FriendAddr* addr, u32* index) {
+NWC24Err NWC24SearchFriendInfoByAddr(const NWC24FriendAddr* addr, u32* index) {
     NWC24Err            result;
 
     NWC24FLHeader*      header;
@@ -755,7 +755,7 @@ static NWC24Err GetCachedFLHeader(NWC24FLHeader** header) {
 // Supposed to be a static declaration in NWC24CheckPublicMailAddr but VF's LTO just had to make it global.
 const char g_SpecialsChars[11] = { '(', ')', '<', '>', '[', ']', ':', ';', '\\', ',', '"' };
 
-NWC24Err NWC24CheckFriendInfo(NWC24FriendInfo* friendInfo) {
+NWC24Err NWC24CheckFriendInfo(const NWC24FriendInfo* friendInfo) {
     NWC24Err result;
 
     if (friendInfo == NULL) {

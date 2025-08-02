@@ -12,7 +12,7 @@ extern "C" {
 #define NWC24_DL_TASK_MAX       120
 #define NWC24_DL_SUBTASK_MAX    32
 
-typedef u16 NWC24DLTaskId;
+typedef u16 NWC24DlId;
 
 typedef enum NWC24DLError {
     DL24ERR_MESS_00,
@@ -39,7 +39,7 @@ typedef enum NWC24DLError {
 typedef enum NWC24DLStep {
     DL24STEP_NULL = 0,
     DL24STEP_FIRST,
-    DL24STEP_FIRST_WAIT ,
+    DL24STEP_FIRST_WAIT,
     DL24STEP_INIT,
     DL24STEP_OPEN,
     DL24STEP_CHECK,
@@ -93,25 +93,25 @@ typedef struct NWC24DlIterateWork {
 
 NWC24Err    NWC24InitDlTask(NWC24DlTask* dlTask, NWC24DLType dlType);
 
-NWC24Err    NWC24SetDlId(NWC24DlTask* dlTask, NWC24DLTaskId dlTaskId);
+NWC24Err    NWC24SetDlId(NWC24DlTask* dlTask, NWC24DlId dlId);
 NWC24Err    NWC24SetDlPriority(NWC24DlTask* dlTask, u8 dlPrio);
 NWC24Err    NWC24SetDlInterval(NWC24DlTask* dlTask, u16 dlInterval);
 NWC24Err    NWC24SetDlUrl(NWC24DlTask* dlTask, const char* dlUrl);
 NWC24Err    NWC24SetDlFlags(NWC24DlTask* dlTask, u32 dlFlags);
 
-NWC24Err    NWC24GetDlAppId(NWC24DlTask* dlTask, u32* dlAppId);
+NWC24Err    NWC24GetDlAppId(const NWC24DlTask* dlTask, u32* dlAppId);
 
 NWC24Err    NWC24DumpDlTask(NWC24DlTask* dlTask);
 
-NWC24Err    NWC24IterateDlTask(NWC24DLTaskId* dlTaskId, BOOL begin);
-NWC24Err    NWC24IterateDlTaskEx(NWC24DlIterateWork* dlIterateWork, NWC24DLTaskId* dlTaskId);
+NWC24Err    NWC24IterateDlTask(NWC24DlId* dlIterateId, BOOL begin);
+NWC24Err    NWC24IterateDlTaskEx(NWC24DlIterateWork* dlIterateWork, NWC24DlId* dlIterateId);
 
 NWC24Err    NWC24UpdateDlTask(NWC24DlTask* dlTask);
 
 NWC24Err    NWC24DeleteDlTask(NWC24DlTask* dlTask);
 NWC24Err    NWC24AddDlTask(NWC24DlTask* dlTask);
 
-NWC24Err    NWC24GetDlTask(NWC24DlTask* dlTask, NWC24DLTaskId dlTaskId);
+NWC24Err    NWC24GetDlTask(NWC24DlTask* dlTask, NWC24DlId dlId);
 
 NWC24Err    NWC24PurgeOldestDlTask();
 NWC24Err    NWC24ManageDlTaskListForMenu();

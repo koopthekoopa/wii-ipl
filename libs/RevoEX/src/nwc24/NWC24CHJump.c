@@ -7,11 +7,11 @@ typedef struct CHJumpBlock {
     u32 size;   // 0x04
 } CHJumpBlock;
 
-static const u8* GetCHDataPtr(const NWC24CHJumpObj* chjp) {
-    return (u8*)(chjp->data);
+static const char* GetCHDataPtr(const NWC24CHJumpObj* chjp) {
+    return (char*)(chjp->data);
 }
 
-static const CHJumpBlock* GetCHJumpBlock(const u8* table, u32 idx) {
+static const CHJumpBlock* GetCHJumpBlock(const char* table, u32 idx) {
     return (CHJumpBlock*)(&table[idx * sizeof(CHJumpBlock)]);
 }
 
@@ -27,7 +27,7 @@ NWC24Err NWC24CheckCHJumpObj(const NWC24CHJumpObj* chjp, u32 dataSize) {
     int                 size;
 
     const CHJumpBlock*  block;
-    const u8*           blockTbl = GetCHDataPtr(chjp);
+    const char*           blockTbl = GetCHDataPtr(chjp);
 
     // Verify magic
     if (chjp->magic != NWC24_CHJP_HEADER_MAGIC) {
@@ -72,7 +72,7 @@ NWC24Err NWC24GetCHJumpTitleId(const NWC24CHJumpObj* chjp, u64* titleId) {
 
 NWC24Err NWC24GetCHJumpBlockSize(const NWC24CHJumpObj* chjp, u32* size, u32 index) {
     const CHJumpBlock*  block;
-    const u8*           blockTbl = GetCHDataPtr(chjp);
+    const char*           blockTbl = GetCHDataPtr(chjp);
 
     if (chjp->numBlocks <= index) {
         return NWC24_ERR_INVALID_VALUE;
@@ -84,11 +84,11 @@ NWC24Err NWC24GetCHJumpBlockSize(const NWC24CHJumpObj* chjp, u32* size, u32 inde
     return NWC24_OK;
 }
 
-NWC24Err NWC24GetCHJumpBlockData(const NWC24CHJumpObj* chjp, u8* data, u32 size, u32 index) {
+NWC24Err NWC24GetCHJumpBlockData(const NWC24CHJumpObj* chjp, char* data, u32 size, u32 index) {
     const CHJumpBlock*  block;
-    const u8*           blockTbl = GetCHDataPtr(chjp);
+    const char*         blockTbl = GetCHDataPtr(chjp);
 
-    u8* srcData;
+    char* srcData;
     u32 srcSize;
 
     if (chjp->numBlocks <= index) {
@@ -98,7 +98,7 @@ NWC24Err NWC24GetCHJumpBlockData(const NWC24CHJumpObj* chjp, u8* data, u32 size,
     block = GetCHJumpBlock(blockTbl, index);
 
     // Get block data and size
-    srcData = (u8*)&blockTbl[block->offset];
+    srcData = (char*)&blockTbl[block->offset];
     srcSize = block->size;
 
     // Make sure they do not overflow

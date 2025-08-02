@@ -22,23 +22,22 @@ namespace ipl {
 
                 void    closeDatabase();
 
-                BOOL    createNewRecord(const char* riplType, const char* rbrFileType, const OSCalendarTime* dateTime, u32* gameCode, u16* makerCode,
-                                        const math::VEC2& rbrPos, u32 recordType, const NWC24FriendAddr& friendAddr, u16 unk, u16 nwc24Type,
-                                        const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
+                BOOL    createNewRecord(const char* recordName, const char* recordFileType, const OSCalendarTime* dateTime, u32* gameCode, u16* makerCode, 
+                                        const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& friendAddr, u16 friendType, u16 replyFlag, 
+                                        const wchar_t* titleText, const wchar_t* bodyText, const void* faceData, 
                                         const void** attachData, u32* attachSize, RBRAttachmentType* attachType);
 
-                u8*     makeBuffer(const math::VEC2& rbrPos, u32 recordType, const NWC24FriendAddr& friendAddr, u16 unk, u16 nwc24Type,
-                                const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
-                                const void** attachData, u32* attachSize, RBRAttachmentType* attachType,
-                                u32* bufferSize);
+                u8*     makeBuffer(const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& friendAddr, u16 friendType, u16 replyFlag,
+                                    const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
+                                    const void** attachData, u32* attachSize, RBRAttachmentType* attachType,
+                                    u32* bufferSize);
 
-                BOOL    writeRecord(CDBRecord* record, const math::VEC2& rbrPos, u32 recordType, const NWC24FriendAddr& friendAddr, u16 unk, u16 nwc24Type,
+                BOOL    writeRecord(CDBRecord* record, const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& friendAddr, u16 friendType, u16 replyFlag,
                                     const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
                                     const void** attachData, u32* attachSize, RBRAttachmentType* attachType);
 
-                BOOL    createAtOnce(CDBRecord* record, const char* riplType, const char* rbrFileType,
-                                    u32* gameCode, u16* makerCode, const OSCalendarTime* dateTime,
-                                    u8* buffer, u32 bufferSize);
+                BOOL    createAtOnce(CDBRecord* record, const char* recordName, const char* recordFileType, 
+                                    u32* gameCode, u16* makerCode, const OSCalendarTime* dateTime, u8* buffer, u32 bufferSize);
 
                 BOOL    deleteRecord(CDBRecordKey* recordKey);
 

@@ -28,6 +28,7 @@
 #include "system/iplBS2Manager.h"
 #include "system/iplCdbManager.h"
 #include "scene/iplSceneManager.h"
+#include "utility/iplJpegDecoder.h"
 
 /**
  * @brief Log the result to the NAND log. (`shared2/test2/nanderr.log`)
@@ -61,102 +62,104 @@ namespace ipl {
                     Arg();
 
                 private:
-                    EGG::Heap*          mpMem1Root;             // 0x00
-                    EGG::Heap*          mpMem2Root;             // 0x04
-                    EGG::Heap*          mpMem1Sys;              // 0x08
-                    EGG::Heap*          mpMem2Sys;              // 0x0C
-                    EGG::Heap*          mpSceneManagerHeap;     // 0x10
-                    EGG::Heap*          mpSoundHeap;            // 0x14
-                    EGG::Heap*          mpChannelManagerHeap;   // 0x18
-                    EGG::Heap*          mpUnusedHeap;           // 0x1C
-                    EGG::Heap*          mpSharedHeap;           // 0x20
-                    EGG::Heap*          mpMem1App;              // 0x24
-                    EGG::Heap*          mpMem2App;              // 0x28
-                    EGG::Heap*          mpTreasureHeap;         // 0x2C
-                    EGG::Heap*          mpChannelSelectHeap;    // 0x30
-                    EGG::Heap*          mpFontHeap;             // 0x34
-                    EGG::Heap*          mpCdbHeap;              // 0x38
+                    EGG::Heap*              mpMem1Root;             // 0x00
+                    EGG::Heap*              mpMem2Root;             // 0x04
+                    EGG::Heap*              mpMem1Sys;              // 0x08
+                    EGG::Heap*              mpMem2Sys;              // 0x0C
+                    EGG::Heap*              mpSceneManagerHeap;     // 0x10
+                    EGG::Heap*              mpSoundHeap;            // 0x14
+                    EGG::Heap*              mpChannelManagerHeap;   // 0x18
+                    EGG::Heap*              mpUnusedHeap;           // 0x1C
+                    EGG::Heap*              mpSharedHeap;           // 0x20
+                    EGG::Heap*              mpMem1App;              // 0x24
+                    EGG::Heap*              mpMem2App;              // 0x28
+                    EGG::Heap*              mpTreasureHeap;         // 0x2C
+                    EGG::Heap*              mpChannelSelectHeap;    // 0x30
+                    EGG::Heap*              mpFontHeap;             // 0x34
+                    EGG::Heap*              mpMailHeap;             // 0x38
 
-                    OSCalendarTime      mCurrentTime;           // 0x3C
+                    OSCalendarTime          mCurrentTime;           // 0x3C
 
-                    scene::Manager*     mpSceneManager;         // 0x64
-                    nigaoe::Manager*    mpMiiManager;           // 0x68
-                    nand::Manager*      mpNandManager;          // 0x6C
-                    undefined4          unk_0x70;
-                    Framework*          mpFramework;            // 0x74
-                    undefined           unk_0x78[0x7C - 0x78];
-                    cdb::Manager*       mpCdbManager;           // 0x7C
-                    message::Manager*   mpMessageMgr;           // 0x80
-                    undefined4          unk_0x84;
-                    undefined4          unk_0x88;
-                    nwc24::Manager*     mpNwc24Manager;         // 0x8C
-                    undefined4*         unk_0x90;
-                    savedata::Manager*  mpSaveDataManager;      // 0x94
-                    ErrorHandler*       mpErrorHandler;         // 0x98
-                    ResetHandler*       mpResetHandler;         // 0x9C
-                    WarningHandler*     mpWarningHandler;       // 0xA0
-                    postman::Manager*   mpPostmanManager;       // 0xA4
-                    bs2::Manager*       mpBS2Manager;           // 0xA8
-                    DialogWindow*       mpDialog;               // 0xAC
-                    Pointer*            mpPointer;              // 0xB0
-                    HomeButtonMenu*     mpHomeButton;           // 0xB4
-                    undefined4*         unk_0xB8;
-                    undefined4*         mpJpegDecoder;          // 0xBC
-                    EGG::Thread*        mpUnkThread;            // 0xC0
-                    EGG::ColorFader*    mpFader;                // 0xC4
-                    EGG::ColorFader*    mpResetFader;           // 0xC8
-                    math::Random*       mpRandom;               // 0xCC
+                    scene::Manager*         mpSceneManager;         // 0x64
+                    controller::Manager*    mpControllerManager;    // 0x68
+                    nand::Manager*          mpNandManager;          // 0x6C
+                    nigaoe::Manager*        mpMiiManager;           // 0x70
+                    Framework*              mpFramework;            // 0x74
+                    undefined               unk_0x78[0x7C - 0x78];
+                    cdb::Manager*           mpCdbManager;           // 0x7C
+                    message::Manager*       mpMessageMgr;           // 0x80
+                    undefined4              unk_0x84;
+                    undefined4              unk_0x88;
+                    nwc24::Manager*         mpNwc24Manager;         // 0x8C
+                    undefined4*             unk_0x90;
+                    savedata::Manager*      mpSaveDataManager;      // 0x94
+                    ErrorHandler*           mpErrorHandler;         // 0x98
+                    ResetHandler*           mpResetHandler;         // 0x9C
+                    WarningHandler*         mpWarningHandler;       // 0xA0
+                    postman::Manager*       mpPostmanManager;       // 0xA4
+                    bs2::Manager*           mpBS2Manager;           // 0xA8
+                    DialogWindow*           mpDialog;               // 0xAC
+                    Pointer*                mpPointer;              // 0xB0
+                    HomeButtonMenu*         mpHomeButton;           // 0xB4
+                    undefined4*             unk_0xB8;
+                    utility::JpegDecoder*   mpJpegDecoder;          // 0xBC
+                    EGG::Thread*            mpUnkThread;            // 0xC0
+                    EGG::ColorFader*        mpFader;                // 0xC4
+                    EGG::ColorFader*        mpResetFader;           // 0xC8
+                    math::Random*           mpRandom;               // 0xCC
 
-                    EGG::TaskThread*    mpTask;                 // 0xD0
-                    EGG::TaskThread*    unk_0xD4;               // 0xD4
-                    EGG::TaskThread*    mpNandTask;             // 0xD8
+                    EGG::TaskThread*        mpTask;                 // 0xD0
+                    EGG::TaskThread*        unk_0xD4;               // 0xD4
+                    EGG::TaskThread*        mpNandTask;             // 0xD8
     
-                    nw4r::ut::Font*     mpWBFont1Data;          // 0xDC
-                    undefined4          unk_0xE0;
-                    nw4r::ut::Font*     mpWBFont2Data;          // 0xE4
-                    undefined4          unk_0xE8;
+                    nw4r::ut::Font*         mpWBFont1Data;          // 0xDC
+                    undefined4              unk_0xE0;
+                    nw4r::ut::Font*         mpWBFont2Data;          // 0xE4
+                    undefined4              unk_0xE8;
 
-                    u8                  unk_0xEC[0x100 - 0xEC];
+                    u8                      unk_0xEC[0x100 - 0xEC];
 
-                    nand::File*         mpRFLArcBuffer;         // 0x100
+                    nand::File*             mpRFLArcBuffer;         // 0x100
 
-                    u8                  unk_0x104[0x130 - 0x104];
+                    u8                      unk_0x104[0x130 - 0x104];
 
-                    nand::File*         mpEngMsg;               // 0x130
-                    nand::File*         mpFraMsg;               // 0x134
-                    nand::File*         mpGerMsg;               // 0x138
-                    nand::File*         mpItaMsg;               // 0x13C
-                    nand::File*         mpJpnMsg;               // 0x140
-                    nand::File*         mpDutMsg;               // 0x144
-                    nand::File*         mpSpaMsg;               // 0x148
-                    nand::File*         mpChnMsg;               // 0x14C
-                    nand::File*         mpChnTradMsg;           // 0x150
-                    nand::File*         mpKorMsg;               // 0x154
+                    nand::File*             mpEngMsg;               // 0x130
+                    nand::File*             mpFraMsg;               // 0x134
+                    nand::File*             mpGerMsg;               // 0x138
+                    nand::File*             mpItaMsg;               // 0x13C
+                    nand::File*             mpJpnMsg;               // 0x140
+                    nand::File*             mpDutMsg;               // 0x144
+                    nand::File*             mpSpaMsg;               // 0x148
+                    nand::File*             mpChnMsg;               // 0x14C
+                    nand::File*             mpChnTradMsg;           // 0x150
+                    nand::File*             mpKorMsg;               // 0x154
 
-                    u8                  unk_0x158[0x18C - 0x158];
-                    nand::LayoutFile*   mpDlgArc;               // 0x18C
-                    u8                  unk_0x190[0x1E0 - 0x190];
-                    OSAlarm             mUnkAlarm;              // 0x1E0
-                    u8                  unk_0x210[0x2B0 - 0x210];
+                    u8                      unk_0x158[0x180 - 0x158];
+                    nand::File*             mpInvalidJpgFile;
+                    u8                      unk_0x184[0x18C - 0x184];
+                    nand::LayoutFile*       mpDlgArc;               // 0x18C
+                    u8                      unk_0x190[0x1E0 - 0x190];
+                    OSAlarm                 mUnkAlarm;              // 0x1E0
+                    u8                      unk_0x210[0x2B0 - 0x210];
 
-                    volatile bool       mbResLoaded;            // 0x2B0
-                    bool                unk_0x2B1;
-                    volatile bool       mbCreatedAfter;         // 0x2B2
-                    bool                mbLibraryInit;          // 0x2B3
-                    bool                unk_0x2B4;
-                    bool                unused_0x2B5;
-                    volatile bool       mbFontResLoaded;        // 0x2B6
-                    volatile bool       mbSndResLoaded;         // 0x2B7
-                    volatile bool       mbZi8ResLoaded;         // 0x2B8
-                    volatile bool       mbResetDisabled;        // 0x2B9
-                    volatile bool       mbFoldersCreated;       // 0x2BA
-                    volatile bool       mbIsNandFull;           // 0x2BB
-                    volatile bool       mbSafeMode;             // 0x2BC
-                    bool                unk_0x2BD;
-                    volatile bool       unk_0x2BE;
-                    bool                unk_0x2BF;
+                    volatile bool           mbResLoaded;            // 0x2B0
+                    bool                    unk_0x2B1;
+                    volatile bool           mbCreatedAfter;         // 0x2B2
+                    bool                    mbLibraryInit;          // 0x2B3
+                    bool                    unk_0x2B4;
+                    bool                    unused_0x2B5;
+                    volatile bool           mbFontResLoaded;        // 0x2B6
+                    volatile bool           mbSndResLoaded;         // 0x2B7
+                    volatile bool           mbZi8ResLoaded;         // 0x2B8
+                    volatile bool           mbResetDisabled;        // 0x2B9
+                    volatile bool           mbFoldersCreated;       // 0x2BA
+                    volatile bool           mbIsNandFull;           // 0x2BB
+                    volatile bool           mbSafeMode;             // 0x2BC
+                    bool                    unk_0x2BD;
+                    volatile bool           unk_0x2BE;
+                    bool                    unk_0x2BF;
 
-                    u8                  unk_0x2C0[0x2D8 - 0x2C0];
+                    u8                      unk_0x2C0[0x2D8 - 0x2C0];
 
                 friend class System;
             };
@@ -168,6 +171,7 @@ namespace ipl {
             static EGG::Thread*             getUnkThread()          { return smArg.mpUnkThread; }
             static EGG::TaskThread*         getTask()               { return smArg.mpTask; }
             static EGG::TaskThread*         getNandTask()           { return smArg.mpNandTask; }
+            static nand::File*              getInvalidJpegImage()   { return smArg.mpInvalidJpgFile; }
             static bool                     isUnk_0x2B1()           { return smArg.unk_0x2B1; }
             static bool                     isUnk_0x2B4()           { return smArg.unk_0x2B4; }
             static bool                     isUnk_0x2BD()           { return smArg.unk_0x2BD; }
@@ -190,7 +194,7 @@ namespace ipl {
             static EGG::Heap*               getMem2App()            { return smArg.mpMem2App; }
             static EGG::Heap*               getSharedHeap()         { return smArg.mpSharedHeap; }
             static EGG::Heap*               getTreasureHeap()       { return smArg.mpTreasureHeap; }
-            static EGG::Heap*               getCdbHeap()            { return smArg.mpCdbHeap; }
+            static EGG::Heap*               getMailWorkHeap()       { return smArg.mpMailHeap; }
 
             /*==============================*/
             /*       SYSTEM RESOURCES       */
@@ -316,6 +320,8 @@ namespace ipl {
             static postman::Manager*        getPostmanManager()     { return smArg.mpPostmanManager; }
             /** @return The CDB Manager object. */
             static cdb::Manager*            getCdbManager()         { return smArg.mbSafeMode ? NULL : smArg.mpCdbManager; }
+            /** @return The JPEG Decoder object. */
+            static utility::JpegDecoder*    getJpegDecoder()        { return smArg.mpJpegDecoder; }
 
             /*==============================*/
             /*              MII              */
@@ -418,8 +424,10 @@ namespace ipl {
             /*           UTILITIES          */
             /*==============================*/
 
-            /** @return The Random Number Generator object. */
-            static math::Random*            getRndm()               { return smArg.mpRandom; }
+            /**
+             * @return The Random Number Generator object.
+             */
+            static math::Random*            getRndm();
             static OSCalendarTime&          getCurrentTime()        { return smArg.mCurrentTime; }
             /*==============================*/
             /*              MISC            */
