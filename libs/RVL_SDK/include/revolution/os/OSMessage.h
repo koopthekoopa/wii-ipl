@@ -19,6 +19,8 @@ typedef struct {
     s32             usedCount;      // 0x1C
 } OSMessageQueue;
 
+#define OS_MESSAGE_BLOCK    (1 << 0)
+
 void    OSInitMessageQueue(OSMessageQueue* queue, OSMessage* msgArray, s32 msgCount);
 BOOL    OSSendMessage(OSMessageQueue* queue, OSMessage msg, s32 flags);
 BOOL    OSJamMessage(OSMessageQueue* queue, OSMessage msg, s32 flags);

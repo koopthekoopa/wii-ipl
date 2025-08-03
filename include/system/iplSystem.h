@@ -159,7 +159,9 @@ namespace ipl {
                     volatile bool           unk_0x2BE;
                     bool                    unk_0x2BF;
 
-                    u8                      unk_0x2C0[0x2D8 - 0x2C0];
+                    u8                      unk_0x2C0[0x2C8 - 0x2C0];
+                    volatile bool           unk_0x2C8;
+                    u8                      unk_0x2CC[0x2D8 - 0x2CC];
 
                 friend class System;
             };
@@ -179,6 +181,7 @@ namespace ipl {
             static void                     setUnk_0x2BE(bool val)  { smArg.unk_0x2BE = val; }
             static bool                     isUnk_0x2BF()           { return smArg.unk_0x2BF; }
             static void                     setUnk_0x2BF(bool val)  { smArg.unk_0x2BF = val; }
+            static bool                     isUnk_0x2C8()           { return smArg.unk_0x2C8; }
 
             /*==============================*/
             /*         MEMORY HEAP          */
@@ -311,9 +314,13 @@ namespace ipl {
             static nand::File*              getKorMsg()             { return smArg.mpKorMsg; }
 
             /*==============================*/
-            /*      WIICONNECT24 & CDB      */
+            /*     WIICONNECT24 & MAIL      */
             /*==============================*/
 
+            /**
+             * @param errorCode Error code from NWC24RegisterUserId
+             */
+            static void                     setNWC24RegistEnd(s32 errorCode);
             /** @return The WiiConnect24 Manager object. */
             static nwc24::Manager*          getNwc24Manager()       { return smArg.mbSafeMode ? NULL : smArg.mpNwc24Manager; }
             /** @return The Postman Handler object. */

@@ -5,14 +5,29 @@
 extern "C" {
 #endif // __cplusplus
 
+#include <revolution/os/OSTime.h>
+
 #include <revolution/ncd/NCDTypes.h>
 
-s32 NCDSetIpConfig(NCDIpConfig* ipConfig);
-s32 NCDSetIfConfig(NCDIfConfig* ifConfig);
+NCDErr  NCDReadConfig(NCDConfig* config);
+NCDErr  NCDWriteConfig(const NCDConfig* config);
 
-s32 NCDGetLinkStatus();
+NCDErr  NCDSetIpConfig(NCDIpConfig* ipConfig);
+NCDErr  NCDSetIfConfig(NCDIfConfig* ifConfig);
 
-s32 NCDGetWirelessMacAddress(u8* macAddr);
+NCDErr  NCDGetCurrentIpConfig(NCDIpConfig* ipConfig);
+
+NCDErr  NCDGetLinkStatus();
+BOOL    NCDIsInterfaceDecided();
+
+NCDErr  NCDGetWirelessMacAddress(u8* macAddr);
+
+NCDErr  NCDLockWirelessDriver();
+NCDErr  NCDUnlockWirelessDriver(s32 id);
+
+s32     NCDRestoreConfig();
+
+void    NCDSleep(OSTime tick);
 
 #ifdef __cplusplus
 }

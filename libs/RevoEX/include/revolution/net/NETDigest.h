@@ -1,5 +1,5 @@
-#ifndef REVOEX_NET_DIGEST_H
-#define REVOEX_NET_DIGEST_H
+#ifndef REVOLUTION_NET_DIGEST_H
+#define REVOLUTION_NET_DIGEST_H
 
 #include <revolution/types.h>
 
@@ -71,4 +71,4 @@ static void NETCalcSHA1(void* digest, const void* input, u32 length) {
 }
 #endif
 
-#endif // REVOEX_NET_DIGEST_H
+#endif // REVOLUTION_NET_DIGEST_H

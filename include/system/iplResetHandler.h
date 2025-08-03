@@ -24,6 +24,7 @@ namespace ipl {
             void update();
             void fatalUpdate();
 
+            volatile BOOL isTypeEq0() const             { return mType != 0; }
             u32 getType() const                 { return mType; }
             u32 getFatalState() const           { return mFatalState; }
 

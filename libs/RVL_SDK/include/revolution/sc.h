@@ -126,6 +126,8 @@ typedef struct SCParentalControlsInfo {
     u16 secretAnswerLen;    // 0x48
 } SCParentalControlsInfo;
 
+#define SC_PARENTAL_CONTROL_ENABLED (1 << 7)
+
 BOOL    SCGetParentalControl(SCParentalControlsInfo* pcInfo);
 BOOL    SCSetParentalControl(SCParentalControlsInfo* pcInfo);
 

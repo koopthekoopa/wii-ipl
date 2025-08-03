@@ -11,6 +11,9 @@
 #include "system/RIPL_BoardRecord.h"
 
 namespace ipl {
+    namespace postman {
+        class Manager;
+    }
     namespace nwc24 {
         class Manager {
             public:
@@ -161,10 +164,12 @@ namespace ipl {
 
                 bool        unk_0xA30;
                 bool        unk_0xA31;
-                bool        unk_0xA32;
+                bool        mbReceivePaused;                    // 0xA32
                 bool        unk_0xA33;
 
                 static Arg  smArg;
+
+                friend class postman::Manager;
         };
     }
 }

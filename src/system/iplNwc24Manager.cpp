@@ -35,7 +35,7 @@ namespace ipl {
         Manager::Manager(EGG::Heap* heap) :
         unk_0xA30(false),
         unk_0xA31(false),
-        unk_0xA32(false),
+        mbReceivePaused(false),
         unk_0xA33(false) {
             OSInitMutex(&mLock);
             OSInitMutex(&mAutoLock);
@@ -899,7 +899,7 @@ out:
                     // We created the record, so we don't need to message anymore. Goodbye!
                     deleteMsg(NWC24_MBOX_TYPE_RECV, mMsgIdsTbl[i]);
 
-                    if (System::getCdbManager()->isOverFlow() || unk_0xA32) {
+                    if (System::getCdbManager()->isOverFlow() || mbReceivePaused) {
                         break;
                     }
                 }

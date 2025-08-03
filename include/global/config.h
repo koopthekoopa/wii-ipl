@@ -1,6 +1,8 @@
 #ifndef GLOBAL_HEADERS_CONFIG_H
 #define GLOBAL_HEADERS_CONFIG_H
 
+/* Small configuration macros */
+
 #define SYSMENU_TITLE_ID    0x0000000100000002
 #define SYSMENU_CONTENT_ID  0x00000001/*.app*/
 
@@ -25,6 +27,9 @@
 
 /** @brief ErrorHandler will also log NANDLogging to OSReport. */
 // #define NAND_LOG_TO_OSREPORT
+
+/** @brief NCDDebugPrint in PostmanManager will print NCDConfig (assuming its what it originally did) */
+// #define USE_POSTMAN_NCD_DEBUG_PRINT
 
 
 /*** SDK CONFIGURATION ***/

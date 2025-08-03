@@ -596,7 +596,7 @@ config.libs = [
             Object(NonMatching, "system/iplResetHandler.cpp"),
             Object(Matching,    "system/iplWarningHandler.cpp"),
             Object(Matching,    "system/iplSocketSetting.cpp"),
-            Object(NonMatching, "system/iplPostmanManager.cpp"),
+            Object(Matching,    "system/iplPostmanManager.cpp"),
             Object(NonMatching, "system/iplSaveDataManager.cpp"),
             Object(Matching,    "system/iplChannelRsoThread.cpp"),
             Object(NonMatching, "system/RsoSystem.cpp"),

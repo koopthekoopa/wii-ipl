@@ -3,6 +3,10 @@
 
 #include <revolution/types.h>
 
+typedef s32 NCDErr;
+
+#define PACKED __attribute__((packed))
+
 enum {
     NCD_LINKSTATUS_WIRED = 3, // ?
 };
@@ -10,6 +14,15 @@ enum {
 enum {
     NCD_RESULT_SUCCESS = 0,
     NCD_RESULT_INPROGRESS = -8,
+};
+
+enum {
+    NCD_NWC24_PERMISSION_NONE = 0,
+    NCD_NWC24_PERMISSION_SEND_MAIL = 1,
+    NCD_NWC24_PERMISSION_RECEIVE_MAIL = 2,
+    NCD_NWC24_PERMISSION_MESSAGE = (NCD_NWC24_PERMISSION_RECEIVE_MAIL | NCD_NWC24_PERMISSION_SEND_MAIL),
+    NCD_NWC24_PERMISSION_DOWNLOAD = 4,
+    NCD_NWC24_PERMISSION_ALL = 7
 };
 
 #define NCD_MAC_ADDRESS_LENGTH  6
@@ -81,7 +94,7 @@ typedef struct NCDPrivacy {
                 u8  reserved[2];    // 0x02
             };
             u8 key[4][5];   // 0x04
-        } wep40;    // 0x00
+        } wep40;
         struct {
             u16 keyId;      // 0x00
             union { 
@@ -89,17 +102,17 @@ typedef struct NCDPrivacy {
                 u8  reserved[2];    // 0x02
             };
             u8 key[4][13];  // 0x04
-        } wep104;   // 0x00
+        } wep104;
         struct {
             u16 keyLen;         // 0x00
             u8  reserved[2];    // 0x02
             u8  key[64];        // 0x04
-        } tkip;     // 0x00
+        } tkip;
         struct {
             u16 keyLen;         // 0x00
             u8  reserved[2];    // 0x02
             u8  key[64];        // 0x04
-        } aes;      // 0x00
+        } aes;
     };
 } NCDPrivacy;
 
@@ -149,10 +162,10 @@ typedef struct NCDWirelessProfile {
     u8  configMethod;   // 0x02
     u8  retryLimit;     // 0x03
     union {
-        NCDApConfig     manual;     // 0x00
-        NCDUsbapConfig  usbap;      // 0x00
-        NCDAossConfig   aoss;       // 0x00
-        NCDApConfig     rakuraku;   // 0x00
+        NCDApConfig     manual;
+        NCDUsbapConfig  usbap;
+        NCDAossConfig   aoss;
+        NCDApConfig     rakuraku;
     } config;   // 0x04
 } NCDWirelessProfile;
 
@@ -160,9 +173,30 @@ typedef struct NCDIfConfig {
     u8  selectedMedia;  // 0x00
     u8  linkTimeout;    // 0x01
     union {
-        NCDWiredProfile     wired;      // 0x00
-        NCDWirelessProfile  wireless;   // 0x00
+        NCDWiredProfile     wired;
+        NCDWirelessProfile  wireless;
     } netif;    // 0x02
 } NCDIfConfig;
+
+typedef struct NCDProfile {
+    u8                  flags;          // 0x00
+    u8                  reserved[3];    // 0x01
+    NCDIpProfile        ip;             // 0x04
+    NCDIpAdjustProfile  adjust;         // 0x18
+    NCDProxyProfile     proxy;          // 0x24
+    union {
+        NCDWiredProfile     wired;
+        NCDWirelessProfile  wireless;
+    } netif;                            // 0x7C0
+} NCDProfile;
+
+typedef struct NCDConfig {
+    u32         version;            // 0x00
+    u8          selectedMedia;      // 0x04
+    u8          nwc24Permission;    // 0x05
+    u8          linkTimeout;        // 0x06
+    u8          reserved[1];        // 0x07
+    NCDProfile  profiles[3];        // 0x08
+} PACKED NCDConfig;
 
 #endif // REVOLUTION_NCD_TYPES_H

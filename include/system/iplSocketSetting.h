@@ -13,7 +13,7 @@ namespace ipl {
             public:
                 static const char*  getLANMacAddrUtf8();
 
-                static BOOL         init(void* work);
+                static BOOL         init(void* work /*unused*/);
                 static void         finish();
 
                 static void         convertLANMacAddr();
