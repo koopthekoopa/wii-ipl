@@ -63,7 +63,7 @@ namespace ipl {
         }
 
         void* Manager::Run() {
-            if (!System::getResetHandler()->isTypeEq0()) {
+            if (!System::getResetHandler()->isValidType()) {
                 mState = STATE_PREPARE;
 
                 update_playlog_();

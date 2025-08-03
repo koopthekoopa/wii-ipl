@@ -219,7 +219,7 @@ namespace ipl {
 #endif // USE_ZI8
                                     ; }
 
-            static bool                     unkBool()               { return smArg.mbCreatedAfter && smArg.unk_0x2B4; }
+            static volatile bool            unkBool()               { return smArg.mbCreatedAfter && smArg.unk_0x2B4; }
 
             /** @return The Message ID as a Wide-string. */
             static const wchar_t*           getMessage(u32 id)      { return smArg.mpMessageMgr->getMessage(id); }
@@ -408,7 +408,7 @@ namespace ipl {
             static EGG::ColorFader*         getResetFader()         { return smArg.mpResetFader; }
 
              /** @return A boolean indicating if the user can restart their Wii console. */
-            static bool                     isResetAcceptable()     { return !smArg.mbResetDisabled; }
+            static BOOL                     isResetAcceptable();
 
             /*==============================*/
             /*       WARNING HANDLING       */

@@ -402,10 +402,6 @@ static void SetDefaultConfig() {
     config->idCreationStage = NWC24_IDCS_INITIAL;
     config->version = NWC24_CONFIG_CURRENT_VERSION;
     config->magic = NWC24_CONFIG_MAGIC;
-
-    // A guess. This was possibly here originally and was stripped out by the compiler.
-    // It would not make sense if it was not there.
-    ConfigModified = TRUE;
 }
 
 static u32 GetConfigCheckSum() {

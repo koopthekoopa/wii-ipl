@@ -593,7 +593,7 @@ config.libs = [
             Object(NonMatching, "system/iplNandSDWorker.cpp"),
             Object(NonMatching, "system/iplKeyboard.cpp"),
             Object(Matching,    "system/iplErrorHandler.cpp"),
-            Object(NonMatching, "system/iplResetHandler.cpp"),
+            Object(Matching,    "system/iplResetHandler.cpp"),
             Object(Matching,    "system/iplWarningHandler.cpp"),
             Object(Matching,    "system/iplSocketSetting.cpp"),
             Object(Matching,    "system/iplPostmanManager.cpp"),

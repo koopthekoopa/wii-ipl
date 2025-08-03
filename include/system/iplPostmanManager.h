@@ -35,6 +35,7 @@ namespace ipl {
                 virtual void*   Run();
                 
                 int             Get_CurrentState() const { return mState; }
+                BOOL            Running() { return mState != STATE_PREPARE; }
 
             private:
                 enum {

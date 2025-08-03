@@ -8,6 +8,18 @@
 namespace ipl {
     class ResetHandler {
         enum {
+            STATE_SHUTDOWN_LIB = 0,
+            STATE_SHUTDOWN_VIDEO = 3,
+            STATE_SHUTDOWN_SYSTEM = 4,
+        };
+
+        enum {
+            TYPE_INVALID = 0,
+            TYPE_RESTART,
+            TYPE_SHUTDOWN
+        };
+
+        enum {
             FATAL_STATE_NONE = 0,
             FATAL_STATE_FADE,
             FATAL_STATE_INIT = FATAL_STATE_FADE,
@@ -18,18 +30,18 @@ namespace ipl {
         public:
             ResetHandler(EGG::Heap* heap);
 
-            void reset();
-            void check();
+            void    reset();
+            void    check();
 
-            void update();
-            void fatalUpdate();
+            void    update();
+            void    fatalUpdate();
 
-            volatile BOOL isTypeEq0() const             { return mType != 0; }
-            u32 getType() const                 { return mType; }
-            u32 getFatalState() const           { return mFatalState; }
+            BOOL    isValidType() const         { return mType != TYPE_INVALID; }
+            BOOL    isInvalidType() const       { return mType == TYPE_INVALID; }
 
-            void changeType(u32 value)          { mType = value; }
-            void changeFatalState(u32 value)    { mFatalState = value; }
+            u32     getType() const             { return mType; }
+
+            void    changeType(u32 value)       { mType = value; }
 
             /**
              * This tells the reset handler to return to the system menu when resetting (calling `OSReturnToMenu()`)
@@ -51,11 +63,10 @@ namespace ipl {
 
             void setFatalResetCallback();
 
-            u32     mState;
-            u32     mType;
-            BOOL    mbReturnToMenu;
-
-            u32     mFatalState;
+            u32     mState;         // 0x00
+            vu32    mType;          // 0x04
+            BOOL    mbReturnToMenu; // 0x08
+            u32     mFatalState;    // 0x0C
     };
 }
 

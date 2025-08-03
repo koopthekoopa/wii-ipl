@@ -135,6 +135,8 @@ namespace ipl {
 
                 int         getErrCode();
 
+                volatile bool   isUnk0xA31()    { return unk_0xA31 == false; }
+
             private:
                 void        add_dl_task(NWC24DlId id, const char* url, u16 interval, u8 priority);
 
