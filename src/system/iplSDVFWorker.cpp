@@ -120,7 +120,7 @@ namespace ipl {
                 case MESSAGE_MOUNT_SD: {
                     do_mount_sd();
 
-                    if (s_sd_state == SD_STATE_ALREADY_INSERTED || s_sd_state == SD_STATE_ERROR) {
+                    if (s_sd_state == SD_STATE_BROKEN || s_sd_state == SD_STATE_ERROR) {
                         myWork->prevAsyncResult = myWork->asyncResult;
                     }
                     else {
@@ -214,7 +214,7 @@ namespace ipl {
                         s_sd_state = SD_STATE_AVAILABLE;
                     }
                     else if (result == RESULT_SD_BROKEN) {
-                        s_sd_state = SD_STATE_ALREADY_INSERTED;
+                        s_sd_state = SD_STATE_BROKEN;
                     }
                     else if (result == RESULT_SD_ERROR) {
                         s_sd_state = SD_STATE_ERROR;
@@ -247,7 +247,7 @@ namespace ipl {
                     s_sd_state = SD_STATE_AVAILABLE;
                 }
                 else if (result == RESULT_SD_BROKEN) {
-                    s_sd_state = SD_STATE_ALREADY_INSERTED;
+                    s_sd_state = SD_STATE_BROKEN;
                 }
                 else {
                     s_sd_state = result == RESULT_SD_ERROR ? SD_STATE_ERROR : SD_STATE_EJECTED;
@@ -332,7 +332,7 @@ namespace ipl {
     void SDVFWorker::do_format_sd() {
         FAError faErr;
 
-        if (s_sd_state != SD_STATE_AVAILABLE && s_sd_state != SD_STATE_ALREADY_INSERTED) {
+        if (s_sd_state != SD_STATE_AVAILABLE && s_sd_state != SD_STATE_BROKEN) {
             OSReport("SDVFWorker: cannot format sd because of illegal sd state.[%d]\n", s_sd_state);
             myWork->asyncResult = RESULT_FATAL_SD_ERROR;
             return;

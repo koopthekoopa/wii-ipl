@@ -10,7 +10,7 @@ namespace ipl {
 
     PlayTimeLog PlayTimeLog::smArg;
 
-    int search_cb_(void* playTime, CDBRecord* record) {
+    BOOL search_cb_(void* playTime, CDBRecord* record) {
         PlayTimeLog* playTimeLog = reinterpret_cast<PlayTimeLog*>(playTime);
         return playTimeLog->check(record);
     }

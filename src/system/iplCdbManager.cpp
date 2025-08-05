@@ -11,7 +11,7 @@
 
 namespace ipl {
     namespace cdb {
-        const u32 Manager::UNKNOWN_VALUE = 50;
+        const int Manager::UNKNOWN_VALUE = 50;
 
         Manager::Manager(EGG::Heap* heap) : 
         mCDBResult(CDB_ERROR_OK), 
@@ -408,7 +408,7 @@ namespace ipl {
         }
 
         BOOL Manager::search(const CDBDate& begin, const CDBDate& end,
-        CDBSearchDirection searchDirection, CDBRecordLocation recordLocation,int unk2,
+        CDBSearchDirection searchDirection, CDBRecordLocation recordLocation, int unk2,
         CDBSearchRecordCB searchRecordCB, void* searchRecordWork) {
             utility::autoMutexLock lock(mMutex);
             CDBErr err = CDBDatabaseSearch(&mDatabase, begin, end, searchDirection, NULL, NULL, 0, recordLocation, unk2, searchRecordCB, searchRecordWork);

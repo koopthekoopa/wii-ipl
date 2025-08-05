@@ -198,7 +198,7 @@ namespace ipl {
              * @param msgId Message ID for the body text.
              * @param rBtnId Message ID for the right button text.
              * @param lBtnId Message ID for the left button text.
-             * @param bSwapSound Swap the "OK" and "Back" sound effect.
+             * @param bSwapSound Swap "OK" and "Back" sounds. Normally, Right button plays "Back" sound and left button plays "OK" sound.
              * @return Whenever dialog call was successful.
              */
             BOOL            callBtn2(u32 msgId, u32 rBtnId, u32 lBtnId, bool bSwapSound = false);

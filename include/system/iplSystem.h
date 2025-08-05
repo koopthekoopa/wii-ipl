@@ -323,15 +323,23 @@ namespace ipl {
             static void                     setNWC24RegistEnd(s32 errorCode);
             /** @return The WiiConnect24 Manager object. */
             static nwc24::Manager*          getNwc24Manager()       { return smArg.mbSafeMode ? NULL : smArg.mpNwc24Manager; }
+            /** @return The WiiConnect24 Manager object. */
+            static nwc24::Manager*          getNwc24ManagerForce()  { return smArg.mpNwc24Manager; }
             /** @return The Postman Handler object. */
             static postman::Manager*        getPostmanManager()     { return smArg.mpPostmanManager; }
             /** @return The CDB Manager object. */
-            static cdb::Manager*            getCdbManager()         { return smArg.mbSafeMode ? NULL : smArg.mpCdbManager; }
+            static cdb::Manager*            getCdbManager()         { return isSafeMode() ? NULL : smArg.mpCdbManager; }
+            /** @return The CDB Manager object. */
+            static cdb::Manager*            getCdbManagerForce()    { return smArg.mpCdbManager; }
             /** @return The JPEG Decoder object. */
             static utility::JpegDecoder*    getJpegDecoder()        { return smArg.mpJpegDecoder; }
+            /** Start postman manager */
+            static void                     startReceiveSchedule();
+            /** Pause postman manager */
+            static void                     stopReceiveSchedule();
 
             /*==============================*/
-            /*              MII              */
+            /*              MII             */
             /*==============================*/
 
             /** @return The Mii Manager object. */

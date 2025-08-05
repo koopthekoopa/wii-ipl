@@ -34,7 +34,7 @@ namespace ipl {
                SD_STATE_UNAVAILABLE = 0,
                SD_STATE_EJECTED,
                SD_STATE_INSERTED,
-               SD_STATE_ALREADY_INSERTED,
+               SD_STATE_BROKEN,
                SD_STATE_ERROR,
                SD_STATE_AVAILABLE,
             } WorkSDState;
@@ -43,6 +43,7 @@ namespace ipl {
                 RESULT_SUCCESS = 0,
                 RESULT_STILL_WORKING = -1,
                 RESULT_FATAL_SD_ERROR = -2,
+                RESULT_NAND_CORRUPT = -5, // Unused but checked by CdbBackup
                 RESULT_OUT_OF_SPACE = -7,
                 RESULT_FA_ERROR = -8,
                 RESULT_SD_BROKEN = -9,

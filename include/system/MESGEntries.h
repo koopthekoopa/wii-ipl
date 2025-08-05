@@ -1,6 +1,13 @@
 #ifndef IPL_MESSAGE_ENTRIES_H
 #define IPL_MESSAGE_ENTRIES_H
 
+/* Common message IDs */
+
+
+#define MESG_CMN_OK                     46
+#define MESG_CMN_YES                    321
+#define MESG_CMN_NO                     322
+
 /* Play Time Log */
 
 #define MESG_PLAY_TIME_LOG_TITLE        132
@@ -12,9 +19,21 @@
 #define MESG_PLAY_TIME_SENDMSG_AND      145
 #define MESG_PLAY_TIME_SENDMSG_MORE     146
 
-/* Warning Handler */
+/* Cdb Backup */
 
-#define MESG_WARN_ACCEPT                46
+#define MESG_CDBBACKUP_SD_UNAVAILABLE   56
+#define MESG_CDBBACKUP_ASK_FOR_BACKUP   57
+#define MESG_CDBBACKUP_BACKING          58
+#define MESG_CDBBACKUP_BACK_FINISHED    59
+#define MESG_CDBBACKUP_BACK_SD_FULL     60
+#define MESG_CDBBACKUP_BACK_SD_ERROR    61
+#define MESG_CDBBACKUP_SD_LOCKED        62
+#define MESG_CDBBACKUP_ASK_FOR_DELETE   147
+#define MESG_CDBBACKUP_DELETING         148
+#define MESG_CDBBACKUP_DELETE_FINISH    149
+#define MESG_CDBBACKUP_BACKING_NO_SD    150
+#define MESG_CDBBACKUP_SD_UNKNOWN_ERR   151
+#define MESG_CDBBACKUP_BACK_FINISHED_2  152
 
 /* Address */
 

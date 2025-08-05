@@ -15,7 +15,7 @@ namespace EGG {
                 void* unk_0x04;
                 OSMessage mMsg;             // 0x08
                 
-                TFunction mEnterFunction;   // 0x0c
+                TFunction mEnterFunction;   // 0x0C
                 TFunction mExitFunction;    // 0x10
                 TFunction unk_0x14;
                 
