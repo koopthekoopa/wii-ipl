@@ -1056,13 +1056,13 @@ src/keyboard/tiUtil.cpp:
 	.ctors      start:0x8160D20C end:0x8160D210
 	.data       start:0x81660378 end:0x81660598
 	.sdata2     start:0x81694E28 end:0x81694E58
-	.sdata      start:0x81697408 end:0x81697410
 	.sbss       start:0x81698D28 end:0x81698D40
 
 src/keyboard/tiCpData.cpp:
 	.text       start:0x8143A3CC end:0x8143A8E4
 	.ctors      start:0x8160D210 end:0x8160D214
 	.data       start:0x81660598 end:0x81664058
+	.sdata      start:0x81697408 end:0x81697410
 
 src/keyboard/tiSwData.cpp:
 	.text       start:0x8143A8E4 end:0x8143B2B8

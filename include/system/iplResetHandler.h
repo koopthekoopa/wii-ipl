@@ -39,10 +39,6 @@ namespace ipl {
             BOOL    isValidType() const         { return mType != TYPE_INVALID; }
             BOOL    isInvalidType() const       { return mType == TYPE_INVALID; }
 
-            u32     getType() const             { return mType; }
-
-            void    changeType(u32 value)       { mType = value; }
-
             /**
              * This tells the reset handler to return to the system menu when resetting (calling `OSReturnToMenu()`)
              * instead of rebooting the system (calling `OSRebootSystem()`)

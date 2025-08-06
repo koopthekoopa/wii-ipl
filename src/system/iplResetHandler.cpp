@@ -22,14 +22,14 @@ namespace ipl {
     }
 
     void ResetHandler::cbReset() {
-        if (System::getResetHandler()->getType() == TYPE_INVALID) {
-            System::getResetHandler()->changeType(TYPE_RESTART);
+        if (System::getResetHandler()->mType == TYPE_INVALID) {
+            System::getResetHandler()->mType = TYPE_RESTART;
         }
     }
 
     void ResetHandler::cbPowerOff() {
-        if (System::getResetHandler()->getType() == TYPE_INVALID) {
-            System::getResetHandler()->changeType(TYPE_SHUTDOWN);
+        if (System::getResetHandler()->mType == TYPE_INVALID) {
+            System::getResetHandler()->mType = TYPE_SHUTDOWN;
         }
     }
 

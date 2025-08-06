@@ -10,7 +10,7 @@ namespace ipl {
     namespace scene {
         void Reboot::calc() {
             if (System::unkBool() || (System::hasCreatedAfter() && System::isNandFull())) {
-                System::getHomeButtonMenu()->setUnk_0x05(true);
+                System::getHomeButtonMenu()->enableLib();
 
                 switch (mSettingsType) {
                     // Wii Options

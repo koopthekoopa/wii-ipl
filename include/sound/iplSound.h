@@ -18,8 +18,15 @@ namespace ipl {
 
                 void            stopAllSound(BOOL unk = FALSE);
                 void            stopBannerSound(BOOL unk = FALSE);
-                void            startSE(const char* sndName);
+
+                int             startSE(const char* sndName);
+                int             startSEIndex(u32 sndIndex);
+
                 int             startBGM(const char* bgmName);
+                int             pauseOnBGM();
+                int             pauseOffBGM();
+
+                int             resetAllSound();
             
             private:
                 u32             unk_0x00[0x638];

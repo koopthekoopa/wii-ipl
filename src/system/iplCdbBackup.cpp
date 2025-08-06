@@ -396,6 +396,8 @@ namespace ipl {
         return result;
     }
 
+    // Stack loading order is swapped. Turning peephole off fixed it but still not matching
+    // https://decomp.me/scratch/G7ppD
     void cdb_backup_delete_task_(void* work) {
         CdbBackup* cdbBackup = reinterpret_cast<CdbBackup*>(work);
 
@@ -439,6 +441,7 @@ namespace ipl {
         return result;
     }
 
+    // NonMatching too. see cdb_backup_delete_task_
     void cdb_backup_move_task_(void* work) {
         CdbBackup* cdbBackup = reinterpret_cast<CdbBackup*>(work);
 

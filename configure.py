@@ -589,7 +589,7 @@ config.libs = [
             Object(Matching,    "system/iplPointer.cpp"),
             Object(Matching,    "system/iplPointerCore.cpp"),
             Object(Matching,    "system/iplDialogWindow.cpp"),
-            Object(NonMatching, "system/iplHomeButtonMenu.cpp"),
+            Object(Matching,    "system/iplHomeButtonMenu.cpp"),
             Object(NonMatching, "system/iplNandSDWorker.cpp"),
             Object(NonMatching, "system/iplKeyboard.cpp"),
             Object(Matching,    "system/iplErrorHandler.cpp"),

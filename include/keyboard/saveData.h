@@ -1,5 +1,5 @@
-#ifndef KEYBOARD_SAVE_DATA_H
-#define KEYBOARD_SAVE_DATA_H
+#ifndef TEXTINPUT_SAVE_DATA_H
+#define TEXTINPUT_SAVE_DATA_H
 
 #include <revolution/types.h>
 
@@ -52,4 +52,4 @@ namespace textinput {
     }
 }
 
-#endif // KEYBOARD_SAVE_DATA_H
+#endif // TEXTINPUT_SAVE_DATA_H

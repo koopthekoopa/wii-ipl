@@ -4,7 +4,9 @@
 #include <decomp.h>
 
 #include <revolution.h>
+#include <revolution/pad.h>
 #include <revolution/wpad.h>
+#include <revolution/kpad.h>
 
 #include <egg/core.h>
 
@@ -94,18 +96,33 @@ namespace ipl {
                  * @return The Horizon X and Y as `ipl::math::VEC2`.
                  */
                 virtual math::VEC2  getHorizon() const;             // 0x5C
-                virtual int         unk_0x60();
-                virtual int         unk_0x64();
-                virtual int         unk_0x68();
+                virtual int         getDpdDistance() const;         // 0x60
+                virtual KPADStatus* getKPADStatus() const;          // 0x64
+                virtual PADStatus*  getPADStatus() const;           // 0x68
                 virtual bool        isValidBtn() const;             // 0x6C
                 /**
                  * @brief If the Wii Remote is pointing to the IR sensor bar.
                  * @return Whether it is pointing or not.
                  */
                 virtual bool        isValidDpd() const;             // 0x70
+
+                virtual bool        setForceInvalid(bool flag);     // 0x74
+
+                virtual f32         getMainStickX() const;          // 0x78
+                virtual f32         getMainStickY() const;          // 0x7C
+
+                virtual f32         getSubStickX() const;           // 0x80
+                virtual f32         getSubStickY() const;           // 0x84
+
+                virtual void        read() const;                   // 0x88
             
             private:
                 u8 dummyData[32];
+        };
+
+        class Classic : public Interface {
+            public:
+                virtual BOOL        isValidDpdClassic() const;      // 0x8C
         };
     }
 }
