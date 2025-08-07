@@ -8,7 +8,7 @@
 
 namespace ipl {
     namespace nand {
-        class SharedFile : File {
+        class SharedFile : public File {
             public:
                 SharedFile(EGG::Heap* heap, const char* fileName, u32 index, int offset, u32 length, ESTitleId titleId, int ticketIdx);
                 virtual ~SharedFile();

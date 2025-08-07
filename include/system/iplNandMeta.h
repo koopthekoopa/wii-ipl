@@ -7,7 +7,7 @@
 
 namespace ipl {
     namespace nand {
-        class MetaFile : File {
+        class MetaFile : public File {
             public:
                 typedef void (*Callback)(void*);
 

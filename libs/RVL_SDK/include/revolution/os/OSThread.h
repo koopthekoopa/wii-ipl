@@ -79,38 +79,40 @@ struct OSThread {
 typedef void (*OSIdleFunction)(void* param);
 typedef void (*OSSwitchThreadCallback)(OSThread* from, OSThread* to);
 
-void        OSInitThreadQueue(OSThreadQueue* queue);
+void                    OSInitThreadQueue(OSThreadQueue* queue);
 
-void        OSSleepThread(OSThreadQueue* queue);
-void        OSWakeupThread(OSThreadQueue* queue);
+void                    OSSleepThread(OSThreadQueue* queue);
+void                    OSWakeupThread(OSThreadQueue* queue);
 
-void        OSSetCurrentThread(OSThread* thread);
-OSThread*   OSGetCurrentThread();
+void                    OSSetCurrentThread(OSThread* thread);
+OSThread*               OSGetCurrentThread();
 
-s32         OSEnableScheduler();
-s32         OSDisableScheduler();
+s32                     OSEnableScheduler();
+s32                     OSDisableScheduler();
 
-BOOL        OSIsThreadSuspended(OSThread* thread);
-BOOL        OSIsThreadTerminated(OSThread* thread);
+BOOL                    OSIsThreadSuspended(OSThread* thread);
+BOOL                    OSIsThreadTerminated(OSThread* thread);
 
-BOOL        OSCreateThread(OSThread* thread, void* (*ThreadFunc)(void*), void* param, void* stack, u32 stackSize, OSPriority priority, u16 attr);
-void        OSExitThread(void* val);
-void        OSCancelThread(OSThread* thread);
-BOOL        OSJoinThread(OSThread* thread, void* val);
-void        OSDetachThread(OSThread* thread);
+BOOL                    OSCreateThread(OSThread* thread, void* (*ThreadFunc)(void*), void* param, void* stack, u32 stackSize, OSPriority priority, u16 attr);
+void                    OSExitThread(void* val);
+void                    OSCancelThread(OSThread* thread);
+BOOL                    OSJoinThread(OSThread* thread, void* val);
+void                    OSDetachThread(OSThread* thread);
 
-void        OSYieldThread();
+void                    OSYieldThread();
 
-s32         OSSuspendThread(OSThread* thread);
-s32         OSResumeThread(OSThread* thread);
+s32                     OSSuspendThread(OSThread* thread);
+s32                     OSResumeThread(OSThread* thread);
 
-BOOL        OSSetThreadPriority(OSThread* thread, OSPriority priority);
-s32         OSGetThreadPriority(OSThread* thread);
+BOOL                    OSSetThreadPriority(OSThread* thread, OSPriority priority);
+s32                     OSGetThreadPriority(OSThread* thread);
 
-s32         OSCheckActiveThreads();
+s32                     OSCheckActiveThreads();
 
-void        OSSetThreadSpecific(s32 index, void* ptr);
-void*       OSGetThreadSpecific(s32 index);
+void                    OSSetThreadSpecific(s32 index, void* ptr);
+void*                   OSGetThreadSpecific(s32 index);
+
+OSSwitchThreadCallback  OSSetSwitchThreadCallback(OSSwitchThreadCallback callback);
 
 #ifdef __cplusplus
 }

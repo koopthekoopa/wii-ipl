@@ -7,11 +7,10 @@ namespace ipl {
     namespace ncd {
         class NCDSetting {
             public:
-                static unsigned char* getMacAddr();
+                static void             makeMacAddr();
+                static unsigned char*   getMacAddr();
         };
     }
 }
 
 #endif // IPL_NCD_SETTING_H
-
-

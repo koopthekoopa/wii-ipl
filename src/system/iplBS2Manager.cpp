@@ -14,7 +14,7 @@
 namespace ipl {
     namespace bs2 {
         Manager::Manager(EGG::Heap* heap) :
-        unk_0x04(1),
+        mIPLState(IPL_STATE_NO_DISK),
         mState(BS2_NO_DISK),
         unk_0x0C(true),
         unk_0x0D(false),
@@ -37,15 +37,15 @@ namespace ipl {
         }
 
         int Manager::update() {
-            if (unk_0x04 == 9 || unk_0x04 == 10) {
-                return unk_0x04;
+            if (mIPLState == IPL_STATE_UPDATE_FAIL || mIPLState == IPL_STATE_FATAL) {
+                return mIPLState;
             }
 
             if (unk_0x0F && !System::isNandFull()) {
                 BS2RestartStateMachine();
 
                 unk_0x0C = true;
-                unk_0x04 = 1;
+                mIPLState = IPL_STATE_NO_DISK;
                 unk_0x0F = false;
             }
             else if (unk_0x0C) {
@@ -68,7 +68,7 @@ namespace ipl {
                 }
             }
 
-            return unk_0x04;
+            return mIPLState;
         }
 
         u32 Manager::getDiskBannerBuffer(void** pBuffer) {
@@ -162,25 +162,25 @@ namespace ipl {
                 case BS2_NO_DISK:
                 case BS2_COVER_OPEN: {
                     unk_0x1C = BS2_NO_DISK;
-                    unk_0x04 = 1;
+                    mIPLState = IPL_STATE_NO_DISK;
                     break;
                 }
                 case BS2_RUN_APP: {
                     mbHasBanner = BS2IsBannerAvailable();
-                    unk_0x04 = 5;
+                    mIPLState = IPL_STATE_RUN_RVL_GAME;
                     if (BS2IsDiagDisc()) {
                         mbIsDiagDisc = true;
                     }
                     break;
                 }
                 case BS2_RUN_GC_APP: {
-                    unk_0x04 = 6;
+                    mIPLState = IPL_STATE_RUN_GC_GAME;
                     break;
                 }
                 case BS2_DATA_DISK: {
                     mbHasBanner = BS2IsBannerAvailable();
                     unk_0x1C = BS2_DATA_DISK;
-                    unk_0x04 = 5;
+                    mIPLState = IPL_STATE_RUN_RVL_GAME;
                     break;
                 }
                 case BS2_RUN_LOCKED_APP: {
@@ -191,33 +191,33 @@ namespace ipl {
                 case BS2_DIRTY_DISK:
                 case BS2_STATE_68: {
                     unk_0x1C = BS2_NO_DISK;
-                    unk_0x04 = 7;
+                    mIPLState = IPL_STATE_BAD_DISK;
                     break;
                 }
                 case BS2_RUN_UPDATE: {
-                    unk_0x04 = 3;
+                    mIPLState = IPL_STATE_START_UPDATE;
                     break;
                 }
                 case BS2_RESTART: {
-                    unk_0x04 = 4;
+                    mIPLState = IPL_STATE_RESTART_IPL;
                     break;
                 }
                 case BS2_STATE_64: {
                     unk_0x0C = false;
-                    unk_0x04 = 8;
+                    mIPLState = IPL_STATE_8;
                     break;
                 }
                 case BS2_UPDATE_FAILED: {
-                    unk_0x04 = 9;
+                    mIPLState = IPL_STATE_UPDATE_FAIL;
                     break;
                 }
                 case BS2_FATAL_ERROR: {
                     unk_0x1C = BS2_NO_DISK;
-                    unk_0x04 = 10;
+                    mIPLState = IPL_STATE_FATAL;
                     break;
                 }
                 default: {
-                    unk_0x04 = 2;
+                    mIPLState = IPL_STATE_BUSY;
                     break;
                 }
             }
@@ -244,14 +244,14 @@ namespace ipl {
                  || state == BS2_UPDATE_FAILED
                  || state == BS2_DIRTY_DISK) {
                     unk_0x0C = false;
-                    unk_0x04 = 8;
+                    mIPLState = IPL_STATE_8;
                 }
                 else {
                     BS2AbortStateMachine();
                 }
             }
             
-            unk_0x0D = 0;
+            unk_0x0D = false;
             unk_0x0E = false;
         }
 

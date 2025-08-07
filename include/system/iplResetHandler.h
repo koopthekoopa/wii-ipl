@@ -8,37 +8,40 @@
 namespace ipl {
     class ResetHandler {
         enum {
-            STATE_SHUTDOWN_LIB = 0,
-            STATE_SHUTDOWN_VIDEO = 3,
-            STATE_SHUTDOWN_SYSTEM = 4,
+            RESET_STATE_SHUTDOWN_LIB = 0,
+            RESET_STATE_SHUTDOWN_VIDEO = 3,
+            RESET_STATE_SHUTDOWN_SYSTEM = 4,
         };
 
         enum {
-            TYPE_INVALID = 0,
-            TYPE_RESTART,
-            TYPE_SHUTDOWN
+            STATE_WAIT_REQUEST = 0,
+            STATE_RESTART,
+            STATE_SHUTDOWN
         };
 
         enum {
-            FATAL_STATE_NONE = 0,
-            FATAL_STATE_FADE,
-            FATAL_STATE_INIT = FATAL_STATE_FADE,
-            FATAL_STATE_VIDEO,
-            FATAL_STATE_SYSTEM
+            FATAL_RESET_STATE_NONE = 0,
+            FATAL_RESET_STATE_FADE,
+            FATAL_RESET_STATE_INIT = FATAL_RESET_STATE_FADE,
+            FATAL_RESET_STATE_VIDEO,
+            FATAL_RESET_STATE_SYSTEM
         };
 
         public:
             ResetHandler(EGG::Heap* heap);
 
             void    reset();
+            void    powerOff()  { cbPowerOff(); }
+
+            void    setFatalResetCallback();
+
             void    check();
 
             void    update();
             void    fatalUpdate();
 
-            BOOL    isValidType() const         { return mType != TYPE_INVALID; }
-            BOOL    isInvalidType() const       { return mType == TYPE_INVALID; }
-
+            BOOL    isResetting() const         { return mState != STATE_WAIT_REQUEST; }
+   
             /**
              * This tells the reset handler to return to the system menu when resetting (calling `OSReturnToMenu()`)
              * instead of rebooting the system (calling `OSRebootSystem()`)
@@ -57,12 +60,10 @@ namespace ipl {
             static void cbFatalReset();
             static void cbFatalPowerOff();
 
-            void setFatalResetCallback();
-
-            u32     mState;         // 0x00
-            vu32    mType;          // 0x04
-            BOOL    mbReturnToMenu; // 0x08
-            u32     mFatalState;    // 0x0C
+            u32     mUpdateSatate;      // 0x00
+            vu32    mState;             // 0x04
+            BOOL    mbReturnToMenu;     // 0x08
+            u32     mFatalResetState;   // 0x0C
     };
 }
 

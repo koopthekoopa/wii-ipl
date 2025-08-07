@@ -27,7 +27,7 @@ namespace ipl {
     ErrorHandler::ErrorHandler(EGG::Heap* heap) :
     mbReady(FALSE),
     mType(NONE),
-    mMessageID(MESG_ERR_GENERIC),
+    mMessageID(0),
     mpArcData(NULL) {
         // Decompress the archive file.
         mArcSize = Rvl_decode_ash_size(fatalDlg_ash);
@@ -58,7 +58,7 @@ namespace ipl {
         }
 
         curThread = OSGetCurrentThread();
-        if (curThread == System::getUnkThread()->getMessageQueue()->queueSend.tail) {
+        if (curThread == System::getMainThread()->getMessageQueue()->queueSend.tail) {
             check();
         }
         else {

@@ -11,8 +11,10 @@
 namespace EGG {
     class Thread {
         public:
-            Thread();
+            Thread(OSThread* currThread, int);
             virtual ~Thread();
+
+            static void initialize();
 
             OSMessageQueue* getMessageQueue() { return &mMsgQueue; }
 

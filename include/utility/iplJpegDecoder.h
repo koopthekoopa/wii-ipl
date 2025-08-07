@@ -2,13 +2,15 @@
 #define IPL_UTILITY_JPEG_DECODER
 
 #include <revolution/types.h>
-#include <egg/core.h>
 
+#include <egg/core.h>
 
 namespace ipl {
     namespace  utility {
         class JpegDecoder {
             public:
+                JpegDecoder(EGG::Heap* heap);
+
                 BOOL    decodeJpg(EGG::Heap* heap, u8* buffer, u32 length);
                 BOOL    encodeOdh(EGG::Heap* heap, u8* buffer, u32 length);
 
@@ -19,7 +21,7 @@ namespace ipl {
                 void    clear();
 
             private:
-                u32 dummy[32];
+                u8 dummy[0x710];
         };
     }
 }

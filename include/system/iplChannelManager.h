@@ -5,6 +5,8 @@
 
 #include <private/es.h>
 
+#include <egg/core.h>
+
 #define CHANNEL_INFO(primary, second, flags, titleId) \
     { primary, second, 0, 0, flags, ES_CHANNEL_ID(titleId), ES_TITLE_ID(titleId) }
 
@@ -42,6 +44,18 @@ namespace ipl {
             ESTitleId32 titleType;      // 0x08
             ESTitleId32 titleCode;      // 0x0C
         } SInfo;
+
+        class Manager {
+            public:
+                Manager(EGG::Heap* heap);
+
+                void    initManager();
+
+                void    update();
+
+            private:
+                u8 dummy[0x1da8];
+        };
     }
 }
 

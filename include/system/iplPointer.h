@@ -105,6 +105,7 @@ namespace ipl {
             layout::Object* get_layout(int chan, int type);
 
             void            setVisible(bool value)      { mbVisible = value; }
+            bool            isVisible()                 { return mbVisible; }
             
             void            setOrigin(f32 x, f32 y)     { mOriginPos.x = x; mOriginPos.y = y; }
             void            setOrigin(math::VEC2 vec)   { mOriginPos = vec; }
@@ -132,5 +133,3 @@ namespace ipl {
 }
 
 #endif // IPL_POINTER_H
-
-

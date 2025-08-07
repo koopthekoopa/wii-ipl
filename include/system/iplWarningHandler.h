@@ -12,7 +12,8 @@ namespace ipl {
         private:
             enum Type {
                 NONE = 0,
-                DEFAULT
+                DEFAULT,
+                RESET
             };
 
             WarningHandler(EGG::Heap* heap);
@@ -20,12 +21,14 @@ namespace ipl {
              * @param type The warning type.
              * @param msgId The message ID.
              */
-            void set(Type type, u32 msgId);
+            void    set(Type type, u32 msgId);
 
-            void calc();
-            void draw();
+            void    calc();
+            void    draw();
 
-            BOOL check();
+            BOOL    check();
+
+            BOOL    resetting() { return mType == RESET; }
 
             Type            mType;      // 0x00
             u32             mMessageID; // 0x04
@@ -37,5 +40,3 @@ namespace ipl {
 }
 
 #endif // IPL_WARNING_HANDLER_H
-
-

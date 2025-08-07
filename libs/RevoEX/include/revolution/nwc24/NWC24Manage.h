@@ -13,6 +13,8 @@ BOOL        NWC24IsMsgLibOpened();
 BOOL        NWC24IsMsgLibOpenedByTool();
 BOOL        NWC24IsMsgLibOpenBlocking();
 
+#define NWC24_LIB_WORK_SIZE 0x4000
+
 NWC24Err    NWC24OpenLib(void* work);
 NWC24Err    NWC24OpenMsgLib(void* work);
 NWC24Err    NWC24CloseLib();

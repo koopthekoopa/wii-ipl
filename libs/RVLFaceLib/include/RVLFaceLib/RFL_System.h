@@ -14,6 +14,8 @@ RFLErrcode  RFLInitRes(void* workBuffer, void* resBuffer, u32 resSize, BOOL useD
 RFLErrcode  RFLWaitAsync();
 RFLErrcode  RFLGetAsyncStatus();
 
+char*       RFLGetArcFilePath();
+
 #ifdef __cplusplus
 }
 #endif

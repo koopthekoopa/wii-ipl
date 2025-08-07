@@ -142,6 +142,12 @@ static inline void BS2ScreenReportNoColor(const char* msg) {
 
 u32         BS2GetBootType();
 
+u32         BS2GetLaunchCode();
+ESTitleId   BS2GetLaunchTitle();
+
+u32         BS2GetArgc();
+char**      BS2GetArgv();
+
 void        BS2SetMemAllocator(MEMAllocator* allocator);
 
 void        BS2SetStateFlags();

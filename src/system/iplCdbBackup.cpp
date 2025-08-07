@@ -153,7 +153,7 @@ namespace ipl {
             // "Yes"
             case DialogWindow::RESULT_LEFT_BUTTON: {
                 mbDoneProcess = false;
-                System::getTask()->request(cdb_backup_delete_task_, this, NULL);
+                System::getTask1()->request(cdb_backup_delete_task_, this, NULL);
                 System::getDialog()->callBtn0(MESG_CDBBACKUP_DELETING, 0, true);
                 mState = STATE_WAIT_DELETING;
                 break;
@@ -173,7 +173,7 @@ namespace ipl {
             // "Yes"
             case DialogWindow::RESULT_LEFT_BUTTON: {
                 mbDoneProcess = false;
-                System::getTask()->request(cdb_backup_delete_task_, this, NULL);
+                System::getTask1()->request(cdb_backup_delete_task_, this, NULL);
                 System::getDialog()->callBtn0(MESG_CDBBACKUP_DELETING, 0, true);
                 mState = STATE_WAIT_DELETING;
                 break;
@@ -270,7 +270,7 @@ namespace ipl {
     void CdbBackup::stt_check_prepare_back() {
         if (System::getCdbManager()->getSDWorker()->get_async_result() == SDVFWorker::RESULT_SUCCESS) {
             mbDoneProcess = false;
-            System::getTask()->request(cdb_backup_move_task_, this, NULL);
+            System::getTask1()->request(cdb_backup_move_task_, this, NULL);
             System::getDialog()->callBtnPrg(MESG_CDBBACKUP_BACKING);
             mState = STATE_WAIT_SD_BACKING;
         }

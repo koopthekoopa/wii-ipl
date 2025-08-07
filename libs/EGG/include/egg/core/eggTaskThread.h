@@ -5,7 +5,7 @@
 #include <egg/core/eggThread.h>
 
 namespace EGG {
-    class TaskThread : Thread {
+    class TaskThread : public Thread {
         public:
             typedef void (*TFunction)(void*);
             
@@ -37,7 +37,7 @@ namespace EGG {
             void                request(TFunction func, void* work, void*);
             void                requestJam(TFunction func, void* work, void*);
 
-            OSMessageQueue*     getMessageQueue()                       { return mpMsgQueue; }
+            OSMessageQueue*     getThreadMsgQueue()                       { return mpMsgQueue; }
 
             void                setMessageQueue(OSMessageQueue* queue)  { mpMsgQueue = queue; }
 

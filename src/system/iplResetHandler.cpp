@@ -9,9 +9,9 @@
 
 namespace ipl {
     ResetHandler::ResetHandler(EGG::Heap* heap) {
-        mState = /*STATE_SHUTDOWN_LIB;*/ mType = TYPE_INVALID;
+        mUpdateSatate = /*RESET_STATE_SHUTDOWN_LIB;*/ mState = STATE_WAIT_REQUEST;
         mbReturnToMenu = FALSE;
-        mFatalState = FATAL_STATE_NONE;
+        mFatalResetState = FATAL_RESET_STATE_NONE;
         // Prepare the fade out.
         System::getResetFader()->setStatus(EGG::Fader::STATUS_PREPARE_OUT);
         System::getResetFader()->calc();
@@ -22,34 +22,34 @@ namespace ipl {
     }
 
     void ResetHandler::cbReset() {
-        if (System::getResetHandler()->mType == TYPE_INVALID) {
-            System::getResetHandler()->mType = TYPE_RESTART;
+        if (System::getResetHandler()->mState == STATE_WAIT_REQUEST) {
+            System::getResetHandler()->mState = STATE_RESTART;
         }
     }
 
     void ResetHandler::cbPowerOff() {
-        if (System::getResetHandler()->mType == TYPE_INVALID) {
-            System::getResetHandler()->mType = TYPE_SHUTDOWN;
+        if (System::getResetHandler()->mState == STATE_WAIT_REQUEST) {
+            System::getResetHandler()->mState = STATE_SHUTDOWN;
         }
     }
 
     void ResetHandler::reset() {
-        if (mType == TYPE_INVALID) {
-            mType = TYPE_RESTART;
+        if (mState == STATE_WAIT_REQUEST) {
+            mState = STATE_RESTART;
         }
     }
 
     void ResetHandler::check() {
-        if (mType != TYPE_INVALID) {
+        if (mState != STATE_WAIT_REQUEST) {
             System::reset_run();
         }
     }
 
     void ResetHandler::update() {
-        if (mType != TYPE_INVALID) {
-            switch (mState) {
+        if (mState != STATE_WAIT_REQUEST) {
+            switch (mUpdateSatate) {
                 // Shutdown Library
-                case STATE_SHUTDOWN_LIB: {
+                case RESET_STATE_SHUTDOWN_LIB: {
                     if (TVRCManager::getHandle() != NULL) {
                         TVRCManager::getHandle()->resetProcessAsync(TRUE);
                     }
@@ -58,10 +58,10 @@ namespace ipl {
                     && (System::getSaveData() == NULL || System::getSaveData()->isResetAcceptable())
                     && System::isResetAcceptable()) {
                         if (TVRCManager::getHandle() == NULL || TVRCManager::getHandle()->waitResetProcessCompleted()) {
-                            if (System::getPostmanManager()->Running()
+                            if (System::getPostmanManager()->IsUnknown()
                             || (System::getSceneManager() != NULL && System::getSceneManager()->getScene(scene::SCENE_ADDRESS) != NULL)) {
                                 if (System::getNwc24Manager() != NULL && !System::isNandFull()) {
-                                    if (System::unkBool() && !System::getNwc24Manager()->isUnk0xA31()) {
+                                    if (System::createdAfterAndLibMgr() && !System::getNwc24Manager()->isUnk0xA31()) {
                                         return;
                                     }
                                 }
@@ -78,18 +78,18 @@ namespace ipl {
                                     }
                                 #endif
 
-                                    mState = STATE_SHUTDOWN_VIDEO;
+                                    mUpdateSatate = RESET_STATE_SHUTDOWN_VIDEO;
 
                                     if (System::getSceneManager() != NULL) {
                                         System::getSceneManager()->startResetting();
                                     }
 
-                                    switch (mType) {
-                                        case TYPE_RESTART: {
+                                    switch (mState) {
+                                        case STATE_RESTART: {
                                             __WPADReconnect(TRUE);
                                             break;
                                         }
-                                        case TYPE_SHUTDOWN: {
+                                        case STATE_SHUTDOWN: {
                                             break;
                                         }
                                     }
@@ -100,19 +100,19 @@ namespace ipl {
                     break;
                 }
                 // Shutdown video
-                case STATE_SHUTDOWN_VIDEO: {
+                case RESET_STATE_SHUTDOWN_VIDEO: {
                     if (System::getResetFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN
                     && (System::getSceneManager() == NULL || System::getSceneManager()->isResetProcessDone())) {
-                        mState = STATE_SHUTDOWN_SYSTEM;
+                        mUpdateSatate = RESET_STATE_SHUTDOWN_SYSTEM;
                         VISetBlack(TRUE);
                         VIFlush();
                     }
                     break;
                 }
                 // Shutdown System
-                case STATE_SHUTDOWN_SYSTEM: {
-                    switch (mType) {
-                        case TYPE_RESTART: {
+                case RESET_STATE_SHUTDOWN_SYSTEM: {
+                    switch (mState) {
+                        case STATE_RESTART: {
                             if (WPADGetStatus() == 0) {
                                 VISetBlack(TRUE);
                                 VIFlush();
@@ -127,7 +127,7 @@ namespace ipl {
                             }
                             break;
                         }
-                        case TYPE_SHUTDOWN: {
+                        case STATE_SHUTDOWN: {
                             VISetBlack(TRUE);
                             VIFlush();
                             VIWaitForRetrace();
@@ -146,8 +146,8 @@ namespace ipl {
     }
 
     void ResetHandler::cbFatalPowerOff() {
-        if (System::getResetHandler()->mFatalState == FATAL_STATE_NONE) {
-            System::getResetHandler()->mFatalState = FATAL_STATE_INIT;
+        if (System::getResetHandler()->mFatalResetState == FATAL_RESET_STATE_NONE) {
+            System::getResetHandler()->mFatalResetState = FATAL_RESET_STATE_INIT;
         }
     }
 
@@ -157,28 +157,28 @@ namespace ipl {
     }
 
     void ResetHandler::fatalUpdate() {
-        switch (mFatalState) {
+        switch (mFatalResetState) {
             // Fade out
-            case FATAL_STATE_FADE: {
+            case FATAL_RESET_STATE_FADE: {
                 if (System::getResetFader()->fadeOut()) {
                     System::getResetFader()->fadeOut();
 
-                    mFatalState = FATAL_STATE_VIDEO;
+                    mFatalResetState = FATAL_RESET_STATE_VIDEO;
                 }
                 break;
             }
             // Shutdown the video
-            case FATAL_STATE_VIDEO: {
+            case FATAL_RESET_STATE_VIDEO: {
                 if (System::getResetFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
                     VISetBlack(TRUE);
                     VIFlush();
 
-                    mFatalState = FATAL_STATE_SYSTEM;
+                    mFatalResetState = FATAL_RESET_STATE_SYSTEM;
                 }
                 break;
             }
             // Shutdown the system
-            case FATAL_STATE_SYSTEM: {
+            case FATAL_RESET_STATE_SYSTEM: {
                 VISetBlack(TRUE);
                 VIFlush();
 

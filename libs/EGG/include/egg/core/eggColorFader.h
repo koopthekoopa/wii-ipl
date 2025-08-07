@@ -7,7 +7,7 @@
 namespace EGG {
     class ColorFader : public Fader {
         public:
-            ColorFader(f32, f32, f32, f32, nw4r::ut::Color, EStatus);
+            ColorFader(f32 left, f32 top, f32 right, f32 bottom, nw4r::ut::Color color = nw4r::ut::Color(0), EStatus status = EGG::ColorFader::STATUS_PREPARE_IN);
             
             virtual void    setStatus(EStatus status);  // 0x08
             virtual EStatus getStatus() const;          // 0x0C
@@ -23,9 +23,9 @@ namespace EGG {
          private: /* ? */
             void setFrame(u16 value);
             void setColor(nw4r::ut::Color value);
+
+            u8  dummy[0x20];
     };
 }
 
 #endif // EGG_CORE_COLOR_FADER_H
-
-

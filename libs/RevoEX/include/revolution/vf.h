@@ -7,6 +7,8 @@
 extern "C" {
 #endif // __cplusplus
 
+#define VF_WORK_SIZE    0x14000
+
 void    VFInitEx(void* heap_start_address, u32 size);
 s32     VFIsAvailable();
 

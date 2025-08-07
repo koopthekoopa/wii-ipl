@@ -32,6 +32,6 @@ namespace ipl {
     }
 
     BOOL WarningHandler::check() {
-        return mpDialog->getLastResult() /* == DialogWindow::RESULT_WAIT */;
+        return mpDialog->getLastResult();
     }
 }

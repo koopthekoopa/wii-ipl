@@ -56,11 +56,6 @@ namespace ipl {
             BTN_1       = REVO_BTN_1,
             BTN_2       = REVO_BTN_2,
         };
-
-        class Manager {
-            public:
-                Manager();
-        };
         
         class Interface {
             public:
@@ -123,6 +118,20 @@ namespace ipl {
         class Classic : public Interface {
             public:
                 virtual BOOL        isValidDpdClassic() const;      // 0x8C
+        };
+
+        class Manager {
+            public:
+                Manager(EGG::Heap* heap);
+
+                void        read();
+
+                Interface*  getController(int chan);
+                Interface*  getMasterController();
+                Interface*  getYoungController();
+
+            private:
+                u8  dummy[0x2F8];
         };
     }
 }

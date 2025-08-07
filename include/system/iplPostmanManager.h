@@ -18,7 +18,7 @@ namespace ipl {
                     STATE_STOP_RUN,
                     STATE_USBETHER_MAC,
                     STATE_DL_TASK,
-                    STATE_PREPARE
+                    STATE_UNKNOWN
                 };
                 Manager(EGG::Heap* heap);
                 virtual ~Manager() {}
@@ -35,7 +35,12 @@ namespace ipl {
                 virtual void*   Run();
                 
                 int             Get_CurrentState() const { return mState; }
-                BOOL            Running() { return mState != STATE_PREPARE; }
+                BOOL            IsUnknown() { return mState != STATE_UNKNOWN; }
+                BOOL            NotRunning() { return mState == STATE_STOP_RUN; }
+
+                void Start_RegistTask(EGG::TaskThread* task) {
+                    task->request(register_nwc24, NULL, NULL);
+                }
 
             private:
                 enum {
@@ -46,6 +51,8 @@ namespace ipl {
                     MESSAGE_GET_USBETHER_MACADDR,
                     MESSAGE_DOWNLOADTASK_RELOAD,
                 };
+
+                static void     register_nwc24(void* work /*unused*/);
 
                 void    suspend_scheduler_();
                 void    resume_scheduler_();
@@ -59,7 +66,6 @@ namespace ipl {
                 void    set_alarm_();
                 void    get_usb_ether_macaddr_();
                 void    set_nwc24_permission_();
-                void    register_nwc24(void* work /*unused*/);
 
                 void    ncd_debug_print_(bool unused = true) NO_INLINE;
                 void    ncd_debug_print_full_();

@@ -3,6 +3,8 @@
 
 #include <revolution/types.h>
 
+extern void* pBSWaveBuffer;
+
 class BannerSoundPlayer {
     public:
         void init(s32);

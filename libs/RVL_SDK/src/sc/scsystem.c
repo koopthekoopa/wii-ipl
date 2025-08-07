@@ -123,12 +123,6 @@ static void MyNandCallback(s32 result, NANDCommandBlock* block);
 static void FinishFromFlush();
 static void ErrorFromFlush();
 
-BOOL    __SCIsDirty();
-void    __SCSetDirtyFlag();
-void    __SCClearDirtyFlag();
-u8*     __SCGetConfBuf();
-u32     __SCGetConfBufSize();
-
 void SCInit() {
     BOOL enabled = OSDisableInterrupts();
 

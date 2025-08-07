@@ -19,6 +19,8 @@ namespace ipl {
             void    set_prev_free_size(int value)   { mPrevFreeSize = value; }
             void    set_free_size(int value)        { mTotalFreeSize = value; }
 
+            BOOL    is_working()                    { return mState != STATE_FINISHED; }
+
         private:
             void    stt_wait_worker();
             void    stt_mount_sd();

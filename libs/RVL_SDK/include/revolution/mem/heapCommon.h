@@ -14,7 +14,7 @@ extern "C" {
 typedef enum MEMHeapOpt {
     MEM_HEAP_OPT_CLEAR_ALLOC    = (1 << 0),
     MEM_HEAP_OPT_DEBUG_FILL     = (1 << 1),
-    MEM_HEAP_OPT_CAN_LOCK       = (1 << 2)
+    MEM_HEAP_OPT_THREAD_SAFE    = (1 << 2)
 } MEMHeapOpt;
 
 typedef struct MEMiHeapHead {

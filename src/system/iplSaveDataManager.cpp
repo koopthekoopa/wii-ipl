@@ -96,7 +96,7 @@ namespace ipl {
 
         void Manager::initManager() {
             mbInit = false;
-            System::getNandTask()->request(initManagerTask, this, NULL);
+            System::getTask3()->request(initManagerTask, this, NULL);
         }
 
         void Manager::setPrevPage(int prevPage) {

@@ -24,9 +24,9 @@ namespace ipl {
         mbCreatedReserved(false),
         mbDestroySyncTask(false) {
             // Setup the heaps!!
-            mpBigSceneHeap = EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_BIG_SIZE,    3, 4), SCENE_BIG_SIZE,    heap, 4, 2);
-            mpMdmSceneHeap = EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_MEDIUM_SIZE, 4, 4), SCENE_MEDIUM_SIZE, heap, 4, 2);
-            mpSmlSceneHeap = EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_SMALL_SIZE,  6, 4), SCENE_SMALL_SIZE,  heap, 4, 2);
+            mpBigSceneHeap = EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_BIG_SIZE,    3, 4), SCENE_BIG_SIZE,    heap, 4, MEM_HEAP_OPT_DEBUG_FILL);
+            mpMdmSceneHeap = EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_MEDIUM_SIZE, 4, 4), SCENE_MEDIUM_SIZE, heap, 4, MEM_HEAP_OPT_DEBUG_FILL);
+            mpSmlSceneHeap = EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_SMALL_SIZE,  6, 4), SCENE_SMALL_SIZE,  heap, 4, MEM_HEAP_OPT_DEBUG_FILL);
         }
 
         void Manager::init() {
@@ -201,7 +201,7 @@ namespace ipl {
                 }
             }
 
-            heap = EGG::FrmHeap::create(size, heap, 2);
+            heap = EGG::FrmHeap::create(size, heap, MEM_HEAP_OPT_DEBUG_FILL);
             System::setCurrentHeap(heap);
 
             scene = Creator::create(sceneId, heap, args);
@@ -217,7 +217,7 @@ namespace ipl {
 
         void Manager::setDestructSync() {
             mbDestroySyncTask = false;
-            System::getTask()->request(destruct_sync_task_, this, NULL);
+            System::getTask1()->request(destruct_sync_task_, this, NULL);
         }
 
         void Manager::destroyScene(SceneObj* scene) {

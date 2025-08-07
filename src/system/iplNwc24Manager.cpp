@@ -400,7 +400,7 @@ namespace ipl {
             return result;
         }
 
-        BOOL Manager::setDlTable() {
+        void Manager::setDlTable() {
             NWC24DlId dlId = 0;
             int i = 0;
 

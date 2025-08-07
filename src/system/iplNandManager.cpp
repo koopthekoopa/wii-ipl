@@ -130,7 +130,7 @@ namespace ipl {
         MetaFile* Manager::readMetaHeaderAsync(EGG::Heap* heap, ESTitleId titleId, int offset, u32 length, MetaFile::Callback callback, void* callbackWork, int ticketIdx) {
             MetaFile* file = new(heap, CLASS_HEAP) MetaFile(heap, "", NULL, titleId, offset, length, callback, callbackWork, ticketIdx);
 
-            System::getNandTask()->request(doReadTask, file, NULL);
+            System::getTask3()->request(doReadTask, file, NULL);
 
             return file;
         }
@@ -220,7 +220,7 @@ namespace ipl {
 
         BOOL Manager::receiveToken(int* token) {
             BOOL result = FALSE;
-            OSMessage msg = EGG::TaskThread::waitQueueMessage(mpTask->getMessageQueue(), &result);
+            OSMessage msg = EGG::TaskThread::waitQueueMessage(mpTask->getThreadMsgQueue(), &result);
             if (result && msg != NULL) {
                 *token = reinterpret_cast<int>(msg);
             }

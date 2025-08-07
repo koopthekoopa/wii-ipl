@@ -9,7 +9,7 @@ extern "C" {
 
 static void OSInitFastCast() {
 #ifdef __MWERKS__
-    asm volatile {
+    asm {
         li      r3, 4
         oris    r3, r3, 4
         mtspr   0x392, r3

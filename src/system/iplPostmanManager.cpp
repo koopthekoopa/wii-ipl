@@ -63,8 +63,8 @@ namespace ipl {
         }
 
         void* Manager::Run() {
-            if (!System::getResetHandler()->isValidType()) {
-                mState = STATE_PREPARE;
+            if (!System::getResetHandler()->isResetting()) {
+                mState = STATE_UNKNOWN;
 
                 update_playlog_();
                 add_dl_task_();
@@ -147,7 +147,7 @@ namespace ipl {
 
         void Manager::update_playlog_() {
             if (System::getCdbManager() != NULL) {
-                if (!System::getCdbManager()->isOverFlow() && !System::isUnk_0x2C8()) {
+                if (!System::getCdbManager()->isOverFlow() && !System::goingToDataManager()) {
                     PlayTimeLog::log();
                 }
                 System::getCdbManager()->cleanUpEmptyDirectories(CDB_RECORD_LOCATION_VF);

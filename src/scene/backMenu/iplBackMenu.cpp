@@ -91,12 +91,12 @@ namespace ipl {
 
         SceneCommand BackMenu::calcFadeout() {
             if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
-                System::setUnk_0x2BE(true);
-                System::setUnk_0x2BF(true);
+                System::requestCreateAfter();
+                System::requestCreateLibManager();
             }
 
             // After system initialized, we can exit out the scene
-            if (System::unkBool() || (System::hasCreatedAfter() && System::isNandFull())) {
+            if (System::createdAfterAndLibMgr() || (System::hasCreatedAfter() && System::isNandFull())) {
                 System::getPointer()->setVisible(true);
                 System::getResetHandler()->enableResetToMenu(TRUE);
                 

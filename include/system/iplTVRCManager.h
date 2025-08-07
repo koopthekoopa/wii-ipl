@@ -1,25 +1,29 @@
 #ifndef IPL_TVRC_MANAGER_H
 #define IPL_TVRC_MANAGER_H
 
-#include <decomp.h>
+#include <revolution/types.h>
 
-#include <revolution.h>
+#include <egg/core.h>
 
 namespace ipl {
     class TVRCManager {
         public:
-            TVRCManager();
+            TVRCManager(EGG::Heap* heap);
+
+            void    update();
+
+            void    loadDatabase();
             
-            void resetProcessAsync(BOOL unk);
-            bool waitResetProcessCompleted();
+            void    resetProcessAsync(BOOL unk);
+            bool    waitResetProcessCompleted();
             
             static TVRCManager* getHandle() { return m_handle; }
 
         private:
             static TVRCManager* m_handle;
+
+            u8 dummy[0x88];
     };
 }
 
 #endif // IPL_TVRC_MANAGER_H
-
-

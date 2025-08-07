@@ -79,6 +79,19 @@ typedef struct RSOExportTable {
     u32 hash;       // 0x0C
 } RSOExportTable;
 
+BOOL    RSOStaticLocateObject(void* newModule);
+BOOL    RSOUnLocateObject(void* oldModule);
+
+int     RSOLink(RSOObjectHeader* rsoImp, RSOObjectHeader* rsoExp);
+
+int     RSOGetNumImportSymbolsUnresolved(RSOObjectHeader* rso);
+BOOL    RSOIsImportSymbolResolvedAll(RSOObjectHeader* rso);
+
+BOOL    RSOListInit(void* staticRso);
+
+BOOL    RSOLinkList(void* newRso, void* bss);
+BOOL    RSOUnLinkList(void* oldRso);
+
 #ifdef __cplusplus
 }
 #endif

@@ -3,12 +3,24 @@
 
 /* Small configuration macros */
 
-#define SYSMENU_TITLE_ID    0x0000000100000002
-#define SYSMENU_CONTENT_ID  0x00000001/*.app*/
-
 
 /*** IPL CONFIGURATION ***/
 
+
+#define SYSMENU_TITLE_ID    0x0000000100000002
+#define SYSMENU_CONTENT_ID  0x00000001/*.app*/
+
+#define SYSMENU_BUILD_TYPE      "FINAL"
+
+#if defined(VERSION_43U)
+#define SYSMENU_BUILD_VERSION   "US2"
+#elif defined(VERSION_43E)
+#define SYSMENU_BUILD_VERSION   "EU2"
+#elif defined(VERSION_43J)
+#define SYSMENU_BUILD_VERSION   "JP2"
+#elif defined(VERSION_43K)
+#define SYSMENU_BUILD_VERSION   "KR2"
+#endif
 
 /**
  * @brief Enables OSReport for BS2
@@ -18,6 +30,9 @@
 
 /** @brief IRD Mode (recovery mode) will boot up any Wii/GC game. */
 // #define IRD_DIAG_RESTRICT_OFF
+
+/** @brief Korean Common Key on non -Korean Wiis will not cause Error 003. */
+// #define TURN_OFF_CK2_VERIFY
 
 /** @brief Enables OSReport for IPL's WWW (untested) */
 // #define ENABLE_IPL_WWW_REPORT

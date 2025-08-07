@@ -9,17 +9,17 @@
 namespace ipl {
     namespace scene {
         void Reboot::calc() {
-            if (System::unkBool() || (System::hasCreatedAfter() && System::isNandFull())) {
+            if (System::createdAfterAndLibMgr() || (System::hasCreatedAfter() && System::isNandFull())) {
                 System::getHomeButtonMenu()->enableLib();
 
                 switch (mSettingsType) {
                     // Wii Options
-                    case REBOOT_SETTINGS_SELECT: {  
+                    case REBOOT_DATA_MANAGEMENT: {  
                         reserveSceneChange(SCENE_SETTING_BG, (void*)2);
                         break;
                     }
                      // System Settings
-                    case REBOOT_SETTINGS: {
+                    case REBOOT_INTERNET_SETTINGS: {
                         reserveSceneChange(SCENE_SETTING, (void*)6);
                         break;
                     }

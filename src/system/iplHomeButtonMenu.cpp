@@ -141,7 +141,7 @@ namespace ipl {
             return;
         }
 
-        if (!System::getResetHandler()->isValidType()) {
+        if (!System::getResetHandler()->isResetting()) {
             if (!mbHbmEnabled && !mbBanIconEnabled
             && System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_OUT) {
                 checkStart();

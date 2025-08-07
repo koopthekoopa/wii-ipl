@@ -106,7 +106,7 @@ namespace ipl {
                 BOOL        updateDlTask(NWC24DlTask* dlTask);
                 BOOL        deleteDlTask(NWC24DlTask* dlTask);
                 BOOL        setDlTableFirst();
-                BOOL        setDlTable();
+                void        setDlTable();
                 BOOL        isAppDlEnable(u32 appId) const;
 
                 // NWC24System

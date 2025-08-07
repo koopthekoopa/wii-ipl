@@ -431,12 +431,12 @@ namespace ipl {
         }
 
         Object* Object::create(EGG::Heap* heap, u32 unk0, nand::LayoutFile* file, const char* directory, const char* fileName) {
-            EGG::ExpHeap* expHeap = EGG::ExpHeap::create(unk0, heap, 2);
+            EGG::ExpHeap* expHeap = EGG::ExpHeap::create(unk0, heap, MEM_HEAP_OPT_DEBUG_FILL);
             return new(expHeap, CLASS_HEAP) Object(expHeap, file, directory, fileName);
         }
 
         Object* Object::create(EGG::Heap* heap, u32 unk0, void* buffer, const char* directory, const char* fileName) {
-            EGG::ExpHeap* expHeap = EGG::ExpHeap::create(unk0, heap, 2);
+            EGG::ExpHeap* expHeap = EGG::ExpHeap::create(unk0, heap, MEM_HEAP_OPT_DEBUG_FILL);
             return new(expHeap, CLASS_HEAP) Object(expHeap, buffer, directory, fileName);
         }
 

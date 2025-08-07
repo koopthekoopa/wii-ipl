@@ -14,34 +14,38 @@
 #include "system/iplNandShared.h"
 #include "system/iplNandMeta.h"
 
+#include "config.h"
+
 namespace ipl {
     namespace nand {
         class Manager {
             public:
                 Manager(EGG::Heap* heap);
 
-                File*       read(EGG::Heap* heap, const char* fileName, int offset, u32 length, bool bJamRequest = false);
-                File*       readAsync(EGG::Heap* heap, const char* fileName, int offset, u32 length, bool bJamRequest = false);
+                File*               read(EGG::Heap* heap, const char* fileName, int offset = 0, u32 length = 0, bool bJamRequest = false);
+                File*               readAsync(EGG::Heap* heap, const char* fileName, int offset = 0, u32 length = 0, bool bJamRequest = false);
 
-                File*       write(EGG::Heap* heap, const char* fileName, void* buffer, u32 length, u8 perms);
-                File*       writeAsync(EGG::Heap* heap, const char* fileName, void* buffer, u32 length, u8 perms);
+                File*               write(EGG::Heap* heap, const char* fileName, void* buffer, u32 length, u8 perms);
+                File*               writeAsync(EGG::Heap* heap, const char* fileName, void* buffer, u32 length, u8 perms);
 
-                SharedFile* readSharedAsync(EGG::Heap* heap, const char* fileName, int index, int offset, u32 length, ESTitleId titleId, int ticketIdx);
+                SharedFile*         readSharedAsync(EGG::Heap* heap, const char* fileName, int index, int offset = 0, u32 length = 0, ESTitleId titleId = SYSMENU_TITLE_ID, int ticketIdx = 0);
 
-                MetaFile*   readMetaHeaderAsync(EGG::Heap* heap, ESTitleId titleId, int offset, u32 length, MetaFile::Callback callback, void* callbackWork, int ticketIdx);
-                MetaFile*   readMetaBodyAsync(EGG::Heap* heap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, MetaFile::Callback callback, void* callbackWork, int ticketIdx);
+                MetaFile*           readMetaHeaderAsync(EGG::Heap* heap, ESTitleId titleId, int offset, u32 length, MetaFile::Callback callback, void* callbackWork, int ticketIdx);
+                MetaFile*           readMetaBodyAsync(EGG::Heap* heap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, MetaFile::Callback callback, void* callbackWork, int ticketIdx);
 
-                LayoutFile* readLayout(EGG::Heap* heap, const char* fileName, bool bJamRequest = false);
-                LayoutFile* readLayoutAsync(EGG::Heap* heap, const char* fileName, bool bJamRequest = false);
+                LayoutFile*         readLayout(EGG::Heap* heap, const char* fileName, bool bJamRequest = false);
+                LayoutFile*         readLayoutAsync(EGG::Heap* heap, const char* fileName, bool bJamRequest = false);
                 
-                void        openContentsAll();
-                void        closeContentsAll();
+                void                openContentsAll();
+                void                closeContentsAll();
                 
-                void        sendToken(int token);
-                BOOL        receiveToken(int* token);
+                void                sendToken(int token);
+                BOOL                receiveToken(int* token);
                 
-                ESFd        getDescriptor() const   { return mDescriptor; }
-                ARCHandle*  getArc()                { return &mArc; }
+                ESFd                getDescriptor() const   { return mDescriptor; }
+                ARCHandle*          getArc()                { return &mArc; }
+
+                EGG::TaskThread*    getTask()               { return mpTask; }
             
             private:
                 static void doReadTask(void* work);

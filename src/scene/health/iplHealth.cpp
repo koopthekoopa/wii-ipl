@@ -308,16 +308,16 @@ namespace ipl {
             mpLayout->calc();
 
             if (!mpLayout->isPlaying(ANIM_FADE_OUT)) {
-                System::setUnk_0x2BE(true);
+                System::requestCreateAfter();
 
                 if (!System::isSafeMode()) {
-                    System::setUnk_0x2BF(true);
+                    System::requestCreateLibManager();
                 }
 
                 System::getFader()->fadeOut();
             }
 
-            if (System::unkBool() || (System::hasCreatedAfter() && System::isNandFull()) || System::isSafeMode()) {
+            if (System::createdAfterAndLibMgr() || (System::hasCreatedAfter() && System::isNandFull()) || System::isSafeMode()) {
                 if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
                     System::getPointer()->setVisible(true);
                     System::getResetHandler()->enableResetToMenu(TRUE);

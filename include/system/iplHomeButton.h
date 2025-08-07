@@ -26,6 +26,8 @@ namespace ipl {
             void            enableLib()     { mbHBMLibEnabled = true; }
             void            disableLib()    { mbHBMLibEnabled = false; }
 
+            bool            isEnable()      { return mbHbmEnabled && mEnableByTVRCFlag ? true : false; }
+
         private:
             void            DrawBanIcon(u8 alpha);
             void            callHBM();

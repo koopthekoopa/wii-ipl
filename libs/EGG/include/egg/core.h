@@ -11,6 +11,8 @@
 #include <egg/core/eggThread.h>
 #include <egg/core/eggTaskThread.h>
 
+#include <egg/core/eggGraphicsFifo.h>
+
 #include <egg/core/eggFader.h>
 #include <egg/core/eggColorFader.h>
 

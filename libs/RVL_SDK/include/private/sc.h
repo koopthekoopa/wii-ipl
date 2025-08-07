@@ -135,6 +135,13 @@ BOOL SCReplaceU32Item(u32 dst, SCItemID id);
 BOOL SCReplaceU64Item(u64 dst, SCItemID id);
 BOOL SCReplaceBoolItem(BOOL dst, SCItemID id);
 
+BOOL    __SCIsDirty();
+void    __SCClearConfBuf();
+void    __SCSetDirtyFlag();
+void    __SCClearDirtyFlag();
+u8*     __SCGetConfBuf();
+u32     __SCGetConfBufSize();
+
 #ifdef __cplusplus
 }
 #endif

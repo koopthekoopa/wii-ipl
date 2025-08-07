@@ -51,13 +51,13 @@ static void SetOptForHeap(MEMiHeapHead* heap, u16 opt) {
 }
 
 static void LockHeap(MEMiHeapHead* heap) {
-    if (GetOptForHeap(heap) & MEM_HEAP_OPT_CAN_LOCK) {
+    if (GetOptForHeap(heap) & MEM_HEAP_OPT_THREAD_SAFE) {
         OSLockMutex(&heap->mutex);
     }
 }
 
 static void UnlockHeap(MEMiHeapHead* heap) {
-    if (GetOptForHeap(heap) & MEM_HEAP_OPT_CAN_LOCK) {
+    if (GetOptForHeap(heap) & MEM_HEAP_OPT_THREAD_SAFE) {
         OSUnlockMutex(&heap->mutex);
     }
 }

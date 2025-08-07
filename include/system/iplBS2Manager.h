@@ -13,6 +13,19 @@
 
 namespace ipl {
     namespace bs2 {
+        enum {
+            IPL_STATE_NO_DISK = 1,
+            IPL_STATE_BUSY,
+            IPL_STATE_START_UPDATE,
+            IPL_STATE_RESTART_IPL,
+            IPL_STATE_RUN_RVL_GAME,
+            IPL_STATE_RUN_GC_GAME,
+            IPL_STATE_BAD_DISK,
+            IPL_STATE_8,
+            IPL_STATE_UPDATE_FAIL,
+            IPL_STATE_FATAL,
+        };
+
         class Manager {
             public:
                 /** @param heap The work heap used. */
@@ -66,7 +79,7 @@ namespace ipl {
             private:
                 void    bootNewSystem();
                 
-                u32                 unk_0x04;
+                u32                 mIPLState;          // 0x04
                 volatile BS2State   mState;             // 0x08
                 bool                unk_0x0C;
                 bool                unk_0x0D;
@@ -91,5 +104,3 @@ namespace ipl {
 }
 
 #endif // IPL_BS2_MANAGER_H
-
-

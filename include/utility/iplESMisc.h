@@ -52,6 +52,8 @@ namespace ipl {
                 static BOOL     IsLastTicketExpired(ESTitleId* titleId);
                 static void     DeleteExpiredFlagFile();
 
+                static void     InitSaveData(EGG::Heap* heap);
+
                 static u32      CheckTmdCountryCode(ESTmdView* tmdView);
 
                 static BOOL     __IsPCEnable();
@@ -61,6 +63,7 @@ namespace ipl {
                 static u32      NumInodesSaveDirRoot(ESTitleId titleId);
 
                 static s32      DeleteTitle(EGG::Heap* heap, ESTitleId titleId);
+                static s32      DeleteEmptyTitles(EGG::Heap* heap);
                 static s32      DeleteMetaContent(ESTitleId titleId);
         };
     }

@@ -12,7 +12,7 @@
 /*** Message IDs for the Error Message ***/
 
 /* An error has occurred. */
-#define MESG_ERR_GENERIC    0
+#define MESG_ERR_DVD        0
 /* The Wii System Memory is damaged. */
 #define MESG_ERR_NAND       1
 /* The system files are corrupted. */
@@ -20,7 +20,7 @@
 /* This channel can't be used. */
 #define MESG_ERR_CHANNEL    3
 /* Error:003 unauthorized device has been detected. */
-#define MESG_ERR_KEY        4
+#define MESG_ERR_KEY2       4
 
 namespace ipl {
     class ErrorHandler {
@@ -33,9 +33,11 @@ namespace ipl {
             /** @param heap The work heap. */
             ErrorHandler(EGG::Heap* heap);
 
-            void draw();
-            void check();
-            void calc();
+            void    draw();
+            void    check();
+            void    calc();
+
+            BOOL    isReady()   { return mbReady == TRUE; }
 
             /**
              * @param type The error type.
@@ -44,7 +46,7 @@ namespace ipl {
              * @param arg2 Unknown. Left as `0`.
              * @param arg3 Unknown. Left as `-1`.
              */
-            void set(Type type, u32 msgId, const char* arg1 = NULL, int arg2 = 0, int arg3 = -1);
+            void    set(Type type, u32 msgId, const char* arg1 = NULL, int arg2 = 0, int arg3 = -1);
 
             /**
              * @param type The error type.
@@ -52,7 +54,7 @@ namespace ipl {
              * @param file The source file name.
              * @param line The source file line.
             */
-            void log(const char* type, int result, const char* file, int line);
+            void    log(const char* type, int result, const char* file, int line);
 
         private:
             BOOL            mbReady;    // 0x00
@@ -69,8 +71,6 @@ namespace ipl {
             u32             mArcSize;   // 0x1C
 
             layout::Object* mpLayout;   // 0x20
-        
-        friend class System;
     };
 }
 

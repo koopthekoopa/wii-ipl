@@ -9,6 +9,8 @@ namespace ipl {
             #define NEXT    (next = next * 1664525 + 1013904223)
             
             public:
+                Random(u32 myNext) : next(myNext) { }
+
                 u8  get_u8()    { return (u8) NEXT; }
                 u16 get_u16()   { return (u16)NEXT; }
                 u32 get_u32()   { return (u32)NEXT; }
@@ -24,5 +26,3 @@ namespace ipl {
 }
 
 #endif // IPL_MATH_RANDOM_H
-
-

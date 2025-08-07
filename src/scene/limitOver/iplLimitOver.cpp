@@ -260,7 +260,7 @@ namespace ipl {
 
             // Done waiting? We wait again!... For the system to finish preparing.
             if (mbFadedIn && OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mWaitTick)) > LIMIT_TIMER_FADE_IN) {
-                if (System::unkBool() || (System::hasCreatedAfter() && System::isNandFull())) {
+                if (System::createdAfterAndLibMgr() || (System::hasCreatedAfter() && System::isNandFull())) {
                     mpPushPane->SetVisible(true);
 
                     mpLayout->start(ANIM_WAIT_PUSH);

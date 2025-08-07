@@ -6,6 +6,9 @@
 #include <egg/core/eggDisposer.h>
 
 #include <revolution/types.h>
+#include <revolution/mem/heapCommon.h>
+
+#include <revolution/os/OSInterrupt.h>
 
 #include <cstddef>
 
@@ -17,6 +20,8 @@ namespace EGG {
                 HEAP_EXPANDED = 1,
                 HEAP_FRAME = 2
             } HeapKind;
+
+            static void         initialize();
             
             virtual ~Heap();                                                        // 0x08
 
@@ -36,6 +41,19 @@ namespace EGG {
             virtual void        adjust() = 0;                                       // 0x28
 
             void                becomeCurrentHeap();
+
+            void                dump();
+
+            void                _becomeCurrentHeapWithoutLock();
+            void unkUnline_becomeCurrentHeap(int id = 0) {
+                BOOL enabled = OSDisableInterrupts();
+                _becomeCurrentHeapWithoutLock();
+                OSSetThreadSpecific(id, this);
+                OSRestoreInterrupts(enabled);
+            }
+            static Heap* unkInline2(int id = 0) {
+                return (Heap*)OSGetThreadSpecific(id);
+            }
     };
 }
 
