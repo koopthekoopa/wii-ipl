@@ -74,6 +74,10 @@
 namespace ipl {
     class System {
         public:
+            enum {
+                LAUNCH_CODE_INTERNET_SETTING = 1,
+                LAUNCH_CODE_DATA_MANAGER = 2,
+            };
             class Arg {
                 public:
                     Arg();
@@ -193,16 +197,11 @@ namespace ipl {
                     void*                   mpMem1Arena;                // 0x214
                     u32                     mMem1ArenaSize;             // 0x218
 
-                    enum {
-                        LAUNCH_CODE_INTERNET_SETTING = 1,
-                        LAUNCH_CODE_DATA_MANAGER = 2,
-                    };
-
                     u32                     mBS2BootType;               // 0x21C
                     u32                     mBS2LaunchCode;             // 0x220
                     u32                     unk_0x224;
                     char*                   mpNetSettingArg;            // 0x228
-                    char*                   mDataManageArg;             // 0x22C
+                    char*                   mpDataManageArg;            // 0x22C
                     char                    mBS2FirstArgv[128];         // 0x230
 
                     volatile bool           mbResLoaded;                // 0x2B0
@@ -329,6 +328,9 @@ namespace ipl {
             static void                             requestCreateAfter()        { smArg.mbRequestCreateAfter = true; }
             static void                             requestCreateLibManager()   { smArg.mbRequestCreateLibMgr = true; }
 
+            static void                             stopCreateAfterReq()        { smArg.mbRequestCreateAfter = false; }
+            static void                             stopCreateLibManagerReq()   { smArg.mbRequestCreateLibMgr = false; }
+
             static bool                             goingToDataManager()        { return smArg.mbGoingToDataManager; }
 
             /*==============================*/
@@ -337,6 +339,13 @@ namespace ipl {
 
             /** @return The BS2 Manager object. */
             static bs2::Manager*                    getBS2Manager()             { return smArg.mpBS2Manager; }
+
+            static u32                              getBS2BootType()            { return smArg.mBS2BootType; }
+            static u32                              getBS2LaunchCode()          { return smArg.mBS2LaunchCode; }
+            static ESTitleId                        getBS2LaunchTitle()         { return smArg.mBS2LaunchTitle; }
+
+            static char*                            getNetSettingArg()          { return smArg.mpNetSettingArg; }
+            static char*                            getDataManagerArg()         { return smArg.mpDataManageArg; }
 
             /*==============================*/
             /*        WII CONTROLLERS       */

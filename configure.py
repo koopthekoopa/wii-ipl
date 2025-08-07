@@ -787,7 +787,7 @@ config.libs = [
     ),
     IPLSection("sceneMisc", [
             Object(Matching,    "scene/sceneMisc/iplReboot.cpp"),
-            Object(NonMatching, "scene/sceneMisc/iplRootScene.cpp"),
+            Object(Matching,    "scene/sceneMisc/iplRootScene.cpp"),
         ]
     ),
     IPLSection("sdChannelSelect", [

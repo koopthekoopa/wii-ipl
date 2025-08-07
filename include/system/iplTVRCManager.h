@@ -10,6 +10,8 @@ namespace ipl {
         public:
             TVRCManager(EGG::Heap* heap);
 
+            void    setEnable(BOOL flag);
+
             void    update();
 
             void    loadDatabase();

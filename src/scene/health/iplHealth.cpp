@@ -320,7 +320,7 @@ namespace ipl {
             if (System::createdAfterAndLibMgr() || (System::hasCreatedAfter() && System::isNandFull()) || System::isSafeMode()) {
                 if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
                     System::getPointer()->setVisible(true);
-                    System::getResetHandler()->enableResetToMenu(TRUE);
+                    System::getResetHandler()->enableResetToMenu();
 
                     for (int i = 0; i < 1; i++) { // :question:
                         reserveAllSceneDestruction(SCENE_BOARD, NULL);

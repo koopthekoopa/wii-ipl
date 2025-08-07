@@ -9,7 +9,7 @@
 
 namespace ipl {
     ResetHandler::ResetHandler(EGG::Heap* heap) {
-        mUpdateSatate = /*RESET_STATE_SHUTDOWN_LIB;*/ mState = STATE_WAIT_REQUEST;
+        mUpdateState = /*RESET_STATE_SHUTDOWN_LIB;*/ mState = STATE_WAIT_REQUEST;
         mbReturnToMenu = FALSE;
         mFatalResetState = FATAL_RESET_STATE_NONE;
         // Prepare the fade out.
@@ -47,7 +47,7 @@ namespace ipl {
 
     void ResetHandler::update() {
         if (mState != STATE_WAIT_REQUEST) {
-            switch (mUpdateSatate) {
+            switch (mUpdateState) {
                 // Shutdown Library
                 case RESET_STATE_SHUTDOWN_LIB: {
                     if (TVRCManager::getHandle() != NULL) {
@@ -78,7 +78,7 @@ namespace ipl {
                                     }
                                 #endif
 
-                                    mUpdateSatate = RESET_STATE_SHUTDOWN_VIDEO;
+                                    mUpdateState = RESET_STATE_SHUTDOWN_VIDEO;
 
                                     if (System::getSceneManager() != NULL) {
                                         System::getSceneManager()->startResetting();
@@ -103,7 +103,7 @@ namespace ipl {
                 case RESET_STATE_SHUTDOWN_VIDEO: {
                     if (System::getResetFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN
                     && (System::getSceneManager() == NULL || System::getSceneManager()->isResetProcessDone())) {
-                        mUpdateSatate = RESET_STATE_SHUTDOWN_SYSTEM;
+                        mUpdateState = RESET_STATE_SHUTDOWN_SYSTEM;
                         VISetBlack(TRUE);
                         VIFlush();
                     }

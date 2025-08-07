@@ -98,7 +98,7 @@ namespace ipl {
             // After system initialized, we can exit out the scene
             if (System::createdAfterAndLibMgr() || (System::hasCreatedAfter() && System::isNandFull())) {
                 System::getPointer()->setVisible(true);
-                System::getResetHandler()->enableResetToMenu(TRUE);
+                System::getResetHandler()->enableResetToMenu();
                 
                 reserveAllSceneDestruction(SCENE_BOARD, NULL);
                 

@@ -7,11 +7,14 @@ namespace ipl {
     namespace scene {
         SCENE_CLASS(RootScene) {
             public:
+                virtual ~RootScene() {}
+
+                void        create();
                 static void proc_boot_scene(int* initialScene, int* initialSubScene);
             
             private:
-                void*   mInitialArgs;   // 0x54
-                void*   unk_0x58;
+                void*   mInitialArgs;       // 0x54
+                void*   mInitialSceneID;    // 0x58
             
             friend class Manager;
         };
