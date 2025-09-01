@@ -10,7 +10,7 @@
 
 #include <private/nwc24.h>
 
-#include <wchar.h>
+#include <cwchar>
 
 namespace ipl {
     namespace nwc24 {
@@ -40,7 +40,7 @@ namespace ipl {
             OSInitMutex(&mLock);
             OSInitMutex(&mAutoLock);
 
-            mpLibWork = new(heap, BUFFER_HEAP) u8[0x4000];
+            mpLibWork = new(heap, DEFAULT_ALIGN) u8[0x4000];
 
             memset(&smArg, 0, sizeof(smArg));
 
@@ -610,8 +610,8 @@ namespace ipl {
                     }
                     bool msgBoardCanOptOut = (result & (bool)msgMbOptOutFlag);
 
-                    // 
-                    if (msgAppId == ES_TITLE_ID(TITLE_NIGAOE_ALL)) {
+                    // Get Mii data
+                    if (msgAppId == ES_TITLE_CODE(TITLE_NIGAOE_ALL)) {
                         RFLiCharData charData;
                         if (RFLiNWC24Msg2CharData(&charData, &msgObj)
                         && System::getMiiManager()->isValid(&charData)) {
@@ -624,7 +624,7 @@ namespace ipl {
 
                     // Get record type
                     // For System Menu (with the title ID "HAEA" or 00000002)
-                    if (msgAppId == ES_TITLE_ID(TITLE_BOARD_ALL) || msgAppId == 0x00000002) {
+                    if (msgAppId == ES_TITLE_CODE(TITLE_BOARD_ALL) || msgAppId == 0x00000002) {
                         if (msgBoardUpdateSW) {
                             recordFlags = RBRRecordType_SWUpdate;
                         }
@@ -731,13 +731,13 @@ namespace ipl {
                     // Get attachment count
                     getMsgNumAttached(&msgObj, &msgNumAttached);
                     if (mLastError == NWC24_ERR_BROKEN) {
-                        goto out;
+                        goto out2;
                     }
 
                     // Get attachment data
                     for (int attachIndex = 0; attachIndex < msgNumAttached; attachIndex++) {
                         getMsgAttachedSize(&msgObj, attachIndex, &mAttachSize[attachIndex]);
-                        mAttachData[attachIndex] = new(heap, BUFFER_HEAP) u8[mAttachSize[attachIndex]];
+                        mAttachData[attachIndex] = new(heap, DEFAULT_ALIGN) u8[mAttachSize[attachIndex]];
                         if (mAttachData[attachIndex] == NULL) {
                             mAttachSize[attachIndex] = 0;
                             break;
@@ -769,7 +769,7 @@ namespace ipl {
 
                                         mAttachSize[attachIndex] = System::getInvalidJpegImage()->getLength();
 
-                                        mAttachData[attachIndex] = new(heap, BUFFER_HEAP) u8[mAttachSize[attachIndex]];
+                                        mAttachData[attachIndex] = new(heap, DEFAULT_ALIGN) u8[mAttachSize[attachIndex]];
                                         memcpy(mAttachData[attachIndex], invalidJpegImage->getBuffer(), mAttachSize[attachIndex]);
                                     
                                         // Attempt to convert to ODH (AJPG)
@@ -879,6 +879,7 @@ namespace ipl {
                                                             msgHasMii ? &msgCharData : NULL,
                                                             (const void**)mAttachData, mAttachSize, msgAttachTypes);
 
+out2:
                     unk_0xA30 = true;
 
 out:
@@ -1029,7 +1030,7 @@ start:
                     mAttachData[attachIndex] = NULL;
 
                     mJpegSize = NWC24_ATTACH_PICTURE_MAX;
-                    mJpegData = new(heap, BUFFER_HEAP) u8[NWC24_ATTACH_PICTURE_MAX];
+                    mJpegData = new(heap, DEFAULT_ALIGN) u8[NWC24_ATTACH_PICTURE_MAX];
 
                     if (mJpegData != NULL) {
                         // Then encode ODH with the decoded JPEG

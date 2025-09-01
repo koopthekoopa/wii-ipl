@@ -71,7 +71,7 @@ namespace ipl {
         BOOL MetaFile::openTicketFile_() {
             s32 line;
 
-            mTicket = (ESTicketView*)System::getMem2Sys()->alloc(OSRoundUp32B(sizeof(ESTicketView)), -BUFFER_HEAP);
+            mTicket = (ESTicketView*)System::getMem2Sys()->alloc(OSRoundUp32B(sizeof(ESTicketView)), -DEFAULT_ALIGN);
             s32 result = utility::ESMisc::GetTicketView(System::getMem2Sys(), mTitleId, mTicket, mTicketIdx);
 
             if (result < ES_ERR_OK) {

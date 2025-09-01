@@ -3,10 +3,13 @@
 
 /* Common message IDs */
 
-
 #define MESG_CMN_OK                     46
 #define MESG_CMN_YES                    321
 #define MESG_CMN_NO                     322
+
+/* Channel Manager */
+
+#define MESG_DISK_CHANNEL_NAME          0
 
 /* Play Time Log */
 

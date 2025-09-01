@@ -40,6 +40,7 @@ u32     SCCheckStatus();
 #define SC_PRODUCT_AREA_LTN     9   /* Latin */
 #define SC_PRODUCT_AREA_SAF     10  /* South Africa */
 #define SC_PRODUCT_AREA_CHN     11  /* China */
+#define SC_PRODUCT_AREA_MAX     12
 
 BOOL    SCGetProductAreaString(char* buf, u32 sz);
 s8      SCGetProductArea();

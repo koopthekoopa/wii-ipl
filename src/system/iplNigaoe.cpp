@@ -42,7 +42,7 @@ namespace ipl {
             u32 iconSize = width * height * GX_RGB5A3_SIZE;
             mIconSize = iconSize;
                 
-            mpIconTex = new(heap, BUFFER_HEAP) u8[iconSize];
+            mpIconTex = new(heap, DEFAULT_ALIGN) u8[iconSize];
         }
 
         Object::~Object() {

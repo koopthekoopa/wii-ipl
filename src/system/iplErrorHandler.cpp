@@ -31,12 +31,12 @@ namespace ipl {
     mpArcData(NULL) {
         // Decompress the archive file.
         mArcSize = Rvl_decode_ash_size(fatalDlg_ash);
-        mpArcData = new(heap, BUFFER_HEAP) u8[mArcSize];
+        mpArcData = new(heap, DEFAULT_ALIGN) u8[mArcSize];
 
         Rvl_decode(mpArcData, fatalDlg_ash);
 
         // Create the layout from archive.
-        mpLayout = new(heap, 4) layout::Object(heap, mpArcData, "arc", "my_Fatal.brlyt");
+        mpLayout = new(heap, CLASS_HEAP) layout::Object(heap, mpArcData, "arc", "my_Fatal.brlyt");
     }
 
     void ErrorHandler::set(Type type, u32 msgId, const char* arg1, int arg2, int arg3) {

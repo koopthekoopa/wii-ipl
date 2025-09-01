@@ -21,7 +21,7 @@ namespace ipl {
         }
 
         void Manager::InitManager() {
-            mpThreadStack = mpHeap->alloc(THREAD_STACK_SIZE, BUFFER_HEAP);
+            mpThreadStack = mpHeap->alloc(THREAD_STACK_SIZE, DEFAULT_ALIGN);
             Create(mpThreadStack, THREAD_STACK_SIZE, 21, false);
         }
 

@@ -31,10 +31,10 @@ namespace ipl {
         mpArc(arc),
         mFileOffset(offset),
         mFileLength(length),
-        mFileMode(IPL_FILE_MODE_WRITE),
+        mFileMode(MODE_WRITE),
         mFilePerms(NAND_ACCESS_NONE),
         mpBuffer(NULL), mpCmpBuffer(NULL),
-        mResult(IPL_NAND_RESULT_NONE),
+        mResult(RESULT_NONE),
         mbFatalError(false),
         mbIsFullForTask(false),
         mbIsNandFile(bIsInNand) {
@@ -53,23 +53,23 @@ namespace ipl {
         mpArc(NULL),
         mFileOffset(0),
         mFileLength(length),
-        mFileMode(IPL_FILE_MODE_READ),
+        mFileMode(MODE_READ),
         mFilePerms(perms),
         mpBuffer(buffer), mpCmpBuffer(NULL),
-        mResult(IPL_NAND_RESULT_NONE),
+        mResult(RESULT_NONE),
         mbFatalError(false),
         mbIsFullForTask(false),
         mbIsNandFile(TRUE) {
             strncpy(msFileName, fileName, NAND_MAX_PATH+1);
 
-            mpCmpBuffer = new(mpHeap, -BUFFER_HEAP) u8[mFileLength];
+            mpCmpBuffer = new(mpHeap, -DEFAULT_ALIGN) u8[mFileLength];
             memcpy(mpCmpBuffer, mpBuffer, mFileLength);
 
             memset(&mNandFile, 0, sizeof(NANDFileInfo));
         }
 
         File::~File() {
-            if (mFileMode == IPL_FILE_MODE_WRITE && mpBuffer) {
+            if (mFileMode == MODE_WRITE && mpBuffer) {
                 delete[] mpBuffer;
             }
         }
@@ -242,7 +242,7 @@ namespace ipl {
                         usedHeap = System::getMem2Root();
                     }
 
-                    mpCmpBuffer = new(usedHeap, -BUFFER_HEAP) u8[mFileLength];
+                    mpCmpBuffer = new(usedHeap, -DEFAULT_ALIGN) u8[mFileLength];
                 }
 
                 // Read header
@@ -329,11 +329,11 @@ namespace ipl {
 
             for (int i = 0; i < NET_MD5_DIGEST_SIZE; i++) {
                 if (md5[i] != sum[i]) {
-                    return IPL_NAND_RESULT_VERIFY_ERROR;
+                    return RESULT_VERIFY_ERROR;
                 }
             }
 
-            return IPL_NAND_RESULT_SUCCESS;
+            return RESULT_SUCCESS;
         }
 
         BOOL File::close_() {
@@ -360,7 +360,7 @@ namespace ipl {
         }
 
         u8* File::getBuffer_(u32 length) {
-            return new(mpHeap, BUFFER_HEAP) u8[length];
+            return new(mpHeap, DEFAULT_ALIGN) u8[length];
         }
 
         LangFile::LangFile(EGG::Heap* heap, const char* dirName, const char* fileName, ARCHandle* arc, bool bIsNandFile) {
@@ -410,7 +410,7 @@ namespace ipl {
                 usedHeap = System::getMem2Root();
             }
 
-            u8* buffer = new(usedHeap, -BUFFER_HEAP) u8[BUFFER_SIZE];
+            u8* buffer = new(usedHeap, -DEFAULT_ALIGN) u8[BUFFER_SIZE];
             s32 result;
             BOOL success;
 
@@ -468,7 +468,7 @@ done:
                     }
                     // If it did not exist, open error occured.
                     case NAND_RESULT_NOEXISTS: {
-                        mResult = IPL_NAND_RESULT_OPEN_ERROR;
+                        mResult = RESULT_OPEN_ERROR;
                         break;
                     }
                     // Too big to do anymore NAND stuff.
@@ -480,7 +480,7 @@ done:
                     // Authentication error
                     case NAND_RESULT_AUTHENTICATION:
                     case NAND_RESULT_ECC_CRIT: {
-                        mResult = IPL_NAND_RESULT_VERIFY_ERROR;
+                        mResult = RESULT_VERIFY_ERROR;
                         break;
                     }
                     // Display the system memory is damaged screen.
@@ -524,10 +524,10 @@ done:
 
         bool File::isFatalError() { return mbFatalError; }
 
-        bool LangFile::checkData() {
+        int LangFile::checkData() {
             if (mpLangFile) return mpLangFile->checkData();
-            if (mpCommonFile)  return mpCommonFile->checkData();
-            return false;
+            if (mpCommonFile) return mpCommonFile->checkData();
+            return 0;
         }
 
         bool LangFile::isFinished() {
@@ -552,7 +552,7 @@ done:
         }
         
         bool Base::isFatalError() { return false; }
-        bool Base::checkData() { return false; }
+        int Base::checkData() { return 0; }
         bool Base::isFinished() { return false; }
         void Base::read() {}
         

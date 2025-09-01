@@ -32,7 +32,7 @@ namespace ipl {
 
             // Open content archive
 #ifdef STAND_ALONE_BUILD
-            spSysMenuTik = (ESTicketView*)System::getMem2Sys()->alloc(OSRoundUp32B(sizeof(ESTicketView)), -BUFFER_HEAP);
+            spSysMenuTik = (ESTicketView*)System::getMem2Sys()->alloc(OSRoundUp32B(sizeof(ESTicketView)), -DEFAULT_ALIGN);
             ret = utility::ESMisc::GetTicketView(System::getMem2Sys(), SYSMENU_TITLE_ID, spSysMenuTik, 0);
             if (ret < ES_ERR_OK) {
                 IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", mDescriptor, 0xBAD);
@@ -54,7 +54,7 @@ namespace ipl {
             }
 
             u32 bufSize = OSRoundUp32B(header.fileStart);
-            mpFSTBuffer = new(BUFFER_HEAP) u8[bufSize];
+            mpFSTBuffer = new(DEFAULT_ALIGN) u8[bufSize];
 
             // Seek to file system table offset
             ret = ES_SeekContentFile(mDescriptor, 0, NAND_SEEK_BEG);

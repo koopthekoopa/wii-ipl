@@ -95,10 +95,6 @@ namespace ipl {
                 virtual KPADStatus* getKPADStatus() const;          // 0x64
                 virtual PADStatus*  getPADStatus() const;           // 0x68
                 virtual bool        isValidBtn() const;             // 0x6C
-                /**
-                 * @brief If the Wii Remote is pointing to the IR sensor bar.
-                 * @return Whether it is pointing or not.
-                 */
                 virtual bool        isValidDpd() const;             // 0x70
 
                 virtual bool        setForceInvalid(bool flag);     // 0x74

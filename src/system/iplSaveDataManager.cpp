@@ -15,8 +15,6 @@
 
 #include "config.h"
 
-#define CHECK_MAGIC4_NOT(b, c0, c1, c2, c3) (b[0] != c0 || b[1] != c1 || b[2] != c2 || b[3] != c3)
-
 namespace ipl {
     #define DISK_CHANNEL        CHANNEL_INFO(channel::PRIMARY_TYPE_DISK,    channel::SECONARY_TYPE_SYSTEM, 0x0000000F, 0)
     #define NIGAOE_CHANNEL      CHANNEL_INFO(channel::PRIMARY_TYPE_CHANNEL, channel::SECONARY_TYPE_SYSTEM, 0x0000000E, TITLE_NIGAOE_ALL)
@@ -134,23 +132,21 @@ namespace ipl {
         }
 
         ESTitleId Manager::hasChannel(ESTitleId titleId, int* outIndex, int* outPage) const {
-            u32 mask;
-            if (titleId & ~0) {
-                mask = ~0;
+            u64 typeMask;
+            if (ES_TITLE_TYPE(titleId) != 0) {
+                typeMask = 0xFFFFFFFFFFFFFFFF;
             }
             else {
-                mask = 0;
+                typeMask = 0x00000000FFFFFFFF;
             }
             
             for (int page = 0; page < MAX_CHANNEL_PAGE; page++) {
-                for (int i = 0; i < MAX_CHANNEL_INDEX; i++) {
-                    if (mData.chanInfo[page][i].primaryType != channel::PRIMARY_TYPE_CHANNEL) {
-                        ESTitleId tId = TITLE_ESTITLE(mData.chanInfo[page][i].titleType, mData.chanInfo[page][i].titleCode) & mask;
-                        if (titleId == tId
-                        || TITLE_NO_REGION(titleId) == TITLE_NO_REGION(tId)
-                        || TITLE_REGION(titleId) == TITLE_REGION_ALL) {
+                for (int index = 0; index < MAX_CHANNEL_INDEX; index++) {
+                    if (mData.chanInfo[page][index].primaryType == channel::PRIMARY_TYPE_CHANNEL) {
+                        ESTitleId tId = ES_TITLE_ID(mData.chanInfo[page][index].titleType, mData.chanInfo[page][index].titleCode);
+                        if (titleId == (tId & typeMask) || TITLE_NO_REGION(tId & typeMask) == TITLE_NO_REGION(titleId & typeMask) && TITLE_REGION(titleId) == TITLE_REGION_ALL) {
                             if (outIndex) {
-                                *outIndex = i;
+                                *outIndex = index;
                             }
                             if (outPage) {
                                 *outPage = page;
@@ -226,7 +222,7 @@ namespace ipl {
                                 bCreateNew = TRUE;
                             }
                             else {
-                                if (CHECK_MAGIC4_NOT(manager->mData.sig, 'R','I','P','L')) {
+                                if (!NAND_CHECK_MAGIC4(manager->mData.sig, 'R','I','P','L')) {
                                     // Signature incorrect, create new
                                     bCreateNew = TRUE;
                                 }
@@ -378,7 +374,7 @@ namespace ipl {
             u32 titleCount;
             ES_ListTitlesOnCard(NULL, &titleCount);
 
-            u64* titleIds = new(mpHeap, -BUFFER_HEAP) u64[titleCount];
+            u64* titleIds = new(mpHeap, -DEFAULT_ALIGN) u64[titleCount];
 
             s32 ret = ES_ListTitlesOnCard(titleIds, &titleCount);
             if (ret != ES_ERR_OK) {
@@ -408,12 +404,12 @@ namespace ipl {
         void Manager::deleteInvalidTitle(ESTitleId* titleIds, u32 titleCount) {
             for (int i = 0; i < titleCount; i++) {
                 s32 ret;
-                if (ES_CHANNEL_ID(titleIds[i]) != TITLE_TYPE_CHANNEL
-                && ES_CHANNEL_ID(titleIds[i]) != TITLE_TYPE_SYSTEM_CHANNEL
-                && ES_CHANNEL_ID(titleIds[i]) != TITLE_TYPE_DISC
-                && ES_CHANNEL_ID(titleIds[i]) != TITLE_TYPE_DISC_CHANNEL
-                && ES_CHANNEL_ID(titleIds[i]) != TITLE_TYPE_UNK6
-                && ES_CHANNEL_ID(titleIds[i]) != TITLE_TYPE_UNK3) {
+                if ((ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_CHANNEL
+                && (ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_SYSTEM_CHANNEL
+                && (ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_DISC
+                && (ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_DISC_CHANNEL
+                && (ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_UNK6
+                && (ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_UNK3) {
                     titleIds[i] = TITLE_NULL;
                 }
                 else {
@@ -561,7 +557,7 @@ namespace ipl {
         int Manager::getAvailableNumInList(const ESTitleId* titleIds, u32 titleCount) {
             int count = 0;
             for (int i = 0; i < titleCount; i++) {
-                if (titleIds[i]) {
+                if (titleIds[i] != 0) {
                     count++;
                 }
             }
@@ -622,16 +618,17 @@ namespace ipl {
                     break;
                 }
                 case 3: {
-                    // what even
-                    if ((s16)oldVersion != 2 && (s16)oldVersion < 2) {
-                        if ((s16)oldVersion < 0) {
-                            break;
-                        }
-                        else {
+                    switch ((u16)oldVersion) {
+                        case 2: {
                             setDefaultKeyboard();
                         }
+                        case 3: {
+                            setDefaultSDMenu();
+                        }
+                        default: {
+                            break;
+                        }
                     }
-                    setDefaultSDMenu();
                     break;
                 }
             }

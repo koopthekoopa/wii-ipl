@@ -33,7 +33,7 @@ enum {
     ISFS_ERROR_ECC             = -113,
     ISFS_ERROR_ECC_CRIT        = -114,
     ISFS_ERROR_NOTEMPTY        = -115,
-    ISFS_ERROR_AUTHENTICATION            = -116,
+    ISFS_ERROR_AUTHENTICATION  = -116,
     ISFS_ERROR_UNKNOWN         = -117,
     ISFS_ERROR_BUSY            = -118,
     ISFS_ERROR_SHUTDOWN        = -119

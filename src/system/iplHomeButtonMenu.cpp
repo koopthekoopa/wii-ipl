@@ -3,8 +3,9 @@
 #include "iplSystem.h"
 #include "iplSound.h"
 
+#include "config.h"
+
 namespace ipl {
-    #pragma sym on
     static bool exitAnm = false;
 
     static const f32 BAN_ICON_FADEIN_TIMER = 250.0f;
@@ -58,7 +59,11 @@ namespace ipl {
 
         mpHbmInfo->adjust.x = 1.3684211f;
         mpHbmInfo->adjust.y = 1.0f;
+    #ifdef IMPROVE_PAL50_HBM_DELTA
+        mpHbmInfo->frameDelta = System::getAnimDelta();
+    #else
         mpHbmInfo->frameDelta = 1.0f;
+    #endif // IMPROVE_PAL50_HBM_DELTA
 
         mpHbmInfo->layoutBuf = System::getHBMLayoutFile()->getBuffer();
         mpHbmInfo->lytLangBuf = System::getHBMLangFile()->getBuffer();
@@ -67,7 +72,7 @@ namespace ipl {
         mpHbmInfo->configBuf = mpConfigFile->getBuffer();
         mpHbmInfo->spkSeBuf = mpSpeakerSoundFile->getBuffer();
 
-        mpHbmInfo->mem = heap->alloc(HBM_WORK_SIZE, BUFFER_HEAP);
+        mpHbmInfo->mem = heap->alloc(HBM_WORK_SIZE, DEFAULT_ALIGN);
         mpHbmInfo->memSize = HBM_WORK_SIZE;
 
         mpHbmInfo->pAllocator = NULL;

@@ -22,7 +22,7 @@ namespace ipl {
             int code = 0;
             int errcode = 0;
             int erridx = 0;
-            mTicket = (ESTicketView*)System::getSharedHeap()->alloc(OSRoundUp32B(sizeof(ESTicketView)), -BUFFER_HEAP);
+            mTicket = (ESTicketView*)System::getSharedHeap()->alloc(OSRoundUp32B(sizeof(ESTicketView)), -DEFAULT_ALIGN);
 
             if (mTicketIdx >= 0) {
                 if (utility::ESMisc::GetTicketView(System::getSharedHeap(), mTitleId, mTicket, mTicketIdx) < ES_ERR_OK) {
@@ -64,7 +64,7 @@ namespace ipl {
             }
 
             u32 bufSize = OSRoundUp32B(header.fileStart);
-            mpFSTBuffer = System::getSharedHeap()->alloc(bufSize, -BUFFER_HEAP);
+            mpFSTBuffer = System::getSharedHeap()->alloc(bufSize, -DEFAULT_ALIGN);
 
             if (ES_SeekContentFile(mDescriptor, 0, NAND_SEEK_BEG) < ES_ERR_OK
             || ES_ReadContentFile(mDescriptor, mpFSTBuffer, bufSize) < ES_ERR_OK
@@ -80,7 +80,7 @@ namespace ipl {
             else {
         err:
                 char errString[192];
-                sprintf(errString, "ES %d, %llx, %llx, %x", errcode, erridx, mTitleId);
+                sprintf(errString, "ES %d, %llx, %llx, %x", errcode, mTitleId, erridx);
 
                 IPLErrorLogAndDisplay(MESG_ERR_FILE, errString, code, 158);
   

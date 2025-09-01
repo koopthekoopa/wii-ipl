@@ -1,6 +1,7 @@
 #include "scene/iplRootScene.h"
 #include "scene/misc/iplReboot.h"
 #include "scene/iplSceneCreator.h"
+#include "scene/setting/iplSetting.h"
 
 #include "iplSystem.h"
 #include "utility/iplESMisc.h"
@@ -25,11 +26,11 @@ namespace ipl {
             if (!SCGetConfigDoneFlag2()) {
                 if (SCGetUpdateType() == SC_UPDATE_TYPE_NONE) {
                     *initialScene = SCENE_SETTING;
-                    *initialSubScene = 2;
+                    *initialSubScene = SETTING_SCENE_INITIAL_SETUP;
                 }
                 else {
                     *initialScene = SCENE_SETTING;
-                    *initialSubScene = 5;
+                    *initialSubScene = SETTING_SCENE_UPDATE_BEFORE_SETUP;
                 }
             }
             else {
@@ -57,7 +58,7 @@ namespace ipl {
                             if (System::getBS2LaunchCode() == System::LAUNCH_CODE_INTERNET_SETTING) {
                                 *initialScene = SCENE_REBOOT;
                                 *initialSubScene = REBOOT_INTERNET_SETTINGS;
-                                disableTvrc /* = TRUE*/ = *initialSubScene; // This screams fakematch.
+                                disableTvrc /* = TRUE*/ = *initialSubScene;
                                 System::getResetHandler()->enableResetToMenu();
                             }
                             else if (System::getBS2LaunchCode() == System::LAUNCH_CODE_DATA_MANAGER) {

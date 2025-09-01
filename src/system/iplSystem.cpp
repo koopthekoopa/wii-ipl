@@ -120,7 +120,7 @@ namespace ipl {
 
     void* System::constructFontSub_(void* fontData) {
         u32 workSize = nw4r::ut::ArchiveFont::GetRequireBufferSize(fontData);
-        u8* work = new(getMem2Sys(), BUFFER_HEAP) u8[OSRoundUp32B(workSize)];
+        u8* work = new(getMem2Sys(), DEFAULT_ALIGN) u8[OSRoundUp32B(workSize)];
 
         nw4r::ut::ArchiveFont* font = new(getMem1Sys(), CLASS_HEAP) nw4r::ut::ArchiveFont();
     
@@ -129,7 +129,7 @@ namespace ipl {
     }
 
     void System::loadFont_() {
-        smArg.mpFontArena = getMem2App()->alloc(0x400000, -BUFFER_HEAP);
+        smArg.mpFontArena = getMem2App()->alloc(0x400000, -DEFAULT_ALIGN);
         smArg.mpFontHeap = EGG::ExpHeap::create(smArg.mpFontArena, 0x400000, 0);
 
     #ifndef VERSION_43K
@@ -216,7 +216,7 @@ namespace ipl {
 
     void System::createFolders_(void* work) {
         // Init VF
-        u8* workData = new(getMem1Sys(), BUFFER_HEAP) u8[VF_WORK_SIZE];
+        u8* workData = new(getMem1Sys(), DEFAULT_ALIGN) u8[VF_WORK_SIZE];
         VFInitEx(workData, VF_WORK_SIZE);
 
         // Init CDB
@@ -229,7 +229,7 @@ namespace ipl {
 
         // @BUG: Reports free MEM1 size and how many NWC24 needs, yet it uses MEM2 instead.
         OSReport("MEM1SYS Free:%d NWC24 Need %d\n", getMem1Sys()->getAllocatableSize(4), NWC24_LIB_WORK_SIZE);
-        workData = new(getMem2Sys(), -BUFFER_HEAP) u8[NWC24_LIB_WORK_SIZE];
+        workData = new(getMem2Sys(), -DEFAULT_ALIGN) u8[NWC24_LIB_WORK_SIZE];
 
         // Init NWC24
         if (!SCGetConfigDoneFlag() && !SCGetConfigDoneFlag2()) {
@@ -325,13 +325,13 @@ namespace ipl {
         smArg.mpMem1Sys->unkUnline_becomeCurrentHeap();
 
         // Create important instances
-        smArg.mpDialog = new(getMem1Sys(), 4) DialogWindow(getMem2Sys());
-        smArg.mpWarningHandler = new(getMem1Sys(), 4) WarningHandler(getMem2Sys());
-        smArg.mpMiiManager = new(getMem1Sys(), 4) nigaoe::Manager(getMem2Sys());
-        smArg.mpKeyboardMgr = new(getMem1Sys(), 4) keyboard::Manager();
+        smArg.mpDialog = new(getMem1Sys(), CLASS_HEAP) DialogWindow(getMem2Sys());
+        smArg.mpWarningHandler = new(getMem1Sys(), CLASS_HEAP) WarningHandler(getMem2Sys());
+        smArg.mpMiiManager = new(getMem1Sys(), CLASS_HEAP) nigaoe::Manager(getMem2Sys());
+        smArg.mpKeyboardMgr = new(getMem1Sys(), CLASS_HEAP) keyboard::Manager();
         smArg.mpKeyboardMgr->create(smArg.mResources.file[Arg::SOFT_KEYBOARD], getMem2Sys());
         smArg.mpKeyboardMgr->init();
-        smArg.mpHomeButton = new(getMem1Sys(), 4) HomeButtonMenu(getMem2Sys());
+        smArg.mpHomeButton = new(getMem1Sys(), CLASS_HEAP) HomeButtonMenu(getMem2Sys());
 
         if (old != NULL) {
             old->unkUnline_becomeCurrentHeap();
@@ -346,9 +346,9 @@ namespace ipl {
 
         smArg.mpMem1Sys->unkUnline_becomeCurrentHeap();
 
-        // Create WC24 and mail instances
-        smArg.mpCdbManager = new(getMem1Sys(), 4) cdb::Manager(getMem2Sys());
-        smArg.mpNwc24Manager = new(getMem1Sys(), 4) nwc24::Manager(getMem2Sys());
+        // Create NWC24 and mail instances
+        smArg.mpCdbManager = new(getMem1Sys(), CLASS_HEAP) cdb::Manager(getMem2Sys());
+        smArg.mpNwc24Manager = new(getMem1Sys(), CLASS_HEAP) nwc24::Manager(getMem2Sys());
 
         getMiiManager()->commitHiddenDB();
 
@@ -454,12 +454,10 @@ namespace ipl {
 
                 return FALSE;
             }
-
             case Arg::REGIST_STATE_END: {
                 OSReport("Done: Process NWC24 WiiID\n");
                 return TRUE;
             }
-
             case Arg::REGIST_STATE_DOING:
             default: {
                 return FALSE;
@@ -596,7 +594,7 @@ namespace ipl {
         createAppHeap_();
 
         // Allocate work buffer for Banner Sound Player
-        pBSWaveBuffer = getMem1Sys()->alloc(0x3000, BUFFER_HEAP);
+        pBSWaveBuffer = getMem1Sys()->alloc(0x3000, DEFAULT_ALIGN);
 
         OSSetSwitchThreadCallback(cbThreadSwitch);
 
@@ -636,8 +634,8 @@ namespace ipl {
             IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", initResult, 1201);
         }
 
-        // IPL save data
-        utility::ESMisc::InitSaveData(getTreasureHeap());
+        // Delete save data exploits
+        utility::ESMisc::DeleteBadSaveData(getTreasureHeap());
 
         // Task threads
         smArg.mpTask1 = EGG::TaskThread::create(0x40, 19, 0x10000, getMem1Sys());
@@ -714,7 +712,7 @@ namespace ipl {
         smArg.mpSceneManager = new(getMem1Sys(), CLASS_HEAP) scene::Manager(smArg.mpSceneHeap);
 
         // IPL save data
-        smArg.mpSaveDataManager = new(getMem1Sys(), BUFFER_HEAP) savedata::Manager(getMem2Sys());
+        smArg.mpSaveDataManager = new(getMem1Sys(), DEFAULT_ALIGN) savedata::Manager(getMem2Sys());
         smArg.mpSaveDataManager->initManager();
 
         // TVRC Database
@@ -940,7 +938,7 @@ namespace ipl {
             GXSetViewport(0.0f, 0.0f, rMode->fbWidth, rMode->efbHeight, 0.0f, 1.0f);
             GXSetScissor(0, 0, rMode->fbWidth, rMode->efbHeight);
 
-            // Drawinh
+            // Drawing
             getSceneManager()->draw();
             getKeyboardManager()->draw();
             getDialog()->draw();
@@ -1022,7 +1020,7 @@ namespace ipl {
             if (getSceneManager() != NULL) {
                 getSceneManager()->calc();
             }
-            if (smArg.mpControllerManager != NULL) {
+            if (getControllerManager() != NULL) {
                 getControllerManager()->read();
             }
             if (getDialog() != NULL) {

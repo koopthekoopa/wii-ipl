@@ -725,6 +725,35 @@ namespace ipl {
         return result;
     }
 
+    BOOL DialogWindow::callBtn0(const wchar_t* msg, u32 wait, bool bIsProg) {
+        BOOL result = FALSE;
+
+        if (call(DIALOG_TYPE_BTN0)) {
+            mWaitTimer = wait;
+            mbIsProg = bIsProg;
+            mbDoProgBar = false;
+            set_text("T_Dialog", msg);
+
+            mpCurDialog->gLayout->FindPaneByName("N_Prog")->SetVisible(false);
+
+            if (mbIsProg) {
+                mpCurDialog->gLayout->FindPaneByName("Wait_00")->SetVisible(true);
+                mpCurDialog->gLayout->getAnim(ANIM_BTN0_WAIT)->play();
+
+                snd::getSystem()->startSE("WIPL_SE_COPYING");
+            }
+            else {
+                mpCurDialog->gLayout->FindPaneByName("Wait_00")->SetVisible(false);
+                
+                snd::getSystem()->startSE("WIPL_SE_INFO_WINDOW");
+            }
+
+            result = TRUE;
+        }
+
+        return result;
+    }
+
     BOOL DialogWindow::callBtn0NoShade(u32 msgId, u32 wait, bool bIsProg) {
         BOOL result = FALSE;
 
@@ -978,6 +1007,23 @@ namespace ipl {
         return result;
     }
 
+    BOOL DialogWindow::callBtn3(const wchar_t* msg, u32 tBtnId, u32 cBtnID, u32 bBtnId) {
+        BOOL result = FALSE;
+
+        if (call(DIALOG_TYPE_BTN3)) {
+            set_text("T_Dialog", msg);
+            set_tbtn_text(tBtnId);
+            set_cbtn_text(cBtnID);
+            set_bbtn_text(bBtnId);
+
+            snd::getSystem()->startSE("WIPL_SE_INFO_WINDOW");
+
+            result = TRUE;
+        }
+
+        return result;
+    }
+
     BOOL DialogWindow::callSBtn2(u32 msgId, u32 rBtnId, u32 lBtnId, bool bSwapSound) {
         BOOL result = FALSE;
 
@@ -987,6 +1033,26 @@ namespace ipl {
             mpCurDialog->gLayout->FindPaneByName("N_Top")->SetVisible(true);
 
             set_message(msgId);
+            set_rbtn_text(rBtnId);
+            set_lbtn_text(lBtnId);
+
+            snd::getSystem()->startSE("WIPL_SE_INFO_WINDOW");
+
+            result = TRUE;
+        }
+
+        return result;
+    }
+
+    BOOL DialogWindow::callSBtn2(const wchar_t* msg, u32 rBtnId, u32 lBtnId, bool bSwapSound) {
+        BOOL result = FALSE;
+
+        if (call(DIALOG_TYPE_BTNS2)) {
+            mbSwapSound = bSwapSound;
+
+            mpCurDialog->gLayout->FindPaneByName("N_Top")->SetVisible(true);
+
+            set_text("T_Dialog", msg);
             set_rbtn_text(rBtnId);
             set_lbtn_text(lBtnId);
 
@@ -1030,6 +1096,36 @@ namespace ipl {
             mProgBarFrame = 0;
 
             set_message(msgId);
+
+            mpCurDialog->gLayout->FindPaneByName("N_Prog")->SetVisible(true);
+            mpCurDialog->gLayout->FindPaneByName("Wait_00")->SetVisible(true);
+
+            // Play waiting icon
+            mpCurDialog->gLayout->getAnim(ANIM_BTN0_WAIT)->play();
+            // Prepare progress bar
+            mpCurDialog->gLayout->getAnim(ANIM_BTN0_PRORESS)->init();
+
+            snd::getSystem()->startSE("WIPL_SE_COPYING");
+
+            result = TRUE;
+        }
+
+        return result;
+    }
+
+    BOOL DialogWindow::callBtnPrg(const wchar_t* msg) {
+        BOOL result = FALSE;
+
+        if (call(DIALOG_TYPE_BTN0)) {
+            mWaitTimer = 0;
+
+            mbIsProg = true;
+            mbDoProgBar = true;
+
+            mProgBarLen = 0;
+            mProgBarFrame = 0;
+
+            set_text("T_Dialog", msg);
 
             mpCurDialog->gLayout->FindPaneByName("N_Prog")->SetVisible(true);
             mpCurDialog->gLayout->FindPaneByName("Wait_00")->SetVisible(true);

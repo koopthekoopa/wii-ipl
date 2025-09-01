@@ -19,7 +19,7 @@ namespace ipl {
         Manager::Manager(EGG::Heap* heap) {
             mResFile = System::getRFLArc();
 
-            void* work = heap->alloc(RFLGetWorkSize(FALSE), BUFFER_HEAP);
+            void* work = heap->alloc(RFLGetWorkSize(FALSE), DEFAULT_ALIGN);
 
             mErrcode = RFLInitRes(work, mResFile->getBuffer(), mResFile->getLength(), FALSE);
 
@@ -120,7 +120,7 @@ namespace ipl {
             if (nwc24Manager) {
                 if (nwc24Manager->open()) {
                     if (RFLiMakeNWC24MsgforExchange(&msgObj, &charData) == RFLErrcode_Success) {
-                        nwc24Manager->setMsgAppId(&msgObj, ES_TITLE_ID(TITLE_NIGAOE_ALL));
+                        nwc24Manager->setMsgAppId(&msgObj, ES_TITLE_CODE(TITLE_NIGAOE_ALL));
                         nwc24Manager->commitMsg(&msgObj);
                     }
                     nwc24Manager->close();

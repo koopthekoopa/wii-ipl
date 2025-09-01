@@ -24,16 +24,16 @@
 namespace ipl {
     namespace nand {
         enum {
-            IPL_NAND_RESULT_NONE = 0,
-            IPL_NAND_RESULT_SUCCESS,
-            IPL_NAND_RESULT_VERIFY_ERROR,
-            IPL_NAND_RESULT_OPEN_ERROR,
+            RESULT_NONE = 0,
+            RESULT_SUCCESS,
+            RESULT_VERIFY_ERROR,
+            RESULT_OPEN_ERROR,
         };
 
         enum {
-            IPL_FILE_MODE_NONE = 0,
-            IPL_FILE_MODE_WRITE,
-            IPL_FILE_MODE_READ,
+            MODE_NONE = 0,
+            MODE_WRITE,
+            MODE_READ,
         };
 
         class Base {
@@ -45,7 +45,7 @@ namespace ipl {
                 virtual void    write();                                                // 0x10
                 
                 virtual bool    isFinished();                                           // 0x14
-                virtual bool    checkData();                                            // 0x18
+                virtual int     checkData();                                            // 0x18
                 virtual bool    isFatalError();                                         // 0x1C
         };
         
@@ -65,8 +65,8 @@ namespace ipl {
                 /** @brief Writes the file contents. */
                 virtual void    write();                                                // 0x10
 
-                virtual bool    isFinished();                                           // 0x14
-                virtual bool    checkData();                                            // 0x18
+                virtual bool    isFinished() { return mbDoneTask; }                     // 0x14
+                virtual int     checkData() { return mResult; }                         // 0x18
                 virtual bool    isFatalError();                                         // 0x1C
 
                 u8*             getBuffer() const       { return mpBuffer; }
@@ -82,7 +82,7 @@ namespace ipl {
                     NETMD5Sum   md5;            // 0x10
                 } MD5Head;
 
-                typedef s8 MD5Bool; // ehhhh...
+                typedef s8 MD5Bool; // ehhhh
 
             protected:
                 virtual BOOL    open_(u8 attr);                                         // 0x20
@@ -146,7 +146,7 @@ namespace ipl {
                 virtual void    read();                                                 // 0x0C
 
                 virtual bool    isFinished();                                           // 0x14
-                virtual bool    checkData();                                            // 0x18
+                virtual int     checkData();                                            // 0x18
                 virtual bool    isFatalError();                                         // 0x1C
 
                 File*           getCmnFile() const  { return mpCommonFile; }

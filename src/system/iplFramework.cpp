@@ -286,7 +286,7 @@ namespace ipl {
 
         u32 xfbSize = VIPadFrameBufferWidth(rMode->fbWidth) * rMode->xfbHeight * VI_DISPLAY_PIX_SZ;
         for (int i = 0; i < 2; i++) {
-            mpXfb[i] = new(heap, BUFFER_HEAP) u8[xfbSize];
+            mpXfb[i] = new(heap, DEFAULT_ALIGN) u8[xfbSize];
         }
 
         mCurXfb = 0;

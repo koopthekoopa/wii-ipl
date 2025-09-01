@@ -24,7 +24,7 @@ static NANDLoggingCallback s_callback = NULL;
 #define CALLBACK_FUNC(b) if (s_callback) s_callback(b)
 
 static void asyncRoutine(ISFSError result, void* arg);
-static void PrepareLine(char* line, int type, const char* msg) {
+static void PrepareLine(char* line, int count, const char* msg) {
     int             result;
     char            titleID[64];
     OSCalendarTime  time;
@@ -41,7 +41,7 @@ static void PrepareLine(char* line, int type, const char* msg) {
     titleID[16+1] = '\0';
 
     // Create entry
-    result = snprintf(line, LINE_MAX_EACH, "%d %04d/%02d/%02d %02d:%02d:%02d %s %s", type % 63+1, time.year, time.mon+1, time.mday, time.hour, time.min, time.sec, titleID, msg);
+    result = snprintf(line, LINE_MAX_EACH, "%d %04d/%02d/%02d %02d:%02d:%02d %s %s", count % 63+1, time.year, time.mon+1, time.mday, time.hour, time.min, time.sec, titleID, msg);
 
     // Did
     if (result < LINE_MAX_EACH) {
@@ -157,7 +157,7 @@ BOOL NANDLoggingAddMessageAsync(NANDLoggingCallback callback, const char* fmt, .
     vsnprintf(s_message, LINE_MAX_EACH, fmt, ap);
     va_end(ap);
 
-    // Open the file then write the new line. (with the asyncRoutine callback)
+    // Open the file then write the new line.
     s_callback = callback;
     s_stage = 1;
     ret = ISFS_OpenAsync("/shared2/test2/nanderr.log", ISFS_ACCESS_RW, asyncRoutine, NULL);
@@ -216,12 +216,12 @@ static void asyncRoutine(ISFSError result, void* arg) {
     }
     else if (s_stage == 5) {
         if (result == ISFS_ERROR_OK) {
-            int type = 0;
+            int count = 0;
             s_rBuf[255] = '\0';
     
-            type = atoi(s_rBuf);
+            count = atoi(s_rBuf);
 
-            PrepareLine(s_wBuf, type, s_message);
+            PrepareLine(s_wBuf, count, s_message);
 
             ret = ISFS_WriteAsync(s_fd, s_wBuf, LINE_MAX_EACH, asyncRoutine, NULL);
             if (ret != ISFS_ERROR_OK) {
@@ -234,8 +234,8 @@ static void asyncRoutine(ISFSError result, void* arg) {
     }
     else if (s_stage == 6) {
         if (result == LINE_MAX_EACH) {
-            int type = atoi(s_rBuf);
-            ret = ISFS_SeekAsync(s_fd, type * LINE_MAX_EACH, ISFS_SEEK_BEG, asyncRoutine, NULL);
+            int count = atoi(s_rBuf);
+            ret = ISFS_SeekAsync(s_fd, count * LINE_MAX_EACH, ISFS_SEEK_BEG, asyncRoutine, NULL);
 
             if (ret != ISFS_ERROR_OK) {
                 CALLBACK_FUNC(FALSE);
@@ -246,8 +246,8 @@ static void asyncRoutine(ISFSError result, void* arg) {
         }
     }
     else if (s_stage == 7) {
-        int type = atoi(s_rBuf);
-        if (result == type * LINE_MAX_EACH) {
+        int count = atoi(s_rBuf);
+        if (result == count * LINE_MAX_EACH) {
             ret = ISFS_WriteAsync(s_fd, s_wBuf, LINE_MAX_EACH, asyncRoutine, NULL);
             if (ret != ISFS_ERROR_OK) {
                 CALLBACK_FUNC(FALSE);
@@ -270,7 +270,7 @@ static void asyncRoutine(ISFSError result, void* arg) {
     }
     else if (s_stage == 9) {
         if (result == ISFS_ERROR_OK) {
-            s_fd = -0xFF;
+            s_fd = -255;
             CALLBACK_FUNC(TRUE);
         }
         else {

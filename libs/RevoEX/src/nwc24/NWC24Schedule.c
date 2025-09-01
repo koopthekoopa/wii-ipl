@@ -102,7 +102,7 @@ NWC24Err NWC24iGetSchedulerStat(NWC24ScdStat* scdStat, u32 scdStatSize) {
             }
 
             resultClose = NWC24CloseResourceManager(fd);
-            if (result >= 0) { // @BUG: Should compare `resultClose`
+            if (result >= 0) {
                 result = resultClose;
             }
         }

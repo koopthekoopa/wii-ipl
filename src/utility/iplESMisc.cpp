@@ -35,7 +35,7 @@ namespace ipl {
                 goto out;
             }
 
-            tmdView = (ESTmdView*)heap->alloc(OSRoundUp32B(tmdViewSize), -BUFFER_HEAP);
+            tmdView = (ESTmdView*)heap->alloc(OSRoundUp32B(tmdViewSize), -DEFAULT_ALIGN);
             *outTmdView = tmdView;
             memset(tmdView, 0, OSRoundUp32B(tmdViewSize));
 
@@ -72,7 +72,7 @@ out:
                 return ES_ERR_TICKET_NOT_FOUND;
             }
 
-            ticketViews = (ESTicketView*)heap->alloc(OSRoundUp32B(numTicketViews * sizeof(ESTicketView)), -BUFFER_HEAP);
+            ticketViews = (ESTicketView*)heap->alloc(OSRoundUp32B(numTicketViews * sizeof(ESTicketView)), -DEFAULT_ALIGN);
             *outTicketViews = ticketViews;
 
             ret = ES_GetTicketViews(titleId, ticketViews, &numTicketViews);
@@ -466,7 +466,7 @@ do_proc:
 
                 // Prepare TMD backup entry.
                 entryLen = OSRoundUp32B(tmdSize) + OSRoundUp32B(sizeof(EntryHead));
-                entry = (EntryHead*)mpHeap->alloc(entryLen, -BUFFER_HEAP);
+                entry = (EntryHead*)mpHeap->alloc(entryLen, -DEFAULT_ALIGN);
                 memset(entry, 0, entryLen);
                 entry->titleId = titleId;
                 entry->tmdSize = tmdSize;
@@ -537,7 +537,7 @@ out:
                 }
 
                 fileLen = OSRoundUp32B(tmdSize);
-                tmdBuffer = mpHeap->alloc(fileLen, -BUFFER_HEAP);
+                tmdBuffer = mpHeap->alloc(fileLen, -DEFAULT_ALIGN);
                 memset(tmdBuffer, 0, fileLen);
 
                 ret = NANDRead(&mFile, tmdBuffer, fileLen);

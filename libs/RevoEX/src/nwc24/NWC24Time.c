@@ -12,7 +12,7 @@
 
 static BOOL nwc24TimeInitialized = FALSE;
 static u32 nwc24TimeRtc = 0;
-static OSTime nwc24TimeDifference = 0;
+static s64 nwc24TimeDifference = 0;
 
 static s32 nwc24TimeCommonResult[8] ALIGN32;
 static s32 nwc24TimeCommonBuffer[8] ALIGN32;
@@ -29,8 +29,8 @@ void NWC24iStrTime() {
     static u8 buf[128];
 }
 
-NWC24Err NWC24iGetUniversalTime(OSTime* pTime) {
-    static OSTime whenCached = 0;
+NWC24Err NWC24iGetUniversalTime(s64* pTime) {
+    static s64 whenCached = 0;
 
     NWC24Err result;
 
@@ -60,7 +60,7 @@ NWC24Err NWC24iGetUniversalTime(OSTime* pTime) {
     return NWC24_OK;
 }
 
-NWC24Err NWC24iGetTimeDifference(OSTime* pDiff) {
+NWC24Err NWC24iGetTimeDifference(s64* pDiff) {
     NWC24Err result;
     NWC24Err resultClose;
 
@@ -85,7 +85,7 @@ NWC24Err NWC24iGetTimeDifference(OSTime* pDiff) {
 
                 // Cast is necessary
                 if (result == 0 && pDiff != (void*)NULL) {
-                    *pDiff = *(OSTime*)(&nwc24TimeCommonResult[1]);
+                    *pDiff = *(s64*)(&nwc24TimeCommonResult[1]);
                 }
             }
 

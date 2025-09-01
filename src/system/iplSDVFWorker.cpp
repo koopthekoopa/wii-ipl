@@ -15,7 +15,7 @@ namespace ipl {
         Work* workArg = reinterpret_cast<Work*>(work);
         myWork = workArg;
 
-        /* BUG: Stack should be threadStack, not the thread itself! */
+        /* @BUG: Stack should be threadStack, not the thread itself! */
         OSCreateThread(&workArg->thread,
                         thread_main, this,
                         &myWork->thread, STACK_SIZE,

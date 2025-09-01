@@ -15,7 +15,7 @@ namespace ipl {
     namespace bs2 {
         Manager::Manager(EGG::Heap* heap) :
         mIPLState(IPL_STATE_NO_DISK),
-        mState(BS2_NO_DISK),
+        mState(BS2_STT_NO_DISK),
         unk_0x0C(true),
         unk_0x0D(false),
         unk_0x0E(false),
@@ -23,12 +23,12 @@ namespace ipl {
         mbIsDiagDisc(false),
         unk_0x11(false),
         mbHasBanner(FALSE),
-        unk_0x1C(BS2_NO_DISK),
+        mUnlockedState(BS2_STT_NO_DISK),
         mbStartUpdate(false),
         mEntries(NULL),
         mEntrySize(1),
         mEntryOffset(0) {
-            mpBannerBuffer = new(heap, BUFFER_HEAP) u8[BS2_DEFAULT_BANNER_SIZE];
+            mpBannerBuffer = new(heap, DEFAULT_ALIGN) u8[BS2_DEFAULT_BANNER_SIZE];
             BS2SetBannerBuffer(mpBannerBuffer, BS2_DEFAULT_BANNER_SIZE);
         }
 
@@ -153,19 +153,19 @@ namespace ipl {
 
         void Manager::loadLockedTitleAsync(ESTitleId titleId, ESTicketView& ticketView) {
             if (BS2StartLoadingTitle(titleId, &ticketView)) {
-                unk_0x1C = BS2_STATE_70;
+                mUnlockedState = BS2_STT_LOCKED_DISK;
             }
         }
 
         void Manager::splashTick(BS2State state) {
             switch (state) {
-                case BS2_NO_DISK:
-                case BS2_COVER_OPEN: {
-                    unk_0x1C = BS2_NO_DISK;
+                case BS2_STT_NO_DISK:
+                case BS2_STT_COVER_OPEN: {
+                    mUnlockedState = BS2_STT_NO_DISK;
                     mIPLState = IPL_STATE_NO_DISK;
                     break;
                 }
-                case BS2_RUN_APP: {
+                case BS2_STT_START_GAME: {
                     mbHasBanner = BS2IsBannerAvailable();
                     mIPLState = IPL_STATE_RUN_RVL_GAME;
                     if (BS2IsDiagDisc()) {
@@ -173,46 +173,46 @@ namespace ipl {
                     }
                     break;
                 }
-                case BS2_RUN_GC_APP: {
+                case BS2_STT_START_GC_GAME: {
                     mIPLState = IPL_STATE_RUN_GC_GAME;
                     break;
                 }
-                case BS2_DATA_DISK: {
+                case BS2_STT_DATA_DISK: {
                     mbHasBanner = BS2IsBannerAvailable();
-                    unk_0x1C = BS2_DATA_DISK;
+                    mUnlockedState = BS2_STT_DATA_DISK;
                     mIPLState = IPL_STATE_RUN_RVL_GAME;
                     break;
                 }
-                case BS2_RUN_LOCKED_APP: {
-                    unk_0x1C = BS2_RUN_LOCKED_APP;
+                case BS2_STT_START_LOCKED_DISK: {
+                    mUnlockedState = BS2_STT_START_LOCKED_DISK;
                     break;
                 }
-                case BS2_WRONG_DISK:
-                case BS2_DIRTY_DISK:
-                case BS2_STATE_68: {
-                    unk_0x1C = BS2_NO_DISK;
+                case BS2_STT_WRONG_DISK:
+                case BS2_STT_DIRTY_DISK:
+                case BS2_STT_68: {
+                    mUnlockedState = BS2_STT_NO_DISK;
                     mIPLState = IPL_STATE_BAD_DISK;
                     break;
                 }
-                case BS2_RUN_UPDATE: {
+                case BS2_STT_RUN_UPDATE: {
                     mIPLState = IPL_STATE_START_UPDATE;
                     break;
                 }
-                case BS2_RESTART: {
+                case BS2_STT_RESET_SYSTEM: {
                     mIPLState = IPL_STATE_RESTART_IPL;
                     break;
                 }
-                case BS2_STATE_64: {
+                case BS2_STT_64: {
                     unk_0x0C = false;
                     mIPLState = IPL_STATE_8;
                     break;
                 }
-                case BS2_UPDATE_FAILED: {
+                case BS2_STT_UPDATE_FAILED: {
                     mIPLState = IPL_STATE_UPDATE_FAIL;
                     break;
                 }
-                case BS2_FATAL_ERROR: {
-                    unk_0x1C = BS2_NO_DISK;
+                case BS2_STT_FATAL_ERROR: {
+                    mUnlockedState = BS2_STT_NO_DISK;
                     mIPLState = IPL_STATE_FATAL;
                     break;
                 }
@@ -225,7 +225,7 @@ namespace ipl {
 
         void Manager::execTick(BS2State state) {
             if (unk_0x0D) {
-                if (state == BS2_RUN_UPDATE) {
+                if (state == BS2_STT_RUN_UPDATE) {
                     BS2StartUpdate();
                 }
                 else {
@@ -233,16 +233,16 @@ namespace ipl {
                 }
             }
             else if (unk_0x0E) {
-                if (state == BS2_NO_DISK
-                 || state == BS2_COVER_OPEN
-                 || state == BS2_STATE_55
-                 || state == BS2_WRONG_DISK
-                 || state == BS2_STATE_66
-                 || state == BS2_STATE_67
-                 || state == BS2_STATE_68
-                 || state == BS2_FATAL_ERROR
-                 || state == BS2_UPDATE_FAILED
-                 || state == BS2_DIRTY_DISK) {
+                if (state == BS2_STT_NO_DISK
+                 || state == BS2_STT_COVER_OPEN
+                 || state == BS2_STT_55
+                 || state == BS2_STT_WRONG_DISK
+                 || state == BS2_STT_66
+                 || state == BS2_STT_67
+                 || state == BS2_STT_68
+                 || state == BS2_STT_FATAL_ERROR
+                 || state == BS2_STT_UPDATE_FAILED
+                 || state == BS2_STT_DIRTY_DISK) {
                     unk_0x0C = false;
                     mIPLState = IPL_STATE_8;
                 }
@@ -322,16 +322,16 @@ namespace ipl {
             while (!__OSSyncSram()) {}
             
             // Run app!
-            if (mState == BS2_RUN_APP) {
+            if (mState == BS2_STT_START_GAME) {
                 BS2StartGame();
             }
-            else if (mState == BS2_RUN_GC_APP) {
+            else if (mState == BS2_STT_START_GC_GAME) {
                 BS2StartGCGame();
             }
-            else if (mState == BS2_RESTART) {
+            else if (mState == BS2_STT_RESET_SYSTEM) {
                 OSReturnToMenu();
             }
-            else if (mState == BS2_RUN_LOCKED_APP) {
+            else if (mState == BS2_STT_START_LOCKED_DISK) {
                 BS2StartGame();
             }
         }

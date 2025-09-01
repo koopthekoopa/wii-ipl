@@ -11,7 +11,7 @@ namespace ipl {
         mTextureHeight(height),
         mTextureFormat(texFmt) {
             mTextureSize = GXGetTexBufferSize(width, height, texFmt, GX_FALSE, 1);
-            mTextureBuffer = new(heap, BUFFER_HEAP) u8[mTextureSize];
+            mTextureBuffer = new(heap, DEFAULT_ALIGN) u8[mTextureSize];
 
             GXInitTexObj(&mTexObj, mTextureBuffer, mTextureWidth, mTextureHeight, mTextureFormat, GX_CLAMP, GX_CLAMP, GX_FALSE);
         }

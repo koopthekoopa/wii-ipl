@@ -48,7 +48,7 @@ Wii Menu
 
 <!--- Contents -->
 
-A work-in-progress decompilation of the Wii Menu (4.3).
+A work-in-progress decompilation of the Wii Menu (4.3)
 
 This repository does **not** contain any assets or assembly of the executable whatsoever. An existing WAD of the Wii Menu is required.
 

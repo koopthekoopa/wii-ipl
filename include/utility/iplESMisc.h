@@ -47,12 +47,12 @@ namespace ipl {
 
                 static ESError  checkContentsNum(ESTitleId titleId, ESTmdView* tmdView);
     
-                static ESError  GetValidTicketIndex(EGG::Heap* heap, ESTitleId titleId, ESTicketView* ticket, u32 ticketLength);
+                static ESError  GetValidTicketIndex(EGG::Heap* heap, ESTitleId titleId, ESTicketView* ticket = NULL, u32 ticketLength = 0);
 
                 static BOOL     IsLastTicketExpired(ESTitleId* titleId);
                 static void     DeleteExpiredFlagFile();
 
-                static void     InitSaveData(EGG::Heap* heap);
+                static void     DeleteBadSaveData(EGG::Heap* heap);
 
                 static u32      CheckTmdCountryCode(ESTmdView* tmdView);
 

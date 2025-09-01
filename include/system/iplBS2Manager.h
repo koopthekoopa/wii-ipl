@@ -33,48 +33,50 @@ namespace ipl {
                 virtual ~Manager();
 
                 /** @brief Initialize Disc Update */
-                void    startUpdate();
+                void        startUpdate();
                 /** @brief Start Disc Update */
-                int     update();
+                int         update();
 
                 /**
                  * @brief Get buffer length of a game disc's banner.
                  * @param pBuffer Disc banner data.
                  */
-                u32     getDiskBannerBuffer(void** pBuffer);
+                u32         getDiskBannerBuffer(void** pBuffer);
 
-                void    reserveRVLGame();
-                void    reserveGCGame();
+                void        reserveRVLGame();
+                void        reserveGCGame();
                 
                 /** @brief Start Wii Game (same as `startGCGame`) */
-                void    startRVLGame();
+                void        startRVLGame();
                 /** @brief Start Game Cube Game (same as `startRVLGame`) */
-                void    startGCGame();
+                void        startGCGame();
 
-                /** @brief Abort Game Disk? */
-                void    abort();
-                /** @brief Restart Game Disk? */
-                void    restart();
+                void        abort();
+                void        restart();
 
                 /** @brief Wrapper for `BS2CheckParentalControl` */
-                bool    checkParentalControl();
+                bool        checkParentalControl();
 
                 /**
                  * @brief Gets the information of the game disc.
                  * @param diskID Output title ID of disc.
                  * @param diskMaker Output maker ID of disc.
                  */
-                void    getDiskInfo(char** diskID, char** diskMaker);
+                void        getDiskInfo(char** diskID, char** diskMaker);
 
                 /** @brief Check is disc title is available? */
-                BOOL    isTitleAvailable(ESTitleId titleId) const;
+                BOOL        isTitleAvailable(ESTitleId titleId) const;
                 /** @brief Get disc's ticket from NAND? */
-                s32     getTicketFromNand(ESTitleId titleId, ESTicketView* pTicketView) const;
-                void    loadLockedTitleAsync(ESTitleId titleId, ESTicketView& ticketView);
+                s32         getTicketFromNand(ESTitleId titleId, ESTicketView* pTicketView) const;
+                void        loadLockedTitleAsync(ESTitleId titleId, ESTicketView& ticketView);
 
-                void    splashTick(BS2State state);
-                void    execTick(BS2State state);
-                void    updateTick();
+                void        splashTick(BS2State state);
+                void        execTick(BS2State state);
+                void        updateTick();
+
+                u32         getIPLState()       { return mIPLState; }
+                BS2State    getUnlockedState()  { return mUnlockedState; }
+                BOOL        diskHasBanner()     { return mbHasBanner; }
 
             private:
                 void    bootNewSystem();
@@ -89,7 +91,7 @@ namespace ipl {
                 bool                unk_0x11;
                 u8*                 mpBannerBuffer;     // 0x14
                 BOOL                mbHasBanner;        // 0x18
-                BS2State            unk_0x1C;
+                BS2State            mUnlockedState;     // 0x1C
 
                 // For Update
 

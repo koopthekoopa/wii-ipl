@@ -269,7 +269,8 @@ CDBErr CDBFSSDUnmount() {
     s_fssdWork.isEjected = FALSE;
     s_fssdWork.isInserted = FALSE;
 
-    CDBReportInfo("VFUnmountDriveForce %s succeeded\n", "SD Slot0", CDB_SD_VF_DRIVE_LETTER /*@BUG: should not be here*/);
+    /* @BUG: should not have CDB_SD_VF_DRIVE_LETTER */
+    CDBReportInfo("VFUnmountDriveForce %s succeeded\n", "SD Slot0", CDB_SD_VF_DRIVE_LETTER);
     return CDB_ERROR_OK;
 }
 

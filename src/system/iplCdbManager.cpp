@@ -134,7 +134,7 @@ namespace ipl {
             // The current offset is the size of the board record
             rbrSize = rbrCurOffset;
 
-            u8* buffer = new (System::getMailWorkHeap(), BUFFER_HEAP) u8[rbrSize];
+            u8* buffer = new (System::getMailWorkHeap(), DEFAULT_ALIGN) u8[rbrSize];
 
             if (buffer != NULL) {
                 u8* rbrBuffer = &buffer[0];
@@ -161,7 +161,7 @@ namespace ipl {
                     }
                 }
 
-                // Ok now write the buffer!
+                // Ok, now write the buffer!
                 result = write(record, buffer, rbrSize);
 
                 // Delete the file if we ran out of storage
@@ -250,7 +250,7 @@ namespace ipl {
             // Add up the board record size with the record attribute to add up the total buffer size
             *bufferSize = rbrSize + CDB_RECORD_BUFFER_SIZE;
 
-            u8* buffer = new (System::getMailWorkHeap(), BUFFER_HEAP) u8[rbrSize + CDB_RECORD_BUFFER_SIZE];
+            u8* buffer = new (System::getMailWorkHeap(), DEFAULT_ALIGN) u8[rbrSize + CDB_RECORD_BUFFER_SIZE];
 
             if (buffer == NULL) {
                 return NULL;
@@ -510,7 +510,6 @@ namespace ipl {
 
             if (mCDBFreeSize < 0) {
                 IPLErrorLog("CDB", CDBGetLastVFError(), 1058);
-
                 error_handling(CDB_ERROR_FATAL_ERROR, 1059);
             }
 

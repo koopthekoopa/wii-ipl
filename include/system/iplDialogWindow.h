@@ -125,12 +125,20 @@ namespace ipl {
 
             /**
              * Call dialog with no button.
-             * @param msgId Message ID from BMG file.
+             * @param msgId Message ID for body text.
              * @param wait The amount of ticks for the dialog should display for.
              * @param bIsProg Show waiting icon on the bottom right.
              * @return Whenever dialog call was successful.
              */
             BOOL            callBtn0(u32 msgId, u32 wait, bool bIsProg = false);
+            /**
+             * Call dialog with no button.
+             * @param msg Unicode string for the body text.
+             * @param wait The amount of ticks for the dialog should display for.
+             * @param bIsProg Show waiting icon on the bottom right.
+             * @return Whenever dialog call was successful.
+             */
+            BOOL            callBtn0(const wchar_t* msg, u32 wait, bool bIsProg = false);
             /**
              * Call dialog with no button and no dark background.
              * @param msgId Message ID for the body text.
@@ -221,7 +229,7 @@ namespace ipl {
             BOOL            callBtn2Multi(Page* pages, int pageCount, int fadeDelay);
             /**
              * Call dialog with two buttons and without the dark background.
-             * @param msgId Message ID for the body text.
+             * @param msg Unicode string for the body text.
              * @param rBtnId Message ID for the right button text.
              * @param lBtnId Message ID for the left button text.
              * @param bSwapSound Swap the "OK" and "Back" sound effect.
@@ -242,6 +250,15 @@ namespace ipl {
              * @return Whenever dialog call was successful.
              */
             BOOL            callBtn3(u32 msgId, u32 tBtnId, u32 cBtnID, u32 bBtnId);
+            /**
+             * Call dialog with three buttons (vertically sorted)
+             * @param msg Unicode string for the body text.
+             * @param tBtnId Message ID for the top button text.
+             * @param cBtnID Message ID for the middle button text.
+             * @param bBtnId Message ID for the bottom button text.
+             * @return Whenever dialog call was successful.
+             */
+            BOOL            callBtn3(const wchar_t* msg, u32 tBtnId, u32 cBtnID, u32 bBtnId);
 
             /*==================*/
             /* DIALOG BUTTON S2 */
@@ -256,6 +273,15 @@ namespace ipl {
              * @return Whenever dialog call was successful.
              */
             BOOL            callSBtn2(u32 msgId, u32 rBtnId, u32 lBtnId, bool bSwapSound = false);
+            /**
+             * Call dialog with two buttons (alternative)
+             * @param msgId Message ID for the body text.
+             * @param rBtnId Message ID for the right button text.
+             * @param lBtnId Message ID for the left button text.
+             * @param bSwapSound Swap the "OK" and "Back" sound effect.
+             * @return Whenever dialog call was successful.
+             */
+            BOOL            callSBtn2(const wchar_t* msg, u32 rBtnId, u32 lBtnId, bool bSwapSound = false);
             /**
              * Call dialog with two buttons (alternative) without header
              * @param rBtnId Message ID for the right button text.
@@ -275,6 +301,12 @@ namespace ipl {
              * @return Whenever dialog call was successful.
              */
             BOOL            callBtnPrg(u32 msgId);
+            /**
+             * Call dialog with a progress bar.
+             * @param msgId Message ID for the body text.
+             * @return Whenever dialog call was successful.
+             */
+            BOOL            callBtnPrg(const wchar_t* msg);
             /**
              * Call dialog with a progress bar and no dark background.
              * @param msgId Message ID for the body text.

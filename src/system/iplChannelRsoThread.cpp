@@ -9,7 +9,7 @@ namespace ipl {
         RsoThread::RsoThread(EGG::Heap* heap) :
         mbStarted(false),
         mpCalcFunc(NULL) {
-            mpStack = new(heap, BUFFER_HEAP) u8[STACK_SIZE];
+            mpStack = new(heap, DEFAULT_ALIGN) u8[STACK_SIZE];
         }
 
         RsoThread::~RsoThread() {

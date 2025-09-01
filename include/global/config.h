@@ -31,17 +31,20 @@
 /** @brief IRD Mode (recovery mode) will boot up any Wii/GC game. */
 // #define IRD_DIAG_RESTRICT_OFF
 
-/** @brief Korean Common Key on non -Korean Wiis will not cause Error 003. */
-// #define TURN_OFF_CK2_VERIFY
-
-/** @brief Enables OSReport for IPL's WWW (untested) */
-// #define ENABLE_IPL_WWW_REPORT
+/** @brief In PAL50, The HOME Menu runs slow, this will make sure it's on normal speed*/
+// #define IMPROVE_PAL50_HBM_DELTA
 
 /** @brief Load IPL content by loading the System Menu TMD manually. */
 // #define STAND_ALONE_BUILD
 
 /** @brief ErrorHandler will also log NANDLogging to OSReport. */
 // #define NAND_LOG_TO_OSREPORT
+
+/** @brief Korean Common Key on non -Korean Wiis will not cause Error 003. */
+// #define TURN_OFF_CK2_VERIFY
+
+/** @brief Enables OSReport for IPL's WWW (untested) */
+// #define ENABLE_IPL_WWW_REPORT
 
 /** @brief NCDDebugPrint in PostmanManager will print NCDConfig (assuming its what it originally did) */
 // #define USE_POSTMAN_NCD_DEBUG_PRINT

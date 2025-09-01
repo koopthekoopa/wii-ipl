@@ -35,8 +35,13 @@ typedef u8          ESSignature[60];
 
 typedef u8          ESHash[20];
 
-#define             ES_CHANNEL_ID(t64)  ((ESTitleId32)(((ESTitleId)t64 & 0xFFFFFFFF00000000) >> 32))
-#define             ES_TITLE_ID(t64)    ((ESTitleId32)((ESTitleId)t64 & 0x00000000FFFFFFFF))
+#define             ES_TITLE_TYPE(t64)          ((((ESTitleId)t64 & 0xFFFFFFFF00000000) >> 32))
+#define             ES_TITLE_CODE(t64)          (((ESTitleId)t64 & 0x00000000FFFFFFFF))
+
+#define             ES_TITLE_TYPE_NOMASK(t64)   ((((ESTitleId)t64) >> 32))
+#define             ES_TITLE_CODE_NOMASK(t64)   (((ESTitleId)t64))
+
+#define             ES_TITLE_ID(type, code)     ((ESTitleId)((ESTitleId)type << 32 | code))
 
 #define             ES_MAX_CONTENT  512
 
@@ -54,6 +59,12 @@ enum {
     ES_CK_NORMAL = 0,   // Normal common key
     ES_CK_KOREAN,       // Korean common key
     ES_CK_CAFEWII       // Wii U's Wii Mode common key
+};
+
+enum {
+    ES_DEV_RETAIL = 0,   // Normal unit
+    ES_DEV_1,            // Korean/Dev unit??
+    ES_DEV_CAFE          // Wii U'
 };
 
 enum {

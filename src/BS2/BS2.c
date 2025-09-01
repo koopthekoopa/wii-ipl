@@ -752,7 +752,7 @@ void BS2BootIRD() {
             sprintf(verString, "%d.%d(%s)",  SYSMENU_VERSION_MAJOR, SYSMENU_VERSION_MINOR, productArea);
         }
         else {
-            /* @BUG Should not include productArea anyway */
+            /* @BUG Should not include productArea */
             sprintf(verString, "%d.%d(XXX)", SYSMENU_VERSION_MAJOR, SYSMENU_VERSION_MINOR, productArea);
         }
 
@@ -770,7 +770,7 @@ static void BS2TickIRD() {
     int i;
 
     switch (state) {
-        case BS2_RUN_APP: {
+        case BS2_STT_START_GAME: {
             // Print information about Disc
             OSBootInfo* bi = (OSBootInfo*)OSPhysicalToCached(OS_ADDR_BOOT_INFO);
             OSReport("\n");
@@ -802,7 +802,7 @@ static void BS2TickIRD() {
             
             break;
         }
-        case BS2_RUN_GC_APP: {
+        case BS2_STT_START_GC_GAME: {
             // Print information about Disc
             OSBootInfo* bi = (OSBootInfo*)OSPhysicalToCached(OS_ADDR_BOOT_INFO);
             OSReport("\n");
@@ -840,28 +840,28 @@ static void BS2TickIRD() {
             break;
         }
         // Some OSReports
-        case BS2_NO_DISK:
-        case BS2_COVER_OPEN: {
+        case BS2_STT_NO_DISK:
+        case BS2_STT_COVER_OPEN: {
             OSReport("\rInsert disk ");
             break;
         }
-        case BS2_WRONG_DISK: {
+        case BS2_STT_WRONG_DISK: {
             OSReport("\rWrong disk  ");
             break;
         }
-        case BS2_DIRTY_DISK: {
+        case BS2_STT_DIRTY_DISK: {
             OSReport("\rDirty disk  ");
             break;
         }
-        case BS2_FATAL_ERROR: {
+        case BS2_STT_FATAL_ERROR: {
             OSReport("\rFatal error occurred  ");
             break;
         }
-        case BS2_UPDATE_FAILED: {
+        case BS2_STT_UPDATE_FAILED: {
             OSReport("\nUpdate failed  ");
             break;
         }
-        case BS2_RUN_UPDATE: {
+        case BS2_STT_RUN_UPDATE: {
             BS2UpdateEntry* updateEntry;
 
             // Print list of entries
@@ -880,7 +880,7 @@ static void BS2TickIRD() {
 
             break;
         }
-        case BS2_RUNNING_UPDATE: {
+        case BS2_STT_RUNNING_UPDATE: {
             if (Tick++ == -1) {
                 OSReport("\rUpdating...  ");
             }
@@ -890,7 +890,7 @@ static void BS2TickIRD() {
             }
             break;
         }
-        case BS2_RESTART: {
+        case BS2_STT_RESET_SYSTEM: {
             OSReport("\rReboot");
 
             // Reset video
@@ -906,7 +906,7 @@ static void BS2TickIRD() {
 
             break;
         }
-        case BS2_DATA_DISK: {
+        case BS2_STT_DATA_DISK: {
             OSReport("\rData disk  ");
             break;
         }

@@ -13,6 +13,8 @@ namespace ipl {
 
                 MetaFile(EGG::Heap* heap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, Callback callBack, void* callBackWork, int ticketIdx);
                 virtual ~MetaFile();
+
+                bool    inNand() const  { return mbMetaInNand; }
             
             protected:
                 virtual BOOL    open_(u8 attr);
