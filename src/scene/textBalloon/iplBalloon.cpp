@@ -8,8 +8,6 @@
 
 #include <cwchar>
 
-#pragma sym on
-
 namespace ipl {
     namespace scene {
         TextBalloon::TextBalloon(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* directory, const char* fileName, const math::VEC3& unk2, f32 unk3, f32 unk4) :

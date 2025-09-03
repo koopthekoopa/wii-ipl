@@ -682,7 +682,7 @@ config.libs = [
     IPLSection("board", [
             Object(NonMatching, "scene/board/iplBoard.cpp"),
             Object(NonMatching, "scene/board/iplBoardObject.cpp"),
-            Object(NonMatching, "scene/board/iplBoardSD.cpp"),
+            Object(Matching,    "scene/board/iplBoardSD.cpp"),
         ]
     ),
     IPLSection("button", [

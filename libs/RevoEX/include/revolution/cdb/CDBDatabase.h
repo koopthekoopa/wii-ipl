@@ -43,6 +43,8 @@ CDBErr  CDBDatabaseSearch(CDBDatabase* database, CDBDate beginDate, CDBDate endD
 
 CDBErr  CDBDatabaseCleanUpEmptyDirectories(CDBDatabase* database, CDBRecordLocation recordLocation);
 
+BOOL    CDBIsSDAvailable();
+
 #ifdef __cplusplus
 }
 #endif // __cplusplus

@@ -6,8 +6,6 @@
 #include "iplSystem.h"
 #include "iplSound.h"
 
-#pragma sym on
-
 namespace ipl {
     namespace scene {
         const char* AddressAddSel::mscButtonName[AddressAddSel::BTN_MAX] = {
