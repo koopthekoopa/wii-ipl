@@ -24,6 +24,8 @@ namespace ipl {
 
         SCENE_CLASS(Arrow) {
             public:
+                Arrow(EGG::Heap* heap) : Base(heap) {}
+
                 virtual void draw();
         };
 

@@ -1,13 +1,13 @@
-#ifndef IPL_SCENE_ADDRESS_H
-#define IPL_SCENE_ADDRESS_H
+#ifndef IPL_SCENE_ADDRESS_EDIT_H
+#define IPL_SCENE_ADDRESS_EDIT_H
 
 #include "iplSceneHeader.h"
 
 namespace ipl {
     namespace scene {
-        FADER_SCENE_CLASS(Address) {
+        FADER_SCENE_CLASS(AddressEdit) {
             public:
-                Address(EGG::Heap* heap, int);
+                AddressEdit(EGG::Heap* heap, int friendCode);
 
                 enum {
                     SCENE_ADD_WII = 1,
@@ -15,9 +15,9 @@ namespace ipl {
                 };
 
             private:
-                u8  unk_0x58[0x248];
+                u8  unk_0x58[0x498];
         };
     }
 }
 
-#endif // IPL_SCENE_ADDRESS_H
+#endif // IPL_SCENE_ADDRESS_EDIT_H

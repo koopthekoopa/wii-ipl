@@ -23,9 +23,9 @@ namespace ipl {
                 virtual SceneCommand    calcNormal();
                 virtual SceneCommand    calcFadeout();
 
-                // :sob:
-#if defined(VERSION_43K)
-                virtual void            someUnusedVirtualMember() = 0;
+                // Fuck this
+#if defined(VERSION_43K) && defined(VERY_DIRTY_MATCH_HACK)
+                virtual void            SomeSortOfPaddingIdfk() = 0;
 #endif
             
             private:

@@ -21,6 +21,7 @@ namespace ipl {
 
         SCENE_CLASS(SDArrow) {
             public:
+                SDArrow(EGG::Heap* heap) : Base(heap) {}
                 virtual void draw();
         };
 

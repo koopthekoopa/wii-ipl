@@ -7,6 +7,7 @@ namespace ipl {
     namespace scene {
         SCENE_CLASS(RootScene) {
             public:
+                RootScene(EGG::Heap* heap, int sceneId) : Base(heap), mInitialArgs(NULL), mInitialSceneID((void*)sceneId) {}
                 virtual ~RootScene() {}
 
                 void        create();

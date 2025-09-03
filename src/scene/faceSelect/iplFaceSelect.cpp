@@ -496,7 +496,6 @@ namespace ipl {
             mpLayout->getAnim(ANIM_SWITCH_PAGE_NUMBER)->play();
             set_page();
 
-            // Read faces
             read_face();
 
             // Stop text balloons
@@ -518,7 +517,6 @@ namespace ipl {
             mpLayout->getAnim(ANIM_SWITCH_PAGE_NUMBER)->play();
             set_page();
 
-            // Read faces
             read_face();
 
             // Stop text balloons
@@ -755,6 +753,7 @@ namespace ipl {
         void FaceSelect::clear_face_pane(const char** facePaneList) {
             for (int i = 0; i < MAX_FACE_EACH_PAGE; i++) {
                 GXTexObj texObj;
+
                 // Set "no mii" icon
                 nw4r::lyt::Pane* pane = mpLayout->FindPaneByName(facePaneList[i]);
                 nw4r::lyt::Material* material = pane->FindMaterialByName(facePaneList[i]);
@@ -853,6 +852,7 @@ namespace ipl {
                             }
                         }
                     }
+
                     break;
                 }
             }

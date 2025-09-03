@@ -7,7 +7,7 @@ namespace ipl {
     namespace scene {
         SCENE_CLASS(Board) {
             public:
-                Board(EGG::Heap* heap);
+                Board(EGG::Heap* heap, int);
 
                 nand::LayoutFile*   getLayoutFile() const { return mpLayoutFile; }
 

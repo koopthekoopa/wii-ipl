@@ -11,6 +11,7 @@ namespace ipl {
         };
         SCENE_CLASS(Reboot) {
             public:
+                Reboot(EGG::Heap* heap, int settingsType) : Base(heap), mSettingsType(settingsType) {}
                 virtual void    calc();
             
             private:
