@@ -6,20 +6,9 @@
 
 namespace ipl {
     namespace scene {
-        static const char* scBtnSoundType[2] = {
+        static const char* scBtnSoundType[SettingButton::MAX_SOUND_TYPE] = {
             "WIPL_SE_CANCEL",
             "WIPL_SE_DECIDE",
-        };
-
-        enum {
-            ANIM_SEEN_IN = 0,
-            ANIM_BTN_FOCUS_IN,
-            ANIM_BTN_FOCUS_OUT,
-            ANIM_BTN_FLASH,
-            ANIM_WII_APPEAR,
-            ANIM_WII_LOST,
-            ANIM_ALPHA_IN,
-            ANIM_ALPHA_OUT,
         };
 
         SettingButton::SettingButton(EGG::Heap* heap, int type) :
@@ -191,7 +180,7 @@ namespace ipl {
                     break;
                 }
                 case ::gui::EventHandler::ON_TRIG: {
-                    if (controller->downTrg(controller::BTN_A)) {
+                    if (controller->downTrg(controller::BTN_INTERACT)) {
                         start_trig_event(paneName);
                     }
                     break;

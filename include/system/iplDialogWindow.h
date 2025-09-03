@@ -360,6 +360,44 @@ namespace ipl {
                 DIALOG_BTN_TYPE_MAX,
             };
 
+            enum {
+                DIALOG_PAGE_FADE_IN = 0,
+                DIALOG_PAGE_FADE_OUT,
+                DIALOG_PAGE_NORMAL,
+            };
+
+            enum {
+                ANIM_DIALOG_IN = 0,
+                ANIM_DIALOG_OUT,
+                ANIM_FOCUS_BTN_B_ON,
+                ANIM_FOCUS_BTN_B_OFF,
+                ANIM_SELECT_BTN_B,
+                ANIM_FOCUS_BTN_A_ON,
+                ANIM_FOCUS_BTN_A_OFF,
+                ANIM_SELECT_BTN_A,
+            };
+
+            enum {
+                ANIM_BTN0_DIALOG_IN = 0,
+                ANIM_BTN0_DIALOG_OUT,
+                ANIM_BTN0_WAIT,
+                ANIM_BTN0_PRORESS,
+            };
+
+            enum {
+                ANIM_BTN3_DIALOG_IN = 0,
+                ANIM_BTN3_DIALOG_OUT,
+                ANIM_BTN3_FOCUS_BTN_B_ON,
+                ANIM_BTN3_FOCUS_BTN_B_OFF,
+                ANIM_BTN3_SELECT_BTN_B,
+                ANIM_BTN3_FOCUS_BTN_A_ON,
+                ANIM_BTN3_FOCUS_BTN_A_OFF,
+                ANIM_BTN3_SELECT_BTN_A,
+                ANIM_BTN3_FOCUS_BTN_C_ON,
+                ANIM_BTN3_FOCUS_BTN_C_OFF,
+                ANIM_BTN3_SELECT_BTN_C,
+            };
+
             struct Interface {
                 layout::Object*     gLayout;    // 0x00
                 gui::PaneManager*   guiMgr;     // 0x04

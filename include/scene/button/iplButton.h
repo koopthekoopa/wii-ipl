@@ -145,13 +145,13 @@ namespace ipl {
             public:
                 enum {
                     IDANIM_FROM_CH_SEL_TO_BOARD = 0,
-                    IDANIM_FROM_CH_SEL_TO_SETTING, /*??? (unused)*/
-                    IDANIM_FROM_SETTING_TO_CH_SEL, /*??? (unused)*/
+                    IDANIM_FROM_CH_SEL_TO_SETTING,  /*??? (unused)*/
+                    IDANIM_FROM_SETTING_TO_CH_SEL,  /*??? (unused)*/
                     IDANIM_FROM_BOARD_TO_CH_SEL,
                     IDANIM_FROM_BOARD_TO_CALENDAR,
                     IDANIM_BACK_TO_BOARD,
-                    IDANIM_BACK_TO_BOARD_ALT,      /*??? (maybe unused)*/
-                    IDANIM_UNKNOWN_7,              // unused
+                    IDANIM_BACK_TO_BOARD_ALT,       /*??? (maybe unused)*/
+                    IDANIM_UNKNOWN_7,               // unused
                     IDANIM_SELECT_LEFT_BUTTON,
                     IDANIM_DISAPPEAR_BOARD_BUTTON,
                     IDANIM_APPEAR_BOARD_BUTTON,
@@ -165,8 +165,8 @@ namespace ipl {
                     IDANIM_DISPPEAR_ALL_BUTTONS,
                     IDANIM_ARROW_RIGHT_SELECT,
                     IDANIM_ARROW_LEFT_SELECT,
-                    IDANIM_ARROW_RIGHT_SELECT_ALT, // unused
-                    IDANIM_ARROW_LEFT_SELECT_ALT,  // unused
+                    IDANIM_ARROW_RIGHT_SELECT_ALT,  // unused
+                    IDANIM_ARROW_LEFT_SELECT_ALT,   // unused
                     IDANIM_ARROW_RIGHT_APPEAR,
                     IDANIM_ARROW_LEFT_APPEAR,
                     IDANIM_ARROW_RIGHT_DISAPPEAR,
@@ -248,7 +248,7 @@ namespace ipl {
 
                 bool            isActive() const;
 
-                void            setEventHandler(::gui::EventHandler* event, ::gui::EventHandler* optOutEvent);
+                void            setEventHandler(::gui::EventHandler* event, ::gui::EventHandler* optOutEvent = NULL);
 
                 void            setText(const char* paneName, u32 msgId);
                 void            setText(const char* paneName, const wchar_t* text);
@@ -278,6 +278,8 @@ namespace ipl {
 
                 static int      getButtonNo(const char* paneName);
 
+                static int      cmpButtonName(const char* name, int btnNo)  { return strcmp(name, mscButtonName[btnNo]); }
+
             protected:
                 typedef struct Command {
                     enum {
@@ -300,11 +302,9 @@ namespace ipl {
                     };          // 0x08
                 } Command;
 
-                EGG::Heap*                  get_heap()          { return mpHeap; }
-
-                SDMenuButton*               get_sd_menu_btn()   { return &mSdMenuBtn; } 
-                OptOutButton*               get_opt_out_btn()   { return &mOptOutBtn; } 
-                layout::Object*             get_layout()        { return mpLayout; } 
+                SDMenuButton*               get_sd_menu_btn()   { return &mSdMenuBtn; }
+                OptOutButton*               get_opt_out_btn()   { return &mOptOutBtn; }
+                layout::Object*             get_layout()        { return mpLayout; }
 
             private:
                 enum {

@@ -26,44 +26,6 @@ namespace ipl {
         #define BUTTON_THREE_MAX    3
     };
 
-    enum {
-        ANIM_DIALOG_IN = 0,
-        ANIM_DIALOG_OUT,
-        ANIM_FOCUS_BTN_B_ON,
-        ANIM_FOCUS_BTN_B_OFF,
-        ANIM_SELECT_BTN_B,
-        ANIM_FOCUS_BTN_A_ON,
-        ANIM_FOCUS_BTN_A_OFF,
-        ANIM_SELECT_BTN_A,
-    };
-
-    enum {
-        ANIM_BTN0_DIALOG_IN = 0,
-        ANIM_BTN0_DIALOG_OUT,
-        ANIM_BTN0_WAIT,
-        ANIM_BTN0_PRORESS,
-    };
-
-    enum {
-        ANIM_BTN3_DIALOG_IN = 0,
-        ANIM_BTN3_DIALOG_OUT,
-        ANIM_BTN3_FOCUS_BTN_B_ON,
-        ANIM_BTN3_FOCUS_BTN_B_OFF,
-        ANIM_BTN3_SELECT_BTN_B,
-        ANIM_BTN3_FOCUS_BTN_A_ON,
-        ANIM_BTN3_FOCUS_BTN_A_OFF,
-        ANIM_BTN3_SELECT_BTN_A,
-        ANIM_BTN3_FOCUS_BTN_C_ON,
-        ANIM_BTN3_FOCUS_BTN_C_OFF,
-        ANIM_BTN3_SELECT_BTN_C,
-    };
-
-    enum {
-        DIALOG_PAGE_FADE_IN = 0,
-        DIALOG_PAGE_FADE_OUT,
-        DIALOG_PAGE_NORMAL,
-    };
-
     #define DIALOG_BTN0_PROG_SPEED  2
 
     DialogWindow::DialogWindow(EGG::Heap* heap) :
@@ -1359,7 +1321,7 @@ namespace ipl {
 
     int DialogWindow::get_button_no(const char* btnName) {
         int result = -1;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < DIALOG_BTN_TYPE_MAX; i++) {
             if (strncmp(mscBtnName[i], btnName, 16) == 0) {
                 result = i;
                 break;
@@ -1387,7 +1349,7 @@ namespace ipl {
             }
             // Pointer click on button
             case ::gui::EventHandler::ON_TRIG: {
-                if (mState == DIALOG_STATE_NORMAL && con->downTrg(controller::BTN_A)) {
+                if (mState == DIALOG_STATE_NORMAL && con->downTrg(controller::BTN_INTERACT)) {
                     start_trig_event(paneName);
                 }
                 break;

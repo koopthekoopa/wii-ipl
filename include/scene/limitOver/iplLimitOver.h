@@ -21,6 +21,12 @@ namespace ipl {
                 virtual SceneCommand calcFadeout();
 
             private:
+                enum {
+                    ANIM_FADE_IN = 0,
+                    ANIM_WAIT_PUSH,
+                    ANIM_FADE_OUT,
+                };
+
                 u32                 getCountryIndex_();
                 
                 layout::Object*     mpLayout;       // 0x58

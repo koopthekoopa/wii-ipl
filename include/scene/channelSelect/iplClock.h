@@ -20,6 +20,33 @@ namespace ipl {
                 void    draw(nw4r::lyt::Pane* pane);
 
             private:
+                enum {
+                    STATE_FADE_IN = 0,
+                    STATE_NORMAL,
+                    STATE_WAIT_ANIM,
+                    STATE_DISAPPEAR,
+                };
+
+                enum {
+                    ANIM_WII_MENU_CHANGE = 0,
+                    ANIM_CLOCK_CHANGE,
+
+                    ANIM_CLOCK_COLON_BLINK,
+
+                    ANIM_CLOCK_0_APPEAR,
+                    ANIM_CLOCK_1_APPEAR,
+                    ANIM_CLOCK_2_APPEAR,
+                    ANIM_CLOCK_3_APPEAR,
+                    ANIM_AM_PM_LEFT_APPEAR,
+                    ANIM_AM_PM_RIGHT_APPEAR,
+
+                    ANIM_CLOCK_0_LOST,
+                    ANIM_CLOCK_1_LOST,
+                    ANIM_CLOCK_2_LOST,
+                    ANIM_CLOCK_3_LOST,
+                    ANIM_AM_PM_LEFT_LOST,
+                    ANIM_AM_PM_RIGHT_LOST,
+                };
                 typedef struct time_tex {
                     s32     hourDigit2;     // 0x00
                     s32     hourDigit1;     // 0x04

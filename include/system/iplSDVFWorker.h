@@ -53,14 +53,14 @@ namespace ipl {
 
         private:
             typedef struct Work {
-                FACacheBuf      cacheBuf[TOTAl_PAGES];   // 0x00
-                FACachePage     cachePages[TOTAl_PAGES]; // 0x1000
+                FACacheBuf      cacheBuf[TOTAl_PAGES];              // 0x00
+                FACachePage     cachePages[TOTAl_PAGES];            // 0x1000
 
                 FADrvTbl        driveTable;                         // 0x1140
 
                 FACacheSetting  cacheSetting;                       // 0x114C
 
-                u8              threadStack[STACK_SIZE]; // 0x1160
+                u8              threadStack[STACK_SIZE];            // 0x1160
                 OSThread        thread;                             // 0x21160
 
                 OSMutex         mutex;                              // 0x21478

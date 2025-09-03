@@ -21,13 +21,29 @@ namespace ipl {
                 Object(EGG::Heap* heap, int width, int height, int faceId, MakeIconCallback callback, void* callbackWork);
                 Object(EGG::Heap* heap, int width, int height, RFLiCharData* faceData, MakeIconCallback callback, void* callbackWork);
                 ~Object();
+
+                const wchar_t* getName() const {
+                    wchar_t* faceName;
+
+                    int faceId = mFaceId;
+                    if (faceId >= 0) {
+                        RFLiCharData* charData = RFLiGetCharData(faceId);
+                        faceName = charData->name;
+                    }
+                    else {
+                        faceName = NULL;
+                    }
+
+                    return faceName;
+                }
+
+                const GXTexObj& getIconTexture() const  { return mFaceTexObj; }
+
+                BOOL            created() const         { return mbCreated; }
             
             private:
-                void    init(EGG::Heap* heap, int width, int height);
-                void    make_icon();
-
-                BOOL    created() const         { return mbCreated; }
-                u8*     getIconTexture() const  { return mpIconTex; }
+                void            init(EGG::Heap* heap, int width, int height);
+                void            make_icon();
 
                 u8*                 mpIconTex;          // 0x00
                 u32                 mIconSize;          // 0x04

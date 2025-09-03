@@ -10,6 +10,7 @@ namespace ipl {
                 enum {
                     CANCEL = 0,
                     DECIDE,
+                    MAX_SOUND_TYPE
                 };
 
                 enum {
@@ -40,6 +41,17 @@ namespace ipl {
                 void                    setSoundType(int type)  { mSoundType = type; }
 
             private:
+                enum {
+                    ANIM_SEEN_IN = 0,
+                    ANIM_BTN_FOCUS_IN,
+                    ANIM_BTN_FOCUS_OUT,
+                    ANIM_BTN_FLASH,
+                    ANIM_WII_APPEAR,
+                    ANIM_WII_LOST,
+                    ANIM_ALPHA_IN,
+                    ANIM_ALPHA_OUT,
+                };
+
                 void                    setText(u32 msgId);
 
                 void                    showBtn();

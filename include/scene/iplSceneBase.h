@@ -131,6 +131,8 @@ namespace ipl {
                         void                setPtr(pointer p)                       { mPtr = p; }
                 };
 
+                EGG::Heap*      getHeap()   { return mpHeap; }
+
             protected:
                 EGG::Heap*  mpHeap;         // 0x24
 

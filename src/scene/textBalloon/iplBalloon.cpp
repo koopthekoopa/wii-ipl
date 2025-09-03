@@ -8,6 +8,8 @@
 
 #include <cwchar>
 
+#pragma sym on
+
 namespace ipl {
     namespace scene {
         TextBalloon::TextBalloon(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* directory, const char* fileName, const math::VEC3& unk2, f32 unk3, f32 unk4) :
@@ -189,17 +191,13 @@ namespace ipl {
             System::getProjectionRect(&proj16x9);
             System::getProjectionRect4x3(&proj4x3);
 
-            const nw4r::lyt::Size* baseSize;
-
             switch(unk_0x28) {
                 case 1: {
-                    baseSize = get_size("W_Base");
-                    temp1 = baseSize->width / 2;
+                    temp1 = get_size("W_Base")->width / 2;
                     break;
                 }
                 case 2: {
-                    baseSize = get_size("W_Base");
-                    temp1 = -baseSize->width / 2;
+                    temp1 = -get_size("W_Base")->width / 2;
                     break;
                 }
             }
@@ -208,12 +206,10 @@ namespace ipl {
                 temp1 *= proj4x3.GetWidth() / proj16x9.GetWidth();
             }
 
-            baseSize = get_size("W_Base");
-            f32 temp2 = (trans.x + temp1) - (baseSize->width / 2) - proj16x9.left;
+            f32 temp2 = (trans.x + temp1) - (get_size("W_Base")->width / 2) - proj16x9.left;
 
-            baseSize = get_size("W_Base");
+            f32 temp4 = proj16x9.right - (trans.x + temp1 + get_size("W_Base")->width / 2);
             f32 temp3 = 0.0f;
-            f32 temp4 = proj16x9.right - (trans.x + temp1 + baseSize->width / 2);
 
             if (temp2 < temp0) {
                 temp3 = temp0 - temp2;
@@ -222,7 +218,7 @@ namespace ipl {
                 temp3 = temp4 - temp0;
             }
 
-            math::VEC3 finalTrans(temp3 + trans.x + temp1, trans.y, trans.z);
+            math::VEC3 finalTrans( trans.x + temp3 + temp1, trans.y, trans.z);
             balloonPane->SetTranslate(finalTrans);
         }
 
@@ -287,12 +283,11 @@ namespace ipl {
                                                 1.0f;
 
             nw4r::ut::Rect textRect = textPane->GetTextDrawRect(*mpLayout->getDrawInfo());
-            const nw4r::lyt::Size* baseSize = get_size("W_Base");
 
-            nw4r::lyt::Size newSize(textRect.GetWidth() + 40.0f, baseSize->height);
+            nw4r::lyt::Size newSize(textRect.GetWidth() + 40.0f, get_size("W_Base")->height);
 
-            if (newSize.width < 160.0f * temp1) {
-                newSize.width = 160.0f * temp1;
+            if (newSize.width < temp1 * 160.0f) {
+                newSize.width = temp1 * 160.0f;
             }
 
             set_size("W_Base", newSize);

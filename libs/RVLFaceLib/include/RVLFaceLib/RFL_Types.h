@@ -8,9 +8,9 @@ extern "C" {
 #endif
 
 #define RFL_NAME_LENGTH     10
-#define RFL_CREATOR_LENGTH     10
+#define RFL_CREATOR_LENGTH  10
 #define RFL_CREATEID_LENGTH 8
-#define RFL_CHARDATA_SIZE    74
+#define RFL_CHARDATA_SIZE   74
 
 typedef enum {
     RFLErrcode_Success  = 0,

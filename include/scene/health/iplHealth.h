@@ -22,6 +22,12 @@ namespace ipl {
                 virtual SceneCommand calcFadeout();
 
             private:
+                enum {
+                    ANIM_FADE_IN = 0,
+                    ANIM_WAIT_PUSH,
+                    ANIM_FADE_OUT,
+                };
+                
                 void                check_safe_mode();
                 BOOL                finish_safe_mode_check() const;
 

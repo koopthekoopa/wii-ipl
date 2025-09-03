@@ -159,6 +159,9 @@ namespace ipl {
                 const nw4r::ut::Rect    getTextDrawRect(nw4r::lyt::TextBox* textBox)    { return textBox->GetTextDrawRect(mDrawInfo); }
                 const nw4r::ut::Rect    getTextDrawRect(const char* paneName)           { return getTextDrawRect(nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(FindPaneByName(paneName))); }
 
+                const nw4r::ut::Rect    getPaneRect(nw4r::lyt::Pane* pane)              { return pane->GetPaneRect(mDrawInfo); }
+                const nw4r::ut::Rect    getPaneRect(const char* paneName)               { return getPaneRect(FindPaneByName(paneName)); }
+
                 Animator*               getAnim(int idx = 0)                            { return static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, idx)); }
             private:
                 void                    init_(const char* fileName);

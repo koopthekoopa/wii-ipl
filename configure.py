@@ -718,7 +718,7 @@ config.libs = [
         ]
     ),
     IPLSection("faceSelect", [
-            Object(NonMatching, "scene/faceSelect/iplFaceSelect.cpp"),
+            Object(Matching,    "scene/faceSelect/iplFaceSelect.cpp"),
         ]
     ),
     IPLSection("health", [

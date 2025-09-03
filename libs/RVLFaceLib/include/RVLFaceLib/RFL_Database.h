@@ -7,6 +7,8 @@
 extern "C" {
 #endif
 
+#define RFL_DATABASE_COUNT  100
+
 BOOL    RFLIsAvailableOfficialData(u16 index);
 
 #ifdef __cplusplus
@@ -14,5 +16,3 @@ BOOL    RFLIsAvailableOfficialData(u16 index);
 #endif
 
 #endif // REVOLUTION_FACE_DATABASE_H
-
-

@@ -40,21 +40,22 @@ namespace ipl {
             CL_BTN_B            = __iplWpadCl(WPAD_BUTTON_CL_B),
             CL_BTN_PLUS         = __iplWpadCl(WPAD_BUTTON_CL_PLUS),
             CL_BTN_MINUS        = __iplWpadCl(WPAD_BUTTON_CL_MINUS),
+            CL_BTN_L            = __iplWpadCl(WPAD_BUTTON_CL_FULL_R),
+            CL_BTN_R            = __iplWpadCl(WPAD_BUTTON_CL_FULL_L),
             CL_BTN_HOME         = __iplWpadCl(WPAD_BUTTON_CL_HOME),
         };
-        /* Both Revolution (Wii Remote) and Classic Controller */
+        /* Common button inputs */
         enum {
-            BTN_UP      = REVO_BTN_UP       | CL_BTN_PAD_UP,
-            BTN_DOWN    = REVO_BTN_DOWN     | CL_BTN_PAD_DOWN,
-            BTN_LEFT    = REVO_BTN_LEFT     | CL_BTN_PAD_LEFT,
-            BTN_RIGHT   = REVO_BTN_RIGHT    | CL_BTN_PAD_RIGHT,
-            BTN_A       = REVO_BTN_A        | CL_BTN_A,
-            BTN_B       = REVO_BTN_B        | CL_BTN_B,
-            BTN_PLUS    = REVO_BTN_PLUS     | CL_BTN_PLUS,
-            BTN_MINUS   = REVO_BTN_MINUS    | CL_BTN_MINUS,
-            BTN_HOME    = REVO_BTN_HOME     | CL_BTN_HOME,
-            BTN_1       = REVO_BTN_1,
-            BTN_2       = REVO_BTN_2,
+            BTN_UP          = REVO_BTN_UP       | CL_BTN_PAD_UP,                /* 0x00010008 */
+            BTN_DOWN        = REVO_BTN_DOWN     | CL_BTN_PAD_DOWN,              /* 0x40000004 */
+            BTN_LEFT        = REVO_BTN_LEFT     | CL_BTN_PAD_LEFT,              /* 0x00020001 */
+            BTN_RIGHT       = REVO_BTN_RIGHT    | CL_BTN_PAD_RIGHT,             /* 0x80000002 */
+            BTN_INTERACT    = REVO_BTN_A        | CL_BTN_A,                     /* 0x00100800 */
+            BTN_BACK        = REVO_BTN_B        | CL_BTN_B,                     /* 0x00400400 */
+            BTN_DRAG        = REVO_BTN_A        | REVO_BTN_B,                   /* 0x00000C00 */
+            BTN_NEXT_RIGHT  = REVO_BTN_PLUS     | CL_BTN_PLUS       | CL_BTN_L, /* 0x06000010 */
+            BTN_NEXT_LEFT   = REVO_BTN_MINUS    | CL_BTN_MINUS      | CL_BTN_R, /* 0x30001000 */
+            BTN_HOME        = REVO_BTN_HOME     | CL_BTN_HOME,                  /* 0x08008000 */
         };
         
         class Interface {

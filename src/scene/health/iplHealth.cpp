@@ -41,13 +41,13 @@ namespace ipl {
         
         #define HAS_SEC2MS(x)           (x * 1000)
         
-        #define HAS_TIMER_FADE_IN       HAS_SEC2MS(1)                           /* Seconds after fading in */
-        #define HAS_TIMER_PRESS_A       HAS_SEC2MS(2)                           /* Seconds until the user can pass through the screen */
-        #define HAS_TIMER_NOT_PRESS_A   HAS_SEC2MS(60)                          /* Seconds for the user to do something to pass through the screen */
+        #define HAS_TIMER_FADE_IN       HAS_SEC2MS(1)                                       /* Seconds after fading in */
+        #define HAS_TIMER_PRESS_A       HAS_SEC2MS(2)                                       /* Seconds until the user can pass through the screen */
+        #define HAS_TIMER_NOT_PRESS_A   HAS_SEC2MS(60)                                      /* Seconds for the user to do something to pass through the screen */
         
-        #define HAS_TIMER_SAFE_MODE     HAS_SEC2MS(3)                           /* Seconds the user has to hold the safe mode combo on for */
+        #define HAS_TIMER_SAFE_MODE     HAS_SEC2MS(3)                                       /* Seconds the user has to hold the safe mode combo on for */
 
-        #define HAS_PRESS_A_BUTTON      (controller::BTN_A | controller::BTN_B) /* Buttons the user can press to goto the main menu */
+        #define HAS_PRESS_A_BUTTON      (controller::BTN_INTERACT | controller::BTN_BACK)   /* Buttons the user can press to goto the main menu */
 
         enum {
             LANG_JPN = 0,
@@ -62,12 +62,6 @@ namespace ipl {
             LANG_EU_NED,
             LANG_KOR,
             LANG_CHN
-        };
-
-        enum {
-            ANIM_FADE_IN = 0,
-            ANIM_WAIT_PUSH,
-            ANIM_FADE_OUT,
         };
 
         // Health And Safety screen

@@ -7,13 +7,12 @@
 extern "C" {
 #endif
 
-void RFLiConvertRaw2Info(const RFLiCharData* data, RFLiCharInfo* out);
-BOOL RFLiIsValidID(const RFLCreateID* id);
+void            RFLiConvertRaw2Info(const RFLiCharData* data, RFLiCharInfo* out);
+RFLiCharData*   RFLiGetCharData(u16 index);
+BOOL            RFLiIsValidID(const RFLCreateID* id);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif // RFL_INTERVAL_DATABASE_H
-
-

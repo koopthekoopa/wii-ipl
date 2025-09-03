@@ -262,7 +262,7 @@ namespace ipl {
 
             // Setup text balloons
             for (int i = 0; i < BALLOON_MAX; i++) {
-                mpBalloons[i] = new TextBalloon(get_heap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 120.0f, 30.0f);
+                mpBalloons[i] = new TextBalloon(getHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 120.0f, 30.0f);
                 mpBalloons[i]->init(System::getMessage(scBalloonMsg[i]), 0);
                 mpBalloons[i]->init_textbox();
             }
