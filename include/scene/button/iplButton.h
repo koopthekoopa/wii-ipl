@@ -10,8 +10,6 @@
 #include "utility/iplTimer.h"
 #include "utility/iplQueue.h"
 
-#define BUTTON_EVENT_HANDLER(x) class x : public ButtonEventHandlerBase
-
 namespace ipl {
     namespace scene {
         typedef struct AnmFrame {
@@ -197,7 +195,7 @@ namespace ipl {
                     BTN_SETTING,
                     BTN_CALENDAR,
                     BTN_CREATE,
-                    BTN_CALENDAR_EXIT,
+                    BTN_EXIT,
                     BTN_CREATE_EXIT,
                     BTN_CREATE_R_BUTTON,
                     BTN_TRASH_DELETE,
@@ -222,8 +220,8 @@ namespace ipl {
                 };
 
                 enum {
-                    TEXT_CALENDAR_EXIT = 0,
-                    TEXT_CALENDAR_ADD,
+                    TEXT_LEFT_BUTTON = 0,
+                    TEXT_RIGHT_BUTTON,
                     TEXT_MAX
                 };
 
@@ -274,7 +272,7 @@ namespace ipl {
                 void            disableBtn();
                 
                 void            reserveAnm(int animId);
-                void            reserveText(int animId, u32 msgId);
+                void            reserveText(int paneId, u32 msgId);
 
                 static int      getButtonNo(const char* paneName);
 
@@ -297,7 +295,7 @@ namespace ipl {
 
                     /* Second argument (UNSIGNED)*/
                     union {
-                        u32 secondArg;
+                        u32 secondArg;  
                         u32 msgId;
                     };          // 0x08
                 } Command;
@@ -375,13 +373,13 @@ namespace ipl {
                 virtual void    onEventDerived(u32 compId, u32 event, const controller::Interface* con);
         };
 
-        BUTTON_EVENT_HANDLER(OptOutButtonEventHandlerBase) {
+        class OptOutButtonEventHandlerBase : public ButtonEventHandlerBase {
             public:
                 virtual void    onEvent(u32 compId, u32 event, void* data);
                 virtual void    onEventDerived(u32 compId, u32 event, const controller::Interface* con);
         };
 
-        BUTTON_EVENT_HANDLER(SDMenuEventHandlerBase) {
+        class SDMenuEventHandlerBase : public ButtonEventHandlerBase {
             public:
                 virtual void    onEvent(u32 compId, u32 event, void* data);
                 virtual void    onEventDerived(u32 compId, u32 event, const controller::Interface* con);

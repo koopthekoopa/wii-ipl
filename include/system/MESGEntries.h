@@ -43,6 +43,16 @@
 #define MESG_ADDRESS_WII_ID             66
 #define MESG_ADDRESS_CHOOSE             78
 
+/* Address */
+
+#define MESG_ADDRESS_BACK               35
+#define MESG_ADDRESS_REGISTER           41
+
+/* Address Add Select */
+
+#define MESG_ADDRESS_ADD_SEL_WII        77
+#define MESG_ADDRESS_ADD_SEL_EMAIL      70
+
 /* Friend List Cache (awaiting friends by email) */
 
 #define MESG_FRIEND_CACHE_EMAIL_TITLE   385

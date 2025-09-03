@@ -289,7 +289,7 @@ namespace ipl {
             gui::PaneComponent* component = static_cast<gui::PaneComponent*>(mpManager->getComponent(compId));
             const char* paneName = component->getPane()->GetName();
 
-            SDMenuButton* sdMenuButton = static_cast<Button*>(System::getSceneManager()->getScene(SCENE_BUTTON))->get_sd_menu_btn();
+            SDMenuButton* sdMenuButton = static_cast<Button*>(System::getScene(SCENE_BUTTON))->get_sd_menu_btn();
 
             switch (event) {
                 case ON_POINT: {

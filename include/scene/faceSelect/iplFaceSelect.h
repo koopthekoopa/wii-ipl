@@ -23,7 +23,6 @@ namespace ipl {
                 };
 
                 FaceSelect(EGG::Heap* heap, int fadeType);
-                virtual ~FaceSelect() {}
 
                 virtual void            prepare();
                 virtual void            create();
@@ -89,15 +88,15 @@ namespace ipl {
                     ANIM_LEFT_ARROW_FOCUS_IN,
                     ANIM_LEFT_ARROW_FOCUS_OUT,
                     ANIM_LEFT_ARROW_SELECT,
-                    ANIM_LEFT_ARROW_SELECT_ALT0,
-                    ANIM_LEFT_ARROW_SELECT_ALT1,
+                    ANIM_LEFT_ARROW_SELECT_ALT,
+                    ANIM_LEFT_ARROW_SELECT_ALT_REPEAT,
                     ANIM_LEFT_ARROW_APPEAR,
                     ANIM_LEFT_ARROW_DISAPPEAR,
                     ANIM_RIGHT_ARROW_FOCUS_IN,
                     ANIM_RIGHT_ARROW_FOCUS_OUT,
                     ANIM_RIGHT_ARROW_SELECT,
-                    ANIM_RIGHT_ARROW_SELECT_ALT0,
-                    ANIM_RIGHT_ARROW_SELECT_ALT1,
+                    ANIM_RIGHT_ARROW_SELECT_ALT,
+                    ANIM_RIGHT_ARROW_SELECT_ALT_REPEAT,
                     ANIM_RIGHT_ARROW_APPEAR,
                     ANIM_RIGHT_ARROW_DISAPPEAR,
                     ANIM_APPEARING,
@@ -219,7 +218,7 @@ namespace ipl {
                 FaceSelect* mpInstance; // 0x0C
         };
 
-        BUTTON_EVENT_HANDLER(FaceSelectButtonEvent) {
+        class FaceSelectButtonEvent : public ButtonEventHandlerBase {
             public:
                 FaceSelectButtonEvent(FaceSelect* instance) :
                 ButtonEventHandlerBase(),

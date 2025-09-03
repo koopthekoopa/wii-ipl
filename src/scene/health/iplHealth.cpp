@@ -197,7 +197,7 @@ namespace ipl {
             nw4r::lyt::Pane* pHasPane;
             nw4r::lyt::Pane* pPushPane;
 
-            mpLayout = new layout::Object(mpHeap, mpLayoutFile, "arc", "it_Has_a.brlyt");
+            mpLayout = new layout::Object(getHeap(), mpLayoutFile, "arc", "it_Has_a.brlyt");
 
             // Make all of the panes invisible
             for (int i = 0; i < ARRSIZE(has_pane_name); i++) {
@@ -328,7 +328,7 @@ namespace ipl {
         }
 
         void skHealth::draw() {
-            if (System::getSceneManager()->canDrawScene()) {
+            if (System::canDrawScene()) {
                 layout::Object::setCamera();
                 mpLayout->draw();
             }

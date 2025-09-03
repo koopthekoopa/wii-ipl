@@ -5,7 +5,7 @@
 
 namespace ipl {
     namespace scene {
-        FADER_SCENE_GUI_CLASS(SettingButton) {
+        FADER_SCENE_CLASS(SettingButton), public ::gui::EventHandler {
             public:
                 enum {
                     CANCEL = 0,

@@ -45,13 +45,13 @@ namespace ipl {
         SDButton::~SDButton() {}
 
         void SDButton::prepare() {
-            mpLayoutFile  = System::getNandManager()->readLayoutAsync(mpHeap, "sdButton.ash");
-            mpBalloonFile = System::getNandManager()->readLayoutAsync(mpHeap, "balloon.ash");
+            mpLayoutFile  = System::getNandManager()->readLayoutAsync(getHeap(), "sdButton.ash");
+            mpBalloonFile = System::getNandManager()->readLayoutAsync(getHeap(), "balloon.ash");
         }
 
         void SDButton::create() {
             // Setup layout
-            mpLayout = new layout::Object(mpHeap, mpLayoutFile, "arc", "mn_SdcardMenu_b.brlyt");
+            mpLayout = new layout::Object(getHeap(), mpLayoutFile, "arc", "mn_SdcardMenu_b.brlyt");
         
             // Bind button animatons
             mpLayout->bindToGroup("mn_SdcardMenu_b_Btn_Wiimenu_rollover.brlan", "G_BL", false);
@@ -129,7 +129,7 @@ namespace ipl {
         }
 
         void SDButton::draw() {
-            if (System::getSceneManager()->canDrawScene()) {
+            if (System::canDrawScene()) {
                 // Setup camera
                 layout::Object::setCamera();
 
@@ -506,7 +506,7 @@ namespace ipl {
             gui::PaneComponent* component = static_cast<gui::PaneComponent*>(mpManager->getComponent(compId));
             const char* paneName = component->getPane()->GetName();
 
-            SDButton* button = static_cast<SDButton*>(System::getSceneManager()->getScene(SCENE_SD_BUTTON));
+            SDButton* button = static_cast<SDButton*>(System::getScene(SCENE_SD_BUTTON));
 
             switch (event) {
                 case ON_POINT: {

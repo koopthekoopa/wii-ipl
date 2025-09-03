@@ -15,11 +15,11 @@ namespace ipl {
         }
 
         void SettingBg::prepare() {
-            mpLayoutFile = System::getNandManager()->readLayoutAsync(mpHeap, "setupBg.ash");
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(getHeap(), "setupBg.ash");
         }
 
         void SettingBg::create() {
-            mpLayout = new layout::Object(mpHeap, mpLayoutFile, "arc", "it_BgSetUp_a.brlyt");
+            mpLayout = new layout::Object(getHeap(), mpLayoutFile, "arc", "it_BgSetUp_a.brlyt");
             mpLayout->finishBinding();
 
             createChildScene(SCENE_SETTING_BUTTON, this, NULL, (void*)mSettingType);
@@ -33,7 +33,7 @@ namespace ipl {
         }
 
         void SettingBg::draw() {
-            if (System::getSceneManager()->canDrawScene()) {
+            if (System::canDrawScene()) {
                 layout::Object::setCamera();
                 mpLayout->draw();
             }

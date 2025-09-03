@@ -85,7 +85,7 @@ namespace ipl {
                 /*button in*/ { /*start=*/3900.0f, /*end=*/3906.0f },
                 /*button out*/{ /*start=*/3930.0f, /*end=*/3938.0f }
             },
-            /*BTN_CALENDAR_EXIT*/
+            /*BTN_EXIT*/
             {
                 /*button in*/ { /*start=*/2900.0f, /*end=*/2906.0f },
                 /*button out*/{ /*start=*/2930.0f, /*end=*/2938.0f }
@@ -199,13 +199,13 @@ namespace ipl {
         Button::~Button() {}
             
         void Button::prepare() {
-            mpLayoutFile  = System::getNandManager()->readLayoutAsync(mpHeap, "cmnBtn.ash");
-            mpBalloonFile = System::getNandManager()->readLayoutAsync(mpHeap, "balloon.ash");
+            mpLayoutFile  = System::getNandManager()->readLayoutAsync(getHeap(), "cmnBtn.ash");
+            mpBalloonFile = System::getNandManager()->readLayoutAsync(getHeap(), "balloon.ash");
         }
 
         void Button::create() {
             // Setup layout
-            mpLayout = new layout::Object(mpHeap, mpLayoutFile, "arc", "my_IplTop_e.brlyt");
+            mpLayout = new layout::Object(getHeap(), mpLayoutFile, "arc", "my_IplTop_e.brlyt");
 
             // Bind all groups
             for (int i = 0; i < BTN_MAX; i++) {
@@ -270,8 +270,8 @@ namespace ipl {
             stopMailNumAnm();
 
             // Create the other buttons
-            mOptOutBtn.create(mpLayoutFile, mpHeap);
-            mSdMenuBtn.create(mpLayoutFile, mpBalloonFile, mpHeap);
+            mOptOutBtn.create(mpLayoutFile, getHeap());
+            mSdMenuBtn.create(mpLayoutFile, mpBalloonFile, getHeap());
 
 #ifdef KOREAN_BUILD
             if (SCGetAspectRatio() == SC_ASPECT_RATIO_16x9) {
@@ -340,7 +340,7 @@ namespace ipl {
         }
 
         void Button::draw() {
-            if (System::getSceneManager()->canDrawScene()) {
+            if (System::canDrawScene()) {
                 // Setup camera
                 layout::Object::setCamera();
 
@@ -536,7 +536,7 @@ namespace ipl {
                 }
                 case IDANIM_SELECT_CALENDAR_EXIT: {
                     anim = mpButtonAnim[ANIM_CALENDAR_EXIT];
-                    initBtn(BTN_CALENDAR_EXIT);
+                    initBtn(BTN_EXIT);
                     break;
                 }
                 case IDANIM_SELECT_TRASH_BUTTON: {
@@ -826,15 +826,15 @@ namespace ipl {
 
         void Button::reserveAnm(int animId) {
             Command command;
-            command.type = 0;
+            command.type = Command::TYPE_ANIM;
             command.animId = animId;
             mButtonCmd.push(command);
         }
     
-        void Button::reserveText(int animId, u32 msgId) {
+        void Button::reserveText(int paneId, u32 msgId) {
             Command command;
-            command.type = 1;
-            command.animId = animId;
+            command.type = Command::TYPE_TEXT;
+            command.paneId = paneId;
             command.msgId = msgId;
             mButtonCmd.push(command);
         }
@@ -928,7 +928,7 @@ namespace ipl {
             gui::PaneComponent* component = static_cast<gui::PaneComponent*>(mpManager->getComponent(compId));
             const char* paneName = component->getPane()->GetName();
 
-            Button* button = static_cast<Button*>(System::getSceneManager()->getScene(SCENE_BUTTON));
+            Button* button = static_cast<Button*>(System::getScene(SCENE_BUTTON));
 
             switch (event) {
                 case ON_POINT: {
@@ -950,7 +950,7 @@ namespace ipl {
             gui::PaneComponent* component = static_cast<gui::PaneComponent*>(mpManager->getComponent(compId));
             const char* paneName = component->getPane()->GetName();
 
-            OptOutButton* button = static_cast<Button*>(System::getSceneManager()->getScene(SCENE_BUTTON))->get_opt_out_btn();
+            OptOutButton* button = static_cast<Button*>(System::getScene(SCENE_BUTTON))->get_opt_out_btn();
 
             switch (event) {
                 case ON_POINT: {

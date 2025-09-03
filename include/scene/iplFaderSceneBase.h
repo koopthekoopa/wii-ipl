@@ -4,7 +4,6 @@
 #include "scene/iplSceneBase.h"
 
 #define FADER_SCENE_CLASS(x)        class x : public scene::FaderSceneBase
-#define FADER_SCENE_GUI_CLASS(x)    class x : public scene::FaderSceneBase, public ::gui::EventHandler
 
 namespace ipl {
     namespace scene {

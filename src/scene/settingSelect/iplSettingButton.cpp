@@ -30,11 +30,11 @@ namespace ipl {
         }
 
         void SettingButton::prepare() {
-            mpLayoutFile = System::getNandManager()->readLayoutAsync(mpHeap, "setupBtn.ash");
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(getHeap(), "setupBtn.ash");
         }
 
         void SettingButton::create() {
-            mpLayout = new layout::Object(mpHeap, mpLayoutFile, "arc", "it_Button_a.brlyt");
+            mpLayout = new layout::Object(getHeap(), mpLayoutFile, "arc", "it_Button_a.brlyt");
         
             mpLayout->bindToGroup("it_Button_a_SeenIn.brlan",       "G_BarIn",      false);
             mpLayout->bindToGroup("it_Button_a_BtnFoucusIn.brlan",  "G_FocusBtnA",  false, false);
@@ -119,7 +119,7 @@ namespace ipl {
         }
 
         void SettingButton::draw() {
-            if (System::getSceneManager()->canDrawScene()) {
+            if (System::canDrawScene()) {
                 layout::Object::setCamera();
                 mpLayout->draw();
             }

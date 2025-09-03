@@ -465,6 +465,7 @@ src/scene/address/iplAddress.cpp:
 src/scene/address/iplAddressAddSel.cpp:
 	.text       start:0x813867A8 end:0x81387470
 	.data       start:0x8161CB48 end:0x8161CD98
+	.sdata2     start:0x81668E50 end:0x81668E58
 	.sdata      start:0x8166ABF0 end:0x8166AC00
 
 src/scene/address/iplAddressEdit.cpp:
@@ -472,7 +473,7 @@ src/scene/address/iplAddressEdit.cpp:
 	.text       start:0x81387470 end:0x8138DDA8
 	.rodata     start:0x815E8228 end:0x815E8250
 	.data       start:0x8161CD98 end:0x8161D600
-	.sdata2     start:0x81668E50 end:0x81668E68
+	.sdata2     start:0x81668E58 end:0x81668E70
 	.sdata      start:0x8166AC00 end:0x8166AC18
 
 src/scene/backMenu/iplBackMenu.cpp:
@@ -487,7 +488,7 @@ src/scene/board/iplBoard.cpp:
 	.text       start:0x8138E120 end:0x81392F48
 	.rodata     start:0x815E8250 end:0x815E82B8
 	.data       start:0x8161FDC0 end:0x816200A8
-	.sdata2     start:0x81668E68 end:0x81668E80
+	.sdata2     start:0x81668E70 end:0x81668E80
 	.sdata      start:0x8166AC20 end:0x8166AC48
 
 src/scene/board/iplBoardObject.cpp:

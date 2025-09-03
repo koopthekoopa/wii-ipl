@@ -50,7 +50,7 @@ namespace ipl {
 
         void BackMenu::create() {
             // Set up layout
-            mpLayout = new layout::Object(mpHeap, backToWiiMenu_arc, "arc", "my_BackToWiiMenu.brlyt");
+            mpLayout = new layout::Object(getHeap(), backToWiiMenu_arc, "arc", "my_BackToWiiMenu.brlyt");
 
             mpLayout->bind("my_BackToWiiMenu.brlan");
             mpLayout->finishBinding();
@@ -108,7 +108,7 @@ namespace ipl {
         }
 
         void BackMenu::draw() {
-            if (System::getSceneManager()->canDrawScene()) {
+            if (System::canDrawScene()) {
                 layout::Object::setCamera();
                 mpLayout->draw();
             }

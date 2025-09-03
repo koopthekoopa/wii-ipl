@@ -103,13 +103,13 @@ namespace ipl {
 
         void FaceSelect::prepare() {
             // Read the files!!!
-            mpLayoutFile = System::getNandManager()->readLayoutAsync(mpHeap, "faceSel.ash");
-            mpBalloonFile = System::getNandManager()->readLayoutAsync(mpHeap, "balloon.ash");
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(getHeap(), "faceSel.ash");
+            mpBalloonFile = System::getNandManager()->readLayoutAsync(getHeap(), "balloon.ash");
         }
 
         void FaceSelect::create() {
             // Layout!!!
-            mpLayout = new layout::Object(mpHeap, mpLayoutFile, "arc", "my_selectNigaoe_a.brlyt");
+            mpLayout = new layout::Object(getHeap(), mpLayoutFile, "arc", "my_selectNigaoe_a.brlyt");
 
             // Bind all of the animations
             mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeIn.brlan",           "G_All", false, mFadeType == FADE_FROM_MEMO);
@@ -239,7 +239,7 @@ namespace ipl {
 
         
         void FaceSelect::initCalcNormal() {
-            static_cast<Button*>(System::getSceneManager()->getScene(SCENE_BUTTON))->setEventHandler(mpButtonEvent);
+            static_cast<Button*>(System::getScene(SCENE_BUTTON))->setEventHandler(mpButtonEvent);
 
             // Force right arrow to appear
             if (CAN_SCROLL_RIGHT) {
@@ -280,7 +280,7 @@ namespace ipl {
                 mpBalloons[i]->calc();
             }
 
-            static_cast<Button*>(System::getSceneManager()->getScene(SCENE_BUTTON))->setEventHandler(NULL);
+            static_cast<Button*>(System::getScene(SCENE_BUTTON))->setEventHandler(NULL);
 
             mpLayout->getAnim(mFadeAnimIndex + ANIM_FADE_OUT)->play();
         }
@@ -309,7 +309,7 @@ namespace ipl {
         }
 
         void FaceSelect::draw() {
-            if (System::getSceneManager()->canDrawScene()) {
+            if (System::canDrawScene()) {
                 u32 scLeft, scTop;
                 u32 scWidth, scHeight;
                 
@@ -357,8 +357,8 @@ namespace ipl {
         }
 
         void FaceSelect::stt_normal() {
-            if (static_cast<Button*>(System::getSceneManager()->getScene(SCENE_BUTTON))->isActive()) {
-                static_cast<Button*>(System::getSceneManager()->getScene(SCENE_BUTTON))->update();
+            if (static_cast<Button*>(System::getScene(SCENE_BUTTON))->isActive()) {
+                static_cast<Button*>(System::getScene(SCENE_BUTTON))->update();
             }
 
             if (mState == STATE_NORMAL) {
@@ -629,7 +629,7 @@ namespace ipl {
                 else {
                     if (is_exist(btnNo)) {
                         // Button scene animation
-                        Button* button = static_cast<Button*>(System::getSceneManager()->getScene(SCENE_BUTTON));
+                        Button* button = static_cast<Button*>(System::getScene(SCENE_BUTTON));
                         button->animation(Button::IDANIM_DISAPPEAR_LEFT_BUTTON);
                         if (mFadeType == FADE_FROM_ADDRESS_EDIT) {
                             button->reserveAnm(Button::IDANIM_APPEAR_LEFT_BUTTON);
@@ -829,9 +829,9 @@ namespace ipl {
                 case ::gui::EventHandler::ON_TRIG: {
                     if (con->downTrg(controller::BTN_INTERACT)) {
                         if (mpInstance->mState == FaceSelect::STATE_NORMAL) {
-                            Button* button = static_cast<Button*>(System::getSceneManager()->getScene(SCENE_BUTTON));
+                            Button* button = static_cast<Button*>(System::getScene(SCENE_BUTTON));
 
-                            if (Button::cmpButtonName(paneName, Button::BTN_CALENDAR_EXIT) == 0) {
+                            if (Button::cmpButtonName(paneName, Button::BTN_EXIT) == 0) {
                                 snd::getSystem()->startSE("WIPL_SE_CANCEL");
 
                                 // Button scene animation

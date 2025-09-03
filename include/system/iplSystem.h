@@ -528,6 +528,8 @@ namespace ipl {
 
             /** @return The Scene Manager object. */
             static scene::Manager*                  getSceneManager()           { return smArg.mpSceneManager; }
+            static scene::SceneObj*                 getScene(int sceneID)       { return getSceneManager()->getScene(sceneID); }
+            static bool                             canDrawScene()              { return getSceneManager()->canDrawScene(); }
 
             /*==============================*/
             /*           HOME MENU          */

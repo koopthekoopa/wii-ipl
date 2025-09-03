@@ -59,7 +59,7 @@ namespace ipl {
                     && System::isResetAcceptable()) {
                         if (TVRCManager::getHandle() == NULL || TVRCManager::getHandle()->waitResetProcessCompleted()) {
                             if (System::getPostmanManager()->IsUnknown()
-                            || (System::getSceneManager() != NULL && System::getSceneManager()->getScene(scene::SCENE_ADDRESS) != NULL)) {
+                            || (System::getSceneManager() != NULL && System::getScene(scene::SCENE_ADDRESS) != NULL)) {
                                 if (System::getNwc24Manager() != NULL && !System::isNandFull()) {
                                     if (System::createdAfterAndLibMgr() && !System::getNwc24Manager()->isUnk0xA31()) {
                                         return;
