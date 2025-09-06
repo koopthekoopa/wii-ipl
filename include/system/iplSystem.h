@@ -37,6 +37,8 @@
 #include "utility/iplJpegDecoder.h"
 #include "utility/iplCalendar.h"
 
+#include <eztx.h>
+
 /**
  * @brief Log the result to the NAND log. (`shared2/test2/nanderr.log`)
  * @param type The error type as a string
@@ -191,8 +193,16 @@ namespace ipl {
                         nand::LayoutFile*       layoutFile[MAX_RES];
                     } mResources;                                       // 0xEC
 
-                    u8*                     mpZiDictData[2][10];        // 0x190
+                    union {
+                        struct {
+                            u8* sys[EZTX_LANG_MAX];
+                            u8* oem[EZTX_LANG_MAX];
+                        };
+                        u8* all[EZTX_LANG_MAX * 2];
+                    } mZiDicData;                                       // 0x190
+
                     OSAlarm                 mUnusedAlarm;               // 0x1E0
+
                     void*                   mpFontArena;                // 0x210
                     void*                   mpMem1Arena;                // 0x214
                     u32                     mMem1ArenaSize;             // 0x218
@@ -470,10 +480,25 @@ namespace ipl {
             /** @return The Keyboard Manager object. */
             static keyboard::Manager*               getKeyboardManager()        { return smArg.mpKeyboardMgr; }
             /**
-             * @return Dictionary data for ZI8.
+             * @return Array of dictionary data for ZI.
              * @note For builds that do not use ZI8, do not use this.
              */
-            static u8*                              getZIDictData(int i, int l) { return smArg.mpZiDictData[i][l]; }
+            static u8**                             getZiDicData()              { return smArg.mZiDicData.all; }
+            /**
+             * @return Dictionary data for ZI.
+             * @note For builds that do not use ZI8, do not use this.
+             */
+            static u8*                              getZiDicData(int i)         { return smArg.mZiDicData.sys[i]; }
+            /**
+             * @return System dictionary data for ZI.
+             * @note For builds that do not use ZI8, do not use this.
+             */
+            static u8*                              getZiSystemDicData(int i)   { return smArg.mZiDicData.sys[i]; }
+            /**
+             * @return OEM (Nintendo) dictionary data for ZI.
+             * @note For builds that do not use ZI8, do not use this.
+             */
+            static u8*                              getZiOemDicData(int i)      { return smArg.mZiDicData.oem[i]; }
 
             /*==============================*/
             /*              MII             */

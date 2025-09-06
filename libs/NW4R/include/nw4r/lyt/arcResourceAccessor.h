@@ -17,7 +17,6 @@ namespace nw4r {
         class FontRefLink {
             public:
                 FontRefLink();
-                ~FontRefLink();
                 
                 void        Set(const char* name, ut::Font* pFont);
 

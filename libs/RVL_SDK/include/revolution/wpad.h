@@ -52,35 +52,35 @@ enum {
 
 /* WIRELESS REMOTE */
 
-#define WPAD_BUTTON_LEFT        (1 << 0)
-#define WPAD_BUTTON_RIGHT       (1 << 1)
-#define WPAD_BUTTON_DOWN        (1 << 2)
-#define WPAD_BUTTON_UP          (1 << 3)
-#define WPAD_BUTTON_PLUS        (1 << 4)
-#define WPAD_BUTTON_2           (1 << 8)
-#define WPAD_BUTTON_1           (1 << 9)
-#define WPAD_BUTTON_B           (1 << 10)
-#define WPAD_BUTTON_A           (1 << 11)
-#define WPAD_BUTTON_MINUS       (1 << 12)
-#define WPAD_BUTTON_HOME        (1 << 15)
+#define WPAD_BUTTON_LEFT        (1 << 0)    // 0x01
+#define WPAD_BUTTON_RIGHT       (1 << 1)    // 0x02
+#define WPAD_BUTTON_DOWN        (1 << 2)    // 0x04
+#define WPAD_BUTTON_UP          (1 << 3)    // 0x08
+#define WPAD_BUTTON_PLUS        (1 << 4)    // 0x10
+#define WPAD_BUTTON_2           (1 << 8)    // 0x100
+#define WPAD_BUTTON_1           (1 << 9)    // 0x200
+#define WPAD_BUTTON_B           (1 << 10)   // 0x400
+#define WPAD_BUTTON_A           (1 << 11)   // 0x800
+#define WPAD_BUTTON_MINUS       (1 << 12)   // 0x1000
+#define WPAD_BUTTON_HOME        (1 << 15)   // 0x2000
 
 /* CLASSIC CONTROLLER */
 
-#define WPAD_BUTTON_CL_UP       (1 <<  0)
-#define WPAD_BUTTON_CL_LEFT     (1 <<  1)
-#define WPAD_BUTTON_CL_ZR       (1 <<  2)
-#define WPAD_BUTTON_CL_X        (1 <<  3)
-#define WPAD_BUTTON_CL_A        (1 <<  4)
-#define WPAD_BUTTON_CL_Y        (1 <<  5)
-#define WPAD_BUTTON_CL_B        (1 <<  6)
-#define WPAD_BUTTON_CL_ZL       (1 <<  7)
-#define WPAD_BUTTON_CL_FULL_R   (1 <<  9)
-#define WPAD_BUTTON_CL_PLUS     (1 << 10)
-#define WPAD_BUTTON_CL_HOME     (1 << 11)
-#define WPAD_BUTTON_CL_MINUS    (1 << 12)
-#define WPAD_BUTTON_CL_FULL_L   (1 << 13)
-#define WPAD_BUTTON_CL_DOWN     (1 << 14)
-#define WPAD_BUTTON_CL_RIGHT    (1 << 15)
+#define WPAD_BUTTON_CL_UP       (1 <<  0)   // 0x01
+#define WPAD_BUTTON_CL_LEFT     (1 <<  1)   // 0x02
+#define WPAD_BUTTON_CL_ZR       (1 <<  2)   // 0x04
+#define WPAD_BUTTON_CL_X        (1 <<  3)   // 0x08
+#define WPAD_BUTTON_CL_A        (1 <<  4)   // 0x10
+#define WPAD_BUTTON_CL_Y        (1 <<  5)   // 0x20
+#define WPAD_BUTTON_CL_B        (1 <<  6)   // 0x40
+#define WPAD_BUTTON_CL_ZL       (1 <<  7)   // 0x80
+#define WPAD_BUTTON_CL_FULL_R   (1 <<  9)   // 0x200
+#define WPAD_BUTTON_CL_PLUS     (1 << 10)   // 0x400
+#define WPAD_BUTTON_CL_HOME     (1 << 11)   // 0x800
+#define WPAD_BUTTON_CL_MINUS    (1 << 12)   // 0x1000
+#define WPAD_BUTTON_CL_FULL_L   (1 << 13)   // 0x2000
+#define WPAD_BUTTON_CL_DOWN     (1 << 14)   // 0x4000
+#define WPAD_BUTTON_CL_RIGHT    (1 << 15)   // 0x8000
 
 enum {
     WPAD_FMT_CORE_BTN,

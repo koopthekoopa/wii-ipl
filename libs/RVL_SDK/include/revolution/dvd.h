@@ -113,9 +113,9 @@ typedef struct DVDDirEntry {
 
 typedef struct DVDDriveInfo {
     u16 revisionLevel;  // 0x00
-    u16 deviceCode;     // 0x04
-    u32 releaseDate;    // 0x08
-    u8  pad[24];        // 0x0C
+    u16 deviceCode;     // 0x02
+    u32 releaseDate;    // 0x04
+    u8  pad_0x08[0x18];
 } DVDDriveInfo;
 
 typedef struct DVDCommandInfo {

@@ -9,7 +9,7 @@
 
 #include "system/iplChannelManager.h"
 
-#include "keyboard/saveData.h"
+#include "keyboard/tiSaveData.h"
 #include "system/iplNand.h"
 
 #define SAVEDATA_VERSION    3
@@ -24,37 +24,38 @@ namespace ipl {
                 Manager(EGG::Heap* heap);
                 virtual ~Manager();
 
-                void            initManager();
+                void                                         initManager();
 
-                void            setPrevPage(int prevPage);
-                void            setChanInfo(int page, int index, const channel::SInfo& chanInfo);
-                void            setMemoSetting(const textinput::extend::savedata::MemoSetting& memoSetting);
+                void                                         setPrevPage(int prevPage);
+                void                                         setChanInfo(int page, int index, const channel::SInfo& chanInfo);
+                void                                         setMemoSetting(const textinput::extend::savedata::MemoSetting& memoSetting);
 
-                nand::File*     flushAsync(EGG::Heap* flushHeap);
+                nand::File*                                  flushAsync(EGG::Heap* flushHeap);
 
-                ESTitleId       hasChannel(ESTitleId titleId, int* outIndex = NULL, int* outPage = NULL) const;
+                ESTitleId                                    hasChannel(ESTitleId titleId, int* outIndex = NULL, int* outPage = NULL) const;
 
-                int             getNumValidChannel() const;
+                int                                          getNumValidChannel() const;
 
-                BOOL            isFinished(nand::File* file);
-                BOOL            isResetAcceptable();
+                BOOL                                         isFinished(nand::File* file);
+                BOOL                                         isResetAcceptable();
 
-                void            setDefaultSaveData();
-                void            updateVersion(u32 newVersion, u32 oldVersion);
+                void                                         setDefaultSaveData();
+                void                                         updateVersion(u32 newVersion, u32 oldVersion);
 
-                BOOL            updateChanInfos();
+                BOOL                                         updateChanInfos();
 
-                void            setLastPrevPage(int page)           { mLastPrevPage = page; }
+                void                                         setLastPrevPage(int page)          { mLastPrevPage = page; }
                 
-                int             getPrevPage()                       { return mLastPrevPage; }
+                int                                          getPrevPage()                      { return mLastPrevPage; }
 
-                bool            hasPhotoMP3Dummy()                  { return mbPhotoMP3; }
-                bool            hasPhoto2Title()                    { return mbPhoto2; }
-                bool            hasPhoto2DummyCheck()               { return mbPhoto2Check; }
+                bool                                         hasPhotoMP3Dummy()                 { return mbPhotoMP3; }
+                bool                                         hasPhoto2Title()                   { return mbPhoto2; }
+                bool                                         hasPhoto2DummyCheck()              { return mbPhoto2Check; }
 
-                ESTitleId       getPhotoID()                        { return mPhotoId; }
+                ESTitleId                                    getPhotoID()                       { return mPhotoId; }
 
-                channel::SInfo& getChanInfo(int page, int index)    { return mData.chanInfo[page][index]; }
+                channel::SInfo&                             getChanInfo(int page, int index)    { return mData.chanInfo[page][index]; }
+                textinput::extend::savedata::MemoSetting    getMemoSetting()                    { return mData.memoSetting; }
 
             private:
                 BOOL        checkValidApp(ESTitleId titleId);

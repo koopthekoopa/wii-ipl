@@ -1,7 +1,7 @@
 #ifndef PRIVATE_VI_H
 #define PRIVATE_VI_H
 
-#include <revolution/vi/vitypes.h>
+#include <revolution/vi.h>
 
 #ifdef __cplusplus
 extern "C" {

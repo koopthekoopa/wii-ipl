@@ -25,6 +25,7 @@ namespace ipl {
                 void            stopBannerSound(int unk = 0);
 
                 int             startSE(const char* sndName);
+                int             holdSE(const char* sndName);
                 int             startSEIndex(u32 sndIndex);
 
                 int             startBGM(const char* bgmName);

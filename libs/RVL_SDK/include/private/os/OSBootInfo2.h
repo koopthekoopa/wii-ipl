@@ -21,6 +21,7 @@ typedef struct OSBootInfo2 {
     u32 padSpec;            // 0x24
     u32 codeLimit;          // 0x28
     u32 simulatedMem2Size;  // 0x2C
+    u8  padding[0x2000 - 0x30];
 } OSBootInfo2;
 
 #define BI2_SIZE                        0x2000

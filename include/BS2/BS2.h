@@ -123,13 +123,31 @@ enum {
 
 #define     BS2_CACHE_BOOT_SIZE     0xB00000
 
+extern OSBootInfo2  bi2;
 extern OSBootInfo3  bi3;
+
+extern vu32         BS2LastMode;
+
+extern vBOOL        BS2BootFromCache;
+extern vBOOL        BS2BootCaching;
+
+extern vBOOL        BS2DriveReset;
+extern vBOOL        BS2WaitSpinup;
+extern vBOOL        BS2NoDisk;
+
+extern BOOL         BS2ReturnToMenu;
+extern BOOL         BS2ReturnToIdle;
+extern BOOL         BS2ReturnToDataManager;
+extern BOOL         BS2ReturnArgs;
+extern BOOL         BS2LaunchTitle;;
+
+extern u32          BS2BootType;
 
 BS2State    BS2Tick();
 
 void        BS2Init();
 
-void        BS2Report(const char* format, ...);
+void        BS2Report(const char* msg, ...);
 void        BS2ScreenReport(GXColor fg, GXColor bg, const char* msg);
 
 static inline void BS2ScreenReportNoColor(const char* msg) {

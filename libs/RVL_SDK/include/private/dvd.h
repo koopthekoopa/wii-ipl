@@ -43,26 +43,26 @@ typedef struct DVDVideoReportKey {
 } DVDVideoReportKey;
 
 typedef struct DVDGamePartition {
-    ESTicket        ticket;
+    ESTicket        ticket;         // 0x00
 
-    u32             tmdSize;
-    ESTitleMeta*    tmd;
+    u32             tmdSize;        // 0x2A4
+    ESTitleMeta*    tmd;            // 0x2A8
 
-    u32             certSize;
-    void*           cert;
+    u32             certSize;       // 0x2AC
+    void*           cert;           // 0x2B0
 
-    u8*             h3Hash;
-    u8*             encryptedArea;
+    u8*             h3Hash;         // 0x2B4
+    u8*             encryptedArea;  // 0x2B8
 } DVDGamePartition;
 
 typedef struct DVDPartitionInfo {
-    DVDGamePartition*   partition;
-    u32                 partitionType;
+    DVDGamePartition*   partition;      // 0x00
+    u32                 partitionType;  // 0x04
 } DVDPartitionInfo;
 
 typedef struct DVDGameTOC {
-    u32                 partitionCount;
-    DVDPartitionInfo*   partitionInfo;
+    u32                 partitionCount; // 0x00
+    DVDPartitionInfo*   partitionInfo;  // 0x04
 } DVDGameTOC;
 
 typedef struct DVDPartitionParams {
@@ -86,17 +86,17 @@ typedef struct DVDPartitionParams {
 } DVDPartitionParams;
 
 typedef struct DVDBB2 {
-    u32     bootFilePosition;
+    u32     bootFilePosition;   // 0x00
     
-    u32     FSTPosition;
-    u32     FSTLength;
-    u32     FSTMaxLength;
-    void*   FSTAddress;
+    u32     FSTPosition;        // 0x04
+    u32     FSTLength;          // 0x08
+    u32     FSTMaxLength;       // 0x0C
+    void*   FSTAddress;         // 0x10
 
-    u32     userPosition;
-    u32     userLength;
+    u32     userPosition;       // 0x14
+    u32     userLength;         // 0x18
 
-    u32     padding0;
+    u32     pad_0x1C;
 } DVDBB2;
 
 /* Low level broadway stuff */
