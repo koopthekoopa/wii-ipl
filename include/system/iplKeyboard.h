@@ -25,11 +25,11 @@ namespace ipl {
         class Manager {
             public:
                 typedef enum KeyboardState {
-                    HIDDEN = 0,
-                    APPEARING,
-                    VISIBLE,
-                    DISAPPEARING,
-                    HIDDEN_AFTER_DISAPEAR
+                    STATE_HIDDEN = 0,
+                    STATE_APPEARING,
+                    STATE_VISIBLE,
+                    STATE_DISAPPEARING,
+                    STATE_HIDDEN_AFTER_DISAPEAR
                 } KeyboardState;
 
                 typedef enum KeyboardType {
@@ -51,7 +51,7 @@ namespace ipl {
 
                 typedef struct KeyboardSetting {
                     KeyboardType    type;           // 0x00
-                    wchar_t*        wcString;       // 0x04
+                    const wchar_t*  wcString;       // 0x04
                     u32             stringLimit;    // 0x08
                     u32             rowLimit;       // 0x0C
                 } KeyboardSetting;
@@ -71,38 +71,40 @@ namespace ipl {
                 mbActivated(false),
                 mpSaveFile(NULL) {}
 
-                virtual void    create(nand::File* file, EGG::Heap* heap);          // 0x08
+                virtual void            create(nand::File* file, EGG::Heap* heap);          // 0x08
 
-                virtual void    init();                                             // 0x0C
-                virtual void    calc();                                             // 0x10
+                virtual void            init();                                             // 0x0C
+                virtual void            calc();                                             // 0x10
 
-                virtual void    draw();                                             // 0x14
-                virtual void    memoDraw();                                         // 0x18
+                virtual void            draw();                                             // 0x14
+                virtual void            memoDraw();                                         // 0x18
 
-                virtual void    changeAspectRatio();                                // 0x1C
-                virtual void    setKeyboardType(int chan, KeyboardType type);       // 0x20
+                virtual void            changeAspectRatio();                                // 0x1C
+                virtual void            setKeyboardType(int chan, KeyboardType type);       // 0x20
 
-                virtual void    start(int chan, const KeyboardSetting& setting);    // 0x24
+                virtual void            start(int chan, const KeyboardSetting& setting);    // 0x24
 
-                virtual void    ok();                                               // 0x28
-                virtual void    cancel();                                           // 0x2C
+                virtual void            ok();                                               // 0x28
+                virtual void            cancel();                                           // 0x2C
 
-                virtual void    doRumble();                                         // 0x30
-                virtual State*  getState();                                         // 0x34
+                virtual void            doRumble();                                         // 0x30
+                virtual State*          getState();                                         // 0x34
 
-                virtual void    setWCString(const wchar_t* wcString);               // 0x38
-                virtual void    setLanguage(u32 language);                          // 0x3C
+                virtual void            setWCString(const wchar_t* wcString);               // 0x38
+                virtual void            setLanguage(u32 language);                          // 0x3C
 
-                virtual void    touchFormInDisp(int);                               // 0x40
+                virtual void            touchFormInDisp(int);                               // 0x40
 
-                virtual void    setConfigure(KeyboardType type);                    // 0x44
+                virtual void            setConfigure(KeyboardType type);                    // 0x44
 
-                virtual void    doSave();                                           // 0x48
+                virtual void            doSave();                                           // 0x48
 
-                void            sendRelease();
+                void                    sendRelease();
 
-                void*           getZiSystemDic();
-                void*           getZiOemDic();
+                void*                   getZiSystemDic();
+                void*                   getZiOemDic();
+
+                textinput::MemoManager* memoMgr()   { return mpManager; }
 
             private:
                 textinput::MemoManager*                     mpManager;          // 0x04

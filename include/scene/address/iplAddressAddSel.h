@@ -1,7 +1,8 @@
 #ifndef IPL_SCENE_ADDRESS_ADD_SELECT_H
 #define IPL_SCENE_ADDRESS_ADD_SELECT_H
 
-#include "iplSceneHeader.h"
+#include "iplSceneUIHeader.h"
+
 #include "scene/button/iplButton.h"
 
 namespace ipl {
@@ -56,7 +57,6 @@ namespace ipl {
                 };
 
                 void                    stt_normal();
-
                 void                    stt_wait_decide_anm();
 
                 void                    start_point_event(const char* paneName, controller::Interface* con);

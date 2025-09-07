@@ -65,8 +65,8 @@ namespace ipl {
                     FLAG_LOCAL_SAVE             = 0x00000001,
                     FLAG_ALTERNATE_ANIMATION    = 0x00000010,
                 };
-                void        resolve_icon();
-                int         get_iconspeed(int frame) const;
+                void    resolve_icon();
+                int     get_iconspeed(int frame) const;
 
                 int get_iconspeed_ticks(int frame) {
                     return get_iconspeed(frame) * SAVE_ANIM_FRAME_TICK;

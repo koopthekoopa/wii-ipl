@@ -1,5 +1,7 @@
 #include "scene/address/iplAddressAddSel.h"
 
+#include "iplSceneUI.h"
+
 #include "scene/address/iplAddress.h"
 #include "scene/board/iplBoard.h"
 

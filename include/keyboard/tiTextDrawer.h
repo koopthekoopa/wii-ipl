@@ -73,7 +73,7 @@ namespace textinput {
                 virtual u32                 getEndPos() const;
 
             private:
-                u8      unk_0x50[0x70];
+                u8      unk_0x50[0x78];
                 bool    mbSecretMode;   // 0xC8
                 u8      unk_0xCC[0x3C];
         };

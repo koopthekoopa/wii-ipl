@@ -3,6 +3,7 @@
 
 /* Common message IDs */
 
+#define MESG_CMN_QUIT                   37
 #define MESG_CMN_OK                     46
 #define MESG_CMN_YES                    321
 #define MESG_CMN_NO                     322
@@ -79,6 +80,15 @@
 /* Clock */
 
 #define MESG_CLOCK_WII_MENU             16
+
+/* Parental Dialog */
+
+#define MESG_PARENTAL_DLG_TITLE         327
+#define MESG_PARENTAL_DLG_PIN           328
+#define MESG_PARENTAL_DLG_SUCCESS       329
+#define MESG_PARENTAL_DLG_SUCCESS_ALT   330
+#define MESG_PARENTAL_DLG_BAD_PIN       331
+#define MESG_PARENTAL_DLG_NO_PIN        345
 
 /* SD Button */
 

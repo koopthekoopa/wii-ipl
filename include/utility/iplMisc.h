@@ -21,6 +21,7 @@ namespace ipl {
             public:
                 static char* getPath();
         };
+
         template<typename T> inline void setBit(T* b, int pos) {
             const T mask = (T)(1 << pos);
             *b |= mask;
@@ -29,6 +30,8 @@ namespace ipl {
         template<typename T> inline void clearBit(T* b, int pos) {
             *b &= ~(T)(1 << pos);
         }
+
+        int memcpy_s(void* dest, u32 destSize, const void* src, u32 srcSize);
     }
 }
 

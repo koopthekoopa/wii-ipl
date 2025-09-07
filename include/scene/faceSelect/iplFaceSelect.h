@@ -1,7 +1,8 @@
 #ifndef IPL_SCENE_FACE_SELECT_H
 #define IPL_SCENE_FACE_SELECT_H
 
-#include "iplSceneHeader.h"
+#include "iplSceneUIHeader.h"
+
 #include "scene/button/iplButton.h"
 
 #include "system/iplNigaoe.h"

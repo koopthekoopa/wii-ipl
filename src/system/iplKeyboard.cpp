@@ -270,7 +270,7 @@ namespace ipl {
 
             // Init state
             mState.type = textinput::MemoManager::ST_Hidden;
-            mState.iplType = HIDDEN;
+            mState.iplType = STATE_HIDDEN;
             mState.wcString = NULL;
 
             // Refresh aspect ratio
@@ -310,21 +310,21 @@ namespace ipl {
 
             // State handling
             if (prevStateType == textinput::MemoManager::ST_Hidden && mState.type == textinput::MemoManager::ST_Appearing) {
-                mState.iplType = APPEARING;
+                mState.iplType = STATE_APPEARING;
                 mState.pressOK = false;
             }
             else if (prevStateType == textinput::MemoManager::ST_Appearing && mState.type == textinput::MemoManager::ST_Visible) {
-                mState.iplType = VISIBLE;
+                mState.iplType = STATE_VISIBLE;
                 mState.pressOK = false;
             }
             else if (prevStateType == textinput::MemoManager::ST_Visible && mState.type == textinput::MemoManager::ST_Disappearing) {
-                mState.iplType = DISAPPEARING;
+                mState.iplType = STATE_DISAPPEARING;
             }
             else if (prevStateType == textinput::MemoManager::ST_Disappearing && mState.type == textinput::MemoManager::ST_Hidden) {
-                mState.iplType = HIDDEN_AFTER_DISAPEAR;
+                mState.iplType = STATE_HIDDEN_AFTER_DISAPEAR;
             }
             else {
-                mState.iplType = HIDDEN;
+                mState.iplType = STATE_HIDDEN;
             }
 
             mState.wcString = mpManager->getWCString();

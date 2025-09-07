@@ -735,7 +735,7 @@ config.libs = [
         ]
     ),
     IPLSection("limitOver", [
-            Object(Matching, "scene/limitOver/iplLimitOver.cpp"),
+            Object(Matching,    "scene/limitOver/iplLimitOver.cpp"),
         ]
     ),
     IPLSection("mailAddSel", [
@@ -782,7 +782,7 @@ config.libs = [
         ]
     ),
     IPLSection("parentalDialog", [
-            Object(NonMatching, "scene/parentalDialog/iplParentalDialog.cpp"),
+            Object(Matching,    "scene/parentalDialog/iplParentalDialog.cpp"),
         ]
     ),
     IPLSection("sceneMisc", [

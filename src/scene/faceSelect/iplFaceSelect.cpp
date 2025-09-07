@@ -1,5 +1,7 @@
 #include "scene/faceSelect/iplFaceSelect.h"
 
+#include "iplSceneUI.h"
+
 #include "system/iplNigaoeManager.h"
 
 #include "iplSystem.h"

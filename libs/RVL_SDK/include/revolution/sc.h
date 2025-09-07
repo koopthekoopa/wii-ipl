@@ -114,17 +114,20 @@ BOOL    SCSetIdleMode(SCIdleModeInfo* info);
 u8      SCGetLanguage();
 BOOL    SCSetLanguage(u8 language);
 
+#define SC_PARENTAL_PIN_LENGTH              4
+#define SC_PARENTAL_SECRET_ANSWER_LENGTH    32
+
 typedef struct SCParentalControlsInfo {
-    u8  enable;             // 0x00
-    u8  org;                // 0x01
+    u8  enable;                                         // 0x00
+    u8  org;                                            // 0x01
 
-    u8  ageRating;          // 0x02
+    u8  ageRating;                                      // 0x02
 
-    u8  pin[4];             // 0x03
+    u8  pin[SC_PARENTAL_PIN_LENGTH];                    // 0x03
 
-    u8  secretQuestion;     // 0x07
-    u16 secretAnswer[32];   // 0x08
-    u16 secretAnswerLen;    // 0x48
+    u8  secretQuestion;                                 // 0x07
+    u16 secretAnswer[SC_PARENTAL_SECRET_ANSWER_LENGTH]; // 0x08
+    u16 secretAnswerLen;                                // 0x48
 } SCParentalControlsInfo;
 
 #define SC_PARENTAL_CONTROL_ENABLED (1 << 7)

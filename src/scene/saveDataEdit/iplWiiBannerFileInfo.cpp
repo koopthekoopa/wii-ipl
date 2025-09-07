@@ -66,7 +66,7 @@ namespace ipl {
 
             // If tick reached to last frame
             if (mAnim_FrameTick >= mAnim_MaxFrameTicks) {
-                // For alternate, set the frame tick to the last frame
+                // For alternate, play backwards
                 if (mAnim_AltFlag == FLAG_ALTERNATE_ANIMATION) {
                     mAnim_FrameTick = (mAnim_MaxFrameTicks - mAnim_AltBackward) - 1;
                     mAnim_Incrementer = -1;
@@ -80,11 +80,11 @@ namespace ipl {
 
             // If tick reached to first frame
             if (mAnim_FrameTick < 0) {
-                // For alternate, set the frame tick to the second frame
+                // For alternate, play forwards
                 if (mAnim_AltFlag == FLAG_ALTERNATE_ANIMATION) {
                     mAnim_FrameTick = mAnim_AltForward;
                 }
-                // For loop, reset to first frame.
+                // For loop, reset to first frame
                 else {
                     mAnim_FrameTick = 0;
                 }
@@ -102,7 +102,7 @@ namespace ipl {
                 }
             } while (i < SAVE_ICON_COUNT);
 
-            // Init current icon frame texture
+            // Init current frame texture
             GXInitTexObj(&mCurIconTex, mpIconData[i-1],
                         SAVE_ICON_TEX_WIDTH, SAVE_ICON_TEX_HEIGHT,
                         GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP, GX_FALSE);
@@ -150,11 +150,10 @@ namespace ipl {
             // Set max frame ticks
             int i = 0;
             for (i = 0; i < SAVE_ICON_COUNT; i++) {
-                if (get_iconspeed(i) == 0) break; // A frame with the value 0 indicates the end of the frames.
+                if (get_iconspeed(i) == 0) break; // A frame with the speed of 0 indicates the end.
                 mAnim_MaxFrameTicks += (get_iconspeed_ticks(i));
             }
 
-            // Set alternate backward frame (second last frame)
             mAnim_AltBackward = (get_iconspeed_begin_tick(i));
 
             // The rest of the settings are set if it can animate.
