@@ -63,7 +63,7 @@ namespace textinput {
             
             virtual void                                setAspectRatio(bool b4x3);
 
-            virtual void                                setSecretInputMode(bool flag) { mpInputForm->setSecretModeOn(flag); }
+            virtual void                                setSecretInputMode(bool secretInputMode) { mpInputForm->setSecretModeOn(secretInputMode); }
 
             virtual void                                setDefaultPredictionJP(int num, const char** predicts);
             virtual void                                setFixedPredictionJP(int num, const char** predicts);

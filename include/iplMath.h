@@ -6,5 +6,3 @@
 #include "math/iplMathRandom.h"
 
 #endif // IPL_MATH_H
-
-

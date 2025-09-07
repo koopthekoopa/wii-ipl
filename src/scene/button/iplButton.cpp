@@ -12,7 +12,7 @@ namespace ipl {
         /* MAIN BUTTON */
         /* =========== */
 
-        static const AnmFrame scAnmFrame[Button::IDANIM_MAX] = {
+        static const Button::AnmFrame scAnmFrame[Button::IDANIM_MAX] = {
             /*IDANIM_FROM_CH_SEL_TO_BOARD*/           { /*start=*/1000.0f,  /*end=*/1040.0f  },
             /*IDANIM_FROM_CH_SEL_TO_SETTING*/         { /*start=*/7000.0f,  /*end=*/7040.0f  },
             /*IDANIM_FROM_SETTING_TO_CH_SEL*/         { /*start=*/8000.0f,  /*end=*/8040.0f  },
@@ -59,7 +59,7 @@ namespace ipl {
             /*IDANIM_SD_BUTTON_SELECT*/               { /*start=*/0.0f,     /*end=*/0.0f     }, // left out blank for SDMenuButton
         };
 
-        static const BtnAnmFrame scBtnFadeFrame[Button::BTN_MAX] = {
+        static const Button::BtnAnmFrame scBtnFadeFrame[Button::BTN_MAX] = {
             /*BTN_BBS_BOARD*/
             {
                 { /*start=*/900.0f, /*end=*/906.0f },
@@ -117,19 +117,19 @@ namespace ipl {
             }
         };
 
-        static const AnmFrame scAnmRepeatAnmFrame = {
+        static const Button::AnmFrame scAnmRepeatAnmFrame = {
             /*start=*/10503.0f, /*end=*/10580.0f
         };
 
-        static const AnmFrame scNewArvAnmFrame = {
+        static const Button::AnmFrame scNewArvAnmFrame = {
             /*start=*/1.0f, /*end=*/400.0f
         };
 
-        static const AnmFrame scLoopAnmFrame = {
+        static const Button::AnmFrame scLoopAnmFrame = {
             /*start=*/1.0f, /*end=*/160.0f
         };
 
-        static const AnmFrame scArwLoopAnmFrame = {
+        static const Button::AnmFrame scArwLoopAnmFrame = {
             /*start=*/10000.0, /*end=*/10055.0f
         };
 

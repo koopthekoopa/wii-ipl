@@ -61,7 +61,7 @@ namespace textinput {
                 virtual void                doLineFeed();
 
                 virtual void                put(wchar_t wc);
-                virtual void                procCursor(CursorPos* cursorPos, s32 presentLine);
+                virtual void                procCursor(CursorPos* cursorPos, s32);
                 virtual bool                onCursor(CursorPos* cursorPos);
 
                 virtual void                makeUpCursorPos(CursorPos* cursorPos, u32 pos, s32 startLine, s32 endLine);

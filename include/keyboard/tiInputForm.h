@@ -136,7 +136,7 @@ namespace textinput {
                 virtual void                onPressLeft();
                 virtual void                onPressRight();
 
-                virtual void                makeUpCursorPos(CursorPos* cursorPos, u32 pos, s32 scopeStartLine, s32 scopeEndLine);
+                virtual void                makeUpCursorPos(CursorPos* cursorPos, u32 pos, s32 startLine, s32 endLine);
 
             private:
                 u8                  unk_0x120[0x4C];

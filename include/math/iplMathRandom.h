@@ -3,6 +3,8 @@
 
 #include <revolution/types.h>
 
+#ifdef __cplusplus
+
 namespace ipl {
     namespace math {
         class Random {
@@ -24,5 +26,7 @@ namespace ipl {
         };
     }
 }
+
+#endif // __cplusplus
 
 #endif // IPL_MATH_RANDOM_H

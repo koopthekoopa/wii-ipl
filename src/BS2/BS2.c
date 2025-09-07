@@ -203,6 +203,7 @@ static void UpdateStateFlagsAndBootCache() {
     if (ret == FALSE) {
         InvalidShutdown = TRUE;
 
+        // createeee
         ret = __OSCreateStateFlags();
         if (ret == FALSE) {
             OSReport("Failed to create\n");
@@ -251,6 +252,7 @@ static void UpdateStateFlagsAndBootCache() {
                         if (BS2NandbootInfo.returnValue == OS_NANDBOOT_RETURN_MENU) {
                             argv = BS2_ARGV;
 
+                            // Copy args from NANDBOOTINFO
                             for (i = 0; i < BS2GetArgc(); i++) {
                                 argv[i] = (char*)((u8*)&BS2NandbootInfo.args + (u32)argv[i] - sizeof(BS2NandbootInfo.args));
                             }
@@ -270,6 +272,7 @@ static void UpdateStateFlagsAndBootCache() {
                     if (BS2NandbootInfo.returnValue == 8) {
                         argv = BS2_ARGV;
 
+                        // Copy args from NANDBOOTINFO
                         for (i = 0; i < BS2GetArgc(); i++) {
                             argv[i] = (char*)((u8*)&BS2NandbootInfo.args + (u32)argv[i] - sizeof(BS2NandbootInfo.args));
                         }
@@ -357,8 +360,8 @@ static void UpdateStateFlagsAndBootCache() {
     NANDOpen("/title/00000001/00000002/data/cache.dat", &BS2CacheFileInfo, NAND_ACCESS_RW);
 }
 
-// Syncs SRAM to SYSCONF.
-static void SyncSramToSysConf() {
+// Syncs SRAM time then sync SRAM changes to SYSCONF.
+static void SyncSystemSettings() {
     u32 bias;
     u32 rtc;
     OSCalendarTime dateTime;
@@ -368,7 +371,7 @@ static void SyncSramToSysConf() {
 
     InvalidSram = FALSE;
 
-    // Sync in time
+    // Sync time
     sram = __OSLockSram();
     if (!__OSCheckSram()) {
         bias = sram->counterBias;
@@ -998,7 +1001,7 @@ int main(int argc, char** argv) {
         BS2BootType = BS2_BOOT_TYPE_POWER_ON;
     }
 
-    SyncSramToSysConf();
+    SyncSystemSettings();
 
     // Shutdown from MIOS
     if (*(u32*)OSPhysicalToUncached(OS_ADDR_MIOS_SHUTDOWN_FLAG) == TRUE && BS2LastMode == 2) {

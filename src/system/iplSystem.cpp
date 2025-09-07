@@ -634,8 +634,8 @@ namespace ipl {
             IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", initResult, 1201);
         }
 
-        // Delete save data exploits
-        utility::ESMisc::DeleteBadSaveData(getTreasureHeap());
+        // Delete homebrew titles and exploits
+        utility::ESMisc::DeleteUnauthorisedData(getTreasureHeap());
 
         // Task threads
         smArg.mpTask1 = EGG::TaskThread::create(0x40, 19, 0x10000, getMem1Sys());

@@ -12,14 +12,6 @@
 
 namespace ipl {
     namespace scene {
-        typedef struct AnmFrame {
-            f32 start, end;
-        } AnmFrame;
-
-        typedef struct BtnAnmFrame {
-            AnmFrame in, out;
-        } BtnAnmFrame;
-
         /* Arrow Button */
 
         SCENE_CLASS(Arrow) {
@@ -143,6 +135,14 @@ namespace ipl {
 
         SCENE_CLASS(Button) {
             public:
+                typedef struct AnmFrame {
+                    f32 start, end;
+                } AnmFrame;
+
+                typedef struct BtnAnmFrame {
+                    AnmFrame in, out;
+                } BtnAnmFrame;
+
                 enum {
                     IDANIM_FROM_CH_SEL_TO_BOARD = 0,
                     IDANIM_FROM_CH_SEL_TO_SETTING,  /*??? (unused)*/
