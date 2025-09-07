@@ -635,7 +635,7 @@ namespace ipl {
         }
 
         // Delete homebrew titles and exploits
-        utility::ESMisc::DeleteUnauthorisedData(getTreasureHeap());
+        utility::ESMisc::DeleteUnauthorizedData(getTreasureHeap());
 
         // Task threads
         smArg.mpTask1 = EGG::TaskThread::create(0x40, 19, 0x10000, getMem1Sys());
