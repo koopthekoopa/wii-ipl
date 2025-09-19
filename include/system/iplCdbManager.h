@@ -72,17 +72,19 @@ namespace ipl {
                 BOOL        mountSD();
                 BOOL        unmountSD();
 
-                void mountSD_if_unmounted() {
+                void mountSD_safe() {
                     if (!mbSDMounted) {
                         mountSD();
                     }
                 }
 
-                void unmountSD2_if_mounted() {
+                void unmountSD_safe() {
                     if (mbSDMounted) {
                         unmountSD();
                     }
                 }
+
+                bool        isSDMounted()   { return mbSDMounted; }
 
                 BOOL        backupToSD(CDBRecord* record);
 

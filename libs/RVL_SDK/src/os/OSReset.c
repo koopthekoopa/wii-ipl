@@ -222,8 +222,8 @@ void __OSReturnToMenuForError() {
     OSStateFlags  state;
 
     __OSReadStateFlags(&state);
-    state.lastDiscState = 2;
-    state.lastShutdown  = 3;
+    state.discState = OS_STATE_FLAGS_DISC_CHANGED;
+    state.shutdownType  = OS_STATE_FLAGS_SHUTDOWN_RETURN_MENU;
     __OSClearRTCFlags();
     __OSWriteStateFlags(&state);
 

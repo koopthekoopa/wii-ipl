@@ -208,7 +208,7 @@ namespace ipl {
 
             // Get text lengths
             titleLength = titleText == NULL || *titleText == 0 ? 0 : ((wcslen(titleText) + 4) * sizeof(wchar_t)) & ~(RBR_TITLE_LENGTH_LIMIT - 1);
-            bodyLength  = bodyText == NULL  || *bodyText  == 0 ? 0 : ((wcslen(bodyText)  + 4) * sizeof(wchar_t)) & ~(RBR_BODY_LENGTH_LIMIT  - 1);
+            bodyLength  = bodyText  == NULL || *bodyText  == 0 ? 0 : ((wcslen(bodyText)  + 4) * sizeof(wchar_t)) & ~(RBR_BODY_LENGTH_LIMIT  - 1);
 
             // Get description offset
             if (titleLength != 0) {

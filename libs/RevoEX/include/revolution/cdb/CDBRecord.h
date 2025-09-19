@@ -26,6 +26,7 @@ extern "C" {
 typedef enum CDBRecordLocation {
     CDB_RECORD_LOCATION_VF = 1,
     CDB_RECORD_LOCATION_SD,
+    CDB_RECORD_LOCATION_VF_SD = CDB_RECORD_LOCATION_SD | CDB_RECORD_LOCATION_VF,
 } CDBRecordLocation;
 
 /* The way the "serial number" is handled is some sort of count from 0 - 1000 */

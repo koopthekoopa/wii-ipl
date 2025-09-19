@@ -12,9 +12,9 @@ void NWC24Data_SetDataP(NWC24Data* data, const void* ptr, u32 size) {
 }
 
 void NWC24Date_Init(NWC24Date* date) {
-    date->year = 2000;
-    date->month = 1;
-    date->day = 1;
+    date->year = MIN_YEAR;
+    date->month = MIN_MONTH;
+    date->day = MIN_MONTH;
     date->hour = 12;
     date->min = 0;
     date->sec = 0;

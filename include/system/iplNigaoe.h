@@ -47,22 +47,21 @@ namespace ipl {
 
                 u8*                 mpIconTex;          // 0x00
                 u32                 mIconSize;          // 0x04
-                
+
                 RFLIconSetting      mIconSettings;      // 0x08
-                
                 GXTexObj            mFaceTexObj;        // 0x18
-                
                 RFLiCharData*       mpCharData;         // 0x38
                 u32                 mFaceId;            // 0x3C
-                
+
                 MakeIconCallback    mCallBack;          // 0x40
-                
                 void*               mpCallBackWork;     // 0x44
-                
+
+            public:
                 nw4r::ut::Link      mLink;              // 0x48
 
+            private:
                 bool                mbCreated;          // 0x50
-            
+
             friend class Manager;
         };
     }

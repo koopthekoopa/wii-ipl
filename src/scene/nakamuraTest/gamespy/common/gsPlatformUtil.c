@@ -762,7 +762,7 @@ void msleep(gsi_time msec)
 #define BASE_DOW          4                    /* 01-01-70 was a Thursday */
 #define BASE_YEAR         70L                  /* 1970 is the base year */
 #define LEAP_YEAR_ADJUST  17L                  /* Leap years 1900 - 1970 */
-#define MAX_YEAR          138L                 /* 2038 is the max year */
+#define MAX_DATE_YEAR          138L                 /* 2038 is the max year */
 
 // ChkAdd evaluates to TRUE if dest = src1 + src2 has overflowed
 #define ChkAdd(dest, src1, src2)   ( ((src1 >= 0L) && (src2 >= 0L) \
@@ -919,7 +919,7 @@ time_t gsiDateToSeconds(struct tm *tb)
 	/*
 	 * First, make sure tm_year is reasonably close to being in range.
 	 */
-	if ( ((tmptm1 = tb->tm_year) < BASE_YEAR - 1) || (tmptm1 > MAX_YEAR + 1) )
+	if ( ((tmptm1 = tb->tm_year) < BASE_YEAR - 1) || (tmptm1 > MAX_DATE_YEAR + 1) )
 		return MKTIME_ERROR;
 
 
@@ -943,7 +943,7 @@ time_t gsiDateToSeconds(struct tm *tb)
 		/*
          * Make sure year count is still in range.
          */
-		if ( (tmptm1 < BASE_YEAR - 1) || (tmptm1 > MAX_YEAR + 1) )
+		if ( (tmptm1 < BASE_YEAR - 1) || (tmptm1 > MAX_DATE_YEAR + 1) )
 			return MKTIME_ERROR;
 	}
 

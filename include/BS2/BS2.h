@@ -114,6 +114,14 @@ enum {
     BS2_BOOT_TYPE_RETURN_ARGS
 };
 
+enum {
+    BS2_LAST_MODE_0 = 0,
+    BS2_LAST_MODE_1,
+    BS2_LAST_MODE_GC,
+    BS2_LAST_MODE_3,
+    BS2_LAST_MODE_4,
+};
+
 // Version "1.13"
 #define     BS2_MAJOR_VERSION       0x01
 #define     BS2_MINOR_VERSION       0x13

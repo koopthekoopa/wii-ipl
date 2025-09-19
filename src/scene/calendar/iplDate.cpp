@@ -30,8 +30,8 @@ namespace ipl {
             { Date::ANIM_PANE_MSG,          0.0f,  0.0f  },
         };
 
-        utility::Date   Date::mscMinDate(2000, 1,  1);
-        utility::Date   Date::mscMaxDate(2035, 12, 31);
+        utility::Date   Date::mscMinDate(MIN_YEAR, MIN_MONTH, MIN_DAY);
+        utility::Date   Date::mscMaxDate(MAX_YEAR, MAX_MONTH, MAX_DAY);
 
         u8              padding[0x10];
 

@@ -14,6 +14,12 @@ BOOL    __OSGetRTCFlags(u32* flags);
 
 BOOL    __OSClearRTCFlags();
 
+// From Dolphin Emulator.
+enum {
+    RTC_FLAGS_EJECT_DISC = (1 << 0),
+    RTC_FLAGS_DISC_CHANGED = (1 << 1),
+};
+
 #ifdef __cplusplus
 }
 #endif

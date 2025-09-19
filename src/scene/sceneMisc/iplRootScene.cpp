@@ -23,6 +23,7 @@ namespace ipl {
             System::requestCreateAfter();
             System::requestCreateLibManager();
 
+            // If setup was not done, then initial setup!!
             if (!SCGetConfigDoneFlag2()) {
                 if (SCGetUpdateType() == SC_UPDATE_TYPE_NONE) {
                     *initialScene = SCENE_SETTING;
@@ -34,12 +35,15 @@ namespace ipl {
                 }
             }
             else {
+                // If the last play title had it's ticket expired, show the channel limit
                 if (utility::ESMisc::IsLastTicketExpired(NULL)) {
                     *initialScene = SCENE_LIMIT_OVER;
                     System::getResetHandler()->enableResetToMenu();
                 }
                 else {
+                    // Depending on boot type
                     switch (System::getBS2BootType()) {
+                        // Data management
                         case BS2_BOOT_TYPE_RETURN_TO_DATA_MANAGER: {
                             disableTvrc = TRUE;
                             *initialScene = SCENE_REBOOT;
@@ -47,6 +51,7 @@ namespace ipl {
                             System::getResetHandler()->enableResetToMenu();
                             break;
                         }
+                        // Back menu
                         case BS2_BOOT_TYPE_RETURN_TO_MENU: {
                             System::stopCreateAfterReq();
                             System::stopCreateLibManagerReq();
@@ -54,19 +59,23 @@ namespace ipl {
                             System::getResetHandler()->enableResetToMenu();
                             break;
                         }
+                        // If we have custom arguments
                         case BS2_BOOT_TYPE_RETURN_ARGS: {
+                            // Internet settings
                             if (System::getBS2LaunchCode() == System::LAUNCH_CODE_INTERNET_SETTING) {
                                 *initialScene = SCENE_REBOOT;
                                 *initialSubScene = REBOOT_INTERNET_SETTINGS;
                                 disableTvrc /* = TRUE*/ = *initialSubScene;
                                 System::getResetHandler()->enableResetToMenu();
                             }
+                            // Data management again
                             else if (System::getBS2LaunchCode() == System::LAUNCH_CODE_DATA_MANAGER) {
                                 disableTvrc = TRUE;
                                 *initialScene = SCENE_REBOOT;
                                 *initialSubScene = REBOOT_DATA_MANAGEMENT;
                                 System::getResetHandler()->enableResetToMenu();
                             }
+                            // Invalid arguments show health and safety
                             else {
                                 System::stopCreateAfterReq();
                                 System::stopCreateLibManagerReq();
@@ -74,6 +83,7 @@ namespace ipl {
                             }
                             break;
                         }
+                        // Invalid boot type (or BS2_BOOT_TYPE_POWER_ON) show health and safety
                         default: {
                             System::stopCreateAfterReq();
                             System::stopCreateLibManagerReq();

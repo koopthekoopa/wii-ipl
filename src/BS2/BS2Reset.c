@@ -64,22 +64,22 @@ void OSRebootSystem() {
     __DVDPrepareReset();
 
     __OSReadStateFlags(&state);
-    state.lastBootApp = OS_APP_TYPE_84;
+    state.lastAppType = OS_APP_TYPE_84;
     if (BS2BootFromCache) {
-        state.lastBootApp |= OS_APP_TYPE_IPL;
+        state.lastAppType |= OS_APP_TYPE_IPL;
     }
     if (__DVDGetCoverStatus() != DVD_COVER_CLOSED) {
-        state.lastDiscState = OS_STATE_FLAGS_DISC_NONE;
+        state.discState = OS_STATE_FLAGS_DISC_NONE;
     }
     else {
         if (!BS2BootFromCache || (__OSGetRTCFlags(&flags) && flags)) {
-            state.lastDiscState = OS_STATE_FLAGS_DISC_CHANGED;
+            state.discState = OS_STATE_FLAGS_DISC_CHANGED;
         }
         else {
-            state.lastDiscState = OS_STATE_FLAGS_DISC_IN;
+            state.discState = OS_STATE_FLAGS_DISC_IN;
         }
     }
-    state.lastShutdown = OS_STATE_FLAGS_DISC_CHANGED;
+    state.shutdownType = OS_STATE_FLAGS_DISC_CHANGED;
     __OSClearRTCFlags();
     __OSWriteStateFlags(&state);
 
@@ -110,28 +110,35 @@ void OSShutdownSystem() {
 
     __DVDPrepareReset();
 
+    // Write state flags
+
     __OSReadStateFlags(&state);
-    state.lastBootApp = OS_APP_TYPE_84;
+
+    // Last app type
+    state.lastAppType = OS_APP_TYPE_84;
     if (BS2BootFromCache) {
-        state.lastBootApp |= OS_APP_TYPE_IPL;
+        state.lastAppType |= OS_APP_TYPE_IPL;
     }
+
+    // Disc state
     if (__DVDGetCoverStatus() != DVD_COVER_CLOSED) {
-        state.lastDiscState = OS_STATE_FLAGS_DISC_NONE;
+        state.discState = OS_STATE_FLAGS_DISC_NONE;
     }
     else {
         if (!BS2BootFromCache || (__OSGetRTCFlags(&flags) && flags)) {
-            state.lastDiscState = OS_STATE_FLAGS_DISC_CHANGED;
+            state.discState = OS_STATE_FLAGS_DISC_CHANGED;
         }
         else {
-            state.lastDiscState = OS_STATE_FLAGS_DISC_IN;
+            state.discState = OS_STATE_FLAGS_DISC_IN;
         }
     }
 
+    // Shutdown type
     if (idleModeInfo.standby == SC_IDLE_MODE_STANDBY_ON) {
-        state.lastShutdown = OS_STATE_FLAGS_SHUTDOWN_IDLE;
+        state.shutdownType = OS_STATE_FLAGS_SHUTDOWN_IDLE;
     }
     else {
-        state.lastShutdown = OS_STATE_FLAGS_SHUTDOWN_EJECTDISC;
+        state.shutdownType = OS_STATE_FLAGS_SHUTDOWN_POWER_OFF;
     }
     __OSClearRTCFlags();
     __OSWriteStateFlags(&state);
@@ -174,27 +181,27 @@ void OSShutdownSystemForBS() {
     __DVDPrepareReset();
 
     __OSReadStateFlags(&state);
-    state.lastBootApp = OS_APP_TYPE_84;
+    state.lastAppType = OS_APP_TYPE_84;
     if (BS2BootFromCache) {
-        state.lastBootApp |= OS_APP_TYPE_IPL;
+        state.lastAppType |= OS_APP_TYPE_IPL;
     }
     if (__DVDGetCoverStatus() != DVD_COVER_CLOSED) {
-        state.lastDiscState = OS_STATE_FLAGS_DISC_NONE;
+        state.discState = OS_STATE_FLAGS_DISC_NONE;
     }
     else {
         if (!BS2BootFromCache || (__OSGetRTCFlags(&flags) && flags)) {
-            state.lastDiscState = OS_STATE_FLAGS_DISC_CHANGED;
+            state.discState = OS_STATE_FLAGS_DISC_CHANGED;
         }
         else {
-            state.lastDiscState = OS_STATE_FLAGS_DISC_IN;
+            state.discState = OS_STATE_FLAGS_DISC_IN;
         }
     }
     __OSGetIOSRev(&iosRev);
     if (idleModeInfo.standby == SC_IDLE_MODE_STANDBY_ON && iosRev.major != 9) {
-        state.lastShutdown = OS_STATE_FLAGS_SHUTDOWN_LAUNCH_TITLE;
+        state.shutdownType = OS_STATE_FLAGS_SHUTDOWN_LAUNCH_TITLE;
     }
     else {
-        state.lastShutdown = OS_STATE_FLAGS_SHUTDOWN_EJECTDISC;
+        state.shutdownType = OS_STATE_FLAGS_SHUTDOWN_POWER_OFF;
     }
     __OSClearRTCFlags();
     __OSWriteStateFlags(&state);
@@ -202,7 +209,7 @@ void OSShutdownSystemForBS() {
     __VISetVolume(0, 0);
 
     if (idleModeInfo.standby == SC_IDLE_MODE_STANDBY_ON && iosRev.major != 9) {
-        if (state.lastDiscState != OS_STATE_FLAGS_DISC_NONE) {
+        if (state.discState != OS_STATE_FLAGS_DISC_NONE) {
             __DVDResetWithNoSpinup();
         }
 
@@ -230,22 +237,22 @@ void OSReturnToMenu() {
     __DVDPrepareReset();
 
     __OSReadStateFlags(&state);
-    state.lastBootApp = OS_APP_TYPE_84;
+    state.lastAppType = OS_APP_TYPE_84;
     if (BS2BootFromCache) {
-        state.lastBootApp |= OS_APP_TYPE_IPL;
+        state.lastAppType |= OS_APP_TYPE_IPL;
     }
     if (__DVDGetCoverStatus() != DVD_COVER_CLOSED) {
-        state.lastDiscState = OS_STATE_FLAGS_DISC_NONE;
+        state.discState = OS_STATE_FLAGS_DISC_NONE;
     }
     else {
         if (!BS2BootFromCache || (__OSGetRTCFlags(&flags) && flags)) {
-            state.lastDiscState = OS_STATE_FLAGS_DISC_CHANGED;
+            state.discState = OS_STATE_FLAGS_DISC_CHANGED;
         }
         else {
-            state.lastDiscState = OS_STATE_FLAGS_DISC_IN;
+            state.discState = OS_STATE_FLAGS_DISC_IN;
         }
     }
-    state.lastShutdown = OS_STATE_FLAGS_DISC_NONE;
+    state.shutdownType = OS_STATE_FLAGS_DISC_NONE;
     __OSClearRTCFlags();
     __OSWriteStateFlags(&state);
 
@@ -269,20 +276,20 @@ void BS2SetStateFlags() {
     u32             flags;
     
     __OSReadStateFlags(&state);
-    state.lastBootApp = OS_APP_TYPE_CHANNEL;
+    state.lastAppType = OS_APP_TYPE_CHANNEL;
     if (BS2BootFromCache) {
-        state.lastBootApp |= OS_APP_TYPE_IPL;
+        state.lastAppType |= OS_APP_TYPE_IPL;
     }
-    state.lastShutdown = OS_STATE_FLAGS_SHUTDOWN_BAD;
+    state.shutdownType = OS_STATE_FLAGS_SHUTDOWN_BAD;
     if (__DVDGetCoverStatus() != DVD_COVER_CLOSED) {
-        state.lastDiscState = OS_STATE_FLAGS_DISC_NONE;
+        state.discState = OS_STATE_FLAGS_DISC_NONE;
     }
     else {
         if (!BS2BootFromCache || (__OSGetRTCFlags(&flags) && flags)) {
-            state.lastDiscState = OS_STATE_FLAGS_DISC_CHANGED;
+            state.discState = OS_STATE_FLAGS_DISC_CHANGED;
         }
         else {
-            state.lastDiscState = OS_STATE_FLAGS_DISC_IN;
+            state.discState = OS_STATE_FLAGS_DISC_IN;
         }
     }
     __OSWriteStateFlags(&state);

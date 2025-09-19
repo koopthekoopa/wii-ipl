@@ -414,10 +414,10 @@ void LaunchCommon(ESTitleId titleId, u32 launchArg, const char** argv, BOOL laun
         __OSWriteNandbootInfo(info);
 
         __OSReadStateFlags(&state);
-        state.lastShutdown = 3;
+        state.shutdownType = OS_STATE_FLAGS_SHUTDOWN_RETURN_MENU;
         if (titleId == EXEC_SYSTEM_MENU_ID) {
-            state.lastDiscState = __OSGetDiscState(state.lastDiscState);
-            state.menuMode = 2;
+            state.discState = __OSGetDiscState(state.discState);
+            state.menuMode = OS_STATE_FLAGS_MENUMODE_ARGS;
         }
         __OSWriteStateFlags(&state);
     }

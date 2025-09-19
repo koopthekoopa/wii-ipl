@@ -1300,10 +1300,10 @@ namespace ipl {
 
     void System::setToday_() {
         OSTicksToCalendarTime(OSGetTime(), &smArg.mCurrentTime);
-        if (smArg.mCurrentTime.year > 2035) {
-            smArg.mCurrentTime.year = 2035;
-            smArg.mCurrentTime.mon = 11;
-            smArg.mCurrentTime.mday = 31;
+        if (smArg.mCurrentTime.year > MAX_YEAR) {
+            smArg.mCurrentTime.year = MAX_YEAR;
+            smArg.mCurrentTime.mon = MAX_MONTH-1;
+            smArg.mCurrentTime.mday = MAX_DAY;
             OSTicksToCalendarTime(OSCalendarTimeToTicks(&smArg.mCurrentTime), &smArg.mCurrentTime);
         }
     }

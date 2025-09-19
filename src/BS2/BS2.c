@@ -34,7 +34,7 @@
 BOOL    InvalidShutdown = FALSE;
 BOOL    ShutdownFromGCFlag = FALSE;
 
-vu32    BS2LastMode = 0;
+vu32    BS2LastMode = BS2_LAST_MODE_0;
 
 vBOOL   BS2BootFromCache = FALSE;
 vBOOL   BS2BootCaching = TRUE;
@@ -49,6 +49,7 @@ BOOL    BS2ReturnToDataManager = FALSE;
 BOOL    BS2ReturnArgs = FALSE;
 BOOL    BS2LaunchTitle = FALSE;
 
+// Default
 u32     BS2BootType = BS2_BOOT_TYPE_POWER_ON;
 
 OSNandbootInfo  BS2NandbootInfo ALIGN32 = {0};
@@ -210,43 +211,47 @@ static void UpdateStateFlagsAndBootCache() {
         }
     }
     else {
-        u32 lastBootApp = BS2StateFlags.lastBootApp;
-        if (lastBootApp & OS_APP_TYPE_DVD) {
-            switch (lastBootApp & ~(OS_APP_TYPE_IPL | OS_APP_TYPE_DVD)) {
+        u32 lastAppType = BS2StateFlags.lastAppType;
+        if (lastAppType & OS_APP_TYPE_DVD) {
+            switch (lastAppType & ~(OS_APP_TYPE_IPL | OS_APP_TYPE_DVD)) {
                 case 1: {
-                    BS2LastMode = 1;
+                    BS2LastMode = BS2_LAST_MODE_1;
                     break;
                 }
                 case 2: {
-                    BS2LastMode = 2;
+                    BS2LastMode = BS2_LAST_MODE_GC;
                     break;
                 }
                 case 4: {
-                    BS2LastMode = 4;
+                    BS2LastMode = BS2_LAST_MODE_4;
                     break;
                 }
                 default:
                 case 3: {
-                    BS2LastMode = 0;
+                    BS2LastMode = BS2_LAST_MODE_0;
                     break;
                 }
             }
         }
         
-        if (BS2StateFlags.lastShutdown == OS_STATE_FLAGS_SHUTDOWN_BAD) {
+        // If shutdown type is invalid
+        if (BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_BAD) {
             InvalidShutdown = TRUE;
         }
         else if (getVISolidClrYCol() == 16
-        && (BS2StateFlags.lastShutdown == OS_STATE_FLAGS_SHUTDOWN_RETURN_MENU || BS2StateFlags.lastShutdown == OS_STATE_FLAGS_SHUTDOWN_IDLE)) {
+        && (BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_RETURN_MENU || BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_IDLE)) {
             InvalidShutdown = TRUE;
         }
         else {
-            if (BS2StateFlags.lastShutdown == OS_STATE_FLAGS_SHUTDOWN_RETURN_MENU) {
+            // If returning to menu
+            if (BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_RETURN_MENU) {
                 BS2ReturnToMenu = TRUE;
 
+                // If we are launching data management?
                 if (BS2StateFlags.menuMode == OS_STATE_FLAGS_MENUMODE_DATA_MANAGER) {
                     BS2ReturnToDataManager = TRUE;
                 }
+                // Or have any arguments?
                 else if (BS2StateFlags.menuMode == OS_STATE_FLAGS_MENUMODE_ARGS) {
                     if (__OSReadNandbootInfo(&BS2NandbootInfo)) {
                         if (BS2NandbootInfo.returnValue == OS_NANDBOOT_RETURN_MENU) {
@@ -261,15 +266,17 @@ static void UpdateStateFlagsAndBootCache() {
                         }
                     }
                 }
+                // Or we are just returning to menu
             }
 
-            if (BS2StateFlags.lastShutdown == OS_STATE_FLAGS_SHUTDOWN_IDLE) {
+            // If we are going idle mode
+            if (BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_IDLE) {
                 BS2ReturnToIdle = TRUE;
             }
-
-            if (BS2StateFlags.lastShutdown == OS_STATE_FLAGS_SHUTDOWN_LAUNCH_TITLE) {
+            // If we are launching title on shutdown
+            if (BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_LAUNCH_TITLE) {
                  if (__OSReadNandbootInfo(&BS2NandbootInfo)) {
-                    if (BS2NandbootInfo.returnValue == 8) {
+                    if (BS2NandbootInfo.returnValue == OS_NANDBOOT_8) {
                         argv = BS2_ARGV;
 
                         // Copy args from NANDBOOTINFO
@@ -282,8 +289,9 @@ static void UpdateStateFlagsAndBootCache() {
                 }
             }
 
-            if (BS2StateFlags.lastDiscState == OS_STATE_FLAGS_DISC_IN && (BS2StateFlags.lastBootApp & OS_APP_TYPE_IPL)
-            && !BS2NoDisk && (BS2LastMode == 1 || BS2LastMode == 4)) {
+            // Boot cache.
+            if (BS2StateFlags.discState == OS_STATE_FLAGS_DISC_IN && (BS2StateFlags.lastAppType & OS_APP_TYPE_IPL)
+            && !BS2NoDisk && (BS2LastMode == BS2_LAST_MODE_1 || BS2LastMode == BS2_LAST_MODE_4)) {
                 OSReport("Boot from cache\n");
                 BS2BootFromCache = TRUE;
                 BS2BootCaching = FALSE;
@@ -298,9 +306,10 @@ static void UpdateStateFlagsAndBootCache() {
         }
     }
 
-    newState.lastBootApp = 0;
-    newState.lastShutdown = OS_STATE_FLAGS_SHUTDOWN_BAD;
-    newState.lastDiscState = OS_STATE_FLAGS_DISC_CHANGED;
+    // Write invalid state flags (expecting it to be written via OSReset functions)
+    newState.lastAppType = 0;
+    newState.shutdownType = OS_STATE_FLAGS_SHUTDOWN_BAD;
+    newState.discState = OS_STATE_FLAGS_DISC_CHANGED;
     newState.menuMode = OS_STATE_FLAGS_MENUMODE_MENU;
 
     __OSWriteStateFlags(&newState);
@@ -402,7 +411,7 @@ static void SyncSystemSettings() {
     }
 
     // Now for SYSCONF
-    if (!InvalidSram && BS2LastMode == 2) {
+    if (!InvalidSram && BS2LastMode == BS2_LAST_MODE_GC) {
         // Sync SRAM sound mode to SYSCONF
         if (SCGetSoundMode() != SC_SOUND_MODE_SURROUND || OSGetSoundMode() != OS_SOUND_MODE_STEREO) {
             if (OSGetSoundMode() != SCGetSoundMode()) {
@@ -987,7 +996,7 @@ int main(int argc, char** argv) {
 
     setVISolidClrYCol(17);
 
-    // Get BS2 Boot type
+    // Determine BS2 Boot type
     if (BS2ReturnArgs) {
         BS2BootType = BS2_BOOT_TYPE_RETURN_ARGS;
     }
@@ -1003,8 +1012,8 @@ int main(int argc, char** argv) {
 
     SyncSystemSettings();
 
-    // Shutdown from MIOS
-    if (*(u32*)OSPhysicalToUncached(OS_ADDR_MIOS_SHUTDOWN_FLAG) == TRUE && BS2LastMode == 2) {
+    // Shutdown requested by GC
+    if (*(u32*)OSPhysicalToUncached(OS_ADDR_MIOS_SHUTDOWN_FLAG) == TRUE && BS2LastMode == BS2_LAST_MODE_GC) {
         ShutdownFromGCFlag = TRUE;
     }
 
@@ -1028,7 +1037,7 @@ int main(int argc, char** argv) {
         OSReport("ES_InitLib failed! %d\n", ret);
     }
 
-    // Shutdown system if requested by GC software
+    // If shutdown was requested by GC
     if (ShutdownFromGCFlag) {
         OSReport("Shutdown system from GC!\n");
         OSShutdownSystem();
@@ -1037,10 +1046,10 @@ int main(int argc, char** argv) {
     // Shutdown sequence
     // (not an inline function, due to the 'rtc' variable)
     if (!InvalidShutdown) {
-        if (BS2StateFlags.lastShutdown == OS_STATE_FLAGS_SHUTDOWN_EJECTDISC && (rtc & 1)) {
+        if (BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_POWER_OFF && (rtc & RTC_FLAGS_EJECT_DISC)) {
             OSReport("EJECT switch was pressed\n");
 
-            if (!BS2NoDisk && BS2StateFlags.lastShutdown != OS_STATE_FLAGS_SHUTDOWN_LAUNCH_TITLE) {
+            if (!BS2NoDisk && BS2StateFlags.shutdownType != OS_STATE_FLAGS_SHUTDOWN_LAUNCH_TITLE) {
                 u8* arenaHi;
                 u8* arenaLo;
                 MEMHeapHandle heap;
@@ -1057,10 +1066,8 @@ int main(int argc, char** argv) {
                 OSSetMEM2ArenaLo(arenaHi);
                 MEMInitAllocatorForExpHeap(&BS2Allocator, heap, DEFAULT_ALIGN);
 
-                // Eject disc
                 EjectDisc();
 
-                // I don't exactly get the point of this.
                 // Initialize WPAD... for what?
                 WPADRegisterAllocator(BS2AllocProc, BS2FreeProc);
                 WPADInit();
@@ -1084,10 +1091,12 @@ int main(int argc, char** argv) {
             BS2BootCaching = TRUE;
         }
         else if (BS2ReturnToIdle) {
+            // Shifft to idle!!!
             OSReport("Shift to idle mode\n");
             OSShutdownSystemForBS();
         }
-        else if ((rtc & 2) && (BS2StateFlags.lastDiscState == OS_STATE_FLAGS_DISC_NONE || BS2StateFlags.lastShutdown == OS_STATE_FLAGS_SHUTDOWN_LAUNCH_TITLE)) {
+        else if ((rtc & RTC_FLAGS_DISC_CHANGED) && (BS2StateFlags.discState == OS_STATE_FLAGS_DISC_NONE || BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_LAUNCH_TITLE)) {
+            // We have a disc inside!
             OSReport("Disc in\n");
             BS2DriveReset = TRUE;
             BS2WaitSpinup = TRUE;
@@ -1096,6 +1105,7 @@ int main(int argc, char** argv) {
             BS2BootCaching = TRUE;
         }
 
+        // Returned from menu
         else if (BS2ReturnToMenu || BS2ReturnToDataManager) {
             OSReport("Return to menu\n");
             BS2DriveReset = TRUE;
@@ -1103,6 +1113,7 @@ int main(int argc, char** argv) {
         }
     }
     else {
+        // if InvalidShutdown is true
         OSReport("Last shutdown sequence is invalid\n");
         BS2DriveReset = TRUE;
         BS2WaitSpinup = TRUE;
@@ -1152,7 +1163,7 @@ int main(int argc, char** argv) {
         OSReport("LaunchCode: %08X\n", BS2GetLaunchCode());
         OSReport("argc      : %d\n", BS2GetArgc() - 1);
 
-        for (i = 1; i < BS2GetArgc(); i ++) {
+        for (i = 1; i < BS2GetArgc(); i++) {
             OSReport("argv[%d]   : %s\n", i - 1, argv[i]);
         }
 

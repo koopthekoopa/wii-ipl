@@ -31,17 +31,17 @@ namespace ipl {
 
         OSTicksToCalendarTime(smArg.mPlayRecord.playTime, &smArg.mDateTime);
 
-        if (smArg.mDateTime.year > 2035) {
-            smArg.mDateTime.year = 2035;
-            smArg.mDateTime.mon = 11;
-            smArg.mDateTime.mday = 31;
+        if (smArg.mDateTime.year > MAX_YEAR) {
+            smArg.mDateTime.year = MAX_YEAR;
+            smArg.mDateTime.mon = MAX_MONTH-1;
+            smArg.mDateTime.mday = MAX_DAY;
             OSTime time = OSCalendarTimeToTicks(&smArg.mDateTime);
             OSTicksToCalendarTime(time ,&smArg.mDateTime);
         }
-        else if (smArg.mDateTime.year < 2000) {
-            smArg.mDateTime.year = 2000;
-            smArg.mDateTime.mon = 0;
-            smArg.mDateTime.mday = 1;
+        else if (smArg.mDateTime.year < MIN_YEAR) {
+            smArg.mDateTime.year = MIN_YEAR;
+            smArg.mDateTime.mon = MIN_MONTH-1;
+            smArg.mDateTime.mday = MIN_DAY;
             OSTime time = OSCalendarTimeToTicks(&smArg.mDateTime);
             OSTicksToCalendarTime(time ,&smArg.mDateTime);
         }

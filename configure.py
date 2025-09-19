@@ -693,7 +693,7 @@ config.libs = [
         ]
     ),
     IPLSection("calendar", [
-            Object(NonMatching, "scene/calendar/iplCalendar.cpp"),
+            Object(Equivalent,  "scene/calendar/iplCalendar.cpp"),
             Object(Equivalent,  "scene/calendar/iplDate.cpp"),
         ]
     ),

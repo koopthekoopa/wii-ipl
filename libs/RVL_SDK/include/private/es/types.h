@@ -135,7 +135,7 @@ typedef struct ESTicketView {
     u8                  license;                // 0x24
     ESTicketReserved    reserved;               // 0x25
 
-    u8                  audit;                  // 0x55
+    u8                  unk_0x55;
     ESContentMask       cidxMask;               // 0x56
     ESLpEntry           limits[ES_LIMIT_MAX];   // 0x98
 } ESTicketView;
@@ -166,7 +166,7 @@ typedef struct ESTicket {
 
     ESTicketReserved    reserved;               // 0x1F1
 
-    u8                  audit;                  // 0x221
+    u8                  unk_0x221;              // 0x221
     ESContentMask       cidxMask;               // 0x222
     ESLpEntry           limits[ES_LIMIT_MAX];   // 0x264
 } ESTicket;

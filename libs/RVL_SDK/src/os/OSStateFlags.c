@@ -10,7 +10,7 @@ static OSStateFlags StateFlags  ALIGN32;
 static u32 checkSum(OSStateFlags* flags) {
     u32  *ptr, i, sum;
 
-    ptr = (u32*)&flags->lastBootApp;
+    ptr = (u32*)&flags->lastAppType;
     sum = 0;
 
     for (i = 0; i < OS_STATE_FLAGS_CHECKSUM_SIZE / 4; i++) {

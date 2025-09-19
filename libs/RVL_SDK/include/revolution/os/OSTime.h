@@ -10,6 +10,20 @@ extern "C" {
 typedef s64 OSTime;
 typedef u32 OSTick;
 
+#define MAX_YEAR    2035
+#define MAX_MONTH   12
+#define MAX_DAY     31
+#define MAX_HOUR    23
+#define MAX_MINUTE  59
+#define MAX_SECOND  59
+
+#define MIN_YEAR    2000
+#define MIN_MONTH   1
+#define MIN_DAY     1
+#define MIN_HOUR    0
+#define MIN_MINUTE  0
+#define MIN_SECOND  0
+
 typedef struct OSCalendarTime {
     int sec;    // 0x00
     int min;    // 0x04

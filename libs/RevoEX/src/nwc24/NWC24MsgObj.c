@@ -1,9 +1,6 @@
 #include <revolution/nwc24.h>
 #include <private/nwc24.h>
 
-#define YEAR_MIN 2000
-#define YEAR_MAX 2035 // !!!
-
 #define ALT_NAME_MAX 35
 #define SMTP_LINE_MAX 1000
 

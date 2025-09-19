@@ -9,7 +9,7 @@ extern "C" {
 
 void    __OSSetTime(OSTime time);
 OSTime  __OSGetSystemTime();
-OSTime  __OSTimeToSystemTime();
+OSTime  __OSTimeToSystemTime(OSTime time);
 
 #ifdef __cplusplus
 }

@@ -28,6 +28,7 @@ typedef struct OSNandbootInfo {
 enum {
     OS_NANDBOOT_RETURN_GAME = 2,
     OS_NANDBOOT_RETURN_MENU = 4,
+    OS_NANDBOOT_8 = 8,
 };
 
 #define OS_NANDBOOT_CHECKSUM_SIZE   (sizeof(OSNandbootInfo) - 4)

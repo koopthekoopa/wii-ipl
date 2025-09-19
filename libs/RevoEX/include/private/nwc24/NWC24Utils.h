@@ -6,6 +6,8 @@
 #include <revolution/nwc24/NWC24Err.h>
 #include <revolution/nwc24/NWC24Types.h>
 
+#include <revolution/os/OSTime.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

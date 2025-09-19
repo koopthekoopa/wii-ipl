@@ -36,8 +36,8 @@ void CDBClampCDBDate(CDBDate* cdbDate) {
 
     if (cdbDate != NULL) {
         CDBConvertCDBDateToCalendarTime(*cdbDate, &year, &month, &day, &hour, &min, &sec);
-        if (year > 2035) {
-            *cdbDate = CDBMakeCDBDate(2035, 11, 31, hour, min, sec);
+        if (year > MAX_YEAR) {
+            *cdbDate = CDBMakeCDBDate(MAX_YEAR, MAX_MONTH-1, MAX_DAY, hour, min, sec);
         }
     }
 }
@@ -59,15 +59,15 @@ CDBDate CDBMakeCDBDate(int year, int month, int day, int hour, int min, int sec)
 }
 
 CDBDate CDBMakeCDBDateDayBegin(int year, int month, int day, int hour, int min, int sec) {
-    return CDBMakeCDBDate(year, month, day, 0, 0, 0);
+    return CDBMakeCDBDate(year, month, day, MIN_HOUR, MIN_MINUTE, MIN_SECOND);
 }
 
 CDBDate CDBMakeCDBDateDayEnd(int year, int month, int day, int hour, int min, int sec) {
-    return CDBMakeCDBDate(year, month, day, 23, 59, 59);
+    return CDBMakeCDBDate(year, month, day, MAX_HOUR, MAX_MINUTE, MAX_SECOND);
 }
 
 CDBDate CDBMakeCDBDateMonthBegin(int year, int month, int day, int hour, int min, int sec) {
-    return CDBMakeCDBDate(year, month, 1, 0, 0, 0);
+    return CDBMakeCDBDate(year, month, MIN_DAY, MIN_HOUR, MIN_MINUTE, MIN_SECOND);
 }
 
 CDBDate CDBMakeCDBDateMonthEnd(int year, int month, int day, int hour, int min, int sec) {
@@ -98,15 +98,15 @@ CDBDate CDBMakeCDBDateMonthEnd(int year, int month, int day, int hour, int min, 
         }
     }
 
-    return CDBMakeCDBDate(year, month, day, 23, 59, 59);
+    return CDBMakeCDBDate(year, month, day, MAX_HOUR, MAX_MINUTE, MAX_SECOND);
 }
 
 CDBDate CDBMakeCDBDateYearBegin(int year, int month, int day, int hour, int min, int sec) {
-    return CDBMakeCDBDate(year, 0, 1, 0, 0, 0);
+    return CDBMakeCDBDate(year, MIN_MONTH-1, MIN_DAY, MIN_HOUR, MIN_MINUTE, MIN_SECOND);
 }
 
 CDBDate CDBMakeCDBDateYearEnd(int year, int month, int day, int hour, int min, int sec) {
-    return CDBMakeCDBDate(year, 11, 31, 23, 59, 59);
+    return CDBMakeCDBDate(year, MAX_MONTH-1, MAX_DAY, MAX_HOUR, MAX_MINUTE, MAX_SECOND);
 }
 
 void CDBConvYearValueToYearStr(char* yearStr, int year) {

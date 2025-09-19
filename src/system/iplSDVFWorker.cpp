@@ -143,7 +143,7 @@ namespace ipl {
                         s_sd_state = SD_STATE_UNAVAILABLE;
                     }
 
-                    System::getCdbManager()->mountSD_if_unmounted();
+                    System::getCdbManager()->mountSD_safe();
  
                     cdbErr = System::getCdbManager()->getCDBResult();
                     if (cdbErr == CDB_ERROR_OK || cdbErr == CDB_ERROR_SD_IS_MOUNTED) {
@@ -157,7 +157,7 @@ namespace ipl {
                     break;
                 }
                 case MESSAGE_CLEANUP_CDB_BACKUP: {
-                    System::getCdbManager()->unmountSD2_if_mounted();
+                    System::getCdbManager()->unmountSD_safe();
 
                     cdbErr = System::getCdbManager()->getCDBResult();
                     if (cdbErr == CDB_ERROR_OK || cdbErr == CDB_ERROR_SD_IS_NOT_MOUNTED) {

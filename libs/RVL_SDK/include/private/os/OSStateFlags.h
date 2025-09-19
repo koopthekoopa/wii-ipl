@@ -6,9 +6,9 @@
 typedef struct OSStateFlags {
     u32 checkSum;       // 0x00
 
-    u8  lastBootApp;    // 0x04
-    u8  lastShutdown;   // 0x05
-    u8  lastDiscState;  // 0x06
+    u8  lastAppType;    // 0x04
+    u8  shutdownType;   // 0x05
+    u8  discState;      // 0x06
 
     u8  menuMode;       // 0x07
 
@@ -20,7 +20,8 @@ typedef struct OSStateFlags {
 #define OS_STATE_FLAGS_CHECKSUM_SIZE    (sizeof(OSStateFlags) - 4)
 
 enum {
-    OS_STATE_FLAGS_SHUTDOWN_EJECTDISC = 1, /* hmm */
+    OS_STATE_FLAGS_SHUTDOWN_NONE = 0,
+    OS_STATE_FLAGS_SHUTDOWN_POWER_OFF,
     OS_STATE_FLAGS_SHUTDOWN_RESTART,
     OS_STATE_FLAGS_SHUTDOWN_RETURN_MENU,
     OS_STATE_FLAGS_SHUTDOWN_LAUNCH_TITLE,

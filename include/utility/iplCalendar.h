@@ -3,18 +3,26 @@
 
 #include <revolution/os/OSTime.h>
 
+#include <revolution/cdb/CDBDate.h>
+
 #include <cstring>
 
 namespace ipl {
     namespace utility {
         class Date {
             public:
-                Date() : year(2000), month(1), day(1) {}
+                Date() : year(MIN_YEAR), month(MIN_MONTH), day(MIN_DAY) {}
                 Date(int myYear, int myMonth, int myDay) : year(myYear), month(myMonth), day(myDay) {}
                 Date(const OSCalendarTime& cal) : year(cal.year), month(cal.mon), day(cal.mday) {}
+                Date(const Date& date) : year(date.year), month(date.month), day(date.day) {}
 
-                void    getMaxDate()    { year = 2035; month = 12; day = 31; }
-                void    getMinDate()    { year = 2000; month = 1;  day = 1;  }
+                void    getMaxDate()            { year = MAX_YEAR; month = MAX_MONTH; day = MAX_DAY; }
+                void    getMinDate()            { year = MIN_YEAR; month = MIN_MONTH; day = MIN_DAY; }
+
+                CDBDate cdbDateBegin()          { return CDBMakeCDBDate(year, month-1, day, 0, 0, 0); }
+                CDBDate cdbDateEnd()            { return CDBMakeCDBDate(year, month-1, day, 23, 59, 59); }
+
+                bool    operator==(const Date& rhs) const { return year == rhs.year && month == rhs.month && day == rhs.day; }
 
                 int year;   // 0x00
                 int month;  // 0x04
@@ -31,11 +39,11 @@ namespace ipl {
                     dest->day++;
                     if (dest->day > days) {
                         dest->month++;
-                        if (dest->month > 12) {
-                            dest->month = 1;
+                        if (dest->month > MAX_MONTH) {
+                            dest->month = MIN_MONTH;
                             dest->year++;
                         }
-                        dest->day = 1;
+                        dest->day = MIN_DAY;
                     }
                 }
                 static void getYesterday(const Date& src, Date* dest) {
@@ -44,7 +52,7 @@ namespace ipl {
                     if (dest->day <= 0) {
                         dest->month--;
                         if (dest->month <= 0) {
-                            dest->month = 12;
+                            dest->month = MAX_MONTH;
                             dest->year--;
                         }
                         dest->day = getDays(dest->year, dest->month);
@@ -67,7 +75,7 @@ namespace ipl {
                     year = date.year;
                     if (month <= 2) {
                         year--;
-                        month += 12;
+                        month += MAX_MONTH;
                     }
                     return (day + (((month * 13) + 8) / 5) + ((year / 400) + ((year + (year / 4)) - (year / 100)))) % 7;
                 }
@@ -75,7 +83,7 @@ namespace ipl {
                 static int getWeek(int year, int month, int day) {
                     if (month <= 2) {
                         year--;
-                        month += 12;
+                        month += MAX_MONTH;
                     }
                     return (day + (((month * 13) + 8) / 5) + ((year / 400) + ((year + (year / 4)) - (year / 100)))) % 7;
                 }
@@ -83,11 +91,11 @@ namespace ipl {
                 static void getNextMonth(const Date& src, Date* dest) {
                     *dest = src;
                     dest->month++;
-                    if (dest->month > 12) {
-                        dest->month = 1;
+                    if (dest->month > MAX_MONTH) {
+                        dest->month = MIN_MONTH;
                         dest->year++;
                     }
-                    dest->day = 1;
+                    dest->day = MIN_DAY;
                 }
 
                 static void getLastMonth(const Date& src, Date* dest) {
@@ -96,7 +104,7 @@ namespace ipl {
                     if (dest->month <= 0) {
                         dest->month--;
                         if (dest->month <= 0) {
-                            dest->month = 12;
+                            dest->month = MAX_MONTH;
                             dest->year--;
                         }
                     }

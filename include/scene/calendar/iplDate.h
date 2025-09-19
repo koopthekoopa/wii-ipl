@@ -63,27 +63,38 @@ namespace ipl {
 
                 static bool             isValidDate(const utility::Date& date);
 
+                utility::Date*          getDate()   { return mpDate; }
+
             private:
                 void                    start_point_event(const char* paneName, controller::Interface* con);
                 void                    start_left_event(const char* paneName);
 
                 void                    set_textbox(int day);
 
-                BOOL                    mbAppearMsg;                // 0x0C
+            public:
+                vBOOL                   mbAppearMsg;                // 0x0C
+
+            private:
                 u32                     unk_0x10;
                 int                     unk_0x14;
                 layout::Object*         mpLayout;                   // 0x18
                 gui::PaneManager*       mpGui;                      // 0x1C
                 layout::PaneAnimator*   mpCurrentPaneAnim;          // 0x20
                 layout::PaneAnimator*   mpPaneAnims[ANIM_PANE_MAX]; // 0x24
+
+            public:
                 utility::Date*          mpDate;                     // 0x38
                 u32                     unk_0x3C;
-                u8                      unk_0x40[0x10];
 
                 static const char*      mscAnimPanes[ANIM_PANE_MAX];
 
                 static utility::Date    mscMinDate;
                 static utility::Date    mscMaxDate;
+
+                nw4r::ut::Link          mNode1;                     // 0x40
+                nw4r::ut::Link          mNode2;                     // 0x48
+
+                friend class Calendar;
         };
     }
 }

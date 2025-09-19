@@ -401,8 +401,9 @@ namespace ipl {
     void cdb_backup_delete_task_(void* work) {
         CdbBackup* cdbBackup = reinterpret_cast<CdbBackup*>(work);
 
-        CDBDate beginDate = CDBMakeCDBDate(2000, 0, 1, 0, 0, 0);
-        CDBDate endDate = CDBMakeCDBDate(2035, 12, 31, 23, 59, 59);
+        CDBDate beginDate = CDBMakeCDBDate(MIN_YEAR, MIN_MONTH-1, MIN_DAY, MIN_HOUR, MIN_MINUTE, MIN_SECOND);
+        // @Bug should be MAX_MONTH-1
+        CDBDate endDate = CDBMakeCDBDate(MAX_YEAR, MAX_MONTH, MAX_DAY, MAX_HOUR, MAX_MINUTE, MAX_SECOND);
 
         System::getCdbManager()->search(beginDate, endDate,
                                         CDB_SEARCH_DIRECTION_RIGHT, CDB_RECORD_LOCATION_VF, 0,
@@ -445,8 +446,9 @@ namespace ipl {
     void cdb_backup_move_task_(void* work) {
         CdbBackup* cdbBackup = reinterpret_cast<CdbBackup*>(work);
 
-        const CDBDate beginDate = CDBMakeCDBDate(2000, 0, 1, 0 ,0, 0);
-        const CDBDate endDate = CDBMakeCDBDate(2035, 12, 31, 23, 59, 59);
+        const CDBDate beginDate = CDBMakeCDBDate(MIN_YEAR, MIN_MONTH-1, MIN_DAY, MIN_HOUR, MIN_MINUTE, MIN_SECOND);
+        // @Bug should be MAX_MONTH-1
+        const CDBDate endDate = CDBMakeCDBDate(MAX_YEAR, MAX_MONTH, MAX_DAY, MAX_HOUR, MAX_MINUTE, MAX_SECOND);
         u32 freeSize;
 
         System::getCdbManager()->getFreeSize(&freeSize);
