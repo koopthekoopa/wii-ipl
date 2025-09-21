@@ -128,6 +128,8 @@ inline float    frexpf(float x, int* eptr) { return frexpf(x, eptr); }
 double          ldexp(double x, int n);
 inline float    ldexpf(float x, int n) { return ldexp(x, n); }
 
+double          floor(double x);
+
 #ifdef __cplusplus
 }
 #endif

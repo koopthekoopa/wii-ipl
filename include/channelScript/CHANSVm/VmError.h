@@ -1,7 +1,13 @@
 #ifndef CHANS_VM_ERROR_CODES_H
 #define CHANS_VM_ERROR_CODES_H
 
-typedef int CHANSVmErr;
+#include <revolution/types.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef s32 CHANSVmErr;
 
 enum {
     CHANS_VM_OK                                     = 0,
@@ -86,5 +92,9 @@ enum {
     CHANS_VM_ERR_NO_SUCH_FUNCTION,                  /* -924 */
     CHANS_VM_ERR_RESERVED_OPCODE,                   /* -923 */
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // CHANS_VM_ERROR_CODES_H
