@@ -209,11 +209,11 @@ CHANSVmObjHdr* CHANSVmCopyObject(CHANSVm* vm, CHANSVmObjHdr* outObj, CHANSVmObjH
     if (inObj != vmNull) {
         if (outObj != vmNull) {
             memset(outObj, 0, sizeof(CHANSVmObjHdr));
-            goto fuck;
+            goto skip;
         }
         outObj = CHANSVmNewObjHdr(vm, 0);
         if (outObj != vmNull) {
-fuck:
+skip:
             memcpy(outObj, inObj, sizeof(CHANSVmObjHdr));
 
             outObj->flags.raw = outObj->flags.reserved;
@@ -443,7 +443,7 @@ CHANSVmErr CHANSVmSetU16StringFromU8(CHANSVm* vm, CHANSVmObjHdr* object, vmStrin
     return ret;
 }
 
-u16 CHANSVmGetArgc(CHANSVm* vm) {
+vmU32 CHANSVmGetArgc(CHANSVm* vm) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
 
     return pVm->unk_0x60->argc;
@@ -471,7 +471,7 @@ CHANSVmObjHdr* CHANSVmGetArgString(CHANSVm* vm, vmU32 argIdx) {
     return CHANSVmConvertObjectType(vm, CHANS_VM_OBJ_TYPE_STRING, CHANSVmGetArg(vm, argIdx));
 }
 
-CHANSVmNativeClass* CHANSVmFindNativeClass(CHANSVm* vm, const vmString clsName) {
+CHANSVmNativeClass* CHANSVmFindNativeClass(CHANSVm* vm, const char* clsName) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
 
     CHANSVmNativeClass* cls;
@@ -488,7 +488,7 @@ CHANSVmNativeClass* CHANSVmFindNativeClass(CHANSVm* vm, const vmString clsName) 
     return vmNull;
 }
 
-CHANSVmNativeClass* CHANSVmAddNativeClass2(CHANSVm* vm, const vmString clsName, CHANSVmFunction clsCtor, CHANSVmFunction clsDtor, CHANSVmFunction clsInit) {
+CHANSVmNativeClass* CHANSVmAddNativeClass2(CHANSVm* vm, const char* clsName, CHANSVmFunction clsCtor, CHANSVmFunction clsDtor, CHANSVmFunction clsInit) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
 
     CHANSVmNativeClass* cls;
@@ -527,44 +527,44 @@ CHANSVmNativeClass* CHANSVmAddNativeClass2(CHANSVm* vm, const vmString clsName, 
     return vmNull;
 }
 
-CHANSVmNativeClass* CHANSVmAddNativeClass(CHANSVm* vm, const vmString clsName, CHANSVmFunction clsCtor, CHANSVmFunction clsDtor) {
+CHANSVmNativeClass* CHANSVmAddNativeClass(CHANSVm* vm, const char* clsName, CHANSVmFunction clsCtor, CHANSVmFunction clsDtor) {
     return CHANSVmAddNativeClass2(vm, clsName, clsCtor, clsDtor, vmNull);
 }
 
 VmMethodDefine(Math, E) {
-    return CHANSVmSetFloat(vm, vmOutObj, M_E) == CHANS_VM_OK;
+    return CHANSVmSetFloat(VmInst, VmReturnObj, M_E) == CHANS_VM_OK;
 }
 VmMethodDefine(Math, LN10) {
-    return CHANSVmSetFloat(vm, vmOutObj, M_LN10) == CHANS_VM_OK;
+    return CHANSVmSetFloat(VmInst, VmReturnObj, M_LN10) == CHANS_VM_OK;
 }
 VmMethodDefine(Math, LN2) {
-    return CHANSVmSetFloat(vm, vmOutObj, M_LN2) == CHANS_VM_OK;
+    return CHANSVmSetFloat(VmInst, VmReturnObj, M_LN2) == CHANS_VM_OK;
 }
 VmMethodDefine(Math, LOG2E) {
-    return CHANSVmSetFloat(vm, vmOutObj, M_LOG2E) == CHANS_VM_OK;
+    return CHANSVmSetFloat(VmInst, VmReturnObj, M_LOG2E) == CHANS_VM_OK;
 }
 VmMethodDefine(Math, LOG10E) {
-    return CHANSVmSetFloat(vm, vmOutObj, M_LOG10E) == CHANS_VM_OK;
+    return CHANSVmSetFloat(VmInst, VmReturnObj, M_LOG10E) == CHANS_VM_OK;
 }
 VmMethodDefine(Math, PI) {
-    return CHANSVmSetFloat(vm, vmOutObj, M_PI) == CHANS_VM_OK;
+    return CHANSVmSetFloat(VmInst, VmReturnObj, M_PI) == CHANS_VM_OK;
 }
 VmMethodDefine(Math, SQRT1_2) {
-    return CHANSVmSetFloat(vm, vmOutObj, M_SQRT1_2) == CHANS_VM_OK;
+    return CHANSVmSetFloat(VmInst, VmReturnObj, M_SQRT1_2) == CHANS_VM_OK;
 }
 VmMethodDefine(Math, SQRT2) {
-    return CHANSVmSetFloat(vm, vmOutObj, M_SQRT2) == CHANS_VM_OK;
+    return CHANSVmSetFloat(VmInst, VmReturnObj, M_SQRT2) == CHANS_VM_OK;
 }
 VmMethodDefine(Math, abs) {
-    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(vm, 0);
+    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
     vmBoolInt result = arg != vmNull;
     if (result) {
-        result = CHANSVmSetFloat(vm, vmOutObj, fabs(arg->value.float_v)) == CHANS_VM_OK;
+        result = CHANSVmSetFloat(VmInst, VmReturnObj, fabs(arg->value.float_v)) == CHANS_VM_OK;
     }
     return result;
 }
 VmMethodDefine(Math, acos) {
-    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(vm, 0);
+    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
     if (arg != vmNull) {
         vmFloat val = arg->value.float_v;
         vmFloat newVal;
@@ -575,14 +575,14 @@ VmMethodDefine(Math, acos) {
         else {
             newVal = VM_NAN;
         }
-        return CHANSVmSetFloat(vm, vmOutObj, newVal) == CHANS_VM_OK;
+        return CHANSVmSetFloat(VmInst, VmReturnObj, newVal) == CHANS_VM_OK;
     }
     else {
         return vmFalse;
     }
 }
 VmMethodDefine(Math, asin) {
-    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(vm, 0);
+    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
     if (arg != vmNull) {
         vmFloat val = arg->value.float_v;
         vmFloat newVal;
@@ -593,97 +593,97 @@ VmMethodDefine(Math, asin) {
         else {
             newVal = VM_NAN;
         }
-        return CHANSVmSetFloat(vm, vmOutObj, newVal) == CHANS_VM_OK;
+        return CHANSVmSetFloat(VmInst, VmReturnObj, newVal) == CHANS_VM_OK;
     }
     else {
         return vmFalse;
     }
 }
 VmMethodDefine(Math, atan) {
-    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(vm, 0);
+    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
     vmBool result = vmFalse;
     if (arg != vmNull) {
-        if (CHANSVmSetFloat(vm, vmOutObj, atan(arg->value.float_v)) == CHANS_VM_OK) {
+        if (CHANSVmSetFloat(VmInst, VmReturnObj, atan(arg->value.float_v)) == CHANS_VM_OK) {
             result = vmTrue;
         }
     }
     return result;
 }
 VmMethodDefine(Math, atan2) {
-    CHANSVmObjHdr* arg0 = CHANSVmGetArgFloat(vm, 0);
-    CHANSVmObjHdr* arg1 = CHANSVmGetArgFloat(vm, 1);
+    CHANSVmObjHdr* arg0 = CHANSVmGetArgFloat(VmInst, 0);
+    CHANSVmObjHdr* arg1 = CHANSVmGetArgFloat(VmInst, 1);
     vmBool result = vmFalse;
     if (arg0 != vmNull && arg1 != vmNull) {
-        if (CHANSVmSetFloat(vm, vmOutObj, atan2(arg0->value.float_v, arg1->value.float_v)) == CHANS_VM_OK) {
+        if (CHANSVmSetFloat(VmInst, VmReturnObj, atan2(arg0->value.float_v, arg1->value.float_v)) == CHANS_VM_OK) {
             result = vmTrue;
         }
     }
     return result;
 }
 VmMethodDefine(Math, ceil) {
-    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(vm, 0);
+    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
     vmBool result = vmFalse;
     if (arg != vmNull) {
-        if (CHANSVmSetFloat(vm, vmOutObj, ceil(arg->value.float_v)) == CHANS_VM_OK) {
+        if (CHANSVmSetFloat(VmInst, VmReturnObj, ceil(arg->value.float_v)) == CHANS_VM_OK) {
             result = vmTrue;
         }
     }
     return result;
 }
 VmMethodDefine(Math, cos) {
-    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(vm, 0);
+    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
     vmBool result = vmFalse;
     if (arg != vmNull) {
-        if (CHANSVmSetFloat(vm, vmOutObj, cos(arg->value.float_v)) == CHANS_VM_OK) {
+        if (CHANSVmSetFloat(VmInst, VmReturnObj, cos(arg->value.float_v)) == CHANS_VM_OK) {
             result = vmTrue;
         }
     }
     return result;
 }
 VmMethodDefine(Math, exp) {
-    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(vm, 0);
+    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
     vmBool result = vmFalse;
     if (arg != vmNull) {
-        if (CHANSVmSetFloat(vm, vmOutObj, exp(arg->value.float_v)) == CHANS_VM_OK) {
+        if (CHANSVmSetFloat(VmInst, VmReturnObj, exp(arg->value.float_v)) == CHANS_VM_OK) {
             result = vmTrue;
         }
     }
     return result;
 }
 VmMethodDefine(Math, floor) {
-    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(vm, 0);
+    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
     vmBool result = vmFalse;
     if (arg != vmNull) {
-        if (CHANSVmSetFloat(vm, vmOutObj, floor(arg->value.float_v)) == CHANS_VM_OK) {
+        if (CHANSVmSetFloat(VmInst, VmReturnObj, floor(arg->value.float_v)) == CHANS_VM_OK) {
             result = vmTrue;
         }
     }
     return result;
 }
 VmMethodDefine(Math, log) {
-    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(vm, 0);
+    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
     vmBool result = vmFalse;
     if (arg != vmNull) {
-        if (CHANSVmSetFloat(vm, vmOutObj, log(arg->value.float_v)) == CHANS_VM_OK) {
+        if (CHANSVmSetFloat(VmInst, VmReturnObj, log(arg->value.float_v)) == CHANS_VM_OK) {
             result = vmTrue;
         }
     }
     return result;
 }
 inline VmMethodDefine(Math, fmax) {
-    CHANSVmObjHdr* arg0 = CHANSVmGetArgFloat(vm, 0);
-    CHANSVmObjHdr* arg1 = CHANSVmGetArgFloat(vm, 1);
+    CHANSVmObjHdr* arg0 = CHANSVmGetArgFloat(VmInst, 0);
+    CHANSVmObjHdr* arg1 = CHANSVmGetArgFloat(VmInst, 1);
     vmBool result = vmFalse;
     if (arg0 != vmNull && arg1 != vmNull) {
-        if (CHANSVmSetFloat(vm, vmOutObj, fmax(arg0->value.float_v, arg1->value.float_v)) == CHANS_VM_OK) {
+        if (CHANSVmSetFloat(VmInst, VmReturnObj, fmax(arg0->value.float_v, arg1->value.float_v)) == CHANS_VM_OK) {
             result = vmTrue;
         }
     }
     return result;
 }
 VmMethodDefine(Math, max) {
-    CHANSVmObjHdr* arg0 = CHANSVmGetArg(vm, 0);
-    CHANSVmObjHdr* arg1 = CHANSVmGetArg(vm, 1);
+    CHANSVmObjHdr* arg0 = CHANSVmGetArg(VmInst, 0);
+    CHANSVmObjHdr* arg1 = CHANSVmGetArg(VmInst, 1);
     vmBool result = vmFalse;
     if (arg0 != vmNull && arg1 != vmNull) {
         if (arg0->type == arg1->type && arg0->type == CHANS_VM_OBJ_TYPE_INTEGER) {
@@ -691,10 +691,10 @@ VmMethodDefine(Math, max) {
                 arg0 = arg1;
             }
 
-            return CHANSVmSetInteger(vm, vmOutObj, arg0->value.int_v) == CHANS_VM_OK;
+            return CHANSVmSetInteger(VmInst, VmReturnObj, arg0->value.int_v) == CHANS_VM_OK;
         }
         else {
-            return (VmMethod(Math, fmax))(vm, vmInObj, vmOutObj);
+            return (VmMethod(Math, fmax))(VmInst, VmParentObj, VmReturnObj);
         }
     }
     else {
@@ -702,19 +702,19 @@ VmMethodDefine(Math, max) {
     }
 }
 inline VmMethodDefine(Math, fmin) {
-    CHANSVmObjHdr* arg0 = CHANSVmGetArgFloat(vm, 0);
-    CHANSVmObjHdr* arg1 = CHANSVmGetArgFloat(vm, 1);
+    CHANSVmObjHdr* arg0 = CHANSVmGetArgFloat(VmInst, 0);
+    CHANSVmObjHdr* arg1 = CHANSVmGetArgFloat(VmInst, 1);
     vmBool result = vmFalse;
     if (arg0 != vmNull && arg1 != vmNull) {
-        if (CHANSVmSetFloat(vm, vmOutObj, fmin(arg0->value.float_v, arg1->value.float_v)) == CHANS_VM_OK) {
+        if (CHANSVmSetFloat(VmInst, VmReturnObj, fmin(arg0->value.float_v, arg1->value.float_v)) == CHANS_VM_OK) {
             result = vmTrue;
         }
     }
     return result;
 }
 VmMethodDefine(Math, min) {
-    CHANSVmObjHdr* arg0 = CHANSVmGetArg(vm, 0);
-    CHANSVmObjHdr* arg1 = CHANSVmGetArg(vm, 1);
+    CHANSVmObjHdr* arg0 = CHANSVmGetArg(VmInst, 0);
+    CHANSVmObjHdr* arg1 = CHANSVmGetArg(VmInst, 1);
     vmBool result = vmFalse;
     if (arg0 != vmNull && arg1 != vmNull) {
         if (arg0->type == arg1->type && arg0->type == CHANS_VM_OBJ_TYPE_INTEGER) {
@@ -722,10 +722,10 @@ VmMethodDefine(Math, min) {
                 arg0 = arg1;
             }
 
-            return CHANSVmSetInteger(vm, vmOutObj, arg0->value.int_v) == CHANS_VM_OK;
+            return CHANSVmSetInteger(VmInst, VmReturnObj, arg0->value.int_v) == CHANS_VM_OK;
         }
         else {
-            return (VmMethod(Math, fmin))(vm, vmInObj, vmOutObj);
+            return (VmMethod(Math, fmin))(VmInst, VmParentObj, VmReturnObj);
         }
     }
     else {
@@ -733,21 +733,21 @@ VmMethodDefine(Math, min) {
     }
 }
 VmMethodDefine(Math, pow) {
-    CHANSVmObjHdr* arg0 = CHANSVmGetArgFloat(vm, 0);
-    CHANSVmObjHdr* arg1 = CHANSVmGetArgFloat(vm, 1);
+    CHANSVmObjHdr* arg0 = CHANSVmGetArgFloat(VmInst, 0);
+    CHANSVmObjHdr* arg1 = CHANSVmGetArgFloat(VmInst, 1);
     vmBool result = vmFalse;
     if (arg0 != vmNull && arg1 != vmNull) {
-        if (CHANSVmSetFloat(vm, vmOutObj, pow(arg0->value.float_v, arg1->value.float_v)) == CHANS_VM_OK) {
+        if (CHANSVmSetFloat(VmInst, VmReturnObj, pow(arg0->value.float_v, arg1->value.float_v)) == CHANS_VM_OK) {
             result = vmTrue;
         }
     }
     return result;
 }
 VmMethodDefine(Math, random) {
-    return CHANSVmSetFloat(vm, vmOutObj, rand() / 32767.0) == CHANS_VM_OK;
+    return CHANSVmSetFloat(VmInst, VmReturnObj, rand() / 32767.0) == CHANS_VM_OK;
 }
 VmMethodDefine(Math, round) {
-    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(vm, 0);
+    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
     if (arg != vmNull) {
         vmFloat val = arg->value.float_v;
         vmFloat newVal;
@@ -758,24 +758,24 @@ VmMethodDefine(Math, round) {
         else {
             newVal = ceil(val - 0.5);
         }
-        return CHANSVmSetFloat(vm, vmOutObj, newVal) == CHANS_VM_OK;
+        return CHANSVmSetFloat(VmInst, VmReturnObj, newVal) == CHANS_VM_OK;
     }
     else {
         return vmFalse;
     }
 }
 VmMethodDefine(Math, sin) {
-    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(vm, 0);
+    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
     vmBool result = vmFalse;
     if (arg != vmNull) {
-        if (CHANSVmSetFloat(vm, vmOutObj, sin(arg->value.float_v)) == CHANS_VM_OK) {
+        if (CHANSVmSetFloat(VmInst, VmReturnObj, sin(arg->value.float_v)) == CHANS_VM_OK) {
             result = vmTrue;
         }
     }
     return result;
 }
 VmMethodDefine(Math, sqrt) {
-    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(vm, 0);
+    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
     if (arg != vmNull) {
         vmFloat val = arg->value.float_v;
         vmFloat newVal;
@@ -786,7 +786,7 @@ VmMethodDefine(Math, sqrt) {
         else {
             newVal = sqrt(val);
         }
-        return CHANSVmSetFloat(vm, vmOutObj, newVal) == CHANS_VM_OK;
+        return CHANSVmSetFloat(VmInst, VmReturnObj, newVal) == CHANS_VM_OK;
     }
     else {
         return vmFalse;
@@ -802,20 +802,20 @@ vmString VmGetStrFromObjHdr(CHANSVmObjHdr* object) {
     return vmNull;
 }
 VmMethodDefine(Math, tan) {
-    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(vm, 0);
+    CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
     vmBool result = vmFalse;
     if (arg != vmNull) {
-        if (CHANSVmSetFloat(vm, vmOutObj, tan(arg->value.float_v)) == CHANS_VM_OK) {
+        if (CHANSVmSetFloat(VmInst, VmReturnObj, tan(arg->value.float_v)) == CHANS_VM_OK) {
             result = vmTrue;
         }
     }
     return result;
 }
 
-vmInteger32 VmGetIntFromObjHdr(CHANSVmObjHdr* object) {
+int VmGetIntFromObjHdr(CHANSVmObjHdr* object) {
     if (object != vmNull) {
-        if (object->value.int32) {
-            return object->value.int32->v;
+        if (object->value.int32_v) {
+            return object->value.int32_v->val;
         }
     }
     return 0;
@@ -827,22 +827,22 @@ void CHANSVmImageRegisterAllocator(CHANSVmImageAllocatorCallback allocCb, CHANSV
 }
 
 VmMethodDefine(Image, Width) {
-    CHANSVmImage* image = (CHANSVmImage*)*vmInObj->value.ptr_v;
-    return CHANSVmSetInteger(vm, vmOutObj, image->width) == CHANS_VM_OK;
+    CHANSVmImage* image = (CHANSVmImage*)*VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, image->width) == CHANS_VM_OK;
 }
 VmMethodDefine(Image, Height) {
-    CHANSVmImage* image = (CHANSVmImage*)*vmInObj->value.ptr_v;
-    return CHANSVmSetInteger(vm, vmOutObj, image->height) == CHANS_VM_OK;
+    CHANSVmImage* image = (CHANSVmImage*)*VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, image->height) == CHANS_VM_OK;
 }
 VmMethodDefine(Image, Format) {
-    CHANSVmImage* image = (CHANSVmImage*)*vmInObj->value.ptr_v;
-    return CHANSVmSetInteger(vm, vmOutObj, image->format) == CHANS_VM_OK;
+    CHANSVmImage* image = (CHANSVmImage*)*VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, image->format) == CHANS_VM_OK;
 }
 
 VmCtorDefine(Image) {
     vmBoolInt result = vmFalse;
 
-    CHANSVmImage* image = (CHANSVmImage*)*vmInObj->value.ptr_v;
+    CHANSVmImage* image = (CHANSVmImage*)*VmParentObj->value.ptr_v;
     if (VmImageCtorCallback != vmNull) {
         if (image->unk_0x00 != 0 && image->unk_0x04 != 0) {
             result = VmImageCtorCallback();

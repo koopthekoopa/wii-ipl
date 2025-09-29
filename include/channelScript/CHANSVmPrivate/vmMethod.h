@@ -7,9 +7,10 @@
 extern "C" {
 #endif
 
-#define     VmFunction(name)                vmBoolInt /* explicit */ name(CHANSVm* vm, CHANSVmObjHdr* vmInObj, CHANSVmObjHdr* vmOutObj)
+#define     VmFunction(name)                vmBoolInt name(CHANSVm* VmInst, CHANSVmObjHdr* VmParentObj, CHANSVmObjHdr* VmReturnObj)
 
 #define     VmMethod(cls, name)             Vm##cls##name
+
 #define     VmMethodDefine(cls, name)       VmFunction(Vm##cls##name)
 
 #define     VmCtor(cls)                     Vm##cls##Ctor

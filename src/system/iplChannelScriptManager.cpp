@@ -42,24 +42,24 @@ namespace ipl {
 
             CHANSVmInit(&smCSVm, mpChansWork, CHANS_VM_DEFAULT_WORK_SIZE);
 
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, system),       "CHANSVmSystemMenuInit error\n",    101);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, layout),       "VmLayoutInit error\n",             105);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, pane),         "VmPaneInit error\n",               109);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, material),     "VmMaterialInit error\n",           113);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, texture),      "VmTextureInit error\n",            117);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, savedata),     "VmSaveDataInit error\n",           121);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, vec3),         "VmVec3Init error\n",               125);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, mtx34),        "VmMTX34Init error\n",              129);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, gx),           "VmGXInit error\n",                 133);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, textwriter),   "VmTextWriterInit error\n",         137);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, font),         "VmFontInit error\n",               141);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, rect),         "VmRectInit error\n",               145);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, color),        "VmColorInit error\n",              149);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, color_s10),    "VmColorS10Init error\n",           153);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, size),         "VmSizeInit error\n",               157);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, anim),         "VmAnimInit error\n",               161);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, sound),        "VmSoundInit error\n",              165);
-            OSAssertMsg(INIT_CS_LIB(&smCSVm, iplimage),     "VmIplImageInit error\n",           169);
+            OSAssertMsg(cs::system::init(&smCSVm),      "CHANSVmSystemMenuInit error\n",    101);
+            OSAssertMsg(cs::layout::init(&smCSVm),      "VmLayoutInit error\n",             105);
+            OSAssertMsg(cs::pane::init(&smCSVm),        "VmPaneInit error\n",               109);
+            OSAssertMsg(cs::material::init(&smCSVm),    "VmMaterialInit error\n",           113);
+            OSAssertMsg(cs::texture::init(&smCSVm),     "VmTextureInit error\n",            117);
+            OSAssertMsg(cs::savedata::init(&smCSVm),    "VmSaveDataInit error\n",           121);
+            OSAssertMsg(cs::vec3::init(&smCSVm),        "VmVec3Init error\n",               125);
+            OSAssertMsg(cs::mtx34::init(&smCSVm),       "VmMTX34Init error\n",              129);
+            OSAssertMsg(cs::gx::init(&smCSVm),          "VmGXInit error\n",                 133);
+            OSAssertMsg(cs::textwriter::init(&smCSVm),  "VmTextWriterInit error\n",         137);
+            OSAssertMsg(cs::font::init(&smCSVm),        "VmFontInit error\n",               141);
+            OSAssertMsg(cs::rect::init(&smCSVm),        "VmRectInit error\n",               145);
+            OSAssertMsg(cs::color::init(&smCSVm),       "VmColorInit error\n",              149);
+            OSAssertMsg(cs::color_s10::init(&smCSVm),   "VmColorS10Init error\n",           153);
+            OSAssertMsg(cs::size::init(&smCSVm),        "VmSizeInit error\n",               157);
+            OSAssertMsg(cs::anim::init(&smCSVm),        "VmAnimInit error\n",               161);
+            OSAssertMsg(cs::sound::init(&smCSVm),       "VmSoundInit error\n",              165);
+            OSAssertMsg(cs::iplimage::init(&smCSVm),    "VmIplImageInit error\n",           169);
 
             BOOL retResult;
             if (CHANSVmGetFreeExeSize(&smCSVm) == 0) {

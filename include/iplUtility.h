@@ -6,6 +6,7 @@
 #include "utility/iplTimer.h"
 
 #include "utility/iplCapture.h"
+#include "utility/iplCharacterCode.h"
 #include "utility/iplCalendar.h"
 #include "utility/iplCSFlags.h"
 #include "utility/iplESMisc.h"

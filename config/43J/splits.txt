@@ -1222,25 +1222,22 @@ src/channelScript/systemmenu/iplCSRect.cpp:
 	.sdata      start:0x816C7040 end:0x816C7048
 
 src/channelScript/systemmenu/iplCSColor.cpp:
-	.text       start:0x8145DC68 end:0x8145E2BC
-	.rodata     start:0x81640948 end:0x81640978
-	.sdata      start:0x816C7048 end:0x816C7058
-
-src/channelScript/systemmenu/iplCSColorS10.cpp:
-	.text       start:0x8145E2BC end:0x8145E888
-	.rodata     start:0x81640978 end:0x816409A8
+	.text       start:0x8145DC68 end:0x8145E888
+	.rodata     start:0x81640948 end:0x816409A8
 	.data       start:0x8169B1C8 end:0x8169B1D8
+	.sdata      start:0x816C7048 end:0x816C7058
 
 src/channelScript/systemmenu/iplCSSize.cpp:
 	.text       start:0x8145E888 end:0x8145EBF8
 	.rodata     start:0x816409A8 end:0x816409C0
+	.sdata2     start:0x816C46F8 end:0x816C4700
 	.sdata      start:0x816C7058 end:0x816C7070
 
 src/channelScript/systemmenu/iplCSAnim.cpp:
 	.text       start:0x8145EBF8 end:0x8145F494
 	.rodata     start:0x816409C0 end:0x81640A68
 	.data       start:0x8169B1D8 end:0x8169B288
-	.sdata2     start:0x816C46F8 end:0x816C4708
+	.sdata2     start:0x816C4708 end:0x816C4708
 	.sdata      start:0x816C7070 end:0x816C7098
 
 src/channelScript/systemmenu/iplCSSound.cpp:

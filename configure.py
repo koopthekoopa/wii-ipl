@@ -889,19 +889,18 @@ config.libs = [
             Object(NonMatching, "channelScript/systemmenu/iplCSMaterial.cpp"),
             Object(NonMatching, "channelScript/systemmenu/iplCSTexture.cpp"),
             Object(NonMatching, "channelScript/systemmenu/iplCSSavedata.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSVector.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSGX.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSUtil.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSMtx.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSVector.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSGX.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSUtil.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSMtx.cpp"),
             Object(NonMatching, "channelScript/systemmenu/iplCSTextWriter.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSFont.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSRect.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSColor.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSColorS10.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSSize.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSFont.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSRect.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSColor.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSSize.cpp"),
             Object(NonMatching, "channelScript/systemmenu/iplCSAnim.cpp"),
             Object(NonMatching, "channelScript/systemmenu/iplCSSound.cpp"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSImage.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSImage.cpp"),
         ]
     ),
     # ATOKDictionary (for 4.3J only)
@@ -917,7 +916,7 @@ config.libs = [
         ]
     ),
     # eZiText (for 4.3U and 4.3E only)
-    EZTXLib("zi8rvl", [
+    EZTXLib("eztx", [
             Object(Matching,    "rvl/eztx.c"),
         ]
     ),

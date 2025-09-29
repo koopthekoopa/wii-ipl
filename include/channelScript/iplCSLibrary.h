@@ -2,47 +2,57 @@
 #define IPL_CS_LIBRARY_H
 
 #include "channelScript/CHANSVm.h"
+#include "channelScript/iplCSUtil.h"
 
-#define DEFINE_LIB(l)               namespace l { BOOL init(CHANSVm* vm); }
+#include <nw4r/ut/Color.h>
+#include <revolution/gx/GXStruct.h>
 
-#define INIT_CS_LIB(vm, l)          cs::l::init(vm)
+// messy but so as CHANS
+
+#define EXTERN_IPL_LIB(l)               namespace l { BOOL init(CHANSVm* vm); }
+
+#define EXTERN_IPL_LIB_CTOR(l)          namespace l { BOOL _ctor(CHANSVm* VmInst, CHANSVmObjHdr* VmObj); }
+#define EXTERN_IPL_LIB_CTOR_ARG(l, ...) namespace l { BOOL _ctor(CHANSVm* VmInst, CHANSVmObjHdr* VmObj, __VA_ARGS__); }
+
+#define CS_IPL_CTOR(vm, obj, ...)       _ctor(vm, obj, __VA_ARGS__)
+
+#define DEFINE_CS_IPL_CTOR()            BOOL _ctor(CHANSVm* VmInst, CHANSVmObjHdr* VmObj)
+#define DEFINE_CS_IPL_CTOR_ARG(...)     BOOL _ctor(CHANSVm* VmInst, CHANSVmObjHdr* VmObj, __VA_ARGS__)
 
 namespace ipl {
     namespace cs {
         // Sytsem Menu
-        DEFINE_LIB(system)
+        EXTERN_IPL_LIB(system)
         // Layout
-        DEFINE_LIB(layout)
-        DEFINE_LIB(pane)
-        DEFINE_LIB(material)
-        DEFINE_LIB(texture)
+        EXTERN_IPL_LIB(layout)
+        EXTERN_IPL_LIB(pane)        EXTERN_IPL_LIB_CTOR_ARG(pane, u32 pane)
+        EXTERN_IPL_LIB(material)    EXTERN_IPL_LIB_CTOR_ARG(material, u32 material)
+        EXTERN_IPL_LIB(texture)
         // Save data
-        DEFINE_LIB(savedata)
+        EXTERN_IPL_LIB(savedata)
         // Math stuff
-        DEFINE_LIB(vec3)
-        DEFINE_LIB(mtx34)
+        EXTERN_IPL_LIB(vec3)        EXTERN_IPL_LIB_CTOR_ARG(material, f32 x, f32 y, f32 z)
+        EXTERN_IPL_LIB(mtx34)
         // Graphics
-        DEFINE_LIB(gx)
+        EXTERN_IPL_LIB(gx)
         // Text
-        DEFINE_LIB(textwriter)
-        DEFINE_LIB(font)
+        EXTERN_IPL_LIB(textwriter)
+        EXTERN_IPL_LIB(font)        EXTERN_IPL_LIB_CTOR_ARG(font, u32 font)
         // Rectangle
-        DEFINE_LIB(rect)
-        DEFINE_LIB(size)
+        EXTERN_IPL_LIB(rect)        EXTERN_IPL_LIB_CTOR    (rect)
+        EXTERN_IPL_LIB(size)        EXTERN_IPL_LIB_CTOR_ARG(size, f32 width, f32 height)
         // Color
-        DEFINE_LIB(color)
-        DEFINE_LIB(color_s10)
+        EXTERN_IPL_LIB(color)       EXTERN_IPL_LIB_CTOR_ARG(color, nw4r::ut::Color color)
+        EXTERN_IPL_LIB(color_s10)   EXTERN_IPL_LIB_CTOR_ARG(color_s10, GXColorS10 color)
         // Animation
-        DEFINE_LIB(anim)
+        EXTERN_IPL_LIB(anim)        EXTERN_IPL_LIB_CTOR_ARG(anim, u32 anim)
         // Sound
-        DEFINE_LIB(sound)
+        EXTERN_IPL_LIB(sound)
         // Allocator
-        DEFINE_LIB(iplimage)
+        EXTERN_IPL_LIB(iplimage)
     }
 }
 
-#undef DEFINE_LIB
+#undef EXTERN_IPL_LIB
 
 #endif // IPL_CS_LIBRARY_H
-
-

@@ -430,7 +430,7 @@ namespace ipl {
             /** @return The Channel Manager object. */
             static channel::Manager*                getChannelManager()         { return smArg.mpChannelManager; }
             /** @return The ChannelScript Manager object. */
-            static channel::ChannelScriptManager*   getChannelScriptManager()   { return smArg.mpChannelScriptManager; }
+            static channel::ChannelScriptManager*   getCSManager()              { return smArg.mpChannelScriptManager; }
 
             /*==============================*/
             /*     WIICONNECT24 & MAIL      */

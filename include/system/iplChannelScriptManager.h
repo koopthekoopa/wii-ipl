@@ -17,14 +17,14 @@ namespace ipl {
         class ChannelScriptManager {
             public:
                 class CSData {
-                    private:
+                    public:
                         undefined4  unk_0x00;
                         undefined4  unk_0x04;
                         undefined4  unk_0x08;
                         undefined4  unk_0x0C;
                         undefined4  unk_0x10;
-                        undefined4  unk_0x14;
-                        undefined   unk_0x18;
+                        u32         nwc24AppId; // 0x14
+                        bool        unk_0x18;
                         undefined   unk_0x19;
                         undefined   unk_0x1A;
                         undefined   unk_0x1B;
@@ -44,6 +44,9 @@ namespace ipl {
                 void        setData(const CSData& data);
 
                 static void calcCSThread();
+
+                CSData&     getData()   { return mCSData; }
+                EGG::Heap*  getHeap()   { return mpHeap; }
             
             private:
                 enum {
@@ -70,5 +73,3 @@ namespace ipl {
 }
 
 #endif // IPL_CHANNEL_SCRIPT_MANAGER_H
-
-

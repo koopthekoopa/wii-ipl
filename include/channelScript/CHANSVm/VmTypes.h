@@ -29,7 +29,6 @@ typedef BOOL            vmBoolInt;
 
 typedef void*           vmPtr;
 
-typedef long int        vmInteger32;
 typedef long long int   vmInteger;
 typedef double          vmFloat;
 typedef size_t          vmSize;
@@ -53,18 +52,22 @@ typedef enum CHANSVmObjType {
     CHANS_VM_OBJ_TYPE_STRING,
     CHANS_VM_TYPE_UNK4,
     CHANS_VM_TYPE_UNK5,
+    CHANS_VM_TYPE_UNK6,
+    CHANS_VM_TYPE_UNK7,
+    CHANS_VM_TYPE_POINTER,
+    CHANS_VM_TYPE_MAX,
 } CHANSVmObjType;
 
 typedef struct CHANSVmObjHdr CHANSVmObjHdr;
 typedef struct CHANSVmNativeClass CHANSVmNativeClass;
-
+#include <revolution/gx/GXStruct.h>
 struct CHANSVmObjHdr {
     union {
         vmInteger       int_v;
         struct {
-            vmU32       unk_0x00; // ?
-            vmInteger32 v;
-        }* int32;
+            vmU8    unk_0x00; // ?
+            vmS32   val;
+        }* int32_v;
         vmFloat         float_v;
         struct {
             vmWString  str;
@@ -74,8 +77,9 @@ struct CHANSVmObjHdr {
             vmString    str;
             vmSize      len;
         }* string_v;
+        vmPtr*          array_v;
+        vmFloat**       float_array_v;
         vmPtr*          ptr_v;
-        CHANSVmObjHdr*  obj_ptr;
     } value;        // 0x00
 
     union {
@@ -108,10 +112,10 @@ typedef struct CHANSVmImage {
 
 /* CLASSES & METHODS */
 
-typedef vmBoolInt (*CHANSVmFunction)(CHANSVm* vm, CHANSVmObjHdr* objectIn, CHANSVmObjHdr* objectOut);
+typedef vmBoolInt (*CHANSVmFunction)(CHANSVm* vm, CHANSVmObjHdr* vmObjIn, CHANSVmObjHdr* vmObjOut);
 
 typedef struct CHANSVmMethodList {
-    char*           name;   // 0x00
+    const char*     name;   // 0x00
     CHANSVmFunction method; // 0x04
 } CHANSVmMethodList;
 
@@ -120,9 +124,9 @@ typedef struct CHANSVmNativeMethod {
 } CHANSVmNativeMethod;
 
 typedef struct CHANSVmPropertyList {
-    char*           name;       // 0x00
-    CHANSVmFunction unk_0x04;
-    CHANSVmFunction unk_0x08;
+    const char*     name;       // 0x00
+    CHANSVmFunction get;
+    CHANSVmFunction set;
 } CHANSVmPropertyList;
 
 typedef struct CHANSVmNativeProperty {
