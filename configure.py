@@ -1602,7 +1602,7 @@ config.libs = [
         ]
     ),
     RVLSDKLib("rso", [
-            Object(NonMatching, "rso/RSOLink.c"),
+            Object(Matching,    "rso/RSOLink.c"),
         ]
     ),
     RVLSDKLib("es", [

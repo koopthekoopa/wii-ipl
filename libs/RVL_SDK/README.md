@@ -44,7 +44,7 @@ List of libraries that are linked (in alphabetical order):
 | **NUP**      | Wii NUS Library; **N**intendo **UP**dater?                  | ❌ |
 | **OS**       | Main Operating System library                               | ✔️ |
 | **PAD**      | GameCube Controller Library                                 | ✔️ |
-| **RSO**      | Relocated Static Object Library                             | ❌ |
+| **RSO**      | Relocated Static Object Library                             | ✔️ |
 | **SC**       | System Configuration Library                                | ✔️ |
 | **SCUTIL**   | Small Utilities Library for System Configuration            | ✔️ |
 | **SDI**      | SD Card Driver API                                          | ❌ |
