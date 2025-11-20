@@ -228,19 +228,19 @@ namespace nw4r {
                         scale.y *= drawInfo.GetLocationAdjustScale().y;
                     }
 
-                    PSMTXScale(mtx2, scale.x, scale.y, 1.0f);
+                    MTXScale(mtx2, scale.x, scale.y, 1.0f);
                 }
 
-                PSMTXRotRad(rotateMtx, 'x', MTXDegToRad(mRotate.x));
-                PSMTXConcat(rotateMtx, mtx2, mtx1);
+                MTXRotRad(rotateMtx, 'x', MTXDegToRad(mRotate.x));
+                MTXConcat(rotateMtx, mtx2, mtx1);
 
-                PSMTXRotRad(rotateMtx, 'y', MTXDegToRad(mRotate.y));
-                PSMTXConcat(rotateMtx, mtx1, mtx2);
+                MTXRotRad(rotateMtx, 'y', MTXDegToRad(mRotate.y));
+                MTXConcat(rotateMtx, mtx1, mtx2);
 
-                PSMTXRotRad(rotateMtx, 'z', MTXDegToRad(mRotate.z));
-                PSMTXConcat(rotateMtx, mtx2, mtx1);
+                MTXRotRad(rotateMtx, 'z', MTXDegToRad(mRotate.z));
+                MTXConcat(rotateMtx, mtx2, mtx1);
 
-                PSMTXTransApply(mtx1, mMtx, mTranslate.x, mTranslate.y, mTranslate.z);
+                MTXTransApply(mtx1, mMtx, mTranslate.x, mTranslate.y, mTranslate.z);
             }
 
             if (mpParent != NULL) {

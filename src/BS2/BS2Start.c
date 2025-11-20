@@ -95,7 +95,8 @@ bi2_end_arg_parse:
 asm void __init_registers() {
 #ifdef __MWERKS__
     nofralloc
-    
+
+    // da regisers
     li  r0, 0
     li  r3, 0
     li  r4, 0

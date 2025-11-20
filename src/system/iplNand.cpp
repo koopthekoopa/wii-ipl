@@ -374,7 +374,7 @@ namespace ipl {
             strncat(fullName, "/common/", (NAND_MAX_PATH+1) - strlen(fullName));
             strncat(fullName, fileName, (NAND_MAX_PATH+1) - strlen(fullName));
 
-            mpCommonFile = new(heap, CLASS_HEAP) File(heap, fullName, arc, NULL, 0, 0, bIsNandFile);
+            mpCommonFile = new(heap, 4) File(heap, fullName, arc, NULL, 0, 0, bIsNandFile);
 
             char* langPath = utility::Language::getPath();
 
@@ -385,7 +385,7 @@ namespace ipl {
             strncat(fullName, "/", (NAND_MAX_PATH+1) - strlen(fullName));
             strncat(fullName, fileName, (NAND_MAX_PATH+1) - strlen(fullName));
 
-            mpLangFile = new(heap, CLASS_HEAP) File(heap, fullName, arc, NULL, 0, 0, bIsNandFile);
+            mpLangFile = new(heap, 4) File(heap, fullName, arc, NULL, 0, 0, bIsNandFile);
         }
 
         LangFile::~LangFile() {

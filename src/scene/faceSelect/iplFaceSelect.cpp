@@ -337,8 +337,8 @@ namespace ipl {
                 nw4r::math::VEC3 vec0(paneRect.left, paneRect.top, 0.0f);
                 nw4r::math::VEC3 vec1(paneRect.right, paneRect.bottom, 0.0f);
 
-                PSMTXMultVec(paneGlbMtx, vec0, vec0);
-                PSMTXMultVec(paneGlbMtx, vec1, vec1);
+                MTXMultVec(paneGlbMtx, vec0, vec0);
+                MTXMultVec(paneGlbMtx, vec1, vec1);
 
                 mpLayout->FindPaneByName("Mask_00")->SetVisible(true);
                 mpLayout->draw("Mask_00");
@@ -556,7 +556,7 @@ namespace ipl {
                             // Calculate balloon position
                             nw4r::lyt::Pane* paneObj = mpLayout->FindPaneByName(paneName);
                             math::VEC3 balloonPos(0.0f, 0.0f, 0.0f);
-                            PSMTXMultVec(paneObj->GetGlobalMtx(), balloonPos, balloonPos);
+                            MTXMultVec(paneObj->GetGlobalMtx(), balloonPos, balloonPos);
                             
                             // UUGHHH
                             f32 y = 50.0f;

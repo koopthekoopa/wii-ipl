@@ -73,11 +73,11 @@ void            MEMVisitAllocatedForExpHeap(MEMHeapHandle heap, void (*visitor)(
 
 u32             MEMAdjustExpHeap(MEMHeapHandle heap);
 
-static MEMHeapHandle MEMCreateExpHeap(void* start, u32 size) {
+inline MEMHeapHandle MEMCreateExpHeap(void* start, u32 size) {
     return MEMCreateExpHeapEx(start, size, 0);
 }
 
-static void* MEMAllocFromExpHeap(MEMHeapHandle heap, u32 size) {
+inline void* MEMAllocFromExpHeap(MEMHeapHandle heap, u32 size) {
     return MEMAllocFromExpHeapEx(heap, size, 4);
 }
 

@@ -40,7 +40,7 @@ namespace ipl {
 
             f32 temp_f9 =  projRect.right / scale.x;
             f32 temp_f7 = projRect.left / scale.x;
-            C_MTXOrtho(mArg.mProjMtx,
+            MTXOrtho(mArg.mProjMtx,
                 translate.y - (projRect.top / scale.y),
                 translate.y - (projRect.bottom / scale.y),
                 translate.x + temp_f7,
@@ -52,7 +52,7 @@ namespace ipl {
 
         void Graphics::setOrthoProjection(u32 id) {
             GXRenderModeObj* rMode = System::getRenderModeObj();
-            C_MTXOrtho(mArg.mProjMtx,
+            MTXOrtho(mArg.mProjMtx,
                  rMode->efbHeight / 2, -rMode->efbHeight / 2,
                 -rMode->fbWidth   / 2,  rMode->fbWidth   / 2,
                 -100.0f, 100.0f);
@@ -67,7 +67,7 @@ namespace ipl {
         }
 
         void Graphics::setCamera(u32 id) {
-            GXLoadPosMtxImm(mArg.mViewMtx,id);
+            GXLoadPosMtxImm(mArg.mViewMtx, id);
             GXSetCurrentMtx(id);
         }
 
@@ -128,7 +128,7 @@ namespace ipl {
             u8 rightTop_x,    rightTop_y;
 
             switch (ori) {
-                case ORIENTATION_0: {
+                case ORI_NONE: {
                     leftTop_x = 0;
                     leftTop_y = 0;
                     leftBottom_x = 0;
@@ -139,7 +139,7 @@ namespace ipl {
                     rightTop_y = 0;
                     break;
                 }
-                case ORIENTATION_1: {
+                case ORI_90_CLOCKWISE: {
                     leftTop_x = 0;
                     rightBottom_y = 0;
                     rightTop_x = 0;
@@ -150,7 +150,7 @@ namespace ipl {
                     rightBottom_x = texCoord;
                     break;
                 }
-                case ORIENTATION_2: {
+                case ORI_90_ANTICLOCKWISE: {
                     leftTop_x = texCoord;
                     leftTop_y = 0;
                     leftBottom_x = 0;

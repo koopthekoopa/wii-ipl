@@ -50,7 +50,7 @@ namespace ipl {
         mpSpeakerSoundFile = System::getHBMSpeakSoundFile();
         mpBanIconFile = System::getHBMBanIconFile();
 
-        mpHbmInfo = new(heap, CLASS_HEAP) HBMDataInfo();
+        mpHbmInfo = new(heap, 4) HBMDataInfo();
 
         mpHbmInfo->backFlag = 0;
         mpHbmInfo->region = SCGetLanguage();
@@ -92,7 +92,7 @@ namespace ipl {
         GXColor color = (GXColor){ 255, 255, 255, alpha };
         nw4r::ut::Rect rect(-256.0f, 188.0f, -200.0f, 132.0f);
 
-        utility::Graphics::drawTexture(rect, texObj, color, GX_TEXCOORD1, utility::Graphics::ORIENTATION_0);
+        utility::Graphics::drawTexture(rect, texObj, color, GX_TEXCOORD1);
     }
 
     void HomeButtonMenu::callHBM() {

@@ -43,8 +43,10 @@ namespace ipl {
         }
 
         void ParentalDialog::create() {
+            // Init layout
             mpLayout = new layout::Object(getHeap(), mpLayoutFile, "arc", "my_ParentalWindow_a.brlyt");
 
+            // Bind animations
             mpLayout->bindToGroup("my_ParentalWindow_a_DialogIn.brlan",     "G_InOut", false);
             mpLayout->bindToGroup("my_ParentalWindow_a_DialogOut.brlan",    "G_InOut", false, false);
             mpLayout->bindToGroup("my_ParentalWindow_a_FocusBtn_on.brlan",  "G_FocusBtnA", false, false);
@@ -61,6 +63,7 @@ namespace ipl {
             mpLayout->bindToGroup("my_ParentalWindow_a_OnBtn.brlan",        "G_OnOffBtnB", false, false);
             mpLayout->finishBinding();
 
+            // Setup interface
             mpEvent = new ParentalDialogEvent(this);
             mpGui = new gui::PaneManager(mpEvent, mpLayout->getDrawInfo(), NULL, NULL);
             mpGui->createLayoutScene(*mpLayout->getLayout());
@@ -69,12 +72,16 @@ namespace ipl {
                 mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[i]), true);
             }
 
+            // Set button text
             set_textbox("T_BtnA", MESG_CMN_QUIT);
             set_textbox("T_BtnB", MESG_CMN_OK);
             set_textbox("T_Dialog", MESG_PARENTAL_DLG_TITLE);
             set_textbox("T_Before", MESG_PARENTAL_DLG_PIN);
 
+            // Fade in
             mpLayout->getAnim(ANIM_DIALOG_IN)->play();
+
+            // Enable buttons
             mpLayout->getAnim(ANIM_CHANGE_INPUT_BUTTON)->initAnmFrame();
             mpLayout->getAnim(ANIM_DECIDE_BUTTON_ENABLE)->initAnmFrame();
         }
@@ -144,6 +151,7 @@ namespace ipl {
             switch (state->iplType) {
                 case keyboard::Manager::STATE_DISAPPEARING: {
                     if (state->pressOK) {
+                        // We got the pin!
                         memset(&mMyPin, 0, sizeof(mMyPin));
                         wcsncpy(mMyPin, state->wcString, SC_PARENTAL_PIN_LENGTH);
 
@@ -182,11 +190,13 @@ namespace ipl {
             switch (System::getDialog()->getLastResult()) {
                 case DialogWindow::RESULT_BUTTON: {
                     if (mAttempts < ATTEMPTS_MAX) {
+                        // Try again!
                         mpLayout->getAnim(ANIM_CHANGE_INPUT_BUTTON)->setAnimType(ANIM_TYPE_BACKWARD);
                         mpLayout->getAnim(ANIM_CHANGE_INPUT_BUTTON)->play();
                         mState = STATE_NORMAL;
                     }
                     else {
+                        // Exit out if too many attempts
                         mResult = RESULT_OVER_ATTEMPTS;
                         mState = STATE_DONE;
                     }
@@ -280,11 +290,13 @@ namespace ipl {
                             snd::getSystem()->startSE("WIPL_SE_DECIDE");
 
                             if (check()) {
+                                // Correct!!
                                 System::getDialog()->callBtn0(mbLaunchTitle == FALSE ? MESG_PARENTAL_DLG_SUCCESS : MESG_PARENTAL_DLG_SUCCESS_ALT, 180);
                                 mResult = RESULT_SUCCESS;
                                 mState = STATE_WAIT_MSG;
                             }
                             else {
+                                // Incorrect!!
                                 mAttempts++;
                                 System::getDialog()->callBtn1(MESG_PARENTAL_DLG_BAD_PIN, MESG_CMN_OK);
                                 mpLayout->getAnim(ANIM_DECIDE_BUTTON_DISABLE)->play();
@@ -312,7 +324,7 @@ namespace ipl {
 
                         System::getKeyboardManager()->start(chan, setting);
                         System::getKeyboardManager()->memoMgr()->setSecretInputMode(true);
-                        System::getKeyboardManager()->memoMgr()->setTitleText(System::getMessage(345));
+                        System::getKeyboardManager()->memoMgr()->setTitleText(System::getMessage(MESG_PARENTAL_DLG_NO_PIN));
 
                         mState = STATE_WAIT_INPUT;
                         

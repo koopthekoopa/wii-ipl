@@ -7,7 +7,7 @@
 namespace ipl {
     namespace message {
         Manager::Manager(EGG::Heap* heap) {
-            mpMessage = new(heap, CLASS_HEAP) Message();
+            mpMessage = new(heap, 4) Message();
             initMessage();
         }
 
@@ -45,9 +45,6 @@ namespace ipl {
                     mpMessage->setResource(System::getChnMsg()->getBuffer());
                     break;
                 }
-                
-                // Traditional chinese is unused?
-                
                 case SC_LANG_KOREAN: {
                     mpMessage->setResource(System::getKorMsg()->getBuffer());
                     break;
@@ -60,5 +57,3 @@ namespace ipl {
         }
     }
 }
-
-

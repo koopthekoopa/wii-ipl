@@ -6,8 +6,8 @@ namespace ipl {
     namespace scene {
         Base::Base(EGG::Heap* heap) :
         mpHeap(heap),
-        mFlags(0), 
-        unk_0x2C(0), 
+        mParentFlags(0), 
+        mScnState(0), 
         mSceneID(0), 
         mPrevSceneID(0),
         mCommand() {}
@@ -21,17 +21,17 @@ namespace ipl {
 
         void Base::do_create() {
             create();
-            unk_0x2C |= 1;
+            mScnState |= SCN_STATE_CREATED;
         }
 
         void Base::do_calc() {
-            if ((getChild() == NULL || (mFlags & 1)) && !(unk_0x2C & 2)) {
+            if ((getChild() == NULL || (mParentFlags & SCN_PARENT_FLAG_CANCALC)) && !(mScnState & SCN_STATE_DESTROY_REQ)) {
                 calc();
             }
         }
 
         void Base::do_draw() {
-            if ((getChild() == NULL || (mFlags & 2)) && !(unk_0x2C & 2)) {
+            if ((getChild() == NULL || (mParentFlags & SCN_PARENT_FLAG_CANDRAW)) && !(mScnState & SCN_STATE_DESTROY_REQ)) {
                 draw();
             }
         }

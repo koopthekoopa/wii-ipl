@@ -16,7 +16,7 @@ Sections:
 src/system/enc_dummy.c:
 	.sbss       start:0x816C7D40 end:0x816C7D80
 
-src/BS2/BootStart.c:
+src/BS2/BS2Start.c:
 	.init       start:0x81330000 end:0x813301D8
 
 src/system/rvl_dec.c:

@@ -22,66 +22,66 @@ namespace ipl {
         };
 
         static const Calendar::DayToMsgId scJapanDayToMessageID[] = {
-            { "TextBox_00", 116 },
-            { "TextBox_01", 110 },
-            { "TextBox_02", 111 },
-            { "TextBox_03", 112 },
-            { "TextBox_04", 113 },
-            { "TextBox_05", 114 },
-            { "TextBox_06", 115 },
-            { "TextBox_08", 116 },
-            { "TextBox_09", 110 },
-            { "TextBox_10", 111 },
-            { "TextBox_11", 112 },
-            { "TextBox_12", 113 },
-            { "TextBox_13", 114 },
-            { "TextBox_07", 115 },
-            { "TextBox_16", 116 },
-            { "TextBox_17", 110 },
-            { "TextBox_18", 111 },
-            { "TextBox_19", 112 },
-            { "TextBox_20", 113 },
-            { "TextBox_14", 114 },
-            { "TextBox_15", 115 },
+            { "TextBox_00", MESG_CALENDAR_SUNDAY },
+            { "TextBox_01", MESG_CALENDAR_MONDAY },
+            { "TextBox_02", MESG_CALENDAR_TUESDAY },
+            { "TextBox_03", MESG_CALENDAR_WEDNESDAY },
+            { "TextBox_04", MESG_CALENDAR_THURSDAY },
+            { "TextBox_05", MESG_CALENDAR_THURSDAY },
+            { "TextBox_06", MESG_CALENDAR_SATURDAY },
+            { "TextBox_08", MESG_CALENDAR_SUNDAY },
+            { "TextBox_09", MESG_CALENDAR_MONDAY },
+            { "TextBox_10", MESG_CALENDAR_TUESDAY },
+            { "TextBox_11", MESG_CALENDAR_WEDNESDAY },
+            { "TextBox_12", MESG_CALENDAR_THURSDAY },
+            { "TextBox_13", MESG_CALENDAR_THURSDAY },
+            { "TextBox_07", MESG_CALENDAR_SATURDAY },
+            { "TextBox_16", MESG_CALENDAR_SUNDAY },
+            { "TextBox_17", MESG_CALENDAR_MONDAY },
+            { "TextBox_18", MESG_CALENDAR_TUESDAY },
+            { "TextBox_19", MESG_CALENDAR_WEDNESDAY },
+            { "TextBox_20", MESG_CALENDAR_THURSDAY },
+            { "TextBox_14", MESG_CALENDAR_THURSDAY },
+            { "TextBox_15", MESG_CALENDAR_SATURDAY },
         };
 
         static const Calendar::DayToMsgId scWorldDayToMessageID[] = {
-            { "TextBox_00", 110 },
-            { "TextBox_01", 111 },
-            { "TextBox_02", 112 },
-            { "TextBox_03", 113 },
-            { "TextBox_04", 114 },
-            { "TextBox_05", 115 },
-            { "TextBox_06", 116 },
-            { "TextBox_08", 110 },
-            { "TextBox_09", 111 },
-            { "TextBox_10", 112 },
-            { "TextBox_11", 113 },
-            { "TextBox_12", 114 },
-            { "TextBox_13", 115 },
-            { "TextBox_07", 116 },
-            { "TextBox_16", 110 },
-            { "TextBox_17", 111 },
-            { "TextBox_18", 112 },
-            { "TextBox_19", 113 },
-            { "TextBox_20", 114 },
-            { "TextBox_14", 115 },
-            { "TextBox_15", 116 },
+            { "TextBox_00", MESG_CALENDAR_MONDAY },
+            { "TextBox_01", MESG_CALENDAR_TUESDAY },
+            { "TextBox_02", MESG_CALENDAR_WEDNESDAY },
+            { "TextBox_03", MESG_CALENDAR_THURSDAY },
+            { "TextBox_04", MESG_CALENDAR_THURSDAY },
+            { "TextBox_05", MESG_CALENDAR_SATURDAY },
+            { "TextBox_06", MESG_CALENDAR_SUNDAY },
+            { "TextBox_08", MESG_CALENDAR_MONDAY },
+            { "TextBox_09", MESG_CALENDAR_TUESDAY },
+            { "TextBox_10", MESG_CALENDAR_WEDNESDAY },
+            { "TextBox_11", MESG_CALENDAR_THURSDAY },
+            { "TextBox_12", MESG_CALENDAR_THURSDAY },
+            { "TextBox_13", MESG_CALENDAR_SATURDAY },
+            { "TextBox_07", MESG_CALENDAR_SUNDAY },
+            { "TextBox_16", MESG_CALENDAR_MONDAY },
+            { "TextBox_17", MESG_CALENDAR_TUESDAY },
+            { "TextBox_18", MESG_CALENDAR_WEDNESDAY },
+            { "TextBox_19", MESG_CALENDAR_THURSDAY },
+            { "TextBox_20", MESG_CALENDAR_THURSDAY },
+            { "TextBox_14", MESG_CALENDAR_SATURDAY },
+            { "TextBox_15", MESG_CALENDAR_SUNDAY },
         };
 
         static const u32 scMonthToMessageID[] = {
-            118,
-            119,
-            120,
-            121,
-            122,
-            123,
-            124,
-            125,
-            126,
-            127,
-            128,
-            129,
+            MESG_CALENDAR_JAN,
+            MESG_CALENDAR_FEB,
+            MESG_CALENDAR_MAR,
+            MESG_CALENDAR_APR,
+            MESG_CALENDAR_MAY,
+            MESG_CALENDAR_JUN,
+            MESG_CALENDAR_JUL,
+            MESG_CALENDAR_AUG,
+            MESG_CALENDAR_SEP,
+            MESG_CALENDAR_OCT,
+            MESG_CALENDAR_NOV,
+            MESG_CALENDAR_DEC,
         };
 
         static const char* lbl_8164C458[] = {
@@ -160,7 +160,7 @@ namespace ipl {
             set_textbox_date(1, *mpBoardDate);
             exec_search_task();
 
-            mpInitAnim->initAnmFrame(!mbAsian && !mbUSA ? 1 : 0);
+            mpInitAnim->initAnmFrame(!mbAsian && !mbUSA ? 1.0f : 0.0f);
         }
 
         void Calendar::calcCommon() {
@@ -191,7 +191,7 @@ namespace ipl {
             Button* button;
             SceneCommand result = SCENE_CONTINUE;
 
-            if (!mpLayout->isPlaying(0)) {
+            if (!mpLayout->isPlaying(IDANIM_0)) {
                 button = static_cast<Button*>(System::getScene(SCENE_BUTTON));
                 if (button != NULL) {
                     button->setEventHandler(this);
@@ -247,7 +247,7 @@ namespace ipl {
         }
 
         SceneCommand Calendar::calcFadeout() {
-            return !mpLayout->isPlaying(0) ? SCENE_NEXT : SCENE_CONTINUE;
+            return !mpLayout->isPlaying(IDANIM_0) ? SCENE_NEXT : SCENE_CONTINUE;
         }
 
         void Calendar::draw() {
@@ -313,7 +313,7 @@ namespace ipl {
 
         void Calendar::onTrigDate(Date* date) {
             if (mState == STATE_NORMAL) {
-                static_cast<Board*>(System::getScene(SCENE_BOARD))->updateDate(*date->mpDate /*getDate() won't work*/);
+                static_cast<Board*>(System::getScene(SCENE_BOARD))->updateDate(*date->mpDate /*getDate() won't match*/);
                 date->doAnim(Date::IDANIM_SELECT);
                 mpSelectDate = date;
                 snd::getSystem()->startSE("WIPL_SE_DATE_SELECT");
@@ -696,7 +696,7 @@ out:
                 local_68.y = ((i & 0xFFFF) / 7) * -0x30;
                 local_68.z = 0.0f;
 
-                PSMTXMultVec(pane2->GetGlobalMtx(), local_68, local_68);
+                MTXMultVec(pane2->GetGlobalMtx(), local_68, local_68);
 
                 dateScn->setTranslate(local_68);
                 dateScn->setRotate(pane1->GetRotate());

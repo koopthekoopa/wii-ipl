@@ -161,7 +161,7 @@ namespace ipl {
                 else {
                     stack18.setPtr(stack18->getParent());
                 }
-                if ((stack10->unk_0x2C & 2) != 0) {
+                if ((stack10->mScnState & SceneObj::SCN_STATE_DESTROY_REQ) != 0) {
                     if (mReservedCommand.prevSceneID == stack10->mSceneID) {
                         mbCreatedReserved = true;
                     }

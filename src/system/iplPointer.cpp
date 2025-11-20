@@ -52,7 +52,7 @@ namespace ipl {
     mCore() {
         mpLayoutArchive = System::getNandManager()->readLayout(heap, "cursor.ash");
         for (int i = 0; i < MAX_LAYOUT_FILES; i++) {
-            mpLayout[i] = new(heap, CLASS_HEAP) layout::Object(heap, mpLayoutArchive, "arc", scLayoutName[i]);
+            mpLayout[i] = new(heap, 4) layout::Object(heap, mpLayoutArchive, "arc", scLayoutName[i]);
             mpLayout[i]->finishBinding();
         }
     }
@@ -63,7 +63,7 @@ namespace ipl {
 
         // Update the scrolling cursor
         if (mIsScrolling >= POINT_SCROLLING) {
-            nw4r::lyt::Pane* pRootPane   = mpLayout[LYT_SCROLLER_ID]->FindPaneByName("N_BArw");
+            nw4r::lyt::Pane* pRootPane = mpLayout[LYT_SCROLLER_ID]->FindPaneByName("N_BArw");
             nw4r::lyt::Pane* pLengthPane = mpLayout[LYT_SCROLLER_ID]->FindPaneByName("W_BArw");
             nw4r::lyt::Pane* pOriginPane = mpLayout[LYT_SCROLLER_ID]->FindPaneByName("BArwBase");
 

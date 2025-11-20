@@ -145,7 +145,7 @@ namespace nw4r {
         } VEC4;
 
         inline VEC3* VEC3Transform(VEC3* pOut, const MTX34* pMtx, const VEC3* pVec) {
-            PSMTXMultVec(*pMtx, *pVec, *pOut);
+            MTXMultVec(*pMtx, *pVec, *pOut);
             return pOut;
         }
         VEC4* VEC4Transform(VEC4* pOut, const MTX44* pM, const VEC4* pV);
@@ -156,12 +156,12 @@ namespace nw4r {
         }
 
         inline MTX34* MTX34Mult(MTX34* pOut, const MTX34* p1, const MTX34* p2) {
-            PSMTXConcat(*p1, *p2, *pOut);
+            MTXConcat(*p1, *p2, *pOut);
             return pOut;
         }
 
         inline MTX34* MTX34Identity(MTX34* pOut) {
-            PSMTXIdentity(*pOut);
+            MTXIdentity(*pOut);
             return pOut;
         }
 

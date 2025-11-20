@@ -11,7 +11,7 @@ namespace ipl {
         mSettingType(type),
         mpLayout(NULL),
         mpLayoutFile(NULL) {
-            mFlags = 3;
+            mParentFlags = SCN_PARENT_FLAG_CANCALC | SCN_PARENT_FLAG_CANDRAW;
         }
 
         void SettingBg::prepare() {

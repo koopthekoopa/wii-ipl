@@ -43,7 +43,7 @@ namespace ipl {
         } VEC3;
 
         inline VEC3* VEC3Transform(VEC3* pOut, const nw4r::math::MTX34* pMtx, const VEC3* pVec) {
-            PSMTXMultVec(*pMtx, *pVec, *pOut);
+            MTXMultVec(*pMtx, *pVec, *pOut);
             return pOut;
         }
     }

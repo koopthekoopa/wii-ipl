@@ -190,7 +190,7 @@ namespace ipl {
 
         bool SettingButton::update() {
             bool result = false;
-            if (getState() == FADE_STATE_NORMAL && mbShowBtn
+            if (mScnFadeState == FADE_STATE_NORMAL && mbShowBtn
             && !mpLayout->getAnim(ANIM_ALPHA_IN)->isPlaying()) {
                 mpGui->update();
 

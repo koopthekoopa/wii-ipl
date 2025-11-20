@@ -36,7 +36,7 @@ namespace EGG {
             
             virtual void        resizeForMBlock(void* block, u32 size) = 0;         // 0x20
             
-            virtual u32         getAllocatableSize(long align) = 0;                 // 0x24
+            virtual u32         getAllocatableSize(s32 align = 4) = 0;              // 0x24
 
             virtual void        adjust() = 0;                                       // 0x28
 
@@ -45,7 +45,7 @@ namespace EGG {
             void                dump();
 
             void                _becomeCurrentHeapWithoutLock();
-            void unkUnline_becomeCurrentHeap(int id = 0) {
+            void unkUnline1(int id = 0) {
                 BOOL enabled = OSDisableInterrupts();
                 _becomeCurrentHeapWithoutLock();
                 OSSetThreadSpecific(id, this);
@@ -59,17 +59,13 @@ namespace EGG {
 
 void* operator  new(size_t size);
 void* operator  new(size_t size, int align);
-void* operator  new(size_t size, EGG::Heap *heap, int align);
+void* operator  new(size_t size, EGG::Heap *heap, int align = 4);
 
 void* operator  new[](size_t size);
 void* operator  new[](size_t size, int align);
-void* operator  new[](size_t size, EGG::Heap *heap, int align);
+void* operator  new[](size_t size, EGG::Heap *heap, int align = 4);
 
 void operator   delete(void* ptr);
 void operator   delete[](void* ptr);
-
-// errr
-#define BUFFER_HEAP DEFAULT_ALIGN
-#define CLASS_HEAP  4
 
 #endif // EGG_CORE_HEAP_H

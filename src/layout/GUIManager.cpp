@@ -25,7 +25,7 @@ void drawLine_(f32 x0, f32 y0, f32 x1, f32 y1, f32 z, u8 width, GXColor& color) 
     GXSetBlendMode(GX_BM_NONE, GX_BL_ZERO, GX_BL_ZERO, GX_LO_NOOP);
 
     Mtx mtx;
-    PSMTXTrans(mtx, 0.0f, 0.0f, 0.0f);
+    MTXTrans(mtx, 0.0f, 0.0f, 0.0f);
     GXLoadPosMtxImm(mtx, 0);
 
     GXSetLineWidth(width, GX_TO_ZERO);
@@ -213,20 +213,21 @@ namespace gui {
     }
 
     void PaneManager::walkInChildren(nw4r::lyt::PaneList& paneList) {
-        PaneComponent*   pComponent;
+        PaneComponent* pComponent;
         PaneToComponent* pToComponent;
 
         for (nw4r::lyt::PaneList::Iterator it = paneList.GetBeginIter(); it != paneList.GetEndIter(); it++) {
             // Create the component
             if (mpAllocator) {
-                void* pComBuf   = MEMAllocFromAllocator(mpAllocator, sizeof(PaneComponent));
-                void* pBuf      = MEMAllocFromAllocator(mpAllocator, sizeof(PaneToComponent));
-                pComponent      = new(pComBuf) PaneComponent(suIDCounter);
-                pToComponent    = new(pBuf) PaneToComponent(&(*it), pComponent);
+                void* pComBuf = MEMAllocFromAllocator(mpAllocator, sizeof(PaneComponent));
+                void* pBuf = MEMAllocFromAllocator(mpAllocator, sizeof(PaneToComponent));
+
+                pComponent = new(pComBuf) PaneComponent(suIDCounter);
+                pToComponent = new(pBuf) PaneToComponent(&(*it), pComponent);
             }
             else {
-                pComponent      = new PaneComponent(suIDCounter);
-                pToComponent    = new PaneToComponent(&(*it), pComponent);
+                pComponent = new PaneComponent(suIDCounter);
+                pToComponent = new PaneToComponent(&(*it), pComponent);
             }
 
             // Append it
@@ -280,12 +281,12 @@ namespace gui {
         }
 
         nw4r::math::MTX34 globalMtx;
-        PSMTXInverse(mpPane->GetGlobalMtx(), globalMtx);
+        MTXInverse(mpPane->GetGlobalMtx(), globalMtx);
 
-        nw4r::math::VEC3  pos;
-        PSMTXMultVec(globalMtx, nw4r::math::VEC3(x, y, 0), pos);
+        nw4r::math::VEC3 pos;
+        MTXMultVec(globalMtx, nw4r::math::VEC3(x, y, 0), pos);
 
-        nw4r::ut::Rect    rect = mpPane->GetPaneRect(*drawInfo);
+        nw4r::ut::Rect rect = mpPane->GetPaneRect(*drawInfo);
 
         // If position is touching pane?
         if (rect.left <= pos.x && pos.x <= rect.right
@@ -299,8 +300,8 @@ namespace gui {
 
     void PaneComponent::draw() {
         if (static_cast<PaneManager*>(mpManager)->getDrawInfo()) {
-            nw4r::lyt::Size             size = mpPane->GetSize();
-            const nw4r::math::MTX34&    mtx = mpPane->GetGlobalMtx();
+            nw4r::lyt::Size size = mpPane->GetSize();
+            const nw4r::math::MTX34& mtx = mpPane->GetGlobalMtx();
 
             f32 x = mtx.m[0][3];
             f32 y = mtx.m[1][3];

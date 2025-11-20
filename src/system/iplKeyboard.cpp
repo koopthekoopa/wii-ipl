@@ -159,9 +159,9 @@ namespace ipl {
 
         void Manager::create(nand::File* file, EGG::Heap* heap) {
             // Open arc
-            nw4r::lyt::ArcResourceLink* arcLink = new(heap, CLASS_HEAP) nw4r::lyt::ArcResourceLink();
+            nw4r::lyt::ArcResourceLink* arcLink = new(heap, 4) nw4r::lyt::ArcResourceLink();
             arcLink->Set(file->getBuffer(), "arc");
-            nw4r::lyt::MultiArcResourceAccessor* multiArc = new(heap, CLASS_HEAP) nw4r::lyt::MultiArcResourceAccessor();
+            nw4r::lyt::MultiArcResourceAccessor* multiArc = new(heap, 4) nw4r::lyt::MultiArcResourceAccessor();
             multiArc->Attach(arcLink);
 
             nw4r::lyt::FontRefLink wbf1Public;
@@ -183,7 +183,7 @@ namespace ipl {
             multiArc->RegistFont(&wbf2Private);
 
             // Allocators
-            EGG::Allocator* allocator = new(heap, CLASS_HEAP) EGG::Allocator(heap, CLASS_HEAP);
+            EGG::Allocator* allocator = new(heap, 4) EGG::Allocator(heap, 4);
             nw4r::lyt::Layout::SetAllocator(allocator);
 
             u8* systemDict = NULL;
@@ -222,7 +222,7 @@ namespace ipl {
             mSaveData = System::getSaveData()->getMemoSetting();
 
             // Memo manager
-            mpManager = new(heap, CLASS_HEAP) textinput::MemoManager(allocator, multiArc, &mEvent);
+            mpManager = new(heap, 4) textinput::MemoManager(allocator, multiArc, &mEvent);
             mpManager->setSaveData(mSaveData);
             mpManager->create(NULL);
             mEvent.setManager(this);
@@ -548,7 +548,7 @@ namespace ipl {
         }
 
 #ifdef JAPANESE_BUILD
-        const char* predictionJP[] = {
+        static const char* sPredictionJP[] = {
             "http://",
             "www.",
             ".jp",
@@ -631,7 +631,7 @@ namespace ipl {
                 }
             }
 #ifdef JAPANESE_BUILD
-            mpManager->setDefaultPredictionJP(ARRSIZE(predictionJP), predictionJP);
+            mpManager->setDefaultPredictionJP(ARRSIZE(sPredictionJP), sPredictionJP);
 #endif // JAPANESE_BUILD
         }
 

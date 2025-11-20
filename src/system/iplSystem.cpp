@@ -102,6 +102,7 @@ namespace ipl {
     }
 
     void System::createAppHeap_() {
+        // Create all the heaps!!
         smArg.mpMem2Sys = EGG::ExpHeap::create(0x1200000, getMem2Root(), MEM_HEAP_OPT_DEBUG_FILL | MEM_HEAP_OPT_THREAD_SAFE);
         smArg.mpSceneHeap = EGG::ExpHeap::create(0x696000, getMem2Root(), MEM_HEAP_OPT_DEBUG_FILL | MEM_HEAP_OPT_THREAD_SAFE);
         smArg.mpSoundHeap = EGG::ExpHeap::create(0x325800, getMem2Root(), MEM_HEAP_OPT_DEBUG_FILL);
@@ -122,7 +123,7 @@ namespace ipl {
         u32 workSize = nw4r::ut::ArchiveFont::GetRequireBufferSize(fontData);
         u8* work = new(getMem2Sys(), DEFAULT_ALIGN) u8[OSRoundUp32B(workSize)];
 
-        nw4r::ut::ArchiveFont* font = new(getMem1Sys(), CLASS_HEAP) nw4r::ut::ArchiveFont();
+        nw4r::ut::ArchiveFont* font = new(getMem1Sys(), 4) nw4r::ut::ArchiveFont();
     
         font->Construct(work, workSize, fontData);
         return font;
@@ -261,7 +262,7 @@ namespace ipl {
     }
 
     void System::loadResource_(void* work) {
-        smArg.mpMem1Sys->unkUnline_becomeCurrentHeap();
+        smArg.mpMem1Sys->unkUnline1();
 
         // Load font
         loadFont_();
@@ -322,19 +323,19 @@ namespace ipl {
 
     void System::createAfter_(void* work) {
         EGG::Heap* old = EGG::Heap::unkInline2();
-        smArg.mpMem1Sys->unkUnline_becomeCurrentHeap();
+        smArg.mpMem1Sys->unkUnline1();
 
         // Create important instances
-        smArg.mpDialog = new(getMem1Sys(), CLASS_HEAP) DialogWindow(getMem2Sys());
-        smArg.mpWarningHandler = new(getMem1Sys(), CLASS_HEAP) WarningHandler(getMem2Sys());
-        smArg.mpMiiManager = new(getMem1Sys(), CLASS_HEAP) nigaoe::Manager(getMem2Sys());
-        smArg.mpKeyboardMgr = new(getMem1Sys(), CLASS_HEAP) keyboard::Manager();
+        smArg.mpDialog = new(getMem1Sys(), 4) DialogWindow(getMem2Sys());
+        smArg.mpWarningHandler = new(getMem1Sys(), 4) WarningHandler(getMem2Sys());
+        smArg.mpMiiManager = new(getMem1Sys(), 4) nigaoe::Manager(getMem2Sys());
+        smArg.mpKeyboardMgr = new(getMem1Sys(), 4) keyboard::Manager();
         smArg.mpKeyboardMgr->create(smArg.mResources.file[Arg::SOFT_KEYBOARD], getMem2Sys());
         smArg.mpKeyboardMgr->init();
-        smArg.mpHomeButton = new(getMem1Sys(), CLASS_HEAP) HomeButtonMenu(getMem2Sys());
+        smArg.mpHomeButton = new(getMem1Sys(), 4) HomeButtonMenu(getMem2Sys());
 
         if (old != NULL) {
-            old->unkUnline_becomeCurrentHeap();
+            old->unkUnline1();
         }
 
         // Done!
@@ -344,15 +345,15 @@ namespace ipl {
     void System::createLibManager_() {
         EGG::Heap* old = EGG::Heap::unkInline2();
 
-        smArg.mpMem1Sys->unkUnline_becomeCurrentHeap();
+        smArg.mpMem1Sys->unkUnline1();
 
         // Create NWC24 and mail instances
-        smArg.mpCdbManager = new(getMem1Sys(), CLASS_HEAP) cdb::Manager(getMem2Sys());
-        smArg.mpNwc24Manager = new(getMem1Sys(), CLASS_HEAP) nwc24::Manager(getMem2Sys());
+        smArg.mpCdbManager = new(getMem1Sys(), 4) cdb::Manager(getMem2Sys());
+        smArg.mpNwc24Manager = new(getMem1Sys(), 4) nwc24::Manager(getMem2Sys());
 
         getMiiManager()->commitHiddenDB();
 
-        old->unkUnline_becomeCurrentHeap();
+        old->unkUnline1();
     }
 
     void System::stopReceiveSchedule() {
@@ -404,7 +405,7 @@ namespace ipl {
     }
 
     void System::setCurrentHeap(EGG::Heap* heap) {
-        heap->unkUnline_becomeCurrentHeap();
+        heap->unkUnline1();
     }
 
     void System::cbThreadSwitch(OSThread* thread1, OSThread* thread2) {
@@ -598,12 +599,12 @@ namespace ipl {
 
         OSSetSwitchThreadCallback(cbThreadSwitch);
 
-        smArg.mpMem1Sys->unkUnline_becomeCurrentHeap();
+        smArg.mpMem1Sys->unkUnline1();
 
         // Create FIFO
         EGG::GraphicsFifo::create(0x40000, NULL);
         GXSetPixelFmt(GX_PF_RGBA6_Z24, GX_ZC_LINEAR);
-        smArg.mpFramework = new(getMem1Sys(), CLASS_HEAP) Framework(getMem1Sys());
+        smArg.mpFramework = new(getMem1Sys(), 4) Framework(getMem1Sys());
 
         // Fast cast
         OSInitFastCast();
@@ -617,16 +618,16 @@ namespace ipl {
 
         // Faders
         GXRenderModeObj* rMode = getRenderModeObj();
-        smArg.mpFader = new(getMem1Sys(), CLASS_HEAP) EGG::ColorFader(0.0f, 0.0f, rMode->fbWidth, rMode->efbHeight);
-        smArg.mpResetFader = new(getMem1Sys(), CLASS_HEAP) EGG::ColorFader(0.0f, 0.0f, rMode->fbWidth, rMode->efbHeight);
+        smArg.mpFader = new(getMem1Sys(), 4) EGG::ColorFader(0.0f, 0.0f, rMode->fbWidth, rMode->efbHeight);
+        smArg.mpResetFader = new(getMem1Sys(), 4) EGG::ColorFader(0.0f, 0.0f, rMode->fbWidth, rMode->efbHeight);
     
         // Main thread
         EGG::Thread::initialize();
-        smArg.mpMainThread = new(getMem1Sys(), CLASS_HEAP) EGG::Thread(OSGetCurrentThread(), 4);
+        smArg.mpMainThread = new(getMem1Sys(), 4) EGG::Thread(OSGetCurrentThread(), 4);
 
-        smArg.mpControllerManager = new(getMem1Sys(), CLASS_HEAP) controller::Manager(getMem2Sys());
-        smArg.mpResetHandler = new(getMem1Sys(), CLASS_HEAP) ResetHandler(getMem2Sys());
-        smArg.mpErrorHandler = new(getMem1Sys(), CLASS_HEAP) ErrorHandler(getMem2Sys());
+        smArg.mpControllerManager = new(getMem1Sys(), 4) controller::Manager(getMem2Sys());
+        smArg.mpResetHandler = new(getMem1Sys(), 4) ResetHandler(getMem2Sys());
+        smArg.mpErrorHandler = new(getMem1Sys(), 4) ErrorHandler(getMem2Sys());
 
         // ES Library
         BOOL initResult = ES_InitLib() != ES_ERR_OK;
@@ -643,14 +644,14 @@ namespace ipl {
         smArg.mpTask3 = EGG::TaskThread::create(0x31, 20, 0x10000, getMem1Sys());
 
         // Postman
-        smArg.mpPostmanManager = new(getMem1Sys(), CLASS_HEAP) postman::Manager(getMem1Sys());
+        smArg.mpPostmanManager = new(getMem1Sys(), 4) postman::Manager(getMem1Sys());
         smArg.mpPostmanManager->InitManager();
 
         // Set current time
         setToday_();
 
         // BS2 Management
-        smArg.mpBS2Manager = new(getMem1Sys(), CLASS_HEAP) bs2::Manager(getMem2Sys());
+        smArg.mpBS2Manager = new(getMem1Sys(), 4) bs2::Manager(getMem2Sys());
         if (isNandFull()) {
             getBS2Manager()->abort();
         }
@@ -664,10 +665,10 @@ namespace ipl {
         CNTCACHEInit(0, 0);
 
         // Random manager
-        smArg.mpRandom = new(getMem1Sys(), CLASS_HEAP) math::Random(OSGetTick());
+        smArg.mpRandom = new(getMem1Sys(), 4) math::Random(OSGetTick());
 
         // NAND manager
-        smArg.mpNandManager = new(getMem1Sys(), CLASS_HEAP) nand::Manager(getMem1Sys());
+        smArg.mpNandManager = new(getMem1Sys(), 4) nand::Manager(getMem1Sys());
 
         // Symbol list for RSO modules
         snprintf(rsoListPath, sizeof(rsoListPath), "/%s/%s/main.sel", SYSMENU_BUILD_TYPE, SYSMENU_BUILD_VERSION);
@@ -699,17 +700,17 @@ namespace ipl {
     #endif // VERSION_43E
 
         // Setup more stuff
-        smArg.mpException = new(getMem1Sys(), CLASS_HEAP) Exception(getMem2Sys(), *System::getRenderModeObj());
-        smArg.mpPointer = new(getMem1Sys(), CLASS_HEAP) Pointer(getMem2Sys());
-        smArg.mpTVRCManager = new(getMem2Sys(), CLASS_HEAP) TVRCManager(getMem2Sys());
+        smArg.mpException = new(getMem1Sys(), 4) Exception(getMem2Sys(), *System::getRenderModeObj());
+        smArg.mpPointer = new(getMem1Sys(), 4) Pointer(getMem2Sys());
+        smArg.mpTVRCManager = new(getMem2Sys(), 4) TVRCManager(getMem2Sys());
         ncd::NCDSetting::makeMacAddr();
-        smArg.mpJpegDecoder = new(getMem1Sys(), CLASS_HEAP) utility::JpegDecoder(getMem2Sys());
+        smArg.mpJpegDecoder = new(getMem1Sys(), 4) utility::JpegDecoder(getMem2Sys());
 
         // Load system resources
         loadResource_(NULL);
 
-        smArg.mpMessageMgr = new(getMem1Sys(), CLASS_HEAP) message::Manager(getMem2Sys());
-        smArg.mpSceneManager = new(getMem1Sys(), CLASS_HEAP) scene::Manager(smArg.mpSceneHeap);
+        smArg.mpMessageMgr = new(getMem1Sys(), 4) message::Manager(getMem2Sys());
+        smArg.mpSceneManager = new(getMem1Sys(), 4) scene::Manager(smArg.mpSceneHeap);
 
         // IPL save data
         smArg.mpSaveDataManager = new(getMem1Sys(), DEFAULT_ALIGN) savedata::Manager(getMem2Sys());
@@ -719,8 +720,8 @@ namespace ipl {
         TVRCManager::getHandle()->loadDatabase();
 
         // Channel instances
-        smArg.mpChannelScriptManager = new(getMem1Sys(), CLASS_HEAP) channel::ChannelScriptManager();
-        smArg.mpChannelManager = new(getMem1Sys(), CLASS_HEAP) channel::Manager(smArg.mpChannelHeap);
+        smArg.mpChannelScriptManager = new(getMem1Sys(), 4) channel::ChannelScriptManager();
+        smArg.mpChannelManager = new(getMem1Sys(), 4) channel::Manager(smArg.mpChannelHeap);
         smArg.mpChannelManager->initManager();
 
         // Setup scenary
@@ -735,7 +736,7 @@ namespace ipl {
         }
 
     #if defined(VERSION_43K) || !defined(TURN_OFF_CK2_VERIFY)
-        // And finally... fear.
+        // And finally... homebrew's fear.
         BOOL hasKoreanKey = ES_VerifyCK2() == ES_ERR_OK;
         if (hasKoreanKey) {
             IPLErrorLogAndDisplay(MESG_ERR_KEY2, "ES", hasKoreanKey, 1446);

@@ -656,7 +656,8 @@ typedef enum _GXEvent {
 typedef enum _GXFBClamp {
     GX_CLAMP_NONE,
     GX_CLAMP_TOP,
-    GX_CLAMP_BOTTOM
+    GX_CLAMP_BOTTOM,
+    GX_CLAMP_ALL
 } GXFBClamp;
 
 typedef enum _GXAnisotropy {

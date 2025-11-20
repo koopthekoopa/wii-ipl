@@ -34,11 +34,11 @@ namespace ipl {
                     wmemset(mSaveName, 0, SAVE_NAME_LENGTH+1);
                     wmemset(mSaveSubName, 0, SAVE_NAME_LENGTH+1);
         
-                    mpBannerData = System::getMem2App()->alloc(SAVE_BANNER_TEX_SIZE, BUFFER_HEAP);
+                    mpBannerData = System::getMem2App()->alloc(SAVE_BANNER_TEX_SIZE, DEFAULT_ALIGN);
                     memset(mpBannerData, 0, SAVE_BANNER_TEX_SIZE);
         
                     for (int i = 0; i < SAVE_ICON_COUNT; i++) {
-                        mpIconData[i] = System::getMem2App()->alloc(SAVE_ICON_TEX_SIZE, BUFFER_HEAP);
+                        mpIconData[i] = System::getMem2App()->alloc(SAVE_ICON_TEX_SIZE, DEFAULT_ALIGN);
                         memset(mpIconData[i], 0, SAVE_ICON_TEX_SIZE);
                     }
         

@@ -31,30 +31,30 @@
 #include <string.h>
 #include <stdio.h>
 
-BOOL    InvalidShutdown = FALSE;
-BOOL    ShutdownFromGCFlag = FALSE;
+BOOL            InvalidShutdown = FALSE;
+BOOL            ShutdownFromGCFlag = FALSE;
 
-vu32    BS2LastMode = BS2_LAST_MODE_0;
+vu32            BS2LastMode = BS2_LAST_MODE_0;
 
-vBOOL   BS2BootFromCache = FALSE;
-vBOOL   BS2BootCaching = TRUE;
+vBOOL           BS2BootFromCache = FALSE;
+vBOOL           BS2BootCaching = TRUE;
 
-vBOOL   BS2DriveReset = FALSE;
-vBOOL   BS2WaitSpinup = TRUE;
-vBOOL   BS2NoDisk = FALSE;
+vBOOL           BS2DriveReset = FALSE;
+vBOOL           BS2WaitSpinup = TRUE;
+vBOOL           BS2NoDisk = FALSE;
 
-BOOL    BS2ReturnToMenu = FALSE;
-BOOL    BS2ReturnToIdle = FALSE;
-BOOL    BS2ReturnToDataManager = FALSE;
-BOOL    BS2ReturnArgs = FALSE;
-BOOL    BS2LaunchTitle = FALSE;
+BOOL            BS2ReturnToMenu = FALSE;
+BOOL            BS2ReturnToIdle = FALSE;
+BOOL            BS2ReturnToDataManager = FALSE;
+BOOL            BS2ReturnArgs = FALSE;
+BOOL            BS2LaunchTitle = FALSE;
 
 // Default
-u32     BS2BootType = BS2_BOOT_TYPE_POWER_ON;
+u32             BS2BootType = BS2_BOOT_TYPE_POWER_ON;
 
-OSNandbootInfo  BS2NandbootInfo ALIGN32 = {0};
-MEMAllocator    BS2Allocator = {0};
-OSStateFlags    BS2StateFlags = {0};
+OSNandbootInfo  BS2NandbootInfo ALIGN32;
+MEMAllocator    BS2Allocator;
+OSStateFlags    BS2StateFlags;
 
 // @BUG: The location of the arguments starts in the middle of iplNwc24Manager's BSS section, so eventually these will be overwritten.
 #define BS2_ARGC    (*(u32*) ((BS2NandbootInfo.args -  sizeof(BS2NandbootInfo.args))      + BS2NandbootInfo.argsOff))
@@ -100,7 +100,7 @@ u32 BS2GetBootType() {
 vBOOL   InvalidSram;
 vu32    BS2VideoMode;
 
-static u8 SRAMtoSCLang[9];
+static u8 SRAMtoSCLang[OS_LANG_MAX];
 
 // Get some device from EXI.
 static void GetSomeDevFromExi() {
@@ -238,8 +238,7 @@ static void UpdateStateFlagsAndBootCache() {
         if (BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_BAD) {
             InvalidShutdown = TRUE;
         }
-        else if (getVISolidClrYCol() == 16
-        && (BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_RETURN_MENU || BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_IDLE)) {
+        else if (getVISolidClrYCol() == 16 && (BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_RETURN_MENU || BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_IDLE)) {
             InvalidShutdown = TRUE;
         }
         else {
@@ -431,7 +430,7 @@ static void SyncSystemSettings() {
         }
         else {
             // Sync SRAM language to SYSCONF
-            if (OSGetLanguage() > 5) {
+            if (OSGetLanguage() > OS_LANG_DUTCH) {
                 writeChanges = TRUE;
                 SCSetLanguage(SC_LANG_ENGLISH);
             }
@@ -524,10 +523,10 @@ static void SyncTimeWithRTC() {
 static void SetupVI1Config() {
     int cfg;
     if (SCGetProductGameRegion() == SC_PRODUCT_GAME_REGION_JP) {
-        cfg = 1;
+        cfg = BS2_VI1_CFG_NTSC_J_ON;
     }
     else {
-        cfg = 0;
+        cfg = BS2_VI1_CFG_NTSC_J_OFF;
     }
     setVI1Cfg(cfg);
 }
@@ -641,9 +640,9 @@ static BOOL HasTitleInstalled(ESTitleId titleId, void* work, u32 workLen) {
                 }
             }
         }
-    }
 
-    return TRUE;
+        return TRUE;
+    }
 
 fail:
     return FALSE;
@@ -764,7 +763,7 @@ void BS2BootIRD() {
             sprintf(verString, "%d.%d(%s)",  SYSMENU_VERSION_MAJOR, SYSMENU_VERSION_MINOR, productArea);
         }
         else {
-            /* @BUG Should not include productArea */
+            /* Should not include productArea */
             sprintf(verString, "%d.%d(XXX)", SYSMENU_VERSION_MAJOR, SYSMENU_VERSION_MINOR, productArea);
         }
 
@@ -941,7 +940,7 @@ static void BS2TickIRD() {
 /* MAIN ENTRY POINT */
 /********************/
 
-static u8 SRAMtoSCLang[9] = {
+static u8 SRAMtoSCLang[OS_LANG_MAX] = {
     SC_LANG_ENGLISH,
     SC_LANG_GERMAN,
     SC_LANG_FRENCH,

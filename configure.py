@@ -192,7 +192,7 @@ if not config.non_matching:
 
 # Tool versions
 config.binutils_tag = "2.42-1"
-config.compilers_tag = "latest"
+config.compilers_tag = "20231018"
 config.dtk_tag = "v1.4.1"
 config.objdiff_tag = "v2.7.1"
 config.sjiswrap_tag = "v1.2.0"
@@ -656,7 +656,7 @@ config.libs = [
         ]
     ),
     IPLSection("BS2", [
-            Object(Matching,    "BS2/BootStart.c"),
+            Object(Matching,    "BS2/BS2Start.c"),
             Object(Matching,    "BS2/BS2Entry.c"),
             Object(Matching,    "BS2/BS2.c"),
             Object(Matching,    "BS2/BS2Init.c"),

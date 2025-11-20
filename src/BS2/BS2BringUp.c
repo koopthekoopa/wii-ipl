@@ -20,7 +20,6 @@ u32 getVISolidClrYCol() {
 
 #define ACR_IOP_ADDR (OS_BASE_UNCACHED + ACR_REG_ADDRESS + AHB_TRUSTED_OFFSET)
 
-// These are not volatile writes...
 void GPIOPPCInit() {
     *(u32*)(ACR_IOP_ADDR + HW_GPIOB_DIR) = 0xC320;
     *(u32*)(ACR_IOP_ADDR + HW_GPIOB_OUT) = 0xC000;

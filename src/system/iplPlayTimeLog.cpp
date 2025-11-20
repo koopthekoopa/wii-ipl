@@ -173,7 +173,7 @@ namespace ipl {
     }
 
     wchar_t* PlayTimeLog::create_text(const EventBuffer* event) {
-        wchar_t* string = new(System::getMailWorkHeap(), CLASS_HEAP) wchar_t[STRINGBUF_LIMIT];
+        wchar_t* string = new(System::getMailWorkHeap(), 4) wchar_t[STRINGBUF_LIMIT];
         memset(string, 0, STRINGBUF_LIMIT * sizeof(wchar_t));
 
         // Create log buffer
@@ -448,7 +448,7 @@ namespace ipl {
             u32 recordSize;
             cdbManager->getDataSize(record, &recordSize);
 
-            buffer = new (System::getMailWorkHeap(), CLASS_HEAP) u8[recordSize];
+            buffer = new (System::getMailWorkHeap(), 4) u8[recordSize];
             cdbManager->read(record, buffer, recordSize);
 
             RBRHeader* header = (RBRHeader*)buffer;

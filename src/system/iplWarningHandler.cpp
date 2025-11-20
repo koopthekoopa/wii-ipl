@@ -6,7 +6,7 @@ namespace ipl {
     WarningHandler::WarningHandler(EGG::Heap* heap) :
     mType(NONE),
     mMessageID(0) {
-        mpDialog = new(heap, CLASS_HEAP) DialogWindow(heap);
+        mpDialog = new(heap, 4) DialogWindow(heap);
     }
 
     void WarningHandler::set(Type type, u32 msgId) {

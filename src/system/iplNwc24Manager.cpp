@@ -487,7 +487,7 @@ namespace ipl {
         void Manager::receive() {
             EGG::Heap* heap = System::getMailWorkHeap();
 
-            OSReport("mail work heap rest size %x\n", heap->getAllocatableSize(CLASS_HEAP));
+            OSReport("mail work heap rest size %x\n", heap->getAllocatableSize(4));
 
             NWC24iGetSchedulerStat(&smArg.mScheduleStat, sizeof(NWC24ScdStat));
 
@@ -1082,8 +1082,8 @@ start:
                 getMsgSubjectSize(msg, &subjectGotSize);
                 if (subjectGotSize > 1) {
                     subjectLen = NWC24_MSG_SUBJECT_LENGTH;
-                    subject = new(heap, -CLASS_HEAP) wchar_t[NWC24_MSG_SUBJECT_LENGTH+1];
-                    subjectWork = new(heap, -CLASS_HEAP) u8[NWC24_SUBJECT_PUBLIC_WORK_SIZE+4];
+                    subject = new(heap, -4) wchar_t[NWC24_MSG_SUBJECT_LENGTH+1];
+                    subjectWork = new(heap, -4) u8[NWC24_SUBJECT_PUBLIC_WORK_SIZE+4];
                     if (subject != NULL && subjectWork != NULL) {
                         memset(subject, 0, (NWC24_MSG_SUBJECT_LENGTH+1) * sizeof(wchar_t));
                         memset(subjectWork, 0, NWC24_SUBJECT_PUBLIC_WORK_SIZE+4);
@@ -1100,8 +1100,8 @@ start:
             getMsgTextSize(msg, &textGotSize);
             if (textGotSize != 0) {
                 textLen = NWC24_MSG_TEXT_LENGTH;
-                text = new(heap, -CLASS_HEAP) wchar_t[NWC24_MSG_TEXT_LENGTH+1];
-                textWork = new(heap, -CLASS_HEAP) u8[NWC24_TEXT_PUBLIC_WORK_SIZE+4];
+                text = new(heap, -4) wchar_t[NWC24_MSG_TEXT_LENGTH+1];
+                textWork = new(heap, -4) u8[NWC24_TEXT_PUBLIC_WORK_SIZE+4];
                 if (text != NULL && textWork != NULL) {
                     memset(text, 0, (NWC24_MSG_TEXT_LENGTH+1) * sizeof(wchar_t));
                     memset(textWork, 0, NWC24_TEXT_PUBLIC_WORK_SIZE+4);
@@ -1127,7 +1127,7 @@ start:
             // Combine subject and text
             if (subjectLen != 0 || textLen != 0) {
                 int fullTextLen = subjectLen + textLen + 4;
-                fullText = new(heap, CLASS_HEAP) wchar_t[fullTextLen];
+                fullText = new(heap, 4) wchar_t[fullTextLen];
                 if (fullText != NULL) {
                     memset(fullText, 0, fullTextLen * (int)sizeof(wchar_t));
                     if (bIncludeSubject && subjectLen != 0 && subjectGotSize > 1) {

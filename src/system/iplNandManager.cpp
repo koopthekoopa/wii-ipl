@@ -93,7 +93,7 @@ namespace ipl {
             strncpy(fullName, mNandPath, sizeof(mNandPath));
             strncat(fullName, fileName, sizeof(mNandPath) - strlen(fullName));
 
-            File* file = new(heap, CLASS_HEAP) File(heap, fullName, NULL, NULL, offset, length, false);
+            File* file = new(heap, 4) File(heap, fullName, NULL, NULL, offset, length, false);
 
             if (bJamRequest) {
                 mpTask->requestJam(doReadTask, file, NULL);
@@ -112,7 +112,7 @@ namespace ipl {
             strncpy(fullName, mNandPath, sizeof(mNandPath));
             strncat(fullName, fileName, sizeof(mNandPath) - strlen(fullName));
 
-            File* file = new(heap, CLASS_HEAP) File(heap, fullName, NULL, NULL, offset, length, false);
+            File* file = new(heap, 4) File(heap, fullName, NULL, NULL, offset, length, false);
 
             file->read();
 
@@ -120,7 +120,7 @@ namespace ipl {
         }
 
         SharedFile* Manager::readSharedAsync(EGG::Heap* heap, const char* fileName, int index, int offset, u32 length, ESTitleId titleId, int ticketIdx) {
-            SharedFile* file = new(heap, CLASS_HEAP) SharedFile(heap, fileName, index, offset, length, titleId, ticketIdx);
+            SharedFile* file = new(heap, 4) SharedFile(heap, fileName, index, offset, length, titleId, ticketIdx);
 
             mpTask->request(doReadTask, file, NULL);
 
@@ -128,7 +128,7 @@ namespace ipl {
         }
 
         MetaFile* Manager::readMetaHeaderAsync(EGG::Heap* heap, ESTitleId titleId, int offset, u32 length, MetaFile::Callback callback, void* callbackWork, int ticketIdx) {
-            MetaFile* file = new(heap, CLASS_HEAP) MetaFile(heap, "", NULL, titleId, offset, length, callback, callbackWork, ticketIdx);
+            MetaFile* file = new(heap, 4) MetaFile(heap, "", NULL, titleId, offset, length, callback, callbackWork, ticketIdx);
 
             System::getTask3()->request(doReadTask, file, NULL);
 
@@ -136,7 +136,7 @@ namespace ipl {
         }
 
         MetaFile* Manager::readMetaBodyAsync(EGG::Heap* heap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, MetaFile::Callback callback, void* callbackWork, int ticketIdx) {
-            MetaFile* file = new(heap, CLASS_HEAP) MetaFile(heap, fileName, arc, titleId, offset, length, callback, callbackWork, ticketIdx);
+            MetaFile* file = new(heap, 4) MetaFile(heap, fileName, arc, titleId, offset, length, callback, callbackWork, ticketIdx);
 
             mpTask->request(doReadTask, file, NULL);
 
@@ -172,7 +172,7 @@ namespace ipl {
             strncpy(fullName, mNandPath, sizeof(mNandPath));
             strncat(fullName, "/layout", sizeof(mNandPath) - strlen(fullName));
 
-            LayoutFile* file = new(heap, CLASS_HEAP) LayoutFile(heap, fullName, fileName, arc, bIsNand);
+            LayoutFile* file = new(heap, 4) LayoutFile(heap, fullName, fileName, arc, bIsNand);
             
             return file;
         }
@@ -203,7 +203,7 @@ namespace ipl {
             strncpy(fullName, mNandPath, sizeof(mNandPath));
             strncat(fullName, fileName, sizeof(mNandPath) - strlen(fullName));
 
-            File* file = new(heap, CLASS_HEAP) File(heap, fileName, (u8*)buffer, length, perms);
+            File* file = new(heap, 4) File(heap, fileName, (u8*)buffer, length, perms);
 
             return file;
         }

@@ -36,7 +36,7 @@ namespace ipl {
         Rvl_decode(mpArcData, fatalDlg_ash);
 
         // Create the layout from archive.
-        mpLayout = new(heap, CLASS_HEAP) layout::Object(heap, mpArcData, "arc", "my_Fatal.brlyt");
+        mpLayout = new(heap, 4) layout::Object(heap, mpArcData, "arc", "my_Fatal.brlyt");
     }
 
     void ErrorHandler::set(Type type, u32 msgId, const char* arg1, int arg2, int arg3) {

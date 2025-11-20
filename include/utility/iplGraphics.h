@@ -25,9 +25,9 @@ namespace ipl {
                     friend class Graphics;
                 };
                 typedef enum Orientation {
-                    ORIENTATION_0 = 0,
-                    ORIENTATION_1,
-                    ORIENTATION_2
+                    ORI_NONE = 0,
+                    ORI_90_CLOCKWISE,
+                    ORI_90_ANTICLOCKWISE
                 } Orientation;
 
                 static nw4r::math::MTX34&   getViewMtx() { return mArg.mViewMtx; }
@@ -42,7 +42,7 @@ namespace ipl {
                 static void                 setCamera(u32 id = 0);
 
                 static void                 drawPolygon(const nw4r::ut::Rect& rect, GXColor color);
-                static void                 drawTexture(const nw4r::ut::Rect& rect, const GXTexObj& texObj, GXColor color, u8 texCoord, Orientation ori);
+                static void                 drawTexture(const nw4r::ut::Rect& rect, const GXTexObj& texObj, GXColor color, u8 texCoord, Orientation ori = ORI_NONE);
             private:
                 static Arg  mArg;
         };

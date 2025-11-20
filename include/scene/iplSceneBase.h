@@ -134,10 +134,20 @@ namespace ipl {
                 EGG::Heap*      getHeap()   { return mpHeap; }
 
             protected:
+                enum {
+                    SCN_PARENT_FLAG_CANCALC = (1 << 0),
+                    SCN_PARENT_FLAG_CANDRAW = (1 << 1),
+                };
+
+                enum {
+                    SCN_STATE_CREATED       = (1 << 0),
+                    SCN_STATE_DESTROY_REQ   = (1 << 1),
+                };
+
                 EGG::Heap*  mpHeap;         // 0x24
 
-                u32         mFlags;         // 0x28
-                u32         unk_0x2C;
+                u32         mParentFlags;   // 0x28
+                u32         mScnState;      // 0x2C
                 int         mSceneID;       // 0x30
                 u32         mPrevSceneID;   // 0x34
 

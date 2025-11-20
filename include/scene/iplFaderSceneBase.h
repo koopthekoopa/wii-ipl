@@ -41,12 +41,9 @@ namespace ipl {
             
 
                 virtual void            calcCommonAfter()   {}                      // 0x64
-            
+
             protected:
-                int                     getState()          { return mState; }
-            
-            private:
-                int mState; // 0x54
+                int mScnFadeState;  // 0x54
         };
     }
 }

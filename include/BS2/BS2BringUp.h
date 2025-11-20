@@ -11,6 +11,9 @@ extern "C" {
 
 void    enableLegacyDI();
 
+#define BS2_VI1_CFG_NTSC_J_ON   1
+#define BS2_VI1_CFG_NTSC_J_OFF  0
+
 void    setVI1Cfg(u32 val);
 
 void    setVISolidClrYCol(u32 val);

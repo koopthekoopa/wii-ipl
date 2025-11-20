@@ -20,7 +20,7 @@ namespace ipl {
         unk_0x30(unk3),
         unk_0x34(unk4),
         mWaitUntilFadeIn(0) {
-            mpLayout = new(heap, CLASS_HEAP) layout::Object(heap, layoutFile, directory, fileName);
+            mpLayout = new(heap, 4) layout::Object(heap, layoutFile, directory, fileName);
             mpLayout->bind("my_IplTopBalloon_a_BalloonInOut.brlan");
             mpLayout->finishBinding();
 

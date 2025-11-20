@@ -32,7 +32,7 @@ namespace ipl {
         SDButton::SDButton(EGG::Heap* heap)
         : Base(heap),
         unk_0x54(0) {
-            mFlags = 3;
+            mParentFlags = SCN_PARENT_FLAG_CANCALC | SCN_PARENT_FLAG_CANDRAW;;
             for (int i = 0; i < 2; i++) {
                 mbArrowVisible[i] = true;
             }
@@ -324,7 +324,7 @@ namespace ipl {
         }
 
         bool SDButton::isActive() const {
-            return unk_0x2C & 1;
+            return mScnState & SCN_STATE_CREATED;
         }
 
         void SDButton::setEventHandler(::gui::EventHandler* event, ::gui::EventHandler* optOutEvent) {

@@ -115,6 +115,7 @@ loop:
 
 static void ConfigureVideo(u16 xfbW, u16 xfbH) NO_INLINE {
     GXRenderModeObj mode;
+
     mode.fbWidth = xfbW;
     mode.efbHeight = 480;
     mode.xfbHeight = xfbH;
@@ -175,8 +176,8 @@ static GXColor RGB2YUV(GXColor rgb) NO_INLINE {
 
 void OSFatal(GXColor fg, GXColor bg, const char* msg) {
     OSBootInfo* bootInfo;
-    u32         count;
-    OSTime      t;
+    u32 count;
+    OSTime t;
 
     bootInfo = (OSBootInfo*)OSPhysicalToCached(OS_ADDR_BOOT_INFO);
     OSDisableInterrupts();
@@ -232,11 +233,11 @@ void OSFatal(GXColor fg, GXColor bg, const char* msg) {
 }
 
 static void Halt() {
-    u32             count;
-    OSFontHeader*   fontData;
-    void*           xfb;
-    u32             len;
-    OSFatalParam*   fp;
+    u32 count;
+    OSFontHeader* fontData;
+    void* xfb;
+    u32 len;
+    OSFatalParam* fp;
 
     OSEnableInterrupts();
 
@@ -387,11 +388,11 @@ void __DVDPrintFatalMessage() {
 }
 
 void BS2ScreenReport(GXColor fg, GXColor bg, const char* msg) {
-    u32             count;
-    OSFontHeader*   fontData;
-    void*           xfb;
-    u32             len;
-    OSFatalParam*   fp;
+    u32 count;
+    OSFontHeader* fontData;
+    void* xfb;
+    u32 len;
+    OSFatalParam* fp;
 
     FatalParam.fg = fg;
     FatalParam.bg = bg;

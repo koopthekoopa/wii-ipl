@@ -1,4 +1,16 @@
 #include <revolution/mtx.h>
+#include <math.h>
+
+void C_VECNormalize(const Vec* src, Vec* unit) {
+    f32 mag;
+
+    mag = (src->z * src->z) + ((src->x * src->x) + (src->y * src->y));
+
+    mag = 1.0f/ sqrtf(mag);
+    unit->x = src->x * mag;
+    unit->y = src->y * mag;
+    unit->z = src->z * mag;
+}
 
 void PSVECNormalize(const register Vec* src, register Vec* unit) {
     register float c_half = 0.5f;
@@ -28,6 +40,17 @@ void PSVECNormalize(const register Vec* src, register Vec* unit) {
         ps_muls0 v1_z, v1_z, rsqrt
         psq_st v1_z, 0x8(unit), 1, 0
     }
+}
+
+void C_VECCrossProduct(const Vec* a, const Vec* b, Vec* axb) {
+    Vec vTmp;
+
+    vTmp.x = (a->y * b->z) - (a->z * b->y);
+    vTmp.y = (a->z * b->x) - (a->x * b->z);
+    vTmp.z = (a->x * b->y) - (a->y * b->x);
+    axb->x = vTmp.x;
+    axb->y = vTmp.y;
+    axb->z = vTmp.z;
 }
 
 asm void PSVECCrossProduct(const register Vec* a, const register Vec* b, register Vec* axb) {

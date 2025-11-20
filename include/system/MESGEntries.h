@@ -43,9 +43,6 @@
 
 #define MESG_ADDRESS_WII_ID             66
 #define MESG_ADDRESS_CHOOSE             78
-
-/* Address */
-
 #define MESG_ADDRESS_BACK               35
 #define MESG_ADDRESS_REGISTER           41
 
@@ -66,6 +63,29 @@
 #define MESG_BUTTON_CH_SEL              16
 #define MESG_BUTTON_CALENDAR            17
 #define MESG_BUTTON_CREATE              18
+
+/* Button */
+
+#define MESG_CALENDAR_MONDAY            110
+#define MESG_CALENDAR_TUESDAY           111
+#define MESG_CALENDAR_WEDNESDAY         112
+#define MESG_CALENDAR_THURSDAY          113
+#define MESG_CALENDAR_FRIDAY            114
+#define MESG_CALENDAR_SATURDAY          115
+#define MESG_CALENDAR_SUNDAY            116
+
+#define MESG_CALENDAR_JAN               118
+#define MESG_CALENDAR_FEB               119
+#define MESG_CALENDAR_MAR               120
+#define MESG_CALENDAR_APR               121
+#define MESG_CALENDAR_MAY               122
+#define MESG_CALENDAR_JUN               123
+#define MESG_CALENDAR_JUL               124
+#define MESG_CALENDAR_AUG               125
+#define MESG_CALENDAR_SEP               126
+#define MESG_CALENDAR_OCT               127
+#define MESG_CALENDAR_NOV               128
+#define MESG_CALENDAR_DEC               129
 
 /* Channel Edit */
 

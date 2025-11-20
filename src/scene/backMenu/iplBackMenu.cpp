@@ -41,7 +41,7 @@ namespace ipl {
         BackMenu::BackMenu(EGG::Heap* heap) :
         FaderSceneBase(heap),
         unused_0x5C(0) {
-            mFlags = 2;
+            mParentFlags = SCN_PARENT_FLAG_CANDRAW; // (ignored as child scenes aren't created over this scene)
         }
 
         void BackMenu::prepare() {}

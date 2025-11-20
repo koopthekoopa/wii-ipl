@@ -103,7 +103,7 @@ namespace ipl {
         mWBF1PublicLink(),
         mWBF2PublicLink(),
         mpHeap(heap),
-        mAllocator(heap, CLASS_HEAP),
+        mAllocator(heap, 4),
         mDrawInfo(),
         mCurLink(),
         mArcLinks() {
@@ -119,7 +119,7 @@ namespace ipl {
         mWBF1PublicLink(),
         mWBF2PublicLink(),
         mpHeap(heap),
-        mAllocator(heap, CLASS_HEAP),
+        mAllocator(heap, 4),
         mDrawInfo(),
         mCurLink(),
         mArcLinks() {
@@ -196,7 +196,7 @@ namespace ipl {
         PaneAnimator* Object::bind_(const char* fileName, nw4r::lyt::Pane* pane, bool bRecursive, bool bUnused) {
             void* animBuf = mArc.GetResource(0, fileName);
 
-            PaneAnimator* anim = new(mpHeap, CLASS_HEAP) PaneAnimator(mLayout.CreateAnimTransform(animBuf, &mArc),
+            PaneAnimator* anim = new(mpHeap, 4) PaneAnimator(mLayout.CreateAnimTransform(animBuf, &mArc),
                                                                       pane,
                                                                       bRecursive,
                                                                       bUnused);
@@ -228,7 +228,7 @@ namespace ipl {
         GroupAnimator* Object::bind_(const char* fileName, nw4r::lyt::Group* group, bool bRecursive, bool bUnused) {
             void* animBuf = mArc.GetResource(0, fileName);
 
-            GroupAnimator* anim = new(mpHeap, CLASS_HEAP) GroupAnimator(mLayout.CreateAnimTransform(animBuf, &mArc),
+            GroupAnimator* anim = new(mpHeap, 4) GroupAnimator(mLayout.CreateAnimTransform(animBuf, &mArc),
                                                                         group,
                                                                         bRecursive,
                                                                         bUnused);
@@ -432,12 +432,12 @@ namespace ipl {
 
         Object* Object::create(EGG::Heap* heap, u32 unk0, nand::LayoutFile* file, const char* directory, const char* fileName) {
             EGG::ExpHeap* expHeap = EGG::ExpHeap::create(unk0, heap, MEM_HEAP_OPT_DEBUG_FILL);
-            return new(expHeap, CLASS_HEAP) Object(expHeap, file, directory, fileName);
+            return new(expHeap, 4) Object(expHeap, file, directory, fileName);
         }
 
         Object* Object::create(EGG::Heap* heap, u32 unk0, void* buffer, const char* directory, const char* fileName) {
             EGG::ExpHeap* expHeap = EGG::ExpHeap::create(unk0, heap, MEM_HEAP_OPT_DEBUG_FILL);
-            return new(expHeap, CLASS_HEAP) Object(expHeap, buffer, directory, fileName);
+            return new(expHeap, 4) Object(expHeap, buffer, directory, fileName);
         }
 
         PaneAnimator::~PaneAnimator() {}

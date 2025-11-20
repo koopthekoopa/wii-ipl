@@ -24,28 +24,28 @@ namespace ipl {
         mpLayout(NULL) {}
 
         void clock::init(EGG::Heap* heap, nand::LayoutFile* layoutFile) {
-            mpLayout = new(heap, CLASS_HEAP) layout::Object(heap, layoutFile, "arc", "my_Clock_a.brlyt");
+            // Init layout
+            mpLayout = new(heap, 4) layout::Object(heap, layoutFile, "arc", "my_Clock_a.brlyt");
         
+            // Bind animations
             mpLayout->bind("my_Clock_a_Change.brlan",   "T_WiiMenu",    false);
             mpLayout->bind("my_Clock_a_Change.brlan",   "N_Clock",      false);
             mpLayout->bind("my_Clock_a_Min.brlan",      "ClockTen",     false);
-
             mpLayout->bind("my_Clock_a_NumApear.brlan", "Clock0",       false, false);
             mpLayout->bind("my_Clock_a_NumApear.brlan", "Clock1",       false, false);
             mpLayout->bind("my_Clock_a_NumApear.brlan", "Clock2",       false, false);
             mpLayout->bind("my_Clock_a_NumApear.brlan", "Clock3",       false, false);
             mpLayout->bind("my_Clock_a_NumApear.brlan", "AM_PM",        false, false);
             mpLayout->bind("my_Clock_a_NumApear.brlan", "AM_PM_R",      false, false);
-
             mpLayout->bind("my_Clock_a_NumLost.brlan",  "Clock0",       false);
             mpLayout->bind("my_Clock_a_NumLost.brlan",  "Clock1",       false);
             mpLayout->bind("my_Clock_a_NumLost.brlan",  "Clock2",       false);
             mpLayout->bind("my_Clock_a_NumLost.brlan",  "Clock3",       false);
             mpLayout->bind("my_Clock_a_NumLost.brlan",  "AM_PM",        false);
             mpLayout->bind("my_Clock_a_NumLost.brlan",  "AM_PM_R",      false);
-        
             mpLayout->finishBinding();
 
+            // Configure clock layout
             s32 region = System::getRegion();
             switch (region) {
                 case SC_PRODUCT_AREA_KOR:
@@ -64,13 +64,15 @@ namespace ipl {
                 }
             }
 
+            // Update texture
             mCurrentTex = mPreviousTex = calc_tex();
             change_tex();
 
+            // Update time
             mTime = System::getCurrentTime();
 
             utility::layout::set_string(mpLayout->FindPaneByName("T_WiiMenu"), System::getMessage(MESG_CLOCK_WII_MENU));
-        
+
             if (m_already_shown_wii_menu) {
                 mpLayout->getAnim(ANIM_WII_MENU_CHANGE)->setAnimType(ANIM_TYPE_BACKWARD);
                 mpLayout->getAnim(ANIM_WII_MENU_CHANGE)->init();
@@ -195,13 +197,13 @@ namespace ipl {
             bool isPM = mCurrentTex.isPM;
 
             char* newTexNames[CLOCK_TEXTURE_MAX];
-            newTexNames[0] = (char*)s_time_num[mCurrentTex.minuteDigit1];
-            newTexNames[1] = (char*)s_time_num[mCurrentTex.minuteDigit2];
-            newTexNames[2] = (char*)s_time_num[mCurrentTex.hourDigit1];
-            newTexNames[3] = (char*)s_time_num[mCurrentTex.hourDigit2];
+            newTexNames[CLOCK_TEXTURE_CLOCK_0] = (char*)s_time_num[mCurrentTex.minuteDigit1];
+            newTexNames[CLOCK_TEXTURE_CLOCK_1] = (char*)s_time_num[mCurrentTex.minuteDigit2];
+            newTexNames[CLOCK_TEXTURE_CLOCK_2] = (char*)s_time_num[mCurrentTex.hourDigit1];
+            newTexNames[CLOCK_TEXTURE_CLOCK_3] = (char*)s_time_num[mCurrentTex.hourDigit2];
 
-            newTexNames[4] = isPM ? (char*)"PM" : (char*)"AM";
-            newTexNames[5] = isPM ? (char*)"PM" : (char*)"AM";
+            newTexNames[CLOCK_TEXTURE_AM_PM_LEFT] = isPM ? (char*)"PM" : (char*)"AM";
+            newTexNames[CLOCK_TEXTURE_AM_PM_RIGHT] = isPM ? (char*)"PM" : (char*)"AM";
 
             for (int i = 0; i < CLOCK_TEXTURE_MAX; i++) {
                 nw4r::lyt::Pane* destPane = mpLayout->FindPaneByName(clockTexNames[i]);

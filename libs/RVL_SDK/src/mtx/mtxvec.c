@@ -1,5 +1,16 @@
 #include <revolution/mtx.h>
 
+void C_MTXMultVec(const Mtx m, const Vec* src, Vec* dst) {
+    Vec vTmp;
+
+    vTmp.x = m[0][3] + ((m[0][2] * src->z) + ((m[0][0] * src->x) + (m[0][1] * src->y)));
+    vTmp.y = m[1][3] + ((m[1][2] * src->z) + ((m[1][0] * src->x) + (m[1][1] * src->y)));
+    vTmp.z = m[2][3] + ((m[2][2] * src->z) + ((m[2][0] * src->x) + (m[2][1] * src->y)));
+    dst->x = vTmp.x;
+    dst->y = vTmp.y;
+    dst->z = vTmp.z;
+}
+
 asm void PSMTXMultVec(const register Mtx m, const register Vec* src, register Vec* dst) {
     nofralloc
     psq_l f0, Vec.x(src), 0, 0

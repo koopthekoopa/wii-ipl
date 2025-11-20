@@ -25,10 +25,10 @@ void __OSLaunchMenu() {
     int i;
     s32 ret;
 
-    u32             ticketCnt = 1;
-    ESTicketView*   tik = views;
+    u32 ticketCnt = 1;
+    ESTicketView* tik = views;
 
-    ESTitleId   version = 0x0000000100000003;
+    ESTitleId version = 0x0000000100000003;
 
     ret = ES_InitLib();
     if (ret != ES_ERR_OK) {
@@ -91,11 +91,11 @@ void OSRebootSystem() {
 }
 
 void OSShutdownSystem() {
-    SCIdleModeInfo  idleModeInfo;
-    OSIOSRev        iosRev;
+    SCIdleModeInfo idleModeInfo;
+    OSIOSRev iosRev;
 
-    OSStateFlags    state;
-    u32             flags;
+    OSStateFlags state;
+    u32 flags;
 
     memset(&idleModeInfo, 0, sizeof(SCIdleModeInfo));
 
@@ -161,11 +161,11 @@ void OSShutdownSystem() {
 }
 
 void OSShutdownSystemForBS() {
-    SCIdleModeInfo  idleModeInfo;
-    OSIOSRev        iosRev;
+    SCIdleModeInfo idleModeInfo;
+    OSIOSRev iosRev;
 
-    OSStateFlags    state;
-    u32             flags;
+    OSStateFlags state;
+    u32 flags;
 
     memset(&idleModeInfo, 0, sizeof(SCIdleModeInfo));
 
@@ -272,8 +272,8 @@ void OSReturnToMenu() {
 }
 
 void BS2SetStateFlags() {
-    OSStateFlags    state;
-    u32             flags;
+    OSStateFlags state;
+    u32 flags;
     
     __OSReadStateFlags(&state);
     state.lastAppType = OS_APP_TYPE_CHANNEL;

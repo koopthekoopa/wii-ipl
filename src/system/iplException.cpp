@@ -39,7 +39,7 @@ namespace ipl {
         nw4r::db::Exception_Init();
         nw4r::db::DirectPrint_Init();
 
-        mpBuffer = new(heap, CLASS_HEAP) u8[NW4R_CONSOLE_BUFFER_SIZE(FONT_WIDTH, FONT_HEIGHT)];
+        mpBuffer = new(heap, 4) u8[NW4R_CONSOLE_BUFFER_SIZE(FONT_WIDTH, FONT_HEIGHT)];
         mConsole = nw4r::db::Console_Create(mpBuffer, FONT_WIDTH, FONT_HEIGHT, 18, 0, 4);
 
         setConsole(rMode);

@@ -107,7 +107,7 @@ namespace ipl {
         mSafeModeTick(0),
         mbHeldCombo(false),
         mbDoneSafeMode(false) {
-            mFlags = 2;
+            mParentFlags = SCN_PARENT_FLAG_CANDRAW; // (ignored as child scenes aren't created over this scene)
         }
 
         skHealth::~skHealth() {}

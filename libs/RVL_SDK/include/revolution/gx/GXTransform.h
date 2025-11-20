@@ -10,8 +10,8 @@
 extern "C" {
 #endif
 
-#define GX_PROJECTION_SZ  7
-#define GX_VIEWPORT_SZ  6
+#define GX_PROJECTION_SZ    7
+#define GX_VIEWPORT_SZ      6
 
 void GXSetProjection(const Mtx44 mtx, GXProjectionType type);
 void GXSetProjectionv(const f32* ptr);

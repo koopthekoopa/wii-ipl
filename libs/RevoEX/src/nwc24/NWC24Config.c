@@ -34,10 +34,12 @@ NWC24Err NWC24GetMyUserId(NWC24UserId* pId) {
 
     result = NWC24_OK;
 
+    // If config was loaded, load user ID from there
     if (NWC24IsMsgLibOpened() || NWC24IsMsgLibOpenedByTool()) {
         *pId = config->userId;
     }
     else {
+        // Otherwise, load from cache
         scdErr = GetCachedUserIdFromLoMem(pId);
         if (scdErr == NWC24_OK) {
             return scdErr;
@@ -119,21 +121,26 @@ NWC24Err NWC24iConfigInit(BOOL force) {
 
     config = (NWC24ConfigData*)nwc24Work->configData;
 
+    // Read config file
     result = NWC24iConfigReload();
     if (result == NWC24_OK && !force) {
         return result;
     }
 
+    // Failed to read config?
+
+    // Check if it was a version mismatch
     if (result == NWC24_ERR_VER_MISMATCH && !force && config->version > NWC24_CONFIG_CURRENT_VERSION) {
         return result;
     }
+    
+    // Other reason why it failed to read the config? Create a new one.
 
     if (result == NWC24_OK || result == NWC24_ERR_VER_MISMATCH || result == NWC24_ERR_BROKEN) {
         idCreationCount = config->idCreationCount;
     }
 
     memset(config, 0, sizeof(*config));
-
     SetDefaultConfig();
 
     NWC24SetIdCreationCount(idCreationCount);
@@ -148,8 +155,10 @@ NWC24Err NWC24iConfigOpen() {
     config = (NWC24ConfigData*)nwc24Work->configData;
     ConfigModified = FALSE;
 
+    // Open config file
     result = NWC24iConfigReload();
     if (result != NWC24_ERR_FILE_NOEXISTS && result == NWC24_OK) {
+        // If opened, cache user ID
         CacheUserIdToLoMem(config->userId);
     }
 
@@ -165,6 +174,7 @@ NWC24Err NWC24iConfigReload() {
         return NWC24_ERR_LIB_NOT_OPENED;
     }
 
+    // Open config file
     result = NWC24FOpen(&file, ConfigFile, NWC24_OPEN_NAND_R);
 
     if (result == NWC24_OK) {
@@ -174,14 +184,16 @@ NWC24Err NWC24iConfigReload() {
     }
 
     if (result == NWC24_OK) {
+        // Verify config
         result = CheckConfig();
 
         if (result == NWC24_OK) {
-            ConfigModified = FALSE;
+            ConfigModified = FALSE; // current config is fine
             return result;
         }
     }
 
+    // Not verified? Open backup
     result = NWC24FOpen(&file, CfgBakFile, NWC24_OPEN_NAND_R);
 
     if (result == NWC24_OK) {
@@ -191,10 +203,11 @@ NWC24Err NWC24iConfigReload() {
     }
 
     if (result == NWC24_OK) {
+        // Verify config
         result = CheckConfig();
 
         if (result == NWC24_OK) {
-            ConfigModified = TRUE;
+            ConfigModified = TRUE; // current config is not fine
         }
     }
 
@@ -214,8 +227,10 @@ NWC24Err NWC24iConfigFlush() {
         return NWC24_OK;
     }
 
+    // Generate new checksum
     config->checksum = GetConfigCheckSum();
 
+    // Write current config
     result = NWC24FOpen(&file, ConfigFile, NWC24_OPEN_NAND_W);
 
     if (result == NWC24_OK) {
@@ -230,6 +245,7 @@ NWC24Err NWC24iConfigFlush() {
         return result;
     }
 
+    // Write backup config
     result = NWC24FOpen(&file, CfgBakFile, NWC24_OPEN_NAND_W);
 
     if (result == NWC24_OK) {
@@ -421,18 +437,22 @@ static u32 GetConfigCheckSum() {
 }
 
 static NWC24Err CheckConfig() {
+    // Compare magic
     if (config->magic != NWC24_CONFIG_MAGIC) {
         return NWC24_ERR_BROKEN;
     }
 
+    // Checksum
     if (config->checksum != GetConfigCheckSum()) {
         return NWC24_ERR_BROKEN;
     }
 
+    // ID Creation count
     if (config->idCreationCount >= NWC24_CONFIG_MAX_ID_COUNT) {
         return NWC24_ERR_BROKEN;
     }
 
+    // Version
     if (config->version != NWC24_CONFIG_CURRENT_VERSION) {
         return NWC24_ERR_VER_MISMATCH;
     }
@@ -448,7 +468,7 @@ static NWC24Err GenerateUserId(NWC24UserId* pId) {
         return NWC24_ERR_INVALID_VALUE;
     }
 
-    *pId = 9999999999999999;
+    *pId = 9999999999999999; // dummy
     result = NWC24iRequestGenerateUserId(pId, &arg1);
     CacheUserIdToLoMem(*pId);
     return result;
@@ -481,7 +501,7 @@ static NWC24Err RegisterUserId() {
 }
 
 static void CacheUserIdToLoMem(NWC24UserId id) {
-    NWC24UserId* pId = (NWC24UserId*)OSCachedToPhysical(0x31C0); // what's the point
+    NWC24UserId* pId = (NWC24UserId*)OSCachedToPhysical(0x31C0);
     *pId = id;
 
     DCStoreRange(pId, DEFAULT_ALIGN);
