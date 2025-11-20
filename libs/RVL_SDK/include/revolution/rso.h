@@ -80,8 +80,7 @@ typedef struct RSOExportTable {
 } RSOExportTable;
 
 
-typedef enum /* explicitly untagged */
-{
+typedef enum {
     RSO_FL_NON,
     RSO_FL_INTERNAL,
     RSO_FL_EXTERNAL,

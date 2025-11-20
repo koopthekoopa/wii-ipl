@@ -22,7 +22,7 @@ List of libraries that are linked (in alphabetical order):
 | **CARD**     | GameCube Memory Card Library                                | ⚠️ |
 | **CNT**      | Content API Library for Channel Titles                      | ✔️ |
 | **CNTCACHE** | Library that automatically delete temporary titles?         | ❌ |
-| **CX**       | Compression Library; for LZ, Huffman and RunLength          | ❌ |
+| **CX**       | Compression Library; for LZ, Huffman and RunLength          | ✔️ |
 | **DB**       | Debug Interface Library                                     | ✔️ |
 | **DSP**      | Digital Signal Processor Driver Library                     | ✔️ |
 | **DVD**      | DVD Drive Library                                           | ✔️ |

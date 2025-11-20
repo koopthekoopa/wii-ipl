@@ -1405,9 +1405,9 @@ config.libs = [
         ]
     ),
     RVLSDKLib("cx", [
-            Object(NonMatching, "cx/CXStreamingUncompression.c"),
-            Object(NonMatching, "cx/CXUncompression.c"),
-            Object(NonMatching, "cx/CXSecureUncompression.c"),
+            Object(Matching,    "cx/CXStreamingUncompression.c"),
+            Object(Matching,    "cx/CXUncompression.c"),
+            Object(Matching,    "cx/CXSecureUncompression.c"),
         ]
     ),
     RVLSDKLib("dsp", [
