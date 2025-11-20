@@ -9,7 +9,7 @@
 
 #include <revolution/mtx.h>
 
-#include <RVLFaceLibPrivate.h>
+#include <RVLFaceLibInternal.h>
 
 #include <cstring>
 
@@ -96,7 +96,7 @@ namespace ipl {
                 mbHovered[i] = FALSE;
             }
             
-            for (int i = 0; i < RFL_DATABASE_COUNT; i++) {
+            for (int i = 0; i < RFL_MAX_DATABASE; i++) {
                 mFaceIds[i] = -1;
             }
 
@@ -176,7 +176,7 @@ namespace ipl {
             mpButtonEvent = new FaceSelectButtonEvent(this);
 
             // Setup Miis
-            for (int i = 0; i < RFL_DATABASE_COUNT; i++) {
+            for (int i = 0; i < RFL_MAX_DATABASE; i++) {
                 if (System::getMiiManager()->isAvalable(i)) {
                     mFaceIds[mFaceCount++] = i;
                 }

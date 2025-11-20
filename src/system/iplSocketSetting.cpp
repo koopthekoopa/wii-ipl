@@ -28,7 +28,7 @@ namespace ipl {
         BOOL SocketSetting::init(void* work) {
             if (mpHeap == NULL) {
                 mpHeapBuf = System::getMem2Sys()->alloc(HEAP_BUFFER_SIZE, -DEFAULT_ALIGN);
-                mpHeap = MEMCreateExpHeapEx(mpHeapBuf, HEAP_BUFFER_SIZE, 2);
+                mpHeap = MEMCreateExpHeapEx(mpHeapBuf, HEAP_BUFFER_SIZE, MEM_HEAP_OPT_DEBUG_FILL);
 
                 SOLibraryConfig config;
                 memset(&config, 0, sizeof(SOLibraryConfig));

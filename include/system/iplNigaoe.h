@@ -11,6 +11,7 @@
 #include <egg/core.h>
 
 #include <RVLFaceLib.h>
+#include <RVLFaceLibInternal.h>
 
 namespace ipl {
     namespace nigaoe {
@@ -28,7 +29,7 @@ namespace ipl {
                     int faceId = mFaceId;
                     if (faceId >= 0) {
                         RFLiCharData* charData = RFLiGetCharData(faceId);
-                        faceName = charData->name;
+                        faceName = (wchar_t*)charData->name;
                     }
                     else {
                         faceName = NULL;

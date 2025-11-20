@@ -169,7 +169,7 @@ void GXInitTexObj(const GXTexObj* obj, void* image_ptr, u16 width, u16 height, G
     SET_REG_FIELD(t->image0, 10, 10, height - 1);
     SET_REG_FIELD(t->image0, 4, 20, format & 0xF);
     imageBase = (u32)((u32)image_ptr >> 5) & 0x01FFFFFF;
-    SET_REG_FIELD(t->image1, 24, 0, imageBase);
+    SET_REG_FIELD(t->image3, 24, 0, imageBase);
 
     switch (format & 0xF) {
         case GX_TF_I4:
@@ -296,6 +296,12 @@ void* GXGetTexObjUserData(const GXTexObj* obj) {
     return t->userData;
 }
 
+void* GXGetTexObjData(const GXTexObj* to) {
+    const __GXTexObjInt* t = (const __GXTexObjInt *)to;
+
+    return (void*)(GET_REG_FIELD(t->image3, 21, 0) << 5);
+}
+
 u16 GXGetTexObjWidth(const GXTexObj* to) {
     const __GXTexObjInt* t = (const __GXTexObjInt *)to;
 
@@ -345,21 +351,21 @@ void GXLoadTexObjPreLoaded(const GXTexObj *obj, const GXTexRegion *region, GXTex
     img0 = t->image0;
     img1 = r->image1;
     img2 = r->image2;
-    img3 = t->image1;
+    img3 = t->image3;
 
     SET_REG_FIELD(t->mode0, 8, 24, GXTexMode0Ids[id]);
     SET_REG_FIELD(t->mode1, 8, 24, GXTexMode1Ids[id]);
     SET_REG_FIELD(t->image0, 8, 24, GXTexImage0Ids[id]);
     SET_REG_FIELD(r->image1, 8, 24, GXTexImage1Ids[id]);
     SET_REG_FIELD(r->image2, 8, 24, GXTexImage2Ids[id]);
-    SET_REG_FIELD(t->image1, 8, 24, GXTexImage3Ids[id]);
+    SET_REG_FIELD(t->image3, 8, 24, GXTexImage3Ids[id]);
 
     GX_WRITE_RAS_REG(t->mode0);
     GX_WRITE_RAS_REG(t->mode1);
     GX_WRITE_RAS_REG(t->image0);
     GX_WRITE_RAS_REG(r->image1);
     GX_WRITE_RAS_REG(r->image2);
-    GX_WRITE_RAS_REG(t->image1);
+    GX_WRITE_RAS_REG(t->image3);
 
     if (!(t->flags & 2)) {
         tlr = (__GXTlutRegionInt*)__GXData->tlutRegionCallback(t->tlutName);

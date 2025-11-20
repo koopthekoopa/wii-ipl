@@ -1,18 +1,20 @@
-#ifndef REVOLUTION_FACE_LIB_H
-#define REVOLUTION_FACE_LIB_H
+#ifndef REVOLUTION_FACE_LIBRARY_H
+#define REVOLUTION_FACE_LIBRARY_H
 
-// Special thanks to the kiwi515 for the RVLFaceLib code from ogws
+#include <RFL_Types.h>
+#include <RFL_System.h>
 
-#include <revolution/types.h>
+#include <RFL_DefaultDatabase.h>
+#include <RFL_MiddleDatabase.h>
+#include <RFL_Controller.h>
 
-#include <RVLFacelib/RFL_Types.h>
+#include <RFL_DataUtility.h>
 
-#include <RVLFaceLibPrivate.h>
+#include <RFL_Model.h>
+#include <RFL_Icon.h>
 
-#include <RVLFacelib/RFL_System.h>
-#include <RVLFacelib/RFL_Database.h>
-#include <RVLFacelib/RFL_Icon.h>
+#include <RFL_NANDLoader.h>
 
-#endif // REVOLUTION_FACE_LIB_H
+#include <RFL_NWC24.h>
 
-
+#endif // REVOLUTION_FACE_LIBRARY_H

@@ -119,7 +119,7 @@ namespace ipl {
 
             if (nwc24Manager) {
                 if (nwc24Manager->open()) {
-                    if (RFLiMakeNWC24MsgforExchange(&msgObj, &charData) == RFLErrcode_Success) {
+                    if (RFLiMakeNWC24MsgforExchange(&msgObj, (RFLCharData*)&charData) == RFLErrcode_Success) {
                         nwc24Manager->setMsgAppId(&msgObj, ES_TITLE_CODE(TITLE_NIGAOE_ALL));
                         nwc24Manager->commitMsg(&msgObj);
                     }

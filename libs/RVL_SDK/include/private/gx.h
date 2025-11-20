@@ -187,7 +187,7 @@ typedef struct TEVAOpTable {
 
 typedef struct __GXTexObjInt_struct {
     u32         mode0, mode1;
-    u32         image0, image1;
+    u32         image0, image3;
 
     void*       userData;
 

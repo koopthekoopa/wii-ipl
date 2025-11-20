@@ -269,7 +269,7 @@ u8                      WPADGetSensorBarPosition();
 void                    WPADGetAccGravityUnit(s32 chan, u32 type, s32* acc);
 
 void                    WPADDisconnect(s32 chan);
-s32                     WPADProbe(s32 chan, s32* pDevType);
+s32                     WPADProbe(s32 chan, u32* pDevType);
 
 WPADSamplingCallback    WPADSetSamplingCallback(s32 chan, WPADSamplingCallback callback);
 WPADConnectCallback     WPADSetConnectCallback(s32 chan, WPADConnectCallback callback);
@@ -303,6 +303,9 @@ BOOL                    WPADIsDpdEnabled(s32 chan);
 s32                     WPADControlDpd(s32 chan, u32 command, WPADCallback callback);
 
 void                    WPADRecalibrate(s32 chan);
+
+s32                     WPADReadFaceData(s32 chan, void* dst, u16 size, u16 src, WPADCallback cb);
+s32                     WPADWriteFaceData(s32 chan, void *dst, u16 size, u16 src, WPADCallback cb);
 
 void                    __WPADReconnect(BOOL reconnect);
 

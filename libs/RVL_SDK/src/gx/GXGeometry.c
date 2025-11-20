@@ -193,6 +193,11 @@ void GXSetCullMode(GXCullMode mode) {
     __GXData->dirtyState |= 4;
 }
 
+void GXGetCullMode(GXCullMode* mode) {
+    GXCullMode hwMode = __GXData->genMode;
+    *mode = ((hwMode >> 0xD) & 0x2) | (((((int)hwMode >> 0xE) & 0x2) >> 0x1));
+}
+
 void GXSetCoPlanar(GXBool enable) {
     u32 reg;
 

@@ -8,7 +8,7 @@
 #include "system/iplNigaoe.h"
 #include "scene/textBalloon/iplBalloon.h"
 
-#include <RVLFaceLib/RFL_Database.h>
+#include <RFL_Database.h>
 
 namespace ipl {
     namespace scene {
@@ -131,7 +131,7 @@ namespace ipl {
                 };
 
                 static const int    MAX_FACE_EACH_PAGE = 10;
-                static const int    MAX_PAGES = (RFL_DATABASE_COUNT / MAX_FACE_EACH_PAGE); // (there really isn't a maximum amount of pages)
+                static const int    MAX_PAGES = (RFL_MAX_DATABASE / MAX_FACE_EACH_PAGE); // (there really isn't a maximum amount of pages)
                 
                 static const int    MAX_BALLOONS = BTN_MAX_FACE;
 
@@ -178,7 +178,7 @@ namespace ipl {
                 int                     mCurrentPage;                   // 0x74
                 int                     mFaceCount;                     // 0x78
 
-                int                     mFaceIds[RFL_DATABASE_COUNT];   // 0x7C
+                int                     mFaceIds[RFL_MAX_DATABASE];     // 0x7C
                 int                     mbHovered[BTN_MAX];             // 0x20C
 
                 int                     mSelectedFaceId;                // 0x23C

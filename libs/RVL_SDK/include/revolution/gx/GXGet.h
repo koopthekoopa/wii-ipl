@@ -12,6 +12,7 @@ extern "C" {
 // Texture
 GXBool          GXGetTexObjMipMap(const GXTexObj* to);
 GXTexFmt        GXGetTexObjFmt(const GXTexObj* to);
+void*           GXGetTexObjData(const GXTexObj* to);
 u16             GXGetTexObjWidth(const GXTexObj* to);
 u16             GXGetTexObjHeight(const GXTexObj* to);
 GXTexWrapMode   GXGetTexObjWrapS(const GXTexObj* to);

@@ -435,7 +435,7 @@ def RVLFaceLib(objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": "RVLFaceLib",
         "mw_version": config.linker_version,
-        "cflags": cflags_sdk,
+        "cflags": cflags_sdk_except,
         "progress_category": "rvlfacelib",
         "objects": objects,
         "src_dir": "libs/RVLFaceLib/src",
@@ -1113,21 +1113,21 @@ config.libs = [
     # RVLFaceLib
     RVLFaceLib(
         [
-            Object(NonMatching, "RFL_System.c"),
-            Object(NonMatching, "RFL_NANDLoader.c"),
-            Object(NonMatching, "RFL_NANDAccess.c"),
-            Object(NonMatching, "RFL_Model.c"),
-            Object(NonMatching, "RFL_MakeTex.c"),
+            Object(Matching,    "RFL_System.c"),
+            Object(Matching,    "RFL_NANDLoader.c"),
+            Object(Matching,    "RFL_NANDAccess.c"),
+            Object(Matching,    "RFL_Model.c"),
+            Object(Matching,    "RFL_MakeTex.c"),
             Object(NonMatching, "RFL_Icon.c"),
-            Object(NonMatching, "RFL_HiddenDatabase.c"),
-            Object(NonMatching, "RFL_Database.c"),
-            Object(NonMatching, "RFL_Controller.c"),
-            Object(NonMatching, "RFL_MiddleDatabase.c"),
-            Object(NonMatching, "RFL_MakeRandomFace.c"),
-            Object(NonMatching, "RFL_DefaultDatabase.c"),
-            Object(NonMatching, "RFL_DataUtility.c"),
+            Object(Matching,    "RFL_HiddenDatabase.c"),
+            Object(Matching,    "RFL_Database.c"),
+            Object(Matching,    "RFL_Controller.c"),
+            Object(Matching,    "RFL_MiddleDatabase.c"),
+            Object(Matching,    "RFL_MakeRandomFace.c"),
+            Object(Matching,    "RFL_DefaultDatabase.c"),
+            Object(Matching,    "RFL_DataUtility.c"),
             Object(NonMatching, "RFL_NWC24.c"),
-            Object(NonMatching, "RFL_Format.c"),
+            Object(Matching,    "RFL_Format.c"),
         ]
     ),
     # TMC JPEG

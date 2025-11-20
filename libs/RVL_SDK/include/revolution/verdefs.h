@@ -27,6 +27,12 @@
 #define GetVersion(lib) __##lib##Version
 
 #define SDKDefineVersion(lib, date, time) DefineVersion(RVL_SDK, lib, date, time)
+#if defined(DEBUG)
+#define SDKDefineVersionDebug(lib, date, time, time2) DefineVersion(RVL_SDK, lib, date, time2)
+#else
+#define SDKDefineVersionDebug(lib, date, time, time2) DefineVersion(RVL_SDK, lib, date, time)
+#endif
+
 #define SDKDefineVersionEx(lib, date, time, cwbuild) DefineVersionEx(RVL_SDK, lib, date, time, cwbuild)
 
 #endif // REVOLUTION_VERSION_MACROS_H

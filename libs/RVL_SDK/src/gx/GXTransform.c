@@ -154,7 +154,7 @@ void GXGetProjectionv(f32* ptr) {
     Copy6Floats(&ptr[1], __GXData->projMtx);
 }
 
-void GXLoadPosMtxImm(Mtx mtx, u32 id) {
+void GXLoadPosMtxImm(const Mtx mtx, u32 id) {
     u32 reg;
     u32 addr;
 
