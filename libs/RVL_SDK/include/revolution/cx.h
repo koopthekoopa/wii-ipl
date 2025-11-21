@@ -10,9 +10,6 @@ typedef u8 CXCompressionType;
 
 #define CX_COMPRESSION_TYPE_MASK        0xF0
 
-
-
-
 #include <revolution/cx/CXUncompression.h>
 #include <revolution/cx/CXSecureUncompression.h>
 #include <revolution/cx/CXStreamingUncompression.h>

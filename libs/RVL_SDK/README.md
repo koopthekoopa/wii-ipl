@@ -52,7 +52,7 @@ List of libraries that are linked (in alphabetical order):
 | **TPL**      | Texture Palette File Library                                | ✔️ |
 | **USB**      | IUSB Input/Output API; written by Hudson Soft               | ✔️ |
 | **USBCMN**   | Small utilities for USB?                                    | ❌ |
-| **USBKBD**   | USB Keyboard Driver Library                                 | ❌ |
+| **USBKBD**   | USB Keyboard Driver Library                                 | ✔️ |
 | **VI**       | Video Interface Library                                     | ❌ |
 | **WAD**      | WAD Package Library                                         | ❌ |
 | **WENC**     | Wii Remote Speaker Encoding Library                         | ✔️ |

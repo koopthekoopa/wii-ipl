@@ -1833,7 +1833,7 @@ config.libs = [
         ]
     ),
     RVLSDKLib("usbkbd", [
-            Object(NonMatching, "usbkbd/usb_kbd.c"),
+            Object(Matching,    "usbkbd/usb_kbd.c"),
         ]
     ),
     RVLSDKLib("cntcache", [
