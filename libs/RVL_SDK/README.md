@@ -51,7 +51,7 @@ List of libraries that are linked (in alphabetical order):
 | **SI**       | Serial Interface Library; for PAD                           | ✔️ |
 | **TPL**      | Texture Palette File Library                                | ✔️ |
 | **USB**      | IUSB Input/Output API; written by Hudson Soft               | ✔️ |
-| **USBCMN**   | Small utilities for USB?                                    | ❌ |
+| **USBCMN**   | Small utilities for USB?                                    | ✔️ |
 | **USBKBD**   | USB Keyboard Driver Library                                 | ✔️ |
 | **VI**       | Video Interface Library                                     | ❌ |
 | **WAD**      | WAD Package Library                                         | ❌ |

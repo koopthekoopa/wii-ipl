@@ -1815,10 +1815,10 @@ config.libs = [
         ]
     ),
     RVLSDKLib("usbcmn", [
-            Object(NonMatching, "usbcmn/puh_ker_mem.c"),
-            Object(NonMatching, "usbcmn/puh_ker_msg.c"),
-            Object(NonMatching, "usbcmn/puh_ker_sem.c"),
-            Object(NonMatching, "usbcmn/puh_ker_tsk.c"),
+            Object(Matching,    "usbcmn/puh_ker_mem.c"),
+            Object(Matching,    "usbcmn/puh_ker_msg.c"),
+            Object(Matching,    "usbcmn/puh_ker_sem.c"),
+            Object(Matching,    "usbcmn/puh_ker_tsk.c"),
         ]
     ),
     RVLSDKLib("kbd", [

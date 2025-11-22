@@ -10,7 +10,8 @@
                 "${workspaceFolder}/libs/RevoEX/include/**",
                 "${workspaceFolder}/libs/NW4R/include/**",
                 "${workspaceFolder}/libs/EGG/include/**",
-                "${workspaceFolder}/libs/RVLFaceLib/include"
+                "${workspaceFolder}/libs/RVLFaceLib/include",
+                "${workspaceFolder}/libs/RVLMiddleware/eZiText/include"
             ],
             "cStandard": "c99",
             "cppStandard": "c++03",
@@ -28,7 +29,8 @@
                 "${workspaceFolder}/libs/RevoEX/include/**",
                 "${workspaceFolder}/libs/NW4R/include/**",
                 "${workspaceFolder}/libs/EGG/include/**",
-                "${workspaceFolder}/libs/RVLFaceLib/include"
+                "${workspaceFolder}/libs/RVLFaceLib/include",
+                "${workspaceFolder}/libs/RVLMiddleware/eZiText/include"
             ],
             "cStandard": "c99",
             "cppStandard": "c++03",
@@ -46,7 +48,8 @@
                 "${workspaceFolder}/libs/RevoEX/include/**",
                 "${workspaceFolder}/libs/NW4R/include/**",
                 "${workspaceFolder}/libs/EGG/include/**",
-                "${workspaceFolder}/libs/RVLFaceLib/include"
+                "${workspaceFolder}/libs/RVLFaceLib/include",
+                "${workspaceFolder}/libs/RVLMiddleware/eZiText/include"
             ],
             "cStandard": "c99",
             "cppStandard": "c++03",

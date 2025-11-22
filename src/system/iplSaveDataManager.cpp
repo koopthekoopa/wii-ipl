@@ -668,7 +668,7 @@ namespace ipl {
                     case NAND_RESULT_MAXFD:
                     case NAND_RESULT_MAXBLOCKS:
                     case NAND_RESULT_INVALID:
-                    case 7:
+                    case NAND_RESULT_UNUSED_7:
                     default: {
                         IPLErrorLogAndDisplay(MESG_ERR_FILE, "NAND", code, 1503);
                         break;
