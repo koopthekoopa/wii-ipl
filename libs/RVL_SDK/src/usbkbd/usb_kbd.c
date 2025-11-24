@@ -36,7 +36,7 @@ static u8                   usbKbdIosResultMem[OSRoundUp32B(sizeof(usbKbdAsyncMe
 static BOOL                 usbKbdInitialized = FALSE;
 static BOOL                 usbKbdAsyncReady = FALSE;
 
-static IOSError usbKbdCallbackHandler(IOSError error, void* arg) {
+static IOSError usbKbdCallbackHandler(s32 result, void* arg) {
     usbKbdAsyncMem* data = (usbKbdAsyncMem*)arg;
 
     // Current state

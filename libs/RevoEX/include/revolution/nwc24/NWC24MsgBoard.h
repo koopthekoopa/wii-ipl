@@ -93,7 +93,7 @@ NWC24Err    NWC24GetMsgFromId(const NWC24MsgObj* msg, NWC24UserId* fromId);
 NWC24Err    NWC24GetMsgDate(const NWC24MsgObj* msg, OSCalendarTime* msgDate);
 NWC24Err    NWC24GetMsgIconNewSign(const NWC24MsgObj* msg, u32* iconNewSign);
 
-NWC24Err    NWC24ReadMsgField(const NWC24MsgObj* msg, char* fieldName, u8* fieldBuf, unsigned long fieldBufLen);
+NWC24Err    NWC24ReadMsgField(const NWC24MsgObj* msg, char* fieldName, u8* fieldBuf, u32 fieldBufLen);
 NWC24Err    NWC24ReadMsgFaceData(const NWC24MsgObj* msg, u8* faceData);
 NWC24Err    NWC24ReadMsgAltName(const NWC24MsgObj* msg, u16* altName, u32 altNameLen);
 NWC24Err    NWC24ReadMsgMBNoReply(const NWC24MsgObj* msg, BOOL* mbNoReplyFlag);

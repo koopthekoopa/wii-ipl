@@ -29,7 +29,7 @@ namespace ipl {
         #endif
 
         #define FILE_ERROR_OK                                                                                                   \
-         (((mLastError >  NWC24_ERR_FILE_OPEN   || mLastError < NWC24_ERR_FILE_OTHER)  && mLastError != NWC24_ERR_NAND_CORRUPT) \
+         (((mLastError >  NWC24_ERR_FILE_OPEN   || mLastError <  NWC24_ERR_FILE_OTHER) && mLastError != NWC24_ERR_NAND_CORRUPT) \
         && (mLastError != NWC24_ERR_FILE_EXISTS && mLastError != NWC24_ERR_INTERNAL_VF && mLastError != NWC24_ERR_FILE_BROKEN))
 
         Manager::Manager(EGG::Heap* heap) :
@@ -491,7 +491,7 @@ namespace ipl {
 
             NWC24iGetSchedulerStat(&smArg.mScheduleStat, sizeof(NWC24ScdStat));
 
-            // Print Scheduler Sstatus
+            // Print Scheduler status
             OSReport("permission %d\n",smArg.mScheduleStat.permission);
             OSReport("last task err %d\n",smArg.mScheduleStat.lastCriticalError);
             OSReport("new msg flag %d\n",smArg.mScheduleStat.newMsgFlag);
