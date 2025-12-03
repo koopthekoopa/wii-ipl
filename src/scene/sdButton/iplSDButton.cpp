@@ -32,7 +32,8 @@ namespace ipl {
         SDButton::SDButton(EGG::Heap* heap)
         : Base(heap),
         unk_0x54(0) {
-            mParentFlags = SCN_PARENT_FLAG_CANCALC | SCN_PARENT_FLAG_CANDRAW;;
+            setSceneParentFlags(SCN_PARENT_FLAG_CANCALC | SCN_PARENT_FLAG_CANDRAW);
+
             for (int i = 0; i < 2; i++) {
                 mbArrowVisible[i] = true;
             }
@@ -45,13 +46,13 @@ namespace ipl {
         SDButton::~SDButton() {}
 
         void SDButton::prepare() {
-            mpLayoutFile  = System::getNandManager()->readLayoutAsync(getHeap(), "sdButton.ash");
-            mpBalloonFile = System::getNandManager()->readLayoutAsync(getHeap(), "balloon.ash");
+            mpLayoutFile  = System::getNandManager()->readLayoutAsync(getSceneHeap(), "sdButton.ash");
+            mpBalloonFile = System::getNandManager()->readLayoutAsync(getSceneHeap(), "balloon.ash");
         }
 
         void SDButton::create() {
             // Setup layout
-            mpLayout = new layout::Object(getHeap(), mpLayoutFile, "arc", "mn_SdcardMenu_b.brlyt");
+            mpLayout = new layout::Object(getSceneHeap(), mpLayoutFile, "arc", "mn_SdcardMenu_b.brlyt");
         
             // Bind button animatons
             mpLayout->bindToGroup("mn_SdcardMenu_b_Btn_Wiimenu_rollover.brlan", "G_BL", false);
@@ -98,7 +99,7 @@ namespace ipl {
 
             // Setup text balloons
             for (int i = 0; i < BALLOON_MAX; i++) {
-                mpBalloons[i] = new TextBalloon(get_heap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 120.0f, 30.0f);
+                mpBalloons[i] = new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 120.0f, 30.0f);
                 mpBalloons[i]->init(System::getMessage(scBalloonMsg[i]), 0);
                 mpBalloons[i]->init_textbox(TRUE);
             }
@@ -324,7 +325,7 @@ namespace ipl {
         }
 
         bool SDButton::isActive() const {
-            return mScnState & SCN_STATE_CREATED;
+            return getSceneState() & SCN_STATE_CREATED;
         }
 
         void SDButton::setEventHandler(::gui::EventHandler* event, ::gui::EventHandler* optOutEvent) {

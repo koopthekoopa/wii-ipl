@@ -120,6 +120,15 @@
 
 #define MESG_SETTING_BTN_BACK           315
 
+/* Settings Select Button */
+
+#define MESG_SETTING_SEL_DATA_MANAGE    253
+#define MESG_SETTING_SEL_SAVE_DATA      254
+#define MESG_SETTING_SEL_CHANNELS       255
+#define MESG_SETTING_SEL_WII            256
+#define MESG_SETTING_SEL_CUBE           257
+#define MESG_SETTING_SEL_WII_SETTING    316
+
 /* Error Messages */
 
 #define MESG_ERROR_CODE                 400

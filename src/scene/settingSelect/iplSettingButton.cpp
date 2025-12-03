@@ -1,4 +1,5 @@
 #include "scene/settingSelect/iplSettingButton.h"
+#include "scene/settingSelect/iplSettingSelectArg.h"
 
 #include "iplSceneUI.h"
 
@@ -11,14 +12,14 @@ namespace ipl {
             "WIPL_SE_DECIDE",
         };
 
-        SettingButton::SettingButton(EGG::Heap* heap, int type) :
+        SettingButton::SettingButton(EGG::Heap* heap, int arg) :
         FaderSceneBase(heap),
         ::gui::EventHandler() {
             unk_0x264 = 64;
             unk_0x268 = 0;
             unk_0x26C = 0;
             unk_0x270 = 0;
-            mSettingType = type;
+            mSettingArg = arg;
             mpLayout = NULL;
             mpLayoutFile = NULL;
             mpGui = NULL;
@@ -30,11 +31,11 @@ namespace ipl {
         }
 
         void SettingButton::prepare() {
-            mpLayoutFile = System::getNandManager()->readLayoutAsync(getHeap(), "setupBtn.ash");
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(getSceneHeap(), "setupBtn.ash");
         }
 
         void SettingButton::create() {
-            mpLayout = new layout::Object(getHeap(), mpLayoutFile, "arc", "it_Button_a.brlyt");
+            mpLayout = new layout::Object(getSceneHeap(), mpLayoutFile, "arc", "it_Button_a.brlyt");
         
             mpLayout->bindToGroup("it_Button_a_SeenIn.brlan",       "G_BarIn",      false);
             mpLayout->bindToGroup("it_Button_a_BtnFoucusIn.brlan",  "G_FocusBtnA",  false, false);
@@ -53,7 +54,7 @@ namespace ipl {
 
             setText(MESG_SETTING_BTN_BACK);
 
-            if (mSettingType == 1) {
+            if (mSettingArg == SettingSelectArg::ARG_START_SAVE_DATA) {
                 mbShowBtn = false;
                 mpLayout->getAnim(ANIM_ALPHA_IN)->init();
             }
@@ -190,8 +191,7 @@ namespace ipl {
 
         bool SettingButton::update() {
             bool result = false;
-            if (mScnFadeState == FADE_STATE_NORMAL && mbShowBtn
-            && !mpLayout->getAnim(ANIM_ALPHA_IN)->isPlaying()) {
+            if (getSceneFadeState() == FaderSceneBase::STT_NORMAL && mbShowBtn && !mpLayout->getAnim(ANIM_ALPHA_IN)->isPlaying()) {
                 mpGui->update();
 
                 result = mbTrigBtn;

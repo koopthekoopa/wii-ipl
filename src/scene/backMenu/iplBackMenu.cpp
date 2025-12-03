@@ -41,7 +41,7 @@ namespace ipl {
         BackMenu::BackMenu(EGG::Heap* heap) :
         FaderSceneBase(heap),
         unused_0x5C(0) {
-            mParentFlags = SCN_PARENT_FLAG_CANDRAW; // (ignored as child scenes aren't created over this scene)
+            setSceneParentFlags(SCN_PARENT_FLAG_CANDRAW); // (ignored as child scenes aren't created over this scene)
         }
 
         void BackMenu::prepare() {}
@@ -52,7 +52,7 @@ namespace ipl {
 
         void BackMenu::create() {
             // Set up layout
-            mpLayout = new layout::Object(getHeap(), backToWiiMenu_arc, "arc", "my_BackToWiiMenu.brlyt");
+            mpLayout = new layout::Object(getSceneHeap(), backToWiiMenu_arc, "arc", "my_BackToWiiMenu.brlyt");
 
             mpLayout->bind("my_BackToWiiMenu.brlan");
             mpLayout->finishBinding();

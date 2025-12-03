@@ -28,6 +28,8 @@ namespace ipl {
                 int             holdSE(const char* sndName);
                 int             startSEIndex(u32 sndIndex);
 
+                BOOL            isSEActive(const char* sndName);
+
                 int             startBGM(const char* bgmName);
                 int             pauseOnBGM();
                 int             pauseOffBGM();

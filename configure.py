@@ -554,8 +554,7 @@ Matching = True                   # Object matches and should be linked
 NonMatching = False               # Object does not match and should not be linked
 Equivalent = config.non_matching  # Object should be linked when configured with --non-Equivalent
 
-
-def EquivalentFor(*versions):
+def MatchingFor(*versions):
     return config.version in versions
 
 
@@ -827,7 +826,7 @@ config.libs = [
     IPLSection("settingSelect", [
             Object(Matching,    "scene/settingSelect/iplSettingBg.cpp"),
             Object(Matching,    "scene/settingSelect/iplSettingButton.cpp"),
-            Object(NonMatching, "scene/settingSelect/iplSettingSelect.cpp"),
+            Object(MatchingFor("43U", "43E", "43J"),  "scene/settingSelect/iplSettingSelect.cpp"),
         ]
     ),
     IPLSection("sceneSystem", [

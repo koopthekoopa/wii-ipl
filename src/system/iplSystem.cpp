@@ -1322,7 +1322,7 @@ namespace ipl {
         // If the boot type involves arguments
         if (smArg.mBS2BootType == BS2_BOOT_TYPE_RETURN_ARGS) {
             // Internet settings
-            if (smArg.mBS2LaunchCode == LAUNCH_CODE_INTERNET_SETTING && BS2GetArgc() > 1) {
+            if (smArg.mBS2LaunchCode == LAUNCH_CODE_SETTING && BS2GetArgc() > 1) {
                 strncpy(smArg.mBS2FirstArgv, BS2GetArgv()[1], sizeof(smArg.mBS2FirstArgv));
                 smArg.mBS2FirstArgv[sizeof(smArg.mBS2FirstArgv)-1] = 0;
                 smArg.mpNetSettingArg = smArg.mBS2FirstArgv;

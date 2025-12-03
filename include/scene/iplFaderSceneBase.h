@@ -13,18 +13,18 @@ namespace ipl {
             /* Onto the next scene `calc` function */
             SCENE_NEXT,
         };
-        
-        enum {
-            FADE_STATE_FADE_IN = 0,
-            FADE_STATE_INIT_NORMAL,
-            FADE_STATE_NORMAL,
-            FADE_STATE_INIT_FADE_OUT,
-            FADE_STATE_FADE_OUT,
-            FADE_STATE_DONE,
-        };
 
         SCENE_CLASS(FaderSceneBase) {
             public:
+                enum {
+                    STT_FADE_IN = 0,
+                    STT_INIT_NORMAL,
+                    STT_NORMAL,
+                    STT_INIT_FADE_OUT,
+                    STT_FADE_OUT,
+                    STT_DONE,
+                };
+
                 FaderSceneBase(EGG::Heap* heap);
                 virtual ~FaderSceneBase() {}
 
@@ -41,6 +41,8 @@ namespace ipl {
             
 
                 virtual void            calcCommonAfter()   {}                      // 0x64
+
+                int                     getSceneFadeState() { return mScnFadeState; }
 
             protected:
                 int mScnFadeState;  // 0x54

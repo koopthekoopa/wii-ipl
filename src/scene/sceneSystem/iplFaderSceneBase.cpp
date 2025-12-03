@@ -4,45 +4,44 @@ namespace ipl {
     namespace scene {
         FaderSceneBase::FaderSceneBase(EGG::Heap* heap) :
         Base(heap),
-        mScnFadeState(FADE_STATE_FADE_IN) {}
+        mScnFadeState(STT_FADE_IN) {}
 
         void FaderSceneBase::calc() {
-            if (mScnFadeState != FADE_STATE_DONE) {
+            if (mScnFadeState != STT_DONE) {
                 calcCommon();
             }
 
             switch (mScnFadeState) {
-                case FADE_STATE_FADE_IN: {
+                case STT_FADE_IN: {
                     if (calcFadein() != SCENE_CONTINUE) {
-                        mScnFadeState = FADE_STATE_INIT_NORMAL;
+                        mScnFadeState = STT_INIT_NORMAL;
                     }
                     break;
                 }
-                case FADE_STATE_INIT_NORMAL: {
+                case STT_INIT_NORMAL: {
                     initCalcNormal();
-                    mScnFadeState = FADE_STATE_NORMAL;
+                    mScnFadeState = STT_NORMAL;
                 }
-                case FADE_STATE_NORMAL: {
+                case STT_NORMAL: {
                     if (calcNormal() != SCENE_CONTINUE) {
-                        mScnFadeState = FADE_STATE_INIT_FADE_OUT;
+                        mScnFadeState = STT_INIT_FADE_OUT;
                     }
                     break;
                 }
-                case FADE_STATE_INIT_FADE_OUT: {
+                case STT_INIT_FADE_OUT: {
                     initCalcFadeout();
-                    mScnFadeState = FADE_STATE_FADE_OUT;
+                    mScnFadeState = STT_FADE_OUT;
                 }
-                case FADE_STATE_FADE_OUT: {
+                case STT_FADE_OUT: {
                     if (calcFadeout() != SCENE_CONTINUE) {
-                        u32 result = mScnState | SCN_STATE_DESTROY_REQ;
-                        mScnFadeState = FADE_STATE_DONE;
-                        mScnState = result;
+                        setSceneState(SCN_STATE_DESTROY_REQ);
+                        mScnFadeState = STT_DONE;
                     }
                     break;
                 }
             }
 
-            if (mScnFadeState != FADE_STATE_DONE) {
+            if (mScnFadeState != STT_DONE) {
                 calcCommonAfter();
             }
         }

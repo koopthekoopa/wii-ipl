@@ -77,7 +77,7 @@ namespace ipl {
     class System {
         public:
             enum {
-                LAUNCH_CODE_INTERNET_SETTING = 1,
+                LAUNCH_CODE_SETTING = 1,
                 LAUNCH_CODE_DATA_MANAGER = 2,
             };
             class Arg {

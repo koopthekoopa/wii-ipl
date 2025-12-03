@@ -74,14 +74,14 @@ namespace ipl {
                 void        execTick(BS2State state);
                 void        updateTick();
 
-                u32         getIPLState()       { return mIPLState; }
+                int         getIPLState()       { return mIPLState; }
                 BS2State    getUnlockedState()  { return mUnlockedState; }
                 BOOL        diskHasBanner()     { return mbHasBanner; }
 
             private:
                 void    bootNewSystem();
                 
-                u32                 mIPLState;          // 0x04
+                int                 mIPLState;          // 0x04
                 volatile BS2State   mState;             // 0x08
                 bool                unk_0x0C;
                 bool                unk_0x0D;

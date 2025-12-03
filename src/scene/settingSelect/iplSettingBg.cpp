@@ -1,4 +1,5 @@
 #include "scene/settingSelect/iplSettingBg.h"
+#include "scene/settingSelect/iplSettingSelectArg.h"
 
 #include "iplScene.h"
 
@@ -6,24 +7,24 @@
 
 namespace ipl {
     namespace scene {
-        SettingBg::SettingBg(EGG::Heap* heap, int type) :
+        SettingBg::SettingBg(EGG::Heap* heap, int arg) :
         Base(heap),
-        mSettingType(type),
+        mSettingArg(arg),
         mpLayout(NULL),
         mpLayoutFile(NULL) {
-            mParentFlags = SCN_PARENT_FLAG_CANCALC | SCN_PARENT_FLAG_CANDRAW;
+            setSceneParentFlags(SCN_PARENT_FLAG_CANCALC | SCN_PARENT_FLAG_CANDRAW);
         }
 
         void SettingBg::prepare() {
-            mpLayoutFile = System::getNandManager()->readLayoutAsync(getHeap(), "setupBg.ash");
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(getSceneHeap(), "setupBg.ash");
         }
 
         void SettingBg::create() {
-            mpLayout = new layout::Object(getHeap(), mpLayoutFile, "arc", "it_BgSetUp_a.brlyt");
+            mpLayout = new layout::Object(getSceneHeap(), mpLayoutFile, "arc", "it_BgSetUp_a.brlyt");
             mpLayout->finishBinding();
 
-            createChildScene(SCENE_SETTING_BUTTON, this, NULL, (void*)mSettingType);
-            createChildScene(SCENE_SETTING_SELECT, this, NULL, (void*)mSettingType);
+            createChildScene(SCENE_SETTING_BUTTON, this, NULL, (void*)mSettingArg);
+            createChildScene(SCENE_SETTING_SELECT, this, NULL, (void*)mSettingArg);
 
             System::getFader()->fadeIn();
         }

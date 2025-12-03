@@ -62,9 +62,9 @@ namespace ipl {
                         // If we have custom arguments
                         case BS2_BOOT_TYPE_RETURN_ARGS: {
                             // Internet settings
-                            if (System::getBS2LaunchCode() == System::LAUNCH_CODE_INTERNET_SETTING) {
+                            if (System::getBS2LaunchCode() == System::LAUNCH_CODE_SETTING) {
                                 *initialScene = SCENE_REBOOT;
-                                *initialSubScene = REBOOT_INTERNET_SETTINGS;
+                                *initialSubScene = REBOOT_SETTINGS;
                                 disableTvrc /* = TRUE*/ = *initialSubScene;
                                 System::getResetHandler()->enableResetToMenu();
                             }

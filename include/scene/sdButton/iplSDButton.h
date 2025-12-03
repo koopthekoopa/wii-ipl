@@ -106,8 +106,8 @@ namespace ipl {
                 void            disableBtn();
 
                 static int      getButtonNo(const char* paneName);
+
             protected:
-                EGG::Heap*      get_heap()      { return mpHeap; }
                 layout::Object* get_layout()    { return mpLayout; } 
 
             private:

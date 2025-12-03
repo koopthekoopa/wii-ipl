@@ -7,7 +7,7 @@ namespace ipl {
     namespace scene {
         enum {
             REBOOT_DATA_MANAGEMENT = 0,
-            REBOOT_INTERNET_SETTINGS
+            REBOOT_SETTINGS
         };
         SCENE_CLASS(Reboot) {
             public:

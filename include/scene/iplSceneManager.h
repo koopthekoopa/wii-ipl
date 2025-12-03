@@ -65,6 +65,8 @@ namespace ipl {
                 void        attachReservedScene();
 
                 BOOL        isReady(int sceneId);
+
+                SceneObj*   getReservedScene()  { return mpReservedScene; }
             
             private:
                 void        createRootScene(int sceneId, void* args);

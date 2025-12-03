@@ -105,13 +105,13 @@ namespace ipl {
 
         void FaceSelect::prepare() {
             // Read the files!!!
-            mpLayoutFile = System::getNandManager()->readLayoutAsync(getHeap(), "faceSel.ash");
-            mpBalloonFile = System::getNandManager()->readLayoutAsync(getHeap(), "balloon.ash");
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(getSceneHeap(), "faceSel.ash");
+            mpBalloonFile = System::getNandManager()->readLayoutAsync(getSceneHeap(), "balloon.ash");
         }
 
         void FaceSelect::create() {
             // Layout!!!
-            mpLayout = new layout::Object(getHeap(), mpLayoutFile, "arc", "my_selectNigaoe_a.brlyt");
+            mpLayout = new layout::Object(getSceneHeap(), mpLayoutFile, "arc", "my_selectNigaoe_a.brlyt");
 
             // Bind all of the animations
             mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeIn.brlan",           "G_All", false, mFadeType == FADE_FROM_MEMO);
@@ -208,7 +208,7 @@ namespace ipl {
             f32 unk4 = 30.0f;
             f32 unk3 = 120.0f;
             for (int i = 0; i < MAX_BALLOONS; i++) {
-                mpBalloons[i] = new TextBalloon(getHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), unk3, unk4);
+                mpBalloons[i] = new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), unk3, unk4);
             }
         }
 

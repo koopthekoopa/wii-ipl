@@ -39,12 +39,12 @@ namespace ipl {
         }
 
         void ParentalDialog::prepare() {
-            mpLayoutFile = System::getNandManager()->readLayoutAsync(getHeap(), "prntDlg.ash");
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(getSceneHeap(), "prntDlg.ash");
         }
 
         void ParentalDialog::create() {
             // Init layout
-            mpLayout = new layout::Object(getHeap(), mpLayoutFile, "arc", "my_ParentalWindow_a.brlyt");
+            mpLayout = new layout::Object(getSceneHeap(), mpLayoutFile, "arc", "my_ParentalWindow_a.brlyt");
 
             // Bind animations
             mpLayout->bindToGroup("my_ParentalWindow_a_DialogIn.brlan",     "G_InOut", false);

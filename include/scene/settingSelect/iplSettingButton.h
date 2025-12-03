@@ -20,7 +20,7 @@ namespace ipl {
                     CMD_SET_TEXT,
                 };
 
-                SettingButton(EGG::Heap* heap, int type);
+                SettingButton(EGG::Heap* heap, int arg);
 
                 virtual void            prepare();
                 virtual void            create();
@@ -40,6 +40,14 @@ namespace ipl {
                 bool                    isPlaying() const;
                 void                    setSoundType(int type)  { mSoundType = type; }
 
+                void                    setText(u32 msgId);
+
+                void                    showBtn();
+                void                    hideBtn();
+
+                void                    showWii();
+                void                    hideWii();
+
             private:
                 enum {
                     ANIM_SEEN_IN = 0,
@@ -51,14 +59,6 @@ namespace ipl {
                     ANIM_ALPHA_IN,
                     ANIM_ALPHA_OUT,
                 };
-
-                void                    setText(u32 msgId);
-
-                void                    showBtn();
-                void                    hideBtn();
-
-                void                    showWii();
-                void                    hideWii();
 
                 void                    start_point_event(const char* paneName, controller::Interface* controller);
                 void                    start_left_event(const char* paneName);
@@ -76,7 +76,7 @@ namespace ipl {
                 int                 unk_0x26C;
                 int                 unk_0x270;
 
-                int                 mSettingType;   // 0x274
+                int                 mSettingArg;    // 0x274
 
                 layout::Object*     mpLayout;       // 0x278
 

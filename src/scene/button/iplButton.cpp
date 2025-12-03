@@ -199,13 +199,13 @@ namespace ipl {
         Button::~Button() {}
             
         void Button::prepare() {
-            mpLayoutFile  = System::getNandManager()->readLayoutAsync(getHeap(), "cmnBtn.ash");
-            mpBalloonFile = System::getNandManager()->readLayoutAsync(getHeap(), "balloon.ash");
+            mpLayoutFile  = System::getNandManager()->readLayoutAsync(getSceneHeap(), "cmnBtn.ash");
+            mpBalloonFile = System::getNandManager()->readLayoutAsync(getSceneHeap(), "balloon.ash");
         }
 
         void Button::create() {
             // Setup layout
-            mpLayout = new layout::Object(getHeap(), mpLayoutFile, "arc", "my_IplTop_e.brlyt");
+            mpLayout = new layout::Object(getSceneHeap(), mpLayoutFile, "arc", "my_IplTop_e.brlyt");
 
             // Bind all groups
             for (int i = 0; i < BTN_MAX; i++) {
@@ -262,7 +262,7 @@ namespace ipl {
 
             // Setup text balloons
             for (int i = 0; i < BALLOON_MAX; i++) {
-                mpBalloons[i] = new TextBalloon(getHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 120.0f, 30.0f);
+                mpBalloons[i] = new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 120.0f, 30.0f);
                 mpBalloons[i]->init(System::getMessage(scBalloonMsg[i]), 0);
                 mpBalloons[i]->init_textbox();
             }
@@ -270,8 +270,8 @@ namespace ipl {
             stopMailNumAnm();
 
             // Create the other buttons
-            mOptOutBtn.create(mpLayoutFile, getHeap());
-            mSdMenuBtn.create(mpLayoutFile, mpBalloonFile, getHeap());
+            mOptOutBtn.create(mpLayoutFile, getSceneHeap());
+            mSdMenuBtn.create(mpLayoutFile, mpBalloonFile, getSceneHeap());
 
 #ifdef KOREAN_BUILD
             if (SCGetAspectRatio() == SC_ASPECT_RATIO_16x9) {
@@ -456,7 +456,7 @@ namespace ipl {
 
         bool Button::isActive() const {
             bool result = false;
-            if ((mScnState & SCN_STATE_CREATED) && unk_0x54 != 1) {
+            if ((getSceneState() & SCN_STATE_CREATED) && unk_0x54 != 1) {
                 result = true;
             }
             return result;

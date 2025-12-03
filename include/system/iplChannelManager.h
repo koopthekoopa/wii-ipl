@@ -283,6 +283,8 @@ namespace ipl {
 
                 SEntry&             getChannel(int page, int index) { return mChannels[page][index]; }
 
+                BOOL                isReady()   { return mState == FINISH; }
+
             private:
                 typedef struct MD5Head {
                     u8          magic[4];       // 0x00 (`IMD5`; "IPL MD5"?)
@@ -298,7 +300,7 @@ namespace ipl {
                 };
 
                 EGG::Heap*          mpHeap;                                         // 0x04
-                u32                 mState;                                         // 0x08
+                int                 mState;                                         // 0x08
 
                 SEntry              mChannels[MAX_CHANNEL_PAGE][MAX_CHANNEL_INDEX]; // 0x0C
                 SEntry              mTmpChannel;                                    // 0x150C

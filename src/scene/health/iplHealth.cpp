@@ -107,7 +107,7 @@ namespace ipl {
         mSafeModeTick(0),
         mbHeldCombo(false),
         mbDoneSafeMode(false) {
-            mParentFlags = SCN_PARENT_FLAG_CANDRAW; // (ignored as child scenes aren't created over this scene)
+            setSceneParentFlags(SCN_PARENT_FLAG_CANDRAW); // (ignored as child scenes aren't created over this scene)
         }
 
         skHealth::~skHealth() {}
@@ -197,7 +197,7 @@ namespace ipl {
             nw4r::lyt::Pane* pHasPane;
             nw4r::lyt::Pane* pPushPane;
 
-            mpLayout = new layout::Object(getHeap(), mpLayoutFile, "arc", "it_Has_a.brlyt");
+            mpLayout = new layout::Object(getSceneHeap(), mpLayoutFile, "arc", "it_Has_a.brlyt");
 
             // Make all of the panes invisible
             for (int i = 0; i < ARRSIZE(has_pane_name); i++) {

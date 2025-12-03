@@ -26,7 +26,7 @@ namespace ipl {
             nand::LayoutFile* layoutFile = static_cast<Board*>(System::getScene(SCENE_BOARD))->getLayoutFile();
 
             // Layout init
-            mpLayout = new layout::Object(getHeap(), layoutFile, "arc", "th_Adress_d.brlyt");
+            mpLayout = new layout::Object(getSceneHeap(), layoutFile, "arc", "th_Adress_d.brlyt");
 
             // Bind animations
             mpLayout->bindToGroup("th_Adress_d_btn_strt.brlan", "G_btn_strt_fnsh", false);

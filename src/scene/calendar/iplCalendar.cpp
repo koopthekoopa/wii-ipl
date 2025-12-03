@@ -125,11 +125,11 @@ namespace ipl {
         }
 
         void Calendar::prepare() {
-            mpLayoutFile = System::getNandManager()->readLayoutAsync(getHeap(), "calendar.ash");
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(getSceneHeap(), "calendar.ash");
         }
 
         void Calendar::create() {
-            mpLayout = new layout::Object(getHeap(), mpLayoutFile, "arc", "my_IplTop_g.brlyt");
+            mpLayout = new layout::Object(getSceneHeap(), mpLayoutFile, "arc", "my_IplTop_g.brlyt");
 
             mpGroupAnim = mpLayout->bindToGroup("my_IplTop_g.brlan", "G_All", false);
             mpInitAnim = mpLayout->bindToGroup("my_IplTop_g.brlan", "G_Yobi");
@@ -138,7 +138,7 @@ namespace ipl {
             mpLayout->finishBinding();
 
             for (int i = 0; i < (DATE_COUNT*2); i++) {
-                Date* date = new Date(getHeap(), mpLayoutFile, "arc", "my_IplTop_f.brlyt");
+                Date* date = new Date(getSceneHeap(), mpLayoutFile, "arc", "my_IplTop_f.brlyt");
                 if (i < DATE_COUNT) {
                     nw4r::ut::List_Append(&unk_0x90, date);
                 }

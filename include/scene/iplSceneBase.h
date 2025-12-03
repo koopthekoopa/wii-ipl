@@ -87,15 +87,15 @@ namespace ipl {
                  * @param sceneId The target scene.
                  * @param arg Arguments for the scene.
                 */
-                void            createChildScene(int sceneId, Base* parent, Base* child, void* args);
+                void            createChildScene(int sceneId, Base* parent, Base* child, void* args = NULL);
                 /**
                  * @brief Send a request to change scene.
                  * @param sceneId The target scene.
                  * @param arg Arguments for the scene.
                 */
-                void            reserveSceneChange(int sceneId, void* args);
-                void            reserveAllSceneDestruction(int sceneId, void* args);
-                
+                void            reserveSceneChange(int sceneId, void* args = NULL);
+                void            reserveAllSceneDestruction(int sceneId, void* args = NULL);
+
                 virtual Base*   getParent()                 { return (Base*)mpParent; }
                 virtual Base*   getChild()                  { return (Base*)mpChild; }
                 virtual Base*   getNext()                   { return (Base*)mpNext; }
@@ -131,8 +131,6 @@ namespace ipl {
                         void                setPtr(pointer p)                       { mPtr = p; }
                 };
 
-                EGG::Heap*      getHeap()   { return mpHeap; }
-
             protected:
                 enum {
                     SCN_PARENT_FLAG_CANCALC = (1 << 0),
@@ -144,6 +142,18 @@ namespace ipl {
                     SCN_STATE_DESTROY_REQ   = (1 << 1),
                 };
 
+                EGG::Heap*  getSceneHeap()                  { return mpHeap; }
+
+                void        setSceneParentFlags(u32 flag)   { mParentFlags = flag; }
+                u32         getSceneParentFlags() const     { return mParentFlags; }
+
+                void        setSceneState(u32 flag)         { mScnState |= flag; }
+                u32         getSceneState() const           { return mScnState; }
+
+                int         getSceneID() const              { return mSceneID; }
+                u32         getPrevSceneID() const          { return mPrevSceneID; }
+
+            private:
                 EGG::Heap*  mpHeap;         // 0x24
 
                 u32         mParentFlags;   // 0x28
@@ -152,8 +162,7 @@ namespace ipl {
                 u32         mPrevSceneID;   // 0x34
 
                 Command     mCommand;       // 0x38
-            
-            friend class FaderSceneBase;
+
             friend class Manager;
         };
     }

@@ -98,7 +98,7 @@ namespace ipl {
         LimitOver::~LimitOver() {}
 
         void LimitOver::prepare() {
-            mpLayoutFile = System::getNandManager()->readLayoutAsync(getHeap(),"limitOver.ash", true);
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(getSceneHeap(),"limitOver.ash", true);
 
             ES_SetUid(SYSMENU_TITLE_ID);
             utility::ESMisc::DeleteExpiredFlagFile();
@@ -180,7 +180,7 @@ namespace ipl {
         void LimitOver::create() {
             GXTexObj texObj[3];
 
-            mpLayout = new layout::Object(getHeap(), mpLayoutFile, "arc", "my_Timer_c.brlyt");
+            mpLayout = new layout::Object(getSceneHeap(), mpLayoutFile, "arc", "my_Timer_c.brlyt");
 
             // Change pane textures for widescreen
             if (SCGetAspectRatio() == SC_ASPECT_RATIO_16x9) {

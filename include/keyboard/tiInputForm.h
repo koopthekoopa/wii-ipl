@@ -85,7 +85,8 @@ namespace textinput {
 
                 void setZiDictionary(void* ziDict, void* ziOemDict)  { 
                     mpZiString->openDictionary(ziDict, ziOemDict);
-                    initZiString(); resetContextPredict_(); 
+                    initZiString();
+                    resetContextPredict_(); 
                 }
 
                 void                        initZiString();

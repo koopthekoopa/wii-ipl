@@ -72,6 +72,11 @@ DECOMP_FORCE_ACTIVE(OSReset_c, "__OSHotReset(): Falied to reset system.\n");
 DECOMP_FORCE_ACTIVE(OSReset_c, "OSReturnToMenu(): Falied to boot system menu.\n");
 DECOMP_FORCE_ACTIVE(OSReset_c, "OSReturnToDataManager(): Falied to boot system menu.\n");
 
+enum {
+    LAUNCH_ARG_MENU = 0,
+    LAUNCH_ARG_SETTING,
+};
+
 static void KillThreads() {
     OSThread* thread;
     OSThread* next;
@@ -214,7 +219,7 @@ void OSReturnToSetting(u8 setting) {
         }
     }
 
-    __OSReturnToMenul(1, url, NULL);
+    __OSReturnToMenul(LAUNCH_ARG_SETTING, url, NULL);
 }
 
 
