@@ -153,7 +153,7 @@ namespace ipl {
                     if (state->pressOK) {
                         // We got the pin!
                         memset(&mMyPin, 0, sizeof(mMyPin));
-                        wcsncpy(mMyPin, state->wcString, SC_PARENTAL_PIN_LENGTH);
+                        wcsncpy(mMyPin, state->wcString, SC_PARENTAL_PASSWORD_LENGTH);
 
                         mpLayout->getAnim(ANIM_DECIDE_BUTTON_ENABLE)->play();
 
@@ -353,17 +353,17 @@ namespace ipl {
         }
 
         BOOL ParentalDialog::check() const {
-            u8 myPin[SC_PARENTAL_PIN_LENGTH+1];
+            u8 myPin[SC_PARENTAL_PASSWORD_LENGTH+1];
 
             SCParentalControlsInfo pcInfo;
 
             BOOL pcInfoResult= SCGetParentalControl(&pcInfo);
             memset(myPin, 0, sizeof(myPin));
-            utility::CharacterCode::UTF16ToANSI(myPin, mMyPin, SC_PARENTAL_PIN_LENGTH);
+            utility::CharacterCode::UTF16ToANSI(myPin, mMyPin, SC_PARENTAL_PASSWORD_LENGTH);
 
             BOOL result = FALSE;
             if (pcInfoResult) {
-                if (strncmp((char*)pcInfo.pin, (char*)myPin, SC_PARENTAL_PIN_LENGTH) == 0) {
+                if (strncmp((char*)pcInfo.password, (char*)myPin, SC_PARENTAL_PASSWORD_LENGTH) == 0) {
                     result = TRUE;
                 }
             }

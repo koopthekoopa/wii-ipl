@@ -114,23 +114,35 @@ BOOL    SCSetIdleMode(SCIdleModeInfo* info);
 u8      SCGetLanguage();
 BOOL    SCSetLanguage(u8 language);
 
-#define SC_PARENTAL_PIN_LENGTH              4
+#define SC_PARENTAL_PASSWORD_LENGTH              4
 #define SC_PARENTAL_SECRET_ANSWER_LENGTH    32
 
 typedef struct SCParentalControlsInfo {
-    u8  enable;                                         // 0x00
-    u8  org;                                            // 0x01
+    u8      enable;                                         // 0x00
+    u8      org;                                            // 0x01
 
-    u8  ageRating;                                      // 0x02
+    u8      rating;                                         // 0x02
 
-    u8  pin[SC_PARENTAL_PIN_LENGTH];                    // 0x03
+    char    password[SC_PARENTAL_PASSWORD_LENGTH];               // 0x03
 
-    u8  secretQuestion;                                 // 0x07
-    u16 secretAnswer[SC_PARENTAL_SECRET_ANSWER_LENGTH]; // 0x08
-    u16 secretAnswerLen;                                // 0x48
+    u8      secretQuestion;                                 // 0x07
+    u16     secretAnswer[SC_PARENTAL_SECRET_ANSWER_LENGTH]; // 0x08
+    u16     secretAnswerLength;                             // 0x48
 } SCParentalControlsInfo;
 
-#define SC_PARENTAL_CONTROL_ENABLED (1 << 7)
+#define SC_PARENTAL_FLAG_ENABLED    (1 << 7)
+#define SC_PARENTAL_RATING_ENABLED  0x1F
+
+#define SC_PARENTAL_ORG_CERO            0 
+#define SC_PARENTAL_ORG_ESRB            1
+#define SC_PARENTAL_ORG_USK             3
+#define SC_PARENTAL_ORG_PEGI            4
+#define SC_PARENTAL_ORG_PEGI_FINLAND    5
+#define SC_PARENTAL_ORG_PEGI_PORTUGAL   6
+#define SC_PARENTAL_ORG_BBFC            7
+#define SC_PARENTAL_ORG_OFLC            8
+#define SC_PARENTAL_ORG_GRB             9
+#define SC_PARENTAL_ORG_GRAC            SC_PARENTAL_ORG_GRB /* GRB is now called GRAC */
 
 BOOL    SCGetParentalControl(SCParentalControlsInfo* pcInfo);
 BOOL    SCSetParentalControl(SCParentalControlsInfo* pcInfo);

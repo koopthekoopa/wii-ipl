@@ -4,6 +4,7 @@
 #include "tiManager.h"
 
 #include "MyTiInputForm.h"
+#include "MyTiLetterForm.h"
 
 namespace textinput {
     namespace extend {
@@ -121,11 +122,11 @@ namespace textinput {
                     ConfigType              meConfigType;                   // 0x44
                     savedata::MemoSetting   mMemoSetting;                   // 0x48
                     MemoInputForm*          mpMemoInputForm;                // 0x50
-                    void*                   mpLetterInputForm;              // 0x54
-                    InputForm*              mpBigTextInputForm;             // 0x58
+                    LetterInputForm*        mpLetterInputForm;              // 0x54
+                    textinput::InputForm*   mpBigTextInputForm;             // 0x58
                     void*                   mpDefaultPCKeyboard;            // 0x5C
                     void*                   mpDefaultCellPhoneKeyboard;     // 0x60
-                    InputForm*              mpDefaultInputForm;             // 0x64
+                    textinput::InputForm*   mpDefaultInputForm;             // 0x64
                     void*                   mpDefaultCandidateBox;          // 0x68
                     void*                   mpDefaultToolBar;               // 0x6C
                     void*                   mpDefaultPredictLanguageDialog; // 0x70

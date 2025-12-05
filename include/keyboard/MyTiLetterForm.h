@@ -15,18 +15,18 @@ namespace textinput {
 
                     virtual nw4r::lyt::Material*    getPhotoPaneMaterial();
 
-                    virtual void onPhotoTrig();
-                    virtual void onPhotoPoint();
-                    virtual void onPhotoLeft();
-                    virtual bool isPhotoScaledUp();
-                    virtual void setPhotoDraw(bool photoDraw)   { mbPhotoDraw = photoDraw; }
+                    virtual void                    onPhotoTrig();
+                    virtual void                    onPhotoPoint();
+                    virtual void                    onPhotoLeft();
+                    virtual bool                    isPhotoScaledUp();
+                    virtual void                    setPhotoDraw(bool photoDraw)   { mbPhotoDraw = photoDraw; }
 
-                    virtual void setType(Type type)             { meType = type; }
+                    virtual void                    setType(Type type)             { meType = type; }
 
-                    virtual void setSendOutMessage(const wchar_t* sendOutMessage);
+                    virtual void                    setSendOutMessage(const wchar_t* sendOutMessage);
 
                 private:
-                    bool    unk_0x400;
+                    u8      unk_0x400;
                     bool    mbPhotoDraw;    // 0x401
                     Type    meType;         // 0x404
             };

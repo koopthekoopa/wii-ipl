@@ -230,7 +230,7 @@ namespace ipl {
                 POSTMANReport("PERMISSION_DOWNLOAD_ON\n");
                 nwc24Permission |= NCD_NWC24_PERMISSION_DOWNLOAD;
 
-                if ((pcInfo.enable & SC_PARENTAL_CONTROL_ENABLED) != SC_PARENTAL_CONTROL_ENABLED
+                if ((pcInfo.enable & SC_PARENTAL_FLAG_ENABLED) != SC_PARENTAL_FLAG_ENABLED
                 || (SCGetNetContentRestrictions() & SC_NET_RESTRICTIONS_MSG_BOARD) != SC_NET_RESTRICTIONS_MSG_BOARD) {
                     POSTMANReport("PERMISSION_MESSAGE_ON\n");
                     nwc24Permission |= NCD_NWC24_PERMISSION_MESSAGE;

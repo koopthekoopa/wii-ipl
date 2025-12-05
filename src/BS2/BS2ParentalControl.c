@@ -15,11 +15,11 @@ BOOL BS2CheckParentalControl() {
         return TRUE;
     }
 
-    if (parentalControls.enable & 0x80) {
+    if (parentalControls.enable & SC_PARENTAL_FLAG_ENABLED) {
         int pcFlags = bi3.parentalControlFlags[parentalControls.org];
 
         // If parental controls enabled
-        if (pcFlags & BI3_PARENTALCONTROL_ENABLED) {
+        if (pcFlags & SC_PARENTAL_FLAG_ENABLED) {
             return FALSE;
         }
         // If... this is enabled
@@ -27,7 +27,7 @@ BOOL BS2CheckParentalControl() {
             return FALSE;
         }
         // If the age rating in BI3 is bigger than SYSCONF's
-        if ((pcFlags & BI3_PARENTALCONTROL_FLAGS_RATING) > parentalControls.ageRating) {
+        if ((pcFlags & SC_PARENTAL_RATING_ENABLED) > parentalControls.rating) {
             return FALSE;
         }
     }
@@ -58,7 +58,7 @@ BOOL BS2IsValidDisc() {
     switch (SCGetProductArea()) {
         case SC_PRODUCT_AREA_JPN:
         case SC_PRODUCT_AREA_TWN: {
-            if (bi3.parentalControlFlags[BI3_PARENTALCONTROL_CERO] & BI3_PARENTALCONTROL_ENABLED) {
+            if (bi3.parentalControlFlags[SC_PARENTAL_ORG_CERO] & SC_PARENTAL_FLAG_ENABLED) {
                 return FALSE;
             }
             else {
@@ -66,7 +66,7 @@ BOOL BS2IsValidDisc() {
             }
         }
         case SC_PRODUCT_AREA_USA: {
-            if (bi3.parentalControlFlags[BI3_PARENTALCONTROL_ESRB] & BI3_PARENTALCONTROL_ENABLED) {
+            if (bi3.parentalControlFlags[SC_PARENTAL_ORG_ESRB] & SC_PARENTAL_FLAG_ENABLED) {
                 return FALSE;
             }
             else {
@@ -74,11 +74,11 @@ BOOL BS2IsValidDisc() {
             }
         }
         case SC_PRODUCT_AREA_EUR: {
-            if (bi3.parentalControlFlags[BI3_PARENTALCONTROL_USK]           & BI3_PARENTALCONTROL_ENABLED
-             && bi3.parentalControlFlags[BI3_PARENTALCONTROL_PEGI]          & BI3_PARENTALCONTROL_ENABLED
-             && bi3.parentalControlFlags[BI3_PARENTALCONTROL_PEGI_FINLAND]  & BI3_PARENTALCONTROL_ENABLED
-             && bi3.parentalControlFlags[BI3_PARENTALCONTROL_PEGI_PORTUGAL] & BI3_PARENTALCONTROL_ENABLED
-             && bi3.parentalControlFlags[BI3_PARENTALCONTROL_BBFC]          & BI3_PARENTALCONTROL_ENABLED) {
+            if (bi3.parentalControlFlags[SC_PARENTAL_ORG_USK]           & SC_PARENTAL_FLAG_ENABLED
+             && bi3.parentalControlFlags[SC_PARENTAL_ORG_PEGI]          & SC_PARENTAL_FLAG_ENABLED
+             && bi3.parentalControlFlags[SC_PARENTAL_ORG_PEGI_FINLAND]  & SC_PARENTAL_FLAG_ENABLED
+             && bi3.parentalControlFlags[SC_PARENTAL_ORG_PEGI_PORTUGAL] & SC_PARENTAL_FLAG_ENABLED
+             && bi3.parentalControlFlags[SC_PARENTAL_ORG_BBFC]          & SC_PARENTAL_FLAG_ENABLED) {
                 return FALSE;
             }
             else {
@@ -86,7 +86,7 @@ BOOL BS2IsValidDisc() {
             }
         }
         case SC_PRODUCT_AREA_AUS: {
-            if (bi3.parentalControlFlags[BI3_PARENTALCONTROL_OFLC] & BI3_PARENTALCONTROL_ENABLED) {
+            if (bi3.parentalControlFlags[SC_PARENTAL_ORG_OFLC] & SC_PARENTAL_FLAG_ENABLED) {
                 return FALSE;
             }
             else {
@@ -94,7 +94,7 @@ BOOL BS2IsValidDisc() {
             }
         }
         case SC_PRODUCT_AREA_KOR: {
-            if (bi3.parentalControlFlags[BI3_PARENTALCONTROL_GRB] & BI3_PARENTALCONTROL_ENABLED) {
+            if (bi3.parentalControlFlags[SC_PARENTAL_ORG_GRB] & SC_PARENTAL_FLAG_ENABLED) {
                 return FALSE;
             }
             else {

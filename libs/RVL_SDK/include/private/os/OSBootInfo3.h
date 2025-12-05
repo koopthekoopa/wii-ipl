@@ -21,19 +21,6 @@ typedef struct OSBootInfo3 {
 #define BI3_OFFSET_PARENTALCONTROL_FLAGS    0x0010
 #define BI3_OFFSET_MAGIC                    0x1FFC
 
-#define BI3_PARENTALCONTROL_CERO            0 
-#define BI3_PARENTALCONTROL_ESRB            1
-#define BI3_PARENTALCONTROL_USK             3
-#define BI3_PARENTALCONTROL_PEGI            4
-#define BI3_PARENTALCONTROL_PEGI_FINLAND    5
-#define BI3_PARENTALCONTROL_PEGI_PORTUGAL   6
-#define BI3_PARENTALCONTROL_BBFC            7
-#define BI3_PARENTALCONTROL_OFLC            8
-#define BI3_PARENTALCONTROL_GRB             9 /* Nowerdays it's GRAC */
-
-#define BI3_PARENTALCONTROL_ENABLED         0x80
-#define BI3_PARENTALCONTROL_FLAGS_RATING    0x1F
-
 #ifdef __cplusplus
 }
 #endif

@@ -143,16 +143,16 @@ static void FixUpParentalInfo() {
     SCParentalControlsInfo parentalInfo;
     SCGetParentalControl(&parentalInfo);
 
-    if (parentalInfo.org == BI3_PARENTALCONTROL_PEGI_FINLAND) {
-        parentalInfo.org = BI3_PARENTALCONTROL_PEGI;
+    if (parentalInfo.org == SC_PARENTAL_ORG_PEGI_FINLAND) {
+        parentalInfo.org = SC_PARENTAL_ORG_PEGI;
 
-        switch (parentalInfo.ageRating) {
+        switch (parentalInfo.rating) {
             case 11: {
-                parentalInfo.ageRating = 12;
+                parentalInfo.rating = 12;
                 break;
             }
             case 15: {
-                parentalInfo.ageRating = 16;
+                parentalInfo.rating = 16;
                 break;
             }
             default: {

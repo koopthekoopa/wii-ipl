@@ -99,7 +99,7 @@ namespace ipl {
 
                 BOOL                    mbHovered[BTN_MAX];                 // 0x74
 
-                wchar_t                 mMyPin[SC_PARENTAL_PIN_LENGTH+1];   // 0x80
+                wchar_t                 mMyPin[SC_PARENTAL_PASSWORD_LENGTH+1];   // 0x80
                 bool                    mbInputPin;                         // 0x8A
                 int                     mAttempts;                          // 0x8C
 
