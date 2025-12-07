@@ -10,8 +10,6 @@ namespace textinput {
             public:
                 virtual ~StringBase();
 
-                virtual void        create();
-                
                 virtual void        create(MEMAllocator* allocator);
                 virtual void        pushBack(wchar_t ch);
                 virtual void        popBack();
@@ -46,6 +44,8 @@ namespace textinput {
 
                 MEMAllocator*   mpAllocator;    // 0x14
         };
+        
+        class Delocated : public StringBase {};
     }
 }
 

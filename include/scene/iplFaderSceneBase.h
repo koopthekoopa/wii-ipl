@@ -38,7 +38,6 @@ namespace ipl {
                 virtual SceneCommand    calcFadein()        { return SCENE_NEXT; }  // 0x58
                 virtual SceneCommand    calcNormal()        { return SCENE_NEXT; }  // 0x5C
                 virtual SceneCommand    calcFadeout()       { return SCENE_NEXT; }  // 0x60
-            
 
                 virtual void            calcCommonAfter()   {}                      // 0x64
 

@@ -12,6 +12,10 @@
 
 namespace ipl {
     namespace scene {
+        class ButtonEventHandlerBase;
+        class OptOutButtonEventHandlerBase;
+        class SDMenuEventHandlerBase;
+
         /* Arrow Button */
 
         SCENE_CLASS(Arrow) {
@@ -280,6 +284,8 @@ namespace ipl {
 
                 static int      cmpButtonName(const char* name, int btnNo)  { return strcmp(name, mscButtonName[btnNo]); }
 
+                int             getCurrentReservedCommandIndex()            { return mReservedCmd.current; }
+
             protected:
                 typedef struct Command {
                     enum {
@@ -350,7 +356,7 @@ namespace ipl {
                 utility::timer              mTimer;                         // 0x108
                 bool                        mbEnabled;                      // 0x110
 
-                utility::Queue<Command, 8>  mButtonCmd;                     // 0x114
+                utility::Queue<Command, 8>  mReservedCmd;                   // 0x114
 
                 int                         unused_0x184;
 
@@ -362,9 +368,9 @@ namespace ipl {
 
                 friend class Arrow;
 
-                friend class SDMenuEventHandlerBase;
                 friend class ButtonEventHandlerBase;
                 friend class OptOutButtonEventHandlerBase;
+                friend class SDMenuEventHandlerBase;
         };
 
         /* Button event handlers */

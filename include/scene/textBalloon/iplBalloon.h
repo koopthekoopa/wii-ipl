@@ -14,13 +14,13 @@ namespace ipl {
                     WAIT_UNTIL_FADE_IN = 15
                 };
 
-                TextBalloon(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* directory, const char* fileName, const ipl::math::VEC3& unk2, f32 unk3, f32 unk4);
+                TextBalloon(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* directory, const char* fileName, const ipl::math::VEC3& unk2, f32 unk3 = 120.0f, f32 unk4 = 30.0f);
                 ~TextBalloon();
 
                 void        calc();
                 void        draw();
 
-                void        init(const wchar_t* text, u32 unk0);
+                void        init(const wchar_t* text, u32 texLen);
 
                 void        terminate();
 

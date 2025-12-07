@@ -83,7 +83,7 @@ namespace textinput {
                 virtual void                closeAtokDictionary();
                 virtual bool                isAtokDictionaryOpened();
 
-                void setZiDictionary(void* ziDict, void* ziOemDict)  { 
+                void setZiDictionary(void* ziOemDict, void* ziDict)  { 
                     mpZiString->openDictionary(ziDict, ziOemDict);
                     initZiString();
                     resetContextPredict_(); 
@@ -161,7 +161,7 @@ namespace textinput {
 
                 virtual nw4r::math::VEC2    getScale() const;
 
-                virtual void                updateInput(int chan, u32 trig, u32 hold, u32 release, void* data);
+                virtual void                updateInputCommon(int chan, u32 trig, u32 hold, u32 release, void* data);
                 virtual bool                updateInput(int chan, f32 x, f32 y, u32 trig, u32 hold, u32 release, void* data);
                 virtual bool                updateInput(textinput::input::HKBManager& hkbManager);
 

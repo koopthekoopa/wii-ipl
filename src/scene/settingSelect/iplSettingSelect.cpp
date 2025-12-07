@@ -288,7 +288,7 @@ namespace ipl {
             mpGui->update();
 
             if (prevState == mState) {
-                SettingButton* settingButton = static_cast<SettingButton*>(System::getSceneManager()->getScene(SCENE_SETTING_BUTTON));
+                SettingButton* settingButton = static_cast<SettingButton*>(System::getScene(SCENE_SETTING_BUTTON));
                 if (settingButton->update()) {
                     CHANGE_STATE(STATE_WAIT_BUTTON_DECIDE);
                 }
@@ -308,7 +308,7 @@ namespace ipl {
         }
 
         void SettingSelect::stt_wait_button_decided() {
-            SettingButton* settingButton = static_cast<SettingButton*>(System::getSceneManager()->getScene(SCENE_SETTING_BUTTON));
+            SettingButton* settingButton = static_cast<SettingButton*>(System::getScene(SCENE_SETTING_BUTTON));
             if (!settingButton->isPlaying()) {
                 switch (mPrevState) {
                     case STATE_1ST_NORMAL: {
@@ -354,7 +354,7 @@ namespace ipl {
                         mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_CHANNEL]), true);
 
                         if (mSettingArg == SettingSelectArg::ARG_START_SAVE_DATA) {
-                            static_cast<SettingButton*>(System::getSceneManager()->getScene(SCENE_SETTING_BUTTON))->hideBtn();
+                            static_cast<SettingButton*>(System::getScene(SCENE_SETTING_BUTTON))->hideBtn();
                         }
 
                         CHANGE_STATE(STATE_3RD_WAIT_BACK);
@@ -371,7 +371,7 @@ namespace ipl {
         }
 
         void SettingSelect::stt_wait_child() {
-           if (getChild() == NULL && System::getSceneManager()->getReservedScene() == NULL) {
+           if (getChild() == NULL && System::getReservedScene() == NULL) {
                 int backAnim = -1;
                 int inAnim = -1;
 
@@ -395,7 +395,7 @@ namespace ipl {
                         backAnim = ANIM_CHANNEL_BACK;
                         inAnim = ANIM_SAVE_DATA_IN;
                         if (mSettingArg == SettingSelectArg::ARG_START_SAVE_DATA) {
-                            static_cast<SettingButton*>(System::getSceneManager()->getScene(SCENE_SETTING_BUTTON))->hideBtn();
+                            static_cast<SettingButton*>(System::getScene(SCENE_SETTING_BUTTON))->hideBtn();
                         }
                         break;
                     }
@@ -412,13 +412,13 @@ namespace ipl {
             if (is_stopped_all_anm()) {
                 switch (unk_0x90) {
                     case 12: {
-                        static_cast<SettingButton*>(System::getSceneManager()->getScene(SCENE_SETTING_BUTTON))->showWii();
+                        static_cast<SettingButton*>(System::getScene(SCENE_SETTING_BUTTON))->showWii();
                         CHANGE_STATE(STATE_2ND_NORMAL);
                         break;
                     }
                     case 13:
                     case 14: {
-                        static_cast<SettingButton*>(System::getSceneManager()->getScene(SCENE_SETTING_BUTTON))->showWii();
+                        static_cast<SettingButton*>(System::getScene(SCENE_SETTING_BUTTON))->showWii();
                     #ifndef KOREAN_BUILD
                         CHANGE_STATE(STATE_3RD_NORMAL);
                     #else
@@ -433,7 +433,7 @@ namespace ipl {
         }
 
         void SettingSelect::draw() {
-            if (System::getSceneManager()->canDrawScene()) {
+            if (System::canDrawScene()) {
                 utility::Graphics::setOrtho();
                 mpLayout->draw();
             }
@@ -609,11 +609,11 @@ namespace ipl {
                     outAnim = ANIM_CHANNEL_OUT;
                 #ifdef KOREAN_BUILD
                     createChildScene(SCENE_MEMORY, this, NULL);
-                    static_cast<SettingButton*>(System::getSceneManager()->getScene(SCENE_SETTING_BUTTON))->hideWii();
+                    static_cast<SettingButton*>(System::getScene(SCENE_SETTING_BUTTON))->hideWii();
                 #endif
                     CHANGE_STATE(STATE_2ND_WAIT_FADE_OUT);
                     if (mSettingArg == SettingSelectArg::ARG_START_SAVE_DATA) {
-                        static_cast<SettingButton*>(System::getSceneManager()->getScene(SCENE_SETTING_BUTTON))->showBtn();
+                        static_cast<SettingButton*>(System::getScene(SCENE_SETTING_BUTTON))->showBtn();
                     }
                     break;
                 }
@@ -623,9 +623,9 @@ namespace ipl {
                     outAnim = ANIM_SAVE_DATA_OUT;
                     createChildScene(SCENE_CHANNEL_EDIT, this, NULL);
                     CHANGE_STATE(STATE_2ND_WAIT_FADE_OUT);
-                    static_cast<SettingButton*>(System::getSceneManager()->getScene(SCENE_SETTING_BUTTON))->hideWii();
+                    static_cast<SettingButton*>(System::getScene(SCENE_SETTING_BUTTON))->hideWii();
                     if (mSettingArg == SettingSelectArg::ARG_START_SAVE_DATA) {
-                        static_cast<SettingButton*>(System::getSceneManager()->getScene(SCENE_SETTING_BUTTON))->showBtn();
+                        static_cast<SettingButton*>(System::getScene(SCENE_SETTING_BUTTON))->showBtn();
                     }
                     break;
                 }
@@ -635,7 +635,7 @@ namespace ipl {
                     outAnim = ANIM_GC_SAVE_DATA_OUT;
                     createChildScene(SCENE_MEMORY, this, NULL);
                     CHANGE_STATE(STATE_3RD_WAIT_FADE_OUT);
-                    static_cast<SettingButton*>(System::getSceneManager()->getScene(SCENE_SETTING_BUTTON))->hideWii();
+                    static_cast<SettingButton*>(System::getScene(SCENE_SETTING_BUTTON))->hideWii();
                     break;
                 }
                 case BTN_GC_SAVE: {
@@ -644,7 +644,7 @@ namespace ipl {
                     outAnim = ANIM_WII_SAVE_DATA_OUT;
                     createChildScene(SCENE_MEMORY_CARD, this, NULL);
                     CHANGE_STATE(STATE_3RD_WAIT_FADE_OUT);
-                    static_cast<SettingButton*>(System::getSceneManager()->getScene(SCENE_SETTING_BUTTON))->hideWii();
+                    static_cast<SettingButton*>(System::getScene(SCENE_SETTING_BUTTON))->hideWii();
                     break;
                 }
             }

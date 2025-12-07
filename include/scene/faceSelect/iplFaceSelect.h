@@ -42,6 +42,8 @@ namespace ipl {
 
                 virtual void            draw();
 
+                int                     getSelectedFaceId() { return mSelectedFaceId; }
+
                 typedef struct Face {
                     bool            creating;   // 0x00
                     bool            created;    // 0x01

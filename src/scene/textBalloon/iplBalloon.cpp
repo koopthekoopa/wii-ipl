@@ -53,9 +53,9 @@ namespace ipl {
             mpLayout->draw();
         }
 
-        void TextBalloon::init(const wchar_t* text, u32 unk0) {
+        void TextBalloon::init(const wchar_t* text, u32 texLen) {
             mpText = (wchar_t*)text;
-            mTextLen = unk0;
+            mTextLen = texLen;
             mWaitUntilFadeIn = 0;
 
             mpLayout->setAnmType(ANIM_TYPE_FORWARD);

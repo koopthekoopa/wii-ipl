@@ -146,7 +146,7 @@ namespace ipl {
         }
 
         void ParentalDialog::stt_wait_input() {
-            keyboard::Manager::State* state = System::getKeyboardManager()->getState();
+            keyboard::Manager::State* state = System::getKeyboard()->getState();
 
             switch (state->iplType) {
                 case keyboard::Manager::STATE_DISAPPEARING: {
@@ -164,7 +164,7 @@ namespace ipl {
                     }
                     break;
                 }
-                case keyboard::Manager::STATE_HIDDEN_AFTER_DISAPEAR: {
+                case keyboard::Manager::STATE_HIDDEN_AFTER_DISAPPEAR: {
                     mState = STATE_NORMAL;
                     break;
                 }
@@ -172,10 +172,10 @@ namespace ipl {
                 case keyboard::Manager::STATE_APPEARING: {
                     if (state->wcString != NULL) {
                         if (*state->wcString == 0) {
-                            System::getKeyboardManager()->memoMgr()->setTitleText(System::getMessage(MESG_PARENTAL_DLG_NO_PIN));
+                            System::getKeyboard()->memoMgr()->setTitleText(System::getMessage(MESG_PARENTAL_DLG_NO_PIN));
                         }
                         else {
-                            System::getKeyboardManager()->memoMgr()->setTitleText(L"");
+                            System::getKeyboard()->memoMgr()->setTitleText(L"");
                         }
                     }
                     break;
@@ -315,16 +315,16 @@ namespace ipl {
                         wchar_t wcString[2] = L"";
                         keyboard::Manager::KeyboardSetting setting;
 
-                        System::getKeyboardManager()->init();
+                        System::getKeyboard()->init();
 
                         setting.type = keyboard::Manager::NUMERIC;
                         setting.wcString = wcString;
                         setting.stringLimit = 4;
                         setting.rowLimit = 1;
 
-                        System::getKeyboardManager()->start(chan, setting);
-                        System::getKeyboardManager()->memoMgr()->setSecretInputMode(true);
-                        System::getKeyboardManager()->memoMgr()->setTitleText(System::getMessage(MESG_PARENTAL_DLG_NO_PIN));
+                        System::getKeyboard()->start(chan, setting);
+                        System::getKeyboard()->memoMgr()->setSecretInputMode(true);
+                        System::getKeyboard()->memoMgr()->setTitleText(System::getMessage(MESG_PARENTAL_DLG_NO_PIN));
 
                         mState = STATE_WAIT_INPUT;
                         

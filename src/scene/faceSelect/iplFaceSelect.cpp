@@ -1,3 +1,5 @@
+#include "scene/button/iplButton.h"
+
 #include "scene/faceSelect/iplFaceSelect.h"
 
 #include "iplSceneUI.h"

@@ -3,5 +3,6 @@
 
 #include "keyboard/MyTiManager.h"
 #include "keyboard/tiManager.h"
+#include "keyboard/tiUtil.h"
 
 #endif // SOFT_KEYBOARD_H

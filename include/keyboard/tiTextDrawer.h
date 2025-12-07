@@ -72,6 +72,17 @@ namespace textinput {
                 virtual u32                 getStartPos() const;
                 virtual u32                 getEndPos() const;
 
+                // todo
+                virtual void                setDrawModifyScopeLine();
+                virtual void                setDrawCacheScopeLine();
+                virtual void                modifyCursorCache();
+                virtual void                isEnableCursorCache();
+                virtual void                getDrawModifyStartLine();
+                virtual void                getDrawModifyEndLine();
+                virtual void                getDrawCacheStartPos();
+                virtual void                dirtyDrawCache();
+                virtual void                dirtyCursorCache();
+
             private:
                 u8      unk_0x50[0x78];
                 bool    mbSecretMode;   // 0xC8

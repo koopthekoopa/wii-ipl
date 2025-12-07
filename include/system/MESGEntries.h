@@ -3,6 +3,7 @@
 
 /* Common message IDs */
 
+#define MESG_CMN_BACK                   35
 #define MESG_CMN_QUIT                   37
 #define MESG_CMN_OK                     46
 #define MESG_CMN_YES                    321
@@ -128,6 +129,14 @@
 #define MESG_SETTING_SEL_WII            256
 #define MESG_SETTING_SEL_CUBE           257
 #define MESG_SETTING_SEL_WII_SETTING    316
+
+/* Text Writer */
+
+#define MESG_TEXTWRITER_HEADER          133
+#define MESG_TEXTWRITER_ADD_MII         139
+#define MESG_TEXTWRITER_LETTER_TITLE    140
+#define MESG_TEXTWRITER_NO_MII          380
+#define MESG_TEXTWRITER_SEND_ERROR      455
 
 /* Error Messages */
 

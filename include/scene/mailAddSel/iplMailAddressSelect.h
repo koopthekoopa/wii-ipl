@@ -9,6 +9,8 @@ namespace ipl {
             public:
                 MailAddressSelect(EGG::Heap* heap);
 
+                void    finishMemo(bool);
+
             private:
                 u8  unk_0x58[0x34];
         };

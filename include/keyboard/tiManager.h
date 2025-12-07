@@ -73,8 +73,8 @@ namespace textinput {
             virtual void                                start() {}
             virtual void                                end()   {}
 
-            virtual inputform::Base*                    getInputForm()                          { return mpInputForm; }
-            virtual const inputform::Base*              getInputForm() const                    { return mpInputForm; }
+            virtual InputForm*                          getInputForm()                          { return mpInputForm; }
+            virtual const InputForm*                    getInputForm() const                    { return mpInputForm; }
             
             virtual keyboard::hwkey::HWKeyboard*        getHWKeyboard()                         { return mpHWKeyboard; }
             virtual const keyboard::hwkey::HWKeyboard*  getHWKeyboard() const                   { return mpHWKeyboard; }

@@ -321,7 +321,7 @@ namespace ipl {
                 mState.iplType = STATE_DISAPPEARING;
             }
             else if (prevStateType == textinput::MemoManager::ST_Disappearing && mState.type == textinput::MemoManager::ST_Hidden) {
-                mState.iplType = STATE_HIDDEN_AFTER_DISAPEAR;
+                mState.iplType = STATE_HIDDEN_AFTER_DISAPPEAR;
             }
             else {
                 mState.iplType = STATE_HIDDEN;

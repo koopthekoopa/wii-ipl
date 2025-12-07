@@ -186,7 +186,7 @@ namespace ipl {
         mSdMenuBtn(),
         unk_0x104(false),
         unk_0x105(false),
-        mButtonCmd() {
+        mReservedCmd() {
             for (int i = 0; i < ARROW_BTN_MAX; i++) {
                 mbArrowVisible[i] = true;
             }
@@ -291,8 +291,8 @@ namespace ipl {
         void Button::calc() {
             switch (unk_0x54) {
                 case 0: {
-                    if (mButtonCmd.get_current_index() != 0) {
-                        Command popped = mButtonCmd.get_popped_item();
+                    if (mReservedCmd.get_current_index() != 0) {
+                        Command popped = mReservedCmd.get_popped_item();
                         if (popped.type == Command::TYPE_ANIM) {
                             animation(popped.animId);
                         }
@@ -301,7 +301,7 @@ namespace ipl {
                             setText(pane, System::getMessage(popped.msgId));
                         }
 
-                        mButtonCmd.pop();
+                        mReservedCmd.pop();
                     }
                     break;
                 }
@@ -828,7 +828,7 @@ namespace ipl {
             Command command;
             command.type = Command::TYPE_ANIM;
             command.animId = animId;
-            mButtonCmd.push(command);
+            mReservedCmd.push(command);
         }
     
         void Button::reserveText(int paneId, u32 msgId) {
@@ -836,7 +836,7 @@ namespace ipl {
             command.type = Command::TYPE_TEXT;
             command.paneId = paneId;
             command.msgId = msgId;
-            mButtonCmd.push(command);
+            mReservedCmd.push(command);
         }
 
         /* ============== */

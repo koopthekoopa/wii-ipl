@@ -478,7 +478,7 @@ namespace ipl {
             /*==============================*/
 
             /** @return The Keyboard Manager object. */
-            static keyboard::Manager*               getKeyboardManager()        { return smArg.mpKeyboardMgr; }
+            static keyboard::Manager*               getKeyboard()        { return smArg.mpKeyboardMgr; }
             /**
              * @return Array of dictionary data for ZI.
              * @note For builds that do not use ZI8, do not use this.
@@ -554,6 +554,7 @@ namespace ipl {
             /** @return The Scene Manager object. */
             static scene::Manager*                  getSceneManager()           { return smArg.mpSceneManager; }
             static scene::SceneObj*                 getScene(int sceneID)       { return getSceneManager()->getScene(sceneID); }
+            static scene::SceneObj*                 getReservedScene()          { return getSceneManager()->getReservedScene(); }
             static bool                             canDrawScene()              { return getSceneManager()->canDrawScene(); }
 
             /*==============================*/

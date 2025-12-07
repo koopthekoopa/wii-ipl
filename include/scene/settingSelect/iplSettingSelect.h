@@ -11,6 +11,7 @@ namespace ipl {
 
                 virtual void    prepare();
                 virtual void    create();
+                virtual void    draw();
                 virtual void    calc();
 
                 virtual void    onEvent(u32 compId, u32 event, void* data);
@@ -139,8 +140,6 @@ namespace ipl {
 
                 void    stt_wait_child();
                 void    stt_wait_child_anm();
-
-                void    draw();
 
                 void    reset_gui();
 

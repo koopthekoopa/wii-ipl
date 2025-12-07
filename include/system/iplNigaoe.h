@@ -39,6 +39,7 @@ namespace ipl {
                 }
 
                 const GXTexObj& getIconTexture() const  { return mFaceTexObj; }
+                u32             getIndex() const        { return mFaceId; }
 
                 BOOL            created() const         { return mbCreated; }
             

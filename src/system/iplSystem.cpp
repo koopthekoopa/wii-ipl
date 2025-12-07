@@ -784,7 +784,7 @@ namespace ipl {
             // Drawing
             getSceneManager()->draw();
             if (hasCreatedAfter()) {
-                getKeyboardManager()->draw();
+                getKeyboard()->draw();
                 getDialog()->draw();
                 getHomeButtonMenu()->draw();
 
@@ -816,7 +816,7 @@ namespace ipl {
                 // Update log depending on HOME Menu state
                 if (getHomeButtonMenu() != NULL && !getHomeButtonMenu()->isEnable()) {
                     getSceneManager()->calc();
-                    getKeyboardManager()->calc();
+                    getKeyboard()->calc();
                     getDialog()->calc();
                     getHomeButtonMenu()->calc();
                     getPointer()->calc();
@@ -890,7 +890,7 @@ namespace ipl {
                     getSceneManager()->draw();
                 }
                 if (hasCreatedAfter()) {
-                    getKeyboardManager()->draw();
+                    getKeyboard()->draw();
                 }
                 if (hasCreatedAfter()) {
                     getHomeButtonMenu()->draw();
@@ -941,7 +941,7 @@ namespace ipl {
 
             // Drawing
             getSceneManager()->draw();
-            getKeyboardManager()->draw();
+            getKeyboard()->draw();
             getDialog()->draw();
             getHomeButtonMenu()->draw();
             getPointer()->draw();
@@ -1000,7 +1000,7 @@ namespace ipl {
                 getSceneManager()->draw();
             }
             if (hasCreatedAfter()) {
-                getKeyboardManager()->draw();
+                getKeyboard()->draw();
                 getDialog()->draw();
                 getWarningHandler()->draw();
                 getPointer()->draw();
@@ -1078,7 +1078,7 @@ namespace ipl {
             // Drawing
             getSceneManager()->draw();
             if (hasCreatedAfter()) {
-                getKeyboardManager()->draw();
+                getKeyboard()->draw();
                 getDialog()->draw();
             }
             getWarningHandler()->draw();
