@@ -12,7 +12,7 @@ namespace ipl {
 
                 for (int i = 0; i < SDButton::ARROW_BTN_MAX; i++) {
                     layout::Object* arrowLayout = button->get_layout();
-                    nw4r::lyt::Pane* pane = arrowLayout->FindPaneByName(SDButton::mscArrowBtnName[i]);
+                    nw4r::lyt::Pane* pane = arrowLayout->FindPaneByName(SDButton::mscArrowName[i]);
                     
                     pane->SetVisible(true);
                     arrowLayout->draw(pane);

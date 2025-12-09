@@ -41,7 +41,7 @@ namespace ipl {
                     SEND_ERR_RFL,
                 };
 
-                virtual BOOL                isResetAcceptable() const;
+                virtual BOOL                isResetAcceptable() const { return unk_0x7D; }
 
                 virtual void                prepare();
                 virtual void                create();
@@ -51,7 +51,7 @@ namespace ipl {
                 virtual void                initCalcNormal();
                 virtual void                initCalcFadeout();
 
-                virtual void                calcCommon();
+                virtual void                calcCommon() {}
 
                 virtual SceneCommand        calcFadein();
                 virtual SceneCommand        calcNormal();
@@ -77,9 +77,13 @@ namespace ipl {
                 textinput::MemoInputForm*   getMemoInputForm();
                 Button*                     getButton();
 
-            private:
+                void                        createBalloon() {
+                    mpNigaoeBalloon = new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f));
+                }
+
+            protected:
                 enum {
-                    STATE_NORMAL,
+                    STATE_NORMAL = 0,
                     STATE_TO_SEL_FACE,
                     STATE_SEL_FACE,
                     STATE_DIALOG,

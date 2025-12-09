@@ -169,12 +169,12 @@ namespace ipl {
             "G_ArwL_Focus"
         };
 
-        const char* Button::mscButtonTextName[Button::TEXT_MAX] = {
+        const char* Button::mscTextPaneName[Button::TEXT_MAX] = {
             "T_CalExit",
             "T_CalAdd_R"
         };
 
-        const char* Button::mscArrowBtnName[Button::ARROW_BTN_MAX] = {
+        const char* Button::mscArrowName[Button::ARROW_BTN_MAX] = {
             "ArwR",
             "ArwL"
         };
@@ -257,7 +257,7 @@ namespace ipl {
                 mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[i]), true);
             }
             for (int i = 0; i < ARROW_BTN_MAX; i++) {
-                mpLayout->FindPaneByName(mscArrowBtnName[i])->SetVisible(false);
+                mpLayout->FindPaneByName(mscArrowName[i])->SetVisible(false);
             }
 
             // Setup text balloons
@@ -297,7 +297,7 @@ namespace ipl {
                             animation(popped.animId);
                         }
                         else {
-                            const char* pane = mscButtonTextName[popped.paneId];
+                            const char* pane = mscTextPaneName[popped.paneId];
                             setText(pane, System::getMessage(popped.msgId));
                         }
 

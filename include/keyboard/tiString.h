@@ -8,6 +8,14 @@ namespace textinput {
     namespace tistring {
         class StringBase {
             public:
+                StringBase(u16 maxLength) :
+                muMaxLength(maxLength),
+                muLength(0),
+                mpszString(NULL),
+                mpszTmpString(NULL),
+                mwcCandidate(0),
+                mpAllocator(NULL) {}
+
                 virtual ~StringBase();
 
                 virtual void        create(MEMAllocator* allocator);

@@ -52,7 +52,7 @@ namespace ipl {
             mpGui->setAllComponentTriggerTarget(false);
             mpGui->setTriggerTarget(mpLayout->FindPaneByName("B_Button_00"), true);
 
-            setText(MESG_SETTING_BTN_BACK);
+            setText(MESG_CMN_BACK_ALT);
 
             if (mSettingArg == SettingSelectArg::ARG_START_SAVE_DATA) {
                 mbShowBtn = false;

@@ -76,7 +76,7 @@ namespace ipl {
             getMemoInputForm()->setNigaoeEventObserver(mpEventObserver);
             getMemoInputForm()->setHeaderCaption(System::getMessage(MESG_TEXTWRITER_HEADER));
             getMemoInputForm()->setMiiName(System::getMessage(MESG_TEXTWRITER_ADD_MII));
-            getMemoInputForm()->setTouchLetterCaption(System::getMessage(MESG_TEXTWRITER_LETTER_TITLE));
+            getMemoInputForm()->setTouchLetterCaption(System::getMessage(MESG_TEXTWRITER_LETTER_TEXT));
             getMemoManager()->setWCString(L"");
             getMemoInputForm()->setDefaultNigaoe();
 
@@ -86,7 +86,7 @@ namespace ipl {
             getMemoInputForm()->setCloseWithSend(false);
 
             // Start keyboard
-            getMemoManager()->start();
+            System::getKeyboard()->startMgr();
             System::getKeyboard()->deactivate();
 
             mSelectedFaceId = -1;
@@ -96,9 +96,10 @@ namespace ipl {
             mNwc24ErrCountdown = 0;
 
             // Text balloon for Mii face
-            f32 float0 = 30.0f;
-            f32 float1 = 120.0f;
-            mpNigaoeBalloon = new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), float1, float0);
+            // What the fuck is up with these two floats
+            f32 f0 = 30.0f;
+            f32 f1 = 120.0f;
+            mpNigaoeBalloon = new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), f1, f0);
             
             // Scroller
             mpScroller = new utility::YoungBScroller();
@@ -268,7 +269,7 @@ namespace ipl {
 
             static_cast<MailAddressSelect*>(System::getScene(SCENE_MAIL_ADDRESS_SELECT))->finishMemo(mbClosing);
             
-            getMemoManager()->end();
+            System::getKeyboard()->endMgr();
             
             mpNigaoeBalloon->calc();
         }
@@ -573,10 +574,6 @@ namespace ipl {
 
         Button* TextWriter::getButton() {
             return static_cast<Button*>(System::getScene(SCENE_BUTTON));
-        }
-
-        void TextWriter::calcCommon() {
-
         }
     }
 }

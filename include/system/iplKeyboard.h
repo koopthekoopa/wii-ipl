@@ -107,8 +107,12 @@ namespace ipl {
                 void                        activate()      { mbActivated = true; }
                 void                        deactivate()    { mbActivated = false; }
 
+                textinput::Manager*         baseMgr()   { return (textinput::Manager*)mpManager; }
                 textinput::MemoManager*     memoMgr()   { return mpManager; }
                 textinput::MemoInputForm*   memoFrm()   { return (textinput::MemoInputForm*)mpManager->getInputForm(); }
+
+                void                        startMgr()  { baseMgr()->start(); }
+                void                        endMgr()    { baseMgr()->end(); }
 
             private:
                 textinput::MemoManager*                     mpManager;          // 0x04

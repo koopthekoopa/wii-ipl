@@ -24,7 +24,7 @@ namespace ipl {
             "B_ArwL"
         };
 
-        const char* SDButton::mscArrowBtnName[SDButton::ARROW_BTN_MAX] = {
+        const char* SDButton::mscArrowName[SDButton::ARROW_BTN_MAX] = {
             "ArwR",
             "ArwL"
         };

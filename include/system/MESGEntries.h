@@ -6,6 +6,7 @@
 #define MESG_CMN_BACK                   35
 #define MESG_CMN_QUIT                   37
 #define MESG_CMN_OK                     46
+#define MESG_CMN_BACK_ALT               315
 #define MESG_CMN_YES                    321
 #define MESG_CMN_NO                     322
 
@@ -42,10 +43,10 @@
 
 /* Address */
 
-#define MESG_ADDRESS_WII_ID             66
-#define MESG_ADDRESS_CHOOSE             78
 #define MESG_ADDRESS_BACK               35
 #define MESG_ADDRESS_REGISTER           41
+#define MESG_ADDRESS_WII_ID             66
+#define MESG_ADDRESS_CHOOSE             78
 
 /* Address Add Select */
 
@@ -65,7 +66,7 @@
 #define MESG_BUTTON_CALENDAR            17
 #define MESG_BUTTON_CREATE              18
 
-/* Button */
+/* Calendar */
 
 #define MESG_CALENDAR_MONDAY            110
 #define MESG_CALENDAR_TUESDAY           111
@@ -102,6 +103,17 @@
 
 #define MESG_CLOCK_WII_MENU             16
 
+/* Letter Writer */
+
+#define MESG_LETTERWRITER_SEND          39
+#define MESG_LETTERWRITER_REPLY         67
+#define MESG_LETTERWRITER_LETTER_HEADER 141
+#define MESG_LETTERWRITER_LETTER_TEXT   142
+#define MESG_LETTERWRITER_SENDING       143
+#define MESG_LETTERWRITER_EMAIL_SUBJECT 387
+#define MESG_LETTERWRITER_NWC24_ERROR   454
+#define MESG_LETTERWRITER_FRIEND_NULL   456
+
 /* Parental Dialog */
 
 #define MESG_PARENTAL_DLG_TITLE         327
@@ -119,10 +131,6 @@
 
 /* Settings Select Button */
 
-#define MESG_SETTING_BTN_BACK           315
-
-/* Settings Select Button */
-
 #define MESG_SETTING_SEL_DATA_MANAGE    253
 #define MESG_SETTING_SEL_SAVE_DATA      254
 #define MESG_SETTING_SEL_CHANNELS       255
@@ -134,7 +142,7 @@
 
 #define MESG_TEXTWRITER_HEADER          133
 #define MESG_TEXTWRITER_ADD_MII         139
-#define MESG_TEXTWRITER_LETTER_TITLE    140
+#define MESG_TEXTWRITER_LETTER_TEXT    140
 #define MESG_TEXTWRITER_NO_MII          380
 #define MESG_TEXTWRITER_SEND_ERROR      455
 

@@ -9,7 +9,10 @@ namespace textinput {
             class InputForm : public textinput::MemoInputForm {
                 public:
                     typedef enum Type {
-                        T_0 = 0,
+                        T_AddressSel = 0,
+                        T_Address,
+                        T_Picture,
+                        T_Reply,
                         T_Last,
                     } Type;
 
@@ -24,6 +27,8 @@ namespace textinput {
                     virtual void                    setType(Type type)             { meType = type; }
 
                     virtual void                    setSendOutMessage(const wchar_t* sendOutMessage);
+
+                    void                            resizePhotoPane(f32 width, f32 height);
 
                 private:
                     u8      unk_0x400;

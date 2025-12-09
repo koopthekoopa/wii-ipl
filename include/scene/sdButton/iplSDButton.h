@@ -149,7 +149,7 @@ namespace ipl {
                 bool                        mbEnabled;                      // 0x82
 
                 static const char*  mscButtonName[BTN_MAX];
-                static const char*  mscArrowBtnName[ARROW_BTN_MAX];
+                static const char*  mscArrowName[ARROW_BTN_MAX];
 
                 friend class SDArrow;
                 friend class SDButtonEventHandlerBase;

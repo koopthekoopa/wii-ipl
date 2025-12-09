@@ -360,11 +360,11 @@ namespace ipl {
 
                 int                         unused_0x184;
 
-                static const char*  mscButtonTextName[2];
+                static const char*  mscTextPaneName[2];
                 static const char*  mscButtonName[BTN_MAX];
                 static const char*  mscGroupName[BTN_MAX];
 
-                static const char*  mscArrowBtnName[ARROW_BTN_MAX];
+                static const char*  mscArrowName[ARROW_BTN_MAX];
 
                 friend class Arrow;
 
