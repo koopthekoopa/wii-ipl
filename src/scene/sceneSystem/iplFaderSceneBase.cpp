@@ -13,7 +13,7 @@ namespace ipl {
 
             switch (mScnFadeState) {
                 case STT_FADE_IN: {
-                    if (calcFadein() != SCENE_CONTINUE) {
+                    if (calcFadein() != FADER_SCN_CONTINUE) {
                         mScnFadeState = STT_INIT_NORMAL;
                     }
                     break;
@@ -23,7 +23,7 @@ namespace ipl {
                     mScnFadeState = STT_NORMAL;
                 }
                 case STT_NORMAL: {
-                    if (calcNormal() != SCENE_CONTINUE) {
+                    if (calcNormal() != FADER_SCN_CONTINUE) {
                         mScnFadeState = STT_INIT_FADE_OUT;
                     }
                     break;
@@ -33,8 +33,8 @@ namespace ipl {
                     mScnFadeState = STT_FADE_OUT;
                 }
                 case STT_FADE_OUT: {
-                    if (calcFadeout() != SCENE_CONTINUE) {
-                        setSceneState(SCN_STATE_DESTROY_REQ);
+                    if (calcFadeout() != FADER_SCN_CONTINUE) {
+                        requestSceneDestruction();
                         mScnFadeState = STT_DONE;
                     }
                     break;

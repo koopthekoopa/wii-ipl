@@ -148,7 +148,7 @@ namespace ipl {
 
         if (!System::getResetHandler()->isResetting()) {
             if (!mbHbmEnabled && !mbBanIconEnabled
-            && System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_OUT) {
+            && System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT) {
                 checkStart();
             }
 
@@ -180,7 +180,7 @@ namespace ipl {
         else {
             mEnableFlag = false;
             if (!mbHbmEnabled && !mbBanIconEnabled
-            && System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_OUT) {
+            && System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT) {
                 checkStart();
             }
         }

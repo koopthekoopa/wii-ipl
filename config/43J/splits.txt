@@ -4585,6 +4585,3 @@ libs/MetroTRK/src/dolphin_Os/dolphin_trk_glue.c:
 libs/MetroTRK/src/dolphin_Os/target_options.c:
 	.bss        start:0x811C10D0 end:0x811C10D4
 	.text       start:0x816363B0 end:0x816363C0
-
-GARBAGE_DATA:
-	.bss        start:0x811C10D4 end:0x81330000 align:4

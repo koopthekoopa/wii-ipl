@@ -13,7 +13,7 @@ namespace ipl {
         mbReturnToMenu = FALSE;
         mFatalResetState = FATAL_RESET_STATE_NONE;
         // Prepare the fade out.
-        System::getResetFader()->setStatus(EGG::Fader::STATUS_PREPARE_OUT);
+        System::getResetFader()->setStatus(EGG::Fader::PREPARE_OUT);
         System::getResetFader()->calc();
 
         // Set the callbacks.
@@ -69,7 +69,7 @@ namespace ipl {
                                 WPADGetStatus();
 
                                 if (System::getResetFader()->fadeOut()
-                                || System::getResetFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+                                || System::getResetFader()->getStatus() == EGG::Fader::PREPARE_IN) {
                                 #ifdef VERSION_43E
                                     if (System::getMasterController()->down(controller::REVO_BTN_DOWN)) {
                                         SCSetEuRgb60Mode(FALSE);
@@ -101,7 +101,7 @@ namespace ipl {
                 }
                 // Shutdown video
                 case RESET_STATE_SHUTDOWN_VIDEO: {
-                    if (System::getResetFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN
+                    if (System::getResetFader()->getStatus() == EGG::Fader::PREPARE_IN
                     && (System::getSceneManager() == NULL || System::getSceneManager()->isResetProcessDone())) {
                         mUpdateState = RESET_STATE_SHUTDOWN_SYSTEM;
                         VISetBlack(TRUE);
@@ -169,7 +169,7 @@ namespace ipl {
             }
             // Shutdown the video
             case FATAL_RESET_STATE_VIDEO: {
-                if (System::getResetFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+                if (System::getResetFader()->getStatus() == EGG::Fader::PREPARE_IN) {
                     VISetBlack(TRUE);
                     VIFlush();
 

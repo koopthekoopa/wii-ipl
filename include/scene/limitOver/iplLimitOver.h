@@ -10,15 +10,15 @@ namespace ipl {
                 LimitOver(EGG::Heap* heap);
                 virtual ~LimitOver();
 
-                virtual BOOL        isReady() const;
+                virtual BOOL                isReady() const;
 
-                virtual void        prepare();
-                virtual void        create();
-                virtual void        draw();
+                virtual void                prepare();
+                virtual void                create();
+                virtual void                draw();
 
-                virtual SceneCommand calcFadein();
-                virtual SceneCommand calcNormal();
-                virtual SceneCommand calcFadeout();
+                virtual FaderSceneCommand   calcFadein();
+                virtual FaderSceneCommand   calcNormal();
+                virtual FaderSceneCommand   calcFadeout();
 
             private:
                 enum {

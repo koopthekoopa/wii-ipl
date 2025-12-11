@@ -214,8 +214,8 @@ namespace ipl {
             }
         }
 
-        SceneCommand FaceSelect::calcFadein() {
-            SceneCommand command = SCENE_CONTINUE;
+        FaderSceneCommand FaceSelect::calcFadein() {
+            FaderSceneCommand command = FADER_SCN_CONTINUE;
 
             if (mbPreparing) {
                 bool result = true;
@@ -235,7 +235,7 @@ namespace ipl {
                 }
             }
             else {
-                command = !mpLayout->getAnim(mFadeAnimIndex + ANIM_FADE_IN)->isPlaying() ? SCENE_NEXT : SCENE_CONTINUE;
+                command = !mpLayout->getAnim(mFadeAnimIndex + ANIM_FADE_IN)->isPlaying() ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
             }
 
             return command;
@@ -252,7 +252,7 @@ namespace ipl {
             }
         }
 
-        SceneCommand FaceSelect::calcNormal() {
+        FaderSceneCommand FaceSelect::calcNormal() {
             switch (mState) {
                 case STATE_NORMAL: {
                     stt_normal();
@@ -276,7 +276,7 @@ namespace ipl {
                 }
             }
 
-            return mState == STATE_DONE ? SCENE_NEXT : SCENE_CONTINUE;
+            return mState == STATE_DONE ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
         }
 
         void FaceSelect::initCalcFadeout() {
@@ -289,12 +289,12 @@ namespace ipl {
             mpLayout->getAnim(mFadeAnimIndex + ANIM_FADE_OUT)->play();
         }
 
-        SceneCommand FaceSelect::calcFadeout() {
+        FaderSceneCommand FaceSelect::calcFadeout() {
             for (int i = 0; i < MAX_BALLOONS; i++) {
                 mpBalloons[i]->calc();
             }
 
-            return !mpLayout->getAnim(mFadeAnimIndex + ANIM_FADE_OUT)->isPlaying() ? SCENE_NEXT : SCENE_CONTINUE;
+            return !mpLayout->getAnim(mFadeAnimIndex + ANIM_FADE_OUT)->isPlaying() ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
         }
 
         void FaceSelect::calcCommonAfter() {

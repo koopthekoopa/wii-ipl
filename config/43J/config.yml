@@ -1,9 +1,14 @@
-object: 'build/43J/base/main.dol'
+name: 'main'
+
+object_base: 'orig/43J'
+object: '00000008.app'
+
+hash: c94c8e671854d56fa2abd4c4c886e6c62a2c7f0e
 
 symbols: 'config/43J/symbols.txt'
 splits: 'config/43J/splits.txt'
 
-ldscript_template: ldscript_ipl2.lcf
+ldscript_template: 'config/ldscript_ipl2.lcf'
 
 quick_analysis: true
 fill_gaps: false
@@ -76,10 +81,3 @@ extract:
     - symbol: ms_ppki
       binary: certs\ms_ppki.cert
       header: ms_ppki_cert.inc
-
-# fix up bss nightmare from the generated dol
-block_relocations:
-    - target: .bss:0x811C10D4
-      end:    .bss:0x8132FFFF
-
-

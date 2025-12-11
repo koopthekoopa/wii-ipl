@@ -34,7 +34,7 @@ namespace ipl {
         mpGui(NULL),
         mState(STATE_NORMAL),
         mbParentalBypass(false) {
-            setSceneParentFlags(SCN_PARENT_FLAG_CANCALC | SCN_PARENT_FLAG_CANDRAW);
+            setSceneParentFlags(SCN_PARENTFLAG_CALC | SCN_PARENTFLAG_DRAW);
 
             for (int i = 0; i < BTN_MAX; i++) {
                 mbHovered[i] = FALSE;
@@ -106,8 +106,8 @@ namespace ipl {
             mpGui->calc();
         }
 
-        SceneCommand MailAddressSelect::calcFadein() {
-            SceneCommand result = SCENE_CONTINUE;
+        FaderSceneCommand MailAddressSelect::calcFadein() {
+            FaderSceneCommand result = FADER_SCN_CONTINUE;
 
             bool res = false;
             if (!mpLayout->getAnim(ANIM_FADE_IN)->isPlaying()) {
@@ -118,7 +118,7 @@ namespace ipl {
 
             if (res) {
                 if (!getButton()->hasReservedAnim()) {
-                    result = SCENE_NEXT;
+                    result = FADER_SCN_NEXT;
                 }
             }
 
@@ -129,7 +129,7 @@ namespace ipl {
             getButton()->setEventHandler(this);
         }
 
-        SceneCommand MailAddressSelect::calcNormal() {
+        FaderSceneCommand MailAddressSelect::calcNormal() {
             Button* button = getButton();
 
             switch (mState) {
@@ -290,23 +290,23 @@ namespace ipl {
                 }
             }
 
-            return mState == STATE_DONE ? SCENE_NEXT : SCENE_CONTINUE;
+            return mState == STATE_DONE ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
         }
 
         void MailAddressSelect::initCalcFadeout() {
             getButton()->setEventHandler(NULL);
             
-            if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_OUT) {
+            if (System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT) {
                 mpLayout->getAnim(ANIM_FADE_OUT)->play();
             }
         }
 
-        SceneCommand MailAddressSelect::calcFadeout() {
-            if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_OUT) {
-                return !mpLayout->getAnim(ANIM_FADE_OUT)->isPlaying() ? SCENE_NEXT : SCENE_CONTINUE;
+        FaderSceneCommand MailAddressSelect::calcFadeout() {
+            if (System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT) {
+                return !mpLayout->getAnim(ANIM_FADE_OUT)->isPlaying() ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
             }
             else {
-                return System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN ? SCENE_NEXT : SCENE_CONTINUE;
+                return System::getFader()->getStatus() == EGG::Fader::PREPARE_IN ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
             }
         }
 

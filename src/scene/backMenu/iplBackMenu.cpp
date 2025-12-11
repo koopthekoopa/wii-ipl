@@ -41,7 +41,7 @@ namespace ipl {
         BackMenu::BackMenu(EGG::Heap* heap) :
         FaderSceneBase(heap),
         unused_0x5C(0) {
-            setSceneParentFlags(SCN_PARENT_FLAG_CANDRAW); // (ignored as child scenes aren't created over this scene)
+            setSceneParentFlags(SCN_PARENTFLAG_DRAW); // (ignored as child scenes aren't created over this scene)
         }
 
         void BackMenu::prepare() {}
@@ -69,19 +69,19 @@ namespace ipl {
             mpLayout->calc();
         }
 
-        SceneCommand BackMenu::calcFadein() {
-            if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_OUT) {
-                return SCENE_NEXT;
+        FaderSceneCommand BackMenu::calcFadein() {
+            if (System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT) {
+                return FADER_SCN_NEXT;
             }
-            return SCENE_CONTINUE;
+            return FADER_SCN_CONTINUE;
         }
 
-        SceneCommand BackMenu::calcNormal() {
-            SceneCommand result = SCENE_CONTINUE;
+        FaderSceneCommand BackMenu::calcNormal() {
+            FaderSceneCommand result = FADER_SCN_CONTINUE;
 
             // Get out of scene once resources are fully loaded.
             if (has_prepared()) {
-                result = SCENE_NEXT;
+                result = FADER_SCN_NEXT;
             }
 
             return result;
@@ -91,8 +91,8 @@ namespace ipl {
             System::getFader()->fadeOut();
         }
 
-        SceneCommand BackMenu::calcFadeout() {
-            if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+        FaderSceneCommand BackMenu::calcFadeout() {
+            if (System::getFader()->getStatus() == EGG::Fader::PREPARE_IN) {
                 System::requestCreateAfter();
                 System::requestCreateLibManager();
             }
@@ -104,9 +104,9 @@ namespace ipl {
                 
                 reserveAllSceneDestruction(SCENE_BOARD, NULL);
                 
-                return SCENE_NEXT;
+                return FADER_SCN_NEXT;
             }
-            return SCENE_CONTINUE;
+            return FADER_SCN_CONTINUE;
         }
 
         void BackMenu::draw() {

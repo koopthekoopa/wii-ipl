@@ -53,9 +53,9 @@ namespace ipl {
 
                 virtual void                calcCommon() {}
 
-                virtual SceneCommand        calcFadein();
-                virtual SceneCommand        calcNormal();
-                virtual SceneCommand        calcFadeout();
+                virtual FaderSceneCommand   calcFadein();
+                virtual FaderSceneCommand   calcNormal();
+                virtual FaderSceneCommand   calcFadeout();
 
                 virtual bool                onNigaoeButton();
                 virtual void                setNigaoe(nigaoe::Object* nigaoe);

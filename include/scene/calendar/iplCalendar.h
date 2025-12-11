@@ -30,22 +30,22 @@ namespace ipl {
 
                 Calendar(EGG::Heap* heap);
 
-                void            prepare();
-                void            create();
+                void                prepare();
+                void                create();
 
-                void            calcCommon();
-                SceneCommand    calcFadein();
-                SceneCommand    calcNormal();
-                void            initCalcFadeout();
-                SceneCommand    calcFadeout();
+                void                calcCommon();
+                FaderSceneCommand   calcFadein();
+                FaderSceneCommand   calcNormal();
+                void                initCalcFadeout();
+                FaderSceneCommand   calcFadeout();
 
-                void            draw();
-                void            doAnim(int animId);
+                void                draw();
+                void                doAnim(int animId);
 
-                void            onEventDerived(u32 compId, u32 event, const controller::Interface* con);
+                void                onEventDerived(u32 compId, u32 event, const controller::Interface* con);
 
-                void            onPointDate(Date* date);
-                void            onTrigDate(Date* date);
+                void                onPointDate(Date* date);
+                void                onTrigDate(Date* date);
 
             private:
                 enum {
@@ -57,32 +57,32 @@ namespace ipl {
                     STATE_DONE,
                 };
 
-                void            on_normal();
-                void            on_scroll();
-                void            on_wait_task();
-                void            on_wait_exit();
+                void    on_normal();
+                void    on_scroll();
+                void    on_wait_task();
+                void    on_wait_exit();
 
-                void            start_scroll_r();
-                void            do_scroll_r();
+                void    start_scroll_r();
+                void    do_scroll_r();
 
-                void            start_scroll_l();
-                void            do_scroll_l();
+                void    start_scroll_l();
+                void    do_scroll_l();
 
-                void            start_exit();
-                void            do_exit();
+                void    start_exit();
+                void    do_exit();
 
-                void            set_textbox(const char* paneName, u32 msgId);
-                void            set_textbox_day();
-                void            set_textbox_month();
-                void            set_textbox_month(const char* paneName, const utility::Date& date);
-                void            set_textbox_date(int unk, const utility::Date& date);
+                void    set_textbox(const char* paneName, u32 msgId);
+                void    set_textbox_day();
+                void    set_textbox_month();
+                void    set_textbox_month(const char* paneName, const utility::Date& date);
+                void    set_textbox_date(int unk, const utility::Date& date);
 
-                void            set_date_pos(int unk);
+                void    set_date_pos(int unk);
 
-                void            exec_search_task();
+                void    exec_search_task();
 
-                BOOL            is_upper_limit();
-                BOOL            is_lower_limit();
+                BOOL    is_upper_limit();
+                BOOL    is_lower_limit();
 
                 int                     mState;             // 0x64
                 int                     mPrevState;         // 0x68

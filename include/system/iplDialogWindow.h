@@ -471,7 +471,7 @@ namespace ipl {
             bool                    mbNoShade;                          // 0x98
             bool                    mbHideBtnA;                         // 0x99
 
-            static char*            mscBtnName[3];
+            static const char*      mscBtnName[DIALOG_BTN_TYPE_MAX];
     };
 }
 

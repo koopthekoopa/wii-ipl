@@ -29,7 +29,7 @@ namespace ipl {
                 ChannelSelect::setInitFlag(snd::getSystem()->startBGM("WIPL_BGM_MENU"));
                 System::getFader()->fadeIn();
 
-                setSceneState(SCN_STATE_DESTROY_REQ);
+                requestSceneDestruction();
             }
         }
     }

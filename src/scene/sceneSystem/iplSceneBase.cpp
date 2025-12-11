@@ -25,13 +25,13 @@ namespace ipl {
         }
 
         void Base::do_calc() {
-            if ((getChild() == NULL || (mParentFlags & SCN_PARENT_FLAG_CANCALC)) && !(mScnState & SCN_STATE_DESTROY_REQ)) {
+            if ((getChild() == NULL || (mParentFlags & SCN_PARENTFLAG_CALC)) && !(mScnState & SCN_STATE_DESTROY_REQ)) {
                 calc();
             }
         }
 
         void Base::do_draw() {
-            if ((getChild() == NULL || (mParentFlags & SCN_PARENT_FLAG_CANDRAW)) && !(mScnState & SCN_STATE_DESTROY_REQ)) {
+            if ((getChild() == NULL || (mParentFlags & SCN_PARENTFLAG_DRAW)) && !(mScnState & SCN_STATE_DESTROY_REQ)) {
                 draw();
             }
         }

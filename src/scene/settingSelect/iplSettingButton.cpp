@@ -64,24 +64,24 @@ namespace ipl {
             }
         }
 
-        SceneCommand SettingButton::calcFadein() {
-            SceneCommand result = SCENE_CONTINUE;
+        FaderSceneCommand SettingButton::calcFadein() {
+            FaderSceneCommand result = FADER_SCN_CONTINUE;
             if (!mbFadedIn) {
-                if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_OUT) {
+                if (System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT) {
                     mbFadedIn = true;
                     mpLayout->getAnim(ANIM_SEEN_IN)->play();
                 }
             }
             else {
                 if (!mpLayout->getAnim(ANIM_SEEN_IN)->isPlaying()) {
-                    result = SCENE_NEXT;
+                    result = FADER_SCN_NEXT;
                 }
             }
 
             return result;
         }
 
-        SceneCommand SettingButton::calcNormal() {
+        FaderSceneCommand SettingButton::calcNormal() {
             if (!mpLayout->getAnim(ANIM_ALPHA_IN)->isPlaying()
             && !mpLayout->getAnim(ANIM_ALPHA_OUT)->isPlaying()
             && !mpLayout->getAnim(ANIM_BTN_FLASH)->isPlaying()
@@ -111,7 +111,7 @@ namespace ipl {
                 
             }
 
-            return SCENE_CONTINUE;
+            return FADER_SCN_CONTINUE;
         }
 
         void SettingButton::calcCommonAfter() {

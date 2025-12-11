@@ -456,7 +456,7 @@ namespace ipl {
 
         bool Button::isActive() const {
             bool result = false;
-            if ((getSceneState() & SCN_STATE_CREATED) && unk_0x54 != 1) {
+            if (isSceneCreated() && unk_0x54 != 1) {
                 result = true;
             }
             return result;

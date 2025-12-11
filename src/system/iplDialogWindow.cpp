@@ -17,7 +17,7 @@ namespace ipl {
      * BtnC = Button 2 - Bottom button on Btn3
      */
 
-    char* DialogWindow::mscBtnName[3] = {
+    const char* DialogWindow::mscBtnName[DIALOG_BTN_TYPE_MAX] = {
         "B_BtnB",
         #define BUTTON_ONE_MAX      1
         "B_BtnA",

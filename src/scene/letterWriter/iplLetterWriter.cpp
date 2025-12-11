@@ -23,7 +23,7 @@ namespace ipl {
         mpCaptionString(NULL),
         mpCaptionAllocator(NULL),
         mNwc24ErrCountdown2(0) {
-            setSceneParentFlags(SCN_PARENT_FLAG_CANDRAW | SCN_PARENT_FLAG_CANCALC); // already set by TextWriter base
+            setSceneParentFlags(SCN_PARENTFLAG_DRAW | SCN_PARENTFLAG_CALC); // already set by TextWriter base
         }
 
         LetterWriter::~LetterWriter() {
@@ -98,7 +98,7 @@ namespace ipl {
             getLetterInputForm()->setSendOutMessage(System::getMessage(MESG_LETTERWRITER_SENDING));
         }
 
-        SceneCommand LetterWriter::calcFadein() {
+        FaderSceneCommand LetterWriter::calcFadein() {
             return TextWriter::calcFadein();
         }
 
@@ -203,7 +203,7 @@ namespace ipl {
             return mpCaptionString->getWCString();
         }
 
-        SceneCommand LetterWriter::calcNormal() {
+        FaderSceneCommand LetterWriter::calcNormal() {
             const wchar_t* caption;
 
             switch (mLetterState) {
@@ -212,7 +212,7 @@ namespace ipl {
 
                     getFriendInfo();
 
-                    return SCENE_CONTINUE;
+                    return FADER_SCN_CONTINUE;
                 }
                 case LETTER_STATE_EXIT_ON_ERROR: {
                     if (System::getDialog()->getLastResult() == DialogWindow::RESULT_BUTTON) {
@@ -237,7 +237,7 @@ namespace ipl {
                         mState = STATE_DONE;
                     }
 
-                    return SCENE_CONTINUE;
+                    return FADER_SCN_CONTINUE;
                 }
                 case LETTER_STATE_DISABLE_UI: {
                     mLetterState = LETTER_STATE_ENABLE_UI;
@@ -246,7 +246,7 @@ namespace ipl {
 
                     getButton()->setEventHandler(NULL);
 
-                    return SCENE_CONTINUE;
+                    return FADER_SCN_CONTINUE;
                 }
                 case LETTER_STATE_ENABLE_UI: {
                     if (System::getScene(SCENE_ADDRESS) == NULL && System::getReservedScene() == NULL) {
@@ -267,7 +267,7 @@ namespace ipl {
                         }
                     }
 
-                    return SCENE_CONTINUE;
+                    return FADER_SCN_CONTINUE;
                 }
                 case LETTER_STATE_NORMAL:
                 default: {
@@ -382,7 +382,7 @@ namespace ipl {
             }
         }
 
-        SceneCommand LetterWriter::calcFadeout() {
+        FaderSceneCommand LetterWriter::calcFadeout() {
             return TextWriter::calcFadeout();
         }
 

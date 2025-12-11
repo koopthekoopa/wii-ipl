@@ -1,9 +1,14 @@
-object: 'build/43U/base/main.dol'
+name: 'main'
+
+object_base: 'orig/43U'
+object: '00000008.app'
+
+hash: 26116613f624061ba99c8d1a299aaa6efa85670d
 
 symbols: 'config/43U/symbols.txt'
 splits: 'config/43U/splits.txt'
 
-ldscript_template: ldscript_ipl2.lcf
+ldscript_template: 'config/ldscript_ipl2.lcf'
 
 quick_analysis: true
 fill_gaps: false
@@ -75,10 +80,3 @@ extract:
     - symbol: ms_ppki
       binary: certs\ms_ppki.cert
       header: ms_ppki_cert.inc
-
-# fix up bss nightmare from the generated dol
-block_relocations:
-     - target: .bss:0x811B1494
-       end:    .bss:0x8132FFFF
-
-

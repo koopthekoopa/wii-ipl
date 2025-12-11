@@ -25,24 +25,24 @@ namespace ipl {
 
                 FaceSelect(EGG::Heap* heap, int fadeType);
 
-                virtual void            prepare();
-                virtual void            create();
+                virtual void                prepare();
+                virtual void                create();
 
-                virtual SceneCommand    calcFadein();
+                virtual FaderSceneCommand    calcFadein();
 
-                virtual void            initCalcNormal();
-                virtual SceneCommand    calcNormal();
+                virtual void                initCalcNormal();
+                virtual FaderSceneCommand   calcNormal();
 
-                virtual void            initCalcFadeout();
-                virtual SceneCommand    calcFadeout();
+                virtual void                initCalcFadeout();
+                virtual FaderSceneCommand   calcFadeout();
 
-                virtual void            calcCommonAfter();
+                virtual void                calcCommonAfter();
 
-                virtual void            destroy();
+                virtual void                destroy();
 
-                virtual void            draw();
+                virtual void                draw();
 
-                int                     getSelectedFaceId() { return mSelectedFaceId; }
+                int                         getSelectedFaceId() { return mSelectedFaceId; }
 
                 typedef struct Face {
                     bool            creating;   // 0x00

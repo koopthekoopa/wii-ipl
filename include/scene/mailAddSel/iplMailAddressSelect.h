@@ -13,26 +13,26 @@ namespace ipl {
                 MailAddressSelect(EGG::Heap* heap);
                 ~MailAddressSelect();
 
-                virtual void            prepare();
-                virtual void            create();
+                virtual void                prepare();
+                virtual void                create();
 
-                virtual void            calcCommon();
-                virtual SceneCommand    calcFadein();
+                virtual void                calcCommon();
+                virtual FaderSceneCommand   calcFadein();
 
-                virtual void            initCalcNormal();
-                virtual SceneCommand    calcNormal();
+                virtual void                initCalcNormal();
+                virtual FaderSceneCommand   calcNormal();
 
-                virtual void            initCalcFadeout();
-                virtual SceneCommand    calcFadeout();
+                virtual void                initCalcFadeout();
+                virtual FaderSceneCommand   calcFadeout();
 
-                virtual void            draw();
-                virtual void            destroy();
+                virtual void                draw();
+                virtual void                destroy();
 
-                void                    finishMemo(bool closing);
-                void                    finishLetter(bool closing);
-                void                    finishAddress();
+                void                        finishMemo(bool closing);
+                void                        finishLetter(bool closing);
+                void                        finishAddress();
 
-                virtual void            onEventDerived(u32 compId, u32 event, const controller::Interface* con);
+                virtual void                onEventDerived(u32 compId, u32 event, const controller::Interface* con);
 
             protected:
                 void    start_point_event(const char* paneName, controller::Interface* con);

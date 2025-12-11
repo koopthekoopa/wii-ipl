@@ -26,9 +26,9 @@ namespace ipl {
 
                 virtual void                    calcCommon() {}
 
-                virtual SceneCommand            calcFadein();
-                virtual SceneCommand            calcNormal();
-                virtual SceneCommand            calcFadeout();
+                virtual FaderSceneCommand       calcFadein();
+                virtual FaderSceneCommand       calcNormal();
+                virtual FaderSceneCommand       calcFadeout();
 
                 virtual void                    onEventDerived(u32 compId, u32 event, const controller::Interface* con);
 

@@ -225,7 +225,7 @@ namespace ipl {
             System::getPointer()->setVisible(false);
         }
 
-        SceneCommand LimitOver::calcFadein() {
+        FaderSceneCommand LimitOver::calcFadein() {
             mpLayout->calc();
 
             // Wait for system initialization.
@@ -235,7 +235,7 @@ namespace ipl {
                     mpLayout->start(ANIM_FADE_IN);
                     mpLayout->calc();
 
-                    System::getFader()->setStatus(EGG::Fader::STATUS_PREPARE_OUT);
+                    System::getFader()->setStatus(EGG::Fader::PREPARE_OUT);
                     System::getFader()->calc();
 
                     snd::getSystem()->startSE("WIPL_SE_INFO_WINDOW");
@@ -243,7 +243,7 @@ namespace ipl {
                     mbDoneInit = true;
                 }
 
-                return SCENE_CONTINUE;
+                return FADER_SCN_CONTINUE;
             }
 
             // We faded in? Now we wait...
@@ -263,15 +263,15 @@ namespace ipl {
                     mPushTick = OSGetTick();
                     mWpadMask = utility::wpad::getWpadConnectedMask();
 
-                    return SCENE_NEXT;
+                    return FADER_SCN_NEXT;
                 }
             }
 
-            return SCENE_CONTINUE;
+            return FADER_SCN_CONTINUE;
         }
 
-        SceneCommand LimitOver::calcNormal() {
-            SceneCommand result  = SCENE_CONTINUE;
+        FaderSceneCommand LimitOver::calcNormal() {
+            FaderSceneCommand result  = FADER_SCN_CONTINUE;
             u32 newWpadMask     = utility::wpad::getWpadConnectedMask();
 
             // Finished waiting?? The user can finally pass through the screen
@@ -289,7 +289,7 @@ namespace ipl {
                     snd::getSystem()->startSE("WIPL_SE_BT_PUSH");
                     mpLayout->start(ANIM_FADE_OUT);
 
-                    result = SCENE_NEXT;
+                    result = FADER_SCN_NEXT;
                 }
             }
 
@@ -298,7 +298,7 @@ namespace ipl {
             return result;
         }
 
-        SceneCommand LimitOver::calcFadeout() {
+        FaderSceneCommand LimitOver::calcFadeout() {
             mpLayout->calc();
 
             if (!mpLayout->isPlaying(ANIM_FADE_OUT)) {
@@ -306,15 +306,15 @@ namespace ipl {
                 System::getFader()->calc();
             }
 
-            if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+            if (System::getFader()->getStatus() == EGG::Fader::PREPARE_IN) {
                 System::getPointer()->setVisible(true);
 
                 reserveSceneChange(SCENE_BOARD, NULL);
 
-                return SCENE_NEXT;
+                return FADER_SCN_NEXT;
             }
 
-            return SCENE_CONTINUE;
+            return FADER_SCN_CONTINUE;
         }
 
         void LimitOver::draw() {

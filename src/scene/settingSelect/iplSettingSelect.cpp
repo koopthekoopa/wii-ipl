@@ -32,7 +32,7 @@ namespace ipl {
         mpGui(NULL),
         unk_0x90(0),
         unk_0x94(0) {
-            setSceneParentFlags(SCN_PARENT_FLAG_CANCALC | SCN_PARENT_FLAG_CANDRAW);
+            setSceneParentFlags(SCN_PARENTFLAG_CALC | SCN_PARENTFLAG_DRAW);
         }
 
         void SettingSelect::prepare() {
@@ -199,7 +199,7 @@ namespace ipl {
         void SettingSelect::stt_wait_button_fadein() {
             SettingButton* settingButton = static_cast<SettingButton*>(System::getSceneManager()->getScene(SCENE_SETTING_BUTTON));
 
-            if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_OUT
+            if (System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT
             && settingButton != NULL && settingButton->getSceneFadeState() != FaderSceneBase::STT_FADE_IN) {
                 if (mSettingArg == SettingSelectArg::ARG_START_NORMAL) {
                     mpLayout->getAnim(ANIM_DATA_MANAGE_IN)->play();
@@ -364,8 +364,8 @@ namespace ipl {
         }
 
         void SettingSelect::stt_wait_blackout() {
-            if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
-                setSceneState(SCN_STATE_DESTROY_REQ);
+            if (System::getFader()->getStatus() == EGG::Fader::PREPARE_IN) {
+                requestSceneDestruction();
                 CHANGE_STATE(STATE_DONE);
             }
         }
@@ -745,7 +745,7 @@ namespace ipl {
         }
 
         void SettingSelect::fn_814099EC() {
-            if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+            if (System::getFader()->getStatus() == EGG::Fader::PREPARE_IN) {
                 while (WPADGetStatus() != 0 || System::getBS2Manager()->getIPLState() != bs2::IPL_STATE_8) {
                     snd::getSystem()->calc();
                     System::getBS2Manager()->update();

@@ -107,7 +107,7 @@ namespace ipl {
         mSafeModeTick(0),
         mbHeldCombo(false),
         mbDoneSafeMode(false) {
-            setSceneParentFlags(SCN_PARENT_FLAG_CANDRAW); // (ignored as child scenes aren't created over this scene)
+            setSceneParentFlags(SCN_PARENTFLAG_DRAW); // (ignored as child scenes aren't created over this scene)
         }
 
         skHealth::~skHealth() {}
@@ -230,14 +230,14 @@ namespace ipl {
             mpLayout->start(ANIM_FADE_IN);
             mpLayout->calc();
 
-            System::getFader()->setStatus(EGG::Fader::STATUS_PREPARE_OUT);
+            System::getFader()->setStatus(EGG::Fader::PREPARE_OUT);
             System::getFader()->calc();
 
             System::getPointer()->setVisible(false);
         }
 
-        SceneCommand skHealth::calcFadein() {
-            SceneCommand result = SCENE_CONTINUE;
+        FaderSceneCommand skHealth::calcFadein() {
+            FaderSceneCommand result = FADER_SCN_CONTINUE;
 
             check_safe_mode();
 
@@ -257,7 +257,7 @@ namespace ipl {
                     mPushTick = OSGetTick();
                     mWpadMask = utility::wpad::getWpadConnectedMask();
 
-                    result = SCENE_NEXT;
+                    result = FADER_SCN_NEXT;
                 }
             }
 
@@ -266,8 +266,8 @@ namespace ipl {
             return result;
         }
 
-        SceneCommand skHealth::calcNormal() {
-            SceneCommand result  = SCENE_CONTINUE;
+        FaderSceneCommand skHealth::calcNormal() {
+            FaderSceneCommand result  = FADER_SCN_CONTINUE;
             u32 newWpadMask     = utility::wpad::getWpadConnectedMask();
 
             check_safe_mode();
@@ -288,7 +288,7 @@ namespace ipl {
                         snd::getSystem()->startSE("WIPL_SE_BT_PUSH");
                         mpLayout->start(ANIM_FADE_OUT);
 
-                        result = SCENE_NEXT;
+                        result = FADER_SCN_NEXT;
                     }
                 }
             }
@@ -298,7 +298,7 @@ namespace ipl {
             return result;
         }
 
-        SceneCommand skHealth::calcFadeout() {
+        FaderSceneCommand skHealth::calcFadeout() {
             mpLayout->calc();
 
             if (!mpLayout->isPlaying(ANIM_FADE_OUT)) {
@@ -312,7 +312,7 @@ namespace ipl {
             }
 
             if (System::createdAfterAndLibMgr() || (System::hasCreatedAfter() && System::isNandFull()) || System::isSafeMode()) {
-                if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+                if (System::getFader()->getStatus() == EGG::Fader::PREPARE_IN) {
                     System::getPointer()->setVisible(true);
                     System::getResetHandler()->enableResetToMenu();
 
@@ -320,11 +320,11 @@ namespace ipl {
                         reserveAllSceneDestruction(SCENE_BOARD, NULL);
                     }
 
-                    return SCENE_NEXT;
+                    return FADER_SCN_NEXT;
                 }
             }
             
-            return SCENE_CONTINUE;
+            return FADER_SCN_CONTINUE;
         }
 
         void skHealth::draw() {

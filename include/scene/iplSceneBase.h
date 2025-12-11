@@ -50,6 +50,8 @@ namespace ipl {
         } Command;
 
         class Base : public utility::Tree, EGG::Disposer {
+            /* PUBLIC FUNCTIONS */
+
             public:
                 /** @brief If the scene is ready */
                 Base(EGG::Heap* heap);
@@ -75,26 +77,6 @@ namespace ipl {
                 virtual void    draw()      {}
                 /** @brief Destroy the scene and clear from memory */
                 virtual void    destroy()   {}
-
-                void            do_prepare();
-                void            do_create();
-                void            do_calc();
-                void            do_draw();
-                void            do_destroy();
-
-                /**
-                 * @brief Creates a child scene.
-                 * @param sceneId The target scene.
-                 * @param arg Arguments for the scene.
-                */
-                void            createChildScene(int sceneId, Base* parent, Base* child, void* args = NULL);
-                /**
-                 * @brief Send a request to change scene.
-                 * @param sceneId The target scene.
-                 * @param arg Arguments for the scene.
-                */
-                void            reserveSceneChange(int sceneId, void* args = NULL);
-                void            reserveAllSceneDestruction(int sceneId, void* args = NULL);
 
                 virtual Base*   getParent()                 { return (Base*)mpParent; }
                 virtual Base*   getChild()                  { return (Base*)mpChild; }
@@ -131,29 +113,20 @@ namespace ipl {
                         void                setPtr(pointer p)                       { mPtr = p; }
                 };
 
-            protected:
-                enum {
-                    SCN_PARENT_FLAG_CANCALC = (1 << 0),
-                    SCN_PARENT_FLAG_CANDRAW = (1 << 1),
-                };
+            /* PRIVATE STUFF */
 
+            private:
                 enum {
                     SCN_STATE_CREATED       = (1 << 0),
                     SCN_STATE_DESTROY_REQ   = (1 << 1),
                 };
 
-                EGG::Heap*  getSceneHeap()                  { return mpHeap; }
+                void    do_prepare();
+                void    do_create();
+                void    do_calc();
+                void    do_draw();
+                void    do_destroy();
 
-                void        setSceneParentFlags(u32 flag)   { mParentFlags = flag; }
-                u32         getSceneParentFlags() const     { return mParentFlags; }
-
-                void        setSceneState(u32 flag)         { mScnState |= flag; }
-                u32         getSceneState() const           { return mScnState; }
-
-                int         getSceneID() const              { return mSceneID; }
-                u32         getPrevSceneID() const          { return mPrevSceneID; }
-
-            private:
                 EGG::Heap*  mpHeap;         // 0x24
 
                 u32         mParentFlags;   // 0x28
@@ -162,6 +135,57 @@ namespace ipl {
                 u32         mPrevSceneID;   // 0x34
 
                 Command     mCommand;       // 0x38
+            
+            /* FUNCTIONS FOR SCENES */
+
+            protected:
+                enum {
+                    SCN_PARENTFLAG_CALC = (1 << 0),
+                    SCN_PARENTFLAG_DRAW = (1 << 1),
+                };
+
+                /**
+                 * @brief Creates a child scene.
+                 * @param sceneId The target scene ID (refer to iplSceneCreator.h)
+                 * @param arg Arguments for the scene
+                */
+                void        createChildScene(int sceneId, Base* parent, Base* child, void* args = NULL);
+
+                /**
+                 * @brief Sends a request to change scene.
+                 * @param sceneId The target scene ID (refer to iplSceneCreator.h)
+                 * @param arg Arguments for the scene
+                */
+                void        reserveSceneChange(int sceneId, void* args = NULL);
+
+                /**
+                 * @brief Sends a request to destroy every active scene, then change scene.
+                 * @param sceneId The target scene ID (refer to iplSceneCreator.h)
+                 * @param arg Arguments for the scene
+                */
+                void        reserveAllSceneDestruction(int sceneId, void* args = NULL);
+
+                /**
+                 * Sets flags for it's parent scene.
+                 * SCN_PARENTFLAG_CALC = The parent scene can run `calc()`
+                 * SCN_PARENTFLAG_DRAW = The parent scene can run `draw()`
+                 * @param flag The flags
+                 * @note You must execute this in the scene's constructor.
+                */
+                void        setSceneParentFlags(u32 flag)   { mParentFlags = flag; }
+
+                /**
+                 * @brief Check if scene has been created.
+                */
+                bool        isSceneCreated() const          { return (mScnState & SCN_STATE_CREATED); }
+                /**
+                 * @brief Request scene to be destroyed.
+                */
+                void        requestSceneDestruction()       { mScnState |= SCN_STATE_DESTROY_REQ; }
+
+                EGG::Heap*  getSceneHeap()                  { return mpHeap; }
+                int         getSceneID() const              { return mSceneID; }
+                u32         getPrevSceneID() const          { return mPrevSceneID; }
 
             friend class Manager;
         };

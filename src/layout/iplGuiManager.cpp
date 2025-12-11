@@ -17,7 +17,7 @@ namespace ipl {
         void PaneManager::update(int chan) {
             controller::Interface* con = System::getController(chan);
 
-            if (System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_OUT) {
+            if (System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT) {
                 if (con && (!mbDisableCon || !mbDoneUpdateWithCon)) {
                     // Get Projection Area
                     nw4r::ut::Rect  projRect(0.0f, 0.0f, 0.0f, 0.0f);

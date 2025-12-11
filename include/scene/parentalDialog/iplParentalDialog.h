@@ -20,21 +20,21 @@ namespace ipl {
 
                 ParentalDialog(EGG::Heap* heap, BOOL isTemporary);
 
-                void            prepare();
-                void            create();
+                void                prepare();
+                void                create();
 
-                SceneCommand    calcFadein();
+                FaderSceneCommand   calcFadein();
 
-                SceneCommand    calcNormal();
+                FaderSceneCommand   calcNormal();
 
-                void            initCalcFadeout();
-                SceneCommand    calcFadeout();
+                void                initCalcFadeout();
+                FaderSceneCommand   calcFadeout();
 
-                void            calcCommonAfter();
+                void                calcCommonAfter();
 
-                void            draw();
+                void                draw();
 
-                Result          getResult() const   { return mResult; }
+                Result              getResult() const   { return mResult; }
 
             private:
                 enum {
@@ -70,22 +70,22 @@ namespace ipl {
                     ANIM_DECIDE_BUTTON_DISABLE,
                 };
 
-                void            stt_normal();
-                void            stt_wait_sel_anm();
-                void            stt_wait_input();
-                void            stt_wait_msg();
+                void    stt_normal();
+                void    stt_wait_sel_anm();
+                void    stt_wait_input();
+                void    stt_wait_msg();
 
-                void            start_point_event(const char* paneName, controller::Interface* con);
-                void            start_left_event(const char* paneName);
-                void            start_trig_event(const char* paneName, int chan);
+                void    start_point_event(const char* paneName, controller::Interface* con);
+                void    start_left_event(const char* paneName);
+                void    start_trig_event(const char* paneName, int chan);
 
-                int             get_button_no(const char* paneName) const;
+                int     get_button_no(const char* paneName) const;
 
-                void            reset_gui();
+                void    reset_gui();
 
-                BOOL            check() const;
+                BOOL    check() const;
 
-                void            set_textbox(const char* paneName, u32 msgId);
+                void    set_textbox(const char* paneName, u32 msgId);
 
                 u32                     mState;                                 // 0x58
 

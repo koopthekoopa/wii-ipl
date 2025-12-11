@@ -12,7 +12,7 @@ namespace ipl {
         mSettingArg(arg),
         mpLayout(NULL),
         mpLayoutFile(NULL) {
-            setSceneParentFlags(SCN_PARENT_FLAG_CANCALC | SCN_PARENT_FLAG_CANDRAW);
+            setSceneParentFlags(SCN_PARENTFLAG_CALC | SCN_PARENTFLAG_DRAW);
         }
 
         void SettingBg::prepare() {

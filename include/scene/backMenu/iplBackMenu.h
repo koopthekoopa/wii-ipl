@@ -9,23 +9,23 @@ namespace ipl {
             public:
                 BackMenu(EGG::Heap* heap);
 
-                virtual BOOL            isReady() const;
+                virtual BOOL                isReady() const;
 
-                virtual void            prepare();
-                virtual void            create();
-                virtual void            draw();
+                virtual void                prepare();
+                virtual void                create();
+                virtual void                draw();
 
-                virtual void            initCalcFadeout();
+                virtual void                initCalcFadeout();
 
-                virtual void            calcCommon();
+                virtual void                calcCommon();
 
-                virtual SceneCommand    calcFadein();
-                virtual SceneCommand    calcNormal();
-                virtual SceneCommand    calcFadeout();
+                virtual FaderSceneCommand   calcFadein();
+                virtual FaderSceneCommand   calcNormal();
+                virtual FaderSceneCommand   calcFadeout();
 
                 // Fuck this
 #if defined(VERSION_43K) && defined(VERY_DIRTY_MATCH_HACK)
-                virtual void            SomeSortOfPaddingIdfk() = 0;
+                virtual void                SomeSortOfPaddingIdfk() = 0;
 #endif
             
             private:

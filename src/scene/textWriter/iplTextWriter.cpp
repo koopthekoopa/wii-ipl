@@ -42,7 +42,7 @@ namespace ipl {
         mbClosing(false),
         unk_0x7D(true),
         mNwc24ErrCountdown(0) {
-            setSceneParentFlags(SCN_PARENT_FLAG_CANDRAW | SCN_PARENT_FLAG_CANCALC);
+            setSceneParentFlags(SCN_PARENTFLAG_DRAW | SCN_PARENTFLAG_CALC);
         }
 
         TextWriter::~TextWriter() {
@@ -112,15 +112,15 @@ namespace ipl {
             }
         }
 
-        SceneCommand TextWriter::calcFadein() {
-            return getMemoInputForm()->isWholePaneInAnimation() ? SCENE_CONTINUE : SCENE_NEXT;
+        FaderSceneCommand TextWriter::calcFadein() {
+            return getMemoInputForm()->isWholePaneInAnimation() ? FADER_SCN_CONTINUE : FADER_SCN_NEXT;
         }
 
         void TextWriter::initCalcNormal() {
             System::getKeyboard()->activate();
         }
 
-        SceneCommand TextWriter::calcNormal() {
+        FaderSceneCommand TextWriter::calcNormal() {
             // Face select loop
             if (mState == STATE_SEL_FACE) {
                 FaceSelect* faceSelect = static_cast<FaceSelect*>(System::getScene(SCENE_FACE_SELECT));
@@ -144,7 +144,7 @@ namespace ipl {
                         System::getMiiManager()->create(System::getMem2App(), 76, 76, selected, nigaoeMakeIcon, this);
                     }
                 }
-                return SCENE_CONTINUE;
+                return FADER_SCN_CONTINUE;
             }
             // Scroll to face
             else if (mState == STATE_TO_SEL_FACE) {
@@ -156,7 +156,7 @@ namespace ipl {
                     getButton()->setEventHandler(NULL);
                 }
                 mpNigaoeBalloon->calc();
-                return SCENE_CONTINUE;
+                return FADER_SCN_CONTINUE;
             }
             // Dialog window
             else if (mState == STATE_DIALOG) {
@@ -164,7 +164,7 @@ namespace ipl {
                     System::getKeyboard()->activate();
                     mState = STATE_NORMAL;
                 }
-                return SCENE_CONTINUE;
+                return FADER_SCN_CONTINUE;
             }
             // Sending
             else if (mState == STATE_SEND) {
@@ -180,7 +180,7 @@ namespace ipl {
                     Button* button = getButton();
                     button->setEventHandler(this);
                 }
-                return SCENE_CONTINUE;
+                return FADER_SCN_CONTINUE;
             }
 
             bool appearing;
@@ -261,7 +261,7 @@ namespace ipl {
                 }
             }
 
-            return mState == STATE_DONE ? SCENE_NEXT : SCENE_CONTINUE;
+            return mState == STATE_DONE ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
         }
 
         void TextWriter::initCalcFadeout() {
@@ -274,10 +274,10 @@ namespace ipl {
             mpNigaoeBalloon->calc();
         }
 
-        SceneCommand TextWriter::calcFadeout() {
+        FaderSceneCommand TextWriter::calcFadeout() {
             mpNigaoeBalloon->calc();
 
-            return getMemoInputForm()->isWholePaneInAnimation() ? SCENE_CONTINUE : SCENE_NEXT;
+            return getMemoInputForm()->isWholePaneInAnimation() ? FADER_SCN_CONTINUE : FADER_SCN_NEXT;
         }
 
         void TextWriter::pointNigaoeButton() {

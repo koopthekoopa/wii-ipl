@@ -69,15 +69,15 @@ namespace ipl {
             reset_gui();
         }
 
-        SceneCommand AddressAddSel::calcFadein() {
-            return !mpLayout->getAnim(ANIM_FADE_IN)->isPlaying() ? SCENE_NEXT : SCENE_CONTINUE;
+        FaderSceneCommand AddressAddSel::calcFadein() {
+            return !mpLayout->getAnim(ANIM_FADE_IN)->isPlaying() ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
         }
 
         void AddressAddSel::initCalcNormal() {
             static_cast<Button*>(System::getScene(SCENE_BUTTON))->setEventHandler(this);
         }
 
-        SceneCommand AddressAddSel::calcNormal() {
+        FaderSceneCommand AddressAddSel::calcNormal() {
             switch (mState) {
                 case STATE_NORMAL: {
                     stt_normal();
@@ -89,7 +89,7 @@ namespace ipl {
                 }
             }
 
-            return mState == STATE_DONE ? SCENE_NEXT : SCENE_CONTINUE;
+            return mState == STATE_DONE ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
         }
 
         void AddressAddSel::initCalcFadeout() {
@@ -97,8 +97,8 @@ namespace ipl {
             mpLayout->getAnim(ANIM_FADE_OUT)->play();
         }
 
-        SceneCommand AddressAddSel::calcFadeout() {
-            return !mpLayout->getAnim(ANIM_FADE_OUT)->isPlaying() ? SCENE_NEXT : SCENE_CONTINUE;
+        FaderSceneCommand AddressAddSel::calcFadeout() {
+            return !mpLayout->getAnim(ANIM_FADE_OUT)->isPlaying() ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
         }
 
         void AddressAddSel::calcCommonAfter() {

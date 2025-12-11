@@ -130,7 +130,7 @@ namespace ipl {
     }
 
     void ErrorHandler::calc() {
-        if (mbReady == FALSE && System::getFader()->getStatus() == EGG::Fader::STATUS_PREPARE_IN) {
+        if (mbReady == FALSE && System::getFader()->getStatus() == EGG::Fader::PREPARE_IN) {
             System::getFader()->fadeIn();
             mbReady = TRUE;
         }

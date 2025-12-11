@@ -13,21 +13,21 @@ namespace ipl {
             public:
                 AddressAddSel(EGG::Heap* heap);
 
-                virtual void            create();
+                virtual void                create();
 
-                virtual SceneCommand    calcFadein();
+                virtual FaderSceneCommand   calcFadein();
 
-                virtual void            initCalcNormal();
-                virtual SceneCommand    calcNormal();
+                virtual void                initCalcNormal();
+                virtual FaderSceneCommand   calcNormal();
 
-                virtual void            initCalcFadeout();
-                virtual SceneCommand    calcFadeout();
+                virtual void                initCalcFadeout();
+                virtual FaderSceneCommand   calcFadeout();
 
-                virtual void            calcCommonAfter();
+                virtual void                calcCommonAfter();
 
-                virtual void            draw();
+                virtual void                draw();
 
-                virtual void            onEventDerived(u32 compId, u32 event, const controller::Interface* con);
+                virtual void                onEventDerived(u32 compId, u32 event, const controller::Interface* con);
 
             private:
                 enum {
@@ -56,18 +56,18 @@ namespace ipl {
                     ANIM_EMAIL_BTN_SELECT,
                 };
 
-                void                    stt_normal();
-                void                    stt_wait_decide_anm();
+                void    stt_normal();
+                void    stt_wait_decide_anm();
 
-                void                    start_point_event(const char* paneName, controller::Interface* con);
-                void                    start_left_event(const char* paneName);
-                void                    start_trig_event(const char* paneName);
+                void    start_point_event(const char* paneName, controller::Interface* con);
+                void    start_left_event(const char* paneName);
+                void    start_trig_event(const char* paneName);
 
-                int                     get_button_no(const char* paneName);
+                int     get_button_no(const char* paneName);
 
-                void                    reset_gui();
+                void    reset_gui();
 
-                void                    set_textbox(const char* paneName, u32 msgId);
+                void    set_textbox(const char* paneName, u32 msgId);
 
                 u32                 mState;             // 0x64
 

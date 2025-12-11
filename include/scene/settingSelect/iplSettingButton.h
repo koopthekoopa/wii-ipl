@@ -22,31 +22,31 @@ namespace ipl {
 
                 SettingButton(EGG::Heap* heap, int arg);
 
-                virtual void            prepare();
-                virtual void            create();
-                virtual void            draw();
+                virtual void                prepare();
+                virtual void                create();
+                virtual void                draw();
 
-                virtual SceneCommand    calcFadein();
-                virtual SceneCommand    calcNormal();
+                virtual FaderSceneCommand   calcFadein();
+                virtual FaderSceneCommand   calcNormal();
 
-                virtual void            calcCommonAfter();
+                virtual void                calcCommonAfter();
 
-                virtual void            onEvent(u32 compId, u32 event, void* data);
+                virtual void                onEvent(u32 compId, u32 event, void* data);
             
-                bool                    update();
+                bool                        update();
 
-                void                    reserve(int command, u32 msgId);
+                void                        reserve(int command, u32 msgId);
 
-                bool                    isPlaying() const;
-                void                    setSoundType(int type)  { mSoundType = type; }
+                bool                        isPlaying() const;
+                void                        setSoundType(int type)  { mSoundType = type; }
 
-                void                    setText(u32 msgId);
+                void                        setText(u32 msgId);
 
-                void                    showBtn();
-                void                    hideBtn();
+                void                        showBtn();
+                void                        hideBtn();
 
-                void                    showWii();
-                void                    hideWii();
+                void                        showWii();
+                void                        hideWii();
 
             private:
                 enum {

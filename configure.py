@@ -57,13 +57,6 @@ VERSION_INFO = [
     ],
 ]
 
-
-def getFirstFile(path_find):
-    for filename in Path(path_find).iterdir():
-        if filename.is_file() and filename.suffix == '.wad':
-            return Path(filename)
-
-
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "mode",
@@ -135,6 +128,12 @@ parser.add_argument(
     help="path to sjiswrap.exe (optional)",
 )
 parser.add_argument(
+    "--ninja",
+    metavar="BINARY",
+    type=Path,
+    help="path to ninja binary (optional)",
+)
+parser.add_argument(
     "--bstool",
     metavar="EXE",
     type=Path,
@@ -150,6 +149,13 @@ parser.add_argument(
     dest="non_matching",
     action="store_true",
     help="builds equivalent (but non-matching) or modded objects",
+)
+parser.add_argument(
+    "--warn",
+    dest="warn",
+    type=str,
+    choices=["all", "off", "error"],
+    help="how to handle warnings",
 )
 parser.add_argument(
     "--no-progress",
@@ -182,6 +188,7 @@ config.compilers_path = args.compilers
 config.generate_map = args.map
 config.non_matching = args.non_matching
 config.sjiswrap_path = args.sjiswrap
+config.ninja_path = args.ninja
 config.bstool_path = args.bstool
 config.progress = args.progress
 if not is_windows():
@@ -192,18 +199,16 @@ if not config.non_matching:
 
 # Tool versions
 config.binutils_tag = "2.42-1"
-config.compilers_tag = "20231018"
-config.dtk_tag = "v1.4.1"
-config.objdiff_tag = "v2.7.1"
-config.sjiswrap_tag = "v1.2.0"
-config.wibo_tag = "0.6.16"
+config.compilers_tag = "20250812"
+config.dtk_tag = "v1.7.6"
+config.objdiff_tag = "v3.4.5"
+config.sjiswrap_tag = "v1.2.2"
+config.wibo_tag = "1.0.0"
 config.bstool_tag = "v1.0.1"
 
 # Project
-config.wad_path = getFirstFile(Path("orig") / config.version)
 config.app_name = "0000000" + str(VERSION_INFO[VERSION_CONTENT][version_num]) + ".app"
-config.app_path = Path("build") / config.version / Path("base") / config.app_name
-config.dol_path = Path("build") / config.version / Path("base") / "main.dol"
+config.dol_path = Path("orig") / config.version / config.app_name
 config.config_path = Path("config") / config.version / "config.yml"
 config.check_sha_path = Path("config") / config.version / "build.sha1"
 config.asflags = [
@@ -231,7 +236,7 @@ config.reconfig_deps = []
 # Can be overridden in libraries or objects
 config.scratch_preset_id = None
 
-config.progress_all = False
+# config.progress_all = False
 config.progress_use_fancy = True
 config.progress_code_fancy_frac = 288   # Maxumum amount on System Memory + Maxumum amount on SD Card
 config.progress_code_fancy_item = "Channels"
@@ -285,16 +290,24 @@ if args.debug:
 else:
     cflags_base.append("-DNDEBUG=1")
 
-
 # Wii Build
 if TARGET_RVL:
     cflags_base.append("-DTARGET_RVL")
-
 
 # For non matching build
 if args.non_matching:
     cflags_base.append("-DNON_MATCHING")
 
+if args.standalone:
+    cflags_ipl.append("-DSTAND_ALONE_BUILD")
+
+# Warning flags
+if args.warn == "all":
+    cflags_base.append("-W all")
+elif args.warn == "off":
+    cflags_base.append("-W off")
+elif args.warn == "error":
+    cflags_base.append("-W error")
 
 # Main IPL flags
 cflags_ipl = [
@@ -305,9 +318,6 @@ cflags_ipl = [
     "-O4,s",
     "-enc SJIS",
 ]
-
-if args.standalone:
-    cflags_ipl.append("-DSTAND_ALONE_BUILD")
 
 # Common SDK flags
 cflags_sdk = [
@@ -552,8 +562,10 @@ def TRKLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
 
 Matching = True                   # Object matches and should be linked
 NonMatching = False               # Object does not match and should not be linked
-Equivalent = config.non_matching  # Object should be linked when configured with --non-Equivalent
+Equivalent = config.non_matching  # Object should be linked when configured with --non-matching
 
+
+# Object is only matching for specific versions
 def MatchingFor(*versions):
     return config.version in versions
 
@@ -1965,6 +1977,27 @@ config.libs = [
     ),
 ]
 
+
+# Optional callback to adjust link order. This can be used to add, remove, or reorder objects.
+# This is called once per module, with the module ID and the current link order.
+#
+# For example, this adds "dummy.c" to the end of the DOL link order if configured with --non-matching.
+# "dummy.c" *must* be configured as a Matching (or Equivalent) object in order to be linked.
+def link_order_callback(module_id: int, objects: List[str]) -> List[str]:
+    # Don't modify the link order for matching builds
+    if not config.non_matching:
+        return objects
+    if module_id == 0:  # DOL
+        return objects + ["dummy.c"]
+    return objects
+
+
+# Uncomment to enable the link order callback.
+# config.link_order_callback = link_order_callback
+
+
+# Optional extra categories for progress tracking
+# Adjust as desired for your project
 config.progress_categories = [
     ProgressCategory("main",        "System Menu Code"),
     ProgressCategory("rvlmwm",      "Revolution Middleware"),
@@ -1976,12 +2009,18 @@ config.progress_categories = [
     ProgressCategory("mw",          "Metroworks"),
 ]
 config.progress_each_module = args.verbose
+# Optional extra arguments to `objdiff-cli report generate`
+config.progress_report_args = [
+    # Marks relocations as mismatching if the target value is different
+    # Default is "functionRelocDiffs=none", which is most lenient
+    # "--config functionRelocDiffs=data_value",
+]
 
 if args.mode == "configure":
     # Write build.ninja and objdiff.json
     generate_build(config)
 elif args.mode == "progress":
-    # Print progress and write progress.json
+    # Print progress information
     calculate_progress(config)
 else:
     sys.exit("Unknown mode: " + args.mode)

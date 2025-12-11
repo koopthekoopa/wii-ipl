@@ -7,11 +7,11 @@
 
 namespace ipl {
     namespace scene {
-        enum SceneCommand {
+        enum FaderSceneCommand {
             /* Continue the current scene `calc` function */
-            SCENE_CONTINUE = 0,
+            FADER_SCN_CONTINUE = 0,
             /* Onto the next scene `calc` function */
-            SCENE_NEXT,
+            FADER_SCN_NEXT,
         };
 
         SCENE_CLASS(FaderSceneBase) {
@@ -28,20 +28,20 @@ namespace ipl {
                 FaderSceneBase(EGG::Heap* heap);
                 virtual ~FaderSceneBase() {}
 
-                virtual void            calc();
+                virtual void                calc();
 
-                virtual void            initCalcNormal()    {}                      // 0x4C
-                virtual void            initCalcFadeout()   {}                      // 0x50
+                virtual void                initCalcNormal()    {}                          // 0x4C
+                virtual void                initCalcFadeout()   {}                          // 0x50
 
-                virtual void            calcCommon()        {}                      // 0x54
+                virtual void                calcCommon()        {}                          // 0x54
 
-                virtual SceneCommand    calcFadein()        { return SCENE_NEXT; }  // 0x58
-                virtual SceneCommand    calcNormal()        { return SCENE_NEXT; }  // 0x5C
-                virtual SceneCommand    calcFadeout()       { return SCENE_NEXT; }  // 0x60
+                virtual FaderSceneCommand   calcFadein()        { return FADER_SCN_NEXT; }  // 0x58
+                virtual FaderSceneCommand   calcNormal()        { return FADER_SCN_NEXT; }  // 0x5C
+                virtual FaderSceneCommand   calcFadeout()       { return FADER_SCN_NEXT; }  // 0x60
 
-                virtual void            calcCommonAfter()   {}                      // 0x64
+                virtual void                calcCommonAfter()   {}                          // 0x64
 
-                int                     getSceneFadeState() { return mScnFadeState; }
+                int                         getSceneFadeState() { return mScnFadeState; }
 
             protected:
                 int mScnFadeState;  // 0x54

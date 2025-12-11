@@ -10,16 +10,16 @@ namespace ipl {
                 skHealth(EGG::Heap* heap);
                 virtual ~skHealth();
 
-                virtual BOOL        isReady() const;
+                virtual BOOL                isReady() const;
 
-                virtual void        prepare();
-                virtual void        create();
-                virtual void        draw();
-                virtual void        destroy();
+                virtual void                prepare();
+                virtual void                create();
+                virtual void                draw();
+                virtual void                destroy();
 
-                virtual SceneCommand calcFadein();
-                virtual SceneCommand calcNormal();
-                virtual SceneCommand calcFadeout();
+                virtual FaderSceneCommand   calcFadein();
+                virtual FaderSceneCommand   calcNormal();
+                virtual FaderSceneCommand   calcFadeout();
 
             private:
                 enum {

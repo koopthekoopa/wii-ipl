@@ -187,9 +187,9 @@ namespace ipl {
             }
         }
 
-        SceneCommand Calendar::calcFadein() {
+        FaderSceneCommand Calendar::calcFadein() {
             Button* button;
-            SceneCommand result = SCENE_CONTINUE;
+            FaderSceneCommand result = FADER_SCN_CONTINUE;
 
             if (!mpLayout->isPlaying(IDANIM_0)) {
                 button = static_cast<Button*>(System::getScene(SCENE_BUTTON));
@@ -203,14 +203,14 @@ namespace ipl {
                         button->animation(Button::IDANIM_ARROW_RIGHT_APPEAR);
                     }
 
-                    result = SCENE_NEXT;
+                    result = FADER_SCN_NEXT;
                 }
             }
 
             return result;
         }
 
-        SceneCommand Calendar::calcNormal() {
+        FaderSceneCommand Calendar::calcNormal() {
             switch (mState) {
                 case STATE_NORMAL: {
                     on_normal();
@@ -234,7 +234,7 @@ namespace ipl {
                 }
             }
 
-            return mState == STATE_DONE ? SCENE_NEXT : SCENE_CONTINUE;
+            return mState == STATE_DONE ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
         }
 
         void Calendar::initCalcFadeout() {
@@ -246,8 +246,8 @@ namespace ipl {
             }
         }
 
-        SceneCommand Calendar::calcFadeout() {
-            return !mpLayout->isPlaying(IDANIM_0) ? SCENE_NEXT : SCENE_CONTINUE;
+        FaderSceneCommand Calendar::calcFadeout() {
+            return !mpLayout->isPlaying(IDANIM_0) ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
         }
 
         void Calendar::draw() {

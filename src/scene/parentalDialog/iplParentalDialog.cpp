@@ -86,11 +86,11 @@ namespace ipl {
             mpLayout->getAnim(ANIM_DECIDE_BUTTON_ENABLE)->initAnmFrame();
         }
 
-        SceneCommand ParentalDialog::calcFadein() {
-            return !mpLayout->getAnim(ANIM_DIALOG_IN)->isPlaying() ? SCENE_NEXT : SCENE_CONTINUE;
+        FaderSceneCommand ParentalDialog::calcFadein() {
+            return !mpLayout->getAnim(ANIM_DIALOG_IN)->isPlaying() ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
         }
 
-        SceneCommand ParentalDialog::calcNormal() {
+        FaderSceneCommand ParentalDialog::calcNormal() {
             switch (mState) {
                 case STATE_NORMAL: {
                     stt_normal();
@@ -110,15 +110,15 @@ namespace ipl {
                 }
             }
 
-            return mState == STATE_DONE ? SCENE_NEXT : SCENE_CONTINUE;
+            return mState == STATE_DONE ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
         }
 
         void ParentalDialog::initCalcFadeout() {
             mpLayout->getAnim(ANIM_DIALOG_OUT)->play();
         }
 
-        SceneCommand ParentalDialog::calcFadeout() {
-            return !mpLayout->getAnim(ANIM_DIALOG_OUT)->isPlaying() ? SCENE_NEXT : SCENE_CONTINUE;
+        FaderSceneCommand ParentalDialog::calcFadeout() {
+            return !mpLayout->getAnim(ANIM_DIALOG_OUT)->isPlaying() ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
         }
 
         void ParentalDialog::calcCommonAfter() {
