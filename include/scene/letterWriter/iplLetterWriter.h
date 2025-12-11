@@ -9,7 +9,7 @@ namespace ipl {
         class LetterWriter : public TextWriter {
             public:
                 enum {
-                    ADDRESS_SEL = textinput::extend::letter::InputForm::T_AddressSel,
+                    MAIL_ADDRESS_SEL = textinput::extend::letter::InputForm::T_MailAddressSel,
                     ADDRESS = textinput::extend::letter::InputForm::T_Address,
                     PICTURE = textinput::extend::letter::InputForm::T_Picture,
                     REPLY = textinput::extend::letter::InputForm::T_Reply,

@@ -120,9 +120,9 @@ typedef struct CARDDir {
     u16 startBlock;                     // 0x36
     u16 length;                         // 0x38
 
-    u8  _padding1[2];                   // 0x3C
+    u8  _padding1[2];                   // 0x3A
 
-    u32 commentAddr;                    // 0x3E
+    u32 commentAddr;                    // 0x3C
 } CARDDir;
 
 typedef struct CARDControl {
@@ -290,7 +290,7 @@ s32     CARDClose(CARDFileInfo* fileInfo);
 s32     CARDGetXferredBytes(s32 chan);
 
 s32     CARDReadAsync(CARDFileInfo* fileInfo, void* buf, s32 length, s32 offset, CARDCallback callback);
-s32     CARDRead(CARDFileInfo*  fileInfo, void*  buf, s32 length, s32 offset);
+s32     CARDRead(CARDFileInfo* fileInfo, void* buf, s32 length, s32 offset);
 s32     CARDCancel(CARDFileInfo* fileInfo);
 
 s32     CARDWriteAsync(CARDFileInfo* fileInfo, void* buf, s32 length, s32 offset, CARDCallback callback);

@@ -22,6 +22,11 @@ s32 __CARDUnlock(s32 chan, u8 flashID[12]);
 /* READ */
 s32 __CARDSeek(CARDFileInfo* fileInfo, s32 length, s32 offset, CARDControl** pcard);
 
+/* STATUS */
+s32 __CARDGetStatusEx(s32 chan, s32 fileNo, CARDDir* dirent);
+s32 __CARDSetStatusExAsync(s32 chan, s32 fileNo, CARDDir* dirent, CARDCallback callback);
+s32 __CARDSetStatusEx(s32 chan, s32 fileNo, CARDDir* dirent);
+
 /* READ & WRITE */
 s32 __CARDRead(s32 chan, u32 addr, s32 length, void* dst, CARDCallback callback);
 s32 __CARDWrite(s32 chan, u32 addr, s32 length, void* dst, CARDCallback callback);

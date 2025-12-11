@@ -315,7 +315,7 @@ namespace ipl {
                 return false;
             }
 
-            if (!button->isActive() || button->getCurrentReservedCommandIndex() != 0) {
+            if (!button->isActive() || button->hasReservedAnim()) {
                 return false;
             }
 

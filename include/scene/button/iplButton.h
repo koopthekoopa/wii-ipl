@@ -284,7 +284,7 @@ namespace ipl {
 
                 static int      cmpButtonName(const char* name, int btnNo)  { return strcmp(name, mscButtonName[btnNo]); }
 
-                int             getCurrentReservedCommandIndex()            { return mReservedCmd.current; }
+                int             hasReservedAnim()   { return mReservedCmd.current != 0; }
 
             protected:
                 typedef struct Command {

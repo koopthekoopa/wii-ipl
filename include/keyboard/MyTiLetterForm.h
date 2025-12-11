@@ -9,7 +9,7 @@ namespace textinput {
             class InputForm : public textinput::MemoInputForm {
                 public:
                     typedef enum Type {
-                        T_AddressSel = 0,
+                        T_MailAddressSel = 0,
                         T_Address,
                         T_Picture,
                         T_Reply,

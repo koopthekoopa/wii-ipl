@@ -738,7 +738,7 @@ config.libs = [
         ]
     ),
     IPLSection("mailAddSel", [
-            Object(NonMatching, "scene/mailAddSel/iplMailAddressSelect.cpp"),
+            Object(Matching,    "scene/mailAddSel/iplMailAddressSelect.cpp"),
         ]
     ),
     IPLSection("memory", [

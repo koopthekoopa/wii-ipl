@@ -27,7 +27,7 @@ namespace ipl {
         mpLayoutFile(NULL),
         mpEvent(NULL),
         mpGui(NULL),
-        mbLaunchTitle(launchTitle),
+        mpTemporary(launchTitle),
         mResult(RESULT_NONE),
         mbInputPin(false),
         mAttempts(0) {
@@ -291,7 +291,7 @@ namespace ipl {
 
                             if (check()) {
                                 // Correct!!
-                                System::getDialog()->callBtn0(mbLaunchTitle == FALSE ? MESG_PARENTAL_DLG_SUCCESS : MESG_PARENTAL_DLG_SUCCESS_ALT, 180);
+                                System::getDialog()->callBtn0(mpTemporary == FALSE ? MESG_PARENTAL_DLG_SUCCESS : MESG_PARENTAL_DLG_SUCCESS_TEMP, 180);
                                 mResult = RESULT_SUCCESS;
                                 mState = STATE_WAIT_MSG;
                             }

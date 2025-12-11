@@ -18,7 +18,7 @@ namespace ipl {
                     RESULT_CANCELLED,
                 } Result;
 
-                ParentalDialog(EGG::Heap* heap, BOOL launchTitle);
+                ParentalDialog(EGG::Heap* heap, BOOL isTemporary);
 
                 void            prepare();
                 void            create();
@@ -87,21 +87,21 @@ namespace ipl {
 
                 void            set_textbox(const char* paneName, u32 msgId);
 
-                u32                     mState;                             // 0x58
+                u32                     mState;                                 // 0x58
 
-                layout::Object*         mpLayout;                           // 0x5C
-                nand::LayoutFile*       mpLayoutFile;                       // 0x60
-                ParentalDialogEvent*    mpEvent;                            // 0x64
-                gui::PaneManager*       mpGui;                              // 0x68
+                layout::Object*         mpLayout;                               // 0x5C
+                nand::LayoutFile*       mpLayoutFile;                           // 0x60
+                ParentalDialogEvent*    mpEvent;                                // 0x64
+                gui::PaneManager*       mpGui;                                  // 0x68
 
-                BOOL                    mbLaunchTitle;                      // 0x6C
-                Result                  mResult;                            // 0x70
+                BOOL                    mpTemporary;                            // 0x6C
+                Result                  mResult;                                // 0x70
 
-                BOOL                    mbHovered[BTN_MAX];                 // 0x74
+                BOOL                    mbHovered[BTN_MAX];                     // 0x74
 
-                wchar_t                 mMyPin[SC_PARENTAL_PASSWORD_LENGTH+1];   // 0x80
-                bool                    mbInputPin;                         // 0x8A
-                int                     mAttempts;                          // 0x8C
+                wchar_t                 mMyPin[SC_PARENTAL_PASSWORD_LENGTH+1];  // 0x80
+                bool                    mbInputPin;                             // 0x8A
+                int                     mAttempts;                              // 0x8C
 
                 static const char*      mscButtonName[BTN_MAX];
 

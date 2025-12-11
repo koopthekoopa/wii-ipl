@@ -2,10 +2,11 @@
 #define IPL_MESSAGE_ENTRIES_H
 
 /* Common message IDs */
-
+// TODO: Find out whats with the alts
 #define MESG_CMN_BACK                   35
 #define MESG_CMN_QUIT                   37
 #define MESG_CMN_OK                     46
+#define MESG_CMN_BACK_ALT_2             79
 #define MESG_CMN_BACK_ALT               315
 #define MESG_CMN_YES                    321
 #define MESG_CMN_NO                     322
@@ -47,6 +48,7 @@
 #define MESG_ADDRESS_REGISTER           41
 #define MESG_ADDRESS_WII_ID             66
 #define MESG_ADDRESS_CHOOSE             78
+#define MESG_ADDRESS_TITLE              134
 
 /* Address Add Select */
 
@@ -57,6 +59,11 @@
 
 #define MESG_FRIEND_CACHE_EMAIL_TITLE   385
 #define MESG_FRIEND_CACHE_EMAIL_BODY    386
+
+/* Board */
+
+#define MESG_BOARD_SEND                 39
+#define MESG_BOARD_REPLY                67
 
 /* Button */
 
@@ -105,21 +112,18 @@
 
 /* Letter Writer */
 
-#define MESG_LETTERWRITER_SEND          39
-#define MESG_LETTERWRITER_REPLY         67
+#define MESG_LETTERWRITER_POST          36
 #define MESG_LETTERWRITER_LETTER_HEADER 141
 #define MESG_LETTERWRITER_LETTER_TEXT   142
 #define MESG_LETTERWRITER_SENDING       143
 #define MESG_LETTERWRITER_EMAIL_SUBJECT 387
-#define MESG_LETTERWRITER_NWC24_ERROR   454
-#define MESG_LETTERWRITER_FRIEND_NULL   456
 
 /* Parental Dialog */
 
 #define MESG_PARENTAL_DLG_TITLE         327
 #define MESG_PARENTAL_DLG_PIN           328
 #define MESG_PARENTAL_DLG_SUCCESS       329
-#define MESG_PARENTAL_DLG_SUCCESS_ALT   330
+#define MESG_PARENTAL_DLG_SUCCESS_TEMP  330
 #define MESG_PARENTAL_DLG_BAD_PIN       331
 #define MESG_PARENTAL_DLG_NO_PIN        345
 
@@ -140,11 +144,19 @@
 
 /* Text Writer */
 
+#define MESG_TEXTWRITER_POST            36
 #define MESG_TEXTWRITER_HEADER          133
 #define MESG_TEXTWRITER_ADD_MII         139
-#define MESG_TEXTWRITER_LETTER_TEXT    140
+#define MESG_TEXTWRITER_LETTER_TEXT     140
 #define MESG_TEXTWRITER_NO_MII          380
 #define MESG_TEXTWRITER_SEND_ERROR      455
+
+/* Network */
+
+#define MESG_NETWORK_NO_CONFIG          324
+#define MESG_NETWORK_SETTINGS_BTN       326
+#define MESG_NETWORK_PARENTAL_RESTRICT  332
+#define MESG_NETWORK_NO_WC24_CONFIG     382
 
 /* Error Messages */
 
@@ -158,6 +170,10 @@
 #define MESG_ERROR_NCD_INVALID          407
 #define MESG_ERROR_NCD_LAN_INVALID      408
 #define MESG_ERROR_NCD_WL_INVALID       409
-#define MESG_ERROR_NCD_UNKNOWN          410
+#define MESG_ERROR_NWC24_NETWORK        410
+#define MESG_ERROR_NWC24_NETWORK_ALT    430
+#define MESG_ERROR_NWC24_SERVER         453
+#define MESG_ERROR_NWC24_FATAL          454
+#define MESG_ERROR_NWC24_FRIEND_NULL    456
 
 #endif // IPL_MESSAGE_ENTRIES_H

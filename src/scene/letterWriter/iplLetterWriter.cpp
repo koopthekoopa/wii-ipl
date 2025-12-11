@@ -106,7 +106,7 @@ namespace ipl {
             // A mix of switch statements and if statements...
             switch (mLetterType) {
                 case textinput::extend::letter::InputForm::T_Picture:
-                case textinput::extend::letter::InputForm::T_AddressSel: {
+                case textinput::extend::letter::InputForm::T_MailAddressSel: {
                     if (mLetterType == textinput::extend::letter::InputForm::T_Picture) {
                         createChildScene(SCENE_ADDRESS, this, NULL, (void*)2);
                     }
@@ -176,13 +176,13 @@ namespace ipl {
                 case Board::FRIEND_CODE_ERR_NWC24: {
                     if ((mNwc24ErrCountdown2 += 1) > 300) {
                         mLetterState = LETTER_STATE_EXIT_ON_ERROR;
-                        System::getDialog()->callBtn1(MESG_LETTERWRITER_NWC24_ERROR, MESG_CMN_OK);
+                        System::getDialog()->callBtn1(MESG_ERROR_NWC24_FATAL, MESG_CMN_OK);
                     }
                     break;
                 }
                 case Board::FRIEND_CODE_ERR_NULL: {
                     mLetterState = LETTER_STATE_EXIT_ON_ERROR;
-                    System::getDialog()->callBtn1(MESG_LETTERWRITER_FRIEND_NULL, MESG_CMN_OK);
+                    System::getDialog()->callBtn1(MESG_ERROR_NWC24_FRIEND_NULL, MESG_CMN_OK);
                     break;
                 }
                 default: {
@@ -223,7 +223,7 @@ namespace ipl {
 
                         button->reserveAnm(Button::IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON);
                         button->reserveText(Button::BTN_BBS_BOARD, MESG_CMN_BACK_ALT);
-                        button->reserveText(Button::BTN_CH_SEL, MESG_LETTERWRITER_REPLY);
+                        button->reserveText(Button::BTN_CH_SEL, MESG_BOARD_REPLY);
 
                         if (getBoard()->isOptOut()) {
                             button->reserveAnm(Button::IDANIM_OPTOUT_IN_ALT);
@@ -282,7 +282,7 @@ namespace ipl {
             getButton()->setEventHandler(NULL);
 
             switch (mLetterType) {
-                case textinput::extend::letter::InputForm::T_AddressSel: {
+                case textinput::extend::letter::InputForm::T_MailAddressSel: {
                     static_cast<MailAddressSelect*>(System::getScene(SCENE_MAIL_ADDRESS_SELECT))->finishLetter(mbClosing);
                     break;
                 }
@@ -320,14 +320,14 @@ namespace ipl {
                                         case textinput::extend::letter::InputForm::T_Picture: {
                                             button->reserveAnm(Button::IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON);
                                             button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_CMN_BACK_ALT);
-                                            button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_LETTERWRITER_SEND);
+                                            button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_BOARD_SEND);
                                             button->reserveAnm(Button::IDANIM_APPEAR_LEFT_AND_RIGHT_BUTTON);
                                             break;
                                         }
                                         case textinput::extend::letter::InputForm::T_Reply: {
                                             button->reserveAnm(Button::IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON);
                                             button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_CMN_BACK_ALT);
-                                            button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_LETTERWRITER_REPLY);
+                                            button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_BOARD_REPLY);
                                             if (getBoard()->isOptOut()) {
                                                 button->reserveAnm(Button::IDANIM_OPTOUT_IN_ALT);
                                             }
@@ -343,7 +343,7 @@ namespace ipl {
                                             button->reserveAnm(Button::IDANIM_APPEAR_LEFT_AND_RIGHT_BUTTON);
                                             break;
                                         }
-                                        case textinput::extend::letter::InputForm::T_AddressSel:
+                                        case textinput::extend::letter::InputForm::T_MailAddressSel:
                                         default: {
                                             button->reserveAnm(Button::IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON);
                                             button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_ADDRESS_BACK);
@@ -425,14 +425,14 @@ namespace ipl {
                 case textinput::extend::letter::InputForm::T_Picture: {
                     button->reserveAnm(Button::IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON);
                     button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_CMN_BACK_ALT);
-                    button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_LETTERWRITER_SEND);
+                    button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_BOARD_SEND);
                     button->reserveAnm(Button::IDANIM_APPEAR_LEFT_AND_RIGHT_BUTTON);
                     break;
                 }
                 case textinput::extend::letter::InputForm::T_Reply: {
                     button->reserveAnm(Button::IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON);
                     button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_CMN_BACK_ALT);
-                    button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_LETTERWRITER_REPLY);
+                    button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_BOARD_REPLY);
                     if (getBoard()->isOptOut()) {
                         button->reserveAnm(Button::IDANIM_OPTOUT_IN_ALT);
                     }
@@ -448,7 +448,7 @@ namespace ipl {
                     button->reserveAnm(Button::IDANIM_APPEAR_LEFT_AND_RIGHT_BUTTON);
                     break;
                 }
-                case textinput::extend::letter::InputForm::T_AddressSel:
+                case textinput::extend::letter::InputForm::T_MailAddressSel:
                 default: {
                     button->reserveAnm(Button::IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON);
                     button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_ADDRESS_BACK);
