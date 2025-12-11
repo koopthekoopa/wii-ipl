@@ -110,7 +110,7 @@ Building
   git clone https://github.com/koopthekoopa/wii-ipl.git
   ```
 
-- Copy your WAD to `orig/[Wii Menu Version]`.
+- Copy your WAD to `orig/[Wii Menu Version]`. 
 
 - Configure:
 
