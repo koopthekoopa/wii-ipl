@@ -22,6 +22,7 @@ namespace ipl {
         enum {
             DRAW_LAYER_1 = 0,
             DRAW_LAYER_2,
+            DRAW_LAYER_DEFAULT = DRAW_LAYER_2,
             DRAW_LAYER_3,
             DRAW_LAYER_MAX,
         };
@@ -60,13 +61,17 @@ namespace ipl {
                 SceneObj*   getScene(int sceneId);
                 SceneObj*   getScene(int sceneId, SceneObj* obj);
 
-                bool        canDrawScene() { return mDrawMode == DRAW_LAYER_2; }
+                bool        onDefaultDrawLayer()        { return mDrawLayer == DRAW_LAYER_2; }
+                bool        onDrawLayer(int layer)      { return mDrawLayer == layer; }
 
                 void        attachReservedScene();
 
                 BOOL        isReady(int sceneId);
 
-                SceneObj*   getReservedScene()  { return mpReservedScene; }
+                SceneObj*   getReservedScene()          { return mpReservedScene; }
+
+                int         getCurrentRootSceneID()     { return mRootSceneID; }
+                int         getPreviousRootSceneID()    { return mPrevRootSceneID; }
             
             private:
                 void        createRootScene(int sceneId, void* args);
@@ -79,7 +84,7 @@ namespace ipl {
 
                 CommandList     mCommands;          // 0x10
 
-                BOOL            mDrawMode;          // 0x100
+                int             mDrawLayer;         // 0x100
 
                 SceneObj*       mpReservedScene;    // 0x104
                 Command         mReservedCommand;   // 0x108

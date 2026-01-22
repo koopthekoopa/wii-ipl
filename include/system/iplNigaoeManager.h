@@ -27,6 +27,8 @@ namespace ipl {
                 RFLErrcode  addHiddenDB(const NWC24MsgObj* faceDB);
                 void        commitHiddenDB();
 
+                RFLErrcode  getInitResult() { return mErrcode; }
+
             private:
                 nand::File*     mResFile;   // 0x00
                 RFLErrcode      mErrcode;   // 0x04

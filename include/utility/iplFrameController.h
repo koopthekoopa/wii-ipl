@@ -23,7 +23,7 @@ namespace ipl {
                 FrameController()           {}
                 virtual ~FrameController()  {}
                 
-                void            init(int type, f32 maxFrame, f32 minFrame = 1.0f, f32 speed = 1.0f);
+                void            init(int type, f32 maxFrame, f32 minFrame, f32 speed = 1.0f);
                 void            initFrame();
 
                 virtual void    calc();
@@ -47,6 +47,9 @@ namespace ipl {
                 
                 void            setAnimType(int value)      { mAnmType = value; }
                 int             getAnimType() const         { return mAnmType; }
+
+                void            play()          { initFrame(); mState = ANIM_STATE_PLAY; }
+                void            stop()          { mState = ANIM_STATE_STOP; }
 
                 bool            isPlaying() const           { return mState == ANIM_STATE_PLAY; }
 

@@ -19,11 +19,6 @@ namespace ipl {
             -245.0f
         };
 
-        /* TODO: get rid of this absolutely disgusting fakematching. */
-        inline void set_pane_visible_0(nw4r::lyt::Pane* pane) { pane->SetVisible(true); }
-        inline void set_pane_visible_1(nw4r::lyt::Pane* pane) { pane->SetVisible(true); }
-        inline void set_pane_visible_2(nw4r::lyt::Pane* pane) { pane->SetVisible(true); }
-
         SDMenuButton::SDMenuButton() :
         mpLayout(NULL), mpGui(NULL),
         mbHovered(),
@@ -46,17 +41,17 @@ namespace ipl {
             mpLayout->getAnim(ANIM_ON_LOOP)->play();
             
             mpGui = new gui::PaneManager(NULL, mpLayout->getDrawInfo(), NULL, NULL);
-            mpGui->createLayoutScene(*mpLayout->getLayout());
+            mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
             mpGui->setTriggerTarget(mpLayout->FindPaneByName(scSDBtnName[0]), true);
 
-            mpLayout->FindPaneByName("N_Btn_On")->SetVisible(false);
-            set_pane_visible_0(mpLayout->FindPaneByName("N_Btn_Off"));
+            mpLayout->hide("N_Btn_On");
+            mpLayout->show("N_Btn_Off");
 
             nw4r::math::VEC3 newPos(SCGetAspectRatio() == SC_ASPECT_RATIO_16x9 ? scBtnPos[SC_ASPECT_RATIO_16x9] : scBtnPos[SC_ASPECT_RATIO_4x3],
                                     -172.0f,
                                     -172.0f);
-            mpLayout->getRoot()->SetTranslate(newPos);
+            mpLayout->GetRootPane()->SetTranslate(newPos);
 
             for (int i = 0; i < BTN_MAX; i++) {
                 mpBalloons[i] = new TextBalloon(heap, balloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 200.0f, 110.0f);
@@ -257,12 +252,12 @@ namespace ipl {
 
         void SDMenuButton::toggle_insert(BOOL bInserted) {
             if (bInserted) {
-                set_pane_visible_2(mpLayout->FindPaneByName("N_Btn_On"));
-                mpLayout->FindPaneByName("N_Btn_Off")->SetVisible(false);
+                mpLayout->setVisible("N_Btn_On", true);
+                mpLayout->setVisible("N_Btn_Off", false);
             }
             else {
-                mpLayout->FindPaneByName("N_Btn_On")->SetVisible(false);
-                set_pane_visible_1(mpLayout->FindPaneByName("N_Btn_Off"));
+                mpLayout->setVisible("N_Btn_On", false);
+                mpLayout->setVisible("N_Btn_Off", true);
 
                 // Force stop the insert animation.
                 if (mpLayout->isPlaying(ANIM_BTN_INSERT)) {

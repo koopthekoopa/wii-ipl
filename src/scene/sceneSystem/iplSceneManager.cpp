@@ -101,10 +101,10 @@ namespace ipl {
         }
 
         void Manager::draw() {
-            mDrawMode = DRAW_LAYER_1;
-            while (mDrawMode < DRAW_LAYER_MAX) {
+            mDrawLayer = DRAW_LAYER_1;
+            while (mDrawLayer < DRAW_LAYER_MAX) {
                 draw(mpRootScene);
-                mDrawMode++;
+                mDrawLayer++;
             }
         }
 

@@ -103,8 +103,7 @@ namespace nw4r {
                 }
             }
 
-            bool SoundArchiveFileReader::ReadSoundInfo(
-                u32 id, SoundArchive::SoundInfo* soundInfo) const {
+            bool SoundArchiveFileReader::ReadSoundInfo(u32 id, SoundArchive::SoundInfo* soundInfo) const {
 
                 const SoundArchiveFile::SoundCommonInfo* pCmnInfo = impl_GetSoundInfo(id);
 
@@ -120,8 +119,7 @@ namespace nw4r {
                 return true;
             }
 
-            bool SoundArchiveFileReader::ReadSeqSoundInfo(
-                u32 id, SoundArchive::SeqSoundInfo* info) const {
+            bool SoundArchiveFileReader::ReadSeqSoundInfo(u32 id, SoundArchive::SeqSoundInfo* info) const {
 
                 const SoundArchiveFile::SeqSoundInfo* pSrc = impl_GetSeqSoundInfo(id);
 
@@ -148,8 +146,7 @@ namespace nw4r {
                 return true;
             }
 
-            bool SoundArchiveFileReader::ReadWaveSoundInfo(
-                u32 id, SoundArchive::WaveSoundInfo* info) const {
+            bool SoundArchiveFileReader::ReadWaveSoundInfo(u32 id, SoundArchive::WaveSoundInfo* info) const {
 
                 const SoundArchiveFile::WaveSoundInfo* pSrc = impl_GetWaveSoundInfo(id);
 
@@ -244,8 +241,7 @@ namespace nw4r {
                 return true;
             }
 
-            bool SoundArchiveFileReader::ReadSoundArchivePlayerInfo(
-                SoundArchive::SoundArchivePlayerInfo* info) const {
+            bool SoundArchiveFileReader::ReadSoundArchivePlayerInfo(SoundArchive::SoundArchivePlayerInfo* info) const {
 
                 const SoundArchiveFile::SoundArchivePlayerInfo* pSrc = Util::GetDataRefAddress0(mInfo->soundArchivePlayerInfoRef, mInfo);
 
@@ -390,8 +386,7 @@ namespace nw4r {
                 return static_cast<const char*>(GetPtrConst(mStringBase, mStringTable->offsetTable.items[id]));
             }
 
-            u32 SoundArchiveFileReader::ConvertLabelStringToId(
-                const SoundArchiveFile::StringTree* pTree, const char* label) const {
+            u32 SoundArchiveFileReader::ConvertLabelStringToId(const SoundArchiveFile::StringTree* pTree, const char* label) const {
 
                 if (pTree == NULL) {
                     return SoundArchive::INVALID_ID;

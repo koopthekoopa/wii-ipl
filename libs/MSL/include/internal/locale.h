@@ -108,8 +108,8 @@ struct __locale {
     struct _loc_coll_cmpt* coll_cmpt_ptr;       // 0x34
     struct _loc_ctype_cmpt* ctype_cmpt_ptr;     // 0x38
     struct _loc_mon_cmpt* mon_cmpt_ptr;         // 0x3C
-	struct _loc_num_cmpt* num_cmpt_ptr;         // 0x40
-	struct _loc_time_cmpt* time_cmpt_ptr;       // 0x44
+    struct _loc_num_cmpt* num_cmpt_ptr;         // 0x40
+    struct _loc_time_cmpt* time_cmpt_ptr;       // 0x44
 };
 
 extern struct __locale _current_locale;

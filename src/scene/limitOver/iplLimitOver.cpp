@@ -318,7 +318,7 @@ namespace ipl {
         }
 
         void LimitOver::draw() {
-            if (System::canDrawScene()) {
+            if (System::onDefaultDrawLayer()) {
                 layout::Object::setCamera();
                 mpLayout->draw();
             }

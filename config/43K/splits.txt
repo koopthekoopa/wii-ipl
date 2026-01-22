@@ -488,30 +488,30 @@ src/scene/board/iplBoard.cpp:
 	.text       start:0x8138E120 end:0x81392F48
 	.rodata     start:0x815E8250 end:0x815E82B8
 	.data       start:0x8161FDC0 end:0x816200A8
-	.sdata2     start:0x81668E70 end:0x81668E80
+	.sdata2     start:0x81668E70 end:0x81668E78
 	.sdata      start:0x8166AC20 end:0x8166AC48
 
 src/scene/board/iplBoardObject.cpp:
 	.text       start:0x81392F48 end:0x81395328
 	.rodata     start:0x815E82B8 end:0x815E82C8
 	.data       start:0x816200A8 end:0x81620558
-	.sdata2     start:0x81668E80 end:0x81668EC0
+	.sdata2     start:0x81668E78 end:0x81668EB8
 	.sdata      start:0x8166AC48 end:0x8166AC70
 
 src/scene/board/iplBoardSD.cpp:
 	.text       start:0x81395328 end:0x8139559C
 	.data       start:0x81620558 end:0x81620578
 
-src/scene/button/iplUrlProcessor.cpp:
+src/scene/board/iplUrlProcessor.cpp:
 	.text       start:0x8139559C end:0x81395F54
 	.data       start:0x81620578 end:0x81620590
-	.sdata2     start:0x81668EC0 end:0x81668ED8
+	.sdata2     start:0x81668EB8 end:0x81668ED0
 
-src/scene/button/iplLetterButton.cpp:
+src/scene/board/iplFocusObject.cpp:
 	.text       start:0x81395F54 end:0x8139AEC0
 	.rodata     start:0x815E82C8 end:0x815E8378
 	.data       start:0x81620590 end:0x81620E08
-	.sdata2     start:0x81668ED8 end:0x81668F08
+	.sdata2     start:0x81668ED0 end:0x81668F08
 	.sdata      start:0x8166AC70 end:0x8166AD20
 
 src/scene/button/iplButton.cpp:

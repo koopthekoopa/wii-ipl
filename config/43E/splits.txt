@@ -501,12 +501,12 @@ src/scene/board/iplBoardSD.cpp:
 	.text       start:0x813961F8 end:0x8139646C
 	.data       start:0x8164B958 end:0x8164B978
 
-src/scene/button/iplUrlProcessor.cpp:
+src/scene/board/iplUrlProcessor.cpp:
 	.text       start:0x8139646C end:0x81396E24
 	.data       start:0x8164B978 end:0x8164B990
 	.sdata2     start:0x816966F0 end:0x81696708
 
-src/scene/button/iplLetterButton.cpp:
+src/scene/board/iplFocusObject.cpp:
 	.text       start:0x81396E24 end:0x8139BD90
 	.rodata     start:0x8160F948 end:0x8160F9F8
 	.data       start:0x8164B990 end:0x8164C208

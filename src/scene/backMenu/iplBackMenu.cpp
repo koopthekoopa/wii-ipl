@@ -110,7 +110,7 @@ namespace ipl {
         }
 
         void BackMenu::draw() {
-            if (System::canDrawScene()) {
+            if (System::onDefaultDrawLayer()) {
                 layout::Object::setCamera();
                 mpLayout->draw();
             }

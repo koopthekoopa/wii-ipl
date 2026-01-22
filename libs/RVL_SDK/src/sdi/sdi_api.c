@@ -7,8 +7,6 @@
 
 #include <string.h>
 
-#pragma sym on
-
 #define SD_SLOT_0_PATH      "/dev/sdio/slot0"
 #define SD_SLOT_1_PATH      "/dev/sdio/slot1"
 #define SD_SLOT_W_PATH      "/dev/sdio/slotw"

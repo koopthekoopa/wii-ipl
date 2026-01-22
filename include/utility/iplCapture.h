@@ -26,7 +26,20 @@ namespace ipl {
                  * @brief Capture the screen
                  * @param disableFilter Disable the GX filter on capture.
                  */
-                void    capture(BOOL disableFilter = FALSE);
+                void            capture(BOOL disableFilter = FALSE);
+
+                u32             getCaptureX() const         { return mXPos; }
+                u32             getCaptureY() const         { return mYPos; }
+
+                u32             getCaptureWidth() const     { return mTextureWidth; }
+                u32             getCaptureHeight() const    { return mTextureHeight; }
+
+                u32             getTexWidth() const         { return mTextureWidth; }
+                u32             getTexHeight() const        { return mTextureHeight; }
+
+                u32             getTexSize() const          { return mTextureSize; }
+                u8*             getTexBuffer() const        { return mTextureBuffer; }
+                const GXTexObj& getGXTex() const            { return mTexObj; }
             
             private:
                 u16         mXPos;          // 0x00

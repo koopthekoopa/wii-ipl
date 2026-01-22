@@ -251,7 +251,7 @@ namespace ipl {
         }
 
         void Calendar::draw() {
-            if (System::canDrawScene()) {
+            if (System::onDefaultDrawLayer()) {
                 utility::Graphics::setOrtho();
                 mpLayout->draw();
 
@@ -740,7 +740,7 @@ out:
 
                         cdb::Manager* cdbManager = System::getCdbManager();
                         cdbManager->search(begin, end,
-                                            CDB_SEARCH_DIRECTION_RIGHT, cdbManager->isSDMounted() ? CDB_RECORD_LOCATION_VF_SD : CDB_RECORD_LOCATION_VF,
+                                            CDB_SEARCH_DIRECTION_RIGHT, cdbManager->isSDMounted() ? CDB_RECORD_LOCATION_ALL : CDB_RECORD_LOCATION_NAND,
                                             0, search_task_cb_, dateScn);
                     }
                 }

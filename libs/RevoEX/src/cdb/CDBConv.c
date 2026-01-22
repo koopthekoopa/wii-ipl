@@ -136,7 +136,7 @@ void CDBGenRootPath(char* rootPath, CDBLocation location, u64* wiiId) {
     char    wiiIdHiPath[16];
     char    wiiIdLoPath[16];
 
-    if (location == CDB_FS_LOCATION_VF) {
+    if (location == CDB_FS_LOCATION_NAND) {
         strcpy(rootPath, CDB_CFG_VF_DRIVE_ROOT);
         return;
     }
@@ -355,7 +355,7 @@ void CDBConvKeyStrToFullPath_(char* keyString, char* fullPath, CDBLocation locat
     CDBConvKeyStrToType(keyString, typeStr);
     CDBConvKeyStrToFileName(keyString, fileNameStr);
 
-    if (location == CDB_FS_LOCATION_VF || location == CDB_FS_LOCATION_SD) {
+    if (location == CDB_FS_LOCATION_NAND || location == CDB_FS_LOCATION_SD) {
         CDBConvFileNameStrToFullPath(fullPath, yearStr, monthStr, dayStr, hourStr, minStr, codeStr, typeStr, fileNameStr, location, wiiId);
     }
     else {

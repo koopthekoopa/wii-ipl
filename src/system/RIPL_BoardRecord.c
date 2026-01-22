@@ -7,18 +7,18 @@ const char* RBRFileType_Odh = "odh";
 const char* RBRFileType_Dat = "dat";
 const char* RBRFileType_Log = "log";
 
-u8* RBRGetPicture(u8* data, u32* pictureSize) {
+u8* RBRGetPicture(u8* recordData, u32* pictureSize) {
     u8* picture = NULL;
-    RBRHeader* header = (RBRHeader*)data;
+    RBRHeader* header = (RBRHeader*)recordData;
 
-    if (header->magic == RBR_MAGIC && header->crc32 == NETCalcCRC32(data, RBR_HEADER_SIZE)) {
+    if (header->magic == RBR_MAGIC && header->crc32 == NETCalcCRC32(recordData, RBR_HEADER_SIZE)) {
         int i;
         for (i = 0; i < RBR_ATTACHMENT_MAX; i++) {
-            if (header->attachments[i].type == RBRAttachmentType_Picture) {
+            if (header->attach[i].type == RBRAttachmentType_Picture) {
                 // Get picture data
-                picture = (u8*)header + header->attachments[i].offset;
+                picture = (u8*)header + header->attach[i].offset;
                 // Get data size of picture
-                *pictureSize = header->attachments[i].size;
+                *pictureSize = header->attach[i].size;
                 break;
             }
         }
@@ -35,7 +35,7 @@ void RBRGetPosRect(f32* left, f32* right, f32* top, f32* bottom) {
         *right = 230.0f;
     }
     if (top != NULL) {
-        *top = 180;
+        *top = 180.0f;
     }
     if (bottom != NULL) {
         *bottom = -80.0f;

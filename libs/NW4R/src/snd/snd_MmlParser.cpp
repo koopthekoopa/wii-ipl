@@ -201,9 +201,7 @@ namespace nw4r {
                                         case MML_EX_ARITHMETIC:
                                         case MML_EX_LOGIC: {
                                             arg1 = ReadByte(&rTrackParam.currentAddr);
-                                            arg2 = static_cast<s16>(
-                                                ReadArg(&rTrackParam.currentAddr, seqPlayer, track,
-                                                        useArgType ? argType : SEQ_ARG_S16));
+                                            arg2 = static_cast<s16>(ReadArg(&rTrackParam.currentAddr, seqPlayer, track, useArgType ? argType : SEQ_ARG_S16));
 
                                             if (doExecCommand) {
                                                 CommandProc(track, (cmd << 8) + cmdex, arg1, arg2);

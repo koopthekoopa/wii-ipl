@@ -167,7 +167,7 @@ namespace ipl {
             // Create GUI and event
             mpEvent = new FaceSelectEvent(this);
             mpGui = new gui::PaneManager(mpEvent, mpLayout->getDrawInfo(), NULL, NULL, true);
-            mpGui->createLayoutScene(*mpLayout->getLayout());
+            mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
 
             for (int i = 0; i < BTN_MAX; i++) {
@@ -313,7 +313,7 @@ namespace ipl {
         }
 
         void FaceSelect::draw() {
-            if (System::canDrawScene()) {
+            if (System::onDefaultDrawLayer()) {
                 u32 scLeft, scTop;
                 u32 scWidth, scHeight;
                 

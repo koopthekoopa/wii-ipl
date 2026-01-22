@@ -150,7 +150,7 @@ namespace ipl {
                 if (!System::getCdbManager()->isOverFlow() && !System::goingToDataManager()) {
                     PlayTimeLog::log();
                 }
-                System::getCdbManager()->cleanUpEmptyDirectories(CDB_RECORD_LOCATION_VF);
+                System::getCdbManager()->cleanUpEmptyDirectories(CDB_RECORD_LOCATION_NAND);
             }
         }
 

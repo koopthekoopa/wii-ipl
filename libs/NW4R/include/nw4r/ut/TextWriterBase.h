@@ -124,10 +124,10 @@ namespace nw4r {
                 TagProcessorBase<T>*    mTagProcessor;  // 0x5C
 
             private:
-                static T*   mFormatBuffer;
-                static u32  mFormatBufferSize;
+                static T*                   mFormatBuffer;
+                static u32                  mFormatBufferSize;
 
-                static TagProcessorBase<T> mDefaultTagProcessor;
+                static TagProcessorBase<T>  mDefaultTagProcessor;
 
                 static const int DEFAULT_FORMAT_BUFFER_SIZE = 256;
 

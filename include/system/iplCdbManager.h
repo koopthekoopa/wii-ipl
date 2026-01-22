@@ -10,6 +10,8 @@
 
 #include "iplMath.h"
 
+#include "utility/iplLock.h"
+
 #include <egg/core.h>
 
 namespace ipl {
@@ -23,16 +25,16 @@ namespace ipl {
                 void        closeDatabase();
 
                 BOOL        createNewRecord(const char* recordName, const char* recordFileType, const OSCalendarTime* dateTime, u32* gameCode, u16* makerCode, 
-                                            const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& friendAddr, u16 friendType, u16 replyFlag, 
+                                            const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& addr, u16 addrType, u16 noReplyFlag, 
                                             const wchar_t* titleText, const wchar_t* bodyText, const void* faceData, 
                                             const void** attachData, u32* attachSize, RBRAttachmentType* attachType);
 
-                u8*         makeBuffer(const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& friendAddr, u16 friendType, u16 replyFlag,
+                u8*         makeBuffer(const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& addr, u16 addrType, u16 noReplyFlag,
                                         const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
                                         const void** attachData, u32* attachSize, RBRAttachmentType* attachType,
                                         u32* bufferSize);
 
-                BOOL        writeRecord(CDBRecord* record, const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& friendAddr, u16 friendType, u16 replyFlag,
+                BOOL        writeRecord(CDBRecord* record, const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& addr, u16 addrType, u16 noReplyFlag,
                                         const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
                                         const void** attachData, u32* attachSize, RBRAttachmentType* attachType);
 
@@ -71,6 +73,14 @@ namespace ipl {
 
                 BOOL        mountSD();
                 BOOL        unmountSD();
+
+                void unused() {
+                    utility::autoMutexLock lock(mMutex);
+                }
+
+                void unused2() {
+                    utility::autoMutexLock lock(mMutex);
+                }
 
                 void mountSD_safe() {
                     if (!mbSDMounted) {
@@ -111,6 +121,17 @@ namespace ipl {
 
                 u8          unk_0x38;
                 u8          unk_0x39;
+        };
+
+        class auto_closer {
+            public:
+                auto_closer(Manager* mgr, CDBRecord* record) : mpCDBMgr(mgr), mpRecord(record) {}
+                ~auto_closer() {
+                    mpCDBMgr->close(mpRecord);
+                }
+            private:
+                Manager*    mpCDBMgr;   // 0x00
+                CDBRecord*  mpRecord;   // 0x04
         };
     }
 }

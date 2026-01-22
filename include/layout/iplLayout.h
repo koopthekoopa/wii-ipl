@@ -13,8 +13,29 @@
 #include "utility/iplFrameController.h"
 #include "utility/iplGraphics.h"
 
+// TODO?: Should reduce the amount of inline functions which just call SetVisible.
+
 namespace ipl {
     namespace layout {
+        class Wrapper {
+            public:
+                static inline void SetVisible(nw4r::lyt::Pane* pane, bool flag) {
+                    pane->SetVisible(flag);
+                }
+                static inline void SetVisibleSafe(nw4r::lyt::Pane* pane, bool flag) {
+                    if (pane) {
+                        pane->SetVisible(flag);
+                    }
+                }
+
+                static inline void Show(nw4r::lyt::Pane* pane) {
+                    pane->SetVisible(true);
+                }
+                static inline void Hide(nw4r::lyt::Pane* pane) {
+                    pane->SetVisible(false);
+                }
+        };
+
         class Animator : public utility::FrameController {
             public:
                 Animator(nw4r::lyt::AnimTransform* animTrans, bool bRecursive, bool bUnused);
@@ -29,11 +50,7 @@ namespace ipl {
                 void            initAnmFrame();
                 void            initAnmFrame(f32 frame);
 
-                inline void init()          { initAnmFrame(); }
-
-                inline void play()          { initFrame(); mState = ANIM_STATE_PLAY; }
-
-                inline void stop()          { mState = ANIM_STATE_STOP; }
+                inline void     init()          { initAnmFrame(); }
 
             protected:
                 nw4r::lyt::AnimTransform*   mAnimTrans; // 0x20
@@ -130,39 +147,55 @@ namespace ipl {
                 static Object*          create(EGG::Heap* heap, u32 unk0, void* buffer, const char* directory, const char* fileName);
 
                 /** @brief Prepare the camera for the layout. */
-                static void             setCamera()                                     { utility::Graphics::setOrtho(); }
+                static void             setCamera()                                                 { utility::Graphics::setOrtho(); }
+
                 /**
                  * @brief Prepare the camera for the layout.
                  * @param ortho Orthographic view
                  */
-                static void             setCamera(u32 ortho)                            { utility::Graphics::setOrtho(ortho); }
+                static void             setCamera(u32 ortho)                                        { utility::Graphics::setOrtho(ortho); }
+
                 /** @brief Prepare the default camera for the layout. */
-                static void             setDefaultCamera()                              { utility::Graphics::setDefaultOrtho(); }
+                static void             setDefaultCamera()                                          { utility::Graphics::setDefaultOrtho(); }
+
                 /**
                  * @brief Prepare the default camera for the layout.
                  * @param ortho Orthographic view
                  */
-                static void             setDefaultCamera(u32 ortho)                     { utility::Graphics::setDefaultOrtho(ortho); }
+                static void             setDefaultCamera(u32 ortho)                                 { utility::Graphics::setDefaultOrtho(ortho); }
 
                 /** @brief Gets the layout object. */
-                nw4r::lyt::Layout*      getLayout()                                     { return &mLayout; }
+                nw4r::lyt::Layout*      getNW4RLyt()                                                { return &mLayout; }
                 /** @brief Gets the draw info object. */
-                nw4r::lyt::DrawInfo*    getDrawInfo()                                   { return &mDrawInfo; }
+                nw4r::lyt::DrawInfo*    getDrawInfo()                                               { return &mDrawInfo; }
 
                 /** @brief Calculate the Layout matrix for rendering. */
-                void                    calcMtx()                                       { getLayout()->CalculateMtx(mDrawInfo); }
-                /** @brief Gets the root pane of the layout. */
-                nw4r::lyt::Pane*        getRoot()                                       { return getLayout()->GetRootPane(); }
-                nw4r::lyt::Pane*        FindPaneByName(const char *findName)            { return getRoot()->FindPaneByName(findName); }
+                void                    calcMtx()                                                   { getNW4RLyt()->CalculateMtx(mDrawInfo); }
+
+                /**
+                 * @brief Prepare the default camera for the layout.
+                 * @param ortho Orthographic view
+                 */
+                Animator*               getAnim(int idx = 0)                                        { return static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, idx)); }
 
                 /*** TODO: These always generate a weak. Try and make them not do that. ***/
-                const nw4r::ut::Rect    getTextDrawRect(nw4r::lyt::TextBox* textBox)    { return textBox->GetTextDrawRect(mDrawInfo); }
-                const nw4r::ut::Rect    getTextDrawRect(const char* paneName)           { return getTextDrawRect(nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(FindPaneByName(paneName))); }
+                const nw4r::ut::Rect    getTextDrawRect(const nw4r::lyt::TextBox* textBox) const    { return textBox->GetTextDrawRect(mDrawInfo); }
+                const nw4r::ut::Rect    getTextDrawRect(const char* paneName) const                 { return getTextDrawRect(nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mLayout.GetRootPane()->FindPaneByName(paneName))); }
 
-                const nw4r::ut::Rect    getPaneRect(nw4r::lyt::Pane* pane)              { return pane->GetPaneRect(mDrawInfo); }
-                const nw4r::ut::Rect    getPaneRect(const char* paneName)               { return getPaneRect(FindPaneByName(paneName)); }
+                const nw4r::ut::Rect    getPaneRect(nw4r::lyt::Pane* pane) const                    { return pane->GetPaneRect(mDrawInfo); }
+                const nw4r::ut::Rect    getPaneRect(const char* paneName) const                     { return getPaneRect(mLayout.GetRootPane()->FindPaneByName(paneName)); }
 
-                Animator*               getAnim(int idx = 0)                            { return static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, idx)); }
+                void                    show(const char* paneName)                                  { layout::Wrapper::Show(FindPaneByName(paneName)); }
+                void                    hide(const char* paneName)                                  { layout::Wrapper::Hide(FindPaneByName(paneName)); }
+
+                void                    setVisible(const char* paneName, bool flag)                 { layout::Wrapper::SetVisible(FindPaneByName(paneName), flag); }
+
+                nw4r::lyt::Pane*        GetRootPane()                                               { return mLayout.GetRootPane(); }
+                nw4r::lyt::Pane*        FindPaneByName(const char* findName)                        { return GetRootPane()->FindPaneByName(findName); }
+
+                void                    SetTranslate(const math::VEC3& translate)                   { SetTranslate(translate); }
+                void                    SetTranslate(const math::VEC2& translate)                   { SetTranslate(math::VEC3(translate.x, translate.y, 0.0f)); }
+
             private:
                 void                    init_(const char* fileName);
 

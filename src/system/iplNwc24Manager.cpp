@@ -33,7 +33,7 @@ namespace ipl {
         && (mLastError != NWC24_ERR_FILE_EXISTS && mLastError != NWC24_ERR_INTERNAL_VF && mLastError != NWC24_ERR_FILE_BROKEN))
 
         Manager::Manager(EGG::Heap* heap) :
-        unk_0xA30(false),
+        mbReviecedMsg(false),
         unk_0xA31(false),
         mbReceivePaused(false),
         unk_0xA33(false) {
@@ -412,7 +412,9 @@ namespace ipl {
                 NWC24DlTask dlTask;
                 if (getDlTask(&dlTask, dlId)) {
                     u32 dlAppId = 0;
+
                     getDlAppId(&dlTask, &dlAppId);
+
                     if (dlAppId != 0 && i < MAX_DOWNLOAD_COUNT) {
                         mDlTable[i++] = dlAppId;
                     }
@@ -863,7 +865,7 @@ namespace ipl {
                         msgRecordFlags.optOut |= TRUE;
                     }
 
-                    // And now lets create a record of the message!
+                    // And now lets create a CDBRecord of the message!
                     System::getCdbManager()->createNewRecord("ripl_board_record",
                                                             rbrFileType,
                                                             msgUseMbRegDate ? &msgMbRegDate : &currTime,
@@ -880,7 +882,7 @@ namespace ipl {
                                                             (const void**)mAttachData, mAttachSize, msgAttachTypes);
 
 out2:
-                    unk_0xA30 = true;
+                    mbReviecedMsg = true;
 
 out:
                     if (msgBodyText != NULL) {

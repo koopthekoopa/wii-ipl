@@ -406,10 +406,10 @@ namespace ipl {
         CDBDate endDate = CDBMakeCDBDate(MAX_YEAR, MAX_MONTH, MAX_DAY, MAX_HOUR, MAX_MINUTE, MAX_SECOND);
 
         System::getCdbManager()->search(beginDate, endDate,
-                                        CDB_SEARCH_DIRECTION_RIGHT, CDB_RECORD_LOCATION_VF, 0,
+                                        CDB_SEARCH_DIRECTION_RIGHT, CDB_RECORD_LOCATION_NAND, 0,
                                         cdb_backup_delete_search_cb_, cdbBackup);
 
-        System::getCdbManager()->cleanUpEmptyDirectories(CDB_RECORD_LOCATION_VF);
+        System::getCdbManager()->cleanUpEmptyDirectories(CDB_RECORD_LOCATION_NAND);
 
         cdbBackup->set_done_process(true);
     }
@@ -457,10 +457,10 @@ namespace ipl {
         cdbBackup->set_free_size(freeSize);
 
         System::getCdbManager()->search(beginDate, endDate,
-                                        CDB_SEARCH_DIRECTION_RIGHT, CDB_RECORD_LOCATION_VF, 1,
+                                        CDB_SEARCH_DIRECTION_RIGHT, CDB_RECORD_LOCATION_NAND, 1,
                                         cdb_backup_move_search_cb_, cdbBackup);
 
-        System::getCdbManager()->cleanUpEmptyDirectories(CDB_RECORD_LOCATION_VF);
+        System::getCdbManager()->cleanUpEmptyDirectories(CDB_RECORD_LOCATION_NAND);
 
         cdbBackup->set_done_process(true);
     }

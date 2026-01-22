@@ -6,7 +6,7 @@ namespace ipl {
     namespace scene {
         void Arrow::draw() {
             Button* button;
-            if (System::canDrawScene()
+            if (System::onDefaultDrawLayer()
             && (button = static_cast<Button*>(System::getScene(SCENE_BUTTON)), button != NULL)) {
                 layout::Object::setDefaultCamera();
 

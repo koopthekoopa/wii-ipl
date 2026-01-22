@@ -42,7 +42,7 @@ namespace ipl {
                 static void                 setCamera(u32 id = 0);
 
                 static void                 drawPolygon(const nw4r::ut::Rect& rect, GXColor color);
-                static void                 drawTexture(const nw4r::ut::Rect& rect, const GXTexObj& texObj, GXColor color, u8 texCoord, Orientation ori = ORI_NONE);
+                static void                 drawTexture(const nw4r::ut::Rect& rect, const GXTexObj& texObj, GXColor color, u8 texScale, Orientation ori = ORI_NONE);
             private:
                 static Arg  mArg;
         };

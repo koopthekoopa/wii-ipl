@@ -2,6 +2,7 @@
 #define IPL_GUI_MANAGER_H
 
 #include "layout/GUIManager.h"
+#include "layout/iplLayout.h"
 
 #include <egg/core.h>
 
@@ -24,6 +25,10 @@ namespace ipl {
 
                 void setTriggerTarget(nw4r::lyt::Pane* pane, bool bEnable);
                 void initPane(nw4r::lyt::Pane* pane);
+
+                void setupScene(layout::Object* layout) {
+                    createLayoutScene(*layout->getNW4RLyt());
+                }
             
             private:
                 u32         unk_0x28;

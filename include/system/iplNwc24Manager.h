@@ -136,6 +136,8 @@ namespace ipl {
 
                 int             getErrCode();
 
+                bool            received()          { return mbReviecedMsg; }
+                void            prepNextReceive()   { mbReviecedMsg = false; }
                 volatile bool   isUnk0xA31()        { return unk_0xA31 == false; }
 
                 BOOL isAppDlEnableLock(u32 appId) {
@@ -171,7 +173,7 @@ namespace ipl {
                 OSMutex     mLock;                              // 0xA00
                 OSMutex     mAutoLock;                          // 0xA18
 
-                bool        unk_0xA30;
+                bool        mbReviecedMsg;
                 bool        unk_0xA31;
                 bool        mbReceivePaused;                    // 0xA32
                 bool        unk_0xA33;

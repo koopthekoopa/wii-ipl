@@ -83,6 +83,11 @@ namespace ipl {
                 virtual Base*   getNext()                   { return (Base*)mpNext; }
                 virtual Base*   getPrev()                   { return (Base*)mpPrev; }
 
+                /** @brief Check if scene has been created.*/
+                bool            isSceneCreated() const          { return (mScnState & SCN_STATE_CREATED); }
+
+                /* TREE CLASSES */
+
                 class iterator : public utility::Tree::iterator {
                     typedef Base        value_type;
                     typedef value_type* pointer;
@@ -174,10 +179,6 @@ namespace ipl {
                 */
                 void        setSceneParentFlags(u32 flag)   { mParentFlags = flag; }
 
-                /**
-                 * @brief Check if scene has been created.
-                */
-                bool        isSceneCreated() const          { return (mScnState & SCN_STATE_CREATED); }
                 /**
                  * @brief Request scene to be destroyed.
                 */

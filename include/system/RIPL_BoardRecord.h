@@ -74,27 +74,27 @@ typedef union RBRRecordFlags {
 #define RBR_MAKE_RECORDFLAGS(type, optOut) ((u32)((type & 0xFF) | (optOut & 0xFF) << 24))
 
 typedef struct RBRHeader {
-    u32             magic;                              // 0x00 (Always 0x52495F35)
-    f32             xPos;                               // 0x04
-    f32             yPos;                               // 0x08
-    u32             flags;                              // 0x0C
-    OSTime          time;                               // 0x10
+    u32             magic;                      // 0x00 (Always 0x52495F35)
+    f32             xPos;                       // 0x04
+    f32             yPos;                       // 0x08
+    RBRRecordFlags  flags;                      // 0x0C
+    OSTime          time;                       // 0x10
 
-    NWC24FriendAddr friendAddr;                         // 0x18
-    u16             friendType;                         // 0x118
-    u16             replyFlag;                          // 0x11A
+    NWC24FriendAddr addr;                       // 0x18
+    u16             addrType;                   // 0x118
+    u16             noReplyFlag;                // 0x11A
 
-    u32             titleOffset;                        // 0x11C
-    u32             bodyOffset;                         // 0x120
-    u32             faceOffset;                         // 0x124
+    u32             titleOffset;                // 0x11C
+    u32             bodyOffset;                 // 0x120
+    u32             faceOffset;                 // 0x124
 
-    RBRAttachment   attachments[RBR_ATTACHMENT_MAX];    // 0x128
+    RBRAttachment   attach[RBR_ATTACHMENT_MAX]; // 0x128
 
-    u32             crc32;                              // 0x140
-    u32             reserved; /* ? */                   // 0x148
+    u32             crc32;                      // 0x140
+    u32             reserved; /* ? */           // 0x148
 } RBRHeader;
 
-u8*     RBRGetPicture(u8* data, u32* pictureSize);
+u8*     RBRGetPicture(u8* recordData, u32* pictureSize);
 void    RBRGetPosRect(f32* left, f32* right, f32* top, f32* bottom);
 
 #ifdef __cplusplus

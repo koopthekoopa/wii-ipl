@@ -6,7 +6,7 @@ namespace ipl {
     namespace scene {
         void SDArrow::draw() {
             SDButton* button;
-            if (System::canDrawScene()
+            if (System::onDefaultDrawLayer()
             && (button = static_cast<SDButton*>(System::getScene(SCENE_SD_BUTTON)), button != NULL)) {
                 layout::Object::setDefaultCamera();
 

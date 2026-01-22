@@ -1,7 +1,7 @@
 #ifndef GLOBAL_HEADERS_DECOMP_UTILS_H
 #define GLOBAL_HEADERS_DECOMP_UTILS_H
 
-#define __CONCAT(x, y)          x##y
+#define __CONCAT(x, y)          x ## y
 #define   CONCAT(x, y)          __CONCAT(x, y)
 
 #define ARRSIZE(x)              (sizeof(x) / sizeof(x[0]))

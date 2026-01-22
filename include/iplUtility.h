@@ -16,6 +16,7 @@
 #include "utility/iplThread.h"
 #include "utility/iplWpad.h"
 #include "utility/iplLayout.h"
+#include "utility/iplScroller.h"
 
 #include "utility/iplMisc.h"
 

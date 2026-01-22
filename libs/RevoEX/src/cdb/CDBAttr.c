@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-extern CDBErr   GenCDBIdNumber(CDBId* attrCdbID);
+extern CDBErr   GenCDBIdNumber(u32* cdbIDNum);
 
 static char     CDB_ATTR_MAGIC[] = "CDBFILE";
 static const u8 CDB_ATTR_VERSION = 2;
@@ -64,10 +64,13 @@ void CDBAttrInit(CDBAttr* attr) {
 CDBErr CDBAttrCreateOnNAND(CDBAttr* attr, const char* desc, u32 lastModifiedDate) {
     CDBErr  err;
     u32     descStrLen;
+    u32     cdbNum;
 
-    CDBId   attrCdbID;
     u8      attrDescLength;
-    u32     attrLastModifiedDate, attrModifiedCount, attrCdbIDNum;
+    u32     attrLastModifiedDate;
+    u32     attrModifiedCount;
+    u32     attrCdbIDNum;
+
     u64     attrWiiID;
 
     CDBAttrInit(attr);
@@ -100,11 +103,11 @@ CDBErr CDBAttrCreateOnNAND(CDBAttr* attr, const char* desc, u32 lastModifiedDate
     attr->unk_0x400 = TRUE;
 
     attrModifiedCount = 0;
-    memcpy(&attr->buf.modifiedCount, &attrModifiedCount, sizeof(u32));
+    memcpy(&attr->buf.cdbID.modifiedCount, &attrModifiedCount, sizeof(u32));
     attr->unk_0x400 = TRUE;
 
-    GenCDBIdNumber(&attrCdbID);
-    attrCdbIDNum = attrCdbID.num;
+    GenCDBIdNumber(&cdbNum);
+    attrCdbIDNum = cdbNum;
     memcpy(&attr->buf.cdbID.num, &attrCdbIDNum, sizeof(u32));
 
     attrWiiID = CDBGetWiiId();
@@ -129,20 +132,20 @@ CDBErr CDBAttrSetModifiedDate(CDBAttr* attr, u32 modifiedDate) {
 
 CDBErr CDBAttrSetModifiedCount(CDBAttr* attr, u32 modifiedCount) {
     u32 value = modifiedCount;
-    memcpy(&attr->buf.modifiedCount, &value, sizeof(u32));
+    memcpy(&attr->buf.cdbID.modifiedCount, &value, sizeof(u32));
     attr->unk_0x400 = TRUE;
 
     return CDB_ERROR_OK;
 }
 
 CDBErr CDBAttrGetModifiedCount(CDBAttr* attr, u32* modifiedCount) {
-    memcpy(modifiedCount, &attr->buf.modifiedCount, sizeof(u32));
+    memcpy(modifiedCount, &attr->buf.cdbID.modifiedCount, sizeof(u32));
 
     return CDB_ERROR_OK;
 }
 
 CDBErr CDBAttrGetIDNumber(CDBAttr* attr, CDBId* cdbID) {
-    memcpy(cdbID, &attr->buf.cdbID, sizeof(CDBId));
+    memcpy(cdbID, &attr->buf.cdbID.num, sizeof(u32));
 
     return CDB_ERROR_OK;
 }

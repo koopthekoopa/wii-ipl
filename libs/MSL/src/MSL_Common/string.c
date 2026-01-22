@@ -12,7 +12,7 @@ char* strcpy(char* dst, const char* src) {
     register unsigned int w, t, align;
     register unsigned int k1;
     register unsigned int k2;
-			
+
     fromb = (unsigned char*)src;
     destb = (unsigned char*)dst;
     
@@ -38,7 +38,7 @@ char* strcpy(char* dst, const char* src) {
     k1 = K1;
     k2 = K2;
 
-	w = *((int*)(fromb));
+    w = *((int*)(fromb));
     t = w + k2;
     t &= ~w;
     t &= k1;
@@ -47,7 +47,7 @@ char* strcpy(char* dst, const char* src) {
     }
     
     --((int*)(destb));
-			
+            
     do {
         *(++((int*)(destb))) = w;
         w = *(++((int*)(fromb)));

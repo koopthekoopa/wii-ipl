@@ -56,7 +56,7 @@ namespace ipl {
             
             // Setup GUI
             mpGui = new gui::PaneManager(this, mpLayout->getDrawInfo(), NULL, NULL);
-            mpGui->createLayoutScene(*mpLayout->getLayout());
+            mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
             mpGui->setTriggerTarget(mpLayout->FindPaneByName("B_Cal"), true);
 

@@ -24,9 +24,9 @@ extern "C" {
 #define CDB_KEYSTR_TYPE_SIZE            3
 
 typedef enum CDBRecordLocation {
-    CDB_RECORD_LOCATION_VF = 1,
+    CDB_RECORD_LOCATION_NAND = 1,
     CDB_RECORD_LOCATION_SD,
-    CDB_RECORD_LOCATION_VF_SD = CDB_RECORD_LOCATION_SD | CDB_RECORD_LOCATION_VF,
+    CDB_RECORD_LOCATION_ALL = CDB_RECORD_LOCATION_SD | CDB_RECORD_LOCATION_NAND,
 } CDBRecordLocation;
 
 /* The way the "serial number" is handled is some sort of count from 0 - 1000 */
@@ -86,7 +86,10 @@ CDBErr  CDBRecordClose(CDBRecord* record);
 CDBErr  CDBRecordGetDataSize(CDBRecord* record, u32* recordSize);
 CDBErr  CDBRecordGetId(CDBRecord* record, CDBId* id);
 
+CDBErr  CDBRecordGetCalendarTimeForce(CDBRecord* record, int* year, int* month, int* day, int* hour, int* min, int* sec);
+CDBErr  CDBRecordGetKeyForce(CDBRecord* record, CDBRecordKey* recordKey);
 CDBErr  CDBRecordGetTypeForce(CDBRecord* record, char* type);
+CDBErr  CDBRecordGetGameCodeForce(CDBRecord* record, char* gcStr);
 
 CDBErr  CDBRecordRemove(CDBRecord* record);
 

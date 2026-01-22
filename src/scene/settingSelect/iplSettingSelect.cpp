@@ -2,6 +2,8 @@
 #include "scene/settingSelect/iplSettingSelectArg.h"
 #include "scene/settingSelect/iplSettingButton.h"
 
+#include "scene/setting/iplSetting.h"
+
 #include "iplSceneUI.h"
 
 #include "iplSystem.h"
@@ -99,7 +101,7 @@ namespace ipl {
             mpLayout->finishBinding();
 
             mpGui = new gui::PaneManager(this, mpLayout->getDrawInfo(), NULL, NULL, true);
-            mpGui->createLayoutScene(*mpLayout->getLayout());
+            mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
 
             if (mSettingArg == SettingSelectArg::ARG_START_NORMAL) {
@@ -433,7 +435,7 @@ namespace ipl {
         }
 
         void SettingSelect::draw() {
-            if (System::canDrawScene()) {
+            if (System::onDefaultDrawLayer()) {
                 utility::Graphics::setOrtho();
                 mpLayout->draw();
             }
@@ -597,7 +599,7 @@ namespace ipl {
                     unk_0x90 = 18;
                     flashAnim = ANIM_SETTING_FLASH;
                     outAnim = ANIM_DATA_MANAGE_OUT;
-                    reserveAllSceneDestruction(SCENE_SETTING, NULL);
+                    reserveAllSceneDestruction(SCENE_SETTING, (void*)Setting::ARG_NORMAL_PAGE);
                     CHANGE_STATE(STATE_1ST_WAIT_FADE_OUT);
                     break;
                 }

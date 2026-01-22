@@ -20,6 +20,8 @@ class BannerSoundPlayer {
         bool checkHeader(void* data, u32 length);
         bool checkData(void* data, u32 length, bool);
 
+        int getUnk_0x00() const { return unk_0x00[0]; }
+
     private:
         u8  unk_0x00[0x518];
 };

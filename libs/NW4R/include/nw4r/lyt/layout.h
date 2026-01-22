@@ -45,14 +45,14 @@ namespace nw4r {
             GroupContainer*         GetGroupContainer() const               { return mpGroupContainer; }
 
             static MEMAllocator*    GetAllocator()                          { return mspAllocator; }
-            static void             SetAllocator(MEMAllocator* allocator)  { mspAllocator = allocator; }
+            static void             SetAllocator(MEMAllocator* allocator)   { mspAllocator = allocator; }
         
             static void*            AllocMemory(u32 size)                   { return MEMAllocFromAllocator(mspAllocator, size); }
             static void             FreeMemory(void* ptr)                   { MEMFreeToAllocator(mspAllocator, ptr); }
 
+        private:
             static Pane*            BuildPaneObj(s32 kind, const void* dataPtr, const ResBlockSet& resBlockSet) NO_INLINE;
 
-        private:
             AnimTransformList       mAnimTransList;     // 0x04
 
             Pane*                   mpRootPane;         // 0x10

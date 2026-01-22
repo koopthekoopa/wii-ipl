@@ -18,7 +18,12 @@ namespace ipl {
                     RESULT_CANCELLED,
                 } Result;
 
-                ParentalDialog(EGG::Heap* heap, BOOL isTemporary);
+                enum {
+                    TYPE_GAME = 0,
+                    TYPE_IPL,
+                };
+
+                ParentalDialog(EGG::Heap* heap, int type);
 
                 void                prepare();
                 void                create();
@@ -94,7 +99,7 @@ namespace ipl {
                 ParentalDialogEvent*    mpEvent;                                // 0x64
                 gui::PaneManager*       mpGui;                                  // 0x68
 
-                BOOL                    mpTemporary;                            // 0x6C
+                int                     mDialogType;                            // 0x6C
                 Result                  mResult;                                // 0x70
 
                 BOOL                    mbHovered[BTN_MAX];                     // 0x74

@@ -27,11 +27,11 @@ namespace ipl {
             if (!SCGetConfigDoneFlag2()) {
                 if (SCGetUpdateType() == SC_UPDATE_TYPE_NONE) {
                     *initialScene = SCENE_SETTING;
-                    *initialSubScene = SETTING_SCENE_INITIAL_SETUP;
+                    *initialSubScene = Setting::ARG_SETUP;
                 }
                 else {
                     *initialScene = SCENE_SETTING;
-                    *initialSubScene = SETTING_SCENE_UPDATE_BEFORE_SETUP;
+                    *initialSubScene = Setting::ARG_UNK_5;
                 }
             }
             else {

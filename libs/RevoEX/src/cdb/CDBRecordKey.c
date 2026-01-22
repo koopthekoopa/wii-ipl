@@ -12,7 +12,7 @@ BOOL CDBRecordKeyIsValid(CDBRecordKey* recordKey) {
     keyLength = strlen(recordKey->keyString);
     if (keyLength >= CDB_RECORD_KEY_STRLEN_LEN) {
         if (recordKey->keyStrStruct.pad0 == '_' && recordKey->keyStrStruct.pad1 == '_' && recordKey->keyStrStruct.pad2 == '_' && recordKey->keyStrStruct.pad3 == '.') {
-            if (recordKey->location >= CDB_FS_LOCATION_VF && recordKey->location <= CDB_FS_LOCATION_4) {
+            if (recordKey->location >= CDB_FS_LOCATION_NAND && recordKey->location <= CDB_FS_LOCATION_4) {
                 return TRUE;
             }
         }

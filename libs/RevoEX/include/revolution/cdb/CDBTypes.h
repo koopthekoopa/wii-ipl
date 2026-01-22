@@ -59,7 +59,7 @@ typedef enum CDBVerboseLevel {
 } CDBVerboseLevel;
 
 typedef enum CDBLocation {
-    CDB_FS_LOCATION_VF = 1,
+    CDB_FS_LOCATION_NAND = 1,
     CDB_FS_LOCATION_SD,
     CDB_FS_LOCATION_3,
     CDB_FS_LOCATION_4
@@ -72,7 +72,8 @@ typedef enum CDBSeek {
 } CDBSeek;
 
 typedef struct _CDBId {
-    u32 num;    // 0x00
+    u32 num;            // 0x00
+    u32 modifiedCount;  // 0x04
 } CDBId;
 
 #ifdef __cplusplus

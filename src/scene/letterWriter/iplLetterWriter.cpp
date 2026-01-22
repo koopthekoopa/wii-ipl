@@ -180,7 +180,7 @@ namespace ipl {
                     }
                     break;
                 }
-                case Board::FRIEND_CODE_ERR_NULL: {
+                case Board::FRIEND_CODE_ERR_UNAVAILABLE: {
                     mLetterState = LETTER_STATE_EXIT_ON_ERROR;
                     System::getDialog()->callBtn1(MESG_ERROR_NWC24_FRIEND_NULL, MESG_CMN_OK);
                     break;
@@ -222,8 +222,8 @@ namespace ipl {
                         Button* button = getButton();
 
                         button->reserveAnm(Button::IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON);
-                        button->reserveText(Button::BTN_BBS_BOARD, MESG_CMN_BACK_ALT);
-                        button->reserveText(Button::BTN_CH_SEL, MESG_BOARD_REPLY);
+                        button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_CMN_BACK_ALT);
+                        button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_BOARD_REPLY);
 
                         if (getBoard()->isOptOut()) {
                             button->reserveAnm(Button::IDANIM_OPTOUT_IN_ALT);
@@ -338,7 +338,7 @@ namespace ipl {
                                         }
                                         case textinput::extend::letter::InputForm::T_Address: {
                                             button->reserveAnm(Button::IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON);
-                                            button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_ADDRESS_BACK);
+                                            button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_CMN_BACK);
                                             button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_ADDRESS_REGISTER);
                                             button->reserveAnm(Button::IDANIM_APPEAR_LEFT_AND_RIGHT_BUTTON);
                                             break;
@@ -346,7 +346,7 @@ namespace ipl {
                                         case textinput::extend::letter::InputForm::T_MailAddressSel:
                                         default: {
                                             button->reserveAnm(Button::IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON);
-                                            button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_ADDRESS_BACK);
+                                            button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_CMN_BACK);
                                             button->reserveAnm(Button::IDANIM_APPEAR_LEFT_BUTTON);
                                             break;
                                         }
@@ -443,7 +443,7 @@ namespace ipl {
                 }
                 case textinput::extend::letter::InputForm::T_Address: {
                     button->reserveAnm(Button::IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON);
-                    button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_ADDRESS_BACK);
+                    button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_CMN_BACK);
                     button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_ADDRESS_REGISTER);
                     button->reserveAnm(Button::IDANIM_APPEAR_LEFT_AND_RIGHT_BUTTON);
                     break;
@@ -451,7 +451,7 @@ namespace ipl {
                 case textinput::extend::letter::InputForm::T_MailAddressSel:
                 default: {
                     button->reserveAnm(Button::IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON);
-                    button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_ADDRESS_BACK);
+                    button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_CMN_BACK);
                     button->reserveAnm(Button::IDANIM_APPEAR_BOARD_BUTTON);
                     break;
                 }

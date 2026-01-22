@@ -91,7 +91,7 @@ namespace ipl {
 
             // Setup interface
             mpGui = new gui::PaneManager(NULL, mpLayout->getDrawInfo(), NULL, NULL);
-            mpGui->createLayoutScene(*mpLayout->getLayout());
+            mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
             for (int i = 0; i < BTN_MAX; i++) {
                 mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[i]), true);
@@ -130,7 +130,7 @@ namespace ipl {
         }
 
         void SDButton::draw() {
-            if (System::canDrawScene()) {
+            if (System::onDefaultDrawLayer()) {
                 // Setup camera
                 layout::Object::setCamera();
 

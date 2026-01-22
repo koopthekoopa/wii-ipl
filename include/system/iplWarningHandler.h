@@ -9,7 +9,7 @@
 
 namespace ipl {
     class WarningHandler {
-        private:
+        public:
             enum Type {
                 NONE = 0,
                 DEFAULT,
@@ -30,6 +30,7 @@ namespace ipl {
 
             BOOL    resetting() { return mType == RESET; }
 
+        private:
             Type            mType;      // 0x00
             u32             mMessageID; // 0x04
 

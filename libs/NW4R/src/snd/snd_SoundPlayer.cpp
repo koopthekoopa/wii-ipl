@@ -251,8 +251,7 @@ namespace nw4r {
                 return;
             }
 
-            void* pExtArg = ambientArgInfo->argAllocaterCallback->detail_AllocAmbientArg(
-                ambientArgInfo->argSize);
+            void* pExtArg = ambientArgInfo->argAllocaterCallback->detail_AllocAmbientArg(ambientArgInfo->argSize);
 
             if (pExtArg == NULL) {
                 return;
@@ -284,9 +283,7 @@ namespace nw4r {
             mPlayableLimit = limit;
         }
 
-        bool SoundPlayer::CheckPlayableSoundCount(
-            int startPriority, detail::ExternalSoundPlayer* extPlayer) {
-
+        bool SoundPlayer::CheckPlayableSoundCount(int startPriority, detail::ExternalSoundPlayer* extPlayer) {
             if (GetPlayableSoundCount() == 0) {
                 return false;
             }

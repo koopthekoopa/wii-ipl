@@ -155,7 +155,7 @@ namespace ipl {
                     IDANIM_FROM_BOARD_TO_CALENDAR,
                     IDANIM_BACK_TO_BOARD,
                     IDANIM_BACK_TO_BOARD_ALT,       /*??? (maybe unused)*/
-                    IDANIM_UNKNOWN_7,               // unused
+                    IDANIM_FROM_BOARD_TO_MAIL_SEL,
                     IDANIM_SELECT_LEFT_BUTTON,
                     IDANIM_DISAPPEAR_BOARD_BUTTON,
                     IDANIM_APPEAR_BOARD_BUTTON,
@@ -166,7 +166,7 @@ namespace ipl {
                     IDANIM_APPEAR_LEFT_AND_RIGHT_BUTTON,
                     IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON,
                     IDANIM_APPEAR_ALL_BUTTONS,
-                    IDANIM_DISPPEAR_ALL_BUTTONS,
+                    IDANIM_DISAPPEAR_ALL_BUTTONS,
                     IDANIM_ARROW_RIGHT_SELECT,
                     IDANIM_ARROW_LEFT_SELECT,
                     IDANIM_ARROW_RIGHT_SELECT_ALT,  // unused
@@ -286,6 +286,12 @@ namespace ipl {
 
                 int             hasReservedAnim()   { return mReservedCmd.current != 0; }
 
+                SDMenuButton*   get_sd_menu_btn()   { return &mSdMenuBtn; }
+                OptOutButton*   get_opt_out_btn()   { return &mOptOutBtn; }
+                layout::Object* get_layout()        { return mpLayout; }
+
+                bool            isArrowVisible(int i) { return mbArrowVisible[i]; }
+
             protected:
                 typedef struct Command {
                     enum {
@@ -307,10 +313,6 @@ namespace ipl {
                         u32 msgId;
                     };          // 0x08
                 } Command;
-
-                SDMenuButton*               get_sd_menu_btn()   { return &mSdMenuBtn; }
-                OptOutButton*               get_opt_out_btn()   { return &mOptOutBtn; }
-                layout::Object*             get_layout()        { return mpLayout; }
 
             private:
                 enum {

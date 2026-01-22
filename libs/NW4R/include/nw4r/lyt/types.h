@@ -100,20 +100,20 @@ namespace nw4r {
                 return reinterpret_cast<T*>(reinterpret_cast<unsigned>(baseAddress) + offset);
             }
 
-            template<typename T> inline void SetBit(T* pBits, int pos, bool val) {
-                const T mask = (T)(~(1 << pos));
+            template<typename T> inline void SetBit(T* pBits, int pos, bool value) {
+                T mask = ~(1 << pos);
                 *pBits &= mask;
-                *pBits |= (val ? 1 : 0) << pos;
+                *pBits |= (value ? 1 : 0) << pos;
             }
 
             template<typename T> inline bool TestBit(T bits, int pos) {
-                const T mask = (T)(1 << pos);
-                return 0 != (bits&  mask);
+                T mask = 1 << pos;
+                return (bits & mask) != 0;
             }
 
-            template<typename T> T GetBits(T bits, int pos, int len) {
-                T mask = static_cast<T>(~(-1 << len));
-                return static_cast<T>((bits >> pos)&  mask);
+            template<typename T> inline T GetBits(T bits, int pos, int len) {
+                T mask = ~(static_cast<T>(-1) << len);
+                return bits >> pos & mask;
             }
         }
         

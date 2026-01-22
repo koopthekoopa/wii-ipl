@@ -20,7 +20,7 @@ namespace ipl {
                 void        calc();
                 void        draw();
 
-                void        init(const wchar_t* text, u32 texLen);
+                void        init(const wchar_t* text, u32 texLen = 0);
 
                 void        terminate();
 
@@ -36,9 +36,7 @@ namespace ipl {
                 void        set_translate(const math::VEC3& trans);
                 void        set_textbox(const wchar_t* text, BOOL bNoLimit = FALSE);
 
-                void init_textbox(BOOL bNoLimit = FALSE) {
-                    set_textbox(mpText, bNoLimit);
-                }
+                void        init_textbox(BOOL bNoLimit = FALSE) { set_textbox(mpText, bNoLimit); }
 
                 layout::Object* get_layout() { return mpLayout; }
 

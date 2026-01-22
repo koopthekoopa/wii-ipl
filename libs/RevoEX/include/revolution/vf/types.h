@@ -55,6 +55,11 @@ enum {
 enum {
     VF_SD_SLOT_0 = 0,
     VF_SD_SLOT_1, /* hehehehe */
+    VF_SD_SLOT_MAX
+};
+
+enum {
+    VF_STATUS_PROTECTED = (1 << 2),
 };
 
 typedef void    VFFILE;

@@ -131,7 +131,7 @@ CDBErr CDBFSUninit() {
 }
 
 char* CDBFindDataGetName(CDBFindData* findData) {
-    if (findData->loc == CDB_FS_LOCATION_VF) {
+    if (findData->loc == CDB_FS_LOCATION_NAND) {
         return CDBFindDataGetNameVF(&findData->vf);
     }
     else {
@@ -140,7 +140,7 @@ char* CDBFindDataGetName(CDBFindData* findData) {
 }
 
 BOOL CDBFindDataIsDirectory(CDBFindData* findData) {
-    if (findData->loc == CDB_FS_LOCATION_VF) {
+    if (findData->loc == CDB_FS_LOCATION_NAND) {
         return CDBFindDataIsDirectoryVF(&findData->vf);
     }
     else {
@@ -149,7 +149,7 @@ BOOL CDBFindDataIsDirectory(CDBFindData* findData) {
 }
 
 BOOL CDBFindDataIsEnd(CDBFindData* findData) {
-    if (findData->loc == CDB_FS_LOCATION_VF) {
+    if (findData->loc == CDB_FS_LOCATION_NAND) {
         return CDBFindDataIsEndVF(&findData->vf);
     }
     else {
@@ -158,7 +158,7 @@ BOOL CDBFindDataIsEnd(CDBFindData* findData) {
 }
 
 BOOL CDBFSIsExistFile(const char* fileName, CDBLocation location) {
-    if (location == CDB_FS_LOCATION_VF) {
+    if (location == CDB_FS_LOCATION_NAND) {
         return CDBFSIsExistFileVF(fileName);
     }
     else {
@@ -182,7 +182,7 @@ void CDBFSFindFirstRootEx(CDBFindData *findData, CDBLocation location, u64* wiiI
 
 void CDBFSFindFirst(CDBFindData* findData, const char* fileName, CDBLocation location) {
     findData->loc = location;
-    if (findData->loc == CDB_FS_LOCATION_VF) {
+    if (findData->loc == CDB_FS_LOCATION_NAND) {
         CDBFSFindFirstVF(&findData->vf, fileName);
     }
     else {
@@ -191,7 +191,7 @@ void CDBFSFindFirst(CDBFindData* findData, const char* fileName, CDBLocation loc
 }
 
 void CDBFSFindNext(CDBFindData* findData) {
-    if (findData->loc == CDB_FS_LOCATION_VF) {
+    if (findData->loc == CDB_FS_LOCATION_NAND) {
         CDBFSFindNextVF(&findData->vf);
     }
     else {
@@ -200,7 +200,7 @@ void CDBFSFindNext(CDBFindData* findData) {
 }
 
 void CDBFSFindClose(CDBFindData* findData) {
-    if (findData->loc == CDB_FS_LOCATION_VF) {
+    if (findData->loc == CDB_FS_LOCATION_NAND) {
         CDBFSFindCloseVF(&findData->vf);
     }
     else {
@@ -210,7 +210,7 @@ void CDBFSFindClose(CDBFindData* findData) {
 
 void CDBFSDeleteDir(char* dirName, CDBLocation location) {
     CDBReportInfo("CDBFSDeleteDir() %s\n", dirName);
-    if (location == CDB_FS_LOCATION_VF) {
+    if (location == CDB_FS_LOCATION_NAND) {
         CDBFSDeleteDirVF(dirName);
     }
     else {

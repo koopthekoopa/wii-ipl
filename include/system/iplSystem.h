@@ -224,10 +224,10 @@ namespace ipl {
                     volatile bool           mbSndResLoaded;             // 0x2B7
                     volatile bool           mbZi8ResLoaded;             // 0x2B8
                     volatile bool           mbNeedToCreateFolders;      // 0x2B9
-                    volatile bool           mbFoldersCreated;           // 0x2BA
+                    volatile bool           mbNWC24LibError;            // 0x2BA
                     volatile bool           mbIsNandFull;               // 0x2BB
                     volatile bool           mbSafeMode;                 // 0x2BC
-                    bool                    unk_0x2BD;
+                    bool                    mbStartNewMainAmn;          // 0x2BD
                     volatile bool           mbRequestCreateAfter;       // 0x2BE
                     bool                    mbRequestCreateLibMgr;      // 0x2BF
 
@@ -284,9 +284,13 @@ namespace ipl {
             /*==============================*/
 
             static bool                             isCmnResLoaded()            { return smArg.mbResLoaded; }
+
             static bool                             isFontResLoaded()           { return smArg.mbFontResLoaded; }
             static bool                             isSndResLoaded()            { return smArg.mbSndResLoaded; }
             static bool                             isZi8ResLoaded()            { return smArg.mbZi8ResLoaded; }
+
+            static bool                             hasNWC24LibError()          { return smArg.mbNWC24LibError; }
+            static void                             resetNWC24LibState()        { smArg.mbNWC24LibError = false; }
 
             static bool isRsrcLoaded() { return smArg.mbResLoaded 
                                     && smArg.mbFontResLoaded 
@@ -342,6 +346,11 @@ namespace ipl {
             static void                             stopCreateLibManagerReq()   { smArg.mbRequestCreateLibMgr = false; }
 
             static bool                             goingToDataManager()        { return smArg.mbGoingToDataManager; }
+
+            // This is a guess, judging by how it's used.
+            static bool                             requestedNewMailAnm()       { return smArg.mbStartNewMainAmn; }
+            static void                             requestNewMailAnm()         { smArg.mbStartNewMainAmn = true; }
+            static void                             stopRequestNewMailAnm()     { smArg.mbStartNewMainAmn = false; }
 
             /*==============================*/
             /*          SYSTEM BS2          */
@@ -555,7 +564,10 @@ namespace ipl {
             static scene::Manager*                  getSceneManager()           { return smArg.mpSceneManager; }
             static scene::SceneObj*                 getScene(int sceneID)       { return getSceneManager()->getScene(sceneID); }
             static scene::SceneObj*                 getReservedScene()          { return getSceneManager()->getReservedScene(); }
-            static bool                             canDrawScene()              { return getSceneManager()->canDrawScene(); }
+            static bool                             onDefaultDrawLayer()        { return getSceneManager()->onDefaultDrawLayer(); }
+            static bool                             onDrawLayer(int layer)      { return getSceneManager()->onDrawLayer(layer); }
+            static int                              getCurrentRootSceneID()     { return getSceneManager()->getCurrentRootSceneID(); }
+            static int                              getPreviousRootSceneID()    { return getSceneManager()->getPreviousRootSceneID(); }
 
             /*==============================*/
             /*           HOME MENU          */

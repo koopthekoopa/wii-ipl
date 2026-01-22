@@ -20,14 +20,14 @@ namespace ipl {
             "B_BtnC",
         };
 
-        ParentalDialog::ParentalDialog(EGG::Heap* heap, BOOL launchTitle) :
+        ParentalDialog::ParentalDialog(EGG::Heap* heap, int type) :
         FaderSceneBase(heap),
         mState(STATE_NORMAL),
         mpLayout(NULL),
         mpLayoutFile(NULL),
         mpEvent(NULL),
         mpGui(NULL),
-        mpTemporary(launchTitle),
+        mDialogType(type),
         mResult(RESULT_NONE),
         mbInputPin(false),
         mAttempts(0) {
@@ -66,7 +66,7 @@ namespace ipl {
             // Setup interface
             mpEvent = new ParentalDialogEvent(this);
             mpGui = new gui::PaneManager(mpEvent, mpLayout->getDrawInfo(), NULL, NULL);
-            mpGui->createLayoutScene(*mpLayout->getLayout());
+            mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
             for (int i = 0; i < BTN_MAX; i++) {
                 mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[i]), true);
@@ -127,7 +127,7 @@ namespace ipl {
         }
 
         void ParentalDialog::draw() {
-            if (System::canDrawScene()) {
+            if (System::onDefaultDrawLayer()) {
                 utility::Graphics::setDefaultOrtho();
                 mpLayout->draw();
             }
@@ -291,7 +291,7 @@ namespace ipl {
 
                             if (check()) {
                                 // Correct!!
-                                System::getDialog()->callBtn0(mpTemporary == FALSE ? MESG_PARENTAL_DLG_SUCCESS : MESG_PARENTAL_DLG_SUCCESS_TEMP, 180);
+                                System::getDialog()->callBtn0(mDialogType == TYPE_GAME ? MESG_PARENTAL_DLG_SUCCESS : MESG_PARENTAL_DLG_SUCCESS_TEMP, 180);
                                 mResult = RESULT_SUCCESS;
                                 mState = STATE_WAIT_MSG;
                             }

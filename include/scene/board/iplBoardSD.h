@@ -10,7 +10,9 @@ namespace ipl {
                 BoardSD();
                 void    update();
 
-                u32     getUnk_0x04()   { return unk_0x04; }
+                u32     getSDState()        { return mSDState; }
+
+                void    setState(u32 state) { mState = state; }
 
             private:
                 enum {
@@ -23,7 +25,7 @@ namespace ipl {
                 void    error_handling(int code);
 
                 u32     mState;     // 0x00
-                u32     unk_0x04;
+                u32     mSDState;  // 0x04
         };
     }
 }

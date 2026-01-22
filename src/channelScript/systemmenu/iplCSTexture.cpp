@@ -1,7 +1,7 @@
 #include "channelScript/iplCSLibrary.h"
 
 #include "iplSystem.h"
-#pragma sym on
+
 namespace ipl {
     namespace cs {
         namespace texture {

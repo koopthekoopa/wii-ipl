@@ -48,7 +48,7 @@ namespace ipl {
             mpLayout->finishBinding();
 
             mpGui = new gui::PaneManager(this, mpLayout->getDrawInfo(), NULL, NULL, true);
-            mpGui->createLayoutScene(*mpLayout->getLayout());
+            mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
             mpGui->setTriggerTarget(mpLayout->FindPaneByName("B_Button_00"), true);
 
@@ -120,7 +120,7 @@ namespace ipl {
         }
 
         void SettingButton::draw() {
-            if (System::canDrawScene()) {
+            if (System::onDefaultDrawLayer()) {
                 layout::Object::setCamera();
                 mpLayout->draw();
             }

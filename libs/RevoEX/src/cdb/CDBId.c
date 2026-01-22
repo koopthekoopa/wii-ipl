@@ -5,7 +5,7 @@
 
 #include <stdio.h>
 
-CDBErr GenCDBIdNumber(CDBId* cdbID) {
+CDBErr GenCDBIdNumber(u32* cdbIdNum) {
     char    confPath[256];
     VFFILE* confFile;
 
@@ -18,14 +18,14 @@ CDBErr GenCDBIdNumber(CDBId* cdbID) {
     if (confFile == NULL) {
         confFile = VFCreateFile(confPath, 0);
 
-        cdbID->num = 0;
+        *cdbIdNum = 0;
 
         if (confFile == NULL) {
             CDBReportError("failed to create %s\n", CDB_CFG_CDBID_FILE);
             return CDBOnVFErrorOccured(CDBGetLastVFError());
         }
 
-        vfErr = VFWriteFile(confFile, cdbID, sizeof(CDBId));
+        vfErr = VFWriteFile(confFile, cdbIdNum, sizeof(*cdbIdNum));
         if (vfErr != VF_ERR_SUCCESS) {
             return CDBOnVFErrorOccured(vfErr);
         }
@@ -38,19 +38,19 @@ CDBErr GenCDBIdNumber(CDBId* cdbID) {
         return CDB_ERROR_OK;
     }
 
-    vfErr = VFReadFile(confFile, cdbID, sizeof(CDBId), NULL);
+    vfErr = VFReadFile(confFile, cdbIdNum, sizeof(*cdbIdNum), NULL);
     if (vfErr != VF_ERR_SUCCESS) {
         return CDBOnVFErrorOccured(vfErr);
     }
 
-    cdbID->num++;
+    (*cdbIdNum)++;
 
     vfErr = VFSeekFile(confFile, 0, VF_SEEK_ORIGIN_BEGIN);
     if (vfErr != VF_ERR_SUCCESS) {
         return CDBOnVFErrorOccured(vfErr);
     }
 
-    vfErr = VFWriteFile(confFile, cdbID, sizeof(CDBId));
+    vfErr = VFWriteFile(confFile, cdbIdNum, sizeof(*cdbIdNum));
     if (vfErr != VF_ERR_SUCCESS) {
         return CDBOnVFErrorOccured(vfErr);
     }

@@ -238,7 +238,7 @@ namespace nw4r {
                     DoDrawString_(console, printLines, GetTextPtr_(console, line, 0), writer);
                     printLines++;
 
-                    if (line == console->printTop ) {
+                    if (line == console->printTop) {
                         goto end;
                     }
 

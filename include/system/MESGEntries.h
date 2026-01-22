@@ -3,6 +3,7 @@
 
 /* Common message IDs */
 // TODO: Find out whats with the alts
+#define MESG_CMN_START                  2
 #define MESG_CMN_BACK                   35
 #define MESG_CMN_QUIT                   37
 #define MESG_CMN_OK                     46
@@ -44,7 +45,6 @@
 
 /* Address */
 
-#define MESG_ADDRESS_BACK               35
 #define MESG_ADDRESS_REGISTER           41
 #define MESG_ADDRESS_WII_ID             66
 #define MESG_ADDRESS_CHOOSE             78
@@ -62,8 +62,40 @@
 
 /* Board */
 
+#define MESG_BOARD_CORRUPTED            11
+#define MESG_BOARD_UPDATE               21
+#define MESG_BOARD_SAFE_MODE_NOTICE     27
+#define MESG_BOARD_POST                 36
 #define MESG_BOARD_SEND                 39
+#define MESG_BOARD_ERASE_ERROR          62
+#define MESG_BOARD_ERASE_CONFIRM        64
 #define MESG_BOARD_REPLY                67
+#define MESG_BOARD_TRASH                40
+#define MESG_BOARD_CHJUMP_CONFIRM       88
+#define MESG_BOARD_CHJUMP_NO_OPERA      89
+#define MESG_BOARD_CHJUMP_LAUNCH_ERROR  90
+#define MESG_BOARD_OPT_OUT              92
+#ifndef VERSION_43E
+#define MESG_BOARD_OPT_OUT_SELECT       102
+#define MESG_BOARD_OPT_OUT_ONE          103
+#define MESG_BOARD_OPT_OUT_ALL          104
+#define MESG_BOARD_OPT_OUT_CANCEL       105
+#define MESG_BOARD_OPT_OUT_CONFIRM      106
+#define MESG_BOARD_OPT_OUT_DONE         107
+#define MESG_BOARD_OPT_OUT_DONE_ALL     108
+#define MESG_BOARD_NWC24_DELETE_FAIL    109
+#else
+#define MESG_BOARD_OPT_OUT_SELECT       93
+#define MESG_BOARD_OPT_OUT_ONE          94
+#define MESG_BOARD_OPT_OUT_ALL          95
+#define MESG_BOARD_OPT_OUT_CANCEL       96
+#define MESG_BOARD_OPT_OUT_CONFIRM      97
+#define MESG_BOARD_OPT_OUT_DONE         98
+#define MESG_BOARD_OPT_OUT_DONE_ALL     99
+#define MESG_BOARD_NWC24_DELETE_FAIL    100
+#endif // VERSION_43E
+#define MESG_BOARD_NAND_FULL            154
+#define MESG_BOARD_RFL_INIT_FAIL        381
 
 /* Button */
 
@@ -96,6 +128,9 @@
 #define MESG_CALENDAR_NOV               128
 #define MESG_CALENDAR_DEC               129
 
+#define MESG_CALENDAR_WEEK_START        130
+#define MESG_CALENDAR_WEEK_END          131
+
 /* Channel Edit */
 
 #define MESG_CHAN_EDIT_BLOCKS_OPEN      156
@@ -112,7 +147,6 @@
 
 /* Letter Writer */
 
-#define MESG_LETTERWRITER_POST          36
 #define MESG_LETTERWRITER_LETTER_HEADER 141
 #define MESG_LETTERWRITER_LETTER_TEXT   142
 #define MESG_LETTERWRITER_SENDING       143
@@ -144,7 +178,6 @@
 
 /* Text Writer */
 
-#define MESG_TEXTWRITER_POST            36
 #define MESG_TEXTWRITER_HEADER          133
 #define MESG_TEXTWRITER_ADD_MII         139
 #define MESG_TEXTWRITER_LETTER_TEXT     140
@@ -170,8 +203,11 @@
 #define MESG_ERROR_NCD_INVALID          407
 #define MESG_ERROR_NCD_LAN_INVALID      408
 #define MESG_ERROR_NCD_WL_INVALID       409
+#ifndef VERSION_43E
 #define MESG_ERROR_NWC24_NETWORK        410
-#define MESG_ERROR_NWC24_NETWORK_ALT    430
+#else
+#define MESG_ERROR_NWC24_NETWORK        430
+#endif // VERSION_43E
 #define MESG_ERROR_NWC24_SERVER         453
 #define MESG_ERROR_NWC24_FATAL          454
 #define MESG_ERROR_NWC24_FRIEND_NULL    456

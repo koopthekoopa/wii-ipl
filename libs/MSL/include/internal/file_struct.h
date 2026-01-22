@@ -19,11 +19,11 @@ typedef struct __file_modes {
 } file_modes;
 
 typedef struct __file_states {
-	unsigned long   io_state : 3;
-	unsigned long   free_buffer : 1;
+    unsigned long   io_state : 3;
+    unsigned long   free_buffer : 1;
 
-	unsigned char   eof;
-	unsigned char   error;
+    unsigned char   eof;
+    unsigned char   error;
 } file_states;
 
 typedef unsigned long file_handle;

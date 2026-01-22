@@ -8,10 +8,9 @@
 #include "scene/letterWriter/iplLetterWriter.h"
 
 #include "scene/setting/iplNCDSetting.h"
+#include "scene/setting/iplSetting.h"
 
 #include "iplSystem.h"
-
-#pragma sym on
 
 namespace ipl {
     namespace scene {
@@ -76,7 +75,7 @@ namespace ipl {
 
             // Create interface
             mpGui = new gui::PaneManager(mpEvent, mpLayout->getDrawInfo(), NULL, NULL);
-            mpGui->createLayoutScene(*mpLayout->getLayout());
+            mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
 
             // Set pane buttons
@@ -179,7 +178,7 @@ namespace ipl {
                                 getButton()->setEventHandler(NULL);
                                 getButton()->animation(Button::IDANIM_DISAPPEAR_LEFT_BUTTON);
 
-                                createChildScene(SCENE_PARENTAL_DIALOG, this, NULL, (void*)TRUE);
+                                createChildScene(SCENE_PARENTAL_DIALOG, this, NULL, (void*)ParentalDialog::TYPE_IPL);
 
                                 mbParentalBypass = false;
                                 mState = STATE_PARENTAL_DIALOG;
@@ -187,7 +186,7 @@ namespace ipl {
                             else {
                                 System::getFader()->fadeOut();
 
-                                reserveAllSceneDestruction(SCENE_SETTING, (void*)1);
+                                reserveAllSceneDestruction(SCENE_SETTING, (void*)Setting::ARG_INTERNET_SETTING);
 
                                 mState = STATE_DONE;
                             }
@@ -226,7 +225,7 @@ namespace ipl {
                         if (mbParentalBypass) {
                             System::getFader()->fadeOut();
 
-                            reserveAllSceneDestruction(SCENE_SETTING, (void*)1);
+                            reserveAllSceneDestruction(SCENE_SETTING, (void*)Setting::ARG_INTERNET_SETTING);
 
                             mState = STATE_DONE;
                         }
@@ -254,7 +253,7 @@ namespace ipl {
                         case DialogWindow::RESULT_RIGHT_BUTTON: {
                             System::getFader()->fadeOut();
 
-                            reserveAllSceneDestruction(SCENE_SETTING, (void*)4);
+                            reserveAllSceneDestruction(SCENE_SETTING, (void*)Setting::ARG_INTERNET_PAGE);
 
                             mState = STATE_DONE;
                             break;
@@ -268,7 +267,7 @@ namespace ipl {
                 case STATE_CHECK_NETWORK: {
                     if (check_network()) {
                         button->animation(Button::IDANIM_DISAPPEAR_LEFT_BUTTON);
-                        button->reserveText(Button::BTN_CH_SEL, MESG_LETTERWRITER_POST);
+                        button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_BOARD_POST);
                         button->reserveAnm(Button::IDANIM_APPEAR_LEFT_BUTTON);
 
                         createChildScene(SCENE_LETTER_WRITER, this, NULL, (void*)LetterWriter::MAIL_ADDRESS_SEL);
@@ -316,7 +315,7 @@ namespace ipl {
         }
 
         void MailAddressSelect::draw() {
-            if (System::canDrawScene()) {
+            if (System::onDefaultDrawLayer()) {
                 utility::Graphics::setOrtho();
                 mpLayout->draw();
             }
@@ -358,8 +357,8 @@ namespace ipl {
                         animId = ANIM_BTN_MAIL_ZOOM_IN;
 
                         button->reserveAnm(Button::IDANIM_DISAPPEAR_LEFT_BUTTON);
-                        button->reserveText(Button::BTN_BBS_BOARD, MESG_CMN_BACK_ALT_2);
-                        button->reserveText(Button::BTN_CH_SEL, MESG_TEXTWRITER_POST);
+                        button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_CMN_BACK_ALT_2);
+                        button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_BOARD_POST);
                         button->reserveAnm(Button::IDANIM_APPEAR_LEFT_AND_RIGHT_BUTTON);
 
                         snd::getSystem()->startSE("WIPL_SE_DECIDE");
@@ -376,7 +375,7 @@ namespace ipl {
                     }
                     case BTN_ADDRESS: {
                         button->animation(Button::IDANIM_DISAPPEAR_LEFT_BUTTON);
-                        button->reserveText(Button::BTN_CH_SEL, MESG_ADDRESS_REGISTER);
+                        button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_ADDRESS_REGISTER);
                         button->reserveAnm(Button::IDANIM_APPEAR_LEFT_AND_RIGHT_BUTTON);
 
                         animId = ANIM_BTN_ADDRESS_ZOOM_IN;
@@ -534,11 +533,7 @@ namespace ipl {
             // WC24 library check
             switch (checkErr) {
                 case NWC24_ERR_NETWORK: {
-#ifndef VERSION_43E
                     set_err_msg(errStr, sizeof(errStr)/sizeof(wchar_t), MESG_ERROR_NWC24_NETWORK, errorCode);
-#else
-                    set_err_msg(errStr, sizeof(errStr)/sizeof(wchar_t), MESG_ERROR_NWC24_NETWORK_ALT, errorCode);
-#endif // VERSION_43E
 
                     System::getDialog()->callBtn1(errStr, MESG_CMN_OK);
                     mState = STATE_DIALOG;

@@ -110,7 +110,7 @@ Building
   git clone https://github.com/koopthekoopa/wii-ipl.git
   ```
 
-- Copy your WAD to `orig/[Wii Menu Version]`. 
+- Copy your WAD to `orig/[Wii Menu Version]`.
 
 - Configure:
 
@@ -127,7 +127,7 @@ Building
   ```
 
 >  [!NOTE]
-> This does **not** produce a WAD file, only the executable file, `main.app`.
+> This does **not** produce a WAD file, only the executable file, `main.dol`.
 
 > [!WARNING]
 > Due to the SEL file not being generated on build, the code is not 100% shiftable.  

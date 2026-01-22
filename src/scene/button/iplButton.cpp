@@ -20,7 +20,7 @@ namespace ipl {
             /*IDANIM_FROM_BOARD_TO_CALENDAR*/         { /*start=*/2000.0f,  /*end=*/2050.0f  },
             /*IDANIM_BACK_TO_BOARD*/                  { /*start=*/3000.0f,  /*end=*/3050.0f  },
             /*IDANIM_BACK_TO_BOARD_ALT*/              { /*start=*/3500.0f,  /*end=*/3550.0f  },
-            /*IDANIM_UNKNOWN_7*/                      { /*start=*/4000.0f,  /*end=*/4026.0f  },
+            /*IDANIM_FROM_BOARD_TO_MAIL_SEL*/           { /*start=*/4000.0f,  /*end=*/4026.0f  },
             /*IDANIM_SELECT_LEFT_BUTTON*/             { /*start=*/5000.0f,  /*end=*/5050.0f  },
             /*IDANIM_DISAPPEAR_BOARD_BUTTON*/         { /*start=*/3100.0f,  /*end=*/3113.0f  },
             /*IDANIM_APPEAR_BOARD_BUTTON*/            { /*start=*/3426.0f,  /*end=*/3439.0f  },
@@ -31,7 +31,7 @@ namespace ipl {
             /*IDANIM_APPEAR_LEFT_AND_RIGHT_BUTTON*/   { /*start=*/3313.0f,  /*end=*/3326.0f  },
             /*IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON*/{ /*start=*/3413.0f,  /*end=*/3426.0f  },
             /*IDANIM_APPEAR_ALL_BUTTONS*/             { /*start=*/3640.0f,  /*end=*/3653.0f  },
-            /*IDANIM_DISPPEAR_ALL_BUTTONS*/           { /*start=*/3660.0f,  /*end=*/3673.0f  },
+            /*IDANIM_DISAPPEAR_ALL_BUTTONS*/          { /*start=*/3660.0f,  /*end=*/3673.0f  },
             /*IDANIM_ARROW_RIGHT_SELECT*/             { /*start=*/10700.0f, /*end=*/10730.0f },
             /*IDANIM_ARROW_LEFT_SELECT*/              { /*start=*/10700.0f, /*end=*/10730.0f },
             /*IDANIM_ARROW_RIGHT_SELECT_ALT*/         { /*start=*/10500.0f, /*end=*/10580.0f },
@@ -250,7 +250,7 @@ namespace ipl {
 
             // Setup interface
             mpGui = new gui::PaneManager(NULL, mpLayout->getDrawInfo(), NULL, NULL);
-            mpGui->createLayoutScene(*mpLayout->getLayout());
+            mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
 
             for (int i = 0; i < BTN_MAX; i++) {
@@ -340,7 +340,7 @@ namespace ipl {
         }
 
         void Button::draw() {
-            if (System::canDrawScene()) {
+            if (System::onDefaultDrawLayer()) {
                 // Setup camera
                 layout::Object::setCamera();
 
@@ -610,7 +610,7 @@ namespace ipl {
                     break;
                 }
                 case IDANIM_OPTOUT_OUT_ALT: {
-                    animNo = IDANIM_DISPPEAR_ALL_BUTTONS;
+                    animNo = IDANIM_DISAPPEAR_ALL_BUTTONS;
                     optOutAnim = mOptOutBtn.mpLayout->getAnim(OptOutButton::ANIM_BTN_OUT);
                     break;
                 }
@@ -654,7 +654,7 @@ namespace ipl {
                 case IDANIM_FROM_BOARD_TO_CALENDAR:
                 case IDANIM_BACK_TO_BOARD:
                 case IDANIM_BACK_TO_BOARD_ALT:
-                case IDANIM_UNKNOWN_7:
+                case IDANIM_FROM_BOARD_TO_MAIL_SEL:
                 case IDANIM_SELECT_LEFT_BUTTON:
                 case IDANIM_DISAPPEAR_BOARD_BUTTON: {
                     for (int i = 0; i < BALLOON_MAX; i++) {
@@ -861,7 +861,7 @@ namespace ipl {
 
             // Setup interface
             mpGui = new gui::PaneManager(NULL, mpLayout->getDrawInfo(), NULL, NULL);
-            mpGui->createLayoutScene(*mpLayout->getLayout());
+            mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
             mpGui->setTriggerTarget(mpLayout->FindPaneByName("B_Stop"), true);
         }

@@ -212,7 +212,7 @@ namespace nw4r {
         static void ShowStackTrace_(u32 stackAddress);
         static void ShowMainInfo_(u16 error, OSContext* context, u32 dsisr, u32 dar);
         static void ShowGPR_(OSContext* context);
-        static void ShowSRR0Map_( OSContext* context);
+        static void ShowSRR0Map_(OSContext* context);
         static void ShowGPRMap_(OSContext* context);
         static void ShowFloat_(OSContext* context);
         static bool ShowMapInfoSubroutine_(u32 address, bool arg);
@@ -282,7 +282,7 @@ namespace nw4r {
 
         static void ShowStackTrace_(u32 stackAddress) {
             Exception_Printf_("-------------------------------- TRACE\n");
-            Exception_Printf_( "Address:   BackChain   LR save\n" );
+            Exception_Printf_("Address:   BackChain   LR save\n");
 
             u32 i;
             u32 *ptr = (u32 *)stackAddress;

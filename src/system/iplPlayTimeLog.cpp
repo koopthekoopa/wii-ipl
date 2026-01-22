@@ -48,10 +48,10 @@ namespace ipl {
 
         smArg.mbCheckSucceed = false;
 
-        CDBDate begin = CDBMakeCDBDate(smArg.mDateTime.year, smArg.mDateTime.mon, smArg.mDateTime.mday, 0, 0, 0);
-        CDBDate end = CDBMakeCDBDate(smArg.mDateTime.year, smArg.mDateTime.mon, smArg.mDateTime.mday, 23, 59, 59);
+        CDBDate begin = CDBMakeCDBDate(smArg.mDateTime.year, smArg.mDateTime.mon, smArg.mDateTime.mday, MIN_HOUR, MIN_MINUTE, MIN_SECOND);
+        CDBDate end = CDBMakeCDBDate(smArg.mDateTime.year, smArg.mDateTime.mon, smArg.mDateTime.mday, MAX_HOUR, MAX_MINUTE, MAX_SECOND);
     
-        cdbManager->search(begin, end, CDB_SEARCH_DIRECTION_RIGHT, CDB_RECORD_LOCATION_VF, 0, search_cb_, &smArg);
+        cdbManager->search(begin, end, CDB_SEARCH_DIRECTION_RIGHT, CDB_RECORD_LOCATION_NAND, 0, search_cb_, &smArg);
 
         if (!smArg.mbCheckSucceed) {
             smArg.create_new_playlog(&smArg.mPlayRecord);
@@ -86,10 +86,10 @@ namespace ipl {
 
         smArg.mbCheckSucceed = false;
 
-        CDBDate begin = CDBMakeCDBDate(smArg.mDateTime.year, smArg.mDateTime.mon, smArg.mDateTime.mday, 0, 0, 0);
-        CDBDate end = CDBMakeCDBDate(smArg.mDateTime.year, smArg.mDateTime.mon, smArg.mDateTime.mday, 23, 59, 59);
+        CDBDate begin = CDBMakeCDBDate(smArg.mDateTime.year, smArg.mDateTime.mon, smArg.mDateTime.mday, MIN_HOUR, MIN_MINUTE, MIN_SECOND);
+        CDBDate end = CDBMakeCDBDate(smArg.mDateTime.year, smArg.mDateTime.mon, smArg.mDateTime.mday, MAX_HOUR, MAX_MINUTE, MAX_SECOND);
     
-        cdbManager->search(begin, end, CDB_SEARCH_DIRECTION_RIGHT, CDB_RECORD_LOCATION_VF, 0, search_cb_, &smArg);
+        cdbManager->search(begin, end, CDB_SEARCH_DIRECTION_RIGHT, CDB_RECORD_LOCATION_NAND, 0, search_cb_, &smArg);
 
         if (!smArg.mbCheckSucceed) {
             smArg.create_new_sendmsglog(smArg.mFriendNameBuf);
@@ -452,10 +452,10 @@ namespace ipl {
             cdbManager->read(record, buffer, recordSize);
 
             RBRHeader* header = (RBRHeader*)buffer;
-            u8* attachData = (u8*)&buffer[header->attachments[0].offset];
+            u8* attachData = (u8*)&buffer[header->attach[0].offset];
 
             // Older versions of PlayTimeLog only included LogBuffer
-            if (header->attachments[0].size == sizeof(LogBuffer)) {
+            if (header->attach[0].size == sizeof(LogBuffer)) {
                 memcpy(&event->logBuf, attachData, sizeof(LogBuffer));
             }
             // Newer versions included LogBuffer and SendMsgBuffer
@@ -480,10 +480,10 @@ namespace ipl {
 
         cdbManager->seek(record, 0, CDB_SEEK_BEGIN);
         cdbManager->writeRecord(record, math::VEC2(header->xPos, header->yPos),
-                                header->flags,
-                                header->friendAddr,
-                                header->friendType,
-                                header->replyFlag,
+                                header->flags.data,
+                                header->addr,
+                                header->addrType,
+                                header->noReplyFlag,
                                 (wchar_t*)&buffer[header->titleOffset],
                                 bodyText,
                                 NULL,

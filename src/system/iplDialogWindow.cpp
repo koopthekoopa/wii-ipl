@@ -71,7 +71,7 @@ namespace ipl {
         mDialog[DIALOG_TYPE_BTN1].gLayout->bindToGroup("my_DialogWindow_a1_SelectBtn_Ac.brlan", "G_SelectBtnB", false, false);
         mDialog[DIALOG_TYPE_BTN1].gLayout->finishBinding();
         mDialog[DIALOG_TYPE_BTN1].guiMgr = new(heap, 4) gui::PaneManager(NULL, mDialog[DIALOG_TYPE_BTN1].gLayout->getDrawInfo(), NULL, allocator);
-        mDialog[DIALOG_TYPE_BTN1].guiMgr->createLayoutScene(*mDialog[DIALOG_TYPE_BTN1].gLayout->getLayout());
+        mDialog[DIALOG_TYPE_BTN1].guiMgr->setupScene(mDialog[DIALOG_TYPE_BTN1].gLayout);
         mDialog[DIALOG_TYPE_BTN1].guiMgr->setAllComponentTriggerTarget(false);
         for (int i = 0; i <= (BUTTON_ONE_MAX - 1); i++) {
             mDialog[DIALOG_TYPE_BTN1].guiMgr->setTriggerTarget(mDialog[DIALOG_TYPE_BTN1].gLayout->FindPaneByName(mscBtnName[i]), true);
@@ -89,7 +89,7 @@ namespace ipl {
         mDialog[DIALOG_TYPE_BTN2].gLayout->bindToGroup("my_DialogWindow_a2_SelectBtn_Ac.brlan", "G_SelectBtnA", false, false);
         mDialog[DIALOG_TYPE_BTN2].gLayout->finishBinding();
         mDialog[DIALOG_TYPE_BTN2].guiMgr = new(heap, 4) gui::PaneManager(NULL, mDialog[DIALOG_TYPE_BTN2].gLayout->getDrawInfo(), NULL, allocator);
-        mDialog[DIALOG_TYPE_BTN2].guiMgr->createLayoutScene(*mDialog[DIALOG_TYPE_BTN2].gLayout->getLayout());
+        mDialog[DIALOG_TYPE_BTN2].guiMgr->setupScene(mDialog[DIALOG_TYPE_BTN2].gLayout);
         mDialog[DIALOG_TYPE_BTN2].guiMgr->setAllComponentTriggerTarget(false);
         for (int i = 0; i <= (BUTTON_TWO_MAX - 1); i++) {
             mDialog[DIALOG_TYPE_BTN2].guiMgr->setTriggerTarget(mDialog[DIALOG_TYPE_BTN2].gLayout->FindPaneByName(mscBtnName[i]), true);
@@ -110,7 +110,7 @@ namespace ipl {
         mDialog[DIALOG_TYPE_BTN3].gLayout->bindToGroup("my_DialogWindow_a3_SelectBtn_Ac.brlan", "G_SelectBtnC", false, false);
         mDialog[DIALOG_TYPE_BTN3].gLayout->finishBinding();
         mDialog[DIALOG_TYPE_BTN3].guiMgr = new(heap, 4) gui::PaneManager(NULL, mDialog[DIALOG_TYPE_BTN3].gLayout->getDrawInfo(), NULL, allocator);
-        mDialog[DIALOG_TYPE_BTN3].guiMgr->createLayoutScene(*mDialog[DIALOG_TYPE_BTN3].gLayout->getLayout());
+        mDialog[DIALOG_TYPE_BTN3].guiMgr->setupScene(mDialog[DIALOG_TYPE_BTN3].gLayout);
         mDialog[DIALOG_TYPE_BTN3].guiMgr->setAllComponentTriggerTarget(false);
         for (int i = 0; i <= (BUTTON_THREE_MAX - 1); i++) {
             mDialog[DIALOG_TYPE_BTN3].guiMgr->setTriggerTarget(mDialog[DIALOG_TYPE_BTN3].gLayout->FindPaneByName(mscBtnName[i]), true);
@@ -128,7 +128,7 @@ namespace ipl {
         mDialog[DIALOG_TYPE_BTNS2].gLayout->bindToGroup("my_DialogWindow_b_SelectBtn_Ac.brlan", "G_SelectBtnA", false, false);
         mDialog[DIALOG_TYPE_BTNS2].gLayout->finishBinding();
         mDialog[DIALOG_TYPE_BTNS2].guiMgr = new(heap, 4) gui::PaneManager(NULL, mDialog[DIALOG_TYPE_BTNS2].gLayout->getDrawInfo(), NULL, allocator);
-        mDialog[DIALOG_TYPE_BTNS2].guiMgr->createLayoutScene(*mDialog[DIALOG_TYPE_BTNS2].gLayout->getLayout());
+        mDialog[DIALOG_TYPE_BTNS2].guiMgr->setupScene(mDialog[DIALOG_TYPE_BTNS2].gLayout);
         mDialog[DIALOG_TYPE_BTNS2].guiMgr->setAllComponentTriggerTarget(false);
         for (int i = 0; i <= (BUTTON_TWO_MAX - 1); i++) {
             mDialog[DIALOG_TYPE_BTNS2].guiMgr->setTriggerTarget(mDialog[DIALOG_TYPE_BTNS2].gLayout->FindPaneByName(mscBtnName[i]), true);
@@ -435,7 +435,7 @@ namespace ipl {
                 // Has the layout changed? Fade in to the new one.
                 if (mpPages[mCurPage].layoutObj != mpPages[mPrevPage].layoutObj
                 && mpPages[mCurPage].layoutObj) {
-                    set_alpha(mpPages[mCurPage].layoutObj->getRoot(), mPageAlpha);
+                    set_alpha(mpPages[mCurPage].layoutObj->GetRootPane(), mPageAlpha);
                     if (mpPages[mCurPage].isLytAnim && mPageAlpha == 255) {
                         mpPages[mCurPage].layoutObj->getAnim(ANIM_DIALOG_IN)->play();
                     }
@@ -499,7 +499,7 @@ namespace ipl {
                 // Has the layout changed? Fade out the old layout
                 if (mpPages[mCurPage].layoutObj != mpPages[mPrevPage].layoutObj
                 && mpPages[mPrevPage].layoutObj) {
-                    nw4r::lyt::Pane* pPane = mpPages[mPrevPage].layoutObj->getRoot();
+                    nw4r::lyt::Pane* pPane = mpPages[mPrevPage].layoutObj->GetRootPane();
                     if (mPageAlpha != 0) {
                         set_alpha(pPane, mPageAlpha);
                     }
@@ -540,7 +540,7 @@ namespace ipl {
                 nw4r::math::VEC3 dlgPos = mpCurDialog->gLayout->FindPaneByName("N_Dialog")->GetTranslate();
                 dlgPos.x += mCustomLayoutPos.x;
                 dlgPos.y += mCustomLayoutPos.y;
-                mpCustomLayout->getRoot()->SetTranslate(dlgPos);
+                mpCustomLayout->GetRootPane()->SetTranslate(dlgPos);
 
                 mpCustomLayout->calcMtx();
                 if (mState != DIALOG_STATE_PAGE_FADE || mPageAlpha != 0) {

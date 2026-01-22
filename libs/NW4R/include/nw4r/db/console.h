@@ -43,7 +43,7 @@ namespace nw4r {
 
         typedef enum ConsoleOutputType {
             CONSOLE_OUTPUT_NONE = 0,
-            CONSOLE_OUTPUT_TERMINAL	= (1 << 0),
+            CONSOLE_OUTPUT_TERMINAL = (1 << 0),
             CONSOLE_OUTPUT_DISPLAY = (1 << 1),
             CONSOLE_OUTPUT_ALL = CONSOLE_OUTPUT_TERMINAL | CONSOLE_OUTPUT_DISPLAY
         } ConsoleOutputType;

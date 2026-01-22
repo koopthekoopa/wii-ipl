@@ -275,9 +275,9 @@ namespace ipl {
             nw4r::ut::Rect proj16x9;
             System::getProjectionRect16x9(&proj16x9);
 
-            f32 temp0 = proj16x9.GetWidth() / proj4x3.GetWidth();
+            f32 locationAdjust = proj16x9.GetWidth() / proj4x3.GetWidth();
             f32 temp1 = SCGetAspectRatio() == SC_ASPECT_RATIO_16x9 ?
-                                                temp0 :
+                                                locationAdjust :
                                                 1.0f;
 
             nw4r::ut::Rect textRect = textPane->GetTextDrawRect(*mpLayout->getDrawInfo());

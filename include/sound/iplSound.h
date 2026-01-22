@@ -26,7 +26,10 @@ namespace ipl {
 
                 int             startSE(const char* sndName);
                 int             holdSE(const char* sndName);
+                int             holdSEwithPosDis(const char* sndName, f32 x, f32 y);
                 int             startSEIndex(u32 sndIndex);
+
+                int             startSEwithPos(const char* sndName, f32 pos);
 
                 BOOL            isSEActive(const char* sndName);
 
@@ -34,7 +37,12 @@ namespace ipl {
                 int             pauseOnBGM();
                 int             pauseOffBGM();
 
+                int             muteOffBGM(int);
+                int             muteOnBGM(int);
+
                 int             resetAllSound();
+
+                BOOL            checkTmpSoundFile(void*, u32);
             
             private:
                 u32             unk_0x00[0x638];

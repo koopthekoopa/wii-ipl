@@ -121,7 +121,7 @@ namespace ipl {
             } GXEnd();
         }
 
-        void Graphics::drawTexture(const nw4r::ut::Rect &rect, const GXTexObj& texObj, GXColor color, u8 texCoord, Orientation ori) {
+        void Graphics::drawTexture(const nw4r::ut::Rect &rect, const GXTexObj& texObj, GXColor color, u8 texScale, Orientation ori) {
             u8 leftTop_x,     leftTop_y;
             u8 leftBottom_x,  leftBottom_y;
             u8 rightBottom_x, rightBottom_y;
@@ -132,10 +132,10 @@ namespace ipl {
                     leftTop_x = 0;
                     leftTop_y = 0;
                     leftBottom_x = 0;
-                    leftBottom_y = texCoord;
-                    rightBottom_x = texCoord;
-                    rightBottom_y = texCoord;
-                    rightTop_x = texCoord;
+                    leftBottom_y = texScale;
+                    rightBottom_x = texScale;
+                    rightBottom_y = texScale;
+                    rightTop_x = texScale;
                     rightTop_y = 0;
                     break;
                 }
@@ -144,21 +144,21 @@ namespace ipl {
                     rightBottom_y = 0;
                     rightTop_x = 0;
                     rightTop_y = 0;
-                    leftTop_y = texCoord;
-                    leftBottom_x = texCoord;
-                    leftBottom_y = texCoord;
-                    rightBottom_x = texCoord;
+                    leftTop_y = texScale;
+                    leftBottom_x = texScale;
+                    leftBottom_y = texScale;
+                    rightBottom_x = texScale;
                     break;
                 }
                 case ORI_90_ANTICLOCKWISE: {
-                    leftTop_x = texCoord;
+                    leftTop_x = texScale;
                     leftTop_y = 0;
                     leftBottom_x = 0;
                     leftBottom_y = 0;
                     rightBottom_x = 0;
-                    rightBottom_y = texCoord;
-                    rightTop_x = texCoord;
-                    rightTop_y = texCoord;
+                    rightBottom_y = texScale;
+                    rightTop_x = texScale;
+                    rightTop_y = texScale;
                     break;
                 }
             }

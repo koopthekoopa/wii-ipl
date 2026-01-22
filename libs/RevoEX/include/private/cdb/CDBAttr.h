@@ -37,7 +37,6 @@ typedef struct _CDBAttrBuf {
 
     CDBId               cdbID;                                  // 0x70
 
-    u32                 modifiedCount;                          // 0x74
     u32                 fileSize;                               // 0x78
     u32                 lastModifiedDate;                       // 0x7C
 

@@ -200,7 +200,7 @@ if not config.non_matching:
 # Tool versions
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "20250812"
-config.dtk_tag = "v1.7.6"
+config.dtk_tag = "v1.7.5"
 config.objdiff_tag = "v3.4.5"
 config.sjiswrap_tag = "v1.2.2"
 config.wibo_tag = "1.0.0"
@@ -299,7 +299,7 @@ if args.non_matching:
     cflags_base.append("-DNON_MATCHING")
 
 if args.standalone:
-    cflags_ipl.append("-DSTAND_ALONE_BUILD")
+    cflags_base.append("-DSTAND_ALONE_BUILD")
 
 # Warning flags
 if args.warn == "all":
@@ -691,14 +691,14 @@ config.libs = [
         ]
     ),
     IPLSection("board", [
-            Object(NonMatching, "scene/board/iplBoard.cpp"),
-            Object(NonMatching, "scene/board/iplBoardObject.cpp"),
+            Object(Equivalent,  "scene/board/iplBoard.cpp"),
+            Object(Equivalent,  "scene/board/iplBoardObject.cpp"),
             Object(Matching,    "scene/board/iplBoardSD.cpp"),
+            Object(Equivalent,  "scene/board/iplUrlProcessor.cpp"),
+            Object(Equivalent,  "scene/board/iplFocusObject.cpp"),
         ]
     ),
     IPLSection("button", [
-            Object(NonMatching, "scene/button/iplUrlProcessor.cpp"),
-            Object(NonMatching, "scene/button/iplLetterButton.cpp"),
             Object(Equivalent,  "scene/button/iplButton.cpp"),
             Object(Matching,    "scene/button/iplArrow.cpp"),
         ]

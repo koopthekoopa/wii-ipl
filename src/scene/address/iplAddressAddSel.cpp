@@ -45,7 +45,7 @@ namespace ipl {
             // Setup GUI and event
             mpEvent = new AddressAddSelEvent(this);
             mpGui = new gui::PaneManager(mpEvent, mpLayout->getDrawInfo(), NULL, NULL);
-            mpGui->createLayoutScene(*mpLayout->getLayout());
+            mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
             for (int i = 0; i < BTN_MAX; i++) {
                 mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[i]), true);
@@ -106,7 +106,7 @@ namespace ipl {
         }
 
         void AddressAddSel::draw() {
-            if (System::canDrawScene()) {
+            if (System::onDefaultDrawLayer()) {
                 utility::Graphics::setOrtho();
                 mpLayout->draw();
             }
@@ -246,7 +246,7 @@ namespace ipl {
                             // Button scene animation
                             button->reserveAnm(Button::IDANIM_SELECT_CALENDAR_EXIT);
                             button->reserveAnm(Button::IDANIM_DISAPPEAR_LEFT_BUTTON);
-                            button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_ADDRESS_BACK);
+                            button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_CMN_BACK);
                             button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_ADDRESS_REGISTER);
                             button->reserveAnm(Button::IDANIM_APPEAR_LEFT_AND_RIGHT_BUTTON);
 

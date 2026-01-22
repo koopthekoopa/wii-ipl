@@ -106,7 +106,7 @@ namespace ipl {
         }
 
         void TextWriter::draw() {
-            if (System::canDrawScene()) {
+            if (System::onDefaultDrawLayer()) {
                 System::getKeyboard()->memoDraw();
                 mpNigaoeBalloon->draw();
             }
@@ -372,7 +372,7 @@ namespace ipl {
                                     // Button animation and text
                                     button->animation(Button::IDANIM_SELECT_CALENDAR_EXIT);
                                     button->reserveAnm(Button::IDANIM_DISAPPEAR_LEFT_AND_RIGHT_BUTTON);
-                                    button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_ADDRESS_BACK);
+                                    button->reserveText(Button::TEXT_LEFT_BUTTON, MESG_CMN_BACK);
                                     button->reserveAnm(Button::IDANIM_APPEAR_LEFT_BUTTON);
                                     button->setEventHandler(NULL);
 

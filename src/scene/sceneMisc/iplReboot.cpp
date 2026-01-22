@@ -5,6 +5,7 @@
 #include "scene/channelSelect/iplChannelSelect.h"
 
 #include "scene/settingSelect/iplSettingSelectArg.h"
+#include "scene/setting/iplSetting.h"
 
 #include "iplSystem.h"
 
@@ -20,7 +21,7 @@ namespace ipl {
                         break;
                     }
                     case REBOOT_SETTINGS: {
-                        reserveSceneChange(SCENE_SETTING, (void*)6);
+                        reserveSceneChange(SCENE_SETTING, (void*)Setting::ARG_UNK_6);
                         break;
                     }
                 }

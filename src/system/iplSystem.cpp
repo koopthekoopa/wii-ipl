@@ -248,12 +248,13 @@ namespace ipl {
                 || (err == NWC24_ERR_FILE_OTHER || err == NWC24_ERR_FILE_NOEXISTS || err == NWC24_ERR_FILE_WRITE
                 || err == NWC24_ERR_FILE_READ || err == NWC24_ERR_FILE_CLOSE || err == NWC24_ERR_FILE_OPEN)) {
                     NWC24InitFiles(workData, FALSE);
-                    smArg.mbFoldersCreated = true;
+                    smArg.mbNWC24LibError = true;
                 }
             }
         }
 
         delete[] workData;
+
         smArg.mbNeedToCreateFolders = false;
     }
 

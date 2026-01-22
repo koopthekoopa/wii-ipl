@@ -166,7 +166,7 @@ CXStreamingResult CXReadUncompLZ(CXUncompContextLZ* context, const void* src, u3
     if (context->unk_0x13) {
         int a;
         if (context->unk_0x13 == 8) {
-            if ((*pSrc & CX_COMPRESSION_TYPE_MASK) != CX_COMPRESSION_TYPE_LEMPEL_ZIV) {
+            if ((*pSrc & CX_COMPRESSION_TYPE_MASK) != CX_COMPRESSION_TYPE_LZ) {
                 return CX_STREAMING_ERR_BAD_FILE_TYPE;
             }
 

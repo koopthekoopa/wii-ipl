@@ -28,7 +28,7 @@ namespace ipl {
                 virtual void                prepare();
                 virtual void                create();
 
-                virtual FaderSceneCommand    calcFadein();
+                virtual FaderSceneCommand   calcFadein();
 
                 virtual void                initCalcNormal();
                 virtual FaderSceneCommand   calcNormal();

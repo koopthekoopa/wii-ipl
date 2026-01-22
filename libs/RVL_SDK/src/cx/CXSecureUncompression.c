@@ -105,7 +105,7 @@ CXSecureResult CXSecureUncompressLZ(const void* src, u32 length, void* dst) {
 
     BOOL stat = (IN_BUFFER_AT(u8, pSrc, 0) & 0x0F) ? TRUE : FALSE;
 
-    if ((secstat & CX_COMPRESSION_TYPE_MASK) != CX_COMPRESSION_TYPE_LEMPEL_ZIV) {
+    if ((secstat & CX_COMPRESSION_TYPE_MASK) != CX_COMPRESSION_TYPE_LZ) {
         return CX_SECURE_ERR_BAD_FILE_TYPE;
     }
 

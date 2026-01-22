@@ -92,7 +92,7 @@ namespace ipl {
         GXColor color = (GXColor){ 255, 255, 255, alpha };
         nw4r::ut::Rect rect(-256.0f, 188.0f, -200.0f, 132.0f);
 
-        utility::Graphics::drawTexture(rect, texObj, color, GX_TEXCOORD1);
+        utility::Graphics::drawTexture(rect, texObj, color, 1);
     }
 
     void HomeButtonMenu::callHBM() {

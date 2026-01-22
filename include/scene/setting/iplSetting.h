@@ -5,14 +5,19 @@
 
 namespace ipl {
     namespace scene {
-        enum {
-            SETTING_SCENE_INITIAL_SETUP = 2,
-            SETTING_SCENE_UPDATE_BEFORE_SETUP = 5,
-        };
-
         FADER_SCENE_CLASS(Setting) {
             public:
-                Setting(EGG::Heap* heap, int);
+                Setting(EGG::Heap* heap, int arg);
+
+                enum {
+                    ARG_NORMAL_PAGE = 0,
+                    ARG_INTERNET_SETTING,
+                    ARG_SETUP,
+                    ARG_UPDATE,
+                    ARG_INTERNET_PAGE,
+                    ARG_UNK_5,
+                    ARG_UNK_6,
+                };
 
             private:
                 u8  unk_0x58[0xB68];

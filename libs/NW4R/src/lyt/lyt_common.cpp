@@ -228,11 +228,11 @@ namespace nw4r {
                 GXSetLineWidth(6, GX_TO_ZERO);
 
                 GXBegin(GX_LINESTRIP, GX_VTXFMT0, 5); {
-                    GXPosition2f32(pos.x,               pos.y            );
-                    GXPosition2f32(pos.x + size.width,  pos.y            );
+                    GXPosition2f32(pos.x,               pos.y              );
+                    GXPosition2f32(pos.x + size.width,  pos.y              );
                     GXPosition2f32(pos.x + size.width,  pos.y + size.height);
                     GXPosition2f32(pos.x,               pos.y + size.height);
-                    GXPosition2f32(pos.x,               pos.y            );
+                    GXPosition2f32(pos.x,               pos.y              );
                 } GXEnd();
             }
 
@@ -244,7 +244,7 @@ namespace nw4r {
 
                 TPLDescriptor* tdp = TPLGet(pal, id);
 
-                GXBool mipMap = tdp->textureHeader->minLOD != tdp->textureHeader->maxLOD ? 1 : 0;
+                GXBool mipMap = tdp->textureHeader->minLOD != tdp->textureHeader->maxLOD ? GX_TRUE : GX_FALSE;
 
                 if (tdp->CLUTHeader != NULL) {
                     GXInitTexObjCI(to, tdp->textureHeader->data,

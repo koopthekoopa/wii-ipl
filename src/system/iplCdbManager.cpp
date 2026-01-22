@@ -41,14 +41,14 @@ namespace ipl {
         }
 
         BOOL Manager::createNewRecord(const char* recordName, const char* recordFileType, const OSCalendarTime* dateTime, u32* gameCode, u16* makerCode, 
-        const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& friendAddr, u16 friendType, u16 replyFlag, 
+        const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& addr, u16 addrType, u16 noReplyFlag, 
         const wchar_t* titleText, const wchar_t* bodyText, const void* faceData, 
         const void** attachData, u32* attachSize, RBRAttachmentType* attachType) {
             BOOL result = FALSE;
             u32 bufferSize = 0;
 
             // Create RBR buffer
-            u8* buffer = makeBuffer(recordPos, recordFlags, friendAddr, friendType, replyFlag, 
+            u8* buffer = makeBuffer(recordPos, recordFlags, addr, addrType, noReplyFlag, 
                                     titleText, bodyText, faceData, 
                                     attachData, attachSize, attachType, 
                                     &bufferSize);
@@ -65,7 +65,7 @@ namespace ipl {
             return result;
         }
 
-        BOOL Manager::writeRecord(CDBRecord* record, const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& friendAddr, u16 friendType, u16 replyFlag,
+        BOOL Manager::writeRecord(CDBRecord* record, const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& addr, u16 addrType, u16 noReplyFlag,
         const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
         const void** attachData, u32* attachSize, RBRAttachmentType* attachType) {
             RBRHeader   rbrHeader;
@@ -84,11 +84,11 @@ namespace ipl {
             rbrHeader.magic = RBR_MAGIC;
             rbrHeader.xPos = recordPos.x;
             rbrHeader.yPos = recordPos.y;
-            rbrHeader.flags = recordFlags;
+            rbrHeader.flags.data = recordFlags;
             rbrHeader.time = OSGetTime();
-            rbrHeader.friendAddr = friendAddr;
-            rbrHeader.friendType = friendType;
-            rbrHeader.replyFlag = replyFlag;
+            rbrHeader.addr = addr;
+            rbrHeader.addrType = addrType;
+            rbrHeader.noReplyFlag = noReplyFlag;
 
             // Set offset after header
             rbrCurOffset = sizeof(RBRHeader);
@@ -121,9 +121,9 @@ namespace ipl {
             // Get type, offset and size of attachments
             for (int i = 0; i < RBR_ATTACHMENT_MAX; i++) {
                 if (attachData[i] != NULL) {
-                    rbrHeader.attachments[i].type = attachType[i];
-                    rbrHeader.attachments[i].offset = rbrCurOffset;
-                    rbrHeader.attachments[i].size = attachSize[i];
+                    rbrHeader.attach[i].type = attachType[i];
+                    rbrHeader.attach[i].offset = rbrCurOffset;
+                    rbrHeader.attach[i].size = attachSize[i];
                     rbrCurOffset += OSRoundUp32B(attachSize[i]);
                 }
             }
@@ -134,7 +134,7 @@ namespace ipl {
             // The current offset is the size of the board record
             rbrSize = rbrCurOffset;
 
-            u8* buffer = new (System::getMailWorkHeap(), DEFAULT_ALIGN) u8[rbrSize];
+            u8* buffer = new(System::getMailWorkHeap(), DEFAULT_ALIGN) u8[rbrSize];
 
             if (buffer != NULL) {
                 u8* rbrBuffer = &buffer[0];
@@ -157,7 +157,7 @@ namespace ipl {
                 // Copy attachments
                 for (int i = 0; i < RBR_ATTACHMENT_MAX; i++) {
                     if (attachData[i] != NULL) {
-                        memcpy(&rbrBuffer[rbrHeader.attachments[i].offset], attachData[i], attachSize[i]);
+                        memcpy(&rbrBuffer[rbrHeader.attach[i].offset], attachData[i], attachSize[i]);
                     }
                 }
 
@@ -179,7 +179,7 @@ namespace ipl {
             return result;
         }
 
-        u8* Manager::makeBuffer(const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& friendAddr, u16 friendType, u16 replyFlag,
+        u8* Manager::makeBuffer(const math::VEC2& recordPos, u32 recordFlags, const NWC24FriendAddr& addr, u16 addrType, u16 noReplyFlag,
         const wchar_t* titleText, const wchar_t* bodyText, const void* faceData,
         const void** attachData, u32* attachSize, RBRAttachmentType* attachType,
         u32* bufferSize) {
@@ -197,11 +197,11 @@ namespace ipl {
             rbrHeader.magic = RBR_MAGIC;
             rbrHeader.xPos = recordPos.x;
             rbrHeader.yPos = recordPos.y;
-            rbrHeader.flags = recordFlags;
+            rbrHeader.flags.data = recordFlags;
             rbrHeader.time = OSGetTime();
-            rbrHeader.friendAddr = friendAddr;
-            rbrHeader.friendType = friendType;
-            rbrHeader.replyFlag = replyFlag;
+            rbrHeader.addr = addr;
+            rbrHeader.addrType = addrType;
+            rbrHeader.noReplyFlag = noReplyFlag;
 
             // Set offset after header
             rbrCurOffset = sizeof(RBRHeader);
@@ -234,9 +234,9 @@ namespace ipl {
             // Get type, offset and size of attachments
             for (int i = 0; i < RBR_ATTACHMENT_MAX; i++) {
                 if (attachData[i] != NULL) {
-                    rbrHeader.attachments[i].type = attachType[i];
-                    rbrHeader.attachments[i].offset = rbrCurOffset;
-                    rbrHeader.attachments[i].size = attachSize[i];
+                    rbrHeader.attach[i].type = attachType[i];
+                    rbrHeader.attach[i].offset = rbrCurOffset;
+                    rbrHeader.attach[i].size = attachSize[i];
                     rbrCurOffset += OSRoundUp32B(attachSize[i]);
                 }
             }
@@ -250,7 +250,7 @@ namespace ipl {
             // Add up the board record size with the record attribute to add up the total buffer size
             *bufferSize = rbrSize + CDB_RECORD_BUFFER_SIZE;
 
-            u8* buffer = new (System::getMailWorkHeap(), DEFAULT_ALIGN) u8[rbrSize + CDB_RECORD_BUFFER_SIZE];
+            u8* buffer = new(System::getMailWorkHeap(), DEFAULT_ALIGN) u8[rbrSize + CDB_RECORD_BUFFER_SIZE];
 
             if (buffer == NULL) {
                 return NULL;
@@ -278,7 +278,7 @@ namespace ipl {
                 // Copy attachments
                 for (int i = 0; i < RBR_ATTACHMENT_MAX; i++) {
                     if (attachData[i] != NULL) {
-                        memcpy(&rbrBuffer[rbrHeader.attachments[i].offset], attachData[i], attachSize[i]);
+                        memcpy(&rbrBuffer[rbrHeader.attach[i].offset], attachData[i], attachSize[i]);
                     }
                 }
 
