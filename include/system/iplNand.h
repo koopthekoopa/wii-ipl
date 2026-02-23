@@ -65,8 +65,8 @@ namespace ipl {
                 /** @brief Writes the file contents. */
                 virtual void    write();                                                // 0x10
 
-                virtual bool    isFinished() { return mbDoneTask; }                     // 0x14
-                virtual int     checkData() { return mResult; }                         // 0x18
+                virtual bool    isFinished()            { return mbDoneTask; }          // 0x14
+                virtual int     checkData()             { return mResult; }             // 0x18
                 virtual bool    isFatalError();                                         // 0x1C
 
                 u8*             getBuffer() const       { return mpBuffer; }

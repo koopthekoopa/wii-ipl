@@ -35,6 +35,8 @@ namespace ipl {
                 void            setMinFrame(f32 value)      { mMinFrame = value; }
                 void            setMinFrame(u32 value)      { mMinFrame = value; }
                 f32             getMinFrame() const         { return mMinFrame; }
+
+                f32             getLength() const           { return mMaxFrame - mMinFrame; }
                 
                 void            setCurrentFrame(f32 value)  { mFrame = value; }
                 f32             getCurrentFrame() const     { return mFrame; }

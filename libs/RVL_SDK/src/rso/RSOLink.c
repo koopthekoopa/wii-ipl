@@ -127,7 +127,7 @@ static void RSOResolveImportSymbol(RSOObjectHeader* rsoImp, int index, void* add
 static void RSOUnresolveImportSymbol(RSOObjectHeader* rsoImp, int index);
 static void RSOUnresolveImportSymbolAll(RSOObjectHeader* rso);
 
-static int FindExportIndex(RSOObjectHeader* rso, char* name);
+static int FindExportIndex(RSOObjectHeader* rso, const char* name);
 
 static void RSORelocate(RSORel* rel, int index, u32 offset);
 static void RSORelocateImportSymbol(RSOObjectHeader* rso, RSOImportTable* impTab, int impIndex);
@@ -435,7 +435,7 @@ void RSOUnLink(RSOObjectHeader* rsoImp, RSOObjectHeader* rsoExp) {
     }
 }
 
-RSOHash RSOGetHash(char* symbolname) {
+RSOHash RSOGetHash(const char* symbolname) {
     RSOHash h = 0x00000000;
     RSOHash g;
 
@@ -533,7 +533,7 @@ void* RSOGetExportSymbolAddr(RSOObjectHeader* rso, int index) {
     return (void*)(expSec->offset + expTab->value);
 }
 
-static int FindExportIndex(RSOObjectHeader* rso, char* name) {
+static int FindExportIndex(RSOObjectHeader* rso, const char* name) {
     RSOHash a_hash = RSOGetHash(name);
     int i;
     char* expName;
@@ -617,7 +617,7 @@ static int FindExportIndex(RSOObjectHeader* rso, char* name) {
     return -1;
 }
 
-void* RSOFindExportSymbolAddr(RSOObjectHeader* rso, char* name) {
+void* RSOFindExportSymbolAddr(RSOObjectHeader* rso, const char* name) {
     int a_idx = FindExportIndex(rso, name);
 
     if (a_idx == -1) {
@@ -627,7 +627,7 @@ void* RSOFindExportSymbolAddr(RSOObjectHeader* rso, char* name) {
     return RSOGetExportSymbolAddr(rso, a_idx);
 }
 
-RSOExportTable* RSOFindExportSymbol(RSOObjectHeader* rso, char* name) {
+RSOExportTable* RSOFindExportSymbol(RSOObjectHeader* rso, const char* name) {
     int a_idx = FindExportIndex(rso, name);
 
     if (a_idx == -1) {

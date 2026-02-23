@@ -44,6 +44,11 @@ namespace ipl {
             SECONARY_TYPE_NORMAL = 0,
             SECONARY_TYPE_SYSTEM,
         };
+
+        enum {
+            SCENE_ID_WAD_CHANNEL = 0x0E, // ?
+            SCENE_ID_DISK_CHANNEL = 0x0F,
+        };
         
         typedef struct SChannelInfo {
             inline void clear() {
@@ -51,7 +56,7 @@ namespace ipl {
                 secondaryType = 0;
                 reserved[0] = 0;
                 reserved[1] = 0;
-                flags = 0;
+                sceneID = 0;
                 titleType = 0;
                 titleCode = 0;
             }
@@ -60,7 +65,7 @@ namespace ipl {
 
             u8          reserved[2];    // 0x02
 
-            s32         flags;          // 0x04
+            s32         sceneID;        // 0x04
 
             union {
                 struct {
@@ -246,8 +251,20 @@ namespace ipl {
 
                 void                makeLoadOrderList(int* list) const;
 
+                SEntry&             getChannel(int page, int index) { return mChannels[page][index]; }
+
                 ESTitleId           getTitleID(int page, int index) const;
                 u16*                getTitleName(int page, int index, int nameIndex) const;
+
+                /* SEntry */
+                bool                hasLoadedBnr(int page, int index) const { return mChannels[page][index].loadedBnr; }
+                int                 getSceneID(int page, int index) const { return mChannels[page][index].loadedBnr ? mChannels[page][index].info.sceneID : 0; }
+
+                /* SMetaBlockHeader */
+                u32                 getMetaHdr_IconRSOIdx(int page, int index) const    { return mChannels[page][index].loadedBnr ? mChannels[page][index].metaHdr->blockHdr.iconRSOIdx : 0; }
+                u32                 getMetaHdr_IconCSIdx(int page, int index) const     { return mChannels[page][index].loadedBnr ? mChannels[page][index].metaHdr->blockHdr.iconCSIdx : 0; }
+                u32                 getMetaHdr_BannerRSOIdx(int page, int index) const  { return mChannels[page][index].loadedBnr ? mChannels[page][index].metaHdr->blockHdr.bannerRSOIdx : 0; }
+                u32                 getMetaHdr_BannerCSIdx(int page, int index) const   { return mChannels[page][index].loadedBnr ? mChannels[page][index].metaHdr->blockHdr.bannerCSIdx : 0; }
 
                 int                 updateInitState();
                 int                 updateWaitSCFlush();
@@ -280,8 +297,6 @@ namespace ipl {
                 nand::SharedFile*   fn_8133A924(EGG::Heap* heap, ESTitleId titleId);
                 void                fn_8133A9F0();
                 void                fn_8133AA50(ESTitleId titleId);
-
-                SEntry&             getChannel(int page, int index) { return mChannels[page][index]; }
 
                 BOOL                isReady()   { return mState == FINISH; }
 

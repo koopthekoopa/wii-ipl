@@ -99,7 +99,7 @@ RSOExportTable* RSOGetExport(RSOSymbolHeader* exp);
 int             RSOLink(RSOObjectHeader* rsoImp, RSOObjectHeader* rsoExp);
 void            RSOUnLink(RSOObjectHeader* rsoImp, RSOObjectHeader* rsoExp);
 
-RSOHash         RSOGetHash(char* symbolname);
+RSOHash         RSOGetHash(const char* symbolname);
 
 int             RSOGetNumImportSymbols(RSOSymbolHeader* imp);
 int             RSOGetNumImportSymbolsUnresolved(RSOObjectHeader* rso);
@@ -112,13 +112,13 @@ int             RSOGetNumExportSymbols(RSOSymbolHeader* exp);
 char*           RSOGetExportSymbolName(RSOSymbolHeader* exp, int index);
 void*           RSOGetExportSymbolAddr(RSOObjectHeader* rso, int index);
 
-void*           RSOFindExportSymbolAddr(RSOObjectHeader* rso, char* name);
-RSOExportTable* RSOFindExportSymbol(RSOObjectHeader* rso, char* name);
+void*           RSOFindExportSymbolAddr(RSOObjectHeader* rso, const char* name);
+RSOExportTable* RSOFindExportSymbol(RSOObjectHeader* rso, const char* name);
 
-BOOL            RSOListInit(void* i_staticRso);
+BOOL            RSOListInit(void* staticRso);
 
-BOOL            RSOLinkList(void* i_newRso, void* i_bss);
-BOOL            RSOUnLinkList(void* i_oldRso);
+BOOL            RSOLinkList(void* newRso, void* bss);
+BOOL            RSOUnLinkList(void* oldRso);
 
 #ifdef __cplusplus
 }

@@ -430,13 +430,13 @@ namespace ipl {
             mpHeap->destroy();
         }
 
-        Object* Object::create(EGG::Heap* heap, u32 unk0, nand::LayoutFile* file, const char* directory, const char* fileName) {
-            EGG::ExpHeap* expHeap = EGG::ExpHeap::create(unk0, heap, MEM_HEAP_OPT_DEBUG_FILL);
+        Object* Object::create(EGG::Heap* heap, u32 allocSize, nand::LayoutFile* file, const char* directory, const char* fileName) {
+            EGG::ExpHeap* expHeap = EGG::ExpHeap::create(allocSize, heap, MEM_HEAP_OPT_DEBUG_FILL);
             return new(expHeap, 4) Object(expHeap, file, directory, fileName);
         }
 
-        Object* Object::create(EGG::Heap* heap, u32 unk0, void* buffer, const char* directory, const char* fileName) {
-            EGG::ExpHeap* expHeap = EGG::ExpHeap::create(unk0, heap, MEM_HEAP_OPT_DEBUG_FILL);
+        Object* Object::create(EGG::Heap* heap, u32 allocSize, void* buffer, const char* directory, const char* fileName) {
+            EGG::ExpHeap* expHeap = EGG::ExpHeap::create(allocSize, heap, MEM_HEAP_OPT_DEBUG_FILL);
             return new(expHeap, 4) Object(expHeap, buffer, directory, fileName);
         }
 

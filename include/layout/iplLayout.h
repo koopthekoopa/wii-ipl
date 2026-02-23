@@ -143,8 +143,8 @@ namespace ipl {
                 void                    adjustHeap();
                 void                    destroyHeap();
                 
-                static Object*          create(EGG::Heap* heap, u32 unk0, nand::LayoutFile* file, const char* directory, const char* fileName);
-                static Object*          create(EGG::Heap* heap, u32 unk0, void* buffer, const char* directory, const char* fileName);
+                static Object*          create(EGG::Heap* heap, u32 allocSize, nand::LayoutFile* file, const char* directory, const char* fileName);
+                static Object*          create(EGG::Heap* heap, u32 allocSize, void* buffer, const char* directory, const char* fileName);
 
                 /** @brief Prepare the camera for the layout. */
                 static void             setCamera()                                                 { utility::Graphics::setOrtho(); }
@@ -191,10 +191,10 @@ namespace ipl {
                 void                    setVisible(const char* paneName, bool flag)                 { layout::Wrapper::SetVisible(FindPaneByName(paneName), flag); }
 
                 nw4r::lyt::Pane*        GetRootPane()                                               { return mLayout.GetRootPane(); }
-                nw4r::lyt::Pane*        FindPaneByName(const char* findName)                        { return GetRootPane()->FindPaneByName(findName); }
+                nw4r::lyt::Group*       FindGroupByName(const char* findName) const                 { return mLayout.GetGroupContainer()->FindGroupByName(findName); }
+                nw4r::lyt::GroupList&   GetGroupList() const                                        { return mLayout.GetGroupContainer()->GetGroupList(); }
 
-                void                    SetTranslate(const math::VEC3& translate)                   { SetTranslate(translate); }
-                void                    SetTranslate(const math::VEC2& translate)                   { SetTranslate(math::VEC3(translate.x, translate.y, 0.0f)); }
+                nw4r::lyt::Pane*        FindPaneByName(const char* findName)                        { return GetRootPane()->FindPaneByName(findName); }
 
             private:
                 void                    init_(const char* fileName);

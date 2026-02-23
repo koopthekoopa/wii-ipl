@@ -34,7 +34,7 @@ namespace nw4r {
 
                 ut::LinkListNode mLink; // 0x04
                 
-            protected:
+            private:
                 PaneLinkList    mPaneLinkList;      // 0x0C
                 char            mName[16];          // 0x18
                 

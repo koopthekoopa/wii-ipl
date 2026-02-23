@@ -10,6 +10,8 @@
 #include "system/iplChannelRsoThread.h"
 #include "system/iplNand.h"
 
+#include "layout/iplLayout.h"
+
 #include "channelScript/CHANSVm.h"
 
 namespace ipl {
@@ -18,17 +20,13 @@ namespace ipl {
             public:
                 class CSData {
                     public:
-                        undefined4  unk_0x00;
-                        undefined4  unk_0x04;
-                        undefined4  unk_0x08;
-                        undefined4  unk_0x0C;
-                        undefined4  unk_0x10;
-                        u32         nwc24AppId; // 0x14
-                        bool        unk_0x18;
-                        undefined   unk_0x19;
-                        undefined   unk_0x1A;
-                        undefined   unk_0x1B;
-                        undefined4  unk_0x1C;
+                        EGG::ExpHeap*       unk_0x00;
+                        layout::Object*     unk_0x04;
+                        layout::Animator**  unk_0x08;
+                        u64                 unk_0x10;
+                        u8                  unk_0x18;
+                        u8                  unk_0x19;
+                        u8                  unk_0x1A;
                 };
 
                 ChannelScriptManager();

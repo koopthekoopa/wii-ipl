@@ -50,27 +50,29 @@ namespace nw4r {
 
                 virtual void            SetAnimationEnable(AnimTransform* animTrans, bool bEnable);
 
-                const char*             GetName() const             { return mName; }
-                GXColorS10              GetTevColor(u32 idx) const  { return mTevCols[idx]; }
+                const char*             GetName() const                             { return mName; }
 
-                u8                      GetTextureCap() const       { return mGXMemCap.texMap; }
+                GXColorS10              GetTevColor(u32 idx) const                  { return mTevCols[idx]; }
+                void                    SetTevColor(u32 idx, const GXColorS10& val) { mTevCols[idx] = val; }
 
-                u8                      GetTexSRTCap() const        { return mGXMemCap.texSRT; }
+                u8                      GetTextureCap() const                       { return mGXMemCap.texMap; }
 
-                u8                      GetTexCoordGenCap() const   { return mGXMemCap.texCoordGen; }
+                u8                      GetTexSRTCap() const                        { return mGXMemCap.texSRT; }
 
-                u8                      GetIndTexSRTCap() const     { return mGXMemCap.indSRT; }
+                u8                      GetTexCoordGenCap() const                   { return mGXMemCap.texCoordGen; }
 
-                bool                    IsTevSwapCap() const        { return static_cast<bool>(mGXMemCap.tevSwap); }
-                bool                    IsBlendModeCap() const      { return static_cast<bool>(mGXMemCap.blendMode); }
-                bool                    IsAlphaCompareCap() const   { return static_cast<bool>(mGXMemCap.alpComp); }
+                u8                      GetIndTexSRTCap() const                     { return mGXMemCap.indSRT; }
 
-                bool                    IsMatColorCap() const       { return static_cast<bool>(mGXMemCap.matCol); }
-                bool                    IsChanCtrlCap() const       { return static_cast<bool>(mGXMemCap.chanCtrl); }
+                bool                    IsTevSwapCap() const                        { return static_cast<bool>(mGXMemCap.tevSwap); }
+                bool                    IsBlendModeCap() const                      { return static_cast<bool>(mGXMemCap.blendMode); }
+                bool                    IsAlphaCompareCap() const                   { return static_cast<bool>(mGXMemCap.alpComp); }
 
-                u8                      GetTextureNum() const       { return mGXMemNum.texMap; }
+                bool                    IsMatColorCap() const                       { return static_cast<bool>(mGXMemCap.matCol); }
+                bool                    IsChanCtrlCap() const                       { return static_cast<bool>(mGXMemCap.chanCtrl); }
 
-                bool                    IsUserAllocated() const     { return mbUserAllocated; }
+                u8                      GetTextureNum() const                       { return mGXMemNum.texMap; }
+
+                bool                    IsUserAllocated() const                     { return mbUserAllocated; }
 
                 void                    SetName(const char* name);
 

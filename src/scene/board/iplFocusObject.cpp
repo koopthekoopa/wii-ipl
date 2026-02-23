@@ -10,7 +10,7 @@
 
 #include <revolution/enc.h>
 #include <revolution/cx.h>
-#pragma sym on
+
 namespace ipl {
     namespace scene {
         const char* focus_object::mAnimNames[BoardObject::TYPE_MAX][1+ANIM_ARROW_MAX] = {
@@ -25,7 +25,7 @@ namespace ipl {
                 "my_Memo_a_Appear.brlan",
                 "my_Memo_a_Lost.brlan",
                 "my_Memo_a_HDActionStart.brlan",
-               "my_Memo_a_HDActionEnd.brlan"
+                "my_Memo_a_HDActionEnd.brlan"
             },
             {
                 "my_LetterL.brlyt",
@@ -38,7 +38,7 @@ namespace ipl {
                 "my_LetterL_Appear.brlan",
                 "my_LetterL_Lost.brlan",
                 "my_LetterL_HDActionStart.brlan",
-               "my_LetterL_HDActionEnd.brlan",
+                "my_LetterL_HDActionEnd.brlan",
             },
             {
                 "my_Memo_a.brlyt",
@@ -51,7 +51,7 @@ namespace ipl {
                 "my_Memo_a_Appear.brlan",
                 "my_Memo_a_Lost.brlan",
                 "my_Memo_a_HDActionStart.brlan",
-               "my_Memo_a_HDActionEnd.brlan",
+                "my_Memo_a_HDActionEnd.brlan",
             }
         };
 

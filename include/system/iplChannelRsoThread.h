@@ -7,7 +7,9 @@
 
 namespace ipl {
     namespace channel {
-        typedef void (*CalcFunc)();
+        typedef void (*CreateFunc)(void*);
+        typedef BOOL (*CalcFunc)(int);
+        typedef void (*ThreadCalcFunc)();
         
         class RsoThread : public utility::ut_thread {
             public:
@@ -19,7 +21,7 @@ namespace ipl {
 
                 void            start();
                 /** @param func The new loop function. */
-                void            setCalcFunc(CalcFunc func);
+                void            setCalcFunc(ThreadCalcFunc func);
 
                 OSMessageQueue* getCalcQueue()  { return &mCalcQueue; }
             
@@ -28,7 +30,7 @@ namespace ipl {
                 
                 bool            mbStarted;      // 0x330
 
-                CalcFunc        mpCalcFunc;     // 0x334
+                ThreadCalcFunc  mpCalcFunc;     // 0x334
                 OSMessageQueue  mCalcQueue;     // 0x338
                 OSMessage       mCalcMsg;       // 0x358
         };

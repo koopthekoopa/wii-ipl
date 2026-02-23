@@ -28,84 +28,56 @@ namespace ipl {
         static const u32 scLangLookup[SC_PRODUCT_AREA_MAX][16] = {
             // Japan
             {
-                SC_LANG_JAPANESE, -1,
-                0, 0, 0, 0,
-                0, 0, 0, 0,
-                0, 0, 0, 0,
-                0, 0
+                SC_LANG_JAPANESE,
+                -1
             },
             // USA
             {
-                SC_LANG_ENGLISH, SC_LANG_FRENCH, SC_LANG_SPANISH, -1,
-                0, 0, 0, 0,
-                0, 0, 0, 0,
-                0, 0, 0, 0
+                SC_LANG_ENGLISH,
+                SC_LANG_FRENCH,
+                SC_LANG_SPANISH,
+                -1
             },
             // Europe
             {
-                SC_LANG_ENGLISH, SC_LANG_FRENCH, SC_LANG_GERMAN, SC_LANG_SPANISH,
-                SC_LANG_ITALIAN, SC_LANG_DUTCH, -1,
-                0, 0, 0, 0,
-                0, 0, 0, 0,
-                0
+                SC_LANG_ENGLISH,
+                SC_LANG_FRENCH,
+                SC_LANG_GERMAN,
+                SC_LANG_SPANISH,
+                SC_LANG_ITALIAN,
+                SC_LANG_DUTCH,
+                -1
             },
             {
-                -1, 0, 0, 0,
-                 0, 0, 0, 0,
-                 0, 0, 0, 0,
-                 0, 0, 0, 0
+                -1
             },
             {
-                -1, 0, 0, 0,
-                 0, 0, 0, 0,
-                 0, 0, 0, 0,
-                 0, 0, 0, 0
+                -1
             },
             {
-                -1, 0, 0, 0,
-                 0, 0, 0, 0,
-                 0, 0, 0, 0,
-                 0, 0, 0, 0
+                -1
             },
             // Korean
             {
-                SC_LANG_KOREAN, -1,
-                0, 0, 0, 0,
-                0, 0, 0, 0,
-                0, 0, 0, 0,
-                0, 0
+                SC_LANG_KOREAN,
+                -1
             },
             {
-                -1, 0, 0, 0,
-                 0, 0, 0, 0,
-                 0, 0, 0, 0,
-                 0, 0, 0, 0
+                -1
             },
             {
-                -1, 0, 0, 0,
-                 0, 0, 0, 0,
-                 0, 0, 0, 0,
-                 0, 0, 0, 0
+                -1
             },
             {
-                -1, 0, 0, 0,
-                 0, 0, 0, 0,
-                 0, 0, 0, 0,
-                 0, 0, 0, 0
+                -1
             },
             {
-                -1, 0, 0, 0,
-                 0, 0, 0, 0,
-                 0, 0, 0, 0,
-                 0, 0, 0, 0
+                -1
             },
             // China
             {
-                SC_PRODUCT_AREA_HKG, -1,
-                0, 0, 0, 0,
-                0, 0, 0, 0,
-                0, 0, 0, 0,
-                0, 0
+                SC_PRODUCT_AREA_HKG,
+                -1
             },
         };
 
@@ -593,7 +565,7 @@ namespace ipl {
             *page = *index = 0;
             for (int i = 0; i < MAX_CHANNEL_PAGE; i++) {
                 for (int j = 0; j < MAX_CHANNEL_INDEX; j++) {
-                    if (mChannels[i][j].info.flags == 0x0F) {
+                    if (mChannels[i][j].info.sceneID == SCENE_ID_DISK_CHANNEL) {
                         *page = i;
                         *index = j;
                         return;
@@ -705,7 +677,7 @@ namespace ipl {
 
             // It is a normal channel
             mTmpChannel.info.primaryType = PRIMARY_TYPE_CHANNEL;
-            mTmpChannel.info.flags = 0x0E;
+            mTmpChannel.info.sceneID = SCENE_ID_WAD_CHANNEL;
 
             s32 ret = utility::ESMisc::GetValidTicketIndex(System::getMem2Sys(), titleId);
             if (ret == -1) {
@@ -794,7 +766,7 @@ namespace ipl {
             else if (info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 // Load disk banner
                 mChannels[page][index].loadedBnr = true;
-                if (mChannels[page][index].info.flags == 0x0F) {
+                if (mChannels[page][index].info.sceneID == SCENE_ID_DISK_CHANNEL) {
                     if (mChannels[page][index].metaHdr == NULL) {
                         mChannels[page][index].metaHdr = &mDiskChanMetaHdr;
                     }

@@ -32,11 +32,9 @@ namespace ipl {
                 Create(mpStack, STACK_SIZE, 17);
             }
         }
-        void RsoThread::setCalcFunc(CalcFunc func) {
+        void RsoThread::setCalcFunc(ThreadCalcFunc func) {
             mpCalcFunc = func;
             OSInitMessageQueue(&mCalcQueue, &mCalcMsg, 1);
         }
     }
 }
-
-
