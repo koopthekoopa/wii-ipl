@@ -85,7 +85,7 @@ namespace ipl {
         BOOL Parental::checkPass(const char* pass) {
             int result = strncmp(mStackPass, pass, SC_PARENTAL_PASSWORD_LENGTH);
             if (result == 0) {
-                memcpy(m_sc.info.password, pass, ARRSIZE(m_sc.info.password));
+                memcpy(m_sc.info.password, pass, ARRAY_LENGTH(m_sc.info.password));
                 return TRUE;
             }
             else {
@@ -94,7 +94,7 @@ namespace ipl {
         }
 
         BOOL Parental::_checkPass(const char* pass) {
-            return strncmp(m_sc.info.password, pass, ARRSIZE(m_sc.info.password)) == 0;
+            return strncmp(m_sc.info.password, pass, ARRAY_LENGTH(m_sc.info.password)) == 0;
         }
 
         BOOL Parental::judgePass(const char* pass) {
@@ -298,7 +298,7 @@ namespace ipl {
 
             // Create request (confirmation) number
             u32 macnum = ncd::NCDSetting::getMacNum();
-            snprintf(mRequestNum, ARRSIZE(mRequestNum), "%08u", macnum);
+            snprintf(mRequestNum, ARRAY_LENGTH(mRequestNum), "%08u", macnum);
             OSReport("macnum:%u  :%s\n", macnum, mRequestNum);
 
             OSCalendarTime dateTime;

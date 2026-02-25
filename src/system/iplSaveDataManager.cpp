@@ -164,7 +164,7 @@ namespace ipl {
             int i, page;
             for (page = 0; page < MAX_CHANNEL_PAGE; page++) {
                 for (i = 0; i < MAX_CHANNEL_INDEX; i++) {
-                    if (mData.chanInfo[page][i].primaryType != channel::PRIMARY_TYPE_NONE && mData.chanInfo[page][i].flags != 0) {
+                    if (mData.chanInfo[page][i].primaryType != channel::PRIMARY_TYPE_NONE && mData.chanInfo[page][i].sceneID != 0) {
                         count++;
                     }
                 }

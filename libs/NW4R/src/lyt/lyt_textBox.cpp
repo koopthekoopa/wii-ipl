@@ -207,7 +207,7 @@ namespace nw4r {
                 SetString(pBlockText, 0, resStrLen);
             }
 
-            for (int i = 0; i < (int)ARRSIZE(mTextColors); i++) {
+            for (int i = 0; i < (int)ARRAY_LENGTH(mTextColors); i++) {
                 mTextColors[i] = pBlock->textCols[i];
             }
 

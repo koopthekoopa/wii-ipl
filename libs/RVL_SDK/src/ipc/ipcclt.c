@@ -58,7 +58,7 @@ static inline void __ipcSendRequest() {
     }
 
     IPC_WRITE_REG(HW_IPC_PPCMSG, OSCachedToPhysical(rpc));
-    __responses.rptr = (__responses.rptr + 1) % ARRSIZE(__responses.buf);
+    __responses.rptr = (__responses.rptr + 1) % ARRAY_LENGTH(__responses.buf);
     __responses.rcount++;
     __mailboxAck--;
 
@@ -248,12 +248,12 @@ static inline IOSRpcRequest* ipcAllocReq() {
 static inline IOSError __ipcQueueRequest(IOSResourceRequest* req) {
     IOSError ret = IPC_RESULT_OK;
 
-    if (DIFFERENTIATE(__responses.wcount, __responses.rcount) >= ARRSIZE(__responses.buf)) {
+    if (DIFFERENTIATE(__responses.wcount, __responses.rcount) >= ARRAY_LENGTH(__responses.buf)) {
         ret = IPL_RESULT_FULLQUEUE;
     }
     else {
         __responses.buf[__responses.wptr] = req;
-        __responses.wptr = (__responses.wptr + 1) % ARRSIZE(__responses.buf);
+        __responses.wptr = (__responses.wptr + 1) % ARRAY_LENGTH(__responses.buf);
         __responses.wcount++;
         IPCiProfQueueReq(req, (s32)req->handle);
     }

@@ -19,8 +19,11 @@ namespace ipl {
             }
 
             CHANSVmDefineMethod(is_dltask_registered) {
-                BOOL appDlEnable = FALSE;
-                u32 appId = System::getCSManager()->getData().nwc24AppId;
+                u32 appId;
+                BOOL appDlEnable;
+
+                appDlEnable = FALSE;
+                appId = ES_TITLE_CODE(System::getCSManager()->getData().unk_0x10);
 
                 nwc24::Manager* nwc24Manager = System::getNwc24Manager();
                 if (nwc24Manager != NULL) {

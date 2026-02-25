@@ -8,6 +8,8 @@
 #include <revolution/os/OSThread.h>
 #include <revolution/nand.h>
 
+#include "bt_types.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -141,6 +143,59 @@ void    __SCSetDirtyFlag();
 void    __SCClearDirtyFlag();
 u8*     __SCGetConfBuf();
 u32     __SCGetConfBufSize();
+
+/* SYSCONF BTE */
+
+#define SC_MAX_DEV_ENTRY_FOR_STD    10
+#define SC_MAX_DEV_ENTRY_FOR_SMP    6
+#define SC_MAX_DEV_ENTRY            (SC_MAX_DEV_ENTRY_FOR_STD + SC_MAX_DEV_ENTRY_FOR_SMP)
+
+typedef struct SCBtDeviceInfo_ {
+    u8          devName[20];    // 0x00
+    u8          at_0x14[1];
+    u8          unk_0x15[0xB];
+    LINK_KEY    linkKey;        // 0x20
+    u8          unk_0x30[0x10];
+} SCBtDeviceInfo_;
+
+typedef struct SCBtDeviceInfo {
+    BD_ADDR         addr;   // 0x00
+    SCBtDeviceInfo_ info;   // 0x06
+} SCBtDeviceInfo;
+
+typedef struct SCBtDeviceInfoArray {
+    u8              numRegist;                  // 0x00
+    //SCBtDeviceInfo  devices[SC_MAX_DEV_ENTRY];  // 0x01
+    union {
+        struct {
+            SCBtDeviceInfo regist[SC_MAX_DEV_ENTRY_FOR_STD]; // at 0x1
+            SCBtDeviceInfo active[SC_MAX_DEV_ENTRY_FOR_SMP]; // at 0x2BD
+        };
+
+        SCBtDeviceInfo devices[SC_MAX_DEV_ENTRY];
+    };
+} SCBtDeviceInfoArray;
+
+BOOL    SCGetBtDeviceInfoArray(SCBtDeviceInfoArray* devInfo);
+BOOL    SCSetBtDeviceInfoArray(SCBtDeviceInfoArray* devInfo);
+
+typedef struct SCBtCmpDevInfo {
+    BD_ADDR     addr;       // 0x00
+    u8          name[64];   // 0x06
+    LINK_KEY    linkKey;    // 0x30
+} SCBtCmpDevInfo;
+
+typedef struct SCBtCmpDevInfoArray {
+    u8              numRegist;                          // 0x00
+    SCBtCmpDevInfo  devices[SC_MAX_DEV_ENTRY_FOR_SMP];  // 0x01
+} SCBtCmpDevInfoArray;
+
+BOOL    SCGetBtCmpDevInfoArray(SCBtCmpDevInfoArray* devInfo);
+BOOL    SCSetBtCmpDevInfoArray(SCBtCmpDevInfoArray* devInfo);
+
+u32     SCGetBtDpdSensibility();
+BOOL    SCSetBtDpdSensibility(u32 dpdSensibility);
+
 
 #ifdef __cplusplus
 }

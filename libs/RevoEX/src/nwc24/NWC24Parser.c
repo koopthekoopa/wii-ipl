@@ -103,7 +103,7 @@ static int  GetFieldLengthF(NWC24FileStream* fileStream);
 const char* NWC24GetMIMETypeStr(NWC24MIMEType type) {
     NWC24MIMEType* conv;
     int i;
-    for (i = 0; i < ARRSIZE(MIMETypeConv); i++) {
+    for (i = 0; i < ARRAY_LENGTH(MIMETypeConv); i++) {
         conv = MIMETypeConv;
         if (conv && !conv) {
             u32 dummy = 0;
@@ -118,7 +118,7 @@ const char* NWC24GetMIMETypeStr(NWC24MIMEType type) {
 
 const char* NWC24iGetMIMETypeSuffix(NWC24MIMEType type) {
     int i;
-    for (i = 0; i < ARRSIZE(MIMETypeConv); i++) {
+    for (i = 0; i < ARRAY_LENGTH(MIMETypeConv); i++) {
         if (type == MIMETypeConv[i]) {
             return MIMETypeSuffix[i];
         }
@@ -128,7 +128,7 @@ const char* NWC24iGetMIMETypeSuffix(NWC24MIMEType type) {
 
 const char* NWC24GetCharsetStr(NWC24Charset charset) {
     int i;
-    for (i = 0; i < ARRSIZE(CharsetConv); i++) {
+    for (i = 0; i < ARRAY_LENGTH(CharsetConv); i++) {
         if (charset == CharsetConv[i]) {
             return CharsetStr[i];
         }
@@ -137,7 +137,7 @@ const char* NWC24GetCharsetStr(NWC24Charset charset) {
 }
 
 NWC24Err NWC24ParseCharsetStr(NWC24Charset* charset, const char* str) {
-    int charSetIndex = StrCmpMultiNCS(str, CharsetStr, ARRSIZE(CharsetStr));
+    int charSetIndex = StrCmpMultiNCS(str, CharsetStr, ARRAY_LENGTH(CharsetStr));
     if (charSetIndex < 0) {
         *charset = NWC24_CHARSET_UNKNOWN;
         return NWC24_ERR_NOT_SUPPORTED;
@@ -149,7 +149,7 @@ NWC24Err NWC24ParseCharsetStr(NWC24Charset* charset, const char* str) {
 
 const char* NWC24GetEncodingStr(NWC24Encoding encoding) {
     int i;
-    for (i = 0; i < ARRSIZE(EncodingConv); i++) {
+    for (i = 0; i < ARRAY_LENGTH(EncodingConv); i++) {
         if (encoding == EncodingConv[i]) {
             return EncodingStr[i];
         }
@@ -158,7 +158,7 @@ const char* NWC24GetEncodingStr(NWC24Encoding encoding) {
 }
 
 NWC24Err NWC24ParseEncodingStr(NWC24Encoding* encoding, const char* str) {
-    int charSetIndex = StrCmpMultiNCS(str, EncodingStr, ARRSIZE(EncodingStr));
+    int charSetIndex = StrCmpMultiNCS(str, EncodingStr, ARRAY_LENGTH(EncodingStr));
     if (charSetIndex < 0) {
         *encoding = 0;
         return NWC24_ERR_NOT_SUPPORTED;

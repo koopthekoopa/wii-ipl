@@ -188,15 +188,15 @@ namespace ipl {
                 mpLayout->FindPaneByName("Picture_05")->GetMaterial()->GetTexture(&texObj[1], 0);
                 mpLayout->FindPaneByName("Picture_06")->GetMaterial()->GetTexture(&texObj[2], 0);
 
-                for (int i = 0; i < (int)ARRSIZE(wide_pane_names); i++) {
-                    for (int j = 0; j < (int)ARRSIZE(wide_pane_names[0]); j++) {
+                for (int i = 0; i < (int)ARRAY_LENGTH(wide_pane_names); i++) {
+                    for (int j = 0; j < (int)ARRAY_LENGTH(wide_pane_names[0]); j++) {
                         mpLayout->FindPaneByName(wide_pane_names[i][j])->GetMaterial()->SetTexture(0, texObj[i]);
                     }
                 }
             }
 
             // Make all of the panes invisible
-            for (int i = 0; i < ARRSIZE(lo_pane_name); i++) {
+            for (int i = 0; i < ARRAY_LENGTH(lo_pane_name); i++) {
                 nw4r::lyt::Pane* pTextPane = mpLayout->FindPaneByName(lo_pane_name[i]);
                 nw4r::lyt::Pane* pPushPane = mpLayout->FindPaneByName(lopush_pane_name[i]);
 

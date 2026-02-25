@@ -24,7 +24,7 @@ namespace nw4r {
 
             Init(texCoordNum);
 
-            for (int i = 0; i < (int)ARRSIZE(mVtxColors); i++) {
+            for (int i = 0; i < (int)ARRAY_LENGTH(mVtxColors); i++) {
                 mVtxColors[i] = pResPic->vtxCols[i];
             }
 

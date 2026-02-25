@@ -71,7 +71,7 @@ namespace nw4r {
                 };
 
                 for (int j = mNum; j < num; j++) {
-                    for (int i = 0; i < (int)ARRSIZE(mpData[j]); i++) {
+                    for (int i = 0; i < (int)ARRAY_LENGTH(mpData[j]); i++) {
                         mpData[j][i] = texCoords[i];
                     }
                 }
@@ -96,7 +96,7 @@ namespace nw4r {
                 const TexCoords* src = static_cast<const TexCoords*>(pResTexCoord);
 
                 for (int j = 0; j < texCoordNum; j++) {
-                    for (int i = 0; i < (int)ARRSIZE(mpData[j]); i++) {
+                    for (int i = 0; i < (int)ARRAY_LENGTH(mpData[j]); i++) {
                         mpData[j][i] = src[j][i];
                     }
                 }

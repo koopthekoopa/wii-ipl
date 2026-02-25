@@ -200,7 +200,7 @@ namespace ipl {
             mpLayout = new layout::Object(getSceneHeap(), mpLayoutFile, "arc", "it_Has_a.brlyt");
 
             // Make all of the panes invisible
-            for (int i = 0; i < ARRSIZE(has_pane_name); i++) {
+            for (int i = 0; i < ARRAY_LENGTH(has_pane_name); i++) {
                 pHasPane   = mpLayout->FindPaneByName(has_pane_name[i]);
                 pPushPane  = mpLayout->FindPaneByName(push_pane_name[i]);
 

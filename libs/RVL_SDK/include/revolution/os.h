@@ -50,8 +50,9 @@ extern "C" {
 #define OSRoundUp32B(x)                 ROUNDUP((unsigned long)(x), 32)
 #define OSRoundDown32B(x)               ROUNDDOWN((unsigned long)(x), 32)
 
-u32     __OSBusClock                    ADDRESS(OS_BASE_CACHED + OS_ADDR_BUS_CLOCK_SPEED);
-u32     __OSCoreClock                   ADDRESS(OS_BASE_CACHED + OS_ADDR_CPU_CLOCK_SPEED);
+u32         __OSBusClock                ADDRESS(OS_BASE_CACHED + OS_ADDR_BUS_CLOCK_SPEED);
+u32         __OSCoreClock               ADDRESS(OS_BASE_CACHED + OS_ADDR_CPU_CLOCK_SPEED);
+extern s64  __OSStartTime;
 
 #define OS_BUS_CLOCK                    __OSBusClock
 #define OS_CORE_CLOCK                   __OSCoreClock
@@ -87,6 +88,18 @@ enum {
 u8          OSGetAppType();
 u32         OSGetConsoleType();
 const char* OSGetAppGamename();
+
+#ifdef DEBUG
+
+#define ASSERTLINE(x, line)         (void)((x) || (OSPanic(__FILE__, line, "Failed assertion "#x), 0))
+#define ASSERTMSGLINE(x, line, ...) (void)((x) || (OSPanic(__FILE__, line, __VA_ARGS__), 0))
+
+#else
+
+#define ASSERTLINE(x, line)         ((void)0)
+#define ASSERTMSGLINE(x, line, ...) ((void)0)
+
+#endif
 
 #include <revolution/os/OSAlarm.h>
 #include <revolution/os/OSAlloc.h>

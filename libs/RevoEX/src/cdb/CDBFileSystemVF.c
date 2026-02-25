@@ -93,7 +93,7 @@ BOOL CDBFSIsDirNameVF(char* path) {
         CDB_CFG_VF_DRIVE_ROOT,
         CDB_CFG_SD_VF_DRIVE_ROOT,
     };
-    for (i = 0; i < ARRSIZE(driveRoots); i++) {
+    for (i = 0; i < ARRAY_LENGTH(driveRoots); i++) {
         if (strcmp(driveRoots[i], path) == 0) {
             // It is a drive letter, it is not a path!
             return FALSE;

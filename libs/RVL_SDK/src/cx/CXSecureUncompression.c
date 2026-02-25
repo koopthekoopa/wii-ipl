@@ -235,7 +235,7 @@ BOOL CXiVerifyHuffmanTable_(const void* param_1, u8 param_2)
 
     u8 e[sizeof(u8) * 0x40];
     u32 i;
-    for (i = 0; i < ARRSIZE(e); i++) {
+    for (i = 0; i < ARRAY_LENGTH(e); i++) {
         e[i] = 0;
     }
 

@@ -27,7 +27,7 @@ BOOL AXFXDelayInit(AXFX_DELAY* fx) {
     enabled = OSDisableInterrupts();
     fx->active = 1;
 
-    for (i = 0; i < ARRSIZE(fx->delay); i++) {
+    for (i = 0; i < ARRAY_LENGTH(fx->delay); i++) {
         if (fx->delay[i] == 0) {
             AXFXDelayShutdown(fx);
             OSRestoreInterrupts(enabled);
@@ -138,7 +138,7 @@ void AXFXDelayCallback(void* chans, void* context) {
 static BOOL __AllocDelayLine(AXFX_DELAY* fx) {
     int i;
 
-    for (i = 0; i < ARRSIZE(fx->line); i++) {
+    for (i = 0; i < ARRAY_LENGTH(fx->line); i++) {
         fx->line[i] = __AXFXAlloc(fx->length[i] * sizeof(s32));
         if (fx->line[i] == NULL) {
             return FALSE;
@@ -151,7 +151,7 @@ static BOOL __AllocDelayLine(AXFX_DELAY* fx) {
 static void __FreeDelayLine(AXFX_DELAY* fx) {
     int i;
 
-    for (i = 0; i < ARRSIZE(fx->line); i++) {
+    for (i = 0; i < ARRAY_LENGTH(fx->line); i++) {
         if (fx->line[i] != NULL) {
             __AXFXFree(fx->line[i]);
             fx->line[i] = NULL;
@@ -162,7 +162,7 @@ static void __FreeDelayLine(AXFX_DELAY* fx) {
 static BOOL __InitParams(AXFX_DELAY* fx) {
     int i;
 
-    for (i = 0; i < ARRSIZE(fx->line); i++) {
+    for (i = 0; i < ARRAY_LENGTH(fx->line); i++) {
         if (fx->feedback[i] >= 100) {
             return FALSE;
         }

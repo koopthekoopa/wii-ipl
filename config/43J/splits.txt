@@ -3216,12 +3216,12 @@ libs/RVL_SDK/src/bte/bte_logmsg.c:
 	.bss        start:0x8117D420 end:0x8117DC00
 	.text       start:0x815BAAEC end:0x815BAC50
 	.sdata      start:0x816C7978 end:0x816C7980
-	.sbss       start:0x816C8D90 end:0x816C8D98
 
 libs/RVL_SDK/src/bte/bte_main.c:
 	.bss        start:0x8117DC00 end:0x8117EC30
 	.text       start:0x815BAC50 end:0x815BADA8
 	.sdata      start:0x816C7980 end:0x816C7988
+	.sbss       start:0x816C8D90 end:0x816C8D98
 
 libs/RVL_SDK/src/bte/btu_task1.c:
 	.bss        start:0x8117EC30 end:0x8117ECB8

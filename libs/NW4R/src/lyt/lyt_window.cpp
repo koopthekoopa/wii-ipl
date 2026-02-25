@@ -166,7 +166,7 @@ namespace nw4r {
                 const res::WindowContent* pResContent = detail::ConvertOffsToPtr<res::WindowContent>(pBlock,
                                                                                                     pBlock->contentOffset);
 
-                for (int i = 0; i < (int)ARRSIZE(mContent.vtxColors); i++) {
+                for (int i = 0; i < (int)ARRAY_LENGTH(mContent.vtxColors); i++) {
                     mContent.vtxColors[i] = pResContent->vtxCols[i];
                 }
 

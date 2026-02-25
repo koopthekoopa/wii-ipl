@@ -34,7 +34,7 @@ IOSHeapId iosCreateHeap(void *ptr, u32 size) {
         goto finish;
     }
 
-    for (i = 0; i < ARRSIZE(__heaps); i++) {
+    for (i = 0; i < ARRAY_LENGTH(__heaps); i++) {
         if (__heaps[i].base == 0) {
             break;
         }

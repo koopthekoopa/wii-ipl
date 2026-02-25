@@ -455,7 +455,7 @@ CNTError __CNTConvertErrorCode(s32 result) {
         return result;
     }
 
-    for (; i < ARRSIZE(errorMap); i += 2) {
+    for (; i < ARRAY_LENGTH(errorMap); i += 2) {
         if (errorMap[i] == result) {
             if (result == ISFS_ERROR_ECC_CRIT || result == ISFS_ERROR_AUTHENTICATION || result == ISFS_ERROR_UNKNOWN
             || result == IPC_RESULT_UNKNOWN || result == IPC_RESULT_ECC_CRIT) {

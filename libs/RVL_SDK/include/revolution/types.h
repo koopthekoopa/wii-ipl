@@ -36,11 +36,13 @@ typedef volatile uBOOL      vuBOOL;
 #define TRUE                1
 #define FALSE               0
 
+#ifndef NULL
 #ifdef __cplusplus
 #define NULL                0
 #else
 #define NULL                ((void*)0)
 #endif  // __cplusplus
+#endif
 
 #define ATTRIBUTE_ALIGN(num)    __attribute__((aligned(num)))
 

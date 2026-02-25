@@ -6,5 +6,3 @@ typedef unsigned short  undefined2;
 typedef unsigned long   undefined4;
 
 #endif // GLOBAL_HEADERS_DECOMP_TYPES_H
-
-

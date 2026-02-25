@@ -497,7 +497,7 @@ namespace ipl {
 
             u32* lookup = (u32*)scLangLookup[System::getRegion()];
 
-            for (int i = 0; i < ARRSIZE(scLangLookup[0]); i++) {
+            for (int i = 0; i < ARRAY_LENGTH(scLangLookup[0]); i++) {
                 u32 lang = lookup[i];
                 if (mChannels[page][index].metaHdr->names[lang][nameIndex][0] != 0) {
                     return mChannels[page][index].metaHdr->names[lang][nameIndex];
@@ -1145,7 +1145,7 @@ namespace ipl {
 
             u32* lookup = (u32*)scLangLookup[System::getRegion()];
 
-            for (int i = 0; i < ARRSIZE(scLangLookup[0]); i++) {
+            for (int i = 0; i < ARRAY_LENGTH(scLangLookup[0]); i++) {
                 u32 lang = lookup[i];
                 if (diskInMsgs->messages[lang][0] != 0) {
                     return (u16*)diskInMsgs->messages[lang];

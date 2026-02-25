@@ -4,7 +4,7 @@
 #define __CONCAT(x, y)          x ## y
 #define   CONCAT(x, y)          __CONCAT(x, y)
 
-#define ARRSIZE(x)              (sizeof(x) / sizeof(x[0]))
+#define ARRAY_LENGTH(x)              (sizeof(x) / sizeof(x[0]))
 
 #define ROUNDUP(x, a)           (((x) + ((a) - 1)) & ~((a) - 1))
 #define PTR_ROUNDUP(x, a)       ((void*)ROUNDUP((unsigned long)x, a))

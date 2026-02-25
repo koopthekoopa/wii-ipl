@@ -25,7 +25,7 @@ namespace ipl {
                 CHANSVmObjHdr args[12];
                 memset(args, 0, sizeof(args));
 
-                for (int i = 0; i < (int)ARRSIZE(args); i++) {
+                for (int i = 0; i < (int)ARRAY_LENGTH(args); i++) {
                     if (CHANSVmGetArgFloat(VmInst, i)) {
                         CHANSVmCopyObject(VmInst, &args[i], CHANSVmGetArgFloat(VmInst, i));
                     }
@@ -39,7 +39,7 @@ namespace ipl {
                 CHANSVmObjHdr* arrObj = (CHANSVmObjHdr*)CHANSVmNewObjData(VmInst, VmReturnObj, 16);
                 if (arrObj != NULL) {
                     u32 sizes[] = { 3, 4 };
-                    if (CHANSVmNewArrayObject(VmInst, arrObj, ARRSIZE(sizes), sizes) != NULL) {
+                    if (CHANSVmNewArrayObject(VmInst, arrObj, ARRAY_LENGTH(sizes), sizes) != NULL) {
                         CHANSVmCopyObject(VmInst, CHANSVmGetArrayElement2D(VmInst, arrObj, 0, 0), &args[0]);
                         CHANSVmCopyObject(VmInst, CHANSVmGetArrayElement2D(VmInst, arrObj, 0, 1), &args[1]);
                         CHANSVmCopyObject(VmInst, CHANSVmGetArrayElement2D(VmInst, arrObj, 0, 2), &args[2]);

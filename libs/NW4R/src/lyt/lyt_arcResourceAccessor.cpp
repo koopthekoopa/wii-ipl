@@ -105,8 +105,8 @@ namespace nw4r {
 
             mArcBuf = archiveStart;
 
-            strncpy(mResRootDir, resourceRootDirectory, ARRSIZE(mResRootDir) - 1);
-            mResRootDir[ARRSIZE(mResRootDir) - 1] = '\0';
+            strncpy(mResRootDir, resourceRootDirectory, ARRAY_LENGTH(mResRootDir) - 1);
+            mResRootDir[ARRAY_LENGTH(mResRootDir) - 1] = '\0';
 
             return true;
         }
@@ -118,8 +118,8 @@ namespace nw4r {
                 return false;
             }
 
-            strncpy(mResRootDir, resRootDirectory, ARRSIZE(mResRootDir) - 1);
-            mResRootDir[ARRSIZE(mResRootDir) - 1] = '\0';
+            strncpy(mResRootDir, resRootDirectory, ARRAY_LENGTH(mResRootDir) - 1);
+            mResRootDir[ARRAY_LENGTH(mResRootDir) - 1] = '\0';
 
             return true;
         }

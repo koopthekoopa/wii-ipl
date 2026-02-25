@@ -1558,7 +1558,7 @@ static BOOL IsDmaCommand(u32 command) {
         return TRUE;
     }
 
-    for (i = 0 ; i < ARRSIZE(DmaCommand); i++) {
+    for (i = 0 ; i < ARRAY_LENGTH(DmaCommand); i++) {
         if (command == DmaCommand[i]) {
             return TRUE;
         }

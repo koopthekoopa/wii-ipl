@@ -211,10 +211,10 @@ namespace nw4r {
             Init();
             SetName(pRes->name);
 
-            for (int i = 0; i < (int)ARRSIZE(mTevCols); i++) {
+            for (int i = 0; i < (int)ARRAY_LENGTH(mTevCols); i++) {
                 mTevCols[i] = pRes->tevCols[i];
             }
-            for (int i = 0; i < (int)ARRSIZE(mTevKCols); i++) {
+            for (int i = 0; i < (int)ARRAY_LENGTH(mTevKCols); i++) {
                 mTevKCols[i] = pRes->tevKCols[i];
             }
 
@@ -561,7 +561,7 @@ namespace nw4r {
         }
 
         void Material::SetName(const char* name) {
-            strncpy(mName, name, ARRSIZE(mName));
+            strncpy(mName, name, ARRAY_LENGTH(mName));
         }
 
         void Material::SetTextureNum(u8 num) {
@@ -764,7 +764,7 @@ namespace nw4r {
             bool bSetTexMtx = false;
             bool bUseTexMtx[MAX_TEX_SRT];
 
-            for (int i = 0; i < (int)ARRSIZE(bUseTexMtx); i++) {
+            for (int i = 0; i < (int)ARRAY_LENGTH(bUseTexMtx); i++) {
                 bUseTexMtx[i] = false;
             }
 
@@ -849,7 +849,7 @@ namespace nw4r {
             bool bSetIndTexMtx = false;
             bool bUseIndTexMtx[MAX_IND_SRT];
 
-            for (int i = 0; i < (int)ARRSIZE(bUseIndTexMtx); i++) {
+            for (int i = 0; i < (int)ARRAY_LENGTH(bUseIndTexMtx); i++) {
                 bUseIndTexMtx[i] = false;
             }
 

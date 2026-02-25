@@ -169,40 +169,6 @@ BOOL    SCSetSoundMode(u8 soundMode);
 u32     SCGetCounterBias();
 BOOL    SCSetCounterBias(u32 counterBias);
 
-#define SC_MAX_DEV_ENTRY_FOR_STD    10
-#define SC_MAX_DEV_ENTRY_FOR_CMP    6
-#define SC_MAX_DEV_ENTRY            (SC_MAX_DEV_ENTRY_FOR_STD + SC_MAX_DEV_ENTRY_FOR_CMP)
-
-typedef struct SCBtDeviceInfo {
-    u8  addr[6];    // 0x00
-    u8  name[64];   // 0x06
-} SCBtDeviceInfo;
-
-typedef struct SCBtDeviceInfoArray {
-    u8              numRegist;                  // 0x00
-    SCBtDeviceInfo  devices[SC_MAX_DEV_ENTRY];  // 0x01
-} SCBtDeviceInfoArray;
-
-BOOL    SCGetBtDeviceInfoArray(SCBtDeviceInfoArray* devInfo);
-BOOL    SCSetBtDeviceInfoArray(SCBtDeviceInfoArray* devInfo);
-
-typedef struct SCBtCmpDevInfo {
-    u8  addr[6];        // 0x00
-    u8  name[64];       // 0x06
-    u8  linkKey[16];    // 0x30
-} SCBtCmpDevInfo;
-
-typedef struct SCBtCmpDevInfoArray {
-    u8              numRegist;                          // 0x00
-    SCBtCmpDevInfo  devices[SC_MAX_DEV_ENTRY_FOR_CMP];  // 0x01
-} SCBtCmpDevInfoArray;
-
-BOOL    SCGetBtCmpDevInfoArray(SCBtCmpDevInfoArray* devInfo);
-BOOL    SCSetBtCmpDevInfoArray(SCBtCmpDevInfoArray* devInfo);
-
-u32     SCGetBtDpdSensibility();
-BOOL    SCSetBtDpdSensibility(u32 dpdSensibility);
-
 BOOL    SCGetWwwRestriction();
 BOOL    SCSetWwwRestriction(BOOL wwwRestrictFlag);
 

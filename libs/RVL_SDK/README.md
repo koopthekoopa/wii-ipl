@@ -18,7 +18,7 @@ List of libraries that are linked (in alphabetical order):
 | **AX**       | Audio Mixing Library                                        | ✔️ |
 | **AXFX**     | Auxillary Effects Library for AX                            | ❌ |
 | **BASE**     | PowerPC Architecture Library                                | ✔️ |
-| **BTE**      | Bluetooth Driver Library; written by BroadCom               | ❌ |
+| **BTE**      | Bluetooth Driver Library; written by BroadCom               | ✔️ |
 | **CARD**     | GameCube Memory Card Library                                | ⚠️ |
 | **CNT**      | Content API Library for Channel Titles                      | ✔️ |
 | **CNTCACHE** | Library that automatically delete temporary titles?         | ❌ |

@@ -11,4 +11,12 @@ typedef long int            time_t;
 #define offsetof(type, member) __builtin_offsetof(type, member)
 #endif
 
+#ifndef NULL
+#ifdef __cplusplus
+#define NULL    0
+#else
+#define NULL    ((void*)0)
+#endif  // __cplusplus
+#endif
+
 #endif // MSL_STDDEF_H

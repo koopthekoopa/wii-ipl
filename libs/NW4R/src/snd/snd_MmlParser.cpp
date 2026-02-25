@@ -406,8 +406,6 @@ namespace nw4r {
 
                         const vs16* pVar = GetVariablePtr(seqPlayer, track, arg1);
 
-                        // clang-format off
-
                         // Convert absolute index into variable type-relative index
                         int varNo = arg1 >= SeqPlayer::VARIABLE_NUM       ? arg1 - SeqPlayer::VARIABLE_NUM
                                 : (arg1 >= SeqPlayer::LOCAL_VARIABLE_NUM ? arg1 - SeqPlayer::LOCAL_VARIABLE_NUM : arg1);
@@ -416,8 +414,6 @@ namespace nw4r {
                         // 'T' = Track variable, 'G' = Global (player) variable
                         const char* pVarType = arg1 >= SeqPlayer::VARIABLE_NUM       ? "T"
                                             : (arg1 >= SeqPlayer::LOCAL_VARIABLE_NUM ? "G" : "");
-
-                        // clang-format on
 
                         OSReport("#%08x[%d]: printvar %sVAR_%d(%d) = %d\n", seqPlayer,
                                 track->GetPlayerTrackNo(), pVarType, varNo, arg1, *pVar);

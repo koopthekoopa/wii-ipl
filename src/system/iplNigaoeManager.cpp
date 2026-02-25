@@ -38,7 +38,7 @@ namespace ipl {
                 
                 // Get mac values
                 for (int i = 1; i < NCD_MAC_ADDRESS_LENGTH; i++) {
-                    memcpy(temp, &ncd_mac[i * ARRSIZE(temp)], sizeof(temp) - 1);
+                    memcpy(temp, &ncd_mac[i * ARRAY_LENGTH(temp)], sizeof(temp) - 1);
                     mac[i] = strtol((char*)temp, NULL, 16);
                 }
 

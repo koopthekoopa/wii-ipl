@@ -302,7 +302,7 @@ namespace ipl {
         }
 
         void FaceSelect::destroy() {
-            for (int i = 0; i < (int)ARRSIZE(mpFaces); i++) {
+            for (int i = 0; i < (int)ARRAY_LENGTH(mpFaces); i++) {
                 for (int j = 0; j < MAX_FACE_EACH_PAGE; j++) {
                     if (mpFaces[i][j].object != NULL) {
                         delete mpFaces[i][j].object;

@@ -631,7 +631,7 @@ namespace ipl {
                 }
             }
 #ifdef JAPANESE_BUILD
-            mpManager->setDefaultPredictionJP(ARRSIZE(sPredictionJP), sPredictionJP);
+            mpManager->setDefaultPredictionJP(ARRAY_LENGTH(sPredictionJP), sPredictionJP);
 #endif // JAPANESE_BUILD
         }
 

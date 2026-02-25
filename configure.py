@@ -12,10 +12,14 @@
 # Append --help to see available options.
 ###
 
+# fmt: off
+
 import argparse
 import sys
 from pathlib import Path
 from typing import Any, Dict, List
+from os.path import join as joinpath
+from os import walk
 
 from tools.project import (
     Object,
@@ -179,6 +183,32 @@ except ValueError:
     version_num = VERSION_INFO[VERSION_CONFIG].index(args.version)
 config.version = str(VERSION_INFO[VERSION_CONFIG][version_num])
 
+# Extra flags for clangd parser
+config.extra_clang_flags = [
+    "-Iinclude/MSL/internal", # Allow clangd to see internal MSL headers
+    "-Wno-invalid-offsetof",  # Silence non-POD offsetof 
+    "-fshort-wchar",          # Force wide characters as 16-bit 
+]
+
+def find_directories(root_path: str, recursive: bool) -> list[str]:
+    found = [root_path]
+
+    for dirpath, dirnames, _ in walk(root_path):
+        found += [joinpath(dirpath, x) for x in dirnames]
+
+        if not recursive:
+            break
+
+    return found
+
+libs_bte_inc_dir = "libs/RVL_SDK/include/private/bte"
+
+# Add BTE directories
+config.extra_clang_flags.extend([
+    f"-isystem{x}" for x in
+        find_directories(libs_bte_inc_dir, recursive=True)
+])
+
 # Apply arguments
 config.build_dir = args.build_dir
 config.dtk_path = args.dtk
@@ -256,6 +286,7 @@ cflags_includes = [
     "-i libs/RVLFaceLib/include",
     "-i libs/EGG/include",
     "-i libs/OperaWWW/include",
+    f"-ir {libs_bte_inc_dir}",
     f"-i build/{config.version}/include",
 ]
 
@@ -281,7 +312,9 @@ cflags_base = [
     "-DMEM_MANAGER_DIRECT", # for GameSpy
     *cflags_includes,
     f"-DBUILD_VERSION={version_num}",
-    f"-DVERSION_{config.version}"
+    f"-DVERSION_{config.version}",
+    "-DREVOLUTION",
+    f"-i {libs_bte_inc_dir}",  # for BTE (:/)
 ]
 
 # Debug flags
@@ -894,7 +927,7 @@ config.libs = [
     IPLSection("channelScript", [
             Object(NonMatching, "channelScript/CHANSVm.c"),
             Object(NonMatching, "channelScript/systemmenu/VmSystem.c"),
-            Object(NonMatching, "channelScript/systemmenu/iplCSSystem.cpp"),
+            Object(Matching,    "channelScript/systemmenu/iplCSSystem.cpp"),
             Object(NonMatching, "channelScript/systemmenu/iplCSLayout.cpp"),
             Object(NonMatching, "channelScript/systemmenu/iplCSPane.cpp"),
             Object(NonMatching, "channelScript/systemmenu/iplCSMaterial.cpp"),
@@ -1525,87 +1558,87 @@ config.libs = [
         ]
     ),
     RVLSDKLib("bte", [
-            Object(NonMatching, "bte/gki_buffer.c"),
-            Object(NonMatching, "bte/gki_time.c"),
-            Object(NonMatching, "bte/gki_ppc.c"),
+            Object(Matching,    "bte/gki_buffer.c"),
+            Object(Matching,    "bte/gki_time.c"),
+            Object(Matching,    "bte/gki_ppc.c"),
 
-            Object(NonMatching, "bte/hcisu_h2.c"),
-            Object(NonMatching, "bte/uusb_ppc.c"),
-            Object(NonMatching, "bte/bta_dm_cfg.c"),
-            Object(NonMatching, "bte/bta_hh_cfg.c"),
-            Object(NonMatching, "bte/bta_sys_cfg.c"),
-            Object(NonMatching, "bte/bte_hcisu.c"),
-            Object(NonMatching, "bte/bte_init.c"),
-            Object(NonMatching, "bte/bte_logmsg.c"),
-            Object(NonMatching, "bte/bte_main.c"),
-            Object(NonMatching, "bte/btu_task1.c"),
-            Object(NonMatching, "bte/bd.c"),
-            Object(NonMatching, "bte/bta_sys_conn.c"),
-            Object(NonMatching, "bte/bta_sys_main.c"),
-            Object(NonMatching, "bte/ptim.c"),
-            Object(NonMatching, "bte/utl.c"),
+            Object(Matching,    "bte/hcisu_h2.c"),
+            Object(Matching,    "bte/uusb_ppc.c"),
+            Object(Matching,    "bte/bta_dm_cfg.c"),
+            Object(Matching,    "bte/bta_hh_cfg.c"),
+            Object(Matching,    "bte/bta_sys_cfg.c"),
+            Object(Matching,    "bte/bte_hcisu.c"),
+            Object(Matching,    "bte/bte_init.c"),
+            Object(Matching,    "bte/bte_logmsg.c"),
+            Object(Matching,    "bte/bte_main.c"),
+            Object(Matching,    "bte/btu_task1.c"),
+            Object(Matching,    "bte/bd.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/bta_sys_conn.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/bta_sys_main.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/ptim.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/utl.c", mw_version = "GC/3.0a5"),
 
-            Object(NonMatching, "bte/bta_dm_act.c"),
-            Object(NonMatching, "bte/bta_dm_api.c"),
-            Object(NonMatching, "bte/bta_dm_main.c"),
-            Object(NonMatching, "bte/bta_dm_pm.c"),
+            Object(Matching,    "bte/bta_dm_act.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/bta_dm_api.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/bta_dm_main.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/bta_dm_pm.c", mw_version = "GC/3.0a5"),
 
-            Object(NonMatching, "bte/bta_hh_act.c"),
-            Object(NonMatching, "bte/bta_hh_api.c"),
-            Object(NonMatching, "bte/bta_hh_main.c"),
-            Object(NonMatching, "bte/bta_hh_utils.c"),
+            Object(Matching,    "bte/bta_hh_act.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/bta_hh_api.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/bta_hh_main.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/bta_hh_utils.c", mw_version = "GC/3.0a5"),
 
-            Object(NonMatching, "bte/btm_acl.c"),
-            Object(NonMatching, "bte/btm_dev.c"),
-            Object(NonMatching, "bte/btm_devctl.c"),
-            Object(NonMatching, "bte/btm_discovery.c"),
-            Object(NonMatching, "bte/btm_inq.c"),
-            Object(NonMatching, "bte/btm_main.c"),
-            Object(NonMatching, "bte/btm_pm.c"),
-            Object(NonMatching, "bte/btm_sco.c"),
-            Object(NonMatching, "bte/btm_sec.c"),
+            Object(Matching,    "bte/btm_acl.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/btm_dev.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/btm_devctl.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/btm_discovery.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/btm_inq.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/btm_main.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/btm_pm.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/btm_sco.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/btm_sec.c", mw_version = "GC/3.0a5"),
 
-            Object(NonMatching, "bte/btu_hcif.c"),
-            Object(NonMatching, "bte/btu_init.c"),
+            Object(Matching,    "bte/btu_hcif.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/btu_init.c", mw_version = "GC/3.0a5"),
 
-            Object(NonMatching, "bte/wbt_ext.c"),
+            Object(Matching,    "bte/wbt_ext.c", mw_version = "GC/3.0a5"),
 
-            Object(NonMatching, "bte/gap_api.c"),
-            Object(NonMatching, "bte/gap_conn.c"),
-            Object(NonMatching, "bte/gap_utils.c"),
+            Object(Matching,    "bte/gap_api.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/gap_conn.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/gap_utils.c", mw_version = "GC/3.0a5"),
 
-            Object(NonMatching, "bte/hcicmds.c"),
+            Object(Matching,    "bte/hcicmds.c", mw_version = "GC/3.0a5"),
 
-            Object(NonMatching, "bte/hidd_api.c"),
-            Object(NonMatching, "bte/hidd_conn.c"),
-            Object(NonMatching, "bte/hidd_mgmt.c"),
-            Object(NonMatching, "bte/hidd_pm.c"),
-            Object(NonMatching, "bte/hidh_api.c"),
-            Object(NonMatching, "bte/hidh_conn.c"),
+            Object(Matching,    "bte/hidd_api.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/hidd_conn.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/hidd_mgmt.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/hidd_pm.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/hidh_api.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/hidh_conn.c", mw_version = "GC/3.0a5"),
 
-            Object(NonMatching, "bte/l2c_api.c"),
-            Object(NonMatching, "bte/l2c_csm.c"),
-            Object(NonMatching, "bte/l2c_link.c"),
-            Object(NonMatching, "bte/l2c_main.c"),
-            Object(NonMatching, "bte/l2c_utils.c"),
+            Object(Matching,    "bte/l2c_api.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/l2c_csm.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/l2c_link.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/l2c_main.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/l2c_utils.c", mw_version = "GC/3.0a5"),
 
-            Object(NonMatching, "bte/port_api.c"),
-            Object(NonMatching, "bte/port_rfc.c"),
-            Object(NonMatching, "bte/port_utils.c"),
+            Object(Matching,    "bte/port_api.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/port_rfc.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/port_utils.c", mw_version = "GC/3.0a5"),
 
-            Object(NonMatching, "bte/rfc_l2cap_if.c"),
-            Object(NonMatching, "bte/rfc_mx_fsm.c"),
-            Object(NonMatching, "bte/rfc_port_fsm.c"),
-            Object(NonMatching, "bte/rfc_port_if.c"),
-            Object(NonMatching, "bte/rfc_ts_frames.c"),
-            Object(NonMatching, "bte/rfc_utils.c"),
+            Object(Matching,    "bte/rfc_l2cap_if.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/rfc_mx_fsm.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/rfc_port_fsm.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/rfc_port_if.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/rfc_ts_frames.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/rfc_utils.c", mw_version = "GC/3.0a5"),
 
-            Object(NonMatching, "bte/sdp_api.c"),
-            Object(NonMatching, "bte/sdp_db.c"),
-            Object(NonMatching, "bte/sdp_discovery.c"),
-            Object(NonMatching, "bte/sdp_main.c"),
-            Object(NonMatching, "bte/sdp_server.c"),
-            Object(NonMatching, "bte/sdp_utils.c"),
+            Object(Matching,    "bte/sdp_api.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/sdp_db.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/sdp_discovery.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/sdp_main.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/sdp_server.c", mw_version = "GC/3.0a5"),
+            Object(Matching,    "bte/sdp_utils.c", mw_version = "GC/3.0a5"),
         ]
     ),
     RVLSDKLib("TPL", [

@@ -1223,7 +1223,7 @@ namespace ipl {
         
         BOOL focus_object::is_url_end_code(wchar_t ch) const {
             bool result = FALSE;
-            for (int i = 0; i < ARRSIZE(unk_0x114); i++) {
+            for (int i = 0; i < ARRAY_LENGTH(unk_0x114); i++) {
                 result |= ((unk_0x114[i]-ch) == 0);
             }
             return result;
@@ -1284,7 +1284,7 @@ namespace ipl {
                                          L'「', L'」',
                                          L'『', L'』'};
 
-            for (int i = 0; i < ARRSIZE(patterns); i += 2) {
+            for (int i = 0; i < ARRAY_LENGTH(patterns); i += 2) {
                 if (ch == patterns[i]) {
                     unk_0x114[5] = patterns[i];
                     break;
@@ -1375,7 +1375,7 @@ namespace ipl {
             if (mpBoardObj->arc_init_handle(mpArcData, &arc)) {
                 ARCFileInfo arcFile;
 
-                for (int i = 0; i < (int)ARRSIZE(scChangeTexFile); i++) {
+                for (int i = 0; i < (int)ARRAY_LENGTH(scChangeTexFile); i++) {
                     if (ARCOpen(&arc, scChangeTexFile[i].file, &arcFile)) {
                         TPLPalette* tplData = (TPLPalette*)((u8*)mpArcData + ARCGetStartOffset(&arcFile));
                         u32 tplSize = ARCGetLength(&arcFile);
@@ -1414,7 +1414,7 @@ namespace ipl {
                     "sound.aiff"
                 };
 
-                for (int i = 0; i < (int)ARRSIZE(soundFileList); i++) {
+                for (int i = 0; i < (int)ARRAY_LENGTH(soundFileList); i++) {
                     if (ARCOpen(&arc, soundFileList[i], &arcFile)) {
                         mpSoundData = (u8*)(pArc + ARCGetStartOffset(&arcFile));
                         mSoundSize = ARCGetLength(&arcFile);

@@ -12,7 +12,7 @@
 
 // Encapsulating function to get the file to align properly
 asm void __targsupp() {
-#ifdef __MWERKS__ // clang-format off
+#ifdef __MWERKS__
     nofralloc
     entry TRKAccessFile
         twi 31, r0, 0
@@ -26,5 +26,5 @@ asm void __targsupp() {
     entry TRKPositionFile
         twi 31, r0, 0
         blr
-#endif // clang-format on
+#endif
 }
