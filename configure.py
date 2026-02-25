@@ -1552,9 +1552,9 @@ config.libs = [
         ]
     ),
     RVLSDKLib("wud", [
-            Object(NonMatching, "wud/WUD.c"),
-            Object(NonMatching, "wud/WUDHidHost.c"),
-            Object(NonMatching, "wud/debug_msg.c"),
+            Object(Matching,    "wud/WUD.c"),
+            Object(Matching,    "wud/WUDHidHost.c"),
+            Object(Matching,    "wud/debug_msg.c"),
         ]
     ),
     RVLSDKLib("bte", [

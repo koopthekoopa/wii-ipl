@@ -150,17 +150,17 @@ u32     __SCGetConfBufSize();
 #define SC_MAX_DEV_ENTRY_FOR_SMP    6
 #define SC_MAX_DEV_ENTRY            (SC_MAX_DEV_ENTRY_FOR_STD + SC_MAX_DEV_ENTRY_FOR_SMP)
 
-typedef struct SCBtDeviceInfo_ {
+typedef struct SC_BT_DEV_INFO {
     u8          devName[20];    // 0x00
-    u8          at_0x14[1];
+    u8          unk_0x14;
     u8          unk_0x15[0xB];
     LINK_KEY    linkKey;        // 0x20
     u8          unk_0x30[0x10];
-} SCBtDeviceInfo_;
+} SC_BT_DEV_INFO;
 
 typedef struct SCBtDeviceInfo {
     BD_ADDR         addr;   // 0x00
-    SCBtDeviceInfo_ info;   // 0x06
+    SC_BT_DEV_INFO  info;   // 0x06
 } SCBtDeviceInfo;
 
 typedef struct SCBtDeviceInfoArray {

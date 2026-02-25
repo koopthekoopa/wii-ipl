@@ -57,7 +57,7 @@ List of libraries that are linked (in alphabetical order):
 | **WAD**      | WAD Package Library                                         | ❌ |
 | **WENC**     | Wii Remote Speaker Encoding Library                         | ✔️ |
 | **WPAD**     | Low Level Wii Remote Library                                | ❌ |
-| **WUD**      | Wireless Driver Library                                     | ❌ |
+| **WUD**      | Wireless Driver Library                                     | ✔️ |
 
 Thanks to
 ---------
