@@ -3017,10 +3017,11 @@ libs/RVL_SDK/src/enc/encunicode.c:
 
 libs/RVL_SDK/src/enc/encjapanese.c:
 	.text       start:0x815457C8 end:0x81546DB8
+	.rodata     start:0x815F9A78 end:0x815F9AF8
 
 libs/RVL_SDK/src/enc/enclatin.c:
 	.text       start:0x81546DB8 end:0x81547358
-	.rodata     start:0x815F9A78 end:0x815FB5F8
+	.rodata     start:0x815F9AF8 end:0x815FB5F8
 
 libs/RVL_SDK/src/enc/encconvert.c:
 	.text       start:0x81547358 end:0x81548520

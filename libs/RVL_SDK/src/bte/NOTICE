@@ -38,6 +38,6 @@ bluedroid do not complain to me that it does not look like bluedroid
 
 There are some common modifications made for this repository:
 - To use the include paths and macros that this repository uses.
-- Little bit of clean up.
+- Adding missing types.
 
 - KoopTheKoopa

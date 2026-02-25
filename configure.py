@@ -313,7 +313,6 @@ cflags_base = [
     *cflags_includes,
     f"-DBUILD_VERSION={version_num}",
     f"-DVERSION_{config.version}",
-    "-DREVOLUTION",
     f"-i {libs_bte_inc_dir}",  # for BTE (:/)
 ]
 
@@ -982,10 +981,15 @@ config.libs = [
             Object(NonMatching, "clib/zi8match.c"),
             Object(NonMatching, "clib/zi8misc.c"),
             Object(NonMatching, "clib/zi8pud2.c"),
-            Object(NonMatching, "clib/zi8punct.c"),
+            Object(NonMatching, "clib/Zi8punct.c"),
+            Object(NonMatching, "clib/zi8space.c"),
             Object(NonMatching, "clib/zi8uwd.c"),
+            Object(NonMatching, "clib/zi8ver.c"),
+            Object(NonMatching, "clib/zi8ZHuwd.c"),
             Object(NonMatching, "clib/zidawg1.c"),
-            Object(NonMatching, "clib/zi_unknown_tu.c"),
+            Object(NonMatching, "clib/zikorean.c"),
+            Object(NonMatching, "clib/ziswordw.c"),
+            Object(NonMatching, "clib/zkokeyp.c"),
             Object(Matching,    "clib/zierror.c"),
             Object(NonMatching, "clib/zmtkey.c"),
             Object(NonMatching, "clib/zoemdata.c"),
@@ -1498,13 +1502,13 @@ config.libs = [
         ]
     ),
     RVLSDKLib("enc", [
-            Object(NonMatching, "enc/encutility.c"),
-            Object(NonMatching, "enc/encunicode.c"),
-            Object(NonMatching, "enc/encjapanese.c"),
-            Object(NonMatching, "enc/enclatin.c"),
-            Object(NonMatching, "enc/encconvert.c"),
-            Object(NonMatching, "enc/encchinese.c"),
-            Object(NonMatching, "enc/enckorean.c"),
+            Object(Matching,    "enc/encutility.c", shift_jis = False, extra_cflags = ["-enc UTF-8"]),
+            Object(Matching,    "enc/encunicode.c", shift_jis = False, extra_cflags = ["-enc UTF-8"]),
+            Object(Matching,    "enc/encjapanese.c", shift_jis = False, extra_cflags = ["-enc UTF-8"]),
+            Object(Matching,    "enc/enclatin.c", shift_jis = False, extra_cflags = ["-enc UTF-8"]),
+            Object(Matching,    "enc/encconvert.c", shift_jis = False, extra_cflags = ["-enc UTF-8"]),
+            Object(Matching,    "enc/encchinese.c", shift_jis = False, extra_cflags = ["-enc UTF-8"]),
+            Object(Matching,    "enc/enckorean.c", shift_jis = False, extra_cflags = ["-enc UTF-8"]),
         ]
     ),
     RVLSDKLib("arc", [

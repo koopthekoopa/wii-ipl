@@ -1267,17 +1267,17 @@ libs/RVLMiddleware/eZiText/src/clib/zconvert.c:
 	.rodata     start:0x81617900 end:0x81617920
 
 libs/RVLMiddleware/eZiText/src/clib/zi81key.c:
-	extab       start:0x81330478 end:0x813304C8
-	extabindex  start:0x81331044 end:0x813310BC
-	.text       start:0x8145FDF8 end:0x81465200
+	extab       start:0x81330478 end:0x813304C0
+	extabindex  start:0x81331044 end:0x813310B0
+	.text       start:0x8145FDF8 end:0x814651CC
 	.rodata     start:0x81617920 end:0x81617DA0
 	.data       start:0x8166AA28 end:0x8166AA58
 	.sdata2     start:0x81694FF8 end:0x81695000
 
 libs/RVLMiddleware/eZiText/src/clib/zi8alpha.c:
-	extab       start:0x813304C8 end:0x81330508
-	extabindex  start:0x813310BC end:0x8133111C
-	.text       start:0x81465200 end:0x8146A66C
+	extab       start:0x813304C0 end:0x81330508
+	extabindex  start:0x813310B0 end:0x8133111C
+	.text       start:0x814651CC end:0x8146A66C
 	.rodata     start:0x81617DA0 end:0x81617EF0
 	.data       start:0x8166AA58 end:0x8166AA88
 
@@ -1333,12 +1333,12 @@ libs/RVLMiddleware/eZiText/src/clib/zi8getSW.c:
 libs/RVLMiddleware/eZiText/src/clib/zi8initd.c:
 	extab       start:0x81330638 end:0x81330640
 	extabindex  start:0x813312E4 end:0x813312F0
-	.text       start:0x8147C7C4 end:0x8147C9C4
+	.text       start:0x8147C7C4 end:0x8147CA84
 
 libs/RVLMiddleware/eZiText/src/clib/zi8is.c:
 	extab       start:0x81330640 end:0x81330650
 	extabindex  start:0x813312F0 end:0x81331308
-	.text       start:0x8147C9C4 end:0x8147CEF4
+	.text       start:0x8147CA84 end:0x8147CEF4
 
 libs/RVLMiddleware/eZiText/src/clib/zi8match.c:
 	extab       start:0x81330650 end:0x813306A0
@@ -1356,28 +1356,51 @@ libs/RVLMiddleware/eZiText/src/clib/zi8pud2.c:
 	extabindex  start:0x813313B0 end:0x813313F8
 	.text       start:0x8147F598 end:0x8147FDF0
 
-libs/RVLMiddleware/eZiText/src/clib/zi8punct.c:
+libs/RVLMiddleware/eZiText/src/clib/Zi8punct.c:
 	extab       start:0x813306F0 end:0x813306F8
 	extabindex  start:0x813313F8 end:0x81331404
 	.text       start:0x8147FDF0 end:0x8147FF1C
 	.rodata     start:0x81618130 end:0x81618180
 
+libs/RVLMiddleware/eZiText/src/clib/zi8space.c:
+	extab       start:0x813306F8 end:0x81330700
+	extabindex  start:0x81331404 end:0x81331410
+	.text       start:0x8147FF1C end:0x81480224
+
 libs/RVLMiddleware/eZiText/src/clib/zi8uwd.c:
-	extab       start:0x813306F8 end:0x81330728
-	extabindex  start:0x81331404 end:0x8133144C
-	.text       start:0x8147FF1C end:0x81480D7C
+	extab       start:0x81330700 end:0x81330720
+	extabindex  start:0x81331410 end:0x81331440
+	.text       start:0x81480224 end:0x81480C84
+
+libs/RVLMiddleware/eZiText/src/clib/zi8ver.c:
+	.text       start:0x81480C84 end:0x81480C9C
+
+libs/RVLMiddleware/eZiText/src/clib/zi8ZHuwd.c:
+	extab       start:0x81330720 end:0x81330728
+	extabindex  start:0x81331440 end:0x8133144C
+	.text       start:0x81480C9C end:0x81480D7C
 
 libs/RVLMiddleware/eZiText/src/clib/zidawg1.c:
 	extab       start:0x81330728 end:0x81330748
 	extabindex  start:0x8133144C end:0x8133147C
 	.text       start:0x81480D7C end:0x814813FC
 
-libs/RVLMiddleware/eZiText/src/clib/zi_unknown_tu.c:
-	extab       start:0x81330748 end:0x813307A8
-	extabindex  start:0x8133147C end:0x8133150C
-	.text       start:0x814813FC end:0x8148447C
+libs/RVLMiddleware/eZiText/src/clib/zikorean.c:
+	extab       start:0x81330748 end:0x81330760
+	extabindex  start:0x8133147C end:0x813314A0
+	.text       start:0x814813FC end:0x81482840
 	.data       start:0x8166B2B0 end:0x8166B3D0
+
+libs/RVLMiddleware/eZiText/src/clib/ziswordw.c:
+	extab       start:0x81330760 end:0x81330770
+	extabindex  start:0x813314A0 end:0x813314B8
+	.text       start:0x81482840 end:0x8148302C
 	.sdata2     start:0x81695018 end:0x81695020
+
+libs/RVLMiddleware/eZiText/src/clib/zkokeyp.c:
+	extab       start:0x81330770 end:0x813307A8
+	extabindex  start:0x813314B8 end:0x8133150C
+	.text       start:0x8148302C end:0x8148447C
 
 libs/RVLMiddleware/eZiText/src/clib/zierror.c:
 	.text       start:0x8148447C end:0x81484484

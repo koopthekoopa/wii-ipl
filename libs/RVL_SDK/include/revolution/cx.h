@@ -3,7 +3,7 @@
 
 #include <revolution/types.h>
 
-#define CX_COMPRESSION_TYPE_LZ          0x10    /* Lempel Ziv encoded */
+#define CX_COMPRESSION_TYPE_LZ          0x10    /* Lempel-Ziv encoded */
 #define CX_COMPRESSION_TYPE_HUFFMAN     0x20    /* Huffman encoded */
 #define CX_COMPRESSION_TYPE_RUN_LENGTH  0x30    /* Runlength encoded */
 
