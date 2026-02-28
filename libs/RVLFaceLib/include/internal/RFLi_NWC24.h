@@ -14,7 +14,9 @@ BOOL        RFLiNWC24Msg2CharData(RFLiCharData* rawdata, const NWC24MsgObj* obj)
 
 RFLErrcode  RFLiNWC24Msg2HiddenAsync(const NWC24MsgObj* obj);
 
-RFLErrcode  RFLiSetOfficial2NWC24Msg(NWC24MsgObj* obj, RFLCharData* out, u16 index);
+#if RFL_BUILD < 20080306
+RFLErrcode  RFLiSetOfficial2NWC24Msg(NWC24MsgObj* obj, RFLCharData* charData, u16 index);
+#endif // RFL_BUILD < 20080306
 
 RFLErrcode  RFLiMakeNWC24MsgforExchange(NWC24MsgObj* obj, RFLCharData* work);
 RFLErrcode  RFLiMakeNWC24MsgforExchange_Debug(NWC24MsgObj* obj, RFLCharData* work);

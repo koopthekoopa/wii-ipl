@@ -20,7 +20,7 @@ typedef struct {
 
     u32                 userdata1; // 0x10
     u32                 userdata2; // 0x14
-} RFLiMiddleDB;
+} RFLiMiddleDatabase;
 
 RFLErrcode  RFLiUpdateMiddleDB(RFLMiddleDatabase* db);
 RFLErrcode  RFLiUpdateMiddleDBAsync(RFLMiddleDatabase* db, RFLSimpleCB cb, BOOL use_cache);

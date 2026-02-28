@@ -1166,7 +1166,7 @@ config.libs = [
             Object(Matching,    "RFL_NANDAccess.c"),
             Object(Matching,    "RFL_Model.c"),
             Object(Matching,    "RFL_MakeTex.c"),
-            Object(NonMatching, "RFL_Icon.c"),
+            Object(Matching,    "RFL_Icon.c"),
             Object(Matching,    "RFL_HiddenDatabase.c"),
             Object(Matching,    "RFL_Database.c"),
             Object(Matching,    "RFL_Controller.c"),
@@ -1174,7 +1174,7 @@ config.libs = [
             Object(Matching,    "RFL_MakeRandomFace.c"),
             Object(Matching,    "RFL_DefaultDatabase.c"),
             Object(Matching,    "RFL_DataUtility.c"),
-            Object(NonMatching, "RFL_NWC24.c"),
+            Object(Matching,    "RFL_NWC24.c"),
             Object(Matching,    "RFL_Format.c"),
         ]
     ),

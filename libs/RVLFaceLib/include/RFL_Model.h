@@ -70,6 +70,7 @@ GXColor         RFLGetFavoriteColor(RFLFavoriteColor favoriteColor);
 void            RFLDrawOpa(const RFLCharModel* charModel);
 void            RFLDrawXlu(const RFLCharModel* charModel);
 
+void            RFLLoadDrawSetting(const RFLDrawSetting* setting);
 void            RFLLoadVertexSetting(const RFLDrawCoreSetting* setting);
 void            RFLLoadMaterialSetting(const RFLDrawCoreSetting* setting);
 

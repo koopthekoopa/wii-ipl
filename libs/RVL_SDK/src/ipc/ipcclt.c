@@ -94,7 +94,6 @@ void IpcReplyHandler(__OSInterrupt interrupt, OSContext* context) {
 
             break;
         }
-
         case IPC_REQ_IOCTL: {
             req->args.ioctl.outPtr = (req->args.ioctl.outPtr) ? OSPhysicalToCached((u32)req->args.ioctl.outPtr) : NULL;
 
@@ -103,7 +102,6 @@ void IpcReplyHandler(__OSInterrupt interrupt, OSContext* context) {
 
             break;
         }
-
         case IPC_REQ_IOCTLV: {
             int i;
             IOSResourceIoctlv* v = &req->args.ioctlv;

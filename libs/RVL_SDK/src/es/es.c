@@ -7,8 +7,8 @@
 
 static IOSFd __esFd = -1;
 
-#define ESWork          u8 esWork[256] ALIGN32
-#define AtESWork(x)     (esWork + x)
+#define DECLARE_ES_WORK u8 __esWork[256] ALIGN32
+#define AT_ES_WORK(x)   (__esWork + x)
 
 #define IS_ALIGNED(x)   (((u32)(x) & 31) == 0)
 #define IS_ALIGNED64(x) (((u32)(x) & 63) == 0)
@@ -94,9 +94,9 @@ out:
 }
 
 ESError ES_ImportTicket(ESTicket* ticket, void* certs, u32 certSize, void* crls, u32 crlSize, int unknown) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
 
     ESError         ret = ES_ERR_OK;
 
@@ -136,9 +136,9 @@ out:
 }
 
 ESError ES_ImportBoot(ESTicket* ticket, void* certs, u32 certSize, void* tmd, u32 tmdSize, void* tmdCerts, u32 tmdCertSize, void* crls, u32 crlSize, void* app, u32 appSize) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
 
     ESError         ret = ES_ERR_OK;
 
@@ -212,9 +212,9 @@ out:
 }
 
 ESError ES_GetDeviceId(ESDeviceId* deviceId) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
 
     ESError         ret;
 
@@ -222,21 +222,21 @@ ESError ES_GetDeviceId(ESDeviceId* deviceId) {
         return ES_ERR_INVALID;
     }
 
-    vec[0].base = AtESWork(0x00);
+    vec[0].base = AT_ES_WORK(0x00);
     vec[0].length = sizeof(ESDeviceId);
 
     ret = IOS_Ioctlv(__esFd, ES_IOCTLV_GET_DEVICE_ID, 0, 1, vec);
     if (ret == IPC_RESULT_OK) {
-        *deviceId = *(ESDeviceId*)AtESWork(0x00);
+        *deviceId = *(ESDeviceId*)AT_ES_WORK(0x00);
     }
     return ret;
 }
 
 ESError ES_ImportTitleInit(void* tmd, u32 tmdSize, void* certs, u32 certSize, void* crls, u32 crlSize, int unknown0, int unknown1) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    int*            pUnknown = (int*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    int*            pUnknown = (int*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -295,11 +295,11 @@ ESError ES_ImportTitleInit(void* tmd, u32 tmdSize, void* certs, u32 certSize, vo
 }
 
 ESFd ES_ImportContentBegin(ESTitleId titleId, ESContentId contentId) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AtESWork(0x00);
-    ESContentId*    pContentId = (ESContentId*)AtESWork(0x20);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
+    ESContentId*    pContentId = (ESContentId*)AT_ES_WORK(0x20);
 
     ESError         ret;
 
@@ -320,10 +320,10 @@ ESFd ES_ImportContentBegin(ESTitleId titleId, ESContentId contentId) {
 }
 
 ESError ES_ImportContentData(ESFd fd, void* data, u32 dataSize) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESFd*           pFd = (ESFd*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESFd*           pFd = (ESFd*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -351,10 +351,10 @@ ESError ES_ImportContentData(ESFd fd, void* data, u32 dataSize) {
 }
 
 ESError ES_ImportContentEnd(ESFd fd) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESFd*           pFd = (ESFd*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESFd*           pFd = (ESFd*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -371,9 +371,9 @@ ESError ES_ImportContentEnd(ESFd fd) {
 }
 
 ESError ES_ImportTitleDone() {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
 
     ESError         ret;
 
@@ -386,9 +386,9 @@ ESError ES_ImportTitleDone() {
 }
 
 ESError ES_ImportTitleCancel() {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
 
     ESError         ret;
 
@@ -401,10 +401,10 @@ ESError ES_ImportTitleCancel() {
 }
 
 ESError ES_LaunchTitle(ESTitleId titleId, ESTicketView* ticket) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -432,10 +432,10 @@ ESError ES_LaunchTitle(ESTitleId titleId, ESTicketView* ticket) {
 }
 
 ESFd ES_OpenContentFile(ESContentId contentId) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESContentId*    pContentId = (ESContentId*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESContentId*    pContentId = (ESContentId*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -452,11 +452,11 @@ ESFd ES_OpenContentFile(ESContentId contentId) {
 }
 
 ESFd ES_OpenTitleContentFile(ESTitleId titleId, ESTicketView* ticketView, ESContentId contentIndex) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AtESWork(0x00);
-    ESContentId*    pContentId = (ESContentId*)AtESWork(0x20);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
+    ESContentId*    pContentId = (ESContentId*)AT_ES_WORK(0x20);
 
     ESError         ret;
 
@@ -480,10 +480,10 @@ ESFd ES_OpenTitleContentFile(ESTitleId titleId, ESTicketView* ticketView, ESCont
 }
 
 ESError ES_ReadContentFile(ESFd fd, void* buffer, u32 size) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESFd*           cFd = (ESFd*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESFd*           cFd = (ESFd*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -507,12 +507,12 @@ ESError ES_ReadContentFile(ESFd fd, void* buffer, u32 size) {
 }
 
 ESError ES_SeekContentFile(ESFd fd, s32 offset, u32 whence) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    s32*            pFd = (s32*)AtESWork(0x00);
-    s32*            pOffset = (s32*)AtESWork(0x20);
-    u32*            pWhence = (u32*)AtESWork(0x40);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    s32*            pFd = (s32*)AT_ES_WORK(0x00);
+    s32*            pOffset = (s32*)AT_ES_WORK(0x20);
+    u32*            pWhence = (u32*)AT_ES_WORK(0x40);
 
     ESError         ret;
 
@@ -537,10 +537,10 @@ ESError ES_SeekContentFile(ESFd fd, s32 offset, u32 whence) {
 }
 
 ESError ES_CloseContentFile(ESFd fd) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    s32*            pFd = (s32*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    s32*            pFd = (s32*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -557,10 +557,10 @@ ESError ES_CloseContentFile(ESFd fd) {
 }
 
 ESError ES_ListOwnedTitles(ESTitleId* titleIds, u32* numTitles) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    u32*            pNumTitles = (u32*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    u32*            pNumTitles = (u32*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -600,10 +600,10 @@ ESError ES_ListOwnedTitles(ESTitleId* titleIds, u32* numTitles) {
 }
 
 ESError ES_ListTitlesOnCard(ESTitleId* titleIds, u32* numTitles) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    u32*            pNumTitles = (u32*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    u32*            pNumTitles = (u32*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -643,11 +643,11 @@ ESError ES_ListTitlesOnCard(ESTitleId* titleIds, u32* numTitles) {
 }
 
 ESError ES_ListTitleContentsOnCard(ESTitleId titleId, ESContentId* contentIds, u32* numContents) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AtESWork(0x00);
-    u32*            pNumContents = (u32*)AtESWork(0x20);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
+    u32*            pNumContents = (u32*)AT_ES_WORK(0x20);
 
     ESError         ret;
 
@@ -694,10 +694,10 @@ ESError ES_ListTitleContentsOnCard(ESTitleId titleId, ESContentId* contentIds, u
 }
 
 ESError ES_ListTmdContentsOnCard(ESTitleMeta* tmd, u32 tmdSize, ESContentId* contentIds, u32* numContents) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    u32*            pNumContents = (u32*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    u32*            pNumContents = (u32*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -743,10 +743,10 @@ ESError ES_ListTmdContentsOnCard(ESTitleMeta* tmd, u32 tmdSize, ESContentId* con
 }
 
 ESError ES_ListSharedContents(u32* numContents, ESHash* hashes) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    u32*            pNumContents = (u32*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    u32*            pNumContents = (u32*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -786,11 +786,11 @@ ESError ES_ListSharedContents(u32* numContents, ESHash* hashes) {
 }
 
 ESError ES_GetTicketViews(ESTitleId titleId,  ESTicketView* ticketViewList, u32* numTicketViews) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AtESWork(0x00);
-    u32*            pNumTicketViews = (u32*)AtESWork(0x20);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
+    u32*            pNumTicketViews = (u32*)AT_ES_WORK(0x20);
 
     ESError         ret;
 
@@ -837,11 +837,11 @@ ESError ES_GetTicketViews(ESTitleId titleId,  ESTicketView* ticketViewList, u32*
 }
 
 ESError ES_GetTmd(ESTitleId titleId, ESTitleMeta* tmd, u32* tmdSize) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AtESWork(0x00);
-    u32*            pTmdSize = (u32*)AtESWork(0x20);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
+    u32*            pTmdSize = (u32*)AT_ES_WORK(0x20);
 
     ESError         ret;
 
@@ -888,11 +888,11 @@ ESError ES_GetTmd(ESTitleId titleId, ESTitleMeta* tmd, u32* tmdSize) {
 }
 
 ESError ES_GetTmdView(ESTitleId titleId, ESTmdView* tmdView, u32* tmdSize) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AtESWork(0x00);
-    u32*            pTmdSize = (u32*)AtESWork(0x20);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
+    u32*            pTmdSize = (u32*)AT_ES_WORK(0x20);
 
     ESError         ret;
 
@@ -939,10 +939,10 @@ ESError ES_GetTmdView(ESTitleId titleId, ESTmdView* tmdView, u32* tmdSize) {
 }
 
 ESError ES_DeleteTitleContent(ESTitleId titleId) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -959,11 +959,11 @@ ESError ES_DeleteTitleContent(ESTitleId titleId) {
 }
 
 ESError ES_DeleteContent(ESTitleId titleId, ESContentId contentId) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AtESWork(0x00);
-    ESContentId*    pContentId = (ESContentId*)AtESWork(0x20);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
+    ESContentId*    pContentId = (ESContentId*)AT_ES_WORK(0x20);
 
     ESError         ret;
 
@@ -984,10 +984,10 @@ ESError ES_DeleteContent(ESTitleId titleId, ESContentId contentId) {
 }
 
 ESError ES_DeleteTitle(ESTitleId titleId) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -1004,9 +1004,9 @@ ESError ES_DeleteTitle(ESTitleId titleId) {
 }
 
 ESError ES_DeleteTicket(ESTicketView* ticket) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
 
     ESError         ret;
 
@@ -1026,9 +1026,9 @@ ESError ES_DeleteTicket(ESTicketView* ticket) {
 }
 
 ESError ES_GetTitleId(ESTitleId* titleId) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
 
     ESError         ret;
 
@@ -1036,22 +1036,21 @@ ESError ES_GetTitleId(ESTitleId* titleId) {
         return ES_ERR_INVALID;
     }
 
-    // Explicity use espWork instead of a pointer... ???
-    vec[0].base = AtESWork(0x00);
+    vec[0].base = AT_ES_WORK(0x00);
     vec[0].length = sizeof(ESTitleId);
 
     ret = IOS_Ioctlv(__esFd, ES_IOCTLV_GET_TITLE_ID, 0, 1, vec);
     if (ret == IPC_RESULT_OK) {
-        *titleId = *(ESTitleId*)AtESWork(0x00);;
+        *titleId = *(ESTitleId*)AT_ES_WORK(0x00);
     }
     return ret;
 }
 
 ESError ES_SetUid(ESTitleId titleId) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -1068,9 +1067,9 @@ ESError ES_SetUid(ESTitleId titleId) {
 }
 
 ESError ES_GetDeviceCert(void* deviceCert) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
 
     ESError         ret;
 
@@ -1090,10 +1089,10 @@ ESError ES_GetDeviceCert(void* deviceCert) {
 }
 
 ESError ES_DiGetTmdView(ESTitleMeta* tmd, u32 tmdSize, ESTmdView* tmdView, u32* tmdViewSize) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    u32*            pTmdViewSize = (u32*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    u32*            pTmdViewSize = (u32*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -1139,10 +1138,10 @@ ESError ES_DiGetTmdView(ESTitleMeta* tmd, u32 tmdSize, ESTmdView* tmdView, u32* 
 }
 
 ESError ES_ExportTitleInit(ESTitleId titleId, ESDeviceId deviceId, ESTicketId ticketId, void* certs, u32 certSize, void* crls, u32 crlSize, int unknown, void* ticket, void* tmd, u32 tmdSize) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -1179,11 +1178,11 @@ ESError ES_ExportTitleInit(ESTitleId titleId, ESDeviceId deviceId, ESTicketId ti
 }
 
 ESError ES_ExportContentBegin(ESTitleId titleId, ESContentId contentId) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AtESWork(0x00);
-    ESContentId*    pContentId = (ESContentId*)AtESWork(0x20);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
+    ESContentId*    pContentId = (ESContentId*)AT_ES_WORK(0x20);
 
     ESError         ret;
 
@@ -1204,10 +1203,10 @@ ESError ES_ExportContentBegin(ESTitleId titleId, ESContentId contentId) {
 }
 
 ESError ES_ExportContentData(ESFd fd, void* data, u32 dataSize) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESFd*           pFd = (ESFd*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESFd*           pFd = (ESFd*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -1235,10 +1234,10 @@ ESError ES_ExportContentData(ESFd fd, void* data, u32 dataSize) {
 }
 
 ESError ES_ExportContentEnd(ESFd fd) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    ESFd*           pFd = (ESFd*)AtESWork(0x00);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESFd*           pFd = (ESFd*)AT_ES_WORK(0x00);
 
     ESError         ret;
 
@@ -1255,9 +1254,9 @@ ESError ES_ExportContentEnd(ESFd fd) {
 }
 
 ESError ES_ExportTitleDone() {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
 
     ESError         ret;
 
@@ -1270,11 +1269,11 @@ ESError ES_ExportTitleDone() {
 }
 
 ESError ES_Encrypt(u32 keyNum, u8* iv, u8* input, u32 size, u8* output) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    u32*            pKeyNum = (u32*)AtESWork(0x00);
-    u32*            pSize = (u32*)AtESWork(0x20);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    u32*            pKeyNum = (u32*)AT_ES_WORK(0x00);
+    u32*            pSize = (u32*)AT_ES_WORK(0x20);
 
     ESError         ret;
 
@@ -1306,11 +1305,11 @@ ESError ES_Encrypt(u32 keyNum, u8* iv, u8* input, u32 size, u8* output) {
 }
 
 ESError ES_Decrypt(u32 keyNum, u8* iv, u8* input, u32 size, u8* output) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
-    u32*            pKeyNum = (u32*)AtESWork(0x00);
-    u32*            pSize = (u32*)AtESWork(0x20);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    u32*            pKeyNum = (u32*)AT_ES_WORK(0x00);
+    u32*            pSize = (u32*)AT_ES_WORK(0x20);
 
     ESError         ret;
 
@@ -1342,9 +1341,9 @@ ESError ES_Decrypt(u32 keyNum, u8* iv, u8* input, u32 size, u8* output) {
 }
 
 ESError ES_VerifyCK2() {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
 
     ESError         ret;
 
@@ -1357,9 +1356,9 @@ ESError ES_VerifyCK2() {
 }
 
 ESError ES_GetBoot2Version(u32* bootVersion) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
 
     ESError         ret;
 
@@ -1367,20 +1366,20 @@ ESError ES_GetBoot2Version(u32* bootVersion) {
         return ES_ERR_INVALID;
     }
 
-    vec[0].base = (u8*)AtESWork(0x00);
+    vec[0].base = (u8*)AT_ES_WORK(0x00);
     vec[0].length = sizeof(*bootVersion);
 
     ret = IOS_Ioctlv(__esFd, ES_IOCTLV_GET_BOOT2_VERSION, 0, 1, vec);
     if (ret == IPC_RESULT_OK) {
-        *bootVersion = *(u32*)AtESWork(0x00);
+        *bootVersion = *(u32*)AT_ES_WORK(0x00);
     }
     return ret;
 }
 
 ESError ES_Sign(void* data, u32 length, ESSignature signature, ESCertSignature* sigKeyCert) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
 
     ESError         ret;
 
@@ -1406,9 +1405,9 @@ ESError ES_Sign(void* data, u32 length, ESSignature signature, ESCertSignature* 
 }
 
 ESError ES_VerifySign(void* data, u32 length, ESSignature signature, void* certs, u32 certSize) {
-    ESWork;
+    DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AtESWork(0xD0);
+    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
 
     ESError         ret;
 

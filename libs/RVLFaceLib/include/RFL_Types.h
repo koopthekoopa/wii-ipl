@@ -73,6 +73,16 @@ typedef enum {
 } RFLExpression;
 
 typedef enum {
+    RFLExpFlag_Normal = 1,
+    RFLExpFlag_Smile = 2,
+    RFLExpFlag_Anger = 4,
+    RFLExpFlag_Sorrow = 8,
+    RFLExpFlag_Surprise = 16,
+    RFLExpFlag_Blink = 32,
+    RFLExpFlag_OpenMouth = 64,
+} RFLExpFlag;
+
+typedef enum {
     RFLFavoriteColor_Red = 0,
     RFLFavoriteColor_Orange,
     RFLFavoriteColor_Yellow,
