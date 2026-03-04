@@ -1,6 +1,6 @@
 #include <zi8clib/zitypes.h>
 #include <zi8clib/zierror.h>
-#pragma sym on
+
 ziU8 Zi8LangSupported(ziU8 lang ZI_NEED_WORK) {
     ziU8 i;
 

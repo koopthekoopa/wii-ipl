@@ -1539,12 +1539,11 @@ config.libs = [
         ]
     ),
     RVLSDKLib("wpad", [
-            Object(NonMatching, "wpad/WPAD.c"),
+            Object(Equivalent,  "wpad/WPAD.c"),
             Object(NonMatching, "wpad/WPADHIDParser.c"),
-            Object(NonMatching, "wpad/WPADMem.c"),
-            Object(NonMatching, "wpad/WPADEncrypt.c"),
-            Object(NonMatching, "wpad/WPADEncrypt.c"),
-            Object(NonMatching, "wpad/debug_msg.c"),
+            Object(Matching,    "wpad/WPADMem.c"),
+            Object(Matching,    "wpad/WPADEncrypt.c"),
+            Object(Matching,    "wpad/debug_msg.c"),
         ]
     ),
     RVLSDKLib("kpad", [

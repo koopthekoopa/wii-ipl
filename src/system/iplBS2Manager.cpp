@@ -7,7 +7,7 @@
 #include <revolution/os/OSBootInfo.h>
 #include <private/os.h>
 
-#include <revolution/wpad.h>
+#include <private/wpad/WPADInternal.h>
 
 #define MAX_ENTRIES 34
 

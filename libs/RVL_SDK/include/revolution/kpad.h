@@ -9,6 +9,8 @@ extern "C" {
 #include <revolution/wpad.h>
 #include <revolution/mtx/GeoTypes.h>
 
+typedef WPADCallback KPADCallback;
+
 typedef union KPADEXStatus {
     struct {
         Vec2    stick;
@@ -62,7 +64,19 @@ typedef struct KPADStatus {
     KPADEXStatus    ex_status;
 } KPADStatus;
 
-s32 KPADRead(s32 chan, KPADStatus* status, u32 length);
+void    KPADInit();
+s32     KPADRead(s32 chan, KPADStatus* status, u32 length);
+
+void    KPADSetSensorHeight(s32 chan, f32 sensorHeight);
+void    KPADGetProjectionPos(f32, f32*, const f32* param_3, const f32* param_4);
+
+void    KPADSetPosParam(s32 chan, f32 x, f32 y);
+void    KPADSetBtnRepeat(s32 chan, f32, f32);
+
+void    KPADEnableDPD(s32 chan);
+void    KPADDisableDPD(s32 chan);
+
+void    KPADSetControlDpdCallback(s32 chan, KPADCallback *cb);
 
 #ifdef __cplusplus
 }

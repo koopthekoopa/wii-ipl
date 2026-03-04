@@ -7,6 +7,15 @@
 extern "C" {
 #endif // __cplusplus
 
+#define WPAD_MAX_DPD_OBJECTS    4
+
+#define WPAD_MIN_DPD_SENS       1
+#define WPAD_MAX_DPD_SENS       5
+
+#define WPAD_MAX_DPD_X          1023
+#define WPAD_MAX_DPD_Y          767
+
+#define WPAD_MAX_SPEAKER_VOLUME 127
 
 typedef void* (*WPADAllocFunc)(u32 size);
 typedef BOOL (*WPADFreeFunc)(void* block);
@@ -16,6 +25,7 @@ typedef void (*WPADClearDeviceCallback)(s32 result);
 
 /* WPAD CHANNEL */
 
+#define WPAD_CHAN_INVALID       -1
 #define WPAD_CHAN0              0
 #define WPAD_CHAN1              1
 #define WPAD_CHAN2              2
@@ -83,6 +93,14 @@ enum {
 #define WPAD_BUTTON_CL_RIGHT    (1 << 15)   // 0x8000
 
 enum {
+    WPAD_LIB_STATUS_0,
+    WPAD_LIB_STATUS_1,
+    WPAD_LIB_STATUS_2,
+    WPAD_LIB_STATUS_3,
+    WPAD_LIB_STATUS_4,
+};
+
+enum {
     WPAD_FMT_CORE_BTN,
     WPAD_FMT_CORE_BTN_ACC,
     WPAD_FMT_CORE_BTN_ACC_DPD,
@@ -148,6 +166,15 @@ typedef struct DPDObject {
     u8  traceId;    // 0x06
 } DPDObject;
 
+typedef struct DPDObjEx {
+    s16 range_x1;   // 0x0
+    s16 range_y1;   // 0x2
+    s16 range_x2;   // 0x4
+    s16 range_y2;   // 0x6
+    u16 pixel;      // 0x8
+    s8  radius;     // 0xA
+} DPDObjEx;
+
 typedef struct WPADStatus {
     u16         button;                     // 0x00
     s16         accX;                       // 0x02
@@ -160,19 +187,37 @@ typedef struct WPADStatus {
     s8          err;                        // 0x29
 } WPADStatus;
 
+typedef struct WPADStatusEx {
+    u16         button;                     // at 0x0
+
+    s16         accX;                       // at 0x2
+    s16         accY;                       // at 0x4
+    s16         accZ;                       // at 0x6
+
+    DPDObject   obj[WPAD_MAX_DPD_OBJECTS];  // at 0x8
+    u8          dev;                        // at 0x28
+    s8          err;                        // at 0x29
+
+    DPDObjEx    exp[WPAD_MAX_DPD_OBJECTS];  // at 0x2A
+} WPADStatusEx;
+
 typedef struct WPADFSStatus {
-    u16 button; // 0x0, 0x2
-    s16 accX; // 0x2, 0x2
-    s16 accY; // 0x4, 0x2
-    s16 accZ; // 0x6, 0x2
-    struct DPDObject obj[4]; // 0x8, 0x20
-    u8 dev; // 0x28, 0x1
-    s8 err; // 0x29, 0x1
-    s16 fsAccX; // 0x2A, 0x2
-    s16 fsAccY; // 0x2C, 0x2
-    s16 fsAccZ; // 0x2E, 0x2
-    s8 fsStickX; // 0x30, 0x1
-    s8 fsStickY; // 0x31, 0x1
+    u16         button;                     // 0x00
+
+    s16         accX;                       // 0x02
+    s16         accY;                       // 0x04
+    s16         accZ;                       // 0x06
+
+    DPDObject   obj[WPAD_MAX_DPD_OBJECTS];  // 0x08
+    u8          dev;                        // 0x28
+    s8          err;                        // 0x29
+
+    s16         fsAccX;                     // 0x2A
+    s16         fsAccY;                     // 0x2C
+    s16         fsAccZ;                     // 0x2E
+
+    s8          fsStickX;                   // 0x30
+    s8          fsStickY;                   // 0x31
 } WPADFSStatus;
 
 typedef struct WPADCLStatus {
@@ -181,7 +226,7 @@ typedef struct WPADCLStatus {
     s16         accY;                       // 0x04
     s16         accZ;                       // 0x06
 
-    DPDObject   obj[WPAD_MAX_CONTROLLERS];  // 0x08
+    DPDObject   obj[WPAD_MAX_DPD_OBJECTS];  // 0x08
 
     u8          dev;                        // 0x28
     s8          err;                        // 0x29
@@ -203,7 +248,7 @@ typedef struct WPADTRStatus {
     s16 accY;                               // 0x04
     s16 accZ;                               // 0x06
 
-    DPDObject obj[WPAD_MAX_CONTROLLERS];    // 0x08
+    DPDObject obj[WPAD_MAX_DPD_OBJECTS];    // 0x08
 
     u8 dev;                                 // 0x28
     s8 err;                                 // 0x29
@@ -219,12 +264,12 @@ typedef struct WPADBLStatus {
     s16 accY;                               // 0x04
     s16 accZ;                               // 0x06
 
-    DPDObject obj[WPAD_MAX_CONTROLLERS];    // 0x08
+    DPDObject obj[WPAD_MAX_DPD_OBJECTS];    // 0x08
 
     u8 dev;                                 // 0x28
     s8 err;                                 // 0x29
 
-    u16 press[WPAD_MAX_CONTROLLERS];        // 0x2A
+    u16 press[WPAD_MAX_DPD_OBJECTS];        // 0x2A
     s8 temp;                                // 0x32
     u8 battery;                             // 0x33
 } WPADBLStatus;
@@ -241,6 +286,12 @@ typedef struct WPADInfo {
     u8      protocol;   // 0x16
     u8      firmware;   // 0x17
 } WPADInfo;
+
+typedef struct WPADAccGravityUnit {
+    s16 x; // at 0x0
+    s16 y; // at 0x2
+    s16 z; // at 0x4
+} WPADAccGravityUnit;
 
 typedef void (*WPADCallback)(s32 chan, s32 result);
 typedef void (*WPADSamplingCallback)(s32 chan);
@@ -266,7 +317,7 @@ u32                     WPADGetWorkMemorySize();
 s32                     WPADGetStatus();
 u8                      WPADGetSensorBarPosition();
 
-void                    WPADGetAccGravityUnit(s32 chan, u32 type, s32* acc);
+void                    WPADGetAccGravityUnit(s32 chan, u32 type, WPADAccGravityUnit* acc);
 
 void                    WPADDisconnect(s32 chan);
 s32                     WPADProbe(s32 chan, u32* pDevType);
@@ -284,10 +335,13 @@ void                    WPADControlMotor(s32 chan, u32 command);
 void                    WPADEnableMotor(BOOL enable);
 BOOL                    WPADIsMotorEnabled();
 
+s32                     WPADControlLed(s32 chan, u8 flags, WPADCallback pCallback);
 BOOL                    WPADSaveConfig(WPADSaveCallback callback);
 
 void                    WPADRead(s32 chan, WPADStatus* status);
 void                    WPADSetAutoSamplingBuf(s32 chan, void* buffer, u32 len);
+
+u32                     WPADGetLatestIndexInBuf(s32 chan);
 
 BOOL                    WPADIsSpeakerEnabled(s32 chan);
 s32                     WPADControlSpeaker(s32 chan, u32 command, WPADCallback callback);
@@ -297,6 +351,7 @@ void                    WPADSetSpeakerVolume(u8 volume);
 BOOL                    WPADCanSendStreamData(s32 chan);
 s32                     WPADSendStreamData(s32 chan, void* data, u16 len);
 
+void                    WPADSetDpdSensitivity(u8 sensitivity);
 u8                      WPADGetDpdSensitivity();
 BOOL                    WPADSetSensorBarPower(BOOL enable);
 BOOL                    WPADIsDpdEnabled(s32 chan);
@@ -306,8 +361,6 @@ void                    WPADRecalibrate(s32 chan);
 
 s32                     WPADReadFaceData(s32 chan, void* dst, u16 size, u16 src, WPADCallback cb);
 s32                     WPADWriteFaceData(s32 chan, void *dst, u16 size, u16 src, WPADCallback cb);
-
-void                    __WPADReconnect(BOOL reconnect);
 
 #ifdef __cplusplus
 }

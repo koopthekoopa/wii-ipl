@@ -9,6 +9,7 @@
 #include "iplSystem.h"
 
 #include <private/os.h>
+#include <private/wpad/WPADInternal.h>
 
 namespace ipl {
     namespace scene {

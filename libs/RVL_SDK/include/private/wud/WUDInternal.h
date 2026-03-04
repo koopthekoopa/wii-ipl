@@ -18,6 +18,8 @@
 extern "C" {
 #endif
 
+void WUD_DEBUGPrint(const char* format, ...);
+
 #define WUD_BDCMP(LHS, RHS)             memcmp(LHS, RHS, BD_ADDR_LEN)
 #define WUD_BDCPY(DST, SRC)             memcpy(DST, SRC, BD_ADDR_LEN)
 

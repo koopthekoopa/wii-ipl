@@ -8,6 +8,7 @@ extern "C" {
 #endif
 
 void    __VISetRGBModeImm();
+void    __VIResetRFIdle();
 void    __VIResetSIIdle();
 
 void    __VIGetCurrentPosition(s16* x, s16* y);

@@ -66,6 +66,7 @@
 
 /* Hollywood GPIOs */
 #define HW_GPIOB_OUT            0x0C0
+#define HW_GPIOB_OUT_SENSOR_BAR 8
 #define HW_GPIOB_DIR            0x0C4
 #define HW_GPIOB_IN             0x0C8
 #define HW_GPIOB_INTLVL         0x0CC
@@ -199,5 +200,13 @@ vu32    __ACRIOPRegs[256]       ADDRESS(OS_BASE_UNCACHED + ACR_REG_ADDRESS + AHB
 #define ACRIOP_SET_REG_F(x, v)      __hw_set_bit  (__ACRIOPRegs[x >> 2], v)
 #define ACRIOP_DEL_REG_F(x, v)      __hw_clear_bit(__ACRIOPRegs[x >> 2], v)
 #define ACRIOP_HAS_REG_F(x, v)      __hw_has_bit  (__ACRIOPRegs[x >> 2], v)
+
+// these are for WPAD only
+inline u32 ACRReadReg(u32 offset) {
+    return ACR_READ_REG32(offset);
+}
+inline void ACRWriteReg(u32 offset, u32 val) {
+    ACR_WRITE_REG32(offset, val);
+}
 
 #endif // PRIVATE_HOLLYWOOD_REGISTERS_H

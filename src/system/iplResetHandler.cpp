@@ -3,6 +3,7 @@
 #include <decomp.h>
 
 #include <revolution.h>
+#include <private/wpad/WPADInternal.h>
 
 #include "iplSystem.h"
 #include "system/iplTVRCManager.h"

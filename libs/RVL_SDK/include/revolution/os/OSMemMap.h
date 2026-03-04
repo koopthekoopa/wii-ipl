@@ -100,4 +100,6 @@
 #define OS_ADDR_BOOT_PART_TYPE          0x3194
 #define OS_ADDR_BOOT_PART_OFFSET        0x3198
 
+#define OS_ADDR_WIFI_AFH_CHANNEL        0x31A2
+
 #endif // REVOLUTION_OS_MEMORY_MAP_H

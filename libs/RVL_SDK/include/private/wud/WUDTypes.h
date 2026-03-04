@@ -12,8 +12,6 @@
 extern "C" {
 #endif
 
-void WUD_DEBUGPrint(const char* format, ...);
-
 #define WUD_MAX_DEV_ENTRY_FOR_STD SC_MAX_DEV_ENTRY_FOR_STD
 #define WUD_MAX_DEV_ENTRY_FOR_SMP SC_MAX_DEV_ENTRY_FOR_SMP
 #define WUD_MAX_DEV_ENTRY SC_MAX_DEV_ENTRY
