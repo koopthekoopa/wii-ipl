@@ -283,6 +283,7 @@ cflags_includes = [
     "-i libs/RevoEX/include",
     "-i libs/NW4R/include",
     "-i libs/RVLMiddleware/eZiText/include",
+    # "-i libs/RVLMiddleware/ATOKDict/include",
     "-i libs/RVLFaceLib/include",
     "-i libs/EGG/include",
     "-i libs/OperaWWW/include",
@@ -384,7 +385,10 @@ cflags_sdk_except = [
 # Zi8 C Library
 cflags_zi8 = [
     *cflags_base,
-    "-ipa file",
+    "-inline off",
+    "-opt off",
+    "-str readonly",
+    "-sdata 0",
     "-fp_contract off",
     "-Cpp_exceptions on",
 ]
@@ -971,7 +975,7 @@ config.libs = [
             Object(NonMatching, "clib/zi8alts.c"),
             Object(NonMatching, "clib/zi8cgetc.c"),
             Object(NonMatching, "clib/zi8cinfo.c"),
-            Object(NonMatching, "clib/zi8copy.c"),
+            Object(Matching,    "clib/zi8copy.c"),
             Object(NonMatching, "clib/zi8dawg.c"),
             Object(NonMatching, "clib/zi8getc.c"),
             Object(NonMatching, "clib/zi8getc2.c"),
@@ -984,7 +988,7 @@ config.libs = [
             Object(NonMatching, "clib/Zi8punct.c"),
             Object(NonMatching, "clib/zi8space.c"),
             Object(NonMatching, "clib/zi8uwd.c"),
-            Object(NonMatching, "clib/zi8ver.c"),
+            Object(Matching,    "clib/zi8ver.c"),
             Object(NonMatching, "clib/zi8ZHuwd.c"),
             Object(NonMatching, "clib/zidawg1.c"),
             Object(NonMatching, "clib/zikorean.c"),

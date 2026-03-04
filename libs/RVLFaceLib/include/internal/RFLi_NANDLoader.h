@@ -32,9 +32,9 @@ typedef enum {
 } RFLiArcID;
 
 typedef struct {
-    u16 num; // 0x00
-    u16 maxsize; // 0x02
-    u32 offset; // 0x04
+    u16 num;        // 0x00
+    u16 maxsize;    // 0x02
+    u32 offset;     // 0x04
 } RFLiNANDArchive;
 
 typedef struct {

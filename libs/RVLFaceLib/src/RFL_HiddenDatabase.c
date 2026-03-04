@@ -197,7 +197,7 @@ static void savehiddenheadercallback_() {
     RFLiCloseAsync(RFLiFileType_Database, RFLiGetHDBManager()->writeCallback);
 }
 
-static void saveheaderCreateCRCCb_() {
+static void saveheaderCreateCRCCb_(u32 unused /*not in dwarf*/) {
     RFLiHiddenDatabase* header = RFLiGetHiddenHeader();
 
     switch (RFLiWriteAsync(RFLiFileType_Database, header, sizeof(RFLiHiddenDatabase), savehiddenheadercallback_, 0x1D00)) {
@@ -305,7 +305,7 @@ RFLErrcode RFLiDeleteHiddenDataIDAsync(const RFLCreateID* id) {
     return RFLiDeleteHiddenDataAsync(index);
 }
 
-static void updateOfficialCalcCRCCb_() {
+static void updateOfficialCalcCRCCb_(u32 unused /*not in dwarf*/) {
     switch (RFLiWriteAsync(RFLiFileType_Database, RFLiGetHiddenHeader(), sizeof(RFLiHiddenDatabase), updateOfficial2HiddenWriteCb_, 0x1D00)) {
         case RFLErrcode_Success:
         case RFLErrcode_Busy: {
@@ -559,7 +559,7 @@ static void writeCallback_() {
     }
 }
 
-// DEBUG NON MATCH
+// DEBUG NON MATCH (https://decomp.me/scratch/l7B9S)
 static void writeData_(const RFLiHiddenCharData* data /* r27 */) {
     RFLiHiddenDBManager* manager = RFLiGetHDBManager(); // r31
     s32 offset = 0; // r29

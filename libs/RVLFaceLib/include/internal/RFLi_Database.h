@@ -103,7 +103,7 @@ BOOL                RFLiDBIsLoaded();
 u16                 RFLiCalculateCRC(void* head, u32 size);
 
 void                RFLiCreateHeaderCRC();
-void                RFLiCreateHeaderCRCAsync(RFLSimpleCB cb);
+void                RFLiCreateHeaderCRCAsync(RFLSimpleCBArg cb);
 
 BOOL                RFLiCheckHeaderCRC();
 void                RFLiCheckHeaderCRCAsync(RFLSimpleCBArg cb);

@@ -491,7 +491,6 @@ static void readcallback_(s32 result, NANDCommandBlock* block) {
         if (result > info->readinfo.size) {
             RFLi_ASSERTLINE_MSG(FALSE, 863, "Read size OVER provided Buffer length.\n");
 
-            // unreachable for debug
             clear = TRUE;
             RFLiEndWorking(RFLErrcode_Loadfail);
         }

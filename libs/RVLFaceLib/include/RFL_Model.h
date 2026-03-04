@@ -25,29 +25,29 @@ typedef struct {
 } RFLCharModel;
 
 typedef struct {
-    u8          lightEnable; // 0x00
-    u32         lightMask; // 0x04
+    u8          lightEnable;    // 0x00
+    u32         lightMask;      // 0x04
 
-    GXDiffuseFn diffFn; // 0x08
-    GXAttnFn    attnFn; // 0x0C
+    GXDiffuseFn diffFn;         // 0x08
+    GXAttnFn    attnFn;         // 0x0C
 
-    GXColor     ambientColor; // 0x10
+    GXColor     ambientColor;   // 0x10
 
-    GXBool      zCompLoc; // 0x14
+    GXBool      zCompLoc;       // 0x14
 } RFLDrawSetting;
 
 typedef struct {
-    u8              txcGenNum; // 0x00
-    GXTexCoordID    txcID; // 0x04
+    u8              txcGenNum;      // 0x00
+    GXTexCoordID    txcID;          // 0x04
 
-    GXTexMapID      texMapID; // 0x08
+    GXTexMapID      texMapID;       // 0x08
 
-    u8              tevStageNum; // 0x0C
-    GXTevSwapSel    tevSwapTable; // 0x10
-    GXTevKColorID   tevKColorID; // 0x14
-    GXTevRegID      tevOutRegID; // 0x18
+    u8              tevStageNum;    // 0x0C
+    GXTevSwapSel    tevSwapTable;   // 0x10
+    GXTevKColorID   tevKColorID;    // 0x14
+    GXTevRegID      tevOutRegID;    // 0x18
 
-    GXPosNrmMtx     posNrmMtxID; // 0x1C
+    GXPosNrmMtx     posNrmMtxID;    // 0x1C
 
     GXBool          reverseCulling; // 0x20
 } RFLDrawCoreSetting;

@@ -87,8 +87,8 @@ void RFLiGetDefaultData(RFLiCharInfo* info, u16 index) {
     RFLiConvertRaw2Info((RFLiCharData*)scDefaultData[index], info);
 }
 
-int RFLSearchDefaultData(const RFLCreateID* id, u16* index) {
-    int ret = FALSE;
+BOOL RFLSearchDefaultData(const RFLCreateID* id, u16* index) {
+    BOOL ret = FALSE;
     u16 i;
 
     RFLi_ASSERTLINE_NULL(id, 194);

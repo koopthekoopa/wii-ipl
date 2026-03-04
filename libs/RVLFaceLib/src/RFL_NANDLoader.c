@@ -6,6 +6,7 @@
 #include <internal/RFLi_Debug.h>
 
 #include <revolution/os.h>
+#include <private/nand.h>
 #include <revolution/nand.h>
 
 #include <string.h>
@@ -44,6 +45,8 @@ static void parseOnmemoryRes_() {
 
     offset = loader->mCacheBuffer;
     ptr = (u16*)offset;
+
+    // Check version
     loader->mVersion = ptr[1];
     RFLi_REPORT("RFL: Load Resource Version = %06d\n", loader->mVersion);
     RFLi_ASSERTLINE_MSG(loader->mVersion >= 0x39D, 78, "RFL : resource is old.");
@@ -132,6 +135,7 @@ static void loadResRead1stcallback_() {
         s32* offset = (s32*)loader->mHeaderBuf1;
         u16* ptr = (u16*)offset;
 
+        // Check version
         loader->mVersion = ptr[1];
         RFLi_REPORT("RFL: Load Resource Version = %06d\n", loader->mVersion);
         RFLi_ASSERTLINE_MSG(loader->mVersion >= 0x39D, 208, "RFL : resource is old.");
@@ -250,7 +254,7 @@ static u32 getSafetyLength_(NANDFileInfo* info) {
         return *(u16*)&buffer[0];
     }
     else {
-        return NULL;
+        return 0;
     }
 }
 

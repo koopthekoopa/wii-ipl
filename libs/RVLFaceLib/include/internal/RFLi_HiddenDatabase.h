@@ -15,7 +15,7 @@
 extern "C" {
 #endif
 
-#define RFLi_HIDDEN_DB_IDENTIFIER   'RNHD'
+#define RFLi_HIDDEN_DB_IDENTIFIER   0x524E4844 /*'RNHD'*/
 
 #define RFL_MAX_HIDDEN_DB   (10000)
 

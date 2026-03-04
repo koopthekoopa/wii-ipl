@@ -234,7 +234,7 @@ static void saveDBmultiopencallback_() {
     }
 }
 
-static void createCRCForSaveDBCallback_() {
+static void createCRCForSaveDBCallback_(u32 unused /*not in dwarf*/) {
     RFLiDatabaseManager* manager = RFLiGetDBManager();
 
     switch (manager->saveType) {
@@ -1057,10 +1057,10 @@ BOOL RFLiIsValidName(const RFLiCharData* data) {
     RFLi_ASSERTLINE_NULL(data, 1512);
 
     if (data == NULL) {
-        return NULL;
+        return FALSE;
     }
 
-    return *data->name != NULL ? TRUE : FALSE;
+    return *data->name != 0L ? TRUE : FALSE;
 }
 
 BOOL RFLiIsValidName2(const RFLiCharInfo* info) {
@@ -1069,7 +1069,7 @@ BOOL RFLiIsValidName2(const RFLiCharInfo* info) {
     RFLi_ASSERTLINE_NULL(info, 1533);
 
     if (info == NULL) {
-        return NULL;
+        return FALSE;
     }
 
     RFLiConvertInfo2Raw(info, &data);

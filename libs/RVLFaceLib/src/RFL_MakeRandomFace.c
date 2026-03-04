@@ -14,7 +14,7 @@
 
 #define DEFAULT_NAME    L"no name"
 
-#define ARRAY_SIZE(x) (sizeof((x)) / sizeof((x)[0]))
+#define GET_ARRAY_LENGTH(x) (sizeof((x)) / sizeof((x)[0]))
 
 void RFLi_MakeRandomFace_Core(RFLiCharInfo* pCharInfo, RFLi_SEX argSex, RFLi_AGE argAge, RFLi_RACE argRace);
 
@@ -97,10 +97,10 @@ void RFLi_MakeRandomFace_Core(RFLiCharInfo* pCharInfo, RFLi_SEX argSex, RFLi_AGE
     u8 yOffset = 0;
     int i;
 
-    if (sex == RFLSex_Female) {
+    if (sex == RFLi_SEX_FEMALE) {
         yOffset += RFLi_GetRandU32(3);
     }
-    if (age == RFLAge_Child) {
+    if (age == RFLi_AGE_CHILD) {
         yOffset += RFLi_GetRandU32(3);
     }
 
@@ -116,7 +116,7 @@ void RFLi_MakeRandomFace_Core(RFLiCharInfo* pCharInfo, RFLi_SEX argSex, RFLi_AGE
     pCharInfo->eye.color = RFLi_GetEyeColor(race);
     pCharInfo->eye.scale = 4;
 
-    if (sex == RFLSex_Male) {
+    if (sex == RFLi_SEX_MALE) {
         pCharInfo->eye.rotate = 4;
         pCharInfo->eye.rotate += (RFLi_EYE_ROT_OFFSET[2] - RFLi_EYE_ROT_OFFSET[pCharInfo->eye.type]);
     }
@@ -132,7 +132,7 @@ void RFLi_MakeRandomFace_Core(RFLiCharInfo* pCharInfo, RFLi_SEX argSex, RFLi_AGE
     pCharInfo->eyebrow.scale = 4;
     pCharInfo->eyebrow.rotate = 6;
     pCharInfo->eyebrow.x = 2;
-    if (race == RFLRace_Asian) {
+    if (race == RFLi_RACE_ASIAN) {
         pCharInfo->eyebrow.y = yOffset + 9;
         pCharInfo->eyebrow.rotate += (RFLi_EYEBROW_ROT_OFFSET[6] - RFLi_EYEBROW_ROT_OFFSET[pCharInfo->eyebrow.type]);
     }
@@ -142,7 +142,7 @@ void RFLi_MakeRandomFace_Core(RFLiCharInfo* pCharInfo, RFLi_SEX argSex, RFLi_AGE
     }
 
     pCharInfo->nose.type = RFLi_GetNoseType(sex, age, race);
-    if (sex == RFLSex_Male) {
+    if (sex == RFLi_SEX_MALE) {
         pCharInfo->nose.scale = 4;
     }
     else {
@@ -151,7 +151,7 @@ void RFLi_MakeRandomFace_Core(RFLiCharInfo* pCharInfo, RFLi_SEX argSex, RFLi_AGE
     pCharInfo->nose.y = yOffset + 9;
 
     pCharInfo->mouth.type = RFLi_GetMouthType(sex, age, race);
-    if (sex == RFLSex_Male) {
+    if (sex == RFLi_SEX_MALE) {
         pCharInfo->mouth.color = 0;
     }
     else {
@@ -160,7 +160,7 @@ void RFLi_MakeRandomFace_Core(RFLiCharInfo* pCharInfo, RFLi_SEX argSex, RFLi_AGE
     pCharInfo->mouth.scale = 4;
     pCharInfo->mouth.y = yOffset + 13;
 
-    if (sex == RFLSex_Male && (age == RFLAge_Adult || age == RFLAge_Elder) && RFLi_GetRandU32(10) < 2) {
+    if (sex == RFLi_SEX_MALE && (age == RFLi_AGE_ADULT || age == RFLi_AGE_ELDER) && RFLi_GetRandU32(10) < 2) {
         u32 r = RFLi_GetRandU32(3);
 
         if (r == 0) {
@@ -204,7 +204,7 @@ void RFLi_MakeRandomFace_Core(RFLiCharInfo* pCharInfo, RFLi_SEX argSex, RFLi_AGE
     for (i = 0; i < RFL_NAME_LENGTH + 1; i++) {
         pCharInfo->personal.name[i] = 0;
     }
-    wcsncpy(pCharInfo->personal.name, (wchar_t*)DEFAULT_NAME, ARRAY_SIZE(DEFAULT_NAME)-1);
+    wcsncpy((wchar_t*)pCharInfo->personal.name, (wchar_t*)DEFAULT_NAME, GET_ARRAY_LENGTH(DEFAULT_NAME)-1);
 
     for (i = 0; i < RFL_NAME_LENGTH + 1; i++) {
         pCharInfo->personal.creator[i] = 0;
@@ -245,7 +245,7 @@ u8 RFLi_GetFacelineType(RFLi_SEX sex, RFLi_AGE age,  RFLi_RACE race) {
     RFLi_ASSERTLINE_RANGE(age, RFLAge_Child, RFLAge_All, 303);
     RFLi_ASSERTLINE_RANGE(race, RFLRace_Black, RFLAge_All, 304);
 
-    return facelineTypeTable[(sex*9) + (age*3) + race] [RFLi_GetRandU32(ARRAY_SIZE(facelineTypeTable[0]))];
+    return facelineTypeTable[(sex * (RFLAge_All * RFLRace_All)) + (age * RFLRace_All) + race] [RFLi_GetRandU32(GET_ARRAY_LENGTH(facelineTypeTable[0]))];
 }
 
 u8 RFLi_GetHairType(RFLi_SEX sex, RFLi_AGE age, RFLi_RACE race) {
@@ -272,7 +272,7 @@ u8 RFLi_GetHairType(RFLi_SEX sex, RFLi_AGE age, RFLi_RACE race) {
     };
 
     u8 hair_parts_num[RFLSex_All * RFLAge_All * RFLRace_All] = { 26, 26, 26, 34, 34, 34, 16, 17, 17, 33, 33, 33, 37, 36, 36, 22, 22, 22 };
-    u8 index = (sex * 9) + (age * 3) + race;
+    u8 index = (sex * (RFLAge_All * RFLRace_All)) + (age * RFLRace_All) + race;
 
     RFLi_ASSERTLINE_RANGE(sex, RFLSex_Male, RFLSex_All, 337);
     RFLi_ASSERTLINE_RANGE(age, RFLAge_Child, RFLAge_All, 338);
@@ -305,7 +305,7 @@ u8 RFLi_GetEyeType(RFLi_SEX sex, RFLi_AGE age, RFLi_RACE race) {
     };
 
     u8 eye_parts_num[RFLSex_All * RFLAge_All * RFLRace_All] = { 22, 22, 23, 29, 29, 29, 24, 24, 24, 34, 34, 35, 40, 40, 40, 20, 20, 20 };
-    u8 index = (sex * 9) + (age * 3) + race;
+    u8 index = (sex * (RFLAge_All * RFLRace_All)) + (age * RFLRace_All) + race;
 
     RFLi_ASSERTLINE_RANGE(sex, RFLSex_Male, RFLSex_All, 372);
     RFLi_ASSERTLINE_RANGE(age, RFLAge_Child, RFLAge_All, 373);
@@ -338,7 +338,7 @@ u8 RFLi_GetEyebrowType(RFLi_SEX sex, RFLi_AGE age, RFLi_RACE race) {
     };
 
     u8 eyebrow_parts_num[RFLSex_All * RFLAge_All * RFLRace_All] = { 18, 18, 18, 23, 23, 23, 21, 21, 21, 9, 9, 9, 11, 11, 11, 9, 9, 9 };
-    u8 index = (sex * 9) + (age * 3) + race;
+    u8 index =(sex * (RFLAge_All * RFLRace_All)) + (age * RFLRace_All) + race;
 
     RFLi_ASSERTLINE_RANGE(sex, RFLSex_Male, RFLSex_All, 407);
     RFLi_ASSERTLINE_RANGE(age, RFLAge_Child, RFLAge_All, 408);
@@ -371,7 +371,7 @@ u8 RFLi_GetNoseType(RFLi_SEX sex, RFLi_AGE age, RFLi_RACE race) {
     };
 
     u8 nose_parts_num[RFLSex_All * RFLAge_All * RFLRace_All] = { 9, 9, 9, 12, 12, 11, 12, 12, 11, 6, 6, 6, 9, 9, 8, 9, 9, 8 };
-    u8 index = (sex * 9) + (age * 3) + race;
+    u8 index = (sex * (RFLAge_All * RFLRace_All)) + (age * RFLRace_All) + race;
 
     RFLi_ASSERTLINE_RANGE(sex, RFLSex_Male, RFLSex_All, 442);
     RFLi_ASSERTLINE_RANGE(age, RFLAge_Child, RFLAge_All, 443);
@@ -404,7 +404,7 @@ u8 RFLi_GetMouthType(RFLi_SEX sex, RFLi_AGE age, RFLi_RACE race) {
     };
 
     u8 mouth_parts_num[RFLSex_All * RFLAge_All * RFLRace_All] = { 17, 19, 19, 19, 21, 21, 19, 21, 21, 19, 20, 20, 19, 20, 20, 20, 21, 21 };
-    u8 index = (sex * 9) + (age * 3) + race;
+    u8 index = (sex * (RFLAge_All * RFLRace_All)) + (age * RFLRace_All) + race;
 
     RFLi_ASSERTLINE_RANGE(sex, RFLSex_Male, RFLSex_All, 477);
     RFLi_ASSERTLINE_RANGE(age, RFLAge_Child, RFLAge_All, 478);
@@ -440,7 +440,7 @@ u8 RFLi_GetFaceTexType(RFLi_SEX sex, RFLi_AGE age, RFLi_RACE race) {
     RFLi_ASSERTLINE_RANGE(age, RFLAge_Child, RFLAge_All, 509);
     RFLi_ASSERTLINE_RANGE(race, RFLRace_Black, RFLAge_All, 510);
 
-    return faceTexTypeTable[(sex * 9) + (age * 3) + race] [RFLi_GetRandU32(ARRAY_SIZE(faceTexTypeTable[0]))];
+    return faceTexTypeTable[(sex * (RFLAge_All * RFLRace_All)) + (age * RFLRace_All) + race] [RFLi_GetRandU32(GET_ARRAY_LENGTH(faceTexTypeTable[0]))];
 }
 
 u8 RFLi_GetGlassType(RFLi_AGE age) {
@@ -520,7 +520,7 @@ u8 RFLi_GetFaceColor(RFLi_SEX sex, RFLi_RACE race) {
     RFLi_ASSERTLINE_RANGE(sex, RFLSex_Male, RFLSex_All, 563);
     RFLi_ASSERTLINE_RANGE(race, RFLRace_Black, RFLAge_All, 564);
 
-    return faceColorTable[(sex * 3) + race] [RFLi_GetRandU32(ARRAY_SIZE(faceColorTable[0]))];
+    return faceColorTable[(sex * RFLRace_All) + race] [RFLi_GetRandU32(GET_ARRAY_LENGTH(faceColorTable[0]))];
 }
 
 u8 RFLi_GetHairColor(RFLi_AGE age, RFLi_RACE race) {
@@ -539,7 +539,7 @@ u8 RFLi_GetHairColor(RFLi_AGE age, RFLi_RACE race) {
     RFLi_ASSERTLINE_RANGE(age, RFLAge_Child, RFLAge_All, 584);
     RFLi_ASSERTLINE_RANGE(race, RFLRace_Black, RFLAge_All, 585);
 
-    return hairColorTable[(race * 4 - race) + age] [RFLi_GetRandU32(ARRAY_SIZE(hairColorTable[0]))];
+    return hairColorTable[(race * 4 - race) + age] [RFLi_GetRandU32(GET_ARRAY_LENGTH(hairColorTable[0]))];
 }
 
 u8 RFLi_GetEyeColor(RFLi_RACE race) {
@@ -551,7 +551,7 @@ u8 RFLi_GetEyeColor(RFLi_RACE race) {
 
     RFLi_ASSERTLINE_RANGE(race, RFLRace_Black, RFLAge_All, 599);
 
-    return eyeColorTable[race][RFLi_GetRandU32(ARRAY_SIZE(eyeColorTable[0]))];
+    return eyeColorTable[race][RFLi_GetRandU32(GET_ARRAY_LENGTH(eyeColorTable[0]))];
 }
 
 u32 RFLi_GetRandU32(u32 max) {

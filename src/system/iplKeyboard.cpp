@@ -11,32 +11,32 @@
 
 namespace ipl {
     namespace keyboard {
-        static EZTXStaticTable sZiSysLangTable[EZTX_LANG_MAX+1] = {
-            { 0x3B000000, NULL },
-            { 0x3A000000, NULL },
-            { 0x3F000000, NULL },
-            { 0x05000000, NULL },
-            { 0x2F000000, NULL },
-            { 0x42000000, NULL },
-            { 0x41000000, NULL },
-            { 0x40000000, NULL },
-            { 0x0D000000, NULL },
-            { 0x01000000, NULL },
-            { 0x00000000, NULL },
+        static EZTXLanguageEntry sZiSysLangTable[EZTX_LANG_MAX+1] = {
+            { ZI8_LANG_ENAM, NULL },
+            { ZI8_LANG_ENUK, NULL },
+            { ZI8_LANG_FREU, NULL },
+            { ZI8_LANG_DE,   NULL },
+            { ZI8_LANG_IT,   NULL },
+            { ZI8_LANG_ESEU, NULL },
+            { ZI8_LANG_ESSA, NULL },
+            { ZI8_LANG_FRCA, NULL },
+            { ZI8_LANG_NL,   NULL },
+            { ZI8_LANG_ZH,   NULL },
+            { ZI8_LANG_NONE, NULL },
         };
 
-        static EZTXStaticTable sZiOemLangTable[EZTX_LANG_MAX+1] = {
-            { 0x3B000000, NULL },
-            { 0x3A000000, NULL },
-            { 0x3F000000, NULL },
-            { 0x05000000, NULL },
-            { 0x2F000000, NULL },
-            { 0x42000000, NULL },
-            { 0x41000000, NULL },
-            { 0x40000000, NULL },
-            { 0x0D000000, NULL },
-            { 0x01000000, NULL },
-            { 0x00000000, NULL },
+        static EZTXLanguageEntry sZiOemLangTable[EZTX_LANG_MAX+1] = {
+            { ZI8_LANG_ENAM, NULL },
+            { ZI8_LANG_ENUK, NULL },
+            { ZI8_LANG_FREU, NULL },
+            { ZI8_LANG_DE,   NULL },
+            { ZI8_LANG_IT,   NULL },
+            { ZI8_LANG_ESEU, NULL },
+            { ZI8_LANG_ESSA, NULL },
+            { ZI8_LANG_FRCA, NULL },
+            { ZI8_LANG_NL,   NULL },
+            { ZI8_LANG_ZH,   NULL },
+            { ZI8_LANG_NONE, NULL },
         };
 
         static int getFirstController() {
@@ -202,7 +202,7 @@ namespace ipl {
 #endif // USE_ZI8
 
 #ifdef USE_ZI8
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < EZTX_LANG_MAX; i++) {
                 u8* usedSystemDict = System::getZiSystemDicData(i);
                 u8* usedOemDict = System::getZiOemDicData(i);
 

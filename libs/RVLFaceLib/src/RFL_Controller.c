@@ -172,7 +172,6 @@ static void clearDeleted_(RFLiCtrlBuffer* buffer) {
     }
 }
 
-// DEBUG NON MATCH
 static void readcallback_(s32 chan, s32 result) {
     RFLiCtrlManager* manager = RFLiGetCtrlBufManager();
 

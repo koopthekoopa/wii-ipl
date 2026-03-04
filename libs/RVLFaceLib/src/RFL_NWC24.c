@@ -9,7 +9,7 @@
 #include <revolution/nwc24.h>
 
 #include <string.h>
-#pragma sym on
+
 #define GET_ARRAY_LENGTH(x)     (sizeof(x)/sizeof(x[0]))
 
 #define SEARCH_COUNT            20
@@ -245,20 +245,20 @@ RFLErrcode makeNWC24MsgforExchange_(NWC24MsgObj* obj, RFLCharData* sendTarget, B
 
     RFLi_ASSERTLINE_NULL(obj, 322);
 
+    // Verification
     if (obj == NULL) {
         return RFLErrcode_WrongParam;
     }
-
     if (!RFLAvailable()) {
         return RFLErrcode_NotAvailable;
     }
-
     if (RFLiGetIsolation()) {
         return RFLErrcode_Isolation;
     }
 
     OSTicksToCalendarTime(OSGetTime(), &cal);
 
+    // Check date
     if (cal.mday == RFLiGetDBManager()->mDatabase->day_nwc24 && cal.mon == RFLiGetDBManager()->mDatabase->month_nwc24) {
         if (check_date) {
             return RFLErrcode_Exist;
@@ -267,7 +267,8 @@ RFLErrcode makeNWC24MsgforExchange_(NWC24MsgObj* obj, RFLCharData* sendTarget, B
             OSReport("[RFL] Last Send Date: %d/%d but send.\n", cal.mon, cal.mday);
         }
     }
-    
+
+    // Get character data from middle database
     {
         RFLMiddleDatabase middleDB;
         void* mdbWork = RFLiAlloc32(RFLGetMiddleDBBufferSize(RFL_MAX_DATABASE));

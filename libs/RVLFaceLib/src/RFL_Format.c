@@ -7,7 +7,7 @@
 
 #include <string.h>
 
-const u32 gcRFLDataBaseIdentifier = 'RNOD';
+const u32 gcRFLDataBaseIdentifier = 0x524E4F44 /*'RNOD'*/;
 
 #define RFLi_TEMP_BUFFER_SIZE   0x16960
 
@@ -27,7 +27,7 @@ void RFLiClearDBBuffer() {
     RFLi_ASSERTLINE_NULL(database, 53);
 
     header = &database->hidden;
-    memset(&database->rawdata, 0, sizeof(RFLiDatabase)); // @BUG: 4byte buffer overrun
+    memset(&database->rawdata, 0, sizeof(RFLiDatabase)); // @BUG: 4 byte buffer overrun
 
     database->identifier = gcRFLDataBaseIdentifier;
     database->isolation = TRUE;
@@ -104,7 +104,7 @@ static void formatWriteCallback_() {
     }
 }
 
-static void formatCalcCRCCb_() {
+static void formatCalcCRCCb_(u32 unused /*not in dwarf*/) {
     RFLiWriteAsync(RFLiFileType_Database, RFLiGetDBManager()->mDatabase, sizeof(RFLiDatabase), formatWriteCallback_, 0);
 }
 

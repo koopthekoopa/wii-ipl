@@ -3,6 +3,7 @@
 
 #include <zi8clib/zitypes.h>
 
-ziUChar Zi8CopyW(ziWChar* dest, ziUChar* unknown0, ziUChar unknown1, ziVoid* workData);
+ziU8    Zi8CopyWordListW(ziWChar* destination, ziU8 maxCharacters, ziWChar* wordList, ziU8 index ZI_NEED_WORK);
+ziU8    Zi8CopyW(ziWChar* dest, ziGetParam* getParams, ziU8 index ZI_NEED_WORK);
 
 #endif // ZI8_CLIB_COPY_WORD_H

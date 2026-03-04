@@ -103,10 +103,10 @@ void RFLiMakeIcon(void* buf, const RFLiCharInfo* info, RFLExpression expression,
         GXSetScissor(0, 0, setting->width, setting->height);
 
         RFLiSetupCopyTex(GX_TF_RGB5A3, setting->width, setting->height, buf, backColor);
-
-        GXGetViewportv(vp);
-        GXSetViewport(0.0f, 0.0f, setting->width, setting->height, 0.0f, 1.0f);
     }
+
+    GXGetViewportv(vp);
+    GXSetViewport(0.0f, 0.0f, setting->width, setting->height, 0.0f, 1.0f);
 
     {
         Mtx44 projMtx;
@@ -162,7 +162,7 @@ void RFLiMakeIcon(void* buf, const RFLiCharInfo* info, RFLExpression expression,
     }
 
     if (!setting->drawXluOnly) {
-        GXSetColorUpdate(TRUE);
+        GXSetColorUpdate(GX_TRUE);
         GXSetAlphaUpdate(GX_TRUE);
         GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_COPY);
         RFLDrawOpa(&model);

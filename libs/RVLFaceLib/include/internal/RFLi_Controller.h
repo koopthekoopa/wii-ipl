@@ -36,7 +36,7 @@ typedef struct {
 } RFLiCtrlBuffer;
 
 typedef struct {
-    u8  isDelete[RFL_MAX_DATABASE]; // 0x00
+    u8  isDelete[RFL_MAX_DATABASE];
 } RFLiCtrlWriteDeleteList;
 
 typedef struct {

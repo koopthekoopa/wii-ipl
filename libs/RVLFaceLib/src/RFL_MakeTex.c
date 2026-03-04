@@ -46,7 +46,7 @@ void RFLiSetupCopyTex(GXTexFmt texFmt, u16 width, u16 height, void* buf, GXColor
     GXPixModeSync();
 }
 
-// DEBUG NON MATCH
+// DEBUG NON MATCH (https://decomp.me/scratch/IC6ts)
 void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* r29 */, RFLResolution resolution /* r27 */) {
     int i; // r30
 
@@ -394,7 +394,7 @@ void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* 
 
         if (resolution & 256) {
             GXSetTexCopySrc(0, 0, 256, 256);
-            GXSetTexCopyDst(256, 256, GX_TF_RGB5A3, FALSE);
+            GXSetTexCopyDst(256, 256, GX_TF_RGB5A3, GX_FALSE);
             GXSetScissor(0, 0, 256, 256);
             RFLiSetFaceParts(&info[i], &face[i], RFLi_MASKRSL_256);
             RFLiCapture(ptr, &info[i], &face[i], RFLi_MASKRSL_256);
@@ -403,7 +403,7 @@ void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* 
 
         if (resolution & 128) {
             GXSetTexCopySrc(0, 0, 128, 128);
-            GXSetTexCopyDst(128, 128, GX_TF_RGB5A3, FALSE);
+            GXSetTexCopyDst(128, 128, GX_TF_RGB5A3, GX_FALSE);
             GXSetScissor(0, 0, 128, 128);
             RFLiSetFaceParts(&info[i], &face[i], RFLi_MASKRSL_128);
             RFLiCapture(ptr, &info[i], &face[i], RFLi_MASKRSL_128);
@@ -412,7 +412,7 @@ void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* 
 
         if (resolution & 64) {
             GXSetTexCopySrc(0, 0, 64, 64);
-            GXSetTexCopyDst(64, 64, GX_TF_RGB5A3, FALSE);
+            GXSetTexCopyDst(64, 64, GX_TF_RGB5A3, GX_FALSE);
             GXSetScissor(0, 0, 64, 64);
             RFLiSetFaceParts(&info[i], &face[i], RFLi_MASKRSL_64);
             RFLiCapture(ptr, &info[i], &face[i], RFLi_MASKRSL_64);
@@ -421,7 +421,7 @@ void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* 
 
         if (resolution & 32) {
             GXSetTexCopySrc(0, 0, 32, 32);
-            GXSetTexCopyDst(32, 32, GX_TF_RGB5A3, FALSE);
+            GXSetTexCopyDst(32, 32, GX_TF_RGB5A3, GX_FALSE);
             GXSetScissor(0, 0, 32, 32);
             RFLiSetFaceParts(&info[i], &face[i], RFLi_MASKRSL_32);
             RFLiCapture(ptr, &info[i], &face[i], RFLi_MASKRSL_32);
@@ -506,7 +506,7 @@ void RFLiInitFaceParts(const RFLiCharInfo* pCharInfo, RFLiFaceData* pFace) {
 void RFLiInitRFLTexture(RFLTexObj* pRFLTexObj) {
     RFLTexture* pTexture = pRFLTexObj->texture;
 
-    GXInitTexObj(&pRFLTexObj->tobj, RFLiGetTexImage(pTexture), pTexture->width, pTexture->height, pTexture->format, GX_CLAMP, GX_CLAMP, FALSE);
+    GXInitTexObj(&pRFLTexObj->tobj, RFLiGetTexImage(pTexture), pTexture->width, pTexture->height, pTexture->format, GX_CLAMP, GX_CLAMP, GX_FALSE);
     GXInitTexObjLOD(&pRFLTexObj->tobj, pTexture->minFilter, pTexture->magFilter, pTexture->minLOD, pTexture->maxLOD, pTexture->LODBias, (GXBool)pTexture->enableBiasClamp,  (GXBool)pTexture->enableEdgeLOD, pTexture->enableMaxAniso);
 }
 
