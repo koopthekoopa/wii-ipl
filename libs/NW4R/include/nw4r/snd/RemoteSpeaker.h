@@ -12,6 +12,7 @@ namespace nw4r {
         class RemoteSpeaker {
             public:
                 static const int SAMPLES_PER_AUDIO_PACKET = 40;
+                static const int SAMPLES_PER_ENCODED_PACKET = (SAMPLES_PER_AUDIO_PACKET + 1) / 2;
 
                 RemoteSpeaker();
 
@@ -43,7 +44,6 @@ namespace nw4r {
 
                 bool        IsAllSampleZero(const s16* axRemoteSamples);
 
-                static const int SAMPLES_PER_ENCODED_PACKET = (SAMPLES_PER_AUDIO_PACKET + 1) / 2;
                 static const int CONTINUOUS_PLAY_INTERVAL_MINUTES = 8;
 
                 static void ContinueAlarmHandler(OSAlarm* alarm, OSContext* context);

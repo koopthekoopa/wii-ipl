@@ -177,27 +177,27 @@ namespace ipl {
 
     void System::constructZiDIC_(void* work) {
     #if defined(VERSION_43U)
-        smArg.mZiDicData.sys[EZTX_LANG_ENGLISH_USA]         = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemENAM.zsd");
-        smArg.mZiDicData.sys[EZTX_LANG_FRENCH_CANADA]       = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemFRCA.zsd");
-        smArg.mZiDicData.sys[EZTX_LANG_SPANISH_AMERICAN]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemESSA.zsd");
+        smArg.mZiDicData.sys[EZTX_LANG_ENAM]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemENAM.zsd");
+        smArg.mZiDicData.sys[EZTX_LANG_FRCA]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemFRCA.zsd");
+        smArg.mZiDicData.sys[EZTX_LANG_ESSA]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemESSA.zsd");
 
-        smArg.mZiDicData.oem[EZTX_LANG_ENGLISH_USA]         = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoENAM.znd");
-        smArg.mZiDicData.oem[EZTX_LANG_FRENCH_CANADA]       = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoFRCA.znd");
-        smArg.mZiDicData.oem[EZTX_LANG_SPANISH_AMERICAN]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoESSA.znd");
+        smArg.mZiDicData.oem[EZTX_LANG_ENAM]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoENAM.znd");
+        smArg.mZiDicData.oem[EZTX_LANG_FRCA]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoFRCA.znd");
+        smArg.mZiDicData.oem[EZTX_LANG_ESSA]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoESSA.znd");
     #elif defined(VERSION_43E)
-        smArg.mZiDicData.sys[EZTX_LANG_ENGLISH_UK]          = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemENUK.zsd");
-        smArg.mZiDicData.sys[EZTX_LANG_GERMAN]              = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemDE.zsd");
-        smArg.mZiDicData.sys[EZTX_LANG_FRENCH_EUROPE]       = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemFREU.zsd");
-        smArg.mZiDicData.sys[EZTX_LANG_SPANISH_EUROPE]      = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemESEU.zsd");
-        smArg.mZiDicData.sys[EZTX_LANG_ITALIAN]             = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemIT.zsd");
-        smArg.mZiDicData.sys[EZTX_LANG_DUTCH]               = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemNL.zsd");
+        smArg.mZiDicData.sys[EZTX_LANG_ENUK]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemENUK.zsd");
+        smArg.mZiDicData.sys[EZTX_LANG_DE]      = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemDE.zsd");
+        smArg.mZiDicData.sys[EZTX_LANG_FREU]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemFREU.zsd");
+        smArg.mZiDicData.sys[EZTX_LANG_ESEU]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemESEU.zsd");
+        smArg.mZiDicData.sys[EZTX_LANG_IT]      = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemIT.zsd");
+        smArg.mZiDicData.sys[EZTX_LANG_NL]      = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemNL.zsd");
 
-        smArg.mZiDicData.oem[EZTX_LANG_ENGLISH_UK]          = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoENUK.znd");
-        smArg.mZiDicData.oem[EZTX_LANG_GERMAN]              = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoDE.znd");
-        smArg.mZiDicData.oem[EZTX_LANG_FRENCH_EUROPE]       = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoFREU.znd");
-        smArg.mZiDicData.oem[EZTX_LANG_SPANISH_EUROPE]      = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoESEU.znd");
-        smArg.mZiDicData.oem[EZTX_LANG_ITALIAN]             = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoIT.znd");
-        smArg.mZiDicData.oem[EZTX_LANG_DUTCH]               = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoNL.znd");
+        smArg.mZiDicData.oem[EZTX_LANG_ENUK]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoENUK.znd");
+        smArg.mZiDicData.oem[EZTX_LANG_DE]      = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoDE.znd");
+        smArg.mZiDicData.oem[EZTX_LANG_FREU]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoFREU.znd");
+        smArg.mZiDicData.oem[EZTX_LANG_ESEU]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoESEU.znd");
+        smArg.mZiDicData.oem[EZTX_LANG_IT]      = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoIT.znd");
+        smArg.mZiDicData.oem[EZTX_LANG_NL]      = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoNL.znd");
     #endif
 
         smArg.mbZi8ResLoaded = true;

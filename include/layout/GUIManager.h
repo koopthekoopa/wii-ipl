@@ -80,7 +80,7 @@ namespace gui {
             }
             virtual ~Component() {}                                                                             // 0x1C (0x07)
 
-            virtual u32     getID() { return mID; }                                                             // 0x20 (0x08)
+            virtual u32     getID()                                     { return mID; }                         // 0x20 (0x08)
 
             virtual bool    isPointed(int point)                        { return mbPointed[point]; }            // 0x24 (0x09)
             virtual bool    isDragging(int point)                       { return mbDragging[point]; }           // 0x28 (0x0A)
@@ -100,7 +100,7 @@ namespace gui {
                 }
             }
 
-            virtual void    setDraggingButton(u32 dragBtn)  {mDraggingButton = dragBtn; }                       // 0x44 (0x11)
+            virtual void    setDraggingButton(u32 dragBtn)  { mDraggingButton = dragBtn; }                      // 0x44 (0x11)
 
             virtual bool    update(int point, const KPADStatus* kpad, f32, f32, void* data) { return false; }   // 0x48 (0x12)
             virtual bool    update(int point, f32 x, f32 y, u32 trig, u32 hold, u32 release, void* data);       // 0x4C (0x13)
@@ -110,7 +110,7 @@ namespace gui {
 
             virtual void    setManager(Manager* manager)                { mpManager = manager; }                // 0x58 (0x16)
             
-            virtual bool    isVisible() { return true; }                                                        // 0x58 (0x17) 
+            virtual bool    isVisible() { return true; }                                                        // 0x5C (0x17)
             
             virtual u16     getFlightDuration(int point)                { return mFlightDuration[point]; }      // 0x60 (0x18)
             virtual void    setFlightDuration(int point, u16 flightDir) { mFlightDuration[point] = flightDir; } // 0x64 (0x19)
@@ -221,8 +221,8 @@ namespace gui {
             
             virtual PaneComponent*              getPaneComponentByPane(nw4r::lyt::Pane* pane);                                  // 0x48 (0x12)
 
-            virtual const nw4r::lyt::DrawInfo*  getDrawInfo()                               { return mpDrawInfo; }              // 0x4C (0x13)
-            virtual void                        setDrawInfo(const nw4r::lyt::DrawInfo* drawInfo)  { mpDrawInfo = drawInfo; }    // 0x50 (0x14)
+            virtual const nw4r::lyt::DrawInfo*  getDrawInfo()                                       { return mpDrawInfo; }      // 0x4C (0x13)
+            virtual void                        setDrawInfo(const nw4r::lyt::DrawInfo* drawInfo)    { mpDrawInfo = drawInfo; }  // 0x50 (0x14)
 
             virtual void                        setAllBoundingBoxComponentTriggerTarget(bool bEnable);                          // 0x54 (0x15)
             virtual void                        walkInChildren(nw4r::lyt::PaneList& paneList);                                  // 0x58 (0x16)

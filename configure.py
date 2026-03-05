@@ -695,11 +695,11 @@ config.libs = [
     ),
     IPLSection("homebutton", [
             Object(NonMatching, "homebutton/HBMBase.cpp"),
-            Object(NonMatching, "homebutton/HBMAnmController.cpp"),
+            Object(Matching,    "homebutton/HBMAnmController.cpp"),
             Object(NonMatching, "homebutton/HBMController.cpp"),
             Object(Matching,    "homebutton/HBMFrameController.cpp"),
-            Object(NonMatching, "homebutton/HBMGUIManager.cpp"),
-            Object(NonMatching, "homebutton/HBMRemoteSpk.cpp"),
+            Object(Matching,    "homebutton/HBMGUIManager.cpp"),
+            Object(Matching,    "homebutton/HBMRemoteSpk.cpp"),
         ]
     ),
     IPLSection("BS2", [

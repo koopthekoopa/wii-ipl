@@ -213,8 +213,8 @@ namespace ipl {
                     usedOemDict = oemDict;
                 }
 
-                sZiSysLangTable[i].dictData = usedSystemDict;
-                sZiOemLangTable[i].dictData = usedOemDict;
+                sZiSysLangTable[i].table = usedSystemDict;
+                sZiOemLangTable[i].table = usedOemDict;
             }
 #endif // USE_ZI8
 
