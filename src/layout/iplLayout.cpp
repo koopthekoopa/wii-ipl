@@ -40,7 +40,7 @@ namespace ipl {
         }
 
         void Animator::calc() {
-            setFlag(mState != ANIM_STATE_STOP);
+            setFlag(mState != FrameController::ANIM_STATE_STOP);
             utility::FrameController::calc();
             setFrame();
         }
@@ -52,14 +52,14 @@ namespace ipl {
         }
 
         void Animator::initAnmFrame() {
-            mState = ANIM_STATE_STOP_REQ;
+            mState = FrameController::ANIM_STATE_STOP_REQ;
             utility::FrameController::initFrame();
             setFrame();
         }
 
         void Animator::initAnmFrame(f32 frame) {
             mFrame = frame;
-            mState = ANIM_STATE_STOP_REQ;
+            mState = FrameController::ANIM_STATE_STOP_REQ;
             setFrame();
         }
 
@@ -293,14 +293,12 @@ namespace ipl {
             if (animIdx == -1) {
                 anim = NULL;
                 while (anim = static_cast<Animator*>(nw4r::ut::List_GetNext(&mAnims, anim)), anim != NULL) {
-                    anim->initFrame();
-                    anim->setState(ANIM_STATE_PLAY);
+                    anim->play();
                 }
             }
             else {
                 anim = static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, animIdx));
-                anim->initFrame();
-                anim->setState(ANIM_STATE_PLAY);
+                anim->play();
             }
         }
 
@@ -337,12 +335,12 @@ namespace ipl {
             if (animIdx == -1) {
                 anim = NULL;
                 while (anim = static_cast<Animator*>(nw4r::ut::List_GetNext(&mAnims, anim)), anim != NULL) {
-                    anim->setAnimType(type);
+                    anim->setAnmType(type);
                 }
             }
             else {
                 anim = static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, animIdx));
-                anim->setAnimType(type);
+                anim->setAnmType(type);
             }
         }
 

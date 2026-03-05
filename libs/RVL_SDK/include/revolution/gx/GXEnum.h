@@ -640,7 +640,11 @@ typedef enum _GXTevMode {
     GX_PASSCLR
 } GXTevMode;
 
-typedef enum _GXGamma { GX_GM_1_0, GX_GM_1_7, GX_GM_2_2 } GXGamma;
+typedef enum _GXGamma {
+    GX_GM_1_0,
+    GX_GM_1_7,
+    GX_GM_2_2
+} GXGamma;
 
 typedef enum _GXProjectionType {
     GX_PERSPECTIVE,

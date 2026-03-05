@@ -101,6 +101,13 @@ enum {
 };
 
 enum {
+    WPAD_SYNC_BUSY = -1,
+    WPAD_SYNC_WAITING,
+    WPAD_SYNC_DONE,
+};
+
+
+enum {
     WPAD_FMT_CORE_BTN,
     WPAD_FMT_CORE_BTN_ACC,
     WPAD_FMT_CORE_BTN_ACC_DPD,

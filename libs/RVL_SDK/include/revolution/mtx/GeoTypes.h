@@ -20,6 +20,13 @@ typedef struct Vec2 {
     f32 y; // 0x04
 } Vec2;
 
+typedef struct Rect {
+    f32 left;   // 0x00
+    f32 top;    // 0x04
+    f32 right;  // 0x08
+    f32 bottom; // 0x0C
+} Rect;
+
 typedef struct {
     f32 x, y, z, w;
 } Quaternion, *QuaternionPtr, Qtrn, *QtrnPtr;

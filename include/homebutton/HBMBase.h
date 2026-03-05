@@ -1,5 +1,5 @@
-#ifndef HOME_BUTTON_FRAME_H
-#define HOME_BUTTON_FRAME_H
+#ifndef HOME_BUTTON_BASE_H
+#define HOME_BUTTON_BASE_H
 
 #include <revolution/types.h>
 #include <revolution/mem/allocator.h>
@@ -55,6 +55,15 @@ enum {
     HBMSE_END_CONNECT_WINDOW,
 };
 
+enum {
+    HBM_SPK_SE_VOLUME = 0,
+    HBM_SPK_SE_CONNECT1,
+    HBM_SPK_SE_CONNECT2,
+    HBM_SPK_SE_CONNECT3,
+    HBM_SPK_SE_CONNECT4,
+};
+
+
 typedef BOOL (*HBMSoundCallback)(int, int);
 
 typedef struct HBMDataInfo {
@@ -101,8 +110,10 @@ HBMSelectBtnNum HBMGetSelectBtnNum();
 
 void            HBMSetAdjustFlag(BOOL flag);
 
+BOOL            HBMIsReassignedControllers();
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif // HOME_BUTTON_FRAME_H
+#endif // HOME_BUTTON_BASE_H

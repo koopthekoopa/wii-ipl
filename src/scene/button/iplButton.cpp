@@ -242,7 +242,7 @@ namespace ipl {
             layout::GroupAnimator* arrowLoop = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_ArwRoop", false);
             arrowLoop->setMinFrame(scArwLoopAnmFrame.start);
             arrowLoop->setMaxFrame(scArwLoopAnmFrame.end);
-            arrowLoop->setAnimType(ANIM_TYPE_LOOP);
+            arrowLoop->setAnmType(ANIM_TYPE_LOOP);
             arrowLoop->play();
 
             // Finished binding
@@ -384,7 +384,7 @@ namespace ipl {
                     layout::Animator* anim = mpLayout->getAnim(i);
                     anim->setMinFrame(scBtnFadeFrame[i].out.start);
                     anim->setMaxFrame(scBtnFadeFrame[i].out.end);
-                    anim->setAnimType(ANIM_TYPE_FORWARD);
+                    anim->setAnmType(ANIM_TYPE_FORWARD);
                     anim->play();
 
                     mbHovered[i] = FALSE;
@@ -407,7 +407,7 @@ namespace ipl {
                     layout::Animator* anim = mpLayout->getAnim(btnNo);
                     anim->setMinFrame(scBtnFadeFrame[btnNo].in.start);
                     anim->setMaxFrame(scBtnFadeFrame[btnNo].in.end);
-                    anim->setAnimType(ANIM_TYPE_FORWARD);
+                    anim->setAnmType(ANIM_TYPE_FORWARD);
                     anim->play();
 
                     // Play nice sound
@@ -439,7 +439,7 @@ namespace ipl {
                     layout::Animator* anim = mpLayout->getAnim(btnNo);
                     anim->setMinFrame(scBtnFadeFrame[btnNo].out.start);
                     anim->setMaxFrame(scBtnFadeFrame[btnNo].out.end);
-                    anim->setAnimType(ANIM_TYPE_FORWARD);
+                    anim->setAnmType(ANIM_TYPE_FORWARD);
                     anim->play();
 
                     // Fade out balloon
@@ -638,7 +638,7 @@ namespace ipl {
 
                 anim->setMinFrame(min);
                 anim->setMaxFrame(max);
-                anim->setAnimType(ANIM_TYPE_FORWARD);
+                anim->setAnmType(ANIM_TYPE_FORWARD);
                 anim->play();
             }
 
@@ -733,7 +733,7 @@ namespace ipl {
         }
 
         void Button::startMailNumAnm() {
-            mpButtonAnim[ANIM_BOARD_BBS_NUM_LOOP]->setAnimType(ANIM_TYPE_LOOP);
+            mpButtonAnim[ANIM_BOARD_BBS_NUM_LOOP]->setAnmType(ANIM_TYPE_LOOP);
             mpButtonAnim[ANIM_BOARD_BBS_NUM_LOOP]->setMinFrame(scNewArvAnmFrame.start);
             mpButtonAnim[ANIM_BOARD_BBS_NUM_LOOP]->setMaxFrame(scNewArvAnmFrame.end);
             mpButtonAnim[ANIM_BOARD_BBS_NUM_LOOP]->setSpeed(1.0f);
@@ -741,7 +741,7 @@ namespace ipl {
         }
 
         void Button::stopMailNumAnm() {
-            mpButtonAnim[ANIM_BOARD_BBS_NUM_LOOP]->setAnimType(ANIM_TYPE_LOOP);
+            mpButtonAnim[ANIM_BOARD_BBS_NUM_LOOP]->setAnmType(ANIM_TYPE_LOOP);
             mpButtonAnim[ANIM_BOARD_BBS_NUM_LOOP]->setMinFrame(0.0f);
             mpButtonAnim[ANIM_BOARD_BBS_NUM_LOOP]->setMaxFrame(1.0f);
             mpButtonAnim[ANIM_BOARD_BBS_NUM_LOOP]->setSpeed(0.0f);
@@ -749,7 +749,7 @@ namespace ipl {
         }
 
         void Button::startNewMailAnm() {
-            mpButtonAnim[ANIM_BOARD_BBS_NEW]->setAnimType(ANIM_TYPE_FORWARD);
+            mpButtonAnim[ANIM_BOARD_BBS_NEW]->setAnmType(ANIM_TYPE_FORWARD);
             mpButtonAnim[ANIM_BOARD_BBS_NEW]->setMinFrame(scLoopAnmFrame.start);
             mpButtonAnim[ANIM_BOARD_BBS_NEW]->setMaxFrame(scLoopAnmFrame.end);
             mpButtonAnim[ANIM_BOARD_BBS_NEW]->setSpeed(1.0f);
@@ -769,7 +769,7 @@ namespace ipl {
         }
 
         void Button::stopNewMailAnm() {
-            mpButtonAnim[ANIM_BOARD_BBS_NEW]->setAnimType(ANIM_TYPE_LOOP);
+            mpButtonAnim[ANIM_BOARD_BBS_NEW]->setAnmType(ANIM_TYPE_LOOP);
             mpButtonAnim[ANIM_BOARD_BBS_NEW]->setMinFrame(0.0f);
             mpButtonAnim[ANIM_BOARD_BBS_NEW]->setMaxFrame(1.0f);
             mpButtonAnim[ANIM_BOARD_BBS_NEW]->setSpeed(0.0f);
@@ -788,7 +788,7 @@ namespace ipl {
                     layout::Animator* anim = mpLayout->getAnim(i);
                     anim->setMinFrame(scBtnFadeFrame[i].out.start);
                     anim->setMaxFrame(scBtnFadeFrame[i].out.end);
-                    anim->setAnimType(ANIM_TYPE_FORWARD);
+                    anim->setAnmType(ANIM_TYPE_FORWARD);
                     anim->play();
                 }
 
@@ -815,7 +815,7 @@ namespace ipl {
                     layout::Animator* anim = mpLayout->getAnim(btnNo);
                     anim->setMinFrame(scBtnFadeFrame[btnNo].out.start);
                     anim->setMaxFrame(scBtnFadeFrame[btnNo].out.end);
-                    anim->setAnimType(ANIM_TYPE_FORWARD);
+                    anim->setAnmType(ANIM_TYPE_FORWARD);
                     anim->play();
                 }
 

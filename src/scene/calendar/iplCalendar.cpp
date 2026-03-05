@@ -274,7 +274,7 @@ namespace ipl {
         void Calendar::doAnim(int animId) {
             mpGroupAnim->setMinFrame(scAnmFrame[animId].start);
             mpGroupAnim->setMaxFrame(scAnmFrame[animId].end);
-            mpGroupAnim->setAnimType(ANIM_TYPE_FORWARD);
+            mpGroupAnim->setAnmType(ANIM_TYPE_FORWARD);
             mpGroupAnim->play();
         }
 

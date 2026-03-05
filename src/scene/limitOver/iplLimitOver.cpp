@@ -216,9 +216,9 @@ namespace ipl {
             mpLayout->bindToGroup("my_Timer_c_Push_blink.brlan", "G_Push");
             mpLayout->bindToGroup("my_Timer_c_Fade_Out.brlan",   "G_All");
 
-            mpLayout->setAnmType(ANIM_TYPE_FORWARD,         ANIM_FADE_IN);
-            mpLayout->setAnmType(ANIM_TYPE_LOOP,            ANIM_WAIT_PUSH);
-            mpLayout->setAnmType(ANIM_TYPE_FORWARD,         ANIM_FADE_OUT);
+            mpLayout->setAnmType(ANIM_TYPE_FORWARD, ANIM_FADE_IN);
+            mpLayout->setAnmType(ANIM_TYPE_LOOP,    ANIM_WAIT_PUSH);
+            mpLayout->setAnmType(ANIM_TYPE_FORWARD, ANIM_FADE_OUT);
 
             mpLayout->finishBinding();
 

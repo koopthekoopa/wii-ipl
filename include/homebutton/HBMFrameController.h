@@ -11,17 +11,18 @@ namespace homebutton {
         ANIM_TYPE_ALTERNATE
     };
 
-    enum {
-        ANIM_STATE_STOP = 0,
-        ANIM_STATE_PLAY,
-        ANIM_STATE_STOP_REQ,
-    };
-
     class FrameController {
+        protected:
+            enum {
+                ANIM_STATE_STOP = 0,
+                ANIM_STATE_PLAY,
+                ANIM_STATE_STOP_REQ,
+            };
+
         public:
             FrameController()           {}
             virtual ~FrameController()  {}
-            
+
             void            init(int type, f32 maxFrame, f32 minFrame, f32 delta);
             void            initFrame();
 
@@ -29,23 +30,25 @@ namespace homebutton {
             
             void            setMaxFrame(f32 value)      { mMaxFrame = value; }
             f32             getMaxFrame() const         { return mMaxFrame; }
-
             f32             getLastFrame() const        { return mMaxFrame - 1.0f; }
             
             void            setMinFrame(f32 value)      { mMinFrame = value; }
             f32             getMinFrame() const         { return mMinFrame; }
+
+            f32             getLength() const           { return mMaxFrame - mMinFrame; }
             
             void            setCurrentFrame(f32 value)  { mFrame = value; }
             f32             getCurrentFrame() const     { return mFrame; }
             
             void            setDelta(f32 value)         { mDelta = value; }
             f32             getDelta() const            { return mDelta; }
-            
-            void            setState(int value)         { mState = value; }
-            int             getState() const            { return mState; }
-            
-            void            setAnimType(int value)      { mAnmType = value; }
-            int             getAnimType() const         { return mAnmType; }
+
+            void            setAnmType(int value)       { mAnmType = value; }
+            int             getAnmType() const          { return mAnmType; }
+
+            void            play()                      { initFrame(); restart(); }
+            void            restart()                   { mState = ANIM_STATE_PLAY; }
+            void            stop()                      { mState = ANIM_STATE_STOP; }
 
             bool            isPlaying() const           { return mState == ANIM_STATE_PLAY; }
 

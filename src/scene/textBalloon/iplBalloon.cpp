@@ -153,9 +153,9 @@ namespace ipl {
 
         void TextBalloon::fadeoutForce() {
             if (!unk_0x08) {
-                if (mpLayout->getAnim()->getAnimType() == ANIM_TYPE_FORWARD) {
-                    mpLayout->getAnim()->setAnimType(ANIM_TYPE_BACKWARD);
-                    mpLayout->getAnim()->setState(ANIM_STATE_PLAY);
+                if (mpLayout->getAnim()->getAnmType() == ANIM_TYPE_FORWARD) {
+                    mpLayout->getAnim()->setAnmType(ANIM_TYPE_BACKWARD);
+                    mpLayout->getAnim()->restart();
                 }
             }
             else if (unk_0x08 == TRUE) {

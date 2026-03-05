@@ -189,7 +189,7 @@ namespace ipl {
                                 math::VEC2(0.0f, 0.0f),
                                 math::VEC2((rect.left - mBoardPos.x) - mMoveSpeed.x, (-mBoardPos.y - mMoveSpeed.y) + 53.0f));
 
-                    mMoveAnim.setAnimType(ANIM_TYPE_FORWARD);
+                    mMoveAnim.setAnmType(ANIM_TYPE_FORWARD);
                     mMoveAnim.play();
 
                     mpLayout->getAnim(ANIM_NEXT_PAGE)->play();
@@ -208,7 +208,7 @@ namespace ipl {
                                 math::VEC2(0.0f, 0.0f),
                                 math::VEC2((rect.right - mBoardPos.x) - mMoveSpeed.x, (-mBoardPos.y - mMoveSpeed.y) + 53.0f));
 
-                    mMoveAnim.setAnimType(ANIM_TYPE_FORWARD);
+                    mMoveAnim.setAnmType(ANIM_TYPE_FORWARD);
                     mMoveAnim.play();
 
                     mpLayout->getAnim(ANIM_NEXT_PAGE)->play();

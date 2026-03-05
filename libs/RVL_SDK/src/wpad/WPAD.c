@@ -2081,7 +2081,6 @@ s32 WPADControlDpd(s32 chan, u32 command, WPADCallback pCallback) {
     u8 pendingCmd;
     s32 status;
 
-    // clang-format off
     static const u8 cfg1[WPAD_MAX_DPD_SENS][DPD_CONFIG1_SIZE] = {
         {0x02, 0x00, 0x00, 0x71, 0x01, 0x00, 0x64, 0x00, 254},
         {0x02, 0x00, 0x00, 0x71, 0x01, 0x00, 0x96, 0x00, 180},
@@ -2089,9 +2088,7 @@ s32 WPADControlDpd(s32 chan, u32 command, WPADCallback pCallback) {
         {0x02, 0x00, 0x00, 0x71, 0x01, 0x00, 0xC8, 0x00,  54},
         {0x07, 0x00, 0x00, 0x71, 0x01, 0x00, 0x72, 0x00,  32}
     };
-    // clang-format on
 
-    // clang-format off
     static const u8 cfg2[WPAD_MAX_DPD_SENS][DPD_CONFIG2_SIZE] = {
         {0xFD, 0x05},
         {0xB3, 0x04},
@@ -2099,7 +2096,6 @@ s32 WPADControlDpd(s32 chan, u32 command, WPADCallback pCallback) {
         {0x35, 0x03},
         {0x1F, 0x03}
     };
-    // clang-format on
 
     enabled = OSDisableInterrupts();
 

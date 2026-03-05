@@ -157,7 +157,7 @@ namespace ipl {
 
                         mpLayout->getAnim(ANIM_DECIDE_BUTTON_ENABLE)->play();
 
-                        mpLayout->getAnim(ANIM_CHANGE_INPUT_BUTTON)->setAnimType(ANIM_TYPE_FORWARD);
+                        mpLayout->getAnim(ANIM_CHANGE_INPUT_BUTTON)->setAnmType(ANIM_TYPE_FORWARD);
                         mpLayout->getAnim(ANIM_CHANGE_INPUT_BUTTON)->play();
 
                         mbInputPin = true;
@@ -191,7 +191,7 @@ namespace ipl {
                 case DialogWindow::RESULT_BUTTON: {
                     if (mAttempts < ATTEMPTS_MAX) {
                         // Try again!
-                        mpLayout->getAnim(ANIM_CHANGE_INPUT_BUTTON)->setAnimType(ANIM_TYPE_BACKWARD);
+                        mpLayout->getAnim(ANIM_CHANGE_INPUT_BUTTON)->setAnmType(ANIM_TYPE_BACKWARD);
                         mpLayout->getAnim(ANIM_CHANGE_INPUT_BUTTON)->play();
                         mState = STATE_NORMAL;
                     }

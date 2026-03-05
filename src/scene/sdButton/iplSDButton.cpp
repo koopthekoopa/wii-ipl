@@ -179,7 +179,7 @@ namespace ipl {
 
                     if (anim != NULL) {
                         anim->initAnmFrame();
-                        anim->setAnimType(ANIM_TYPE_FORWARD);
+                        anim->setAnmType(ANIM_TYPE_FORWARD);
                         anim->play();
                     }
                 }
@@ -240,7 +240,7 @@ namespace ipl {
 
                     if (anim != NULL) {
                         anim->initAnmFrame();
-                        anim->setAnimType(ANIM_TYPE_FORWARD);
+                        anim->setAnmType(ANIM_TYPE_FORWARD);
                         anim->play();
                     }
 
@@ -313,7 +313,7 @@ namespace ipl {
 
                     if (anim != NULL) {
                         anim->initAnmFrame();
-                        anim->setAnimType(ANIM_TYPE_FORWARD);
+                        anim->setAnmType(ANIM_TYPE_FORWARD);
                         anim->play();
                     }
                 }
@@ -388,7 +388,7 @@ namespace ipl {
 
             if (anim != NULL) {
                 anim->initAnmFrame();
-                anim->setAnimType(ANIM_TYPE_FORWARD);
+                anim->setAnmType(ANIM_TYPE_FORWARD);
                 anim->play();
             }
         }
@@ -483,7 +483,7 @@ namespace ipl {
 
                     if (anim != NULL) {
                         anim->initAnmFrame();
-                        anim->setAnimType(ANIM_TYPE_FORWARD);
+                        anim->setAnmType(ANIM_TYPE_FORWARD);
                         anim->play();
                     }
                 }

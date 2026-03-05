@@ -109,7 +109,7 @@ namespace ipl {
 
                     if (anim != NULL) {
                         anim->initAnmFrame();
-                        anim->setAnimType(ANIM_TYPE_FORWARD);
+                        anim->setAnmType(ANIM_TYPE_FORWARD);
                         anim->play();
                     }
 
@@ -148,7 +148,7 @@ namespace ipl {
 
                 if (anim != NULL) {
                     anim->initAnmFrame();
-                    anim->setAnimType(ANIM_TYPE_FORWARD);
+                    anim->setAnmType(ANIM_TYPE_FORWARD);
                     anim->play();
                 }
 
@@ -206,10 +206,10 @@ namespace ipl {
             if (anim != NULL) {
                 anim->initAnmFrame();
                 if (backwards) {
-                    anim->setAnimType(ANIM_TYPE_BACKWARD);
+                    anim->setAnmType(ANIM_TYPE_BACKWARD);
                 }
                 else {
-                    anim->setAnimType(ANIM_TYPE_FORWARD);
+                    anim->setAnmType(ANIM_TYPE_FORWARD);
                 }
                 anim->play();
             }

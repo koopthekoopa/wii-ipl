@@ -11,15 +11,16 @@ namespace ipl {
         ANIM_TYPE_ALTERNATE
     };
 
-    enum {
-        ANIM_STATE_STOP = 0,
-        ANIM_STATE_PLAY,
-        ANIM_STATE_STOP_REQ,
-    };
-    
     namespace utility {
         class FrameController {
-            public:
+            protected:
+                enum {
+                    ANIM_STATE_STOP = 0,
+                    ANIM_STATE_PLAY,
+                    ANIM_STATE_STOP_REQ,
+                };
+
+            public: 
                 FrameController()           {}
                 virtual ~FrameController()  {}
                 
@@ -40,18 +41,16 @@ namespace ipl {
                 
                 void            setCurrentFrame(f32 value)  { mFrame = value; }
                 f32             getCurrentFrame() const     { return mFrame; }
-                
+
                 void            setSpeed(f32 value)         { mSpeed = value; }
                 f32             getSpeed() const            { return mSpeed; }
-                
-                void            setState(int value)         { mState = value; }
-                int             getState() const            { return mState; }
-                
-                void            setAnimType(int value)      { mAnmType = value; }
-                int             getAnimType() const         { return mAnmType; }
 
-                void            play()          { initFrame(); mState = ANIM_STATE_PLAY; }
-                void            stop()          { mState = ANIM_STATE_STOP; }
+                void            setAnmType(int value)       { mAnmType = value; }
+                int             getAnmType() const          { return mAnmType; }
+
+                void            play()                      { initFrame(); restart(); }
+                void            restart()                   { mState = ANIM_STATE_PLAY; }
+                void            stop()                      { mState = ANIM_STATE_STOP; }
 
                 bool            isPlaying() const           { return mState == ANIM_STATE_PLAY; }
 

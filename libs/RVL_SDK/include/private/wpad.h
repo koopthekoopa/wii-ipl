@@ -5,6 +5,6 @@
 
 #include <private/wpad/WPADInternal.h>
 #include <private/wpad/WPADHIDParser.h>
-#include <private/wpad/WPADMEM.h>
+#include <private/wpad/WPADMem.h>
 
 #endif // PRIVATE_WPAD_H

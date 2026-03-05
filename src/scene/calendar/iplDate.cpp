@@ -100,7 +100,7 @@ namespace ipl {
             layout::PaneAnimator* anim = mpPaneAnims[scAnmFrame[animId].paneAnim];
             anim->setMinFrame(scAnmFrame[animId].start);
             anim->setMaxFrame(scAnmFrame[animId].end);
-            anim->setAnimType(ANIM_TYPE_FORWARD);
+            anim->setAnmType(ANIM_TYPE_FORWARD);
             anim->play();
             return mpPaneAnims[scAnmFrame[animId].paneAnim];
         }

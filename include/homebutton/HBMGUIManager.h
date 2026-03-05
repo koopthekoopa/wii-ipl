@@ -45,19 +45,14 @@ namespace homebutton {
                     ON_RELEASE,
                 };
 
-                EventHandler() :
-                mLatestCtrlNum(0) {}
+                EventHandler() {}
 
-                virtual void        onEvent(u32 compId, u32 event, void* data) {}                       // 0x08 (0x02)
+                virtual void        onEvent(u32 compId, u32 event, void* data) {}                   // 0x08 (0x02)
 
-                virtual void        setManager(Manager* manager)        { mpManager = manager; }        // 0x0C (0x03)
-
-                virtual void        setLatestEventCtrlNo(int ctrlNo)    { mLatestCtrlNum = ctrlNo; }    // 0x10 (0x04)
-                virtual int         getLatestEventCtrlNo()              { return mLatestCtrlNum; }      // 0x14 (0x05)
+                virtual void        setManager(Manager* manager)        { mpManager = manager; }    // 0x0C (0x03)
             
             protected:
                 Manager*    mpManager;      // 0x04
-                int         mLatestCtrlNum; // 0x08
         };
 
         class Component : public Interface {
@@ -225,6 +220,10 @@ namespace homebutton {
                 nw4r::ut::List              mPaneComponents;    // 0x18
 
                 const nw4r::lyt::DrawInfo*  mpDrawInfo;         // 0x24
+
+                // Unused. And removed from IPL's GUIManager.
+                u16                         muNumPoint;         // 0x28
+                u16                         muPadding;          // 0x28
 
                 static u32                  suIDCounter;
         };

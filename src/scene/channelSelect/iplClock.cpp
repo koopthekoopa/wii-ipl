@@ -74,9 +74,9 @@ namespace ipl {
             utility::layout::set_string(mpLayout->FindPaneByName("T_WiiMenu"), System::getMessage(MESG_CLOCK_WII_MENU));
 
             if (m_already_shown_wii_menu) {
-                mpLayout->getAnim(ANIM_WII_MENU_CHANGE)->setAnimType(ANIM_TYPE_BACKWARD);
+                mpLayout->getAnim(ANIM_WII_MENU_CHANGE)->setAnmType(ANIM_TYPE_BACKWARD);
                 mpLayout->getAnim(ANIM_WII_MENU_CHANGE)->init();
-                mpLayout->getAnim(ANIM_CLOCK_CHANGE)->setAnimType(ANIM_TYPE_BACKWARD);
+                mpLayout->getAnim(ANIM_CLOCK_CHANGE)->setAnmType(ANIM_TYPE_BACKWARD);
                 mpLayout->getAnim(ANIM_CLOCK_CHANGE)->init();
 
                 mState = STATE_NORMAL;

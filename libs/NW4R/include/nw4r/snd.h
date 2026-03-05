@@ -8,6 +8,8 @@
 #include <nw4r/snd/FxReverbStd.h>
 
 #include <nw4r/snd/SoundSystem.h>
+#include <nw4r/snd/SoundPlayer.h>
+
 #include <nw4r/snd/SoundArchive.h>
 #include <nw4r/snd/SoundArchivePlayer.h>
 
