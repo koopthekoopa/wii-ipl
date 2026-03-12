@@ -559,12 +559,13 @@ static void writeCallback_() {
     }
 }
 
-// DEBUG NON MATCH (https://decomp.me/scratch/l7B9S)
-static void writeData_(const RFLiHiddenCharData* data /* r27 */) {
-    RFLiHiddenDBManager* manager = RFLiGetHDBManager(); // r31
-    s32 offset = 0; // r29
-    s16 onhdb = -1; // r28
-    s16 target = getFirstBlank_(); // r30
+static void writeData_(const RFLiHiddenCharData* data) {
+    RFLiHiddenDBManager* manager = RFLiGetHDBManager();
+    s32 offset = 0;
+    s16 onhdb = -1;
+    s16 target = getFirstBlank_();
+
+    offset; // *sob* (for debug match)
 
     onhdb = RFLiSearchHiddenData((RFLCreateID*)&data->createID);
 

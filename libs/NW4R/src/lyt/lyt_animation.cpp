@@ -280,7 +280,7 @@ namespace nw4r {
                     const u32* fileNameOffsets = detail::ConvertOffsToPtr<u32>(mpRes, sizeof(*mpRes));
 
                     for (int i = 0; i < mpRes->fileNum; i++) {
-                        mpFileResAry[i] = pResAccessor->GetResource(RESOURCE_TYPE_TEXTURE, detail::GetStrTableStr(fileNameOffsets, i), 0);
+                        mpFileResAry[i] = pResAccessor->GetResource(RESOURCE_TYPE_TEXTURE, detail::GetStrTableStr(fileNameOffsets, i), NULL);
                     }
                 }
             }

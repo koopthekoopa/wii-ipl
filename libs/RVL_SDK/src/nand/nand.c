@@ -231,14 +231,14 @@ s32 NANDCreateDir(const char* path, u8 perm, u8 attr) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
-    return nandConvertErrorCode( nandCreateDir(path, perm, attr, NULL, FALSE, FALSE));
+    return nandConvertErrorCode(nandCreateDir(path, perm, attr, NULL, FALSE, FALSE));
 }
 
 s32 NANDPrivateCreateDir(const char* path, u8 perm, u8 attr) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
-    return nandConvertErrorCode( nandCreateDir(path, perm, attr, NULL, FALSE, TRUE));
+    return nandConvertErrorCode(nandCreateDir(path, perm, attr, NULL, FALSE, TRUE));
 }
 
 s32 NANDPrivateCreateDirAsync(const char* path, u8 perm, u8 attr, NANDCallback callback, NANDCommandBlock* block) {

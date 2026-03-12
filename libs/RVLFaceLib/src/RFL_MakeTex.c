@@ -46,7 +46,7 @@ void RFLiSetupCopyTex(GXTexFmt texFmt, u16 width, u16 height, void* buf, GXColor
     GXPixModeSync();
 }
 
-// DEBUG NON MATCH (https://decomp.me/scratch/IC6ts)
+// DEBUG NON MATCH (https://decomp.me/scratch/RSlZC)
 void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* r29 */, RFLResolution resolution /* r27 */) {
     int i; // r30
 

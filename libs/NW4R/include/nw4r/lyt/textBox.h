@@ -30,6 +30,7 @@ namespace nw4r {
 
                 virtual u16         SetString(const wchar_t* str, u16 dstIdx = 0);          // 0x6C
                 virtual u16         SetString(const wchar_t* str, u16 dstIdx, u16 strLen);  // 0x70
+                const wchar_t*      GetString() const                                               { return mTextBuf; }
         
                 const Size&         GetFontSize() const                                             { return mFontSize;}
 

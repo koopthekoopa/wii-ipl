@@ -858,13 +858,13 @@ src/scene/setting/iplAPScanThread.cpp:
 	.text       start:0x813FB830 end:0x813FB9B4
 	.data       start:0x8162C988 end:0x8162C9F0
 
-src/scene/setting/iplUsbAP.cpp:
+src/scene/setting/iplUSBAP.cpp:
 	.bss        start:0x810BC148 end:0x810BD498
 	.text       start:0x813FB9B4 end:0x813FBD90
 	.data       start:0x8162C9F0 end:0x8162CA00
 	.sbss       start:0x8166D220 end:0x8166D240
 
-src/scene/setting/iplUsbAPThread.cpp:
+src/scene/setting/iplUSBAPThread.cpp:
 	.text       start:0x813FBD90 end:0x813FBEA0
 	.data       start:0x8162CA00 end:0x8162CA48
 
@@ -1051,13 +1051,14 @@ src/keyboard/tiUtil.cpp:
 	.text       start:0x81436E80 end:0x81437BCC
 	.ctors      start:0x815E5DEC end:0x815E5DF0
 	.data       start:0x816351C8 end:0x816353E8
-	.sdata2     start:0x816694A8 end:0x816694D8
+	.sdata2     start:0x816694A8 end:0x816694C8
 	.sbss       start:0x8166D340 end:0x8166D358
 
 src/keyboard/tiCpData.cpp:
 	.text       start:0x81437BCC end:0x814380E4
 	.ctors      start:0x815E5DF0 end:0x815E5DF4
 	.data       start:0x816353E8 end:0x81638EA8
+	.sdata2     start:0x816694C8 end:0x816694D8
 	.sdata      start:0x8166BA28 end:0x8166BA30
 
 src/keyboard/tiSwData.cpp:
@@ -1097,20 +1098,22 @@ src/keyboard/MyTiInputForm.cpp:
 src/keyboard/MyTiLetterForm.cpp:
 	.text       start:0x81441F3C end:0x81442CE4
 	.rodata     start:0x815EF440 end:0x815EF710
-	.data       start:0x8163D6B0 end:0x8163DBB8
+	.data       start:0x8163D6B0 end:0x8163DB28
 	.sdata2     start:0x81669530 end:0x81669550
 	.sdata      start:0x8166BB48 end:0x8166BB90
 
 src/keyboard/MyTiBg.cpp:
 	.text       start:0x81442CE4 end:0x81442D9C
+	.data       start:0x8163DB28 end:0x8163DBB8
 
 src/keyboard/tiDebug.cpp:
 	.text       start:0x81442D9C end:0x814433B0
+	.sdata2     start:0x81669550 end:0x81669568
 
 src/keyboard/tiGUIManager.cpp:
 	.text       start:0x814433B0 end:0x81444ACC
 	.data       start:0x8163DBB8 end:0x8163DD30
-	.sdata2     start:0x81669550 end:0x81669578
+	.sdata2     start:0x81669568 end:0x81669578
 
 src/keyboard/tiHKBManager.cpp:
 	.bss        start:0x810C6BB8 end:0x810C6CC0
@@ -1127,8 +1130,11 @@ src/keyboard/tiHwKeyboard.cpp:
 	.sdata      start:0x8166BB90 end:0x8166BB98
 
 src/keyboard/tiLayout.cpp:
-	.text       start:0x814474A4 end:0x81447DB8
+	.text       start:0x814474A4 end:0x81447D28
 	.data       start:0x8163DE68 end:0x8163DEC0
+
+src/keyboard/tiLayoutGather.cpp:
+	.text       start:0x81447D28 end:0x81447DB8
 
 src/keyboard/tiKoreanInput.cpp:
 	.text       start:0x81447DB8 end:0x8144A33C

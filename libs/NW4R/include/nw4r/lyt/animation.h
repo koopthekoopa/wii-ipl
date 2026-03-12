@@ -194,7 +194,7 @@ namespace nw4r {
                 virtual void    Animate(u32 idx, Pane* pane);
                 virtual void    Animate(u32 idx, Material* pMaterial);
 
-            private:
+            protected:
                 void**          mpFileResAry;   // 0x14
 
                 AnimationLink*  mAnimLinkAry;   // 0x18

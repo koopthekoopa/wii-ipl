@@ -43,8 +43,8 @@ namespace nw4r {
             void                SetGlobalAlpha(f32 alpha)                       { mGlobalAlpha = alpha; }
 
         protected:
-            math::MTX34 mViewMtx;           // 0x04
-            ut::Rect    mViewRect;          // 0x34
+            math::MTX34 mViewMtx;               // 0x04
+            ut::Rect    mViewRect;              // 0x34
 
             math::VEC2  mLocationAdjustScale;   // 0x44
             f32         mGlobalAlpha;           // 0x4C

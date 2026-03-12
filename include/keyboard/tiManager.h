@@ -20,9 +20,9 @@
 namespace textinput {
     class EventObserver {
         public:
-            virtual void    onInput(CommandReceiver::INPUT_COMMAND command, void* data) {}
-            virtual void    onCommand(CommandReceiver::INPUT_COMMAND command, void* data) {}
-            virtual void    onEvent(nw4r::lyt::Pane* pane, u32 event) {}
+            virtual void    onInput(CommandReceiver::INPUT_COMMAND command, void* data) {}      // 0x08
+            virtual void    onCommand(CommandReceiver::INPUT_COMMAND command, void* data) {}    // 0x0C
+            virtual void    onEvent(nw4r::lyt::Pane* pane, u32 event) {}                        // 0x10
 
             virtual void    onSE(sound::SE seId)    {}
             virtual void    onOK()                  { printf("OK!\n"); }

@@ -418,7 +418,7 @@ RFLErrcode makeNWC24MsgforExchange_(NWC24MsgObj* obj, RFLCharData* sendTarget, B
             BOOL isEstablished = FALSE;
 
             NWC24Err errcode = NWC24ReadFriendInfo(&info, index);
-            if (errcode == RFLErrcode_Success) {
+            if (errcode == NWC24_OK) {
                 if (info.attr.status == NWC24_FRIENDSTATUS_CONFIRMED && info.attr.type == NWC24_FRIENDTYPE_WII) {
                     isEstablished = TRUE;
                 }

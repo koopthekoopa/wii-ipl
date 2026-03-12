@@ -84,7 +84,6 @@ namespace textinput {
 
                     virtual void setSaveData(savedata::MemoSetting memoSetting) {
                         mMemoSetting = memoSetting;
-                        //reflectSaveData();
                     }
                     virtual savedata::MemoSetting   getSaveData()   { return mMemoSetting; }
 

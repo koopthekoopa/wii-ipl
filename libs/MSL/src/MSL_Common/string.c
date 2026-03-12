@@ -78,7 +78,7 @@ char* strcpy(char* dst, const char* src) {
 
 char* strncpy(char* dst, const char* src, size_t n) {
     const unsigned char* p = (const unsigned char*)src - 1;
-    unsigned char* q = (unsigned char*)dst -1 ;
+    unsigned char* q = (unsigned char*)dst -1;
     n++;
 
     while (--n) {

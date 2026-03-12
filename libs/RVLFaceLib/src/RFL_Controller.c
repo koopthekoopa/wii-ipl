@@ -591,7 +591,7 @@ static BOOL setDataCoreBuffer_(const RFLiCharInfo* src, RFLiCtrlBuffer* buffer, 
 }
 
 static int setDataCore_(const RFLiCharInfo* src, s32 chan, u8 index, BOOL isSecret) {
-    setDataCoreBuffer_(src, RFLiGetCtrlBufManager()->mBuffer[chan], index, isSecret);
+    return setDataCoreBuffer_(src, RFLiGetCtrlBufManager()->mBuffer[chan], index, isSecret);
 }
 
 static void fillHiddenData_(RFLiCtrlBuffer* buffer) {

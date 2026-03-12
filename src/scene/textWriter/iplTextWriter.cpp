@@ -228,7 +228,7 @@ namespace ipl {
                         mpScroller->calc();
                         if (mpScroller->isActive()) {
                             if ((getMemoInputForm()->getScroll() < getMemoInputForm()->getScrollMax() && mpScroller->isDown())
-                            || ( getMemoInputForm()->getScroll() > 0.0f                               && mpScroller->isUp())) {
+                            || ( getMemoInputForm()->getScroll() > 0.0f                               && mpScroller->isUp()  )) {
                                 // Memo scrolling
                                 getMemoInputForm()->setAddScroll(mpScroller->getSpeed(), mpScroller->isUp(), mpScroller->isDown());
 

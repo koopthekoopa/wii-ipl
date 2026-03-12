@@ -58,7 +58,7 @@ namespace nw4r {
                 virtual ut::Color       GetVtxColor(u32 idx) const;                                                             // 0x24
                 virtual void            SetVtxColor(u32 idx, ut::Color valuw);                                                  // 0x28
 
-                virtual u8              GetColorElement(u32 idx) const;                                                         // 0x2c
+                virtual u8              GetColorElement(u32 idx) const;                                                         // 0x2C
                 virtual void            SetColorElement(u32 idx, u8 color);                                                     // 0x30
 
                 virtual u8              GetVtxColorElement(u32 idx) const;                                                      // 0x34
@@ -67,15 +67,15 @@ namespace nw4r {
                 virtual Pane*           FindPaneByName(const char* findName, bool bRecursive = true);                           // 0x3C
                 virtual Material*       FindMaterialByName(const char* findName, bool bRecursive = true);                       // 0x40
 
-                virtual void            BindAnimation(AnimTransform* animTrans, bool bRecursive = true);                       // 0x44
+                virtual void            BindAnimation(AnimTransform* animTrans, bool bRecursive = true);                        // 0x44
                 
-                virtual void            UnbindAnimation(AnimTransform* animTrans, bool bRecursive = true);                     // 0x48
+                virtual void            UnbindAnimation(AnimTransform* animTrans, bool bRecursive = true);                      // 0x48
                 virtual void            UnbindAllAnimation(bool bRecursive = true);                                             // 0x4C
-                virtual void            UnbindAnimationSelf(AnimTransform* animTrans);                                         // 0x50
+                virtual void            UnbindAnimationSelf(AnimTransform* animTrans);                                          // 0x50
                 
-                virtual AnimationLink*  FindAnimationLink(AnimTransform* animTrans);                                           // 0x54
+                virtual AnimationLink*  FindAnimationLink(AnimTransform* animTrans);                                            // 0x54
 
-                virtual void            SetAnimationEnable(AnimTransform* animTrans, bool bEnable, bool bRecursive = true);    // 0x58
+                virtual void            SetAnimationEnable(AnimTransform* animTrans, bool bEnable, bool bRecursive = true);     // 0x58
 
                 virtual Material*       GetMaterial() const;                                                                    // 0x5C
 

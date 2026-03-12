@@ -8,6 +8,8 @@
 namespace ipl {
     namespace math {
         class Random {
+            // Based on https://en.wikipedia.org/wiki/Linear_congruential_generator#Parameters_in_common_use
+            // Numerical Recipes
             #define NEXT    (next = next * 1664525 + 1013904223)
             
             public:

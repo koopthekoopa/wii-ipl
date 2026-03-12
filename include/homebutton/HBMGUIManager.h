@@ -103,7 +103,7 @@ namespace homebutton {
 
                 virtual void    setManager(Manager* manager)                { mpManager = manager; }                // 0x54 (0x15)
                 
-                virtual bool    isVisible() { return true; }                                                        // 0x58 (0x16)
+                virtual bool    isVisible()                                 { return true; }                        // 0x58 (0x16)
 
                 virtual bool    contain(f32 x, f32 y) = 0;                                                          // 0x5C (0x17)
             

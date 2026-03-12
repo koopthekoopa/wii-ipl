@@ -372,7 +372,7 @@ ENCResult ENCConvertToInternalEncoding(ENCContext* context, u16* dst, s32* dstSi
         }
 
         if (dst) {
-            ret = ENCiConvertToInternalEncoding( context, dst + dstCnt, &tmpDstSize, (const u8*)src + srcCnt, &tmpSrcSize);
+            ret = ENCiConvertToInternalEncoding(context, dst + dstCnt, &tmpDstSize, (const u8*)src + srcCnt, &tmpSrcSize);
         }
         else {
             ret = ENCiConvertToInternalEncoding(context, NULL, &tmpDstSize, (const u8*)src + srcCnt, &tmpSrcSize);
@@ -591,7 +591,7 @@ static ENCEncoding ENCiGetEncodingTypeFromHashTable(const struct encoding_hash_t
     s32 cnt = 0;
 
     // /^(x-|cs)/i
-    if (   ((encodingName[0] == 'x' || encodingName[0] == 'X')
+    if (((encodingName[0] == 'x' || encodingName[0] == 'X')
           && encodingName[1] == '-')
         || ((encodingName[0] == 'c' || encodingName[0] == 'C')
          && (encodingName[1] == 's' || encodingName[1] == 'S'))) {
@@ -877,7 +877,7 @@ static ENCResult ENCiConvertFromInternalEncoding(ENCContext* context, void* dst,
             return ENCiConvertStringUtf16ToUtf8(dst, dstSize, src, srcSize, context->brtype);
         }
         case ENC_ENCODING_UTF_16BE: {
-            return ENCiConvertStringUtf16ToUtf16( dst, dstSize, src, srcSize, context->brtype, &context->state);
+            return ENCiConvertStringUtf16ToUtf16(dst, dstSize, src, srcSize, context->brtype, &context->state);
         }
         case ENC_ENCODING_UTF_32BE: {
             return ENCiConvertStringUtf16ToUtf32(dst, dstSize, src, srcSize, context->brtype);
@@ -901,7 +901,7 @@ static ENCResult ENCiConvertFromInternalEncoding(ENCContext* context, void* dst,
             return ENCiConvertStringUnicodeToLatin9(dst, dstSize, src, srcSize, context->brtype);
         }
         case ENC_ENCODING_ISO_2022_JP: {
-            return ENCiConvertStringUnicodeToJis( dst, dstSize, src, srcSize, context->brtype, &context->state);
+            return ENCiConvertStringUnicodeToJis(dst, dstSize, src, srcSize, context->brtype, &context->state);
         }
         case ENC_ENCODING_SHIFT_JIS: {
             return ENCiConvertStringUnicodeToSjis(dst, dstSize, src, srcSize, context->brtype);

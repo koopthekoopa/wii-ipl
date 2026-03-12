@@ -857,7 +857,7 @@ void RFLiInitCharModelRes(RFLiCharModelRes* charModelRes, const RFLiCharInfo* in
     DCFlushRange(charModelRes, sizeof(RFLiCharModelRes)+0x10 /*?*/);
 }
 
-// DEBUG NON MATCH (https://decomp.me/scratch/djwFR)
+// DEBUG NON MATCH (https://decomp.me/scratch/mQdEd)
 void RFLiInitShapeRes(RFLiCharShapeRes* arg /* r30 */) {
     void* res; // r31+0xE8
     u8* ptr8; // r29

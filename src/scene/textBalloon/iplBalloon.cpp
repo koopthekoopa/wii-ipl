@@ -216,7 +216,7 @@ namespace ipl {
                 temp3 = temp4 - temp0;
             }
 
-            math::VEC3 finalTrans( trans.x + temp3 + temp1, trans.y, trans.z);
+            math::VEC3 finalTrans(trans.x + temp3 + temp1, trans.y, trans.z);
             balloonPane->SetTranslate(finalTrans);
         }
 

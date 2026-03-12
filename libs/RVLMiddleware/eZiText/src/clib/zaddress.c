@@ -105,6 +105,8 @@ ziU8 Zi8GetFormatVersion(ziU8 lang ZI_NEED_WORK) {
 ziU32 Zi8WCharCount(ziWChar* str ZI_NEED_WORK) {
     ziU32 count = 0;
 
+    str; // *sob*
+
     Zi8LogError(0x64, ZI_WORK);
 
     if (str == ZI8_NULL) {

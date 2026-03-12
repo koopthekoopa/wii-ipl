@@ -309,7 +309,7 @@ static void loadHiddenRandomSync_(RFLiMiddleDatabase* db) {
     RFLiGetManager()->mLastErrcode = db->storedSize < db->size ? RFLErrcode_DBNodata : RFLErrcode_Success;
 }
 
-static void updateHDBRandcallback_(u32 arg ) {
+static void updateHDBRandcallback_(u32 arg) {
     RFLiMiddleDatabase* db = (RFLiMiddleDatabase*)arg;
     RFL_HIDDEN_RANDOM_PARAM* param = (RFL_HIDDEN_RANDOM_PARAM*)&db->userdata1;
 

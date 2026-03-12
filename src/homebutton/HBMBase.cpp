@@ -607,7 +607,7 @@ namespace homebutton {
 
             mpAnmController[i]->mpAnimGroup = mpLayout->CreateAnimTransform(pBinary, mpResAccessor);
 
-            mpAnmController[i]->mpGroup = mpLayout->GetGroupContainer()->FindGroupByName( scGrName[scAnmTable[i].pane]);
+            mpAnmController[i]->mpGroup = mpLayout->GetGroupContainer()->FindGroupByName(scGrName[scAnmTable[i].pane]);
 
             nw4r::lyt::PaneLinkList& rList =
                 mpAnmController[i]->mpGroup->GetPaneList();
@@ -631,7 +631,7 @@ namespace homebutton {
 
             mpGroupAnmController[i]->mpAnimGroup = mpLayout->CreateAnimTransform(pBinary, mpResAccessor);
 
-            mpGroupAnmController[i]->mpGroup = mpLayout->GetGroupContainer()->FindGroupByName( scGroupName[scGroupAnmTable[i].pane]);
+            mpGroupAnmController[i]->mpGroup = mpLayout->GetGroupContainer()->FindGroupByName(scGroupName[scGroupAnmTable[i].pane]);
 
             nw4r::lyt::PaneLinkList& rList = mpGroupAnmController[i]->mpGroup->GetPaneList();
 
@@ -646,7 +646,7 @@ namespace homebutton {
             strcpy(anmNameBuf, mpAnmName);
             strcat(anmNameBuf, scPairGroupAnimName[i]);
 
-            void* pBinary = mpResAccessor->GetResource( 0, anmNameBuf, NULL);
+            void* pBinary = mpResAccessor->GetResource(0, anmNameBuf, NULL);
 
             if (void* pMem = HBMAllocMem(sizeof(GroupAnmController))) {
                 mpPairGroupAnmController[i] = new(pMem) GroupAnmController();
@@ -2023,7 +2023,7 @@ namespace homebutton {
             case SEQ_CONTROL: {
                 for (i = 0; i < res::eFuncTouchPane_Max; i++) {
                     if ((i > res::eFuncTouchPane_B_btn_00 && i < res::eFuncTouchPane_B_BtnA) || i == res::eFuncTouchPane_cntrl_00) {
-                        nw4r::lyt::Pane* pTouchPane = mpLayout->GetRootPane()->FindPaneByName( scFuncTouchPaneName[i], true);
+                        nw4r::lyt::Pane* pTouchPane = mpLayout->GetRootPane()->FindPaneByName(scFuncTouchPaneName[i], true);
 
                         mpPaneManager->getPaneComponentByPane(pTouchPane)->setTriggerTarget(true);
                     }
@@ -2045,7 +2045,7 @@ namespace homebutton {
                         mpPaneManager->getPaneComponentByPane(pTouchPane)->setTriggerTarget(false);
                     }
                     else {
-                        nw4r::lyt::Pane* pTouchPane = mpLayout->GetRootPane()->FindPaneByName( scFuncTouchPaneName[i], true);
+                        nw4r::lyt::Pane* pTouchPane = mpLayout->GetRootPane()->FindPaneByName(scFuncTouchPaneName[i], true);
 
                         mpPaneManager->getPaneComponentByPane(pTouchPane) ->setTriggerTarget(true);
                     }

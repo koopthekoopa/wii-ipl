@@ -57,10 +57,9 @@ namespace textinput {
 
             virtual void    clearSender();
             virtual void    onCommand(INPUT_COMMAND command, void* data);
-
-        private:
             virtual void    addSender(CommandSender* cmdSend);
 
+        private:
             nw4r::ut::List  mSenderList;    // 0x04
     };
 
@@ -71,6 +70,8 @@ namespace textinput {
             virtual void    updateFromReceiver(u32, void*);
 
             nw4r::ut::Link      mLink;              // 0x00
+
+        private:
             CommandReceiver*    mpCommandReceiver;  // 0x08
     };
 }

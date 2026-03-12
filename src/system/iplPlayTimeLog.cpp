@@ -448,7 +448,7 @@ namespace ipl {
             u32 recordSize;
             cdbManager->getDataSize(record, &recordSize);
 
-            buffer = new (System::getMailWorkHeap(), 4) u8[recordSize];
+            buffer = new(System::getMailWorkHeap(), 4) u8[recordSize];
             cdbManager->read(record, buffer, recordSize);
 
             RBRHeader* header = (RBRHeader*)buffer;

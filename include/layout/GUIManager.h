@@ -110,7 +110,7 @@ namespace gui {
 
             virtual void    setManager(Manager* manager)                { mpManager = manager; }                // 0x58 (0x16)
             
-            virtual bool    isVisible() { return true; }                                                        // 0x5C (0x17)
+            virtual bool    isVisible()                                 { return true; }                        // 0x5C (0x17)
             
             virtual u16     getFlightDuration(int point)                { return mFlightDuration[point]; }      // 0x60 (0x18)
             virtual void    setFlightDuration(int point, u16 flightDir) { mFlightDuration[point] = flightDir; } // 0x64 (0x19)
