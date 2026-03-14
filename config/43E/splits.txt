@@ -1031,7 +1031,7 @@ src/keyboard/tiString.cpp:
 src/keyboard/tiZiString.cpp:
 	.bss        start:0x810C65F0 end:0x810C8270
 	.text       start:0x81433B4C end:0x814350CC
-	.rodata     start:0x81616090 end:0x816165F0
+	.rodata     start:0x81616090 end:0x816160C8
 	.data       start:0x8165F8F8 end:0x8165FA40
 
 src/keyboard/tiTextDrawer.cpp:
@@ -1061,6 +1061,7 @@ src/keyboard/tiUtil.cpp:
 src/keyboard/tiCpData.cpp:
 	.text       start:0x8143A4C8 end:0x8143A9E0
 	.ctors      start:0x8160D450 end:0x8160D454
+	.rodata     start:0x816160C8 end:0x816165F0
 	.data       start:0x81660858 end:0x81664318
 	.sdata2     start:0x81696CE8 end:0x81696CF8
 	.sdata      start:0x816992A8 end:0x816992B0

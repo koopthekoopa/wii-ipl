@@ -93,6 +93,7 @@ namespace textinput {
                 return ch;
             }
 
+            // From handaku
             if (KBD_IsHandaku(ch)) {
                 wchar_t ch1 = KBD_ConvertHandaku(ch);
                 wchar_t ch2 = ConvertDakutenEtc(s_dakuten_map, ch1);
@@ -104,6 +105,7 @@ namespace textinput {
                 }
             }
 
+            // From small
             if (KBD_IsSmall(ch)) {
                 wchar_t ch1 = KBD_ConvertSmall(ch);
                 wchar_t ch2 = ConvertDakutenEtc(s_dakuten_map, ch1);
@@ -123,6 +125,7 @@ namespace textinput {
                 return ch;
             }
 
+            // From Dakuten
             if (KBD_IsDakuten(ch)) {
                 wchar_t ch1 = KBD_ConvertDakuten(ch);
                 wchar_t ch2 = ConvertDakutenEtc(s_handaku_map, ch1);
@@ -142,6 +145,7 @@ namespace textinput {
                 return ch;
             }
 
+            // From Dakuten
             if (KBD_IsDakuten(ch)) {
                 wchar_t ch1 = KBD_ConvertDakuten(ch);
                 wchar_t ch2 = ConvertDakutenEtc(s_small_map, ch1);
@@ -236,8 +240,10 @@ namespace textinput {
         static wchar_t ConvertDakutenEtc(const wchar_t* map[], wchar_t ch) {
             for (int i = 0; i < 2; i++) {
                 const wchar_t* first = wcschr((wchar_t*)map[i], ch);
+
                 if (first != NULL) {
                     u32 offset = (u32)(first - map[i]);
+
                     if (map[1-i][offset] != L'　') {
                         return map[1-i][offset];
                     }

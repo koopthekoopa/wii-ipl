@@ -1057,6 +1057,7 @@ src/keyboard/tiUtil.cpp:
 src/keyboard/tiCpData.cpp:
 	.text       start:0x81437BCC end:0x814380E4
 	.ctors      start:0x815E5DF0 end:0x815E5DF4
+	.rodata     start:0x815EEA10 end:0x815EEF38
 	.data       start:0x816353E8 end:0x81638EA8
 	.sdata2     start:0x816694C8 end:0x816694D8
 	.sdata      start:0x8166BA28 end:0x8166BA30
@@ -1090,7 +1091,7 @@ src/keyboard/MyTiManager.cpp:
 
 src/keyboard/MyTiInputForm.cpp:
 	.text       start:0x8143E66C end:0x81441F3C
-	.rodata     start:0x815EEA10 end:0x815EF440
+	.rodata     start:0x815EEF38 end:0x815EF440
 	.data       start:0x8163D060 end:0x8163D6B0
 	.sdata2     start:0x816694F8 end:0x81669530
 	.sdata      start:0x8166BB00 end:0x8166BB48

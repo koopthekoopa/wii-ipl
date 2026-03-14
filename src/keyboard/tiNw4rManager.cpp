@@ -150,8 +150,10 @@ namespace textinput {
         }
 
         void Layout::draw() {
+            // Project it
             setProjectionMtx();
 
+            // Animate it
             if (mbAnimOn) {
                 mpLayout->Animate();
                 mpLayout->CalculateMtx(mDrawInfo);
@@ -173,6 +175,7 @@ namespace textinput {
                 }
             }
 
+            // Draw!
             mpLayout->Draw(mDrawInfo);
 
             for (int i = 0; i < fifo.getSize(); i++) {
@@ -262,9 +265,11 @@ namespace textinput {
             nw4r::ut::Rect rect16x9;
             util::getProjectionRect16x9(&rect16x9);
 
+            // Scale layout for location adjust
             nw4r::math::VEC2 scale(rect16x9.GetWidth() / rect4x3.GetWidth(), 1.0f);
             mpLayout->GetRootPane()->SetScale(scale);
 
+            // Set location adjust scale
             nw4r::math::VEC2 locationAdjust(rect4x3.GetWidth() / rect16x9.GetWidth(), 1.0f);
             mDrawInfo.SetLocationAdjustScale(locationAdjust);
             mDrawInfo.SetLocationAdjust(true);
@@ -277,9 +282,11 @@ namespace textinput {
 
             util::getProjectionRect4x3(&mScreenRect);
 
+            // Scale layout for location adjust
             nw4r::math::VEC2 scale(1.0f, 1.0f);
             mpLayout->GetRootPane()->SetScale(scale);
 
+            // Set location adjust scale
             nw4r::math::VEC2 locationAdjust(1.0f, 1.0f);
             mDrawInfo.SetLocationAdjustScale(locationAdjust);
             mDrawInfo.SetLocationAdjust(true);
@@ -354,8 +361,10 @@ namespace textinput {
             void* mem = MEMAllocFromAllocator(allocator, sizeof(Anim));
             Anim* anim = new(mem) Anim(id, animTransformPane, loop, noOff);
 
+            // Add it,
             nw4r::ut::List_Append(&mAnms, anim);
 
+            // Then bind!
             mpPane->BindAnimation(animTransformPane, noOff);
             mpPane->SetAnimationEnable(animTransformPane, false, noOff);
         }
@@ -364,20 +373,26 @@ namespace textinput {
             void* mem = MEMAllocFromAllocator(allocator, sizeof(Anim));
             Anim* anim = new(mem) Anim(id, animTransformPane, loop, noOff);
 
+            // Add it,
             nw4r::ut::List_Append(&mAnms, anim);
 
+            // Then bind by force!
             animTransformPane->ForceBind(mpPane, name);
             mpPane->SetAnimationEnable(animTransformPane, false, noOff);
         }
 
         void AnmPane::changeAnimation(u32 id) {
+            // Turn off current animation
             if (mpCurrentAnim != NULL) {
                 mpPane->SetAnimationEnable(mpCurrentAnim->mpAnimTransform, false, mpCurrentAnim->mbNoOff);
             }
 
+            // Now let's get the new one!
             mpCurrentAnim = searchAnimation(id);
 
             if (mpCurrentAnim != NULL) {
+                // Found? Then play it!
+
                 mpCurrentAnim->mfCurrentFrame = 0.0f;
                 mpCurrentAnim->mpAnimTransform->SetFrame(0.0f);
 
@@ -393,13 +408,16 @@ namespace textinput {
 
         void AnmPane::calc() {
             if (mpCurrentAnim != NULL) {
+                // Increment frame
                 mpCurrentAnim->mfCurrentFrame += 1.0f;
 
                 if (mpCurrentAnim->mfCurrentFrame >= mpCurrentAnim->mpAnimTransform->GetFrameSize()) {
+                    // For loop
                     if (mpCurrentAnim->mbLoop) {
                         mpCurrentAnim->mfCurrentFrame = 0.0f;
                         mpCurrentAnim->mpAnimTransform->SetFrame(mpCurrentAnim->mfCurrentFrame);
                     }
+                    // For one time
                     else {
                         mpPane->SetAnimationEnable(mpCurrentAnim->mpAnimTransform, false, mpCurrentAnim->mbNoOff);
 

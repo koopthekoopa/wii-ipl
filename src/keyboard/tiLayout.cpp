@@ -34,6 +34,7 @@ namespace textinput {
         const u32* animContOffsets = nw4r::lyt::detail::ConvertOffsToPtr<u32>(mpRes, mpRes->animContOffsetsOffset);
         for (u16 i = 0; i < mpRes->animContNum; i++) {
             const nw4r::lyt::res::AnimationContent* cnt = nw4r::lyt::detail::ConvertOffsToPtr<nw4r::lyt::res::AnimationContent>(mpRes, animContOffsets[i]);
+
             if (cnt->type == nw4r::lyt::res::AnimationContent::ANIMTYPE_PANE) {
                 if (strncmp(cnt->name, name, 17) == 0) {
                     count++;
@@ -64,13 +65,18 @@ namespace textinput {
 
     void AnimTransformPane::Bind(nw4r::lyt::Pane* pane, bool bRecursive) {
         u32 count = 0;
+
+        // Count all animations
+
         if (!bRecursive) {
             count = CountAnimForPane_(pane->GetName());
         }
         else {
             count = CountAnimForPane_(pane, true);
         }
-        
+
+        // Setup animation links
+
         u32 linkSize = sizeof(nw4r::lyt::AnimationLink) * count;
         void* linkBuffer = nw4r::lyt::Layout::AllocMemory(linkSize);
         
@@ -114,11 +120,14 @@ namespace textinput {
     }
 
     void AnimTransformPane::ForceBind(nw4r::lyt::Pane* pane, const char* name) {
+        // Get all animation count
         u32 count = CountAnimForPane_(name);
+
+        // Setup animation links
 
         u32 linkSize = sizeof(nw4r::lyt::AnimationLink) * count;
         void* linkBuffer = nw4r::lyt::Layout::AllocMemory(linkSize);
-        
+
         mAnimLinkAry = static_cast<nw4r::lyt::AnimationLink*>(linkBuffer);
         mAnimLinkNum = count;
 
@@ -165,15 +174,18 @@ namespace textinput {
 
         for (int i = 0; i < header->dataBlocks; i++) {
             switch (nw4r::lyt::detail::GetSignatureInt(blockHeader->kind)) {
+                // For animation blocks
                 case nw4r::lyt::res::OBJECT_SIGNATURE_PANE_ANIM: {
                     switch (nw4r::lyt::detail::GetSignatureInt(header->signature)) {
+                        // For (almost) everything animation related
                         case nw4r::lyt::res::FILE_HEADER_SIGNATURE_ANIMATION:
                         case nw4r::lyt::res::AnimationInfo::ANIM_INFO_PANE_PAIN_SRT:
-                        case nw4r::lyt::res::AnimationInfo::ANIM_INFO_PANE_VISIBILITY:
                         case nw4r::lyt::res::AnimationInfo::ANIM_INFO_PANE_VERTEX_COLOR:
+                        case nw4r::lyt::res::AnimationInfo::ANIM_INFO_PANE_VISIBILITY:
                         case nw4r::lyt::res::AnimationInfo::ANIM_INFO_MATERIAL_COLOR:
+                        case nw4r::lyt::res::AnimationInfo::ANIM_INFO_MATERIAL_TEXTURE_PATTERN:
                         case nw4r::lyt::res::AnimationInfo::ANIM_INFO_MATERIAL_TEXTURE_SRT:
-                        case nw4r::lyt::res::AnimationInfo::ANIM_INFO_MATERIAL_TEXTURE_PATTERN: {
+                        /*case nw4r::lyt::res::AnimationInfo::ANIM_INFO_MATERIAL_IND_TEX_SRT:*/ {
                             void* mem = nw4r::lyt::Layout::AllocMemory(sizeof(AnimTransformPane));
                             AnimTransformPane* animTrans = new(mem) AnimTransformPane();
 
@@ -212,10 +224,10 @@ namespace textinput {
         while (pane != mpRootPane && parent != NULL) {
             if (&parent->GetChildList().GetBack() != pane) {
                 nw4r::lyt::PaneList::Iterator it;
-                for (it = parent->GetChildList().GetBeginIter(); &(*it) != pane; ++it) {}
+                for (it = parent->GetChildList().GetBeginIter(); &*it != pane; ++it) {}
                 it++;
 
-                return PaneAccessor(mpRootPane, &(*it));
+                return PaneAccessor(mpRootPane, &*it);
             }
 
             pane = parent;
