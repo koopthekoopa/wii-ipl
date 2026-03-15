@@ -7,40 +7,40 @@ extern "C" {
 
 #include <revolution/types.h>
 
-#include <wchar.h>
-#include <stddef.h>
 #include <stdbool.h>
+#include <stddef.h>
+#include <wchar.h>
 
-typedef u8              vmU8;
-typedef u16             vmU16;
-typedef u32             vmU32;
-typedef u64             vmU64;
-typedef s8              vmS8;
-typedef s16             vmS16;
-typedef s32             vmS32;
-typedef s64             vmS64;
+typedef u8 vmU8;
+typedef u16 vmU16;
+typedef u32 vmU32;
+typedef u64 vmU64;
+typedef s8 vmS8;
+typedef s16 vmS16;
+typedef s32 vmS32;
+typedef s64 vmS64;
 
-typedef bool            vmBool;
-typedef BOOL            vmBoolInt;
-#define                 vmFalse 0
-#define                 vmTrue  1
+typedef bool vmBool;
+typedef BOOL vmBoolInt;
+#define vmFalse 0
+#define vmTrue 1
 
-#define                 vmNull  NULL
+#define vmNull NULL
 
-typedef void*           vmPtr;
+typedef void* vmPtr;
 
-typedef long long int   vmInteger;
-typedef double          vmFloat;
-typedef size_t          vmSize;
+typedef long long int vmInteger;
+typedef double vmFloat;
+typedef size_t vmSize;
 
-typedef wchar_t         vmWChar;
-typedef wchar_t*        vmWString;
+typedef wchar_t vmWChar;
+typedef wchar_t* vmWString;
 
-typedef char            vmChar;
-typedef char*           vmString;
+typedef char vmChar;
+typedef char* vmString;
 
 typedef struct CHANSVm {
-    u8  data[0x270];
+    u8 data[0x270];
 } CHANSVm;
 
 /* OBJECT HEADER & DATA */
@@ -63,40 +63,40 @@ typedef struct CHANSVmNativeClass CHANSVmNativeClass;
 
 struct CHANSVmObjHdr {
     union {
-        vmInteger       int_v;
+        vmInteger int_v;  // 0x00
         struct {
-            vmU8    unk_0x00; // ?
-            vmS32   val;
-        }* int32_v;
-        vmFloat         float_v;
+            vmU8 unk_0x00;  // ?
+            vmS32 val;
+        }* int32_v;       // 0x01
+        vmFloat float_v;  // 0x5
         struct {
-            vmWString  str;
-            vmSize     len;
-        }* wstring_v;
+            vmWString str;
+            vmSize len;
+        }* wstring_v;  // 0x7
         struct {
-            vmString    str;
-            vmSize      len;
-        }* string_v;
-        vmPtr*          array_v;
-        vmFloat**       float_array_v;
-        vmPtr*          ptr_v;
-    } value;        // 0x00
+            vmString str;
+            vmSize len;
+        }* string_v;              // 0xB
+        vmPtr* array_v;           // 0xF
+        vmFloat** float_array_v;  // 0x13
+        vmPtr* ptr_v;             // 0x17
+    } value;                      // 0x00
 
     union {
         struct {
-            vmU8        type;    // 0x08
+            vmU8 type;  // 0x08
 
             union {
                 struct {
-                    bool    readonly : 1;   // 10000000
-                    vmU8    reserved : 7;   // 01111111
+                    bool readonly : 1;  // 10000000
+                    vmU8 reserved : 7;  // 01111111
                 };
-                vmU8    raw;
-            } flags;                    // 0x08
-            vmU8        unk_0x0A;
-            vmU8        unk_0x0B;
+                vmU8 raw;
+            } flags;  // 0x08
+            vmU8 unk_0x0A;
+            vmU8 unk_0x0B;
         };
-        vmS32   typeAndFlag;
+        vmS32 typeAndFlag;
     };
 
     CHANSVmNativeClass* parentCls;  // 0x0C
@@ -105,9 +105,9 @@ struct CHANSVmObjHdr {
 typedef struct CHANSVmImage {
     u32 unk_0x00;
     u32 unk_0x04;
-    u16 width;  // 0x08
-    u16 height; // 0x0A
-    u8  format; // 0x0C
+    u16 width;   // 0x08
+    u16 height;  // 0x0A
+    u8 format;   // 0x0C
 } CHANSVmImage;
 
 /* CLASSES & METHODS */
@@ -115,42 +115,42 @@ typedef struct CHANSVmImage {
 typedef vmBoolInt (*CHANSVmFunction)(CHANSVm* vm, CHANSVmObjHdr* vmObjIn, CHANSVmObjHdr* vmObjOut);
 
 typedef struct CHANSVmMethodList {
-    const char*     name;   // 0x00
-    CHANSVmFunction method; // 0x04
+    const char* name;        // 0x00
+    CHANSVmFunction method;  // 0x04
 } CHANSVmMethodList;
 
 typedef struct CHANSVmNativeMethod {
-    undefined       unk_0x00[0x20];
+    undefined unk_0x00[0x20];
 } CHANSVmNativeMethod;
 
 typedef struct CHANSVmPropertyList {
-    const char*     name;       // 0x00
+    const char* name;  // 0x00
     CHANSVmFunction get;
     CHANSVmFunction set;
 } CHANSVmPropertyList;
 
 typedef struct CHANSVmNativeProperty {
-    undefined       unk_0x00[0x20];
+    undefined unk_0x00[0x20];
 } CHANSVmNativeProperty;
 
 struct CHANSVmNativeClass {
-    CHANSVmNativeClass*     next;               // 0x00
+    CHANSVmNativeClass* next;  // 0x00
 
-    CHANSVmFunction         ctor;               // 0x04
-    CHANSVmFunction         dtor;               // 0x08
-    CHANSVmFunction         init;               // 0x0C
+    CHANSVmFunction ctor;  // 0x04
+    CHANSVmFunction dtor;  // 0x08
+    CHANSVmFunction init;  // 0x0C
 
-    CHANSVmNativeMethod*    nativeMethods;      // 0x10
-    CHANSVmNativeProperty*  nativProperties;    // 0x14
+    CHANSVmNativeMethod* nativeMethods;      // 0x10
+    CHANSVmNativeProperty* nativProperties;  // 0x14
 
-    vmSize                  nameLength;         // 0x18
-    vmString                name;               // 0x1C
+    vmSize nameLength;  // 0x18
+    vmString name;      // 0x1C
 
-    undefined               unk_0x20[0x1C];
+    undefined unk_0x20[0x1C];
 };
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // CHANS_VM_TYPES_H
+#endif  // CHANS_VM_TYPES_H
