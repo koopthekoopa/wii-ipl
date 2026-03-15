@@ -11,12 +11,12 @@
 #include <string.h>
 
 /* for Create ID */
-#define LOWADDR     0
-#define HIGHADDR    1
+#define LOWADDR 0
+#define HIGHADDR 1
 
 #define FLAG_NORMAL 31
-#define FLAG_DSID   30
-#define FLAG_TEMP   29
+#define FLAG_DSID 30
+#define FLAG_TEMP 29
 
 void RFLiInitDatabase(MEMiHeapHead* sysHeap) {
     RFLiDatabaseManager* manager = RFLiGetDBManager();
@@ -45,8 +45,7 @@ static void bootloadCheckCRCCb_(u32 crc) {
     if (crc != 0) {
         RFLiGetManager()->mLastErrcode = RFLErrcode_Loadfail;
         RFLiSetFileBroken(RFLiFileBrokenType_DBBroken);
-    }
-    else {
+    } else {
         RFLiGetManager()->mLastErrcode = RFLErrcode_Success;
     }
 
@@ -324,8 +323,8 @@ RFLiCharData* RFLiGetCharData(u16 index) {
 
         if (!RFLiIsValidOnNAND(&info)) {
             return NULL;
+        }
     }
-}
 
     return data;
 }
@@ -581,7 +580,7 @@ void RFLiConvertInfo2HRaw(const RFLiCharInfo* info, RFLiHiddenCharData* data) {
 
 void RFLiConvertHRaw2Raw(const RFLiHiddenCharData* hdata, RFLiCharData* data) {
     memset(data, 0, sizeof(RFLiCharData));
-    memcpy(data, hdata, sizeof(RFLiHiddenCharData)-10);
+    memcpy(data, hdata, sizeof(RFLiHiddenCharData) - 10);
 
     /* NO BIRTHDAY */
     data->birth_day = 0;
@@ -590,7 +589,7 @@ void RFLiConvertHRaw2Raw(const RFLiHiddenCharData* hdata, RFLiCharData* data) {
 
 void RFLiConvertRaw2HRaw(const RFLiCharData* data, RFLiHiddenCharData* hdata) {
     memset(hdata, 0, sizeof(RFLiHiddenCharData));
-    memcpy(hdata, data, sizeof(RFLiHiddenCharData)-10);
+    memcpy(hdata, data, sizeof(RFLiHiddenCharData) - 10);
 
     /* NO BIRTHDAY */
     hdata->birth_padding = 0;
@@ -616,7 +615,7 @@ RFLErrcode RFLiGetCharRawData(RFLiCharData* data, u16 index) {
     }
 
     memcpy(data, idata, sizeof(RFLiCharData));
-    
+
     return RFLErrcode_Success;
 }
 
@@ -663,8 +662,7 @@ BOOL RFLiSetCharInfo(const RFLiCharInfo* info, u16 index) {
     if (setCharInfo_(index, info)) {
         RFLiDeleteHiddenDataID((RFLCreateID*)&info->createID);
         return TRUE;
-    }
-    else {
+    } else {
         return FALSE;
     }
 }
@@ -753,8 +751,7 @@ BOOL RFLIsAvailableOfficialData(u16 index) {
     data = RFLiGetCharData(index);
     if (data == NULL) {
         return FALSE;
-    }
-    else {
+    } else {
         return TRUE;
     }
 }
@@ -798,8 +795,8 @@ static BOOL createLowAddr_(u32* dst) {
     BOOL isFirst = TRUE;
 
     // Nintendo's MAC Address identifier
-    static const u8 scFirstMakerCode[RFL_MAC_ADDR_LENGTH/2] = { 0x00, 0x17, 0xAB };
-    #define FIRST_MAKER_CODE_LEN    (int)(sizeof(scFirstMakerCode)/sizeof(scFirstMakerCode[0]))
+    static const u8 scFirstMakerCode[RFL_MAC_ADDR_LENGTH / 2] = {0x00, 0x17, 0xAB};
+#define FIRST_MAKER_CODE_LEN (int)(sizeof(scFirstMakerCode) / sizeof(scFirstMakerCode[0]))
 
     RFLi_ASSERTLINE_NULL(addr, 1162);
 
@@ -925,7 +922,7 @@ BOOL RFLiIsMyHomeID(const RFLCreateID* id) {
     if (*ptarg_low != addr) {
         return FALSE;
     }
-    
+
     return TRUE;
 }
 
@@ -960,8 +957,7 @@ BOOL RFLiIsSpecialID(const RFLCreateID* id) {
 
     if ((ptarg[LOWADDR] & (1 << FLAG_NORMAL)) == 0) {
         return TRUE;
-    }
-    else {
+    } else {
         return FALSE;
     }
 }
@@ -985,8 +981,7 @@ BOOL RFLiIsDSID(const RFLCreateID* id) {
 
     if ((ptarg[LOWADDR] & (1 << FLAG_DSID))) {
         return TRUE;
-    }
-    else {
+    } else {
         return FALSE;
     }
 }
@@ -1006,8 +1001,7 @@ BOOL RFLiIsTemporaryID(const RFLCreateID* id) {
 
     if ((ptarg[LOWADDR] & (1 << FLAG_TEMP))) {
         return TRUE;
-    }
-    else {
+    } else {
         return FALSE;
     }
 }
@@ -1133,8 +1127,7 @@ u16 RFLiCalculateCRC(void* head, u32 size) {
             if ((crc & 0x8000)) {
                 crc = crc << 1;
                 crc ^= scGeneration;
-            }
-            else {
+            } else {
                 crc <<= 1;
             }
 
@@ -1172,7 +1165,7 @@ void alarmCreateCb_(OSAlarm* alarm, OSContext* context) {
     while (count < size) {
         u8 data = *current;
         int i;
-        
+
         if (curCount >= scOneCheckCount) {
             manager->crcInfo.current = current;
             manager->crcInfo.count = count;
@@ -1189,8 +1182,7 @@ void alarmCreateCb_(OSAlarm* alarm, OSContext* context) {
             if ((crc & 0x8000)) {
                 crc = crc << 1;
                 crc ^= scGeneration;
-            }
-            else {
+            } else {
                 crc <<= 1;
             }
 
@@ -1254,7 +1246,7 @@ static void alarmCheckCb_(OSAlarm* alarm, OSContext* context) {
     while (count < size) {
         u8 data = *current;
         int i;
-        
+
         if (curCount >= scOneCheckCount) {
             manager->crcInfo.current = current;
             manager->crcInfo.count = count;
@@ -1271,8 +1263,7 @@ static void alarmCheckCb_(OSAlarm* alarm, OSContext* context) {
             if ((crc & 0x8000)) {
                 crc = crc << 1;
                 crc ^= scGeneration;
-            }
-            else {
+            } else {
                 crc <<= 1;
             }
 
@@ -1352,7 +1343,7 @@ RFLErrcode RFLGetStoreData(RFLStoreData* data, RFLDataSource source, u16 index) 
     }
 
     if (rawdata == NULL) {
-        return RFLErrcode_DBNodata; 
+        return RFLErrcode_DBNodata;
     }
 
     memcpy(&storedata, rawdata, sizeof(RFLiCharData));

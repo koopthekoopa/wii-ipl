@@ -1,12 +1,13 @@
 #include "iplSceneUI.h"
 
-#include "scene/calendar/iplDate.h"
 #include "scene/calendar/iplCalendar.h"
+#include "scene/calendar/iplDate.h"
 
 #include "iplSystem.h"
 
 namespace ipl {
     namespace scene {
+        // clang-format off
         const char* Date::mscAnimPanes[Date::ANIM_PANE_MAX] = {
             "N_CalDay_r",
             "W_Cal",
@@ -29,22 +30,17 @@ namespace ipl {
             { Date::ANIM_PANE_MSG,          1.0f,  1.0f  },
             { Date::ANIM_PANE_MSG,          0.0f,  0.0f  },
         };
+        // clang-format on
 
-        utility::Date   Date::mscMinDate(MIN_YEAR, MIN_MONTH, MIN_DAY);
-        utility::Date   Date::mscMaxDate(MAX_YEAR, MAX_MONTH, MAX_DAY);
+        utility::Date Date::mscMinDate(MIN_YEAR, MIN_MONTH, MIN_DAY);
+        utility::Date Date::mscMaxDate(MAX_YEAR, MAX_MONTH, MAX_DAY);
 
-        u8              padding[0x10];
+        u8 padding[0x10];
 
         DECOMP_FORCE_ACTIVE(iplDate_cpp, padding);
 
-        Date::Date(EGG::Heap* heap, nand::LayoutFile* file, const char* layoutFolder, const char* layoutFileName) :
-        ::gui::EventHandler(),
-        mbAppearMsg(0),
-        unk_0x10(0),
-        unk_0x14(0),
-        mpLayout(NULL),
-        mpCurrentPaneAnim(0),
-        unk_0x3C(0) {
+        Date::Date(EGG::Heap* heap, nand::LayoutFile* file, const char* layoutFolder, const char* layoutFileName)
+            : ::gui::EventHandler(), mbAppearMsg(0), unk_0x10(0), unk_0x14(0), mpLayout(NULL), mpCurrentPaneAnim(0), unk_0x3C(0) {
             // Layout
             mpLayout = new layout::Object(heap, file, layoutFolder, layoutFileName);
 
@@ -53,7 +49,7 @@ namespace ipl {
                 mpPaneAnims[i] = mpLayout->bind("my_IplTop_f.brlan", mscAnimPanes[i], false);
             }
             mpLayout->finishBinding();
-            
+
             // Setup GUI
             mpGui = new gui::PaneManager(this, mpLayout->getDrawInfo(), NULL, NULL);
             mpGui->setupScene(mpLayout);
@@ -75,7 +71,7 @@ namespace ipl {
             mpLayout->calc();
             mpGui->calc();
 
-            if (mpCurrentPaneAnim != NULL && !mpCurrentPaneAnim->isPlaying()) { 
+            if (mpCurrentPaneAnim != NULL && !mpCurrentPaneAnim->isPlaying()) {
                 mpCurrentPaneAnim = NULL;
                 onCmdRecv(3);
             }
@@ -88,8 +84,7 @@ namespace ipl {
                 if (unk_0x3C != 0) {
                     mpLayout->draw();
                 }
-            }
-            else {
+            } else {
                 if (unk_0x3C == 0) {
                     mpLayout->draw();
                 }
@@ -125,28 +120,23 @@ namespace ipl {
             if ((attr & 2) == 2) {
                 if ((attr & 8) == 8) {
                     doAnim(IDANIM_BLUE_TEXT);
-                }
-                else if ((attr & 4) == 4) {
+                } else if ((attr & 4) == 4) {
                     doAnim(IDANIM_RED_TEXT);
-                }
-                else {
+                } else {
                     doAnim(IDANIM_RESET_GREY_TEXT);
                 }
                 if ((attr & 1) == 1) {
                     doAnim(IDANIM_LOOP);
-                }
-                else {
+                } else {
                     doAnim(IDANIM_RESET_GREY_BUTTON);
                 }
-            }
-            else {
+            } else {
                 doAnim(IDANIM_GREY_TEXT);
                 doAnim(IDANIM_GREY_BUTTON);
             }
             if (mbAppearMsg) {
                 doAnim(IDANIM_APPEAR_MSG);
-            }
-            else {
+            } else {
                 doAnim(IDANIM_NO_MSG);
             }
             return;
@@ -156,7 +146,7 @@ namespace ipl {
             *mpDate = date;
             set_textbox(mpDate->day);
         }
-        
+
         void Date::update() {
             mpGui->update();
         }
@@ -217,7 +207,7 @@ namespace ipl {
             }
         }
 
-        static const wchar_t scNumber[] = {'0','1','2','3','4','5','6','7','8','9'};
+        static const wchar_t scNumber[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
         bool Date::isValidDate(const utility::Date& date) {
             return date.year >= mscMinDate.year && date.year <= mscMaxDate.year;
@@ -231,22 +221,20 @@ namespace ipl {
             wchar_t ch;
             if (day >= 10) {
                 ch = scNumber[day / 10];
-            }
-            else {
+            } else {
                 ch = scNumber[day % 10];
             }
             numStr[index++] = ch;
 
             if (day >= 10) {
                 ch = scNumber[day % 10];
-            }
-            else {
+            } else {
                 ch = 0;
             }
             numStr[index++] = ch;
 
             numStr[index++] = 0;
-            
+
             nw4r::lyt::TextBox* pane = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpLayout->FindPaneByName(mscAnimPanes[2]));
             pane->SetString(numStr);
         }
@@ -261,8 +249,7 @@ namespace ipl {
                     if (cmd == 1) {
                         mpCurrentPaneAnim = doAnim(IDANIM_FOCUS_IN);
                         unk_0x10 = 1;
-                    }
-                    else if (cmd == 2) {
+                    } else if (cmd == 2) {
                         mpCurrentPaneAnim = doAnim(IDANIM_FOCUS_OUT);
                         unk_0x10 = 2;
                     }
@@ -295,5 +282,5 @@ namespace ipl {
             unk_0x3C = 0;
             onCmdRecv(3);
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

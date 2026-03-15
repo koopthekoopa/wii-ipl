@@ -7,24 +7,24 @@
 extern "C" {
 #endif
 
-u32         RFLGetWorkSize(BOOL useDeluxTex);
+u32 RFLGetWorkSize(BOOL useDeluxTex);
 
-RFLErrcode  RFLInitResAsync(void* workBuffer, void* resBuffer, u32 resSize, BOOL useDeluxTex);
-RFLErrcode  RFLInitRes(void* workBuffer, void* resBuffer, u32 resSize, BOOL useDeluxTex);
+RFLErrcode RFLInitResAsync(void* workBuffer, void* resBuffer, u32 resSize, BOOL useDeluxTex);
+RFLErrcode RFLInitRes(void* workBuffer, void* resBuffer, u32 resSize, BOOL useDeluxTex);
 
-void        RFLExit();
+void RFLExit();
 
-BOOL        RFLAvailable();
+BOOL RFLAvailable();
 
-RFLErrcode  RFLGetAsyncStatus();
-s32         RFLGetLastReason();
+RFLErrcode RFLGetAsyncStatus();
+s32 RFLGetLastReason();
 
-RFLErrcode  RFLWaitAsync();
+RFLErrcode RFLWaitAsync();
 
-char*       RFLGetArcFilePath();
+char* RFLGetArcFilePath();
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // RFL_SYSTEM_H
+#endif  // RFL_SYSTEM_H

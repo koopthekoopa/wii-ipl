@@ -3,11 +3,11 @@
 
 #include <private/enc/encutility.h>
 
-#include <private/enc/encunicode.h>
+#include <private/enc/encchinese.h>
 #include <private/enc/encjapanese.h>
 #include <private/enc/enckorean.h>
-#include <private/enc/encchinese.h>
 #include <private/enc/enclatin.h>
+#include <private/enc/encunicode.h>
 
 #include <private/enc/encconvert.h>
 
@@ -19,4 +19,4 @@ extern "C" {
 }
 #endif
 
-#endif // PRIVATE_ENC_H
+#endif  // PRIVATE_ENC_H

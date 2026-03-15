@@ -8,64 +8,64 @@
 namespace nw4r {
     namespace ut {
         class NandFileStream : public FileStream {
-            public:
-                NW4R_UT_RUNTIME_TYPEINFO;
+        public:
+            NW4R_UT_RUNTIME_TYPEINFO;
 
-                NandFileStream(const char* path, u32 mode);
-                NandFileStream(const NANDFileInfo* info, u32 mode, bool enableClose);
-                virtual ~NandFileStream();                                                                              // 0x0C
+            NandFileStream(const char* path, u32 mode);
+            NandFileStream(const NANDFileInfo* info, u32 mode, bool enableClose);
+            virtual ~NandFileStream();  // 0x0C
 
-                bool            Open(const char* path, u32 mode);
-                bool            Open(const NANDFileInfo* info, u32 mode, bool enableClose) NO_INLINE;
+            bool Open(const char* path, u32 mode);
+            bool Open(const NANDFileInfo* info, u32 mode, bool enableClose) NO_INLINE;
 
-                virtual void    Close();                                                                                // 0x10
+            virtual void Close();  // 0x10
 
-                virtual s32     Read(void* pDst, u32 size);                                                             // 0x14
-                virtual bool    ReadAsync(void* pDst, u32 size, IOStreamCallback pCallback, void* pCallbackArg);        // 0x18
+            virtual s32 Read(void* pDst, u32 size);                                                        // 0x14
+            virtual bool ReadAsync(void* pDst, u32 size, IOStreamCallback pCallback, void* pCallbackArg);  // 0x18
 
-                virtual void    Write(const void* pSrc, u32 size);                                                      // 0x1C
-                virtual bool    WriteAsync(const void* pSrc, u32 size, IOStreamCallback pCallback, void* pCallbackArg); // 0x20
+            virtual void Write(const void* pSrc, u32 size);                                                       // 0x1C
+            virtual bool WriteAsync(const void* pSrc, u32 size, IOStreamCallback pCallback, void* pCallbackArg);  // 0x20
 
-                virtual void    Seek(s32 offset, u32 origin);                                                           // 0x44
+            virtual void Seek(s32 offset, u32 origin);  // 0x44
 
-                virtual bool    IsBusy() const          { return mIsBusy; }                                             // 0x24
+            virtual bool IsBusy() const { return mIsBusy; }  // 0x24
 
-                virtual u32     Tell() const            { return mFilePosition.Tell(); }                                // 0x58
-                virtual u32     GetSize() const         { return mFilePosition.GetFileSize(); }                         // 0x40
+            virtual u32 Tell() const { return mFilePosition.Tell(); }            // 0x58
+            virtual u32 GetSize() const { return mFilePosition.GetFileSize(); }  // 0x40
 
-                virtual bool    CanAsync() const        { return true; }                                                // 0x28
-                virtual bool    CanSeek() const         { return true; }                                                // 0x50
-                virtual bool    CanRead() const         { return mCanRead; }                                            // 0x2C
-                virtual bool    CanWrite() const        { return mCanWrite; }                                           // 0x30
-                virtual bool    CanCancel() const       { return false; }                                               // 0x54
+            virtual bool CanAsync() const { return true; }       // 0x28
+            virtual bool CanSeek() const { return true; }        // 0x50
+            virtual bool CanRead() const { return mCanRead; }    // 0x2C
+            virtual bool CanWrite() const { return mCanWrite; }  // 0x30
+            virtual bool CanCancel() const { return false; }     // 0x54
 
-                virtual u32     GetOffsetAlign() const  { return 1; }                                                   // 0x34
-                virtual u32     GetSizeAlign() const    { return DEFAULT_ALIGN; }                                       // 0x38
-                virtual u32     GetBufferAlign() const  { return DEFAULT_ALIGN; }                                       // 0x3C
+            virtual u32 GetOffsetAlign() const { return 1; }              // 0x34
+            virtual u32 GetSizeAlign() const { return DEFAULT_ALIGN; }    // 0x38
+            virtual u32 GetBufferAlign() const { return DEFAULT_ALIGN; }  // 0x3C
 
-            private:
-                typedef struct NandFileStreamInfo {
-                    NANDCommandBlock    nandBlock;  // 0x00
-                    NANDFileInfo        nandInfo;   // 0xB8
-                    NandFileStream*     stream;     // 0x144
-                } NandFileStreamInfo;
+        private:
+            typedef struct NandFileStreamInfo {
+                NANDCommandBlock nandBlock;  // 0x00
+                NANDFileInfo nandInfo;       // 0xB8
+                NandFileStream* stream;      // 0x144
+            } NandFileStreamInfo;
 
-                static void NandAsyncCallback_(s32 result, NANDCommandBlock* pBlock);
+            static void NandAsyncCallback_(s32 result, NANDCommandBlock* pBlock);
 
-                void Initialize_();
+            void Initialize_();
 
-                FilePosition        mFilePosition;      // 0x14
-                NandFileStreamInfo  mFileInfo;          // 0x1C
+            FilePosition mFilePosition;    // 0x14
+            NandFileStreamInfo mFileInfo;  // 0x1C
 
-                bool                mCanRead;           // 0x164
-                bool                mCanWrite;          // 0x165
+            bool mCanRead;   // 0x164
+            bool mCanWrite;  // 0x165
 
-                volatile bool       mIsBusy;            // 0x166
+            volatile bool mIsBusy;  // 0x166
 
-                bool                mCloseOnDestroyFlg; // 0x167
-                bool                mCloseEnableFlg;    // 0x168
+            bool mCloseOnDestroyFlg;  // 0x167
+            bool mCloseEnableFlg;     // 0x168
         };
-    }
-}
+    }  // namespace ut
+}  // namespace nw4r
 
-#endif // NW4R_UT_NAND_FILE_STREAM_H
+#endif  // NW4R_UT_NAND_FILE_STREAM_H

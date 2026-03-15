@@ -2,20 +2,17 @@
 
 #include <revolution/gx.h>
 
-#include <nw4r/math.h>
 #include <nw4r/lyt.h>
+#include <nw4r/math.h>
 
 #include "iplSystem.h"
 
 #include "iplUtility.h"
 
 namespace ipl {
-    PointerCoreObject::PointerCoreObject() :
-    mpLayout(NULL),
-    mState(PointerType::StateNoScroll),
-    mLayoutType(PointerType::LayoutMax),
-    mChan(0),
-    unused_0x10(0) {}
+    PointerCoreObject::PointerCoreObject()
+        : mpLayout(NULL), mState(PointerType::StateNoScroll), mLayoutType(PointerType::LayoutMax), mChan(0), unused_0x10(0) {
+    }
 
     void PointerCoreObject::calc(Pointer* pointer, const controller::Interface* pController) {
         mpLayout = NULL;
@@ -30,7 +27,7 @@ namespace ipl {
             // Rotation
             math::VEC2 cursorHorizon(pController->getHorizon());
             math::VEC3 cursorRotateVec(0.f, 0.f, nw4r::math::Atan2Deg(-cursorHorizon.y, cursorHorizon.x));
-            nw4r::lyt::Pane *pRotatePane = mpLayout->FindPaneByName("N_Rot");
+            nw4r::lyt::Pane* pRotatePane = mpLayout->FindPaneByName("N_Rot");
             nw4r::lyt::Pane* pRotateShadowPane = mpLayout->FindPaneByName("N_SRot");
 
             pRotatePane->SetRotate(cursorRotateVec);
@@ -84,4 +81,4 @@ namespace ipl {
     void PointerCore::changeType(int chan, int type) {
         mCursors[chan].changeType(type);
     }
-}
+}  // namespace ipl

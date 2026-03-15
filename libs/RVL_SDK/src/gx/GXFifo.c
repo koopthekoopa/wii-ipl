@@ -1,23 +1,23 @@
-#include <revolution/gx.h>
 #include <private/gx.h>
+#include <revolution/gx.h>
 
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 #include <string.h>
 
-static GXBool               CPGPLinked;
+static GXBool CPGPLinked;
 
-static OSThread*            __GXCurrentThread;
-static BOOL                 GXOverflowSuspendInProgress;
+static OSThread* __GXCurrentThread;
+static BOOL GXOverflowSuspendInProgress;
 
-static GXBreakPtCallback    BreakPointCB;
+static GXBreakPtCallback BreakPointCB;
 
 __GXFifoObj CPUFifo;
 __GXFifoObj GPFifo;
 
-void*   __GXCurrentBP;
-u32     __GXOverflowCount;
+void* __GXCurrentBP;
+u32 __GXOverflowCount;
 
 static GXBool GPFifoReady;
 static GXBool CPUFifoReady;
@@ -92,7 +92,7 @@ void GXCPInterruptHandler(__OSInterrupt interrupt, OSContext* context) {
     }
 }
 
-void GXInitFifoBase(GXFifoObj *fifo, void *base, u32 size) {
+void GXInitFifoBase(GXFifoObj* fifo, void* base, u32 size) {
     __GXFifoObj* realFifo = (__GXFifoObj*)fifo;
 
     realFifo->base = base;
@@ -100,7 +100,7 @@ void GXInitFifoBase(GXFifoObj *fifo, void *base, u32 size) {
     realFifo->size = size;
     realFifo->count = 0;
 
-    GXInitFifoLimits(fifo, size - (16 * 1024), OSRoundDown32B(size/2));
+    GXInitFifoLimits(fifo, size - (16 * 1024), OSRoundDown32B(size / 2));
     GXInitFifoPtrs(fifo, base, base);
 }
 
@@ -152,7 +152,7 @@ GXBool CPGPLinkCheck() {
 
         return GX_TRUE;
     }
-    
+
     range1 = (s32)((u8*)CPUFifo.top - (u8*)GPFifo.base);
     range2 = (s32)((u8*)GPFifo.top - (u8*)CPUFifo.base);
     overlap = ((range1 > 0) && (range2 > 0) || (range1 < 0 && (range2 < 0)));
@@ -187,7 +187,7 @@ void GXSetCPUFifo(GXFifoObj* fifo) {
         CPUFifo.bind_gp = GX_TRUE;
 
         reg = 0;
-        
+
         GX_SET_PI_REG(3, (u32)CPUFifo.base & 0x3FFFFFFF);
         GX_SET_PI_REG(4, (u32)CPUFifo.top & 0x3FFFFFFF);
 
@@ -198,8 +198,7 @@ void GXSetCPUFifo(GXFifoObj* fifo) {
         __GXWriteFifoIntReset(GX_TRUE, GX_TRUE);
         __GXWriteFifoIntEnable(GX_TRUE, GX_FALSE);
         __GXFifoLink(GX_TRUE);
-    }
-    else {
+    } else {
         CPUFifo.bind_gp = GX_FALSE;
 
         if (CPGPLinked) {
@@ -207,7 +206,7 @@ void GXSetCPUFifo(GXFifoObj* fifo) {
             CPGPLinked = GX_FALSE;
         }
 
-        __GXWriteFifoIntEnable (GX_FALSE, GX_FALSE);
+        __GXWriteFifoIntEnable(GX_FALSE, GX_FALSE);
 
         reg = 0;
 
@@ -239,7 +238,7 @@ void GXSetGPFifo(GXFifoObj* fifo) {
         OSRestoreInterrupts(enabled);
         return;
     }
-    
+
     GPFifo = *realFifo;
     GPFifoReady = GX_TRUE;
     GPFifo.bind_gp = GX_TRUE;
@@ -266,8 +265,7 @@ void GXSetGPFifo(GXFifoObj* fifo) {
         GPFifo.bind_cpu = GX_TRUE;
         __GXWriteFifoIntEnable(1, 0);
         __GXFifoLink(1);
-    }
-    else {
+    } else {
         CPGPLinked = GX_FALSE;
         GPFifo.bind_cpu = GX_FALSE;
         __GXWriteFifoIntEnable(0, 0);
@@ -285,17 +283,19 @@ void GXSetGPFifo(GXFifoObj* fifo) {
     OSRestoreInterrupts(enabled);
 }
 
-#define SOME_MACRO1(fifo) {                 \
-    u32 temp = GX_GET_CP_REG(29) << 16;     \
-    temp |= GX_GET_CP_REG(28);              \
-    fifo.rdPtr = OSPhysicalToCached(temp);  \
-}
+#define SOME_MACRO1(fifo)                                                                                                                            \
+    {                                                                                                                                                \
+        u32 temp = GX_GET_CP_REG(29) << 16;                                                                                                          \
+        temp |= GX_GET_CP_REG(28);                                                                                                                   \
+        fifo.rdPtr = OSPhysicalToCached(temp);                                                                                                       \
+    }
 
-#define SOME_MACRO2(fifo) {             \
-    u32 temp = GX_GET_CP_REG(25) << 16; \
-    temp |= GX_GET_CP_REG(24);          \
-    fifo.count = temp;                  \
-}
+#define SOME_MACRO2(fifo)                                                                                                                            \
+    {                                                                                                                                                \
+        u32 temp = GX_GET_CP_REG(25) << 16;                                                                                                          \
+        temp |= GX_GET_CP_REG(24);                                                                                                                   \
+        fifo.count = temp;                                                                                                                           \
+    }
 
 static void __GXSaveFifoCPStat() {
     u32 cpStatus;
@@ -308,7 +308,7 @@ static void __GXSaveFifoCPStat() {
 static void __GXSaveFifoPIStat() {
     u32 reg = GX_GET_PI_REG(5);
     CPUFifo.wrPtr = OSPhysicalToCached(reg & 0x1FFFFFE0);
-    CPUFifo.wrap = (reg & 0x20000000)  ? GX_TRUE : GX_FALSE;
+    CPUFifo.wrap = (reg & 0x20000000) ? GX_TRUE : GX_FALSE;
 }
 
 static void __GXSaveFifo() {
@@ -327,9 +327,8 @@ static void __GXSaveFifo() {
         CPUFifo.count = GPFifo.count;
         GPFifo.wrPtr = CPUFifo.wrPtr;
         GPFifo.wrap = CPUFifo.wrap;
-    }
-    else if (CPUFifoReady) {
-        CPUFifo.count  = (s32)CPUFifo.wrPtr - (s32)CPUFifo.rdPtr;
+    } else if (CPUFifoReady) {
+        CPUFifo.count = (s32)CPUFifo.wrPtr - (s32)CPUFifo.rdPtr;
         if (CPUFifo.count < 0) {
             CPUFifo.count += CPUFifo.size;
         }
@@ -344,14 +343,14 @@ GXBool __GXIsGPFifoReady() {
 
 void GXGetGPStatus(GXBool* overhi, GXBool* underlow, GXBool* readIdle, GXBool* cmdIdle, GXBool* brkpt) {
     __GXData->cpStatus = GX_GET_CP_REG(0);
-    *overhi   = GET_REG_FIELD(__GXData->cpStatus, 1, 0);
+    *overhi = GET_REG_FIELD(__GXData->cpStatus, 1, 0);
     *underlow = (int)GET_REG_FIELD(__GXData->cpStatus, 1, 1);
     *readIdle = (int)GET_REG_FIELD(__GXData->cpStatus, 1, 2);
-    *cmdIdle  = (int)GET_REG_FIELD(__GXData->cpStatus, 1, 3);
-    *brkpt    = (int)GET_REG_FIELD(__GXData->cpStatus, 1, 4);
+    *cmdIdle = (int)GET_REG_FIELD(__GXData->cpStatus, 1, 3);
+    *brkpt = (int)GET_REG_FIELD(__GXData->cpStatus, 1, 4);
 }
 
-GXBool GXGetCPUFifo(GXFifoObj *fifo) {
+GXBool GXGetCPUFifo(GXFifoObj* fifo) {
     __GXFifoObj* realFifo = (__GXFifoObj*)fifo;
     if (!CPUFifoReady) {
         return GX_FALSE;
@@ -375,7 +374,7 @@ u32 GXGetFifoCount(const GXFifoObj* fifo) {
 }
 
 GXBool GXGetFifoWrap(const GXFifoObj* fifo) {
-    __GXFifoObj* realFifo = (__GXFifoObj*) fifo;
+    __GXFifoObj* realFifo = (__GXFifoObj*)fifo;
     return realFifo->wrap;
 }
 
@@ -399,7 +398,7 @@ void __GXFifoInit() {
     memset(&GPFifo, 0, sizeof(__GXFifoObj));
 
     CPUFifoReady = GX_FALSE;
-    GPFifoReady  = GX_FALSE;
+    GPFifoReady = GX_FALSE;
 }
 
 void __GXCleanGPFifo() {
@@ -417,9 +416,9 @@ void __GXCleanGPFifo() {
     GX_SET_CP_REG(24, GPFifo.count);
     GX_SET_CP_REG(26, (u32)GPFifo.wrPtr & 0x3FFFFFFF);
     GX_SET_CP_REG(28, (u32)GPFifo.rdPtr & 0x3FFFFFFF);
-    GX_SET_CP_REG(25, GPFifo.count>>16);
-    GX_SET_CP_REG(27, ((u32)GPFifo.wrPtr & 0x3FFFFFFF)>>16);
-    GX_SET_CP_REG(29, ((u32)GPFifo.rdPtr & 0x3FFFFFFF)>>16);
+    GX_SET_CP_REG(25, GPFifo.count >> 16);
+    GX_SET_CP_REG(27, ((u32)GPFifo.wrPtr & 0x3FFFFFFF) >> 16);
+    GX_SET_CP_REG(29, ((u32)GPFifo.rdPtr & 0x3FFFFFFF) >> 16);
 
     PPCSync();
 

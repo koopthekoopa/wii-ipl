@@ -6,14 +6,14 @@
 namespace ipl {
     namespace ncd {
         class NCDSetting {
-            public:
-                static bool getConnectEnableFlag();
+        public:
+            static bool getConnectEnableFlag();
 
-                static void makeMacAddr();
-                static u8*  getMacAddr();
-                static u32  getMacNum();
+            static void makeMacAddr();
+            static u8* getMacAddr();
+            static u32 getMacNum();
         };
-    }
-}
+    }  // namespace ncd
+}  // namespace ipl
 
-#endif // IPL_NCD_SETTING_H
+#endif  // IPL_NCD_SETTING_H

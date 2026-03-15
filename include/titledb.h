@@ -3,6 +3,7 @@
 
 #include <private/es/types.h>
 
+// clang-format off
 #define TITLE_TYPE_SYSTEM           0x00000001
 #define TITLE_TYPE_DISC             0x00010000
 #define TITLE_TYPE_CHANNEL          0x00010001
@@ -84,5 +85,6 @@
 
 #define TITLE_NO_REGION(t)          (t & TITLE_NOREGION_MASK)
 #define TITLE_REGION(t)             (t & TITLE_REGION_MASK)
+// clang-format on
 
-#endif // IPL_TITLE_ID_DATABASE
+#endif  // IPL_TITLE_ID_DATABASE

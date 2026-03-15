@@ -10,21 +10,13 @@
 
 namespace ipl {
     namespace nigaoe {
-        Object::Object(EGG::Heap* heap, int width, int height, int faceId, MakeIconCallback callback, void* callbackWork) :
-        mFaceId(faceId),
-        mpCharData(NULL),
-        mCallBack(callback),
-        mpCallBackWork(callbackWork),
-        mbCreated(false) {
+        Object::Object(EGG::Heap* heap, int width, int height, int faceId, MakeIconCallback callback, void* callbackWork)
+            : mFaceId(faceId), mpCharData(NULL), mCallBack(callback), mpCallBackWork(callbackWork), mbCreated(false) {
             init(heap, width, height);
         }
 
-        Object::Object(EGG::Heap* heap, int width, int height, RFLiCharData* faceData, MakeIconCallback callback, void* callbackWork) :
-        mFaceId(-1),
-        mpCharData(faceData),
-        mCallBack(callback),
-        mpCallBackWork(callbackWork),
-        mbCreated(false) {
+        Object::Object(EGG::Heap* heap, int width, int height, RFLiCharData* faceData, MakeIconCallback callback, void* callbackWork)
+            : mFaceId(-1), mpCharData(faceData), mCallBack(callback), mpCallBackWork(callbackWork), mbCreated(false) {
             init(heap, width, height);
         }
 
@@ -32,17 +24,17 @@ namespace ipl {
             // Prepare icon settings
             mIconSettings.width = width;
             mIconSettings.height = height;
-            
+
             mIconSettings.bgType = RFLIconBG_Direct;
             mIconSettings.bgColor = (GXColor){0, 0, 0, 0};
-            
+
             mIconSettings.drawXluOnly = FALSE;
 
             // Prepare icon buffer.
             u32 iconSize = width * height * GX_RGB5A3_SIZE;
             mIconSize = iconSize;
-                
-            mpIconTex = new(heap, DEFAULT_ALIGN) u8[iconSize];
+
+            mpIconTex = new (heap, DEFAULT_ALIGN) u8[iconSize];
         }
 
         Object::~Object() {
@@ -50,30 +42,29 @@ namespace ipl {
         }
 
         void Object::make_icon() {
-            GXRenderModeObj *rMode;
+            GXRenderModeObj* rMode;
             RFLErrcode err = RFLErrcode_Success;
-            
+
             if (mpCharData != NULL) {
                 RFLiMakeIconFromData(mpIconTex, mpCharData, RFLExp_Normal, &mIconSettings);
-            }
-            else {
+            } else {
                 err = RFLMakeIcon(mpIconTex, RFLDataSource_Official, NULL, mFaceId, RFLExp_Normal, &mIconSettings);
             }
-            
+
             if (err != RFLErrcode_Success) {
                 memset(mpIconTex, 0, mIconSize);
                 DCStoreRange(mpIconTex, mIconSize);
             }
-            
+
             rMode = System::getRenderModeObj();
-            
+
             GXSetCopyFilter(rMode->aa, rMode->sample_pattern, GX_TRUE, rMode->vfilter);
             GXSetDither(GX_TRUE);
-            
+
             GXInitTexObj(&mFaceTexObj, mpIconTex, mIconSettings.width, mIconSettings.height, GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP, GX_FALSE);
-            
+
             mbCreated = true;
             mCallBack(this, mpCallBackWork);
         }
-    }
-}
+    }  // namespace nigaoe
+}  // namespace ipl

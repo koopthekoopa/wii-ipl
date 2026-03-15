@@ -12,12 +12,10 @@ namespace nw4r {
             if ((GetChar<u8>(0) & 0x80) == 0x00) {
                 code = GetChar<u8>(0);
                 StepStrm<u8>(1);
-            }
-            else if ((GetChar<u8>(0) & 0xE0) == 0xC0) {
+            } else if ((GetChar<u8>(0) & 0xE0) == 0xC0) {
                 code = (GetChar<u8>(0) & 0x1F) << 6 | (GetChar<u8>(1) & 0x3F);
                 StepStrm<u8>(2);
-            }
-            else {
+            } else {
                 code = (GetChar<u8>(0) & 0x1F) << 12 | (GetChar<u8>(1) & 0x3F) << 6 | (GetChar<u8>(2) & 0x3F);
                 StepStrm<u8>(3);
             }
@@ -45,13 +43,12 @@ namespace nw4r {
             if (IsSJISLeadByte(GetChar<u8>(0))) {
                 code = GetChar<u8>(0) << 8 | GetChar<u8>(1);
                 StepStrm<u8>(2);
-            }
-            else {
+            } else {
                 code = GetChar<u8>(0);
                 StepStrm<u8>(1);
             }
 
             return code;
         }
-    }
-}
+    }  // namespace ut
+}  // namespace nw4r

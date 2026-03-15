@@ -6,9 +6,9 @@
 #ifdef __cplusplus
 
 namespace std {
-    using   ::va_list;
-} // namespace std
+    using ::va_list;
+}  // namespace std
 
 #endif
 
-#endif // MSL_CSTDARG_H
+#endif  // MSL_CSTDARG_H

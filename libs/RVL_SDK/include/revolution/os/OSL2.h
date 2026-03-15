@@ -7,9 +7,9 @@
 extern "C" {
 #endif
 
-void    L2Enable();
-void    L2Disable();
-void    L2GlobalInvalidate();
+void L2Enable();
+void L2Disable();
+void L2GlobalInvalidate();
 
 #ifdef __cplusplus
 }

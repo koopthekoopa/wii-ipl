@@ -5,7 +5,7 @@
 namespace ipl {
     namespace cs {
         namespace size {
-            #define PROPERTY_COUNT  2
+#define PROPERTY_COUNT 2
             extern const CHANSVmPropertyList cPropertyList[PROPERTY_COUNT];
 
             DEFINE_CS_IPL_CTOR_ARG(f32 width, f32 height) {
@@ -33,15 +33,13 @@ namespace ipl {
 
                     if (arg0 != NULL) {
                         width = arg0->value.float_v;
-                    }
-                    else {
+                    } else {
                         width = 0.0;
                     }
 
                     if (arg1 != NULL) {
                         height = arg1->value.float_v;
-                    }
-                    else {
+                    } else {
                         height = 0.0;
                     }
 
@@ -65,7 +63,8 @@ namespace ipl {
                 return result;
             }
 
-            template<int I> CHANSVmDefineMethod(set) {
+            template <int I>
+            CHANSVmDefineMethod(set) {
                 BOOL result = FALSE;
                 CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
                 if (util::is_valid_datap(VmParentObj) && arg != NULL) {
@@ -77,7 +76,8 @@ namespace ipl {
                 return result;
             }
 
-            template<int I> CHANSVmDefineMethod(get) {
+            template <int I>
+            CHANSVmDefineMethod(get) {
                 BOOL result = FALSE;
                 if (util::is_valid_datap(VmParentObj)) {
                     f32* data = (f32*)*VmParentObj->value.ptr_v;
@@ -86,10 +86,12 @@ namespace ipl {
                 return result;
             }
 
+            // clang-format off
             const CHANSVmPropertyList cPropertyList[PROPERTY_COUNT] = {
                 { "width",  get<0>, set<0> },
                 { "height", get<1>, set<1> },
             };
-        }
-    }
-}
+            // clang-format on
+        }  // namespace size
+    }  // namespace cs
+}  // namespace ipl

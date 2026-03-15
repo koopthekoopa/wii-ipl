@@ -15,4 +15,4 @@ s32 NANDCheck(u32 fsblock, u32 inode, u32* answer) {
     return NAND_RESULT_OK;
 }
 
-} // extern "C" 
+}  // extern "C"

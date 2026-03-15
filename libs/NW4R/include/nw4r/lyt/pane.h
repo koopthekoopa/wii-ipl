@@ -9,10 +9,10 @@
 
 #include <nw4r/math/types.h>
 
-#include <nw4r/lyt/types.h>
-#include <nw4r/lyt/drawInfo.h>
 #include <nw4r/lyt/animation.h>
+#include <nw4r/lyt/drawInfo.h>
 #include <nw4r/lyt/material.h>
+#include <nw4r/lyt/types.h>
 
 namespace nw4r {
     namespace lyt {
@@ -20,13 +20,13 @@ namespace nw4r {
 
         namespace detail {
             class PaneBase {
-                public:
-                    inline PaneBase() : mLink() {}
-                    virtual ~PaneBase() {}
+            public:
+                inline PaneBase() : mLink() {}
+                virtual ~PaneBase() {}
 
-                    ut::LinkListNode mLink;
+                ut::LinkListNode mLink;
             };
-        }
+        }  // namespace detail
         typedef ut::LinkList<Pane, offsetof(detail::PaneBase, mLink)> PaneList;
 
         enum {
@@ -34,140 +34,140 @@ namespace nw4r {
         };
 
         class Pane : detail::PaneBase {
-            private:
-                enum {
-                    BIT_VISIBLE = 0,
-                    BIT_INFLUENCED_ALPHA,
-                    BIT_LOCATION_ADJUST
-                };
-            public:
-                Pane();
-                Pane(const res::Pane* pBlock);
-                virtual ~Pane();                                                                                                // 0x08
-                
-                NW4R_UT_RUNTIME_TYPEINFO;
+        private:
+            enum { BIT_VISIBLE = 0, BIT_INFLUENCED_ALPHA, BIT_LOCATION_ADJUST };
 
-                virtual void            CalculateMtx(const DrawInfo& drawInfo);                                                 // 0x10
+        public:
+            Pane();
+            Pane(const res::Pane* pBlock);
+            virtual ~Pane();  // 0x08
 
-                virtual void            Draw(const DrawInfo& drawInfo);                                                         // 0x14
-                virtual void            DrawSelf(const DrawInfo& drawInfo);                                                     // 0x18
+            NW4R_UT_RUNTIME_TYPEINFO;
 
-                virtual void            Animate(u32 option = 0);                                                                // 0x1C
-                virtual void            AnimateSelf(u32 option = 0);                                                            // 0x20
+            virtual void CalculateMtx(const DrawInfo& drawInfo);  // 0x10
 
-                virtual ut::Color       GetVtxColor(u32 idx) const;                                                             // 0x24
-                virtual void            SetVtxColor(u32 idx, ut::Color valuw);                                                  // 0x28
+            virtual void Draw(const DrawInfo& drawInfo);      // 0x14
+            virtual void DrawSelf(const DrawInfo& drawInfo);  // 0x18
 
-                virtual u8              GetColorElement(u32 idx) const;                                                         // 0x2C
-                virtual void            SetColorElement(u32 idx, u8 color);                                                     // 0x30
+            virtual void Animate(u32 option = 0);      // 0x1C
+            virtual void AnimateSelf(u32 option = 0);  // 0x20
 
-                virtual u8              GetVtxColorElement(u32 idx) const;                                                      // 0x34
-                virtual void            SetVtxColorElement(u32 idx, u8 element);                                                // 0x38
-                
-                virtual Pane*           FindPaneByName(const char* findName, bool bRecursive = true);                           // 0x3C
-                virtual Material*       FindMaterialByName(const char* findName, bool bRecursive = true);                       // 0x40
+            virtual ut::Color GetVtxColor(u32 idx) const;        // 0x24
+            virtual void SetVtxColor(u32 idx, ut::Color valuw);  // 0x28
 
-                virtual void            BindAnimation(AnimTransform* animTrans, bool bRecursive = true);                        // 0x44
-                
-                virtual void            UnbindAnimation(AnimTransform* animTrans, bool bRecursive = true);                      // 0x48
-                virtual void            UnbindAllAnimation(bool bRecursive = true);                                             // 0x4C
-                virtual void            UnbindAnimationSelf(AnimTransform* animTrans);                                          // 0x50
-                
-                virtual AnimationLink*  FindAnimationLink(AnimTransform* animTrans);                                            // 0x54
+            virtual u8 GetColorElement(u32 idx) const;        // 0x2C
+            virtual void SetColorElement(u32 idx, u8 color);  // 0x30
 
-                virtual void            SetAnimationEnable(AnimTransform* animTrans, bool bEnable, bool bRecursive = true);     // 0x58
+            virtual u8 GetVtxColorElement(u32 idx) const;          // 0x34
+            virtual void SetVtxColorElement(u32 idx, u8 element);  // 0x38
 
-                virtual Material*       GetMaterial() const;                                                                    // 0x5C
+            virtual Pane* FindPaneByName(const char* findName, bool bRecursive = true);          // 0x3C
+            virtual Material* FindMaterialByName(const char* findName, bool bRecursive = true);  // 0x40
 
-                virtual void            LoadMtx(const DrawInfo& drawInfo);                                                      // 0x60
+            virtual void BindAnimation(AnimTransform* animTrans, bool bRecursive = true);  // 0x44
 
-                Pane*                   GetParent() const                           { return mpParent; }
-                PaneList&               GetChildList()                              { return mChildList; }
+            virtual void UnbindAnimation(AnimTransform* animTrans, bool bRecursive = true);  // 0x48
+            virtual void UnbindAllAnimation(bool bRecursive = true);                         // 0x4C
+            virtual void UnbindAnimationSelf(AnimTransform* animTrans);                      // 0x50
 
-                const math::VEC3&       GetTranslate()                              { return mTranslate; }
-                void                    SetTranslate(const math::VEC3& translate)   { mTranslate = translate; }
-                void                    SetTranslate(const math::VEC2& translate)   { SetTranslate(math::VEC3(translate.x, translate.y, 0.0f)); }
+            virtual AnimationLink* FindAnimationLink(AnimTransform* animTrans);  // 0x54
 
-                const math::VEC3&       GetRotate() const                           { return mRotate; }
-                void                    SetRotate(const math::VEC3& rotate)         { mRotate = rotate; }
+            virtual void SetAnimationEnable(AnimTransform* animTrans, bool bEnable, bool bRecursive = true);  // 0x58
 
-                const math::VEC2&       GetScale() const                            { return mScale; }
-                void                    SetScale(const math::VEC2& scale)           { mScale = scale; }
+            virtual Material* GetMaterial() const;  // 0x5C
 
-                const Size&             GetSize() const                             { return mSize; }
-                void                    SetSize(const Size& size)                   { mSize = size; }
+            virtual void LoadMtx(const DrawInfo& drawInfo);  // 0x60
 
-                bool                    IsVisible()                                 { return detail::TestBit(mFlag, BIT_VISIBLE); };
-                void                    SetVisible(bool visible)                    { detail::SetBit(&mFlag, BIT_VISIBLE, visible); };
+            Pane* GetParent() const { return mpParent; }
+            PaneList& GetChildList() { return mChildList; }
 
-                bool                    IsInfluencedAlpha()                         { return detail::TestBit(mFlag, BIT_INFLUENCED_ALPHA); };
-                void                    SetInfluencedAlpha(bool visible)            { detail::SetBit(&mFlag, BIT_INFLUENCED_ALPHA, visible); };
+            const math::VEC3& GetTranslate() { return mTranslate; }
+            void SetTranslate(const math::VEC3& translate) { mTranslate = translate; }
+            void SetTranslate(const math::VEC2& translate) { SetTranslate(math::VEC3(translate.x, translate.y, 0.0f)); }
 
-                bool                    IsLocationAdjust()                          { return detail::TestBit(mFlag, BIT_LOCATION_ADJUST); };
-                void                    SetLocationAdjust(bool visible)             { detail::SetBit(&mFlag, BIT_LOCATION_ADJUST, visible); };
+            const math::VEC3& GetRotate() const { return mRotate; }
+            void SetRotate(const math::VEC3& rotate) { mRotate = rotate; }
 
-                const math::MTX34&      GetGlobalMtx() const                        { return mGlbMtx; }
-                void                    SetGlobalMtx(const math::MTX34& mtx)        { mGlbMtx = mtx; }
+            const math::VEC2& GetScale() const { return mScale; }
+            void SetScale(const math::VEC2& scale) { mScale = scale; }
 
-                const math::MTX34&      GetMtx() const                              { return mMtx; }
-                void                    SetMtx(const math::MTX34& mtx)              { mMtx = mtx; }
+            const Size& GetSize() const { return mSize; }
+            void SetSize(const Size& size) { mSize = size; }
 
-                u8                      GetAlpha()                                  { return mAlpha; }
-                void                    SetAlpha(u8 alpha)                          { mAlpha = alpha; }
+            bool IsVisible() { return detail::TestBit(mFlag, BIT_VISIBLE); };
+            void SetVisible(bool visible) { detail::SetBit(&mFlag, BIT_VISIBLE, visible); };
 
-                const char*             GetName() const                             { return mName; }
+            bool IsInfluencedAlpha() { return detail::TestBit(mFlag, BIT_INFLUENCED_ALPHA); };
+            void SetInfluencedAlpha(bool visible) { detail::SetBit(&mFlag, BIT_INFLUENCED_ALPHA, visible); };
 
-                void                    SetSRTElement(u32 idx, f32 value)           { NW4R_ASSERT(idx < ANIMTARGET_PANE_MAX); reinterpret_cast<f32*>(&mTranslate)[idx] = value; }
+            bool IsLocationAdjust() { return detail::TestBit(mFlag, BIT_LOCATION_ADJUST); };
+            void SetLocationAdjust(bool visible) { detail::SetBit(&mFlag, BIT_LOCATION_ADJUST, visible); };
 
-                bool                    IsUserAllocated() const                     { return mbUserAllocated; }
+            const math::MTX34& GetGlobalMtx() const { return mGlbMtx; }
+            void SetGlobalMtx(const math::MTX34& mtx) { mGlbMtx = mtx; }
 
-                const ut::Rect          GetPaneRect(const DrawInfo& drawInfo) const;
-                
-                math::VEC2              GetVtxPos() const;
+            const math::MTX34& GetMtx() const { return mMtx; }
+            void SetMtx(const math::MTX34& mtx) { mMtx = mtx; }
 
-                void                    SetName(const char* name);
-                void                    SetUserData(const char* userData);
+            u8 GetAlpha() { return mAlpha; }
+            void SetAlpha(u8 alpha) { mAlpha = alpha; }
 
-                void                    Init();
+            const char* GetName() const { return mName; }
 
-                void                    InsertChild(PaneList::Iterator next, Pane* pChild);
-                void                    InsertChild(Pane* pNext, Pane* pChild);
+            void SetSRTElement(u32 idx, f32 value) {
+                NW4R_ASSERT(idx < ANIMTARGET_PANE_MAX);
+                reinterpret_cast<f32*>(&mTranslate)[idx] = value;
+            }
 
-                void                    PrependChild(Pane* pChild);
-                void                    AppendChild(Pane* pChild);
+            bool IsUserAllocated() const { return mbUserAllocated; }
 
-                void                    RemoveChild(Pane* pChild);
+            const ut::Rect GetPaneRect(const DrawInfo& drawInfo) const;
 
-                void                    CalculateMtxChild(const DrawInfo& drawInfo);
+            math::VEC2 GetVtxPos() const;
 
-                void                    AddAnimationLink(AnimationLink* animationLink);
-            
-            protected:
-                Pane*                           mpParent;           // 0x0C
+            void SetName(const char* name);
+            void SetUserData(const char* userData);
 
-                PaneList                        mChildList;         // 0x10
-                AnimationLinkList               mAnimList;          // 0x1C
+            void Init();
 
-                Material*                       mpMaterial;         // 0x28
+            void InsertChild(PaneList::Iterator next, Pane* pChild);
+            void InsertChild(Pane* pNext, Pane* pChild);
 
-                math::VEC3                      mTranslate;         // 0x2C
-                math::VEC3                      mRotate;            // 0x38
-                math::VEC2                      mScale;             // 0x44
-                Size                            mSize;              // 0x4C
+            void PrependChild(Pane* pChild);
+            void AppendChild(Pane* pChild);
 
-                math::MTX34                     mMtx;               // 0x54
-                math::MTX34                     mGlbMtx;            // 0x84
-                
-                char                            mName[16];          // 0xB4
-                char                            mUserData[8];       // 0xC4
-                
-                u8                              mBasePosition;      // 0xCC
-                u8                              mAlpha;             // 0xCD
-                u8                              mGlbAlpha;          // 0xCE
-                u8                              mFlag;              // 0xCF
-                bool                            mbUserAllocated;    // 0xD0
+            void RemoveChild(Pane* pChild);
+
+            void CalculateMtxChild(const DrawInfo& drawInfo);
+
+            void AddAnimationLink(AnimationLink* animationLink);
+
+        protected:
+            Pane* mpParent;  // 0x0C
+
+            PaneList mChildList;          // 0x10
+            AnimationLinkList mAnimList;  // 0x1C
+
+            Material* mpMaterial;  // 0x28
+
+            math::VEC3 mTranslate;  // 0x2C
+            math::VEC3 mRotate;     // 0x38
+            math::VEC2 mScale;      // 0x44
+            Size mSize;             // 0x4C
+
+            math::MTX34 mMtx;     // 0x54
+            math::MTX34 mGlbMtx;  // 0x84
+
+            char mName[16];     // 0xB4
+            char mUserData[8];  // 0xC4
+
+            u8 mBasePosition;      // 0xCC
+            u8 mAlpha;             // 0xCD
+            u8 mGlbAlpha;          // 0xCE
+            u8 mFlag;              // 0xCF
+            bool mbUserAllocated;  // 0xD0
         };
-    }
-}
+    }  // namespace lyt
+}  // namespace nw4r
 
-#endif // NW4R_LYT_PANE_H
+#endif  // NW4R_LYT_PANE_H

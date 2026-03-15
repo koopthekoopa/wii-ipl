@@ -9,14 +9,16 @@
 
 #include <egg/core.h>
 
+// clang-format off
 #include "scene/iplSceneCreator.h"
 #include "scene/iplSceneBase.h"
+// clang-format on
 
 #include "utility/iplQueue.h"
 
 namespace ipl {
     namespace scene {
-        class   Base;
+        class Base;
         typedef Base SceneObj;
 
         enum {
@@ -27,75 +29,75 @@ namespace ipl {
             DRAW_LAYER_MAX,
         };
 
-        #define MAX_COMMANDS 8
+#define MAX_COMMANDS 8
         typedef utility::Queue<Command, MAX_COMMANDS> CommandList;
 
         class Manager {
-            public:
-                Manager(EGG::Heap* heap);
+        public:
+            Manager(EGG::Heap* heap);
 
-                void        init();
+            void init();
 
-                void        calc();
-                void        calc(SceneObj* scene);
+            void calc();
+            void calc(SceneObj* scene);
 
-                void        draw();
-                void        draw(SceneObj* scene);
+            void draw();
+            void draw(SceneObj* scene);
 
-                SceneObj*   createScene(int sceneId, int prevSceneId, void* args);
-                SceneObj*   createScene(int sceneId, void* args) { return createScene(sceneId, SCENE_NONE, args); }
-                void        createScene(const Command& command);
+            SceneObj* createScene(int sceneId, int prevSceneId, void* args);
+            SceneObj* createScene(int sceneId, void* args) { return createScene(sceneId, SCENE_NONE, args); }
+            void createScene(const Command& command);
 
-                void        destroyScene(SceneObj* scene);
-                void        detach(SceneObj* scene);
+            void destroyScene(SceneObj* scene);
+            void detach(SceneObj* scene);
 
-                void        startResetting();
-                BOOL        isResetProcessDone();
-                BOOL        isResetAcceptable();
+            void startResetting();
+            BOOL isResetProcessDone();
+            BOOL isResetAcceptable();
 
-                BOOL        pushCommand(const Command& pCommand);
+            BOOL pushCommand(const Command& pCommand);
 
-                void        setDestructSync();
-                void        doDestructSync() { mbDestroySyncTask = true; }
+            void setDestructSync();
+            void doDestructSync() { mbDestroySyncTask = true; }
 
-                SceneObj*   getScene(int sceneId);
-                SceneObj*   getScene(int sceneId, SceneObj* obj);
+            SceneObj* getScene(int sceneId);
+            SceneObj* getScene(int sceneId, SceneObj* obj);
 
-                bool        onDefaultDrawLayer()        { return mDrawLayer == DRAW_LAYER_2; }
-                bool        onDrawLayer(int layer)      { return mDrawLayer == layer; }
+            bool onDefaultDrawLayer() { return mDrawLayer == DRAW_LAYER_2; }
+            bool onDrawLayer(int layer) { return mDrawLayer == layer; }
 
-                void        attachReservedScene();
+            void attachReservedScene();
 
-                BOOL        isReady(int sceneId);
+            BOOL isReady(int sceneId);
 
-                SceneObj*   getReservedScene()          { return mpReservedScene; }
+            SceneObj* getReservedScene() { return mpReservedScene; }
 
-                int         getCurrentRootSceneID()     { return mRootSceneID; }
-                int         getPreviousRootSceneID()    { return mPrevRootSceneID; }
-            
-            private:
-                void        createRootScene(int sceneId, void* args);
+            int getCurrentRootSceneID() { return mRootSceneID; }
+            int getPreviousRootSceneID() { return mPrevRootSceneID; }
 
-                EGG::UnitHeap*  mpBigSceneHeap;     // 0x00
-                EGG::UnitHeap*  mpMdmSceneHeap;     // 0x04
-                EGG::UnitHeap*  mpSmlSceneHeap;     // 0x08
+        private:
+            void createRootScene(int sceneId, void* args);
 
-                SceneObj*       mpRootScene;        // 0x0C
+            EGG::UnitHeap* mpBigSceneHeap;  // 0x00
+            EGG::UnitHeap* mpMdmSceneHeap;  // 0x04
+            EGG::UnitHeap* mpSmlSceneHeap;  // 0x08
 
-                CommandList     mCommands;          // 0x10
+            SceneObj* mpRootScene;  // 0x0C
 
-                int             mDrawLayer;         // 0x100
+            CommandList mCommands;  // 0x10
 
-                SceneObj*       mpReservedScene;    // 0x104
-                Command         mReservedCommand;   // 0x108
-                bool            mbCreatedReserved;  // 0x124
+            int mDrawLayer;  // 0x100
 
-                bool            mbDestroySyncTask;  // 0x125
+            SceneObj* mpReservedScene;  // 0x104
+            Command mReservedCommand;   // 0x108
+            bool mbCreatedReserved;     // 0x124
 
-                int             mRootSceneID;       // 0x128
-                int             mPrevRootSceneID;   // 0x12C
+            bool mbDestroySyncTask;  // 0x125
+
+            int mRootSceneID;      // 0x128
+            int mPrevRootSceneID;  // 0x12C
         };
-    }
-}
+    }  // namespace scene
+}  // namespace ipl
 
-#endif // IPL_SCENE_MANAGER_H
+#endif  // IPL_SCENE_MANAGER_H

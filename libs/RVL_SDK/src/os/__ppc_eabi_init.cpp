@@ -24,13 +24,14 @@ extern void exit();
 
 typedef void (*VoidPTR)();
 #pragma section code_type ".ctors$00"
-__declspec(section ".ctors$00") extern VoidPTR  _ctors[];
+__declspec(section ".ctors$00") extern VoidPTR _ctors[];
 #pragma section code_type ".dtors$00"
-__declspec(section ".dtors$00") extern VoidPTR  _dtors[];
+__declspec(section ".dtors$00") extern VoidPTR _dtors[];
 
 #pragma section code_type ".init"
 
 asm void __init_hardware() {
+    // clang-format off
 #ifdef __MWERKS__
     nofralloc
     
@@ -48,9 +49,11 @@ asm void __init_hardware() {
     mtlr    r31
     blr
 #endif
+    // clang-format on
 }
 
 asm void __flush_cache(void* pAddress, unsigned int size) {
+    // clang-format off
 #ifdef __MWERKS__
     lis     r5, 0xFFFF
     ori     r5, r5, 0xFFF1
@@ -74,11 +77,13 @@ loop:
 
     blr
 #endif
+    // clang-format on
 }
 
 #pragma section code_type ".text"
 
 asm void __init_user() {
+    // clang-format off
 #ifdef __MWERKS__
     fralloc
 
@@ -87,17 +92,18 @@ asm void __init_user() {
     frfree
     blr
 #endif
+    // clang-format on
 }
 
 static void __init_cpp() {
-    VoidPTR *ctor;
+    VoidPTR* ctor;
     for (ctor = _ctors; *ctor != 0; ctor++) {
         (*ctor)();
     }
 }
 
 static void __fini_cpp() {
-    VoidPTR *dtor;
+    VoidPTR* dtor;
     for (dtor = _dtors; *dtor != 0; dtor++) {
         (*dtor)();
     }

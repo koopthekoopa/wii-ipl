@@ -7,8 +7,8 @@
 namespace nw4r {
     namespace snd {
         namespace detail {
-            AxfxImpl*   AxfxImpl::mCurrentFx = NULL;
-            u32         AxfxImpl::mAllocatedSize = 0;
+            AxfxImpl* AxfxImpl::mCurrentFx = NULL;
+            u32 AxfxImpl::mAllocatedSize = 0;
 
             bool AxfxImpl::CreateHeap(void* buffer, u32 size) {
                 mHeap = MEMCreateFrmHeap(buffer, size);
@@ -39,6 +39,6 @@ namespace nw4r {
                     MEMFreeToFrmHeap(mCurrentFx->mHeap, MEM_FRM_HEAP_FREE_ALL);
                 }
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

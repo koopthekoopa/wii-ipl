@@ -5,10 +5,10 @@
 
 namespace EGG {
     class ExpHeap : public Heap {
-        public:
-            static ExpHeap* create(void* arena, u32 allocSize, u16 opt);
-            static ExpHeap* create(u32 allocSize, Heap* parent, u16 opt);
+    public:
+        static ExpHeap* create(void* arena, u32 allocSize, u16 opt);
+        static ExpHeap* create(u32 allocSize, Heap* parent, u16 opt);
     };
-}
+}  // namespace EGG
 
-#endif // EGG_CORE_EXPHEAP_H
+#endif  // EGG_CORE_EXPHEAP_H

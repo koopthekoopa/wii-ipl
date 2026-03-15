@@ -8,6 +8,8 @@
 
 #define LC_BASE_PREFIX 0xE000
 
+// clang-format off
+
 asm void DCEnable() {
 #ifdef __MWERKS__
     nofralloc
@@ -207,6 +209,8 @@ do_invalidate:
 #endif // __MWERKS__
 }
 
+// clang-format on
+
 static void L2Init() {
     u32 msr;
 
@@ -242,7 +246,8 @@ void L2GlobalInvalidate() {
     l2cr = PPCMfl2cr();
     PPCMtl2cr(l2cr | L2CR_L2I);
 
-    while (PPCMfl2cr() & L2CR_L2IP) {}
+    while (PPCMfl2cr() & L2CR_L2IP) {
+    }
 
     l2cr = PPCMfl2cr();
     PPCMtl2cr(l2cr & ~L2CR_L2I);

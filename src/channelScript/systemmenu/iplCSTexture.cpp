@@ -20,6 +20,6 @@ namespace ipl {
                 }
                 return result;
             }
-        }
-    }
-}
+        }  // namespace texture
+    }  // namespace cs
+}  // namespace ipl

@@ -3,13 +3,13 @@
 
 #include <revolution/os/OSThread.h>
 
-void        __OSReschedule();
+void __OSReschedule();
 
-OSPriority  __OSGetEffectivePriority(OSThread *thread);
-void        __OSPromoteThread(OSThread *thread, OSPriority priority);
+OSPriority __OSGetEffectivePriority(OSThread* thread);
+void __OSPromoteThread(OSThread* thread, OSPriority priority);
 
-BOOL        __OSIsThreadActive(OSThread* thread);
+BOOL __OSIsThreadActive(OSThread* thread);
 
-void        __OSSwitchThread(OSThread* thread);
+void __OSSwitchThread(OSThread* thread);
 
-#endif // PRIVATE_OS_THREAD_H
+#endif  // PRIVATE_OS_THREAD_H

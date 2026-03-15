@@ -1,47 +1,50 @@
-#include <revolution/nand.h>
 #include <private/nand.h>
+#include <revolution/nand.h>
 
 #include <private/fs.h>
 
 #include <private/ipc.h>
 
-#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-#define LINE_MAX_EACH   256
-#define LINE_MAX        64
-#define TOTAL_STR_SIZE  (LINE_MAX * LINE_MAX_EACH)
-#define TOTAL_SIZE      (TOTAL_STR_SIZE * (int)sizeof(char))
+#define LINE_MAX_EACH 256
+#define LINE_MAX 64
+#define TOTAL_STR_SIZE (LINE_MAX * LINE_MAX_EACH)
+#define TOTAL_SIZE (TOTAL_STR_SIZE * (int)sizeof(char))
 
-static IOSFd    s_fd = -255;
+static IOSFd s_fd = -255;
 
-static int      s_stage;
-static char     s_message[LINE_MAX_EACH] ATTRIBUTE_ALIGN(LINE_MAX);
+static int s_stage;
+static char s_message[LINE_MAX_EACH] ATTRIBUTE_ALIGN(LINE_MAX);
 
 static NANDLoggingCallback s_callback = NULL;
 
-#define CALLBACK_FUNC(b) if (s_callback) s_callback(b)
+#define CALLBACK_FUNC(b)                                                                                                                             \
+    if (s_callback)                                                                                                                                  \
+    s_callback(b)
 
 static void asyncRoutine(ISFSError result, void* arg);
 static void PrepareLine(char* line, int count, const char* msg) {
-    int             result;
-    char            titleID[64];
-    OSCalendarTime  time;
+    int result;
+    char titleID[64];
+    OSCalendarTime time;
 
     // Setup line
-    memset(line, ' ', LINE_MAX_EACH-2);
+    memset(line, ' ', LINE_MAX_EACH - 2);
 
     // Get time
     OSTicksToCalendarTime(OSGetTime(), &time);
 
     // Grab the title ID
-    strncpy(titleID, nandGetHomeDir() + 7, 16+1);
+    strncpy(titleID, nandGetHomeDir() + 7, 16 + 1);
     titleID[8] = '-';
-    titleID[16+1] = '\0';
+    titleID[16 + 1] = '\0';
 
     // Create entry
-    result = snprintf(line, LINE_MAX_EACH, "%d %04d/%02d/%02d %02d:%02d:%02d %s %s", count % 63+1, time.year, time.mon+1, time.mday, time.hour, time.min, time.sec, titleID, msg);
+    result = snprintf(line, LINE_MAX_EACH, "%d %04d/%02d/%02d %02d:%02d:%02d %s %s", count % 63 + 1, time.year, time.mon + 1, time.mday, time.hour,
+                      time.min, time.sec, titleID, msg);
 
     // Did
     if (result < LINE_MAX_EACH) {
@@ -49,14 +52,14 @@ static void PrepareLine(char* line, int count, const char* msg) {
     }
 
     // Add new line (in CRLF)
-    line[LINE_MAX_EACH-2] = '\r';
-    line[LINE_MAX_EACH-1] = '\n';
+    line[LINE_MAX_EACH - 2] = '\r';
+    line[LINE_MAX_EACH - 1] = '\n';
 }
 
 BOOL NANDLoggingPrepareFile(u8* workBuf) {
-    ISFSError   ret;
-    IOSFd       fd;
-    u32         leftOut = 0;
+    ISFSError ret;
+    IOSFd fd;
+    u32 leftOut = 0;
 
     int i;
 
@@ -65,11 +68,9 @@ BOOL NANDLoggingPrepareFile(u8* workBuf) {
     if (ret == ISFS_ERROR_OK || ret == ISFS_ERROR_ACCESS) {
         OSReport("Caution!  Path of logfile is a directory!");
         return FALSE;
-    }
-    else if (ret == ISFS_ERROR_INVALID) {
+    } else if (ret == ISFS_ERROR_INVALID) {
         return TRUE;
-    }
-    else if (ret != ISFS_ERROR_NOEXISTS) {
+    } else if (ret != ISFS_ERROR_NOEXISTS) {
         OSReport("Caution!  ISFS_ReadDir() failed.\n");
         return FALSE;
     }
@@ -89,9 +90,9 @@ BOOL NANDLoggingPrepareFile(u8* workBuf) {
     // Fill it all in with spaces
     memset(workBuf, ' ', TOTAL_SIZE);
     PrepareLine((char*)workBuf, 0, "Created log file.");
-    for (i = 0; i < LINE_MAX; i++){
-        workBuf[(i+1) * LINE_MAX_EACH-2] = '\r';
-        workBuf[(i+1) * LINE_MAX_EACH-1] = '\n';
+    for (i = 0; i < LINE_MAX; i++) {
+        workBuf[(i + 1) * LINE_MAX_EACH - 2] = '\r';
+        workBuf[(i + 1) * LINE_MAX_EACH - 1] = '\n';
     }
     ret = ISFS_Write(fd, (char*)workBuf, TOTAL_SIZE);
     if (ret != TOTAL_SIZE) {
@@ -128,14 +129,11 @@ BOOL reserveFileDescriptor() {
     if (s_fd == -255) {
         s_fd = -254;
         busy_flag = FALSE;
-    }
-    else if (s_fd == -254) {
+    } else if (s_fd == -254) {
         busy_flag = TRUE;
-    }
-    else if (s_fd >= 0) {
+    } else if (s_fd >= 0) {
         busy_flag = TRUE;
-    }
-    else {
+    } else {
         busy_flag = TRUE;
     }
 
@@ -150,7 +148,7 @@ BOOL NANDLoggingAddMessageAsync(NANDLoggingCallback callback, const char* fmt, .
 
     if (!reserveFileDescriptor()) {
         return FALSE;
-    }   
+    }
 
     // Add message
     va_start(ap, fmt);
@@ -164,14 +162,13 @@ BOOL NANDLoggingAddMessageAsync(NANDLoggingCallback callback, const char* fmt, .
 
     if (ret == ISFS_ERROR_OK) {
         return TRUE;
-    }
-    else {
+    } else {
         return FALSE;
     }
 }
 
 static void asyncRoutine(ISFSError result, void* arg) {
-    ISFSError   ret;
+    ISFSError ret;
     static char s_rBuf[LINE_MAX_EACH] ATTRIBUTE_ALIGN(LINE_MAX);
     static char s_wBuf[LINE_MAX_EACH] ATTRIBUTE_ALIGN(LINE_MAX);
 
@@ -185,40 +182,34 @@ static void asyncRoutine(ISFSError result, void* arg) {
             if (ret != ISFS_ERROR_OK) {
                 CALLBACK_FUNC(FALSE);
             }
-        }
-        else {
+        } else {
             CALLBACK_FUNC(FALSE);
         }
-    }
-    else if (s_stage == 3) {
+    } else if (s_stage == 3) {
         if (result == ISFS_ERROR_OK) {
             ret = ISFS_ReadAsync(s_fd, (u8*)s_rBuf, LINE_MAX_EACH, asyncRoutine, NULL);
 
             if (ret != ISFS_ERROR_OK) {
                 CALLBACK_FUNC(FALSE);
             }
-        }
-        else {
+        } else {
             CALLBACK_FUNC(FALSE);
         }
-    }
-    else if (s_stage == 4) {
+    } else if (s_stage == 4) {
         if (result == LINE_MAX_EACH) {
             ret = ISFS_SeekAsync(s_fd, 0, ISFS_SEEK_BEG, asyncRoutine, NULL);
 
             if (ret != ISFS_ERROR_OK) {
                 CALLBACK_FUNC(FALSE);
             }
-        }
-        else {
+        } else {
             CALLBACK_FUNC(FALSE);
         }
-    }
-    else if (s_stage == 5) {
+    } else if (s_stage == 5) {
         if (result == ISFS_ERROR_OK) {
             int count = 0;
             s_rBuf[255] = '\0';
-    
+
             count = atoi(s_rBuf);
 
             PrepareLine(s_wBuf, count, s_message);
@@ -227,12 +218,10 @@ static void asyncRoutine(ISFSError result, void* arg) {
             if (ret != ISFS_ERROR_OK) {
                 CALLBACK_FUNC(FALSE);
             }
-        }
-        else {
+        } else {
             CALLBACK_FUNC(FALSE);
         }
-    }
-    else if (s_stage == 6) {
+    } else if (s_stage == 6) {
         if (result == LINE_MAX_EACH) {
             int count = atoi(s_rBuf);
             ret = ISFS_SeekAsync(s_fd, count * LINE_MAX_EACH, ISFS_SEEK_BEG, asyncRoutine, NULL);
@@ -240,40 +229,33 @@ static void asyncRoutine(ISFSError result, void* arg) {
             if (ret != ISFS_ERROR_OK) {
                 CALLBACK_FUNC(FALSE);
             }
-        }
-        else {
+        } else {
             CALLBACK_FUNC(FALSE);
         }
-    }
-    else if (s_stage == 7) {
+    } else if (s_stage == 7) {
         int count = atoi(s_rBuf);
         if (result == count * LINE_MAX_EACH) {
             ret = ISFS_WriteAsync(s_fd, s_wBuf, LINE_MAX_EACH, asyncRoutine, NULL);
             if (ret != ISFS_ERROR_OK) {
                 CALLBACK_FUNC(FALSE);
             }
-        }
-        else {
+        } else {
             CALLBACK_FUNC(FALSE);
         }
-    }
-    else if (s_stage == 8) {
+    } else if (s_stage == 8) {
         if (result == LINE_MAX_EACH) {
             ret = ISFS_CloseAsync(s_fd, asyncRoutine, NULL);
             if (ret != ISFS_ERROR_OK) {
                 CALLBACK_FUNC(FALSE);
             }
-        }
-        else {
+        } else {
             CALLBACK_FUNC(FALSE);
         }
-    }
-    else if (s_stage == 9) {
+    } else if (s_stage == 9) {
         if (result == ISFS_ERROR_OK) {
             s_fd = -255;
             CALLBACK_FUNC(TRUE);
-        }
-        else {
+        } else {
             CALLBACK_FUNC(FALSE);
         }
     }

@@ -1,5 +1,5 @@
-#include <revolution/gx.h>
 #include <private/gx.h>
+#include <revolution/gx.h>
 
 static void __GXXfVtxSpecs() {
     u32 nTex, nNrm, nCols = 0;
@@ -19,23 +19,52 @@ static void __GXXfVtxSpecs() {
 
 static inline void SETVCDATTR(GXAttr Attr, GXAttrType Type) {
     switch (Attr) {
-        case GX_VA_PNMTXIDX:    { SET_REG_FIELD(__GXData->vcdLo, 1, 0, Type); break; }
-        case GX_VA_TEX0MTXIDX:  { SET_REG_FIELD(__GXData->vcdLo, 1, 1, Type); break; }
-        case GX_VA_TEX1MTXIDX:  { SET_REG_FIELD(__GXData->vcdLo, 1, 2, Type); break; }
-        case GX_VA_TEX2MTXIDX:  { SET_REG_FIELD(__GXData->vcdLo, 1, 3, Type); break; }
-        case GX_VA_TEX3MTXIDX:  { SET_REG_FIELD(__GXData->vcdLo, 1, 4, Type); break; }
-        case GX_VA_TEX4MTXIDX:  { SET_REG_FIELD(__GXData->vcdLo, 1, 5, Type); break; }
-        case GX_VA_TEX5MTXIDX:  { SET_REG_FIELD(__GXData->vcdLo, 1, 6, Type); break; }
-        case GX_VA_TEX6MTXIDX:  { SET_REG_FIELD(__GXData->vcdLo, 1, 7, Type); break; }
-        case GX_VA_TEX7MTXIDX:  { SET_REG_FIELD(__GXData->vcdLo, 1, 8, Type); break; }
-        case GX_VA_POS:         { SET_REG_FIELD(__GXData->vcdLo, 2, 9, Type); break; }
+        case GX_VA_PNMTXIDX: {
+            SET_REG_FIELD(__GXData->vcdLo, 1, 0, Type);
+            break;
+        }
+        case GX_VA_TEX0MTXIDX: {
+            SET_REG_FIELD(__GXData->vcdLo, 1, 1, Type);
+            break;
+        }
+        case GX_VA_TEX1MTXIDX: {
+            SET_REG_FIELD(__GXData->vcdLo, 1, 2, Type);
+            break;
+        }
+        case GX_VA_TEX2MTXIDX: {
+            SET_REG_FIELD(__GXData->vcdLo, 1, 3, Type);
+            break;
+        }
+        case GX_VA_TEX3MTXIDX: {
+            SET_REG_FIELD(__GXData->vcdLo, 1, 4, Type);
+            break;
+        }
+        case GX_VA_TEX4MTXIDX: {
+            SET_REG_FIELD(__GXData->vcdLo, 1, 5, Type);
+            break;
+        }
+        case GX_VA_TEX5MTXIDX: {
+            SET_REG_FIELD(__GXData->vcdLo, 1, 6, Type);
+            break;
+        }
+        case GX_VA_TEX6MTXIDX: {
+            SET_REG_FIELD(__GXData->vcdLo, 1, 7, Type);
+            break;
+        }
+        case GX_VA_TEX7MTXIDX: {
+            SET_REG_FIELD(__GXData->vcdLo, 1, 8, Type);
+            break;
+        }
+        case GX_VA_POS: {
+            SET_REG_FIELD(__GXData->vcdLo, 2, 9, Type);
+            break;
+        }
         case GX_VA_NRM: {
             if (Type != GX_NONE) {
                 __GXData->hasNrms = GX_TRUE;
                 __GXData->hasBiNrms = GX_FALSE;
                 __GXData->nrmType = Type;
-            }
-            else {
+            } else {
                 __GXData->hasNrms = GX_FALSE;
             }
             break;
@@ -45,22 +74,51 @@ static inline void SETVCDATTR(GXAttr Attr, GXAttrType Type) {
                 __GXData->hasBiNrms = GX_TRUE;
                 __GXData->hasNrms = GX_FALSE;
                 __GXData->nrmType = Type;
-            }
-            else {
+            } else {
                 __GXData->hasBiNrms = GX_FALSE;
             }
             break;
         }
-        case GX_VA_CLR0:        { SET_REG_FIELD(__GXData->vcdLo, 2, 13, Type); break; }
-        case GX_VA_CLR1:        { SET_REG_FIELD(__GXData->vcdLo, 2, 15, Type); break; }
-        case GX_VA_TEX0:        { SET_REG_FIELD(__GXData->vcdHi, 2, 0, Type); break; }
-        case GX_VA_TEX1:        { SET_REG_FIELD(__GXData->vcdHi, 2, 2, Type); break; }
-        case GX_VA_TEX2:        { SET_REG_FIELD(__GXData->vcdHi, 2, 4, Type); break; }
-        case GX_VA_TEX3:        { SET_REG_FIELD(__GXData->vcdHi, 2, 6, Type); break; }
-        case GX_VA_TEX4:        { SET_REG_FIELD(__GXData->vcdHi, 2, 8, Type); break; }
-        case GX_VA_TEX5:        { SET_REG_FIELD(__GXData->vcdHi, 2, 10, Type); break; }
-        case GX_VA_TEX6:        { SET_REG_FIELD(__GXData->vcdHi, 2, 12, Type); break; }
-        case GX_VA_TEX7:        { SET_REG_FIELD(__GXData->vcdHi, 2, 14, Type); break; }
+        case GX_VA_CLR0: {
+            SET_REG_FIELD(__GXData->vcdLo, 2, 13, Type);
+            break;
+        }
+        case GX_VA_CLR1: {
+            SET_REG_FIELD(__GXData->vcdLo, 2, 15, Type);
+            break;
+        }
+        case GX_VA_TEX0: {
+            SET_REG_FIELD(__GXData->vcdHi, 2, 0, Type);
+            break;
+        }
+        case GX_VA_TEX1: {
+            SET_REG_FIELD(__GXData->vcdHi, 2, 2, Type);
+            break;
+        }
+        case GX_VA_TEX2: {
+            SET_REG_FIELD(__GXData->vcdHi, 2, 4, Type);
+            break;
+        }
+        case GX_VA_TEX3: {
+            SET_REG_FIELD(__GXData->vcdHi, 2, 6, Type);
+            break;
+        }
+        case GX_VA_TEX4: {
+            SET_REG_FIELD(__GXData->vcdHi, 2, 8, Type);
+            break;
+        }
+        case GX_VA_TEX5: {
+            SET_REG_FIELD(__GXData->vcdHi, 2, 10, Type);
+            break;
+        }
+        case GX_VA_TEX6: {
+            SET_REG_FIELD(__GXData->vcdHi, 2, 12, Type);
+            break;
+        }
+        case GX_VA_TEX7: {
+            SET_REG_FIELD(__GXData->vcdHi, 2, 14, Type);
+            break;
+        }
     }
 }
 
@@ -69,8 +127,7 @@ void GXSetVtxDesc(GXAttr attr, GXAttrType type) {
 
     if (__GXData->hasNrms || __GXData->hasBiNrms) {
         SET_REG_FIELD(__GXData->vcdLo, 2, 11, __GXData->nrmType);
-    }
-    else {
+    } else {
         SET_REG_FIELD(__GXData->vcdLo, 2, 11, 0);
     }
 
@@ -85,9 +142,9 @@ void __GXSetVCD() {
 }
 
 void __GXCalculateVLim() {
-    static u8 tbl1[] = { 0, 4,  1, 2 };
-    static u8 tbl2[] = { 0, 8,  1, 2 };
-    static u8 tbl3[] = { 0, 12, 1, 2 };
+    static u8 tbl1[] = {0, 4, 1, 2};
+    static u8 tbl2[] = {0, 8, 1, 2};
+    static u8 tbl3[] = {0, 12, 1, 2};
 
     GXCompCnt nc = GX_POS_XY;
 
@@ -102,7 +159,7 @@ void __GXCalculateVLim() {
         va = __GXData->vatA[0];
         nc = GET_REG_FIELD(va, 1, 9);
 
-        vlm  = GET_REG_FIELD(vl, 1, 0);
+        vlm = GET_REG_FIELD(vl, 1, 0);
         vlm += (u8)GET_REG_FIELD(vl, 1, 1);
         vlm += (u8)GET_REG_FIELD(vl, 1, 2);
         vlm += (u8)GET_REG_FIELD(vl, 1, 3);
@@ -112,11 +169,10 @@ void __GXCalculateVLim() {
         vlm += (u8)GET_REG_FIELD(vl, 1, 7);
         vlm += (u8)GET_REG_FIELD(vl, 1, 8);
         vlm += tbl3[(u8)GET_REG_FIELD(vl, 2, 9)];
-        
+
         if (nc == 1) {
             b = 3;
-        }
-        else {
+        } else {
             b = 1;
         }
 
@@ -163,8 +219,7 @@ static inline void SETVAT(u32* va, u32* vb, u32* vc, GXAttr attr, GXCompCnt cnt,
             if (cnt == GX_NRM_NBT3) {
                 SET_REG_FIELD(*va, 1, 9, 1);
                 SET_REG_FIELD(*va, 1, 31, 1);
-            }
-            else {
+            } else {
                 SET_REG_FIELD(*va, 1, 9, cnt);
                 SET_REG_FIELD(*va, 1, 31, 0);
             }
@@ -266,7 +321,7 @@ void GXSetVtxAttrFmtv(GXVtxFmt vtxfmt, const GXVtxAttrFmtList* list) {
 void __GXSetVAT() {
     s32 i;
     u32 dirty = __GXData->dirtyVAT;
-    
+
     i = 0;
     do {
         if (dirty & 1) {
@@ -312,20 +367,66 @@ void GXSetTexCoordGen2(GXTexCoordID dst_coord, GXTexGenType func, GXTexGenSrc sr
     form = 0;
     row = 5;
     switch (src_param) {
-        case GX_TG_POS:     { row = 0; form = 1; break; }
-        case GX_TG_NRM:     { row = 1; form = 1; break; }
-        case GX_TG_BINRM:   { row = 3; form = 1; break; }
-        case GX_TG_TANGENT: { row = 4; form = 1; break; }
-        case GX_TG_COLOR0:  { row = 2; break; }
-        case GX_TG_COLOR1:  { row = 2; break; }
-        case GX_TG_TEX0:    { row = 5; break; }
-        case GX_TG_TEX1:    { row = 6; break; }
-        case GX_TG_TEX2:    { row = 7; break; }
-        case GX_TG_TEX3:    { row = 8; break; }
-        case GX_TG_TEX4:    { row = 9; break; }
-        case GX_TG_TEX5:    { row = 10; break; }
-        case GX_TG_TEX6:    { row = 11; break; }
-        case GX_TG_TEX7:    { row = 12; break; }
+        case GX_TG_POS: {
+            row = 0;
+            form = 1;
+            break;
+        }
+        case GX_TG_NRM: {
+            row = 1;
+            form = 1;
+            break;
+        }
+        case GX_TG_BINRM: {
+            row = 3;
+            form = 1;
+            break;
+        }
+        case GX_TG_TANGENT: {
+            row = 4;
+            form = 1;
+            break;
+        }
+        case GX_TG_COLOR0: {
+            row = 2;
+            break;
+        }
+        case GX_TG_COLOR1: {
+            row = 2;
+            break;
+        }
+        case GX_TG_TEX0: {
+            row = 5;
+            break;
+        }
+        case GX_TG_TEX1: {
+            row = 6;
+            break;
+        }
+        case GX_TG_TEX2: {
+            row = 7;
+            break;
+        }
+        case GX_TG_TEX3: {
+            row = 8;
+            break;
+        }
+        case GX_TG_TEX4: {
+            row = 9;
+            break;
+        }
+        case GX_TG_TEX5: {
+            row = 10;
+            break;
+        }
+        case GX_TG_TEX6: {
+            row = 11;
+            break;
+        }
+        case GX_TG_TEX7: {
+            row = 12;
+            break;
+        }
         default: {
             break;
         }
@@ -367,8 +468,7 @@ void GXSetTexCoordGen2(GXTexCoordID dst_coord, GXTexGenType func, GXTexGenSrc sr
             SET_REG_FIELD(reg, 1, 2, form);
             if (src_param == GX_TG_COLOR0) {
                 SET_REG_FIELD(reg, 3, 4, 2);
-            }
-            else {
+            } else {
                 SET_REG_FIELD(reg, 3, 4, 3);
             }
             SET_REG_FIELD(reg, 5, 7, 2);
@@ -385,18 +485,42 @@ void GXSetTexCoordGen2(GXTexCoordID dst_coord, GXTexGenType func, GXTexGenSrc sr
     reg = 0;
     SET_REG_FIELD(reg, 6, 0, pt_texmtx - 64);
     SET_REG_FIELD(reg, 1, 8, normalize);
-    
+
     __GXData->texGenCtrl2[dst_coord] = reg;
 
     switch (dst_coord) {
-        case GX_TEXCOORD0: { SET_REG_FIELD(__GXData->matIdxA, 6, 6, mtx);  break; }
-        case GX_TEXCOORD1: { SET_REG_FIELD(__GXData->matIdxA, 6, 12, mtx); break; }
-        case GX_TEXCOORD2: { SET_REG_FIELD(__GXData->matIdxA, 6, 18, mtx); break; }
-        case GX_TEXCOORD3: { SET_REG_FIELD(__GXData->matIdxA, 6, 24, mtx); break; }
-        case GX_TEXCOORD4: { SET_REG_FIELD(__GXData->matIdxB, 6, 0, mtx);  break; }
-        case GX_TEXCOORD5: { SET_REG_FIELD(__GXData->matIdxB, 6, 6, mtx);  break; }
-        case GX_TEXCOORD6: { SET_REG_FIELD(__GXData->matIdxB, 6, 12, mtx); break; }
-        default:           { SET_REG_FIELD(__GXData->matIdxB, 6, 18, mtx); break; }
+        case GX_TEXCOORD0: {
+            SET_REG_FIELD(__GXData->matIdxA, 6, 6, mtx);
+            break;
+        }
+        case GX_TEXCOORD1: {
+            SET_REG_FIELD(__GXData->matIdxA, 6, 12, mtx);
+            break;
+        }
+        case GX_TEXCOORD2: {
+            SET_REG_FIELD(__GXData->matIdxA, 6, 18, mtx);
+            break;
+        }
+        case GX_TEXCOORD3: {
+            SET_REG_FIELD(__GXData->matIdxA, 6, 24, mtx);
+            break;
+        }
+        case GX_TEXCOORD4: {
+            SET_REG_FIELD(__GXData->matIdxB, 6, 0, mtx);
+            break;
+        }
+        case GX_TEXCOORD5: {
+            SET_REG_FIELD(__GXData->matIdxB, 6, 6, mtx);
+            break;
+        }
+        case GX_TEXCOORD6: {
+            SET_REG_FIELD(__GXData->matIdxB, 6, 12, mtx);
+            break;
+        }
+        default: {
+            SET_REG_FIELD(__GXData->matIdxB, 6, 18, mtx);
+            break;
+        }
     }
 
     mtxIdAttr = (GXAttr)(GX_VA_TEX0MTXIDX + (dst_coord - GX_TEXCOORD0));

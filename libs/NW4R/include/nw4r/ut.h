@@ -24,8 +24,8 @@
 #include <nw4r/ut/TextWriter.h>
 #include <nw4r/ut/WideTextWriter.h>
 
-#include <nw4r/ut/FileStream.h>
 #include <nw4r/ut/DvdLockedFileStream.h>
+#include <nw4r/ut/FileStream.h>
 #include <nw4r/ut/NandFileStream.h>
 
-#endif // NW4R_UT_H
+#endif  // NW4R_UT_H

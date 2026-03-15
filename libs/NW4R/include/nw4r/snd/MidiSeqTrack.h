@@ -11,8 +11,8 @@ namespace nw4r {
                 MidiSeqTrack();
                 virtual ~MidiSeqTrack() {}
             };
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r
 
-#endif // NW4R_SND_MIDI_SEQ_TRACK_H
+#endif  // NW4R_SND_MIDI_SEQ_TRACK_H

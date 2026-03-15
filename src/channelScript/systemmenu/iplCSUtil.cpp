@@ -1,7 +1,7 @@
 #include "channelScript/iplCSLibrary.h"
 
-#include <cstring>
 #include "iplUtility.h"
+#include <cstring>
 
 namespace ipl {
     namespace cs {
@@ -38,6 +38,6 @@ namespace ipl {
                     utility::CharacterCode::UTF16ToANSI((u8*)asciiOut, utf16In, strLen);
                 }
             }
-        }
-    }
-}
+        }  // namespace util
+    }  // namespace cs
+}  // namespace ipl

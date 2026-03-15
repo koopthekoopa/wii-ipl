@@ -10,22 +10,18 @@
 namespace nw4r {
     namespace snd {
         class SeqSoundHandle : private ut::NonCopyable {
-            public:
-                ~SeqSoundHandle() {
-                    DetachSound();
-                }
+        public:
+            ~SeqSoundHandle() { DetachSound(); }
 
-                void DetachSound();
+            void DetachSound();
 
-                bool IsAttachedSound() const {
-                    return mSound != NULL;
-                }
+            bool IsAttachedSound() const { return mSound != NULL; }
 
-            private:
-                detail::SeqSound*   mSound; // 0x00
+        private:
+            detail::SeqSound* mSound;  // 0x00
         };
 
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r
 
-#endif // NW4R_SND_SEQ_SOUND_HANDLE_H
+#endif  // NW4R_SND_SEQ_SOUND_HANDLE_H

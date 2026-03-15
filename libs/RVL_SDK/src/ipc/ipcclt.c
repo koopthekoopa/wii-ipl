@@ -4,23 +4,25 @@
 
 #include <private/hollywood.h>
 
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
-#include <string.h>
+
 #include <stddef.h>
+#include <string.h>
+
 
 #define DIFFERENTIATE(a, b) ((a) < (b)) ? ((u32)0xFFFFFFFF - (b) + (a) + 1) : ((a) - (b))
 
-#define IPC_CLT_HEAP_SIZE   0x1000
+#define IPC_CLT_HEAP_SIZE 0x1000
 
-static IOSResponseRequest   __responses;
+static IOSResponseRequest __responses;
 
 static s32 __mailboxAck = 1;
-static u32 __relnchFl   = 0;
+static u32 __relnchFl = 0;
 
-static IOSRpcRequest* __relnchRpc       = NULL;
-static IOSRpcRequest* __relnchRpcSave   = NULL;
+static IOSRpcRequest* __relnchRpc = NULL;
+static IOSRpcRequest* __relnchRpcSave = NULL;
 
 u8 __rpcBuf[OSRoundUp32B(sizeof(IOSRpcRequest))] ALIGN32;
 
@@ -62,14 +64,14 @@ static inline void __ipcSendRequest() {
     __responses.rcount++;
     __mailboxAck--;
 
-    IPC_WRITE_REG(HW_IPC_PPCCTRL, (IPC_READ_REG(HW_IPC_PPCCTRL) & ((1<<5) | (1<<4)) | (1<<0)));
+    IPC_WRITE_REG(HW_IPC_PPCCTRL, (IPC_READ_REG(HW_IPC_PPCCTRL) & ((1 << 5) | (1 << 4)) | (1 << 0)));
 }
 
 void IpcReplyHandler(__OSInterrupt interrupt, OSContext* context) {
-    OSContext           exceptionContext;
+    OSContext exceptionContext;
     IOSResourceRequest* req;
-    IOSRpcRequest*      rep;
-    u32                 addr;
+    IOSRpcRequest* rep;
+    u32 addr;
 
     addr = IPC_READ_REG(HW_IPC_ARMMSG);
 
@@ -78,8 +80,8 @@ void IpcReplyHandler(__OSInterrupt interrupt, OSContext* context) {
     }
 
     rep = (IOSRpcRequest*)OSPhysicalToCached(addr);
-    IPC_WRITE_REG(HW_IPC_PPCCTRL, (IPC_READ_REG(HW_IPC_PPCCTRL) & ((1<<5) | (1<<4)) | (1<<2)));
-    ACR_WRITE_REG32(HW_PPCIRQFLAG, (1<<30));
+    IPC_WRITE_REG(HW_IPC_PPCCTRL, (IPC_READ_REG(HW_IPC_PPCCTRL) & ((1 << 5) | (1 << 4)) | (1 << 2)));
+    ACR_WRITE_REG32(HW_PPCIRQFLAG, (1 << 30));
     req = &rep->request;
 
     DCInvalidateRange(req, sizeof(*req));
@@ -107,7 +109,7 @@ void IpcReplyHandler(__OSInterrupt interrupt, OSContext* context) {
             IOSResourceIoctlv* v = &req->args.ioctlv;
 
             req->args.ioctlv.vector = (req->args.ioctlv.vector) ? (IOSIoVector*)OSPhysicalToCached((u32)req->args.ioctlv.vector) : NULL;
-            DCInvalidateRange(&v->vector[0], (req->args.ioctlv.readCount + req->args.ioctlv.writeCount)*  sizeof(IOSIoVector));
+            DCInvalidateRange(&v->vector[0], (req->args.ioctlv.readCount + req->args.ioctlv.writeCount) * sizeof(IOSIoVector));
 
             for (i = 0; i < (req->args.ioctlv.readCount + req->args.ioctlv.writeCount); i++) {
                 v->vector[i].base = (v->vector[i].base) ? (u8*)OSPhysicalToCached((u32)v->vector[i].base) : NULL;
@@ -139,12 +141,11 @@ void IpcReplyHandler(__OSInterrupt interrupt, OSContext* context) {
         OSSetCurrentContext(context);
 
         ipcFree(rep);
-    }
-    else {
+    } else {
         OSWakeupThread(&rep->thread_queue);
     }
 
-    IPC_WRITE_REG(HW_IPC_PPCCTRL, (IPC_READ_REG(HW_IPC_PPCCTRL) & ((1<<5) | (1<<4))) | (1<<3));
+    IPC_WRITE_REG(HW_IPC_PPCCTRL, (IPC_READ_REG(HW_IPC_PPCCTRL) & ((1 << 5) | (1 << 4))) | (1 << 3));
     IPCiProfReply(req, (s32)req->handle);
 
 err:
@@ -152,8 +153,8 @@ err:
 }
 
 static void IpcAckHandler(__OSInterrupt interrupt, OSContext* context) {
-    IPC_WRITE_REG(HW_IPC_PPCCTRL, (IPC_READ_REG(HW_IPC_PPCCTRL)  & ((1<<5) | (1<<4))) | (1<<1));
-    ACR_WRITE_REG32(HW_PPCIRQFLAG, (1<<30));
+    IPC_WRITE_REG(HW_IPC_PPCCTRL, (IPC_READ_REG(HW_IPC_PPCCTRL) & ((1 << 5) | (1 << 4))) | (1 << 1));
+    ACR_WRITE_REG32(HW_PPCIRQFLAG, (1 << 30));
 
     if (__mailboxAck < 1) {
         __mailboxAck++;
@@ -167,7 +168,7 @@ static void IpcAckHandler(__OSInterrupt interrupt, OSContext* context) {
             __relnchFl = 0;
 
             OSWakeupThread(&__relnchRpc->thread_queue);
-            IPC_WRITE_REG(HW_IPC_PPCCTRL, (IPC_READ_REG(HW_IPC_PPCCTRL)  & ((1<<5) | (1<<4))) | (1<<3));
+            IPC_WRITE_REG(HW_IPC_PPCCTRL, (IPC_READ_REG(HW_IPC_PPCCTRL) & ((1 << 5) | (1 << 4))) | (1 << 3));
         }
 
         __ipcSendRequest();
@@ -175,20 +176,20 @@ static void IpcAckHandler(__OSInterrupt interrupt, OSContext* context) {
 }
 
 void IPCInterruptHandler(__OSInterrupt interrupt, OSContext* context) {
-    if ((IPC_READ_REG(HW_IPC_PPCCTRL) & ((1<<4) | (1<<2))) == ((1<<4) | (1<<2))) {
+    if ((IPC_READ_REG(HW_IPC_PPCCTRL) & ((1 << 4) | (1 << 2))) == ((1 << 4) | (1 << 2))) {
         IpcReplyHandler(interrupt, context);
     }
- 
-    if ((IPC_READ_REG(HW_IPC_PPCCTRL) & ((1<<5) | (1<<1))) == ((1<<5) | (1<<1))) {
+
+    if ((IPC_READ_REG(HW_IPC_PPCCTRL) & ((1 << 5) | (1 << 1))) == ((1 << 5) | (1 << 1))) {
         IpcAckHandler(interrupt, context);
     }
 }
 
 IOSError IPCCltInit() {
-    static u32  initialized = FALSE;
-    IOSError    ret = IPC_RESULT_OK;
-    void*       bufferLo;
-    u32         i;
+    static u32 initialized = FALSE;
+    IOSError ret = IPC_RESULT_OK;
+    void* bufferLo;
+    u32 i;
 
     if (initialized) {
         goto out;
@@ -198,7 +199,7 @@ IOSError IPCCltInit() {
 
     IPCInit();
 
-    i = IPC_CLT_HEAP_SIZE<<1;
+    i = IPC_CLT_HEAP_SIZE << 1;
     bufferLo = IPCGetBufferLo();
 
     if ((void*)((u8*)bufferLo + i) > IPCGetBufferHi()) {
@@ -212,7 +213,7 @@ IOSError IPCCltInit() {
     __OSSetInterruptHandler(__OS_INTERRUPT_PI_ACR, IPCInterruptHandler);
     __OSUnmaskInterrupts(OS_INTERRUPTMASK_PI_ACR);
 
-    IPC_WRITE_REG(HW_IPC_PPCCTRL, ((1<<5) | (1<<4) | (1<<3)));
+    IPC_WRITE_REG(HW_IPC_PPCCTRL, ((1 << 5) | (1 << 4) | (1 << 3)));
     IPCiProfInit();
 
 out:
@@ -220,9 +221,9 @@ out:
 }
 
 IOSError IPCCltReInit() {
-    u32         i;
-    IOSError    ret = IPC_RESULT_OK;
-    void*       bufferLo;
+    u32 i;
+    IOSError ret = IPC_RESULT_OK;
+    void* bufferLo;
 
     i = IPC_CLT_HEAP_SIZE;
     bufferLo = IPCGetBufferLo();
@@ -248,8 +249,7 @@ static inline IOSError __ipcQueueRequest(IOSResourceRequest* req) {
 
     if (DIFFERENTIATE(__responses.wcount, __responses.rcount) >= ARRAY_LENGTH(__responses.buf)) {
         ret = IPL_RESULT_FULLQUEUE;
-    }
-    else {
+    } else {
         __responses.buf[__responses.wptr] = req;
         __responses.wptr = (__responses.wptr + 1) % ARRAY_LENGTH(__responses.buf);
         __responses.wcount++;
@@ -260,7 +260,7 @@ static inline IOSError __ipcQueueRequest(IOSResourceRequest* req) {
 }
 
 static inline IOSError __ios_Open(IOSRpcRequest* rpc, const char* path, u32 flags) {
-    IOSError            ret = IPC_RESULT_OK;
+    IOSError ret = IPC_RESULT_OK;
     IOSResourceRequest* req;
 
     if (!rpc) {
@@ -269,7 +269,7 @@ static inline IOSError __ios_Open(IOSRpcRequest* rpc, const char* path, u32 flag
     }
 
     req = &rpc->request;
-    DCFlushRange((void*)path, strnlen(path, 64)+1);
+    DCFlushRange((void*)path, strnlen(path, 64) + 1);
     req->args.open.path = (u8*)OSCachedToPhysical(path);
     req->args.open.flags = flags;
 
@@ -278,16 +278,16 @@ error:
 }
 
 static inline IOSError __ios_Ipc1(IOSFd fd, u32 cmd, IOSIpcCb callback, void* callbackArg, IOSRpcRequest** rpc) {
-    IOSError            ret = IPC_RESULT_OK;
+    IOSError ret = IPC_RESULT_OK;
     IOSResourceRequest* req;
 
     if (rpc == 0) {
         ret = IPC_RESULT_INVALID;
         goto error;
     }
-    
+
     *rpc = (IOSRpcRequest*)ipcAllocReq();
-    
+
     if (*rpc == 0) {
         ret = IPC_RESULT_ALLOC_FAILED;
         goto error;
@@ -305,14 +305,13 @@ error:
 }
 
 static IOSError __ios_Ipc2(IOSRpcRequest* rpc, IOSIpcCb callback) {
-    IOSError            ret = IPC_RESULT_OK;
-    u32                 inten;
+    IOSError ret = IPC_RESULT_OK;
+    u32 inten;
     IOSResourceRequest* req;
 
     if (rpc == NULL) {
         ret = IPC_RESULT_INVALID;
-    }
-    else {
+    } else {
         req = &rpc->request;
 
         if (!callback) {
@@ -329,8 +328,7 @@ static IOSError __ios_Ipc2(IOSRpcRequest* rpc, IOSIpcCb callback) {
             if (callback) {
                 ipcFree(rpc);
             }
-        }
-        else {
+        } else {
             if (__mailboxAck > 0) {
                 __ipcSendRequest();
             }
@@ -355,8 +353,8 @@ static IOSError __ios_Ipc2(IOSRpcRequest* rpc, IOSIpcCb callback) {
 }
 
 IOSError IOS_OpenAsync(const char* pPath, u32 flags, IOSIpcCb callback, void* callback_arg) {
-    IOSRpcRequest*  rpc;
-    IOSError        ret = IPC_RESULT_OK;
+    IOSRpcRequest* rpc;
+    IOSError ret = IPC_RESULT_OK;
 
     ret = __ios_Ipc1(0, IPC_REQ_OPEN, callback, callback_arg, &rpc);
 
@@ -376,21 +374,21 @@ error:
 }
 
 IOSError IOS_Open(const char* path, u32 flags) {
-    IOSRpcRequest*  rpc;
-    IOSError        ret = IPC_RESULT_OK;
+    IOSRpcRequest* rpc;
+    IOSError ret = IPC_RESULT_OK;
 
     ret = __ios_Ipc1(0, IPC_REQ_OPEN, NULL, NULL, &rpc);
-    
+
     if (ret != IPC_RESULT_OK) {
         goto error;
     }
 
     ret = __ios_Open(rpc, path, flags);
-    
+
     if (ret != IPC_RESULT_OK) {
         goto error;
     }
-    
+
     ret = __ios_Ipc2(rpc, NULL);
 
 error:
@@ -398,8 +396,8 @@ error:
 }
 
 IOSError IOS_CloseAsync(IOSFd fd, IOSIpcCb callback, void* callbackArg) {
-    IOSRpcRequest*  rpc;
-    IOSError        ret = IPC_RESULT_OK;
+    IOSRpcRequest* rpc;
+    IOSError ret = IPC_RESULT_OK;
 
     ret = __ios_Ipc1(fd, IPC_REQ_CLOSE, callback, callbackArg, &rpc);
 
@@ -411,8 +409,8 @@ IOSError IOS_CloseAsync(IOSFd fd, IOSIpcCb callback, void* callbackArg) {
 }
 
 IOSError IOS_Close(IOSFd fd) {
-    IOSRpcRequest*  rpc;
-    IOSError        ret = IPC_RESULT_OK;
+    IOSRpcRequest* rpc;
+    IOSError ret = IPC_RESULT_OK;
 
     ret = __ios_Ipc1(fd, IPC_REQ_CLOSE, NULL, NULL, &rpc);
 
@@ -425,7 +423,7 @@ IOSError IOS_Close(IOSFd fd) {
 
 static IOSError __ios_Read(IOSRpcRequest* rpc, void* buf, u32 len) {
     IOSResourceRequest* req;
-    IOSError            ret = IPC_RESULT_OK;
+    IOSError ret = IPC_RESULT_OK;
 
     if (!rpc) {
         ret = IPC_RESULT_INVALID;
@@ -443,8 +441,8 @@ error:
 }
 
 IOSError IOS_ReadAsync(IOSFd fd, void* buf, u32 len, IOSIpcCb callback, void* callbackArg) {
-    IOSRpcRequest*  rpc;
-    IOSError        ret = IPC_RESULT_OK;
+    IOSRpcRequest* rpc;
+    IOSError ret = IPC_RESULT_OK;
 
     ret = __ios_Ipc1(fd, IPC_REQ_READ, callback, callbackArg, &rpc);
 
@@ -465,8 +463,8 @@ error:
 }
 
 IOSError IOS_Read(IOSFd fd, void* buf, u32 len) {
-    IOSRpcRequest*  rpc;
-    IOSError        ret = IPC_RESULT_OK;
+    IOSRpcRequest* rpc;
+    IOSError ret = IPC_RESULT_OK;
 
     ret = __ios_Ipc1(fd, IPC_REQ_READ, NULL, NULL, &rpc);
 
@@ -488,7 +486,7 @@ error:
 
 static IOSError __ios_Write(IOSRpcRequest* rpc, void* buf, u32 len) {
     IOSResourceRequest* req;
-    IOSError            ret = IPC_RESULT_OK;
+    IOSError ret = IPC_RESULT_OK;
 
     if (!rpc) {
         ret = IPC_RESULT_INVALID;
@@ -505,8 +503,8 @@ error:
 }
 
 IOSError IOS_WriteAsync(IOSFd fd, void* buf, u32 len, IOSIpcCb callback, void* callbackArg) {
-    IOSRpcRequest*  rpc;
-    IOSError        ret = IPC_RESULT_OK;
+    IOSRpcRequest* rpc;
+    IOSError ret = IPC_RESULT_OK;
 
     ret = __ios_Ipc1(fd, IPC_REQ_WRITE, callback, callbackArg, &rpc);
 
@@ -527,8 +525,8 @@ error:
 }
 
 IOSError IOS_Write(IOSFd fd, void* buf, u32 len) {
-    IOSRpcRequest*  rpc;
-    IOSError        ret = IPC_RESULT_OK;
+    IOSRpcRequest* rpc;
+    IOSError ret = IPC_RESULT_OK;
 
     ret = __ios_Ipc1(fd, IPC_REQ_WRITE, NULL, NULL, &rpc);
 
@@ -550,7 +548,7 @@ error:
 
 static IOSError __ios_Seek(IOSRpcRequest* rpc, s32 offset, u32 whence) {
     IOSResourceRequest* req;
-    IOSError            ret = IPC_RESULT_OK;
+    IOSError ret = IPC_RESULT_OK;
 
     if (!rpc) {
         ret = IPC_RESULT_INVALID;
@@ -566,8 +564,8 @@ error:
 }
 
 IOSError IOS_SeekAsync(IOSFd fd, s32 offset, u32 whence, IOSIpcCb callback, void* callbackArg) {
-    IOSRpcRequest*  rpc;
-    IOSError        ret = IPC_RESULT_OK;
+    IOSRpcRequest* rpc;
+    IOSError ret = IPC_RESULT_OK;
 
     ret = __ios_Ipc1(fd, IPC_REQ_SEEK, callback, callbackArg, &rpc);
 
@@ -588,8 +586,8 @@ error:
 }
 
 IOSError IOS_Seek(IOSFd fd, s32 offset, u32 whence) {
-    IOSRpcRequest*  rpc;
-    IOSError        ret = IPC_RESULT_OK;
+    IOSRpcRequest* rpc;
+    IOSError ret = IPC_RESULT_OK;
 
     ret = __ios_Ipc1(fd, IPC_REQ_SEEK, NULL, NULL, &rpc);
 
@@ -611,7 +609,7 @@ error:
 
 static IOSError __ios_Ioctl(IOSRpcRequest* rpc, s32 cmd, void* input, u32 inputLen, void* output, u32 outputLen) {
     IOSResourceRequest* req;
-    IOSError            ret = IPC_RESULT_OK;
+    IOSError ret = IPC_RESULT_OK;
 
     if (!rpc) {
         ret = IPC_RESULT_INVALID;
@@ -625,7 +623,7 @@ static IOSError __ios_Ioctl(IOSRpcRequest* rpc, s32 cmd, void* input, u32 inputL
     req->args.ioctl.outLen = outputLen;
     req->args.ioctl.inPtr = (input) ? (u8*)OSCachedToPhysical(input) : 0;
     req->args.ioctl.inLen = inputLen;
-    
+
     DCFlushRange(input, inputLen);
     DCFlushRange(output, outputLen);
 
@@ -634,8 +632,8 @@ error:
 }
 
 IOSError IOS_IoctlAsync(IOSFd fd, s32 cmd, void* input, u32 inputLen, void* output, u32 outputLen, IOSIpcCb callback, void* callbackArg) {
-    IOSRpcRequest*  rpc;
-    IOSError        ret = IPC_RESULT_OK;
+    IOSRpcRequest* rpc;
+    IOSError ret = IPC_RESULT_OK;
 
     ret = __ios_Ipc1(fd, IPC_REQ_IOCTL, callback, callbackArg, &rpc);
 
@@ -656,8 +654,8 @@ err:
 }
 
 IOSError IOS_Ioctl(IOSFd fd, s32 cmd, void* input, u32 inputLen, void* output, u32 outputLen) {
-    IOSRpcRequest*  rpc;
-    IOSError        ret = IPC_RESULT_OK;
+    IOSRpcRequest* rpc;
+    IOSError ret = IPC_RESULT_OK;
 
     ret = __ios_Ipc1(fd, IPC_REQ_IOCTL, NULL, NULL, &rpc);
 
@@ -677,11 +675,10 @@ error:
     return ret;
 }
 
-
 static IOSError __ios_Ioctlv(IOSRpcRequest* rpc, s32 cmd, u32 readCount, u32 writeCount, IOSIoVector* vect) {
     IOSResourceRequest* req;
-    IOSResourceIoctlv*  v;
-    IOSError            ret = IPC_RESULT_OK;
+    IOSResourceIoctlv* v;
+    IOSError ret = IPC_RESULT_OK;
 
     u32 i, j;
 
@@ -708,7 +705,7 @@ static IOSError __ios_Ioctlv(IOSRpcRequest* rpc, s32 cmd, u32 readCount, u32 wri
         v->vector[i].base = (v->vector[i].base) ? (u8*)OSCachedToPhysical(v->vector[i].base) : 0;
     }
 
-    DCFlushRange(&v->vector[0], (v->readCount + v->writeCount)*  sizeof(IOSIoVector));
+    DCFlushRange(&v->vector[0], (v->readCount + v->writeCount) * sizeof(IOSIoVector));
     req->args.ioctlv.vector = (vect) ? (IOSIoVector*)OSCachedToPhysical(vect) : 0;
 
 err:
@@ -716,8 +713,8 @@ err:
 }
 
 IOSError IOS_IoctlvAsync(IOSFd fd, s32 cmd, u32 readCount, u32 writeCount, IOSIoVector* vect, IOSIpcCb callback, void* callbackArg) {
-    IOSRpcRequest*  rpc;
-    IOSError        ret = IPC_RESULT_OK;
+    IOSRpcRequest* rpc;
+    IOSError ret = IPC_RESULT_OK;
 
     ret = __ios_Ipc1(fd, IPC_REQ_IOCTLV, callback, callbackArg, &rpc);
 
@@ -738,8 +735,8 @@ err:
 }
 
 IOSError IOS_Ioctlv(IOSFd fd, s32 cmd, u32 readCount, u32 writeCount, IOSIoVector* vect) {
-    IOSRpcRequest*  rpc;
-    IOSError        ret = IPC_RESULT_OK;
+    IOSRpcRequest* rpc;
+    IOSError ret = IPC_RESULT_OK;
 
     ret = __ios_Ipc1(fd, IPC_REQ_IOCTLV, NULL, NULL, &rpc);
 
@@ -760,11 +757,11 @@ err:
 }
 
 IOSError IOS_IoctlvReboot(IOSFd fd, s32 cmd, u32 readCount, u32 writeCount, IOSIoVector* vect) {
-    IOSError            ret = IPC_RESULT_OK;
-    u32                 inten;
+    IOSError ret = IPC_RESULT_OK;
+    u32 inten;
 
     IOSResourceRequest* req;
-    IOSRpcRequest*      rpc;
+    IOSRpcRequest* rpc;
 
     inten = OSDisableInterrupts();
 
@@ -787,7 +784,7 @@ IOSError IOS_IoctlvReboot(IOSFd fd, s32 cmd, u32 readCount, u32 writeCount, IOSI
     rpc->relaunch_flag = TRUE;
 
     ret = __ios_Ioctlv(rpc, cmd, readCount, writeCount, vect);
-    
+
     if (ret != IPC_RESULT_OK) {
         goto err;
     }

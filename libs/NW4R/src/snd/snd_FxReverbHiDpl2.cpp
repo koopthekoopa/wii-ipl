@@ -36,7 +36,7 @@ namespace nw4r {
 
             BOOL success = AXFXReverbHiInitDpl2(&mAxfxParam);
 
-            AXFXReverbHiGetMemSizeDpl2(&mAxfxParam); // Debug leftover
+            AXFXReverbHiGetMemSizeDpl2(&mAxfxParam);  // Debug leftover
             mImpl.mCurrentFx = NULL;
             mImpl.mIsActive = true;
 
@@ -88,5 +88,5 @@ namespace nw4r {
 
             AXFXReverbHiCallbackDpl2(chans, &mAxfxParam);
         }
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r

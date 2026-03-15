@@ -45,7 +45,7 @@ extern "C" {
 #define RPT10_RUMBLE 0
 
 // Report 0x11: Set LED lights
-#define RPTID_SET_PORT 0x11 // internally called SetPort
+#define RPTID_SET_PORT 0x11  // internally called SetPort
 #define RPT11_SIZE 1
 
 #define RPT11_LED 0
@@ -58,7 +58,7 @@ extern "C" {
 #define RPT12_DATA_REPORT_MODE 1
 
 // Report 0x13: Enable IR camera
-#define RPTID_ENABLE_DPD 0x13 // internally called the DPD
+#define RPTID_ENABLE_DPD 0x13  // internally called the DPD
 #define RPT13_SIZE 1
 
 #define RPT13_DPD_ENABLE 0
@@ -211,4 +211,4 @@ s32 WPADiHIDParser(u8 port, u8* p_rpt);
 }
 #endif
 
-#endif // PRIVATE_WPAD_HID_PARSER_H
+#endif  // PRIVATE_WPAD_HID_PARSER_H

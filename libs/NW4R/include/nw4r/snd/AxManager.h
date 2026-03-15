@@ -1,8 +1,8 @@
 #ifndef NW4R_SND_AX_MANAGER_H
 #define NW4R_SND_AX_MANAGER_H
 
-#include <nw4r/snd/FxBase.h>
 #include <nw4r/snd/AxVoice.h>
+#include <nw4r/snd/FxBase.h>
 #include <nw4r/snd/MoveValue.h>
 
 #include <revolution/ai.h>
@@ -12,115 +12,115 @@ namespace nw4r {
     namespace snd {
         namespace detail {
             class AxManager {
-                public:
-                    typedef struct CallbackListNode {
-                        ut::LinkListNode    link;       // 0x00
-                        AXOutCallback       callback;   // 0x08
-                    } CallbackListNode;
+            public:
+                typedef struct CallbackListNode {
+                    ut::LinkListNode link;   // 0x00
+                    AXOutCallback callback;  // 0x08
+                } CallbackListNode;
 
-                    typedef ut::LinkList<CallbackListNode, offsetof(CallbackListNode, link)> CallbackList;
+                typedef ut::LinkList<CallbackListNode, offsetof(CallbackListNode, link)> CallbackList;
 
-                    static AxManager&   GetInstance();
+                static AxManager& GetInstance();
 
-                    void            Init();
-                    void            Update();
+                void Init();
+                void Update();
 
-                    bool            CheckInit()                 { return mInitialized; }
+                bool CheckInit() { return mInitialized; }
 
-                    bool            IsDiskError() const        { return mDiskErrorFlag; }
-                    bool            IsHomeButtonMenu() const   { return mHomeButtonMuteFlag; }
+                bool IsDiskError() const { return mDiskErrorFlag; }
+                bool IsHomeButtonMenu() const { return mHomeButtonMuteFlag; }
 
-                    bool            IsResetReady() const       { return mResetReadyCounter == 0; }
-                    
-                    f32             GetOutputVolume() const;
-                    void*           GetZeroBufferAddress();
+                bool IsResetReady() const { return mResetReadyCounter == 0; }
 
-                    void            RegisterCallback(CallbackListNode* node, AXOutCallback callback);
-                    void            UnregisterCallback(CallbackListNode* node);
+                f32 GetOutputVolume() const;
+                void* GetZeroBufferAddress();
 
-                    void            SetOutputMode(OutputMode mode);
-                    OutputMode      GetOutputMode();
+                void RegisterCallback(CallbackListNode* node, AXOutCallback callback);
+                void UnregisterCallback(CallbackListNode* node);
 
-                    void            UpdateAllVoicesPriority();
-                    void            UpdateAllVoices();
-                    void            UpdateAllVoicesSync(u32 syncFlag);
+                void SetOutputMode(OutputMode mode);
+                OutputMode GetOutputMode();
 
-                    f32             GetMasterVolume() const     { return mMasterVolume.GetValue(); }
-                    void            SetMasterVolume(f32 volume, int frame);
+                void UpdateAllVoicesPriority();
+                void UpdateAllVoices();
+                void UpdateAllVoicesSync(u32 syncFlag);
 
-                    bool            AppendEffect(AuxBus bus, FxBase* fx);
-                    void            ClearEffect(AuxBus bus, int frame);
-                    void            ShutdownEffect(AuxBus bus);
+                f32 GetMasterVolume() const { return mMasterVolume.GetValue(); }
+                void SetMasterVolume(f32 volume, int frame);
 
-                    FxList&         GetEffectList(AuxBus bus)   { return mFxList[bus]; }
+                bool AppendEffect(AuxBus bus, FxBase* fx);
+                void ClearEffect(AuxBus bus, int frame);
+                void ShutdownEffect(AuxBus bus);
 
-                    void            AppendVoiceList(AxVoice* voice);
-                    void            RemoveVoiceList(AxVoice* voice);
+                FxList& GetEffectList(AuxBus bus) { return mFxList[bus]; }
 
-                    AxVoice*        AllocVoice(int channels, int voices, int priority, AxVoice::AxVoiceCallback callback, void* callbackData);
-                    void            FreeVoice(AxVoice* voice);
+                void AppendVoiceList(AxVoice* voice);
+                void RemoveVoiceList(AxVoice* voice);
 
-                    void            ChangeVoicePriority(AxVoice* voice);
-                    void            LockUpdateVoicePriority();
-                    void            UnlockUpdateVoicePriority();
+                AxVoice* AllocVoice(int channels, int voices, int priority, AxVoice::AxVoiceCallback callback, void* callbackData);
+                void FreeVoice(AxVoice* voice);
 
-                    int             DropLowestPriorityVoice(int priority);
+                void ChangeVoicePriority(AxVoice* voice);
+                void LockUpdateVoicePriority();
+                void UnlockUpdateVoicePriority();
 
-                    AxVoiceList&    GetVoiceList() { return mPrioVoiceList; }
+                int DropLowestPriorityVoice(int priority);
 
-                private:
-                    static const u8             AUX_CALLBACK_WAIT_FRAME = 6;
+                AxVoiceList& GetVoiceList() { return mPrioVoiceList; }
 
-                    static const int            FX_SAMPLE_RATE          = AX_SAMPLE_RATE;
-                    static const SampleFormat   FX_SAMPLE_FORMAT        = SAMPLE_FORMAT_PCM_S32;
-                    static const int            FX_BUFFER_SIZE          = AX_FRAME_SIZE;
+            private:
+                static const u8 AUX_CALLBACK_WAIT_FRAME = 6;
 
-                    static const int            ZERO_BUFFER_SIZE        = 256;
+                static const int FX_SAMPLE_RATE = AX_SAMPLE_RATE;
+                static const SampleFormat FX_SAMPLE_FORMAT = SAMPLE_FORMAT_PCM_S32;
+                static const int FX_BUFFER_SIZE = AX_FRAME_SIZE;
 
-                    AxManager();
+                static const int ZERO_BUFFER_SIZE = 256;
 
-                    static void AxCallbackFunc();
-                    static void AuxCallbackFunc(void* chans, void* context);
+                AxManager();
 
-                    OutputMode          mOutputMode;                            // 0x00
+                static void AxCallbackFunc();
+                static void AuxCallbackFunc(void* chans, void* context);
 
-                    void*               mZeroBufferAddress;                     // 0x04
+                OutputMode mOutputMode;  // 0x00
 
-                    CallbackList        mCallbackList;                          // 0x08
-                    AxVoiceList         mPrioVoiceList;                         // 0x14
-                    AxVoiceList         mFreeVoiceList;                         // 0x20
+                void* mZeroBufferAddress;  // 0x04
 
-                    AxVoice             mVoices[AX_VOICE_MAX];                  // 0x2C
+                CallbackList mCallbackList;  // 0x08
+                AxVoiceList mPrioVoiceList;  // 0x14
+                AxVoiceList mFreeVoiceList;  // 0x20
 
-                    AXOutCallback       mNextAxRegisterCallback;                // 0xA22C
+                AxVoice mVoices[AX_VOICE_MAX];  // 0x2C
 
-                    bool                mInitialized;                           // 0xA230
+                AXOutCallback mNextAxRegisterCallback;  // 0xA22C
 
-                    bool                mUpdateVoicePrioFlag;                   // 0xA231
-                    bool                mHomeButtonMuteFlag;                    // 0xA232
-                    bool                mDiskErrorFlag;                         // 0xA233
+                bool mInitialized;  // 0xA230
 
-                    MoveValue<f32, int> mHomeButtonMenuVolume;                  // 0xA234
-                    MoveValue<f32, int> mMasterVolume;                          // 0xA244
-                    MoveValue<f32, int> mVolumeForReset;                        // 0xA254
+                bool mUpdateVoicePrioFlag;  // 0xA231
+                bool mHomeButtonMuteFlag;   // 0xA232
+                bool mDiskErrorFlag;        // 0xA233
 
-                    AIDCallback         mOldAidCallback;                        // 0xA264
+                MoveValue<f32, int> mHomeButtonMenuVolume;  // 0xA234
+                MoveValue<f32, int> mMasterVolume;          // 0xA244
+                MoveValue<f32, int> mVolumeForReset;        // 0xA254
 
-                    vs32                mResetReadyCounter;                     // 0xA268
+                AIDCallback mOldAidCallback;  // 0xA264
 
-                    MoveValue<f32, int> mAuxFadeVolume[AUX_BUS_NUM];            // 0xA26C
-                    MoveValue<f32, int> mAuxUserVolume[AUX_BUS_NUM];            // 0xA29C
+                vs32 mResetReadyCounter;  // 0xA268
 
-                    FxList              mFxList[AUX_BUS_NUM];                   // 0xA2CC
+                MoveValue<f32, int> mAuxFadeVolume[AUX_BUS_NUM];  // 0xA26C
+                MoveValue<f32, int> mAuxUserVolume[AUX_BUS_NUM];  // 0xA29C
 
-                    AXAuxCallback       mAuxCallback[AUX_BUS_NUM];              // 0xA2F0
-                    void*               mAuxCallbackContext[AUX_BUS_NUM];       // 0xA2FC
-                    u8                  mAuxCallbackWaitCounter[AUX_BUS_NUM];   // 0xA308
+                FxList mFxList[AUX_BUS_NUM];  // 0xA2CC
 
-                    static u8           sZeroBuffer[ZERO_BUFFER_SIZE];
+                AXAuxCallback mAuxCallback[AUX_BUS_NUM];  // 0xA2F0
+                void* mAuxCallbackContext[AUX_BUS_NUM];   // 0xA2FC
+                u8 mAuxCallbackWaitCounter[AUX_BUS_NUM];  // 0xA308
+
+                static u8 sZeroBuffer[ZERO_BUFFER_SIZE];
             };
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r
 
-#endif // NW4R_SND_AX_MANAGER_H
+#endif  // NW4R_SND_AX_MANAGER_H

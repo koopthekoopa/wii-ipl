@@ -10,23 +10,23 @@
 #ifdef __cplusplus
 
 namespace std {
-    using   ::rand;
-    using   ::srand;
+    using ::rand;
+    using ::srand;
 
-    using   ::mbtowc;
-    using   ::mbstowcs;
+    using ::mbstowcs;
+    using ::mbtowc;
 
-    using   ::wcstombs;
+    using ::wcstombs;
 
-    using   ::strtol;
-    using   ::strtoull;
-    
-    using   ::atoi;
-    using   ::atol;
+    using ::strtol;
+    using ::strtoull;
 
-    using   ::itoa;
-} // namespace std
+    using ::atoi;
+    using ::atol;
+
+    using ::itoa;
+}  // namespace std
 
 #endif
 
-#endif // MSL_CSTDLIB_H
+#endif  // MSL_CSTDLIB_H

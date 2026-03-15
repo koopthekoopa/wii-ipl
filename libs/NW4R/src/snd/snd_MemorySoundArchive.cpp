@@ -8,33 +8,34 @@
 namespace nw4r {
     namespace snd {
         class MemorySoundArchive::MemoryFileStream : public ut::FileStream {
-            public:
-                MemoryFileStream(const void* buffer, u32 size);
+        public:
+            MemoryFileStream(const void* buffer, u32 size);
 
-                virtual void    Close();                                // 0x10
-                virtual s32     Read(void* dst, u32 size);              // 0x14
-                virtual void    Seek(s32 offset, u32 origin);           // 0x44
+            virtual void Close();                       // 0x10
+            virtual s32 Read(void* dst, u32 size);      // 0x14
+            virtual void Seek(s32 offset, u32 origin);  // 0x44
 
-                virtual bool    CanSeek() const     { return true; }    // 0x50
-                virtual bool    CanCancel() const   { return true; }    // 0x54
-                virtual bool    CanAsync() const    { return false; }   // 0x28
-                virtual bool    CanRead() const     { return true; }    // 0x2C
-                virtual bool    CanWrite() const    { return false; }   // 0x30
+            virtual bool CanSeek() const { return true; }    // 0x50
+            virtual bool CanCancel() const { return true; }  // 0x54
+            virtual bool CanAsync() const { return false; }  // 0x28
+            virtual bool CanRead() const { return true; }    // 0x2C
+            virtual bool CanWrite() const { return false; }  // 0x30
 
-                virtual u32     Tell() const        { return mOffset; } // 0x58
+            virtual u32 Tell() const { return mOffset; }  // 0x58
 
-                virtual u32     GetSize() const     { return mSize; }   // 0x40
+            virtual u32 GetSize() const { return mSize; }  // 0x40
 
-            private:
-                const void* mData;      // 0x14
-                s32         mSize;      // 0x18
-                s32         mOffset;    // 0x1C
+        private:
+            const void* mData;  // 0x14
+            s32 mSize;          // 0x18
+            s32 mOffset;        // 0x1C
         };
 
-        MemorySoundArchive::MemorySoundArchive() :
-        mData(NULL) {}
+        MemorySoundArchive::MemorySoundArchive() : mData(NULL) {
+        }
 
-        MemorySoundArchive::~MemorySoundArchive() {}
+        MemorySoundArchive::~MemorySoundArchive() {
+        }
 
         bool MemorySoundArchive::Setup(const void* buffer) {
             mFileReader.Init(buffer);
@@ -103,10 +104,8 @@ namespace nw4r {
             return ut::AddOffsetToPtr(mData, groupInfo.waveDataOffset + itemInfo.waveDataOffset);
         }
 
-        MemorySoundArchive::MemoryFileStream::MemoryFileStream(const void* buffer, u32 size) :
-        mData(buffer),
-        mSize(size),
-        mOffset(0) {}
+        MemorySoundArchive::MemoryFileStream::MemoryFileStream(const void* buffer, u32 size) : mData(buffer), mSize(size), mOffset(0) {
+        }
 
         ut::FileStream* MemorySoundArchive::OpenStream(void* buffer, int size, u32 offset, u32 length) const {
             if (mData == NULL) {
@@ -117,7 +116,7 @@ namespace nw4r {
                 return NULL;
             }
 
-            return new(buffer) MemoryFileStream(ut::AddOffsetToPtr(mData, offset), length);
+            return new (buffer) MemoryFileStream(ut::AddOffsetToPtr(mData, offset), length);
         }
 
         ut::FileStream* MemorySoundArchive::OpenExtStream(void* buffer, int size, const char* extPath, u32 offset, u32 length) const {
@@ -160,5 +159,5 @@ namespace nw4r {
                 }
             }
         }
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r

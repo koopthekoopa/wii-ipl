@@ -1,7 +1,8 @@
 #include <nw4r/snd/RemoteSpeakerManager.h>
 
-#include <revolution/os.h>
 #include <revolution/ax.h>
+#include <revolution/os.h>
+
 
 namespace nw4r {
     namespace snd {
@@ -53,6 +54,6 @@ namespace nw4r {
 
                 AXRmtAdvancePtr(RemoteSpeaker::SAMPLES_PER_AUDIO_PACKET);
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

@@ -1,5 +1,5 @@
-#include <nw4r/snd/WavePlayer.h>
 #include <nw4r/snd/WaveFile.h>
+#include <nw4r/snd/WavePlayer.h>
 
 #include <nw4r/snd/AxManager.h>
 
@@ -11,16 +11,9 @@ namespace nw4r {
             WavePlayerList sPlayerList;
         }
 
-        WavePlayer::WavePlayer() :
-        mStartFlag(false),
-        mVoiceStartFlag(false),
-        mChannelCount(0),
-        mVoice(NULL),
-        mLoopSetFlag(false),
-        mCallback(NULL),
-        mCallbackArg(NULL),
-        mPauseFlag(false),
-        mPlaySampleCount(0) {
+        WavePlayer::WavePlayer()
+            : mStartFlag(false), mVoiceStartFlag(false), mChannelCount(0), mVoice(NULL), mLoopSetFlag(false), mCallback(NULL), mCallbackArg(NULL),
+              mPauseFlag(false), mPlaySampleCount(0) {
             InitParam();
         }
 
@@ -123,18 +116,18 @@ namespace nw4r {
 
         void WavePlayer::Start() {
             ut::AutoInterruptLock lock;
-            
+
             if (mPauseFlag) {
                 Pause(false);
             }
-            
+
             if (!mStartFlag) {
                 sPlayerList.PushBack(this);
                 mStartFlag = true;
             }
-            
+
             mPlaySampleCount = 0;
-            
+
             if (!mWavePacketList.IsEmpty()) {
                 StartVoice();
             }
@@ -187,7 +180,7 @@ namespace nw4r {
             detail::WaveData waveData;
             detail::AxVoice::Format axVoiceFormat;
 
-            switch(mSampleFormat) {
+            switch (mSampleFormat) {
                 case SAMPLE_FORMAT_PCM_S16: {
                     waveData.format = detail::WaveFile::FORMAT_PCM16;
                     axVoiceFormat = detail::AxVoice::FORMAT_PCM16;
@@ -352,8 +345,7 @@ namespace nw4r {
                 }
 
                 SetNextWavePacket();
-            }
-            else {
+            } else {
                 if (!mWavePacketList.IsEmpty()) {
                     StartVoice();
                 }
@@ -399,12 +391,10 @@ namespace nw4r {
             }
         }
 
-        WavePlayer::WavePacket::WavePacket() :
-        mWaveBuffer(),
-        mAppendFlag(false) {
+        WavePlayer::WavePacket::WavePacket() : mWaveBuffer(), mAppendFlag(false) {
             for (int i = 0; i < CHANNEL_MAX; i++) {
                 mWaveBuffer.bufferAddress[i] = NULL;
             }
         }
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r

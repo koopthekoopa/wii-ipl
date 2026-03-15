@@ -55,8 +55,7 @@ void loadcallback_() {
 
             if (RFLiCheckValidInfo(&info) && RFLiIsValidOnNAND(&info)) {
                 memcpy(manager->loadDst, data, sizeof(RFLiHiddenCharData));
-            }
-            else {
+            } else {
                 RFLiGetManager()->mLastErrcode = RFLErrcode_Broken;
             }
         }
@@ -70,7 +69,7 @@ void loadcallback_() {
 
 void loadopencallback_() {
     RFLiHiddenDBManager* manager = RFLiGetHDBManager();
-    
+
     if (RFLGetAsyncStatus() == RFLErrcode_Success) {
         s32 offset = manager->loadIndex * sizeof(RFLiHiddenCharData);
         u32 size = sizeof(RFLiHiddenCharData);
@@ -91,8 +90,7 @@ void loadopencallback_() {
                 RFLiCloseAsync(RFLiFileType_Database, NULL);
             }
         }
-    }
-    else {
+    } else {
         manager->loadDst = NULL;
         manager->loadTmp = NULL;
         manager->loadIndex = 0;
@@ -165,19 +163,16 @@ RFLErrcode RFLiLoadCachedHiddenData(RFLiHiddenCharData* data, u16 index) {
             if (RFLiCheckValidInfo(&info)) {
                 memcpy(data, &manager->cachedDB[index], sizeof(RFLiHiddenCharData));
                 err = RFLErrcode_Success;
-            }
-            else {
+            } else {
                 err = RFLErrcode_Broken;
             }
-        }
-        else {
+        } else {
             err = RFLErrcode_Broken;
         }
-    }
-    else {
+    } else {
         err = RFLErrcode_NotAvailable;
     }
-    
+
     return err;
 }
 
@@ -364,7 +359,7 @@ static BOOL checkCtrlWritableData_(const RFLiCtrlBuffer* buffer, u8 index, BOOL 
 static BOOL checkOneWritableData_(const RFLiHiddenCharData* data) {
     if (RFLiIsValidID((RFLCreateID*)&data->createID) && !data->localonly && !RFLSearchOfficialData((RFLCreateID*)&data->createID, NULL)
 #if RFL_BUILD < 20080306
-    && (RFLiSearchHiddenData((RFLCreateID*)&data->createID) == -1 || !RFLiIsMyHomeID((RFLCreateID*)&data->createID))
+        && (RFLiSearchHiddenData((RFLCreateID*)&data->createID) == -1 || !RFLiIsMyHomeID((RFLCreateID*)&data->createID))
 #endif
     ) {
         return TRUE;
@@ -440,7 +435,7 @@ static s16 getFirstBlank_() {
     s16 i;
     RFLiHiddenDatabase* table = RFLiGetHiddenHeader();
 
-    for (i = 0; i < RFL_MAX_HIDDEN_DB; i++ ){
+    for (i = 0; i < RFL_MAX_HIDDEN_DB; i++) {
         if (!RFLiIsValidID(&table->data[i].createID)) {
             return i;
         }
@@ -506,11 +501,10 @@ static void create_(const RFLiHiddenCharData* data, s16 target) {
         curNode->prev = table->tail;
         table->tail = index;
         curNode->next = -1;
-    }
-    else {
+    } else {
         table->tail = index;
         table->head = index;
-        curNode->prev =  -1;
+        curNode->prev = -1;
         curNode->next = -1;
     }
 
@@ -530,7 +524,7 @@ static void writeData_(const RFLiHiddenCharData* data);
 static void writeCallback_() {
     BOOL doClose = TRUE;
     RFLiHiddenDBManager* manager = RFLiGetHDBManager();
-    
+
     if (RFLGetAsyncStatus() == RFLErrcode_Success) {
         RFLiHiddenDBList* list = &RFLiGetHDBManager()->list;
 
@@ -543,15 +537,13 @@ static void writeCallback_() {
         if (list->current < list->num) {
             doClose = FALSE;
             writeData_(&list->data[list->current]);
-        }
-        else {
+        } else {
             RFLiFree(manager->writeTmp);
             manager->writeTmp = NULL;
 
             writeHeader_();
         }
-    }
-    else {
+    } else {
         RFLiFree(manager->writeTmp);
         manager->writeTmp = NULL;
 
@@ -565,17 +557,15 @@ static void writeData_(const RFLiHiddenCharData* data) {
     s16 onhdb = -1;
     s16 target = getFirstBlank_();
 
-    offset; // *sob* (for debug match)
+    offset;  // *sob* (for debug match)
 
     onhdb = RFLiSearchHiddenData((RFLCreateID*)&data->createID);
 
     if (onhdb != -1) {
         target = onhdb;
-    }
-    else if (target < 0) {
+    } else if (target < 0) {
         target = overwrite_(data);
-    }
-    else {
+    } else {
         create_(data, target);
     }
 
@@ -629,8 +619,7 @@ static void initAnyBufferToHiddenDB_(RFLSimpleCB cb, RFLSimpleCB nextScene) {
 
     if (!RFLiDBIsLoaded()) {
         RFLiFormatAsync(nextScene);
-    }
-    else {
+    } else {
         nextScene();
     }
 }
@@ -640,8 +629,7 @@ RFLErrcode RFLiWriteCtrlToHiddenDB(const RFLiCtrlBuffer* buffer, BOOL isChMode) 
 
     if (getCtrlWritableCount_(buffer, isChMode)) {
         initAnyBufferToHiddenDB_(writeCtrl2HDBCallback_, writeDataStart_);
-    }
-    else {
+    } else {
         initAnyBufferToHiddenDB_(writeCtrl2HDBCallback_, writeHeaderStart_);
     }
 
@@ -818,8 +806,7 @@ BOOL RFLiIsValidHiddenData(u16 index, RFLSex sex) {
         case RFLSex_Male: {
             if (sex == RFLSex_Male) {
                 return TRUE;
-            }
-            else {
+            } else {
                 return FALSE;
             }
             break;
@@ -827,8 +814,7 @@ BOOL RFLiIsValidHiddenData(u16 index, RFLSex sex) {
         case RFLSex_Female: {
             if (sex == RFLSex_Female) {
                 return TRUE;
-            }
-            else {
+            } else {
                 return FALSE;
             }
             break;
@@ -846,7 +832,7 @@ u32 RFLiGetCacheHDBBufferSize() {
 static void readCacheCallback_() {
     RFLiHiddenDBManager* manager = RFLiGetHDBManager();
     s32 reason;
-    
+
     switch (RFLGetAsyncStatus()) {
         case RFLErrcode_Success: {
             break;
@@ -960,7 +946,7 @@ RFLErrcode RFLiCacheHDBAsync(void* buffer) {
     manager->cachedDB = buffer;
     manager->cached = FALSE;
     RFLiClearCacheHDB(manager->cachedDB);
-    
+
     return RFLiOpenAsync(RFLiFileType_Database, NAND_ACCESS_READ, openCacheCallback_);
 }
 

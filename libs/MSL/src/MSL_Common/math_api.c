@@ -8,16 +8,14 @@ int __fpclassifyf(float x) {
         case 0x7F800000:
             if (val & 0x7FFFFF) {
                 return 1;
-            }
-            else {
+            } else {
                 return 2;
             }
             break;
         case 0:
             if (val & 0x7FFFFF) {
                 return 5;
-            }
-            else {
+            } else {
                 return 3;
             }
             break;
@@ -35,8 +33,7 @@ int __fpclassifyd(double x) {
         case 0x7FF00000:
             if (((*(int*)&x) & 0xFFFFF) || (*(1 + (int*)&x)) & 0xFFFFFFFF) {
                 return 1;
-            }
-            else {
+            } else {
                 return 2;
             }
 
@@ -44,8 +41,7 @@ int __fpclassifyd(double x) {
         case 0:
             if (((*(int*)&x) & 0xFFFFF) || (*(1 + (int*)&x)) & 0xFFFFFFFF) {
                 return 5;
-            }
-            else {
+            } else {
                 return 3;
             }
 

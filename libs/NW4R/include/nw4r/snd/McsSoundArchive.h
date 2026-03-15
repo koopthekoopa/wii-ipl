@@ -5,8 +5,8 @@
 
 #include <nw4r/snd/SoundArchive.h>
 
-#include <nw4r/ut/RuntimeTypeInfo.h>
 #include <nw4r/ut/FileStream.h>
+#include <nw4r/ut/RuntimeTypeInfo.h>
 
 namespace nw4r {
     namespace snd {
@@ -14,7 +14,7 @@ namespace nw4r {
             class McsFileStream;
             McsSoundArchive();
         };
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r
 
-#endif // NW4R_SND_MCS_SOUND_ARCHIVE_H
+#endif  // NW4R_SND_MCS_SOUND_ARCHIVE_H

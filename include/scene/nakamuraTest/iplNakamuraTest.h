@@ -6,13 +6,13 @@
 namespace ipl {
     namespace scene {
         FADER_SCENE_CLASS(NakamuraTest) {
-            public:
-                NakamuraTest(EGG::Heap* heap);
+        public:
+            NakamuraTest(EGG::Heap * heap);
 
-            private:
-                u8  unk_0x58[0x2B38];
+        private:
+            u8 unk_0x58[0x2B38];
         };
-    }
-}
+    }  // namespace scene
+}  // namespace ipl
 
-#endif // IPL_SCENE_NAKAMURA_TEST_H
+#endif  // IPL_SCENE_NAKAMURA_TEST_H

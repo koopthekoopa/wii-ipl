@@ -1,6 +1,8 @@
 #ifndef IPL_MESSAGE_ENTRIES_H
 #define IPL_MESSAGE_ENTRIES_H
 
+// clang-format off
+
 /* Common message IDs */
 // TODO: Find out whats with the alts
 #define MESG_CMN_START                  2
@@ -212,4 +214,6 @@
 #define MESG_ERROR_NWC24_FATAL          454
 #define MESG_ERROR_NWC24_FRIEND_NULL    456
 
-#endif // IPL_MESSAGE_ENTRIES_H
+// clang-format on
+
+#endif  // IPL_MESSAGE_ENTRIES_H

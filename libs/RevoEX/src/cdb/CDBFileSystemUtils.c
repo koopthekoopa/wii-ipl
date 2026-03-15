@@ -1,10 +1,10 @@
-#include <revolution/cdb.h>
 #include <private/cdb.h>
+#include <revolution/cdb.h>
 
 #include <ctype.h>
-#include <string.h>
-#include <stdlib.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
 
 void CDBFSConcatenatePath(char* path, const char* concatPath) {
     strcat(path, "/");
@@ -12,7 +12,7 @@ void CDBFSConcatenatePath(char* path, const char* concatPath) {
 }
 
 BOOL CDBFSIsYearDirName(char* dirName) {
-    if (CDBSafeStrLen(dirName, 4+1) == 4) {
+    if (CDBSafeStrLen(dirName, 4 + 1) == 4) {
         if (isdigit(dirName[0]) && isdigit(dirName[1]) && isdigit(dirName[2]) && isdigit(dirName[3])) {
             return TRUE;
         }
@@ -22,7 +22,7 @@ BOOL CDBFSIsYearDirName(char* dirName) {
 }
 
 BOOL CDBFSIsMonthDirName(char* dirName) {
-    if (CDBSafeStrLen(dirName, 2+1) == 2) {
+    if (CDBSafeStrLen(dirName, 2 + 1) == 2) {
         if (isdigit(dirName[0]) && isdigit(dirName[1])) {
             int val = atoi(dirName);
             if (val >= 0 && val <= 11) {
@@ -35,7 +35,7 @@ BOOL CDBFSIsMonthDirName(char* dirName) {
 }
 
 BOOL CDBFSIsDayDirName(char* dirName) {
-    if (CDBSafeStrLen(dirName, 2+1) == 2) {
+    if (CDBSafeStrLen(dirName, 2 + 1) == 2) {
         if (isdigit(dirName[0]) && isdigit(dirName[1])) {
             int val = atoi(dirName);
             if (val >= 1 && val <= 31) {
@@ -48,7 +48,7 @@ BOOL CDBFSIsDayDirName(char* dirName) {
 }
 
 BOOL CDBFSIsHourDirName(char* dirName) {
-    if (CDBSafeStrLen(dirName, 2+1) == 2) {
+    if (CDBSafeStrLen(dirName, 2 + 1) == 2) {
         if (isdigit(dirName[0]) && isdigit(dirName[1])) {
             int val = atoi(dirName);
             if (val >= 0 && val <= 23) {
@@ -61,7 +61,7 @@ BOOL CDBFSIsHourDirName(char* dirName) {
 }
 
 BOOL CDBFSIsMinuteDirName(char* dirName) {
-    if (CDBSafeStrLen(dirName, 2+1) == 2) {
+    if (CDBSafeStrLen(dirName, 2 + 1) == 2) {
         if (isdigit(dirName[0]) && isdigit(dirName[1])) {
             int val = atoi(dirName);
             if (val >= 0 && val <= 59) {
@@ -74,7 +74,7 @@ BOOL CDBFSIsMinuteDirName(char* dirName) {
 }
 
 BOOL CDBFSIsCodeDirName(char* dirName) {
-    if (CDBSafeStrLen(dirName, 7+1) == 7) {
+    if (CDBSafeStrLen(dirName, 7 + 1) == 7) {
         if (dirName[4] == '_') {
             return TRUE;
         }
@@ -84,18 +84,16 @@ BOOL CDBFSIsCodeDirName(char* dirName) {
 }
 
 BOOL CDBFSIsTypeDirName(char* dirName) {
-    int strLen1 = CDBSafeStrLen(dirName, 5+1);
-    int strLen2 = CDBSafeStrLen(dirName, 2+1);
+    int strLen1 = CDBSafeStrLen(dirName, 5 + 1);
+    int strLen2 = CDBSafeStrLen(dirName, 2 + 1);
 
     BOOL result;
 
     if (strLen2 == 1 && dirName[0] == '.') {
         result = TRUE;
-    }
-    else if (strLen2 == 2 && dirName[0] == '.' && dirName[1] == '.') {
+    } else if (strLen2 == 2 && dirName[0] == '.' && dirName[1] == '.') {
         result = TRUE;
-    }
-    else {
+    } else {
         result = FALSE;
     }
 
@@ -109,7 +107,7 @@ BOOL CDBFSIsTypeDirName(char* dirName) {
 }
 
 BOOL CDBFSIsCDBFileOnSD(char* fileName) {
-    if (CDBSafeStrLen(fileName, 12+1) == 12) {
+    if (CDBSafeStrLen(fileName, 12 + 1) == 12) {
         char* ptr = fileName;
         char i, j;
         for (i = 0; i < 4; i++) {
@@ -137,7 +135,7 @@ BOOL CDBFSIsCDBFileOnSD(char* fileName) {
 }
 
 BOOL CDBFSIsMCGCDirNameOnSD(char* dirName) {
-    if (CDBSafeStrLen(dirName, 7+1) == 7) {
+    if (CDBSafeStrLen(dirName, 7 + 1) == 7) {
         if (dirName[4] == '_') {
             return TRUE;
         }
@@ -148,18 +146,16 @@ BOOL CDBFSIsMCGCDirNameOnSD(char* dirName) {
 
 // Duplicate of CDBFSIsTypeDirNameOn
 BOOL CDBFSIsTypeDirNameOnSD(char* dirName) {
-    int strLen1 = CDBSafeStrLen(dirName, 5+1);
-    int strLen2 = CDBSafeStrLen(dirName, 2+1);
+    int strLen1 = CDBSafeStrLen(dirName, 5 + 1);
+    int strLen2 = CDBSafeStrLen(dirName, 2 + 1);
 
     BOOL result;
 
     if (strLen2 == 1 && dirName[0] == '.') {
         result = TRUE;
-    }
-    else if (strLen2 == 2 && dirName[0] == '.' && dirName[1] == '.') {
+    } else if (strLen2 == 2 && dirName[0] == '.' && dirName[1] == '.') {
         result = TRUE;
-    }
-    else {
+    } else {
         result = FALSE;
     }
 

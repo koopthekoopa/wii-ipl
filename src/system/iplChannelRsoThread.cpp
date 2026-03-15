@@ -2,14 +2,12 @@
 
 #include <cstring>
 
-#define STACK_SIZE  0x8000
+#define STACK_SIZE 0x8000
 
 namespace ipl {
     namespace channel {
-        RsoThread::RsoThread(EGG::Heap* heap) :
-        mbStarted(false),
-        mpCalcFunc(NULL) {
-            mpStack = new(heap, DEFAULT_ALIGN) u8[STACK_SIZE];
+        RsoThread::RsoThread(EGG::Heap* heap) : mbStarted(false), mpCalcFunc(NULL) {
+            mpStack = new (heap, DEFAULT_ALIGN) u8[STACK_SIZE];
         }
 
         RsoThread::~RsoThread() {
@@ -36,5 +34,5 @@ namespace ipl {
             mpCalcFunc = func;
             OSInitMessageQueue(&mCalcQueue, &mCalcMsg, 1);
         }
-    }
-}
+    }  // namespace channel
+}  // namespace ipl

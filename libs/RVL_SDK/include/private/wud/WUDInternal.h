@@ -20,13 +20,13 @@ extern "C" {
 
 void WUD_DEBUGPrint(const char* format, ...);
 
-#define WUD_BDCMP(LHS, RHS)             memcmp(LHS, RHS, BD_ADDR_LEN)
-#define WUD_BDCPY(DST, SRC)             memcpy(DST, SRC, BD_ADDR_LEN)
+#define WUD_BDCMP(LHS, RHS) memcmp(LHS, RHS, BD_ADDR_LEN)
+#define WUD_BDCPY(DST, SRC) memcpy(DST, SRC, BD_ADDR_LEN)
 
-#define WUD_DEV_NAME_IS(NAME, VALUE)    (memcmp(NAME, VALUE, sizeof(VALUE) - 1) == 0)
+#define WUD_DEV_NAME_IS(NAME, VALUE) (memcmp(NAME, VALUE, sizeof(VALUE) - 1) == 0)
 
-#define WUD_DEV_NAME_IS_CNT(NAME)       WUD_DEV_NAME_IS(NAME, "Nintendo RVL-CNT")
-#define WUD_DEV_NAME_IS_CNT_01(NAME)    WUD_DEV_NAME_IS(NAME, "Nintendo RVL-CNT-01")
+#define WUD_DEV_NAME_IS_CNT(NAME) WUD_DEV_NAME_IS(NAME, "Nintendo RVL-CNT")
+#define WUD_DEV_NAME_IS_CNT_01(NAME) WUD_DEV_NAME_IS(NAME, "Nintendo RVL-CNT-01")
 
 typedef enum {
     WUD_STATE_SYNC_START = 0,
@@ -120,87 +120,87 @@ typedef enum {
 
 typedef struct WUDDevInfoList WUDDevInfoList;
 struct WUDDevInfoList {
-    WUDDevInfo*     devInfo;    // 0x00
-    WUDDevInfoList* prev;       // 0x04
-    WUDDevInfoList* next;       // 0x08
+    WUDDevInfo* devInfo;   // 0x00
+    WUDDevInfoList* prev;  // 0x04
+    WUDDevInfoList* next;  // 0x08
 };
 
 typedef struct WUDDiscResp {
-    BD_ADDR             devAddr;        // 0x00
-    char                devName[64];    // 0x06
-    u8                  UNK_0x46[0xBA];
-    tBTA_SERVICE_MASK   services;       // 0x100
-    u8                  UNK_0x104[0x4];
+    BD_ADDR devAddr;   // 0x00
+    char devName[64];  // 0x06
+    u8 UNK_0x46[0xBA];
+    tBTA_SERVICE_MASK services;  // 0x100
+    u8 UNK_0x104[0x4];
 } WUDDiscResp;
 
 typedef struct WUDPatchCmd {
-    u8  data[13];   // 0x00
+    u8 data[13];  // 0x00
 } WUDPatchCmd;
 typedef struct WUDPatchList {
-    u8          num;    // 0x00
-    WUDPatchCmd cmds[]; // 0x01
+    u8 num;              // 0x00
+    WUDPatchCmd cmds[];  // 0x01
 } WUDPatchList;
 #define WUD_PATCH_BUFFER_SIZE 0xFF
 #define WUD_MAX_PATCHES (WUD_PATCH_BUFFER_SIZE / (s32)sizeof(WUDPatchCmd))
 
 typedef struct WUDCB {
-    WUDSyncDeviceCallback   syncStdCB;                          // 0x00
-    WUDSyncDeviceCallback   syncSmpCB;                          // 0x04
-    WUDClearDeviceCallback  clearDevCB;                         // 0x08
+    WUDSyncDeviceCallback syncStdCB;    // 0x00
+    WUDSyncDeviceCallback syncSmpCB;    // 0x04
+    WUDClearDeviceCallback clearDevCB;  // 0x08
 
-    u8                      syncState;                          // 0x0C
-    u8                      deleteState;                        // 0x0D
-    u8                      linkKeyState;                       // 0x0E
-    u8                      stackState;                         // 0x0F
-    u8                      initState;                          // 0x10
-    u8                      shutdownState;                      // 0x11
+    u8 syncState;      // 0x0C
+    u8 deleteState;    // 0x0D
+    u8 linkKeyState;   // 0x0E
+    u8 stackState;     // 0x0F
+    u8 initState;      // 0x10
+    u8 shutdownState;  // 0x11
 
-    u8                      devNums;                            // 0x12
-    u8                      devSmpNums;                         // 0x13
+    u8 devNums;     // 0x12
+    u8 devSmpNums;  // 0x13
 
-    WUDDevInfoList*         smpListHead;                        // 0x14
-    WUDDevInfoList*         smpListTail;                        // 0x18
-    WUDDevInfoList          smpList[WUD_MAX_DEV_ENTRY_FOR_SMP]; // 0x1C
+    WUDDevInfoList* smpListHead;                        // 0x14
+    WUDDevInfoList* smpListTail;                        // 0x18
+    WUDDevInfoList smpList[WUD_MAX_DEV_ENTRY_FOR_SMP];  // 0x1C
 
-    WUDDevInfoList*         stdListHead;                        // 0x64
-    WUDDevInfoList*         stdListTail;                        // 0x68
-    WUDDevInfoList          stdList[WUD_MAX_DEV_ENTRY_FOR_STD]; // 0x6C
+    WUDDevInfoList* stdListHead;                        // 0x64
+    WUDDevInfoList* stdListTail;                        // 0x68
+    WUDDevInfoList stdList[WUD_MAX_DEV_ENTRY_FOR_STD];  // 0x6C
 
-    WUDDevInfo              stdDevs[WUD_MAX_DEV_ENTRY_FOR_STD]; // 0xE4
-    WUDDevInfo              smpDevs[WUD_MAX_DEV_ENTRY_FOR_SMP]; // 0x4A4
+    WUDDevInfo stdDevs[WUD_MAX_DEV_ENTRY_FOR_STD];  // 0xE4
+    WUDDevInfo smpDevs[WUD_MAX_DEV_ENTRY_FOR_SMP];  // 0x4A4
 
-    u8                      connectedNum;                       // 0x6E4
-    u8                      linkedNum;                          // 0x6E5
-    u8                      syncedNum;                          // 0x6E6
+    u8 connectedNum;  // 0x6E4
+    u8 linkedNum;     // 0x6E5
+    u8 syncedNum;     // 0x6E6
 
-    u8                      syncSkipChecks;                     // 0x6E7
-    s8                      syncLoopNum;                        // 0x6E8
-    u8                      syncType;                           // 0x6E9
+    u8 syncSkipChecks;  // 0x6E7
+    s8 syncLoopNum;     // 0x6E8
+    u8 syncType;        // 0x6E9
 
-    u8                      connectable;                        // 0x6EA
-    u8                      discoverable;                       // 0x6EB
+    u8 connectable;   // 0x6EA
+    u8 discoverable;  // 0x6EB
 
-    WUDHidRecvCallback      hidRecvCB;                          // 0x6EC
-    WUDHidConnCallback      hidConnCB;                          // 0x6F0
+    WUDHidRecvCallback hidRecvCB;  // 0x6EC
+    WUDHidConnCallback hidConnCB;  // 0x6F0
 
-    WUDAllocFunc            allocFunc;                          // 0x6F4
-    WUDFreeFunc             freeFunc;                           // 0x6F8
+    WUDAllocFunc allocFunc;  // 0x6F4
+    WUDFreeFunc freeFunc;    // 0x6F8
 
-    BD_ADDR                 pairAddr;                           // 0x6FC
-    BD_ADDR                 hostAddr;                           // 0x702
+    BD_ADDR pairAddr;  // 0x6FC
+    BD_ADDR hostAddr;  // 0x702
 
-    s8                      libStatus;                          // 0x708
+    s8 libStatus;  // 0x708
 
-    u8                      serialPortStatus;                   // 0x709
-    UINT8                   pmID;                               // 0x70A
-    s8                      syncRssi;                           // 0x70B
-    OSAlarm                 alarm;                              // 0x710
-    u32                     hhFlags;                            // 0x740
+    u8 serialPortStatus;  // 0x709
+    UINT8 pmID;           // 0x70A
+    s8 syncRssi;          // 0x70B
+    OSAlarm alarm;        // 0x710
+    u32 hhFlags;          // 0x740
 
-    u16                     bufferStatus0;                      // 0x744
-    u16                     bufferStatus1;                      // 0x746
-    s16                     waitStartSearchFrames;              // 0x748
-    s16                     waitIncomingFrames;                 // 0x74A
+    u16 bufferStatus0;          // 0x744
+    u16 bufferStatus1;          // 0x746
+    s16 waitStartSearchFrames;  // 0x748
+    s16 waitIncomingFrames;     // 0x74A
 } WUDCB;
 
 extern WUDCB _wcb;
@@ -216,4 +216,4 @@ extern u16 _dev_handle_notack_num[WUD_MAX_DEV_ENTRY];
 }
 #endif
 
-#endif // PRIVATE_WUD_INTERNAL_H
+#endif  // PRIVATE_WUD_INTERNAL_H

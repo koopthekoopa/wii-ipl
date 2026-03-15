@@ -7,9 +7,9 @@
 #include <private/nwc24/NWC24Utils.h>
 
 #include <private/nwc24/NWC24Ipc.h>
-#include <private/nwc24/NWC24Private.h>
 #include <private/nwc24/NWC24Manage.h>
 #include <private/nwc24/NWC24Parser.h>
+#include <private/nwc24/NWC24Private.h>
 
 #include <private/nwc24/NWC24Schedule.h>
 #include <private/nwc24/NWC24Time.h>
@@ -27,6 +27,6 @@
 #include <private/nwc24/NWC24MBox.h>
 #include <private/nwc24/NWC24MsgObj.h>
 
-NWC24Err    NWC24iPrepareShutdown();
+NWC24Err NWC24iPrepareShutdown();
 
 #endif  // REVOLUTION_NWC24_H

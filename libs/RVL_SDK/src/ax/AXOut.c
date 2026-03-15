@@ -1,5 +1,5 @@
-#include <revolution/ax.h>
 #include <private/ax.h>
+#include <revolution/ax.h>
 
 #include <revolution/ai.h>
 
@@ -8,9 +8,11 @@
 #include <private/dsp.h>
 
 extern u16 axDspSlave[];
-extern u16 axDspInitVector;;
+extern u16 axDspInitVector;
+;
 extern u16 axDspResumeVector;
-extern u16 axDspSlaveLength;;
+extern u16 axDspSlaveLength;
+;
 
 // Output uses a ring buffer
 #define OUT_RING_MAX 3
@@ -48,10 +50,12 @@ static u32 __AXOutBuffer[OUT_RING_MAX][AX_SAMPLES_PER_FRAME] ALIGN32;
 static DSPTaskInfo __AXDSPTask ALIGN32;
 static u8 __AXDramImage[64] ALIGN32;
 
-#define DSP_SEND_MAIL_TO_DSP(mail) {    \
-    DSPSendMailToDSP((u32)mail);        \
-    while (DSPCheckMailToDSP()) {}      \
-}
+#define DSP_SEND_MAIL_TO_DSP(mail)                                                                                                                   \
+    {                                                                                                                                                \
+        DSPSendMailToDSP((u32)mail);                                                                                                                 \
+        while (DSPCheckMailToDSP()) {                                                                                                                \
+        }                                                                                                                                            \
+    }
 
 u32 __AXOutNewFrame() {
     AXPROFILE* current;
@@ -62,14 +66,11 @@ u32 __AXOutNewFrame() {
 
     __AXLocalProfile.timeBegin = OSGetTime();
 
-    cycles =
-        (AX_SAMPLES_PER_FRAME - (AIGetDMABytesLeft() / AX_SAMPLE_DEPTH_BYTES)) *
-        3797;
+    cycles = (AX_SAMPLES_PER_FRAME - (AIGetDMABytesLeft() / AX_SAMPLE_DEPTH_BYTES)) * 3797;
 
     if (__AXOutputBufferMode == 1) {
         __AXSyncPBs(0);
-    }
-    else {
+    } else {
         __AXSyncPBs(24400);
     }
 
@@ -101,8 +102,7 @@ u32 __AXOutNewFrame() {
         ptr = 0;
     }
 
-    if (__AXRmtCpuPtr >= __AXRmtDspPtr &&
-        __AXRmtCpuPtr < __AXRmtDspPtr + AX_SAMPLES_PER_FRAME_RMT) {
+    if (__AXRmtCpuPtr >= __AXRmtDspPtr && __AXRmtCpuPtr < __AXRmtDspPtr + AX_SAMPLES_PER_FRAME_RMT) {
         __AXRmtCpuPtr = ptr;
     }
 
@@ -112,8 +112,7 @@ u32 __AXOutNewFrame() {
 
     if (__AXOutputBufferMode == 1) {
         __AXOutFrame %= OUT_RING_MAX;
-    }
-    else {
+    } else {
         __AXOutFrame &= 1;
         AIInitDMA((u32)__AXOutBuffer[__AXOutFrame], AX_FRAME_SIZE);
     }
@@ -148,8 +147,7 @@ void __AXOutAiCallback() {
     if (__AXOutDspReady == 1) {
         __AXOutDspReady = 0;
         __AXOutNewFrame();
-    }
-    else {
+    } else {
         __AXOutDspReady = 2;
         DSPAssertTask(&__AXDSPTask);
     }
@@ -182,8 +180,7 @@ static void __AXDSPResumeCallback(DSPTaskInfo* task) {
             __AXExceedCallback(cycles);
         }
 
-    }
-    else {
+    } else {
         __AXOutDspReady = 1;
     }
 }
@@ -193,7 +190,8 @@ static void __AXDSPDoneCallback(DSPTaskInfo* task) {
     OSWakeupThread(&__AXOutThreadQueue);
 }
 
-static void __AXDSPRequestCallback(DSPTaskInfo* task) {}
+static void __AXDSPRequestCallback(DSPTaskInfo* task) {
+}
 
 void __AXOutInitDSP() {
     __AXDSPTask.iram_mmem_addr = axDspSlave;
@@ -224,7 +222,8 @@ void __AXOutInitDSP() {
     }
 
     DSPAddTask(&__AXDSPTask);
-    while (!__AXDSPInitFlag) {}
+    while (!__AXDSPInitFlag) {
+    }
 }
 
 void __AXOutInit(u32 mode) {
@@ -238,20 +237,17 @@ void __AXOutInit(u32 mode) {
     __AXOutputBufferMode = mode;
     __AXDebugSteppingMode = 0;
 
-    for (dst = (u32*)__AXOutBuffer, i = 0;
-         i < sizeof(__AXOutBuffer) / sizeof(u32); i++) {
+    for (dst = (u32*)__AXOutBuffer, i = 0; i < sizeof(__AXOutBuffer) / sizeof(u32); i++) {
         *dst++ = 0;
     }
     DCFlushRange(__AXOutBuffer, sizeof(__AXOutBuffer));
 
-    for (dst2 = (u32*)__AXOutSBuffer, i = 0;
-         i < sizeof(__AXOutSBuffer) / sizeof(u32); i++) {
+    for (dst2 = (u32*)__AXOutSBuffer, i = 0; i < sizeof(__AXOutSBuffer) / sizeof(u32); i++) {
         *dst2++ = 0;
     }
     DCFlushRange(__AXOutSBuffer, sizeof(__AXOutSBuffer));
 
-    for (dst2 = (u32*)__AXRmtOutBuffer, i = 0;
-         i < sizeof(__AXRmtOutBuffer) / sizeof(u32); i++) {
+    for (dst2 = (u32*)__AXRmtOutBuffer, i = 0; i < sizeof(__AXRmtOutBuffer) / sizeof(u32); i++) {
         *dst2++ = 0;
     }
     DCFlushRange(__AXRmtOutBuffer, sizeof(__AXRmtOutBuffer));
@@ -270,8 +266,7 @@ void __AXOutInit(u32 mode) {
 
     if (__AXOutputBufferMode == 1) {
         __AXNextFrame(__AXOutSBuffer, __AXOutBuffer[2], rmt);
-    }
-    else {
+    } else {
         __AXNextFrame(__AXOutSBuffer, __AXOutBuffer[1], rmt);
     }
 
@@ -281,8 +276,7 @@ void __AXOutInit(u32 mode) {
     if (__AXOutputBufferMode == 1) {
         AIInitDMA((u32)__AXOutBuffer[__AXAiDmaFrame], AX_FRAME_SIZE);
         __AXAiDmaFrame++;
-    }
-    else {
+    } else {
         AIInitDMA((u32)__AXOutBuffer[__AXOutFrame], AX_FRAME_SIZE);
     }
 

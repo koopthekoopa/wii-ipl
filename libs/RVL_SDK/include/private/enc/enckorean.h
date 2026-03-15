@@ -3,8 +3,8 @@
 
 #include <revolution/types.h>
 
-#include <revolution/enc.h>
 #include <private/enc/encutility.h>
+#include <revolution/enc.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -29,4 +29,4 @@ DECLARE_PRIVATE_ENC_FUNCTION_FROM_UTF16(Uhc)
 }
 #endif
 
-#endif // PRIVATE_ENC_KOREAN_H
+#endif  // PRIVATE_ENC_KOREAN_H

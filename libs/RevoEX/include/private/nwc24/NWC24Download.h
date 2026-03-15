@@ -9,8 +9,8 @@
 extern "C" {
 #endif
 
-NWC24Err    NWC24iOpenDlTaskList();
-NWC24Err    NWC24iCloseDlTaskList();
+NWC24Err NWC24iOpenDlTaskList();
+NWC24Err NWC24iCloseDlTaskList();
 
 #ifdef __cplusplus
 }

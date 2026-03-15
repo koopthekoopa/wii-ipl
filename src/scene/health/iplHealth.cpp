@@ -38,17 +38,18 @@ namespace ipl {
 
             return false;
         }
-        
-        #define HAS_SEC2MS(x)           (x * 1000)
-        
-        #define HAS_TIMER_FADE_IN       HAS_SEC2MS(1)                                       /* Seconds after fading in */
-        #define HAS_TIMER_PRESS_A       HAS_SEC2MS(2)                                       /* Seconds until the user can pass through the screen */
-        #define HAS_TIMER_NOT_PRESS_A   HAS_SEC2MS(60)                                      /* Seconds for the user to do something to pass through the screen */
-        
-        #define HAS_TIMER_SAFE_MODE     HAS_SEC2MS(3)                                       /* Seconds the user has to hold the safe mode combo on for */
 
-        #define HAS_PRESS_A_BUTTON      (controller::BTN_INTERACT | controller::BTN_BACK)   /* Buttons the user can press to goto the main menu */
+#define HAS_SEC2MS(x) (x * 1000)
 
+#define HAS_TIMER_FADE_IN HAS_SEC2MS(1)      /* Seconds after fading in */
+#define HAS_TIMER_PRESS_A HAS_SEC2MS(2)      /* Seconds until the user can pass through the screen */
+#define HAS_TIMER_NOT_PRESS_A HAS_SEC2MS(60) /* Seconds for the user to do something to pass through the screen */
+
+#define HAS_TIMER_SAFE_MODE HAS_SEC2MS(3) /* Seconds the user has to hold the safe mode combo on for */
+
+#define HAS_PRESS_A_BUTTON (controller::BTN_INTERACT | controller::BTN_BACK) /* Buttons the user can press to goto the main menu */
+
+        // clang-format off
         enum {
             LANG_JPN = 0,
             LANG_US_ENG,
@@ -95,22 +96,16 @@ namespace ipl {
             "Push_KOR",
             "Push_CHN"
         };
+        // clang-format on
 
-        skHealth::skHealth(EGG::Heap *heap) :
-        FaderSceneBase(heap),
-        mpHasPane(NULL),
-        mpPushPane(NULL),
-        mWaitTick(0),
-        mPushTick(0),
-        mbFadedIn(false),
-        mWpadMask(0),
-        mSafeModeTick(0),
-        mbHeldCombo(false),
-        mbDoneSafeMode(false) {
-            setSceneParentFlags(SCN_PARENTFLAG_DRAW); // (ignored as child scenes aren't created over this scene)
+        skHealth::skHealth(EGG::Heap* heap)
+            : FaderSceneBase(heap), mpHasPane(NULL), mpPushPane(NULL), mWaitTick(0), mPushTick(0), mbFadedIn(false), mWpadMask(0), mSafeModeTick(0),
+              mbHeldCombo(false), mbDoneSafeMode(false) {
+            setSceneParentFlags(SCN_PARENTFLAG_DRAW);  // (ignored as child scenes aren't created over this scene)
         }
 
-        skHealth::~skHealth() {}
+        skHealth::~skHealth() {
+        }
 
         void skHealth::prepare() {
             mpLayoutFile = System::getNandManager()->readLayoutAsync(System::getMem2App(), "health.ash", true);
@@ -201,8 +196,8 @@ namespace ipl {
 
             // Make all of the panes invisible
             for (int i = 0; i < ARRAY_LENGTH(has_pane_name); i++) {
-                pHasPane   = mpLayout->FindPaneByName(has_pane_name[i]);
-                pPushPane  = mpLayout->FindPaneByName(push_pane_name[i]);
+                pHasPane = mpLayout->FindPaneByName(has_pane_name[i]);
+                pPushPane = mpLayout->FindPaneByName(push_pane_name[i]);
 
                 pHasPane->SetVisible(false);
                 pPushPane->SetVisible(false);
@@ -210,18 +205,18 @@ namespace ipl {
 
             // Make the necessary panes visible
             u32 country = getCountryIndex_();
-            mpHasPane   = mpLayout->FindPaneByName(has_pane_name[country]);
-            mpPushPane  = mpLayout->FindPaneByName(push_pane_name[country]);
+            mpHasPane = mpLayout->FindPaneByName(has_pane_name[country]);
+            mpPushPane = mpLayout->FindPaneByName(push_pane_name[country]);
 
             mpHasPane->SetVisible(true);
 
             // Bind the animations
-            mpLayout->bindToGroup("it_Has_a_SeenIn.brlan",  "G_All");
-            mpLayout->bindToGroup("it_Has_a_Push.brlan",    "G_Push");
+            mpLayout->bindToGroup("it_Has_a_SeenIn.brlan", "G_All");
+            mpLayout->bindToGroup("it_Has_a_Push.brlan", "G_Push");
             mpLayout->bindToGroup("it_Has_a_SeenOut.brlan", "G_All");
 
             mpLayout->setAnmType(ANIM_TYPE_FORWARD, ANIM_FADE_IN);
-            mpLayout->setAnmType(ANIM_TYPE_LOOP,    ANIM_WAIT_PUSH);
+            mpLayout->setAnmType(ANIM_TYPE_LOOP, ANIM_WAIT_PUSH);
             mpLayout->setAnmType(ANIM_TYPE_FORWARD, ANIM_FADE_OUT);
 
             mpLayout->finishBinding();
@@ -267,8 +262,8 @@ namespace ipl {
         }
 
         FaderSceneCommand skHealth::calcNormal() {
-            FaderSceneCommand result  = FADER_SCN_CONTINUE;
-            u32 newWpadMask     = utility::wpad::getWpadConnectedMask();
+            FaderSceneCommand result = FADER_SCN_CONTINUE;
+            u32 newWpadMask = utility::wpad::getWpadConnectedMask();
 
             check_safe_mode();
 
@@ -279,12 +274,11 @@ namespace ipl {
 
             if (finish_safe_mode_check()) {
                 // Either user pressed A (or B), connected controller, went to safe more OR was on the screen for 60 seconds? We fade out.
-                if (System::getMasterController()->downTrg(HAS_PRESS_A_BUTTON) || mWpadMask != newWpadMask
-                || OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) > HAS_TIMER_NOT_PRESS_A || mbDoneSafeMode) {
+                if (System::getMasterController()->downTrg(HAS_PRESS_A_BUTTON) || mWpadMask != newWpadMask ||
+                    OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) > HAS_TIMER_NOT_PRESS_A || mbDoneSafeMode) {
                     if (mWpadMask != newWpadMask && !utility::wpad::isIncreaseConnectedWpad(mWpadMask, newWpadMask)) {
                         mWpadMask = newWpadMask;
-                    }
-                    else {
+                    } else {
                         snd::getSystem()->startSE("WIPL_SE_BT_PUSH");
                         mpLayout->start(ANIM_FADE_OUT);
 
@@ -316,14 +310,14 @@ namespace ipl {
                     System::getPointer()->setVisible(true);
                     System::getResetHandler()->enableResetToMenu();
 
-                    for (int i = 0; i < 1; i++) { // :question:
+                    for (int i = 0; i < 1; i++) {  // :question:
                         reserveAllSceneDestruction(SCENE_BOARD, NULL);
                     }
 
                     return FADER_SCN_NEXT;
                 }
             }
-            
+
             return FADER_SCN_CONTINUE;
         }
 
@@ -337,20 +331,18 @@ namespace ipl {
         void skHealth::check_safe_mode() {
             // If the user is holding the combo?
             if (!mbHeldCombo) {
-                if (System::getMasterController()->down(controller::REVO_BTN_PLUS)
-                    && System::getMasterController()->down(controller::REVO_BTN_MINUS)) {
+                if (System::getMasterController()->down(controller::REVO_BTN_PLUS) &&
+                    System::getMasterController()->down(controller::REVO_BTN_MINUS)) {
                     mSafeModeTick = OSGetTick();
                     mbHeldCombo = true;
                 }
-            }
-            else {
+            } else {
                 // Have they let go of the combo? Restart the timer
-                if (!System::getMasterController()->down(controller::REVO_BTN_PLUS)
-                    || !System::getMasterController()->down(controller::REVO_BTN_MINUS)) {
+                if (!System::getMasterController()->down(controller::REVO_BTN_PLUS) ||
+                    !System::getMasterController()->down(controller::REVO_BTN_MINUS)) {
                     mSafeModeTick = 0;
                     mbHeldCombo = false;
-                }
-                else {
+                } else {
                     // Have they been holding the combo after the timer? Welcome to safe mode!
                     if (OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mSafeModeTick)) > HAS_TIMER_SAFE_MODE) {
                         mbDoneSafeMode = true;
@@ -363,12 +355,13 @@ namespace ipl {
         BOOL skHealth::finish_safe_mode_check() const {
             BOOL result = FALSE;
 
-            if (!(System::getMasterController()->down(controller::REVO_BTN_PLUS)
-                || System::getMasterController()->down(controller::REVO_BTN_MINUS)) || mbDoneSafeMode) {
+            if (!(System::getMasterController()->down(controller::REVO_BTN_PLUS) ||
+                  System::getMasterController()->down(controller::REVO_BTN_MINUS)) ||
+                mbDoneSafeMode) {
                 result = TRUE;
             }
 
             return result;
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

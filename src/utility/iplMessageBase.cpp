@@ -17,7 +17,5 @@ namespace ipl {
         void ut_message_base::InitMessageQueue(OSMessage* pMsg, s32 msgCount) {
             OSInitMessageQueue(&mpMsgQueue, pMsg, msgCount);
         }
-    }
-}
-
-
+    }  // namespace utility
+}  // namespace ipl

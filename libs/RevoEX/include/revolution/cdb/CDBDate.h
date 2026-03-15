@@ -7,9 +7,9 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif // __cplusplus
+#endif  // __cplusplus
 
-void    CDBClampCDBDate(CDBDate* cdbDate);
+void CDBClampCDBDate(CDBDate* cdbDate);
 
 CDBDate CDBMakeCDBDate(int year, int month, int day, int hour, int min, int sec);
 
@@ -22,6 +22,6 @@ CDBDate CDBMakeCDBDateYearEnd(int year, int month, int day, int hour, int min, i
 
 #ifdef __cplusplus
 }
-#endif // __cplusplus
+#endif  // __cplusplus
 
-#endif // REVOLUTION_CDB_DATE_H
+#endif  // REVOLUTION_CDB_DATE_H

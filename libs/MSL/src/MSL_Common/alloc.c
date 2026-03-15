@@ -90,35 +90,34 @@ static int initialized = 0;
 static SubBlock* SubBlock_merge_prev(SubBlock*, SubBlock**);
 static void SubBlock_merge_next(SubBlock*, SubBlock**);
 
-static const unsigned int fix_pool_sizes[] = { 4, 12, 20, 36, 52, 68 };
+static const unsigned int fix_pool_sizes[] = {4, 12, 20, 36, 52, 68};
 
-#define SubBlock_size(ths)  ((ths)->size & 0xFFFFFFF8)
+#define SubBlock_size(ths) ((ths)->size & 0xFFFFFFF8)
 #define SubBlock_block(ths) ((Block*)((unsigned int)((ths)->block) & ~0x1))
-#define Block_size(ths)     ((ths)->size & 0xFFFFFFF8)
-#define Block_start(ths)    (*(SubBlock**)((char*)(ths) + Block_size((ths)) - sizeof(unsigned int)))
+#define Block_size(ths) ((ths)->size & 0xFFFFFFF8)
+#define Block_start(ths) (*(SubBlock**)((char*)(ths) + Block_size((ths)) - sizeof(unsigned int)))
 
-#define SubBlock_set_free(ths)                 \
-    unsigned int this_size = SubBlock_size((ths));      \
-    (ths)->size &= ~0x2;                       \
-    *(unsigned int*)((char*)(ths) + this_size) &= ~0x4; \
+#define SubBlock_set_free(ths)                                                                                                                       \
+    unsigned int this_size = SubBlock_size((ths));                                                                                                   \
+    (ths)->size &= ~0x2;                                                                                                                             \
+    *(unsigned int*)((char*)(ths) + this_size) &= ~0x4;                                                                                              \
     *(unsigned int*)((char*)(ths) + this_size - sizeof(unsigned int)) = this_size
 
 #define SubBlock_is_free(ths) !((ths)->size & 2)
-#define SubBlock_set_size(ths, sz)    \
-    (ths)->size &= ~0xFFFFFFF8;       \
-    (ths)->size |= (sz) & 0xFFFFFFF8; \
-    if (SubBlock_is_free((ths)))      \
+#define SubBlock_set_size(ths, sz)                                                                                                                   \
+    (ths)->size &= ~0xFFFFFFF8;                                                                                                                      \
+    (ths)->size |= (sz) & 0xFFFFFFF8;                                                                                                                \
+    if (SubBlock_is_free((ths)))                                                                                                                     \
     *(unsigned int*)((char*)(ths) + (sz) - sizeof(unsigned int)) = (sz)
 
-#define SubBlock_from_pointer(ptr)    ((SubBlock*)((char*)(ptr) - 8))
+#define SubBlock_from_pointer(ptr) ((SubBlock*)((char*)(ptr) - 8))
 #define FixSubBlock_from_pointer(ptr) ((FixSubBlock*)((char*)(ptr) - 4))
 
 #define FixBlock_client_size(ths) ((ths)->client_size_)
-#define FixSubBlock_size(ths)     (FixBlock_client_size((ths)->block_))
+#define FixSubBlock_size(ths) (FixBlock_client_size((ths)->block_))
 
 #define classify(ptr) (*(unsigned int*)((char*)(ptr) - sizeof(unsigned int)) & 1)
-#define __msize_inline(ptr) \
-    (!classify(ptr) ? FixSubBlock_size(FixSubBlock_from_pointer(ptr)) : SubBlock_size(SubBlock_from_pointer(ptr)) - 8)
+#define __msize_inline(ptr) (!classify(ptr) ? FixSubBlock_size(FixSubBlock_from_pointer(ptr)) : SubBlock_size(SubBlock_from_pointer(ptr)) - 8)
 
 #define Block_empty(ths) (_sb = (SubBlock*)((char*)(ths) + 16)), SubBlock_is_free(_sb) && SubBlock_size(_sb) == Block_size((ths)) - 24
 
@@ -128,16 +127,15 @@ void Block_link(Block* ths, SubBlock* sb) {
     st = &Block_start(ths);
 
     if (*st != 0) {
-        sb->prev       = (*st)->prev;
+        sb->prev = (*st)->prev;
         sb->prev->next = sb;
-        sb->next       = *st;
-        (*st)->prev    = sb;
-        *st            = sb;
-        *st            = SubBlock_merge_prev(*st, st);
+        sb->next = *st;
+        (*st)->prev = sb;
+        *st = sb;
+        *st = SubBlock_merge_prev(*st, st);
         SubBlock_merge_next(*st, st);
-    }
-    else {
-        *st      = sb;
+    } else {
+        *st = sb;
         sb->prev = sb;
         sb->next = sb;
     }
@@ -158,7 +156,7 @@ static SubBlock* SubBlock_merge_prev(SubBlock* ths, SubBlock** start) {
 
         if (*start == ths)
             *start = (*start)->next;
-        ths->next->prev       = ths->prev;
+        ths->next->prev = ths->prev;
         ths->next->prev->next = ths->next;
         return p;
     }
@@ -183,8 +181,7 @@ static void SubBlock_merge_next(SubBlock* pBlock, SubBlock** pStart) {
 
         if (!(pBlock->size & 2)) {
             *(unsigned int*)((char*)pBlock + this_cur_size) &= ~4;
-        }
-        else {
+        } else {
             *(unsigned int*)((char*)pBlock + this_cur_size) |= 4;
         }
 
@@ -212,7 +209,7 @@ static Block* __unlink(__mem_pool_obj* pool_obj, Block* bp) {
     }
 
     if (result != 0) {
-        result->prev       = bp->prev;
+        result->prev = bp->prev;
         result->prev->next = result;
     }
 
@@ -234,7 +231,9 @@ static void deallocate_from_var_pools(__mem_pool_obj* pool_obj, void* ptr) {
     }
 }
 
-void __init_pool_obj(__mem_pool* pool_obj) { memset(pool_obj, 0, sizeof(__mem_pool_obj)); }
+void __init_pool_obj(__mem_pool* pool_obj) {
+    memset(pool_obj, 0, sizeof(__mem_pool_obj));
+}
 
 static __mem_pool* get_malloc_pool() {
     static __mem_pool protopool;
@@ -258,26 +257,25 @@ void deallocate_from_fixed_pools(__mem_pool_obj* pool_obj, void* ptr, unsigned i
     }
 
     fs = &pool_obj->fix_start[i];
-    p  = FixSubBlock_from_pointer(ptr);
-    b  = p->block_;
+    p = FixSubBlock_from_pointer(ptr);
+    b = p->block_;
 
     if (b->start_ == 0 && fs->head_ != b) {
         if (fs->tail_ == b) {
             fs->head_ = fs->head_->prev_;
             fs->tail_ = fs->tail_->prev_;
-        }
-        else {
+        } else {
             b->prev_->next_ = b->next_;
             b->next_->prev_ = b->prev_;
-            b->next_        = fs->head_;
-            b->prev_        = b->next_->prev_;
+            b->next_ = fs->head_;
+            b->prev_ = b->next_->prev_;
             b->prev_->next_ = b;
             b->next_->prev_ = b;
-            fs->head_       = b;
+            fs->head_ = b;
         }
     }
 
-    p->next_  = b->start_;
+    p->next_ = b->start_;
     b->start_ = p;
 
     if (--b->n_allocated_ == 0) {
@@ -313,12 +311,11 @@ void __pool_free(__mem_pool* pool, void* ptr) {
     }
 
     pool_obj = (__mem_pool_obj*)pool;
-    size     = __msize_inline(ptr);
+    size = __msize_inline(ptr);
 
     if (size <= 68) {
         deallocate_from_fixed_pools(pool_obj, ptr, size);
-    }
-    else {
+    } else {
         deallocate_from_var_pools(pool_obj, ptr);
     }
 }

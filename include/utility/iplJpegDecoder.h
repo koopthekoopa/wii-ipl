@@ -6,24 +6,24 @@
 #include <egg/core.h>
 
 namespace ipl {
-    namespace  utility {
+    namespace utility {
         class JpegDecoder {
-            public:
-                JpegDecoder(EGG::Heap* heap);
+        public:
+            JpegDecoder(EGG::Heap* heap);
 
-                BOOL    decodeJpg(EGG::Heap* heap, u8* buffer, u32 length);
-                BOOL    encodeOdh(EGG::Heap* heap, u8* buffer, u32 length);
+            BOOL decodeJpg(EGG::Heap* heap, u8* buffer, u32 length);
+            BOOL encodeOdh(EGG::Heap* heap, u8* buffer, u32 length);
 
-                BOOL    waitCaptured();
+            BOOL waitCaptured();
 
-                BOOL    makeRawData();
+            BOOL makeRawData();
 
-                void    clear();
+            void clear();
 
-            private:
-                u8 dummy[0x710];
+        private:
+            u8 dummy[0x710];
         };
-    }
-}
+    }  // namespace utility
+}  // namespace ipl
 
-#endif // IPL_UTILITY_JPEG_DECODER
+#endif  // IPL_UTILITY_JPEG_DECODER

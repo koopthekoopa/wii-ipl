@@ -1,16 +1,16 @@
-#include <revolution/ssl.h>
 #include <private/ssl.h>
+#include <revolution/ssl.h>
 
-#include <private/ipc.h>
 #include <private/ios.h>
+#include <private/ipc.h>
 
-#include <revolution/verdefs.h>
 #include <revolution/os.h>
+#include <revolution/verdefs.h>
 
 #include <string.h>
 
 #define MAX_VECTOR_ARGS 4
-#define OPEN_SSL_IOS()  IOS_Open("/dev/net/ssl", 0)
+#define OPEN_SSL_IOS() IOS_Open("/dev/net/ssl", 0)
 
 enum {
     SSL_IOCTVL_NEW = 1,
@@ -27,19 +27,19 @@ enum {
 
 SDKDefineVersionEx(SSL, "Jun 21 2007", "13:10:10", 60726);
 
-static BOOL     sslRegistered = FALSE;
-static s32      l_initialized = FALSE;
+static BOOL sslRegistered = FALSE;
+static s32 l_initialized = FALSE;
 
-static OSMutex  l_mutex;
+static OSMutex l_mutex;
 
-static char     l_cert_data[SSL_ROOT_CA_LENGTH] ALIGN32;
-static char     l_private_key_data[SSL_PRIVATE_KEY_LENGTH] ALIGN32;
-static char     l_root_ca[SSL_CLIENT_CERT_LENGTH] ALIGN32;
+static char l_cert_data[SSL_ROOT_CA_LENGTH] ALIGN32;
+static char l_private_key_data[SSL_PRIVATE_KEY_LENGTH] ALIGN32;
+static char l_root_ca[SSL_CLIENT_CERT_LENGTH] ALIGN32;
 
-static u32  SSL_strnlen(const char* s, u32 maxlen);
+static u32 SSL_strnlen(const char* s, u32 maxlen);
 
-static int  SSL_read(s32 fd, SSLId i_sslId, char* o_buf, u32 i_bufSize);
-static int  SSL_write(s32 fd, SSLId i_sslId, const char* i_buf, u32 i_bufSize);
+static int SSL_read(s32 fd, SSLId i_sslId, char* o_buf, u32 i_bufSize);
+static int SSL_write(s32 fd, SSLId i_sslId, const char* i_buf, u32 i_bufSize);
 
 static void SSL_lock();
 static void SSL_unlock();
@@ -48,12 +48,12 @@ SSLId SSLNew(u32 i_verifyOption, const char* i_serverName) {
     s32 fd;
     IOSIoVector vec[MAX_VECTOR_ARGS] ALIGN32;
 
-    char        server_name[SSL_SERVER_NAME_LENGTH];
-    u32         name_len;
-    SSLId       ssl_id[SSL_ID_MAX];
-    u32         verify_option[SSL_ID_MAX];
+    char server_name[SSL_SERVER_NAME_LENGTH];
+    u32 name_len;
+    SSLId ssl_id[SSL_ID_MAX];
+    u32 verify_option[SSL_ID_MAX];
 
-    s32         err;
+    s32 err;
 
     fd = OPEN_SSL_IOS();
 
@@ -65,7 +65,7 @@ SSLId SSLNew(u32 i_verifyOption, const char* i_serverName) {
     if (fd < 0) {
         return SSL_ID_INVALID;
     }
-    
+
     name_len = SSL_strnlen(i_serverName, SSL_SERVER_NAME_LENGTH);
 
     if (name_len == 0) {
@@ -99,14 +99,14 @@ SSLId SSLNew(u32 i_verifyOption, const char* i_serverName) {
 }
 
 int SSLConnect(SSLId i_sslId, int i_socket) {
-    s32         fd;
+    s32 fd;
     IOSIoVector vec[MAX_VECTOR_ARGS] ALIGN32;
 
-    SSLId       ssl_id[SSL_ID_MAX];
-    int         socket[SSL_ID_MAX];
-    int         result[SSL_ID_MAX];
+    SSLId ssl_id[SSL_ID_MAX];
+    int socket[SSL_ID_MAX];
+    int result[SSL_ID_MAX];
 
-    s32         err;
+    s32 err;
 
     fd = OPEN_SSL_IOS();
 
@@ -134,13 +134,13 @@ int SSLConnect(SSLId i_sslId, int i_socket) {
 }
 
 SSLResult SSLDoHandshake(SSLId i_sslId) {
-    s32         fd;
+    s32 fd;
     IOSIoVector vec[MAX_VECTOR_ARGS] ALIGN32;
 
-    SSLId       ssl_id[SSL_ID_MAX];
-    int         result[SSL_ID_MAX];
+    SSLId ssl_id[SSL_ID_MAX];
+    int result[SSL_ID_MAX];
 
-    s32         err;
+    s32 err;
 
     fd = OPEN_SSL_IOS();
     if (fd < 0) {
@@ -163,18 +163,18 @@ SSLResult SSLDoHandshake(SSLId i_sslId) {
 }
 
 SSLResult SSLRead(SSLId i_sslId, char* o_buf, u32 i_bufSize) {
-    s32     fd;
-    int     ret;
+    s32 fd;
+    int ret;
 
-    u32     bufSize;
-    char    tmp[32] ALIGN32;
-    u32     align;
-    u32     front_bytes;
-    u32     rest;
-    int     total_read;
+    u32 bufSize;
+    char tmp[32] ALIGN32;
+    u32 align;
+    u32 front_bytes;
+    u32 rest;
+    int total_read;
 
-    u32     body_bytes;
-    u32     back_bytes;
+    u32 body_bytes;
+    u32 back_bytes;
 
     fd = OPEN_SSL_IOS();
 
@@ -186,16 +186,14 @@ SSLResult SSLRead(SSLId i_sslId, char* o_buf, u32 i_bufSize) {
 
     if (i_bufSize > SSL_BUFFER_MAX_LENGTH) {
         bufSize = SSL_BUFFER_MAX_LENGTH;
-    }
-    else {
+    } else {
         bufSize = i_bufSize;
     }
 
-    align = (u32)o_buf & (DEFAULT_ALIGN-1);
+    align = (u32)o_buf & (DEFAULT_ALIGN - 1);
     if (align != 0) {
         front_bytes = DEFAULT_ALIGN - align;
-    }
-    else {
+    } else {
         front_bytes = 0;
     }
 
@@ -216,20 +214,18 @@ SSLResult SSLRead(SSLId i_sslId, char* o_buf, u32 i_bufSize) {
             if (ret < front_bytes) {
                 IOS_Close(fd);
                 return total_read;
-            }
-            else {
+            } else {
                 o_buf += ret;
                 rest -= ret;
             }
-        }
-        else {
+        } else {
             IOS_Close(fd);
             return ret;
         }
     }
 
     if (rest != 0) {
-        body_bytes = rest & ~(DEFAULT_ALIGN-1);
+        body_bytes = rest & ~(DEFAULT_ALIGN - 1);
         if (body_bytes != 0) {
             ret = SSL_read(fd, i_sslId, o_buf, body_bytes);
             if (ret > 0) {
@@ -237,18 +233,15 @@ SSLResult SSLRead(SSLId i_sslId, char* o_buf, u32 i_bufSize) {
                 if (ret < body_bytes) {
                     IOS_Close(fd);
                     return total_read;
-                }
-                else {
+                } else {
                     o_buf += ret;
                     rest -= ret;
                 }
-            }
-            else {
+            } else {
                 IOS_Close(fd);
                 if (total_read > 0) {
                     return total_read;
-                }
-                else {
+                } else {
                     return ret;
                 }
             }
@@ -256,7 +249,7 @@ SSLResult SSLRead(SSLId i_sslId, char* o_buf, u32 i_bufSize) {
     }
 
     if (rest != 0) {
-        back_bytes = rest & (DEFAULT_ALIGN-1);
+        back_bytes = rest & (DEFAULT_ALIGN - 1);
         if (back_bytes != 0) {
             memset(tmp, 0, sizeof(tmp));
 
@@ -265,13 +258,11 @@ SSLResult SSLRead(SSLId i_sslId, char* o_buf, u32 i_bufSize) {
             if (ret > 0) {
                 total_read += ret;
                 memcpy(o_buf, tmp, ret);
-            }
-            else {
+            } else {
                 IOS_Close(fd);
                 if (total_read > 0) {
                     return total_read;
-                }
-                else {
+                } else {
                     return ret;
                 }
             }
@@ -287,17 +278,17 @@ SSLResult SSLRead(SSLId i_sslId, char* o_buf, u32 i_bufSize) {
 }
 
 SSLResult SSLWrite(SSLId i_sslId, const char* i_buf, u32 i_bufSize) {
-    s32     fd;
-    int     ret;
+    s32 fd;
+    int ret;
 
-    char    tmp[32] ALIGN32;
-    u32     align;
-    u32     front_bytes;
-    u32     rest;
-    int     total_write;
+    char tmp[32] ALIGN32;
+    u32 align;
+    u32 front_bytes;
+    u32 rest;
+    int total_write;
 
-    u32     body_bytes;
-    u32     back_bytes;
+    u32 body_bytes;
+    u32 back_bytes;
 
     fd = OPEN_SSL_IOS();
 
@@ -307,11 +298,10 @@ SSLResult SSLWrite(SSLId i_sslId, const char* i_buf, u32 i_bufSize) {
         return ret;
     }
 
-    align = (u32)i_buf & (DEFAULT_ALIGN-1);
+    align = (u32)i_buf & (DEFAULT_ALIGN - 1);
     if (align != 0) {
         front_bytes = DEFAULT_ALIGN - align;
-    }
-    else {
+    } else {
         front_bytes = 0;
     }
 
@@ -332,20 +322,18 @@ SSLResult SSLWrite(SSLId i_sslId, const char* i_buf, u32 i_bufSize) {
             if (ret < front_bytes) {
                 IOS_Close(fd);
                 return ret;
-            }
-            else {
+            } else {
                 i_buf += ret;
                 rest -= ret;
             }
-        }
-        else {
+        } else {
             IOS_Close(fd);
             return ret;
         }
     }
 
     if (rest != 0) {
-        body_bytes = rest & ~(DEFAULT_ALIGN-1);
+        body_bytes = rest & ~(DEFAULT_ALIGN - 1);
         if (body_bytes != 0) {
             ret = SSL_write(fd, i_sslId, i_buf, body_bytes);
             if (ret > 0) {
@@ -353,18 +341,15 @@ SSLResult SSLWrite(SSLId i_sslId, const char* i_buf, u32 i_bufSize) {
                 if (ret < body_bytes) {
                     IOS_Close(fd);
                     return total_write;
-                }
-                else {
+                } else {
                     i_buf += ret;
                     rest -= ret;
                 }
-            }
-            else {
+            } else {
                 IOS_Close(fd);
                 if (total_write > 0) {
                     return total_write;
-                }
-                else {
+                } else {
                     return ret;
                 }
             }
@@ -372,7 +357,7 @@ SSLResult SSLWrite(SSLId i_sslId, const char* i_buf, u32 i_bufSize) {
     }
 
     if (rest != 0) {
-        back_bytes = rest & (DEFAULT_ALIGN-1);
+        back_bytes = rest & (DEFAULT_ALIGN - 1);
         if (back_bytes != 0) {
             memset(tmp, 0, sizeof(tmp));
             memcpy(tmp, i_buf, back_bytes);
@@ -381,13 +366,11 @@ SSLResult SSLWrite(SSLId i_sslId, const char* i_buf, u32 i_bufSize) {
 
             if (ret > 0) {
                 total_write += ret;
-            }
-            else {
+            } else {
                 IOS_Close(fd);
                 if (total_write > 0) {
                     return total_write;
-                }
-                else {
+                } else {
                     return ret;
                 }
             }
@@ -403,13 +386,13 @@ SSLResult SSLWrite(SSLId i_sslId, const char* i_buf, u32 i_bufSize) {
 }
 
 SSLResult SSLShutdown(SSLId i_sslId) {
-    s32         fd;
+    s32 fd;
     IOSIoVector vec[MAX_VECTOR_ARGS] ALIGN32;
 
-    SSLId       ssl_id[SSL_ID_MAX];
-    int         result[SSL_ID_MAX];
+    SSLId ssl_id[SSL_ID_MAX];
+    int result[SSL_ID_MAX];
 
-    s32         err;
+    s32 err;
 
     fd = OPEN_SSL_IOS();
     if (fd < 0) {
@@ -432,13 +415,13 @@ SSLResult SSLShutdown(SSLId i_sslId) {
 }
 
 SSLResult SSLSetClientCert(SSLId i_sslId, const char* i_clientCertData, u32 i_clientCertSize, const char* i_privateKeyData, u32 i_privateKeySize) {
-    s32         fd;
+    s32 fd;
     IOSIoVector vec[MAX_VECTOR_ARGS] ALIGN32;
 
-    SSLResult   result[SSL_ID_MAX];
-    SSLId       ssl_id[SSL_ID_MAX];
+    SSLResult result[SSL_ID_MAX];
+    SSLId ssl_id[SSL_ID_MAX];
 
-    s32         err;
+    s32 err;
 
     fd = OPEN_SSL_IOS();
     if (fd < 0) {
@@ -473,13 +456,13 @@ SSLResult SSLSetClientCert(SSLId i_sslId, const char* i_clientCertData, u32 i_cl
 }
 
 SSLResult SSLSetRootCA(SSLId i_sslId, const char* i_rootCAData, u32 i_rootCASize) {
-    s32         fd;
+    s32 fd;
     IOSIoVector vec[MAX_VECTOR_ARGS] ALIGN32;
 
-    SSLResult   result[SSL_ID_MAX];
-    SSLId       ssl_id[SSL_ID_MAX];
+    SSLResult result[SSL_ID_MAX];
+    SSLId ssl_id[SSL_ID_MAX];
 
-    s32         err;
+    s32 err;
 
     fd = OPEN_SSL_IOS();
     if (fd < 0) {
@@ -510,14 +493,14 @@ SSLResult SSLSetRootCA(SSLId i_sslId, const char* i_rootCAData, u32 i_rootCASize
 }
 
 SSLResult SSLSetBuiltinRootCA(SSLId i_sslId, u32 i_rootCAId) {
-    s32         fd;
+    s32 fd;
     IOSIoVector vec[MAX_VECTOR_ARGS] ALIGN32;
 
-    int         result[SSL_ID_MAX];
-    int         ssl_id[SSL_ID_MAX];
-    u32         rootCAId[SSL_ROOT_CA_ID_MAX];
+    int result[SSL_ID_MAX];
+    int ssl_id[SSL_ID_MAX];
+    u32 rootCAId[SSL_ROOT_CA_ID_MAX];
 
-    s32         err;
+    s32 err;
 
     fd = OPEN_SSL_IOS();
     if (fd < 0) {
@@ -544,14 +527,14 @@ SSLResult SSLSetBuiltinRootCA(SSLId i_sslId, u32 i_rootCAId) {
 }
 
 SSLResult SSLSetBuiltinClientCert(SSLId i_sslId, u32 i_clientCertId) {
-    s32         fd;
+    s32 fd;
     IOSIoVector vec[MAX_VECTOR_ARGS] ALIGN32;
 
-    int         result[SSL_ID_MAX];
-    int         ssl_id[SSL_ID_MAX];
-    u32         clientCertId[SSL_CLIENT_CERT_ID_MAX];
+    int result[SSL_ID_MAX];
+    int ssl_id[SSL_ID_MAX];
+    u32 clientCertId[SSL_CLIENT_CERT_ID_MAX];
 
-    s32         err;
+    s32 err;
 
     fd = OPEN_SSL_IOS();
     if (fd < 0) {
@@ -580,10 +563,10 @@ SSLResult SSLSetBuiltinClientCert(SSLId i_sslId, u32 i_clientCertId) {
 static int SSL_read(s32 fd, SSLId i_sslId, char* o_buf, u32 i_bufSize) {
     IOSIoVector vec[MAX_VECTOR_ARGS] ALIGN32;
 
-    SSLId       ssl_id[SSL_ID_MAX];
-    SSLResult   result[SSL_ID_MAX];
+    SSLId ssl_id[SSL_ID_MAX];
+    SSLResult result[SSL_ID_MAX];
 
-    s32         err;
+    s32 err;
 
     ssl_id[0] = i_sslId;
     result[0] = SSL_INVALID_RESULT;
@@ -605,10 +588,10 @@ static int SSL_read(s32 fd, SSLId i_sslId, char* o_buf, u32 i_bufSize) {
 static int SSL_write(s32 fd, SSLId i_sslId, const char* i_buf, u32 i_bufSize) {
     IOSIoVector vec[MAX_VECTOR_ARGS] ALIGN32;
 
-    SSLId       ssl_id[SSL_ID_MAX];
-    SSLResult   result[SSL_ID_MAX];
+    SSLId ssl_id[SSL_ID_MAX];
+    SSLResult result[SSL_ID_MAX];
 
-    s32         err;
+    s32 err;
 
     ssl_id[0] = i_sslId;
     result[0] = SSL_INVALID_RESULT;
@@ -652,6 +635,7 @@ static void SSL_unlock() {
 static u32 SSL_strnlen(const char* s, u32 n) {
     int i;
     const char* t;
-    for (i = 0, t = s; i < n && *t != 0; i++, t++) {}
-    return t-s;
+    for (i = 0, t = s; i < n && *t != 0; i++, t++) {
+    }
+    return t - s;
 }

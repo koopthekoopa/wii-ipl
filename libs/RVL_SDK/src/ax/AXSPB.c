@@ -1,19 +1,19 @@
-#include <revolution/ax.h>
 #include <private/ax.h>
+#include <revolution/ax.h>
 
 #include <revolution/os.h>
 
 #define DEPOP_MIN (-20)
-#define DEPOP_MAX  (20)
+#define DEPOP_MAX (20)
 
-static AXSPB    __AXStudio ALIGN32;
+static AXSPB __AXStudio ALIGN32;
 
-static s32      __AXSpbAL, __AXSpbAR, __AXSpbAS;
-static s32      __AXSpbAAL, __AXSpbAAR, __AXSpbAAS;
-static s32      __AXSpbABL, __AXSpbABR, __AXSpbABS;
-static s32      __AXSpbACL, __AXSpbACR, __AXSpbACS;
-static s32      __AXSpbMain0, __AXSpbMain1, __AXSpbMain2, __AXSpbMain3;
-static s32      __AXSpbAux0, __AXSpbAux1, __AXSpbAux2, __AXSpbAux3;
+static s32 __AXSpbAL, __AXSpbAR, __AXSpbAS;
+static s32 __AXSpbAAL, __AXSpbAAR, __AXSpbAAS;
+static s32 __AXSpbABL, __AXSpbABR, __AXSpbABS;
+static s32 __AXSpbACL, __AXSpbACR, __AXSpbACS;
+static s32 __AXSpbMain0, __AXSpbMain1, __AXSpbMain2, __AXSpbMain3;
+static s32 __AXSpbAux0, __AXSpbAux1, __AXSpbAux2, __AXSpbAux3;
 
 AXSPB* __AXGetStudio() {
     return &__AXStudio;
@@ -35,8 +35,7 @@ void __AXDepopFadeMain(s32* all, s32* value, s16* depop) {
         *value = *all;
         *all -= avg * AX_SAMPLES_PER_FRAME;
         *depop = -avg;
-    }
-    else {
+    } else {
         *all = 0;
         *value = 0;
         *depop = 0;
@@ -59,8 +58,7 @@ void __AXDepopFadeRmt(s32* all, s32* value, s16* depop) {
         *value = *all;
         *all -= avg * AX_SAMPLES_PER_FRAME_RMT;
         *depop = -avg;
-    }
-    else {
+    } else {
         *all = 0;
         *value = 0;
         *depop = 0;
@@ -68,9 +66,9 @@ void __AXDepopFadeRmt(s32* all, s32* value, s16* depop) {
 }
 
 void __AXPrintStudio() {
-    __AXDepopFadeMain(&__AXSpbAL,  (void*)&__AXStudio.dpopLHi,  &__AXStudio.dpopLDelta);
-    __AXDepopFadeMain(&__AXSpbAR,  (void*)&__AXStudio.dpopRHi,  &__AXStudio.dpopRDelta);
-    __AXDepopFadeMain(&__AXSpbAS,  (void*)&__AXStudio.dpopSHi,  &__AXStudio.dpopSDelta);
+    __AXDepopFadeMain(&__AXSpbAL, (void*)&__AXStudio.dpopLHi, &__AXStudio.dpopLDelta);
+    __AXDepopFadeMain(&__AXSpbAR, (void*)&__AXStudio.dpopRHi, &__AXStudio.dpopRDelta);
+    __AXDepopFadeMain(&__AXSpbAS, (void*)&__AXStudio.dpopSHi, &__AXStudio.dpopSDelta);
 
     __AXDepopFadeMain(&__AXSpbAAL, (void*)&__AXStudio.dpopALHi, &__AXStudio.dpopALDelta);
     __AXDepopFadeMain(&__AXSpbAAR, (void*)&__AXStudio.dpopARHi, &__AXStudio.dpopARDelta);
@@ -83,7 +81,7 @@ void __AXPrintStudio() {
     __AXDepopFadeMain(&__AXSpbACL, (void*)&__AXStudio.dpopCLHi, &__AXStudio.dpopCLDelta);
     __AXDepopFadeMain(&__AXSpbACR, (void*)&__AXStudio.dpopCRHi, &__AXStudio.dpopCRDelta);
     __AXDepopFadeMain(&__AXSpbACS, (void*)&__AXStudio.dpopCSHi, &__AXStudio.dpopCSDelta);
-    
+
     __AXDepopFadeRmt(&__AXSpbMain0, (void*)&__AXStudio.dpopMain0Hi, &__AXStudio.dpopMain0Delta);
     __AXDepopFadeRmt(&__AXSpbMain1, (void*)&__AXStudio.dpopMain1Hi, &__AXStudio.dpopMain1Delta);
     __AXDepopFadeRmt(&__AXSpbMain2, (void*)&__AXStudio.dpopMain2Hi, &__AXStudio.dpopMain2Delta);
@@ -98,13 +96,13 @@ void __AXPrintStudio() {
 }
 
 void __AXSPBInit() {
-    __AXSpbAux0  = __AXSpbAux1  = __AXSpbAux2  = __AXSpbAux3 = 0;
+    __AXSpbAux0 = __AXSpbAux1 = __AXSpbAux2 = __AXSpbAux3 = 0;
     __AXSpbMain0 = __AXSpbMain1 = __AXSpbMain2 = __AXSpbMain3 = 0;
-    
-    __AXSpbACL   = __AXSpbACR   = __AXSpbACS   = 0;
-    __AXSpbABL   = __AXSpbABR   = __AXSpbABS   = 0;
-    __AXSpbAAL   = __AXSpbAAR   = __AXSpbAAS   = 0;
-    __AXSpbAL    = __AXSpbAR    = __AXSpbAS    = 0;
+
+    __AXSpbACL = __AXSpbACR = __AXSpbACS = 0;
+    __AXSpbABL = __AXSpbABR = __AXSpbABS = 0;
+    __AXSpbAAL = __AXSpbAAR = __AXSpbAAS = 0;
+    __AXSpbAL = __AXSpbAR = __AXSpbAS = 0;
 }
 
 void __AXDepopVoice(AXPB* pb) {

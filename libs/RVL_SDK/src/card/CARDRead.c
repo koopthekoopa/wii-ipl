@@ -1,10 +1,10 @@
-#include <revolution/card.h>
 #include <private/card.h>
+#include <revolution/card.h>
 
 #include <string.h>
 
-#define TRUNC(n, a) (((u32)(n)) & ~((a)-1))
-#define OFFSET(addr, align) (((u32)(addr) & ((align)-1)))
+#define TRUNC(n, a) (((u32)(n)) & ~((a) - 1))
+#define OFFSET(addr, align) (((u32)(addr) & ((align) - 1)))
 
 static void ReadCallback(s32 chan, s32 result);
 
@@ -88,9 +88,8 @@ static void ReadCallback(s32 chan, s32 result) {
         goto error;
     }
 
-    result = __CARDRead(chan, card->sectorSize * (u32)fileInfo->iBlock,
-                        (fileInfo->length < card->sectorSize) ? fileInfo->length : card->sectorSize, card->buffer,
-                        ReadCallback);
+    result = __CARDRead(chan, card->sectorSize * (u32)fileInfo->iBlock, (fileInfo->length < card->sectorSize) ? fileInfo->length : card->sectorSize,
+                        card->buffer, ReadCallback);
     if (result < 0) {
         goto error;
     }
@@ -154,13 +153,12 @@ s32 CARDCancel(CARDFileInfo* fileInfo) {
     CARDControl* card;
 
     enabled = OSDisableInterrupts();
-    
+
     card = &__CARDBlock[fileInfo->chan];
     result = CARD_RESULT_READY;
     if (!card->attached) {
         result = CARD_RESULT_NOCARD;
-    }
-    else if (card->result == CARD_RESULT_BUSY && card->fileInfo == fileInfo) {
+    } else if (card->result == CARD_RESULT_BUSY && card->fileInfo == fileInfo) {
         fileInfo->length = -1;
         result = CARD_RESULT_CANCELED;
     }

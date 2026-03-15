@@ -1,5 +1,5 @@
-#include <nw4r/snd/SoundHeap.h>
 #include <nw4r/snd/DisposeCallbackManager.h>
+#include <nw4r/snd/SoundHeap.h>
 
 namespace nw4r {
     namespace snd {
@@ -33,5 +33,5 @@ namespace nw4r {
             detail::DisposeCallbackManager::Dispose(buffer, size, callbackArg);
             detail::DisposeCallbackManager::DisposeWave(buffer, size, callbackArg);
         }
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r

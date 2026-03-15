@@ -19,10 +19,11 @@ namespace nw4r {
                 OSu16tof32(&x, &rval);
                 return rval;
             }
-        }
+        }  // namespace
 
 #ifdef TARGET_RVL
 
+        // clang-format off
         inline f32 FSelect(register f32 cond, register f32 ifPos, register f32 ifNeg) {
             register f32 ret;
             #ifdef __MWERKS__
@@ -39,14 +40,17 @@ namespace nw4r {
             return ret;
         }
 
+        // clang-format on
 #else
-        inline f32 FAbs(f32 x) {}
-        inline f32 FSelect(f32 cond, f32 ifPos, f32 ifNeg) {}
-#endif // TARGET_RVL
-        
+        inline f32 FAbs(f32 x) {
+        }
+        inline f32 FSelect(f32 cond, f32 ifPos, f32 ifNeg) {
+        }
+#endif  // TARGET_RVL
+
         f32 FrSqrt(f32 x);
         u32 CntBit1(u32 x);
-    }
-}
+    }  // namespace math
+}  // namespace nw4r
 
-#endif // NW4R_MATH_ARITHMETIC_H
+#endif  // NW4R_MATH_ARITHMETIC_H

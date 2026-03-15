@@ -1,5 +1,5 @@
-#include <revolution/card.h>
 #include <private/card.h>
+#include <revolution/card.h>
 
 #include <string.h>
 
@@ -12,8 +12,7 @@ BOOL __CARDCompareFileName(CARDDir* ent, const char* fileName) {
     while (--n >= 0) {
         if ((c1 = *entName++) != (c2 = *fileName++)) {
             return FALSE;
-        }
-        else if (c2 == '\0') {
+        } else if (c2 == '\0') {
             return TRUE;
         }
     }
@@ -30,9 +29,8 @@ s32 __CARDAccess(CARDControl* card, CARDDir* ent) {
     if (ent->gameName[0] == 0xFF)
         return CARD_RESULT_NOFILE;
 
-    if (diskID == &__CARDDiskNone
-    || (memcmp(ent->gameName, diskID->gameName, sizeof(ent->gameName)) == 0
-    && memcmp(ent->company, diskID->company, sizeof(ent->company)) == 0)) {
+    if (diskID == &__CARDDiskNone ||
+        (memcmp(ent->gameName, diskID->gameName, sizeof(ent->gameName)) == 0 && memcmp(ent->company, diskID->company, sizeof(ent->company)) == 0)) {
         return CARD_RESULT_READY;
     }
 
@@ -48,11 +46,10 @@ s32 __CARDIsWritable(CARDControl* card, CARDDir* ent) {
     if (result == CARD_RESULT_NOPERM) {
         perm = ent->permission & __CARDPermMask;
         if (perm & 0x20 && (memcmp(ent->gameName, __CARDDiskNone.gameName, sizeof(ent->gameName)) == 0 &&
-            memcmp(ent->company, __CARDDiskNone.company, sizeof(ent->company)) == 0)) {
+                            memcmp(ent->company, __CARDDiskNone.company, sizeof(ent->company)) == 0)) {
             return CARD_RESULT_READY;
-        }
-        else if (perm & 0x40 && (memcmp(ent->gameName, __CARDDiskNone.gameName, sizeof(ent->gameName)) == 0 &&
-                memcmp(ent->company, diskID->company, sizeof(ent->company)) == 0)) {
+        } else if (perm & 0x40 && (memcmp(ent->gameName, __CARDDiskNone.gameName, sizeof(ent->gameName)) == 0 &&
+                                   memcmp(ent->company, diskID->company, sizeof(ent->company)) == 0)) {
             return CARD_RESULT_READY;
         }
     }
@@ -118,8 +115,7 @@ s32 CARDFastOpen(s32 chan, s32 fileNo, CARDFileInfo* fileInfo) {
     if (0 <= result) {
         if (!CARDIsValidBlockNo(card, ent->startBlock)) {
             result = CARD_RESULT_BROKEN;
-        }
-        else {
+        } else {
             fileInfo->chan = chan;
             fileInfo->fileNo = fileNo;
             fileInfo->offset = 0;
@@ -148,8 +144,7 @@ s32 CARDOpen(s32 chan, const char* fileName, CARDFileInfo* fileInfo) {
         ent = &dir[fileNo];
         if (!CARDIsValidBlockNo(card, ent->startBlock)) {
             result = CARD_RESULT_BROKEN;
-        }
-        else {
+        } else {
             fileInfo->chan = chan;
             fileInfo->fileNo = fileNo;
             fileInfo->offset = 0;

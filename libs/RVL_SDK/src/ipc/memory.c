@@ -1,32 +1,32 @@
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 #include <private/ipc.h>
 
 typedef struct IOSChunk IOSChunk;
 struct IOSChunk {
-    u32         status;     // 0x00
-    u32         size;       // 0x04
-    IOSChunk*   prevFree;   // 0x08
-    IOSChunk*   nextFree;   // 0x0C
+    u32 status;          // 0x00
+    u32 size;            // 0x04
+    IOSChunk* prevFree;  // 0x08
+    IOSChunk* nextFree;  // 0x0C
 };
 
 typedef struct IOSHeap {
-    void*       base;       // 0x00
-    u32         owner;      // 0x04
-    u32         size;       // 0x08
-    IOSChunk*   freeList;   // 0x0C
+    void* base;          // 0x00
+    u32 owner;           // 0x04
+    u32 size;            // 0x08
+    IOSChunk* freeList;  // 0x0C
 } IOSHeap;
 
-#define MAX_HEAPS   8
+#define MAX_HEAPS 8
 
 static IOSHeap __heaps[MAX_HEAPS];
 
-IOSHeapId iosCreateHeap(void *ptr, u32 size) {
-    IOSError    ret = IPC_RESULT_INVALID;
-    u32         mask;
-    s32         i;
-    IOSHeap*    h;
+IOSHeapId iosCreateHeap(void* ptr, u32 size) {
+    IOSError ret = IPC_RESULT_INVALID;
+    u32 mask;
+    s32 i;
+    IOSHeap* h;
 
     mask = OSDisableInterrupts();
 
@@ -62,7 +62,7 @@ finish:
 
 IOSError iosDestroyHeap(IOSHeapId id) {
     IOSError ret = IPC_RESULT_ACCESS;
-    IOSHeap *h;
+    IOSHeap* h;
 
     int enabled = OSDisableInterrupts();
 
@@ -76,7 +76,7 @@ IOSError iosDestroyHeap(IOSHeapId id) {
         ret = IPC_RESULT_ACCESS;
         goto finish;
     }
-    
+
     h->base = 0;
     h->size = 0;
     h->owner = 0;
@@ -90,7 +90,7 @@ finish:
     return ret;
 }
 
-static void __iosCoalesceChunk(IOSChunk *p) {
+static void __iosCoalesceChunk(IOSChunk* p) {
     if (p && ((u32)p->nextFree == ((u32)p + p->size + sizeof(IOSChunk)))) {
         IOSChunk* next = p->nextFree;
         p->nextFree = next->nextFree;
@@ -104,11 +104,11 @@ static void __iosCoalesceChunk(IOSChunk *p) {
 }
 
 static void* __iosAlloc(IOSHeapId id, u32 size, u32 alignment) {
-    u32         mask;
-    IOSChunk*   p;
-    IOSChunk*   best;
-    IOSHeap*    h;
-    void*       ret = NULL;
+    u32 mask;
+    IOSChunk* p;
+    IOSChunk* best;
+    IOSHeap* h;
+    void* ret = NULL;
 
     mask = OSDisableInterrupts();
 
@@ -119,7 +119,7 @@ static void* __iosAlloc(IOSHeapId id, u32 size, u32 alignment) {
     if (!alignment || (alignment & (alignment - 1))) {
         goto finish;
     }
-    
+
     if (alignment < DEFAULT_ALIGN) {
         alignment = DEFAULT_ALIGN;
     }
@@ -142,8 +142,7 @@ static void* __iosAlloc(IOSHeapId id, u32 size, u32 alignment) {
         if ((p->size == size) && !extra) {
             best = p;
             break;
-        }
-        else if ((p->size >= (size + extra)) && (!best || (p->size < best->size))) {
+        } else if ((p->size >= (size + extra)) && (!best || (p->size < best->size))) {
             best = p;
         }
 
@@ -157,7 +156,7 @@ static void* __iosAlloc(IOSHeapId id, u32 size, u32 alignment) {
         u32 extra = (alignment - (ptr & (alignment - 1))) & (alignment - 1);
 
         if (p->size > (size + extra + sizeof(IOSChunk))) {
-            IOSChunk *n = (IOSChunk *)((u8 *)p + size + extra + sizeof(IOSChunk));
+            IOSChunk* n = (IOSChunk*)((u8*)p + size + extra + sizeof(IOSChunk));
             n->status = IPC_HEAP_CHUNK_FREE;
             n->size = p->size - size - extra - sizeof(IOSChunk);
             n->nextFree = p->nextFree;
@@ -174,8 +173,7 @@ static void* __iosAlloc(IOSHeapId id, u32 size, u32 alignment) {
 
         if (p->prevFree) {
             p->prevFree->nextFree = p->nextFree;
-        }
-        else {
+        } else {
             h->freeList = p->nextFree;
         }
 
@@ -187,7 +185,7 @@ static void* __iosAlloc(IOSHeapId id, u32 size, u32 alignment) {
         ret = (u8*)p + extra + sizeof(IOSChunk);
 
         if (extra) {
-            IOSChunk* n = (IOSChunk*)ret-1;
+            IOSChunk* n = (IOSChunk*)ret - 1;
             n->status = IPC_HEAP_CHUNK_FORALIGN;
             n->prevFree = p;
         }
@@ -207,11 +205,11 @@ void* iosAllocAligned(IOSHeapId id, u32 size, u32 alignment) {
 }
 
 IOSError iosFree(IOSHeapId id, void* ptr) {
-    u32         mask;
-    IOSChunk*   p;
-    IOSHeap*    h;
-    IOSError    ret = IPC_RESULT_INVALID;
-    IOSChunk*   prev;
+    u32 mask;
+    IOSChunk* p;
+    IOSHeap* h;
+    IOSError ret = IPC_RESULT_INVALID;
+    IOSChunk* prev;
 
     mask = OSDisableInterrupts();
 
@@ -258,8 +256,7 @@ IOSError iosFree(IOSHeapId id, void* ptr) {
         if (p->nextFree) {
             p->nextFree->prevFree = p;
         }
-    }
-    else {
+    } else {
         p->nextFree = h->freeList;
         h->freeList = p;
         p->prevFree = NULL;

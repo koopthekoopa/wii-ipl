@@ -60,44 +60,39 @@ BOOL BS2IsValidDisc() {
         case SC_PRODUCT_AREA_TWN: {
             if (bi3.parentalControlFlags[SC_PARENTAL_ORG_CERO] & SC_PARENTAL_FLAG_ENABLED) {
                 return FALSE;
-            }
-            else {
+            } else {
                 return TRUE;
             }
         }
         case SC_PRODUCT_AREA_USA: {
             if (bi3.parentalControlFlags[SC_PARENTAL_ORG_ESRB] & SC_PARENTAL_FLAG_ENABLED) {
                 return FALSE;
-            }
-            else {
+            } else {
                 return TRUE;
             }
         }
         case SC_PRODUCT_AREA_EUR: {
-            if (bi3.parentalControlFlags[SC_PARENTAL_ORG_USK]           & SC_PARENTAL_FLAG_ENABLED
-             && bi3.parentalControlFlags[SC_PARENTAL_ORG_PEGI]          & SC_PARENTAL_FLAG_ENABLED
-             && bi3.parentalControlFlags[SC_PARENTAL_ORG_PEGI_FINLAND]  & SC_PARENTAL_FLAG_ENABLED
-             && bi3.parentalControlFlags[SC_PARENTAL_ORG_PEGI_PORTUGAL] & SC_PARENTAL_FLAG_ENABLED
-             && bi3.parentalControlFlags[SC_PARENTAL_ORG_BBFC]          & SC_PARENTAL_FLAG_ENABLED) {
+            if (bi3.parentalControlFlags[SC_PARENTAL_ORG_USK] & SC_PARENTAL_FLAG_ENABLED &&
+                bi3.parentalControlFlags[SC_PARENTAL_ORG_PEGI] & SC_PARENTAL_FLAG_ENABLED &&
+                bi3.parentalControlFlags[SC_PARENTAL_ORG_PEGI_FINLAND] & SC_PARENTAL_FLAG_ENABLED &&
+                bi3.parentalControlFlags[SC_PARENTAL_ORG_PEGI_PORTUGAL] & SC_PARENTAL_FLAG_ENABLED &&
+                bi3.parentalControlFlags[SC_PARENTAL_ORG_BBFC] & SC_PARENTAL_FLAG_ENABLED) {
                 return FALSE;
-            }
-            else {
+            } else {
                 return TRUE;
             }
         }
         case SC_PRODUCT_AREA_AUS: {
             if (bi3.parentalControlFlags[SC_PARENTAL_ORG_OFLC] & SC_PARENTAL_FLAG_ENABLED) {
                 return FALSE;
-            }
-            else {
+            } else {
                 return TRUE;
             }
         }
         case SC_PRODUCT_AREA_KOR: {
             if (bi3.parentalControlFlags[SC_PARENTAL_ORG_GRB] & SC_PARENTAL_FLAG_ENABLED) {
                 return FALSE;
-            }
-            else {
+            } else {
                 return TRUE;
             }
         }

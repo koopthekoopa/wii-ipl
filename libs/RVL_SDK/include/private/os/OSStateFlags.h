@@ -4,21 +4,22 @@
 #include <revolution/types.h>
 
 typedef struct OSStateFlags {
-    u32 checkSum;       // 0x00
+    u32 checkSum;  // 0x00
 
-    u8  lastAppType;    // 0x04
-    u8  shutdownType;   // 0x05
-    u8  discState;      // 0x06
+    u8 lastAppType;   // 0x04
+    u8 shutdownType;  // 0x05
+    u8 discState;     // 0x06
 
-    u8  menuMode;       // 0x07
+    u8 menuMode;  // 0x07
 
-    u8  padding_0x08[24];
+    u8 padding_0x08[24];
 } OSStateFlags;
 
-#define OS_STATE_FLAGS_NAND_PATH        "/title/00000001/00000002/data/state.dat"
+#define OS_STATE_FLAGS_NAND_PATH "/title/00000001/00000002/data/state.dat"
 
-#define OS_STATE_FLAGS_CHECKSUM_SIZE    (sizeof(OSStateFlags) - 4)
+#define OS_STATE_FLAGS_CHECKSUM_SIZE (sizeof(OSStateFlags) - 4)
 
+// clang-format off
 enum {
     OS_STATE_FLAGS_SHUTDOWN_NONE = 0,
     OS_STATE_FLAGS_SHUTDOWN_POWER_OFF,
@@ -41,9 +42,10 @@ enum {
     OS_STATE_FLAGS_DISC_CHANGED,
     OS_STATE_FLAGS_DISC_NONE
 };
+// clang-format on
 
-BOOL    __OSCreateStateFlags();
-BOOL    __OSWriteStateFlags(OSStateFlags* flags);
-BOOL    __OSReadStateFlags(OSStateFlags* flags);
+BOOL __OSCreateStateFlags();
+BOOL __OSWriteStateFlags(OSStateFlags* flags);
+BOOL __OSReadStateFlags(OSStateFlags* flags);
 
-#endif // PRIVATE_OS_STATE_FLAGS_H
+#endif  // PRIVATE_OS_STATE_FLAGS_H

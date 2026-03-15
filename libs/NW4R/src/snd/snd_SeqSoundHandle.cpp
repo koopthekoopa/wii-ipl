@@ -13,5 +13,5 @@ namespace nw4r {
                 mSound = NULL;
             }
         }
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r

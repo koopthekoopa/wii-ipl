@@ -36,7 +36,7 @@ namespace nw4r {
 
             BOOL success = AXFXDelayInit(&mAxfxParam);
 
-            AXFXDelayGetMemSize(&mAxfxParam); // Debug leftover
+            AXFXDelayGetMemSize(&mAxfxParam);  // Debug leftover
             mImpl.mCurrentFx = NULL;
             mImpl.mIsActive = true;
 
@@ -44,7 +44,7 @@ namespace nw4r {
         }
 
         void FxDelay::Shutdown() {
-             mImpl.mIsActive = false;
+            mImpl.mIsActive = false;
             mImpl.mCurrentFx = &mImpl;
 
             AXFXSetHooks(detail::AxfxImpl::Alloc, detail::AxfxImpl::Free);
@@ -84,5 +84,5 @@ namespace nw4r {
 
             AXFXDelayCallback(chans, &mAxfxParam);
         }
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r

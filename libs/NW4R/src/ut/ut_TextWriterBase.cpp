@@ -3,78 +3,94 @@
 
 namespace nw4r {
     namespace ut {
-        template<typename T> u32 TextWriterBase<T>::mFormatBufferSize = 0x100;
-        template<typename T> T* TextWriterBase<T>::mFormatBuffer;
-        template<typename T> TagProcessorBase<T> TextWriterBase<T>::mDefaultTagProcessor;
+        template <typename T>
+        u32 TextWriterBase<T>::mFormatBufferSize = 0x100;
+        template <typename T>
+        T* TextWriterBase<T>::mFormatBuffer;
+        template <typename T>
+        TagProcessorBase<T> TextWriterBase<T>::mDefaultTagProcessor;
 
-        template<typename T> TextWriterBase<T>::TextWriterBase() :
-        mCharSpace(0.0f),
-        mLineSpace(0.0f),
-        mTabWidth(4),
-        mDrawFlag(0),
-        mTagProcessor(&mDefaultTagProcessor) {}
+        template <typename T>
+        TextWriterBase<T>::TextWriterBase() : mCharSpace(0.0f), mLineSpace(0.0f), mTabWidth(4), mDrawFlag(0), mTagProcessor(&mDefaultTagProcessor) {
+        }
 
-        template<typename T> TextWriterBase<T>::~TextWriterBase() {}
+        template <typename T>
+        TextWriterBase<T>::~TextWriterBase() {
+        }
 
-        template<typename T> void TextWriterBase<T>::SetLineHeight(f32 lineHeight) {
+        template <typename T>
+        void TextWriterBase<T>::SetLineHeight(f32 lineHeight) {
             const Font* font = GetFont();
             int linefeed = font ? font->GetLineFeed() : 0;
 
             mLineSpace = lineHeight - linefeed * GetScaleV();
         }
 
-        template<typename T> f32 TextWriterBase<T>::GetLineHeight() const {
+        template <typename T>
+        f32 TextWriterBase<T>::GetLineHeight() const {
             const Font* font = GetFont();
             int linefeed = font ? font->GetLineFeed() : 0;
 
             return mLineSpace + linefeed * GetScaleV();
         }
 
-        template<typename T> void TextWriterBase<T>::SetLineSpace(f32 lineSpace) {
+        template <typename T>
+        void TextWriterBase<T>::SetLineSpace(f32 lineSpace) {
             mLineSpace = lineSpace;
         }
 
-        template<typename T> void TextWriterBase<T>::SetCharSpace(f32 charSpace) {
+        template <typename T>
+        void TextWriterBase<T>::SetCharSpace(f32 charSpace) {
             mCharSpace = charSpace;
         }
 
-        template<typename T> f32 TextWriterBase<T>::GetLineSpace() const {
+        template <typename T>
+        f32 TextWriterBase<T>::GetLineSpace() const {
             return mLineSpace;
         }
 
-        template<typename T> f32 TextWriterBase<T>::GetCharSpace() const {
+        template <typename T>
+        f32 TextWriterBase<T>::GetCharSpace() const {
             return mCharSpace;
         }
 
-        template<typename T> void TextWriterBase<T>::SetTabWidth(int tabWidth) {
+        template <typename T>
+        void TextWriterBase<T>::SetTabWidth(int tabWidth) {
             mTabWidth = tabWidth;
         }
 
-        template<typename T> int TextWriterBase<T>::GetTabWidth() const {
+        template <typename T>
+        int TextWriterBase<T>::GetTabWidth() const {
             return mTabWidth;
         }
 
-        template<typename T> void TextWriterBase<T>::SetDrawFlag(u32 flags) {
+        template <typename T>
+        void TextWriterBase<T>::SetDrawFlag(u32 flags) {
             mDrawFlag = flags;
         }
 
-        template<typename T> u32 TextWriterBase<T>::GetDrawFlag() const {
+        template <typename T>
+        u32 TextWriterBase<T>::GetDrawFlag() const {
             return mDrawFlag;
         }
 
-        template<typename T> void TextWriterBase<T>::SetTagProcessor(TagProcessorBase<T>* tagProcessor) {
+        template <typename T>
+        void TextWriterBase<T>::SetTagProcessor(TagProcessorBase<T>* tagProcessor) {
             mTagProcessor = tagProcessor;
         }
 
-        template<typename T> void TextWriterBase<T>::ResetTagProcessor() {
+        template <typename T>
+        void TextWriterBase<T>::ResetTagProcessor() {
             mTagProcessor = &mDefaultTagProcessor;
         }
 
-        template<typename T> TagProcessorBase<T>& TextWriterBase<T>::GetTagProcessor() const {
+        template <typename T>
+        TagProcessorBase<T>& TextWriterBase<T>::GetTagProcessor() const {
             return *mTagProcessor;
         }
 
-        template<typename T> f32 TextWriterBase<T>::CalcFormatStringWidth(const T* format, ...) const {
+        template <typename T>
+        f32 TextWriterBase<T>::CalcFormatStringWidth(const T* format, ...) const {
             Rect rect;
             va_list vargs;
 
@@ -85,7 +101,8 @@ namespace nw4r {
             return rect.GetWidth();
         }
 
-        template<typename T> f32 TextWriterBase<T>::CalcFormatStringHeight(const T* format, ...) const {
+        template <typename T>
+        f32 TextWriterBase<T>::CalcFormatStringHeight(const T* format, ...) const {
             Rect rect;
             va_list vargs;
 
@@ -96,7 +113,8 @@ namespace nw4r {
             return rect.GetHeight();
         }
 
-        template<typename T> void TextWriterBase<T>::CalcFormatStringRect(Rect* pRect, const T* format, ...) const {
+        template <typename T>
+        void TextWriterBase<T>::CalcFormatStringRect(Rect* pRect, const T* format, ...) const {
             va_list vargs;
 
             va_start(vargs, format);
@@ -104,9 +122,10 @@ namespace nw4r {
             va_end(vargs);
         }
 
-        template<typename T> f32 TextWriterBase<T>::AdjustCursor(f32* xOrigin, f32* yOrigin, const T* str, int length) {
-            f32 textWidth   = 0.0f;
-            f32 textHeight  = 0.0f;
+        template <typename T>
+        f32 TextWriterBase<T>::AdjustCursor(f32* xOrigin, f32* yOrigin, const T* str, int length) {
+            f32 textWidth = 0.0f;
+            f32 textHeight = 0.0f;
 
             if (!IsDrawFlagSet(DRAWFLAG_MASK_ALL, DRAWFLAG_MASK_ALIGN_V) && !IsDrawFlagSet(DRAWFLAG_MASK_ALL, 0)) {
                 Rect textRect;
@@ -118,15 +137,13 @@ namespace nw4r {
 
             if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_H, DRAWFLAG_ALIGN_H_CENTER)) {
                 *xOrigin -= textWidth / 2.0f;
-            }
-            else if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_H, DRAWFLAG_ALIGN_H_RIGHT)) {
+            } else if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_H, DRAWFLAG_ALIGN_H_RIGHT)) {
                 *xOrigin -= textWidth;
             }
 
             if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_V, DRAWFLAG_ALIGN_V_CENTER)) {
                 *yOrigin -= textHeight / 2.0f;
-            }
-            else if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_V, DRAWFLAG_ALIGN_V_TOP)) {
+            } else if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_V, DRAWFLAG_ALIGN_V_TOP)) {
                 *yOrigin -= textHeight;
             }
 
@@ -134,27 +151,25 @@ namespace nw4r {
                 f32 width = CalcLineWidth(str, length);
                 f32 offset = (textWidth - width) / 2.0f;
                 SetCursorX(*xOrigin + offset);
-            }
-            else if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_TEXT, DRAWFLAG_ALIGN_TEXT_RIGHT)) {
+            } else if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_TEXT, DRAWFLAG_ALIGN_TEXT_RIGHT)) {
                 f32 width = CalcLineWidth(str, length);
                 f32 offset = textWidth - width;
                 SetCursorX(*xOrigin + offset);
-            }
-            else {
+            } else {
                 SetCursorX(*xOrigin);
             }
 
             if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_V, DRAWFLAG_ALIGN_V_CENTER | DRAWFLAG_ALIGN_V_TOP)) {
                 SetCursorY(*yOrigin);
-            }
-            else {
+            } else {
                 SetCursorY(*yOrigin + GetFontAscent());
             }
 
             return textWidth;
         }
 
-        template<typename T> f32 TextWriterBase<T>::PrintImpl(const T* str, int length) {
+        template <typename T>
+        f32 TextWriterBase<T>::PrintImpl(const T* str, int length) {
             f32 xOrigin = GetCursorX();
             f32 yOrigin = GetCursorY();
 
@@ -192,35 +207,29 @@ namespace nw4r {
                             f32 offset = (textWidth - width) / 2.0f;
 
                             SetCursorX(context.xOrigin + offset);
-                        }
-                        else if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_TEXT, DRAWFLAG_ALIGN_TEXT_RIGHT)) {
+                        } else if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_TEXT, DRAWFLAG_ALIGN_TEXT_RIGHT)) {
                             int remain = length - (context.str - str);
                             f32 width = CalcLineWidth(context.str, remain);
                             f32 offset = textWidth - width;
 
                             SetCursorX(context.xOrigin + offset);
-                        }
-                        else {
+                        } else {
                             f32 width = GetCursorX() - context.xOrigin;
                             textWidth = Max(textWidth, width);
 
                             SetCursorX(context.xOrigin);
                         }
                         bCharSpace = false;
-                    }
-                    else if (operation == OPERATION_NO_CHAR_SPACE) {
+                    } else if (operation == OPERATION_NO_CHAR_SPACE) {
                         bCharSpace = false;
-                    }
-                    else if (operation == OPERATION_CHAR_SPACE) {
+                    } else if (operation == OPERATION_CHAR_SPACE) {
                         bCharSpace = true;
-                    }
-                    else if (operation == OPERATION_END_DRAW) {
+                    } else if (operation == OPERATION_END_DRAW) {
                         break;
                     }
 
                     reader.Set(context.str);
-                }
-                else {
+                } else {
                     f32 baseY = GetCursorY();
 
                     if (bCharSpace) {
@@ -243,15 +252,15 @@ namespace nw4r {
 
             if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_V, DRAWFLAG_ALIGN_V_CENTER) || IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_V, DRAWFLAG_ALIGN_V_TOP)) {
                 SetCursorY(orgCursorY);
-            }
-            else {
+            } else {
                 MoveCursorY(yCursorAdj);
             }
 
             return textWidth;
         }
 
-        template<typename T> void TextWriterBase<T>::CalcStringRectImpl(Rect* pRect, const T* str, int length) {
+        template <typename T>
+        void TextWriterBase<T>::CalcStringRectImpl(Rect* pRect, const T* str, int length) {
             int remain = length;
             const T* pos = str;
 
@@ -276,11 +285,13 @@ namespace nw4r {
             } while (remain > 0);
         }
 
-        template<typename T> f32 TextWriterBase<T>::PrintMutable(const T* str, int length) {
+        template <typename T>
+        f32 TextWriterBase<T>::PrintMutable(const T* str, int length) {
             return PrintImpl(str, length);
         }
 
-        template<typename T> int TextWriterBase<T>::CalcLineRectImpl(Rect* pRect, const T* str, int length) {
+        template <typename T>
+        int TextWriterBase<T>::CalcLineRectImpl(Rect* pRect, const T* str, int length) {
             PrintContext<T> context = {this, str, 0.0f, 0.0f, 0};
             const Font* font = GetFont();
 
@@ -319,18 +330,14 @@ namespace nw4r {
 
                     if (operation == OPERATION_END_DRAW) {
                         return length;
-                    }
-                    else if (operation == OPERATION_NO_CHAR_SPACE) {
+                    } else if (operation == OPERATION_NO_CHAR_SPACE) {
                         bCharSpace = false;
-                    }
-                    else if (operation == OPERATION_CHAR_SPACE) {
+                    } else if (operation == OPERATION_CHAR_SPACE) {
                         bCharSpace = true;
-                    }
-                    else if (operation == OPERATION_NEXT_LINE) {
+                    } else if (operation == OPERATION_NEXT_LINE) {
                         break;
                     }
-                }
-                else {
+                } else {
                     if (bCharSpace) {
                         x += GetCharSpace();
                     }
@@ -339,8 +346,7 @@ namespace nw4r {
 
                     if (IsWidthFixed()) {
                         x += GetFixedWidth();
-                    }
-                    else {
+                    } else {
                         x += GetFont()->GetCharWidth(code) * GetScaleH();
                     }
 
@@ -352,7 +358,8 @@ namespace nw4r {
             return static_cast<const T*>(reader.GetCurrentPos()) - str;
         }
 
-        template<typename T> f32 TextWriterBase<T>::CalcLineWidth(const T* str, int length) {
+        template <typename T>
+        f32 TextWriterBase<T>::CalcLineWidth(const T* str, int length) {
             Rect rect;
             TextWriterBase<T> myCopy(*this);
 
@@ -361,15 +368,18 @@ namespace nw4r {
             return rect.GetWidth();
         }
 
-        template<typename T> T* TextWriterBase<T>::GetBuffer() {
+        template <typename T>
+        T* TextWriterBase<T>::GetBuffer() {
             return mFormatBuffer;
         }
 
-        template<typename T> u32 TextWriterBase<T>::GetBufferSize() {
+        template <typename T>
+        u32 TextWriterBase<T>::GetBufferSize() {
             return mFormatBufferSize;
         }
 
-        template<typename T> T* TextWriterBase<T>::SetBuffer(u32 size) {
+        template <typename T>
+        T* TextWriterBase<T>::SetBuffer(u32 size) {
             T* oldBuffer = mFormatBuffer;
 
             mFormatBuffer = NULL;
@@ -378,7 +388,8 @@ namespace nw4r {
             return oldBuffer;
         }
 
-        template<typename T> T* TextWriterBase<T>::SetBuffer(T* buffer, u32 size) {
+        template <typename T>
+        T* TextWriterBase<T>::SetBuffer(T* buffer, u32 size) {
             T* oldBuffer = mFormatBuffer;
 
             mFormatBuffer = buffer;
@@ -387,11 +398,13 @@ namespace nw4r {
             return oldBuffer;
         }
 
-        template<typename T> f32 TextWriterBase<T>::Print(const T* str) {
+        template <typename T>
+        f32 TextWriterBase<T>::Print(const T* str) {
             return Print(str, StrLen(str));
         }
 
-        template<typename T> f32 TextWriterBase<T>::Print(const T* str, int length) {
+        template <typename T>
+        f32 TextWriterBase<T>::Print(const T* str, int length) {
             TextWriterBase<T> myCopy(*this);
 
             f32 width = myCopy.PrintImpl(str, length);
@@ -400,7 +413,8 @@ namespace nw4r {
             return width;
         }
 
-        template<typename T> f32 TextWriterBase<T>::VPrintf(const T* format, va_list args) {
+        template <typename T>
+        f32 TextWriterBase<T>::VPrintf(const T* format, va_list args) {
             T* buffer = mFormatBuffer ? mFormatBuffer : static_cast<T*>(__alloca(mFormatBufferSize));
 
             int length = VSNPrintf(buffer, mFormatBufferSize, format, args);
@@ -408,7 +422,8 @@ namespace nw4r {
             return width;
         }
 
-        template<typename T> f32 TextWriterBase<T>::Printf(const T* format, ...) {
+        template <typename T>
+        f32 TextWriterBase<T>::Printf(const T* format, ...) {
             va_list vargs;
 
             va_start(vargs, format);
@@ -418,39 +433,46 @@ namespace nw4r {
             return width;
         }
 
-        template<typename T> void TextWriterBase<T>::CalcStringRect(Rect* pRect, const T* str) const {
+        template <typename T>
+        void TextWriterBase<T>::CalcStringRect(Rect* pRect, const T* str) const {
             CalcStringRect(pRect, str, StrLen(str));
         }
 
-        template<typename T> void TextWriterBase<T>::CalcStringRect(Rect* pRect, const T* str, int length) const {
+        template <typename T>
+        void TextWriterBase<T>::CalcStringRect(Rect* pRect, const T* str, int length) const {
             TextWriterBase<T> myCopy(*this);
 
             myCopy.CalcStringRectImpl(pRect, str, length);
         }
 
-        template<typename T> f32 TextWriterBase<T>::CalcStringHeight(const T* str) const {
+        template <typename T>
+        f32 TextWriterBase<T>::CalcStringHeight(const T* str) const {
             return CalcStringHeight(str, StrLen(str));
         }
 
-        template<typename T> f32 TextWriterBase<T>::CalcStringHeight(const T* str, int length) const {
+        template <typename T>
+        f32 TextWriterBase<T>::CalcStringHeight(const T* str, int length) const {
             Rect rect;
 
             CalcStringRect(&rect, str, length);
             return rect.GetHeight();
         }
 
-        template<typename T> f32 TextWriterBase<T>::CalcStringWidth(const T* str) const {
+        template <typename T>
+        f32 TextWriterBase<T>::CalcStringWidth(const T* str) const {
             return CalcStringWidth(str, StrLen(str));
         }
 
-        template<typename T> f32 TextWriterBase<T>::CalcStringWidth(const T* str, int length) const {
+        template <typename T>
+        f32 TextWriterBase<T>::CalcStringWidth(const T* str, int length) const {
             Rect rect;
 
             CalcStringRect(&rect, str, length);
             return rect.GetWidth();
         }
 
-        template<typename T> void TextWriterBase<T>::CalcVStringRect(Rect* pRect, const T* format, va_list args) const {
+        template <typename T>
+        void TextWriterBase<T>::CalcVStringRect(Rect* pRect, const T* format, va_list args) const {
             T* buffer = mFormatBuffer ? mFormatBuffer : static_cast<T*>(__alloca(mFormatBufferSize));
 
             int length = VSNPrintf(buffer, mFormatBufferSize, format, args);
@@ -459,5 +481,5 @@ namespace nw4r {
 
         template class TextWriterBase<char>;
         template class TextWriterBase<wchar_t>;
-    }
-}
+    }  // namespace ut
+}  // namespace nw4r

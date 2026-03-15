@@ -4,71 +4,69 @@
 #include <revolution/types.h>
 
 namespace ipl {
-    enum {
-        ANIM_TYPE_FORWARD = 0,
-        ANIM_TYPE_BACKWARD,
-        ANIM_TYPE_LOOP,
-        ANIM_TYPE_ALTERNATE
-    };
+    enum { ANIM_TYPE_FORWARD = 0, ANIM_TYPE_BACKWARD, ANIM_TYPE_LOOP, ANIM_TYPE_ALTERNATE };
 
     namespace utility {
         class FrameController {
-            protected:
-                enum {
-                    ANIM_STATE_STOP = 0,
-                    ANIM_STATE_PLAY,
-                    ANIM_STATE_STOP_REQ,
-                };
+        protected:
+            enum {
+                ANIM_STATE_STOP = 0,
+                ANIM_STATE_PLAY,
+                ANIM_STATE_STOP_REQ,
+            };
 
-            public: 
-                FrameController()           {}
-                virtual ~FrameController()  {}
-                
-                void            init(int type, f32 maxFrame, f32 minFrame, f32 speed = 1.0f);
-                void            initFrame();
+        public:
+            FrameController() {}
+            virtual ~FrameController() {}
 
-                virtual void    calc();
-                
-                void            setMaxFrame(f32 value)      { mMaxFrame = value; }
-                f32             getMaxFrame() const         { return mMaxFrame; }
-                f32             getLastFrame() const        { return mMaxFrame - 1.0f; }
-                
-                void            setMinFrame(f32 value)      { mMinFrame = value; }
-                void            setMinFrame(u32 value)      { mMinFrame = value; }
-                f32             getMinFrame() const         { return mMinFrame; }
+            void init(int type, f32 maxFrame, f32 minFrame, f32 speed = 1.0f);
+            void initFrame();
 
-                f32             getLength() const           { return mMaxFrame - mMinFrame; }
-                
-                void            setCurrentFrame(f32 value)  { mFrame = value; }
-                f32             getCurrentFrame() const     { return mFrame; }
+            virtual void calc();
 
-                void            setSpeed(f32 value)         { mSpeed = value; }
-                f32             getSpeed() const            { return mSpeed; }
+            void setMaxFrame(f32 value) { mMaxFrame = value; }
+            f32 getMaxFrame() const { return mMaxFrame; }
+            f32 getLastFrame() const { return mMaxFrame - 1.0f; }
 
-                void            setAnmType(int value)       { mAnmType = value; }
-                int             getAnmType() const          { return mAnmType; }
+            void setMinFrame(f32 value) { mMinFrame = value; }
+            void setMinFrame(u32 value) { mMinFrame = value; }
+            f32 getMinFrame() const { return mMinFrame; }
 
-                void            play()                      { initFrame(); restart(); }
-                void            restart()                   { mState = ANIM_STATE_PLAY; }
-                void            stop()                      { mState = ANIM_STATE_STOP; }
+            f32 getLength() const { return mMaxFrame - mMinFrame; }
 
-                bool            isPlaying() const           { return mState == ANIM_STATE_PLAY; }
+            void setCurrentFrame(f32 value) { mFrame = value; }
+            f32 getCurrentFrame() const { return mFrame; }
 
-            protected:
-                f32     mMaxFrame;      // 0x04
-                f32     mMinFrame;      // 0x08
-                f32     mFrame;         // 0x0C
-                
-                f32     mSpeed;         // 0x10
+            void setSpeed(f32 value) { mSpeed = value; }
+            f32 getSpeed() const { return mSpeed; }
 
-                int     mState;         // 0x14
-                
-                int     mAnmType;       // 0x18
+            void setAnmType(int value) { mAnmType = value; }
+            int getAnmType() const { return mAnmType; }
 
-            private:
-                bool    mbAlternateBack;   // 0x1C
+            void play() {
+                initFrame();
+                restart();
+            }
+            void restart() { mState = ANIM_STATE_PLAY; }
+            void stop() { mState = ANIM_STATE_STOP; }
+
+            bool isPlaying() const { return mState == ANIM_STATE_PLAY; }
+
+        protected:
+            f32 mMaxFrame;  // 0x04
+            f32 mMinFrame;  // 0x08
+            f32 mFrame;     // 0x0C
+
+            f32 mSpeed;  // 0x10
+
+            int mState;  // 0x14
+
+            int mAnmType;  // 0x18
+
+        private:
+            bool mbAlternateBack;  // 0x1C
         };
-    }
-}
+    }  // namespace utility
+}  // namespace ipl
 
-#endif // IPL_FRAME_CONTROLLER_H
+#endif  // IPL_FRAME_CONTROLLER_H

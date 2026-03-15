@@ -6,7 +6,7 @@ namespace ipl {
     namespace cs {
         namespace iplimage {
             void* allocator(CHANSVm* vm, u32 size) {
-                u8* buffer = new(System::getCSManager()->getHeap(), 32) u8[size];
+                u8* buffer = new (System::getCSManager()->getHeap(), 32) u8[size];
                 return buffer;
             }
 
@@ -14,6 +14,6 @@ namespace ipl {
                 CHANSVmImageRegisterAllocator(allocator, NULL);
                 return TRUE;
             }
-        }
-    }
-}
+        }  // namespace iplimage
+    }  // namespace cs
+}  // namespace ipl

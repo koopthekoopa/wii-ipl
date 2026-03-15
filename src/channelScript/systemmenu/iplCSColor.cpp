@@ -4,17 +4,18 @@
 
 namespace ipl {
     namespace cs {
-        
+
         /*** GX COLOR 8 BIT ***/
 
         namespace color {
-            #define COLOR_PROPERTY_COUNT  4
+#define COLOR_PROPERTY_COUNT 4
+
             extern const CHANSVmPropertyList cPropertyList[COLOR_PROPERTY_COUNT];
 
             typedef union CS_Color {
-                u32     val32;
+                u32 val32;
                 GXColor gxColor;
-                u8      arr[4];
+                u8 arr[4];
             } CS_Color;
 
             typedef struct _CS_Struct {
@@ -78,7 +79,8 @@ namespace ipl {
                 return result;
             }
 
-            template<int I> CHANSVmDefineMethod(set) {
+            template <int I>
+            CHANSVmDefineMethod(set) {
                 BOOL result = FALSE;
                 CHANSVmObjHdr* arg = CHANSVmGetArgInteger(VmInst, 0);
                 if (util::is_valid_datap(VmParentObj) && arg != NULL) {
@@ -93,7 +95,8 @@ namespace ipl {
                 return result;
             }
 
-            template<int I> CHANSVmDefineMethod(get) {
+            template <int I>
+            CHANSVmDefineMethod(get) {
                 BOOL result = FALSE;
                 if (util::is_valid_datap(VmParentObj)) {
                     CS_Struct* data = (CS_Struct*)*VmParentObj->value.ptr_v;
@@ -106,17 +109,17 @@ namespace ipl {
             }
 
             const CHANSVmPropertyList cPropertyList[COLOR_PROPERTY_COUNT] = {
-                { "r",  get<0>, set<0> },
-                { "g",  get<1>, set<1> },
-                { "b",  get<2>, set<2> },
-                { "a",  get<3>, set<3> },
+                {"r", get<0>, set<0>},
+                {"g", get<1>, set<1>},
+                {"b", get<2>, set<2>},
+                {"a", get<3>, set<3>},
             };
-        }
+        }  // namespace color
 
         /*** GX COLOR 16 BIT ***/
 
         namespace color_s10 {
-            #define COLORS10_PROPERTY_COUNT  4
+#define COLORS10_PROPERTY_COUNT 4
             extern const CHANSVmPropertyList cPropertyList[COLORS10_PROPERTY_COUNT];
 
             CHANSVmDefineMethod(ctor) {
@@ -165,7 +168,8 @@ namespace ipl {
                 return result;
             }
 
-            template<int I> CHANSVmDefineMethod(set) {
+            template <int I>
+            CHANSVmDefineMethod(set) {
                 BOOL result = FALSE;
                 CHANSVmObjHdr* arg = CHANSVmGetArgInteger(VmInst, 0);
                 if (util::is_valid_datap(VmParentObj) && arg != NULL) {
@@ -178,7 +182,8 @@ namespace ipl {
                 return result;
             }
 
-            template<int I> CHANSVmDefineMethod(get) {
+            template <int I>
+            CHANSVmDefineMethod(get) {
                 BOOL result = FALSE;
                 if (util::is_valid_datap(VmParentObj)) {
                     s16* data = (s16*)*VmParentObj->value.ptr_v;
@@ -190,11 +195,11 @@ namespace ipl {
             }
 
             const CHANSVmPropertyList cPropertyList[COLORS10_PROPERTY_COUNT] = {
-                { "r",  get<0>, set<0> },
-                { "g",  get<1>, set<1> },
-                { "b",  get<2>, set<2> },
-                { "a",  get<3>, set<3> },
+                {"r", get<0>, set<0>},
+                {"g", get<1>, set<1>},
+                {"b", get<2>, set<2>},
+                {"a", get<3>, set<3>},
             };
-        }
-    }
-}
+        }  // namespace color_s10
+    }  // namespace cs
+}  // namespace ipl

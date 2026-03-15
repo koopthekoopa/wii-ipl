@@ -14,10 +14,10 @@ enum {
 };
 
 typedef struct PF_STR {
-    const s8*   p_head;     // 0x00
-    const s8*   p_tail;     // 0x04
+    const s8* p_head;  // 0x00
+    const s8* p_tail;  // 0x04
 
-    u32         code_mode;  // 0x08
+    u32 code_mode;  // 0x08
 } PF_STR;
 
-#endif // PRIVATE_PF_STR_H
+#endif  // PRIVATE_PF_STR_H

@@ -2,8 +2,8 @@
 
 #include "iplMath.h"
 
-#include "system/iplController.h"
 #include "iplSystem.h"
+#include "system/iplController.h"
 
 namespace ipl {
     namespace gui {
@@ -20,35 +20,25 @@ namespace ipl {
             if (System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT) {
                 if (con && (!mbDisableCon || !mbDoneUpdateWithCon)) {
                     // Get Projection Area
-                    nw4r::ut::Rect  projRect(0.0f, 0.0f, 0.0f, 0.0f);
+                    nw4r::ut::Rect projRect(0.0f, 0.0f, 0.0f, 0.0f);
                     System::getProjectionRect(&projRect);
 
                     // Get Cursor Position
                     ipl::math::VEC2 conProjPos = con->getDpdProjectionPos();
-                    if ((projRect.left > conProjPos.x || conProjPos.x > projRect.right)
-                    || (projRect.top > conProjPos.y && conProjPos.y > projRect.bottom)) {
+                    if ((projRect.left > conProjPos.x || conProjPos.x > projRect.right) ||
+                        (projRect.top > conProjPos.y && conProjPos.y > projRect.bottom)) {
                         conProjPos.y = IPL_MATH_NULL_FLOAT;
                         conProjPos.x = IPL_MATH_NULL_FLOAT;
                     }
 
                     // Update the base manager with controller input
-                    ::gui::Manager::update(chan,
-                                        conProjPos.x, -conProjPos.y, 
-                                        con->getTrigFlag() | con->getClassicTrigFlag(),
-                                        con->getHoldFlag() | con->getClassicHoldFlag(),
-                                        con->getReleaseFlag() | con->getClassicReleaseFlag(),
-                                        con);
-                    
+                    ::gui::Manager::update(chan, conProjPos.x, -conProjPos.y, con->getTrigFlag() | con->getClassicTrigFlag(),
+                                           con->getHoldFlag() | con->getClassicHoldFlag(), con->getReleaseFlag() | con->getClassicReleaseFlag(), con);
+
                     mbDoneUpdateWithCon = true;
-                }
-                else {
+                } else {
                     // Update the base manager without controller input
-                    ::gui::Manager::update(chan,
-                                        IPL_MATH_NULL_FLOAT, IPL_MATH_NULL_FLOAT,
-                                        0,
-                                        0,
-                                        0,
-                                        NULL);
+                    ::gui::Manager::update(chan, IPL_MATH_NULL_FLOAT, IPL_MATH_NULL_FLOAT, 0, 0, 0, NULL);
                 }
             }
         }
@@ -64,5 +54,5 @@ namespace ipl {
                 component->init();
             }
         }
-    }
-}
+    }  // namespace gui
+}  // namespace ipl

@@ -16,17 +16,15 @@ namespace ipl {
             newSceneID = 0;
         }
 
-        Manager::Manager(EGG::Heap* heap) :
-        mpRootScene(NULL),
-        mCommands(),
-        mpReservedScene(NULL),
-        mReservedCommand(),
-        mbCreatedReserved(false),
-        mbDestroySyncTask(false) {
+        Manager::Manager(EGG::Heap* heap)
+            : mpRootScene(NULL), mCommands(), mpReservedScene(NULL), mReservedCommand(), mbCreatedReserved(false), mbDestroySyncTask(false) {
             // Setup the heaps!!
-            mpBigSceneHeap = EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_BIG_SIZE,    3, 4), SCENE_BIG_SIZE,    heap, 4, MEM_HEAP_OPT_DEBUG_FILL);
-            mpMdmSceneHeap = EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_MEDIUM_SIZE, 4, 4), SCENE_MEDIUM_SIZE, heap, 4, MEM_HEAP_OPT_DEBUG_FILL);
-            mpSmlSceneHeap = EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_SMALL_SIZE,  6, 4), SCENE_SMALL_SIZE,  heap, 4, MEM_HEAP_OPT_DEBUG_FILL);
+            mpBigSceneHeap =
+                EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_BIG_SIZE, 3, 4), SCENE_BIG_SIZE, heap, 4, MEM_HEAP_OPT_DEBUG_FILL);
+            mpMdmSceneHeap =
+                EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_MEDIUM_SIZE, 4, 4), SCENE_MEDIUM_SIZE, heap, 4, MEM_HEAP_OPT_DEBUG_FILL);
+            mpSmlSceneHeap =
+                EGG::UnitHeap::create(EGG::UnitHeap::calcHeapSize(SCENE_SMALL_SIZE, 6, 4), SCENE_SMALL_SIZE, heap, 4, MEM_HEAP_OPT_DEBUG_FILL);
         }
 
         void Manager::init() {
@@ -45,19 +43,18 @@ namespace ipl {
 
             System::setCurrentHeap(mpRootScene->mpHeap);
             mpRootScene->do_create();
-            
+
             System::getMem1Root()->becomeCurrentHeap();
         }
 
         void Manager::calc() {
             calc(mpRootScene);
-            
+
             if (mpReservedScene) {
                 if (mbCreatedReserved) {
                     attachReservedScene();
                 }
-            }
-            else {
+            } else {
                 if (mCommands.get_current_index() != 0) {
                     const Command& popped = mCommands.get_popped_item();
                     switch (popped.type) {
@@ -117,8 +114,7 @@ namespace ipl {
         BOOL Manager::isResetAcceptable() {
             if (!mpRootScene) {
                 return TRUE;
-            }
-            else {
+            } else {
                 for (SceneObj::iterator it = SceneObj::iterator(mpRootScene); it.getPtr() != NULL; ++it) {
                     if (it->isResetAcceptable() == FALSE) {
                         return FALSE;
@@ -139,8 +135,7 @@ namespace ipl {
         BOOL Manager::isResetProcessDone() {
             if (!mpRootScene) {
                 return TRUE;
-            }
-            else {
+            } else {
                 for (SceneObj::iterator it = SceneObj::iterator(mpRootScene); it.getPtr() != NULL; ++it) {
                     if (it->isResetProcessDone() == FALSE) {
                         return FALSE;
@@ -157,8 +152,7 @@ namespace ipl {
                 if (stack18->getPrev()) {
                     stack18.setPtr(stack18->getPrev());
                     stack18.reverse();
-                }
-                else {
+                } else {
                     stack18.setPtr(stack18->getParent());
                 }
                 if ((stack10->mScnState & SceneObj::SCN_STATE_DESTROY_REQ) != 0) {
@@ -176,15 +170,15 @@ namespace ipl {
             mReservedCommand = command;
             mbCreatedReserved = false;
             mpReservedScene->do_prepare();
-            
+
             System::getMem1Root()->becomeCurrentHeap();
         }
 
         SceneObj* Manager::createScene(int sceneId, int prevSceneId, void* args) {
-            EGG::Heap*  heap = NULL;
-            int         size = Creator::size(sceneId);
+            EGG::Heap* heap = NULL;
+            int size = Creator::size(sceneId);
 
-            SceneObj*   scene = NULL;
+            SceneObj* scene = NULL;
 
             switch (size) {
                 case SCENE_BIG_SIZE: {
@@ -239,8 +233,7 @@ namespace ipl {
 
                 if (mReservedCommand.child) {
                     scene->insert(mpReservedScene, mReservedCommand.child);
-                }
-                else {
+                } else {
                     scene->attach(mpReservedScene);
                 }
 
@@ -261,7 +254,7 @@ namespace ipl {
 
         BOOL Manager::isReady(int sceneId) {
             BOOL result = FALSE;
-            int  gotID = 0;
+            int gotID = 0;
             if (System::getNandManager()->receiveToken(&gotID) && sceneId == gotID) {
                 result = TRUE;
             }
@@ -284,5 +277,5 @@ namespace ipl {
             }
             return found;
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

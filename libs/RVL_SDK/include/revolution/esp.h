@@ -14,14 +14,14 @@ ESError ESP_CloseLib();
 
 ESError ESP_LaunchTitle(ESTitleId titleId, ESTicketView* ticket);
 
-ESFd    ESP_OpenContentFile(ESContentId contentId);
+ESFd ESP_OpenContentFile(ESContentId contentId);
 ESError ESP_ReadContentFile(ESFd fd, void* buffer, u32 size);
 ESError ESP_SeekContentFile(ESFd fd, s32 offset, u32 whence);
 ESError ESP_CloseContentFile(ESFd fd);
 
 ESError ESP_ListTitleContentsOnCard(ESTitleId titleId, ESContentId* contentIds, u32* numContents);
 
-ESError ESP_GetTicketViews(ESTitleId titleId,  ESTicketView* ticketViewList, u32* numTicketViews);
+ESError ESP_GetTicketViews(ESTitleId titleId, ESTicketView* ticketViewList, u32* numTicketViews);
 
 ESError ESP_DiGetTicketView(void* ticket, ESTicketView* ticketView);
 
@@ -37,4 +37,4 @@ ESError ESP_GetConsumption(ESTicketId ticketId, ESLpEntry* limitEntries, u32* nu
 }
 #endif
 
-#endif // REVOLUTION_ESP_H
+#endif  // REVOLUTION_ESP_H

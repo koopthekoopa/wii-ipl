@@ -11,11 +11,11 @@ namespace nw4r {
         public:
             ResourceAccessor();
             virtual ~ResourceAccessor();
-            
-            virtual void*       GetResource(u32 resType, const char* name, u32* pSize) = 0;
-            virtual ut::Font*   GetFont(const char* name);
-        };
-    }
-}
 
-#endif // NW4R_LYT_RESOURCE_ACCESSOR_H
+            virtual void* GetResource(u32 resType, const char* name, u32* pSize) = 0;
+            virtual ut::Font* GetFont(const char* name);
+        };
+    }  // namespace lyt
+}  // namespace nw4r
+
+#endif  // NW4R_LYT_RESOURCE_ACCESSOR_H

@@ -9,9 +9,9 @@
 extern "C" {
 #endif
 
-NWC24Err    NWC24EnableLedNotification(BOOL enableLed);
+NWC24Err NWC24EnableLedNotification(BOOL enableLed);
 
-NWC24Err    NWC24DoDailyTasks(void* work);
+NWC24Err NWC24DoDailyTasks(void* work);
 
 #ifdef __cplusplus
 }

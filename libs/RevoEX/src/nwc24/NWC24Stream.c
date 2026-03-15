@@ -1,5 +1,5 @@
-#include <revolution/nwc24.h>
 #include <private/nwc24.h>
+#include <revolution/nwc24.h>
 
 #include <revolution/os.h>
 

@@ -1,5 +1,5 @@
-#include <revolution/ax.h>
 #include <private/ax.h>
+#include <revolution/ax.h>
 
 #include <revolution/os.h>
 #include <revolution/verdefs.h>

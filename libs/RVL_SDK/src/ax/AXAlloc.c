@@ -1,5 +1,5 @@
-#include <revolution/ax.h>
 #include <private/ax.h>
+#include <revolution/ax.h>
 
 #include <revolution/os.h>
 
@@ -21,7 +21,7 @@ void __AXServiceCallbackStack() {
             if (vpb->callback) {
                 vpb->callback(vpb);
             }
-    
+
             __AXRemoveFromStack(vpb);
             __AXPushFreeStack(vpb);
         }
@@ -110,8 +110,7 @@ void __AXPushStackHead(AXVPB* vpb, u32 priority) {
     if (vpb->next) {
         __AXStackHead[priority]->prev = vpb;
         __AXStackHead[priority] = vpb;
-    }
-    else {
+    } else {
         __AXStackTail[priority] = vpb;
         __AXStackHead[priority] = vpb;
     }
@@ -127,8 +126,7 @@ AXVPB* __AXPopStackFromBottom(u32 priority) {
         if (__AXStackHead[priority] == __AXStackTail[priority]) {
             vpb = __AXStackHead[priority];
             __AXStackHead[priority] = __AXStackTail[priority] = 0;
-        }
-        else if (__AXStackTail[priority]) {
+        } else if (__AXStackTail[priority]) {
             vpb = __AXStackTail[priority];
             __AXStackTail[priority] = vpb->prev;
             __AXStackTail[priority]->next = 0;

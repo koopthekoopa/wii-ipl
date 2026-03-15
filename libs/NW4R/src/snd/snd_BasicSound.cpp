@@ -1,8 +1,10 @@
-#include <nw4r/snd/BasicSound.h>
 #include <nw4r/snd/BasicPlayer.h>
+#include <nw4r/snd/BasicSound.h>
 
-#include <nw4r/snd/SoundPlayer.h>
+
 #include <nw4r/snd/ExternalSoundPlayer.h>
+#include <nw4r/snd/SoundPlayer.h>
+
 
 #include <climits>
 
@@ -11,17 +13,11 @@ namespace nw4r {
         namespace detail {
             NW4R_UT_GET_RUNTIME_TYPEINFO(BasicSound);
 
-            BasicSound::BasicSound() :
-            mHeap(NULL),
-            mGeneralHandle(NULL),
-            mTempGeneralHandle(NULL),
-            mSoundPlayer(NULL),
-            mExtSoundPlayer(NULL),
-            mAmbientParamUpdateCallback(NULL),
-            mAmbientArgUpdateCallback(NULL),
-            mAmbientArgAllocaterCallback(NULL),
-            mAmbientArg(NULL),
-            mId(INVALID_ID) {}
+            BasicSound::BasicSound()
+                : mHeap(NULL), mGeneralHandle(NULL), mTempGeneralHandle(NULL), mSoundPlayer(NULL), mExtSoundPlayer(NULL),
+                  mAmbientParamUpdateCallback(NULL), mAmbientArgUpdateCallback(NULL), mAmbientArgAllocaterCallback(NULL), mAmbientArg(NULL),
+                  mId(INVALID_ID) {
+            }
 
             void BasicSound::InitParam() {
                 mPauseFlag = false;
@@ -70,8 +66,7 @@ namespace nw4r {
             void BasicSound::Stop(int frames) {
                 BasicPlayer& rPlayer = GetBasicPlayer();
 
-                if (frames == 0 || !rPlayer.IsActive() || !rPlayer.IsStarted() ||
-                    rPlayer.IsPause()) {
+                if (frames == 0 || !rPlayer.IsActive() || !rPlayer.IsStarted() || rPlayer.IsPause()) {
                     Shutdown();
                     return;
                 }
@@ -98,8 +93,7 @@ namespace nw4r {
                     }
 
                     mPauseFadeVolume.SetTarget(0.0f, t);
-                }
-                else {
+                } else {
                     // what
                     if ((mPauseFlag != false) != flag) {
                         rPlayer.Pause(false);
@@ -173,8 +167,7 @@ namespace nw4r {
 
                 if (mPauseFadeFlag) {
                     mPauseFadeVolume.Update();
-                }
-                else {
+                } else {
                     mFadeVolume.Update();
                     mExtMoveVolume.Update();
                 }
@@ -401,10 +394,8 @@ namespace nw4r {
                 return mRemoteOutVolume[remote];
             }
 
-            void BasicSound::SetAmbientParamCallback(AmbientParamUpdateCallback* paramUpdateCallback,
-                                                    AmbientArgUpdateCallback* argUpdateCallback,
-                                                    AmbientArgAllocaterCallback* argAllocaterCallback,
-                                                    void* arg) {
+            void BasicSound::SetAmbientParamCallback(AmbientParamUpdateCallback* paramUpdateCallback, AmbientArgUpdateCallback* argUpdateCallback,
+                                                     AmbientArgAllocaterCallback* argAllocaterCallback, void* arg) {
                 mAmbientParamUpdateCallback = paramUpdateCallback;
                 mAmbientArgUpdateCallback = argUpdateCallback;
                 mAmbientArgAllocaterCallback = argAllocaterCallback;
@@ -431,6 +422,6 @@ namespace nw4r {
                 mId = id;
                 GetBasicPlayer().SetId(id);
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

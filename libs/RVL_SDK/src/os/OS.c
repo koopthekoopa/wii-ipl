@@ -1,13 +1,15 @@
 #include <revolution/base/PPCArch.h>
 
+#include <private/os.h>
 #include <revolution/os.h>
 #include <revolution/os/OSBootInfo.h>
-#include <private/os.h>
+
 
 #include <private/hollywood.h>
 
-#include <revolution/dvd.h>
 #include <private/dvd.h>
+#include <revolution/dvd.h>
+
 
 #include <revolution/sc.h>
 
@@ -28,38 +30,37 @@
 
 SDKDefineVersion(OS, "Apr 20 2010", "11:20:43");
 
-
 /* Linker generated */
-extern u8                       __ArenaHi[];
-extern u8                       __ArenaLo[];
+extern u8 __ArenaHi[];
+extern u8 __ArenaLo[];
 
-OSExecParams                    __OSRebootParams;
+OSExecParams __OSRebootParams;
 
-OSTime                          __OSStartTime;
+OSTime __OSStartTime;
 
-static OSBootInfo* volatile     BootInfo;
+static OSBootInfo* volatile BootInfo;
 
-static u32*                     BI2DebugFlag;
-static u32                      BI2DebugFlagHolder;
+static u32* BI2DebugFlag;
+static u32 BI2DebugFlagHolder;
 
-static char                     GameNameBuffer[4+1];
+static char GameNameBuffer[4 + 1];
 
-static f64                      ZeroF;
-static f32                      ZeroPS[2];
+static f64 ZeroF;
+static f32 ZeroPS[2];
 
-static DVDDriveInfo             DriveInfo;
-static DVDCommandBlock          DriveBlock;
+static DVDDriveInfo DriveInfo;
+static DVDCommandBlock DriveBlock;
 
-__OSExceptionHandler*           OSExceptionTable;
+__OSExceptionHandler* OSExceptionTable;
 
-extern u32                      __PADSpec;
+extern u32 __PADSpec;
 
-extern u32                      __DVDLongFileNameFlag;
+extern u32 __DVDLongFileNameFlag;
 
-static BOOL                     AreWeInitialized;
+static BOOL AreWeInitialized;
 
-BOOL                            __OSIsGcam;
-BOOL                            __OSInNandBoot, __OSInIPL;
+BOOL __OSIsGcam;
+BOOL __OSInNandBoot, __OSInIPL;
 
 void __OSEVStart();
 void __OSEVEnd();
@@ -78,10 +79,11 @@ void __OSDBJUMPEND();
 
 void OSDefaultExceptionHandler(u8 type, register OSContext* context);
 
-#define OSArenaSize()       ((u32)OSGetArenaHi() - (u32)OSGetArenaLo())
-#define OSMEM2ArenaSize()   ((u32)OSGetMEM2ArenaHi() - (u32)OSGetMEM2ArenaLo())
+#define OSArenaSize() ((u32)OSGetArenaHi() - (u32)OSGetArenaLo())
+#define OSMEM2ArenaSize() ((u32)OSGetMEM2ArenaHi() - (u32)OSGetMEM2ArenaLo())
 
 asm void __OSFPRInit() {
+    // clang-format off
 #ifdef __MWERKS__
     nofralloc
 
@@ -168,6 +170,7 @@ skipPairedSingleInit:
 
     blr
 #endif // __MWERKS__
+    // clang-format on
 }
 
 u32 __OSGetHollywoodRev() {
@@ -270,40 +273,35 @@ u32 OSGetConsoleType() {
         case HOLLYWOOD_ES_1_0: {
             if (gddrSize == 0x4000000) {
                 return OS_CONSOLE_RVL_PP_0;
-            }
-            else {
+            } else {
                 return OS_CONSOLE_NDEV_1_0;
             }
         }
         case HOLLYWOOD_ES_1_1:
             if (gddrSize == 0x4000000) {
                 return OS_CONSOLE_RVL_PP_1;
-            }
-            else {
+            } else {
                 return OS_CONSOLE_NDEV_1_1;
             }
 
         case HOLLYWOOD_ES_1_2:
             if (gddrSize == 0x4000000) {
                 return OS_CONSOLE_RVL_PP_2_1;
-            }
-            else {
+            } else {
                 return OS_CONSOLE_NDEV_1_2;
             }
 
         case HOLLYWOOD_ES_2_0:
             if (gddrSize == 0x4000000) {
                 return OS_CONSOLE_RVL_PP_2_2;
-            }
-            else {
+            } else {
                 return OS_CONSOLE_NDEV_2_0;
             }
 
         case HOLLYWOOD_ES_2_1:
             if (gddrSize == 0x4000000) {
                 return OS_CONSOLE_RETAIL;
-            }
-            else {
+            } else {
                 return OS_CONSOLE_NDEV_2_1;
             }
     }
@@ -311,8 +309,7 @@ u32 OSGetConsoleType() {
     if (hwRev > HOLLYWOOD_ES_2_1) {
         if (gddrSize == 0x4000000) {
             return OS_CONSOLE_RETAIL;
-        }
-        else {
+        } else {
             return OS_CONSOLE_NDEV_2_1;
         }
     }
@@ -320,7 +317,7 @@ u32 OSGetConsoleType() {
     return BootInfo->consoleType;
 }
 
-static void MemClear(void *base, u32 size) {
+static void MemClear(void* base, u32 size) {
     void* lastBase = (size > 0x40000) ? (void*)((u32)base + (size - 0x40000)) : base;
     DCZeroRange(base, size);
     DCFlushRange(lastBase, 0x40000);
@@ -329,19 +326,16 @@ static void MemClear(void *base, u32 size) {
 static void ClearArena() NO_INLINE {
     if (!((OSGetResetCode() >> 31) & 1)) {
         MemClear(OSGetArenaLo(), OSArenaSize());
-    }
-    else {
+    } else {
         if (__OSRebootParams.regionStart == NULL || !OSIsMEM1Region(__OSRebootParams.regionStart)) {
             MemClear(OSGetArenaLo(), OSArenaSize());
-        }
-        else {
+        } else {
             if (OSGetArenaLo() < __OSRebootParams.regionStart) {
                 if (OSGetArenaHi() <= __OSRebootParams.regionStart) {
                     MemClear(OSGetArenaLo(), OSArenaSize());
-                }
-                else {
+                } else {
                     MemClear(OSGetArenaLo(), (u32)__OSRebootParams.regionStart - (u32)OSGetArenaLo());
-                
+
                     if (OSGetArenaHi() > __OSRebootParams.regionEnd) {
                         MemClear(__OSRebootParams.regionEnd, (u32)OSGetArenaHi() - (u32)__OSRebootParams.regionEnd);
                     }
@@ -354,17 +348,14 @@ static void ClearArena() NO_INLINE {
 static void ClearMEM2Arena() NO_INLINE {
     if (!((OSGetResetCode() >> 31) & 1)) {
         MemClear(OSGetMEM2ArenaLo(), OSMEM2ArenaSize());
-    }
-    else {
+    } else {
         if (__OSRebootParams.regionStart == NULL || !OSIsMEM2Region(__OSRebootParams.regionStart)) {
             MemClear(OSGetMEM2ArenaLo(), OSMEM2ArenaSize());
-        }
-        else {
+        } else {
             if (OSGetMEM2ArenaLo() < __OSRebootParams.regionStart) {
                 if (OSGetMEM2ArenaHi() <= __OSRebootParams.regionStart) {
                     MemClear(OSGetMEM2ArenaLo(), OSMEM2ArenaSize());
-                }
-                else {
+                } else {
                     MemClear(OSGetMEM2ArenaLo(), (u32)__OSRebootParams.regionStart - (u32)OSGetMEM2ArenaLo());
 
                     if (OSGetMEM2ArenaHi() > __OSRebootParams.regionEnd) {
@@ -376,14 +367,14 @@ static void ClearMEM2Arena() NO_INLINE {
     }
 }
 
-void InquiryCallback(s32 res, DVDCommandBlock *block) {
+void InquiryCallback(s32 res, DVDCommandBlock* block) {
     switch (block->state) {
         case DVD_STATE_IDLE: {
             __OSDeviceCode = DriveInfo.deviceCode | DVD_DEVICE_CODE;
             break;
         }
         default: {
-            __OSDeviceCode = (1<<0);
+            __OSDeviceCode = (1 << 0);
             break;
         }
     }
@@ -463,7 +454,7 @@ static void ReportOSInfo() {
             break;
         }
         case OS_CONSOLE_TDEV_EMU: {
-            OSReport("TDEV-based emulation HW%d\n", (consoleType & ~OS_CONSOLE_MASK/*???*/) - 3);
+            OSReport("TDEV-based emulation HW%d\n", (consoleType & ~OS_CONSOLE_MASK /*???*/) - 3);
             break;
         }
         default: {
@@ -475,7 +466,7 @@ static void ReportOSInfo() {
     // Print IOS revision
     __OSGetIOSRev(&ios);
     OSReport("Firmware     : %d.%d.%d ", ios.major, ios.minor, ios.micro);
-    OSReport("(%d/%d/%d)\n",             ios.month, ios.date, ios.year);
+    OSReport("(%d/%d/%d)\n", ios.month, ios.date, ios.year);
 
     // Print total available memory
     sysMemSize = (OSGetConsoleSimulatedMem1Size() + OSGetConsoleSimulatedMem2Size());
@@ -550,7 +541,7 @@ void OSInit() {
         PPCMtpmc2(0);
         PPCMtpmc3(0);
         PPCMtpmc4(0);
-    
+
         // HID 4
         PPCMthid4(HID4_H4A | HID4_SBE | HID4_PS1_CTL | (1 << 23) /*hmmm*/ | HID4_L2_CCFI);
 
@@ -570,10 +561,9 @@ void OSInit() {
             BI2DebugFlag = (u32*)((u32)bi2StartAddr + BI2_OFFSET_DEBUGFLAG);
             __PADSpec = *(u32*)((u32)bi2StartAddr + BI2_OFFSET_PADSPEC);
 
-            *(u8*)OSPhysicalToCached(OS_ADDR_BI2_DEBUG_FLAG)    = *BI2DebugFlag;
-            *(u8*)OSPhysicalToCached(OS_ADDR_BI2_PAD_SPEC)      = __PADSpec;
-        }
-        else {
+            *(u8*)OSPhysicalToCached(OS_ADDR_BI2_DEBUG_FLAG) = *BI2DebugFlag;
+            *(u8*)OSPhysicalToCached(OS_ADDR_BI2_PAD_SPEC) = __PADSpec;
+        } else {
             if (((OSBootInfo*)OSPhysicalToCached(OS_ADDR_BOOT_INFO))->arenaHi != NULL) {
                 BI2DebugFlagHolder = *(u8*)OSPhysicalToCached(OS_ADDR_BI2_DEBUG_FLAG);
                 BI2DebugFlag = &BI2DebugFlagHolder;
@@ -593,8 +583,7 @@ void OSInit() {
                 if (BootInfo->arenaLo == NULL && BI2DebugFlag && *BI2DebugFlag < 2) {
                     arenaAddr = (void*)OSRoundUp32B(_stack_addr);
                 }
-            }
-            else {
+            } else {
                 arenaAddr = (void*)0x80004000;
             }
         }
@@ -619,8 +608,7 @@ void OSInit() {
                 if (BI2DebugFlag && *BI2DebugFlag < 2) {
                     arenaAddr = (void*)OSRoundUp32B(_stack_addr);
                 }
-            }
-            else {
+            } else {
                 if ((u32)arenaAddr >= 0x90000000 && (u32)arenaAddr < 0x90000800) {
                     arenaAddr = (void*)0x90000800;
                 }
@@ -674,7 +662,8 @@ void OSInit() {
 
             SCInit();
 
-            while (SCCheckStatus() == 1) {}
+            while (SCCheckStatus() == 1) {
+            }
 
             __OSInitNet();
         }
@@ -684,9 +673,8 @@ void OSInit() {
             DVDInit();
 
             if (__OSIsGcam) {
-                __OSDeviceCode = (u16)(DVD_DEVICE_CODE | (1<<12));
-            }
-            else if (!__OSDeviceCode) {
+                __OSDeviceCode = (u16)(DVD_DEVICE_CODE | (1 << 12));
+            } else if (!__OSDeviceCode) {
                 DCInvalidateRange(&DriveInfo, sizeof(DriveInfo));
                 DVDInquiryAsync(&DriveBlock, &DriveInfo, InquiryCallback);
             }
@@ -702,32 +690,16 @@ void OSInit() {
     }
 }
 
-static u32 __OSExceptionLocations[] = {
-    0x100,
-    0x200,
-    0x300,
-    0x400,
-    0x500,
-    0x600,
-    0x700,
-    0x800,
-    0x900,
-    0xC00,
-    0xD00,
-    0xF00,
-    0x1300,
-    0x1400,
-    0x1700
-};
+static u32 __OSExceptionLocations[] = {0x100, 0x200, 0x300, 0x400, 0x500, 0x600, 0x700, 0x800, 0x900, 0xC00, 0xD00, 0xF00, 0x1300, 0x1400, 0x1700};
 
 void OSExceptionInit() {
     __OSException excep;
 
-    u32*  opCodeAddr = (u32*)__OSEVSetNumber;
-    u32   oldOpCode = *opCodeAddr;
+    u32* opCodeAddr = (u32*)__OSEVSetNumber;
+    u32 oldOpCode = *opCodeAddr;
 
-    u8*   handlerStart = (u8*)__OSEVStart;
-    u32   handlerSize = __OSEVSize;
+    u8* handlerStart = (u8*)__OSEVStart;
+    u32 handlerSize = __OSEVSize;
 
     void* destAddr = (void*)OSPhysicalToCached(OS_ADDR_DB_INTEGRATOR_HOOK);
 
@@ -750,8 +722,7 @@ void OSExceptionInit() {
         if (__DBIsExceptionMarked(excep)) {
             DBPrintf(">>> OSINIT: exception %d vectored to debugger\n", excep);
             memcpy((void*)__DBVECTOR, (void*)__OSDBJUMPSTART, __OSDBJUMPSIZE);
-        }
-        else {
+        } else {
             u32* ops = (u32*)__DBVECTOR;
             int cb;
 
@@ -779,6 +750,7 @@ void OSExceptionInit() {
 }
 
 static asm void __OSDBIntegrator() {
+    // clang-format off
 #ifdef __MWERKS__
     nofralloc
 
@@ -797,15 +769,18 @@ entry __OSDBINTSTART
     blr
 entry __OSDBINTEND
 #endif // __MWERKS__
+    // clang-format ob
 }
 
 static asm void __OSDBJump() {
+    // clang-format off
  #ifdef __MWERKS__
     nofralloc
 entry __OSDBJUMPSTART
     bla OS_ADDR_DB_INTEGRATOR_HOOK
 entry __OSDBJUMPEND
 #endif // __MWERKS__
+    // clang-format on
 }
 
 __OSExceptionHandler __OSSetExceptionHandler(__OSException ex, __OSExceptionHandler handler) {
@@ -820,6 +795,7 @@ __OSExceptionHandler __OSGetExceptionHandler(__OSException ex) {
 }
 
 static asm void OSExceptionVector() {
+    // clang-format off
 #ifdef __MWERKS__
     nofralloc
 entry __OSEVStart
@@ -874,9 +850,11 @@ recover:
 entry __OSEVEnd
     nop
 #endif // __MWERKS__
+    // clang-format on
 }
 
 asm void OSDefaultExceptionHandler(u8 type, register OSContext* context) {
+    // clang-format off
 #ifdef __MWERKS__
     nofralloc
 
@@ -906,6 +884,7 @@ asm void OSDefaultExceptionHandler(u8 type, register OSContext* context) {
     stwu    r1, -8(r1)
     b       __OSUnhandledException
 #endif // __MWERKS__
+    // clang-format on
 }
 
 void __OSPSInit() {
@@ -913,6 +892,7 @@ void __OSPSInit() {
     ICFlashInvalidate();
     __sync();
 
+    // clang-format off
 #ifdef __MWERKS__
     asm {
         li r3, 0
@@ -926,13 +906,14 @@ void __OSPSInit() {
         mtspr GQR7, r3
     }
 #endif // __MWERKS__
+    // clang-format on
 }
 
 u32 __OSGetDIConfig() {
     return DI_READ_REG(DI_CONFIG) & 0b11111111;
 }
 
-void OSRegisterVersion(const char *id) {
+void OSRegisterVersion(const char* id) {
     OSReport("%s\n", id);
 }
 
@@ -943,8 +924,7 @@ const char* OSGetAppGamename() {
 
     if (__OSInIPL) {
         appNameSrc = AppGameNameForSysMenu;
-    }
-    else if ((*appNameSrc < '0') || ('9' < *appNameSrc && *appNameSrc < 'A') || ('Z' < *appNameSrc)) {
+    } else if ((*appNameSrc < '0') || ('9' < *appNameSrc && *appNameSrc < 'A') || ('Z' < *appNameSrc)) {
         appNameSrc = (char*)OSPhysicalToCached(OS_ADDR_CURRENT_APP_NAME);
     }
 

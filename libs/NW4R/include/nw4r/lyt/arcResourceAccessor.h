@@ -5,91 +5,91 @@
 
 #include <revolution/arc.h>
 
-#include <nw4r/ut/LinkList.h>
 #include <nw4r/ut/Font.h>
+#include <nw4r/ut/LinkList.h>
 
 #include <nw4r/lyt/resourceAccessor.h>
 
 namespace nw4r {
     namespace lyt {
-        static const int RESOURCE_NAME_MAX  = 128;
+        static const int RESOURCE_NAME_MAX = 128;
 
         class FontRefLink {
-            public:
-                FontRefLink();
-                
-                void        Set(const char* name, ut::Font* pFont);
+        public:
+            FontRefLink();
 
-                const char* GetFontName() const { return mFontName; }
-                ut::Font*   GetFont() const     { return mpFont; }
+            void Set(const char* name, ut::Font* pFont);
 
-                ut::LinkListNode mLink;     // 0x00
-            
-            protected:
-                char        mFontName[RESOURCE_NAME_MAX]; // 0x08
-                ut::Font*   mpFont;         // 0x88
+            const char* GetFontName() const { return mFontName; }
+            ut::Font* GetFont() const { return mpFont; }
+
+            ut::LinkListNode mLink;  // 0x00
+
+        protected:
+            char mFontName[RESOURCE_NAME_MAX];  // 0x08
+            ut::Font* mpFont;                   // 0x88
         };
         typedef ut::LinkList<FontRefLink, offsetof(FontRefLink, mLink)> FontRefLinkList;
-        
+
         class ArcResourceLink {
-            public:
-                ArcResourceLink() {}
+        public:
+            ArcResourceLink() {}
 
-                bool        Set(void* archiveStart, const char* resRootDirectory);
-                
-                char*       GetResRootDir() { return mResRootDir; }
-                ARCHandle*  GetArcHandle()  { return &mArcHandle; }
+            bool Set(void* archiveStart, const char* resRootDirectory);
 
-                ut::LinkListNode mLink;                     // 0x00
-            
-            protected:
-                ARCHandle   mArcHandle;                     // 0x08
+            char* GetResRootDir() { return mResRootDir; }
+            ARCHandle* GetArcHandle() { return &mArcHandle; }
 
-                char        mResRootDir[RESOURCE_NAME_MAX]; // 0x24
+            ut::LinkListNode mLink;  // 0x00
+
+        protected:
+            ARCHandle mArcHandle;  // 0x08
+
+            char mResRootDir[RESOURCE_NAME_MAX];  // 0x24
         };
         typedef ut::LinkList<ArcResourceLink, offsetof(ArcResourceLink, mLink)> ArcResourceLinkList;
 
         class ArcResourceAccessor : public ResourceAccessor {
-            public:
-                ArcResourceAccessor();
-                virtual ~ArcResourceAccessor() {}
+        public:
+            ArcResourceAccessor();
+            virtual ~ArcResourceAccessor() {}
 
-                virtual void*       GetResource(u32 resType, const char* name, u32* pSize = NULL);
-                virtual ut::Font*   GetFont(const char* name);
+            virtual void* GetResource(u32 resType, const char* name, u32* pSize = NULL);
+            virtual ut::Font* GetFont(const char* name);
 
-                bool                Attach(void* archiveStart, const char* resourceRootDirectory);
+            bool Attach(void* archiveStart, const char* resourceRootDirectory);
 
-            private:
-                ARCHandle       mArcHandle;                     // 0x04
-                void*           mArcBuf;                        // 0x20,
+        private:
+            ARCHandle mArcHandle;  // 0x04
+            void* mArcBuf;         // 0x20,
 
-                FontRefLinkList mFontList;                      // 0x24
+            FontRefLinkList mFontList;  // 0x24
 
-                char            mResRootDir[RESOURCE_NAME_MAX]; // 0x30
+            char mResRootDir[RESOURCE_NAME_MAX];  // 0x30
         };
 
         class MultiArcResourceAccessor : public ResourceAccessor {
-            public:
-                MultiArcResourceAccessor();
-                virtual ~MultiArcResourceAccessor();
+        public:
+            MultiArcResourceAccessor();
+            virtual ~MultiArcResourceAccessor();
 
-                void                Attach(ArcResourceLink* pLink);
-                void                DetachAll() { reinterpret_cast<ut::detail::LinkListImpl*>(&mArcList)->Clear();}
-                
-                void                RegistFont(FontRefLink* pLink);
-                
-                virtual void*       GetResource(u32 resType, const char* name, u32* pSize = NULL);
-                virtual ut::Font*   GetFont(const char* name);
+            void Attach(ArcResourceLink* pLink);
+            void DetachAll() { reinterpret_cast<ut::detail::LinkListImpl*>(&mArcList)->Clear(); }
 
-            protected:
-                ArcResourceLinkList mArcList;   // 0x04
-                FontRefLinkList     mFontList;  // 0x10
+            void RegistFont(FontRefLink* pLink);
+
+            virtual void* GetResource(u32 resType, const char* name, u32* pSize = NULL);
+            virtual ut::Font* GetFont(const char* name);
+
+        protected:
+            ArcResourceLinkList mArcList;  // 0x04
+            FontRefLinkList mFontList;     // 0x10
         };
 
         namespace detail {
-            ut::Font*   FindFont(FontRefLinkList* pFontRefList, const char* name);
+            ut::Font* FindFont(FontRefLinkList* pFontRefList, const char* name);
         }
-    }
-}
+    }  // namespace lyt
+}  // namespace nw4r
 
-#endif // NW4R_LYT_ARC_RESOURCE_ACCESSOR_H
+#endif  // NW4R_LYT_ARC_RESOURCE_ACCESSOR_H

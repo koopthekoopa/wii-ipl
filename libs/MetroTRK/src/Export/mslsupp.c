@@ -23,8 +23,8 @@ inline DSIOResult __access_file(unsigned int handle, unsigned char* buffer, int*
     }
 
     countTemp = *count;
-    r0        = TRKAccessFile(cmd, handle, &countTemp, buffer);
-    *count    = countTemp;
+    r0 = TRKAccessFile(cmd, handle, &countTemp, buffer);
+    *count = countTemp;
 
     switch ((unsigned char)r0) {
         case DS_IONoError:

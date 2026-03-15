@@ -1,37 +1,37 @@
-#include <revolution/rso.h>
 #include <revolution/os.h>
+#include <revolution/rso.h>
 
 #include <string.h>
 
-RSOObjectList   __RSOObjectInfoList;
+RSOObjectList __RSOObjectInfoList;
 
-#define JUMP_CODE_INST_COUNT    6
-#define JUMP_CODE_SIZE          (sizeof(u32) * JUMP_CODE_INST_COUNT)
+#define JUMP_CODE_INST_COUNT 6
+#define JUMP_CODE_SIZE (sizeof(u32) * JUMP_CODE_INST_COUNT)
 
 enum RSOSection {
-    RSO_SECTION_NONE        = 0,    // ---
+    RSO_SECTION_NONE = 0,  // ---
 
-    RSO_SECTION_INIT        = 1,    // .init
-    RSO_SECTION_TEXT        = 2,    // .text
-    RSO_SECTION_CTORS       = 3,    // .ctors
-    RSO_SECTION_DTORS       = 4,    // .dtors
-    RSO_SECTION_RODATA      = 5,    // .rodata
-    RSO_SECTION_DATA        = 6,    // .data
-    RSO_SECTION_BSS         = 7,    // .bss
-    RSO_SECTION_SDATA       = 8,    // .sdata
-    RSO_SECTION_SDATA2      = 9,    // .sdata2
-    RSO_SECTION_EMB_SDATA0  = 10,   // .PPC.EMB.sdata0
-    RSO_SECTION_SBSS        = 11,   // .sbss
-    RSO_SECTION_SBSS2       = 12,   // .sbss2
-    RSO_SECTION_EMB_SBSS0   = 13,   // .PPC.EMB.sbss0
+    RSO_SECTION_INIT = 1,         // .init
+    RSO_SECTION_TEXT = 2,         // .text
+    RSO_SECTION_CTORS = 3,        // .ctors
+    RSO_SECTION_DTORS = 4,        // .dtors
+    RSO_SECTION_RODATA = 5,       // .rodata
+    RSO_SECTION_DATA = 6,         // .data
+    RSO_SECTION_BSS = 7,          // .bss
+    RSO_SECTION_SDATA = 8,        // .sdata
+    RSO_SECTION_SDATA2 = 9,       // .sdata2
+    RSO_SECTION_EMB_SDATA0 = 10,  // .PPC.EMB.sdata0
+    RSO_SECTION_SBSS = 11,        // .sbss
+    RSO_SECTION_SBSS2 = 12,       // .sbss2
+    RSO_SECTION_EMB_SBSS0 = 13,   // .PPC.EMB.sbss0
 
-    RSO_SECTION_EXTABINDEX  = 241,  // extabindex
+    RSO_SECTION_EXTABINDEX = 241,  // extabindex
 };
 
 typedef struct RSORel {
-    u32 offset; // 0x00
-    u32 info;   // 0x04
-    u32 addend; // 0x08
+    u32 offset;  // 0x00
+    u32 info;    // 0x04
+    u32 addend;  // 0x08
 } RSORel;
 
 extern char _f_sbss2[];
@@ -44,82 +44,86 @@ extern char _f_rodata[];
 extern char _f_text[];
 extern char _f_init[];
 
-#define ELF32_R_SYM(val)        ((val) >> 8)
-#define ELF32_R_TYPE(val)       ((val) & 0xff)
+#define ELF32_R_SYM(val) ((val) >> 8)
+#define ELF32_R_TYPE(val) ((val) & 0xff)
 #define ELF32_R_INFO(sym, type) (((sym) << 8) + ((type) & 0xff))
 
-#define R_PPC_NONE              0
-#define R_PPC_ADDR32            1
-#define R_PPC_ADDR24            2
-#define R_PPC_ADDR16            3
-#define R_PPC_ADDR16_LO         4
-#define R_PPC_ADDR16_HI         5
-#define R_PPC_ADDR16_HA         6
-#define R_PPC_ADDR14            7
-#define R_PPC_ADDR14_BRTAKEN    8
-#define R_PPC_ADDR14_BRNTAKEN   9
-#define R_PPC_REL24             10
-#define R_PPC_REL14             11
-#define R_PPC_REL14_BRTAKEN     12
-#define R_PPC_REL14_BRNTAKEN    13
+#define R_PPC_NONE 0
+#define R_PPC_ADDR32 1
+#define R_PPC_ADDR24 2
+#define R_PPC_ADDR16 3
+#define R_PPC_ADDR16_LO 4
+#define R_PPC_ADDR16_HI 5
+#define R_PPC_ADDR16_HA 6
+#define R_PPC_ADDR14 7
+#define R_PPC_ADDR14_BRTAKEN 8
+#define R_PPC_ADDR14_BRNTAKEN 9
+#define R_PPC_REL24 10
+#define R_PPC_REL14 11
+#define R_PPC_REL14_BRTAKEN 12
+#define R_PPC_REL14_BRNTAKEN 13
 
-#define R_PPC_EMB_SDA21         109
+#define R_PPC_EMB_SDA21 109
 
-#define BIND_POINTER(target_, base_)   * (u32*)&(target_) += (u32)(base_);
-#define UNBIND_POINTER(target_, base_) * (u32*)&(target_) -= (u32)(base_);
+#define BIND_POINTER(target_, base_) *(u32*)&(target_) += (u32)(base_);
+#define UNBIND_POINTER(target_, base_) *(u32*)&(target_) -= (u32)(base_);
 
-struct mtsi { char _[12]; RSOSectionInfo* at_0x0c; };
+struct mtsi {
+    char _[12];
+    RSOSectionInfo* at_0x0c;
+};
 #define MODULE_TO_SECTION_INFO(module_) (((struct mtsi*)(module_))->at_0x0c)
 
-#define ADD_LINK_TO_LIST_TAIL(list_, link_) {   \
-        RSOObjectInfo* __prev = (list_)->tail;  \
-                                                \
-        if (__prev == NULL) {                   \
-            (list_)->head = (link_);            \
-        }                                       \
-        else {                                  \
-            __prev->link.next = (link_);        \
-        }                                       \
-                                                \
-        (link_)->link.prev = __prev;            \
-        (link_)->link.next = NULL;              \
-                                                \
-        (list_)->tail = (link_);                \
+#define ADD_LINK_TO_LIST_TAIL(list_, link_)                                                                                                          \
+    {                                                                                                                                                \
+        RSOObjectInfo* __prev = (list_)->tail;                                                                                                       \
+                                                                                                                                                     \
+        if (__prev == NULL) {                                                                                                                        \
+            (list_)->head = (link_);                                                                                                                 \
+        } else {                                                                                                                                     \
+            __prev->link.next = (link_);                                                                                                             \
+        }                                                                                                                                            \
+                                                                                                                                                     \
+        (link_)->link.prev = __prev;                                                                                                                 \
+        (link_)->link.next = NULL;                                                                                                                   \
+                                                                                                                                                     \
+        (list_)->tail = (link_);                                                                                                                     \
     }
 
-#define REMOVE_LINK_FROM_LIST(list_, link_) {       \
-        RSOObjectInfo* __next = (link_)->link.next; \
-        RSOObjectInfo* __prev = (link_)->link.prev; \
-                                                    \
-        if (__next == NULL) {                       \
-            (list_)->tail = __prev;                 \
-        }                                           \
-        else {                                      \
-            __next->link.prev = __prev;             \
-        }                                           \
-                                                    \
-        if (__prev == NULL) {                       \
-            (list_)->head = __next;                 \
-        }                                           \
-        else {                                      \
-            __prev->link.next = __next;             \
-        }                                           \
+#define REMOVE_LINK_FROM_LIST(list_, link_)                                                                                                          \
+    {                                                                                                                                                \
+        RSOObjectInfo* __next = (link_)->link.next;                                                                                                  \
+        RSOObjectInfo* __prev = (link_)->link.prev;                                                                                                  \
+                                                                                                                                                     \
+        if (__next == NULL) {                                                                                                                        \
+            (list_)->tail = __prev;                                                                                                                  \
+        } else {                                                                                                                                     \
+            __next->link.prev = __prev;                                                                                                              \
+        }                                                                                                                                            \
+                                                                                                                                                     \
+        if (__prev == NULL) {                                                                                                                        \
+            (list_)->head = __next;                                                                                                                  \
+        } else {                                                                                                                                     \
+            __prev->link.next = __next;                                                                                                              \
+        }                                                                                                                                            \
     }
 
-#define MAKE_RELOC_ADDR24(base_, reloc_)    (((base_) & ~0x03fffffc) | ((reloc_) & 0x03fffffc))
-#define MAKE_RELOC_ADDR16(base_, reloc_)    ((reloc_) & 0xffff)
+#define MAKE_RELOC_ADDR24(base_, reloc_) (((base_) & ~0x03fffffc) | ((reloc_) & 0x03fffffc))
+#define MAKE_RELOC_ADDR16(base_, reloc_) ((reloc_) & 0xffff)
 #define MAKE_RELOC_ADDR16_LO(base_, reloc_) ((reloc_) & 0xffff)
 #define MAKE_RELOC_ADDR16_HI(base_, reloc_) (((reloc_) >> 16) & 0xffff)
 #define MAKE_RELOC_ADDR16_HA(base_, reloc_) ((((reloc_) >> 16) + ((reloc_) & 0x8000 ? 1 : 0)) & 0xffff)
-#define MAKE_RELOC_ADDR14(base_, reloc_)    (((base_) & ~0x0000fffc) | ((reloc_) & 0x0000fffc))
-#define MAKE_RELOC_REL24(base_, reloc_)     (((base_) & ~0x03fffffc) | ((reloc_) & 0x03fffffc))
-#define MAKE_RELOC_REL14(base_, reloc_)     (((base_) & ~0x0000fffc) | ((reloc_) & 0x0000fffc))
+#define MAKE_RELOC_ADDR14(base_, reloc_) (((base_) & ~0x0000fffc) | ((reloc_) & 0x0000fffc))
+#define MAKE_RELOC_REL24(base_, reloc_) (((base_) & ~0x03fffffc) | ((reloc_) & 0x03fffffc))
+#define MAKE_RELOC_REL14(base_, reloc_) (((base_) & ~0x0000fffc) | ((reloc_) & 0x0000fffc))
 
-#define MAKE_RELOC_EMB_SDA21_REG(hi_, reg_)     (((hi_) & ~0x1f) | (reg_))
-#define MAKE_RELOC_EMB_SDA21_ADDR(lo_, addr_)   ((addr_) & 0xffff)
+#define MAKE_RELOC_EMB_SDA21_REG(hi_, reg_) (((hi_) & ~0x1f) | (reg_))
+#define MAKE_RELOC_EMB_SDA21_ADDR(lo_, addr_) ((addr_) & 0xffff)
 
-void RSONotifyLink(RSOObjectHeader* moduleHeader) NO_INLINE {}
-void RSONotifyUnlink(RSOObjectHeader* moduleHeader) NO_INLINE {}
+void RSONotifyLink(RSOObjectHeader* moduleHeader) NO_INLINE {
+}
+void RSONotifyUnlink(RSOObjectHeader* moduleHeader) NO_INLINE {
+}
 
 BOOL LocateObject(void* newModule, void* bss, RSOFixedLevel i_fixed_level);
 
@@ -158,8 +162,7 @@ BOOL LocateObject(void* newModule, void* bss, RSOFixedLevel i_fixed_level) {
 
         if (si->offset) {
             BIND_POINTER(si->offset, moduleHeader);
-        }
-        else if (si->size) {
+        } else if (si->size) {
             moduleHeader->bssSection = i;
             si->offset = (u32)bss;
         }
@@ -355,8 +358,7 @@ BOOL RSOUnLocateObject(void* oldModule) {
         if (i == moduleHeader->bssSection) {
             moduleHeader->bssSection = 0;
             si->offset = 0;
-        }
-        else if (si->offset) {
+        } else if (si->offset) {
             UNBIND_POINTER(si->offset, moduleHeader);
         }
     }
@@ -440,7 +442,7 @@ RSOHash RSOGetHash(const char* symbolname) {
     RSOHash g;
 
     while (*symbolname) {
-        h = (h << 4) +* symbolname++;
+        h = (h << 4) + *symbolname++;
         g = h & 0xf0000000;
         if (g) {
             h ^= g >> 24;
@@ -555,20 +557,16 @@ static int FindExportIndex(RSOObjectHeader* rso, const char* name) {
         if (a_hash > a_expTab->hash) {
             if (a_top == i) {
                 a_idx = a_last;
-            }
-            else {
+            } else {
                 a_top = i;
             }
-        }
-        else if (a_hash < a_expTab->hash) {
+        } else if (a_hash < a_expTab->hash) {
             if (a_top == i) {
                 a_idx = a_top;
-            }
-            else {
+            } else {
                 a_last = i;
             }
-        }
-        else {
+        } else {
             a_idx = i;
         }
     }
@@ -593,8 +591,7 @@ static int FindExportIndex(RSOObjectHeader* rso, const char* name) {
             if (strcmp(name, expName) == 0) {
                 return i;
             }
-        }
-        else {
+        } else {
             i = a_last + 1;
         }
     }
@@ -608,8 +605,7 @@ static int FindExportIndex(RSOObjectHeader* rso, const char* name) {
             if (strcmp(name, expName) == 0) {
                 return i;
             }
-        }
-        else {
+        } else {
             return -1;
         }
     }
@@ -766,7 +762,7 @@ static void RSORelocateSmallDataSection(RSOObjectHeader* rsoImp, int impIndex, R
                 switch (expTab->section) {
                     case RSO_SECTION_SDATA:
                     case RSO_SECTION_SBSS: {
-                        *p = MAKE_RELOC_EMB_SDA21_REG(*p, 13); // r13 (SysV PPC ABI)
+                        *p = MAKE_RELOC_EMB_SDA21_REG(*p, 13);  // r13 (SysV PPC ABI)
 
                         baseTab = RSOFindExportSymbol(rsoExp, "_SDA_BASE_");
                         if (baseTab == NULL) {
@@ -779,7 +775,7 @@ static void RSORelocateSmallDataSection(RSOObjectHeader* rsoImp, int impIndex, R
                     }
                     case RSO_SECTION_SDATA2:
                     case RSO_SECTION_SBSS2: {
-                        *p = MAKE_RELOC_EMB_SDA21_REG(*p, 2); // r2 (PPC EABI)
+                        *p = MAKE_RELOC_EMB_SDA21_REG(*p, 2);  // r2 (PPC EABI)
 
                         baseTab = RSOFindExportSymbol(rsoExp, "_SDA2_BASE_");
                         if (baseTab == NULL) {
@@ -792,7 +788,7 @@ static void RSORelocateSmallDataSection(RSOObjectHeader* rsoImp, int impIndex, R
                     }
                     case RSO_SECTION_EMB_SDATA0:
                     case RSO_SECTION_EMB_SBSS0: {
-                        *p = MAKE_RELOC_EMB_SDA21_REG(*p, 0); // (rA|0) (PPC EABI)
+                        *p = MAKE_RELOC_EMB_SDA21_REG(*p, 0);  // (rA|0) (PPC EABI)
                         base = 0;
                         break;
                     }

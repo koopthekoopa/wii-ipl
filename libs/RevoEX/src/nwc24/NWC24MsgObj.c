@@ -1,5 +1,5 @@
-#include <revolution/nwc24.h>
 #include <private/nwc24.h>
+#include <revolution/nwc24.h>
 
 #define ALT_NAME_MAX 35
 #define SMTP_LINE_MAX 1000
@@ -28,8 +28,7 @@ NWC24Err NWC24InitMsgObj(NWC24MsgObj* msg, NWC24MsgType type) {
 
     switch (type) {
         case NWC24_MSGTYPE_RVL_MENU_SHARED:
-            msgObj->type |=
-                MSG_OBJ_FOR_RECIPIENT | MSG_OBJ_FOR_APP | MSG_OBJ_FOR_MENU;
+            msgObj->type |= MSG_OBJ_FOR_RECIPIENT | MSG_OBJ_FOR_APP | MSG_OBJ_FOR_MENU;
             break;
         case NWC24_MSGTYPE_RVL:
             msgObj->type |= MSG_OBJ_FOR_RECIPIENT | MSG_OBJ_FOR_APP;
@@ -57,8 +56,7 @@ NWC24Err NWC24InitMsgObj(NWC24MsgObj* msg, NWC24MsgType type) {
     for (i = 0; i < NWC24_MSG_RECIPIENT_MAX; i++) {
         if (type == NWC24_MSGTYPE_PUBLIC) {
             NWC24Data_Init(&msgObj->toAddrs[i]);
-        }
-        else {
+        } else {
             msgObj->toIds[i] = 0;
         }
     }
@@ -83,7 +81,7 @@ NWC24Err NWC24InitMsgObj(NWC24MsgObj* msg, NWC24MsgType type) {
     NWC24Data_Init(&msgObj->faceData);
     NWC24Data_Init(&msgObj->altName);
 
-    msgObj->msgBoardFlags.raw = 0;                       
+    msgObj->msgBoardFlags.raw = 0;
     msgObj->dwcId = 0;
     msgObj->iconNew = (1 << 31);
 
@@ -92,8 +90,7 @@ NWC24Err NWC24InitMsgObj(NWC24MsgObj* msg, NWC24MsgType type) {
 
 NWC24Err NWC24SetMsgToId(NWC24MsgObj* msg, NWC24UserId id) {
     NWC24MsgObjPrivate* msgObj = (NWC24MsgObjPrivate*)msg;
-    if (!(msgObj->type & MSG_OBJ_INITIALIZED) ||
-        (msgObj->type & MSG_OBJ_DELIVERING)) {
+    if (!(msgObj->type & MSG_OBJ_INITIALIZED) || (msgObj->type & MSG_OBJ_DELIVERING)) {
         return NWC24_ERR_PROTECTED;
     }
 

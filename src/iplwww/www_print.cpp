@@ -7,19 +7,19 @@
 namespace ext_ead {
     namespace www {
         namespace print {
-            #define WWW_REPORT_LENGTH   1022
-            
+#define WWW_REPORT_LENGTH 1022
+
             /** @note Was stubbed out for release */
             void IPLWWWReport(int type, const char* format, ...) {
                 va_list args;
-                
+
                 va_start(args, format);
 #ifdef ENABLE_IPL_WWW_REPORT
                 IPLWWWVReport(type, format, args);
-#endif // ENABLE_IPL_WWW_REPORT
+#endif  // ENABLE_IPL_WWW_REPORT
                 va_end(args);
             }
-            
+
             /** @note Was stubbed out for release */
             void IPLWWWVReport(int type, const char* format, va_list args) {
 #ifdef ENABLE_IPL_WWW_REPORT
@@ -30,8 +30,8 @@ namespace ext_ead {
                 str[WWW_REPORT_LENGTH + 1] = str[WWW_REPORT_LENGTH] = 0;
 
                 OSReport("%s %s", Message[type], str);
-#endif // ENABLE_IPL_WWW_REPORT
+#endif  // ENABLE_IPL_WWW_REPORT
             }
-        }
-    }
-}
+        }  // namespace print
+    }  // namespace www
+}  // namespace ext_ead

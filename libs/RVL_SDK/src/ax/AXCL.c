@@ -1,5 +1,5 @@
-#include <revolution/ax.h>
 #include <private/ax.h>
+#include <revolution/ax.h>
 
 #include <revolution/os.h>
 
@@ -11,12 +11,11 @@
 // Space is allocated for two commands lists
 #define LIST_MAX 2
 
-#define LIST_WRITE_16(x)            \
-    __AXWriteToCommandList((x))     \
+#define LIST_WRITE_16(x) __AXWriteToCommandList((x))
 
-#define LIST_WRITE_32(x)                    \
-        __AXWriteToCommandList((x) >> 16);  \
-        __AXWriteToCommandList((x))         \
+#define LIST_WRITE_32(x)                                                                                                                             \
+    __AXWriteToCommandList((x) >> 16);                                                                                                               \
+    __AXWriteToCommandList((x))
 
 /**
  * Command list opcodes (from Dolphin Emulator)
@@ -158,8 +157,7 @@ void __AXNextFrame(void* surround, void* lr, void* rmt) {
 
             __AXCommandListCycles += 3036;
         }
-    }
-    else {
+    } else {
         __AXGetAuxAInput(&imm);
         if (imm != NULL) {
             LIST_WRITE_16(COMMAND_MIX_AUXA);
@@ -218,8 +216,7 @@ void __AXNextFrame(void* surround, void* lr, void* rmt) {
         LIST_WRITE_32((u32)surround);
         LIST_WRITE_32((u32)lr);
         __AXCommandListCycles += 1195;
-    }
-    else {
+    } else {
         LIST_WRITE_16(COMMAND_OUTPUT);
         LIST_WRITE_16(__AXMasterVolume);
         LIST_WRITE_32((u32)surround);

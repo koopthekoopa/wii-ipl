@@ -1,4 +1,5 @@
 #include <decomp.h>
+// clang-format off
 
 #pragma force_active on
 
@@ -130,3 +131,4 @@ asm void longjmp(register struct __jmp_buf* env, register int status) {
     blr
 #endif
 }
+// clang-format on

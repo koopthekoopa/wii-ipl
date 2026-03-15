@@ -11,36 +11,36 @@
 
 namespace ipl {
     class Framework {
-        public:
-            Framework(EGG::Heap* heap);
+    public:
+        Framework(EGG::Heap* heap);
 
-            void                beginFrame();
-            void                beginRender();
-            void                endRender();
-            void                endFrame();
+        void beginFrame();
+        void beginRender();
+        void endRender();
+        void endFrame();
 
-            void                resetRenderMode();
+        void resetRenderMode();
 
-            GXRenderModeObj*    getRenderMode() const   { return mpRMode; }
-            BOOL                getAspectRatio() const  { return mAspectRatio; }
-            f32                 getDelta() const        { return mDelta; }
+        GXRenderModeObj* getRenderMode() const { return mpRMode; }
+        BOOL getAspectRatio() const { return mAspectRatio; }
+        f32 getDelta() const { return mDelta; }
 
-        private:
-            void    flip_xfb();
-            
-            void    init_vi();
-            void    init_xfb(EGG::Heap* heap);
-            void    reset_render_mode();
+    private:
+        void flip_xfb();
 
-            GXRenderModeObj*    mpRMode;        // 0x00
+        void init_vi();
+        void init_xfb(EGG::Heap* heap);
+        void reset_render_mode();
 
-            int                 mCurXfb;        // 0x04
-            u8*                 mpXfb[2];       // 0x08
+        GXRenderModeObj* mpRMode;  // 0x00
 
-            BOOL                mAspectRatio;   // 0x10
+        int mCurXfb;   // 0x04
+        u8* mpXfb[2];  // 0x08
 
-            f32                 mDelta;         // 0x14
+        BOOL mAspectRatio;  // 0x10
+
+        f32 mDelta;  // 0x14
     };
-}
+}  // namespace ipl
 
-#endif // IPL_FRAME_WORK_H
+#endif  // IPL_FRAME_WORK_H

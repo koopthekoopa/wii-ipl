@@ -9,9 +9,9 @@ extern "C" {
 
 typedef u8 GXBool;
 
-#define GX_TRUE    ((GXBool)1)
-#define GX_FALSE   ((GXBool)0)
-#define GX_ENABLE  ((GXBool)1)
+#define GX_TRUE ((GXBool)1)
+#define GX_FALSE ((GXBool)0)
+#define GX_ENABLE ((GXBool)1)
 #define GX_DISABLE ((GXBool)0)
 
 typedef enum _GXAttr {
@@ -143,7 +143,10 @@ typedef enum _GXChannelID {
     GX_COLOR_NULL = 0xff
 } GXChannelID;
 
-typedef enum _GXColorSrc { GX_SRC_REG = 0, GX_SRC_VTX } GXColorSrc;
+typedef enum _GXColorSrc {
+    GX_SRC_REG = 0,
+    GX_SRC_VTX
+} GXColorSrc;
 
 typedef enum _GXTlut {
     GX_TLUT0 = 0,
@@ -279,45 +282,45 @@ typedef enum _GXTevStageID {
 #define _GX_TF_ZTF 0x10 /* Z-texture-format */
 
 typedef enum _GXTexFmt {
-    GX_TF_I4 =      0x0,
-    GX_TF_I8 =      0x1,
-    GX_TF_IA4 =     0x2,
-    GX_TF_IA8 =     0x3,
-    GX_TF_RGB565 =  0x4,
-    GX_TF_RGB5A3 =  0x5,
-    GX_TF_RGBA8 =   0x6,
-    GX_TF_CMPR =    0xE,
+    GX_TF_I4 = 0x0,
+    GX_TF_I8 = 0x1,
+    GX_TF_IA4 = 0x2,
+    GX_TF_IA8 = 0x3,
+    GX_TF_RGB565 = 0x4,
+    GX_TF_RGB5A3 = 0x5,
+    GX_TF_RGBA8 = 0x6,
+    GX_TF_CMPR = 0xE,
 
-    GX_CTF_R4 =     0x0 | _GX_TF_CTF,
-    GX_CTF_RA4 =    0x2 | _GX_TF_CTF,
-    GX_CTF_RA8 =    0x3 | _GX_TF_CTF,
-    GX_CTF_YUVA8 =  0x6 | _GX_TF_CTF,
-    GX_CTF_A8 =     0x7 | _GX_TF_CTF,
-    GX_CTF_R8 =     0x8 | _GX_TF_CTF,
-    GX_CTF_G8 =     0x9 | _GX_TF_CTF,
-    GX_CTF_B8 =     0xA | _GX_TF_CTF,
-    GX_CTF_RG8 =    0xB | _GX_TF_CTF,
-    GX_CTF_GB8 =    0xC | _GX_TF_CTF,
+    GX_CTF_R4 = 0x0 | _GX_TF_CTF,
+    GX_CTF_RA4 = 0x2 | _GX_TF_CTF,
+    GX_CTF_RA8 = 0x3 | _GX_TF_CTF,
+    GX_CTF_YUVA8 = 0x6 | _GX_TF_CTF,
+    GX_CTF_A8 = 0x7 | _GX_TF_CTF,
+    GX_CTF_R8 = 0x8 | _GX_TF_CTF,
+    GX_CTF_G8 = 0x9 | _GX_TF_CTF,
+    GX_CTF_B8 = 0xA | _GX_TF_CTF,
+    GX_CTF_RG8 = 0xB | _GX_TF_CTF,
+    GX_CTF_GB8 = 0xC | _GX_TF_CTF,
 
-    GX_TF_Z8 =      0x1 | _GX_TF_ZTF,
-    GX_TF_Z16 =     0x3 | _GX_TF_ZTF,
-    GX_TF_Z24X8 =   0x6 | _GX_TF_ZTF,
+    GX_TF_Z8 = 0x1 | _GX_TF_ZTF,
+    GX_TF_Z16 = 0x3 | _GX_TF_ZTF,
+    GX_TF_Z24X8 = 0x6 | _GX_TF_ZTF,
 
-    GX_CTF_Z4 =     0x0 | _GX_TF_ZTF | _GX_TF_CTF,
-    GX_CTF_Z8M =    0x9 | _GX_TF_ZTF | _GX_TF_CTF,
-    GX_CTF_Z8L =    0xA | _GX_TF_ZTF | _GX_TF_CTF,
-    GX_CTF_Z16L =   0xC | _GX_TF_ZTF | _GX_TF_CTF,
+    GX_CTF_Z4 = 0x0 | _GX_TF_ZTF | _GX_TF_CTF,
+    GX_CTF_Z8M = 0x9 | _GX_TF_ZTF | _GX_TF_CTF,
+    GX_CTF_Z8L = 0xA | _GX_TF_ZTF | _GX_TF_CTF,
+    GX_CTF_Z16L = 0xC | _GX_TF_ZTF | _GX_TF_CTF,
 
     GX_TF_A8 = GX_CTF_A8
 } GXTexFmt;
 
 typedef enum _GXTexOffset {
-    GX_TO_ZERO      = 0,
+    GX_TO_ZERO = 0,
     GX_TO_SIXTEENTH = 1,
-    GX_TO_EIGHTH    = 2,
-    GX_TO_FOURTH    = 3,
-    GX_TO_HALF      = 4,
-    GX_TO_ONE       = 5,
+    GX_TO_EIGHTH = 2,
+    GX_TO_FOURTH = 3,
+    GX_TO_HALF = 4,
+    GX_TO_ONE = 5,
     GX_MAX_TEXOFFSET,
 } GXTexOffset;
 
@@ -328,7 +331,10 @@ typedef enum _GXCullMode {
     GX_CULL_ALL
 } GXCullMode;
 
-typedef enum _GXClipMode { GX_CLIP_ENABLE = 0, GX_CLIP_DISABLE = 1 } GXClipMode;
+typedef enum _GXClipMode {
+    GX_CLIP_ENABLE = 0,
+    GX_CLIP_DISABLE = 1
+} GXClipMode;
 
 typedef enum _GXTexWrapMode {
     GX_CLAMP,
@@ -347,15 +353,15 @@ typedef enum _GXTexFilter {
 } GXTexFilter;
 
 typedef enum _GXLightID {
-    GX_LIGHT0 =     0x001,
-    GX_LIGHT1 =     0x002,
-    GX_LIGHT2 =     0x004,
-    GX_LIGHT3 =     0x008,
-    GX_LIGHT4 =     0x010,
-    GX_LIGHT5 =     0x020,
-    GX_LIGHT6 =     0x040,
-    GX_LIGHT7 =     0x080,
-    GX_MAX_LIGHT =  0x100,
+    GX_LIGHT0 = 0x001,
+    GX_LIGHT1 = 0x002,
+    GX_LIGHT2 = 0x004,
+    GX_LIGHT3 = 0x008,
+    GX_LIGHT4 = 0x010,
+    GX_LIGHT5 = 0x020,
+    GX_LIGHT6 = 0x040,
+    GX_LIGHT7 = 0x080,
+    GX_MAX_LIGHT = 0x100,
     GX_LIGHT_NULL = 0x000
 } GXLightID;
 
@@ -365,18 +371,22 @@ typedef enum _GXDiffuseFn {
     GX_DF_CLAMP
 } GXDiffuseFn;
 
-typedef enum _GXAttnFn { GX_AF_SPEC = 0, GX_AF_SPOT = 1, GX_AF_NONE } GXAttnFn;
+typedef enum _GXAttnFn {
+    GX_AF_SPEC = 0,
+    GX_AF_SPOT = 1,
+    GX_AF_NONE
+} GXAttnFn;
 
 typedef enum _GXCompCnt {
-    GX_POS_XY   = 0,
-    GX_POS_XYZ  = 1,
-    GX_NRM_XYZ  = 0,
-    GX_NRM_NBT  = 1,  // one index per NBT
-    GX_NRM_NBT3 = 2, // one index per each of N/B/T
-    GX_CLR_RGB  = 0,
+    GX_POS_XY = 0,
+    GX_POS_XYZ = 1,
+    GX_NRM_XYZ = 0,
+    GX_NRM_NBT = 1,   // one index per NBT
+    GX_NRM_NBT3 = 2,  // one index per each of N/B/T
+    GX_CLR_RGB = 0,
     GX_CLR_RGBA = 1,
-    GX_TEX_S    = 0,
-    GX_TEX_ST   = 1
+    GX_TEX_S = 0,
+    GX_TEX_ST = 1
 } GXCompCnt;
 
 typedef enum _GXTevRegID {
@@ -391,17 +401,17 @@ typedef enum _GXTevOp {
     GX_TEV_ADD = 0,
     GX_TEV_SUB = 1,
 
-    GX_TEV_COMP_R8_GT       = 8,
-    GX_TEV_COMP_R8_EQ       = 9,
-    GX_TEV_COMP_GR16_GT     = 10,
-    GX_TEV_COMP_GR16_EQ     = 11,
-    GX_TEV_COMP_BGR24_GT    = 12,
-    GX_TEV_COMP_BGR24_EQ    = 13,
-    GX_TEV_COMP_RGB8_GT     = 14,
-    GX_TEV_COMP_RGB8_EQ     = 15,
+    GX_TEV_COMP_R8_GT = 8,
+    GX_TEV_COMP_R8_EQ = 9,
+    GX_TEV_COMP_GR16_GT = 10,
+    GX_TEV_COMP_GR16_EQ = 11,
+    GX_TEV_COMP_BGR24_GT = 12,
+    GX_TEV_COMP_BGR24_EQ = 13,
+    GX_TEV_COMP_RGB8_GT = 14,
+    GX_TEV_COMP_RGB8_EQ = 15,
 
-    GX_TEV_COMP_A8_GT       = GX_TEV_COMP_RGB8_GT,
-    GX_TEV_COMP_A8_EQ       = GX_TEV_COMP_RGB8_EQ
+    GX_TEV_COMP_A8_GT = GX_TEV_COMP_RGB8_GT,
+    GX_TEV_COMP_A8_EQ = GX_TEV_COMP_RGB8_EQ
 } GXTevOp;
 
 typedef enum _GXTevColorArg {
@@ -458,73 +468,73 @@ typedef enum _GXTevKColorID {
 } GXTevKColorID;
 
 typedef enum _GXTevKColorSel {
-    GX_TEV_KCSEL_8_8    = 0x00,
-    GX_TEV_KCSEL_7_8    = 0x01,
-    GX_TEV_KCSEL_6_8    = 0x02,
-    GX_TEV_KCSEL_5_8    = 0x03,
-    GX_TEV_KCSEL_4_8    = 0x04,
-    GX_TEV_KCSEL_3_8    = 0x05,
-    GX_TEV_KCSEL_2_8    = 0x06,
-    GX_TEV_KCSEL_1_8    = 0x07,
+    GX_TEV_KCSEL_8_8 = 0x00,
+    GX_TEV_KCSEL_7_8 = 0x01,
+    GX_TEV_KCSEL_6_8 = 0x02,
+    GX_TEV_KCSEL_5_8 = 0x03,
+    GX_TEV_KCSEL_4_8 = 0x04,
+    GX_TEV_KCSEL_3_8 = 0x05,
+    GX_TEV_KCSEL_2_8 = 0x06,
+    GX_TEV_KCSEL_1_8 = 0x07,
 
-    GX_TEV_KCSEL_1      = GX_TEV_KCSEL_8_8,
-    GX_TEV_KCSEL_3_4    = GX_TEV_KCSEL_6_8,
-    GX_TEV_KCSEL_1_2    = GX_TEV_KCSEL_4_8,
-    GX_TEV_KCSEL_1_4    = GX_TEV_KCSEL_2_8,
+    GX_TEV_KCSEL_1 = GX_TEV_KCSEL_8_8,
+    GX_TEV_KCSEL_3_4 = GX_TEV_KCSEL_6_8,
+    GX_TEV_KCSEL_1_2 = GX_TEV_KCSEL_4_8,
+    GX_TEV_KCSEL_1_4 = GX_TEV_KCSEL_2_8,
 
-    GX_TEV_KCSEL_K0     = 0x0C,
-    GX_TEV_KCSEL_K1     = 0x0D,
-    GX_TEV_KCSEL_K2     = 0x0E,
-    GX_TEV_KCSEL_K3     = 0x0F,
-    GX_TEV_KCSEL_K0_R   = 0x10,
-    GX_TEV_KCSEL_K1_R   = 0x11,
-    GX_TEV_KCSEL_K2_R   = 0x12,
-    GX_TEV_KCSEL_K3_R   = 0x13,
-    GX_TEV_KCSEL_K0_G   = 0x14,
-    GX_TEV_KCSEL_K1_G   = 0x15,
-    GX_TEV_KCSEL_K2_G   = 0x16,
-    GX_TEV_KCSEL_K3_G   = 0x17,
-    GX_TEV_KCSEL_K0_B   = 0x18,
-    GX_TEV_KCSEL_K1_B   = 0x19,
-    GX_TEV_KCSEL_K2_B   = 0x1A,
-    GX_TEV_KCSEL_K3_B   = 0x1B,
-    GX_TEV_KCSEL_K0_A   = 0x1C,
-    GX_TEV_KCSEL_K1_A   = 0x1D,
-    GX_TEV_KCSEL_K2_A   = 0x1E,
-    GX_TEV_KCSEL_K3_A   = 0x1F
+    GX_TEV_KCSEL_K0 = 0x0C,
+    GX_TEV_KCSEL_K1 = 0x0D,
+    GX_TEV_KCSEL_K2 = 0x0E,
+    GX_TEV_KCSEL_K3 = 0x0F,
+    GX_TEV_KCSEL_K0_R = 0x10,
+    GX_TEV_KCSEL_K1_R = 0x11,
+    GX_TEV_KCSEL_K2_R = 0x12,
+    GX_TEV_KCSEL_K3_R = 0x13,
+    GX_TEV_KCSEL_K0_G = 0x14,
+    GX_TEV_KCSEL_K1_G = 0x15,
+    GX_TEV_KCSEL_K2_G = 0x16,
+    GX_TEV_KCSEL_K3_G = 0x17,
+    GX_TEV_KCSEL_K0_B = 0x18,
+    GX_TEV_KCSEL_K1_B = 0x19,
+    GX_TEV_KCSEL_K2_B = 0x1A,
+    GX_TEV_KCSEL_K3_B = 0x1B,
+    GX_TEV_KCSEL_K0_A = 0x1C,
+    GX_TEV_KCSEL_K1_A = 0x1D,
+    GX_TEV_KCSEL_K2_A = 0x1E,
+    GX_TEV_KCSEL_K3_A = 0x1F
 } GXTevKColorSel;
 
 typedef enum _GXTevKAlphaSel {
-    GX_TEV_KASEL_8_8    = 0x00,
-    GX_TEV_KASEL_7_8    = 0x01,
-    GX_TEV_KASEL_6_8    = 0x02,
-    GX_TEV_KASEL_5_8    = 0x03,
-    GX_TEV_KASEL_4_8    = 0x04,
-    GX_TEV_KASEL_3_8    = 0x05,
-    GX_TEV_KASEL_2_8    = 0x06,
-    GX_TEV_KASEL_1_8    = 0x07,
+    GX_TEV_KASEL_8_8 = 0x00,
+    GX_TEV_KASEL_7_8 = 0x01,
+    GX_TEV_KASEL_6_8 = 0x02,
+    GX_TEV_KASEL_5_8 = 0x03,
+    GX_TEV_KASEL_4_8 = 0x04,
+    GX_TEV_KASEL_3_8 = 0x05,
+    GX_TEV_KASEL_2_8 = 0x06,
+    GX_TEV_KASEL_1_8 = 0x07,
 
-    GX_TEV_KASEL_1      = GX_TEV_KASEL_8_8,
-    GX_TEV_KASEL_3_4    = GX_TEV_KASEL_6_8,
-    GX_TEV_KASEL_1_2    = GX_TEV_KASEL_4_8,
-    GX_TEV_KASEL_1_4    = GX_TEV_KASEL_2_8,
+    GX_TEV_KASEL_1 = GX_TEV_KASEL_8_8,
+    GX_TEV_KASEL_3_4 = GX_TEV_KASEL_6_8,
+    GX_TEV_KASEL_1_2 = GX_TEV_KASEL_4_8,
+    GX_TEV_KASEL_1_4 = GX_TEV_KASEL_2_8,
 
-    GX_TEV_KASEL_K0_R   = 0x10,
-    GX_TEV_KASEL_K1_R   = 0x11,
-    GX_TEV_KASEL_K2_R   = 0x12,
-    GX_TEV_KASEL_K3_R   = 0x13,
-    GX_TEV_KASEL_K0_G   = 0x14,
-    GX_TEV_KASEL_K1_G   = 0x15,
-    GX_TEV_KASEL_K2_G   = 0x16,
-    GX_TEV_KASEL_K3_G   = 0x17,
-    GX_TEV_KASEL_K0_B   = 0x18,
-    GX_TEV_KASEL_K1_B   = 0x19,
-    GX_TEV_KASEL_K2_B   = 0x1A,
-    GX_TEV_KASEL_K3_B   = 0x1B,
-    GX_TEV_KASEL_K0_A   = 0x1C,
-    GX_TEV_KASEL_K1_A   = 0x1D,
-    GX_TEV_KASEL_K2_A   = 0x1E,
-    GX_TEV_KASEL_K3_A   = 0x1F
+    GX_TEV_KASEL_K0_R = 0x10,
+    GX_TEV_KASEL_K1_R = 0x11,
+    GX_TEV_KASEL_K2_R = 0x12,
+    GX_TEV_KASEL_K3_R = 0x13,
+    GX_TEV_KASEL_K0_G = 0x14,
+    GX_TEV_KASEL_K1_G = 0x15,
+    GX_TEV_KASEL_K2_G = 0x16,
+    GX_TEV_KASEL_K3_G = 0x17,
+    GX_TEV_KASEL_K0_B = 0x18,
+    GX_TEV_KASEL_K1_B = 0x19,
+    GX_TEV_KASEL_K2_B = 0x1A,
+    GX_TEV_KASEL_K3_B = 0x1B,
+    GX_TEV_KASEL_K0_A = 0x1C,
+    GX_TEV_KASEL_K1_A = 0x1D,
+    GX_TEV_KASEL_K2_A = 0x1E,
+    GX_TEV_KASEL_K3_A = 0x1F
 } GXTevKAlphaSel;
 
 typedef enum _GXAlphaOp {
@@ -544,22 +554,22 @@ typedef enum _GXTevScale {
 } GXTevScale;
 
 typedef enum _GXFogType {
-    GX_FOG_NONE             = 0x00,
-    GX_FOG_PERSP_LIN        = 0x02,
-    GX_FOG_PERSP_EXP        = 0x04,
-    GX_FOG_PERSP_EXP2       = 0x05,
-    GX_FOG_PERSP_REVEXP     = 0x06,
-    GX_FOG_PERSP_REVEXP2    = 0x07,
-    GX_FOG_ORTHO_LIN        = 0x0A,
-    GX_FOG_ORTHO_EXP        = 0x0C,
-    GX_FOG_ORTHO_EXP2       = 0x0D,
-    GX_FOG_ORTHO_REVEXP     = 0x0E,
-    GX_FOG_ORTHO_REVEXP2    = 0x0F,
-    GX_FOG_LIN              = GX_FOG_PERSP_LIN,
-    GX_FOG_EXP              = GX_FOG_PERSP_EXP,
-    GX_FOG_EXP2             = GX_FOG_PERSP_EXP2,
-    GX_FOG_REVEXP           = GX_FOG_PERSP_REVEXP,
-    GX_FOG_REVEXP2          = GX_FOG_PERSP_REVEXP2
+    GX_FOG_NONE = 0x00,
+    GX_FOG_PERSP_LIN = 0x02,
+    GX_FOG_PERSP_EXP = 0x04,
+    GX_FOG_PERSP_EXP2 = 0x05,
+    GX_FOG_PERSP_REVEXP = 0x06,
+    GX_FOG_PERSP_REVEXP2 = 0x07,
+    GX_FOG_ORTHO_LIN = 0x0A,
+    GX_FOG_ORTHO_EXP = 0x0C,
+    GX_FOG_ORTHO_EXP2 = 0x0D,
+    GX_FOG_ORTHO_REVEXP = 0x0E,
+    GX_FOG_ORTHO_REVEXP2 = 0x0F,
+    GX_FOG_LIN = GX_FOG_PERSP_LIN,
+    GX_FOG_EXP = GX_FOG_PERSP_EXP,
+    GX_FOG_EXP2 = GX_FOG_PERSP_EXP2,
+    GX_FOG_REVEXP = GX_FOG_PERSP_REVEXP,
+    GX_FOG_REVEXP2 = GX_FOG_PERSP_REVEXP2
 } GXFogType;
 
 typedef enum _GXBlendMode {
@@ -580,7 +590,7 @@ typedef enum _GXBlendFactor {
     GX_BL_DSTALPHA,
     GX_BL_INVDSTALPHA,
 
-    GX_BL_DSTCLR    = GX_BL_SRCCLR,
+    GX_BL_DSTCLR = GX_BL_SRCCLR,
     GX_BL_INVDSTCLR = GX_BL_INVSRCCLR
 } GXBlendFactor;
 
@@ -679,16 +689,19 @@ typedef enum _GXZTexOp {
 
 } GXZTexOp;
 
-typedef enum _GXTexMtxType { GX_MTX3x4 = 0, GX_MTX2x4 } GXTexMtxType;
+typedef enum _GXTexMtxType {
+    GX_MTX3x4 = 0,
+    GX_MTX2x4
+} GXTexMtxType;
 
 typedef enum _GXPrimitive {
-    GX_POINTS           = 0xb8,
-    GX_LINES            = 0xa8,
-    GX_LINESTRIP        = 0xb0,
-    GX_TRIANGLES        = 0x90,
-    GX_TRIANGLESTRIP    = 0x98,
-    GX_TRIANGLEFAN      = 0xa0,
-    GX_QUADS            = 0x80
+    GX_POINTS = 0xb8,
+    GX_LINES = 0xa8,
+    GX_LINESTRIP = 0xb0,
+    GX_TRIANGLES = 0x90,
+    GX_TRIANGLESTRIP = 0x98,
+    GX_TRIANGLEFAN = 0xa0,
+    GX_QUADS = 0x80
 } GXPrimitive;
 
 typedef enum _GXPerf0 {
@@ -774,14 +787,14 @@ typedef enum _GXVCachePerf {
 
 typedef enum _GXCopyMode {
     GX_COPY_PROGRESSIVE = 0,
-    GX_COPY_INTLC_EVEN  = 2,
-    GX_COPY_INTLC_ODD   = 3
+    GX_COPY_INTLC_EVEN = 2,
+    GX_COPY_INTLC_ODD = 3
 } GXCopyMode;
 
 typedef enum _GXTlutFmt {
-    GX_TL_IA8       = 0x0,
-    GX_TL_RGB565    = 0x1,
-    GX_TL_RGB5A3    = 0x2,
+    GX_TL_IA8 = 0x0,
+    GX_TL_RGB565 = 0x1,
+    GX_TL_RGB5A3 = 0x2,
     GX_MAX_TLUTFMT
 } GXTlutFmt;
 
@@ -807,16 +820,16 @@ typedef enum _GXPosNrmMtx {
 } GXPosNrmMtx;
 
 typedef enum _GXTexMtx {
-    GX_TEXMTX0  = 30,
-    GX_TEXMTX1  = 33,
-    GX_TEXMTX2  = 36,
-    GX_TEXMTX3  = 39,
-    GX_TEXMTX4  = 42,
-    GX_TEXMTX5  = 45,
-    GX_TEXMTX6  = 48,
-    GX_TEXMTX7  = 51,
-    GX_TEXMTX8  = 54,
-    GX_TEXMTX9  = 57,
+    GX_TEXMTX0 = 30,
+    GX_TEXMTX1 = 33,
+    GX_TEXMTX2 = 36,
+    GX_TEXMTX3 = 39,
+    GX_TEXMTX4 = 42,
+    GX_TEXMTX5 = 45,
+    GX_TEXMTX6 = 48,
+    GX_TEXMTX7 = 51,
+    GX_TEXMTX8 = 54,
+    GX_TEXMTX9 = 57,
     GX_IDENTITY = 60
 } GXTexMtx;
 
@@ -828,8 +841,8 @@ typedef enum _GXTevColorChan {
 } GXTevColorChan;
 
 typedef enum _GXCITexFmt {
-    GX_TF_C4    = 0x8,
-    GX_TF_C8    = 0x9,
+    GX_TF_C4 = 0x8,
+    GX_TF_C8 = 0x9,
     GX_TF_C14X2 = 0xA
 } GXCITexFmt;
 
@@ -895,4 +908,4 @@ typedef enum _GXTlutSize {
 }
 #endif
 
-#endif // REVOLUTION_GX_ENUM_H
+#endif  // REVOLUTION_GX_ENUM_H

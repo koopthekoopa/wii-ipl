@@ -30,7 +30,8 @@ ziU8 Zi8CopyWordListW(ziWChar* destination, ziU8 maxCharacters, ziWChar* wordLis
             return 0;
         }
 
-        while (*wordList++ != 0) {}
+        while (*wordList++ != 0) {
+        }
 
         if (index-- == 0) {
             Zi8LogError(0x132, ZI_WORK);

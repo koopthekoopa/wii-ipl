@@ -13,16 +13,13 @@ void* memmove(void* dest, const void* src, size_t count) {
         if (isUnaligned) {
             if (rev == 0) {
                 __copy_longs_unaligned(dest, src, count);
-            }
-            else {
+            } else {
                 __copy_longs_rev_unaligned(dest, src, count);
             }
-        }
-        else {
+        } else {
             if (rev == 0) {
                 __copy_longs_aligned(dest, src, count);
-            }
-            else {
+            } else {
                 __copy_longs_rev_aligned(dest, src, count);
             }
         }
@@ -34,8 +31,7 @@ void* memmove(void* dest, const void* src, size_t count) {
         for (cur = (const char*)src - 1, dst = (char*)dest - 1, count++; --count;) {
             *++dst = *++cur;
         }
-    }
-    else {
+    } else {
         for (cur = (const char*)src + count, dst = (char*)dest + count, count++; --count;) {
             *--dst = *--cur;
         }
@@ -75,7 +71,7 @@ int memcmp(const void* ptr1, const void* ptr2, size_t num) {
 
     for (p1 = (const unsigned char*)ptr1 - 1, p2 = (const unsigned char*)ptr2 - 1, num++; --num;) {
         if (*++p1 != *++p2) {
-            return (*p1 < *p2) ? -1 : + 1;
+            return (*p1 < *p2) ? -1 : +1;
         }
     }
 

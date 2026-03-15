@@ -7,11 +7,7 @@
 
 namespace ipl {
     namespace scene {
-        SettingBg::SettingBg(EGG::Heap* heap, int arg) :
-        Base(heap),
-        mSettingArg(arg),
-        mpLayout(NULL),
-        mpLayoutFile(NULL) {
+        SettingBg::SettingBg(EGG::Heap* heap, int arg) : Base(heap), mSettingArg(arg), mpLayout(NULL), mpLayoutFile(NULL) {
             setSceneParentFlags(SCN_PARENTFLAG_CALC | SCN_PARENTFLAG_DRAW);
         }
 
@@ -40,6 +36,7 @@ namespace ipl {
             }
         }
 
-        SettingBg::~SettingBg() {}
-    }
-}
+        SettingBg::~SettingBg() {
+        }
+    }  // namespace scene
+}  // namespace ipl

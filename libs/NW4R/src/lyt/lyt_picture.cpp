@@ -1,6 +1,6 @@
-#include <nw4r/lyt/picture.h>
-#include <nw4r/lyt/layout.h>
 #include <nw4r/lyt/common.h>
+#include <nw4r/lyt/layout.h>
+#include <nw4r/lyt/picture.h>
 
 #include <new>
 
@@ -13,13 +13,12 @@ namespace nw4r {
 
             Material* pMemMaterial = static_cast<Material*>(Layout::AllocMemory(sizeof(*pMemMaterial)));
             if (pMemMaterial != NULL) {
-                mpMaterial = new(pMemMaterial) Material();
+                mpMaterial = new (pMemMaterial) Material();
                 mpMaterial->ReserveGXMem(num, num, num, 0, false, 0, 0, false, false, false, false);
             }
         }
 
-        Picture::Picture(const res::Picture* pResPic, const ResBlockSet& resBlockSet) :
-        Pane(pResPic) {
+        Picture::Picture(const res::Picture* pResPic, const ResBlockSet& resBlockSet) : Pane(pResPic) {
             u8 texCoordNum = ut::Min<u8>(pResPic->texCoordNum, GX_MAX_TEXCOORD);
 
             Init(texCoordNum);
@@ -34,12 +33,11 @@ namespace nw4r {
 
             Material* pMemMaterial = static_cast<Material*>(Layout::AllocMemory(sizeof(*pMemMaterial)));
             if (pMemMaterial != NULL) {
-                const u32* matOffsTbl = detail::ConvertOffsToPtr<u32>(resBlockSet.pMaterialList,
-                                                                    sizeof(*resBlockSet.pMaterialList));
-                const res::Material* pResMaterial = detail::ConvertOffsToPtr<res::Material>(resBlockSet.pMaterialList,
-                                                                                            matOffsTbl[pResPic->materialIdx]);
+                const u32* matOffsTbl = detail::ConvertOffsToPtr<u32>(resBlockSet.pMaterialList, sizeof(*resBlockSet.pMaterialList));
+                const res::Material* pResMaterial =
+                    detail::ConvertOffsToPtr<res::Material>(resBlockSet.pMaterialList, matOffsTbl[pResPic->materialIdx]);
 
-                mpMaterial = new(pMemMaterial) Material(pResMaterial, resBlockSet);
+                mpMaterial = new (pMemMaterial) Material(pResMaterial, resBlockSet);
             }
         }
 
@@ -65,8 +63,7 @@ namespace nw4r {
         }
 
         void Picture::Append(const GXTexObj& texObj) {
-            if (mpMaterial->GetTextureNum() >= mpMaterial->GetTextureCap()
-            || mpMaterial->GetTextureNum() >= mpMaterial->GetTexCoordGenCap()) {
+            if (mpMaterial->GetTextureNum() >= mpMaterial->GetTextureCap() || mpMaterial->GetTextureNum() >= mpMaterial->GetTexCoordGenCap()) {
                 return;
             }
 
@@ -132,9 +129,7 @@ namespace nw4r {
             bool bUseVtxCol = mpMaterial->SetupGX(detail::IsModulateVertexColor(mVtxColors, mGlbAlpha), mGlbAlpha);
             detail::SetVertexFormat(bUseVtxCol, mTexCoordAry.GetSize());
 
-            detail::DrawQuad(GetVtxPos(), mSize,
-                            mTexCoordAry.GetSize(), mTexCoordAry.GetArray(),
-                            bUseVtxCol ? mVtxColors : NULL, mGlbAlpha);
+            detail::DrawQuad(GetVtxPos(), mSize, mTexCoordAry.GetSize(), mTexCoordAry.GetArray(), bUseVtxCol ? mVtxColors : NULL, mGlbAlpha);
         }
-    }
-}
+    }  // namespace lyt
+}  // namespace nw4r

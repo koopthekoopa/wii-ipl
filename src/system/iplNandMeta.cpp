@@ -9,34 +9,29 @@
 
 namespace ipl {
     namespace nand {
-        MetaFile::MetaFile(EGG::Heap* heap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, Callback callBack, void* callBackWork, int ticketIdx) :
-        File(heap, fileName, arc, NULL, offset, length, false),
-        mDescriptor(-1),
-        mTitleId(titleId),
-        mTicket(NULL),
-        mTicketIdx(ticketIdx),
-        mbMetaInNand(false),
-        mCallback(callBack),
-        mCallbackWork(callBackWork) {}
+        MetaFile::MetaFile(EGG::Heap* heap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, Callback callBack,
+                           void* callBackWork, int ticketIdx)
+            : File(heap, fileName, arc, NULL, offset, length, false), mDescriptor(-1), mTitleId(titleId), mTicket(NULL), mTicketIdx(ticketIdx),
+              mbMetaInNand(false), mCallback(callBack), mCallbackWork(callBackWork) {
+        }
 
-        MetaFile::~MetaFile() {}
+        MetaFile::~MetaFile() {
+        }
 
         BOOL MetaFile::openNandFile_() {
             char fileName[48];
 
             // Get title path
-            sprintf(fileName, "/meta/%08x/%08x/title.met",  NANDTitleIdHi(mTitleId), NANDTitleIdLo(mTitleId));
+            sprintf(fileName, "/meta/%08x/%08x/title.met", NANDTitleIdHi(mTitleId), NANDTitleIdLo(mTitleId));
 
             if (mpArc) {
                 s32 result = wrapper::PrivateOpen(fileName, &mNandFile, NAND_ACCESS_READ);
                 if (nand_error_handling(result) == FALSE || ARCOpen(mpArc, msFileName, &mArcFile) == FALSE) {
                     return FALSE;
-                }
-                else {
+                } else {
                     return TRUE;
                 }
-            }
-            else {
+            } else {
                 s32 result = wrapper::PrivateOpen(fileName, &mNandFile, NAND_ACCESS_READ);
                 return nand_error_handling(result);
             }
@@ -49,8 +44,7 @@ namespace ipl {
             if (mpArc) {
                 result = wrapper::Seek(&mNandFile, mFileOffset + ARCGetStartOffset(&mArcFile) + offset, 0);
                 nand_error_handling(result);
-            }
-            else {
+            } else {
                 result = wrapper::Seek(&mNandFile, mFileOffset + offset, 0);
                 nand_error_handling(result);
             }
@@ -76,8 +70,7 @@ namespace ipl {
 
             if (result < ES_ERR_OK) {
                 line = 146;
-            }
-            else {
+            } else {
                 // Open up the meta file from content index 0 (the 00000000.app file)
                 result = ES_OpenTitleContentFile(mTitleId, mTicket, 0);
                 mDescriptor = result;
@@ -91,9 +84,9 @@ namespace ipl {
                 // Otherwise if it could not open the file for any reason, abort.
                 if (result < ES_ERR_OK) {
                     line = 163;
-                }
-                else {
-                    if (!mpArc) return TRUE;
+                } else {
+                    if (!mpArc)
+                        return TRUE;
 
                     // Open up the arc file
                     BOOL success = ARCOpen(mpArc, msFileName, &mArcFile);
@@ -126,8 +119,7 @@ namespace ipl {
                 if (result < ES_ERR_OK) {
                     goto failed;
                 }
-            }
-            else {
+            } else {
                 result = ES_SeekContentFile(mDescriptor, mFileOffset + offset, 0);
                 if (result < ES_ERR_OK) {
                     goto failed;
@@ -136,7 +128,7 @@ namespace ipl {
 
             // Read the file
             if (ES_ReadContentFile(mDescriptor, bufferOut, length) < ES_ERR_OK) {
-        failed:
+            failed:
                 IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", 0, 230);
             }
         }
@@ -148,8 +140,7 @@ namespace ipl {
                     System::getMem2Sys()->free(mTicket);
                 }
                 return TRUE;
-            }
-            else {
+            } else {
                 IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", 0, 253);
                 return FALSE;
             }
@@ -162,8 +153,7 @@ namespace ipl {
         BOOL MetaFile::close_() {
             if (mbMetaInNand) {
                 return closeNandFile_();
-            }
-            else {
+            } else {
                 return closeTicketFile_();
             }
         }
@@ -175,8 +165,7 @@ namespace ipl {
         void MetaFile::readBlock_(void* buffer, int length, int offset) {
             if (mbMetaInNand) {
                 readNandBlock_(buffer, length, offset);
-            }
-            else {
+            } else {
                 readTicketBlock_(buffer, length, offset);
             }
         }
@@ -186,5 +175,5 @@ namespace ipl {
                 mCallback(mCallbackWork);
             }
         }
-    }
-}
+    }  // namespace nand
+}  // namespace ipl

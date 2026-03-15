@@ -5,8 +5,8 @@
 
 #include <revolution/sc.h>
 
-#include <revolution/os/OSThread.h>
 #include <revolution/nand.h>
+#include <revolution/os/OSThread.h>
 
 #include "bt_types.h"
 
@@ -15,7 +15,7 @@ extern "C" {
 #endif
 
 #define SC_CONFIG_FILE_PHYS_ADDRESS 0x3800
-#define SC_CONFIG_FILE_LENGTH       0x100
+#define SC_CONFIG_FILE_LENGTH 0x100
 
 typedef enum SCItemID {
     SC_ITEM_ID_IPL_COUNTER_BIAS,
@@ -61,8 +61,8 @@ typedef enum SCItemID {
 
 typedef void (*SCAsyncCallback)(s32 result);
 
-#define SC_CONF_MIN_SIZE    (sizeof(SCConfHeader) + sizeof(u32))
-#define SC_CONF_MAX_SIZE    0x4000
+#define SC_CONF_MIN_SIZE (sizeof(SCConfHeader) + sizeof(u32))
+#define SC_CONF_MAX_SIZE 0x4000
 
 typedef struct SCConfHeader {
     u32 magic;          // 0x00
@@ -71,55 +71,55 @@ typedef struct SCConfHeader {
 } SCConfHeader;
 
 typedef struct SCConfItem {
-    u8      desc;   // 0x00
-    char    name[]; // 0x04
+    u8 desc;      // 0x00
+    char name[];  // 0x04
 } SCConfItem;
 
 typedef enum {
-    SC_CONF_FILE_SYSTEM,    // SYSCONF
-    SC_CONF_FILE_PRODUCT,   // setting.txt
+    SC_CONF_FILE_SYSTEM,   // SYSCONF
+    SC_CONF_FILE_PRODUCT,  // setting.txt
     SC_CONF_FILE_MAX
 } SCConfFile;
 
 typedef struct SCControl {
-    OSThreadQueue       threadQueue;                    // 0x00
-    NANDFileInfo        fileInfo;                       // 0x08
-    NANDCommandBlock    commandBlock;                   // 0x94
+    OSThreadQueue threadQueue;      // 0x00
+    NANDFileInfo fileInfo;          // 0x08
+    NANDCommandBlock commandBlock;  // 0x94
 
     union {
-        NANDStatus  fileAttr;
-        u8          fileType;
-    };                                                  // 0x14C
+        NANDStatus fileAttr;
+        u8 fileType;
+    };  // 0x14C
 
-    u8                  nandCbState;                    // 0x154
-    u8                  isFileOpen;                     // 0x155
-    u8                  openFileType;                   // 0x156
+    u8 nandCbState;   // 0x154
+    u8 isFileOpen;    // 0x155
+    u8 openFileType;  // 0x156
 
-    SCAsyncCallback     asyncCallback;                  // 0x158
-    s32                 asyncResult;                    // 0x15C
+    SCAsyncCallback asyncCallback;  // 0x158
+    s32 asyncResult;                // 0x15C
 
-    const char*         filePaths[SC_CONF_FILE_MAX];    // 0x160
-    u8*                 fileBuffers[SC_CONF_FILE_MAX];  // 0x168
-    u32                 bufferSizes[SC_CONF_FILE_MAX];  // 0x170
-    u32                 fileSizes[SC_CONF_FILE_MAX];    // 0x178
+    const char* filePaths[SC_CONF_FILE_MAX];  // 0x160
+    u8* fileBuffers[SC_CONF_FILE_MAX];        // 0x168
+    u32 bufferSizes[SC_CONF_FILE_MAX];        // 0x170
+    u32 fileSizes[SC_CONF_FILE_MAX];          // 0x178
 
-    SCFlushCallback     flushCallback;                  // 0x180
-    SCStatus            flushStatus;                    // 0x184
-    u32                 flushSize;                      // 0x188
+    SCFlushCallback flushCallback;  // 0x180
+    SCStatus flushStatus;           // 0x184
+    u32 flushSize;                  // 0x188
 } SCControl;
 
 typedef struct SCItem {
-    char        unk_0x00[0x8];
+    char unk_0x00[0x8];
 
-    u8          primType;   // 0x08
-    u8          arrayType;  // 0x09
+    u8 primType;   // 0x08
+    u8 arrayType;  // 0x09
 
-    u32         nameLen;    // 0x0C
-    u32         dataLen;    // 0x10
-    const char* name;       // 0x14
-    u8*         data;       // 0x18
+    u32 nameLen;       // 0x0C
+    u32 dataLen;       // 0x10
+    const char* name;  // 0x14
+    u8* data;          // 0x18
 
-    u32         itemLen;    // 0x1C
+    u32 itemLen;  // 0x1C
 } SCItem;
 
 BOOL SCFindByteArrayItem(void* dst, u32 len, SCItemID id);
@@ -137,68 +137,67 @@ BOOL SCReplaceU32Item(u32 dst, SCItemID id);
 BOOL SCReplaceU64Item(u64 dst, SCItemID id);
 BOOL SCReplaceBoolItem(BOOL dst, SCItemID id);
 
-BOOL    __SCIsDirty();
-void    __SCClearConfBuf();
-void    __SCSetDirtyFlag();
-void    __SCClearDirtyFlag();
-u8*     __SCGetConfBuf();
-u32     __SCGetConfBufSize();
+BOOL __SCIsDirty();
+void __SCClearConfBuf();
+void __SCSetDirtyFlag();
+void __SCClearDirtyFlag();
+u8* __SCGetConfBuf();
+u32 __SCGetConfBufSize();
 
 /* SYSCONF BTE */
 
-#define SC_MAX_DEV_ENTRY_FOR_STD    10
-#define SC_MAX_DEV_ENTRY_FOR_SMP    6
-#define SC_MAX_DEV_ENTRY            (SC_MAX_DEV_ENTRY_FOR_STD + SC_MAX_DEV_ENTRY_FOR_SMP)
+#define SC_MAX_DEV_ENTRY_FOR_STD 10
+#define SC_MAX_DEV_ENTRY_FOR_SMP 6
+#define SC_MAX_DEV_ENTRY (SC_MAX_DEV_ENTRY_FOR_STD + SC_MAX_DEV_ENTRY_FOR_SMP)
 
 typedef struct SC_BT_DEV_INFO {
-    u8          devName[20];    // 0x00
-    u8          unk_0x14;
-    u8          unk_0x15[0xB];
-    LINK_KEY    linkKey;        // 0x20
-    u8          unk_0x30[0x10];
+    u8 devName[20];  // 0x00
+    u8 unk_0x14;
+    u8 unk_0x15[0xB];
+    LINK_KEY linkKey;  // 0x20
+    u8 unk_0x30[0x10];
 } SC_BT_DEV_INFO;
 
 typedef struct SCBtDeviceInfo {
-    BD_ADDR         addr;   // 0x00
-    SC_BT_DEV_INFO  info;   // 0x06
+    BD_ADDR addr;         // 0x00
+    SC_BT_DEV_INFO info;  // 0x06
 } SCBtDeviceInfo;
 
 typedef struct SCBtDeviceInfoArray {
-    u8              numRegist;                  // 0x00
-    //SCBtDeviceInfo  devices[SC_MAX_DEV_ENTRY];  // 0x01
+    u8 numRegist;  // 0x00
+    // SCBtDeviceInfo  devices[SC_MAX_DEV_ENTRY];  // 0x01
     union {
         struct {
-            SCBtDeviceInfo regist[SC_MAX_DEV_ENTRY_FOR_STD]; // at 0x1
-            SCBtDeviceInfo active[SC_MAX_DEV_ENTRY_FOR_SMP]; // at 0x2BD
+            SCBtDeviceInfo regist[SC_MAX_DEV_ENTRY_FOR_STD];  // at 0x1
+            SCBtDeviceInfo active[SC_MAX_DEV_ENTRY_FOR_SMP];  // at 0x2BD
         };
 
         SCBtDeviceInfo devices[SC_MAX_DEV_ENTRY];
     };
 } SCBtDeviceInfoArray;
 
-BOOL    SCGetBtDeviceInfoArray(SCBtDeviceInfoArray* devInfo);
-BOOL    SCSetBtDeviceInfoArray(SCBtDeviceInfoArray* devInfo);
+BOOL SCGetBtDeviceInfoArray(SCBtDeviceInfoArray* devInfo);
+BOOL SCSetBtDeviceInfoArray(SCBtDeviceInfoArray* devInfo);
 
 typedef struct SCBtCmpDevInfo {
-    BD_ADDR     addr;       // 0x00
-    u8          name[64];   // 0x06
-    LINK_KEY    linkKey;    // 0x30
+    BD_ADDR addr;      // 0x00
+    u8 name[64];       // 0x06
+    LINK_KEY linkKey;  // 0x30
 } SCBtCmpDevInfo;
 
 typedef struct SCBtCmpDevInfoArray {
-    u8              numRegist;                          // 0x00
-    SCBtCmpDevInfo  devices[SC_MAX_DEV_ENTRY_FOR_SMP];  // 0x01
+    u8 numRegist;                                      // 0x00
+    SCBtCmpDevInfo devices[SC_MAX_DEV_ENTRY_FOR_SMP];  // 0x01
 } SCBtCmpDevInfoArray;
 
-BOOL    SCGetBtCmpDevInfoArray(SCBtCmpDevInfoArray* devInfo);
-BOOL    SCSetBtCmpDevInfoArray(SCBtCmpDevInfoArray* devInfo);
+BOOL SCGetBtCmpDevInfoArray(SCBtCmpDevInfoArray* devInfo);
+BOOL SCSetBtCmpDevInfoArray(SCBtCmpDevInfoArray* devInfo);
 
-u32     SCGetBtDpdSensibility();
-BOOL    SCSetBtDpdSensibility(u32 dpdSensibility);
-
+u32 SCGetBtDpdSensibility();
+BOOL SCSetBtDpdSensibility(u32 dpdSensibility);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // PRIVATE_SC_H
+#endif  // PRIVATE_SC_H

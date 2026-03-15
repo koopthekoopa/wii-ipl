@@ -1,5 +1,5 @@
-#include <revolution/cdb.h>
 #include <private/cdb.h>
+#include <revolution/cdb.h>
 
 #include <stddef.h>
 
@@ -39,8 +39,7 @@ CDBErr CDBRecordFileWriteAttrBuf(CDBRecord* record) {
         if (err != CDB_ERROR_OK) {
             return err;
         }
-    }
-    else if (recordFile->attr.unk_0x400 || recordFile->attr.unk_0x404) {
+    } else if (recordFile->attr.unk_0x400 || recordFile->attr.unk_0x404) {
         err = CDBFWriteAttr(&recordFile->bridgeFile, &recordFile->attr, record->key.location);
         if (err != CDB_ERROR_OK) {
             return err;
@@ -97,7 +96,7 @@ CDBErr CDBRecordFileCreateBlank(CDBRecord* record) {
     }
 
     CDBReportInfo(" create %s...\n", record->key.keyString);
-    
+
     return CDB_ERROR_OK;
 }
 
@@ -193,7 +192,7 @@ CDBErr CDBRecordFileCreateAtOnce(CDBRecord* record, void* buffer, u32 size) {
 CDBErr CDBRecordFileDelete(CDBRecord* record) {
     char fullPath[256];
     CDBErr err;
-    
+
     if (!CDBRecordKeyIsValid(&record->key)) {
         CDBReportError("invalid key\n");
         return CDB_ERROR_5;
@@ -284,8 +283,7 @@ CDBErr CDBRecordFileReadData(CDBRecord* record, void* buffer, u32 size, u32* rea
         }
 
         return CDB_ERROR_OK;
-    }
-    else {
+    } else {
         return CDBFReadData(&recordFile->bridgeFile, buffer, size, readSize, record->key.location);
     }
 }
@@ -298,7 +296,7 @@ CDBErr CDBRecordFileReadDataFile(CDBRecord* record, void* buffer, u32 size, u32*
 CDBErr CDBRecordFileSeekData(CDBRecord* record, u32 offset, CDBSeek seek) {
     CDBRecordFile* recordFile = record->file;
     CDBCryptBuf* cryptBuf = record->cryptBuf;
-    
+
     if (cryptBuf != NULL) {
         switch (seek) {
             case CDB_SEEK_BEGIN: {
@@ -307,7 +305,7 @@ CDBErr CDBRecordFileSeekData(CDBRecord* record, u32 offset, CDBSeek seek) {
                 break;
             }
             case CDB_SEEK_END: {
-                cryptBuf->unk_0x3EC04 = (cryptBuf->unk_0x3EC00-1) - offset;
+                cryptBuf->unk_0x3EC04 = (cryptBuf->unk_0x3EC00 - 1) - offset;
                 break;
             }
             case CDB_SEEK_CUR: {
@@ -316,8 +314,7 @@ CDBErr CDBRecordFileSeekData(CDBRecord* record, u32 offset, CDBSeek seek) {
             }
         }
         return CDB_ERROR_OK;
-    }
-    else {
+    } else {
         return CDBFSeekData(&recordFile->bridgeFile, offset, seek, record->key.location);
     }
 }
@@ -330,7 +327,7 @@ CDBErr CDBRecordFileSeekDataFile(CDBRecord* record, u32 offset, CDBSeek seek) {
 int CDBRecordFileTellData(CDBRecord* record) {
     CDBRecordFile* recordFile = record->file;
     CDBCryptBuf* cryptBuf = record->cryptBuf;
-    
+
     if (cryptBuf != NULL) {
         return cryptBuf->unk_0x3EC04 - sizeof(CDBAttrBuf);
     }

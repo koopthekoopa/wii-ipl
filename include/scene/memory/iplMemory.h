@@ -6,13 +6,13 @@
 namespace ipl {
     namespace scene {
         SCENE_CLASS(Memory) {
-            public:
-                Memory(EGG::Heap* heap);
+        public:
+            Memory(EGG::Heap * heap);
 
-            private:
-                u8  unk_0x54[0x80];
+        private:
+            u8 unk_0x54[0x80];
         };
-    }
-}
+    }  // namespace scene
+}  // namespace ipl
 
-#endif // IPL_SCENE_MEMORY_H
+#endif  // IPL_SCENE_MEMORY_H

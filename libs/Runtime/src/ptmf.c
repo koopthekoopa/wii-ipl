@@ -1,5 +1,6 @@
 #include <decomp.h>
 
+// clang-format off
 typedef struct PTMF {
     long        this_delta; // 0x00
     long        v_offset;   // 0x04
@@ -25,3 +26,5 @@ asm void __ptmf_scall(...) {
         bctr
 #endif
 }
+
+// clang-format on

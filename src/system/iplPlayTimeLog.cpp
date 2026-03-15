@@ -33,24 +33,23 @@ namespace ipl {
 
         if (smArg.mDateTime.year > MAX_YEAR) {
             smArg.mDateTime.year = MAX_YEAR;
-            smArg.mDateTime.mon = MAX_MONTH-1;
+            smArg.mDateTime.mon = MAX_MONTH - 1;
             smArg.mDateTime.mday = MAX_DAY;
             OSTime time = OSCalendarTimeToTicks(&smArg.mDateTime);
-            OSTicksToCalendarTime(time ,&smArg.mDateTime);
-        }
-        else if (smArg.mDateTime.year < MIN_YEAR) {
+            OSTicksToCalendarTime(time, &smArg.mDateTime);
+        } else if (smArg.mDateTime.year < MIN_YEAR) {
             smArg.mDateTime.year = MIN_YEAR;
-            smArg.mDateTime.mon = MIN_MONTH-1;
+            smArg.mDateTime.mon = MIN_MONTH - 1;
             smArg.mDateTime.mday = MIN_DAY;
             OSTime time = OSCalendarTimeToTicks(&smArg.mDateTime);
-            OSTicksToCalendarTime(time ,&smArg.mDateTime);
+            OSTicksToCalendarTime(time, &smArg.mDateTime);
         }
 
         smArg.mbCheckSucceed = false;
 
         CDBDate begin = CDBMakeCDBDate(smArg.mDateTime.year, smArg.mDateTime.mon, smArg.mDateTime.mday, MIN_HOUR, MIN_MINUTE, MIN_SECOND);
         CDBDate end = CDBMakeCDBDate(smArg.mDateTime.year, smArg.mDateTime.mon, smArg.mDateTime.mday, MAX_HOUR, MAX_MINUTE, MAX_SECOND);
-    
+
         cdbManager->search(begin, end, CDB_SEARCH_DIRECTION_RIGHT, CDB_RECORD_LOCATION_NAND, 0, search_cb_, &smArg);
 
         if (!smArg.mbCheckSucceed) {
@@ -80,7 +79,7 @@ namespace ipl {
         smArg.mDateTime = System::getCurrentTime();
 
         memset(smArg.mFriendNameBuf, 0, sizeof(smArg.mFriendNameBuf));
-        wcsncpy(smArg.mFriendNameBuf, stringBuf, NWC24_FRIEND_NAME_LENGTH-2);
+        wcsncpy(smArg.mFriendNameBuf, stringBuf, NWC24_FRIEND_NAME_LENGTH - 2);
 
         cdb::Manager* cdbManager = System::getCdbManager();
 
@@ -88,7 +87,7 @@ namespace ipl {
 
         CDBDate begin = CDBMakeCDBDate(smArg.mDateTime.year, smArg.mDateTime.mon, smArg.mDateTime.mday, MIN_HOUR, MIN_MINUTE, MIN_SECOND);
         CDBDate end = CDBMakeCDBDate(smArg.mDateTime.year, smArg.mDateTime.mon, smArg.mDateTime.mday, MAX_HOUR, MAX_MINUTE, MAX_SECOND);
-    
+
         cdbManager->search(begin, end, CDB_SEARCH_DIRECTION_RIGHT, CDB_RECORD_LOCATION_NAND, 0, search_cb_, &smArg);
 
         if (!smArg.mbCheckSucceed) {
@@ -99,7 +98,7 @@ namespace ipl {
     BOOL PlayTimeLog::check(CDBRecord* record) {
         BOOL result = TRUE;
 
-        cdb::Manager* cdbManager = System::getCdbManager(); // unused
+        cdb::Manager* cdbManager = System::getCdbManager();  // unused
 
         char type[RBR_FILETYPE_LENGTH] = "";
 
@@ -126,7 +125,7 @@ namespace ipl {
     void PlayTimeLog::set_time_str(wchar_t* timeStr, u32 time) {
         u32 hour = time / 60;
         u32 minute = time % 60;
-        
+
         const wchar_t* msg = System::getMessage(MESG_PLAY_TIME_TIME_SEPERATOR);
         int msgLen = wcslen(msg);
 
@@ -146,7 +145,7 @@ namespace ipl {
         timeStr[i++] = 0;
     }
 
-    void PlayTimeLog::set_num_str(wchar_t*  numStr, u32 num) {
+    void PlayTimeLog::set_num_str(wchar_t* numStr, u32 num) {
         u32 result;
         int index;
 
@@ -173,7 +172,7 @@ namespace ipl {
     }
 
     wchar_t* PlayTimeLog::create_text(const EventBuffer* event) {
-        wchar_t* string = new(System::getMailWorkHeap(), 4) wchar_t[STRINGBUF_LIMIT];
+        wchar_t* string = new (System::getMailWorkHeap(), 4) wchar_t[STRINGBUF_LIMIT];
         memset(string, 0, STRINGBUF_LIMIT * sizeof(wchar_t));
 
         // Create log buffer
@@ -213,8 +212,7 @@ namespace ipl {
                 u32 time = OSTicksToSeconds(logBuffer->entries[i].playRecord.playTime - logBuffer->entries[i].playRecord.playStartTime) / 60;
                 if (time == 0) {
                     time = 1;
-                }
-                else if ((time / 60) >= 24) {
+                } else if ((time / 60) >= 24) {
                     time = 1439;
                 }
                 set_time_str(timeStr, time);
@@ -332,7 +330,7 @@ namespace ipl {
         memset(&event.sendMsg, 0, sizeof(SendMsgBuffer));
 
         memset(event.sendMsg.entries[0].friendName, 0, sizeof(event.sendMsg.entries[0].friendName));
-        wcsncpy(event.sendMsg.entries[0].friendName, stringBuf, NWC24_FRIEND_NAME_LENGTH-2);
+        wcsncpy(event.sendMsg.entries[0].friendName, stringBuf, NWC24_FRIEND_NAME_LENGTH - 2);
         event.sendMsg.entries[0].alreadyAdded = true;
 
         create_new_record(&event);
@@ -341,44 +339,25 @@ namespace ipl {
     // https://decomp.me/scratch/sRhsi
     // Some sort of hellhole with loading arguments for createNewRecord??
     void PlayTimeLog::create_new_record(const EventBuffer* event) {
-        cdb::Manager*   cdbManager = System::getCdbManager();
+        cdb::Manager* cdbManager = System::getCdbManager();
 
-        const wchar_t*  bodyText = create_text(event);
-        const wchar_t*  titleText = System::getMessage(MESG_PLAY_TIME_TITLE);
+        const wchar_t* bodyText = create_text(event);
+        const wchar_t* titleText = System::getMessage(MESG_PLAY_TIME_TITLE);
 
-        math::VEC2      recordPos(0, 0);
+        math::VEC2 recordPos(0, 0);
 
-        const void* attachData[RBR_ATTACHMENT_MAX] = {
-            (void*)event,
-            NULL
-        };
+        const void* attachData[RBR_ATTACHMENT_MAX] = {(void*)event, NULL};
 
-        u32 attachSize[RBR_ATTACHMENT_MAX] = {
-            sizeof(EventBuffer),
-            0
-        };
+        u32 attachSize[RBR_ATTACHMENT_MAX] = {sizeof(EventBuffer), 0};
 
-        RBRAttachmentType attachType[RBR_ATTACHMENT_MAX] = {
-            RBRAttachmentType_PlayTimeLog,
-            RBRAttachmentType_None
-        };
+        RBRAttachmentType attachType[RBR_ATTACHMENT_MAX] = {RBRAttachmentType_PlayTimeLog, RBRAttachmentType_None};
 
         NWC24FriendAddr friendAddr;
         memset(&friendAddr, 0, sizeof(NWC24FriendAddr));
 
-        cdbManager->createNewRecord("playtimelog",
-                                    RBRFileType_Log,
-                                    &mDateTime,
-                                    NULL,
-                                    NULL,
-                                    recordPos,
-                                    RBR_MAKE_RECORDFLAGS(RBRRecordType_PlayTimeLog, FALSE),
-                                    friendAddr,
-                                    NWC24_FRIENDTYPE_NONE,
-                                    RBRReplyFlag_NotAvailable,
-                                    titleText, bodyText,
-                                    NULL,
-                                    attachData, attachSize, attachType);
+        cdbManager->createNewRecord("playtimelog", RBRFileType_Log, &mDateTime, NULL, NULL, recordPos,
+                                    RBR_MAKE_RECORDFLAGS(RBRRecordType_PlayTimeLog, FALSE), friendAddr, NWC24_FRIENDTYPE_NONE,
+                                    RBRReplyFlag_NotAvailable, titleText, bodyText, NULL, attachData, attachSize, attachType);
 
         delete[] bodyText;
     }
@@ -424,7 +403,7 @@ namespace ipl {
             for (int i = 0; i < LOG_MAX_ENTRIES; i++) {
                 if (!event.sendMsg.entries[i].alreadyAdded) {
                     memset(event.sendMsg.entries[i].friendName, 0, sizeof(smArg.mFriendNameBuf));
-                    wcsncpy(event.sendMsg.entries[i].friendName, stringBuf, NWC24_FRIEND_NAME_LENGTH-2);
+                    wcsncpy(event.sendMsg.entries[i].friendName, stringBuf, NWC24_FRIEND_NAME_LENGTH - 2);
                     result = event.sendMsg.entries[i].alreadyAdded = true;
                     break;
                 }
@@ -448,7 +427,7 @@ namespace ipl {
             u32 recordSize;
             cdbManager->getDataSize(record, &recordSize);
 
-            buffer = new(System::getMailWorkHeap(), 4) u8[recordSize];
+            buffer = new (System::getMailWorkHeap(), 4) u8[recordSize];
             cdbManager->read(record, buffer, recordSize);
 
             RBRHeader* header = (RBRHeader*)buffer;
@@ -468,26 +447,19 @@ namespace ipl {
     }
 
     void PlayTimeLog::write_record(CDBRecord* record, EventBuffer* event, u8* buffer) {
-        cdb::Manager*       cdbManager = System::getCdbManager();
+        cdb::Manager* cdbManager = System::getCdbManager();
 
-        const wchar_t*      bodyText = create_text(event);
+        const wchar_t* bodyText = create_text(event);
 
-        const void*         attachData[RBR_ATTACHMENT_MAX] = { (void*)event, NULL };
-        u32                 attachSize[RBR_ATTACHMENT_MAX] = { sizeof(EventBuffer), 0 };
-        RBRAttachmentType   attachType[RBR_ATTACHMENT_MAX] = { RBRAttachmentType_PlayTimeLog, RBRAttachmentType_None };
+        const void* attachData[RBR_ATTACHMENT_MAX] = {(void*)event, NULL};
+        u32 attachSize[RBR_ATTACHMENT_MAX] = {sizeof(EventBuffer), 0};
+        RBRAttachmentType attachType[RBR_ATTACHMENT_MAX] = {RBRAttachmentType_PlayTimeLog, RBRAttachmentType_None};
 
-        RBRHeader*          header = (RBRHeader*)buffer;
+        RBRHeader* header = (RBRHeader*)buffer;
 
         cdbManager->seek(record, 0, CDB_SEEK_BEGIN);
-        cdbManager->writeRecord(record, math::VEC2(header->xPos, header->yPos),
-                                header->flags.data,
-                                header->addr,
-                                header->addrType,
-                                header->noReplyFlag,
-                                (wchar_t*)&buffer[header->titleOffset],
-                                bodyText,
-                                NULL,
-                                attachData, attachSize, attachType);
+        cdbManager->writeRecord(record, math::VEC2(header->xPos, header->yPos), header->flags.data, header->addr, header->addrType,
+                                header->noReplyFlag, (wchar_t*)&buffer[header->titleOffset], bodyText, NULL, attachData, attachSize, attachType);
 
         delete[] bodyText;
         delete[] buffer;
@@ -500,5 +472,5 @@ namespace ipl {
     math::VEC2 ForceCTORWeak() {
         return math::VEC2(NULL, NULL);
     }
-#endif // NON_MATCHING
-}
+#endif  // NON_MATCHING
+}  // namespace ipl

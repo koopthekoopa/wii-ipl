@@ -10,12 +10,11 @@ namespace ext_ead {
             return pThread->Run();
         }
 
-        ut_thread::ut_thread() :
-        mpStack(NULL),
-        mStackSize(0),
-        mPriority(16) {}
+        ut_thread::ut_thread() : mpStack(NULL), mStackSize(0), mPriority(16) {
+        }
 
-        ut_thread::~ut_thread() {}
+        ut_thread::~ut_thread() {
+        }
 
         void ut_thread::Create(void* pStack, u32 stackSize, int priority, bool bStartThread) {
             mStackSize = stackSize;
@@ -51,5 +50,5 @@ namespace ext_ead {
         bool ut_thread::IsThreadSuspended() {
             return OSIsThreadSuspended(&mThread);
         }
-    }
-}
+    }  // namespace www
+}  // namespace ext_ead

@@ -10,11 +10,11 @@
 extern "C" {
 #endif
 
-NWC24Err    NWC24CheckUserId(NWC24UserId id);
-NWC24Err    NWC24iCheckUserIdCRC(NWC24UserId id);
+NWC24Err NWC24CheckUserId(NWC24UserId id);
+NWC24Err NWC24iCheckUserIdCRC(NWC24UserId id);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // PRIVATE_NWC24_USERID_H
+#endif  // PRIVATE_NWC24_USERID_H

@@ -6,14 +6,14 @@
 namespace ipl {
     namespace utility {
         class timer {
-            public:
-                bool    operator()();
-                void    set_msec(int ms);
-            
-            private:
-                OSTime  tick;
-        };
-    }
-}
+        public:
+            bool operator()();
+            void set_msec(int ms);
 
-#endif // IPL_UTILITY_H
+        private:
+            OSTime tick;
+        };
+    }  // namespace utility
+}  // namespace ipl
+
+#endif  // IPL_UTILITY_H

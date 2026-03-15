@@ -6,9 +6,8 @@
 
 namespace ipl {
     namespace scene {
-        BoardSD::BoardSD() :
-        mState(STATE_PREPARE),
-        mSDState(0) {}
+        BoardSD::BoardSD() : mState(STATE_PREPARE), mSDState(0) {
+        }
 
         void BoardSD::update() {
             SDVFWorker* sdWorker = System::getCdbManager()->getSDWorker();
@@ -50,8 +49,7 @@ namespace ipl {
                         error_handling(sdWorker->get_async_result());
                         if (sdWorker->get_async_result() == SDVFWorker::RESULT_SUCCESS) {
                             mState = STATE_CLEANUP;
-                        }
-                        else {
+                        } else {
                             sdWorker->mount_sd_async();
                             mState = STATE_PREPARE;
                         }
@@ -91,5 +89,5 @@ namespace ipl {
                 }
             }
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

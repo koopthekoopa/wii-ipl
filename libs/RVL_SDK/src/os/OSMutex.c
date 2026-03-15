@@ -1,46 +1,46 @@
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
-#define ENQUEUE_MUTEX(mutex, queue, link) { \
-    OSMutex* __prev = (queue)->tail;    \
-    if (__prev == NULL) {               \
-        (queue)->head = (mutex);        \
-    }                                   \
-    else {                              \
-        __prev->link.next = (mutex);    \
-    }                                   \
-    (mutex)->link.prev = __prev;        \
-    (mutex)->link.next = NULL;          \
-    (queue)->tail = (mutex);            \
-}
 
-#define DEQUEUE_MUTEX(mutex, queue, link) { \
-    OSMutex* __next = (mutex)->link.next;   \
-    OSMutex* __prev = (mutex)->link.prev;   \
-    if (__next == NULL) {                   \
-        (queue)->tail = __prev;             \
-    }                                       \
-    else {                                  \
-        __next->link.prev = __prev;         \
-    }                                       \
-    if (__prev == NULL) {                   \
-        (queue)->head = __next;             \
-    }                                       \
-    else {                                  \
-        __prev->link.next = __next;         \
-    }                                       \
-}
+#define ENQUEUE_MUTEX(mutex, queue, link)                                                                                                            \
+    {                                                                                                                                                \
+        OSMutex* __prev = (queue)->tail;                                                                                                             \
+        if (__prev == NULL) {                                                                                                                        \
+            (queue)->head = (mutex);                                                                                                                 \
+        } else {                                                                                                                                     \
+            __prev->link.next = (mutex);                                                                                                             \
+        }                                                                                                                                            \
+        (mutex)->link.prev = __prev;                                                                                                                 \
+        (mutex)->link.next = NULL;                                                                                                                   \
+        (queue)->tail = (mutex);                                                                                                                     \
+    }
 
-#define DEQUEUE_HEAD(mutex, queue, link) {  \
-    OSMutex* __next = mutex->link.next;     \
-    if (__next == NULL) {                   \
-        (queue)->tail = NULL;               \
-    }                                       \
-    else {                                  \
-        __next->link.prev = NULL;           \
-    }                                       \
-    (queue)->head = __next;                 \
-}
+#define DEQUEUE_MUTEX(mutex, queue, link)                                                                                                            \
+    {                                                                                                                                                \
+        OSMutex* __next = (mutex)->link.next;                                                                                                        \
+        OSMutex* __prev = (mutex)->link.prev;                                                                                                        \
+        if (__next == NULL) {                                                                                                                        \
+            (queue)->tail = __prev;                                                                                                                  \
+        } else {                                                                                                                                     \
+            __next->link.prev = __prev;                                                                                                              \
+        }                                                                                                                                            \
+        if (__prev == NULL) {                                                                                                                        \
+            (queue)->head = __next;                                                                                                                  \
+        } else {                                                                                                                                     \
+            __prev->link.next = __next;                                                                                                              \
+        }                                                                                                                                            \
+    }
+
+#define DEQUEUE_HEAD(mutex, queue, link)                                                                                                             \
+    {                                                                                                                                                \
+        OSMutex* __next = mutex->link.next;                                                                                                          \
+        if (__next == NULL) {                                                                                                                        \
+            (queue)->tail = NULL;                                                                                                                    \
+        } else {                                                                                                                                     \
+            __next->link.prev = NULL;                                                                                                                \
+        }                                                                                                                                            \
+        (queue)->head = __next;                                                                                                                      \
+    }
 
 static int IsMember(OSMutexQueue* queue, OSMutex* mutex);
 
@@ -65,12 +65,10 @@ void OSLockMutex(OSMutex* mutex) {
             mutex->count++;
             ENQUEUE_MUTEX(mutex, &currentThread->queueMutex, link);
             break;
-        }
-        else if (ownerThread == currentThread) {
+        } else if (ownerThread == currentThread) {
             mutex->count++;
             break;
-        }
-        else {
+        } else {
             currentThread->mutex = mutex;
             __OSPromoteThread(mutex->thread, currentThread->priority);
             OSSleepThread(&mutex->queue);
@@ -120,12 +118,10 @@ BOOL OSTryLockMutex(OSMutex* mutex) {
         mutex->count++;
         ENQUEUE_MUTEX(mutex, &currentThread->queueMutex, link);
         locked = TRUE;
-    }
-    else if (mutex->thread == currentThread) {
+    } else if (mutex->thread == currentThread) {
         mutex->count++;
         locked = TRUE;
-    }
-    else {
+    } else {
         locked = FALSE;
     }
     OSRestoreInterrupts(enabled);
@@ -192,13 +188,13 @@ BOOL __OSCheckMutex(OSMutex* mutex) {
     while (thread) {
         if (thread->link.next != NULL && (thread != thread->link.next->link.prev)) {
             return FALSE;
-        } 
+        }
         if (thread->link.prev != NULL && (thread != thread->link.prev->link.next)) {
             return FALSE;
-        } 
+        }
         if (thread->state != 4) {
             return FALSE;
-        } 
+        }
         if (thread->priority < priority) {
             return FALSE;
         }
@@ -209,8 +205,7 @@ BOOL __OSCheckMutex(OSMutex* mutex) {
         if (mutex->count <= 0) {
             return FALSE;
         }
-    }
-    else if (mutex->count != 0) {
+    } else if (mutex->count != 0) {
         return FALSE;
     }
     return TRUE;

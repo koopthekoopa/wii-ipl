@@ -1,13 +1,13 @@
 #include "system/iplErrorHandler.h"
 
+#include <revolution/gx.h>
 #include <revolution/nand.h>
 #include <revolution/sc.h>
-#include <revolution/gx.h>
 
 #include <cstring>
 
-#include "system/rvl_dec.h"
 #include "iplSystem.h"
+#include "system/rvl_dec.h"
 
 /** These declarations are auto generated **/
 
@@ -24,19 +24,15 @@ extern u8 ipl_error_chn_bmg[];
 extern u8 ipl_error_kor_bmg[];
 
 namespace ipl {
-    ErrorHandler::ErrorHandler(EGG::Heap* heap) :
-    mbReady(FALSE),
-    mType(NONE),
-    mMessageID(0),
-    mpArcData(NULL) {
+    ErrorHandler::ErrorHandler(EGG::Heap* heap) : mbReady(FALSE), mType(NONE), mMessageID(0), mpArcData(NULL) {
         // Decompress the archive file.
         mArcSize = Rvl_decode_ash_size(fatalDlg_ash);
-        mpArcData = new(heap, DEFAULT_ALIGN) u8[mArcSize];
+        mpArcData = new (heap, DEFAULT_ALIGN) u8[mArcSize];
 
         Rvl_decode(mpArcData, fatalDlg_ash);
 
         // Create the layout from archive.
-        mpLayout = new(heap, 4) layout::Object(heap, mpArcData, "arc", "my_Fatal.brlyt");
+        mpLayout = new (heap, 4) layout::Object(heap, mpArcData, "arc", "my_Fatal.brlyt");
     }
 
     void ErrorHandler::set(Type type, u32 msgId, const char* arg1, int arg2, int arg3) {
@@ -52,16 +48,14 @@ namespace ipl {
         if (arg1) {
             strncpy(unk_0x14, arg1, sizeof(unk_0x14));
             unk_0x14[sizeof(unk_0x14) - 1] = 0;
-        }
-        else {
+        } else {
             memset(unk_0x14, 0, sizeof(unk_0x14));
         }
 
         curThread = OSGetCurrentThread();
         if (curThread == System::getMainThread()->getMessageQueue()->queueSend.tail) {
             check();
-        }
-        else {
+        } else {
             OSCancelThread(curThread);
         }
     }
@@ -123,9 +117,9 @@ namespace ipl {
     }
 
     void ErrorHandler::log(const char* type, int result, const char* file, int line) {
-    #ifdef NAND_LOG_TO_OSREPORT
+#ifdef NAND_LOG_TO_OSREPORT
         OSReport("ErrorHandler::log(%s error. [%d] %s line: %d)\n", type, result, file, line);
-    #endif
+#endif
         NANDLoggingAddMessageAsync(NULL, "%s error. [%d] %s line: %d", type, result, file, line);
     }
 
@@ -146,4 +140,4 @@ namespace ipl {
             mpLayout->draw();
         }
     }
-}
+}  // namespace ipl

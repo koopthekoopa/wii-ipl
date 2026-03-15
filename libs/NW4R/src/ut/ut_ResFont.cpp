@@ -1,26 +1,29 @@
-#include <nw4r/ut/ResFont.h>
 #include <nw4r/ut/Font.h>
+#include <nw4r/ut/ResFont.h>
 #include <nw4r/ut/binaryFileFormat.h>
 
 #include <nw4r/config.h>
 
 namespace nw4r {
     namespace ut {
-        #define CONVERT_OFFSET_TO_PTR(type_, ptr_, offset_) reinterpret_cast<type_ *>(reinterpret_cast<u32>(ptr_) + offset_)
+#define CONVERT_OFFSET_TO_PTR(type_, ptr_, offset_) reinterpret_cast<type_*>(reinterpret_cast<u32>(ptr_) + offset_)
 
         namespace {
-            template<typename T> void ResolveOffset(T*& ptr, void* base) {
+            template <typename T>
+            void ResolveOffset(T*& ptr, void* base) {
                 *reinterpret_cast<u32*>(&ptr) = reinterpret_cast<u32>(base) + reinterpret_cast<u32>(ptr);
             }
+        }  // namespace
+
+        ResFont::ResFont() {
         }
 
-        ResFont::ResFont() {}
-
-        ResFont::~ResFont() {}
+        ResFont::~ResFont() {
+        }
 
         bool ResFont::SetResource(void* brfnt) {
-            FontInformation*    pFontInfo = NULL;
-            BinaryFileHeader*   fileHeader = static_cast<BinaryFileHeader*>(brfnt);
+            FontInformation* pFontInfo = NULL;
+            BinaryFileHeader* fileHeader = static_cast<BinaryFileHeader*>(brfnt);
 
             if (!IsManaging(NULL)) {
                 return false;
@@ -42,14 +45,12 @@ namespace nw4r {
                     blockHeader = CONVERT_OFFSET_TO_PTR(BinaryBlockHeader, blockHeader, blockHeader->size);
                     nBlocks++;
                 }
-            }
-            else {
+            } else {
                 if (fileHeader->version == NW4R_VERSION(1, 4)) {
                     if (!IsValidBinaryFile(fileHeader, SIGNATURE_FONT, NW4R_VERSION(1, 4), 2)) {
                         return false;
                     }
-                }
-                else {
+                } else {
                     if (!IsValidBinaryFile(fileHeader, SIGNATURE_FONT, NW4R_VERSION(1, 2), 2)) {
                         return false;
                     }
@@ -69,8 +70,8 @@ namespace nw4r {
         }
 
         FontInformation* ResFont::Rebuild(BinaryFileHeader* fileHeader) {
-            BinaryBlockHeader*  blockHeader;
-            FontInformation*    info = NULL;
+            BinaryBlockHeader* blockHeader;
+            FontInformation* info = NULL;
 
             int nBlocks = 0;
 
@@ -128,5 +129,5 @@ namespace nw4r {
 
             return info;
         }
-    }
-}
+    }  // namespace ut
+}  // namespace nw4r

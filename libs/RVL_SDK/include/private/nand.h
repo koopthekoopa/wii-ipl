@@ -5,34 +5,34 @@
 
 #include <revolution/nand.h>
 
+#include <private/nand/NANDLog.h>
 #include <private/nand/nandprivate.h>
 #include <private/nand/nandsecret.h>
-#include <private/nand/NANDLog.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-BOOL        nandIsInitialized();
+BOOL nandIsInitialized();
 
-void        nandCallback(ISFSError result, void* arg);
+void nandCallback(ISFSError result, void* arg);
 
-void        nandRemoveTailToken(char* newPath, const char* oldPath);
-void        nandGetHeadToken(char* token, char* newPath, const char* oldPath);
+void nandRemoveTailToken(char* newPath, const char* oldPath);
+void nandGetHeadToken(char* token, char* newPath, const char* oldPath);
 
-void        nandGetRelativeName(char* name, const char* path);
+void nandGetRelativeName(char* name, const char* path);
 
-void        nandConvertPath(char* absPath, const char* wd, const char* relPath);
+void nandConvertPath(char* absPath, const char* wd, const char* relPath);
 
-BOOL        nandIsPrivatePath(const char* path);
-BOOL        nandIsUnderPrivatePath(const char* path);
+BOOL nandIsPrivatePath(const char* path);
+BOOL nandIsUnderPrivatePath(const char* path);
 
-void        nandReportErrorCode(ISFSError result) NO_INLINE;
-s32         nandConvertErrorCode(ISFSError result);
+void nandReportErrorCode(ISFSError result) NO_INLINE;
+s32 nandConvertErrorCode(ISFSError result);
 
-void        nandGenerateAbsPath(char* absPath, const char* path);
+void nandGenerateAbsPath(char* absPath, const char* path);
 
-void        nandGetParentDirectory(char* parentDir, const char* absPath);
+void nandGetParentDirectory(char* parentDir, const char* absPath);
 
 const char* nandGetHomeDir();
 
@@ -40,4 +40,4 @@ const char* nandGetHomeDir();
 }
 #endif
 
-#endif // PRIVATE_NAND_H
+#endif  // PRIVATE_NAND_H

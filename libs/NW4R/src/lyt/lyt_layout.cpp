@@ -2,8 +2,8 @@
 
 #include <nw4r/lyt/common.h>
 
-#include <nw4r/lyt/pane.h>
 #include <nw4r/lyt/bounding.h>
+#include <nw4r/lyt/pane.h>
 #include <nw4r/lyt/picture.h>
 #include <nw4r/lyt/textbox.h>
 #include <nw4r/lyt/window.h>
@@ -16,35 +16,35 @@ namespace {
     using namespace nw4r;
     using namespace nw4r::lyt;
 
-    template<class T> T* CreateObject() {
+    template <class T>
+    T* CreateObject() {
         void* pMem = Layout::AllocMemory(sizeof(T));
 
         if (pMem != NULL) {
-            return new(pMem) T();
-        }
-        else {
+            return new (pMem) T();
+        } else {
             return NULL;
         }
     }
 
-    template<class T, typename Param1> T* CreateObject(Param1 p1) {
+    template <class T, typename Param1>
+    T* CreateObject(Param1 p1) {
         void* pMem = Layout::AllocMemory(sizeof(T));
 
         if (pMem) {
-            return new(pMem) T(p1);
-        }
-        else {
+            return new (pMem) T(p1);
+        } else {
             return NULL;
         }
     }
 
-    template<class T, typename Param1, typename Param2> T* CreateObject(Param1 p1, Param2 p2) {
+    template <class T, typename Param1, typename Param2>
+    T* CreateObject(Param1 p1, Param2 p2) {
         void* pMem = Layout::AllocMemory(sizeof(T));
 
         if (pMem) {
-            return new(pMem) T(p1, p2);
-        }
-        else {
+            return new (pMem) T(p1, p2);
+        } else {
             return NULL;
         }
     }
@@ -58,17 +58,14 @@ namespace {
             SetTagProcessorImpl(&(*it), pTagProcessor);
         }
     }
-}
+}  // namespace
 
 namespace nw4r {
     namespace lyt {
-        MEMAllocator*   Layout::mspAllocator;
+        MEMAllocator* Layout::mspAllocator;
 
-        Layout::Layout():
-        mpRootPane(NULL),
-        mpGroupContainer(NULL),
-        mLayoutSize(0.0f, 0.0f),
-        mOriginType(ORIGINTYPE_TOPLEFT) {}
+        Layout::Layout() : mpRootPane(NULL), mpGroupContainer(NULL), mLayoutSize(0.0f, 0.0f), mOriginType(ORIGINTYPE_TOPLEFT) {
+        }
 
         Layout::~Layout() {
             if (mpGroupContainer != NULL) {
@@ -104,7 +101,7 @@ namespace nw4r {
             Pane* pLastPane = NULL;
 
             bool bReadRootGroup = false;
-            int  groupNestLevel = 0;
+            int groupNestLevel = 0;
 
             void* dataPtr = reinterpret_cast<void*>(reinterpret_cast<u32>(lytResBuf) + fileHead->headerSize);
 
@@ -117,7 +114,7 @@ namespace nw4r {
                     // Layout
                     case res::OBJECT_SIGNATURE_LAYOUT: {
                         res::Layout* pResLyt = static_cast<res::Layout*>(dataPtr);
-                        mOriginType = pResLyt->originType != ORIGINTYPE_TOPLEFT; // Interesting way of doing it.
+                        mOriginType = pResLyt->originType != ORIGINTYPE_TOPLEFT;  // Interesting way of doing it.
                         mLayoutSize = pResLyt->layoutSize;
                         break;
                     }
@@ -177,8 +174,7 @@ namespace nw4r {
                         if (!bReadRootGroup) {
                             bReadRootGroup = true;
                             mpGroupContainer = CreateObject<GroupContainer>();
-                        }
-                        else if (mpGroupContainer && groupNestLevel == 1) {
+                        } else if (mpGroupContainer && groupNestLevel == 1) {
                             Group* pGroup = CreateObject<Group>(reinterpret_cast<const res::Group*>(pDataBlockHead), mpRootPane);
                             if (pGroup != NULL) {
                                 mpGroupContainer->AppendGroup(pGroup);
@@ -212,8 +208,7 @@ namespace nw4r {
             }
 
             const res::AnimationBlock* pInfoBlock = NULL;
-            const res::DataBlockHeader* pDataBlockHead = detail::ConvertOffsToPtr<res::DataBlockHeader>(pFileHead,
-                                                                                                        pFileHead->headerSize);
+            const res::DataBlockHeader* pDataBlockHead = detail::ConvertOffsToPtr<res::DataBlockHeader>(pFileHead, pFileHead->headerSize);
 
             AnimTransform* ret = NULL;
 
@@ -244,8 +239,7 @@ namespace nw4r {
                     }
                 }
 
-                pDataBlockHead = detail::ConvertOffsToPtr<res::DataBlockHeader>(pDataBlockHead,
-                                                                                pDataBlockHead->size);
+                pDataBlockHead = detail::ConvertOffsToPtr<res::DataBlockHeader>(pDataBlockHead, pDataBlockHead->size);
             }
 
             return ret;
@@ -293,10 +287,8 @@ namespace nw4r {
 
         const ut::Rect Layout::GetLayoutRect() const {
             if (mOriginType == ORIGINTYPE_CENTER) {
-                return ut::Rect(-mLayoutSize.width / 2.0f,  mLayoutSize.height / 2.0f,
-                                 mLayoutSize.width / 2.0f, -mLayoutSize.height / 2.0f);
-            }
-            else {
+                return ut::Rect(-mLayoutSize.width / 2.0f, mLayoutSize.height / 2.0f, mLayoutSize.width / 2.0f, -mLayoutSize.height / 2.0f);
+            } else {
                 return ut::Rect(0.0f, 0.0f, mLayoutSize.width, mLayoutSize.height);
             }
         }
@@ -332,5 +324,5 @@ namespace nw4r {
                 }
             }
         }
-    }
-}
+    }  // namespace lyt
+}  // namespace nw4r

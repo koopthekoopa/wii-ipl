@@ -1,6 +1,8 @@
 #ifndef PRIVATE_IPC_TYPES_H
 #define PRIVATE_IPC_TYPES_H
 
+// clang-format off
+
 enum {
     IPC_HEAP_CHUNK_FREE     = 0xBABE0000,
     IPC_HEAP_CHUNK_USED     = 0xBABE0001,
@@ -59,4 +61,6 @@ enum {
     IPC_SEEK_END
 };
 
-#endif // PRIVATE_IPC_TYPES_H
+// clang-format on
+
+#endif  // PRIVATE_IPC_TYPES_H

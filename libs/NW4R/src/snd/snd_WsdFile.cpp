@@ -6,8 +6,7 @@ namespace nw4r {
     namespace snd {
         namespace detail {
             bool WsdFileReader::IsValidFileHeader(const void* waveData) {
-                const ut::BinaryFileHeader* pFileHeader =
-                    static_cast<const ut::BinaryFileHeader*>(waveData);
+                const ut::BinaryFileHeader* pFileHeader = static_cast<const ut::BinaryFileHeader*>(waveData);
 
                 if (pFileHeader->signature != SIGNATURE) {
                     return false;
@@ -24,10 +23,7 @@ namespace nw4r {
                 return true;
             }
 
-            WsdFileReader::WsdFileReader(const void* waveData) :
-            mHeader(NULL),
-            mDataBlock(NULL),
-            mWaveBlock(NULL) {
+            WsdFileReader::WsdFileReader(const void* waveData) : mHeader(NULL), mDataBlock(NULL), mWaveBlock(NULL) {
                 if (!IsValidFileHeader(waveData)) {
                     return;
                 }
@@ -49,8 +45,7 @@ namespace nw4r {
                     soundInfo->fxSendB = pWsdInfo->fxSendB;
                     soundInfo->fxSendC = pWsdInfo->fxSendC;
                     soundInfo->mainSend = pWsdInfo->mainSend;
-                }
-                else if (mHeader->fileHeader.version == NW4R_VERSION(1, 1)) {
+                } else if (mHeader->fileHeader.version == NW4R_VERSION(1, 1)) {
                     soundInfo->pitch = pWsdInfo->pitch;
                     soundInfo->pan = pWsdInfo->pan;
                     soundInfo->surroundPan = pWsdInfo->surroundPan;
@@ -58,8 +53,7 @@ namespace nw4r {
                     soundInfo->fxSendB = 0;
                     soundInfo->fxSendC = 0;
                     soundInfo->mainSend = 127;
-                }
-                else {
+                } else {
                     soundInfo->pitch = 1.0f;
                     soundInfo->pan = 64;
                     soundInfo->surroundPan = 0;
@@ -89,8 +83,7 @@ namespace nw4r {
                     soundNoteInfo->pan = noteInfo->pan;
                     soundNoteInfo->surroundPan = noteInfo->surroundPan;
                     soundNoteInfo->pitch = noteInfo->pitch;
-                }
-                else {
+                } else {
                     soundNoteInfo->pan = 64;
                     soundNoteInfo->surroundPan = 0;
                     soundNoteInfo->pitch = 1.0f;
@@ -105,8 +98,7 @@ namespace nw4r {
                 if (mHeader->fileHeader.version == NW4R_VERSION(1, 0)) {
                     const WsdFile::WaveBlockOld* waveBlockOld = reinterpret_cast<const WsdFile::WaveBlockOld*>(mWaveBlock);
                     waveInfo = static_cast<const WaveFile::WaveInfo*>(ut::AddOffsetToPtr(waveBlockOld, waveBlockOld->offsetTable[id]));
-                }
-                else {
+                } else {
                     if (id >= mWaveBlock->waveCount) {
                         return false;
                     }
@@ -117,6 +109,6 @@ namespace nw4r {
                 WaveFileReader reader(waveInfo);
                 return reader.ReadWaveParam(waveData, waveAddr);
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

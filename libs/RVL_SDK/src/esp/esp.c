@@ -1,16 +1,16 @@
 #include <private/es/types.h>
 
-#include <private/ipc.h>
 #include <private/ios.h>
+#include <private/ipc.h>
 
 #include <revolution/esp.h>
 
 static IOSFd __esFd = -1;
 
 #define DECLARE_ES_WORK u8 __esWork[256] ALIGN32
-#define AT_ES_WORK(x)   (__esWork + x)
+#define AT_ES_WORK(x) (__esWork + x)
 
-#define IS_ALIGNED(x)   (((u32)(x) & 31) == 0)
+#define IS_ALIGNED(x) (((u32)(x) & 31) == 0)
 
 // Di means something. DVD Interface????
 enum {
@@ -113,10 +113,10 @@ out:
 ESError ESP_LaunchTitle(ESTitleId titleId, ESTicketView* ticket) {
     DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
-    ESTitleId*      tId = (ESTitleId*)AT_ES_WORK(0x00);
+    IOSIoVector* vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId* tId = (ESTitleId*)AT_ES_WORK(0x00);
 
-    ESError         ret;
+    ESError ret;
 
     if (__esFd < 0) {
         return ES_ERR_INVALID;
@@ -144,10 +144,10 @@ ESError ESP_LaunchTitle(ESTitleId titleId, ESTicketView* ticket) {
 ESFd ESP_OpenContentFile(ESContentId contentId) {
     DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
-    ESContentId*    pContentId = (ESContentId*)AT_ES_WORK(0x00);
+    IOSIoVector* vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESContentId* pContentId = (ESContentId*)AT_ES_WORK(0x00);
 
-    ESError         ret;
+    ESError ret;
 
     if (__esFd < 0) {
         return ES_ERR_INVALID;
@@ -157,17 +157,17 @@ ESFd ESP_OpenContentFile(ESContentId contentId) {
     vec[0].base = (u8*)pContentId;
     vec[0].length = sizeof(*pContentId);
 
-    ret = IOS_Ioctlv(__esFd, ES_IOCTLV_OPEN_CONTENT, 1, 0 , vec);
+    ret = IOS_Ioctlv(__esFd, ES_IOCTLV_OPEN_CONTENT, 1, 0, vec);
     return ret;
 }
 
 ESError ESP_ReadContentFile(ESFd fd, void* buffer, u32 size) {
     DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
-    ESFd*           cFd = (ESFd*)AT_ES_WORK(0x00);
+    IOSIoVector* vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESFd* cFd = (ESFd*)AT_ES_WORK(0x00);
 
-    ESError         ret;
+    ESError ret;
 
     if (__esFd < 0 || fd < 0 || buffer == NULL || size == 0) {
         return ES_ERR_INVALID;
@@ -184,19 +184,19 @@ ESError ESP_ReadContentFile(ESFd fd, void* buffer, u32 size) {
     vec[1].base = (u8*)buffer;
     vec[1].length = size;
 
-    ret = IOS_Ioctlv(__esFd, ES_IOCTLV_READ_CONTENT, 1, 1 , vec);
+    ret = IOS_Ioctlv(__esFd, ES_IOCTLV_READ_CONTENT, 1, 1, vec);
     return ret;
 }
 
 ESError ESP_SeekContentFile(ESFd fd, s32 offset, u32 whence) {
     DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
-    s32*            pFd = (s32*)AT_ES_WORK(0x00);
-    s32*            pOffset = (s32*)AT_ES_WORK(0x20);
-    u32*            pWhence = (u32*)AT_ES_WORK(0x40);
+    IOSIoVector* vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    s32* pFd = (s32*)AT_ES_WORK(0x00);
+    s32* pOffset = (s32*)AT_ES_WORK(0x20);
+    u32* pWhence = (u32*)AT_ES_WORK(0x40);
 
-    ESError         ret;
+    ESError ret;
 
     if (__esFd < 0) {
         return ES_ERR_INVALID;
@@ -214,17 +214,17 @@ ESError ESP_SeekContentFile(ESFd fd, s32 offset, u32 whence) {
     vec[2].base = (u8*)pWhence;
     vec[2].length = sizeof(*pWhence);
 
-    ret = IOS_Ioctlv(__esFd, ES_IOCTLV_SEEK_CONTENT, 3, 0 , vec);
+    ret = IOS_Ioctlv(__esFd, ES_IOCTLV_SEEK_CONTENT, 3, 0, vec);
     return ret;
 }
 
 ESError ESP_CloseContentFile(ESFd fd) {
     DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
-    s32*            pFd = (s32*)AT_ES_WORK(0x00);
+    IOSIoVector* vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    s32* pFd = (s32*)AT_ES_WORK(0x00);
 
-    ESError         ret;
+    ESError ret;
 
     if (__esFd < 0 || fd < 0) {
         return ES_ERR_INVALID;
@@ -241,11 +241,11 @@ ESError ESP_CloseContentFile(ESFd fd) {
 ESError ESP_ListTitleContentsOnCard(ESTitleId titleId, ESContentId* contentIds, u32* numContents) {
     DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
-    u32*            pNumContents = (u32*)AT_ES_WORK(0x20);
+    IOSIoVector* vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId* pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
+    u32* pNumContents = (u32*)AT_ES_WORK(0x20);
 
-    ESError         ret;
+    ESError ret;
 
     if (__esFd < 0 || numContents == NULL) {
         return ES_ERR_INVALID;
@@ -268,35 +268,33 @@ ESError ESP_ListTitleContentsOnCard(ESTitleId titleId, ESContentId* contentIds, 
             *numContents = *pNumContents;
         }
         return ret;
-    }
-    else if (*numContents == 0) {
+    } else if (*numContents == 0) {
         return ES_ERR_INVALID;
-    }
-    else {
+    } else {
         *pNumContents = *numContents;
 
         vec[0].base = (u8*)pTitleId;
         vec[0].length = sizeof(*pTitleId);
-    
+
         vec[1].base = (u8*)pNumContents;
         vec[1].length = sizeof(*pNumContents);
 
         vec[2].base = (u8*)contentIds;
         vec[2].length = *numContents * sizeof(*contentIds);
-    
+
         ret = IOS_Ioctlv(__esFd, ES_IOCTLV_LIST_TITLE_CONTENTS_WITH_COUNT, 2, 1, vec);
         return ret;
     }
 }
 
-ESError ESP_GetTicketViews(ESTitleId titleId,  ESTicketView* ticketViewList, u32* numTicketViews) {
+ESError ESP_GetTicketViews(ESTitleId titleId, ESTicketView* ticketViewList, u32* numTicketViews) {
     DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
-    u32*            pNumTicketViews = (u32*)AT_ES_WORK(0x20);
+    IOSIoVector* vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId* pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
+    u32* pNumTicketViews = (u32*)AT_ES_WORK(0x20);
 
-    ESError         ret;
+    ESError ret;
 
     if (__esFd < 0 || numTicketViews == NULL) {
         return ES_ERR_INVALID;
@@ -319,22 +317,20 @@ ESError ESP_GetTicketViews(ESTitleId titleId,  ESTicketView* ticketViewList, u32
             *numTicketViews = *pNumTicketViews;
         }
         return ret;
-    }
-    else if (*numTicketViews == 0) {
+    } else if (*numTicketViews == 0) {
         return ES_ERR_INVALID;
-    }
-    else {
+    } else {
         *pNumTicketViews = *numTicketViews;
 
         vec[0].base = (u8*)pTitleId;
         vec[0].length = sizeof(*pTitleId);
-    
+
         vec[1].base = (u8*)pNumTicketViews;
         vec[1].length = sizeof(*pNumTicketViews);
 
         vec[2].base = (u8*)ticketViewList;
         vec[2].length = *numTicketViews * sizeof(*ticketViewList);
-    
+
         ret = IOS_Ioctlv(__esFd, ES_IOCTLV_GET_TICKET_VIEWS_WITH_COUNT, 2, 1, vec);
         return ret;
     }
@@ -343,9 +339,9 @@ ESError ESP_GetTicketViews(ESTitleId titleId,  ESTicketView* ticketViewList, u32
 ESError ESP_DiGetTicketView(void* ticket, ESTicketView* ticketView) {
     DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    IOSIoVector* vec = (IOSIoVector*)AT_ES_WORK(0xD0);
 
-    ESError         ret;
+    ESError ret;
 
     if (__esFd < 0 || ticketView == NULL) {
         return ES_ERR_INVALID;
@@ -358,8 +354,7 @@ ESError ESP_DiGetTicketView(void* ticket, ESTicketView* ticketView) {
     vec[0].base = (u8*)ticket;
     if (ticket == NULL) {
         vec[0].length = 0;
-    }
-    else {
+    } else {
         vec[0].length = sizeof(ESTicket);
     }
 
@@ -373,10 +368,10 @@ ESError ESP_DiGetTicketView(void* ticket, ESTicketView* ticketView) {
 ESError ESP_DiGetTmd(ESTitleMeta* tmd, u32* tmdSize) {
     DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
-    u32*            pTmdSize = (u32*)AT_ES_WORK(0x00);
+    IOSIoVector* vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    u32* pTmdSize = (u32*)AT_ES_WORK(0x00);
 
-    ESError         ret;
+    ESError ret;
 
     if (__esFd < 0 || tmdSize == NULL) {
         return ES_ERR_INVALID;
@@ -395,11 +390,9 @@ ESError ESP_DiGetTmd(ESTitleMeta* tmd, u32* tmdSize) {
             *tmdSize = *pTmdSize;
         }
         return ret;
-    }
-    else if (*tmdSize == 0) {
+    } else if (*tmdSize == 0) {
         return ES_ERR_INVALID;
-    }
-    else {
+    } else {
         *pTmdSize = *tmdSize;
 
         vec[0].base = (u8*)pTmdSize;
@@ -416,11 +409,11 @@ ESError ESP_DiGetTmd(ESTitleMeta* tmd, u32* tmdSize) {
 ESError ESP_GetTmdView(ESTitleId titleId, ESTmdView* tmdView, u32* tmdSize) {
     DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
-    u32*            pTmdSize = (u32*)AT_ES_WORK(0x20);
+    IOSIoVector* vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId* pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
+    u32* pTmdSize = (u32*)AT_ES_WORK(0x20);
 
-    ESError         ret;
+    ESError ret;
 
     if (__esFd < 0 || tmdSize == NULL) {
         return ES_ERR_INVALID;
@@ -443,22 +436,20 @@ ESError ESP_GetTmdView(ESTitleId titleId, ESTmdView* tmdView, u32* tmdSize) {
             *tmdSize = *pTmdSize;
         }
         return ret;
-    }
-    else if (*tmdSize == 0) {
+    } else if (*tmdSize == 0) {
         return ES_ERR_INVALID;
-    }
-    else {
+    } else {
         *pTmdSize = *tmdSize;
 
         vec[0].base = (u8*)pTitleId;
         vec[0].length = sizeof(*pTitleId);
-    
+
         vec[1].base = (u8*)pTmdSize;
         vec[1].length = sizeof(*pTmdSize);
 
         vec[2].base = (u8*)tmdView;
         vec[2].length = *tmdSize;
-    
+
         ret = IOS_Ioctlv(__esFd, ES_IOCTLV_GET_TMDVIEW_WITH_SIZE, 2, 1, vec);
         return ret;
     }
@@ -467,10 +458,10 @@ ESError ESP_GetTmdView(ESTitleId titleId, ESTmdView* tmdView, u32* tmdSize) {
 ESError ESP_GetDataDir(ESTitleId titleId, char* dataDir) {
     DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
-    ESTitleId*      pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
+    IOSIoVector* vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId* pTitleId = (ESTitleId*)AT_ES_WORK(0x00);
 
-    ESError         ret;
+    ESError ret;
 
     if (__esFd < 0 || dataDir == NULL) {
         return ES_ERR_INVALID;
@@ -483,7 +474,7 @@ ESError ESP_GetDataDir(ESTitleId titleId, char* dataDir) {
     *pTitleId = titleId;
     vec[0].base = (u8*)pTitleId;
     vec[0].length = sizeof(*pTitleId);
-    
+
     vec[1].base = (u8*)dataDir;
     vec[1].length = sizeof(*dataDir) * 30;
 
@@ -494,9 +485,9 @@ ESError ESP_GetDataDir(ESTitleId titleId, char* dataDir) {
 ESError ESP_GetTitleId(ESTitleId* titleId) {
     DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    IOSIoVector* vec = (IOSIoVector*)AT_ES_WORK(0xD0);
 
-    ESError         ret;
+    ESError ret;
 
     if (__esFd < 0 || titleId == NULL) {
         return ES_ERR_INVALID;
@@ -515,11 +506,11 @@ ESError ESP_GetTitleId(ESTitleId* titleId) {
 ESError ESP_GetConsumption(ESTicketId ticketId, ESLpEntry* limitEntries, u32* numEntries) {
     DECLARE_ES_WORK;
 
-    IOSIoVector*    vec = (IOSIoVector*)AT_ES_WORK(0xD0);
-    ESTitleId*      pTicketId = (ESTitleId*)AT_ES_WORK(0x00);
-    u32*            pNumEntries = (u32*)AT_ES_WORK(0x20);
+    IOSIoVector* vec = (IOSIoVector*)AT_ES_WORK(0xD0);
+    ESTitleId* pTicketId = (ESTitleId*)AT_ES_WORK(0x00);
+    u32* pNumEntries = (u32*)AT_ES_WORK(0x20);
 
-    ESError         ret;
+    ESError ret;
 
     if (__esFd < 0) {
         return ES_ERR_INVALID;
@@ -536,8 +527,7 @@ ESError ESP_GetConsumption(ESTicketId ticketId, ESLpEntry* limitEntries, u32* nu
     if (limitEntries == NULL) {
         vec[1].base = NULL;
         vec[1].length = 0;
-    }
-    else {
+    } else {
         vec[1].base = (u8*)limitEntries;
         vec[1].length = *numEntries * sizeof(*limitEntries);
         *pNumEntries = *numEntries;

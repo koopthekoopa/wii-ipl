@@ -16,4 +16,4 @@ void* __OSGetIPCBufferLo() {
 void __OSInitIPCBuffer() {
     IpcBufferLo = RAMReadPtr(OSPhysicalToCached(OS_ADDR_IPC_BUFFER_START));
     IpcBufferHi = RAMReadPtr(OSPhysicalToCached(OS_ADDR_IPC_BUFFER_END));
-} 
+}

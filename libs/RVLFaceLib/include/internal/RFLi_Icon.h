@@ -10,11 +10,11 @@
 extern "C" {
 #endif
 
-void    RFLiMakeIconFromData(void* buf, const RFLiCharData* data, RFLExpression expression, const RFLIconSetting* setting);
-void    RFLiMakeIcon(void* buf, const RFLiCharInfo* info, RFLExpression expression, const RFLIconSetting* setting);
+void RFLiMakeIconFromData(void* buf, const RFLiCharData* data, RFLExpression expression, const RFLIconSetting* setting);
+void RFLiMakeIcon(void* buf, const RFLiCharInfo* info, RFLExpression expression, const RFLIconSetting* setting);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // RFLi_ICON_H
+#endif  // RFLi_ICON_H

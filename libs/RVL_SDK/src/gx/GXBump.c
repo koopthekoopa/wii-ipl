@@ -1,19 +1,21 @@
 #include <private/os.h>
 #include <revolution/os.h>
 
-#include <revolution/gx.h>
 #include <private/gx.h>
+#include <revolution/gx.h>
 
 #include <private/hollywood.h>
 
 #include <revolution/base/PPCArch.h>
 
-#define GX_WRITE_SOME_REG5(a, b) {  \
-    GX_WRITE_U8(a);                 \
-    GX_WRITE_U32(b);                \
-}
+#define GX_WRITE_SOME_REG5(a, b)                                                                                                                     \
+    {                                                                                                                                                \
+        GX_WRITE_U8(a);                                                                                                                              \
+        GX_WRITE_U32(b);                                                                                                                             \
+    }
 
-void GXSetTevIndirect(GXTevStageID tev_stage, GXIndTexStageID ind_stage, GXIndTexFormat format, GXIndTexBiasSel bias_sel, GXIndTexMtxID matrix_sel, GXIndTexWrap wrap_s, GXIndTexWrap wrap_t, GXBool add_prev, GXBool utc_lod, GXIndTexAlphaSel alpha_sel) NO_INLINE {
+void GXSetTevIndirect(GXTevStageID tev_stage, GXIndTexStageID ind_stage, GXIndTexFormat format, GXIndTexBiasSel bias_sel, GXIndTexMtxID matrix_sel,
+                      GXIndTexWrap wrap_s, GXIndTexWrap wrap_t, GXBool add_prev, GXBool utc_lod, GXIndTexAlphaSel alpha_sel) NO_INLINE {
     u32 reg = 0;
 
     SET_REG_FIELD(reg, 2, 0, ind_stage);
@@ -181,7 +183,8 @@ void GXSetTevDirect(GXTevStageID tev_stage) {
     GXSetTevIndirect(tev_stage, GX_INDTEXSTAGE0, GX_ITF_8, GX_ITB_NONE, GX_ITM_OFF, GX_ITW_OFF, GX_ITW_OFF, GX_FALSE, GX_FALSE, GX_ITBA_OFF);
 }
 
-void __GXUpdateBPMask() {}
+void __GXUpdateBPMask() {
+}
 
 void __GXSetIndirectMask(u32 mask) {
     SET_REG_FIELD(__GXData->bpMask, 8, ~0xFF, mask);

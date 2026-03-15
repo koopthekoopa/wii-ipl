@@ -6,14 +6,14 @@
 #include <new>
 
 namespace textinput {
-    namespace gui { 
+    namespace gui {
         void drawLine_(f32 x0, f32 y0, f32 x1, f32 y1, f32 z, u8 width, GXColor& color) {
             GXClearVtxDesc();
             GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
             GXSetVtxDesc(GX_VA_CLR0, GX_DIRECT);
             GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_CLR_RGBA, GX_F32, 0);
             GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR0, GX_CLR_RGBA, GX_RGBA8, 0);
-            
+
             GXSetCullMode(GX_CULL_NONE);
 
             GXSetNumChans(1);
@@ -34,12 +34,14 @@ namespace textinput {
             GXSetLineWidth(width, GX_TO_ZERO);
 
             // Draw the line
-            GXBegin(GX_LINES, GX_VTXFMT0, 2); {
+            GXBegin(GX_LINES, GX_VTXFMT0, 2);
+            {
                 GXPosition3f32(x0, y0, z);
                 GXColor1u32(*(u32*)&color);
                 GXPosition3f32(x1, y1, z);
                 GXColor1u32(*(u32*)&color);
-            } GXEnd();
+            }
+            GXEnd();
         }
 
         u32 GUIComponent::updatePointerImpl(const GUIPointer& pointer) {
@@ -54,14 +56,12 @@ namespace textinput {
                     if (isPointed(point)) {
                         onMove(point, x, y);
                         event = EVENT_MOVE;
-                    }
-                    else {
+                    } else {
                         setPointed(point, true);
                         onPointIn(point);
                         event = EVENT_POINT;
                     }
-                }
-                else {
+                } else {
                     // Not colliding with component
                     if (isPointed(point)) {
                         setPointed(point, false);
@@ -93,8 +93,7 @@ namespace textinput {
                 // Then delete them from memory.
                 if (mpAllocator) {
                     MEMFreeToAllocator(mpAllocator, p);
-                }
-                else {
+                } else {
                     delete p;
                 }
                 // Next component to kill!
@@ -104,7 +103,7 @@ namespace textinput {
 
         void GUIManager::init() {
             for (IDToComponent* p = static_cast<IDToComponent*>(nw4r::ut::List_GetFirst(&mComponents)); p != NULL;
-            p = static_cast<IDToComponent*>(nw4r::ut::List_GetNext(&mComponents, p))) {
+                 p = static_cast<IDToComponent*>(nw4r::ut::List_GetNext(&mComponents, p))) {
                 p->mpComponent->init();
             }
         }
@@ -115,10 +114,9 @@ namespace textinput {
             component->setParentManager(this);
             if (mpAllocator) {
                 void* pBuf = MEMAllocFromAllocator(mpAllocator, sizeof(IDToComponent));
-                IDToComponent* p = new(pBuf) IDToComponent(id, component);
+                IDToComponent* p = new (pBuf) IDToComponent(id, component);
                 nw4r::ut::List_Append(&mComponents, p);
-            }
-            else {
+            } else {
                 IDToComponent* p = new IDToComponent(id, component);
                 nw4r::ut::List_Append(&mComponents, p);
             }
@@ -139,8 +137,7 @@ namespace textinput {
 
             GUIComponent* triggerCom = NULL;
             for (IDToComponent* p = static_cast<IDToComponent*>(nw4r::ut::List_GetFirst(&mComponents)); p != NULL;
-            p = static_cast<IDToComponent*>(nw4r::ut::List_GetNext(&mComponents, p))) {
-
+                 p = static_cast<IDToComponent*>(nw4r::ut::List_GetNext(&mComponents, p))) {
                 GUIComponent* component = p->mpComponent;
                 u32 result = p->mpComponent->updatePointer(point, x, y, trig, hold, release);
 
@@ -166,11 +163,11 @@ namespace textinput {
                         break;
                     }
 
-            hasTouched:
-                    touched = true;
-                    if (component->isTriggerTarget()) {
-                        triggerCom = component;
-                    }
+                    hasTouched:
+                        touched = true;
+                        if (component->isTriggerTarget()) {
+                            triggerCom = component;
+                        }
                 }
 
                 if (component->isDragging(point)) {
@@ -194,28 +191,28 @@ namespace textinput {
 
         void GUIManager::calc() {
             for (IDToComponent* p = static_cast<IDToComponent*>(nw4r::ut::List_GetFirst(&mComponents)); p != NULL;
-            p = static_cast<IDToComponent*>(nw4r::ut::List_GetNext(&mComponents, p))) {
+                 p = static_cast<IDToComponent*>(nw4r::ut::List_GetNext(&mComponents, p))) {
                 p->mpComponent->calc();
             }
         }
 
         void GUIManager::draw() {
             for (IDToComponent* p = static_cast<IDToComponent*>(nw4r::ut::List_GetFirst(&mComponents)); p != NULL;
-            p = static_cast<IDToComponent*>(nw4r::ut::List_GetNext(&mComponents, p))) {
+                 p = static_cast<IDToComponent*>(nw4r::ut::List_GetNext(&mComponents, p))) {
                 p->mpComponent->draw();
             }
         }
 
         void GUIManager::setAllComponentTriggerTarget(bool bEnable) {
             for (IDToComponent* p = static_cast<IDToComponent*>(nw4r::ut::List_GetFirst(&mComponents)); p != NULL;
-            p = static_cast<IDToComponent*>(nw4r::ut::List_GetNext(&mComponents, p))) {
+                 p = static_cast<IDToComponent*>(nw4r::ut::List_GetNext(&mComponents, p))) {
                 p->mpComponent->setTriggerTarget(bEnable);
             }
         }
 
         void GUIManager::setDraggingButton(u32 dragBtn) {
             for (IDToComponent* p = static_cast<IDToComponent*>(nw4r::ut::List_GetFirst(&mComponents)); p != NULL;
-            p = static_cast<IDToComponent*>(nw4r::ut::List_GetNext(&mComponents, p))) {
+                 p = static_cast<IDToComponent*>(nw4r::ut::List_GetNext(&mComponents, p))) {
                 p->mpComponent->setDraggingButton(dragBtn);
             }
         }
@@ -232,8 +229,7 @@ namespace textinput {
 
                     MEMFreeToAllocator(mpAllocator, p->mpComponent);
                     MEMFreeToAllocator(mpAllocator, p);
-                }
-                else {
+                } else {
                     delete p->mpComponent;
                     delete p;
                 }
@@ -263,12 +259,11 @@ namespace textinput {
                 void* pComBuf = MEMAllocFromAllocator(mpAllocator, sizeof(PaneComponent));
                 void* pBuf = MEMAllocFromAllocator(mpAllocator, sizeof(PaneToComponent));
 
-                pComponent = new(pComBuf) PaneComponent(mIDCounter);
-                pToComponent = new(pBuf) PaneToComponent(pane, pComponent);
-            }
-            else {
+                pComponent = new (pComBuf) PaneComponent(mIDCounter);
+                pToComponent = new (pBuf) PaneToComponent(pane, pComponent);
+            } else {
                 pComponent = new PaneComponent(mIDCounter);
-                    pToComponent = new PaneToComponent(pane, pComponent);
+                pToComponent = new PaneToComponent(pane, pComponent);
             }
 
             // Append it
@@ -338,11 +333,9 @@ namespace textinput {
             nw4r::ut::Rect rect = mpPane->GetPaneRect(*drawInfo);
 
             // If position is touching pane?
-            if (rect.left <= pos.x && pos.x <= rect.right
-            && rect.bottom <= pos.y && pos.y <= rect.top) {
+            if (rect.left <= pos.x && pos.x <= rect.right && rect.bottom <= pos.y && pos.y <= rect.top) {
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         }
@@ -380,7 +373,7 @@ namespace textinput {
             }
             return is_visible(pane->GetParent());
         }
-        
+
         bool PaneComponent::isVisible() {
             nw4r::lyt::Pane* pane = mpPane;
             if (pane == NULL) {
@@ -394,5 +387,5 @@ namespace textinput {
             }
             return true;
         }
-    }
-}
+    }  // namespace gui
+}  // namespace textinput

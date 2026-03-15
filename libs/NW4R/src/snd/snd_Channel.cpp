@@ -10,13 +10,9 @@
 namespace nw4r {
     namespace snd {
         namespace detail {
-            Channel Channel::mChannel[AX_VOICE_MAX+1];
+            Channel Channel::mChannel[AX_VOICE_MAX + 1];
 
-            Channel::Channel() :
-            mPauseFlag(0),
-            mActiveFlag(false),
-            mAllocFlag(false),
-            mVoice(NULL) {
+            Channel::Channel() : mPauseFlag(0), mActiveFlag(false), mAllocFlag(false), mVoice(NULL) {
                 ChannelManager::GetInstance().Append(this);
             }
 
@@ -361,6 +357,6 @@ namespace nw4r {
                     currIt->Update(true);
                 }
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

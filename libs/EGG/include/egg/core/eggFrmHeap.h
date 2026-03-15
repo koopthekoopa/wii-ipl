@@ -5,9 +5,9 @@
 
 namespace EGG {
     class FrmHeap : public Heap {
-        public:
-            static FrmHeap* create(u32, EGG::Heap*, u16);
+    public:
+        static FrmHeap* create(u32, EGG::Heap*, u16);
     };
-}
+}  // namespace EGG
 
-#endif // EGG_CORE_FRM_HEAP_H
+#endif  // EGG_CORE_FRM_HEAP_H

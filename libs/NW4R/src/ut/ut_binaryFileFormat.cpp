@@ -18,7 +18,7 @@ namespace nw4r {
                 return false;
             }
             // Compare size
-            if (header->fileSize < sizeof(*header) + sizeof(BinaryBlockHeader) * minBlocks){
+            if (header->fileSize < sizeof(*header) + sizeof(BinaryBlockHeader) * minBlocks) {
                 return false;
             }
             // And finally compare the amount of blocks
@@ -28,5 +28,5 @@ namespace nw4r {
             // Passed all of those checks? Then it's valid!
             return true;
         }
-    }
-}
+    }  // namespace ut
+}  // namespace nw4r

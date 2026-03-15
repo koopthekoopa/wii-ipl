@@ -7,11 +7,11 @@
 extern "C" {
 #endif
 
-void    __OSInitAudioSystem();
-void    __OSStopAudioSystem();
+void __OSInitAudioSystem();
+void __OSStopAudioSystem();
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // PRIVATE_OS_AUDIO_SYSTEM_H
+#endif  // PRIVATE_OS_AUDIO_SYSTEM_H

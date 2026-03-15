@@ -18,13 +18,13 @@ enum {
     EUART_ERROR_EXI,
 };
 
-BOOL        EUARTInit();
+BOOL EUARTInit();
 
-EUARTError  InitializeUART(int unused);
-EUARTError  WriteUARTN(const char* msg, u32 n);
+EUARTError InitializeUART(int unused);
+EUARTError WriteUARTN(const char* msg, u32 n);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // PRIVATE_EUART_H
+#endif  // PRIVATE_EUART_H

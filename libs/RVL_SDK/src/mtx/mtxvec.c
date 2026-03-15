@@ -1,5 +1,7 @@
 #include <revolution/mtx.h>
 
+// clang-format off
+
 void C_MTXMultVec(const Mtx m, const Vec* src, Vec* dst) {
     Vec vTmp;
 
@@ -35,3 +37,5 @@ asm void PSMTXMultVec(const register Mtx m, const register Vec* src, register Ve
     psq_st f6, Vec.z(dst), 1, 0
     blr
 }
+
+// clang-format on

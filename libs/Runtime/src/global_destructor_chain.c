@@ -1,18 +1,18 @@
-#include <decomp.h>
 #include <NMWException.h>
+#include <decomp.h>
 
-DestructorChain*    __global_destructor_chain;
+DestructorChain* __global_destructor_chain;
 
 void __register_global_object(void* object, void* dtor, DestructorChain* chain) {
     chain->next = __global_destructor_chain;
     chain->dtor = dtor;
     chain->object = object;
-    
+
     __global_destructor_chain = chain;
 }
 
 void __destroy_global_chain() {
-    DestructorChain*   chain;
+    DestructorChain* chain;
 
     while ((chain = __global_destructor_chain) != 0) {
         __global_destructor_chain = chain->next;

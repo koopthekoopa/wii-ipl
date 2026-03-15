@@ -1,5 +1,5 @@
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 #include <revolution/vi.h>
 
@@ -9,35 +9,35 @@
 #include <private/hollywood.h>
 
 enum {
-    STM_IOCTL_REG_STM_EVENT     = 0x1000,
-    STM_IOCTL_HOT_RESET         = 0x2001,
-    STM_IOCTL_SHUTDOWN_TO_SBY   = 0x2003,
-    STM_IOCTL_SHUTDOWN_TO_IDL   = 0x2004,
-    STM_IOCTL_UNREG_STM_EVENT   = 0x3002,
-    STM_IOCTL_SET_VI_DIM        = 0x5001,
+    STM_IOCTL_REG_STM_EVENT = 0x1000,
+    STM_IOCTL_HOT_RESET = 0x2001,
+    STM_IOCTL_SHUTDOWN_TO_SBY = 0x2003,
+    STM_IOCTL_SHUTDOWN_TO_IDL = 0x2004,
+    STM_IOCTL_UNREG_STM_EVENT = 0x3002,
+    STM_IOCTL_SET_VI_DIM = 0x5001,
     STM_IOCTL_SET_IDLE_LED_MODE = 0x6002,
 };
 
-u32 StmVdOutBuf[8]   ALIGN32;
-u32 StmVdInBuf[8]    ALIGN32;
+u32 StmVdOutBuf[8] ALIGN32;
+u32 StmVdInBuf[8] ALIGN32;
 
-u32 StmImOutBuf[8]   ALIGN32;
-u32 StmImInBuf[8]    ALIGN32;
+u32 StmImOutBuf[8] ALIGN32;
+u32 StmImInBuf[8] ALIGN32;
 
-u32 StmEhOutBuf[8]   ALIGN32;
-u32 StmEhInBuf[8]    ALIGN32;
+u32 StmEhOutBuf[8] ALIGN32;
+u32 StmEhInBuf[8] ALIGN32;
 
-OSResetCallback     ResetCallback;
-OSPowerCallback     PowerCallback;
+OSResetCallback ResetCallback;
+OSPowerCallback PowerCallback;
 
-BOOL    StmVdInUse;
-BOOL    StmEhRegistered;
+BOOL StmVdInUse;
+BOOL StmEhRegistered;
 
-int     StmEhDesc, StmImDesc;
+int StmEhDesc, StmImDesc;
 
-BOOL    StmReady;
+BOOL StmReady;
 
-BOOL    ResetDown;
+BOOL ResetDown;
 
 void __OSDefaultResetCallback();
 void __OSDefaultPowerCallback();
@@ -49,17 +49,18 @@ static void LockUp() {
     OSDisableInterrupts();
     ICFlashInvalidate();
 
-    while (TRUE) {}
+    while (TRUE) {
+    }
 }
 
 void __OSRegisterStateEvent() {
     BOOL enabled;
     enabled = OSDisableInterrupts();
 
-    if (IOS_IoctlAsync(StmEhDesc, STM_IOCTL_REG_STM_EVENT, StmEhInBuf, sizeof(StmEhInBuf), StmEhOutBuf, sizeof(StmEhOutBuf), __OSStateEventHandler, NULL) == IPC_RESULT_OK) {
+    if (IOS_IoctlAsync(StmEhDesc, STM_IOCTL_REG_STM_EVENT, StmEhInBuf, sizeof(StmEhInBuf), StmEhOutBuf, sizeof(StmEhOutBuf), __OSStateEventHandler,
+                       NULL) == IPC_RESULT_OK) {
         StmEhRegistered = TRUE;
-    }
-    else {
+    } else {
         StmEhRegistered = FALSE;
     }
 
@@ -67,7 +68,7 @@ void __OSRegisterStateEvent() {
 }
 
 BOOL __OSGetResetButtonStateRaw() {
-    return (!(PI_READ_REG(PI_INTERRUPT_CAUSE) & (1<<PI_INTERRUPT_RSW_STATE))) ? TRUE : FALSE;
+    return (!(PI_READ_REG(PI_INTERRUPT_CAUSE) & (1 << PI_INTERRUPT_RSW_STATE))) ? TRUE : FALSE;
 }
 
 OSResetCallback OSSetResetCallback(OSResetCallback callback) {
@@ -137,7 +138,7 @@ BOOL __OSInitSTM() {
 
 void __OSShutdownToSBY() {
     VI_WRITE_REG(VI_DISPLAY_CONFIG, 0);
-    
+
     OSAssertMsg(StmReady, "Error: The firmware doesn't support shutdown feature.\n", 281);
 
     StmImInBuf[0] = 0;
@@ -150,16 +151,15 @@ void __OSShutdownToIDL() {
     VI_WRITE_REG(VI_DISPLAY_CONFIG, 0);
 
     OSAssertMsg(StmReady, "Error: The firmware doesn't support shutdown feature.\n", 308);
-    
+
     if (__OSGetHollywoodRev() == HOLLYWOOD_ES_1_0 || __OSGetHollywoodRev() == HOLLYWOOD_ES_1_1 || __OSGetHollywoodRev() == HOLLYWOOD_ES_1_2) {
         StmImInBuf[0] = 0xFCA08280;
-    }
-    else {
+    } else {
         StmImInBuf[0] = 0xFCE082C0;
     }
-    
+
     IOS_Ioctl(StmImDesc, STM_IOCTL_SHUTDOWN_TO_IDL, StmImInBuf, sizeof(StmImInBuf), StmImOutBuf, sizeof(StmImOutBuf));
-    
+
     LockUp();
 }
 
@@ -175,7 +175,7 @@ void __OSHotReset() {
 
 static BOOL AccessVIDimRegs() {
     IOSError result = IOS_IoctlAsync(StmImDesc, STM_IOCTL_SET_VI_DIM, StmVdInBuf, sizeof(StmVdInBuf), StmVdOutBuf, sizeof(StmVdOutBuf),
-                                    __OSVIDimReplyHandler, NULL);
+                                     __OSVIDimReplyHandler, NULL);
     return result != FALSE ? result : TRUE;
 }
 
@@ -240,14 +240,16 @@ s32 __OSUnRegisterStateEvent() {
 }
 
 s32 __OSVIDimReplyHandler(s32 result, void* arg) {
-    #pragma unused(result)
-    #pragma unused(arg)
-        StmVdInUse = FALSE;
-        return 0;
-    }
+#pragma unused(result)
+#pragma unused(arg)
+    StmVdInUse = FALSE;
+    return 0;
+}
 
-void __OSDefaultResetCallback() {}
-void __OSDefaultPowerCallback() {}
+void __OSDefaultResetCallback() {
+}
+void __OSDefaultPowerCallback() {
+}
 
 s32 __OSStateEventHandler(s32 result, void* arg) {
 #pragma unused(result)
@@ -255,13 +257,13 @@ s32 __OSStateEventHandler(s32 result, void* arg) {
     OSPowerCallback callback;
 
     OSAssertMsg(result == 0, "Error on STM state event handler\n", 753);
-    
+
     StmEhRegistered = FALSE;
-    
+
     if (((u32*)StmEhOutBuf)[0] == 0x20000) {
         if (__OSGetResetButtonStateRaw()) {
             BOOL enabled = OSDisableInterrupts();
-    
+
             callback = ResetCallback;
             ResetDown = TRUE;
             ResetCallback = __OSDefaultResetCallback;
@@ -272,16 +274,16 @@ s32 __OSStateEventHandler(s32 result, void* arg) {
         }
         __OSRegisterStateEvent();
     }
-    
+
     if (((u32*)StmEhOutBuf)[0] == 0x0800) {
         BOOL enabled = OSDisableInterrupts();
-    
+
         callback = PowerCallback;
         PowerCallback = __OSDefaultPowerCallback;
         callback();
-    
+
         OSRestoreInterrupts(enabled);
     }
-    
+
     return 0;
 }

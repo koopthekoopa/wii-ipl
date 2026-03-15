@@ -8,15 +8,15 @@
 extern "C" {
 #endif
 
-RFLErrcode  RFLLoadControllerAsync(s32 chan);
-RFLErrcode  RFLUnloadController(s32 chan);
+RFLErrcode RFLLoadControllerAsync(s32 chan);
+RFLErrcode RFLUnloadController(s32 chan);
 
-BOOL        RFLIsAvailableControllerData(s32 chan, u8 index);
+BOOL RFLIsAvailableControllerData(s32 chan, u8 index);
 
-u8          RFLGetAvailableControllerDataNum(s32 chan);
+u8 RFLGetAvailableControllerDataNum(s32 chan);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // RFL_CONTROLLER_H
+#endif  // RFL_CONTROLLER_H

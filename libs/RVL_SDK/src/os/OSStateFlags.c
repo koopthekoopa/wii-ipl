@@ -1,14 +1,14 @@
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 #include <revolution/nand.h>
 
 #include <string.h>
 
-static OSStateFlags StateFlags  ALIGN32;
+static OSStateFlags StateFlags ALIGN32;
 
 static u32 checkSum(OSStateFlags* flags) {
-    u32  *ptr, i, sum;
+    u32 *ptr, i, sum;
 
     ptr = (u32*)&flags->lastAppType;
     sum = 0;
@@ -28,8 +28,7 @@ BOOL __OSCreateStateFlags() {
     ret = NANDGetStatus(OS_STATE_FLAGS_NAND_PATH, &status);
     if (ret == NAND_RESULT_OK) {
         return TRUE;
-    }
-    else if (ret == NAND_RESULT_NOEXISTS) {
+    } else if (ret == NAND_RESULT_NOEXISTS) {
         return NANDCreate(OS_STATE_FLAGS_NAND_PATH, NAND_PERM_ALL_RW, 0) == NAND_RESULT_OK ? TRUE : FALSE;
     }
     return FALSE;
@@ -57,8 +56,7 @@ BOOL __OSWriteStateFlags(OSStateFlags* flags) {
         if (ret != NAND_RESULT_OK) {
             return FALSE;
         }
-    }
-    else {
+    } else {
         return FALSE;
     }
 
@@ -80,8 +78,7 @@ BOOL __OSReadStateFlags(OSStateFlags* flags) {
             memset(flags, 0, sizeof(StateFlags));
             return FALSE;
         }
-    }
-    else {
+    } else {
         memset(flags, 0, sizeof(OSStateFlags));
         return FALSE;
     }

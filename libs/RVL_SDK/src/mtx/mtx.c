@@ -2,6 +2,8 @@
 
 #include <math.h>
 
+// clang-format off
+
 static f32 Unit01[2] = {
     0.0f,
     1.0f
@@ -677,3 +679,5 @@ void C_MTXLookAt(Mtx m, const Point3d* camPos, const Vec* camUp, const Point3d* 
     m[2][2] = vLook.z;
     m[2][3] = -((camPos->z * vLook.z) + ((camPos->x * vLook.x) + (camPos->y * vLook.y)));
 }
+
+// clang-format on

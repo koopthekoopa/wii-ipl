@@ -34,8 +34,7 @@ namespace nw4r {
                 for (; it != NULL; it = it->mNext) {
                     if (begin <= it && it < end) {
                         pPrev->mNext = it->mNext;
-                    }
-                    else {
+                    } else {
                         pPrev = it;
                     }
                 }
@@ -73,6 +72,6 @@ namespace nw4r {
                 pHead->mNext = mNext;
                 mNext = pHead;
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

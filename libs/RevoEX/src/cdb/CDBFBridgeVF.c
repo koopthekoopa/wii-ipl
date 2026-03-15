@@ -1,5 +1,5 @@
-#include <revolution/cdb.h>
 #include <private/cdb.h>
+#include <revolution/cdb.h>
 
 CDBErr CDBFCreateFileVF(CDBBridgeFile* file, const char* fileName) {
     VFError vfErr;
@@ -10,11 +10,9 @@ CDBErr CDBFCreateFileVF(CDBBridgeFile* file, const char* fileName) {
 
         if (vfErr == VF_ERR_EEXIST) {
             return CDB_ERROR_FILE_EXISTS;
-        }
-        else if (vfErr == VF_ERR_ENOSPC) {
+        } else if (vfErr == VF_ERR_ENOSPC) {
             return CDB_ERROR_OUT_OF_SPACE;
-        }
-        else {
+        } else {
             CDBSetFatalVFErrorFlag();
             return CDBOnVFErrorOccured(vfErr);
         }
@@ -56,8 +54,7 @@ CDBErr CDBFOpenVF(CDBBridgeFile* file, const char* fileName) {
 
         if (vfErr == VF_ERR_ENOENT || vfErr == VF_ERR_EINVAL) {
             return CDB_ERROR_CANNOT_OPEN_FILE;
-        }
-        else {
+        } else {
             CDBSetFatalVFErrorFlag();
             vfErr = VFGetLastError();
             return CDBOnVFErrorOccured(vfErr);
@@ -128,11 +125,11 @@ CDBErr CDBFSeekVF_(VFFILE* file, u32 offset, CDBSeek seek) {
 }
 
 CDBErr CDBFReadAttrVF(CDBBridgeFile* file, CDBAttr* attr) {
-    CDBErr  err;
+    CDBErr err;
     VFError vfErr;
-    
-    s32     fileOffset;
-    u32     readSize;
+
+    s32 fileOffset;
+    u32 readSize;
 
     fileOffset = VFGetOffsetByFd(file->vf);
 
@@ -145,8 +142,7 @@ CDBErr CDBFReadAttrVF(CDBBridgeFile* file, CDBAttr* attr) {
     if (vfErr != VF_ERR_SUCCESS) {
         CDBSetFatalVFErrorFlag();
         err = CDBOnVFErrorOccured(vfErr);
-    }
-    else {
+    } else {
         err = CDB_ERROR_OK;
     }
 
@@ -167,10 +163,10 @@ CDBErr CDBFReadAttrVF(CDBBridgeFile* file, CDBAttr* attr) {
 }
 
 CDBErr CDBFWriteAttrVF(CDBBridgeFile* file, CDBAttr* attr) {
-    CDBErr  err;
+    CDBErr err;
     VFError vfErr;
-    
-    s32     fileOffset;
+
+    s32 fileOffset;
 
     fileOffset = VFGetOffsetByFd(file->vf);
 
@@ -183,13 +179,11 @@ CDBErr CDBFWriteAttrVF(CDBBridgeFile* file, CDBAttr* attr) {
     if (vfErr != VF_ERR_SUCCESS) {
         if (vfErr == VF_ERR_ENOSPC) {
             err = CDB_ERROR_OUT_OF_SPACE;
-        }
-        else {
+        } else {
             CDBSetFatalVFErrorFlag();
             err = CDBOnVFErrorOccured(vfErr);
         }
-    }
-    else {
+    } else {
         err = CDB_ERROR_OK;
     }
 
@@ -206,10 +200,10 @@ CDBErr CDBFWriteAttrVF(CDBBridgeFile* file, CDBAttr* attr) {
 }
 
 CDBErr CDBFWriteAttrOnlyLeadChunkVF(CDBBridgeFile* file, CDBAttr* chunk) {
-    CDBErr  err;
+    CDBErr err;
     VFError vfErr;
-    
-    s32     fileOffset;
+
+    s32 fileOffset;
 
     fileOffset = VFGetOffsetByFd(file->vf);
 
@@ -222,13 +216,11 @@ CDBErr CDBFWriteAttrOnlyLeadChunkVF(CDBBridgeFile* file, CDBAttr* chunk) {
     if (vfErr != VF_ERR_SUCCESS) {
         if (vfErr == VF_ERR_ENOSPC) {
             err = CDB_ERROR_OUT_OF_SPACE;
-        }
-        else {
+        } else {
             CDBSetFatalVFErrorFlag();
             err = CDBOnVFErrorOccured(vfErr);
         }
-    }
-    else {
+    } else {
         err = CDB_ERROR_OK;
     }
 
@@ -259,8 +251,7 @@ CDBErr CDBFWriteDataVF(CDBBridgeFile* file, void* buffer, u32 size) {
     if (vfErr != VF_ERR_SUCCESS) {
         if (vfErr == VF_ERR_ENOSPC) {
             return CDB_ERROR_OUT_OF_SPACE;
-        }
-        else {
+        } else {
             CDBSetFatalVFErrorFlag();
             return CDBOnVFErrorOccured(vfErr);
         }
@@ -286,12 +277,11 @@ CDBErr CDBFGetDataSizeVF(CDBBridgeFile* file, u32* dataSize) {
     s32 size = VFGetFileSizeByFd(file->vf);
     if (size < 0) {
         err = CDB_ERROR_CANNOT_OPEN_FILE;
-    }
-    else {
+    } else {
         *dataSize = size;
         err = CDB_ERROR_OK;
     }
-    
+
     *dataSize -= 0x400;
 
     return err;
@@ -303,8 +293,7 @@ CDBErr CDBFGetFileSizeVF(CDBBridgeFile* file, u32* fileSize) {
     s32 size = VFGetFileSizeByFd(file->vf);
     if (size < 0) {
         err = CDB_ERROR_CANNOT_OPEN_FILE;
-    }
-    else {
+    } else {
         *fileSize = size;
         err = CDB_ERROR_OK;
     }

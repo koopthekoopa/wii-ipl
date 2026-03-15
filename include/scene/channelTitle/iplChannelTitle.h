@@ -8,15 +8,15 @@ namespace ipl {
         class ChannelSelect;
 
         FADER_SCENE_CLASS(ChannelTitle) {
-            public:
-                ChannelTitle(EGG::Heap* heap, ChannelSelect* chanSel);
+        public:
+            ChannelTitle(EGG::Heap * heap, ChannelSelect * chanSel);
 
-                BOOL    isInLaunching() const;
+            BOOL isInLaunching() const;
 
-            private:
-                u8  unk_0x58[0x3B0];
+        private:
+            u8 unk_0x58[0x3B0];
         };
-    }
-}
+    }  // namespace scene
+}  // namespace ipl
 
-#endif // IPL_SCENE_CHANNEL_TITLE_H
+#endif  // IPL_SCENE_CHANNEL_TITLE_H

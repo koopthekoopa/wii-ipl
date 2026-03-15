@@ -6,6 +6,7 @@
 
 namespace ipl {
     namespace scene {
+        // clang-format off
         const char* scSDBtnName[] = {
             "Ac",
         };
@@ -18,28 +19,28 @@ namespace ipl {
             -152.0f,
             -245.0f
         };
+        // clang-format on
 
-        SDMenuButton::SDMenuButton() :
-        mpLayout(NULL), mpGui(NULL),
-        mbHovered(),
-        mbEnabled(true) {}
+        SDMenuButton::SDMenuButton() : mpLayout(NULL), mpGui(NULL), mbHovered(), mbEnabled(true) {
+        }
 
-        SDMenuButton::~SDMenuButton() {}
+        SDMenuButton::~SDMenuButton() {
+        }
 
         void SDMenuButton::create(nand::LayoutFile* layoutFile, nand::LayoutFile* balloonFile, EGG::Heap* heap) {
             mpLayout = new layout::Object(heap, layoutFile, "arc", "mn_Sdcard_Btn.brlyt");
-            mpLayout->bindToGroup("mn_Sdcard_Btn_On_Roop.brlan",       "On_Roop",     false);
-            mpLayout->bindToGroup("mn_Sdcard_Btn_BtnL_In.brlan",       "Btn_L_InOut", false);
-            mpLayout->bindToGroup("mn_Sdcard_Btn_BtnL_Out.brlan",      "Btn_L_InOut", false);
-            mpLayout->bindToGroup("mn_Sdcard_Btn_Insert.brlan",        "Insert",      false);
-            mpLayout->bindToGroup("mn_Sdcard_Btn_BtnL_On.brlan",       "Btn_L_On",    false);
-            mpLayout->bindToGroup("mn_Sdcard_Btn_BtnL_RollOver.brlan", "Btn_L_Roll",  false);
-            mpLayout->bindToGroup("mn_Sdcard_Btn_BtnL_RollOut.brlan",  "Btn_L_On",    false);
+            mpLayout->bindToGroup("mn_Sdcard_Btn_On_Roop.brlan", "On_Roop", false);
+            mpLayout->bindToGroup("mn_Sdcard_Btn_BtnL_In.brlan", "Btn_L_InOut", false);
+            mpLayout->bindToGroup("mn_Sdcard_Btn_BtnL_Out.brlan", "Btn_L_InOut", false);
+            mpLayout->bindToGroup("mn_Sdcard_Btn_Insert.brlan", "Insert", false);
+            mpLayout->bindToGroup("mn_Sdcard_Btn_BtnL_On.brlan", "Btn_L_On", false);
+            mpLayout->bindToGroup("mn_Sdcard_Btn_BtnL_RollOver.brlan", "Btn_L_Roll", false);
+            mpLayout->bindToGroup("mn_Sdcard_Btn_BtnL_RollOut.brlan", "Btn_L_On", false);
             mpLayout->getAnim(ANIM_BTN_ROLL_OVER)->initAnmFrame();
             mpLayout->finishBinding();
             mpLayout->getAnim(ANIM_ON_LOOP)->initAnmFrame();
             mpLayout->getAnim(ANIM_ON_LOOP)->play();
-            
+
             mpGui = new gui::PaneManager(NULL, mpLayout->getDrawInfo(), NULL, NULL);
             mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
@@ -49,8 +50,7 @@ namespace ipl {
             mpLayout->show("N_Btn_Off");
 
             nw4r::math::VEC3 newPos(SCGetAspectRatio() == SC_ASPECT_RATIO_16x9 ? scBtnPos[SC_ASPECT_RATIO_16x9] : scBtnPos[SC_ASPECT_RATIO_4x3],
-                                    -172.0f,
-                                    -172.0f);
+                                    -172.0f, -172.0f);
             mpLayout->GetRootPane()->SetTranslate(newPos);
 
             for (int i = 0; i < BTN_MAX; i++) {
@@ -120,7 +120,7 @@ namespace ipl {
                     }
                 }
 
-                if (mbHovered[btnNo] < 4/*???*/) {
+                if (mbHovered[btnNo] < 4 /*???*/) {
                     mbHovered[btnNo]++;
                 }
             }
@@ -185,8 +185,7 @@ namespace ipl {
                             anim->setMinFrame(static_cast<u32>(frame));
                             anim->setMaxFrame(15.0f);
                         }
-                    }
-                    else {
+                    } else {
                         anim = mpLayout->getAnim(ANIM_BTN_OUT);
                         anim->setMinFrame(0.0f);
                         anim->setMaxFrame(15.0f);
@@ -207,8 +206,7 @@ namespace ipl {
                 anim->initAnmFrame();
                 if (backwards) {
                     anim->setAnmType(ANIM_TYPE_BACKWARD);
-                }
-                else {
+                } else {
                     anim->setAnmType(ANIM_TYPE_FORWARD);
                 }
                 anim->play();
@@ -254,8 +252,7 @@ namespace ipl {
             if (bInserted) {
                 mpLayout->setVisible("N_Btn_On", true);
                 mpLayout->setVisible("N_Btn_Off", false);
-            }
-            else {
+            } else {
                 mpLayout->setVisible("N_Btn_On", false);
                 mpLayout->setVisible("N_Btn_Off", true);
 
@@ -300,6 +297,7 @@ namespace ipl {
             onEventDerived(compId, event, static_cast<controller::Interface*>(data));
         }
 
-        void SDMenuEventHandlerBase::onEventDerived(u32 compId, u32 event, const controller::Interface* con) {}
-    }
-}
+        void SDMenuEventHandlerBase::onEventDerived(u32 compId, u32 event, const controller::Interface* con) {
+        }
+    }  // namespace scene
+}  // namespace ipl

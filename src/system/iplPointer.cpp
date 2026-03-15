@@ -1,14 +1,16 @@
 #include "system/iplPointer.h"
 
+#include <nw4r/lyt.h>
 #include <nw4r/math.h>
 #include <nw4r/ut.h>
-#include <nw4r/lyt.h>
 
 #include "iplSystem.h"
 
 namespace ipl {
-    #define MIN_LENGTH    32.f
-    #define MAX_LENGTH    128.f
+#define MIN_LENGTH 32.f
+#define MAX_LENGTH 128.f
+
+    // clang-format off
     
     enum {
         POINT_DOWN = 0,
@@ -42,17 +44,14 @@ namespace ipl {
          "my_BScroll_a.brlyt"
     };
 
-    Pointer::Pointer(EGG::Heap* heap) :
-    mIsScrolling(POINT_NOT_SCROLLING),
-    mOriginPos(0.f, 0.f),
-    mArrowLength(MIN_LENGTH),
-    mPointDirection(POINT_DOWN),
-    mbScrolling(false),
-    mbVisible(true),
-    mCore() {
+    // clang-format on
+
+    Pointer::Pointer(EGG::Heap* heap)
+        : mIsScrolling(POINT_NOT_SCROLLING), mOriginPos(0.f, 0.f), mArrowLength(MIN_LENGTH), mPointDirection(POINT_DOWN), mbScrolling(false),
+          mbVisible(true), mCore() {
         mpLayoutArchive = System::getNandManager()->readLayout(heap, "cursor.ash");
         for (int i = 0; i < MAX_LAYOUT_FILES; i++) {
-            mpLayout[i] = new(heap, 4) layout::Object(heap, mpLayoutArchive, "arc", scLayoutName[i]);
+            mpLayout[i] = new (heap, 4) layout::Object(heap, mpLayoutArchive, "arc", scLayoutName[i]);
             mpLayout[i]->finishBinding();
         }
     }
@@ -72,8 +71,8 @@ namespace ipl {
             pOriginPane->SetTranslate(mOriginPos);
 
             // Arrow Length
-            nw4r::lyt::Size arrowSize = pLengthPane->GetSize();   
-            arrowSize.height          = IPL_MATH_CLAMP(mArrowLength, MIN_LENGTH, MAX_LENGTH);
+            nw4r::lyt::Size arrowSize = pLengthPane->GetSize();
+            arrowSize.height = IPL_MATH_CLAMP(mArrowLength, MIN_LENGTH, MAX_LENGTH);
             pLengthPane->SetSize(arrowSize);
 
             // Arrow Scale
@@ -82,8 +81,7 @@ namespace ipl {
             f32 arrowDirection;
             if (mPointDirection == POINT_DOWN) {
                 arrowDirection = 1.0f;
-            }
-            else {
+            } else {
                 arrowDirection = -1.0f;
             }
             pRootPane->SetScale(math::VEC2(1.0f, arrowDirection));
@@ -100,7 +98,7 @@ namespace ipl {
     void Pointer::draw() {
         if (mbVisible) {
             mCore.draw();
-            
+
             // Draw the scroller
             if (mIsScrolling >= POINT_SCROLLING) {
                 mpLayout[LYT_SCROLLER_ID]->draw();
@@ -132,4 +130,4 @@ namespace ipl {
 
         return mpLayout[grabId + chan];
     }
-}
+}  // namespace ipl

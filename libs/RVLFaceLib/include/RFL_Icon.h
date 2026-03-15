@@ -16,23 +16,24 @@ typedef enum {
 } RFLIconBG;
 
 typedef struct {
-    u16         width;          // 0x00
-    u16         height;         // 0x02
+    u16 width;   // 0x00
+    u16 height;  // 0x02
 
-    RFLIconBG   bgType;         // 0x04
-    GXColor     bgColor;        // 0x08
+    RFLIconBG bgType;  // 0x04
+    GXColor bgColor;   // 0x08
 
-    BOOL        drawXluOnly;    // 0x0C
+    BOOL drawXluOnly;  // 0x0C
 } RFLIconSetting;
 
-RFLErrcode  RFLMakeIcon(void* buf, RFLDataSource source, RFLMiddleDatabase* middleDB, u16 index, RFLExpression expression, const RFLIconSetting* setting);
+RFLErrcode RFLMakeIcon(void* buf, RFLDataSource source, RFLMiddleDatabase* middleDB, u16 index, RFLExpression expression,
+                       const RFLIconSetting* setting);
 
 #if RFL_BUILD >= 20080306
-void        RFLSetIconDrawDoneCallback(RFLSimpleCB cb);
-#endif // RFL_BUILD
+void RFLSetIconDrawDoneCallback(RFLSimpleCB cb);
+#endif  // RFL_BUILD
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // RFL_ICON_H
+#endif  // RFL_ICON_H

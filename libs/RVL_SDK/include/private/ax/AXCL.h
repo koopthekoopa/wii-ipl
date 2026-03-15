@@ -12,19 +12,19 @@ extern "C" {
 // Each command takes up two bytes
 #define AX_CL_SIZE (AX_CL_MAX_CMD * sizeof(u16))
 
-extern u32  __AXClMode;
+extern u32 __AXClMode;
 
-void    __AXClInit();
+void __AXClInit();
 
-u32     __AXGetCommandListCycles();
-void*   __AXGetCommandListAddress();
+u32 __AXGetCommandListCycles();
+void* __AXGetCommandListAddress();
 
-void    __AXWriteToCommandList(u16 cmd);
+void __AXWriteToCommandList(u16 cmd);
 
-void    __AXNextFrame(void* surround, void* lr, void* rmt);
+void __AXNextFrame(void* surround, void* lr, void* rmt);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // PRIVATE_AX_CL_H
+#endif  // PRIVATE_AX_CL_H

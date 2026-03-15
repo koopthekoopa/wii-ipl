@@ -1,16 +1,16 @@
-#include <revolution/cdb.h>
 #include <private/cdb.h>
+#include <revolution/cdb.h>
 
+#include <stdbool.h>
 #include <stddef.h>
 #include <string.h>
-#include <stdbool.h>
 
-extern CDBErr   GenCDBIdNumber(u32* cdbIDNum);
+extern CDBErr GenCDBIdNumber(u32* cdbIDNum);
 
-static char     CDB_ATTR_MAGIC[] = "CDBFILE";
+static char CDB_ATTR_MAGIC[] = "CDBFILE";
 static const u8 CDB_ATTR_VERSION = 2;
 
-static u32  s_seed = 0;
+static u32 s_seed = 0;
 
 u32 CDBAttrGetDescOffset(CDBAttr* attr) {
     return attr->buf.version == 1 ? 0x0D : offsetof(CDBAttrBuf, descLength);
@@ -62,28 +62,27 @@ void CDBAttrInit(CDBAttr* attr) {
 }
 
 CDBErr CDBAttrCreateOnNAND(CDBAttr* attr, const char* desc, u32 lastModifiedDate) {
-    CDBErr  err;
-    u32     descStrLen;
-    u32     cdbNum;
+    CDBErr err;
+    u32 descStrLen;
+    u32 cdbNum;
 
-    u8      attrDescLength;
-    u32     attrLastModifiedDate;
-    u32     attrModifiedCount;
-    u32     attrCdbIDNum;
+    u8 attrDescLength;
+    u32 attrLastModifiedDate;
+    u32 attrModifiedCount;
+    u32 attrCdbIDNum;
 
-    u64     attrWiiID;
+    u64 attrWiiID;
 
     CDBAttrInit(attr);
 
-    memcpy(&attr->buf.magic, CDB_ATTR_MAGIC, sizeof(CDB_ATTR_MAGIC)-1);
+    memcpy(&attr->buf.magic, CDB_ATTR_MAGIC, sizeof(CDB_ATTR_MAGIC) - 1);
     memcpy(&attr->buf.version, &CDB_ATTR_VERSION, sizeof(CDB_ATTR_VERSION));
 
-    descStrLen = strlen(desc)+1;
+    descStrLen = strlen(desc) + 1;
 
     if (descStrLen >= CDB_ATTR_BUF_MAX_DESC_LEN) {
         err = CDB_ERROR_16;
-    }
-    else {
+    } else {
         attrDescLength = descStrLen;
 
         memcpy((u8*)&attr->buf + CDBAttrGetDescOffset(attr), &attrDescLength, sizeof(u8));
@@ -162,8 +161,7 @@ void CDBAttrSetKeyStr(CDBAttr* attr, CDBRecordKey* recordKey) {
     if (CDBRecordKeyIsValid(recordKey)) {
         memset(attr->buf.keyString, 0, CDB_ATTR_BUF_KEY_STRING_LEN);
         CDBRecordKeyGetKeyStr(recordKey, attr->buf.keyString);
-    }
-    else {
+    } else {
         CDBReportError("CDBAttrSetKeyStr : invalid CDBRecordKey\n");
     }
 }
@@ -200,7 +198,7 @@ void CDBAttrGetIV(CDBAttr* attr, u8* iv) {
     int i, j;
     for (i = 0; i < 2; i++) {
         for (j = 0; j < 8; j++) {
-            iv[(i*8)+j] = attr->buf.iv[(i * 8) + j];
+            iv[(i * 8) + j] = attr->buf.iv[(i * 8) + j];
         }
     }
 }

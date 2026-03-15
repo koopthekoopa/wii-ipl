@@ -5,8 +5,8 @@
 
 #include <config.h>
 
-BOOL            DBVerbose;
-DBInterface*    __DBInterface;
+BOOL DBVerbose;
+DBInterface* __DBInterface;
 
 void DBInit() {
     __DBInterface = OSPhysicalToCached(OS_ADDR_DB_INTERFACE);
@@ -25,6 +25,7 @@ void __DBExceptionDestinationAux() {
 }
 
 asm void __DBExceptionDestination() {
+    // clang-format off
 #ifdef __MWERKS__
     nofralloc
     
@@ -35,6 +36,7 @@ asm void __DBExceptionDestination() {
 
     b __DBExceptionDestinationAux
 #endif // __MWERKS__
+    // clang-format on
 }
 
 BOOL __DBIsExceptionMarked(__OSException exception) {

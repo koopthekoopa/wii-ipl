@@ -16,6 +16,7 @@
 #include "config.h"
 
 namespace ipl {
+    // clang-format off
     #define DISK_CHANNEL        CHANNEL_INFO(channel::PRIMARY_TYPE_DISK,    channel::SECONARY_TYPE_SYSTEM, 0x0000000F, 0)
     #define NIGAOE_CHANNEL      CHANNEL_INFO(channel::PRIMARY_TYPE_CHANNEL, channel::SECONARY_TYPE_SYSTEM, 0x0000000E, TITLE_NIGAOE_ALL)
     #define PHOTO_CHANNEL       CHANNEL_INFO(channel::PRIMARY_TYPE_CHANNEL, channel::SECONARY_TYPE_SYSTEM, 0x0000000E, TITLE_PHOTO_ALL)
@@ -24,7 +25,7 @@ namespace ipl {
     #define NEWS_CHANNEL        CHANNEL_INFO(channel::PRIMARY_TYPE_CHANNEL, channel::SECONARY_TYPE_SYSTEM, 0x0000000E, TITLE_NEWS_ALL)
     #define NO_CHANNEL          CHANNEL_INFO_NULL
 
-    #define DEFAULT_CHANNEL_COUNT   6
+    #define DEFAULT_CHANNEL_COUNT 6
     static const channel::SInfo cDefaultChanList/*[MAX_CHANNEL_PAGE][MAX_CHANNEL_INDEX]*/[MAX_CHANNEL_TOTAL] = {
         // Page 1
         //{
@@ -67,6 +68,7 @@ namespace ipl {
             /* =============================================================*/
         //},
     };
+    // clang-format on
 
     static const char* csSavePath = "/title/00000001/00000002/data/iplsave.bin";
 
@@ -85,7 +87,7 @@ namespace ipl {
 
             mLastError = 0;
         }
-        
+
         Manager::~Manager() {
             if (mpUpdatedFile) {
                 delete mpUpdatedFile;
@@ -135,16 +137,16 @@ namespace ipl {
             u64 typeMask;
             if (ES_TITLE_TYPE(titleId) != 0) {
                 typeMask = 0xFFFFFFFFFFFFFFFF;
-            }
-            else {
+            } else {
                 typeMask = 0x00000000FFFFFFFF;
             }
-            
+
             for (int page = 0; page < MAX_CHANNEL_PAGE; page++) {
                 for (int index = 0; index < MAX_CHANNEL_INDEX; index++) {
                     if (mData.chanInfo[page][index].primaryType == channel::PRIMARY_TYPE_CHANNEL) {
                         ESTitleId tId = ES_TITLE_ID(mData.chanInfo[page][index].titleType, mData.chanInfo[page][index].titleCode);
-                        if (titleId == (tId & typeMask) || TITLE_NO_REGION(tId & typeMask) == TITLE_NO_REGION(titleId & typeMask) && TITLE_REGION(titleId) == TITLE_REGION_ALL) {
+                        if (titleId == (tId & typeMask) ||
+                            TITLE_NO_REGION(tId & typeMask) == TITLE_NO_REGION(titleId & typeMask) && TITLE_REGION(titleId) == TITLE_REGION_ALL) {
                             if (outIndex) {
                                 *outIndex = index;
                             }
@@ -171,12 +173,11 @@ namespace ipl {
             }
             return count;
         }
-        
+
         BOOL Manager::isResetAcceptable() {
             if (mpFile == NULL || mpFile->isFinished() || mpFile->isFatalError()) {
                 return TRUE;
-            }
-            else {
+            } else {
                 return FALSE;
             }
         }
@@ -203,37 +204,30 @@ namespace ipl {
                     if (fileLenCheck == 0) {
                         // Create a new file if blank
                         bCreateNew = TRUE;
-                    }
-                    else {
+                    } else {
                         // Read header
                         ret = nand::wrapper::Read(&fileInfo, &manager->mData, 0x20);
                         manager->nand_error_handling(ret);
 
-                        if (manager->mLastError == NAND_RESULT_AUTHENTICATION
-                        || manager->mLastError == NAND_RESULT_ECC_CRIT) {
+                        if (manager->mLastError == NAND_RESULT_AUTHENTICATION || manager->mLastError == NAND_RESULT_ECC_CRIT) {
                             // Access to file is broken, create new
                             ret = nand::wrapper::Delete(csSavePath);
                             manager->nand_error_handling(ret);
                             bCreateNew = TRUE;
-                        }
-                        else {
+                        } else {
                             if (manager->mData.version > SAVEDATA_VERSION) {
                                 // Save data too high, create new
                                 bCreateNew = TRUE;
-                            }
-                            else {
-                                if (!NAND_CHECK_MAGIC4(manager->mData.sig, 'R','I','P','L')) {
+                            } else {
+                                if (!NAND_CHECK_MAGIC4(manager->mData.sig, 'R', 'I', 'P', 'L')) {
                                     // Signature incorrect, create new
                                     bCreateNew = TRUE;
-                                }
-                                else {
+                                } else {
                                     ret = nand::wrapper::GetLength(&fileInfo, &fileLen);
-                                    if (ret != NAND_RESULT_OK
-                                    || manager->mData.fileSize < 0x20 || manager->mData.fileSize > fileLen) {
+                                    if (ret != NAND_RESULT_OK || manager->mData.fileSize < 0x20 || manager->mData.fileSize > fileLen) {
                                         // Invalid filesize, create new
                                         bCreateNew = TRUE;
-                                    }
-                                    else {
+                                    } else {
                                         fileLen = manager->mData.fileSize;
 
                                         ret = nand::wrapper::Seek(&fileInfo, 0, NAND_SEEK_BEG);
@@ -241,14 +235,12 @@ namespace ipl {
                                         ret = nand::wrapper::Read(&fileInfo, &manager->mData, fileLen);
                                         manager->nand_error_handling(ret);
 
-                                        if (manager->mLastError == NAND_RESULT_AUTHENTICATION
-                                        || manager->mLastError == NAND_RESULT_ECC_CRIT) {
+                                        if (manager->mLastError == NAND_RESULT_AUTHENTICATION || manager->mLastError == NAND_RESULT_ECC_CRIT) {
                                             // Access to file is broken, create new
                                             ret = nand::wrapper::Delete(csSavePath);
                                             manager->nand_error_handling(ret);
                                             bCreateNew = TRUE;
-                                        }
-                                        else {
+                                        } else {
                                             NETMD5Sum md5;
                                             NETCalcMD5(md5, &manager->mData, fileLen - NET_MD5_DIGEST_SIZE);
 
@@ -267,13 +259,11 @@ namespace ipl {
                     }
                     ret = nand::wrapper::Close(&fileInfo);
                     manager->nand_error_handling(ret);
-                }
-                else {
+                } else {
                     if (manager->mLastError == NAND_RESULT_NOEXISTS) {
                         // Create a new file if it does not exist
                         bCreateNew = TRUE;
-                    }
-                    else {
+                    } else {
                         // Otherwise something is wrong
                         IPLErrorLogAndDisplay(MESG_ERR_FILE, "NAND", manager->mLastError, 450);
                     }
@@ -282,8 +272,7 @@ namespace ipl {
                 if (bCreateNew) {
                     manager->setDefaultSaveData();
                     bNeedFlush = TRUE;
-                }
-                else {
+                } else {
                     u32 oldVersion = manager->mData.version;
                     if (oldVersion < SAVEDATA_VERSION) {
                         manager->updateVersion(SAVEDATA_VERSION, oldVersion);
@@ -342,25 +331,25 @@ namespace ipl {
         }
 
         void Manager::setDefaultKeyboard() {
-            mData.memoSetting.uRevisionAndType      = 0x11;
+            mData.memoSetting.uRevisionAndType = 0x11;
 
-            mData.memoSetting.uDictionary           = 0xFA;
-            mData.memoSetting.uPredictOnOff         = 0x00;
-            mData.memoSetting.uSignPage             = 0x00;
+            mData.memoSetting.uDictionary = 0xFA;
+            mData.memoSetting.uPredictOnOff = 0x00;
+            mData.memoSetting.uSignPage = 0x00;
 
-            mData.memoSetting.uKeitaiUpperCaseJP    = TRUE;
-            mData.memoSetting.uKeitaiInputMode      = 0x02;
+            mData.memoSetting.uKeitaiUpperCaseJP = TRUE;
+            mData.memoSetting.uKeitaiInputMode = 0x02;
 
-            mData.memoSetting.uQwertyABC            = FALSE;
+            mData.memoSetting.uQwertyABC = FALSE;
 
-            mData.memoSetting.uABCInputMode         = 0x01;
-            mData.memoSetting.uAIUInputMode         = 0x00;
+            mData.memoSetting.uABCInputMode = 0x01;
+            mData.memoSetting.uAIUInputMode = 0x00;
 
-            mData.memoSetting.uNumLockOff           = FALSE;
+            mData.memoSetting.uNumLockOff = FALSE;
 
-            mData.memoSetting.uReserve2             = 0x00;
-            mData.memoSetting.uReserve3             = 0x00;
-            mData.memoSetting.uReserve4             = 0x00;
+            mData.memoSetting.uReserve2 = 0x00;
+            mData.memoSetting.uReserve3 = 0x00;
+            mData.memoSetting.uReserve4 = 0x00;
         }
 
         void Manager::setDefaultTVRC() {
@@ -374,7 +363,7 @@ namespace ipl {
             u32 titleCount;
             ES_ListTitlesOnCard(NULL, &titleCount);
 
-            u64* titleIds = new(mpHeap, -DEFAULT_ALIGN) u64[titleCount];
+            u64* titleIds = new (mpHeap, -DEFAULT_ALIGN) u64[titleCount];
 
             s32 ret = ES_ListTitlesOnCard(titleIds, &titleCount);
             if (ret != ES_ERR_OK) {
@@ -391,7 +380,7 @@ namespace ipl {
             checkSpecialTitles(titleIds, titleCount);
             checkTmpTitle(titleIds, titleCount);
 
-            ESTitleId unk[MAX_CHANNEL_TOTAL] = { 0 };
+            ESTitleId unk[MAX_CHANNEL_TOTAL] = {0};
 
             makePriorTitleIDList(unk, titleIds, titleCount);
             integrateTitleIDList(unk, titleIds, titleCount);
@@ -404,15 +393,13 @@ namespace ipl {
         void Manager::deleteInvalidTitle(ESTitleId* titleIds, u32 titleCount) {
             for (int i = 0; i < titleCount; i++) {
                 s32 ret;
-                if ((ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_CHANNEL
-                && (ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_SYSTEM_CHANNEL
-                && (ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_DISC
-                && (ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_DISC_CHANNEL
-                && (ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_UNK6
-                && (ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_UNK3) {
+                if ((ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_CHANNEL &&
+                    (ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_SYSTEM_CHANNEL &&
+                    (ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_DISC &&
+                    (ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_DISC_CHANNEL &&
+                    (ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_UNK6 && (ESTitleId32)ES_TITLE_TYPE(titleIds[i]) != TITLE_TYPE_UNK3) {
                     titleIds[i] = TITLE_NULL;
-                }
-                else {
+                } else {
                     ESTmdView* tmd = NULL;
                     ret = utility::ESMisc::GetTmdView(mpHeap, titleIds[i], &tmd);
                     if (ret == ES_ERR_OK) {
@@ -433,13 +420,11 @@ namespace ipl {
                         if (tmd) {
                             mpHeap->free(tmd);
                         }
-                    }
-                    else if (TITLE_NO_REGION(titleIds[i]) == TITLE_PHOTO_2) {
+                    } else if (TITLE_NO_REGION(titleIds[i]) == TITLE_PHOTO_2) {
                         if (checkValidApp(titleIds[i])) {
                             mbPhoto2 = true;
                         }
-                    }
-                    else if (TITLE_NO_REGION(titleIds[i]) == TITLE_PHOTO_2_CHECK) {
+                    } else if (TITLE_NO_REGION(titleIds[i]) == TITLE_PHOTO_2_CHECK) {
                         if (checkValidApp(titleIds[i])) {
                             mbPhoto2Check = true;
                         }
@@ -456,22 +441,18 @@ namespace ipl {
                         if (mbPhoto2 && mbPhoto2Check) {
                             if (titleIdNoRegion == TITLE_PHOTO) {
                                 titleIds[i] = 0;
-                            }
-                            else if (titleIdNoRegion == TITLE_PHOTO_2_CHECK) {
+                            } else if (titleIdNoRegion == TITLE_PHOTO_2_CHECK) {
                                 titleIds[i] = 0;
                             }
-                        }
-                        else if (!mbPhoto2 && mbPhoto2Check) {
+                        } else if (!mbPhoto2 && mbPhoto2Check) {
                             if (titleIdNoRegion == TITLE_PHOTO) {
                                 titleIds[i] = 0;
                             }
-                        }
-                        else if (mbPhoto2 && !mbPhoto2Check && mbPhotoMP3) {
+                        } else if (mbPhoto2 && !mbPhoto2Check && mbPhotoMP3) {
                             if (titleIdNoRegion == TITLE_PHOTO) {
                                 titleIds[i] = 0;
                             }
-                        }
-                        else if (mbPhoto2 && !mbPhoto2Check && !mbPhotoMP3) {
+                        } else if (mbPhoto2 && !mbPhoto2Check && !mbPhotoMP3) {
                             if (titleIdNoRegion == TITLE_PHOTO_2) {
                                 titleIds[i] = 0;
                             }
@@ -481,19 +462,16 @@ namespace ipl {
 
                 if (mbPhoto2 && mbPhoto2Check) {
                     mPhotoId = TITLE_PHOTO_2;
-                }
-                else if (!mbPhoto2 && mbPhoto2Check) {
+                } else if (!mbPhoto2 && mbPhoto2Check) {
                     mPhotoId = TITLE_PHOTO_2_CHECK;
-                }
-                else if (mbPhoto2 && !mbPhoto2Check && mbPhotoMP3) {
+                } else if (mbPhoto2 && !mbPhoto2Check && mbPhotoMP3) {
                     mPhotoId = TITLE_PHOTO_2;
-                }
-                else if (mbPhoto2 && !mbPhoto2Check && !mbPhotoMP3) {
+                } else if (mbPhoto2 && !mbPhoto2Check && !mbPhotoMP3) {
                     mPhotoId = TITLE_PHOTO;
                 }
             }
         }
-        
+
         void Manager::checkTmpTitle(ESTitleId* titleIds, u32 titleCount) {
             bool foundTmp = false;
 
@@ -511,8 +489,7 @@ namespace ipl {
                         SCSetTmpTitleID(TITLE_NULL);
                         SCFlush();
                     }
-                }
-                else {
+                } else {
                     SCSetTmpTitleID(TITLE_NULL);
                     SCFlush();
                 }
@@ -526,12 +503,10 @@ namespace ipl {
             s32 ret = ES_GetTicketViews(titleId, NULL, &tikCount);
             if (ret < ES_ERR_OK && tikCount == 0) {
                 result = FALSE;
-            }
-            else {
+            } else {
                 if (!utility::ESMisc::PrivateContentsExist(titleId)) {
                     result = FALSE;
-                }
-                else {
+                } else {
                     ESTmdView* tmd = NULL;
                     ret = utility::ESMisc::GetTmdView(mpHeap, titleId, &tmd);
                     if (ret != ES_ERR_OK && ret != ES_ERR_NO_TMD_FILE_FOUND) {
@@ -580,17 +555,13 @@ namespace ipl {
         int Manager::isEqualChannel(ESTitleId titleId0, ESTitleId titleId1) {
             if (titleId0 == titleId1) {
                 return -2;
-            }
-            else if (TITLE_NO_REGION(titleId0) == TITLE_NO_REGION(titleId1)) {
+            } else if (TITLE_NO_REGION(titleId0) == TITLE_NO_REGION(titleId1)) {
                 return -1;
-            }
-            else if (TITLE_REGION(titleId0) != TITLE_REGION_ALL && TITLE_REGION(titleId1) == TITLE_REGION_ALL) {
+            } else if (TITLE_REGION(titleId0) != TITLE_REGION_ALL && TITLE_REGION(titleId1) == TITLE_REGION_ALL) {
                 return 0;
-            }
-            else if (TITLE_REGION(titleId0) != TITLE_REGION_ALL || TITLE_REGION(titleId1) == TITLE_REGION_ALL) {
+            } else if (TITLE_REGION(titleId0) != TITLE_REGION_ALL || TITLE_REGION(titleId1) == TITLE_REGION_ALL) {
                 return 1;
-            }
-            else {
+            } else {
                 return -1;
             }
         }
@@ -646,8 +617,7 @@ namespace ipl {
             mLastError = code;
             if (code >= NAND_RESULT_OK) {
                 return TRUE;
-            }
-            else {
+            } else {
                 switch (code) {
                     case NAND_RESULT_AUTHENTICATION:
                     case NAND_RESULT_NOEXISTS:
@@ -678,5 +648,5 @@ namespace ipl {
 
             return result;
         }
-    }
-}
+    }  // namespace savedata
+}  // namespace ipl

@@ -12,8 +12,8 @@ namespace homebutton {
     bool Controller::sBatteryFlag[WPAD_MAX_CONTROLLERS];
     bool Controller::lbl_816989BC[WPAD_MAX_CONTROLLERS];
 
-    OSAlarm     Controller::sAlarm[WPAD_MAX_CONTROLLERS];
-    OSAlarm     Controller::sAlarmSoundOff[WPAD_MAX_CONTROLLERS];
+    OSAlarm Controller::sAlarm[WPAD_MAX_CONTROLLERS];
+    OSAlarm Controller::sAlarmSoundOff[WPAD_MAX_CONTROLLERS];
     Controller* Controller::sThis[WPAD_MAX_CONTROLLERS];
 
     void Controller::wpadConnectCallback(s32 chan, s32 result) {
@@ -121,12 +121,10 @@ namespace homebutton {
         }
 
         if (updatePos) {
-            if (pPadData->kpad->dev_type == WPAD_DEV_CLASSIC &&
-                pPadData->use_devtype == WPAD_DEV_CLASSIC) {
+            if (pPadData->kpad->dev_type == WPAD_DEV_CLASSIC && pPadData->use_devtype == WPAD_DEV_CLASSIC) {
                 mHBController.x = pPadData->pos.x;
                 mHBController.y = pPadData->pos.y;
-            }
-            else {
+            } else {
                 mHBController.x = pPadData->kpad->pos.x;
                 mHBController.y = pPadData->kpad->pos.y;
             }
@@ -141,21 +139,33 @@ namespace homebutton {
             u32 t = pPadData->kpad->ex_status.cl.trig;
             u32 r = pPadData->kpad->ex_status.cl.release;
 
-            if (h & WPAD_BUTTON_CL_A)     mHBController.hold    |= WPAD_BUTTON_A;
-            if (t & WPAD_BUTTON_CL_A)     mHBController.trig    |= WPAD_BUTTON_A;
-            if (r & WPAD_BUTTON_CL_A)     mHBController.release |= WPAD_BUTTON_A;
+            if (h & WPAD_BUTTON_CL_A)
+                mHBController.hold |= WPAD_BUTTON_A;
+            if (t & WPAD_BUTTON_CL_A)
+                mHBController.trig |= WPAD_BUTTON_A;
+            if (r & WPAD_BUTTON_CL_A)
+                mHBController.release |= WPAD_BUTTON_A;
 
-            if (h & WPAD_BUTTON_CL_PLUS)  mHBController.hold    |= WPAD_BUTTON_PLUS;
-            if (t & WPAD_BUTTON_CL_PLUS)  mHBController.trig    |= WPAD_BUTTON_PLUS;
-            if (r & WPAD_BUTTON_CL_PLUS)  mHBController.release |= WPAD_BUTTON_PLUS;
+            if (h & WPAD_BUTTON_CL_PLUS)
+                mHBController.hold |= WPAD_BUTTON_PLUS;
+            if (t & WPAD_BUTTON_CL_PLUS)
+                mHBController.trig |= WPAD_BUTTON_PLUS;
+            if (r & WPAD_BUTTON_CL_PLUS)
+                mHBController.release |= WPAD_BUTTON_PLUS;
 
-            if (h & WPAD_BUTTON_CL_MINUS) mHBController.hold    |= WPAD_BUTTON_MINUS;
-            if (t & WPAD_BUTTON_CL_MINUS) mHBController.trig    |= WPAD_BUTTON_MINUS;
-            if (r & WPAD_BUTTON_CL_MINUS) mHBController.release |= WPAD_BUTTON_MINUS;
+            if (h & WPAD_BUTTON_CL_MINUS)
+                mHBController.hold |= WPAD_BUTTON_MINUS;
+            if (t & WPAD_BUTTON_CL_MINUS)
+                mHBController.trig |= WPAD_BUTTON_MINUS;
+            if (r & WPAD_BUTTON_CL_MINUS)
+                mHBController.release |= WPAD_BUTTON_MINUS;
 
-            if (h & WPAD_BUTTON_CL_HOME)  mHBController.hold    |= WPAD_BUTTON_HOME;
-            if (t & WPAD_BUTTON_CL_HOME)  mHBController.trig    |= WPAD_BUTTON_HOME;
-            if (r & WPAD_BUTTON_CL_HOME)  mHBController.release |= WPAD_BUTTON_HOME;
+            if (h & WPAD_BUTTON_CL_HOME)
+                mHBController.hold |= WPAD_BUTTON_HOME;
+            if (t & WPAD_BUTTON_CL_HOME)
+                mHBController.trig |= WPAD_BUTTON_HOME;
+            if (r & WPAD_BUTTON_CL_HOME)
+                mHBController.release |= WPAD_BUTTON_HOME;
         }
     }
 
@@ -179,7 +189,6 @@ namespace homebutton {
     }
 
     void Controller::disconnect() {
-
     }
 
     void Controller::setSpeakerVol(f32 vol) {
@@ -310,4 +319,4 @@ namespace homebutton {
         sBatteryFlag[getChan()] = false;
     }
 
-}
+}  // namespace homebutton

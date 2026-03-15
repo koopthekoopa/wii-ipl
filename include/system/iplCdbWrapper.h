@@ -7,10 +7,10 @@ namespace ipl {
     namespace cdb {
         namespace wrapper {
             // only one
-            CDBErr  init(void* work);
-        }
-    }
-    
-}
+            CDBErr init(void* work);
+        }  // namespace wrapper
+    }  // namespace cdb
 
-#endif // IPL_CDB_WRAPPER_H
+}  // namespace ipl
+
+#endif  // IPL_CDB_WRAPPER_H

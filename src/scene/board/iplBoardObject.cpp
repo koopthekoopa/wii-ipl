@@ -1,7 +1,8 @@
 #include "iplSceneUI.h"
 
-#include "scene/board/iplBoardObject.h"
 #include "scene/board/iplBoard.h"
+#include "scene/board/iplBoardObject.h"
+
 
 #include "scene/button/iplButton.h"
 
@@ -16,16 +17,33 @@
 #include "utility/iplTPLValidity.h"
 
 // I don't want to keep typing this out lol
-#define DELETE_PTR_FORCE(x)                { delete x; x = NULL; }
-#define DELETE_PTR_ARRAY_FORCE(x)          { delete[] x; x = NULL; }
-#define DELETE_PTR(x)               if (x) { delete x; x = NULL; }
-#define DELETE_PTR_ARRAY(x)         if (x) { delete[] x; x = NULL; }
+#define DELETE_PTR_FORCE(x)                                                                                                                          \
+    {                                                                                                                                                \
+        delete x;                                                                                                                                    \
+        x = NULL;                                                                                                                                    \
+    }
+#define DELETE_PTR_ARRAY_FORCE(x)                                                                                                                    \
+    {                                                                                                                                                \
+        delete[] x;                                                                                                                                  \
+        x = NULL;                                                                                                                                    \
+    }
+#define DELETE_PTR(x)                                                                                                                                \
+    if (x) {                                                                                                                                         \
+        delete x;                                                                                                                                    \
+        x = NULL;                                                                                                                                    \
+    }
+#define DELETE_PTR_ARRAY(x)                                                                                                                          \
+    if (x) {                                                                                                                                         \
+        delete[] x;                                                                                                                                  \
+        x = NULL;                                                                                                                                    \
+    }
 
-#define PICTURE_THUMB_WIDTH     64
-#define PICTURE_THUMB_HEIGHT    48
+#define PICTURE_THUMB_WIDTH 64
+#define PICTURE_THUMB_HEIGHT 48
 
 namespace ipl {
     namespace scene {
+        // clang-format off
         const char* BoardObject::mAnimNames[BoardObject::TYPE_MAX][1+BoardObject::ANIM_MAX] = {
             {
                 "LetterS_a.brlyt",
@@ -64,6 +82,7 @@ namespace ipl {
                 "LetterS_c_SDAnim.brlan"
             }
         };
+        // clang-format on
 
         static const struct {
             const char* file;
@@ -75,33 +94,15 @@ namespace ipl {
             "Letter0",
         };
 
-        BoardObject::BoardObject() :
-        ::gui::EventHandler(),
-        mpLayout(NULL),
-        mpGui(NULL),
-        mpNigaoe(NULL),
-        mpRecordData(NULL),
-        mpUncompThumb(NULL),
-        mBoardPos(0.0f, 0.0f),
-        mMoveSpeed(0.0f, 0.0f),
-        mMoveAnim(),
-        mBoardDate(),
-        mbModifiedPos(false),
-        mbCleaned(false),
-        mbCreatedPic(false),
-        mbLeftWay(false),
-        mbRightWay(false),
-        mOptOutFlag(0),
-        mPicture(),
-        mpCapture(NULL),
-        mbCaptured(false),
-        mState(STATE_NORMAL),
-        mConPos(0.0f, 0.0f),
-        mConChan(0) {
+        BoardObject::BoardObject()
+            : ::gui::EventHandler(), mpLayout(NULL), mpGui(NULL), mpNigaoe(NULL), mpRecordData(NULL), mpUncompThumb(NULL), mBoardPos(0.0f, 0.0f),
+              mMoveSpeed(0.0f, 0.0f), mMoveAnim(), mBoardDate(), mbModifiedPos(false), mbCleaned(false), mbCreatedPic(false), mbLeftWay(false),
+              mbRightWay(false), mOptOutFlag(0), mPicture(), mpCapture(NULL), mbCaptured(false), mState(STATE_NORMAL), mConPos(0.0f, 0.0f),
+              mConChan(0) {
             // Setup memory allocators
             mpHeapArena = (u8*)System::getMem2App()->alloc(0x46000, 4);
             mpHeap = EGG::ExpHeap::create(mpHeapArena, 0x46000, 0);
-            mpAllocator = new(mpHeap, 4) EGG::Allocator(mpHeap, 4);
+            mpAllocator = new (mpHeap, 4) EGG::Allocator(mpHeap, 4);
 
             mStandData.init();
         }
@@ -116,7 +117,8 @@ namespace ipl {
             material->SetTexture(GX_TEXMAP0, obj->getIconTexture());
         }
 
-        void BoardObject::create(nand::LayoutFile* file, u8* recordData, u32 gameCode, const CDBId& cdbId, const CDBRecordKey& recordKey, const ipl::utility::Date& date) {
+        void BoardObject::create(nand::LayoutFile* file, u8* recordData, u32 gameCode, const CDBId& cdbId, const CDBRecordKey& recordKey,
+                                 const ipl::utility::Date& date) {
             mpRecordData = recordData;
             mpLayoutFile = file;
 
@@ -139,9 +141,7 @@ namespace ipl {
             mpUncompThumb = NULL;
             mpThumbLength = 0;
 
-            mMoveAnim.init(0, 8.0f, 0.0f,
-                            math::VEC2(0.0f, 0.0f), 
-                            math::VEC2(0.0f, 0.0f));
+            mMoveAnim.init(0, 8.0f, 0.0f, math::VEC2(0.0f, 0.0f), math::VEC2(0.0f, 0.0f));
 
             mPicture.mpWork = 0;
             mPicture.mpRGB565 = NULL;
@@ -183,11 +183,8 @@ namespace ipl {
                     nw4r::ut::Rect rect;
                     System::getProjectionRect4x3(&rect);
 
-                    mMoveAnim.init(ANIM_TYPE_FORWARD,
-                                mpLayout->getAnim(ANIM_NEXT_PAGE)->getMaxFrame(),
-                                0.0f,
-                                math::VEC2(0.0f, 0.0f),
-                                math::VEC2((rect.left - mBoardPos.x) - mMoveSpeed.x, (-mBoardPos.y - mMoveSpeed.y) + 53.0f));
+                    mMoveAnim.init(ANIM_TYPE_FORWARD, mpLayout->getAnim(ANIM_NEXT_PAGE)->getMaxFrame(), 0.0f, math::VEC2(0.0f, 0.0f),
+                                   math::VEC2((rect.left - mBoardPos.x) - mMoveSpeed.x, (-mBoardPos.y - mMoveSpeed.y) + 53.0f));
 
                     mMoveAnim.setAnmType(ANIM_TYPE_FORWARD);
                     mMoveAnim.play();
@@ -202,11 +199,8 @@ namespace ipl {
                     nw4r::ut::Rect rect;
                     System::getProjectionRect4x3(&rect);
 
-                    mMoveAnim.init(0,
-                                mpLayout->getAnim(ANIM_NEXT_PAGE)->getMaxFrame(),
-                                0.0f,
-                                math::VEC2(0.0f, 0.0f),
-                                math::VEC2((rect.right - mBoardPos.x) - mMoveSpeed.x, (-mBoardPos.y - mMoveSpeed.y) + 53.0f));
+                    mMoveAnim.init(0, mpLayout->getAnim(ANIM_NEXT_PAGE)->getMaxFrame(), 0.0f, math::VEC2(0.0f, 0.0f),
+                                   math::VEC2((rect.right - mBoardPos.x) - mMoveSpeed.x, (-mBoardPos.y - mMoveSpeed.y) + 53.0f));
 
                     mMoveAnim.setAnmType(ANIM_TYPE_FORWARD);
                     mMoveAnim.play();
@@ -241,31 +235,29 @@ namespace ipl {
 
             if (mRecordType == RBRRecordType_Memo) {
                 mLetterType = TYPE_MEMO;
-            }
-            else if (mRecordType == RBRRecordType_PlayTimeLog) {
+            } else if (mRecordType == RBRRecordType_PlayTimeLog) {
                 mLetterType = TYPE_PLAYTIME;
-            }
-            else {
+            } else {
                 mLetterType = TYPE_LETTER;
             }
 
             const char** btnAnims = mAnimNames[mLetterType];
             mOptOutFlag = recordHdr->flags.optOut & 1;
 
-            mpLayout = new(mpHeap, 4) layout::Object(mpHeap, mpLayoutFile, "arc", btnAnims[0]);
-            mpLayout->bind(btnAnims[ANIM_PASTE+1]);
-            mpLayout->bind(btnAnims[ANIM_FOCUS_IN+1], false);
-            mpLayout->bind(btnAnims[ANIM_FOCUS_OUT+1], false);
-            mpLayout->bind(btnAnims[ANIM_FOCUS+1], false);
-            mpLayout->bind(btnAnims[ANIM_EXIT+1], false);
-            mpLayout->bind(btnAnims[ANIM_NEXT_PAGE+1], false);
-            mpLayout->bindToGroup(btnAnims[ANIM_NEW+1], "G_New", false, false);
-            mpLayout->bindToGroup(btnAnims[ANIM_DEFAULT+1], "G_New", false, false);
-            mpLayout->bindToGroup(btnAnims[ANIM_SD+1], "G_New", false, false);
+            mpLayout = new (mpHeap, 4) layout::Object(mpHeap, mpLayoutFile, "arc", btnAnims[0]);
+            mpLayout->bind(btnAnims[ANIM_PASTE + 1]);
+            mpLayout->bind(btnAnims[ANIM_FOCUS_IN + 1], false);
+            mpLayout->bind(btnAnims[ANIM_FOCUS_OUT + 1], false);
+            mpLayout->bind(btnAnims[ANIM_FOCUS + 1], false);
+            mpLayout->bind(btnAnims[ANIM_EXIT + 1], false);
+            mpLayout->bind(btnAnims[ANIM_NEXT_PAGE + 1], false);
+            mpLayout->bindToGroup(btnAnims[ANIM_NEW + 1], "G_New", false, false);
+            mpLayout->bindToGroup(btnAnims[ANIM_DEFAULT + 1], "G_New", false, false);
+            mpLayout->bindToGroup(btnAnims[ANIM_SD + 1], "G_New", false, false);
             mpLayout->finishBinding();
 
-            mpGui = new(mpHeap, 4) gui::PaneManager(this, mpLayout->getDrawInfo(), NULL, mpAllocator);
-        
+            mpGui = new (mpHeap, 4) gui::PaneManager(this, mpLayout->getDrawInfo(), NULL, mpAllocator);
+
             mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
             mpGui->setTriggerTarget(mpLayout->FindPaneByName("B_Letter"), true);
@@ -277,8 +269,7 @@ namespace ipl {
                 if (recordHdr->bodyOffset != 0) {
                     thumbText = (wchar_t*)((u8*)mpRecordData + recordHdr->bodyOffset);
                 }
-            }
-            else {
+            } else {
                 if (recordHdr->titleOffset != 0) {
                     thumbText = (wchar_t*)((u8*)mpRecordData + recordHdr->titleOffset);
                 }
@@ -313,13 +304,12 @@ namespace ipl {
                         if (CXGetCompressionType(mpThumbPtr) == CX_COMPRESSION_TYPE_LZ) {
                             u32 uncompSize = CXGetUncompressedSize(mpThumbPtr);
                             if (uncompSize != 0 && uncompSize < 0x7800) {
-                                mpUncompThumb = new(mpHeap, DEFAULT_ALIGN) u8[uncompSize];
+                                mpUncompThumb = new (mpHeap, DEFAULT_ALIGN) u8[uncompSize];
                                 if (mpUncompThumb != NULL) {
                                     if (CXSecureUncompressLZ(mpThumbPtr, mpThumbLength, mpUncompThumb) == CX_SECURE_ERR_OK) {
                                         DCStoreRange(mpUncompThumb, uncompSize);
                                         change_ltrtex(mpLayout, mpUncompThumb);
-                                    }
-                                    else {
+                                    } else {
                                         DELETE_PTR_ARRAY_FORCE(mpUncompThumb);
                                     }
                                 }
@@ -328,10 +318,9 @@ namespace ipl {
                     }
                 }
                 if (recordHdr->attach[i].type == RBRAttachmentType_Picture) {
-                    if (create_picture(&mPicture,
-                                        System::getMem2App(), System::getMem2App(),
-                                        ((u8*)mpRecordData + recordHdr->attach[i].offset), 4 + recordHdr->attach[i].size)) {
-                        mpCapture = new(mpHeap, 4) utility::Capture(mpHeap, 0, 0, PICTURE_THUMB_WIDTH, PICTURE_THUMB_HEIGHT, GX_TF_RGB565);
+                    if (create_picture(&mPicture, System::getMem2App(), System::getMem2App(), ((u8*)mpRecordData + recordHdr->attach[i].offset),
+                                       4 + recordHdr->attach[i].size)) {
+                        mpCapture = new (mpHeap, 4) utility::Capture(mpHeap, 0, 0, PICTURE_THUMB_WIDTH, PICTURE_THUMB_HEIGHT, GX_TF_RGB565);
                         mbCaptured = false;
                         mbCreatedPic = true;
 
@@ -349,13 +338,11 @@ namespace ipl {
                 if (recordTime < currTime) {
                     if (OSSecondsToTicks(NEW_MESSAGE_DURATION_SECONDS) > (OSTime)(currTime - recordTime)) {
                         mpLayout->getAnim(ANIM_NEW)->play();
-                    }
-                    else {
+                    } else {
                         mpLayout->getAnim(ANIM_DEFAULT)->play();
                     }
                 }
-            }
-            else {
+            } else {
                 mpLayout->getAnim(ANIM_SD)->play();
             }
 
@@ -366,8 +353,7 @@ namespace ipl {
 
             if (mbCreatedPic) {
                 mState = STATE_MAKE_THUMB;
-            }
-            else {
+            } else {
                 mpLayout->getAnim(ANIM_PASTE)->play();
                 mState = STATE_FADE_IN;
             }
@@ -426,8 +412,7 @@ namespace ipl {
                     }
 
                     snd::getSystem()->holdSEwithPosDis("WIPL_SE_BOARD_DRAG", mBoardPos.x + mMoveSpeed.x, speed);
-                }
-                else {
+                } else {
                     if (con->isValidDpd()) {
                         nw4r::ut::Rect rbrPos;
                         RBRUtility::getPosRect(&rbrPos);
@@ -441,15 +426,13 @@ namespace ipl {
 
                         if (newPos.x < rbrPos.left) {
                             newPos.x = rbrPos.left;
-                        }
-                        else if (newPos.x > rbrPos.right) {
+                        } else if (newPos.x > rbrPos.right) {
                             newPos.x = rbrPos.right;
                         }
 
                         if (newPos.y < rbrPos.bottom) {
                             newPos.y = rbrPos.bottom;
-                        }
-                        else if (newPos.y > rbrPos.top) {
+                        } else if (newPos.y > rbrPos.top) {
                             newPos.y = rbrPos.top;
                         }
 
@@ -474,8 +457,7 @@ namespace ipl {
 
                     mState = STATE_NORMAL;
                 }
-            }
-            else {
+            } else {
                 System::getPointer()->changeType(mConChan, PointerType::LayoutPoint);
                 mMoveSpeed.clear();
                 mConPos.clear();
@@ -490,7 +472,8 @@ namespace ipl {
             f32 dVar2 = nw4r::math::CosFIdx(((mStandData.unk_0x0C * 30.0f + 30.0f) * 0.7111111f));
             f32 dVar3 = nw4r::math::SinFIdx(((mStandData.unk_0x0C * 30.0f + 30.0f) * 0.7111111f));
 
-            mBoardPos = (((mStandData.pos * (f32)(10 - mStandData.unk_0x08)) + (math::VEC2(dVar3 * 160.0f, dVar2 * 160.0f) * mStandData.unk_0x08)) / 10.0f);
+            mBoardPos =
+                (((mStandData.pos * (f32)(10 - mStandData.unk_0x08)) + (math::VEC2(dVar3 * 160.0f, dVar2 * 160.0f) * mStandData.unk_0x08)) / 10.0f);
 
             if ((mStandData.unk_0x08 += 1) > 10) {
                 mStandData.init();
@@ -502,7 +485,7 @@ namespace ipl {
             if (mpLayout == NULL) {
                 return;
             }
-            
+
             if (mState == STATE_MAKE_THUMB) {
                 return;
             }
@@ -523,7 +506,8 @@ namespace ipl {
                 utility::Graphics::calcOrthoCamera();
                 utility::Graphics::setCamera();
 
-                utility::Graphics::drawTexture(nw4r::ut::Rect(0.0f, 0.0f, PICTURE_THUMB_WIDTH, PICTURE_THUMB_HEIGHT), mPicture.texObj, (GXColor){255, 255, 255, 255}, 1);
+                utility::Graphics::drawTexture(nw4r::ut::Rect(0.0f, 0.0f, PICTURE_THUMB_WIDTH, PICTURE_THUMB_HEIGHT), mPicture.texObj,
+                                               (GXColor){255, 255, 255, 255}, 1);
                 if (mpCapture != NULL) {
                     mpCapture->capture(TRUE);
                 }
@@ -566,7 +550,7 @@ namespace ipl {
 
         BOOL BoardObject::create_picture(picture* picture, EGG::Heap* picHeap, EGG::Heap* workHeap, u8* src, u32 srcSize) {
             BOOL result = FALSE;
-            
+
             picture->width = ODHGetWidth(src);
             picture->height = ODHGetHeight(src);
 
@@ -574,26 +558,24 @@ namespace ipl {
 
             if (picture->width > 0 && picture->width <= 512 && picture->height > 0 && picture->height <= 456) {
                 u32 rgb565Size = pictureSize * 2;
-                picture->mpRGB565 = new(picHeap, DEFAULT_ALIGN) u8[rgb565Size];
+                picture->mpRGB565 = new (picHeap, DEFAULT_ALIGN) u8[rgb565Size];
 
                 u32 workSize = ODHGetWorkSize(pictureSize);
-                picture->mpWork = new(workHeap, -DEFAULT_ALIGN) u8[workSize];
+                picture->mpWork = new (workHeap, -DEFAULT_ALIGN) u8[workSize];
 
                 if (picture->mpRGB565 != NULL && picture->mpWork != NULL) {
                     if (ODHDecodeRGB565(src, srcSize, picture->mpRGB565, rgb565Size, picture->mpWork, workSize)) {
                         DCStoreRange(picture->mpRGB565, rgb565Size);
                         GXInitTexObj(&picture->texObj, picture->mpRGB565, picture->width, picture->height, GX_TF_RGB565, GX_CLAMP, GX_CLAMP, 0);
-                        
+
                         result = TRUE;
 
                         DELETE_PTR_ARRAY_FORCE(picture->mpWork);
-                    }
-                    else {
+                    } else {
                         DELETE_PTR_ARRAY_FORCE(picture->mpRGB565);
                         DELETE_PTR_ARRAY_FORCE(picture->mpWork);
                     }
-                }
-                else {
+                } else {
                     DELETE_PTR_ARRAY(picture->mpRGB565);
                     DELETE_PTR_ARRAY(picture->mpWork);
                 }
@@ -622,27 +604,26 @@ namespace ipl {
             memset(local_28, 0, sizeof(local_28));
 
             if (thumbText != NULL) {
-                for (int i = 0; i < THUMB_TEXT_LENGTH+1 && thumbText[i] != (u16)'\n'; i++) {
+                for (int i = 0; i < THUMB_TEXT_LENGTH + 1 && thumbText[i] != (u16)'\n'; i++) {
                     local_28[i] = thumbText[i];
                 }
             }
 
             if (System::getRegion() == SC_LANG_JAPANESE) {
                 if (local_28[THUMB_TEXT_LENGTH] != 0) {
-                    local_28[THUMB_TEXT_LENGTH+0] = L'…';
+                    local_28[THUMB_TEXT_LENGTH + 0] = L'…';
                 }
-            }
-            else {
+            } else {
                 if (local_28[THUMB_TEXT_LENGTH] != 0) {
-                    local_28[THUMB_TEXT_LENGTH+2] = '.';
-                    local_28[THUMB_TEXT_LENGTH+1] = '.';
-                    local_28[THUMB_TEXT_LENGTH+0] = '.';
+                    local_28[THUMB_TEXT_LENGTH + 2] = '.';
+                    local_28[THUMB_TEXT_LENGTH + 1] = '.';
+                    local_28[THUMB_TEXT_LENGTH + 0] = '.';
                 }
             }
 
             textBox->SetString(local_28);
         }
-        
+
         void BoardObject::update(int chan) {
             if (mpGui != NULL) {
                 mpGui->update(chan);
@@ -725,8 +706,8 @@ namespace ipl {
                 case ON_HOLD: {
                     if (con != NULL && con->decide()) {
                         if (static_cast<Board*>(System::getScene(SCENE_BOARD))->getHoveredObj(num) == this) {
-                            if (static_cast<Button*>(System::getScene(SCENE_BUTTON))->isActive()
-                            && !static_cast<Button*>(System::getScene(SCENE_BUTTON))->hasReservedAnim()) {
+                            if (static_cast<Button*>(System::getScene(SCENE_BUTTON))->isActive() &&
+                                !static_cast<Button*>(System::getScene(SCENE_BUTTON))->hasReservedAnim()) {
                                 static_cast<Board*>(System::getScene(SCENE_BOARD))->focus(this);
                             }
                         }
@@ -828,7 +809,7 @@ namespace ipl {
                 header.yPos = mBoardPos.y;
                 header.crc32 = cdbManager->calcCRC(&header);
                 if (cdbManager->findByKey(&cdbRecord, &mCDBRecordKey)) {
-                    cdbManager->unused(); // does nothing but got that auto mutex lock
+                    cdbManager->unused();  // does nothing but got that auto mutex lock
 
                     if (cdbManager->open(&cdbRecord)) {
                         if (cdbManager->seek(&cdbRecord, 0, CDB_SEEK_BEGIN)) {
@@ -880,12 +861,12 @@ namespace ipl {
 
             result = ARCInitHandle(buffer, handle);
 
-out:
+        out:
             return result;
         }
 
         void GenerateWEAK() {
             nw4r::lyt::TextBox* textBox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(((nw4r::lyt::Pane*)NULL)->FindPaneByName(NULL));
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

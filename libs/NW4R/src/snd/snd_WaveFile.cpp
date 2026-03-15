@@ -4,8 +4,8 @@
 namespace nw4r {
     namespace snd {
         namespace detail {
-            WaveFileReader::WaveFileReader(const WaveFile::WaveInfo* waveInfo) :
-            mWaveInfo(waveInfo) {}
+            WaveFileReader::WaveFileReader(const WaveFile::WaveInfo* waveInfo) : mWaveInfo(waveInfo) {
+            }
 
             bool WaveFileReader::ReadWaveParam(WaveData* waveData, const void* waveAddr) const {
                 waveData->format = mWaveInfo->format;
@@ -21,7 +21,8 @@ namespace nw4r {
                 for (int i = 0; i < mWaveInfo->numChannels; i++) {
                     ChannelParam& rParam = waveData->channelParam[i];
 
-                    const WaveFile::WaveChannelInfo* pChannelInfo = reinterpret_cast<const WaveFile::WaveChannelInfo*>(ut::AddOffsetToPtr(mWaveInfo, pInfoOffsetTable[i]));
+                    const WaveFile::WaveChannelInfo* pChannelInfo =
+                        reinterpret_cast<const WaveFile::WaveChannelInfo*>(ut::AddOffsetToPtr(mWaveInfo, pInfoOffsetTable[i]));
 
                     rParam.volumeFrontLeft = pChannelInfo->volumeFrontLeft;
                     rParam.volumeFrontRight = pChannelInfo->volumeFrontRight;
@@ -50,6 +51,6 @@ namespace nw4r {
 
                 return AxVoice::FORMAT_ADPCM;
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

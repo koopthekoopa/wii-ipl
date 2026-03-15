@@ -3,8 +3,10 @@
 namespace nw4r {
     namespace ut {
         namespace detail {
-            LinkListImpl::~LinkListImpl() { Clear(); }
- 
+            LinkListImpl::~LinkListImpl() {
+                Clear();
+            }
+
             LinkListImpl::Iterator LinkListImpl::Erase(LinkListImpl::Iterator it) {
                 Iterator clone = it;
                 return Erase(it, ++clone);
@@ -61,6 +63,6 @@ namespace nw4r {
 
                 return (Iterator)pNext;
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace ut
+}  // namespace nw4r

@@ -9,8 +9,8 @@
 
 #include "config.h"
 
-#include <revolution/sc.h>
 #include <revolution/cx.h>
+#include <revolution/sc.h>
 
 #include <cstdio>
 #include <cstring>
@@ -18,13 +18,14 @@
 
 namespace ipl {
     namespace channel {
-        u32     Manager::mNumFinished;
-        int     Manager::mNumValidChannel;
-        bool    Manager::mDiskChannelFixed;
+        u32 Manager::mNumFinished;
+        int Manager::mNumValidChannel;
+        bool Manager::mDiskChannelFixed;
 
-        int     Manager::msCurPage;
-        int     Manager::msCurIndex;
+        int Manager::msCurPage;
+        int Manager::msCurIndex;
 
+        // clang-format off
         static const u32 scLangLookup[SC_PRODUCT_AREA_MAX][16] = {
             // Japan
             {
@@ -80,23 +81,19 @@ namespace ipl {
                 -1
             },
         };
+        // clang-format on
 
-        Manager::Manager(EGG::Heap* heap) :
-        mpHeap(heap),
-        mState(INIT),
-        mbCanRefresh(0),
-        unk_0x1B81(false),
-        mbSetDiskBannerInfo(false),
-        mPrevNandResult(NAND_RESULT_OK),
-        mbLoadedChJump(false) { 
+        Manager::Manager(EGG::Heap* heap)
+            : mpHeap(heap), mState(INIT), mbCanRefresh(0), unk_0x1B81(false), mbSetDiskBannerInfo(false), mPrevNandResult(NAND_RESULT_OK),
+              mbLoadedChJump(false) {
             mpLockedMsgFile = NULL;
 
             memset(mChannels, 0, sizeof(mChannels));
 
             // Setup buffers
-            mpDiskIconBuf = new(mpHeap, DEFAULT_ALIGN) u8[0x19000];
-            mpDiskBannerBuf = new(mpHeap, DEFAULT_ALIGN) u8[0x80000];
-            mpDiskSoundBuf = new(mpHeap, DEFAULT_ALIGN) u8[0x80000];
+            mpDiskIconBuf = new (mpHeap, DEFAULT_ALIGN) u8[0x19000];
+            mpDiskBannerBuf = new (mpHeap, DEFAULT_ALIGN) u8[0x80000];
+            mpDiskSoundBuf = new (mpHeap, DEFAULT_ALIGN) u8[0x80000];
 
             // Reset banner data
             for (int page = 0; page < MAX_CHANNEL_PAGE; page++) {
@@ -205,19 +202,19 @@ namespace ipl {
                 }
             }
 
-            if (page-1 >= 0) {
-                int lastInRow[MAX_CHANNEL_COLUMN] = { 3, 7, 11 };
+            if (page - 1 >= 0) {
+                int lastInRow[MAX_CHANNEL_COLUMN] = {3, 7, 11};
                 for (int column = 0; column < MAX_CHANNEL_COLUMN; column++) {
-                    if (mChannels[page-1][lastInRow[column]].state != CHAN_STATE_LOADED) {
+                    if (mChannels[page - 1][lastInRow[column]].state != CHAN_STATE_LOADED) {
                         return FALSE;
                     }
                 }
             }
 
-            if (page+1 < MAX_CHANNEL_PAGE) {
-                int firstInRow[MAX_CHANNEL_COLUMN] = { 0, 4, 8 };
+            if (page + 1 < MAX_CHANNEL_PAGE) {
+                int firstInRow[MAX_CHANNEL_COLUMN] = {0, 4, 8};
                 for (int column = 0; column < MAX_CHANNEL_COLUMN; column++) {
-                    if (mChannels[page+1][firstInRow[column]].state != CHAN_STATE_LOADED) {
+                    if (mChannels[page + 1][firstInRow[column]].state != CHAN_STATE_LOADED) {
                         return FALSE;
                     }
                 }
@@ -238,8 +235,7 @@ namespace ipl {
             u64 typeMask;
             if (ES_TITLE_TYPE(titleId) != 0) {
                 typeMask = 0xFFFFFFFFFFFFFFFF;
-            }
-            else {
+            } else {
                 typeMask = 0x00000000FFFFFFFF;
             }
 
@@ -248,7 +244,8 @@ namespace ipl {
                     if (mChannels[page][index].loadedBnr) {
                         if (mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_CHANNEL) {
                             ESTitleId tId = ES_TITLE_ID(mChannels[page][index].info.titleType, mChannels[page][index].info.titleCode);
-                            if (titleId == (tId & typeMask) || TITLE_NO_REGION(tId & typeMask) == TITLE_NO_REGION(titleId & typeMask) && TITLE_REGION(titleId) == TITLE_REGION_ALL) {
+                            if (titleId == (tId & typeMask) ||
+                                TITLE_NO_REGION(tId & typeMask) == TITLE_NO_REGION(titleId & typeMask) && TITLE_REGION(titleId) == TITLE_REGION_ALL) {
                                 if (outPage) {
                                     *outPage = page;
                                 }
@@ -299,10 +296,9 @@ namespace ipl {
 
             if (data != NULL) {
                 strncpy(mChJumpData, data, NWC24_MAX_CHJP_SIZE);
-                mChJumpData[NWC24_MAX_CHJP_SIZE-1] = 0;
+                mChJumpData[NWC24_MAX_CHJP_SIZE - 1] = 0;
                 mbLoadedChJump = true;
-            }
-            else {
+            } else {
                 mbLoadedChJump = false;
             }
 
@@ -320,11 +316,10 @@ namespace ipl {
         void* Manager::getDiskSound(bool unk) {
             int diskPage, diskIndex;
             getDiskChannelLocation(&diskPage, &diskIndex);
-            
+
             if (mChannels[diskPage][diskIndex].metaHdr->blockHdr.soundSize == 0) {
                 return NULL;
-            }
-            else {
+            } else {
                 return getDiskBannerData(DISK_BANNERDATA_SOUND, unk);
             }
         }
@@ -332,19 +327,17 @@ namespace ipl {
         nand::MetaFile* Manager::loadThumbnailAsync(EGG::Heap* heap, int page, int index) {
             if (!mChannels[page][index].loadedBnr || mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 return NULL;
-            }
-            else {
+            } else {
                 return System::getNandManager()->readMetaBodyAsync(heap, "/meta/icon.bin", &mChannels[page][index].arc, getTitleID(page, index),
-                       mChannels[page][index].headerSize + mChannels[page][index].headerOffset, 0,
-                       NULL, NULL, mChannels[page][index].ticketIdx);
+                                                                   mChannels[page][index].headerSize + mChannels[page][index].headerOffset, 0, NULL,
+                                                                   NULL, mChannels[page][index].ticketIdx);
             }
         }
 
         ESTitleId Manager::getTitleID(int page, int index) const {
             if (mChannels[page][index].loadedBnr) {
                 return ES_TITLE_ID(mChannels[page][index].info.titleType, mChannels[page][index].info.titleCode);
-            }
-            else {
+            } else {
                 return 0;
             }
         }
@@ -352,39 +345,35 @@ namespace ipl {
         nand::MetaFile* Manager::loadBannerAsync(EGG::Heap* heap, int page, int index) {
             if (!mChannels[page][index].loadedBnr || mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 return NULL;
-            }
-            else {
+            } else {
                 return System::getNandManager()->readMetaBodyAsync(heap, "/meta/banner.bin", &mChannels[page][index].arc, getTitleID(page, index),
-                       mChannels[page][index].headerSize + mChannels[page][index].headerOffset, 0,
-                       NULL, NULL, mChannels[page][index].ticketIdx);
+                                                                   mChannels[page][index].headerSize + mChannels[page][index].headerOffset, 0, NULL,
+                                                                   NULL, mChannels[page][index].ticketIdx);
             }
         }
 
         nand::MetaFile* Manager::loadSoundAsync(EGG::Heap* heap, int page, int index) {
-            if (!mChannels[page][index].loadedBnr || mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK
-            || mChannels[page][index].metaHdr->blockHdr.soundSize == 0) {
+            if (!mChannels[page][index].loadedBnr || mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK ||
+                mChannels[page][index].metaHdr->blockHdr.soundSize == 0) {
                 return NULL;
-            }
-            else {
+            } else {
                 return System::getNandManager()->readMetaBodyAsync(heap, "/meta/sound.bin", &mChannels[page][index].arc, getTitleID(page, index),
-                       mChannels[page][index].headerSize + mChannels[page][index].headerOffset, 0,
-                       NULL, NULL, mChannels[page][index].ticketIdx);
+                                                                   mChannels[page][index].headerSize + mChannels[page][index].headerOffset, 0, NULL,
+                                                                   NULL, mChannels[page][index].ticketIdx);
             }
         }
 
         nand::SharedFile* Manager::loadThumbnailRsoAsync(EGG::Heap* heap, int page, int index) {
             if (!mChannels[page][index].loadedBnr || mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 return NULL;
-            }
-            else {
+            } else {
                 u32 rsoIndex = getChannel(page, index).loadedBnr ? mChannels[page][index].metaHdr->blockHdr.iconRSOIdx : 0;
 
                 if (rsoIndex == 0) {
                     return NULL;
-                }
-                else {
+                } else {
                     return System::getNandManager()->readSharedAsync(heap, "/arc/icon.rso.lz7", rsoIndex, 0, 0, getTitleID(page, index),
-                           mChannels[page][index].ticketIdx);
+                                                                     mChannels[page][index].ticketIdx);
                 }
             }
         }
@@ -392,16 +381,14 @@ namespace ipl {
         nand::SharedFile* Manager::loadBannerRsoAsync(EGG::Heap* heap, int page, int index) {
             if (!mChannels[page][index].loadedBnr || mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 return NULL;
-            }
-            else {
+            } else {
                 u32 rsoIndex = mChannels[page][index].loadedBnr ? mChannels[page][index].metaHdr->blockHdr.bannerRSOIdx : 0;
 
                 if (rsoIndex == 0) {
                     return NULL;
-                }
-                else {
+                } else {
                     return System::getNandManager()->readSharedAsync(heap, "/arc/banner.rso.lz7", rsoIndex, 0, 0, getTitleID(page, index),
-                           mChannels[page][index].ticketIdx);
+                                                                     mChannels[page][index].ticketIdx);
                 }
             }
         }
@@ -409,16 +396,14 @@ namespace ipl {
         nand::SharedFile* Manager::loadThumbnailCSAsync(EGG::Heap* heap, int page, int index) {
             if (!mChannels[page][index].loadedBnr || mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 return NULL;
-            }
-            else {
+            } else {
                 u32 rsoIndex = mChannels[page][index].loadedBnr ? mChannels[page][index].metaHdr->blockHdr.iconCSIdx : 0;
 
                 if (rsoIndex == 0) {
                     return NULL;
-                }
-                else {
+                } else {
                     return System::getNandManager()->readSharedAsync(heap, "/arc/icon.cs.lz7", rsoIndex, 0, 0, getTitleID(page, index),
-                           mChannels[page][index].ticketIdx);
+                                                                     mChannels[page][index].ticketIdx);
                 }
             }
         }
@@ -426,16 +411,14 @@ namespace ipl {
         nand::SharedFile* Manager::loadBannerCSAsync(EGG::Heap* heap, int page, int index) {
             if (!mChannels[page][index].loadedBnr || mChannels[page][index].info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 return NULL;
-            }
-            else {
+            } else {
                 u32 rsoIndex = mChannels[page][index].loadedBnr ? mChannels[page][index].metaHdr->blockHdr.bannerCSIdx : 0;
 
                 if (rsoIndex == 0) {
                     return NULL;
-                }
-                else {
+                } else {
                     return System::getNandManager()->readSharedAsync(heap, "/arc/banner.cs.lz7", rsoIndex, 0, 0, getTitleID(page, index),
-                           mChannels[page][index].ticketIdx);
+                                                                     mChannels[page][index].ticketIdx);
                 }
             }
         }
@@ -446,9 +429,9 @@ namespace ipl {
                     delete mpLockedMsgFile;
                 }
 
-                mpLockedMsgFile = System::getNandManager()->readMetaBodyAsync(mpHeap, "/meta/diskInMsg.bin", &mChannels[page][index].arc, getTitleID(page, index),
-                        mChannels[page][index].headerSize + mChannels[page][index].headerOffset, 0,
-                        NULL, NULL, mChannels[page][index].ticketIdx);
+                mpLockedMsgFile = System::getNandManager()->readMetaBodyAsync(
+                    mpHeap, "/meta/diskInMsg.bin", &mChannels[page][index].arc, getTitleID(page, index),
+                    mChannels[page][index].headerSize + mChannels[page][index].headerOffset, 0, NULL, NULL, mChannels[page][index].ticketIdx);
             }
         }
 
@@ -513,14 +496,13 @@ namespace ipl {
         }
 
         BOOL Manager::checkNeedUpdate(int page, int index) const {
-            if (mChannels[page][index].loadedBnr && mChannels[page][index].info.primaryType == PRIMARY_TYPE_CHANNEL
-            && mChannels[page][index].info.titleType == TITLE_TYPE_SYSTEM_CHANNEL) {
-
+            if (mChannels[page][index].loadedBnr && mChannels[page][index].info.primaryType == PRIMARY_TYPE_CHANNEL &&
+                mChannels[page][index].info.titleType == TITLE_TYPE_SYSTEM_CHANNEL) {
                 // If the news/forecast channel is below version 5
                 // Or, if the shop channel is below version 2
                 u32 code = mChannels[page][index].info.titleCode & 0xFFFFFF00;
-                if ((code == ES_TITLE_CODE(TITLE_NEWS) || code == ES_TITLE_CODE(TITLE_WEATHER)) && mChannels[page][index].tmdVersion <= 5
-                || code == ES_TITLE_CODE(TITLE_SHOPPING) && mChannels[page][index].tmdVersion <= 2) {
+                if ((code == ES_TITLE_CODE(TITLE_NEWS) || code == ES_TITLE_CODE(TITLE_WEATHER)) && mChannels[page][index].tmdVersion <= 5 ||
+                    code == ES_TITLE_CODE(TITLE_SHOPPING) && mChannels[page][index].tmdVersion <= 2) {
                     return TRUE;
                 }
             }
@@ -528,9 +510,8 @@ namespace ipl {
         }
 
         BOOL Manager::isParentalRestricted(int page, int index) const {
-            if (mChannels[page][index].loadedBnr && mChannels[page][index].info.primaryType == PRIMARY_TYPE_CHANNEL
-            && mChannels[page][index].info.titleType == TITLE_TYPE_SYSTEM_CHANNEL) {
-
+            if (mChannels[page][index].loadedBnr && mChannels[page][index].info.primaryType == PRIMARY_TYPE_CHANNEL &&
+                mChannels[page][index].info.titleType == TITLE_TYPE_SYSTEM_CHANNEL) {
                 // If news channel is verson 6 or above
                 u32 code = mChannels[page][index].info.titleCode & 0xFFFFFF00;
                 if (code == ES_TITLE_CODE(TITLE_NEWS) && mChannels[page][index].tmdVersion >= 6) {
@@ -542,7 +523,6 @@ namespace ipl {
 
         BOOL Manager::isInternetChannel(int page, int index) const {
             if (mChannels[page][index].loadedBnr && mChannels[page][index].info.primaryType == PRIMARY_TYPE_CHANNEL) {
-
                 u32 code = mChannels[page][index].info.titleCode & 0xFFFFFF00;
                 if (code == ES_TITLE_CODE(TITLE_OPERA)) {
                     return TRUE;
@@ -553,9 +533,9 @@ namespace ipl {
 
         void Manager::setDiskChannelName() {
             int diskPage, diskIndex;
-            getDiskChannelLocation(&diskPage, &diskIndex); // unused
+            getDiskChannelLocation(&diskPage, &diskIndex);  // unused
 
-            for (u32 i = 0; i <= SC_LANG_MAX-1; i++) {
+            for (u32 i = 0; i <= SC_LANG_MAX - 1; i++) {
                 wcsncpy((wchar_t*)mDiskChanMetaHdr.names[i][NAME_INDEX_TITLE], System::getMessage(MESG_DISK_CHANNEL_NAME), META_CHANNEL_NAME_LENGTH);
                 mDiskChanMetaHdr.names[i][NAME_INDEX_TITLE][META_CHANNEL_NAME_LENGTH] = 0;
             }
@@ -592,8 +572,7 @@ namespace ipl {
                     return UNLOCK_STATE_3;
                 }
                 return (System::getBS2Manager()->isTitleAvailable(title) != FALSE) + 1;
-            }
-            else {
+            } else {
                 return UNLOCK_STATE_INVALID;
             }
         }
@@ -626,17 +605,17 @@ namespace ipl {
                     mgr->loadMetaHeaderAsync(page, column);
                 }
 
-                if (page-1 >= 0) {
-                    int lastInRow[MAX_CHANNEL_COLUMN] = { 3, 7, 11 };
+                if (page - 1 >= 0) {
+                    int lastInRow[MAX_CHANNEL_COLUMN] = {3, 7, 11};
                     for (int column = 0; column < MAX_CHANNEL_COLUMN; column++) {
-                        mgr->loadMetaHeaderAsync(page-1, lastInRow[column]);
+                        mgr->loadMetaHeaderAsync(page - 1, lastInRow[column]);
                     }
                 }
 
-                if (page+1 < MAX_CHANNEL_PAGE) {
-                    int firstInRow[MAX_CHANNEL_COLUMN] = { 0, 4, 8 };
+                if (page + 1 < MAX_CHANNEL_PAGE) {
+                    int firstInRow[MAX_CHANNEL_COLUMN] = {0, 4, 8};
                     for (int column = 0; column < MAX_CHANNEL_COLUMN; column++) {
-                        mgr->loadMetaHeaderAsync(page+1, firstInRow[column]);
+                        mgr->loadMetaHeaderAsync(page + 1, firstInRow[column]);
                     }
                 }
             }
@@ -648,8 +627,7 @@ namespace ipl {
                 mgr->mTmpChannel.info.titleCode = ES_TITLE_CODE_NOMASK(tmpTitle);
 
                 mgr->loadTmpMetaHeaderAsync(tmpTitle);
-            }
-            else {
+            } else {
                 if (mgr->mTmpChannel.bnrFile != NULL) {
                     delete mgr->mTmpChannel.bnrFile;
                 }
@@ -706,7 +684,7 @@ namespace ipl {
             if (mTmpChannel.bnrFile != NULL) {
                 delete mTmpChannel.bnrFile;
             }
-            mTmpChannel.bnrFile = System::getNandManager()->readMetaHeaderAsync(mpHeap, titleId, 0, sizeof(SChanMgrMetaHeader)+0x100,
+            mTmpChannel.bnrFile = System::getNandManager()->readMetaHeaderAsync(mpHeap, titleId, 0, sizeof(SChanMgrMetaHeader) + 0x100,
                                                                                 cbReadTmpMetaHeader, &mTmpChannel, mTmpChannel.ticketIdx);
             mTmpChannel.state = CHAN_STATE_LOADED_META;
         }
@@ -716,28 +694,28 @@ namespace ipl {
             nand::MetaFile* bnrFile = channel->bnrFile;
 
             // Check is file was read correctly
-            if (bnrFile->inNand() && (bnrFile->checkData() == nand::RESULT_VERIFY_ERROR || channel->bnrFile->checkData() == nand::RESULT_OPEN_ERROR)) {
+            if (bnrFile->inNand() &&
+                (bnrFile->checkData() == nand::RESULT_VERIFY_ERROR || channel->bnrFile->checkData() == nand::RESULT_OPEN_ERROR)) {
                 memset(channel, 0, sizeof(SEntry));
                 delete channel->bnrFile;
                 channel->bnrFile = NULL;
-            }
-            else {
+            } else {
                 // Search for meta header
                 channel->headerOffset = System::getChannelManager()->searchMetaHeader(channel->bnrFile->getBuffer() + META_PAD);
-                if (channel->headerOffset < 0 || !System::getChannelManager()->checkHeaderBase((u8*)(channel->headerOffset + channel->bnrFile->getBuffer() + META_PAD), &channel->headerSize)) {
+                if (channel->headerOffset < 0 || !System::getChannelManager()->checkHeaderBase(
+                                                     (u8*)(channel->headerOffset + channel->bnrFile->getBuffer() + META_PAD), &channel->headerSize)) {
                     memset(channel, 0, sizeof(SEntry));
                     delete channel->bnrFile;
                     channel->bnrFile = NULL;
-                }
-                else {
+                } else {
                     bnrFile = channel->bnrFile;
                     channel->metaHdr = (SChanMgrMetaHeader*)(bnrFile->getBuffer() + channel->headerOffset);
 
                     // Verify file
-                    if ((bnrFile->inNand() && bnrFile->checkData() == nand::RESULT_VERIFY_ERROR) || !System::getChannelManager()->checkHeaderMD5((u8*)channel->metaHdr)) {
+                    if ((bnrFile->inNand() && bnrFile->checkData() == nand::RESULT_VERIFY_ERROR) ||
+                        !System::getChannelManager()->checkHeaderMD5((u8*)channel->metaHdr)) {
                         memset(channel, 0, sizeof(SEntry));
-                    }
-                    else {
+                    } else {
                         // Alright, prepare the ARC!
                         channel->arcData = (u8*)(channel->bnrFile->getBuffer() + channel->headerSize + channel->headerOffset);
                         ARCInitHandle(channel->arcData, &channel->arc);
@@ -762,8 +740,7 @@ namespace ipl {
                 memset(&mChannels[page][index], 0, sizeof(SEntry));
                 mNumFinished++;
                 mChannels[page][index].state = CHAN_STATE_LOADED;
-            }
-            else if (info.primaryType == channel::PRIMARY_TYPE_DISK) {
+            } else if (info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 // Load disk banner
                 mChannels[page][index].loadedBnr = true;
                 if (mChannels[page][index].info.sceneID == SCENE_ID_DISK_CHANNEL) {
@@ -775,8 +752,7 @@ namespace ipl {
                 mNumFinished++;
                 mNumValidChannel++;
                 mChannels[page][index].state = CHAN_STATE_LOADED;
-            }
-            else {
+            } else {
                 // Load channel banner
                 ESTitleId titleId = ES_TITLE_ID(mChannels[page][index].info.titleType, mChannels[page][index].info.titleCode);
                 s32 ret = utility::ESMisc::GetValidTicketIndex(System::getMem2Sys(), titleId);
@@ -804,9 +780,10 @@ namespace ipl {
                 if (mChannels[page][index].bnrFile != NULL) {
                     delete mChannels[page][index].bnrFile;
                 }
-                mChannels[page][index].bnrFile = System::getNandManager()->readMetaHeaderAsync(mpHeap, titleId, 0, sizeof(SChanMgrMetaHeader)+0x100,
-                                                                                            cbReadMetaHeader, &mChannels[page][index], mChannels[page][index].ticketIdx);
-                
+                mChannels[page][index].bnrFile =
+                    System::getNandManager()->readMetaHeaderAsync(mpHeap, titleId, 0, sizeof(SChanMgrMetaHeader) + 0x100, cbReadMetaHeader,
+                                                                  &mChannels[page][index], mChannels[page][index].ticketIdx);
+
                 mChannels[page][index].state = CHAN_STATE_LOADED_META;
             }
         }
@@ -816,28 +793,28 @@ namespace ipl {
             nand::MetaFile* bnrFile = channel->bnrFile;
 
             // Check is file was read correctly
-            if (bnrFile->inNand() && (bnrFile->checkData() == nand::RESULT_VERIFY_ERROR || channel->bnrFile->checkData() == nand::RESULT_OPEN_ERROR)) {
+            if (bnrFile->inNand() &&
+                (bnrFile->checkData() == nand::RESULT_VERIFY_ERROR || channel->bnrFile->checkData() == nand::RESULT_OPEN_ERROR)) {
                 memset(channel, 0, sizeof(SEntry));
                 delete channel->bnrFile;
                 channel->bnrFile = NULL;
-            }
-            else {
+            } else {
                 // Search for meta header
                 channel->headerOffset = System::getChannelManager()->searchMetaHeader(channel->bnrFile->getBuffer() + META_PAD);
-                if (channel->headerOffset < 0 || !System::getChannelManager()->checkHeaderBase((u8*)(channel->headerOffset + channel->bnrFile->getBuffer() + META_PAD), &channel->headerSize)) {
+                if (channel->headerOffset < 0 || !System::getChannelManager()->checkHeaderBase(
+                                                     (u8*)(channel->headerOffset + channel->bnrFile->getBuffer() + META_PAD), &channel->headerSize)) {
                     memset(channel, 0, sizeof(SEntry));
                     delete channel->bnrFile;
                     channel->bnrFile = NULL;
-                }
-                else {
+                } else {
                     bnrFile = channel->bnrFile;
                     channel->metaHdr = (SChanMgrMetaHeader*)(bnrFile->getBuffer() + channel->headerOffset);
 
                     // Verify file
-                    if ((bnrFile->inNand() && bnrFile->checkData() == nand::RESULT_VERIFY_ERROR) || !System::getChannelManager()->checkHeaderMD5((u8*)channel->metaHdr)) {
+                    if ((bnrFile->inNand() && bnrFile->checkData() == nand::RESULT_VERIFY_ERROR) ||
+                        !System::getChannelManager()->checkHeaderMD5((u8*)channel->metaHdr)) {
                         memset(channel, 0, sizeof(SEntry));
-                    }
-                    else {
+                    } else {
                         // Alright, prepare the ARC!
                         channel->arcData = (u8*)(channel->bnrFile->getBuffer() + channel->headerSize + channel->headerOffset);
                         ARCInitHandle(channel->arcData, &channel->arc);
@@ -856,7 +833,7 @@ namespace ipl {
         void Manager::makeLoadOrderList(int* list) const {
             int prevPage = System::getSaveData()->getPrevPage();
             *list = prevPage;
-            int var1 = prevPage+1;
+            int var1 = prevPage + 1;
 
             int i = 1;
             do {
@@ -866,8 +843,7 @@ namespace ipl {
                         list[i++] = var1;
                     }
                     var1 = prevPage - var2;
-                }
-                else {
+                } else {
                     if (var1 >= 0) {
                         list[i++] = var1;
                     }
@@ -888,8 +864,7 @@ namespace ipl {
                     SCSetInstalledChannelAppCount(mNumValidChannel);
                     SCSetFreeChannelAppCount(MAX_CHANNEL_TOTAL - mNumValidChannel);
                     result = SC_FLUSH;
-                }
-                else {
+                } else {
                     result = FINISH;
                 }
             }
@@ -916,8 +891,7 @@ namespace ipl {
             if (state == bs2::IPL_STATE_RUN_RVL_GAME && mBS2State != bs2::IPL_STATE_RUN_RVL_GAME) {
                 mbSetDiskBannerInfo = setDiskBannerInfo(false);
                 unk_0x1B81 = true;
-            }
-            else if (state != bs2::IPL_STATE_RUN_RVL_GAME && state != mBS2State) {
+            } else if (state != bs2::IPL_STATE_RUN_RVL_GAME && state != mBS2State) {
                 setDiskBannerInfo(true);
             }
 
@@ -938,8 +912,7 @@ namespace ipl {
                     if (next == 4) {
                         return i - 3;
                     }
-                }
-                else {
+                } else {
                     // Otherwise, try again!!
                     next = 0;
                 }
@@ -956,7 +929,8 @@ namespace ipl {
             }
 
             // Verify magic and file size
-            if (!NAND_CHECK_MAGIC4(header->magic, 'I','M','E','T') || myHdrSize < sizeof(SMetaBlockHeader) || myHdrSize > sizeof(SChanMgrMetaHeader)) {
+            if (!NAND_CHECK_MAGIC4(header->magic, 'I', 'M', 'E', 'T') || myHdrSize < sizeof(SMetaBlockHeader) ||
+                myHdrSize > sizeof(SChanMgrMetaHeader)) {
                 return 0;
             }
 
@@ -972,7 +946,7 @@ namespace ipl {
 
             // Copy sum
             for (int i = 0; i < NET_MD5_DIGEST_SIZE; i++) {
-                md5sum[i] = buffer[(size - NET_MD5_DIGEST_SIZE)+i];
+                md5sum[i] = buffer[(size - NET_MD5_DIGEST_SIZE) + i];
             }
 
             // Reset padding
@@ -1007,8 +981,7 @@ namespace ipl {
                     mChannels[diskPage][diskIndex].loadedBnrData[i] = false;
                 }
                 return true;
-            }
-            else {
+            } else {
                 if (!System::getBS2Manager()->diskHasBanner()) {
                     return false;
                 }
@@ -1031,7 +1004,7 @@ namespace ipl {
                 mChannels[diskPage][diskIndex].arcData = (u8*)(metaBnr) + mChannels[diskPage][diskIndex].headerSize;
 
                 ARCInitHandle(mChannels[diskPage][diskIndex].arcData, &mChannels[diskPage][diskIndex].arc);
-            
+
                 return true;
             }
         }
@@ -1057,13 +1030,11 @@ namespace ipl {
                 ARCOpen(&mChannels[diskPage][diskIndex].arc, "/meta/icon.bin", &readFile);
                 destData = &mpDiskIconBuf;
                 readSize = mChannels[diskPage][diskIndex].metaHdr->blockHdr.iconSize;
-            }
-            else if (index == DISK_BANNERDATA_BANNER) {
+            } else if (index == DISK_BANNERDATA_BANNER) {
                 ARCOpen(&mChannels[diskPage][diskIndex].arc, "/meta/banner.bin", &readFile);
                 destData = &mpDiskBannerBuf;
                 readSize = mChannels[diskPage][diskIndex].metaHdr->blockHdr.bannerSize;
-            }
-            else if (index == DISK_BANNERDATA_SOUND) {
+            } else if (index == DISK_BANNERDATA_SOUND) {
                 ARCOpen(&mChannels[diskPage][diskIndex].arc, "/meta/sound.bin", &readFile);
                 destData = &mpDiskSoundBuf;
                 readSize = mChannels[diskPage][diskIndex].metaHdr->blockHdr.soundSize;
@@ -1076,16 +1047,15 @@ namespace ipl {
             NETMD5Sum md5sum;
 
             // Verify MD5 magic
-            if (NAND_CHECK_MAGIC4(md5Block->magic, 'I','M','D','5')) {
+            if (NAND_CHECK_MAGIC4(md5Block->magic, 'I', 'M', 'D', '5')) {
                 fileLen = md5Block->length;
                 memcpy(md5sum, md5Block->md5, NET_MD5_DIGEST_SIZE);
-            }
-            else {
+            } else {
                 return NULL;
             }
 
             // (Fakematch??) Using both 0x20 and sizeof(MD5Head) otherwise it does not match
-            if (NAND_CHECK_MAGIC4((u8*)srcData + 0x20, 'L','Z','7','7')) {
+            if (NAND_CHECK_MAGIC4((u8*)srcData + 0x20, 'L', 'Z', '7', '7')) {
                 if (!mChannels[diskPage][diskIndex].loadedBnrData[index]) {
                     // Uncompress data
                     CXGetUncompressedSize((u8*)srcData + sizeof(MD5Head) + 4);
@@ -1098,11 +1068,10 @@ namespace ipl {
                         return NULL;
                     }
                 }
-            }
-            else {
+            } else {
                 if (!mChannels[diskPage][diskIndex].loadedBnrData[index]) {
                     memcpy(*destData, (u8*)srcData + sizeof(MD5Head), readSize);
-                    
+
                     mChannels[diskPage][diskIndex].loadedBnrData[index] = true;
 
                     // Verify MD5
@@ -1160,9 +1129,9 @@ namespace ipl {
             return (u16*)diskInMsgs->messages[lookup[SC_LANG_JAPANESE]];
         }
 
-        // Unused?!!! force.
-        #pragma push
-        #pragma force_active on
+// Unused?!!! force.
+#pragma push
+#pragma force_active on
 
         BOOL Manager::nand_error_handling(int code) {
             BOOL result = FALSE;
@@ -1203,7 +1172,7 @@ namespace ipl {
             return result;
         }
 
-        #pragma pop
+#pragma pop
 
         SEntry* Manager::fn_8133A4E0(ESTitleId titleId) {
             for (int page = 0; page < MAX_CHANNEL_PAGE; page++) {
@@ -1229,8 +1198,7 @@ namespace ipl {
             SEntry* channel = fn_8133A4E0(titleId);
             if (channel != NULL) {
                 return channel->metaHdr->blockHdr.bannerCSIdx;
-            }
-            else {
+            } else {
                 return 0;
             }
         }
@@ -1239,8 +1207,7 @@ namespace ipl {
             SEntry* channel = fn_8133A4E0(titleId);
             if (channel != NULL) {
                 return channel->metaHdr->blockHdr.soundSize;
-            }
-            else {
+            } else {
                 return 0;
             }
         }
@@ -1249,8 +1216,7 @@ namespace ipl {
             SEntry* channel = fn_8133A4E0(titleId);
             if (channel != NULL && (channel->metaHdr->blockHdr.unk_08 << 8)) {
                 return TRUE;
-            }
-            else {
+            } else {
                 return FALSE;
             }
         }
@@ -1259,8 +1225,7 @@ namespace ipl {
             SEntry* channel = fn_8133A4E0(titleId);
             if (channel != NULL && (channel->metaHdr->blockHdr.unk_14 << 14)) {
                 return TRUE;
-            }
-            else {
+            } else {
                 return FALSE;
             }
         }
@@ -1269,8 +1234,7 @@ namespace ipl {
             SEntry* channel = fn_8133A4E0(titleId);
             if (channel != NULL && channel->missingTicket != FALSE) {
                 return TRUE;
-            }
-            else {
+            } else {
                 return FALSE;
             }
         }
@@ -1281,12 +1245,11 @@ namespace ipl {
                 return FALSE;
             }
 
-            if (channel->loadedBnr && channel->info.primaryType == channel::PRIMARY_TYPE_CHANNEL
-            && channel->info.titleType == ES_TITLE_TYPE(TITLE_NEWS) && (channel->info.titleCode & 0xFFFFFF00) == ES_TITLE_CODE(TITLE_NEWS)
-            && channel->tmdVersion >= 6) {
+            if (channel->loadedBnr && channel->info.primaryType == channel::PRIMARY_TYPE_CHANNEL &&
+                channel->info.titleType == ES_TITLE_TYPE(TITLE_NEWS) && (channel->info.titleCode & 0xFFFFFF00) == ES_TITLE_CODE(TITLE_NEWS) &&
+                channel->tmdVersion >= 6) {
                 return TRUE;
-            }
-            else {
+            } else {
                 return FALSE;
             }
         }
@@ -1297,11 +1260,10 @@ namespace ipl {
                 return FALSE;
             }
 
-            if (channel->loadedBnr && channel->info.primaryType == channel::PRIMARY_TYPE_CHANNEL
-            && (channel->info.titleCode & 0xFFFFFF00) == ES_TITLE_CODE(TITLE_OPERA)) {
+            if (channel->loadedBnr && channel->info.primaryType == channel::PRIMARY_TYPE_CHANNEL &&
+                (channel->info.titleCode & 0xFFFFFF00) == ES_TITLE_CODE(TITLE_OPERA)) {
                 return TRUE;
-            }
-            else {
+            } else {
                 return FALSE;
             }
         }
@@ -1314,11 +1276,9 @@ namespace ipl {
 
             if (!channel->loadedBnr || channel->info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 return NULL;
-            }
-            else {
+            } else {
                 return System::getNandManager()->readMetaBodyAsync(heap, "/meta/banner.bin", &channel->arc, titleId,
-                                                                    channel->headerSize + channel->headerOffset, 0,
-                                                                    NULL, NULL, channel->ticketIdx);
+                                                                   channel->headerSize + channel->headerOffset, 0, NULL, NULL, channel->ticketIdx);
             }
         }
 
@@ -1328,14 +1288,11 @@ namespace ipl {
                 return NULL;
             }
 
-            if (!channel->loadedBnr || channel->info.primaryType == channel::PRIMARY_TYPE_DISK
-            || channel->metaHdr->blockHdr.soundSize == 0) {
+            if (!channel->loadedBnr || channel->info.primaryType == channel::PRIMARY_TYPE_DISK || channel->metaHdr->blockHdr.soundSize == 0) {
                 return NULL;
-            }
-            else {
+            } else {
                 return System::getNandManager()->readMetaBodyAsync(heap, "/meta/sound.bin", &channel->arc, titleId,
-                                                                    channel->headerSize + channel->headerOffset, 0,
-                                                                    NULL, NULL, channel->ticketIdx);
+                                                                   channel->headerSize + channel->headerOffset, 0, NULL, NULL, channel->ticketIdx);
             }
         }
 
@@ -1347,8 +1304,7 @@ namespace ipl {
 
             if (!channel->loadedBnr || channel->info.primaryType == channel::PRIMARY_TYPE_DISK) {
                 return NULL;
-            }
-            else {
+            } else {
                 u32 index = fn_8133A57C(titleId);
                 if (index == 0) {
                     return NULL;
@@ -1371,5 +1327,5 @@ namespace ipl {
                 channel->loadedBnr = false;
             }
         }
-    }
-}
+    }  // namespace channel
+}  // namespace ipl

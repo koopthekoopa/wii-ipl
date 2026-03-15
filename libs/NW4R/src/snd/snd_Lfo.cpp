@@ -31,10 +31,8 @@ namespace nw4r {
             }
 
             s8 Lfo::GetSinIdx(int idx) {
-                static const u8 sinTable[TABLE_SIZE + 1] = {
-                    0,   6,   12,  19,  25,  31,  37,  43,  49,  54,  60,
-                    65,  71,  76,  81,  85,  90,  94,  98,  102, 106, 109,
-                    112, 115, 117, 120, 122, 123, 125, 126, 126, 127, 127};
+                static const u8 sinTable[TABLE_SIZE + 1] = {0,  6,  12,  19,  25,  31,  37,  43,  49,  54,  60,  65,  71,  76,  81,  85, 90,
+                                                            94, 98, 102, 106, 109, 112, 115, 117, 120, 122, 123, 125, 126, 126, 127, 127};
 
                 if (idx < TABLE_SIZE) {
                     return sinTable[idx];
@@ -67,6 +65,6 @@ namespace nw4r {
 
                 return value;
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

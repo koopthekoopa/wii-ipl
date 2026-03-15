@@ -8,15 +8,9 @@
 
 namespace nw4r {
     namespace snd {
-        RemoteSpeaker::RemoteSpeaker() :
-        mInitFlag(false),
-        mRemoteInitFlag(false),
-        mPlayFlag(false),
-        mEnableFlag(false),
-        mSetupBusyFlag(false),
-        mSetupCallback(NULL),
-        mFirstEncodeFlag(false),
-        mForceResumeFlag(false) {
+        RemoteSpeaker::RemoteSpeaker()
+            : mInitFlag(false), mRemoteInitFlag(false), mPlayFlag(false), mEnableFlag(false), mSetupBusyFlag(false), mSetupCallback(NULL),
+              mFirstEncodeFlag(false), mForceResumeFlag(false) {
             OSCreateAlarm(&mContinueAlarm);
             OSSetAlarmUserData(&mContinueAlarm, this);
 
@@ -68,33 +62,29 @@ namespace nw4r {
             if (mPlayFlag) {
                 if (playFlag) {
                     wencMode = 1;
-                }
-                else {
+                } else {
                     wencMode = 1;
                     lastFlag = true;
                 }
-            }
-            else {
+            } else {
                 if (playFlag) {
                     if (mFirstEncodeFlag) {
                         wencMode = 0;
-                    }
-                    else {
+                    } else {
                         wencMode = 1;
                     }
 
                     mFirstEncodeFlag = false;
                     firstFlag = true;
-                }
-                else {
+                } else {
                     wencMode = -1;
                 }
             }
 
             if (wencMode != -1) {
                 u8 adpcmBuffer[SAMPLES_PER_ENCODED_PACKET];
-                WENCGetEncodeData(&mEncodeInfo, wencMode, pRmtSamples,
-                                wencMode == 2 ? SAMPLES_PER_AUDIO_PACKET-8 : SAMPLES_PER_AUDIO_PACKET, adpcmBuffer);
+                WENCGetEncodeData(&mEncodeInfo, wencMode, pRmtSamples, wencMode == 2 ? SAMPLES_PER_AUDIO_PACKET - 8 : SAMPLES_PER_AUDIO_PACKET,
+                                  adpcmBuffer);
 
                 s32 result = WPADSendStreamData(mChannelIndex, adpcmBuffer, SAMPLES_PER_ENCODED_PACKET);
             }
@@ -158,5 +148,5 @@ namespace nw4r {
 
             speaker->mIntervalFlag = false;
         }
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r

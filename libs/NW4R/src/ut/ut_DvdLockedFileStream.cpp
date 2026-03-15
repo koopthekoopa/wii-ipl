@@ -20,17 +20,16 @@ namespace nw4r {
             OSRestoreInterrupts(enabled);
         }
 
-        DvdLockedFileStream::DvdLockedFileStream(s32 entrynum) :
-        DvdFileStream(entrynum) {
+        DvdLockedFileStream::DvdLockedFileStream(s32 entrynum) : DvdFileStream(entrynum) {
             InitMutex_();
         }
 
-        DvdLockedFileStream::DvdLockedFileStream(const DVDFileInfo* info, bool close) :
-        DvdFileStream(info, close) {
+        DvdLockedFileStream::DvdLockedFileStream(const DVDFileInfo* info, bool close) : DvdFileStream(info, close) {
             InitMutex_();
         }
 
-        DvdLockedFileStream::~DvdLockedFileStream() {}
+        DvdLockedFileStream::~DvdLockedFileStream() {
+        }
 
         s32 DvdLockedFileStream::Read(void* pDst, u32 size) {
             OSLockMutex(&sMutex);
@@ -45,5 +44,5 @@ namespace nw4r {
             OSUnlockMutex(&sMutex);
             return result;
         }
-    }
-}
+    }  // namespace ut
+}  // namespace nw4r

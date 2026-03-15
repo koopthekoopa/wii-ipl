@@ -17,7 +17,7 @@ namespace textinput {
             AnmPane* anmPane = NULL;
 
             for (anmPane = static_cast<AnmPane*>(nw4r::ut::List_GetFirst(&mAnmPanes)); anmPane != NULL;
-            anmPane = static_cast<AnmPane*>(nw4r::ut::List_GetNext(&mAnmPanes, anmPane))) {
+                 anmPane = static_cast<AnmPane*>(nw4r::ut::List_GetNext(&mAnmPanes, anmPane))) {
                 // Found anim pane!
                 if (util::strcmp(paneName, anmPane->getPane()->GetName())) {
                     return anmPane;
@@ -31,7 +31,7 @@ namespace textinput {
             AnmPane* anmPane = NULL;
 
             for (anmPane = static_cast<AnmPane*>(nw4r::ut::List_GetFirst(&mAnmPanes)); anmPane != NULL;
-            anmPane = static_cast<AnmPane*>(nw4r::ut::List_GetNext(&mAnmPanes, anmPane))) {
+                 anmPane = static_cast<AnmPane*>(nw4r::ut::List_GetNext(&mAnmPanes, anmPane))) {
                 nw4r::lyt::PaneList& paneList = anmPane->getPane()->GetChildList();
                 nw4r::lyt::PaneList::Iterator it = paneList.GetBeginIter();
                 nw4r::lyt::TextBox* textBox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(&*it);
@@ -52,7 +52,7 @@ namespace textinput {
             AnmPane* anmPane = NULL;
 
             for (anmPane = static_cast<AnmPane*>(nw4r::ut::List_GetFirst(&mAnmPaneList)); anmPane != NULL;
-            anmPane = static_cast<AnmPane*>(nw4r::ut::List_GetNext(&mAnmPaneList, anmPane))) {
+                 anmPane = static_cast<AnmPane*>(nw4r::ut::List_GetNext(&mAnmPaneList, anmPane))) {
                 anmPane->calc();
             }
         }
@@ -61,25 +61,16 @@ namespace textinput {
             AnmPane* anmPane = NULL;
 
             for (anmPane = static_cast<AnmPane*>(nw4r::ut::List_GetFirst(&mAnmPaneList)); anmPane != NULL;
-            anmPane = static_cast<AnmPane*>(nw4r::ut::List_GetNext(&mAnmPaneList, anmPane))) {
+                 anmPane = static_cast<AnmPane*>(nw4r::ut::List_GetNext(&mAnmPaneList, anmPane))) {
                 anmPane->changeAnimation(id);
             }
         }
 
-        Layout::Layout(nw4r::lyt::MultiArcResourceAccessor* resAccessor, const char* layoutBinName, EventObserver* event) :
-        mpLayout(NULL),
-        mpszLayoutBinName(layoutBinName),
-        mpMultiArcResourceAccessor(resAccessor),
-        mpPaneManager(NULL),
-        mpEventObserver(event),
-        mDrawInfo(),
-        mScreenRect(),
-        mbAnimOn(true),
-        mbAspectRatio4x3(true),
-        mAnmPaneFifo(),
-        mpNw4rAllocator(NULL) {
+        Layout::Layout(nw4r::lyt::MultiArcResourceAccessor* resAccessor, const char* layoutBinName, EventObserver* event)
+            : mpLayout(NULL), mpszLayoutBinName(layoutBinName), mpMultiArcResourceAccessor(resAccessor), mpPaneManager(NULL), mpEventObserver(event),
+              mDrawInfo(), mScreenRect(), mbAnimOn(true), mbAspectRatio4x3(true), mAnmPaneFifo(), mpNw4rAllocator(NULL) {
             nw4r::ut::List_Init(&mAnmPanes, offsetof(AnmPane, mLink));
-            mAnmPaneFifo.init(); // but... the constructor already calls it.
+            mAnmPaneFifo.init();  // but... the constructor already calls it.
         }
 
         Layout::~Layout() {
@@ -100,7 +91,7 @@ namespace textinput {
             // Create layout object
             {
                 void* pMem = MEMAllocFromAllocator(allocator, sizeof(TiLayout));
-                mpLayout = new(pMem) TiLayout();
+                mpLayout = new (pMem) TiLayout();
             }
 
             // Build layout data from ARC
@@ -134,9 +125,9 @@ namespace textinput {
 
         gui::PaneManager* Layout::createPaneManager(MEMAllocator* allocator, TiEventHandler* eventHandler) {
             void* pMem = MEMAllocFromAllocator(allocator, sizeof(gui::PaneManager));
-            
+
             gui::PaneManager* paneManager = NULL;
-            paneManager = new(pMem) gui::PaneManager(eventHandler, allocator, NULL);
+            paneManager = new (pMem) gui::PaneManager(eventHandler, allocator, NULL);
 
             return paneManager;
         }
@@ -189,7 +180,7 @@ namespace textinput {
         void Layout::calc() {
             if (mbAnimOn) {
                 for (AnmPane* anmPane = static_cast<AnmPane*>(nw4r::ut::List_GetFirst(&mAnmPanes)); anmPane != NULL;
-                anmPane = static_cast<AnmPane*>(nw4r::ut::List_GetNext(&mAnmPanes, anmPane))) {
+                     anmPane = static_cast<AnmPane*>(nw4r::ut::List_GetNext(&mAnmPanes, anmPane))) {
                     anmPane->calc();
                 }
             }
@@ -223,8 +214,7 @@ namespace textinput {
             nw4r::lyt::Pane* pane = mpLayout->GetRootPane()->FindPaneByName(paneName);
             if (pane == NULL) {
                 return false;
-            }
-            else {
+            } else {
                 *result = pane->IsVisible();
                 return true;
             }
@@ -301,15 +291,14 @@ namespace textinput {
                 util::getProjectionRect16x9(&rect16x9);
 
                 MTXOrtho(projMtx, rect16x9.bottom, rect16x9.top, rect16x9.left, rect16x9.right, -1.0f, 1.0f);
-            }
-            else {
+            } else {
                 MTXOrtho(projMtx, layoutRect.top, layoutRect.bottom, layoutRect.left, layoutRect.right, -1.0f, 1.0f);
             }
 
             GXSetProjection(projMtx, GX_ORTHOGRAPHIC);
         }
 
-        void Layout::SetFontForce(nw4r::ut::Font *font) {
+        void Layout::SetFontForce(nw4r::ut::Font* font) {
             PaneAccessor paneAccessor(mpLayout);
 
             while (paneAccessor.GotPane()) {
@@ -340,14 +329,12 @@ namespace textinput {
                     ReverseYAxis(&paneMtx);
                 }
                 pPaneMtx = paneMtx;
-            }
-            else {
+            } else {
                 if (drawInfo.IsYAxisUp()) {
                     MTX34Copy(&paneMtx, &mGlobalMtx);
                     ReverseYAxis(&paneMtx);
                     pPaneMtx = paneMtx;
-                }
-                else {
+                } else {
                     pPaneMtx = mGlobalMtx;
                 }
             }
@@ -355,11 +342,12 @@ namespace textinput {
             MTXCopy(pPaneMtx, mtx);
         }
 
-        AnmPane::~AnmPane() {}
+        AnmPane::~AnmPane() {
+        }
 
         void AnmPane::addAnimation(MEMAllocator* allocator, u32 id, AnimTransformPane* animTransformPane, bool loop, bool noOff) {
             void* mem = MEMAllocFromAllocator(allocator, sizeof(Anim));
-            Anim* anim = new(mem) Anim(id, animTransformPane, loop, noOff);
+            Anim* anim = new (mem) Anim(id, animTransformPane, loop, noOff);
 
             // Add it,
             nw4r::ut::List_Append(&mAnms, anim);
@@ -369,9 +357,10 @@ namespace textinput {
             mpPane->SetAnimationEnable(animTransformPane, false, noOff);
         }
 
-        void AnmPane::forceAddAnimation(MEMAllocator* allocator, u32 id, AnimTransformPane* animTransformPane, const char* name, bool loop, bool noOff) {
+        void AnmPane::forceAddAnimation(MEMAllocator* allocator, u32 id, AnimTransformPane* animTransformPane, const char* name, bool loop,
+                                        bool noOff) {
             void* mem = MEMAllocFromAllocator(allocator, sizeof(Anim));
-            Anim* anim = new(mem) Anim(id, animTransformPane, loop, noOff);
+            Anim* anim = new (mem) Anim(id, animTransformPane, loop, noOff);
 
             // Add it,
             nw4r::ut::List_Append(&mAnms, anim);
@@ -397,7 +386,7 @@ namespace textinput {
                 mpCurrentAnim->mpAnimTransform->SetFrame(0.0f);
 
                 mpPane->SetAnimationEnable(mpCurrentAnim->mpAnimTransform, true, mpCurrentAnim->mbNoOff);
-            
+
                 onAnmEvent(PE_3);
 
                 if (mpObserver != NULL) {
@@ -429,8 +418,7 @@ namespace textinput {
 
                         onAnmEvent(PE_4);
                     }
-                }
-                else {
+                } else {
                     mpCurrentAnim->mpAnimTransform->SetFrame(mpCurrentAnim->mfCurrentFrame);
                 }
             }
@@ -440,8 +428,7 @@ namespace textinput {
             if (mpCurrentAnim != NULL) {
                 state->currentFrame = mpCurrentAnim->mfCurrentFrame;
                 state->currentAnim = mpCurrentAnim->muID;
-            }
-            else {
+            } else {
                 state->currentFrame = 0.0f;
                 state->currentAnim = -1;
             }
@@ -454,8 +441,7 @@ namespace textinput {
 
             if (state->currentAnim < 0) {
                 mpCurrentAnim = NULL;
-            }
-            else {
+            } else {
                 mpCurrentAnim = searchAnimation(state->currentAnim);
             }
 
@@ -470,7 +456,7 @@ namespace textinput {
         void AnmPane::destroy(MEMAllocator* allocator) {
             if (allocator != NULL) {
                 for (Anim* anim = static_cast<Anim*>(nw4r::ut::List_GetFirst(&mAnms)); anim != NULL;
-                anim = static_cast<Anim*>(nw4r::ut::List_GetFirst(&mAnms))) {
+                     anim = static_cast<Anim*>(nw4r::ut::List_GetFirst(&mAnms))) {
                     mpPane->UnbindAnimation(anim->mpAnimTransform);
                     List_Remove(&mAnms, anim);
                     MEMFreeToAllocator(allocator, anim);
@@ -478,10 +464,9 @@ namespace textinput {
 
                 this->~AnmPane();
                 MEMFreeToAllocator(allocator, this);
-            }
-            else {
+            } else {
                 for (Anim* anim = static_cast<Anim*>(nw4r::ut::List_GetFirst(&mAnms)); anim != NULL;
-                anim = static_cast<Anim*>(nw4r::ut::List_GetFirst(&mAnms))) {
+                     anim = static_cast<Anim*>(nw4r::ut::List_GetFirst(&mAnms))) {
                     mpPane->UnbindAnimation(anim->mpAnimTransform);
                     List_Remove(&mAnms, anim);
                     delete anim;
@@ -490,5 +475,5 @@ namespace textinput {
                 delete this;
             }
         }
-    }
-}
+    }  // namespace nw4rmanager
+}  // namespace textinput

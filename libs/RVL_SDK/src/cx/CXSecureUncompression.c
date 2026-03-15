@@ -62,8 +62,7 @@ CXSecureResult CXSecureUncompressRL(const void* src, u32 length, void* dst) {
             do
                 *pDst++ = *pSrc++;
             while (--runLength > 0);
-        }
-        else {
+        } else {
             u8 byte;
             runLength += 3;
 
@@ -147,15 +146,13 @@ CXSecureResult CXSecureUncompressLZ(const void* src, u32 length, void* dst) {
                 }
 
                 size--;
-            }
-            else {
+            } else {
                 s32 length2 = *pSrc >> 4;
                 s32 offset;
 
                 if (!stat) {
                     length2 += 3;
-                }
-                else {
+                } else {
                     if (length2 == 0x01) {
                         length2 = (*pSrc++ & 0x0F) << 12;
                         length2 |= *pSrc++ << 4;
@@ -163,15 +160,13 @@ CXSecureResult CXSecureUncompressLZ(const void* src, u32 length, void* dst) {
                         length2 += 0x111;
 
                         remainingLength -= 2;
-                    }
-                    else if (length2 == 0x00) {
+                    } else if (length2 == 0x00) {
                         length2 = (*pSrc++ & 0x0F) << 4;
                         length2 |= *pSrc >> 4;
                         length2 += 0x11;
 
                         remainingLength -= 1;
-                    }
-                    else {
+                    } else {
                         length2 += 0x01;
                     }
                 }
@@ -226,8 +221,7 @@ CXSecureResult CXSecureUncompressLZ(const void* src, u32 length, void* dst) {
     return CX_SECURE_ERR_OK;
 }
 
-BOOL CXiVerifyHuffmanTable_(const void* param_1, u8 param_2)
-{
+BOOL CXiVerifyHuffmanTable_(const void* param_1, u8 param_2) {
     const u8* a = param_1;
     const u8* b = a + 1;
     u32 c = *a;
@@ -309,8 +303,7 @@ CXSecureResult CXSecureUncompressHuffman(const void* src, u32 length, void* dst)
         }
 
         size = CXiConvertEndian32_(IN_BUFFER_AT(u32, pSrc, 4));
-    }
-    else {
+    } else {
         if (length < e + 4) {
             return CX_SECURE_ERR_BUFFER_TOO_SMALL;
         }

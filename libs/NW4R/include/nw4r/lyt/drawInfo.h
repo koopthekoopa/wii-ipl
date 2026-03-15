@@ -13,51 +13,51 @@ namespace nw4r {
         public:
             DrawInfo();
             virtual ~DrawInfo();
-            
-            void                SetViewRect(const ut::Rect& rect)               { mViewRect = rect; }
 
-            const math::MTX34&  GetViewMtx() const                              { return mViewMtx; }
-            void                SetViewMtx(const math::MTX34& value)            { mViewMtx = value; }
+            void SetViewRect(const ut::Rect& rect) { mViewRect = rect; }
 
-            const math::VEC2&   GetLocationAdjustScale() const                  { return mLocationAdjustScale; }
-            void                SetLocationAdjustScale(const math::VEC2& scale) { mLocationAdjustScale = scale; }
+            const math::MTX34& GetViewMtx() const { return mViewMtx; }
+            void SetViewMtx(const math::MTX34& value) { mViewMtx = value; }
 
-            bool                IsMultipleViewMtxOnDraw() const                 { return mFlag.mulViewDraw; }
-            void                SetMultipleViewMtxOnDraw(bool bEnable)          { mFlag.mulViewDraw = bEnable; }
+            const math::VEC2& GetLocationAdjustScale() const { return mLocationAdjustScale; }
+            void SetLocationAdjustScale(const math::VEC2& scale) { mLocationAdjustScale = scale; }
 
-            bool                IsInfluencedAlpha() const                       { return mFlag.influencedAlpha; }
-            void                SetInfluencedAlpha(bool bEnable)                { mFlag.influencedAlpha = bEnable; }
+            bool IsMultipleViewMtxOnDraw() const { return mFlag.mulViewDraw; }
+            void SetMultipleViewMtxOnDraw(bool bEnable) { mFlag.mulViewDraw = bEnable; }
 
-            bool                IsLocationAdjust() const                        { return mFlag.locationAdjust; }
-            void                SetLocationAdjust(bool bEnable)                 { mFlag.locationAdjust = bEnable; }
+            bool IsInfluencedAlpha() const { return mFlag.influencedAlpha; }
+            void SetInfluencedAlpha(bool bEnable) { mFlag.influencedAlpha = bEnable; }
 
-            bool                IsInvisiblePaneCalculateMtx() const             { return mFlag.invisiblePaneCalculateMtx; }
-            void                SetInvisiblePaneCalculateMtx(bool bEnable)      { mFlag.invisiblePaneCalculateMtx = bEnable; }
+            bool IsLocationAdjust() const { return mFlag.locationAdjust; }
+            void SetLocationAdjust(bool bEnable) { mFlag.locationAdjust = bEnable; }
 
-            bool                IsDebugDrawMode() const                         { return mFlag.debugDrawMode; }
-            void                SetDebugDrawMode(bool bEnable)                  { mFlag.debugDrawMode = bEnable; }
+            bool IsInvisiblePaneCalculateMtx() const { return mFlag.invisiblePaneCalculateMtx; }
+            void SetInvisiblePaneCalculateMtx(bool bEnable) { mFlag.invisiblePaneCalculateMtx = bEnable; }
 
-            bool                IsYAxisUp() const                               { return mViewRect.bottom - mViewRect.top < 0.0f; }
+            bool IsDebugDrawMode() const { return mFlag.debugDrawMode; }
+            void SetDebugDrawMode(bool bEnable) { mFlag.debugDrawMode = bEnable; }
 
-            f32                 GetGlobalAlpha() const                          { return mGlobalAlpha; }
-            void                SetGlobalAlpha(f32 alpha)                       { mGlobalAlpha = alpha; }
+            bool IsYAxisUp() const { return mViewRect.bottom - mViewRect.top < 0.0f; }
+
+            f32 GetGlobalAlpha() const { return mGlobalAlpha; }
+            void SetGlobalAlpha(f32 alpha) { mGlobalAlpha = alpha; }
 
         protected:
-            math::MTX34 mViewMtx;               // 0x04
-            ut::Rect    mViewRect;              // 0x34
+            math::MTX34 mViewMtx;  // 0x04
+            ut::Rect mViewRect;    // 0x34
 
-            math::VEC2  mLocationAdjustScale;   // 0x44
-            f32         mGlobalAlpha;           // 0x4C
+            math::VEC2 mLocationAdjustScale;  // 0x44
+            f32 mGlobalAlpha;                 // 0x4C
 
             struct {
-                u8  mulViewDraw : 1;                // 10000000
-                u8  influencedAlpha : 1;            // 01000000
-                u8  locationAdjust : 1;             // 00100000
-                u8  invisiblePaneCalculateMtx : 1;  // 00010000
-                u8  debugDrawMode : 1;              // 00001000
-            } mFlag;    // 0x50
+                u8 mulViewDraw : 1;                // 10000000
+                u8 influencedAlpha : 1;            // 01000000
+                u8 locationAdjust : 1;             // 00100000
+                u8 invisiblePaneCalculateMtx : 1;  // 00010000
+                u8 debugDrawMode : 1;              // 00001000
+            } mFlag;                               // 0x50
         };
-    }
-}
+    }  // namespace lyt
+}  // namespace nw4r
 
-#endif // NW4R_LYT_DRAW_INFO_H
+#endif  // NW4R_LYT_DRAW_INFO_H

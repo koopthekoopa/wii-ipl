@@ -1,5 +1,5 @@
-#include <revolution/card.h>
 #include <private/card.h>
+#include <revolution/card.h>
 
 #include <string.h>
 
@@ -25,8 +25,7 @@ static void WriteCallback(s32 chan, s32 result) {
         if (card->currentFat == fat0) {
             card->currentFat = fat1;
             memcpy(fat1, fat0, 0x2000);
-        }
-        else {
+        } else {
             card->currentFat = fat0;
             memcpy(fat0, fat1, 0x2000);
         }
@@ -108,8 +107,7 @@ s32 __CARDAllocBlock(s32 chan, u32 cBlock, CARDCallback callback) {
         if (fat[iBlock] == 0x0000u) {
             if (startBlock == 0xFFFF) {
                 startBlock = iBlock;
-            }
-            else {
+            } else {
                 fat[prevBlock] = iBlock;
             }
             prevBlock = iBlock;

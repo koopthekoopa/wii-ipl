@@ -10,7 +10,7 @@ void drawLine_(f32 x0, f32 y0, f32 x1, f32 y1, f32 z, u8 width, GXColor& color) 
     GXSetVtxDesc(GX_VA_CLR0, GX_DIRECT);
     GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_CLR_RGBA, GX_F32, 0);
     GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR0, GX_CLR_RGBA, GX_RGBA8, 0);
-    
+
     GXSetCullMode(GX_CULL_NONE);
 
     GXSetNumChans(1);
@@ -31,12 +31,14 @@ void drawLine_(f32 x0, f32 y0, f32 x1, f32 y1, f32 z, u8 width, GXColor& color) 
     GXSetLineWidth(width, GX_TO_ZERO);
 
     // Draw the line
-    GXBegin(GX_LINES, GX_VTXFMT0, 2); {
+    GXBegin(GX_LINES, GX_VTXFMT0, 2);
+    {
         GXPosition3f32(x0, y0, z);
         GXColor1u32(*(u32*)&color);
         GXPosition3f32(x1, y1, z);
         GXColor1u32(*(u32*)&color);
-    } GXEnd();
+    }
+    GXEnd();
 }
 
 namespace gui {
@@ -49,17 +51,15 @@ namespace gui {
                 if (isPointed(point)) {
                     onMove(point, x, y);
                     mpManager->onEvent(getID(), EventHandler::ON_MOVE, point, data);
-                }
-                else {
+                } else {
                     setPointed(point, true);
                     onPoint(point);
                     mpManager->onEvent(getID(), EventHandler::ON_POINT, point, data);
                 }
 
                 touched = true;
-            }
-            else {
-                 // Not colliding with component
+            } else {
+                // Not colliding with component
                 if (isPointed(point)) {
                     setPointed(point, false);
                     offPoint(point);
@@ -91,8 +91,7 @@ namespace gui {
             // Then delete them from memory.
             if (mpAllocator) {
                 MEMFreeToAllocator(mpAllocator, p);
-            }
-            else {
+            } else {
                 delete p;
             }
             // Next component to kill!
@@ -113,10 +112,9 @@ namespace gui {
         component->setManager(this);
         if (mpAllocator) {
             void* pBuf = MEMAllocFromAllocator(mpAllocator, sizeof(IDToComponent));
-            IDToComponent* p = new(pBuf) IDToComponent(id, component);
+            IDToComponent* p = new (pBuf) IDToComponent(id, component);
             nw4r::ut::List_Append(&mComponents, p);
-        }
-        else {
+        } else {
             IDToComponent* p = new IDToComponent(id, component);
             nw4r::ut::List_Append(&mComponents, p);
         }
@@ -132,8 +130,7 @@ namespace gui {
 
         Component* triggerCom = NULL;
         for (IDToComponent* p = static_cast<IDToComponent*>(nw4r::ut::List_GetFirst(&mComponents)); p != NULL;
-        p = static_cast<IDToComponent*>(nw4r::ut::List_GetNext(&mComponents, p))) {
-
+             p = static_cast<IDToComponent*>(nw4r::ut::List_GetNext(&mComponents, p))) {
             bool touchedCom = p->mpComponent->update(point, x, y, trig, hold, release, data);
 
             if (touchedCom) {
@@ -195,8 +192,7 @@ namespace gui {
             if (mpAllocator) {
                 MEMFreeToAllocator(mpAllocator, p->mpComponent);
                 MEMFreeToAllocator(mpAllocator, p);
-            }
-            else {
+            } else {
                 delete p->mpComponent;
                 delete p;
             }
@@ -222,10 +218,9 @@ namespace gui {
                 void* pComBuf = MEMAllocFromAllocator(mpAllocator, sizeof(PaneComponent));
                 void* pBuf = MEMAllocFromAllocator(mpAllocator, sizeof(PaneToComponent));
 
-                pComponent = new(pComBuf) PaneComponent(suIDCounter);
-                pToComponent = new(pBuf) PaneToComponent(&(*it), pComponent);
-            }
-            else {
+                pComponent = new (pComBuf) PaneComponent(suIDCounter);
+                pToComponent = new (pBuf) PaneToComponent(&(*it), pComponent);
+            } else {
                 pComponent = new PaneComponent(suIDCounter);
                 pToComponent = new PaneToComponent(&(*it), pComponent);
             }
@@ -289,11 +284,9 @@ namespace gui {
         nw4r::ut::Rect rect = mpPane->GetPaneRect(*drawInfo);
 
         // If position is touching pane?
-        if (rect.left <= pos.x && pos.x <= rect.right
-        && rect.bottom <= pos.y && pos.y <= rect.top) {
+        if (rect.left <= pos.x && pos.x <= rect.right && rect.bottom <= pos.y && pos.y <= rect.top) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -331,8 +324,8 @@ namespace gui {
         }
         return is_visible(pane->GetParent());
     }
-    
+
     bool PaneComponent::isVisible() {
         return is_visible(mpPane);
     }
-}
+}  // namespace gui

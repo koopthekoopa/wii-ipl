@@ -4,64 +4,64 @@
 #include "BS2/sysmenu.h"
 #include "config.h"
 
+#include <private/os.h>
 #include <revolution/os.h>
 #include <revolution/os/OSBootInfo.h>
-#include <private/os.h>
 
-#include <private/exi.h>
 #include <private/euart.h>
+#include <private/exi.h>
 
-#include <revolution/nand.h>
 #include <private/nand.h>
+#include <revolution/nand.h>
 
-#include <revolution/dvd.h>
 #include <private/dvd.h>
+#include <revolution/dvd.h>
 
 #include <revolution/esp.h>
 
 #include <revolution/sc.h>
 
-#include <revolution/pad.h>
 #include <revolution/mem.h>
+#include <revolution/pad.h>
 #include <revolution/wpad.h>
 
-#include <revolution/vi.h>
 #include <private/vi.h>
+#include <revolution/vi.h>
 
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
 
-BOOL            InvalidShutdown = FALSE;
-BOOL            ShutdownFromGCFlag = FALSE;
+BOOL InvalidShutdown = FALSE;
+BOOL ShutdownFromGCFlag = FALSE;
 
-vu32            BS2LastMode = BS2_LAST_MODE_0;
+vu32 BS2LastMode = BS2_LAST_MODE_0;
 
-vBOOL           BS2BootFromCache = FALSE;
-vBOOL           BS2BootCaching = TRUE;
+vBOOL BS2BootFromCache = FALSE;
+vBOOL BS2BootCaching = TRUE;
 
-vBOOL           BS2DriveReset = FALSE;
-vBOOL           BS2WaitSpinup = TRUE;
-vBOOL           BS2NoDisk = FALSE;
+vBOOL BS2DriveReset = FALSE;
+vBOOL BS2WaitSpinup = TRUE;
+vBOOL BS2NoDisk = FALSE;
 
-BOOL            BS2ReturnToMenu = FALSE;
-BOOL            BS2ReturnToIdle = FALSE;
-BOOL            BS2ReturnToDataManager = FALSE;
-BOOL            BS2ReturnArgs = FALSE;
-BOOL            BS2LaunchTitle = FALSE;
+BOOL BS2ReturnToMenu = FALSE;
+BOOL BS2ReturnToIdle = FALSE;
+BOOL BS2ReturnToDataManager = FALSE;
+BOOL BS2ReturnArgs = FALSE;
+BOOL BS2LaunchTitle = FALSE;
 
 // Default
-u32             BS2BootType = BS2_BOOT_TYPE_POWER_ON;
+u32 BS2BootType = BS2_BOOT_TYPE_POWER_ON;
 
-OSNandbootInfo  BS2NandbootInfo ALIGN32;
-MEMAllocator    BS2Allocator;
-OSStateFlags    BS2StateFlags;
+OSNandbootInfo BS2NandbootInfo ALIGN32;
+MEMAllocator BS2Allocator;
+OSStateFlags BS2StateFlags;
 
-// @BUG: The location of the arguments starts in the middle of iplNwc24Manager's BSS section, so eventually these will be overwritten.
-#define BS2_ARGC    (*(u32*) ((BS2NandbootInfo.args -  sizeof(BS2NandbootInfo.args))      + BS2NandbootInfo.argsOff))
-#define BS2_ARGV    ((char**)((BS2NandbootInfo.args - (sizeof(BS2NandbootInfo.args) - 4)) + BS2NandbootInfo.argsOff))
+// @bug: The location of the arguments starts in the middle of iplNwc24Manager's BSS section, so eventually these will be overwritten.
+#define BS2_ARGC (*(u32*)((BS2NandbootInfo.args - sizeof(BS2NandbootInfo.args)) + BS2NandbootInfo.argsOff))
+#define BS2_ARGV ((char**)((BS2NandbootInfo.args - (sizeof(BS2NandbootInfo.args) - 4)) + BS2NandbootInfo.argsOff))
 
-#define BS2_WORK_AREA           0x81200000
-#define BS2_WORK_AREA_LENGTH    0xF0000
+#define BS2_WORK_AREA 0x81200000
+#define BS2_WORK_AREA_LENGTH 0xF0000
 
 u32 BS2GetLaunchCode() {
     return BS2NandbootInfo.argValue;
@@ -74,8 +74,7 @@ u32 BS2GetArgc() {
 char** BS2GetArgv() {
     if (BS2_ARGC == 0) {
         return NULL;
-    }
-    else {
+    } else {
         return BS2_ARGV;
     }
 }
@@ -97,8 +96,8 @@ u32 BS2GetBootType() {
     return BS2BootType;
 }
 
-vBOOL   InvalidSram;
-vu32    BS2VideoMode;
+vBOOL InvalidSram;
+vu32 BS2VideoMode;
 
 static u8 SRAMtoSCLang[OS_LANG_MAX];
 
@@ -109,8 +108,8 @@ static void GetSomeDevFromExi() {
     u32 unk1;
 
     u32 i;
-    
-    for (i = 0; i < EXI_CHAN_MAX-1; i++) {
+
+    for (i = 0; i < EXI_CHAN_MAX - 1; i++) {
         if (!EXILock(EXI_CHAN_0, EXI_DEV_INT, NULL)) {
             break;
         }
@@ -121,8 +120,7 @@ static void GetSomeDevFromExi() {
 
         if (i == 0) {
             unk1 = 0;
-        }
-        else {
+        } else {
             unk1 = 0x100;
         }
         cmd = unk1 | 0xA1000000;
@@ -179,11 +177,9 @@ static void UpdateProductInfoPerms() {
                 OSReport("Failed to set product info file permission! (%d)\n", ret);
             }
         }
-    }
-    else if (ret == NAND_RESULT_NOEXISTS) {
+    } else if (ret == NAND_RESULT_NOEXISTS) {
         OSReport("product info file is not exist\n");
-    }
-    else {
+    } else {
         OSReport("Fatal error! (%d)\n", ret);
     }
 }
@@ -209,8 +205,7 @@ static void UpdateStateFlagsAndBootCache() {
         if (ret == FALSE) {
             OSReport("Failed to create\n");
         }
-    }
-    else {
+    } else {
         u32 lastAppType = BS2StateFlags.lastAppType;
         if (lastAppType & OS_APP_TYPE_DVD) {
             switch (lastAppType & ~(OS_APP_TYPE_IPL | OS_APP_TYPE_DVD)) {
@@ -233,15 +228,14 @@ static void UpdateStateFlagsAndBootCache() {
                 }
             }
         }
-        
+
         // If shutdown type is invalid
         if (BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_BAD) {
             InvalidShutdown = TRUE;
-        }
-        else if (getVISolidClrYCol() == 16 && (BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_RETURN_MENU || BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_IDLE)) {
+        } else if (getVISolidClrYCol() == 16 && (BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_RETURN_MENU ||
+                                                 BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_IDLE)) {
             InvalidShutdown = TRUE;
-        }
-        else {
+        } else {
             // If returning to menu
             if (BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_RETURN_MENU) {
                 BS2ReturnToMenu = TRUE;
@@ -274,7 +268,7 @@ static void UpdateStateFlagsAndBootCache() {
             }
             // If we are launching title on shutdown
             if (BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_LAUNCH_TITLE) {
-                 if (__OSReadNandbootInfo(&BS2NandbootInfo)) {
+                if (__OSReadNandbootInfo(&BS2NandbootInfo)) {
                     if (BS2NandbootInfo.returnValue == OS_NANDBOOT_8) {
                         argv = BS2_ARGV;
 
@@ -289,19 +283,17 @@ static void UpdateStateFlagsAndBootCache() {
             }
 
             // Boot cache.
-            if (BS2StateFlags.discState == OS_STATE_FLAGS_DISC_IN && (BS2StateFlags.lastAppType & OS_APP_TYPE_IPL)
-            && !BS2NoDisk && (BS2LastMode == BS2_LAST_MODE_1 || BS2LastMode == BS2_LAST_MODE_4)) {
+            if (BS2StateFlags.discState == OS_STATE_FLAGS_DISC_IN && (BS2StateFlags.lastAppType & OS_APP_TYPE_IPL) && !BS2NoDisk &&
+                (BS2LastMode == BS2_LAST_MODE_1 || BS2LastMode == BS2_LAST_MODE_4)) {
                 OSReport("Boot from cache\n");
                 BS2BootFromCache = TRUE;
                 BS2BootCaching = FALSE;
                 BS2DriveReset = FALSE;
                 BS2WaitSpinup = FALSE;
-            }
-            else {
+            } else {
                 BS2BootFromCache = FALSE;
                 BS2BootCaching = TRUE;
             }
-            
         }
     }
 
@@ -333,14 +325,13 @@ static void UpdateStateFlagsAndBootCache() {
 
                     if (ret == NAND_RESULT_OK) {
                         BS2BootFromCache = FALSE;
-                        ret = NAND_RESULT_NOEXISTS; // Tell to create a new file
+                        ret = NAND_RESULT_NOEXISTS;  // Tell to create a new file
                         BS2BootCaching = TRUE;
                         BS2WaitSpinup = TRUE;
                     }
                 }
             }
-        }
-        else {
+        } else {
             ret = NANDClose(&BS2CacheFileInfo);
             BS2Report("close boot cache file(%d)\n", ret);
         }
@@ -353,7 +344,7 @@ static void UpdateStateFlagsAndBootCache() {
 
         // Write blank data adding up to 0xB00000
         // A pretty interesitng way of doing it.
-        
+
         for (i = 0; i < (BS2_CACHE_BOOT_SIZE / BS2_UPDATE_LENGTH); i++) {
             NANDWrite(&BS2CacheFileInfo, Entries, BS2_UPDATE_LENGTH);
         }
@@ -389,8 +380,7 @@ static void SyncSystemSettings() {
             if (dateTime.year < 2000 || dateTime.year > 2012) {
                 bias = 0;
             }
-        }
-        else {
+        } else {
             bias = 0;
         }
 
@@ -406,7 +396,8 @@ static void SyncSystemSettings() {
     // Flush changes
     __OSUnlockSram(syncSram);
     if (syncSram) {
-        while (!__OSSyncSram()) {}
+        while (!__OSSyncSram()) {
+        }
     }
 
     // Now for SYSCONF
@@ -423,18 +414,14 @@ static void SyncSystemSettings() {
         if (SCGetProductVideoMode() != SC_PRODUCT_VIDEO_PAL) {
             if (OSGetProgressiveMode() != SCGetProgressiveMode()) {
                 writeChanges = TRUE;
-                SCSetProgressiveMode(OSGetProgressiveMode() == OS_PROGRESSIVE_MODE_ON ?
-                                                                                SC_PROGRESSIVE_MODE_ON :
-                                                                                SC_PROGRESSIVE_MODE_OFF);
+                SCSetProgressiveMode(OSGetProgressiveMode() == OS_PROGRESSIVE_MODE_ON ? SC_PROGRESSIVE_MODE_ON : SC_PROGRESSIVE_MODE_OFF);
             }
-        }
-        else {
+        } else {
             // Sync SRAM language to SYSCONF
             if (OSGetLanguage() > OS_LANG_DUTCH) {
                 writeChanges = TRUE;
                 SCSetLanguage(SC_LANG_ENGLISH);
-            }
-            else {
+            } else {
                 if (SRAMtoSCLang[OSGetLanguage()] != SCGetLanguage()) {
                     writeChanges = TRUE;
                     SCSetLanguage(SRAMtoSCLang[OSGetLanguage()]);
@@ -444,9 +431,7 @@ static void SyncSystemSettings() {
             // Sync SRAM EURGB60 to SYSCONF
             if (OSGetEuRgb60Mode() != SCGetEuRgb60Mode()) {
                 writeChanges = TRUE;
-                SCSetEuRgb60Mode(OSGetEuRgb60Mode() == OS_EURGB60_ON ?
-                                                                    SC_EURGB60_MODE_ON :
-                                                                    SC_EURGB60_MODE_OFF);
+                SCSetEuRgb60Mode(OSGetEuRgb60Mode() == OS_EURGB60_ON ? SC_EURGB60_MODE_ON : SC_EURGB60_MODE_OFF);
                 if (SCGetProgressiveMode() == SC_PROGRESSIVE_MODE_ON && SCGetEuRgb60Mode() == SC_PROGRESSIVE_MODE_OFF) {
                     SCSetProgressiveMode(SC_PROGRESSIVE_MODE_OFF);
                 }
@@ -478,12 +463,10 @@ static void SetupVideo() {
                     break;
                 }
             }
-        }
-        else {
+        } else {
             __VIInit((VITVMode)VI_TVMODE(BS2VideoMode, VI_INTERLACE));
         }
-    }
-    else {
+    } else {
         if (VIGetScanMode() == VI_NON_INTERLACE) {
             if (SCGetProgressiveMode() == SC_PROGRESSIVE_MODE_ON && VIGetDTVStatus() == VI_DTV_COMPONENT) {
                 switch (BS2VideoMode) {
@@ -497,8 +480,7 @@ static void SetupVideo() {
                         break;
                     }
                 }
-            }
-            else {
+            } else {
                 __VIInit((VITVMode)VI_TVMODE(BS2VideoMode, VI_INTERLACE));
             }
         }
@@ -524,8 +506,7 @@ static void SetupVI1Config() {
     int cfg;
     if (SCGetProductGameRegion() == SC_PRODUCT_GAME_REGION_JP) {
         cfg = BS2_VI1_CFG_NTSC_J_ON;
-    }
-    else {
+    } else {
         cfg = BS2_VI1_CFG_NTSC_J_OFF;
     }
     setVI1Cfg(cfg);
@@ -568,7 +549,7 @@ static BOOL HasTitleInstalled(ESTitleId titleId, void* work, u32 workLen) {
 
     // Get ticket
     ret = ESP_GetTicketViews(titleId, ticketView, &tikCount);
-    if (ret != ES_ERR_OK){
+    if (ret != ES_ERR_OK) {
         goto fail;
     }
 
@@ -657,22 +638,18 @@ static BOOL HasWaikiki() {
     bool hasWaikiki = FALSE;
 
     // Check memory card slot A
-    if (EXIGetIDEx(EXI_CHAN_0, EXI_DEV_EXT, &devId)
-    && (devId & 0xFFFFFF00) == WAIKIKI_ID) {
+    if (EXIGetIDEx(EXI_CHAN_0, EXI_DEV_EXT, &devId) && (devId & 0xFFFFFF00) == WAIKIKI_ID) {
         OSReport("WikikiSlot A\n");
         hasWaikiki = TRUE;
-    }
-    else {
+    } else {
         OSReport("Id0 : %08x\n", devId);
     }
 
     // Check memory card slot B
-    if (EXIGetIDEx(EXI_CHAN_1, EXI_DEV_EXT, &devId)
-    && (devId & 0xFFFFFF00) == WAIKIKI_ID) {
+    if (EXIGetIDEx(EXI_CHAN_1, EXI_DEV_EXT, &devId) && (devId & 0xFFFFFF00) == WAIKIKI_ID) {
         OSReport("WikikiSlot B\n");
         hasWaikiki = TRUE;
-    }
-    else {
+    } else {
         OSReport("Id1 : %08x\n", devId);
     }
 
@@ -717,11 +694,11 @@ void BS2Entry(); /* {
 /* IRD BOOT MODE (aka "recovery mode") */
 /***************************************/
 
-#define IRD_MODE_HEAP_SIZE  0x200000
+#define IRD_MODE_HEAP_SIZE 0x200000
 
-#define LOAD_ICON_FRAMES    4
-#define LOAD_ICON_FPS       15
-#define LOAD_ICON_LENGTH    (LOAD_ICON_FRAMES * LOAD_ICON_FPS)
+#define LOAD_ICON_FRAMES 4
+#define LOAD_ICON_FPS 15
+#define LOAD_ICON_LENGTH (LOAD_ICON_FRAMES * LOAD_ICON_FPS)
 
 static void BS2TickIRD();
 
@@ -731,18 +708,18 @@ void BS2BootIRD() {
     u8* arenaHi;
     MEMHeapHandle heap;
     MEMAllocator allocator;
-    GXColor verBG = {  0,   0,   0,  0 };
-    GXColor verFG = { 255, 255, 255, 0 };
+    GXColor verBG = {0, 0, 0, 0};
+    GXColor verFG = {255, 255, 255, 0};
 
     // Setup heap for BS2
     arenaHi = OSGetMEM2ArenaHi();
-    heap = MEMCreateExpHeap((void*)(arenaHi-IRD_MODE_HEAP_SIZE), IRD_MODE_HEAP_SIZE);
+    heap = MEMCreateExpHeap((void*)(arenaHi - IRD_MODE_HEAP_SIZE), IRD_MODE_HEAP_SIZE);
     if (heap == NULL) {
         OSHalt("MEM2 heap allocation error.\n", 885);
     }
 
     // Setup allocators for BS2
-    OSSetMEM2ArenaHi((void*)(arenaHi-IRD_MODE_HEAP_SIZE));
+    OSSetMEM2ArenaHi((void*)(arenaHi - IRD_MODE_HEAP_SIZE));
     MEMInitAllocatorForExpHeap(&allocator, heap, DEFAULT_ALIGN);
     BS2SetMemAllocator(&allocator);
 
@@ -760,9 +737,8 @@ void BS2BootIRD() {
         verString = OSAllocFromMEM2ArenaLo(32, DEFAULT_ALIGN);
 
         if (SCGetProductAreaString(productArea, 32)) {
-            sprintf(verString, "%d.%d(%s)",  SYSMENU_VERSION_MAJOR, SYSMENU_VERSION_MINOR, productArea);
-        }
-        else {
+            sprintf(verString, "%d.%d(%s)", SYSMENU_VERSION_MAJOR, SYSMENU_VERSION_MINOR, productArea);
+        } else {
             /* Should not include productArea */
             sprintf(verString, "%d.%d(XXX)", SYSMENU_VERSION_MAJOR, SYSMENU_VERSION_MINOR, productArea);
         }
@@ -789,8 +765,8 @@ static void BS2TickIRD() {
             OSReport("  Company ..... %-2.2s\n", bi->DVDDiskID.company);
             OSReport("  Disk # ...... %x\n", bi->DVDDiskID.diskNumber);
             OSReport("  Game ver .... %x\n", bi->DVDDiskID.gameVersion);
-            OSReport("\n  Banner ...... %s\n", BS2IsBannerAvailable()? "Available" : "Not available");
-            OSReport("  PC Check .... %s\n", BS2CheckParentalControl()? "Success" : "Failed");
+            OSReport("\n  Banner ...... %s\n", BS2IsBannerAvailable() ? "Available" : "Not available");
+            OSReport("  PC Check .... %s\n", BS2CheckParentalControl() ? "Success" : "Failed");
 
             // Shutdown video
             VISetBlack(TRUE);
@@ -798,19 +774,20 @@ static void BS2TickIRD() {
             VIWaitForRetrace();
 
             // Make sure SRAM is up to date
-            while (!__OSSyncSram()) {}
+            while (!__OSSyncSram()) {
+            }
 
             // Launch the game (if it is a diagnostic disc; without IRD_DIAG_RESTRICT_OFF)
 #ifndef IRD_DIAG_RESTRICT_OFF
             if (BS2IsDiagDisc())
-#endif // IRD_DIAG_RESTRICT_OFF
+#endif  // IRD_DIAG_RESTRICT_OFF
             {
                 BS2StartGame();
             }
 
             // Unreachable
             OSHalt("", 769);
-            
+
             break;
         }
         case BS2_STT_START_GC_GAME: {
@@ -826,8 +803,7 @@ static void BS2TickIRD() {
             if (bi->DVDDiskID.streaming) {
                 if (bi->DVDDiskID.streamingBufSize) {
                     OSReport("    Buf size .. %d\n", bi->DVDDiskID.streamingBufSize);
-                }
-                else {
+                } else {
                     OSReport("    Buf size .. 10(default)\n");
                 }
             }
@@ -838,13 +814,14 @@ static void BS2TickIRD() {
             VIWaitForRetrace();
 
             // Make sure SRAM is up to date
-            while (!__OSSyncSram()) {}
+            while (!__OSSyncSram()) {
+            }
 
             // Don't launch game (without IRD_DIAG_RESTRICT_OFF)
 #ifdef IRD_DIAG_RESTRICT_OFF
             // Launch the game
             BS2StartGCGame();
-#endif // IRD_DIAG_RESTRICT_OFF
+#endif  // IRD_DIAG_RESTRICT_OFF
 
             OSHalt("", 795);
 
@@ -910,7 +887,8 @@ static void BS2TickIRD() {
             VIWaitForRetrace();
 
             // Make sure SRAM is up to date
-            while (!__OSSyncSram()) {}
+            while (!__OSSyncSram()) {
+            }
 
             // Reset the system
             OSReturnToMenu();
@@ -940,22 +918,10 @@ static void BS2TickIRD() {
 /* MAIN ENTRY POINT */
 /********************/
 
-static u8 SRAMtoSCLang[OS_LANG_MAX] = {
-    SC_LANG_ENGLISH,
-    SC_LANG_GERMAN,
-    SC_LANG_FRENCH,
-    SC_LANG_SPANISH,
-    SC_LANG_ITALIAN,
-    SC_LANG_DUTCH,
-    SC_LANG_SIMP_CHINESE,
-    SC_LANG_TRAD_CHINESE,
-    SC_LANG_KOREAN
-};
+static u8 SRAMtoSCLang[OS_LANG_MAX] = {SC_LANG_ENGLISH, SC_LANG_GERMAN,       SC_LANG_FRENCH,       SC_LANG_SPANISH, SC_LANG_ITALIAN,
+                                       SC_LANG_DUTCH,   SC_LANG_SIMP_CHINESE, SC_LANG_TRAD_CHINESE, SC_LANG_KOREAN};
 
-#define COMBO (PAD_BUTTON_LEFT \
-            | PAD_BUTTON_RIGHT \
-            | PAD_BUTTON_UP    \
-            | PAD_BUTTON_DOWN)
+#define COMBO (PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT | PAD_BUTTON_UP | PAD_BUTTON_DOWN)
 
 int main(int argc, char** argv) {
     s32 ret;
@@ -963,7 +929,8 @@ int main(int argc, char** argv) {
     PADStatus pads[PAD_MAX_CONTROLLER];
 
     // Wait for semaphore to fully initialize.
-    while (*(BOOL*)OSPhysicalToUncached(OS_ADDR_SEMAPHORE_BUSY)) {}
+    while (*(BOOL*)OSPhysicalToUncached(OS_ADDR_SEMAPHORE_BUSY)) {
+    }
 
     // Init the system.
     BS2Init();
@@ -975,7 +942,8 @@ int main(int argc, char** argv) {
     GetSomeDevFromExi();
 
     // Wait for SC to initialize.
-    while (SCCheckStatus() == SC_STATUS_BUSY) {}
+    while (SCCheckStatus() == SC_STATUS_BUSY) {
+    }
     if (SCCheckStatus() == SC_STATUS_FATAL) {
         OSReport("SCInit failed!\n");
     }
@@ -986,8 +954,7 @@ int main(int argc, char** argv) {
     // Check if disc is not in the drive
     if (__DVDGetCoverStatus() != DVD_STATE_WAITING) {
         BS2NoDisk = TRUE;
-    }
-    else {
+    } else {
         BS2NoDisk = FALSE;
     }
 
@@ -998,14 +965,11 @@ int main(int argc, char** argv) {
     // Determine BS2 Boot type
     if (BS2ReturnArgs) {
         BS2BootType = BS2_BOOT_TYPE_RETURN_ARGS;
-    }
-    else if (BS2ReturnToDataManager) {
+    } else if (BS2ReturnToDataManager) {
         BS2BootType = BS2_BOOT_TYPE_RETURN_TO_DATA_MANAGER;
-    }
-    else if (BS2ReturnToMenu) {
+    } else if (BS2ReturnToMenu) {
         BS2BootType = BS2_BOOT_TYPE_RETURN_TO_MENU;
-    }
-    else {
+    } else {
         BS2BootType = BS2_BOOT_TYPE_POWER_ON;
     }
 
@@ -1070,31 +1034,32 @@ int main(int argc, char** argv) {
                 // Initialize WPAD... for what?
                 WPADRegisterAllocator(BS2AllocProc, BS2FreeProc);
                 WPADInit();
-                while (WPADGetStatus() != 3) {}
+                while (WPADGetStatus() != 3) {
+                }
 
                 // Wait until DVD cover is opened.
-                while (__DVDGetCoverStatus() != DVD_COVER_OPENED) {}
+                while (__DVDGetCoverStatus() != DVD_COVER_OPENED) {
+                }
 
                 // Wait 2 seconds
                 {
                     OSTime start = __OSGetSystemTime();
-                    while (__OSGetSystemTime() - start < OSMillisecondsToTicks((OSTime)2000)) {}
+                    while (__OSGetSystemTime() - start < OSMillisecondsToTicks((OSTime)2000)) {
+                    }
                 }
 
                 // Bye bye!
                 OSReport("Shutdown system!\n");
                 OSShutdownSystem();
-
             }
             BS2BootFromCache = FALSE;
             BS2BootCaching = TRUE;
-        }
-        else if (BS2ReturnToIdle) {
+        } else if (BS2ReturnToIdle) {
             // Shifft to idle!!!
             OSReport("Shift to idle mode\n");
             OSShutdownSystemForBS();
-        }
-        else if ((rtc & RTC_FLAGS_DISC_CHANGED) && (BS2StateFlags.discState == OS_STATE_FLAGS_DISC_NONE || BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_LAUNCH_TITLE)) {
+        } else if ((rtc & RTC_FLAGS_DISC_CHANGED) &&
+                   (BS2StateFlags.discState == OS_STATE_FLAGS_DISC_NONE || BS2StateFlags.shutdownType == OS_STATE_FLAGS_SHUTDOWN_LAUNCH_TITLE)) {
             // We have a disc inside!
             OSReport("Disc in\n");
             BS2DriveReset = TRUE;
@@ -1102,16 +1067,13 @@ int main(int argc, char** argv) {
 
             BS2BootFromCache = FALSE;
             BS2BootCaching = TRUE;
-        }
-
-        // Returned from menu
-        else if (BS2ReturnToMenu || BS2ReturnToDataManager) {
+        } else if (BS2ReturnToMenu || BS2ReturnToDataManager) {
+            // Returned from menu
             OSReport("Return to menu\n");
             BS2DriveReset = TRUE;
             BS2WaitSpinup = TRUE;
         }
-    }
-    else {
+    } else {
         // if InvalidShutdown is true
         OSReport("Last shutdown sequence is invalid\n");
         BS2DriveReset = TRUE;
@@ -1155,7 +1117,7 @@ int main(int argc, char** argv) {
         OSReport("Launch NAND App from WC24\n");
 
         argv = BS2GetArgv();
-        sscanf(argv[0], "%016llx", &titleId); // Get title ID from first argument
+        sscanf(argv[0], "%016llx", &titleId);  // Get title ID from first argument
 
         // Print info about title.
         OSReport("Launch    : 0x%016llx\n", titleId);
@@ -1180,8 +1142,7 @@ int main(int argc, char** argv) {
         if (HasTitleInstalled(titleId, (void*)BS2_WORK_AREA, BS2_WORK_AREA_LENGTH)) {
             BS2SetStateFlags();
             __OSLaunchTitlevForSystem(titleId, BS2GetLaunchCode(), (const char**)&argv[1]);
-        }
-        else {
+        } else {
             // Otherwise, good bye!
             OSReport("specified title by WC24 is not installed!\n");
             OSShutdownSystemForBS();
@@ -1191,8 +1152,7 @@ int main(int argc, char** argv) {
     // Has either Waikiki or Button combo (see COMBO macro)
     if (HasWaikiki() || (pads[3].err == PAD_ERR_NONE && (pads[3].button & COMBO) == COMBO)) {
         BS2BootIRD();
-    }
-    else {
+    } else {
         BS2Entry();
     }
 

@@ -6,24 +6,23 @@
 
 static struct {
     struct {
-        OSSemaphore*    sem;    // 0x00
-        u32             unk_0x04;
-        u32             unk_0x08;
-    }   entries[MAX_PUH_SEM];   // 0x00
-    u32             unk_0x90;
-    OSSemaphore*    unk_0x94;
-    u8              unk_0x98[0x0C];
+        OSSemaphore* sem;  // 0x00
+        u32 unk_0x04;
+        u32 unk_0x08;
+    } entries[MAX_PUH_SEM];  // 0x00
+    u32 unk_0x90;
+    OSSemaphore* unk_0x94;
+    u8 unk_0x98[0x0C];
 } st_uhs_ker_sem_mng;
 
-static OSSemaphore  st_uhf_ker_sem[MAX_PUH_SEM];
+static OSSemaphore st_uhf_ker_sem[MAX_PUH_SEM];
 
-static s32          st_uhs_ker_sem_status;
+static s32 st_uhs_ker_sem_status;
 
 static int uhf_ker_sem_inline_0() {
     if (st_uhs_ker_sem_status != 1 || st_uhs_ker_sem_mng.unk_0x94 == 0) {
         return -1;
-    }
-    else {
+    } else {
         OSWaitSemaphore(st_uhs_ker_sem_mng.unk_0x94);
         return 0;
     }
@@ -92,14 +91,14 @@ s32 uhf_ker_delete_sem(int sem) {
         return -5;
     }
 
-    if (st_uhs_ker_sem_mng.entries[sem-1].sem == NULL) {
+    if (st_uhs_ker_sem_mng.entries[sem - 1].sem == NULL) {
         uhf_ker_sem_inline_1();
         return -5;
     }
 
-    st_uhs_ker_sem_mng.entries[sem-1].sem = NULL;
-    st_uhs_ker_sem_mng.entries[sem-1].unk_0x04 = 0;
-    st_uhs_ker_sem_mng.entries[sem-1].unk_0x08 = 0;
+    st_uhs_ker_sem_mng.entries[sem - 1].sem = NULL;
+    st_uhs_ker_sem_mng.entries[sem - 1].unk_0x04 = 0;
+    st_uhs_ker_sem_mng.entries[sem - 1].unk_0x08 = 0;
     st_uhs_ker_sem_mng.unk_0x90--;
 
     uhf_ker_sem_inline_1();
@@ -112,11 +111,11 @@ s32 uhf_ker_get_sem(int sem) {
         return -5;
     }
 
-    if (st_uhs_ker_sem_mng.entries[sem-1].sem == NULL) {
+    if (st_uhs_ker_sem_mng.entries[sem - 1].sem == NULL) {
         return -5;
     }
 
-    OSWaitSemaphore(st_uhs_ker_sem_mng.entries[sem-1].sem);
+    OSWaitSemaphore(st_uhs_ker_sem_mng.entries[sem - 1].sem);
 
     return 0;
 }

@@ -2,14 +2,14 @@
 
 #include "system/iplNandManager.h"
 
-#include "system/iplNandMeta.h"
 #include "iplSystem.h"
+#include "system/iplNandMeta.h"
 
 #include <cstring>
 
 #ifdef STAND_ALONE_BUILD
 #include "utility/iplESMisc.h"
-#endif // STAND_ALONE_BUILD
+#endif  // STAND_ALONE_BUILD
 
 namespace ipl {
     namespace nand {
@@ -41,9 +41,9 @@ namespace ipl {
             mDescriptor = ES_OpenTitleContentFile(SYSMENU_TITLE_ID, spSysMenuTik, SYSMENU_CONTENT_ID);
 #else
             mDescriptor = ES_OpenContentFile(SYSMENU_CONTENT_ID);
-#endif // STAND_ALONE_BUILD
+#endif  // STAND_ALONE_BUILD
             if (mDescriptor < ES_ERR_OK) {
-               IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", mDescriptor, 43);
+                IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", mDescriptor, 43);
             }
 
             // Read archive header
@@ -54,7 +54,7 @@ namespace ipl {
             }
 
             u32 bufSize = OSRoundUp32B(header.fileStart);
-            mpFSTBuffer = new(DEFAULT_ALIGN) u8[bufSize];
+            mpFSTBuffer = new (DEFAULT_ALIGN) u8[bufSize];
 
             // Seek to file system table offset
             ret = ES_SeekContentFile(mDescriptor, 0, NAND_SEEK_BEG);
@@ -73,7 +73,8 @@ namespace ipl {
         }
 
         // Stub
-        void Manager::openContentsAll() {}
+        void Manager::openContentsAll() {
+        }
 
         void Manager::closeContentsAll() {
 #ifdef STAND_ALONE_BUILD
@@ -87,18 +88,17 @@ namespace ipl {
         }
 
         File* Manager::readAsync(EGG::Heap* heap, const char* fileName, int offset, u32 length, bool bJamRequest) {
-            char fullName[NAND_MAX_PATH+1];
+            char fullName[NAND_MAX_PATH + 1];
 
             // Set up path
             strncpy(fullName, mNandPath, sizeof(mNandPath));
             strncat(fullName, fileName, sizeof(mNandPath) - strlen(fullName));
 
-            File* file = new(heap, 4) File(heap, fullName, NULL, NULL, offset, length, false);
+            File* file = new (heap, 4) File(heap, fullName, NULL, NULL, offset, length, false);
 
             if (bJamRequest) {
                 mpTask->requestJam(doReadTask, file, NULL);
-            }
-            else {
+            } else {
                 mpTask->request(doReadTask, file, NULL);
             }
 
@@ -106,37 +106,40 @@ namespace ipl {
         }
 
         File* Manager::read(EGG::Heap* heap, const char* fileName, int offset, u32 length, bool bJamRequest) {
-            char fullName[NAND_MAX_PATH+1];
+            char fullName[NAND_MAX_PATH + 1];
 
             // Set up path
             strncpy(fullName, mNandPath, sizeof(mNandPath));
             strncat(fullName, fileName, sizeof(mNandPath) - strlen(fullName));
 
-            File* file = new(heap, 4) File(heap, fullName, NULL, NULL, offset, length, false);
+            File* file = new (heap, 4) File(heap, fullName, NULL, NULL, offset, length, false);
 
             file->read();
 
             return file;
         }
 
-        SharedFile* Manager::readSharedAsync(EGG::Heap* heap, const char* fileName, int index, int offset, u32 length, ESTitleId titleId, int ticketIdx) {
-            SharedFile* file = new(heap, 4) SharedFile(heap, fileName, index, offset, length, titleId, ticketIdx);
+        SharedFile* Manager::readSharedAsync(EGG::Heap* heap, const char* fileName, int index, int offset, u32 length, ESTitleId titleId,
+                                             int ticketIdx) {
+            SharedFile* file = new (heap, 4) SharedFile(heap, fileName, index, offset, length, titleId, ticketIdx);
 
             mpTask->request(doReadTask, file, NULL);
 
             return file;
         }
 
-        MetaFile* Manager::readMetaHeaderAsync(EGG::Heap* heap, ESTitleId titleId, int offset, u32 length, MetaFile::Callback callback, void* callbackWork, int ticketIdx) {
-            MetaFile* file = new(heap, 4) MetaFile(heap, "", NULL, titleId, offset, length, callback, callbackWork, ticketIdx);
+        MetaFile* Manager::readMetaHeaderAsync(EGG::Heap* heap, ESTitleId titleId, int offset, u32 length, MetaFile::Callback callback,
+                                               void* callbackWork, int ticketIdx) {
+            MetaFile* file = new (heap, 4) MetaFile(heap, "", NULL, titleId, offset, length, callback, callbackWork, ticketIdx);
 
             System::getTask3()->request(doReadTask, file, NULL);
 
             return file;
         }
 
-        MetaFile* Manager::readMetaBodyAsync(EGG::Heap* heap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length, MetaFile::Callback callback, void* callbackWork, int ticketIdx) {
-            MetaFile* file = new(heap, 4) MetaFile(heap, fileName, arc, titleId, offset, length, callback, callbackWork, ticketIdx);
+        MetaFile* Manager::readMetaBodyAsync(EGG::Heap* heap, const char* fileName, ARCHandle* arc, ESTitleId titleId, int offset, u32 length,
+                                             MetaFile::Callback callback, void* callbackWork, int ticketIdx) {
+            MetaFile* file = new (heap, 4) MetaFile(heap, fileName, arc, titleId, offset, length, callback, callbackWork, ticketIdx);
 
             mpTask->request(doReadTask, file, NULL);
 
@@ -149,8 +152,7 @@ namespace ipl {
             if (bJamRequest) {
                 OSReport("Jam Request*****************************************************************\n");
                 mpTask->requestJam(doReadTask, file, NULL);
-            }
-            else {
+            } else {
                 mpTask->request(doReadTask, file, NULL);
             }
 
@@ -166,14 +168,14 @@ namespace ipl {
         }
 
         LayoutFile* Manager::readLayout_(EGG::Heap* heap, const char* fileName, ARCHandle* arc, bool bIsNand) {
-            char fullName[NAND_MAX_PATH+1];
+            char fullName[NAND_MAX_PATH + 1];
 
             // Set up path
             strncpy(fullName, mNandPath, sizeof(mNandPath));
             strncat(fullName, "/layout", sizeof(mNandPath) - strlen(fullName));
 
-            LayoutFile* file = new(heap, 4) LayoutFile(heap, fullName, fileName, arc, bIsNand);
-            
+            LayoutFile* file = new (heap, 4) LayoutFile(heap, fullName, fileName, arc, bIsNand);
+
             return file;
         }
 
@@ -198,12 +200,12 @@ namespace ipl {
         }
 
         File* Manager::write_(EGG::Heap* heap, const char* fileName, void* buffer, u32 length, u8 perms) {
-            char fullName[NAND_MAX_PATH+1];
+            char fullName[NAND_MAX_PATH + 1];
 
             strncpy(fullName, mNandPath, sizeof(mNandPath));
             strncat(fullName, fileName, sizeof(mNandPath) - strlen(fullName));
 
-            File* file = new(heap, 4) File(heap, fileName, (u8*)buffer, length, perms);
+            File* file = new (heap, 4) File(heap, fileName, (u8*)buffer, length, perms);
 
             return file;
         }
@@ -216,7 +218,8 @@ namespace ipl {
             mpTask->request(doSendTokenTask, NULL, (void*)token);
         }
 
-        void Manager::doSendTokenTask(void* work) {}
+        void Manager::doSendTokenTask(void* work) {
+        }
 
         BOOL Manager::receiveToken(int* token) {
             BOOL result = FALSE;
@@ -227,5 +230,5 @@ namespace ipl {
 
             return (result && msg != NULL) ? TRUE : FALSE;
         }
-    }
-}
+    }  // namespace nand
+}  // namespace ipl

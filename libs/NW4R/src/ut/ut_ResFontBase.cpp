@@ -1,10 +1,10 @@
-#include <nw4r/ut/ResFont.h>
 #include <nw4r/ut/Font.h>
+#include <nw4r/ut/ResFont.h>
 
 namespace nw4r {
     namespace ut {
         namespace detail {
-            #define GLYPH_INDEX_NOT_FOUND    0xFFFF
+#define GLYPH_INDEX_NOT_FOUND 0xFFFF
 
             typedef struct CMapScanEntry {
                 u16 ccode;  // 0x00
@@ -12,15 +12,15 @@ namespace nw4r {
             } CMapScanEntry;
 
             typedef struct CMapInfoScan {
-                u16             num;        // 0x00
-                CMapScanEntry   entries[];  // 0x02
+                u16 num;                  // 0x00
+                CMapScanEntry entries[];  // 0x02
             } CMapInfoScan;
 
-            ResFontBase::ResFontBase() :
-            mResource(NULL),
-            mFontInfo(NULL) {}
+            ResFontBase::ResFontBase() : mResource(NULL), mFontInfo(NULL) {
+            }
 
-            ResFontBase::~ResFontBase() {}
+            ResFontBase::~ResFontBase() {
+            }
 
             void ResFontBase::SetResourceBuffer(void* pUserBuffer, FontInformation* pFontInfo) {
                 mResource = pUserBuffer;
@@ -85,8 +85,7 @@ namespace nw4r {
                 if (index != GLYPH_INDEX_NOT_FOUND) {
                     mFontInfo->alterCharIndex = index;
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }
             }
@@ -143,20 +142,18 @@ namespace nw4r {
                         break;
                     }
                     case FONT_MAP_SCAN: {
-                        const CMapInfoScan*     scanInfo = reinterpret_cast<const CMapInfoScan*>(pMap->mapInfo);
-                        const CMapScanEntry*    first = scanInfo->entries;
-                        const CMapScanEntry*    last = scanInfo->entries + (scanInfo->num - 1);
+                        const CMapInfoScan* scanInfo = reinterpret_cast<const CMapInfoScan*>(pMap->mapInfo);
+                        const CMapScanEntry* first = scanInfo->entries;
+                        const CMapScanEntry* last = scanInfo->entries + (scanInfo->num - 1);
 
                         while (first <= last) {
                             const CMapScanEntry* mid = first + (last - first) / 2;
 
                             if (mid->ccode < c) {
                                 first = mid + 1;
-                            }
-                            else if (c < mid->ccode) {
+                            } else if (c < mid->ccode) {
                                 last = mid - 1;
-                            }
-                            else {
+                            } else {
                                 index = mid->index;
                                 break;
                             }
@@ -210,6 +207,6 @@ namespace nw4r {
                 glyph->cellX = cellPixelX + 1;
                 glyph->cellY = cellPixelY + 1;
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace ut
+}  // namespace nw4r

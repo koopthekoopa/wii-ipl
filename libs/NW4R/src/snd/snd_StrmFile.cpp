@@ -24,7 +24,8 @@ namespace nw4r {
                 return true;
             }
 
-            StrmFileReader::StrmFileReader() : mHeader(NULL), mHeadBlock(NULL) {}
+            StrmFileReader::StrmFileReader() : mHeader(NULL), mHeadBlock(NULL) {
+            }
 
             void StrmFileReader::Setup(const void* strmData) {
                 if (!IsValidFileHeader(strmData)) {
@@ -35,7 +36,7 @@ namespace nw4r {
 
                 mHeadBlock = static_cast<const StrmFile::HeadBlock*>(ut::AddOffsetToPtr(mHeader, mHeader->headBlockOffset));
 
-                Util::GetDataRefAddress0(mHeadBlock->refDataHeader, &mHeadBlock->refDataHeader); // debug leftover
+                Util::GetDataRefAddress0(mHeadBlock->refDataHeader, &mHeadBlock->refDataHeader);  // debug leftover
             }
 
             bool StrmFileReader::ReadStrmInfo(StrmInfo* strmInfo) const {
@@ -74,7 +75,8 @@ namespace nw4r {
                     return false;
                 }
 
-                const StrmFile::ChannelInfo* pChannelInfo = Util::GetDataRefAddress0(pChannelTable->refChannelHeader[channels], &mHeadBlock->refDataHeader);
+                const StrmFile::ChannelInfo* pChannelInfo =
+                    Util::GetDataRefAddress0(pChannelTable->refChannelHeader[channels], &mHeadBlock->refDataHeader);
                 const AdpcmInfo* pSrcInfo = Util::GetDataRefAddress0(pChannelInfo->refAdpcmInfo, &mHeadBlock->refDataHeader);
 
                 *adpcmInfo = *pSrcInfo;
@@ -119,9 +121,7 @@ namespace nw4r {
                     return false;
                 }
 
-                s32 offset = mReader.GetAdpcBlockOffset() +
-                            block * channels * (2 * sizeof(u16)) +
-                            sizeof(ut::BinaryBlockHeader);
+                s32 offset = mReader.GetAdpcBlockOffset() + block * channels * (2 * sizeof(u16)) + sizeof(ut::BinaryBlockHeader);
 
                 mStream.Seek(offset, ut::FileStream::SEEK_BEG);
 
@@ -136,6 +136,6 @@ namespace nw4r {
 
                 return true;
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

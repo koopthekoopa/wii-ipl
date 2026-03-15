@@ -1,8 +1,8 @@
 #include <private/os.h>
 #include <revolution/os.h>
 
-#include <revolution/gx.h>
 #include <private/gx.h>
+#include <revolution/gx.h>
 
 #include <private/hollywood.h>
 
@@ -27,25 +27,22 @@ void GXSetFog(GXFogType type, f32 startz, f32 endz, f32 nearz, f32 farz, GXColor
 
     fsel = type & 7;
     proj = (type >> 3) & 1;
-    
+
     if (proj) {
         if (farz == nearz || endz == startz) {
             a = 0.0f;
             c = 0.0f;
-        }
-        else {
+        } else {
             A = (1.0f / (endz - startz));
             a = A * (farz - nearz);
             c = A * (startz - nearz);
         }
-    }
-    else {
+    } else {
         if (farz == nearz || endz == startz) {
             A = 0.0f;
             B = 0.5f;
             C = 0.0f;
-        }
-        else {
+        } else {
             A = (farz * nearz) / ((farz - nearz) * (endz - startz));
             B = farz / (farz - nearz);
             C = startz / (endz - startz);
@@ -62,7 +59,7 @@ void GXSetFog(GXFogType type, f32 startz, f32 endz, f32 nearz, f32 farz, GXColor
             B_expn--;
         }
 
-        a = A / (f32) (1 << (B_expn + 1));
+        a = A / (f32)(1 << (B_expn + 1));
         b_m = 8.388638e6f * B_mant;
         b_s = B_expn + 1;
         c = C;
@@ -74,8 +71,8 @@ void GXSetFog(GXFogType type, f32 startz, f32 endz, f32 nearz, f32 farz, GXColor
         SET_REG_FIELD(fog2, 8, 24, 0xF0);
     }
 
-    a_hex = *(u32 *)&a;
-    c_hex = *(u32 *)&c;
+    a_hex = *(u32*)&a;
+    c_hex = *(u32*)&c;
 
     SET_REG_FIELD(fog0, 11, 0, (a_hex >> 12) & 0x7FF);
     SET_REG_FIELD(fog0, 8, 11, (a_hex >> 23) & 0xFF);
@@ -103,7 +100,7 @@ void GXSetFog(GXFogType type, f32 startz, f32 endz, f32 nearz, f32 farz, GXColor
     __GXData->bpSentNot = GX_FALSE;
 }
 
-void GXSetFogRangeAdj(GXBool enable, u16 center, const GXFogAdjTable *table) {
+void GXSetFogRangeAdj(GXBool enable, u16 center, const GXFogAdjTable* table) {
     u32 i;
     u32 range_adj;
     u32 range_c;
@@ -189,7 +186,7 @@ void GXSetZCompLoc(GXBool before_tex) {
 void GXSetPixelFmt(GXPixelFmt pix_fmt, GXZFmt16 z_fmt) {
     u32 oldPeCtrl;
     u8 aa;
-    static u32 p2f[8] = { 0, 1, 2, 3, 4, 4, 4, 5 };
+    static u32 p2f[8] = {0, 1, 2, 3, 4, 4, 4, 5};
 
     oldPeCtrl = __GXData->peCtrl;
     SET_REG_FIELD(__GXData->peCtrl, 3, 0, p2f[pix_fmt]);

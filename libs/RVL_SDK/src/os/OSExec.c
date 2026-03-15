@@ -1,19 +1,22 @@
+#include <private/os.h>
 #include <revolution/os.h>
 #include <revolution/os/OSBootInfo.h>
-#include <private/os.h>
+
 
 #include <revolution/esp.h>
 
-#include <revolution/dvd.h>
 #include <private/dvd.h>
+#include <revolution/dvd.h>
+
 
 #include <revolution/nand.h>
 #include <revolution/sc.h>
 
 #include <private/bus.h>
 
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
+
 
 /* some string pooling (the first one is used but is just pooled first...)*/
 DECOMP_FORCE_ACTIVE(OSExec_c, "\nOSExec(): Failed to exec %d in %d\n");
@@ -22,11 +25,11 @@ DECOMP_FORCE_ACTIVE(OSExec_c, "\nOSExec(): The specified game doesn't exist in t
 extern BOOL __OSInIPL;
 extern BOOL __OSInNandBoot;
 
-BOOL        __OSInReboot;
+BOOL __OSInReboot;
 
 #define BI2_ROUND(x, a) (((x) & ~((a) - 1)))
 
-BOOL PackArgs(void *addr, int argc, char** argv) {
+BOOL PackArgs(void* addr, int argc, char** argv) {
     int argCount;
     u8* bootInfo2;
     u8* argPtr;
@@ -36,10 +39,9 @@ BOOL PackArgs(void *addr, int argc, char** argv) {
 
     if (argc == 0) {
         *(u32*)&bootInfo2[BI2_OFFSET_ARGOFFSET] = 0;
-    }
-    else {
+    } else {
         argCount = argc;
-        argPtr = bootInfo2 + BI2_OFFSET_ARGS; // Arguments are located after BI2
+        argPtr = bootInfo2 + BI2_OFFSET_ARGS;  // Arguments are located after BI2
 
         // For each argument
         while (--argc >= 0) {
@@ -70,20 +72,19 @@ BOOL PackArgs(void *addr, int argc, char** argv) {
     return TRUE;
 }
 
-void __OSGetExecParams(OSExecParams *params) {
+void __OSGetExecParams(OSExecParams* params) {
     if ((u32)__OSExecParamsAddr >= OS_BASE_CACHED) {
         memcpy(params, __OSExecParamsAddr, sizeof(OSExecParams));
-    }
-    else {
+    } else {
         params->valid = FALSE;
     }
 }
 
 BOOL __OSCheckCompanyCode(ESTitleId titleId, BOOL diskApp) {
     NANDStatus status;
-    char homePath[NAND_MAX_PATH+1];
-    char dataPath[NAND_MAX_PATH+1];
-    u16  curGroupId, launchGroupId;
+    char homePath[NAND_MAX_PATH + 1];
+    char dataPath[NAND_MAX_PATH + 1];
+    u16 curGroupId, launchGroupId;
 
     int ret = NAND_RESULT_OK;
 
@@ -111,8 +112,7 @@ BOOL __OSCheckCompanyCode(ESTitleId titleId, BOOL diskApp) {
         // Get group ID from disc
         DVDDiskID* diskId = DVDGetCurrentDiskID();
         launchGroupId = *(u16*)diskId->company;
-    }
-    else {
+    } else {
         // Get group ID from title's data folder
         sprintf(dataPath, "/title/%08x/%08x/data", NANDTitleIdHi(titleId), NANDTitleIdLo(titleId));
         ret = NANDGetStatus(dataPath, &status);
@@ -132,18 +132,17 @@ BOOL __OSCheckTmdCountryCode(ESTmdView* tmd) {
     if (country == ES_REGION_ALL) {
         // Do not bother checking if its region free
         return TRUE;
-    }
-    else {
+    } else {
         // Check if region matches the system region
         return country == SCGetProductGameRegion() ? TRUE : FALSE;
     }
 }
 
 int __OSGetValidTicketIndex(ESTicketView* ticketViewList, u32 numTickets) {
-    int  ret, i;
-    int  bestIdx = 0;
+    int ret, i;
+    int bestIdx = 0;
     BOOL permanent = FALSE;
-    u32  maxBit = 0, maxTime = 0;
+    u32 maxBit = 0, maxTime = 0;
 
     // Check if there are any tickets
     if (ticketViewList == NULL) {
@@ -160,8 +159,7 @@ int __OSGetValidTicketIndex(ESTicketView* ticketViewList, u32 numTickets) {
         if (ret > 0) {
             ret = ES_ERR_OK;
             continue;
-        }
-        else if (ret != ES_ERR_OK) {
+        } else if (ret != ES_ERR_OK) {
             return ret;
         }
 
@@ -177,7 +175,8 @@ int __OSGetValidTicketIndex(ESTicketView* ticketViewList, u32 numTickets) {
                 accessMask = (u16)((ticketViewList[i].accessMask[1] << 8) | ticketViewList[i].accessMask[0]);
 
                 for (j = 0; j < 16; j++) {
-                    if (accessMask & (1 << j)) bits++;
+                    if (accessMask & (1 << j))
+                        bits++;
                 }
 
                 if (bits > maxBit) {
@@ -258,13 +257,14 @@ void __OSLaunchTitle(ESTitleId titleId) {
     }
 
     // Lock up
-    while (TRUE) {}
+    while (TRUE) {
+    }
 }
 
 inline BOOL __OSCheckTmdSysVersion(ESTmdView* tmd) {
     ESTitleId systemId = 0x0000000100000003;
 
-    char syspath[NAND_MAX_PATH+1] ALIGN32;
+    char syspath[NAND_MAX_PATH + 1] ALIGN32;
 
     int ret = ES_ERR_OK;
     u32 numTicket = 0, numContent = 0;
@@ -286,26 +286,25 @@ inline BOOL __OSCheckTmdSysVersion(ESTmdView* tmd) {
 static BOOL __OSCheckTmdDriveSpinFlag(ESTmdView* tmd) {
     if (tmd->head.reserved.driveSpin & 1) {
         return TRUE;
-    }
-    else {
+    } else {
         return FALSE;
     }
 }
 
 void LaunchCommon(ESTitleId titleId, u32 launchArg, const char** argv, BOOL launchCheck) {
-    OSStateFlags    state;
-    OSNandbootInfo  *info;
-    u8*             bi2;
-    int             argLen;
+    OSStateFlags state;
+    OSNandbootInfo* info;
+    u8* bi2;
+    int argLen;
 
-    char    titleIdString[20];
-    char**  argvToPass;
+    char titleIdString[20];
+    char** argvToPass;
 
     int i;
 
-    ESTitleId   title ALIGN32;
-    ESTmdView*  tmd = NULL;
-    u32         tmdCount = 0;
+    ESTitleId title ALIGN32;
+    ESTmdView* tmd = NULL;
+    u32 tmdCount = 0;
 
     int ret = ES_ERR_OK;
 
@@ -364,11 +363,11 @@ void LaunchCommon(ESTitleId titleId, u32 launchArg, const char** argv, BOOL laun
         sprintf(titleIdString, "%016llx", titleId);
 
         // Setup launch arguments
-        
+
         argLen = 0;
         if (argv) {
             while (argv[argLen])
-            argLen++;
+                argLen++;
         }
 
         argvToPass = OSAllocFromMEM1ArenaLo((++argLen + 1) * sizeof(char*), 1);
@@ -377,13 +376,12 @@ void LaunchCommon(ESTitleId titleId, u32 launchArg, const char** argv, BOOL laun
         for (i = 1; i < argLen; i++) {
             argvToPass[i] = (char*)argv[i - 1];
         }
-        
+
         PackArgs(bi2, argLen, argvToPass);
 
         if (__OSInIPL) {
             title = EXEC_SYSTEM_MENU_ID;
-        }
-        else {
+        } else {
             ret = ESP_InitLib();
             if (ret != ES_ERR_OK) {
                 OSReport("\nOSExec(): Failed to exec %d in %d\n", ret, 1712);
@@ -403,8 +401,7 @@ void LaunchCommon(ESTitleId titleId, u32 launchArg, const char** argv, BOOL laun
         info->prevAppType = OSGetAppType();
         if (titleId == EXEC_SYSTEM_MENU_ID) {
             info->returnValue = OS_NANDBOOT_RETURN_MENU;
-        }
-        else {
+        } else {
             info->returnValue = OS_NANDBOOT_RETURN_GAME;
         }
         info->argValue = launchArg;
@@ -421,7 +418,7 @@ void LaunchCommon(ESTitleId titleId, u32 launchArg, const char** argv, BOOL laun
         }
         __OSWriteStateFlags(&state);
     }
-    
+
     OSDisableScheduler();
     __OSShutdownDevices(OS_SHUTDOWN_LAUNCH);
     OSEnableScheduler();
@@ -432,17 +429,18 @@ void LaunchCommon(ESTitleId titleId, u32 launchArg, const char** argv, BOOL laun
     __OSLaunchMenu();
 }
 
-#define __COPY_VA_ARGS_TO_ARRAY(arg0, argv) {                           \
-    va_list list;                                                       \
-    char*   argPtr;                                                     \
-    int     i;                                                          \
-    argv = OSAllocFromMEM1ArenaLo(sizeof(*argv), 0x1000);               \
-    va_start(list, arg0);                                               \
-    for (i = 0, argPtr = (char*)arg0; (argv[i++] = argPtr) != NULL;) {  \
-        argPtr = va_arg(list, char*);                                   \
-    }                                                                   \
-    va_end(list);                                                       \
-}
+#define __COPY_VA_ARGS_TO_ARRAY(arg0, argv)                                                                                                          \
+    {                                                                                                                                                \
+        va_list list;                                                                                                                                \
+        char* argPtr;                                                                                                                                \
+        int i;                                                                                                                                       \
+        argv = OSAllocFromMEM1ArenaLo(sizeof(*argv), 0x1000);                                                                                        \
+        va_start(list, arg0);                                                                                                                        \
+        for (i = 0, argPtr = (char*)arg0; (argv[i++] = argPtr) != NULL;) {                                                                           \
+            argPtr = va_arg(list, char*);                                                                                                            \
+        }                                                                                                                                            \
+        va_end(list);                                                                                                                                \
+    }
 
 // "System" as in system menu
 void __OSLaunchTitlevForSystem(ESTitleId titleId, u32 launchCode, const char** argv) {
@@ -454,8 +452,7 @@ void __OSLaunchTitlevForSystem(ESTitleId titleId, u32 launchCode, const char** a
     // If we are in the system menu (but NOT in a nandloader)
     if (__OSInIPL && !__OSInNandBoot) {
         LaunchCommon(titleId, launchCode, argv, FALSE);
-    }
-    else {
+    } else {
         OSReport("__OSLaunchTitlevForSystem(): only system can call this function\n");
         __OSReturnToMenuForError();
     }
@@ -463,7 +460,7 @@ void __OSLaunchTitlevForSystem(ESTitleId titleId, u32 launchCode, const char** a
 
 void __OSLaunchTitlelForSystem(ESTitleId titleId, u32 launchCode, const char* arg0, ...) {
     char** argv;
-    
+
     __OSUnRegisterStateEvent();
 
     OSSetArenaLo(EXEC_WORK_ARENA_LO);
@@ -474,21 +471,20 @@ void __OSLaunchTitlelForSystem(ESTitleId titleId, u32 launchCode, const char* ar
     // If we are in the system menu (but NOT in a nandloader)
     if (__OSInIPL && !__OSInNandBoot) {
         LaunchCommon(titleId, launchCode, (const char**)argv, FALSE);
-    }
-    else {
+    } else {
         OSReport("__OSLaunchTitlelForSystem(): only system can call this function\n");
         __OSReturnToMenuForError();
     }
 }
 
-void __OSReturnToMenul(u32 launchArg, const char *arg0, ...) {
+void __OSReturnToMenul(u32 launchArg, const char* arg0, ...) {
     char** argv;
 
     __OSUnRegisterStateEvent();
 
     OSSetArenaLo(EXEC_WORK_ARENA_LO);
     OSSetArenaHi(EXEC_WORK_ARENA_HI);
-    
+
     __COPY_VA_ARGS_TO_ARRAY(arg0, argv);
 
     LaunchCommon(EXEC_SYSTEM_MENU_ID, launchArg, (const char**)argv, FALSE);

@@ -1,11 +1,13 @@
 #ifndef RFL_MODEL_H
 #define RFL_MODEL_H
 
-#include <RFL_Types.h>
 #include <RFL_MiddleDatabase.h>
+#include <RFL_Types.h>
 
-#include <revolution/mtx.h>
+
 #include <revolution/gx/GXEnum.h>
+#include <revolution/mtx.h>
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -25,67 +27,68 @@ typedef struct {
 } RFLCharModel;
 
 typedef struct {
-    u8          lightEnable;    // 0x00
-    u32         lightMask;      // 0x04
+    u8 lightEnable;  // 0x00
+    u32 lightMask;   // 0x04
 
-    GXDiffuseFn diffFn;         // 0x08
-    GXAttnFn    attnFn;         // 0x0C
+    GXDiffuseFn diffFn;  // 0x08
+    GXAttnFn attnFn;     // 0x0C
 
-    GXColor     ambientColor;   // 0x10
+    GXColor ambientColor;  // 0x10
 
-    GXBool      zCompLoc;       // 0x14
+    GXBool zCompLoc;  // 0x14
 } RFLDrawSetting;
 
 typedef struct {
-    u8              txcGenNum;      // 0x00
-    GXTexCoordID    txcID;          // 0x04
+    u8 txcGenNum;        // 0x00
+    GXTexCoordID txcID;  // 0x04
 
-    GXTexMapID      texMapID;       // 0x08
+    GXTexMapID texMapID;  // 0x08
 
-    u8              tevStageNum;    // 0x0C
-    GXTevSwapSel    tevSwapTable;   // 0x10
-    GXTevKColorID   tevKColorID;    // 0x14
-    GXTevRegID      tevOutRegID;    // 0x18
+    u8 tevStageNum;             // 0x0C
+    GXTevSwapSel tevSwapTable;  // 0x10
+    GXTevKColorID tevKColorID;  // 0x14
+    GXTevRegID tevOutRegID;     // 0x18
 
-    GXPosNrmMtx     posNrmMtxID;    // 0x1C
+    GXPosNrmMtx posNrmMtxID;  // 0x1C
 
-    GXBool          reverseCulling; // 0x20
+    GXBool reverseCulling;  // 0x20
 } RFLDrawCoreSetting;
 
-void            RFLSetCoordinate(RFLCoordinate up, RFLCoordinate front);
+void RFLSetCoordinate(RFLCoordinate up, RFLCoordinate front);
 
-u32             RFLGetModelBufferSize(RFLResolution resolution, u32 expressionFlag);
+u32 RFLGetModelBufferSize(RFLResolution resolution, u32 expressionFlag);
 
-RFLErrcode      RFLInitCharModel(RFLCharModel* charModel, RFLDataSource source, RFLMiddleDatabase* middleDB, u16 index, void* bufferPtr, RFLResolution resolution, u32 expressionFlag);
+RFLErrcode RFLInitCharModel(RFLCharModel* charModel, RFLDataSource source, RFLMiddleDatabase* middleDB, u16 index, void* bufferPtr,
+                            RFLResolution resolution, u32 expressionFlag);
 
-void            RFLSetMtx(RFLCharModel* charModel, const MtxPtr mvMtx);
-void            RFLSetMtxPosNrm(RFLCharModel* charModel, const MtxPtr posMtx, const MtxPtr nrmMtx);
+void RFLSetMtx(RFLCharModel* charModel, const MtxPtr mvMtx);
+void RFLSetMtxPosNrm(RFLCharModel* charModel, const MtxPtr posMtx, const MtxPtr nrmMtx);
 
-void            RFLSetExpression(RFLCharModel* charModel, RFLExpression expression);
-RFLExpression   RFLGetExpression(const RFLCharModel* charModel);
-BOOL            RFLIsAvailableExpression(const RFLCharModel* charModel, RFLExpression expression);
+void RFLSetExpression(RFLCharModel* charModel, RFLExpression expression);
+RFLExpression RFLGetExpression(const RFLCharModel* charModel);
+BOOL RFLIsAvailableExpression(const RFLCharModel* charModel, RFLExpression expression);
 
-GXColor         RFLGetFavoriteColor(RFLFavoriteColor favoriteColor);
+GXColor RFLGetFavoriteColor(RFLFavoriteColor favoriteColor);
 
-void            RFLDrawOpa(const RFLCharModel* charModel);
-void            RFLDrawXlu(const RFLCharModel* charModel);
+void RFLDrawOpa(const RFLCharModel* charModel);
+void RFLDrawXlu(const RFLCharModel* charModel);
 
-void            RFLLoadDrawSetting(const RFLDrawSetting* setting);
-void            RFLLoadVertexSetting(const RFLDrawCoreSetting* setting);
-void            RFLLoadMaterialSetting(const RFLDrawCoreSetting* setting);
+void RFLLoadDrawSetting(const RFLDrawSetting* setting);
+void RFLLoadVertexSetting(const RFLDrawCoreSetting* setting);
+void RFLLoadMaterialSetting(const RFLDrawCoreSetting* setting);
 
-void            RFLDrawOpaCore(const RFLCharModel* charModel, const RFLDrawCoreSetting* setting);
-void            RFLDrawXluCore(const RFLCharModel* charModel, const RFLDrawCoreSetting* setting);
+void RFLDrawOpaCore(const RFLCharModel* charModel, const RFLDrawCoreSetting* setting);
+void RFLDrawXluCore(const RFLCharModel* charModel, const RFLDrawCoreSetting* setting);
 
-void            RFLDrawShape(const RFLCharModel* charModel);
-void            RFLCopyCharModel(RFLCharModel* dstCharModel, void* dstBufferPtr, const RFLCharModel* srcCharModel);
+void RFLDrawShape(const RFLCharModel* charModel);
+void RFLCopyCharModel(RFLCharModel* dstCharModel, void* dstBufferPtr, const RFLCharModel* srcCharModel);
 
 #if RFL_BUILD >= 20080306
-void            RFLSetModelDrawDoneCallback(RFLSimpleCB cb);
+void RFLSetModelDrawDoneCallback(RFLSimpleCB cb);
 #endif
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // RFL_MODEL_H
+#endif  // RFL_MODEL_H

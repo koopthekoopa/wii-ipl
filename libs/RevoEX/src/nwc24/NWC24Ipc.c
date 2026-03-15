@@ -1,5 +1,5 @@
-#include <revolution/nwc24.h>
 #include <private/nwc24.h>
+#include <revolution/nwc24.h>
 
 #include <private/ios.h>
 #include <private/ipc.h>
@@ -48,7 +48,8 @@ NWC24Err NWC24iIoctlResourceManager(const char* funcName, s32 fd, s32 cmd, void*
     return NWC24_OK;
 }
 
-NWC24Err NWC24iIoctlResourceManagerAsync(const char* funcName, s32 fd, s32 cmd, void* input, u32 input_bytes, void* output, u32 output_bytes, s32* ret) {
+NWC24Err NWC24iIoctlResourceManagerAsync(const char* funcName, s32 fd, s32 cmd, void* input, u32 input_bytes, void* output, u32 output_bytes,
+                                         s32* ret) {
     s32 err = IOS_IoctlAsync(fd, cmd, input, input_bytes, output, output_bytes, CallbackAsyncIpc, ret);
     if (err < IPC_RESULT_OK) {
         return NWC24_ERR_INTERNAL_IPC;

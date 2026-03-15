@@ -2,23 +2,23 @@
 
 typedef struct HeapCell HeapCell;
 struct HeapCell {
-    HeapCell*   prev;       // 0x00
-    HeapCell*   next;       // 0x04
-    s32         size;       // 0x08
+    HeapCell* prev;  // 0x00
+    HeapCell* next;  // 0x04
+    s32 size;        // 0x08
 };
 
 typedef struct HeapDesc {
-    s32         size;       // 0x00
-    HeapCell*   free;       // 0x04
-    HeapCell*   allocated;  // 0x08
+    s32 size;             // 0x00
+    HeapCell* free;       // 0x04
+    HeapCell* allocated;  // 0x08
 } HeapDesc;
 
-static HeapDesc*        HeapArray;
-static int              NumHeaps;
+static HeapDesc* HeapArray;
+static int NumHeaps;
 
-static void             *ArenaStart, *ArenaEnd;
+static void *ArenaStart, *ArenaEnd;
 
-volatile OSHeapHandle   __OSCurrHeap = -1;
+volatile OSHeapHandle __OSCurrHeap = -1;
 
 #define MAX_LEFT_SIZE 64
 
@@ -40,8 +40,7 @@ static HeapCell* DLExtract(HeapCell* list, HeapCell* cell) {
 
     if (cell->prev == NULL) {
         return cell->next;
-    }
-    else {
+    } else {
         cell->prev->next = cell->next;
         return list;
     }
@@ -72,7 +71,7 @@ static HeapCell* DLInsert(HeapCell* list, HeapCell* cell) {
             }
         }
     }
-    
+
     if (prev != NULL) {
         prev->next = cell;
         if ((u8*)prev + prev->size == (u8*)cell) {
@@ -84,8 +83,7 @@ static HeapCell* DLInsert(HeapCell* list, HeapCell* cell) {
             }
         }
         return list;
-    }
-    else {
+    } else {
         return cell;
     }
 }
@@ -114,8 +112,7 @@ void* OSAllocFromHeap(OSHeapHandle heap, u32 size) {
 
     if (leftSize < (u32)MAX_LEFT_SIZE) {
         desc->free = DLExtract(desc->free, cell);
-    }
-    else {
+    } else {
         cell->size = size;
         newCell = (HeapCell*)((u8*)cell + size);
         newCell->size = leftSize;
@@ -128,8 +125,7 @@ void* OSAllocFromHeap(OSHeapHandle heap, u32 size) {
 
         if (newCell->prev != NULL) {
             newCell->prev->next = newCell;
-        }
-        else {
+        } else {
             desc->free = newCell;
         }
     }
@@ -138,7 +134,7 @@ void* OSAllocFromHeap(OSHeapHandle heap, u32 size) {
     return (void*)((u8*)cell + DEFAULT_ALIGN);
 }
 
-void OSFreeToHeap(OSHeapHandle heap, void *ptr) {
+void OSFreeToHeap(OSHeapHandle heap, void* ptr) {
     HeapDesc* desc;
     HeapCell* cell;
 
@@ -180,7 +176,7 @@ void* OSInitAlloc(void* arenaStart, void* arenaEnd, int maxHeaps) {
     return arenaStart;
 }
 
-int OSCreateHeap(void *start, void *end) {
+int OSCreateHeap(void* start, void* end) {
     OSHeapHandle heap;
     HeapDesc* desc;
     HeapCell* cell;

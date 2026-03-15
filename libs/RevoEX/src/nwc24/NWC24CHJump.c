@@ -3,8 +3,8 @@
 #include <string.h>
 
 typedef struct CHJumpBlock {
-    u32 offset; // 0x00
-    u32 size;   // 0x04
+    u32 offset;  // 0x00
+    u32 size;    // 0x04
 } CHJumpBlock;
 
 static const char* GetCHDataPtr(const NWC24CHJumpObj* chjp) {
@@ -20,14 +20,14 @@ static u32 GetCHJumpBlockTableSize(const NWC24CHJumpObj* chjp) {
 }
 
 NWC24Err NWC24CheckCHJumpObj(const NWC24CHJumpObj* chjp, u32 dataSize) {
-    u32                 blockTblSize;
-    u32                 num;
-    u32                 i;
-    int                 offset;
-    int                 size;
+    u32 blockTblSize;
+    u32 num;
+    u32 i;
+    int offset;
+    int size;
 
-    const CHJumpBlock*  block;
-    const char*           blockTbl = GetCHDataPtr(chjp);
+    const CHJumpBlock* block;
+    const char* blockTbl = GetCHDataPtr(chjp);
 
     // Verify magic
     if (chjp->magic != NWC24_CHJP_HEADER_MAGIC) {
@@ -54,7 +54,7 @@ NWC24Err NWC24CheckCHJumpObj(const NWC24CHJumpObj* chjp, u32 dataSize) {
         if (offset < blockTblSize) {
             return NWC24_ERR_FORMAT;
         }
-    
+
         // Check if block does not exceed total CHJump size
         size = block->size;
         if (offset + size > chjp->totalSize) {
@@ -71,8 +71,8 @@ NWC24Err NWC24GetCHJumpTitleId(const NWC24CHJumpObj* chjp, u64* titleId) {
 }
 
 NWC24Err NWC24GetCHJumpBlockSize(const NWC24CHJumpObj* chjp, u32* size, u32 index) {
-    const CHJumpBlock*  block;
-    const char*           blockTbl = GetCHDataPtr(chjp);
+    const CHJumpBlock* block;
+    const char* blockTbl = GetCHDataPtr(chjp);
 
     if (chjp->numBlocks <= index) {
         return NWC24_ERR_INVALID_VALUE;
@@ -80,13 +80,13 @@ NWC24Err NWC24GetCHJumpBlockSize(const NWC24CHJumpObj* chjp, u32* size, u32 inde
 
     block = GetCHJumpBlock(blockTbl, index);
     *size = block->size;
-    
+
     return NWC24_OK;
 }
 
 NWC24Err NWC24GetCHJumpBlockData(const NWC24CHJumpObj* chjp, char* data, u32 size, u32 index) {
-    const CHJumpBlock*  block;
-    const char*         blockTbl = GetCHDataPtr(chjp);
+    const CHJumpBlock* block;
+    const char* blockTbl = GetCHDataPtr(chjp);
 
     char* srcData;
     u32 srcSize;

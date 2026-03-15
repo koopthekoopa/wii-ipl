@@ -8,15 +8,15 @@ namespace nw4r {
             class SeqTrack;
 
             class SeqTrackAllocator {
-                public:
-                    virtual ~SeqTrackAllocator() {} // 0x08
+            public:
+                virtual ~SeqTrackAllocator() {}  // 0x08
 
-                    virtual SeqTrack*   AllocTrack(SeqPlayer* player) = 0;  // 0x0C
-                    virtual void        FreeTrack(SeqTrack* track) = 0;     // 0x10
+                virtual SeqTrack* AllocTrack(SeqPlayer* player) = 0;  // 0x0C
+                virtual void FreeTrack(SeqTrack* track) = 0;          // 0x10
             };
 
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r
 
 #endif

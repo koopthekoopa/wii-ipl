@@ -1,8 +1,8 @@
 #include <revolution/mem.h>
 #include <revolution/os.h>
 
-#include <string.h>
 #include <math.h>
+#include <string.h>
 
 #include <private/mem.h>
 
@@ -76,8 +76,7 @@ void* MEMAllocFromFrmHeapEx(MEMHeapHandle heap, u32 size, int align) {
 
     if (align >= 0) {
         memory = AllocFromHead_(frmHeap, size, align);
-    }
-    else {
+    } else {
         memory = AllocFromTail_(frmHeap, size, -align);
     }
 
@@ -102,7 +101,7 @@ void MEMFreeToFrmHeap(MEMHeapHandle heap, int mode) {
         }
         frmHeap->tail = heap->heapEnd;
     }
-    
+
     UnlockHeap(heap);
 }
 
@@ -111,7 +110,7 @@ u32 MEMGetAllocatableSizeForFrmHeapEx(MEMHeapHandle heap, int align) {
     u32 size;
     MEMiFrmHeapHead* frmHeap;
     void* block;
-    
+
     align = abs(align);
     enabled = OSDisableInterrupts();
     frmHeap = (MEMiFrmHeapHead*)AddU32ToPtr(heap, sizeof(MEMiHeapHead));
@@ -171,8 +170,8 @@ int MEMFreeByStateToFrmHeap(MEMHeapHandle heap, u32 tag) {
 
     if (tag != 0)
         for (; state; state = state->prevState)
-        if (state->tag == tag)
-            break;
+            if (state->tag == tag)
+                break;
 
     if (!state) {
         ret = FALSE;
@@ -201,8 +200,7 @@ u32 MEMAdjustFrmHeap(MEMHeapHandle heap) {
 
     if (GetOffsetFromPtr(frm->tail, heap->heapEnd) != 0) {
         newSize = 0;
-    }
-    else {
+    } else {
         heap->heapEnd = frm->head;
         frm->tail = frm->head;
         newSize = GetOffsetFromPtr(heap, frm->head);

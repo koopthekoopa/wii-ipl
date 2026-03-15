@@ -9,35 +9,31 @@
 
 namespace ipl {
     class WarningHandler {
-        public:
-            enum Type {
-                NONE = 0,
-                DEFAULT,
-                RESET
-            };
+    public:
+        enum Type { NONE = 0, DEFAULT, RESET };
 
-            WarningHandler(EGG::Heap* heap);
-            /**
-             * @param type The warning type.
-             * @param msgId The message ID.
-             */
-            void    set(Type type, u32 msgId);
+        WarningHandler(EGG::Heap* heap);
+        /**
+         * @param type The warning type.
+         * @param msgId The message ID.
+         */
+        void set(Type type, u32 msgId);
 
-            void    calc();
-            void    draw();
+        void calc();
+        void draw();
 
-            BOOL    check();
+        BOOL check();
 
-            BOOL    resetting() { return mType == RESET; }
+        BOOL resetting() { return mType == RESET; }
 
-        private:
-            Type            mType;      // 0x00
-            u32             mMessageID; // 0x04
+    private:
+        Type mType;      // 0x00
+        u32 mMessageID;  // 0x04
 
-            DialogWindow*   mpDialog;   // 0x08
-        
+        DialogWindow* mpDialog;  // 0x08
+
         friend class System;
     };
-}
+}  // namespace ipl
 
-#endif // IPL_WARNING_HANDLER_H
+#endif  // IPL_WARNING_HANDLER_H

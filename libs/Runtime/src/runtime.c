@@ -1,5 +1,7 @@
 #include <decomp.h>
 
+// clang-format off
+
 #define save_restore_reg r11
 
 #define SAVE_FPR(reg)           _savefpr_##reg
@@ -935,3 +937,4 @@ L_815F9D00:
     blr
 #endif
 }
+// clang-format on

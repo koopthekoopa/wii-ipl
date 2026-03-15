@@ -7,11 +7,11 @@
 extern "C" {
 #endif
 
-void    __OSUnlockAllMutex(OSThread* thread);
+void __OSUnlockAllMutex(OSThread* thread);
 
-BOOL    __OSCheckDeadLock(OSThread* thread);
-BOOL    __OSCheckMutex(OSMutex* mutex);
-BOOL    __OSCheckMutexes(OSThread* thread);
+BOOL __OSCheckDeadLock(OSThread* thread);
+BOOL __OSCheckMutex(OSMutex* mutex);
+BOOL __OSCheckMutexes(OSThread* thread);
 
 #ifdef __cplusplus
 }

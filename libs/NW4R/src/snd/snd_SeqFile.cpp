@@ -24,9 +24,7 @@ namespace nw4r {
                 return true;
             }
 
-            SeqFileReader::SeqFileReader(const void* seqData) :
-            mHeader(NULL),
-            mDataBlock(NULL) {
+            SeqFileReader::SeqFileReader(const void* seqData) : mHeader(NULL), mDataBlock(NULL) {
                 if (!IsValidFileHeader(seqData)) {
                     return;
                 }
@@ -36,8 +34,8 @@ namespace nw4r {
             }
 
             const void* SeqFileReader::GetBaseAddress() const {
-                return ut::AddOffsetToPtr(mDataBlock,Util::ReadBigEndian(mDataBlock->baseOffset));
+                return ut::AddOffsetToPtr(mDataBlock, Util::ReadBigEndian(mDataBlock->baseOffset));
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

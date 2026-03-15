@@ -1,18 +1,19 @@
 #include "scene/board/iplBoard.h"
 
-#include "scene/calendar/iplCalendar.h"
 #include "scene/button/iplButton.h"
+#include "scene/calendar/iplCalendar.h"
 
-#include "iplSystem.h"
 #include "iplSound.h"
+#include "iplSystem.h"
 
 namespace ipl {
     namespace scene {
-        #define DATE_COUNT  42
+#define DATE_COUNT 42
 
         utility::Date Calendar::mscMinDate(MIN_YEAR, MIN_MONTH, MIN_DAY);
         utility::Date Calendar::mscMaxDate(MAX_YEAR, MAX_MONTH, MAX_DAY);
 
+        // clang-format off
         static const Calendar::AnmFrame scAnmFrame[Calendar::IDANIM_MAX] = {
             { 1000.0f, 1040.0f },
             { 1040.0f, 1040.0f },
@@ -101,26 +102,17 @@ namespace ipl {
             "N_CalPos_b",
             "N_CalPos_c",
         };
+        // clang-format on
 
-        Calendar::Calendar(EGG::Heap* heap) :
-        FaderSceneBase(heap),
-        ButtonEventHandlerBase(),
-        mState(STATE_NORMAL),
-        mPrevState(STATE_NORMAL),
-        mpLayout(NULL),
-        mpLayoutFile(NULL),
-        mpGroupAnim(NULL),
-        mpInitAnim(NULL),
-        mpBoardDate(NULL),
-        mpSelectDate(NULL),
-        mbScrolling(false),
-        unk_0xA0(FALSE),
-        mbTaskCanceled(FALSE),
-        mbBackToBoardAlt(FALSE) {
+        Calendar::Calendar(EGG::Heap* heap)
+            : FaderSceneBase(heap), ButtonEventHandlerBase(), mState(STATE_NORMAL), mPrevState(STATE_NORMAL), mpLayout(NULL), mpLayoutFile(NULL),
+              mpGroupAnim(NULL), mpInitAnim(NULL), mpBoardDate(NULL), mpSelectDate(NULL), mbScrolling(false), unk_0xA0(FALSE), mbTaskCanceled(FALSE),
+              mbBackToBoardAlt(FALSE) {
             nw4r::ut::List_Init(&mDateList, offsetof(Date, mNode1));
             nw4r::ut::List_Init(&unk_0x90, offsetof(Date, mNode2));
 
-            mbAsian = System::getRegion() == SC_PRODUCT_AREA_JPN || (u32)System::getRegion() == SC_PRODUCT_AREA_KOR || (u32)System::getRegion() == SC_PRODUCT_AREA_CHN;
+            mbAsian = System::getRegion() == SC_PRODUCT_AREA_JPN || (u32)System::getRegion() == SC_PRODUCT_AREA_KOR ||
+                      (u32)System::getRegion() == SC_PRODUCT_AREA_CHN;
             mbUSA = System::getRegion() == SC_PRODUCT_AREA_USA;
         }
 
@@ -137,7 +129,7 @@ namespace ipl {
             mpLayout->calc();
             mpLayout->finishBinding();
 
-            for (int i = 0; i < (DATE_COUNT*2); i++) {
+            for (int i = 0; i < (DATE_COUNT * 2); i++) {
                 Date* date = new Date(getSceneHeap(), mpLayoutFile, "arc", "my_IplTop_f.brlyt");
                 if (i < DATE_COUNT) {
                     nw4r::ut::List_Append(&unk_0x90, date);
@@ -240,8 +232,7 @@ namespace ipl {
         void Calendar::initCalcFadeout() {
             if (mbBackToBoardAlt == FALSE) {
                 static_cast<Button*>(System::getScene(SCENE_BUTTON))->animation(Button::IDANIM_BACK_TO_BOARD);
-            }
-            else {
+            } else {
                 static_cast<Button*>(System::getScene(SCENE_BUTTON))->animation(Button::IDANIM_BACK_TO_BOARD_ALT);
             }
         }
@@ -256,11 +247,10 @@ namespace ipl {
                 mpLayout->draw();
 
                 if (mState == STATE_SCROLL_RIGHT || mState == STATE_SCROLL_LEFT) {
-                    for (int i = (DATE_COUNT*2)-1; i >= 0; i--) {
+                    for (int i = (DATE_COUNT * 2) - 1; i >= 0; i--) {
                         ((Date*)nw4r::ut::List_GetNth(&mDateList, i))->draw(false);
                     }
-                }
-                else {
+                } else {
                     for (u32 i = 0; i < DATE_COUNT; i++) {
                         ((Date*)nw4r::ut::List_GetNth(&unk_0x90, i))->draw(false);
                     }
@@ -290,12 +280,10 @@ namespace ipl {
                             mbBackToBoardAlt = FALSE;
                             start_exit();
                             snd::getSystem()->startSE("WIPL_SE_CANCEL");
-                        }
-                        else if (Button::cmpButtonName(paneName, Button::BTN_ARROW_RIGHT) == 0 && !is_upper_limit()) {
+                        } else if (Button::cmpButtonName(paneName, Button::BTN_ARROW_RIGHT) == 0 && !is_upper_limit()) {
                             static_cast<Button*>(System::getScene(SCENE_BUTTON))->animation(Button::IDANIM_ARROW_RIGHT_SELECT);
                             start_scroll_r();
-                        }
-                        else if (Button::cmpButtonName(paneName, Button::BTN_ARROW_LEFT) == 0 && !is_lower_limit()){
+                        } else if (Button::cmpButtonName(paneName, Button::BTN_ARROW_LEFT) == 0 && !is_lower_limit()) {
                             static_cast<Button*>(System::getScene(SCENE_BUTTON))->animation(Button::IDANIM_ARROW_LEFT_SELECT);
                             start_scroll_l();
                         }
@@ -335,8 +323,7 @@ namespace ipl {
             controller::Interface* con = System::getMasterController();
             if (con->down(controller::BTN_NEXT_LEFT) && !is_lower_limit()) {
                 start_scroll_l();
-            }
-            else if (con->down(controller::BTN_NEXT_RIGHT) && !is_upper_limit()) {
+            } else if (con->down(controller::BTN_NEXT_RIGHT) && !is_upper_limit()) {
                 start_scroll_r();
             }
         }
@@ -422,8 +409,7 @@ namespace ipl {
                 mbTaskCanceled = TRUE;
                 mPrevState = STATE_SCROLL_RIGHT;
                 mState = STATE_WAIT_TASK;
-            }
-            else {
+            } else {
                 do_scroll_r();
             }
         }
@@ -437,9 +423,8 @@ namespace ipl {
             if (!is_upper_limit()) {
                 if (is_lower_limit()) {
                     static_cast<Button*>(System::getScene(SCENE_BUTTON))->animation(Button::IDANIM_ARROW_LEFT_APPEAR);
-                }
-                else {
-                    if (mpBoardDate->year == mscMaxDate.year && mpBoardDate->month == mscMaxDate.month-1) {
+                } else {
+                    if (mpBoardDate->year == mscMaxDate.year && mpBoardDate->month == mscMaxDate.month - 1) {
                         static_cast<Button*>(System::getScene(SCENE_BUTTON))->animation(Button::IDANIM_ARROW_RIGHT_DISAPPEAR);
                     }
                 }
@@ -466,8 +451,7 @@ namespace ipl {
                 mbTaskCanceled = TRUE;
                 mPrevState = STATE_SCROLL_LEFT;
                 mState = STATE_WAIT_TASK;
-            }
-            else {
+            } else {
                 do_scroll_l();
             }
         }
@@ -481,9 +465,8 @@ namespace ipl {
             if (!is_lower_limit()) {
                 if (is_upper_limit()) {
                     static_cast<Button*>(System::getScene(SCENE_BUTTON))->animation(Button::IDANIM_ARROW_RIGHT_APPEAR);
-                }
-                else {
-                    if (mpBoardDate->year == mscMinDate.year && mpBoardDate->month == mscMinDate.month+1) {
+                } else {
+                    if (mpBoardDate->year == mscMinDate.year && mpBoardDate->month == mscMinDate.month + 1) {
                         static_cast<Button*>(System::getScene(SCENE_BUTTON))->animation(Button::IDANIM_ARROW_LEFT_DISAPPEAR);
                     }
                 }
@@ -504,12 +487,11 @@ namespace ipl {
             mState = STATE_DONE;
 
             if (unk_0xA0 == TRUE) {
-                OSReport("検索タスク終了要求\n"); // "Search task termination requested"
+                OSReport("検索タスク終了要求\n");  // "Search task termination requested"
                 mbTaskCanceled = TRUE;
                 mPrevState = mState;
                 mState = STATE_WAIT_TASK;
-            }
-            else {
+            } else {
                 do_exit();
             }
         }
@@ -556,25 +538,24 @@ namespace ipl {
 
         void Calendar::set_textbox_month(const char* paneName, const utility::Date& date) {
             wchar_t fullStr[32] = L"";
-            const wchar_t numbers[] = {'0','1','2','3','4','5','6','7','8','9'};
+            const wchar_t numbers[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
             int year = date.year;
             int i = 0;
             if (mbAsian) {
                 fullStr[i++] = numbers[year / 1000];
-                fullStr[i++]= numbers[(year / 100) % 10];
+                fullStr[i++] = numbers[(year / 100) % 10];
                 fullStr[i++] = numbers[(year / 10) % 10];
                 fullStr[i++] = numbers[year % 10];
 
-                const wchar_t* msg = System::getMessage(scMonthToMessageID[date.month-1]);
+                const wchar_t* msg = System::getMessage(scMonthToMessageID[date.month - 1]);
                 wchar_t msgCh;
                 do {
                     msgCh = *msg++;
                     fullStr[i++] = msgCh;
                 } while (msgCh != 0);
-            }
-            else {
-                const wchar_t* msg = System::getMessage(scMonthToMessageID[date.month-1]);
+            } else {
+                const wchar_t* msg = System::getMessage(scMonthToMessageID[date.month - 1]);
                 wchar_t msgCh;
                 do {
                     msgCh = *msg++;
@@ -594,29 +575,28 @@ namespace ipl {
         }
 
         void Calendar::set_textbox_date(int unk, const utility::Date& date) {
-            s32 lang = System::getLanguage(); // unused
+            s32 lang = System::getLanguage();  // unused
             int week = utility::Calendar::getWeek(date.year, date.month, 1);
             int maxDays = utility::Calendar::getDays(date.year, date.month);
 
             OSCalendarTime curTime = System::getCurrentTime();
 
-            utility::Date local_64(curTime.wday, curTime.year+1, curTime.mon);
+            utility::Date local_64(curTime.wday, curTime.year + 1, curTime.mon);
             utility::Date local_70;
             utility::Date local_7c;
 
-            utility::Calendar::getLastMonth(date,&local_70);
-            utility::Calendar::getNextMonth(date,&local_7c);
+            utility::Calendar::getLastMonth(date, &local_70);
+            utility::Calendar::getNextMonth(date, &local_7c);
 
             int iVar10;
             if (mbAsian || mbUSA) {
                 iVar10 = 6 - utility::Calendar::getWeek(date.year, date.month, maxDays);
-            }
-            else {
+            } else {
                 week--;
                 if (week < 0) {
                     week = 6;
                 }
-                iVar10 = 6 - (utility::Calendar::getWeek(date.year, date.month, maxDays)-1);
+                iVar10 = 6 - (utility::Calendar::getWeek(date.year, date.month, maxDays) - 1);
                 if (iVar10 >= 7) {
                     iVar10 = 0;
                 }
@@ -669,13 +649,12 @@ namespace ipl {
                     local_88.month = local_7c.month;
                     local_88.day = ((i - maxDays) - week) + 1;
                     goto out;
-                }
-                else {
+                } else {
                     dateScn->setVisible(false);
                     continue;
                 }
 
-out:
+            out:
                 dateScn->setDate(local_88);
                 dateScn->setAttribute(attr);
             }
@@ -727,7 +706,7 @@ out:
             if (calendar != NULL) {
                 for (u32 i = 0; i < DATE_COUNT; i++) {
                     if (calendar->mbTaskCanceled == TRUE) {
-                        OSReport("タスクキャンセルされた\n"); // Task canceled
+                        OSReport("タスクキャンセルされた\n");  // Task canceled
                         calendar->mbTaskCanceled = FALSE;
                         break;
                     }
@@ -739,13 +718,13 @@ out:
                         CDBDate end = dateScn->mpDate->cdbDateEnd();
 
                         cdb::Manager* cdbManager = System::getCdbManager();
-                        cdbManager->search(begin, end,
-                                            CDB_SEARCH_DIRECTION_RIGHT, cdbManager->isSDMounted() ? CDB_RECORD_LOCATION_ALL : CDB_RECORD_LOCATION_NAND,
-                                            0, search_task_cb_, dateScn);
+                        cdbManager->search(begin, end, CDB_SEARCH_DIRECTION_RIGHT,
+                                           cdbManager->isSDMounted() ? CDB_RECORD_LOCATION_ALL : CDB_RECORD_LOCATION_NAND, 0, search_task_cb_,
+                                           dateScn);
                     }
                 }
 
-                OSReport("タスク終了\n");   // Task end
+                OSReport("タスク終了\n");  // Task end
 
                 calendar->unk_0xA0 = FALSE;
                 calendar->mbTaskCanceled = FALSE;
@@ -753,7 +732,7 @@ out:
         }
 
         void Calendar::exec_search_task() {
-            OSReport("検索開始\n"); // Start search
+            OSReport("検索開始\n");  // Start search
             unk_0xA0 = TRUE;
             System::getTask1()->requestJam(search_task_, this, NULL);
         }
@@ -765,5 +744,5 @@ out:
         BOOL Calendar::is_lower_limit() {
             return mpBoardDate->year == mscMinDate.year && mpBoardDate->month == mscMinDate.month;
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

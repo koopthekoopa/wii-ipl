@@ -1,5 +1,5 @@
-#include <revolution/ax.h>
 #include <private/ax.h>
+#include <revolution/ax.h>
 
 #include <revolution/os.h>
 
@@ -26,10 +26,8 @@ static s32 __AXNumVoices = 0;
 static u32 __AXRecDspCycles = 0;
 static u32 __AXMaxDspCycles = 0;
 
-static u32 __AXMixCycles[] = {2,   408,  408,  810,  1404, 1404, 1404, 1404,
-                              408, 816,  816,  1218, 1812, 1812, 1812, 1812,
-                              707, 1115, 1115, 1517, 2111, 2111, 2111, 2111,
-                              707, 1115, 1115, 1517, 2111, 2111, 2111, 2111};
+static u32 __AXMixCycles[] = {2,   408,  408,  810,  1404, 1404, 1404, 1404, 408, 816,  816,  1218, 1812, 1812, 1812, 1812,
+                              707, 1115, 1115, 1517, 2111, 2111, 2111, 2111, 707, 1115, 1115, 1517, 2111, 2111, 2111, 2111};
 
 static u32 __AXRmtMixCycles[] = {4, 86, 151, 151};
 
@@ -75,8 +73,7 @@ void __AXServiceVPB(AXVPB* vpb) {
 
     if (sync & AX_PBSYNC_STATE) {
         ppbDsp->state = ppbUser->state;
-    }
-    else {
+    } else {
         ppbUser->state = ppbDsp->state;
     }
 
@@ -91,37 +88,64 @@ void __AXServiceVPB(AXVPB* vpb) {
     if (sync & AX_PBSYNC_ITD_SHIFT) {
         ppbDsp->itd.targetShiftL = ppbUser->itd.targetShiftL;
         ppbDsp->itd.targetShiftR = ppbUser->itd.targetShiftR;
-    }
-    else if (sync & AX_PBSYNC_ITD) {
+    } else if (sync & AX_PBSYNC_ITD) {
         u16* src;
         u16* dst;
         u32* dst_;
         src = (void*)&ppbUser->itd;
         dst = (void*)&ppbDsp->itd;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); src+=1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        src += 1;
 
         dst_ = vpb->itdBuffer;
-        *(dst_) = 0; dst_+=1;
-        *(dst_) = 0; dst_+=1;
-        *(dst_) = 0; dst_+=1;
-        *(dst_) = 0; dst_+=1;
-        *(dst_) = 0; dst_+=1;
-        *(dst_) = 0; dst_+=1;
-        *(dst_) = 0; dst_+=1;
-        *(dst_) = 0; dst_+=1;
-        *(dst_) = 0; dst_+=1;
-        *(dst_) = 0; dst_+=1;
-        *(dst_) = 0; dst_+=1;
-        *(dst_) = 0; dst_+=1;
-        *(dst_) = 0; dst_+=1;
-        *(dst_) = 0; dst_+=1;
-        *(dst_) = 0; dst_+=1;
+        *(dst_) = 0;
+        dst_ += 1;
+        *(dst_) = 0;
+        dst_ += 1;
+        *(dst_) = 0;
+        dst_ += 1;
+        *(dst_) = 0;
+        dst_ += 1;
+        *(dst_) = 0;
+        dst_ += 1;
+        *(dst_) = 0;
+        dst_ += 1;
+        *(dst_) = 0;
+        dst_ += 1;
+        *(dst_) = 0;
+        dst_ += 1;
+        *(dst_) = 0;
+        dst_ += 1;
+        *(dst_) = 0;
+        dst_ += 1;
+        *(dst_) = 0;
+        dst_ += 1;
+        *(dst_) = 0;
+        dst_ += 1;
+        *(dst_) = 0;
+        dst_ += 1;
+        *(dst_) = 0;
+        dst_ += 1;
+        *(dst_) = 0;
+        dst_ += 1;
         *(dst_) = 0;
     }
 
@@ -132,14 +156,12 @@ void __AXServiceVPB(AXVPB* vpb) {
     if (sync & AX_PBSYNC_VE_DELTA) {
         ppbUser->ve.currentVolume = ppbDsp->ve.currentVolume;
         ppbDsp->ve.currentDelta = ppbUser->ve.currentDelta;
-    }
-    else if (sync & AX_PBSYNC_VE) {
+    } else if (sync & AX_PBSYNC_VE) {
         ppbDsp->ve.currentVolume = ppbUser->ve.currentVolume;
         ppbDsp->ve.currentDelta = ppbUser->ve.currentDelta;
     }
 
-    if (sync & (AX_PBSYNC_LOOP_FLAG | AX_PBSYNC_LOOP_ADDR | AX_PBSYNC_END_ADDR |
-                AX_PBSYNC_CURR_ADDR)) {
+    if (sync & (AX_PBSYNC_LOOP_FLAG | AX_PBSYNC_LOOP_ADDR | AX_PBSYNC_END_ADDR | AX_PBSYNC_CURR_ADDR)) {
         if (sync & AX_PBSYNC_LOOP_FLAG) {
             ppbDsp->addr.loopFlag = ppbUser->addr.loopFlag;
         }
@@ -154,22 +176,25 @@ void __AXServiceVPB(AXVPB* vpb) {
 
         if (sync & AX_PBSYNC_CURR_ADDR) {
             *(u32*)&ppbDsp->addr.currentAddressHi = *(u32*)&ppbUser->addr.currentAddressHi;
-        }
-        else {
+        } else {
             *(u32*)&ppbUser->addr.currentAddressHi = *(u32*)&ppbDsp->addr.currentAddressHi;
         }
-    }
-    else if (sync & AX_PBSYNC_ADDR) {
+    } else if (sync & AX_PBSYNC_ADDR) {
         u32* src;
         u32* dst;
         dst = (void*)&ppbDsp->addr;
         src = (void*)&ppbUser->addr;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); 
-    }
-    else {
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+    } else {
         ppbUser->addr.currentAddressHi = ppbDsp->addr.currentAddressHi;
         ppbUser->addr.currentAddressLo = ppbDsp->addr.currentAddressLo;
     }
@@ -179,34 +204,67 @@ void __AXServiceVPB(AXVPB* vpb) {
         u32* dst;
         dst = (void*)&ppbDsp->adpcm;
         src = (void*)&ppbUser->adpcm;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
     }
 
     if (sync & AX_PBSYNC_SRC_RATIO) {
         ppbDsp->src.ratioHi = ppbUser->src.ratioHi;
         ppbDsp->src.ratioLo = ppbUser->src.ratioLo;
-    }
-    else if (sync & AX_PBSYNC_SRC) {
+    } else if (sync & AX_PBSYNC_SRC) {
         u16* src;
         u16* dst;
         dst = (void*)&ppbDsp->src;
         src = (void*)&ppbUser->src;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
     }
 
     if (sync & AX_PBSYNC_ADPCM_LOOP) {
@@ -214,24 +272,33 @@ void __AXServiceVPB(AXVPB* vpb) {
         u16* dst;
         dst = (void*)&ppbDsp->adpcmLoop;
         src = (void*)&ppbUser->adpcmLoop;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
         *(dst) = *(src);
     }
 
     if (sync & AX_PBSYNC_LPF_COEFS) {
         ppbDsp->lpf.a0 = ppbUser->lpf.a0;
         ppbDsp->lpf.b0 = ppbUser->lpf.b0;
-    }
-    else if (sync & AX_PBSYNC_LPF) {
+    } else if (sync & AX_PBSYNC_LPF) {
         u16* src;
         u16* dst;
 
         dst = (void*)&ppbDsp->lpf;
         src = (void*)&ppbUser->lpf;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
         *(dst) = *(src);
     }
 
@@ -241,22 +308,39 @@ void __AXServiceVPB(AXVPB* vpb) {
         ppbDsp->biquad.b2 = ppbUser->biquad.b2;
         ppbDsp->biquad.a1 = ppbUser->biquad.a1;
         ppbDsp->biquad.a2 = ppbUser->biquad.a2;
-    }
-    else if (sync & AX_PBSYNC_BIQUAD) {
+    } else if (sync & AX_PBSYNC_BIQUAD) {
         u16* src;
         u16* dst;
 
         dst = (void*)&ppbDsp->biquad;
         src = (void*)&ppbUser->biquad;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
         *(dst) = *(src);
     }
 
@@ -283,29 +367,45 @@ void __AXServiceVPB(AXVPB* vpb) {
     if (sync & AX_PBSYNC_RMTIIR_LPF_COEFS) {
         ppbDsp->rmtIIR.lpf.a0 = ppbUser->rmtIIR.lpf.a0;
         ppbDsp->rmtIIR.lpf.b0 = ppbUser->rmtIIR.lpf.b0;
-    }
-    else if (sync & AX_PBSYNC_RMTIIR_BIQUAD_COEFS) {
+    } else if (sync & AX_PBSYNC_RMTIIR_BIQUAD_COEFS) {
         ppbDsp->rmtIIR.biquad.b0 = ppbUser->rmtIIR.biquad.b0;
         ppbDsp->rmtIIR.biquad.b1 = ppbUser->rmtIIR.biquad.b1;
         ppbDsp->rmtIIR.biquad.b2 = ppbUser->rmtIIR.biquad.b2;
         ppbDsp->rmtIIR.biquad.a1 = ppbUser->rmtIIR.biquad.a1;
         ppbDsp->rmtIIR.biquad.a2 = ppbUser->rmtIIR.biquad.a2;
-    }
-    else if (sync & AX_PBSYNC_RMTIIR) {
+    } else if (sync & AX_PBSYNC_RMTIIR) {
         u16* src;
         u16* dst;
 
         dst = (void*)&ppbDsp->rmtIIR;
         src = (void*)&ppbUser->rmtIIR;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
         *(dst) = *(src);
     }
 }
@@ -361,40 +461,30 @@ void __AXSyncPBs(u32 baseCycles) {
                 }
 
                 cycles += __AXGetSrcCycles(head->pb.srcSelect, &head->pb.src);
-                cycles += __AXMixCycles[head->pb.mixerCtrl >> 0 & 31] +
-                          __AXMixCycles[head->pb.mixerCtrl >> 16 & 31] +
-                          __AXMixCycles[head->pb.mixerCtrl >> 21 & 31] +
-                          __AXMixCycles[head->pb.mixerCtrl >> 26 & 31];
+                cycles += __AXMixCycles[head->pb.mixerCtrl >> 0 & 31] + __AXMixCycles[head->pb.mixerCtrl >> 16 & 31] +
+                          __AXMixCycles[head->pb.mixerCtrl >> 21 & 31] + __AXMixCycles[head->pb.mixerCtrl >> 26 & 31];
 
                 if (head->pb.remote == TRUE) {
                     cycles += 613;
 
                     if (head->pb.rmtIIR.lpf.on == AX_PB_LPF_ON) {
                         cycles += 118;
-                    }
-                    else if (head->pb.rmtIIR.biquad.on == AX_PB_BIQUAD_ON) {
+                    } else if (head->pb.rmtIIR.biquad.on == AX_PB_BIQUAD_ON) {
                         cycles += 834;
                     }
 
-                    cycles +=
-                        __AXRmtMixCycles[head->pb.rmtMixerCtrl >> 0 & 3] +
-                        __AXRmtMixCycles[head->pb.rmtMixerCtrl >> 2 & 3] +
-                        __AXRmtMixCycles[head->pb.rmtMixerCtrl >> 4 & 3] +
-                        __AXRmtMixCycles[head->pb.rmtMixerCtrl >> 6 & 3] +
-                        __AXRmtMixCycles[head->pb.rmtMixerCtrl >> 8 & 3] +
-                        __AXRmtMixCycles[head->pb.rmtMixerCtrl >> 10 & 3] +
-                        __AXRmtMixCycles[head->pb.rmtMixerCtrl >> 12 & 3] +
-                        __AXRmtMixCycles[head->pb.rmtMixerCtrl >> 14 & 3];
+                    cycles += __AXRmtMixCycles[head->pb.rmtMixerCtrl >> 0 & 3] + __AXRmtMixCycles[head->pb.rmtMixerCtrl >> 2 & 3] +
+                              __AXRmtMixCycles[head->pb.rmtMixerCtrl >> 4 & 3] + __AXRmtMixCycles[head->pb.rmtMixerCtrl >> 6 & 3] +
+                              __AXRmtMixCycles[head->pb.rmtMixerCtrl >> 8 & 3] + __AXRmtMixCycles[head->pb.rmtMixerCtrl >> 10 & 3] +
+                              __AXRmtMixCycles[head->pb.rmtMixerCtrl >> 12 & 3] + __AXRmtMixCycles[head->pb.rmtMixerCtrl >> 14 & 3];
                 }
 
                 if (__AXMaxDspCycles > cycles) {
                     __AXServiceVPB(head);
-                }
-                else {
+                } else {
                     __AXDumpVPB(head);
                 }
-            }
-            else {
+            } else {
                 __AXServiceVPB(head);
             }
 
@@ -405,8 +495,7 @@ void __AXSyncPBs(u32 baseCycles) {
 
     __AXRecDspCycles = cycles;
 
-    for (head = __AXGetStackHead(AX_PRIORITY_FREE); head != NULL;
-         head = head->next) {
+    for (head = __AXGetStackHead(AX_PRIORITY_FREE); head != NULL; head = head->next) {
         if (head->depop) {
             __AXDepopVoice(&__AXPB[head->index]);
         }
@@ -426,9 +515,7 @@ AXPB* __AXGetPBs() {
 void __AXSetPBDefault(AXVPB* vpb) {
     vpb->pb.state = AX_VOICE_STOP;
     vpb->pb.itd.flag = 0;
-    vpb->sync = AX_PBSYNC_STATE | AX_PBSYNC_ITD | AX_PBSYNC_LPF |
-                AX_PBSYNC_BIQUAD | AX_PBSYNC_REMOTE | AX_PBSYNC_RMTSRC |
-                AX_PBSYNC_RMTIIR;
+    vpb->sync = AX_PBSYNC_STATE | AX_PBSYNC_ITD | AX_PBSYNC_LPF | AX_PBSYNC_BIQUAD | AX_PBSYNC_REMOTE | AX_PBSYNC_RMTSRC | AX_PBSYNC_RMTIIR;
     vpb->pb.lpf.on = 0;
     vpb->pb.biquad.on = 0;
     vpb->pb.remote = 0;
@@ -457,18 +544,15 @@ static void __AXVPBInitCommon() {
     __AXMaxDspCycles = OS_BUS_CLOCK / 667;
     __AXRecDspCycles = 0;
 
-    for (dst = (u32*)__AXPB, i = __AXMaxVoices * (sizeof(AXPB) / sizeof(u32));
-         i > 0; i--) {
+    for (dst = (u32*)__AXPB, i = __AXMaxVoices * (sizeof(AXPB) / sizeof(u32)); i > 0; i--) {
         *dst++ = 0;
     }
 
-    for (dst = (u32*)__AXITD, i = __AXMaxVoices * (sizeof(AXPBITDBUFFER) / sizeof(u32));
-         i > 0; i--) {
+    for (dst = (u32*)__AXITD, i = __AXMaxVoices * (sizeof(AXPBITDBUFFER) / sizeof(u32)); i > 0; i--) {
         *dst++ = 0;
     }
 
-    for (dst = (u32*)__AXVPB, i = __AXMaxVoices * (sizeof(AXVPB) / sizeof(u32));
-         i > 0; i--) {
+    for (dst = (u32*)__AXVPB, i = __AXMaxVoices * (sizeof(AXVPB) / sizeof(u32)); i > 0; i--) {
         *dst++ = 0;
     }
 
@@ -484,8 +568,7 @@ static void __AXVPBInitCommon() {
         if (i == __AXMaxVoices - 1) {
             pb->nextHi = pb->nextLo = 0;
             vpb->pb.nextHi = vpb->pb.nextLo = 0;
-        }
-        else {
+        } else {
             vpb->pb.nextHi = ADDRHI((u32)pb + 320);
             vpb->pb.nextLo = ADDRLO((u32)pb + 320);
 
@@ -580,37 +663,61 @@ void AXSetVoiceMix(AXVPB* vpb, AXPBMIX* mix) {
     s32 mixerCtrl;
     u16* dst;
     u16* src;
-    
+
     src = (u16*)mix;
     dst = (u16*)&vpb->pb.mix;
     mixerCtrl = 0;
 
     old = OSDisableInterrupts();
 
-    if ((*dst++ = *src++)) mixerCtrl |= 0x1;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x5;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x2;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x6;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x10000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x50000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x20000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x60000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x200000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0xA00000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x400000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0xC00000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x4000000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x14000000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x8000000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x18000000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x8;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x18;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x80000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x180000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x1000000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x3000000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x20000000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x60000000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x1;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x5;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x2;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x6;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x10000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x50000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x20000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x60000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x200000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0xA00000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x400000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0xC00000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x4000000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x14000000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x8000000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x18000000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x8;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x18;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x80000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x180000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x1000000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x3000000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x20000000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x60000000;
 
     vpb->pb.mixerCtrl = mixerCtrl;
     vpb->sync |= (AX_PBSYNC_MIX | AX_PBSYNC_MIXER_CTRL);
@@ -683,8 +790,7 @@ void AXSetVoiceAddr(AXVPB* vpb, AXPBADDR* addr) {
         }
     }
 
-    vpb->sync &= ~(AX_PBSYNC_LOOP_FLAG | AX_PBSYNC_LOOP_ADDR |
-                   AX_PBSYNC_END_ADDR | AX_PBSYNC_CURR_ADDR);
+    vpb->sync &= ~(AX_PBSYNC_LOOP_FLAG | AX_PBSYNC_LOOP_ADDR | AX_PBSYNC_END_ADDR | AX_PBSYNC_CURR_ADDR);
     vpb->sync |= AX_PBSYNC_ADDR | AX_PBSYNC_ADPCM;
 
     OSRestoreInterrupts(enabled);
@@ -715,16 +821,36 @@ void AXSetVoiceAdpcm(AXVPB* vpb, AXPBADPCM* adpcm) {
     old = OSDisableInterrupts();
 
     {
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
     }
     vpb->sync |= AX_PBSYNC_ADPCM;
     OSRestoreInterrupts(old);
@@ -740,13 +866,27 @@ void AXSetVoiceSrc(AXVPB* vpb, AXPBSRC* src_) {
 
     old = OSDisableInterrupts();
     {
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
     }
     vpb->sync &= ~(AX_PBSYNC_SRC_RATIO);
     vpb->sync |= AX_PBSYNC_SRC;
@@ -758,7 +898,7 @@ void AXSetVoiceSrcRatio(AXVPB* vpb, float ratio) {
     BOOL old;
 
     old = OSDisableInterrupts();
-    r = 65536.0f* ratio;
+    r = 65536.0f * ratio;
     vpb->pb.src.ratioHi = ((u32)r >> 0x10);
     vpb->pb.src.ratioLo = ((u32)r);
     vpb->sync |= AX_PBSYNC_SRC_RATIO;
@@ -774,9 +914,15 @@ void AXSetVoiceAdpcmLoop(AXVPB* vpb, AXPBADPCMLOOP* adpcmloop) {
     src = (void*)adpcmloop;
     old = OSDisableInterrupts();
     {
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
-        *(dst) = *(src); dst+=1; src+=1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
+        *(dst) = *(src);
+        dst += 1;
+        src += 1;
     }
     vpb->sync |= AX_PBSYNC_ADPCM_LOOP;
     OSRestoreInterrupts(old);
@@ -792,10 +938,18 @@ void AXSetVoiceLpf(AXVPB* vpb, AXPBLPF* lpf) {
 
     old = OSDisableInterrupts();
 
-    *dst = *src; dst++; src++;
-    *dst = *src; dst++; src++;
-    *dst = *src; dst++; src++;
-    *dst = *src; dst++; src++;
+    *dst = *src;
+    dst++;
+    src++;
+    *dst = *src;
+    dst++;
+    src++;
+    *dst = *src;
+    dst++;
+    src++;
+    *dst = *src;
+    dst++;
+    src++;
     vpb->sync |= AX_PBSYNC_LPF;
 
     OSRestoreInterrupts(old);
@@ -812,7 +966,7 @@ void AXSetVoiceLpfCoefs(AXVPB* vpb, u16 a0, u16 b0) {
     OSRestoreInterrupts(old);
 }
 
-#define fM_PI   3.14159265358979323846f /* Must be as float */
+#define fM_PI 3.14159265358979323846f /* Must be as float */
 
 void AXGetLpfCoefs(u16 freq, u16* a, u16* b) {
     f32 rf31 = 2.0f - (f32)cos(2 * fM_PI * freq / AX_SAMPLE_RATE);
@@ -822,10 +976,10 @@ void AXGetLpfCoefs(u16 freq, u16* a, u16* b) {
     *a = 32767 - *b;
 }
 
-void AXSetVoiceRmtOn(AXVPB *vpb, u16 on) {
+void AXSetVoiceRmtOn(AXVPB* vpb, u16 on) {
     BOOL old = OSDisableInterrupts();
     vpb->pb.remote = on;
-    vpb->sync |= AX_PBSYNC_REMOTE; 
+    vpb->sync |= AX_PBSYNC_REMOTE;
     OSRestoreInterrupts(old);
 }
 
@@ -834,29 +988,45 @@ void AXSetVoiceRmtMix(AXVPB* vpb, AXPBRMTMIX* mix) {
     u16 mixerCtrl;
     u16* dst;
     u16* src;
-    
+
     src = (u16*)mix;
     dst = (u16*)&vpb->pb.rmtMix;
     mixerCtrl = 0;
 
     old = OSDisableInterrupts();
 
-    if ((*dst++ = *src++)) mixerCtrl |= 0x1;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x2;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x4;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x8;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x10;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x20;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x40;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x80;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x100;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x200;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x400;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x800;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x1000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x2000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x4000;
-    if ((*dst++ = *src++)) mixerCtrl |= 0x8000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x1;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x2;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x4;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x8;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x10;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x20;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x40;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x80;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x100;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x200;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x400;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x800;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x1000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x2000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x4000;
+    if ((*dst++ = *src++))
+        mixerCtrl |= 0x8000;
 
     vpb->pb.rmtMixerCtrl = mixerCtrl;
     vpb->sync |= (AX_PBSYNC_RMTMIX | AX_PBSYNC_RMT_MIXER_CTRL);

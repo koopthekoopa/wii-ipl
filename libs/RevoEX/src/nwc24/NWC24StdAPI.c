@@ -1,5 +1,5 @@
-#include <revolution/nwc24.h>
 #include <private/nwc24.h>
+#include <revolution/nwc24.h>
 
 #include <ctype.h>
 
@@ -17,7 +17,8 @@ char* Mail_strcpy(char* dest, const char* src) {
 
 int Mail_strlen(const char* str) {
     int i;
-    for (i = 0; *str != 0; i++, str++) {}
+    for (i = 0; *str != 0; i++, str++) {
+    }
     return i;
 }
 

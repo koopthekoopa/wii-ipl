@@ -1,13 +1,13 @@
-#include <revolution/sc.h>
 #include <private/sc.h>
+#include <revolution/sc.h>
 
 #include <revolution/os.h>
 
 #include <string.h>
 
-static SCSimpleAddress  TempSimpleAddress;
+static SCSimpleAddress TempSimpleAddress;
 
-#define MASK(x) (0xFF<<(x))
+#define MASK(x) (0xFF << (x))
 
 u8 SCGetAspectRatio() {
     u8 item;
@@ -15,8 +15,7 @@ u8 SCGetAspectRatio() {
     if (!SCFindU8Item(&item, SC_ITEM_ID_IPL_ASPECT_RATIO)) {
         // Default value
         item = SC_ASPECT_RATIO_4x3;
-    }
-    else {
+    } else {
         if (item != SC_ASPECT_RATIO_16x9) {
             item = SC_ASPECT_RATIO_4x3;
         }
@@ -35,12 +34,10 @@ s8 SCGetDisplayOffsetH() {
     if (!SCFindS8Item(&item, SC_ITEM_ID_IPL_DISPLAY_OFFSET_H)) {
         // Default value
         item = 0;
-    }
-    else {
+    } else {
         if (item < -32) {
             item = -32;
-        }
-        else if (item > 32) {
+        } else if (item > 32) {
             item = 32;
         }
     }
@@ -58,8 +55,7 @@ u8 SCGetEuRgb60Mode() {
     if (!SCFindU8Item(&item, SC_ITEM_ID_IPL_EURGB60_MODE)) {
         // Default value
         item = SC_EURGB60_MODE_OFF;
-    }
-    else {
+    } else {
         if (item != SC_EURGB60_MODE_ON) {
             item = SC_EURGB60_MODE_OFF;
         }
@@ -87,12 +83,10 @@ u8 SCGetLanguage() {
         // Default value
         if (SCGetProductArea() == SC_LANG_JAPANESE) {
             item = SC_LANG_JAPANESE;
-        }
-        else {
+        } else {
             item = SC_LANG_ENGLISH;
         }
-    }
-    else {
+    } else {
         if (item > SC_LANG_KOREAN) {
             item = SC_LANG_ENGLISH;
         }
@@ -119,8 +113,7 @@ u8 SCGetProgressiveMode() {
     if (!SCFindU8Item(&item, SC_ITEM_ID_IPL_PROGRESSIVE_MODE)) {
         // Default value
         item = SC_PROGRESSIVE_MODE_OFF;
-    }
-    else {
+    } else {
         if (item != SC_PROGRESSIVE_MODE_ON) {
             item = SC_PROGRESSIVE_MODE_OFF;
         }
@@ -139,8 +132,7 @@ u8 SCGetScreenSaverMode() {
     if (!SCFindU8Item(&item, SC_ITEM_ID_IPL_SCREEN_SAVER_MODE)) {
         // Default value
         item = SC_SCREEN_SAVER_MODE_ON;
-    }
-    else {
+    } else {
         if (item != SC_SCREEN_SAVER_MODE_ON) {
             item = SC_SCREEN_SAVER_MODE_OFF;
         }
@@ -159,8 +151,7 @@ u8 SCGetSoundMode() {
     if (!SCFindU8Item(&item, SC_ITEM_ID_IPL_SOUND_MODE)) {
         // Default value
         item = SC_SOUND_MODE_STEREO;
-    }
-    else {
+    } else {
         if (item != SC_SOUND_MODE_MONO && item != SC_SOUND_MODE_STEREO && item != SC_SOUND_MODE_SURROUND) {
             item = SC_SOUND_MODE_STEREO;
         }
@@ -210,12 +201,10 @@ u32 SCGetBtDpdSensibility() {
     if (!SCFindU32Item(&item, SC_ITEM_ID_BT_DPD_SENSIBILITY)) {
         // Default value
         item = 2;
-    }
-    else {
+    } else {
         if (item < 1) {
             item = 1;
-        }
-        else if (item > 5) {
+        } else if (item > 5) {
             item = 5;
         }
     }
@@ -248,8 +237,7 @@ u8 SCGetWpadMotorMode() {
     if (!SCFindU8Item(&item, SC_ITEM_ID_BT_MOTOR_MODE)) {
         // Default value
         item = SC_WPAD_MOTOR_MODE_ON;
-    }
-    else {
+    } else {
         if (item != SC_SCREEN_SAVER_MODE_ON) {
             item = SC_SCREEN_SAVER_MODE_OFF;
         }
@@ -268,8 +256,7 @@ u8 SCGetWpadSensorBarPosition() {
     if (!SCFindU8Item(&item, SC_ITEM_ID_BT_SENSOR_BAR_POSITION)) {
         // Default value
         item = SC_WPAD_SENSOR_BAR_POSITION_BOTTOM;
-    }
-    else {
+    } else {
         if (item != SC_WPAD_SENSOR_BAR_POSITION_TOP) {
             item = SC_WPAD_SENSOR_BAR_POSITION_BOTTOM;
         }
@@ -288,8 +275,7 @@ u8 SCGetWpadSpeakerVolume() {
     if (!SCFindU8Item(&item, SC_ITEM_ID_BT_SPEAKER_VOLUME)) {
         // Default value
         item = 89;
-    }
-    else {
+    } else {
         if (item > 127) {
             item = 127;
         }
@@ -321,10 +307,9 @@ BOOL SCGetSimpleAddressData(SCSimpleAddress* address) {
     BOOL enabled;
     u32 id;
 
-    if (SCFindByteArrayItem(address, sizeof(*address), SC_ITEM_ID_IPL_SIMPLE_ADDRESS)
-    &&  address->id != 0xFFFFFFFF
-    && (address->id & MASK(SC_SIMPLE_ADDRESS_ID_COUNTRY)) != 0 && (address->id & MASK(SC_SIMPLE_ADDRESS_ID_COUNTRY)) != 0xFF000000
-    && (address->id & MASK(SC_SIMPLE_ADDRESS_ID_REGION)) != 0xFF0000) {
+    if (SCFindByteArrayItem(address, sizeof(*address), SC_ITEM_ID_IPL_SIMPLE_ADDRESS) && address->id != 0xFFFFFFFF &&
+        (address->id & MASK(SC_SIMPLE_ADDRESS_ID_COUNTRY)) != 0 && (address->id & MASK(SC_SIMPLE_ADDRESS_ID_COUNTRY)) != 0xFF000000 &&
+        (address->id & MASK(SC_SIMPLE_ADDRESS_ID_REGION)) != 0xFF0000) {
         enabled = OSDisableInterrupts();
         id = address->id;
 
@@ -335,8 +320,7 @@ BOOL SCGetSimpleAddressData(SCSimpleAddress* address) {
 
         OSRestoreInterrupts(enabled);
         return TRUE;
-    }
-    else {
+    } else {
         return FALSE;
     }
 }
@@ -396,8 +380,7 @@ u8 SCGetUpdateType() {
     if (!SCFindU8Item(&item, SC_ITEM_ID_IPL_UPDATE_TYPE)) {
         // Default value
         item = SC_UPDATE_TYPE_NONE;
-    }
-    else {
+    } else {
         if (item != SC_UPDATE_TYPE_DISC && item != SC_UPDATE_TYPE_NETWORK) {
             item = SC_UPDATE_TYPE_NONE;
         }
@@ -458,14 +441,9 @@ BOOL SCSetInstalledChannelAppCount(u32 count) {
     return SCReplaceU32Item(count, SC_ITEM_ID_IPL_INSTALLED_CHANNEL_APP_COUNT);
 }
 
-#define TITLE_TYPE(x) ((u32)(x>>32))
+#define TITLE_TYPE(x) ((u32)(x >> 32))
 
-#define IS_VALID_TEMP_TYPE(tId)        \
-      ((tId) == 0x00010001    \
-    || (tId) == 0x00010003    \
-    || (tId) == 0x00010004    \
-    || (tId) == 0x00010006    \
-    || (tId) == 0x00010007)
+#define IS_VALID_TEMP_TYPE(tId) ((tId) == 0x00010001 || (tId) == 0x00010003 || (tId) == 0x00010004 || (tId) == 0x00010006 || (tId) == 0x00010007)
 
 u64 SCGetTmpTitleID() {
     u64 item;

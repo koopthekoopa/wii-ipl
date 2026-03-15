@@ -10,17 +10,11 @@
 
 namespace ipl {
     namespace scene {
-        TextBalloon::TextBalloon(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* directory, const char* fileName, const math::VEC3& unk2, f32 unk3, f32 unk4) :
-        unk_0x08(FALSE),
-        mpText(NULL),
-        mTextLen(0),
-        mBalloonPos(unk2),
-        unk_0x28(0),
-        unk_0x2C(1),
-        unk_0x30(unk3),
-        unk_0x34(unk4),
-        mWaitUntilFadeIn(0) {
-            mpLayout = new(heap, 4) layout::Object(heap, layoutFile, directory, fileName);
+        TextBalloon::TextBalloon(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* directory, const char* fileName, const math::VEC3& unk2,
+                                 f32 unk3, f32 unk4)
+            : unk_0x08(FALSE), mpText(NULL), mTextLen(0), mBalloonPos(unk2), unk_0x28(0), unk_0x2C(1), unk_0x30(unk3), unk_0x34(unk4),
+              mWaitUntilFadeIn(0) {
+            mpLayout = new (heap, 4) layout::Object(heap, layoutFile, directory, fileName);
             mpLayout->bind("my_IplTopBalloon_a_BalloonInOut.brlan");
             mpLayout->finishBinding();
 
@@ -157,8 +151,7 @@ namespace ipl {
                     mpLayout->getAnim()->setAnmType(ANIM_TYPE_BACKWARD);
                     mpLayout->getAnim()->restart();
                 }
-            }
-            else if (unk_0x08 == TRUE) {
+            } else if (unk_0x08 == TRUE) {
                 mWaitUntilFadeIn = 0;
                 unk_0x08 = FALSE;
             }
@@ -175,8 +168,7 @@ namespace ipl {
 
             if (SCGetAspectRatio() == SC_ASPECT_RATIO_16x9) {
                 temp0 = unk_0x30;
-            }
-            else {
+            } else {
                 temp0 = unk_0x34;
             }
 
@@ -189,7 +181,7 @@ namespace ipl {
             System::getProjectionRect(&proj16x9);
             System::getProjectionRect4x3(&proj4x3);
 
-            switch(unk_0x28) {
+            switch (unk_0x28) {
                 case 1: {
                     temp1 = get_size("W_Base")->width / 2;
                     break;
@@ -211,8 +203,7 @@ namespace ipl {
 
             if (temp2 < temp0) {
                 temp3 = temp0 - temp2;
-            }
-            else if (temp4 < temp0) {
+            } else if (temp4 < temp0) {
                 temp3 = temp4 - temp0;
             }
 
@@ -231,7 +222,7 @@ namespace ipl {
                 strLen = 32;
             }
 
-            wchar_t fullStr[(32+3)] = L"";
+            wchar_t fullStr[(32 + 3)] = L"";
 
             wcsncpy(fullStr, text, 32);
 
@@ -251,22 +242,20 @@ namespace ipl {
                     }
 
                     if (System::getRegion() == SC_PRODUCT_AREA_JPN) {
-                        fullStr[i-1] = NULL;
-                        fullStr[i-2] = L'…';
-                    }
-                    else {
+                        fullStr[i - 1] = NULL;
+                        fullStr[i - 2] = L'…';
+                    } else {
                         temp1 = -1.179962f;
                         extraLen = 2;
-                        fullStr[i+1] = NULL;
-                        fullStr[i]   = '.';
-                        fullStr[i-1] = '.';
-                        fullStr[i-2] = '.';
+                        fullStr[i + 1] = NULL;
+                        fullStr[i] = '.';
+                        fullStr[i - 1] = '.';
+                        fullStr[i - 2] = '.';
                     }
                 }
-            }
-            else {
+            } else {
                 textPane->FreeStringBuffer();
-                textPane->AllocStringBuffer((32+3));
+                textPane->AllocStringBuffer((32 + 3));
                 textPane->SetString(fullStr);
             }
 
@@ -276,9 +265,7 @@ namespace ipl {
             System::getProjectionRect16x9(&proj16x9);
 
             f32 locationAdjust = proj16x9.GetWidth() / proj4x3.GetWidth();
-            f32 temp1 = SCGetAspectRatio() == SC_ASPECT_RATIO_16x9 ?
-                                                locationAdjust :
-                                                1.0f;
+            f32 temp1 = SCGetAspectRatio() == SC_ASPECT_RATIO_16x9 ? locationAdjust : 1.0f;
 
             nw4r::ut::Rect textRect = textPane->GetTextDrawRect(*mpLayout->getDrawInfo());
 
@@ -300,5 +287,5 @@ namespace ipl {
             const nw4r::lyt::Size& size = mpLayout->FindPaneByName(paneName)->GetSize();
             return &size;
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

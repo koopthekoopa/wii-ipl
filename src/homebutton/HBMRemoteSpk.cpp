@@ -80,8 +80,7 @@ namespace homebutton {
                         pInfo->seId = -1;
                         pInfo->in_pcm = NULL;
                     }
-                }
-                else {
+                } else {
                     pInfo->cannotSendCnt++;
 
                     // @bug 300 is out of range of a signed, 8 bit integer
@@ -109,8 +108,7 @@ namespace homebutton {
 
         if (pSpkSeBuf != NULL) {
             available = ARCInitHandle(pSpkSeBuf, &handle);
-        }
-        else {
+        } else {
             available = false;
         }
 
@@ -142,7 +140,8 @@ namespace homebutton {
         }
 
         OSCreateAlarm(&speakerAlarm);
-        OSSetPeriodicAlarm(&speakerAlarm, OSGetTime(), OSNanosecondsToTicks(nw4r::snd::detail::RemoteSpeakerManager::SPEAKER_ALARM_PERIOD_NSEC),&UpdateSpeaker);
+        OSSetPeriodicAlarm(&speakerAlarm, OSGetTime(), OSNanosecondsToTicks(nw4r::snd::detail::RemoteSpeakerManager::SPEAKER_ALARM_PERIOD_NSEC),
+                           &UpdateSpeaker);
     }
 
     void RemoteSpk::Stop() {
@@ -249,4 +248,4 @@ namespace homebutton {
     bool RemoteSpk::isPlayReady(s32 chan) const {
         return info[chan].playReady != false;
     }
-}
+}  // namespace homebutton

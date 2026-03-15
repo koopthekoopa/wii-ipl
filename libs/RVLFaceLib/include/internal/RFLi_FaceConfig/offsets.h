@@ -8,6 +8,7 @@
 extern "C" {
 #endif
 
+// clang-format off
 static const u8 RFLi_EYE_ROT_OFFSET[] = {
     29, 28, 28, 28, 29, 28, 28, 28,
     29, 28, 28, 28, 28, 29, 29, 28,
@@ -23,9 +24,10 @@ static const u8 RFLi_EYEBROW_ROT_OFFSET[] = {
     28, 25, 26, 24, 27, 27, 26, 26,
     25, 25, 26, 26, 27, 26, 25, 27
 };
+// clang-format on
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // RFLi_FACE_CONFIGURATION_OFFSETS_H
+#endif  // RFLi_FACE_CONFIGURATION_OFFSETS_H

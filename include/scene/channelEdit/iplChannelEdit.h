@@ -6,13 +6,13 @@
 namespace ipl {
     namespace scene {
         SCENE_CLASS(ChannelEdit) {
-            public:
-                ChannelEdit(EGG::Heap* heap);
+        public:
+            ChannelEdit(EGG::Heap * heap);
 
-            private:
-                u8  unk_0x54[0x84];
+        private:
+            u8 unk_0x54[0x84];
         };
-    }
-}
+    }  // namespace scene
+}  // namespace ipl
 
-#endif // IPL_SCENE_CHANNEL_EDIT_H
+#endif  // IPL_SCENE_CHANNEL_EDIT_H

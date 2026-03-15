@@ -1,5 +1,5 @@
-#include <revolution/nwc24.h>
 #include <private/nwc24/NWC24Std.h>
+#include <revolution/nwc24.h>
 
 #include <string.h>
 
@@ -26,11 +26,11 @@ static ChkHostNameError CheckHostName(const char* hostName, u32 hostNameLength);
      - ... That's it!!
 */
 extern "C" NWC24Err NWC24CheckPublicMailAddr_(const char* addr) {
-    int     i, j;
-    int     len;
-    BOOL    readingDomain;
+    int i, j;
+    int len;
+    BOOL readingDomain;
 
-    static const char specials[] = { '(', ')', '<', '>', '[', ']', ':', ';', '\\', ',', '"' };
+    static const char specials[] = {'(', ')', '<', '>', '[', ']', ':', ';', '\\', ',', '"'};
 
     // Check parameters
     if (addr == NULL) {
@@ -47,7 +47,7 @@ extern "C" NWC24Err NWC24CheckPublicMailAddr_(const char* addr) {
     }
 
     readingDomain = FALSE;
-    
+
     for (i = 0; i < len; i++) {
         char ch = addr[i];
 
@@ -62,7 +62,7 @@ extern "C" NWC24Err NWC24CheckPublicMailAddr_(const char* addr) {
         }
 
         // If the character is not a letter or symbol, invalid!
-        if (ch <= ' ' || ch >= '~'+1) {
+        if (ch <= ' ' || ch >= '~' + 1) {
             return NWC24_ERR_FORMAT;
         }
 
@@ -80,16 +80,16 @@ extern "C" NWC24Err NWC24CheckPublicMailAddr_(const char* addr) {
     }
 
     // If the hostname is not valid, invalid!
-    if (CheckHostName(&addr[i+1], (len - i)) < CHECK_HOSTNAME_SUCCESS) {
+    if (CheckHostName(&addr[i + 1], (len - i)) < CHECK_HOSTNAME_SUCCESS) {
         return NWC24_ERR_FORMAT;
     }
 
-    return strnicmp(&addr[i], NWC24GetAccountDomain(), (len - i)+1) == 0 ? NWC24_ERR_PROTECTED : NWC24_OK;
+    return strnicmp(&addr[i], NWC24GetAccountDomain(), (len - i) + 1) == 0 ? NWC24_ERR_PROTECTED : NWC24_OK;
 }
 
 static ChkHostNameError CheckHostName(const char* hostName, u32 hostNameLength) {
-    int     i;
-    BOOL    foundDot;
+    int i;
+    BOOL foundDot;
 
     // Parameter check
     if (hostNameLength == 0) {
@@ -129,9 +129,7 @@ static ChkHostNameError CheckHostName(const char* hostName, u32 hostNameLength) 
         }
 
         // Check if there are invalid characters
-        if ((ch < '0' || ch > '9')
-        && (ch < 'a' || ch > 'z') && (ch < 'A' || ch > 'Z')
-        && (ch != '-' && ch != '_')) {
+        if ((ch < '0' || ch > '9') && (ch < 'a' || ch > 'z') && (ch < 'A' || ch > 'Z') && (ch != '-' && ch != '_')) {
             return CHECK_HOSTNAME_INVALID_CHARACTERS;
         }
 
@@ -144,7 +142,7 @@ static ChkHostNameError CheckHostName(const char* hostName, u32 hostNameLength) 
     }
 
     // Check if the end of hostname has a dot
-    if (i > 0 && hostName[i-1] == '.') {
+    if (i > 0 && hostName[i - 1] == '.') {
         return CHECK_HOSTNAME_DOT_AT_END;
     }
 

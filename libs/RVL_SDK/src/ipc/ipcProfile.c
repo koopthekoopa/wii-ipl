@@ -13,7 +13,7 @@ static u32 IpcReqPtrArray[MAX_REQUEST];
 static void AddReqInfo(void* ptr, s32 fd);
 static void DelReqInfo(void* ptr, s32 fd);
 
-DECOMP_FORCE_ACTIVE(ipcProfile_c, IpcFdArray); // Force `IpcFdArray` to be first
+DECOMP_FORCE_ACTIVE(ipcProfile_c, IpcFdArray);  // Force `IpcFdArray` to be first
 
 void IPCiProfInit() {
     u32 i;
@@ -27,7 +27,7 @@ void IPCiProfInit() {
     }
 }
 
-void IPCiProfQueueReq(void *req, s32 fd) {
+void IPCiProfQueueReq(void* req, s32 fd) {
     ++IpcNumPendingReqs;
     ++IpcNumUnIssuedReqs;
     AddReqInfo(req, fd);

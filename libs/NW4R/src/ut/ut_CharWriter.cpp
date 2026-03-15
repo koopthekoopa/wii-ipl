@@ -5,17 +5,17 @@
 namespace nw4r {
     void SetupGXCommon() {
         static ut::Color fog(ut::Color::NOCOLOR);
-    
+
         GXSetFog(GX_FOG_NONE, 0.0f, 0.0f, 0.0f, 0.0f, fog);
-    
+
         GXSetTevSwapModeTable(GX_TEV_SWAP0, GX_CH_RED, GX_CH_GREEN, GX_CH_BLUE, GX_CH_ALPHA);
         GXSetZTexture(GX_ZT_DISABLE, GX_TF_Z8, 0);
-    
+
         GXSetNumChans(1);
-    
+
         GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_REG, GX_SRC_VTX, GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE);
         GXSetChanCtrl(GX_COLOR1A1, GX_FALSE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE);
-    
+
         GXSetNumTexGens(1);
         GXSetTexCoordGen(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY);
         GXSetNumIndStages(0);
@@ -23,13 +23,9 @@ namespace nw4r {
     }
 
     namespace ut {
-        CharWriter::LoadingTexture  CharWriter::mLoadingTexture;
+        CharWriter::LoadingTexture CharWriter::mLoadingTexture;
 
-        CharWriter::CharWriter() :
-        mAlpha(255),
-        mIsWidthFixed(false),
-        mFixedWidth(0.0f),
-        mFont(NULL) {
+        CharWriter::CharWriter() : mAlpha(255), mIsWidthFixed(false), mFixedWidth(0.0f), mFont(NULL) {
             mLoadingTexture.Reset();
             ResetColorMapping();
             SetGradationMode(GRADMODE_NONE);
@@ -39,23 +35,22 @@ namespace nw4r {
             EnableLinearFilter(true, true);
         }
 
-        CharWriter::~CharWriter() {}
+        CharWriter::~CharWriter() {
+        }
 
         void CharWriter::SetFont(const Font& font) {
             mFont = &font;
         }
-        const Font *CharWriter::GetFont() const {
+        const Font* CharWriter::GetFont() const {
             return mFont;
         }
 
         void CharWriter::SetupGX() {
             ResetTextureCache();
 
-            if (mColorMapping.min != DEFAULT_COLOR_MAPPING_MIN
-            || mColorMapping.max != DEFAULT_COLOR_MAPPING_MAX) {
+            if (mColorMapping.min != DEFAULT_COLOR_MAPPING_MIN || mColorMapping.max != DEFAULT_COLOR_MAPPING_MAX) {
                 SetupGXWithColorMapping(mColorMapping.min, mColorMapping.max);
-            }
-            else if (mFont) {
+            } else if (mFont) {
                 GXTexFmt format = mFont->GetTextureFormat();
                 switch (format) {
                     case GX_TF_I4:
@@ -79,8 +74,7 @@ namespace nw4r {
                         break;
                     }
                 }
-            }
-            else {
+            } else {
                 SetupGXDefault();
             }
         }
@@ -190,8 +184,7 @@ namespace nw4r {
 
                 width = mFixedWidth;
                 left = margin + widths.left * mScale.x;
-            }
-            else {
+            } else {
                 width = widths.charWidth * mScale.x;
                 left = widths.left * mScale.x;
             }
@@ -251,7 +244,8 @@ namespace nw4r {
 
             LoadTexture(glyph, GX_TEXMAP0);
 
-            GXBegin(GX_QUADS, GX_VTXFMT0, 4); {
+            GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+            {
                 GXPosition3f32(posLeft, posTop, posZ);
                 GXColor1u32(mVertexColor.lu);
                 GXTexCoord2u16(texLeft, texTop);
@@ -267,7 +261,8 @@ namespace nw4r {
                 GXPosition3f32(posLeft, posBottom, posZ);
                 GXColor1u32(mVertexColor.ld);
                 GXTexCoord2u16(texLeft, texBottom);
-            } GXEnd();
+            }
+            GXEnd();
         }
 
         void CharWriter::LoadTexture(const Glyph& glyph, GXTexMapID slot) {
@@ -368,5 +363,5 @@ namespace nw4r {
         void CharWriter::SetupGXForRGBA() {
             SetupGXDefault();
         }
-    }
-}
+    }  // namespace ut
+}  // namespace nw4r

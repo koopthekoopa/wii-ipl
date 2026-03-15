@@ -7,8 +7,8 @@
 extern "C" {
 #endif
 
-void*   __OSGetIPCBufferHi();
-void*   __OSGetIPCBufferLo();
+void* __OSGetIPCBufferHi();
+void* __OSGetIPCBufferLo();
 
 #ifdef __cplusplus
 }

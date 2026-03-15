@@ -9,12 +9,12 @@ extern "C" {
 
 typedef int (*COMPARE_FUNC)(const void*, const void*);
 
-void*   bsearch(const void* key, const void* ptr, size_t count, size_t size, COMPARE_FUNC comp);
+void* bsearch(const void* key, const void* ptr, size_t count, size_t size, COMPARE_FUNC comp);
 
-void    qsort(void* ptr, size_t count, size_t size, COMPARE_FUNC comp);
+void qsort(void* ptr, size_t count, size_t size, COMPARE_FUNC comp);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // MSL_SEARCH_H
+#endif  // MSL_SEARCH_H

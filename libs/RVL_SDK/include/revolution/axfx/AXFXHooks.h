@@ -7,14 +7,14 @@
 extern "C" {
 #endif
 
-typedef void*   (*AXFXAllocHook)(u32);
-typedef void    (*AXFXFreeHook)(void*);
+typedef void* (*AXFXAllocHook)(u32);
+typedef void (*AXFXFreeHook)(void*);
 
-void    AXFXSetHooks(AXFXAllocHook alloc, AXFXFreeHook free);
-void    AXFXGetHooks(AXFXAllocHook* alloc, AXFXFreeHook* free);
+void AXFXSetHooks(AXFXAllocHook alloc, AXFXFreeHook free);
+void AXFXGetHooks(AXFXAllocHook* alloc, AXFXFreeHook* free);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // REVOLUTION_AXFX_HOOKS_H
+#endif  // REVOLUTION_AXFX_HOOKS_H

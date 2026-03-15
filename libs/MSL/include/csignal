@@ -6,9 +6,9 @@
 #ifdef __cplusplus
 
 namespace std {
-    using   ::raise;
-} // namespace std
+    using ::raise;
+}  // namespace std
 
 #endif
 
-#endif // MSL_CSIGNAL_H
+#endif  // MSL_CSIGNAL_H

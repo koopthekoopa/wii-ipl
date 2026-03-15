@@ -1,9 +1,10 @@
 #include <nw4r/lyt/window.h>
 
+#include <nw4r/lyt/common.h>
+#include <nw4r/lyt/layout.h>
 #include <nw4r/lyt/resources.h>
 #include <nw4r/lyt/types.h>
-#include <nw4r/lyt/layout.h>
-#include <nw4r/lyt/common.h>
+
 
 #include <nw4r/math.h>
 
@@ -13,7 +14,7 @@ namespace nw4r {
     namespace lyt {
         NW4R_UT_GET_DERIVED_RUNTIME_TYPEINFO(Window, Pane);
     }
-}
+}  // namespace nw4r
 
 namespace {
     using namespace nw4r;
@@ -27,6 +28,7 @@ namespace {
     TextureFlipInfo& GetTexutreFlipInfo(u8 textureFlip) {
         NW4R_ASSERT(textureFlip < TEXTUREFLIP_MAX);
 
+        // clang-format off
         static TextureFlipInfo flipInfos[] = {                                                      //    0    1    2    3
                                                                                         // in order of    LT   RT   LB   RB
             {{{0, 0}, {1, 0}, {0, 1}, {1, 1}}, {0, 1}}, //    0    1    2    3              No flip
@@ -36,6 +38,7 @@ namespace {
             {{{1, 1}, {0, 1}, {1, 0}, {0, 0}}, {0, 1}}, //    3    2    1    0              Clockwise 180 degrees
             {{{1, 0}, {1, 1}, {0, 0}, {0, 1}}, {1, 0}}  //    1    3    0    2, Index flip  Clockwise 270 degrees 
         };
+        // clang-format on
 
         return flipInfos[textureFlip];
     }
@@ -53,19 +56,17 @@ namespace {
 
         const math::VEC2 tSz(texSize.width, texSize.height);
 
-        texCds[VERTEXCOLOR_LT][ix] = texCds[VERTEXCOLOR_LB][ix] =
-            flipInfo.coords[VERTEXCOLOR_LT][ix];
+        texCds[VERTEXCOLOR_LT][ix] = texCds[VERTEXCOLOR_LB][ix] = flipInfo.coords[VERTEXCOLOR_LT][ix];
 
-        texCds[VERTEXCOLOR_LT][iy] = texCds[VERTEXCOLOR_RT][iy] =
-            flipInfo.coords[VERTEXCOLOR_LT][iy];
+        texCds[VERTEXCOLOR_LT][iy] = texCds[VERTEXCOLOR_RT][iy] = flipInfo.coords[VERTEXCOLOR_LT][iy];
 
         texCds[VERTEXCOLOR_RB][ix] = texCds[VERTEXCOLOR_RT][ix] =
-            flipInfo.coords[VERTEXCOLOR_LT][ix] + polSize.width /
-            ((flipInfo.coords[VERTEXCOLOR_RT][ix] - flipInfo.coords[VERTEXCOLOR_LT][ix]) * tSz[ix]);
-        
+            flipInfo.coords[VERTEXCOLOR_LT][ix] +
+            polSize.width / ((flipInfo.coords[VERTEXCOLOR_RT][ix] - flipInfo.coords[VERTEXCOLOR_LT][ix]) * tSz[ix]);
+
         texCds[VERTEXCOLOR_RB][iy] = texCds[VERTEXCOLOR_LB][iy] =
-            flipInfo.coords[VERTEXCOLOR_LT][iy] + polSize.height /
-            ((flipInfo.coords[VERTEXCOLOR_LB][iy] - flipInfo.coords[VERTEXCOLOR_LT][iy]) * tSz[iy]);
+            flipInfo.coords[VERTEXCOLOR_LT][iy] +
+            polSize.height / ((flipInfo.coords[VERTEXCOLOR_LB][iy] - flipInfo.coords[VERTEXCOLOR_LT][iy]) * tSz[iy]);
     }
 
     void GetRTFrameSize(math::VEC2* pPt, Size* pSize, const math::VEC2& basePt, const Size& winSize, const WindowFrameSize& frameSize) {
@@ -81,19 +82,17 @@ namespace {
 
         const math::VEC2 tSz(texSize.width, texSize.height);
 
-        texCds[VERTEXCOLOR_RT][ix] = texCds[VERTEXCOLOR_RB][ix] =
-            flipInfo.coords[VERTEXCOLOR_RT][ix];
+        texCds[VERTEXCOLOR_RT][ix] = texCds[VERTEXCOLOR_RB][ix] = flipInfo.coords[VERTEXCOLOR_RT][ix];
 
-        texCds[VERTEXCOLOR_RT][iy] = texCds[VERTEXCOLOR_LT][iy] =
-            flipInfo.coords[VERTEXCOLOR_RT][iy];
+        texCds[VERTEXCOLOR_RT][iy] = texCds[VERTEXCOLOR_LT][iy] = flipInfo.coords[VERTEXCOLOR_RT][iy];
 
         texCds[VERTEXCOLOR_LB][ix] = texCds[VERTEXCOLOR_LT][ix] =
-            flipInfo.coords[VERTEXCOLOR_RT][ix] + polSize.width /
-            ((flipInfo.coords[VERTEXCOLOR_LT][ix] - flipInfo.coords[VERTEXCOLOR_RT][ix]) * tSz[ix]);
-        
+            flipInfo.coords[VERTEXCOLOR_RT][ix] +
+            polSize.width / ((flipInfo.coords[VERTEXCOLOR_LT][ix] - flipInfo.coords[VERTEXCOLOR_RT][ix]) * tSz[ix]);
+
         texCds[VERTEXCOLOR_LB][iy] = texCds[VERTEXCOLOR_RB][iy] =
-            flipInfo.coords[VERTEXCOLOR_RT][iy] + polSize.height /
-            ((flipInfo.coords[VERTEXCOLOR_RB][iy] - flipInfo.coords[VERTEXCOLOR_RT][iy]) * tSz[iy]);
+            flipInfo.coords[VERTEXCOLOR_RT][iy] +
+            polSize.height / ((flipInfo.coords[VERTEXCOLOR_RB][iy] - flipInfo.coords[VERTEXCOLOR_RT][iy]) * tSz[iy]);
     }
 
     void GetLBFrameSize(math::VEC2* pPt, Size* pSize, const math::VEC2& basePt, const Size& winSize, const WindowFrameSize& frameSize) {
@@ -109,19 +108,17 @@ namespace {
 
         const math::VEC2 tSz(texSize.width, texSize.height);
 
-        texCds[VERTEXCOLOR_LB][ix] = texCds[VERTEXCOLOR_LT][ix] =
-            flipInfo.coords[VERTEXCOLOR_LB][ix];
+        texCds[VERTEXCOLOR_LB][ix] = texCds[VERTEXCOLOR_LT][ix] = flipInfo.coords[VERTEXCOLOR_LB][ix];
 
-        texCds[VERTEXCOLOR_LB][iy] = texCds[VERTEXCOLOR_RB][iy] =
-            flipInfo.coords[VERTEXCOLOR_LB][iy];
+        texCds[VERTEXCOLOR_LB][iy] = texCds[VERTEXCOLOR_RB][iy] = flipInfo.coords[VERTEXCOLOR_LB][iy];
 
         texCds[VERTEXCOLOR_RT][ix] = texCds[VERTEXCOLOR_RB][ix] =
-            flipInfo.coords[VERTEXCOLOR_LB][ix] + polSize.width /
-            ((flipInfo.coords[VERTEXCOLOR_RB][ix] - flipInfo.coords[VERTEXCOLOR_LB][ix]) * tSz[ix]);
-        
+            flipInfo.coords[VERTEXCOLOR_LB][ix] +
+            polSize.width / ((flipInfo.coords[VERTEXCOLOR_RB][ix] - flipInfo.coords[VERTEXCOLOR_LB][ix]) * tSz[ix]);
+
         texCds[VERTEXCOLOR_RT][iy] = texCds[VERTEXCOLOR_LT][iy] =
-            flipInfo.coords[VERTEXCOLOR_LB][iy] + polSize.height / 
-            ((flipInfo.coords[VERTEXCOLOR_LT][iy] - flipInfo.coords[VERTEXCOLOR_LB][iy]) * tSz[iy]);
+            flipInfo.coords[VERTEXCOLOR_LB][iy] +
+            polSize.height / ((flipInfo.coords[VERTEXCOLOR_LT][iy] - flipInfo.coords[VERTEXCOLOR_LB][iy]) * tSz[iy]);
     }
 
     void GetRBFrameSize(math::VEC2* pPt, Size* pSize, const math::VEC2& basePt, const Size& winSize, const WindowFrameSize& frameSize) {
@@ -137,34 +134,29 @@ namespace {
 
         const math::VEC2 tSz(texSize.width, texSize.height);
 
-        texCds[VERTEXCOLOR_RB][ix] = texCds[VERTEXCOLOR_RT][ix] =
-            flipInfo.coords[VERTEXCOLOR_RB][ix];
+        texCds[VERTEXCOLOR_RB][ix] = texCds[VERTEXCOLOR_RT][ix] = flipInfo.coords[VERTEXCOLOR_RB][ix];
 
-        texCds[VERTEXCOLOR_RB][iy] = texCds[VERTEXCOLOR_LB][iy] =
-            flipInfo.coords[VERTEXCOLOR_RB][iy];
+        texCds[VERTEXCOLOR_RB][iy] = texCds[VERTEXCOLOR_LB][iy] = flipInfo.coords[VERTEXCOLOR_RB][iy];
 
         texCds[VERTEXCOLOR_LT][ix] = texCds[VERTEXCOLOR_LB][ix] =
-            flipInfo.coords[VERTEXCOLOR_RB][ix] + polSize.width /
-            ((flipInfo.coords[VERTEXCOLOR_LB][ix] - flipInfo.coords[VERTEXCOLOR_RB][ix]) * tSz[ix]);
+            flipInfo.coords[VERTEXCOLOR_RB][ix] +
+            polSize.width / ((flipInfo.coords[VERTEXCOLOR_LB][ix] - flipInfo.coords[VERTEXCOLOR_RB][ix]) * tSz[ix]);
 
         texCds[VERTEXCOLOR_LT][iy] = texCds[VERTEXCOLOR_RT][iy] =
-            flipInfo.coords[VERTEXCOLOR_RB][iy] + polSize.height /
-            ((flipInfo.coords[VERTEXCOLOR_RT][iy] - flipInfo.coords[VERTEXCOLOR_RB][iy]) * tSz[iy]);
+            flipInfo.coords[VERTEXCOLOR_RB][iy] +
+            polSize.height / ((flipInfo.coords[VERTEXCOLOR_RT][iy] - flipInfo.coords[VERTEXCOLOR_RB][iy]) * tSz[iy]);
     }
-}
+}  // namespace
 
 namespace nw4r {
     namespace lyt {
-        Window::Window(const res::Window* pBlock, const ResBlockSet& resBlockSet) :
-        Pane(pBlock) {
+        Window::Window(const res::Window* pBlock, const ResBlockSet& resBlockSet) : Pane(pBlock) {
             mContentInflation = pBlock->inflation;
 
-            const u32* const matOffsTbl = detail::ConvertOffsToPtr<u32>(resBlockSet.pMaterialList,
-                                                                        sizeof(*resBlockSet.pMaterialList));
+            const u32* const matOffsTbl = detail::ConvertOffsToPtr<u32>(resBlockSet.pMaterialList, sizeof(*resBlockSet.pMaterialList));
 
             {
-                const res::WindowContent* pResContent = detail::ConvertOffsToPtr<res::WindowContent>(pBlock,
-                                                                                                    pBlock->contentOffset);
+                const res::WindowContent* pResContent = detail::ConvertOffsToPtr<res::WindowContent>(pBlock, pBlock->contentOffset);
 
                 for (int i = 0; i < (int)ARRAY_LENGTH(mContent.vtxColors); i++) {
                     mContent.vtxColors[i] = pResContent->vtxCols[i];
@@ -181,9 +173,9 @@ namespace nw4r {
 
                 void* pMemMaterial = Layout::AllocMemory(sizeof(Material));
                 if (pMemMaterial != NULL) {
-                    const res::Material* pResMaterial = detail::ConvertOffsToPtr<res::Material>(resBlockSet.pMaterialList,
-                                                                                                matOffsTbl[pResContent->materialIdx]);
-                    mpMaterial = new(pMemMaterial) Material(pResMaterial, resBlockSet);
+                    const res::Material* pResMaterial =
+                        detail::ConvertOffsToPtr<res::Material>(resBlockSet.pMaterialList, matOffsTbl[pResContent->materialIdx]);
+                    mpMaterial = new (pMemMaterial) Material(pResMaterial, resBlockSet);
                 }
             }
 
@@ -194,19 +186,17 @@ namespace nw4r {
                 mFrames = static_cast<Frame*>(Layout::AllocMemory(sizeof(*mFrames) * pBlock->frameNum));
                 if (mFrames != NULL) {
                     mFrameNum = pBlock->frameNum;
-                    const u32* frameOffsetTable = detail::ConvertOffsToPtr<u32>(pBlock,
-                                                                                pBlock->frameOffsetTableOffset);
+                    const u32* frameOffsetTable = detail::ConvertOffsToPtr<u32>(pBlock, pBlock->frameOffsetTableOffset);
 
                     for (int i = 0; i < mFrameNum; i++) {
-                        const res::WindowFrame* pResWindowFrame = detail::ConvertOffsToPtr<res::WindowFrame>(pBlock,
-                                                                                                            frameOffsetTable[i]);
+                        const res::WindowFrame* pResWindowFrame = detail::ConvertOffsToPtr<res::WindowFrame>(pBlock, frameOffsetTable[i]);
                         mFrames[i].textureFlip = pResWindowFrame->textureFlip;
                         mFrames[i].pMaterial = NULL;
 
                         if (void* pMemMaterial = Layout::AllocMemory(sizeof(Material))) {
-                            const res::Material* pResMaterial = detail::ConvertOffsToPtr<res::Material>(resBlockSet.pMaterialList,
-                                                                                                        matOffsTbl[pResWindowFrame->materialIdx]);
-                            mFrames[i].pMaterial = new(pMemMaterial) Material(pResMaterial, resBlockSet);
+                            const res::Material* pResMaterial =
+                                detail::ConvertOffsToPtr<res::Material>(resBlockSet.pMaterialList, matOffsTbl[pResWindowFrame->materialIdx]);
+                            mFrames[i].pMaterial = new (pMemMaterial) Material(pResMaterial, resBlockSet);
                         }
                     }
                 }
@@ -304,7 +294,7 @@ namespace nw4r {
 
             switch (mFrameNum) {
                 case 1: {
-                    DrawFrame(basePt,* mFrames, frameSize, mGlbAlpha);
+                    DrawFrame(basePt, *mFrames, frameSize, mGlbAlpha);
                     break;
                 }
                 case 4: {
@@ -338,15 +328,13 @@ namespace nw4r {
 
         void Window::DrawContent(const math::VEC2& basePt, const WindowFrameSize& frameSize, u8 alpha) {
             bool bUseVtxCol = mpMaterial->SetupGX(detail::IsModulateVertexColor(mContent.vtxColors, alpha), alpha);
-        
+
             detail::SetVertexFormat(bUseVtxCol, mContent.texCoordAry.GetSize());
-        
+
             detail::DrawQuad(math::VEC2(basePt.x + frameSize.l - mContentInflation.l, basePt.y + frameSize.t - mContentInflation.t),
-                             Size(mSize.width  - frameSize.l + mContentInflation.l - frameSize.r + mContentInflation.r,
+                             Size(mSize.width - frameSize.l + mContentInflation.l - frameSize.r + mContentInflation.r,
                                   mSize.height - frameSize.t + mContentInflation.t - frameSize.b + mContentInflation.b),
-                             mContent.texCoordAry.GetSize(),
-                             mContent.texCoordAry.GetArray(),
-                             bUseVtxCol ? mContent.vtxColors : NULL, alpha);
+                             mContent.texCoordAry.GetSize(), mContent.texCoordAry.GetArray(), bUseVtxCol ? mContent.vtxColors : NULL, alpha);
         }
 
         void Window::DrawFrame(const math::VEC2& basePt, const Frame& frame, const WindowFrameSize& frameSize, u8 alpha) {
@@ -365,18 +353,19 @@ namespace nw4r {
             math::VEC2 polPt;
             Size polSize;
 
-            #define DRAW_QUAD_FOR_FRAME_1(corner_, frameIdx_) {                                             \
-                Get##corner_##FrameSize(&polPt, &polSize, basePt, mSize, frameSize);                        \
-                Get##corner_##TexCoord(*texCds, polSize, texSize, frameIdx_);                               \
-                detail::DrawQuad(polPt, polSize, GX_TEXMAP1, texCds, bUseVtxCol ? vtxColors : NULL, alpha); \
-            }
+#define DRAW_QUAD_FOR_FRAME_1(corner_, frameIdx_)                                                                                                    \
+    {                                                                                                                                                \
+        Get##corner_##FrameSize(&polPt, &polSize, basePt, mSize, frameSize);                                                                         \
+        Get##corner_##TexCoord(*texCds, polSize, texSize, frameIdx_);                                                                                \
+        detail::DrawQuad(polPt, polSize, GX_TEXMAP1, texCds, bUseVtxCol ? vtxColors : NULL, alpha);                                                  \
+    }
 
             DRAW_QUAD_FOR_FRAME_1(LT, TEXTUREFLIP_NONE);
             DRAW_QUAD_FOR_FRAME_1(RT, TEXTUREFLIP_H);
             DRAW_QUAD_FOR_FRAME_1(RB, TEXTUREFLIP_180);
             DRAW_QUAD_FOR_FRAME_1(LB, TEXTUREFLIP_V);
 
-            #undef DRAW_QUAD_FOR_FRAME_1
+#undef DRAW_QUAD_FOR_FRAME_1
         }
 
         void Window::DrawFrame4(const math::VEC2& basePt, const Frame* frames, const WindowFrameSize& frameSize, u8 alpha) {
@@ -389,23 +378,24 @@ namespace nw4r {
 
             bool bModVtxCol = detail::IsModulateVertexColor(NULL, alpha);
 
-            #define DRAW_QUAD_FOR_FRAME_4(corner_, frameIdx_) {                                                                                 \
-                if (frames[frameIdx_].pMaterial->GetTextureNum() > GX_TEXMAP0) {                                                                \
-                    bool bUseVtxCol = frames[frameIdx_].pMaterial->SetupGX(bModVtxCol, alpha);                                                  \
-                    Get##corner_##FrameSize(&polPt, &polSize, basePt, mSize, frameSize);                                                        \
-                    Get##corner_##TexCoord(*texCds, polSize,                                                                                    \
-                                            detail::GetTextureSize(frames[frameIdx_].pMaterial, GX_TEXMAP0), frames[frameIdx_].textureFlip);    \
-                    detail::SetVertexFormat(bUseVtxCol, GX_TEXMAP1);                                                                            \
-                    detail::DrawQuad(polPt, polSize, GX_TEXMAP1, texCds, bUseVtxCol ? vtxColors : NULL, alpha);                                 \
-                }                                                                                                                               \
-            }
+#define DRAW_QUAD_FOR_FRAME_4(corner_, frameIdx_)                                                                                                    \
+    {                                                                                                                                                \
+        if (frames[frameIdx_].pMaterial->GetTextureNum() > GX_TEXMAP0) {                                                                             \
+            bool bUseVtxCol = frames[frameIdx_].pMaterial->SetupGX(bModVtxCol, alpha);                                                               \
+            Get##corner_##FrameSize(&polPt, &polSize, basePt, mSize, frameSize);                                                                     \
+            Get##corner_##TexCoord(*texCds, polSize, detail::GetTextureSize(frames[frameIdx_].pMaterial, GX_TEXMAP0),                                \
+                                   frames[frameIdx_].textureFlip);                                                                                   \
+            detail::SetVertexFormat(bUseVtxCol, GX_TEXMAP1);                                                                                         \
+            detail::DrawQuad(polPt, polSize, GX_TEXMAP1, texCds, bUseVtxCol ? vtxColors : NULL, alpha);                                              \
+        }                                                                                                                                            \
+    }
 
             DRAW_QUAD_FOR_FRAME_4(LT, TEXTUREFLIP_NONE);
             DRAW_QUAD_FOR_FRAME_4(RT, TEXTUREFLIP_H);
             DRAW_QUAD_FOR_FRAME_4(RB, TEXTUREFLIP_90);
             DRAW_QUAD_FOR_FRAME_4(LB, TEXTUREFLIP_V);
 
-            #undef DRAW_QUAD_FOR_FRAME_4
+#undef DRAW_QUAD_FOR_FRAME_4
         }
 
         void Window::DrawFrame8(const math::VEC2& basePt, const Frame* frames, const WindowFrameSize& frameSize, u8 alpha) {
@@ -417,42 +407,38 @@ namespace nw4r {
 
             bool bModVtxCol = detail::IsModulateVertexColor(NULL, alpha);
 
-            #define DRAW_QUAD_FOR_FRAME_8(corner_, frameIdx_, polSizeInit_, basePtInit_) {                                  \
-                if (frames[WINDOWFRAME_##frameIdx_].pMaterial->GetTextureNum() > GX_TEXMAP0) {                              \
-                    bool bUseVtxCol = frames[WINDOWFRAME_##frameIdx_].pMaterial->SetupGX(bModVtxCol, alpha);                \
-                    polSize = polSizeInit_;                                                                                 \
-                    Get##corner_##TexCoord(*texCds, polSize,                                                                \
-                                            detail::GetTextureSize(frames[WINDOWFRAME_##frameIdx_].pMaterial, GX_TEXMAP0),  \
-                                            frames[WINDOWFRAME_##frameIdx_].textureFlip);                                   \
-                    detail::SetVertexFormat(bUseVtxCol, GX_TEXMAP1);                                                        \
-                    detail::DrawQuad(basePtInit_, polSize, GX_TEXMAP1, texCds, bUseVtxCol ? vtxColors : NULL, alpha);       \
-                }                                                                                                           \
-            }
+#define DRAW_QUAD_FOR_FRAME_8(corner_, frameIdx_, polSizeInit_, basePtInit_)                                                                         \
+    {                                                                                                                                                \
+        if (frames[WINDOWFRAME_##frameIdx_].pMaterial->GetTextureNum() > GX_TEXMAP0) {                                                               \
+            bool bUseVtxCol = frames[WINDOWFRAME_##frameIdx_].pMaterial->SetupGX(bModVtxCol, alpha);                                                 \
+            polSize = polSizeInit_;                                                                                                                  \
+            Get##corner_##TexCoord(*texCds, polSize, detail::GetTextureSize(frames[WINDOWFRAME_##frameIdx_].pMaterial, GX_TEXMAP0),                  \
+                                   frames[WINDOWFRAME_##frameIdx_].textureFlip);                                                                     \
+            detail::SetVertexFormat(bUseVtxCol, GX_TEXMAP1);                                                                                         \
+            detail::DrawQuad(basePtInit_, polSize, GX_TEXMAP1, texCds, bUseVtxCol ? vtxColors : NULL, alpha);                                        \
+        }                                                                                                                                            \
+    }
 
             DRAW_QUAD_FOR_FRAME_8(LT, LT, Size(frameSize.l, frameSize.t), basePt);
 
-            DRAW_QUAD_FOR_FRAME_8(LT, T, Size(mSize.width - frameSize.l - frameSize.r, frameSize.t),
-                                math::VEC2(basePt.x + frameSize.l, basePt.y));
+            DRAW_QUAD_FOR_FRAME_8(LT, T, Size(mSize.width - frameSize.l - frameSize.r, frameSize.t), math::VEC2(basePt.x + frameSize.l, basePt.y));
 
-            DRAW_QUAD_FOR_FRAME_8(RT, RT, Size(frameSize.r, frameSize.t),
-                                math::VEC2(basePt.x + mSize.width - frameSize.r, basePt.y));
+            DRAW_QUAD_FOR_FRAME_8(RT, RT, Size(frameSize.r, frameSize.t), math::VEC2(basePt.x + mSize.width - frameSize.r, basePt.y));
 
             DRAW_QUAD_FOR_FRAME_8(RT, R, Size(frameSize.r, mSize.height - frameSize.t - frameSize.b),
-                                math::VEC2(basePt.x + mSize.width - frameSize.r, basePt.y + frameSize.t));
+                                  math::VEC2(basePt.x + mSize.width - frameSize.r, basePt.y + frameSize.t));
 
             DRAW_QUAD_FOR_FRAME_8(RB, RB, Size(frameSize.r, frameSize.b),
-                                math::VEC2(basePt.x + mSize.width - frameSize.r, basePt.y + mSize.height - frameSize.b));
+                                  math::VEC2(basePt.x + mSize.width - frameSize.r, basePt.y + mSize.height - frameSize.b));
 
             DRAW_QUAD_FOR_FRAME_8(RB, B, Size(mSize.width - frameSize.l - frameSize.r, frameSize.b),
-                                math::VEC2(basePt.x + frameSize.l, basePt.y + mSize.height - frameSize.b));
+                                  math::VEC2(basePt.x + frameSize.l, basePt.y + mSize.height - frameSize.b));
 
-            DRAW_QUAD_FOR_FRAME_8(LB, LB, Size(frameSize.l, frameSize.b),
-                                math::VEC2(basePt.x, basePt.y + mSize.height - frameSize.b));
+            DRAW_QUAD_FOR_FRAME_8(LB, LB, Size(frameSize.l, frameSize.b), math::VEC2(basePt.x, basePt.y + mSize.height - frameSize.b));
 
-            DRAW_QUAD_FOR_FRAME_8(LB, L, Size(frameSize.l, mSize.height - frameSize.t - frameSize.b),
-                                math::VEC2(basePt.x, basePt.y + frameSize.t));
+            DRAW_QUAD_FOR_FRAME_8(LB, L, Size(frameSize.l, mSize.height - frameSize.t - frameSize.b), math::VEC2(basePt.x, basePt.y + frameSize.t));
 
-            #undef DRAW_QUAD_FOR_FRAME_8
+#undef DRAW_QUAD_FOR_FRAME_8
         }
 
         WindowFrameSize Window::GetFrameSize(u8 frameNum, const Frame* frames) {
@@ -494,5 +480,5 @@ namespace nw4r {
         Material* Window::GetContentMaterial() const {
             return GetMaterial();
         }
-    }
-}
+    }  // namespace lyt
+}  // namespace nw4r

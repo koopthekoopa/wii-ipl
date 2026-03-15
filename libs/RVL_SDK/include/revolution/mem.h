@@ -11,4 +11,4 @@
 
 #include <revolution/mem/allocator.h>
 
-#endif // REVOLUTION_MEM_H
+#endif  // REVOLUTION_MEM_H

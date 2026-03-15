@@ -1,8 +1,8 @@
-#include <revolution/gx.h>
 #include <private/gx.h>
+#include <revolution/gx.h>
 
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 #include <revolution/vi.h>
 
@@ -29,8 +29,7 @@ void* __cpReg;
 void* __piReg;
 
 static u16 DefaultTexData[] ALIGN32 = {
-    0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
-    0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
+    0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
 };
 
 static GXVtxAttrFmtList GXDefaultVATList[] = {
@@ -52,11 +51,9 @@ static GXVtxAttrFmtList GXDefaultVATList[] = {
 static f32 GXDefaultProjData[] = {1.0f, 0.0f, 1.0f, 0.0f, -1.0f, -2.0f, 0.0f};
 
 static u32 GXTexRegionAddrTable[] = {
-    0x00000, 0x10000, 0x20000, 0x30000, 0x40000, 0x50000, 0x60000, 0x70000, 0x08000, 0x18000,
-    0x28000, 0x38000, 0x48000, 0x58000, 0x68000, 0x78000, 0x00000, 0x90000, 0x20000, 0xB0000,
-    0x40000, 0x98000, 0x60000, 0xB8000, 0x80000, 0x10000, 0xA0000, 0x30000, 0x88000, 0x50000,
-    0xA8000, 0x70000, 0x00000, 0x90000, 0x20000, 0xB0000, 0x40000, 0x90000, 0x60000, 0xB0000,
-    0x80000, 0x10000, 0xA0000, 0x30000, 0x80000, 0x50000, 0xA0000, 0x70000,
+    0x00000, 0x10000, 0x20000, 0x30000, 0x40000, 0x50000, 0x60000, 0x70000, 0x08000, 0x18000, 0x28000, 0x38000, 0x48000, 0x58000, 0x68000, 0x78000,
+    0x00000, 0x90000, 0x20000, 0xB0000, 0x40000, 0x98000, 0x60000, 0xB8000, 0x80000, 0x10000, 0xA0000, 0x30000, 0x88000, 0x50000, 0xA8000, 0x70000,
+    0x00000, 0x90000, 0x20000, 0xB0000, 0x40000, 0x90000, 0x60000, 0xB0000, 0x80000, 0x10000, 0xA0000, 0x30000, 0x80000, 0x50000, 0xA0000, 0x70000,
 };
 
 static BOOL __GXShutdown(BOOL final, u32 event);
@@ -78,7 +75,7 @@ static void DisableWriteGatherPipe() {
     PPCMthid2(hid2);
 }
 
-static GXTexRegion*__GXDefaultTexRegionCallback(const GXTexObj* t_obj, GXTexMapID id) {
+static GXTexRegion* __GXDefaultTexRegionCallback(const GXTexObj* t_obj, GXTexMapID id) {
     GXTexFmt fmt;
     u8 mm;
 
@@ -139,8 +136,7 @@ static BOOL __GXShutdown(BOOL final, u32 event) {
             time = timeNew;
             return FALSE;
         }
-    }
-    else {
+    } else {
         GXSetBreakPtCallback(NULL);
         GXSetDrawSyncCallback(NULL);
         GXSetDrawDoneCallback(NULL);
@@ -223,7 +219,7 @@ GXFifoObj* GXInit(void* base, u32 size) {
     __GXData->abtWaitPECopy = 1;
     __GXData->tcsManEnab = FALSE;
     __GXData->tevTcEnab = FALSE;
-    
+
     GXSetMisc(GX_MT_XF_FLUSH, 0);
 
     __piReg = OSPhysicalToUncached(0xC003000);
@@ -296,12 +292,12 @@ GXFifoObj* GXInit(void* base, u32 size) {
     __GXInitRevisionBits();
 
     for (i = 0; i < 8; i++) {
-        GXInitTexCacheRegion(&__GXData->TexRegions0[i], GX_FALSE, GXTexRegionAddrTable[i],
-                             GX_TEXCACHE_32K, GXTexRegionAddrTable[i + 8], GX_TEXCACHE_32K);
-        GXInitTexCacheRegion(&__GXData->TexRegions1[i], GX_FALSE, GXTexRegionAddrTable[i + 16],
-                             GX_TEXCACHE_32K, GXTexRegionAddrTable[i + 24], GX_TEXCACHE_32K);
-        GXInitTexCacheRegion(&__GXData->TexRegions2[i], GX_TRUE, GXTexRegionAddrTable[i + 32],
-                             GX_TEXCACHE_32K, GXTexRegionAddrTable[i + 40], GX_TEXCACHE_32K);
+        GXInitTexCacheRegion(&__GXData->TexRegions0[i], GX_FALSE, GXTexRegionAddrTable[i], GX_TEXCACHE_32K, GXTexRegionAddrTable[i + 8],
+                             GX_TEXCACHE_32K);
+        GXInitTexCacheRegion(&__GXData->TexRegions1[i], GX_FALSE, GXTexRegionAddrTable[i + 16], GX_TEXCACHE_32K, GXTexRegionAddrTable[i + 24],
+                             GX_TEXCACHE_32K);
+        GXInitTexCacheRegion(&__GXData->TexRegions2[i], GX_TRUE, GXTexRegionAddrTable[i + 32], GX_TEXCACHE_32K, GXTexRegionAddrTable[i + 40],
+                             GX_TEXCACHE_32K);
     }
 
     for (i = 0; i < 16; i++) {
@@ -321,10 +317,10 @@ GXFifoObj* GXInit(void* base, u32 size) {
         GX_WRITE_U8(0x8);
         GX_WRITE_U8(0x20);
         GX_WRITE_U32(__GXData->perfSel);
-    
+
         reg = 0;
         GX_WRITE_XF_REG(0x1006, reg);
-        
+
         reg = 0x23000000;
         GX_WRITE_RAS_REG(reg);
 
@@ -343,9 +339,9 @@ GXFifoObj* GXInit(void* base, u32 size) {
 }
 
 void __GXInitGX() {
-    GXRenderModeObj*    rmode;
-    GXTexObj            tex_obj;
-    Mtx                 identity_mtx;
+    GXRenderModeObj* rmode;
+    GXTexObj tex_obj;
+    Mtx identity_mtx;
 
     GXColor clear = {64, 64, 64, 255};
     GXColor black = {0, 0, 0, 0};
@@ -507,8 +503,7 @@ void __GXInitGX() {
     GXSetDstAlpha(GX_DISABLE, 0);
     GXSetPixelFmt(GX_PF_RGB8_Z24, GX_ZC_LINEAR);
     GXSetFieldMask(GX_ENABLE, GX_ENABLE);
-    GXSetFieldMode(rmode->field_rendering,
-                   ((rmode->viHeight == 2 * rmode->xfbHeight) ? GX_ENABLE : GX_DISABLE));
+    GXSetFieldMode(rmode->field_rendering, ((rmode->viHeight == 2 * rmode->xfbHeight) ? GX_ENABLE : GX_DISABLE));
 
     GXSetDispCopySrc(0, 0, rmode->fbWidth, rmode->efbHeight);
     GXSetDispCopyDst(rmode->fbWidth, rmode->efbHeight);

@@ -7,8 +7,6 @@
 #include <nw4r/ut/Color.h>
 #include <revolution/gx/GXStruct.h>
 
-// messy but so as CHANS
-
 #define EXTERN_IPL_LIB(l)               namespace l { BOOL init(CHANSVm* vm); }
 
 #define EXTERN_IPL_LIB_CTOR(l)          namespace l { BOOL _ctor(CHANSVm* VmInst, CHANSVmObjHdr* VmObj); }

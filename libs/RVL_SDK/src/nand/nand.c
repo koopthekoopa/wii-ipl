@@ -1,12 +1,12 @@
-#include <revolution/nand.h>
 #include <private/nand.h>
+#include <revolution/nand.h>
 
 #include <private/fs.h>
 
 #include <private/ipc.h>
 
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
 
 static BOOL nandInspectPermission(u8 perm);
 static void nandSplitPerm(u8 perm, u32* owner, u32* group, u32* others);
@@ -14,24 +14,21 @@ static void nandSplitPerm(u8 perm, u32* owner, u32* group, u32* others);
 static void nandGetStatusCallback(ISFSError result, void* arg);
 
 static ISFSError nandCreate(const char* path, u8 perm, u8 attr, NANDCommandBlock* block, BOOL isAsync, BOOL hasPrivateAccess) {
-    char    absPath[NAND_MAX_PATH] = "";
-    u32     owner = 0, group = 0, others = 0;
+    char absPath[NAND_MAX_PATH] = "";
+    u32 owner = 0, group = 0, others = 0;
 
     nandGenerateAbsPath(absPath, path);
 
     if (!hasPrivateAccess && nandIsPrivatePath(absPath)) {
         return ISFS_ERROR_ACCESS;
-    }
-    else if (!nandInspectPermission(perm)) {
+    } else if (!nandInspectPermission(perm)) {
         return ISFS_ERROR_INVALID;
-    }
-    else {
+    } else {
         nandSplitPerm(perm, &owner, &group, &others);
 
         if (isAsync) {
             return ISFS_CreateFileAsync(absPath, attr, owner, group, others, nandCallback, block);
-        }
-        else {
+        } else {
             return ISFS_CreateFile(absPath, attr, owner, group, others);
         }
     }
@@ -65,12 +62,10 @@ static ISFSError nandDelete(const char* path, NANDCommandBlock* block, BOOL isAs
 
     if (!hasPrivateAccess && nandIsPrivatePath(absPath)) {
         return ISFS_ERROR_ACCESS;
-    }
-    else {
+    } else {
         if (isAsync) {
             return ISFS_DeleteAsync(absPath, nandCallback, block);
-        }
-        else {
+        } else {
             return ISFS_Delete(absPath);
         }
     }
@@ -151,8 +146,7 @@ static ISFSError nandSeek(IOSFd fd, s32 offset, s32 whence, NANDCommandBlock* bl
 
     if (isAsync) {
         return ISFS_SeekAsync(fd, offset, where, nandCallback, block);
-    }
-    else {
+    } else {
         return ISFS_Seek(fd, offset, where);
     }
 }
@@ -178,12 +172,10 @@ static ISFSError nandReadDir(const char* path, char* nameList, u32* num, NANDCom
     nandGenerateAbsPath(absPath, path);
     if (!hasPrivateAccess && nandIsPrivatePath(absPath)) {
         return ISFS_ERROR_ACCESS;
-    }
-    else {
+    } else {
         if (isAsync) {
             return ISFS_ReadDirAsync(absPath, nameList, num, nandCallback, block);
-        }
-        else {
+        } else {
             return ISFS_ReadDir(absPath, nameList, num);
         }
     }
@@ -195,7 +187,6 @@ s32 NANDReadDir(const char* path, char* nameList, u32* num) {
     }
     return nandConvertErrorCode(nandReadDir(path, nameList, num, NULL, FALSE, FALSE));
 }
-
 
 s32 NANDPrivateReadDir(const char* path, char* nameList, u32* num) {
     if (!nandIsInitialized()) {
@@ -210,18 +201,15 @@ static ISFSError nandCreateDir(const char* path, u8 perm, u8 attr, NANDCommandBl
     nandGenerateAbsPath(absPath, path);
     if (!hasPrivateAccess && nandIsPrivatePath(absPath)) {
         return ISFS_ERROR_ACCESS;
-    }
-    else if (!nandInspectPermission(perm)) {
+    } else if (!nandInspectPermission(perm)) {
         return ISFS_ERROR_INVALID;
-    }
-    else {
+    } else {
         u32 owner = 0, group = 0, others = 0;
         nandSplitPerm(perm, &owner, &group, &others);
 
         if (isAsync) {
             return ISFS_CreateDirAsync(absPath, attr, owner, group, others, nandCallback, block);
-        }
-        else {
+        } else {
             return ISFS_CreateDir(absPath, attr, owner, group, others);
         }
     }
@@ -250,29 +238,26 @@ s32 NANDPrivateCreateDirAsync(const char* path, u8 perm, u8 attr, NANDCallback c
 }
 
 static ISFSError nandMove(const char* path, const char* destDir, NANDCommandBlock* block, BOOL isAsync, BOOL hasPrivateAccess) {
-    char absOldPath[NAND_MAX_PATH]          = "";
-    char absNewPath[NAND_MAX_PATH]          = "";
-    char relativeName[NAND_MAX_DIR_PATH+1]  = "";
+    char absOldPath[NAND_MAX_PATH] = "";
+    char absNewPath[NAND_MAX_PATH] = "";
+    char relativeName[NAND_MAX_DIR_PATH + 1] = "";
 
     nandGenerateAbsPath(absOldPath, path);
     nandGetRelativeName(relativeName, absOldPath);
     nandGenerateAbsPath(absNewPath, destDir);
     if (strcmp(absNewPath, "/") == 0) {
         sprintf(absNewPath, "/%s", relativeName);
-    }
-    else {
+    } else {
         strcat(absNewPath, "/");
         strcat(absNewPath, relativeName);
     }
 
     if (!hasPrivateAccess && (nandIsPrivatePath(absOldPath) || nandIsPrivatePath(absNewPath))) {
         return ISFS_ERROR_ACCESS;
-    }
-    else {
+    } else {
         if (isAsync) {
             return ISFS_RenameAsync(absOldPath, absNewPath, nandCallback, block);
-        }
-        else {
+        } else {
             return ISFS_Rename(absOldPath, absNewPath);
         }
     }
@@ -286,8 +271,8 @@ s32 NANDPrivateMove(const char* path, const char* destDir) {
 }
 
 static ISFSError nandGetFileStatus(IOSFd fd, u32* length, u32* pos) {
-    ISFSFileStats   isfsStats ALIGN32;
-    ISFSError       ret = ISFS_GetFileStats(fd, &isfsStats);
+    ISFSFileStats isfsStats ALIGN32;
+    ISFSError ret = ISFS_GetFileStats(fd, &isfsStats);
 
     if (ret == ISFS_ERROR_OK) {
         if (length) {
@@ -316,8 +301,8 @@ s32 NANDTell(NANDFileInfo* info, u32* pos) {
 }
 
 static void nandGetFileStatusAsyncCallback(ISFSError result, void* arg) {
-    NANDCommandBlock*   block = (NANDCommandBlock*)arg;
-    ISFSFileStats*      isfsStats = (ISFSFileStats *)OSRoundUp32B((u32)block->absPath);
+    NANDCommandBlock* block = (NANDCommandBlock*)arg;
+    ISFSFileStats* isfsStats = (ISFSFileStats*)OSRoundUp32B((u32)block->absPath);
 
     if (result == ISFS_ERROR_OK) {
         if (block->length) {
@@ -332,8 +317,8 @@ static void nandGetFileStatusAsyncCallback(ISFSError result, void* arg) {
 }
 
 static ISFSError nandGetFileStatusAsync(IOSFd fd, NANDCommandBlock* block) {
-    ISFSError       result = ISFS_ERROR_UNKNOWN;
-    ISFSFileStats*  isfsStats = (ISFSFileStats*)OSRoundUp32B((u32)block->absPath);
+    ISFSError result = ISFS_ERROR_UNKNOWN;
+    ISFSFileStats* isfsStats = (ISFSFileStats*)OSRoundUp32B((u32)block->absPath);
     return ISFS_GetFileStatsAsync(fd, isfsStats, nandGetFileStatusAsyncCallback, block);
 }
 
@@ -401,18 +386,17 @@ static void nandSplitPerm(u8 perm, u32* owner, u32* group, u32* others) {
     }
 }
 
-static ISFSError nandGetStatus(const char* path, NANDStatus *status, NANDCommandBlock* block, BOOL isAsync, BOOL hasPrivateAccess) {
+static ISFSError nandGetStatus(const char* path, NANDStatus* status, NANDCommandBlock* block, BOOL isAsync, BOOL hasPrivateAccess) {
     char absPath[NAND_MAX_PATH] = "";
 
     nandGenerateAbsPath(absPath, path);
     if (!hasPrivateAccess && nandIsUnderPrivatePath(absPath)) {
         return ISFS_ERROR_ACCESS;
-    }
-    else {
+    } else {
         if (isAsync) {
-            return ISFS_GetAttrAsync(absPath, &status->ownerId, &status->groupId, &block->attr, &block->ownerAcc, &block->groupAcc, &block->othersAcc, nandGetStatusCallback, block);
-        }
-        else {
+            return ISFS_GetAttrAsync(absPath, &status->ownerId, &status->groupId, &block->attr, &block->ownerAcc, &block->groupAcc, &block->othersAcc,
+                                     nandGetStatusCallback, block);
+        } else {
             u32 attr = 0;
             u32 owner = 0, group = 0, others = 0;
             ISFSError result = ISFS_GetAttr(absPath, &status->ownerId, &status->groupId, &attr, &owner, &group, &others);
@@ -428,21 +412,21 @@ static ISFSError nandGetStatus(const char* path, NANDStatus *status, NANDCommand
 static void nandGetStatusCallback(ISFSError result, void* arg) {
     NANDCommandBlock* block = (NANDCommandBlock*)arg;
     if (result == ISFS_ERROR_OK) {
-        NANDStatus *status = (NANDStatus*)block->status;
+        NANDStatus* status = (NANDStatus*)block->status;
         status->attribute = block->attr;
         nandComposePerm(&status->permission, block->ownerAcc, block->groupAcc, block->othersAcc);
     }
     block->callback(nandConvertErrorCode(result), block);
 }
 
-s32 NANDGetStatus(const char* path, NANDStatus *status) {
+s32 NANDGetStatus(const char* path, NANDStatus* status) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
     return nandConvertErrorCode(nandGetStatus(path, status, NULL, FALSE, FALSE));
 }
 
-s32 NANDPrivateGetStatus(const char* path, NANDStatus *status) {
+s32 NANDPrivateGetStatus(const char* path, NANDStatus* status) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -459,22 +443,19 @@ s32 NANDPrivateGetStatusAsync(const char* path, NANDStatus* status, NANDCallback
 }
 
 static ISFSError nandSetStatus(const char* path, const NANDStatus* status, NANDCommandBlock* block, BOOL isAsync, BOOL hasPrivateAccess) {
-    char absPath[NAND_MAX_PATH]="";
+    char absPath[NAND_MAX_PATH] = "";
 
     nandGenerateAbsPath(absPath, path);
     if (!hasPrivateAccess && nandIsPrivatePath(absPath)) {
         return ISFS_ERROR_ACCESS;
-    }
-    else if (!nandInspectPermission(status->permission)) {
+    } else if (!nandInspectPermission(status->permission)) {
         return ISFS_ERROR_INVALID;
-    }
-    else {
+    } else {
         u32 owner = 0, group = 0, others = 0;
         nandSplitPerm(status->permission, &owner, &group, &others);
         if (isAsync) {
             return ISFS_SetAttrAsync(absPath, status->ownerId, status->groupId, (u8)(status->attribute), owner, group, others, nandCallback, block);
-        }
-        else {
+        } else {
             return ISFS_SetAttr(absPath, status->ownerId, status->groupId, (u8)(status->attribute), owner, group, others);
         }
     }
@@ -486,7 +467,6 @@ s32 NANDSetStatus(const char* path, NANDStatus* status) {
     }
     return nandConvertErrorCode(nandSetStatus(path, status, NULL, FALSE, FALSE));
 }
-
 
 s32 NANDPrivateSetStatus(const char* path, NANDStatus* status) {
     if (!nandIsInitialized()) {
@@ -506,8 +486,7 @@ void* NANDGetUserData(NANDCommandBlock* block) {
 static BOOL nandInspectPermission(u8 perm) {
     if (perm & NAND_PERM_USER_READ) {
         return TRUE;
-    }
-    else {
+    } else {
         return FALSE;
     }
 }

@@ -15,24 +15,26 @@ namespace ipl {
          * @param basePos The IR position.
          * @return The Cursor Position as `ipl::math::VEC2`
          */
-        math::VEC2  get_cursor_pos(const math::VEC2& basePos);
-        
+        math::VEC2 get_cursor_pos(const math::VEC2& basePos);
+
         class Language {
-            public:
-                static char* getPath();
+        public:
+            static char* getPath();
         };
 
-        template<typename T> inline void setBit(T* b, int pos) {
+        template <typename T>
+        inline void setBit(T* b, int pos) {
             const T mask = (T)(1 << pos);
             *b |= mask;
         }
 
-        template<typename T> inline void clearBit(T* b, int pos) {
+        template <typename T>
+        inline void clearBit(T* b, int pos) {
             *b &= ~(T)(1 << pos);
         }
 
         int memcpy_s(void* dest, u32 destSize, const void* src, u32 srcSize);
-    }
-}
+    }  // namespace utility
+}  // namespace ipl
 
-#endif // IPL_UTILITY_MISC_H
+#endif  // IPL_UTILITY_MISC_H

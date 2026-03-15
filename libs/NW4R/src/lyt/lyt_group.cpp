@@ -1,13 +1,14 @@
+#include <nw4r/lyt/common.h>
 #include <nw4r/lyt/group.h>
 #include <nw4r/lyt/layout.h>
-#include <nw4r/lyt/common.h>
 
-#include <new>
 #include <cstring>
+#include <new>
 
 namespace nw4r {
     namespace lyt {
-        Group::Group() {}
+        Group::Group() {
+        }
 
         Group::Group(const res::Group* pResGroup, Pane* pRootPane) {
             Init();
@@ -40,7 +41,7 @@ namespace nw4r {
 
         void Group::AppendPane(Pane* pane) {
             if (void* pMem = Layout::AllocMemory(sizeof(detail::PaneLink))) {
-                detail::PaneLink* paneLink = new(pMem) detail::PaneLink();
+                detail::PaneLink* paneLink = new (pMem) detail::PaneLink();
 
                 paneLink->mTarget = pane;
                 mPaneLinkList.PushBack(paneLink);
@@ -73,5 +74,5 @@ namespace nw4r {
 
             return NULL;
         }
-    }
-}
+    }  // namespace lyt
+}  // namespace nw4r

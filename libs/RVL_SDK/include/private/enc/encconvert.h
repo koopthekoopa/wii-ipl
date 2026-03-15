@@ -3,26 +3,26 @@
 
 #include <revolution/types.h>
 
-#include <revolution/enc.h>
 #include <private/enc/encutility.h>
+#include <revolution/enc.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define ENCODING_NAME_LENGTH                    16
-#define ENCODING_HASH_TABLE_ENTRY_NAME_LENGTH   24
+#define ENCODING_NAME_LENGTH 16
+#define ENCODING_HASH_TABLE_ENTRY_NAME_LENGTH 24
 
 struct encoding {
-    u32         width;                      // 0x00
-    BOOL        is7bit;                     // 0x04
-    const char  name[ENCODING_NAME_LENGTH]; // 0x08
+    u32 width;                              // 0x00
+    BOOL is7bit;                            // 0x04
+    const char name[ENCODING_NAME_LENGTH];  // 0x08
 };
 
 struct encoding_hash_table_entry {
-    const char  name[ENCODING_HASH_TABLE_ENTRY_NAME_LENGTH];    // 0x00
-    ENCEncoding encoding;                                       // 0x18
-    int         nextIndex;                                      // 0x1C
+    const char name[ENCODING_HASH_TABLE_ENTRY_NAME_LENGTH];  // 0x00
+    ENCEncoding encoding;                                    // 0x18
+    int nextIndex;                                           // 0x1C
 };
 
 extern const struct encoding encoding_array[];
@@ -37,4 +37,4 @@ extern BOOL enc_tbl_cn_loaded;
 }
 #endif
 
-#endif // PRIVATE_ENC_CONVERT_H
+#endif  // PRIVATE_ENC_CONVERT_H

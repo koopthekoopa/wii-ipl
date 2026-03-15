@@ -20,6 +20,7 @@ extern u32 __PADFixBits;
 extern void __OSFPRInit();
 
 static asm void ClearOtherBATs() {
+    // clang-format off
 #ifdef __MWERKS__
     nofralloc
 
@@ -42,29 +43,30 @@ static asm void ClearOtherBATs() {
 
     blr
 #endif // __MWERKS__
+    // clang-format on
 }
 
 static void SetConsoleInfo() {
     OSBootInfo* bi = (OSBootInfo*)OSPhysicalToCached(OS_ADDR_BOOT_INFO);
 
     // Memory
-    bi->arenaLo             = NULL;
-    bi->memorySize          = *(u32*)OSPhysicalToCached(OS_ADDR_PHYSICAL_MEM1_SIZE);
+    bi->arenaLo = NULL;
+    bi->memorySize = *(u32*)OSPhysicalToCached(OS_ADDR_PHYSICAL_MEM1_SIZE);
 
     // Console type
-    bi->consoleType         =  OS_CONSOLE_RETAIL;
-    bi->consoleType         += PI_READ_REG(PI_UNIT_INFO) >> PI_UNIT_INFO_TYPE;
+    bi->consoleType = OS_CONSOLE_RETAIL;
+    bi->consoleType += PI_READ_REG(PI_UNIT_INFO) >> PI_UNIT_INFO_TYPE;
 
     // Simulated memory size
     *(u32*)OSPhysicalToCached(OS_ADDR_SIMULATED_MEMORY_SIZE) = bi->memorySize;
 
     // MEM1
     *(u32*)OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM1_START) = 0;
-    *(u32*)OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM1_END)   = 0;
-    
+    *(u32*)OSPhysicalToCached(OS_ADDR_AVAILABLE_MEM1_END) = 0;
+
     // BS2 stuff
-    *(u8*) OSPhysicalToCached(OS_ADDR_BOOT_PROGRAM_TARGET)  = OS_APP_TYPE_DVD;
-    *(u16*)OSPhysicalToCached(OS_ADDR_DEV_KIT_VERSION)      = BS2_VERSION;
+    *(u8*)OSPhysicalToCached(OS_ADDR_BOOT_PROGRAM_TARGET) = OS_APP_TYPE_DVD;
+    *(u16*)OSPhysicalToCached(OS_ADDR_DEV_KIT_VERSION) = BS2_VERSION;
 }
 
 void BS2Init() {
@@ -75,9 +77,9 @@ void BS2Init() {
     ClearOtherBATs();
     SetConsoleInfo();
 
-    __PADFixBits    = -1;
-    __OSInIPL       = TRUE; // Yes, we are in the IPL!
-    
+    __PADFixBits = -1;
+    __OSInIPL = TRUE;  // Yes, we are in the IPL!
+
     __OSFPRInit();
 
     PPCMtmmcr0(MMCR0_PMC1_HOLD | MMCR0_PMC2_HOLD);

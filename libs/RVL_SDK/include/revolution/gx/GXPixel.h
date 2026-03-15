@@ -1,8 +1,8 @@
 #ifndef REVOLUTION_GX_PIXEL_H
 #define REVOLUTION_GX_PIXEL_H
 
-#include <revolution/types.h>
 #include <revolution/gx/GXStruct.h>
+#include <revolution/types.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -32,4 +32,4 @@ void GXSetFieldMode(GXBool field_mode, GXBool half_aspect_ratio);
 }
 #endif
 
-#endif // REVOLUTION_GX_PIXEL_H
+#endif  // REVOLUTION_GX_PIXEL_H

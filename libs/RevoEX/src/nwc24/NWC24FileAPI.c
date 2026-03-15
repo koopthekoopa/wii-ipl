@@ -1,5 +1,5 @@
-#include <revolution/nwc24.h>
 #include <private/nwc24.h>
+#include <revolution/nwc24.h>
 
 #include <private/nand.h>
 
@@ -18,12 +18,12 @@ static NWC24Err AlignedSeek(NWC24File* file, s32 offset, int whence);
 static NWC24Err ConvertError(s32 nanderr, NWC24Err wc24err);
 static NWC24Err ConvertVfError(s32 vferr, NWC24Err wc24err);
 
-#define INVALIDATE_ALIGN (1 << (DEFAULT_ALIGN-1)) // ?
+#define INVALIDATE_ALIGN (1 << (DEFAULT_ALIGN - 1))  // ?
 
-#define NWC24_IO_WRITE_BUFFER_SIZE  ((int)(sizeof(nwc24Work->writeBuffer)))
-#define NWC24_IO_READ_BUFFER_SIZE   ((int)(sizeof(nwc24Work->readBuffer) ))
+#define NWC24_IO_WRITE_BUFFER_SIZE ((int)(sizeof(nwc24Work->writeBuffer)))
+#define NWC24_IO_READ_BUFFER_SIZE ((int)(sizeof(nwc24Work->readBuffer)))
 
-#define NAND_RETRY_COUNT    3
+#define NAND_RETRY_COUNT 3
 
 NWC24Err NWC24FOpen(NWC24File* file, const char* path, u32 mode) {
     InstanceIdGen++;
@@ -33,9 +33,7 @@ NWC24Err NWC24FOpen(NWC24File* file, const char* path, u32 mode) {
     file->align = 0;
     file->mode = mode;
 
-    if (mode == NWC24_OPEN_NAND_WBUFF || mode == NWC24_OPEN_NAND_RBUFF ||
-        mode == NWC24_OPEN_VF_WBUFF || mode == NWC24_OPEN_VF_RBUFF) {
-
+    if (mode == NWC24_OPEN_NAND_WBUFF || mode == NWC24_OPEN_NAND_RBUFF || mode == NWC24_OPEN_VF_WBUFF || mode == NWC24_OPEN_VF_RBUFF) {
         if (!NWC24IsMsgLibOpened() && !NWC24IsMsgLibOpenedByTool()) {
             return NWC24_ERR_LIB_NOT_OPENED;
         }
@@ -152,16 +150,14 @@ NWC24Err NWC24FClose(NWC24File* file) {
     NWC24Err close = NWC24_OK;
     NWC24Err read = NWC24_OK;
 
-    if (file->mode == NWC24_OPEN_NAND_WBUFF ||
-        file->mode == NWC24_OPEN_VF_WBUFF) {
+    if (file->mode == NWC24_OPEN_NAND_WBUFF || file->mode == NWC24_OPEN_VF_WBUFF) {
         read = BufferedWriteFlush(file);
         WrBufferMutex = 0;
     }
 
     if (file->mode & NWC24_OPEN_VF) {
         close = NWC24iFCloseVF(file);
-    }
-    else {
+    } else {
         close = NWC24iFCloseNand(file);
     }
 
@@ -186,8 +182,7 @@ NWC24Err NWC24iFCloseNand(NWC24File* file) {
 
     if (result == NAND_RESULT_CORRUPT) {
         err = NWC24_ERR_NAND_CORRUPT;
-    }
-    else if (result != NAND_RESULT_OK) {
+    } else if (result != NAND_RESULT_OK) {
         err = NWC24_ERR_FILE_CLOSE;
     }
 
@@ -205,13 +200,11 @@ NWC24Err NWC24iFCloseVF(NWC24File* file) {
     return NWC24_OK;
 }
 
-
 NWC24Err NWC24FSeek(NWC24File* file, s32 offset, int whence) {
     s32 result;
     u32 i;
 
-    if (file->mode == NWC24_OPEN_NAND_RBUFF ||
-        file->mode == NWC24_OPEN_VF_RBUFF) {
+    if (file->mode == NWC24_OPEN_NAND_RBUFF || file->mode == NWC24_OPEN_VF_RBUFF) {
         return AlignedSeek(file, offset, whence);
     }
 
@@ -479,7 +472,7 @@ NWC24Err NWC24CreateVF(const char* path, u32 fileSize) {
         return ConvertVfError(vfResult, NWC24_ERR_INTERNAL_VF);
     }
 
-    vfResult = VFCreateDir(NWC24_VF_DRIVE":/mb");
+    vfResult = VFCreateDir(NWC24_VF_DRIVE ":/mb");
     if (vfResult != VF_ERR_SUCCESS) {
         return ConvertVfError(vfResult, NWC24_ERR_INTERNAL_VF);
     }
@@ -654,8 +647,7 @@ static NWC24Err BufferedRead(void* dest, s32 size, NWC24File* file) {
             }
 
             result = bytesread;
-        }
-        else {
+        } else {
             for (i = 0; i < NAND_RETRY_COUNT; i++) {
                 result = NANDRead(&file->nand, buf, now);
                 if (!(result == NAND_RESULT_BUSY || result == NAND_RESULT_ALLOC_FAILED)) {
@@ -673,8 +665,7 @@ static NWC24Err BufferedRead(void* dest, s32 size, NWC24File* file) {
         if (result != now) {
             err = NWC24_ERR_FILE_READ;
             break;
-        }
-        else {
+        } else {
             memcpy(bdst, buf + pos, left);
             bdst += left;
             total -= left;
@@ -714,13 +705,13 @@ static NWC24Err AlignedSeek(NWC24File* file, s32 offset, int whence) {
 
 static NWC24Err ConvertError(s32 nanderr, NWC24Err wc24err) {
     switch (nanderr) {
-    case NAND_RESULT_ECC_CRIT:
-    case NAND_RESULT_AUTHENTICATION:
-        return NWC24_ERR_FILE_BROKEN;
-    case NAND_RESULT_CORRUPT:
-        return NWC24_ERR_NAND_CORRUPT;
-    default:
-        return wc24err;
+        case NAND_RESULT_ECC_CRIT:
+        case NAND_RESULT_AUTHENTICATION:
+            return NWC24_ERR_FILE_BROKEN;
+        case NAND_RESULT_CORRUPT:
+            return NWC24_ERR_NAND_CORRUPT;
+        default:
+            return wc24err;
     }
 }
 

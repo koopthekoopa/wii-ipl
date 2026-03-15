@@ -6,6 +6,7 @@
 
 namespace ipl {
     namespace scene {
+        // clang-format off
         static const char* scPaneAnims[] = {
             "Cursur_a",
             "T_Balloon",
@@ -150,47 +151,15 @@ namespace ipl {
                 85.0f, 48.0f
             }
         };
+        // clang-format on
 
-        ChannelObj::ChannelObj(EGG::Heap* heap, int page, int index) :
-        unk_0x10(heap),
-        unk_0x08(NULL),
-        unk_0x0C(NULL),
-        mpDiskHeap(NULL),
-        unk_0x18(0),
-        mChanPage(page),
-        mChanIndex(index),
-        mpBasePane(NULL),
-        mpDiskLyt(NULL),
-        mpDiskAnim(NULL),
-        unk_0x40(NULL),
-        unk_0x44(NULL),
-        unk_0x48(NULL),
-        unk_0x58(0),
-        unk_0x5C(0),
-        unk_0x60(NULL),
-        unk_0x68(0),
-        unk_0x6C(0),
-        unk_0x70(0),
-        unk_0x74(0),
-        unk_0x78(NULL),
-        unk_0x7C(0),
-        unk_0x80(0),
-        unk_0x84(0),
-        unk_0x88(0),
-        unk_0x8C(cfChanThumbOfss[SCGetAspectRatio()][0]),
-        unk_0x90(cfChanThumbOfss[SCGetAspectRatio()][1]),
-        mpModuleHeap(NULL),
-        unk_0x9C(NULL),
-        unk_0xA0(NULL),
-        unk_0xE4(0),
-        unk_0xE8(NULL),
-        unk_0xEC(0),
-        unk_0xF4(0),
-        unk_0xF8(36000),
-        unk_0xFC(36000),
-        unk_0x100(NULL),
-        unk_0x104(NULL),
-        unk_0x110(NULL) {
+        ChannelObj::ChannelObj(EGG::Heap* heap, int page, int index)
+            : unk_0x10(heap), unk_0x08(NULL), unk_0x0C(NULL), mpDiskHeap(NULL), unk_0x18(0), mChanPage(page), mChanIndex(index), mpBasePane(NULL),
+              mpDiskLyt(NULL), mpDiskAnim(NULL), unk_0x40(NULL), unk_0x44(NULL), unk_0x48(NULL), unk_0x58(0), unk_0x5C(0), unk_0x60(NULL),
+              unk_0x68(0), unk_0x6C(0), unk_0x70(0), unk_0x74(0), unk_0x78(NULL), unk_0x7C(0), unk_0x80(0), unk_0x84(0), unk_0x88(0),
+              unk_0x8C(cfChanThumbOfss[SCGetAspectRatio()][0]), unk_0x90(cfChanThumbOfss[SCGetAspectRatio()][1]), mpModuleHeap(NULL), unk_0x9C(NULL),
+              unk_0xA0(NULL), unk_0xE4(0), unk_0xE8(NULL), unk_0xEC(0), unk_0xF4(0), unk_0xF8(36000), unk_0xFC(36000), unk_0x100(NULL),
+              unk_0x104(NULL), unk_0x110(NULL) {
             if (SCGetAspectRatio() == SC_ASPECT_RATIO_16x9) {
                 nw4r::ut::Rect projRect4x3;
                 System::getProjectionRect4x3(&projRect4x3);
@@ -198,8 +167,7 @@ namespace ipl {
                 System::getProjectionRect16x9(&projRect16x9);
 
                 mLocationAdjust = projRect16x9.GetWidth() / projRect4x3.GetWidth();
-            }
-            else {
+            } else {
                 mLocationAdjust = 1.0f;
             }
 
@@ -213,8 +181,7 @@ namespace ipl {
 
             if (isDiskChannel()) {
                 destroyDiskLayout();
-            }
-            else {
+            } else {
                 unk_0x30->destroyHeap();
             }
 
@@ -315,14 +282,12 @@ namespace ipl {
                             if (unk_0xF0 == NULL) {
                                 unk_0xF0 = System::getChannelManager()->loadThumbnailCSAsync(mpModuleHeap, mChanPage, mChanIndex);
                                 unk_0xEC = 4;
-                            }
-                            else {
+                            } else {
                                 unk_0xEC = 2;
                             }
 
                             result = 2;
-                        }
-                        else {
+                        } else {
                             result = 1;
                         }
                     }
@@ -339,7 +304,7 @@ namespace ipl {
                         unk_0x104 = NULL;
 
                         if (unk_0x100->bssSize != 0) {
-                            unk_0x104 = new(mpModuleHeap, DEFAULT_ALIGN) u8[unk_0x100->bssSize];
+                            unk_0x104 = new (mpModuleHeap, DEFAULT_ALIGN) u8[unk_0x100->bssSize];
                             memset(unk_0x104, 0, unk_0x100->bssSize);
                         }
 
@@ -347,8 +312,7 @@ namespace ipl {
 
                         if (RSOIsImportSymbolResolvedAll(unk_0x100)) {
                             OSReport("Module's ImportSymbol is resolved all.\n");
-                        }
-                        else {
+                        } else {
                             OSReport("%d module's ImportSymbols are not resolved.\n", RSOGetNumImportSymbolsUnresolved(unk_0x100));
                         }
 
@@ -358,7 +322,7 @@ namespace ipl {
                         // ThreadCalc()
                         unk_0xE8->setCalcFunc((channel::ThreadCalcFunc)RSOFindExportSymbolAddr(unk_0x100, "ThreadCalc"));
 
-                        ((void(*)())unk_0x100->prolog)();
+                        ((void (*)())unk_0x100->prolog)();
 
                         // Create(nw4r::lyt::Layout*)
                         channel::CreateFunc createFunc = (channel::CreateFunc)RSOFindExportSymbolAddr(unk_0x100, "Create");
@@ -390,7 +354,7 @@ namespace ipl {
                     if (unk_0x10D && unk_0x10C) {
                         unk_0xE4 = 1;
 
-                        ((void(*)())unk_0x100->epilog)();
+                        ((void (*)())unk_0x100->epilog)();
 
                         RSOUnLinkList(unk_0x100);
 
@@ -401,11 +365,10 @@ namespace ipl {
                         clearModuleParam();
 
                         result = 3;
-                    }
-                    else {
+                    } else {
                         result = 2;
                     }
-    
+
                     break;
                 }
                 case 4: {
@@ -439,11 +402,10 @@ namespace ipl {
                         System::getCSManager()->setData(data);
                         if (!System::getCSManager()->init(unk_0xF0, unk_0xE8)) {
                             unk_0xEC = 6;
-                        }
-                        else {
+                        } else {
                             unk_0xEC = 5;
                         }
-                        
+
                         delete unk_0xF0;
                         unk_0xF0 = NULL;
                     }
@@ -499,11 +461,9 @@ namespace ipl {
 
             if (unk_0x40->searchFile("icon.brlan")) {
                 unk_0x44 = unk_0x40->bind("icon.brlan");
-            }
-            else if (unk_0x40->searchFile("icon_Whole.brlan")) {
+            } else if (unk_0x40->searchFile("icon_Whole.brlan")) {
                 unk_0x44 = unk_0x40->bind("icon_Whole.brlan");
-            }
-            else {
+            } else {
                 unk_0x44 = NULL;
             }
 
@@ -539,8 +499,7 @@ namespace ipl {
             if (isDiskChannel()) {
                 if (unk_0x40 != NULL) {
                     setBalloonText((wchar_t*)System::getChannelManager()->getTitleName(mChanPage, mChanIndex, 0));
-                }
-                else {
+                } else {
                     setBalloonText(System::getMessage(0));
                 }
             }
@@ -553,8 +512,7 @@ namespace ipl {
         BOOL ChannelObj::isDiskChannel() const {
             if (isValid() && System::getChannelManager()->getSceneID(mChanPage, mChanIndex) == channel::SCENE_ID_DISK_CHANNEL) {
                 return TRUE;
-            }
-            else {
+            } else {
                 return FALSE;
             }
         }
@@ -566,11 +524,9 @@ namespace ipl {
         void ChannelObj::onPoint(int unk) {
             if (unk & 0x10000U) {
                 unk_0x74 = 0;
-            }
-            else if (unk & 0x20000U) {
+            } else if (unk & 0x20000U) {
                 unk_0x74 = 1;
-            }
-            else if ((unk_0x74 += 1) > 1) {
+            } else if ((unk_0x74 += 1) > 1) {
                 return;
             }
 
@@ -585,11 +541,9 @@ namespace ipl {
         void ChannelObj::onLeft(int unk) {
             if (unk & 0x10000U) {
                 unk_0x74 = 0;
-            }
-            else if (unk & 0x20000U) {
+            } else if (unk & 0x20000U) {
                 unk_0x74 = 1;
-            }
-            else if ((unk_0x74 -= 1) > 0) {
+            } else if ((unk_0x74 -= 1) > 0) {
                 return;
             }
 
@@ -605,8 +559,7 @@ namespace ipl {
             if (unk) {
                 setCursorAnim(1);
                 unk_0x74 = 1;
-            }
-            else {
+            } else {
                 setCursorAnim(0);
                 unk_0x74 = 0;
             }
@@ -646,8 +599,7 @@ namespace ipl {
             for (nw4r::lyt::GroupList::Iterator it = layout->GetGroupList().GetBeginIter(); it != layout->GetGroupList().GetEndIter(); it++) {
                 if (strcmp(it->GetName(), langGroup) == 0) {
                     bVar4 = true;
-                }
-                else {
+                } else {
                     bool bVar3 = true;
                     for (int i = 0; i < 16; i++) {
                         char name[6];
@@ -660,7 +612,8 @@ namespace ipl {
 
                     if (bVar3) {
                         nw4r::lyt::Group* group = layout->FindGroupByName(langGroup);
-                        for (nw4r::lyt::PaneLinkList::Iterator it2 = group->GetPaneList().GetBeginIter(); it2 != group->GetPaneList().GetEndIter(); it2++) {
+                        for (nw4r::lyt::PaneLinkList::Iterator it2 = group->GetPaneList().GetBeginIter(); it2 != group->GetPaneList().GetEndIter();
+                             it2++) {
                             it2->mTarget->SetVisible(false);
                         }
 
@@ -680,8 +633,7 @@ namespace ipl {
                 for (nw4r::lyt::PaneLinkList::Iterator it = group->GetPaneList().GetBeginIter(); it != group->GetPaneList().GetEndIter(); it++) {
                     it->mTarget->SetVisible(true);
                 }
-            }
-            else {
+            } else {
                 s32 region = System::getRegion();
                 for (int i = 0; i < 16; i++) {
                     char* groupName = (char*)lbl_8164E328[region][i];
@@ -689,7 +641,8 @@ namespace ipl {
                     if (groupName != NULL) {
                         if (strcmp(groupName, &local_50[scLangLookup[region][i]]) == 0) {
                             nw4r::lyt::Group* group = layout->FindGroupByName(groupName);
-                            for (nw4r::lyt::PaneLinkList::Iterator it = group->GetPaneList().GetBeginIter(); it != group->GetPaneList().GetEndIter(); it++) {
+                            for (nw4r::lyt::PaneLinkList::Iterator it = group->GetPaneList().GetBeginIter(); it != group->GetPaneList().GetEndIter();
+                                 it++) {
                                 it->mTarget->SetVisible(true);
                             }
                         }
@@ -742,18 +695,15 @@ namespace ipl {
             if (isValid()) {
                 if (System::getChannelManager()->getSceneID(mChanPage, mChanIndex) == channel::SCENE_ID_DISK_CHANNEL) {
                     frame = 0.0f;
-                }
-                else {
+                } else {
                     if (unk_0x2C->checkData() == nand::RESULT_SUCCESS) {
                         frame = createWadThumbnail();
-                    }
-                    else {
+                    } else {
                         frame = createWrongThumbnail();
                         bVar1 = true;
                     }
                 }
-            }
-            else {
+            } else {
                 frame = createEmptyThumbnail();
                 bVar1 = true;
             }
@@ -785,29 +735,23 @@ namespace ipl {
             if (rsoIdx != 0) {
                 if (unk_0x30->searchFile("icon_Start.brlan")) {
                     unk_0x34 = unk_0x30->bind("icon_Start.brlan");
-                }
-                else {
+                } else {
                     unk_0x34 = NULL;
                 }
-            }
-            else {
+            } else {
                 if (csIdx != 0) {
                     if (unk_0x30->searchFile("icon_Start.brlan")) {
                         unk_0x34 = unk_0x30->bind("icon_Start.brlan");
-                    }
-                    else {
+                    } else {
                         unk_0x34 = NULL;
                     }
-                }
-                else {
+                } else {
                     if (unk_0x30->searchFile("icon.brlan")) {
                         unk_0x34 = unk_0x30->bind("icon_.brlan");
-                    }
-                    else {
+                    } else {
                         if (unk_0x30->searchFile("icon_Whole.brlan")) {
                             unk_0x34 = unk_0x30->bind("icon_Whole.brlan");
-                        }
-                        else {
+                        } else {
                             unk_0x34 = NULL;
                         }
                     }
@@ -817,8 +761,7 @@ namespace ipl {
             if (unk_0x34 != NULL) {
                 if (rsoIdx != 0 || csIdx != 0) {
                     frame = unk_0x34->getMinFrame();
-                }
-                else {
+                } else {
                     frame = unk_0x34->getMinFrame() + (System::getRndm()->get_u16() % (u16)(unk_0x34->getMaxFrame() - unk_0x34->getMinFrame()));
                 }
             }
@@ -858,8 +801,7 @@ namespace ipl {
                 if (unk_0x40 != NULL) {
                     unk_0x30 = unk_0x40;
                     unk_0x34 = unk_0x44;
-                }
-                else {
+                } else {
                     unk_0x30 = mpDiskLyt;
                     unk_0x34 = mpDiskAnim;
                 }
@@ -883,7 +825,7 @@ namespace ipl {
         }
 
         void ChannelObj::initCursor() {
-            unk_0x48 = new(unk_0x08, 4) layout::Object(unk_0x08, unk_0x24, "arc", "my_IplTop_d.brlyt");
+            unk_0x48 = new (unk_0x08, 4) layout::Object(unk_0x08, unk_0x24, "arc", "my_IplTop_d.brlyt");
 
             for (int i = 0; i < 3; i++) {
                 unk_0x4C[i] = unk_0x48->bind(scCursorAnims[i], scPaneAnims[0], false);
@@ -910,14 +852,12 @@ namespace ipl {
 
                 unk_0x48->getAnim(1)->initAnmFrame();
                 unk_0x48->GetRootPane()->SetVisible(false);
-            }
-            else if (unk == 4) {
+            } else if (unk == 4) {
                 unk_0x58 = 4;
                 unk_0x5C = 0;
                 unk_0x48->GetRootPane()->SetVisible(true);
                 startCursorAnim(2);
-            }
-            else {
+            } else {
                 switch (unk_0x58) {
                     case 0: {
                         if (unk == 1) {
@@ -930,11 +870,9 @@ namespace ipl {
                     case 1: {
                         if (unk == 2) {
                             unk_0x58 = 2;
-                        }
-                        else if (unk == 3) {
+                        } else if (unk == 3) {
                             unk_0x5C = 3;
-                        }
-                        else if (unk == 1) {
+                        } else if (unk == 1) {
                             unk_0x5C = 0;
                         }
                         break;
@@ -949,8 +887,7 @@ namespace ipl {
                     case 3: {
                         if (unk == 1) {
                             unk_0x5C = 1;
-                        }
-                        else if (unk == 3) {
+                        } else if (unk == 3) {
                             unk_0x5C = 0;
                         }
                         break;
@@ -960,47 +897,46 @@ namespace ipl {
         }
 
         void ChannelObj::calcCursorAnim() {
-            
         }
 
         /*void ChannelObj::startCursorAnim(int unk) {
-            
+
         }
 
         void ChannelObj::initBalloon() {
-            
+
         }
 
         void ChannelObj::setBalloonText(const wchar_t* text) {
-            
+
         }
 
         void ChannelObj::calcBalloon(const nw4r::math::VEC3& vec) {
-            
+
         }
 
         void ChannelObj::setBalloonAnim(int unk) {
-            
+
         }
 
         void ChannelObj::calcBalloonAnim(int unk) {
-            
+
         }
 
         void ChannelObj::clearModuleParam() {
-            
+
         }
 
         void ChannelObj::bindNewAnm(layout::Object* layout) {
-            
+
         }
 
         void ChannelObj::updateNew() {
-            
+
         }
 
         void ChannelObj::setupNew() {
-            
+
         }*/
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

@@ -1,8 +1,8 @@
 #include <private/os.h>
 #include <revolution/os.h>
 
-#include <revolution/gx.h>
 #include <private/gx.h>
+#include <revolution/gx.h>
 
 #include <private/hollywood.h>
 
@@ -15,7 +15,7 @@ inline void __GXSetAmbMat(u32 amState) {
     if (amState & 0x100) {
         GX_WRITE_XF_REG(0x100A, __GXData->ambColor[0]);
     }
-    
+
     if (amState & 0x200) {
         GX_WRITE_XF_REG(0x100B, __GXData->ambColor[1]);
     }
@@ -23,7 +23,7 @@ inline void __GXSetAmbMat(u32 amState) {
     if (amState & 0x400) {
         GX_WRITE_XF_REG(0x100C, __GXData->matColor[0]);
     }
-    
+
     if (amState & 0x800) {
         GX_WRITE_XF_REG(0x100D, __GXData->matColor[1]);
     }
@@ -104,14 +104,14 @@ void __GXSetDirtyState() {
         if (dStateLocal) {
             __GXSetAmbMat(dStateLocal);
         }
-        
-        dStateLocal = dState & (0x01000000|0x0000F000);
+
+        dStateLocal = dState & (0x01000000 | 0x0000F000);
 
         if (dStateLocal) {
             __GXSetLightChan(dStateLocal);
         }
 
-        dStateLocal = dState & (0x02000000|0x00FF0000);
+        dStateLocal = dState & (0x02000000 | 0x00FF0000);
 
         if (dStateLocal) {
             __GXSetTexGen(dStateLocal);
@@ -131,7 +131,7 @@ void __GXSetDirtyState() {
         dStateLocal = dState & 0x8000000;
         if (dStateLocal) {
             __GXSetProjection();
-        } 
+        }
 
         __GXData->bpSentNot = GX_TRUE;
     }
@@ -187,7 +187,7 @@ void GXEnableTexOffsets(GXTexCoordID coord, u8 line_enable, u8 point_enable) {
 }
 
 void GXSetCullMode(GXCullMode mode) {
-    GXCullMode hwMode = (GXCullMode)(((mode & 0x1)<<1) | ((mode & 0x2)>>1));
+    GXCullMode hwMode = (GXCullMode)(((mode & 0x1) << 1) | ((mode & 0x2) >> 1));
 
     SET_REG_FIELD(__GXData->genMode, 2, 14, hwMode);
     __GXData->dirtyState |= 4;

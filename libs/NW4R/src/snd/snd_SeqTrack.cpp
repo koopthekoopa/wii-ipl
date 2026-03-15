@@ -1,6 +1,6 @@
-#include <nw4r/snd/SeqTrackAllocator.h>
-#include <nw4r/snd/SeqTrack.h>
 #include <nw4r/snd/SeqPlayer.h>
+#include <nw4r/snd/SeqTrack.h>
+#include <nw4r/snd/SeqTrackAllocator.h>
 
 #include <nw4r/snd/NoteOnCallback.h>
 
@@ -93,11 +93,9 @@ namespace nw4r {
             }
 
             void SeqTrack::UpdateChannelLength() {
-                for (Channel* it = mChannelList; it != NULL;
-                    it = it->GetNextTrackChannel()) {
-
+                for (Channel* it = mChannelList; it != NULL; it = it->GetNextTrackChannel()) {
                     if (it->GetLength() > 0) {
-                        it->SetLength(it->GetLength()-1);
+                        it->SetLength(it->GetLength() - 1);
                         if (it->GetLength() == 0) {
                             it->Release();
                         }
@@ -123,9 +121,7 @@ namespace nw4r {
                 }
 
                 if (mParserTrackParam.currentAddr != NULL) {
-                    while (mParserTrackParam.wait == 0 &&
-                        !mParserTrackParam.noteFinishWait) {
-
+                    while (mParserTrackParam.wait == 0 && !mParserTrackParam.noteFinishWait) {
                         if (Parse(doNoteOn) == PARSE_RESULT_FINISH) {
                             return -1;
                         }
@@ -137,9 +133,7 @@ namespace nw4r {
 
             void SeqTrack::StopAllChannel() {
                 ut::AutoInterruptLock lock;
-                for (Channel* it = mChannelList; it != NULL;
-                    it = it->GetNextTrackChannel()) {
-
+                for (Channel* it = mChannelList; it != NULL; it = it->GetNextTrackChannel()) {
                     Channel::FreeChannel(it);
                     it->Stop();
                 }
@@ -153,9 +147,7 @@ namespace nw4r {
                 ut::AutoInterruptLock lock;
                 AxManager::GetInstance().LockUpdateVoicePriority();
 
-                for (Channel* it = mChannelList; it != NULL;
-                    it = it->GetNextTrackChannel()) {
-
+                for (Channel* it = mChannelList; it != NULL; it = it->GetNextTrackChannel()) {
                     if (it->IsActive()) {
                         if (release >= 0) {
                             it->SetRelease(static_cast<u8>(release));
@@ -171,9 +163,7 @@ namespace nw4r {
             void SeqTrack::PauseAllChannel(bool flag) {
                 ut::AutoInterruptLock lock;
 
-                for (Channel* it = mChannelList; it != NULL;
-                    it = it->GetNextTrackChannel()) {
-
+                for (Channel* it = mChannelList; it != NULL; it = it->GetNextTrackChannel()) {
                     if (it->IsActive() && flag != it->IsPause()) {
                         it->Pause(flag);
                     }
@@ -251,9 +241,7 @@ namespace nw4r {
                 }
 
                 ut::AutoInterruptLock lock;
-                for (Channel* it = mChannelList; it != NULL;
-                    it = it->GetNextTrackChannel()) {
-
+                for (Channel* it = mChannelList; it != NULL; it = it->GetNextTrackChannel()) {
                     it->SetUserVolume(volume);
                     it->SetUserPitch(pitch);
                     it->SetUserPitchRatio(pitchRatio);
@@ -283,16 +271,13 @@ namespace nw4r {
 
             void SeqTrack::FreeAllChannel() {
                 ut::AutoInterruptLock lock;
-                for (Channel* it = mChannelList; it != NULL;
-                    it = it->GetNextTrackChannel()) {
-
+                for (Channel* it = mChannelList; it != NULL; it = it->GetNextTrackChannel()) {
                     Channel::FreeChannel(it);
                 }
 
                 mChannelList = NULL;
             }
 
-            
             void SeqTrack::ChannelCallbackFunc(Channel* dropChannel, Channel::ChannelCallbackStatus status, u32 arg) {
                 SeqTrack* p = reinterpret_cast<SeqTrack*>(arg);
 
@@ -314,9 +299,7 @@ namespace nw4r {
                     return;
                 }
 
-                for (Channel* it = p->mChannelList; it->GetNextTrackChannel() != NULL;
-                    it = it->GetNextTrackChannel()) {
-
+                for (Channel* it = p->mChannelList; it->GetNextTrackChannel() != NULL; it = it->GetNextTrackChannel()) {
                     if (it->GetNextTrackChannel() == dropChannel) {
                         it->SetNextTrackChannel(dropChannel->GetNextTrackChannel());
                         return;
@@ -372,16 +355,16 @@ namespace nw4r {
 
                 if (channel == NULL) {
                     NoteOnInfo info = {
-                        mParserTrackParam.prgNo,   // prgNo
-                        key,                       // key
-                        velocity,                  // velocity
-                        tie ? -1 : length,         // length
-                        mParserTrackParam.initPan, // initPan
-                        seqPlayer->GetParserPlayerParam().priority + // priority
+                        mParserTrackParam.prgNo,                      // prgNo
+                        key,                                          // key
+                        velocity,                                     // velocity
+                        tie ? -1 : length,                            // length
+                        mParserTrackParam.initPan,                    // initPan
+                        seqPlayer->GetParserPlayerParam().priority +  // priority
                             GetParserTrackParam().priority,
-                        mSeqPlayer->GetVoiceOutCount(), // voiceOuCount
-                        ChannelCallbackFunc,         // channelCallback
-                        reinterpret_cast<u32>(this)  // channelCallbackData
+                        mSeqPlayer->GetVoiceOutCount(),  // voiceOuCount
+                        ChannelCallbackFunc,             // channelCallback
+                        reinterpret_cast<u32>(this)      // channelCallbackData
                     };
 
                     channel = mSeqPlayer->NoteOn(mParserTrackParam.bankNo, info);
@@ -412,8 +395,7 @@ namespace nw4r {
 
                 if (mParserTrackParam.portaTime == 0) {
                     channel->SetSweepParam(sweepPitch, length, false);
-                }
-                else {
+                } else {
                     int time = mParserTrackParam.portaTime;
                     time *= time;
                     time *= sweepPitch >= 0.0f ? sweepPitch : -sweepPitch;
@@ -427,6 +409,6 @@ namespace nw4r {
 
                 return channel;
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

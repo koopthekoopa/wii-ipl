@@ -1,5 +1,6 @@
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
+
 
 #include <revolution/base/PPCArch.h>
 
@@ -8,9 +9,9 @@
 
 #include <stdio.h>
 
-OSErrorHandler  __OSErrorTable[OS_EXCEPTION_MAX];
+OSErrorHandler __OSErrorTable[OS_EXCEPTION_MAX];
 
-u32             __OSFpscrEnableBits = FPSCR_ENABLE;
+u32 __OSFpscrEnableBits = FPSCR_ENABLE;
 
 void OSReport(const char* msg, ...) {
     va_list marker;
@@ -49,7 +50,7 @@ OSErrorHandler OSSetErrorHandler(OSError error, OSErrorHandler handler) {
 
     BOOL enabled = OSDisableInterrupts();
     u32 msr, fpscr;
- 
+
     int i;
 
     oldHandler = __OSErrorTable[error];
@@ -72,28 +73,24 @@ OSErrorHandler OSSetErrorHandler(OSError error, OSErrorHandler handler) {
                     thread->context.fpscr = FPSCR_NI;
                 }
                 SET_FLAG(thread->context.fpscr, OS_FPSCR_ENABLE);
-                CLEAR_FLAG(thread->context.fpscr,   FPSCR_VXVC   | FPSCR_VXIMZ  | FPSCR_VXZDZ  | FPSCR_VXIDI | FPSCR_VXISI |
-                                                    FPSCR_VXSNAN | FPSCR_VXSOFT | FPSCR_VXSQRT | FPSCR_VXCVI | FPSCR_XX    |
-                                                    FPSCR_ZX     | FPSCR_UX     | FPSCR_OX     | FPSCR_FX    | FPSCR_FI);
+                CLEAR_FLAG(thread->context.fpscr, FPSCR_VXVC | FPSCR_VXIMZ | FPSCR_VXZDZ | FPSCR_VXIDI | FPSCR_VXISI | FPSCR_VXSNAN | FPSCR_VXSOFT |
+                                                      FPSCR_VXSQRT | FPSCR_VXCVI | FPSCR_XX | FPSCR_ZX | FPSCR_UX | FPSCR_OX | FPSCR_FX | FPSCR_FI);
             }
             SET_FLAG(fpscr, __OSFpscrEnableBits & FPSCR_ENABLE);
             SET_FLAG(msr, MSR_FE0 | MSR_FE1);
-        }
-        else {
+        } else {
             for (thread = __OSActiveThreadQueue.head; thread; thread = thread->linkActive.next) {
-                CLEAR_FLAG(thread->context.srr1,  MSR_FE0 | MSR_FE1);
+                CLEAR_FLAG(thread->context.srr1, MSR_FE0 | MSR_FE1);
                 CLEAR_FLAG(thread->context.fpscr, FPSCR_ENABLE);
-                CLEAR_FLAG(thread->context.fpscr,   FPSCR_VXVC   | FPSCR_VXIMZ  | FPSCR_VXZDZ  | FPSCR_VXIDI | FPSCR_VXISI |
-                                                    FPSCR_VXSNAN | FPSCR_VXSOFT | FPSCR_VXSQRT | FPSCR_VXCVI | FPSCR_XX    |
-                                                    FPSCR_ZX     | FPSCR_UX     | FPSCR_OX     | FPSCR_FX    | FPSCR_FI);
+                CLEAR_FLAG(thread->context.fpscr, FPSCR_VXVC | FPSCR_VXIMZ | FPSCR_VXZDZ | FPSCR_VXIDI | FPSCR_VXISI | FPSCR_VXSNAN | FPSCR_VXSOFT |
+                                                      FPSCR_VXSQRT | FPSCR_VXCVI | FPSCR_XX | FPSCR_ZX | FPSCR_UX | FPSCR_OX | FPSCR_FX | FPSCR_FI);
             }
             CLEAR_FLAG(fpscr, FPSCR_ENABLE);
             CLEAR_FLAG(msr, MSR_FE0 | MSR_FE1);
         }
 
-        CLEAR_FLAG(fpscr,   FPSCR_VXVC   | FPSCR_VXIMZ  | FPSCR_VXZDZ  | FPSCR_VXIDI | FPSCR_VXISI |
-                            FPSCR_VXSNAN | FPSCR_VXSOFT | FPSCR_VXSQRT | FPSCR_VXCVI | FPSCR_XX    |
-                            FPSCR_ZX     | FPSCR_UX     | FPSCR_OX     | FPSCR_FX    | FPSCR_FI);
+        CLEAR_FLAG(fpscr, FPSCR_VXVC | FPSCR_VXIMZ | FPSCR_VXZDZ | FPSCR_VXIDI | FPSCR_VXISI | FPSCR_VXSNAN | FPSCR_VXSOFT | FPSCR_VXSQRT |
+                              FPSCR_VXCVI | FPSCR_XX | FPSCR_ZX | FPSCR_UX | FPSCR_OX | FPSCR_FX | FPSCR_FI);
 
         PPCMtfpscr(fpscr);
         PPCMtmsr(msr);
@@ -112,8 +109,7 @@ void __OSUnhandledException(__OSException exception, OSContext* context, u32 dsi
 
     if (!HAS_FLAG(context->srr1, MSR_RI)) {
         OSReport("Non-recoverable Exception %d", exception);
-    }
-    else {
+    } else {
         if (exception == OS_EXCEPTION_PROGRAM && (context->srr1 & SRR1_L2DP_BIT) && __OSErrorTable[OS_EXCEPTION_FLOATING_POINT_EXCEPTION] != NULL) {
             exception = OS_EXCEPTION_FLOATING_POINT_EXCEPTION;
 
@@ -125,9 +121,8 @@ void __OSUnhandledException(__OSException exception, OSContext* context, u32 dsi
             }
 
             fpscr = PPCMffpscr();
-            CLEAR_FLAG(fpscr,   FPSCR_VXVC   | FPSCR_VXIMZ  | FPSCR_VXZDZ  | FPSCR_VXIDI | FPSCR_VXISI |
-                                FPSCR_VXSNAN | FPSCR_VXSOFT | FPSCR_VXSQRT | FPSCR_VXCVI | FPSCR_XX |
-                                FPSCR_ZX     | FPSCR_UX     | FPSCR_OX     | FPSCR_FX    | FPSCR_FI);
+            CLEAR_FLAG(fpscr, FPSCR_VXVC | FPSCR_VXIMZ | FPSCR_VXZDZ | FPSCR_VXIDI | FPSCR_VXISI | FPSCR_VXSNAN | FPSCR_VXSOFT | FPSCR_VXSQRT |
+                                  FPSCR_VXCVI | FPSCR_XX | FPSCR_ZX | FPSCR_UX | FPSCR_OX | FPSCR_FX | FPSCR_FI);
             PPCMtfpscr(fpscr);
 
             PPCMtmsr(msr);
@@ -138,13 +133,11 @@ void __OSUnhandledException(__OSException exception, OSContext* context, u32 dsi
                 CLEAR_FLAG(context->srr1, MSR_FP);
                 __OSFPUContext = NULL;
 
-                CLEAR_FLAG(context->fpscr,  FPSCR_VXVC   | FPSCR_VXIMZ  | FPSCR_VXZDZ  | FPSCR_VXIDI | FPSCR_VXISI |
-                                            FPSCR_VXSNAN | FPSCR_VXSOFT | FPSCR_VXSQRT | FPSCR_VXCVI | FPSCR_XX |
-                                            FPSCR_ZX     | FPSCR_UX     | FPSCR_OX     | FPSCR_FX    | FPSCR_FI);
+                CLEAR_FLAG(context->fpscr, FPSCR_VXVC | FPSCR_VXIMZ | FPSCR_VXZDZ | FPSCR_VXIDI | FPSCR_VXISI | FPSCR_VXSNAN | FPSCR_VXSOFT |
+                                               FPSCR_VXSQRT | FPSCR_VXCVI | FPSCR_XX | FPSCR_ZX | FPSCR_UX | FPSCR_OX | FPSCR_FX | FPSCR_FI);
                 OSEnableScheduler();
                 __OSReschedule();
-            }
-            else {
+            } else {
                 CLEAR_FLAG(context->srr1, MSR_FP);
                 __OSFPUContext = NULL;
             }
@@ -191,7 +184,7 @@ void __OSUnhandledException(__OSException exception, OSContext* context, u32 dsi
             OSReport("\n");
             OSReport("AI DMA Address =   0x%04x%04x\n", DSP_READ_REG(DSP_DMA_START_ADDR_H), DSP_READ_REG(DSP_DMA_START_ADDR_L));
             OSReport("ARAM DMA Address = 0x%04x%04x\n", DSP_READ_REG(DSP_AR_DMA_MMADDR_H), DSP_READ_REG(DSP_AR_DMA_MMADDR_L));
-            OSReport("DI DMA Address =   0x%08x\n",     DI_READ_REG(DI_DMA_MEM_ADDRESS));
+            OSReport("DI DMA Address =   0x%08x\n", DI_READ_REG(DI_DMA_MEM_ADDRESS));
             break;
         }
     }

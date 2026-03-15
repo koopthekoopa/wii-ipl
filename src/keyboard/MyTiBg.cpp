@@ -12,6 +12,6 @@ namespace textinput {
                 mpLayout->Animate();
                 mpLayout->CalculateMtx(mDrawInfo);
             }
-        }
-    }
-}
+        }  // namespace bg
+    }  // namespace extend
+}  // namespace textinput

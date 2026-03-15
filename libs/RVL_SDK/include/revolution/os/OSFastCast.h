@@ -8,6 +8,7 @@ extern "C" {
 #endif
 
 static void OSInitFastCast() {
+    // clang-format off
 #ifdef __MWERKS__
     asm {
         li      r3, 4
@@ -27,15 +28,18 @@ static void OSInitFastCast() {
         mtspr   0x395, r3
     }
 #endif
+    // clang-format on
 }
 
 /*** TO F32 ***/
 
 static f32 __OSu16tof32(register const u16* arg) {
     register f32 ret;
+    // clang-format off
 #ifdef __MWERKS__
     asm { psq_l ret, 0(arg), 1, 3 }
 #endif
+    // clang-format on
     return ret;
 }
 
@@ -49,11 +53,13 @@ static u8 __OSf32tou8(register f32 arg) {
     f32 a;
     register f32* ptr = &a;
     u8 r;
-    #ifdef __MWERKS__
+    // clang-format off
+#ifdef __MWERKS__
     asm {
         psq_st arg, 0(ptr), 1, 2
     }
-    #endif
+#endif
+    // clang-format on
     r = *(u8*)ptr;
     return r;
 }
@@ -66,9 +72,11 @@ static u16 __OSf32tou16(register f32 arg) {
     f32 a;
     register f32* ptr = &a;
     u16 r;
+    // clang-format off
 #ifdef __MWERKS__
     asm { psq_st arg, 0(ptr), 1, 3 }
 #endif
+    // clang-format on
     r = *(u16*)ptr;
     return r;
 }
@@ -79,9 +87,11 @@ static void OSf32tou16(const f32* in, u16* out) {
 
 static f32 __OSs16tof32(register const s16* arg) {
     register f32 ret;
+    // clang-format off
 #ifdef __MWERKS__
     asm { psq_l ret, 0(arg), 1, 5 }
 #endif
+    // clang-format on
     return ret;
 }
 
@@ -93,9 +103,11 @@ static s16 __OSf32tos16(register f32 arg) {
     f32 a;
     register f32* ptr = &a;
     s16 r;
+    // clang-format off
 #ifdef __MWERKS__
     asm { psq_st arg, 0(ptr), 1, 5 }
 #endif
+    // clang-format on
     r = *(s16*)ptr;
     return r;
 }

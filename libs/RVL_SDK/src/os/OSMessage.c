@@ -44,9 +44,9 @@ BOOL OSReceiveMessage(OSMessageQueue* queue, OSMessage* msg, s32 flags) {
         OSSleepThread(&queue->queueReceive);
     }
     if (msg != NULL) {
-       *(u32*)msg = ((u32*)queue->msgArray)[queue->firstIndex];
+        *(u32*)msg = ((u32*)queue->msgArray)[queue->firstIndex];
     }
-    
+
     queue->firstIndex = (queue->firstIndex + 1) % queue->msgCount;
     queue->usedCount--;
     OSWakeupThread(&queue->queueSend);

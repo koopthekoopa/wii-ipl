@@ -17,25 +17,25 @@ enum {
 typedef void (*USBKBDAttachCallback)(void*);
 typedef void (*USBKBDDetachCallback)(void*);
 typedef void (*USBKBDEventCallback)(void*, char*);
-typedef void (*USBKBDCmdLEDCallback)(BOOL success, void *cbarg);
+typedef void (*USBKBDCmdLEDCallback)(BOOL success, void* cbarg);
 
 typedef struct USBKBDCmdLED {
     vu32 unk_0x00;
-    vu8  unk_0x04;
+    vu8 unk_0x04;
 } USBKBDCmdLED;
 
 typedef struct USBKBDCmdLEDAsync {
-    USBKBDCmdLED            base;           // 0x00
-    u8                      unk_0x08[0x10];
-    USBKBDCmdLEDCallback    cb;             // 0x18
-    void*                   cbArg;          // 0x1C
+    USBKBDCmdLED base;  // 0x00
+    u8 unk_0x08[0x10];
+    USBKBDCmdLEDCallback cb;  // 0x18
+    void* cbArg;              // 0x1C
 } USBKBDCmdLEDAsync;
 
-USBKBDErr   USBKBDInitialize(USBKBDAttachCallback attachCb, USBKBDDetachCallback detachCb);
+USBKBDErr USBKBDInitialize(USBKBDAttachCallback attachCb, USBKBDDetachCallback detachCb);
 
-USBKBDErr   USBKBDSetLED(u32, u8, USBKBDCmdLED* cmd);
-USBKBDErr   USBKBDSetLEDAsync(u32, u8, USBKBDCmdLEDAsync* cmd, USBKBDCmdLEDCallback cb, void* cbArg);
+USBKBDErr USBKBDSetLED(u32, u8, USBKBDCmdLED* cmd);
+USBKBDErr USBKBDSetLEDAsync(u32, u8, USBKBDCmdLEDAsync* cmd, USBKBDCmdLEDCallback cb, void* cbArg);
 
-USBKBDErr   USBKBDRegisterEventCallback(USBKBDEventCallback cb);
+USBKBDErr USBKBDRegisterEventCallback(USBKBDEventCallback cb);
 
 #endif  // REVOLUTION_USB_KBD_H

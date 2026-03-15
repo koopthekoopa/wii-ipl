@@ -1,4 +1,4 @@
-#define VERY_DIRTY_MATCH_HACK // for 4.3k
+#define VERY_DIRTY_MATCH_HACK  // for 4.3k
 
 #include "scene/backMenu/iplBackMenu.h"
 
@@ -38,14 +38,13 @@ namespace ipl {
             return false;
         }
 
-        BackMenu::BackMenu(EGG::Heap* heap) :
-        FaderSceneBase(heap),
-        unused_0x5C(0) {
-            setSceneParentFlags(SCN_PARENTFLAG_DRAW); // (ignored as child scenes aren't created over this scene)
+        BackMenu::BackMenu(EGG::Heap* heap) : FaderSceneBase(heap), unused_0x5C(0) {
+            setSceneParentFlags(SCN_PARENTFLAG_DRAW);  // (ignored as child scenes aren't created over this scene)
         }
 
-        void BackMenu::prepare() {}
-        
+        void BackMenu::prepare() {
+        }
+
         BOOL BackMenu::isReady() const {
             return TRUE;
         }
@@ -101,9 +100,9 @@ namespace ipl {
             if (System::createdAfterAndLibMgr() || (System::hasCreatedAfter() && System::isNandFull())) {
                 System::getPointer()->setVisible(true);
                 System::getResetHandler()->enableResetToMenu();
-                
+
                 reserveAllSceneDestruction(SCENE_BOARD, NULL);
-                
+
                 return FADER_SCN_NEXT;
             }
             return FADER_SCN_CONTINUE;
@@ -115,5 +114,5 @@ namespace ipl {
                 mpLayout->draw();
             }
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

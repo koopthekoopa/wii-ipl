@@ -8,14 +8,10 @@
 namespace nw4r {
     namespace snd {
         namespace detail {
-            SoundArchiveFileReader::SoundArchiveFileReader() :
-            mInfo(NULL),
-            mStringBase(NULL),
-            mStringTable(NULL),
-            mStringTreeSound(NULL),
-            mStringTreePlayer(NULL),
-            mStringTreeGroup(NULL),
-            mStringTreeBank(NULL) {}
+            SoundArchiveFileReader::SoundArchiveFileReader()
+                : mInfo(NULL), mStringBase(NULL), mStringTable(NULL), mStringTreeSound(NULL), mStringTreePlayer(NULL), mStringTreeGroup(NULL),
+                  mStringTreeBank(NULL) {
+            }
 
             void SoundArchiveFileReader::Init(const void* soundArchiveData) {
                 if (!IsValidFileHeader(soundArchiveData)) {
@@ -50,10 +46,14 @@ namespace nw4r {
                 mStringBase = pStringBlock;
 
                 mStringTable = static_cast<const SoundArchiveFile::StringTable*>(GetPtrConst(mStringBase, pStringBlock->stringChunk.tableOffset));
-                mStringTreeSound = static_cast<const SoundArchiveFile::StringTree*>(GetPtrConst(mStringBase, pStringBlock->stringChunk.soundTreeOffset));
-                mStringTreePlayer = static_cast<const SoundArchiveFile::StringTree*>(GetPtrConst(mStringBase, pStringBlock->stringChunk.playerTreeOffset));
-                mStringTreeGroup = static_cast<const SoundArchiveFile::StringTree*>(GetPtrConst(mStringBase, pStringBlock->stringChunk.groupTreeOffset));
-                mStringTreeBank = static_cast<const SoundArchiveFile::StringTree*>(GetPtrConst(mStringBase, pStringBlock->stringChunk.bankTreeOffset));
+                mStringTreeSound =
+                    static_cast<const SoundArchiveFile::StringTree*>(GetPtrConst(mStringBase, pStringBlock->stringChunk.soundTreeOffset));
+                mStringTreePlayer =
+                    static_cast<const SoundArchiveFile::StringTree*>(GetPtrConst(mStringBase, pStringBlock->stringChunk.playerTreeOffset));
+                mStringTreeGroup =
+                    static_cast<const SoundArchiveFile::StringTree*>(GetPtrConst(mStringBase, pStringBlock->stringChunk.groupTreeOffset));
+                mStringTreeBank =
+                    static_cast<const SoundArchiveFile::StringTree*>(GetPtrConst(mStringBase, pStringBlock->stringChunk.bankTreeOffset));
             }
 
             void SoundArchiveFileReader::SetInfoChunk(const void* pChunk, u32 size) {
@@ -82,8 +82,7 @@ namespace nw4r {
                     }
 
                     soundType = static_cast<SoundType>(pCmnInfo->soundType);
-                }
-                else {
+                } else {
                     soundType = static_cast<SoundType>(pTable->items[id].dataType);
                 }
 
@@ -104,7 +103,6 @@ namespace nw4r {
             }
 
             bool SoundArchiveFileReader::ReadSoundInfo(u32 id, SoundArchive::SoundInfo* soundInfo) const {
-
                 const SoundArchiveFile::SoundCommonInfo* pCmnInfo = impl_GetSoundInfo(id);
 
                 if (pCmnInfo == NULL) {
@@ -120,7 +118,6 @@ namespace nw4r {
             }
 
             bool SoundArchiveFileReader::ReadSeqSoundInfo(u32 id, SoundArchive::SeqSoundInfo* info) const {
-
                 const SoundArchiveFile::SeqSoundInfo* pSrc = impl_GetSeqSoundInfo(id);
 
                 if (pSrc == NULL) {
@@ -147,7 +144,6 @@ namespace nw4r {
             }
 
             bool SoundArchiveFileReader::ReadWaveSoundInfo(u32 id, SoundArchive::WaveSoundInfo* info) const {
-
                 const SoundArchiveFile::WaveSoundInfo* pSrc = impl_GetWaveSoundInfo(id);
 
                 if (pSrc == NULL) {
@@ -209,7 +205,6 @@ namespace nw4r {
             }
 
             bool SoundArchiveFileReader::ReadGroupItemInfo(u32 groupId, u32 itemId, SoundArchive::GroupItemInfo* info) const {
-
                 const SoundArchiveFile::GroupInfo* pGroup = impl_GetGroupInfo(groupId);
 
                 if (pGroup == NULL) {
@@ -242,7 +237,6 @@ namespace nw4r {
             }
 
             bool SoundArchiveFileReader::ReadSoundArchivePlayerInfo(SoundArchive::SoundArchivePlayerInfo* info) const {
-
                 const SoundArchiveFile::SoundArchivePlayerInfo* pSrc = Util::GetDataRefAddress0(mInfo->soundArchivePlayerInfoRef, mInfo);
 
                 // @bug Doesn't check dataref result
@@ -387,7 +381,6 @@ namespace nw4r {
             }
 
             u32 SoundArchiveFileReader::ConvertLabelStringToId(const SoundArchiveFile::StringTree* pTree, const char* label) const {
-
                 if (pTree == NULL) {
                     return SoundArchive::INVALID_ID;
                 }
@@ -407,8 +400,7 @@ namespace nw4r {
                     u32 nodeIndex;
                     if (pos < length && (1 << (7 - bit)) & label[pos]) {
                         nodeIndex = pNode->rightIdx;
-                    }
-                    else {
+                    } else {
                         nodeIndex = pNode->leftIdx;
                     }
 
@@ -437,8 +429,7 @@ namespace nw4r {
 
                 if (GetVersion() >= NW4R_VERSION(1, 1)) {
                     return Util::GetDataRefAddress0(pTable->items[id], mInfo);
-                }
-                else {
+                } else {
                     return static_cast<const SoundArchiveFile::SoundCommonInfo*>(ut::AddOffsetToPtr(mInfo, pTable->items[id].value));
                 }
             }
@@ -532,6 +523,6 @@ namespace nw4r {
 
                 return Util::GetDataRefAddress0(pTable->items[id], mInfo);
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

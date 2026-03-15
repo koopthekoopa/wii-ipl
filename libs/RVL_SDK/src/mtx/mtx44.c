@@ -2,6 +2,8 @@
 
 #include <math.h>
 
+// clang-format off
+
 void C_MTXFrustum(Mtx44 m, f32 t, f32 b, f32 l, f32 r, f32 n, f32 f) {
     f32 tmp;
 
@@ -76,3 +78,5 @@ void C_MTXOrtho(Mtx44 m, f32 t, f32 b, f32 l, f32 r, f32 n, f32 f) {
     m[3][2] = 0;
     m[3][3] = 1;
 }
+
+// clang-format on

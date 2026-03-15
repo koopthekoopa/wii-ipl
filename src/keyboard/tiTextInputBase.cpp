@@ -10,7 +10,7 @@ namespace textinput {
 
     void CommandReceiver::onCommand(INPUT_COMMAND command, void* data) {
         for (CommandSender* sender = static_cast<CommandSender*>(nw4r::ut::List_GetFirst(&mSenderList)); sender != NULL;
-        sender = static_cast<CommandSender*>(nw4r::ut::List_GetNext(&mSenderList, sender))) {
+             sender = static_cast<CommandSender*>(nw4r::ut::List_GetNext(&mSenderList, sender))) {
             sender->updateFromReceiver((u32)command, data);
         }
     }
@@ -18,4 +18,4 @@ namespace textinput {
     void CommandReceiver::clearSender() {
         nw4r::ut::List_Init(&mSenderList, offsetof(CommandSender, mLink));
     }
-}
+}  // namespace textinput

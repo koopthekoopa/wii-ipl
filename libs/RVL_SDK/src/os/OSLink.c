@@ -1,5 +1,5 @@
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 void __OSModuleInit() {
     __OSModuleInfoList.tail = NULL;

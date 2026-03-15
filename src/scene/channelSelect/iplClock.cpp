@@ -7,6 +7,7 @@ namespace ipl {
     namespace scene {
         bool clock::m_already_shown_wii_menu = false;
 
+        // clang-format off
         static const char* s_time_num[] = {
             "Num0",
             "Num1",
@@ -19,30 +20,31 @@ namespace ipl {
             "Num8",
             "Num9",
         };
+        // clang-format on
 
-        clock::clock() :
-        mpLayout(NULL) {}
+        clock::clock() : mpLayout(NULL) {
+        }
 
         void clock::init(EGG::Heap* heap, nand::LayoutFile* layoutFile) {
             // Init layout
-            mpLayout = new(heap, 4) layout::Object(heap, layoutFile, "arc", "my_Clock_a.brlyt");
-        
+            mpLayout = new (heap, 4) layout::Object(heap, layoutFile, "arc", "my_Clock_a.brlyt");
+
             // Bind animations
-            mpLayout->bind("my_Clock_a_Change.brlan",   "T_WiiMenu",    false);
-            mpLayout->bind("my_Clock_a_Change.brlan",   "N_Clock",      false);
-            mpLayout->bind("my_Clock_a_Min.brlan",      "ClockTen",     false);
-            mpLayout->bind("my_Clock_a_NumApear.brlan", "Clock0",       false, false);
-            mpLayout->bind("my_Clock_a_NumApear.brlan", "Clock1",       false, false);
-            mpLayout->bind("my_Clock_a_NumApear.brlan", "Clock2",       false, false);
-            mpLayout->bind("my_Clock_a_NumApear.brlan", "Clock3",       false, false);
-            mpLayout->bind("my_Clock_a_NumApear.brlan", "AM_PM",        false, false);
-            mpLayout->bind("my_Clock_a_NumApear.brlan", "AM_PM_R",      false, false);
-            mpLayout->bind("my_Clock_a_NumLost.brlan",  "Clock0",       false);
-            mpLayout->bind("my_Clock_a_NumLost.brlan",  "Clock1",       false);
-            mpLayout->bind("my_Clock_a_NumLost.brlan",  "Clock2",       false);
-            mpLayout->bind("my_Clock_a_NumLost.brlan",  "Clock3",       false);
-            mpLayout->bind("my_Clock_a_NumLost.brlan",  "AM_PM",        false);
-            mpLayout->bind("my_Clock_a_NumLost.brlan",  "AM_PM_R",      false);
+            mpLayout->bind("my_Clock_a_Change.brlan", "T_WiiMenu", false);
+            mpLayout->bind("my_Clock_a_Change.brlan", "N_Clock", false);
+            mpLayout->bind("my_Clock_a_Min.brlan", "ClockTen", false);
+            mpLayout->bind("my_Clock_a_NumApear.brlan", "Clock0", false, false);
+            mpLayout->bind("my_Clock_a_NumApear.brlan", "Clock1", false, false);
+            mpLayout->bind("my_Clock_a_NumApear.brlan", "Clock2", false, false);
+            mpLayout->bind("my_Clock_a_NumApear.brlan", "Clock3", false, false);
+            mpLayout->bind("my_Clock_a_NumApear.brlan", "AM_PM", false, false);
+            mpLayout->bind("my_Clock_a_NumApear.brlan", "AM_PM_R", false, false);
+            mpLayout->bind("my_Clock_a_NumLost.brlan", "Clock0", false);
+            mpLayout->bind("my_Clock_a_NumLost.brlan", "Clock1", false);
+            mpLayout->bind("my_Clock_a_NumLost.brlan", "Clock2", false);
+            mpLayout->bind("my_Clock_a_NumLost.brlan", "Clock3", false);
+            mpLayout->bind("my_Clock_a_NumLost.brlan", "AM_PM", false);
+            mpLayout->bind("my_Clock_a_NumLost.brlan", "AM_PM_R", false);
             mpLayout->finishBinding();
 
             // Configure clock layout
@@ -80,8 +82,7 @@ namespace ipl {
                 mpLayout->getAnim(ANIM_CLOCK_CHANGE)->init();
 
                 mState = STATE_NORMAL;
-            }
-            else {
+            } else {
                 m_already_shown_wii_menu = true;
                 mWiiMenuTimer.set_msec(WII_MENU_APPEAR_FOR);
 
@@ -118,7 +119,7 @@ namespace ipl {
 
             wiiMenuPane->SetTranslate(nw4r::math::VEC2(mtx.m[0][3], mtx.m[1][3]));
             wiiMenuPane->CalculateMtx(*mpLayout->getDrawInfo());
-            
+
             mpLayout->draw(wiiMenuPane);
         }
 
@@ -186,12 +187,7 @@ namespace ipl {
             };
 
             const char* clockTexNames[CLOCK_TEXTURE_MAX] = {
-                "Clock0",
-                "Clock1",
-                "Clock2",
-                "Clock3",
-                "AM_PM",
-                "AM_PM_R",
+                "Clock0", "Clock1", "Clock2", "Clock3", "AM_PM", "AM_PM_R",
             };
 
             bool isPM = mCurrentTex.isPM;
@@ -264,5 +260,5 @@ namespace ipl {
             }
             return ret;
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

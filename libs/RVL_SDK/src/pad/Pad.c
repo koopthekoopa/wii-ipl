@@ -1,36 +1,21 @@
 #include <revolution/pad.h>
 
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 #include <private/si.h>
 #include <private/vi.h>
 
-#include <string.h>
 #include <math.h>
+#include <string.h>
 
 #include <revolution/verdefs.h>
 
 SDKDefineVersion(PAD, "Apr 20 2010", "11:20:52");
 
-#define PAD_ALL             \
-    (                      \
-        PAD_BUTTON_LEFT  | \
-        PAD_BUTTON_RIGHT | \
-        PAD_BUTTON_DOWN  | \
-        PAD_BUTTON_UP    | \
-        PAD_TRIGGER_Z    | \
-        PAD_TRIGGER_R    | \
-        PAD_TRIGGER_L    | \
-        PAD_BUTTON_A     | \
-        PAD_BUTTON_B     | \
-        PAD_BUTTON_X     | \
-        PAD_BUTTON_Y     | \
-        PAD_BUTTON_MENU  | \
-        0x2000           | \
-        0x0080             \
-    )
-
+#define PAD_ALL                                                                                                                                      \
+    (PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT | PAD_BUTTON_DOWN | PAD_BUTTON_UP | PAD_TRIGGER_Z | PAD_TRIGGER_R | PAD_TRIGGER_L | PAD_BUTTON_A |           \
+     PAD_BUTTON_B | PAD_BUTTON_X | PAD_BUTTON_Y | PAD_BUTTON_MENU | 0x2000 | 0x0080)
 
 static BOOL OnShutdown(BOOL final, u32 code);
 
@@ -57,8 +42,8 @@ static u32 CheckingBits;
 static u32 PendingBits;
 static u32 BarrelBits;
 
-static u32          Type[PAD_MAX_CONTROLLER];
-static PADStatus    Origin[PAD_MAX_CONTROLLER];
+static u32 Type[PAD_MAX_CONTROLLER];
+static PADStatus Origin[PAD_MAX_CONTROLLER];
 
 u32 __PADSpec;
 
@@ -66,15 +51,15 @@ static void PADTypeAndStatusCallback(s32 chan, u32 type);
 static void DoReset();
 static void PADEnable(s32 chan);
 static void PADDisable(s32 chan);
-static void PADProbeCallback(s32 chan, u32 error, OSContext *context);
+static void PADProbeCallback(s32 chan, u32 error, OSContext* context);
 static void UpdateOrigin(s32 chan);
-static void PADOriginCallback(s32 chan, u32 error, OSContext *context);
+static void PADOriginCallback(s32 chan, u32 error, OSContext* context);
 static void PADReceiveCheckCallback(s32 chan, u32 error);
-static void SPEC0_MakeStatus(s32 chan, PADStatus *status, u32 data[2]);
-static void SPEC1_MakeStatus(s32 chan, PADStatus *status, u32 data[2]);
-static s8   ClampS8(s8 var, s8 org);
-static u8   ClampU8(u8 var, u8 org);
-static void SPEC2_MakeStatus(s32 chan, PADStatus *status, u32 data[2]);
+static void SPEC0_MakeStatus(s32 chan, PADStatus* status, u32 data[2]);
+static void SPEC1_MakeStatus(s32 chan, PADStatus* status, u32 data[2]);
+static s8 ClampS8(s8 var, s8 org);
+static u8 ClampU8(u8 var, u8 org);
+static void SPEC2_MakeStatus(s32 chan, PADStatus* status, u32 data[2]);
 
 typedef void (*SPECCallback)(s32, PADStatus*, u32*);
 static SPECCallback MakeStatus = SPEC2_MakeStatus;
@@ -120,7 +105,7 @@ static void DoReset() {
     if (ResettingChan != 32) {
         chanBit = (PAD_CHAN0_BIT >> ResettingChan);
         ResettingBits &= ~chanBit;
-        
+
         memset(&Origin[ResettingChan], 0, sizeof(PADStatus));
         SIGetTypeAsync(ResettingChan, PADTypeAndStatusCallback);
     }
@@ -242,16 +227,13 @@ static void PADTypeAndStatusCallback(s32 chan, u32 type) {
     if (!(type & SI_GC_WIRELESS) || (type & SI_WIRELESS_IR)) {
         if (recalibrate) {
             rc = SITransfer(ResettingChan, &CmdCalibrate, 3, &Origin[ResettingChan], 10, PADOriginCallback, 0);
-        }
-        else {
+        } else {
             rc = SITransfer(ResettingChan, &CmdReadOrigin, 1, &Origin[ResettingChan], 10, PADOriginCallback, 0);
         }
-    }
-    else if ((type & SI_WIRELESS_FIX_ID) && (type & SI_WIRELESS_CONT_MASK) == SI_WIRELESS_CONT && !(type & SI_WIRELESS_LITE)) {
+    } else if ((type & SI_WIRELESS_FIX_ID) && (type & SI_WIRELESS_CONT_MASK) == SI_WIRELESS_CONT && !(type & SI_WIRELESS_LITE)) {
         if (type & SI_WIRELESS_RECEIVED) {
             rc = SITransfer(ResettingChan, &CmdReadOrigin, 1, &Origin[ResettingChan], 10, PADOriginCallback, 0);
-        }
-        else {
+        } else {
             rc = SITransfer(ResettingChan, &CmdProbeDevice[ResettingChan], 3, &Origin[ResettingChan], 8, PADProbeCallback, 0);
         }
     }
@@ -276,14 +258,11 @@ static void PADReceiveCheckCallback(s32 chan, u32 type) {
         WaitingBits &= ~chanBit;
         CheckingBits &= ~chanBit;
 
-        if (!(error &
-            (SI_ERROR_UNDER_RUN | SI_ERROR_OVER_RUN | SI_ERROR_NO_RESPONSE | SI_ERROR_COLLISION)) &&
-            (type & SI_GC_WIRELESS) && (type & SI_WIRELESS_FIX_ID) && (type & SI_WIRELESS_RECEIVED) &&
-            !(type & SI_WIRELESS_IR) && (type & SI_WIRELESS_CONT_MASK) == SI_WIRELESS_CONT &&
-            !(type & SI_WIRELESS_LITE)) {
+        if (!(error & (SI_ERROR_UNDER_RUN | SI_ERROR_OVER_RUN | SI_ERROR_NO_RESPONSE | SI_ERROR_COLLISION)) && (type & SI_GC_WIRELESS) &&
+            (type & SI_WIRELESS_FIX_ID) && (type & SI_WIRELESS_RECEIVED) && !(type & SI_WIRELESS_IR) &&
+            (type & SI_WIRELESS_CONT_MASK) == SI_WIRELESS_CONT && !(type & SI_WIRELESS_LITE)) {
             SITransfer(chan, &CmdReadOrigin, 1, &Origin[chan], 10, PADOriginUpdateCallback, 0);
-        }
-        else {
+        } else {
             PADDisable(chan);
         }
     }
@@ -347,7 +326,7 @@ BOOL PADInit() {
     if (Initialized) {
         return 1;
     }
-    
+
     OSRegisterVersion(GetVersion(PAD));
 
     if (__PADSpec)
@@ -357,11 +336,8 @@ BOOL PADInit() {
 
     if (__PADFixBits != 0) {
         OSTime time = OSGetTime();
-        __OSWirelessPadFixMode = (u16)((((time) & 0xffff) +
-                                        ((time >> 16) & 0xffff) +
-                                        ((time >> 32) & 0xffff) +
-                                        ((time >> 48) & 0xffff)) & 0x3fff);
-    
+        __OSWirelessPadFixMode = (u16)((((time) & 0xffff) + ((time >> 16) & 0xffff) + ((time >> 32) & 0xffff) + ((time >> 48) & 0xffff)) & 0x3fff);
+
         RecalibrateBits = PAD_CHAN0_BIT | PAD_CHAN1_BIT | PAD_CHAN2_BIT | PAD_CHAN3_BIT;
     }
 
@@ -418,20 +394,16 @@ u32 PADRead(PADStatus* status) {
             PADReset(0);
             status->err = PAD_ERR_NOT_READY;
             memset(status, 0, offsetof(PADStatus, err));
-        }
-        else if ((ResettingBits & chanBit) || ResettingChan == chan) {
+        } else if ((ResettingBits & chanBit) || ResettingChan == chan) {
             status->err = PAD_ERR_NOT_READY;
             memset(status, 0, offsetof(PADStatus, err));
-        }
-        else if (!(EnabledBits & chanBit)) {
+        } else if (!(EnabledBits & chanBit)) {
             status->err = PAD_ERR_NO_CONTROLLER;
             memset(status, 0, offsetof(PADStatus, err));
-        }
-        else if (SIIsChanBusy(chan)) {
+        } else if (SIIsChanBusy(chan)) {
             status->err = PAD_ERR_TRANSFER;
             memset(status, 0, offsetof(PADStatus, err));
-        }
-        else {
+        } else {
             sr = SIGetStatus(chan);
             if (sr & SI_ERROR_NO_RESPONSE) {
                 SIGetResponse(chan, data);
@@ -444,42 +416,37 @@ u32 PADRead(PADStatus* status) {
                         CheckingBits |= chanBit;
                         SIGetTypeAsync(chan, PADReceiveCheckCallback);
                     }
-                }
-                else {
+                } else {
                     PADDisable(chan);
                     status->err = PAD_ERR_NO_CONTROLLER;
                     memset(status, 0, offsetof(PADStatus, err));
                 }
-            }
-            else {
+            } else {
                 if (!(SIGetType(chan) & SI_GC_NOMOTOR)) {
                     motor |= chanBit;
                 }
-    
+
                 if (!SIGetResponse(chan, &data)) {
                     status->err = PAD_ERR_TRANSFER;
                     memset(status, 0, offsetof(PADStatus, err));
-                }
-                else if (data[0] & 0x80000000) {
+                } else if (data[0] & 0x80000000) {
                     status->err = PAD_ERR_TRANSFER;
                     memset(status, 0, offsetof(PADStatus, err));
-                }
-                else {
+                } else {
                     MakeStatus(chan, status, data);
-    
+
                     // Check and clear PAD_ORIGIN bit
                     if (status->button & 0x2000) {
                         status->err = PAD_ERR_TRANSFER;
                         memset(status, 0, offsetof(PADStatus, err));
-        
+
                         // Get origin. It is okay if the following transfer fails
                         // since the PAD_ORIGIN bit remains until the read origin
                         // command complete.
                         SITransfer(chan, &CmdReadOrigin, 1, &Origin[chan], 10, PADOriginUpdateCallback, 0);
-                    }
-                    else {
+                    } else {
                         status->err = PAD_ERR_NONE;
-        
+
                         // Clear PAD_INTERFERE bit
                         status->button &= ~0x0080;
                     }
@@ -566,8 +533,7 @@ static s8 ClampS8(s8 var, s8 org) {
         if (var < min) {
             var = min;
         }
-    }
-    else if (org < 0) {
+    } else if (org < 0) {
         s8 max = (s8)(127 + org);
         if (max < var) {
             var = max;
@@ -583,7 +549,7 @@ static u8 ClampU8(u8 var, u8 org) {
     return var -= org;
 }
 
-#define SQ(x) ((x)*(x))
+#define SQ(x) ((x) * (x))
 static void SPEC2_MakeStatus(s32 chan, PADStatus* status, u32 data[2]) {
     PADStatus* origin;
     static PADStatus pre_status[PAD_MAX_CONTROLLER];
@@ -664,35 +630,30 @@ static void SPEC2_MakeStatus(s32 chan, PADStatus* status, u32 data[2]) {
         status->substickX = 0;
         status->substickY = 0;
         return;
-    }
-    else {
+    } else {
         BarrelBits &= ~(PAD_CHAN0_BIT >> chan);
     }
 
     origin = &Origin[chan];
 
-    status->stickX          = ClampS8(status->stickX, origin->stickX);
-    status->stickY          = ClampS8(status->stickY, origin->stickY);
+    status->stickX = ClampS8(status->stickX, origin->stickX);
+    status->stickY = ClampS8(status->stickY, origin->stickY);
 
-    status->substickX       = ClampS8(status->substickX, origin->substickX);
-    status->substickY       = ClampS8(status->substickY, origin->substickY);
+    status->substickX = ClampS8(status->substickX, origin->substickX);
+    status->substickY = ClampS8(status->substickY, origin->substickY);
 
-    status->triggerLeft     = ClampU8(status->triggerLeft, origin->triggerLeft);
-    status->triggerRight    = ClampU8(status->triggerRight, origin->triggerRight);
+    status->triggerLeft = ClampU8(status->triggerLeft, origin->triggerLeft);
+    status->triggerRight = ClampU8(status->triggerRight, origin->triggerRight);
 
-    if (__abs(SQ(status->stickX)        - SQ(pre_status[chan].stickX))          >= 9 
-     || __abs(SQ(status->stickY)        - SQ(pre_status[chan].stickY))          >= 9
-     || __abs(SQ(status->substickX)     - SQ(pre_status[chan].substickX))       >= 9
-     || __abs(SQ(status->substickY)     - SQ(pre_status[chan].substickY))       >= 9
-     || __abs(SQ(status->triggerLeft)   - SQ(pre_status[chan].triggerLeft))     >= 9
-     || __abs(SQ(status->triggerRight)  - SQ(pre_status[chan].triggerRight))    >= 9
-     || status->button != pre_status[chan].button) {
+    if (__abs(SQ(status->stickX) - SQ(pre_status[chan].stickX)) >= 9 || __abs(SQ(status->stickY) - SQ(pre_status[chan].stickY)) >= 9 ||
+        __abs(SQ(status->substickX) - SQ(pre_status[chan].substickX)) >= 9 || __abs(SQ(status->substickY) - SQ(pre_status[chan].substickY)) >= 9 ||
+        __abs(SQ(status->triggerLeft) - SQ(pre_status[chan].triggerLeft)) >= 9 ||
+        __abs(SQ(status->triggerRight) - SQ(pre_status[chan].triggerRight)) >= 9 || status->button != pre_status[chan].button) {
         __VIResetSIIdle();
     }
 
     memcpy(&pre_status[chan], status, sizeof(PADStatus));
 }
-
 
 BOOL PADSync() {
     return ResettingBits == 0 && (s32)ResettingChan == 32 && !SIBusy();
@@ -715,8 +676,7 @@ static BOOL OnShutdown(BOOL final, u32 code) {
             return FALSE;
         }
         return sync;
-    }
-    else {
+    } else {
         recalibrated = FALSE;
     }
 
@@ -742,8 +702,7 @@ PADSamplingCallback PADSetSamplingCallback(PADSamplingCallback callback) {
     SamplingCallback = callback;
     if (callback) {
         SIRegisterPollingHandler(SamplingHandler);
-    }
-    else {
+    } else {
         SIUnregisterPollingHandler(SamplingHandler);
     }
 

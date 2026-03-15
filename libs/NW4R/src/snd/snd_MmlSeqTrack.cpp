@@ -13,6 +13,6 @@ namespace nw4r {
             ParseResult MmlSeqTrack::Parse(bool doNoteOn) {
                 return mParser->Parse(this, doNoteOn);
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

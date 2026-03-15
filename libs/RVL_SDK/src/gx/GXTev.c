@@ -1,8 +1,8 @@
 #include <private/os.h>
 #include <revolution/os.h>
 
-#include <revolution/gx.h>
 #include <private/gx.h>
+#include <revolution/gx.h>
 
 #include <private/hollywood.h>
 
@@ -48,8 +48,7 @@ void GXSetTevOp(GXTevStageID id, GXTevMode mode) {
     if (id == GX_TEVSTAGE0) {
         ctmp = (u32*)TEVCOpTableST0 + mode;
         atmp = (u32*)TEVAOpTableST0 + mode;
-    }
-    else {
+    } else {
         ctmp = (u32*)TEVCOpTableST1 + mode;
         atmp = (u32*)TEVAOpTableST1 + mode;
     }
@@ -72,9 +71,9 @@ void GXSetTevColorIn(GXTevStageID stage, GXTevColorArg a, GXTevColorArg b, GXTev
 
     tevReg = __GXData->tevc[stage];
     SET_REG_FIELD(tevReg, 4, 12, a);
-    SET_REG_FIELD(tevReg, 4,  8, b);
-    SET_REG_FIELD(tevReg, 4,  4, c);
-    SET_REG_FIELD(tevReg, 4,  0, d);
+    SET_REG_FIELD(tevReg, 4, 8, b);
+    SET_REG_FIELD(tevReg, 4, 4, c);
+    SET_REG_FIELD(tevReg, 4, 0, d);
 
     GX_WRITE_RAS_REG(tevReg);
     __GXData->tevc[stage] = tevReg;
@@ -87,8 +86,8 @@ void GXSetTevAlphaIn(GXTevStageID stage, GXTevAlphaArg a, GXTevAlphaArg b, GXTev
     tevReg = __GXData->teva[stage];
     SET_REG_FIELD(tevReg, 3, 13, a);
     SET_REG_FIELD(tevReg, 3, 10, b);
-    SET_REG_FIELD(tevReg, 3,  7, c);
-    SET_REG_FIELD(tevReg, 3,  4, d);
+    SET_REG_FIELD(tevReg, 3, 7, c);
+    SET_REG_FIELD(tevReg, 3, 4, d);
 
     GX_WRITE_RAS_REG(tevReg);
     __GXData->teva[stage] = tevReg;
@@ -103,8 +102,7 @@ void GXSetTevColorOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale 
     if (op <= 1) {
         SET_REG_FIELD(tevReg, 2, 20, scale);
         SET_REG_FIELD(tevReg, 2, 16, bias);
-    }
-    else {
+    } else {
         SET_REG_FIELD(tevReg, 2, 20, (op >> 1) & 3);
         SET_REG_FIELD(tevReg, 2, 16, 3);
     }
@@ -124,8 +122,7 @@ void GXSetTevAlphaOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale 
     if (op <= 1) {
         SET_REG_FIELD(tevReg, 2, 20, scale);
         SET_REG_FIELD(tevReg, 2, 16, bias);
-    }
-    else {
+    } else {
         SET_REG_FIELD(tevReg, 2, 20, (op >> 1) & 3);
         SET_REG_FIELD(tevReg, 2, 16, 3);
     }
@@ -170,7 +167,7 @@ void GXSetTevColorS10(GXTevRegID id, GXColorS10 color) {
     sBA = *((u32*)&color + 1);
 
     regRA = (0xE0 + id * 2) << 24;
-    SET_REG_FIELD(regRA, 11,  0, (sRG >> 16) & 0x7FF);
+    SET_REG_FIELD(regRA, 11, 0, (sRG >> 16) & 0x7FF);
     SET_REG_FIELD(regRA, 11, 12, sBA & 0x7FF);
 
     regBG = (0xE1 + id * 2) << 24;
@@ -213,8 +210,7 @@ void GXSetTevKColorSel(GXTevStageID stage, GXTevKColorSel sel) {
     Kreg = &__GXData->tevKsel[stage >> 1];
     if (stage & 1) {
         SET_REG_FIELD(*Kreg, 5, 14, sel);
-    }
-    else {
+    } else {
         SET_REG_FIELD(*Kreg, 5, 4, sel);
     }
 
@@ -228,8 +224,7 @@ void GXSetTevKAlphaSel(GXTevStageID stage, GXTevKAlphaSel sel) {
     Kreg = &__GXData->tevKsel[stage >> 1];
     if (stage & 1) {
         SET_REG_FIELD(*Kreg, 5, 19, sel);
-    }
-    else {
+    } else {
         SET_REG_FIELD(*Kreg, 5, 9, sel);
     }
 
@@ -323,7 +318,7 @@ void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map, GXCha
     u32* ptref;
     u32 tmap;
     u32 tcoord;
-    static int c2r[] = { 0, 1, 0, 1, 0, 1, 7, 5, 6 };
+    static int c2r[] = {0, 1, 0, 1, 0, 1, 7, 5, 6};
 
     ptref = &__GXData->tref[stage / 2];
     __GXData->texmapId[stage] = map;
@@ -334,8 +329,7 @@ void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map, GXCha
     if (coord >= GX_MAX_TEXCOORD) {
         tcoord = GX_TEXCOORD0;
         __GXData->tevTcEnab = __GXData->tevTcEnab & ~(1 << stage);
-    }
-    else {
+    } else {
         tcoord = coord;
         __GXData->tevTcEnab = __GXData->tevTcEnab | (1 << stage);
     }
@@ -345,8 +339,7 @@ void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map, GXCha
         SET_REG_FIELD(*ptref, 3, 15, tcoord);
         SET_REG_FIELD(*ptref, 3, 19, (color == GX_COLOR_NULL) ? 7 : c2r[color]);
         SET_REG_FIELD(*ptref, 1, 18, (map != GX_TEXMAP_NULL && !(map & GX_TEX_DISABLE)));
-    }
-    else {
+    } else {
         SET_REG_FIELD(*ptref, 3, 0, tmap);
         SET_REG_FIELD(*ptref, 3, 3, tcoord);
         SET_REG_FIELD(*ptref, 3, 7, (color == GX_COLOR_NULL) ? 7 : c2r[color]);

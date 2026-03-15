@@ -1,8 +1,8 @@
-#include <revolution/nwc24.h>
 #include <private/nwc24.h>
+#include <revolution/nwc24.h>
 
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 #include <revolution/sc.h>
 
@@ -39,10 +39,7 @@ NWC24Err NWC24iGetUniversalTime(s64* pTime) {
         return NWC24_ERR_INVALID_VALUE;
     }
 
-    if (whenCached == 0 ||
-        whenCached + OSSecondsToTicks(1) <= __OSGetSystemTime() ||
-        nwc24TimeRtc == 0) {
-
+    if (whenCached == 0 || whenCached + OSSecondsToTicks(1) <= __OSGetSystemTime() || nwc24TimeRtc == 0) {
         result = NWC24iGetTimeDifference(&nwc24TimeDifference);
         if (result < 0) {
             return result;
@@ -76,9 +73,7 @@ NWC24Err NWC24iGetTimeDifference(s64* pDiff) {
         result = NWC24OpenResourceManager("/dev/net/kd/time", &fd, 0);
 
         if (result >= 0) {
-            result = NWC24IoctlResourceManager(fd, NWC24_IOCTL_GET_TIME_DIFFERENCE,
-                                        NULL, 0, &nwc24TimeCommonResult,
-                                        sizeof(nwc24TimeCommonResult));
+            result = NWC24IoctlResourceManager(fd, NWC24_IOCTL_GET_TIME_DIFFERENCE, NULL, 0, &nwc24TimeCommonResult, sizeof(nwc24TimeCommonResult));
 
             if (result >= 0) {
                 result = *(s32*)(&nwc24TimeCommonResult[0]);
@@ -119,10 +114,8 @@ NWC24Err NWC24iSetRtcCounter(u32 rtcCounter, u32 flags) {
             *(u32*)(&nwc24TimeCommonBuffer[0]) = rtcCounter;
             *(u32*)(&nwc24TimeCommonBuffer[1]) = flags;
 
-            result = NWC24IoctlResourceManager(
-                fd, NWC24_IOCTL_SET_RTC_COUNTER, &nwc24TimeCommonBuffer,
-                sizeof(nwc24TimeCommonBuffer), &nwc24TimeCommonResult,
-                sizeof(nwc24TimeCommonResult));
+            result = NWC24IoctlResourceManager(fd, NWC24_IOCTL_SET_RTC_COUNTER, &nwc24TimeCommonBuffer, sizeof(nwc24TimeCommonBuffer),
+                                               &nwc24TimeCommonResult, sizeof(nwc24TimeCommonResult));
 
             if (result >= 0) {
                 result = *(s32*)(&nwc24TimeCommonResult[0]);

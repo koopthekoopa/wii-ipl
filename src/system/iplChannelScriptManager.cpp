@@ -8,9 +8,9 @@
 
 namespace ipl {
     namespace channel {
-        int         ChannelScriptManager::smCSState;
-        RsoThread*  ChannelScriptManager::smpThread;
-        CHANSVm     ChannelScriptManager::smCSVm;
+        int ChannelScriptManager::smCSState;
+        RsoThread* ChannelScriptManager::smpThread;
+        CHANSVm ChannelScriptManager::smCSVm;
 
         ChannelScriptManager::ChannelScriptManager() {
             mpChansWork = NULL;
@@ -19,7 +19,7 @@ namespace ipl {
 
         void ChannelScriptManager::create(EGG::ExpHeap* heap) {
             if (mpChansWork == NULL) {
-                mpChansWork = new(heap, 4) u8[CHANS_VM_DEFAULT_WORK_SIZE];
+                mpChansWork = new (heap, 4) u8[CHANS_VM_DEFAULT_WORK_SIZE];
             }
 
             if (mpHeap == NULL) {
@@ -42,35 +42,33 @@ namespace ipl {
 
             CHANSVmInit(&smCSVm, mpChansWork, CHANS_VM_DEFAULT_WORK_SIZE);
 
-            OSAssertMsg(cs::system::init(&smCSVm),      "CHANSVmSystemMenuInit error\n",    101);
-            OSAssertMsg(cs::layout::init(&smCSVm),      "VmLayoutInit error\n",             105);
-            OSAssertMsg(cs::pane::init(&smCSVm),        "VmPaneInit error\n",               109);
-            OSAssertMsg(cs::material::init(&smCSVm),    "VmMaterialInit error\n",           113);
-            OSAssertMsg(cs::texture::init(&smCSVm),     "VmTextureInit error\n",            117);
-            OSAssertMsg(cs::savedata::init(&smCSVm),    "VmSaveDataInit error\n",           121);
-            OSAssertMsg(cs::vec3::init(&smCSVm),        "VmVec3Init error\n",               125);
-            OSAssertMsg(cs::mtx34::init(&smCSVm),       "VmMTX34Init error\n",              129);
-            OSAssertMsg(cs::gx::init(&smCSVm),          "VmGXInit error\n",                 133);
-            OSAssertMsg(cs::textwriter::init(&smCSVm),  "VmTextWriterInit error\n",         137);
-            OSAssertMsg(cs::font::init(&smCSVm),        "VmFontInit error\n",               141);
-            OSAssertMsg(cs::rect::init(&smCSVm),        "VmRectInit error\n",               145);
-            OSAssertMsg(cs::color::init(&smCSVm),       "VmColorInit error\n",              149);
-            OSAssertMsg(cs::color_s10::init(&smCSVm),   "VmColorS10Init error\n",           153);
-            OSAssertMsg(cs::size::init(&smCSVm),        "VmSizeInit error\n",               157);
-            OSAssertMsg(cs::anim::init(&smCSVm),        "VmAnimInit error\n",               161);
-            OSAssertMsg(cs::sound::init(&smCSVm),       "VmSoundInit error\n",              165);
-            OSAssertMsg(cs::iplimage::init(&smCSVm),    "VmIplImageInit error\n",           169);
+            OSAssertMsg(cs::system::init(&smCSVm), "CHANSVmSystemMenuInit error\n", 101);
+            OSAssertMsg(cs::layout::init(&smCSVm), "VmLayoutInit error\n", 105);
+            OSAssertMsg(cs::pane::init(&smCSVm), "VmPaneInit error\n", 109);
+            OSAssertMsg(cs::material::init(&smCSVm), "VmMaterialInit error\n", 113);
+            OSAssertMsg(cs::texture::init(&smCSVm), "VmTextureInit error\n", 117);
+            OSAssertMsg(cs::savedata::init(&smCSVm), "VmSaveDataInit error\n", 121);
+            OSAssertMsg(cs::vec3::init(&smCSVm), "VmVec3Init error\n", 125);
+            OSAssertMsg(cs::mtx34::init(&smCSVm), "VmMTX34Init error\n", 129);
+            OSAssertMsg(cs::gx::init(&smCSVm), "VmGXInit error\n", 133);
+            OSAssertMsg(cs::textwriter::init(&smCSVm), "VmTextWriterInit error\n", 137);
+            OSAssertMsg(cs::font::init(&smCSVm), "VmFontInit error\n", 141);
+            OSAssertMsg(cs::rect::init(&smCSVm), "VmRectInit error\n", 145);
+            OSAssertMsg(cs::color::init(&smCSVm), "VmColorInit error\n", 149);
+            OSAssertMsg(cs::color_s10::init(&smCSVm), "VmColorS10Init error\n", 153);
+            OSAssertMsg(cs::size::init(&smCSVm), "VmSizeInit error\n", 157);
+            OSAssertMsg(cs::anim::init(&smCSVm), "VmAnimInit error\n", 161);
+            OSAssertMsg(cs::sound::init(&smCSVm), "VmSoundInit error\n", 165);
+            OSAssertMsg(cs::iplimage::init(&smCSVm), "VmIplImageInit error\n", 169);
 
             BOOL retResult;
             if (CHANSVmGetFreeExeSize(&smCSVm) == 0) {
                 retResult = FALSE;
-            }
-            else {
+            } else {
                 void* freeBuf = CHANSVmGetFreeExeBufp(&smCSVm);
                 if (freeBuf == NULL) {
                     retResult = FALSE;
-                }
-                else {
+                } else {
                     memcpy(freeBuf, file->getBuffer(), file->getLength());
 
                     if (CHANSVmAddExe(&smCSVm, 1, 0) == FALSE) {
@@ -81,12 +79,10 @@ namespace ipl {
                             retResult = TRUE;
 
                             smCSState = CHANS_VM_STATE_UNK1;
-                        }
-                        else {
+                        } else {
                             retResult = FALSE;
                         }
-                    }
-                    else {
+                    } else {
                         retResult = FALSE;
                     }
                 }
@@ -144,7 +140,6 @@ namespace ipl {
         }
 
         void ChannelScriptManager::calcCSThread() {
-
         }
-    }
-}
+    }  // namespace channel
+}  // namespace ipl

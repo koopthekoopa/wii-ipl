@@ -3,36 +3,36 @@
 #pragma exceptions on
 
 class __partial_array_destructor {
-    private:
-        void* p;
-        size_t size;
-        size_t n;
-        void* dtor;
-    
-    public:
-        size_t i;
-    
-        __partial_array_destructor(void* array, size_t elementsize, size_t nelements, void* destructor) {
-            p    = array;
-            size = elementsize;
-            n    = nelements;
-            dtor = destructor;
-            i    = n;
-        }
-    
-        ~__partial_array_destructor() {
-            char* ptr;
-    
-            if (i < n && dtor) {
-                for (ptr = (char*)p + size * i; i > 0; i--) {
-                    ptr -= size;
-                    DTORCALL_COMPLETE(dtor, ptr);
-                }
+private:
+    void* p;
+    size_t size;
+    size_t n;
+    void* dtor;
+
+public:
+    size_t i;
+
+    __partial_array_destructor(void* array, size_t elementsize, size_t nelements, void* destructor) {
+        p = array;
+        size = elementsize;
+        n = nelements;
+        dtor = destructor;
+        i = n;
+    }
+
+    ~__partial_array_destructor() {
+        char* ptr;
+
+        if (i < n && dtor) {
+            for (ptr = (char*)p + size * i; i > 0; i--) {
+                ptr -= size;
+                DTORCALL_COMPLETE(dtor, ptr);
             }
         }
+    }
 };
 
-#define ARRAY_HEADER_SIZE   16
+#define ARRAY_HEADER_SIZE 16
 
 void* __construct_new_array(void* block, void* ctor, void* dtor, size_t size, size_t n) {
     char* ptr;

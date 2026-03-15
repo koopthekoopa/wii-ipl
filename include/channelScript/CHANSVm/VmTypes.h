@@ -60,7 +60,7 @@ typedef enum CHANSVmObjType {
 
 typedef struct CHANSVmObjHdr CHANSVmObjHdr;
 typedef struct CHANSVmNativeClass CHANSVmNativeClass;
-#include <revolution/gx/GXStruct.h>
+
 struct CHANSVmObjHdr {
     union {
         vmInteger       int_v;

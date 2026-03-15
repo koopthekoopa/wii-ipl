@@ -7,14 +7,14 @@
 extern "C" {
 #endif
 
-u32     __AXOutNewFrame();
-void    __AXOutAiCallback();
-void    __AXOutInitDSP();
+u32 __AXOutNewFrame();
+void __AXOutAiCallback();
+void __AXOutInitDSP();
 
-void    __AXOutInit(u32 mode);
+void __AXOutInit(u32 mode);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // PRIVATE_AX_OUT_H
+#endif  // PRIVATE_AX_OUT_H

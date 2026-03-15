@@ -1,14 +1,16 @@
 #include "system/rvl_dec.h"
 
-#define SZS_SIGNATURE   0x0059617A  /* 'Yaz */
-#define ASH_SIGNATURE   0x00415348  /* 'ASH' */
-#define ASR_SIGNATURE   0x00415352  /* 'ASR' */
+#define SZS_SIGNATURE 0x0059617A /* 'Yaz */
+#define ASH_SIGNATURE 0x00415348 /* 'ASH' */
+#define ASR_SIGNATURE 0x00415352 /* 'ASR' */
 
 int Rvl_decode(u8* out, u8* in) {
 #ifdef TARGET_RVL
     // Original ASM Implementation
 
     register u8* dataIn = in;
+
+    // clang-format off
 #ifdef __MWERKS__
     asm volatile {
         // Get magic
@@ -34,6 +36,8 @@ int Rvl_decode(u8* out, u8* in) {
         beq     Rvl_decode_asr
     };
 #endif // __MWERKS__
+    // clang-format on
+
     // Otherwise
     return 0;
 #else
@@ -59,10 +63,16 @@ int Rvl_decode(u8* out, u8* in) {
             return 0;
         }
     }
-#endif // TARGET_RVL
+#endif  // TARGET_RVL
 }
 
 /* TODO !!! */
-int Rvl_decode_szs(u8* out, u8* in) { return 0; }
-int Rvl_decode_ash(u8* out, u8* in) { return 0; }
-int Rvl_decode_asr(u8* out, u8* in) { return 0; }
+int Rvl_decode_szs(u8* out, u8* in) {
+    return 0;
+}
+int Rvl_decode_ash(u8* out, u8* in) {
+    return 0;
+}
+int Rvl_decode_asr(u8* out, u8* in) {
+    return 0;
+}

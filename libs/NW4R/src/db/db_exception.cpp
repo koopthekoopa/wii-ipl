@@ -1,42 +1,42 @@
-#include <nw4r/db/exception.h>
 #include <nw4r/db/console.h>
 #include <nw4r/db/directPrint.h>
+#include <nw4r/db/exception.h>
 
 #include <revolution/base/PPCArch.h>
 
 #include <revolution/vi.h>
 
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 #include <cmath>
 
 namespace nw4r {
     namespace db {
         typedef struct ExceptionStruct {
-            OSThread                thread;
-            OSMessageQueue          queue;
-            void*                   frameMemory;
+            OSThread thread;
+            OSMessageQueue queue;
+            void* frameMemory;
 
-            u32                     stackAddress;
+            u32 stackAddress;
 
-            ConsoleHandle           consoleHandle;
+            ConsoleHandle consoleHandle;
 
-            const GXRenderModeObj*  exceptionRenderObj;
-            ExceptionUserCallback   exceptionCallback;
-            void*                   exceptionCallbackArgs;
+            const GXRenderModeObj* exceptionRenderObj;
+            ExceptionUserCallback exceptionCallback;
+            void* exceptionCallbackArgs;
 
-            u32                     MSR_COPY;
-            u32                     FPCSR_COPY;
+            u32 MSR_COPY;
+            u32 FPCSR_COPY;
 
-            u16                     exceptionDisplayInfo;
+            u16 exceptionDisplayInfo;
         } ExceptionStruct;
 
         typedef struct {
-            u16         error;
-            OSContext*  context;
-            u32         dsisr;
-            u32         dar;
+            u16 error;
+            OSContext* context;
+            u32 dsisr;
+            u32 dar;
         } ExceptionCallbackParam;
 
         static OSMessage sMessageBuffer[1];
@@ -64,8 +64,8 @@ namespace nw4r {
             "FLOATING POINT",
         };
 
-        void*   RunThread_(void* work);
-        void    ErrorHandler_(u16 error, OSContext* context, u32 dsisr, u32 dar);
+        void* RunThread_(void* work);
+        void ErrorHandler_(u16 error, OSContext* context, u32 dsisr, u32 dar);
 
         static void PrintContext_(u16 error, OSContext* context, u32 dsisr, u32 dar);
         static void WaitTime_(s32 time);
@@ -177,11 +177,9 @@ namespace nw4r {
                                 return NULL;
                             }
                         } while (info == sException.exceptionDisplayInfo);
-                    }
-                    else if (sException.consoleHandle != NULL) {
+                    } else if (sException.consoleHandle != NULL) {
                         DrawConsoleEndless_(sException.consoleHandle);
-                    }
-                    else {
+                    } else {
                         return NULL;
                     }
                 }
@@ -190,7 +188,7 @@ namespace nw4r {
             return NULL;
         }
 
-        static void Exception_Printf_(const char *format, ...) {
+        static void Exception_Printf_(const char* format, ...) {
             const GXRenderModeObj* obj = sException.exceptionRenderObj;
 
             va_list args;
@@ -220,8 +218,7 @@ namespace nw4r {
         static void PrintContext_(u16 error, OSContext* context, u32 dsisr, u32 dar) {
             if (error < OS_EXCEPTION_MAX) {
                 Exception_Printf_("******** EXCEPTION OCCURRED! ********\nFrameMemory:%XH\n", sException.frameMemory);
-            }
-            else {
+            } else {
                 Exception_Printf_("******** USER HALT ********\nFrameMemory:%XH\n", sException.frameMemory);
             }
 
@@ -262,18 +259,15 @@ namespace nw4r {
         static bool IsValidStackAddr_(u32 stackAddress) {
             if (stackAddress == 0 || stackAddress == 0xFFFFFFFF) {
                 return false;
-            }
-            else if (OSIsMEM1Region(stackAddress)) {
+            } else if (OSIsMEM1Region(stackAddress)) {
                 if ((stackAddress & 0x0fffffff) >= OSGetPhysicalMem1Size()) {
                     return false;
                 }
-            }
-            else if (OSIsMEM2Region(stackAddress)) {
+            } else if (OSIsMEM2Region(stackAddress)) {
                 if ((stackAddress & 0x0fffffff) >= OSGetPhysicalMem2Size()) {
                     return false;
                 }
-            }
-            else {
+            } else {
                 return false;
             }
 
@@ -285,7 +279,7 @@ namespace nw4r {
             Exception_Printf_("Address:   BackChain   LR save\n");
 
             u32 i;
-            u32 *ptr = (u32 *)stackAddress;
+            u32* ptr = (u32*)stackAddress;
             for (i = 0; i < 16; i++) {
                 if (ptr == NULL || (u32)ptr == 0xffffffff) {
                     break;
@@ -295,15 +289,14 @@ namespace nw4r {
                 if (!ShowMapInfoSubroutine_(ptr[1], true)) {
                     Exception_Printf_("\n");
                 }
-                ptr = (u32 *)*ptr;
+                ptr = (u32*)*ptr;
             }
         }
 
         void ShowMainInfo_(u16 error, OSContext* context, u32 dsisr, u32 dar) {
             if (error < OS_EXCEPTION_MAX) {
                 Exception_Printf_("CONTEXT:%08XH  (%s EXCEPTION)\n", context, CPU_EXP_NAME[error]);
-            }
-            else {
+            } else {
                 Exception_Printf_("CONTEXT:%08XH\n", context);
             }
 
@@ -360,7 +353,8 @@ namespace nw4r {
         void ShowGPR_(OSContext* context) {
             Exception_Printf_("-------------------------------- GPR\n");
             for (int i = 0; i < 10; i++) {
-                Exception_Printf_("R%02d:%08XH  R%02d:%08XH  R%02d:%08XH\n", i, context->gpr[i], i + 11, context->gpr[i + 11], i + 22, context->gpr[i + 22]);
+                Exception_Printf_("R%02d:%08XH  R%02d:%08XH  R%02d:%08XH\n", i, context->gpr[i], i + 11, context->gpr[i + 11], i + 22,
+                                  context->gpr[i + 22]);
             }
             Exception_Printf_("R%02d:%08XH  R%02d:%08XH\n", 10, context->gpr[10], 21, context->gpr[21]);
         }
@@ -420,20 +414,16 @@ namespace nw4r {
         void ShowFloatSub_(s32 reg, f32 val) {
             if (isnan(val)) {
                 Exception_Printf_("F%02d: Nan      ", reg);
-            }
-            else {
+            } else {
                 if (__fpclassifyf(val) == 2) {
                     if ((reinterpret_cast<u8&>(val) & 0x80) != 0) {
                         Exception_Printf_("F%02d:+Inf      ", reg);
-                    }
-                    else {
+                    } else {
                         Exception_Printf_("F%02d:-Inf      ", reg);
                     }
-                }
-                else if (val == 0.0f) {
+                } else if (val == 0.0f) {
                     Exception_Printf_("F%02d: 0.0      ", reg);
-                }
-                else {
+                } else {
                     Exception_Printf_("F%02d:%+.3E", reg, val);
                 }
             }
@@ -462,5 +452,5 @@ namespace nw4r {
                 t2 = OSGetTime();
             } while (OSTicksToMilliseconds(t2 - t1) < time);
         }
-    }
-}
+    }  // namespace db
+}  // namespace nw4r

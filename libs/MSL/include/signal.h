@@ -11,4 +11,4 @@ int raise(int signal);
 }
 #endif
 
-#endif // MSL_SIGNAL_H
+#endif  // MSL_SIGNAL_H

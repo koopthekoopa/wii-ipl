@@ -7,10 +7,10 @@ extern "C" {
 
 #include <revolution/os/OSThread.h>
 
-void    OSInitCond(OSCond* cond);
-void    OSWaitCond(OSCond* cond, OSMutex* mutex);
+void OSInitCond(OSCond* cond);
+void OSWaitCond(OSCond* cond, OSMutex* mutex);
 
-void    OSSignalCond(OSCond* cond);
+void OSSignalCond(OSCond* cond);
 
 #ifdef __cplusplus
 }

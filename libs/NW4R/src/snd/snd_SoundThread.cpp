@@ -1,9 +1,9 @@
 #include <nw4r/snd/SoundThread.h>
 
-#include <nw4r/snd/WsdPlayer.h>
 #include <nw4r/snd/SeqPlayer.h>
-#include <nw4r/snd/WavePlayer.h>
 #include <nw4r/snd/StrmPlayer.h>
+#include <nw4r/snd/WavePlayer.h>
+#include <nw4r/snd/WsdPlayer.h>
 
 #include <revolution/os.h>
 
@@ -14,7 +14,7 @@ namespace nw4r {
                 static SoundThread instance;
                 return instance;
             }
-            
+
             bool SoundThread::Create(s32 priority) {
                 if (mCreateFlag) {
                     return true;
@@ -25,10 +25,8 @@ namespace nw4r {
                 OSInitThreadQueue(&mThreadQueue);
                 OSInitMutex(&mMutex);
 
-                BOOL success = OSCreateThread(&mThread, SoundThreadFunc, &GetInstance(),
-                                            mThreadStack + THREAD_STACK_SIZE,
-                                            THREAD_STACK_SIZE * 8,
-                                            priority, 0);
+                BOOL success =
+                    OSCreateThread(&mThread, SoundThreadFunc, &GetInstance(), mThreadStack + THREAD_STACK_SIZE, THREAD_STACK_SIZE * 8, priority, 0);
 
                 if (success) {
                     OSResumeThread(&mThread);
@@ -93,8 +91,7 @@ namespace nw4r {
                             CallbackList::Iterator currIt = it++;
                             currIt->EndSoundFrame();
                         }
-                    }
-                    else if (reinterpret_cast<u32>(message) == MSG_SHUTDOWN) {
+                    } else if (reinterpret_cast<u32>(message) == MSG_SHUTDOWN) {
                         SeqPlayer::StopAllPlayers();
                         WsdPlayer::StopAllPlayers();
                         StrmPlayer::StopAllPlayers();
@@ -104,6 +101,6 @@ namespace nw4r {
                     }
                 }
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

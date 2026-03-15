@@ -11,13 +11,13 @@ typedef int OSHeapHandle;
 
 extern volatile OSHeapHandle __OSCurrHeap;
 
-void*           OSInitAlloc(void* arenaStart, void* arenaEnd, int maxHeaps);
+void* OSInitAlloc(void* arenaStart, void* arenaEnd, int maxHeaps);
 
-OSHeapHandle    OSCreateHeap(void* start, void* end);
-OSHeapHandle    OSSetCurrentHeap(OSHeapHandle heap);
+OSHeapHandle OSCreateHeap(void* start, void* end);
+OSHeapHandle OSSetCurrentHeap(OSHeapHandle heap);
 
-void*           OSAllocFromHeap(OSHeapHandle heap, u32 size);
-void            OSFreeToHeap(OSHeapHandle heap, void* ptr);
+void* OSAllocFromHeap(OSHeapHandle heap, u32 size);
+void OSFreeToHeap(OSHeapHandle heap, void* ptr);
 
 #ifdef __cplusplus
 }

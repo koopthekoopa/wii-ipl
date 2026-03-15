@@ -6,35 +6,35 @@
 #ifdef __cplusplus
 
 namespace std {
-    using   ::memcpy;
-    using   ::memset;
-    using   ::memmove;
-    using   ::memchr;
-    using   ::memcmp;
+    using ::memchr;
+    using ::memcmp;
+    using ::memcpy;
+    using ::memmove;
+    using ::memset;
 
-    using   ::strcpy;
-    using   ::strcat;
-    using   ::strlen;
-    using   ::strchr;
-    using   ::strrchr;
-    using   ::strcmp;
-    using   ::strpbrk;
-    using   ::strspn;
-    using   ::strtok;
-    using   ::strstr;
+    using ::strcat;
+    using ::strchr;
+    using ::strcmp;
+    using ::strcpy;
+    using ::strlen;
+    using ::strpbrk;
+    using ::strrchr;
+    using ::strspn;
+    using ::strstr;
+    using ::strtok;
 
-    using   ::strncpy;
-    using   ::strncat;
-    using   ::strnlen;
-    using   ::strncmp;
+    using ::strncat;
+    using ::strncmp;
+    using ::strncpy;
+    using ::strnlen;
 
-    using   ::strcspn;
+    using ::strcspn;
 
-    using   ::stricmp;
-    using   ::strnicmp;
-    using   ::strcmpi;
-} // namespace std
+    using ::strcmpi;
+    using ::stricmp;
+    using ::strnicmp;
+}  // namespace std
 
 #endif
 
-#endif // MSL_CSTRING_H
+#endif  // MSL_CSTRING_H

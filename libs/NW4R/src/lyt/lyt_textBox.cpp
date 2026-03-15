@@ -1,6 +1,6 @@
-#include <nw4r/lyt/textbox.h>
-#include <nw4r/lyt/layout.h>
 #include <nw4r/lyt/common.h>
+#include <nw4r/lyt/layout.h>
+#include <nw4r/lyt/textbox.h>
 
 #include <nw4r/lyt/resources.h>
 #include <nw4r/lyt/types.h>
@@ -14,7 +14,7 @@ namespace nw4r {
     namespace lyt {
         NW4R_UT_GET_DERIVED_RUNTIME_TYPEINFO(TextBox, Pane);
     }
-}
+}  // namespace nw4r
 
 namespace {
     using namespace nw4r;
@@ -36,9 +36,11 @@ namespace {
         return value < 0 ? 0 : (value > 255 ? 255 : value);
     }
 
-    template<typename T> int CalcLineRectImpl(ut::Rect* pRect, ut::TextWriterBase<T>* pTextWriter, const T* str, int length, f32 maxWidth, bool* pbOver);
+    template <typename T>
+    int CalcLineRectImpl(ut::Rect* pRect, ut::TextWriterBase<T>* pTextWriter, const T* str, int length, f32 maxWidth, bool* pbOver);
 
-    template<typename T> int CalcLineStrNum(f32* pWidth, ut::TextWriterBase<T>* pTextWriter, const T* str, int length, f32 maxWidth, bool* pbOver) {
+    template <typename T>
+    int CalcLineStrNum(f32* pWidth, ut::TextWriterBase<T>* pTextWriter, const T* str, int length, f32 maxWidth, bool* pbOver) {
         ut::Rect rect;
         ut::TextWriterBase<T> myCopy = *pTextWriter;
         myCopy.SetCursor(0.0f, 0.0f);
@@ -49,7 +51,8 @@ namespace {
         return ret;
     }
 
-    template<typename T> int CalcLineRectImpl(ut::Rect* pRect, ut::TextWriterBase<T>* pTextWriter, const T* str, int length, f32 maxWidth, bool* pbOver) {
+    template <typename T>
+    int CalcLineRectImpl(ut::Rect* pRect, ut::TextWriterBase<T>* pTextWriter, const T* str, int length, f32 maxWidth, bool* pbOver) {
         ut::PrintContext<T> context = {pTextWriter, str, 0.0f, 0.0f, 0};
         const ut::Font* font = pTextWriter->GetFont();
 
@@ -65,13 +68,13 @@ namespace {
         pRect->bottom = ut::Max(0.0f, pTextWriter->GetLineHeight());
 
         *pbOver = false;
-    
+
         reader.Set(str);
 
         ut::Rect prMaxRect = *pRect;
 
         for (u16 code = reader.Next(); static_cast<const T*>(reader.GetCurrentPos()) - str <= length;
-            prStrPos = static_cast<const T*>(reader.GetCurrentPos()), code = reader.Next(), prMaxRect = *pRect) {
+             prStrPos = static_cast<const T*>(reader.GetCurrentPos()), code = reader.Next(), prMaxRect = *pRect) {
             if ((int)code < L' ') {
                 ut::Operation operation;
                 ut::Rect rect(x, 0.0f, 0.0f, 0.0f);
@@ -100,18 +103,14 @@ namespace {
 
                 if (operation == ut::OPERATION_END_DRAW) {
                     return length;
-                }
-                else if (operation == ut::OPERATION_NO_CHAR_SPACE) {
+                } else if (operation == ut::OPERATION_NO_CHAR_SPACE) {
                     bCharSpace = false;
-                }
-                else if (operation == ut::OPERATION_CHAR_SPACE) {
+                } else if (operation == ut::OPERATION_CHAR_SPACE) {
                     bCharSpace = true;
-                }
-                else if (operation == ut::OPERATION_NEXT_LINE) {
+                } else if (operation == ut::OPERATION_NEXT_LINE) {
                     goto end_draw;
                 }
-            }
-            else {
+            } else {
                 if (bCharSpace) {
                     x += pTextWriter->GetCharSpace();
                 }
@@ -120,10 +119,8 @@ namespace {
 
                 if (pTextWriter->IsWidthFixed()) {
                     x += pTextWriter->GetFixedWidth();
-                }
-                else {
-                    x += pTextWriter->GetFont()->GetCharWidth(code)
-                    *pTextWriter->GetScaleH();
+                } else {
+                    x += pTextWriter->GetFont()->GetCharWidth(code) * pTextWriter->GetScaleH();
                 }
 
                 pRect->left = ut::Min(pRect->left, x);
@@ -140,20 +137,22 @@ namespace {
         if (*pbOver && prStrPos) {
             *pRect = prMaxRect;
             return prStrPos - str;
-        }
-        else {
+        } else {
             return static_cast<const T*>(reader.GetCurrentPos()) - str;
         }
     }
 
-    template<typename T> void CalcStringRectImpl(ut::Rect* pRect, ut::TextWriterBase<T>* pTextWriter, const T* str, int length, f32 maxWidth);
+    template <typename T>
+    void CalcStringRectImpl(ut::Rect* pRect, ut::TextWriterBase<T>* pTextWriter, const T* str, int length, f32 maxWidth);
 
-    template<typename T> void CalcStringRect(ut::Rect* pRect, ut::TextWriterBase<T>* pTextWriter, const T* str, int length, f32 maxWidth) {
+    template <typename T>
+    void CalcStringRect(ut::Rect* pRect, ut::TextWriterBase<T>* pTextWriter, const T* str, int length, f32 maxWidth) {
         ut::TextWriterBase<T> myCopy = *pTextWriter;
-        CalcStringRectImpl(pRect,&myCopy, str, length, maxWidth);
+        CalcStringRectImpl(pRect, &myCopy, str, length, maxWidth);
     }
 
-    template<typename T> void CalcStringRectImpl(ut::Rect* pRect, ut::TextWriterBase<T>* pTextWriter, const T* str, int length, f32 maxWidth) {
+    template <typename T>
+    void CalcStringRectImpl(ut::Rect* pRect, ut::TextWriterBase<T>* pTextWriter, const T* str, int length, f32 maxWidth) {
         int remain = length;
         const T* pos = str;
 
@@ -181,7 +180,7 @@ namespace {
             pRect->bottom = ut::Max(pRect->bottom, rect.bottom);
         } while (remain > 0);
     }
-}
+}  // namespace
 
 namespace nw4r {
     namespace lyt {
@@ -191,8 +190,7 @@ namespace nw4r {
             SetFont(pFont);
         }
 
-        TextBox::TextBox(const res::TextBox* pBlock, const ResBlockSet& resBlockSet) :
-        Pane(pBlock) {
+        TextBox::TextBox(const res::TextBox* pBlock, const ResBlockSet& resBlockSet) : Pane(pBlock) {
             u16 allocStrBufLen = pBlock->textBufBytes / sizeof(wchar_t);
             if (allocStrBufLen) {
                 allocStrBufLen = allocStrBufLen - 1;
@@ -222,10 +220,9 @@ namespace nw4r {
 
             if (ut::Font* pFont = resBlockSet.pResAccessor->GetFont(fontName)) {
                 mpFont = pFont;
-            }
-            else if (void* fontRes = resBlockSet.pResAccessor->GetResource('font', fontName, NULL)) {
+            } else if (void* fontRes = resBlockSet.pResAccessor->GetResource('font', fontName, NULL)) {
                 if (void* pMemFont = Layout::AllocMemory(sizeof(ut::ResFont))) {
-                    ut::ResFont* pResFont = new(pMemFont) ut::ResFont();
+                    ut::ResFont* pResFont = new (pMemFont) ut::ResFont();
                     bool bSuccess = pResFont->SetResource(fontRes);
 
                     mpFont = pResFont;
@@ -234,13 +231,12 @@ namespace nw4r {
             }
 
             if (void* pMemMaterial = Layout::AllocMemory(sizeof(Material))) {
-                const u32* matOffsTbl = detail::ConvertOffsToPtr<u32>(resBlockSet.pMaterialList,
-                                                                    sizeof(*resBlockSet.pMaterialList));
+                const u32* matOffsTbl = detail::ConvertOffsToPtr<u32>(resBlockSet.pMaterialList, sizeof(*resBlockSet.pMaterialList));
 
-                const res::Material* pResMaterial = detail::ConvertOffsToPtr<res::Material>(resBlockSet.pMaterialList,
-                                                                                            matOffsTbl[pBlock->materialIdx]);
+                const res::Material* pResMaterial =
+                    detail::ConvertOffsToPtr<res::Material>(resBlockSet.pMaterialList, matOffsTbl[pBlock->materialIdx]);
 
-                mpMaterial = new(pMemMaterial) Material(pResMaterial, resBlockSet);
+                mpMaterial = new (pMemMaterial) Material(pResMaterial, resBlockSet);
             }
         }
 
@@ -313,7 +309,7 @@ namespace nw4r {
             ut::Rect rect = GetTextDrawRect(&writer);
 
             if (drawInfo.IsYAxisUp()) {
-                rect.top    = -rect.top;
+                rect.top = -rect.top;
                 rect.bottom = -rect.bottom;
             }
 
@@ -335,8 +331,7 @@ namespace nw4r {
 
             ut::Color topCol = detail::MultipleAlpha(mTextColors[TEXTCOLOR_TOP], mGlbAlpha);
             ut::Color btmCol = detail::MultipleAlpha(mTextColors[TEXTCOLOR_BOTTOM], mGlbAlpha);
-            writer.SetGradationMode(topCol != btmCol ? ut::CharWriter::GRADMODE_V
-                                                    : ut::CharWriter::GRADMODE_NONE);
+            writer.SetGradationMode(topCol != btmCol ? ut::CharWriter::GRADMODE_V : ut::CharWriter::GRADMODE_NONE);
 
             writer.SetTextColor(topCol, btmCol);
 
@@ -432,8 +427,8 @@ namespace nw4r {
             return cpLen;
         }
 
-        const ut::Font* TextBox::GetFont() const
-        { return mpFont;
+        const ut::Font* TextBox::GetFont() const {
+            return mpFont;
         }
 
         void TextBox::SetFont(const ut::Font* pFont) {
@@ -447,8 +442,7 @@ namespace nw4r {
 
             if (mpFont) {
                 SetFontSize(Size(mpFont->GetWidth(), mpFont->GetHeight()));
-            }
-            else {
+            } else {
                 SetFontSize(Size(0.0f, 0.0f));
             }
         }
@@ -461,7 +455,7 @@ namespace nw4r {
 
             math::VEC2 basePt = Pane::GetVtxPos();
 
-            textRect.MoveTo(basePt.x + (mSize.width  - textRect.GetWidth())  * GetTextMagH(),
+            textRect.MoveTo(basePt.x + (mSize.width - textRect.GetWidth()) * GetTextMagH(),
                             basePt.y + (mSize.height - textRect.GetHeight()) * GetTextMagV());
 
             return textRect;
@@ -510,5 +504,5 @@ namespace nw4r {
 
             return vMag;
         }
-    }
-}
+    }  // namespace lyt
+}  // namespace nw4r

@@ -1,6 +1,6 @@
-#include <revolution/tpl.h>
-#include <revolution/os.h>
 #include <revolution/gx.h>
+#include <revolution/os.h>
+#include <revolution/tpl.h>
 
 void TPLBind(TPLPalette* pal) {
     u16 i;
@@ -12,7 +12,7 @@ void TPLBind(TPLPalette* pal) {
     for (i = 0; i < pal->numDescriptors; i++) {
         if (pal->descriptorArray[i].textureHeader) {
             pal->descriptorArray[i].textureHeader = (TPLHeader*)(((u32)(pal->descriptorArray[i].textureHeader)) + ((u32)pal));
-        
+
             if (!pal->descriptorArray[i].textureHeader->unpacked) {
                 pal->descriptorArray[i].textureHeader->data = (char*)((u32)(pal->descriptorArray[i].textureHeader->data) + (u32)pal);
                 pal->descriptorArray[i].textureHeader->unpacked = 1;
@@ -37,7 +37,10 @@ TPLDescriptor* TPLGet(TPLPalette* pal, u32 id) {
 void TPLGetGXTexObjFromPalette(TPLPalette* pal, GXTexObj* texObj, u32 id) {
     TPLDescriptor* descriptor = TPLGet(pal, id);
     GXBool hasMipMap = descriptor->textureHeader->minLOD == descriptor->textureHeader->maxLOD ? GX_FALSE : GX_TRUE;
-    
-    GXInitTexObj(texObj, descriptor->textureHeader->data, descriptor->textureHeader->width, descriptor->textureHeader->height, descriptor->textureHeader->format, descriptor->textureHeader->wrapS, descriptor->textureHeader->wrapT, hasMipMap);
-    GXInitTexObjLOD(texObj, descriptor->textureHeader->minFilter,descriptor->textureHeader->magFilter, descriptor->textureHeader->minLOD,descriptor->textureHeader->maxLOD, descriptor->textureHeader->LODBias, GX_FALSE, descriptor->textureHeader->edgeLODEnable, GX_ANISO_1);
+
+    GXInitTexObj(texObj, descriptor->textureHeader->data, descriptor->textureHeader->width, descriptor->textureHeader->height,
+                 descriptor->textureHeader->format, descriptor->textureHeader->wrapS, descriptor->textureHeader->wrapT, hasMipMap);
+    GXInitTexObjLOD(texObj, descriptor->textureHeader->minFilter, descriptor->textureHeader->magFilter, descriptor->textureHeader->minLOD,
+                    descriptor->textureHeader->maxLOD, descriptor->textureHeader->LODBias, GX_FALSE, descriptor->textureHeader->edgeLODEnable,
+                    GX_ANISO_1);
 }

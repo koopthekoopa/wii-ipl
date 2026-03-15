@@ -5,8 +5,10 @@
 #include <revolution/sc.h>
 
 namespace ipl {
-    #define DELTA_60    1.0f /* Delta for NTSC, MPAL and PAL60 */
-    #define DELTA_50    1.2f /* Delta for PAL50 */
+#define DELTA_60 1.0f /* Delta for NTSC, MPAL and PAL60 */
+#define DELTA_50 1.2f /* Delta for PAL50 */
+
+    // clang-format off
 
     // NTSC Interlaced
     static GXRenderModeObj sRMO_Ntsc_640x456IntDf = {
@@ -118,6 +120,8 @@ namespace ipl {
         0, 0,
     };
 
+    // clang-format on
+
     Framework::Framework(EGG::Heap* heap) {
         mpRMode = NULL;
 
@@ -163,11 +167,12 @@ namespace ipl {
 
     void Framework::resetRenderMode() {
         reset_render_mode();
-        
-        VIFlush(); {
+
+        VIFlush();
+        {
             GXSetDispCopySrc(0, 0, mpRMode->fbWidth, mpRMode->efbHeight);
             f32 yScaleFactor = GXGetYScaleFactor(mpRMode->efbHeight, mpRMode->xfbHeight);
-            u32 height       = GXSetDispCopyYScale(yScaleFactor);
+            u32 height = GXSetDispCopyYScale(yScaleFactor);
             GXSetDispCopyDst(mpRMode->fbWidth, height);
         }
 
@@ -198,14 +203,12 @@ namespace ipl {
             case VI_NTSC: {
                 if (VIGetDTVStatus() == TRUE && progressive == SC_PROGRESSIVE_MODE_ON) {
                     mpRMode = &sRMO_Ntsc_640x456Prog;
-                }
-                else {
+                } else {
                     mpRMode = &sRMO_Ntsc_640x456IntDf;
                 }
                 if (aspectRatio == SC_ASPECT_RATIO_16x9) {
                     mpRMode->viWidth = 686;
-                }
-                else {
+                } else {
                     mpRMode->viWidth = 670;
                 }
                 mpRMode->viXOrigin = (VI_MAX_WIDTH_NTSC - mpRMode->viWidth) / 2;
@@ -218,8 +221,7 @@ namespace ipl {
                     mpRMode = &sRMO_Pal60_640x456Prog;
                     if (aspectRatio == SC_ASPECT_RATIO_16x9) {
                         sRMO_Pal60_640x456Prog.viWidth = 686;
-                    }
-                    else {
+                    } else {
                         sRMO_Pal60_640x456Prog.viWidth = 670;
                     }
                     mpRMode->viXOrigin = (VI_MAX_WIDTH_EURGB60 - mpRMode->viWidth) / 2;
@@ -229,8 +231,7 @@ namespace ipl {
                     mpRMode = &sRMO_Pal60_640x456IntDf;
                     if (aspectRatio == SC_ASPECT_RATIO_16x9) {
                         sRMO_Pal60_640x456IntDf.viWidth = 686;
-                    }
-                    else {
+                    } else {
                         sRMO_Pal60_640x456IntDf.viWidth = 670;
                     }
                     mpRMode->viXOrigin = (VI_MAX_WIDTH_EURGB60 - mpRMode->viWidth) / 2;
@@ -240,8 +241,7 @@ namespace ipl {
                     mpRMode = &sRMO_Pal50_640x456IntDf;
                     if (aspectRatio == SC_ASPECT_RATIO_16x9) {
                         sRMO_Pal50_640x456IntDf.viWidth = 682;
-                    }
-                    else {
+                    } else {
                         sRMO_Pal50_640x456IntDf.viWidth = 666;
                     }
                     mpRMode->viXOrigin = (VI_MAX_WIDTH_PAL - mpRMode->viWidth) / 2;
@@ -264,11 +264,12 @@ namespace ipl {
         // Screen burn in reduction
         VIEnableDimming(FALSE);
         VIEnableDimming((BOOL)SCGetScreenSaverMode());
-        
-        VIFlush(); {
+
+        VIFlush();
+        {
             GXSetDispCopySrc(0, 0, mpRMode->fbWidth, mpRMode->efbHeight);
             f32 yScaleFactor = GXGetYScaleFactor(mpRMode->efbHeight, mpRMode->xfbHeight);
-            u32 height       = GXSetDispCopyYScale(yScaleFactor);
+            u32 height = GXSetDispCopyYScale(yScaleFactor);
             GXSetDispCopyDst(mpRMode->fbWidth, height);
         }
 
@@ -278,17 +279,17 @@ namespace ipl {
     }
 
     void Framework::init_xfb(EGG::Heap* heap) {
-    #ifdef VERSION_43E
+#ifdef VERSION_43E
         GXRenderModeObj* rMode = &sRMO_Pal50_640x456IntDf;
-    #else
+#else
         GXRenderModeObj* rMode = mpRMode;
-    #endif
+#endif
 
         u32 xfbSize = VIPadFrameBufferWidth(rMode->fbWidth) * rMode->xfbHeight * VI_DISPLAY_PIX_SZ;
         for (int i = 0; i < 2; i++) {
-            mpXfb[i] = new(heap, DEFAULT_ALIGN) u8[xfbSize];
+            mpXfb[i] = new (heap, DEFAULT_ALIGN) u8[xfbSize];
         }
 
         mCurXfb = 0;
     }
-}
+}  // namespace ipl

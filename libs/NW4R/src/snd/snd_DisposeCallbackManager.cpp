@@ -11,7 +11,8 @@ namespace nw4r {
                 return instance;
             }
 
-            DisposeCallbackManager::DisposeCallbackManager() {}
+            DisposeCallbackManager::DisposeCallbackManager() {
+            }
 
             void DisposeCallbackManager::RegisterDisposeCallback(DisposeCallback* callback) {
                 ut::AutoInterruptLock lock;
@@ -52,6 +53,6 @@ namespace nw4r {
                     currIt++->InvalidateWaveData(start, end);
                 }
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

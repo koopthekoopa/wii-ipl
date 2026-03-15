@@ -10,23 +10,24 @@
 namespace nw4r {
     namespace snd {
         class NandSoundArchive::NandFileStream : public ut::NandFileStream {
-            public:
-                NandFileStream(const NANDFileInfo* pFileInfo, u32 offset, u32 size);
-                NandFileStream(const char* path, u32 offset, u32 size);
+        public:
+            NandFileStream(const NANDFileInfo* pFileInfo, u32 offset, u32 size);
+            NandFileStream(const char* path, u32 offset, u32 size);
 
-                virtual s32     Read(void* dst, u32 size);                                          // 0x14
-                virtual void    Seek(s32 offset, u32 origin);                                       // 0x44
+            virtual s32 Read(void* dst, u32 size);      // 0x14
+            virtual void Seek(s32 offset, u32 origin);  // 0x44
 
-                virtual u32     Tell() const    { return ut::NandFileStream::Tell() - mOffset; }    // 0x58
+            virtual u32 Tell() const { return ut::NandFileStream::Tell() - mOffset; }  // 0x58
 
-                virtual u32     GetSize() const { return mSize; }                                   // 0x40
+            virtual u32 GetSize() const { return mSize; }  // 0x40
 
-            private:
-                s32 mOffset;    // 0x16C
-                s32 mSize;      // 0x170
+        private:
+            s32 mOffset;  // 0x16C
+            s32 mSize;    // 0x170
         };
 
-        NandSoundArchive::NandSoundArchive() : mOpen(false) {}
+        NandSoundArchive::NandSoundArchive() : mOpen(false) {
+        }
 
         NandSoundArchive::~NandSoundArchive() {
             Close();
@@ -85,7 +86,7 @@ namespace nw4r {
                 return NULL;
             }
 
-            return new(buffer) NandFileStream(&mFileInfo, offset, length);
+            return new (buffer) NandFileStream(&mFileInfo, offset, length);
         }
 
         ut::FileStream* NandSoundArchive::OpenExtStream(void* buffer, int size, const char* extPath, u32 offset, u32 length) const {
@@ -97,8 +98,7 @@ namespace nw4r {
                 return NULL;
             }
 
-            NandFileStream* pExtStream =
-                new(buffer) NandFileStream(extPath, offset, length);
+            NandFileStream* pExtStream = new (buffer) NandFileStream(extPath, offset, length);
 
             if (!pExtStream->IsAvailable()) {
                 pExtStream->~NandFileStream();
@@ -182,11 +182,8 @@ namespace nw4r {
             return true;
         }
 
-        NandSoundArchive::NandFileStream::NandFileStream(const NANDFileInfo* pFileInfo, u32 offset, u32 size) :
-        ut::NandFileStream(pFileInfo, NAND_ACCESS_READ, false),
-            mOffset(offset),
-            mSize(size) {
-
+        NandSoundArchive::NandFileStream::NandFileStream(const NANDFileInfo* pFileInfo, u32 offset, u32 size)
+            : ut::NandFileStream(pFileInfo, NAND_ACCESS_READ, false), mOffset(offset), mSize(size) {
             if (IsAvailable()) {
                 if (mSize == 0) {
                     mSize = ut::NandFileStream::GetSize();
@@ -196,11 +193,8 @@ namespace nw4r {
             }
         }
 
-        NandSoundArchive::NandFileStream::NandFileStream(const char* path, u32 offset, u32 size) :
-        ut::NandFileStream(path, NAND_ACCESS_READ),
-            mOffset(offset),
-            mSize(size) {
-
+        NandSoundArchive::NandFileStream::NandFileStream(const char* path, u32 offset, u32 size)
+            : ut::NandFileStream(path, NAND_ACCESS_READ), mOffset(offset), mSize(size) {
             if (IsAvailable()) {
                 if (mSize == 0) {
                     mSize = ut::NandFileStream::GetSize();
@@ -245,12 +239,11 @@ namespace nw4r {
 
             if (offset < mOffset) {
                 offset = mOffset;
-            }
-            else if (offset > mOffset + mSize) {
+            } else if (offset > mOffset + mSize) {
                 offset = mOffset + mSize;
             }
 
             ut::NandFileStream::Seek(offset, SEEK_BEG);
         }
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r

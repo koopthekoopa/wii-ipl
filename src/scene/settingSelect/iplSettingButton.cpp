@@ -7,14 +7,14 @@
 
 namespace ipl {
     namespace scene {
+        // clang-format off
         static const char* scBtnSoundType[SettingButton::MAX_SOUND_TYPE] = {
             "WIPL_SE_CANCEL",
             "WIPL_SE_DECIDE",
         };
+        // clang-format on
 
-        SettingButton::SettingButton(EGG::Heap* heap, int arg) :
-        FaderSceneBase(heap),
-        ::gui::EventHandler() {
+        SettingButton::SettingButton(EGG::Heap* heap, int arg) : FaderSceneBase(heap), ::gui::EventHandler() {
             unk_0x264 = 64;
             unk_0x268 = 0;
             unk_0x26C = 0;
@@ -36,15 +36,15 @@ namespace ipl {
 
         void SettingButton::create() {
             mpLayout = new layout::Object(getSceneHeap(), mpLayoutFile, "arc", "it_Button_a.brlyt");
-        
-            mpLayout->bindToGroup("it_Button_a_SeenIn.brlan",       "G_BarIn",      false);
-            mpLayout->bindToGroup("it_Button_a_BtnFoucusIn.brlan",  "G_FocusBtnA",  false, false);
-            mpLayout->bindToGroup("it_Button_a_BtnFoucusOut.brlan", "G_FocusBtnA",  false, false);
-            mpLayout->bindToGroup("it_Button_a_BtnFlash.brlan",     "G_SelectBtnA", false, false);
-            mpLayout->bindToGroup("it_Button_a_WiiAppear.brlan",    "G_Wii",        false, false);
-            mpLayout->bindToGroup("it_Button_a_WiiLost.brlan",      "G_Wii",        false);
-            mpLayout->bindToGroup("it_Button_a_AlphIn.brlan",       "G_FocusBtnA",  false, false);
-            mpLayout->bindToGroup("it_Button_a_AlphOut.brlan",      "G_FocusBtnA",  false, false);
+
+            mpLayout->bindToGroup("it_Button_a_SeenIn.brlan", "G_BarIn", false);
+            mpLayout->bindToGroup("it_Button_a_BtnFoucusIn.brlan", "G_FocusBtnA", false, false);
+            mpLayout->bindToGroup("it_Button_a_BtnFoucusOut.brlan", "G_FocusBtnA", false, false);
+            mpLayout->bindToGroup("it_Button_a_BtnFlash.brlan", "G_SelectBtnA", false, false);
+            mpLayout->bindToGroup("it_Button_a_WiiAppear.brlan", "G_Wii", false, false);
+            mpLayout->bindToGroup("it_Button_a_WiiLost.brlan", "G_Wii", false);
+            mpLayout->bindToGroup("it_Button_a_AlphIn.brlan", "G_FocusBtnA", false, false);
+            mpLayout->bindToGroup("it_Button_a_AlphOut.brlan", "G_FocusBtnA", false, false);
             mpLayout->finishBinding();
 
             mpGui = new gui::PaneManager(this, mpLayout->getDrawInfo(), NULL, NULL, true);
@@ -57,8 +57,7 @@ namespace ipl {
             if (mSettingArg == SettingSelectArg::ARG_START_SAVE_DATA) {
                 mbShowBtn = false;
                 mpLayout->getAnim(ANIM_ALPHA_IN)->init();
-            }
-            else {
+            } else {
                 mbShowBtn = true;
                 mpLayout->getAnim(ANIM_ALPHA_OUT)->init();
             }
@@ -71,8 +70,7 @@ namespace ipl {
                     mbFadedIn = true;
                     mpLayout->getAnim(ANIM_SEEN_IN)->play();
                 }
-            }
-            else {
+            } else {
                 if (!mpLayout->getAnim(ANIM_SEEN_IN)->isPlaying()) {
                     result = FADER_SCN_NEXT;
                 }
@@ -82,10 +80,8 @@ namespace ipl {
         }
 
         FaderSceneCommand SettingButton::calcNormal() {
-            if (!mpLayout->getAnim(ANIM_ALPHA_IN)->isPlaying()
-            && !mpLayout->getAnim(ANIM_ALPHA_OUT)->isPlaying()
-            && !mpLayout->getAnim(ANIM_BTN_FLASH)->isPlaying()
-            && unk_0x268 != 0) {
+            if (!mpLayout->getAnim(ANIM_ALPHA_IN)->isPlaying() && !mpLayout->getAnim(ANIM_ALPHA_OUT)->isPlaying() &&
+                !mpLayout->getAnim(ANIM_BTN_FLASH)->isPlaying() && unk_0x268 != 0) {
                 Unk unk = unk_0x64[unk_0x26C];
                 switch (unk.command) {
                     case CMD_SHOW_BTN: {
@@ -108,7 +104,6 @@ namespace ipl {
                     }
                     unk_0x268--;
                 }
-                
             }
 
             return FADER_SCN_CONTINUE;
@@ -160,7 +155,7 @@ namespace ipl {
 
                 mbTrigBtn = true;
                 mpGui->init();
-                
+
                 mBtnHovered = FALSE;
             }
         }
@@ -168,9 +163,9 @@ namespace ipl {
         void SettingButton::onEvent(u32 compId, u32 event, void* data) {
             gui::PaneComponent* component = static_cast<gui::PaneComponent*>(mpManager->getComponent(compId));
             const char* paneName = component->getPane()->GetName();
-    
+
             controller::Interface* controller = reinterpret_cast<controller::Interface*>(data);
-    
+
             switch (event) {
                 case ::gui::EventHandler::ON_POINT: {
                     start_point_event(paneName, controller);
@@ -246,5 +241,5 @@ namespace ipl {
         bool SettingButton::isPlaying() const {
             return mpLayout->getAnim(ANIM_BTN_FLASH)->isPlaying();
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

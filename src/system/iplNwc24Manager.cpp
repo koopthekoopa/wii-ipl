@@ -14,33 +14,29 @@
 
 namespace ipl {
     namespace nwc24 {
-        Manager::Arg    Manager::smArg;
+        Manager::Arg Manager::smArg;
 
-        #if defined(VERSION_43U)
-            static const NWC24EncodingRegion ENCODING_REGION = NWC24_ENCODING_REGION_USA;
-        #elif defined(VERSION_43E)
-            static const NWC24EncodingRegion ENCODING_REGION = NWC24_ENCODING_REGION_EUR;
-        #elif defined(VERSION_43J)
-            static const NWC24EncodingRegion ENCODING_REGION = NWC24_ENCODING_REGION_JPN;
-        #elif defined(VERSION_43K)
-            static const NWC24EncodingRegion ENCODING_REGION = NWC24_ENCODING_REGION_KOR;
-        #else
-            static const NWC24EncodingRegion ENCODING_REGION = NWC24_ENCODING_REGION_NON;
-        #endif
+#if defined(VERSION_43U)
+        static const NWC24EncodingRegion ENCODING_REGION = NWC24_ENCODING_REGION_USA;
+#elif defined(VERSION_43E)
+        static const NWC24EncodingRegion ENCODING_REGION = NWC24_ENCODING_REGION_EUR;
+#elif defined(VERSION_43J)
+        static const NWC24EncodingRegion ENCODING_REGION = NWC24_ENCODING_REGION_JPN;
+#elif defined(VERSION_43K)
+        static const NWC24EncodingRegion ENCODING_REGION = NWC24_ENCODING_REGION_KOR;
+#else
+        static const NWC24EncodingRegion ENCODING_REGION = NWC24_ENCODING_REGION_NON;
+#endif
 
-        #define FILE_ERROR_OK                                                                                                   \
-         (((mLastError >  NWC24_ERR_FILE_OPEN   || mLastError <  NWC24_ERR_FILE_OTHER) && mLastError != NWC24_ERR_NAND_CORRUPT) \
-        && (mLastError != NWC24_ERR_FILE_EXISTS && mLastError != NWC24_ERR_INTERNAL_VF && mLastError != NWC24_ERR_FILE_BROKEN))
+#define FILE_ERROR_OK                                                                                                                                \
+    (((mLastError > NWC24_ERR_FILE_OPEN || mLastError < NWC24_ERR_FILE_OTHER) && mLastError != NWC24_ERR_NAND_CORRUPT) &&                            \
+     (mLastError != NWC24_ERR_FILE_EXISTS && mLastError != NWC24_ERR_INTERNAL_VF && mLastError != NWC24_ERR_FILE_BROKEN))
 
-        Manager::Manager(EGG::Heap* heap) :
-        mbReviecedMsg(false),
-        unk_0xA31(false),
-        mbReceivePaused(false),
-        unk_0xA33(false) {
+        Manager::Manager(EGG::Heap* heap) : mbReviecedMsg(false), unk_0xA31(false), mbReceivePaused(false), unk_0xA33(false) {
             OSInitMutex(&mLock);
             OSInitMutex(&mAutoLock);
 
-            mpLibWork = new(heap, DEFAULT_ALIGN) u8[0x4000];
+            mpLibWork = new (heap, DEFAULT_ALIGN) u8[0x4000];
 
             memset(&smArg, 0, sizeof(smArg));
 
@@ -94,7 +90,8 @@ namespace ipl {
             return error_handling(err, 295);
         }
 
-        BOOL Manager::setMsgSubjectAndTextPublic(NWC24MsgObj* msg, const u16* subject, u32 subjectLen, const u16* text, u32 textLen, u8* work, u32 workSize) {
+        BOOL Manager::setMsgSubjectAndTextPublic(NWC24MsgObj* msg, const u16* subject, u32 subjectLen, const u16* text, u32 textLen, u8* work,
+                                                 u32 workSize) {
             NWC24Err err = NWC24SetMsgSubjectAndTextPublic(msg, subject, subjectLen, text, textLen, ENCODING_REGION, -1, work, workSize);
             return error_handling(err, 418);
         }
@@ -123,22 +120,22 @@ namespace ipl {
             NWC24Err err = NWC24GetNumMsgs(msgBoxType, numMsgs);
             return error_handling(err, 492);
         }
-        
+
         BOOL Manager::getMsgIdList(const NWC24MBoxType msgBoxType, u32* msgIds, u32 maxLength) {
             NWC24Err err = NWC24GetMsgIdList(msgBoxType, msgIds, maxLength);
             return error_handling(err, 505);
         }
-        
+
         BOOL Manager::getMsgObj(NWC24MsgObj* msg, NWC24MBoxType msgBoxType, u32 index) {
             NWC24Err err = NWC24GetMsgObj(msg, msgBoxType, index);
             return error_handling(err, 518);
         }
-        
+
         BOOL Manager::getMsgType(const NWC24MsgObj* msg, NWC24MsgType* type) {
             NWC24Err err = NWC24GetMsgType(msg, type);
             return error_handling(err, 530);
         }
-        
+
         BOOL Manager::getMsgAppId(const NWC24MsgObj* msg, u32* appId) {
             NWC24Err err = NWC24GetMsgAppId(msg, appId);
             return error_handling(err, 542);
@@ -153,7 +150,7 @@ namespace ipl {
             NWC24Err err = NWC24GetMsgTextSize(msg, textLen);
             return error_handling(err, 566);
         }
-        
+
         BOOL Manager::getMsgSubjectSize(const NWC24MsgObj* msg, u32* subjectLen) {
             NWC24Err err = NWC24GetMsgSubjectSize(msg, subjectLen);
             return error_handling(err, 578);
@@ -238,7 +235,7 @@ namespace ipl {
             NWC24Err err = NWC24ReadMsgMBUpdateSW(msg, mbUpdateSW);
             return error_handling_ignore_file(err, 869);
         }
-    
+
         BOOL Manager::readMsgMBOptOutFlag(const NWC24MsgObj* msg, BOOL* mbOptOutFlag, u32* appId) {
             NWC24Err err = NWC24ReadMsgMBOptOutFlag(msg, mbOptOutFlag, appId);
             return error_handling_ignore_file(err, 882);
@@ -259,11 +256,9 @@ namespace ipl {
             BOOL result;
             if (err == FALSE) {
                 result = FALSE;
-            }
-            else if (err == TRUE) {
+            } else if (err == TRUE) {
                 result = TRUE;
-            }
-            else {
+            } else {
                 return error_handling(err, 920);
             }
             return result;
@@ -494,22 +489,22 @@ namespace ipl {
             NWC24iGetSchedulerStat(&smArg.mScheduleStat, sizeof(NWC24ScdStat));
 
             // Print Scheduler status
-            OSReport("permission %d\n",smArg.mScheduleStat.permission);
-            OSReport("last task err %d\n",smArg.mScheduleStat.lastCriticalError);
-            OSReport("new msg flag %d\n",smArg.mScheduleStat.newMsgFlag);
-            OSReport("cur task err %d\n",smArg.mScheduleStat.taskStage);
-            OSReport("err num %d\n",smArg.mScheduleStat.numErrors);
-            OSReport("send msg num %d\n",smArg.mScheduleStat.numMsgSent);
-            OSReport("recv msg num %d\n",smArg.mScheduleStat.numMsgReceived);
-            OSReport("save msg num %d\n",smArg.mScheduleStat.numMsgSaved);
-            OSReport("refuse msg num %d\n",smArg.mScheduleStat.numMsgRejected);
-            OSReport("filter msg num %d\n",smArg.mScheduleStat.numMsgFiltered);
-            OSReport("confirm task num %d\n",smArg.mScheduleStat.countMailChk);
-            OSReport("recv task num %d\n",smArg.mScheduleStat.countMailRcv);
-            OSReport("save task num %d\n",smArg.mScheduleStat.countMailSav);
-            OSReport("send task num %d\n",smArg.mScheduleStat.countMailSnd);
-            OSReport("download task num %d\n",smArg.mScheduleStat.countDL);
-            OSReport("friend %d\n",smArg.mScheduleStat.countEstablished);
+            OSReport("permission %d\n", smArg.mScheduleStat.permission);
+            OSReport("last task err %d\n", smArg.mScheduleStat.lastCriticalError);
+            OSReport("new msg flag %d\n", smArg.mScheduleStat.newMsgFlag);
+            OSReport("cur task err %d\n", smArg.mScheduleStat.taskStage);
+            OSReport("err num %d\n", smArg.mScheduleStat.numErrors);
+            OSReport("send msg num %d\n", smArg.mScheduleStat.numMsgSent);
+            OSReport("recv msg num %d\n", smArg.mScheduleStat.numMsgReceived);
+            OSReport("save msg num %d\n", smArg.mScheduleStat.numMsgSaved);
+            OSReport("refuse msg num %d\n", smArg.mScheduleStat.numMsgRejected);
+            OSReport("filter msg num %d\n", smArg.mScheduleStat.numMsgFiltered);
+            OSReport("confirm task num %d\n", smArg.mScheduleStat.countMailChk);
+            OSReport("recv task num %d\n", smArg.mScheduleStat.countMailRcv);
+            OSReport("save task num %d\n", smArg.mScheduleStat.countMailSav);
+            OSReport("send task num %d\n", smArg.mScheduleStat.countMailSnd);
+            OSReport("download task num %d\n", smArg.mScheduleStat.countDL);
+            OSReport("friend %d\n", smArg.mScheduleStat.countEstablished);
 
             // Open NWC24 Library
             if (!open()) {
@@ -532,7 +527,7 @@ namespace ipl {
 
             int iconNewCount = 0;
             int iconNewIndex = 0;
-            
+
             u8 recordFlags;
 
             // Now begin!!!
@@ -573,8 +568,7 @@ namespace ipl {
                             readFriendInfo(&friendInfo, index);
                             wcsncpy(msgFriendName, (wchar_t*)friendInfo.attr.name, 12);
                         }
-                    }
-                    else {
+                    } else {
                         u32 index = 0;
                         getMsgFromId(&msgObj, &msgFriendAddr.wiiId);
                         msgFriendType = msgFriendAddr.wiiId == myUserId ? NWC24_FRIENDTYPE_NONE : NWC24_FRIENDTYPE_WII;
@@ -615,8 +609,7 @@ namespace ipl {
                     // Get Mii data
                     if (msgAppId == ES_TITLE_CODE(TITLE_NIGAOE_ALL)) {
                         RFLiCharData charData;
-                        if (RFLiNWC24Msg2CharData(&charData, &msgObj)
-                        && System::getMiiManager()->isValid(&charData)) {
+                        if (RFLiNWC24Msg2CharData(&charData, &msgObj) && System::getMiiManager()->isValid(&charData)) {
                             System::getMiiManager()->addHiddenDB(&msgObj);
                         }
 
@@ -643,8 +636,7 @@ namespace ipl {
                     else {
                         if (msgBoardUpdateSW) {
                             recordFlags = RBRRecordType_SWUpdate;
-                        }
-                        else {
+                        } else {
                             recordFlags = RBRRecordType_Letter;
                         }
                     }
@@ -670,8 +662,7 @@ namespace ipl {
                             // Skip message if we have not passed the delay timer
                             continue;
                         }
-                    }
-                    else if (!FILE_ERROR_OK) {
+                    } else if (!FILE_ERROR_OK) {
                         goto out;
                     }
 
@@ -688,8 +679,7 @@ namespace ipl {
                         msgMbRegDate.year = msgYear;
                         msgMbRegDate.mon = msgMonth - 1;
                         msgMbRegDate.mday = msgDay;
-                    }
-                    else if (!FILE_ERROR_OK) {
+                    } else if (!FILE_ERROR_OK) {
                         goto out;
                     }
 
@@ -715,8 +705,7 @@ namespace ipl {
                     // Get Mii data
                     bool msgHasMii = false;
                     RFLiCharData msgCharData;
-                    if (RFLiNWC24Msg2CharData(&msgCharData, &msgObj)
-                    && System::getMiiManager()->isValid(&msgCharData)) {
+                    if (RFLiNWC24Msg2CharData(&msgCharData, &msgObj) && System::getMiiManager()->isValid(&msgCharData)) {
                         System::getMiiManager()->addHiddenDB(&msgObj);
                         msgHasMii = true;
                     }
@@ -739,7 +728,7 @@ namespace ipl {
                     // Get attachment data
                     for (int attachIndex = 0; attachIndex < msgNumAttached; attachIndex++) {
                         getMsgAttachedSize(&msgObj, attachIndex, &mAttachSize[attachIndex]);
-                        mAttachData[attachIndex] = new(heap, DEFAULT_ALIGN) u8[mAttachSize[attachIndex]];
+                        mAttachData[attachIndex] = new (heap, DEFAULT_ALIGN) u8[mAttachSize[attachIndex]];
                         if (mAttachData[attachIndex] == NULL) {
                             mAttachSize[attachIndex] = 0;
                             break;
@@ -758,8 +747,7 @@ namespace ipl {
                                     if (encode_odh(heap, attachIndex)) {
                                         msgAttachTypes[attachIndex] = RBRAttachmentType_Picture;
                                         rbrFileType = RBRFileType_Odh;
-                                    }
-                                    else {
+                                    } else {
                                         if (mAttachData[attachIndex] != NULL) {
                                             delete mAttachData[attachIndex];
                                             mAttachData[attachIndex] = NULL;
@@ -771,15 +759,14 @@ namespace ipl {
 
                                         mAttachSize[attachIndex] = System::getInvalidJpegImage()->getLength();
 
-                                        mAttachData[attachIndex] = new(heap, DEFAULT_ALIGN) u8[mAttachSize[attachIndex]];
+                                        mAttachData[attachIndex] = new (heap, DEFAULT_ALIGN) u8[mAttachSize[attachIndex]];
                                         memcpy(mAttachData[attachIndex], invalidJpegImage->getBuffer(), mAttachSize[attachIndex]);
-                                    
+
                                         // Attempt to convert to ODH (AJPG)
                                         if (encode_odh(heap, attachIndex)) {
                                             msgAttachTypes[attachIndex] = RBRAttachmentType_Picture;
                                             rbrFileType = RBRFileType_Odh;
-                                        }
-                                        else {
+                                        } else {
                                             // Failed to do that too? Don't use it.
                                             if (mAttachData[attachIndex] != NULL) {
                                                 delete mAttachData[attachIndex];
@@ -788,8 +775,7 @@ namespace ipl {
                                             mAttachSize[attachIndex] = 0;
                                         }
                                     }
-                                }
-                                else {
+                                } else {
                                     delete[] mAttachData[attachIndex];
                                     mAttachData[attachIndex] = NULL;
                                     mAttachSize[attachIndex] = 0;
@@ -798,11 +784,10 @@ namespace ipl {
                             }
                             // For ODH files
                             case NWC24_X_WII_PICTURE: {
-                                if (strcmp(rbrFileType, RBRFileType_Txt) == 0 && mAttachSize[attachIndex] < NWC24_ATTACH_PICTURE_MAX+0x1400) {
+                                if (strcmp(rbrFileType, RBRFileType_Txt) == 0 && mAttachSize[attachIndex] < NWC24_ATTACH_PICTURE_MAX + 0x1400) {
                                     msgAttachTypes[attachIndex] = RBRAttachmentType_Picture;
                                     rbrFileType = RBRFileType_Odh;
-                                }
-                                else {
+                                } else {
                                     delete[] mAttachData[attachIndex];
                                     mAttachData[attachIndex] = NULL;
                                     mAttachSize[attachIndex] = 0;
@@ -814,8 +799,7 @@ namespace ipl {
                                 if (isMsgBoardData == false && mAttachSize[attachIndex] < NWC24_ATTACH_MSGBOARD_MAX) {
                                     msgAttachTypes[attachIndex] = RBRAttachmentType_MsgBoard;
                                     isMsgBoardData = true;
-                                }
-                                else {
+                                } else {
                                     delete[] mAttachData[attachIndex];
                                     mAttachData[attachIndex] = NULL;
                                     mAttachSize[attachIndex] = 0;
@@ -827,8 +811,7 @@ namespace ipl {
                                 if (strcmp(rbrFileType, RBRFileType_Txt) == 0 && mAttachSize[attachIndex] < NWC24_ATTACH_MINIDATA_MAX) {
                                     msgAttachTypes[attachIndex] = RBRAttachmentType_MiniData;
                                     rbrFileType = RBRFileType_Dat;
-                                }
-                                else {
+                                } else {
                                     delete[] mAttachData[attachIndex];
                                     mAttachData[attachIndex] = NULL;
                                     mAttachSize[attachIndex] = 0;
@@ -850,8 +833,7 @@ namespace ipl {
                     // Decide position
                     f32 left, right, top, bottom;
                     RBRGetPosRect(&left, &right, &top, &bottom);
-                    math::VEC2 msgBoardPos(left + (right  - left) * System::getRndm()->get_f01(),
-                                           top  + (bottom - top ) * System::getRndm()->get_f01());
+                    math::VEC2 msgBoardPos(left + (right - left) * System::getRndm()->get_f01(), top + (bottom - top) * System::getRndm()->get_f01());
 
                     // Get current time (For backup incase we have not got the message date)
                     BOOL enabled = OSDisableInterrupts();
@@ -859,32 +841,23 @@ namespace ipl {
                     OSRestoreInterrupts(enabled);
 
                     // Decide record flags
-                    RBRRecordFlags msgRecordFlags = { 0 };
+                    RBRRecordFlags msgRecordFlags = {0};
                     msgRecordFlags.type = recordFlags;
                     if (msgBoardCanOptOut) {
                         msgRecordFlags.optOut |= TRUE;
                     }
 
                     // And now lets create a CDBRecord of the message!
-                    System::getCdbManager()->createNewRecord("ripl_board_record",
-                                                            rbrFileType,
-                                                            msgUseMbRegDate ? &msgMbRegDate : &currTime,
-                                                            msgGroupId == 1 || msgGroupId == 0 ? NULL : &msgAppId,
-                                                            msgGroupId == 1 || msgGroupId == 0 ? NULL : &msgGroupId,
-                                                            msgBoardPos,
-                                                            msgRecordFlags.data,
-                                                            msgFriendAddr,
-                                                            msgFriendType,
-                                                            msgNoReply,
-                                                            msgTitleText[0] != 0 ? msgTitleText : msgFriendName,
-                                                            msgBodyText,
-                                                            msgHasMii ? &msgCharData : NULL,
-                                                            (const void**)mAttachData, mAttachSize, msgAttachTypes);
+                    System::getCdbManager()->createNewRecord(
+                        "ripl_board_record", rbrFileType, msgUseMbRegDate ? &msgMbRegDate : &currTime,
+                        msgGroupId == 1 || msgGroupId == 0 ? NULL : &msgAppId, msgGroupId == 1 || msgGroupId == 0 ? NULL : &msgGroupId, msgBoardPos,
+                        msgRecordFlags.data, msgFriendAddr, msgFriendType, msgNoReply, msgTitleText[0] != 0 ? msgTitleText : msgFriendName,
+                        msgBodyText, msgHasMii ? &msgCharData : NULL, (const void**)mAttachData, mAttachSize, msgAttachTypes);
 
-out2:
+                out2:
                     mbReviecedMsg = true;
 
-out:
+                out:
                     if (msgBodyText != NULL) {
                         delete[] msgBodyText;
                     }
@@ -905,8 +878,7 @@ out:
                     if (System::getCdbManager()->isOverFlow() || mbReceivePaused) {
                         break;
                     }
-                }
-                else if (msgType == NWC24_MSGTYPE_WII_APP || msgType == NWC24_MSGTYPE_WII_APP_HIDDEN) {
+                } else if (msgType == NWC24_MSGTYPE_WII_APP || msgType == NWC24_MSGTYPE_WII_APP_HIDDEN) {
                     u32 iconNewSign;
                     if (getMsgIconNewSign(&msgObj, &iconNewSign) && iconNewCount < MAX_MESSAGES_COUNT) {
                         iconNewCount++;
@@ -935,19 +907,19 @@ out:
                     if (++i > 1000) {
                         break;
                     }
-start:
+                start:
                     if (open()) {
                         char fullDlUrl[64];
                         memset(fullDlUrl, 0, sizeof(fullDlUrl));
 
-                        NWC24DlId   dlIds[4]        = { 0, 1, 5, 6 };
-                        u16         dlIntervals[4]  = { 240, 240, 240, 240 };
-                        u8          dlPrios[4]      = { 128, 160, 200, 240 };
+                        NWC24DlId dlIds[4] = {0, 1, 5, 6};
+                        u16 dlIntervals[4] = {240, 240, 240, 240};
+                        u8 dlPrios[4] = {128, 160, 200, 240};
 
                         for (int j = 0; j < 4; j++) {
                             // Add DL task for announcements
-                            snprintf(fullDlUrl, sizeof(fullDlUrl)/sizeof(char),
-                                    "http://cfh.wapp.wii.com/announce/%03d/%d/%d.bin", address.id >> SC_SIMPLE_ADDRESS_ID_COUNTRY, System::getLanguage(), j+1);
+                            snprintf(fullDlUrl, sizeof(fullDlUrl) / sizeof(char), "http://cfh.wapp.wii.com/announce/%03d/%d/%d.bin",
+                                     address.id >> SC_SIMPLE_ADDRESS_ID_COUNTRY, System::getLanguage(), j + 1);
 
                             add_dl_task(dlIds[j], fullDlUrl, dlIntervals[j], dlPrios[j]);
                         }
@@ -970,8 +942,7 @@ start:
                     initDlTask(&dlTask, NWC24_DLTYPE_MULTIPART_V2);
                     setDlId(&dlTask, id);
                     setDlFlags(&dlTask, 0);
-                }
-                else {
+                } else {
                     return;
                 }
             }
@@ -982,8 +953,7 @@ start:
 
             if (newTask) {
                 addDlTask(&dlTask);
-            }
-            else {
+            } else {
                 updateDlTask(&dlTask);
             }
 
@@ -1032,7 +1002,7 @@ start:
                     mAttachData[attachIndex] = NULL;
 
                     mJpegSize = NWC24_ATTACH_PICTURE_MAX;
-                    mJpegData = new(heap, DEFAULT_ALIGN) u8[NWC24_ATTACH_PICTURE_MAX];
+                    mJpegData = new (heap, DEFAULT_ALIGN) u8[NWC24_ATTACH_PICTURE_MAX];
 
                     if (mJpegData != NULL) {
                         // Then encode ODH with the decoded JPEG
@@ -1042,21 +1012,18 @@ start:
                             result = TRUE;
                             mAttachData[attachIndex] = mJpegData;
                             mAttachSize[attachIndex] = mJpegSize;
-                        }
-                        else {
+                        } else {
                             delete[] mJpegData;
                             mJpegData = NULL;
                         }
                     }
 
                     jpegDecoder->clear();
-                }
-                else {
+                } else {
                     delete[] mAttachData[attachIndex];
                     mAttachData[attachIndex] = NULL;
                 }
-            }
-            else {
+            } else {
                 delete[] mAttachData[attachIndex];
                 mAttachData[attachIndex] = NULL;
             }
@@ -1065,31 +1032,35 @@ start:
         }
 
         wchar_t* Manager::make_text(EGG::Heap* heap, const NWC24MsgObj* msg, bool bIncludeSubject, u32* failFlag) {
-            wchar_t*    fullText = NULL;
+            wchar_t* fullText = NULL;
 
-            u32         subjectGotSize = 0;
-            wchar_t*    subject = NULL;
-            u32         subjectLen = 0;
-            u8*         subjectWork = NULL;
+            u32 subjectGotSize = 0;
+            wchar_t* subject = NULL;
+            u32 subjectLen = 0;
+            u8* subjectWork = NULL;
 
-            u32         textGotSize = 0;
-            wchar_t*    text = NULL;
-            u32         textLen = 0;
-            u8*         textWork = NULL;
+            u32 textGotSize = 0;
+            wchar_t* text = NULL;
+            u32 textLen = 0;
+            u8* textWork = NULL;
 
             *failFlag = FALSE;
 
             // Read subject text
             if (bIncludeSubject) {
                 getMsgSubjectSize(msg, &subjectGotSize);
+
                 if (subjectGotSize > 1) {
                     subjectLen = NWC24_MSG_SUBJECT_LENGTH;
-                    subject = new(heap, -4) wchar_t[NWC24_MSG_SUBJECT_LENGTH+1];
-                    subjectWork = new(heap, -4) u8[NWC24_SUBJECT_PUBLIC_WORK_SIZE+4];
+                    subject = new (heap, -4) wchar_t[NWC24_MSG_SUBJECT_LENGTH + 1];
+                    subjectWork = new (heap, -4) u8[NWC24_SUBJECT_PUBLIC_WORK_SIZE + 4];
+
                     if (subject != NULL && subjectWork != NULL) {
-                        memset(subject, 0, (NWC24_MSG_SUBJECT_LENGTH+1) * sizeof(wchar_t));
-                        memset(subjectWork, 0, NWC24_SUBJECT_PUBLIC_WORK_SIZE+4);
+                        memset(subject, 0, (NWC24_MSG_SUBJECT_LENGTH + 1) * sizeof(wchar_t));
+                        memset(subjectWork, 0, NWC24_SUBJECT_PUBLIC_WORK_SIZE + 4);
+
                         readMsgSubjectPublic(msg, (u16*)subject, &subjectLen, subjectWork, NWC24_SUBJECT_PUBLIC_WORK_SIZE);
+
                         if (!FILE_ERROR_OK) {
                             *failFlag = TRUE;
                             goto out;
@@ -1102,19 +1073,20 @@ start:
             getMsgTextSize(msg, &textGotSize);
             if (textGotSize != 0) {
                 textLen = NWC24_MSG_TEXT_LENGTH;
-                text = new(heap, -4) wchar_t[NWC24_MSG_TEXT_LENGTH+1];
-                textWork = new(heap, -4) u8[NWC24_TEXT_PUBLIC_WORK_SIZE+4];
+                text = new (heap, -4) wchar_t[NWC24_MSG_TEXT_LENGTH + 1];
+                textWork = new (heap, -4) u8[NWC24_TEXT_PUBLIC_WORK_SIZE + 4];
+
                 if (text != NULL && textWork != NULL) {
-                    memset(text, 0, (NWC24_MSG_TEXT_LENGTH+1) * sizeof(wchar_t));
-                    memset(textWork, 0, NWC24_TEXT_PUBLIC_WORK_SIZE+4);
+                    memset(text, 0, (NWC24_MSG_TEXT_LENGTH + 1) * sizeof(wchar_t));
+                    memset(textWork, 0, NWC24_TEXT_PUBLIC_WORK_SIZE + 4);
+
                     if (bIncludeSubject) {
                         readMsgTextPublic(msg, (u16*)text, &textLen, textWork, NWC24_TEXT_PUBLIC_WORK_SIZE);
                         if (!FILE_ERROR_OK) {
                             *failFlag = TRUE;
                             goto out;
                         }
-                    }
-                    else {
+                    } else {
                         NWC24Charset charset;
                         NWC24Encoding encoding;
                         readMsgText(msg, (char*)text, textLen * sizeof(wchar_t), &charset, &encoding);
@@ -1129,9 +1101,11 @@ start:
             // Combine subject and text
             if (subjectLen != 0 || textLen != 0) {
                 int fullTextLen = subjectLen + textLen + 4;
-                fullText = new(heap, 4) wchar_t[fullTextLen];
+                fullText = new (heap, 4) wchar_t[fullTextLen];
+
                 if (fullText != NULL) {
                     memset(fullText, 0, fullTextLen * (int)sizeof(wchar_t));
+
                     if (bIncludeSubject && subjectLen != 0 && subjectGotSize > 1) {
                         wcsncat(fullText, subject, fullTextLen - wcslen(fullText));
                         wcsncat(fullText, L"\n\n", fullTextLen - wcslen(fullText));
@@ -1142,7 +1116,7 @@ start:
                 }
             }
 
-out:
+        out:
             if (subject != NULL) {
                 delete[] subject;
             }
@@ -1163,7 +1137,7 @@ out:
                 return TRUE;
             }
 
-            char appIdStr[sizeof(appId)+sizeof(groupId)];
+            char appIdStr[sizeof(appId) + sizeof(groupId)];
 
             memset(appIdStr, 0, sizeof(appIdStr));
             strncpy(appIdStr, (char*)&appId, sizeof(appId));
@@ -1227,5 +1201,5 @@ out:
             }
             return error_handling(code, line);
         }
-    }
-}
+    }  // namespace nwc24
+}  // namespace ipl

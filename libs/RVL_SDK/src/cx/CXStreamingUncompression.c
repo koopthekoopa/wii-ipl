@@ -1,8 +1,8 @@
 #include <private/cx.h>
 #include <revolution/cx.h>
 
-static inline int   CXiReadHeader(u8*, int*, const u8*, int, int);
-static inline u8*   GetNextNode(u8*, int);
+static inline int CXiReadHeader(u8*, int*, const u8*, int, int);
+static inline u8* GetNextNode(u8*, int);
 
 void CXInitUncompContextRL(CXUncompContextRL* context, u8* param_2) {
     context->unk_0x00 = param_2;
@@ -67,7 +67,7 @@ CXStreamingResult CXReadUncompRL(CXUncompContextRL* context, const void* src, u3
     while (context->unk_0x04 > 0) {
         if (!(context->unk_0x0e & 0x80)) {
             while (context->unk_0x0c) {
-                *context->unk_0x00++ =* pSrc++;
+                *context->unk_0x00++ = *pSrc++;
 
                 context->unk_0x0c--;
                 context->unk_0x04--;
@@ -77,9 +77,8 @@ CXStreamingResult CXReadUncompRL(CXUncompContextRL* context, const void* src, u3
                     return context->unk_0x04;
                 }
             }
-        }
-        else if (context->unk_0x0c) {
-            u8 b =* pSrc++;
+        } else if (context->unk_0x0c) {
+            u8 b = *pSrc++;
             size--;
 
             while (context->unk_0x0c) {
@@ -94,14 +93,13 @@ CXStreamingResult CXReadUncompRL(CXUncompContextRL* context, const void* src, u3
             }
         }
 
-        context->unk_0x0e =* pSrc++;
+        context->unk_0x0e = *pSrc++;
         size--;
         context->unk_0x0c = context->unk_0x0e & 0x7f;
 
         if (context->unk_0x0e & 0x80) {
             context->unk_0x0c += 3;
-        }
-        else {
+        } else {
             context->unk_0x0c += 1;
         }
 
@@ -134,26 +132,25 @@ static int CXiReadHeader(u8* param_1, int* param_2, const u8* param_3, int param
         (*param_1)--;
 
         if (*param_1 <= 3) {
-            *param_2 |=* param_3 << ((3 -* param_1) << 3);
-        }
-        else if (*param_1 <= 6) {
-            *param_2 |=* param_3 << ((6 -* param_1) << 3);
+            *param_2 |= *param_3 << ((3 - *param_1) << 3);
+        } else if (*param_1 <= 6) {
+            *param_2 |= *param_3 << ((6 - *param_1) << 3);
         }
 
         param_3++;
         a++;
 
-        if (*param_1 == 4 &&* param_2 > 0) {
+        if (*param_1 == 4 && *param_2 > 0) {
             *param_1 = 0;
         }
 
         param_4--;
-        if (param_4 == 0 &&* param_1 != 0) {
+        if (param_4 == 0 && *param_1 != 0) {
             return a;
         }
     }
 
-    if (param_5 > 0 && param_5 <* param_2) {
+    if (param_5 > 0 && param_5 < *param_2) {
         *param_2 = param_5;
     }
 
@@ -170,7 +167,7 @@ CXStreamingResult CXReadUncompLZ(CXUncompContextLZ* context, const void* src, u3
                 return CX_STREAMING_ERR_BAD_FILE_TYPE;
             }
 
-            context->unk_0x14 =* pSrc & 0x0F;
+            context->unk_0x14 = *pSrc & 0x0F;
 
             if (context->unk_0x14 != 0 && context->unk_0x14 != 1) {
                 return CX_STREAMING_ERR_BAD_FILE_TYPE;
@@ -196,7 +193,7 @@ CXStreamingResult CXReadUncompLZ(CXUncompContextLZ* context, const void* src, u3
             }
 
             if (!(context->unk_0x11 & 0x80)) {
-                *context->unk_0x00++ =* pSrc++;
+                *context->unk_0x00++ = *pSrc++;
                 context->unk_0x04--;
 
                 size--;
@@ -208,25 +205,22 @@ CXStreamingResult CXReadUncompLZ(CXUncompContextLZ* context, const void* src, u3
                 context->unk_0x10--;
 
                 if (!context->unk_0x14) {
-                    context->unk_0x0c =* pSrc++;
+                    context->unk_0x0c = *pSrc++;
                     context->unk_0x0c += 0x30;
                     context->unk_0x10 = 0;
-                }
-                else {
+                } else {
                     switch (context->unk_0x10) {
                         case 2: {
-                            context->unk_0x0c =* pSrc++;
+                            context->unk_0x0c = *pSrc++;
 
                             if (context->unk_0x0c >> 4 == 1) {
                                 context->unk_0x0c = (context->unk_0x0c & 0x0F) << 16;
                                 context->unk_0x0c += 0x1110;
-                            }
-                            else if (context->unk_0x0c >> 4 == 0) {
+                            } else if (context->unk_0x0c >> 4 == 0) {
                                 context->unk_0x0c = (context->unk_0x0c & 0x0F) << 8;
                                 context->unk_0x0c += 0x110;
                                 context->unk_0x10 = 1;
-                            }
-                            else {
+                            } else {
                                 context->unk_0x0c += 0x10;
                                 context->unk_0x10 = 0;
                             }
@@ -234,11 +228,11 @@ CXStreamingResult CXReadUncompLZ(CXUncompContextLZ* context, const void* src, u3
                             break;
                         }
                         case 1: {
-                            context->unk_0x0c +=* pSrc++ << 8;
+                            context->unk_0x0c += *pSrc++ << 8;
                             break;
                         }
                         case 0: {
-                            context->unk_0x0c +=* pSrc++;
+                            context->unk_0x0c += *pSrc++;
                             break;
                         }
                     }
@@ -253,7 +247,7 @@ CXStreamingResult CXReadUncompLZ(CXUncompContextLZ* context, const void* src, u3
             a = (context->unk_0x0c & 0x0F) << 8;
             context->unk_0x0c >>= 4;
 
-            a = (a |* pSrc++) + 1;
+            a = (a | *pSrc++) + 1;
             size--;
             context->unk_0x10 = 3;
 
@@ -272,7 +266,7 @@ CXStreamingResult CXReadUncompLZ(CXUncompContextLZ* context, const void* src, u3
                 context->unk_0x0c--;
             }
 
-            there:
+        there:
             if (!context->unk_0x04) {
                 goto out;
             }
@@ -285,7 +279,7 @@ CXStreamingResult CXReadUncompLZ(CXUncompContextLZ* context, const void* src, u3
             return context->unk_0x04;
         }
 
-        context->unk_0x11 =* pSrc++;
+        context->unk_0x11 = *pSrc++;
         context->unk_0x12 = 8;
         size--;
     }
@@ -303,7 +297,7 @@ CXStreamingResult CXReadUncompHuffman(CXUncompContextHuffman* context, const voi
     if (context->unk_0x1d) {
         int a;
         if (context->unk_0x1d == 8) {
-            context->unk_0x1c =* pSrc & 0x0F;
+            context->unk_0x1c = *pSrc & 0x0F;
 
             if ((*pSrc & CX_COMPRESSION_TYPE_MASK) != CX_COMPRESSION_TYPE_HUFFMAN) {
                 return CX_STREAMING_ERR_BAD_FILE_TYPE;
@@ -326,7 +320,7 @@ CXStreamingResult CXReadUncompHuffman(CXUncompContextHuffman* context, const voi
 
     if (context->unk_0x18 < 0) {
         context->unk_0x18 = ((*pSrc + 1) << 1) - 1;
-        *context->unk_0x0c++ =* pSrc++;
+        *context->unk_0x0c++ = *pSrc++;
         size--;
     }
 
@@ -335,7 +329,7 @@ CXStreamingResult CXReadUncompHuffman(CXUncompContextHuffman* context, const voi
             return context->unk_0x04;
         }
 
-        *context->unk_0x0c++ =* pSrc++;
+        *context->unk_0x0c++ = *pSrc++;
         context->unk_0x18--;
         size--;
 
@@ -356,7 +350,7 @@ CXStreamingResult CXReadUncompHuffman(CXUncompContextHuffman* context, const voi
                 return context->unk_0x04;
             }
 
-            context->unk_0x10 |=* pSrc++ << context->unk_0x1a;
+            context->unk_0x10 |= *pSrc++ << context->unk_0x1a;
 
             size--;
             context->unk_0x1a += 8;
@@ -364,7 +358,7 @@ CXStreamingResult CXReadUncompHuffman(CXUncompContextHuffman* context, const voi
 
         while (context->unk_0x1a) {
             int b = context->unk_0x10 >> 31;
-            int c = (*(vu8*)context->unk_0x0c << b) & 0x80; // ?
+            int c = (*(vu8*)context->unk_0x0c << b) & 0x80;  // ?
 
             context->unk_0x0c = GetNextNode(context->unk_0x0c, b);
             context->unk_0x10 <<= 1;
@@ -375,7 +369,7 @@ CXStreamingResult CXReadUncompHuffman(CXUncompContextHuffman* context, const voi
             }
 
             context->unk_0x14 >>= context->unk_0x1c;
-            context->unk_0x14 |=* context->unk_0x0c << (32 - context->unk_0x1c);
+            context->unk_0x14 |= *context->unk_0x0c << (32 - context->unk_0x1c);
             context->unk_0x0c = context->unk_0x20 + 1;
             context->unk_0x1b += context->unk_0x1c;
 

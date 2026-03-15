@@ -8,20 +8,20 @@ extern "C" {
 #include <revolution/os/OSThread.h>
 
 struct OSMutex {
-    OSThreadQueue   queue;  // 0x00
-    OSThread*       thread; // 0x08
-    s32             count;  // 0x0C
-    OSMutexLink     link;   // 0x10
+    OSThreadQueue queue;  // 0x00
+    OSThread* thread;     // 0x08
+    s32 count;            // 0x0C
+    OSMutexLink link;     // 0x10
 };
 
 struct OSCond {
-    OSThreadQueue   queue;  // 0x00
+    OSThreadQueue queue;  // 0x00
 };
 
-void    OSInitMutex(OSMutex* mutex);
-void    OSLockMutex(OSMutex* mutex);
-void    OSUnlockMutex(OSMutex* mutex);
-BOOL    OSTryLockMutex(OSMutex* mutex);
+void OSInitMutex(OSMutex* mutex);
+void OSLockMutex(OSMutex* mutex);
+void OSUnlockMutex(OSMutex* mutex);
+BOOL OSTryLockMutex(OSMutex* mutex);
 
 #include <revolution/os/OSCond.h>
 

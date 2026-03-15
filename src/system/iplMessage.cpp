@@ -2,26 +2,27 @@
 
 namespace ipl {
     namespace message {
-        Message::Message()
-        : mpInfoHeader(NULL), mpInfoData(NULL), mspMessageData(NULL) {}
+        Message::Message() : mpInfoHeader(NULL), mpInfoData(NULL), mspMessageData(NULL) {
+        }
 
-        Message::~Message() {}
+        Message::~Message() {
+        }
 
         void Message::setResource(u8* msgData) {
             MESGHeader* header = (MESGHeader*)(msgData);
 
-            msgData += sizeof(MESGHeader); // Start after the header
+            msgData += sizeof(MESGHeader);  // Start after the header
 
-            for (int i = 0; i < header->sectionCount; i++) { // for every section available
-                #define CURRENT_SECTION ((MESGDataHeader*)(msgData))
+            for (int i = 0; i < header->sectionCount; i++) {  // for every section available
+#define CURRENT_SECTION ((MESGDataHeader*)(msgData))
 
                 switch (CURRENT_SECTION->signature) {
-                    case 'INF1': { // Meta Data section
+                    case 'INF1': {  // Meta Data section
                         mpInfoHeader = (MESGInfoHeader*)(msgData);
                         mpInfoData = (MESGInfoBlock*)(msgData + sizeof(MESGInfoHeader));
                         break;
                     }
-                    case 'DAT1': { // Data section
+                    case 'DAT1': {  // Data section
                         mspMessageData = (u8*)(msgData + sizeof(MESGDataHeader));
                         break;
                     }
@@ -30,7 +31,7 @@ namespace ipl {
                 // Next section!
                 msgData += CURRENT_SECTION->size;
 
-                #undef CURRENT_SECTION
+#undef CURRENT_SECTION
             }
         }
 
@@ -39,5 +40,5 @@ namespace ipl {
             u32 off = (&mpInfoData->offset)[(u16)id];
             return (wchar_t*)(mspMessageData + off);
         }
-    }
-}
+    }  // namespace message
+}  // namespace ipl

@@ -1,5 +1,5 @@
-#include <revolution/card.h>
 #include <private/card.h>
+#include <revolution/card.h>
 
 #include <string.h>
 
@@ -21,8 +21,7 @@ static void WriteCallback(s32 chan, s32 result) {
         if (card->currentDir == dir0) {
             card->currentDir = dir1;
             memcpy(dir1, dir0, 0x2000);
-        }
-        else {
+        } else {
             card->currentDir = dir0;
             memcpy(dir0, dir1, 0x2000);
         }

@@ -10,57 +10,56 @@ namespace nw4r {
     namespace snd {
         namespace detail {
             class ExternalSoundPlayer {
-                public:
-                    ExternalSoundPlayer();
-                    ~ExternalSoundPlayer();
+            public:
+                ExternalSoundPlayer();
+                ~ExternalSoundPlayer();
 
-                    int         GetPlayableSoundCount() const   { return mPlayableCount; }
-                    void        SetPlayableSoundCount(int count);
+                int GetPlayableSoundCount() const { return mPlayableCount; }
+                void SetPlayableSoundCount(int count);
 
-                    int         GetPlayingSoundCount() const    { return mSoundList.GetSize(); }
+                int GetPlayingSoundCount() const { return mSoundList.GetSize(); }
 
-                    f32         detail_GetVolume() const        { return mVolume; }
-                    BasicSound* GetLowestPrioritySound();
+                f32 detail_GetVolume() const { return mVolume; }
+                BasicSound* GetLowestPrioritySound();
 
-                    void        InsertSoundList(BasicSound* sound);
-                    void        RemoveSoundList(BasicSound* sound);
+                void InsertSoundList(BasicSound* sound);
+                void RemoveSoundList(BasicSound* sound);
 
-                    template<typename TForEachFunc>
-                    TForEachFunc ForEachSound(TForEachFunc func, bool reverse) {
-                        if (reverse) {
-                            BasicSoundExtPlayList::RevIterator it = mSoundList.GetBeginReverseIter();
+                template <typename TForEachFunc>
+                TForEachFunc ForEachSound(TForEachFunc func, bool reverse) {
+                    if (reverse) {
+                        BasicSoundExtPlayList::RevIterator it = mSoundList.GetBeginReverseIter();
 
-                            while (it != mSoundList.GetEndReverseIter()) {
-                                BasicSoundExtPlayList::RevIterator curr = it;
+                        while (it != mSoundList.GetEndReverseIter()) {
+                            BasicSoundExtPlayList::RevIterator curr = it;
 
-                                SoundHandle handle;
-                                handle.detail_AttachSoundAsTempHandle(&*curr);
-                                func(handle);
+                            SoundHandle handle;
+                            handle.detail_AttachSoundAsTempHandle(&*curr);
+                            func(handle);
 
-                                if (handle.IsAttachedSound()) {
-                                    it++;
-                                }
+                            if (handle.IsAttachedSound()) {
+                                it++;
                             }
                         }
-                        else {
-                            for (BasicSoundExtPlayList::Iterator itr = mSoundList.GetBeginIter(); itr != mSoundList.GetEndIter();) {
-                                BasicSoundExtPlayList::Iterator curr = itr++;
-                                SoundHandle handle;
-                                handle.detail_AttachSoundAsTempHandle(&*curr);
-                                func(handle);
-                            }
+                    } else {
+                        for (BasicSoundExtPlayList::Iterator itr = mSoundList.GetBeginIter(); itr != mSoundList.GetEndIter();) {
+                            BasicSoundExtPlayList::Iterator curr = itr++;
+                            SoundHandle handle;
+                            handle.detail_AttachSoundAsTempHandle(&*curr);
+                            func(handle);
                         }
-
-                        return func;
                     }
 
-                private:
-                    BasicSoundExtPlayList   mSoundList;     // 0x00
-                    u16                     mPlayableCount; // 0x0C
-                    f32                     mVolume;        // 0x10
-                };
-        }
-    }
-}
+                    return func;
+                }
 
-#endif // NW4R_SND_AXFX_IMPL_H
+            private:
+                BasicSoundExtPlayList mSoundList;  // 0x00
+                u16 mPlayableCount;                // 0x0C
+                f32 mVolume;                       // 0x10
+            };
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r
+
+#endif  // NW4R_SND_AXFX_IMPL_H

@@ -28,6 +28,6 @@ namespace ipl {
                 }
                 return result;
             }
-        }
-    }
-}
+        }  // namespace pane
+    }  // namespace cs
+}  // namespace ipl

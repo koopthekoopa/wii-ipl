@@ -1,23 +1,21 @@
 #include <revolution/wenc.h>
 
-#include <string.h>
 #include <math.h>
+#include <string.h>
 
 typedef struct {
-    s32 nXN;         // 0x00
-    s32 nDL;         // 0x04
-    s32 nQN;         // 0x08
-    s32 nDN;         // 0x0C
-    s32 nDLH;        // 0x10
-    s32 nDLQ;        // 0x14
+    s32 nXN;   // 0x00
+    s32 nDL;   // 0x04
+    s32 nQN;   // 0x08
+    s32 nDN;   // 0x0C
+    s32 nDLH;  // 0x10
+    s32 nDLQ;  // 0x14
 
     u8 padding[8];  // 0x18
 } WENCBlock;
 
 s32 WENCGetEncodeData(WENCInfo* info, u32 flag, const s16* pbyPcmData, s32 nSampleNum, u8* pbyAdpcmData) {
-    const f64 dTable[] = {0.89843750, 0.89843750, 0.89843750, 0.89843750,
-                         1.19921875, 1.59765625,
-                         2.00000000, 2.39843750};
+    const f64 dTable[] = {0.89843750, 0.89843750, 0.89843750, 0.89843750, 1.19921875, 1.59765625, 2.00000000, 2.39843750};
 
     u8 by;
     u8* pDst;
@@ -55,8 +53,7 @@ s32 WENCGetEncodeData(WENCInfo* info, u32 flag, const s16* pbyPcmData, s32 nSamp
         nDN = 0;
         nDLH = 0;
         nDLQ = 0;
-    }
-    else {
+    } else {
         nXN = block->nXN;
         nDL = block->nDL;
         nQN = block->nQN;

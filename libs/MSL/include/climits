@@ -3,4 +3,4 @@
 
 #include <limits.h>
 
-#endif // MSL_CLIMITS_H
+#endif  // MSL_CLIMITS_H

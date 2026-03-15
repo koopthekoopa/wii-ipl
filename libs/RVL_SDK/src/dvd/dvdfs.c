@@ -1,5 +1,5 @@
-#include <revolution/dvd.h>
 #include <private/dvd.h>
+#include <revolution/dvd.h>
 
 #include <revolution/os.h>
 #include <revolution/os/OSBootInfo.h>
@@ -10,40 +10,40 @@
 // Few functions are unused. Make sure that they link.
 #pragma force_active on
 
-extern u32  __DVDLayoutFormat;
+extern u32 __DVDLayoutFormat;
 
 typedef struct FSTEntry {
     u32 isDirAndStringOff;  // 0x00
     union {
         struct {
-            u32 parent;     // 0x04
-            u32 next;       // 0x08
+            u32 parent;  // 0x04
+            u32 next;    // 0x08
         } dir;
         struct {
-            u32 position;   // 0x04
-            u32 length;     // 0x08
+            u32 position;  // 0x04
+            u32 length;    // 0x08
         } file;
     };
 } FSTEntry;
 
-static OSBootInfo*  BootInfo;
+static OSBootInfo* BootInfo;
 
-static FSTEntry*    FstStart;
-static char*        FstStringStart;
+static FSTEntry* FstStart;
+static char* FstStringStart;
 
-static u32          MaxEntryNum;
+static u32 MaxEntryNum;
 
-static u32          currentDirectory = 0;
+static u32 currentDirectory = 0;
 
-OSThreadQueue       __DVDThreadQueue;
+OSThreadQueue __DVDThreadQueue;
 
-u32                 __DVDLongFileNameFlag = TRUE;
+u32 __DVDLongFileNameFlag = TRUE;
 
 static void cbForReadAsync(s32 result, DVDCommandBlock* block);
 static void cbForReadSync(s32 result, DVDCommandBlock* block);
 
-#define IS_ENTRY_DIR(fstStart, i)       ((((fstStart)[i].isDirAndStringOff & 0xFF000000) == 0) ? FALSE : TRUE)
-#define FILE_STRING_OFF(fstStart, i)      ((fstStart)[i].isDirAndStringOff & 0x00FFFFFF)
+#define IS_ENTRY_DIR(fstStart, i) ((((fstStart)[i].isDirAndStringOff & 0xFF000000) == 0) ? FALSE : TRUE)
+#define FILE_STRING_OFF(fstStart, i) ((fstStart)[i].isDirAndStringOff & 0x00FFFFFF)
 
 static BOOL DVDGetCurrentDir(char* path, u32 maxlen);
 
@@ -73,14 +73,14 @@ static BOOL isSame(const char* path, const char* str) {
 
 s32 DVDConvertPathToEntrynum(const char* path) {
     const char* ptrPath;
-    char*       name;
+    char* name;
 
     BOOL isDir;
-    s32  pathLen, dirLookAt, i;
+    s32 pathLen, dirLookAt, i;
 
     const char* origPathPtr = path;
     const char* hasExtensionStart;
-    
+
     BOOL isInvalid, hasExtension;
 
     dirLookAt = currentDirectory;
@@ -89,7 +89,7 @@ s32 DVDConvertPathToEntrynum(const char* path) {
         // End of path? Done!
         if (*path == 0) {
             return dirLookAt;
-        } 
+        }
         // Ignore initial slash.
         else if (*path == '/') {
             dirLookAt = 0;
@@ -106,17 +106,17 @@ s32 DVDConvertPathToEntrynum(const char* path) {
                     continue;
                 }
                 // If the input path was literally just `../`, then return the parent.
-                else if (*(path+2) == 0) {
+                else if (*(path + 2) == 0) {
                     return FstStart[dirLookAt].dir.parent;
                 }
             }
             // "." directory does nothing
-            else if (*(path+1) == '/') {
+            else if (*(path + 1) == '/') {
                 path += 2;
                 continue;
             }
             // Ignore trailing dot
-            else if (*(path+1) == 0) {
+            else if (*(path + 1) == 0) {
                 return dirLookAt;
             }
         }
@@ -135,8 +135,7 @@ s32 DVDConvertPathToEntrynum(const char* path) {
                     hasExtension = TRUE;
                     hasExtensionStart = ptrPath + 1;
 
-                } 
-                else if (*ptrPath == ' ') {
+                } else if (*ptrPath == ' ') {
                     isInvalid = TRUE;
                 }
             }
@@ -146,10 +145,13 @@ s32 DVDConvertPathToEntrynum(const char* path) {
             }
 
             // Yeah I wonder how soon the restriction was finally patched out (or was it even patched out at ALL)
-            OSAssertVMsg(!isInvalid, 443, "DVDConvertEntrynumToPath(possibly DVDOpen or DVDChangeDir or DVDOpenDir): specified directory or file (%s) doesn't match standard 8.3 format. This is a temporary restriction and will be removed soon\n", origPathPtr);
-        }
-        else {
-            for (ptrPath = path; (*ptrPath != '\0') && (*ptrPath != '/'); ptrPath++) {}
+            OSAssertVMsg(!isInvalid, 443,
+                         "DVDConvertEntrynumToPath(possibly DVDOpen or DVDChangeDir or DVDOpenDir): specified directory or file (%s) doesn't match "
+                         "standard 8.3 format. This is a temporary restriction and will be removed soon\n",
+                         origPathPtr);
+        } else {
+            for (ptrPath = path; (*ptrPath != '\0') && (*ptrPath != '/'); ptrPath++) {
+            }
         }
 
         isDir = (*ptrPath == '\0') ? FALSE : TRUE;
@@ -157,7 +159,7 @@ s32 DVDConvertPathToEntrynum(const char* path) {
 
         ptrPath = path;
 
-        for (i = dirLookAt+1; i < FstStart[dirLookAt].dir.next; i = IS_ENTRY_DIR(FstStart, i) ? FstStart[i].dir.next : (i + 1)) {
+        for (i = dirLookAt + 1; i < FstStart[dirLookAt].dir.next; i = IS_ENTRY_DIR(FstStart, i) ? FstStart[i].dir.next : (i + 1)) {
             // Skip directories
             if (IS_ENTRY_DIR(FstStart, i) == FALSE && isDir == TRUE) {
                 continue;
@@ -173,7 +175,7 @@ s32 DVDConvertPathToEntrynum(const char* path) {
 
         return -1;
 
-next_in_hier:
+    next_in_hier:
         if (!isDir) {
             return i;
         }
@@ -249,7 +251,7 @@ u32 entryToPath(u32 entry, char* path, u32 maxlen) {
     }
 
     name = FstStringStart + FILE_STRING_OFF(FstStart, entry);
-    loc = entryToPath(FstStart[entry].dir.parent , path, maxlen);
+    loc = entryToPath(FstStart[entry].dir.parent, path, maxlen);
 
     if (loc == maxlen) {
         return loc;
@@ -316,7 +318,7 @@ s32 DVDReadPrio(DVDFileInfo* fileInfo, void* addr, s32 length, s32 offset, s32 p
 
     block = &fileInfo->cb;
     result = DVDReadAbsAsyncPrio(block, addr, length, (u32)(fileInfo->startAddr + (offset >> 2)), cbForReadSync, prio);
-    
+
     if (result == FALSE) {
         return -1;
     }

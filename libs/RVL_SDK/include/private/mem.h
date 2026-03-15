@@ -12,11 +12,11 @@
 extern "C" {
 #endif
 
-#define MEM_ROUNDUP(x, align)       (((x) + (align)-1) & (-(align)))
-#define MEM_PTR_ROUNDUP(x, align)   ((void*)((((u32)(x)) + (align)-1) & (~((align)-1))))
+#define MEM_ROUNDUP(x, align) (((x) + (align) - 1) & (-(align)))
+#define MEM_PTR_ROUNDUP(x, align) ((void*)((((u32)(x)) + (align) - 1) & (~((align) - 1))))
 
-#define MEM_ROUNDDOWN(x, align)     ((x) & (-(align)))
-#define MEM_PTR_ROUNDDOWN(x, align) ((void*)(((u32)(x)) & (~((align)-1))))
+#define MEM_ROUNDDOWN(x, align) ((x) & (-(align)))
+#define MEM_PTR_ROUNDDOWN(x, align) ((void*)(((u32)(x)) & (~((align) - 1))))
 
 static u32 GetUIntPtr(const void* p) {
     return (u32)p;
@@ -74,7 +74,7 @@ static void FillFreeMemory(MEMiHeapHead* heap, void* memBlock, u32 size) {
     }
 }
 
-static inline s32 ComparePtr(void *p0, void *p1) {
+static inline s32 ComparePtr(void* p0, void* p1) {
     return (u32)p0 - (u32)p1;
 }
 
@@ -82,4 +82,4 @@ static inline s32 ComparePtr(void *p0, void *p1) {
 }
 #endif
 
-#endif // PRIVATE_MEM_H
+#endif  // PRIVATE_MEM_H

@@ -1,5 +1,6 @@
-#include <nw4r/snd/SeqTrackAllocator.h>
 #include <nw4r/snd/SeqTrack.h>
+#include <nw4r/snd/SeqTrackAllocator.h>
+
 
 #include <nw4r/snd/SeqPlayer.h>
 
@@ -17,8 +18,8 @@ namespace nw4r {
             }
             vs16 SeqPlayer::mGlobalVariable[GLOBAL_VARIABLE_NUM];
 
-            SeqPlayer::SeqPlayer() :
-            mActiveFlag(false) {}
+            SeqPlayer::SeqPlayer() : mActiveFlag(false) {
+            }
 
             SeqPlayer::~SeqPlayer() {
                 if (mActiveFlag) {
@@ -81,7 +82,7 @@ namespace nw4r {
                 {
                     u32 trackFlags = allocTrackFlags;
                     bool allocated = true;
-                    
+
                     for (int i = 0; trackFlags != 0; trackFlags >>= 1, i++) {
                         if (trackFlags & 1) {
                             SeqTrack* track = allocator->AllocTrack(this);
@@ -291,7 +292,7 @@ namespace nw4r {
                 mSeqTrackAllocator->FreeTrack(mTracks[trackNo]);
                 mTracks[trackNo] = NULL;
             }
-            
+
             SeqTrack* SeqPlayer::GetPlayerTrack(int trackNo) {
                 if (trackNo > TRACK_NUM - 1) {
                     return NULL;
@@ -340,8 +341,7 @@ namespace nw4r {
 
                     if (track->ParseNextTick(doNoteOn) == 0) {
                         active = true;
-                    }
-                    else {
+                    } else {
                         CloseTrack(i);
                     }
                 }
@@ -430,8 +430,10 @@ namespace nw4r {
                 return mParserParam.callback->NoteOn(this, bankNo, noteOnInfo);
             }
 
-            // Blank. Not sure if this was explicitly defined here but if the function is defined in the header, it would link to MidiSeqPlayer instead.
-            void SeqPlayer::ChannelCallback(Channel* channel) {}
-        }
-    }
-}
+            // Blank. Not sure if this was explicitly defined here but if the function is defined in the header, it would link to MidiSeqPlayer
+            // instead.
+            void SeqPlayer::ChannelCallback(Channel* channel) {
+            }
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

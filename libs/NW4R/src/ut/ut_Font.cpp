@@ -1,5 +1,5 @@
-#include <nw4r/ut/Font.h>
 #include <nw4r/ut/CharStrmReader.h>
+#include <nw4r/ut/Font.h>
 
 namespace nw4r {
     namespace ut {
@@ -24,5 +24,5 @@ namespace nw4r {
                 }
             }
         }
-    }
-}
+    }  // namespace ut
+}  // namespace nw4r

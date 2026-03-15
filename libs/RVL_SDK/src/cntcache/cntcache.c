@@ -2,25 +2,25 @@
 
 #include <revolution/os.h>
 
-#include <revolution/nand.h>
 #include <private/nand.h>
+#include <revolution/nand.h>
 
 #include <private/es.h>
 
+#include <errno.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <errno.h>
 
 SDKDefineVersion(CNTCACHE, "Apr 20 2010", "14:15:28");
 
 OSMutex _CNTCACHEMutex;
 
-int     _CNTCACHEUnused816997A8;
-int     _CNTCACHEUnused816997A4;
+int _CNTCACHEUnused816997A8;
+int _CNTCACHEUnused816997A4;
 
-BOOL    _CNTCACHEInitialized;
+BOOL _CNTCACHEInitialized;
 
 void CNTCACHEClear();
 BOOL _CNTCACHEIsTitleRemovable(ESTitleId titleId);
@@ -51,13 +51,12 @@ void _CNTCACHEDeleteTitle() {
 
         errno = 0;
         titleId = strtoull(tok, NULL, 16);
-    
+
         if (errno == 0 && NANDTitleIdHi(titleId) != 0x00000001) {
             BOOL result = _CNTCACHEIsTitleRemovable(titleId);
             if (result == TRUE) {
                 ES_DeleteTitle(titleId);
-            }
-            else if (result == FALSE) {
+            } else if (result == FALSE) {
                 ES_DeleteTitleContent(titleId);
             }
         }
@@ -66,7 +65,7 @@ void _CNTCACHEDeleteTitle() {
 }
 
 static int GetSavePath(ESTitleId titleId) {
-    char    nandPath[64] ALIGN32;
+    char nandPath[64] ALIGN32;
 
     s32 ret;
     u32 usedBlocks = 1;
@@ -77,12 +76,10 @@ static int GetSavePath(ESTitleId titleId) {
 
     if (ret == NAND_RESULT_NOEXISTS) {
         ret = 2;
-    }
-    else if (ret >= NAND_RESULT_OK) {
+    } else if (ret >= NAND_RESULT_OK) {
         if (usedINodes == 1 && usedBlocks == 0) {
             ret = 1;
-        }
-        else {
+        } else {
             ret = 0;
         }
     }
@@ -106,9 +103,9 @@ out:
     return ret;
 }
 
-int _CNTCACHEIsTitleRemovable(ESTitleId titleId) {    
-    ESTmdView   tmd ALIGN32;
-    s32         ret = -1;
+int _CNTCACHEIsTitleRemovable(ESTitleId titleId) {
+    ESTmdView tmd ALIGN32;
+    s32 ret = -1;
 
     ret = GetSavePath(titleId);
     if (ret == 1) {
@@ -119,8 +116,7 @@ int _CNTCACHEIsTitleRemovable(ESTitleId titleId) {
 
         if (tmd.head.titleVersion >> 8 == 0) {
             ret = 1;
-        }
-        else {
+        } else {
             ret = 0;
         }
         goto out;

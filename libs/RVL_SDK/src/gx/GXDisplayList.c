@@ -2,8 +2,8 @@
 #include <private/os.h>
 #include <revolution/os.h>
 
-#include <revolution/gx.h>
 #include <private/gx.h>
+#include <revolution/gx.h>
 
 #include <private/hollywood.h>
 
@@ -11,9 +11,9 @@
 
 #include <string.h>
 
-static GXFifoObj    DisplayListFifo;
-static GXData       __savedGXdata;
-static GXFifoObj    OldCPUFifo;
+static GXFifoObj DisplayListFifo;
+static GXData __savedGXdata;
+static GXFifoObj OldCPUFifo;
 
 void GXBeginDisplayList(void* list, u32 size) {
     __GXFifoObj* impl = (__GXFifoObj*)&DisplayListFifo;

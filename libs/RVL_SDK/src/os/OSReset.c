@@ -1,5 +1,5 @@
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 #include <private/pad.h>
 
@@ -8,62 +8,59 @@
 
 #include <private/hollywood.h>
 
-static OSShutdownFunctionQueue  ShutdownFunctionQueue;
-vBOOL                           __OSIsReturnToIdle;
+static OSShutdownFunctionQueue ShutdownFunctionQueue;
+vBOOL __OSIsReturnToIdle;
 
-#define ENQUEUE_INFO(info, queue) {                      \
-    OSShutdownFunctionInfo* __prev = (queue)->tail;      \
-    if (__prev == 0) {                                   \
-        (queue)->head = (info);                          \
-    }                                                    \
-    else {                                               \
-        __prev->next = (info);                           \
-    }                                                    \
-    (info)->prev = __prev;                               \
-    (info)->next = 0;                                    \
-    (queue)->tail = (info);                              \
-}
+#define ENQUEUE_INFO(info, queue)                                                                                                                    \
+    {                                                                                                                                                \
+        OSShutdownFunctionInfo* __prev = (queue)->tail;                                                                                              \
+        if (__prev == 0) {                                                                                                                           \
+            (queue)->head = (info);                                                                                                                  \
+        } else {                                                                                                                                     \
+            __prev->next = (info);                                                                                                                   \
+        }                                                                                                                                            \
+        (info)->prev = __prev;                                                                                                                       \
+        (info)->next = 0;                                                                                                                            \
+        (queue)->tail = (info);                                                                                                                      \
+    }
 
-#define DEQUEUE_INFO(info, queue)  {                \
-    OSShutdownFunctionInfo* __next = (info)->next;  \
-    OSShutdownFunctionInfo* __prev = (info)->prev;  \
-    if (__next == 0) {                              \
-        (queue)->tail = __prev;                     \
-    }                                               \
-    else {                                          \
-        __next->prev = __prev;                      \
-    }                                               \
-    if (__prev == 0) {                              \
-        (queue)->head = __next;                     \
-    }                                               \
-    else {                                          \
-        __prev->next = __next;                      \
-    }                                               \
-}
+#define DEQUEUE_INFO(info, queue)                                                                                                                    \
+    {                                                                                                                                                \
+        OSShutdownFunctionInfo* __next = (info)->next;                                                                                               \
+        OSShutdownFunctionInfo* __prev = (info)->prev;                                                                                               \
+        if (__next == 0) {                                                                                                                           \
+            (queue)->tail = __prev;                                                                                                                  \
+        } else {                                                                                                                                     \
+            __next->prev = __prev;                                                                                                                   \
+        }                                                                                                                                            \
+        if (__prev == 0) {                                                                                                                           \
+            (queue)->head = __next;                                                                                                                  \
+        } else {                                                                                                                                     \
+            __prev->next = __next;                                                                                                                   \
+        }                                                                                                                                            \
+    }
 
-#define ENQUEUE_INFO_PRIO(info, queue) {         \
-    OSShutdownFunctionInfo* __prev;              \
-    OSShutdownFunctionInfo* __next;              \
-    for (__next = (queue)->head; __next          \
-      && (__next->priority <= (info)->priority); \
-            __next = __next->next) ;             \
-                                                 \
-    if (__next == 0) {                           \
-        ENQUEUE_INFO(info, queue);               \
-    }                                            \
-    else {                                       \
-        (info)->next = __next;                   \
-        __prev = __next->prev;                   \
-        __next->prev = (info);                   \
-        (info)->prev = __prev;                   \
-        if (__prev == 0) {                       \
-            (queue)->head = (info);              \
-        }                                        \
-        else {                                   \
-            __prev->next = (info);               \
-        }                                        \
-    }                                            \
-}
+#define ENQUEUE_INFO_PRIO(info, queue)                                                                                                               \
+    {                                                                                                                                                \
+        OSShutdownFunctionInfo* __prev;                                                                                                              \
+        OSShutdownFunctionInfo* __next;                                                                                                              \
+        for (__next = (queue)->head; __next && (__next->priority <= (info)->priority); __next = __next->next)                                        \
+            ;                                                                                                                                        \
+                                                                                                                                                     \
+        if (__next == 0) {                                                                                                                           \
+            ENQUEUE_INFO(info, queue);                                                                                                               \
+        } else {                                                                                                                                     \
+            (info)->next = __next;                                                                                                                   \
+            __prev = __next->prev;                                                                                                                   \
+            __next->prev = (info);                                                                                                                   \
+            (info)->prev = __prev;                                                                                                                   \
+            if (__prev == 0) {                                                                                                                       \
+                (queue)->head = (info);                                                                                                              \
+            } else {                                                                                                                                 \
+                __prev->next = (info);                                                                                                               \
+            }                                                                                                                                        \
+        }                                                                                                                                            \
+    }
 
 // They're used but pooled first.
 DECOMP_FORCE_ACTIVE(OSReset_c, "OSReset.c");
@@ -124,7 +121,7 @@ BOOL __OSCallShutdownFunctions(BOOL final, u32 event) {
 void __OSShutdownDevices(u32 event) {
     BOOL rc, disableRecalibration, doRecal;
 
-    switch(event) {
+    switch (event) {
         case 0:
         case OS_SHUTDOWN_RETURN_MENU:
         case OS_SHUTDOWN_LAUNCH: {
@@ -147,8 +144,10 @@ void __OSShutdownDevices(u32 event) {
         disableRecalibration = __PADDisableRecalibration(TRUE);
     }
 
-    while (!__OSCallShutdownFunctions(FALSE, event)) {}
-    while (!__OSSyncSram()) {}
+    while (!__OSCallShutdownFunctions(FALSE, event)) {
+    }
+    while (!__OSSyncSram()) {
+    }
 
     OSDisableInterrupts();
     rc = __OSCallShutdownFunctions(TRUE, event);
@@ -167,15 +166,13 @@ u8 __OSGetDiscState(u8 out) {
 
     if (__DVDGetCoverStatus() != DVD_COVER_CLOSED) {
         return 3;
-    }
-    else if (out == 1) {
+    } else if (out == 1) {
         if (!__OSGetRTCFlags(&flags) || flags == 0) {
             goto status_1;
         }
     status_2:
         return 2;
-    }
-    else {
+    } else {
         goto status_2;
     status_1:
         return 1;
@@ -222,13 +219,12 @@ void OSReturnToSetting(u8 setting) {
     __OSReturnToMenul(LAUNCH_ARG_SETTING, url, NULL);
 }
 
-
 void __OSReturnToMenuForError() {
-    OSStateFlags  state;
+    OSStateFlags state;
 
     __OSReadStateFlags(&state);
     state.discState = OS_STATE_FLAGS_DISC_CHANGED;
-    state.shutdownType  = OS_STATE_FLAGS_SHUTDOWN_RETURN_MENU;
+    state.shutdownType = OS_STATE_FLAGS_SHUTDOWN_RETURN_MENU;
     __OSClearRTCFlags();
     __OSWriteStateFlags(&state);
 
@@ -252,9 +248,8 @@ void __OSHotResetForError() {
 u32 OSGetResetCode() {
     u32 code;
     if (__OSRebootParams.valid) {
-        code = ((1<<31) | __OSRebootParams.restartCode);
-    }
-    else {
+        code = ((1 << 31) | __OSRebootParams.restartCode);
+    } else {
         code = (PI_READ_REG(PI_RESET_REQUEST) & 0xFFFFFFF8) >> 3;
     }
     return code;

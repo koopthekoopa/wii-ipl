@@ -1,15 +1,19 @@
-#include <nw4r/snd/AxVoice.h>
 #include <nw4r/snd/AxManager.h>
+#include <nw4r/snd/AxVoice.h>
 #include <nw4r/snd/DisposeCallbackManager.h>
 
-#include <nw4r/snd/WaveFile.h>
+
 #include <nw4r/snd/Util.h>
+#include <nw4r/snd/WaveFile.h>
 
-#include <nw4r/ut.h>
+
 #include <nw4r/math.h>
+#include <nw4r/ut.h>
 
-#include <revolution/wpad.h>
+
 #include <revolution/os.h>
+#include <revolution/wpad.h>
+
 
 #include <cmath>
 
@@ -20,17 +24,11 @@ namespace nw4r {
                 void SetVoiceLoop(AXVPB* vpb, u32 loopAddr);
                 void SetVoiceLoopAddr(AXVPB* vpb, u32 loopAddr);
                 void SetVoiceEndAddr(AXVPB* vpb, u32 endAddr);
-            }
+            }  // namespace
 
-            AxVoice::AxVoice() :
-            mCallback(NULL),
-            mActiveFlag(false),
-            mStartFlag(false),
-            mStartedFlag(false),
-            mPauseFlag(false),
-            mFirstVeUpdateFlag(0),
-            mHomeButtonMuteFlag(0),
-            mSyncFlag(0) {
+            AxVoice::AxVoice()
+                : mCallback(NULL), mActiveFlag(false), mStartFlag(false), mStartedFlag(false), mPauseFlag(false), mFirstVeUpdateFlag(0),
+                  mHomeButtonMuteFlag(0), mSyncFlag(0) {
                 for (int i = 0; i < CHANNEL_MAX; i++) {
                     for (int j = 0; j < VOICES_MAX; j++) {
                         mVpb[i][j] = NULL;
@@ -53,7 +51,7 @@ namespace nw4r {
                 for (int i = 0; i < channels; i++) {
                     mVoiceChannelParam[i].waveData = NULL;
                 }
-                
+
                 mChannelCount = channels;
                 mVoiceOutCount = voices;
                 mCallback = callback;
@@ -100,7 +98,7 @@ namespace nw4r {
                 if (mActiveFlag) {
                     if (mStartedFlag && IsPlayFinished()) {
                         if (mCallback) {
-                         mCallback(this, CALLBACK_STATUS_FINISH_WAVE, mCallbackData);
+                            mCallback(this, CALLBACK_STATUS_FINISH_WAVE, mCallbackData);
                         }
                         mStartedFlag = false;
                         mStartFlag = false;
@@ -119,8 +117,7 @@ namespace nw4r {
                             if (mPauseFlag || mHomeButtonMuteFlag || AxManager::GetInstance().IsDiskError()) {
                                 SetAxParam(AXSetVoiceState, (u16)AX_VOICE_STOP);
                                 mPausingFlag = true;
-                            }
-                            else {
+                            } else {
                                 SetAxParam(AXSetVoiceState, (u16)AX_VOICE_STREAM);
                                 mPausingFlag = false;
                             }
@@ -161,8 +158,7 @@ namespace nw4r {
                 u32 axPrio;
                 if (priority == PRIORITY_MAX) {
                     axPrio = AX_PRIORITY_MAX;
-                }
-                else {
+                } else {
                     axPrio = (AX_PRIORITY_MAX / 2) + 1;
                 }
 
@@ -177,9 +173,7 @@ namespace nw4r {
 
                         const AxVoiceList& rVoiceList = AxManager::GetInstance().GetVoiceList();
 
-                        for (AxVoiceList::ConstIterator it = rVoiceList.GetBeginIter();
-                            it != rVoiceList.GetEndIter(); it++) {
-
+                        for (AxVoiceList::ConstIterator it = rVoiceList.GetBeginIter(); it != rVoiceList.GetEndIter(); it++) {
                             if (priority < it->GetPriority()) {
                                 break;
                             }
@@ -200,9 +194,8 @@ namespace nw4r {
 
                         u32 allocPrio;
                         if (axPrio < AX_PRIORITY_MAX) {
-                            allocPrio = axPrio+1;
-                        }
-                        else {
+                            allocPrio = axPrio + 1;
+                        } else {
                             allocPrio = axPrio;
                         }
 
@@ -335,11 +328,10 @@ namespace nw4r {
 
             bool AxVoice::IsRun() {
                 ut::AutoInterruptLock lock;
-    
+
                 if (mVpb[0][0] == NULL) {
                     return false;
-                }
-                else {
+                } else {
                     return mVpb[0][0]->pb.state == AX_VOICE_RUN;
                 }
             }
@@ -360,8 +352,7 @@ namespace nw4r {
                         mVeTargetVolume = target;
                         mSyncFlag |= SYNC_AX_VE;
                     }
-                }
-                else {
+                } else {
                     target = ut::Clamp(target, 0.0f, 1.0f);
                     init = ut::Clamp(init, 0.0f, 1.0f);
                     if (init != mVeInitVolume || target != mVeTargetVolume) {
@@ -419,7 +410,6 @@ namespace nw4r {
                 }
             }
 
-            
             void AxVoice::SetOutputLine(int flag) {
                 if (flag != mOutputLineFlag) {
                     mOutputLineFlag = flag;
@@ -494,8 +484,7 @@ namespace nw4r {
                 const AXPB* vpb = &mVpb[0][0]->pb;
                 if (vpb == NULL) {
                     return 0;
-                }
-                else {
+                } else {
                     return ((vpb->addr.currentAddressHi << 16) + vpb->addr.currentAddressLo);
                 }
             }
@@ -506,8 +495,7 @@ namespace nw4r {
                 const AXPB* vpb = &mVpb[0][0]->pb;
                 if (vpb == NULL) {
                     return 0;
-                }
-                else {
+                } else {
                     return ((vpb->addr.endAddressHi << 16) + vpb->addr.endAddressLo);
                 }
             }
@@ -551,8 +539,7 @@ namespace nw4r {
 
                 if (samples <= dspAddr && dspAddr < addr) {
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }
             }
@@ -581,14 +568,13 @@ namespace nw4r {
 
                 if (loopFlag) {
                     loopAddr = GetDspAddressBySample(waveAddr, loopStart, mFormat);
-                }
-                else {
+                } else {
                     void* zeroAddr = AxManager::GetInstance().GetZeroBufferAddress();
                     loopAddr = GetDspAddressBySample(zeroAddr, 0, mFormat);
                 }
 
                 u32 startAddr = GetDspAddressBySample(waveAddr, 0, mFormat);
-                u32 endAddr = GetDspAddressBySample(waveAddr, loopEnd-1, mFormat);
+                u32 endAddr = GetDspAddressBySample(waveAddr, loopEnd - 1, mFormat);
 
                 AXPBADDR addr;
 
@@ -619,7 +605,7 @@ namespace nw4r {
 
             void AxVoice::SetLoopEnd(int channelIndex, const void* baseAddress, u32 samples) {
                 ut::AutoInterruptLock lock;
-                u32 addr = GetDspAddressBySample(baseAddress, samples-1, mFormat);
+                u32 addr = GetDspAddressBySample(baseAddress, samples - 1, mFormat);
                 for (int i = 0; i < mVoiceOutCount; i++) {
                     SetVoiceEndAddr(mVpb[channelIndex][i], addr);
                 }
@@ -639,7 +625,7 @@ namespace nw4r {
 
                 void* zeroAddr = AxManager::GetInstance().GetZeroBufferAddress();
                 u32 startAddr = GetDspAddressBySample(zeroAddr, 0, mFormat);
-                u32 endAddr = GetDspAddressBySample(baseAddress, samples-1, mFormat);
+                u32 endAddr = GetDspAddressBySample(baseAddress, samples - 1, mFormat);
 
                 for (int i = 0; i < mVoiceOutCount; i++) {
                     AXVPB* vpb = mVpb[channelIndex][i];
@@ -677,8 +663,7 @@ namespace nw4r {
                         for (int j = 0; j < mChannelCount; j++) {
                             AXSetVoiceSrc(mVpb[j][i], &src);
                         }
-                    }
-                    else {
+                    } else {
                         for (int j = 0; j < mChannelCount; j++) {
                             AXSetVoiceSrcRatio(mVpb[j][i], ratio * pitch);
                         }
@@ -726,8 +711,7 @@ namespace nw4r {
                     adpcmLoop.loop_pred_scale = param->loop_pred_scale;
                     adpcmLoop.loop_yn1 = param->loop_yn1;
                     adpcmLoop.loop_yn2 = param->loop_yn2;
-                }
-                else {
+                } else {
                     adpcmLoop.loop_pred_scale = 0;
                     adpcmLoop.loop_yn1 = 0;
                     adpcmLoop.loop_yn2 = 0;
@@ -744,11 +728,11 @@ namespace nw4r {
                 f32 baseVolume = 1.0f;
                 baseVolume *= mVolume;
                 baseVolume *= AxManager::GetInstance().GetOutputVolume();
-                
+
                 if (mHomeButtonMuteFlag) {
                     baseVolume = 0.0f;
                 }
-                
+
                 for (int i = 0; i < mVoiceOutCount; i++) {
                     f32& volumePrev = mVolumePrev[i];
                     f32 volume = baseVolume * mVoiceOutParam[i].volume;
@@ -760,12 +744,11 @@ namespace nw4r {
                         u16 targetVol;
 
                         if (mFirstVeUpdateFlag || !IsRun()) {
-                            initVol = volume * mVeInitVolume * (AX_MAX_VOLUME-1);
-                            targetVol = volume * mVeTargetVolume * (AX_MAX_VOLUME-1);
-                        }
-                        else {
-                            initVol = volumePrev * mVeInitVolume * (AX_MAX_VOLUME-1);
-                            targetVol = volume * mVeTargetVolume * (AX_MAX_VOLUME-1);
+                            initVol = volume * mVeInitVolume * (AX_MAX_VOLUME - 1);
+                            targetVol = volume * mVeTargetVolume * (AX_MAX_VOLUME - 1);
+                        } else {
+                            initVol = volumePrev * mVeInitVolume * (AX_MAX_VOLUME - 1);
+                            targetVol = volume * mVeTargetVolume * (AX_MAX_VOLUME - 1);
                         }
 
                         pbVe.currentVolume = initVol;
@@ -792,20 +775,19 @@ namespace nw4r {
             void AxVoice::UpdateAxMix() {
                 AXPBRMTMIX rmtMix;
                 AXPBMIX mix;
-                
+
                 for (int i = 0; i < mChannelCount; i = i + 1) {
                     for (int j = 0; j < mVoiceOutCount; j = j + 1) {
-                        CalcAXPBMIX(i,j,&mix);
+                        CalcAXPBMIX(i, j, &mix);
 
-                        AXSetVoiceMix(mVpb[i][j],&mix);
+                        AXSetVoiceMix(mVpb[i][j], &mix);
 
                         if (mOutputLineFlag == 0 || mOutputLineFlag == OUTPUT_LINE_MAIN) {
-                            AXSetVoiceRmtOn(mVpb[i][j],0);
-                        }
-                        else {
-                            CalcAXPBRMTMIX(i,j,&rmtMix);
-                            AXSetVoiceRmtOn(mVpb[i][j],1);
-                            AXSetVoiceRmtMix(mVpb[i][j],&rmtMix);
+                            AXSetVoiceRmtOn(mVpb[i][j], 0);
+                        } else {
+                            CalcAXPBRMTMIX(i, j, &rmtMix);
+                            AXSetVoiceRmtOn(mVpb[i][j], 1);
+                            AXSetVoiceRmtMix(mVpb[i][j], &rmtMix);
                         }
                     }
                 }
@@ -823,8 +805,7 @@ namespace nw4r {
                         for (int j = 0; j < mChannelCount; j++) {
                             AXSetVoiceLpf(mVpb[j][i], &lpf);
                         }
-                    }
-                    else {
+                    } else {
                         u16 a0, b0;
 
                         if (mVpb[0][0]->pb.lpf.on == TRUE) {
@@ -833,8 +814,7 @@ namespace nw4r {
                             for (int j = 0; j < mChannelCount; j++) {
                                 AXSetVoiceLpfCoefs(mVpb[j][i], a0, b0);
                             }
-                        }
-                        else {
+                        } else {
                             AXPBLPF lpf;
 
                             lpf.on = TRUE;
@@ -887,8 +867,8 @@ namespace nw4r {
 
                 switch (fmt) {
                     case FORMAT_ADPCM: {
-                        addr = (samples / AX_ADPCM_SAMPLES_PER_FRAME * AX_ADPCM_NIBBLES_PER_FRAME) + (samples % AX_ADPCM_SAMPLES_PER_FRAME)
-                             + (reinterpret_cast<u32>(base) * sizeof(u16)) + sizeof(u16);
+                        addr = (samples / AX_ADPCM_SAMPLES_PER_FRAME * AX_ADPCM_NIBBLES_PER_FRAME) + (samples % AX_ADPCM_SAMPLES_PER_FRAME) +
+                               (reinterpret_cast<u32>(base) * sizeof(u16)) + sizeof(u16);
                         break;
                     }
 
@@ -915,7 +895,8 @@ namespace nw4r {
                 switch (fmt) {
                     case FORMAT_ADPCM: {
                         samples = addr - reinterpret_cast<u32>(base) * sizeof(u16);
-                        samples = (samples % AX_ADPCM_NIBBLES_PER_FRAME) + (samples / AX_ADPCM_NIBBLES_PER_FRAME * AX_ADPCM_SAMPLES_PER_FRAME) - sizeof(u16);
+                        samples = (samples % AX_ADPCM_NIBBLES_PER_FRAME) + (samples / AX_ADPCM_NIBBLES_PER_FRAME * AX_ADPCM_SAMPLES_PER_FRAME) -
+                                  sizeof(u16);
                         break;
                     }
 
@@ -965,11 +946,9 @@ namespace nw4r {
 
                     if (ratio > 4.0f / 3.0f) {
                         type = SRC_4TAP_8K;
-                    }
-                    else if (ratio > 1.0f) {
+                    } else if (ratio > 1.0f) {
                         type = SRC_4TAP_12K;
-                    }
-                    else {
+                    } else {
                         type = SRC_4TAP_16K;
                     }
                 }
@@ -983,28 +962,22 @@ namespace nw4r {
                     if (surroundPan <= 0.0f) {
                         *pPan = pan;
                         *pSurroundPan = -0.12f + 0.88f * surroundPan;
-                    }
-                    else {
+                    } else {
                         *pPan = 0.5f * pan;
                         *pSurroundPan = -0.12f + 1.12f * surroundPan;
                     }
-                }
-                else if (pan >= 0.0f) {
+                } else if (pan >= 0.0f) {
                     if (surroundPan <= 0.0f) {
                         *pPan = (0.85f + (1.0f - 0.85f) * (-surroundPan / pan)) * math::FAbs(pan);
                         *pSurroundPan = -0.12f + (2.0f * surroundPan + 0.88f * pan);
-                    }
-                    else {
-                        *pPan =
-                            (0.85f + (1.0f - 0.65f) * (-surroundPan / pan)) * math::FAbs(pan);
+                    } else {
+                        *pPan = (0.85f + (1.0f - 0.65f) * (-surroundPan / pan)) * math::FAbs(pan);
                         *pSurroundPan = -0.12f + 1.12f * pan;
                     }
-                }
-                else if (surroundPan <= 0.0f) {
+                } else if (surroundPan <= 0.0f) {
                     *pPan = ((1.0f - 0.85f) * (-surroundPan / pan) - 0.85f) * math::FAbs(pan);
                     *pSurroundPan = -0.12f + (2.0f * surroundPan - 1.12f * pan);
-                }
-                else {
+                } else {
                     *pPan = ((1.0f - 0.65f) * (-surroundPan / pan) - 0.85f) * math::FAbs(pan);
                     *pSurroundPan = -0.12f + 1.12f * -pan;
                 }
@@ -1054,8 +1027,7 @@ namespace nw4r {
                 f32 volume = 1.0f;
                 if (mOutputLineFlag & OUTPUT_LINE_MAIN) {
                     volume *= mMainOutVolume;
-                }
-                else {
+                } else {
                     volume = 0.0f;
                 }
 
@@ -1122,9 +1094,8 @@ namespace nw4r {
                 f32 pan, surroundPan;
                 switch (AxManager::GetInstance().GetOutputMode()) {
                     case OUTPUT_MODE_DPL2: {
-                        TransformDpl2Pan(&pan, &surroundPan,
-                                        mPan +         mPan2 +  vPan + mVoiceOutParam[voiceIndex].pan,
-                                        mSurroundPan + mSurroundPan2 + mVoiceOutParam[voiceIndex].surroundPan);
+                        TransformDpl2Pan(&pan, &surroundPan, mPan + mPan2 + vPan + mVoiceOutParam[voiceIndex].pan,
+                                         mSurroundPan + mSurroundPan2 + mVoiceOutParam[voiceIndex].surroundPan);
                         break;
                     }
                     case OUTPUT_MODE_MONO: {
@@ -1135,7 +1106,7 @@ namespace nw4r {
                     case OUTPUT_MODE_STEREO:
                     case OUTPUT_MODE_SURROUND:
                     default: {
-                        pan =         mPan +         mPan2 +  vPan + mVoiceOutParam[voiceIndex].pan;
+                        pan = mPan + mPan2 + vPan + mVoiceOutParam[voiceIndex].pan;
                         surroundPan = mSurroundPan + mSurroundPan2 + mVoiceOutParam[voiceIndex].surroundPan;
                         break;
                     }
@@ -1180,12 +1151,12 @@ namespace nw4r {
                         vR *= rightVol;
                         vSL *= leftVol;
                         vSR *= rightVol;
-                        vAuxAL  *= leftVol;
-                        vAuxAR  *= rightVol;
+                        vAuxAL *= leftVol;
+                        vAuxAR *= rightVol;
                         vAuxASL *= leftVol;
                         vAuxASR *= rightVol;
-                        vAuxBL  *= leftVol;
-                        vAuxBR  *= rightVol;
+                        vAuxBL *= leftVol;
+                        vAuxBR *= rightVol;
                         vAuxBSL *= leftVol;
                         vAuxBSR *= rightVol;
                         break;
@@ -1340,8 +1311,7 @@ namespace nw4r {
                     f32 volume = 1.0f;
                     if (mOutputLineFlag & (OUTPUT_LINE_REMOTE_N << i)) {
                         volume *= mRemoteOutVolume[i];
-                    }
-                    else {
+                    } else {
                         volume = 0.0f;
                     }
                     rmt *= volume;
@@ -1406,7 +1376,7 @@ namespace nw4r {
                         vpb->sync |= 0x2000;
                     }
                 }
-            }
+            }  // namespace
 
             void AxVoice::InvalidateWaveData(const void* start, const void* end) {
                 ut::AutoInterruptLock lock;
@@ -1428,6 +1398,6 @@ namespace nw4r {
                     }
                 }
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

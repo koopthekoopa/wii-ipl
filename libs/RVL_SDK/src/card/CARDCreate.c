@@ -1,5 +1,5 @@
-#include <revolution/card.h>
 #include <private/card.h>
+#include <revolution/card.h>
 
 #include <string.h>
 
@@ -17,7 +17,7 @@ static void CreateCallbackFat(s32 chan, s32 result) {
         dir = __CARDGetDirBlock(card);
         ent = &dir[card->freeNo];
         memcpy(ent->gameName, card->diskID->gameName, sizeof(ent->gameName));
-        memcpy(ent->company,  card->diskID->company, sizeof(ent->company));
+        memcpy(ent->company, card->diskID->company, sizeof(ent->company));
         ent->permission = 4;
         ent->copyTimes = 0;
 
@@ -36,9 +36,8 @@ static void CreateCallbackFat(s32 chan, s32 result) {
         if (result < 0) {
             goto after;
         }
-    }
-    else {
-after:
+    } else {
+    after:
         __CARDPutControlBlock(card, result);
         if (callback) {
             callback(chan, result);
@@ -64,7 +63,7 @@ s32 CARDCreateAsync(s32 chan, const char* fileName, u32 size, CARDFileInfo* file
         return result;
     }
 
-    if (size <= 0 || (size % card->sectorSize) != 0) {        
+    if (size <= 0 || (size % card->sectorSize) != 0) {
         return CARD_RESULT_FATAL_ERROR;
     }
 
@@ -76,10 +75,8 @@ s32 CARDCreateAsync(s32 chan, const char* fileName, u32 size, CARDFileInfo* file
             if (freeNo == (u16)-1) {
                 freeNo = fileNo;
             }
-        }
-        else if (memcmp(ent->gameName, card->diskID->gameName, sizeof(ent->gameName)) == 0 &&
-                memcmp(ent->company, card->diskID->company, sizeof(ent->company)) == 0 &&
-                __CARDCompareFileName(ent, fileName)) {
+        } else if (memcmp(ent->gameName, card->diskID->gameName, sizeof(ent->gameName)) == 0 &&
+                   memcmp(ent->company, card->diskID->company, sizeof(ent->company)) == 0 && __CARDCompareFileName(ent, fileName)) {
             return __CARDPutControlBlock(card, CARD_RESULT_EXIST);
         }
     }

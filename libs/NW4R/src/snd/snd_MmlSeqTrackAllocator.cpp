@@ -1,5 +1,6 @@
-#include <nw4r/snd/MmlSeqTrackAllocator.h>
 #include <nw4r/snd/MmlSeqTrack.h>
+#include <nw4r/snd/MmlSeqTrackAllocator.h>
+
 
 namespace nw4r {
     namespace snd {
@@ -27,6 +28,6 @@ namespace nw4r {
             void MmlSeqTrackAllocator::Destroy(void* buffer, u32 size) {
                 mTrackPool.Destroy(buffer, size);
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

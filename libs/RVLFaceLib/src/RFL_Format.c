@@ -9,9 +9,9 @@
 
 const u32 gcRFLDataBaseIdentifier = 0x524E4F44 /*'RNOD'*/;
 
-#define RFLi_TEMP_BUFFER_SIZE   0x16960
+#define RFLi_TEMP_BUFFER_SIZE 0x16960
 
-#define TABLE_STEP  1250
+#define TABLE_STEP 1250
 
 void RFLiClearTableData(RFLiFormatTable* data) {
     memset(data, 0, sizeof(RFLiFormatTable));
@@ -27,7 +27,7 @@ void RFLiClearDBBuffer() {
     RFLi_ASSERTLINE_NULL(database, 53);
 
     header = &database->hidden;
-    memset(&database->rawdata, 0, sizeof(RFLiDatabase)); // @BUG: 4 byte buffer overrun
+    memset(&database->rawdata, 0, sizeof(RFLiDatabase));  // @BUG: 4 byte buffer overrun
 
     database->identifier = gcRFLDataBaseIdentifier;
     database->isolation = TRUE;
@@ -61,8 +61,7 @@ static void formatWriteCallback_() {
 
         if (manager->formatIndex == -1) {
             manager->formatIndex = 0;
-        }
-        else {
+        } else {
             manager->formatIndex += TABLE_STEP;
         }
 
@@ -71,10 +70,11 @@ static void formatWriteCallback_() {
             s32 i;
 
             for (i = 0; i < TABLE_STEP; i++) {
-                memset((RFLiHiddenCharData*)manager->formatTmp+i, 0, sizeof(RFLiHiddenCharData));
+                memset((RFLiHiddenCharData*)manager->formatTmp + i, 0, sizeof(RFLiHiddenCharData));
             }
 
-            switch (RFLiWriteAsync(RFLiFileType_Database, manager->formatTmp, RFLi_TEMP_BUFFER_SIZE, formatWriteCallback_, offset + sizeof(RFLiDatabase))) {
+            switch (RFLiWriteAsync(RFLiFileType_Database, manager->formatTmp, RFLi_TEMP_BUFFER_SIZE, formatWriteCallback_,
+                                   offset + sizeof(RFLiDatabase))) {
                 case RFLErrcode_Success:
                 case RFLErrcode_Busy:
                     continuous = TRUE;
@@ -83,16 +83,13 @@ static void formatWriteCallback_() {
                     break;
                 }
             }
-        }
-        else if (RFLiIsCachedHDB()) {
+        } else if (RFLiIsCachedHDB()) {
             RFLiClearCacheHDB(manager->cachedDB);
         }
-    }
-    else if (err == RFLErrcode_NANDCommandfail) {
+    } else if (err == RFLErrcode_NANDCommandfail) {
         if (RFLiGetLastReason() == NAND_RESULT_MAXBLOCKS) {
             RFLiCloseAsync(RFLiFileType_Database, maxblockCloseCallback_);
-        }
-        else {
+        } else {
             RFLiCloseAsync(RFLiFileType_Database, NULL);
         }
     }
@@ -114,18 +111,16 @@ static void formatOpenCallback_() {
         RFLiHiddenDBManager* manager = RFLiGetHDBManager();
         manager->formatIndex = -1;
         RFLi_ASSERTLINE(manager->formatTmp == 0L /* NULL */, 197);
-        
+
         manager->formatTmp = RFLiAlloc32(RFLi_TEMP_BUFFER_SIZE);
         RFLiCreateHeaderCRCAsync(formatCalcCRCCb_);
 
         return;
-    }
-    else if (err == RFLErrcode_NANDCommandfail) {
+    } else if (err == RFLErrcode_NANDCommandfail) {
         if (RFLiGetLastReason() == NAND_RESULT_MAXFILES) {
             RFLiGetManager()->mLastErrcode = RFLErrcode_MaxFiles;
         }
-    }
-    else {
+    } else {
         RFLiCloseAsync(RFLiFileType_Database, formatCloseCallback_);
     }
 }
@@ -141,8 +136,7 @@ static void formatCreateDirCallback_() {
 
     if (err == RFLErrcode_Success) {
         RFLiDeleteAsync(RFLiFileType_Database, formatDeleteCallback_);
-    }
-    else if (err == RFLErrcode_NANDCommandfail) {
+    } else if (err == RFLErrcode_NANDCommandfail) {
         if (RFLiGetLastReason() == NAND_RESULT_MAXFILES) {
             RFLiGetManager()->mLastErrcode = RFLErrcode_MaxFiles;
         }

@@ -3,17 +3,17 @@
 
 #include <revolution/types.h>
 
-#include <revolution/enc.h>
 #include <private/enc/encutility.h>
+#include <revolution/enc.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 struct latin_hash_table_entry {
-    u16 c16;    // 0x00
-    u8  cc;     // 0x02
-    u8  next;   // 0x03
+    u16 c16;  // 0x00
+    u8 cc;    // 0x02
+    u8 next;  // 0x03
 };
 
 extern const u16 latin1_unicode_array[];
@@ -46,7 +46,8 @@ extern const struct latin_hash_table_entry unicode_ibm850_array[];
 extern const struct latin_hash_table_entry unicode_ibm852_array[];
 
 ENCResult ENCiConvertStringLatinToUnicode(u16* dst, s32* dstSize, const u8* src, s32* srcSize, ENCBreakType breakType, const u16* table);
-ENCResult ENCiConvertStringUnicodeToLatin( u8* dst, s32* dstSize, const u16* src, s32* srcSize, ENCBreakType breakType, const struct latin_hash_table_entry* table);
+ENCResult ENCiConvertStringUnicodeToLatin(u8* dst, s32* dstSize, const u16* src, s32* srcSize, ENCBreakType breakType,
+                                          const struct latin_hash_table_entry* table);
 
 DECLARE_PRIVATE_ENC_FUNCTION_TO_UTF16(Latin1)
 DECLARE_PRIVATE_ENC_FUNCTION_FROM_UTF16(Latin1)
@@ -76,4 +77,4 @@ DECLARE_PRIVATE_ENC_FUNCTION_TO_UTF16(Ibm852)
 }
 #endif
 
-#endif // PRIVATE_ENC_LATIN_H
+#endif  // PRIVATE_ENC_LATIN_H

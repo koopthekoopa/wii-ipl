@@ -17,7 +17,7 @@ int __flush_buffer(FILE* pFile, size_t* pFlushed) {
         pFile->buffer_len = len;
 
         res = (*pFile->write_proc)(pFile->handle, pFile->buffer, (size_t*)&pFile->buffer_len, pFile->ref);
-    
+
         if (pFlushed != 0) {
             *pFlushed = pFile->buffer_len;
         }

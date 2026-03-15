@@ -5,8 +5,8 @@
 namespace nw4r {
     namespace snd {
         namespace detail {
-            FrameHeap::FrameHeap() :
-            mHandle(NULL) {}
+            FrameHeap::FrameHeap() : mHandle(NULL) {
+            }
 
             FrameHeap::~FrameHeap() {
                 if (IsValid()) {
@@ -63,7 +63,7 @@ namespace nw4r {
                     return NULL;
                 }
 
-                Block* pBlock = new(buffer) Block(size, callback, callbackArg);
+                Block* pBlock = new (buffer) Block(size, callback, callbackArg);
                 mSectionList.GetBack().AppendBlock(pBlock);
 
                 return pBlock->GetBufferAddr();
@@ -119,7 +119,7 @@ namespace nw4r {
                     return false;
                 }
 
-                mSectionList.PushBack(new(pSection) Section());
+                mSectionList.PushBack(new (pSection) Section());
                 return true;
             }
 
@@ -130,6 +130,6 @@ namespace nw4r {
                     mSectionList.Erase(&rSection);
                 }
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

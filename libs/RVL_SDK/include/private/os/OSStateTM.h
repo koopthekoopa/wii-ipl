@@ -9,24 +9,24 @@
 extern "C" {
 #endif
 
-void        __OSRegisterStateEvent();
-BOOL        __OSGetResetButtonStateRaw();
-IOSError    __OSUnRegisterStateEvent();
+void __OSRegisterStateEvent();
+BOOL __OSGetResetButtonStateRaw();
+IOSError __OSUnRegisterStateEvent();
 
-BOOL        __OSInitSTM();
+BOOL __OSInitSTM();
 
-void        __OSHotReset();
+void __OSHotReset();
 
-void        __OSShutdownToSBY();
-void        __OSShutdownToIDL();
-int         __OSSetVIForceDimming(BOOL enable, u32 shiftY, u32 shiftX);
+void __OSShutdownToSBY();
+void __OSShutdownToIDL();
+int __OSSetVIForceDimming(BOOL enable, u32 shiftY, u32 shiftX);
 
-s32         __OSSetIdleLEDMode(u32 mode);
+s32 __OSSetIdleLEDMode(u32 mode);
 
-s32         __OSUnRegisterStateEvent();
+s32 __OSUnRegisterStateEvent();
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // PRIVATE_OS_STATE_TM_H
+#endif  // PRIVATE_OS_STATE_TM_H

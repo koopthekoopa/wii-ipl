@@ -30,10 +30,7 @@ namespace nw4r {
                 return true;
             }
 
-            BankFileReader::BankFileReader(const void* bankData) :
-            mHeader(NULL),
-            mDataBlock(NULL),
-            mWaveBlock(NULL) {
+            BankFileReader::BankFileReader(const void* bankData) : mHeader(NULL), mDataBlock(NULL), mWaveBlock(NULL) {
                 if (!IsValidFileHeader(bankData)) {
                     return;
                 }
@@ -100,8 +97,7 @@ namespace nw4r {
                 if (mHeader->fileHeader.version == VERSION) {
                     info->volume = param->volume;
                     info->tune = param->tune;
-                }
-                else {
+                } else {
                     info->volume = 127;
                     info->tune = 1.0f;
                 }
@@ -121,8 +117,7 @@ namespace nw4r {
                         break;
                     }
                     case DATATYPE_RANGETABLE: {
-                        const BankFile::RangeTable* pRangeTable =
-                            Util::GetDataRefAddress2(*ref, &mDataBlock->instTable);
+                        const BankFile::RangeTable* pRangeTable = Util::GetDataRefAddress2(*ref, &mDataBlock->instTable);
 
                         if (pRangeTable == NULL) {
                             return NULL;
@@ -143,8 +138,7 @@ namespace nw4r {
                         break;
                     }
                     case DATATYPE_INDEXTABLE: {
-                        const BankFile::IndexTable* pIndexTable =
-                            Util::GetDataRefAddress3(*ref, &mDataBlock->instTable);
+                        const BankFile::IndexTable* pIndexTable = Util::GetDataRefAddress3(*ref, &mDataBlock->instTable);
 
                         if (pIndexTable == NULL) {
                             return NULL;
@@ -185,6 +179,6 @@ namespace nw4r {
                 WaveFileReader wfr(info);
                 return wfr.ReadWaveParam(data, waveAddr);
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

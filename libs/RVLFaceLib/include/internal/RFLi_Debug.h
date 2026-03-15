@@ -10,6 +10,7 @@
 extern "C" {
 #endif
 
+// clang-format off
 #ifdef RFL_DEBUG
 
 #define RFLi_REPORT(...)                            OSReport(__VA_ARGS__)
@@ -31,9 +32,10 @@ extern "C" {
 #define RFLi_ASSERTLINE_RANGE(i, min, max, line)    ((void)0)
 
 #endif
+// clang-format on
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // RFLi_DEBUG_H
+#endif  // RFLi_DEBUG_H

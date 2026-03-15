@@ -8,25 +8,24 @@
 namespace nw4r {
     namespace ut {
         class Rect {
-            public:
-
+        public:
             Rect() : left(), top(), right(), bottom() {}
             Rect(f32 l, f32 t, f32 r, f32 b) : left(l), top(t), right(r), bottom(b) {}
 
             ~Rect() {}
 
-            void    SetWidth(f32 width)     { right = left + width; }
-            void    SetHeight(f32 height)   { bottom = top + height; }
+            void SetWidth(f32 width) { right = left + width; }
+            void SetHeight(f32 height) { bottom = top + height; }
 
-            f32     GetWidth() const        { return right - left; }
-            f32     GetHeight() const       { return bottom - top; }
+            f32 GetWidth() const { return right - left; }
+            f32 GetHeight() const { return bottom - top; }
 
             void MoveTo(f32 x, f32 y) {
-                right   = x + GetWidth();
-                left    = x;
+                right = x + GetWidth();
+                left = x;
 
-                bottom  = y + GetHeight();
-                top     = y;
+                bottom = y + GetHeight();
+                top = y;
             }
 
             void Normalize() {
@@ -35,16 +34,16 @@ namespace nw4r {
                 f32 r = right;
                 f32 b = bottom;
 
-                left    = math::FSelect(r - l, l, r);
-                right   = math::FSelect(r - l, r, l);
-                top     = math::FSelect(b - t, t, b);
-                bottom  = math::FSelect(b - t, b, t);
+                left = math::FSelect(r - l, l, r);
+                right = math::FSelect(r - l, r, l);
+                top = math::FSelect(b - t, t, b);
+                bottom = math::FSelect(b - t, b, t);
             }
 
             f32 left, top;      // 0x00
             f32 right, bottom;  // 0x08
         };
-    };
-};
+    };  // namespace ut
+};  // namespace nw4r
 
-#endif // NW4R_RECT_H
+#endif  // NW4R_RECT_H

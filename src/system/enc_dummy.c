@@ -10,51 +10,45 @@
 
 // Dummy out Japanese encoding stuff
 #ifdef KOREAN_BUILD
-BOOL enc_tbl_jp_loaded      = FALSE;
+BOOL enc_tbl_jp_loaded = FALSE;
 
-u16* enc_tbl_jp_wctomb      = NULL;
-u16* enc_tbl_jp_mbtowc      = NULL;
+u16* enc_tbl_jp_wctomb = NULL;
+u16* enc_tbl_jp_mbtowc = NULL;
 
-u16* enc_offset_jp          = NULL;
-#endif // KOREAN_BUILD
-
+u16* enc_offset_jp = NULL;
+#endif  // KOREAN_BUILD
 
 // Dummy out Chinese encoding stuff
-BOOL enc_tbl_cn_loaded      = FALSE;
+BOOL enc_tbl_cn_loaded = FALSE;
 
-u16* enc_tbl_cn_wctomb      = NULL;
-u16* enc_tbl_cn_mbtowc      = NULL;
+u16* enc_tbl_cn_wctomb = NULL;
+u16* enc_tbl_cn_mbtowc = NULL;
 
-u16* enc_offset_cn          = NULL;
+u16* enc_offset_cn = NULL;
 
-u16* enc_tbl_cnex_mbtowc    = NULL;
-
+u16* enc_tbl_cnex_mbtowc = NULL;
 
 // Dummy out Korean encoding stuff
 #ifndef KOREAN_BUILD
-u16* enc_tbl_kr_wctomb1     = NULL;
-u16* enc_tbl_kr_mbtowc1     = NULL;
+u16* enc_tbl_kr_wctomb1 = NULL;
+u16* enc_tbl_kr_mbtowc1 = NULL;
 
-u16* enc_offset_kr1         = NULL;
-#endif // KOREAN_BUILD
+u16* enc_offset_kr1 = NULL;
+#endif  // KOREAN_BUILD
 
-BOOL enc_tbl_kr_loaded      = FALSE;
-
+BOOL enc_tbl_kr_loaded = FALSE;
 
 // Dummy out more Korean encoding stuff
-u16* enc_tbl_kr_wctomb2     = NULL;
-u16* enc_tbl_kr_mbtowc2     = NULL;
+u16* enc_tbl_kr_wctomb2 = NULL;
+u16* enc_tbl_kr_mbtowc2 = NULL;
 
 u16* enc_offset_kr2 = 0;
 
-
 // Dummy out (yet again) MORE Korean encoding stuff
 #ifndef KOREAN_BUILD
-BOOL enc_tbl_uhc_loaded     = FALSE;
+BOOL enc_tbl_uhc_loaded = FALSE;
 
-u16* enc_tbl_uhc_mbtowc     = NULL;
+u16* enc_tbl_uhc_mbtowc = NULL;
 
-u16* enc_offset_uhc         = NULL;
-#endif // KOREAN_BUILD
-
-
+u16* enc_offset_uhc = NULL;
+#endif  // KOREAN_BUILD

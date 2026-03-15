@@ -5,22 +5,15 @@
 #include "scene/address/iplAddress.h"
 #include "scene/board/iplBoard.h"
 
-#include "iplSystem.h"
 #include "iplSound.h"
+#include "iplSystem.h"
 
 namespace ipl {
     namespace scene {
-        const char* AddressAddSel::mscButtonName[AddressAddSel::BTN_MAX] = {
-            "B_btn_00",
-            "B_btn_01"
-        };
+        const char* AddressAddSel::mscButtonName[AddressAddSel::BTN_MAX] = {"B_btn_00", "B_btn_01"};
 
-        AddressAddSel::AddressAddSel(EGG::Heap* heap) :
-        FaderSceneBase(heap),
-        mState(STATE_NORMAL),
-        mpLayout(NULL),
-        mpEvent(NULL),
-        mpGui(NULL) {}
+        AddressAddSel::AddressAddSel(EGG::Heap* heap) : FaderSceneBase(heap), mState(STATE_NORMAL), mpLayout(NULL), mpEvent(NULL), mpGui(NULL) {
+        }
 
         void AddressAddSel::create() {
             nand::LayoutFile* layoutFile = static_cast<Board*>(System::getScene(SCENE_BOARD))->getLayoutFile();
@@ -64,7 +57,7 @@ namespace ipl {
                 size.width += 0.5f;
                 nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpLayout->FindPaneByName("T_btn_name_00"))->SetFontSize(size);
             }
-#endif // KOREAN_BUILD
+#endif  // KOREAN_BUILD
 
             reset_gui();
         }
@@ -130,46 +123,46 @@ namespace ipl {
 
         void AddressAddSel::start_point_event(const char* paneName, controller::Interface* con) {
             int btnNo = get_button_no(paneName);
-            //if (btnNo > -1) {
-                switch (btnNo) {
-                    case BTN_WII:
-                    case BTN_EMAIL: {
-                        if (mbHovered[btnNo] == FALSE) {
-                            // Play hover in animation
-                            mpLayout->getAnim(btnNo + ANIM_BTN_FOCUS_IN)->play();
+            // if (btnNo > -1) {
+            switch (btnNo) {
+                case BTN_WII:
+                case BTN_EMAIL: {
+                    if (mbHovered[btnNo] == FALSE) {
+                        // Play hover in animation
+                        mpLayout->getAnim(btnNo + ANIM_BTN_FOCUS_IN)->play();
 
-                            // Play nice sound
-                            snd::getSystem()->startSE("WIPL_SE_BT_TARGETTING");
+                        // Play nice sound
+                        snd::getSystem()->startSE("WIPL_SE_BT_TARGETTING");
 
-                            // Rrrrrumble
-                            con->rumble(1);
-                        }
-                        mbHovered[btnNo]++;
-                        break;
+                        // Rrrrrumble
+                        con->rumble(1);
                     }
-                    default: {
-                        break;
-                    }
+                    mbHovered[btnNo]++;
+                    break;
                 }
+                default: {
+                    break;
+                }
+            }
             //}
         }
 
         void AddressAddSel::start_left_event(const char* paneName) {
             int btnNo = get_button_no(paneName);
-            //if (btnNo > -1) {
-                switch (btnNo) {
-                    case BTN_WII:
-                    case BTN_EMAIL: {
-                        if (mbHovered[btnNo] == TRUE) {
-                            mpLayout->getAnim(btnNo + ANIM_BTN_FOCUS_OUT)->play();
-                        }
-                        mbHovered[btnNo]--;
-                        break;
+            // if (btnNo > -1) {
+            switch (btnNo) {
+                case BTN_WII:
+                case BTN_EMAIL: {
+                    if (mbHovered[btnNo] == TRUE) {
+                        mpLayout->getAnim(btnNo + ANIM_BTN_FOCUS_OUT)->play();
                     }
-                    default: {
-                        break;
-                    }
+                    mbHovered[btnNo]--;
+                    break;
                 }
+                default: {
+                    break;
+                }
+            }
             //}
         }
 
@@ -288,5 +281,5 @@ namespace ipl {
                 }
             }
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

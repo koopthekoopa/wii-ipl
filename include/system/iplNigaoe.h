@@ -16,57 +16,56 @@
 namespace ipl {
     namespace nigaoe {
         class Object {
-            public:
-                typedef void (*MakeIconCallback)(Object*, void*);
+        public:
+            typedef void (*MakeIconCallback)(Object*, void*);
 
-                Object(EGG::Heap* heap, int width, int height, int faceId, MakeIconCallback callback, void* callbackWork);
-                Object(EGG::Heap* heap, int width, int height, RFLiCharData* faceData, MakeIconCallback callback, void* callbackWork);
-                ~Object();
+            Object(EGG::Heap* heap, int width, int height, int faceId, MakeIconCallback callback, void* callbackWork);
+            Object(EGG::Heap* heap, int width, int height, RFLiCharData* faceData, MakeIconCallback callback, void* callbackWork);
+            ~Object();
 
-                const wchar_t* getName() const {
-                    wchar_t* faceName;
+            const wchar_t* getName() const {
+                wchar_t* faceName;
 
-                    int faceId = mFaceId;
-                    if (faceId >= 0) {
-                        RFLiCharData* charData = RFLiGetCharData(faceId);
-                        faceName = (wchar_t*)charData->name;
-                    }
-                    else {
-                        faceName = NULL;
-                    }
-
-                    return faceName;
+                int faceId = mFaceId;
+                if (faceId >= 0) {
+                    RFLiCharData* charData = RFLiGetCharData(faceId);
+                    faceName = (wchar_t*)charData->name;
+                } else {
+                    faceName = NULL;
                 }
 
-                const GXTexObj& getIconTexture() const  { return mFaceTexObj; }
-                u32             getIndex() const        { return mFaceId; }
+                return faceName;
+            }
 
-                BOOL            created() const         { return mbCreated; }
-            
-            private:
-                void            init(EGG::Heap* heap, int width, int height);
-                void            make_icon();
+            const GXTexObj& getIconTexture() const { return mFaceTexObj; }
+            u32 getIndex() const { return mFaceId; }
 
-                u8*                 mpIconTex;          // 0x00
-                u32                 mIconSize;          // 0x04
+            BOOL created() const { return mbCreated; }
 
-                RFLIconSetting      mIconSettings;      // 0x08
-                GXTexObj            mFaceTexObj;        // 0x18
-                RFLiCharData*       mpCharData;         // 0x38
-                u32                 mFaceId;            // 0x3C
+        private:
+            void init(EGG::Heap* heap, int width, int height);
+            void make_icon();
 
-                MakeIconCallback    mCallBack;          // 0x40
-                void*               mpCallBackWork;     // 0x44
+            u8* mpIconTex;  // 0x00
+            u32 mIconSize;  // 0x04
 
-            public:
-                nw4r::ut::Link      mLink;              // 0x48
+            RFLIconSetting mIconSettings;  // 0x08
+            GXTexObj mFaceTexObj;          // 0x18
+            RFLiCharData* mpCharData;      // 0x38
+            u32 mFaceId;                   // 0x3C
 
-            private:
-                bool                mbCreated;          // 0x50
+            MakeIconCallback mCallBack;  // 0x40
+            void* mpCallBackWork;        // 0x44
+
+        public:
+            nw4r::ut::Link mLink;  // 0x48
+
+        private:
+            bool mbCreated;  // 0x50
 
             friend class Manager;
         };
-    }
-}
+    }  // namespace nigaoe
+}  // namespace ipl
 
-#endif // IPL_NIGAOE_H
+#endif  // IPL_NIGAOE_H

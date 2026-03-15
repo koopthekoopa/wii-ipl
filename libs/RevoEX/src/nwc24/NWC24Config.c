@@ -1,44 +1,43 @@
-#include <revolution/nwc24.h>
 #include <private/nwc24.h>
+#include <revolution/nwc24.h>
 
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 #include <revolution/dvd.h>
 
 #include <string.h>
 
 static NWC24ConfigData* config = NULL;
-static BOOL             ConfigModified = FALSE;
+static BOOL ConfigModified = FALSE;
 
-static const char*      MBoxDir = "/shared2/wc24/mbox";
-static const char*      ConfigFile = "/shared2/wc24/nwc24msg.cfg";
-static const char*      CfgBakFile = "/shared2/wc24/nwc24msg.cbk";
+static const char* MBoxDir = "/shared2/wc24/mbox";
+static const char* ConfigFile = "/shared2/wc24/nwc24msg.cfg";
+static const char* CfgBakFile = "/shared2/wc24/nwc24msg.cbk";
 
-static u16              VirtualGroupId = 01; // Nintendo
+static u16 VirtualGroupId = 01;  // Nintendo
 
-static void     SetDefaultConfig();
+static void SetDefaultConfig();
 
-static u32      GetConfigCheckSum();
+static u32 GetConfigCheckSum();
 static NWC24Err CheckConfig() NO_INLINE;
 
 static NWC24Err GenerateUserId(NWC24UserId* pId);
 static NWC24Err RegisterUserId() NO_INLINE;
 
-static void     CacheUserIdToLoMem(NWC24UserId id);
+static void CacheUserIdToLoMem(NWC24UserId id);
 static NWC24Err GetCachedUserIdFromLoMem(NWC24UserId* pId);
 
 NWC24Err NWC24GetMyUserId(NWC24UserId* pId) {
-    NWC24Err    scdErr;
-    NWC24Err    result;
+    NWC24Err scdErr;
+    NWC24Err result;
 
     result = NWC24_OK;
 
     // If config was loaded, load user ID from there
     if (NWC24IsMsgLibOpened() || NWC24IsMsgLibOpenedByTool()) {
         *pId = config->userId;
-    }
-    else {
+    } else {
         // Otherwise, load from cache
         scdErr = GetCachedUserIdFromLoMem(pId);
         if (scdErr == NWC24_OK) {
@@ -133,7 +132,7 @@ NWC24Err NWC24iConfigInit(BOOL force) {
     if (result == NWC24_ERR_VER_MISMATCH && !force && config->version > NWC24_CONFIG_CURRENT_VERSION) {
         return result;
     }
-    
+
     // Other reason why it failed to read the config? Create a new one.
 
     if (result == NWC24_OK || result == NWC24_ERR_VER_MISMATCH || result == NWC24_ERR_BROKEN) {
@@ -188,7 +187,7 @@ NWC24Err NWC24iConfigReload() {
         result = CheckConfig();
 
         if (result == NWC24_OK) {
-            ConfigModified = FALSE; // current config is fine
+            ConfigModified = FALSE;  // current config is fine
             return result;
         }
     }
@@ -207,7 +206,7 @@ NWC24Err NWC24iConfigReload() {
         result = CheckConfig();
 
         if (result == NWC24_OK) {
-            ConfigModified = TRUE; // current config is not fine
+            ConfigModified = TRUE;  // current config is not fine
         }
     }
 
@@ -299,7 +298,7 @@ u16 NWC24GetGroupId() {
 
     switch (OSGetAppType()) {
         case OS_APP_TYPE_IPL: {
-            groupId = 01; // Nintendo
+            groupId = 01;  // Nintendo
             break;
         }
         case OS_APP_TYPE_DVD: {
@@ -384,7 +383,7 @@ void NWC24SetMailTrsServerURL(const char* mailTrsServerURL) {
 }
 
 void NWC24SetIdCreationCount(u32 idCreationCount) {
-    config->idCreationCount = idCreationCount & (NWC24_CONFIG_MAX_ID_COUNT-1);
+    config->idCreationCount = idCreationCount & (NWC24_CONFIG_MAX_ID_COUNT - 1);
     ConfigModified = TRUE;
 }
 
@@ -461,22 +460,22 @@ static NWC24Err CheckConfig() {
 }
 
 static NWC24Err GenerateUserId(NWC24UserId* pId) {
-    NWC24Err    result;
-    u32         arg1 = 0;
+    NWC24Err result;
+    u32 arg1 = 0;
 
     if (pId == NULL) {
         return NWC24_ERR_INVALID_VALUE;
     }
 
-    *pId = 9999999999999999; // dummy
+    *pId = 9999999999999999;  // dummy
     result = NWC24iRequestGenerateUserId(pId, &arg1);
     CacheUserIdToLoMem(*pId);
     return result;
 }
 
 static NWC24Err RegisterUserId() {
-    NWC24Err    result;
-    s32         scheduleErrCount, scheduleErr;
+    NWC24Err result;
+    s32 scheduleErrCount, scheduleErr;
 
     result = NWC24SuspendScheduler();
     if (result < NWC24_OK) {
@@ -485,11 +484,10 @@ static NWC24Err RegisterUserId() {
 
     result = NWC24iRequestRegisterUserId();
     if (result != NWC24_OK && result != NWC24_ERR_ID_REGISTERED) {
-        NWC24Err result2 = NWC24GetSchedulerError(&scheduleErrCount,&scheduleErr);
+        NWC24Err result2 = NWC24GetSchedulerError(&scheduleErrCount, &scheduleErr);
         if (result2 == NWC24_OK && scheduleErrCount > 0) {
             NWC24iSetErrorCode(scheduleErr);
-        }
-        else {
+        } else {
             NWC24iSetErrorCode(NWC24iMakeCode(NWC24_ERRCODE_1092XX, result));
         }
     }
@@ -513,6 +511,6 @@ static NWC24Err GetCachedUserIdFromLoMem(NWC24UserId* pId) {
     if (*pId == 0) {
         return NWC24_ERR_NULL;
     }
-    
+
     return NWC24iCheckUserIdCRC(*pId);
 }

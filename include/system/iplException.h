@@ -9,29 +9,29 @@
 
 namespace ipl {
     class Exception {
-        public:
-            /**
-             * @param heap The memory heap used.
-             * @param rMode Render mode used.
-             */
-            Exception(EGG::Heap* heap, const GXRenderModeObj& rMode);
+    public:
+        /**
+         * @param heap The memory heap used.
+         * @param rMode Render mode used.
+         */
+        Exception(EGG::Heap* heap, const GXRenderModeObj& rMode);
 
-            /* @note pretty please, unless you wanna crash the ipl, dont run this . */
-            void    exception_callback(nw4r::db::ConsoleHandle console);
+        /* @note pretty please, unless you wanna crash the ipl, dont run this . */
+        void exception_callback(nw4r::db::ConsoleHandle console);
 
-        private:
-            void    setConsole(const GXRenderModeObj& rMode);
-            void    key_input();
-            void    wait(u32 ticks);
+    private:
+        void setConsole(const GXRenderModeObj& rMode);
+        void key_input();
+        void wait(u32 ticks);
 
-            nw4r::db::ConsoleHandle         mConsole;   // 0x00
-            
-            undefined4                      unk_0x04;
-            
-            u8*                             mpBuffer;   // 0x08
-            
-            int                             unk_0x0C;
+        nw4r::db::ConsoleHandle mConsole;  // 0x00
+
+        undefined4 unk_0x04;
+
+        u8* mpBuffer;  // 0x08
+
+        int unk_0x0C;
     };
-}
+}  // namespace ipl
 
-#endif // IPL_MESSAGE_H
+#endif  // IPL_EXCEPTION_HANDLER_H

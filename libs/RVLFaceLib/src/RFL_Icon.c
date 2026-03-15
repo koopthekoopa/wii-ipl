@@ -6,15 +6,18 @@
 #include <RVLFaceLibInternal.h>
 
 #include <internal/RFLi_FaceConfig.h>
+// clang-format off
 #include <internal/RFLi_FaceConfig/offsets.h>
 #include <internal/RFLi_FaceConfig/colors.h>
+// clang-format on
 
 #include <revolution/gx.h>
 #include <revolution/mtx.h>
 
 #include <math.h>
 
-RFLErrcode RFLMakeIcon(void* buf, RFLDataSource source, RFLMiddleDatabase* middleDB, u16 index, RFLExpression expression, const RFLIconSetting* setting) {
+RFLErrcode RFLMakeIcon(void* buf, RFLDataSource source, RFLMiddleDatabase* middleDB, u16 index, RFLExpression expression,
+                       const RFLIconSetting* setting) {
     RFLiCharInfo info;
 
     RFLErrcode err = RFLiPickupCharInfo(&info, source, middleDB, index);
@@ -55,7 +58,7 @@ void RFLiMakeIcon(void* buf, const RFLiCharInfo* info, RFLExpression expression,
     RFLi_ASSERTLINE(setting->height >= 16 && setting->height <= 512, 101);
 
     {
-        RFLiCoordinateData iconCoordData = { 1, 2, 0, 0, 0, 0 };
+        RFLiCoordinateData iconCoordData = {1, 2, 0, 0, 0, 0};
 
         byteSize = (setting->width * setting->height) * 2;
 
@@ -70,11 +73,9 @@ void RFLiMakeIcon(void* buf, const RFLiCharInfo* info, RFLExpression expression,
 
         if ((setting->width > 128 || setting->height > 128) && RFLiGetUseDeluxTex()) {
             resolution = RFLResolution_256;
-        }
-        else if (setting->width > 64 || setting->height > 64) {
+        } else if (setting->width > 64 || setting->height > 64) {
             resolution = RFLResolution_128;
-        }
-        else {
+        } else {
             resolution = RFLResolution_64;
         }
 
@@ -93,12 +94,11 @@ void RFLiMakeIcon(void* buf, const RFLiCharInfo* info, RFLExpression expression,
         GXColor backColor;
         if (setting->bgType == RFLIconBG_Direct) {
             backColor = setting->bgColor;
-        }
-        else {
+        } else {
             backColor = RFLGetFavoriteColor(info->personal.favoriteColor);
         }
         backColor.a = 0;
-    
+
         GXGetScissor(&scissorOffsetX, &scissorOffsetY, &scissorWidth, &scissorHeight);
         GXSetScissor(0, 0, setting->width, setting->height);
 
@@ -118,8 +118,7 @@ void RFLiMakeIcon(void* buf, const RFLiCharInfo* info, RFLExpression expression,
         // TODO: Get the division to match.
         if (setting->width < setting->height) {
             fovy = 2 * (/*(180.0f / (f32)M_PI)*/ 57.2957801818848f * atan2f(43.2f / aspect, 500.0f));
-        }
-        else {
+        } else {
             fovy = 2 * (/*(180.0f / (f32)M_PI)*/ 57.2957801818848f * atan2f(43.2f, 500.0f));
         }
 
@@ -128,11 +127,10 @@ void RFLiMakeIcon(void* buf, const RFLiCharInfo* info, RFLExpression expression,
     }
 
     {
-        
         RFLiPositionData cameraPos = (RFLiPositionData){0.0f, 34.5f, 600.0f};
         RFLiPositionData target = (RFLiPositionData){0.0f, 34.5f, 0.0f};
         RFLiPositionData cameraUp = (RFLiPositionData){0.0f, 1.0f, 0.0f};
-        
+
         MTXLookAt(viewMtx, (Vec*)&cameraPos, (Vec*)&cameraUp, (Vec*)&target);
     }
 
@@ -190,14 +188,13 @@ void RFLiMakeIcon(void* buf, const RFLiCharInfo* info, RFLExpression expression,
     GXPixModeSync();
     if (RFLiGetManager()->mDrawIconCB == NULL) {
         GXDrawDone();
-    }
-    else {
+    } else {
         RFLiGetManager()->mDrawIconCB();
     }
 #else
     GXDrawDone();
     GXPixModeSync();
-#endif // RFL_BUILD
+#endif  // RFL_BUILD
 
     RFLiFree(modelBuf);
 
@@ -211,4 +208,4 @@ void RFLiMakeIcon(void* buf, const RFLiCharInfo* info, RFLExpression expression,
 void RFLSetIconDrawDoneCallback(RFLSimpleCB cb) {
     RFLiGetManager()->mDrawIconCB = cb;
 }
-#endif // RFL_BUILD
+#endif  // RFL_BUILD

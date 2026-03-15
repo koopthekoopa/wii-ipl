@@ -1,22 +1,17 @@
 #include "system/iplPostmanManager.h"
 
-#include "utility/iplMessageBase.h"
+#include "iplSystem.h"
 #include "system/iplPlayTimeLog.h"
 #include "system/iplSocketSetting.h"
-#include "iplSystem.h"
+#include "utility/iplMessageBase.h"
 
 #include "config.h"
 
-#define POSTMANReport(...)  OSReport("[POSTMAN] "__VA_ARGS__);
+#define POSTMANReport(...) OSReport("[POSTMAN] "__VA_ARGS__);
 
 namespace ipl {
     namespace postman {
-        Manager::Manager(EGG::Heap* heap) :
-        ut_thread(),
-        mpHeap(heap),
-        mpThreadStack(NULL),
-        mState(STATE_NONE),
-        mMessage() {
+        Manager::Manager(EGG::Heap* heap) : ut_thread(), mpHeap(heap), mpThreadStack(NULL), mState(STATE_NONE), mMessage() {
             OSCreateAlarm(&mAlarm);
         }
 
@@ -196,8 +191,7 @@ namespace ipl {
                     }
                 }
                 set_alarm_();
-            }
-            else {
+            } else {
                 POSTMANReport("IGNORED: receive_immediately_\n");
             }
         }
@@ -223,20 +217,19 @@ namespace ipl {
         void Manager::set_nwc24_permission_() {
             SCParentalControlsInfo pcInfo;
             u8 nwc24Permission = NCD_NWC24_PERMISSION_NONE;
-            
+
             SCGetParentalControl(&pcInfo);
 
             if ((SCGetWCFlags() & SC_WC_FLAGS_ENABLED) == SC_WC_FLAGS_ENABLED && SCGetEULA()) {
                 POSTMANReport("PERMISSION_DOWNLOAD_ON\n");
                 nwc24Permission |= NCD_NWC24_PERMISSION_DOWNLOAD;
 
-                if ((pcInfo.enable & SC_PARENTAL_FLAG_ENABLED) != SC_PARENTAL_FLAG_ENABLED
-                || (SCGetNetContentRestrictions() & SC_NET_RESTRICTIONS_MSG_BOARD) != SC_NET_RESTRICTIONS_MSG_BOARD) {
+                if ((pcInfo.enable & SC_PARENTAL_FLAG_ENABLED) != SC_PARENTAL_FLAG_ENABLED ||
+                    (SCGetNetContentRestrictions() & SC_NET_RESTRICTIONS_MSG_BOARD) != SC_NET_RESTRICTIONS_MSG_BOARD) {
                     POSTMANReport("PERMISSION_MESSAGE_ON\n");
                     nwc24Permission |= NCD_NWC24_PERMISSION_MESSAGE;
                 }
-            }
-            else {
+            } else {
                 POSTMANReport("PERMISSION_ALL_OFF\n");
             }
 
@@ -292,5 +285,5 @@ namespace ipl {
             POSTMANReport("Network State: %d\n", NCDGetLinkStatus());
             ncd_debug_print_();
         }
-    }
-}
+    }  // namespace postman
+}  // namespace ipl

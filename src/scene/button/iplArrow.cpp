@@ -6,14 +6,13 @@ namespace ipl {
     namespace scene {
         void Arrow::draw() {
             Button* button;
-            if (System::onDefaultDrawLayer()
-            && (button = static_cast<Button*>(System::getScene(SCENE_BUTTON)), button != NULL)) {
+            if (System::onDefaultDrawLayer() && (button = static_cast<Button*>(System::getScene(SCENE_BUTTON)), button != NULL)) {
                 layout::Object::setDefaultCamera();
 
                 for (int i = 0; i < Button::ARROW_BTN_MAX; i++) {
                     layout::Object* arrowLayout = button->get_layout();
                     nw4r::lyt::Pane* pane = arrowLayout->FindPaneByName(Button::mscArrowName[i]);
-                    
+
                     pane->SetVisible(true);
                     arrowLayout->draw(pane);
                     pane->SetVisible(false);
@@ -25,5 +24,5 @@ namespace ipl {
                 }
             }
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

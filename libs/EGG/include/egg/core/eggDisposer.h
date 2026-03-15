@@ -7,16 +7,14 @@ namespace EGG {
     class Heap;
 
     class Disposer {
-        public:
-            Disposer();
-            virtual ~Disposer();
-        
-        private:
-            Heap*           mpHeap; // 0x00
-            nw4r::ut::Link  mLink;  // 0x04
+    public:
+        Disposer();
+        virtual ~Disposer();
+
+    private:
+        Heap* mpHeap;          // 0x00
+        nw4r::ut::Link mLink;  // 0x04
     };
-}
+}  // namespace EGG
 
-#endif // EGG_CORE_DISPOSER_H
-
-
+#endif  // EGG_CORE_DISPOSER_H

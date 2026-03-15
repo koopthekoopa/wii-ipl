@@ -6,20 +6,17 @@
 
 namespace ipl {
     SDVFWorker::WorkSDState SDVFWorker::s_sd_state;
-    bool                    SDVFWorker::s_sd_inserted = false;
+    bool SDVFWorker::s_sd_inserted = false;
 
-    SDVFWorker::SDVFWorker() :
-    myWork(NULL) {}
+    SDVFWorker::SDVFWorker() : myWork(NULL) {
+    }
 
     void SDVFWorker::create(void* work, int priority) {
         Work* workArg = reinterpret_cast<Work*>(work);
         myWork = workArg;
 
-        /* @BUG: Stack should be threadStack, not the thread itself! */
-        OSCreateThread(&workArg->thread,
-                        thread_main, this,
-                        &myWork->thread, STACK_SIZE,
-                        priority, OS_THREAD_ATTR_DETACH);
+        /* @bug: Stack should be threadStack, not the thread itself! */
+        OSCreateThread(&workArg->thread, thread_main, this, &myWork->thread, STACK_SIZE, priority, OS_THREAD_ATTR_DETACH);
 
         OSInitMessageQueue(&myWork->msgQueue, myWork->messages, 8);
         OSInitMutex(&myWork->mutex);
@@ -65,8 +62,7 @@ namespace ipl {
     BOOL SDVFWorker::is_sd_write_protected() {
         if (s_sd_state == SD_STATE_AVAILABLE) {
             return myWork->isWriteProtected;
-        }
-        else {
+        } else {
             return FALSE;
         }
     }
@@ -97,11 +93,11 @@ namespace ipl {
     }
 
     void* SDVFWorker::run() {
-        FAError         faErr;
+        FAError faErr;
 
-        CDBErr          cdbErr;
-        
-        bool            started = false;
+        CDBErr cdbErr;
+
+        bool started = false;
 
         while (true) {
             switch (wait_work()) {
@@ -122,8 +118,7 @@ namespace ipl {
 
                     if (s_sd_state == SD_STATE_BROKEN || s_sd_state == SD_STATE_ERROR) {
                         myWork->prevAsyncResult = myWork->asyncResult;
-                    }
-                    else {
+                    } else {
                         myWork->prevAsyncResult = RESULT_STILL_WORKING;
                     }
                     break;
@@ -144,12 +139,11 @@ namespace ipl {
                     }
 
                     System::getCdbManager()->mountSD_safe();
- 
+
                     cdbErr = System::getCdbManager()->getCDBResult();
                     if (cdbErr == CDB_ERROR_OK || cdbErr == CDB_ERROR_SD_IS_MOUNTED) {
                         myWork->asyncResult = RESULT_SUCCESS;
-                    }
-                    else {
+                    } else {
                         OSReport("SDVFWorker: CDBMountSD failed [%d]\n", cdbErr);
                         myWork->asyncResult = RESULT_FATAL_SD_ERROR;
                     }
@@ -162,8 +156,7 @@ namespace ipl {
                     cdbErr = System::getCdbManager()->getCDBResult();
                     if (cdbErr == CDB_ERROR_OK || cdbErr == CDB_ERROR_SD_IS_NOT_MOUNTED) {
                         myWork->asyncResult = RESULT_SUCCESS;
-                    }
-                    else {
+                    } else {
                         OSReport("SDVFWorker: CDBUnmountSD failed [%d]\n", cdbErr);
                         myWork->asyncResult = RESULT_FATAL_SD_ERROR;
                     }
@@ -204,28 +197,24 @@ namespace ipl {
                 FAInit(FA_FLAG_FILENAME_CHECK);
                 FASetThreadPriority(myWork->priority);
                 FARegistCB(FA_DEVICE_SD, sd_insert_callback, sd_eject_callback);
-            
+
                 faErr = FAAttach(FA_DEVICE_SD, NULL, 0, &myWork->driveTable);
                 if (faErr == FA_ERR_SUCCESS) {
                     OSReport("SDVFWorker: attach SD card drive = %c\n", myWork->driveTable.drive);
-                
+
                     int result = call_fa_mount();
                     if (result == RESULT_SUCCESS) {
                         s_sd_state = SD_STATE_AVAILABLE;
-                    }
-                    else if (result == RESULT_SD_BROKEN) {
+                    } else if (result == RESULT_SD_BROKEN) {
                         s_sd_state = SD_STATE_BROKEN;
-                    }
-                    else if (result == RESULT_SD_ERROR) {
+                    } else if (result == RESULT_SD_ERROR) {
                         s_sd_state = SD_STATE_ERROR;
-                    }
-                    else {
+                    } else {
                         s_sd_state = SD_STATE_EJECTED;
                         s_sd_inserted = false;
                     }
                     myWork->asyncResult = result;
-                }
-                else {
+                } else {
                     OSReport("SDVFWorker: FAAttach failed.[%d]\n", FAErrnum());
                     s_sd_state = SD_STATE_UNAVAILABLE;
                     myWork->asyncResult = RESULT_FA_ERROR;
@@ -235,8 +224,7 @@ namespace ipl {
             case SD_STATE_EJECTED: {
                 if (myWork->prevAsyncResult == RESULT_STILL_WORKING) {
                     myWork->asyncResult = RESULT_FATAL_SD_ERROR;
-                }
-                else {
+                } else {
                     myWork->asyncResult = myWork->prevAsyncResult;
                 }
                 break;
@@ -245,11 +233,9 @@ namespace ipl {
                 int result = call_fa_mount();
                 if (result == RESULT_SUCCESS) {
                     s_sd_state = SD_STATE_AVAILABLE;
-                }
-                else if (result == RESULT_SD_BROKEN) {
+                } else if (result == RESULT_SD_BROKEN) {
                     s_sd_state = SD_STATE_BROKEN;
-                }
-                else {
+                } else {
                     s_sd_state = result == RESULT_SD_ERROR ? SD_STATE_ERROR : SD_STATE_EJECTED;
                 }
                 myWork->asyncResult = result;
@@ -286,19 +272,16 @@ namespace ipl {
             if (faErr == FA_ERR_SUCCESS) {
                 myWork->isWriteProtected = FALSE;
                 result = RESULT_SUCCESS;
-            }
-            else {
+            } else {
                 if (FAErrnum() == FA_ERR_EWRTPROTECT) {
                     OSReport("SDVFWorker: SD card is write protected.\n");
                     result = RESULT_SUCCESS;
                     myWork->isWriteProtected = TRUE;
-                }
-                else {
+                } else {
                     result = handle_sd_error(faErr);
                 }
             }
-        }
-        else {
+        } else {
             faErr = FAErrnum();
             OSReport("SDVFWorker: FAMount failed.[%d]\n", faErr);
             if (faErr == FA_ERR_ENOEXEC) {
@@ -306,22 +289,18 @@ namespace ipl {
                 if (FA_INSERTED(myWork->driveTable)) {
                     result = RESULT_SD_BROKEN;
                 }
-            }
-            else if (faErr == FA_ERR_EINVAL) {
+            } else if (faErr == FA_ERR_EINVAL) {
                 result = RESULT_FATAL_SD_ERROR;
-            }
-            else if (faErr == FA_ERR_EIO) {
+            } else if (faErr == FA_ERR_EIO) {
                 if (s_sd_state == SD_STATE_EJECTED) {
                     result = RESULT_FATAL_SD_ERROR;
-                }
-                else {
+                } else {
                     result = RESULT_FATAL_SD_ERROR;
                     if (s_sd_inserted) {
                         result = RESULT_SD_ERROR;
                     }
                 }
-            }
-            else {
+            } else {
                 result = RESULT_SD_ERROR;
             }
         }
@@ -349,8 +328,7 @@ namespace ipl {
 
         if (myWork->asyncResult == RESULT_SUCCESS) {
             OSReport("SDVFWorker: successfully format sd.\n");
-        }
-        else {
+        } else {
             OSReport("SDVFWorker: FAFormat failed.[%d]\n", myWork->asyncResult);
         }
     }
@@ -453,4 +431,4 @@ namespace ipl {
         }
         return result;
     }
-}
+}  // namespace ipl

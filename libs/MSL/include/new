@@ -10,6 +10,6 @@ inline void* operator new(size_t size, void* ptr) {
     return ptr;
 }
 
-#endif // MSL_CPP_NEW_H
+#endif  // MSL_CPP_NEW_H
 
 #endif

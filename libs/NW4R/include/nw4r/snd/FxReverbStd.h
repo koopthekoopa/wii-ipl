@@ -6,40 +6,41 @@
 namespace nw4r {
     namespace snd {
         class FxReverbStd : public FxBase {
-            public:
-                typedef struct ReverbStdParam {
-                    f32 preDelayTime;   // 0x00
-                    f32 fusedTime;      // 0x04
-                    f32 coloration;     // 0x08
-                    f32 damping;        // 0x0C
-                    f32 outGain;        // 0x10
-                } ReverbStdParam;
-            public:
-                FxReverbStd();
+        public:
+            typedef struct ReverbStdParam {
+                f32 preDelayTime;  // 0x00
+                f32 fusedTime;     // 0x04
+                f32 coloration;    // 0x08
+                f32 damping;       // 0x0C
+                f32 outGain;       // 0x10
+            } ReverbStdParam;
 
-                virtual ~FxReverbStd() {
-                    Shutdown();
-                    ReleaseWorkBuffer();
-                }
+        public:
+            FxReverbStd();
 
-                virtual bool    StartUp();                                                                                                  // 0x0C
-                virtual void    Shutdown();                                                                                                 // 0x10
+            virtual ~FxReverbStd() {
+                Shutdown();
+                ReleaseWorkBuffer();
+            }
 
-                virtual void    UpdateBuffer(int channels, void** buffer, u32 size, SampleFormat format, f32 sampleRate, OutputMode mode);  // 0x14
+            virtual bool StartUp();   // 0x0C
+            virtual void Shutdown();  // 0x10
 
-                virtual bool    AssignWorkBuffer(void* buffer, u32 size);                                                                   // 0x18
-                virtual void    ReleaseWorkBuffer();                                                                                        // 0x1C
+            virtual void UpdateBuffer(int channels, void** buffer, u32 size, SampleFormat format, f32 sampleRate, OutputMode mode);  // 0x14
 
-                u32             GetRequiredMemSize();
-                bool            SetParam(const ReverbStdParam& rParam) NO_INLINE;
+            virtual bool AssignWorkBuffer(void* buffer, u32 size);  // 0x18
+            virtual void ReleaseWorkBuffer();                       // 0x1C
 
-            private:
-                detail::AxfxImpl    mImpl;      // 0x0C
+            u32 GetRequiredMemSize();
+            bool SetParam(const ReverbStdParam& rParam) NO_INLINE;
 
-                ReverbStdParam      mParam;     // 0x18
-                AXFX_REVERBSTD      mAxfxParam; // 0x30
+        private:
+            detail::AxfxImpl mImpl;  // 0x0C
+
+            ReverbStdParam mParam;      // 0x18
+            AXFX_REVERBSTD mAxfxParam;  // 0x30
         };
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r
 
-#endif // NW4R_SND_FX_REVERB_STD_H
+#endif  // NW4R_SND_FX_REVERB_STD_H

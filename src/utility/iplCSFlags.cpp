@@ -2,14 +2,14 @@
 
 #include "utility/iplMisc.h"
 
-#include <revolution/nand.h>
 #include <private/nand.h>
+#include <revolution/nand.h>
 
 #include <revolution/sc.h>
 
 #include <cstring>
 
-#define FLAG_FILE_PATH  "/shared2/sys/flags.dat"
+#define FLAG_FILE_PATH "/shared2/sys/flags.dat"
 
 namespace ipl {
     namespace utility {
@@ -18,11 +18,10 @@ namespace ipl {
             bool createFile = false;
 
             s32 result = NANDPrivateGetType(FLAG_FILE_PATH, (u8*)&dummy);
-    
+
             if (result == NAND_RESULT_NOEXISTS) {
                 createFile = true;
-            }
-            else if (result != NAND_RESULT_OK) {
+            } else if (result != NAND_RESULT_OK) {
                 OSReport("CSFlags::CreateFlagsFile: the flag file is bad status: %d\n", result);
 
                 result = NANDPrivateDelete(FLAG_FILE_PATH);
@@ -35,8 +34,8 @@ namespace ipl {
             }
 
             if (createFile) {
-                NANDFileInfo    file;
-                CSFlagsData     data ALIGN32;
+                NANDFileInfo file;
+                CSFlagsData data ALIGN32;
 
                 // Create file
 
@@ -80,8 +79,8 @@ namespace ipl {
         }
 
         s32 CSFlags::ReadFlags(CSFlagsData* outData) {
-            NANDFileInfo    file;
-            CSFlagsData     data ALIGN32;
+            NANDFileInfo file;
+            CSFlagsData data ALIGN32;
 
             // Opne file
 
@@ -116,8 +115,8 @@ namespace ipl {
         }
 
         s32 CSFlags::WriteFlags(CSFlagsData* inData) {
-            NANDFileInfo    file;
-            CSFlagsData     data ALIGN32;
+            NANDFileInfo file;
+            CSFlagsData data ALIGN32;
 
             // Opne file
 
@@ -128,7 +127,7 @@ namespace ipl {
             }
 
             // Write contents
-            
+
             memcpy(&data, inData, sizeof(data));
             result = NANDWrite(&file, &data, sizeof(data));
             if (result != sizeof(data)) {
@@ -178,7 +177,7 @@ namespace ipl {
                 OSReport("CSFlags::UpdateFlagsFile: failed to write the flag: %d\n", result);
                 return result;
             }
-            
+
             // Finished.
 
             return result;
@@ -187,10 +186,9 @@ namespace ipl {
         void CSFlags::SetEULAFlag(CSFlagsData* data) {
             if (SCGetEULA()) {
                 utility::setBit(&data->flags, CSFlagsData::FLAG_SYSCONF_EULA);
-            }
-            else {
+            } else {
                 utility::clearBit(&data->flags, CSFlagsData::FLAG_SYSCONF_EULA);
             }
         }
-    }
-}
+    }  // namespace utility
+}  // namespace ipl

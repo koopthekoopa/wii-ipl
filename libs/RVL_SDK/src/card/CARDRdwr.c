@@ -1,5 +1,5 @@
-#include <revolution/card.h>
 #include <private/card.h>
+#include <revolution/card.h>
 
 static void BlockReadCallback(s32 chan, s32 result);
 static void BlockWriteCallback(s32 chan, s32 result);

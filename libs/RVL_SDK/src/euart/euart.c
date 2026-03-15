@@ -2,8 +2,8 @@
 
 #include <private/exi.h>
 
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 static BOOL __EUARTInitialized = FALSE;
 static u32 __EUARTLastErrorCode = 0;

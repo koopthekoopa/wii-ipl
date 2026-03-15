@@ -1,5 +1,5 @@
-#include <revolution/axfx.h>
 #include <private/axfx.h>
+#include <revolution/axfx.h>
 
 #include <revolution/ax.h>
 

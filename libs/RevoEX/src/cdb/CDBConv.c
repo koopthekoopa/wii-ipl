@@ -1,26 +1,26 @@
-#include <revolution/cdb.h>
 #include <private/cdb.h>
+#include <revolution/cdb.h>
 
 #include <revolution/os.h>
 
-#include <string.h>
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
+#include <string.h>
 
 BOOL CDBIsMakerCodeStr(const char* makerCode) {
-    return CDBSafeStrLen(makerCode, 2+1) == 2;
+    return CDBSafeStrLen(makerCode, 2 + 1) == 2;
 }
 
 BOOL CDBIsGameCodeStr(const char* gameCode) {
-    return CDBSafeStrLen(gameCode, 4+1) == 4;
+    return CDBSafeStrLen(gameCode, 4 + 1) == 4;
 }
 
 int CDBCompareTypeStr(char* str1, char* str2) {
-    if (CDBSafeStrLen(str1, 5+1) < 0) {
+    if (CDBSafeStrLen(str1, 5 + 1) < 0) {
         return -1;
     }
-    if (CDBSafeStrLen(str2, 5+1) < 0) {
+    if (CDBSafeStrLen(str2, 5 + 1) < 0) {
         return 1;
     }
     return strcmpi(str1, str2);
@@ -37,7 +37,7 @@ void CDBClampCDBDate(CDBDate* cdbDate) {
     if (cdbDate != NULL) {
         CDBConvertCDBDateToCalendarTime(*cdbDate, &year, &month, &day, &hour, &min, &sec);
         if (year > MAX_YEAR) {
-            *cdbDate = CDBMakeCDBDate(MAX_YEAR, MAX_MONTH-1, MAX_DAY, hour, min, sec);
+            *cdbDate = CDBMakeCDBDate(MAX_YEAR, MAX_MONTH - 1, MAX_DAY, hour, min, sec);
         }
     }
 }
@@ -102,11 +102,11 @@ CDBDate CDBMakeCDBDateMonthEnd(int year, int month, int day, int hour, int min, 
 }
 
 CDBDate CDBMakeCDBDateYearBegin(int year, int month, int day, int hour, int min, int sec) {
-    return CDBMakeCDBDate(year, MIN_MONTH-1, MIN_DAY, MIN_HOUR, MIN_MINUTE, MIN_SECOND);
+    return CDBMakeCDBDate(year, MIN_MONTH - 1, MIN_DAY, MIN_HOUR, MIN_MINUTE, MIN_SECOND);
 }
 
 CDBDate CDBMakeCDBDateYearEnd(int year, int month, int day, int hour, int min, int sec) {
-    return CDBMakeCDBDate(year, MAX_MONTH-1, MAX_DAY, MAX_HOUR, MAX_MINUTE, MAX_SECOND);
+    return CDBMakeCDBDate(year, MAX_MONTH - 1, MAX_DAY, MAX_HOUR, MAX_MINUTE, MAX_SECOND);
 }
 
 void CDBConvYearValueToYearStr(char* yearStr, int year) {
@@ -132,9 +132,9 @@ void CDBConvMinuteValueToMinuteStr(char* minuteStr, int minute) {
 DECOMP_FORCE_ACTIVE(CDBConv_c, "%08X");
 
 void CDBGenRootPath(char* rootPath, CDBLocation location, u64* wiiId) {
-    u32     wiiIdHi, wiiIdLo;
-    char    wiiIdHiPath[16];
-    char    wiiIdLoPath[16];
+    u32 wiiIdHi, wiiIdLo;
+    char wiiIdHiPath[16];
+    char wiiIdLoPath[16];
 
     if (location == CDB_FS_LOCATION_NAND) {
         strcpy(rootPath, CDB_CFG_VF_DRIVE_ROOT);
@@ -144,8 +144,7 @@ void CDBGenRootPath(char* rootPath, CDBLocation location, u64* wiiId) {
     if (wiiId == NULL || *wiiId == 0) {
         wiiIdHi = CDBGetWiiHighId();
         wiiIdLo = CDBGetWiiLowId();
-    }
-    else {
+    } else {
         wiiIdHi = CDBGetWiiHighIdEx(*wiiId);
         wiiIdLo = CDBGetWiiLowIdEx(*wiiId);
     }
@@ -185,7 +184,8 @@ void CDBConvHourStrToFullPath(char* fullPath, char* yearStr, char* monthStr, cha
     CDBFSConcatenatePath(fullPath, hourStr);
 }
 
-void CDBConvMinuteStrToFullPath(char* fullPath, char* yearStr, char* monthStr, char* dayStr, char* hourStr, char* minuteStr, CDBLocation location, u64* wiiId) {
+void CDBConvMinuteStrToFullPath(char* fullPath, char* yearStr, char* monthStr, char* dayStr, char* hourStr, char* minuteStr, CDBLocation location,
+                                u64* wiiId) {
     CDBGenRootPath(fullPath, location, wiiId);
     CDBFSConcatenatePath(fullPath, yearStr);
     CDBFSConcatenatePath(fullPath, monthStr);
@@ -194,7 +194,8 @@ void CDBConvMinuteStrToFullPath(char* fullPath, char* yearStr, char* monthStr, c
     CDBFSConcatenatePath(fullPath, minuteStr);
 }
 
-void CDBConvCodeStrToFullPath(char* fullPath, char* yearStr, char* monthStr, char* dayStr, char* hourStr, char* minuteStr, char* codeStr, CDBLocation location, u64* wiiId) {
+void CDBConvCodeStrToFullPath(char* fullPath, char* yearStr, char* monthStr, char* dayStr, char* hourStr, char* minuteStr, char* codeStr,
+                              CDBLocation location, u64* wiiId) {
     CDBGenRootPath(fullPath, location, wiiId);
     CDBFSConcatenatePath(fullPath, yearStr);
     CDBFSConcatenatePath(fullPath, monthStr);
@@ -205,7 +206,8 @@ void CDBConvCodeStrToFullPath(char* fullPath, char* yearStr, char* monthStr, cha
 }
 
 // I cannot take it anymore
-void CDBConvTypeStrToFullPath(char* fullPath, char* yearStr, char* monthStr, char* dayStr, char* hourStr, char* minuteStr, char* codeStr, char* typeStr, CDBLocation location, u64* wiiId) {
+void CDBConvTypeStrToFullPath(char* fullPath, char* yearStr, char* monthStr, char* dayStr, char* hourStr, char* minuteStr, char* codeStr,
+                              char* typeStr, CDBLocation location, u64* wiiId) {
     CDBGenRootPath(fullPath, location, wiiId);
     CDBFSConcatenatePath(fullPath, yearStr);
     CDBFSConcatenatePath(fullPath, monthStr);
@@ -216,7 +218,8 @@ void CDBConvTypeStrToFullPath(char* fullPath, char* yearStr, char* monthStr, cha
     CDBFSConcatenatePath(fullPath, typeStr);
 }
 
-void CDBConvFileNameStrToFullPath(char* fullPath, char* yearStr, char* monthStr, char* dayStr, char* hourStr, char* minuteStr, char* codeStr, char* typeStr, char* fileNameStr, CDBLocation location, u64* wiiId) {
+void CDBConvFileNameStrToFullPath(char* fullPath, char* yearStr, char* monthStr, char* dayStr, char* hourStr, char* minuteStr, char* codeStr,
+                                  char* typeStr, char* fileNameStr, CDBLocation location, u64* wiiId) {
     CDBGenRootPath(fullPath, location, wiiId);
     CDBFSConcatenatePath(fullPath, yearStr);
     CDBFSConcatenatePath(fullPath, monthStr);
@@ -235,36 +238,34 @@ CDBDate CDBConvDirStrToCDBDate(char* yearStr, char* monthStr, char* dayStr, char
 void CDBConvGCStrToGCValue(char* gcStr, u32* gcValue) {
     if (gcStr == NULL) {
         *gcValue = -1;
-    }
-    else {
+    } else {
         memcpy(gcValue, gcStr, sizeof(u32));
     }
 }
 
 void CDBConvGCValueToGCStr(u32 gcValue, char* gcStr) {
     memcpy(gcStr, &gcValue, sizeof(u32));
-    gcStr[4] = 0; // Null termination
-    strcmp(gcStr, "JXXN"); // ?
+    gcStr[4] = 0;           // Null termination
+    strcmp(gcStr, "JXXN");  // ?
 }
 
 void CDBConvMCValueToMCStr(u16 mcValue, char* mcStr) {
     memcpy(mcStr, &mcValue, sizeof(u16));
-    mcStr[2] = 0; // Null termination
+    mcStr[2] = 0;  // Null termination
     CDBCheckMakerCodeStr(mcStr);
 }
 
 void CDBConvMCStrToMCValue(char* mcStr, u16* mcValue) {
     if (mcStr == NULL) {
         *mcValue = -1;
-    }
-    else {
+    } else {
         memcpy(mcValue, mcStr, sizeof(u16));
     }
 }
 
 void CDBConvKeyStrToEpochValue(char* keyString, CDBDate* epochVal) {
     char epochStr[32];
-    
+
     strncpy(epochStr, CDBKeyStrEpoch(keyString), CDB_KEYSTR_EPOCH_SIZE);
     epochStr[CDB_KEYSTR_EPOCH_SIZE] = 0;
 
@@ -273,7 +274,7 @@ void CDBConvKeyStrToEpochValue(char* keyString, CDBDate* epochVal) {
 
 void CDBConvKeyStrToEpochStr(char* keyString, char* epochVal) {
     char epochStr[16];
-    
+
     strncpy(epochVal, CDBKeyStrEpoch(keyString), CDB_KEYSTR_EPOCH_SIZE);
     epochVal[CDB_KEYSTR_EPOCH_SIZE] = 0;
 }
@@ -284,7 +285,7 @@ void CDBConvEpochStrToEpochValue(char* epochStr, CDBDate* epochVal) {
 
 void CDBConvEpochValueToDate(CDBDate epoch, int* year, int* month, int* day, int* hour, int* min, int* sec) {
     OSCalendarTime calendar;
-    
+
     OSTicksToCalendarTime(OSSecondsToTicks((OSTime)epoch), &calendar);
 
     if (year != NULL) {
@@ -323,23 +324,23 @@ CDBErr CDBConvKeyToFullPath(CDBRecordKey* recordKey, char* fullPath) {
 }
 
 void CDBConvKeyStrToFullPath_(char* keyString, char* fullPath, CDBLocation location, u64* wiiId) {
-    char    yearStr[8];
-    char    monthStr[8];
-    char    dayStr[8];
-    char    hourStr[8];
-    char    minStr[8];
+    char yearStr[8];
+    char monthStr[8];
+    char dayStr[8];
+    char hourStr[8];
+    char minStr[8];
 
-    char    codeStr[8];
-    char    typeStr[8];
-    char    serialNumStr[8];
-    char    fileNameStr[8];
-    
+    char codeStr[8];
+    char typeStr[8];
+    char serialNumStr[8];
+    char fileNameStr[8];
+
     CDBDate epoch;
-    int     year;
-    int     month;
-    int     day;
-    int     hour;
-    int     min;
+    int year;
+    int month;
+    int day;
+    int hour;
+    int min;
 
     CDBConvKeyStrToEpochValue(keyString, &epoch);
     CDBConvEpochValueToDate(epoch, &year, &month, &day, &hour, &min, NULL);
@@ -357,8 +358,7 @@ void CDBConvKeyStrToFullPath_(char* keyString, char* fullPath, CDBLocation locat
 
     if (location == CDB_FS_LOCATION_NAND || location == CDB_FS_LOCATION_SD) {
         CDBConvFileNameStrToFullPath(fullPath, yearStr, monthStr, dayStr, hourStr, minStr, codeStr, typeStr, fileNameStr, location, wiiId);
-    }
-    else {
+    } else {
         CDBReportFatal("CDBConvKeyStrToFullPath unknown location=%d\n", location);
         OSHalt("CDBConvKeyStrToFullPath", 733);
     }
@@ -376,15 +376,15 @@ void CDBConvKeyStrToSerialNumber(char* keyString, char* serialNum) {
 
 void CDBConvKeyStrToFileName(char* keyString, char* fileName) {
     CDBDate epoch;
-    char serialNum[CDB_KEYSTR_SERIAL_NUMBER_SIZE+1];
-    
+    char serialNum[CDB_KEYSTR_SERIAL_NUMBER_SIZE + 1];
+
     CDBConvKeyStrToEpochValue(keyString, &epoch);
     CDBConvKeyStrToSerialNumber(keyString, serialNum);
     sprintf(fileName, "%08X.%s", epoch, serialNum);
 }
 
 void CDBConvKeyStrToGameCode(char* keyString, u32* gameCode) {
-    char gcStr[CDB_KEYSTR_GAME_CODE_SIZE+1];
+    char gcStr[CDB_KEYSTR_GAME_CODE_SIZE + 1];
     memcpy(gcStr, CDBKeyStrGameCode(keyString), CDB_KEYSTR_GAME_CODE_SIZE);
     gcStr[CDB_KEYSTR_GAME_CODE_SIZE] = 0;
 
@@ -392,7 +392,7 @@ void CDBConvKeyStrToGameCode(char* keyString, u32* gameCode) {
 }
 
 void CDBConvKeyStrToMakerCode(char* keyString, u32* makerCode) {
-    char mcStr[CDB_KEYSTR_MAKER_CODE_SIZE+1];
+    char mcStr[CDB_KEYSTR_MAKER_CODE_SIZE + 1];
     memcpy(mcStr, CDBKeyStrMakerCode(keyString), CDB_KEYSTR_MAKER_CODE_SIZE);
     mcStr[2] = 0;
 
@@ -413,7 +413,7 @@ void CDBConvKeyStrToType(char* keyString, char* type) {
 
 void CDBConvertCDBDateToCalendarTime(CDBDate date, int* year, int* month, int* day, int* hour, int* min, int* sec) {
     OSCalendarTime calendar;
-    
+
     OSTicksToCalendarTime(OSSecondsToTicks((OSTime)date), &calendar);
 
     if (year != NULL) {

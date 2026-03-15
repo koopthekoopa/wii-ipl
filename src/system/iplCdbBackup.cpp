@@ -3,18 +3,13 @@
 #include "iplSystem.h"
 
 namespace ipl {
-    const int   CdbBackup::unknown = (cdb::Manager::UNKNOWN_VALUE * 0x1400000) / 100;
+    const int CdbBackup::unknown = (cdb::Manager::UNKNOWN_VALUE * 0x1400000) / 100;
 
-    void    cdb_backup_delete_task_(void*);
-    void    cdb_backup_move_task_(void*);
+    void cdb_backup_delete_task_(void*);
+    void cdb_backup_move_task_(void*);
 
-    CdbBackup::CdbBackup() :
-    mbDoneProcess(false),
-    mCDBResult(0),
-    mPrevFreeSize(0),
-    mTotalFreeSize(0),
-    mState(STATE_MOUNT_SD),
-    mState2(STATE_INVALID) {
+    CdbBackup::CdbBackup()
+        : mbDoneProcess(false), mCDBResult(0), mPrevFreeSize(0), mTotalFreeSize(0), mState(STATE_MOUNT_SD), mState2(STATE_INVALID) {
         System::getHomeButtonMenu()->disable();
         System::stopReceiveSchedule();
 
@@ -123,14 +118,13 @@ namespace ipl {
         SDVFWorker* sdVfWorker = System::getCdbManager()->getSDWorker();
         // ...
         if (System::isSafeMode()) {
-            
         }
         switch (sdVfWorker->get_sd_state()) {
             case SDVFWorker::SD_STATE_UNAVAILABLE: {
                 break;
             }
             case SDVFWorker::SD_STATE_EJECTED: {
-                // @BUG Should set `bSwapSound` to true
+                // @bug Should set `bSwapSound` to true
                 System::getDialog()->callBtn2(MESG_CDBBACKUP_ASK_FOR_DELETE, MESG_CMN_NO, MESG_CMN_YES);
                 mState = STATE_DELETING;
                 break;
@@ -140,7 +134,7 @@ namespace ipl {
                 break;
             }
             default: {
-                // @BUG Should set `bSwapSound` to true
+                // @bug Should set `bSwapSound` to true
                 System::getDialog()->callBtn2(MESG_CDBBACKUP_ASK_FOR_BACKUP, MESG_CMN_NO, MESG_CMN_YES);
                 mState = STATE_SD_BACKING;
                 break;
@@ -208,8 +202,7 @@ namespace ipl {
             if (System::getCdbManager()->getSDWorker()->get_sd_state() == SDVFWorker::SD_STATE_INSERTED) {
                 System::getCdbManager()->getSDWorker()->mount_sd_async();
             }
-        }
-        else {
+        } else {
             error_handling();
         }
 
@@ -219,15 +212,14 @@ namespace ipl {
                 if (System::getCdbManager()->getSDWorker()->is_working()) {
                     mState = STATE_WAIT_WORKER;
                     mState2 = 8;
-                }
-                else {
+                } else {
                     mState = STATE_SD_CHECK_ERR;
                 }
                 break;
             }
             // "No"
             case DialogWindow::RESULT_RIGHT_BUTTON: {
-                // @BUG Should set `bSwapSound` to true
+                // @bug Should set `bSwapSound` to true
                 System::getDialog()->callBtn2(MESG_CDBBACKUP_ASK_FOR_DELETE, MESG_CMN_NO, MESG_CMN_YES);
                 mState = STATE_DELETING_2;
                 break;
@@ -243,8 +235,7 @@ namespace ipl {
                     System::getDialog()->callBtn1(MESG_CDBBACKUP_SD_LOCKED, MESG_CMN_OK);
                     mState = STATE_WAIT_RET;
                     mState2 = STATE_MOUNT_SD;
-                }
-                else {
+                } else {
                     sdVfWorker->prepare_cdb_backup_to_sd_async();
                     mState = STATE_WAIT_WORKER;
                     mState2 = STATE_SD_BACK_PREPARE;
@@ -273,8 +264,7 @@ namespace ipl {
             System::getTask1()->request(cdb_backup_move_task_, this, NULL);
             System::getDialog()->callBtnPrg(MESG_CDBBACKUP_BACKING);
             mState = STATE_WAIT_SD_BACKING;
-        }
-        else {
+        } else {
             System::getDialog()->callBtn1(MESG_CDBBACKUP_SD_UNKNOWN_ERR, MESG_CMN_OK);
             mState = STATE_WAIT_RET;
             mState2 = STATE_MOUNT_SD;
@@ -289,8 +279,7 @@ namespace ipl {
         if (mbDoneProcess) {
             if (fn_8135B1C0() >= 100) {
                 System::getDialog()->setProgBarLength(100);
-            }
-            else {
+            } else {
                 System::getDialog()->terminate();
             }
             mState = STATE_DONE_SD_BACK;
@@ -313,8 +302,7 @@ namespace ipl {
                         System::getDialog()->callBtn1(MESG_CDBBACKUP_BACK_SD_FULL, MESG_CMN_OK);
                         mState = STATE_WAIT_RET;
                         mState2 = STATE_CLEAN_SD_BACK;
-                    }
-                    else {
+                    } else {
                         System::getDialog()->callBtn1(MESG_CDBBACKUP_BACK_FINISHED_2, MESG_CMN_OK);
                         mState = STATE_WAIT_FINISH_MSG;
                         mState2 = STATE_FINISHED_2;
@@ -388,8 +376,7 @@ namespace ipl {
             if (cdbManager->isUnderFlow()) {
                 result = FALSE;
             }
-        }
-        else {
+        } else {
             result = FALSE;
         }
 
@@ -401,13 +388,12 @@ namespace ipl {
     void cdb_backup_delete_task_(void* work) {
         CdbBackup* cdbBackup = reinterpret_cast<CdbBackup*>(work);
 
-        CDBDate beginDate = CDBMakeCDBDate(MIN_YEAR, MIN_MONTH-1, MIN_DAY, MIN_HOUR, MIN_MINUTE, MIN_SECOND);
+        CDBDate beginDate = CDBMakeCDBDate(MIN_YEAR, MIN_MONTH - 1, MIN_DAY, MIN_HOUR, MIN_MINUTE, MIN_SECOND);
         // @Bug should be MAX_MONTH-1
         CDBDate endDate = CDBMakeCDBDate(MAX_YEAR, MAX_MONTH, MAX_DAY, MAX_HOUR, MAX_MINUTE, MAX_SECOND);
 
-        System::getCdbManager()->search(beginDate, endDate,
-                                        CDB_SEARCH_DIRECTION_RIGHT, CDB_RECORD_LOCATION_NAND, 0,
-                                        cdb_backup_delete_search_cb_, cdbBackup);
+        System::getCdbManager()->search(beginDate, endDate, CDB_SEARCH_DIRECTION_RIGHT, CDB_RECORD_LOCATION_NAND, 0, cdb_backup_delete_search_cb_,
+                                        cdbBackup);
 
         System::getCdbManager()->cleanUpEmptyDirectories(CDB_RECORD_LOCATION_NAND);
 
@@ -432,8 +418,7 @@ namespace ipl {
             if (cdbManager->isUnderFlow()) {
                 result = FALSE;
             }
-        }
-        else {
+        } else {
             result = FALSE;
         }
 
@@ -446,7 +431,7 @@ namespace ipl {
     void cdb_backup_move_task_(void* work) {
         CdbBackup* cdbBackup = reinterpret_cast<CdbBackup*>(work);
 
-        const CDBDate beginDate = CDBMakeCDBDate(MIN_YEAR, MIN_MONTH-1, MIN_DAY, MIN_HOUR, MIN_MINUTE, MIN_SECOND);
+        const CDBDate beginDate = CDBMakeCDBDate(MIN_YEAR, MIN_MONTH - 1, MIN_DAY, MIN_HOUR, MIN_MINUTE, MIN_SECOND);
         // @Bug should be MAX_MONTH-1
         const CDBDate endDate = CDBMakeCDBDate(MAX_YEAR, MAX_MONTH, MAX_DAY, MAX_HOUR, MAX_MINUTE, MAX_SECOND);
         u32 freeSize;
@@ -456,12 +441,11 @@ namespace ipl {
         cdbBackup->set_prev_free_size(freeSize);
         cdbBackup->set_free_size(freeSize);
 
-        System::getCdbManager()->search(beginDate, endDate,
-                                        CDB_SEARCH_DIRECTION_RIGHT, CDB_RECORD_LOCATION_NAND, 1,
-                                        cdb_backup_move_search_cb_, cdbBackup);
+        System::getCdbManager()->search(beginDate, endDate, CDB_SEARCH_DIRECTION_RIGHT, CDB_RECORD_LOCATION_NAND, 1, cdb_backup_move_search_cb_,
+                                        cdbBackup);
 
         System::getCdbManager()->cleanUpEmptyDirectories(CDB_RECORD_LOCATION_NAND);
 
         cdbBackup->set_done_process(true);
     }
-}
+}  // namespace ipl

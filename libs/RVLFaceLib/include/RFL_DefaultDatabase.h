@@ -7,10 +7,10 @@
 extern "C" {
 #endif
 
-BOOL    RFLSearchDefaultData(const RFLCreateID* id, u16* index);
+BOOL RFLSearchDefaultData(const RFLCreateID* id, u16* index);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // RFL_DEFAULT_DATABASE_H
+#endif  // RFL_DEFAULT_DATABASE_H

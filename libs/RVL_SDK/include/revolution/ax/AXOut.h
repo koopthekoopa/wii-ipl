@@ -13,14 +13,14 @@ extern "C" {
 typedef void (*AXOutCallback)(void);
 typedef void (*AXExceedCallback)(u32 cycles);
 
-AXOutCallback   AXRegisterCallback(AXOutCallback callback);
+AXOutCallback AXRegisterCallback(AXOutCallback callback);
 
-s32             AXRmtGetSamplesLeft();
-s32             AXRmtGetSamples(s32 chan, s16* out, s32 num);
-s32             AXRmtAdvancePtr(s32 num);
+s32 AXRmtGetSamplesLeft();
+s32 AXRmtGetSamples(s32 chan, s16* out, s32 num);
+s32 AXRmtAdvancePtr(s32 num);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // REVOLUTION_AX_OUT_H
+#endif  // REVOLUTION_AX_OUT_H

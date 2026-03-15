@@ -8,7 +8,8 @@ namespace nw4r {
             return false;
         }
 
-        void IOStream::Write(const void* pSrc, u32 size) {}
+        void IOStream::Write(const void* pSrc, u32 size) {
+        }
 
         bool IOStream::WriteAsync(const void* pSrc, u32 size, IOStreamCallback callback, void* callbackArg) {
             return false;
@@ -17,5 +18,5 @@ namespace nw4r {
         bool IOStream::IsBusy() const {
             return false;
         }
-    }
-}
+    }  // namespace ut
+}  // namespace nw4r

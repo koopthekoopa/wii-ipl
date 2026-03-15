@@ -12,6 +12,7 @@ namespace ipl {
         /* MAIN BUTTON */
         /* =========== */
 
+        // clang-format off
         static const Button::AnmFrame scAnmFrame[Button::IDANIM_MAX] = {
             /*IDANIM_FROM_CH_SEL_TO_BOARD*/           { /*start=*/1000.0f,  /*end=*/1040.0f  },
             /*IDANIM_FROM_CH_SEL_TO_SETTING*/         { /*start=*/7000.0f,  /*end=*/7040.0f  },
@@ -178,15 +179,9 @@ namespace ipl {
             "ArwR",
             "ArwL"
         };
+        // clang-format on
 
-        Button::Button(EGG::Heap* heap)
-        : Base(heap),
-        unk_0x54(0),
-        mOptOutBtn(),
-        mSdMenuBtn(),
-        unk_0x104(false),
-        unk_0x105(false),
-        mReservedCmd() {
+        Button::Button(EGG::Heap* heap) : Base(heap), unk_0x54(0), mOptOutBtn(), mSdMenuBtn(), unk_0x104(false), unk_0x105(false), mReservedCmd() {
             for (int i = 0; i < ARROW_BTN_MAX; i++) {
                 mbArrowVisible[i] = true;
             }
@@ -196,10 +191,11 @@ namespace ipl {
             mbEnabled = true;
         }
 
-        Button::~Button() {}
-            
+        Button::~Button() {
+        }
+
         void Button::prepare() {
-            mpLayoutFile  = System::getNandManager()->readLayoutAsync(getSceneHeap(), "cmnBtn.ash");
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(getSceneHeap(), "cmnBtn.ash");
             mpBalloonFile = System::getNandManager()->readLayoutAsync(getSceneHeap(), "balloon.ash");
         }
 
@@ -213,18 +209,18 @@ namespace ipl {
             }
 
             // Bind button animatons
-            mpButtonAnim[ANIM_SCENE_CHANGE]     = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_SeenChange", false);
-            mpButtonAnim[ANIM_ARROW_R_AC]       = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_ArwR_Ac", false);
-            mpButtonAnim[ANIM_ARROW_L_AC]       = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_ArwL_Ac", false);
-            mpButtonAnim[ANIM_ARROW_R_HD_AC]    = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_ArwR_HDAc", false);
-            mpButtonAnim[ANIM_ARROW_L_HD_AC]    = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_ArwL_HDAc", false);
-            mpButtonAnim[ANIM_ARROW_R_END]      = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_ArwR_End", false);
-            mpButtonAnim[ANIM_ARROW_L_END]      = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_ArwL_End", false);
-            mpButtonAnim[ANIM_CALENDAR_EXIT]    = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_CalExit", false);
-            mpButtonAnim[ANIM_TRASH_DELETE]     = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_Dust", false);
-            mpButtonAnim[ANIM_COMMON_BUTTON]    = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_Cmn_R", false);
-            mpButtonAnim[ANIM_ARROW_LETTER_R]   = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_TabaR", false);
-            mpButtonAnim[ANIM_ARROW_LETTER_L]   = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_TabaL", false);
+            mpButtonAnim[ANIM_SCENE_CHANGE] = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_SeenChange", false);
+            mpButtonAnim[ANIM_ARROW_R_AC] = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_ArwR_Ac", false);
+            mpButtonAnim[ANIM_ARROW_L_AC] = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_ArwL_Ac", false);
+            mpButtonAnim[ANIM_ARROW_R_HD_AC] = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_ArwR_HDAc", false);
+            mpButtonAnim[ANIM_ARROW_L_HD_AC] = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_ArwL_HDAc", false);
+            mpButtonAnim[ANIM_ARROW_R_END] = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_ArwR_End", false);
+            mpButtonAnim[ANIM_ARROW_L_END] = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_ArwL_End", false);
+            mpButtonAnim[ANIM_CALENDAR_EXIT] = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_CalExit", false);
+            mpButtonAnim[ANIM_TRASH_DELETE] = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_Dust", false);
+            mpButtonAnim[ANIM_COMMON_BUTTON] = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_Cmn_R", false);
+            mpButtonAnim[ANIM_ARROW_LETTER_R] = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_TabaR", false);
+            mpButtonAnim[ANIM_ARROW_LETTER_L] = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_TabaL", false);
 
             // Bind "new messages" animation and setup its frame controller
             mpButtonAnim[ANIM_BOARD_BBS_NUM_LOOP] = mpLayout->bindToGroup("my_IplTop_e.brlan", "G_BbsSignal", false);
@@ -262,7 +258,8 @@ namespace ipl {
 
             // Setup text balloons
             for (int i = 0; i < BALLOON_MAX; i++) {
-                mpBalloons[i] = new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 120.0f, 30.0f);
+                mpBalloons[i] =
+                    new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 120.0f, 30.0f);
                 mpBalloons[i]->init(System::getMessage(scBalloonMsg[i]), 0);
                 mpBalloons[i]->init_textbox();
             }
@@ -277,15 +274,18 @@ namespace ipl {
             if (SCGetAspectRatio() == SC_ASPECT_RATIO_16x9) {
                 nw4r::lyt::Size size;
 
-                size = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpBalloons[BALLOON_BBS_BOARD]->get_layout()->FindPaneByName("T_Balloon"))->GetFontSize();
+                size = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpBalloons[BALLOON_BBS_BOARD]->get_layout()->FindPaneByName("T_Balloon"))
+                           ->GetFontSize();
                 size.width += 0.75f;
-                nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpBalloons[BALLOON_BBS_BOARD]->get_layout()->FindPaneByName("T_Balloon"))->SetFontSize(size);
+                nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpBalloons[BALLOON_BBS_BOARD]->get_layout()->FindPaneByName("T_Balloon"))
+                    ->SetFontSize(size);
 
-                size = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpBalloons[BALLOON_CH_SEL]->get_layout()->FindPaneByName("T_Balloon"))->GetFontSize();
+                size =
+                    nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpBalloons[BALLOON_CH_SEL]->get_layout()->FindPaneByName("T_Balloon"))->GetFontSize();
                 size.width += 1.0f;
                 nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpBalloons[BALLOON_CH_SEL]->get_layout()->FindPaneByName("T_Balloon"))->SetFontSize(size);
             }
-#endif // KOREAN_BUILD
+#endif  // KOREAN_BUILD
         }
 
         void Button::calc() {
@@ -295,8 +295,7 @@ namespace ipl {
                         Command popped = mReservedCmd.get_popped_item();
                         if (popped.type == Command::TYPE_ANIM) {
                             animation(popped.animId);
-                        }
-                        else {
+                        } else {
                             const char* pane = mscTextPaneName[popped.paneId];
                             setText(pane, System::getMessage(popped.msgId));
                         }
@@ -306,11 +305,9 @@ namespace ipl {
                     break;
                 }
                 case 1: {
-                    if (!mpButtonAnim[ANIM_SCENE_CHANGE]->isPlaying()
-                     && !mpButtonAnim[ANIM_CALENDAR_EXIT]->isPlaying()
-                     && !mpButtonAnim[ANIM_COMMON_BUTTON]->isPlaying()
-                     && !mpButtonAnim[ANIM_TRASH_DELETE]->isPlaying()
-                     && !mOptOutBtn.mpLayout->isPlaying()) {
+                    if (!mpButtonAnim[ANIM_SCENE_CHANGE]->isPlaying() && !mpButtonAnim[ANIM_CALENDAR_EXIT]->isPlaying() &&
+                        !mpButtonAnim[ANIM_COMMON_BUTTON]->isPlaying() && !mpButtonAnim[ANIM_TRASH_DELETE]->isPlaying() &&
+                        !mOptOutBtn.mpLayout->isPlaying()) {
                         unk_0x54 = 0;
                     }
                     break;
@@ -323,7 +320,7 @@ namespace ipl {
 
             // Calculate opt out button
             mOptOutBtn.calc();
-            
+
             // Calculate SD Menu Button (if we are not in maintenance mode)
             if (!System::isSafeMode()) {
                 mSdMenuBtn.calc();
@@ -398,10 +395,10 @@ namespace ipl {
 
         void Button::startPointEvent(const char* paneName, controller::Interface* con) {
             int btnNo = getButtonNo(paneName);
-            if ((btnNo != BTN_BBS_BOARD || !System::isSafeMode()) && btnNo != -1
-            && (mbEnabled || btnNo == BTN_ARROW_RIGHT || btnNo == BTN_ARROW_LEFT)
-            && (btnNo != BTN_ARROW_RIGHT || mbArrowVisible[ARROW_BTN_RIGHT] == true)
-            && (btnNo != BTN_ARROW_LEFT || mbArrowVisible[ARROW_BTN_LEFT] == true)) {
+            if ((btnNo != BTN_BBS_BOARD || !System::isSafeMode()) && btnNo != -1 &&
+                (mbEnabled || btnNo == BTN_ARROW_RIGHT || btnNo == BTN_ARROW_LEFT) &&
+                (btnNo != BTN_ARROW_RIGHT || mbArrowVisible[ARROW_BTN_RIGHT] == true) &&
+                (btnNo != BTN_ARROW_LEFT || mbArrowVisible[ARROW_BTN_LEFT] == true)) {
                 if (mbHovered[btnNo] == FALSE) {
                     // Play hover in animation
                     layout::Animator* anim = mpLayout->getAnim(btnNo);
@@ -430,10 +427,10 @@ namespace ipl {
 
         void Button::startLeftEvent(const char* paneName) {
             int btnNo = getButtonNo(paneName);
-            if ((btnNo != BTN_BBS_BOARD || !System::isSafeMode()) && btnNo != -1
-            && (mbEnabled | btnNo == BTN_ARROW_RIGHT /*TYPO!!*/ || btnNo == BTN_ARROW_LEFT)
-            && (btnNo != BTN_ARROW_RIGHT || mbArrowVisible[ARROW_BTN_RIGHT] == true)
-            && (btnNo != BTN_ARROW_LEFT || mbArrowVisible[ARROW_BTN_LEFT] == true)) {
+            if ((btnNo != BTN_BBS_BOARD || !System::isSafeMode()) && btnNo != -1 &&
+                (mbEnabled | btnNo == BTN_ARROW_RIGHT /*TYPO!!*/ || btnNo == BTN_ARROW_LEFT) &&
+                (btnNo != BTN_ARROW_RIGHT || mbArrowVisible[ARROW_BTN_RIGHT] == true) &&
+                (btnNo != BTN_ARROW_LEFT || mbArrowVisible[ARROW_BTN_LEFT] == true)) {
                 if (mbHovered[btnNo] == TRUE) {
                     // Play hover out animation
                     layout::Animator* anim = mpLayout->getAnim(btnNo);
@@ -679,8 +676,7 @@ namespace ipl {
                     anim = mpButtonAnim[ANIM_ARROW_R_END];
                     if (bAppear) {
                         frame = scAnmFrame[IDANIM_ARROW_RIGHT_APPEAR].end;
-                    }
-                    else {
+                    } else {
                         frame = scAnmFrame[IDANIM_ARROW_RIGHT_DISAPPEAR].end;
                     }
                     break;
@@ -690,8 +686,7 @@ namespace ipl {
                     anim = mpButtonAnim[ANIM_ARROW_L_END];
                     if (bAppear) {
                         frame = scAnmFrame[IDANIM_ARROW_LEFT_APPEAR].end;
-                    }
-                    else {
+                    } else {
                         frame = scAnmFrame[IDANIM_ARROW_LEFT_DISAPPEAR].end;
                     }
                     break;
@@ -830,7 +825,7 @@ namespace ipl {
             command.animId = animId;
             mReservedCmd.push(command);
         }
-    
+
         void Button::reserveText(int paneId, u32 msgId) {
             Command command;
             command.type = Command::TYPE_TEXT;
@@ -843,20 +838,19 @@ namespace ipl {
         /* OPT OUT BUTTON */
         /* ============== */
 
-        OptOutButton::OptOutButton() :
-        mpLayout(NULL), mpGui(NULL),
-        mbHovered(FALSE) {}
+        OptOutButton::OptOutButton() : mpLayout(NULL), mpGui(NULL), mbHovered(FALSE) {
+        }
 
         void OptOutButton::create(nand::LayoutFile* layoutFile, EGG::Heap* heap) {
             // Setup layout
             mpLayout = new layout::Object(heap, layoutFile, "arc", "my_BtnStop_a.brlyt");
 
             // Setup animations
-            mpLayout->bindToGroup("my_BtnStop_a_Btn_In.brlan",      "G_SeenChange", false);
-            mpLayout->bindToGroup("my_BtnStop_a_Btn_Out.brlan",     "G_SeenChange", false, false);
-            mpLayout->bindToGroup("my_BtnStop_a_Focus_In.brlan",    "G_Stop",       false, false);
-            mpLayout->bindToGroup("my_BtnStop_a_Focus_Out.brlan",   "G_Stop",       false, false);
-            mpLayout->bindToGroup("my_BtnStop_a_Select.brlan",      "G_Stop",       false, false);
+            mpLayout->bindToGroup("my_BtnStop_a_Btn_In.brlan", "G_SeenChange", false);
+            mpLayout->bindToGroup("my_BtnStop_a_Btn_Out.brlan", "G_SeenChange", false, false);
+            mpLayout->bindToGroup("my_BtnStop_a_Focus_In.brlan", "G_Stop", false, false);
+            mpLayout->bindToGroup("my_BtnStop_a_Focus_Out.brlan", "G_Stop", false, false);
+            mpLayout->bindToGroup("my_BtnStop_a_Select.brlan", "G_Stop", false, false);
             mpLayout->finishBinding();
 
             // Setup interface
@@ -944,7 +938,8 @@ namespace ipl {
             onEventDerived(compId, event, static_cast<controller::Interface*>(data));
         }
 
-        void ButtonEventHandlerBase::onEventDerived(u32 compId, u32 event, const controller::Interface* con) {}
+        void ButtonEventHandlerBase::onEventDerived(u32 compId, u32 event, const controller::Interface* con) {
+        }
 
         void OptOutButtonEventHandlerBase::onEvent(u32 compId, u32 event, void* data) {
             gui::PaneComponent* component = static_cast<gui::PaneComponent*>(mpManager->getComponent(compId));
@@ -966,6 +961,7 @@ namespace ipl {
             onEventDerived(compId, event, static_cast<controller::Interface*>(data));
         }
 
-        void OptOutButtonEventHandlerBase::onEventDerived(u32 compId, u32 event, const controller::Interface* con) {}
-    }
-}
+        void OptOutButtonEventHandlerBase::onEventDerived(u32 compId, u32 event, const controller::Interface* con) {
+        }
+    }  // namespace scene
+}  // namespace ipl

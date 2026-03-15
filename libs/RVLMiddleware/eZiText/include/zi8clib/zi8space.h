@@ -3,6 +3,6 @@
 
 #include <zi8clib/zitypes.h>
 
-ziBool  Zi8ZHaddSpace(ziWChar* elements, ziU8 elementCount, ziWChar* candidates, ziWChar maxCandSize ZI_NEED_WORK);
+ziBool Zi8ZHaddSpace(ziWChar* elements, ziU8 elementCount, ziWChar* candidates, ziWChar maxCandSize ZI_NEED_WORK);
 
-#endif // ZI8_CLIB_SPACE_H
+#endif  // ZI8_CLIB_SPACE_H

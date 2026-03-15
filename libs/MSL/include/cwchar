@@ -6,27 +6,27 @@
 #ifdef __cplusplus
 
 namespace std {
-    using   ::fwide;
+    using ::fwide;
 
-    using   ::wmemcpy;
-    using   ::wmemset;
-    using   ::wmemchr;
+    using ::wmemchr;
+    using ::wmemcpy;
+    using ::wmemset;
 
-    using   ::wcslen;
-    using   ::wcscpy;
-    using   ::wcsncpy;
-    using   ::wcscat;
-    using   ::wcsncat;
-    using   ::wcsncmp;
-    using   ::wcschr;
-    using   ::wcsstr;
+    using ::wcscat;
+    using ::wcschr;
+    using ::wcscpy;
+    using ::wcslen;
+    using ::wcsncat;
+    using ::wcsncmp;
+    using ::wcsncpy;
+    using ::wcsstr;
 
-    using   ::swprintf;
-    using   ::vswprintf;
+    using ::swprintf;
+    using ::vswprintf;
 
-    using   ::wcsnicmp;
-} // namespace std
+    using ::wcsnicmp;
+}  // namespace std
 
 #endif
 
-#endif // MSL_CWCHAR_H
+#endif  // MSL_CWCHAR_H

@@ -1,7 +1,7 @@
 #include <private/vf/pf_clib.h>
 
-#include <private/vf/pf_volume.h>
 #include <private/vf/pf_str.h>
+#include <private/vf/pf_volume.h>
 
 void VFiPFSTR_SetCodeMode(PF_STR* p_str, u32 code_mode) {
     p_str->code_mode = code_mode;
@@ -14,8 +14,7 @@ u32 VFiPFSTR_GetCodeMode(PF_STR* p_str) {
 s8* VFiPFSTR_GetStrPos(PF_STR* p_str, u32 target) {
     if (target == PF_STR_TARGET_HEAD) {
         return (s8*)p_str->p_head;
-    }
-    else {
+    } else {
         return (s8*)p_str->p_tail;
     }
 }
@@ -35,8 +34,7 @@ void VFiPFSTR_MoveStrPos(PF_STR* p_str, s16 length) {
             }
             offset++;
         }
-    }
-    else {
+    } else {
         p = (s8*)p_str->p_head;
 
         for (cnt = 0; cnt < length; cnt++) {
@@ -57,12 +55,10 @@ s32 VFiPFSTR_InitStr(PF_STR* p_str, const s8* s, u32 code_mode) {
     if (code_mode == PF_STR_CODE_MODE_CHAR) {
         p_str->p_head = s;
         p_str->p_tail = (s8*)(s + VFipf_strlen(s));
-    }
-    else if (code_mode == PF_STR_CODE_MODE_WCHAR) {
+    } else if (code_mode == PF_STR_CODE_MODE_WCHAR) {
         p_str->p_head = s;
         p_str->p_tail = (s8*)(s + (VFipf_w_strlen((u16*)s) << 1));
-    }
-    else {
+    } else {
         return 10;
     }
 
@@ -81,8 +77,7 @@ u32 VFiPFSTR_StrNumChar(PF_STR* p_str, u32 target) {
 
     if (target == PF_STR_TARGET_HEAD) {
         p = (s8*)p_str->p_head;
-    }
-    else {
+    } else {
         p = (s8*)p_str->p_tail;
     }
 
@@ -93,8 +88,7 @@ u32 VFiPFSTR_StrNumChar(PF_STR* p_str, u32 target) {
             }
             p++;
         }
-    }
-    else {
+    } else {
         for (cnt = 0; *p != 0 || *(p + 1) != 0; cnt++) {
             s32 width = VFipf_vol_set.codeset.unicode_char_width((u16*)p);
             p += width;
@@ -105,25 +99,25 @@ u32 VFiPFSTR_StrNumChar(PF_STR* p_str, u32 target) {
 }
 
 s32 VFiPFSTR_StrCmp(const PF_STR* p_str, const s8* s) {
-    u16         wc;
-    const u16*  wp;
+    u16 wc;
+    const u16* wp;
 
-    const s8*   p1;
-    const s8*   p2;
+    const s8* p1;
+    const s8* p2;
 
-    s32         ret;
+    s32 ret;
 
     if (p_str->code_mode == PF_STR_CODE_MODE_CHAR) {
         p1 = p_str->p_head;
         p2 = (s8*)s;
 
         ret = VFipf_strcmp(p1, p2);
-    }
-    else {
+    } else {
         wp = (u16*)p_str->p_head;
 
         do {
-            (VFipf_vol_set.codeset.oem2unicode)((s8*)s, &wc); s++;
+            (VFipf_vol_set.codeset.oem2unicode)((s8*)s, &wc);
+            s++;
             if (*wp++ != wc) {
                 break;
             }
@@ -136,35 +130,34 @@ s32 VFiPFSTR_StrCmp(const PF_STR* p_str, const s8* s) {
 }
 
 s32 VFiPFSTR_StrNCmp(PF_STR* p_str, const s8* s, u32 target, s16 offset, u16 length) {
-    u16         wc;
-    const u16*  wp;
+    u16 wc;
+    const u16* wp;
 
-    const s8*   p1;
-    const s8*   p2;
+    const s8* p1;
+    const s8* p2;
 
-    s32         ret;
+    s32 ret;
 
     if (p_str->code_mode == PF_STR_CODE_MODE_CHAR) {
         if (target == PF_STR_TARGET_HEAD) {
             p1 = (s8*)p_str->p_head + offset;
-        }
-        else {
+        } else {
             p1 = (s8*)p_str->p_tail + offset;
         }
         p2 = (s8*)s;
 
         ret = VFipf_strncmp(p1, p2, length);
-    }
-    else {
+    } else {
         if (target == PF_STR_TARGET_HEAD) {
             wp = (u16*)p_str->p_head + offset;
-        }
-        else {
+        } else {
             wp = (u16*)p_str->p_tail + offset;
         }
 
         do {
-            (VFipf_vol_set.codeset.oem2unicode)((s8*)s, &wc); s++; length--;
+            (VFipf_vol_set.codeset.oem2unicode)((s8*)s, &wc);
+            s++;
+            length--;
             if (*wp++ != wc || length <= 0) {
                 break;
             }
@@ -183,8 +176,7 @@ void VFiPFSTR_ToUpperNStr(PF_STR* p_str, u16 num, s8* dst) {
         for (; num > 0 && *p != 0; p++, num--) {
             *dst++ = (s8)VFipf_toupper(*p);
         }
-    }
-    else {
+    } else {
         u16* wp = (u16*)p_str->p_head;
         u16 wc;
 
@@ -192,7 +184,7 @@ void VFiPFSTR_ToUpperNStr(PF_STR* p_str, u16 num, s8* dst) {
             wc = ('a' <= *wp && *wp <= 'z') ? *wp + ('A' - 'a') : *wp;
 
             *(dst) = (s8)wc;
-            *(dst+1) = (s8)(wc >> 8);
+            *(dst + 1) = (s8)(wc >> 8);
 
             dst += 2;
         }

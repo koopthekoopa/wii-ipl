@@ -10,7 +10,8 @@ namespace nw4r {
             mExtFileRoot[1] = '\0';
         }
 
-        SoundArchive::~SoundArchive() {}
+        SoundArchive::~SoundArchive() {
+        }
 
         bool SoundArchive::IsAvailable() const {
             return mFileReader;
@@ -163,15 +164,13 @@ namespace nw4r {
             return OpenStream(buffer, bufferSize, groupInfo.waveDataOffset, groupInfo.waveDataSize);
         }
 
-
         ut::FileStream* SoundArchive::OpenExtStreamImpl(void* buffer, int bufferSize, const char* extPath, u32 offset, u32 size) const {
             char pathBuffer[FILE_PATH_MAX];
             const char* pFullPath;
 
             if (extPath[0] == '/') {
                 pFullPath = extPath;
-            }
-            else {
+            } else {
                 u32 fileLen = strlen(extPath);
                 u32 dirLen = strlen(mExtFileRoot);
 
@@ -202,5 +201,5 @@ namespace nw4r {
             // @bug Long path can overflow mExtFileRoot buffer
             strncpy(mExtFileRoot, pExtFileRoot, len);
         }
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r

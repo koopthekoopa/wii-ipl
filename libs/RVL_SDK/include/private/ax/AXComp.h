@@ -13,4 +13,4 @@ extern u16 __AXCompressorTable[];
 }
 #endif
 
-#endif // PRIVATE_AX_COMP_H
+#endif  // PRIVATE_AX_COMP_H

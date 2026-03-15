@@ -8,4 +8,4 @@ void SSL_InitMutex(OSMutex* mutex_p);
 void SSL_LockMutex(OSMutex* mutex_p);
 void SSL_UnlockMutex(OSMutex* mutex_p);
 
-#endif // PRIVATE_SSL_H
+#endif  // PRIVATE_SSL_H

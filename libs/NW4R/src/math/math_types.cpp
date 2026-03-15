@@ -6,6 +6,7 @@ namespace nw4r {
             register f32 a, b, c;
             a = 0.0f;
             b = 1.0f;
+            // clang-format off
             #ifdef __MWERKS__
                 asm {
                     psq_st a, 8(pMtx), 0, 0
@@ -19,7 +20,8 @@ namespace nw4r {
                     psq_st a, 48(pMtx), 0, 0
                     psq_st c, 56(pMtx), 0, 0
                 }
-            #endif
+            #endif // __MWERKS__
+            // clang-format on
         }
 
         VEC4* VEC4Transform(VEC4* pOut, const MTX44* pM, const VEC4* pV) {
@@ -35,5 +37,5 @@ namespace nw4r {
             pOut->w = tmp.w;
             return pOut;
         }
-    }
-}
+    }  // namespace math
+}  // namespace nw4r

@@ -1,5 +1,5 @@
-#include <revolution/cdb.h>
 #include <private/cdb.h>
+#include <revolution/cdb.h>
 
 #include <revolution/vf.h>
 

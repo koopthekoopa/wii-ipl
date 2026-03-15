@@ -1,9 +1,9 @@
 #ifndef PRIVATE_NAND_PRIVATE_H
 #define PRIVATE_NAND_PRIVATE_H
 
-#include <revolution/types.h>
-#include <revolution/nand.h>
 #include <private/fs.h>
+#include <revolution/nand.h>
+#include <revolution/types.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,13 +16,14 @@ s32 NANDPrivateOpen(const char* path, NANDFileInfo* info, u8 accType);
 s32 NANDPrivateOpenAsync(const char* path, NANDFileInfo* info, u8 accType, NANDCallback callback, NANDCommandBlock* block);
 
 s32 NANDPrivateSafeOpen(const char* path, NANDFileInfo* info, u8 accType, void* buffer, u32 length);
-s32 NANDPrivateSafeOpenAsync(const char* path, NANDFileInfo* info, u8 accType, void* buffer, u32 length, NANDCallback callback, NANDCommandBlock* block);
+s32 NANDPrivateSafeOpenAsync(const char* path, NANDFileInfo* info, u8 accType, void* buffer, u32 length, NANDCallback callback,
+                             NANDCommandBlock* block);
 
 s32 NANDPrivateGetTypeAsync(const char* path, u8* type, NANDCallback callback, NANDCommandBlock* block);
 
 s32 NANDPrivateMove(const char* path, const char* destDir);
 
-s32 NANDPrivateGetStatus(const char* path, NANDStatus *status);
+s32 NANDPrivateGetStatus(const char* path, NANDStatus* status);
 s32 NANDPrivateGetStatusAsync(const char* path, NANDStatus* status, NANDCallback callback, NANDCommandBlock* block);
 
 s32 NANDPrivateSetStatus(const char* path, NANDStatus* status);
@@ -43,4 +44,4 @@ s32 NANDPrivateReadDir(const char* path, char* nameList, u32* num);
 }
 #endif
 
-#endif // PRIVATE_NAND_PRIVATE_H
+#endif  // PRIVATE_NAND_PRIVATE_H

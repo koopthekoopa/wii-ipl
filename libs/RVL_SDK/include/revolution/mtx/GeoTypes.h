@@ -16,15 +16,15 @@ typedef struct {
 } S16Vec, *S16VecPtr;
 
 typedef struct Vec2 {
-    f32 x; // 0x00
-    f32 y; // 0x04
+    f32 x;  // 0x00
+    f32 y;  // 0x04
 } Vec2;
 
 typedef struct Rect {
-    f32 left;   // 0x00
-    f32 top;    // 0x04
-    f32 right;  // 0x08
-    f32 bottom; // 0x0C
+    f32 left;    // 0x00
+    f32 top;     // 0x04
+    f32 right;   // 0x08
+    f32 bottom;  // 0x0C
 } Rect;
 
 typedef struct {
@@ -53,4 +53,4 @@ typedef f32 (*ROMtxPtr)[4];
 }
 #endif
 
-#endif // REVOLUTION_MTX_GEO_TYPES_H
+#endif  // REVOLUTION_MTX_GEO_TYPES_H

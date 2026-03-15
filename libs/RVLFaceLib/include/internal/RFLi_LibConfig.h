@@ -10,6 +10,8 @@
 extern "C" {
 #endif
 
+// clang-format off
+
 /* Available builds:
     20080218 (used)
     20080306
@@ -31,8 +33,10 @@ extern "C" {
 #define RFL_ALIGN           8
 #define RFL_BUFFER_ALIGN    DEFAULT_ALIGN /* 32 */
 
+// clang-format on
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif // RFLi_CONFIGURATION_H
+#endif  // RFLi_CONFIGURATION_H

@@ -5,8 +5,8 @@
 
 #include <internal/RFLi_Debug.h>
 
-#include <revolution/os.h>
 #include <revolution/mem.h>
+#include <revolution/os.h>
 #include <revolution/verdefs.h>
 
 #include <string.h>
@@ -17,24 +17,23 @@ SDKDefineVersionDebug(RFL, "Mar  6 2008", "17:40:04", "17:39:52");
 SDKDefineVersion(RFL, "Feb 18 2008", "09:37:42");
 #else
 #error "Unsupported version! Check RFLi_LibConfig.h"
-#endif // RFL_BUILD
+#endif  // RFL_BUILD
 
-#define RFLi_WORK_SIZE       0x4B000
+#define RFLi_WORK_SIZE 0x4B000
 #define RFLi_DELUX_WORK_SIZE 0x64000
 
-static RFLiSysManager*          sRFLManager = NULL;
+static RFLiSysManager* sRFLManager = NULL;
 
-static RFLErrcode               sRFLLastErrCode = RFLErrcode_NotAvailable;
-static s32                      sRFLLastReason = 0;
-static u8                       sRFLBrokenType = 0;
+static RFLErrcode sRFLLastErrCode = RFLErrcode_NotAvailable;
+static s32 sRFLLastReason = 0;
+static u8 sRFLBrokenType = 0;
 
 static const RFLiCoordinateData scCoordinate = {1, 2, 0, 0, 0, 0};
 
 u32 RFLGetWorkSize(BOOL useDeluxTex) {
     if (useDeluxTex) {
         return RFLi_DELUX_WORK_SIZE + sizeof(RFLiSysManager);
-    }
-    else {
+    } else {
         return RFLi_WORK_SIZE + sizeof(RFLiSysManager);
     }
 }
@@ -52,8 +51,7 @@ RFLErrcode RFLInitResAsync(void* workBuffer, void* resBuffer, u32 resSize, BOOL 
     // Must need the RFL resource data
     if (resBuffer == NULL) {
         return RFLErrcode_Fatal;
-    }
-    else {
+    } else {
         RFLi_REPORT("---------- RVLFaceLib::RFLInit() --------------\n");
 
         if (RFLiGetManager() == NULL) {
@@ -73,7 +71,8 @@ RFLErrcode RFLInitResAsync(void* workBuffer, void* resBuffer, u32 resSize, BOOL 
                 sRFLLastReason = 0;
                 sRFLBrokenType = 0;
 
-                RFLi_REPORT(" manager   : 0x%08x - 0x%08x (%6dByte)\n", (u8*)sRFLManager, ((u8*)sRFLManager + sizeof(RFLiSysManager)), sizeof(RFLiSysManager));
+                RFLi_REPORT(" manager   : 0x%08x - 0x%08x (%6dByte)\n", (u8*)sRFLManager, ((u8*)sRFLManager + sizeof(RFLiSysManager)),
+                            sizeof(RFLiSysManager));
                 RFLiGetManager()->mWorkBuffer = ((u8*)workBuffer + sizeof(RFLiSysManager));
             }
 
@@ -82,12 +81,12 @@ RFLErrcode RFLInitResAsync(void* workBuffer, void* resBuffer, u32 resSize, BOOL 
                 u32 size;
                 if (useDeluxTex) {
                     size = (RFLi_DELUX_WORK_SIZE - sizeof(RFLiSysManager));
-                }
-                else {
+                } else {
                     size = (RFLi_WORK_SIZE - sizeof(RFLiSysManager));
                 }
                 RFLiGetManager()->mRootHeap = MEMCreateExpHeapEx(RFLiGetManager()->mWorkBuffer, size, 1);
-                RFLi_REPORT(" rootHeap  : 0x%08x - 0x%08x (%6dByte)\n", (u8*)RFLiGetManager()->mWorkBuffer, (size + (u32)RFLiGetManager()->mWorkBuffer), size);
+                RFLi_REPORT(" rootHeap  : 0x%08x - 0x%08x (%6dByte)\n", (u8*)RFLiGetManager()->mWorkBuffer,
+                            (size + (u32)RFLiGetManager()->mWorkBuffer), size);
             }
 
             // Initialize system heap
@@ -118,7 +117,7 @@ RFLErrcode RFLInitResAsync(void* workBuffer, void* resBuffer, u32 resSize, BOOL 
             // Prepare for icon and model callback
             RFLSetIconDrawDoneCallback(FALSE);
             RFLSetModelDrawDoneCallback(FALSE);
-#endif // RFL_BUILD
+#endif  // RFL_BUILD
 
             RFLiSetWorking(FALSE);
 
@@ -132,10 +131,11 @@ RFLErrcode RFLInitResAsync(void* workBuffer, void* resBuffer, u32 resSize, BOOL 
 #if RFL_BUILD >= 20080306
             // Prepare coordinates
             RFLiSetCoordinateData(&scCoordinate);
-#endif // RFL_BUILD
+#endif  // RFL_BUILD
 
             // Completed!!
-            RFLi_REPORT(" remain    : sys=%8dByte, tmp=%8dByte\n", MEMGetTotalFreeSizeForExpHeap(RFLiGetManager()->mSystemHeap), MEMGetTotalFreeSizeForExpHeap(RFLiGetManager()->mTmpHeap));
+            RFLi_REPORT(" remain    : sys=%8dByte, tmp=%8dByte\n", MEMGetTotalFreeSizeForExpHeap(RFLiGetManager()->mSystemHeap),
+                        MEMGetTotalFreeSizeForExpHeap(RFLiGetManager()->mTmpHeap));
             RFLi_REPORT(" initialize finished.\n");
 
             // Setup cache.
@@ -152,9 +152,8 @@ RFLErrcode RFLInitResAsync(void* workBuffer, void* resBuffer, u32 resSize, BOOL 
                 RFLExit();
             }
 
-            (void)0; // for debug match
-        }
-        else {
+            (void)0;  // for debug match
+        } else {
             // We already done that!!
             RFLi_REPORT(" already initialized.\n");
             errcode = RFLErrcode_Success;
@@ -240,7 +239,7 @@ void* RFLiAlloc32(u32 size) {
     return allocal_(size, RFL_BUFFER_ALIGN);
 }
 
-void RFLiFree(void *block)  {
+void RFLiFree(void* block) {
     MEMFreeToExpHeap(RFLiGetManager()->mTmpHeap, block);
 }
 
@@ -248,8 +247,7 @@ u32 RFLiGetUsedWorkSize() {
     if (RFLAvailable()) {
         MEMiHeapHead* heap = RFLiGetManager()->mTmpHeap;
         return MEMGetAllocatableSizeForExpHeap(heap) - MEMGetTotalFreeSizeForExpHeap(heap);
-    }
-    else {
+    } else {
         return 0;
     }
 }
@@ -395,7 +393,7 @@ BOOL RFLiNeedRepairError() {
 
 BOOL RFLiCriticalError() {
     u8* list = &sRFLBrokenType;
-    BOOL ret = FALSE; // Unused
+    BOOL ret = FALSE;  // Unused
 
     if (RFLAvailable()) {
         list = &RFLiGetManager()->mBrokenTypeList;

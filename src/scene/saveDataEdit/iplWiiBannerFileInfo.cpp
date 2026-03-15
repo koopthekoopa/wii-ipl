@@ -16,8 +16,8 @@ namespace ipl {
             mAnim_AltBackward = 0;
 
             // Init name
-            wmemset(mSaveName, 0, SAVE_NAME_LENGTH+1);
-            wmemset(mSaveSubName, 0, SAVE_NAME_LENGTH+1);
+            wmemset(mSaveName, 0, SAVE_NAME_LENGTH + 1);
+            wmemset(mSaveSubName, 0, SAVE_NAME_LENGTH + 1);
 
             // Init banner
             memset(mpBannerData, 0, SAVE_BANNER_TEX_SIZE);
@@ -103,9 +103,7 @@ namespace ipl {
             } while (i < SAVE_ICON_COUNT);
 
             // Init current frame texture
-            GXInitTexObj(&mCurIconTex, mpIconData[i-1],
-                        SAVE_ICON_TEX_WIDTH, SAVE_ICON_TEX_HEIGHT,
-                        GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP, GX_FALSE);
+            GXInitTexObj(&mCurIconTex, mpIconData[i - 1], SAVE_ICON_TEX_WIDTH, SAVE_ICON_TEX_HEIGHT, GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP, GX_FALSE);
         }
 
         GXTexObj* WiiBannerFileInfo::loadIconTexture() {
@@ -121,9 +119,7 @@ namespace ipl {
             } while (i < SAVE_ICON_COUNT);
 
             // Load current icon frame texture
-            GXInitTexObj(&mCurIconTex, mpIconData[i-1],
-                        SAVE_ICON_TEX_WIDTH, SAVE_ICON_TEX_HEIGHT,
-                        GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP, GX_FALSE);
+            GXInitTexObj(&mCurIconTex, mpIconData[i - 1], SAVE_ICON_TEX_WIDTH, SAVE_ICON_TEX_HEIGHT, GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP, GX_FALSE);
             GXLoadTexObj(&mCurIconTex, GX_TEXMAP0);
 
             return &mCurIconTex;
@@ -131,9 +127,7 @@ namespace ipl {
 
         GXTexObj* WiiBannerFileInfo::loadBannerTexture() {
             // Load current banner texture
-            GXInitTexObj(&mCurBannerTex, mpBannerData,
-                        SAVE_BANNER_TEX_WIDTH, SAVE_BANNER_TEX_HEIGHT,
-                        GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP, GX_FALSE);
+            GXInitTexObj(&mCurBannerTex, mpBannerData, SAVE_BANNER_TEX_WIDTH, SAVE_BANNER_TEX_HEIGHT, GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP, GX_FALSE);
             GXLoadTexObj(&mCurBannerTex, GX_TEXMAP0);
 
             return &mCurBannerTex;
@@ -150,7 +144,8 @@ namespace ipl {
             // Set max frame ticks
             int i = 0;
             for (i = 0; i < SAVE_ICON_COUNT; i++) {
-                if (get_iconspeed(i) == 0) break; // A frame with the speed of 0 indicates the end.
+                if (get_iconspeed(i) == 0)
+                    break;  // A frame with the speed of 0 indicates the end.
                 mAnim_MaxFrameTicks += (get_iconspeed_ticks(i));
             }
 
@@ -185,5 +180,5 @@ namespace ipl {
             }
             return (mFrameSpeed >> (frame * 2)) & 0b00000011;
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

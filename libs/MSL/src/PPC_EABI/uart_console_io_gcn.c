@@ -1,14 +1,15 @@
-#include <revolution/os.h>
 #include <private/euart.h>
+#include <revolution/os.h>
+
 #pragma exceptions on
 
-int __TRK_write_console(unsigned long, unsigned char *, size_t *, void *);
+int __TRK_write_console(unsigned long, unsigned char*, size_t*, void*);
 
-typedef void (* __idle_proc)  (void);
+typedef void (*__idle_proc)(void);
 
 static EUARTError __init_uart_console(void) {
-    EUARTError  err = 0;
-    static int  initialized = 0;
+    EUARTError err = 0;
+    static int initialized = 0;
 
     if (initialized == 0) {
         err = InitializeUART(57600);
@@ -19,7 +20,6 @@ static EUARTError __init_uart_console(void) {
     }
 
     return err;
-
 }
 
 int __write_console(unsigned long handle, unsigned char* buffer, size_t* count, void* ref) {

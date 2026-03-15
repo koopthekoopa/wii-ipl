@@ -1,6 +1,6 @@
 #include "scene/iplRootScene.h"
-#include "scene/misc/iplReboot.h"
 #include "scene/iplSceneCreator.h"
+#include "scene/misc/iplReboot.h"
 #include "scene/setting/iplSetting.h"
 
 #include "iplSystem.h"
@@ -28,19 +28,16 @@ namespace ipl {
                 if (SCGetUpdateType() == SC_UPDATE_TYPE_NONE) {
                     *initialScene = SCENE_SETTING;
                     *initialSubScene = Setting::ARG_SETUP;
-                }
-                else {
+                } else {
                     *initialScene = SCENE_SETTING;
                     *initialSubScene = Setting::ARG_UNK_5;
                 }
-            }
-            else {
+            } else {
                 // If the last play title had it's ticket expired, show the channel limit
                 if (utility::ESMisc::IsLastTicketExpired(NULL)) {
                     *initialScene = SCENE_LIMIT_OVER;
                     System::getResetHandler()->enableResetToMenu();
-                }
-                else {
+                } else {
                     // Depending on boot type
                     switch (System::getBS2BootType()) {
                         // Data management
@@ -98,5 +95,5 @@ namespace ipl {
                 TVRCManager::getHandle()->setEnable(FALSE);
             }
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

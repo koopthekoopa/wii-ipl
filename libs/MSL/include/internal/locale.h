@@ -7,8 +7,8 @@ extern "C" {
 
 #include <wchar.h>
 
-typedef int (*__decode_mbyte) (wchar_t*, const char*, size_t);
-typedef int (*__encode_mbyte) (char*, wchar_t);
+typedef int (*__decode_mbyte)(wchar_t*, const char*, size_t);
+typedef int (*__encode_mbyte)(char*, wchar_t);
 
 struct lconv {
     char* decimal_point;
@@ -54,12 +54,12 @@ struct _loc_mon_cmpt {
     char n_sign_posn;
     char* int_curr_symbol;
     char int_frac_digits;
-    char int_p_cs_precedes; 
-    char int_n_cs_precedes; 
-    char int_p_sep_by_space; 
-    char int_n_sep_by_space; 
-    char int_p_sign_posn; 
-    char int_n_sign_posn; 
+    char int_p_cs_precedes;
+    char int_n_cs_precedes;
+    char int_p_sep_by_space;
+    char int_n_sep_by_space;
+    char int_p_sign_posn;
+    char int_n_sign_posn;
 };
 
 struct _loc_num_cmpt {
@@ -91,25 +91,25 @@ struct _loc_coll_cmpt {
 };
 
 struct _loc_ctype_cmpt {
-    char name[8];                               // 0x0
-    const unsigned short* ctype_map_ptr;        // 0x8
-    const unsigned char* upper_map_ptr;         // 0xC
-    const unsigned char* lower_map_ptr;         // 0x10
-    const unsigned short* wctype_map_ptr;       // 0x14
-    const wchar_t* wupper_map_ptr;              // 0x18
-    const wchar_t* wlower_map_ptr;              // 0x1C
-    __decode_mbyte  decode_mb;
-    __encode_mbyte  encode_wc;
+    char name[8];                          // 0x00
+    const unsigned short* ctype_map_ptr;   // 0x08
+    const unsigned char* upper_map_ptr;    // 0xC
+    const unsigned char* lower_map_ptr;    // 0x10
+    const unsigned short* wctype_map_ptr;  // 0x14
+    const wchar_t* wupper_map_ptr;         // 0x18
+    const wchar_t* wlower_map_ptr;         // 0x1C
+    __decode_mbyte decode_mb;
+    __encode_mbyte encode_wc;
 };
 
 struct __locale {
-    struct __locale* next_locale;               // 0x0
-    char name[0x30];                            // 0x4
-    struct _loc_coll_cmpt* coll_cmpt_ptr;       // 0x34
-    struct _loc_ctype_cmpt* ctype_cmpt_ptr;     // 0x38
-    struct _loc_mon_cmpt* mon_cmpt_ptr;         // 0x3C
-    struct _loc_num_cmpt* num_cmpt_ptr;         // 0x40
-    struct _loc_time_cmpt* time_cmpt_ptr;       // 0x44
+    struct __locale* next_locale;            // 0x00
+    char name[0x30];                         // 0x04
+    struct _loc_coll_cmpt* coll_cmpt_ptr;    // 0x34
+    struct _loc_ctype_cmpt* ctype_cmpt_ptr;  // 0x38
+    struct _loc_mon_cmpt* mon_cmpt_ptr;      // 0x3C
+    struct _loc_num_cmpt* num_cmpt_ptr;      // 0x40
+    struct _loc_time_cmpt* time_cmpt_ptr;    // 0x44
 };
 
 extern struct __locale _current_locale;
@@ -119,4 +119,4 @@ extern struct lconv __lconv;
 }
 #endif
 
-#endif // MSL_INTERNAL_LOCALE_H
+#endif  // MSL_INTERNAL_LOCALE_H

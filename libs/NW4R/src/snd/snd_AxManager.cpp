@@ -3,35 +3,23 @@
 
 #include <nw4r/ut.h>
 
-#include <revolution/os.h>
 #include <revolution/dvd.h>
+#include <revolution/os.h>
 
-#include <cstring>
+
 #include <cstddef>
+#include <cstring>
+
 
 namespace nw4r {
     namespace snd {
         namespace detail {
             u8 AxManager::sZeroBuffer[ZERO_BUFFER_SIZE];
 
-            AxManager::AxManager() :
-            mOutputMode(OUTPUT_MODE_STEREO),
-            mZeroBufferAddress(NULL),
-            mCallbackList(),
-            mPrioVoiceList(),
-            mFreeVoiceList(),
-            mVoices(),
-            mInitialized(false),
-            mUpdateVoicePrioFlag(true),
-            mHomeButtonMuteFlag(false),
-            mDiskErrorFlag(false),
-            mHomeButtonMenuVolume(),
-            mMasterVolume(),
-            mVolumeForReset(),
-            mOldAidCallback(NULL),
-            mResetReadyCounter(-1),
-            mAuxUserVolume(),
-            mFxList() {
+            AxManager::AxManager()
+                : mOutputMode(OUTPUT_MODE_STEREO), mZeroBufferAddress(NULL), mCallbackList(), mPrioVoiceList(), mFreeVoiceList(), mVoices(),
+                  mInitialized(false), mUpdateVoicePrioFlag(true), mHomeButtonMuteFlag(false), mDiskErrorFlag(false), mHomeButtonMenuVolume(),
+                  mMasterVolume(), mVolumeForReset(), mOldAidCallback(NULL), mResetReadyCounter(-1), mAuxUserVolume(), mFxList() {
                 mHomeButtonMenuVolume.InitValue(1.0f);
                 mMasterVolume.InitValue(1.0f);
                 mVolumeForReset.InitValue(1.0f);
@@ -48,8 +36,8 @@ namespace nw4r {
                 return instance;
             }
 
-            #pragma push
-            #pragma ppc_iro_level 0 // uh
+#pragma push
+#pragma ppc_iro_level 0  // uh
             void AxManager::Init() {
                 if (mInitialized) {
                     return;
@@ -72,7 +60,7 @@ namespace nw4r {
                 mNextAxRegisterCallback = AXRegisterCallback(AxCallbackFunc);
                 mInitialized = true;
             }
-            #pragma pop
+#pragma pop
 
             f32 AxManager::GetOutputVolume() const {
                 f32 volume = mMasterVolume.GetValue();
@@ -89,8 +77,7 @@ namespace nw4r {
                         mDiskErrorFlag = false;
                         UpdateAllVoicesSync(AxVoice::SYNC_AX_VOICE);
                     }
-                }
-                else if (status != DVD_STATE_BUSY) {
+                } else if (status != DVD_STATE_BUSY) {
                     if (!mDiskErrorFlag) {
                         mDiskErrorFlag = true;
                         UpdateAllVoicesSync(AxVoice::SYNC_AX_VOICE);
@@ -268,7 +255,7 @@ namespace nw4r {
                     UpdateAllVoicesSync(AxVoice::SYNC_AX_VE);
                 }
             }
-            
+
             void AxManager::AxCallbackFunc() {
                 for (CallbackList::Iterator it = GetInstance().mCallbackList.GetBeginIter(); it != GetInstance().mCallbackList.GetEndIter();) {
                     CallbackList::Iterator currIt = it++;
@@ -385,8 +372,7 @@ namespace nw4r {
                     buffer[AX_DPL2_R] = ppChans[AX_DPL2_R];
                     buffer[AX_DPL2_LS] = ppChans[AX_DPL2_LS];
                     buffer[AX_DPL2_RS] = ppChans[AX_DPL2_RS];
-                }
-                else {
+                } else {
                     num = AX_STEREO_MAX;
 
                     buffer[AX_STEREO_L] = ppChans[AX_STEREO_L];
@@ -400,20 +386,17 @@ namespace nw4r {
                     for (int i = 0; i < num; i++) {
                         memset(buffer[i], 0, FX_BUFFER_SIZE);
                     }
-                }
-                else if (GetInstance().GetEffectList(bus).IsEmpty()) {
+                } else if (GetInstance().GetEffectList(bus).IsEmpty()) {
                     for (int i = 0; i < num; i++) {
                         memset(buffer[i], 0, FX_BUFFER_SIZE);
                     }
-                }
-                else {
-                    for (FxList::Iterator it = GetInstance().GetEffectList(bus).GetBeginIter();
-                        it != GetInstance().GetEffectList(bus).GetEndIter(); it++) {
-
+                } else {
+                    for (FxList::Iterator it = GetInstance().GetEffectList(bus).GetBeginIter(); it != GetInstance().GetEffectList(bus).GetEndIter();
+                         it++) {
                         it->UpdateBuffer(num, buffer, FX_BUFFER_SIZE, FX_SAMPLE_FORMAT, FX_SAMPLE_RATE, GetInstance().GetOutputMode());
                     }
                 }
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

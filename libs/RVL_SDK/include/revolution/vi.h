@@ -5,13 +5,12 @@
 extern "C" {
 #endif
 
-#include <revolution/vi/vitypes.h>
 #include <revolution/vi/vifuncs.h>
+#include <revolution/vi/vitypes.h>
+
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // REVOLUTION_VI_H
-
-
+#endif  // REVOLUTION_VI_H

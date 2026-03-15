@@ -1,22 +1,15 @@
-#include <revolution/card.h>
 #include <private/card.h>
+#include <revolution/card.h>
 
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 #include <string.h>
 
-#define SECTOR(x) ((x)*1024)
+#define SECTOR(x) ((x) * 1024)
 
 static u32 SectorSizeTable[8] = {
-    SECTOR(8),
-    SECTOR(16),
-    SECTOR(32),
-    SECTOR(64),
-    SECTOR(128),
-    SECTOR(256),
-    0,
-    0,
+    SECTOR(8), SECTOR(16), SECTOR(32), SECTOR(64), SECTOR(128), SECTOR(256), 0, 0,
 };
 
 static u32 LatencyTable[8] = {
@@ -69,8 +62,7 @@ static BOOL IsCard(u32 id) {
 int CARDProbe(s32 chan) {
     if (__OSPADButton & 0x80) {
         return 0;
-    }
-    else {
+    } else {
         return EXIProbe(chan);
     }
 }
@@ -89,11 +81,9 @@ static s32 DoMount(s32 chan) {
     if (card->mountStep == 0) {
         if (EXIGetID(chan, 0, &id) == 0) {
             result = CARD_RESULT_NOCARD;
-        }
-        else if (IsCard(id)) {
+        } else if (IsCard(id)) {
             result = CARD_RESULT_READY;
-        }
-        else {
+        } else {
             result = CARD_RESULT_WRONGDEVICE;
         }
 
@@ -117,8 +107,7 @@ static s32 DoMount(s32 chan) {
 
         if (CARDGetFastMode() && (card->vendorID >> 8) == 0xEC) {
             card->pageSize = 512;
-        }
-        else {
+        } else {
             card->pageSize = 128;
         }
 
@@ -153,8 +142,7 @@ static s32 DoMount(s32 chan) {
             __OSUnlockSramEx(TRUE);
 
             return result;
-        }
-        else {
+        } else {
             card->mountStep = 1;
 
             checkSum = 0;
@@ -198,8 +186,8 @@ static s32 DoMount(s32 chan) {
     }
 
     step = card->mountStep - 2;
-    result = __CARDRead(chan, (u32)card->sectorSize * step, CARD_SYSTEM_BLOCK_SIZE,
-                        (u8 *)card->workArea + (CARD_SYSTEM_BLOCK_SIZE * step), __CARDMountCallback);
+    result = __CARDRead(chan, (u32)card->sectorSize * step, CARD_SYSTEM_BLOCK_SIZE, (u8*)card->workArea + (CARD_SYSTEM_BLOCK_SIZE * step),
+                        __CARDMountCallback);
     if (result < 0) {
         __CARDPutControlBlock(card, result);
     }
@@ -222,8 +210,7 @@ void __CARDMountCallback(s32 chan, s32 result) {
                 result = DoMount(chan);
                 if (0 <= result)
                     return;
-            }
-            else {
+            } else {
                 result = __CARDVerify(card);
             }
             break;

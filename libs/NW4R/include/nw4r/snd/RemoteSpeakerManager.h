@@ -7,27 +7,27 @@ namespace nw4r {
     namespace snd {
         namespace detail {
             class RemoteSpeakerManager {
-                public:
-                    static RemoteSpeakerManager&    GetInstance();
+            public:
+                static RemoteSpeakerManager& GetInstance();
 
-                    RemoteSpeaker&                  GetRemoteSpeaker(int idx);
+                RemoteSpeaker& GetRemoteSpeaker(int idx);
 
-                    void Setup();
+                void Setup();
 
-                    static const int SPEAKER_ALARM_HZ = 150;
-                    static const int SPEAKER_ALARM_PERIOD_NSEC = static_cast<int>(1.0f / SPEAKER_ALARM_HZ * 1000 * 1000 * 1000);
+                static const int SPEAKER_ALARM_HZ = 150;
+                static const int SPEAKER_ALARM_PERIOD_NSEC = static_cast<int>(1.0f / SPEAKER_ALARM_HZ * 1000 * 1000 * 1000);
 
-                private:
-                    RemoteSpeakerManager();
+            private:
+                RemoteSpeakerManager();
 
-                    static void RemoteSpeakerAlarmProc(OSAlarm* alarm, OSContext* context);
+                static void RemoteSpeakerAlarmProc(OSAlarm* alarm, OSContext* context);
 
-                    bool            mInitialized;                   // 0x00
-                    OSAlarm         mRemoteSpeakerAlarm;            // 0x08
-                    RemoteSpeaker   mSpeaker[WPAD_MAX_CONTROLLERS]; // 0x38
+                bool mInitialized;                             // 0x00
+                OSAlarm mRemoteSpeakerAlarm;                   // 0x08
+                RemoteSpeaker mSpeaker[WPAD_MAX_CONTROLLERS];  // 0x38
             };
-            }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r
 
-#endif // NW4R_SND_REMOTE_SPEAKER_MANAGER_H
+#endif  // NW4R_SND_REMOTE_SPEAKER_MANAGER_H

@@ -1,17 +1,14 @@
 #include <nw4r/snd/ExternalSoundPlayer.h>
-#include <nw4r/snd/SoundPlayer.h>
 #include <nw4r/snd/SoundInstanceManager.h>
+#include <nw4r/snd/SoundPlayer.h>
 
 #include <nw4r/snd/SeqSound.h>
-#include <nw4r/snd/WaveSound.h>
 #include <nw4r/snd/StrmSound.h>
+#include <nw4r/snd/WaveSound.h>
 
 namespace nw4r {
     namespace snd {
-        SoundPlayer::SoundPlayer() :
-        mPlayableCount(1),
-        mPlayableLimit(1),
-        mUsePlayerHeap(false) {
+        SoundPlayer::SoundPlayer() : mPlayableCount(1), mPlayableLimit(1), mUsePlayerHeap(false) {
             InitParam();
         }
 
@@ -72,12 +69,10 @@ namespace nw4r {
         }
 
         void SoundPlayer::detail_InsertPriorityList(detail::BasicSound* sound) {
-            detail::BasicSoundPlayerPrioList::Iterator it =
-                mPriorityList.GetBeginIter();
+            detail::BasicSoundPlayerPrioList::Iterator it = mPriorityList.GetBeginIter();
 
             for (; it != mPriorityList.GetEndIter(); it++) {
-                if (sound->CalcCurrentPlayerPriority() <
-                    it->CalcCurrentPlayerPriority()) {
+                if (sound->CalcCurrentPlayerPriority() < it->CalcCurrentPlayerPriority()) {
                     break;
                 }
             }
@@ -107,8 +102,7 @@ namespace nw4r {
             }
         }
 
-        detail::SeqSound* SoundPlayer::detail_AllocSeqSound(int priority, int startPriority,
-                                                            detail::BasicSound::AmbientArgInfo* ambientArgInfo,
+        detail::SeqSound* SoundPlayer::detail_AllocSeqSound(int priority, int startPriority, detail::BasicSound::AmbientArgInfo* ambientArgInfo,
                                                             detail::ExternalSoundPlayer* extPlayer, u32 id,
                                                             detail::SoundInstanceManager<detail::SeqSound>* manager) {
             if (manager == NULL) {
@@ -148,10 +142,9 @@ namespace nw4r {
             return sound;
         }
 
-        detail::StrmSound* SoundPlayer::detail_AllocStrmSound(int priority, int startPriority,
-                                                            detail::BasicSound::AmbientArgInfo* ambientArgInfo,
-                                                            detail::ExternalSoundPlayer* extPlayer, u32 id,
-                                                            detail::SoundInstanceManager<detail::StrmSound>* manager) {
+        detail::StrmSound* SoundPlayer::detail_AllocStrmSound(int priority, int startPriority, detail::BasicSound::AmbientArgInfo* ambientArgInfo,
+                                                              detail::ExternalSoundPlayer* extPlayer, u32 id,
+                                                              detail::SoundInstanceManager<detail::StrmSound>* manager) {
             if (manager == NULL) {
                 return NULL;
             }
@@ -189,19 +182,16 @@ namespace nw4r {
             return sound;
         }
 
-        detail::WaveSound* SoundPlayer::detail_AllocWaveSound(int priority, int startPriority,
-                                                            detail::BasicSound::AmbientArgInfo* ambientArgInfo,
-                                                            detail::ExternalSoundPlayer* extPlayer, u32 id,
-                                                            detail::SoundInstanceManager<detail::WaveSound>* manager) {
-
+        detail::WaveSound* SoundPlayer::detail_AllocWaveSound(int priority, int startPriority, detail::BasicSound::AmbientArgInfo* ambientArgInfo,
+                                                              detail::ExternalSoundPlayer* extPlayer, u32 id,
+                                                              detail::SoundInstanceManager<detail::WaveSound>* manager) {
             if (manager == NULL) {
                 return NULL;
             }
 
             int priorityReduction = CalcPriorityReduction(ambientArgInfo, id);
 
-            startPriority = ut::Clamp(startPriority - priorityReduction, 0,
-                                    detail::BasicSound::PRIORITY_MAX);
+            startPriority = ut::Clamp(startPriority - priorityReduction, 0, detail::BasicSound::PRIORITY_MAX);
 
             if (!CheckPlayableSoundCount(startPriority, extPlayer)) {
                 return NULL;
@@ -238,7 +228,8 @@ namespace nw4r {
             if (ambientArgInfo != NULL) {
                 SoundParam param;
 
-                ambientArgInfo->paramUpdateCallback->detail_Update(&param, id, NULL, ambientArgInfo->arg, detail::BasicSound::AmbientParamUpdateCallback::PARAM_UPDATE_PRIORITY);
+                ambientArgInfo->paramUpdateCallback->detail_Update(&param, id, NULL, ambientArgInfo->arg,
+                                                                   detail::BasicSound::AmbientParamUpdateCallback::PARAM_UPDATE_PRIORITY);
 
                 priority = param.priority;
             }
@@ -246,7 +237,7 @@ namespace nw4r {
             return priority;
         }
 
-        void SoundPlayer::InitAmbientArg(detail::BasicSound* sound,detail::BasicSound::AmbientArgInfo* ambientArgInfo) {
+        void SoundPlayer::InitAmbientArg(detail::BasicSound* sound, detail::BasicSound::AmbientArgInfo* ambientArgInfo) {
             if (ambientArgInfo == NULL) {
                 return;
             }
@@ -259,10 +250,8 @@ namespace nw4r {
 
             memcpy(pExtArg, ambientArgInfo->arg, ambientArgInfo->argSize);
 
-            sound->SetAmbientParamCallback(ambientArgInfo->paramUpdateCallback,
-                                            ambientArgInfo->argUpdateCallback,
-                                            ambientArgInfo->argAllocaterCallback,
-                                            pExtArg);
+            sound->SetAmbientParamCallback(ambientArgInfo->paramUpdateCallback, ambientArgInfo->argUpdateCallback,
+                                           ambientArgInfo->argAllocaterCallback, pExtArg);
         }
 
         void SoundPlayer::SetPlayableSoundCount(int count) {
@@ -360,5 +349,5 @@ namespace nw4r {
 
             sound->SetPlayerHeap(NULL);
         }
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r

@@ -5,8 +5,8 @@
 static void* __AXFXAllocFunction(size_t size);
 static void __AXFXFreeFunction(void* block);
 
-AXFXAllocHook   __AXFXAlloc = __AXFXAllocFunction;
-AXFXFreeHook    __AXFXFree = __AXFXFreeFunction;
+AXFXAllocHook __AXFXAlloc = __AXFXAllocFunction;
+AXFXFreeHook __AXFXFree = __AXFXFreeFunction;
 
 static void* __AXFXAllocFunction(size_t size) {
     return OSAllocFromHeap(__OSCurrHeap, size);

@@ -9,12 +9,12 @@
 extern "C" {
 #endif
 
-int     OSDisableInterrupts();
-int     OSEnableInterrupts();
-int     OSRestoreInterrupts(int level);
+int OSDisableInterrupts();
+int OSEnableInterrupts();
+int OSRestoreInterrupts(int level);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // REVOLUTION_OS_INTERRUPT_H
+#endif  // REVOLUTION_OS_INTERRUPT_H

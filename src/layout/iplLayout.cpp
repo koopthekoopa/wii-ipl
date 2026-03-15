@@ -13,8 +13,7 @@ namespace ipl {
             FLAG_UNUSED,
         };
 
-        Animator::Animator(nw4r::lyt::AnimTransform* animTrans, bool bRecursive, bool bUnused) :
-        mAnimTrans(animTrans) {
+        Animator::Animator(nw4r::lyt::AnimTransform* animTrans, bool bRecursive, bool bUnused) : mAnimTrans(animTrans) {
             mFlags = 0;
 
             int anmType;
@@ -23,19 +22,18 @@ namespace ipl {
             if (animTrans->IsLoopData()) {
                 anmType = ANIM_TYPE_LOOP;
                 maxFrame = animTrans->GetFrameSize();
-            }
-            else {
+            } else {
                 anmType = ANIM_TYPE_FORWARD;
-                maxFrame = animTrans->GetFrameSize() - 1.0f; // Last frame
+                maxFrame = animTrans->GetFrameSize() - 1.0f;  // Last frame
             }
 
             utility::FrameController::init(anmType, maxFrame, 0.0f);
 
             if (bRecursive != FALSE) {
-                mFlags |= (1<<FLAG_RECURSIVE);
+                mFlags |= (1 << FLAG_RECURSIVE);
             }
             if (bUnused != FALSE) {
-                mFlags |= (1<<FLAG_UNUSED);
+                mFlags |= (1 << FLAG_UNUSED);
             }
         }
 
@@ -45,7 +43,8 @@ namespace ipl {
             setFrame();
         }
 
-        void Animator::setFlag(bool flag) {}
+        void Animator::setFlag(bool flag) {
+        }
 
         void Animator::setFrame() {
             mAnimTrans->SetFrame(mFrame);
@@ -63,27 +62,27 @@ namespace ipl {
             setFrame();
         }
 
-        PaneAnimator::PaneAnimator(nw4r::lyt::AnimTransform* animTrans, nw4r::lyt::Pane* pane, bool bRecursive, bool bUnused) :
-        Animator(animTrans, bRecursive, bUnused),
-        mPane(pane) {}
+        PaneAnimator::PaneAnimator(nw4r::lyt::AnimTransform* animTrans, nw4r::lyt::Pane* pane, bool bRecursive, bool bUnused)
+            : Animator(animTrans, bRecursive, bUnused), mPane(pane) {
+        }
 
         void PaneAnimator::bind() {
-            mPane->BindAnimation(mAnimTrans, mFlags & (1<<FLAG_RECURSIVE));
+            mPane->BindAnimation(mAnimTrans, mFlags & (1 << FLAG_RECURSIVE));
         }
 
         void PaneAnimator::setFlag(bool flag) {
-            mPane->SetAnimationEnable(mAnimTrans, flag, mFlags & (1<<FLAG_RECURSIVE));
+            mPane->SetAnimationEnable(mAnimTrans, flag, mFlags & (1 << FLAG_RECURSIVE));
         }
 
-        GroupAnimator::GroupAnimator(nw4r::lyt::AnimTransform* animTrans, nw4r::lyt::Group* group, bool bRecursive, bool bUnused) :
-        Animator(animTrans, bRecursive, bUnused),
-        mGroup(group) {}
+        GroupAnimator::GroupAnimator(nw4r::lyt::AnimTransform* animTrans, nw4r::lyt::Group* group, bool bRecursive, bool bUnused)
+            : Animator(animTrans, bRecursive, bUnused), mGroup(group) {
+        }
 
         void GroupAnimator::bind() {
             // Bind all panes contained in the group
             nw4r::lyt::PaneLinkList& list = mGroup->GetPaneList();
             for (nw4r::lyt::PaneLinkList::Iterator it = list.GetBeginIter(); it != list.GetEndIter(); ++it) {
-                it->mTarget->BindAnimation(mAnimTrans, mFlags & (1<<FLAG_RECURSIVE));
+                it->mTarget->BindAnimation(mAnimTrans, mFlags & (1 << FLAG_RECURSIVE));
             }
         }
 
@@ -91,45 +90,26 @@ namespace ipl {
             // Enable Animation on all panes contained in the group
             nw4r::lyt::PaneLinkList& list = mGroup->GetPaneList();
             for (nw4r::lyt::PaneLinkList::Iterator it = list.GetBeginIter(); it != list.GetEndIter(); ++it) {
-                it->mTarget->SetAnimationEnable(mAnimTrans, flag, mFlags & (1<<FLAG_RECURSIVE));
+                it->mTarget->SetAnimationEnable(mAnimTrans, flag, mFlags & (1 << FLAG_RECURSIVE));
             }
         }
 
-        Object::Object(EGG::Heap* heap, void* arcBuffer, const char* directory, const char* fileName) :
-        mLayout(),
-        mArc(),
-        mWBF1PrivateLink(),
-        mWBF2PrivateLink(),
-        mWBF1PublicLink(),
-        mWBF2PublicLink(),
-        mpHeap(heap),
-        mAllocator(heap, 4),
-        mDrawInfo(),
-        mCurLink(),
-        mArcLinks() {
+        Object::Object(EGG::Heap* heap, void* arcBuffer, const char* directory, const char* fileName)
+            : mLayout(), mArc(), mWBF1PrivateLink(), mWBF2PrivateLink(), mWBF1PublicLink(), mWBF2PublicLink(), mpHeap(heap), mAllocator(heap, 4),
+              mDrawInfo(), mCurLink(), mArcLinks() {
             attach(arcBuffer, directory);
             init_(fileName);
         }
 
-        Object::Object(EGG::Heap* heap, nand::LayoutFile* file, const char* directory, const char* fileName) :
-        mLayout(),
-        mArc(),
-        mWBF1PrivateLink(),
-        mWBF2PrivateLink(),
-        mWBF1PublicLink(),
-        mWBF2PublicLink(),
-        mpHeap(heap),
-        mAllocator(heap, 4),
-        mDrawInfo(),
-        mCurLink(),
-        mArcLinks() {
+        Object::Object(EGG::Heap* heap, nand::LayoutFile* file, const char* directory, const char* fileName)
+            : mLayout(), mArc(), mWBF1PrivateLink(), mWBF2PrivateLink(), mWBF1PublicLink(), mWBF2PublicLink(), mpHeap(heap), mAllocator(heap, 4),
+              mDrawInfo(), mCurLink(), mArcLinks() {
             u8* buffer;
 
             // Find layout from common
             if (file->getCmnFile() != NULL) {
                 buffer = file->getCmnFile()->getBuffer();
-            }
-            else {
+            } else {
                 buffer = NULL;
             }
             if (buffer != NULL) {
@@ -139,8 +119,7 @@ namespace ipl {
             // Find layout from language
             if (file->getLangFile() != NULL) {
                 buffer = file->getLangFile()->getBuffer();
-            }
-            else {
+            } else {
                 buffer = NULL;
             }
             if (buffer != NULL) {
@@ -196,11 +175,8 @@ namespace ipl {
         PaneAnimator* Object::bind_(const char* fileName, nw4r::lyt::Pane* pane, bool bRecursive, bool bUnused) {
             void* animBuf = mArc.GetResource(0, fileName);
 
-            PaneAnimator* anim = new(mpHeap, 4) PaneAnimator(mLayout.CreateAnimTransform(animBuf, &mArc),
-                                                                      pane,
-                                                                      bRecursive,
-                                                                      bUnused);
-        
+            PaneAnimator* anim = new (mpHeap, 4) PaneAnimator(mLayout.CreateAnimTransform(animBuf, &mArc), pane, bRecursive, bUnused);
+
             anim->bind();
             anim->setFlag(bUnused);
 
@@ -209,30 +185,22 @@ namespace ipl {
             return anim;
         }
 
-        void Animator::bind() {}
+        void Animator::bind() {
+        }
 
         GroupAnimator* Object::bindToGroup(const char* fileName, const char* groupName, bool bRecursive, bool bUnused) {
-            return bind_(fileName,
-                    mLayout.GetGroupContainer()->FindGroupByName(groupName),
-                    bRecursive,
-                    bUnused);
+            return bind_(fileName, mLayout.GetGroupContainer()->FindGroupByName(groupName), bRecursive, bUnused);
         }
 
         GroupAnimator* Object::bindToGroup(const char* fileName, nw4r::lyt::Group* group, bool bRecursive, bool bUnused) {
-            return bind_(fileName,
-                        group,
-                        bRecursive,
-                        bUnused);
+            return bind_(fileName, group, bRecursive, bUnused);
         }
 
         GroupAnimator* Object::bind_(const char* fileName, nw4r::lyt::Group* group, bool bRecursive, bool bUnused) {
             void* animBuf = mArc.GetResource(0, fileName);
 
-            GroupAnimator* anim = new(mpHeap, 4) GroupAnimator(mLayout.CreateAnimTransform(animBuf, &mArc),
-                                                                        group,
-                                                                        bRecursive,
-                                                                        bUnused);
-        
+            GroupAnimator* anim = new (mpHeap, 4) GroupAnimator(mLayout.CreateAnimTransform(animBuf, &mArc), group, bRecursive, bUnused);
+
             anim->bind();
             anim->setFlag(bUnused);
 
@@ -255,7 +223,7 @@ namespace ipl {
         bool Object::searchFile(const char* fileName) {
             return mArc.GetResource(0, fileName) != NULL;
         }
-        
+
         void Object::calc() {
             initLocationAdjust();
 
@@ -295,8 +263,7 @@ namespace ipl {
                 while (anim = static_cast<Animator*>(nw4r::ut::List_GetNext(&mAnims, anim)), anim != NULL) {
                     anim->play();
                 }
-            }
-            else {
+            } else {
                 anim = static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, animIdx));
                 anim->play();
             }
@@ -309,8 +276,7 @@ namespace ipl {
                 while (anim = static_cast<Animator*>(nw4r::ut::List_GetNext(&mAnims, anim)), anim != NULL) {
                     anim->setMaxFrame(maxFrame);
                 }
-            }
-            else {
+            } else {
                 anim = static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, animIdx));
                 anim->setMaxFrame(maxFrame);
             }
@@ -323,8 +289,7 @@ namespace ipl {
                 while (anim = static_cast<Animator*>(nw4r::ut::List_GetNext(&mAnims, anim)), anim != NULL) {
                     anim->setMinFrame(minFrame);
                 }
-            }
-            else {
+            } else {
                 anim = static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, animIdx));
                 anim->setMinFrame(minFrame);
             }
@@ -337,8 +302,7 @@ namespace ipl {
                 while (anim = static_cast<Animator*>(nw4r::ut::List_GetNext(&mAnims, anim)), anim != NULL) {
                     anim->setAnmType(type);
                 }
-            }
-            else {
+            } else {
                 anim = static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, animIdx));
                 anim->setAnmType(type);
             }
@@ -353,8 +317,7 @@ namespace ipl {
                 while (anim = static_cast<Animator*>(nw4r::ut::List_GetNext(&mAnims, anim)), anim != NULL) {
                     result |= anim->isPlaying();
                 }
-            }
-            else {
+            } else {
                 anim = static_cast<Animator*>(nw4r::ut::List_GetNth(&mAnims, animIdx));
                 result = anim->isPlaying();
             }
@@ -410,8 +373,7 @@ namespace ipl {
                 nw4r::math::VEC2 adjustScale(rect4x3.GetWidth() / rect16x9.GetWidth(), 1.0f);
                 mDrawInfo.SetLocationAdjustScale(adjustScale);
                 mDrawInfo.SetLocationAdjust(true);
-            }
-            else {
+            } else {
                 // No adjustments here
                 mLayout.GetRootPane()->SetScale(nw4r::math::VEC2(1.0f, 1.0f));
 
@@ -430,15 +392,17 @@ namespace ipl {
 
         Object* Object::create(EGG::Heap* heap, u32 allocSize, nand::LayoutFile* file, const char* directory, const char* fileName) {
             EGG::ExpHeap* expHeap = EGG::ExpHeap::create(allocSize, heap, MEM_HEAP_OPT_DEBUG_FILL);
-            return new(expHeap, 4) Object(expHeap, file, directory, fileName);
+            return new (expHeap, 4) Object(expHeap, file, directory, fileName);
         }
 
         Object* Object::create(EGG::Heap* heap, u32 allocSize, void* buffer, const char* directory, const char* fileName) {
             EGG::ExpHeap* expHeap = EGG::ExpHeap::create(allocSize, heap, MEM_HEAP_OPT_DEBUG_FILL);
-            return new(expHeap, 4) Object(expHeap, buffer, directory, fileName);
+            return new (expHeap, 4) Object(expHeap, buffer, directory, fileName);
         }
 
-        PaneAnimator::~PaneAnimator() {}
-        GroupAnimator::~GroupAnimator() {}
-    }
-}
+        PaneAnimator::~PaneAnimator() {
+        }
+        GroupAnimator::~GroupAnimator() {
+        }
+    }  // namespace layout
+}  // namespace ipl

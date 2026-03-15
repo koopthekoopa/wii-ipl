@@ -17,31 +17,26 @@
 
 #include "utility/iplRBRUtility.h"
 
-#define RECORD_DATE_TO_CDB(x)       (CDBMakeCDBDate((x).year, (x).month, (x).day,   (x).hour, (x).min,   (x).sec))
-#define RECORD_DATE_TO_CDB_BEGIN(x) (CDBMakeCDBDate((x).year, (x).month, (x).day,   MIN_HOUR, MIN_MINUTE, MIN_SECOND))
-#define RECORD_DATE_TO_CDB_END(x)   (CDBMakeCDBDate((x).year, (x).month, (x).day,   MAX_HOUR, MAX_MINUTE, MAX_SECOND))
+#define RECORD_DATE_TO_CDB(x) (CDBMakeCDBDate((x).year, (x).month, (x).day, (x).hour, (x).min, (x).sec))
+#define RECORD_DATE_TO_CDB_BEGIN(x) (CDBMakeCDBDate((x).year, (x).month, (x).day, MIN_HOUR, MIN_MINUTE, MIN_SECOND))
+#define RECORD_DATE_TO_CDB_END(x) (CDBMakeCDBDate((x).year, (x).month, (x).day, MAX_HOUR, MAX_MINUTE, MAX_SECOND))
 
-#define DATE_TO_CDB_BEGIN(x)        (CDBMakeCDBDate((x).year, (x).month-1, (x).day, MIN_HOUR, MIN_MINUTE, MIN_SECOND))
-#define DATE_TO_CDB_END(x)          (CDBMakeCDBDate((x).year, (x).month-1, (x).day, MAX_HOUR, MAX_MINUTE, MAX_SECOND))
+#define DATE_TO_CDB_BEGIN(x) (CDBMakeCDBDate((x).year, (x).month - 1, (x).day, MIN_HOUR, MIN_MINUTE, MIN_SECOND))
+#define DATE_TO_CDB_END(x) (CDBMakeCDBDate((x).year, (x).month - 1, (x).day, MAX_HOUR, MAX_MINUTE, MAX_SECOND))
 
 namespace ipl {
     namespace scene {
         static const struct {
             f32 start, end;
-        } scAnmFrame[] = {
-            { 30.0f,  50.0f },
-            { 0.0f,   20.0f },
-            { 100.0f, 131.0f },
-            { 60.0f,  91.0f }
-        };
-        
+        } scAnmFrame[] = {{30.0f, 50.0f}, {0.0f, 20.0f}, {100.0f, 131.0f}, {60.0f, 91.0f}};
+
         static const char* scScrollPane[] = {
             "TopBack_a",
             "TopBack_b",
             "TopBack_c",
         };
 
-        static const wchar_t scNumber[] = {'0','1','2','3','4','5','6','7','8','9'};
+        static const wchar_t scNumber[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
         BOOL count_task_cb_(void* work, CDBRecord* record);
         void count_task_(void* work);
@@ -54,55 +49,34 @@ namespace ipl {
 
         void delete_task_(void* work);
 
-        #define OBJ_LIST_LOOP(...) {                \
-            BoardObject* object = NULL;             \
-            goto CONCAT(l,__LINE__);                \
-            do {                                    \
-                {__VA_ARGS__}                       \
-CONCAT(l,__LINE__):                                 \
-                object = mObjList.getNext(object);  \
-            } while (object != NULL);               \
-        }
+#define OBJ_LIST_LOOP(...)                                                                                                                           \
+    {                                                                                                                                                \
+        BoardObject* object = NULL;                                                                                                                  \
+        goto CONCAT(l, __LINE__);                                                                                                                    \
+        do {                                                                                                                                         \
+            {__VA_ARGS__} CONCAT(l, __LINE__) : object = mObjList.getNext(object);                                                                   \
+        } while (object != NULL);                                                                                                                    \
+    }
 
-        #define OBJ_LIST_LOOP_ALT(object, ...) {    \
-            goto CONCAT(l,__LINE__);                \
-            do {                                    \
-                {__VA_ARGS__}                       \
-CONCAT(l,__LINE__):                                 \
-                object = mObjList.getNext(object);  \
-            } while (object != NULL);               \
-        }
+#define OBJ_LIST_LOOP_ALT(object, ...)                                                                                                               \
+    {                                                                                                                                                \
+        goto CONCAT(l, __LINE__);                                                                                                                    \
+        do {                                                                                                                                         \
+            {__VA_ARGS__} CONCAT(l, __LINE__) : object = mObjList.getNext(object);                                                                   \
+        } while (object != NULL);                                                                                                                    \
+    }
 
         enum {
             FOCUS_ANIM_IN = 0,
             FOCUS_ANIM_OUT,
         };
 
-        Board::Board(EGG::Heap* heap, int unk) :
-        Base(heap),
-        ButtonEventHandlerBase(),
-        mState(STATE_WAIT_CDB_INIT),
-        mObjList(),
-        mbDoReadTask(false),
-        mbReading(false),
-        mbDoTaskDelete(false),
-        mbDoCountTask(false),
-        mbNewMsgAnimCount(false),
-        mCurrentDate(System::getCurrentTime()),
-        mPreviousDate(System::getCurrentTime()),
-        mpLayoutFile(NULL),
-        mpLayoutBg(NULL),
-        mpLayoutFocusBg(NULL),
-        mbRIconEnable(false),
-        mbLIconEnable(false),
-        mbFocusMode(false),
-        mbPlayDispSound(false),
-        mpCurrentFocus(NULL),
-        mMsgCount(-1),
-        mPrevMsgCount(-1),
-        mBoardSD(),
-        unk_0xFB4(false),
-        unk_0xFB8(unk) {
+        Board::Board(EGG::Heap* heap, int unk)
+            : Base(heap), ButtonEventHandlerBase(), mState(STATE_WAIT_CDB_INIT), mObjList(), mbDoReadTask(false), mbReading(false),
+              mbDoTaskDelete(false), mbDoCountTask(false), mbNewMsgAnimCount(false), mCurrentDate(System::getCurrentTime()),
+              mPreviousDate(System::getCurrentTime()), mpLayoutFile(NULL), mpLayoutBg(NULL), mpLayoutFocusBg(NULL), mbRIconEnable(false),
+              mbLIconEnable(false), mbFocusMode(false), mbPlayDispSound(false), mpCurrentFocus(NULL), mMsgCount(-1), mPrevMsgCount(-1), mBoardSD(),
+              unk_0xFB4(false), unk_0xFB8(unk) {
             setSceneParentFlags(SCN_PARENTFLAG_CALC | SCN_PARENTFLAG_DRAW);
 
             for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
@@ -202,8 +176,7 @@ CONCAT(l,__LINE__):                                 \
                             System::getCdbManager()->terminateSDProc();
                             mState = STATE_DONE;
                         }
-                    }
-                    else {
+                    } else {
                         mState = STATE_DONE;
                     }
                     break;
@@ -261,8 +234,7 @@ CONCAT(l,__LINE__):                                 \
                             if (mMsgCount <= 99) {
                                 mailCount = mMsgCount;
                             }
-                        }
-                        else {
+                        } else {
                             mailCount = 0;
                         }
 
@@ -278,8 +250,7 @@ CONCAT(l,__LINE__):                                 \
 
                         if (mailCount != 0) {
                             button->startMailNumAnm();
-                        }
-                        else {
+                        } else {
                             button->stopMailNumAnm();
                         }
 
@@ -297,11 +268,8 @@ CONCAT(l,__LINE__):                                 \
         void Board::draw() {
             if (mState != STATE_WAIT_CDB_INIT) {
                 if (System::onDrawLayer(scene::DRAW_LAYER_1)) {
-                    OBJ_LIST_LOOP({
-                        object->capture();
-                    });
-                }
-                else if (System::onDrawLayer(scene::DRAW_LAYER_2)) {
+                    OBJ_LIST_LOOP({ object->capture(); });
+                } else if (System::onDrawLayer(scene::DRAW_LAYER_2)) {
                     // Background
                     utility::Graphics::setOrtho();
                     mpLayoutBg->draw();
@@ -313,8 +281,7 @@ CONCAT(l,__LINE__):                                 \
                     OBJ_LIST_LOOP({
                         if (object->mState != BoardObject::STATE_PINCH) {
                             object->draw();
-                        }
-                        else {
+                        } else {
                             chosen = object;
                         }
                     });
@@ -380,7 +347,7 @@ CONCAT(l,__LINE__):                                 \
             if (!mbDoTaskDelete && !mbDoReadTask && !mbDoCountTask && !is_wait_to_clean_task()) {
                 result = TRUE;
             }
-            
+
             return result;
         }
 
@@ -391,18 +358,15 @@ CONCAT(l,__LINE__):                                 \
                     utility::Calendar::getYesterday(mCurrentDate, &yesterday);
                     if (yesterday == date) {
                         cmn_start_scroll_l();
-                    }
-                    else {
+                    } else {
                         cmn_start_scroll_l_hi(date);
                     }
-                }
-                else {
+                } else {
                     utility::Date tomorrow;
                     utility::Calendar::getTomorrow(mCurrentDate, &tomorrow);
                     if (tomorrow == date) {
                         cmn_start_scroll_r();
-                    }
-                    else {
+                    } else {
                         cmn_start_scroll_r_hi(date);
                     }
                 }
@@ -413,7 +377,7 @@ CONCAT(l,__LINE__):                                 \
             Button* button = get_button();
             button->setEventHandler(NULL);
 
-            mpCurrentFocus = new(System::getMem2App(), 4) focus_object(mpLayoutFile, mpBalloonFile, boardObject);
+            mpCurrentFocus = new (System::getMem2App(), 4) focus_object(mpLayoutFile, mpBalloonFile, boardObject);
 
             // Focus in
             mpLayoutFocusBg->getAnim(FOCUS_ANIM_IN)->play();
@@ -480,8 +444,8 @@ CONCAT(l,__LINE__):                                 \
             // Get record metadata
             CDBRecordGetCalendarTimeForce(record, &recordDate.year, &recordDate.month, &recordDate.day, &recordHour, &recordMin, &recordDay);
             CDBRecordGetKeyForce(record, &recordKey);
-            CDBRecordGetTypeForce(record,recordType);
-            CDBRecordGetGameCodeForce(record,(char*)&recordGC);
+            CDBRecordGetTypeForce(record, recordType);
+            CDBRecordGetGameCodeForce(record, (char*)&recordGC);
 
             if (mbReading == true && mSearchRecord_Prev.created) {
                 mbReading = false;
@@ -547,7 +511,7 @@ CONCAT(l,__LINE__):                                 \
             }
 
             // Read CDB metadata
-            u8* rbrData = new(obj->mpHeap, DEFAULT_ALIGN) u8[dataSize];
+            u8* rbrData = new (obj->mpHeap, DEFAULT_ALIGN) u8[dataSize];
             if (rbrData == NULL) {
                 return FALSE;
             }
@@ -574,57 +538,55 @@ CONCAT(l,__LINE__):                                 \
                     obj->create(mpLayoutFile, rbrData, recordGC, cdbId, recordKey, recordDate);
                     mObjList.append(obj);
 
-                    CDBRecordGetCalendarTimeForce(record, &mSearchRecord_Next.year, &mSearchRecord_Next.month, &mSearchRecord_Next.day, &mSearchRecord_Next.hour, &mSearchRecord_Next.min, &mSearchRecord_Next.sec);
+                    CDBRecordGetCalendarTimeForce(record, &mSearchRecord_Next.year, &mSearchRecord_Next.month, &mSearchRecord_Next.day,
+                                                  &mSearchRecord_Next.hour, &mSearchRecord_Next.min, &mSearchRecord_Next.sec);
                     memcpy(&mSearchRecord_Next.key, &recordKey, sizeof(CDBRecordKey));
 
                     mSearchRecord_Next.created = true;
                     if (mSearchRecord_Prev.created == false) {
                         memcpy(&mSearchRecord_Prev, &mSearchRecord_Next, sizeof(SearchRecord));
-                    }    
-                }
-                else {
+                    }
+                } else {
                     result = FALSE;
                     delete[] rbrData;
                 }
 
                 OSRestoreInterrupts(old3);
-            }
-            else {
+            } else {
                 delete[] rbrData;
             }
 
-close:
+        close:
             cdbManager->close(record);
 
-hide_icon:
+        hide_icon:
             if (mSearchDirection == CDB_SEARCH_DIRECTION_LEFT) {
                 hide_licon();
-            }
-            else {
+            } else {
                 hide_ricon();
             }
 
             goto out;
 
-show_icon:
+        show_icon:
             if (mSearchDirection == CDB_SEARCH_DIRECTION_LEFT) {
                 show_licon();
-            }
-            else {
+            } else {
                 show_ricon();
             }
 
             result = FALSE;
             goto out;
 
-error:
+        error:
             result = FALSE;
-out:
+        out:
             return result;
         }
 
         void Board::stt_wait_cdb_init() {
-            if ((System::createdAfterAndLibMgr() || (System::hasCreatedAfter() && System::isNandFull()) || (System::isSafeMode())) && System::getChannelManager()->isInitialized()) {
+            if ((System::createdAfterAndLibMgr() || (System::hasCreatedAfter() && System::isNandFull()) || (System::isSafeMode())) &&
+                System::getChannelManager()->isInitialized()) {
                 System::getHomeButtonMenu()->enableLib();
 
                 // Scene order = Button > Channel Select > Arrow
@@ -722,10 +684,8 @@ out:
             scene::Manager* scnMgr = System::getSceneManager();
             Button* button = static_cast<Button*>(scnMgr->getScene(SCENE_BUTTON));
 
-            if (scnMgr->getScene(SCENE_CHANNEL_SELECT) == NULL
-            && scnMgr->getScene(SCENE_CALENDAR) == NULL
-            && scnMgr->getScene(SCENE_MAIL_ADDRESS_SELECT) == NULL
-            && scnMgr->getReservedScene() == NULL) {
+            if (scnMgr->getScene(SCENE_CHANNEL_SELECT) == NULL && scnMgr->getScene(SCENE_CALENDAR) == NULL &&
+                scnMgr->getScene(SCENE_MAIL_ADDRESS_SELECT) == NULL && scnMgr->getReservedScene() == NULL) {
                 if (!unk_0xFB4) {
                     if (mbFocusMode) {
                         mpLayoutFocusBg->getAnim(FOCUS_ANIM_OUT)->play();
@@ -745,8 +705,7 @@ out:
 
                     mState = STATE_NORMAL;
                 }
-            }
-            else {
+            } else {
                 if (static_cast<ChannelTitle*>(System::getScene(SCENE_CHANNEL_TITLE)) != NULL) {
                     if (static_cast<ChannelTitle*>(System::getScene(SCENE_CHANNEL_TITLE))->isInLaunching()) {
                         return;
@@ -771,8 +730,8 @@ out:
                     return;
                 }
 
-                if (scnMgr->getScene(SCENE_CHANNEL_SELECT) != NULL && System::requestedNewMailAnm()
-                && (mPrevMsgCount >= 0 && mMsgCount > 0 && mPrevMsgCount < mMsgCount)) {
+                if (scnMgr->getScene(SCENE_CHANNEL_SELECT) != NULL && System::requestedNewMailAnm() &&
+                    (mPrevMsgCount >= 0 && mMsgCount > 0 && mPrevMsgCount < mMsgCount)) {
                     mPrevMsgCount = mMsgCount;
                     button->startNewMailAnm();
 
@@ -791,9 +750,8 @@ out:
         void Board::stt_wait_child_cst() {
             scene::Manager* scnMgr = System::getSceneManager();
 
-            if (scnMgr->getScene(SCENE_CHANNEL_SELECT) != NULL
-            || scnMgr->getScene(SCENE_CALENDAR) != NULL
-            || scnMgr->getScene(SCENE_MAIL_ADDRESS_SELECT) != NULL) {
+            if (scnMgr->getScene(SCENE_CHANNEL_SELECT) != NULL || scnMgr->getScene(SCENE_CALENDAR) != NULL ||
+                scnMgr->getScene(SCENE_MAIL_ADDRESS_SELECT) != NULL) {
                 mState = STATE_WAIT_CHILD_DST;
             }
         }
@@ -811,12 +769,10 @@ out:
 
                 scene::Manager* scnMgr = System::getSceneManager();
 
-                if (scnMgr->getScene(SCENE_CALENDAR) != NULL
-                || scnMgr->getScene(SCENE_CHANNEL_SELECT) != NULL
-                || scnMgr->getReservedScene() != NULL) {
+                if (scnMgr->getScene(SCENE_CALENDAR) != NULL || scnMgr->getScene(SCENE_CHANNEL_SELECT) != NULL ||
+                    scnMgr->getReservedScene() != NULL) {
                     mState = STATE_WAIT_CHILD_DST;
-                }
-                else {
+                } else {
                     edge_arrow();
                     mState = STATE_NORMAL;
                 }
@@ -857,8 +813,7 @@ out:
                     exec_count_task();
                     System::getNwc24Manager()->prepNextReceive();
                     System::stopRequestNewMailAnm();
-                }
-                else {
+                } else {
                     if (mObjList.getFreeCount() != 0) {
                         if (mSearchDirection == CDB_SEARCH_DIRECTION_LEFT) {
                             SearchRecord record;
@@ -880,13 +835,11 @@ out:
 
                         System::getNwc24Manager()->prepNextReceive();
                         System::stopRequestNewMailAnm();
-                    }
-                    else {
+                    } else {
                         if (!result) {
                             if (mSearchDirection == CDB_SEARCH_DIRECTION_LEFT) {
                                 memcpy(&mSearchRecord, &mSearchRecord_Prev, sizeof(SearchRecord));
-                            }
-                            else {
+                            } else {
                                 memcpy(&mSearchRecord, &mSearchRecord_Next, sizeof(SearchRecord));
                             }
 
@@ -1117,8 +1070,7 @@ out:
                         // Refresh
                         mbDoReadTask = true;
                         System::getTask1()->request(read_task_, this, NULL);
-                    }
-                    else if (mObjList.getCount() == 0 && mbRIconEnable) {
+                    } else if (mObjList.getCount() == 0 && mbRIconEnable) {
                         init_search_condition();
 
                         mSearchDirection = CDB_SEARCH_DIRECTION_RIGHT;
@@ -1141,16 +1093,13 @@ out:
             if (!mbDoReadTask) {
                 if (mSearchDirection == CDB_SEARCH_DIRECTION_LEFT) {
                     memcpy(&mSearchRecord, &mSearchRecord_Next, sizeof(SearchRecord));
-                }
-                else {
+                } else {
                     memcpy(&mSearchRecord, &mSearchRecord_Prev, sizeof(SearchRecord));
                 }
 
                 mSearchDirection = CDB_SEARCH_DIRECTION_LEFT;
 
-                OBJ_LIST_LOOP({
-                    object->right_away();
-                });
+                OBJ_LIST_LOOP({ object->right_away(); });
 
                 snd::getSystem()->startSEwithPos("WIPL_SE_MSG_HOUSE", 300.0f);
 
@@ -1162,16 +1111,13 @@ out:
             if (!mbDoReadTask) {
                 if (mSearchDirection == CDB_SEARCH_DIRECTION_RIGHT) {
                     memcpy(&mSearchRecord, &mSearchRecord_Next, sizeof(SearchRecord));
-                }
-                else {
+                } else {
                     memcpy(&mSearchRecord, &mSearchRecord_Prev, sizeof(SearchRecord));
                 }
 
                 mSearchDirection = CDB_SEARCH_DIRECTION_RIGHT;
 
-                OBJ_LIST_LOOP({
-                    object->left_away();
-                });
+                OBJ_LIST_LOOP({ object->left_away(); });
 
                 snd::getSystem()->startSEwithPos("WIPL_SE_MSG_HOUSE", -300.0f);
 
@@ -1182,20 +1128,16 @@ out:
         void Board::stt_wait_fadeaway() {
             bool result = mbDoReadTask == false;
             OBJ_LIST_LOOP({
-                result = (result & (!object->mbRightWay
-                                && !object->mbLeftWay
-                                && !object->mMoveAnim.isPlaying()
-                                && object->mpLayout != NULL
-                                && !object->mpLayout->getAnim(BoardObject::ANIM_NEXT_PAGE)->isPlaying())) != false
-                        && object->mbModifiedPos == false;
+                result = (result & (!object->mbRightWay && !object->mbLeftWay && !object->mMoveAnim.isPlaying() && object->mpLayout != NULL &&
+                                    !object->mpLayout->getAnim(BoardObject::ANIM_NEXT_PAGE)->isPlaying())) != false &&
+                         object->mbModifiedPos == false;
             });
 
             if (result) {
                 if (mSearchDirection == CDB_SEARCH_DIRECTION_LEFT) {
                     hide_licon();
                     show_ricon();
-                }
-                else {
+                } else {
                     hide_ricon();
                     show_licon();
                 }
@@ -1219,9 +1161,7 @@ out:
         void Board::stt_wait_stand() {
             bool result = TRUE;
 
-            OBJ_LIST_LOOP({
-                result &= (object->mState == STATE_WAIT_CHILD_CST);
-            });
+            OBJ_LIST_LOOP({ result &= (object->mState == STATE_WAIT_CHILD_CST); });
 
             if (result) {
                 mState = STATE_NORMAL;
@@ -1288,20 +1228,17 @@ out:
 
                 if (board->getSearchRecord().created) {
                     start = RECORD_DATE_TO_CDB(board->getSearchRecord());
-                }
-                else {
+                } else {
                     if (board->getSearchDirection() == CDB_SEARCH_DIRECTION_LEFT) {
                         start = DATE_TO_CDB_END(board->getDate());
-                    }
-                    else {
+                    } else {
                         start = DATE_TO_CDB_BEGIN(board->getDate());
                     }
                 }
 
                 if (board->getSearchDirection() == CDB_SEARCH_DIRECTION_LEFT) {
                     end = DATE_TO_CDB_BEGIN(board->getDate());
-                }
-                else {
+                } else {
                     end = DATE_TO_CDB_END(board->getDate());
                 }
 
@@ -1336,12 +1273,10 @@ out:
 
                 if (!cdbManager->isValidType(recordType)) {
                     return TRUE;
-                }
-                else {
+                } else {
                     if (board->is_already_read(recordKey.keyString)) {
                         return TRUE;
-                    }
-                    else {
+                    } else {
                         date.month++;
                         if (date == board->getDate()) {
                             board->show_ricon();
@@ -1389,7 +1324,7 @@ out:
         }
 
         void Board::set_text_date(const utility::Date& date, const char* paneName) {
-            #define TEXT_LENGTH 32
+#define TEXT_LENGTH 32
 
             wchar_t fullText[TEXT_LENGTH] = {0};
             memset(&fullText, 0, sizeof(fullText));
@@ -1439,18 +1374,11 @@ out:
             nw4r::lyt::TextBox* textBox = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpLayoutBg->FindPaneByName(paneName));
             textBox->SetString(fullText);
 
-            #undef TEXT_LENGTH
+#undef TEXT_LENGTH
         }
 
-        static const u32 scWeekMsgId[] = {
-            MESG_CALENDAR_MONDAY,
-            MESG_CALENDAR_MONDAY,
-            MESG_CALENDAR_TUESDAY,
-            MESG_CALENDAR_WEDNESDAY,
-            MESG_CALENDAR_THURSDAY,
-            MESG_CALENDAR_FRIDAY,
-            MESG_CALENDAR_SATURDAY
-        };
+        static const u32 scWeekMsgId[] = {MESG_CALENDAR_MONDAY,   MESG_CALENDAR_MONDAY, MESG_CALENDAR_TUESDAY, MESG_CALENDAR_WEDNESDAY,
+                                          MESG_CALENDAR_THURSDAY, MESG_CALENDAR_FRIDAY, MESG_CALENDAR_SATURDAY};
 
         void Board::get_text_jpn(const utility::Date& date, wchar_t* text, u32 textLen) {
             message::Manager* msgMgr = System::getMessageManager();
@@ -1517,11 +1445,10 @@ out:
 
             scene::Manager* scnMgr = System::getSceneManager();
 
-            if (scnMgr->getScene(SCENE_CHANNEL_SELECT) == NULL
-            && scnMgr->getScene(SCENE_CALENDAR) == NULL
-            && scnMgr->getScene(SCENE_MAIL_ADDRESS_SELECT) == NULL
-            && scnMgr->getReservedScene() == NULL) {
-                if (mState == STATE_NORMAL || (mState == STATE_PINCH || mState == STATE_INIT_LEFT_FADEAWAY || mState == STATE_INIT_RIGHT_FADEAWAY || mState == STATE_INIT_FADEAWAY)) {
+            if (scnMgr->getScene(SCENE_CHANNEL_SELECT) == NULL && scnMgr->getScene(SCENE_CALENDAR) == NULL &&
+                scnMgr->getScene(SCENE_MAIL_ADDRESS_SELECT) == NULL && scnMgr->getReservedScene() == NULL) {
+                if (mState == STATE_NORMAL || (mState == STATE_PINCH || mState == STATE_INIT_LEFT_FADEAWAY || mState == STATE_INIT_RIGHT_FADEAWAY ||
+                                               mState == STATE_INIT_FADEAWAY)) {
                     if (System::getSceneManager()->getScene(SCENE_BUTTON) != NULL && prev != mbRIconEnable) {
                         get_button()->animation(Button::IDANIM_RIGHT_ARROW_SHOW_LETTER);
                         if (!get_button()->isArrowVisible(Button::ARROW_BTN_RIGHT)) {
@@ -1548,11 +1475,10 @@ out:
 
             scene::Manager* scnMgr = System::getSceneManager();
 
-            if (scnMgr->getScene(SCENE_CHANNEL_SELECT) == NULL
-            && scnMgr->getScene(SCENE_CALENDAR) == NULL
-            && scnMgr->getScene(SCENE_MAIL_ADDRESS_SELECT) == NULL
-            && scnMgr->getReservedScene() == NULL) {
-                if (mState == STATE_NORMAL || (mState == STATE_PINCH || mState == STATE_INIT_LEFT_FADEAWAY || mState == STATE_INIT_RIGHT_FADEAWAY || mState == STATE_INIT_FADEAWAY)) {
+            if (scnMgr->getScene(SCENE_CHANNEL_SELECT) == NULL && scnMgr->getScene(SCENE_CALENDAR) == NULL &&
+                scnMgr->getScene(SCENE_MAIL_ADDRESS_SELECT) == NULL && scnMgr->getReservedScene() == NULL) {
+                if (mState == STATE_NORMAL || (mState == STATE_PINCH || mState == STATE_INIT_LEFT_FADEAWAY || mState == STATE_INIT_RIGHT_FADEAWAY ||
+                                               mState == STATE_INIT_FADEAWAY)) {
                     if (System::getSceneManager()->getScene(SCENE_BUTTON) != NULL && prev != mbLIconEnable) {
                         get_button()->animation(Button::IDANIM_LEFT_ARROW_SHOW_LETTER);
                         if (!get_button()->isArrowVisible(Button::ARROW_BTN_LEFT)) {
@@ -1643,8 +1569,7 @@ out:
                     if (!button->isArrowVisible(Button::ARROW_BTN_LEFT)) {
                         button->animation(Button::IDANIM_ARROW_LEFT_APPEAR);
                     }
-                }
-                else {
+                } else {
                     if (mCurrentDate == utility::Date::getMinDate()) {
                         if (button->isArrowVisible(Button::ARROW_BTN_LEFT) && mbLIconEnable != true) {
                             button->animation(Button::IDANIM_ARROW_LEFT_DISAPPEAR);
@@ -1652,8 +1577,7 @@ out:
                         if (!button->isArrowVisible(Button::ARROW_BTN_RIGHT)) {
                             button->animation(Button::IDANIM_ARROW_RIGHT_APPEAR);
                         }
-                    }
-                    else {
+                    } else {
                         appear_arrow();
                     }
                 }
@@ -1696,8 +1620,7 @@ out:
 
             if (date < mPreviousDate) {
                 ret = 0;
-            }
-            else if (date > mPreviousDate) {
+            } else if (date > mPreviousDate) {
                 ret = 2;
             }
 
@@ -1720,17 +1643,13 @@ out:
         void Board::set_key_table() {
             int i = 0;
 
-            OBJ_LIST_LOOP({
-                strncpy((char*)mKeyTable[i++], object->mCDBRecordKey.keyString, sizeof(object->mCDBRecordKey.keyString));
-            });
+            OBJ_LIST_LOOP({ strncpy((char*)mKeyTable[i++], object->mCDBRecordKey.keyString, sizeof(object->mCDBRecordKey.keyString)); });
         }
 
         BOOL Board::is_exist_diff_date() const {
             bool result = false;
 
-            OBJ_LIST_LOOP({
-                result |= (object->mBoardDate != mCurrentDate);
-            });
+            OBJ_LIST_LOOP({ result |= (object->mBoardDate != mCurrentDate); });
 
             return result;
         }
@@ -1827,9 +1746,7 @@ out:
         BOOL Board::is_wait_to_clean_task() const {
             bool result = false;
 
-            OBJ_LIST_LOOP({
-                result |= object->mbCleaned;
-            });
+            OBJ_LIST_LOOP({ result |= object->mbCleaned; });
 
             return result;
         }
@@ -1862,8 +1779,7 @@ out:
         void Board::after_backup() {
             if (System::getCdbManager()->isSDMounted()) {
                 mBoardSD.setState(2);
-            }
-            else {
+            } else {
                 System::getCdbManager()->getSDWorker()->mount_sd_async();
                 mBoardSD.setState(0);
             }
@@ -1885,7 +1801,7 @@ out:
             if (nwc24Mgr->open()) {
                 NWC24FriendAddr boardAddr = mpCurrentFocus->mpBoardObj->get_addr();
 
-                switch(mpCurrentFocus->mpBoardObj->get_addr_type()) {
+                switch (mpCurrentFocus->mpBoardObj->get_addr_type()) {
                     case NWC24_FRIENDTYPE_WII: {
                         if (nwc24Mgr->searchFriendInfo(boardAddr.wiiId, &index)) {
                             nwc24Mgr->readFriendInfo(&readInfo, index);
@@ -1893,13 +1809,11 @@ out:
 
                             if (info->attr.status == NWC24_FRIENDSTATUS_CONFIRMED) {
                                 result = FRIEND_CODE_ERR_SUCCESS;
-                            }
-                            else {
+                            } else {
                                 result = FRIEND_CODE_ERR_UNAVAILABLE;
                             }
                             break;
-                        }
-                        else {
+                        } else {
                             result = FRIEND_CODE_ERR_UNAVAILABLE;
                         }
                         break;
@@ -1911,13 +1825,11 @@ out:
 
                             if (info->attr.status == NWC24_FRIENDSTATUS_CONFIRMED) {
                                 result = FRIEND_CODE_ERR_SUCCESS;
-                            }
-                            else {
+                            } else {
                                 result = FRIEND_CODE_ERR_UNAVAILABLE;
                             }
                             break;
-                        }
-                        else {
+                        } else {
                             result = FRIEND_CODE_ERR_UNAVAILABLE;
                         }
                         break;
@@ -1962,8 +1874,7 @@ out:
 
                             updateDate(utility::Date(System::getCurrentTime()));
                             exec_count_task();
-                        }
-                        else if (mState == STATE_NORMAL && Button::cmpButtonName(paneName, Button::BTN_CALENDAR) == 0) {
+                        } else if (mState == STATE_NORMAL && Button::cmpButtonName(paneName, Button::BTN_CALENDAR) == 0) {
                             createChildScene(SCENE_CALENDAR, this, button);
                             cmn_create_child(Button::IDANIM_FROM_BOARD_TO_CALENDAR);
 
@@ -1972,8 +1883,7 @@ out:
                             mpLayoutFocusBg->getAnim(FOCUS_ANIM_IN)->play();
 
                             mbFocusMode = true;
-                        }
-                        else if (mState == STATE_NORMAL && Button::cmpButtonName(paneName, Button::BTN_CREATE) == 0) {
+                        } else if (mState == STATE_NORMAL && Button::cmpButtonName(paneName, Button::BTN_CREATE) == 0) {
                             createChildScene(SCENE_MAIL_ADDRESS_SELECT, this, button);
                             cmn_create_child(Button::IDANIM_FROM_BOARD_TO_MAIL_SEL);
 
@@ -1983,32 +1893,28 @@ out:
                             mpLayoutFocusBg->getAnim(FOCUS_ANIM_IN)->play();
 
                             mbFocusMode = true;
-                        }
-                        else if (mState == STATE_NORMAL && Button::cmpButtonName(paneName, Button::BTN_ARROW_RIGHT) == 0) {
+                        } else if (mState == STATE_NORMAL && Button::cmpButtonName(paneName, Button::BTN_ARROW_RIGHT) == 0) {
                             if (mbRIconEnable) {
                                 if (mbDoReadTask) {
                                     mbReading = true;
                                 }
                                 mState = STATE_INIT_RIGHT_FADEAWAY;
                                 button->animation(Button::IDANIM_ARROW_RIGHT_SELECT);
-                            }
-                            else {
+                            } else {
                                 if (mCurrentDate != utility::Date::getMaxDate()) {
                                     button->animation(Button::IDANIM_ARROW_RIGHT_SELECT);
                                     cmn_start_scroll_r();
                                     snd::getSystem()->startSE("WSD_SELECT");
                                 }
                             }
-                        }
-                        else if (mState == STATE_NORMAL && Button::cmpButtonName(paneName, Button::BTN_ARROW_LEFT) == 0) {
+                        } else if (mState == STATE_NORMAL && Button::cmpButtonName(paneName, Button::BTN_ARROW_LEFT) == 0) {
                             if (mbLIconEnable) {
                                 if (mbDoReadTask) {
                                     mbReading = true;
                                 }
                                 mState = STATE_INIT_LEFT_FADEAWAY;
                                 button->animation(Button::IDANIM_ARROW_LEFT_SELECT);
-                            }
-                            else {
+                            } else {
                                 if (mCurrentDate != utility::Date::getMinDate()) {
                                     button->animation(Button::IDANIM_ARROW_LEFT_SELECT);
                                     cmn_start_scroll_l();
@@ -2042,7 +1948,7 @@ out:
                                 return;
                             }
 
-                            u8* recordData = new(logObj->mpHeap, DEFAULT_ALIGN) u8[dataSize];
+                            u8* recordData = new (logObj->mpHeap, DEFAULT_ALIGN) u8[dataSize];
                             if (recordData == NULL) {
                                 logObj->destroy();
                                 mObjList.remove(logObj);
@@ -2079,13 +1985,12 @@ out:
             return logObj;
         }
 
-        Board::ObjList::ObjList() : 
-        mObjects() {
+        Board::ObjList::ObjList() : mObjects() {
             nw4r::ut::List_Init(&mUsedObjs, offsetof(BoardObject, mLinkNode));
             nw4r::ut::List_Init(&mFreeObjs, offsetof(BoardObject, mLinkNode));
 
             for (int i = 0; i < OBJECTS_ON_SCREEN; i++) {
-                nw4r::ut::List_Append(&mFreeObjs, &mObjects[i]); // Append blank data
+                nw4r::ut::List_Append(&mFreeObjs, &mObjects[i]);  // Append blank data
             }
         }
 
@@ -2096,5 +2001,5 @@ out:
         Arrow* Board::get_arrow() {
             return static_cast<Arrow*>(System::getScene(SCENE_ARROW));
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

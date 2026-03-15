@@ -13,8 +13,7 @@ namespace textinput {
             if (first != NULL) {
                 u32 index = (u32)(first - s_alphabet_map[ALPHABET_MAP_UPPER]);
                 return s_alphabet_map[ALPHABET_MAP_LOWER][index];
-            }
-            else {
+            } else {
                 return ch;
             }
         }
@@ -24,8 +23,7 @@ namespace textinput {
             if (first != NULL) {
                 u32 index = (u32)(first - s_alphabet_map[ALPHABET_MAP_LOWER]);
                 return s_alphabet_map[ALPHABET_MAP_UPPER][index];
-            }
-            else {
+            } else {
                 return ch;
             }
         }
@@ -60,8 +58,7 @@ namespace textinput {
             if (first != NULL) {
                 u32 index = (u32)(first - map[1]);
                 return map[0][index];
-            }
-            else {
+            } else {
                 return ch;
             }
         }
@@ -73,20 +70,11 @@ namespace textinput {
             L"ぁぃぅぇぉ　　　　　　　　　　　　っ　　　　　　　ゃゅょゎァィゥェォヵ　　ヶ　　　　　　　　ッ　　　　　　　ャュョヮ",
         };
 
-        static const wchar_t* s_dakuten_map[] = {
-            s_all_map[0],
-            s_all_map[1]
-        };
+        static const wchar_t* s_dakuten_map[] = {s_all_map[0], s_all_map[1]};
 
-        static const wchar_t* s_handaku_map[] = {
-            s_all_map[0],
-            s_all_map[2]
-        };
+        static const wchar_t* s_handaku_map[] = {s_all_map[0], s_all_map[2]};
 
-        static const wchar_t* s_small_map[] = {
-            s_all_map[0],
-            s_all_map[3]
-        };
+        static const wchar_t* s_small_map[] = {s_all_map[0], s_all_map[3]};
 
         wchar_t KBD_ConvertDakuten(wchar_t ch) {
             if (ch == L'　') {
@@ -99,8 +87,7 @@ namespace textinput {
                 wchar_t ch2 = ConvertDakutenEtc(s_dakuten_map, ch1);
                 if (ch2 != ch1) {
                     return ch2;
-                }
-                else {
+                } else {
                     return ch;
                 }
             }
@@ -111,8 +98,7 @@ namespace textinput {
                 wchar_t ch2 = ConvertDakutenEtc(s_dakuten_map, ch1);
                 if (ch2 != ch1) {
                     return ch2;
-                }
-                else {
+                } else {
                     return ch;
                 }
             }
@@ -131,8 +117,7 @@ namespace textinput {
                 wchar_t ch2 = ConvertDakutenEtc(s_handaku_map, ch1);
                 if (ch2 != ch1) {
                     return ch2;
-                }
-                else {
+                } else {
                     return ch;
                 }
             }
@@ -151,8 +136,7 @@ namespace textinput {
                 wchar_t ch2 = ConvertDakutenEtc(s_small_map, ch1);
                 if (ch2 != ch1) {
                     return ch2;
-                }
-                else {
+                } else {
                     return ch;
                 }
             }
@@ -182,8 +166,7 @@ namespace textinput {
                         return s_all_map[(i + j) % 4][offset];
                     }
                 }
-            }
-            else {
+            } else {
                 return ch;
             }
 
@@ -215,8 +198,7 @@ namespace textinput {
 
             if (strncmp(s1, s2, len) == 0) {
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         }
@@ -244,10 +226,9 @@ namespace textinput {
                 if (first != NULL) {
                     u32 offset = (u32)(first - map[i]);
 
-                    if (map[1-i][offset] != L'　') {
-                        return map[1-i][offset];
-                    }
-                    else {
+                    if (map[1 - i][offset] != L'　') {
+                        return map[1 - i][offset];
+                    } else {
                         return ch;
                     }
                 }
@@ -295,5 +276,5 @@ namespace textinput {
             rect->bottom = 228.0;
             rect->top = -228.0;
         }
-    }
-}
+    }  // namespace util
+}  // namespace textinput

@@ -1,6 +1,6 @@
+#include <private/os.h>
 #include <revolution/os.h>
 #include <revolution/os/OSBootInfo.h>
-#include <private/os.h>
 
 #include <revolution/vi.h>
 
@@ -14,16 +14,16 @@
 
 #include <string.h>
 
-#define FATAL_REPORT_X_POS  48
-#define FATAL_REPORT_Y_POS  100
+#define FATAL_REPORT_X_POS 48
+#define FATAL_REPORT_Y_POS 100
 
-#define BS2_REPORT_X_POS    480
-#define BS2_REPORT_Y_POS    420
+#define BS2_REPORT_X_POS 480
+#define BS2_REPORT_Y_POS 420
 
 typedef struct OSFatalParam {
-    GXColor     fg;     // 0x00
-    GXColor     bg;     // 0x04
-    const char* msg;    // 0x08
+    GXColor fg;       // 0x00
+    GXColor bg;       // 0x04
+    const char* msg;  // 0x08
 } OSFatalParam;
 
 static OSFatalParam FatalParam;
@@ -53,7 +53,7 @@ static void ScreenReport(void* xfb, u16 xfbW, u16 xfbH, GXColor yuv, s32 x, s32 
     u32 i, j;
     u32 image[72];
     u32 k, l;
-    u8  Y;
+    u8 Y;
     u32 pixel;
     s32 col;
 
@@ -76,8 +76,8 @@ loop:
 
             for (i = 0; i < 24; i++) {
                 j = (i & 7) + ((i >> 3) * 24);
-                image[j + 0]  = 0;
-                image[j + 8]  = 0;
+                image[j + 0] = 0;
+                image[j + 8] = 0;
                 image[j + 16] = 0;
             }
 
@@ -98,8 +98,7 @@ loop:
                         if ((col + k) & 1) {
                             ptr[(pixel * 2) - 1] = yuv.g;
                             ptr[(pixel * 2) + 1] = yuv.b;
-                        }
-                        else {
+                        } else {
                             ptr[(pixel * 2) - 1] = yuv.b;
                             ptr[(pixel * 2) + 1] = yuv.g;
                         }
@@ -126,12 +125,11 @@ static void ConfigureVideo(u16 xfbW, u16 xfbH) NO_INLINE {
     switch (VIGetTvFormat()) {
         case VI_MPAL:
         case VI_NTSC: {
-            if (VI_HAS_REG_F(VI_CLOCK_SELECT, (1<<0))) {
+            if (VI_HAS_REG_F(VI_CLOCK_SELECT, (1 << 0))) {
                 mode.viTVmode = 2;
                 mode.viYOrigin = 0;
                 mode.xFBmode = 0;
-            }
-            else {
+            } else {
                 mode.viTVmode = 0;
                 mode.viYOrigin = 0;
                 mode.xFBmode = 1;
@@ -162,9 +160,9 @@ static GXColor RGB2YUV(GXColor rgb) NO_INLINE {
     f32 Cr;
     GXColor yuv;
 
-    Y  = 0.5f + (16.0f + ((0.098f * (f32) rgb.b) + ((0.257f * (f32) rgb.r) + (0.504f * (f32) rgb.g))));
-    Cb = 0.5f + (128.0f + ((0.439f * (f32) rgb.b) + ((-0.148f * (f32) rgb.r) - (0.291f * (f32) rgb.g))));
-    Cr = 0.5f + (128.0f + (((0.439f * (f32) rgb.r) - (0.368f * (f32) rgb.g)) - (0.071f * (f32) rgb.b)));
+    Y = 0.5f + (16.0f + ((0.098f * (f32)rgb.b) + ((0.257f * (f32)rgb.r) + (0.504f * (f32)rgb.g))));
+    Cb = 0.5f + (128.0f + ((0.439f * (f32)rgb.b) + ((-0.148f * (f32)rgb.r) - (0.291f * (f32)rgb.g))));
+    Cr = 0.5f + (128.0f + (((0.439f * (f32)rgb.r) - (0.368f * (f32)rgb.g)) - (0.071f * (f32)rgb.b)));
 
     yuv.r = (Y > 235.0f) ? 235.0f : (Y < 16.0f) ? 16.0f : Y;
     yuv.g = (Cb > 240.0f) ? 240.0f : (Cb < 16.0f) ? 16.0f : Cb;
@@ -198,10 +196,12 @@ void OSFatal(GXColor fg, GXColor bg, const char* msg) {
     OSEnableInterrupts();
 
     count = VIGetRetraceCount();
-    while ((s32)(VIGetRetraceCount() - count) < 1) {}
+    while ((s32)(VIGetRetraceCount() - count) < 1) {
+    }
 
     t = OSGetTime();
-    while (!__OSCallShutdownFunctions(FALSE, OS_SHUTDOWN_FATAL) && OSGetTime() - t < OSMillisecondsToTicks(1000)) {}
+    while (!__OSCallShutdownFunctions(FALSE, OS_SHUTDOWN_FATAL) && OSGetTime() - t < OSMillisecondsToTicks(1000)) {
+    }
 
     OSDisableInterrupts();
 
@@ -217,7 +217,8 @@ void OSFatal(GXColor fg, GXColor bg, const char* msg) {
     }
     EXIUnlock(EXI_CHAN_0);
 
-    while ((__EXIRegs[EXI_0_CONTROL >> 2] & (1<<EXI_CONTROL_TSTART)) == TRUE) {}
+    while ((__EXIRegs[EXI_0_CONTROL >> 2] & (1 << EXI_CONTROL_TSTART)) == TRUE) {
+    }
 
     __OSSetExceptionHandler(OS_EXCEPTION_DECREMENTER, &OSDefaultExceptionHandler);
     GXAbortFrame();
@@ -254,7 +255,8 @@ static void Halt() {
     ConfigureVideo(640, 480);
     VIFlush();
     count = VIGetRetraceCount();
-    while ((s32)VIGetRetraceCount() - (s32)count < 2);
+    while ((s32)VIGetRetraceCount() - (s32)count < 2)
+        ;
 
     ScreenReport(xfb, 640, 480, RGB2YUV(fp->fg), FATAL_REPORT_X_POS, FATAL_REPORT_Y_POS, fontData->leading, fp->msg);
     DCFlushRange(xfb, 640 * 480 * VI_DISPLAY_PIX_SZ);
@@ -262,14 +264,16 @@ static void Halt() {
     VIFlush();
     count = VIGetRetraceCount();
 
-    while ((s32)VIGetRetraceCount() - (s32)count < 1) {}
+    while ((s32)VIGetRetraceCount() - (s32)count < 1) {
+    }
 
     OSDisableInterrupts();
     OSReport("%s\n", fp->msg);
     PPCHalt();
 }
 
-const char* const __DVDErrorMessage[] = {
+// clang-format off
+const char* __DVDErrorMessage[] = {
     "\n\n\n"
     "           エラーが発生しました。\n\n"
     "イジェクトボタンを押してディスクを取り出してか\n"
@@ -343,25 +347,24 @@ const char* const __DVDErrorMessage[] = {
     "   Please read the Wii operations manual\n"
     "           for more information."
 };
+// clang-format on
 
 static void (*FatalFunc)();
 
 void __DVDShowFatalMessage() {
     const char* message;
-    GXColor bg = {  0,   0,   0,  0 };
-    GXColor fg = { 255, 255, 255, 0 };
+    GXColor bg = {0, 0, 0, 0};
+    GXColor fg = {255, 255, 255, 0};
 
     if (SCGetLanguage() == SC_LANG_JAPANESE) {
         OSSetFontEncode(OS_FONT_ENCODE_SJIS);
-    }
-    else {
+    } else {
         OSSetFontEncode(OS_FONT_ENCODE_ANSI);
     }
 
     if (SCGetLanguage() > SC_LANG_KOREAN) {
         message = __DVDErrorMessage[SC_LANG_ENGLISH];
-    }
-    else {
+    } else {
         message = __DVDErrorMessage[SCGetLanguage()];
     }
 
@@ -412,7 +415,8 @@ void BS2ScreenReport(GXColor fg, GXColor bg, const char* msg) {
     ConfigureVideo(640, 480);
     VIFlush();
     count = VIGetRetraceCount();
-    while ((s32)VIGetRetraceCount() - (s32)count < 2);
+    while ((s32)VIGetRetraceCount() - (s32)count < 2)
+        ;
 
     ScreenReport(xfb, 640, 480, RGB2YUV(fp->fg), BS2_REPORT_X_POS, BS2_REPORT_Y_POS, fontData->leading, fp->msg);
     DCFlushRange(xfb, 640 * 480 * VI_DISPLAY_PIX_SZ);
@@ -420,7 +424,8 @@ void BS2ScreenReport(GXColor fg, GXColor bg, const char* msg) {
     VIFlush();
     count = VIGetRetraceCount();
 
-    while ((s32)VIGetRetraceCount() - (s32)count < 1);
+    while ((s32)VIGetRetraceCount() - (s32)count < 1)
+        ;
 
     OSReport("%s\n", fp->msg);
 }

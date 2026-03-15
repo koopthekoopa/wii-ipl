@@ -1,35 +1,35 @@
 #include "scene/iplSceneCreator.h"
 
-#include "scene/iplRootScene.h"
-#include "scene/channelSelect/iplChannelSelect.h"
-#include "scene/channelTitle/iplChannelTitle.h"
+#include "scene/address/iplAddress.h"
+#include "scene/address/iplAddressAddSel.h"
+#include "scene/address/iplAddressEdit.h"
+#include "scene/backMenu/iplBackMenu.h"
 #include "scene/board/iplBoard.h"
 #include "scene/button/iplButton.h"
 #include "scene/calendar/iplCalendar.h"
-#include "scene/mailAddSel/iplMailAddressSelect.h"
-#include "scene/textWriter/iplTextWriter.h"
-#include "scene/letterWriter/iplLetterWriter.h"
 #include "scene/channelEdit/iplChannelEdit.h"
+#include "scene/channelSelect/iplChannelSelect.h"
+#include "scene/channelTitle/iplChannelTitle.h"
+#include "scene/faceSelect/iplFaceSelect.h"
+#include "scene/health/iplHealth.h"
+#include "scene/iplRootScene.h"
+#include "scene/kitayamaTest/iplKitayamaTest.h"
+#include "scene/letterWriter/iplLetterWriter.h"
+#include "scene/limitOver/iplLimitOver.h"
+#include "scene/mailAddSel/iplMailAddressSelect.h"
 #include "scene/memory/iplMemory.h"
 #include "scene/memoryCard/iplMemoryCard.h"
-#include "scene/setting/iplSetting.h"
-#include "scene/settingSelect/iplSettingSelect.h"
-#include "scene/settingSelect/iplSettingButton.h"
-#include "scene/settingSelect/iplSettingBg.h"
-#include "scene/address/iplAddress.h"
-#include "scene/address/iplAddressEdit.h"
-#include "scene/address/iplAddressAddSel.h"
-#include "scene/nakamuraTest/iplNakamuraTest.h"
-#include "scene/health/iplHealth.h"
-#include "scene/parentalDialog/iplParentalDialog.h"
-#include "scene/faceSelect/iplFaceSelect.h"
-#include "scene/kitayamaTest/iplKitayamaTest.h"
-#include "scene/backMenu/iplBackMenu.h"
-#include "scene/limitOver/iplLimitOver.h"
 #include "scene/misc/iplReboot.h"
+#include "scene/nakamuraTest/iplNakamuraTest.h"
+#include "scene/parentalDialog/iplParentalDialog.h"
+#include "scene/sdButton/iplSDButton.h"
 #include "scene/sdChannelSelect/iplSDChannelSelect.h"
 #include "scene/sdChannelTitle/iplSDChannelTitle.h"
-#include "scene/sdButton/iplSDButton.h"
+#include "scene/setting/iplSetting.h"
+#include "scene/settingSelect/iplSettingBg.h"
+#include "scene/settingSelect/iplSettingButton.h"
+#include "scene/settingSelect/iplSettingSelect.h"
+#include "scene/textWriter/iplTextWriter.h"
 
 namespace ipl {
     namespace scene {
@@ -221,5 +221,5 @@ namespace ipl {
 
             return scene;
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

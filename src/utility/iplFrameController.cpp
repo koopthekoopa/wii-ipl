@@ -1,5 +1,5 @@
-#include "iplSystem.h"
 #include "utility/iplFrameController.h"
+#include "iplSystem.h"
 
 namespace ipl {
     namespace utility {
@@ -22,8 +22,7 @@ namespace ipl {
             float frame;
             if (mAnmType == ANIM_TYPE_BACKWARD) {
                 frame = mMaxFrame;
-            }
-            else {
+            } else {
                 frame = mMinFrame;
             }
             mFrame = frame;
@@ -66,8 +65,7 @@ namespace ipl {
                                 mFrame = mMaxFrame;
                                 mbAlternateBack = true;
                             }
-                        }
-                        else {
+                        } else {
                             if ((mFrame -= speed) <= mMinFrame) {
                                 mFrame = mMinFrame;
                                 mbAlternateBack = false;
@@ -76,10 +74,9 @@ namespace ipl {
                         break;
                     }
                 }
-            }
-            else if (mState == ANIM_STATE_STOP_REQ) {
+            } else if (mState == ANIM_STATE_STOP_REQ) {
                 mState = ANIM_STATE_STOP;
             }
         }
-    }
-}
+    }  // namespace utility
+}  // namespace ipl

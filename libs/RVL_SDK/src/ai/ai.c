@@ -1,5 +1,6 @@
-#include <revolution/ai.h>
 #include <private/ai.h>
+#include <revolution/ai.h>
+
 
 #include <revolution/os.h>
 
@@ -11,17 +12,17 @@
 
 SDKDefineVersion(AI, "Apr 20 2010", "11:18:54");
 
-static AIDCallback  __AID_Callback;
+static AIDCallback __AID_Callback;
 
-static void*    __CallbackStack;
-static void*    __OldStack;
+static void* __CallbackStack;
+static void* __OldStack;
 
-static s64  bound_32KHz;
-static s64  bound_48KHz;
+static s64 bound_32KHz;
+static s64 bound_48KHz;
 
-static s64  min_wait;
-static s64  max_wait;
-static s64  buffer;
+static s64 min_wait;
+static s64 max_wait;
+static s64 buffer;
 
 static BOOL __AID_Active;
 static BOOL __AI_init_flag;
@@ -55,11 +56,11 @@ void AIInitDMA(u32 startAddr, u32 length) {
 }
 
 void AIStartDMA() {
-    DSP_SET_REG_F(DSP_DMA_CONTROL_LENGTH, (1<<DSP_DMA_CONTROL_LENGTH_CTRL));
+    DSP_SET_REG_F(DSP_DMA_CONTROL_LENGTH, (1 << DSP_DMA_CONTROL_LENGTH_CTRL));
 }
 
 void AIStopDMA() {
-    DSP_DEL_REG_F(DSP_DMA_CONTROL_LENGTH, (1<<DSP_DMA_CONTROL_LENGTH_CTRL));
+    DSP_DEL_REG_F(DSP_DMA_CONTROL_LENGTH, (1 << DSP_DMA_CONTROL_LENGTH_CTRL));
 }
 
 u32 AIGetDMABytesLeft() {
@@ -78,13 +79,13 @@ void AISetDSPSampleRate(u32 rate) {
     BOOL enabled;
 
     if (rate != AIGetDSPSampleRate()) {
-        AI_DEL_REG_F(AI_CONTROL, (1<<AI_CONTROL_SAMPLERATE));
+        AI_DEL_REG_F(AI_CONTROL, (1 << AI_CONTROL_SAMPLERATE));
 
         if (rate == AI_DSP_SAMPLE_RATE_32KHZ) {
             enabled = OSDisableInterrupts();
 
             __AI_SRC_INIT();
-            AI_SET_REG_F(AI_CONTROL, (1<<AI_CONTROL_SAMPLERATE));
+            AI_SET_REG_F(AI_CONTROL, (1 << AI_CONTROL_SAMPLERATE));
 
             OSRestoreInterrupts(enabled);
         }
@@ -92,7 +93,7 @@ void AISetDSPSampleRate(u32 rate) {
 }
 
 u32 AIGetDSPSampleRate() {
-    return (AI_HAS_REG_F(AI_CONTROL, (1<<AI_CONTROL_SAMPLERATE)) >> 6) ^ 1;
+    return (AI_HAS_REG_F(AI_CONTROL, (1 << AI_CONTROL_SAMPLERATE)) >> 6) ^ 1;
 }
 
 void AIInit(void* stack) {
@@ -106,12 +107,12 @@ void AIInit(void* stack) {
         max_wait = OSNanosecondsToTicks(63000);
         buffer = OSNanosecondsToTicks(3000);
 
-        AI_DEL_REG_F(AI_CONTROL, (1<<AI_CONTROL_PSTAT) | (1<<AI_CONTROL_AIINTMSK) | (1<<AI_CONTROL_AIINTVLD));
+        AI_DEL_REG_F(AI_CONTROL, (1 << AI_CONTROL_PSTAT) | (1 << AI_CONTROL_AIINTMSK) | (1 << AI_CONTROL_AIINTVLD));
 
         AI_WRITE_REG(AI_VOLUME, 0);
         AI_WRITE_REG(AI_AIIT, 0);
 
-        AI_WRITE_REG(AI_CONTROL, (AI_READ_REG(1<<AI_CONTROL) & ~(1<<AI_CONTROL_SCRESET)) | (1<<AI_CONTROL_SCRESET));
+        AI_WRITE_REG(AI_CONTROL, (AI_READ_REG(1 << AI_CONTROL) & ~(1 << AI_CONTROL_SCRESET)) | (1 << AI_CONTROL_SCRESET));
 
         AISetDSPSampleRate(AI_DSP_SAMPLE_RATE_32KHZ);
 
@@ -128,9 +129,8 @@ void AIInit(void* stack) {
 void __AIDHandler(__OSInterrupt interrupt, OSContext* context) {
     OSContext tempCtx;
 
-    DSP_WRITE_REG(DSP_CONTROL_STATUS, (DSP_READ_REG(DSP_CONTROL_STATUS) &
-                                    ~((1<<DSP_CONTROL_STATUS_ARINT) | (1<<DSP_CONTROL_STATUS_DSPINT))) |
-                                      (1<<DSP_CONTROL_STATUS_AIDINT));
+    DSP_WRITE_REG(DSP_CONTROL_STATUS, (DSP_READ_REG(DSP_CONTROL_STATUS) & ~((1 << DSP_CONTROL_STATUS_ARINT) | (1 << DSP_CONTROL_STATUS_DSPINT))) |
+                                          (1 << DSP_CONTROL_STATUS_AIDINT));
 
     OSClearContext(&tempCtx);
     OSSetCurrentContext(&tempCtx);
@@ -140,8 +140,7 @@ void __AIDHandler(__OSInterrupt interrupt, OSContext* context) {
 
         if (__CallbackStack != NULL) {
             __AICallbackStackSwitch(__AID_Callback);
-        }
-        else {
+        } else {
             __AID_Callback();
         }
 
@@ -153,6 +152,7 @@ void __AIDHandler(__OSInterrupt interrupt, OSContext* context) {
 }
 
 static asm void __AICallbackStackSwitch(register AIDCallback callback) {
+    // clang-format off
 #ifdef __MWERKS__
     mr      r31, callback
 
@@ -175,6 +175,7 @@ static asm void __AICallbackStackSwitch(register AIDCallback callback) {
     frfree
     blr
 #endif // __MWERKS
+    // clang-format on
 }
 
 static void __AI_SRC_INIT() {
@@ -186,40 +187,41 @@ static void __AI_SRC_INIT() {
     u32 samples = 0;
 
     while (!exit) {
-        AI_WRITE_REG(AI_CONTROL, (AI_READ_REG(AI_CONTROL) & ~(1<<AI_CONTROL_SCRESET)) | (1<<AI_CONTROL_SCRESET));
-        AI_DEL_REG_F(AI_CONTROL, (1<<AI_CONTROL_AFR));
-        AI_WRITE_REG(AI_CONTROL, (AI_READ_REG(AI_CONTROL) & ~(1<<AI_CONTROL_PSTAT)) | (1<<AI_CONTROL_PSTAT));
+        AI_WRITE_REG(AI_CONTROL, (AI_READ_REG(AI_CONTROL) & ~(1 << AI_CONTROL_SCRESET)) | (1 << AI_CONTROL_SCRESET));
+        AI_DEL_REG_F(AI_CONTROL, (1 << AI_CONTROL_AFR));
+        AI_WRITE_REG(AI_CONTROL, (AI_READ_REG(AI_CONTROL) & ~(1 << AI_CONTROL_PSTAT)) | (1 << AI_CONTROL_PSTAT));
 
         samples = AI_READ_REG(AI_AISCNT) & ~0x80000000;
-        while (samples == (AI_READ_REG(AI_AISCNT) & ~0x80000000)) {}
+        while (samples == (AI_READ_REG(AI_AISCNT) & ~0x80000000)) {
+        }
 
         start = OSGetTime();
 
-        AI_WRITE_REG(AI_CONTROL, (AI_READ_REG(AI_CONTROL) & ~(1<<AI_CONTROL_AFR)) | (1<<AI_CONTROL_AFR));
-        AI_WRITE_REG(AI_CONTROL, (AI_READ_REG(AI_CONTROL) & ~(1<<AI_CONTROL_PSTAT)) | (1<<AI_CONTROL_PSTAT));
+        AI_WRITE_REG(AI_CONTROL, (AI_READ_REG(AI_CONTROL) & ~(1 << AI_CONTROL_AFR)) | (1 << AI_CONTROL_AFR));
+        AI_WRITE_REG(AI_CONTROL, (AI_READ_REG(AI_CONTROL) & ~(1 << AI_CONTROL_PSTAT)) | (1 << AI_CONTROL_PSTAT));
 
         // Waiting for one sample?
         samples = AI_READ_REG(AI_AISCNT) & ~0x80000000;
-        while (samples == (AI_READ_REG(AI_AISCNT) & ~0x80000000)) { }
+        while (samples == (AI_READ_REG(AI_AISCNT) & ~0x80000000)) {
+        }
 
         end = OSGetTime();
         diff = end - start;
 
-        AI_DEL_REG_F(AI_CONTROL, (1<<AI_CONTROL_AFR));
-        AI_DEL_REG_F(AI_CONTROL, (1<<AI_CONTROL_PSTAT));
+        AI_DEL_REG_F(AI_CONTROL, (1 << AI_CONTROL_AFR));
+        AI_DEL_REG_F(AI_CONTROL, (1 << AI_CONTROL_PSTAT));
 
         if (diff < bound_32KHz - buffer) {
             wait = min_wait;
             exit = TRUE;
-        }
-        else if (diff >= bound_32KHz + buffer && diff < bound_48KHz - buffer) {
+        } else if (diff >= bound_32KHz + buffer && diff < bound_48KHz - buffer) {
             wait = max_wait;
             exit = TRUE;
-        }
-        else {
+        } else {
             exit = FALSE;
         }
     }
 
-    while (end + wait > OSGetTime()) {}
+    while (end + wait > OSGetTime()) {
+    }
 }

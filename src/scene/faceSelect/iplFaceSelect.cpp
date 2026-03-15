@@ -6,8 +6,8 @@
 
 #include "system/iplNigaoeManager.h"
 
-#include "iplSystem.h"
 #include "iplSound.h"
+#include "iplSystem.h"
 
 #include <revolution/mtx.h>
 
@@ -15,16 +15,17 @@
 
 #include <cstring>
 
-#define NO_MII_ICON         "NigaoeD_00"
+#define NO_MII_ICON "NigaoeD_00"
 
-#define LOADED_MIIS         (mCurrentPage * MAX_FACE_EACH_PAGE)
-#define CAN_SCROLL_LEFT     ((mCurrentPage > 0))
-#define CAN_SCROLL_RIGHT    ((mCurrentPage + 1) * MAX_FACE_EACH_PAGE < mFaceCount)
+#define LOADED_MIIS (mCurrentPage * MAX_FACE_EACH_PAGE)
+#define CAN_SCROLL_LEFT ((mCurrentPage > 0))
+#define CAN_SCROLL_RIGHT ((mCurrentPage + 1) * MAX_FACE_EACH_PAGE < mFaceCount)
 
-#define NIGAOE_ICON_SIZE    76
+#define NIGAOE_ICON_SIZE 76
 
 namespace ipl {
     namespace scene {
+        // clang-format off
         const char* FaceSelect::mscButtonName[BTN_MAX] = {
             "B_NigaoeSel0",
             "B_NigaoeSel1",
@@ -78,26 +79,16 @@ namespace ipl {
             "NigaoeSel8_02",
             "NigaoeSel9_02",
         };
+        // clang-format on
 
-        FaceSelect::FaceSelect(EGG::Heap* heap, int fadeType) :
-        FaderSceneBase(heap),
-        mpLayout(NULL),
-        mpEvent(NULL),
-        mpGui(NULL),
-        mpButtonEvent(NULL),
-        mState(STATE_NORMAL),
-        mPrevState(STATE_NORMAL),
-        mCurrentPage(0),
-        mFaceCount(0),
-        mSelectedFaceId(-1),
-        mCachedPage(0),
-        mbLeftArrowExit(false),
-        mbRightArrowExit(false),
-        mFadeType(fadeType) {
+        FaceSelect::FaceSelect(EGG::Heap* heap, int fadeType)
+            : FaderSceneBase(heap), mpLayout(NULL), mpEvent(NULL), mpGui(NULL), mpButtonEvent(NULL), mState(STATE_NORMAL), mPrevState(STATE_NORMAL),
+              mCurrentPage(0), mFaceCount(0), mSelectedFaceId(-1), mCachedPage(0), mbLeftArrowExit(false), mbRightArrowExit(false),
+              mFadeType(fadeType) {
             for (int i = 0; i < BTN_MAX; i++) {
                 mbHovered[i] = FALSE;
             }
-            
+
             for (int i = 0; i < RFL_MAX_DATABASE; i++) {
                 mFaceIds[i] = -1;
             }
@@ -116,50 +107,50 @@ namespace ipl {
             mpLayout = new layout::Object(getSceneHeap(), mpLayoutFile, "arc", "my_selectNigaoe_a.brlyt");
 
             // Bind all of the animations
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeIn.brlan",           "G_All", false, mFadeType == FADE_FROM_MEMO);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeOut.brlan",          "G_All", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeIn_a.brlan",         "G_All", false, mFadeType == FADE_FROM_ADDRESS_EDIT);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeOut_a.brlan",        "G_All",false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeIn_b.brlan",         "G_All", false, mFadeType == FADE_FROM_ADDRESS_ADD);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeOut_b.brlan",        "G_All", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan",     "G_Foucus0", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan",     "G_Foucus1", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan",     "G_Foucus2", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan",     "G_Foucus3", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan",     "G_Foucus4", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan",     "G_Foucus5", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan",     "G_Foucus6", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan",     "G_Foucus7", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan",     "G_Foucus8", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan",     "G_Foucus9", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan",    "G_Foucus0", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan",    "G_Foucus1", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan",    "G_Foucus2", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan",    "G_Foucus3", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan",    "G_Foucus4", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan",    "G_Foucus5", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan",    "G_Foucus6", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan",    "G_Foucus7", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan",    "G_Foucus8", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan",    "G_Foucus9", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_MoveArwR1.brlan",          "G_NigaoeAll", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_MoveArwL1.brlan",          "G_NigaoeAll", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_FocusOn.brlan",            "G_ArwL_Focus", false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_FocusOff.brlan",           "G_ArwL_Focus", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_Select.brlan",             "G_ArwL_Ac", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_HDActionStart.brlan",      "G_ArwL_HDAc", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_HDActionRepeat.brlan",     "G_ArwL_HDAc", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_Appear.brlan",             "G_ArwL_End", false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_Lost.brlan",               "G_ArwL_End", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_FocusOn.brlan",            "G_ArwR_Focus", false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_FocusOff.brlan",           "G_ArwR_Focus", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_Select.brlan",             "G_ArwR_Ac", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_HDActionStart.brlan",      "G_ArwR_HDAc", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_HDActionRepeat.brlan",     "G_ArwR_HDAc", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_Appear.brlan",             "G_ArwR_End", false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_Lost.brlan",               "G_ArwR_End", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_Loop.brlan",               "G_ArwRoop", false, false);
-            mpLayout->bindToGroup("my_selectNigaoe_a_PageSwitch.brlan",         "G_Page", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeIn.brlan", "G_All", false, mFadeType == FADE_FROM_MEMO);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeOut.brlan", "G_All", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeIn_a.brlan", "G_All", false, mFadeType == FADE_FROM_ADDRESS_EDIT);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeOut_a.brlan", "G_All", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeIn_b.brlan", "G_All", false, mFadeType == FADE_FROM_ADDRESS_ADD);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeOut_b.brlan", "G_All", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan", "G_Foucus0", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan", "G_Foucus1", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan", "G_Foucus2", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan", "G_Foucus3", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan", "G_Foucus4", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan", "G_Foucus5", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan", "G_Foucus6", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan", "G_Foucus7", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan", "G_Foucus8", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusIn.brlan", "G_Foucus9", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan", "G_Foucus0", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan", "G_Foucus1", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan", "G_Foucus2", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan", "G_Foucus3", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan", "G_Foucus4", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan", "G_Foucus5", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan", "G_Foucus6", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan", "G_Foucus7", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan", "G_Foucus8", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_NigaoeFoucusOut.brlan", "G_Foucus9", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_MoveArwR1.brlan", "G_NigaoeAll", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_MoveArwL1.brlan", "G_NigaoeAll", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_FocusOn.brlan", "G_ArwL_Focus", false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_FocusOff.brlan", "G_ArwL_Focus", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_Select.brlan", "G_ArwL_Ac", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_HDActionStart.brlan", "G_ArwL_HDAc", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_HDActionRepeat.brlan", "G_ArwL_HDAc", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_Appear.brlan", "G_ArwL_End", false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_Lost.brlan", "G_ArwL_End", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_FocusOn.brlan", "G_ArwR_Focus", false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_FocusOff.brlan", "G_ArwR_Focus", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_Select.brlan", "G_ArwR_Ac", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_HDActionStart.brlan", "G_ArwR_HDAc", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_HDActionRepeat.brlan", "G_ArwR_HDAc", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_Appear.brlan", "G_ArwR_End", false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_Lost.brlan", "G_ArwR_End", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_Loop.brlan", "G_ArwRoop", false, false);
+            mpLayout->bindToGroup("my_selectNigaoe_a_PageSwitch.brlan", "G_Page", false, false);
 
             // Done binding animations
             mpLayout->finishBinding();
@@ -210,7 +201,8 @@ namespace ipl {
             f32 unk4 = 30.0f;
             f32 unk3 = 120.0f;
             for (int i = 0; i < MAX_BALLOONS; i++) {
-                mpBalloons[i] = new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), unk3, unk4);
+                mpBalloons[i] =
+                    new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), unk3, unk4);
             }
         }
 
@@ -221,8 +213,7 @@ namespace ipl {
                 bool result = true;
                 for (int i = 0; i < MAX_FACE_EACH_PAGE; i++) {
                     // If face was created
-                    result &= !mpFaces[mCachedPage][i].creating
-                            || mpFaces[mCachedPage][i].created ? true : false;
+                    result &= !mpFaces[mCachedPage][i].creating || mpFaces[mCachedPage][i].created ? true : false;
                 }
                 if (result) {
                     mbPreparing = false;
@@ -233,15 +224,13 @@ namespace ipl {
                     mpLayout->getAnim(mFadeAnimIndex + ANIM_FADE_IN)->play();
                     mpLayout->getAnim(ANIM_APPEARING)->play();
                 }
-            }
-            else {
+            } else {
                 command = !mpLayout->getAnim(mFadeAnimIndex + ANIM_FADE_IN)->isPlaying() ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
             }
 
             return command;
         }
 
-        
         void FaceSelect::initCalcNormal() {
             static_cast<Button*>(System::getScene(SCENE_BUTTON))->setEventHandler(mpButtonEvent);
 
@@ -316,7 +305,7 @@ namespace ipl {
             if (System::onDefaultDrawLayer()) {
                 u32 scLeft, scTop;
                 u32 scWidth, scHeight;
-                
+
                 utility::Graphics::setOrtho();
 
                 GXGetScissor(&scLeft, &scTop, &scWidth, &scHeight);
@@ -382,8 +371,7 @@ namespace ipl {
                         start_lloaded();
                         change_state(STATE_LEFT_LOAD);
                     }
-                }
-                else {
+                } else {
                     // Scroll right when pressing Minus or R trigger
                     if (con->downTrg(controller::BTN_NEXT_RIGHT) && CAN_SCROLL_RIGHT) {
                         start_rloaded();
@@ -409,8 +397,7 @@ namespace ipl {
             bool result = true;
             for (int i = 0; i < MAX_FACE_EACH_PAGE; i++) {
                 // If face was created
-                result &= !mpFaces[mCachedPage][i].creating
-                        || mpFaces[mCachedPage][i].created ? true : false;
+                result &= !mpFaces[mCachedPage][i].creating || mpFaces[mCachedPage][i].created ? true : false;
             }
 
             // Scroll to the left!
@@ -425,8 +412,7 @@ namespace ipl {
             bool result = true;
             for (int i = 0; i < MAX_FACE_EACH_PAGE; i++) {
                 // If face was created
-                result &= !mpFaces[mCachedPage][i].creating
-                        || mpFaces[mCachedPage][i].created ? true : false;
+                result &= !mpFaces[mCachedPage][i].creating || mpFaces[mCachedPage][i].created ? true : false;
             }
 
             // Scroll to the right!
@@ -559,7 +545,7 @@ namespace ipl {
                             nw4r::lyt::Pane* paneObj = mpLayout->FindPaneByName(paneName);
                             math::VEC3 balloonPos(0.0f, 0.0f, 0.0f);
                             MTXMultVec(paneObj->GetGlobalMtx(), balloonPos, balloonPos);
-                            
+
                             // UUGHHH
                             f32 y = 50.0f;
                             balloonPos.y += y;
@@ -627,16 +613,14 @@ namespace ipl {
                     mpLayout->getAnim(ANIM_RIGHT_ARROW_SELECT)->play();
                     start_rloaded();
                     change_state(STATE_RIGHT_LOAD);
-                }
-                else {
+                } else {
                     if (is_exist(btnNo)) {
                         // Button scene animation
                         Button* button = static_cast<Button*>(System::getScene(SCENE_BUTTON));
                         button->animation(Button::IDANIM_DISAPPEAR_LEFT_BUTTON);
                         if (mFadeType == FADE_FROM_ADDRESS_EDIT) {
                             button->reserveAnm(Button::IDANIM_APPEAR_LEFT_BUTTON);
-                        }
-                        else {
+                        } else {
                             button->reserveAnm(Button::IDANIM_APPEAR_LEFT_AND_RIGHT_BUTTON);
                         }
 
@@ -690,7 +674,7 @@ namespace ipl {
         }
 
         void FaceSelect::set_page() {
-            const wchar_t numbers[] = {'0','1','2','3','4','5','6','7','8','9'};
+            const wchar_t numbers[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
             wchar_t numStr[3] = L"";
 
@@ -734,8 +718,7 @@ namespace ipl {
                     // Set mii face
                     pane->SetVisible(true);
                     material->SetTexture(GX_TEXMAP0, mpFaces[mCachedPage][i].object->getIconTexture());
-                }
-                else {
+                } else {
                     // Set "no mii" icon
                     GXTexObj texObj;
                     pane->SetVisible(false);
@@ -747,8 +730,7 @@ namespace ipl {
                 if (object != NULL) {
                     // Setup balloon text
                     mpBalloons[i]->init(object->getName(), RFL_NAME_LENGTH);
-                }
-                else {
+                } else {
                     mpBalloons[i]->terminate();
                 }
             }
@@ -785,10 +767,9 @@ namespace ipl {
                     mpFaces[mCachedPage][i].creating = true;
                     mpFaces[mCachedPage][i].created = false;
                     // Create!
-                    System::getMiiManager()->create(System::getMem2App(), NIGAOE_ICON_SIZE, NIGAOE_ICON_SIZE, mFaceIds[index],
-                                                    nigaoe_make_icon_cb_, (void*)&mpFaces[mCachedPage][i]);
-                }
-                else {
+                    System::getMiiManager()->create(System::getMem2App(), NIGAOE_ICON_SIZE, NIGAOE_ICON_SIZE, mFaceIds[index], nigaoe_make_icon_cb_,
+                                                    (void*)&mpFaces[mCachedPage][i]);
+                } else {
                     mpFaces[mCachedPage][i].creating = false;
                 }
             }
@@ -842,8 +823,7 @@ namespace ipl {
                                 button->reserveAnm(Button::IDANIM_DISAPPEAR_LEFT_BUTTON);
                                 if (mpInstance->mFadeType == FaceSelect::FADE_FROM_ADDRESS_EDIT) {
                                     button->reserveAnm(Button::IDANIM_APPEAR_LEFT_BUTTON);
-                                }
-                                else {
+                                } else {
                                     button->reserveAnm(Button::IDANIM_APPEAR_LEFT_AND_RIGHT_BUTTON);
                                 }
 
@@ -861,5 +841,5 @@ namespace ipl {
                 }
             }
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

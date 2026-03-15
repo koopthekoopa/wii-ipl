@@ -3,4 +3,4 @@
 
 #include <errno.h>
 
-#endif // MSL_CERRNO_H
+#endif  // MSL_CERRNO_H

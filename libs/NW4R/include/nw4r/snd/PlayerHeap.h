@@ -11,23 +11,23 @@ namespace nw4r {
         namespace detail {
             class BasicSound;
             class PlayerHeap : public SoundHeap {
-                public:
-                    PlayerHeap() : mSound(NULL), mPlayer(NULL) {}
-                    virtual ~PlayerHeap() {}    // 0x08
+            public:
+                PlayerHeap() : mSound(NULL), mPlayer(NULL) {}
+                virtual ~PlayerHeap() {}  // 0x08
 
-                    void    SetSound(BasicSound* sound)         { mSound = sound; }
-                    void    SetSoundPlayer(SoundPlayer* player) { mPlayer = player; }
+                void SetSound(BasicSound* sound) { mSound = sound; }
+                void SetSoundPlayer(SoundPlayer* player) { mPlayer = player; }
 
-                public:
-                    ut::LinkListNode    mLink;      // 0x2C
+            public:
+                ut::LinkListNode mLink;  // 0x2C
 
-                private:
-                    BasicSound*         mSound;     // 0x34
-                    SoundPlayer*        mPlayer;    // 0x38
+            private:
+                BasicSound* mSound;    // 0x34
+                SoundPlayer* mPlayer;  // 0x38
             };
             typedef ut::LinkList<PlayerHeap, offsetof(PlayerHeap, mLink)> PlayerHeapList;
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r
 
 #endif

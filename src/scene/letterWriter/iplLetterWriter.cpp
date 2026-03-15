@@ -1,10 +1,11 @@
 #include "iplSceneUI.h"
 
-#include "scene/letterWriter/iplLetterWriter.h"
-#include "scene/button/iplButton.h"
-#include "scene/mailAddSel/iplMailAddressSelect.h"
 #include "scene/address/iplAddress.h"
 #include "scene/board/iplBoard.h"
+#include "scene/button/iplButton.h"
+#include "scene/letterWriter/iplLetterWriter.h"
+#include "scene/mailAddSel/iplMailAddressSelect.h"
+
 
 #include <RVLFaceLib.h>
 #include <RVLFaceLibInternal.h>
@@ -14,20 +15,13 @@
 
 namespace ipl {
     namespace scene {
-        LetterWriter::LetterWriter(EGG::Heap* heap, int type) :
-        TextWriter(heap),
-        mbToFriend(false),
-        mLetterState(LETTER_STATE_NORMAL),
-        mLetterType((textinput::extend::letter::InputForm::Type)type),
-        mpTextSubjectWork(NULL),
-        mpCaptionString(NULL),
-        mpCaptionAllocator(NULL),
-        mNwc24ErrCountdown2(0) {
-            setSceneParentFlags(SCN_PARENTFLAG_DRAW | SCN_PARENTFLAG_CALC); // already set by TextWriter base
+        LetterWriter::LetterWriter(EGG::Heap* heap, int type)
+            : TextWriter(heap), mbToFriend(false), mLetterState(LETTER_STATE_NORMAL), mLetterType((textinput::extend::letter::InputForm::Type)type),
+              mpTextSubjectWork(NULL), mpCaptionString(NULL), mpCaptionAllocator(NULL), mNwc24ErrCountdown2(0) {
+            setSceneParentFlags(SCN_PARENTFLAG_DRAW | SCN_PARENTFLAG_CALC);  // already set by TextWriter base
         }
 
         LetterWriter::~LetterWriter() {
-
         }
 
         void LetterWriter::destroy() {
@@ -90,8 +84,9 @@ namespace ipl {
 
             // Text balloon for Mii face
             // What the fuck is up with these two floats
-            mpNigaoeBalloon = new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 120.0f, 30.0f);
-            
+            mpNigaoeBalloon =
+                new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 120.0f, 30.0f);
+
             // Scroller
             mpScroller = new utility::YoungBScroller();
 
@@ -109,8 +104,7 @@ namespace ipl {
                 case textinput::extend::letter::InputForm::T_MailAddressSel: {
                     if (mLetterType == textinput::extend::letter::InputForm::T_Picture) {
                         createChildScene(SCENE_ADDRESS, this, NULL, (void*)2);
-                    }
-                    else {
+                    } else {
                         createChildScene(SCENE_ADDRESS, this, NULL, (void*)1);
                     }
 
@@ -141,8 +135,7 @@ namespace ipl {
                         mLetterState = LETTER_STATE_SEND;
 
                         TextWriter::initCalcNormal();
-                    }
-                    else {
+                    } else {
                         Address* address = static_cast<Address*>(System::getScene(SCENE_ADDRESS));
                         memcpy(&mFriendInfo, &address->getFriendCache()->getInfo(address->getChosenFriendIndex()), sizeof(NWC24FriendInfo));
 
@@ -227,8 +220,7 @@ namespace ipl {
 
                         if (getBoard()->isOptOut()) {
                             button->reserveAnm(Button::IDANIM_OPTOUT_IN_ALT);
-                        }
-                        else {
+                        } else {
                             button->reserveAnm(Button::IDANIM_APPEAR_ALL_BUTTONS);
                         }
 
@@ -260,8 +252,7 @@ namespace ipl {
                         if (!mbToFriend) {
                             System::getKeyboard()->deactivate();
                             mState = STATE_DONE;
-                        }
-                        else {
+                        } else {
                             caption = makeHeaderCaption((const wchar_t*)mFriendInfo.attr.name);
                             getLetterInputForm()->setHeaderCaption(caption);
                         }
@@ -330,8 +321,7 @@ namespace ipl {
                                             button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_BOARD_REPLY);
                                             if (getBoard()->isOptOut()) {
                                                 button->reserveAnm(Button::IDANIM_OPTOUT_IN_ALT);
-                                            }
-                                            else {
+                                            } else {
                                                 button->reserveAnm(Button::IDANIM_APPEAR_ALL_BUTTONS);
                                             }
                                             break;
@@ -360,8 +350,7 @@ namespace ipl {
                                     System::getKeyboard()->sendRelease();
 
                                     mState = STATE_DONE;
-                                }
-                                else if (Button::cmpButtonName(paneName, Button::BTN_CREATE_R_BUTTON) == 0) {
+                                } else if (Button::cmpButtonName(paneName, Button::BTN_CREATE_R_BUTTON) == 0) {
                                     button->animation(Button::IDANIM_SELECT_CREATE_R);
                                     button->setEventHandler(NULL);
 
@@ -369,8 +358,7 @@ namespace ipl {
 
                                     if (mLetterType != textinput::extend::letter::InputForm::T_Address) {
                                         openNWC24();
-                                    }
-                                    else {
+                                    } else {
                                         onSend();
                                     }
                                 }
@@ -400,15 +388,13 @@ namespace ipl {
             NWC24UserId myUserId;
             if (mbToFriend) {
                 myUserId = mFriendInfo.addr.wiiId;
-            }
-            else {
+            } else {
                 getMyUserID(&myUserId);
             }
 
             if (sendMessageByNWC24(myUserId, mWCString) != 0) {
-                OSReport("送信失敗\n"); // "Send failure"
-            }
-            else {
+                OSReport("送信失敗\n");  // "Send failure"
+            } else {
                 PlayTimeLog::sendMsgLog((wchar_t*)mFriendInfo.attr.name);
                 getBoard()->reopen_log();
             }
@@ -435,8 +421,7 @@ namespace ipl {
                     button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_BOARD_REPLY);
                     if (getBoard()->isOptOut()) {
                         button->reserveAnm(Button::IDANIM_OPTOUT_IN_ALT);
-                    }
-                    else {
+                    } else {
                         button->reserveAnm(Button::IDANIM_APPEAR_ALL_BUTTONS);
                     }
                     break;
@@ -472,8 +457,7 @@ namespace ipl {
         int LetterWriter::sendMessageByNWC24(NWC24UserId userId, const wchar_t* wcString) {
             if (mbToFriend && mFriendInfo.attr.type == NWC24_FRIENDTYPE_EMAIL) {
                 return sendToPC(userId, wcString);
-            }
-            else {
+            } else {
                 return sendToWii(userId, wcString);
             }
         }
@@ -497,17 +481,18 @@ namespace ipl {
 
             // Set letter contents
             if (*wcString != 0) {
-                if (!System::getNwc24Manager()->setMsgText(&msgObj, (char*)wcString, wcslen(wcString) * sizeof(wchar_t), NWC24_UTF_16BE, NWC24_ENC_BASE64)) {
+                if (!System::getNwc24Manager()->setMsgText(&msgObj, (char*)wcString, wcslen(wcString) * sizeof(wchar_t), NWC24_UTF_16BE,
+                                                           NWC24_ENC_BASE64)) {
                     OSReport("NWC24SetMsgText err\n");
                     return SEND_ERR_NWC24;
                 }
-            }
-            else {
+            } else {
                 wchar_t blank[2];
                 blank[0] = L' ';
                 blank[1] = 0;
 
-                if (!System::getNwc24Manager()->setMsgText(&msgObj, (char*)blank, wcslen(blank) * sizeof(wchar_t), NWC24_UTF_16BE, NWC24_ENC_BASE64)) {
+                if (!System::getNwc24Manager()->setMsgText(&msgObj, (char*)blank, wcslen(blank) * sizeof(wchar_t), NWC24_UTF_16BE,
+                                                           NWC24_ENC_BASE64)) {
                     OSReport("NWC24SetMsgText err\n");
                     return SEND_ERR_NWC24;
                 }
@@ -528,7 +513,7 @@ namespace ipl {
                 OSReport("NWC24SetMsgMBNoReply err\n");
                 return SEND_ERR_NWC24;
             }
-            
+
             if (!System::getNwc24Manager()->setLedPattern(&msgObj)) {
                 OSReport("setMsgCommand err\n");
                 return SEND_ERR_NWC24;
@@ -572,7 +557,8 @@ namespace ipl {
 
             // Set letter contents
             const wchar_t* subject = System::getMessage(MESG_LETTERWRITER_EMAIL_SUBJECT);
-            if (!System::getNwc24Manager()->setMsgSubjectAndTextPublic(&msgObj, (u16*)subject, wcslen(subject), (u16*)wcString, wcslen(wcString), mpTextSubjectWork, mTextSubjectWorkSize)) {
+            if (!System::getNwc24Manager()->setMsgSubjectAndTextPublic(&msgObj, (u16*)subject, wcslen(subject), (u16*)wcString, wcslen(wcString),
+                                                                       mpTextSubjectWork, mTextSubjectWorkSize)) {
                 OSReport("setMsgSubjectAndTextPublic err\n");
                 return SEND_ERR_NWC24;
             }
@@ -601,5 +587,5 @@ namespace ipl {
         Board* LetterWriter::getBoard() {
             return static_cast<Board*>(System::getScene(SCENE_BOARD));
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

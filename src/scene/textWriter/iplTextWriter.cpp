@@ -1,10 +1,11 @@
 #include "iplSceneUI.h"
 
-#include "scene/textWriter/iplTextWriter.h"
+#include "scene/board/iplBoard.h"
 #include "scene/button/iplButton.h"
 #include "scene/faceSelect/iplFaceSelect.h"
 #include "scene/mailAddSel/iplMailAddressSelect.h"
-#include "scene/board/iplBoard.h"
+#include "scene/textWriter/iplTextWriter.h"
+
 
 #include <RVLFaceLib.h>
 #include <RVLFaceLibInternal.h>
@@ -34,19 +35,13 @@ namespace ipl {
             textWriter->setNigaoe(obj);
         }
 
-        TextWriter::TextWriter(EGG::Heap* heap) :
-        FaderSceneBase(heap),
-        mState(STATE_NORMAL),
-        mSelectedFaceId(-1),
-        mpNigaoe(NULL),
-        mbClosing(false),
-        unk_0x7D(true),
-        mNwc24ErrCountdown(0) {
+        TextWriter::TextWriter(EGG::Heap* heap)
+            : FaderSceneBase(heap), mState(STATE_NORMAL), mSelectedFaceId(-1), mpNigaoe(NULL), mbClosing(false), unk_0x7D(true),
+              mNwc24ErrCountdown(0) {
             setSceneParentFlags(SCN_PARENTFLAG_DRAW | SCN_PARENTFLAG_CALC);
         }
 
         TextWriter::~TextWriter() {
-
         }
 
         void TextWriter::destroy() {
@@ -100,7 +95,7 @@ namespace ipl {
             f32 f0 = 30.0f;
             f32 f1 = 120.0f;
             mpNigaoeBalloon = new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), f1, f0);
-            
+
             // Scroller
             mpScroller = new utility::YoungBScroller();
         }
@@ -227,8 +222,8 @@ namespace ipl {
                         // Calculate scrolling
                         mpScroller->calc();
                         if (mpScroller->isActive()) {
-                            if ((getMemoInputForm()->getScroll() < getMemoInputForm()->getScrollMax() && mpScroller->isDown())
-                            || ( getMemoInputForm()->getScroll() > 0.0f                               && mpScroller->isUp()  )) {
+                            if ((getMemoInputForm()->getScroll() < getMemoInputForm()->getScrollMax() && mpScroller->isDown()) ||
+                                (getMemoInputForm()->getScroll() > 0.0f && mpScroller->isUp())) {
                                 // Memo scrolling
                                 getMemoInputForm()->setAddScroll(mpScroller->getSpeed(), mpScroller->isUp(), mpScroller->isDown());
 
@@ -236,26 +231,22 @@ namespace ipl {
                                 if (mpScroller->isUp()) {
                                     if (getMemoInputForm()->getScroll() + mpScroller->getSpeed() < getMemoInputForm()->getScrollMax()) {
                                         mpScroller->addSoundFreq(mpScroller->getSpeed());
+                                    } else {
+                                        mpScroller->addSoundFreq((getMemoInputForm()->getScroll() + mpScroller->getSpeed()) -
+                                                                 getMemoInputForm()->getScrollMax());
                                     }
-                                    else {
-                                        mpScroller->addSoundFreq((getMemoInputForm()->getScroll() + mpScroller->getSpeed()) - getMemoInputForm()->getScrollMax());
-                                    }
-                                }
-                                else if (mpScroller->isDown()) {
+                                } else if (mpScroller->isDown()) {
                                     if (getMemoInputForm()->getScroll() + mpScroller->getSpeed() > 0.0f) {
                                         mpScroller->addSoundFreq(mpScroller->getSpeed());
-                                    }
-                                    else {
+                                    } else {
                                         mpScroller->addSoundFreq(getMemoInputForm()->getScroll() + mpScroller->getSpeed());
                                     }
                                 }
-                            }
-                            else {
+                            } else {
                                 getMemoInputForm()->setAddScroll(0.0f, false, false);
                             }
                         }
-                    }
-                    else {
+                    } else {
                         getMemoInputForm()->setAddScroll(0.0f, false, false);
                     }
                 }
@@ -268,9 +259,9 @@ namespace ipl {
             getButton()->setEventHandler(NULL);
 
             static_cast<MailAddressSelect*>(System::getScene(SCENE_MAIL_ADDRESS_SELECT))->finishMemo(mbClosing);
-            
+
             System::getKeyboard()->endMgr();
-            
+
             mpNigaoeBalloon->calc();
         }
 
@@ -336,8 +327,7 @@ namespace ipl {
                 System::getDialog()->callBtn1(MESG_TEXTWRITER_NO_MII, MESG_CMN_OK);
 
                 return false;
-            }
-            else {
+            } else {
                 // Miis found
 
                 System::getKeyboard()->deactivate();
@@ -385,8 +375,7 @@ namespace ipl {
                                     mpNigaoeBalloon->fadeoutForce();
 
                                     mState = STATE_DONE;
-                                }
-                                else if (Button::cmpButtonName(paneName, Button::BTN_CREATE_R_BUTTON) == 0) {
+                                } else if (Button::cmpButtonName(paneName, Button::BTN_CREATE_R_BUTTON) == 0) {
                                     button->animation(Button::IDANIM_SELECT_CREATE_R);
                                     button->setEventHandler(NULL);
 
@@ -418,7 +407,7 @@ namespace ipl {
             NWC24UserId myUserId;
             getMyUserID(&myUserId);
             if (sendMessageByNWC24(myUserId, mWCString) != 0) {
-                OSReport("送信失敗\n"); // "Send failure"
+                OSReport("送信失敗\n");  // "Send failure"
             }
 
             closeNWC24();
@@ -457,13 +446,11 @@ namespace ipl {
             if (System::getNwc24Manager()->open()) {
                 mState = STATE_NORMAL;
                 onSend();
-            }
-            else {
+            } else {
                 if (mState == STATE_NORMAL) {
                     mState = STATE_SEND;
                     mNwc24ErrCountdown = 0;
-                }
-                else if (mState == STATE_SEND) {
+                } else if (mState == STATE_SEND) {
                     if ((mNwc24ErrCountdown += 1) >= 300) {
                         mState = STATE_SEND_ERR;
                         System::getDialog()->callBtn1(MESG_TEXTWRITER_SEND_ERROR, MESG_CMN_OK);
@@ -491,7 +478,8 @@ namespace ipl {
 
             // Set memo contents
             if (*wcString != 0) {
-                if (!System::getNwc24Manager()->setMsgText(&msgObj, (char*)wcString, wcslen(wcString) * sizeof(wchar_t), NWC24_UTF_16BE, NWC24_ENC_8BIT)) {
+                if (!System::getNwc24Manager()->setMsgText(&msgObj, (char*)wcString, wcslen(wcString) * sizeof(wchar_t), NWC24_UTF_16BE,
+                                                           NWC24_ENC_8BIT)) {
                     OSReport("NWC24SetMsgText err\n");
                     return SEND_ERR_NWC24;
                 }
@@ -552,8 +540,7 @@ namespace ipl {
             int faceId = mpNigaoe->getIndex();
             if (faceId >= 0) {
                 faceName = (wchar_t*)RFLiGetCharData(faceId)->name;
-            }
-            else {
+            } else {
                 faceName = NULL;
             }
             mpNigaoeBalloon->init(faceName, RFL_NAME_LENGTH);
@@ -575,5 +562,5 @@ namespace ipl {
         Button* TextWriter::getButton() {
             return static_cast<Button*>(System::getScene(SCENE_BUTTON));
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

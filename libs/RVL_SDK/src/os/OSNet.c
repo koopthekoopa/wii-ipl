@@ -1,8 +1,8 @@
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
-#include <revolution/nwc24.h>
 #include <private/nwc24.h>
+#include <revolution/nwc24.h>
 
 void __OSInitNet() {
     NWC24Err ret;
@@ -43,6 +43,6 @@ DECOMP_FORCE_ACTIVE(OSNet_c, "/dev/net/kd/request");
 DECOMP_FORCE_ACTIVE(OSNet_c, "NWC24SuspendScheduler");
 DECOMP_FORCE_ACTIVE(OSNet_c, "NWC24ResumeScheduler");
 DECOMP_FORCE_ACTIVE(OSNet_c, "NWC24iRequestShutdown");
-DECOMP_FORCE_ACTIVE(OSNet_c, "NWC24Shutdown_: Give up!\n"); // Give up!
+DECOMP_FORCE_ACTIVE(OSNet_c, "NWC24Shutdown_: Give up!\n");  // Give up!
 DECOMP_FORCE_ACTIVE(OSNet_c, "NWC24iSetRtcCounter_");
 DECOMP_FORCE_ACTIVE(OSNet_c, "/dev/net/kd/time");

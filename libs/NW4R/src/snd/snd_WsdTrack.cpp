@@ -1,5 +1,6 @@
-#include <nw4r/snd/WsdTrack.h>
 #include <nw4r/snd/WsdPlayer.h>
+#include <nw4r/snd/WsdTrack.h>
+
 
 #include <nw4r/snd/AxManager.h>
 
@@ -40,7 +41,7 @@ namespace nw4r {
                 for (Channel* channel = mChannelList; channel != NULL; channel = channel->GetNextTrackChannel()) {
                     s32 length = channel->GetLength();
                     if (length > 0) {
-                        channel->SetLength(length-1);
+                        channel->SetLength(length - 1);
                         if (!channel->IsAutoUpdateSweep()) {
                             channel->UpdateSweep(1);
                         }
@@ -96,8 +97,7 @@ namespace nw4r {
                 f32 pan = 0.0f;
                 if (mWaveSoundInfo.pan <= 1) {
                     pan += (mWaveSoundInfo.pan - 63) / 63.0f;
-                }
-                else {
+                } else {
                     pan += (mWaveSoundInfo.pan - 64) / 63.0f;
                 }
 
@@ -107,8 +107,7 @@ namespace nw4r {
                 f32 surroundPan = 0.0f;
                 if (mWaveSoundInfo.surroundPan <= 1) {
                     surroundPan += (mWaveSoundInfo.surroundPan + 1) / 63.0f;
-                }
-                else {
+                } else {
                     surroundPan += mWaveSoundInfo.surroundPan / 63.0f;
                 }
 
@@ -197,9 +196,7 @@ namespace nw4r {
                 if (mCounter == 0) {
                     int priority = mWsdPlayer->GetChannelPriority() + mPriority;
 
-                    bool result = callback->GetWaveSoundData(&mWaveSoundInfo, &noteInfo,
-                                                            &waveData, mWsdData,
-                                                            mIndex, 0, callbackData);
+                    bool result = callback->GetWaveSoundData(&mWaveSoundInfo, &noteInfo, &waveData, mWsdData, mIndex, 0, callbackData);
                     if (!result) {
                         return -1;
                     }
@@ -219,10 +216,9 @@ namespace nw4r {
                     channel->Start(waveData, -1);
 
                     AddChannel(channel);
-                    
+
                     mCounter++;
-                }
-                else {
+                } else {
                     if (mChannelList == NULL) {
                         return -1;
                     }
@@ -249,6 +245,6 @@ namespace nw4r {
                     }
                 }
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

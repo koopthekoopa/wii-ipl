@@ -11,17 +11,17 @@
 
 #include "scene/setting/iplNCDSetting.h"
 
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
-#include <revolution/sc.h>
 #include <private/sc.h>
+#include <revolution/sc.h>
 
 #include <revolution/cntcache.h>
 
-#include <revolution/vi.h>
-#include <revolution/dvd.h>
 #include <revolution/card.h>
+#include <revolution/dvd.h>
+#include <revolution/vi.h>
 
 #include <cstring>
 
@@ -69,8 +69,7 @@ namespace ipl {
             OSReport("*****************************\n");
 
             smArg.mpMem2Root = EGG::ExpHeap::create((void*)mem2Lo, ((u32)mem2Hi - (u32)mem2Lo), MEM_HEAP_OPT_DEBUG_FILL);
-        }
-        else {
+        } else {
             smArg.mpTreasureHeap = EGG::ExpHeap::create((void*)0x93440000, 0xC0000, MEM_HEAP_OPT_DEBUG_FILL);
 
             OSReport("*****************************\n");
@@ -121,10 +120,10 @@ namespace ipl {
 
     void* System::constructFontSub_(void* fontData) {
         u32 workSize = nw4r::ut::ArchiveFont::GetRequireBufferSize(fontData);
-        u8* work = new(getMem2Sys(), DEFAULT_ALIGN) u8[OSRoundUp32B(workSize)];
+        u8* work = new (getMem2Sys(), DEFAULT_ALIGN) u8[OSRoundUp32B(workSize)];
 
-        nw4r::ut::ArchiveFont* font = new(getMem1Sys(), 4) nw4r::ut::ArchiveFont();
-    
+        nw4r::ut::ArchiveFont* font = new (getMem1Sys(), 4) nw4r::ut::ArchiveFont();
+
         font->Construct(work, workSize, fontData);
         return font;
     }
@@ -133,11 +132,11 @@ namespace ipl {
         smArg.mpFontArena = getMem2App()->alloc(0x400000, -DEFAULT_ALIGN);
         smArg.mpFontHeap = EGG::ExpHeap::create(smArg.mpFontArena, 0x400000, 0);
 
-    #ifndef VERSION_43K
+#ifndef VERSION_43K
         smArg.mResources.file[Arg::FONT] = getNandManager()->readAsync(getMem2Sys(), "/font/font.ash");
-    #else
+#else
         smArg.mResources.file[Arg::FONT] = getNandManager()->readAsync(getMem2Sys(), "/font/font_kr.ash");
-    #endif
+#endif
 
         smArg.mpWBF1File = getNandManager()->readSharedAsync(getFontHeap(), "wbf1.brfna", 5);
         smArg.mpWBF2File = getNandManager()->readSharedAsync(getFontHeap(), "wbf2.brfna", 5);
@@ -156,8 +155,7 @@ namespace ipl {
     }
 
     void System::constructSND_(void* work) {
-        snd::getSystem()->initOnMemory(smArg.mResources.file[Arg::SOUND]->getBuffer(),
-                                        getSoundHeap(), getSoundHeap()->getAllocatableSize(32));
+        snd::getSystem()->initOnMemory(smArg.mResources.file[Arg::SOUND]->getBuffer(), getSoundHeap(), getSoundHeap()->getAllocatableSize(32));
         smArg.mbSndResLoaded = true;
     }
 
@@ -176,29 +174,29 @@ namespace ipl {
     }
 
     void System::constructZiDIC_(void* work) {
-    #if defined(VERSION_43U)
-        smArg.mZiDicData.sys[EZTX_LANG_ENAM]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemENAM.zsd");
-        smArg.mZiDicData.sys[EZTX_LANG_FRCA]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemFRCA.zsd");
-        smArg.mZiDicData.sys[EZTX_LANG_ESSA]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemESSA.zsd");
+#if defined(VERSION_43U)
+        smArg.mZiDicData.sys[EZTX_LANG_ENAM] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemENAM.zsd");
+        smArg.mZiDicData.sys[EZTX_LANG_FRCA] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemFRCA.zsd");
+        smArg.mZiDicData.sys[EZTX_LANG_ESSA] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemESSA.zsd");
 
-        smArg.mZiDicData.oem[EZTX_LANG_ENAM]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoENAM.znd");
-        smArg.mZiDicData.oem[EZTX_LANG_FRCA]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoFRCA.znd");
-        smArg.mZiDicData.oem[EZTX_LANG_ESSA]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoESSA.znd");
-    #elif defined(VERSION_43E)
-        smArg.mZiDicData.sys[EZTX_LANG_ENUK]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemENUK.zsd");
-        smArg.mZiDicData.sys[EZTX_LANG_DE]      = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemDE.zsd");
-        smArg.mZiDicData.sys[EZTX_LANG_FREU]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemFREU.zsd");
-        smArg.mZiDicData.sys[EZTX_LANG_ESEU]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemESEU.zsd");
-        smArg.mZiDicData.sys[EZTX_LANG_IT]      = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemIT.zsd");
-        smArg.mZiDicData.sys[EZTX_LANG_NL]      = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemNL.zsd");
+        smArg.mZiDicData.oem[EZTX_LANG_ENAM] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoENAM.znd");
+        smArg.mZiDicData.oem[EZTX_LANG_FRCA] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoFRCA.znd");
+        smArg.mZiDicData.oem[EZTX_LANG_ESSA] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoESSA.znd");
+#elif defined(VERSION_43E)
+        smArg.mZiDicData.sys[EZTX_LANG_ENUK] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemENUK.zsd");
+        smArg.mZiDicData.sys[EZTX_LANG_DE] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemDE.zsd");
+        smArg.mZiDicData.sys[EZTX_LANG_FREU] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemFREU.zsd");
+        smArg.mZiDicData.sys[EZTX_LANG_ESEU] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemESEU.zsd");
+        smArg.mZiDicData.sys[EZTX_LANG_IT] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemIT.zsd");
+        smArg.mZiDicData.sys[EZTX_LANG_NL] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemNL.zsd");
 
-        smArg.mZiDicData.oem[EZTX_LANG_ENUK]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoENUK.znd");
-        smArg.mZiDicData.oem[EZTX_LANG_DE]      = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoDE.znd");
-        smArg.mZiDicData.oem[EZTX_LANG_FREU]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoFREU.znd");
-        smArg.mZiDicData.oem[EZTX_LANG_ESEU]    = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoESEU.znd");
-        smArg.mZiDicData.oem[EZTX_LANG_IT]      = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoIT.znd");
-        smArg.mZiDicData.oem[EZTX_LANG_NL]      = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoNL.znd");
-    #endif
+        smArg.mZiDicData.oem[EZTX_LANG_ENUK] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoENUK.znd");
+        smArg.mZiDicData.oem[EZTX_LANG_DE] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoDE.znd");
+        smArg.mZiDicData.oem[EZTX_LANG_FREU] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoFREU.znd");
+        smArg.mZiDicData.oem[EZTX_LANG_ESEU] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoESEU.znd");
+        smArg.mZiDicData.oem[EZTX_LANG_IT] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoIT.znd");
+        smArg.mZiDicData.oem[EZTX_LANG_NL] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoNL.znd");
+#endif
 
         smArg.mbZi8ResLoaded = true;
     }
@@ -217,36 +215,33 @@ namespace ipl {
 
     void System::createFolders_(void* work) {
         // Init VF
-        u8* workData = new(getMem1Sys(), DEFAULT_ALIGN) u8[VF_WORK_SIZE];
+        u8* workData = new (getMem1Sys(), DEFAULT_ALIGN) u8[VF_WORK_SIZE];
         VFInitEx(workData, VF_WORK_SIZE);
 
         // Init CDB
-        workData = new(getMem1Sys(), 64) u8[CDB_SYSTEM_WORK_SIZE];
+        workData = new (getMem1Sys(), 64) u8[CDB_SYSTEM_WORK_SIZE];
         if (!SCGetConfigDoneFlag() && !SCGetConfigDoneFlag2()) {
-            // @BUG Should use the full path
+            // @bug Should use the full path
             nand::wrapper::Delete("cdb.vff");
         }
         cdb::wrapper::init(workData);
 
-        // @BUG: Reports free MEM1 size and how many NWC24 needs, yet it uses MEM2 instead.
+        // @bug: Reports free MEM1 size and how many NWC24 needs, yet it uses MEM2 instead.
         OSReport("MEM1SYS Free:%d NWC24 Need %d\n", getMem1Sys()->getAllocatableSize(4), NWC24_LIB_WORK_SIZE);
-        workData = new(getMem2Sys(), -DEFAULT_ALIGN) u8[NWC24_LIB_WORK_SIZE];
+        workData = new (getMem2Sys(), -DEFAULT_ALIGN) u8[NWC24_LIB_WORK_SIZE];
 
         // Init NWC24
         if (!SCGetConfigDoneFlag() && !SCGetConfigDoneFlag2()) {
             NWC24InitFiles(workData, TRUE);
-        }
-        else {
+        } else {
             if (!SCGetConfigDoneFlag2()) {
                 NWC24InitFiles(workData, FALSE);
-            }
-            else {
+            } else {
                 NWC24Err err = NWC24OpenLib(workData);
                 NWC24CloseLib();
 
-                if (err == NWC24_ERR_BROKEN
-                || (err == NWC24_ERR_FILE_OTHER || err == NWC24_ERR_FILE_NOEXISTS || err == NWC24_ERR_FILE_WRITE
-                || err == NWC24_ERR_FILE_READ || err == NWC24_ERR_FILE_CLOSE || err == NWC24_ERR_FILE_OPEN)) {
+                if (err == NWC24_ERR_BROKEN || (err == NWC24_ERR_FILE_OTHER || err == NWC24_ERR_FILE_NOEXISTS || err == NWC24_ERR_FILE_WRITE ||
+                                                err == NWC24_ERR_FILE_READ || err == NWC24_ERR_FILE_CLOSE || err == NWC24_ERR_FILE_OPEN)) {
                     NWC24InitFiles(workData, FALSE);
                     smArg.mbNWC24LibError = true;
                 }
@@ -302,15 +297,15 @@ namespace ipl {
         smArg.mResources.file[Arg::INVALID_JPEG] = getNandManager()->readAsync(getMem2Sys(), "/my_question.jpg");
 
         // Load ZI dictionary
-    #if defined(VERSION_43U)
+#if defined(VERSION_43U)
         smArg.mResources.sharedFile[Arg::ZI_DICT] = getNandManager()->readSharedAsync(getMem2Sys(), "eZTSystemNA.arc", 6);
         smArg.mResources.sharedFile[Arg::NINTENDO_DICT] = getNandManager()->readSharedAsync(getMem2Sys(), "eZTNintendoNA.arc", 7);
         getNandManager()->getTask()->request(requestCreateInstance, (void*)constructZiDIC_, NULL);
-    #elif defined(VERSION_43E)
+#elif defined(VERSION_43E)
         smArg.mResources.sharedFile[Arg::ZI_DICT] = getNandManager()->readSharedAsync(getMem2Sys(), "eZTSystemEU.arc", 6);
         smArg.mResources.sharedFile[Arg::NINTENDO_DICT] = getNandManager()->readSharedAsync(getMem2Sys(), "eZTNintendoEU.arc", 7);
         getNandManager()->getTask()->request(requestCreateInstance, (void*)constructZiDIC_, NULL);
-    #endif
+#endif
 
         // We are done!
         getNandManager()->getTask()->request(resourceLoaded_, NULL, NULL);
@@ -327,13 +322,13 @@ namespace ipl {
         smArg.mpMem1Sys->unkUnline1();
 
         // Create important instances
-        smArg.mpDialog = new(getMem1Sys(), 4) DialogWindow(getMem2Sys());
-        smArg.mpWarningHandler = new(getMem1Sys(), 4) WarningHandler(getMem2Sys());
-        smArg.mpMiiManager = new(getMem1Sys(), 4) nigaoe::Manager(getMem2Sys());
-        smArg.mpKeyboardMgr = new(getMem1Sys(), 4) keyboard::Manager();
+        smArg.mpDialog = new (getMem1Sys(), 4) DialogWindow(getMem2Sys());
+        smArg.mpWarningHandler = new (getMem1Sys(), 4) WarningHandler(getMem2Sys());
+        smArg.mpMiiManager = new (getMem1Sys(), 4) nigaoe::Manager(getMem2Sys());
+        smArg.mpKeyboardMgr = new (getMem1Sys(), 4) keyboard::Manager();
         smArg.mpKeyboardMgr->create(smArg.mResources.file[Arg::SOFT_KEYBOARD], getMem2Sys());
         smArg.mpKeyboardMgr->init();
-        smArg.mpHomeButton = new(getMem1Sys(), 4) HomeButtonMenu(getMem2Sys());
+        smArg.mpHomeButton = new (getMem1Sys(), 4) HomeButtonMenu(getMem2Sys());
 
         if (old != NULL) {
             old->unkUnline1();
@@ -349,8 +344,8 @@ namespace ipl {
         smArg.mpMem1Sys->unkUnline1();
 
         // Create NWC24 and mail instances
-        smArg.mpCdbManager = new(getMem1Sys(), 4) cdb::Manager(getMem2Sys());
-        smArg.mpNwc24Manager = new(getMem1Sys(), 4) nwc24::Manager(getMem2Sys());
+        smArg.mpCdbManager = new (getMem1Sys(), 4) cdb::Manager(getMem2Sys());
+        smArg.mpNwc24Manager = new (getMem1Sys(), 4) nwc24::Manager(getMem2Sys());
 
         getMiiManager()->commitHiddenDB();
 
@@ -443,7 +438,7 @@ namespace ipl {
         smArg.mRegistState = Arg::REGIST_STATE_START;
         smArg.mRegistErrCode = 0;
     }
-    
+
     BOOL System::processNWC24Regist() {
         switch (smArg.mRegistState) {
             case Arg::REGIST_STATE_START: {
@@ -471,7 +466,7 @@ namespace ipl {
         char rsoListPath[OSRoundUp32B(64)];
         OSCalendarTime newDateTime;
 
-        __OSInIPL = TRUE; // Yes we are in the IPL! (... this is already set to TRUE in BS2Init)
+        __OSInIPL = TRUE;  // Yes we are in the IPL! (... this is already set to TRUE in BS2Init)
 
         // Initialize OS (... this is already done in `main`)
         OSInit();
@@ -495,9 +490,9 @@ namespace ipl {
             SCSetAspectRatio(SC_ASPECT_RATIO_4x3);
 
             SCSetWpadSensorBarPosition(0);
-        #ifdef VERSION_43U
+#ifdef VERSION_43U
             SCSetBtDpdSensibility(3);
-        #endif // VERSION_43U
+#endif  // VERSION_43U
 
             SCSetScreenSaverMode(FALSE);
             VIEnableDimming(SCGetScreenSaverMode());
@@ -556,8 +551,7 @@ namespace ipl {
 
             SCSetNetContentRestrictions(SC_NET_RESTRICTIONS_NONE);
             SCSetWwwRestriction(FALSE);
-        }
-        else if (!SCGetConfigDoneFlag2()) {
+        } else if (!SCGetConfigDoneFlag2()) {
             switch (SCGetProductArea()) {
                 case SC_PRODUCT_AREA_JPN: {
                     setCountry(SC_COUNTRY_JP);
@@ -605,7 +599,7 @@ namespace ipl {
         // Create FIFO
         EGG::GraphicsFifo::create(0x40000, NULL);
         GXSetPixelFmt(GX_PF_RGBA6_Z24, GX_ZC_LINEAR);
-        smArg.mpFramework = new(getMem1Sys(), 4) Framework(getMem1Sys());
+        smArg.mpFramework = new (getMem1Sys(), 4) Framework(getMem1Sys());
 
         // Fast cast
         OSInitFastCast();
@@ -619,16 +613,16 @@ namespace ipl {
 
         // Faders
         GXRenderModeObj* rMode = getRenderModeObj();
-        smArg.mpFader = new(getMem1Sys(), 4) EGG::ColorFader(0.0f, 0.0f, rMode->fbWidth, rMode->efbHeight);
-        smArg.mpResetFader = new(getMem1Sys(), 4) EGG::ColorFader(0.0f, 0.0f, rMode->fbWidth, rMode->efbHeight);
-    
+        smArg.mpFader = new (getMem1Sys(), 4) EGG::ColorFader(0.0f, 0.0f, rMode->fbWidth, rMode->efbHeight);
+        smArg.mpResetFader = new (getMem1Sys(), 4) EGG::ColorFader(0.0f, 0.0f, rMode->fbWidth, rMode->efbHeight);
+
         // Main thread
         EGG::Thread::initialize();
-        smArg.mpMainThread = new(getMem1Sys(), 4) EGG::Thread(OSGetCurrentThread(), 4);
+        smArg.mpMainThread = new (getMem1Sys(), 4) EGG::Thread(OSGetCurrentThread(), 4);
 
-        smArg.mpControllerManager = new(getMem1Sys(), 4) controller::Manager(getMem2Sys());
-        smArg.mpResetHandler = new(getMem1Sys(), 4) ResetHandler(getMem2Sys());
-        smArg.mpErrorHandler = new(getMem1Sys(), 4) ErrorHandler(getMem2Sys());
+        smArg.mpControllerManager = new (getMem1Sys(), 4) controller::Manager(getMem2Sys());
+        smArg.mpResetHandler = new (getMem1Sys(), 4) ResetHandler(getMem2Sys());
+        smArg.mpErrorHandler = new (getMem1Sys(), 4) ErrorHandler(getMem2Sys());
 
         // ES Library
         BOOL initResult = ES_InitLib() != ES_ERR_OK;
@@ -645,14 +639,14 @@ namespace ipl {
         smArg.mpTask3 = EGG::TaskThread::create(0x31, 20, 0x10000, getMem1Sys());
 
         // Postman
-        smArg.mpPostmanManager = new(getMem1Sys(), 4) postman::Manager(getMem1Sys());
+        smArg.mpPostmanManager = new (getMem1Sys(), 4) postman::Manager(getMem1Sys());
         smArg.mpPostmanManager->InitManager();
 
         // Set current time
         setToday_();
 
         // BS2 Management
-        smArg.mpBS2Manager = new(getMem1Sys(), 4) bs2::Manager(getMem2Sys());
+        smArg.mpBS2Manager = new (getMem1Sys(), 4) bs2::Manager(getMem2Sys());
         if (isNandFull()) {
             getBS2Manager()->abort();
         }
@@ -666,10 +660,10 @@ namespace ipl {
         CNTCACHEInit(0, 0);
 
         // Random manager
-        smArg.mpRandom = new(getMem1Sys(), 4) math::Random(OSGetTick());
+        smArg.mpRandom = new (getMem1Sys(), 4) math::Random(OSGetTick());
 
         // NAND manager
-        smArg.mpNandManager = new(getMem1Sys(), 4) nand::Manager(getMem1Sys());
+        smArg.mpNandManager = new (getMem1Sys(), 4) nand::Manager(getMem1Sys());
 
         // Symbol list for RSO modules
         snprintf(rsoListPath, sizeof(rsoListPath), "/%s/%s/main.sel", SYSMENU_BUILD_TYPE, SYSMENU_BUILD_VERSION);
@@ -677,7 +671,7 @@ namespace ipl {
         RSOListInit(smArg.mResources.file[Arg::RSO_SYM_LIST]->getBuffer());
 
         // Load messages
-    #ifndef VERSION_43E
+#ifndef VERSION_43E
         smArg.mResources.file[Arg::MESG_ENG] = getNandManager()->read(getMem2Sys(), "/message/eng/ipl_common.bmg");
         smArg.mResources.file[Arg::MESG_FRA] = getNandManager()->read(getMem2Sys(), "/message/fra/ipl_common.bmg");
         smArg.mResources.file[Arg::MESG_GER] = getNandManager()->read(getMem2Sys(), "/message/ger/ipl_common.bmg");
@@ -687,7 +681,7 @@ namespace ipl {
         smArg.mResources.file[Arg::MESG_SPA] = getNandManager()->read(getMem2Sys(), "/message/spa/ipl_common.bmg");
         smArg.mResources.file[Arg::MESG_KOR] = getNandManager()->read(getMem2Sys(), "/message/kor/ipl_common.bmg");
         smArg.mResources.file[Arg::MESG_CHN] = getNandManager()->read(getMem2Sys(), "/message/chn/ipl_common.bmg");
-    #else
+#else
         // Load European messages
         smArg.mResources.file[Arg::MESG_ENG] = getNandManager()->read(getMem2Sys(), "/message/eng/ipl_common_noe.bmg");
         smArg.mResources.file[Arg::MESG_FRA] = getNandManager()->read(getMem2Sys(), "/message/fra/ipl_common_noe.bmg");
@@ -698,31 +692,31 @@ namespace ipl {
         smArg.mResources.file[Arg::MESG_SPA] = getNandManager()->read(getMem2Sys(), "/message/spa/ipl_common_noe.bmg");
         smArg.mResources.file[Arg::MESG_KOR] = getNandManager()->read(getMem2Sys(), "/message/kor/ipl_common.bmg");
         smArg.mResources.file[Arg::MESG_CHN] = getNandManager()->read(getMem2Sys(), "/message/chn/ipl_common.bmg");
-    #endif // VERSION_43E
+#endif  // VERSION_43E
 
         // Setup more stuff
-        smArg.mpException = new(getMem1Sys(), 4) Exception(getMem2Sys(), *System::getRenderModeObj());
-        smArg.mpPointer = new(getMem1Sys(), 4) Pointer(getMem2Sys());
-        smArg.mpTVRCManager = new(getMem2Sys(), 4) TVRCManager(getMem2Sys());
+        smArg.mpException = new (getMem1Sys(), 4) Exception(getMem2Sys(), *System::getRenderModeObj());
+        smArg.mpPointer = new (getMem1Sys(), 4) Pointer(getMem2Sys());
+        smArg.mpTVRCManager = new (getMem2Sys(), 4) TVRCManager(getMem2Sys());
         ncd::NCDSetting::makeMacAddr();
-        smArg.mpJpegDecoder = new(getMem1Sys(), 4) utility::JpegDecoder(getMem2Sys());
+        smArg.mpJpegDecoder = new (getMem1Sys(), 4) utility::JpegDecoder(getMem2Sys());
 
         // Load system resources
         loadResource_(NULL);
 
-        smArg.mpMessageMgr = new(getMem1Sys(), 4) message::Manager(getMem2Sys());
-        smArg.mpSceneManager = new(getMem1Sys(), 4) scene::Manager(smArg.mpSceneHeap);
+        smArg.mpMessageMgr = new (getMem1Sys(), 4) message::Manager(getMem2Sys());
+        smArg.mpSceneManager = new (getMem1Sys(), 4) scene::Manager(smArg.mpSceneHeap);
 
         // IPL save data
-        smArg.mpSaveDataManager = new(getMem1Sys(), DEFAULT_ALIGN) savedata::Manager(getMem2Sys());
+        smArg.mpSaveDataManager = new (getMem1Sys(), DEFAULT_ALIGN) savedata::Manager(getMem2Sys());
         smArg.mpSaveDataManager->initManager();
 
         // TVRC Database
         TVRCManager::getHandle()->loadDatabase();
 
         // Channel instances
-        smArg.mpChannelScriptManager = new(getMem1Sys(), 4) channel::ChannelScriptManager();
-        smArg.mpChannelManager = new(getMem1Sys(), 4) channel::Manager(smArg.mpChannelHeap);
+        smArg.mpChannelScriptManager = new (getMem1Sys(), 4) channel::ChannelScriptManager();
+        smArg.mpChannelManager = new (getMem1Sys(), 4) channel::Manager(smArg.mpChannelHeap);
         smArg.mpChannelManager->initManager();
 
         // Setup scenary
@@ -736,13 +730,13 @@ namespace ipl {
             smArg.mpFramework->endFrame();
         }
 
-    #if defined(VERSION_43K) || !defined(TURN_OFF_CK2_VERIFY)
+#if defined(VERSION_43K) || !defined(TURN_OFF_CK2_VERIFY)
         // And finally... homebrew's fear.
         BOOL hasKoreanKey = ES_VerifyCK2() == ES_ERR_OK;
         if (hasKoreanKey) {
             IPLErrorLogAndDisplay(MESG_ERR_KEY2, "ES", hasKoreanKey, 1446);
         }
-    #endif
+#endif
     }
 
     BOOL System::isResetAcceptable() {
@@ -812,8 +806,7 @@ namespace ipl {
                 getSceneManager()->calc();
                 getFader()->calc();
                 getResetFader()->calc();
-            }
-            else {
+            } else {
                 // Update log depending on HOME Menu state
                 if (getHomeButtonMenu() != NULL && !getHomeButtonMenu()->isEnable()) {
                     getSceneManager()->calc();
@@ -823,8 +816,7 @@ namespace ipl {
                     getPointer()->calc();
                     getFader()->calc();
                     getResetFader()->calc();
-                }
-                else {
+                } else {
                     getHomeButtonMenu()->calc();
                     getPointer()->calc();
                     getFader()->calc();
@@ -1132,8 +1124,7 @@ namespace ipl {
         // Pop old state
         if (isVisible) {
             System::getPointer()->setVisible(true);
-        }
-        else {
+        } else {
             System::getPointer()->setVisible(false);
         }
 
@@ -1262,7 +1253,7 @@ namespace ipl {
 
         return lang;
     }
-    
+
     s32 System::getRegion() {
         s32 product = SCGetProductArea();
 
@@ -1280,7 +1271,6 @@ namespace ipl {
             // NTSC-K
             case SC_PRODUCT_AREA_KOR: {
                 return SC_PRODUCT_AREA_KOR;
-            
             }
             // Unreleased iQue version
             case SC_PRODUCT_AREA_CHN: {
@@ -1304,7 +1294,7 @@ namespace ipl {
         OSTicksToCalendarTime(OSGetTime(), &smArg.mCurrentTime);
         if (smArg.mCurrentTime.year > MAX_YEAR) {
             smArg.mCurrentTime.year = MAX_YEAR;
-            smArg.mCurrentTime.mon = MAX_MONTH-1;
+            smArg.mCurrentTime.mon = MAX_MONTH - 1;
             smArg.mCurrentTime.mday = MAX_DAY;
             OSTicksToCalendarTime(OSCalendarTimeToTicks(&smArg.mCurrentTime), &smArg.mCurrentTime);
         }
@@ -1325,13 +1315,13 @@ namespace ipl {
             // Internet settings
             if (smArg.mBS2LaunchCode == LAUNCH_CODE_SETTING && BS2GetArgc() > 1) {
                 strncpy(smArg.mBS2FirstArgv, BS2GetArgv()[1], sizeof(smArg.mBS2FirstArgv));
-                smArg.mBS2FirstArgv[sizeof(smArg.mBS2FirstArgv)-1] = 0;
+                smArg.mBS2FirstArgv[sizeof(smArg.mBS2FirstArgv) - 1] = 0;
                 smArg.mpNetSettingArg = smArg.mBS2FirstArgv;
             }
             // Data management
             else if (smArg.mBS2LaunchCode == LAUNCH_CODE_DATA_MANAGER && BS2GetArgc() > 1) {
                 strncpy(smArg.mBS2FirstArgv, BS2GetArgv()[1], sizeof(smArg.mBS2FirstArgv));
-                smArg.mBS2FirstArgv[sizeof(smArg.mBS2FirstArgv)-1] = 0;
+                smArg.mBS2FirstArgv[sizeof(smArg.mBS2FirstArgv) - 1] = 0;
                 smArg.mpDataManageArg = smArg.mBS2FirstArgv;
 
                 smArg.mbGoingToDataManager = true;
@@ -1340,4 +1330,4 @@ namespace ipl {
             }
         }
     }
-}
+}  // namespace ipl

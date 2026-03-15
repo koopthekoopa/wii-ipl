@@ -7,6 +7,7 @@
 
 #include <internal/RFLi_Debug.h>
 
+// clang-format off
 static const u8 scDefaultData[RFL_DEFAULT_DATA_MAX][sizeof(RFLiCharData)] = {
     /* GUEST A */
     {
@@ -69,13 +70,13 @@ static const u8 scDefaultData[RFL_DEFAULT_DATA_MAX][sizeof(RFLiCharData)] = {
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     }
 };
+// clang-format on
 
 RFLiCharData* RFLiGetDefaultDataPtr(u16 index) {
     RFLi_ASSERTLINE_RANGE(index, 0, RFL_DEFAULT_DATA_MAX, 152);
     if (index >= RFL_DEFAULT_DATA_MAX) {
         return NULL;
-    }
-    else {
+    } else {
         return (RFLiCharData*)scDefaultData[index];
     }
 }
@@ -95,7 +96,7 @@ BOOL RFLSearchDefaultData(const RFLCreateID* id, u16* index) {
     if (id == NULL) {
         return FALSE;
     }
-    
+
     for (i = 0; i < RFL_DEFAULT_DATA_MAX; i++) {
         if (RFLiIsSameID((RFLCreateID*)&((RFLiCharData*)scDefaultData[i])->createID, id)) {
             ret = TRUE;

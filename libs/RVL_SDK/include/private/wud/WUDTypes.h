@@ -60,23 +60,23 @@ typedef void (*WUDHidConnCallback)(WUDDevInfo* devHandle, u8 open);
 typedef void (*WUDHidRecvCallback)(UINT8 devHandle, UINT8* pReport, UINT16 len);
 
 struct WUDDevInfo {
-    SC_BT_DEV_INFO      conf;           // 0x00
+    SC_BT_DEV_INFO conf;  // 0x00
 
-    BD_ADDR             devAddr;        // 0x40
-    LINK_KEY            linkKey;        // 0x46
-    UINT8               devHandle;      // 0x56
-    UINT8               subclass;       // 0x57
-    UINT8               appID;          // 0x58
-    u8                  status;         // 0x59
+    BD_ADDR devAddr;   // 0x40
+    LINK_KEY linkKey;  // 0x46
+    UINT8 devHandle;   // 0x56
+    UINT8 subclass;    // 0x57
+    UINT8 appID;       // 0x58
+    u8 status;         // 0x59
 
-    s8                  UNK_0x5A;       // 0x5A
-    u8                  UNK_0x5B;       // 0x5B
-    u8                  UNK_0x5C;       // 0x5C
-    tBTA_HH_ATTR_MASK   hhAttrMask;     // 0x5E
+    s8 UNK_0x5A;                   // 0x5A
+    u8 UNK_0x5B;                   // 0x5B
+    u8 UNK_0x5C;                   // 0x5C
+    tBTA_HH_ATTR_MASK hhAttrMask;  // 0x5E
 };
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // PRIVATE_WUD_TYPES_H
+#endif  // PRIVATE_WUD_TYPES_H

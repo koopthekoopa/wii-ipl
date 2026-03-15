@@ -48,37 +48,37 @@ enum {
 typedef void (*AXVoiceCallback)(void*);
 
 typedef struct _AXVPB {
-    void*           next;           // 0x00
-    void*           prev;           // 0x04
-    void*           next1;          // 0x08
-    u32             priority;       // 0x0C
-    AXVoiceCallback callback;       // 0x10
-    u32             userContext;    // 0x14
-    u32             index;          // 0x18
-    u32             sync;           // 0x1C
-    u32             depop;          // 0x20
-    void*           itdBuffer;      // 0x24
-    AXPB            pb;             // 0x28
+    void* next;                // 0x00
+    void* prev;                // 0x04
+    void* next1;               // 0x08
+    u32 priority;              // 0x0C
+    AXVoiceCallback callback;  // 0x10
+    u32 userContext;           // 0x14
+    u32 index;                 // 0x18
+    u32 sync;                  // 0x1C
+    u32 depop;                 // 0x20
+    void* itdBuffer;           // 0x24
+    AXPB pb;                   // 0x28
 } AXVPB;
 
-void    AXSetVoiceSrcType(AXVPB* vpb, u32 type);
-void    AXSetVoiceState(AXVPB* vpb, u16 state);
-void    AXSetVoiceType(AXVPB* vpb, u16 type);
-void    AXSetVoiceMix(AXVPB* vpb, AXPBMIX* mix);
-void    AXSetVoiceVe(AXVPB* vpb, AXPBVE* ve);
-void    AXSetVoiceAddr(AXVPB* vpb, AXPBADDR* addr);
-void    AXSetVoiceAdpcm(AXVPB* vpb, AXPBADPCM* adpcm);
-void    AXSetVoiceSrc(AXVPB* vpb, AXPBSRC* src_);
-void    AXSetVoiceSrcRatio(AXVPB* vpb, float ratio);
-void    AXSetVoiceAdpcmLoop(AXVPB* vpb, AXPBADPCMLOOP* adpcmloop);
-void    AXSetVoiceLpf(AXVPB* vpb, AXPBLPF* lpf);
-void    AXSetVoiceLpfCoefs(AXVPB* vpb, u16 a0, u16 b0);
-void    AXGetLpfCoefs(u16 freq, u16* a, u16* b);
-void    AXSetVoiceRmtOn(AXVPB *vpb, u16 on);
-void    AXSetVoiceRmtMix(AXVPB* vpb, AXPBRMTMIX* mix);
+void AXSetVoiceSrcType(AXVPB* vpb, u32 type);
+void AXSetVoiceState(AXVPB* vpb, u16 state);
+void AXSetVoiceType(AXVPB* vpb, u16 type);
+void AXSetVoiceMix(AXVPB* vpb, AXPBMIX* mix);
+void AXSetVoiceVe(AXVPB* vpb, AXPBVE* ve);
+void AXSetVoiceAddr(AXVPB* vpb, AXPBADDR* addr);
+void AXSetVoiceAdpcm(AXVPB* vpb, AXPBADPCM* adpcm);
+void AXSetVoiceSrc(AXVPB* vpb, AXPBSRC* src_);
+void AXSetVoiceSrcRatio(AXVPB* vpb, float ratio);
+void AXSetVoiceAdpcmLoop(AXVPB* vpb, AXPBADPCMLOOP* adpcmloop);
+void AXSetVoiceLpf(AXVPB* vpb, AXPBLPF* lpf);
+void AXSetVoiceLpfCoefs(AXVPB* vpb, u16 a0, u16 b0);
+void AXGetLpfCoefs(u16 freq, u16* a, u16* b);
+void AXSetVoiceRmtOn(AXVPB* vpb, u16 on);
+void AXSetVoiceRmtMix(AXVPB* vpb, AXPBRMTMIX* mix);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // REVOLUTION_AX_VPB_H
+#endif  // REVOLUTION_AX_VPB_H

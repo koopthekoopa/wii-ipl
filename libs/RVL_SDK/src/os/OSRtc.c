@@ -1,11 +1,11 @@
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 #include <private/exi.h>
 
 static SramControl Scb ALIGN32;
 
-u16  OSGetGbsMode();
+u16 OSGetGbsMode();
 void OSSetGbsMode(u16 mode);
 
 static BOOL GetRTC(u32* rtc) {
@@ -39,7 +39,7 @@ BOOL __OSGetRTC(u32* rtc) {
     u32 t1;
     int i;
 
-    for(i = 0; i < 16; i++) {
+    for (i = 0; i < 16; i++) {
         err = 0;
         err |= !GetRTC(&t0);
         err |= !GetRTC(&t1);
@@ -198,7 +198,7 @@ BOOL UnlockSram(BOOL commit, u32 offset) {
         }
 
         Scb.sync = WriteSram(Scb.sram + Scb.offset, Scb.offset, 64 - Scb.offset);
-    
+
         if (Scb.sync) {
             Scb.offset = 64;
         }
@@ -208,7 +208,6 @@ BOOL UnlockSram(BOOL commit, u32 offset) {
     OSRestoreInterrupts(Scb.enabled);
     return Scb.sync;
 }
-
 
 BOOL __OSUnlockSram(BOOL commit) {
     return UnlockSram(commit, 0);
@@ -396,8 +395,7 @@ void OSSetEuRgb60Mode(u32 mode) {
     sram = __OSLockSram();
     if (mode == (sram->ntd & 0x40)) {
         __OSUnlockSram(FALSE);
-    }
-    else {
+    } else {
         sram->ntd &= ~0x40;
         sram->ntd |= mode;
         __OSUnlockSram(TRUE);
@@ -420,8 +418,7 @@ void OSSetWirelessID(s32 chan, u16 id) {
     if (sram->wirelessPadID[chan] != id) {
         sram->wirelessPadID[chan] = id;
         __OSUnlockSramEx(TRUE);
-    }
-    else {
+    } else {
         __OSUnlockSramEx(FALSE);
     }
 }
@@ -465,7 +462,7 @@ BOOL __OSClearRTCFlags() {
         EXIUnlock(EXI_CHAN_0);
         return FALSE;
     }
-    
+
     cmd = 0xA1000800;
     err = FALSE;
     err |= !EXIImm(EXI_CHAN_0, &cmd, sizeof(u32), EXI_WRITE, NULL);

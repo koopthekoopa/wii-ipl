@@ -8,24 +8,24 @@
 namespace nw4r {
     namespace snd {
         class DvdSoundArchive::DvdFileStream : public ut::DvdLockedFileStream {
-            public:
-                DvdFileStream(const DVDFileInfo* fileInfo, u32 offset, u32 size);
-                DvdFileStream(s32 entrynum, u32 offset, u32 size);
+        public:
+            DvdFileStream(const DVDFileInfo* fileInfo, u32 offset, u32 size);
+            DvdFileStream(s32 entrynum, u32 offset, u32 size);
 
-                virtual s32     Read(void* dst, u32 size);                                          // 0x14
-                virtual void    Seek(s32 offset, u32 origin);                                       // 0x44
+            virtual s32 Read(void* dst, u32 size);      // 0x14
+            virtual void Seek(s32 offset, u32 origin);  // 0x44
 
-                virtual u32     Tell() const        { return ut::DvdFileStream::Tell() - mOffset; } // 0x58
+            virtual u32 Tell() const { return ut::DvdFileStream::Tell() - mOffset; }  // 0x58
 
-                virtual u32     GetSize() const     { return mSize; }                               // 0x40
+            virtual u32 GetSize() const { return mSize; }  // 0x40
 
-            private:
-                s32 mOffset;    // 0x70
-                s32 mSize;      // 0x74
+        private:
+            s32 mOffset;  // 0x70
+            s32 mSize;    // 0x74
         };
 
-        DvdSoundArchive::DvdSoundArchive() :
-        mOpen(false) {}
+        DvdSoundArchive::DvdSoundArchive() : mOpen(false) {
+        }
 
         DvdSoundArchive::~DvdSoundArchive() {
             Close();
@@ -80,7 +80,7 @@ namespace nw4r {
                 return NULL;
             }
 
-            return new(buffer) DvdFileStream(&mFileInfo, offset, length);
+            return new (buffer) DvdFileStream(&mFileInfo, offset, length);
         }
 
         ut::FileStream* DvdSoundArchive::OpenExtStream(void* buffer, int size, const char* extPath, u32 offset, u32 length) const {
@@ -97,7 +97,7 @@ namespace nw4r {
                 return NULL;
             }
 
-            return new(buffer) DvdFileStream(entrynum, offset, length);
+            return new (buffer) DvdFileStream(entrynum, offset, length);
         }
 
         int DvdSoundArchive::detail_GetRequiredStreamBufferSize() const {
@@ -159,10 +159,8 @@ namespace nw4r {
             return true;
         }
 
-        DvdSoundArchive::DvdFileStream::DvdFileStream(const DVDFileInfo* fileInfo, u32 offset, u32 size) :
-        DvdLockedFileStream(fileInfo, false),
-        mOffset(offset),
-        mSize(size) {
+        DvdSoundArchive::DvdFileStream::DvdFileStream(const DVDFileInfo* fileInfo, u32 offset, u32 size)
+            : DvdLockedFileStream(fileInfo, false), mOffset(offset), mSize(size) {
             if (mSize == 0) {
                 mSize = ut::DvdFileStream::GetSize();
             }
@@ -170,10 +168,8 @@ namespace nw4r {
             ut::DvdFileStream::Seek(mOffset, SEEK_BEG);
         }
 
-        DvdSoundArchive::DvdFileStream::DvdFileStream(s32 entrynum, u32 offset, u32 size) :
-        DvdLockedFileStream(entrynum),
-        mOffset(offset),
-        mSize(size) {
+        DvdSoundArchive::DvdFileStream::DvdFileStream(s32 entrynum, u32 offset, u32 size)
+            : DvdLockedFileStream(entrynum), mOffset(offset), mSize(size) {
             if (mSize == 0) {
                 mSize = ut::DvdFileStream::GetSize();
             }
@@ -213,12 +209,11 @@ namespace nw4r {
 
             if (offset < mOffset) {
                 offset = mOffset;
-            }
-            else if (offset > mOffset + mSize) {
+            } else if (offset > mOffset + mSize) {
                 offset = mOffset + mSize;
             }
 
             ut::DvdFileStream::Seek(offset, SEEK_BEG);
         }
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r

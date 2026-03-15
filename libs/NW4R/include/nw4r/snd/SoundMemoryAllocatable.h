@@ -4,13 +4,13 @@
 #include <nw4r/snd/types.h>
 
 namespace nw4r {
-namespace snd {
+    namespace snd {
         class SoundMemoryAllocatable {
-            public:
-                virtual ~SoundMemoryAllocatable() {}    // 0x08
-                virtual void*   Alloc(u32 size) = 0;    // 0x0C
+        public:
+            virtual ~SoundMemoryAllocatable() {}  // 0x08
+            virtual void* Alloc(u32 size) = 0;    // 0x0C
         };
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r
 
-#endif // NW4R_SND_SOUND_MEMORY_ALLOCATABLE_H
+#endif  // NW4R_SND_SOUND_MEMORY_ALLOCATABLE_H

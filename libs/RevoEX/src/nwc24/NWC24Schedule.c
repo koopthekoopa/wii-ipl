@@ -1,5 +1,5 @@
-#include <revolution/nwc24.h>
 #include <private/nwc24.h>
+#include <revolution/nwc24.h>
 
 #include <revolution/os.h>
 
@@ -61,8 +61,7 @@ s32 NWC24ResumeScheduler() {
     {
         if (nwc24ScdOpenCnt > 0 && nwc24ScdSuspendCnt == 0) {
             count = 0;
-        }
-        else {
+        } else {
             count = ExecResumeScheduler();
 
             if (nwc24ScdSuspendCnt > 0) {
@@ -77,9 +76,9 @@ s32 NWC24ResumeScheduler() {
 }
 
 NWC24Err NWC24iGetSchedulerStat(NWC24ScdStat* scdStat, u32 scdStatSize) {
-    IOSFd       fd;
-    NWC24Err    result;
-    NWC24Err    resultClose;
+    IOSFd fd;
+    NWC24Err result;
+    NWC24Err resultClose;
 
     if (scdStatSize > sizeof(NWC24ScdStat)) {
         return NWC24_ERR_OVERFLOW;
@@ -94,8 +93,7 @@ NWC24Err NWC24iGetSchedulerStat(NWC24ScdStat* scdStat, u32 scdStatSize) {
         result = NWC24OpenResourceManager("/dev/net/kd/request", &fd, 0);
 
         if (result >= 0) {
-            result = NWC24IoctlResourceManager(fd, 30, NULL, 0,
-                                                            scdStat, scdStatSize);
+            result = NWC24IoctlResourceManager(fd, 30, NULL, 0, scdStat, scdStatSize);
 
             if (result >= 0) {
                 result = scdStat->result;
@@ -117,9 +115,9 @@ NWC24Err NWC24iGetSchedulerStat(NWC24ScdStat* scdStat, u32 scdStatSize) {
 }
 
 NWC24Err NWC24iSetScriptMode(int mode) {
-    IOSFd       fd;
-    NWC24Err    result;
-    NWC24Err    resultClose;
+    IOSFd fd;
+    NWC24Err result;
+    NWC24Err resultClose;
 
     result = CHECK_CALLING_STATUS(FALSE);
     if (result < 0) {
@@ -135,8 +133,8 @@ NWC24Err NWC24iSetScriptMode(int mode) {
         if (result >= 0) {
             *(int*)(&nwc24ScdCommonBuffer[0]) = mode;
 
-            result = NWC24IoctlResourceManager(fd, 34, nwc24ScdCommonBuffer, sizeof(nwc24ScdCommonBuffer),
-                                                            nwc24ScdCommonResult, sizeof(nwc24ScdCommonResult));
+            result = NWC24IoctlResourceManager(fd, 34, nwc24ScdCommonBuffer, sizeof(nwc24ScdCommonBuffer), nwc24ScdCommonResult,
+                                               sizeof(nwc24ScdCommonResult));
 
             if (result >= 0) {
                 result = *(s32*)(&nwc24ScdCommonResult[0]);
@@ -160,12 +158,12 @@ NWC24Err NWC24AdjustUniversalTime() {
 NWC24Err NWC24ExecDownloadTask(u32 flags, u16 taskId, u32 subTaskMask) {
     static const char* pTempName = "dlcnt.bin";
 
-    NWC24Err    result = NWC24_OK;
+    NWC24Err result = NWC24_OK;
 
-    BOOL        saveMail;
-    u32         numErrors;
+    BOOL saveMail;
+    u32 numErrors;
 
-    NANDStatus  status;
+    NANDStatus status;
 
     saveMail = result;
 
@@ -183,8 +181,7 @@ NWC24Err NWC24ExecDownloadTask(u32 flags, u16 taskId, u32 subTaskMask) {
     result = NWC24iDownloadNowEx(&saveMail, flags, taskId, subTaskMask);
     if (result >= NWC24_OK && saveMail) {
         result = NWC24iSaveMailNow();
-    }
-    else if (result == NWC24_ERR_PROTECTED) {
+    } else if (result == NWC24_ERR_PROTECTED) {
         // Stripped out but left out if statement
         u32 dummy = 0;
     }
@@ -192,12 +189,10 @@ NWC24Err NWC24ExecDownloadTask(u32 flags, u16 taskId, u32 subTaskMask) {
     if (result < NWC24_OK) {
         if (NWC24iGetSchedulerStat(&nwc24ScdStatBuf, sizeof(nwc24ScdStatBuf)) >= NWC24_OK) {
             NWC24iSetErrorCode(nwc24ScdStatBuf.errorLog[numErrors]);
-        }
-        else {
+        } else {
             NWC24iSetErrorCode(result - 107200);
         }
-    }
-    else {
+    } else {
         NWC24iSetErrorCode(0);
     }
 
@@ -205,9 +200,9 @@ NWC24Err NWC24ExecDownloadTask(u32 flags, u16 taskId, u32 subTaskMask) {
 }
 
 NWC24Err NWC24iRequestGenerateUserId(NWC24UserId* pId, u32* arg1) {
-    IOSFd       fd;
-    NWC24Err    result;
-    NWC24Err    resultClose;
+    IOSFd fd;
+    NWC24Err result;
+    NWC24Err resultClose;
 
     result = CHECK_CALLING_STATUS(TRUE);
     if (result < 0) {
@@ -219,8 +214,7 @@ NWC24Err NWC24iRequestGenerateUserId(NWC24UserId* pId, u32* arg1) {
         result = NWC24OpenResourceManager("/dev/net/kd/request", &fd, 0);
 
         if (result >= 0) {
-            result = NWC24IoctlResourceManager(fd, NWC24_IOCTL_GENERATE_USER_ID, NULL, 0,
-                                                                                    nwc24ScdCommonResult, sizeof(nwc24ScdCommonResult));
+            result = NWC24IoctlResourceManager(fd, NWC24_IOCTL_GENERATE_USER_ID, NULL, 0, nwc24ScdCommonResult, sizeof(nwc24ScdCommonResult));
 
             if (result >= 0) {
                 result = *(s32*)(&nwc24ScdCommonResult[0]);
@@ -247,9 +241,9 @@ NWC24Err NWC24iRequestGenerateUserId(NWC24UserId* pId, u32* arg1) {
 }
 
 NWC24Err NWC24iRequestRegisterUserId() {
-    IOSFd       fd;
-    NWC24Err    result;
-    NWC24Err    resultClose;
+    IOSFd fd;
+    NWC24Err result;
+    NWC24Err resultClose;
 
     result = CHECK_CALLING_STATUS(TRUE);
     if (result < 0) {
@@ -261,8 +255,7 @@ NWC24Err NWC24iRequestRegisterUserId() {
         result = NWC24OpenResourceManager("/dev/net/kd/request", &fd, 0);
 
         if (result >= 0) {
-            result = NWC24IoctlResourceManager(fd, 16, NULL, 0,
-                                                        nwc24ScdCommonResult, sizeof(nwc24ScdCommonResult));
+            result = NWC24IoctlResourceManager(fd, 16, NULL, 0, nwc24ScdCommonResult, sizeof(nwc24ScdCommonResult));
 
             if (result >= 0) {
                 result = *(s32*)(&nwc24ScdCommonResult[0]);
@@ -304,9 +297,9 @@ NWC24Err NWC24iSaveMailNow() {
 }
 
 NWC24Err NWC24iDownloadNowEx(BOOL* saveMail, u32 flags, u16 taskId, u32 subTaskMask) {
-    IOSFd       fd;
-    NWC24Err    result;
-    NWC24Err    resultClose;
+    IOSFd fd;
+    NWC24Err result;
+    NWC24Err resultClose;
 
     result = CHECK_CALLING_STATUS(FALSE);
     if (result < 0) {
@@ -321,8 +314,8 @@ NWC24Err NWC24iDownloadNowEx(BOOL* saveMail, u32 flags, u16 taskId, u32 subTaskM
             *(u32*)(&nwc24ScdCommonBuffer[0]) = flags;
             *(u32*)(&nwc24ScdCommonBuffer[1]) = taskId;
             *(u32*)(&nwc24ScdCommonBuffer[2]) = subTaskMask;
-            result = NWC24IoctlResourceManager(fd, 14, nwc24ScdCommonBuffer, sizeof(nwc24ScdCommonBuffer),
-                                                            nwc24ScdCommonResult, sizeof(nwc24ScdCommonResult));
+            result = NWC24IoctlResourceManager(fd, 14, nwc24ScdCommonBuffer, sizeof(nwc24ScdCommonBuffer), nwc24ScdCommonResult,
+                                               sizeof(nwc24ScdCommonResult));
 
             if (result >= 0) {
                 result = *(s32*)(&nwc24ScdCommonResult[0]);
@@ -379,9 +372,9 @@ static NWC24Err ExecSuspendScheduler() {
 }
 
 static NWC24Err ExecTrySuspendScheduler(u32 flags) {
-    IOSFd       fd;
-    NWC24Err    result;
-    NWC24Err    resultClose;
+    IOSFd fd;
+    NWC24Err result;
+    NWC24Err resultClose;
 
     result = CHECK_CALLING_STATUS(TRUE);
     if (result < 0) {
@@ -398,7 +391,7 @@ static NWC24Err ExecTrySuspendScheduler(u32 flags) {
         *(u32*)(&nwc24ScdCommonBuffer[0]) = flags;
 
         result = NWC24IoctlResourceManager(fd, NWC24_IOCTL_TRY_SUSPEND_SCHEDULER, nwc24ScdCommonBuffer, sizeof(nwc24ScdCommonBuffer),
-                                                                                    nwc24ScdCommonResult, sizeof(nwc24ScdCommonResult));
+                                           nwc24ScdCommonResult, sizeof(nwc24ScdCommonResult));
 
         if (result >= 0) {
             result = ((s32*)nwc24ScdCommonResult)[0];
@@ -429,20 +422,15 @@ static NWC24Err ExecNoParamCommand(const char* funcName, s32 command, s32* exErr
 
     LockRight();
     {
-        result = NWC24iOpenResourceManager(funcName, "/dev/net/kd/request", &fd,
-                                           0);
+        result = NWC24iOpenResourceManager(funcName, "/dev/net/kd/request", &fd, 0);
 
         if (result >= 0) {
-            result = NWC24iIoctlResourceManager(funcName, fd, command, NULL, 0,
-                                                nwc24ScdCommonResult,
-                                                sizeof(nwc24ScdCommonResult));
+            result = NWC24iIoctlResourceManager(funcName, fd, command, NULL, 0, nwc24ScdCommonResult, sizeof(nwc24ScdCommonResult));
 
             if (result >= 0) {
                 result = ((s32*)nwc24ScdCommonResult)[0];
 
-                if (result == NWC24_ERR_FAILED ||
-                    result == NWC24_ERR_CONFIG_NETWORK) {
-
+                if (result == NWC24_ERR_FAILED || result == NWC24_ERR_CONFIG_NETWORK) {
                     if (exErr != (void*)NULL) {
                         *exErr = *(u32*)(&nwc24ScdCommonResult[1]);
                     }

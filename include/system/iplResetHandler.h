@@ -13,11 +13,7 @@ namespace ipl {
             RESET_STATE_SHUTDOWN_SYSTEM = 4,
         };
 
-        enum {
-            STATE_WAIT_REQUEST = 0,
-            STATE_RESTART,
-            STATE_SHUTDOWN
-        };
+        enum { STATE_WAIT_REQUEST = 0, STATE_RESTART, STATE_SHUTDOWN };
 
         enum {
             FATAL_RESET_STATE_NONE = 0,
@@ -27,51 +23,51 @@ namespace ipl {
             FATAL_RESET_STATE_SYSTEM
         };
 
-        public:
-            ResetHandler(EGG::Heap* heap);
+    public:
+        ResetHandler(EGG::Heap* heap);
 
-            void    reset();
-            void    powerOff()              { cbPowerOff(); }
+        void reset();
+        void powerOff() { cbPowerOff(); }
 
-            void    setFatalResetCallback();
+        void setFatalResetCallback();
 
-            void    check();
+        void check();
 
-            void    update();
-            void    fatalUpdate();
+        void update();
+        void fatalUpdate();
 
-            BOOL    isResetting() const     { return mState != STATE_WAIT_REQUEST; }
-   
-            /**
-             * This tells the reset handler to return to the system menu when resetting (calling `OSReturnToMenu()`)
-             * instead of rebooting the system (calling `OSRebootSystem()`)
-             */
-            void enableResetToMenu()        { mbReturnToMenu = TRUE; }
-            /**
-             * This tells the reset handler to reboot the system when resetting (calling `OSRebootSystem()`)
-             * instead of returning to the system menu (calling `OSReturnToMenu()`)
-             */
-            void disableResetToMenu()       { mbReturnToMenu = FALSE; }
-            /**
-             * Returns whether the reset handler to return to the system menu when resetting (calling `OSReturnToMenu()`)
-             * instead of rebooting the system (calling `OSRebootSystem()`)
-             */
-            BOOL willResetToMenu() const    { return mbReturnToMenu; }
+        BOOL isResetting() const { return mState != STATE_WAIT_REQUEST; }
 
-        private:
-            static void cbReset();
-            static void cbPowerOff();
+        /**
+         * This tells the reset handler to return to the system menu when resetting (calling `OSReturnToMenu()`)
+         * instead of rebooting the system (calling `OSRebootSystem()`)
+         */
+        void enableResetToMenu() { mbReturnToMenu = TRUE; }
+        /**
+         * This tells the reset handler to reboot the system when resetting (calling `OSRebootSystem()`)
+         * instead of returning to the system menu (calling `OSReturnToMenu()`)
+         */
+        void disableResetToMenu() { mbReturnToMenu = FALSE; }
+        /**
+         * Returns whether the reset handler to return to the system menu when resetting (calling `OSReturnToMenu()`)
+         * instead of rebooting the system (calling `OSRebootSystem()`)
+         */
+        BOOL willResetToMenu() const { return mbReturnToMenu; }
 
-            static void cbFatalReset();
-            static void cbFatalPowerOff();
+    private:
+        static void cbReset();
+        static void cbPowerOff();
 
-            u32             mUpdateState;       // 0x00
-            vu32            mState;             // 0x04
-            public:
-            volatile BOOL   mbReturnToMenu;     // 0x08
-            private:
-            u32             mFatalResetState;   // 0x0C
+        static void cbFatalReset();
+        static void cbFatalPowerOff();
+
+        u32 mUpdateState;  // 0x00
+        vu32 mState;       // 0x04
+    public:
+        volatile BOOL mbReturnToMenu;  // 0x08
+    private:
+        u32 mFatalResetState;  // 0x0C
     };
-}
+}  // namespace ipl
 
-#endif // IPL_RESET_HANDLER_H
+#endif  // IPL_RESET_HANDLER_H

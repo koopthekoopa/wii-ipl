@@ -80,6 +80,6 @@ namespace nw4r {
                 mAllocFlags[byte] &= ~(1 << bit);
                 mAllocCount--;
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

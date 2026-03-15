@@ -7,16 +7,13 @@
 
 namespace ipl {
     namespace nand {
-        SharedFile::SharedFile(EGG::Heap* heap, const char* fileName, u32 index, int offset, u32 length, ESTitleId titleId, int ticketIdx) :
-        File(heap, fileName, NULL, NULL, offset, length, false),
-        mContentIdx(index),
-        mDescriptor(-1),
-        mTitleId(titleId),
-        mTicket(NULL),
-        mTicketIdx(ticketIdx),
-        mpFSTBuffer(NULL) {}
+        SharedFile::SharedFile(EGG::Heap* heap, const char* fileName, u32 index, int offset, u32 length, ESTitleId titleId, int ticketIdx)
+            : File(heap, fileName, NULL, NULL, offset, length, false), mContentIdx(index), mDescriptor(-1), mTitleId(titleId), mTicket(NULL),
+              mTicketIdx(ticketIdx), mpFSTBuffer(NULL) {
+        }
 
-        SharedFile::~SharedFile() {}
+        SharedFile::~SharedFile() {
+        }
 
         BOOL SharedFile::openTicketFile_() {
             int code = 0;
@@ -29,8 +26,7 @@ namespace ipl {
                     code = 100;
                     goto err;
                 }
-            }
-            else {
+            } else {
                 ESTicketView* tik;
                 u32 tikCount;
 
@@ -41,8 +37,7 @@ namespace ipl {
                         memcpy(mTicket, &tik[tikIdx], sizeof(ESTicketView));
                         System::getSharedHeap()->free(tik);
                     }
-                }
-                else {
+                } else {
                     goto err;
                 }
             }
@@ -56,7 +51,7 @@ namespace ipl {
                 errcode = ret;
                 goto err;
             }
-            
+
             ARCHeader header ALIGN32;
             if (ES_ReadContentFile(mDescriptor, &header, sizeof(ARCHeader)) < ES_ERR_OK) {
                 code = 500;
@@ -66,9 +61,8 @@ namespace ipl {
             u32 bufSize = OSRoundUp32B(header.fileStart);
             mpFSTBuffer = System::getSharedHeap()->alloc(bufSize, -DEFAULT_ALIGN);
 
-            if (ES_SeekContentFile(mDescriptor, 0, NAND_SEEK_BEG) < ES_ERR_OK
-            || ES_ReadContentFile(mDescriptor, mpFSTBuffer, bufSize) < ES_ERR_OK
-            || !ARCInitHandle(mpFSTBuffer, &mArc)) {
+            if (ES_SeekContentFile(mDescriptor, 0, NAND_SEEK_BEG) < ES_ERR_OK || ES_ReadContentFile(mDescriptor, mpFSTBuffer, bufSize) < ES_ERR_OK ||
+                !ARCInitHandle(mpFSTBuffer, &mArc)) {
                 code = 600;
                 goto err;
             }
@@ -76,14 +70,13 @@ namespace ipl {
             BOOL result = ARCOpen(&mArc, msFileName, &mArcFile);
             if (result && ES_CloseContentFile(mDescriptor) >= ES_ERR_OK) {
                 return result == TRUE;
-            }
-            else {
-        err:
+            } else {
+            err:
                 char errString[192];
                 sprintf(errString, "ES %d, %llx, %llx, %x", errcode, mTitleId, erridx);
 
                 IPLErrorLogAndDisplay(MESG_ERR_FILE, errString, code, 158);
-  
+
                 return FALSE;
             }
         }
@@ -99,8 +92,7 @@ namespace ipl {
                 }
 
                 return TRUE;
-            }
-            else {
+            } else {
                 IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", 0, 189);
 
                 return FALSE;
@@ -122,10 +114,10 @@ namespace ipl {
         void SharedFile::readBlock_(void* buffer, int length, int offset) {
             int arcOffset = ARCGetStartOffset(&mArcFile);
 
-            if (ES_SeekContentFile(mDescriptor, arcOffset + offset, NAND_SEEK_BEG) < ES_ERR_OK
-            || ES_ReadContentFile(mDescriptor, buffer, length) < ES_ERR_OK) {
+            if (ES_SeekContentFile(mDescriptor, arcOffset + offset, NAND_SEEK_BEG) < ES_ERR_OK ||
+                ES_ReadContentFile(mDescriptor, buffer, length) < ES_ERR_OK) {
                 IPLErrorLogAndDisplay(MESG_ERR_FILE, "ES", 0, 358);
             }
         }
-    }
-}
+    }  // namespace nand
+}  // namespace ipl

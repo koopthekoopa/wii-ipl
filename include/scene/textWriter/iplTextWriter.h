@@ -4,8 +4,8 @@
 #include "iplSceneUIHeader.h"
 #include "scene/button/iplButton.h"
 
-#include "system/iplNigaoe.h"
 #include "scene/textBalloon/iplBalloon.h"
+#include "system/iplNigaoe.h"
 #include "utility/iplScroller.h"
 
 #include <revolution/nwc24.h>
@@ -16,109 +16,112 @@ namespace ipl {
     namespace scene {
         class TextWriter;
         class InputFormObserver : public textinput::extend::memo::NigaoeEventObserver {
-            public:
-                InputFormObserver(TextWriter* instance) : mpInstance(instance) {}
+        public:
+            InputFormObserver(TextWriter* instance) : mpInstance(instance) {}
 
-                virtual bool    onNigaoeButton();
+            virtual bool onNigaoeButton();
 
-                virtual void    pointNigaoeButton();
-                virtual void    leftNigaoeButton();
-                virtual void    moveNigaoeButton();
+            virtual void pointNigaoeButton();
+            virtual void leftNigaoeButton();
+            virtual void moveNigaoeButton();
 
-            private:
-                TextWriter* mpInstance; // 0x04
+        private:
+            TextWriter* mpInstance;  // 0x04
         };
 
         class Button;
         FADER_SCENE_CLASS(TextWriter), public ButtonEventHandlerBase {
-            public:
-                TextWriter(EGG::Heap* heap);
-                ~TextWriter();
+        public:
+            TextWriter(EGG::Heap * heap);
+            ~TextWriter();
 
-                enum {
-                    SEND_ERR_NWC24 = -1,
-                    SEND_ERR_SUCCESS,
-                    SEND_ERR_RFL,
-                };
+            enum {
+                SEND_ERR_NWC24 = -1,
+                SEND_ERR_SUCCESS,
+                SEND_ERR_RFL,
+            };
 
-                virtual BOOL                isResetAcceptable() const { return unk_0x7D; }
+            virtual BOOL isResetAcceptable() const {
+                return unk_0x7D;
+            }
 
-                virtual void                prepare();
-                virtual void                create();
-                virtual void                draw();
-                virtual void                destroy();
+            virtual void prepare();
+            virtual void create();
+            virtual void draw();
+            virtual void destroy();
 
-                virtual void                initCalcNormal();
-                virtual void                initCalcFadeout();
+            virtual void initCalcNormal();
+            virtual void initCalcFadeout();
 
-                virtual void                calcCommon() {}
+            virtual void calcCommon() {
+            }
 
-                virtual FaderSceneCommand   calcFadein();
-                virtual FaderSceneCommand   calcNormal();
-                virtual FaderSceneCommand   calcFadeout();
+            virtual FaderSceneCommand calcFadein();
+            virtual FaderSceneCommand calcNormal();
+            virtual FaderSceneCommand calcFadeout();
 
-                virtual bool                onNigaoeButton();
-                virtual void                setNigaoe(nigaoe::Object* nigaoe);
+            virtual bool onNigaoeButton();
+            virtual void setNigaoe(nigaoe::Object * nigaoe);
 
-                virtual void                pointNigaoeButton();
-                virtual void                leftNigaoeButton();
-                virtual void                moveNigaoeButton();
+            virtual void pointNigaoeButton();
+            virtual void leftNigaoeButton();
+            virtual void moveNigaoeButton();
 
-                virtual void                onEventDerived(u32 compId, u32 event, const controller::Interface* con);
+            virtual void onEventDerived(u32 compId, u32 event, const controller::Interface* con);
 
-                virtual void                onSend();
-                virtual void                openNWC24();
-                virtual int                 sendMessageByNWC24(NWC24UserId userId, const wchar_t* wcString);
-                virtual void                closeNWC24();
+            virtual void onSend();
+            virtual void openNWC24();
+            virtual int sendMessageByNWC24(NWC24UserId userId, const wchar_t* wcString);
+            virtual void closeNWC24();
 
-                virtual void                getMyUserID(NWC24UserId* myUserId);
+            virtual void getMyUserID(NWC24UserId * myUserId);
 
-                textinput::MemoManager*     getMemoManager();
-                textinput::MemoInputForm*   getMemoInputForm();
-                Button*                     getButton();
+            textinput::MemoManager* getMemoManager();
+            textinput::MemoInputForm* getMemoInputForm();
+            Button* getButton();
 
-                void                        createBalloon() {
-                    mpNigaoeBalloon = new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f));
-                }
+            void createBalloon() {
+                mpNigaoeBalloon = new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f));
+            }
 
-            protected:
-                enum {
-                    STATE_NORMAL = 0,
-                    STATE_TO_SEL_FACE,
-                    STATE_SEL_FACE,
-                    STATE_DIALOG,
-                    STATE_SEND,
-                    STATE_SEND_ERR,
-                    STATE_DONE,
-                };
+        protected:
+            enum {
+                STATE_NORMAL = 0,
+                STATE_TO_SEL_FACE,
+                STATE_SEL_FACE,
+                STATE_DIALOG,
+                STATE_SEND,
+                STATE_SEND_ERR,
+                STATE_DONE,
+            };
 
-                static const int    WC_STRING_LENGTH = 0x400;
+            static const int WC_STRING_LENGTH = 0x400;
 
-                int                 mState;             // 0x64
-                InputFormObserver*  mpEventObserver;    // 0x68
+            int mState;                          // 0x64
+            InputFormObserver* mpEventObserver;  // 0x68
 
-                int                 mSelectedFaceId;    // 0x6C
-                nigaoe::Object*     mpNigaoe;           // 0x70
+            int mSelectedFaceId;       // 0x6C
+            nigaoe::Object* mpNigaoe;  // 0x70
 
-                f32                 mToFace_Frame;      // 0x74
-                f32                 mToFace_Dest;       // 0x78
-                static const int    mToFace_Duration = 20;
+            f32 mToFace_Frame;  // 0x74
+            f32 mToFace_Dest;   // 0x78
+            static const int mToFace_Duration = 20;
 
-                bool                mbClosing;          // 0x7C
-                bool                unk_0x7D;
+            bool mbClosing;  // 0x7C
+            bool unk_0x7D;
 
-                wchar_t*            mWCString;          // 0x80
+            wchar_t* mWCString;  // 0x80
 
-                u32                 mNwc24ErrCountdown; // 0x84
+            u32 mNwc24ErrCountdown;  // 0x84
 
-                u8                  unused_0x88[12];
+            u8 unused_0x88[12];
 
-                TextBalloon*        mpNigaoeBalloon;    // 0x94
-                nand::LayoutFile*   mpBalloonFile;      // 0x98
+            TextBalloon* mpNigaoeBalloon;     // 0x94
+            nand::LayoutFile* mpBalloonFile;  // 0x98
 
-                utility::BScroller* mpScroller;         // 0x9C
+            utility::BScroller* mpScroller;  // 0x9C
         };
-    }
-}
+    }  // namespace scene
+}  // namespace ipl
 
-#endif // IPL_SCENE_TEXT_WRITER_H
+#endif  // IPL_SCENE_TEXT_WRITER_H

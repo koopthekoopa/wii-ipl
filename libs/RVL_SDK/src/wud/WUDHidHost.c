@@ -26,9 +26,8 @@ void WUDHidHostCallback(tBTA_HH_EVT event, tBTA_HH* pData) {
             pConn = &pData->conn;
 
             DEBUGPrint("BTA_HH_OPEN_EVT\n");
-            DEBUGPrint("handle: %d, addr: %02x:%02x:%02x:%02x:%02x:%02x\n",
-                    pConn->handle, pConn->bda[0], pConn->bda[1], pConn->bda[2],
-                    pConn->bda[3], pConn->bda[4], pConn->bda[5]);
+            DEBUGPrint("handle: %d, addr: %02x:%02x:%02x:%02x:%02x:%02x\n", pConn->handle, pConn->bda[0], pConn->bda[1], pConn->bda[2], pConn->bda[3],
+                       pConn->bda[4], pConn->bda[5]);
 
             if (pConn->status == BTA_HH_OK) {
                 pInfo = &_work;
@@ -63,8 +62,7 @@ void WUDHidHostCallback(tBTA_HH_EVT event, tBTA_HH* pData) {
 
                 if (pInfo->UNK_0x5B == 3 || pInfo->UNK_0x5B == 1) {
                     WUDiMoveTopSmpDevInfoPtr(pInfo);
-                }
-                else {
+                } else {
                     WUDiMoveTopStdDevInfoPtr(pInfo);
                 }
 
@@ -73,8 +71,7 @@ void WUDHidHostCallback(tBTA_HH_EVT event, tBTA_HH* pData) {
                 if (p->hidConnCB != NULL) {
                     p->hidConnCB(pInfo, TRUE);
                 }
-            }
-            else {
+            } else {
                 DEBUGPrint("error code: %d\n", pConn->status);
 
                 if (p->syncState != WUD_STATE_SYNC_START) {
@@ -87,15 +84,13 @@ void WUDHidHostCallback(tBTA_HH_EVT event, tBTA_HH* pData) {
 
                         p->syncState = WUD_STATE_SYNC_ERROR;
                     }
-                }
-                else {
+                } else {
                     if (WUDiGetDevInfo(pConn->bda) && pConn->status == BTA_HH_ERR_AUTH_FAILED) {
                         pInfo = WUDiGetDevInfo(pConn->bda);
                         if (pInfo) {
                             if (pInfo->UNK_0x5B == 3 || pInfo->UNK_0x5B == 1) {
                                 WUDiMoveBottomSmpDevInfoPtr(pInfo);
-                            }
-                            else {
+                            } else {
                                 WUDiMoveBottomStdDevInfoPtr(pInfo);
                             }
                         }
@@ -121,8 +116,7 @@ void WUDHidHostCallback(tBTA_HH_EVT event, tBTA_HH* pData) {
             if (pInfo != NULL) {
                 if (pInfo->UNK_0x5B == 3 || pInfo->UNK_0x5B == 1) {
                     WUDiMoveTopOfDisconnectedSmpDevice(pInfo);
-                }
-                else {
+                } else {
                     WUDiMoveTopOfDisconnectedStdDevice(pInfo);
                 }
             }
@@ -171,10 +165,8 @@ void WUDHidHostCallback(tBTA_HH_EVT event, tBTA_HH* pData) {
 
             DEBUGPrint("BTA_HH_ADD_DEV_EVT\n");
 
-            DEBUGPrint("result: %d, handle: %d, addr: %02x:%02x:%02x:%02x:%02x:%02x\n",
-                    pConn->status, pConn->handle,
-                    pConn->bda[0], pConn->bda[1], pConn->bda[2],
-                    pConn->bda[3], pConn->bda[4], pConn->bda[5]);
+            DEBUGPrint("result: %d, handle: %d, addr: %02x:%02x:%02x:%02x:%02x:%02x\n", pConn->status, pConn->handle, pConn->bda[0], pConn->bda[1],
+                       pConn->bda[2], pConn->bda[3], pConn->bda[4], pConn->bda[5]);
 
             pInfo = WUDiGetDevInfo(pConn->bda);
             pInfo->devHandle = pConn->handle;
@@ -187,10 +179,8 @@ void WUDHidHostCallback(tBTA_HH_EVT event, tBTA_HH* pData) {
             pConn = &pData->dev_info;
 
             DEBUGPrint("BTA_HH_RMV_DEV_EVT\n");
-            DEBUGPrint("result: %d, handle: %d, addr: %02x:%02x:%02x:%02x:%02x:%02x\n",
-                pConn->status, pConn->handle,
-                pConn->bda[0], pConn->bda[1], pConn->bda[2],
-                pConn->bda[3], pConn->bda[4], pConn->bda[5]);
+            DEBUGPrint("result: %d, handle: %d, addr: %02x:%02x:%02x:%02x:%02x:%02x\n", pConn->status, pConn->handle, pConn->bda[0], pConn->bda[1],
+                       pConn->bda[2], pConn->bda[3], pConn->bda[4], pConn->bda[5]);
 
             break;
         }
@@ -231,8 +221,7 @@ void bta_hh_co_data(UINT8 handle, UINT8* pReport, UINT16 len, tBTA_HH_PROTO_MODE
         if (p->hidRecvCB != NULL) {
             p->hidRecvCB(handle, pReport, len);
         }
-    }
-    else {
+    } else {
         DEBUGPrint("Invalid app_id [%d]\n", appId);
     }
 }

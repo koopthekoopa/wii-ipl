@@ -1,5 +1,5 @@
-#include <revolution/cdb.h>
 #include <private/cdb.h>
+#include <revolution/cdb.h>
 
 CDBErr CDBFCreateFileSD(CDBBridgeFile* file, const char* fileName) {
     VFError vfErr;
@@ -10,14 +10,11 @@ CDBErr CDBFCreateFileSD(CDBBridgeFile* file, const char* fileName) {
 
         if (vfErr == VF_ERR_EEXIST) {
             return CDB_ERROR_FILE_EXISTS;
-        }
-        else if (vfErr == VF_ERR_ENOSPC) {
+        } else if (vfErr == VF_ERR_ENOSPC) {
             return CDB_ERROR_OUT_OF_SPACE;
-        }
-        else if (vfErr == VF_ERR_EACCES) {
+        } else if (vfErr == VF_ERR_EACCES) {
             return CDB_ERROR_ACCESS_DENIED;
-        }
-        else {
+        } else {
             if (CDBFSSDIsEjected()) {
                 return CDB_ERROR_SD_EJECTED;
             }
@@ -76,8 +73,7 @@ CDBErr CDBFOpenSD_readonly(CDBBridgeFile* file, const char* fileName) {
 
         if (vfErr == VF_ERR_ENOENT || vfErr == VF_ERR_EINVAL) {
             return CDB_ERROR_CANNOT_OPEN_FILE;
-        }
-        else {
+        } else {
             if (CDBFSSDIsEjected()) {
                 return CDB_ERROR_SD_EJECTED;
             }
@@ -104,8 +100,7 @@ CDBErr CDBFOpenSD(CDBBridgeFile* file, const char* fileName) {
         }
         if (vfErr == VF_ERR_EACCES) {
             return CDBFOpenSD_readonly(file, fileName);
-        }
-        else {
+        } else {
             if (CDBFSSDIsEjected()) {
                 return CDB_ERROR_SD_EJECTED;
             }
@@ -183,18 +178,17 @@ CDBErr CDBFSeekSD_(VFFILE* file, u32 offset, CDBSeek seek) {
 s32 CDBFGetOffsetSD(VFFILE* file) {
     if (file != NULL) {
         return VFGetOffsetByFd(file);
-    }
-    else {
+    } else {
         return -1;
     }
 }
 
 CDBErr CDBFReadAttrSD(CDBBridgeFile* file, CDBAttr* attrBuf) {
-    CDBErr  err;
+    CDBErr err;
     VFError vfErr;
-    
-    s32     fileOffset;
-    u32     readSize;
+
+    s32 fileOffset;
+    u32 readSize;
 
     fileOffset = CDBFGetOffsetSD(file->sd);
 
@@ -207,12 +201,10 @@ CDBErr CDBFReadAttrSD(CDBBridgeFile* file, CDBAttr* attrBuf) {
     if (vfErr != VF_ERR_SUCCESS) {
         if (CDBFSSDIsEjected()) {
             err = CDB_ERROR_SD_EJECTED;
-        }
-        else {
+        } else {
             err = CDBOnVFErrorOccured(vfErr);
         }
-    }
-    else {
+    } else {
         err = CDB_ERROR_OK;
     }
 
@@ -245,10 +237,10 @@ CDBErr CDBFReadAttrSD(CDBBridgeFile* file, CDBAttr* attrBuf) {
 }
 
 CDBErr CDBFWriteAttrSD(CDBBridgeFile* file, CDBAttr* attrBuf) {
-    CDBErr  err;
+    CDBErr err;
     VFError vfErr;
-    
-    s32     fileOffset;
+
+    s32 fileOffset;
 
     fileOffset = CDBFGetOffsetSD(file->sd);
 
@@ -264,20 +256,16 @@ CDBErr CDBFWriteAttrSD(CDBBridgeFile* file, CDBAttr* attrBuf) {
     if (vfErr != VF_ERR_SUCCESS) {
         if (vfErr == VF_ERR_ENOSPC) {
             err = CDB_ERROR_OUT_OF_SPACE;
-        }
-        else if (vfErr == VF_ERR_EACCES) {
+        } else if (vfErr == VF_ERR_EACCES) {
             err = CDB_ERROR_ACCESS_DENIED;
-        }
-        else {
+        } else {
             if (CDBFSSDIsEjected()) {
                 err = CDB_ERROR_SD_EJECTED;
-            }
-            else {
+            } else {
                 err = CDBOnVFErrorOccured(vfErr);
             }
         }
-    }
-    else {
+    } else {
         err = CDB_ERROR_OK;
     }
 
@@ -302,10 +290,10 @@ CDBErr CDBFWriteAttrSD(CDBBridgeFile* file, CDBAttr* attrBuf) {
 }
 
 CDBErr CDBFWriteAttrOnlyLeadChunkSD(CDBBridgeFile* file, CDBAttr* attrBuf) {
-    CDBErr  err;
+    CDBErr err;
     VFError vfErr;
-    
-    s32     fileOffset;
+
+    s32 fileOffset;
 
     fileOffset = CDBFGetOffsetSD(file->sd);
 
@@ -321,20 +309,16 @@ CDBErr CDBFWriteAttrOnlyLeadChunkSD(CDBBridgeFile* file, CDBAttr* attrBuf) {
     if (vfErr != VF_ERR_SUCCESS) {
         if (vfErr == VF_ERR_ENOSPC) {
             err = CDB_ERROR_OUT_OF_SPACE;
-        }
-        else if (vfErr == VF_ERR_EACCES) {
+        } else if (vfErr == VF_ERR_EACCES) {
             err = CDB_ERROR_ACCESS_DENIED;
-        }
-        else {
+        } else {
             if (CDBFSSDIsEjected()) {
                 err = CDB_ERROR_SD_EJECTED;
-            }
-            else {
+            } else {
                 err = CDBOnVFErrorOccured(vfErr);
             }
         }
-    }
-    else {
+    } else {
         err = CDB_ERROR_OK;
     }
 
@@ -379,11 +363,9 @@ CDBErr CDBFWriteDataSD(CDBBridgeFile* file, void* buffer, u32 size) {
     if (vfErr != VF_ERR_SUCCESS) {
         if (vfErr == VF_ERR_ENOSPC) {
             return CDB_ERROR_OUT_OF_SPACE;
-        }
-        else if (vfErr == VF_ERR_EACCES) {
+        } else if (vfErr == VF_ERR_EACCES) {
             return CDB_ERROR_ACCESS_DENIED;
-        }
-        else {
+        } else {
             if (CDBFSSDIsEjected()) {
                 return CDB_ERROR_SD_EJECTED;
             }
@@ -412,12 +394,10 @@ CDBErr CDBFGetDataSizeSD(CDBBridgeFile* file, u32* dataSize) {
     if (size < 0) {
         if (CDBFSSDIsEjected()) {
             err = CDB_ERROR_SD_EJECTED;
-        }
-        else {
+        } else {
             err = CDB_ERROR_CANNOT_OPEN_FILE;
         }
-    }
-    else {
+    } else {
         *dataSize = size;
         err = CDB_ERROR_OK;
     }
@@ -428,7 +408,7 @@ CDBErr CDBFGetDataSizeSD(CDBBridgeFile* file, u32* dataSize) {
             return err;
         }
     }
-    
+
     *dataSize -= 0x400;
 
     return err;
@@ -441,15 +421,13 @@ CDBErr CDBFGetFileSizeSD(CDBBridgeFile* file, u32* fileSize) {
     if (size < 0) {
         if (CDBFSSDIsEjected()) {
             err = CDB_ERROR_SD_EJECTED;
-        }
-        else {
+        } else {
             err = CDB_ERROR_CANNOT_OPEN_FILE;
         }
-    }
-    else {
+    } else {
         *fileSize = size;
         err = CDB_ERROR_OK;
     }
-    
+
     return err;
 }

@@ -7,15 +7,15 @@
 
 namespace EGG {
     class Allocator : public MEMAllocator {
-        public:
-            Allocator(Heap* heap, s32 align);
-            virtual ~Allocator();
-            
-            virtual void* alloc(u32 size);
-            virtual void free(void* buffer);
+    public:
+        Allocator(Heap* heap, s32 align);
+        virtual ~Allocator();
 
-            operator MEMAllocator*()    { return this; }
+        virtual void* alloc(u32 size);
+        virtual void free(void* buffer);
+
+        operator MEMAllocator*() { return this; }
     };
-}
+}  // namespace EGG
 
-#endif // EGG_CORE_ALLOCATOR_H
+#endif  // EGG_CORE_ALLOCATOR_H

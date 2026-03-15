@@ -22,7 +22,6 @@ orig/*/*
 build/
 .ninja_*
 build.ninja
-.private/*
 
 # decompctx output
 ctx.*
@@ -33,6 +32,8 @@ objdiff.json
 compile_commands.json
 
 # Miscellaneous
+.private/*
+.ghidra/*
 progress/*
 hbprojs/*
 /*.txt

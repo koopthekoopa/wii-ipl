@@ -8,6 +8,7 @@
 extern "C" {
 #endif
 
+// clang-format off
 static const GXColor RFLi_MOLE_COLOR0 = { 18, 15, 15, 255 };
 
 static const GXColor RFLi_EYE_COLOR1[RFLi_EYE_COLOR_MAX+1] = {
@@ -52,6 +53,7 @@ static const GXColor RFLi_BEARD_COLOR0[RFLi_BEARD_COLOR_MAX+1] = {
     { 122, 89,  40,  255 },
     { 193, 159, 100, 255 }
 };
+// clang-format on
 
 #ifdef __cplusplus
 }

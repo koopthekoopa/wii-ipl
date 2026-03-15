@@ -1,6 +1,6 @@
-#include <nw4r/snd/SoundArchiveLoader.h>
 #include <nw4r/snd/SoundArchive.h>
 #include <nw4r/snd/SoundArchiveFile.h>
+#include <nw4r/snd/SoundArchiveLoader.h>
 
 #include <nw4r/snd/SoundMemoryAllocatable.h>
 
@@ -9,13 +9,12 @@
 namespace nw4r {
     namespace snd {
         namespace detail {
-            SoundArchiveLoader::SoundArchiveLoader(const SoundArchive& soundArchive) :
-            mArc(soundArchive),
-            mStream(NULL) {
+            SoundArchiveLoader::SoundArchiveLoader(const SoundArchive& soundArchive) : mArc(soundArchive), mStream(NULL) {
                 OSInitMutex(&mMutex);
             }
 
-            SoundArchiveLoader::~SoundArchiveLoader() {}
+            SoundArchiveLoader::~SoundArchiveLoader() {
+            }
 
             void* SoundArchiveLoader::LoadGroup(u32 id, SoundMemoryAllocatable* allocatable, void** ppWaveBuffer, u32 blockSize) {
                 ut::AutoMutexLock lock(mMutex);
@@ -44,8 +43,7 @@ namespace nw4r {
                         mStream = NULL;
                         return NULL;
                     }
-                }
-                else {
+                } else {
                     u8* pReadPtr = static_cast<u8*>(pGroupBuffer);
                     u32 bytesLeft = groupHandle->GetSize();
 
@@ -60,8 +58,7 @@ namespace nw4r {
                         if (bytesLeft > blockSize) {
                             bytesLeft -= blockSize;
                             pReadPtr += blockSize;
-                        }
-                        else {
+                        } else {
                             bytesLeft = 0;
                         }
                     }
@@ -93,21 +90,18 @@ namespace nw4r {
                     mStream = waveHandle.GetFileStream();
 
                     if (blockSize == 0) {
-                        s32 bytesRead =
-                            waveHandle->Read(waveBuffer, waveHandle->GetSize());
+                        s32 bytesRead = waveHandle->Read(waveBuffer, waveHandle->GetSize());
 
                         if (bytesRead == 0) {
                             mStream = NULL;
                             return NULL;
                         }
-                    }
-                    else {
+                    } else {
                         u8* pReadPtr = static_cast<u8*>(waveBuffer);
                         u32 bytesLeft = waveHandle->GetSize();
 
                         while (bytesLeft) {
-                            s32 bytesRead =
-                                waveHandle->Read(pReadPtr, ut::Min(blockSize, bytesLeft));
+                            s32 bytesRead = waveHandle->Read(pReadPtr, ut::Min(blockSize, bytesLeft));
 
                             if (bytesRead == 0) {
                                 mStream = NULL;
@@ -117,8 +111,7 @@ namespace nw4r {
                             if (bytesLeft > blockSize) {
                                 bytesLeft -= blockSize;
                                 pReadPtr += blockSize;
-                            }
-                            else {
+                            } else {
                                 bytesLeft = 0;
                             }
                         }
@@ -129,8 +122,7 @@ namespace nw4r {
                     if (ppWaveBuffer != NULL) {
                         *ppWaveBuffer = waveBuffer;
                     }
-                }
-                else if (ppWaveBuffer != NULL) {
+                } else if (ppWaveBuffer != NULL) {
                     *ppWaveBuffer = NULL;
                 }
 
@@ -162,7 +154,7 @@ namespace nw4r {
                 return size;
             }
 
-            void *SoundArchiveLoader::LoadFile(u32 id, SoundMemoryAllocatable* allocatable) {
+            void* SoundArchiveLoader::LoadFile(u32 id, SoundMemoryAllocatable* allocatable) {
                 SoundArchive::FileInfo info;
                 if (!mArc.detail_ReadFileInfo(id, &info)) {
                     return NULL;
@@ -173,7 +165,7 @@ namespace nw4r {
                     return NULL;
                 }
 
-                void *buf = allocatable->Alloc(size);
+                void* buf = allocatable->Alloc(size);
                 if (buf == NULL) {
                     return NULL;
                 }
@@ -189,12 +181,11 @@ namespace nw4r {
                 if (mStream && (mStream->CanCancel())) {
                     if (mStream->CanAsync()) {
                         mStream->CancelAsync(NULL, NULL);
-                    }
-                    else {
+                    } else {
                         mStream->Cancel();
                     }
                 }
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

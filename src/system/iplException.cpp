@@ -7,6 +7,7 @@
 #include <cstring>
 
 namespace ipl {
+    // clang-format off
     static const u32 sKeyInputs[8] = {
         // Left, down, down, 1, -, 2, +, down
         WPAD_BUTTON_LEFT,
@@ -18,28 +19,25 @@ namespace ipl {
         WPAD_BUTTON_PLUS,
         WPAD_BUTTON_DOWN,
     };
+    // clang-format on
 
-    #define LINES_ON_SCREEN_OFFSET  4
-    #define LINES_ON_SCREEN_WIDTH   24
-    #define LINES_ON_SCREEN_HEIGHT  18
+#define LINES_ON_SCREEN_OFFSET 4
+#define LINES_ON_SCREEN_WIDTH 24
+#define LINES_ON_SCREEN_HEIGHT 18
 
-    #define FONT_WIDTH  46
-    #define FONT_HEIGHT 48
+#define FONT_WIDTH 46
+#define FONT_HEIGHT 48
 
     bool exception_callback_(nw4r::db::ConsoleHandle console, void* param) {
         Exception* exception = ((Exception*)param);
         exception->exception_callback(console);
     }
 
-    Exception::Exception(EGG::Heap* heap, const GXRenderModeObj& rMode) :
-    mConsole(NULL),
-    unk_0x04(0),
-    mpBuffer(),
-    unk_0x0C(0) {
+    Exception::Exception(EGG::Heap* heap, const GXRenderModeObj& rMode) : mConsole(NULL), unk_0x04(0), mpBuffer(), unk_0x0C(0) {
         nw4r::db::Exception_Init();
         nw4r::db::DirectPrint_Init();
 
-        mpBuffer = new(heap, 4) u8[NW4R_CONSOLE_BUFFER_SIZE(FONT_WIDTH, FONT_HEIGHT)];
+        mpBuffer = new (heap, 4) u8[NW4R_CONSOLE_BUFFER_SIZE(FONT_WIDTH, FONT_HEIGHT)];
         mConsole = nw4r::db::Console_Create(mpBuffer, FONT_WIDTH, FONT_HEIGHT, 18, 0, 4);
 
         setConsole(rMode);
@@ -60,7 +58,7 @@ namespace ipl {
     void Exception::key_input() {
         KPADStatus cons[WPAD_MAX_CONTROLLERS];
         memset(cons, 0, sizeof(cons));
-        
+
         int inputCur = 0;
 
         OSEnableInterrupts();
@@ -69,7 +67,7 @@ namespace ipl {
             for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
                 KPADRead(i, &cons[i], 1);
             }
-            
+
             wait(50);
 
             // todo
@@ -78,8 +76,7 @@ namespace ipl {
                 if (pressed) {
                     if (pressed & sKeyInputs[inputCur]) {
                         inputCur++;
-                    }
-                    else {
+                    } else {
                         inputCur = 0;
                     }
                 }
@@ -93,7 +90,7 @@ namespace ipl {
         s32 line = nw4r::db::Console_GetBufferHeadLine(mConsole);
         s32 lineScrollMax = nw4r::db::Console_GetTotalLines(mConsole) - LINES_ON_SCREEN_HEIGHT;
 
-        key_input(); // Wait until they pressed key input
+        key_input();  // Wait until they pressed key input
 
         // Scroll through the exception.
         for (; line <= lineScrollMax; line++) {
@@ -133,14 +130,11 @@ namespace ipl {
                     // Scroll depending on what the user presses
                     if ((held & WPAD_BUTTON_UP) && yCur > 0) {
                         yCur--;
-                    }
-                    else if ((held & WPAD_BUTTON_DOWN) && yCur < lineScrollMax) {
+                    } else if ((held & WPAD_BUTTON_DOWN) && yCur < lineScrollMax) {
                         yCur++;
-                    }
-                    else if ((held & WPAD_BUTTON_RIGHT) && xCur > LINES_ON_SCREEN_OFFSET) {
+                    } else if ((held & WPAD_BUTTON_RIGHT) && xCur > LINES_ON_SCREEN_OFFSET) {
                         xCur -= 2;
-                    }
-                    else if ((held & WPAD_BUTTON_LEFT) && xCur < LINES_ON_SCREEN_WIDTH) {
+                    } else if ((held & WPAD_BUTTON_LEFT) && xCur < LINES_ON_SCREEN_WIDTH) {
                         xCur += 2;
                     }
                 }
@@ -162,7 +156,7 @@ namespace ipl {
             // do nothing until it finished
         }
     }
-}
+}  // namespace ipl
 
 /***********************************************************************
  * TODO: Generate weak function nw4r::ut::Color::operator=(const Color&)

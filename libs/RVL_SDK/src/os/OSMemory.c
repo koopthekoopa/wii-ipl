@@ -1,12 +1,15 @@
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 #include <private/hollywood.h>
 
 static BOOL OnShutdown(BOOL final, u32 event);
 
 static OSShutdownFunctionInfo ShutdownFunctionInfo = {
-    OnShutdown, 0x7F, NULL, NULL,
+    OnShutdown,
+    0x7F,
+    NULL,
+    NULL,
 };
 
 u32 OSGetPhysicalMem1Size() {
@@ -34,7 +37,7 @@ static BOOL OnShutdown(BOOL final, u32 event) {
     return TRUE;
 }
 
-void MEMIntrruptHandler(__OSInterrupt interrupt, OSContext *context) {
+void MEMIntrruptHandler(__OSInterrupt interrupt, OSContext* context) {
     u32 addr, cause;
     cause = MEM_READ_REG(MEM_INT_STAT);
     addr = (((u32)(MEM_READ_REG(MEM_INT_ADDRH) & 0b0000001111111111) << 16) | MEM_READ_REG(MEM_INT_ADDRL));
@@ -48,7 +51,7 @@ void MEMIntrruptHandler(__OSInterrupt interrupt, OSContext *context) {
     __OSUnhandledException(OS_EXCEPTION_MEMORY_PROTECTION, context, cause, addr);
 }
 
-void OSProtectRange(u32 chan, void *addr, u32 nBytes, u32 control) {
+void OSProtectRange(u32 chan, void* addr, u32 nBytes, u32 control) {
     BOOL enabled;
     u32 start, end;
     u16 reg;
@@ -67,7 +70,7 @@ void OSProtectRange(u32 chan, void *addr, u32 nBytes, u32 control) {
     __OSMaskInterrupts(0x80000000 /* OS_INTERRUPTMASK_MEM_0 */ >> (chan));
 
     MEM_WRITE_REG(MEM_MARR0_START + 4 * chan, (start >> 10));
-    __MEMRegs[(MEM_MARR0_END>>1) + 2 * chan] = (end >> 10); // todo: make it use MEM_WRITE_REG
+    __MEMRegs[(MEM_MARR0_END >> 1) + 2 * chan] = (end >> 10);  // todo: make it use MEM_WRITE_REG
 
     reg = MEM_READ_REG(MEM_MARR_CONTROL);
     reg &= ~(3 << 2 * chan);
@@ -80,6 +83,8 @@ void OSProtectRange(u32 chan, void *addr, u32 nBytes, u32 control) {
 
     OSRestoreInterrupts(enabled);
 }
+
+// clang-format off
 
 static asm void ConfigMEM1_24MB() {
 #ifdef __MWERKS__
@@ -595,6 +600,8 @@ static asm void RealMode(register u32 addr) {
 #endif // __MWERKS__
 }
 
+// clang-format on
+
 static void BATConfig() {
     u32 size1, size2, prot;
 
@@ -609,13 +616,12 @@ static void BATConfig() {
 
     if (size1 < OSGetPhysicalMem1Size() && size1 == 0x01800000) {
         DCInvalidateRange((void*)0x81800000, 0x01800000);
-        MEM_WRITE_REG(MEM_CONFIG, (1<<1));
+        MEM_WRITE_REG(MEM_CONFIG, (1 << 1));
     }
 
     if (size1 <= 0x01800000) {
         RealMode((u32)ConfigMEM1_24MB);
-    }
-    else if (size1 <= 0x03000000) {
+    } else if (size1 <= 0x03000000) {
         RealMode((u32)ConfigMEM1_48MB);
     }
 
@@ -625,19 +631,15 @@ static void BATConfig() {
     if (size2 <= 0x04000000) {
         if (prot <= 0x93400000) {
             RealMode((u32)ConfigMEM2_52MB);
-        }
-        else if (prot <= 0x93800000) {
+        } else if (prot <= 0x93800000) {
             RealMode((u32)ConfigMEM2_56MB);
-        }
-        else {
+        } else {
             RealMode((u32)ConfigMEM2_64MB);
         }
-    }
-    else if (size2 <= 0x08000000) {
+    } else if (size2 <= 0x08000000) {
         if (prot <= 0x97000000) {
             RealMode((u32)ConfigMEM2_112MB);
-        }
-        else {
+        } else {
             RealMode((u32)ConfigMEM2_128MB);
         }
     }

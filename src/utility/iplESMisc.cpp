@@ -5,8 +5,8 @@
 
 #include <revolution/sc.h>
 
-#include <revolution/nand.h>
 #include <private/nand.h>
+#include <revolution/nand.h>
 
 #include <private/os.h>
 
@@ -14,19 +14,18 @@
 
 #include "config.h"
 
-#define TMD_FILE    "/title/00000001/00000002/data/tmds.sys"
+#define TMD_FILE "/title/00000001/00000002/data/tmds.sys"
 
 namespace ipl {
     namespace utility {
-        // meh
-        #define ES_ERR_REPORT(msg, ...)                                         \
-            OSReport("%s::%s: "msg"\n", __FILE__, __FUNCTION__, __VA_ARGS__);   \
+// meh
+#define ES_ERR_REPORT(msg, ...) OSReport("%s::%s: " msg "\n", __FILE__, __FUNCTION__, __VA_ARGS__);
 
         ESError ESMisc::GetTmdView(EGG::Heap* heap, ESTitleId titleId, ESTmdView** outTmdView) {
-            ESTmdView*  tmdView;
-            u32         tmdViewSize = 0;
+            ESTmdView* tmdView;
+            u32 tmdViewSize = 0;
 
-            ESError     ret;
+            ESError ret;
 
             ret = ES_GetTmdView(titleId, NULL, &tmdViewSize);
             if (ret < ES_ERR_OK) {
@@ -47,15 +46,15 @@ namespace ipl {
                 goto out;
             }
 
-out:
+        out:
             return ret;
         }
 
         ESError ESMisc::GetTicketViewList(EGG::Heap* heap, ESTitleId titleId, ESTicketView** outTicketViews, u32* outNumTicketViews) {
-            ESTicketView*   ticketViews;
-            u32             numTicketViews = 0;
+            ESTicketView* ticketViews;
+            u32 numTicketViews = 0;
 
-            ESError         ret;
+            ESError ret;
 
             ret = ES_GetTicketViews(titleId, NULL, &numTicketViews);
             if (ret < ES_ERR_OK) {
@@ -87,10 +86,10 @@ out:
         }
 
         ESError ESMisc::GetTicketView(EGG::Heap* heap, ESTitleId titleId, ESTicketView* ticketView, int numTicketViews) {
-            u32             inNumTicketViews = 0;
-            ESTicketView*   inTicketView = NULL;
-           
-            ESError         ret;
+            u32 inNumTicketViews = 0;
+            ESTicketView* inTicketView = NULL;
+
+            ESError ret;
 
             ret = GetTicketViewList(heap, titleId, &inTicketView, &inNumTicketViews);
             if (numTicketViews >= inNumTicketViews) {
@@ -102,7 +101,7 @@ out:
             if (ret == ES_ERR_OK) {
                 memcpy(ticketView, inTicketView + numTicketViews, sizeof(ESTicketView));
             }
-out:
+        out:
             if (inTicketView != NULL) {
                 heap->free(inTicketView);
             }
@@ -110,12 +109,12 @@ out:
         }
 
         s32 ESMisc::PrivateContentsExist(ESTitleId titleId) {
-            char    path[96] ALIGN32;
+            char path[96] ALIGN32;
 
-            u32     usedBlocks = 0;
-            u32     usedINodes = 0;
+            u32 usedBlocks = 0;
+            u32 usedINodes = 0;
 
-            s32     ret;
+            s32 ret;
 
             sprintf(path, "/title/%08x/%08x/content", NANDTitleIdHi(titleId), NANDTitleIdLo(titleId));
             ret = NANDSecretGetUsage(path, &usedBlocks, &usedINodes);
@@ -204,9 +203,9 @@ out:
         DECOMP_FORCE_ACTIVE(iplESMisc_cpp, "DeleteSharedContent: ES_DeleteSharedContent err %d\n");
 
         BOOL ESMisc::IsLastTicketExpired(ESTitleId* titleId) {
-            s32             ret;
-            NANDFileInfo    file;
-            ESTitleId       readTitleId ALIGN32;
+            s32 ret;
+            NANDFileInfo file;
+            ESTitleId readTitleId ALIGN32;
 
             if (BS2GetBootType() != 1) {
                 DeleteExpiredFlagFile();
@@ -282,7 +281,7 @@ out:
 
                 char path[64] ALIGN32;
                 snprintf(path, sizeof(path), "/title/%08x/%08x/data", NANDTitleIdHi(titleId), NANDTitleIdLo(titleId));
-                
+
                 u32 nodes;
                 s32 ret = NANDPrivateReadDir(path, NULL, &nodes);
 
@@ -294,7 +293,7 @@ out:
 
                 result = nodes;
             }
-out:
+        out:
             if (changedUid) {
                 ChangeUid(SYSMENU_TITLE_ID);
             }
@@ -315,7 +314,7 @@ out:
                 ES_ERR_REPORT("Backup TMD failed: %d", ret);
                 goto do_proc;
             }
-do_proc:
+        do_proc:
             ret = ES_DeleteTitle(titleId);
             if (ret != ES_ERR_OK) {
                 ES_ERR_REPORT("ES_DeleteTitle failed: %d for %016llx", ret, titleId);
@@ -325,7 +324,7 @@ do_proc:
         }
 
         s32 ESMisc::DeleteMetaContent(ESTitleId titleId) {
-            char metaPath[64]="";
+            char metaPath[64] = "";
             snprintf(metaPath, sizeof(metaPath), "/meta/%08x/%08x/title.met", NANDTitleIdHi(titleId), NANDTitleIdLo(titleId));
             return NANDPrivateDelete(metaPath);
         }
@@ -340,10 +339,7 @@ do_proc:
             return FALSE;
         }
 
-        TMDFile::TMDFile(EGG::Heap* heap) :
-        mpHeap(heap),
-        mbFileOpen(FALSE),
-        mFileLength(0) {
+        TMDFile::TMDFile(EGG::Heap* heap) : mpHeap(heap), mbFileOpen(FALSE), mFileLength(0) {
             memset(&mFile, 0, sizeof(mFile));
         }
 
@@ -388,8 +384,8 @@ do_proc:
         }
 
         BOOL TMDFile::Exist(ESTitleId titleId, u32* tmdOffset, u32* tmdSize) {
-            u32         offset = 0;
-            EntryHead   entry ALIGN32;
+            u32 offset = 0;
+            EntryHead entry ALIGN32;
 
             if (!mbFileOpen) {
                 return FALSE;
@@ -423,9 +419,9 @@ do_proc:
         }
 
         s32 TMDFile::Backup(ESTitleId titleId) {
-            s32         ret = NAND_RESULT_OK;
-            u32         entryLen;
-            EntryHead*  entry = NULL;
+            s32 ret = NAND_RESULT_OK;
+            u32 entryLen;
+            EntryHead* entry = NULL;
 
             if (!mbFileOpen) {
                 return -1;
@@ -433,7 +429,7 @@ do_proc:
 
             u32 fileLen;
             u32 tmdSize;
-            
+
             // Is the TMD already in the backup database?
             if (!Exist(titleId, NULL, NULL)) {
                 // If not, let's back you up!
@@ -496,7 +492,7 @@ do_proc:
                 mFileLength += entryLen;
                 goto out;
             }
-out:
+        out:
             if (entry != NULL) {
                 mpHeap->free(entry);
             }
@@ -504,12 +500,12 @@ out:
         }
 
         s32 TMDFile::Restore(ESTitleId titleId) {
-            s32         ret = NAND_RESULT_OK;
+            s32 ret = NAND_RESULT_OK;
 
-            u32     fileLen;
-            u32     tmdOffset = 0;
-            u32     tmdSize = 0;
-            void*   tmdBuffer = NULL;
+            u32 fileLen;
+            u32 tmdOffset = 0;
+            u32 tmdSize = 0;
+            void* tmdBuffer = NULL;
 
             if (!mbFileOpen) {
                 return -1;
@@ -558,11 +554,11 @@ out:
                     goto out;
                 }
             }
-out:
+        out:
             if (tmdBuffer != NULL) {
                 mpHeap->free(tmdBuffer);
             }
             return ret;
         }
-    }
-}
+    }  // namespace utility
+}  // namespace ipl

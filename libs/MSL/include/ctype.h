@@ -7,17 +7,17 @@
 extern "C" {
 #endif
 
-#define __MSL_ISALPHA_MAP   (1 << 0)
-#define __MSL_ISBLANK_MAP   (1 << 1)
-#define __MSL_ISCNTRL_MAP   (1 << 2)
-#define __MSL_ISDIGIT_MAP   (1 << 3)
-#define __MSL_ISGRAPH_MAP   (1 << 4)
-#define __MSL_ISLOWER_MAP   (1 << 5)
-#define __MSL_ISPRINT_MAP   (1 << 6)
-#define __MSL_ISPUNCT_MAP   (1 << 7)
-#define __MSL_ISSPACE_MAP   (1 << 8)
-#define __MSL_ISUPPER_MAP   (1 << 9)
-#define __MSL_ISXDIGIT_MAP  (1 << 10)
+#define __MSL_ISALPHA_MAP (1 << 0)
+#define __MSL_ISBLANK_MAP (1 << 1)
+#define __MSL_ISCNTRL_MAP (1 << 2)
+#define __MSL_ISDIGIT_MAP (1 << 3)
+#define __MSL_ISGRAPH_MAP (1 << 4)
+#define __MSL_ISLOWER_MAP (1 << 5)
+#define __MSL_ISPRINT_MAP (1 << 6)
+#define __MSL_ISPUNCT_MAP (1 << 7)
+#define __MSL_ISSPACE_MAP (1 << 8)
+#define __MSL_ISUPPER_MAP (1 << 9)
+#define __MSL_ISXDIGIT_MAP (1 << 10)
 
 inline int isalpha(int x) {
     return (x < 0 || x >= 256) ? 0 : (_current_locale.ctype_cmpt_ptr->ctype_map_ptr[x] & __MSL_ISALPHA_MAP);
@@ -75,4 +75,4 @@ inline int toupper(int x) {
 }
 #endif
 
-#endif // MSL_CTYPE_H
+#endif  // MSL_CTYPE_H

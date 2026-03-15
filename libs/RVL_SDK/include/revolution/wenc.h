@@ -12,7 +12,7 @@ enum {
 };
 
 typedef struct WENCInfo {
-    u8  data[0x20];
+    u8 data[0x20];
 } WENCInfo;
 
 s32 WENCGetEncodeData(WENCInfo* info, u32 flag, const s16* pbyPcmData, s32 nSampleNum, u8* pbyAdpcmData);
@@ -21,4 +21,4 @@ s32 WENCGetEncodeData(WENCInfo* info, u32 flag, const s16* pbyPcmData, s32 nSamp
 }
 #endif
 
-#endif // REVOLUTION_WENC_H
+#endif  // REVOLUTION_WENC_H

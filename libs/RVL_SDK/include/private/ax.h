@@ -9,9 +9,9 @@
 #include <private/ax/AXCL.h>
 #include <private/ax/AXComp.h>
 
-#include <private/ax/AXVPB.h>
 #include <private/ax/AXSPB.h>
+#include <private/ax/AXVPB.h>
 
 #include <private/ax/AXProf.h>
 
-#endif // PRIVATE_AX_H
+#endif  // PRIVATE_AX_H

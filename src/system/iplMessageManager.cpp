@@ -7,7 +7,7 @@
 namespace ipl {
     namespace message {
         Manager::Manager(EGG::Heap* heap) {
-            mpMessage = new(heap, 4) Message();
+            mpMessage = new (heap, 4) Message();
             initMessage();
         }
 
@@ -55,5 +55,5 @@ namespace ipl {
                 }
             }
         }
-    }
-}
+    }  // namespace message
+}  // namespace ipl

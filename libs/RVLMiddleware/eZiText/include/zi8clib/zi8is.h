@@ -3,9 +3,9 @@
 
 #include <zi8clib/zitypes.h>
 
-ziU8    Zi8GetZHCharSet(ziPtr workData);
+ziU8 Zi8GetZHCharSet(ziPtr workData);
 
-ziBool  Zi8IsComponent(ziWChar ch ZI_NEED_WORK);
-ziBool  Zi8IsCharacter(ziWChar ch ZI_NEED_WORK);
+ziBool Zi8IsComponent(ziWChar ch ZI_NEED_WORK);
+ziBool Zi8IsCharacter(ziWChar ch ZI_NEED_WORK);
 
-#endif // ZI8_CLIB_IS_H
+#endif  // ZI8_CLIB_IS_H

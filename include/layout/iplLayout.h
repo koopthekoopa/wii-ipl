@@ -13,7 +13,7 @@
 #include "utility/iplFrameController.h"
 #include "utility/iplGraphics.h"
 
-// TODO?: Should reduce the amount of inline functions which just call SetVisible.
+// TODO?: reduce the amount of inline functions which just call SetVisible for matching purposes.
 
 namespace ipl {
     namespace layout {

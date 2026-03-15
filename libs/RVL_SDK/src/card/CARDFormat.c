@@ -1,8 +1,8 @@
-#include <revolution/card.h>
 #include <private/card.h>
+#include <revolution/card.h>
 
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 #include <private/hollywood.h>
 
@@ -21,15 +21,13 @@ static void FormatCallback(s32 chan, s32 result) {
         result = __CARDEraseSector(chan, (u32)card->sectorSize * card->formatStep, FormatCallback);
         if (result >= 0)
             return;
-    }
-    else if (card->formatStep < 2 * CARD_NUM_SYSTEM_BLOCK) {
+    } else if (card->formatStep < 2 * CARD_NUM_SYSTEM_BLOCK) {
         int step = card->formatStep - CARD_NUM_SYSTEM_BLOCK;
-        result = __CARDWrite(chan, (u32)card->sectorSize * step, CARD_SYSTEM_BLOCK_SIZE,
-                             (u8* )card->workArea + (CARD_SYSTEM_BLOCK_SIZE * step), FormatCallback);
+        result = __CARDWrite(chan, (u32)card->sectorSize * step, CARD_SYSTEM_BLOCK_SIZE, (u8*)card->workArea + (CARD_SYSTEM_BLOCK_SIZE * step),
+                             FormatCallback);
         if (result >= 0)
             return;
-    }
-    else {
+    } else {
         card->currentDir = (CARDDir*)((u8*)card->workArea + (1 + 0) * CARD_SYSTEM_BLOCK_SIZE);
         memcpy(card->currentDir, (u8*)card->workArea + (1 + 1) * CARD_SYSTEM_BLOCK_SIZE, CARD_SYSTEM_BLOCK_SIZE);
         card->currentFat = (u16*)((u8*)card->workArea + (3 + 0) * CARD_SYSTEM_BLOCK_SIZE);
@@ -103,8 +101,7 @@ s32 __CARDFormatRegionAsync(s32 chan, u16 encode, CARDCallback callback) {
         fat[CARD_FAT_CHECKCODE] = (u16)i;
         fat[CARD_FAT_FREEBLOCKS] = (u16)(card->cBlock - CARD_NUM_SYSTEM_BLOCK);
         fat[CARD_FAT_LASTSLOT] = CARD_NUM_SYSTEM_BLOCK - 1;
-        __CARDCheckSum(&fat[CARD_FAT_CHECKCODE], CARD_SYSTEM_BLOCK_SIZE - sizeof(u32), &fat[CARD_FAT_CHECKSUM],
-                       &fat[CARD_FAT_CHECKSUMINV]);
+        __CARDCheckSum(&fat[CARD_FAT_CHECKCODE], CARD_SYSTEM_BLOCK_SIZE - sizeof(u32), &fat[CARD_FAT_CHECKSUM], &fat[CARD_FAT_CHECKSUMINV]);
     }
 
     card->apiCallback = callback ? callback : __CARDDefaultApiCallback;

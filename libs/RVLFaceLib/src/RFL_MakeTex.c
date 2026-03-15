@@ -8,17 +8,19 @@
 #include <internal/RFLi_Debug.h>
 
 #include <internal/RFLi_FaceConfig.h>
+// clang-format off
 #include <internal/RFLi_FaceConfig/offsets.h>
 #include <internal/RFLi_FaceConfig/colors.h>
+// clang-format on
 
-#include <revolution/os.h>
-#include <revolution/mtx.h>
 #include <revolution/gx.h>
+#include <revolution/mtx.h>
+#include <revolution/os.h>
 
 #include <math.h>
 
-#define TRANS_X_BASE    0.88961464f
-#define TRANS_Y_BASE    0.9276675f
+#define TRANS_X_BASE 0.88961464f
+#define TRANS_Y_BASE 0.9276675f
 
 void RFLiSetupCopyTex(GXTexFmt texFmt, u16 width, u16 height, void* buf, GXColor clearColor) {
     RFLi_ASSERTLINE_NULL(buf, 36);
@@ -38,7 +40,7 @@ void RFLiSetupCopyTex(GXTexFmt texFmt, u16 width, u16 height, void* buf, GXColor
     GXSetTexCopySrc(0, 0, width, height);
     GXSetTexCopyDst(width, height, texFmt, GX_FALSE);
 
-    GXSetCopyClear(clearColor, 0x1000000-1);
+    GXSetCopyClear(clearColor, 0x1000000 - 1);
 
     DCInvalidateRange(buf, 2 * width * height);
     GXCopyTex(buf, GX_TRUE);
@@ -48,51 +50,51 @@ void RFLiSetupCopyTex(GXTexFmt texFmt, u16 width, u16 height, void* buf, GXColor
 
 // DEBUG NON MATCH (https://decomp.me/scratch/RSlZC)
 void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* r29 */, RFLResolution resolution /* r27 */) {
-    int i; // r30
+    int i;  // r30
 
-    RFLiCharInfo info[RFLExp_Max]; // r31+0xF78
-    RFLiFaceData face[RFLExp_Max]; // r31+0x178
+    RFLiCharInfo info[RFLExp_Max];  // r31+0xF78
+    RFLiFaceData face[RFLExp_Max];  // r31+0x178
 
-    u32 texSizeEye = RFLiGetTexSize(RFLiPartsTex_Eye, 0); // r31+0x100
-    u32 texSizeEyebrow = RFLiGetTexSize(RFLiPartsTex_Eyebrow, 0); // r31+0xFC
-    u32 texSizeMouth = RFLiGetTexSize(RFLiPartsTex_Mouth, 0); // r31+0xF8
-    u32 texSizeMustache = RFLiGetTexSize(RFLiPartsTex_Mustache, 0); // r31+0xF4
-    u32 texSizeMole = RFLiGetTexSize(RFLiPartsTex_Mole, 0); // r31+0xF0
+    u32 texSizeEye = RFLiGetTexSize(RFLiPartsTex_Eye, 0);            // r31+0x100
+    u32 texSizeEyebrow = RFLiGetTexSize(RFLiPartsTex_Eyebrow, 0);    // r31+0xFC
+    u32 texSizeMouth = RFLiGetTexSize(RFLiPartsTex_Mouth, 0);        // r31+0xF8
+    u32 texSizeMustache = RFLiGetTexSize(RFLiPartsTex_Mustache, 0);  // r31+0xF4
+    u32 texSizeMole = RFLiGetTexSize(RFLiPartsTex_Mole, 0);          // r31+0xF0
 
-    u8* bufEyeNormal; // r31+0xEC
-    u8* bufEyeBNormal; // r31+0xE8
-    u8* bufMouthNormal; // r31+0xE4
-    u8* bufMustacheNormal; // r31+0xE0
-    u8* bufMoleNormal; // r31+0xDC
-    u8* bufEyeSmile; // r31+0xD8
-    u8* bufMouthAnger; // r31+0xD4
-    u8* bufEyeSorrow; // r31+0xD0
-    u8* bufMouthSorrow; // r31+0xCC
-    u8* bufEyeSurprise; // r31+0xC8
-    u8* bufEyeBlink; // r31+0xC4
-    u8* bufOpenMouth; // r31+0xC0
-    u8** bufEye[RFLExp_Max]; // r31+0x158
-    u8** bufMouth[RFLExp_Max]; // r31+0x13C
+    u8* bufEyeNormal;           // r31+0xEC
+    u8* bufEyeBNormal;          // r31+0xE8
+    u8* bufMouthNormal;         // r31+0xE4
+    u8* bufMustacheNormal;      // r31+0xE0
+    u8* bufMoleNormal;          // r31+0xDC
+    u8* bufEyeSmile;            // r31+0xD8
+    u8* bufMouthAnger;          // r31+0xD4
+    u8* bufEyeSorrow;           // r31+0xD0
+    u8* bufMouthSorrow;         // r31+0xCC
+    u8* bufEyeSurprise;         // r31+0xC8
+    u8* bufEyeBlink;            // r31+0xC4
+    u8* bufOpenMouth;           // r31+0xC0
+    u8** bufEye[RFLExp_Max];    // r31+0x158
+    u8** bufMouth[RFLExp_Max];  // r31+0x13C
 
-    RFLTexture* texEyeNormal; // r31+0xBC
-    RFLTexture* texEyeBNormal; // r31+0xB8
-    RFLTexture* texMouthNormal; // r31+0xB4
-    RFLTexture* texMustacheNormal; // r31+0xB0
-    RFLTexture* texMoleNormal; // r31+0xAC
-    RFLTexture* texEyeSmile; // r31+0xA8
-    RFLTexture* texMouthAnger; // r31+0xA4
-    RFLTexture* texEyeSad; // r31+0xA0
-    RFLTexture* texMouthSad; // r31+0x9C
-    RFLTexture* texEyeSurprise; // r31+0x98
-    RFLTexture* texEyeBlink; // r31+0x94
-    RFLTexture* texOpenMouth; // r31+0x90
-    RFLTexture** texEye[RFLExp_Max]; // r31+0x120
-    RFLTexture** texMouth[RFLExp_Max]; // r31+0x104
+    RFLTexture* texEyeNormal;           // r31+0xBC
+    RFLTexture* texEyeBNormal;          // r31+0xB8
+    RFLTexture* texMouthNormal;         // r31+0xB4
+    RFLTexture* texMustacheNormal;      // r31+0xB0
+    RFLTexture* texMoleNormal;          // r31+0xAC
+    RFLTexture* texEyeSmile;            // r31+0xA8
+    RFLTexture* texMouthAnger;          // r31+0xA4
+    RFLTexture* texEyeSad;              // r31+0xA0
+    RFLTexture* texMouthSad;            // r31+0x9C
+    RFLTexture* texEyeSurprise;         // r31+0x98
+    RFLTexture* texEyeBlink;            // r31+0x94
+    RFLTexture* texOpenMouth;           // r31+0x90
+    RFLTexture** texEye[RFLExp_Max];    // r31+0x120
+    RFLTexture** texMouth[RFLExp_Max];  // r31+0x104
 
-    u32 scissorOffsetX; // r31+0x8C
-    u32 scissorOffsetY; // r31+0x88
-    u32 scissorWidth; // r31+0x84
-    u32 scissorHeight; // r31+0x80
+    u32 scissorOffsetX;  // r31+0x8C
+    u32 scissorOffsetY;  // r31+0x88
+    u32 scissorWidth;    // r31+0x84
+    u32 scissorHeight;   // r31+0x80
 
     bufEyeNormal = NULL;
     bufEyeBNormal = NULL;
@@ -106,7 +108,7 @@ void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* 
     bufEyeSurprise = NULL;
     bufEyeBlink = NULL;
     bufOpenMouth = NULL;
-    
+
     bufEye[RFLExp_Normal] = &bufEyeNormal;
     bufEye[RFLExp_Smile] = &bufEyeSmile;
     bufEye[RFLExp_Anger] = &bufEyeNormal;
@@ -135,7 +137,7 @@ void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* 
     texEyeSurprise = NULL;
     texEyeBlink = NULL;
     texOpenMouth = NULL;
-    
+
     texEye[RFLExp_Normal] = &texEyeNormal;
     texEye[RFLExp_Smile] = &texEyeSmile;
     texEye[RFLExp_Anger] = &texEyeNormal;
@@ -157,8 +159,8 @@ void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* 
     }
 
     if (texBuffer[RFLExp_Smile] != NULL) {
-        int changeEyeRot = 0; // r31+0x7C
-        RFLExpression exp = RFLExp_Smile; // r31+0x78
+        int changeEyeRot = 0;              // r31+0x7C
+        RFLExpression exp = RFLExp_Smile;  // r31+0x78
 
         info[exp] = *pCharInfo;
         info[exp].eye.type = 48;
@@ -166,41 +168,35 @@ void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* 
         changeEyeRot = RFLi_EYE_ROT_OFFSET[pCharInfo->eye.type] - RFLi_EYE_ROT_OFFSET[info[exp].eye.type];
         if (changeEyeRot + (int)info[exp].eye.rotate < 0) {
             info[exp].eye.rotate = 0;
-        }
-        else if (changeEyeRot + (int)info[exp].eye.rotate > RFLi_EYE_ROT_MAX) {
+        } else if (changeEyeRot + (int)info[exp].eye.rotate > RFLi_EYE_ROT_MAX) {
             info[exp].eye.rotate = RFLi_EYE_ROT_MAX;
-        }
-        else {
+        } else {
             info[exp].eye.rotate += changeEyeRot;
         }
     }
 
     if (texBuffer[RFLExp_Anger] != NULL) {
-        int changeEyebrowRot = 0; // r31+0x74
-        int changeEyeRot = 0; // r31+0x70
-        RFLExpression exp = RFLExp_Anger; // r31+0x6C
+        int changeEyebrowRot = 0;          // r31+0x74
+        int changeEyeRot = 0;              // r31+0x70
+        RFLExpression exp = RFLExp_Anger;  // r31+0x6C
 
         info[exp] = *pCharInfo;
 
         changeEyebrowRot = 2;
         if (changeEyebrowRot + (int)info[exp].eyebrow.rotate < 0) {
             info[exp].eyebrow.rotate = 0;
-        }
-        else if (changeEyebrowRot + (int)info[exp].eyebrow.rotate > RFLi_EYEBROW_ROT_MAX) {
+        } else if (changeEyebrowRot + (int)info[exp].eyebrow.rotate > RFLi_EYEBROW_ROT_MAX) {
             info[exp].eyebrow.rotate = RFLi_EYEBROW_ROT_MAX;
-        }
-        else {
+        } else {
             info[exp].eyebrow.rotate += changeEyebrowRot;
         }
 
         changeEyeRot = 2;
         if (changeEyeRot + (int)info[exp].eye.rotate < 0) {
             info[exp].eye.rotate = 0;
-        }
-        else if (changeEyeRot + (int)info[exp].eye.rotate > RFLi_EYE_ROT_MAX) {
+        } else if (changeEyeRot + (int)info[exp].eye.rotate > RFLi_EYE_ROT_MAX) {
             info[exp].eye.rotate = RFLi_EYE_ROT_MAX;
-        }
-        else {
+        } else {
             info[exp].eye.rotate += changeEyeRot;
         }
 
@@ -208,31 +204,27 @@ void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* 
     }
 
     if (texBuffer[RFLExp_Sorrow] != NULL) {
-        int changeEyebrowRot = 0; // r31+0x68
-        int changeEyeRot = 0; // r31+0x64
-        RFLExpression exp = RFLExp_Sorrow; // r31+0x60
+        int changeEyebrowRot = 0;           // r31+0x68
+        int changeEyeRot = 0;               // r31+0x64
+        RFLExpression exp = RFLExp_Sorrow;  // r31+0x60
 
         info[exp] = *pCharInfo;
 
         changeEyebrowRot = -2;
         if (changeEyebrowRot + (int)info[exp].eyebrow.rotate < 0) {
             info[exp].eyebrow.rotate = 0;
-        }
-        else if (changeEyebrowRot + (int)info[exp].eyebrow.rotate > RFLi_EYEBROW_ROT_MAX) {
+        } else if (changeEyebrowRot + (int)info[exp].eyebrow.rotate > RFLi_EYEBROW_ROT_MAX) {
             info[exp].eyebrow.rotate = RFLi_EYEBROW_ROT_MAX;
-        }
-        else {
+        } else {
             info[exp].eyebrow.rotate += changeEyebrowRot;
         }
 
         changeEyeRot = -2;
         if (changeEyeRot + (int)info[exp].eye.rotate < 0) {
             info[exp].eye.rotate = 0;
-        }
-        else if (changeEyeRot + (int)info[exp].eye.rotate > RFLi_EYE_ROT_MAX) {
+        } else if (changeEyeRot + (int)info[exp].eye.rotate > RFLi_EYE_ROT_MAX) {
             info[exp].eye.rotate = RFLi_EYE_ROT_MAX;
-        }
-        else {
+        } else {
             info[exp].eye.rotate += changeEyeRot;
         }
 
@@ -240,8 +232,8 @@ void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* 
     }
 
     if (texBuffer[RFLExp_Surprise] != NULL) {
-        int changeEyeRot = 0; // r31+0x5C
-        RFLExpression exp = RFLExp_Surprise; // r31+0x58
+        int changeEyeRot = 0;                 // r31+0x5C
+        RFLExpression exp = RFLExp_Surprise;  // r31+0x58
 
         info[exp] = *pCharInfo;
         info[exp].eyebrow.y -= 2;
@@ -250,8 +242,7 @@ void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* 
         changeEyeRot = RFLi_EYE_ROT_OFFSET[pCharInfo->eye.type] - RFLi_EYE_ROT_OFFSET[info[exp].eye.type];
         if (changeEyeRot + (int)info[exp].eye.rotate < 0) {
             info[exp].eye.rotate = 0;
-        }
-        else if (changeEyeRot + (int)info[exp].eye.rotate > RFLi_EYE_ROT_MAX) {
+        } else if (changeEyeRot + (int)info[exp].eye.rotate > RFLi_EYE_ROT_MAX) {
             info[exp].eye.rotate = RFLi_EYE_ROT_MAX;
         } else {
             info[exp].eye.rotate += changeEyeRot;
@@ -259,8 +250,8 @@ void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* 
     }
 
     if (texBuffer[RFLExp_Blink] != NULL) {
-        int changeEyeRot = 0; // r31+0x54
-        RFLExpression exp = RFLExp_Blink; // r31+0x50
+        int changeEyeRot = 0;              // r31+0x54
+        RFLExpression exp = RFLExp_Blink;  // r31+0x50
 
         info[exp] = *pCharInfo;
         info[exp].eye.type = 26;
@@ -268,17 +259,15 @@ void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* 
         changeEyeRot = RFLi_EYE_ROT_OFFSET[pCharInfo->eye.type] - RFLi_EYE_ROT_OFFSET[info[exp].eye.type];
         if (changeEyeRot + (int)info[exp].eye.rotate < 0) {
             info[exp].eye.rotate = 0;
-        }
-        else if (changeEyeRot + (int)info[exp].eye.rotate > RFLi_EYE_ROT_MAX) {
+        } else if (changeEyeRot + (int)info[exp].eye.rotate > RFLi_EYE_ROT_MAX) {
             info[exp].eye.rotate = RFLi_EYE_ROT_MAX;
-        }
-        else {
+        } else {
             info[exp].eye.rotate += changeEyeRot;
         }
     }
 
     if (texBuffer[RFLExp_OpenMouth] != NULL) {
-        RFLExpression exp = RFLExp_OpenMouth; // r31+0x4C
+        RFLExpression exp = RFLExp_OpenMouth;  // r31+0x4C
 
         info[exp] = *pCharInfo;
         info[exp].mouth.type = 24;
@@ -360,7 +349,7 @@ void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* 
     }
 
     {
-        RFLi_MASKRSL maxResolution = RFLiGetMaxMaskRsl(resolution); // r31+0x48
+        RFLi_MASKRSL maxResolution = RFLiGetMaxMaskRsl(resolution);  // r31+0x48
 
         for (i = 0; i < RFLExp_Max; i++) {
             if (texBuffer[i] != NULL) {
@@ -372,7 +361,7 @@ void RFLiMakeTexture(const RFLiCharInfo* pCharInfo /* r28 */, u8** texBuffer /* 
     }
 
     {
-        u32 size = RFLiGetMaskBufSize(resolution); // r31+0x44
+        u32 size = RFLiGetMaskBufSize(resolution);  // r31+0x44
 
         for (i = 0; i < RFLExp_Max; i++) {
             if (texBuffer[i] != NULL) {
@@ -507,7 +496,8 @@ void RFLiInitRFLTexture(RFLTexObj* pRFLTexObj) {
     RFLTexture* pTexture = pRFLTexObj->texture;
 
     GXInitTexObj(&pRFLTexObj->tobj, RFLiGetTexImage(pTexture), pTexture->width, pTexture->height, pTexture->format, GX_CLAMP, GX_CLAMP, GX_FALSE);
-    GXInitTexObjLOD(&pRFLTexObj->tobj, pTexture->minFilter, pTexture->magFilter, pTexture->minLOD, pTexture->maxLOD, pTexture->LODBias, (GXBool)pTexture->enableBiasClamp,  (GXBool)pTexture->enableEdgeLOD, pTexture->enableMaxAniso);
+    GXInitTexObjLOD(&pRFLTexObj->tobj, pTexture->minFilter, pTexture->magFilter, pTexture->minLOD, pTexture->maxLOD, pTexture->LODBias,
+                    (GXBool)pTexture->enableBiasClamp, (GXBool)pTexture->enableEdgeLOD, pTexture->enableMaxAniso);
 }
 
 void RFLiSetup2DCameraAndParam() {
@@ -615,15 +605,18 @@ void RFLiSetTev4Eye(u32 eyeColor, u32 eyeType) {
     GXSetTevAlphaOp(GX_TEVSTAGE2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_TRUE, GX_TEVPREV);
 
     switch (eyeType) {
-        case 9:
+        case 9: {
             color0 = (GXColor){255, 130, 0, 255};
             break;
-        case 20:
+        }
+        case 20: {
             color0 = (GXColor){0, 255, 255, 255};
             break;
-        default:
+        }
+        default: {
             color0 = (GXColor){0, 0, 0, 255};
             break;
+        }
     }
 
     color1 = RFLi_EYE_COLOR1[eyeColor];
@@ -665,9 +658,9 @@ void RFLiSetTev4Mustache(u32 color) {
 }
 
 void RFLiSetFaceParts(const RFLiCharInfo* pCharInfo, RFLiFaceData* pFace, RFLi_MASKRSL resolution) {
-    #define SCALE2DIM(scale)       (1.0 + UNIT_SCALE * (scale))
-    #define ROT2ANG(rotate)        (UNIT_ANGLE * ((rotate) % 32))
-    #define UNIT(x)                ((x) / 64.0f)
+#define SCALE2DIM(scale) (1.0 + UNIT_SCALE * (scale))
+#define ROT2ANG(rotate) (UNIT_ANGLE * ((rotate) % 32))
+#define UNIT(x) ((x) / 64.0f)
 
     // UNUSED. not sure which function these are in
     static const f32 RATIO_X = 1.12408220767975f;
@@ -789,10 +782,10 @@ void RFLiSetFaceParts(const RFLiCharInfo* pCharInfo, RFLiFaceData* pFace, RFLi_M
     pFace->mole.height = moleH * resolution_;
     pFace->mole.angle = 0.0f;
     pFace->mole.origin = RFL_ORIGIN_CENTER;
-    
-    #undef SCALE2DIM
-    #undef ROT2ANG
-    #undef UNIT
+
+#undef SCALE2DIM
+#undef ROT2ANG
+#undef UNIT
 }
 
 void RFLiCapture(u8* texBuffer, const RFLiCharInfo* pCharInfo, RFLiFaceData* pFace, RFLi_MASKRSL resolution) {
@@ -854,8 +847,7 @@ void RFLiCapture(u8* texBuffer, const RFLiCharInfo* pCharInfo, RFLiFaceData* pFa
 #if RFL_BUILD >= 20080306
     if (RFLiGetManager()->mCreateModelCB == NULL) {
         GXDrawDone();
-    }
-    else {
+    } else {
         RFLiGetManager()->mCreateModelCB();
     }
 #else
@@ -917,7 +909,8 @@ void RFLiDrawQuad(f32 x, f32 y, f32 width, f32 height, f32 rotZ, RFLi_ORIGIN ori
         }
     }
 
-    GXBegin(GX_QUADS, GX_VTXFMT0, 4); {
+    GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+    {
         GXPosition2f32(1.0 + xOrigin, -0.5f);
         GXColor1u32(0x000000FF);
         GXTexCoord2s16(s0, 0);
@@ -961,7 +954,6 @@ RFLi_MASKRSL RFLiGetMaxMaskRsl(RFLResolution resolution) {
 u32 RFLiGetMaskSize(RFLi_MASKRSL maskResolution) {
     return 2 * (maskResolution * maskResolution);
 }
-
 
 u32 RFLiGetMaskBufSize(RFLResolution resolution) {
     u32 size = 0;

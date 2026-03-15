@@ -4,14 +4,10 @@
 
 namespace ipl {
     namespace utility {
-        Capture::Capture(EGG::Heap* heap, int x, int y, int width, int height, GXTexFmt texFmt) :
-        mXPos(x),
-        mYPos(y),
-        mTextureWidth(width),
-        mTextureHeight(height),
-        mTextureFormat(texFmt) {
+        Capture::Capture(EGG::Heap* heap, int x, int y, int width, int height, GXTexFmt texFmt)
+            : mXPos(x), mYPos(y), mTextureWidth(width), mTextureHeight(height), mTextureFormat(texFmt) {
             mTextureSize = GXGetTexBufferSize(width, height, texFmt, GX_FALSE, 1);
-            mTextureBuffer = new(heap, DEFAULT_ALIGN) u8[mTextureSize];
+            mTextureBuffer = new (heap, DEFAULT_ALIGN) u8[mTextureSize];
 
             GXInitTexObj(&mTexObj, mTextureBuffer, mTextureWidth, mTextureHeight, mTextureFormat, GX_CLAMP, GX_CLAMP, GX_FALSE);
         }
@@ -22,22 +18,22 @@ namespace ipl {
 
         void Capture::capture(BOOL disableFilter) {
             DCInvalidateRange(mTextureBuffer, mTextureSize);
-            
+
             if (!disableFilter) {
                 GXRenderModeObj* pRmode = System::getRenderModeObj();
                 GXSetCopyFilter(GX_FALSE, pRmode->sample_pattern, GX_FALSE, pRmode->vfilter);
             }
-            
+
             GXSetTexCopySrc(mXPos, mYPos, mTextureWidth, mTextureHeight);
             GXSetTexCopyDst(mTextureWidth, mTextureHeight, mTextureFormat, GX_FALSE);
-            
+
             GXCopyTex(mTextureBuffer, GX_FALSE);
             GXPixModeSync();
-            
+
             if (!disableFilter) {
                 GXRenderModeObj* pRmode = System::getRenderModeObj();
                 GXSetCopyFilter(pRmode->aa, pRmode->sample_pattern, GX_TRUE, pRmode->vfilter);
             }
         }
-    }
-}
+    }  // namespace utility
+}  // namespace ipl

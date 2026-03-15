@@ -1,13 +1,13 @@
-#include <revolution/sc.h>
 #include <private/sc.h>
+#include <revolution/sc.h>
 
 #include <revolution/os.h>
 
-#include <revolution/nand.h>
 #include <private/nand.h>
+#include <revolution/nand.h>
 
-#include <string.h>
 #include <stdbool.h>
+#include <string.h>
 
 #include <revolution/verdefs.h>
 
@@ -43,72 +43,72 @@ typedef enum {
 } NandCallbackState;
 
 typedef struct SCNameAndID {
-    char*       name;
-    SCItemID    id;
+    char* name;
+    SCItemID id;
 } SCNameAndID;
 
 SCNameAndID NameAndIDTbl[SC_ITEM_ID_MAX] = {
-    "IPL.CB",       SC_ITEM_ID_IPL_COUNTER_BIAS,
-    "IPL.AR",       SC_ITEM_ID_IPL_ASPECT_RATIO,
-    "IPL.ARN",      SC_ITEM_ID_IPL_AUTORUN_MODE,
-    "IPL.CD",       SC_ITEM_ID_IPL_CONFIG_DONE,
-    "IPL.CD2",      SC_ITEM_ID_IPL_CONFIG_DONE2,
-    "IPL.DH",       SC_ITEM_ID_IPL_DISPLAY_OFFSET_H,
-    "IPL.E60",      SC_ITEM_ID_IPL_EURGB60_MODE,
-    "IPL.EULA",     SC_ITEM_ID_IPL_EULA,
-    "IPL.FRC",      SC_ITEM_ID_IPL_FREE_CHANNEL_APP_COUNT,
-    "IPL.IDL",      SC_ITEM_ID_IPL_IDLE_MODE,
-    "IPL.INC",      SC_ITEM_ID_IPL_INSTALLED_CHANNEL_APP_COUNT,
-    "IPL.LNG",      SC_ITEM_ID_IPL_LANGUAGE,
-    "IPL.NIK",      SC_ITEM_ID_IPL_OWNER_NICKNAME,
-    "IPL.PC",       SC_ITEM_ID_IPL_PARENTAL_CONTROL,
-    "IPL.PGS",      SC_ITEM_ID_IPL_PROGRESSIVE_MODE,
-    "IPL.SSV",      SC_ITEM_ID_IPL_SCREEN_SAVER_MODE,
-    "IPL.SADR",     SC_ITEM_ID_IPL_SIMPLE_ADDRESS,
-    "IPL.SND",      SC_ITEM_ID_IPL_SOUND_MODE,
-    "IPL.UPT",      SC_ITEM_ID_IPL_UPDATE_TYPE,
-    "NET.CNF",      SC_ITEM_ID_NET_CONFIG,
-    "NET.CTPC",     SC_ITEM_ID_NET_CONTENT_RESTRICTIONS,
-    "NET.PROF",     SC_ITEM_ID_NET_PROFILE,
-    "NET.WCPC",     SC_ITEM_ID_NET_WC_RESTRICTION,
-    "NET.WCFG",     SC_ITEM_ID_NET_WC_FLAGS,
-    "DEV.BTM",      SC_ITEM_ID_DEV_BOOT_MODE,
-    "DEV.VIM",      SC_ITEM_ID_DEV_VIDEO_MODE,
-    "DEV.CTC",      SC_ITEM_ID_DEV_COUNTRY_CODE,
-    "DEV.DSM",      SC_ITEM_ID_DEV_DRIVESAVING_MODE,
-    "BT.DINF",      SC_ITEM_ID_BT_DEVICE_INFO,
-    "BT.CDIF",      SC_ITEM_ID_BT_CMPDEV_INFO,
-    "BT.SENS",      SC_ITEM_ID_BT_DPD_SENSIBILITY,
-    "BT.SPKV",      SC_ITEM_ID_BT_SPEAKER_VOLUME,
-    "BT.MOT",       SC_ITEM_ID_BT_MOTOR_MODE,
-    "BT.BAR",       SC_ITEM_ID_BT_SENSOR_BAR_POSITION,
-    "DVD.CNF",      SC_ITEM_ID_DVD_CONFIG,
-    "WWW.RST",      SC_ITEM_ID_WWW_RESTRICTION,
-    "MPLS.MOVIE",   SC_ITEM_ID_MOTION_PLUS_MOVIE,
-    "IPL.TID",      SC_ITEM_ID_TEMP_TITLE_ID,
+    "IPL.CB",     SC_ITEM_ID_IPL_COUNTER_BIAS,
+    "IPL.AR",     SC_ITEM_ID_IPL_ASPECT_RATIO,
+    "IPL.ARN",    SC_ITEM_ID_IPL_AUTORUN_MODE,
+    "IPL.CD",     SC_ITEM_ID_IPL_CONFIG_DONE,
+    "IPL.CD2",    SC_ITEM_ID_IPL_CONFIG_DONE2,
+    "IPL.DH",     SC_ITEM_ID_IPL_DISPLAY_OFFSET_H,
+    "IPL.E60",    SC_ITEM_ID_IPL_EURGB60_MODE,
+    "IPL.EULA",   SC_ITEM_ID_IPL_EULA,
+    "IPL.FRC",    SC_ITEM_ID_IPL_FREE_CHANNEL_APP_COUNT,
+    "IPL.IDL",    SC_ITEM_ID_IPL_IDLE_MODE,
+    "IPL.INC",    SC_ITEM_ID_IPL_INSTALLED_CHANNEL_APP_COUNT,
+    "IPL.LNG",    SC_ITEM_ID_IPL_LANGUAGE,
+    "IPL.NIK",    SC_ITEM_ID_IPL_OWNER_NICKNAME,
+    "IPL.PC",     SC_ITEM_ID_IPL_PARENTAL_CONTROL,
+    "IPL.PGS",    SC_ITEM_ID_IPL_PROGRESSIVE_MODE,
+    "IPL.SSV",    SC_ITEM_ID_IPL_SCREEN_SAVER_MODE,
+    "IPL.SADR",   SC_ITEM_ID_IPL_SIMPLE_ADDRESS,
+    "IPL.SND",    SC_ITEM_ID_IPL_SOUND_MODE,
+    "IPL.UPT",    SC_ITEM_ID_IPL_UPDATE_TYPE,
+    "NET.CNF",    SC_ITEM_ID_NET_CONFIG,
+    "NET.CTPC",   SC_ITEM_ID_NET_CONTENT_RESTRICTIONS,
+    "NET.PROF",   SC_ITEM_ID_NET_PROFILE,
+    "NET.WCPC",   SC_ITEM_ID_NET_WC_RESTRICTION,
+    "NET.WCFG",   SC_ITEM_ID_NET_WC_FLAGS,
+    "DEV.BTM",    SC_ITEM_ID_DEV_BOOT_MODE,
+    "DEV.VIM",    SC_ITEM_ID_DEV_VIDEO_MODE,
+    "DEV.CTC",    SC_ITEM_ID_DEV_COUNTRY_CODE,
+    "DEV.DSM",    SC_ITEM_ID_DEV_DRIVESAVING_MODE,
+    "BT.DINF",    SC_ITEM_ID_BT_DEVICE_INFO,
+    "BT.CDIF",    SC_ITEM_ID_BT_CMPDEV_INFO,
+    "BT.SENS",    SC_ITEM_ID_BT_DPD_SENSIBILITY,
+    "BT.SPKV",    SC_ITEM_ID_BT_SPEAKER_VOLUME,
+    "BT.MOT",     SC_ITEM_ID_BT_MOTOR_MODE,
+    "BT.BAR",     SC_ITEM_ID_BT_SENSOR_BAR_POSITION,
+    "DVD.CNF",    SC_ITEM_ID_DVD_CONFIG,
+    "WWW.RST",    SC_ITEM_ID_WWW_RESTRICTION,
+    "MPLS.MOVIE", SC_ITEM_ID_MOTION_PLUS_MOVIE,
+    "IPL.TID",    SC_ITEM_ID_TEMP_TITLE_ID,
 };
 
-static SCControl    Control;
-static u8           ConfBuf[SC_CONF_MAX_SIZE] ALIGN32;
-static u8           ConfBufForFlush[SC_CONF_MAX_SIZE] ALIGN32;
+static SCControl Control;
+static u8 ConfBuf[SC_CONF_MAX_SIZE] ALIGN32;
+static u8 ConfBufForFlush[SC_CONF_MAX_SIZE] ALIGN32;
 
-static const char   ConfDirName[] = "/shared2/sys";
-static const char   ConfFileName[] = "/shared2/sys/SYSCONF";
-static const char   ProductInfoFileName[] = "/title/00000001/00000002/data/setting.txt";
+static const char ConfDirName[] = "/shared2/sys";
+static const char ConfFileName[] = "/shared2/sys/SYSCONF";
+static const char ProductInfoFileName[] = "/title/00000001/00000002/data/setting.txt";
 
-static u8   BgJobStatus = SC_STATUS_OK;
+static u8 BgJobStatus = SC_STATUS_OK;
 
-static u32  ItemRestSize = 0;
-static u32  ItemNumTotal = 0;
-static u32  ItemIDMaxPlus1 = 0;
-static u32  ItemIDOffsetTblOffset = 0;
+static u32 ItemRestSize = 0;
+static u32 ItemNumTotal = 0;
+static u32 ItemIDMaxPlus1 = 0;
+static u32 ItemIDOffsetTblOffset = 0;
 
-static u8   IsDevKit = FALSE;
-static u8   DirtyFlag = FALSE;
-static u8   Initialized = FALSE;
+static u8 IsDevKit = FALSE;
+static u8 DirtyFlag = FALSE;
+static u8 Initialized = FALSE;
 
 static void SetBgJobStatus(SCStatus status);
-static s32  SCReloadConfFileAsync(u8* buf, u32 size, SCAsyncCallback callback);
+static s32 SCReloadConfFileAsync(u8* buf, u32 size, SCAsyncCallback callback);
 static void OpenCallbackFromReload(s32 result, NANDCommandBlock* block);
 static void ReadCallbackFromReload(s32 result, NANDCommandBlock* block);
 static void CloseCallbackFromReload(s32 result, NANDCommandBlock* block);
@@ -143,9 +143,7 @@ void SCInit() {
         IsDevKit = TRUE;
     }
 
-    if (NANDInit() != NAND_RESULT_OK ||
-        SCReloadConfFileAsync(__SCGetConfBuf(), __SCGetConfBufSize(), NULL) != NAND_RESULT_OK) {
-
+    if (NANDInit() != NAND_RESULT_OK || SCReloadConfFileAsync(__SCGetConfBuf(), __SCGetConfBufSize(), NULL) != NAND_RESULT_OK) {
         SetBgJobStatus(SC_STATUS_FATAL);
     }
 }
@@ -174,8 +172,7 @@ u32 SCCheckStatus() {
             __SCClearDirtyFlag();
 
             OSRestoreInterrupts(enabled);
-        }
-        else {
+        } else {
             enabled = OSDisableInterrupts();
 
             ClearConfBuf(Control.fileBuffers[SC_CONF_FILE_SYSTEM]);
@@ -186,8 +183,7 @@ u32 SCCheckStatus() {
 
         status = SC_STATUS_OK;
         SetBgJobStatus(SC_STATUS_OK);
-    }
-    else {
+    } else {
         OSRestoreInterrupts(enabled);
     }
 
@@ -227,8 +223,8 @@ static s32 SCReloadConfFileAsync(u8* buf, u32 size, SCAsyncCallback callback) {
 
     Control.isFileOpen = FALSE;
 
-    return NANDPrivateOpenAsync(Control.filePaths[Control.openFileType], &Control.fileInfo, NAND_ACCESS_READ,
-                                OpenCallbackFromReload, &Control.commandBlock);
+    return NANDPrivateOpenAsync(Control.filePaths[Control.openFileType], &Control.fileInfo, NAND_ACCESS_READ, OpenCallbackFromReload,
+                                &Control.commandBlock);
 }
 
 static void OpenCallbackFromReload(s32 result, NANDCommandBlock* block) {
@@ -236,7 +232,7 @@ static void OpenCallbackFromReload(s32 result, NANDCommandBlock* block) {
         Control.isFileOpen = TRUE;
 
         if (NANDReadAsync(&Control.fileInfo, Control.fileBuffers[Control.openFileType], Control.bufferSizes[Control.openFileType],
-        ReadCallbackFromReload, &Control.commandBlock) == NAND_RESULT_OK) {
+                          ReadCallbackFromReload, &Control.commandBlock) == NAND_RESULT_OK) {
             return;
         }
     }
@@ -260,8 +256,7 @@ static void ReadCallbackFromReload(s32 result, NANDCommandBlock* block) {
 static void CloseCallbackFromReload(s32 result, NANDCommandBlock* block) {
     if (result == NAND_RESULT_OK) {
         FinishFromReload();
-    }
-    else {
+    } else {
         ErrorFromReload(result);
     }
 }
@@ -275,8 +270,8 @@ _openFile:
     if (Control.openFileType < SC_CONF_FILE_MAX) {
         Control.isFileOpen = FALSE;
 
-        if (NANDPrivateOpenAsync(Control.filePaths[Control.openFileType], &Control.fileInfo, NAND_ACCESS_READ,
-                                 OpenCallbackFromReload, &Control.commandBlock) == NAND_RESULT_OK) {
+        if (NANDPrivateOpenAsync(Control.filePaths[Control.openFileType], &Control.fileInfo, NAND_ACCESS_READ, OpenCallbackFromReload,
+                                 &Control.commandBlock) == NAND_RESULT_OK) {
             return;
         }
 
@@ -315,8 +310,7 @@ static void ErrorFromReload(s32 result) {
 
     Control.fileSizes[Control.openFileType] = 0;
 
-    if (!Control.isFileOpen ||
-        NANDCloseAsync(&Control.fileInfo, CloseCallbackFromReloadError, &Control.commandBlock) != NAND_RESULT_OK) {
+    if (!Control.isFileOpen || NANDCloseAsync(&Control.fileInfo, CloseCallbackFromReloadError, &Control.commandBlock) != NAND_RESULT_OK) {
         FinishFromReload();
     }
 }
@@ -448,10 +442,7 @@ static SCStatus ParseConfBuf(u8* conf, u32 size) {
 
     // Build lookup table
 
-    for (tblEnd = &tblIter[ItemIDMaxPlus1];
-         tblIter < tblEnd && (itName = tblIter->name) != (void*)NULL;
-         tblIter++) {
-
+    for (tblEnd = &tblIter[ItemIDMaxPlus1]; tblIter < tblEnd && (itName = tblIter->name) != (void*)NULL; tblIter++) {
         u32 itNameLen = strlen(itName);
 
         for (i = 0; i < numItems; i++) {
@@ -543,8 +534,7 @@ static BOOL UnpackItem(const SCConfItem* raw, SCItem* item) {
 
     if (type == SC_ITEM_SMALLARRAY || type == SC_ITEM_BIGARRAY) {
         item->arrayType = SC_ITEM_SMALLARRAY;
-    }
-    else {
+    } else {
         item->primType = type;
         memcpy(item, item->data, item->dataLen);
     }
@@ -630,15 +620,13 @@ static void DeleteItemByID(SCItemID id) {
         if (it < itemOfs) {
             // After deleted item
             *it -= sizeof(u16);
-        }
-        else {
+        } else {
             // Before deleted item
             *it -= itemSize;
         }
     }
 
-    memmove(conf + *itemOfs, conf + itemSize + *itemOfs,
-            itemsEndOfs - (*itemOfs + itemSize));
+    memmove(conf + *itemOfs, conf + itemSize + *itemOfs, itemsEndOfs - (*itemOfs + itemSize));
 
     memset(conf + (itemsEndOfs - itemSize), 0, itemSize);
 
@@ -652,8 +640,7 @@ static void DeleteItemByID(SCItemID id) {
         // After deleted slot
         if (confLut[-i] > itemOfsOfs) {
             confLut[-i] -= sizeof(u16);
-        }
-        else {
+        } else {
             confLut[-i] = 0;
         }
     }
@@ -727,8 +714,7 @@ static BOOL CreateItemByID(SCItemID id, u8 primType, const void* src, u32 len) {
             if (len > SC_SMALLARRAY_MAX + 1) {
                 itemSize += 2;
                 primType = SC_ITEM_BIGARRAY;
-            }
-            else {
+            } else {
                 itemSize += 1;
             }
             break;
@@ -766,8 +752,7 @@ static BOOL CreateItemByID(SCItemID id, u8 primType, const void* src, u32 len) {
     itemsEndOfs = *confItemsEnd;
 
     // Make room for new item
-    memmove(confItemsBegin[0] + sizeof(u16) + conf, confItemsBegin[0] + conf,
-            itemsEndOfs - confItemsBegin[0]);
+    memmove(confItemsBegin[0] + sizeof(u16) + conf, confItemsBegin[0] + conf, itemsEndOfs - confItemsBegin[0]);
 
     // Adjust offsets
     ofsIter = confItemsBegin;
@@ -784,8 +769,7 @@ static BOOL CreateItemByID(SCItemID id, u8 primType, const void* src, u32 len) {
 
     if (primType == SC_ITEM_SMALLARRAY) {
         *newItem++ = len - 1;
-    }
-    else if (primType == SC_ITEM_BIGARRAY) {
+    } else if (primType == SC_ITEM_BIGARRAY) {
         *newItem++ = (len - 1) >> 8 & 0xFF;
         *newItem++ = (len - 1) >> 0 & 0xFF;
     }
@@ -816,8 +800,7 @@ BOOL SCFindByteArrayItem(void* dst, u32 len, SCItemID id) {
     success = FALSE;
     enabled = OSDisableInterrupts();
 
-    if (dst != ((void*)NULL) && FindItemByID(id, &item) &&
-        item.arrayType != 0 && item.dataLen == len) {
+    if (dst != ((void*)NULL) && FindItemByID(id, &item) && item.arrayType != 0 && item.dataLen == len) {
         memcpy(dst, item.data, len);
         success = TRUE;
     }
@@ -845,8 +828,7 @@ BOOL SCReplaceByteArrayItem(const void* src, u32 len, SCItemID id) {
                 success = TRUE;
                 goto _exit;
 
-            }
-            else {
+            } else {
                 DeleteItemByID(id);
             }
         }
@@ -894,8 +876,7 @@ static BOOL SCReplaceIntegerItem(const void* src, SCItemID id, u8 primType) NO_I
             success = TRUE;
             goto _exit;
 
-        }
-        else {
+        } else {
             DeleteItemByID(id);
         }
     }
@@ -929,8 +910,7 @@ BOOL SCFindBoolItem(BOOL* dst, SCItemID id) {
     if (SCFindIntegerItem(&dstVal, id, SC_ITEM_BOOL)) {
         *dst = dstVal ? TRUE : FALSE;
         return TRUE;
-    }
-    else {
+    } else {
         return FALSE;
     }
 }
@@ -1008,22 +988,18 @@ void SCFlushAsync(SCFlushCallback callback) {
         if (!__SCIsDirty()) {
             OSRestoreInterrupts(enabled);
             FinishFromFlush();
-        }
-        else {
+        } else {
             __SCClearDirtyFlag();
             memcpy(ConfBufForFlush, __SCGetConfBuf(), __SCGetConfBufSize());
 
             OSRestoreInterrupts(enabled);
             ctrl->nandCbState = NAND_CB_STATE_GET_STATUS;
 
-            if (NANDPrivateGetTypeAsync(ConfFileName, &ctrl->fileType,
-                                        MyNandCallback, &ctrl->commandBlock) !=
-                NAND_RESULT_OK) {
+            if (NANDPrivateGetTypeAsync(ConfFileName, &ctrl->fileType, MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
                 ErrorFromFlush();
             }
         }
-    }
-    else {
+    } else {
         if (callback != 0) {
             callback(status == SC_STATUS_BUSY ? status : SC_STATUS_FATAL);
         }
@@ -1040,26 +1016,22 @@ static void MyNandCallback(s32 result, NANDCommandBlock* block) {
             if (result == NAND_RESULT_OK && ctrl->fileType == NAND_TYPE_FILE) {
                 ctrl->nandCbState = NAND_CB_STATE_DELETE;
 
-                if (NANDPrivateGetStatusAsync(ConfFileName, &ctrl->fileAttr,
-                                            MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
+                if (NANDPrivateGetStatusAsync(ConfFileName, &ctrl->fileAttr, MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
                     goto _error;
                 }
-            }
-            else {
+            } else {
                 goto _case_1_lbl;
             }
             return;
         }
         case NAND_CB_STATE_DELETE: {
-            if (result == NAND_RESULT_OK &&
-                ctrl->fileAttr.permission == NAND_PERM_ALL_RW) {
+            if (result == NAND_RESULT_OK && ctrl->fileAttr.permission == NAND_PERM_ALL_RW) {
                 goto _case_5_lbl;
             }
         _case_1_lbl:
             ctrl->nandCbState = NAND_CB_STATE_GET_TYPE;
 
-            if (NANDPrivateDeleteAsync(ConfFileName,
-                                    MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
+            if (NANDPrivateDeleteAsync(ConfFileName, MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
                 goto _error;
             }
             return;
@@ -1067,8 +1039,7 @@ static void MyNandCallback(s32 result, NANDCommandBlock* block) {
         case NAND_CB_STATE_GET_TYPE: {
             ctrl->nandCbState = NAND_CB_STATE_CREATE_DIR;
 
-            if (NANDPrivateGetTypeAsync(ConfDirName, &ctrl->fileType,
-                                        MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
+            if (NANDPrivateGetTypeAsync(ConfDirName, &ctrl->fileType, MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
                 goto _error;
             }
             return;
@@ -1080,8 +1051,7 @@ static void MyNandCallback(s32 result, NANDCommandBlock* block) {
 
             ctrl->nandCbState = NAND_CB_STATE_CREATE_FILE;
 
-            if (NANDPrivateCreateDirAsync(ConfDirName, NAND_PERM_ALL_RW, 0,
-                                        MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
+            if (NANDPrivateCreateDirAsync(ConfDirName, NAND_PERM_ALL_RW, 0, MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
                 goto _error;
             }
             return;
@@ -1089,8 +1059,7 @@ static void MyNandCallback(s32 result, NANDCommandBlock* block) {
         case NAND_CB_STATE_CREATE_FILE: {
         _case_4_lbl:
             ctrl->nandCbState = NAND_CB_STATE_OPEN_FILE;
-            if (NANDPrivateCreateAsync(ConfFileName, NAND_PERM_ALL_RW, 0,
-                                    MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
+            if (NANDPrivateCreateAsync(ConfFileName, NAND_PERM_ALL_RW, 0, MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
                 goto _error;
             }
             return;
@@ -1098,8 +1067,7 @@ static void MyNandCallback(s32 result, NANDCommandBlock* block) {
         case NAND_CB_STATE_OPEN_FILE: {
         _case_5_lbl:
             ctrl->nandCbState = NAND_CB_STATE_WRITE_FILE;
-            if (NANDPrivateOpenAsync(ConfFileName, &ctrl->fileInfo, NAND_ACCESS_WRITE,
-                                    MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
+            if (NANDPrivateOpenAsync(ConfFileName, &ctrl->fileInfo, NAND_ACCESS_WRITE, MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
                 goto _error;
             }
             return;
@@ -1112,8 +1080,7 @@ static void MyNandCallback(s32 result, NANDCommandBlock* block) {
             ctrl->isFileOpen = TRUE;
             ctrl->nandCbState = NAND_CB_STATE_CLOSE_FILE;
 
-            if (NANDWriteAsync(&ctrl->fileInfo, ConfBufForFlush, ctrl->flushSize,
-                            MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
+            if (NANDWriteAsync(&ctrl->fileInfo, ConfBufForFlush, ctrl->flushSize, MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
                 goto _error;
             }
             return;
@@ -1126,8 +1093,7 @@ static void MyNandCallback(s32 result, NANDCommandBlock* block) {
             ctrl->isFileOpen = FALSE;
             ctrl->nandCbState = NAND_CB_STATE_ERROR_CHECK;
 
-            if (NANDCloseAsync(&ctrl->fileInfo,
-                            MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
+            if (NANDCloseAsync(&ctrl->fileInfo, MyNandCallback, &ctrl->commandBlock) != NAND_RESULT_OK) {
                 goto _error;
             }
             return;
@@ -1182,8 +1148,7 @@ static void ErrorFromFlush() {
     if (ctrl->isFileOpen) {
         ctrl->nandCbState = NAND_CB_STATE_FINISH;
 
-        if (NANDCloseAsync(&ctrl->fileInfo,
-                            MyNandCallback, &ctrl->commandBlock) == NAND_RESULT_OK) {
+        if (NANDCloseAsync(&ctrl->fileInfo, MyNandCallback, &ctrl->commandBlock) == NAND_RESULT_OK) {
             return;
         }
     }

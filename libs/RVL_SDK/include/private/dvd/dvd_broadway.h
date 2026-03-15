@@ -1,8 +1,8 @@
 #ifndef PRIVATE_DVD_BROADWAY_H
 #define PRIVATE_DVD_BROADWAY_H
 
-#include <revolution/types.h>
 #include <revolution/esp.h>
+#include <revolution/types.h>
 
 #include <stdbool.h>
 
@@ -10,10 +10,8 @@
 extern "C" {
 #endif
 
-
-
 #ifdef __cplusplus
 }
 #endif
 
-#endif // PRIVATE_DVD_BROADWAY_H
+#endif  // PRIVATE_DVD_BROADWAY_H

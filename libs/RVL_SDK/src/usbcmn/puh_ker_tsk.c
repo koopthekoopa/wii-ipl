@@ -6,9 +6,9 @@
 
 static struct {
     struct {
-        OSThread*   unk_0x00;
-        u8          unk_0x04[0x33C];
-    }   entries[MAX_PUH_TSK];   // 0x00
+        OSThread* unk_0x00;
+        u8 unk_0x04[0x33C];
+    } entries[MAX_PUH_TSK];  // 0x00
     u32 unk_0x680;
     u32 unk_0x684;
     u32 unk_0x688;
@@ -24,9 +24,9 @@ s32 uhf_ker_set_priority(int tsk, int priority) {
         return -5;
     }
 
-    if (st_uhs_ker_tsk_mng.entries[tsk-1].unk_0x00 == NULL) {
+    if (st_uhs_ker_tsk_mng.entries[tsk - 1].unk_0x00 == NULL) {
         return -1;
     }
 
-    return OSSetThreadPriority(st_uhs_ker_tsk_mng.entries[tsk-1].unk_0x00, priority) ? 0 : -20;
+    return OSSetThreadPriority(st_uhs_ker_tsk_mng.entries[tsk - 1].unk_0x00, priority) ? 0 : -20;
 }

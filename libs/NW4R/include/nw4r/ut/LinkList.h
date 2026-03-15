@@ -24,16 +24,12 @@ namespace nw4r {
         public:
             LinkListNode() : mNext(NULL), mPrev(NULL) {}
 
-            LinkListNode* GetNext() const {
-                return mNext;
-            }
-            LinkListNode* GetPrev() const {
-                return mPrev;
-            }
+            LinkListNode* GetNext() const { return mNext; }
+            LinkListNode* GetPrev() const { return mPrev; }
 
         private:
-            LinkListNode* mNext; // 0x00
-            LinkListNode* mPrev; // 0x04
+            LinkListNode* mNext;  // 0x00
+            LinkListNode* mPrev;  // 0x04
         };
 
         namespace detail {
@@ -69,17 +65,12 @@ namespace nw4r {
                         return *this;
                     }
 
-                    LinkListNode* operator->() const {
-                        return mNode;
-                    }
+                    LinkListNode* operator->() const { return mNode; }
 
-                    friend bool operator==(LinkListImpl::Iterator lhs,
-                                           LinkListImpl::Iterator rhs) {
-                        return lhs.mNode == rhs.mNode;
-                    }
+                    friend bool operator==(LinkListImpl::Iterator lhs, LinkListImpl::Iterator rhs) { return lhs.mNode == rhs.mNode; }
 
                 private:
-                    LinkListNode* mNode; // 0x00
+                    LinkListNode* mNode;  // 0x00
                 };
 
                 /******************************************************************************
@@ -101,35 +92,22 @@ namespace nw4r {
                         return *this;
                     }
 
-                    const LinkListNode* operator->() const {
-                        return mNode;
-                    }
+                    const LinkListNode* operator->() const { return mNode; }
 
-                    friend bool operator==(LinkListImpl::ConstIterator lhs,
-                                           LinkListImpl::ConstIterator rhs) {
-                        return lhs.mNode == rhs.mNode;
-                    }
+                    friend bool operator==(LinkListImpl::ConstIterator lhs, LinkListImpl::ConstIterator rhs) { return lhs.mNode == rhs.mNode; }
 
                 private:
-                    LinkListNode* mNode; // 0x00
+                    LinkListNode* mNode;  // 0x00
                 };
 
             protected:
-                static Iterator GetIteratorFromPointer(LinkListNode* pNode) {
-                    return Iterator(pNode);
-                }
+                static Iterator GetIteratorFromPointer(LinkListNode* pNode) { return Iterator(pNode); }
 
-                LinkListImpl() {
-                    Initialize_();
-                }
+                LinkListImpl() { Initialize_(); }
                 ~LinkListImpl();
 
-                Iterator GetBeginIter() {
-                    return Iterator(mNode.GetNext());
-                }
-                Iterator GetEndIter() {
-                    return Iterator(&mNode);
-                }
+                Iterator GetBeginIter() { return Iterator(mNode.GetNext()); }
+                Iterator GetEndIter() { return Iterator(&mNode); }
 
                 Iterator Insert(Iterator it, LinkListNode* pNode);
 
@@ -138,19 +116,11 @@ namespace nw4r {
                 Iterator Erase(Iterator begin, Iterator end);
 
             public:
-                u32 GetSize() const {
-                    return mSize;
-                }
-                bool IsEmpty() const {
-                    return mSize == 0;
-                }
+                u32 GetSize() const { return mSize; }
+                bool IsEmpty() const { return mSize == 0; }
 
-                void PopFront() {
-                    Erase(GetBeginIter());
-                }
-                void PopBack() {
-                    Erase(--GetEndIter());
-                }
+                void PopFront() { Erase(GetBeginIter()); }
+                void PopBack() { Erase(--GetEndIter()); }
 
                 void Clear();
 
@@ -162,8 +132,8 @@ namespace nw4r {
                 }
 
             private:
-                u32 mSize;          // 0x00
-                LinkListNode mNode; // 0x04
+                u32 mSize;           // 0x00
+                LinkListNode mNode;  // 0x04
             };
 
             /******************************************************************************
@@ -171,50 +141,42 @@ namespace nw4r {
              * Reverse iterator
              *
              ******************************************************************************/
-            template<typename TIter> class ReverseIterator {
+            template <typename TIter>
+            class ReverseIterator {
             public:
                 explicit ReverseIterator(TIter it) : mCurrent(it) {}
 
-                TIter GetBase() const {
-                    return mCurrent;
-                }
+                TIter GetBase() const { return mCurrent; }
 
                 ReverseIterator& operator++() {
                     --mCurrent;
                     return *this;
                 }
 
-                const typename TIter::TElem* operator->() const {
-                    return &this->operator*();
-                }
+                const typename TIter::TElem* operator->() const { return &this->operator*(); }
 
                 typename TIter::TElem& operator*() const {
                     TIter it = mCurrent;
                     return *--it;
                 }
 
-                friend bool operator==(const ReverseIterator& rLhs,
-                                       const ReverseIterator& rRhs) {
-                    return rLhs.mCurrent == rRhs.mCurrent;
-                }
+                friend bool operator==(const ReverseIterator& rLhs, const ReverseIterator& rRhs) { return rLhs.mCurrent == rRhs.mCurrent; }
 
-                friend bool operator!=(const ReverseIterator& rLhs,
-                                       const ReverseIterator& rRhs) {
-                    return !(rLhs.mCurrent == rRhs.mCurrent);
-                }
+                friend bool operator!=(const ReverseIterator& rLhs, const ReverseIterator& rRhs) { return !(rLhs.mCurrent == rRhs.mCurrent); }
 
             private:
-                TIter mCurrent; // 0x00
+                TIter mCurrent;  // 0x00
             };
 
-        }
+        }  // namespace detail
 
         /******************************************************************************
          *
          * Templated linked list
          *
          ******************************************************************************/
-        template<typename T, int Ofs> class LinkList : public detail::LinkListImpl {
+        template <typename T, int Ofs>
+        class LinkList : public detail::LinkListImpl {
         public:
             // Forward declarations
             class ConstIterator;
@@ -250,24 +212,16 @@ namespace nw4r {
                     return ret;
                 }
 
-                T* operator->() const {
-                    return GetPointerFromNode(mIterator.operator->());
-                }
+                T* operator->() const { return GetPointerFromNode(mIterator.operator->()); }
 
-                T& operator*() const {
-                    return *this->operator->();
-                }
+                T& operator*() const { return *this->operator->(); }
 
-                friend bool operator==(Iterator lhs, Iterator rhs) {
-                    return lhs.mIterator == rhs.mIterator;
-                }
+                friend bool operator==(Iterator lhs, Iterator rhs) { return lhs.mIterator == rhs.mIterator; }
 
-                friend bool operator!=(Iterator lhs, Iterator rhs) {
-                    return !(lhs == rhs);
-                }
+                friend bool operator!=(Iterator lhs, Iterator rhs) { return !(lhs == rhs); }
 
             private:
-                LinkListImpl::Iterator mIterator; // 0x00
+                LinkListImpl::Iterator mIterator;  // 0x00
             };
 
             /******************************************************************************
@@ -300,24 +254,16 @@ namespace nw4r {
                     return ret;
                 }
 
-                const T* operator->() const {
-                    return GetPointerFromNode(mIterator.operator->());
-                }
+                const T* operator->() const { return GetPointerFromNode(mIterator.operator->()); }
 
-                const T& operator*() const {
-                    return *this->operator->();
-                }
+                const T& operator*() const { return *this->operator->(); }
 
-                friend bool operator==(ConstIterator lhs, ConstIterator rhs) {
-                    return lhs.mIterator == rhs.mIterator;
-                }
+                friend bool operator==(ConstIterator lhs, ConstIterator rhs) { return lhs.mIterator == rhs.mIterator; }
 
-                friend bool operator!=(ConstIterator lhs, ConstIterator rhs) {
-                    return !(lhs == rhs);
-                }
+                friend bool operator!=(ConstIterator lhs, ConstIterator rhs) { return !(lhs == rhs); }
 
             private:
-                LinkListImpl::ConstIterator mIterator; // 0x00
+                LinkListImpl::ConstIterator mIterator;  // 0x00
             };
 
         public:
@@ -328,83 +274,42 @@ namespace nw4r {
         public:
             LinkList() {}
 
-            Iterator GetBeginIter() {
-                return Iterator(LinkListImpl::GetBeginIter());
-            }
-            ConstIterator GetBeginIter() const {
-                return ConstIterator(const_cast<LinkList*>(this)->GetBeginIter());
-            }
-            RevIterator GetBeginReverseIter() {
-                return RevIterator(GetBeginIter());
-            }
-            ConstRevIterator GetBeginReverseIter() const {
-                return ConstRevIterator(GetBeginIter());
-            }
+            Iterator GetBeginIter() { return Iterator(LinkListImpl::GetBeginIter()); }
+            ConstIterator GetBeginIter() const { return ConstIterator(const_cast<LinkList*>(this)->GetBeginIter()); }
+            RevIterator GetBeginReverseIter() { return RevIterator(GetBeginIter()); }
+            ConstRevIterator GetBeginReverseIter() const { return ConstRevIterator(GetBeginIter()); }
 
-            Iterator GetEndIter() {
-                return Iterator(LinkListImpl::GetEndIter());
-            }
-            ConstIterator GetEndIter() const {
-                return ConstIterator(const_cast<LinkList*>(this)->GetEndIter());
-            }
-            RevIterator GetEndReverseIter() {
-                return RevIterator(GetEndIter());
-            }
-            ConstRevIterator GetEndReverseIter() const {
-                return ConstRevIterator(GetEndIter());
-            }
+            Iterator GetEndIter() { return Iterator(LinkListImpl::GetEndIter()); }
+            ConstIterator GetEndIter() const { return ConstIterator(const_cast<LinkList*>(this)->GetEndIter()); }
+            RevIterator GetEndReverseIter() { return RevIterator(GetEndIter()); }
+            ConstRevIterator GetEndReverseIter() const { return ConstRevIterator(GetEndIter()); }
 
-            Iterator Insert(Iterator it, T* pElem) {
-                return Iterator(LinkListImpl::Insert(it.mIterator, GetNodeFromPointer(pElem)));
-            }
+            Iterator Insert(Iterator it, T* pElem) { return Iterator(LinkListImpl::Insert(it.mIterator, GetNodeFromPointer(pElem))); }
 
-            Iterator Erase(T* pElem) {
-                return Iterator(LinkListImpl::Erase(GetNodeFromPointer(pElem)));
-            }
-            Iterator Erase(Iterator it) {
-                return Iterator(LinkListImpl::Erase(it.mIterator));
-            }
+            Iterator Erase(T* pElem) { return Iterator(LinkListImpl::Erase(GetNodeFromPointer(pElem))); }
+            Iterator Erase(Iterator it) { return Iterator(LinkListImpl::Erase(it.mIterator)); }
 
-            void PushBack(T* pElem) {
-                Insert(GetEndIter(), pElem);
-            }
+            void PushBack(T* pElem) { Insert(GetEndIter(), pElem); }
 
-            T& GetFront() {
-                return *GetBeginIter();
-            }
-            const T& GetFront() const {
-                return *GetBeginIter();
-            }
+            T& GetFront() { return *GetBeginIter(); }
+            const T& GetFront() const { return *GetBeginIter(); }
 
-            T& GetBack() {
-                return *--GetEndIter();
-            }
-            const T& GetBack() const {
-                return *--GetEndIter();
-            }
+            T& GetBack() { return *--GetEndIter(); }
+            const T& GetBack() const { return *--GetEndIter(); }
 
-            static Iterator GetIteratorFromPointer(T* pElem) {
-                return GetIteratorFromPointer(GetNodeFromPointer(pElem));
-            }
+            static Iterator GetIteratorFromPointer(T* pElem) { return GetIteratorFromPointer(GetNodeFromPointer(pElem)); }
 
-            static Iterator GetIteratorFromPointer(LinkListNode* pNode) {
-                return Iterator(LinkListImpl::GetIteratorFromPointer(pNode));
-            }
+            static Iterator GetIteratorFromPointer(LinkListNode* pNode) { return Iterator(LinkListImpl::GetIteratorFromPointer(pNode)); }
 
-            static LinkListNode* GetNodeFromPointer(T* pElem) {
-                return reinterpret_cast<LinkListNode*>(reinterpret_cast<char*>(pElem) + Ofs);
-            }
+            static LinkListNode* GetNodeFromPointer(T* pElem) { return reinterpret_cast<LinkListNode*>(reinterpret_cast<char*>(pElem) + Ofs); }
 
-            static T* GetPointerFromNode(LinkListNode* pNode) {
-                return reinterpret_cast<T*>(reinterpret_cast<char*>(pNode) - Ofs);
-            }
+            static T* GetPointerFromNode(LinkListNode* pNode) { return reinterpret_cast<T*>(reinterpret_cast<char*>(pNode) - Ofs); }
 
             static const T* GetPointerFromNode(const LinkListNode* pNode) {
                 return reinterpret_cast<const T*>(reinterpret_cast<const char*>(pNode) - Ofs);
             }
         };
-    }
-}
+    }  // namespace ut
+}  // namespace nw4r
 
-
-#endif // NW4R_UT_LINK_LIST_H
+#endif  // NW4R_UT_LINK_LIST_H

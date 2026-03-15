@@ -3,12 +3,12 @@
 
 #include <revolution/types.h>
 
-#define SD_ERROR_BASE   0xC0000000
+#define SD_ERROR_BASE 0xC0000000
 
 typedef s32 ISD_Error;
 
 /* slot0, slot1, slotw */
-#define SD_MAX_SLOTS    3
+#define SD_MAX_SLOTS 3
 
 enum {
     SD_ERROR_SUCCESS = 0,
@@ -19,7 +19,7 @@ enum {
 };
 
 typedef struct _ISD_Device {
-    s32 fd;         // 0x00
+    s32 fd;  // 0x00
     u32 unk_0x04;
     u32 unk_0x08;
     u32 unk_0x0C;
@@ -31,9 +31,9 @@ typedef struct _ISD_Device {
     u32 unk_0x24;
 } ISD_Device;
 
-ISD_Error   ISD_MountCard(u32 slot, ISD_Device** dev);
-void        ISD_UnmountCard(ISD_Device* dev);
+ISD_Error ISD_MountCard(u32 slot, ISD_Device** dev);
+void ISD_UnmountCard(ISD_Device* dev);
 
-ISD_Error   ISD_GetHCRegister(ISD_Device* dev, u32 param_2, u32* param_3, u32 param_4) NO_INLINE;
+ISD_Error ISD_GetHCRegister(ISD_Device* dev, u32 param_2, u32* param_3, u32 param_4) NO_INLINE;
 
-#endif // REVOLUTION_SDI_H
+#endif  // REVOLUTION_SDI_H

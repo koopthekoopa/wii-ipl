@@ -4,7 +4,7 @@
 #pragma function_align 32
 #else
 #pragma function_align 8
-#endif // VERSION_43U
+#endif  // VERSION_43U
 
 #include <TRK_Hollywood_Revolution.h>
 
@@ -12,7 +12,8 @@
 
 // Encapsulating function to get the file to align properly
 asm void __targsupp() {
-#ifdef __MWERKS__
+    // clang-format off
+#ifdef __MWERKS__ 
     nofralloc
     entry TRKAccessFile
         twi 31, r0, 0
@@ -26,5 +27,6 @@ asm void __targsupp() {
     entry TRKPositionFile
         twi 31, r0, 0
         blr
-#endif
+#endif // __MWERKS__
+    // clang-format on
 }

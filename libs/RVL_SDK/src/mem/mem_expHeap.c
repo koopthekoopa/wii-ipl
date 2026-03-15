@@ -1,8 +1,8 @@
 #include <revolution/mem.h>
 #include <revolution/os.h>
 
-#include <string.h>
 #include <math.h>
+#include <string.h>
 
 #include <private/mem.h>
 
@@ -70,15 +70,13 @@ static inline MEMiExpHeapMBlockHead* RemoveMBlock_(MEMiExpBlockList* list, MEMiE
 
     if (prev) {
         prev->link.next = next;
-    }
-    else {
+    } else {
         list->head = next;
     }
 
     if (next) {
         next->link.prev = prev;
-    }
-    else {
+    } else {
         list->tail = prev;
     }
 
@@ -92,8 +90,7 @@ static inline MEMiExpHeapMBlockHead* InsertMBlock_(MEMiExpBlockList* list, MEMiE
     if (prev) {
         next = prev->link.next;
         prev->link.next = block;
-    }
-    else {
+    } else {
         next = list->head;
         list->head = block;
     }
@@ -101,8 +98,7 @@ static inline MEMiExpHeapMBlockHead* InsertMBlock_(MEMiExpBlockList* list, MEMiE
     block->link.next = next;
     if (next) {
         next->link.prev = block;
-    }
-    else {
+    } else {
         list->tail = block;
     }
 
@@ -119,7 +115,7 @@ static inline MEMiExpHeapMBlockHead* InitMBlock_(Region* region, u16 signature) 
     block->signature = signature;
     block->attribute.val = 0;
     block->blockSize = GetOffsetFromPtr(GetMemPtrForMBlock_(block), region->end);
-    
+
     block->link.prev = NULL;
     block->link.next = NULL;
 
@@ -166,15 +162,13 @@ static void* AllocUsedBlockFromFreeBlock_(MEMiExpHeapHead* ext, MEMiExpHeapMBloc
 
     if (GetOffsetFromPtr(region0.start, region0.end) < 0x14) {
         region0.end = region0.start;
-    }
-    else {
+    } else {
         prev = InsertMBlock_(&ext->freeBlocks, InitFreeMBlock_(&region0), prev);
     }
 
     if (GetOffsetFromPtr(region1.start, region1.end) < 0x14) {
         region1.start = region1.end;
-    }
-    else {
+    } else {
         InsertMBlock_(&ext->freeBlocks, InitFreeMBlock_(&region1), prev);
     }
 
@@ -327,8 +321,7 @@ void* MEMAllocFromExpHeapEx(MEMHeapHandle heap, u32 size, int align) {
     LockHeap(heap);
     if (align >= 0) {
         block = AllocFromHead_(heap, size, align);
-    }
-    else {
+    } else {
         block = AllocFromTail_(heap, size, -align);
     }
     UnlockHeap(heap);
@@ -358,8 +351,7 @@ u32 MEMResizeForMBlockExpHeap(MEMHeapHandle heap, void* block, u32 size) {
         if (!search || size > head->blockSize + search->blockSize + sizeof(MEMiExpHeapMBlockHead)) {
             UnlockHeap(heap);
             return 0;
-        }
-        else {
+        } else {
             Region region;
             MEMiExpHeapMBlockHead* prev;
             void* start;
@@ -381,8 +373,7 @@ u32 MEMResizeForMBlockExpHeap(MEMHeapHandle heap, void* block, u32 size) {
 
             FillAllocMemory(heap, start, GetOffsetFromPtr(start, region.start));
         }
-    }
-    else {
+    } else {
         Region region;
         u32 origSize = head->blockSize;
 
@@ -462,7 +453,7 @@ u32 MEMGetAllocatableSizeForExpHeapEx(MEMHeapHandle heap, int align) {
     return maxSize;
 }
 
-void MEMVisitAllocatedForExpHeap(MEMHeapHandle heap, void (*visitor)(void* , MEMHeapHandle , u32), u32 param) {
+void MEMVisitAllocatedForExpHeap(MEMHeapHandle heap, void (*visitor)(void*, MEMHeapHandle, u32), u32 param) {
     MEMiExpHeapMBlockHead* block;
 
     LockHeap(heap);
@@ -487,11 +478,9 @@ u32 MEMAdjustExpHeap(MEMHeapHandle heap) {
     block = ext->freeBlocks.tail;
     if (!block) {
         newSize = 0;
-    }
-    else if (AddU32ToPtr(GetMemPtrForMBlock_(block), block->blockSize) != heap->heapEnd) {
+    } else if (AddU32ToPtr(GetMemPtrForMBlock_(block), block->blockSize) != heap->heapEnd) {
         newSize = 0;
-    }
-    else {
+    } else {
         RemoveMBlock_(&ext->freeBlocks, block);
         heap->heapEnd = SubU32ToPtr(heap->heapEnd, block->blockSize + sizeof(MEMiExpHeapMBlockHead));
         newSize = GetOffsetFromPtr(heap, heap->heapEnd);

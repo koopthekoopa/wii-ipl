@@ -1,6 +1,6 @@
 #include "scene/settingSelect/iplSettingSelect.h"
-#include "scene/settingSelect/iplSettingSelectArg.h"
 #include "scene/settingSelect/iplSettingButton.h"
+#include "scene/settingSelect/iplSettingSelectArg.h"
 
 #include "scene/setting/iplSetting.h"
 
@@ -13,8 +13,11 @@
 
 namespace ipl {
     namespace scene {
-        #define CHANGE_STATE(x) mPrevState = mState; mState = x
+#define CHANGE_STATE(x)                                                                                                                              \
+    mPrevState = mState;                                                                                                                             \
+    mState = x
 
+        // clang-format off
         const char* SettingSelect::mscButtonName[SettingSelect::BTN_MAX] = {
             "B_DataManage_00",
             "B_Setting_00",
@@ -23,18 +26,11 @@ namespace ipl {
             "B_Wii_00",
             "B_Cube_00",
         };
+        // clang-format on
 
-        SettingSelect::SettingSelect(EGG::Heap* heap, int arg) :
-        Base(heap),
-        ::gui::EventHandler(),
-        mState(STATE_WAIT_BUTTON_FADE_IN),
-        mPrevState(STATE_WAIT_BUTTON_FADE_IN),
-        mSettingArg(arg),
-        mpLayout(NULL),
-        mpLayoutFile(NULL),
-        mpGui(NULL),
-        unk_0x90(0),
-        unk_0x94(0) {
+        SettingSelect::SettingSelect(EGG::Heap* heap, int arg)
+            : Base(heap), ::gui::EventHandler(), mState(STATE_WAIT_BUTTON_FADE_IN), mPrevState(STATE_WAIT_BUTTON_FADE_IN), mSettingArg(arg),
+              mpLayout(NULL), mpLayoutFile(NULL), mpGui(NULL), unk_0x90(0), unk_0x94(0) {
             setSceneParentFlags(SCN_PARENTFLAG_CALC | SCN_PARENTFLAG_DRAW);
         }
 
@@ -98,7 +94,7 @@ namespace ipl {
             mpLayout->bindToGroup("it_ObjSetUp_a_SaveDataFoucusFlash.brlan", "G_Cube_01", false, false);
             mpLayout->bindToGroup("it_ObjSetUp_a_SaveDataOut.brlan", "G_Cube_00", false, false);
             mpLayout->bindToGroup("it_ObjSetUp_a_SaveDataBack.brlan", "G_Cube_00", false, false);
-        
+
             mpLayout->finishBinding();
 
             mpGui = new gui::PaneManager(this, mpLayout->getDrawInfo(), NULL, NULL, true);
@@ -108,8 +104,7 @@ namespace ipl {
             if (mSettingArg == SettingSelectArg::ARG_START_NORMAL) {
                 mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_DATA_MANAGE]), true);
                 mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_SETTING]), true);
-            }
-            else {
+            } else {
                 mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_SAVEDATA]), true);
                 mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_CHANNEL]), true);
             }
@@ -202,14 +197,13 @@ namespace ipl {
         void SettingSelect::stt_wait_button_fadein() {
             SettingButton* settingButton = static_cast<SettingButton*>(System::getSceneManager()->getScene(SCENE_SETTING_BUTTON));
 
-            if (System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT
-            && settingButton != NULL && settingButton->getSceneFadeState() != FaderSceneBase::STT_FADE_IN) {
+            if (System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT && settingButton != NULL &&
+                settingButton->getSceneFadeState() != FaderSceneBase::STT_FADE_IN) {
                 if (mSettingArg == SettingSelectArg::ARG_START_NORMAL) {
                     mpLayout->getAnim(ANIM_DATA_MANAGE_IN)->play();
                     mpLayout->getAnim(ANIM_SETTING_IN)->play();
                     CHANGE_STATE(STATE_1ST_WAIT_FADE_IN);
-                }
-                else {
+                } else {
                     layout::Animator* anim = mpLayout->getAnim(ANIM_DATA_MANAGE_FLASH);
                     anim->initAnmFrame(anim->getMaxFrame());
 
@@ -231,8 +225,7 @@ namespace ipl {
                 if (unk_0x90 != 0) {
                     System::getFader()->fadeOut();
                     CHANGE_STATE(STATE_WAIT_BLACK_OUT);
-                }
-                else {
+                } else {
                     mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_DATA_MANAGE]), false);
                     mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_SETTING]), false);
                     mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_SAVEDATA]), true);
@@ -257,8 +250,7 @@ namespace ipl {
                 if (unk_0x90 != 0) {
                     CHANGE_STATE(STATE_WAIT_CHILD);
                     reset_gui();
-                }
-                else {
+                } else {
                     mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_SAVEDATA]), false);
                     mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_CHANNEL]), false);
                     mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[BTN_WII_SAVE]), true);
@@ -329,8 +321,7 @@ namespace ipl {
                             System::getChannelManager()->refreshAsync();
 
                             CHANGE_STATE(STATE_16);
-                        }
-                        else {
+                        } else {
                             mpLayout->getAnim(ANIM_DATA_MANAGE_BACK)->play();
                             mpLayout->getAnim(ANIM_SETTING_IN)->play();
                             mpLayout->getAnim(ANIM_SAVE_DATA_OUT)->play();
@@ -374,19 +365,19 @@ namespace ipl {
         }
 
         void SettingSelect::stt_wait_child() {
-           if (getChild() == NULL && System::getReservedScene() == NULL) {
+            if (getChild() == NULL && System::getReservedScene() == NULL) {
                 int backAnim = -1;
                 int inAnim = -1;
 
                 switch (unk_0x90) {
                     case 13: {
-                    #ifndef KOREAN_BUILD
+#ifndef KOREAN_BUILD
                         backAnim = ANIM_WII_SAVE_DATA_BACK;
                         inAnim = ANIM_GC_SAVE_DATA_IN;
-                    #else
+#else
                         backAnim = ANIM_SAVE_DATA_BACK;
                         inAnim = ANIM_CHANNEL_IN;
-                    #endif
+#endif
                         break;
                     }
                     case 14: {
@@ -408,7 +399,7 @@ namespace ipl {
                 mpLayout->getAnim(inAnim)->play();
 
                 CHANGE_STATE(STATE_WAIT_CHILD_ANIM);
-           }
+            }
         }
 
         void SettingSelect::stt_wait_child_anm() {
@@ -422,11 +413,11 @@ namespace ipl {
                     case 13:
                     case 14: {
                         static_cast<SettingButton*>(System::getScene(SCENE_SETTING_BUTTON))->showWii();
-                    #ifndef KOREAN_BUILD
+#ifndef KOREAN_BUILD
                         CHANGE_STATE(STATE_3RD_NORMAL);
-                    #else
+#else
                         CHANGE_STATE(STATE_2ND_NORMAL);
-                    #endif
+#endif
                         break;
                     }
                 }
@@ -500,10 +491,9 @@ namespace ipl {
         BOOL SettingSelect::condition(int btnNo) {
             BOOL result = FALSE;
 
-            if (btnNo != -1 &&
-              (((btnNo == BTN_DATA_MANAGE || btnNo == BTN_SETTING) && mState == STATE_1ST_NORMAL)
-            || ((btnNo == BTN_SAVEDATA || btnNo == BTN_CHANNEL) && mState == STATE_2ND_NORMAL)
-            || ((btnNo == BTN_WII_SAVE || btnNo == BTN_GC_SAVE) && mState == STATE_3RD_NORMAL))) {
+            if (btnNo != -1 && (((btnNo == BTN_DATA_MANAGE || btnNo == BTN_SETTING) && mState == STATE_1ST_NORMAL) ||
+                                ((btnNo == BTN_SAVEDATA || btnNo == BTN_CHANNEL) && mState == STATE_2ND_NORMAL) ||
+                                ((btnNo == BTN_WII_SAVE || btnNo == BTN_GC_SAVE) && mState == STATE_3RD_NORMAL))) {
                 result = TRUE;
             }
 
@@ -605,15 +595,15 @@ namespace ipl {
                     break;
                 }
                 case BTN_SAVEDATA: {
-                #ifdef KOREAN_BUILD
+#ifdef KOREAN_BUILD
                     unk_0x90 = 13;
-                #endif
+#endif
                     flashAnim = ANIM_SAVE_DATA_FLASH;
                     outAnim = ANIM_CHANNEL_OUT;
-                #ifdef KOREAN_BUILD
+#ifdef KOREAN_BUILD
                     createChildScene(SCENE_MEMORY, this, NULL);
                     static_cast<SettingButton*>(System::getScene(SCENE_SETTING_BUTTON))->hideWii();
-                #endif
+#endif
                     CHANGE_STATE(STATE_2ND_WAIT_FADE_OUT);
                     if (mSettingArg == SettingSelectArg::ARG_START_SAVE_DATA) {
                         static_cast<SettingButton*>(System::getScene(SCENE_SETTING_BUTTON))->showBtn();
@@ -655,7 +645,7 @@ namespace ipl {
             if (flashAnim != -1) {
                 // Play flash anim
                 mpLayout->getAnim(flashAnim)->play();
-                mpLayout->getAnim(flashAnim+1)->play();
+                mpLayout->getAnim(flashAnim + 1)->play();
 
                 // Play out anim
                 mpLayout->getAnim(outAnim)->play();
@@ -666,20 +656,20 @@ namespace ipl {
 
         bool SettingSelect::is_stopped_all_anm() const {
             bool result = true;
-            
+
             for (int i = 0; i < ANIM_MAX; i++) {
                 result &= !mpLayout->getAnim(i)->isPlaying();
             }
-    
+
             return result;
         }
 
         void SettingSelect::onEvent(u32 compId, u32 event, void* data) {
             gui::PaneComponent* component = static_cast<gui::PaneComponent*>(mpManager->getComponent(compId));
             const char* paneName = component->getPane()->GetName();
-    
+
             controller::Interface* controller = reinterpret_cast<controller::Interface*>(data);
-    
+
             switch (event) {
                 case ::gui::EventHandler::ON_POINT: {
                     start_point_event(paneName, controller);
@@ -779,8 +769,7 @@ namespace ipl {
 
                 if (System::getDataManagerArg() != NULL) {
                     __OSLaunchTitlelForSystem(System::getBS2LaunchTitle(), 5, System::getDataManagerArg(), NULL);
-                }
-                else {
+                } else {
                     OSRebootSystem();
                 }
 
@@ -789,5 +778,5 @@ namespace ipl {
                 }
             }
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

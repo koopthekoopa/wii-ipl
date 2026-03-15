@@ -39,16 +39,14 @@ namespace {
 
             if (frame < centerKey.frame) {
                 ikeyR = ikeyCenter;
-            }
-            else {
+            } else {
                 ikeyL = ikeyCenter;
             }
         }
 
         if (RIsSame(frame, keyArray[ikeyR].frame, 0.001f)) {
             return keyArray[ikeyR].value;
-        }
-        else {
+        } else {
             return keyArray[ikeyL].value;
         }
     }
@@ -65,12 +63,11 @@ namespace {
         int ikeyL = 0;
         int ikeyR = keySize - 1;
 
-        while (ikeyL != ikeyR - 1 && ikeyL != ikeyR)     {
+        while (ikeyL != ikeyR - 1 && ikeyL != ikeyR) {
             int ikeyCenter = (ikeyL + ikeyR) / 2;
             if (frame <= keyArray[ikeyCenter].frame) {
                 ikeyR = ikeyCenter;
-            }
-            else {
+            } else {
                 ikeyL = ikeyCenter;
             }
         }
@@ -81,8 +78,7 @@ namespace {
         if (RIsSame(frame, key1.frame, 0.001f)) {
             if (ikeyR < keySize - 1 && keyArray[ikeyR + 1].frame == key1.frame) {
                 return keyArray[ikeyR + 1].value;
-            }
-            else {
+            } else {
                 return key1.value;
             }
         }
@@ -94,16 +90,14 @@ namespace {
         f32 s0 = key0.slope;
         f32 s1 = key1.slope;
 
-        f32 t1t1t2       = t1         * t1 * t2;
-        f32 t1t1t2t2     = t1t1t2     * t2;
-        f32 t1t1t1t2t2   = t1         * t1t1t2t2;
+        f32 t1t1t2 = t1 * t1 * t2;
+        f32 t1t1t2t2 = t1t1t2 * t2;
+        f32 t1t1t1t2t2 = t1 * t1t1t2t2;
         f32 t1t1t1t2t2t2 = t1t1t1t2t2 * t2;
 
         // oh god
-        return v0 * (( 2.0f * t1t1t1t2t2t2) - (3.0f * t1t1t2t2) + 1.0f)
-             + v1 * ((-2.0f * t1t1t1t2t2t2) + (3.0f * t1t1t2t2)       )
-             + s0 * ((        t1t1t1t2t2)   - (2.0f * t1t1t2  ) + t1  )
-             + s1 * ((        t1t1t1t2t2)   - (       t1t1t2  )       );
+        return v0 * ((2.0f * t1t1t1t2t2t2) - (3.0f * t1t1t2t2) + 1.0f) + v1 * ((-2.0f * t1t1t1t2t2t2) + (3.0f * t1t1t2t2)) +
+               s0 * ((t1t1t1t2t2) - (2.0f * t1t1t2) + t1) + s1 * ((t1t1t1t2t2) - (t1t1t2));
     }
 
     void AnimatePainSRT(Pane* pane, const res::AnimationInfo* animInfo, const u32* animTargetOffsets, f32 frame) {
@@ -112,40 +106,31 @@ namespace {
 
             NW4R_ASSERT(animTarget->target < ANIMTARGET_PANE_MAX);
 
-            const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(animTarget,
-                                                                                    animTarget->keysOffset);
- 
-            pane->SetSRTElement(animTarget->target,
-                                GetHermiteCurveValue(frame, keys, animTarget->keyNum));
+            const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(animTarget, animTarget->keysOffset);
+
+            pane->SetSRTElement(animTarget->target, GetHermiteCurveValue(frame, keys, animTarget->keyNum));
         }
     }
 
     void AnimateVisibility(Pane* pane, const res::AnimationInfo* animInfo, const u32* animTargetOffsets, f32 frame) {
         for (int i = 0; i < animInfo->num; i++) {
-            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo,
-                                                                                                    animTargetOffsets[i]);
+            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo, animTargetOffsets[i]);
 
             NW4R_ASSERT(animTarget->target < ANIMTARGET_PANE_MAX);
 
-            const res::StepKey* keys = detail::ConvertOffsToPtr<res::StepKey>(animTarget,
-                                                                            animTarget->keysOffset);
-                
+            const res::StepKey* keys = detail::ConvertOffsToPtr<res::StepKey>(animTarget, animTarget->keysOffset);
 
-            pane->SetVisible(GetStepCurveValue(frame,
-                                                keys,
-                                                animTarget->keyNum) != 0);
+            pane->SetVisible(GetStepCurveValue(frame, keys, animTarget->keyNum) != 0);
         }
     }
 
     void AnimateVertexColor(Pane* pane, const res::AnimationInfo* animInfo, const u32* animTargetOffsets, f32 frame) NO_INLINE {
         for (int i = 0; i < animInfo->num; i++) {
-            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo,
-                                                                                                    animTargetOffsets[i]);
+            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo, animTargetOffsets[i]);
 
             NW4R_ASSERT(animTarget->target < ANIMTARGET_PANE_COLOR_MAX);
 
-            const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(animTarget,
-                                                                                    animTarget->keysOffset);
+            const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(animTarget, animTarget->keysOffset);
 
             f32 value = GetHermiteCurveValue(frame, keys, animTarget->keyNum);
             value += 0.5f;
@@ -153,20 +138,17 @@ namespace {
             u8 u8Val;
             OSf32tou8(&value, &u8Val);
 
-            pane->SetColorElement(animTarget->target,
-                                    u8Val);
+            pane->SetColorElement(animTarget->target, u8Val);
         }
     }
 
     void AnimateMaterialColor(Material* pMaterial, const res::AnimationInfo* animInfo, const u32* animTargetOffsets, f32 frame) NO_INLINE {
         for (int i = 0; i < animInfo->num; i++) {
-            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo,
-                                                                                                    animTargetOffsets[i]);
+            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo, animTargetOffsets[i]);
 
             NW4R_ASSERT(animTarget->target < ANIMTARGET_MATCOLOR_MAX);
 
-            const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(animTarget,
-                                                                                    animTarget->keysOffset);
+            const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(animTarget, animTarget->keysOffset);
 
             f32 value = GetHermiteCurveValue(frame, keys, animTarget->keyNum);
             value += 0.5f;
@@ -175,76 +157,61 @@ namespace {
             OSf32tos16(&value, &s16Val);
             s16Val = ut::Min<s16>(ut::Max<s16>(s16Val, -1024), 1023);
 
-            pMaterial->SetColorElement(animTarget->target,
-                                        s16Val);
+            pMaterial->SetColorElement(animTarget->target, s16Val);
         }
     }
 
     void AnimateTextureSRT(Material* pMaterial, const res::AnimationInfo* animInfo, const u32* animTargetOffsets, f32 frame) {
         for (int i = 0; i < animInfo->num; i++) {
-            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo,
-                                                                                                    animTargetOffsets[i]);
+            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo, animTargetOffsets[i]);
 
             if (animTarget->id < pMaterial->GetTexSRTCap()) {
                 NW4R_ASSERT(animTarget->target < ANIMTARGET_TEXSRT_MAX);
 
-                const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(animTarget,
-                                                                                        animTarget->keysOffset);
+                const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(animTarget, animTarget->keysOffset);
 
-                pMaterial->SetTexSRTElement(animTarget->id,
-                                            animTarget->target,
-                                            GetHermiteCurveValue(frame, keys, animTarget->keyNum));
+                pMaterial->SetTexSRTElement(animTarget->id, animTarget->target, GetHermiteCurveValue(frame, keys, animTarget->keyNum));
             }
         }
     }
 
-    void AnimateTexturePattern(Material* pMaterial, const res::AnimationInfo* animInfo, const u32* animTargetOffsets, f32 frame, void* *tpls) {
+    void AnimateTexturePattern(Material* pMaterial, const res::AnimationInfo* animInfo, const u32* animTargetOffsets, f32 frame, void** tpls) {
         // Not `i`?
         for (int j = 0; j < animInfo->num; j++) {
-            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo,
-                                                                                                    animTargetOffsets[j]);
+            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo, animTargetOffsets[j]);
 
             if (animTarget->id < pMaterial->GetTextureNum() && animTarget->target == ANIMTARGET_TEXPATTURN_IMAGE) {
-                const res::StepKey* keys = detail::ConvertOffsToPtr<res::StepKey>(animTarget,
-                                                                                animTarget->keysOffset);
+                const res::StepKey* keys = detail::ConvertOffsToPtr<res::StepKey>(animTarget, animTarget->keysOffset);
 
-                u16 fileIdx = GetStepCurveValue(frame,
-                                                keys,
-                                                animTarget->keyNum);
+                u16 fileIdx = GetStepCurveValue(frame, keys, animTarget->keyNum);
 
-                pMaterial->SetTextureNoWrap(animTarget->id,
-                                            static_cast<TPLPalette*>(tpls[fileIdx]));
+                pMaterial->SetTextureNoWrap(animTarget->id, static_cast<TPLPalette*>(tpls[fileIdx]));
             }
         }
     }
 
     void AnimateIndTexSRT(Material* pMaterial, const res::AnimationInfo* animInfo, const u32* animTargetOffsets, f32 frame) {
         for (int i = 0; i < animInfo->num; i++) {
-            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo,
-                                                                                                    animTargetOffsets[i]);
+            const res::AnimationTarget* animTarget = detail::ConvertOffsToPtr<res::AnimationTarget>(animInfo, animTargetOffsets[i]);
 
             if (animTarget->id < pMaterial->GetIndTexSRTCap()) {
                 NW4R_ASSERT(animTarget->target < ANIMTARGET_TEXSRT_MAX);
 
-                const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(animTarget,
-                                                                                        animTarget->keysOffset);
+                const res::HermiteKey* keys = detail::ConvertOffsToPtr<res::HermiteKey>(animTarget, animTarget->keysOffset);
 
-                pMaterial->SetIndTexSRTElement(animTarget->id,
-                                                animTarget->target,
-                                                GetHermiteCurveValue(frame, keys, animTarget->keyNum));
+                pMaterial->SetIndTexSRTElement(animTarget->id, animTarget->target, GetHermiteCurveValue(frame, keys, animTarget->keyNum));
             }
         }
     }
-}
+}  // namespace
 
 namespace nw4r {
     namespace lyt {
-        AnimTransform::AnimTransform():
-        mLink(),
-        mpRes(NULL),
-        mFrame(0.0f) {}
+        AnimTransform::AnimTransform() : mLink(), mpRes(NULL), mFrame(0.0f) {
+        }
 
-        AnimTransform::~AnimTransform() {}
+        AnimTransform::~AnimTransform() {
+        }
 
         u16 AnimTransform::GetFrameSize() const {
             return mpRes->frameSize;
@@ -254,10 +221,8 @@ namespace nw4r {
             return mpRes->loop;
         }
 
-        AnimTransformBasic::AnimTransformBasic():
-        mpFileResAry(NULL),
-        mAnimLinkAry(NULL),
-        mAnimLinkNum(0) {}
+        AnimTransformBasic::AnimTransformBasic() : mpFileResAry(NULL), mAnimLinkAry(NULL), mAnimLinkNum(0) {
+        }
 
         AnimTransformBasic::~AnimTransformBasic() {
             if (mAnimLinkAry != NULL) {
@@ -292,7 +257,7 @@ namespace nw4r {
                 memset(mAnimLinkAry, 0, sizeof(*mAnimLinkAry) * pRes->animContNum);
 
                 for (u16 i = 0; i < pRes->animContNum; i++) {
-                    new(&mAnimLinkAry[i]) AnimationLink();
+                    new (&mAnimLinkAry[i]) AnimationLink();
                 }
             }
         }
@@ -310,8 +275,7 @@ namespace nw4r {
                         mAnimLinkAry[i].SetAnimTransform(this, i);
                         pFindPane->AddAnimationLink(&mAnimLinkAry[i]);
                     }
-                }
-                else {
+                } else {
                     Material* pFindMat = pane->FindMaterialByName(animCont->name, bRecursive);
 
                     if (pFindMat != NULL) {
@@ -411,5 +375,5 @@ namespace nw4r {
             }
             return NULL;
         }
-    }
-}
+    }  // namespace lyt
+}  // namespace nw4r

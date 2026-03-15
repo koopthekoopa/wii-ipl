@@ -8,19 +8,19 @@
 namespace ipl {
     namespace message {
         class Manager {
-            public:
-                Manager(EGG::Heap* heap);
+        public:
+            Manager(EGG::Heap* heap);
 
-                /** @return The message data in use. */
-                const wchar_t*  getMessage(u32 id) const         { return mpMessage->getMessage(id); }
-                void            setResource(u8* msgData) const   { mpMessage->setResource(msgData); }
-            
-            private:
-                void initMessage();
+            /** @return The message data in use. */
+            const wchar_t* getMessage(u32 id) const { return mpMessage->getMessage(id); }
+            void setResource(u8* msgData) const { mpMessage->setResource(msgData); }
 
-                Message* mpMessage; // 0x00
+        private:
+            void initMessage();
+
+            Message* mpMessage;  // 0x00
         };
-    }
-}
+    }  // namespace message
+}  // namespace ipl
 
-#endif // IPL_MESSAGE_MANAGER_H
+#endif  // IPL_MESSAGE_MANAGER_H

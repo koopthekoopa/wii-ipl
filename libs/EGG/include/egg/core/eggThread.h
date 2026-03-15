@@ -10,29 +10,29 @@
 
 namespace EGG {
     class Thread {
-        public:
-            Thread(OSThread* currThread, int);
-            virtual ~Thread();
+    public:
+        Thread(OSThread* currThread, int);
+        virtual ~Thread();
 
-            static void initialize();
+        static void initialize();
 
-            OSMessageQueue* getMessageQueue() { return &mMsgQueue; }
+        OSMessageQueue* getMessageQueue() { return &mMsgQueue; }
 
-        private:
-            static nw4r::ut::List   smThreadList;
+    private:
+        static nw4r::ut::List smThreadList;
 
-            Heap*                   mpHeap;         // 0x04
-            OSThread*               mpThread;       // 0x08
+        Heap* mpHeap;        // 0x04
+        OSThread* mpThread;  // 0x08
 
-            OSMessageQueue          mMsgQueue;      // 0x0C
-            void*                   mpMsgArray;     // 0x2C
-            s32                     mMsgCount;      // 0x30
+        OSMessageQueue mMsgQueue;  // 0x0C
+        void* mpMsgArray;          // 0x2C
+        s32 mMsgCount;             // 0x30
 
-            void*                   mpStack;        // 0x34
-            u32                     mStackSize;     // 0x38
+        void* mpStack;   // 0x34
+        u32 mStackSize;  // 0x38
 
-            nw4r::ut::Link          mLink;          // 0x3C
+        nw4r::ut::Link mLink;  // 0x3C
     };
-}
+}  // namespace EGG
 
-#endif // EGG_CORE_THREAD_H
+#endif  // EGG_CORE_THREAD_H

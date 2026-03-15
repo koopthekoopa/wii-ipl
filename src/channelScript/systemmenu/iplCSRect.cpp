@@ -5,7 +5,7 @@
 namespace ipl {
     namespace cs {
         namespace rect {
-            #define METHOD_COUNT  4
+#define METHOD_COUNT 4
             extern const CHANSVmMethodList cMethodList[METHOD_COUNT];
 
             CHANSVmDefineMethod(get_width) {
@@ -76,29 +76,25 @@ namespace ipl {
 
                     if (arg0 != NULL) {
                         left = arg0->value.float_v;
-                    }
-                    else {
+                    } else {
                         left = 0.0;
                     }
 
                     if (arg1 != NULL) {
                         top = arg1->value.float_v;
-                    }
-                    else {
+                    } else {
                         top = 0.0;
                     }
 
                     if (arg2 != NULL) {
                         right = arg2->value.float_v;
-                    }
-                    else {
+                    } else {
                         right = 0.0;
                     }
 
                     if (arg3 != NULL) {
                         bottom = arg3->value.float_v;
-                    }
-                    else {
+                    } else {
                         bottom = 0.0;
                     }
 
@@ -111,12 +107,14 @@ namespace ipl {
                 return result;
             }
 
+            // clang-format off
             const CHANSVmMethodList cMethodList[METHOD_COUNT] = {
                 {"GetWidth",    get_width },
                 {"GetHeight",   get_height },
                 {"SetWidth",    set_width },
                 {"SetHeight",   set_height },
             };
+            // clang-format on
 
             BOOL init(CHANSVm* vm) {
                 BOOL result = FALSE;
@@ -128,6 +126,6 @@ namespace ipl {
                 }
                 return result;
             }
-        }
-    }
-}
+        }  // namespace rect
+    }  // namespace cs
+}  // namespace ipl

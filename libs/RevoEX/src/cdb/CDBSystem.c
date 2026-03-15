@@ -1,26 +1,26 @@
-#include <revolution/cdb.h>
 #include <private/cdb.h>
+#include <revolution/cdb.h>
 
-#include <revolution/vf.h>
 #include <revolution/nand.h>
 #include <revolution/ncd.h>
 #include <revolution/net/NETDigest.h>
+#include <revolution/vf.h>
 
-#include <revolution/os.h>
 #include <revolution/dvd.h>
+#include <revolution/os.h>
 
-static OSMutex  s_mutex;
-static BOOL     s_mutexInitialized = FALSE;
+static OSMutex s_mutex;
+static BOOL s_mutexInitialized = FALSE;
 
-static BOOL     s_fatalVFFlag = FALSE;
+static BOOL s_fatalVFFlag = FALSE;
 
 // This was likely a local originally, but oh well!
 s32 CDBPrintDebugLevel = CDB_VERBOSE_LEVEL_NONE;
 
-static VFError  s_lastVFError;
-static s32      s_lastNANDError;
+static VFError s_lastVFError;
+static s32 s_lastNANDError;
 
-static u8       s_cdbWiiId[OSRoundUp32B(CDB_WIIID_DAT_SIZE)] ALIGN32;
+static u8 s_cdbWiiId[OSRoundUp32B(CDB_WIIID_DAT_SIZE)] ALIGN32;
 
 void MutexInitialized() {
     s_mutexInitialized = TRUE;
@@ -126,8 +126,7 @@ CDBErr CDBInitHashedMacAddr() {
             }
 
             usingCdbWii = FALSE;
-        }
-        else {
+        } else {
             // "Using cdbwiiid.dat"
             CDBReportInfo("cdbwiiid.datを使用します\n");
 
@@ -142,8 +141,7 @@ CDBErr CDBInitHashedMacAddr() {
                 return CDBOnNANDErrorOccured(ret);
             }
         }
-    }
-    else {
+    } else {
         usingCdbWii = FALSE;
     }
 
@@ -179,7 +177,7 @@ CDBErr CDBInitHashedMacAddr() {
         OSReport("MACハッシュ20バイト + ゼロ20バイト = {\n");
         for (i = 0; i < 4; i++) {
             for (j = 0; j < 10; j++) {
-                OSReport("%02X ", s_cdbWiiId[(i*10)+(j)]);
+                OSReport("%02X ", s_cdbWiiId[(i * 10) + (j)]);
             }
             OSReport("\n");
         }
@@ -299,8 +297,7 @@ void CDBCheckMakerCodeStr(char* makerCodeStr) {
     makerCodeStr[0] = 0x23;
     if (makerCodeStr[1] >= 0 && makerCodeStr[1] <= 9) {
         makerCodeStr[1] += 0x30;
-    }
-    else {
+    } else {
         makerCodeStr[1] = 0x23;
     }
 }
@@ -312,8 +309,7 @@ CDBErr CDBSetVFSyncMode(int sync) {
 
     if (sync != 0) {
         vfErr = VFSync(CDB_CFG_VF_DRIVE_LETTER, 0);
-    }
-    else {
+    } else {
         vfErr = VFSync(CDB_CFG_VF_DRIVE_LETTER, 1);
     }
 
@@ -322,7 +318,7 @@ CDBErr CDBSetVFSyncMode(int sync) {
     }
 
     s_vfSync = sync;
-    
+
     return CDB_ERROR_OK;
 }
 

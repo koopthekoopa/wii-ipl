@@ -3,8 +3,8 @@
 
 #include <decomp.h>
 
-#include <revolution/nand.h>
 #include <private/nand.h>
+#include <revolution/nand.h>
 
 namespace ipl {
     namespace nand {
@@ -35,10 +35,11 @@ namespace ipl {
 
             s32 SecretGetUsage(const char* path, u32* usedBlocks, u32* usedINodes);
             s32 SecretGetUserUsage(u32* usedUserBlocks, u32* usedUserINodes);
-            s32 SecretGetSystemAvailableArea(const NANDFileSystemStatus *status, u32 usedSystemBlocks, u32 usedSystemINode, u32 *freeSystemBlocks, u32 *freeSystemINode);
-            s32 SecretGetFileSystemStatus(NANDFileSystemStatus *status);
-        }
-    }
-}
+            s32 SecretGetSystemAvailableArea(const NANDFileSystemStatus* status, u32 usedSystemBlocks, u32 usedSystemINode, u32* freeSystemBlocks,
+                                             u32* freeSystemINode);
+            s32 SecretGetFileSystemStatus(NANDFileSystemStatus* status);
+        }  // namespace wrapper
+    }  // namespace nand
+}  // namespace ipl
 
-#endif // IPL_NAND_WRAPPER_H
+#endif  // IPL_NAND_WRAPPER_H

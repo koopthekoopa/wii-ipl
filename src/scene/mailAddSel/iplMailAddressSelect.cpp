@@ -1,11 +1,11 @@
 #include "iplSceneUI.h"
 
-#include "scene/mailAddSel/iplMailAddressSelect.h"
 #include "scene/button/iplButton.h"
+#include "scene/mailAddSel/iplMailAddressSelect.h"
 #include "scene/parentalDialog/iplParentalDialog.h"
 
-#include "scene/textWriter/iplTextWriter.h"
 #include "scene/letterWriter/iplLetterWriter.h"
+#include "scene/textWriter/iplTextWriter.h"
 
 #include "scene/setting/iplNCDSetting.h"
 #include "scene/setting/iplSetting.h"
@@ -18,21 +18,17 @@ namespace ipl {
             return static_cast<Button*>(System::getScene(SCENE_BUTTON));
         }
 
+        // clang-format off
         const char* MailAddressSelect::mscButtonName[MailAddressSelect::BTN_MAX] = {
             "B_MailIn",
             "B_LetterIn",
             "B_AdressIn",
         };
+        // clang-format on
 
-        MailAddressSelect::MailAddressSelect(EGG::Heap* heap) :
-        FaderSceneBase(heap),
-        ButtonEventHandlerBase(),
-        mpLayout(NULL),
-        mpLayoutFile(NULL),
-        mpEvent(NULL),
-        mpGui(NULL),
-        mState(STATE_NORMAL),
-        mbParentalBypass(false) {
+        MailAddressSelect::MailAddressSelect(EGG::Heap* heap)
+            : FaderSceneBase(heap), ButtonEventHandlerBase(), mpLayout(NULL), mpLayoutFile(NULL), mpEvent(NULL), mpGui(NULL), mState(STATE_NORMAL),
+              mbParentalBypass(false) {
             setSceneParentFlags(SCN_PARENTFLAG_CALC | SCN_PARENTFLAG_DRAW);
 
             for (int i = 0; i < BTN_MAX; i++) {
@@ -41,7 +37,6 @@ namespace ipl {
         }
 
         MailAddressSelect::~MailAddressSelect() {
-            
         }
 
         void MailAddressSelect::prepare() {
@@ -53,20 +48,20 @@ namespace ipl {
             mpLayout = new layout::Object(getSceneHeap(), mpLayoutFile, "arc", "my_Mail_a.brlyt");
 
             // Bind animations
-            mpLayout->bindToGroup("my_Mail_a_SelectIn.brlan",        "G_SelectInOut",  false);
-            mpLayout->bindToGroup("my_Mail_a_SelectOut.brlan",       "G_SelectInOut",  false, false);
-            mpLayout->bindToGroup("my_Mail_a_MailFoucusIn.brlan",    "G_MailFoucus",   false, false);
-            mpLayout->bindToGroup("my_Mail_a_MailFoucusOut.brlan",   "G_MailFoucus",   false, false);
-            mpLayout->bindToGroup("my_Mail_a_MailIn.brlan",          "G_AdressInOut",  false, false);
-            mpLayout->bindToGroup("my_Mail_a_MailOut.brlan",         "G_AdressInOut",  false, false);
-            mpLayout->bindToGroup("my_Mail_a_LetterFoucusIn.brlan",  "G_LetterFoucus", false, false);
+            mpLayout->bindToGroup("my_Mail_a_SelectIn.brlan", "G_SelectInOut", false);
+            mpLayout->bindToGroup("my_Mail_a_SelectOut.brlan", "G_SelectInOut", false, false);
+            mpLayout->bindToGroup("my_Mail_a_MailFoucusIn.brlan", "G_MailFoucus", false, false);
+            mpLayout->bindToGroup("my_Mail_a_MailFoucusOut.brlan", "G_MailFoucus", false, false);
+            mpLayout->bindToGroup("my_Mail_a_MailIn.brlan", "G_AdressInOut", false, false);
+            mpLayout->bindToGroup("my_Mail_a_MailOut.brlan", "G_AdressInOut", false, false);
+            mpLayout->bindToGroup("my_Mail_a_LetterFoucusIn.brlan", "G_LetterFoucus", false, false);
             mpLayout->bindToGroup("my_Mail_a_LetterFoucusOut.brlan", "G_LetterFoucus", false, false);
-            mpLayout->bindToGroup("my_Mail_a_LetterIn.brlan",        "G_AdressInOut",  false, false);
-            mpLayout->bindToGroup("my_Mail_a_LetterOut.brlan",       "G_AdressInOut",  false, false);
-            mpLayout->bindToGroup("my_Mail_a_AdressFoucusIn.brlan",  "G_AdressFoucus", false, false);
+            mpLayout->bindToGroup("my_Mail_a_LetterIn.brlan", "G_AdressInOut", false, false);
+            mpLayout->bindToGroup("my_Mail_a_LetterOut.brlan", "G_AdressInOut", false, false);
+            mpLayout->bindToGroup("my_Mail_a_AdressFoucusIn.brlan", "G_AdressFoucus", false, false);
             mpLayout->bindToGroup("my_Mail_a_AdressFoucusOut.brlan", "G_AdressFoucus", false, false);
-            mpLayout->bindToGroup("my_Mail_a_AdressIn.brlan",        "G_AdressInOut",  false, false);
-            mpLayout->bindToGroup("my_Mail_a_AdressOut.brlan",       "G_AdressInOut",  false, false);
+            mpLayout->bindToGroup("my_Mail_a_AdressIn.brlan", "G_AdressInOut", false, false);
+            mpLayout->bindToGroup("my_Mail_a_AdressOut.brlan", "G_AdressInOut", false, false);
             mpLayout->finishBinding();
             mpLayout->getAnim(ANIM_FADE_IN)->play();
 
@@ -94,7 +89,7 @@ namespace ipl {
                 size.width += 1.0f;
                 nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpLayout->FindPaneByName("T_Mail"))->SetFontSize(size);
             }
-#endif // KOREAN_BUILD
+#endif  // KOREAN_BUILD
 
             // Pause NWC24 Receive
             System::stopReceiveSchedule();
@@ -157,9 +152,8 @@ namespace ipl {
                     break;
                 }
                 case STATE_WAIT_FOR_ZOOM_OUT: {
-                    if (!mpLayout->isPlaying(ANIM_BTN_MAIL_ZOOM_OUT)
-                    && !mpLayout->isPlaying(ANIM_BTN_LETTER_ZOOM_OUT)
-                    && !mpLayout->isPlaying(ANIM_BTN_ADDRESS_ZOOM_OUT)) {
+                    if (!mpLayout->isPlaying(ANIM_BTN_MAIL_ZOOM_OUT) && !mpLayout->isPlaying(ANIM_BTN_LETTER_ZOOM_OUT) &&
+                        !mpLayout->isPlaying(ANIM_BTN_ADDRESS_ZOOM_OUT)) {
                         button->setEventHandler(this);
 
                         mState = STATE_NORMAL;
@@ -182,8 +176,7 @@ namespace ipl {
 
                                 mbParentalBypass = false;
                                 mState = STATE_PARENTAL_DIALOG;
-                            }
-                            else {
+                            } else {
                                 System::getFader()->fadeOut();
 
                                 reserveAllSceneDestruction(SCENE_SETTING, (void*)Setting::ARG_INTERNET_SETTING);
@@ -228,8 +221,7 @@ namespace ipl {
                             reserveAllSceneDestruction(SCENE_SETTING, (void*)Setting::ARG_INTERNET_SETTING);
 
                             mState = STATE_DONE;
-                        }
-                        else {
+                        } else {
                             getButton()->animation(Button::IDANIM_APPEAR_LEFT_BUTTON);
                             getButton()->setEventHandler(this);
 
@@ -277,8 +269,7 @@ namespace ipl {
                         mpLayout->getAnim(ANIM_BTN_LETTER_ZOOM_IN)->play();
 
                         mState = STATE_DISABLE_SCENE;
-                    }
-                    else {
+                    } else {
                         if ((mNwc24ErrCountdown += 1) > 300) {
                             mNwc24ErrCountdown = 0;
                             System::getDialog()->callBtn1(MESG_ERROR_NWC24_FATAL, MESG_CMN_OK);
@@ -294,7 +285,7 @@ namespace ipl {
 
         void MailAddressSelect::initCalcFadeout() {
             getButton()->setEventHandler(NULL);
-            
+
             if (System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT) {
                 mpLayout->getAnim(ANIM_FADE_OUT)->play();
             }
@@ -303,8 +294,7 @@ namespace ipl {
         FaderSceneCommand MailAddressSelect::calcFadeout() {
             if (System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT) {
                 return !mpLayout->getAnim(ANIM_FADE_OUT)->isPlaying() ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
-            }
-            else {
+            } else {
                 return System::getFader()->getStatus() == EGG::Fader::PREPARE_IN ? FADER_SCN_NEXT : FADER_SCN_CONTINUE;
             }
         }
@@ -457,8 +447,7 @@ namespace ipl {
         void MailAddressSelect::finishMemo(bool closing) {
             if (closing) {
                 mState = STATE_CLOSING;
-            }
-            else {
+            } else {
                 mpLayout->getAnim(ANIM_BTN_MAIL_ZOOM_OUT)->play();
                 mState = STATE_WAIT_FOR_ZOOM_OUT;
             }
@@ -467,8 +456,7 @@ namespace ipl {
         void MailAddressSelect::finishLetter(bool closing) {
             if (closing) {
                 mState = STATE_CLOSING;
-            }
-            else {
+            } else {
                 mpLayout->getAnim(ANIM_BTN_LETTER_ZOOM_OUT)->play();
                 mState = STATE_WAIT_FOR_ZOOM_OUT;
             }
@@ -491,7 +479,7 @@ namespace ipl {
 
             wchar_t nwc24ErrStr[32];
             memset(nwc24ErrStr, 0, sizeof(nwc24ErrStr));
-            swprintf(nwc24ErrStr, sizeof(nwc24ErrStr)/sizeof(wchar_t), L"%06d\n", nwc24Err);
+            swprintf(nwc24ErrStr, sizeof(nwc24ErrStr) / sizeof(wchar_t), L"%06d\n", nwc24Err);
             wcsncat(outErrMsg, nwc24ErrStr, outErrMsgLen - wcslen(outErrMsg));
 
             wcsncat(outErrMsg, System::getMessage(errMsgId), outErrMsgLen - wcslen(outErrMsg));
@@ -533,7 +521,7 @@ namespace ipl {
             // WC24 library check
             switch (checkErr) {
                 case NWC24_ERR_NETWORK: {
-                    set_err_msg(errStr, sizeof(errStr)/sizeof(wchar_t), MESG_ERROR_NWC24_NETWORK, errorCode);
+                    set_err_msg(errStr, sizeof(errStr) / sizeof(wchar_t), MESG_ERROR_NWC24_NETWORK, errorCode);
 
                     System::getDialog()->callBtn1(errStr, MESG_CMN_OK);
                     mState = STATE_DIALOG;
@@ -541,7 +529,7 @@ namespace ipl {
                 }
                 case NWC24_ERR_FULL:
                 case NWC24_ERR_SERVER: {
-                    set_err_msg(errStr, sizeof(errStr)/sizeof(wchar_t), MESG_ERROR_NWC24_SERVER, errorCode);
+                    set_err_msg(errStr, sizeof(errStr) / sizeof(wchar_t), MESG_ERROR_NWC24_SERVER, errorCode);
 
                     System::getDialog()->callBtn1(errStr, MESG_CMN_OK);
                     mState = STATE_DIALOG;
@@ -554,7 +542,7 @@ namespace ipl {
             }
 
             System::getNwc24Manager()->close();
-exit:
+        exit:
             return result;
         }
 
@@ -635,5 +623,5 @@ exit:
                 }
             }
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

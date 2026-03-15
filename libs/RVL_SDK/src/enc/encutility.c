@@ -1,8 +1,8 @@
-#include <revolution/enc.h>
 #include <private/enc.h>
+#include <revolution/enc.h>
 
-#include <revolution/verdefs.h>
 #include <revolution/os.h>
+#include <revolution/verdefs.h>
 
 #include <string.h>
 
@@ -18,23 +18,21 @@ void ENCiRegisterVersion() {
     }
 }
 
-
-ENCResult ENCiCheckParameters(BOOL dstValid, s32* dstSizeIn, s32* dstSizeOut, BOOL* dstValidOut, BOOL srcValid, s32* srcSizeIn, s32* srcSizeOut, BOOL* srcLimitedOut) {
+ENCResult ENCiCheckParameters(BOOL dstValid, s32* dstSizeIn, s32* dstSizeOut, BOOL* dstValidOut, BOOL srcValid, s32* srcSizeIn, s32* srcSizeOut,
+                              BOOL* srcLimitedOut) {
     ENCResult ret = ENC_OK;
 
     ENCiRegisterVersion();
 
     if (srcSizeIn) {
         *srcSizeOut = *srcSizeIn;
-    }
-    else {
+    } else {
         *srcSizeOut = ENC_SRC_UNLIMITED;
     }
 
-    if (dstSizeIn){
+    if (dstSizeIn) {
         *dstSizeOut = *dstSizeIn;
-    }
-    else {
+    } else {
         *dstSizeOut = ENC_DST_INVALID;
 
         ret = ENC_ERR_INVALID_PARAM;
@@ -50,7 +48,7 @@ ENCResult ENCiCheckParameters(BOOL dstValid, s32* dstSizeIn, s32* dstSizeOut, BO
         *dstSizeOut = ENC_DST_INVALID;
     }
 
-    if (*srcSizeOut < 0) { // ENC_SRC_UNLIMITED
+    if (*srcSizeOut < 0) {  // ENC_SRC_UNLIMITED
         *srcLimitedOut = FALSE;
     }
 
@@ -65,12 +63,10 @@ ENCResult ENCiCheckParameters(BOOL dstValid, s32* dstSizeIn, s32* dstSizeOut, BO
 int ENCiCheckBreakType(unsigned a, unsigned b) {
     if (a == '\n') {
         return sizeof("\n") - 1;
-    }
-    else if (a == '\r') {
+    } else if (a == '\r') {
         if (b == '\n') {
             return sizeof("\r\n") - 1;
-        }
-        else {
+        } else {
             return sizeof("\r") - 1;
         }
     }
@@ -104,8 +100,7 @@ int ENCiWriteBreakType(void* stream, int width, ENCBreakType breakType, BOOL val
                 break;
             }
         }
-    }
-    else {
+    } else {
         switch (breakType) {
             case ENC_BR_CRLF: {
                 return sizeof("\r\n") - 1;

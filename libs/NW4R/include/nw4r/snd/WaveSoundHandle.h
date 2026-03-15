@@ -10,22 +10,18 @@
 namespace nw4r {
     namespace snd {
         class WaveSoundHandle : private ut::NonCopyable {
-            public:
-                ~WaveSoundHandle() {
-                    DetachSound();
-                }
+        public:
+            ~WaveSoundHandle() { DetachSound(); }
 
-                void DetachSound();
+            void DetachSound();
 
-                bool IsAttachedSound() const {
-                    return mSound != NULL;
-                }
+            bool IsAttachedSound() const { return mSound != NULL; }
 
-            private:
-                detail::WaveSound*  mSound; // 0x00
+        private:
+            detail::WaveSound* mSound;  // 0x00
         };
 
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r
 
-#endif // NW4R_SND_WAVE_SOUND_HANDLE_H
+#endif  // NW4R_SND_WAVE_SOUND_HANDLE_H

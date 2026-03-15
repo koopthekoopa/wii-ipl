@@ -1,6 +1,5 @@
 #include "iplUtility.h"
 
 namespace ipl {
-    namespace utility {
-    }
-}
+    namespace utility {}
+}  // namespace ipl

@@ -1,8 +1,9 @@
 #include <private/os.h>
 #include <revolution/os.h>
 
-#include <revolution/gx.h>
 #include <private/gx.h>
+#include <revolution/gx.h>
+
 
 #include <private/hollywood.h>
 
@@ -14,6 +15,7 @@ inline void PushLight(const register GXLightObj* lt_obj, register void* dest) {
     register u32 zero, color;
     register f32 a0_a1, a2_k0, k1_k2;
     register f32 px_py, pz_dx, dy_dz;
+    // clang-format off
 #ifdef __MWERKS__
     asm volatile {
         lwz     color, 12(lt_obj)
@@ -38,6 +40,7 @@ inline void PushLight(const register GXLightObj* lt_obj, register void* dest) {
         psq_st  dy_dz, 0(dest), 0, 0
     }
 #endif
+    // clang-format on
 }
 
 void GXInitLightPos(GXLightObj* lt_obj, f32 x, f32 y, f32 z) {
@@ -190,7 +193,7 @@ void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src, GXColorS
     SET_REG_FIELD(reg, 1, 1, enable);
     SET_REG_FIELD(reg, 1, 0, mat_src);
     SET_REG_FIELD(reg, 1, 6, amb_src);
-    
+
     SET_REG_FIELD(reg, 2, 7, (attn_fn == GX_AF_SPEC) ? GX_DF_NONE : diff_fn);
     SET_REG_FIELD(reg, 1, 9, (attn_fn != GX_AF_NONE));
     SET_REG_FIELD(reg, 1, 10, (attn_fn != GX_AF_SPEC));
@@ -203,12 +206,11 @@ void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src, GXColorS
 
     if (chan == GX_COLOR0A0) {
         __GXData->chanCtrl[GX_ALPHA0] = reg;
-        __GXData->dirtyState |= (1<<12);
-        __GXData->dirtyState |= (1<<14);
-    }
-    else if (chan == GX_COLOR1A1) {
+        __GXData->dirtyState |= (1 << 12);
+        __GXData->dirtyState |= (1 << 14);
+    } else if (chan == GX_COLOR1A1) {
         __GXData->chanCtrl[GX_ALPHA1] = reg;
-        __GXData->dirtyState |= (1<<13);
-        __GXData->dirtyState |= (1<<15);
+        __GXData->dirtyState |= (1 << 13);
+        __GXData->dirtyState |= (1 << 15);
     }
 }

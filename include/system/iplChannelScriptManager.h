@@ -17,57 +17,57 @@
 namespace ipl {
     namespace channel {
         class ChannelScriptManager {
+        public:
+            class CSData {
             public:
-                class CSData {
-                    public:
-                        EGG::ExpHeap*       unk_0x00;
-                        layout::Object*     unk_0x04;
-                        layout::Animator**  unk_0x08;
-                        u64                 unk_0x10;
-                        u8                  unk_0x18;
-                        u8                  unk_0x19;
-                        u8                  unk_0x1A;
-                };
+                EGG::ExpHeap* unk_0x00;
+                layout::Object* unk_0x04;
+                layout::Animator** unk_0x08;
+                u64 unk_0x10;
+                u8 unk_0x18;
+                u8 unk_0x19;
+                u8 unk_0x1A;
+            };
 
-                ChannelScriptManager();
+            ChannelScriptManager();
 
-                void        create(EGG::ExpHeap* heap);
-                BOOL        init(nand::File* file, RsoThread* thread);
+            void create(EGG::ExpHeap* heap);
+            BOOL init(nand::File* file, RsoThread* thread);
 
-                void        calc();
+            void calc();
 
-                void        finish();
-                void        destroy();
+            void finish();
+            void destroy();
 
-                void        setData(const CSData& data);
+            void setData(const CSData& data);
 
-                static void calcCSThread();
+            static void calcCSThread();
 
-                CSData&     getData()   { return mCSData; }
-                EGG::Heap*  getHeap()   { return mpHeap; }
-            
-            private:
-                enum {
-                    CHANS_VM_STATE_CREATE = 0,
-                    CHANS_VM_STATE_UNK1 = 1,
-                    CHANS_VM_STATE_UNK2 = 2,
-                    CHANS_VM_STATE_UNK3 = 3,
-                    CHANS_VM_STATE_UNK4 = 4,
-                };
+            CSData& getData() { return mCSData; }
+            EGG::Heap* getHeap() { return mpHeap; }
 
-                u8*                 mpChansWork;    // 0x00
-                EGG::ExpHeap*       mpHeap;
+        private:
+            enum {
+                CHANS_VM_STATE_CREATE = 0,
+                CHANS_VM_STATE_UNK1 = 1,
+                CHANS_VM_STATE_UNK2 = 2,
+                CHANS_VM_STATE_UNK3 = 3,
+                CHANS_VM_STATE_UNK4 = 4,
+            };
 
-                CSData              mCSData;        // 0x08
-                u32                 unk_0x28[2];
-                OSMessage           unk_0x30;
-                OSMessage           unk_0x34;
+            u8* mpChansWork;  // 0x00
+            EGG::ExpHeap* mpHeap;
 
-                static int          smCSState;
-                static RsoThread*   smpThread;
-                static CHANSVm      smCSVm;
+            CSData mCSData;  // 0x08
+            u32 unk_0x28[2];
+            OSMessage unk_0x30;
+            OSMessage unk_0x34;
+
+            static int smCSState;
+            static RsoThread* smpThread;
+            static CHANSVm smCSVm;
         };
-    }
-}
+    }  // namespace channel
+}  // namespace ipl
 
-#endif // IPL_CHANNEL_SCRIPT_MANAGER_H
+#endif  // IPL_CHANNEL_SCRIPT_MANAGER_H

@@ -7,25 +7,25 @@
 
 namespace ipl {
     class TVRCManager {
-        public:
-            TVRCManager(EGG::Heap* heap);
+    public:
+        TVRCManager(EGG::Heap* heap);
 
-            void    setEnable(BOOL flag);
+        void setEnable(BOOL flag);
 
-            void    update();
+        void update();
 
-            void    loadDatabase();
-            
-            void    resetProcessAsync(BOOL unk);
-            bool    waitResetProcessCompleted();
-            
-            static TVRCManager* getHandle() { return m_handle; }
+        void loadDatabase();
 
-        private:
-            static TVRCManager* m_handle;
+        void resetProcessAsync(BOOL unk);
+        bool waitResetProcessCompleted();
 
-            u8 dummy[0x88];
+        static TVRCManager* getHandle() { return m_handle; }
+
+    private:
+        static TVRCManager* m_handle;
+
+        u8 dummy[0x88];
     };
-}
+}  // namespace ipl
 
-#endif // IPL_TVRC_MANAGER_H
+#endif  // IPL_TVRC_MANAGER_H

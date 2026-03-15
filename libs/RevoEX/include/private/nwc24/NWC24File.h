@@ -1,9 +1,10 @@
 #ifndef PRIVATE_NWC24_FILE_H
 #define PRIVATE_NWC24_FILE_H
 
-#include <revolution/types.h>
 #include <revolution/nand.h>
+#include <revolution/types.h>
 #include <revolution/vf.h>
+
 
 #include <revolution/nwc24/NWC24Err.h>
 
@@ -49,53 +50,53 @@ enum {
 };
 
 typedef struct NWC24File {
-    u32             id;     // at 0x0
-    u32             mode;   // at 0x4
+    u32 id;    // at 0x0
+    u32 mode;  // at 0x4
 
-    u32             align;  // at 0x8
+    u32 align;  // at 0x8
 
-    NANDFileInfo    nand;   // at 0xC
-    VFFILE*         vf;     // at 0x98
+    NANDFileInfo nand;  // at 0xC
+    VFFILE* vf;         // at 0x98
 } NWC24File;
 
 typedef struct NWC24FileStream {
-    NWC24File*  file;           // 0x00
+    NWC24File* file;  // 0x00
 
-    char*       buffer;         // 0x04
-    u32         length;         // 0x08
-    u32         realOffset;     // 0x0C
+    char* buffer;    // 0x04
+    u32 length;      // 0x08
+    u32 realOffset;  // 0x0C
 
-    u32         baseOffset;     // 0x10
-    u32         currentOffset;  // 0x14
+    u32 baseOffset;     // 0x10
+    u32 currentOffset;  // 0x14
 
-    u32         areaSize;       // 0x18
+    u32 areaSize;  // 0x18
 } NWC24FileStream;
 
-#define     NWC24_VF_DRIVE  "@24"
+#define NWC24_VF_DRIVE "@24"
 
-NWC24Err    NWC24FOpen(NWC24File* file, const char* path, u32 mode);
-NWC24Err    NWC24iFOpenNand(NWC24File* file, const char* path, u32 mode);
-NWC24Err    NWC24iFOpenVF(NWC24File* file, const char* path, u32 mode);
+NWC24Err NWC24FOpen(NWC24File* file, const char* path, u32 mode);
+NWC24Err NWC24iFOpenNand(NWC24File* file, const char* path, u32 mode);
+NWC24Err NWC24iFOpenVF(NWC24File* file, const char* path, u32 mode);
 
-NWC24Err    NWC24FClose(NWC24File* file);
-NWC24Err    NWC24iFCloseNand(NWC24File* file) NO_INLINE;
-NWC24Err    NWC24iFCloseVF(NWC24File* file);
+NWC24Err NWC24FClose(NWC24File* file);
+NWC24Err NWC24iFCloseNand(NWC24File* file) NO_INLINE;
+NWC24Err NWC24iFCloseVF(NWC24File* file);
 
-NWC24Err    NWC24FSeek(NWC24File* file, s32 offset, int whence);
-NWC24Err    NWC24FRead(void* dest, s32 size, NWC24File* file);
-NWC24Err    NWC24FWrite(const void* src, s32 size, NWC24File* file);
-NWC24Err    NWC24FGetLength(NWC24File* file, u32* pLength);
-NWC24Err    NWC24FDelete(const char* path);
-NWC24Err    NWC24FDeleteVF(const char* path);
-NWC24Err    NWC24MountVF(const char* drive, const char* fileName);
-NWC24Err    NWC24UnmountVF(const char* drive);
-NWC24Err    NWC24CheckSizeVF(const char* drive, u32* pSize);
+NWC24Err NWC24FSeek(NWC24File* file, s32 offset, int whence);
+NWC24Err NWC24FRead(void* dest, s32 size, NWC24File* file);
+NWC24Err NWC24FWrite(const void* src, s32 size, NWC24File* file);
+NWC24Err NWC24FGetLength(NWC24File* file, u32* pLength);
+NWC24Err NWC24FDelete(const char* path);
+NWC24Err NWC24FDeleteVF(const char* path);
+NWC24Err NWC24MountVF(const char* drive, const char* fileName);
+NWC24Err NWC24UnmountVF(const char* drive);
+NWC24Err NWC24CheckSizeVF(const char* drive, u32* pSize);
 
-NWC24Err    NWC24FStreamInit(NWC24FileStream* stream, NWC24File* file, u32 baseOffset, u32 areaSize, char* buffer, u32 size);
-u32         NWC24FStreamGetSize(NWC24FileStream* stream);
-char        NWC24FStreamGetc(NWC24FileStream* stream);
-NWC24Err    NWC24FStreamSeek(NWC24FileStream* stream, u32 pos);
-NWC24Err    NWC24FStreamGetPtr(NWC24FileStream* stream, char** buffer, u32 length);
+NWC24Err NWC24FStreamInit(NWC24FileStream* stream, NWC24File* file, u32 baseOffset, u32 areaSize, char* buffer, u32 size);
+u32 NWC24FStreamGetSize(NWC24FileStream* stream);
+char NWC24FStreamGetc(NWC24FileStream* stream);
+NWC24Err NWC24FStreamSeek(NWC24FileStream* stream, u32 pos);
+NWC24Err NWC24FStreamGetPtr(NWC24FileStream* stream, char** buffer, u32 length);
 
 #ifdef __cplusplus
 }

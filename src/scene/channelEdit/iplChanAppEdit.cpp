@@ -18,4 +18,4 @@ namespace ipl {
         ((intp*)0)->get();
         ((intp*)0)->get();
     }
-}
+}  // namespace ipl

@@ -9,7 +9,7 @@
 extern "C" {
 #endif
 
-NWC24Err    NWC24iOpenMBox();
+NWC24Err NWC24iOpenMBox();
 
 #ifdef __cplusplus
 }

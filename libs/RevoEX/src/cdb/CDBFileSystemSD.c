@@ -1,39 +1,39 @@
-#include <revolution/cdb.h>
 #include <private/cdb.h>
+#include <revolution/cdb.h>
 
 #include <revolution/vf.h>
 
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
 
 typedef struct CDB_FS_SD_WORK {
-    int             sdStatus;   // 0x00
+    int sdStatus;  // 0x00
 
-    BOOL            isMounted;  // 0x04
-    BOOL            isEjected;  // 0x08
-    BOOL            isInserted; // 0x0C
+    BOOL isMounted;   // 0x04
+    BOOL isEjected;   // 0x08
+    BOOL isInserted;  // 0x0C
 
-    VFEventCallback sdCallback; // 0x10
+    VFEventCallback sdCallback;  // 0x10
 } CDB_FS_SD_WORK;
 
 enum {
     SD_STATUS_NOT_MOUNTED = 0,
     SD_STATUS_MOUNTED,
-    SD_STATUS_UNAVAILABLE, // ?
+    SD_STATUS_UNAVAILABLE,  // ?
 };
 
-char    CDB_SD_VFF_FILE_NAME[72];
+char CDB_SD_VFF_FILE_NAME[72];
 
-char    CDB_SD_ROOT_PATH_LS[32];
-char    CDB_SD_ROOT_PATH_CD[32];
+char CDB_SD_ROOT_PATH_LS[32];
+char CDB_SD_ROOT_PATH_CD[32];
 
-char    CDB_SD_VF_DRIVE_LETTER[4];
+char CDB_SD_VF_DRIVE_LETTER[4];
 
-static CDB_FS_SD_WORK   s_fssdWork;
+static CDB_FS_SD_WORK s_fssdWork;
 
 BOOL CDBFSIsExistFileSD(const char* fileName) {
-    char    findName[256];
-    VFDta   vfDta;
+    char findName[256];
+    VFDta vfDta;
 
     VFError vfErr;
 
@@ -54,7 +54,7 @@ BOOL CDBFSIsExistFileSD(const char* fileName) {
 }
 
 void CDBFSFindFirstSD(CDBFindDataSD* findData, const char* fileName) {
-    char    findName[256];
+    char findName[256];
 
     VFError vfErr;
 
@@ -104,8 +104,7 @@ void CDBFSFindCloseSD(CDBFindDataSD* findData) {
 char* CDBFindDataGetNameSD(CDBFindDataSD* findData) {
     if (findData->dta.longName[0] == 0) {
         return findData->dta.fileName;
-    }
-    else {
+    } else {
         return findData->dta.longName;
     }
 }
@@ -131,7 +130,7 @@ BOOL CDBFSIsDirNameSD(char* path) {
         }
     }
     // It is not a drive letter, it is a path!
-    return path[strlen(path)-1] != ':';
+    return path[strlen(path) - 1] != ':';
 }
 
 CDBErr CDBFSCreateDirForceSD(const char* dirName) {
@@ -211,8 +210,7 @@ void CDBFSSDEjectedCallback(u32 vfEvent) {
     if (vfEvent == VF_EVENT_EJECTED) {
         CDBReportInfo("SDEjectedCallback EJECTED\n");
         s_fssdWork.isEjected = TRUE;
-    }
-    else if (vfEvent == VF_EVENT_INSERTED) {
+    } else if (vfEvent == VF_EVENT_INSERTED) {
         CDBReportInfo("SDEjectedCallback INSERTED\n");
         s_fssdWork.isInserted = TRUE;
     }
@@ -269,7 +267,7 @@ CDBErr CDBFSSDUnmount() {
     s_fssdWork.isEjected = FALSE;
     s_fssdWork.isInserted = FALSE;
 
-    /* @BUG: should not have CDB_SD_VF_DRIVE_LETTER */
+    /* @bug: should not have CDB_SD_VF_DRIVE_LETTER */
     CDBReportInfo("VFUnmountDriveForce %s succeeded\n", "SD Slot0", CDB_SD_VF_DRIVE_LETTER);
     return CDB_ERROR_OK;
 }
@@ -286,4 +284,4 @@ BOOL CDBFSSDIsInserted() {
     return s_fssdWork.isInserted;
 }
 
-DECOMP_FORCE_ACTIVE(CDBFileSystem_c, CDB_SD_VFF_FILE_NAME); // Unused but linked
+DECOMP_FORCE_ACTIVE(CDBFileSystem_c, CDB_SD_VFF_FILE_NAME);  // Unused but linked

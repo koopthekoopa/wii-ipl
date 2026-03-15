@@ -1,12 +1,12 @@
-#include <revolution/mem.h>
 #include <private/mem.h>
+#include <revolution/mem.h>
 
 #include <revolution/os.h>
 
-static BOOL     sRootListInitialized = FALSE;
+static BOOL sRootListInitialized = FALSE;
 
-static MEMList  sRootList;
-static OSMutex  sRootMutex;
+static MEMList sRootList;
+static OSMutex sRootMutex;
 
 static MEMHeapHandle FindContainHeap_(MEMList* list, const void* memBlock) {
     MEMHeapHandle heap = NULL;

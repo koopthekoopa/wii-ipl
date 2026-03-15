@@ -2,67 +2,47 @@
 
 #include "config.h"
 
-#include "system/rvl_dec.h"
 #include "iplSystem.h"
 #include "system/iplNandManager.h"
+#include "system/rvl_dec.h"
 
 #include "iplUtility.h"
 
-#include <revolution/cx.h>
 #include <private/es.h>
+#include <revolution/cx.h>
 
 #include <cstring>
 
-#define BUFFER_SIZE     0x1000
+#define BUFFER_SIZE 0x1000
 
-#define STANDARD_SIZE   sizeof(MD5Head)
-#define EXT_SIZE        sizeof(MD5Head) + 0x20
+#define STANDARD_SIZE sizeof(MD5Head)
+#define EXT_SIZE sizeof(MD5Head) + 0x20
 
 namespace ipl {
     namespace nand {
-        Base::Base() {}
-        Base::~Base() {}
+        Base::Base() {
+        }
+        Base::~Base() {
+        }
 
-        File::File(EGG::Heap* heap, const char* fileName, ARCHandle* arc, const char* nandFileName, int offset, u32 length, bool bIsInNand) :
-        Base(),
-        mbDoneTask(FALSE),
-        mLastError(NAND_RESULT_OK),
-        mpHeap(heap),
-        mpArc(arc),
-        mFileOffset(offset),
-        mFileLength(length),
-        mFileMode(MODE_WRITE),
-        mFilePerms(NAND_ACCESS_NONE),
-        mpBuffer(NULL), mpCmpBuffer(NULL),
-        mResult(RESULT_NONE),
-        mbFatalError(false),
-        mbIsFullForTask(false),
-        mbIsNandFile(bIsInNand) {
-            strncpy(msFileName, fileName, NAND_MAX_PATH+1);
+        File::File(EGG::Heap* heap, const char* fileName, ARCHandle* arc, const char* nandFileName, int offset, u32 length, bool bIsInNand)
+            : Base(), mbDoneTask(FALSE), mLastError(NAND_RESULT_OK), mpHeap(heap), mpArc(arc), mFileOffset(offset), mFileLength(length),
+              mFileMode(MODE_WRITE), mFilePerms(NAND_ACCESS_NONE), mpBuffer(NULL), mpCmpBuffer(NULL), mResult(RESULT_NONE), mbFatalError(false),
+              mbIsFullForTask(false), mbIsNandFile(bIsInNand) {
+            strncpy(msFileName, fileName, NAND_MAX_PATH + 1);
             if (nandFileName) {
-                strncpy(msNandFileName, nandFileName, NAND_MAX_PATH+1);
+                strncpy(msNandFileName, nandFileName, NAND_MAX_PATH + 1);
             }
             memset(&mNandFile, 0, sizeof(NANDFileInfo));
         }
 
-        File::File(EGG::Heap* heap, const char* fileName, u8* buffer, u32 length, u8 perms) :
-        Base(),
-        mbDoneTask(FALSE),
-        mLastError(NAND_RESULT_OK),
-        mpHeap(heap),
-        mpArc(NULL),
-        mFileOffset(0),
-        mFileLength(length),
-        mFileMode(MODE_READ),
-        mFilePerms(perms),
-        mpBuffer(buffer), mpCmpBuffer(NULL),
-        mResult(RESULT_NONE),
-        mbFatalError(false),
-        mbIsFullForTask(false),
-        mbIsNandFile(TRUE) {
-            strncpy(msFileName, fileName, NAND_MAX_PATH+1);
+        File::File(EGG::Heap* heap, const char* fileName, u8* buffer, u32 length, u8 perms)
+            : Base(), mbDoneTask(FALSE), mLastError(NAND_RESULT_OK), mpHeap(heap), mpArc(NULL), mFileOffset(0), mFileLength(length),
+              mFileMode(MODE_READ), mFilePerms(perms), mpBuffer(buffer), mpCmpBuffer(NULL), mResult(RESULT_NONE), mbFatalError(false),
+              mbIsFullForTask(false), mbIsNandFile(TRUE) {
+            strncpy(msFileName, fileName, NAND_MAX_PATH + 1);
 
-            mpCmpBuffer = new(mpHeap, -DEFAULT_ALIGN) u8[mFileLength];
+            mpCmpBuffer = new (mpHeap, -DEFAULT_ALIGN) u8[mFileLength];
             memcpy(mpCmpBuffer, mpBuffer, mFileLength);
 
             memset(&mNandFile, 0, sizeof(NANDFileInfo));
@@ -85,18 +65,15 @@ namespace ipl {
                     }
                 }
                 return ARCOpen(mpArc, msFileName, &mArcFile) == TRUE;
-            }
-            else {
+            } else {
                 // Is a NAND File?
                 if (mbIsNandFile) {
                     s32 result = wrapper::PrivateOpen(msFileName, &mNandFile, attr);
                     return nand_error_handling(result);
-                }
-                else { // Is a System Menu file?
+                } else {  // Is a System Menu file?
                     if (System::getNandManager()->getDescriptor() < 0) {
                         handle = NULL;
-                    }
-                    else {
+                    } else {
                         handle = System::getNandManager()->getArc();
                     }
 
@@ -119,16 +96,14 @@ namespace ipl {
                     result = wrapper::Read(&mNandFile, buffer, length);
                     nand_error_handling(result);
                 }
-            }
-            else {
+            } else {
                 if (mbIsNandFile) {
                     result = wrapper::Seek(&mNandFile, mFileOffset + offset, NAND_SEEK_BEG);
                     nand_error_handling(result);
 
                     result = wrapper::Read(&mNandFile, buffer, length);
                     nand_error_handling(result);
-                }
-                else {
+                } else {
                     arcOffset = ARCGetStartOffset(&mArcFile);
 
                     result = ES_SeekContentFile(System::getNandManager()->getDescriptor(), mFileOffset + arcOffset + offset, NAND_SEEK_BEG);
@@ -145,16 +120,13 @@ namespace ipl {
         }
 
         u32 File::getDecodeSize_(const u8* buffer) {
-            if (stricmp(&msFileName[strlen(msFileName) - 4], ".lz7") == 0) { // Check file extension
+            if (stricmp(&msFileName[strlen(msFileName) - 4], ".lz7") == 0) {  // Check file extension
                 return CXGetUncompressedSize(buffer);
-            }
-            else if (buffer[0] == 'Y') { // Is Yaz0? (.szs; horrible way to check)
+            } else if (buffer[0] == 'Y') {  // Is Yaz0? (.szs; horrible way to check)
                 return Rvl_decode_szs_size(buffer);
-            }
-            else if (buffer[0] == 'L') { // Is LZ77? (horrible way to check)
+            } else if (buffer[0] == 'L') {  // Is LZ77? (horrible way to check)
                 return CXGetUncompressedSize(&buffer[4]);
-            }
-            else { // Otherwise, it's an ASH file.
+            } else {  // Otherwise, it's an ASH file.
                 return Rvl_decode_ash_size(buffer);
             }
         }
@@ -164,13 +136,11 @@ namespace ipl {
 
             if (mpArc) {
                 length = ARCGetLength(&mArcFile);
-            }
-            else {
+            } else {
                 if (mbIsNandFile) {
                     s32 result = wrapper::GetLength(&mNandFile, &length);
                     nand_error_handling(result);
-                }
-                else {
+                } else {
                     length = ARCGetLength(&mArcFile);
                 }
             }
@@ -179,7 +149,7 @@ namespace ipl {
         }
 
         BOOL File::isSliCompressed(const u8* buffer) {
-            return NAND_CHECK_MAGIC3(buffer, 'Y','a','z');
+            return NAND_CHECK_MAGIC3(buffer, 'Y', 'a', 'z');
         }
 
         /*
@@ -189,11 +159,11 @@ namespace ipl {
         */
 
         BOOL File::isAsrCompressed(const u8* buffer) {
-            return NAND_CHECK_MAGIC3(buffer, 'A','S','H');
+            return NAND_CHECK_MAGIC3(buffer, 'A', 'S', 'H');
         }
 
         BOOL File::isAshCompressed(const u8* buffer) {
-            return NAND_CHECK_MAGIC3(buffer, 'A','S','R');
+            return NAND_CHECK_MAGIC3(buffer, 'A', 'S', 'R');
         }
 
         BOOL File::isLz7Compressed(const u8* buffer) {
@@ -204,7 +174,7 @@ namespace ipl {
             // Check the magic
             else {
                 BOOL result = FALSE;
-                if (NAND_CHECK_MAGIC4(buffer, 'L','Z','7','7')) {
+                if (NAND_CHECK_MAGIC4(buffer, 'L', 'Z', '7', '7')) {
                     result = TRUE;
                 }
                 return result;
@@ -214,8 +184,7 @@ namespace ipl {
         BOOL File::isCompressed(const u8* buffer) {
             if (isSliCompressed(buffer) || isAsrCompressed(buffer) || isAshCompressed(buffer) || isLz7Compressed(buffer)) {
                 return TRUE;
-            }
-            else {
+            } else {
                 return FALSE;
             }
         }
@@ -223,8 +192,7 @@ namespace ipl {
         void File::uncompressLz7(const u8* src, u8* dest) {
             if (stricmp(&msFileName[strlen(msFileName) - 4], ".lz7") == 0) {
                 CXUncompressLZ(src, dest);
-            }
-            else {
+            } else {
                 CXUncompressLZ(&src[4], dest);
             }
         }
@@ -242,30 +210,30 @@ namespace ipl {
                         usedHeap = System::getMem2Root();
                     }
 
-                    mpCmpBuffer = new(usedHeap, -DEFAULT_ALIGN) u8[mFileLength];
+                    mpCmpBuffer = new (usedHeap, -DEFAULT_ALIGN) u8[mFileLength];
                 }
 
                 // Read header
-                u8  buffer[EXT_SIZE] ALIGN32;
+                u8 buffer[EXT_SIZE] ALIGN32;
                 u8* pBuffer = buffer;
                 readBlock_(buffer, mFileLength >= EXT_SIZE ? EXT_SIZE : STANDARD_SIZE);
 
                 // For MD5
                 NETMD5Sum md5sum ALIGN32;
-                MD5Bool   bHasMd5 = false;
-                MD5Head*  md5Head = reinterpret_cast<MD5Head*>(buffer);
+                MD5Bool bHasMd5 = false;
+                MD5Head* md5Head = reinterpret_cast<MD5Head*>(buffer);
 
                 u32 fileLen, fileOff = 0;
 
                 // Check if the header is an MD5 file.
-                if (NAND_CHECK_MAGIC4(md5Head->sig, 'I','M','D','5')) {
+                if (NAND_CHECK_MAGIC4(md5Head->sig, 'I', 'M', 'D', '5')) {
                     fileLen = md5Head->length;
 
                     bHasMd5 = true;
-                    memcpy(md5sum, md5Head->md5, NET_MD5_DIGEST_SIZE);    // Copy MD5 sum
+                    memcpy(md5sum, md5Head->md5, NET_MD5_DIGEST_SIZE);  // Copy MD5 sum
 
                     // Set offset to file data
-                    fileOff  = sizeof(MD5Head);
+                    fileOff = sizeof(MD5Head);
                     pBuffer += sizeof(MD5Head);
                 }
 
@@ -281,9 +249,8 @@ namespace ipl {
                     // LZ77 compression
                     if (isLz7Compressed(pBuffer)) {
                         uncompressLz7(&mpCmpBuffer[fileOff], mpBuffer);
-                        u32 rawSize = getRawSize_(); // Unused
-                    }
-                    else { // Any other compression
+                        u32 rawSize = getRawSize_();  // Unused
+                    } else {                          // Any other compression
                         Rvl_decode(mpBuffer, &mpCmpBuffer[fileOff]);
                     }
 
@@ -291,8 +258,7 @@ namespace ipl {
                     if (bHasMd5 == true) {
                         mResult = calcMD5_(md5sum, &mpCmpBuffer[fileOff], fileLen);
                     }
-                }
-                else {
+                } else {
                     // Just read the data
                     mpBuffer = getBuffer_(mFileLength - fileOff);
                     readBlock_(mpBuffer, mFileLength - fileOff, fileOff);
@@ -315,13 +281,14 @@ namespace ipl {
                     u32 dummy = 0;
                 }
             }
-            
+
             mbDoneTask = TRUE;
             callback_();
         }
 
         // For derived classes.
-        void File::callback_() {}
+        void File::callback_() {
+        }
 
         int File::calcMD5_(const u8* sum, const u8* buffer, u32 length) const {
             NETMD5Sum md5;
@@ -343,64 +310,66 @@ namespace ipl {
                 if (mbIsNandFile) {
                     result = wrapper::Close(&mNandFile);
                     return nand_error_handling(result);
-                }
-                else {
+                } else {
                     return ARCClose(&mArcFile) == TRUE;
                 }
-            }
-            else {
+            } else {
                 if (mbIsNandFile) {
                     result = wrapper::Close(&mNandFile);
                     return nand_error_handling(result);
-                }
-                else {
+                } else {
                     return ARCClose(&mArcFile) == TRUE;
                 }
             }
         }
 
         u8* File::getBuffer_(u32 length) {
-            return new(mpHeap, DEFAULT_ALIGN) u8[length];
+            return new (mpHeap, DEFAULT_ALIGN) u8[length];
         }
 
         LangFile::LangFile(EGG::Heap* heap, const char* dirName, const char* fileName, ARCHandle* arc, bool bIsNandFile) {
-            char fullName[NAND_MAX_PATH+1];
-            
+            char fullName[NAND_MAX_PATH + 1];
+
             mpCommonFile = NULL;
             mpLangFile = NULL;
 
             // Open the "common" file.
-            strncpy(fullName, dirName, NAND_MAX_PATH+1);
-            strncat(fullName, "/common/", (NAND_MAX_PATH+1) - strlen(fullName));
-            strncat(fullName, fileName, (NAND_MAX_PATH+1) - strlen(fullName));
+            strncpy(fullName, dirName, NAND_MAX_PATH + 1);
+            strncat(fullName, "/common/", (NAND_MAX_PATH + 1) - strlen(fullName));
+            strncat(fullName, fileName, (NAND_MAX_PATH + 1) - strlen(fullName));
 
-            mpCommonFile = new(heap, 4) File(heap, fullName, arc, NULL, 0, 0, bIsNandFile);
+            mpCommonFile = new (heap, 4) File(heap, fullName, arc, NULL, 0, 0, bIsNandFile);
 
             char* langPath = utility::Language::getPath();
 
             // Open the language exclusive file
-            strncpy(fullName, dirName, NAND_MAX_PATH+1);
-            strncat(fullName, "/", (NAND_MAX_PATH+1) - strlen(fullName));
-            strncat(fullName, langPath, (NAND_MAX_PATH+1) - strlen(fullName));
-            strncat(fullName, "/", (NAND_MAX_PATH+1) - strlen(fullName));
-            strncat(fullName, fileName, (NAND_MAX_PATH+1) - strlen(fullName));
+            strncpy(fullName, dirName, NAND_MAX_PATH + 1);
+            strncat(fullName, "/", (NAND_MAX_PATH + 1) - strlen(fullName));
+            strncat(fullName, langPath, (NAND_MAX_PATH + 1) - strlen(fullName));
+            strncat(fullName, "/", (NAND_MAX_PATH + 1) - strlen(fullName));
+            strncat(fullName, fileName, (NAND_MAX_PATH + 1) - strlen(fullName));
 
-            mpLangFile = new(heap, 4) File(heap, fullName, arc, NULL, 0, 0, bIsNandFile);
+            mpLangFile = new (heap, 4) File(heap, fullName, arc, NULL, 0, 0, bIsNandFile);
         }
 
         LangFile::~LangFile() {
-            if (mpCommonFile)  delete mpCommonFile;
-            if (mpLangFile) delete mpLangFile;
+            if (mpCommonFile)
+                delete mpCommonFile;
+            if (mpLangFile)
+                delete mpLangFile;
         }
 
         void LangFile::read() {
-            if (mpCommonFile)  mpCommonFile->read();
-            if (mpLangFile) mpLangFile->read();
+            if (mpCommonFile)
+                mpCommonFile->read();
+            if (mpLangFile)
+                mpLangFile->read();
         }
 
         // `LayoutFile` is literally `LangFile` lol.
         LayoutFile::LayoutFile(EGG::Heap* heap, const char* dirName, const char* fileName, ARCHandle* arc, bool bIsNandFile)
-        : LangFile(heap, dirName, fileName, arc, bIsNandFile) {}
+            : LangFile(heap, dirName, fileName, arc, bIsNandFile) {
+        }
 
         void File::write() {
             u8 dummy;
@@ -410,7 +379,7 @@ namespace ipl {
                 usedHeap = System::getMem2Root();
             }
 
-            u8* buffer = new(usedHeap, -DEFAULT_ALIGN) u8[BUFFER_SIZE];
+            u8* buffer = new (usedHeap, -DEFAULT_ALIGN) u8[BUFFER_SIZE];
             s32 result;
             BOOL success;
 
@@ -442,10 +411,10 @@ namespace ipl {
                 nand_error_handling(result);
             }
 
-done:
+        done:
             delete[] buffer;
             delete[] mpCmpBuffer;
-            
+
             mpCmpBuffer = NULL;
 
             mbDoneTask = TRUE;
@@ -458,8 +427,7 @@ done:
 
             if (result >= 0) {
                 return TRUE;
-            }
-            else {
+            } else {
                 switch (result) {
                     // If the file exists, move on.
                     case NAND_RESULT_EXISTS: {
@@ -499,7 +467,8 @@ done:
             }
         }
 
-        void Base::write() {}
+        void Base::write() {
+        }
 
         bool LangFile::isFatalError() {
             bool result = true;
@@ -522,18 +491,22 @@ done:
             return result;
         }
 
-        bool File::isFatalError() { return mbFatalError; }
+        bool File::isFatalError() {
+            return mbFatalError;
+        }
 
         int LangFile::checkData() {
-            if (mpLangFile) return mpLangFile->checkData();
-            if (mpCommonFile) return mpCommonFile->checkData();
+            if (mpLangFile)
+                return mpLangFile->checkData();
+            if (mpCommonFile)
+                return mpCommonFile->checkData();
             return 0;
         }
 
         bool LangFile::isFinished() {
             bool result = false;
             bool finished = true;
-            
+
             if (mpCommonFile && !mpCommonFile->isFinished()) {
                 finished = false;
             }
@@ -550,12 +523,20 @@ done:
 
             return result;
         }
-        
-        bool Base::isFatalError() { return false; }
-        int Base::checkData() { return 0; }
-        bool Base::isFinished() { return false; }
-        void Base::read() {}
-        
-        LayoutFile::~LayoutFile() {}
-    }
-}
+
+        bool Base::isFatalError() {
+            return false;
+        }
+        int Base::checkData() {
+            return 0;
+        }
+        bool Base::isFinished() {
+            return false;
+        }
+        void Base::read() {
+        }
+
+        LayoutFile::~LayoutFile() {
+        }
+    }  // namespace nand
+}  // namespace ipl

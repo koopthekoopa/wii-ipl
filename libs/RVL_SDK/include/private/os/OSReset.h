@@ -24,15 +24,15 @@ enum {
     OS_SETTING_UPDATE
 };
 
-void    OSShutdownSystemForBS();
+void OSShutdownSystemForBS();
 
-BOOL    __OSCallShutdownFunctions(BOOL final, u32 event);
+BOOL __OSCallShutdownFunctions(BOOL final, u32 event);
 
-void    __OSShutdownDevices(u32 id);
+void __OSShutdownDevices(u32 id);
 
-void    __OSReturnToMenuForError();
-void    __OSHotResetForError();
+void __OSReturnToMenuForError();
+void __OSHotResetForError();
 
-u8      __OSGetDiscState(u8 prev);
+u8 __OSGetDiscState(u8 prev);
 
-#endif // PRIVATE_OS_RESET_H
+#endif  // PRIVATE_OS_RESET_H

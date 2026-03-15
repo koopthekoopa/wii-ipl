@@ -3,6 +3,6 @@
 
 #include <nw4r/config.h>
 
-#define NW4R_LYT_VERSION    8
+#define NW4R_LYT_VERSION 8
 
-#endif // NW4R_LYT_CONFIG_H
+#endif  // NW4R_LYT_CONFIG_H

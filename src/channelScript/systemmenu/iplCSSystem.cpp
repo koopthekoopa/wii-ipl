@@ -7,7 +7,7 @@ extern "C" BOOL VmSystemInit(CHANSVm* vm);
 namespace ipl {
     namespace cs {
         namespace system {
-            #define METHOD_COUNT    2
+#define METHOD_COUNT 2
             extern const CHANSVmMethodList cMethodList[METHOD_COUNT];
 
             CHANSVmDefineMethod(is_first_call) {
@@ -33,10 +33,12 @@ namespace ipl {
                 return CHANSVmSetInteger(VmInst, VmReturnObj, appDlEnable) == CHANS_VM_OK;
             }
 
+            // clang-format off
             const CHANSVmMethodList cMethodList[METHOD_COUNT] = {
                 {"isFirstCall",         is_first_call },
                 {"isDlTaskRegistered",  is_dltask_registered },
             };
+            // clang-format on
 
             BOOL init(CHANSVm* vm) {
                 BOOL result = FALSE;
@@ -50,6 +52,6 @@ namespace ipl {
                 }
                 return result;
             }
-        }
-    }
-}
+        }  // namespace system
+    }  // namespace cs
+}  // namespace ipl

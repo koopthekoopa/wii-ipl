@@ -4,8 +4,8 @@
 
 #include "iplSound.h"
 
-#include <revolution/os/OSBootInfo.h>
 #include <private/os.h>
+#include <revolution/os/OSBootInfo.h>
 
 #include <private/wpad/WPADInternal.h>
 
@@ -13,22 +13,11 @@
 
 namespace ipl {
     namespace bs2 {
-        Manager::Manager(EGG::Heap* heap) :
-        mIPLState(IPL_STATE_NO_DISK),
-        mState(BS2_STT_NO_DISK),
-        unk_0x0C(true),
-        unk_0x0D(false),
-        unk_0x0E(false),
-        unk_0x0F(false),
-        mbIsDiagDisc(false),
-        unk_0x11(false),
-        mbHasBanner(FALSE),
-        mUnlockedState(BS2_STT_NO_DISK),
-        mbStartUpdate(false),
-        mEntries(NULL),
-        mEntrySize(1),
-        mEntryOffset(0) {
-            mpBannerBuffer = new(heap, DEFAULT_ALIGN) u8[BS2_DEFAULT_BANNER_SIZE];
+        Manager::Manager(EGG::Heap* pHeap)
+            : mIPLState(IPL_STATE_NO_DISK), mState(BS2_STT_NO_DISK), unk_0x0C(true), unk_0x0D(false), unk_0x0E(false), unk_0x0F(false),
+              mbIsDiagDisc(false), unk_0x11(false), mbHasBanner(FALSE), mUnlockedState(BS2_STT_NO_DISK), mbStartUpdate(false), mEntries(NULL),
+              mEntrySize(1), mEntryOffset(0) {
+            mpBannerBuffer = new (pHeap, DEFAULT_ALIGN) u8[BS2_DEFAULT_BANNER_SIZE];
             BS2SetBannerBuffer(mpBannerBuffer, BS2_DEFAULT_BANNER_SIZE);
         }
 
@@ -47,8 +36,7 @@ namespace ipl {
                 unk_0x0C = true;
                 mIPLState = IPL_STATE_NO_DISK;
                 unk_0x0F = false;
-            }
-            else if (unk_0x0C) {
+            } else if (unk_0x0C) {
                 BOOL old = OSDisableInterrupts();
 
                 mState = BS2Tick();
@@ -93,8 +81,7 @@ namespace ipl {
                 for (int i = 0; i < entryMax; i++) {
                     mEntrySize += mEntries[i].size;
                 }
-            }
-            else {
+            } else {
                 mEntrySize = 1;
                 mEntryOffset = 0;
             }
@@ -108,8 +95,12 @@ namespace ipl {
             unk_0x0C = false;
         }
 
-        void Manager::startRVLGame()    { bootNewSystem(); }
-        void Manager::startGCGame()     { bootNewSystem(); }
+        void Manager::startRVLGame() {
+            bootNewSystem();
+        }
+        void Manager::startGCGame() {
+            bootNewSystem();
+        }
 
         void Manager::abort() {
             unk_0x0E = true;
@@ -127,12 +118,14 @@ namespace ipl {
             return BS2CheckParentalControl();
         }
 
-        void Manager::getDiskInfo(char** diskID, char** diskMaker) {
+        void Manager::getDiskInfo(char** pDiskID, char** pDiskMaker) {
             // Disc info is from BI read by BS2
             OSBootInfo* bi = (OSBootInfo*)OSPhysicalToCached(OS_ADDR_BOOT_INFO);
 
-            if (diskID)     *diskID     = (char*)bi->DVDDiskID.gameName;
-            if (diskMaker)  *diskMaker  = (char*)bi->DVDDiskID.company;
+            if (pDiskID)
+                *pDiskID = (char*)bi->DVDDiskID.gameName;
+            if (pDiskMaker)
+                *pDiskMaker = (char*)bi->DVDDiskID.company;
         }
 
         BOOL Manager::isTitleAvailable(ESTitleId titleId) const {
@@ -141,8 +134,7 @@ namespace ipl {
             BS2GetLockedTitles(NULL, &count);
             if (count != 0 && BS2IsTitleAvailable(titleId)) {
                 return TRUE;
-            }
-            else {
+            } else {
                 return FALSE;
             }
         }
@@ -227,30 +219,20 @@ namespace ipl {
             if (unk_0x0D) {
                 if (state == BS2_STT_RUN_UPDATE) {
                     BS2StartUpdate();
-                }
-                else {
+                } else {
                     mbStartUpdate = false;
                 }
-            }
-            else if (unk_0x0E) {
-                if (state == BS2_STT_NO_DISK
-                 || state == BS2_STT_COVER_OPEN
-                 || state == BS2_STT_55
-                 || state == BS2_STT_WRONG_DISK
-                 || state == BS2_STT_66
-                 || state == BS2_STT_67
-                 || state == BS2_STT_68
-                 || state == BS2_STT_FATAL_ERROR
-                 || state == BS2_STT_UPDATE_FAILED
-                 || state == BS2_STT_DIRTY_DISK) {
+            } else if (unk_0x0E) {
+                if (state == BS2_STT_NO_DISK || state == BS2_STT_COVER_OPEN || state == BS2_STT_55 || state == BS2_STT_WRONG_DISK ||
+                    state == BS2_STT_66 || state == BS2_STT_67 || state == BS2_STT_68 || state == BS2_STT_FATAL_ERROR ||
+                    state == BS2_STT_UPDATE_FAILED || state == BS2_STT_DIRTY_DISK) {
                     unk_0x0C = false;
                     mIPLState = IPL_STATE_8;
-                }
-                else {
+                } else {
                     BS2AbortStateMachine();
                 }
             }
-            
+
             unk_0x0D = false;
             unk_0x0E = false;
         }
@@ -263,8 +245,7 @@ namespace ipl {
                 // Find the current entry
                 for (i = 0; i < BS2GetUpdateEntryNum(); i++) {
                     if (BS2GetCurrentEntry() != NULL) {
-                        if (mEntries[i].titleId == BS2GetCurrentEntry()->titleId &&
-                            mEntries[i].titleVersion == BS2GetCurrentEntry()->titleVersion) {
+                        if (mEntries[i].titleId == BS2GetCurrentEntry()->titleId && mEntries[i].titleVersion == BS2GetCurrentEntry()->titleVersion) {
                             break;
                         }
                     }
@@ -319,21 +300,19 @@ namespace ipl {
             VIFlush();
             VIWaitForRetrace();
 
-            while (!__OSSyncSram()) {}
-            
+            while (!__OSSyncSram()) {
+            }
+
             // Run app!
             if (mState == BS2_STT_START_GAME) {
                 BS2StartGame();
-            }
-            else if (mState == BS2_STT_START_GC_GAME) {
+            } else if (mState == BS2_STT_START_GC_GAME) {
                 BS2StartGCGame();
-            }
-            else if (mState == BS2_STT_RESET_SYSTEM) {
+            } else if (mState == BS2_STT_RESET_SYSTEM) {
                 OSReturnToMenu();
-            }
-            else if (mState == BS2_STT_START_LOCKED_DISK) {
+            } else if (mState == BS2_STT_START_LOCKED_DISK) {
                 BS2StartGame();
             }
         }
-    }
-}
+    }  // namespace bs2
+}  // namespace ipl

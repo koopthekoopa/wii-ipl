@@ -6,35 +6,38 @@
 #include <RVLFaceLibInternal.h>
 
 #include <internal/RFLi_FaceConfig.h>
+// clang-format off
 #include <internal/RFLi_FaceConfig/offsets.h>
 #include <internal/RFLi_FaceConfig/colors.h>
+// clang-format on
 
-#include <revolution/os.h>
 #include <revolution/base/PPCArch.h>
 #include <revolution/gx.h>
+#include <revolution/os.h>
 
 #include <stddef.h>
 #include <string.h>
 
 #define GET_ARRAY_LENGTH(x) (sizeof((x)) / sizeof((x)[0]))
 
-#define VTX_COORDS_IN_POS   3
-#define VTX_COORDS_IN_NRM   3
-#define VTX_COORDS_IN_TXC   2
+#define VTX_COORDS_IN_POS 3
+#define VTX_COORDS_IN_NRM 3
+#define VTX_COORDS_IN_TXC 2
 
-#define VTX_COORD_SIZE      sizeof(s16)
+#define VTX_COORD_SIZE sizeof(s16)
 
-#define NUM_VTX_POS(size)   ((size) / (VTX_COORD_SIZE * VTX_COORDS_IN_POS))
+#define NUM_VTX_POS(size) ((size) / (VTX_COORD_SIZE * VTX_COORDS_IN_POS))
 #define SIZE_VTX_POS(count) (((count) * VTX_COORD_SIZE) * VTX_COORDS_IN_POS)
 
-#define NUM_VTX_NRM(size)   ((size) / (VTX_COORD_SIZE * VTX_COORDS_IN_NRM))
+#define NUM_VTX_NRM(size) ((size) / (VTX_COORD_SIZE * VTX_COORDS_IN_NRM))
 #define SIZE_VTX_NRM(count) (((count) * VTX_COORD_SIZE) * VTX_COORDS_IN_NRM)
 
-#define NUM_VTX_TXC(size)   ((size) / (VTX_COORD_SIZE * VTX_COORDS_IN_TXC))
+#define NUM_VTX_TXC(size) ((size) / (VTX_COORD_SIZE * VTX_COORDS_IN_TXC))
 #define SIZE_VTX_TXC(count) (((count) * VTX_COORD_SIZE) * VTX_COORDS_IN_TXC)
 
 RFLiCoordinateData coordinateData = {1, 2, 0, FALSE, FALSE, FALSE};
 
+// clang-format off
 const RFLDrawCoreSetting cDefaultDrawCoreSetting2Tev = {
     1,          GX_TEXCOORD0, GX_TEXMAP0, 2,    GX_TEV_SWAP0,
     GX_KCOLOR0, GX_TEVPREV,   GX_PNMTX0,  GX_FALSE
@@ -100,6 +103,8 @@ static const GXColor cFavoriteColor[RFLFavoriteColor_Max] = {
     {24,  24,  20,  255},   // RFLFavoriteColor_Black
 };
 
+// clang-format on
+
 static const GXColor cWhite = {255, 255, 255, 255};
 
 typedef union {
@@ -110,13 +115,13 @@ typedef union {
     };
 } RFL_COORDINATE;
 
-#define RFL_COORD_TYPE_X    0x01000000
-#define RFL_COORD_TYPE_Y    0x00010000
-#define RFL_COORD_TYPE_Z    0x00000100
+#define RFL_COORD_TYPE_X 0x01000000
+#define RFL_COORD_TYPE_Y 0x00010000
+#define RFL_COORD_TYPE_Z 0x00000100
 
-#define RFL_COORD_TYPE_RX   0x11000000
-#define RFL_COORD_TYPE_RY   0x00110000
-#define RFL_COORD_TYPE_RZ   0x00001100
+#define RFL_COORD_TYPE_RX 0x11000000
+#define RFL_COORD_TYPE_RY 0x00110000
+#define RFL_COORD_TYPE_RZ 0x00001100
 
 #define RFL_COORD_TYPE_RMSK 0x10101000
 
@@ -127,7 +132,7 @@ void RFLSetCoordinate(RFLCoordinate up, RFLCoordinate front) {
     RFL_COORDINATE f;
     RFL_COORDINATE r;
 
-    RFLi_ASSERTLINE_MSG((up & front) == 0, 148, "upとfrontが直交していません。"); // "Up and front are not perpendicular."
+    RFLi_ASSERTLINE_MSG((up & front) == 0, 148, "upとfrontが直交していません。");  // "Up and front are not perpendicular."
 
     u.coord = up;
     f.coord = front;
@@ -141,33 +146,27 @@ void RFLSetCoordinate(RFLCoordinate up, RFLCoordinate front) {
     // Up
     if (up & RFL_COORD_TYPE_X) {
         coordinateData.uOff = 0;
-    }
-    else if (up & RFL_COORD_TYPE_Y) {
+    } else if (up & RFL_COORD_TYPE_Y) {
         coordinateData.uOff = 1;
-    }
-    else {
+    } else {
         coordinateData.uOff = 2;
     }
 
     // Front
     if (front & RFL_COORD_TYPE_X) {
         coordinateData.fOff = 0;
-    }
-    else if (front & RFL_COORD_TYPE_Y) {
+    } else if (front & RFL_COORD_TYPE_Y) {
         coordinateData.fOff = 1;
-    }
-    else {
+    } else {
         coordinateData.fOff = 2;
     }
 
     // Right
     if (right & RFL_COORD_TYPE_X) {
         coordinateData.rOff = 0;
-    }
-    else if (right & RFL_COORD_TYPE_Y) {
+    } else if (right & RFL_COORD_TYPE_Y) {
         coordinateData.rOff = 1;
-    }
-    else {
+    } else {
         coordinateData.rOff = 2;
     }
 
@@ -199,12 +198,11 @@ u32 RFLGetModelBufferSize(RFLResolution resolution, u32 expressionFlag) {
 
     maskTexSize = RFLiGetMaskBufSize(resolution);
 
-    return OSRoundUp32B(expressionNum * sizeof(GXTexObj)) +
-           OSRoundUp32B(sizeof(RFLiCharModelRes)) +
-           OSRoundUp32B(maskTexSize * expressionNum);
+    return OSRoundUp32B(expressionNum * sizeof(GXTexObj)) + OSRoundUp32B(sizeof(RFLiCharModelRes)) + OSRoundUp32B(maskTexSize * expressionNum);
 }
 
-RFLErrcode RFLInitCharModel(RFLCharModel* charModel, RFLDataSource source, RFLMiddleDatabase* middleDB, u16 index, void* bufferPtr, RFLResolution resolution, u32 expressionFlag) {
+RFLErrcode RFLInitCharModel(RFLCharModel* charModel, RFLDataSource source, RFLMiddleDatabase* middleDB, u16 index, void* bufferPtr,
+                            RFLResolution resolution, u32 expressionFlag) {
     RFLiCharInfo info;
     RFLErrcode err = RFLiPickupCharInfo(&info, source, middleDB, index);
     if (err == RFLErrcode_Success) {
@@ -214,7 +212,7 @@ RFLErrcode RFLInitCharModel(RFLCharModel* charModel, RFLDataSource source, RFLMi
     return err;
 }
 
-void RFLiInitCharModel(RFLCharModel* charModel, const RFLiCharInfo* info, void* bufferPtr,  RFLResolution resolution, u32 expressionFlag) {
+void RFLiInitCharModel(RFLCharModel* charModel, const RFLiCharInfo* info, void* bufferPtr, RFLResolution resolution, u32 expressionFlag) {
     RFLi_MASKRSL maxResolution;
     u32 maskTexSize;
     u8* maskTexBuffer[RFLExp_Max];
@@ -244,8 +242,7 @@ void RFLiInitCharModel(RFLCharModel* charModel, const RFLiCharInfo* info, void* 
             if (expressionFlag & (1 << i)) {
                 charModel_->maskTexObj[i] = (GXTexObj*)ptr8;
                 ptr8 += 32;
-            }
-            else {
+            } else {
                 charModel_->maskTexObj[i] = NULL;
             }
         }
@@ -259,8 +256,7 @@ void RFLiInitCharModel(RFLCharModel* charModel, const RFLiCharInfo* info, void* 
             if (expressionFlag & (1 << i)) {
                 maskTexBuffer[i] = ptr8;
                 ptr8 += maskTexSize;
-            }
-            else {
+            } else {
                 maskTexBuffer[i] = NULL;
             }
         }
@@ -301,8 +297,7 @@ void RFLiInitCharModel(RFLCharModel* charModel, const RFLiCharInfo* info, void* 
                 GXInitTexObj(charModel_->maskTexObj[i], maskTexBuffer[i], maxResolution, maxResolution, GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP, mipmap);
                 if (mipmap) {
                     GXInitTexObjLOD(charModel_->maskTexObj[i], GX_LIN_MIP_LIN, GX_LINEAR, 0.0f, max_lod, 0.0f, GX_FALSE, GX_FALSE, GX_ANISO_1);
-                }
-                else {
+                } else {
                     GXInitTexObjLOD(charModel_->maskTexObj[i], GX_LINEAR, GX_LINEAR, 0.0f, 0.0f, 0.0f, GX_FALSE, GX_FALSE, GX_ANISO_1);
                 }
 
@@ -414,8 +409,7 @@ void RFLLoadDrawSetting(const RFLDrawSetting* setting) {
         GXSetChanCtrl(GX_ALPHA0, GX_FALSE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE);
         GXSetChanAmbColor(GX_COLOR0, setting->ambientColor);
         GXSetChanMatColor(GX_COLOR0, cWhite);
-    }
-    else {
+    } else {
         RFLLoadMaterialSetting(&cDefaultDrawCoreSetting1Tev);
         RFLLoadVertexSetting(&cDefaultDrawCoreSetting1Tev);
         GXSetNumChans(0);
@@ -670,8 +664,10 @@ void RFLiInitCharModelRes(RFLiCharModelRes* charModelRes, const RFLiCharInfo* in
         arg.vtxPosBuf = charModelRes->vtxPosHair;
         arg.vtxNrmBuf = charModelRes->vtxNrmHair;
         arg.dlBuf = charModelRes->dlHair;
-        arg.vtxPosBufSize = NUM_VTX_POS(sizeof(charModelRes->vtxPosCap)) - (((u32)charModelRes->vtxPosHair - (u32)charModelRes->vtxPosCap) / VTX_COORD_SIZE) / VTX_COORDS_IN_POS;
-        arg.vtxNrmBufSize = NUM_VTX_POS(sizeof(charModelRes->vtxNrmCap)) - (((u32)charModelRes->vtxNrmHair - (u32)charModelRes->vtxNrmCap) / VTX_COORD_SIZE) / VTX_COORDS_IN_NRM;
+        arg.vtxPosBufSize = NUM_VTX_POS(sizeof(charModelRes->vtxPosCap)) -
+                            (((u32)charModelRes->vtxPosHair - (u32)charModelRes->vtxPosCap) / VTX_COORD_SIZE) / VTX_COORDS_IN_POS;
+        arg.vtxNrmBufSize = NUM_VTX_POS(sizeof(charModelRes->vtxNrmCap)) -
+                            (((u32)charModelRes->vtxNrmHair - (u32)charModelRes->vtxNrmCap) / VTX_COORD_SIZE) / VTX_COORDS_IN_NRM;
         arg.dlBufSize = sizeof(charModelRes->dlCap) - ((u32)charModelRes->dlHair - (u32)charModelRes->dlCap);
         arg.flipX = info->hair.flip;
         arg.transform = TRUE;
@@ -695,8 +691,10 @@ void RFLiInitCharModelRes(RFLiCharModelRes* charModelRes, const RFLiCharInfo* in
         arg.vtxPosBuf = charModelRes->vtxPosForehead;
         arg.vtxNrmBuf = charModelRes->vtxNrmForehead;
         arg.dlBuf = charModelRes->dlForehead;
-        arg.vtxPosBufSize = NUM_VTX_POS(sizeof(charModelRes->vtxPosCap)) - (((u32)charModelRes->vtxPosForehead - (u32)charModelRes->vtxPosCap) / VTX_COORD_SIZE) / VTX_COORDS_IN_POS;
-        arg.vtxNrmBufSize = NUM_VTX_POS(sizeof(charModelRes->vtxNrmCap)) - (((u32)charModelRes->vtxNrmForehead - (u32)charModelRes->vtxNrmCap) / VTX_COORD_SIZE) / VTX_COORDS_IN_NRM;
+        arg.vtxPosBufSize = NUM_VTX_POS(sizeof(charModelRes->vtxPosCap)) -
+                            (((u32)charModelRes->vtxPosForehead - (u32)charModelRes->vtxPosCap) / VTX_COORD_SIZE) / VTX_COORDS_IN_POS;
+        arg.vtxNrmBufSize = NUM_VTX_POS(sizeof(charModelRes->vtxNrmCap)) -
+                            (((u32)charModelRes->vtxNrmForehead - (u32)charModelRes->vtxNrmCap) / VTX_COORD_SIZE) / VTX_COORDS_IN_NRM;
         arg.dlBufSize = sizeof(charModelRes->dlCap) - ((u32)charModelRes->dlForehead - (u32)charModelRes->dlCap);
         arg.flipX = info->hair.flip;
         arg.transform = TRUE;
@@ -854,16 +852,16 @@ void RFLiInitCharModelRes(RFLiCharModelRes* charModelRes, const RFLiCharInfo* in
     charModelRes->colorIdxGlass = info->glass.color;
     charModelRes->colorIdxFavorite = info->personal.favoriteColor;
 
-    DCFlushRange(charModelRes, sizeof(RFLiCharModelRes)+0x10 /*?*/);
+    DCFlushRange(charModelRes, sizeof(RFLiCharModelRes) + 0x10 /*?*/);
 }
 
 // DEBUG NON MATCH (https://decomp.me/scratch/mQdEd)
 void RFLiInitShapeRes(RFLiCharShapeRes* arg /* r30 */) {
-    void* res; // r31+0xE8
-    u8* ptr8; // r29
-    BOOL skipTxc; // r31+0xE4
+    void* res;     // r31+0xE8
+    u8* ptr8;      // r29
+    BOOL skipTxc;  // r31+0xE4
 
-    static const u32 csHeader[RFLiPartsShp_Max] = { 'nose', 'frhd', 'face', 'hair', 'cap_', 'berd', 'nsln', 'mask', 'glas' };
+    static const u32 csHeader[RFLiPartsShp_Max] = {'nose', 'frhd', 'face', 'hair', 'cap_', 'berd', 'nsln', 'mask', 'glas'};
 
     RFLi_ASSERTLINE_NULL(arg, 1261);
     RFLi_ASSERTLINE_NULL(arg->vtxPosBuf, 1262);
@@ -871,9 +869,8 @@ void RFLiInitShapeRes(RFLiCharShapeRes* arg /* r30 */) {
     RFLi_ASSERTLINE_NULL(arg->dlBuf, 1264);
     RFLi_ASSERTLINE_ALIGN(arg->dlBuf, 32, 1265);
 
-    skipTxc = arg->parts == RFLiPartsShp_Nose || arg->parts == RFLiPartsShp_Forehead ||
-              arg->parts == RFLiPartsShp_Hair ||
-              arg->parts == RFLiPartsShp_Beard;
+    skipTxc =
+        arg->parts == RFLiPartsShp_Nose || arg->parts == RFLiPartsShp_Forehead || arg->parts == RFLiPartsShp_Hair || arg->parts == RFLiPartsShp_Beard;
 
     if (!skipTxc) {
         RFLi_ASSERTLINE_NULL(arg->vtxTxcBuf, 1273);
@@ -884,22 +881,22 @@ void RFLiInitShapeRes(RFLiCharShapeRes* arg /* r30 */) {
     }
 
     {
-        u32 fileSize = RFLiGetShapeSize(arg->parts, arg->index); // r31+0xE0
+        u32 fileSize = RFLiGetShapeSize(arg->parts, arg->index);  // r31+0xE0
         res = RFLiAlloc32(fileSize);
         RFLi_ASSERTLINE_NULL(res, 1287);
     }
 
     {
-        void* result = RFLiLoadShape(arg->parts, arg->index, res); // r31+0xDC
-        RFLi_ASSERTLINE_MSG(result, 1290, "ファイルの読み込みに失敗しました。"); // "Failed to read file."
+        void* result = RFLiLoadShape(arg->parts, arg->index, res);                // r31+0xDC
+        RFLi_ASSERTLINE_MSG(result, 1290, "ファイルの読み込みに失敗しました。");  // "Failed to read file."
     }
 
     {
         u32 header;
 
         ptr8 = res;
-        header = *(u32*)ptr8; // r31+0xD8
-        RFLi_ASSERTLINE_MSG(header == csHeader[arg->parts], 1304, "ヘッダとpartsが一致しません"); // "Header and "parts" do not match"
+        header = *(u32*)ptr8;                                                                      // r31+0xD8
+        RFLi_ASSERTLINE_MSG(header == csHeader[arg->parts], 1304, "ヘッダとpartsが一致しません");  // "Header and "parts" do not match"
 
         ptr8 += sizeof(header);
     }
@@ -909,13 +906,16 @@ void RFLiInitShapeRes(RFLiCharShapeRes* arg /* r30 */) {
         RFLi_ASSERTLINE_NULL(arg->beardTrans, 1311);
         // Missing assert for arg->hairTrans?
 
-        memcpy(arg->noseTrans, ptr8, sizeof(RFLiPositionData)); ptr8 += sizeof(RFLiPositionData);
-        memcpy(arg->beardTrans, ptr8, sizeof(RFLiPositionData)); ptr8 += sizeof(RFLiPositionData);
-        memcpy(arg->hairTrans, ptr8, sizeof(RFLiPositionData)); ptr8 += sizeof(RFLiPositionData);
+        memcpy(arg->noseTrans, ptr8, sizeof(RFLiPositionData));
+        ptr8 += sizeof(RFLiPositionData);
+        memcpy(arg->beardTrans, ptr8, sizeof(RFLiPositionData));
+        ptr8 += sizeof(RFLiPositionData);
+        memcpy(arg->hairTrans, ptr8, sizeof(RFLiPositionData));
+        ptr8 += sizeof(RFLiPositionData);
     }
 
     {
-        u16 size = *(u16*)ptr8; // r31+0xA
+        u16 size = *(u16*)ptr8;  // r31+0xA
         if (size == 0) {
             arg->vtxPosSize = 0;
             arg->vtxNrmSize = 0;
@@ -929,30 +929,30 @@ void RFLiInitShapeRes(RFLiCharShapeRes* arg /* r30 */) {
     }
 
     arg->vtxPosSize = *(u16*)ptr8;
-    RFLi_ASSERTLINE_MSG(arg->vtxPosSize <= arg->vtxPosBufSize, 1351, "vtxPosSize(%d) > vtxPosBufSize(%d) parts:%d index:%d", arg->vtxPosSize, arg->vtxPosBufSize, arg->parts, arg->index);
+    RFLi_ASSERTLINE_MSG(arg->vtxPosSize <= arg->vtxPosBufSize, 1351, "vtxPosSize(%d) > vtxPosBufSize(%d) parts:%d index:%d", arg->vtxPosSize,
+                        arg->vtxPosBufSize, arg->parts, arg->index);
     ptr8 += sizeof(arg->vtxPosSize);
 
     {
-        u32 byteSize; // r31+0xD4
-        s16* ptr16; // r31+0xD0 
+        u32 byteSize;  // r31+0xD4
+        s16* ptr16;    // r31+0xD0
 
         ptr16 = (s16*)ptr8;
         byteSize = SIZE_VTX_POS(arg->vtxPosSize);
 
         if (arg->transform) {
-            int i; // r31+0xCC
-            s32 s = 256.0f * arg->posScale; // r31+0xC8
-            s32 tx = 256.0f * arg->posTrans->x; // r31+0xC4
-            s32 ty = 256.0f * arg->posTrans->y; // r31+0xC0
-            s32 tz = 256.0f * arg->posTrans->z; // r31+0xBC
+            int i;                               // r31+0xCC
+            s32 s = 256.0f * arg->posScale;      // r31+0xC8
+            s32 tx = 256.0f * arg->posTrans->x;  // r31+0xC4
+            s32 ty = 256.0f * arg->posTrans->y;  // r31+0xC0
+            s32 tz = 256.0f * arg->posTrans->z;  // r31+0xBC
 
             for (i = 0; i < arg->vtxPosSize; i++) {
-                s16 temp[3]; // r31+0xFC
+                s16 temp[3];  // r31+0xFC
 
                 if (arg->flipX) {
                     temp[0] = tx + ((-ptr16[0] * s) >> 8);
-                }
-                else {
+                } else {
                     temp[0] = tx + ((ptr16[0] * s) >> 8);
                 }
 
@@ -962,24 +962,22 @@ void RFLiInitShapeRes(RFLiCharShapeRes* arg /* r30 */) {
                 RFLiTransformCoordinate(&arg->vtxPosBuf[i * VTX_COORDS_IN_POS], temp);
                 ptr16 += VTX_COORDS_IN_POS;
             }
-        }
-        else if (arg->flipX) {
-            int i; // r31+0xB8
+        } else if (arg->flipX) {
+            int i;  // r31+0xB8
 
             for (i = 0; i < arg->vtxPosSize; i++) {
-                s16 temp[3]; // r31+0xF4
-                
+                s16 temp[3];  // r31+0xF4
+
                 temp[0] = -ptr16[0];
-                temp[1] =  ptr16[1];
-                temp[2] =  ptr16[2];
+                temp[1] = ptr16[1];
+                temp[2] = ptr16[2];
 
                 RFLiTransformCoordinate(&arg->vtxPosBuf[i * VTX_COORDS_IN_POS], temp);
                 ptr16 += VTX_COORDS_IN_POS;
             }
-        }
-        else {
-            int i; // r31+0xB4
-            
+        } else {
+            int i;  // r31+0xB4
+
             for (i = 0; i < arg->vtxPosSize; i++) {
                 RFLiTransformCoordinate(&arg->vtxPosBuf[i * VTX_COORDS_IN_POS], ptr16);
                 ptr16 += VTX_COORDS_IN_POS;
@@ -990,32 +988,32 @@ void RFLiInitShapeRes(RFLiCharShapeRes* arg /* r30 */) {
     }
 
     arg->vtxNrmSize = *(u16*)ptr8;
-    RFLi_ASSERTLINE_MSG(arg->vtxNrmSize <= arg->vtxNrmBufSize, 1415, "vtxNrmSize(%d) > vtxNrmBufSize(%d) parts:%d index:%d", arg->vtxNrmSize, arg->vtxNrmBufSize, arg->parts, arg->index);
+    RFLi_ASSERTLINE_MSG(arg->vtxNrmSize <= arg->vtxNrmBufSize, 1415, "vtxNrmSize(%d) > vtxNrmBufSize(%d) parts:%d index:%d", arg->vtxNrmSize,
+                        arg->vtxNrmBufSize, arg->parts, arg->index);
     ptr8 += sizeof(u16);
 
     {
-        u32 byteSize; // r31+0xB0
-        s16* ptr16; // r31+0xAC
+        u32 byteSize;  // r31+0xB0
+        s16* ptr16;    // r31+0xAC
 
         ptr16 = (s16*)ptr8;
         byteSize = SIZE_VTX_NRM(arg->vtxNrmSize);
-    
+
         if (arg->flipX) {
-            int i; // r31+0xA8
+            int i;  // r31+0xA8
 
             for (i = 0; i < arg->vtxNrmSize; i++) {
-                s16 temp[3]; // r31+0xEC
+                s16 temp[3];  // r31+0xEC
 
                 temp[0] = -ptr16[0];
-                temp[1] =  ptr16[1];
-                temp[2] =  ptr16[2];
+                temp[1] = ptr16[1];
+                temp[2] = ptr16[2];
 
                 RFLiTransformCoordinate(&arg->vtxNrmBuf[i * VTX_COORDS_IN_NRM], temp);
                 ptr16 += VTX_COORDS_IN_NRM;
             }
-        }
-        else {
-            int i; // r31+0xA4
+        } else {
+            int i;  // r31+0xA4
             for (i = 0; i < arg->vtxNrmSize; i++) {
                 RFLiTransformCoordinate(&arg->vtxNrmBuf[i * VTX_COORDS_IN_NRM], ptr16);
                 ptr16 += VTX_COORDS_IN_NRM;
@@ -1026,14 +1024,14 @@ void RFLiInitShapeRes(RFLiCharShapeRes* arg /* r30 */) {
     }
 
     {
-        u32 byteSize; // r31+0xA0
+        u32 byteSize;  // r31+0xA0
 
         if (skipTxc) {
             arg->vtxTxcSize = 0;
-        }
-        else {
+        } else {
             arg->vtxTxcSize = *(u16*)ptr8;
-            RFLi_ASSERTLINE_MSG(arg->vtxTxcSize <= arg->vtxTxcBufSize, 1460, "vtxTxcSize(%d) > vtxTxcBufSize(%d) parts:%d index:%d", arg->vtxTxcSize, arg->vtxTxcBufSize, arg->parts, arg->index);
+            RFLi_ASSERTLINE_MSG(arg->vtxTxcSize <= arg->vtxTxcBufSize, 1460, "vtxTxcSize(%d) > vtxTxcBufSize(%d) parts:%d index:%d", arg->vtxTxcSize,
+                                arg->vtxTxcBufSize, arg->parts, arg->index);
             ptr8 += sizeof(u16);
 
             byteSize = SIZE_VTX_TXC(arg->vtxTxcSize);
@@ -1043,17 +1041,18 @@ void RFLiInitShapeRes(RFLiCharShapeRes* arg /* r30 */) {
     }
 
     {
-        int primitiveNum = *ptr8++; // r31+0x9C
-        int i, j; // r31+0x94
+        int primitiveNum = *ptr8++;  // r31+0x9C
+        int i, j;                    // r31+0x94
 
         DCInvalidateRange(arg->dlBuf, arg->dlBufSize);
         GXBeginDisplayList(arg->dlBuf, arg->dlBufSize);
 
         for (i = 0; i < primitiveNum; i++) {
-            u16 vtxNum = *ptr8++; // r31+0x8
-            GXPrimitive prim = *ptr8++; // r31+0x90
+            u16 vtxNum = *ptr8++;        // r31+0x8
+            GXPrimitive prim = *ptr8++;  // r31+0x90
 
-            GXBegin(prim, GX_VTXFMT0, vtxNum); {
+            GXBegin(prim, GX_VTXFMT0, vtxNum);
+            {
                 for (j = 0; j < vtxNum; j++) {
                     GXPosition1x8(*ptr8++);
                     GXNormal1x8(*ptr8++);
@@ -1087,7 +1086,7 @@ void RFLiInitTexRes(GXTexObj* texObj, RFLiPartsShpTex parts, u16 index, void* bu
 
     {
         void* result = RFLiLoadShpTexture(parts, index, res);
-        RFLi_ASSERTLINE_MSG(result, 1537, "ファイルの読み込みに失敗しました。"); // "Failed to read file."
+        RFLi_ASSERTLINE_MSG(result, 1537, "ファイルの読み込みに失敗しました。");  // "Failed to read file."
     }
 
     switch (parts) {
@@ -1108,7 +1107,7 @@ void RFLiInitTexRes(GXTexObj* texObj, RFLiPartsShpTex parts, u16 index, void* bu
             break;
         }
         default: {
-            RFLi_ASSERTLINE_MSG(FALSE, 1558, "無効なパーツの種類です。"); // "Invalid part type."
+            RFLi_ASSERTLINE_MSG(FALSE, 1558, "無効なパーツの種類です。");  // "Invalid part type."
             break;
         }
     }
@@ -1239,21 +1238,19 @@ void RFLCopyCharModel(RFLCharModel* dstCharModel, void* dstBufferPtr, const RFLC
 
     memcpy(dstModel->resource, srcModel->resource, OSRoundUp32B(sizeof(RFLiCharModelRes)));
 
-    #define COPY_TEX(texObj, tex)                                                                           \
-    {                                                                                                       \
-        const GXTexObj* srcTex = &srcRes->texObj;                                                           \
-        GXInitTexObj(&dstRes->texObj, dstRes->tex,  GXGetTexObjWidth(srcTex),                               \
-                                                    GXGetTexObjHeight(srcTex),                              \
-                                                    GXGetTexObjFmt(srcTex),                                 \
-                                                    GXGetTexObjWrapS(srcTex),                               \
-                                                    GXGetTexObjWrapT(srcTex),                               \
-                                                    GX_FALSE);                                              \
-        GXInitTexObjLOD(&dstRes->texObj, GX_LINEAR, GX_LINEAR, 0, 0, 0, GX_FALSE, GX_FALSE, GX_ANISO_1);    \
+#define COPY_TEX(texObj, tex)                                                                                                                        \
+    {                                                                                                                                                \
+        const GXTexObj* srcTex = &srcRes->texObj;                                                                                                    \
+        GXInitTexObj(&dstRes->texObj, dstRes->tex, GXGetTexObjWidth(srcTex), GXGetTexObjHeight(srcTex), GXGetTexObjFmt(srcTex),                      \
+                     GXGetTexObjWrapS(srcTex), GXGetTexObjWrapT(srcTex), GX_FALSE);                                                                  \
+        GXInitTexObjLOD(&dstRes->texObj, GX_LINEAR, GX_LINEAR, 0, 0, 0, GX_FALSE, GX_FALSE, GX_ANISO_1);                                             \
     }
 
     COPY_TEX(texObjFaceline, texFaceline);
-    if (dstRes->dlSizeCap != 0) COPY_TEX(texObjCap, texCap);
-    if (dstRes->dlSizeNoseline != 0) COPY_TEX(texObjNoseline, texNoseline);
+    if (dstRes->dlSizeCap != 0)
+        COPY_TEX(texObjCap, texCap);
+    if (dstRes->dlSizeNoseline != 0)
+        COPY_TEX(texObjNoseline, texNoseline);
     COPY_TEX(texObjGlass, texGlass);
 
     dstRes->vtxPosHair = (s16*)((u32)dstRes + ((u32)srcRes->vtxPosHair - (u32)srcRes));
@@ -1263,7 +1260,7 @@ void RFLCopyCharModel(RFLCharModel* dstCharModel, void* dstBufferPtr, const RFLC
     dstRes->vtxPosForehead = (s16*)((u32)dstRes + ((u32)srcRes->vtxPosForehead - (u32)srcRes));
     dstRes->vtxNrmForehead = (s16*)((u32)dstRes + ((u32)srcRes->vtxNrmForehead - (u32)srcRes));
     dstRes->dlForehead = (u8*)((u32)dstRes + ((u32)srcRes->dlForehead - (u32)srcRes));
-    
+
     DCFlushRangeNoSync(dstRes, OSRoundUp32B(sizeof(*dstRes)));
 
     {
@@ -1309,15 +1306,13 @@ void RFLCopyCharModel(RFLCharModel* dstCharModel, void* dstBufferPtr, const RFLC
                 DCFlushRangeNoSync(dstTexImg, maskTexSize);
 
                 GXInitTexObj(dstModel->maskTexObj[i], dstTexImg, maxResolution, maxResolution, GX_TF_RGB5A3, GX_CLAMP, GX_CLAMP, mipmap);
-            
+
                 if (mipmap) {
                     GXInitTexObjLOD(dstModel->maskTexObj[i], GX_LIN_MIP_LIN, GX_LINEAR, 0, max_lod, 0, GX_FALSE, GX_FALSE, GX_ANISO_1);
-                }
-                else {
+                } else {
                     GXInitTexObjLOD(dstModel->maskTexObj[i], GX_LINEAR, GX_LINEAR, 0, 0, 0, GX_FALSE, GX_FALSE, GX_ANISO_1);
                 }
-            }
-            else {
+            } else {
                 dstModel->maskTexObj[i] = NULL;
             }
         }

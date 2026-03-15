@@ -20,8 +20,7 @@ namespace homebutton {
         float frame;
         if (mAnmType == ANIM_TYPE_BACKWARD) {
             frame = mMaxFrame;
-        }
-        else {
+        } else {
             frame = mMinFrame;
         }
         mFrame = frame;
@@ -61,8 +60,7 @@ namespace homebutton {
                             mFrame = getLastFrame();
                             mbAlternateBack = true;
                         }
-                    }
-                    else {
+                    } else {
                         if ((mFrame -= mDelta) <= mMinFrame) {
                             mFrame = mMinFrame;
                             mbAlternateBack = false;
@@ -73,4 +71,4 @@ namespace homebutton {
             }
         }
     }
-}
+}  // namespace homebutton

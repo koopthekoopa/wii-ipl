@@ -7,10 +7,10 @@
 extern "C" {
 #endif
 
-BOOL    __PADDisableRecalibration(BOOL disable);
+BOOL __PADDisableRecalibration(BOOL disable);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // PRIVATE_PAD_H
+#endif  // PRIVATE_PAD_H

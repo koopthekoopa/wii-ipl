@@ -8,7 +8,7 @@ s32 VFipf_toupper(s32 c) {
 }
 
 void* VFipf_memcpy(void* dst, void* src, u32 length) {
-    u8  *d, *s;
+    u8 *d, *s;
     u32 *ld, *ls;
 
     ld = (u32*)dst;
@@ -30,8 +30,8 @@ void* VFipf_memcpy(void* dst, void* src, u32 length) {
 }
 
 void* VFipf_memset(void* dst, s32 c, u32 length) {
-    u8*  d;
-    u32* ldst, lc;
+    u8* d;
+    u32 *ldst, lc;
 
     d = (u8*)dst;
     while (((u32)d & 3) != 0 && length > 0) {
@@ -56,27 +56,38 @@ void* VFipf_memset(void* dst, s32 c, u32 length) {
 
 u32 VFipf_strlen(const s8* s) {
     s8* t = (s8*)s;
-    while (*t) { t++; }
+    while (*t) {
+        t++;
+    }
     return t - s;
 }
 
 s8* VFipf_strcpy(s8* dst, const s8* src) {
     s8* d = dst;
-    while((*d = *src) != 0) { src++; d++; }
+    while ((*d = *src) != 0) {
+        src++;
+        d++;
+    }
     return dst;
 }
 
 s32 VFipf_strcmp(const s8* s1, const s8* s2) {
     u8 *p1 = (u8*)s1, *p2 = (u8*)s2;
-    while ((*p1 != '\0' && *p2 != '\0') && *p1 == *p2) { p1++; p2++; }
+    while ((*p1 != '\0' && *p2 != '\0') && *p1 == *p2) {
+        p1++;
+        p2++;
+    }
     return *p1 - *p2;
 }
 
 s32 VFipf_strncmp(const s8* s1, const s8* s2, u32 length) {
     u8 *p1 = (u8*)s1, *p2 = (u8*)s2;
     while (length-- > 0) {
-        if (*p1 == '\0' || *p2 == '\0' || *p1 != *p2) { return (*p1 - *p2); }
-        p1++; p2++;
+        if (*p1 == '\0' || *p2 == '\0' || *p1 != *p2) {
+            return (*p1 - *p2);
+        }
+        p1++;
+        p2++;
     }
     return 0;
 }

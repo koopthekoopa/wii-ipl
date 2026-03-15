@@ -8,11 +8,11 @@ namespace nw4r {
         namespace detail {
             NW4R_UT_GET_DERIVED_RUNTIME_TYPEINFO(StrmSound, BasicSound);
 
-            StrmSound::StrmSound(SoundInstanceManager<StrmSound>* manager) :
-            mTempSpecialHandle(NULL),
-            mManager(manager) {}
+            StrmSound::StrmSound(SoundInstanceManager<StrmSound>* manager) : mTempSpecialHandle(NULL), mManager(manager) {
+            }
 
-            bool StrmSound::Prepare(StrmBufferPool* bufferPool, StrmPlayer::StartOffsetType startOffsetType, s32 offset, int voices, StrmPlayer::StrmCallback* callback, u32 callbackData) {
+            bool StrmSound::Prepare(StrmBufferPool* bufferPool, StrmPlayer::StartOffsetType startOffsetType, s32 offset, int voices,
+                                    StrmPlayer::StrmCallback* callback, u32 callbackData) {
                 if (bufferPool == NULL) {
                     return NULL;
                 }
@@ -37,6 +37,6 @@ namespace nw4r {
             void StrmSound::DetachTempSpecialHandle() {
                 mTempSpecialHandle->DetachSound();
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

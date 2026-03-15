@@ -2,7 +2,7 @@
 
 namespace nw4r {
     namespace ut {
-        /* All of RomFont is deadstripped except for one generated weak function of the Font's desctructor. 
+        /* All of RomFont is deadstripped except for one generated weak function of the Font's desctructor.
            All what this does is generate that said weak. */
 
         class RomFont : public Font {
@@ -10,7 +10,7 @@ namespace nw4r {
             virtual ~RomFont() {}
         };
 
-        RomFont::RomFont() :
-        Font() {}
-    }
-}
+        RomFont::RomFont() : Font() {
+        }
+    }  // namespace ut
+}  // namespace nw4r

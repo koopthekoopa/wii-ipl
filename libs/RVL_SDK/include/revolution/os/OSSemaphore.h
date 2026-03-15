@@ -12,12 +12,12 @@ typedef struct OSSemaphore {
     OSThreadQueue queue;
 } OSSemaphore;
 
-void    OSInitSemaphore(OSSemaphore* sem, s32 count);
-s32     OSWaitSemaphore(OSSemaphore* sem);
-s32     OSSignalSemaphore(OSSemaphore* sem);
+void OSInitSemaphore(OSSemaphore* sem, s32 count);
+s32 OSWaitSemaphore(OSSemaphore* sem);
+s32 OSSignalSemaphore(OSSemaphore* sem);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // REVOLUTION_OS_SEMAPHORE_H
+#endif  // REVOLUTION_OS_SEMAPHORE_H

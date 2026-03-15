@@ -9,7 +9,7 @@
 extern "C" {
 #endif
 
-NWC24Err    NWC24iSetNewMsgArrived(u32 flags);
+NWC24Err NWC24iSetNewMsgArrived(u32 flags);
 
 #ifdef __cplusplus
 }

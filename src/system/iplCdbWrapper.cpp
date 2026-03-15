@@ -1,24 +1,30 @@
 #include "system/iplCdbWrapper.h"
 
-#include <revolution/os.h>
 #include <revolution/nand.h>
+#include <revolution/os.h>
 
 #include "system/iplPlayTimeLog.h"
 
 namespace ipl {
     namespace cdb {
         namespace wrapper {
-            BOOL    _condition(CDBErr result, int tries);
-            #define MAX_TRIES   10
+            BOOL _condition(CDBErr result, int tries);
+#define MAX_TRIES 10
 
-            #define CDB_WRAPPER(r)                                          \
-                int tries = 0;                                               \
-                CDBErr result;                                                \
-                do { result = r; } while (_condition(result, ++tries));        \
-                if (tries == MAX_TRIES) { result = CDB_ERROR_FATAL_ERROR; }     \
-                return result;
+#define CDB_WRAPPER(r)                                                                                                                               \
+    int tries = 0;                                                                                                                                   \
+    CDBErr result;                                                                                                                                   \
+    do {                                                                                                                                             \
+        result = r;                                                                                                                                  \
+    } while (_condition(result, ++tries));                                                                                                           \
+    if (tries == MAX_TRIES) {                                                                                                                        \
+        result = CDB_ERROR_FATAL_ERROR;                                                                                                              \
+    }                                                                                                                                                \
+    return result;
 
-            CDBErr  init(void* work)    { CDB_WRAPPER(CDBInit(work)); }
+            CDBErr init(void* work) {
+                CDB_WRAPPER(CDBInit(work));
+            }
 
             BOOL _condition(CDBErr result, int tries) {
                 BOOL bTryAgain = FALSE;
@@ -39,6 +45,6 @@ namespace ipl {
 
                 return bTryAgain;
             }
-        }
-    }
-}
+        }  // namespace wrapper
+    }  // namespace cdb
+}  // namespace ipl

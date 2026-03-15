@@ -12,10 +12,7 @@ namespace nw4r {
                 return instance;
             }
 
-            TaskManager::TaskManager() :
-            mMutex(),
-            mCurrentTask(NULL),
-            mTaskList() {
+            TaskManager::TaskManager() : mMutex(), mCurrentTask(NULL), mTaskList() {
                 OSInitMutex(&mMutex);
                 mHeapHandle = MEMCreateUnitHeap(mTaskArea, sizeof(mTaskArea), 64);
             }
@@ -56,7 +53,8 @@ namespace nw4r {
             }
 
             void TaskManager::Execute() {
-                while (ExecuteSingle()) {}
+                while (ExecuteSingle()) {
+                }
             }
 
             bool TaskManager::ExecuteSingle() {
@@ -97,6 +95,6 @@ namespace nw4r {
                     mCurrentTask->Cancel();
                 }
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

@@ -4,8 +4,8 @@
 
 #include "scene/channelSelect/iplChannelSelect.h"
 
-#include "scene/settingSelect/iplSettingSelectArg.h"
 #include "scene/setting/iplSetting.h"
+#include "scene/settingSelect/iplSettingSelectArg.h"
 
 #include "iplSystem.h"
 
@@ -16,7 +16,7 @@ namespace ipl {
                 System::getHomeButtonMenu()->enableLib();
 
                 switch (mSettingsType) {
-                    case REBOOT_DATA_MANAGEMENT: {  
+                    case REBOOT_DATA_MANAGEMENT: {
                         reserveSceneChange(SCENE_SETTING_BG, (void*)SettingSelectArg::ARG_START_AFTER_REBOOT);
                         break;
                     }
@@ -33,5 +33,5 @@ namespace ipl {
                 requestSceneDestruction();
             }
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

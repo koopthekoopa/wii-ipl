@@ -10,31 +10,31 @@ namespace ipl {
         typedef void (*CreateFunc)(void*);
         typedef BOOL (*CalcFunc)(int);
         typedef void (*ThreadCalcFunc)();
-        
+
         class RsoThread : public utility::ut_thread {
-            public:
-                /** @param heap The work heap used. */
-                RsoThread(EGG::Heap* heap);
-                virtual         ~RsoThread();   // 0x08
-                
-                virtual void*   Run();          // 0x0C
+        public:
+            /** @param heap The work heap used. */
+            RsoThread(EGG::Heap* heap);
+            virtual ~RsoThread();  // 0x08
 
-                void            start();
-                /** @param func The new loop function. */
-                void            setCalcFunc(ThreadCalcFunc func);
+            virtual void* Run();  // 0x0C
 
-                OSMessageQueue* getCalcQueue()  { return &mCalcQueue; }
-            
-            private:
-                u8*             mpStack;        // 0x32C
-                
-                bool            mbStarted;      // 0x330
+            void start();
+            /** @param func The new loop function. */
+            void setCalcFunc(ThreadCalcFunc func);
 
-                ThreadCalcFunc  mpCalcFunc;     // 0x334
-                OSMessageQueue  mCalcQueue;     // 0x338
-                OSMessage       mCalcMsg;       // 0x358
+            OSMessageQueue* getCalcQueue() { return &mCalcQueue; }
+
+        private:
+            u8* mpStack;  // 0x32C
+
+            bool mbStarted;  // 0x330
+
+            ThreadCalcFunc mpCalcFunc;  // 0x334
+            OSMessageQueue mCalcQueue;  // 0x338
+            OSMessage mCalcMsg;         // 0x358
         };
-    }
-}
+    }  // namespace channel
+}  // namespace ipl
 
-#endif // IPL_CHANNEL_RSO_THREAD_H
+#endif  // IPL_CHANNEL_RSO_THREAD_H

@@ -1,6 +1,7 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
+// clang-format off
 #include "utility/iplTree.h"
 #include "utility/iplQueue.h"
 #include "utility/iplTimer.h"
@@ -19,5 +20,6 @@
 #include "utility/iplScroller.h"
 
 #include "utility/iplMisc.h"
+// clang-format on
 
-#endif // UTILITY_H
+#endif  // UTILITY_H

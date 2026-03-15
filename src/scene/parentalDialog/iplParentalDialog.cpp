@@ -2,8 +2,8 @@
 
 #include "scene/parentalDialog/iplParentalDialog.h"
 
-#include "iplSystem.h"
 #include "iplSound.h"
+#include "iplSystem.h"
 
 #include <revolution/sc.h>
 
@@ -14,23 +14,17 @@
 
 namespace ipl {
     namespace scene {
+        // clang-format off
         const char* ParentalDialog::mscButtonName[ParentalDialog::BTN_MAX] = {
             "B_BtnA",
             "B_BtnB",
             "B_BtnC",
         };
+        // clang-format on
 
-        ParentalDialog::ParentalDialog(EGG::Heap* heap, int type) :
-        FaderSceneBase(heap),
-        mState(STATE_NORMAL),
-        mpLayout(NULL),
-        mpLayoutFile(NULL),
-        mpEvent(NULL),
-        mpGui(NULL),
-        mDialogType(type),
-        mResult(RESULT_NONE),
-        mbInputPin(false),
-        mAttempts(0) {
+        ParentalDialog::ParentalDialog(EGG::Heap* heap, int type)
+            : FaderSceneBase(heap), mState(STATE_NORMAL), mpLayout(NULL), mpLayoutFile(NULL), mpEvent(NULL), mpGui(NULL), mDialogType(type),
+              mResult(RESULT_NONE), mbInputPin(false), mAttempts(0) {
             for (int i = 0; i < BTN_MAX; i++) {
                 mbHovered[i] = FALSE;
             }
@@ -47,20 +41,20 @@ namespace ipl {
             mpLayout = new layout::Object(getSceneHeap(), mpLayoutFile, "arc", "my_ParentalWindow_a.brlyt");
 
             // Bind animations
-            mpLayout->bindToGroup("my_ParentalWindow_a_DialogIn.brlan",     "G_InOut", false);
-            mpLayout->bindToGroup("my_ParentalWindow_a_DialogOut.brlan",    "G_InOut", false, false);
-            mpLayout->bindToGroup("my_ParentalWindow_a_FocusBtn_on.brlan",  "G_FocusBtnA", false, false);
+            mpLayout->bindToGroup("my_ParentalWindow_a_DialogIn.brlan", "G_InOut", false);
+            mpLayout->bindToGroup("my_ParentalWindow_a_DialogOut.brlan", "G_InOut", false, false);
+            mpLayout->bindToGroup("my_ParentalWindow_a_FocusBtn_on.brlan", "G_FocusBtnA", false, false);
             mpLayout->bindToGroup("my_ParentalWindow_a_FocusBtn_off.brlan", "G_FocusBtnA", false, false);
             mpLayout->bindToGroup("my_ParentalWindow_a_SelectBtn_Ac.brlan", "G_FocusBtnA", false, false);
-            mpLayout->bindToGroup("my_ParentalWindow_a_FocusBtn_on.brlan",  "G_FocusBtnB", false, false);
+            mpLayout->bindToGroup("my_ParentalWindow_a_FocusBtn_on.brlan", "G_FocusBtnB", false, false);
             mpLayout->bindToGroup("my_ParentalWindow_a_FocusBtn_off.brlan", "G_FocusBtnB", false, false);
             mpLayout->bindToGroup("my_ParentalWindow_a_SelectBtn_Ac.brlan", "G_FocusBtnB", false, false);
-            mpLayout->bindToGroup("my_ParentalWindow_a_FocusBtn_on.brlan",  "G_FocusBtnC", false, false);
+            mpLayout->bindToGroup("my_ParentalWindow_a_FocusBtn_on.brlan", "G_FocusBtnC", false, false);
             mpLayout->bindToGroup("my_ParentalWindow_a_FocusBtn_off.brlan", "G_FocusBtnC", false, false);
             mpLayout->bindToGroup("my_ParentalWindow_a_SelectBtn_Ac.brlan", "G_FocusBtnC", false, false);
-            mpLayout->bindToGroup("my_ParentalWindow_a_BeforeAfter.brlan",  "G_BrforeAfter", false, false);
-            mpLayout->bindToGroup("my_ParentalWindow_a_OffBtn.brlan",       "G_OnOffBtnB", false, false);
-            mpLayout->bindToGroup("my_ParentalWindow_a_OnBtn.brlan",        "G_OnOffBtnB", false, false);
+            mpLayout->bindToGroup("my_ParentalWindow_a_BeforeAfter.brlan", "G_BrforeAfter", false, false);
+            mpLayout->bindToGroup("my_ParentalWindow_a_OffBtn.brlan", "G_OnOffBtnB", false, false);
+            mpLayout->bindToGroup("my_ParentalWindow_a_OnBtn.brlan", "G_OnOffBtnB", false, false);
             mpLayout->finishBinding();
 
             // Setup interface
@@ -173,8 +167,7 @@ namespace ipl {
                     if (state->wcString != NULL) {
                         if (*state->wcString == 0) {
                             System::getKeyboard()->memoMgr()->setTitleText(System::getMessage(MESG_PARENTAL_DLG_NO_PIN));
-                        }
-                        else {
+                        } else {
                             System::getKeyboard()->memoMgr()->setTitleText(L"");
                         }
                     }
@@ -194,8 +187,7 @@ namespace ipl {
                         mpLayout->getAnim(ANIM_CHANGE_INPUT_BUTTON)->setAnmType(ANIM_TYPE_BACKWARD);
                         mpLayout->getAnim(ANIM_CHANGE_INPUT_BUTTON)->play();
                         mState = STATE_NORMAL;
-                    }
-                    else {
+                    } else {
                         // Exit out if too many attempts
                         mResult = RESULT_OVER_ATTEMPTS;
                         mState = STATE_DONE;
@@ -291,11 +283,11 @@ namespace ipl {
 
                             if (check()) {
                                 // Correct!!
-                                System::getDialog()->callBtn0(mDialogType == TYPE_GAME ? MESG_PARENTAL_DLG_SUCCESS : MESG_PARENTAL_DLG_SUCCESS_TEMP, 180);
+                                System::getDialog()->callBtn0(mDialogType == TYPE_GAME ? MESG_PARENTAL_DLG_SUCCESS : MESG_PARENTAL_DLG_SUCCESS_TEMP,
+                                                              180);
                                 mResult = RESULT_SUCCESS;
                                 mState = STATE_WAIT_MSG;
-                            }
-                            else {
+                            } else {
                                 // Incorrect!!
                                 mAttempts++;
                                 System::getDialog()->callBtn1(MESG_PARENTAL_DLG_BAD_PIN, MESG_CMN_OK);
@@ -327,7 +319,7 @@ namespace ipl {
                         System::getKeyboard()->memoMgr()->setTitleText(System::getMessage(MESG_PARENTAL_DLG_NO_PIN));
 
                         mState = STATE_WAIT_INPUT;
-                        
+
                         break;
                     }
                 }
@@ -353,11 +345,11 @@ namespace ipl {
         }
 
         BOOL ParentalDialog::check() const {
-            u8 myPin[SC_PARENTAL_PASSWORD_LENGTH+1];
+            u8 myPin[SC_PARENTAL_PASSWORD_LENGTH + 1];
 
             SCParentalControlsInfo pcInfo;
 
-            BOOL pcInfoResult= SCGetParentalControl(&pcInfo);
+            BOOL pcInfoResult = SCGetParentalControl(&pcInfo);
             memset(myPin, 0, sizeof(myPin));
             utility::CharacterCode::UTF16ToANSI(myPin, mMyPin, SC_PARENTAL_PASSWORD_LENGTH);
 
@@ -401,5 +393,5 @@ namespace ipl {
                 }
             }
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

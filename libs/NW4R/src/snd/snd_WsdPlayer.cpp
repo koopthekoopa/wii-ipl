@@ -1,5 +1,5 @@
-#include <nw4r/snd/WsdPlayer.h>
 #include <nw4r/snd/DisposeCallbackManager.h>
+#include <nw4r/snd/WsdPlayer.h>
 
 #include <nw4r/snd/AxManager.h>
 
@@ -12,12 +12,8 @@ namespace nw4r {
                 WsdPlayerList sPlayerList;
             }
 
-            WsdPlayer::WsdPlayer() :
-            BasicPlayer(),
-            DisposeCallback(),
-            mPlayerLink(),
-            mActiveFlag(false),
-            mTrack() {}
+            WsdPlayer::WsdPlayer() : BasicPlayer(), DisposeCallback(), mPlayerLink(), mActiveFlag(false), mTrack() {
+            }
 
             void WsdPlayer::InitParam(int voices, const WsdTrack::WsdCallback* callback, u32 callbackData) {
                 mPreparedFlag = false;
@@ -36,7 +32,7 @@ namespace nw4r {
                 mOutputLineFlag = OUTPUT_LINE_MAIN;
                 mMainOutVolume = 1.0f;
                 mMainSend = 0.0f;
-                for (int i = 0; i<AUX_BUS_NUM; i++) {
+                for (int i = 0; i < AUX_BUS_NUM; i++) {
                     mFxSend[i] = 0.0f;
                 }
                 for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
@@ -197,7 +193,7 @@ namespace nw4r {
                 mPriority = static_cast<u8>(prio);
             }
 
-            void WsdPlayer::InvalidateData(const void* start, const void* end)  {
+            void WsdPlayer::InvalidateData(const void* start, const void* end) {
                 ut::AutoInterruptLock lock;
 
                 if (mActiveFlag) {
@@ -230,15 +226,13 @@ namespace nw4r {
 
                 if (mTrack.ParseNextTick(mCallback, mCallbackData, doNoteOn) >= 0) {
                     active = true;
-                }
-                else {
+                } else {
                     mTrack.Close();
                 }
 
                 if (!active) {
                     return TRUE;
-                }
-                else {
+                } else {
                     return FALSE;
                 }
             }
@@ -278,6 +272,6 @@ namespace nw4r {
                     currIt->Stop();
                 }
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

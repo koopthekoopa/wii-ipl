@@ -5,8 +5,8 @@
 
 #include <egg/core/eggDisposer.h>
 
-#include <revolution/types.h>
 #include <revolution/mem/heapCommon.h>
+#include <revolution/types.h>
 
 #include <revolution/os/OSInterrupt.h>
 
@@ -15,57 +15,52 @@
 namespace EGG {
     class Allocator;
     class Heap : Disposer {
-        public:
-            typedef enum HeapKind {
-                HEAP_EXPANDED = 1,
-                HEAP_FRAME = 2
-            } HeapKind;
+    public:
+        typedef enum HeapKind { HEAP_EXPANDED = 1, HEAP_FRAME = 2 } HeapKind;
 
-            static void         initialize();
-            
-            virtual ~Heap();                                                        // 0x08
+        static void initialize();
 
-            virtual HeapKind    getHeapKind() const = 0;                            // 0x0C
+        virtual ~Heap();  // 0x08
 
-            virtual void        initAllocator(Allocator* allocator, s32 align) = 0; // 0x10
+        virtual HeapKind getHeapKind() const = 0;  // 0x0C
 
-            virtual void*       alloc(u32 size, s32 align) = 0;                     // 0x14
-            virtual void        free(void* buffer) = 0;                             // 0x18
+        virtual void initAllocator(Allocator* allocator, s32 align) = 0;  // 0x10
 
-            virtual void        destroy() = 0;                                      // 0x1C
-            
-            virtual void        resizeForMBlock(void* block, u32 size) = 0;         // 0x20
-            
-            virtual u32         getAllocatableSize(s32 align = 4) = 0;              // 0x24
+        virtual void* alloc(u32 size, s32 align) = 0;  // 0x14
+        virtual void free(void* buffer) = 0;           // 0x18
 
-            virtual void        adjust() = 0;                                       // 0x28
+        virtual void destroy() = 0;  // 0x1C
 
-            void                becomeCurrentHeap();
+        virtual void resizeForMBlock(void* block, u32 size) = 0;  // 0x20
 
-            void                dump();
+        virtual u32 getAllocatableSize(s32 align = 4) = 0;  // 0x24
 
-            void                _becomeCurrentHeapWithoutLock();
-            void unkUnline1(int id = 0) {
-                BOOL enabled = OSDisableInterrupts();
-                _becomeCurrentHeapWithoutLock();
-                OSSetThreadSpecific(id, this);
-                OSRestoreInterrupts(enabled);
-            }
-            static Heap* unkInline2(int id = 0) {
-                return (Heap*)OSGetThreadSpecific(id);
-            }
+        virtual void adjust() = 0;  // 0x28
+
+        void becomeCurrentHeap();
+
+        void dump();
+
+        void _becomeCurrentHeapWithoutLock();
+        void unkUnline1(int id = 0) {
+            BOOL enabled = OSDisableInterrupts();
+            _becomeCurrentHeapWithoutLock();
+            OSSetThreadSpecific(id, this);
+            OSRestoreInterrupts(enabled);
+        }
+        static Heap* unkInline2(int id = 0) { return (Heap*)OSGetThreadSpecific(id); }
     };
-}
+}  // namespace EGG
 
-void* operator  new(size_t size);
-void* operator  new(size_t size, int align);
-void* operator  new(size_t size, EGG::Heap *heap, int align = 4);
+void* operator new(size_t size);
+void* operator new(size_t size, int align);
+void* operator new(size_t size, EGG::Heap* heap, int align = 4);
 
-void* operator  new[](size_t size);
-void* operator  new[](size_t size, int align);
-void* operator  new[](size_t size, EGG::Heap *heap, int align = 4);
+void* operator new[](size_t size);
+void* operator new[](size_t size, int align);
+void* operator new[](size_t size, EGG::Heap* heap, int align = 4);
 
-void operator   delete(void* ptr);
-void operator   delete[](void* ptr);
+void operator delete(void* ptr);
+void operator delete[](void* ptr);
 
-#endif // EGG_CORE_HEAP_H
+#endif  // EGG_CORE_HEAP_H

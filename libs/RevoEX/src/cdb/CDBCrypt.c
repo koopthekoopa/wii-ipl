@@ -1,5 +1,5 @@
-#include <revolution/cdb.h>
 #include <private/cdb.h>
+#include <revolution/cdb.h>
 
 static CDBCryptBuf* s_cryptBuf;
 
@@ -17,8 +17,7 @@ CDBErr CDBCryptBufAllocate(CDBCryptBuf* cryptBuf) {
         cryptBuf->buffer32[0] = (u32)s_cryptBuf;
         s_cryptBuf->allocated = TRUE;
         return CDB_ERROR_OK;
-    }
-    else {
+    } else {
         CDBReportError("failed to allocate crypt buffer\n");
         return CDB_ERROR_CRYPT_ALLOC_FAIL;
     }
@@ -31,8 +30,7 @@ CDBErr CDBCryptBufFree(CDBCryptBuf* cryptBuf) {
         s_cryptBuf->allocated = FALSE;
         *cryptBuf->buffer32 = 0;
         return CDB_ERROR_OK;
-    }
-    else {
+    } else {
         CDBReportError("failed to free crypt buffer\n");
         return CDB_ERROR_1;
     }

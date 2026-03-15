@@ -7,12 +7,12 @@
 extern "C" {
 #endif
 
-BOOL    __OSSetRTC(u32  rtc);
-BOOL    __OSGetRTC(u32* rtc);
+BOOL __OSSetRTC(u32 rtc);
+BOOL __OSGetRTC(u32* rtc);
 
-BOOL    __OSGetRTCFlags(u32* flags);
+BOOL __OSGetRTCFlags(u32* flags);
 
-BOOL    __OSClearRTCFlags();
+BOOL __OSClearRTCFlags();
 
 // From Dolphin Emulator.
 enum {
@@ -24,4 +24,4 @@ enum {
 }
 #endif
 
-#endif // PRIVATE_OS_RTC_H
+#endif  // PRIVATE_OS_RTC_H

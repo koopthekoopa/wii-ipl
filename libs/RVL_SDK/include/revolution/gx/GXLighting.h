@@ -1,14 +1,13 @@
 #ifndef REVOLUTION_GX_LIGHTING_H
 #define REVOLUTION_GX_LIGHTING_H
 
-#include <revolution/types.h>
-#include <revolution/gx/GXStruct.h>
 #include <revolution/gx/GXEnum.h>
+#include <revolution/gx/GXStruct.h>
+#include <revolution/types.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 
 void GXInitLightPos(GXLightObj* lt_obj, f32 x, f32 y, f32 z);
 void GXInitLightColor(GXLightObj* lt_obj, GXColor color);
@@ -26,4 +25,4 @@ void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src, GXColorS
 }
 #endif
 
-#endif // REVOLUTION_GX_LIGHTING_H
+#endif  // REVOLUTION_GX_LIGHTING_H

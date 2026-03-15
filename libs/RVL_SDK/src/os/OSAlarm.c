@@ -1,5 +1,6 @@
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
+
 
 #include <private/dvd.h>
 
@@ -16,11 +17,9 @@ static void SetTimer(const OSAlarm* alarm) {
 
     if (timeLeft < 0) {
         PPCMtdec(0);
-    }
-    else if (timeLeft < 0x80000000) {
+    } else if (timeLeft < 0x80000000) {
         PPCMtdec(timeLeft);
-    }
-    else {
+    } else {
         PPCMtdec(0x7FFFFFFF);
     }
 }
@@ -70,8 +69,7 @@ static void InsertAlarm(OSAlarm* alarm, OSTime end, OSAlarmHandler handler) {
         prev = alarm->prev;
         if (prev != NULL) {
             prev->next = alarm;
-        }
-        else {
+        } else {
             AlarmQueue.head = alarm;
             SetTimer(alarm);
         }
@@ -86,8 +84,7 @@ static void InsertAlarm(OSAlarm* alarm, OSTime end, OSAlarmHandler handler) {
 
     if (prev != NULL) {
         prev->next = alarm;
-    }
-    else {
+    } else {
         AlarmQueue.tail = alarm;
         AlarmQueue.head = alarm;
         SetTimer(alarm);
@@ -126,15 +123,13 @@ void OSCancelAlarm(OSAlarm* alarm) {
     next = alarm->next;
     if (next == NULL) {
         AlarmQueue.tail = alarm->prev;
-    }
-    else {
+    } else {
         next->prev = alarm->prev;
     }
 
     if (alarm->prev != NULL) {
         alarm->prev->next = next;
-    }
-    else {
+    } else {
         AlarmQueue.head = next;
         if (next != NULL) {
             SetTimer(next);
@@ -169,8 +164,7 @@ static void DecrementerExceptionCallback(__OSException type, OSContext* context)
     AlarmQueue.head = next;
     if (next == NULL) {
         AlarmQueue.tail = NULL;
-    }
-    else {
+    } else {
         next->prev = NULL;
     }
 
@@ -199,6 +193,7 @@ static void DecrementerExceptionCallback(__OSException type, OSContext* context)
 }
 
 static asm void DecrementerExceptionHandler(register __OSException exception, register OSContext* context) {
+    // clang-format off
 #ifdef __MWERKS__
     nofralloc
 
@@ -225,6 +220,7 @@ static asm void DecrementerExceptionHandler(register __OSException exception, re
     stwu    r1, -0x08(r1)
     b       DecrementerExceptionCallback
 #endif // __MWERKS__
+    // clang-format on
 }
 
 void OSSetAlarmTag(OSAlarm* alarm, u32 tag) {

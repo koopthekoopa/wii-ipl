@@ -1,8 +1,8 @@
 #ifndef REVOLUTION_GX_CPU_TO_EFB_H
 #define REVOLUTION_GX_CPU_TO_EFB_H
 
-#include <revolution/types.h>
 #include <revolution/gx/GXStruct.h>
+#include <revolution/types.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -26,4 +26,4 @@ void GXPokeZMode(GXBool compare_enable, GXCompare func, GXBool update_enable);
 }
 #endif
 
-#endif // REVOLUTION_GX_CPU_TO_EFB_H
+#endif  // REVOLUTION_GX_CPU_TO_EFB_H

@@ -1,7 +1,7 @@
 #include "system/iplHomeButton.h"
 
-#include "iplSystem.h"
 #include "iplSound.h"
+#include "iplSystem.h"
 
 #include "config.h"
 
@@ -20,8 +20,7 @@ namespace ipl {
             case HBMSEV_BEGIN_BLACKOUT: {
                 if (exitAnm) {
                     return snd::getSystem()->resetAllSound();
-                }
-                else {
+                } else {
                     return snd::getSystem()->pauseOffBGM();
                 }
             }
@@ -37,20 +36,15 @@ namespace ipl {
         return event;
     }
 
-    HomeButtonMenu::HomeButtonMenu(EGG::Heap* heap) :
-    mbHbmEnabled(false),
-    mEnableFlag(true),
-    mEnableByTVRCFlag(true),
-    mDisableByTVRCFlag(false),
-    mDisableFlag(false),
-    mbHBMLibEnabled(false),
-    mbBanIconEnabled(false) {
+    HomeButtonMenu::HomeButtonMenu(EGG::Heap* heap)
+        : mbHbmEnabled(false), mEnableFlag(true), mEnableByTVRCFlag(true), mDisableByTVRCFlag(false), mDisableFlag(false), mbHBMLibEnabled(false),
+          mbBanIconEnabled(false) {
         mpMessageFile = System::getHBMMessageFile();
         mpConfigFile = System::getHBMConfigFile();
         mpSpeakerSoundFile = System::getHBMSpeakSoundFile();
         mpBanIconFile = System::getHBMBanIconFile();
 
-        mpHbmInfo = new(heap, 4) HBMDataInfo();
+        mpHbmInfo = new (heap, 4) HBMDataInfo();
 
         mpHbmInfo->backFlag = 0;
         mpHbmInfo->region = SCGetLanguage();
@@ -59,11 +53,11 @@ namespace ipl {
 
         mpHbmInfo->adjust.x = 1.3684211f;
         mpHbmInfo->adjust.y = 1.0f;
-    #ifdef IMPROVE_PAL50_HBM_DELTA
+#ifdef IMPROVE_PAL50_HBM_DELTA
         mpHbmInfo->frameDelta = System::getAnimDelta();
-    #else
+#else
         mpHbmInfo->frameDelta = 1.0f;
-    #endif // IMPROVE_PAL50_HBM_DELTA
+#endif  // IMPROVE_PAL50_HBM_DELTA
 
         mpHbmInfo->layoutBuf = System::getHBMLayoutFile()->getBuffer();
         mpHbmInfo->lytLangBuf = System::getHBMLangFile()->getBuffer();
@@ -89,7 +83,7 @@ namespace ipl {
         utility::Graphics::setDefaultOrtho();
 
         TPLGetGXTexObjFromPalette((TPLPalette*)mpBanIconFile->getBuffer(), &texObj, 0);
-        GXColor color = (GXColor){ 255, 255, 255, alpha };
+        GXColor color = (GXColor){255, 255, 255, alpha};
         nw4r::ut::Rect rect(-256.0f, 188.0f, -200.0f, 132.0f);
 
         utility::Graphics::drawTexture(rect, texObj, color, 1);
@@ -108,8 +102,7 @@ namespace ipl {
             HBMInit();
 
             mbHbmEnabled = true;
-        }
-        else {
+        } else {
             if (!mbBanIconEnabled) {
                 mbBanIconEnabled = true;
                 mBanIconTime = OSGetTick();
@@ -147,8 +140,7 @@ namespace ipl {
         }
 
         if (!System::getResetHandler()->isResetting()) {
-            if (!mbHbmEnabled && !mbBanIconEnabled
-            && System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT) {
+            if (!mbHbmEnabled && !mbBanIconEnabled && System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT) {
                 checkStart();
             }
 
@@ -160,11 +152,10 @@ namespace ipl {
                         mConData.wiiCon[i].kpad = con->getKPADStatus();
                         mConData.wiiCon[i].pos.x = con->getDpdPos().x;
                         mConData.wiiCon[i].pos.y = con->getDpdPos().y;
-                        if (con->getType() == WPAD_DEV_CLASSIC && reinterpret_cast<controller::Classic*>(con)->isValidDpdClassic())  {
+                        if (con->getType() == WPAD_DEV_CLASSIC && reinterpret_cast<controller::Classic*>(con)->isValidDpdClassic()) {
                             mConData.wiiCon[i].use_devtype = WPAD_DEV_CLASSIC;
                         }
-                    }
-                    else {
+                    } else {
                         mConData.wiiCon[i].kpad = NULL;
                     }
                 }
@@ -176,11 +167,9 @@ namespace ipl {
                     System::getResetHandler()->reset();
                 }
             }
-        }
-        else {
+        } else {
             mEnableFlag = false;
-            if (!mbHbmEnabled && !mbBanIconEnabled
-            && System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT) {
+            if (!mbHbmEnabled && !mbBanIconEnabled && System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT) {
                 checkStart();
             }
         }
@@ -232,8 +221,7 @@ namespace ipl {
         if (mbHbmEnabled) {
             mDisableFlag = true;
             return FALSE;
-        }
-        else {
+        } else {
             mEnableFlag = false;
             return TRUE;
         }
@@ -248,8 +236,7 @@ namespace ipl {
         if (mbHbmEnabled) {
             mDisableByTVRCFlag = true;
             return FALSE;
-        }
-        else {
+        } else {
             mEnableByTVRCFlag = false;
             return TRUE;
         }
@@ -263,7 +250,7 @@ namespace ipl {
     HBMSelectBtnNum HomeButtonMenu::getSelectBtnNum() {
         HBMSelectBtnNum num = HBMGetSelectBtnNum();
 
-        if (num >= HBM_SELECT_NULL+1) {
+        if (num >= HBM_SELECT_NULL + 1) {
             if (mDisableFlag) {
                 mDisableFlag = false;
                 mEnableFlag = false;
@@ -273,4 +260,4 @@ namespace ipl {
 
         return num;
     }
-}
+}  // namespace ipl

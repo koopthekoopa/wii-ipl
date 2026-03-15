@@ -7,8 +7,8 @@
 extern "C" {
 #endif
 
-#define ODHGetWorkSizeByWidthHeight(w, h)   ((w * h) * 3)
-#define ODHGetWorkSize(s)                   (s * 3)
+#define ODHGetWorkSizeByWidthHeight(w, h) ((w * h) * 3)
+#define ODHGetWorkSize(s) (s * 3)
 
 int ODHEncodeRGB565(u8* src, u8* dest, int width, int height, u32 sizeLimit, int quality, u8* work);
 int ODHEncodeRGBA8(u8* src, u8* dest, int width, int height, u32 sizeLimit, int quality, u8* work);
@@ -25,4 +25,4 @@ int ODHGetHeight(u8* data);
 }
 #endif
 
-#endif // ODH_H
+#endif  // ODH_H

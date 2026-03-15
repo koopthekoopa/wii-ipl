@@ -6,13 +6,13 @@
 namespace ipl {
     namespace scene {
         FADER_SCENE_CLASS(SDChannelSelect) {
-            public:
-                SDChannelSelect(EGG::Heap* heap);
+        public:
+            SDChannelSelect(EGG::Heap * heap);
 
-            private:
-                u8  unk_0x58[0x728];
+        private:
+            u8 unk_0x58[0x728];
         };
-    }
-}
+    }  // namespace scene
+}  // namespace ipl
 
-#endif // IPL_SCENE_SD_CHANNEL_SELECT_H
+#endif  // IPL_SCENE_SD_CHANNEL_SELECT_H

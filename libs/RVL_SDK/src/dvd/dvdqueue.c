@@ -1,5 +1,5 @@
-#include <revolution/dvd.h>
 #include <private/dvd.h>
+#include <revolution/dvd.h>
 
 #include <revolution/os.h>
 
@@ -8,7 +8,7 @@ typedef struct Queue {
     DVDCommandBlock* prev;  // 0x04
 } Queue;
 
-#define MAX_QUEUE   4
+#define MAX_QUEUE 4
 
 static Queue WaitingQueue[MAX_QUEUE];
 
@@ -37,7 +37,7 @@ BOOL __DVDPushWaitingQueue(s32 prio, DVDCommandBlock* block) {
 }
 
 static DVDCommandBlock* PopWaitingQueuePrio(s32 prio) {
-    DVDCommandBlock* tmp, *block;
+    DVDCommandBlock *tmp, *block;
 
     BOOL enabled = OSDisableInterrupts();
     block = (DVDCommandBlock*)&WaitingQueue[prio];
@@ -93,8 +93,8 @@ BOOL __DVDCheckWaitingQueue() {
 
 DVDCommandBlock* __DVDGetNextWaitingQueue() {
     int i;
-    DVDCommandBlock*    block;
-    DVDCommandBlock*    next;
+    DVDCommandBlock* block;
+    DVDCommandBlock* next;
 
     BOOL enabled = OSDisableInterrupts();
 
@@ -113,8 +113,8 @@ DVDCommandBlock* __DVDGetNextWaitingQueue() {
 }
 
 BOOL __DVDDequeueWaitingQueue(DVDCommandBlock* block) {
-    DVDCommandBlock*    prev;
-    DVDCommandBlock*    next;
+    DVDCommandBlock* prev;
+    DVDCommandBlock* next;
 
     BOOL enabled = OSDisableInterrupts();
 

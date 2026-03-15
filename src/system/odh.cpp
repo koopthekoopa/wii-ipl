@@ -16,12 +16,12 @@ enum {
 };
 
 class CArGBAOdh {
-    public:
-        s32 decompressGbaOdh(u8* src, int srcSize, u8* dest, int destSize, u8* work, int unk, int format);
-        s32 compressGbaOdh(u8* src, u8* dest, int width, int height, int quality, u32 sizeLimit, u8* work, int format);
+  public:
+    s32 decompressGbaOdh(u8* src, int srcSize, u8* dest, int destSize, u8* work, int unk, int format);
+    s32 compressGbaOdh(u8* src, u8* dest, int width, int height, int quality, u32 sizeLimit, u8* work, int format);
 
-    private:
-        s32 ScaleLimit(s32 scale);
+  private:
+    s32 ScaleLimit(s32 scale);
 };
 
 int ODHEncodeRGB565(u8* src, u8* dest, int width, int height, u32 sizeLimit, int quality, u8* work) {
@@ -67,13 +67,12 @@ int ODHGetHeight(u8* data) {
 
 s32 CArGBAOdh::ScaleLimit(s32 scale) {
     s32 newScale = scale;
-    
+
     if (newScale < 0) {
         newScale = 0;
-    }
-    else if (scale > 255) {
+    } else if (scale > 255) {
         newScale = 255;
     }
-    
+
     return newScale;
 }

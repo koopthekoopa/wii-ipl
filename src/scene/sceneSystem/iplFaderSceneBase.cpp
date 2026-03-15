@@ -2,9 +2,8 @@
 
 namespace ipl {
     namespace scene {
-        FaderSceneBase::FaderSceneBase(EGG::Heap* heap) :
-        Base(heap),
-        mScnFadeState(STT_FADE_IN) {}
+        FaderSceneBase::FaderSceneBase(EGG::Heap* heap) : Base(heap), mScnFadeState(STT_FADE_IN) {
+        }
 
         void FaderSceneBase::calc() {
             if (mScnFadeState != STT_DONE) {
@@ -45,5 +44,5 @@ namespace ipl {
                 calcCommonAfter();
             }
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

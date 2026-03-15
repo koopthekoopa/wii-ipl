@@ -2,8 +2,8 @@
 #include <private/os.h>
 #include <revolution/os.h>
 
-#include <revolution/gx.h>
 #include <private/gx.h>
+#include <revolution/gx.h>
 
 #include <private/hollywood.h>
 
@@ -14,6 +14,7 @@
 static void WriteProjPS(const register f32 proj[6], register volatile void* dest) {
     register f32 p01, p23, p45;
 
+    // clang-format off
 #ifdef __MWERKS__
     asm volatile {
         psq_l  p01,  0(proj), 0, 0
@@ -24,11 +25,13 @@ static void WriteProjPS(const register f32 proj[6], register volatile void* dest
         psq_st p45,  0(dest), 0, 0
     }
 #endif // __MWERKS__
+    // clang-format on
 }
 
 inline void Copy6Floats(const register f32* dst, register const f32* src) {
     register f32 ps_0, ps_1, ps_2;
 
+    // clang-format off
 #ifdef __MWERKS__
     asm volatile {
         psq_l  ps_0,  0(src), 0, 0
@@ -39,6 +42,7 @@ inline void Copy6Floats(const register f32* dst, register const f32* src) {
         psq_st ps_2, 16(dst), 0, 0
     }
 #endif // __MWERKS__
+    // clang-format on
 }
 
 static void WriteMTXPS4x3(const register f32 mtx[3][4], register volatile f32* dest) {
@@ -49,6 +53,7 @@ static void WriteMTXPS4x3(const register f32 mtx[3][4], register volatile f32* d
     register f32 a20_a21;
     register f32 a22_a23;
 
+    // clang-format off
 #ifdef __MWERKS__
     asm volatile {
         psq_l a00_a01, 0x00(mtx), 0, 0
@@ -65,6 +70,7 @@ static void WriteMTXPS4x3(const register f32 mtx[3][4], register volatile f32* d
         psq_st a22_a23, 0(dest), 0, 0
     }
 #endif // __MWERKS__
+    // clang-format on
 }
 
 static void WriteMTXPS3x3from3x4(register f32 mtx[3][4], register volatile f32* dest) {
@@ -75,6 +81,7 @@ static void WriteMTXPS3x3from3x4(register f32 mtx[3][4], register volatile f32* 
     register f32 a20_a21;
     register f32 a22_a23;
 
+    // clang-format off
 #ifdef __MWERKS__
     asm volatile {
         psq_l  a00_a01, 0x00(mtx), 0, 0
@@ -91,6 +98,7 @@ static void WriteMTXPS3x3from3x4(register f32 mtx[3][4], register volatile f32* 
         stfs   a22_a23, 0(dest)
     }
 #endif // __MWERKS__
+    // clang-format on
 }
 
 static void WriteMTXPS4x2(const register f32 mtx[2][4], register volatile f32* dest) {
@@ -99,6 +107,7 @@ static void WriteMTXPS4x2(const register f32 mtx[2][4], register volatile f32* d
     register f32 a10_a11;
     register f32 a12_a13;
 
+    // clang-format off
 #ifdef __MWERKS__
     asm volatile {
         psq_l a00_a01, 0x00(mtx), 0, 0
@@ -111,6 +120,7 @@ static void WriteMTXPS4x2(const register f32 mtx[2][4], register volatile f32* d
         psq_st a12_a13, 0(dest), 0, 0
     }
 #endif // __MWERKS__
+    // clang-format on
 }
 
 void __GXSetProjection() {
@@ -132,15 +142,13 @@ void GXSetProjection(const Mtx44 mtx, GXProjectionType type) {
     if (type == GX_ORTHOGRAPHIC) {
         __GXData->projMtx[1] = mtx[0][3];
         __GXData->projMtx[3] = mtx[1][3];
-    }
-    else {
+    } else {
         __GXData->projMtx[1] = mtx[0][2];
         __GXData->projMtx[3] = mtx[1][2];
     }
 
     __GXData->dirtyState |= 0x8000000;
 }
-
 
 void GXSetProjectionv(const f32* ptr) {
     __GXData->projType = ptr[0] == 0.0f ? GX_PERSPECTIVE : GX_ORTHOGRAPHIC;
@@ -192,8 +200,7 @@ void GXLoadTexMtxImm(const f32 mtx[][4], u32 id, GXTexMtxType type) {
 
     if (id >= GX_PTTEXMTX0) {
         addr = (id - GX_PTTEXMTX0) * 4 + 0x500;
-    }
-    else {
+    } else {
         addr = id * 4;
     }
     count = (type == GX_MTX2x4) ? 8 : 12;
@@ -204,8 +211,7 @@ void GXLoadTexMtxImm(const f32 mtx[][4], u32 id, GXTexMtxType type) {
 
     if (type == GX_MTX3x4) {
         WriteMTXPS4x3(mtx, &GXWGFifo.f32);
-    }
-    else {
+    } else {
         WriteMTXPS4x2(mtx, &GXWGFifo.f32);
     }
 }
@@ -249,7 +255,7 @@ void GXSetViewportJitter(f32 left, f32 top, f32 wd, f32 ht, f32 nearz, f32 farz,
     __GXData->vpHt = ht;
     __GXData->vpNearz = nearz;
     __GXData->vpFarz = farz;
-    
+
     __GXData->dirtyState |= 0x10000000;
 }
 
@@ -337,8 +343,7 @@ void __GXSetMatrixIndex(GXAttr matIdxAttr) NO_INLINE {
     if (matIdxAttr < GX_VA_TEX4MTXIDX) {
         GX_WRITE_SOME_REG4(8, 0x30, __GXData->matIdxA, -12);
         GX_WRITE_XF_REG(0x1018, __GXData->matIdxA);
-    }
-    else {
+    } else {
         GX_WRITE_SOME_REG4(8, 0x40, __GXData->matIdxB, -12);
         GX_WRITE_XF_REG(0x1019, __GXData->matIdxB);
     }

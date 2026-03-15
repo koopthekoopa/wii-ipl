@@ -8,11 +8,9 @@ namespace nw4r {
         namespace detail {
             NW4R_UT_GET_DERIVED_RUNTIME_TYPEINFO(SeqSound, BasicSound);
 
-            SeqSound::SeqSound(SoundInstanceManager<SeqSound>* manager) :
-            mTempSpecialHandle(NULL),
-            mManager(manager),
-            mCallback(NULL),
-            mLoadingFlag(false) {}
+            SeqSound::SeqSound(SoundInstanceManager<SeqSound>* manager)
+                : mTempSpecialHandle(NULL), mManager(manager), mCallback(NULL), mLoadingFlag(false) {
+            }
 
             void SeqSound::InitParam() {
                 BasicSound::InitParam();
@@ -77,6 +75,6 @@ namespace nw4r {
             void SeqSound::DetachTempSpecialHandle() {
                 mTempSpecialHandle->DetachSound();
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

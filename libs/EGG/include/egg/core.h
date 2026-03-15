@@ -1,6 +1,7 @@
 #ifndef EGG_CORE_H
 #define EGG_CORE_H
 
+// clang-format off
 #include <egg/core/eggDisposer.h>
 #include <egg/core/eggAllocator.h>
 #include <egg/core/eggHeap.h>
@@ -15,5 +16,6 @@
 
 #include <egg/core/eggFader.h>
 #include <egg/core/eggColorFader.h>
+// clang-format on
 
 #endif // EGG_CORE_H

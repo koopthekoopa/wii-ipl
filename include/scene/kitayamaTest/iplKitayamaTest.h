@@ -6,13 +6,13 @@
 namespace ipl {
     namespace scene {
         FADER_SCENE_CLASS(KitayamaTest) {
-            public:
-                KitayamaTest(EGG::Heap* heap, int);
+        public:
+            KitayamaTest(EGG::Heap * heap, int);
 
-            private:
-                u8  unk_0x58[0x20];
+        private:
+            u8 unk_0x58[0x20];
         };
-    }
-}
+    }  // namespace scene
+}  // namespace ipl
 
-#endif // IPL_SCENE_KITAYAMA_TEST_H
+#endif  // IPL_SCENE_KITAYAMA_TEST_H

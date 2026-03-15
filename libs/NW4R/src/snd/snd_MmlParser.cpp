@@ -89,8 +89,7 @@ namespace nw4r {
                                 }
 
                                 case MML_SET_PRGNO: {
-                                    arg1 = ReadArg(&rTrackParam.currentAddr, seqPlayer, track,
-                                                useArgType ? argType : SEQ_ARG_VMIDI);
+                                    arg1 = ReadArg(&rTrackParam.currentAddr, seqPlayer, track, useArgType ? argType : SEQ_ARG_VMIDI);
 
                                     if (doExecCommand) {
                                         CommandProc(track, cmd, arg1, arg2);
@@ -190,7 +189,8 @@ namespace nw4r {
 
                                     switch (cmdex & MML_CMD_SET_MASK) {
                                         case MML_EX_USERPROC: {
-                                            arg1 = static_cast<s16>(ReadArg(&rTrackParam.currentAddr, seqPlayer, track, useArgType ? argType : SEQ_ARG_S16));
+                                            arg1 = static_cast<s16>(
+                                                ReadArg(&rTrackParam.currentAddr, seqPlayer, track, useArgType ? argType : SEQ_ARG_S16));
 
                                             if (doExecCommand) {
                                                 CommandProc(track, (cmd << 8) + cmdex, arg1, arg2);
@@ -201,7 +201,8 @@ namespace nw4r {
                                         case MML_EX_ARITHMETIC:
                                         case MML_EX_LOGIC: {
                                             arg1 = ReadByte(&rTrackParam.currentAddr);
-                                            arg2 = static_cast<s16>(ReadArg(&rTrackParam.currentAddr, seqPlayer, track, useArgType ? argType : SEQ_ARG_S16));
+                                            arg2 = static_cast<s16>(
+                                                ReadArg(&rTrackParam.currentAddr, seqPlayer, track, useArgType ? argType : SEQ_ARG_S16));
 
                                             if (doExecCommand) {
                                                 CommandProc(track, (cmd << 8) + cmdex, arg1, arg2);
@@ -235,271 +236,260 @@ namespace nw4r {
                 SeqTrack::ParserTrackParam& rTrackParam = track->GetParserTrackParam();
                 MmlSeqTrack::MmlParserParam& rMmlParam = track->GetMmlParserParam();
 
-                SeqPlayer::ParserPlayerParam& rPlayerParam =
-                    seqPlayer->GetParserPlayerParam();
+                SeqPlayer::ParserPlayerParam& rPlayerParam = seqPlayer->GetParserPlayerParam();
 
                 if (command <= MML_CMD_MAX) {
                     switch (command) {
-                    case MML_SET_TEMPO: {
-                        rPlayerParam.tempo = arg1;
-                        break;
-                    }
-                    case MML_SET_PRGNO: {
-                        if (arg1 < SeqTrack::PRGNO_MAX + 1) {
-                            rTrackParam.prgNo = arg1 & SeqTrack::PRGNO_MAX;
+                        case MML_SET_TEMPO: {
+                            rPlayerParam.tempo = arg1;
+                            break;
                         }
-                        break;
-                    }
-
-                    case MML_SET_MUTE: {
-                        track->SetMute(static_cast<SeqMute>(arg1));
-                        break;
-                    }
-
-                    case MML_SET_TRACK_VOLUME: {
-                        rTrackParam.volume = arg1;
-                        break;
-                    }
-                    case MML_SET_TRACK_VOLUME2: {
-                        rTrackParam.volume2 = arg1;
-                        break;
-                    }
-                    case MML_SET_PLAYER_VOLUME: {
-                        rPlayerParam.volume = arg1;
-                        break;
-                    }
-
-                    case MML_SET_TRANSPOSE: {
-                        rTrackParam.transpose = arg1;
-                        break;
-                    }
-
-                    case MML_SET_PITCHBEND: {
-                        rTrackParam.pitchBend = arg1;
-                        break;
-                    }
-                    case MML_SET_BENDRANGE: {
-                        rTrackParam.bendRange = arg1;
-                        break;
-                    }
-                    case MML_SET_PAN: {
-                        if (arg1 <= 1) {
-                            arg1++;
-                        }
-                        rTrackParam.pan = arg1 - 64;
-                        break;
-                    }
-                    case MML_SET_INITPAN: {
-                        if (arg1 <= 1) {
-                            arg1++;
-                        }
-                        rTrackParam.initPan = arg1 - 64;
-                        break;
-                    }
-                    case MML_SET_SURROUNDPAN: {
-                        if (arg1 <= 1) {
-                            arg1++;
-                        }
-                        rTrackParam.surroundPan = arg1;
-                        break;
-                    }
-                    case MML_SET_PRIORITY: {
-                        rTrackParam.priority = arg1;
-                        break;
-                    }
-
-                    case MML_SET_NOTEWAIT: {
-                        rMmlParam.noteWaitFlag = arg1;
-                        break;
-                    }
-
-                    case MML_SET_PORTATIME: {
-                        rTrackParam.portaTime = arg1;
-                        break;
-                    }
-
-                    case MML_SET_LFODEPTH: {
-                        rTrackParam.lfoParam.depth = static_cast<u8>(arg1) / 128.0f;
-                        break;
-                    }
-                    case MML_SET_LFOSPEED: {
-                        rTrackParam.lfoParam.speed =
-                            static_cast<u8>(arg1) * (100.0f / 256.0f);
-                        break;
-                    }
-                    case MML_SET_LFOTARGET: {
-                        rTrackParam.lfoTarget = arg1;
-                        break;
-                    }
-                    case MML_SET_LFORANGE: {
-                        rTrackParam.lfoParam.range = arg1;
-                        break;
-                    }
-                    case MML_SET_LFODELAY: {
-                        rTrackParam.lfoParam.delay = arg1 * 5;
-                        break;
-                    }
-
-                    case MML_SET_SWEEPPITCH: {
-                        rTrackParam.sweepPitch = arg1 / 32.0f;
-                        break;
-                    }
-
-                    case MML_SET_ATTACK: {
-                        rTrackParam.attack = arg1;
-                        break;
-                    }
-                    case MML_SET_DECAY: {
-                        rTrackParam.decay = arg1;
-                        break;
-                    }
-                    case MML_SET_SUSTAIN: {
-                        rTrackParam.sustain = arg1;
-                        break;
-                    }
-                    case MML_SET_RELEASE: {
-                        rTrackParam.release = arg1;
-                        break;
-                    }
-                    case MML_SET_TIE: {
-                        rMmlParam.tieFlag = arg1;
-                        track->ReleaseAllChannel(-1);
-                        track->FreeAllChannel();
-                        break;
-                    }
-
-                    case MML_SET_PORTAMENTO: {
-                        rTrackParam.portaKey = arg1 + rTrackParam.transpose;
-                        rTrackParam.portaFlag = true;
-                        break;
-                    }
-                    case MML_SET_PORTASPEED: {
-                        rTrackParam.portaFlag = arg1 != 0;
-                        break;
-                    }
-                    case MML_SET_LPFFREQ: {
-                        rTrackParam.lpfFreq = arg1;
-                        break;
-                    }
-
-                    case MML_SET_FXSEND_A: {
-                        rTrackParam.fxSend[AUX_A] = arg1;
-                        break;
-                    }
-                    case MML_SET_FXSEND_B: {
-                        rTrackParam.fxSend[AUX_B] = arg1;
-                        break;
-                    }
-                    case MML_SET_FXSEND_C: {
-                        rTrackParam.fxSend[AUX_C] = arg1;
-                        break;
-                    }
-                    case MML_SET_MAINSEND: {
-                        rTrackParam.mainSend = arg1;
-                        break;
-                    }
-
-                    case MML_PRINTVAR: {
-                        if (!mPrintVarEnabledFlag) {
+                        case MML_SET_PRGNO: {
+                            if (arg1 < SeqTrack::PRGNO_MAX + 1) {
+                                rTrackParam.prgNo = arg1 & SeqTrack::PRGNO_MAX;
+                            }
                             break;
                         }
 
-                        const vs16* pVar = GetVariablePtr(seqPlayer, track, arg1);
-
-                        // Convert absolute index into variable type-relative index
-                        int varNo = arg1 >= SeqPlayer::VARIABLE_NUM       ? arg1 - SeqPlayer::VARIABLE_NUM
-                                : (arg1 >= SeqPlayer::LOCAL_VARIABLE_NUM ? arg1 - SeqPlayer::LOCAL_VARIABLE_NUM : arg1);
-
-                        // Determine variable type prefix from absolute index
-                        // 'T' = Track variable, 'G' = Global (player) variable
-                        const char* pVarType = arg1 >= SeqPlayer::VARIABLE_NUM       ? "T"
-                                            : (arg1 >= SeqPlayer::LOCAL_VARIABLE_NUM ? "G" : "");
-
-                        OSReport("#%08x[%d]: printvar %sVAR_%d(%d) = %d\n", seqPlayer,
-                                track->GetPlayerTrackNo(), pVarType, varNo, arg1, *pVar);
-                        break;
-                    }
-
-                    case MML_OPENTRACK: {
-                        SeqTrack* pNewTrack = seqPlayer->GetPlayerTrack(arg1);
-
-                        if (pNewTrack != NULL && pNewTrack != track) {
-                            pNewTrack->Close();
-                            pNewTrack->SetSeqData(rTrackParam.baseAddr, arg2);
-                        }
-                        break;
-                    }
-
-                    case MML_JUMP: {
-                        rTrackParam.currentAddr = rTrackParam.baseAddr + arg1;
-                        break;
-                    }
-
-                    case MML_CALL: {
-                        if (rMmlParam.callStackDepth >= CALL_STACK_MAX_DEPTH) {
+                        case MML_SET_MUTE: {
+                            track->SetMute(static_cast<SeqMute>(arg1));
                             break;
                         }
 
-                        rMmlParam.callStack[rMmlParam.callStackDepth] =
-                            rTrackParam.currentAddr;
-
-                        rMmlParam.callStackDepth++;
-                        rTrackParam.currentAddr = rTrackParam.baseAddr + arg1;
-                        break;
-                    }
-
-                    case MML_RET: {
-                        if (rMmlParam.callStackDepth == 0) {
+                        case MML_SET_TRACK_VOLUME: {
+                            rTrackParam.volume = arg1;
+                            break;
+                        }
+                        case MML_SET_TRACK_VOLUME2: {
+                            rTrackParam.volume2 = arg1;
+                            break;
+                        }
+                        case MML_SET_PLAYER_VOLUME: {
+                            rPlayerParam.volume = arg1;
                             break;
                         }
 
-                        rMmlParam.callStackDepth--;
-
-                        rTrackParam.currentAddr =
-                            rMmlParam.callStack[rMmlParam.callStackDepth];
-                        break;
-                    }
-
-                    case MML_LOOP_START: {
-                        if (rMmlParam.callStackDepth >= CALL_STACK_MAX_DEPTH) {
+                        case MML_SET_TRANSPOSE: {
+                            rTrackParam.transpose = arg1;
                             break;
                         }
 
-                        rMmlParam.callStack[rMmlParam.callStackDepth] =
-                            rTrackParam.currentAddr;
-
-                        rMmlParam.loopCount[rMmlParam.callStackDepth] = arg1;
-                        rMmlParam.callStackDepth++;
-                        break;
-                    }
-
-                    case MML_LOOP_END: {
-                        if (rMmlParam.callStackDepth == 0) {
+                        case MML_SET_PITCHBEND: {
+                            rTrackParam.pitchBend = arg1;
+                            break;
+                        }
+                        case MML_SET_BENDRANGE: {
+                            rTrackParam.bendRange = arg1;
+                            break;
+                        }
+                        case MML_SET_PAN: {
+                            if (arg1 <= 1) {
+                                arg1++;
+                            }
+                            rTrackParam.pan = arg1 - 64;
+                            break;
+                        }
+                        case MML_SET_INITPAN: {
+                            if (arg1 <= 1) {
+                                arg1++;
+                            }
+                            rTrackParam.initPan = arg1 - 64;
+                            break;
+                        }
+                        case MML_SET_SURROUNDPAN: {
+                            if (arg1 <= 1) {
+                                arg1++;
+                            }
+                            rTrackParam.surroundPan = arg1;
+                            break;
+                        }
+                        case MML_SET_PRIORITY: {
+                            rTrackParam.priority = arg1;
                             break;
                         }
 
-                        u8 count = rMmlParam.loopCount[rMmlParam.callStackDepth - 1];
+                        case MML_SET_NOTEWAIT: {
+                            rMmlParam.noteWaitFlag = arg1;
+                            break;
+                        }
 
-                        if (count != 0 && --count == 0) {
+                        case MML_SET_PORTATIME: {
+                            rTrackParam.portaTime = arg1;
+                            break;
+                        }
+
+                        case MML_SET_LFODEPTH: {
+                            rTrackParam.lfoParam.depth = static_cast<u8>(arg1) / 128.0f;
+                            break;
+                        }
+                        case MML_SET_LFOSPEED: {
+                            rTrackParam.lfoParam.speed = static_cast<u8>(arg1) * (100.0f / 256.0f);
+                            break;
+                        }
+                        case MML_SET_LFOTARGET: {
+                            rTrackParam.lfoTarget = arg1;
+                            break;
+                        }
+                        case MML_SET_LFORANGE: {
+                            rTrackParam.lfoParam.range = arg1;
+                            break;
+                        }
+                        case MML_SET_LFODELAY: {
+                            rTrackParam.lfoParam.delay = arg1 * 5;
+                            break;
+                        }
+
+                        case MML_SET_SWEEPPITCH: {
+                            rTrackParam.sweepPitch = arg1 / 32.0f;
+                            break;
+                        }
+
+                        case MML_SET_ATTACK: {
+                            rTrackParam.attack = arg1;
+                            break;
+                        }
+                        case MML_SET_DECAY: {
+                            rTrackParam.decay = arg1;
+                            break;
+                        }
+                        case MML_SET_SUSTAIN: {
+                            rTrackParam.sustain = arg1;
+                            break;
+                        }
+                        case MML_SET_RELEASE: {
+                            rTrackParam.release = arg1;
+                            break;
+                        }
+                        case MML_SET_TIE: {
+                            rMmlParam.tieFlag = arg1;
+                            track->ReleaseAllChannel(-1);
+                            track->FreeAllChannel();
+                            break;
+                        }
+
+                        case MML_SET_PORTAMENTO: {
+                            rTrackParam.portaKey = arg1 + rTrackParam.transpose;
+                            rTrackParam.portaFlag = true;
+                            break;
+                        }
+                        case MML_SET_PORTASPEED: {
+                            rTrackParam.portaFlag = arg1 != 0;
+                            break;
+                        }
+                        case MML_SET_LPFFREQ: {
+                            rTrackParam.lpfFreq = arg1;
+                            break;
+                        }
+
+                        case MML_SET_FXSEND_A: {
+                            rTrackParam.fxSend[AUX_A] = arg1;
+                            break;
+                        }
+                        case MML_SET_FXSEND_B: {
+                            rTrackParam.fxSend[AUX_B] = arg1;
+                            break;
+                        }
+                        case MML_SET_FXSEND_C: {
+                            rTrackParam.fxSend[AUX_C] = arg1;
+                            break;
+                        }
+                        case MML_SET_MAINSEND: {
+                            rTrackParam.mainSend = arg1;
+                            break;
+                        }
+
+                        case MML_PRINTVAR: {
+                            if (!mPrintVarEnabledFlag) {
+                                break;
+                            }
+
+                            const vs16* pVar = GetVariablePtr(seqPlayer, track, arg1);
+
+                            // Convert absolute index into variable type-relative index
+                            int varNo = arg1 >= SeqPlayer::VARIABLE_NUM ?
+                                            arg1 - SeqPlayer::VARIABLE_NUM :
+                                            (arg1 >= SeqPlayer::LOCAL_VARIABLE_NUM ? arg1 - SeqPlayer::LOCAL_VARIABLE_NUM : arg1);
+
+                            // Determine variable type prefix from absolute index
+                            // 'T' = Track variable, 'G' = Global (player) variable
+                            const char* pVarType = arg1 >= SeqPlayer::VARIABLE_NUM ? "T" : (arg1 >= SeqPlayer::LOCAL_VARIABLE_NUM ? "G" : "");
+
+                            OSReport("#%08x[%d]: printvar %sVAR_%d(%d) = %d\n", seqPlayer, track->GetPlayerTrackNo(), pVarType, varNo, arg1, *pVar);
+                            break;
+                        }
+
+                        case MML_OPENTRACK: {
+                            SeqTrack* pNewTrack = seqPlayer->GetPlayerTrack(arg1);
+
+                            if (pNewTrack != NULL && pNewTrack != track) {
+                                pNewTrack->Close();
+                                pNewTrack->SetSeqData(rTrackParam.baseAddr, arg2);
+                            }
+                            break;
+                        }
+
+                        case MML_JUMP: {
+                            rTrackParam.currentAddr = rTrackParam.baseAddr + arg1;
+                            break;
+                        }
+
+                        case MML_CALL: {
+                            if (rMmlParam.callStackDepth >= CALL_STACK_MAX_DEPTH) {
+                                break;
+                            }
+
+                            rMmlParam.callStack[rMmlParam.callStackDepth] = rTrackParam.currentAddr;
+
+                            rMmlParam.callStackDepth++;
+                            rTrackParam.currentAddr = rTrackParam.baseAddr + arg1;
+                            break;
+                        }
+
+                        case MML_RET: {
+                            if (rMmlParam.callStackDepth == 0) {
+                                break;
+                            }
+
                             rMmlParam.callStackDepth--;
-                        }
-                        else {
-                            rMmlParam.loopCount[rMmlParam.callStackDepth - 1] = count;
 
-                            rTrackParam.currentAddr =
-                                rMmlParam.callStack[rMmlParam.callStackDepth - 1];
+                            rTrackParam.currentAddr = rMmlParam.callStack[rMmlParam.callStackDepth];
+                            break;
                         }
-                        break;
+
+                        case MML_LOOP_START: {
+                            if (rMmlParam.callStackDepth >= CALL_STACK_MAX_DEPTH) {
+                                break;
+                            }
+
+                            rMmlParam.callStack[rMmlParam.callStackDepth] = rTrackParam.currentAddr;
+
+                            rMmlParam.loopCount[rMmlParam.callStackDepth] = arg1;
+                            rMmlParam.callStackDepth++;
+                            break;
+                        }
+
+                        case MML_LOOP_END: {
+                            if (rMmlParam.callStackDepth == 0) {
+                                break;
+                            }
+
+                            u8 count = rMmlParam.loopCount[rMmlParam.callStackDepth - 1];
+
+                            if (count != 0 && --count == 0) {
+                                rMmlParam.callStackDepth--;
+                            } else {
+                                rMmlParam.loopCount[rMmlParam.callStackDepth - 1] = count;
+
+                                rTrackParam.currentAddr = rMmlParam.callStack[rMmlParam.callStackDepth - 1];
+                            }
+                            break;
+                        }
                     }
-                    }
-                }
-                else if (command <= MML_EX_CMD_MAX) {
+                } else if (command <= MML_EX_CMD_MAX) {
                     u32 cmdex = command & 0xFF;
                     vs16* pVar = NULL;
 
-                    if ((cmdex & 0xF0) == MML_EX_ARITHMETIC ||
-                        (cmdex & 0xF0) == MML_EX_LOGIC) {
-
+                    if ((cmdex & 0xF0) == MML_EX_ARITHMETIC || (cmdex & 0xF0) == MML_EX_LOGIC) {
                         pVar = GetVariablePtr(seqPlayer, track, arg1);
                         if (pVar == NULL) {
                             return;
@@ -538,8 +528,7 @@ namespace nw4r {
                             if (arg2 >= 0) {
                                 *pVar <<= arg2;
 
-                            }
-                            else {
+                            } else {
                                 *pVar >>= -arg2;
                             }
                             break;
@@ -629,9 +618,7 @@ namespace nw4r {
                 }
             }
 
-            Channel* MmlParser::NoteOnCommandProc(MmlSeqTrack* track, int key,
-                                                int velocity, s32 length,
-                                                bool tie) const {
+            Channel* MmlParser::NoteOnCommandProc(MmlSeqTrack* track, int key, int velocity, s32 length, bool tie) const {
                 return track->NoteOn(key, velocity, length, tie);
             }
 
@@ -669,8 +656,7 @@ namespace nw4r {
                 return val;
             }
 
-            s32 MmlParser::ReadArg(const u8** ppData, SeqPlayer* seqPlayer, SeqTrack* track,
-                                SeqArgType type) const {
+            s32 MmlParser::ReadArg(const u8** ppData, SeqPlayer* seqPlayer, SeqTrack* track, SeqArgType type) const {
                 s32 arg;
 
                 switch (type) {
@@ -723,6 +709,6 @@ namespace nw4r {
 
                 return NULL;
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

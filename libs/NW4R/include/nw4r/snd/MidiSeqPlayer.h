@@ -11,8 +11,8 @@ namespace nw4r {
                 MidiSeqPlayer();
                 virtual ~MidiSeqPlayer() {}
             };
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r
 
-#endif // NW4R_SND_MIDI_SEQ_PLAYER_H
+#endif  // NW4R_SND_MIDI_SEQ_PLAYER_H

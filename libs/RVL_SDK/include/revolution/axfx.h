@@ -17,4 +17,4 @@
 #include <revolution/axfx/AXFXReverbStd.h>
 #include <revolution/axfx/AXFXReverbStdExp.h>
 
-#endif // REVOLUTION_AXFX_H
+#endif  // REVOLUTION_AXFX_H

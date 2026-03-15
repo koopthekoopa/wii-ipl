@@ -9,16 +9,16 @@
 
 namespace ipl {
     namespace parental {
-        Parental::SCData    Parental::m_sc;
-        Parental::SCData    Parental::m_scSave;
+        Parental::SCData Parental::m_sc;
+        Parental::SCData Parental::m_scSave;
 
-        char                Parental::mRequestNum[REQUEST_NUMBER_LENGTH+1];
+        char Parental::mRequestNum[REQUEST_NUMBER_LENGTH + 1];
 
-        char                Parental::mStackPass[SC_PARENTAL_PASSWORD_LENGTH];
-        u8                  Parental::mMistake[Parental::MISTAKE_MAX];
-        char                Parental::mMasterKey[MASTER_KEY_LENGTH+1];
+        char Parental::mStackPass[SC_PARENTAL_PASSWORD_LENGTH];
+        u8 Parental::mMistake[Parental::MISTAKE_MAX];
+        char Parental::mMasterKey[MASTER_KEY_LENGTH + 1];
 
-        u32                 Parental::mCrc32Table[Parental::CRC32_TABLE_SIZE+1];
+        u32 Parental::mCrc32Table[Parental::CRC32_TABLE_SIZE + 1];
 
         void Parental::init() {
             memset(&m_sc, 0, sizeof(SCData));
@@ -35,7 +35,7 @@ namespace ipl {
             m_sc.netContentRestrict = SCGetNetContentRestrictions();
             m_sc.wwwRestrict = SCGetWwwRestriction();
 
-            memcpy(&m_scSave,  &m_sc,sizeof(SCData));
+            memcpy(&m_scSave, &m_sc, sizeof(SCData));
             clearMiss();
 
             makeMasterkey();
@@ -79,7 +79,8 @@ namespace ipl {
 
         u32 Parental::checkRestrictions() {
             // what even
-            return (m_sc.wwwRestrict == 0) & 4 | -(m_sc.netContentRestrict & 1) & 8 | -((m_sc.netContentRestrict >> 1) & 1) & 2 | (m_sc.netContentRestrict >> 2) & 1;
+            return (m_sc.wwwRestrict == 0) & 4 | -(m_sc.netContentRestrict & 1) & 8 | -((m_sc.netContentRestrict >> 1) & 1) & 2 |
+                   (m_sc.netContentRestrict >> 2) & 1;
         }
 
         BOOL Parental::checkPass(const char* pass) {
@@ -87,8 +88,7 @@ namespace ipl {
             if (result == 0) {
                 memcpy(m_sc.info.password, pass, ARRAY_LENGTH(m_sc.info.password));
                 return TRUE;
-            }
-            else {
+            } else {
                 return FALSE;
             }
         }
@@ -104,8 +104,7 @@ namespace ipl {
             if (_checkPass(pass)) {
                 mMistake[MISTAKE_PASS] = 0;
                 return TRUE;
-            }
-            else {
+            } else {
                 mMistake[MISTAKE_PASS] += 1;
             }
             return FALSE;
@@ -118,8 +117,7 @@ namespace ipl {
             if (memcmp(m_sc.info.secretAnswer, secAnswer, sizeof(m_sc.info.secretAnswer)) == 0) {
                 mMistake[MISTAKE_SEC_ANSWER] = 0;
                 return TRUE;
-            }
-            else {
+            } else {
                 mMistake[MISTAKE_SEC_ANSWER] += 1;
             }
             return FALSE;
@@ -132,8 +130,7 @@ namespace ipl {
             if (strncmp(master, mMasterKey, MASTER_KEY_LENGTH) == 0) {
                 mMistake[MISTAKE_MASTER] = 0;
                 return TRUE;
-            }
-            else {
+            } else {
                 mMistake[MISTAKE_MASTER] += 1;
             }
             return FALSE;
@@ -166,8 +163,7 @@ namespace ipl {
             if (flag == 0) {
                 memcpy(&m_sc, &m_scSave, sizeof(SCData));
                 clearMiss();
-            }
-            else {
+            } else {
                 m_sc.info.enable = SC_PARENTAL_FLAG_ENABLED;
             }
         }
@@ -204,7 +200,7 @@ namespace ipl {
         void Parental::adjustOgn(u8 country) {
             m_sc.info.rating = 20;
 
-            switch (country) { // irregular
+            switch (country) {  // irregular
                 case SC_COUNTRY_DE: {
                     m_sc.info.org = SC_PARENTAL_ORG_USK;
                     break;
@@ -228,7 +224,6 @@ namespace ipl {
                 }
             }
         }
-
 
         void Parental::write() {
             if (!SCSetParentalControl(&m_sc.info)) {
@@ -290,7 +285,7 @@ namespace ipl {
         }
 
         void Parental::makeMasterkey() {
-            char data[REQUEST_NUMBER_LENGTH+1];
+            char data[REQUEST_NUMBER_LENGTH + 1];
 
             memset(data, 0, sizeof(mRequestNum));
             memset(mRequestNum, 0, sizeof(mRequestNum));
@@ -316,7 +311,6 @@ namespace ipl {
             OSReport("data+req:%s\n", data);
         }
 
-
         char* Parental::getRequestNum() {
             makeMasterkey();
             return mRequestNum;
@@ -333,5 +327,5 @@ namespace ipl {
         DECOMP_FORCE_ACTIVE(iplParental_cpp, "requestNum:%s\n");
         DECOMP_FORCE_ACTIVE(iplParental_cpp, "masterkey:%s\n");
         DECOMP_FORCE_ACTIVE(iplParental_cpp, "country: %d\n");
-    }
-}
+    }  // namespace parental
+}  // namespace ipl

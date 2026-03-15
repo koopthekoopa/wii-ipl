@@ -1,33 +1,33 @@
 #ifndef REVOLUTION_OS_MESSAGE_H
 #define REVOLUTION_OS_MESSAGE_H
 
-#include <revolution/types.h>
 #include <revolution/os/OSThread.h>
+#include <revolution/types.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef void*   OSMessage;
+typedef void* OSMessage;
 
 typedef struct {
-    OSThreadQueue   queueSend;      // 0x00
-    OSThreadQueue   queueReceive;   // 0x08
-    OSMessage*      msgArray;       // 0x10
-    s32             msgCount;       // 0x14
-    s32             firstIndex;     // 0x18
-    s32             usedCount;      // 0x1C
+    OSThreadQueue queueSend;     // 0x00
+    OSThreadQueue queueReceive;  // 0x08
+    OSMessage* msgArray;         // 0x10
+    s32 msgCount;                // 0x14
+    s32 firstIndex;              // 0x18
+    s32 usedCount;               // 0x1C
 } OSMessageQueue;
 
-#define OS_MESSAGE_BLOCK    (1 << 0)
+#define OS_MESSAGE_BLOCK (1 << 0)
 
-void    OSInitMessageQueue(OSMessageQueue* queue, OSMessage* msgArray, s32 msgCount);
-BOOL    OSSendMessage(OSMessageQueue* queue, OSMessage msg, s32 flags);
-BOOL    OSJamMessage(OSMessageQueue* queue, OSMessage msg, s32 flags);
-BOOL    OSReceiveMessage(OSMessageQueue* queue, OSMessage* msgArray, s32 flags);
+void OSInitMessageQueue(OSMessageQueue* queue, OSMessage* msgArray, s32 msgCount);
+BOOL OSSendMessage(OSMessageQueue* queue, OSMessage msg, s32 flags);
+BOOL OSJamMessage(OSMessageQueue* queue, OSMessage msg, s32 flags);
+BOOL OSReceiveMessage(OSMessageQueue* queue, OSMessage* msgArray, s32 flags);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // REVOLUTION_OS_MESSAGE_H
+#endif  // REVOLUTION_OS_MESSAGE_H

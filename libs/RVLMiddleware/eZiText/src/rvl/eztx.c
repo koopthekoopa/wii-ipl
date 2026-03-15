@@ -1,10 +1,10 @@
 #include <revolution/types.h>
 #include <revolution/verdefs.h>
 
-#include <zi8clib/zi8initd.h>
+#include <zi8clib/zi8copy.h>
 #include <zi8clib/zi8getc.h>
 #include <zi8clib/zi8getc2.h>
-#include <zi8clib/zi8copy.h>
+#include <zi8clib/zi8initd.h>
 #include <zi8clib/zoemdata.h>
 
 #include <revolution/os.h>

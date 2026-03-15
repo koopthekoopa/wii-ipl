@@ -19,11 +19,11 @@ typedef struct __file_modes {
 } file_modes;
 
 typedef struct __file_states {
-    unsigned long   io_state : 3;
-    unsigned long   free_buffer : 1;
+    unsigned long io_state : 3;
+    unsigned long free_buffer : 1;
 
-    unsigned char   eof;
-    unsigned char   error;
+    unsigned char eof;
+    unsigned char error;
 } file_states;
 
 typedef unsigned long file_handle;
@@ -32,35 +32,35 @@ typedef int (*__io_proc)(unsigned long, unsigned char*, size_t*, void*);
 typedef int (*__close_proc)(unsigned long);
 
 typedef struct _FILE {
-    file_handle     handle;
-    file_modes      mode;
-    file_states     state;
+    file_handle handle;
+    file_modes mode;
+    file_states state;
 
-    unsigned char   is_dyn_alloc;
+    unsigned char is_dyn_alloc;
 
-    unsigned char   char_buf;
-    unsigned char   char_buf_of;
+    unsigned char char_buf;
+    unsigned char char_buf_of;
 
-    unsigned char   unget_buffer[2];
-    unsigned short  ungetwc_buffer[2];
+    unsigned char unget_buffer[2];
+    unsigned short ungetwc_buffer[2];
 
-    unsigned long   pos;
+    unsigned long pos;
 
-    unsigned char*  buffer;
-    unsigned long   buffer_size;
-    unsigned char*  buffer_ptr;
-    unsigned long   buffer_len;
-    unsigned long   buffer_alignment;
-    unsigned long   buffer_len_2;
-    unsigned long   buffer_pos;
+    unsigned char* buffer;
+    unsigned long buffer_size;
+    unsigned char* buffer_ptr;
+    unsigned long buffer_len;
+    unsigned long buffer_alignment;
+    unsigned long buffer_len_2;
+    unsigned long buffer_pos;
 
-    __pos_proc      pos_proc;
-    __io_proc       read_proc;
-    __io_proc       write_proc;
-    __close_proc    close_proc;
+    __pos_proc pos_proc;
+    __io_proc read_proc;
+    __io_proc write_proc;
+    __close_proc close_proc;
 
-    void*           ref;
-    struct _FILE*   next_file; // 0x4C
+    void* ref;
+    struct _FILE* next_file;  // 0x4C
 } FILE;
 
 extern FILE __files[];
@@ -69,4 +69,4 @@ extern FILE __files[];
 }
 #endif
 
-#endif // MSL_INTERNAL_FILE_STRUCT_H
+#endif  // MSL_INTERNAL_FILE_STRUCT_H

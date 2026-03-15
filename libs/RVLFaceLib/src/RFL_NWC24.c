@@ -5,22 +5,22 @@
 #include <RVLFaceLib.h>
 #include <RVLFaceLibInternal.h>
 
-#include <revolution/os.h>
 #include <revolution/nwc24.h>
+#include <revolution/os.h>
 
 #include <string.h>
 
-#define GET_ARRAY_LENGTH(x)     (sizeof(x)/sizeof(x[0]))
+#define GET_ARRAY_LENGTH(x) (sizeof(x) / sizeof(x[0]))
 
-#define SEARCH_COUNT            20
-#define FRIEND_RECEIVE_COUNT    8
+#define SEARCH_COUNT 20
+#define FRIEND_RECEIVE_COUNT 8
 
 BOOL RFLiNWC24Msg2CharData(RFLiCharData* rawdata, const NWC24MsgObj* obj) {
     NWC24Err err;
     u8 data[sizeof(RFLiCharData)];
 
     err = NWC24ReadMsgFaceData(obj, data);
-    OSReport("[RFL]NWC24ReadMsgFaceData: errcode=%d\n", err); // ok I guess we ain't using RFLi_REPORT anymore...
+    OSReport("[RFL]NWC24ReadMsgFaceData: errcode=%d\n", err);  // ok I guess we ain't using RFLi_REPORT anymore...
 
     if (err != NWC24_OK) {
         return FALSE;
@@ -67,7 +67,7 @@ RFLErrcode RFLiSetOfficial2NWC24Msg(NWC24MsgObj* obj, RFLCharData* charData, u16
 
     return RFLErrcode_Success;
 }
-#endif // RFL_BUILD
+#endif  // RFL_BUILD
 
 RFLErrcode RFLCommitNWC24Msg(NWC24MsgObj* obj, u16 index) {
     RFLiCharData data;
@@ -262,8 +262,7 @@ RFLErrcode makeNWC24MsgforExchange_(NWC24MsgObj* obj, RFLCharData* sendTarget, B
     if (cal.mday == RFLiGetDBManager()->mDatabase->day_nwc24 && cal.mon == RFLiGetDBManager()->mDatabase->month_nwc24) {
         if (check_date) {
             return RFLErrcode_Exist;
-        }
-        else {
+        } else {
             OSReport("[RFL] Last Send Date: %d/%d but send.\n", cal.mon, cal.mday);
         }
     }
@@ -303,7 +302,7 @@ RFLErrcode makeNWC24MsgforExchange_(NWC24MsgObj* obj, RFLCharData* sendTarget, B
                 sendData[sendNum] = RFLiAlloc32(sizeof(RFLCharData));
                 RFLiConvertHRaw2Raw(idb->data, (RFLiCharData*)sendData[sendNum]);
                 sendNum++;
-#endif // RFL_BUILD
+#endif  // RFL_BUILD
             }
         }
 
@@ -349,11 +348,11 @@ RFLErrcode makeNWC24MsgforExchange_(NWC24MsgObj* obj, RFLCharData* sendTarget, B
 
             RFLi_ASSERTLINE(aidx <= count, 407);
 
-            for (i = 0; i < aidx-1; i++) {
+            for (i = 0; i < aidx - 1; i++) {
                 u16 tmp;
                 u16 target;
 
-                target = (((rand >> 0x10) + rand) & 0xFFFF) % (aidx-1);
+                target = (((rand >> 0x10) + rand) & 0xFFFF) % (aidx - 1);
                 if (target >= i) {
                     target++;
                 }
@@ -382,7 +381,7 @@ RFLErrcode makeNWC24MsgforExchange_(NWC24MsgObj* obj, RFLCharData* sendTarget, B
 
         RFLiFree(array);
     }
-    
+
     OSReport("[RFL]SendNum: %d Miis\n", sendNum);
 
     if (sendNum == 0) {
@@ -406,7 +405,8 @@ RFLErrcode makeNWC24MsgforExchange_(NWC24MsgObj* obj, RFLCharData* sendTarget, B
         }
     }
 
-    RFLiStartWorking(); {
+    RFLiStartWorking();
+    {
         NWC24FriendInfo* lists[NWC24_FRIEND_INFO_MAX];
 
         for (index = 0; index < NWC24_FRIEND_INFO_MAX; index++) {
@@ -422,8 +422,7 @@ RFLErrcode makeNWC24MsgforExchange_(NWC24MsgObj* obj, RFLCharData* sendTarget, B
                 if (info.attr.status == NWC24_FRIENDSTATUS_CONFIRMED && info.attr.type == NWC24_FRIENDTYPE_WII) {
                     isEstablished = TRUE;
                 }
-            }
-            else if (errcode != NWC24_ERR_NULL) {
+            } else if (errcode != NWC24_ERR_NULL) {
                 nwcerr = errcode;
                 isSuccess = FALSE;
                 break;
@@ -443,8 +442,7 @@ RFLErrcode makeNWC24MsgforExchange_(NWC24MsgObj* obj, RFLCharData* sendTarget, B
                 OSReport("[RFL]Send To:%d=%lld\n", i, receiver[i].addr.wiiId);
             }
             receiverNum = friendsNum;
-        }
-        else {
+        } else {
             int i;
             int k;
 
@@ -510,8 +508,7 @@ RFLErrcode makeNWC24MsgforExchange_(NWC24MsgObj* obj, RFLCharData* sendTarget, B
                 OSReport("[RFL] nwc24 fail errcode=%d\n", nwcerr);
                 RFLiEndWorkingReason(RFLErrcode_NWC24Fail, nwcerr);
                 lastErr = RFLErrcode_NWC24Fail;
-            }
-            else {
+            } else {
                 RFLiGetDBManager()->mDatabase->month_nwc24 = cal.mon;
                 RFLiGetDBManager()->mDatabase->day_nwc24 = cal.mday;
                 OSReport("[RFL] nwc24 success.\n");

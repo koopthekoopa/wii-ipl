@@ -1,16 +1,14 @@
-#include <revolution/cdb.h>
 #include <private/cdb.h>
+#include <revolution/cdb.h>
 
 #include <revolution/vf.h>
 
 #include <string.h>
 
-char    CDB_WIIID_DAT_PATH[NAND_MAX_PATH];
+char CDB_WIIID_DAT_PATH[NAND_MAX_PATH];
 
-char    CDB_VFF_FILE_NAME[NAND_MAX_PATH];
-u32     CDB_VFF_FILE_SIZE;
-
-// This is absolutely DISGUSTING.
+char CDB_VFF_FILE_NAME[NAND_MAX_PATH];
+u32 CDB_VFF_FILE_SIZE;
 
 // Left over unused logs
 DECOMP_FORCE_ACTIVE(CDBFileSystem_c, "NANDCreateDir %s\n");
@@ -31,8 +29,8 @@ DECOMP_FORCE_ACTIVE(CDBFileSystem_c, "VFChangeDir %s %s\n");
 
 static inline CDBErr CDBFSInitVFFile(void* cacheBuffer, u32 cacheSize) {
     VFError vfErr;
-    s32     nandErr;
-    
+    s32 nandErr;
+
     vfErr = VFMountDriveNANDFlashCacheEx(CDB_CFG_VF_DRIVE_LETTER, CDB_VFF_FILE_NAME, cacheBuffer, cacheSize);
     if (vfErr != VF_ERR_SUCCESS) {
         CDBReportInfo("VFMountDriveNANDFlashEx VFErr=%d(%s)\n", vfErr, VFGetApiErrorString(vfErr));
@@ -83,18 +81,17 @@ static inline CDBErr CDBFSInitVFFile(void* cacheBuffer, u32 cacheSize) {
                 CDBReportFatal("VFFormatDrive VFErr=%d\n", vfErr);
                 return CDBOnVFErrorOccured(vfErr);
             }
-        }
-        else {
+        } else {
             CDBReportFatal("VFMountDriveNANDFlashEx VFErr=%d(%s)\n", vfErr, VFGetApiErrorString(vfErr));
             return CDBOnVFErrorOccured(vfErr);
         }
     }
 
     CDBReportInfo("VFMountDriveNANDFlashEx %s->%s succeeded\n", CDB_VFF_FILE_NAME, CDB_CFG_VF_DRIVE_LETTER);
-        
-    vfErr = VFChangeDir(CDB_CFG_VF_DRIVE_ROOT"/");
+
+    vfErr = VFChangeDir(CDB_CFG_VF_DRIVE_ROOT "/");
     if (vfErr != VF_ERR_SUCCESS) {
-        CDBReportFatal("VFChangeDir %s %s\n", CDB_CFG_VF_DRIVE_ROOT"/", VFGetApiErrorString(vfErr));
+        CDBReportFatal("VFChangeDir %s %s\n", CDB_CFG_VF_DRIVE_ROOT "/", VFGetApiErrorString(vfErr));
         return CDBOnVFErrorOccured(vfErr);
     }
 
@@ -108,7 +105,7 @@ DECOMP_FORCE_ACTIVE(CDBFileSystem_c, "<--NANDPrivateDelete\n");
 
 CDBErr CDBFSInit(void* cacheBuffer, u32 cacheSize) {
     VFError vfErr;
-    s32     nandErr;
+    s32 nandErr;
 
     strcpy(CDB_VFF_FILE_NAME, "/title/00000001/00000002/data/cdb.vff");
     CDB_VFF_FILE_SIZE = 0x1400000;
@@ -133,8 +130,7 @@ CDBErr CDBFSUninit() {
 char* CDBFindDataGetName(CDBFindData* findData) {
     if (findData->loc == CDB_FS_LOCATION_NAND) {
         return CDBFindDataGetNameVF(&findData->vf);
-    }
-    else {
+    } else {
         return CDBFindDataGetNameSD(&findData->sd);
     }
 }
@@ -142,8 +138,7 @@ char* CDBFindDataGetName(CDBFindData* findData) {
 BOOL CDBFindDataIsDirectory(CDBFindData* findData) {
     if (findData->loc == CDB_FS_LOCATION_NAND) {
         return CDBFindDataIsDirectoryVF(&findData->vf);
-    }
-    else {
+    } else {
         return CDBFindDataIsDirectorySD(&findData->sd);
     }
 }
@@ -151,8 +146,7 @@ BOOL CDBFindDataIsDirectory(CDBFindData* findData) {
 BOOL CDBFindDataIsEnd(CDBFindData* findData) {
     if (findData->loc == CDB_FS_LOCATION_NAND) {
         return CDBFindDataIsEndVF(&findData->vf);
-    }
-    else {
+    } else {
         return CDBFindDataIsEndSD(&findData->sd);
     }
 }
@@ -160,17 +154,16 @@ BOOL CDBFindDataIsEnd(CDBFindData* findData) {
 BOOL CDBFSIsExistFile(const char* fileName, CDBLocation location) {
     if (location == CDB_FS_LOCATION_NAND) {
         return CDBFSIsExistFileVF(fileName);
-    }
-    else {
+    } else {
         return CDBFSIsExistFileSD(fileName);
     }
 }
 
-void CDBFSFindFirstRoot(CDBFindData *findData, CDBLocation location) {
+void CDBFSFindFirstRoot(CDBFindData* findData, CDBLocation location) {
     CDBFSFindFirstRootEx(findData, location, NULL);
 }
 
-void CDBFSFindFirstRootEx(CDBFindData *findData, CDBLocation location, u64* wiiId) {
+void CDBFSFindFirstRootEx(CDBFindData* findData, CDBLocation location, u64* wiiId) {
     char rootPath[256];
 
     findData->loc = location;
@@ -184,8 +177,7 @@ void CDBFSFindFirst(CDBFindData* findData, const char* fileName, CDBLocation loc
     findData->loc = location;
     if (findData->loc == CDB_FS_LOCATION_NAND) {
         CDBFSFindFirstVF(&findData->vf, fileName);
-    }
-    else {
+    } else {
         CDBFSFindFirstSD(&findData->sd, fileName);
     }
 }
@@ -193,8 +185,7 @@ void CDBFSFindFirst(CDBFindData* findData, const char* fileName, CDBLocation loc
 void CDBFSFindNext(CDBFindData* findData) {
     if (findData->loc == CDB_FS_LOCATION_NAND) {
         CDBFSFindNextVF(&findData->vf);
-    }
-    else {
+    } else {
         CDBFSFindNextSD(&findData->sd);
     }
 }
@@ -202,8 +193,7 @@ void CDBFSFindNext(CDBFindData* findData) {
 void CDBFSFindClose(CDBFindData* findData) {
     if (findData->loc == CDB_FS_LOCATION_NAND) {
         CDBFSFindCloseVF(&findData->vf);
-    }
-    else {
+    } else {
         CDBFSFindCloseSD(&findData->sd);
     }
 }
@@ -212,8 +202,7 @@ void CDBFSDeleteDir(char* dirName, CDBLocation location) {
     CDBReportInfo("CDBFSDeleteDir() %s\n", dirName);
     if (location == CDB_FS_LOCATION_NAND) {
         CDBFSDeleteDirVF(dirName);
-    }
-    else {
+    } else {
         CDBFSDeleteDirSD(dirName);
     }
 }

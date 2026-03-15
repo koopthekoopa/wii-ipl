@@ -1,6 +1,6 @@
+#include <nw4r/snd/AxManager.h>
 #include <nw4r/snd/StrmPlayer.h>
 #include <nw4r/snd/WaveFile.h>
-#include <nw4r/snd/AxManager.h>
 #include <nw4r/ut.h>
 
 #include <climits>
@@ -16,9 +16,7 @@ namespace nw4r {
             }
             u8 StrmPlayer::LoadCommand::mMramBuf[LOAD_BUFFER_SIZE] ALIGN32;
 
-            StrmPlayer::StrmPlayer() :
-            mActiveFlag(false),
-            mVoice(NULL) {
+            StrmPlayer::StrmPlayer() : mActiveFlag(false), mVoice(NULL) {
                 for (u32 i = 0; i < 32; i++) {
                     LoadCommand& loadCommand = mLoadCoammndArray[i];
                     loadCommand.mPlayer = this;
@@ -26,7 +24,8 @@ namespace nw4r {
                 }
             }
 
-            bool StrmPlayer::Prepare(StrmBufferPool* bufferPool, StartOffsetType startOffsetType, s32 startOffset, int voices, StrmCallback* callback, u32 callbackData) {
+            bool StrmPlayer::Prepare(StrmBufferPool* bufferPool, StartOffsetType startOffsetType, s32 startOffset, int voices, StrmCallback* callback,
+                                     u32 callbackData) {
                 if (mActiveFlag) {
                     ForceStop();
                 }
@@ -104,8 +103,7 @@ namespace nw4r {
                 if (driveStatus == DVD_STATE_IDLE) {
                     mDiskErrorFlag = false;
                     UpdatePauseStatus();
-                }
-                else if (driveStatus != DVD_STATE_BUSY) {
+                } else if (driveStatus != DVD_STATE_BUSY) {
                     mDiskErrorFlag = true;
                     mLoadWaitFlag = true;
                     UpdatePauseStatus();
@@ -116,8 +114,7 @@ namespace nw4r {
                         mLoadWaitFlag = true;
                         UpdatePauseStatus();
                     }
-                }
-                else {
+                } else {
                     if (mFillBufferCommandList.IsEmpty()) {
                         mLoadWaitFlag = false;
                         UpdatePauseStatus();
@@ -185,7 +182,7 @@ namespace nw4r {
                         remoteSend[i] += mRemoteSend[i];
 
                         remoteFxSend[i] = 0.0f;
-                        remoteFxSend[i] += mRemoteSend[i]; // @bug Should be mRemoteFxSend
+                        remoteFxSend[i] += mRemoteSend[i];  // @bug Should be mRemoteFxSend
                     }
 
                     mVoice->SetVolume(volume);
@@ -244,9 +241,7 @@ namespace nw4r {
                     UpdateLoopAddress(0, mPlayingBufferBlockCount * mStrmInfo.blockSamples);
                 }
 
-                if (mPlayingBufferBlockIndex == mPlayingBufferBlockCount - 1 &&
-                    mVoice->GetFormat() == AxVoice::FORMAT_ADPCM) {
-
+                if (mPlayingBufferBlockIndex == mPlayingBufferBlockCount - 1 && mVoice->GetFormat() == AxVoice::FORMAT_ADPCM) {
                     if (!mSkipUpdateAdpcmLoop && mValidAdpcmLoop) {
                         ut::AutoInterruptLock lock;
 
@@ -329,21 +324,21 @@ namespace nw4r {
                 param->mBufferBlockIndex = mLoadingBufferBlockIndex;
                 param->mStreamBlockIndex = mLoadingDataBlockIndex;
 
-                u32 blockSize = mLoadingDataBlockIndex < static_cast<s32>(mStrmInfo.numBlocks - 1) ? mStrmInfo.blockSize : mStrmInfo.lastBlockPaddedSize;
+                u32 blockSize =
+                    mLoadingDataBlockIndex < static_cast<s32>(mStrmInfo.numBlocks - 1) ? mStrmInfo.blockSize : mStrmInfo.lastBlockPaddedSize;
 
                 u32 loadSize = mStrmInfo.blockHeaderOffset + mChannelCount * ut::RoundUp(blockSize, 32);
 
-                s32 loadOffset = mStrmInfo.dataOffset +
-                                mLoadingDataBlockIndex * (mStrmInfo.blockHeaderOffset +
-                                                        mStrmInfo.blockSize * mStrmInfo.numChannels);
+                s32 loadOffset =
+                    mStrmInfo.dataOffset + mLoadingDataBlockIndex * (mStrmInfo.blockHeaderOffset + mStrmInfo.blockSize * mStrmInfo.numChannels);
 
                 mFillBufferCommandList.PushBack(param);
 
                 bool needUpdateAdpcmLoop = mLoadingBufferBlockIndex == 0 && mStrmInfo.format == WaveFile::FORMAT_ADPCM;
 
-                StrmCallback::Result result = mCallback->LoadStream(param->mMramBuf, loadSize, loadOffset, mChannelCount,
-                                                                    blockSize, mStrmInfo.blockHeaderOffset, needUpdateAdpcmLoop,
-                                                                    *param, reinterpret_cast<u32>(this), mCallbackData);
+                StrmCallback::Result result =
+                    mCallback->LoadStream(param->mMramBuf, loadSize, loadOffset, mChannelCount, blockSize, mStrmInfo.blockHeaderOffset,
+                                          needUpdateAdpcmLoop, *param, reinterpret_cast<u32>(this), mCallbackData);
                 switch (result) {
                     case StrmCallback::RESULT_FAILED: {
                         ForceStop();
@@ -363,8 +358,7 @@ namespace nw4r {
                 if (mLoadingDataBlockIndex > mLastBlockIndex) {
                     if (mStrmInfo.loopFlag) {
                         mLoadingDataBlockIndex = mLoopStartBlockIndex;
-                    }
-                    else {
+                    } else {
                         mLoadFinishFlag = true;
                         return;
                     }
@@ -552,7 +546,7 @@ namespace nw4r {
                     }
                 }
 
-                if (mStrmInfo.numBlocks <= 2 && !mStrmInfo.loopFlag)  {
+                if (mStrmInfo.numBlocks <= 2 && !mStrmInfo.loopFlag) {
                     SetLoopEndToZeroBuffer(mStrmInfo.numBlocks - 1);
                 }
             }
@@ -581,8 +575,7 @@ namespace nw4r {
                 mBufferBlockCount = poolBlockSize / mDataBlockSize;
                 if (mBufferBlockCount < DATA_BLOCK_COUNT_MIN) {
                     return false;
-                }
-                else if (mBufferBlockCount > DATA_BLOCK_COUNT_MAX) {
+                } else if (mBufferBlockCount > DATA_BLOCK_COUNT_MAX) {
                     mBufferBlockCount = DATA_BLOCK_COUNT_MAX;
                 }
 
@@ -593,8 +586,7 @@ namespace nw4r {
                 if (mStrmInfo.blockSamples > 0) {
                     if (mStartOffsetType == START_OFFSET_TYPE_SAMPLE) {
                         blockIndex = static_cast<s32>(mStartOffset) / static_cast<s32>(mStrmInfo.blockSamples);
-                    }
-                    else if (mStartOffsetType == START_OFFSET_TYPE_MILLISEC) {
+                    } else if (mStartOffsetType == START_OFFSET_TYPE_MILLISEC) {
                         blockIndex = static_cast<s32>(mStrmInfo.sampleRate * mStartOffset / 1000) / static_cast<s32>(mStrmInfo.blockSamples);
                     }
                 }
@@ -606,8 +598,7 @@ namespace nw4r {
 
                 if (mNoRealtimeLoadFlag) {
                     mLoadingBufferBlockCount = mStrmInfo.numBlocks;
-                }
-                else {
+                } else {
                     mLoadingBufferBlockCount = CalcLoadingBufferBlockCount();
                 }
 
@@ -630,7 +621,8 @@ namespace nw4r {
                     waveData.numChannels = static_cast<u8>(mChannelCount);
                     waveData.sampleRate = mStrmInfo.sampleRate;
                     waveData.loopStart = 0;
-                    waveData.loopEnd = AxVoice::GetSampleByByte(static_cast<u32>(mDataBlockSize * mPlayingBufferBlockCount), WaveFormatToAxFormat(mStrmInfo.format));
+                    waveData.loopEnd =
+                        AxVoice::GetSampleByByte(static_cast<u32>(mDataBlockSize * mPlayingBufferBlockCount), WaveFormatToAxFormat(mStrmInfo.format));
 
                     for (int i = 0; i < mChannelCount; i++) {
                         ChannelParam& channelParam = waveData.channelParam[i];
@@ -729,8 +721,7 @@ namespace nw4r {
                 StrmPlayer* player = reinterpret_cast<StrmPlayer*>(userData);
                 if (result) {
                     player->Setup(header);
-                }
-                else {
+                } else {
                     player->ForceStop();
                 }
             }
@@ -768,8 +759,7 @@ namespace nw4r {
                             mPlayer->mPreparedFlag = true;
                         }
                     }
-                }
-                else {
+                } else {
                     mPlayer->ForceStop();
                 }
 
@@ -777,7 +767,8 @@ namespace nw4r {
             }
 
             void StrmPlayer::LoadCommand::SetAdpcmLoopContext(int channelNum, u16* predScale) {
-                if (mPlayer->mStrmInfo.format != WaveFile::FORMAT_ADPCM) return;
+                if (mPlayer->mStrmInfo.format != WaveFile::FORMAT_ADPCM)
+                    return;
 
                 for (int i = 0; i < channelNum && i < CHANNEL_MAX; i++) {
                     mPlayer->mAdpcmPredScale[i] = predScale[i];
@@ -792,6 +783,6 @@ namespace nw4r {
                 }
                 return static_cast<u8*>(mPlayer->mChannels[channelNum].mBuffer) + mPlayer->mDataBlockSize * mBufferBlockIndex;
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

@@ -1,18 +1,18 @@
 #include <decomp.h>
 
+#include <private/os.h>
 #include <revolution/os.h>
 #include <revolution/os/OSBootInfo.h>
-#include <private/os.h>
 
-#include <__ppc_eabi_linker.h>
 #include <__ppc_eabi_init.h>
+#include <__ppc_eabi_linker.h>
 
 #include <string.h>
 
-#define ARENA_HI_ADDR       (OS_BASE_CACHED + 0x00034)
+#define ARENA_HI_ADDR (OS_BASE_CACHED + 0x00034)
 #define EXCEPTION_MASK_ADDR (OS_BASE_CACHED + 0x00044)
 
-extern int  main(int argc, char** argv);
+extern int main(int argc, char** argv);
 extern void exit();
 
 extern void DBInit();
@@ -20,7 +20,8 @@ extern void DBInit();
 #pragma section code_type ".init"
 
 __declspec(weak) asm void __start() {
-#ifdef __MWERKS__ 
+    // clang-format off
+#ifdef __MWERKS__
     nofralloc
 
     // Init hardware
@@ -89,10 +90,12 @@ bi2_end_arg_parse:
 
     // This halts the CPU
     b       exit
-#endif
+#endif // __MWERKS__
+    // clang-format on
 }
 
 asm void __init_registers() {
+    // clang-format off
 #ifdef __MWERKS__
     nofralloc
 
@@ -138,7 +141,8 @@ asm void __init_registers() {
     ori r13, r13, _SDA_BASE_@l
 
     blr
-#endif
+#endif // __MWERKS__
+    // clang-format on
 }
 
 static void copy_rom_section(void* dest, void* source, unsigned int size) {

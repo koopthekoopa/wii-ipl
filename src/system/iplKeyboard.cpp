@@ -1,7 +1,7 @@
 #include "system/iplKeyboard.h"
 
-#include "iplSystem.h"
 #include "iplSound.h"
+#include "iplSystem.h"
 
 #include <revolution/wpad.h>
 
@@ -11,6 +11,7 @@
 
 namespace ipl {
     namespace keyboard {
+        // clang-format off
         static EZTXLanguageEntry sZiSysLangTable[EZTX_LANG_MAX+1] = {
             { ZI8_LANG_ENAM, NULL },
             { ZI8_LANG_ENUK, NULL },
@@ -38,6 +39,7 @@ namespace ipl {
             { ZI8_LANG_ZH,   NULL },
             { ZI8_LANG_NONE, NULL },
         };
+        // clang-format on
 
         static int getFirstController() {
             for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
@@ -159,9 +161,9 @@ namespace ipl {
 
         void Manager::create(nand::File* file, EGG::Heap* heap) {
             // Open arc
-            nw4r::lyt::ArcResourceLink* arcLink = new(heap, 4) nw4r::lyt::ArcResourceLink();
+            nw4r::lyt::ArcResourceLink* arcLink = new (heap, 4) nw4r::lyt::ArcResourceLink();
             arcLink->Set(file->getBuffer(), "arc");
-            nw4r::lyt::MultiArcResourceAccessor* multiArc = new(heap, 4) nw4r::lyt::MultiArcResourceAccessor();
+            nw4r::lyt::MultiArcResourceAccessor* multiArc = new (heap, 4) nw4r::lyt::MultiArcResourceAccessor();
             multiArc->Attach(arcLink);
 
             nw4r::lyt::FontRefLink wbf1Public;
@@ -183,7 +185,7 @@ namespace ipl {
             multiArc->RegistFont(&wbf2Private);
 
             // Allocators
-            EGG::Allocator* allocator = new(heap, 4) EGG::Allocator(heap, 4);
+            EGG::Allocator* allocator = new (heap, 4) EGG::Allocator(heap, 4);
             nw4r::lyt::Layout::SetAllocator(allocator);
 
             u8* systemDict = NULL;
@@ -199,7 +201,7 @@ namespace ipl {
                     oemDict = System::getZiOemDicData(i);
                 }
             }
-#endif // USE_ZI8
+#endif  // USE_ZI8
 
 #ifdef USE_ZI8
             for (int i = 0; i < EZTX_LANG_MAX; i++) {
@@ -216,13 +218,13 @@ namespace ipl {
                 sZiSysLangTable[i].table = usedSystemDict;
                 sZiOemLangTable[i].table = usedOemDict;
             }
-#endif // USE_ZI8
+#endif  // USE_ZI8
 
             // Save data
             mSaveData = System::getSaveData()->getMemoSetting();
 
             // Memo manager
-            mpManager = new(heap, 4) textinput::MemoManager(allocator, multiArc, &mEvent);
+            mpManager = new (heap, 4) textinput::MemoManager(allocator, multiArc, &mEvent);
             mpManager->setSaveData(mSaveData);
             mpManager->create(NULL);
             mEvent.setManager(this);
@@ -262,7 +264,7 @@ namespace ipl {
 #ifdef JAPANESE_BUILD
             mpManager->setDestination(textinput::DST_JP);
             mpManager->setLanguage(textinput::JP);
-#endif // JAPANESE_BUILD
+#endif  // JAPANESE_BUILD
         }
 
         void Manager::init() {
@@ -286,8 +288,7 @@ namespace ipl {
             if ((u32)(SCGetAspectRatio() & 0xFF) == SC_ASPECT_RATIO_16x9) {
                 System::getProjectionRect16x9(&projRect);
                 mpManager->setAspectRatio(false);
-            }
-            else {
+            } else {
                 System::getProjectionRect4x3(&projRect);
                 mpManager->setAspectRatio(true);
             }
@@ -312,18 +313,14 @@ namespace ipl {
             if (prevStateType == textinput::MemoManager::ST_Hidden && mState.type == textinput::MemoManager::ST_Appearing) {
                 mState.iplType = STATE_APPEARING;
                 mState.pressOK = false;
-            }
-            else if (prevStateType == textinput::MemoManager::ST_Appearing && mState.type == textinput::MemoManager::ST_Visible) {
+            } else if (prevStateType == textinput::MemoManager::ST_Appearing && mState.type == textinput::MemoManager::ST_Visible) {
                 mState.iplType = STATE_VISIBLE;
                 mState.pressOK = false;
-            }
-            else if (prevStateType == textinput::MemoManager::ST_Visible && mState.type == textinput::MemoManager::ST_Disappearing) {
+            } else if (prevStateType == textinput::MemoManager::ST_Visible && mState.type == textinput::MemoManager::ST_Disappearing) {
                 mState.iplType = STATE_DISAPPEARING;
-            }
-            else if (prevStateType == textinput::MemoManager::ST_Disappearing && mState.type == textinput::MemoManager::ST_Hidden) {
+            } else if (prevStateType == textinput::MemoManager::ST_Disappearing && mState.type == textinput::MemoManager::ST_Hidden) {
                 mState.iplType = STATE_HIDDEN_AFTER_DISAPPEAR;
-            }
-            else {
+            } else {
                 mState.iplType = STATE_HIDDEN;
             }
 
@@ -339,8 +336,7 @@ namespace ipl {
 
                 if (con == NULL) {
                     mpManager->updateInput(0, IPL_MATH_NULL_FLOAT, IPL_MATH_NULL_FLOAT, 0, 0, 0);
-                }
-                else {
+                } else {
                     KPADStatus* kpadStatus = con->getKPADStatus();
                     nw4r::math::VEC2 conProjPos = con->getDpdProjectionPos();
 
@@ -412,8 +408,8 @@ namespace ipl {
                     nw4r::ut::Rect projRect;
                     System::getProjectionRect(&projRect);
 
-                    if ((projRect.left > conProjPos.x || conProjPos.x > projRect.right)
-                    || (projRect.top > conProjPos.y && conProjPos.y > projRect.bottom)) {
+                    if ((projRect.left > conProjPos.x || conProjPos.x > projRect.right) ||
+                        (projRect.top > conProjPos.y && conProjPos.y > projRect.bottom)) {
                         conProjPos.y = IPL_MATH_NULL_FLOAT;
                         conProjPos.x = IPL_MATH_NULL_FLOAT;
                     }
@@ -422,8 +418,7 @@ namespace ipl {
                         f32 posX = conProjPos.x;
                         f32 posY = conProjPos.y;
                         mpManager->updateInput(0, posX, -posY, trig, hold, release);
-                    }
-                    else {
+                    } else {
                         mpManager->updateInput(0, IPL_MATH_NULL_FLOAT, IPL_MATH_NULL_FLOAT, trig, hold, release);
                     }
                 }
@@ -450,8 +445,7 @@ namespace ipl {
             setKeyboardType(chan, setting.type);
             if (setting.wcString == NULL) {
                 mpManager->setWCString(L"");
-            }
-            else {
+            } else {
                 mpManager->setWCString(setting.wcString);
             }
             mpManager->limitStringLength(setting.stringLimit);
@@ -469,7 +463,8 @@ namespace ipl {
             mpManager->changeState(textinput::extend::memo::Manager::STL_Transition);
             snd::getSystem()->startSE("WIPL_SE_SK_DECIDE_CLOSE");
 
-            if (mpManager->getConfigType() == textinput::extend::memo::Manager::CT_Letter || mpManager->getConfigType() == textinput::extend::memo::Manager::CT_PhotoLetter) {
+            if (mpManager->getConfigType() == textinput::extend::memo::Manager::CT_Letter ||
+                mpManager->getConfigType() == textinput::extend::memo::Manager::CT_PhotoLetter) {
                 doSave();
             }
         }
@@ -479,7 +474,8 @@ namespace ipl {
             mpManager->changeState(textinput::extend::memo::Manager::STL_Transition);
             snd::getSystem()->startSE("WIPL_SE_SK_CANCEL_CLOSE");
 
-            if (mpManager->getConfigType() == textinput::extend::memo::Manager::CT_Letter || mpManager->getConfigType() == textinput::extend::memo::Manager::CT_PhotoLetter) {
+            if (mpManager->getConfigType() == textinput::extend::memo::Manager::CT_Letter ||
+                mpManager->getConfigType() == textinput::extend::memo::Manager::CT_PhotoLetter) {
                 doSave();
             }
         }
@@ -534,8 +530,7 @@ namespace ipl {
                 case SC_LANG_ENGLISH: {
                     if ((u32)System::getRegion() == SC_PRODUCT_AREA_EUR) {
                         mpManager->setLanguage(textinput::UK);
-                    }
-                    else {
+                    } else {
                         mpManager->setLanguage(textinput::USA);
                     }
                     break;
@@ -548,22 +543,9 @@ namespace ipl {
         }
 
 #ifdef JAPANESE_BUILD
-        static const char* sPredictionJP[] = {
-            "http://",
-            "www.",
-            ".jp",
-            ".co",
-            ".com",
-            ".net",
-            "https://",
-            ".ne",
-            ".or",
-            ".org",
-            ".html",
-            ".htm",
-            "index"
-        };
-#endif // JAPANESE_BUILD
+        static const char* sPredictionJP[] = {"http://", "www.", ".jp",  ".co",   ".com", ".net", "https://",
+                                              ".ne",     ".or",  ".org", ".html", ".htm", "index"};
+#endif  // JAPANESE_BUILD
 
         void Manager::setConfigure(KeyboardType type) {
             mpManager->enableCompatibleFilter(true);
@@ -632,14 +614,14 @@ namespace ipl {
             }
 #ifdef JAPANESE_BUILD
             mpManager->setDefaultPredictionJP(ARRAY_LENGTH(sPredictionJP), sPredictionJP);
-#endif // JAPANESE_BUILD
+#endif  // JAPANESE_BUILD
         }
 
         void Manager::doSave() {
             textinput::extend::savedata::MemoSetting newSaveData = mpManager->getSaveData();
             textinput::extend::savedata::MemoSetting oldSaveData = mSaveData;
             BOOL canSave = memcmp(&newSaveData, &oldSaveData, sizeof(textinput::extend::savedata::MemoSetting)) == 0 && mpSaveFile == NULL;
-        
+
             if (canSave) {
                 mSaveData = newSaveData;
                 System::getSaveData()->setMemoSetting(mSaveData);
@@ -668,5 +650,5 @@ namespace ipl {
         Manager::State* Manager::getState() {
             return &mState;
         }
-    }
-}
+    }  // namespace keyboard
+}  // namespace ipl

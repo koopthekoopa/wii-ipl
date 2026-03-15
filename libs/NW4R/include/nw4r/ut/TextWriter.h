@@ -5,8 +5,8 @@
 
 namespace nw4r {
     namespace ut {
-        typedef TextWriterBase<char>    TextWriter;
+        typedef TextWriterBase<char> TextWriter;
     }
-}
+}  // namespace nw4r
 
-#endif // NW4R_UT_TEXT_WRITER_H
+#endif  // NW4R_UT_TEXT_WRITER_H

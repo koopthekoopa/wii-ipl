@@ -6,14 +6,14 @@
 #ifdef __cplusplus
 
 namespace std {
-    using   ::clock;
+    using ::clock;
 
-    using   ::mktime;
-    using   ::localtime;
+    using ::localtime;
+    using ::mktime;
 
-    using   ::strftime;
-} // namespace std
+    using ::strftime;
+}  // namespace std
 
 #endif
 
-#endif // MSL_CTIME_H
+#endif  // MSL_CTIME_H

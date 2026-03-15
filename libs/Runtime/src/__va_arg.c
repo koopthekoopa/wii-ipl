@@ -24,7 +24,7 @@ char* __va_arg(va_list args, _va_arg_type type) {
         size = 8;
         maxReg = maxReg - 1;
         if (reg & 1)
-            even = 1; 
+            even = 1;
         inc = 2;
     }
 
@@ -32,8 +32,7 @@ char* __va_arg(va_list args, _va_arg_type type) {
         reg += even;
         addr = args->reg_save_area + fprOff + (reg * regSize);
         *pReg = reg + inc;
-    }
-    else {
+    } else {
         *pReg = 8;
         addr = args->input_arg_area;
         addr = (char*)PTR_ROUNDUP(addr, size);

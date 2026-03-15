@@ -10,90 +10,84 @@ namespace ipl {
         class AddressAddSelEvent;
 
         FADER_SCENE_CLASS(AddressAddSel), public ButtonEventHandlerBase {
-            public:
-                AddressAddSel(EGG::Heap* heap);
+        public:
+            AddressAddSel(EGG::Heap * heap);
 
-                virtual void                create();
+            virtual void create();
 
-                virtual FaderSceneCommand   calcFadein();
+            virtual FaderSceneCommand calcFadein();
 
-                virtual void                initCalcNormal();
-                virtual FaderSceneCommand   calcNormal();
+            virtual void initCalcNormal();
+            virtual FaderSceneCommand calcNormal();
 
-                virtual void                initCalcFadeout();
-                virtual FaderSceneCommand   calcFadeout();
+            virtual void initCalcFadeout();
+            virtual FaderSceneCommand calcFadeout();
 
-                virtual void                calcCommonAfter();
+            virtual void calcCommonAfter();
 
-                virtual void                draw();
+            virtual void draw();
 
-                virtual void                onEventDerived(u32 compId, u32 event, const controller::Interface* con);
+            virtual void onEventDerived(u32 compId, u32 event, const controller::Interface* con);
 
-            private:
-                enum {
-                    STATE_NORMAL = 0,
-                    STATE_WAIT_DECIDE_ANM,
-                    STATE_DONE,
-                };
+        private:
+            enum {
+                STATE_NORMAL = 0,
+                STATE_WAIT_DECIDE_ANM,
+                STATE_DONE,
+            };
 
-                enum {
-                    BTN_WII = 0,
-                    BTN_EMAIL,
-                    BTN_MAX
-                };
+            enum { BTN_WII = 0, BTN_EMAIL, BTN_MAX };
 
-                enum {
-                    ANIM_FADE_IN = 0,
-                    ANIM_FADE_OUT,
-                    ANIM_BTN_FOCUS_IN,
-                    ANIM_WII_BTN_FOCUS_IN = ANIM_BTN_FOCUS_IN,
-                    ANIM_EMAIL_BTN_FOCUS_IN,
-                    ANIM_BTN_FOCUS_OUT,
-                    ANIM_WII_BTN_FOCUS_OUT = ANIM_BTN_FOCUS_OUT,
-                    ANIM_EMAIL_BTN_FOCUS_OUT,
-                    ANIM_BTN_SELECT,
-                    ANIM_WII_BTN_SELECT = ANIM_BTN_SELECT,
-                    ANIM_EMAIL_BTN_SELECT,
-                };
+            enum {
+                ANIM_FADE_IN = 0,
+                ANIM_FADE_OUT,
+                ANIM_BTN_FOCUS_IN,
+                ANIM_WII_BTN_FOCUS_IN = ANIM_BTN_FOCUS_IN,
+                ANIM_EMAIL_BTN_FOCUS_IN,
+                ANIM_BTN_FOCUS_OUT,
+                ANIM_WII_BTN_FOCUS_OUT = ANIM_BTN_FOCUS_OUT,
+                ANIM_EMAIL_BTN_FOCUS_OUT,
+                ANIM_BTN_SELECT,
+                ANIM_WII_BTN_SELECT = ANIM_BTN_SELECT,
+                ANIM_EMAIL_BTN_SELECT,
+            };
 
-                void    stt_normal();
-                void    stt_wait_decide_anm();
+            void stt_normal();
+            void stt_wait_decide_anm();
 
-                void    start_point_event(const char* paneName, controller::Interface* con);
-                void    start_left_event(const char* paneName);
-                void    start_trig_event(const char* paneName);
+            void start_point_event(const char* paneName, controller::Interface* con);
+            void start_left_event(const char* paneName);
+            void start_trig_event(const char* paneName);
 
-                int     get_button_no(const char* paneName);
+            int get_button_no(const char* paneName);
 
-                void    reset_gui();
+            void reset_gui();
 
-                void    set_textbox(const char* paneName, u32 msgId);
+            void set_textbox(const char* paneName, u32 msgId);
 
-                u32                 mState;             // 0x64
+            u32 mState;  // 0x64
 
-                layout::Object*     mpLayout;           // 0x68
-                AddressAddSelEvent* mpEvent;            // 0x6C
-                gui::PaneManager*   mpGui;              // 0x70
+            layout::Object* mpLayout;     // 0x68
+            AddressAddSelEvent* mpEvent;  // 0x6C
+            gui::PaneManager* mpGui;      // 0x70
 
-                BOOL                mbHovered[BTN_MAX]; // 0x74
+            BOOL mbHovered[BTN_MAX];  // 0x74
 
-                static const char*  mscButtonName[BTN_MAX];
+            static const char* mscButtonName[BTN_MAX];
 
-                friend class AddressAddSelEvent;
+            friend class AddressAddSelEvent;
         };
 
         class AddressAddSelEvent : public ::gui::EventHandler {
-            public:
-                AddressAddSelEvent(AddressAddSel* instance) :
-                ::gui::EventHandler(),
-                mpInstance(instance) {}
+        public:
+            AddressAddSelEvent(AddressAddSel* instance) : ::gui::EventHandler(), mpInstance(instance) {}
 
-                virtual void    onEvent(u32 compId, u32 event, void* data);
+            virtual void onEvent(u32 compId, u32 event, void* data);
 
-            private:
-                AddressAddSel* mpInstance; // 0x0C
+        private:
+            AddressAddSel* mpInstance;  // 0x0C
         };
-    }
-}
+    }  // namespace scene
+}  // namespace ipl
 
-#endif // IPL_SCENE_ADDRESS_ADD_SELECT_H
+#endif  // IPL_SCENE_ADDRESS_ADD_SELECT_H

@@ -1,5 +1,5 @@
-#include <revolution/cdb.h>
 #include <private/cdb.h>
+#include <revolution/cdb.h>
 
 #include <revolution/vf.h>
 
@@ -8,8 +8,7 @@
 char* CDBFindDataGetNameVF(CDBFindDataVF* findData) {
     if (findData->dta.longName[0] == 0) {
         return findData->dta.fileName;
-    }
-    else {
+    } else {
         return findData->dta.longName;
     }
 }
@@ -23,8 +22,8 @@ BOOL CDBFindDataIsEndVF(CDBFindDataVF* findData) {
 }
 
 BOOL CDBFSIsExistFileVF(const char* fileName) {
-    char    findName[256];
-    VFDta   vfDta;
+    char findName[256];
+    VFDta vfDta;
 
     VFError vfErr;
 
@@ -45,7 +44,7 @@ BOOL CDBFSIsExistFileVF(const char* fileName) {
 }
 
 void CDBFSFindFirstVF(CDBFindDataVF* findData, const char* fileName) {
-    char    findName[256];
+    char findName[256];
 
     VFError vfErr;
 

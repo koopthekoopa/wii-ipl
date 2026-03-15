@@ -8,11 +8,11 @@ namespace nw4r {
         namespace detail {
             NW4R_UT_GET_DERIVED_RUNTIME_TYPEINFO(WaveSound, BasicSound);
 
-            WaveSound::WaveSound(SoundInstanceManager<WaveSound>* manager) :
-            mManager(manager),
-            mTempSpecialHandle(NULL) {}
+            WaveSound::WaveSound(SoundInstanceManager<WaveSound>* manager) : mManager(manager), mTempSpecialHandle(NULL) {
+            }
 
-            bool WaveSound::Prepare(const void* waveSoundBase, s32 waveSoundOffset, int voices, const WsdTrack::WsdCallback* callback, u32 callbackData) {
+            bool WaveSound::Prepare(const void* waveSoundBase, s32 waveSoundOffset, int voices, const WsdTrack::WsdCallback* callback,
+                                    u32 callbackData) {
                 InitParam();
 
                 if (!mWsdPlayer.Prepare(waveSoundBase, waveSoundOffset, voices, callback, callbackData)) {
@@ -43,6 +43,6 @@ namespace nw4r {
             void WaveSound::DetachTempSpecialHandle() {
                 mTempSpecialHandle->DetachSound();
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

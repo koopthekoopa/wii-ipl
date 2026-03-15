@@ -1,11 +1,11 @@
 #include <nw4r/snd/SoundArchivePlayer.h>
 
-#include <nw4r/snd/SoundPlayer.h>
-#include <nw4r/snd/SoundHandle.h>
-#include <nw4r/snd/SoundThread.h>
 #include <nw4r/snd/SoundArchive.h>
 #include <nw4r/snd/SoundArchiveFile.h>
 #include <nw4r/snd/SoundArchiveLoader.h>
+#include <nw4r/snd/SoundHandle.h>
+#include <nw4r/snd/SoundPlayer.h>
+#include <nw4r/snd/SoundThread.h>
 
 #include <nw4r/snd/Bank.h>
 #include <nw4r/snd/MmlSeqTrack.h>
@@ -13,27 +13,17 @@
 
 #include <nw4r/snd/DisposeCallbackManager.h>
 
-#include <nw4r/snd/TaskThread.h>
 #include <nw4r/snd/TaskManager.h>
+#include <nw4r/snd/TaskThread.h>
 
 #include <stddef.h>
 
 namespace nw4r {
     namespace snd {
-        SoundArchivePlayer::SoundArchivePlayer() :
-        mSoundArchive(NULL),
-        mSeqLoadCallback(*this),
-        mSeqCallback(*this),
-        mStrmCallback(*this),
-        mWsdCallback(*this),
-        mGroupTable (NULL),
-        mFileManager(NULL),
-        mSoundPlayerCount(0),
-        mSoundPlayers(NULL),
-        mSetupBufferAddress(NULL),
-        mSetupBufferSize(0),
-        mMmlSeqTrackAllocator(&mMmlParser),
-        mSeqTrackAllocator(&mMmlSeqTrackAllocator) {
+        SoundArchivePlayer::SoundArchivePlayer()
+            : mSoundArchive(NULL), mSeqLoadCallback(*this), mSeqCallback(*this), mStrmCallback(*this), mWsdCallback(*this), mGroupTable(NULL),
+              mFileManager(NULL), mSoundPlayerCount(0), mSoundPlayers(NULL), mSetupBufferAddress(NULL), mSetupBufferSize(0),
+              mMmlSeqTrackAllocator(&mMmlParser), mSeqTrackAllocator(&mMmlSeqTrackAllocator) {
             detail::DisposeCallbackManager::GetInstance().RegisterDisposeCallback(this);
         }
 
@@ -109,10 +99,10 @@ namespace nw4r {
 
             SoundArchive::SoundArchivePlayerInfo info;
             if (soundArchive->ReadSoundArchivePlayerInfo(&info)) {
-                size += ut::RoundUp(info.seqSoundCount  * sizeof(detail::SeqSound),    4);
-                size += ut::RoundUp(info.strmSoundCount * sizeof(detail::StrmSound),   4);
-                size += ut::RoundUp(info.waveSoundCount * sizeof(detail::WaveSound),   4);
-                size += ut::RoundUp(info.seqTrackCount  * sizeof(detail::MmlSeqTrack), 4);
+                size += ut::RoundUp(info.seqSoundCount * sizeof(detail::SeqSound), 4);
+                size += ut::RoundUp(info.strmSoundCount * sizeof(detail::StrmSound), 4);
+                size += ut::RoundUp(info.waveSoundCount * sizeof(detail::WaveSound), 4);
+                size += ut::RoundUp(info.seqTrackCount * sizeof(detail::MmlSeqTrack), 4);
             }
 
             return size;
@@ -169,7 +159,7 @@ namespace nw4r {
         }
 
         detail::PlayerHeap* SoundArchivePlayer::CreatePlayerHeap(void* buffer, u32 bufferSize) {
-            detail::PlayerHeap* pHeap = new(buffer) detail::PlayerHeap();
+            detail::PlayerHeap* pHeap = new (buffer) detail::PlayerHeap();
 
             buffer = ut::AddOffsetToPtr(buffer, sizeof(detail::PlayerHeap));
 
@@ -199,7 +189,7 @@ namespace nw4r {
             u8* pPtr = static_cast<u8*>(pPlayerBuffer);
 
             for (u32 i = 0; i < playerCount; i++, pPtr += sizeof(SoundPlayer)) {
-                SoundPlayer* player = new(pPtr) SoundPlayer();
+                SoundPlayer* player = new (pPtr) SoundPlayer();
 
                 SoundArchive::PlayerInfo info;
                 if (!soundArchive->ReadPlayerInfo(i, &info)) {
@@ -239,7 +229,7 @@ namespace nw4r {
         }
 
         bool SoundArchivePlayer::CreateGroupAddressTable(const SoundArchive* soundArchive, void** buffer, void* end) {
-            u32 requireSize =  soundArchive->GetGroupCount() * sizeof(Group) + (sizeof(GroupTable) - sizeof(Group));
+            u32 requireSize = soundArchive->GetGroupCount() * sizeof(Group) + (sizeof(GroupTable) - sizeof(Group));
 
             void* pTableEnd = ut::RoundUp(ut::AddOffsetToPtr(*buffer, requireSize), 4);
 
@@ -275,7 +265,7 @@ namespace nw4r {
             return true;
         }
 
-        bool SoundArchivePlayer::SetupWaveSound(const SoundArchive* soundArchive, int sounds, void** buffer,void* end) {
+        bool SoundArchivePlayer::SetupWaveSound(const SoundArchive* soundArchive, int sounds, void** buffer, void* end) {
             u32 requireSize = sounds * sizeof(detail::WaveSound);
 
             void* soundEnd = ut::RoundUp(ut::AddOffsetToPtr(*buffer, requireSize), 4);
@@ -474,10 +464,11 @@ namespace nw4r {
         }
 
         SoundStartable::StartResult SoundArchivePlayer::detail_SetupSound(SoundHandle* handle, u32 soundId,
-                                                                        detail::BasicSound::AmbientArgInfo* ambientArgInfo, detail::ExternalSoundPlayer* extPlayer,
-                                                                        bool holdFlag, const StartInfo* startInfo) {
+                                                                          detail::BasicSound::AmbientArgInfo* ambientArgInfo,
+                                                                          detail::ExternalSoundPlayer* extPlayer, bool holdFlag,
+                                                                          const StartInfo* startInfo) {
             u8 streamBuffer[STREAM_BUFFER_SIZE];
-            
+
             if (!IsAvailable()) {
                 return SoundStartable::START_ERR_NOT_AVAILABLE;
             }
@@ -525,9 +516,8 @@ namespace nw4r {
                         return SoundStartable::START_ERR_INVALID_SOUNDID;
                     }
 
-                    detail::SeqSound* seqSound = rPlayer.detail_AllocSeqSound(playerPriority, playerPriorityStart,
-                                                                            ambientArgInfo, extPlayer, soundId,
-                                                                            &mSeqSoundInstanceManager);
+                    detail::SeqSound* seqSound = rPlayer.detail_AllocSeqSound(playerPriority, playerPriorityStart, ambientArgInfo, extPlayer, soundId,
+                                                                              &mSeqSoundInstanceManager);
 
                     if (seqSound == NULL) {
                         return SoundStartable::START_ERR_LOW_PRIORITY;
@@ -557,9 +547,8 @@ namespace nw4r {
                     }
                     stream->Close();
 
-                    detail::StrmSound* pStrmSound = rPlayer.detail_AllocStrmSound(playerPriority, playerPriorityStart,
-                                                                                ambientArgInfo, extPlayer, soundId,
-                                                                                &mStrmSoundInstanceManager);
+                    detail::StrmSound* pStrmSound = rPlayer.detail_AllocStrmSound(playerPriority, playerPriorityStart, ambientArgInfo, extPlayer,
+                                                                                  soundId, &mStrmSoundInstanceManager);
 
                     if (pStrmSound == NULL) {
                         return SoundStartable::START_ERR_LOW_PRIORITY;
@@ -583,9 +572,8 @@ namespace nw4r {
                         return SoundStartable::START_ERR_INVALID_SOUNDID;
                     }
 
-                    detail::WaveSound* waveSound = rPlayer.detail_AllocWaveSound(playerPriority, playerPriorityStart,
-                                                                                ambientArgInfo, extPlayer, soundId,
-                                                                                &mWaveSoundInstanceManager);
+                    detail::WaveSound* waveSound = rPlayer.detail_AllocWaveSound(playerPriority, playerPriorityStart, ambientArgInfo, extPlayer,
+                                                                                 soundId, &mWaveSoundInstanceManager);
 
                     if (waveSound == NULL) {
                         return SoundStartable::START_ERR_LOW_PRIORITY;
@@ -612,7 +600,8 @@ namespace nw4r {
             return SoundStartable::START_SUCCESS;
         }
 
-        SoundStartable::StartResult SoundArchivePlayer::PrepareSeqImpl(detail::SeqSound* sound, const SoundArchive::SoundInfo* soundInfo, const SoundArchive::SeqSoundInfo* info, int voices) {
+        SoundStartable::StartResult SoundArchivePlayer::PrepareSeqImpl(detail::SeqSound* sound, const SoundArchive::SoundInfo* soundInfo,
+                                                                       const SoundArchive::SeqSoundInfo* info, int voices) {
             u8 streamBuffer[STREAM_BUFFER_SIZE];
 
             const void* seqData = detail_GetFileAddress(soundInfo->fileId);
@@ -635,8 +624,7 @@ namespace nw4r {
             if (result != detail::SeqPlayer::SETUP_SUCCESS) {
                 if (result == detail::SeqPlayer::SETUP_ERR_CANNOT_ALLOCATE_TRACK) {
                     return SoundStartable::START_ERR_CANNOT_ALLOCATE_TRACK;
-                }
-                else {
+                } else {
                     return SoundStartable::START_ERR_UNKNOWN;
                 }
             }
@@ -647,17 +635,19 @@ namespace nw4r {
             if (seqData != NULL) {
                 detail::SeqFileReader reader(seqData);
                 sound->Prepare(reader.GetBaseAddress(), info->dataOffset);
-            }
-            else {
+            } else {
                 sound->Prepare(&mSeqLoadCallback, reinterpret_cast<u32>(sound));
             }
 
             return SoundStartable::START_SUCCESS;
         }
 
-        SoundStartable::StartResult SoundArchivePlayer::PrepareStrmImpl(detail::StrmSound* sound, const SoundArchive::SoundInfo* soundInfo, const SoundArchive::StrmSoundInfo* info, SoundStartable::StartInfo::StartOffsetType startOffsetType, int startOffset, int voices) {
+        SoundStartable::StartResult SoundArchivePlayer::PrepareStrmImpl(detail::StrmSound* sound, const SoundArchive::SoundInfo* soundInfo,
+                                                                        const SoundArchive::StrmSoundInfo* info,
+                                                                        SoundStartable::StartInfo::StartOffsetType startOffsetType, int startOffset,
+                                                                        int voices) {
             detail::StrmPlayer::StartOffsetType strmOffsetType = detail::StrmPlayer::START_OFFSET_TYPE_SAMPLE;
-           
+
             if (startOffsetType == SoundStartable::StartInfo::START_OFFSET_TYPE_MILLISEC) {
                 strmOffsetType = detail::StrmPlayer::START_OFFSET_TYPE_MILLISEC;
             }
@@ -671,7 +661,8 @@ namespace nw4r {
             return SoundStartable::START_SUCCESS;
         }
 
-        SoundStartable::StartResult SoundArchivePlayer::PrepareWaveSoundImpl(detail::WaveSound* sound, const SoundArchive::SoundInfo* soundInfo, const SoundArchive::WaveSoundInfo* info, int voices) {
+        SoundStartable::StartResult SoundArchivePlayer::PrepareWaveSoundImpl(detail::WaveSound* sound, const SoundArchive::SoundInfo* soundInfo,
+                                                                             const SoundArchive::WaveSoundInfo* info, int voices) {
             const void* waveData = detail_GetFileAddress(soundInfo->fileId);
             if (waveData == NULL) {
                 return SoundStartable::START_ERR_NOT_DATA_LOADED;
@@ -756,12 +747,12 @@ namespace nw4r {
             }
         }
 
-        SoundArchivePlayer::SeqLoadCallback::SeqLoadCallback(const SoundArchivePlayer& player) :
-        mSoundArchivePlayer(player) {
+        SoundArchivePlayer::SeqLoadCallback::SeqLoadCallback(const SoundArchivePlayer& player) : mSoundArchivePlayer(player) {
             OSInitMutex(&mMutex);
         }
 
-        detail::SeqSound::SeqLoadCallback::Result SoundArchivePlayer::SeqLoadCallback::LoadData(detail::SeqSound::NotifyAsyncEndCallback callback, void* callbackArg, u32 userData) const {
+        detail::SeqSound::SeqLoadCallback::Result SoundArchivePlayer::SeqLoadCallback::LoadData(detail::SeqSound::NotifyAsyncEndCallback callback,
+                                                                                                void* callbackArg, u32 userData) const {
             if (!mSoundArchivePlayer.IsAvailable()) {
                 return RESULT_FAILED;
             }
@@ -785,9 +776,8 @@ namespace nw4r {
             }
 
             void* allocBuf = detail::TaskManager::GetInstance().Alloc();
-            SeqLoadTask* task = new(allocBuf) SeqLoadTask(callback, callbackArg,
-                                                soundArchive, soundInfo.fileId, info.dataOffset, *playerHeap,
-                                                userData, mMutex);
+            SeqLoadTask* task =
+                new (allocBuf) SeqLoadTask(callback, callbackArg, soundArchive, soundInfo.fileId, info.dataOffset, *playerHeap, userData, mMutex);
 
             detail::TaskManager::GetInstance().AppendTask(task, detail::TaskManager::PRIORITY_MIDDLE);
             detail::TaskThread::GetInstance().SendWakeupMessage();
@@ -799,7 +789,8 @@ namespace nw4r {
             detail::TaskManager::GetInstance().CancelByTaskId(userData);
         }
 
-        detail::Channel* SoundArchivePlayer::SeqNoteOnCallback::NoteOn(detail::SeqPlayer* seqPlayer, int bankNo, const detail::NoteOnInfo& noteOnInfo) {
+        detail::Channel* SoundArchivePlayer::SeqNoteOnCallback::NoteOn(detail::SeqPlayer* seqPlayer, int bankNo,
+                                                                       const detail::NoteOnInfo& noteOnInfo) {
             if (!mSoundArchivePlayer.IsAvailable()) {
                 return NULL;
             }
@@ -836,17 +827,15 @@ namespace nw4r {
         }
 
         bool SoundArchivePlayer::WsdCallback::GetWaveSoundData(detail::WaveSoundInfo* waveSoundInfo, detail::WaveSoundNoteInfo* noteInfo,
-                                                                detail::WaveData* waveData, const void* pWsdData, int index, int noteIndex,
-                                                                u32 userData) const {
-
+                                                               detail::WaveData* waveData, const void* pWsdData, int index, int noteIndex,
+                                                               u32 userData) const {
             u32 fileId = userData;
 
             if (!mSoundArchivePlayer.IsAvailable()) {
                 return false;
             }
 
-            const void* waveAddr =
-                mSoundArchivePlayer.detail_GetFileWaveDataAddress(fileId);
+            const void* waveAddr = mSoundArchivePlayer.detail_GetFileWaveDataAddress(fileId);
 
             if (waveAddr == NULL) {
                 return false;
@@ -869,23 +858,22 @@ namespace nw4r {
             return true;
         }
 
-        SoundArchivePlayer::StrmCallback::StrmCallback(const SoundArchivePlayer& player) :
-        mSoundArchivePlayer(player) {
+        SoundArchivePlayer::StrmCallback::StrmCallback(const SoundArchivePlayer& player) : mSoundArchivePlayer(player) {
             OSInitMutex(&mMutex);
         }
 
-        detail::StrmPlayer::StrmCallback::Result SoundArchivePlayer::StrmCallback::LoadHeader(detail::StrmPlayer::NotifyLoadHeaderAsyncEndCallback callback, void* callbackData, u32 userId, u32 userData) const {
+        detail::StrmPlayer::StrmCallback::Result
+        SoundArchivePlayer::StrmCallback::LoadHeader(detail::StrmPlayer::NotifyLoadHeaderAsyncEndCallback callback, void* callbackData, u32 userId,
+                                                     u32 userData) const {
             if (!mSoundArchivePlayer.IsAvailable()) {
                 return RESULT_FAILED;
             }
 
-            void *addr = detail::TaskManager::GetInstance().Alloc();
+            void* addr = detail::TaskManager::GetInstance().Alloc();
 
             const SoundArchive& sndArc = mSoundArchivePlayer.GetSoundArchive();
 
-            StrmHeaderLoadTask* task = new(addr) StrmHeaderLoadTask(callback, callbackData,
-                                                                    sndArc, userData,
-                                                                    userId, mMutex);
+            StrmHeaderLoadTask* task = new (addr) StrmHeaderLoadTask(callback, callbackData, sndArc, userData, userId, mMutex);
 
             detail::TaskManager::GetInstance().AppendTask(task, detail::TaskManager::PRIORITY_MIDDLE);
             detail::TaskThread::GetInstance().SendWakeupMessage();
@@ -894,20 +882,20 @@ namespace nw4r {
         }
 
         detail::StrmPlayer::StrmCallback::Result SoundArchivePlayer::StrmCallback::LoadStream(void* mramAddr, u32 size, s32 offset, int numChannels,
-                                                                                            u32 blockSize, s32 blockHeaderOffset, bool needUpdateAdpcmLoop,
-                                                                                            detail::StrmPlayer::LoadCommand& callback, u32 userId, u32 userData) const {
+                                                                                              u32 blockSize, s32 blockHeaderOffset,
+                                                                                              bool needUpdateAdpcmLoop,
+                                                                                              detail::StrmPlayer::LoadCommand& callback, u32 userId,
+                                                                                              u32 userData) const {
             if (!mSoundArchivePlayer.IsAvailable()) {
                 return RESULT_FAILED;
             }
 
             const SoundArchive& sndArc = mSoundArchivePlayer.GetSoundArchive();
 
-            void *addr = detail::TaskManager::GetInstance().Alloc();
+            void* addr = detail::TaskManager::GetInstance().Alloc();
 
-            StrmDataLoadTask* task = new(addr) StrmDataLoadTask(mramAddr, size, offset, numChannels,
-                                                                blockSize, blockHeaderOffset, needUpdateAdpcmLoop,
-                                                                callback, sndArc, userData,
-                                                                userId, mMutex);
+            StrmDataLoadTask* task = new (addr) StrmDataLoadTask(mramAddr, size, offset, numChannels, blockSize, blockHeaderOffset,
+                                                                 needUpdateAdpcmLoop, callback, sndArc, userData, userId, mMutex);
 
             detail::TaskManager::GetInstance().AppendTask(task, detail::TaskManager::PRIORITY_HIGH);
             detail::TaskThread::GetInstance().SendWakeupMessage();
@@ -919,17 +907,11 @@ namespace nw4r {
             detail::TaskManager::GetInstance().CancelByTaskId(userId);
         }
 
-        SoundArchivePlayer::SeqLoadTask::SeqLoadTask(detail::SeqSound::NotifyAsyncEndCallback callback, void* callbackArg,
-                                                const SoundArchive& arc, u32 fileId, u32 dataOffset, SoundHeap& heap,
-                                                u32 taskId, OSMutex& mutex) :
-        mCallback(callback),
-        mCallbackData(callbackArg),
-        mSoundArchive(arc),
-        mFileId(fileId),
-        mDataOffset(dataOffset),
-        mHeap(heap),
-        Task(taskId),
-        mMutex(mutex) {}
+        SoundArchivePlayer::SeqLoadTask::SeqLoadTask(detail::SeqSound::NotifyAsyncEndCallback callback, void* callbackArg, const SoundArchive& arc,
+                                                     u32 fileId, u32 dataOffset, SoundHeap& heap, u32 taskId, OSMutex& mutex)
+            : mCallback(callback), mCallbackData(callbackArg), mSoundArchive(arc), mFileId(fileId), mDataOffset(dataOffset), mHeap(heap),
+              Task(taskId), mMutex(mutex) {
+        }
 
         void SoundArchivePlayer::SeqLoadTask::Execute() {
             detail::SoundArchiveLoader loader(mSoundArchive);
@@ -969,15 +951,9 @@ namespace nw4r {
         }
 
         SoundArchivePlayer::StrmHeaderLoadTask::StrmHeaderLoadTask(detail::StrmPlayer::NotifyLoadHeaderAsyncEndCallback callback, void* callbackData,
-                                                                    const SoundArchive& arc, u32 fileId,
-                                                                    u32 taskId, OSMutex& mutex) :
-        Task(taskId),
-        mSoundArchive(arc),
-        mFileId(fileId),
-        mCallback(callback),
-        mCallbackData(callbackData),
-        mStream(NULL),
-        mMutex(mutex) {}
+                                                                   const SoundArchive& arc, u32 fileId, u32 taskId, OSMutex& mutex)
+            : Task(taskId), mSoundArchive(arc), mFileId(fileId), mCallback(callback), mCallbackData(callbackData), mStream(NULL), mMutex(mutex) {
+        }
 
         void SoundArchivePlayer::StrmHeaderLoadTask::Execute() {
             static u8 buffer[STREAM_BUFFER_SIZE] ALIGN32;
@@ -1048,36 +1024,26 @@ namespace nw4r {
 
         void SoundArchivePlayer::StrmHeaderLoadTask::Cancel() {
             ut::AutoMutexLock lock(mMutex);
-            
+
             mCallback = NULL;
 
             if (mStream != NULL && mStream->CanCancel()) {
                 if (mStream->CanAsync()) {
                     mStream->CancelAsync(NULL, NULL);
-                }
-                else {
+                } else {
                     mStream->Cancel();
                 }
             }
         }
 
-        SoundArchivePlayer::StrmDataLoadTask::StrmDataLoadTask(void* addr, u32 size, s32 offset, int numChannels,
-                                                            u32 blockSize, s32 blockHeaderOffset, bool needUpdateAdpcmLoop,
-                                                            detail::StrmPlayer::LoadCommand& callback, const SoundArchive& arc, u32 fileId,
-                                                            u32 taskId, OSMutex& mutex) :
-        Task(taskId),
-        mAddr(addr),
-        mSize(size),
-        mOffset(offset),
-        mSoundArchive(arc),
-        mFileId(fileId),
-        mStream(NULL),
-        mNumChannels(numChannels),
-        mCallback(&callback),
-        mBlockSize(blockSize),
-        mBlockHeaderOffset(blockHeaderOffset),
-        mNeedUpdateAdpcmLoop(needUpdateAdpcmLoop),
-        mMutex(mutex) {}
+        SoundArchivePlayer::StrmDataLoadTask::StrmDataLoadTask(void* addr, u32 size, s32 offset, int numChannels, u32 blockSize,
+                                                               s32 blockHeaderOffset, bool needUpdateAdpcmLoop,
+                                                               detail::StrmPlayer::LoadCommand& callback, const SoundArchive& arc, u32 fileId,
+                                                               u32 taskId, OSMutex& mutex)
+            : Task(taskId), mAddr(addr), mSize(size), mOffset(offset), mSoundArchive(arc), mFileId(fileId), mStream(NULL), mNumChannels(numChannels),
+              mCallback(&callback), mBlockSize(blockSize), mBlockHeaderOffset(blockHeaderOffset), mNeedUpdateAdpcmLoop(needUpdateAdpcmLoop),
+              mMutex(mutex) {
+        }
 
         void SoundArchivePlayer::StrmDataLoadTask::Execute() {
             DCInvalidateRange(mAddr, mSize);
@@ -1125,7 +1091,7 @@ namespace nw4r {
 
             if (bytesRead != mSize) {
                 detail::TaskManager::GetInstance().CancelByTaskId(GetTaskId());
-                    
+
                 if (mCallback != NULL) {
                     mCallback->NotifyAsyncEnd(false);
                 }
@@ -1164,17 +1130,16 @@ namespace nw4r {
 
         void SoundArchivePlayer::StrmDataLoadTask::Cancel() {
             ut::AutoMutexLock lock(mMutex);
-            
+
             mCallback = NULL;
 
             if (mStream && mStream->CanCancel()) {
                 if (mStream->CanAsync()) {
                     mStream->CancelAsync(NULL, NULL);
-                }
-                else {
+                } else {
                     mStream->Cancel();
                 }
             }
         }
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r

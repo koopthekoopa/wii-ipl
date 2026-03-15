@@ -4,10 +4,11 @@ namespace nw4r {
     namespace snd {
         namespace detail {
             /**
-            * Sorry, nothing.
-            * This file is needed for those left over weak functions.
-            */
-            MidiSeqTrack::MidiSeqTrack() : SeqTrack() {}
-        }
-    }
-}
+             * Sorry, nothing.
+             * This file is needed for those left over weak functions.
+             */
+            MidiSeqTrack::MidiSeqTrack() : SeqTrack() {
+            }
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

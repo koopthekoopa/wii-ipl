@@ -1,5 +1,7 @@
-#include <revolution/mtx.h>
 #include <math.h>
+#include <revolution/mtx.h>
+
+// clang-format off
 
 void C_VECNormalize(const Vec* src, Vec* unit) {
     f32 mag;
@@ -69,3 +71,5 @@ asm void PSVECCrossProduct(const register Vec* a, const register Vec* b, registe
     ps_neg f10, f10
     psq_st f10, Vec.y(axb), 0, 0
 }
+
+// clang-format on

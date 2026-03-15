@@ -26,6 +26,6 @@ namespace ipl {
                 }
                 return result;
             }
-        }
-    }
-}
+        }  // namespace font
+    }  // namespace cs
+}  // namespace ipl

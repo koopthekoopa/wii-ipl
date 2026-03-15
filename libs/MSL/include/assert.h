@@ -2,6 +2,6 @@
 #define MSL_ASSERT_H
 
 // Dummy (for GameSpy)
-#define assert()    (void)0;
+#define assert() (void)0;
 
-#endif // MSL_ASSERT_H
+#endif  // MSL_ASSERT_H

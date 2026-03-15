@@ -1,12 +1,8 @@
 #include <revolution/os.h>
 
 static u16 UcsAnsiTable[32] = {
-    0x20AC, 0x0000, 0x201A, 0x0192, 0x201E, 0x2026, 
-    0x2020, 0x2021, 0x02C6, 0x2030, 0x0160, 0x2039,
-    0x0152, 0x0000, 0x017D, 0x0000, 0x0000, 0x2018,
-    0x2019, 0x201C, 0x201D, 0x2022, 0x2013, 0x2014,
-    0x02DC, 0x2122, 0x0161, 0x203A, 0x0153, 0x0000,
-    0x017E, 0x0178,
+    0x20AC, 0x0000, 0x201A, 0x0192, 0x201E, 0x2026, 0x2020, 0x2021, 0x02C6, 0x2030, 0x0160, 0x2039, 0x0152, 0x0000, 0x017D, 0x0000,
+    0x0000, 0x2018, 0x2019, 0x201C, 0x201D, 0x2022, 0x2013, 0x2014, 0x02DC, 0x2122, 0x0161, 0x203A, 0x0153, 0x0000, 0x017E, 0x0178,
 };
 
 char* OSUTF8to32(const char* utf8, u32* utf32) {
@@ -22,20 +18,16 @@ char* OSUTF8to32(const char* utf8, u32* utf32) {
     if ((u32)(c & 0x80) == 0) {
         u = c;
         len = 0;
-    }
-    else if ((u32)(c & 0xE0) == 0xC0) {
+    } else if ((u32)(c & 0xE0) == 0xC0) {
         u = c & 0x1F;
         len = 1;
-    }
-    else if ((u32)(c & 0xF0) == 0xE0) {
+    } else if ((u32)(c & 0xF0) == 0xE0) {
         u = c & 0xF;
         len = 2;
-    }
-    else if ((u32)(c & 0xF8) == 0xF0) {
+    } else if ((u32)(c & 0xF8) == 0xF0) {
         u = c & 7;
         len = 3;
-    }
-    else {
+    } else {
         return NULL;
     }
 
@@ -53,13 +45,11 @@ char* OSUTF8to32(const char* utf8, u32* utf32) {
         if (len != 0) {
             return NULL;
         }
-    }
-    else if (u <= 0x7FF) {
+    } else if (u <= 0x7FF) {
         if (len != 1) {
             return NULL;
         }
-    }
-    else if (u <= 0xFFFF) {
+    } else if (u <= 0xFFFF) {
         if (len != 2) {
             return NULL;
         }
@@ -85,19 +75,16 @@ u16* OSUTF16to32(const u16* utf16, u32* utf32) {
 
     if (w1 < 0xD800 || 0xDFFF < w1) {
         u = w1;
-    }
-    else if (w1 <= 0xDBFF) {
+    } else if (w1 <= 0xDBFF) {
         w2 = *utf16++;
 
         if (0xDC00 <= w2 && w2 <= 0xDFFF) {
             u = ((w1 & 0x03FF) << 10) | (w2 & 0x03FF);
             u += 0x10000;
-        }
-        else {
+        } else {
             return NULL;
         }
-    }
-    else {
+    } else {
         return NULL;
     }
 

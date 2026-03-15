@@ -8,13 +8,13 @@
 extern "C" {
 #endif
 
-#define RFL_DEFAULT_DATA_MAX    6
+#define RFL_DEFAULT_DATA_MAX 6
 
-RFLiCharData*   RFLiGetDefaultDataPtr(u16 index);
-void            RFLiGetDefaultData(RFLiCharInfo* info, u16 index);
+RFLiCharData* RFLiGetDefaultDataPtr(u16 index);
+void RFLiGetDefaultData(RFLiCharInfo* info, u16 index);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // RFLi_DEFAULT_DATABASE_H
+#endif  // RFLi_DEFAULT_DATABASE_H

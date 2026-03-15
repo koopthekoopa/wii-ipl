@@ -3,9 +3,11 @@
 namespace nw4r {
     namespace snd {
         namespace detail {
-            Bank::Bank(const void* bankData) : mBankReader(bankData), mWaveDataAddress(NULL) {}
+            Bank::Bank(const void* bankData) : mBankReader(bankData), mWaveDataAddress(NULL) {
+            }
 
-            Bank::~Bank() {}
+            Bank::~Bank() {
+            }
 
             Channel* Bank::NoteOn(const NoteOnInfo& noteOnInfo) const {
                 InstInfo instInfo;
@@ -18,9 +20,8 @@ namespace nw4r {
                     return NULL;
                 }
 
-                Channel* channel = Channel::AllocChannel(ut::Min<int>(waveData.numChannels, CHANNEL_MAX),
-                                                        noteOnInfo.voiceOutCount, noteOnInfo.priority,
-                                                        noteOnInfo.channelCallback, noteOnInfo.channelCallbackData);
+                Channel* channel = Channel::AllocChannel(ut::Min<int>(waveData.numChannels, CHANNEL_MAX), noteOnInfo.voiceOutCount,
+                                                         noteOnInfo.priority, noteOnInfo.channelCallback, noteOnInfo.channelCallbackData);
 
                 if (channel == NULL) {
                     return NULL;
@@ -49,6 +50,6 @@ namespace nw4r {
 
                 return channel;
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

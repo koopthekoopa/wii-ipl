@@ -1,6 +1,6 @@
-#include <nw4r/lyt/material.h>
-#include <nw4r/lyt/layout.h>
 #include <nw4r/lyt/common.h>
+#include <nw4r/lyt/layout.h>
+#include <nw4r/lyt/material.h>
 
 #include <nw4r/math.h>
 
@@ -9,8 +9,8 @@
 
 #include <cstring>
 
-static const GXColorS10 DefaultWhiteColor = { 255, 255, 255, 255 };
-static const GXColorS10 DefaultBlackColor = { 0,   0,   0,   0 };
+static const GXColorS10 DefaultWhiteColor = {255, 255, 255, 255};
+static const GXColorS10 DefaultBlackColor = {0, 0, 0, 0};
 
 namespace {
     using namespace nw4r;
@@ -42,14 +42,14 @@ namespace {
         pMtx->mtx[0][0] = a0;
         pMtx->mtx[0][1] = a1;
         pMtx->mtx[0][2] = 0.0f;
-        pMtx->mtx[0][3] = texSRT.translate.x +  center.x + a0 * -center.x + a1 * -center.y;
+        pMtx->mtx[0][3] = texSRT.translate.x + center.x + a0 * -center.x + a1 * -center.y;
 
         a0 = sinR * texSRT.scale.x;
         a1 = cosR * texSRT.scale.y;
         pMtx->mtx[1][0] = a0;
         pMtx->mtx[1][1] = a1;
         pMtx->mtx[1][2] = 0.0f;
-        pMtx->mtx[1][3] = texSRT.translate.y +  center.y + a0 * -center.x + a1 * -center.y;
+        pMtx->mtx[1][3] = texSRT.translate.y + center.y + a0 * -center.x + a1 * -center.y;
 
         pMtx->mtx[2][0] = 0.0f;
         pMtx->mtx[2][1] = 0.0f;
@@ -102,11 +102,19 @@ namespace {
 
         s8 scaleExp = 0;
 
-        m00 = mtx[0][0]; m01 = mtx[0][1]; m02 = mtx[0][2];
-        m10 = mtx[1][0]; m11 = mtx[1][1]; m12 = mtx[1][2];
+        m00 = mtx[0][0];
+        m01 = mtx[0][1];
+        m02 = mtx[0][2];
+        m10 = mtx[1][0];
+        m11 = mtx[1][1];
+        m12 = mtx[1][2];
 
-        a00 = math::FAbs(m00); a01 = math::FAbs(m01); a02 = math::FAbs(m02);
-        a10 = math::FAbs(m10); a11 = math::FAbs(m11); a12 = math::FAbs(m12);
+        a00 = math::FAbs(m00);
+        a01 = math::FAbs(m01);
+        a02 = math::FAbs(m02);
+        a10 = math::FAbs(m10);
+        a11 = math::FAbs(m11);
+        a12 = math::FAbs(m12);
 
         if (a00 >= 1.0f || a01 >= 1.0f || a02 >= 1.0f || a10 >= 1.0f || a11 >= 1.0f || a12 >= 1.0f) {
             do {
@@ -116,32 +124,42 @@ namespace {
 
                 scaleExp++;
 
-                m00 /= 2.0f; m01 /= 2.0f; m02 /= 2.0f;
-                m10 /= 2.0f; m11 /= 2.0f; m12 /= 2.0f;
+                m00 /= 2.0f;
+                m01 /= 2.0f;
+                m02 /= 2.0f;
+                m10 /= 2.0f;
+                m11 /= 2.0f;
+                m12 /= 2.0f;
 
-                a00 /= 2.0f; a01 /= 2.0f; a02 /= 2.0f;
-                a10 /= 2.0f; a11 /= 2.0f; a12 /= 2.0f;
+                a00 /= 2.0f;
+                a01 /= 2.0f;
+                a02 /= 2.0f;
+                a10 /= 2.0f;
+                a11 /= 2.0f;
+                a12 /= 2.0f;
 
-            }
-            while (a00 >= 1.0f || a01 >= 1.0f || a02 >= 1.0f || a10 >= 1.0f || a11 >= 1.0f || a12 >= 1.0f);
-        }
-        else if (a00 < 0.5f && a01 < 0.5f && a02 < 0.5f && a10 < 0.5f && a11 < 0.5f && a12 < 0.5f) {
+            } while (a00 >= 1.0f || a01 >= 1.0f || a02 >= 1.0f || a10 >= 1.0f || a11 >= 1.0f || a12 >= 1.0f);
+        } else if (a00 < 0.5f && a01 < 0.5f && a02 < 0.5f && a10 < 0.5f && a11 < 0.5f && a12 < 0.5f) {
             do {
                 scaleExp--;
 
-                m00 *= 2.0f; m01 *= 2.0f; m02 *= 2.0f;
-                m10 *= 2.0f; m11 *= 2.0f; m12 *= 2.0f;
+                m00 *= 2.0f;
+                m01 *= 2.0f;
+                m02 *= 2.0f;
+                m10 *= 2.0f;
+                m11 *= 2.0f;
+                m12 *= 2.0f;
 
-                a00 *= 2.0f; a01 *= 2.0f; a02 *= 2.0f;
-                a10 *= 2.0f; a11 *= 2.0f; a12 *= 2.0f;
-            }
-            while (a00 < 0.5f && a01 < 0.5f && a02 < 0.5f && a10 < 0.5f && a11 < 0.5f && a12 < 0.5f && scaleExp > -17);
+                a00 *= 2.0f;
+                a01 *= 2.0f;
+                a02 *= 2.0f;
+                a10 *= 2.0f;
+                a11 *= 2.0f;
+                a12 *= 2.0f;
+            } while (a00 < 0.5f && a01 < 0.5f && a02 < 0.5f && a10 < 0.5f && a11 < 0.5f && a12 < 0.5f && scaleExp > -17);
         }
 
-        Mtx23 outMtx = {
-            { m00, m01, m02 },
-            { m10, m11, m12 }
-        };
+        Mtx23 outMtx = {{m00, m01, m02}, {m10, m11, m12}};
 
         GXSetIndTexMtx(id, outMtx, scaleExp);
     }
@@ -198,7 +216,7 @@ namespace {
         *pDst = *pSrc;
         GXInitTexObjUserData(pDst, NULL);
     }
-}
+}  // namespace
 
 namespace nw4r {
     namespace lyt {
@@ -222,47 +240,46 @@ namespace nw4r {
 
             const res::TexMap* const pResTexMap = detail::ConvertOffsToPtr<res::TexMap>(pRes, resOffs);
             resOffs += pRes->resNum.GetTexMapNum() * sizeof(res::TexMap);
-        
+
             const TexSRT* const resTexSRTs = detail::ConvertOffsToPtr<TexSRT>(pRes, resOffs);
             resOffs += pRes->resNum.GetTexSRTNum() * sizeof(TexSRT);
-        
+
             const TexCoordGen* const resTexCoordGens = detail::ConvertOffsToPtr<TexCoordGen>(pRes, resOffs);
             resOffs += pRes->resNum.GetTexCoordGenNum() * sizeof(TexCoordGen);
 
-            u8 texMapNum        = ut::Min<u8>(pRes->resNum.GetTexMapNum(),      GX_MAX_TEXMAP);
-            u8 texSRTNum        = ut::Min<u8>(pRes->resNum.GetTexSRTNum(),      MAX_TEX_SRT);
-            u8 texCoordGenNum   = ut::Min<u8>(pRes->resNum.GetTexCoordGenNum(), GX_MAX_TEXCOORD);
+            u8 texMapNum = ut::Min<u8>(pRes->resNum.GetTexMapNum(), GX_MAX_TEXMAP);
+            u8 texSRTNum = ut::Min<u8>(pRes->resNum.GetTexSRTNum(), MAX_TEX_SRT);
+            u8 texCoordGenNum = ut::Min<u8>(pRes->resNum.GetTexCoordGenNum(), GX_MAX_TEXCOORD);
 
-            bool allocChanCtrl  = pRes->resNum.GetChanCtrlNum() != 0;
-            bool allocMatCol    = pRes->resNum.GetMatColNum() != 0;
-            bool allocTevSwap   = pRes->resNum.HasTevSwapTable();
-            bool allocAlpComp   = pRes->resNum.HasAlphaCompare();
+            bool allocChanCtrl = pRes->resNum.GetChanCtrlNum() != 0;
+            bool allocMatCol = pRes->resNum.GetMatColNum() != 0;
+            bool allocTevSwap = pRes->resNum.HasTevSwapTable();
+            bool allocAlpComp = pRes->resNum.HasAlphaCompare();
             bool allocBlendMode = pRes->resNum.HasBlendMode();
 
-            u8 indTexSRTNum     = ut::Min<u8>(pRes->resNum.GetIndTexSRTNum(),   MAX_IND_SRT);
-            u8 indStageNum      = ut::Min<u8>(pRes->resNum.GetIndTexStageNum(), GX_MAX_INDTEXSTAGE);
-            u8 tevStageNum      = ut::Min<u8>(pRes->resNum.GetTevStageNum(),    GX_MAX_TEVSTAGE);
+            u8 indTexSRTNum = ut::Min<u8>(pRes->resNum.GetIndTexSRTNum(), MAX_IND_SRT);
+            u8 indStageNum = ut::Min<u8>(pRes->resNum.GetIndTexStageNum(), GX_MAX_INDTEXSTAGE);
+            u8 tevStageNum = ut::Min<u8>(pRes->resNum.GetTevStageNum(), GX_MAX_TEVSTAGE);
 
-            ReserveGXMem(texMapNum, texSRTNum, texCoordGenNum, tevStageNum,
-                        allocTevSwap, indStageNum, indTexSRTNum, allocChanCtrl,
-                        allocMatCol, allocAlpComp, allocBlendMode);
+            ReserveGXMem(texMapNum, texSRTNum, texCoordGenNum, tevStageNum, allocTevSwap, indStageNum, indTexSRTNum, allocChanCtrl, allocMatCol,
+                         allocAlpComp, allocBlendMode);
 
             if (mpGXMem != NULL) {
                 SetTextureNum(texMapNum);
                 if (texMapNum) {
-                    const res::Texture* const textures = detail::ConvertOffsToPtr<res::Texture>(resBlockSet.pTextureList,
-                                                                                                sizeof(*resBlockSet.pTextureList));
+                    const res::Texture* const textures =
+                        detail::ConvertOffsToPtr<res::Texture>(resBlockSet.pTextureList, sizeof(*resBlockSet.pTextureList));
 
                     GXTexObj* const texMaps = GetTexMapAry();
 
                     for (u8 i = 0; i < mGXMemNum.texMap; i++) {
-                        const char* fileName = detail::ConvertOffsToPtr<char>(textures,
-                                                                            textures[pResTexMap[i].texIdx].nameStrOffset);
+                        const char* fileName = detail::ConvertOffsToPtr<char>(textures, textures[pResTexMap[i].texIdx].nameStrOffset);
 
                         void* pTplRes = resBlockSet.pResAccessor->GetResource(RESOURCE_TYPE_TEXTURE, fileName, NULL);
 
                         SetTexture(i, static_cast<TPLPalette*>(pTplRes));
-                        GXInitTexObjWrapMode(&texMaps[i], static_cast<GXTexWrapMode>(pResTexMap[i].wrapS), static_cast<GXTexWrapMode>(pResTexMap[i].wrapT));
+                        GXInitTexObjWrapMode(&texMaps[i], static_cast<GXTexWrapMode>(pResTexMap[i].wrapS),
+                                             static_cast<GXTexWrapMode>(pResTexMap[i].wrapT));
                     }
                 }
 
@@ -302,8 +319,7 @@ namespace nw4r {
 
                 if (indTexSRTNum) {
                     TexSRT* indTexSRTs = GetIndTexSRTAry();
-                    const TexSRT* pResIndMtx = detail::ConvertOffsToPtr<TexSRT>(pRes,
-                                                                                resOffs);
+                    const TexSRT* pResIndMtx = detail::ConvertOffsToPtr<TexSRT>(pRes, resOffs);
                     for (int i = 0; i < indTexSRTNum; i++) {
                         indTexSRTs[i] = pResIndMtx[i];
                     }
@@ -387,21 +403,18 @@ namespace nw4r {
             ptr->blendMode = 0;
         }
 
-        void Material::ReserveGXMem(u8 texMapNum, u8 texSRTNum, u8 texCoordGenNum,
-                                    u8 tevStageNum, bool allocTevSwap, u8 indStageNum,
-                                    u8 indSRTNum, bool allocChanCtrl, bool allocMatCol,
-                                    bool allocAlpComp, bool allocBlendMode) {
-            int tevSwapNum   = allocTevSwap   ? 1 : 0;
-            int chanCtrlNum  = allocChanCtrl  ? 1 : 0;
-            int matColNum    = allocMatCol    ? 1 : 0;
-            int alpCompNum   = allocAlpComp   ? 1 : 0;
+        void Material::ReserveGXMem(u8 texMapNum, u8 texSRTNum, u8 texCoordGenNum, u8 tevStageNum, bool allocTevSwap, u8 indStageNum, u8 indSRTNum,
+                                    bool allocChanCtrl, bool allocMatCol, bool allocAlpComp, bool allocBlendMode) {
+            int tevSwapNum = allocTevSwap ? 1 : 0;
+            int chanCtrlNum = allocChanCtrl ? 1 : 0;
+            int matColNum = allocMatCol ? 1 : 0;
+            int alpCompNum = allocAlpComp ? 1 : 0;
             int blendModeNum = allocBlendMode ? 1 : 0;
 
-            if (mGXMemCap.texMap >= texMapNum && mGXMemCap.texSRT >= texSRTNum && mGXMemCap.texCoordGen >= texCoordGenNum
-                && mGXMemCap.tevStage >= tevStageNum && mGXMemCap.tevSwap >= tevSwapNum
-                && mGXMemCap.indStage >= indStageNum && mGXMemCap.indSRT >= indSRTNum
-                && mGXMemCap.chanCtrl >= chanCtrlNum && mGXMemCap.matCol >= matColNum
-                && mGXMemCap.alpComp >= alpCompNum && mGXMemCap.blendMode >= blendModeNum) {
+            if (mGXMemCap.texMap >= texMapNum && mGXMemCap.texSRT >= texSRTNum && mGXMemCap.texCoordGen >= texCoordGenNum &&
+                mGXMemCap.tevStage >= tevStageNum && mGXMemCap.tevSwap >= tevSwapNum && mGXMemCap.indStage >= indStageNum &&
+                mGXMemCap.indSRT >= indSRTNum && mGXMemCap.chanCtrl >= chanCtrlNum && mGXMemCap.matCol >= matColNum &&
+                mGXMemCap.alpComp >= alpCompNum && mGXMemCap.blendMode >= blendModeNum) {
                 return;
             }
 
@@ -412,13 +425,9 @@ namespace nw4r {
                 InitBitGXNums(&mGXMemNum);
             }
 
-            mpGXMem = Layout::AllocMemory(
-                4
-                    * (matColNum + chanCtrlNum + texCoordGenNum + tevSwapNum + alpCompNum + blendModeNum + indStageNum)
-                    + ((int)sizeof(TexSRT)   * texSRTNum)
-                    + ((int)sizeof(GXTexObj) * texMapNum)
-                    + ((int)sizeof(TexSRT)   * indSRTNum)
-                    + ((int)sizeof(TevStage) * tevStageNum));
+            mpGXMem = Layout::AllocMemory(4 * (matColNum + chanCtrlNum + texCoordGenNum + tevSwapNum + alpCompNum + blendModeNum + indStageNum) +
+                                          ((int)sizeof(TexSRT) * texSRTNum) + ((int)sizeof(GXTexObj) * texMapNum) +
+                                          ((int)sizeof(TexSRT) * indSRTNum) + ((int)sizeof(TevStage) * tevStageNum));
 
             if (mpGXMem == NULL) {
                 return;
@@ -529,7 +538,7 @@ namespace nw4r {
         }
 
         const BlendMode* Material::GetBlendModePtr() const {
-            return detail::ConvertOffsToPtr<BlendMode>(mpGXMem,CalcOffsetBlendMode(mGXMemCap));
+            return detail::ConvertOffsToPtr<BlendMode>(mpGXMem, CalcOffsetBlendMode(mGXMemCap));
         }
 
         BlendMode* Material::GetBlendModePtr() {
@@ -612,7 +621,7 @@ namespace nw4r {
         }
 
         void Material::GetTexture(GXTexObj* pTexObj, u8 texMapIdx) const {
-            CopyGXTexObj(pTexObj,&GetTexMapAry()[texMapIdx]);
+            CopyGXTexObj(pTexObj, &GetTexMapAry()[texMapIdx]);
         }
 
         void Material::SetTexture(u8 texMapIdx, TPLPalette* pTplRes) {
@@ -643,7 +652,7 @@ namespace nw4r {
                         ut::Color* matCols = GetMatColAry();
                         SetColorComponentValue(matCols, colorType & 3, value);
                     }
-            
+
                     break;
                 }
                 case ANIMTARGET_MATCOLOR_TEV0R:
@@ -703,26 +712,10 @@ namespace nw4r {
         }
 
         bool Material::SetupGX(bool bModVtxCol, u8 alpha) {
-            static GXTevKColorSel kColSels[GX_MAX_TEXMAP] = {
-                GX_TEV_KCSEL_K3_A,
-                GX_TEV_KCSEL_K3_B,
-                GX_TEV_KCSEL_K3_G,
-                GX_TEV_KCSEL_K3_R,
-                GX_TEV_KCSEL_K2_A,
-                GX_TEV_KCSEL_K2_B,
-                GX_TEV_KCSEL_K2_G,
-                GX_TEV_KCSEL_K2_R
-            };
-            static GXTevKAlphaSel kAlpSels[GX_MAX_TEXMAP] = {
-                GX_TEV_KASEL_K3_A,
-                GX_TEV_KASEL_K3_B,
-                GX_TEV_KASEL_K3_G,
-                GX_TEV_KASEL_K3_R,
-                GX_TEV_KASEL_K2_A,
-                GX_TEV_KASEL_K2_B,
-                GX_TEV_KASEL_K2_G,
-                GX_TEV_KASEL_K2_R
-            };
+            static GXTevKColorSel kColSels[GX_MAX_TEXMAP] = {GX_TEV_KCSEL_K3_A, GX_TEV_KCSEL_K3_B, GX_TEV_KCSEL_K3_G, GX_TEV_KCSEL_K3_R,
+                                                             GX_TEV_KCSEL_K2_A, GX_TEV_KCSEL_K2_B, GX_TEV_KCSEL_K2_G, GX_TEV_KCSEL_K2_R};
+            static GXTevKAlphaSel kAlpSels[GX_MAX_TEXMAP] = {GX_TEV_KASEL_K3_A, GX_TEV_KASEL_K3_B, GX_TEV_KASEL_K3_G, GX_TEV_KASEL_K3_R,
+                                                             GX_TEV_KASEL_K2_A, GX_TEV_KASEL_K2_B, GX_TEV_KASEL_K2_G, GX_TEV_KASEL_K2_R};
 
             bool bUseVtxCol = true;
             bool bUseMatCol = false;
@@ -737,8 +730,7 @@ namespace nw4r {
 
                 bUseVtxCol = chanCtrls->GetColorSrc() == GX_SRC_VTX || chanCtrls->GetAlphaSrc() == GX_SRC_VTX;
                 bUseMatCol = chanCtrls->GetColorSrc() == GX_SRC_REG || chanCtrls->GetAlphaSrc() == GX_SRC_REG;
-            }
-            else {
+            } else {
                 GXSetChanCtrl(GX_COLOR0A0, false, GX_SRC_REG, GX_SRC_VTX, GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE);
             }
 
@@ -834,12 +826,10 @@ namespace nw4r {
             if (IsTevSwapCap()) {
                 TevSwapMode* tevSwaps = GetTevSwapAry();
                 for (int i = 0; i < GX_MAX_TEVSWAP; i++) {
-                    GXSetTevSwapModeTable(static_cast<GXTevSwapSel>(i),
-                                            tevSwaps[i].GetR(), tevSwaps[i].GetG(),
-                                            tevSwaps[i].GetB(), tevSwaps[i].GetA());
+                    GXSetTevSwapModeTable(static_cast<GXTevSwapSel>(i), tevSwaps[i].GetR(), tevSwaps[i].GetG(), tevSwaps[i].GetB(),
+                                          tevSwaps[i].GetA());
                 }
-            }
-            else {
+            } else {
                 GXSetTevSwapModeTable(GX_TEV_SWAP0, GX_CH_RED, GX_CH_GREEN, GX_CH_BLUE, GX_CH_ALPHA);
                 GXSetTevSwapModeTable(GX_TEV_SWAP1, GX_CH_RED, GX_CH_RED, GX_CH_RED, GX_CH_ALPHA);
                 GXSetTevSwapModeTable(GX_TEV_SWAP2, GX_CH_GREEN, GX_CH_GREEN, GX_CH_GREEN, GX_CH_ALPHA);
@@ -860,42 +850,30 @@ namespace nw4r {
                 for (int i = 0; i < mGXMemNum.tevStage; i++) {
                     GXTevStageID tevStage = static_cast<GXTevStageID>(i);
 
-                    GXSetTevOrder(tevStage, tevStages[i].GetTexCoordGen(),
-                                tevStages[i].GetTexMap(),
-                                tevStages[i].GetColorChan());
+                    GXSetTevOrder(tevStage, tevStages[i].GetTexCoordGen(), tevStages[i].GetTexMap(), tevStages[i].GetColorChan());
 
                     GXSetTevSwapMode(tevStage, tevStages[i].GetRasSwapSel(), tevStages[i].GetTexSwapSel());
 
-                    GXSetTevColorIn(tevStage,
-                                    tevStages[i].GetColorInA(),
-                                    tevStages[i].GetColorInB(),
-                                    tevStages[i].GetColorInC(),
+                    GXSetTevColorIn(tevStage, tevStages[i].GetColorInA(), tevStages[i].GetColorInB(), tevStages[i].GetColorInC(),
                                     tevStages[i].GetColorInD());
 
-                    GXSetTevColorOp(tevStage, tevStages[i].GetColorOp(),
-                                    tevStages[i].GetColorBias(), tevStages[i].GetColorScale(),
+                    GXSetTevColorOp(tevStage, tevStages[i].GetColorOp(), tevStages[i].GetColorBias(), tevStages[i].GetColorScale(),
                                     tevStages[i].IsColorClamp(), tevStages[i].GetColorOutReg());
 
                     GXSetTevKColorSel(tevStage, tevStages[i].GetKColorSel());
 
-                    GXSetTevAlphaIn(tevStage,
-                                    tevStages[i].GetAlphaInA(),
-                                    tevStages[i].GetAlphaInB(),
-                                    tevStages[i].GetAlphaInC(),
+                    GXSetTevAlphaIn(tevStage, tevStages[i].GetAlphaInA(), tevStages[i].GetAlphaInB(), tevStages[i].GetAlphaInC(),
                                     tevStages[i].GetAlphaInD());
 
-                    GXSetTevAlphaOp(tevStage, tevStages[i].GetAlphaOp(),
-                                    tevStages[i].GetAlphaBias(), tevStages[i].GetAlphaScale(),
+                    GXSetTevAlphaOp(tevStage, tevStages[i].GetAlphaOp(), tevStages[i].GetAlphaBias(), tevStages[i].GetAlphaScale(),
                                     tevStages[i].IsAlphaClamp(), tevStages[i].GetAlphaOutReg());
 
                     GXSetTevKAlphaSel(tevStage, tevStages[i].GetKAlphaSel());
 
                     GXIndTexMtxID indMtxSel = tevStages[i].GetIndMtxSel();
-                    GXSetTevIndirect(tevStage, tevStages[i].GetIndStage(),
-                                    tevStages[i].GetIndFormat(), tevStages[i].GetIndBiasSel(),
-                                    indMtxSel, tevStages[i].GetIndWrapS(),
-                                    tevStages[i].GetIndWrapT(), tevStages[i].IsIndAddPrev(),
-                                    tevStages[i].IsIndUtcLod(), tevStages[i].GetIndAlphaSel());
+                    GXSetTevIndirect(tevStage, tevStages[i].GetIndStage(), tevStages[i].GetIndFormat(), tevStages[i].GetIndBiasSel(), indMtxSel,
+                                     tevStages[i].GetIndWrapS(), tevStages[i].GetIndWrapT(), tevStages[i].IsIndAddPrev(), tevStages[i].IsIndUtcLod(),
+                                     tevStages[i].GetIndAlphaSel());
 
                     if (GX_ITM_0 <= indMtxSel && indMtxSel <= GX_ITM_2) {
                         bUseIndTexMtx[indMtxSel - 1] = true;
@@ -904,8 +882,7 @@ namespace nw4r {
                 }
 
                 bUseRasStage = true;
-            }
-            else {
+            } else {
                 u8 tevStageID = GX_TEVSTAGE0;
 
                 if (mGXMemNum.texMap == GX_TEXMAP0) {
@@ -917,8 +894,7 @@ namespace nw4r {
 
                     tevStageID++;
                     bUseRasStage = true;
-                }
-                else {
+                } else {
                     if (mGXMemNum.texMap == GX_TEXMAP1) {
                         GXTevStageID tevStage = static_cast<GXTevStageID>(tevStageID);
 
@@ -927,8 +903,7 @@ namespace nw4r {
                         GXSetTevAlphaIn(tevStage, GX_CA_A0, GX_CA_A1, GX_CA_TEXA, GX_CA_ZERO);
 
                         tevStageID++;
-                    }
-                    else {
+                    } else {
                         if (mGXMemNum.texMap == GX_TEXMAP2) {
                             GXTevStageID tevStage;
 
@@ -948,8 +923,7 @@ namespace nw4r {
                             GXSetTevKAlphaSel(tevStage, kAlpSels[GX_TEXMAP0]);
 
                             tevStageID++;
-                        }
-                        else {
+                        } else {
                             for (int i = 0; i < mGXMemNum.texMap; i++) {
                                 GXTevStageID tevStage = static_cast<GXTevStageID>(tevStageID);
 
@@ -1032,19 +1006,15 @@ namespace nw4r {
             if (IsAlphaCompareCap()) {
                 AlphaCompare* pAlpComp = GetAlphaComparePtr();
 
-                GXSetAlphaCompare(pAlpComp->GetComp0(), pAlpComp->GetRef0(),
-                                    pAlpComp->GetOp(), pAlpComp->GetComp1(),
-                                    pAlpComp->GetRef1());
-            }
-            else {
+                GXSetAlphaCompare(pAlpComp->GetComp0(), pAlpComp->GetRef0(), pAlpComp->GetOp(), pAlpComp->GetComp1(), pAlpComp->GetRef1());
+            } else {
                 GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_AND, GX_ALWAYS, 0);
             }
 
             if (IsBlendModeCap()) {
                 BlendMode* pBlendMode = GetBlendModePtr();
                 GXSetBlendMode(pBlendMode->GetType(), pBlendMode->GetSrcFactor(), pBlendMode->GetDstFactor(), pBlendMode->GetOp());
-            }
-            else {
+            } else {
                 GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_SET);
             }
 
@@ -1103,5 +1073,5 @@ namespace nw4r {
 
             return Size(GXGetTexObjWidth(&texObj), GXGetTexObjHeight(&texObj));
         }
-    }
-}
+    }  // namespace lyt
+}  // namespace nw4r

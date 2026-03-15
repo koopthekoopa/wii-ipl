@@ -29,10 +29,8 @@ namespace nw4r {
                 return static_cast<u32>(GetSignatureInt(fileHeader.signature)) == testSig && TestFileHeader(fileHeader);
             }
 
-            TexCoordAry::TexCoordAry():
-            mCap(0),
-            mNum(0),
-            mpData(NULL) {}
+            TexCoordAry::TexCoordAry() : mCap(0), mNum(0), mpData(NULL) {
+            }
 
             void TexCoordAry::Free() {
                 if (mpData != NULL) {
@@ -63,12 +61,7 @@ namespace nw4r {
                     return;
                 }
 
-                static TexCoords texCoords = {
-                    math::VEC2(0.0f, 0.0f),
-                    math::VEC2(1.0f, 0.0f),
-                    math::VEC2(0.0f, 1.0f),
-                    math::VEC2(1.0f, 1.0f)
-                };
+                static TexCoords texCoords = {math::VEC2(0.0f, 0.0f), math::VEC2(1.0f, 0.0f), math::VEC2(0.0f, 1.0f), math::VEC2(1.0f, 1.0f)};
 
                 for (int j = mNum; j < num; j++) {
                     for (int i = 0; i < (int)ARRAY_LENGTH(mpData[j]); i++) {
@@ -108,10 +101,8 @@ namespace nw4r {
                 }
 
                 if (vtxColors != NULL) {
-                    if (vtxColors[VERTEXCOLOR_LT] != ut::Color::WHITE
-                    || vtxColors[VERTEXCOLOR_RT] != ut::Color::WHITE
-                    || vtxColors[VERTEXCOLOR_LB] != ut::Color::WHITE
-                    || vtxColors[VERTEXCOLOR_RB] != ut::Color::WHITE) {
+                    if (vtxColors[VERTEXCOLOR_LT] != ut::Color::WHITE || vtxColors[VERTEXCOLOR_RT] != ut::Color::WHITE ||
+                        vtxColors[VERTEXCOLOR_LB] != ut::Color::WHITE || vtxColors[VERTEXCOLOR_RB] != ut::Color::WHITE) {
                         return true;
                     }
                 }
@@ -154,7 +145,8 @@ namespace nw4r {
             }
 
             void DrawQuad(const math::VEC2& basePt, const Size& size, u8 texCoordNum, const TexCoords* texCoords, const ut::Color* vtxColors) {
-                GXBegin(GX_QUADS, GX_VTXFMT0, 4); {
+                GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+                {
                     // Left top (LT)
                     GXPosition2f32(basePt.x, basePt.y);
                     if (vtxColors != NULL) {
@@ -190,10 +182,12 @@ namespace nw4r {
                     for (int i = 0; i < texCoordNum; i++) {
                         GXTexCoord2f32(texCoords[i][VERTEXCOLOR_LB].x, texCoords[i][VERTEXCOLOR_LB].y);
                     }
-                } GXEnd();
+                }
+                GXEnd();
             }
 
-            void DrawQuad(const math::VEC2& basePt, const Size& size, u8 texCoordNum, const TexCoords* texCoords, const ut::Color* vtxColors, u8 alpha) {
+            void DrawQuad(const math::VEC2& basePt, const Size& size, u8 texCoordNum, const TexCoords* texCoords, const ut::Color* vtxColors,
+                          u8 alpha) {
                 ut::Color wkVtxColors[VERTEXCOLOR_MAX];
                 if (vtxColors != NULL) {
                     MultipleAlpha(wkVtxColors, vtxColors, alpha);
@@ -227,13 +221,15 @@ namespace nw4r {
 
                 GXSetLineWidth(6, GX_TO_ZERO);
 
-                GXBegin(GX_LINESTRIP, GX_VTXFMT0, 5); {
-                    GXPosition2f32(pos.x,               pos.y              );
-                    GXPosition2f32(pos.x + size.width,  pos.y              );
-                    GXPosition2f32(pos.x + size.width,  pos.y + size.height);
-                    GXPosition2f32(pos.x,               pos.y + size.height);
-                    GXPosition2f32(pos.x,               pos.y              );
-                } GXEnd();
+                GXBegin(GX_LINESTRIP, GX_VTXFMT0, 5);
+                {
+                    GXPosition2f32(pos.x, pos.y);
+                    GXPosition2f32(pos.x + size.width, pos.y);
+                    GXPosition2f32(pos.x + size.width, pos.y + size.height);
+                    GXPosition2f32(pos.x, pos.y + size.height);
+                    GXPosition2f32(pos.x, pos.y);
+                }
+                GXEnd();
             }
 
             void InitGXTexObjFromTPL(GXTexObj* to, TPLPalette* pal, u32 id) {
@@ -247,27 +243,19 @@ namespace nw4r {
                 GXBool mipMap = tdp->textureHeader->minLOD != tdp->textureHeader->maxLOD ? GX_TRUE : GX_FALSE;
 
                 if (tdp->CLUTHeader != NULL) {
-                    GXInitTexObjCI(to, tdp->textureHeader->data,
-                                    tdp->textureHeader->width, tdp->textureHeader->height,
-                                    static_cast<GXCITexFmt>(tdp->textureHeader->format),
-                                    tdp->textureHeader->wrapS, tdp->textureHeader->wrapT,
-                                    mipMap, 0);
+                    GXInitTexObjCI(to, tdp->textureHeader->data, tdp->textureHeader->width, tdp->textureHeader->height,
+                                   static_cast<GXCITexFmt>(tdp->textureHeader->format), tdp->textureHeader->wrapS, tdp->textureHeader->wrapT, mipMap,
+                                   0);
 
                     GXInitTexObjUserData(to, tdp->CLUTHeader);
-                }
-                else {
-                    GXInitTexObj(to, tdp->textureHeader->data,
-                                tdp->textureHeader->width, tdp->textureHeader->height,
-                                static_cast<GXTexFmt>(tdp->textureHeader->format),
-                                tdp->textureHeader->wrapS, tdp->textureHeader->wrapT,
-                                mipMap);
+                } else {
+                    GXInitTexObj(to, tdp->textureHeader->data, tdp->textureHeader->width, tdp->textureHeader->height,
+                                 static_cast<GXTexFmt>(tdp->textureHeader->format), tdp->textureHeader->wrapS, tdp->textureHeader->wrapT, mipMap);
                 }
 
-                GXInitTexObjLOD(to,
-                                tdp->textureHeader->minFilter, tdp->textureHeader->magFilter,
-                                tdp->textureHeader->minLOD, tdp->textureHeader->maxLOD, tdp->textureHeader->LODBias,
-                                false, tdp->textureHeader->edgeLODEnable, GX_ANISO_1);
+                GXInitTexObjLOD(to, tdp->textureHeader->minFilter, tdp->textureHeader->magFilter, tdp->textureHeader->minLOD,
+                                tdp->textureHeader->maxLOD, tdp->textureHeader->LODBias, false, tdp->textureHeader->edgeLODEnable, GX_ANISO_1);
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace lyt
+}  // namespace nw4r

@@ -1,23 +1,14 @@
-#include <revolution/nwc24.h>
 #include <private/nwc24.h>
+#include <revolution/nwc24.h>
 
-#include <revolution/verdefs.h>
 #include <revolution/os.h>
+#include <revolution/verdefs.h>
 
 #define MANAGE_ERROR_CODE_BASE 109000
 
-enum {
-    NWC24_LIB_CLOSED,
-    NWC24_LIB_OPENED,
-    NWC24_LIB_OPENED_BY_TOOL,
-    NWC24_LIB_BLOCKED
-};
+enum { NWC24_LIB_CLOSED, NWC24_LIB_OPENED, NWC24_LIB_OPENED_BY_TOOL, NWC24_LIB_BLOCKED };
 
-enum {
-    NWC24_FAIL_SFL = (1 << 0),
-    NWC24_FAIL_DL_TASK = (1 << 1),
-    NWC24_FAIL_FATAL = (1 << 2)
-};
+enum { NWC24_FAIL_SFL = (1 << 0), NWC24_FAIL_DL_TASK = (1 << 1), NWC24_FAIL_FATAL = (1 << 2) };
 
 SDKDefineVersion(NWC24, "Dec 12 2008", "03:06:06");
 
@@ -120,8 +111,7 @@ static NWC24Err NWC24OpenLibInternal(NWC24Work* work, s32 state) {
 
             if (result == NWC24_ERR_FILE_NOEXISTS) {
                 failFlag |= NWC24_FAIL_FATAL;
-            }
-            else {
+            } else {
                 failFlag |= NWC24_FAIL_SFL;
             }
         }
@@ -132,8 +122,7 @@ static NWC24Err NWC24OpenLibInternal(NWC24Work* work, s32 state) {
 
             if (result == NWC24_ERR_FILE_NOEXISTS) {
                 failFlag |= NWC24_FAIL_FATAL;
-            }
-            else {
+            } else {
                 failFlag |= NWC24_FAIL_DL_TASK;
             }
         }
@@ -146,8 +135,7 @@ static NWC24Err NWC24OpenLibInternal(NWC24Work* work, s32 state) {
             NWC24WorkP = NULL;
             NWC24iResumeForCloseLib();
             result = failErr;
-        }
-        else {
+        } else {
             Opened = state;
             return NWC24_OK;
         }
@@ -257,19 +245,15 @@ NWC24Err NWC24BlockOpenMsgLib(BOOL block) {
     if (block) {
         if (Opened == NWC24_LIB_CLOSED) {
             Opened = NWC24_LIB_BLOCKED;
-        }
-        else if (Opened == NWC24_LIB_OPENED) {
+        } else if (Opened == NWC24_LIB_OPENED) {
             result = NWC24_ERR_LIB_OPENED;
-        }
-        else {
+        } else {
             result = NWC24_ERR_BUSY;
         }
-    }
-    else {
+    } else {
         if (Opened == NWC24_LIB_BLOCKED) {
             Opened = NWC24_LIB_CLOSED;
-        }
-        else {
+        } else {
             result = NWC24_ERR_LIB_NOT_OPENED;
         }
     }
@@ -290,8 +274,7 @@ NWC24Err NWC24GetSchedulerError(s32* numErrors, s32* errorCode) {
 
     if ((lastTick & 0xFFFF0000) == (curTick & 0xFFFF0000)) {
         result = NWC24_OK;
-    }
-    else {
+    } else {
         lastTick = curTick;
         result = NWC24iGetSchedulerStat((NWC24ScdStat*)InternalStatBuf, sizeof(InternalStatBuf));
     }
@@ -321,7 +304,7 @@ NWC24Err AnalyzeErrorCode(s32 errorCode, u32 usage, u32* score) {
         tmp = tmp / 10;
     }
 
-    //If the code is 5XXXX, it is an NCD error
+    // If the code is 5XXXX, it is an NCD error
     if (digit[5] == 0 && digit[4] == 5) {
         *score = 60;
         return NWC24_ERR_NETWORK;
@@ -331,8 +314,7 @@ NWC24Err AnalyzeErrorCode(s32 errorCode, u32 usage, u32* score) {
         if ((usage & 2) == 0) {
             return NWC24_OK;
         }
-    }
-    else {
+    } else {
         if ((usage & 1) == 0) {
             return NWC24_OK;
         }

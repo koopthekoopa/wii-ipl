@@ -1,8 +1,8 @@
-#include <revolution/nwc24.h>
 #include <private/nwc24.h>
+#include <revolution/nwc24.h>
 
-#define SECRET_FRIEND_LIST_MAGIC    'WcFs'
-#define SECRET_FRIEND_LIST_VERSION  2
+#define SECRET_FRIEND_LIST_MAGIC 'WcFs'
+#define SECRET_FRIEND_LIST_VERSION 2
 
 static const char* FLFilePath = "/shared2/wc24/nwc24fls.bin";
 
@@ -24,7 +24,7 @@ NWC24Err NWC24iInitSecretFriendList(BOOL force) {
     if (result == NWC24_OK && !force) {
         return result;
     }
-    
+
     if (result == NWC24_ERR_VER_MISMATCH) {
         result = GetCachedSecretFLHeader(&header);
         if (header->version > SECRET_FRIEND_LIST_VERSION) {
@@ -37,14 +37,14 @@ NWC24Err NWC24iInitSecretFriendList(BOOL force) {
 }
 
 NWC24Err NWC24iCreateSecretFriendList() {
-    NWC24Err                result;
-    NWC24Err                resultWrite;
+    NWC24Err result;
+    NWC24Err resultWrite;
 
-    NWC24SecretFLHeader*    header;
-    NWC24SecretFriendInfo*  tmpFriendInfo;
+    NWC24SecretFLHeader* header;
+    NWC24SecretFriendInfo* tmpFriendInfo;
 
-    NWC24File               file;
-    u32                     i;
+    NWC24File file;
+    u32 i;
 
     header = (NWC24SecretFLHeader*)nwc24Work->secretFlHead;
     Mail_memset(header, 0, sizeof(NWC24SecretFLHeader));
@@ -83,11 +83,11 @@ NWC24Err NWC24iCreateSecretFriendList() {
 }
 
 static NWC24Err GetCachedSecretFLHeader(NWC24SecretFLHeader** header) {
-    NWC24Err    result;
-    NWC24Err    resultRead;
-    NWC24Err    resultClose;
+    NWC24Err result;
+    NWC24Err resultRead;
+    NWC24Err resultClose;
 
-    NWC24File   file;
+    NWC24File file;
 
     *header = (NWC24SecretFLHeader*)nwc24Work->secretFlHead;
 
@@ -103,8 +103,7 @@ static NWC24Err GetCachedSecretFLHeader(NWC24SecretFLHeader** header) {
 
         if (resultRead != NWC24_OK) {
             result = resultRead;
-        }
-        else {
+        } else {
             result = resultClose;
         }
 

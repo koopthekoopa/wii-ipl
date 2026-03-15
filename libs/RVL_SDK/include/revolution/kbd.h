@@ -30,15 +30,15 @@ typedef enum _KBDCountryCode {
 } KBDCountryCode;
 
 typedef struct _KBDKeyEvent {
-    u8  unk_0x00[32];
+    u8 unk_0x00[32];
 } KBDKeyEvent;
 
 typedef struct _KBDDevEvent {
-    u8  unk_0x00[32];
+    u8 unk_0x00[32];
 } KBDDevEvent;
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // REVOLUTION_KBD_H
+#endif  // REVOLUTION_KBD_H

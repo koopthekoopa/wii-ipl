@@ -1,8 +1,8 @@
 #ifndef IPL_NIGAOE_MANAGER_H
 #define IPL_NIGAOE_MANAGER_H
 
-#include "system/iplNigaoe.h"
 #include "system/iplNand.h"
+#include "system/iplNigaoe.h"
 
 #include <revolution/nwc24.h>
 
@@ -11,30 +11,30 @@
 namespace ipl {
     namespace nigaoe {
         class Manager {
-            public:
-                Manager(EGG::Heap* heap);
+        public:
+            Manager(EGG::Heap* heap);
 
-                Object*     create(EGG::Heap* heap, int width, int height, int faceId, Object::MakeIconCallback callback, void* callbackWork);
-                Object*     create(EGG::Heap* heap, int width, int height, RFLiCharData* faceData, Object::MakeIconCallback callback, void* callbackWork);
+            Object* create(EGG::Heap* heap, int width, int height, int faceId, Object::MakeIconCallback callback, void* callbackWork);
+            Object* create(EGG::Heap* heap, int width, int height, RFLiCharData* faceData, Object::MakeIconCallback callback, void* callbackWork);
 
-                void        makeIcon();
+            void makeIcon();
 
-                void        detach(Object* obj);
+            void detach(Object* obj);
 
-                BOOL        isAvalable(u16 faceId);
-                BOOL        isValid(const RFLiCharData* faceData) const;
+            BOOL isAvalable(u16 faceId);
+            BOOL isValid(const RFLiCharData* faceData) const;
 
-                RFLErrcode  addHiddenDB(const NWC24MsgObj* faceDB);
-                void        commitHiddenDB();
+            RFLErrcode addHiddenDB(const NWC24MsgObj* faceDB);
+            void commitHiddenDB();
 
-                RFLErrcode  getInitResult() { return mErrcode; }
+            RFLErrcode getInitResult() { return mErrcode; }
 
-            private:
-                nand::File*     mResFile;   // 0x00
-                RFLErrcode      mErrcode;   // 0x04
-                nw4r::ut::List  mObjects;   // 0x08
+        private:
+            nand::File* mResFile;     // 0x00
+            RFLErrcode mErrcode;      // 0x04
+            nw4r::ut::List mObjects;  // 0x08
         };
-    }
-}
+    }  // namespace nigaoe
+}  // namespace ipl
 
-#endif // IPL_NIGAOE_MANAGER_H
+#endif  // IPL_NIGAOE_MANAGER_H

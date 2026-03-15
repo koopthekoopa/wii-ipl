@@ -5,12 +5,12 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif // __cplusplus
+#endif  // __cplusplus
 
-#define VF_WORK_SIZE    0x14000
+#define VF_WORK_SIZE 0x14000
 
-void    VFInitEx(void* heap_start_address, u32 size);
-s32     VFIsAvailable();
+void VFInitEx(void* heap_start_address, u32 size);
+s32 VFIsAvailable();
 
 VFError VFCreateSystemFileNANDFlashEx(const char* sys_file_name, u32 file_size);
 
@@ -36,8 +36,8 @@ VFError VFCreateDir(const char* dir_name);
 VFError VFChangeDir(const char* dir_name);
 VFError VFDeleteDir(const char* dir_name);
 
-s32     VFGetFileSizeByFd(VFFILE* file);
-s32     VFGetOffsetByFd(VFFILE* file);
+s32 VFGetFileSizeByFd(VFFILE* file);
+s32 VFGetOffsetByFd(VFFILE* file);
 
 VFError VFGetDriveFreeSize(const char* drive);
 
@@ -54,10 +54,10 @@ VFError VFSync(const char* drive, s32 mode);
 
 VFError VFGetLastError();
 VFError VFGetLastDeviceError(const char* drive);
-char*   VFGetApiErrorString(VFError error);
+char* VFGetApiErrorString(VFError error);
 
 #ifdef __cplusplus
 }
-#endif // __cplusplus
+#endif  // __cplusplus
 
-#endif // REVOLUTION_VF_H
+#endif  // REVOLUTION_VF_H

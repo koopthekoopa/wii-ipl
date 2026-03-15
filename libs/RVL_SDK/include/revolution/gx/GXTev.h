@@ -1,9 +1,10 @@
 #ifndef REVOLUTION_GX_TEV_H
 #define REVOLUTION_GX_TEV_H
 
-#include <revolution/types.h>
 #include <revolution/gx/GXEnum.h>
 #include <revolution/gx/GXStruct.h>
+#include <revolution/types.h>
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -36,4 +37,4 @@ void GXSetNumTevStages(u8 nStages);
 }
 #endif
 
-#endif // REVOLUTION_GX_TEV_H
+#endif  // REVOLUTION_GX_TEV_H

@@ -6,17 +6,19 @@
 namespace ipl {
     namespace scene {
         FADER_SCENE_CLASS(ChannelSelect) {
-            public:
-                ChannelSelect(EGG::Heap* heap, int page);
+        public:
+            ChannelSelect(EGG::Heap * heap, int page);
 
-                static void setInitFlag(BOOL value) { msInitFlag = value; }
-            
-            private:
-                u8  unk_0x58[0x278];
+            static void setInitFlag(BOOL value) {
+                msInitFlag = value;
+            }
 
-                static BOOL msInitFlag;
+        private:
+            u8 unk_0x58[0x278];
+
+            static BOOL msInitFlag;
         };
-    }
-}
+    }  // namespace scene
+}  // namespace ipl
 
-#endif // IPL_SCENE_CHANNEL_SELECT_H
+#endif  // IPL_SCENE_CHANNEL_SELECT_H

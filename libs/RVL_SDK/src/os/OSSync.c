@@ -1,9 +1,10 @@
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 #include <string.h>
 
 asm void SystemCallVector() {
+    // clang-format off
 #ifdef __MWERKS__
 entry __OSSystemCallVectorStart
     nofralloc
@@ -17,6 +18,7 @@ entry __OSSystemCallVectorStart
 entry __OSSystemCallVectorEnd
     nop
 #endif // __MWERKS__
+    // clang-format on
 }
 
 void __OSInitSystemCall() {

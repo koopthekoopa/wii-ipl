@@ -1,8 +1,8 @@
 #include <private/os.h>
 #include <revolution/os.h>
 
-#include <revolution/gx.h>
 #include <private/gx.h>
+#include <revolution/gx.h>
 
 #include <private/hollywood.h>
 
@@ -10,15 +10,15 @@
 
 #include <string.h>
 
-static u8 GXTexMode0Ids[8] = { 0x80, 0x81, 0x82, 0x83, 0xA0, 0xA1, 0xA2, 0xA3 };
-static u8 GXTexMode1Ids[8] = { 0x84, 0x85, 0x86, 0x87, 0xA4, 0xA5, 0xA6, 0xA7 };
-static u8 GXTexImage0Ids[8] = { 0x88, 0x89, 0x8A, 0x8B, 0xA8, 0xA9, 0xAA, 0xAB };
-static u8 GXTexImage1Ids[8] = { 0x8C, 0x8D, 0x8E, 0x8F, 0xAC, 0xAD, 0xAE, 0xAF };
-static u8 GXTexImage2Ids[8] = { 0x90, 0x91, 0x92, 0x93, 0xB0, 0xB1, 0xB2, 0xB3 };
-static u8 GXTexImage3Ids[8] = { 0x94, 0x95, 0x96, 0x97, 0xB4, 0xB5, 0xB6, 0xB7 };
-static u8 GXTexTlutIds[8] = { 0x98, 0x99, 0x9A, 0x9B, 0xB8, 0xB9, 0xBA, 0xBB };
+static u8 GXTexMode0Ids[8] = {0x80, 0x81, 0x82, 0x83, 0xA0, 0xA1, 0xA2, 0xA3};
+static u8 GXTexMode1Ids[8] = {0x84, 0x85, 0x86, 0x87, 0xA4, 0xA5, 0xA6, 0xA7};
+static u8 GXTexImage0Ids[8] = {0x88, 0x89, 0x8A, 0x8B, 0xA8, 0xA9, 0xAA, 0xAB};
+static u8 GXTexImage1Ids[8] = {0x8C, 0x8D, 0x8E, 0x8F, 0xAC, 0xAD, 0xAE, 0xAF};
+static u8 GXTexImage2Ids[8] = {0x90, 0x91, 0x92, 0x93, 0xB0, 0xB1, 0xB2, 0xB3};
+static u8 GXTexImage3Ids[8] = {0x94, 0x95, 0x96, 0x97, 0xB4, 0xB5, 0xB6, 0xB7};
+static u8 GXTexTlutIds[8] = {0x98, 0x99, 0x9A, 0x9B, 0xB8, 0xB9, 0xBA, 0xBB};
 
-static u8 GX2HWFiltConv[6] = { 0x00, 0x04, 0x01, 0x05, 0x02, 0x06 };
+static u8 GX2HWFiltConv[6] = {0x00, 0x04, 0x01, 0x05, 0x02, 0x06};
 
 static void __GXGetTexTileShift(GXTexFmt fmt, u32* rowTileS, u32* colTileS) {
     switch (fmt) {
@@ -41,10 +41,10 @@ static void __GXGetTexTileShift(GXTexFmt fmt, u32* rowTileS, u32* colTileS) {
         case GX_CTF_G8:
         case GX_CTF_B8:
         case GX_CTF_Z8M: {
-        case GX_CTF_Z8L:
-            *rowTileS = 3;
-            *colTileS = 2;
-            break;
+            case GX_CTF_Z8L:
+                *rowTileS = 3;
+                *colTileS = 2;
+                break;
         }
         case GX_TF_IA8:
         case GX_TF_RGB565:
@@ -80,8 +80,7 @@ u32 GXGetTexBufferSize(u16 width, u16 height, u32 format, GXBool mipmap, u8 max_
     __GXGetTexTileShift(format, &tileShiftX, &tileShiftY);
     if (format == GX_TF_RGBA8 || format == GX_TF_Z24X8) {
         tileBytes = 64;
-    }
-    else {
+    } else {
         tileBytes = 32;
     }
 
@@ -100,8 +99,7 @@ u32 GXGetTexBufferSize(u16 width, u16 height, u32 format, GXBool mipmap, u8 max_
             width = (width > 1) ? width >> 1 : 1;
             height = (height > 1) ? height >> 1 : 1;
         }
-    }
-    else {
+    } else {
         nx = (width + (1 << tileShiftX) - 1) >> tileShiftX;
         ny = (height + (1 << tileShiftY) - 1) >> tileShiftY;
         bufferSize = nx * ny * tileBytes;
@@ -126,7 +124,8 @@ void __GetImageTileCount(GXTexFmt fmt, u16 wd, u16 ht, u32* rowTiles, u32* colTi
     *cmpTiles = (fmt == GX_TF_RGBA8 || fmt == GX_TF_Z24X8) ? 2 : 1;
 }
 
-void GXInitTexObj(const GXTexObj* obj, void* image_ptr, u16 width, u16 height, GXTexFmt format, GXTexWrapMode wrap_s, GXTexWrapMode wrap_t, GXBool mipmap) {
+void GXInitTexObj(const GXTexObj* obj, void* image_ptr, u16 width, u16 height, GXTexFmt format, GXTexWrapMode wrap_s, GXTexWrapMode wrap_t,
+                  GXBool mipmap) {
     u32 imageBase;
     u32 maxLOD;
     u16 rowT, colT;
@@ -144,23 +143,19 @@ void GXInitTexObj(const GXTexObj* obj, void* image_ptr, u16 width, u16 height, G
 
         if (format == 8 || format == 9 || format == 10) {
             SET_REG_FIELD(t->mode0, 3, 5, 5);
-        }
-        else {
+        } else {
             SET_REG_FIELD(t->mode0, 3, 5, 6);
         }
 
-
         if (width > height) {
             maxLOD = 31 - __cntlzw(width);
-        }
-        else {
+        } else {
             maxLOD = 31 - __cntlzw(height);
         }
-    
+
         lmax = 16.0f * maxLOD;
         SET_REG_FIELD(t->mode1, 8, 8, lmax);
-    }
-    else {
+    } else {
         SET_REG_FIELD(t->mode0, 3, 5, 4);
     }
 
@@ -222,7 +217,8 @@ void GXInitTexObj(const GXTexObj* obj, void* image_ptr, u16 width, u16 height, G
     t->flags |= 2;
 }
 
-void GXInitTexObjCI(GXTexObj* obj, void* image_ptr, u16 width, u16 height, GXCITexFmt format, GXTexWrapMode wrap_s, GXTexWrapMode wrap_t, GXBool mipmap, u32 tlut_name) {
+void GXInitTexObjCI(GXTexObj* obj, void* image_ptr, u16 width, u16 height, GXCITexFmt format, GXTexWrapMode wrap_s, GXTexWrapMode wrap_t,
+                    GXBool mipmap, u32 tlut_name) {
     __GXTexObjInt* t = (__GXTexObjInt*)obj;
 
     GXInitTexObj(obj, image_ptr, width, height, format, wrap_s, wrap_t, mipmap);
@@ -230,15 +226,15 @@ void GXInitTexObjCI(GXTexObj* obj, void* image_ptr, u16 width, u16 height, GXCIT
     t->tlutName = tlut_name;
 }
 
-void GXInitTexObjLOD(GXTexObj* obj, GXTexFilter min_filt, GXTexFilter mag_filt, f32 min_lod, f32 max_lod, f32 lod_bias, u8 bias_clamp, u8 do_edge_lod, GXAnisotropy max_aniso) {
+void GXInitTexObjLOD(GXTexObj* obj, GXTexFilter min_filt, GXTexFilter mag_filt, f32 min_lod, f32 max_lod, f32 lod_bias, u8 bias_clamp, u8 do_edge_lod,
+                     GXAnisotropy max_aniso) {
     u8 lbias;
     u8 lmin, lmax;
     __GXTexObjInt* t = (__GXTexObjInt*)obj;
 
     if (lod_bias < -4.0f) {
         lod_bias = -4.0f;
-    }
-    else if (lod_bias >= 4.0f) {
+    } else if (lod_bias >= 4.0f) {
         lod_bias = 3.99f;
     }
 
@@ -254,16 +250,14 @@ void GXInitTexObjLOD(GXTexObj* obj, GXTexFilter min_filt, GXTexFilter mag_filt, 
 
     if (min_lod < 0.0f) {
         min_lod = 0.0f;
-    }
-    else if (min_lod > 10.0f) {
+    } else if (min_lod > 10.0f) {
         min_lod = 10.0f;
     }
 
     lmin = 16.0f * min_lod;
     if (max_lod < 0.0f) {
         max_lod = 0.0f;
-    }
-    else if (max_lod > 10.0f) {
+    } else if (max_lod > 10.0f) {
         max_lod = 10.0f;
     }
     lmax = 16.0f * max_lod;
@@ -291,60 +285,60 @@ void GXInitTexObjUserData(const GXTexObj* obj, void* user_data) {
 }
 
 void* GXGetTexObjUserData(const GXTexObj* obj) {
-    const __GXTexObjInt* t = (const __GXTexObjInt *)obj;
+    const __GXTexObjInt* t = (const __GXTexObjInt*)obj;
 
     return t->userData;
 }
 
 void* GXGetTexObjData(const GXTexObj* to) {
-    const __GXTexObjInt* t = (const __GXTexObjInt *)to;
+    const __GXTexObjInt* t = (const __GXTexObjInt*)to;
 
     return (void*)(GET_REG_FIELD(t->image3, 21, 0) << 5);
 }
 
 u16 GXGetTexObjWidth(const GXTexObj* to) {
-    const __GXTexObjInt* t = (const __GXTexObjInt *)to;
+    const __GXTexObjInt* t = (const __GXTexObjInt*)to;
 
     return (u32)GET_REG_FIELD(t->image0, 10, 0) + 1;
 }
 
 u16 GXGetTexObjHeight(const GXTexObj* to) {
-    const __GXTexObjInt* t = (const __GXTexObjInt *)to;
+    const __GXTexObjInt* t = (const __GXTexObjInt*)to;
 
     return (u32)GET_REG_FIELD(t->image0, 10, 10) + 1;
 }
 
 GXTexFmt GXGetTexObjFmt(const GXTexObj* to) {
-    const __GXTexObjInt* t = (const __GXTexObjInt *)to;
+    const __GXTexObjInt* t = (const __GXTexObjInt*)to;
 
     return t->fmt;
 }
 
 GXTexWrapMode GXGetTexObjWrapS(const GXTexObj* to) {
-    const __GXTexObjInt* t = (const __GXTexObjInt *)to;
+    const __GXTexObjInt* t = (const __GXTexObjInt*)to;
 
     return GET_REG_FIELD(t->mode0, 2, 0);
 }
 
 GXTexWrapMode GXGetTexObjWrapT(const GXTexObj* to) {
-    const __GXTexObjInt* t = (const __GXTexObjInt *)to;
+    const __GXTexObjInt* t = (const __GXTexObjInt*)to;
 
     return GET_REG_FIELD(t->mode0, 2, 2);
 }
 
 GXBool GXGetTexObjMipMap(const GXTexObj* to) {
-    const __GXTexObjInt* t = (const __GXTexObjInt *)to;
+    const __GXTexObjInt* t = (const __GXTexObjInt*)to;
 
     return (t->flags & 1) == 1;
 }
 
-void GXLoadTexObjPreLoaded(const GXTexObj *obj, const GXTexRegion *region, GXTexMapID id) {
+void GXLoadTexObjPreLoaded(const GXTexObj* obj, const GXTexRegion* region, GXTexMapID id) {
     __GXTlutRegionInt* tlr;
     u32 m0, m1;
     u32 img0, img1, img2, img3;
 
     __GXTexObjInt* t = (__GXTexObjInt*)obj;
-    __GXTexRegionInt* r = (__GXTexRegionInt *)region;
+    __GXTexRegionInt* r = (__GXTexRegionInt*)region;
 
     m0 = t->mode0;
     m1 = t->mode1;
@@ -388,7 +382,7 @@ void GXLoadTexObj(const GXTexObj* obj, GXTexMapID id) {
 }
 
 void GXInitTlutObj(const GXTlutObj* tlut_obj, void* lut, GXTlutFmt fmt, u16 n_entries) {
-    __GXTlutObjInt* t = (__GXTlutObjInt *)tlut_obj;
+    __GXTlutObjInt* t = (__GXTlutObjInt*)tlut_obj;
 
     t->tlut = 0;
     SET_REG_FIELD(t->tlut, 2, 10, fmt);
@@ -400,9 +394,9 @@ void GXInitTlutObj(const GXTlutObj* tlut_obj, void* lut, GXTlutFmt fmt, u16 n_en
 void GXLoadTlut(const GXTlutObj* tlut_obj, u32 tlut_name) {
     __GXTlutRegionInt* r;
     u32 tlut_offset;
-    __GXTlutObjInt* t = (__GXTlutObjInt *)tlut_obj;
+    __GXTlutObjInt* t = (__GXTlutObjInt*)tlut_obj;
 
-    r = (__GXTlutRegionInt *)__GXData->tlutRegionCallback(tlut_name);
+    r = (__GXTlutRegionInt*)__GXData->tlutRegionCallback(tlut_name);
 
     __GXFlushTextureState();
     GX_WRITE_RAS_REG(t->loadTlut0);
@@ -473,7 +467,7 @@ void GXInitTexCacheRegion(GXTexRegion* region, u8 is_32b_mipmap, u32 tmem_even, 
 }
 
 void GXInitTlutRegion(GXTlutRegion* region, u32 tmem_addr, GXTlutSize tlut_size) {
-    __GXTlutRegionInt* t = (__GXTlutRegionInt *)region;
+    __GXTlutRegionInt* t = (__GXTlutRegionInt*)region;
 
     t->loadTlut1 = 0;
     tmem_addr -= 0x80000;
@@ -575,8 +569,7 @@ void __GXSetSUTexRegs() {
             tmap = map & 0xFFFFFEFF;
             if (i & 1) {
                 coord = GET_REG_FIELD(*ptref, 3, 15);
-            }
-            else {
+            } else {
                 coord = GET_REG_FIELD(*ptref, 3, 3);
             }
             if ((tmap != 0xFF) && !(__GXData->tcsManEnab & (1 << coord)) && (__GXData->tevTcEnab & (1 << i))) {

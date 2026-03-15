@@ -4,13 +4,13 @@
 
 #include <private/hollywood.h>
 
-static void*    IPCBufferHi;
-static void*    IPCBufferLo;
+static void* IPCBufferHi;
+static void* IPCBufferLo;
 
-static void*    IPCCurrentBufferHi;
-static void*    IPCCurrentBufferLo;
+static void* IPCCurrentBufferHi;
+static void* IPCCurrentBufferLo;
 
-static u8       Initialized;
+static u8 Initialized;
 
 void IPCInit() {
     if (Initialized) {

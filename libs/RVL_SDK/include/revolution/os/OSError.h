@@ -14,28 +14,32 @@
 extern "C" {
 #endif
 
-#define OS_ERROR_MAX    15
+#define OS_ERROR_MAX 15
 
 typedef u16 OSError;
 typedef void (*OSErrorHandler)(OSError, OSContext*, ...);
 
-OSErrorHandler  OSSetErrorHandler(OSError error, OSErrorHandler handler);
+OSErrorHandler OSSetErrorHandler(OSError error, OSErrorHandler handler);
 
-void            OSReport(const char* msg, ...);
-void            OSVReport(const char* msg, va_list list);
+void OSReport(const char* msg, ...);
+void OSVReport(const char* msg, va_list list);
 
-void            OSPanic(const char* file, int line, const char* msg, ...);
+void OSPanic(const char* file, int line, const char* msg, ...);
 
-#define         OSHalt(msg, line) OSPanic(__FILE__, line, msg)
-#define         OSAssertMsg(exp, msg, line) if (!(exp)) OSHalt(msg, line)
-#define         OSAssertVMsg(exp, line, ...) if (!(exp)) OSPanic(__FILE__, line, __VA_ARGS__)
+#define OSHalt(msg, line) OSPanic(__FILE__, line, msg)
+#define OSAssertMsg(exp, msg, line)                                                                                                                  \
+    if (!(exp))                                                                                                                                      \
+    OSHalt(msg, line)
+#define OSAssertVMsg(exp, line, ...)                                                                                                                 \
+    if (!(exp))                                                                                                                                      \
+    OSPanic(__FILE__, line, __VA_ARGS__)
 
-void            OSRegisterVersion(const char* version);
+void OSRegisterVersion(const char* version);
 
-void            OSFatal(GXColor front, GXColor back, const char* msg);
+void OSFatal(GXColor front, GXColor back, const char* msg);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // REVOLUTION_OS_ERROR_H
+#endif  // REVOLUTION_OS_ERROR_H

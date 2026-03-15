@@ -10,102 +10,96 @@
 namespace nw4r {
     namespace snd {
         class SoundHandle : private ut::NonCopyable {
-            public:
-                SoundHandle() : mSound(NULL) {}
-                ~SoundHandle() {
-                    DetachSound();
+        public:
+            SoundHandle() : mSound(NULL) {}
+            ~SoundHandle() { DetachSound(); }
+
+            void detail_AttachSound(detail::BasicSound* sound);
+            void detail_AttachSoundAsTempHandle(detail::BasicSound* sound);
+
+            bool IsAttachedSound() const { return mSound != NULL; }
+
+            detail::BasicSound* detail_GetAttachedSound() { return mSound; }
+
+            void DetachSound();
+
+            bool IsPrepared() const {
+                if (IsAttachedSound()) {
+                    return mSound->IsPrepared();
                 }
 
-                void    detail_AttachSound(detail::BasicSound* sound);
-                void    detail_AttachSoundAsTempHandle(detail::BasicSound* sound);
+                return false;
+            }
 
-                bool IsAttachedSound() const {
-                    return mSound != NULL;
+            u32 GetId() const {
+                if (IsAttachedSound()) {
+                    return mSound->GetId();
                 }
 
-                detail::BasicSound* detail_GetAttachedSound() {
-                    return mSound;
-                }
+                return -1;
+            }
 
-                void DetachSound();
-
-                bool IsPrepared() const {
-                    if (IsAttachedSound()) {
-                        return mSound->IsPrepared();
-                    }
-
-                    return false;
+            void StartPrepared() {
+                if (IsAttachedSound()) {
+                    mSound->StartPrepared();
                 }
+            }
 
-                u32 GetId() const {
-                    if (IsAttachedSound()) {
-                        return mSound->GetId();
-                    }
+            void Stop(int frames) {
+                if (IsAttachedSound()) {
+                    mSound->Stop(frames);
+                }
+            }
 
-                    return -1;
+            void Pause(bool flag, int frames) {
+                if (IsAttachedSound()) {
+                    mSound->Pause(flag, frames);
                 }
+            }
 
-                void StartPrepared() {
-                    if (IsAttachedSound()) {
-                        mSound->StartPrepared();
-                    }
+            void SetVolume(f32 volume, int frames) {
+                if (IsAttachedSound()) {
+                    mSound->SetVolume(volume, frames);
                 }
+            }
+            void SetPan(f32 pan) {
+                if (IsAttachedSound()) {
+                    mSound->SetPan(pan);
+                }
+            }
+            void SetPitch(f32 pitch) {
+                if (IsAttachedSound()) {
+                    mSound->SetPitch(pitch);
+                }
+            }
 
-                void Stop(int frames) {
-                    if (IsAttachedSound()) {
-                        mSound->Stop(frames);
-                    }
+            void SetOutputLine(int flag) {
+                if (IsAttachedSound()) {
+                    mSound->SetOutputLine(flag);
                 }
+            }
 
-                void Pause(bool flag, int frames) {
-                    if (IsAttachedSound()) {
-                        mSound->Pause(flag, frames);
-                    }
+            void SetMainOutVolume(f32 volume) {
+                if (IsAttachedSound()) {
+                    mSound->SetMainOutVolume(volume);
                 }
+            }
+            void SetRemoteOutVolume(int remote, f32 volume) {
+                if (IsAttachedSound()) {
+                    mSound->SetRemoteOutVolume(remote, volume);
+                }
+            }
 
-                void SetVolume(f32 volume, int frames) {
-                    if (IsAttachedSound()) {
-                        mSound->SetVolume(volume, frames);
-                    }
+            void SetFxSend(AuxBus bus, f32 send) {
+                if (IsAttachedSound()) {
+                    mSound->SetFxSend(bus, send);
                 }
-                void SetPan(f32 pan) {
-                    if (IsAttachedSound()) {
-                        mSound->SetPan(pan);
-                    }
-                }
-                void SetPitch(f32 pitch) {
-                    if (IsAttachedSound()) {
-                        mSound->SetPitch(pitch);
-                    }
-                }
+            }
 
-                void SetOutputLine(int flag) {
-                    if (IsAttachedSound()) {
-                        mSound->SetOutputLine(flag);
-                    }
-                }
-
-                void SetMainOutVolume(f32 volume) {
-                    if (IsAttachedSound()) {
-                        mSound->SetMainOutVolume(volume);
-                    }
-                }
-                void SetRemoteOutVolume(int remote, f32 volume) {
-                    if (IsAttachedSound()) {
-                        mSound->SetRemoteOutVolume(remote, volume);
-                    }
-                }
-
-                void SetFxSend(AuxBus bus, f32 send) {
-                    if (IsAttachedSound()) {
-                        mSound->SetFxSend(bus, send);
-                    }
-                }
-
-            private:
-                detail::BasicSound* mSound; // 0x00
+        private:
+            detail::BasicSound* mSound;  // 0x00
         };
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r
 
 #endif

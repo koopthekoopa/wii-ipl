@@ -13,41 +13,41 @@
 namespace nw4r {
     namespace snd {
         class NandSoundArchive : public SoundArchive {
-            private:
-                class NandFileStream;
+        private:
+            class NandFileStream;
 
-            public:
-                NandSoundArchive();
-                virtual ~NandSoundArchive(); // 0x08
+        public:
+            NandSoundArchive();
+            virtual ~NandSoundArchive();  // 0x08
 
-                virtual const void*     detail_GetFileAddress(u32 id) const         { return NULL; }                                // 0x0C
-                virtual const void*     detail_GetWaveDataFileAddress(u32 id) const { return NULL; }                                // 0x10
+            virtual const void* detail_GetFileAddress(u32 id) const { return NULL; }          // 0x0C
+            virtual const void* detail_GetWaveDataFileAddress(u32 id) const { return NULL; }  // 0x10
 
-                virtual int             detail_GetRequiredStreamBufferSize() const;                                                 // 0x14
+            virtual int detail_GetRequiredStreamBufferSize() const;  // 0x14
 
-                virtual ut::FileStream* OpenStream(void* buffer, int size, u32 offset, u32 length) const;                           // 0x18
+            virtual ut::FileStream* OpenStream(void* buffer, int size, u32 offset, u32 length) const;  // 0x18
 
-                virtual ut::FileStream* OpenExtStream(void* buffer, int size, const char* extPath, u32 offset, u32 length) const;   // 0x1C
+            virtual ut::FileStream* OpenExtStream(void* buffer, int size, const char* extPath, u32 offset, u32 length) const;  // 0x1C
 
-                bool                    Open(const char* path);
-                void                    Close();
+            bool Open(const char* path);
+            void Close();
 
-                bool                    LoadHeader(void* buffer, u32 size);
-                bool                    LoadLabelStringData(void* buffer, u32 size);
+            bool LoadHeader(void* buffer, u32 size);
+            bool LoadLabelStringData(void* buffer, u32 size);
 
-                u32                     GetHeaderSize() const                       { return mFileReader.GetInfoChunkSize(); }
-                u32                     GetLabelStringDataSize() const              { return mFileReader.GetLabelStringChunkSize(); }
+            u32 GetHeaderSize() const { return mFileReader.GetInfoChunkSize(); }
+            u32 GetLabelStringDataSize() const { return mFileReader.GetLabelStringChunkSize(); }
 
-            private:
-                bool                    LoadFileHeader() NO_INLINE;
+        private:
+            bool LoadFileHeader() NO_INLINE;
 
-            private:
-                detail::SoundArchiveFileReader  mFileReader;    // 0x108
-                NANDFileInfo                    mFileInfo;      // 0x14C
-                bool                            mOpen;          // 0x1D8
+        private:
+            detail::SoundArchiveFileReader mFileReader;  // 0x108
+            NANDFileInfo mFileInfo;                      // 0x14C
+            bool mOpen;                                  // 0x1D8
         };
 
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r
 
 #endif

@@ -29,8 +29,8 @@ FAError FAErrnum();
 FAFILE* FACreate(const char* fileName, int unk);
 
 FAFILE* FAFopen(const char* fileName, const char* mode);
-size_t  FAFread(void* buffer, size_t size, size_t count, FAFILE* stream);
-size_t  FAFwrite(void* buffer, size_t size, size_t count, FAFILE* stream);
+size_t FAFread(void* buffer, size_t size, size_t count, FAFILE* stream);
+size_t FAFwrite(void* buffer, size_t size, size_t count, FAFILE* stream);
 FAError FAFseek(FAFILE* stream, s32 offset, int origin);
 FAError FAFinfo(FAFILE* stream, FAFileInfo* info);
 
@@ -49,4 +49,4 @@ FAError FACreatedir(const char* dirName, s32 unk, FADta* dta);
 }
 #endif
 
-#endif // REVOLUTION_FA_H
+#endif  // REVOLUTION_FA_H

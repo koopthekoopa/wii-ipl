@@ -12,4 +12,4 @@ typedef unsigned char bool;
 
 #endif
 
-#endif // STDBOOL_H
+#endif  // STDBOOL_H

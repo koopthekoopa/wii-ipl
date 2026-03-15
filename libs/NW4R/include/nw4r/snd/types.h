@@ -8,41 +8,38 @@
 namespace nw4r {
     namespace snd {
         class LinkedInstance {
-            public:
-                ut::LinkListNode    mInstanceLink;  // 0x00
+        public:
+            ut::LinkListNode mInstanceLink;  // 0x00
         };
-        template<typename T, int Ofs> class InstanceManager {
-            public:
-                typedef typename ut::LinkList<T, Ofs>::Iterator Iterator;
-                void Append(T* obj) {
+        template <typename T, int Ofs>
+        class InstanceManager {
+        public:
+            typedef typename ut::LinkList<T, Ofs>::Iterator Iterator;
+            void Append(T* obj) { mFreeList.PushBack(obj); }
+            void Remove(T* obj) { mFreeList.Erase(obj); }
+            T* Alloc() {
+                if (mFreeList.IsEmpty()) {
+                    return NULL;
+                } else {
+                    T& obj = mFreeList.GetFront();
+                    mFreeList.PopFront();
+                    mActiveList.PushBack(&obj);
+                    return &obj;
+                }
+            }
+            void Free(T* obj) {
+                if (!mActiveList.IsEmpty()) {
+                    mActiveList.Erase(obj);
                     mFreeList.PushBack(obj);
                 }
-                void Remove(T* obj) {
-                    mFreeList.Erase(obj);
-                }
-                T* Alloc() {
-                    if (mFreeList.IsEmpty()) {
-                        return NULL;
-                    }
-                    else {
-                        T& obj = mFreeList.GetFront();
-                        mFreeList.PopFront();
-                        mActiveList.PushBack(&obj);
-                        return &obj;
-                    }
-                }
-                void Free(T* obj) {
-                    if (!mActiveList.IsEmpty()) {
-                        mActiveList.Erase(obj);
-                        mFreeList.PushBack(obj);
-                    }
-                }
+            }
 
-                Iterator GetBeginIter() { return mActiveList.GetBeginIter(); }
-                 Iterator GetEndIter() { return mActiveList.GetEndIter(); }
-            private:
-                ut::LinkList<T, Ofs>    mFreeList;      // 0x00
-                ut::LinkList<T, Ofs>    mActiveList;    // 0x0C
+            Iterator GetBeginIter() { return mActiveList.GetBeginIter(); }
+            Iterator GetEndIter() { return mActiveList.GetEndIter(); }
+
+        private:
+            ut::LinkList<T, Ofs> mFreeList;    // 0x00
+            ut::LinkList<T, Ofs> mActiveList;  // 0x0C
         };
 
         static const int THREAD_STACK_SIZE = 1024;
@@ -66,64 +63,49 @@ namespace nw4r {
             OUTPUT_LINE_REMOTE_N = (1 << 1),
         } OutputLineFlag;
 
-        typedef enum OutputMode {
-            OUTPUT_MODE_STEREO = 0,
-            OUTPUT_MODE_SURROUND,
-            OUTPUT_MODE_DPL2,
-            OUTPUT_MODE_MONO
-        } OutputMode;
+        typedef enum OutputMode { OUTPUT_MODE_STEREO = 0, OUTPUT_MODE_SURROUND, OUTPUT_MODE_DPL2, OUTPUT_MODE_MONO } OutputMode;
 
-        typedef enum AuxBus {
-            AUX_A = 0,
-            AUX_B,
-            AUX_C,
-            AUX_BUS_NUM
-        } AuxBus;
+        typedef enum AuxBus { AUX_A = 0, AUX_B, AUX_C, AUX_BUS_NUM } AuxBus;
 
-        typedef enum SampleFormat {
-            SAMPLE_FORMAT_PCM_S32 = 0,
-            SAMPLE_FORMAT_PCM_S16,
-            SAMPLE_FORMAT_PCM_S8,
-            SAMPLE_FORMAT_DSP_ADPCM
-        } SampleFormat;
+        typedef enum SampleFormat { SAMPLE_FORMAT_PCM_S32 = 0, SAMPLE_FORMAT_PCM_S16, SAMPLE_FORMAT_PCM_S8, SAMPLE_FORMAT_DSP_ADPCM } SampleFormat;
 
         typedef struct SoundParam {
-            f32 volume;         // 0x00
-            f32 pitch;          // 0x04
-            f32 pan;            // 0x08
-            f32 surroundPan;    // 0x0C
-            f32 fxSend;         // 0x10
-            f32 lpf;            // 0x14
-            s32 priority;       // 0x18
+            f32 volume;       // 0x00
+            f32 pitch;        // 0x04
+            f32 pan;          // 0x08
+            f32 surroundPan;  // 0x0C
+            f32 fxSend;       // 0x10
+            f32 lpf;          // 0x14
+            s32 priority;     // 0x18
         } SoundParam;
 
         namespace detail {
             typedef struct AdpcmParam {
-                u16 coef[16];   // 0x00
-                u16 gain;       // 0x20
-                u16 pred_scale; // 0x22
-                u16 yn1;        // 0x24
-                u16 yn2;        // 0x26
+                u16 coef[16];    // 0x00
+                u16 gain;        // 0x20
+                u16 pred_scale;  // 0x22
+                u16 yn1;         // 0x24
+                u16 yn2;         // 0x26
             } AdpcmParam;
 
             typedef struct AdpcmLoopParam {
-                u16 loop_pred_scale;    // 0x00
-                u16 loop_yn1;           // 0x02
-                u16 loop_yn2;           // 0x04
+                u16 loop_pred_scale;  // 0x00
+                u16 loop_yn1;         // 0x02
+                u16 loop_yn2;         // 0x04
             } AdpcmLoopParam;
 
             typedef struct AdpcmInfo {
-                AdpcmParam      adpcm;      // 0x08
-                AdpcmLoopParam  adpcmloop;  // 0x28
-                u16             padding;    // 0x2E
+                AdpcmParam adpcm;          // 0x08
+                AdpcmLoopParam adpcmloop;  // 0x28
+                u16 padding;               // 0x2E
             } AdpcmInfo;
 
             typedef struct VoiceChannelParam {
-                void*       waveData;   // 0x00
-                AdpcmInfo   adpcmInfo;  // 0x04
+                void* waveData;       // 0x00
+                AdpcmInfo adpcmInfo;  // 0x04
             } VoiceChannelParam;
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r
 
-#endif // NW4R_SND_TYPES_H
+#endif  // NW4R_SND_TYPES_H

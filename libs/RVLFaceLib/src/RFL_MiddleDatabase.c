@@ -14,28 +14,28 @@ u32 RFLGetMiddleDBBufferSize(u16 size) {
 }
 
 typedef struct {
-    u8 sex;         // 0x00
-    u8 age;         // 0x01
-    u8 race;        // 0x02
-    u8 padding;     // 0x03
+    u8 sex;      // 0x00
+    u8 age;      // 0x01
+    u8 race;     // 0x02
+    u8 padding;  // 0x03
 } RFL_RANDOM_PARAM;
 
 typedef struct {
-    s32 sex : 2;        // 0x00
-    s32 srcIdx : 15;    // 0x00
-    s32 dstIdx : 15;    // 0x00
+    s32 sex : 2;      // 0x00
+    s32 srcIdx : 15;  // 0x00
+    s32 dstIdx : 15;  // 0x00
 } RFL_NEW_OLD_PARAM;
 
 typedef struct {
-    u16 dstIdx;     // 0x00
-    u8  sex;        // 0x02
-    u8  padding;    // 0x03
+    u16 dstIdx;  // 0x00
+    u8 sex;      // 0x02
+    u8 padding;  // 0x03
 } RFL_HIDDEN_RANDOM_PARAM;
 
 typedef struct {
-    s16 lastSrcIdx; // 0x00
-    u16 padding;    // 0x02
-} RFL_DEST_PARAM; // I guess
+    s16 lastSrcIdx;  // 0x00
+    u16 padding;     // 0x02
+} RFL_DEST_PARAM;    // I guess
 
 void RFLInitMiddleDB(RFLMiddleDatabase* db, RFLMiddleDBType type, void* buffer, u16 size) {
     RFLiMiddleDatabase* idb = (RFLiMiddleDatabase*)db;
@@ -113,7 +113,7 @@ static BOOL checkHiddenData_(RFLiHiddenCharData* data) {
 static void updateHDBcallback_(u32 arg) {
     RFLiMiddleDatabase* db = (RFLiMiddleDatabase*)arg;
     RFL_NEW_OLD_PARAM* param = (RFL_NEW_OLD_PARAM*)&db->userdata1;
-    
+
     if (RFLGetAsyncStatus() == RFLErrcode_Success || RFLGetAsyncStatus() == RFLErrcode_Broken) {
         s16 src = -1;
 
@@ -125,8 +125,7 @@ static void updateHDBcallback_(u32 arg) {
 #endif
             if (db->type == RFLMiddleDBType_HiddenOlder) {
                 src = RFLiGetHiddenNext(param->srcIdx);
-            }
-            else {
+            } else {
                 src = RFLiGetHiddenPrev(param->srcIdx);
             }
 #if RFL_BUILD >= 20080306
@@ -150,8 +149,7 @@ static void updateHDBcallback_(u32 arg) {
             if (err != RFLErrcode_Busy) {
                 RFLiEndWorking(err);
             }
-        }
-        else {
+        } else {
             RFLiGetManager()->mLastErrcode = db->storedSize < db->size ? RFLErrcode_DBNodata : RFLErrcode_Success;
         }
     }
@@ -177,16 +175,13 @@ static s16 stepOne_(s16 srcIdx, BOOL oldIsHead) {
     if (oldIsHead) {
         if (srcIdx < 0) {
             ret = RFLiGetHiddenHeader()->head;
-        }
-        else {
+        } else {
             ret = RFLiGetHiddenNext(srcIdx);
         }
-    }
-    else {
+    } else {
         if (srcIdx < 0) {
             ret = RFLiGetHiddenHeader()->tail;
-        }
-        else {
+        } else {
             ret = RFLiGetHiddenPrev(srcIdx);
         }
     }
@@ -203,8 +198,7 @@ static void loadHiddenDataSync_(RFLiMiddleDatabase* db) {
         RFLiLoadCachedHiddenData(&db->data[db->storedSize], param->srcIdx);
         if (db->type == RFLMiddleDBType_HiddenOlder) {
             src = RFLiGetHiddenNext(param->srcIdx);
-        }
-        else {
+        } else {
             src = RFLiGetHiddenPrev(param->srcIdx);
         }
 
@@ -216,8 +210,7 @@ static void loadHiddenDataSync_(RFLiMiddleDatabase* db) {
 
         if (src >= 0 && param->dstIdx < db->size) {
             param->srcIdx = (u16)src;
-        }
-        else {
+        } else {
             running = FALSE;
         }
     }
@@ -261,9 +254,8 @@ static void updateHiddenOld_(RFLiMiddleDatabase* db, BOOL oldIsHead, BOOL use_ca
             if (use_cache) {
                 loadHiddenDataSync_(db);
                 return;
-            }
-            else {
-                RFLErrcode err = RFLiLoadHiddenDataAsync(&db->data[param->dstIdx], param->srcIdx, updateHDBcallback_, (u32)db); // r25
+            } else {
+                RFLErrcode err = RFLiLoadHiddenDataAsync(&db->data[param->dstIdx], param->srcIdx, updateHDBcallback_, (u32)db);  // r25
                 if (err != RFLErrcode_Busy) {
                     RFLiEndWorking(err);
                 }
@@ -282,7 +274,7 @@ static void loadHiddenRandomSync_(RFLiMiddleDatabase* db) {
     while (running) {
         u32 src = *(u32*)&db->data[param->dstIdx];
         if (src != 0) {
-            u16 srcIdx = src-1;
+            u16 srcIdx = src - 1;
             RFLiLoadCachedHiddenData(&db->data[db->storedSize], srcIdx);
 
             if (checkHiddenData_((RFLiHiddenCharData*)&db->data[db->storedSize])) {
@@ -296,12 +288,10 @@ static void loadHiddenRandomSync_(RFLiMiddleDatabase* db) {
                 if (src >= RFL_MAX_HIDDEN_DB) {
                     running = FALSE;
                 }
-            }
-            else {
+            } else {
                 running = FALSE;
             }
-        }
-        else {
+        } else {
             running = FALSE;
         }
     }
@@ -327,20 +317,18 @@ static void updateHDBRandcallback_(u32 arg) {
             RFLErrcode err;
 
             RFLi_ASSERTLINE_RANGE(*src, 0, RFL_MAX_HIDDEN_DB, 443);
-            
+
             if (*src < RFL_MAX_HIDDEN_DB) {
-                u16 srcIdx = *src-1;
+                u16 srcIdx = *src - 1;
                 err = RFLiLoadHiddenDataAsync(&db->data[db->storedSize], srcIdx, updateHDBRandcallback_, (u32)db);
 
                 if (err != RFLErrcode_Busy) {
                     RFLiEndWorking(err);
                 }
-            }
-            else {
+            } else {
                 RFLiGetManager()->mLastErrcode = RFLErrcode_Broken;
             }
-        }
-        else {
+        } else {
             RFLiGetManager()->mLastErrcode = db->storedSize < db->size ? RFLErrcode_DBNodata : RFLErrcode_Success;
         }
     }
@@ -398,11 +386,11 @@ static void updateHiddenRandom_(RFLiMiddleDatabase* db, BOOL use_cache) {
 
     RFLi_ASSERTLINE(aidx == count, 514);
 
-    for (i = 0; i < (count-1); i++) {
+    for (i = 0; i < (count - 1); i++) {
         u16 tmp;
         u16 target;
 
-        target = (((rand >> 0x10) + rand) & 0xFFFF) % (count-1);
+        target = (((rand >> 0x10) + rand) & 0xFFFF) % (count - 1);
         if (target >= i) {
             target++;
         }
@@ -432,13 +420,13 @@ static void updateHiddenRandom_(RFLiMiddleDatabase* db, BOOL use_cache) {
             return;
         }
 
-        srcIdx = *src-1;
+        srcIdx = *src - 1;
         if (use_cache) {
             loadHiddenRandomSync_(db);
             return;
         }
 
-        err = RFLiLoadHiddenDataAsync(&db->data[param->dstIdx], srcIdx, updateHDBRandcallback_, (u32)db); 
+        err = RFLiLoadHiddenDataAsync(&db->data[param->dstIdx], srcIdx, updateHDBRandcallback_, (u32)db);
         if (err != RFLErrcode_Busy) {
             RFLiEndWorking(err);
         }
@@ -476,7 +464,6 @@ static void updateRandom_(RFLiMiddleDatabase* db) {
 
     RFLiEndWorking(RFLErrcode_Success);
 }
-
 
 static void startUpdateDB_(RFLiMiddleDatabase* db) {
     db->storedSize = 0;

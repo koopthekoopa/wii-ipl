@@ -8,38 +8,38 @@
 namespace nw4r {
     namespace db {
         namespace detail {
-            #define NW4R_CONSOLE_BUFFER_SIZE(width, height)  (sizeof(nw4r::db::detail::ConsoleHead) + ((width) + 1) * (height))
-            
+#define NW4R_CONSOLE_BUFFER_SIZE(width, height) (sizeof(nw4r::db::detail::ConsoleHead) + ((width) + 1) * (height))
+
             typedef struct ConsoleHead ConsoleHead;
             struct ConsoleHead {
-                u8*             textBuf;        // 0x00
+                u8* textBuf;  // 0x00
 
-                u16             width;          // 0x04
-                u16             height;         // 0x06
+                u16 width;   // 0x04
+                u16 height;  // 0x06
 
-                u16             priority;       // 0x08
-                u16             attr;           // 0x0A
+                u16 priority;  // 0x08
+                u16 attr;      // 0x0A
 
-                u16             printTop;       // 0x0C
-                u16             printXPos;      // 0x0E
-                u16             printTopUsed;   // 0x10
+                u16 printTop;      // 0x0C
+                u16 printXPos;     // 0x0E
+                u16 printTopUsed;  // 0x10
 
-                u16             ringTop;        // 0x12
-                s32             ringTopLineCnt; // 0x14
+                u16 ringTop;         // 0x12
+                s32 ringTopLineCnt;  // 0x14
 
-                s32             viewTopLine;    // 0x18
-                s16             viewPosX;       // 0x1C
-                s16             viewPosY;       // 0x1E
-                u16             viewLines;      // 0x20
+                s32 viewTopLine;  // 0x18
+                s16 viewPosX;     // 0x1C
+                s16 viewPosY;     // 0x1E
+                u16 viewLines;    // 0x20
 
-                u8              isVisible;      // 0x22
-                u8              padding_[1];    // 0x23
+                u8 isVisible;    // 0x22
+                u8 padding_[1];  // 0x23
 
-                ut::TextWriter* writer;         // 0x24
+                ut::TextWriter* writer;  // 0x24
 
-                ConsoleHead*    next;           // 0x28
+                ConsoleHead* next;  // 0x28
             };
-        }
+        }  // namespace detail
 
         typedef enum ConsoleOutputType {
             CONSOLE_OUTPUT_NONE = 0,
@@ -49,20 +49,20 @@ namespace nw4r {
         } ConsoleOutputType;
 
         typedef detail::ConsoleHead* ConsoleHandle;
-        
-        ConsoleHandle   Console_Create(void* buffer, u16 width, u16 height, u16 viewHeight, u16 prioriry, u16 attr);
 
-        void            Console_DrawDirect(ConsoleHandle console);
+        ConsoleHandle Console_Create(void* buffer, u16 width, u16 height, u16 viewHeight, u16 prioriry, u16 attr);
 
-        void            Console_VFPrintf(ConsoleOutputType type, ConsoleHandle console, const char* format, va_list vlist);
+        void Console_DrawDirect(ConsoleHandle console);
+
+        void Console_VFPrintf(ConsoleOutputType type, ConsoleHandle console, const char* format, va_list vlist);
 
         inline void Console_VPrintf(ConsoleHandle console, const char* format, va_list vlist) {
             Console_VFPrintf(CONSOLE_OUTPUT_ALL, console, format, vlist);
         }
 
-        void            Console_Printf(ConsoleHandle console, const char* format, ...);
+        void Console_Printf(ConsoleHandle console, const char* format, ...);
 
-        s32             Console_GetTotalLines(ConsoleHandle console);
+        s32 Console_GetTotalLines(ConsoleHandle console);
 
         inline u16 Console_GetViewHeight(ConsoleHandle console) {
             return console->viewLines;
@@ -111,7 +111,7 @@ namespace nw4r {
 
             return baseLine;
         }
-    }
-}
+    }  // namespace db
+}  // namespace nw4r
 
-#endif // NW4R_DB_CONSOLE_H
+#endif  // NW4R_DB_CONSOLE_H

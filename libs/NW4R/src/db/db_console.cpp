@@ -7,13 +7,13 @@
 
 namespace nw4r {
     namespace db {
-        static OSMutex          sMutex;
+        static OSMutex sMutex;
 
-        static u8               sStrBuf[1024];
+        static u8 sStrBuf[1024];
 
-        static ConsoleHandle    sConsoleList;
+        static ConsoleHandle sConsoleList;
 
-        static bool             sInitialized = false;
+        static bool sInitialized = false;
 
         static inline u8* GetTextPtr_(ConsoleHandle console, u16 line, u16 xPos) {
             return console->textBuf + xPos + (console->width + 1) * line;
@@ -58,11 +58,11 @@ namespace nw4r {
         }
 
         static void TerminateLine_(ConsoleHandle console);
-        static u8*  NextLine_(ConsoleHandle console);
-        static u8*  PutTab_(ConsoleHandle console, u8* dstPtr);
-        static u32  GetTabSize_(ConsoleHandle console);
-        static u32  PutChar_(ConsoleHandle console, const u8* str, u8* dstPtr);
-        static u32  CodeWidth_(const u8* p);
+        static u8* NextLine_(ConsoleHandle console);
+        static u8* PutTab_(ConsoleHandle console, u8* dstPtr);
+        static u32 GetTabSize_(ConsoleHandle console);
+        static u32 PutChar_(ConsoleHandle console, const u8* str, u8* dstPtr);
+        static u32 CodeWidth_(const u8* p);
 
         static void DoDrawString_(ConsoleHandle console, u32 printLine, const u8* str, ut::TextWriter* writer);
         static void DoDrawConsole_(ConsoleHandle console, ut::TextWriter* writer);
@@ -95,8 +95,7 @@ namespace nw4r {
             if (cursor == NULL) {
                 console->next = sConsoleList;
                 sConsoleList = console;
-            }
-            else {
+            } else {
                 console->next = cursor->next;
                 cursor->next = console;
             }
@@ -152,7 +151,7 @@ namespace nw4r {
             console->printTop++;
             console->printTopUsed = 0;
 
-            if (console->printTop == console->height && !(console->attr & (1<<1))) {
+            if (console->printTop == console->height && !(console->attr & (1 << 1))) {
                 console->printTop = 0;
             }
 
@@ -201,8 +200,7 @@ namespace nw4r {
         static void DoDrawString_(ConsoleHandle console, u32 printLine, const u8* str, ut::TextWriter* writer) {
             if (writer) {
                 writer->Printf("%s\n", str);
-            }
-            else {
+            } else {
                 s32 height = (s32)((u32)console->viewPosY + printLine * 10);
                 DirectPrint_DrawString(console->viewPosX, height, false, "%s\n", str);
             }
@@ -219,8 +217,7 @@ namespace nw4r {
 
                 if (viewOffset < 0) {
                     viewOffset = 0;
-                }
-                else if (viewOffset > GetActiveLines_(console)) {
+                } else if (viewOffset > GetActiveLines_(console)) {
                     goto end;
                 }
 
@@ -245,7 +242,7 @@ namespace nw4r {
                     line++;
 
                     if (line == console->height) {
-                        if (console->attr & (1<<1)) {
+                        if (console->attr & (1 << 1)) {
                             goto end;
                         }
                         line = 0;
@@ -299,16 +296,14 @@ namespace nw4r {
                         str++;
                         storePtr = PutTab_(console, storePtr);
                         console->printTopUsed = 1;
-                    }
-                    else {
+                    } else {
                         u32 bytes = PutChar_(console, str, storePtr);
 
                         if (bytes) {
                             str += bytes;
                             storePtr += bytes;
                             console->printTopUsed = 1;
-                        }
-                        else {
+                        } else {
                             newLineFlag = true;
                         }
                     }
@@ -369,5 +364,5 @@ namespace nw4r {
 
             return count;
         }
-    }
-}
+    }  // namespace db
+}  // namespace nw4r

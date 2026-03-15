@@ -36,7 +36,7 @@ namespace nw4r {
 
             BOOL success = AXFXChorusInit(&mAxfxParam);
 
-            AXFXChorusGetMemSize(&mAxfxParam); // Debug leftover
+            AXFXChorusGetMemSize(&mAxfxParam);  // Debug leftover
             mImpl.mCurrentFx = NULL;
             mImpl.mIsActive = true;
 
@@ -89,5 +89,5 @@ namespace nw4r {
 
             AXFXChorusCallback(chans, &mAxfxParam);
         }
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r

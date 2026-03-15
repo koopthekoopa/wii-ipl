@@ -1,5 +1,5 @@
-#include <revolution/card.h>
 #include <private/card.h>
+#include <revolution/card.h>
 
 #include <string.h>
 
@@ -8,7 +8,7 @@ s32 __CARDGetStatusEx(s32 chan, s32 fileNo, CARDDir* dirent) {
     CARDDir* dir;
     CARDDir* ent;
     s32 result;
-    
+
     if (fileNo < 0 || fileNo >= CARD_MAX_FILE) {
         return CARD_RESULT_FATAL_ERROR;
     }
@@ -71,14 +71,13 @@ s32 __CARDSetStatusExAsync(s32 chan, s32 fileNo, CARDDir* dirent, CARDCallback c
         memset(dirent->gameName, 0, sizeof(dirent->gameName));
     }
 
-    if ((memcmp(&ent->fileName, &dirent->fileName, 32) != 0) || (memcmp(ent->gameName, dirent->gameName, 4) != 0) || (memcmp(ent->company, dirent->company, 2) != 0)) {
+    if ((memcmp(&ent->fileName, &dirent->fileName, 32) != 0) || (memcmp(ent->gameName, dirent->gameName, 4) != 0) ||
+        (memcmp(ent->company, dirent->company, 2) != 0)) {
         for (i = 0; i < CARD_MAX_FILE; i++) {
             if (i != fileNo) {
                 CARDDir* ent = &dir[i];
-                if (((u8)ent->gameName[0] != 0xFF) 
-                && (memcmp(&ent->gameName, &dirent->gameName, 4) == 0) 
-                && (memcmp(&ent->company, &dirent->company, 2) == 0) 
-                && (memcmp(&ent->fileName, &dirent->fileName, 0x20) == 0)) {
+                if (((u8)ent->gameName[0] != 0xFF) && (memcmp(&ent->gameName, &dirent->gameName, 4) == 0) &&
+                    (memcmp(&ent->company, &dirent->company, 2) == 0) && (memcmp(&ent->fileName, &dirent->fileName, 0x20) == 0)) {
                     return __CARDPutControlBlock(card, -7);
                 }
             }

@@ -13,14 +13,15 @@
 
 namespace ipl {
     namespace scene {
-        #define LIMIT_SEC2MS(x)         (x * 1000)
-        
-        #define LIMIT_TIMER_FADE_IN     LIMIT_SEC2MS(1)                                     /* Seconds after fading in */
-        #define LIMIT_TIMER_PRESS_A     LIMIT_SEC2MS(2)                                     /* Seconds until the user can pass through the screen */
-        #define LIMIT_TIMER_NOT_PRESS_A LIMIT_SEC2MS(60)                                    /* Seconds for the user to do something to pass through the screen */
+#define LIMIT_SEC2MS(x) (x * 1000)
 
-        #define LIMIT_PRESS_A_BUTTON    (controller::BTN_INTERACT | controller::BTN_BACK)   /* Buttons the user can press to goto the main menu */
+#define LIMIT_TIMER_FADE_IN LIMIT_SEC2MS(1)      /* Seconds after fading in */
+#define LIMIT_TIMER_PRESS_A LIMIT_SEC2MS(2)      /* Seconds until the user can pass through the screen */
+#define LIMIT_TIMER_NOT_PRESS_A LIMIT_SEC2MS(60) /* Seconds for the user to do something to pass through the screen */
 
+#define LIMIT_PRESS_A_BUTTON (controller::BTN_INTERACT | controller::BTN_BACK) /* Buttons the user can press to goto the main menu */
+
+        // clang-format off
         enum {
             LANG_JPN = 0,
             LANG_US_ENG,
@@ -84,21 +85,18 @@ namespace ipl {
             "Push_KR_KOR",
             "Push_CN_CHN",
         };
+        // clang-format on
 
-        LimitOver::LimitOver(EGG::Heap* heap) :
-        FaderSceneBase(heap),
-        mpTextPane(NULL),
-        mpPushPane(NULL),
-        mWaitTick(0),
-        mPushTick(0),
-        mbFadedIn(false),
-        mbDoneInit(false),
-        mWpadMask(0) {}
+        LimitOver::LimitOver(EGG::Heap* heap)
+            : FaderSceneBase(heap), mpTextPane(NULL), mpPushPane(NULL), mWaitTick(0), mPushTick(0), mbFadedIn(false), mbDoneInit(false),
+              mWpadMask(0) {
+        }
 
-        LimitOver::~LimitOver() {}
+        LimitOver::~LimitOver() {
+        }
 
         void LimitOver::prepare() {
-            mpLayoutFile = System::getNandManager()->readLayoutAsync(getSceneHeap(),"limitOver.ash", true);
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(getSceneHeap(), "limitOver.ash", true);
 
             ES_SetUid(SYSMENU_TITLE_ID);
             utility::ESMisc::DeleteExpiredFlagFile();
@@ -212,12 +210,12 @@ namespace ipl {
             mpTextPane->SetVisible(true);
 
             // Bind the animations
-            mpLayout->bindToGroup("my_Timer_c_Fade_In.brlan",    "G_All");
+            mpLayout->bindToGroup("my_Timer_c_Fade_In.brlan", "G_All");
             mpLayout->bindToGroup("my_Timer_c_Push_blink.brlan", "G_Push");
-            mpLayout->bindToGroup("my_Timer_c_Fade_Out.brlan",   "G_All");
+            mpLayout->bindToGroup("my_Timer_c_Fade_Out.brlan", "G_All");
 
             mpLayout->setAnmType(ANIM_TYPE_FORWARD, ANIM_FADE_IN);
-            mpLayout->setAnmType(ANIM_TYPE_LOOP,    ANIM_WAIT_PUSH);
+            mpLayout->setAnmType(ANIM_TYPE_LOOP, ANIM_WAIT_PUSH);
             mpLayout->setAnmType(ANIM_TYPE_FORWARD, ANIM_FADE_OUT);
 
             mpLayout->finishBinding();
@@ -271,8 +269,8 @@ namespace ipl {
         }
 
         FaderSceneCommand LimitOver::calcNormal() {
-            FaderSceneCommand result  = FADER_SCN_CONTINUE;
-            u32 newWpadMask     = utility::wpad::getWpadConnectedMask();
+            FaderSceneCommand result = FADER_SCN_CONTINUE;
+            u32 newWpadMask = utility::wpad::getWpadConnectedMask();
 
             // Finished waiting?? The user can finally pass through the screen
             if (OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) < LIMIT_TIMER_PRESS_A) {
@@ -280,12 +278,11 @@ namespace ipl {
             }
 
             // Either user pressed A (or B), connected controller  OR was on the screen for 60 seconds? We fade out.
-            if (System::getMasterController()->downTrg(LIMIT_PRESS_A_BUTTON) || mWpadMask != newWpadMask
-            || OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) > LIMIT_TIMER_NOT_PRESS_A) {
+            if (System::getMasterController()->downTrg(LIMIT_PRESS_A_BUTTON) || mWpadMask != newWpadMask ||
+                OSTicksToMilliseconds(OSDiffTick(OSGetTick(), mPushTick)) > LIMIT_TIMER_NOT_PRESS_A) {
                 if (mWpadMask != newWpadMask && !utility::wpad::isIncreaseConnectedWpad(mWpadMask, newWpadMask)) {
                     mWpadMask = newWpadMask;
-                }
-                else {
+                } else {
                     snd::getSystem()->startSE("WIPL_SE_BT_PUSH");
                     mpLayout->start(ANIM_FADE_OUT);
 
@@ -323,5 +320,5 @@ namespace ipl {
                 mpLayout->draw();
             }
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

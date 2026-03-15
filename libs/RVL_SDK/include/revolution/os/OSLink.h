@@ -23,16 +23,16 @@ typedef struct OSModuleLink {
 } OSModuleLink;
 
 struct OSModuleInfo {
-    OSModuleID id;         // 0x00
-    OSModuleLink link;     // 0x04
+    OSModuleID id;      // 0x00
+    OSModuleLink link;  // 0x04
 
-    u32 numSections;       // 0x0C
-    u32 sectionInfoOffset; // 0x10
+    u32 numSections;        // 0x0C
+    u32 sectionInfoOffset;  // 0x10
 
-    u32 nameOffset;        // 0x14
-    u32 nameSize;          // 0x18
+    u32 nameOffset;  // 0x14
+    u32 nameSize;    // 0x18
 
-    u32 version;           // 0x1C
+    u32 version;  // 0x1C
 };
 
 #ifdef __cplusplus

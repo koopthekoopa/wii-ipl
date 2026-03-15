@@ -9,41 +9,36 @@ namespace nw4r {
     namespace snd {
         namespace detail {
             class TaskManager {
-                public:
-                    typedef enum TaskPriority {
-                        PRIORITY_LOW = 0,
-                        PRIORITY_MIDDLE,
-                        PRIORITY_HIGH,
-                        PRIORITY_MAX
-                    } TaskPriority;
+            public:
+                typedef enum TaskPriority { PRIORITY_LOW = 0, PRIORITY_MIDDLE, PRIORITY_HIGH, PRIORITY_MAX } TaskPriority;
 
-                public:
-                    static TaskManager& GetInstance();
+            public:
+                static TaskManager& GetInstance();
 
-                    void                AppendTask(Task* task, TaskPriority priority);
-                    Task*               PopTask(TaskPriority priority);
+                void AppendTask(Task* task, TaskPriority priority);
+                Task* PopTask(TaskPriority priority);
 
-                    void                Execute();
-                    bool                ExecuteSingle() NO_INLINE;
+                void Execute();
+                bool ExecuteSingle() NO_INLINE;
 
-                    void                CancelByTaskId(u32 taskId);
+                void CancelByTaskId(u32 taskId);
 
-                    void*               Alloc();
-                    void                Free(void* ptr);
+                void* Alloc();
+                void Free(void* ptr);
 
-                    static u8  mTaskArea[0x2000 + 0x44];
+                static u8 mTaskArea[0x2000 + 0x44];
 
-                private:
-                    TaskManager();
+            private:
+                TaskManager();
 
-                    OSMutex         mMutex;                     // 0x00
-                    MEMHeapHandle   mHeapHandle;                // 0x18
+                OSMutex mMutex;             // 0x00
+                MEMHeapHandle mHeapHandle;  // 0x18
 
-                    Task*           mCurrentTask;               // 0x1C
-                    TaskList        mTaskList[PRIORITY_MAX];    // 0x20
+                Task* mCurrentTask;                // 0x1C
+                TaskList mTaskList[PRIORITY_MAX];  // 0x20
             };
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r
 
-#endif // NW4R_SND_TASK_MANAGER_H
+#endif  // NW4R_SND_TASK_MANAGER_H

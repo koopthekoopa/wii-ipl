@@ -16,20 +16,20 @@ enum {
 
 AIDCallback AIRegisterDMACallback(AIDCallback callback);
 
-void        AIInitDMA(u32 startAddr, u32 length);
-u32         AIGetDMALength();
-u32         AIGetDMAStartAddr();
+void AIInitDMA(u32 startAddr, u32 length);
+u32 AIGetDMALength();
+u32 AIGetDMAStartAddr();
 
-void        AIStartDMA();
-void        AIStopDMA();
+void AIStartDMA();
+void AIStopDMA();
 
-void        AISetDSPSampleRate(u32 rate);
-u32         AIGetDSPSampleRate();
+void AISetDSPSampleRate(u32 rate);
+u32 AIGetDSPSampleRate();
 
-u32         AIGetDMABytesLeft();
+u32 AIGetDMABytesLeft();
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // REVOLUTION_AI_H
+#endif  // REVOLUTION_AI_H

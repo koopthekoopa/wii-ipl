@@ -6,10 +6,15 @@
 
 namespace nw4r {
     namespace ut {
-        template<typename T>TagProcessorBase<T>::TagProcessorBase() {}
-        template<typename T> TagProcessorBase<T>::~TagProcessorBase() {}
+        template <typename T>
+        TagProcessorBase<T>::TagProcessorBase() {
+        }
+        template <typename T>
+        TagProcessorBase<T>::~TagProcessorBase() {
+        }
 
-        template<typename T> Operation TagProcessorBase<T>::Process(u16 code, PrintContext<T>* context) {
+        template <typename T>
+        Operation TagProcessorBase<T>::Process(u16 code, PrintContext<T>* context) {
             switch (code) {
                 case '\n': {
                     ProcessLinefeed(context);
@@ -25,7 +30,8 @@ namespace nw4r {
             }
         }
 
-        template<typename T> Operation TagProcessorBase<T>::CalcRect(Rect* pRect, u16 code, PrintContext<T>* context) {
+        template <typename T>
+        Operation TagProcessorBase<T>::CalcRect(Rect* pRect, u16 code, PrintContext<T>* context) {
             switch (code) {
                 case '\n': {
                     TextWriterBase<T>& writer = *context->writer;
@@ -54,7 +60,7 @@ namespace nw4r {
                     pRect->bottom = pRect->top + writer.GetFontHeight();
 
                     pRect->Normalize();
-                
+
                     return OPERATION_NO_CHAR_SPACE;
                 }
                 default: {
@@ -63,7 +69,8 @@ namespace nw4r {
             }
         }
 
-        template<typename T> void TagProcessorBase<T>::ProcessLinefeed(PrintContext<T>* context) {
+        template <typename T>
+        void TagProcessorBase<T>::ProcessLinefeed(PrintContext<T>* context) {
             TextWriterBase<T>& writer = *context->writer;
 
             f32 x = context->xOrigin;
@@ -72,7 +79,8 @@ namespace nw4r {
             writer.SetCursor(x, y);
         }
 
-        template<typename T> void TagProcessorBase<T>::ProcessTab(PrintContext<T>* context) {
+        template <typename T>
+        void TagProcessorBase<T>::ProcessTab(PrintContext<T>* context) {
             TextWriterBase<T>& writer = *context->writer;
             int tabWidth = writer.GetTabWidth();
 
@@ -89,5 +97,5 @@ namespace nw4r {
 
         template class TagProcessorBase<char>;
         template class TagProcessorBase<wchar_t>;
-    }
-}
+    }  // namespace ut
+}  // namespace nw4r

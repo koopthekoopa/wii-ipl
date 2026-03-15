@@ -14,7 +14,7 @@ MEMHeapHandle MEMCreateUnitHeapEx(void* start, u32 heapSize, u32 memBlockSize, i
 
     void* heapEnd = PTR_ROUNDDOWN(AddU32ToPtr(start, heapSize), 4);
     void* heapStart;
- 
+
     if (ComparePtr(heap, heapEnd) > 0)
         return NULL;
 

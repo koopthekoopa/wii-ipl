@@ -17,30 +17,33 @@ namespace nw4r {
             NUM_OF_OPERATION
         } Operation;
 
-        template<typename> class TextWriterBase;
+        template <typename>
+        class TextWriterBase;
 
-        template<typename T> struct PrintContext {
-            TextWriterBase<T>*  writer;     // 0x00
-            const T*            str;        // 0x04
+        template <typename T>
+        struct PrintContext {
+            TextWriterBase<T>* writer;  // 0x00
+            const T* str;               // 0x04
 
-            f32                 xOrigin;    // 0x08
-            f32                 yOrigin;    // 0x0c
+            f32 xOrigin;  // 0x08
+            f32 yOrigin;  // 0x0c
 
-            u32                 flags;      // 0x10
+            u32 flags;  // 0x10
         };
 
-        template<typename T> class TagProcessorBase {
-            public:
-                TagProcessorBase();
-                virtual ~TagProcessorBase();
+        template <typename T>
+        class TagProcessorBase {
+        public:
+            TagProcessorBase();
+            virtual ~TagProcessorBase();
 
-                virtual Operation   Process(u16 code, PrintContext<T>* context);
-                virtual Operation   CalcRect(Rect* pRect, u16 code, PrintContext<T>* context);
+            virtual Operation Process(u16 code, PrintContext<T>* context);
+            virtual Operation CalcRect(Rect* pRect, u16 code, PrintContext<T>* context);
 
-                void                ProcessLinefeed(PrintContext<T>* context);
-                void                ProcessTab(PrintContext<T>* context);
+            void ProcessLinefeed(PrintContext<T>* context);
+            void ProcessTab(PrintContext<T>* context);
         };
-    }
-}
+    }  // namespace ut
+}  // namespace nw4r
 
-#endif // NW4R_UT_TAG_PROCESSOR_BASE_H
+#endif  // NW4R_UT_TAG_PROCESSOR_BASE_H

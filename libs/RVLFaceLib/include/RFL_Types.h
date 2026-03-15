@@ -9,8 +9,8 @@
 extern "C" {
 #endif
 
-#define RFL_NAME_LENGTH         10
-#define RFL_CREATE_ID_LENGTH    8
+#define RFL_NAME_LENGTH 10
+#define RFL_CREATE_ID_LENGTH 8
 
 typedef void (*RFLSimpleCB)();
 typedef void (*RFLSimpleCBArg)(u32);
@@ -40,10 +40,10 @@ typedef enum {
 } RFLErrcode;
 
 typedef enum {
-    RFLResolution_64   = 64,
-    RFLResolution_128  = 128,
-    RFLResolution_256  = 256,
-    RFLResolution_64M  = 64 | 32,
+    RFLResolution_64 = 64,
+    RFLResolution_128 = 128,
+    RFLResolution_256 = 256,
+    RFLResolution_64M = 64 | 32,
     RFLResolution_128M = 128 | 64 | 32,
     RFLResolution_256M = 256 | 128 | 64 | 32,
 } RFLResolution;
@@ -123,41 +123,41 @@ typedef enum {
 } RFLRace;
 
 typedef struct {
-    u8  data[RFL_CREATE_ID_LENGTH];
+    u8 data[RFL_CREATE_ID_LENGTH];
 } RFLCreateID;
 
 typedef struct {
-    u8  data[74];
+    u8 data[74];
 } RFLCharData;
 
 typedef struct {
-    u8  data[76];
+    u8 data[76];
 } RFLStoreData;
 
 typedef struct {
-    u16         name[RFL_NAME_LENGTH+1];    // 0x00
-    u16         creator[RFL_NAME_LENGTH+1]; // 0x16
+    u16 name[RFL_NAME_LENGTH + 1];     // 0x00
+    u16 creator[RFL_NAME_LENGTH + 1];  // 0x16
 
-    RFLCreateID createID;                   // 0x2C
+    RFLCreateID createID;  // 0x2C
 
-    u32         gender : 1;                 // 0x34
+    u32 gender : 1;  // 0x34
 
-    u32         birth_month : 4;            // 0x34
-    u32         birth_day : 5;              // 0x34
+    u32 birth_month : 4;  // 0x34
+    u32 birth_day : 5;    // 0x34
 
-    u32         favoriteColor : 4;          // 0x34
-    u32         favorite : 1;               // 0x34
+    u32 favoriteColor : 4;  // 0x34
+    u32 favorite : 1;       // 0x34
 
-    u32         height : 7;                 // 0x34
-    u32         build : 7;                  // 0x34
+    u32 height : 7;  // 0x34
+    u32 build : 7;   // 0x34
 
-    u32         reserved : 3;               // 0x34
+    u32 reserved : 3;  // 0x34
 
-    GXColor     skinColor;                  // 0x38
+    GXColor skinColor;  // 0x38
 } RFLAdditionalInfo;
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // RFL_TYPES_H
+#endif  // RFL_TYPES_H

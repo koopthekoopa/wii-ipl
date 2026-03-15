@@ -2,8 +2,8 @@
 
 #include <decomp.h>
 
-#include <revolution.h>
 #include <private/wpad/WPADInternal.h>
+#include <revolution.h>
 
 #include "iplSystem.h"
 #include "system/iplTVRCManager.h"
@@ -55,12 +55,11 @@ namespace ipl {
                         TVRCManager::getHandle()->resetProcessAsync(TRUE);
                     }
 
-                    if ((System::getSceneManager() == NULL || System::getSceneManager()->isResetAcceptable())
-                    && (System::getSaveData() == NULL || System::getSaveData()->isResetAcceptable())
-                    && System::isResetAcceptable()) {
+                    if ((System::getSceneManager() == NULL || System::getSceneManager()->isResetAcceptable()) &&
+                        (System::getSaveData() == NULL || System::getSaveData()->isResetAcceptable()) && System::isResetAcceptable()) {
                         if (TVRCManager::getHandle() == NULL || TVRCManager::getHandle()->waitResetProcessCompleted()) {
-                            if (System::getPostmanManager()->IsUnknown()
-                            || (System::getSceneManager() != NULL && System::getScene(scene::SCENE_ADDRESS) != NULL)) {
+                            if (System::getPostmanManager()->IsUnknown() ||
+                                (System::getSceneManager() != NULL && System::getScene(scene::SCENE_ADDRESS) != NULL)) {
                                 if (System::getNwc24Manager() != NULL && !System::isNandFull()) {
                                     if (System::createdAfterAndLibMgr() && !System::getNwc24Manager()->isUnk0xA31()) {
                                         return;
@@ -69,15 +68,14 @@ namespace ipl {
 
                                 WPADGetStatus();
 
-                                if (System::getResetFader()->fadeOut()
-                                || System::getResetFader()->getStatus() == EGG::Fader::PREPARE_IN) {
-                                #ifdef VERSION_43E
+                                if (System::getResetFader()->fadeOut() || System::getResetFader()->getStatus() == EGG::Fader::PREPARE_IN) {
+#ifdef VERSION_43E
                                     if (System::getMasterController()->down(controller::REVO_BTN_DOWN)) {
                                         SCSetEuRgb60Mode(FALSE);
                                         SCSetProgressiveMode(FALSE);
                                         SCFlush();
                                     }
-                                #endif
+#endif
 
                                     mUpdateState = RESET_STATE_SHUTDOWN_VIDEO;
 
@@ -102,8 +100,8 @@ namespace ipl {
                 }
                 // Shutdown video
                 case RESET_STATE_SHUTDOWN_VIDEO: {
-                    if (System::getResetFader()->getStatus() == EGG::Fader::PREPARE_IN
-                    && (System::getSceneManager() == NULL || System::getSceneManager()->isResetProcessDone())) {
+                    if (System::getResetFader()->getStatus() == EGG::Fader::PREPARE_IN &&
+                        (System::getSceneManager() == NULL || System::getSceneManager()->isResetProcessDone())) {
                         mUpdateState = RESET_STATE_SHUTDOWN_SYSTEM;
                         VISetBlack(TRUE);
                         VIFlush();
@@ -121,8 +119,7 @@ namespace ipl {
                                 VIWaitForRetrace();
                                 if (mbReturnToMenu) {
                                     OSReturnToMenu();
-                                }
-                                else {
+                                } else {
                                     OSRebootSystem();
                                 }
                             }
@@ -191,4 +188,4 @@ namespace ipl {
             }
         }
     }
-}
+}  // namespace ipl

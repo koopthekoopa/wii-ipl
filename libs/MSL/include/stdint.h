@@ -19,4 +19,4 @@ typedef unsigned char uint_least8_t;
 typedef unsigned short uint_least16_t;
 typedef unsigned long uint_least32_t;
 
-#endif // MSL_STDINT_H
+#endif  // MSL_STDINT_H

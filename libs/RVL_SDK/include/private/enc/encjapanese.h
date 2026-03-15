@@ -3,8 +3,8 @@
 
 #include <revolution/types.h>
 
-#include <revolution/enc.h>
 #include <private/enc/encutility.h>
+#include <revolution/enc.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -12,7 +12,7 @@ extern "C" {
 
 typedef ENCMBState ENCJISState;
 enum {
-    ENC_JIS_STATE_INVALID,                    // Malformed escape sequence
+    ENC_JIS_STATE_INVALID,  // Malformed escape sequence
 
     /* Different character sets are switched between using ISO/IEC 2022 escape
      * sequences. There is a list of character sets that have been registered
@@ -26,14 +26,14 @@ enum {
      */
 
     // GZD4 [ESC 02/08 F]
-    ENC_JIS_STATE_US_ASCII,                    // [ESC 02/08 04/02] (Initial state)
-    ENC_JIS_STATE_JIS_C6220_1969_RO,        // [ESC 02/08 04/10]
-    ENC_JIS_STATE_JIS_C6220_1969_JP,        // [ESC 02/08 04/09]
+    ENC_JIS_STATE_US_ASCII,           // [ESC 02/08 04/02] (Initial state)
+    ENC_JIS_STATE_JIS_C6220_1969_RO,  // [ESC 02/08 04/10]
+    ENC_JIS_STATE_JIS_C6220_1969_JP,  // [ESC 02/08 04/09]
 
     // GZDM4 [ESC 02/04 02/08 F] (See note)
-    ENC_JIS_STATE_JIS_X_0208_1978,            // [ESC 02/04 04/00]
-    ENC_JIS_STATE_JIS_X_0208_1983,            // [ESC 02/04 04/02]
-    ENC_JIS_STATE_JIS_X_0212_1990,            // [ESC 02/04 04/04] (See note)
+    ENC_JIS_STATE_JIS_X_0208_1978,  // [ESC 02/04 04/00]
+    ENC_JIS_STATE_JIS_X_0208_1983,  // [ESC 02/04 04/02]
+    ENC_JIS_STATE_JIS_X_0212_1990,  // [ESC 02/04 04/04] (See note)
 
     /* NOTE: For GZDM4, the normal escape sequence is [ESC 02/04 02/08 F].
      * However, for backwards compatibility with earlier standards that already
@@ -69,4 +69,4 @@ DECLARE_PRIVATE_ENC_FUNCTION_FROM_UTF16_WITH_MB_STATE(Jis)
 }
 #endif
 
-#endif // PRIVATE_ENC_JAPANESE_H
+#endif  // PRIVATE_ENC_JAPANESE_H

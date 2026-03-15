@@ -1,51 +1,47 @@
 #include <private/os.h>
 #include <revolution/os.h>
 
-#include <revolution/gx.h>
 #include <private/gx.h>
+#include <revolution/gx.h>
 
 #include <private/hollywood.h>
 
 #include <revolution/base/PPCArch.h>
 
 GXRenderModeObj GXNtsc480IntDf = {
-    0, 640, 480, 480, 40, 0, 640, 480, 1, 0, 0, { 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6 }, { 8, 8, 10, 12, 10, 8, 8 }
-};
+    0, 640, 480, 480, 40, 0, 640, 480, 1, 0, 0, {6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6}, {8, 8, 10, 12, 10, 8, 8}};
 
 GXRenderModeObj GXMpal480IntDf = {
-    8, 640, 480, 480, 40, 0, 640, 480, 1, 0, 0, { 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6 }, { 8, 8, 10, 12, 10, 8, 8 }
-};
+    8, 640, 480, 480, 40, 0, 640, 480, 1, 0, 0, {6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6}, {8, 8, 10, 12, 10, 8, 8}};
 
 GXRenderModeObj GXPal528IntDf = {
-    4, 640, 528, 528, 40, 23, 640, 528, 1, 0, 0, { 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6 }, { 8, 8, 10, 12, 10, 8, 8 }
-};
+    4, 640, 528, 528, 40, 23, 640, 528, 1, 0, 0, {6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6}, {8, 8, 10, 12, 10, 8, 8}};
 
 GXRenderModeObj GXEurgb60Hz480IntDf = {
-    20, 640, 480, 480, 40, 0, 640, 480, 1, 0, 0, { 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6 }, { 8, 8, 10, 12, 10, 8, 8 }
-};
+    20, 640, 480, 480, 40, 0, 640, 480, 1, 0, 0, {6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6}, {8, 8, 10, 12, 10, 8, 8}};
 
 void GXSetDispCopySrc(u16 left, u16 top, u16 wd, u16 ht) {
     __GXData->cpDispSrc = 0;
-    SET_REG_FIELD(__GXData->cpDispSrc, 10,  0, left);
+    SET_REG_FIELD(__GXData->cpDispSrc, 10, 0, left);
     SET_REG_FIELD(__GXData->cpDispSrc, 10, 10, top);
-    SET_REG_FIELD(__GXData->cpDispSrc,  8, 24, 0x49);
+    SET_REG_FIELD(__GXData->cpDispSrc, 8, 24, 0x49);
 
     __GXData->cpDispSize = 0;
-    SET_REG_FIELD(__GXData->cpDispSize, 10,  0, wd - 1);
+    SET_REG_FIELD(__GXData->cpDispSize, 10, 0, wd - 1);
     SET_REG_FIELD(__GXData->cpDispSize, 10, 10, ht - 1);
-    SET_REG_FIELD(__GXData->cpDispSize,  8, 24, 0x4A);
+    SET_REG_FIELD(__GXData->cpDispSize, 8, 24, 0x4A);
 }
 
 void GXSetTexCopySrc(u16 left, u16 top, u16 wd, u16 ht) {
     __GXData->cpTexSrc = 0;
-    SET_REG_FIELD(__GXData->cpTexSrc, 10,  0, left);
+    SET_REG_FIELD(__GXData->cpTexSrc, 10, 0, left);
     SET_REG_FIELD(__GXData->cpTexSrc, 10, 10, top);
-    SET_REG_FIELD(__GXData->cpTexSrc,  8, 24, 0x49);
+    SET_REG_FIELD(__GXData->cpTexSrc, 8, 24, 0x49);
 
     __GXData->cpTexSize = 0;
-    SET_REG_FIELD(__GXData->cpTexSize, 10,  0, wd - 1);
+    SET_REG_FIELD(__GXData->cpTexSize, 10, 0, wd - 1);
     SET_REG_FIELD(__GXData->cpTexSize, 10, 10, ht - 1);
-    SET_REG_FIELD(__GXData->cpTexSize,  8, 24, 0x4A);
+    SET_REG_FIELD(__GXData->cpTexSize, 8, 24, 0x4A);
 }
 
 void GXSetDispCopyDst(u16 wd, u16 ht) {
@@ -53,8 +49,8 @@ void GXSetDispCopyDst(u16 wd, u16 ht) {
 
     stride = (int)wd * 2;
     __GXData->cpDispStride = 0;
-    SET_REG_FIELD(__GXData->cpDispStride, 10,  0, (stride >> 5) );
-    SET_REG_FIELD(__GXData->cpDispStride,  8, 24, 0x4D);
+    SET_REG_FIELD(__GXData->cpDispStride, 10, 0, (stride >> 5));
+    SET_REG_FIELD(__GXData->cpDispStride, 8, 24, 0x4D);
 }
 
 void GXSetTexCopyDst(u16 wd, u16 ht, GXTexFmt fmt, GXBool mipmap) {
@@ -94,8 +90,8 @@ void GXSetTexCopyDst(u16 wd, u16 ht, GXTexFmt fmt, GXBool mipmap) {
     __GetImageTileCount(fmt, wd, ht, &rowTiles, &colTiles, &cmpTiles);
 
     __GXData->cpTexStride = 0;
-    SET_REG_FIELD(__GXData->cpTexStride, 10,  0, rowTiles * cmpTiles);
-    SET_REG_FIELD(__GXData->cpTexStride,  8, 24, 0x4D);
+    SET_REG_FIELD(__GXData->cpTexStride, 10, 0, rowTiles * cmpTiles);
+    SET_REG_FIELD(__GXData->cpTexStride, 8, 24, 0x4D);
     SET_REG_FIELD(__GXData->cpTex, 1, 9, mipmap);
     SET_REG_FIELD(__GXData->cpTex, 3, 4, peTexFmt);
 }
@@ -178,7 +174,7 @@ u32 GXSetDispCopyYScale(f32 vscale) {
     u32 ht;
     u32 reg;
 
-    iScale = (u32) (256.0f / vscale) & 0x1FF;
+    iScale = (u32)(256.0f / vscale) & 0x1FF;
     enable = (iScale != 256);
 
     reg = 0;
@@ -220,42 +216,41 @@ void GXSetCopyFilter(GXBool aa, const u8 sample_pattern[12][2], GXBool vf, const
 
     if (aa != 0) {
         msLoc[0] = 0;
-        SET_REG_FIELD(msLoc[0], 4,  0, sample_pattern[0][0]);
-        SET_REG_FIELD(msLoc[0], 4,  4, sample_pattern[0][1]);
-        SET_REG_FIELD(msLoc[0], 4,  8, sample_pattern[1][0]);
+        SET_REG_FIELD(msLoc[0], 4, 0, sample_pattern[0][0]);
+        SET_REG_FIELD(msLoc[0], 4, 4, sample_pattern[0][1]);
+        SET_REG_FIELD(msLoc[0], 4, 8, sample_pattern[1][0]);
         SET_REG_FIELD(msLoc[0], 4, 12, sample_pattern[1][1]);
         SET_REG_FIELD(msLoc[0], 4, 16, sample_pattern[2][0]);
         SET_REG_FIELD(msLoc[0], 4, 20, sample_pattern[2][1]);
         SET_REG_FIELD(msLoc[0], 8, 24, 1);
 
         msLoc[1] = 0;
-        SET_REG_FIELD(msLoc[1], 4,  0, sample_pattern[3][0]);
-        SET_REG_FIELD(msLoc[1], 4,  4, sample_pattern[3][1]);
-        SET_REG_FIELD(msLoc[1], 4,  8, sample_pattern[4][0]);
+        SET_REG_FIELD(msLoc[1], 4, 0, sample_pattern[3][0]);
+        SET_REG_FIELD(msLoc[1], 4, 4, sample_pattern[3][1]);
+        SET_REG_FIELD(msLoc[1], 4, 8, sample_pattern[4][0]);
         SET_REG_FIELD(msLoc[1], 4, 12, sample_pattern[4][1]);
         SET_REG_FIELD(msLoc[1], 4, 16, sample_pattern[5][0]);
         SET_REG_FIELD(msLoc[1], 4, 20, sample_pattern[5][1]);
         SET_REG_FIELD(msLoc[1], 8, 24, 2);
 
         msLoc[2] = 0;
-        SET_REG_FIELD(msLoc[2], 4,  0, sample_pattern[6][0]);
-        SET_REG_FIELD(msLoc[2], 4,  4, sample_pattern[6][1]);
-        SET_REG_FIELD(msLoc[2], 4,  8, sample_pattern[7][0]);
+        SET_REG_FIELD(msLoc[2], 4, 0, sample_pattern[6][0]);
+        SET_REG_FIELD(msLoc[2], 4, 4, sample_pattern[6][1]);
+        SET_REG_FIELD(msLoc[2], 4, 8, sample_pattern[7][0]);
         SET_REG_FIELD(msLoc[2], 4, 12, sample_pattern[7][1]);
         SET_REG_FIELD(msLoc[2], 4, 16, sample_pattern[8][0]);
         SET_REG_FIELD(msLoc[2], 4, 20, sample_pattern[8][1]);
         SET_REG_FIELD(msLoc[2], 8, 24, 3);
 
         msLoc[3] = 0;
-        SET_REG_FIELD(msLoc[3], 4,  0, sample_pattern[9][0]);
-        SET_REG_FIELD(msLoc[3], 4,  4, sample_pattern[9][1]);
-        SET_REG_FIELD(msLoc[3], 4,  8, sample_pattern[10][0]);
+        SET_REG_FIELD(msLoc[3], 4, 0, sample_pattern[9][0]);
+        SET_REG_FIELD(msLoc[3], 4, 4, sample_pattern[9][1]);
+        SET_REG_FIELD(msLoc[3], 4, 8, sample_pattern[10][0]);
         SET_REG_FIELD(msLoc[3], 4, 12, sample_pattern[10][1]);
         SET_REG_FIELD(msLoc[3], 4, 16, sample_pattern[11][0]);
         SET_REG_FIELD(msLoc[3], 4, 20, sample_pattern[11][1]);
         SET_REG_FIELD(msLoc[3], 8, 24, 4);
-    }
-    else {
+    } else {
         msLoc[0] = 0x01666666;
         msLoc[1] = 0x02666666;
         msLoc[2] = 0x03666666;
@@ -273,22 +268,21 @@ void GXSetCopyFilter(GXBool aa, const u8 sample_pattern[12][2], GXBool vf, const
     SET_REG_FIELD(coeff1, 8, 24, 0x54);
 
     if (vf != 0) {
-        SET_REG_FIELD(coeff0, 6,  0, vfilter[0]);
-        SET_REG_FIELD(coeff0, 6,  6, vfilter[1]);
+        SET_REG_FIELD(coeff0, 6, 0, vfilter[0]);
+        SET_REG_FIELD(coeff0, 6, 6, vfilter[1]);
         SET_REG_FIELD(coeff0, 6, 12, vfilter[2]);
         SET_REG_FIELD(coeff0, 6, 18, vfilter[3]);
-        SET_REG_FIELD(coeff1, 6,  0, vfilter[4]);
-        SET_REG_FIELD(coeff1, 6,  6, vfilter[5]);
+        SET_REG_FIELD(coeff1, 6, 0, vfilter[4]);
+        SET_REG_FIELD(coeff1, 6, 6, vfilter[5]);
         SET_REG_FIELD(coeff1, 6, 12, vfilter[6]);
-    }
-    else {
-        SET_REG_FIELD(coeff0, 6,  0, 0);
-        SET_REG_FIELD(coeff0, 6,  6, 0);
+    } else {
+        SET_REG_FIELD(coeff0, 6, 0, 0);
+        SET_REG_FIELD(coeff0, 6, 6, 0);
         SET_REG_FIELD(coeff0, 6, 12, 21);
         SET_REG_FIELD(coeff0, 6, 18, 22);
-        SET_REG_FIELD(coeff1, 6,  0, 21);
-        SET_REG_FIELD(coeff1, 6,  6,  0);
-        SET_REG_FIELD(coeff1, 6, 12,  0);
+        SET_REG_FIELD(coeff1, 6, 0, 21);
+        SET_REG_FIELD(coeff1, 6, 6, 0);
+        SET_REG_FIELD(coeff1, 6, 12, 0);
     }
 
     GX_WRITE_RAS_REG(coeff0);
@@ -381,7 +375,7 @@ void GXCopyTex(void* dest, GXBool clear) {
         SET_REG_FIELD(tempPeCtrl, 3, 0, 3);
     }
 
-    if ((clear || ((u32) (tempPeCtrl & 7) == 3)) && ((u32) ((tempPeCtrl >> 6) & 1) == 1)) {
+    if ((clear || ((u32)(tempPeCtrl & 7) == 3)) && ((u32)((tempPeCtrl >> 6) & 1) == 1)) {
         changePeCtrl = 1;
         SET_REG_FIELD(tempPeCtrl, 1, 6, 0);
     }

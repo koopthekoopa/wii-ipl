@@ -10,60 +10,60 @@ extern "C" {
 typedef struct RSOObjectInfo RSOObjectInfo;
 
 typedef struct RSOSymbolHeader {
-    u32 tableOffset;    // 0x00
-    u32 tableSize;      // 0x04
-    u32 stringOffset;   // 0x08
+    u32 tableOffset;   // 0x00
+    u32 tableSize;     // 0x04
+    u32 stringOffset;  // 0x08
 } RSOSymbolHeader;
 
 typedef struct RSOSectionInfo {
-    u32 offset; // 0x00
-    u32 size;   // 0x04
+    u32 offset;  // 0x00
+    u32 size;    // 0x04
 } RSOSectionInfo;
 
 typedef struct RSOObjectLink {
-    RSOObjectInfo*  next;   // 0x00
-    RSOObjectInfo*  prev;   // 0x04
+    RSOObjectInfo* next;  // 0x00
+    RSOObjectInfo* prev;  // 0x04
 } RSOObjectLink;
 
 struct RSOObjectInfo {
-    RSOObjectLink   link;               // 0x00
+    RSOObjectLink link;  // 0x00
 
-    u32             numSections;        // 0x08
-    u32             sectionInfoOffset;  // 0x0C
+    u32 numSections;        // 0x08
+    u32 sectionInfoOffset;  // 0x0C
 
-    u32             nameOffset;         // 0x10
-    u32             nameSize;           // 0x14
+    u32 nameOffset;  // 0x10
+    u32 nameSize;    // 0x14
 
-    u32             version;            // 0x18
+    u32 version;  // 0x18
 };
 
 typedef struct RSOObjectList {
-    RSOObjectInfo*  head;   // 0x00
-    RSOObjectInfo*  tail;   // 0x04
+    RSOObjectInfo* head;  // 0x00
+    RSOObjectInfo* tail;  // 0x04
 } RSOObjectList;
 
 typedef struct RSOObjectHeader {
-    RSOObjectInfo   info;               // 0x00
+    RSOObjectInfo info;  // 0x00
 
-    u32             bssSize;            // 0x1C
+    u32 bssSize;  // 0x1C
 
-    u8              prologSection;      // 0x20
-    u8              epilogSection;      // 0x21
-    u8              unresolvedSection;  // 0x22
-    u8              bssSection;         // 0x23
+    u8 prologSection;      // 0x20
+    u8 epilogSection;      // 0x21
+    u8 unresolvedSection;  // 0x22
+    u8 bssSection;         // 0x23
 
-    u32             prolog;             // 0x24
-    u32             epilog;             // 0x28
-    u32             unresolved;         // 0x2C
+    u32 prolog;      // 0x24
+    u32 epilog;      // 0x28
+    u32 unresolved;  // 0x2C
 
-    u32             internalRelOffset;  // 0x30
-    u32             internalRelSize;    // 0x34
+    u32 internalRelOffset;  // 0x30
+    u32 internalRelSize;    // 0x34
 
-    u32             externalRelOffset;  // 0x38
-    u32             externalRelSize;    // 0x3C
+    u32 externalRelOffset;  // 0x38
+    u32 externalRelSize;    // 0x3C
 
-    RSOSymbolHeader expHeader;          // 0x40
-    RSOSymbolHeader impHeader;          // 0x4C
+    RSOSymbolHeader expHeader;  // 0x40
+    RSOSymbolHeader impHeader;  // 0x4C
 } RSOObjectHeader;
 
 typedef struct RSOImportTable {
@@ -79,7 +79,6 @@ typedef struct RSOExportTable {
     u32 hash;       // 0x0C
 } RSOExportTable;
 
-
 typedef enum {
     RSO_FL_NON,
     RSO_FL_INTERNAL,
@@ -88,40 +87,40 @@ typedef enum {
 
 typedef u32 RSOHash;
 
-BOOL            RSOLocateObject(void* newModule, void* bss);
-BOOL            RSOLocateObjectFixed(void* newModule, void* bss);
-BOOL            RSOStaticLocateObject(void* newModule);
-BOOL            RSOUnLocateObject(void* oldModule);
+BOOL RSOLocateObject(void* newModule, void* bss);
+BOOL RSOLocateObjectFixed(void* newModule, void* bss);
+BOOL RSOStaticLocateObject(void* newModule);
+BOOL RSOUnLocateObject(void* oldModule);
 
 RSOImportTable* RSOGetImport(RSOSymbolHeader* imp);
 RSOExportTable* RSOGetExport(RSOSymbolHeader* exp);
 
-int             RSOLink(RSOObjectHeader* rsoImp, RSOObjectHeader* rsoExp);
-void            RSOUnLink(RSOObjectHeader* rsoImp, RSOObjectHeader* rsoExp);
+int RSOLink(RSOObjectHeader* rsoImp, RSOObjectHeader* rsoExp);
+void RSOUnLink(RSOObjectHeader* rsoImp, RSOObjectHeader* rsoExp);
 
-RSOHash         RSOGetHash(const char* symbolname);
+RSOHash RSOGetHash(const char* symbolname);
 
-int             RSOGetNumImportSymbols(RSOSymbolHeader* imp);
-int             RSOGetNumImportSymbolsUnresolved(RSOObjectHeader* rso);
+int RSOGetNumImportSymbols(RSOSymbolHeader* imp);
+int RSOGetNumImportSymbolsUnresolved(RSOObjectHeader* rso);
 
-char*           RSOGetImportSymbolName(RSOSymbolHeader* imp, int index);
-BOOL            RSOIsImportSymbolResolved(RSOObjectHeader* rso, int index);
-BOOL            RSOIsImportSymbolResolvedAll(RSOObjectHeader* rso);
+char* RSOGetImportSymbolName(RSOSymbolHeader* imp, int index);
+BOOL RSOIsImportSymbolResolved(RSOObjectHeader* rso, int index);
+BOOL RSOIsImportSymbolResolvedAll(RSOObjectHeader* rso);
 
-int             RSOGetNumExportSymbols(RSOSymbolHeader* exp);
-char*           RSOGetExportSymbolName(RSOSymbolHeader* exp, int index);
-void*           RSOGetExportSymbolAddr(RSOObjectHeader* rso, int index);
+int RSOGetNumExportSymbols(RSOSymbolHeader* exp);
+char* RSOGetExportSymbolName(RSOSymbolHeader* exp, int index);
+void* RSOGetExportSymbolAddr(RSOObjectHeader* rso, int index);
 
-void*           RSOFindExportSymbolAddr(RSOObjectHeader* rso, const char* name);
+void* RSOFindExportSymbolAddr(RSOObjectHeader* rso, const char* name);
 RSOExportTable* RSOFindExportSymbol(RSOObjectHeader* rso, const char* name);
 
-BOOL            RSOListInit(void* staticRso);
+BOOL RSOListInit(void* staticRso);
 
-BOOL            RSOLinkList(void* newRso, void* bss);
-BOOL            RSOUnLinkList(void* oldRso);
+BOOL RSOLinkList(void* newRso, void* bss);
+BOOL RSOUnLinkList(void* oldRso);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // REVOLUTION_RSO_H
+#endif  // REVOLUTION_RSO_H

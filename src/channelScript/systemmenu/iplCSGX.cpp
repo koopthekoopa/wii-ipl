@@ -5,7 +5,7 @@
 namespace ipl {
     namespace cs {
         namespace gx {
-            #define PROPERTY_COUNT  11
+#define PROPERTY_COUNT 11
             extern const CHANSVmPropertyList cPropertyList[PROPERTY_COUNT];
 
             BOOL init(CHANSVm* vm) {
@@ -19,6 +19,7 @@ namespace ipl {
                 return result;
             }
 
+            // clang-format off
             const CHANSVmPropertyList cPropertyList[PROPERTY_COUNT] = {
                 { "*GX_TF_I4",      util::get_int<GX_TF_I4>,        NULL },
                 { "*GX_TF_IA4",     util::get_int<GX_TF_IA4>,       NULL },
@@ -32,6 +33,7 @@ namespace ipl {
                 { "*GX_REPEAT",     util::get_int<GX_REPEAT>,       NULL },
                 { "*GX_MIRROR",     util::get_int<GX_MIRROR>,       NULL },
             };
-        }
-    }
-}
+            // clang-format on
+        }  // namespace gx
+    }  // namespace cs
+}  // namespace ipl

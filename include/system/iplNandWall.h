@@ -3,8 +3,8 @@
 
 #include <revolution/types.h>
 
-#include <revolution/nand.h>
 #include <private/nand.h>
+#include <revolution/nand.h>
 
 namespace ipl {
     namespace nandwall {
@@ -12,7 +12,7 @@ namespace ipl {
         void throwNandCheckCommand(void* work);
         /** @brief Checks if the NAND has enough capacity to run an application. */
         BOOL checkNandCapacityAppBootable();
-    }
-}
+    }  // namespace nandwall
+}  // namespace ipl
 
-#endif // IPL_NAND_WALL_H
+#endif  // IPL_NAND_WALL_H

@@ -6,10 +6,10 @@
 #ifdef __cplusplus
 
 namespace std {
-    using   ::tolower;
-    using   ::toupper;
-} // namespace std
+    using ::tolower;
+    using ::toupper;
+}  // namespace std
 
 #endif
 
-#endif // MSL_CCTYPE_H
+#endif  // MSL_CCTYPE_H

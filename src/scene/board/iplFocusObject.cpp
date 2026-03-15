@@ -8,11 +8,13 @@
 
 #include "scene/setting/iplNCDSetting.h"
 
-#include <revolution/enc.h>
 #include <revolution/cx.h>
+#include <revolution/enc.h>
+
 
 namespace ipl {
     namespace scene {
+        // clang-format off
         const char* focus_object::mAnimNames[BoardObject::TYPE_MAX][1+ANIM_ARROW_MAX] = {
             {
                 "my_Memo_a.brlyt",
@@ -54,6 +56,7 @@ namespace ipl {
                 "my_Memo_a_HDActionEnd.brlan",
             }
         };
+        // clang-format on
 
         const char* focus_object::mscButtonName[focus_object::BTN_MAX] = {
             "B_ArwR",
@@ -62,6 +65,7 @@ namespace ipl {
             "B_Nigaoe",
         };
 
+        // clang-format off
         static const struct {
             const char* file;
             const char* s_pane;
@@ -113,43 +117,15 @@ namespace ipl {
                 "LetterI",
             },
         };
+        // clang-format on
 
-        focus_object::focus_object(nand::LayoutFile* layoutFile, nand::LayoutFile* balloonFile, BoardObject* boardObject) :
-        mState(STATE_INIT_NORMAL),
-        mNextState(STATE_NONE),
-        mPrevState(STATE_NONE),
-        mFinalResult(RESULT_NONE),
-        mCurrentResult(RESULT_NONE),
-        mpBoardObj(boardObject),
-        mpLayout(NULL),
-        mpGui(NULL),
-        mpNigaoeBalloon(NULL),
-        mpParsedText(NULL),
-        mEvent(this),
-        mButtonEvent(this),
-        mOptOutEvent(this),
-        mScroller(),
-        mPicture(),
-        unk_0xF8(0),
-        unk_0xFC(0),
-        mGUIAlloc(System::getMem2App(), 4),
-        mpCmpArcData(NULL),
-        mpArcData(NULL),
-        mArcLength(0),
-        mbChanJump(false),
-        mpChJpData(NULL),
-        mpSoundData(NULL),
-        mSoundSize(0),
-        mbSoundPlaying(false),
-        mURLProc(),
-        mFadeAnim(),
-        mNwc24ErrCountdown(0),
-        mChanJumpCountdown(0),
-        mbShowUArw(false),
-        mbShowDArw(false),
-        mbScaleUArw(false),
-        mbScaleDArw(false),
-        mbParentalSuccess(false) {
+        focus_object::focus_object(nand::LayoutFile* layoutFile, nand::LayoutFile* balloonFile, BoardObject* boardObject)
+            : mState(STATE_INIT_NORMAL), mNextState(STATE_NONE), mPrevState(STATE_NONE), mFinalResult(RESULT_NONE), mCurrentResult(RESULT_NONE),
+              mpBoardObj(boardObject), mpLayout(NULL), mpGui(NULL), mpNigaoeBalloon(NULL), mpParsedText(NULL), mEvent(this), mButtonEvent(this),
+              mOptOutEvent(this), mScroller(), mPicture(), unk_0xF8(0), unk_0xFC(0), mGUIAlloc(System::getMem2App(), 4), mpCmpArcData(NULL),
+              mpArcData(NULL), mArcLength(0), mbChanJump(false), mpChJpData(NULL), mpSoundData(NULL), mSoundSize(0), mbSoundPlaying(false),
+              mURLProc(), mFadeAnim(), mNwc24ErrCountdown(0), mChanJumpCountdown(0), mbShowUArw(false), mbShowDArw(false), mbScaleUArw(false),
+              mbScaleDArw(false), mbParentalSuccess(false) {
             for (int i = 0; i < BTN_MAX; i++) {
                 mbHovered[i] = 0;
             }
@@ -312,7 +288,8 @@ namespace ipl {
 
             show_or_hide_arw(showUArw, showDArw, hideUArw, hideDArw);
 
-            if ((mState == STATE_NORMAL || (mState == STATE_PIC_FADE_IN || mState == STATE_PIC_NORMAL || mState == STATE_PIC_FADE_OUT)) && mpSoundData != NULL) {
+            if ((mState == STATE_NORMAL || (mState == STATE_PIC_FADE_IN || mState == STATE_PIC_NORMAL || mState == STATE_PIC_FADE_OUT)) &&
+                mpSoundData != NULL) {
                 if (mSoundTimer()) {
                     snd::getBannerPlayer()->start(mpSoundData, mSoundSize);
                     mSoundTimer.set_msec(1471228928);
@@ -341,9 +318,9 @@ namespace ipl {
 
             mpLayout->GetRootPane()->SetTranslate(math::VEC3((nw4r::math::VEC3)mFadeAnim.get()));
             mpLayout->FindPaneByName("N_Memo")->SetTranslate(nw4r::math::VEC3(0.0f, mScroller.get(), 0.0f));
-        
+
             mpLayout->calc();
-            
+
             mpNigaoeBalloon->updatePos(calc_balloon_pos());
             mpNigaoeBalloon->calc();
 
@@ -355,8 +332,7 @@ namespace ipl {
                         mbSoundPlaying = false;
                         snd::getSystem()->muteOffBGM(120);
                     }
-                }
-                else {
+                } else {
                     mSoundStopTimer.set_msec(100);
                 }
             }
@@ -398,8 +374,7 @@ namespace ipl {
         }
 
         void focus_object::stt_wait_btn() {
-            if (get_button()->isActive()
-            && !get_button()->hasReservedAnim()) {
+            if (get_button()->isActive() && !get_button()->hasReservedAnim()) {
                 switch (mNextState) {
                     case STATE_FADE_OUT: {
                         init_fadeout(false);
@@ -424,10 +399,8 @@ namespace ipl {
                         break;
                     }
                     case STATE_OPT_WAIT_SELECT_MSG: {
-                        System::getDialog()->callBtn3(MESG_BOARD_OPT_OUT_SELECT,
-                                                    MESG_BOARD_OPT_OUT_ONE,
-                                                    MESG_BOARD_OPT_OUT_ALL, 
-                                                    MESG_BOARD_OPT_OUT_CANCEL);
+                        System::getDialog()->callBtn3(MESG_BOARD_OPT_OUT_SELECT, MESG_BOARD_OPT_OUT_ONE, MESG_BOARD_OPT_OUT_ALL,
+                                                      MESG_BOARD_OPT_OUT_CANCEL);
                         break;
                     }
                 }
@@ -458,7 +431,7 @@ namespace ipl {
                 mNextState = STATE_NONE;
             }
         }
-        
+
         void focus_object::stt_del_wait_msg() {
             switch (System::getDialog()->getLastResult()) {
                 case DialogWindow::RESULT_LEFT_BUTTON: {
@@ -478,8 +451,7 @@ namespace ipl {
                         mState = STATE_WAIT_MSG;
 
                         mNextState = STATE_NORMAL;
-                    }
-                    else {
+                    } else {
                         mFadeAnim.playBackwards();
 
                         mpNigaoeBalloon->terminate();
@@ -597,8 +569,7 @@ namespace ipl {
         }
 
         void focus_object::stt_ltr_wait_ltr_scene() {
-            if (System::getReservedScene() == NULL
-            && System::getScene(SCENE_LETTER_WRITER) == NULL) {
+            if (System::getReservedScene() == NULL && System::getScene(SCENE_LETTER_WRITER) == NULL) {
                 System::startReceiveSchedule();
 
                 switch (mPrevState) {
@@ -629,7 +600,7 @@ namespace ipl {
                     break;
                 }
                 case DialogWindow::RESULT_RIGHT_BUTTON: {
-                    char url[(256+1) * sizeof(wchar_t)];
+                    char url[(256 + 1) * sizeof(wchar_t)];
                     memset(url, 0, sizeof(url));
 
                     mURLProc.get_url(url, 256 * sizeof(wchar_t));
@@ -740,8 +711,7 @@ namespace ipl {
                 nwc24Mgr->close();
                 System::getDialog()->callBtn1(MESG_BOARD_OPT_OUT_DONE, MESG_CMN_OK);
                 mState = STATE_OPT_WAIT_CONFIRM_MSG;
-            }
-            else {
+            } else {
                 check_delete_task_failure();
             }
         }
@@ -772,8 +742,7 @@ namespace ipl {
                 nwc24Mgr->close();
                 System::getDialog()->callBtn1(MESG_BOARD_OPT_OUT_DONE_ALL, MESG_CMN_OK);
                 mState = STATE_OPT_WAIT_CONFIRM_MSG;
-            }
-            else {
+            } else {
                 check_delete_task_failure();
             }
         }
@@ -809,8 +778,7 @@ namespace ipl {
 
                         mPrevState = mState;
                         mState = STATE_NET_WAIT_PARENTAL;
-                    }
-                    else {
+                    } else {
                         mFinalResult = RESULT_INTERNET_SETTING;
                         mState = STATE_DONE;
                     }
@@ -866,8 +834,7 @@ namespace ipl {
                     mCurrentResult = RESULT_NONE;
 
                     mState = STATE_DONE;
-                }
-                else {
+                } else {
                     show_cmn_btn();
 
                     get_button()->setEventHandler(&mButtonEvent, &mOptOutEvent);
@@ -884,8 +851,7 @@ namespace ipl {
                 if (mScroller.getBInst().isActive() ? false : true) {
                     if (con->down(controller::BTN_UP)) {
                         mScroller.scrollUpByCon();
-                    }
-                    else if (con->down(controller::BTN_DOWN)) {
+                    } else if (con->down(controller::BTN_DOWN)) {
                         mScroller.scrollDownByCon();
                     }
                 }
@@ -918,16 +884,14 @@ namespace ipl {
                             }
 
                             mState = STATE_CHN_WAIT_MSG;
-                        }
-                        else {
+                        } else {
                             System::getDialog()->callBtn1(MESG_BOARD_CHJUMP_NO_OPERA, MESG_CMN_OK);
                             mNextState = STATE_NORMAL;
                             mPrevState = mState;
                             mState = STATE_WAIT_MSG;
                         }
                     }
-                }
-                else {
+                } else {
                     mbHoveredURL[i] = false;
                 }
             }
@@ -1049,31 +1013,31 @@ namespace ipl {
             RBRHeader* recordHdr = (RBRHeader*)mpBoardObj->mpRecordData;
             const char** animNames = mAnimNames[type];
 
-            mpLayout = new(System::getMem2App(), 4) layout::Object(System::getMem2App(), layoutFile, "arc", animNames[0]);
+            mpLayout = new (System::getMem2App(), 4) layout::Object(System::getMem2App(), layoutFile, "arc", animNames[0]);
 
             // Letter
-            mpLayout->bind(animNames[1+ANIM_SELECT]);
-            mpLayout->bind(animNames[1+ANIM_EXIT], false);
+            mpLayout->bind(animNames[1 + ANIM_SELECT]);
+            mpLayout->bind(animNames[1 + ANIM_EXIT], false);
 
             // Right arrows
-            mpLayout->bindToGroup(animNames[1+ANIM_ARROW_LOOP], "G_ArwRoop", false, false);
-            mpLayout->bindToGroup(animNames[1+ANIM_ARROW_FOCUS_ON], "G_ArwR_Focus", false, false);
-            mpLayout->bindToGroup(animNames[1+ANIM_ARROW_FOCUS_OFF], "G_ArwR_Focus", false, false);
-            mpLayout->bindToGroup(animNames[1+ANIM_ARROW_SELECT], "G_ArwR_Ac", false, false);
-            mpLayout->bindToGroup(animNames[1+ANIM_ARROW_APPEAR], "G_ArwR_End", false, false);
-            mpLayout->bindToGroup(animNames[1+ANIM_ARROW_LOST], "G_ArwR_End", false, false);
-            mpLayout->bindToGroup(animNames[1+ANIM_ARROW_HD_AC_START], "G_ArwR_HDAc", false, false);
-            mpLayout->bindToGroup(animNames[1+ANIM_ARROW_HD_AC_END], "G_ArwR_HDAc", false, false);
+            mpLayout->bindToGroup(animNames[1 + ANIM_ARROW_LOOP], "G_ArwRoop", false, false);
+            mpLayout->bindToGroup(animNames[1 + ANIM_ARROW_FOCUS_ON], "G_ArwR_Focus", false, false);
+            mpLayout->bindToGroup(animNames[1 + ANIM_ARROW_FOCUS_OFF], "G_ArwR_Focus", false, false);
+            mpLayout->bindToGroup(animNames[1 + ANIM_ARROW_SELECT], "G_ArwR_Ac", false, false);
+            mpLayout->bindToGroup(animNames[1 + ANIM_ARROW_APPEAR], "G_ArwR_End", false, false);
+            mpLayout->bindToGroup(animNames[1 + ANIM_ARROW_LOST], "G_ArwR_End", false, false);
+            mpLayout->bindToGroup(animNames[1 + ANIM_ARROW_HD_AC_START], "G_ArwR_HDAc", false, false);
+            mpLayout->bindToGroup(animNames[1 + ANIM_ARROW_HD_AC_END], "G_ArwR_HDAc", false, false);
 
             // Left arrow
-            mpLayout->bindToGroup(animNames[1+ANIM_ARROW_LOOP], "G_ArwRoop", false, false);
-            mpLayout->bindToGroup(animNames[1+ANIM_ARROW_FOCUS_ON], "G_ArwL_Focus", false, false);
-            mpLayout->bindToGroup(animNames[1+ANIM_ARROW_FOCUS_OFF], "G_ArwL_Focus", false, false);
-            mpLayout->bindToGroup(animNames[1+ANIM_ARROW_SELECT], "G_ArwL_Ac", false, false);
-            mpLayout->bindToGroup(animNames[1+ANIM_ARROW_APPEAR], "G_ArwL_End", false, false);
-            mpLayout->bindToGroup(animNames[1+ANIM_ARROW_LOST], "G_ArwL_End", false, false);
-            mpLayout->bindToGroup(animNames[1+ANIM_ARROW_HD_AC_START], "G_ArwL_HDAc", false, false);
-            mpLayout->bindToGroup(animNames[1+ANIM_ARROW_HD_AC_END], "G_ArwL_HDAc", false, false);
+            mpLayout->bindToGroup(animNames[1 + ANIM_ARROW_LOOP], "G_ArwRoop", false, false);
+            mpLayout->bindToGroup(animNames[1 + ANIM_ARROW_FOCUS_ON], "G_ArwL_Focus", false, false);
+            mpLayout->bindToGroup(animNames[1 + ANIM_ARROW_FOCUS_OFF], "G_ArwL_Focus", false, false);
+            mpLayout->bindToGroup(animNames[1 + ANIM_ARROW_SELECT], "G_ArwL_Ac", false, false);
+            mpLayout->bindToGroup(animNames[1 + ANIM_ARROW_APPEAR], "G_ArwL_End", false, false);
+            mpLayout->bindToGroup(animNames[1 + ANIM_ARROW_LOST], "G_ArwL_End", false, false);
+            mpLayout->bindToGroup(animNames[1 + ANIM_ARROW_HD_AC_START], "G_ArwL_HDAc", false, false);
+            mpLayout->bindToGroup(animNames[1 + ANIM_ARROW_HD_AC_END], "G_ArwL_HDAc", false, false);
 
             if (type == BoardObject::TYPE_LETTER) {
                 mpLayout->bindToGroup("my_LetterL_Reply.brlan", "G_Reply", false, false);
@@ -1102,8 +1066,7 @@ namespace ipl {
                 default: {
                     if (recordHdr->titleOffset != 0) {
                         pStr = (wchar_t*)((u8*)mpBoardObj->mpRecordData + recordHdr->titleOffset);
-                    }
-                    else {
+                    } else {
                         pStr = nullStr;
                     }
                     break;
@@ -1123,8 +1086,7 @@ namespace ipl {
                 nw4r::lyt::Pane* bodyPane = mpLayout->FindPaneByName("N_Body");
                 nw4r::ut::Rect textRect = mpLayout->getTextDrawRect("T_Letter");
                 mLineCount = ceilf(-textRect.GetHeight() / bodyPane->GetSize().height);
-            }
-            else {
+            } else {
                 utility::layout::set_string(mpLayout->FindPaneByName("T_Letter"), nullStr);
 
                 mLineCount = 1;
@@ -1134,8 +1096,7 @@ namespace ipl {
             if (recordHdr->faceOffset != 0 && mpBoardObj->mpNigaoe != NULL && mpBoardObj->mpNigaoe->created()) {
                 nigaoePane->SetVisible(true);
                 utility::layout::set_texture(nigaoePane->GetMaterial(), mpBoardObj->mpNigaoe->getIconTexture());
-            }
-            else {
+            } else {
                 nigaoePane->SetVisible(false);
             }
 
@@ -1162,7 +1123,7 @@ namespace ipl {
         void focus_object::make_gui_mgr() {
             nw4r::lyt::Pane* trigPane;
 
-            mpGui = new(System::getMem2App(), 4) gui::PaneManager(&mEvent, mpLayout->getDrawInfo(), NULL, &mGUIAlloc);
+            mpGui = new (System::getMem2App(), 4) gui::PaneManager(&mEvent, mpLayout->getDrawInfo(), NULL, &mGUIAlloc);
             mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
 
@@ -1185,11 +1146,11 @@ namespace ipl {
         }
 
         void focus_object::make_parsed_text(const wchar_t* inText) {
-            mpParsedText = new(System::getMem2App(), 4) wchar_t[PARSED_TEXT_LENGTH];
+            mpParsedText = new (System::getMem2App(), 4) wchar_t[PARSED_TEXT_LENGTH];
             memset(mpParsedText, 0, PARSED_TEXT_LENGTH * sizeof(wchar_t));
 
             const wchar_t *pURLStr, *pStr = inText;
-            const wchar_t URLSep[2] = { 0x1A,  0x00 };
+            const wchar_t URLSep[2] = {0x1A, 0x00};
 
             u32 i = 0;
             u32 strLen = wcslen(inText);
@@ -1212,19 +1173,18 @@ namespace ipl {
 
                     strLen = wcslen(inText);
                     i = 0;
-                }
-                else {
+                } else {
                     i++;
                 }
             }
 
             wcsncat(mpParsedText, inText, i);
         }
-        
+
         BOOL focus_object::is_url_end_code(wchar_t ch) const {
             bool result = FALSE;
             for (int i = 0; i < ARRAY_LENGTH(unk_0x114); i++) {
-                result |= ((unk_0x114[i]-ch) == 0);
+                result |= ((unk_0x114[i] - ch) == 0);
             }
             return result;
         }
@@ -1235,8 +1195,7 @@ namespace ipl {
             const wchar_t* cmp1 = L"http://";
             const wchar_t* cmp2 = L"https://";
 
-            if (wcsncmp(url, cmp1, wcslen(cmp1)) == 0
-            || wcsncmp(url, cmp2, wcslen(cmp2)) == 0) {
+            if (wcsncmp(url, cmp1, wcslen(cmp1)) == 0 || wcsncmp(url, cmp2, wcslen(cmp2)) == 0) {
                 result = TRUE;
             }
             return result;
@@ -1253,7 +1212,8 @@ namespace ipl {
 
         int focus_object::get_url_end(const wchar_t* url) const {
             int i;
-            for (i = 0; !is_url_end_code(url[i]) && !is_buffer_over(url, i+1); i++) {}
+            for (i = 0; !is_url_end_code(url[i]) && !is_buffer_over(url, i + 1); i++) {
+            }
             return i;
         }
 
@@ -1270,19 +1230,8 @@ namespace ipl {
         }
 
         void focus_object::check_paren(wchar_t ch) {
-            wchar_t patterns[] = { L'(', L')',
-                                         L'{', L'}',
-                                         L'[', L']',
-                                         L'<', L'>',
-                                         L'［', L'］',
-                                         L'（', L'）',
-                                         L'｛', L'｝',
-                                         L'＜', L'＞',
-                                         L'《', L'》',
-                                         L'【', L'】',
-                                         L'〔', L'〕',
-                                         L'「', L'」',
-                                         L'『', L'』'};
+            wchar_t patterns[] = {L'(',  L')',  L'{',  L'}',  L'[',  L']',  L'<',  L'>',  L'［', L'］', L'（', L'）', L'｛',
+                                  L'｝', L'＜', L'＞', L'《', L'》', L'【', L'】', L'〔', L'〕', L'「', L'」', L'『', L'』'};
 
             for (int i = 0; i < ARRAY_LENGTH(patterns); i += 2) {
                 if (ch == patterns[i]) {
@@ -1309,14 +1258,13 @@ namespace ipl {
             if (cmpData != NULL && CXGetCompressionType(cmpData) == CX_COMPRESSION_TYPE_LZ) {
                 u32 uncompSize = CXGetUncompressedSize(cmpData);
                 if (uncompSize != 0 && uncompSize < 0x64000) {
-                    mpArcData = new(System::getMem2App(), DEFAULT_ALIGN) u8[uncompSize];
+                    mpArcData = new (System::getMem2App(), DEFAULT_ALIGN) u8[uncompSize];
 
                     if (mpArcData != NULL) {
                         if (CXSecureUncompressLZ(mpCmpArcData, mArcLength, mpArcData) == CX_SECURE_ERR_OK) {
                             DCStoreRange(mpArcData, uncompSize);
                             change_ltrtex();
-                        }
-                        else {
+                        } else {
                             delete[] mpArcData;
                             mpArcData = NULL;
                         }
@@ -1347,7 +1295,7 @@ namespace ipl {
         }
 
         BOOL focus_object::setup_chanjump() {
-            char blockData[NWC24_MAX_CHJP_SIZE+2/*?*/];
+            char blockData[NWC24_MAX_CHJP_SIZE + 2 /*?*/];
             u32 blockSize;
 
             memset(blockData, 0, sizeof(blockData));
@@ -1392,7 +1340,7 @@ namespace ipl {
         void focus_object::make_picture(RBRAttachment* attach) {
             u8* picData = (u8*)(mpBoardObj->mpRecordData + attach->offset);
 
-            if (mpBoardObj->create_picture(&mPicture, System::getTreasureHeap(), System::getMem2App(), picData, attach->size+4)) {
+            if (mpBoardObj->create_picture(&mPicture, System::getTreasureHeap(), System::getMem2App(), picData, attach->size + 4)) {
                 nw4r::lyt::Pane* pane = mpLayout->FindPaneByName("Pic");
                 pane->GetMaterial()->SetTexture(GX_TEXMAP0, mPicture.texObj);
                 resize_pane(pane);
@@ -1407,12 +1355,7 @@ namespace ipl {
             if (mpBoardObj->arc_init_handle(pArc, &arc)) {
                 ARCFileInfo arcFile;
 
-                const char* soundFileList[] = {
-                    "sound.bns",
-                    "sound.wav",
-                    "sound.aif",
-                    "sound.aiff"
-                };
+                const char* soundFileList[] = {"sound.bns", "sound.wav", "sound.aif", "sound.aiff"};
 
                 for (int i = 0; i < (int)ARRAY_LENGTH(soundFileList); i++) {
                     if (ARCOpen(&arc, soundFileList[i], &arcFile)) {
@@ -1421,8 +1364,7 @@ namespace ipl {
 
                         if (snd::getSystem()->checkTmpSoundFile(mpSoundData, mSoundSize)) {
                             return;
-                        }
-                        else {
+                        } else {
                             mpSoundData = NULL;
                             mSoundSize = 0;
                             return;
@@ -1449,8 +1391,7 @@ namespace ipl {
                         newSize.height = paneH;
                         newSize.width = paneW * (paneH / val);
                     }
-                }
-                else {
+                } else {
                     f32 val = (paneH * mPicture.width) / mPicture.height;
                     newSize.width = val;
                     if (val > paneW) {
@@ -1458,7 +1399,7 @@ namespace ipl {
                         newSize.height = paneH * (paneW / val);
                     }
                 }
-                
+
                 pane->SetSize(newSize);
             }
             return;
@@ -1471,9 +1412,7 @@ namespace ipl {
 
             get_button()->setEventHandler(&mButtonEvent, &mOptOutEvent);
 
-            mFadeAnim.init(ANIM_TYPE_FORWARD,
-                           17.0f, 0.0f,
-                           math::VEC3(mpBoardObj->mBoardPos.x, mpBoardObj->mBoardPos.y, 0.0f),
+            mFadeAnim.init(ANIM_TYPE_FORWARD, 17.0f, 0.0f, math::VEC3(mpBoardObj->mBoardPos.x, mpBoardObj->mBoardPos.y, 0.0f),
                            math::VEC3(0.0f, 0.0f, 0.0f));
             mFadeAnim.play();
 
@@ -1485,10 +1424,11 @@ namespace ipl {
         }
 
         void focus_object::init_balloon(nand::LayoutFile* layoutFile) {
-            mpNigaoeBalloon = new(System::getMem2App(), 4) TextBalloon(System::getMem2App(), layoutFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 120.0f, 30.0f);
-            
-            wchar_t ngName[RFL_NAME_LENGTH+2];
-            mpBoardObj->get_nigaoe_name(ngName, RFL_NAME_LENGTH+2);
+            mpNigaoeBalloon = new (System::getMem2App(), 4)
+                TextBalloon(System::getMem2App(), layoutFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 120.0f, 30.0f);
+
+            wchar_t ngName[RFL_NAME_LENGTH + 2];
+            mpBoardObj->get_nigaoe_name(ngName, RFL_NAME_LENGTH + 2);
 
             mpNigaoeBalloon->init(ngName);
             mpNigaoeBalloon->init_textbox();
@@ -1514,7 +1454,8 @@ namespace ipl {
             nw4r::ut::Rect projRect;
             System::getProjectionRect(&projRect);
 
-            f32 limit = 160.0f + ((mLineCount * body->GetSize().height) + (header->GetSize().height + footer->GetSize().height) - projRect.GetHeight());
+            f32 limit =
+                160.0f + ((mLineCount * body->GetSize().height) + (header->GetSize().height + footer->GetSize().height) - projRect.GetHeight());
             if (limit < 0.0f) {
                 limit = 0.0f;
             }
@@ -1627,8 +1568,7 @@ namespace ipl {
                 if (!con->down(controller::BTN_DOWN)) {
                     scale_down_darw();
                 }
-            }
-            else {
+            } else {
                 if (mScroller.getBInst().isUp()) {
                     scale_up_uarw();
                 }
@@ -1651,19 +1591,16 @@ namespace ipl {
 
             if (recordType == RBRRecordType_PlayTimeLog) {
                 btnAnim = Button::IDANIM_APPEAR_LEFT_BUTTON;
-            }
-            else {
+            } else {
                 bool result = false;
 
                 if (recordType == RBRRecordType_SWUpdate) {
                     button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_BOARD_UPDATE);
                     result = true;
-                }
-                else if (mbChanJump) {
+                } else if (mbChanJump) {
                     button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_CMN_START);
                     result = true;
-                }
-                else if (mpBoardObj->permit_reply()) {
+                } else if (mpBoardObj->permit_reply()) {
                     button->reserveText(Button::TEXT_RIGHT_BUTTON, MESG_BOARD_REPLY);
                     result = true;
                 }
@@ -1671,12 +1608,10 @@ namespace ipl {
                 if (mpBoardObj->mOptOutFlag) {
                     if (result) {
                         btnAnim = Button::IDANIM_OPTOUT_IN_ALT;
-                    }
-                    else {
+                    } else {
                         btnAnim = Button::IDANIM_OPTOUT_IN;
                     }
-                }
-                else {
+                } else {
                     btnAnim = Button::IDANIM_APPEAR_LEFT_AND_TRASH_BUTTON;
                     if (result) {
                         btnAnim = Button::IDANIM_APPEAR_ALL_BUTTONS;
@@ -1694,8 +1629,7 @@ namespace ipl {
 
             if (recordType == RBRRecordType_PlayTimeLog) {
                 btnAnim = Button::IDANIM_DISAPPEAR_LEFT_BUTTON;
-            }
-            else {
+            } else {
                 bool result = false;
 
                 if (recordType == RBRRecordType_SWUpdate || mbChanJump || mpBoardObj->permit_reply()) {
@@ -1705,12 +1639,10 @@ namespace ipl {
                 if (mpBoardObj->mOptOutFlag) {
                     if (result) {
                         btnAnim = Button::IDANIM_OPTOUT_OUT_ALT;
-                    }
-                    else {
+                    } else {
                         btnAnim = Button::IDANIM_OPTOUT_OUT;
                     }
-                }
-                else {
+                } else {
                     btnAnim = Button::IDANIM_DISAPPEAR_LEFT_AND_TRASH_BUTTON;
                     if (result) {
                         btnAnim = Button::IDANIM_DISAPPEAR_ALL_BUTTONS;
@@ -1893,7 +1825,7 @@ namespace ipl {
             // WC24 library check
             switch (checkErr) {
                 case NWC24_ERR_NETWORK: {
-                    set_err_msg(errStr, sizeof(errStr)/sizeof(wchar_t), MESG_ERROR_NWC24_NETWORK, errorCode);
+                    set_err_msg(errStr, sizeof(errStr) / sizeof(wchar_t), MESG_ERROR_NWC24_NETWORK, errorCode);
 
                     System::getDialog()->callBtn1(errStr, MESG_CMN_OK);
                     mState = STATE_WAIT_MSG;
@@ -1903,7 +1835,7 @@ namespace ipl {
                 }
                 case NWC24_ERR_FULL:
                 case NWC24_ERR_SERVER: {
-                    set_err_msg(errStr, sizeof(errStr)/sizeof(wchar_t), MESG_ERROR_NWC24_SERVER, errorCode);
+                    set_err_msg(errStr, sizeof(errStr) / sizeof(wchar_t), MESG_ERROR_NWC24_SERVER, errorCode);
 
                     System::getDialog()->callBtn1(errStr, MESG_CMN_OK);
                     mState = STATE_WAIT_MSG;
@@ -1918,7 +1850,7 @@ namespace ipl {
             }
 
             System::getNwc24Manager()->close();
-exit:
+        exit:
             return result;
         }
 
@@ -1950,13 +1882,12 @@ exit:
                 mCurrentResult = RESULT_SW_UPDATE;
                 mPrevState = mState;
                 mState = STATE_NET_WAIT_PARENTAL;
-            }
-            else {
+            } else {
                 mFinalResult = RESULT_SW_UPDATE;
                 mState = STATE_DONE;
             }
 
-exit:
+        exit:
             return;
         }
 
@@ -1967,7 +1898,7 @@ exit:
 
             wchar_t nwc24ErrStr[32];
             memset(nwc24ErrStr, 0, sizeof(nwc24ErrStr));
-            swprintf(nwc24ErrStr, sizeof(nwc24ErrStr)/sizeof(wchar_t), L"%06d\n", nwc24Err);
+            swprintf(nwc24ErrStr, sizeof(nwc24ErrStr) / sizeof(wchar_t), L"%06d\n", nwc24Err);
             wcsncat(outErrMsg, nwc24ErrStr, outErrMsgLen - wcslen(outErrMsg));
 
             wcsncat(outErrMsg, System::getMessage(errMsgId), outErrMsgLen - wcslen(outErrMsg));
@@ -2066,8 +1997,7 @@ exit:
                                 break;
                             }
                         }
-                    }
-                    else if (Button::cmpButtonName(paneName, Button::BTN_TRASH_DELETE) == 0) {
+                    } else if (Button::cmpButtonName(paneName, Button::BTN_TRASH_DELETE) == 0) {
                         if (mpInstance->mState == focus_object::STATE_NORMAL) {
                             button->animation(Button::IDANIM_SELECT_TRASH_BUTTON);
 
@@ -2085,8 +2015,7 @@ exit:
                             mpInstance->mState = focus_object::STATE_WAIT_BTN;
                             mpInstance->mNextState = focus_object::STATE_DEL_WAIT_MSG;
                         }
-                    }
-                    else if (Button::cmpButtonName(paneName, Button::BTN_CREATE_R_BUTTON) == 0) {
+                    } else if (Button::cmpButtonName(paneName, Button::BTN_CREATE_R_BUTTON) == 0) {
                         bool result = false;
 
                         switch (mpInstance->mState) {
@@ -2094,19 +2023,17 @@ exit:
                                 result = true;
 
                                 button->reserveAnm(Button::IDANIM_SELECT_CREATE_R);
-                                
+
                                 if (mpInstance->mpBoardObj->mRecordType == RBRRecordType_SWUpdate) {
                                     mpInstance->check_network_for_news();
-                                }
-                                else {
+                                } else {
                                     if (mpInstance->mbChanJump) {
                                         if (mpInstance->setup_chanjump()) {
                                             mpInstance->init_fadeout(false);
                                             mpInstance->mCurrentResult = focus_object::RESULT_CHJUMP;
                                             mpInstance->mState = focus_object::STATE_FADE_OUT;
                                         }
-                                    }
-                                    else {
+                                    } else {
                                         mpInstance->mNwc24ErrCountdown = 0;
                                         mpInstance->mPrevState = mpInstance->mState;
                                         mpInstance->mState = focus_object::STATE_LETTER_WAIT_NET;
@@ -2163,5 +2090,5 @@ exit:
                 }
             }
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

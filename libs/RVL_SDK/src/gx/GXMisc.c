@@ -1,20 +1,20 @@
 #include <private/os.h>
 #include <revolution/os.h>
 
-#include <revolution/gx.h>
 #include <private/gx.h>
+#include <revolution/gx.h>
+
 
 #include <private/hollywood.h>
 
 #include <revolution/base/PPCArch.h>
 
-static GXDrawSyncCallback   TokenCB;
-static GXDrawDoneCallback   DrawDoneCB;
+static GXDrawSyncCallback TokenCB;
+static GXDrawDoneCallback DrawDoneCB;
 
-static u8                   DrawDone;
+static u8 DrawDone;
 
-static OSThreadQueue        FinishQueue;
-
+static OSThreadQueue FinishQueue;
 
 void GXSetMisc(GXMiscToken token, u32 val) {
     switch (token) {
@@ -49,7 +49,7 @@ void GXFlush() {
     if (__GXData->dirtyState) {
         __GXSetDirtyState();
     }
-    
+
     GX_WRITE_U32(0);
     GX_WRITE_U32(0);
     GX_WRITE_U32(0);
@@ -63,7 +63,8 @@ void GXFlush() {
 }
 
 void GXResetWriteGatherPipe() {
-    while (PPCMfwpar() & WPAR_BNE) {}
+    while (PPCMfwpar() & WPAR_BNE) {
+    }
     PPCMtwpar(OSUncachedToPhysical((void*)GXFIFO_ADDR));
 }
 

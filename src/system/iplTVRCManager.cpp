@@ -12,5 +12,5 @@ namespace ipl {
             }
             return result;
         }
-    }
-}
+    }  // namespace utility
+}  // namespace ipl

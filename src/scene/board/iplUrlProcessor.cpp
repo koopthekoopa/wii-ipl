@@ -9,8 +9,7 @@
 
 namespace ipl {
     namespace scene {
-        UrlProcessor::UrlProcessor() :
-        nw4r::ut::WideTagProcessor() {
+        UrlProcessor::UrlProcessor() : nw4r::ut::WideTagProcessor() {
             nw4r::ut::List_Init(&mUrlCollisions, offsetof(url_collision, mLinkList));
             init();
         }
@@ -44,8 +43,7 @@ namespace ipl {
 
                 if (mConData[i].valid) {
                     mConData[i].pos = con->getDpdProjectionPos();
-                }
-                else {
+                } else {
                     mConData[i].pos.x = 0.0f;
                     mConData[i].pos.y = 0.0f;
                 }
@@ -68,11 +66,10 @@ namespace ipl {
         }
 
         nw4r::ut::Operation UrlProcessor::Process(u16 code, nw4r::ut::PrintContext<wchar_t>* context) {
-              if (code == (u16)0x1A || code == (u16)'\n') {
+            if (code == (u16)0x1A || code == (u16)'\n') {
                 if (unk_0x50 == 0) {
                     make_collision(context, code);
-                }
-                else if (code == 0x1A) {
+                } else if (code == 0x1A) {
                     parse(context);
                 }
             }
@@ -82,8 +79,8 @@ namespace ipl {
         void UrlProcessor::make_collision(nw4r::ut::PrintContext<wchar_t>* context, u16 code) {
             if (code == 0x1A) {
                 if (unk_0x51 == 0) {
-                    url_collision* url_col = new(System::getMem2App(), 4) url_collision();
-                    line_collision* line_col = new(System::getMem2App(), 4) line_collision();
+                    url_collision* url_col = new (System::getMem2App(), 4) url_collision();
+                    line_collision* line_col = new (System::getMem2App(), 4) line_collision();
 
                     url_col->unk_0x00 = unk_0x48;
                     url_col->unk_0x04 = (wchar_t*)context->str;
@@ -93,8 +90,7 @@ namespace ipl {
                     nw4r::ut::List_Append(&mUrlCollisions, url_col);
 
                     unk_0x51 = 1;
-                }
-                else {
+                } else {
                     url_collision* url_col = (url_collision*)nw4r::ut::List_GetPrev(&mUrlCollisions, NULL);
                     line_collision* line_col = (line_collision*)nw4r::ut::List_GetPrev(&url_col->mLineCollisions, NULL);
 
@@ -106,8 +102,7 @@ namespace ipl {
                     unk_0x51 = 0;
                     unk_0x48++;
                 }
-            }
-            else {
+            } else {
                 if (unk_0x51 != 0) {
                     url_collision* url_col = (url_collision*)nw4r::ut::List_GetPrev(&mUrlCollisions, NULL);
                     line_collision* line_col = (line_collision*)nw4r::ut::List_GetPrev(&url_col->mLineCollisions, NULL);
@@ -115,7 +110,7 @@ namespace ipl {
                     line_col->unk_0x04 = context->writer->GetCursorX();
                     line_col->unk_0x08 = context->writer->GetCursorY();
 
-                    line_col = new(System::getMem2App(), 4) line_collision();
+                    line_col = new (System::getMem2App(), 4) line_collision();
                     line_col->unk_0x00 = -208.0f;
 
                     nw4r::ut::List_Append(&url_col->mLineCollisions, line_col);
@@ -128,18 +123,15 @@ namespace ipl {
             if (unk_0x51 == 0) {
                 if (unk_0x4C == unk_0x48) {
                     context->writer->SetTextColor(0xFFE664FF);
-                }
-                else if (unk_0x53 != 0 && is_focused()) {
+                } else if (unk_0x53 != 0 && is_focused()) {
                     context->writer->SetCursorY(curY - 2.0f);
                     context->writer->SetTextColor(0xF06E28FF);
                     unk_0x52 = 1;
-                }
-                else {
+                } else {
                     context->writer->SetTextColor(0x34BEEDFF);
                 }
-                    unk_0x51 = 1;
-            }
-            else {
+                unk_0x51 = 1;
+            } else {
                 if (unk_0x52 != 0) {
                     context->writer->SetCursorY(2.0f + curY);
                     unk_0x52 = 0;
@@ -215,7 +207,7 @@ namespace ipl {
         void UrlProcessor::get_url(char* urlOut, u32 urlLen) {
             url_collision* url_col = get_selected_col();
             if (url_col != NULL) {
-                wchar_t url[0x200+sizeof(wchar_t)];
+                wchar_t url[0x200 + sizeof(wchar_t)];
                 memset(url, 0, sizeof(url));
 
                 int chIdx2 = 0;
@@ -229,7 +221,7 @@ namespace ipl {
                 }
 
                 utility::CharacterCode::UTF16ToUTF8(urlOut, url, urlLen);
-                urlOut[urlLen-1] = 0;
+                urlOut[urlLen - 1] = 0;
             }
         }
 
@@ -248,5 +240,5 @@ namespace ipl {
                 delete col;
             }
         }
-    }
-}
+    }  // namespace scene
+}  // namespace ipl

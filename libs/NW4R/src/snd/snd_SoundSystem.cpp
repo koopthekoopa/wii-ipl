@@ -1,10 +1,10 @@
 #include <nw4r/snd/SoundSystem.h>
 
-#include <nw4r/snd/TaskThread.h>
 #include <nw4r/snd/SoundThread.h>
+#include <nw4r/snd/TaskThread.h>
 
-#include <revolution/sc.h>
 #include <revolution/os.h>
+#include <revolution/sc.h>
 
 namespace nw4r {
     namespace snd {
@@ -52,5 +52,5 @@ namespace nw4r {
             detail::TaskThread::GetInstance().Create(dvdThreadPriority);
             detail::SoundThread::GetInstance().Create(soundThreadPriority);
         }
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r

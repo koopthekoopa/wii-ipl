@@ -1,23 +1,23 @@
-#include <revolution/dsp.h>
 #include <private/dsp.h>
+#include <revolution/dsp.h>
 
 #include <private/hollywood.h>
 
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
 
 #include <revolution/verdefs.h>
 
-static BOOL         __DSP_init_flag;
+static BOOL __DSP_init_flag;
 
 SDKDefineVersion(DSP, "Apr 20 2010", "11:19:06");
 
 u32 DSPCheckMailToDSP() {
-    return DSP_HAS_REG_F(DSP_MAILBOX, (1<<DSP_MAILBOX_SET)) != 0;
+    return DSP_HAS_REG_F(DSP_MAILBOX, (1 << DSP_MAILBOX_SET)) != 0;
 }
 
 u32 DSPCheckMailFromDSP() {
-    return DSP_HAS_REG_F(DSP_CPUMAILBOX, (1<<DSP_CPUMAILBOX_SET)) != 0;
+    return DSP_HAS_REG_F(DSP_CPUMAILBOX, (1 << DSP_CPUMAILBOX_SET)) != 0;
 }
 
 u32 DSPReadMailFromDSP() {
@@ -26,7 +26,7 @@ u32 DSPReadMailFromDSP() {
 
 void DSPSendMailToDSP(u32 mail) {
     DSP_WRITE_REG(DSP_MAILBOX_H, (mail >> 16) & 0xFFFF);
-    DSP_WRITE_REG(DSP_MAILBOX_L, (mail)       & 0xFFFF);
+    DSP_WRITE_REG(DSP_MAILBOX_L, (mail) & 0xFFFF);
 }
 
 void DSPAssertInt() {
@@ -61,12 +61,13 @@ void DSPInit() {
 
     // Reset DSP
     tmp = DSP_READ_REG(DSP_CONTROL_STATUS);
-    CLEAR_FLAG(tmp, ((1<<DSP_CONTROL_STATUS_AIDINT) | (1<<DSP_CONTROL_STATUS_ARINT) | (1<<DSP_CONTROL_STATUS_DSPINT)));
-    SET_FLAG(tmp, (1<<DSP_CONTROL_STATUS_RESET));
+    CLEAR_FLAG(tmp, ((1 << DSP_CONTROL_STATUS_AIDINT) | (1 << DSP_CONTROL_STATUS_ARINT) | (1 << DSP_CONTROL_STATUS_DSPINT)));
+    SET_FLAG(tmp, (1 << DSP_CONTROL_STATUS_RESET));
     DSP_WRITE_REG(DSP_CONTROL_STATUS, tmp);
 
     tmp = DSP_READ_REG(DSP_CONTROL_STATUS);
-    CLEAR_FLAG(tmp, ((1<<DSP_CONTROL_STATUS_AIDINT) | (1<<DSP_CONTROL_STATUS_ARINT) | (1<<DSP_CONTROL_STATUS_DSPINT)) | (1<<DSP_CONTROL_STATUS_HALT));
+    CLEAR_FLAG(tmp, ((1 << DSP_CONTROL_STATUS_AIDINT) | (1 << DSP_CONTROL_STATUS_ARINT) | (1 << DSP_CONTROL_STATUS_DSPINT)) |
+                        (1 << DSP_CONTROL_STATUS_HALT));
     DSP_WRITE_REG(DSP_CONTROL_STATUS, tmp);
 
     __DSP_first_task = __DSP_last_task = __DSP_curr_task = __DSP_tmp_task = NULL;

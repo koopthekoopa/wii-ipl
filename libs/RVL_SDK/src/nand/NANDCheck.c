@@ -1,11 +1,11 @@
-#include <revolution/nand.h>
 #include <private/nand.h>
+#include <revolution/nand.h>
 
 #include <private/fs.h>
 
 #include <private/ipc.h>
 
-static const char *USER_DIR_LIST[] = {
+static const char* USER_DIR_LIST[] = {
     "/meta",
     "/ticket",
     "/title/00010000",
@@ -32,11 +32,9 @@ s32 nandCalcUsage(u32* usedBlocks, u32* usedINodes, const char** list) {
         if (ret == ISFS_ERROR_OK) {
             *usedBlocks += block;
             *usedINodes += node;
-        }
-        else if (ret == ISFS_ERROR_NOEXISTS) {
+        } else if (ret == ISFS_ERROR_NOEXISTS) {
             ret = ISFS_ERROR_OK;
-        }
-        else {
+        } else {
             break;
         }
 
@@ -57,8 +55,7 @@ s32 NANDSecretGetUserAvailableArea(u32* freeUserBlocks, u32* freeUserINodes) {
     ISFSError ret = nandCalcUserUsage(&usedUserBlocks, &usedUserINodes);
     if (ret != ISFS_ERROR_OK) {
         return nandConvertErrorCode(ret);
-    }
-    else {
+    } else {
         u32 blocksResult = NAND_MAX_USER_BLOCKS < usedUserBlocks ? 0 : NAND_MAX_USER_BLOCKS - usedUserBlocks;
         u32 blocksINodes = NAND_MAX_USER_INODES < usedUserINodes ? 0 : NAND_MAX_USER_INODES - usedUserINodes;
         *freeUserBlocks = blocksResult;

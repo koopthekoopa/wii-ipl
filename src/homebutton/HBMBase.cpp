@@ -2,25 +2,25 @@
 
 #include "homebutton/HBMBase.h"
 
-#include "homebutton/HBMFrameController.h"
 #include "homebutton/HBMAnmController.h"
+#include "homebutton/HBMFrameController.h"
 #include "homebutton/HBMGUIManager.h"
 
 #include "homebutton/HBMController.h"
 #include "homebutton/HBMRemoteSpk.h"
 
 #include <nw4r/lyt.h>
-#include <nw4r/ut.h>
 #include <nw4r/snd.h>
+#include <nw4r/ut.h>
 
 #include <revolution/ax.h>
 #include <revolution/axfx.h>
 #include <revolution/gx.h>
 #include <revolution/os.h>
 #include <revolution/pad.h>
+#include <revolution/sc.h>
 #include <revolution/vi.h>
 #include <revolution/wpad.h>
-#include <revolution/sc.h>
 
 /* PUBLIC API */
 
@@ -29,7 +29,7 @@ enum HBMAllocatorType {
     HBM_ALLOCATOR_LOCAL,
     HBM_ALLOCATOR_NW4R,
 };
-    
+
 static MEMAllocator sAllocator;
 static MEMAllocator* spAllocator = &sAllocator;
 
@@ -63,21 +63,21 @@ void HBMCreate(const HBMDataInfo* pDataInfo) {
     }
 
     switch (getAllocatorType(pDataInfo)) {
-    case HBM_ALLOCATOR_APPLI: {
-        nw4r::lyt::Layout::SetAllocator(pDataInfo->pAllocator);
-        spAllocator = pDataInfo->pAllocator;
-        break;
-    }
+        case HBM_ALLOCATOR_APPLI: {
+            nw4r::lyt::Layout::SetAllocator(pDataInfo->pAllocator);
+            spAllocator = pDataInfo->pAllocator;
+            break;
+        }
 
-    case HBM_ALLOCATOR_LOCAL: {
-        nw4r::lyt::Layout::SetAllocator(spAllocator);
-        break;
-    }
+        case HBM_ALLOCATOR_LOCAL: {
+            nw4r::lyt::Layout::SetAllocator(spAllocator);
+            break;
+        }
 
-    case HBM_ALLOCATOR_NW4R: {
-        spAllocator = nw4r::lyt::Layout::GetAllocator();
-        break;
-    }
+        case HBM_ALLOCATOR_NW4R: {
+            spAllocator = nw4r::lyt::Layout::GetAllocator();
+            break;
+        }
     }
 
     homebutton::HomeButton::createInstance(pDataInfo);
@@ -87,7 +87,7 @@ void HBMCreate(const HBMDataInfo* pDataInfo) {
 void HBMDelete() {
     const HBMDataInfo* pHBInfo = homebutton::HomeButton::getInstance()->getHBMDataInfo();
 
-    nw4r::lyt::Layout::SetAllocator(spAllocator); // ??
+    nw4r::lyt::Layout::SetAllocator(spAllocator);  // ??
     homebutton::HomeButton::deleteInstance();
 
     if (getAllocatorType(pHBInfo) == HBM_ALLOCATOR_LOCAL) {
@@ -130,97 +130,16 @@ namespace homebutton {
         int anm;
     } AnmControllerTable;
 
-    static const AnmControllerTable scAnmTable[res::eAnimator_Max] = {
-        {0, 0 },
-        { 0, 2 },
-        { 4, 1 },
-        { 1, 0 },
-        { 1, 2 },
-        { 5, 1 },
-        { 2, 0 },
-        { 2, 2 },
-        { 6, 1 },
-        { 3, 0 },
-        { 3, 2 },
-        { 7, 1 }
-    };
+    static const AnmControllerTable scAnmTable[res::eAnimator_Max] = {{0, 0}, {0, 2}, {4, 1}, {1, 0}, {1, 2}, {5, 1},
+                                                                      {2, 0}, {2, 2}, {6, 1}, {3, 0}, {3, 2}, {7, 1}};
 
     static const AnmControllerTable scGroupAnmTable[res::eGrAnimator_Max] = {
-        { 0,  0  },
-        { 1,  1  },
-        { 2,  0  },
-        { 3,  1  },
-        { 4,  2  },
-        { 4,  19 },
-        { 5,  3  },
-        { 5,  20 },
-        { 6,  4  },
-        { 6,  7  },
-        { 7,  4  },
-        { 7,  7  },
-        { 8,  4  },
-        { 8,  7  },
-        { 9,  4  },
-        { 9,  7  },
-        { 10, 4  },
-        { 10, 7  },
-        { 11, 5  },
-        { 12, 5  },
-        { 13, 6  },
-        { 13, 8  },
-        { 14, 14 },
-        { 14, 6  },
-        { 14, 8  },
-        { 15, 5  },
-        { 16, 6  },
-        { 16, 14 },
-        { 17, 11 },
-        { 17, 12 },
-        { 18, 11 },
-        { 18, 12 },
-        { 19, 13 },
-        { 20, 13 },
-        { 21, 9  },
-        { 21, 10 },
-        { 22, 9  },
-        { 22, 10 },
-        { 23, 9  },
-        { 23, 10 },
-        { 24, 9  },
-        { 24, 10 },
-        { 25, 9  },
-        { 25, 10 },
-        { 26, 9  },
-        { 26, 10 },
-        { 27, 9  },
-        { 27, 10 },
-        { 28, 9  },
-        { 28, 10 },
-        { 29, 9  },
-        { 29, 10 },
-        { 30, 9  },
-        { 30, 10 },
-        { 31, 15 },
-        { 31, 16 },
-        { 31, 17 },
-        { 31, 18 },
-        { 31, 21 },
-        { 32, 15 },
-        { 32, 16 },
-        { 32, 17 },
-        { 32, 18 },
-        { 32, 21 },
-        { 33, 15 },
-        { 33, 16 },
-        { 33, 17 },
-        { 33, 18 },
-        { 33, 21 },
-        { 34, 15 },
-        { 34, 16 },
-        { 34, 17 },
-        { 34, 18 },
-        { 34, 21 }
-    };
+        {0, 0},   {1, 1},   {2, 0},   {3, 1},   {4, 2},   {4, 19},  {5, 3},   {5, 20},  {6, 4},   {6, 7},   {7, 4},   {7, 7},   {8, 4},
+        {8, 7},   {9, 4},   {9, 7},   {10, 4},  {10, 7},  {11, 5},  {12, 5},  {13, 6},  {13, 8},  {14, 14}, {14, 6},  {14, 8},  {15, 5},
+        {16, 6},  {16, 14}, {17, 11}, {17, 12}, {18, 11}, {18, 12}, {19, 13}, {20, 13}, {21, 9},  {21, 10}, {22, 9},  {22, 10}, {23, 9},
+        {23, 10}, {24, 9},  {24, 10}, {25, 9},  {25, 10}, {26, 9},  {26, 10}, {27, 9},  {27, 10}, {28, 9},  {28, 10}, {29, 9},  {29, 10},
+        {30, 9},  {30, 10}, {31, 15}, {31, 16}, {31, 17}, {31, 18}, {31, 21}, {32, 15}, {32, 16}, {32, 17}, {32, 18}, {32, 21}, {33, 15},
+        {33, 16}, {33, 17}, {33, 18}, {33, 21}, {34, 15}, {34, 16}, {34, 17}, {34, 18}, {34, 21}};
 
     HomeButton* HomeButton::spHomeButtonObj = NULL;
 
@@ -238,200 +157,58 @@ namespace homebutton {
         "P1_Def.brlyt",
         "P2_Def.brlyt",
         "P3_Def.brlyt",
-        "P4_Def.brlyt", 
+        "P4_Def.brlyt",
     };
 
     const char* HomeButton::scCursorPaneName = "N_Trans";
     const char* HomeButton::scCursorRotPaneName = "N_Rot";
     const char* HomeButton::scCursorSRotPaneName = "N_SRot";
 
-    const char* HomeButton::scBtnName[res::eBtn_Max] = {
-        "B_btnL_00",
-        "B_btnL_01",
-        "B_btnL_10",
-        "B_btnL_11"
-    };
+    const char* HomeButton::scBtnName[res::eBtn_Max] = {"B_btnL_00", "B_btnL_01", "B_btnL_10", "B_btnL_11"};
 
-    const char* HomeButton::scTxtName[res::eTxt_Max] = {
-        "T_btnL_00",
-        "T_btnL_01",
-        "T_btnL_10",
-        "T_btnL_11"
-    };
+    const char* HomeButton::scTxtName[res::eTxt_Max] = {"T_btnL_00", "T_btnL_01", "T_btnL_10", "T_btnL_11"};
 
-    const char* HomeButton::scGrName[res::eGroup_Max] = {
-        "btnL_00_inOut",
-        "btnL_01_inOut",
-        "btnL_10_inOut",
-        "btnL_11_inOut",
-        "btnL_00_psh",
-        "btnL_01_psh",
-        "btnL_10_psh",
-        "btnL_11_psh"
-    };
-    const char* HomeButton::scAnimName[res::eAnim_Max] = {
-        "_cntBtn_in.brlan",
-        "_cntBtn_psh.brlan",
-        "_cntBtn_out.brlan"
-    };
+    const char* HomeButton::scGrName[res::eGroup_Max] = {"btnL_00_inOut", "btnL_01_inOut", "btnL_10_inOut", "btnL_11_inOut",
+                                                         "btnL_00_psh",   "btnL_01_psh",   "btnL_10_psh",   "btnL_11_psh"};
+    const char* HomeButton::scAnimName[res::eAnim_Max] = {"_cntBtn_in.brlan", "_cntBtn_psh.brlan", "_cntBtn_out.brlan"};
 
     const char* HomeButton::scPairGroupAnimName[res::ePairAnm_Max] = {
-        "_ltrIcn_on.brlan",
-        "_optn_bar_psh.brlan",
-        "_close_bar_psh.brlan",
-        "_hmMenu_bar_in.brlan",
-        "_hmMenu_bar_psh.brlan",
-        "_link_msg_in.brlan",
-        "_link_msg_out.brlan",
-        "_cmn_msg_in.brlan",
-        "_cmn_msg_out.brlan",
-        "_cntrl_up.brlan",
-        "_cntrl_wndw_opn.brlan",
-        "_cntrl_dwn.brlan",
-        "_hmMenu_bar_out.brlan",
-        "_cmn_msg_rtrn.brlan", "_12btn_on.brlan"
-    };
+        "_ltrIcn_on.brlan",      "_optn_bar_psh.brlan", "_close_bar_psh.brlan",  "_hmMenu_bar_in.brlan", "_hmMenu_bar_psh.brlan",
+        "_link_msg_in.brlan",    "_link_msg_out.brlan", "_cmn_msg_in.brlan",     "_cmn_msg_out.brlan",   "_cntrl_up.brlan",
+        "_cntrl_wndw_opn.brlan", "_cntrl_dwn.brlan",    "_hmMenu_bar_out.brlan", "_cmn_msg_rtrn.brlan",  "_12btn_on.brlan"};
 
     const char* HomeButton::scPairGroupName[res::ePairAnm_Max] = {
-        "ltrIcn_on",
-        "optn_bar_psh",
-        "close_bar_psh",
-        "hmMenu_bar_in",
-        "hmMenu_bar_psh",
-        "link_msg_in",
-        "link_msg_out",
-        "cmn_msg_in",
-        "cmn_msg_out",
-        "cntrl_up",
-        "cntrl_wndw_opn",
-        "cntrl_dwn",
-        "hmMenu_bar_out",
-        "cmn_msg_rtrn",
-        "12btn_on"
-    };
+        "ltrIcn_on",   "optn_bar_psh", "close_bar_psh",  "hmMenu_bar_in", "hmMenu_bar_psh", "link_msg_in",  "link_msg_out", "cmn_msg_in",
+        "cmn_msg_out", "cntrl_up",     "cntrl_wndw_opn", "cntrl_dwn",     "hmMenu_bar_out", "cmn_msg_rtrn", "12btn_on"};
 
     const char* HomeButton::scGroupAnimName[res::eGrAnim_Max] = {
-        "_hmMenu_strt.brlan",
-        "_hmMenu_fnsh.brlan",
-        "_optn_bar_in.brlan",
-        "_optn_bar_out.brlan",
-        "_optn_btn_in.brlan",
-        "_optn_btn_psh.brlan",
-        "_vb_btn_wht_psh.brlan",
-        "_optn_btn_out.brlan",
-        "_vb_btn_ylw_psh.brlan",
-        "_sound_gry.brlan",
-        "_sound_ylw.brlan",
-        "_cmn_msg_btn_in.brlan",
-        "_cmn_msg_btn_out.brlan",
-        "_cmn_msg_btn_psh.brlan",
-        "_vb_btn_ylw_ylw.brlan",
-        "_btry_wink.brlan",
-        "_btry_gry.brlan",
-        "_btry_wht.brlan",
-        "_btry_wink_gry.brlan",
-        "_close_bar_in.brlan",
-        "_close_bar_out.brlan",
-        "_btry_red.brlan"
-    };
+        "_hmMenu_strt.brlan",   "_hmMenu_fnsh.brlan",    "_optn_bar_in.brlan",     "_optn_bar_out.brlan",    "_optn_btn_in.brlan",
+        "_optn_btn_psh.brlan",  "_vb_btn_wht_psh.brlan", "_optn_btn_out.brlan",    "_vb_btn_ylw_psh.brlan",  "_sound_gry.brlan",
+        "_sound_ylw.brlan",     "_cmn_msg_btn_in.brlan", "_cmn_msg_btn_out.brlan", "_cmn_msg_btn_psh.brlan", "_vb_btn_ylw_ylw.brlan",
+        "_btry_wink.brlan",     "_btry_gry.brlan",       "_btry_wht.brlan",        "_btry_wink_gry.brlan",   "_close_bar_in.brlan",
+        "_close_bar_out.brlan", "_btry_red.brlan"};
 
     const char* HomeButton::scGroupName[res::eGrPane_Max] = {
-        "hmMenu_strt",
-        "hmMenu_fnsh",
-        "hmMenuBck_strt",
-        "hmMenuBck_fnsh",
-        "optn_bar_in",
-        "optn_bar_out",
-        "optnBtn_00_inOut",
-        "optnBtn_01_inOut",
-        "optnBtn_10_inOut",
-        "optnBtn_11_inOut",
-        "optnBtn_20_inOut",
-        "optnBtn_00_psh",
-        "optnBtn_01_psh",
-        "optnBtn_10_psh",
-        "optnBtn_11_psh",
-        "optnBtn_20_psh",
-        "optnBtn_10_cntrl",
-        "msgBtn_00_inOut",
-        "msgBtn_01_inOut",
-        "msgBtn_00_psh",
-        "msgBtn_01_psh",
-        "vol_00",
-        "vol_01",
-        "vol_02",
-        "vol_03",
-        "vol_04",
-        "vol_05",
-        "vol_06",
-        "vol_07",
-        "vol_08",
-        "vol_09",
-        "plyr_00",
-        "plyr_01",
-        "plyr_02",
-        "plyr_03"
-    };
+        "hmMenu_strt",      "hmMenu_fnsh",      "hmMenuBck_strt",   "hmMenuBck_fnsh",   "optn_bar_in",     "optn_bar_out",   "optnBtn_00_inOut",
+        "optnBtn_01_inOut", "optnBtn_10_inOut", "optnBtn_11_inOut", "optnBtn_20_inOut", "optnBtn_00_psh",  "optnBtn_01_psh", "optnBtn_10_psh",
+        "optnBtn_11_psh",   "optnBtn_20_psh",   "optnBtn_10_cntrl", "msgBtn_00_inOut",  "msgBtn_01_inOut", "msgBtn_00_psh",  "msgBtn_01_psh",
+        "vol_00",           "vol_01",           "vol_02",           "vol_03",           "vol_04",          "vol_05",         "vol_06",
+        "vol_07",           "vol_08",           "vol_09",           "plyr_00",          "plyr_01",         "plyr_02",        "plyr_03"};
 
-    const char* HomeButton::scFuncPaneName[res::eFuncPane_Max] = {
-        "let_icn_00",
-        "N_plyr_00",
-        "N_plyr_01",
-        "N_plyr_02",
-        "N_plyr_03"
-    };
+    const char* HomeButton::scFuncPaneName[res::eFuncPane_Max] = {"let_icn_00", "N_plyr_00", "N_plyr_01", "N_plyr_02", "N_plyr_03"};
 
     const char* HomeButton::scFuncTouchPaneName[res::eFuncTouchPane_Max] = {
-        "B_btn_00",
-        "B_bar_10",
-        "B_optnBtn_00",
-        "B_optnBtn_01",
-        "B_optnBtn_10",
-        "B_optnBtn_11",
-        "B_optnBtn_20",
-        "B_BtnA",
-        "B_BtnB",
-        "cntrl_00"
-    };
+        "B_btn_00", "B_bar_10", "B_optnBtn_00", "B_optnBtn_01", "B_optnBtn_10", "B_optnBtn_11", "B_optnBtn_20", "B_BtnA", "B_BtnB", "cntrl_00"};
 
-    const char* HomeButton::scFuncTextPaneName[res::eFuncTextPane_Max] = {
-        "T_msg_00",
-        "T_msg_01",
-        "T_Dialog"
-    };
+    const char* HomeButton::scFuncTextPaneName[res::eFuncTextPane_Max] = {"T_msg_00", "T_msg_01", "T_Dialog"};
 
     const char* HomeButton::scBatteryPaneName[WPAD_MAX_CONTROLLERS][res::eBatteryPane_Max] = {
-        {
-            "btryPwr_00_0",
-            "btryPwr_00_1",
-            "btryPwr_00_2",
-            "btryPwr_00_3"
-        },
-        {
-            "btryPwr_01_0",
-            "btryPwr_01_1",
-            "btryPwr_01_2",
-            "btryPwr_01_3"
-        },
-        {
-            "btryPwr_02_0",
-            "btryPwr_02_1",
-            "btryPwr_02_2",
-            "btryPwr_02_3"
-        },
-        {
-            "btryPwr_03_0",
-            "btryPwr_03_1",
-            "btryPwr_03_2",
-            "btryPwr_03_3"
-        }
-    };
+        {"btryPwr_00_0", "btryPwr_00_1", "btryPwr_00_2", "btryPwr_00_3"},
+        {"btryPwr_01_0", "btryPwr_01_1", "btryPwr_01_2", "btryPwr_01_3"},
+        {"btryPwr_02_0", "btryPwr_02_1", "btryPwr_02_2", "btryPwr_02_3"},
+        {"btryPwr_03_0", "btryPwr_03_1", "btryPwr_03_2", "btryPwr_03_3"}};
 
-    HomeButton::HomeButton(const HBMDataInfo* pDataInfo) :
-    mpHBInfo(pDataInfo),
-    mpLayout(NULL),
-    mpPaneManager(NULL),
-    mFader(30) {
+    HomeButton::HomeButton(const HBMDataInfo* pDataInfo) : mpHBInfo(pDataInfo), mpLayout(NULL), mpPaneManager(NULL), mFader(30) {
         mState = 2;
 
         mSelectBtnNum = HBM_SELECT_NULL;
@@ -523,7 +300,7 @@ namespace homebutton {
 
     void HomeButton::createInstance(const HBMDataInfo* pDataInfo) {
         if (void* pMem = HBMAllocMem(sizeof(HomeButton))) {
-            spHomeButtonObj = new(pMem) HomeButton(pDataInfo);
+            spHomeButtonObj = new (pMem) HomeButton(pDataInfo);
         }
     }
 
@@ -540,7 +317,7 @@ namespace homebutton {
     void setResource(nw4r::lyt::MultiArcResourceAccessor* multiArc, void* archiveData, const char* resDirectory) {
         if (archiveData != NULL) {
             void* pMem = HBMAllocMem(sizeof(nw4r::lyt::ArcResourceLink));
-            nw4r::lyt::ArcResourceLink* resLink = new(pMem) nw4r::lyt::ArcResourceLink();
+            nw4r::lyt::ArcResourceLink* resLink = new (pMem) nw4r::lyt::ArcResourceLink();
             resLink->Set(archiveData, resDirectory);
             multiArc->Attach(resLink);
         }
@@ -559,16 +336,16 @@ namespace homebutton {
 
         {
             void* pMem = HBMAllocMem(sizeof(nw4r::lyt::MultiArcResourceAccessor));
-            mpResAccessor = new(pMem) nw4r::lyt::MultiArcResourceAccessor();
+            mpResAccessor = new (pMem) nw4r::lyt::MultiArcResourceAccessor();
         }
- 
+
         setResource(mpResAccessor, mpHBInfo->layoutBuf, "arc");
         setResource(mpResAccessor, mpHBInfo->lytLangBuf, "arc");
-    
+
         nw4r::lyt::FontRefLink* fontLink;
         {
             void* pMem = HBMAllocMem(sizeof(nw4r::lyt::FontRefLink));
-            fontLink = new(pMem) nw4r::lyt::FontRefLink();
+            fontLink = new (pMem) nw4r::lyt::FontRefLink();
         }
         fontLink->Set("RevoIpl_UtrilloProGrecoStd_M_32_I4.brfnt", (nw4r::ut::Font*)mpHBInfo->fontBuf);
         mpResAccessor->RegistFont(fontLink);
@@ -576,7 +353,7 @@ namespace homebutton {
         if (!mpHBInfo->cursor) {
             for (i = 0; i < res::eCursorLyt_Max; i++) {
                 if (void* pMem = HBMAllocMem(sizeof(nw4r::lyt::Layout))) {
-                    mpCursorLayout[i] = new(pMem) nw4r::lyt::Layout();
+                    mpCursorLayout[i] = new (pMem) nw4r::lyt::Layout();
                 }
 
                 void* pBinary = mpResAccessor->GetResource(0, scCursorLytName[i], NULL);
@@ -586,7 +363,7 @@ namespace homebutton {
         }
 
         if (void* pMem = HBMAllocMem(sizeof(nw4r::lyt::Layout))) {
-            mpLayout = new(pMem) nw4r::lyt::Layout();
+            mpLayout = new (pMem) nw4r::lyt::Layout();
         }
 
         {
@@ -602,15 +379,14 @@ namespace homebutton {
             void* pBinary = mpResAccessor->GetResource(0, anmNameBuf, NULL);
 
             if (void* pMem = HBMAllocMem(sizeof(GroupAnmController))) {
-                mpAnmController[i] = new(pMem) GroupAnmController();
+                mpAnmController[i] = new (pMem) GroupAnmController();
             }
 
             mpAnmController[i]->mpAnimGroup = mpLayout->CreateAnimTransform(pBinary, mpResAccessor);
 
             mpAnmController[i]->mpGroup = mpLayout->GetGroupContainer()->FindGroupByName(scGrName[scAnmTable[i].pane]);
 
-            nw4r::lyt::PaneLinkList& rList =
-                mpAnmController[i]->mpGroup->GetPaneList();
+            nw4r::lyt::PaneLinkList& rList = mpAnmController[i]->mpGroup->GetPaneList();
 
             for (nw4r::lyt::PaneLinkList::Iterator it = rList.GetBeginIter(); it != rList.GetEndIter(); ++it) {
                 it->mTarget->BindAnimation(mpAnmController[i]->mpAnimGroup, false);
@@ -626,7 +402,7 @@ namespace homebutton {
             void* pBinary = mpResAccessor->GetResource(0, anmNameBuf, NULL);
 
             if (void* pMem = HBMAllocMem(sizeof(GroupAnmController))) {
-                mpGroupAnmController[i] = new(pMem) GroupAnmController();
+                mpGroupAnmController[i] = new (pMem) GroupAnmController();
             }
 
             mpGroupAnmController[i]->mpAnimGroup = mpLayout->CreateAnimTransform(pBinary, mpResAccessor);
@@ -649,7 +425,7 @@ namespace homebutton {
             void* pBinary = mpResAccessor->GetResource(0, anmNameBuf, NULL);
 
             if (void* pMem = HBMAllocMem(sizeof(GroupAnmController))) {
-                mpPairGroupAnmController[i] = new(pMem) GroupAnmController();
+                mpPairGroupAnmController[i] = new (pMem) GroupAnmController();
             }
 
             mpPairGroupAnmController[i]->mpAnimGroup = mpLayout->CreateAnimTransform(pBinary, mpResAccessor);
@@ -666,11 +442,11 @@ namespace homebutton {
         }
 
         if (void* pMem = HBMAllocMem(sizeof(HomeButtonEventHandler))) {
-            mpHomeButtonEventHandler = new(pMem) HomeButtonEventHandler(this);
+            mpHomeButtonEventHandler = new (pMem) HomeButtonEventHandler(this);
         }
 
         if (void* pMem = HBMAllocMem(sizeof(gui::PaneManager))) {
-            mpPaneManager = new(pMem) gui::PaneManager(mpHomeButtonEventHandler, spAllocator, NULL);
+            mpPaneManager = new (pMem) gui::PaneManager(mpHomeButtonEventHandler, spAllocator, NULL);
         }
 
         mpPaneManager->createLayoutScene(*mpLayout);
@@ -683,12 +459,12 @@ namespace homebutton {
         }
 
         if (void* pMem = HBMAllocMem(sizeof(RemoteSpk))) {
-            mpRemoteSpk = new(pMem) RemoteSpk(mpHBInfo->spkSeBuf);
+            mpRemoteSpk = new (pMem) RemoteSpk(mpHBInfo->spkSeBuf);
         }
 
         for (i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
             if (void* pMem = HBMAllocMem(sizeof(Controller))) {
-                mpController[i] = new(pMem) Controller(i, mpRemoteSpk);
+                mpController[i] = new (pMem) Controller(i, mpRemoteSpk);
             }
         }
 
@@ -744,8 +520,7 @@ namespace homebutton {
             if (pConfig[i] == ',') {
                 if (pConfig[i + 1] == '1') {
                     mDialogFlag[j] = true;
-                }
-                else {
+                } else {
                     mDialogFlag[j] = false;
                 }
 
@@ -763,7 +538,7 @@ namespace homebutton {
         int k = 0;
         bool insideStringFlag = false;
         wchar_t* message = static_cast<wchar_t*>(mpHBInfo->msgBuf);
-        
+
         for (; message[i] != 0; i++) {
             if (message[i] == L'\"') {
                 message[i] = 0;
@@ -777,8 +552,7 @@ namespace homebutton {
                         j = 0;
                         k++;
                     }
-                }
-                else {
+                } else {
                     insideStringFlag = false;
                 }
             }
@@ -888,8 +662,7 @@ namespace homebutton {
             if (i < mVolumeNum) {
                 idx = findGroupAnimator(i + res::eGrPane_vol_00, res::eGrAnim_sound_ylw);
                 mpGroupAnmController[idx]->play();
-            }
-            else {
+            } else {
                 idx = findGroupAnimator(i + res::eGrPane_vol_00, res::eGrAnim_sound_gry);
                 mpGroupAnmController[idx]->play();
             }
@@ -907,8 +680,7 @@ namespace homebutton {
 
             idx = findGroupAnimator(res::eGrPane_optnBtn_11_psh, res::eGrAnim_vb_btn_ylw_psh);
             mpGroupAnmController[idx]->play();
-        }
-        else {
+        } else {
             idx = findGroupAnimator(res::eGrPane_optnBtn_10_psh, res::eGrAnim_vb_btn_ylw_psh);
             mpGroupAnmController[idx]->play();
 
@@ -965,8 +737,7 @@ namespace homebutton {
 
                 mControllerFlag[i] = true;
                 getController(i)->getInfoAsync(&mWpadInfo[i]);
-            }
-            else {
+            } else {
                 if (!mpHBInfo->cursor) {
                     mpCursorLayout[i]->GetRootPane()->FindPaneByName(scCursorPaneName, true)->SetVisible(false);
                 }
@@ -1008,8 +779,7 @@ namespace homebutton {
                     if (getController(i)->isRumbling()) {
                         getController(i)->stopMotor();
                     }
-                }
-                else {
+                } else {
                     mOnPaneVibFrame[i] -= mpHBInfo->frameDelta;
 
                     if (mOnPaneVibFrame[i] <= 0.0f || mState == 17) {
@@ -1018,8 +788,7 @@ namespace homebutton {
                         mOnPaneVibWaitFrame[i] = scOnPaneVibWaitTime;
                     }
                 }
-            }
-            else if (mOnPaneVibWaitFrame[i] > 0.0f) {
+            } else if (mOnPaneVibWaitFrame[i] > 0.0f) {
                 mOnPaneVibWaitFrame[i] -= mpHBInfo->frameDelta;
 
                 if (mOnPaneVibWaitFrame[i] <= 0.0f) {
@@ -1036,8 +805,7 @@ namespace homebutton {
                     mpLayout->GetRootPane()->FindPaneByName("back_00", true)->SetVisible(false);
 
                     mpLayout->GetRootPane()->FindPaneByName("back_02", true)->SetVisible(true);
-                }
-                else {
+                } else {
                     mSelectAnmNum = findGroupAnimator(res::eGrPane_hmMenu_strt, res::eGrAnim_hmMenu_strt);
 
                     mpLayout->GetRootPane()->FindPaneByName("back_00", true)->SetVisible(true);
@@ -1071,9 +839,7 @@ namespace homebutton {
                 break;
             }
             case 3: {
-                if (!mpGroupAnmController[mSelectAnmNum]->isPlaying() &&
-                    mSelectAnmNum != res::eGrAnimator_optn_bar_in__close_bar_in) {
-
+                if (!mpGroupAnmController[mSelectAnmNum]->isPlaying() && mSelectAnmNum != res::eGrAnimator_optn_bar_in__close_bar_in) {
                     reset_battery();
                     mSelectAnmNum = res::ePairAnm_link_msg_in;
                     mpPairGroupAnmController[mSelectAnmNum]->play();
@@ -1154,8 +920,7 @@ namespace homebutton {
                     }
 
                     mState = 7;
-                }
-                else {
+                } else {
                     if (++mMsgCount <= scReConnectTime) {
                         break;
                     }
@@ -1199,8 +964,7 @@ namespace homebutton {
 
                     mpLayout->GetRootPane()->FindPaneByName(scFuncTextPaneName[res::eFuncTextPane_T_Dialog], true)->SetVisible(false);
 
-                }
-                else if (mSelectAnmNum == res::ePairAnm_link_msg_out) {
+                } else if (mSelectAnmNum == res::ePairAnm_link_msg_out) {
                     mpLayout->GetRootPane()->FindPaneByName(scFuncTextPaneName[res::eFuncTextPane_T_msg_00], true)->SetVisible(false);
 
                     mpLayout->GetRootPane()->FindPaneByName(scFuncTextPaneName[res::eFuncTextPane_T_msg_01], true)->SetVisible(false);
@@ -1241,8 +1005,7 @@ namespace homebutton {
                     }
 
                     mState = 2;
-                }
-                else if (mSequence == SEQ_CONTROL) {
+                } else if (mSequence == SEQ_CONTROL) {
                     mSelectAnmNum = res::ePairAnm_cntrl_wndw_opn;
                     mpPairGroupAnmController[mSelectAnmNum]->play();
 
@@ -1289,12 +1052,10 @@ namespace homebutton {
                     mState = 19;
                     mFadeOutSeTime = mFader.getMaxFrame();
 
-                    if (mSelectBtnNum != HBM_SELECT_BTN3 &&
-                        mpHBInfo->sound_callback != NULL) {
+                    if (mSelectBtnNum != HBM_SELECT_BTN3 && mpHBInfo->sound_callback != NULL) {
                         mpHBInfo->sound_callback(HBMSEV_BEGIN_EXIT_ANIM, mFadeOutSeTime);
                     }
-                }
-                else {
+                } else {
                     updateTrigPane();
                     mSelectAnmNum = res::ePairAnm_cmn_msg_rtrn;
                     mpPairGroupAnmController[mSelectAnmNum]->play();
@@ -1322,8 +1083,7 @@ namespace homebutton {
                 mState = 19;
                 mFadeOutSeTime = mFader.getMaxFrame();
 
-                if (mSelectBtnNum != HBM_SELECT_BTN3 &&
-                    mpHBInfo->sound_callback != NULL) {
+                if (mSelectBtnNum != HBM_SELECT_BTN3 && mpHBInfo->sound_callback != NULL) {
                     mpHBInfo->sound_callback(HBMSEV_BEGIN_EXIT_ANIM, mFadeOutSeTime);
                 }
 
@@ -1335,8 +1095,7 @@ namespace homebutton {
                 if (!pAnim->isPlaying()) {
                     mState = 17;
                     fadeout_sound(0.0f);
-                }
-                else {
+                } else {
                     f32 restFrame = pAnim->getMaxFrame() - pAnim->getCurrentFrame();
                     fadeout_sound(restFrame / mFadeOutSeTime);
                 }
@@ -1374,8 +1133,7 @@ namespace homebutton {
                     }
                 }
 
-                if (mSelectBtnNum != HBM_SELECT_BTN3 &&
-                    mpHBInfo->sound_callback != NULL) {
+                if (mSelectBtnNum != HBM_SELECT_BTN3 && mpHBInfo->sound_callback != NULL) {
                     mpHBInfo->sound_callback(HBMSEV_BEGIN_BLACKOUT, 0);
                 }
 
@@ -1434,8 +1192,7 @@ namespace homebutton {
                     VIFlush();
 
                     fadeout_sound(0.0f);
-                }
-                else {
+                } else {
                     f32 restFrame = mFader.getMaxFrame() - mFader.getFrame();
                     fadeout_sound(restFrame / mFadeOutSeTime);
                 }
@@ -1487,10 +1244,9 @@ namespace homebutton {
         mpLayout->GetRootPane()->FindPaneByName(scFuncTextPaneName[res::eFuncTextPane_T_Dialog], true)->SetVisible(false);
 
         if (mpHBInfo->backFlag) {
-            mSelectAnmNum = findGroupAnimator(res::eGrPane_hmMenuBck_fnsh,res::eGrAnim_hmMenu_fnsh);
-        }
-        else {
-            mSelectAnmNum = findGroupAnimator(res::eGrPane_hmMenu_fnsh,res::eGrAnim_hmMenu_fnsh);
+            mSelectAnmNum = findGroupAnimator(res::eGrPane_hmMenuBck_fnsh, res::eGrAnim_hmMenu_fnsh);
+        } else {
+            mSelectAnmNum = findGroupAnimator(res::eGrPane_hmMenu_fnsh, res::eGrAnim_hmMenu_fnsh);
         }
 
         mpGroupAnmController[mSelectAnmNum]->play();
@@ -1503,16 +1259,13 @@ namespace homebutton {
     }
 
     void HomeButton::calc_letter() {
-        if (mLetterFlag &&
-            !mpPairGroupAnmController[res::ePairAnm_ltrIcn_on]->isPlaying()) {
-
+        if (mLetterFlag && !mpPairGroupAnmController[res::ePairAnm_ltrIcn_on]->isPlaying()) {
             mpLayout->GetRootPane()->FindPaneByName(scFuncPaneName[res::eFuncPane_let_icn_00], true)->SetVisible(true);
 
             mpPairGroupAnmController[res::ePairAnm_ltrIcn_on]->setAnmType(ANIM_TYPE_LOOP);
 
             mpPairGroupAnmController[res::ePairAnm_ltrIcn_on]->play();
-        }
-        else if (!mLetterFlag) {
+        } else if (!mLetterFlag) {
             mpLayout->GetRootPane()->FindPaneByName(scFuncPaneName[res::eFuncPane_let_icn_00], true)->SetVisible(false);
 
             mpPairGroupAnmController[res::ePairAnm_ltrIcn_on]->stop();
@@ -1523,8 +1276,7 @@ namespace homebutton {
         for (int i = 0; i < res::eBatteryPane_Max; i++) {
             if (i < mWpadInfo[chan].battery) {
                 mpLayout->GetRootPane()->FindPaneByName(scBatteryPaneName[chan][i], true)->SetVisible(true);
-            }
-            else {
+            } else {
                 mpLayout->GetRootPane()->FindPaneByName(scBatteryPaneName[chan][i], true)->SetVisible(false);
             }
         }
@@ -1533,8 +1285,7 @@ namespace homebutton {
             int idx = findGroupAnimator(chan + res::eGrPane_plyr_00, res::eGrAnim_btry_red);
 
             mpGroupAnmController[idx]->play();
-        }
-        else {
+        } else {
             int idx = findGroupAnimator(chan + res::eGrPane_plyr_00, res::eGrAnim_btry_wht);
 
             mpGroupAnmController[idx]->play();
@@ -1566,12 +1317,9 @@ namespace homebutton {
 
         HomeButton* pHBObj = HomeButton::getInstance();
 
-        if (!WPADIsSpeakerEnabled(chan) ||
-            !pHBObj->getController(chan)->isPlayReady()) {
-
+        if (!WPADIsSpeakerEnabled(chan) || !pHBObj->getController(chan)->isPlayReady()) {
             pHBObj->setSpeakerAlarm(chan, 50);
-        }
-        else {
+        } else {
             pHBObj->getController(chan)->playSound(pHBObj->getSoundArchivePlayer(), id);
         }
     }
@@ -1599,8 +1347,7 @@ namespace homebutton {
                 pHBObj->setSimpleSyncFlag(true);
                 retrySuccessFlag = true;
             }
-        }
-        else /* HomeButton::SYNC_STOP */ {
+        } else /* HomeButton::SYNC_STOP */ {
             if (WPADStopSimpleSync()) {
                 retrySuccessFlag = true;
             }
@@ -1632,7 +1379,7 @@ namespace homebutton {
     }
 
     void HomeButton::update(const HBMControllerData* pController) {
-        #define IsValidDevType_(x)  ((x)->use_devtype == WPAD_DEV_CLASSIC || (x)->kpad->dev_type == WPAD_DEV_CLASSIC)
+#define IsValidDevType_(x) ((x)->use_devtype == WPAD_DEV_CLASSIC || (x)->kpad->dev_type == WPAD_DEV_CLASSIC)
 
         int i, idx;
 
@@ -1640,26 +1387,18 @@ namespace homebutton {
 
         for (i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
             if (pController->wiiCon[i].kpad != NULL) {
-
-                if (pController->wiiCon[i].kpad->wpad_err !=
-                    WPAD_ERR_NO_CONTROLLER) {
-
+                if (pController->wiiCon[i].kpad->wpad_err != WPAD_ERR_NO_CONTROLLER) {
                     if (mPadDrawTime[i] > static_cast<int>(scPadDrawWaitTime)) {
-
                         if (pController->wiiCon[i].kpad->wpad_err == WPAD_ERR_OK) {
                             bool pointerEnableFlag;
 
-                            if (pController->wiiCon[i].use_devtype != WPAD_DEV_CLASSIC &&
-                                pController->wiiCon[i].kpad->dev_type != WPAD_DEV_CLASSIC) {
-
+                            if (pController->wiiCon[i].use_devtype != WPAD_DEV_CLASSIC && pController->wiiCon[i].kpad->dev_type != WPAD_DEV_CLASSIC) {
                                 if (pController->wiiCon[i].kpad->dpd_valid_fg > 0) {
                                     pointerEnableFlag = true;
-                                }
-                                else {
+                                } else {
                                     pointerEnableFlag = false;
                                 }
-                            }
-                            else {
+                            } else {
                                 pointerEnableFlag = true;
                             }
 
@@ -1669,29 +1408,23 @@ namespace homebutton {
                                 mpCursorLayout[i]->GetRootPane()->FindPaneByName(scCursorPaneName, true)->SetVisible(true);
                             }
                         }
-                    }
-                    else {
+                    } else {
                         mpController[i]->setKpad(&pController->wiiCon[i], false);
                         mPadDrawTime[i]++;
                     }
 
-                    if (pController->wiiCon[i].use_devtype != WPAD_DEV_CLASSIC &&
-                        pController->wiiCon[i].kpad->dev_type != WPAD_DEV_CLASSIC) {
-
+                    if (pController->wiiCon[i].use_devtype != WPAD_DEV_CLASSIC && pController->wiiCon[i].kpad->dev_type != WPAD_DEV_CLASSIC) {
                         if (pController->wiiCon[i].kpad->dpd_valid_fg <= 0) {
                             s32 result;
                             u32 type;
                             result = WPADProbe(i, &type);
 
-                            if (pController->wiiCon[i].kpad->wpad_err != WPAD_ERR_COMMUNICATION_ERROR &&
-                                result != WPAD_ERR_COMMUNICATION_ERROR) {
-
+                            if (pController->wiiCon[i].kpad->wpad_err != WPAD_ERR_COMMUNICATION_ERROR && result != WPAD_ERR_COMMUNICATION_ERROR) {
                                 mpController[i]->setInValidPos();
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     mpController[i]->setInValidPos();
 
                     if (!mpHBInfo->cursor) {
@@ -1730,8 +1463,7 @@ namespace homebutton {
 
                     if (pController->wiiCon[i].use_devtype == WPAD_DEV_CLASSIC && pController->wiiCon[i].kpad->dev_type == WPAD_DEV_CLASSIC) {
                         vec = nw4r::math::VEC3(0.0f, 0.0f, 15.0f);
-                    }
-                    else {
+                    } else {
                         Vec2 v = pController->wiiCon[i].kpad->horizon;
                         f32 rad = nw4r::math::Atan2Deg(-v.y, v.x);
 
@@ -1758,8 +1490,7 @@ namespace homebutton {
                 if (getController(i)->getBatteryFlag()) {
                     calc_battery(i);
                 }
-            }
-            else {
+            } else {
                 if (mControllerFlag[i]) {
                     idx = findGroupAnimator(i + res::eGrPane_plyr_00, res::eGrAnim_btry_wht);
                     mpGroupAnmController[idx]->play();
@@ -1789,8 +1520,7 @@ namespace homebutton {
 
         if (mGetPadInfoTime > scGetPadInfoTime) {
             mGetPadInfoTime = 0;
-        }
-        else {
+        } else {
             mGetPadInfoTime++;
         }
     }
@@ -1802,7 +1532,7 @@ namespace homebutton {
             HBController* pController = mpController[id]->getController();
 
             Vec2 pos;
-            Vec2 src = { pController->x, pController->y };
+            Vec2 src = {pController->x, pController->y};
 
             Rect bound;
             bound.left = -416.0;
@@ -1819,23 +1549,17 @@ namespace homebutton {
 
             if (-516.0f > pos.x) {
                 pos.x = -516.0f;
-            }
-            else if (516.0f < pos.x) {
+            } else if (516.0f < pos.x) {
                 pos.x = 516.0f;
-            }
-            else if (-328.0f > pos.y) {
+            } else if (-328.0f > pos.y) {
                 pos.y = -328.0f;
-            }
-            else if (328.0f < pos.y) {
+            } else if (328.0f < pos.y) {
                 pos.y = 328.0f;
             }
 
             mpPaneManager->update(id, pos.x, -pos.y, pController->trig, pController->hold, pController->release, pController);
 
-            if (((pController->trig & (PAD_BUTTON_START << 16)) |
-                (pController->trig & WPAD_BUTTON_HOME)) &&
-                isActive()) {
-
+            if (((pController->trig & (PAD_BUTTON_START << 16)) | (pController->trig & WPAD_BUTTON_HOME)) && isActive()) {
                 if (mSequence == SEQ_CONTROL) {
                     mpPaneManager->update(id, 0.0f, -180.0f, 0, 0, 0, NULL);
 
@@ -1852,8 +1576,7 @@ namespace homebutton {
                     mSequence = SEQ_NORMAL;
 
                     play_sound(HBMSE_CLOSE_CONTROLLER);
-                }
-                else if (mSequence == SEQ_NORMAL) {
+                } else if (mSequence == SEQ_NORMAL) {
                     if (mpPairGroupAnmController[res::ePairAnm_hmMenu_bar_in]->isPlaying()) {
                         mpPairGroupAnmController[res::ePairAnm_hmMenu_bar_in]->stop();
                     }
@@ -1870,11 +1593,8 @@ namespace homebutton {
                     mState = 14;
                     play_sound(HBMSE_RETURN_APP);
                 }
-            }
-            else if (mSequence == SEQ_CONTROL && isActive()) {
-                if ((pController->trig & WPAD_BUTTON_MINUS) ||
-                    (pController->trig & (PAD_BUTTON_LEFT << 16))) {
-
+            } else if (mSequence == SEQ_CONTROL && isActive()) {
+                if ((pController->trig & WPAD_BUTTON_MINUS) || (pController->trig & (PAD_BUTTON_LEFT << 16))) {
                     if (mVolumeNum > 0) {
                         mVolumeNum--;
 
@@ -1895,8 +1615,7 @@ namespace homebutton {
 
                                 getController(i)->playSound(mpSoundArchivePlayer, HBM_SPK_SE_CONNECT1);
                             }
-                        }
-                        else {
+                        } else {
                             play_sound(HBMSE_VOLUME_MINUS);
 
                             for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
@@ -1906,13 +1625,11 @@ namespace homebutton {
                             }
                         }
 
-                    }
-                    else {
+                    } else {
                         play_sound(HBMSE_NOTHING_DONE);
                     }
 
-                }
-                else if ((pController->trig & WPAD_BUTTON_PLUS) || (pController->trig & (PAD_BUTTON_RIGHT << 16))) {
+                } else if ((pController->trig & WPAD_BUTTON_PLUS) || (pController->trig & (PAD_BUTTON_RIGHT << 16))) {
                     if (mVolumeNum < HBM_MAX_VOLUME) {
                         idx = findGroupAnimator(mVolumeNum + res::eGrPane_vol_00, res::eGrAnim_sound_gry);
                         mpGroupAnmController[idx]->stop();
@@ -1933,8 +1650,7 @@ namespace homebutton {
 
                                 getController(i)->playSound(mpSoundArchivePlayer, HBM_SPK_SE_CONNECT1);
                             }
-                        }
-                        else {
+                        } else {
                             play_sound(HBMSE_VOLUME_PLUS);
 
                             for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
@@ -1944,15 +1660,13 @@ namespace homebutton {
                             }
                         }
 
-                    }
-                    else {
+                    } else {
                         play_sound(HBMSE_NOTHING_DONE);
                     }
                 }
             }
 
-        }
-        else if (mSequence == SEQ_CONTROL && mState == 5 && !mpPairGroupAnmController[mSelectAnmNum]->isPlaying()) {
+        } else if (mSequence == SEQ_CONTROL && mState == 5 && !mpPairGroupAnmController[mSelectAnmNum]->isPlaying()) {
             HBController* pController = mpController[id]->getController();
             if (pController->trig != 0) {
                 mMsgCount = scReConnectTime;
@@ -1963,7 +1677,7 @@ namespace homebutton {
     void HomeButton::update_posController(int id) {
         HBController* pController = mpController[id]->getController();
         Vec2 pos;
-        Vec2 src = { pController->x, pController->y };
+        Vec2 src = {pController->x, pController->y};
 
         Rect bound;
         bound.left = -416.0;
@@ -1980,14 +1694,11 @@ namespace homebutton {
 
         if (-516.0f > pos.x) {
             pos.x = -516.0f;
-        }
-        else if (516.0f < pos.x) {
+        } else if (516.0f < pos.x) {
             pos.x = 516.0f;
-        }
-        else if (-328.0f > pos.y) {
+        } else if (-328.0f > pos.y) {
             pos.y = -328.0f;
-        }
-        else if (328.0f < pos.y) {
+        } else if (328.0f < pos.y) {
             pos.y = 328.0f;
         }
         nw4r::math::VEC2 pos2(pos.x, -pos.y);
@@ -2006,12 +1717,10 @@ namespace homebutton {
             case SEQ_NORMAL: {
                 for (i = 0; i < res::eFuncTouchPane_Max; i++) {
                     if (i < res::eFuncTouchPane_B_optnBtn_00 || i == res::eFuncTouchPane_cntrl_00) {
-
                         nw4r::lyt::Pane* pTouchPane = mpLayout->GetRootPane()->FindPaneByName(scFuncTouchPaneName[i], true);
 
                         mpPaneManager->getPaneComponentByPane(pTouchPane)->setTriggerTarget(true);
-                    }
-                    else {
+                    } else {
                         nw4r::lyt::Pane* pTouchPane = mpLayout->GetRootPane()->FindPaneByName(scFuncTouchPaneName[i], true);
 
                         mpPaneManager->getPaneComponentByPane(pTouchPane)->setTriggerTarget(false);
@@ -2026,8 +1735,7 @@ namespace homebutton {
                         nw4r::lyt::Pane* pTouchPane = mpLayout->GetRootPane()->FindPaneByName(scFuncTouchPaneName[i], true);
 
                         mpPaneManager->getPaneComponentByPane(pTouchPane)->setTriggerTarget(true);
-                    }
-                    else {
+                    } else {
                         nw4r::lyt::Pane* pTouchPane = mpLayout->GetRootPane()->FindPaneByName(scFuncTouchPaneName[i], true);
 
                         mpPaneManager->getPaneComponentByPane(pTouchPane)->setTriggerTarget(false);
@@ -2038,16 +1746,14 @@ namespace homebutton {
             }
             case SEQ_COMMON: {
                 for (i = 0; i < res::eFuncTouchPane_Max; i++) {
-
                     if (i < res::eFuncTouchPane_B_BtnA || i == res::eFuncTouchPane_cntrl_00) {
                         nw4r::lyt::Pane* pTouchPane = mpLayout->GetRootPane()->FindPaneByName(scFuncTouchPaneName[i], true);
 
                         mpPaneManager->getPaneComponentByPane(pTouchPane)->setTriggerTarget(false);
-                    }
-                    else {
+                    } else {
                         nw4r::lyt::Pane* pTouchPane = mpLayout->GetRootPane()->FindPaneByName(scFuncTouchPaneName[i], true);
 
-                        mpPaneManager->getPaneComponentByPane(pTouchPane) ->setTriggerTarget(true);
+                        mpPaneManager->getPaneComponentByPane(pTouchPane)->setTriggerTarget(true);
                     }
                 }
 
@@ -2072,8 +1778,7 @@ namespace homebutton {
                     onFlag = true;
                 }
 
-            }
-            else {
+            } else {
                 switch (btnNo - mButtonNum) {
                     case res::eFuncTouchPane_B_btn_00: {
                         if (mSequence == SEQ_NORMAL) {
@@ -2085,8 +1790,7 @@ namespace homebutton {
 
                                 setForcusSE();
                                 onFlag = true;
-                            }
-                            else {
+                            } else {
                                 mBar0AnmRev = res::ePairAnm_hmMenu_bar_in;
                             }
                         }
@@ -2105,12 +1809,10 @@ namespace homebutton {
 
                                 setForcusSE();
                                 onFlag = true;
-                            }
-                            else {
+                            } else {
                                 mBar1AnmRev = idx;
                             }
-                        }
-                        else if (mSequence == SEQ_CONTROL) {
+                        } else if (mSequence == SEQ_CONTROL) {
                             idx = findGroupAnimator(res::eGrPane_optn_bar_in, res::eGrAnim_close_bar_in);
 
                             if (isDownBarActive()) {
@@ -2120,8 +1822,7 @@ namespace homebutton {
 
                                 setForcusSE();
                                 onFlag = true;
-                            }
-                            else {
+                            } else {
                                 mBar1AnmRev = idx;
                             }
                         }
@@ -2213,8 +1914,7 @@ namespace homebutton {
         if (btnNo == mButtonNum + res::eFuncTouchPane_B_bar_10 || btnNo == mButtonNum + res::eFuncTouchPane_cntrl_00) {
             mPaneCounter[mButtonNum + res::eFuncTouchPane_B_bar_10]++;
             mPaneCounter[mButtonNum + res::eFuncTouchPane_cntrl_00]++;
-        }
-        else {
+        } else {
             mPaneCounter[btnNo]++;
         }
 
@@ -2234,8 +1934,7 @@ namespace homebutton {
             if (btnNo == mButtonNum + res::eFuncTouchPane_B_bar_10 || btnNo == mButtonNum + res::eFuncTouchPane_cntrl_00) {
                 mPaneCounter[mButtonNum + res::eFuncTouchPane_B_bar_10]--;
                 mPaneCounter[mButtonNum + res::eFuncTouchPane_cntrl_00]--;
-            }
-            else {
+            } else {
                 mPaneCounter[btnNo]--;
             }
         }
@@ -2244,8 +1943,7 @@ namespace homebutton {
             if (mSequence != SEQ_COMMON && btnNo < mButtonNum) {
                 idx = findAnimator(btnNo, res::eAnim_cntBtn_out);
                 mpAnmController[idx]->play();
-            }
-            else {
+            } else {
                 switch (btnNo - mButtonNum) {
                     case res::eFuncTouchPane_B_btn_00: {
                         if (mSequence == SEQ_NORMAL) {
@@ -2254,8 +1952,7 @@ namespace homebutton {
 
                                 mBar0AnmRevHold = res::ePairAnm_hmMenu_bar_out;
                                 mBar0AnmRev = 0;
-                            }
-                            else {
+                            } else {
                                 mBar0AnmRev = res::ePairAnm_hmMenu_bar_out;
                             }
                         }
@@ -2271,20 +1968,17 @@ namespace homebutton {
                                 mpGroupAnmController[idx]->play();
                                 mBar1AnmRevHold = idx;
                                 mBar1AnmRev = 0;
-                            }
-                            else {
+                            } else {
                                 mBar1AnmRev = idx;
                             }
-                        }
-                        else if (mSequence == SEQ_CONTROL) {
+                        } else if (mSequence == SEQ_CONTROL) {
                             idx = findGroupAnimator(res::eGrPane_optn_bar_out, res::eGrAnim_close_bar_out);
 
                             if (isDownBarActive()) {
                                 mpGroupAnmController[idx]->play();
                                 mBar1AnmRevHold = idx;
                                 mBar1AnmRev = 0;
-                            }
-                            else {
+                            } else {
                                 mBar1AnmRev = idx;
                             }
                         }
@@ -2378,13 +2072,11 @@ namespace homebutton {
                     pTextBox->SetString(mpText[mpHBInfo->region][btnNo + 2], 0);
 
                     mpLayout->GetRootPane()->FindPaneByName(scFuncTextPaneName[res::eFuncTextPane_T_Dialog], true)->SetVisible(true);
-                }
-                else {
+                } else {
                     mState = 15;
                 }
 
-            }
-            else {
+            } else {
                 switch (btnNo - mButtonNum) {
                     case res::eFuncTouchPane_B_btn_00: {
                         if (mpPairGroupAnmController[res::ePairAnm_hmMenu_bar_out]->isPlaying()) {
@@ -2420,8 +2112,7 @@ namespace homebutton {
                             mSequence = SEQ_NORMAL;
                             play_sound(HBMSE_CLOSE_CONTROLLER);
 
-                        }
-                        else if (mSequence == SEQ_NORMAL) {
+                        } else if (mSequence == SEQ_NORMAL) {
                             mpPairGroupAnmController[res::ePairAnm_optn_bar_psh]->play();
 
                             mSelectAnmNum = res::ePairAnm_cntrl_up;
@@ -2457,8 +2148,7 @@ namespace homebutton {
 
                                     getController(i)->playSound(mpSoundArchivePlayer, HBM_SPK_SE_CONNECT1);
                                 }
-                            }
-                            else {
+                            } else {
                                 play_sound(HBMSE_VOLUME_MINUS);
 
                                 for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
@@ -2470,8 +2160,7 @@ namespace homebutton {
 
                             idx = findGroupAnimator(res::eGrPane_optnBtn_00_psh, res::eGrAnim_optn_btn_psh);
                             mpGroupAnmController[idx]->play();
-                        }
-                        else {
+                        } else {
                             play_sound(HBMSE_NOTHING_DONE);
                         }
 
@@ -2495,8 +2184,7 @@ namespace homebutton {
 
                                     getController(i)->playSound(mpSoundArchivePlayer, HBM_SPK_SE_CONNECT1);
                                 }
-                            }
-                            else {
+                            } else {
                                 play_sound(HBMSE_VOLUME_PLUS);
 
                                 for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
@@ -2508,8 +2196,7 @@ namespace homebutton {
 
                             idx = findGroupAnimator(res::eGrPane_optnBtn_01_psh, res::eGrAnim_optn_btn_psh);
                             mpGroupAnmController[idx]->play();
-                        }
-                        else {
+                        } else {
                             play_sound(HBMSE_NOTHING_DONE);
                         }
 
@@ -2528,8 +2215,7 @@ namespace homebutton {
                             mpGroupAnmController[mSelectAnmNum]->play();
 
                             play_sound(HBMSE_VIBE_ON);
-                        }
-                        else {
+                        } else {
                             mSelectAnmNum = findGroupAnimator(res::eGrPane_optnBtn_10_cntrl, res::eGrAnim_vb_btn_ylw_ylw);
                             mpGroupAnmController[mSelectAnmNum]->play();
 
@@ -2558,8 +2244,7 @@ namespace homebutton {
                             mpGroupAnmController[mSelectAnmNum]->play();
 
                             play_sound(HBMSE_VIBE_OFF);
-                        }
-                        else {
+                        } else {
                             play_sound(HBMSE_NOTHING_DONE);
                         }
 
@@ -2600,8 +2285,7 @@ namespace homebutton {
 
                         if (mSelectBtnNum == HBM_SELECT_BTN1) {
                             play_sound(HBMSE_GOTO_MENU);
-                        }
-                        else if (mSelectBtnNum == HBM_SELECT_BTN2) {
+                        } else if (mSelectBtnNum == HBM_SELECT_BTN2) {
                             play_sound(HBMSE_RESET_APP);
                         }
 
@@ -2651,8 +2335,7 @@ namespace homebutton {
 
                     mPaneCounter[mButtonNum + res::eFuncTouchPane_B_btn_00] = 0;
                 }
-            }
-            else {
+            } else {
                 idx = findGroupAnimator(res::eGrPane_optn_bar_out, res::eGrAnim_optn_bar_out);
                 mpGroupAnmController[idx]->play();
 
@@ -2693,8 +2376,7 @@ namespace homebutton {
             for (int i = 0; i < 8; i++) {
                 mpPaneManager->update(i, -10000.0f, -10000.0f, 0, 0, 0, NULL);
             }
-        }
-        else {
+        } else {
             mpPaneManager->update(num, -10000.0f, -10000.0f, 0, 0, 0, NULL);
         }
     }
@@ -2706,10 +2388,8 @@ namespace homebutton {
     bool HomeButton::isUpBarActive() const {
         bool flag = true;
 
-        if (!isActive() ||
-            mpPairGroupAnmController[res::ePairAnm_hmMenu_bar_out]->isPlaying() ||
+        if (!isActive() || mpPairGroupAnmController[res::ePairAnm_hmMenu_bar_out]->isPlaying() ||
             mpPairGroupAnmController[res::ePairAnm_hmMenu_bar_in]->isPlaying()) {
-
             flag = false;
         }
 
@@ -2720,17 +2400,13 @@ namespace homebutton {
         bool flag = true;
 
         int idx[4];
-        idx[0] = findGroupAnimator(res::eGrPane_optn_bar_in,  res::eGrAnim_optn_bar_in);
+        idx[0] = findGroupAnimator(res::eGrPane_optn_bar_in, res::eGrAnim_optn_bar_in);
         idx[1] = findGroupAnimator(res::eGrPane_optn_bar_out, res::eGrAnim_optn_bar_out);
-        idx[2] = findGroupAnimator(res::eGrPane_optn_bar_in,  res::eGrAnim_close_bar_in);
+        idx[2] = findGroupAnimator(res::eGrPane_optn_bar_in, res::eGrAnim_close_bar_in);
         idx[3] = findGroupAnimator(res::eGrPane_optn_bar_out, res::eGrAnim_close_bar_out);
 
-        if (!isActive() ||
-            mpGroupAnmController[idx[0]]->isPlaying() ||
-            mpGroupAnmController[idx[1]]->isPlaying() ||
-            mpGroupAnmController[idx[2]]->isPlaying() ||
-            mpGroupAnmController[idx[3]]->isPlaying()) {
-
+        if (!isActive() || mpGroupAnmController[idx[0]]->isPlaying() || mpGroupAnmController[idx[1]]->isPlaying() ||
+            mpGroupAnmController[idx[2]]->isPlaying() || mpGroupAnmController[idx[3]]->isPlaying()) {
             flag = false;
         }
 
@@ -2769,9 +2445,7 @@ namespace homebutton {
 
     int HomeButton::findGroupAnimator(int grPane, int grAnm) {
         for (int i = 0; i < res::eGrAnimator_Max; i++) {
-            if (scGroupAnmTable[i].pane == grPane &&
-                scGroupAnmTable[i].anm == grAnm) {
-
+            if (scGroupAnmTable[i].pane == grPane && scGroupAnmTable[i].anm == grAnm) {
                 return i;
             }
         }
@@ -2811,8 +2485,7 @@ namespace homebutton {
                     mpCursorLayout[i]->GetRootPane()->SetScale(scale);
                 }
             }
-        }
-        else {
+        } else {
             scale = nw4r::math::VEC2(1.0f, 1.0f);
             mpLayout->GetRootPane()->SetScale(scale);
 
@@ -2861,8 +2534,7 @@ namespace homebutton {
                 break;
             }
             case EventHandler::ON_TRIG: {
-                if ((pController->trig & WPAD_BUTTON_A) ||
-                    (pController->trig & (PAD_BUTTON_A << 16))) {
+                if ((pController->trig & WPAD_BUTTON_A) || (pController->trig & (PAD_BUTTON_A << 16))) {
                     pHBObj->startTrigEvent(pPaneName);
                 }
 
@@ -2880,15 +2552,13 @@ namespace homebutton {
     void HomeButton::BlackFader::calc() {
         if (state_ == 1) {
             frame_++;
-        }
-        else if (state_ == 2) {
+        } else if (state_ == 2) {
             frame_--;
         }
 
         if (frame_ < 0) {
             frame_ = 0;
-        }
-        else if (frame_ > maxFrame_) {
+        } else if (frame_ > maxFrame_) {
             frame_ = maxFrame_;
         }
     }
@@ -2937,7 +2607,7 @@ namespace homebutton {
         GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_NOOP);
         GXSetAlphaUpdate(GX_FALSE);
         GXSetZMode(GX_FALSE, GX_ALWAYS, GX_FALSE);
-     
+
         GXSetNumIndStages(0);
         GXSetTevSwapModeTable(GX_TEV_SWAP0, GX_CH_RED, GX_CH_GREEN, GX_CH_BLUE, GX_CH_ALPHA);
         GXSetTevSwapMode(GX_TEVSTAGE0, GX_TEV_SWAP0, GX_TEV_SWAP0);
@@ -2946,7 +2616,8 @@ namespace homebutton {
     static void drawBlackPlate(f32 left, f32 top, f32 right, f32 bottom, GXColor clr) {
         GXSetTevColor(GX_TEVREG0, clr);
 
-        GXBegin(GX_QUADS, GX_VTXFMT0, 4); {
+        GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+        {
             GXPosition2f32(left, top);
             GXPosition2f32(left, bottom);
             GXPosition2f32(right, bottom);
@@ -3008,4 +2679,4 @@ namespace homebutton {
             }
         }
     }
-}
+}  // namespace homebutton

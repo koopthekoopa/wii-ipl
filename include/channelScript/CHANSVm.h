@@ -55,8 +55,6 @@ CHANSVmObjHdr*      CHANSVmNewArrayObject(CHANSVm* vm, CHANSVmObjHdr* object, vm
 CHANSVmObjHdr*      CHANSVmGetArrayElement2D(CHANSVm* vm, vmPtr array, vmS32 dimension0, vmS32 dimension1);
 CHANSVmObjHdr*      CHANSVmGetArrayElement2DFloat(CHANSVm* vm, vmFloat* array, vmS32 dimension0, vmS32 dimension1);
 
-
-
 /************************/
 /***   CHANS Method   ***/
 /************************/

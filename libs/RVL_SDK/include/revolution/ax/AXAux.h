@@ -35,16 +35,16 @@ typedef enum {
 
 typedef void (*AXAuxCallback)(void*, void*);
 
-void    AXRegisterAuxACallback(AXAuxCallback callback, void* context);
-void    AXRegisterAuxBCallback(AXAuxCallback callback, void* context);
-void    AXRegisterAuxCCallback(AXAuxCallback callback, void* context);
+void AXRegisterAuxACallback(AXAuxCallback callback, void* context);
+void AXRegisterAuxBCallback(AXAuxCallback callback, void* context);
+void AXRegisterAuxCCallback(AXAuxCallback callback, void* context);
 
-void    AXGetAuxACallback(AXAuxCallback* callback, void** context);
-void    AXGetAuxBCallback(AXAuxCallback* callback, void** context);
-void    AXGetAuxCCallback(AXAuxCallback* callback, void** context);
+void AXGetAuxACallback(AXAuxCallback* callback, void** context);
+void AXGetAuxBCallback(AXAuxCallback* callback, void** context);
+void AXGetAuxCCallback(AXAuxCallback* callback, void** context);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // REVOLUTION_AX_AUX_H
+#endif  // REVOLUTION_AX_AUX_H

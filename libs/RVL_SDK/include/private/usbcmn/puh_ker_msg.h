@@ -5,4 +5,4 @@
 
 s32 uhf_ker_send_message(int index, void* message);
 
-#endif // PFILE_USB_HELPER_MSG_H
+#endif  // PFILE_USB_HELPER_MSG_H

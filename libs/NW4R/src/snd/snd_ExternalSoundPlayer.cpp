@@ -17,9 +17,7 @@ namespace nw4r {
                 int lowestPrio = BasicSound::PRIORITY_MAX + 1;
                 BasicSound* pLowest = NULL;
 
-                for (BasicSoundExtPlayList::Iterator it = mSoundList.GetBeginIter();
-                    it != mSoundList.GetEndIter(); it++) {
-
+                for (BasicSoundExtPlayList::Iterator it = mSoundList.GetBeginIter(); it != mSoundList.GetEndIter(); it++) {
                     int priority = it->CalcCurrentPlayerPriority();
 
                     if (lowestPrio > priority) {
@@ -30,6 +28,6 @@ namespace nw4r {
 
                 return pLowest;
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

@@ -14,7 +14,7 @@
 
 namespace ipl {
     namespace nigaoe {
-        #define IPL_NIGAOE_ICON_MAX 10
+#define IPL_NIGAOE_ICON_MAX 10
 
         Manager::Manager(EGG::Heap* heap) {
             mResFile = System::getRFLArc();
@@ -24,18 +24,18 @@ namespace ipl {
             mErrcode = RFLInitRes(work, mResFile->getBuffer(), mResFile->getLength(), FALSE);
 
             nw4r::ut::List_Init(&mObjects, offsetof(Object, mLink));
-            
+
             {
                 // Init arrays
                 unsigned char mac[NCD_MAC_ADDRESS_LENGTH + 1];
-                mac[6] =  mac[5] = mac[4] = mac[3] = mac[2] = mac[1] = mac[0] = 0;
+                mac[6] = mac[5] = mac[4] = mac[3] = mac[2] = mac[1] = mac[0] = 0;
 
                 unsigned char temp[3];
                 temp[2] = temp[1] = temp[0] = 0;
 
                 // Setup work
                 unsigned char* ncd_mac = ncd::NCDSetting::getMacAddr();
-                
+
                 // Get mac values
                 for (int i = 1; i < NCD_MAC_ADDRESS_LENGTH; i++) {
                     memcpy(temp, &ncd_mac[i * ARRAY_LENGTH(temp)], sizeof(temp) - 1);
@@ -48,21 +48,22 @@ namespace ipl {
 
         Object* Manager::create(EGG::Heap* heap, int width, int height, int faceId, Object::MakeIconCallback callback, void* callbackWork) {
             // Create mii and append to list
-            Object* obj = new(heap, 4) Object(heap, width, height, faceId, callback, callbackWork);
+            Object* obj = new (heap, 4) Object(heap, width, height, faceId, callback, callbackWork);
             nw4r::ut::List_Append(&mObjects, obj);
             return obj;
         }
 
-        Object* Manager::create(EGG::Heap* heap, int width, int height, RFLiCharData* faceData, Object::MakeIconCallback callback, void* callbackWork) {
+        Object* Manager::create(EGG::Heap* heap, int width, int height, RFLiCharData* faceData, Object::MakeIconCallback callback,
+                                void* callbackWork) {
             // Create mii and append to list
-            Object* obj = new(heap, 4) Object(heap, width, height, faceData, callback, callbackWork);
+            Object* obj = new (heap, 4) Object(heap, width, height, faceData, callback, callbackWork);
             nw4r::ut::List_Append(&mObjects, obj);
             return obj;
         }
 
         void Manager::makeIcon() {
             int i = 0;
-            
+
             if (RFLGetAsyncStatus() != RFLErrcode_Busy) {
                 Object* obj;
                 for (; (obj = reinterpret_cast<Object*>(nw4r::ut::List_GetFirst(&mObjects))) != NULL && i < IPL_NIGAOE_ICON_MAX; i++) {
@@ -102,7 +103,7 @@ namespace ipl {
             if (!RFLiCheckValidInfo(&info)) {
                 result = FALSE;
             }
-            
+
             return result;
         }
 
@@ -113,9 +114,9 @@ namespace ipl {
 
         void Manager::commitHiddenDB() {
             nwc24::Manager* nwc24Manager = System::getNwc24Manager();
-            
-            RFLiCharData    charData;
-            NWC24MsgObj     msgObj;
+
+            RFLiCharData charData;
+            NWC24MsgObj msgObj;
 
             if (nwc24Manager) {
                 if (nwc24Manager->open()) {
@@ -127,5 +128,5 @@ namespace ipl {
                 }
             }
         }
-    }
-}
+    }  // namespace nigaoe
+}  // namespace ipl

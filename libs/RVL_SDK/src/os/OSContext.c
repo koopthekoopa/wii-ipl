@@ -1,9 +1,12 @@
-#include <revolution/os.h>
 #include <private/os.h>
+#include <revolution/os.h>
+
 
 #include <revolution/base/PPCArch.h>
 
 #include <private/db.h>
+
+// clang-format off
 
 static asm void __OSLoadFPUContext(u32 dummy, register OSContext* fpucontext) {
 #ifdef __MWERKS__
@@ -475,6 +478,8 @@ asm void OSInitContext(register OSContext* context, register u32 pc, register u3
 #endif // __MWERKS__
 }
 
+// clang-format on
+
 void OSDumpContext(OSContext* context) {
     u32 i;
     u32* sp;
@@ -482,8 +487,7 @@ void OSDumpContext(OSContext* context) {
     OSReport("------------------------- Context 0x%08x -------------------------\n", context);
 
     for (i = 0; i < 16; i++) {
-        OSReport("r%-2d  = 0x%08x (%14d)  r%-2d  = 0x%08x (%14d)\n", i,
-                 context->gpr[i], context->gpr[i], i + 16, context->gpr[i + 16],
+        OSReport("r%-2d  = 0x%08x (%14d)  r%-2d  = 0x%08x (%14d)\n", i, context->gpr[i], context->gpr[i], i + 16, context->gpr[i + 16],
                  context->gpr[i + 16]);
     }
 
@@ -497,9 +501,9 @@ void OSDumpContext(OSContext* context) {
 
     if (context->state & OS_CONTEXT_STATE_FPSAVED) {
         BOOL enabled = OSDisableInterrupts();
-        
-        OSContext*  currCtx = OSGetCurrentContext();
-        OSContext   temp;
+
+        OSContext* currCtx = OSGetCurrentContext();
+        OSContext temp;
 
         OSClearContext(&temp);
         OSSetCurrentContext(&temp);
@@ -511,7 +515,7 @@ void OSDumpContext(OSContext* context) {
 
         OSReport("\n\nPSFs----------\n");
         for (i = 0; i < 32; i += 2) {
-            OSReport("ps%d \t= 0x%x \t ps%d \t= 0x%x\n", i, (u32)context->psf[i], i+1, (u32)context->psf[i + 1]);
+            OSReport("ps%d \t= 0x%x \t ps%d \t= 0x%x\n", i, (u32)context->psf[i], i + 1, (u32)context->psf[i + 1]);
         }
 
         OSClearContext(&temp);
@@ -524,6 +528,8 @@ void OSDumpContext(OSContext* context) {
         OSReport("0x%08x:   0x%08x    0x%08x\n", sp, *sp, sp[1]);
     }
 }
+
+// clang-format off
 
 static asm void OSSwitchFPUContext(register u8 err, register OSContext* context) {
 #ifdef __MWERKS__
@@ -661,3 +667,5 @@ _return:
     blr
 #endif // __MWERKS__
 }
+
+// clang-format on

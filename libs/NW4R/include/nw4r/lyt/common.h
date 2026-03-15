@@ -1,8 +1,9 @@
 #ifndef NW4R_LYT_COMMON_H
 #define NW4R_LYT_COMMON_H
 
-#include <revolution/types.h>
 #include <revolution/tpl.h>
+#include <revolution/types.h>
+
 
 #include <nw4r/ut/Color.h>
 
@@ -17,50 +18,51 @@ namespace nw4r {
             typedef math::VEC2 TexCoords[4];
 
             class TexCoordAry {
-                public:
-                    TexCoordAry();
+            public:
+                TexCoordAry();
 
-                    u8                  GetSize() const     { return mNum; }
-                    const TexCoords*    GetArray() const    { return mpData; }
+                u8 GetSize() const { return mNum; }
+                const TexCoords* GetArray() const { return mpData; }
 
-                    void                SetSize(u8 num);
+                void SetSize(u8 num);
 
-                    bool                IsEmpty() const     { return mCap == 0; }
+                bool IsEmpty() const { return mCap == 0; }
 
-                    void                Reserve(u8 num);
+                void Reserve(u8 num);
 
-                    void                Free();
-                    void                Copy(const void* pResTexCoord, u8 texCoordNum);
+                void Free();
+                void Copy(const void* pResTexCoord, u8 texCoordNum);
 
-                    void                SetCoord(u32 idx, const math::VEC2* vec);
-                    void                GetCoord(u32 idx, math::VEC2* vec) const;
+                void SetCoord(u32 idx, const math::VEC2* vec);
+                void GetCoord(u32 idx, math::VEC2* vec) const;
 
-                private:
-                    u8          mCap;   // 0x00
-                    u8          mNum;   // 0x01
+            private:
+                u8 mCap;  // 0x00
+                u8 mNum;  // 0x01
 
-                    TexCoords*  mpData; // 0x04
+                TexCoords* mpData;  // 0x04
             };
 
-            bool        EqualsPaneName(const char* name1, const char* name2);
-            bool        EqualsMaterialName(const char* name1, const char* name2);
+            bool EqualsPaneName(const char* name1, const char* name2);
+            bool EqualsMaterialName(const char* name1, const char* name2);
 
-            bool        TestFileHeader(const res::BinaryFileHeader& fileHeader);
-            bool        TestFileHeader(const res::BinaryFileHeader& fileHeader, u32 testSig);
+            bool TestFileHeader(const res::BinaryFileHeader& fileHeader);
+            bool TestFileHeader(const res::BinaryFileHeader& fileHeader, u32 testSig);
 
-            bool        IsModulateVertexColor(ut::Color* vtxColors, u8 glbAlpha);
+            bool IsModulateVertexColor(ut::Color* vtxColors, u8 glbAlpha);
 
-            ut::Color   MultipleAlpha(const ut::Color col, u8 alpha);
-            void        MultipleAlpha(ut::Color* dst, const ut::Color* src, u8 alpha);
+            ut::Color MultipleAlpha(const ut::Color col, u8 alpha);
+            void MultipleAlpha(ut::Color* dst, const ut::Color* src, u8 alpha);
 
-            void        SetVertexFormat(bool bModulate, u8 texCoordNum);
+            void SetVertexFormat(bool bModulate, u8 texCoordNum);
 
-            void        DrawQuad(const math::VEC2& basePt, const Size& size, u8 texCoordNum, const TexCoords* texCoords, const ut::Color* vtxColors);
-            void        DrawQuad(const math::VEC2& basePt, const Size& size, u8 texCoordNum, const TexCoords* texCoords, const ut::Color* vtxColors, u8 alpha);
+            void DrawQuad(const math::VEC2& basePt, const Size& size, u8 texCoordNum, const TexCoords* texCoords, const ut::Color* vtxColors);
+            void DrawQuad(const math::VEC2& basePt, const Size& size, u8 texCoordNum, const TexCoords* texCoords, const ut::Color* vtxColors,
+                          u8 alpha);
 
-            void        DrawLine(const math::VEC2& pos, const Size& size, ut::Color color);
+            void DrawLine(const math::VEC2& pos, const Size& size, ut::Color color);
 
-            void        InitGXTexObjFromTPL(GXTexObj* to, TPLPalette* pal, u32 id);
+            void InitGXTexObjFromTPL(GXTexObj* to, TPLPalette* pal, u32 id);
 
             inline s32 GetSignatureInt(const char* sig) {
                 return *reinterpret_cast<const s32*>(sig);
@@ -92,14 +94,14 @@ namespace nw4r {
             }
 
             inline void SetHorizontalPosition(u8* pVar, u8 newVal) {
-                *pVar = GetVerticalPosition(*pVar) * HORIZONTALPOSITION_MAX  + newVal;
+                *pVar = GetVerticalPosition(*pVar) * HORIZONTALPOSITION_MAX + newVal;
             }
 
             inline void SetVerticalPosition(u8* pVar, u8 newVal) {
-                *pVar = newVal * VERTICALPOSITION_MAX  + GetHorizontalPosition(*pVar);
+                *pVar = newVal * VERTICALPOSITION_MAX + GetHorizontalPosition(*pVar);
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace lyt
+}  // namespace nw4r
 
-#endif // NW4R_LYT_ARC_RESOURCE_ACCESSOR_H
+#endif  // NW4R_LYT_ARC_RESOURCE_ACCESSOR_H

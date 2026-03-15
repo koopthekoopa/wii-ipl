@@ -12,6 +12,7 @@ namespace ipl {
         /* MAIN BUTTON */
         /* =========== */
 
+        // clang-format off
         static const u32 scBalloonMsg[SDButton::BALLOON_MAX] = {
             MESG_SD_BUTTON_WII_MENU,
             MESG_SD_BUTTON_HELP,
@@ -28,10 +29,9 @@ namespace ipl {
             "ArwR",
             "ArwL"
         };
+        // clang-format on
 
-        SDButton::SDButton(EGG::Heap* heap)
-        : Base(heap),
-        unk_0x54(0) {
+        SDButton::SDButton(EGG::Heap* heap) : Base(heap), unk_0x54(0) {
             setSceneParentFlags(SCN_PARENTFLAG_CALC | SCN_PARENTFLAG_DRAW);
 
             for (int i = 0; i < 2; i++) {
@@ -43,42 +43,43 @@ namespace ipl {
             mbEnabled = true;
         }
 
-        SDButton::~SDButton() {}
+        SDButton::~SDButton() {
+        }
 
         void SDButton::prepare() {
-            mpLayoutFile  = System::getNandManager()->readLayoutAsync(getSceneHeap(), "sdButton.ash");
+            mpLayoutFile = System::getNandManager()->readLayoutAsync(getSceneHeap(), "sdButton.ash");
             mpBalloonFile = System::getNandManager()->readLayoutAsync(getSceneHeap(), "balloon.ash");
         }
 
         void SDButton::create() {
             // Setup layout
             mpLayout = new layout::Object(getSceneHeap(), mpLayoutFile, "arc", "mn_SdcardMenu_b.brlyt");
-        
+
             // Bind button animatons
             mpLayout->bindToGroup("mn_SdcardMenu_b_Btn_Wiimenu_rollover.brlan", "G_BL", false);
-            mpLayout->bindToGroup("mn_SdcardMenu_b_Btn_Wiimenu_on.brlan",       "G_BL", false);
-            mpLayout->bindToGroup("mn_SdcardMenu_b_Btn_Wiimenu_rollout.brlan",  "G_BL", false);
+            mpLayout->bindToGroup("mn_SdcardMenu_b_Btn_Wiimenu_on.brlan", "G_BL", false);
+            mpLayout->bindToGroup("mn_SdcardMenu_b_Btn_Wiimenu_rollout.brlan", "G_BL", false);
 
             mpLayout->getAnim(ANIM_WIIMENU_BTN_ROLL_OVER)->initAnmFrame();
 
-            mpLayout->bindToGroup("mn_SdcardMenu_b_Btn_Help_rollover.brlan",    "G_BR", false);
-            mpLayout->bindToGroup("mn_SdcardMenu_b_Btn_Help_on.brlan",          "G_BR", false);
-            mpLayout->bindToGroup("mn_SdcardMenu_b_Btn_Help_rollout.brlan",     "G_BR", false);
+            mpLayout->bindToGroup("mn_SdcardMenu_b_Btn_Help_rollover.brlan", "G_BR", false);
+            mpLayout->bindToGroup("mn_SdcardMenu_b_Btn_Help_on.brlan", "G_BR", false);
+            mpLayout->bindToGroup("mn_SdcardMenu_b_Btn_Help_rollout.brlan", "G_BR", false);
 
             mpLayout->getAnim(ANIM_HELP_BTN_ROLL_OVER)->initAnmFrame();
 
             // Bind arrow animations
-            mpLayout->bindToGroup("mn_SdcardMenu_b_Arw_wating_roop.brlan",  "G_ArwRoop",    false);
-            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwL_on.brlan",          "G_ArwL_Ac",    false);
-            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwR_on.brlan",          "G_ArwR_Ac",    false);
-            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwL_rollover.brlan",    "G_ArwL_Focus", false);
-            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwR_rollover.brlan",    "G_ArwR_Focus", false);
-            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwL_rollout.brlan",     "G_ArwL_Focus", false);
-            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwR_rollout.brlan",     "G_ArwR_Focus", false);
-            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwL_in.brlan",          "G_ArwL_End",   false);
-            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwR_in.brlan",          "G_ArwR_End",   false);
-            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwL_out.brlan",         "G_ArwL_End",   false);
-            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwR_out.brlan",         "G_ArwR_End",   false);
+            mpLayout->bindToGroup("mn_SdcardMenu_b_Arw_wating_roop.brlan", "G_ArwRoop", false);
+            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwL_on.brlan", "G_ArwL_Ac", false);
+            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwR_on.brlan", "G_ArwR_Ac", false);
+            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwL_rollover.brlan", "G_ArwL_Focus", false);
+            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwR_rollover.brlan", "G_ArwR_Focus", false);
+            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwL_rollout.brlan", "G_ArwL_Focus", false);
+            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwR_rollout.brlan", "G_ArwR_Focus", false);
+            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwL_in.brlan", "G_ArwL_End", false);
+            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwR_in.brlan", "G_ArwR_End", false);
+            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwL_out.brlan", "G_ArwL_End", false);
+            mpLayout->bindToGroup("mn_SdcardMenu_b_ArwR_out.brlan", "G_ArwR_End", false);
 
             mpLayout->getAnim(ANIM_ARROW_LEFT_ROLL_OVER)->initAnmFrame();
             mpLayout->getAnim(ANIM_ARROW_RIGHT_ROLL_OVER)->initAnmFrame();
@@ -99,7 +100,8 @@ namespace ipl {
 
             // Setup text balloons
             for (int i = 0; i < BALLOON_MAX; i++) {
-                mpBalloons[i] = new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 120.0f, 30.0f);
+                mpBalloons[i] =
+                    new TextBalloon(getSceneHeap(), mpBalloonFile, "arc", "my_IplTopBalloon_a.brlyt", math::VEC3(0.0f, 0.0f, 0.0f), 120.0f, 30.0f);
                 mpBalloons[i]->init(System::getMessage(scBalloonMsg[i]), 0);
                 mpBalloons[i]->init_textbox(TRUE);
             }
@@ -196,10 +198,9 @@ namespace ipl {
 
         void SDButton::startPointEvent(const char* paneName, controller::Interface* con) {
             int btnNo = getButtonNo(paneName);
-            if (btnNo != -1
-            && (mbEnabled || btnNo == BTN_ARROW_RIGHT || btnNo == BTN_ARROW_LEFT)
-            && (btnNo != BTN_ARROW_RIGHT || mbArrowVisible[ARROW_BTN_RIGHT] == true)
-            && (btnNo != BTN_ARROW_LEFT || mbArrowVisible[ARROW_BTN_LEFT] == true)) {
+            if (btnNo != -1 && (mbEnabled || btnNo == BTN_ARROW_RIGHT || btnNo == BTN_ARROW_LEFT) &&
+                (btnNo != BTN_ARROW_RIGHT || mbArrowVisible[ARROW_BTN_RIGHT] == true) &&
+                (btnNo != BTN_ARROW_LEFT || mbArrowVisible[ARROW_BTN_LEFT] == true)) {
                 if (mbHovered[btnNo] == FALSE) {
                     layout::Animator* anim = NULL;
 
@@ -264,10 +265,9 @@ namespace ipl {
 
         void SDButton::startLeftEvent(const char* paneName) {
             int btnNo = getButtonNo(paneName);
-            if (btnNo != -1
-            && (mbEnabled || btnNo == BTN_ARROW_RIGHT || btnNo == BTN_ARROW_LEFT)
-            && (btnNo != BTN_ARROW_RIGHT || mbArrowVisible[ARROW_BTN_RIGHT] == true)
-            && (btnNo != BTN_ARROW_LEFT || mbArrowVisible[ARROW_BTN_LEFT] == true)) {
+            if (btnNo != -1 && (mbEnabled || btnNo == BTN_ARROW_RIGHT || btnNo == BTN_ARROW_LEFT) &&
+                (btnNo != BTN_ARROW_RIGHT || mbArrowVisible[ARROW_BTN_RIGHT] == true) &&
+                (btnNo != BTN_ARROW_LEFT || mbArrowVisible[ARROW_BTN_LEFT] == true)) {
                 layout::Animator* anim = NULL;
 
                 if (mbHovered[btnNo] == TRUE) {
@@ -401,8 +401,7 @@ namespace ipl {
                 case ARROW_BTN_RIGHT: {
                     if (bAppear) {
                         anim = mpLayout->getAnim(ANIM_ARROW_RIGHT_OUT);
-                    }
-                    else {
+                    } else {
                         anim = mpLayout->getAnim(ANIM_ARROW_RIGHT_IN);
                     }
                     break;
@@ -411,8 +410,7 @@ namespace ipl {
                 case ARROW_BTN_LEFT: {
                     if (bAppear) {
                         anim = mpLayout->getAnim(ANIM_ARROW_LEFT_OUT);
-                    }
-                    else {
+                    } else {
                         anim = mpLayout->getAnim(ANIM_ARROW_LEFT_IN);
                     }
                     break;
@@ -523,6 +521,7 @@ namespace ipl {
             onEventDerived(compId, event, static_cast<controller::Interface*>(data));
         }
 
-        void SDButtonEventHandlerBase::onEventDerived(u32 compId, u32 event, const controller::Interface* con) {}
-    }
-}
+        void SDButtonEventHandlerBase::onEventDerived(u32 compId, u32 event, const controller::Interface* con) {
+        }
+    }  // namespace scene
+}  // namespace ipl

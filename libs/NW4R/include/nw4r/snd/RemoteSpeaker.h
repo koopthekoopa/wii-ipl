@@ -3,74 +3,76 @@
 
 #include <nw4r/snd/types.h>
 
-#include <revolution/wpad.h>
-#include <revolution/wenc.h>
 #include <revolution/os/OSAlarm.h>
+#include <revolution/wenc.h>
+#include <revolution/wpad.h>
 
 namespace nw4r {
     namespace snd {
         class RemoteSpeaker {
-            public:
-                static const int SAMPLES_PER_AUDIO_PACKET = 40;
-                static const int SAMPLES_PER_ENCODED_PACKET = (SAMPLES_PER_AUDIO_PACKET + 1) / 2;
+        public:
+            static const int SAMPLES_PER_AUDIO_PACKET = 40;
+            static const int SAMPLES_PER_ENCODED_PACKET = (SAMPLES_PER_AUDIO_PACKET + 1) / 2;
 
-                RemoteSpeaker();
+            RemoteSpeaker();
 
-                void    InitParam();
-                void    ClearParam();
+            void InitParam();
+            void ClearParam();
 
-                void    Update(const s16* axRemoteSamples);
+            void Update(const s16* axRemoteSamples);
 
-                bool    IsAvailable() const         { return mRemoteInitFlag; }
-                void    SetChannelIndex(int index)  { mChannelIndex = index; }
+            bool IsAvailable() const { return mRemoteInitFlag; }
+            void SetChannelIndex(int index) { mChannelIndex = index; }
 
-            private:
-                typedef enum SpeakerState {
-                    STATE_INVALID,
-                    STATE_EXEC_SPEAKER_ON,
-                    STATE_SPEAKER_ON,
-                    STATE_EXEC_SPEAKER_PLAY,
-                    STATE_SPEAKER_PLAY,
-                    STATE_EXEC_SPEAKER_OFF,
-                    STATE_SPEAKER_OFF
-                } SpeakerState;
+        private:
+            // clang-format off
+            typedef enum SpeakerState {
+                STATE_INVALID,
+                STATE_EXEC_SPEAKER_ON,
+                STATE_SPEAKER_ON,
+                STATE_EXEC_SPEAKER_PLAY,
+                STATE_SPEAKER_PLAY,
+                STATE_EXEC_SPEAKER_OFF,
+                STATE_SPEAKER_OFF
+            } SpeakerState;
 
-                typedef enum SpeakerCommand {
-                    COMMAND_NONE,
-                    COMMAND_SPEAKER_ON,
-                    COMMAND_SPEAKER_PLAY,
-                    COMMAND_SPEAKER_OFF
-                } SpeakerCommand;
+            typedef enum SpeakerCommand {
+                COMMAND_NONE,
+                COMMAND_SPEAKER_ON,
+                COMMAND_SPEAKER_PLAY,
+                COMMAND_SPEAKER_OFF
+            } SpeakerCommand;
+            // clang-format on
 
-                bool        IsAllSampleZero(const s16* axRemoteSamples);
+            bool IsAllSampleZero(const s16* axRemoteSamples);
 
-                static const int CONTINUOUS_PLAY_INTERVAL_MINUTES = 8;
+            static const int CONTINUOUS_PLAY_INTERVAL_MINUTES = 8;
 
-                static void ContinueAlarmHandler(OSAlarm* alarm, OSContext* context);
-                static void IntervalAlarmHandler(OSAlarm* alarm, OSContext* context);
+            static void ContinueAlarmHandler(OSAlarm* alarm, OSContext* context);
+            static void IntervalAlarmHandler(OSAlarm* alarm, OSContext* context);
 
-                bool            mInitFlag;          // 0x00
-                bool            mRemoteInitFlag;    // 0x01
-                bool            mPlayFlag;          // 0x02
-                bool            mEnableFlag;        // 0x03
-                bool            mSetupBusyFlag;     // 0x04
-                bool            mFirstEncodeFlag;   // 0x05
-                bool            mForceResumeFlag;   // 0x06
-                bool            mContinueFlag;      // 0x07
-                bool            mIntervalFlag;      // 0x08
+            bool mInitFlag;         // 0x00
+            bool mRemoteInitFlag;   // 0x01
+            bool mPlayFlag;         // 0x02
+            bool mEnableFlag;       // 0x03
+            bool mSetupBusyFlag;    // 0x04
+            bool mFirstEncodeFlag;  // 0x05
+            bool mForceResumeFlag;  // 0x06
+            bool mContinueFlag;     // 0x07
+            bool mIntervalFlag;     // 0x08
 
-                WENCInfo        mEncodeInfo;        // 0x09
+            WENCInfo mEncodeInfo;  // 0x09
 
-                int             mChannelIndex;      // 0x2C
+            int mChannelIndex;  // 0x2C
 
-                WPADCallback    mSetupCallback;     // 0x30
+            WPADCallback mSetupCallback;  // 0x30
 
-                OSAlarm         mContinueAlarm;     // 0x38
-                OSAlarm         mInvervalAlarm;     // 0x68 
+            OSAlarm mContinueAlarm;  // 0x38
+            OSAlarm mInvervalAlarm;  // 0x68
 
-                OSTime          mContinueBeginTime; // 0x98
+            OSTime mContinueBeginTime;  // 0x98
         };
-    }
-}
+    }  // namespace snd
+}  // namespace nw4r
 
-#endif // NW4R_SND_REMOTE_SPEAKER_H
+#endif  // NW4R_SND_REMOTE_SPEAKER_H

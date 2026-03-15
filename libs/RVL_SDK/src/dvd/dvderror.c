@@ -1,21 +1,21 @@
 #include <revolution/os.h>
 
-#include <revolution/dvd.h>
 #include <private/dvd.h>
+#include <revolution/dvd.h>
 
-#include <revolution/nand.h>
 #include <private/nand.h>
+#include <revolution/nand.h>
 
-static BOOL                 ExistFlag = FALSE;
+static BOOL ExistFlag = FALSE;
 
-static NANDCommandBlock     NandCb;
-static NANDFileInfo         NandInfo;
+static NANDCommandBlock NandCb;
+static NANDFileInfo NandInfo;
 
-static DVDCommandCallback   Callback;
-static u32                  NextOffset;
+static DVDCommandCallback Callback;
+static u32 NextOffset;
 
-DVDErrorInfo                __ErrorInfo         ALIGN32;
-DVDErrorInfo                __FirstErrorInfo    ALIGN32;
+DVDErrorInfo __ErrorInfo ALIGN32;
+DVDErrorInfo __FirstErrorInfo ALIGN32;
 
 void cbForNandClose(s32 result, NANDCommandBlock* block) {
     if (Callback) {
@@ -38,8 +38,7 @@ void cbForNandSeek(s32 result, NANDCommandBlock* block) {
         if (NANDWriteAsync(&NandInfo, (void*)&__ErrorInfo, sizeof(__ErrorInfo), cbForNandWrite, &NandCb) != NAND_RESULT_OK) {
             cbForNandWrite(-1, NULL);
         }
-    }
-    else {
+    } else {
         if (Callback) {
             Callback(2, NULL);
         }
@@ -51,8 +50,7 @@ void cbForNandWrite0(s32 result, NANDCommandBlock* block) {
         if (NANDSeekAsync(&NandInfo, (sizeof(DVDErrorInfo) * (1 + NextOffset)), NAND_SEEK_BEG, cbForNandSeek, &NandCb) != NAND_RESULT_OK) {
             cbForNandSeek(-1, NULL);
         }
-    }
-    else {
+    } else {
         if (Callback) {
             Callback(2, NULL);
         }
@@ -66,8 +64,7 @@ void cbForNandSeek2(s32 result, NANDCommandBlock* block) {
         if (NANDWriteAsync(&NandInfo, (void*)&__FirstErrorInfo, sizeof(__FirstErrorInfo), cbForNandWrite0, &NandCb) != NAND_RESULT_OK) {
             cbForNandWrite0(-1, NULL);
         }
-    }
-    else {
+    } else {
         if (Callback) {
             Callback(2, NULL);
         }
@@ -81,8 +78,7 @@ void cbForNandRead(s32 result, NANDCommandBlock* block) {
         if (NANDSeekAsync(&NandInfo, sizeof(DVDErrorInfo), NAND_SEEK_BEG, cbForNandSeek2, &NandCb) != NAND_RESULT_OK) {
             cbForNandSeek2(-1, NULL);
         }
-    }
-    else {
+    } else {
         __ErrorInfo.nextOffset = 1;
         if (NANDWriteAsync(&NandInfo, (void*)&__ErrorInfo, sizeof(__ErrorInfo), cbForNandWrite, &NandCb) != NAND_RESULT_OK) {
             cbForNandWrite(-1, NULL);
@@ -98,8 +94,7 @@ void cbForNandSeek0(s32 result, NANDCommandBlock* block) {
         if (NANDWriteAsync(&NandInfo, (void*)&__FirstErrorInfo, sizeof(__FirstErrorInfo), cbForNandWrite0, &NandCb) != NAND_RESULT_OK) {
             cbForNandWrite0(-1, NULL);
         }
-    }
-    else {
+    } else {
         if (Callback) {
             Callback(2, NULL);
         }
@@ -111,8 +106,7 @@ void cbForNandSeek1(s32 result, NANDCommandBlock* block) {
         if (NANDReadAsync(&NandInfo, (void*)&__FirstErrorInfo, sizeof(__FirstErrorInfo), cbForNandRead, &NandCb) != NAND_RESULT_OK) {
             cbForNandRead(-1, NULL);
         }
-    }
-    else {
+    } else {
         if (NANDSeekAsync(&NandInfo, 0, 0, cbForNandSeek0, &NandCb) != NAND_RESULT_OK) {
             cbForNandSeek0(-1, NULL);
         }
@@ -125,16 +119,14 @@ void cbForNandOpen(s32 result, NANDCommandBlock* block) {
             if (NANDSeekAsync(&NandInfo, sizeof(DVDErrorInfo), NAND_SEEK_BEG, cbForNandSeek1, &NandCb) != NAND_RESULT_OK) {
                 cbForNandSeek1(-1, NULL);
             }
-        }
-        else {
+        } else {
             NextOffset = 0;
             __ErrorInfo.nextOffset = 1;
             if (NANDWriteAsync(&NandInfo, (void*)&__FirstErrorInfo, sizeof(__FirstErrorInfo), cbForNandWrite0, &NandCb) != NAND_RESULT_OK) {
                 cbForNandWrite0(-1, NULL);
             }
         }
-    }
-    else {
+    } else {
         if (Callback) {
             Callback(2, NULL);
         }
@@ -149,11 +141,10 @@ void cbForNandCreate(s32 result, NANDCommandBlock* block) {
 
         if (NANDPrivateOpenAsync("/shared2/test2/dvderror.dat", &NandInfo, NAND_ACCESS_RW, cbForNandOpen, &NandCb) != NAND_RESULT_OK) {
             if (Callback) {
-               Callback(2, NULL);
+                Callback(2, NULL);
             }
         }
-    }
-    else {
+    } else {
         if (Callback) {
             Callback(2, NULL);
         }
@@ -162,13 +153,12 @@ void cbForNandCreate(s32 result, NANDCommandBlock* block) {
 
 void cbForNandCreateDir(s32 result, NANDCommandBlock* block) {
     if (result == NAND_RESULT_OK || result == NAND_RESULT_EXISTS) {
-        if (NANDPrivateCreateAsync("/shared2/test2/dvderror.dat", NAND_PERM_ALL_RW, 0,  cbForNandCreate, &NandCb) != NAND_RESULT_OK) {
+        if (NANDPrivateCreateAsync("/shared2/test2/dvderror.dat", NAND_PERM_ALL_RW, 0, cbForNandCreate, &NandCb) != NAND_RESULT_OK) {
             if (Callback) {
                 Callback(2, NULL);
             }
         }
-    }
-    else {
+    } else {
         if (Callback) {
             Callback(2, NULL);
         }
@@ -178,8 +168,7 @@ void cbForNandCreateDir(s32 result, NANDCommandBlock* block) {
 void cbForPrepareStatusRegister(u32 intType) {
     if (intType == DVD_INTTYPE_TC) {
         __ErrorInfo.status = DVDLowGetStatusRegister();
-    }
-    else {
+    } else {
         __ErrorInfo.status = 0xFFFFFFFF;
     }
 

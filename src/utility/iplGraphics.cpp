@@ -8,11 +8,9 @@
 
 namespace ipl {
     namespace utility {
-        Graphics::Arg   Graphics::mArg;
+        Graphics::Arg Graphics::mArg;
 
-        Graphics::Arg::Arg() :
-        mOrthoTrans(0, 0, 0),
-        mOrthoScale(1, 1) {
+        Graphics::Arg::Arg() : mOrthoTrans(0, 0, 0), mOrthoScale(1, 1) {
             nw4r::math::MTX44Identity(&mProjMtx);
             nw4r::math::MTX34Identity(&mViewMtx);
         }
@@ -35,27 +33,20 @@ namespace ipl {
         }
 
         void Graphics::setOrthoProjection(const math::VEC3& translate, const math::VEC2& scale) {
-            nw4r::ut::Rect  projRect(0, 0, 0, 0);
+            nw4r::ut::Rect projRect(0, 0, 0, 0);
             System::getProjectionRect(&projRect);
 
-            f32 temp_f9 =  projRect.right / scale.x;
+            f32 temp_f9 = projRect.right / scale.x;
             f32 temp_f7 = projRect.left / scale.x;
-            MTXOrtho(mArg.mProjMtx,
-                translate.y - (projRect.top / scale.y),
-                translate.y - (projRect.bottom / scale.y),
-                translate.x + temp_f7,
-                translate.x + temp_f9,
-                -100.0f, 100.0f);
+            MTXOrtho(mArg.mProjMtx, translate.y - (projRect.top / scale.y), translate.y - (projRect.bottom / scale.y), translate.x + temp_f7,
+                     translate.x + temp_f9, -100.0f, 100.0f);
 
             GXSetProjection(mArg.mProjMtx, GX_ORTHOGRAPHIC);
         }
 
         void Graphics::setOrthoProjection(u32 id) {
             GXRenderModeObj* rMode = System::getRenderModeObj();
-            MTXOrtho(mArg.mProjMtx,
-                 rMode->efbHeight / 2, -rMode->efbHeight / 2,
-                -rMode->fbWidth   / 2,  rMode->fbWidth   / 2,
-                -100.0f, 100.0f);
+            MTXOrtho(mArg.mProjMtx, rMode->efbHeight / 2, -rMode->efbHeight / 2, -rMode->fbWidth / 2, rMode->fbWidth / 2, -100.0f, 100.0f);
             GXSetProjection(mArg.mProjMtx, GX_ORTHOGRAPHIC);
 
             calcOrthoCamera();
@@ -71,12 +62,12 @@ namespace ipl {
             GXSetCurrentMtx(id);
         }
 
-        void Graphics::drawPolygon(const nw4r::ut::Rect &rect, GXColor color) {
+        void Graphics::drawPolygon(const nw4r::ut::Rect& rect, GXColor color) {
             GXClearVtxDesc();
 
             GXInvalidateVtxCache();
             GXInvalidateTexAll();
-                
+
             GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
             GXSetVtxDesc(GX_VA_CLR0, GX_DIRECT);
 
@@ -109,7 +100,8 @@ namespace ipl {
 
             GXSetTevColor(GX_TEVREG0, color);
 
-            GXBegin(GX_QUADS, GX_VTXFMT0, 4); {
+            GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+            {
                 GXPosition3f32(rect.left, rect.top, 0.0f);
                 GXColor4u8(255, 255, 255, 255);
                 GXPosition3f32(rect.left, rect.bottom, 0.0f);
@@ -118,14 +110,15 @@ namespace ipl {
                 GXColor4u8(255, 255, 255, 255);
                 GXPosition3f32(rect.right, rect.top, 0.0f);
                 GXColor4u8(255, 255, 255, 255);
-            } GXEnd();
+            }
+            GXEnd();
         }
 
-        void Graphics::drawTexture(const nw4r::ut::Rect &rect, const GXTexObj& texObj, GXColor color, u8 texScale, Orientation ori) {
-            u8 leftTop_x,     leftTop_y;
-            u8 leftBottom_x,  leftBottom_y;
+        void Graphics::drawTexture(const nw4r::ut::Rect& rect, const GXTexObj& texObj, GXColor color, u8 texScale, Orientation ori) {
+            u8 leftTop_x, leftTop_y;
+            u8 leftBottom_x, leftBottom_y;
             u8 rightBottom_x, rightBottom_y;
-            u8 rightTop_x,    rightTop_y;
+            u8 rightTop_x, rightTop_y;
 
             switch (ori) {
                 case ORI_NONE: {
@@ -201,7 +194,8 @@ namespace ipl {
 
             GXSetTevColor(GX_TEVREG0, color);
 
-            GXBegin(GX_QUADS, GX_VTXFMT0, 4); {
+            GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+            {
                 GXPosition3f32(rect.left, rect.top, 0.0f);
                 GXTexCoord2u8(leftTop_x, leftTop_y);
                 GXPosition3f32(rect.left, rect.bottom, 0.0f);
@@ -210,7 +204,8 @@ namespace ipl {
                 GXTexCoord2u8(rightBottom_x, rightBottom_y);
                 GXPosition3f32(rect.right, rect.top, 0.0f);
                 GXTexCoord2u8(rightTop_x, rightTop_y);
-            } GXEnd();
+            }
+            GXEnd();
         }
-    }
-}
+    }  // namespace utility
+}  // namespace ipl

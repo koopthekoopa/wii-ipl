@@ -25,39 +25,35 @@ void CXUncompressLZ(const void* src, void* dst) {
 
     while (size) {
         u32 i;
-        u32 flags =* pSrc++;
+        u32 flags = *pSrc++;
 
         for (i = 0; i < 8; ++i) {
             if (!(flags & 0x80)) {
-                *pDst++ =* pSrc++;
+                *pDst++ = *pSrc++;
                 size--;
-            }
-            else {
-                s32 length =* pSrc >> 4;
+            } else {
+                s32 length = *pSrc >> 4;
                 s32 offset;
 
                 if (!stat) {
                     length += 3;
-                }
-                else {
+                } else {
                     if (length == 0x01) {
                         length = (*pSrc++ & 0x0F) << 12;
-                        length |=* pSrc++ << 4;
-                        length |=* pSrc >> 4;
+                        length |= *pSrc++ << 4;
+                        length |= *pSrc >> 4;
                         length += 0x111;
-                    }
-                    else if (length == 0x00) {
+                    } else if (length == 0x00) {
                         length = (*pSrc++ & 0x0F) << 4;
-                        length |=* pSrc >> 4;
+                        length |= *pSrc >> 4;
                         length += 0x11;
-                    }
-                    else {
+                    } else {
                         length += 0x01;
                     }
                 }
 
                 offset = (*pSrc++ & 0x0F) << 8;
-                offset = (offset |* pSrc++) + 1;
+                offset = (offset | *pSrc++) + 1;
 
                 if (length > size) {
                     length = size;

@@ -6,17 +6,17 @@
 
 #include <cstdio>
 
-#define HEAP_BUFFER_SIZE    0x4000
+#define HEAP_BUFFER_SIZE 0x4000
 
 namespace ipl {
     namespace socket {
-        char             SocketSetting::mMac[64];
+        char SocketSetting::mMac[64];
 
-        MEMHeapHandle    SocketSetting::mpHeap;
-        void*            SocketSetting::mpHeapBuf;
+        MEMHeapHandle SocketSetting::mpHeap;
+        void* SocketSetting::mpHeapBuf;
 
-        u8               SocketSetting::mMacAddr[NCD_MAC_ADDRESS_LENGTH];
-        bool             SocketSetting::isMacAddr;
+        u8 SocketSetting::mMacAddr[NCD_MAC_ADDRESS_LENGTH];
+        bool SocketSetting::isMacAddr;
 
         const char* SocketSetting::getLANMacAddrUtf8() {
             if (!isMacAddr) {
@@ -68,8 +68,7 @@ namespace ipl {
         }
 
         void SocketSetting::convertLANMacAddr() {
-            sprintf(mMac, "%02x-%02x-%02x-%02x-%02x-%02x",
-                            mMacAddr[0], mMacAddr[1], mMacAddr[2], mMacAddr[3], mMacAddr[4], mMacAddr[5]);
+            sprintf(mMac, "%02x-%02x-%02x-%02x-%02x-%02x", mMacAddr[0], mMacAddr[1], mMacAddr[2], mMacAddr[3], mMacAddr[4], mMacAddr[5]);
         }
 
         void SocketSetting::obtainLANMacAddr(void* work) {
@@ -129,5 +128,5 @@ namespace ipl {
             memset(macAddr, 0, NCD_MAC_ADDRESS_LENGTH);
             return !(memcmp(mMacAddr, macAddr, NCD_MAC_ADDRESS_LENGTH) == 0);
         }
-    }
-}
+    }  // namespace socket
+}  // namespace ipl

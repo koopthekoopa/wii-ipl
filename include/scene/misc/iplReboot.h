@@ -5,19 +5,17 @@
 
 namespace ipl {
     namespace scene {
-        enum {
-            REBOOT_DATA_MANAGEMENT = 0,
-            REBOOT_SETTINGS
-        };
+        enum { REBOOT_DATA_MANAGEMENT = 0, REBOOT_SETTINGS };
         SCENE_CLASS(Reboot) {
-            public:
-                Reboot(EGG::Heap* heap, int settingsType) : Base(heap), mSettingsType(settingsType) {}
-                virtual void    calc();
-            
-            private:
-                int     mSettingsType;
-        };
-    }
-}
+        public:
+            Reboot(EGG::Heap * heap, int settingsType) : Base(heap), mSettingsType(settingsType) {
+            }
+            virtual void calc();
 
-#endif // IPL_REBOOT_H
+        private:
+            int mSettingsType;
+        };
+    }  // namespace scene
+}  // namespace ipl
+
+#endif  // IPL_REBOOT_H

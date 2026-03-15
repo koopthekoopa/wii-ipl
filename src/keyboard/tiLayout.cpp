@@ -18,7 +18,8 @@ namespace textinput {
                 const u32* fileNameOffsets = nw4r::lyt::detail::ConvertOffsToPtr<u32>(mpRes, sizeof(*mpRes));
 
                 for (int i = 0; i < mpRes->fileNum; i++) {
-                    mpFileResAry[i] = pResAccessor->GetResource(nw4r::lyt::RESOURCE_TYPE_TEXTURE, nw4r::lyt::detail::GetStrTableStr(fileNameOffsets, i), NULL);
+                    mpFileResAry[i] =
+                        pResAccessor->GetResource(nw4r::lyt::RESOURCE_TYPE_TEXTURE, nw4r::lyt::detail::GetStrTableStr(fileNameOffsets, i), NULL);
                 }
             }
         }
@@ -33,14 +34,14 @@ namespace textinput {
 
         const u32* animContOffsets = nw4r::lyt::detail::ConvertOffsToPtr<u32>(mpRes, mpRes->animContOffsetsOffset);
         for (u16 i = 0; i < mpRes->animContNum; i++) {
-            const nw4r::lyt::res::AnimationContent* cnt = nw4r::lyt::detail::ConvertOffsToPtr<nw4r::lyt::res::AnimationContent>(mpRes, animContOffsets[i]);
+            const nw4r::lyt::res::AnimationContent* cnt =
+                nw4r::lyt::detail::ConvertOffsToPtr<nw4r::lyt::res::AnimationContent>(mpRes, animContOffsets[i]);
 
             if (cnt->type == nw4r::lyt::res::AnimationContent::ANIMTYPE_PANE) {
                 if (strncmp(cnt->name, name, 17) == 0) {
                     count++;
                 }
-            }
-            else {
+            } else {
                 if (strncmp(cnt->name, name, 17) == 0) {
                     count++;
                 }
@@ -70,8 +71,7 @@ namespace textinput {
 
         if (!bRecursive) {
             count = CountAnimForPane_(pane->GetName());
-        }
-        else {
+        } else {
             count = CountAnimForPane_(pane, true);
         }
 
@@ -79,20 +79,21 @@ namespace textinput {
 
         u32 linkSize = sizeof(nw4r::lyt::AnimationLink) * count;
         void* linkBuffer = nw4r::lyt::Layout::AllocMemory(linkSize);
-        
+
         mAnimLinkAry = static_cast<nw4r::lyt::AnimationLink*>(linkBuffer);
         mAnimLinkNum = count;
 
         memset(mAnimLinkAry, 0, linkSize);
         for (u16 i = 0; i < count; i++) {
-            new(&mAnimLinkAry[i]) nw4r::lyt::AnimationLink();
+            new (&mAnimLinkAry[i]) nw4r::lyt::AnimationLink();
         }
 
         const u32* animContOffsets = nw4r::lyt::detail::ConvertOffsToPtr<u32>(mpRes, mpRes->animContOffsetsOffset);
 
         int linkIdx = 0;
         for (u16 i = 0; i < mpRes->animContNum; i++) {
-            const nw4r::lyt::res::AnimationContent* animCont = nw4r::lyt::detail::ConvertOffsToPtr<nw4r::lyt::res::AnimationContent>(mpRes, animContOffsets[i]);
+            const nw4r::lyt::res::AnimationContent* animCont =
+                nw4r::lyt::detail::ConvertOffsToPtr<nw4r::lyt::res::AnimationContent>(mpRes, animContOffsets[i]);
 
             if (animCont->type == nw4r::lyt::res::AnimationContent::ANIMTYPE_PANE) {
                 nw4r::lyt::Pane* pFindPane = pane->FindPaneByName(animCont->name, bRecursive);
@@ -102,8 +103,7 @@ namespace textinput {
                     pFindPane->AddAnimationLink(&mAnimLinkAry[linkIdx]);
                     linkIdx++;
                 }
-            }
-            else {
+            } else {
                 nw4r::lyt::Material* pFindMat = pane->FindMaterialByName(animCont->name, bRecursive);
 
                 if (pFindMat != NULL) {
@@ -133,8 +133,8 @@ namespace textinput {
 
         memset(mAnimLinkAry, 0, linkSize);
         for (u16 i = 0; i < count; i++) {
-            for (u16 i = 0; i < count; i++) { // :(
-                new(&mAnimLinkAry[i]) nw4r::lyt::AnimationLink();
+            for (u16 i = 0; i < count; i++) {  // :(
+                new (&mAnimLinkAry[i]) nw4r::lyt::AnimationLink();
             }
         }
 
@@ -142,7 +142,8 @@ namespace textinput {
 
         int linkIdx = 0;
         for (u16 i = 0; i < mpRes->animContNum; i++) {
-            const nw4r::lyt::res::AnimationContent* animCont = nw4r::lyt::detail::ConvertOffsToPtr<nw4r::lyt::res::AnimationContent>(mpRes, animContOffsets[i]);
+            const nw4r::lyt::res::AnimationContent* animCont =
+                nw4r::lyt::detail::ConvertOffsToPtr<nw4r::lyt::res::AnimationContent>(mpRes, animContOffsets[i]);
 
             if (strncmp(animCont->name, name, 17) != 0) {
                 continue;
@@ -151,8 +152,7 @@ namespace textinput {
             mAnimLinkAry[linkIdx].SetAnimTransform(this, i);
             if (animCont->type == nw4r::lyt::res::AnimationContent::ANIMTYPE_PANE) {
                 pane->AddAnimationLink(&mAnimLinkAry[linkIdx]);
-            }
-            else {
+            } else {
                 pane->GetMaterial()->AddAnimationLink(&mAnimLinkAry[linkIdx]);
             }
 
@@ -168,7 +168,8 @@ namespace textinput {
         }
 
         const nw4r::lyt::res::AnimationBlock* animBlock = NULL;
-        const nw4r::lyt::res::DataBlockHeader* blockHeader = nw4r::lyt::detail::ConvertOffsToPtr<nw4r::lyt::res::DataBlockHeader>(header, header->headerSize);
+        const nw4r::lyt::res::DataBlockHeader* blockHeader =
+            nw4r::lyt::detail::ConvertOffsToPtr<nw4r::lyt::res::DataBlockHeader>(header, header->headerSize);
 
         nw4r::lyt::AnimTransform* ret = NULL;
 
@@ -185,17 +186,17 @@ namespace textinput {
                         case nw4r::lyt::res::AnimationInfo::ANIM_INFO_MATERIAL_COLOR:
                         case nw4r::lyt::res::AnimationInfo::ANIM_INFO_MATERIAL_TEXTURE_PATTERN:
                         case nw4r::lyt::res::AnimationInfo::ANIM_INFO_MATERIAL_TEXTURE_SRT:
-                        /*case nw4r::lyt::res::AnimationInfo::ANIM_INFO_MATERIAL_IND_TEX_SRT:*/ {
-                            void* mem = nw4r::lyt::Layout::AllocMemory(sizeof(AnimTransformPane));
-                            AnimTransformPane* animTrans = new(mem) AnimTransformPane();
+                            /*case nw4r::lyt::res::AnimationInfo::ANIM_INFO_MATERIAL_IND_TEX_SRT:*/ {
+                                void* mem = nw4r::lyt::Layout::AllocMemory(sizeof(AnimTransformPane));
+                                AnimTransformPane* animTrans = new (mem) AnimTransformPane();
 
-                            if (animTrans != NULL) {
-                                animBlock = reinterpret_cast<const nw4r::lyt::res::AnimationBlock*>(blockHeader);
-                                animTrans->SetResource(animBlock, pResAcsr);
+                                if (animTrans != NULL) {
+                                    animBlock = reinterpret_cast<const nw4r::lyt::res::AnimationBlock*>(blockHeader);
+                                    animTrans->SetResource(animBlock, pResAcsr);
 
-                                ret = animTrans;
+                                    ret = animTrans;
+                                }
                             }
-                        }
                     }
 
                     if (ret) {
@@ -224,7 +225,8 @@ namespace textinput {
         while (pane != mpRootPane && parent != NULL) {
             if (&parent->GetChildList().GetBack() != pane) {
                 nw4r::lyt::PaneList::Iterator it;
-                for (it = parent->GetChildList().GetBeginIter(); &*it != pane; ++it) {}
+                for (it = parent->GetChildList().GetBeginIter(); &*it != pane; ++it) {
+                }
                 it++;
 
                 return PaneAccessor(mpRootPane, &*it);
@@ -236,4 +238,4 @@ namespace textinput {
 
         return PaneAccessor(mpRootPane, NULL);
     }
-}
+}  // namespace textinput

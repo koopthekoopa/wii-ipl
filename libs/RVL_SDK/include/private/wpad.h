@@ -3,8 +3,8 @@
 
 #include <revolution/types.h>
 
-#include <private/wpad/WPADInternal.h>
 #include <private/wpad/WPADHIDParser.h>
+#include <private/wpad/WPADInternal.h>
 #include <private/wpad/WPADMem.h>
 
-#endif // PRIVATE_WPAD_H
+#endif  // PRIVATE_WPAD_H

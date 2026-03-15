@@ -5,11 +5,11 @@
 
 namespace homebutton {
 
-    GroupAnmController::GroupAnmController() :
-    mpGroup(),
-    mpAnimGroup() {}
+    GroupAnmController::GroupAnmController() : mpGroup(), mpAnimGroup() {
+    }
 
-    GroupAnmController::~GroupAnmController() {}
+    GroupAnmController::~GroupAnmController() {
+    }
 
     void GroupAnmController::do_calc() {
         bool enable;
@@ -19,8 +19,7 @@ namespace homebutton {
             enable = true;
 
             mpAnimGroup->SetFrame(mFrame);
-        }
-        else {
+        } else {
             enable = false;
         }
 
@@ -30,4 +29,4 @@ namespace homebutton {
             it->mTarget->SetAnimationEnable(mpAnimGroup, enable, false);
         }
     }
-}
+}  // namespace homebutton

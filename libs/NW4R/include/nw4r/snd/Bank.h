@@ -9,20 +9,20 @@ namespace nw4r {
         namespace detail {
             class Channel;
             class Bank {
-                public:
-                    explicit Bank(const void* bankData);
-                    ~Bank();
+            public:
+                explicit Bank(const void* bankData);
+                ~Bank();
 
-                    Channel*    NoteOn(const NoteOnInfo& noteOnInfo) const;
+                Channel* NoteOn(const NoteOnInfo& noteOnInfo) const;
 
-                    void        SetWaveDataAddress(const void* waveData)    { mWaveDataAddress = waveData; }
+                void SetWaveDataAddress(const void* waveData) { mWaveDataAddress = waveData; }
 
-                private:
-                    BankFileReader  mBankReader;        // 0x00
-                    const void*     mWaveDataAddress;   // 0x0C
+            private:
+                BankFileReader mBankReader;    // 0x00
+                const void* mWaveDataAddress;  // 0x0C
             };
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r
 
-#endif // NW4R_SND_BANK_H
+#endif  // NW4R_SND_BANK_H

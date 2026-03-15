@@ -5,7 +5,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif // __cplusplus
+#endif  // __cplusplus
 
 int Rvl_decode(u8* out, u8* in);
 int Rvl_decode_szs(u8* out, u8* in);
@@ -27,6 +27,6 @@ static int Rvl_decode_ash_size(const u8* in) {
 
 #ifdef __cplusplus
 }
-#endif // __cplusplus
+#endif  // __cplusplus
 
-#endif // RVL_DECODER_H
+#endif  // RVL_DECODER_H

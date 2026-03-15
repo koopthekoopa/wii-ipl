@@ -2,9 +2,8 @@
 
 namespace ipl {
     namespace utility {
-        Tree::Tree() :
-        mpParent(), mpChild(),
-        mpNext(),   mpPrev() {}
+        Tree::Tree() : mpParent(), mpChild(), mpNext(), mpPrev() {
+        }
 
         void Tree::attach(Tree* tree) {
             Tree* child = mpChild;
@@ -12,8 +11,7 @@ namespace ipl {
             if (child == empty()) {
                 mpChild = tree;
                 tree->mpParent = this;
-            }
-            else {
+            } else {
                 while (child->mpNext != empty()) {
                     child = child->mpNext;
                 }
@@ -48,5 +46,5 @@ namespace ipl {
                 mpPrev->mpNext = mpNext;
             }
         }
-    }
-}
+    }  // namespace utility
+}  // namespace ipl

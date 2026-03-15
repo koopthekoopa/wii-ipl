@@ -5,11 +5,11 @@
 
 #include <cstring>
 
-#define MINIMUM_GLOBAL_NAND_BLOCKS  3592 /* 449 data management blocks */
-#define MINIMUM_GLOBAL_NAND_INODES  128
+#define MINIMUM_GLOBAL_NAND_BLOCKS 3592 /* 449 data management blocks */
+#define MINIMUM_GLOBAL_NAND_INODES 128
 
-#define REQUIRED_BOOT_NAND_BLOCKS   3584 /* 448 data management blocks */
-#define REQUIRED_BOOT_NAND_INODES   96
+#define REQUIRED_BOOT_NAND_BLOCKS 3584 /* 448 data management blocks */
+#define REQUIRED_BOOT_NAND_INODES 96
 
 namespace ipl {
     namespace nandwall {
@@ -43,8 +43,7 @@ namespace ipl {
             // Check if NAND is full
             if (!isNandCapacity()) {
                 System::setNandFull(true);
-            }
-            else {
+            } else {
                 System::setNandFull(false);
             }
         }
@@ -56,9 +55,8 @@ namespace ipl {
             if (user_used_fsblocks <= NAND_MAX_USER_BLOCKS && user_used_inodes <= NAND_MAX_USER_INODES &&
                 global_free_fsblock >= MINIMUM_GLOBAL_NAND_BLOCKS && global_free_inode >= MINIMUM_GLOBAL_NAND_INODES) {
                 return TRUE;  // We have enough free space!
-            }
-            else {
-                return FALSE; // We do not have enough free space!
+            } else {
+                return FALSE;  // We do not have enough free space!
             }
         }
 
@@ -68,7 +66,7 @@ namespace ipl {
             u32 used = status->usedBlocks;
             u32 exclude = bad + reserved + NAND_CRITICAL_BLOCKS;
 
-            *freeINodes = (NAND_MAX_INODES) - status->usedInodes;
+            *freeINodes = (NAND_MAX_INODES)-status->usedInodes;
             *freeBlocks = (NAND_MAX_BLOCKS - exclude) - status->usedBlocks;
         }
 
@@ -89,14 +87,13 @@ namespace ipl {
             // Exclude the amount of blocks used in the "tmp" folder
             freeBlocks += excludedBlocks;
             freeINodes += excludedINodes - 1;
-            
+
             // Check if we have enough to boot an application
             if (freeBlocks >= REQUIRED_BOOT_NAND_BLOCKS && freeINodes >= REQUIRED_BOOT_NAND_INODES) {
                 return TRUE;
-            }
-            else {
+            } else {
                 return FALSE;
             }
         }
-    }
-}
+    }  // namespace nandwall
+}  // namespace ipl

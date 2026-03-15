@@ -13,5 +13,3 @@ void __DSP_debug_printf(const char* format, ...) {
     va_end(list);
 #endif
 }
-
-

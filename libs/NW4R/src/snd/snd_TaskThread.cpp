@@ -1,5 +1,5 @@
-#include <nw4r/snd/TaskThread.h>
 #include <nw4r/snd/TaskManager.h>
+#include <nw4r/snd/TaskThread.h>
 
 namespace nw4r {
     namespace snd {
@@ -18,10 +18,8 @@ namespace nw4r {
 
                 OSInitThreadQueue(&mThreadQueue);
 
-                BOOL result = OSCreateThread(&mThread, ThreadFunc, &GetInstance(),
-                                            mThreadStack + THREAD_STACK_SIZE,
-                                            THREAD_STACK_SIZE * 8,
-                                            threadPrio, 0);
+                BOOL result =
+                    OSCreateThread(&mThread, ThreadFunc, &GetInstance(), mThreadStack + THREAD_STACK_SIZE, THREAD_STACK_SIZE * 8, threadPrio, 0);
                 if (result) {
                     OSResumeThread(&mThread);
                 }
@@ -50,12 +48,11 @@ namespace nw4r {
 
                     if (reinterpret_cast<u32>(msg) == MSG_EXECUTE) {
                         TaskManager::GetInstance().Execute();
-                    }
-                    else if (reinterpret_cast<u32>(msg) == MSG_DONE) {
+                    } else if (reinterpret_cast<u32>(msg) == MSG_DONE) {
                         return;
                     }
                 }
             }
-        }
-    }
-}
+        }  // namespace detail
+    }  // namespace snd
+}  // namespace nw4r

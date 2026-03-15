@@ -3,15 +3,12 @@
 const u32 __EXIFreq = EXI_FREQ_16MHZ;
 
 static inline u32 __EXISwap32(u32 val) {
-    return (val >> 24 & 0x000000FF)
-         | (val >> 8 & 0x0000FF00)
-         | (val << 8 & 0x00FF0000)
-         | (val << 24 & 0xFF000000);
+    return (val >> 24 & 0x000000FF) | (val >> 8 & 0x0000FF00) | (val << 8 & 0x00FF0000) | (val << 24 & 0xFF000000);
 }
 
 BOOL EXIWriteReg(s32 chan, u32 dev, u32 exiCmd, void* reg, s32 size) {
     BOOL ret = FALSE;
-    u32  reg32;
+    u32 reg32;
 
     switch (size) {
         case 1: {

@@ -1,7 +1,7 @@
-#include <revolution/card.h>
 #include <private/card.h>
+#include <revolution/card.h>
 
-#define OFFSET(addr, align) (((u32)(addr) & ((align)-1)))
+#define OFFSET(addr, align) (((u32)(addr) & ((align) - 1)))
 
 static void WriteCallback(s32 chan, s32 result);
 static void EraseCallback(s32 chan, s32 result);
@@ -25,13 +25,12 @@ static void WriteCallback(s32 chan, s32 result) {
         if (fileInfo->length <= 0) {
             dir = __CARDGetDirBlock(card);
             ent = dir + fileInfo->fileNo;
-            ent->time = OSGetTime()/(__OSBusClock/4);
+            ent->time = OSGetTime() / (__OSBusClock / 4);
             callback = card->apiCallback;
             card->apiCallback = NULL;
             result = __CARDUpdateDir(chan, callback);
             goto check;
-        }
-        else {
+        } else {
             fat = __CARDGetFatBlock(card);
             fileInfo->offset += card->sectorSize;
             fileInfo->iBlock = fat[fileInfo->iBlock];
@@ -40,14 +39,13 @@ static void WriteCallback(s32 chan, s32 result) {
                 goto after;
             }
             result = __CARDEraseSector(chan, card->sectorSize * fileInfo->iBlock, EraseCallback);
-check:
+        check:
             if (result < 0) {
                 goto after;
             }
         }
-    }
-    else {
-after:
+    } else {
+    after:
         callback = card->apiCallback;
         card->apiCallback = NULL;
         __CARDPutControlBlock(card, result);
@@ -67,9 +65,8 @@ static void EraseCallback(s32 chan, s32 result) {
         if (result < 0) {
             goto after;
         }
-    }
-    else {
-after:
+    } else {
+    after:
         callback = card->apiCallback;
         card->apiCallback = NULL;
         __CARDPutControlBlock(card, result);

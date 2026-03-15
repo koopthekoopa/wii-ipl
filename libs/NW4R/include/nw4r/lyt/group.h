@@ -11,53 +11,53 @@ namespace nw4r {
     namespace lyt {
         namespace detail {
             typedef struct PaneLink {
-                ut::LinkListNode    mLink;
-                
-                Pane*               mTarget;    // 0x08
+                ut::LinkListNode mLink;
+
+                Pane* mTarget;  // 0x08
             } PaneLink;
-        }
+        }  // namespace detail
         typedef ut::LinkList<detail::PaneLink, offsetof(detail::PaneLink, mLink)> PaneLinkList;
-        
+
         class Group {
-            public:
-                Group();
-                Group(const res::Group* pResGroup, Pane* pRootPane);
-                virtual ~Group();
+        public:
+            Group();
+            Group(const res::Group* pResGroup, Pane* pRootPane);
+            virtual ~Group();
 
-                const char*     GetName() const         { return mName; }
-                bool            IsUserAllocated() const { return mbUserAllocated; }
+            const char* GetName() const { return mName; }
+            bool IsUserAllocated() const { return mbUserAllocated; }
 
-                PaneLinkList&   GetPaneList()           { return mPaneLinkList; };
+            PaneLinkList& GetPaneList() { return mPaneLinkList; };
 
-                void            Init();
-                void            AppendPane(Pane* pane);
+            void Init();
+            void AppendPane(Pane* pane);
 
-                ut::LinkListNode mLink; // 0x04
-                
-            private:
-                PaneLinkList    mPaneLinkList;      // 0x0C
-                char            mName[16];          // 0x18
-                
-                bool            mbUserAllocated;    // 0x29
+            ut::LinkListNode mLink;  // 0x04
 
-                u8              mPadding[2];        // 0x2A
+        private:
+            PaneLinkList mPaneLinkList;  // 0x0C
+            char mName[16];              // 0x18
+
+            bool mbUserAllocated;  // 0x29
+
+            u8 mPadding[2];  // 0x2A
         };
         typedef ut::LinkList<Group, offsetof(Group, mLink)> GroupList;
-        
+
         class GroupContainer {
-            public:
-                GroupContainer() {}
-                ~GroupContainer();
+        public:
+            GroupContainer() {}
+            ~GroupContainer();
 
-                GroupList&  GetGroupList()  { return mGroupList; }
+            GroupList& GetGroupList() { return mGroupList; }
 
-                void        AppendGroup(Group* pGroup);
-                Group*      FindGroupByName(const char* findName);
-            
-            protected:
-                GroupList   mGroupList; // 0x00
+            void AppendGroup(Group* pGroup);
+            Group* FindGroupByName(const char* findName);
+
+        protected:
+            GroupList mGroupList;  // 0x00
         };
-    }
-}
+    }  // namespace lyt
+}  // namespace nw4r
 
-#endif // NW4R_LYT_GROUP_H
+#endif  // NW4R_LYT_GROUP_H
