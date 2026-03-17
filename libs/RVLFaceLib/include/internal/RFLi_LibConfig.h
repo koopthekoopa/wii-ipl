@@ -13,10 +13,26 @@ extern "C" {
 // clang-format off
 
 /* Available builds:
-    20080218 (used)
-    20080306
+    20070609
+    20080218
+    20080306 (used)
 */
 #define RFL_BUILD   20080218
+
+/* CONFIGURATIONS
+    RFL_USE_ICON_CALLBACK - Enable callback after drawing icon
+    RFL_USE_MODEL_CALLBACK - Enable callback after creating character model
+    RFL_USE_COORDINATE_DATA - Enable coordinates data
+*/
+
+#if RFL_BUILD == 20080306
+#define RFL_USE_ICON_CALLBACK
+#define RFL_USE_MODEL_CALLBACK
+#define RFL_USE_COORDINATE_DATA
+#elif RFL_BUILD == 20070609
+#define RFL_USE_ICON_CALLBACK
+#define RFL_USE_COORDINATE_DATA
+#endif
 
 #ifndef KEEP_OLD_NULL
 #ifdef NULL

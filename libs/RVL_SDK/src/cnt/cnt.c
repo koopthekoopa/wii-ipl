@@ -169,14 +169,19 @@ s32 contentConvertPathToEntrynumDVD(CNTHandleDVD* cntHandle, const char* path) {
 
     const char* origPathPtr = path;
 
-    FSTEntry* FSTEntries;
+    FSTEntry* FstStart;
     u32 MaxEntryNum;
-    char* FSTStringStart;
+    char* FstStringStart;
 
     dirLookAt = cntHandle->currDir;
-    FSTEntries = DVDGetFSTLocation();
-    MaxEntryNum = FSTEntries[0].dir.next;
-    FSTStringStart = (char*)&(FSTEntries[MaxEntryNum]);
+
+    // from __DVDFSInit
+    FstStart = DVDGetFSTLocation();
+
+    // if (FstStart != NULL) {
+    MaxEntryNum = FstStart[0].dir.next;
+    FstStringStart = (char*)&(FstStart[MaxEntryNum]);
+    // }
 
     while (TRUE) {
         // End of path? Done!
@@ -197,13 +202,13 @@ s32 contentConvertPathToEntrynumDVD(CNTHandleDVD* cntHandle, const char* path) {
                     if (dirLookAt == cntHandle->rootDir) {
                         return -1;
                     }
-                    dirLookAt = FSTEntries[dirLookAt].dir.parent;
+                    dirLookAt = FstStart[dirLookAt].dir.parent;
                     path += 3;
                     continue;
                 }
                 // If the input path was literally just `../`, then return the parent.
                 else if (*(path + 2) == 0) {
-                    return FSTEntries[dirLookAt].dir.parent;
+                    return FstStart[dirLookAt].dir.parent;
                 }
             }
             // "." directory does nothing
@@ -217,6 +222,8 @@ s32 contentConvertPathToEntrynumDVD(CNTHandleDVD* cntHandle, const char* path) {
             }
         }
 
+        // No DVDLongFileName
+
         for (ptrPath = path; (*ptrPath != 0) && (*ptrPath != '/'); ptrPath++) {
         }
 
@@ -225,13 +232,14 @@ s32 contentConvertPathToEntrynumDVD(CNTHandleDVD* cntHandle, const char* path) {
 
         ptrPath = path;
 
-        for (i = dirLookAt + 1; i < FSTEntries[dirLookAt].dir.next; i = IS_ENTRY_DIR(FSTEntries, i) ? FSTEntries[i].dir.next : (i + 1)) {
+        for (i = dirLookAt + 1; i < FstStart[dirLookAt].dir.next; i = IS_ENTRY_DIR(FstStart, i) ? FstStart[i].dir.next : (i + 1)) {
         loop_back:
-            if (IS_ENTRY_DIR(FSTEntries, i) == FALSE && isDir == TRUE) {
+            // Skip directories
+            if (IS_ENTRY_DIR(FstStart, i) == FALSE && isDir == TRUE) {
                 continue;
             }
 
-            name = FSTStringStart + FILE_STRING_OFF(FSTEntries, i);
+            name = FstStringStart + FILE_STRING_OFF(FstStart, i);
 
             if (*name == '.' && *(name + 1) == 0) {
                 i++;
@@ -362,171 +370,94 @@ BOOL contentOpenDirNAND(CNTHandleNAND* cntFileInfo, const char* path, ARCDir* di
 }
 
 CNTError __CNTConvertErrorCode(s32 result) {
+    // clang-format off
     int errorMap[] = {
         // ES codes
-        ES_ERR_OK,
-        CNT_RESULT_OK,
-        -1001,
-        CNT_RESULT_UNKNOWN,
-        -1002,
-        CNT_RESULT_UNKNOWN,
-        -1003,
-        CNT_RESULT_UNKNOWN,
-        -1004,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_INVALID_PUB_KEY_TYPE,
-        CNT_RESULT_UNKNOWN,
-        -1006,
-        CNT_RESULT_UNKNOWN,
-        -1007,
-        CNT_RESULT_UNKNOWN,
-        -1008,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_FILE_READ_FAILED,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_FILE_WRITE_FAILED,
-        CNT_RESULT_UNKNOWN,
-        -1011,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_INVALID_SIGNATURE,
-        CNT_RESULT_UNKNOWN,
-        -1013,
-        CNT_RESULT_UNKNOWN,
-        -1014,
-        CNT_RESULT_UNKNOWN,
-        -1015,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_TMD_MAXFD,
-        CNT_RESULT_MAXFD,
-        ES_ERR_INVALID,
-        CNT_RESULT_INVALID,
-        -1018,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_INVALID_UNKNOWN,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_INVALID_DEVICE_ID,
-        CNT_RESULT_UNKNOWN,
-        -1021,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_INVALID_CONTENT_HASH,
-        CNT_RESULT_UNKNOWN,
-        -1023,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_MEMORY_ERROR,
-        CNT_RESULT_OUT_OF_MEMORY,
-        ES_ERR_NO_TMD_FILE_FOUND,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_TMD_INVALID_RIGHT,
-        CNT_RESULT_ACCESS,
-        ES_ERR_ISSUER_NOT_FOUND,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_TICKET_NOT_FOUND,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_INVALID_TICKET,
-        CNT_RESULT_UNKNOWN,
-        -1030,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_INVALID_BOOT2,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_UNKNOWN_FATAL,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_TICKET_EXPIRED,
-        CNT_RESULT_UNKNOWN,
-        -1034,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_INVALID_TITLE_VER,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_BAD_SYSMENU_TICKET,
-        CNT_RESULT_UNKNOWN,
-        ES_ERR_BAD_SYSMENU_CONTENTS,
-        CNT_RESULT_UNKNOWN,
-        -1038,
-        CNT_RESULT_UNKNOWN,
+        ES_ERR_OK,                      CNT_RESULT_OK, 
+        -1001,                          CNT_RESULT_UNKNOWN,
+        -1002,                          CNT_RESULT_UNKNOWN,
+        -1003,                          CNT_RESULT_UNKNOWN,
+        -1004,                          CNT_RESULT_UNKNOWN,
+        ES_ERR_INVALID_PUB_KEY_TYPE,    CNT_RESULT_UNKNOWN,
+        -1006,                          CNT_RESULT_UNKNOWN,
+        -1007,                          CNT_RESULT_UNKNOWN,
+        -1008,                          CNT_RESULT_UNKNOWN,
+        ES_ERR_FILE_READ_FAILED,        CNT_RESULT_UNKNOWN,
+        ES_ERR_FILE_WRITE_FAILED,       CNT_RESULT_UNKNOWN,
+        -1011,                          CNT_RESULT_UNKNOWN,
+        ES_ERR_INVALID_SIGNATURE,       CNT_RESULT_UNKNOWN,
+        -1013,                          CNT_RESULT_UNKNOWN,
+        -1014,                          CNT_RESULT_UNKNOWN,
+        -1015,                          CNT_RESULT_UNKNOWN,
+        ES_ERR_TMD_MAXFD,               CNT_RESULT_MAXFD,
+        ES_ERR_INVALID,                 CNT_RESULT_INVALID,
+        -1018,                          CNT_RESULT_UNKNOWN,
+        ES_ERR_INVALID_UNKNOWN,         CNT_RESULT_UNKNOWN,
+        ES_ERR_INVALID_DEVICE_ID,       CNT_RESULT_UNKNOWN,
+        -1021,                          CNT_RESULT_UNKNOWN,
+        ES_ERR_INVALID_CONTENT_HASH,    CNT_RESULT_UNKNOWN,
+        -1023,                          CNT_RESULT_UNKNOWN,
+        ES_ERR_MEMORY_ERROR,            CNT_RESULT_OUT_OF_MEMORY,
+        ES_ERR_NO_TMD_FILE_FOUND,       CNT_RESULT_UNKNOWN,
+        ES_ERR_TMD_INVALID_RIGHT,       CNT_RESULT_ACCESS,
+        ES_ERR_ISSUER_NOT_FOUND,        CNT_RESULT_UNKNOWN,
+        ES_ERR_TICKET_NOT_FOUND,        CNT_RESULT_UNKNOWN,
+        ES_ERR_INVALID_TICKET,          CNT_RESULT_UNKNOWN,
+        -1030,                          CNT_RESULT_UNKNOWN,
+        ES_ERR_INVALID_BOOT2,           CNT_RESULT_UNKNOWN,
+        ES_ERR_UNKNOWN_FATAL,           CNT_RESULT_UNKNOWN,
+        ES_ERR_TICKET_EXPIRED,          CNT_RESULT_UNKNOWN,
+        -1034,                          CNT_RESULT_UNKNOWN,
+        ES_ERR_INVALID_TITLE_VER,       CNT_RESULT_UNKNOWN,
+        ES_ERR_BAD_SYSMENU_TICKET,      CNT_RESULT_UNKNOWN,
+        ES_ERR_BAD_SYSMENU_CONTENTS,    CNT_RESULT_UNKNOWN,
+        -1038,                          CNT_RESULT_UNKNOWN,
 
         // FS codes
-        ISFS_ERROR_OK,
-        CNT_RESULT_OK,
-        ISFS_ERROR_ACCESS,
-        CNT_RESULT_ACCESS,
-        ISFS_ERROR_CORRUPT,
-        CNT_RESULT_CORRUPT,
-        ISFS_ERROR_ECC_CRIT,
-        CNT_RESULT_ECC_CRIT,
-        ISFS_ERROR_EXISTS,
-        CNT_RESULT_UNKNOWN,
-        ISFS_ERROR_AUTHENTICATION,
-        CNT_RESULT_AUTHENTICATION,
-        ISFS_ERROR_INVALID,
-        CNT_RESULT_INVALID,
-        ISFS_ERROR_MAXBLOCKS,
-        CNT_RESULT_UNKNOWN,
-        ISFS_ERROR_MAXFD,
-        CNT_RESULT_MAXFD,
-        ISFS_ERROR_MAXFILES,
-        CNT_RESULT_UNKNOWN,
-        ISFS_ERROR_NOEXISTS,
-        CNT_RESULT_INVALID,
-        ISFS_ERROR_NOTEMPTY,
-        CNT_RESULT_UNKNOWN,
-        ISFS_ERROR_NOTREADY,
-        CNT_RESULT_UNKNOWN,
-        ISFS_ERROR_OPENFD,
-        CNT_RESULT_UNKNOWN,
-        ISFS_ERROR_UNKNOWN,
-        CNT_RESULT_UNKNOWN,
-        ISFS_ERROR_BUSY,
-        CNT_RESULT_OUT_OF_MEMORY,  // ...?
-        ISFS_ERROR_SHUTDOWN,
-        CNT_RESULT_SHUTDOWN,
+        ISFS_ERROR_OK,                  CNT_RESULT_OK,
+        ISFS_ERROR_ACCESS,              CNT_RESULT_ACCESS,
+        ISFS_ERROR_CORRUPT,             CNT_RESULT_CORRUPT,
+        ISFS_ERROR_ECC_CRIT,            CNT_RESULT_ECC_CRIT,
+        ISFS_ERROR_EXISTS,              CNT_RESULT_UNKNOWN,
+        ISFS_ERROR_AUTHENTICATION,      CNT_RESULT_AUTHENTICATION,
+        ISFS_ERROR_INVALID,             CNT_RESULT_INVALID,
+        ISFS_ERROR_MAXBLOCKS,           CNT_RESULT_UNKNOWN,
+        ISFS_ERROR_MAXFD,               CNT_RESULT_MAXFD,
+        ISFS_ERROR_MAXFILES,            CNT_RESULT_UNKNOWN,
+        ISFS_ERROR_NOEXISTS,            CNT_RESULT_INVALID,
+        ISFS_ERROR_NOTEMPTY,            CNT_RESULT_UNKNOWN,
+        ISFS_ERROR_NOTREADY,            CNT_RESULT_UNKNOWN,
+        ISFS_ERROR_OPENFD,              CNT_RESULT_UNKNOWN,
+        ISFS_ERROR_UNKNOWN,             CNT_RESULT_UNKNOWN,
+        ISFS_ERROR_BUSY,                CNT_RESULT_OUT_OF_MEMORY, // ...?
+        ISFS_ERROR_SHUTDOWN,            CNT_RESULT_SHUTDOWN,
 
         // IPC codes
-        IPC_RESULT_ACCESS,
-        CNT_RESULT_ACCESS,
-        IPC_RESULT_EXISTS,
-        CNT_RESULT_UNKNOWN,
-        IPC_RESULT_INTR,
-        CNT_RESULT_UNKNOWN,
-        IPC_RESULT_INVALID,
-        CNT_RESULT_INVALID,
-        IPC_RESULT_MAX,
-        CNT_RESULT_UNKNOWN,
-        IPC_RESULT_NOEXISTS,
-        CNT_RESULT_INVALID,
-        IPC_RESULT_EMPTYQUEUE,
-        CNT_RESULT_UNKNOWN,
-        IPL_RESULT_FULLQUEUE,
-        CNT_RESULT_OUT_OF_MEMORY,
-        IPC_RESULT_UNKNOWN,
-        CNT_RESULT_UNKNOWN,
-        IPC_RESULT_NOTREADY,
-        CNT_RESULT_UNKNOWN,
-        IPC_RESULT_ECC,
-        CNT_RESULT_UNKNOWN,
-        IPC_RESULT_ECC_CRIT,
-        CNT_RESULT_ECC_CRIT,
-        IPC_RESULT_BADBLOCK,
-        CNT_RESULT_UNKNOWN,
-        IPC_RESULT_INVALID_OBJTYPE,
-        CNT_RESULT_UNKNOWN,
-        IPC_RESULT_INVALID_RNG,
-        CNT_RESULT_UNKNOWN,
-        IPC_RESULT_INVALID_FLAG,
-        CNT_RESULT_UNKNOWN,
-        IPC_RESULT_INVALID_FORMAT,
-        CNT_RESULT_UNKNOWN,
-        IPC_RESULT_INVALID_VERSION,
-        CNT_RESULT_UNKNOWN,
-        IPC_RESULT_INVALID_SIGNATURE,
-        CNT_RESULT_UNKNOWN,
-        IPC_RESULT_VERIFY_FAILED,
-        CNT_RESULT_UNKNOWN,
-        IPC_RESULT_INTERNAL_FAILURE,
-        CNT_RESULT_UNKNOWN,
-        IPC_RESULT_ALLOC_FAILED,
-        CNT_RESULT_OUT_OF_MEMORY,
-        IPC_RESULT_INVALID_SIZE,
-        CNT_RESULT_UNKNOWN,
+        IPC_RESULT_ACCESS,              CNT_RESULT_ACCESS,
+        IPC_RESULT_EXISTS,              CNT_RESULT_UNKNOWN,
+        IPC_RESULT_INTR,                CNT_RESULT_UNKNOWN,
+        IPC_RESULT_INVALID,             CNT_RESULT_INVALID,
+        IPC_RESULT_MAX,                 CNT_RESULT_UNKNOWN,
+        IPC_RESULT_NOEXISTS,            CNT_RESULT_INVALID,
+        IPC_RESULT_EMPTYQUEUE,          CNT_RESULT_UNKNOWN,
+        IPL_RESULT_FULLQUEUE,           CNT_RESULT_OUT_OF_MEMORY,
+        IPC_RESULT_UNKNOWN,             CNT_RESULT_UNKNOWN,
+        IPC_RESULT_NOTREADY,            CNT_RESULT_UNKNOWN,
+        IPC_RESULT_ECC,                 CNT_RESULT_UNKNOWN,
+        IPC_RESULT_ECC_CRIT,            CNT_RESULT_ECC_CRIT,
+        IPC_RESULT_BADBLOCK,            CNT_RESULT_UNKNOWN,
+        IPC_RESULT_INVALID_OBJTYPE,     CNT_RESULT_UNKNOWN,
+        IPC_RESULT_INVALID_RNG,         CNT_RESULT_UNKNOWN,
+        IPC_RESULT_INVALID_FLAG,        CNT_RESULT_UNKNOWN,
+        IPC_RESULT_INVALID_FORMAT,      CNT_RESULT_UNKNOWN,
+        IPC_RESULT_INVALID_VERSION,     CNT_RESULT_UNKNOWN,
+        IPC_RESULT_INVALID_SIGNATURE,   CNT_RESULT_UNKNOWN,
+        IPC_RESULT_VERIFY_FAILED,       CNT_RESULT_UNKNOWN,
+        IPC_RESULT_INTERNAL_FAILURE,    CNT_RESULT_UNKNOWN,
+        IPC_RESULT_ALLOC_FAILED,        CNT_RESULT_OUT_OF_MEMORY,
+        IPC_RESULT_INVALID_SIZE,        CNT_RESULT_UNKNOWN,
     };
+    // clang-format on
 
     int i = 0;
 

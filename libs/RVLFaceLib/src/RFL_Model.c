@@ -1321,8 +1321,8 @@ void RFLCopyCharModel(RFLCharModel* dstCharModel, void* dstBufferPtr, const RFLC
     PPCSync();
 }
 
-#if RFL_BUILD >= 20080306
+#ifdef RFL_USE_MODEL_CALLBACK
 void RFLSetModelDrawDoneCallback(RFLSimpleCB cb) {
     RFLiGetManager()->mCreateModelCB = cb;
 }
-#endif
+#endif  // RFL_USE_MODEL_CALLBACK

@@ -27,7 +27,7 @@ void RFLiClearDBBuffer() {
     RFLi_ASSERTLINE_NULL(database, 53);
 
     header = &database->hidden;
-    memset(&database->rawdata, 0, sizeof(RFLiDatabase));  // @BUG: 4 byte buffer overrun
+    memset(&database->rawdata, 0, sizeof(RFLiDatabase));  // @bug: 4 byte buffer overrun
 
     database->identifier = gcRFLDataBaseIdentifier;
     database->isolation = TRUE;

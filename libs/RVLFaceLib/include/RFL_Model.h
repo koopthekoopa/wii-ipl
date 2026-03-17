@@ -1,13 +1,13 @@
 #ifndef RFL_MODEL_H
 #define RFL_MODEL_H
 
+#include <internal/RFLi_LibConfig.h>
+
 #include <RFL_MiddleDatabase.h>
 #include <RFL_Types.h>
 
-
 #include <revolution/gx/GXEnum.h>
 #include <revolution/mtx.h>
-
 
 #ifdef __cplusplus
 extern "C" {
@@ -83,9 +83,9 @@ void RFLDrawXluCore(const RFLCharModel* charModel, const RFLDrawCoreSetting* set
 void RFLDrawShape(const RFLCharModel* charModel);
 void RFLCopyCharModel(RFLCharModel* dstCharModel, void* dstBufferPtr, const RFLCharModel* srcCharModel);
 
-#if RFL_BUILD >= 20080306
+#ifdef RFL_USE_MODEL_CALLBACK
 void RFLSetModelDrawDoneCallback(RFLSimpleCB cb);
-#endif
+#endif  // RFL_USE_MODEL_CALLBACK
 
 #ifdef __cplusplus
 }

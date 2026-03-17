@@ -166,7 +166,7 @@ BOOL RFLiIsSameFaceCore(const RFLiCharInfo* lhv, const RFLiCharInfo* rhv) {
     CHECK_PADMASK(eyebrow, 6, u32);
     CHECK_PADMASK(mouth, 0, u16);
     CHECK_PADMASK(beard, 0, u16);
-    CHECK_PADMASK(glass, 1, u16);  // @BUG There is no padding for glass (old version left over?)
+    CHECK_PADMASK(glass, 1, u16);  // @bug There is no padding for glass (old version left over?)
     CHECK_PADMASK(mole, 1, u16);
     CHECK_PADMASK(nose, 3, u16);
     CHECK_PADMASK(hair, 5, u16);
@@ -276,7 +276,7 @@ static void copyChar2Additional_(RFLAdditionalInfo* dst, const RFLiCharInfo* src
     dst->name[RFL_NAME_LENGTH] = 0;
 
     memcpy(dst->creator, src->personal.creator, RFL_NAME_LENGTH * sizeof(u16));
-    dst->name[RFL_NAME_LENGTH] = 0;  // @BUG Copy and paste error
+    dst->name[RFL_NAME_LENGTH] = 0;  // @bug Copy and paste error
 
     dst->gender = src->personal.sex;
 
@@ -294,7 +294,7 @@ static void copyChar2Additional_(RFLAdditionalInfo* dst, const RFLiCharInfo* src
     height = src->body.height;
     build = src->body.build;
 
-    // @BUG The max is not 127
+    // @bug The max is not 127
     if (height > RFLi_HEIGHT_MAX - 1) {
         height = RFLi_HEIGHT_MAX - 1;
     }

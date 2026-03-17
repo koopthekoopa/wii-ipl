@@ -516,7 +516,11 @@ static void writeHeaderCallback_() {
 }
 
 static void writeHeader_() {
+#if RFL_BUILD >= 20080218
     RFLiSaveOpenedDatabaseAsync(RFLiGetHDBManager()->writeCallback);
+#else
+    RFLiSaveDatabaseAsync(RFLiGetHDBManager()->writeCallback);
+#endif  // RFL_BUILD
 }
 
 static void writeData_(const RFLiHiddenCharData* data);
@@ -557,7 +561,7 @@ static void writeData_(const RFLiHiddenCharData* data) {
     s16 onhdb = -1;
     s16 target = getFirstBlank_();
 
-    offset;  // *sob* (for debug match)
+    (void)offset;  // *sob* (for debug match)
 
     onhdb = RFLiSearchHiddenData((RFLCreateID*)&data->createID);
 

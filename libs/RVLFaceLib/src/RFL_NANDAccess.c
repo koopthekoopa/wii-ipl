@@ -93,7 +93,7 @@ static void endWorkingCloseReason_(RFLErrcode errcode, s32 reason) {
     RFLiSetWorking(FALSE);
     if (errcode == RFLErrcode_Success) {
         RFLiGetManager()->mLastErrcode = RFLiGetManager()->mBeforeCloseErr;
-        RFLiGetManager()->mLastReason = RFLiGetManager()->mBeforeCloseErr;  // @BUG Should be mBeforeCloseReason
+        RFLiGetManager()->mLastReason = RFLiGetManager()->mBeforeCloseErr;  // @bug Should be mBeforeCloseReason
     } else {
         RFLiGetManager()->mLastErrcode = errcode;
         RFLiGetManager()->mLastReason = reason;

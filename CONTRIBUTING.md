@@ -61,7 +61,7 @@ nand::wrapper::Delete("cdb.vff");
 
 Despite the compiler that this project uses (CodeWarrior) has support for `#pragma once`, please use the standard way for header guards.
 
-```
+```cpp
 #ifndef {LIBRARY}_{NAME}_H
 #ifndef {LIBRARY}_{NAME}_H
 

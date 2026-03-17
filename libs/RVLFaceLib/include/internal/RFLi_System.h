@@ -10,7 +10,6 @@
 #include <internal/RFLi_NANDAccess.h>
 #include <internal/RFLi_NANDLoader.h>
 
-
 #include <internal/RFLi_Controller.h>
 
 #include <revolution/mem/heapCommon.h>
@@ -45,10 +44,13 @@ typedef struct {
     RFLiNANDAccessInfo mAccInfo[RFLiFileType_Max];  // 0x1B50
 
     RFLSimpleCB mSysCB;  // 0x1F10
-#if RFL_BUILD >= 20080306
-    RFLSimpleCB mDrawIconCB;     // 0x1F14
+#ifdef RFL_USE_ICON_CALLBACK
+    RFLSimpleCB mDrawIconCB;  // 0x1F14
+#endif                        // RFL_USE_ICON_CALLBACK
+
+#ifdef RFL_USE_MODEL_CALLBACK
     RFLSimpleCB mCreateModelCB;  // 0x1F18
-#endif                           // RFL_BUILD
+#endif                           // RFL_USE_MODEL_CALLBACK
 
     u8 macaddr[RFL_MAC_ADDR_LENGTH];  // 0x1F1C
 } RFLiSysManager;

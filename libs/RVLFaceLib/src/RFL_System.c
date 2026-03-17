@@ -15,6 +15,8 @@
 SDKDefineVersionDebug(RFL, "Mar  6 2008", "17:40:04", "17:39:52");
 #elif RFL_BUILD == 20080218
 SDKDefineVersion(RFL, "Feb 18 2008", "09:37:42");
+#elif RFL_BUILD == 20070609
+SDKDefineVersion(RFL, "Jun  9 2007", "17:25:33");
 #else
 #error "Unsupported version! Check RFLi_LibConfig.h"
 #endif  // RFL_BUILD
@@ -113,11 +115,15 @@ RFLErrcode RFLInitResAsync(void* workBuffer, void* resBuffer, u32 resSize, BOOL 
             RFLiGetManager()->mUseDeluxTex = useDeluxTex;
             RFLiGetManager()->mBrokenTypeList = FALSE;
 
-#if RFL_BUILD >= 20080306
-            // Prepare for icon and model callback
+#ifdef RFL_USE_ICON_CALLBACK
+            // Prepare for icon callback
             RFLSetIconDrawDoneCallback(FALSE);
+#endif  // RFL_USE_ICON_CALLBACK
+
+#ifdef RFL_USE_MODEL_CALLBACK
+            // Prepare for model callback
             RFLSetModelDrawDoneCallback(FALSE);
-#endif  // RFL_BUILD
+#endif  // RFL_USE_MODEL_CALLBACK
 
             RFLiSetWorking(FALSE);
 
@@ -128,7 +134,7 @@ RFLErrcode RFLInitResAsync(void* workBuffer, void* resBuffer, u32 resSize, BOOL 
             RFLiInitHiddenDatabase();
             RFLiInitAccessInfo(RFLiGetManager()->mSystemHeap);
 
-#if RFL_BUILD >= 20080306
+#ifdef RFL_USE_COORDINATE_DATA
             // Prepare coordinates
             RFLiSetCoordinateData(&scCoordinate);
 #endif  // RFL_BUILD

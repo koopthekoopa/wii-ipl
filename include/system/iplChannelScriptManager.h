@@ -18,16 +18,15 @@ namespace ipl {
     namespace channel {
         class ChannelScriptManager {
         public:
-            class CSData {
-            public:
-                EGG::ExpHeap* unk_0x00;
-                layout::Object* unk_0x04;
-                layout::Animator** unk_0x08;
-                u64 unk_0x10;
-                u8 unk_0x18;
-                u8 unk_0x19;
-                u8 unk_0x1A;
-            };
+            typedef struct CSData {
+                EGG::ExpHeap* heap;        // 0x00
+                layout::Object* layout;    // 0x04
+                layout::Animator** anims;  // 0x08
+                u64 titleId;               // 0x10
+                bool threadTerminated;     // 0x18
+                bool unk_0x19;
+                bool unk_0x1A;
+            } CSData;
 
             ChannelScriptManager();
 

@@ -179,12 +179,14 @@ void RFLiMakeIcon(void* buf, const RFLiCharInfo* info, RFLExpression expression,
 
     GXSetZMode(GX_TRUE, GX_LEQUAL, GX_TRUE);
     GXSetColorUpdate(GX_TRUE);
+
+    // is this part of the icon callback???
 #if RFL_BUILD < 20080306
     GXDrawDone();
 #endif
     GXCopyTex(buf, GX_TRUE);
 
-#if RFL_BUILD >= 20080306
+#ifdef RFL_USE_ICON_CALLBACK
     GXPixModeSync();
     if (RFLiGetManager()->mDrawIconCB == NULL) {
         GXDrawDone();
@@ -194,7 +196,7 @@ void RFLiMakeIcon(void* buf, const RFLiCharInfo* info, RFLExpression expression,
 #else
     GXDrawDone();
     GXPixModeSync();
-#endif  // RFL_BUILD
+#endif  // RFL_USE_ICON_CALLBACK
 
     RFLiFree(modelBuf);
 
@@ -204,8 +206,8 @@ void RFLiMakeIcon(void* buf, const RFLiCharInfo* info, RFLExpression expression,
     RFLiSetCoordinateData(&coordData);
 }
 
-#if RFL_BUILD >= 20080306
+#ifdef RFL_USE_ICON_CALLBACK
 void RFLSetIconDrawDoneCallback(RFLSimpleCB cb) {
     RFLiGetManager()->mDrawIconCB = cb;
 }
-#endif  // RFL_BUILD
+#endif  // RFL_USE_ICON_CALLBACK

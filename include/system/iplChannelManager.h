@@ -14,11 +14,9 @@
 #include "system/iplNandMeta.h"
 #include "system/iplNandShared.h"
 
-#define CHANNEL_INFO(primary, second, flags, titleId)                                                                                                \
-    { primary, second, 0, 0, flags, ES_TITLE_TYPE(titleId), ES_TITLE_CODE(titleId) }
+#define CHANNEL_INFO(primary, second, flags, titleId) {primary, second, 0, 0, flags, ES_TITLE_TYPE(titleId), ES_TITLE_CODE(titleId)}
 
-#define CHANNEL_INFO_NULL                                                                                                                            \
-    { 0, 0, 0, 0, 0, 0, 0 }
+#define CHANNEL_INFO_NULL {0, 0, 0, 0, 0, 0, 0}
 
 #define MAX_CHANNEL_COLUMN 3
 #define MAX_CHANNEL_ROW 4
@@ -49,6 +47,8 @@ namespace ipl {
             SCENE_ID_WAD_CHANNEL = 0x0E,  // ?
             SCENE_ID_DISK_CHANNEL = 0x0F,
         };
+
+        static const int MAX_ANIMS = 16;
 
         typedef struct SChannelInfo {
             inline void clear() {
@@ -89,11 +89,11 @@ namespace ipl {
                 DISK_BANNERDATA_SOUND,
                 DISK_BANNERDATA_MAX,
             };
-        }
+        }  // namespace
 
-#define META_CHANNEL_NAME_LENGTH 20
-#define META_DISK_IN_MESSAGE_LENGTH 376
-#define META_CURRENT_VERSION 3
+        static const int META_CHANNEL_NAME_LENGTH = 20;
+        static const int META_DISK_IN_MESSAGE_LENGTH = 376;
+        static const int META_CURRENT_VERSION = 3;
 
 #define META_PAD 64
 

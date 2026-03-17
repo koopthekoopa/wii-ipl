@@ -1,6 +1,8 @@
 #ifndef RFL_ICON_H
 #define RFL_ICON_H
 
+#include <internal/RFLi_LibConfig.h>
+
 #include <RFL_Types.h>
 #include <internal/RFLi_Types.h>
 
@@ -28,9 +30,9 @@ typedef struct {
 RFLErrcode RFLMakeIcon(void* buf, RFLDataSource source, RFLMiddleDatabase* middleDB, u16 index, RFLExpression expression,
                        const RFLIconSetting* setting);
 
-#if RFL_BUILD >= 20080306
+#ifdef RFL_USE_ICON_CALLBACK
 void RFLSetIconDrawDoneCallback(RFLSimpleCB cb);
-#endif  // RFL_BUILD
+#endif  // RFL_USE_ICON_CALLBACK
 
 #ifdef __cplusplus
 }

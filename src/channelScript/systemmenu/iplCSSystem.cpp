@@ -13,7 +13,7 @@ namespace ipl {
             CHANSVmDefineMethod(is_first_call) {
                 BOOL result = FALSE;
                 if (util::is_valid_datap(VmParentObj)) {
-                    result = CHANSVmSetInteger(VmInst, VmReturnObj, System::getCSManager()->getData().unk_0x18 == false) == CHANS_VM_OK;
+                    result = CHANSVmSetInteger(VmInst, VmReturnObj, System::getCSManager()->getData().threadTerminated == false) == CHANS_VM_OK;
                 }
                 return result;
             }
@@ -23,7 +23,7 @@ namespace ipl {
                 BOOL appDlEnable;
 
                 appDlEnable = FALSE;
-                appId = ES_TITLE_CODE(System::getCSManager()->getData().unk_0x10);
+                appId = ES_TITLE_CODE(System::getCSManager()->getData().titleId);
 
                 nwc24::Manager* nwc24Manager = System::getNwc24Manager();
                 if (nwc24Manager != NULL) {

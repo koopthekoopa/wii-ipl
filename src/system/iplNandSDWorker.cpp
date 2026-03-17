@@ -28,8 +28,8 @@ namespace ipl {
         }
 
         // Check version
-        if (header->version != META_CURRENT_VERSION) {
-            OSReport("BANNER WARNING: different version v.%d ( now v.%d)\n", header->version, META_CURRENT_VERSION);
+        if (header->version != channel::META_CURRENT_VERSION) {
+            OSReport("BANNER WARNING: different version v.%d ( now v.%d)\n", header->version, channel::META_CURRENT_VERSION);
             return FALSE;
         }
 

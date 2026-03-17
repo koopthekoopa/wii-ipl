@@ -10,7 +10,9 @@ namespace ipl {
     namespace scene {
         class TextBalloon {
         public:
-            enum { WAIT_UNTIL_FADE_IN = 15 };
+            enum {
+                WAIT_UNTIL_FADE_IN = 15
+            };
 
             TextBalloon(EGG::Heap* heap, nand::LayoutFile* layoutFile, const char* directory, const char* fileName, const ipl::math::VEC3& unk2,
                         f32 unk3 = 120.0f, f32 unk4 = 30.0f);
@@ -64,6 +66,8 @@ namespace ipl {
             f32 unk_0x34;
 
             int mWaitUntilFadeIn;  // 0x38
+
+            static const int MAX_STRING_LENGTH = 32;
         };
     }  // namespace scene
 }  // namespace ipl

@@ -844,15 +844,17 @@ void RFLiCapture(u8* texBuffer, const RFLiCharInfo* pCharInfo, RFLiFaceData* pFa
 
     GXSetColorUpdate(GX_TRUE);
 
-#if RFL_BUILD >= 20080306
+#ifdef RFL_USE_MODEL_CALLBACK
     if (RFLiGetManager()->mCreateModelCB == NULL) {
         GXDrawDone();
     } else {
         RFLiGetManager()->mCreateModelCB();
     }
 #else
+#if RFL_BUILD >= 20080218
     GXDrawDone();
-#endif
+#endif  // RFL_BUILD
+#endif  // RFL_USE_MODEL_CALLBACK
 
     DCInvalidateRange(texBuffer, RFLiGetMaskSize(resolution));
     GXCopyTex(texBuffer, GX_TRUE);

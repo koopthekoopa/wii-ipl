@@ -694,7 +694,7 @@ BOOL RFLiFormatControllerData(s32 chan) {
     RFLi_ASSERTLINE_RANGE(chan, 0, WPAD_MAX_CONTROLLERS, 1304);
 
     if (chan < 0 || chan >= WPAD_MAX_CONTROLLERS) {
-        return RFLErrcode_WrongParam;  // @BUG Should be FALSE
+        return RFLErrcode_WrongParam;  // @bug Should be FALSE
     }
 
     manager = RFLiGetCtrlBufManager();
@@ -838,11 +838,11 @@ BOOL RFLiIsAvailableControllerData(s32 chan, u8 index, RFLiCtrlCheckType type) {
     RFLi_ASSERTLINE_RANGE(index, 0, RFL_MAX_CTRL_BUFFER, 1504);
 
     if (chan < 0 || chan >= WPAD_MAX_CONTROLLERS) {
-        return RFLErrcode_WrongParam;  // @BUG: Should be FALSE
+        return RFLErrcode_WrongParam;  // @bug: Should be FALSE
     }
 
     if (index >= RFL_MAX_CTRL_BUFFER) {
-        return RFLErrcode_WrongParam;  // @BUG: Should be FALSE
+        return RFLErrcode_WrongParam;  // @bug: Should be FALSE
     }
 
     if (!RFLAvailable()) {

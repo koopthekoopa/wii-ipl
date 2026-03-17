@@ -58,7 +58,7 @@ RFLErrcode RFLiSetOfficial2NWC24Msg(NWC24MsgObj* obj, RFLCharData* charData, u16
 
     memcpy(charData, &data, sizeof(RFLCharData));
 
-    err2 = NWC24SetMsgFaceData(obj, charData);
+    err2 = NWC24SetMsgFaceData(obj, (u8*)charData);
     if (err2 != NWC24_OK) {
         RFLiGetManager()->mLastErrcode = RFLErrcode_NWC24Fail;
         RFLiGetManager()->mLastReason = err2;

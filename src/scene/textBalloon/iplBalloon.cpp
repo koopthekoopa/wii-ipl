@@ -218,13 +218,13 @@ namespace ipl {
             if (strLen == 0) {
                 strLen = wcslen(text);
             }
-            if (strLen > 32) {
-                strLen = 32;
+            if (strLen > MAX_STRING_LENGTH) {
+                strLen = MAX_STRING_LENGTH;
             }
 
-            wchar_t fullStr[(32 + 3)] = L"";
+            wchar_t fullStr[(MAX_STRING_LENGTH + 3)] = L"";
 
-            wcsncpy(fullStr, text, 32);
+            wcsncpy(fullStr, text, MAX_STRING_LENGTH);
 
             nw4r::lyt::TextBox* textPane = nw4r::ut::DynamicCast<nw4r::lyt::TextBox*>(mpLayout->FindPaneByName("T_Balloon"));
 
@@ -255,7 +255,7 @@ namespace ipl {
                 }
             } else {
                 textPane->FreeStringBuffer();
-                textPane->AllocStringBuffer((32 + 3));
+                textPane->AllocStringBuffer((MAX_STRING_LENGTH + 3));
                 textPane->SetString(fullStr);
             }
 
