@@ -16,7 +16,10 @@ namespace EGG {
     class Allocator;
     class Heap : Disposer {
     public:
-        typedef enum HeapKind { HEAP_EXPANDED = 1, HEAP_FRAME = 2 } HeapKind;
+        typedef enum HeapKind {
+            HEAP_EXPANDED = 1,
+            HEAP_FRAME = 2
+        } HeapKind;
 
         static void initialize();
 
@@ -49,6 +52,14 @@ namespace EGG {
             OSRestoreInterrupts(enabled);
         }
         static Heap* unkInline2(int id = 0) { return (Heap*)OSGetThreadSpecific(id); }
+
+        void* getStartAddress() { return this; }
+        void* getEndAddress() { return MEMGetHeapEndAddress(mHeapHandle); }
+
+        bool isHeapPointer(void* pBlock) { return getStartAddress() <= pBlock && pBlock < getEndAddress(); }
+
+    protected:
+        MEMHeapHandle mHeapHandle;  // 0x10
     };
 }  // namespace EGG
 

@@ -5,8 +5,8 @@
 
 #include <stdbool.h>
 
-bool VmSystemBeginRenderFlag;
-bool VmSystemWaitForRetraceFlag;
+vmBool VmSystemBeginRenderFlag;
+vmBool VmSystemWaitForRetraceFlag;
 
 VmMethodDefine(SCPrivate, SC_ASPECT_RATIO_4x3) {
     return CHANSVmSetInteger(VmInst, VmReturnObj, SC_ASPECT_RATIO_4x3) == CHANS_VM_OK;

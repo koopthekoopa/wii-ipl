@@ -13,6 +13,7 @@
 #include "layout/iplLayout.h"
 
 #include "channelScript/CHANSVm.h"
+#include "channelScript/CHANSVmPrivate.h"
 
 namespace ipl {
     namespace channel {
@@ -26,6 +27,8 @@ namespace ipl {
                 bool threadTerminated;     // 0x18
                 bool unk_0x19;
                 bool unk_0x1A;
+
+                EGG::ExpHeap* getHeap() { return heap; }
             } CSData;
 
             ChannelScriptManager();
@@ -40,6 +43,9 @@ namespace ipl {
 
             void setData(const CSData& data);
 
+            void setAltBannerSound(void* sndData, u32 sndLength);
+            BOOL isValidAddr(void* addr);
+
             static void calcCSThread();
 
             CSData& getData() { return mCSData; }
@@ -47,20 +53,37 @@ namespace ipl {
 
         private:
             enum {
-                CHANS_VM_STATE_CREATE = 0,
-                CHANS_VM_STATE_UNK1 = 1,
-                CHANS_VM_STATE_UNK2 = 2,
-                CHANS_VM_STATE_UNK3 = 3,
-                CHANS_VM_STATE_UNK4 = 4,
+                CHANS_VM_STATE_UNK0 = 0,
+                CHANS_VM_STATE_UNK1,
+                CHANS_VM_STATE_UNK2,
+                CHANS_VM_STATE_UNK3,
+                CHANS_VM_STATE_UNK4,
+            };
+
+            enum {
+                CHANS_VM_MSG_STATE_UNK0 = 0,
+                CHANS_VM_MSG_STATE_UNK1,
+                CHANS_VM_MSG_STATE_UNK2,
+                CHANS_VM_MSG_STATE_UNK3,
+                CHANS_VM_MSG_STATE_UNK4,
+            };
+
+            enum {
+                CHANS_VM_ALT_SND_STATE_UNAVAILABLE = 0,
+                CHANS_VM_ALT_SND_STATE_UNK1,
+                CHANS_VM_ALT_SND_STATE_PLAY,
             };
 
             u8* mpChansWork;  // 0x00
             EGG::ExpHeap* mpHeap;
 
             CSData mCSData;  // 0x08
-            u32 unk_0x28[2];
-            OSMessage unk_0x30;
-            OSMessage unk_0x34;
+            struct {
+                void* data;      // 0x00
+                u32 length;      // 0x04
+            } mAltSound;         // 0x28
+            int mState;          // 0x30
+            int mAltSoundState;  // 0x34
 
             static int smCSState;
             static RsoThread* smpThread;
