@@ -15,7 +15,7 @@
 
 # Ghidra
 
-If you would like to access the shared repository for this project, follow the steps below on how to get access.
+### Accessing the repository
 
 >  [!NOTE]
 > At least version 12.0 is required!
@@ -25,6 +25,21 @@ If you would like to access the shared repository for this project, follow the s
    - Repository: `Wii_IPL_Ghidra`
    - Role: for contributing to the project, you would need to select `Write`.
 - Click Request then wait for your request to be accepted.
+
+### Opening the repository
+
+ - Goto File > New Project
+ - Select "Shared Project"
+ - You would need to input the following:
+   - Server Name: `ghidra.decomp.dev`
+   - Port Number: `13100`
+ - The list of existing servers should show `Wii_IPL_Ghidra`. Select that one.
+ - Input where you want the shared project to be saved.
+ - You are now ready to open a program! (for now, its just `ipl_v4_3_usa.dol`)
+   - If you have write access and want to make changes to the program, right click on the program that you want to open, and click "Check out".
+     - Do not check the "Request exclusive checkout" option!
+   - If you would want to upload of your changes, right click on the program that is currently opened, and click "Check In".
+
 
 # Code Guidelines
 

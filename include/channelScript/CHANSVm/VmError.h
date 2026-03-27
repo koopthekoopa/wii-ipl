@@ -9,6 +9,7 @@ extern "C" {
 
 typedef s32 CHANSVmErr;
 
+// clang-format off
 enum {
     CHANS_VM_OK                                     = 0,
 
@@ -92,9 +93,10 @@ enum {
     CHANS_VM_ERR_NO_SUCH_FUNCTION,                  /* -924 */
     CHANS_VM_ERR_RESERVED_OPCODE,                   /* -923 */
 };
+// clang-format on
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // CHANS_VM_ERROR_CODES_H
+#endif  // CHANS_VM_ERROR_CODES_H

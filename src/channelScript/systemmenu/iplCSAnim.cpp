@@ -9,48 +9,55 @@ namespace ipl {
 #define PROPERTY_COUNT 4
             extern const CHANSVmPropertyList cPropertyList[PROPERTY_COUNT];
 
+            BOOL get_min_frame(CHANSVm* vm, CHANSVmObjHdr* hdr, CHANSVmObjHdr* hdr2) {
+                BOOL ret = 0;
+                CHANSVmErr err;
+                int valid = util::is_valid_datap(hdr);
+                if (valid != 0 && (ipl::layout::Animator*)*hdr->value.ptr_v != NULL) {
+                    ret = CHANSVmSetFloat(vm, hdr2, ((ipl::layout::Animator*)*hdr->value.ptr_v)->getMinFrame()) == CHANS_VM_OK;
+                }
+                return ret;
+            }
+
+            BOOL get_type(CHANSVm* vm, CHANSVmObjHdr* hdr, CHANSVmObjHdr* hdr2) {
+                BOOL ret = 0;
+                CHANSVmErr err;
+                int valid = util::is_valid_datap(hdr);
+                if (valid != 0 && (ipl::layout::Animator*)*hdr->value.ptr_v != NULL) {
+                    ret = CHANSVmSetInteger(vm, hdr2, ((ipl::layout::Animator*)*hdr->value.ptr_v)->getAnmType()) == CHANS_VM_OK;
+                }
+                return ret;
+            }
+
+            BOOL get_delta(CHANSVm* vm, CHANSVmObjHdr* hdr, CHANSVmObjHdr* hdr2) {
+                BOOL ret = 0;
+                CHANSVmErr err;
+                int valid = util::is_valid_datap(hdr);
+                if (valid != 0 && hdr != NULL) {
+                    ret = CHANSVmSetFloat(vm, hdr2, hdr->value.float_v) == CHANS_VM_OK;
+                }
+                return ret;
+            }
+
             const CHANSVmMethodList cMethodList[METHOD_COUNT] = {
-                {"start", NULL},           {"restart", NULL},     {"stop", NULL},        {"isPlaying", NULL},
-                {"initFrame", NULL},       {"setMaxFrame", NULL}, {"setMinFrame", NULL}, {"setCurrentFrame", NULL},
-                {"setType", NULL},         {"setDelta", NULL},    {"getMaxFrame", NULL}, {"getMinFrame", NULL},
-                {"getCurrentFrame", NULL}, {"getType", NULL},     {"getDelta", NULL},
+                {"start", NULL},           {"restart", NULL},     {"stop", NULL},          {"isPlaying", NULL},
+                {"initFrame", NULL},       {"setMaxFrame", NULL}, {"setMinFrame", NULL},   {"setCurrentFrame", NULL},
+                {"setType", NULL},         {"setDelta", NULL},    {"getMaxFrame", NULL},   {"getMinFrame", get_min_frame},
+                {"getCurrentFrame", NULL}, {"getType", get_type}, {"getDelta", get_delta},
 
             };
 
-            template <int I>
-            CHANSVmDefineMethod(set) {
-                BOOL result = FALSE;
-                CHANSVmObjHdr* arg = CHANSVmGetArgFloat(VmInst, 0);
-                if (util::is_valid_datap(VmParentObj) && arg != NULL) {
-                    f32* data = (f32*)*VmParentObj->value.ptr_v;
-
-                    result = TRUE;
-                    data[I] = arg->value.int_v;
-                }
-                return result;
-            }
-
-            template <int I>
-            CHANSVmDefineMethod(get) {
-                BOOL result = FALSE;
-                if (util::is_valid_datap(VmParentObj)) {
-                    s32* data = (s32*)*VmParentObj->value.ptr_v;
-                    result = CHANSVmSetFloat(VmInst, VmReturnObj, data[I]) == CHANS_VM_OK;
-                }
-                return result;
-            }
-
             const CHANSVmPropertyList cPropertyList[PROPERTY_COUNT] = {
-                {"*TYPE_FORWARD", get<0>, set<0>},
-                {"*TYPE_BACKWARD", get<1>, set<1>},
-                {"*TYPE_LOOP", get<2>, set<2>},
-                {"*TYPE_ALTERNATE", get<3>, set<3>},
+                {"*TYPE_FORWARD", util::get_int<0>, NULL},
+                {"*TYPE_BACKWARD", util::get_int<1>, NULL},
+                {"*TYPE_LOOP", util::get_int<2>, NULL},
+                {"*TYPE_ALTERNATE", util::get_int<3>, NULL},
             };
 
             BOOL _ctor(CHANSVm* VmInst, CHANSVmObjHdr* VmObj, u32 anim) {
                 BOOL flag = false;
                 vmPtr obj = CHANSVmNewObjData(VmInst, VmObj, 4);
-                if (VmObj != 0) {
+                if (obj != 0) {
                     CHANSVmNativeClass* ncls = CHANSVmFindNativeClass(VmInst, "Anim");
                     VmObj->value.int32_v->unk_0x00 = 8;  // ?
                     flag = ncls != NULL;
@@ -71,45 +78,6 @@ namespace ipl {
                 }
                 return result & e;
             }
-
-            BOOL get_delta(CHANSVm* vm, CHANSVmObjHdr* hdr, CHANSVmObjHdr* hdr2) {
-                BOOL ret = 0;
-                CHANSVmErr err;
-                int valid = util::is_valid_datap(hdr);
-                if (valid != 0 && hdr != NULL) {
-                    err = CHANSVmSetFloat(vm, hdr2, hdr->value.float_v);
-                    ret = __cntlzw(err);
-                    ret >>= 5;
-                }
-                return ret;
-            }
-
-            BOOL get_type(CHANSVm* vm, CHANSVmObjHdr* hdr, CHANSVmObjHdr* hdr2) {
-                BOOL ret = 0;
-                CHANSVmErr err;
-                int valid = util::is_valid_datap(hdr);
-                if (valid != 0 && hdr != NULL) {
-                    valid = (int)hdr->value.ptr_v;
-                    err = CHANSVmSetInteger(vm, hdr2, valid >> 0x1f);
-                    ret = __cntlzw(err);
-                    ret >>= 5;
-                }
-                return ret;
-            }
-
-            BOOL get_min_frame(CHANSVm* vm, CHANSVmObjHdr* hdr, CHANSVmObjHdr* hdr2) {
-                BOOL ret = 0;
-                CHANSVmErr err;
-                int valid = util::is_valid_datap(hdr);
-                if (valid != 0 && hdr != NULL) {
-                    valid = (int)hdr->value.ptr_v;
-                    err = CHANSVmSetFloat(vm, hdr2, hdr->value.float_v);
-                    ret = __cntlzw(err);
-                    ret >>= 5;
-                }
-                return ret;
-            }
-
         }  // namespace anim
     }  // namespace cs
 }  // namespace ipl

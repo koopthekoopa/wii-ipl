@@ -31,6 +31,7 @@ typedef void* vmPtr;
 
 typedef long long int vmInteger;
 typedef double vmFloat;
+typedef float vmFloat32;
 typedef size_t vmSize;
 
 typedef wchar_t vmWChar;
@@ -63,24 +64,25 @@ typedef struct CHANSVmNativeClass CHANSVmNativeClass;
 
 struct CHANSVmObjHdr {
     union {
-        vmInteger int_v;  // 0x00
+        vmInteger int_v;
         struct {
             vmU8 unk_0x00;  // ?
             vmS32 val;
-        }* int32_v;       // 0x01
-        vmFloat float_v;  // 0x5
+        }* int32_v;
+        vmFloat float_v;
+        vmFloat32 float32_v;
         struct {
             vmWString str;
             vmSize len;
-        }* wstring_v;  // 0x7
+        }* wstring_v;
         struct {
             vmString str;
             vmSize len;
-        }* string_v;              // 0xB
-        vmPtr* array_v;           // 0xF
-        vmFloat** float_array_v;  // 0x13
-        vmPtr* ptr_v;             // 0x17
-    } value;                      // 0x00
+        }* string_v;
+        vmPtr* array_v;
+        vmFloat** float_array_v;
+        vmPtr* ptr_v;
+    } value;  // 0x00
 
     union {
         struct {

@@ -5,12 +5,12 @@
 extern "C" {
 #endif
 
-#include "channelScript/CHANSVmPrivate/vmMethod.h"
 #include "channelScript/CHANSVmPrivate/vmConvert.h"
+#include "channelScript/CHANSVmPrivate/vmMethod.h"
 #include "channelScript/CHANSVmPrivate/vmPrivate.h"
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // CHANS_VM_PRIVATE_H
+#endif  // CHANS_VM_PRIVATE_H

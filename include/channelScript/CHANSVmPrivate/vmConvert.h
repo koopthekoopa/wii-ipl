@@ -7,14 +7,14 @@
 extern "C" {
 #endif
 
-typedef CHANSVmObjHdr*  (*VmConvertFunc)(CHANSVm*, CHANSVmObjType, CHANSVmObjHdr*);
+typedef CHANSVmObjHdr* (*VmConvertFunc)(CHANSVm*, CHANSVmObjType, CHANSVmObjHdr*);
 
 typedef struct VmConvertEntry {
-    VmConvertFunc   convFunc[6];    // 0x00
+    VmConvertFunc convFunc[6];  // 0x00
 } VmConvertEntry;
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // CHANS_VM_PRIVATE_CONVERT_H
+#endif  // CHANS_VM_PRIVATE_CONVERT_H

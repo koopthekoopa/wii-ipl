@@ -16,7 +16,7 @@ namespace ipl {
                 uv3 = a->value.int_v;
                 if (hdr1 != 0 && (a->value.ptr_v < (vmPtr*)(uv3 < 0x10) && e != 0)) {
                     flag = true;
-                    ipl::layout::Animator** f = e->getData().unk_0x08;
+                    ipl::layout::Animator** f = e->getData().anims;
                     int v = cs::anim::_ctor(vm, hdr2, uv3);
                     if ((f != NULL) && (v == 0)) {
                         flag = false;
