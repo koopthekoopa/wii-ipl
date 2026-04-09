@@ -9,6 +9,7 @@
 #include <stdlib.h>
 
 #include <revolution.h>
+#include <revolution/net/NETMisc.h>
 
 #define CHANSVmDebugLength 1024
 
@@ -1321,8 +1322,82 @@ CHANSVmErr CHANSVmGetBoolean(CHANSVmObjHdr* ret, CHANSVmObjHdr* val) {
             break;
         default:
             return CHANS_VM_ERR_GET_BOOLEAN;
-            if (ret != NULL) {
-                ret->value.int_v = (u64)result << 32;
-            }
     }
+    if (ret != NULL) {
+        ret->value.int_v = (u64)result << 32;
+    }
+    return CHANS_VM_OK;
+}
+
+bool CHANS_8144E21(CHANSVm* vm, OSCalendarTime* param_2) {
+    CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
+    u32 argc;
+    s64 time;
+    OSCalendarTime* nettime;
+    CHANSVmObjHdr* arg;
+    u64 uv4;
+    if (param_2 == NULL)
+        return false;
+    argc = pVm->unk_0x60->argc;
+    if (argc == 0) {
+        time = OSGetTime();
+        time = time / (__OSBusClock / 4000);
+        goto ctortimefinalize;
+    }
+    if (argc == 1) {
+        arg = CHANSVmGetArg(vm, 0);
+        if (arg != NULL && arg->type == CHANS_VM_OBJ_TYPE_STRING && (u32)arg->value.ptr_v[1] == 6 && memcmp(arg->value.ptr_v, L"UTC", 6) == 0) {
+            NETGetUniversalCalendar(nettime);
+            time = OSCalendarTimeToTicks(nettime);
+            time = time / (__OSBusClock / 4000);
+            goto ctortimefinalize;
+        }
+        arg = CHANSVmGetArg(vm, 0);
+        arg = CHANSVmConvertObjectType(vm, CHANS_VM_OBJ_TYPE_INTEGER, arg);
+        if (arg != NULL) {
+            time = arg->value.int_v;
+            goto ctortimefinalize;
+        }
+    }
+    if (argc > 7)
+        argc = 7;
+    if (argc != 0) {
+        arg = CHANSVmGetArg(vm, 0);
+        arg = CHANSVmConvertObjectType(vm, CHANS_VM_OBJ_TYPE_INTEGER, arg);
+        if (arg != NULL) {
+            switch (argc) {
+                case 7:
+                    nettime->msec = CHANSVmGetArg(vm, 6)->value.int_v;
+                case 6:
+                    nettime->sec = CHANSVmGetArg(vm, 5)->value.int_v;
+                case 5:
+                    nettime->min = CHANSVmGetArg(vm, 4)->value.int_v;
+                case 4:
+                    nettime->hour = CHANSVmGetArg(vm, 3)->value.int_v;
+                case 3:
+                    nettime->mday = CHANSVmGetArg(vm, 2)->value.int_v;
+                case 2:
+                    nettime->mon = CHANSVmGetArg(vm, 1)->value.int_v;
+                case 1:
+                    nettime->year = CHANSVmGetArg(vm, 0)->value.int_v;
+            }
+            return true;
+        }
+    }
+    if (nettime->year < 2000)
+        nettime->year = 2000;
+    if (nettime->mday < 1)
+        nettime->mday = 1;
+    time = OSCalendarTimeToTicks(nettime);
+    time = time / (__OSBusClock / 4000);
+ctortimefinalize:
+    uv4 = __OSBusClock / 4000;
+    OSTicksToCalendarTime(uv4, param_2);
+    return true;
+}
+
+VmCtorDefine(Date) {
+    OSCalendarTime* caltime;
+    caltime = CHANSVmNewObjData(VmInst, VmReturnObj, 0x28);
+    return CHANS_8144E21(VmInst, caltime);
 }
