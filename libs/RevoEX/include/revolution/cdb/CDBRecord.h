@@ -58,7 +58,7 @@ typedef struct _CDBRecordKey {
     };
     u64 wiiId;             // 0x20
     CDBLocation location;  // 0x28
-    int unk_0x2C;
+    u8 pad[4]; /*?*/       // 0x2C
 } CDBRecordKey;
 
 typedef struct _CDBRecord {

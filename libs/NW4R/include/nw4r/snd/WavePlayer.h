@@ -18,9 +18,9 @@ namespace nw4r {
         public:
             friend class detail::SoundThread;
             typedef struct WaveBufferInfo {
-                int channelCount;
-                void* bufferAddress[CHANNEL_MAX];
-                u32 bufferSize;
+                int channelCount;                  // 0x00
+                void* bufferAddress[CHANNEL_MAX];  // 0x04
+                u32 bufferSize;                    // 0x0C
             } WaveBufferInfo;
 
             class WavePacket {

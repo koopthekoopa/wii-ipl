@@ -45,8 +45,8 @@ namespace nw4r {
         private:
             static void DisposeCallbackFunc(void* buffer, u32 size, void* callbackArg);
 
-            mutable OSMutex mMutex;        // 0x00
-            detail::FrameHeap mFrameHeap;  // 0x1C
+            mutable OSMutex mMutex;        // 0x04
+            detail::FrameHeap mFrameHeap;  // 0x20
         };
     }  // namespace snd
 }  // namespace nw4r
