@@ -33,7 +33,7 @@ namespace ipl {
                 BOOL ret = 0;
                 CHANSVmErr err;
                 int valid = util::is_valid_datap(hdr);
-                if (valid != 0 && hdr != NULL) {
+                if (valid != 0 && (ipl::layout::Animator*)*hdr->value.ptr_v != NULL) {
                     ret = CHANSVmSetFloat(vm, hdr2, hdr->value.float_v) == CHANS_VM_OK;
                 }
                 return ret;
