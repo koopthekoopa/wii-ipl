@@ -23,7 +23,7 @@
  - Head to [ghidra.decomp.dev](https://ghidra.decomp.dev/) then create an account and/or login from there.
  - On the "Repository Access" window, select:
    - Repository: `Wii_IPL_Ghidra`
-   - Role: for contributing to the project, you would need to select `Write`.
+   - Role: If you would like to make changes, select `Write`. Otherwise select `Read`.
 - Click Request then wait for your request to be accepted.
 
 ### Opening the repository
@@ -38,6 +38,7 @@
  - You are now ready to open a program! (for now, its just `ipl_v4_3_usa.dol`)
    - If you have write access and want to make changes to the program, right click on the program that you want to open, and click "Check out".
      - Do not check the "Request exclusive checkout" option!
+     - Changes will be made to the repository, so make sure that you are checking out to the latest version!
    - If you would want to upload of your changes, right click on the program that is currently opened, and click "Check In".
 
 

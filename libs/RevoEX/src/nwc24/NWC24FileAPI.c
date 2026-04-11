@@ -1,6 +1,8 @@
 #include <private/nwc24.h>
 #include <revolution/nwc24.h>
 
+#include <revolution/os.h>
+
 #include <private/nand.h>
 
 #include <string.h>
@@ -9,7 +11,7 @@ static u32 RdBufferMutex = 0;
 static u32 WrBufferMutex = 0;
 static u32 InstanceIdGen = 0;
 
-#define SLEEP_MSEC(x) OSSleepTicks(OSMillisecondsToTicks((s64)(x)))
+#define SLEEP_MSEC(x) OSSleepTicks(OSMillisecondsToTicks((OSTime)(x)))
 
 static NWC24Err BufferedWrite(const void* src, s32 size, NWC24File* file);
 static NWC24Err BufferedWriteFlush(NWC24File* file);

@@ -61,7 +61,7 @@ namespace ipl {
                 f32 temp_f3 = (unkVal0 * (t1 + (temp_f7 - (t2 * (2.0f * t1 * t1))))) + (unkVal1 * (temp_f7 - (t2 * temp_f4)));
 
                 r = r + temp_f3;
-
+                
                 return r;
             }
 

@@ -64,6 +64,7 @@ typedef struct CHANSVmNativeClass CHANSVmNativeClass;
 
 struct CHANSVmObjHdr {
     union {
+        vmBoolInt bool_v;
         vmInteger int_v;
         struct {
             vmU8 unk_0x00;  // ?

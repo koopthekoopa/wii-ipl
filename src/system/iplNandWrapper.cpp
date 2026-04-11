@@ -1,5 +1,7 @@
 #include "system/iplNandWrapper.h"
 
+#include <revolution/os.h>
+
 namespace ipl {
     namespace nand {
         namespace wrapper {

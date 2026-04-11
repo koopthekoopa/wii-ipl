@@ -1,6 +1,8 @@
 #include <private/nand.h>
 #include <revolution/nand.h>
 
+#include <revolution/os.h>
+
 #include <private/fs.h>
 
 #include <private/ipc.h>

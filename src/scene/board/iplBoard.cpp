@@ -1377,7 +1377,7 @@ namespace ipl {
 #undef TEXT_LENGTH
         }
 
-        static const u32 scWeekMsgId[] = {MESG_CALENDAR_MONDAY,   MESG_CALENDAR_MONDAY, MESG_CALENDAR_TUESDAY, MESG_CALENDAR_WEDNESDAY,
+        static const u32 scWeekMsgId[] = {MESG_CALENDAR_SUNDAY,   MESG_CALENDAR_MONDAY, MESG_CALENDAR_TUESDAY, MESG_CALENDAR_WEDNESDAY,
                                           MESG_CALENDAR_THURSDAY, MESG_CALENDAR_FRIDAY, MESG_CALENDAR_SATURDAY};
 
         void Board::get_text_jpn(const utility::Date& date, wchar_t* text, u32 textLen) {
