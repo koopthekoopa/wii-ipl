@@ -4,13 +4,31 @@
 #include "iplSceneHeader.h"
 
 namespace ipl {
+    namespace kitayama {
+        class NandSDWorker_AutoTest;
+    }
+
     namespace scene {
         FADER_SCENE_CLASS(KitayamaTest) {
         public:
             KitayamaTest(EGG::Heap * heap, int);
+            virtual void create();
+            virtual void draw();
+            virtual void destroy();
+            virtual void calcCommon() { };
+            virtual FaderSceneCommand calcNormal();
+            virtual FaderSceneCommand calcFadeout();
+            virtual BOOL isResetAcceptable() const;
 
         private:
-            u8 unk_0x58[0x20];
+            EGG::Heap* unk_0x58;  // 0x58
+            int unk_0x5C;         // 0x5C
+            u32 unk_0x60;         // 0x60
+            kitayama::NandSDWorker_AutoTest* unk_0x64;  // 0x64
+            u32 unk_0x68;         // 0x68
+            u32 unk_0x6C;         // 0x6C
+            u32 unk_0x70;         // 0x70 (unused?)
+            u32 unk_0x74;         // 0x74 (unused?)
         };
     }  // namespace scene
 }  // namespace ipl

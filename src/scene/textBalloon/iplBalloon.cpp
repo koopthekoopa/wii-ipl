@@ -269,7 +269,8 @@ namespace ipl {
 
             nw4r::ut::Rect textRect = textPane->GetTextDrawRect(*mpLayout->getDrawInfo());
 
-            nw4r::lyt::Size newSize(textRect.GetWidth() + 40.0f, get_size("W_Base")->height);
+            nw4r::lyt::Size newSize = *get_size("W_Base");
+            newSize.width = textRect.GetWidth() + 40.0f;
 
             if (newSize.width < temp1 * 160.0f) {
                 newSize.width = temp1 * 160.0f;

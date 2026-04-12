@@ -15,10 +15,6 @@ namespace ipl {
             161,
         };
 
-        static const f32 scBtnPos[] = {
-            -152.0f,
-            -245.0f
-        };
         // clang-format on
 
         SDMenuButton::SDMenuButton() : mpLayout(NULL), mpGui(NULL), mbHovered(), mbEnabled(true) {
@@ -35,7 +31,7 @@ namespace ipl {
             mpLayout->bindToGroup("mn_Sdcard_Btn_Insert.brlan", "Insert", false);
             mpLayout->bindToGroup("mn_Sdcard_Btn_BtnL_On.brlan", "Btn_L_On", false);
             mpLayout->bindToGroup("mn_Sdcard_Btn_BtnL_RollOver.brlan", "Btn_L_Roll", false);
-            mpLayout->bindToGroup("mn_Sdcard_Btn_BtnL_RollOut.brlan", "Btn_L_On", false);
+            mpLayout->bindToGroup("mn_Sdcard_Btn_BtnL_RollOut.brlan", "Btn_L_Roll", false);
             mpLayout->getAnim(ANIM_BTN_ROLL_OVER)->initAnmFrame();
             mpLayout->finishBinding();
             mpLayout->getAnim(ANIM_ON_LOOP)->initAnmFrame();
@@ -49,8 +45,16 @@ namespace ipl {
             mpLayout->hide("N_Btn_On");
             mpLayout->show("N_Btn_Off");
 
-            nw4r::math::VEC3 newPos(SCGetAspectRatio() == SC_ASPECT_RATIO_16x9 ? scBtnPos[SC_ASPECT_RATIO_16x9] : scBtnPos[SC_ASPECT_RATIO_4x3],
-                                    -172.0f, -172.0f);
+            f32 posX;
+            if (SCGetAspectRatio() == SC_ASPECT_RATIO_16x9) {
+                posX = -245.0f;
+            } else {
+                posX = -152.0f;
+            }
+
+            nw4r::math::VEC3 newPos;
+            newPos.x = posX;
+            newPos.y = -172.0f;
             mpLayout->GetRootPane()->SetTranslate(newPos);
 
             for (int i = 0; i < BTN_MAX; i++) {
@@ -163,41 +167,43 @@ namespace ipl {
         }
 
         void SDMenuButton::animation(int animId) {
+            SDMenuButton* button = this;
             layout::Animator* anim = NULL;
             bool backwards = false;
             switch (animId) {
                 case 1: {
-                    anim = mpLayout->getAnim(ANIM_BTN_OUT);
+                    anim = button->mpLayout->getAnim(ANIM_BTN_OUT);
                     backwards = true;
                     anim->setMinFrame(0.0f);
                     anim->setMaxFrame(15.0f);
                     break;
                 }
                 case 2: {
-                    mpBalloons[BTN_SD_CARD]->fadeoutForce();
-                    initGui();
-                    if (mpLayout->isPlaying(ANIM_BTN_OUT)) {
-                        f32 frame = mpLayout->getAnim(ANIM_BTN_OUT)->getCurrentFrame();
-                        mpLayout->getAnim(ANIM_BTN_OUT)->stop();
+                    button->mpBalloons[BTN_SD_CARD]->fadeoutForce();
+                    button->initGui();
+                    if (button->mpLayout->isPlaying(ANIM_BTN_OUT)) {
+                        f32 frame = button->mpLayout->getAnim(ANIM_BTN_OUT)->getCurrentFrame();
+                        button->mpLayout->getAnim(ANIM_BTN_OUT)->stop();
 
                         if (frame > 0.0f) {
-                            anim = mpLayout->getAnim(ANIM_BTN_OUT);
-                            anim->setMinFrame(static_cast<u32>(frame));
+                            frame = static_cast<u32>(frame);
+                            anim = button->mpLayout->getAnim(ANIM_BTN_OUT);
+                            anim->setMinFrame(frame);
                             anim->setMaxFrame(15.0f);
                         }
                     } else {
-                        anim = mpLayout->getAnim(ANIM_BTN_OUT);
+                        anim = button->mpLayout->getAnim(ANIM_BTN_OUT);
                         anim->setMinFrame(0.0f);
                         anim->setMaxFrame(15.0f);
                     }
                     break;
                 }
                 case 3: {
-                    anim = mpLayout->getAnim(ANIM_BTN_INSERT);
+                    anim = button->mpLayout->getAnim(ANIM_BTN_INSERT);
                     break;
                 }
                 case 4: {
-                    anim = mpLayout->getAnim(ANIM_BTN_SELECT);
+                    anim = button->mpLayout->getAnim(ANIM_BTN_SELECT);
                     break;
                 }
             }
@@ -227,14 +233,15 @@ namespace ipl {
         void SDMenuButton::enableBtn() {
             mbEnabled = true;
 
-            for (int i = 0; i < 1; i++) {
+            for (int i = 0; i < BTN_MAX; i++) {
                 if (mbHovered[i]) {
                     mbHovered[i] = FALSE;
 
                     switch (i) {
-                        case 0: { // Play hover out animation
+                        case BTN_SD_CARD: { // Play hover out animation
                             layout::Animator* anim = mpLayout->getAnim(ANIM_BTN_ROLL_OUT);
                             anim->play();
+                            break;
                         }
                     }
                 }
