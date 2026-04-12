@@ -15,5 +15,8 @@ namespace ipl {
             return iVar2;
         }
 
+        void NCDSetting::initSetID(unsigned short setID) {
+            mID = setID;
+        }
     }  // namespace ncd
 }  // namespace ipl
