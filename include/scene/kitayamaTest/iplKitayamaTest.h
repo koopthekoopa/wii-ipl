@@ -27,6 +27,8 @@ namespace ipl {
             kitayama::NandSDWorker_AutoTest* unk_0x64;  // 0x64
             u32 unk_0x68;         // 0x68
             u32 unk_0x6C;         // 0x6C
+            u32 unk_0x70;         // 0x70 (unused?)
+            u32 unk_0x74;         // 0x74 (unused?)
         };
     }  // namespace scene
 }  // namespace ipl
