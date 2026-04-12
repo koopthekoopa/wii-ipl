@@ -3,9 +3,8 @@
 
 #include <revolution/os/OSMutex.h>
 
-void SSL_InitMutex(OSMutex* mutex_p);
-
-void SSL_LockMutex(OSMutex* mutex_p);
-void SSL_UnlockMutex(OSMutex* mutex_p);
+void SSL_InitMutex(OSMutex* mutex);
+void SSL_LockMutex(OSMutex* mutex);
+void SSL_UnlockMutex(OSMutex* mutex);
 
 #endif  // PRIVATE_SSL_H

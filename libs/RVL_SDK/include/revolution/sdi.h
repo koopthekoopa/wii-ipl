@@ -31,6 +31,21 @@ typedef struct _ISD_Device {
     u32 unk_0x24;
 } ISD_Device;
 
+typedef struct _SDDev {
+    int SDDevFd;       // 0x00
+    u32 SDDevFunc;     // 0x04
+    char* SDDevName;   // 0x08
+    u32 SDDevSlot;     // 0x0C
+    u32 SDDevRca;      // 0x10
+    u32 SDBlockLen;    // 0x14
+    u32 SDSectorSize;  // 0x18
+    u32 SDSectorNum;   // 0x1C
+    u32 SDDevSize;     // 0x20
+    u32 SDState;       // 0x24
+} SDDev;
+
+typedef void (*SDDevEventCallback)(u32);
+
 ISD_Error ISD_MountCard(u32 slot, ISD_Device** dev);
 void ISD_UnmountCard(ISD_Device* dev);
 

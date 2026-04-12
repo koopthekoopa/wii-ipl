@@ -38,17 +38,17 @@ namespace textinput {
                 mbNoOff(noOff) {}
 
             private:
-                nw4r::lyt::AnimTransform*   mpAnimTransform;
+                nw4r::lyt::AnimTransform*   mpAnimTransform; // 0x00
 
-                u32                         muID;
+                u32                         muID; // 0x04
 
-                f32                         mfCurrentFrame;
+                f32                         mfCurrentFrame; // 0x08
 
-                bool                        mbLoop;
-                bool                        mbNoOff;
+                bool                        mbLoop; // 0x0C
+                bool                        mbNoOff; // 0x0D
 
             public:
-                nw4r::ut::Link              mLink;
+                nw4r::ut::Link              mLink; // 0x10
 
                 friend class AnmPane;
         };
@@ -255,7 +255,7 @@ namespace textinput {
 
                 PaneFifo                                mAnmPaneFifo;               // 0x8C
 
-                MEMAllocator*                           mpNw4rAllocator;            // 0xB0
+                MEMAllocator*                           mpNw4rAllocator;            // 0xA4
         };
     }
 }
