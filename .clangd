@@ -1,2 +1,7 @@
 Diagnostics:
   UnusedIncludes: None
+
+CompileFlags:
+  Add: [
+    "-Wno-c++11-extensions",
+  ]

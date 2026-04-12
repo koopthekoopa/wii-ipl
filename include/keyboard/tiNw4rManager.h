@@ -15,7 +15,9 @@ namespace textinput {
             public:
                 typedef struct Input {
                     // todo
-                    u8  dummy[32];
+                    u8  dummy[12];
+                    u32 field_0x0C; // 0x0C
+                    u8  dummy2[16];
                 } Input;
 
                 virtual void    onEvent(gui::GUIComponent& comp, u32 event, void* data);                    // 0x0C
@@ -24,8 +26,8 @@ namespace textinput {
         
                 virtual void    setEventObserver(EventObserver *event)  { mpEventObserver = event; }        // 0x1C
 
-            private:
-                EventObserver*  mpEventObserver;    // 0x04
+            protected:
+                EventObserver*  mpEventObserver;    // 0x08
         };
 
         class Anim {
@@ -86,6 +88,10 @@ namespace textinput {
                 virtual Anim*       searchAnimation(u32 id);            // 0x1C
 
                 virtual ~AnmPane();                                     // 0x20
+
+                AnmPane(nw4r::lyt::Pane *pane, AnmObserver *observer) : mpPane(pane), mpCurrentAnim(NULL), mpObserver(observer) {
+                    nw4r::ut::List_Init(&mAnms, offsetof(Anim, mLink));
+                }
 
                 nw4r::lyt::Pane*    getPane()   { return mpPane; }
 

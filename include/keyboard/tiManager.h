@@ -6,6 +6,9 @@
 #include "tiSaveData.h"
 #include "tiHKBManager.h"
 #include "tiHWKeyboard.h"
+#include "tiToolBar.h"
+#include "tiPcKeyboard.h"
+#include "tiCellPhone.h"
 
 #include <nw4r/lyt/pane.h>
 #include <nw4r/lyt/arcResourceAccessor.h>
@@ -79,20 +82,20 @@ namespace textinput {
             virtual keyboard::hwkey::HWKeyboard*        getHWKeyboard()                         { return mpHWKeyboard; }
             virtual const keyboard::hwkey::HWKeyboard*  getHWKeyboard() const                   { return mpHWKeyboard; }
             
-            virtual void*                               getPCKeyboard()                         { return mpPCKeyboard; }
-            virtual const void*                         getPCKeyboard() const                   { return mpPCKeyboard; }
+            virtual keyboard::pctype::LayoutByNW4R*       getPCKeyboard()                         { return mpPCKeyboard; }
+            virtual const keyboard::pctype::LayoutByNW4R* getPCKeyboard() const                   { return mpPCKeyboard; }
             
-            virtual void*                               getCellPhoneKeyboard()                  { return mpCellPhoneKeyboard; }
-            virtual const void*                         getCellPhoneKeyboard() const            { return mpCellPhoneKeyboard; }
+            virtual keyboard::cellphonetype::LayoutByNW4R*       getCellPhoneKeyboard()                  { return mpCellPhoneKeyboard; }
+            virtual const keyboard::cellphonetype::LayoutByNW4R* getCellPhoneKeyboard() const            { return mpCellPhoneKeyboard; }
             
             virtual void*                               getSignKeyboard()                       { return mpSignWindow; }
             virtual const void*                         getSignKeyboard() const                 { return mpSignWindow; }
             
-            virtual void*                               getCandidateBox()                       { return mpCandidateBox; }
-            virtual const void*                         getCandidateBox() const                 { return mpCandidateBox; }
+            virtual candidatebox::LayoutByNW4R*         getCandidateBox()                       { return mpCandidateBox; }
+            virtual const candidatebox::LayoutByNW4R*   getCandidateBox() const                 { return mpCandidateBox; }
             
-            virtual void*                               getToolBar()                            { return mpToolBar; }
-            virtual const void*                         getToolBar() const                      { return mpToolBar; }
+            virtual toolbar::LayoutByNW4R*              getToolBar()                            { return mpToolBar; }
+            virtual const toolbar::LayoutByNW4R*        getToolBar() const                      { return mpToolBar; }
             
             virtual void*                               getPredictLanguageSelectDialog()        { return mpPredictLanguageDialog; }
             virtual const void*                         getPredictLanguageSelectDialog() const  { return mpPredictLanguageDialog; }
@@ -119,11 +122,11 @@ namespace textinput {
             inputform::EditBuffer*                  mpEditBuffer;               // 0x0C
 
             keyboard::hwkey::HWKeyboard*            mpHWKeyboard;               // 0x10
-            void*                                   mpPCKeyboard;               // 0x14
-            void*                                   mpCellPhoneKeyboard;        // 0x18
+            keyboard::pctype::LayoutByNW4R*         mpPCKeyboard;               // 0x14
+            keyboard::cellphonetype::LayoutByNW4R*  mpCellPhoneKeyboard;        // 0x18
             InputForm*                              mpInputForm;                // 0x1C
-            void*                                   mpCandidateBox;             // 0x20
-            void*                                   mpToolBar;                  // 0x24
+            candidatebox::LayoutByNW4R*             mpCandidateBox;             // 0x20
+            toolbar::LayoutByNW4R*                  mpToolBar;                  // 0x24
             void*                                   mpPredictLanguageDialog;    // 0x28
             void*                                   mpSignWindow;               // 0x2C
 

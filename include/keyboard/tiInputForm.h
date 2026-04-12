@@ -92,6 +92,8 @@ namespace textinput {
                 void                        initZiString();
                 void                        resetContextPredict_();
 
+                void                        notifyChangeMode();
+
                 virtual void                enableSpaceByRight(bool rightWithSpace);
                 virtual void                onClose();
                 virtual bool                canConvert();
