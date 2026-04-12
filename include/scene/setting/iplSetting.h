@@ -8,6 +8,7 @@ namespace ipl {
         FADER_SCENE_CLASS(Setting) {
         public:
             Setting(EGG::Heap * heap, int arg);
+            void setInitializeResult(bool, int);
 
             enum {
                 ARG_NORMAL_PAGE = 0,
