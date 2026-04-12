@@ -5,7 +5,7 @@
 - An [introduction to decompilation](https://decomp.wiki/en/resources/decomp-intro), if this is your first time learning.
 - A tool for decompiling. This include, but not limited to:
   - [Ghidra](https://github.com/NationalSecurityAgency/ghidra/releases/latest)
-    - Requires [Cuyler36's GameCube Loader](github.com/Cuyler36/Ghidra-GameCube-Loader/releases/latest)
+    - Requires [Cuyler36's GameCube Loader](https://github.com/Cuyler36/Ghidra-GameCube-Loader/releases/latest).
     - for Ghidra users, you can [access the shared repository](#ghidra).
   - Hex Rays (in [IDA Pro](https://hex-rays.com/ida-pro))
   - [M2C](https://simonsoftware.se/other/m2c.html)
@@ -79,7 +79,7 @@ Despite the compiler that this project uses (CodeWarrior) has support for `#prag
 
 ```cpp
 #ifndef {LIBRARY}_{NAME}_H
-#ifndef {LIBRARY}_{NAME}_H
+#define {LIBRARY}_{NAME}_H
 
 // ...
 
