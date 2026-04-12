@@ -7,9 +7,12 @@ namespace ipl {
     namespace ncd {
         class NCDSetting {
         public:
+            static NCDConfig mConfig;
+
+            static int init();
             static bool getConnectEnableFlag();
 
-            static void makeMacAddr();
+            static int makeMacAddr();
             static u8* getMacAddr();
             static u32 getMacNum();
         };
