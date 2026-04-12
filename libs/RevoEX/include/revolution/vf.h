@@ -29,7 +29,7 @@ VFError VFCloseFile(VFFILE* file);
 
 VFError VFSeekFile(VFFILE* file, s32 offset, s32 origin);
 VFError VFReadFile(VFFILE* file, void* buf, u32 size, u32* read_size);
-VFError VFWriteFile(VFFILE* file, const void* buf, u32 size);
+VFError VFWriteFile(VFFILE* file, void* buf, u32 size);
 VFError VFDeleteFile(const char* path);
 
 VFError VFCreateDir(const char* dir_name);
