@@ -231,9 +231,12 @@ namespace ipl {
                 if (mbHovered[i]) {
                     mbHovered[i] = FALSE;
 
-                    // Play hover out animation
-                    layout::Animator* anim = mpLayout->getAnim(ANIM_BTN_ROLL_OUT);
-                    anim->play();
+                    switch (i) {
+                        case 0: { // Play hover out animation
+                            layout::Animator* anim = mpLayout->getAnim(ANIM_BTN_ROLL_OUT);
+                            anim->play();
+                        }
+                    }
                 }
 
                 // Init button pane
