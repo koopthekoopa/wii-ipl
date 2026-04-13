@@ -3,6 +3,7 @@
 #include <string.h>
 
 #define IPL_NCD_SETTING_CONNECT_TEST_FLAG 5
+#define IPL_NCD_SETTING_DHCP_FLAG 1
 
 namespace ipl {
     namespace ncd {
@@ -19,6 +20,10 @@ namespace ipl {
 
         u8 NCDSetting::checkConnectTestFlag() {
             return (mConfig.profiles[mID].flags) >> IPL_NCD_SETTING_CONNECT_TEST_FLAG & 1;
+        }
+
+        u8 NCDSetting::checkDHCPFlag() {
+            return (mConfig.profiles[mID].flags) >> IPL_NCD_SETTING_DHCP_FLAG & 1;
         }
     }  // namespace ncd
 }  // namespace ipl
