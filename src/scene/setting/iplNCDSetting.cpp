@@ -4,6 +4,7 @@
 
 #define IPL_NCD_SETTING_CONNECT_TEST_FLAG 5
 #define IPL_NCD_SETTING_DHCP_FLAG 1
+#define IPL_NCD_SETTING_DNS_FLAG 2
 
 namespace ipl {
     namespace ncd {
@@ -29,6 +30,19 @@ namespace ipl {
 
         u8 NCDSetting::checkDHCPFlag() {
             return (mConfig.profiles[mID].flags) >> IPL_NCD_SETTING_DHCP_FLAG & 1;
+        }
+
+        u8 NCDSetting::checkDNSFlag() {
+            if ((mConfig.profiles[mID].flags & IPL_NCD_SETTING_DNS_FLAG) != 0) {
+                return (u8)mConfig.profiles[mID].flags >> IPL_NCD_SETTING_DNS_FLAG & 1;
+            } else {
+                setDNSFlag(0);
+                return 0;
+            }
+        }
+
+        u8 NCDSetting::checkProxyFlag() {
+            return mConfig.profiles[mID].proxy.http.mode;
         }
 
         u8 NCDSetting::checkBasic(void) {
