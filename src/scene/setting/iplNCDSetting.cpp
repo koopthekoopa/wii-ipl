@@ -32,6 +32,43 @@ namespace ipl {
             return (mConfig.profiles[mID].flags) >> IPL_NCD_SETTING_DHCP_FLAG & 1;
         }
 
+        void NCDSetting::checkDHCP_() {
+            if (checkDNSFlag()) {
+                memset(&mConfig.profiles[mID].ip.dns1, 0, 4);
+                memset(&mConfig.profiles[mID].ip.dns2, 0, 4);
+            } else {
+                // im sorry for this
+                int i = 0;
+                int remaining = 4;
+
+                for (; i < 4; i++) {
+                    if (mConfig.profiles[mID].ip.dns1[i] != 0) {
+                        break;
+                    }
+                    remaining--;
+                }
+                if (i == 4) {
+                    i = 0;
+                    remaining = 4;
+                    for (; i < 4; i++) {
+                        if (mConfig.profiles[mID].ip.dns2[i] != 0) {
+                            break;
+                        }
+                        remaining--;
+                    }
+                    if (i == 4) {
+                        mConfig.profiles[mID].flags |= 4;
+                    }
+                }
+            }
+            if (checkDHCPFlag()) {
+                memset(&mConfig.profiles[mID].ip.addr, 0, 4);
+                memset(&mConfig.profiles[mID].ip.netmask, 0, 4);
+                memset(&mConfig.profiles[mID].ip.gateway, 0, 4);
+            }
+            return;
+        }
+
         u8 NCDSetting::checkDNSFlag() {
             if ((mConfig.profiles[mID].flags & IPL_NCD_SETTING_DNS_FLAG) != 0) {
                 return (u8)mConfig.profiles[mID].flags >> IPL_NCD_SETTING_DNS_FLAG & 1;
