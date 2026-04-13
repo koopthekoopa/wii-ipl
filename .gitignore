@@ -44,3 +44,5 @@ hbprojs/*
 *.log
 *.zip
 *.7z
+orig/.DS_Store
+.DS_Store
