@@ -14,6 +14,7 @@ namespace ipl {
             static bool getConnectEnableFlag();
             static void initSetID(unsigned short);
             static u8 checkConnectTestFlag();
+            static u8 checkDHCPFlag();
 
             static int makeMacAddr();
             static u8* getMacAddr();

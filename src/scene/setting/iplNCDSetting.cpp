@@ -19,7 +19,8 @@ namespace ipl {
         }
 
         u8 NCDSetting::checkConnectTestFlag() {  // ?????
-            return ((&mConfig.unk_0x08)[mID * IPL_NCD_SETTING_MAGIC_CONSTANT]) >> IPL_NCD_SETTING_CONNECT_TEST_FLAG & 1;
+            // matches 100:
+            return (mConfig.profiles[mID].flags) >> IPL_NCD_SETTING_CONNECT_TEST_FLAG & 1;
         }
     }  // namespace ncd
 }  // namespace ipl
