@@ -3,7 +3,6 @@
 #include <string.h>
 
 #define IPL_NCD_SETTING_CONNECT_TEST_FLAG 5
-#define IPL_NCD_SETTING_MAGIC_CONSTANT 0x91c
 
 namespace ipl {
     namespace ncd {
@@ -18,8 +17,7 @@ namespace ipl {
             mID = setID;
         }
 
-        u8 NCDSetting::checkConnectTestFlag() {  // ?????
-            // matches 100:
+        u8 NCDSetting::checkConnectTestFlag() {
             return (mConfig.profiles[mID].flags) >> IPL_NCD_SETTING_CONNECT_TEST_FLAG & 1;
         }
     }  // namespace ncd
