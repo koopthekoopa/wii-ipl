@@ -14,7 +14,7 @@ namespace ipl {
             checkAllFlag does the same, but for all (3) mIDs
         */
         int NCDSetting::init() {
-            memset(&mConfig, 0, 0x1b5c);              // initialize config to all 0s (?)
+            memset(&mConfig, 0, sizeof(mConfig));     // initialize config to all 0s (?)
             int status = NCDReadConfig(&mConfig);     // read config
             OSReport("NCDReadConfig: %d\n", status);  // log status
             return makeMacAddr();                     // return mac address
