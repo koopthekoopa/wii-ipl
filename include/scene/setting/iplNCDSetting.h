@@ -19,6 +19,7 @@ namespace ipl {
             static undefined4 checkAllFlag();
             static u8 checkConnectTestFlag();
             static u8 checkDHCPFlag();
+            static u8 checkDNSFlag();
             static void checkDHCP_();
             static u8 checkProxyFlag();
             static u8 checkBasic();
