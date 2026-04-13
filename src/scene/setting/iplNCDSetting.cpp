@@ -31,6 +31,10 @@ namespace ipl {
             return (mConfig.profiles[mID].flags) >> IPL_NCD_SETTING_DHCP_FLAG & 1;
         }
 
+        u8 NCDSetting::checkBasic(void) {
+            return mConfig.profiles[mID].proxy.http.authType;
+        }
+
         unsigned int NCDSetting::checkChangeEnable() {
             u8 configMethod = mConfig.profiles[mID].netif.wireless.configMethod;
             return (1 - ((u8)configMethod + 0xff & 0xff)) >> (u8)0x1f;
