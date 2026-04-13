@@ -7,6 +7,11 @@
 
 namespace ipl {
     namespace ncd {
+        /*
+        notes:
+            checkThisFlag calls checkFlag(mID) and returns, so checkFlag() probably checks some flags of mConfig.profiles(param_1).flags
+            checkAllFlag does the same, but for all (3) mIDs
+        */
         int NCDSetting::init() {
             memset(&mConfig, 0, 0x1b5c);              // initialize config to all 0s (?)
             int status = NCDReadConfig(&mConfig);     // read config
@@ -24,6 +29,11 @@ namespace ipl {
 
         u8 NCDSetting::checkDHCPFlag() {
             return (mConfig.profiles[mID].flags) >> IPL_NCD_SETTING_DHCP_FLAG & 1;
+        }
+
+        unsigned int NCDSetting::checkChangeEnable() {
+            u8 configMethod = mConfig.profiles[mID].netif.wireless.configMethod;
+            return (1 - ((u8)configMethod + 0xff & 0xff)) >> (u8)0x1f;
         }
     }  // namespace ncd
 }  // namespace ipl
