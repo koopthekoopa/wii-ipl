@@ -2,6 +2,9 @@
 #include "revolution/os/OSError.h"
 #include <string.h>
 
+#define IPL_NCD_SETTING_CONNECT_TEST_FLAG 5
+#define IPL_NCD_SETTING_MAGIC_CONSTANT 0x91c
+
 namespace ipl {
     namespace ncd {
         int NCDSetting::init() {
@@ -13,6 +16,10 @@ namespace ipl {
 
         void NCDSetting::initSetID(unsigned short setID) {
             mID = setID;
+        }
+
+        u8 NCDSetting::checkConnectTestFlag() {  // ?????
+            return ((&mConfig.unk_0x08)[mID * IPL_NCD_SETTING_MAGIC_CONSTANT]) >> IPL_NCD_SETTING_CONNECT_TEST_FLAG & 1;
         }
     }  // namespace ncd
 }  // namespace ipl

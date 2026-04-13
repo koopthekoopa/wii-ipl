@@ -191,12 +191,13 @@ typedef struct NCDProfile {
 } NCDProfile;
 
 typedef struct NCDConfig {
-    u32 version;             // 0x00
-    u8 selectedMedia;        // 0x04
-    u8 nwc24Permission;      // 0x05
-    u8 linkTimeout;          // 0x06
-    u8 reserved[1];          // 0x07
-    NCDProfile profiles[3];  // 0x08
+    u32 version;         // 0x00
+    u8 selectedMedia;    // 0x04
+    u8 nwc24Permission;  // 0x05
+    u8 linkTimeout;      // 0x06
+    u8 reserved[1];      // 0x07
+    u8 unk_0x08;
+    NCDProfile profiles[3];  // 0x09
 } PACKED NCDConfig;
 
 #endif  // REVOLUTION_NCD_TYPES_H
