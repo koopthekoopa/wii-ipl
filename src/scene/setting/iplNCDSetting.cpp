@@ -8,23 +8,18 @@
 
 namespace ipl {
     namespace ncd {
-        /*
-        notes:
-            checkThisFlag calls checkFlag(mID) and returns, so checkFlag() probably checks some flags of mConfig.profiles(param_1).flags
-            checkAllFlag does the same, but for all (3) mIDs
-        */
         int NCDSetting::init() {
-            memset(&mConfig, 0, sizeof(mConfig));     // initialize config to all 0s (?)
-            int status = NCDReadConfig(&mConfig);     // read config
-            OSReport("NCDReadConfig: %d\n", status);  // log status
-            return makeMacAddr();                     // return mac address
+            memset(&mConfig, 0, sizeof(mConfig));
+            int status = NCDReadConfig(&mConfig);
+            OSReport("NCDReadConfig: %d\n", status);
+            return makeMacAddr();
         }
 
         void NCDSetting::initSetID(unsigned short setID) {
             mID = setID;
         }
 
-        // feels wrong
+        // feels wrong, shouldn't this return checkFlag(mID)?...
         void NCDSetting::checkThisFlag() {
             checkFlag(mID);
         }
