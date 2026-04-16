@@ -925,7 +925,7 @@ config.libs = [
             Object(NonMatching, "keyboard/tiHKBManager.cpp", extra_cflags=["-O4,p"]),
             Object(NonMatching, "keyboard/tiHwKeyboard.cpp", extra_cflags=["-O4,p"]),
             Object(Matching,    "keyboard/tiLayout.cpp", extra_cflags=["-O4,p"]),
-            Object(NonMatching, "keyboard/tiLayoutGather.cpp", extra_cflags=["-O4,p"]),
+            Object(Matching,    "keyboard/tiLayoutGather.cpp", extra_cflags=["-O4,p"]),
             Object(NonMatching, "keyboard/tiKoreanInput.cpp", extra_cflags=["-O4,p"]),  # for 4.3K
         ]
     ),

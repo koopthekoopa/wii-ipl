@@ -31,26 +31,31 @@ namespace textinput {
         };
 
         static const AnimationFile csAninationFile[] = {
-            {0, "fs_VK_toolbar_a_normal.brlan"},     {1, "fs_VK_toolbar_a_Focus-IN.brlan"}, {2, "fs_VK_toolbar_a_Focus-OUT.brlan"},
-            {3, "fs_VK_toolbar_a_Roll_over.brlan"},  {4, "fs_VK_toolbar_a_Pushed.brlan"},   {5, "fs_VK_toolbar_a_toggle-ON.brlan"},
-            {6, "fs_VK_toolbar_a_toggle-OFF.brlan"},
+            {ANM_Normal, "fs_VK_toolbar_a_normal.brlan"},        {ANM_FocusIn, "fs_VK_toolbar_a_Focus-IN.brlan"},
+            {ANM_FocusOut, "fs_VK_toolbar_a_Focus-OUT.brlan"},   {ANM_RollOver, "fs_VK_toolbar_a_Roll_over.brlan"},
+            {ANM_Pushed, "fs_VK_toolbar_a_Pushed.brlan"},        {ANM_ToggleOn, "fs_VK_toolbar_a_toggle-ON.brlan"},
+            {ANM_ToggleOff, "fs_VK_toolbar_a_toggle-OFF.brlan"},
         };
 
         // @bug: Are the [7]s not out of bounds? The counts are 7 too so it's probably fine...
         static const PaneToAnimation csPaneToAnimation[] = {
-            {0, "P_BT_cancel", 5, NULL, {&csAninationFile[0], &csAninationFile[1], &csAninationFile[2], &csAninationFile[3], &csAninationFile[4]}},
-            {0,
+            {KT_NormalButton,
+             "P_BT_cancel",
+             5,
+             NULL,
+             {&csAninationFile[0], &csAninationFile[1], &csAninationFile[2], &csAninationFile[3], &csAninationFile[4]}},
+            {KT_NormalButton,
              "P_BT_confirm",
              5,
              COMMON_BUTTON_ANIM,
              {&csAninationFile[0], &csAninationFile[1], &csAninationFile[2], &csAninationFile[3], &csAninationFile[4]}},
-            {1,
+            {KT_ToggleButton,
              "P_kyChng_QWERTY",
              7,
              NULL,
              {&csAninationFile[0], &csAninationFile[1], &csAninationFile[2], &csAninationFile[3], &csAninationFile[4], &csAninationFile[5],
               &csAninationFile[6], &csAninationFile[7]}},
-            {1,
+            {KT_ToggleButton,
              "P_kyChng_CP",
              7,
              COMMON_CHG_ANIM,
@@ -88,7 +93,7 @@ namespace textinput {
             mpPaneManager->setAllBoundingBoxComponentTriggerTarget(true);
 
             for (u16 i = 0; i < ARRAY_LENGTH(csPaneToAnimation); i++) {
-                const PaneToAnimation &p = csPaneToAnimation[i];
+                const PaneToAnimation& p = csPaneToAnimation[i];
                 AnmPane* pane = NULL;
                 switch (p.type) {
                     case 0: {
@@ -139,12 +144,12 @@ namespace textinput {
         void LayoutByNW4R::init() {
             Base::init();
             Layout::init();
-            searchAnmPane("P_kyChng_CP")->changeAnimation(0);
-            searchAnmPane("P_kyChng_QWERTY")->changeAnimation(0);
+            searchAnmPane("P_kyChng_CP")->changeAnimation(ANM_Normal);
+            searchAnmPane("P_kyChng_QWERTY")->changeAnimation(ANM_Normal);
             enableKeytopChange(true);
             setQwerty(isQwerty());  // okay
-            searchAnmPane("P_BT_confirm")->changeAnimation(0);
-            searchAnmPane("P_BT_cancel")->changeAnimation(0);
+            searchAnmPane("P_BT_confirm")->changeAnimation(ANM_Normal);
+            searchAnmPane("P_BT_cancel")->changeAnimation(ANM_Normal);
             setOKButtonCaption(langindependent::cLanguageIndependentString[langindependent::LANG_STRID_OK][getLanguage()]);
             setCancelButtonCaption(langindependent::cLanguageIndependentString[langindependent::LANG_STRID_CANCEL][getLanguage()]);
             setCancelButtonVisible(true);
@@ -170,16 +175,16 @@ namespace textinput {
                                     pane->changeAnimation(ANM_FocusOut);
                                     break;
                                 }
-                                case KT_ShiftCaps: {
+                                case KT_ToggleButton: {
                                     pane->changeAnimation(ANM_ToggleOn);
                                     break;
                                 }
                             }
                             break;
                         }
-                        case ANM_ToggleOnFocusIn:
-                        case ANM_ToggleOnPushed: {
-                            pane->changeAnimation(ANM_ToggleOnFocusOut);
+                        case ANM_07:
+                        case ANM_11: {
+                            pane->changeAnimation(ANM_09);
                             break;
                         }
                     }

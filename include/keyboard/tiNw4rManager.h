@@ -42,6 +42,7 @@ namespace textinput {
             private:
                 nw4r::lyt::AnimTransform*   mpAnimTransform; // 0x00
 
+            public:
                 u32                         muID; // 0x04
 
                 f32                         mfCurrentFrame; // 0x08
@@ -49,7 +50,6 @@ namespace textinput {
                 bool                        mbLoop; // 0x0C
                 bool                        mbNoOff; // 0x0D
 
-            public:
                 nw4r::ut::Link              mLink; // 0x10
 
                 friend class AnmPane;
@@ -75,6 +75,7 @@ namespace textinput {
                     PE_2,
                     PE_3,
                     PE_4,
+                    PE_5,
                     PE_Last,
                 } AnmPaneEvent;
 

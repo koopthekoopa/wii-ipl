@@ -66,7 +66,6 @@ namespace textinput {
             LayoutByNW4R* mpLayoutByNW4R;  // 0xC
         };
 
-        // TODO better location?
         enum Animation {
             ANM_Normal,
             ANM_FocusIn,
@@ -75,25 +74,19 @@ namespace textinput {
             ANM_Pushed,
             ANM_ToggleOn,
             ANM_ToggleOff,
-            ANM_TargetOn,
-            ANM_ToggleOnFocusIn,
-            ANM_ToggleOnFocusOut,
-            ANM_NormalToggleOn,
-            ANM_ToggleOnPushed,
-            ANM_ActiveOn,
-            ANM_ActiveOff,
-            ANM_ActiveNormal,
-            ANM_NotActiveNormal,
-            ANM_PushedOnIdle,
+            // TODO: These do not appear to be ever set, but some of them are read...
+            ANM_07,
+            ANM_08,
+            ANM_09,
+            ANM_10,
+            ANM_11,
 
             ANM_Last,
         };
 
         enum KeyType {
             KT_NormalButton,
-            KT_ShiftCaps,
             KT_ToggleButton,
-            KT_OnOffButton,
             KT_Last,
         };
 
@@ -126,7 +119,7 @@ namespace textinput {
 
         class ToggleButtonAnmPane : public AnmPane {
         public:
-            ToggleButtonAnmPane(nw4r::lyt::Pane* pane, nw4rmanager::AnmObserver* observer) : AnmPane(pane, observer) { meKeyType = KT_ShiftCaps; }
+            ToggleButtonAnmPane(nw4r::lyt::Pane* pane, nw4rmanager::AnmObserver* observer) : AnmPane(pane, observer) { meKeyType = KT_ToggleButton; }
             virtual ~ToggleButtonAnmPane() {}
 
             virtual void onAnmEvent(AnmPaneEvent paneEvent) override;  // 0x10

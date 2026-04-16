@@ -39,6 +39,8 @@ namespace textinput {
                     PM_Sp,
                     PM_It,
                     PM_Nl,
+                    PM_11, // Cn?
+                    PM_12, // Kr?
 
                     PM_End
                 } PredictMode;
