@@ -12,6 +12,7 @@ namespace ipl {
             static NCDConfig mConfig;
             static NCDConfig mSaveConfig;
             static u16 mID;
+            static u32 mMacNum;
 
             static int init();
             static void initSetID(unsigned short);
@@ -55,16 +56,16 @@ namespace ipl {
             static void backupData();
             static void resetData();
             static void setUseProfileID();
-            static unk setAOSSParams(const NCDAossConfig&);
-            static unk setRakuParams(const NCDApConfig&);
-            static unk getID();
-            static unk getSSID();
-            static unk getUseProfileID();
+            static void setAOSSParams(const NCDAossConfig&);
+            static void setRakuParams(const NCDApConfig&);
+            static u16 getID();
+            static u8* getSSID();
+            static u16 getUseProfileID();
             static unk getPrivacyMode();
             static unk getNCDPrivacyMode();
             static unk getPrivacy();
             static unk getPrivacyLen();
-            static unk getIP();
+            static int getIP();
             static u32 getMacNum();
             static u8* getMacAddr();
             static int makeMacAddr();

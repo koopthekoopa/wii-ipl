@@ -221,5 +221,32 @@ namespace ipl {
             }
             NCDWriteConfig(&mConfig);
         }
+
+        u16 NCDSetting::getID() {
+            return mID & 0xff;
+        }
+
+        u8* NCDSetting::getSSID() {
+            return mConfig.profiles[mID].netif.wireless.config.manual.ssid;
+        }
+
+        u16 NCDSetting::getUseProfileID() {
+            if ((checkAllFlag() & 0xff)) {
+                for (int i = 0; i < 3; i++) {
+                    if (mConfig.profiles[i].flags & 0x80 && mConfig.profiles[i].flags & 0x20) {
+                        return i & 0xff;
+                    }
+                }
+            }
+            return 3;
+        }
+
+        int NCDSetting::getIP() {
+            return *(int*)mConfig.profiles[mID].ip.addr;
+        }
+
+        u32 NCDSetting::getMacNum() {
+            return mMacNum;
+        }
     }  // namespace ncd
 }  // namespace ipl
