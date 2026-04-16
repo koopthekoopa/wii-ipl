@@ -190,8 +190,9 @@ namespace ipl {
             if (mConfig.profiles[mID].flags & IPL_NCD_SETTING_DHCP_FLAG) {
                 memset(&mConfig.profiles[mID].netif.wireless, 0, sizeof(NCDWirelessProfile));
             }
-            mConfig.profiles[mID].flags = mConfig.profiles[mID].flags & IPL_NCD_SETTING_FLAGS_SIZE;
 
+            mConfig.profiles[mID].flags &= ~0x20;
+            mConfig.profiles[mID].flags &= 0x7F;
             adjustNCDData_();
             adjustNWC24FlagEx_();
 
