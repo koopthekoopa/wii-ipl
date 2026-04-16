@@ -20,14 +20,13 @@ namespace ipl {
             mID = setID;
         }
 
-        // feels wrong, shouldn't this return checkFlag(mID)?...
-        void NCDSetting::checkThisFlag() {
-            checkFlag(mID);
+        bool NCDSetting::checkThisFlag() {
+            return checkFlag(mID);
         }
 
-        undefined4 NCDSetting::checkFlag(int id) {
+        bool NCDSetting::checkFlag(int id) {
             int flags = mConfig.profiles[id].flags;
-            if ((flags & IPL_NCD_SETTING_DHCP_FLAG) != 0) {
+            if (flags & IPL_NCD_SETTING_DHCP_FLAG) {
                 return 1;
             }
             if (mConfig.profiles[id].netif.wireless.config.manual.ssidLength == 0 && mConfig.profiles[id].netif.wireless.configMethod == 0 &&
@@ -35,22 +34,24 @@ namespace ipl {
                 return 0;
             }
             int bVar1 = mConfig.profiles[id].netif.wireless.configMethod;
-            if (bVar1 != 2) {
-                if (bVar1 >= 0) {
-                    if (bVar1 > 4) {
-                        if (bVar1 > 0) {
-                            return 1;
-                        }
-                        return 2;
-                    }
+
+            switch (bVar1) {
+                case 0: {
+                    return 2;
+                }
+                case 1: {
                     return 3;
                 }
-                return 4;
+                case 2: {
+                    return 4;
+                }
+                case 3: {
+                    return 5;
+                }
             }
-            return 5;
         }
 
-        undefined4 NCDSetting::checkAllFlag() {
+        bool NCDSetting::checkAllFlag() {
             for (int i = 0; i < 3; i++) {
                 if (checkFlag(i) & 0xff) {
                     return true;
