@@ -10,6 +10,7 @@ namespace ipl {
         class NCDSetting {
         public:
             static NCDConfig mConfig;
+            static NCDConfig mSaveConfig;
             static u16 mID;
 
             static int init();
@@ -51,9 +52,9 @@ namespace ipl {
             static void clearData();
             static void clearLocal();
             static void write();
-            static unk backupData();
-            static unk resetData();
-            static unk setUseProfileID();
+            static void backupData();
+            static void resetData();
+            static void setUseProfileID();
             static unk setAOSSParams(const NCDAossConfig&);
             static unk setRakuParams(const NCDApConfig&);
             static unk getID();
