@@ -5,7 +5,6 @@
 #define IPL_NCD_SETTING_CONNECT_TEST_FLAG 5
 #define IPL_NCD_SETTING_DHCP_FLAG 1
 #define IPL_NCD_SETTING_DNS_FLAG 2
-#define IPL_NCD_SETTING_FLAGS_SIZE 0x5f
 
 namespace ipl {
     namespace ncd {
@@ -196,6 +195,30 @@ namespace ipl {
             adjustNCDData_();
             adjustNWC24FlagEx_();
 
+            NCDWriteConfig(&mConfig);
+        }
+
+        void NCDSetting::backupData() {
+            memcpy(&mSaveConfig, &mConfig, 0x1b5c);
+        }
+
+        void NCDSetting::resetData() {
+            memcpy(&mConfig, &mSaveConfig, 0x1b5c);
+        }
+
+        void NCDSetting::setUseProfileID() {
+            for (int i = 0; i < 3; i++) {
+                if (mID == i) {
+                    mConfig.profiles[i].flags |= 0x80;
+                    if (mConfig.profiles[i].flags & IPL_NCD_SETTING_DHCP_FLAG) {
+                        mConfig.selectedMedia = 2;
+                    } else {
+                        mConfig.selectedMedia = 1;
+                    }
+                } else {
+                    mConfig.profiles[i].flags &= 0x7f;
+                }
+            }
             NCDWriteConfig(&mConfig);
         }
     }  // namespace ncd
