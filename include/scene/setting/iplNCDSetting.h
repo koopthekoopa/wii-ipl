@@ -14,9 +14,9 @@ namespace ipl {
 
             static int init();
             static void initSetID(unsigned short);
-            static undefined4 checkFlag(int);
-            static void checkThisFlag();
-            static undefined4 checkAllFlag();
+            static bool checkFlag(int);
+            static bool checkThisFlag();
+            static bool checkAllFlag();
             static u8 checkConnectTestFlag();
             static u8 checkDHCPFlag();
             static u8 checkDNSFlag();
