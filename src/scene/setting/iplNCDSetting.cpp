@@ -49,7 +49,6 @@ namespace ipl {
             return 5;
         }
 
-        // TODO: ask about why ghidra shows undefined4 for this. its clearly meant to be a bool
         undefined4 NCDSetting::checkAllFlag() {
             for (int i = 0; i < 3; i++) {
                 if (checkFlag(i) & 0xff) {
@@ -150,6 +149,12 @@ namespace ipl {
             }
 
             return ret;
+        }
+
+        undefined NCDSetting::setMTU(long mtu) {
+            mConfig.profiles[mID].adjust.maxTransferUnit = mtu;
+            mConfig.profiles[mID].adjust.tcpRetransTimeout = 0;
+            mConfig.profiles[mID].adjust.dhcpRetransCount = 0;
         }
     }  // namespace ncd
 }  // namespace ipl
