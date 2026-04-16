@@ -45,12 +45,12 @@ namespace ipl {
             static unk setPrivacy(unsigned char*, int);
             static unk setIP(NCDIpProfile*);
             static unk setDNS(NCDIpProfile*);
-            static unk setMTU(long);
-            static unk setProxy(NCDProxyServerProfile*);
-            static unk setBasic(NCDProxyServerProfile*);
-            static unk clearData();
-            static unk clearLocal();
-            static unk write();
+            static void setMTU(long);
+            static void setProxy(NCDProxyServerProfile*);
+            static void setBasic(NCDProxyServerProfile*);
+            static void clearData();
+            static void clearLocal();
+            static void write();
             static unk backupData();
             static unk resetData();
             static unk setUseProfileID();

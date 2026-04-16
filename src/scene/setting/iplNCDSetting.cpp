@@ -151,10 +151,36 @@ namespace ipl {
             return ret;
         }
 
-        undefined NCDSetting::setMTU(long mtu) {
+        void NCDSetting::setMTU(long mtu) {
             mConfig.profiles[mID].adjust.maxTransferUnit = mtu;
             mConfig.profiles[mID].adjust.tcpRetransTimeout = 0;
             mConfig.profiles[mID].adjust.dhcpRetransCount = 0;
+        }
+
+        void NCDSetting::setProxy(NCDProxyServerProfile* proxyServerProfile) {
+            memcpy(&mConfig.profiles[mID].proxy.http.server, proxyServerProfile->server, 256);
+            memcpy(&mConfig.profiles[mID].proxy.ssl.server, proxyServerProfile->server, 256);
+
+            mConfig.profiles[mID].proxy.http.port = proxyServerProfile->port;
+            mConfig.profiles[mID].proxy.ssl.port = proxyServerProfile->port;
+        }
+
+        void NCDSetting::setBasic(NCDProxyServerProfile* proxyServerProfile) {
+            memcpy(mConfig.profiles[mID].proxy.http.username, proxyServerProfile->username, 33);
+            memcpy(mConfig.profiles[mID].proxy.ssl.username, proxyServerProfile->username, 33);
+            memcpy(mConfig.profiles[mID].proxy.http.password, proxyServerProfile->password, 33);
+            memcpy(mConfig.profiles[mID].proxy.ssl.password, proxyServerProfile->password, 33);
+        }
+
+        void NCDSetting::clearData() {
+            memset(&mConfig.profiles[mID].flags, 0, sizeof(NCDProfile));
+            adjustNCDData_();
+            adjustNWC24FlagEx_();
+            NCDWriteConfig(&mConfig);
+        }
+
+        void NCDSetting::clearLocal() {
+            memset(&mConfig.profiles[mID].flags, 0, sizeof(NCDProfile));
         }
     }  // namespace ncd
 }  // namespace ipl
