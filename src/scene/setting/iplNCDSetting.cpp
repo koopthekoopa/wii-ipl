@@ -1,5 +1,7 @@
 #include "scene/setting/iplNCDSetting.h"
 #include "revolution/os/OSError.h"
+#include "revolution/sc.h"
+#include "scene/setting/iplParental.h"
 #include <string.h>
 
 #define IPL_NCD_SETTING_CONNECT_TEST_FLAG 5
@@ -247,6 +249,55 @@ namespace ipl {
 
         u32 NCDSetting::getMacNum() {
             return mMacNum;
+        }
+
+        u8* NCDSetting::getMacAddr() {
+            return mMac;
+        }
+
+        NCDProxyProfile* NCDSetting::getProxy() {
+            return &mConfig.profiles[mID].proxy;
+        }
+
+        s32 NCDSetting::getMTU() {
+            return mConfig.profiles[mID].adjust.maxTransferUnit;
+        }
+
+        NCDConfig* NCDSetting::getData() {
+            return &mConfig;
+        }
+
+        bool NCDSetting::getConnectEnableFlag() {
+            memset(&mConfig, 0, sizeof(mConfig));
+            NCDErr err = NCDReadConfig(&mConfig);
+            OSReport("NCDReadConfig: %d\n", err);
+            return getEnableFlag();
+        }
+
+        bool NCDSetting::getEnableFlag() {
+            for (int i = 0; i < 3; i++) {
+                if (mConfig.profiles[i].flags & 0x80 && mConfig.profiles[i].flags & 0x20) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        NCDErr NCDSetting::adjustNWC24Flag() {
+            adjustNWC24FlagEx_();
+            return NCDWriteConfig(&mConfig);
+        }
+
+        void NCDSetting::adjustNWC24FlagEx_() {
+            u32 wcFlags = SCGetWCFlags() & 1;
+            u32 contentRestrictions = SCGetNetContentRestrictions() & 2;
+            mConfig.nwc24Permission = 0;
+            if (wcFlags && SCGetEULA()) {
+                mConfig.nwc24Permission |= 4;
+                if (!(ipl::parental::Parental::checkFlags() & 0xFF) || ((ipl::parental::Parental::checkFlags() & 0xFF) && !(contentRestrictions))) {
+                    mConfig.nwc24Permission |= 3;
+                }
+            }
         }
     }  // namespace ncd
 }  // namespace ipl
