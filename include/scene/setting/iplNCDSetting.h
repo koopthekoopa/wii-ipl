@@ -11,6 +11,7 @@ namespace ipl {
         public:
             static NCDConfig mConfig;
             static NCDConfig mSaveConfig;
+            static u8 mMac[];
             static u16 mID;
             static u32 mMacNum;
 
@@ -69,13 +70,13 @@ namespace ipl {
             static u32 getMacNum();
             static u8* getMacAddr();
             static int makeMacAddr();
-            static unk getProxy();
-            static unk getMTU();
-            static unk getData();
+            static NCDProxyProfile* getProxy();
+            static s32 getMTU();
+            static NCDConfig* getData();
             static bool getConnectEnableFlag();
-            static unk getEnableFlag();
-            static unk adjustNWC24Flag();
-            static unk adjustNWC24FlagEx_();
+            static bool getEnableFlag();
+            static NCDErr adjustNWC24Flag();
+            static void adjustNWC24FlagEx_();
         };
     }  // namespace ncd
 }  // namespace ipl
