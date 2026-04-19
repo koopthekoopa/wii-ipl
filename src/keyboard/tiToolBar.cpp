@@ -96,12 +96,12 @@ namespace textinput {
                 const PaneToAnimation& p = csPaneToAnimation[i];
                 AnmPane* pane = NULL;
                 switch (p.type) {
-                    case 0: {
+                    case KT_NormalButton: {
                         void* pBtnBuf = MEMAllocFromAllocator(allocator, sizeof(NormalButtonAnmPane));
                         pane = new (pBtnBuf) NormalButtonAnmPane(getPane(p.paneName), NULL);
                         break;
                     }
-                    case 1: {
+                    case KT_ToggleButton: {
                         void* pBtnBuf = MEMAllocFromAllocator(allocator, sizeof(ToggleButtonAnmPane));
                         pane = new (pBtnBuf) ToggleButtonAnmPane(getPane(p.paneName), NULL);
                         break;

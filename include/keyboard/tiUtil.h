@@ -29,7 +29,42 @@ namespace textinput {
     
         void    getProjectionRect4x3(nw4r::ut::Rect* rect);
         void    getProjectionRect16x9(nw4r::ut::Rect* rect);
-    }
-}
 
-#endif // TEXTINPUT_UTIL_H
+        class AnimObserver {
+            public:
+            enum AnmEvent {
+                AE_0,
+                AE_1,
+                // ...
+                AE_Last
+            };
+
+            virtual void onAnmEvent(AnmEvent event, void*) = 0;
+        };
+
+        class Animation {
+        public:
+            Animation() : mfAnimationTime(0.0f), mbInAnimation(false), mbSE(false), mpAnimObserver(NULL) {}
+
+            virtual void startAnm(AnimObserver*, f32, f32, f32, void*);  // 0x08
+            virtual void calc();                                         // 0x0C
+            virtual f32 getValue();                                      // 0x10
+            virtual bool isActive();                                     // 0x14
+            virtual void setSEFlag(bool);                                // 0x18
+            virtual bool isSEFlag();                                     // 0x1C
+            virtual void stop();                                         // 0x20
+
+        private:
+            f32 mfStartPoint;              // 0x04
+            f32 mfEndPoint;                // 0x08
+            f32 mfCurrentFrame;            // 0x0C
+            f32 mfAnimationTime;           // 0x10
+            bool mbInAnimation;            // 0x14
+            bool mbSE;                     // 0x15
+            AnimObserver* mpAnimObserver;  // 0x18
+            void* mpData;                  // 0x1C
+        };
+    }  // namespace util
+}  // namespace textinput
+
+#endif  // TEXTINPUT_UTIL_H

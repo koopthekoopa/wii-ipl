@@ -35,9 +35,12 @@ namespace textinput {
                 virtual void vt_0x5C();
                 virtual void vt_0x60();
                 virtual void vt_0x64();
-                virtual void vt_0x68();
+                virtual void vt_0x68(bool);
 
                 virtual bool onClose();
+
+                // TODO enum?
+                int getInputType() const;
             };
 
             class LayoutByNW4R : public Base, public nw4rmanager::Layout {

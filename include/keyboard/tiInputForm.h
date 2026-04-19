@@ -4,6 +4,7 @@
 #include <revolution/types.h>
 
 #include <revolution/mem/allocator.h>
+#include <revolution/kpr.h>
 
 #include "tiTextInputBase.h"
 #include "tiTextDrawer.h"
@@ -25,6 +26,11 @@ namespace textinput {
                 MEMAllocator*   mpAllocator;    // 0x10
         };
 
+        class DeadKeyStream {
+        private:
+            KPRQueue mKPRQueue;  // 0x00
+        };
+
         class Base : public CommandReceiver, public textdrawer::Base, public candidatebox::CandidateBoxCaller {
             public:
                 typedef enum PredictMode {
@@ -44,6 +50,36 @@ namespace textinput {
 
                     PM_End
                 } PredictMode;
+
+                // TODO - location?
+                enum InputMode {
+                    IM_Direct,
+                    IM_ROMAN,
+                    IM_End,
+                };
+
+                // TODO - location?
+                enum ScrollFlag {
+                    SF_NoScroll,
+                    SF_ScrollOn,
+                    SF_ScrollByBS,
+                    SF_End,
+                };
+
+                struct Info_ {
+                    u16 Back;
+                    u16 Next;
+                    u16 StrCount;
+                    u16 DispRowCount;
+                };
+
+                // TODO - location
+                class RowInfoManager {
+                private:
+                    Info_* mpInfo;              // 0x00
+                    u16 mMaxLength;             // 0x04
+                    MEMAllocator* mpAllocator;  // 0x08
+                };
 
                 virtual ~Base();
 
@@ -96,6 +132,9 @@ namespace textinput {
 
                 void                        notifyChangeMode();
 
+                void                        setCursorSelectFlg(bool flag) { mbCursorSelected = flag; }
+                void                        deselectCandidate();
+
                 virtual void                enableSpaceByRight(bool rightWithSpace);
                 virtual void                onClose();
                 virtual bool                canConvert();
@@ -144,9 +183,46 @@ namespace textinput {
                 virtual void                makeUpCursorPos(CursorPos* cursorPos, u32 pos, s32 startLine, s32 endLine);
 
             private:
-                u8                  unk_0x120[0x4C];
-                tistring::WithZi*   mpZiString; // 0x16C
-                u8                  unk_0x16C[0xA8];
+                Rect mRect;                         // 0x120
+                nw4r::math::MTX34 mMtx;             // 0x130
+                Destination meDestination;          // 0x160
+                tistring::Decolated* mpString;      // 0x164
+                tistring::WithAtok* mpUnfixString;  // 0x168
+                tistring::WithZi* mpZiString;       // 0x16C
+                InputMode meInputMode;              // 0x170
+                PredictMode mePredictMode;          // 0x174
+                bool mbPredictOn;                   // 0x178
+                bool mbDoWordWrap;                  // 0x179
+                bool mbRightWithSpace;              // 0x17A
+                bool mbPadding;                     // 0x17B
+                f32 mfCursorX;                      // 0x17C
+                f32 mfCursorY;                      // 0x180
+                f32 mfScrollX;                      // 0x184
+                f32 mfScrollY;                      // 0x188
+                util::Animation mScrollAnm;         // 0x18C
+                f32 mfSustainTimer;                 // 0x1AC
+                ScrollFlag meScrollFlag;            // 0x1B0
+                u32 muWordWrapCounter;              // 0x1B4
+                u32 muLimitStringLength;            // 0x1B8
+                u32 muLimitRowNum;                  // 0x1BC
+                GXColor mSelectedColor;             // 0x1C0
+                f32 mfCursorTimer;                  // 0x1C4
+                u8 muGlobalAlpha;                   // 0x1C8
+                u8 muPaddint;                       // 0x1C9
+                nw4r::ut::Color mCharColor;         // 0x1CC
+                MEMAllocator* mpAllocator;          // 0x1D0
+                Manager* mpManager;                 // 0x1D4
+                DeadKeyStream mDKStream;            // 0x1D8
+                Language meLanguage;                // 0x1F0
+                bool mbZuSelected;                  // 0x1F4
+                bool mbCursorSelected;              // 0x1F5
+                RowInfoManager mriManager;          // 0x1F8
+                Info_* mpCursorLine;                // 0x204
+                Info_* mpDrawEndLine;               // 0x208
+                u16 mCursorLinePos;                 // 0x20C
+                bool mbLineDraw;                    // 0x20E
+                u32 muSpecifyLineDrawCount;         // 0x210
+                u32 muCursorTimer;                  // 0x214
         };
 
         class LayoutByNW4R : public Base, public nw4rmanager::Layout {

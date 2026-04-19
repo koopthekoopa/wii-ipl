@@ -34,6 +34,7 @@ namespace nw4r {
             const wchar_t* GetString() const { return mTextBuf; }
 
             const Size& GetFontSize() const { return mFontSize; }
+            const f32 GetCharSpace() const { return mCharSpace; }
 
             void SetFontSize(const Size& fontSize) { mFontSize = fontSize; }
             void SetTagProcessor(ut::WideTagProcessor* pTagProcessor) { mpTagProcessor = pTagProcessor; }

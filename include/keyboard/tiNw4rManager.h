@@ -15,9 +15,11 @@ namespace textinput {
             public:
                 typedef struct Input {
                     // todo
-                    u8  dummy[12];
+                    u32 field_0x00; // 0x00
+                    u8  dummy[8];
                     u32 field_0x0C; // 0x0C
-                    u8  dummy2[16];
+                    u32 field_0x10; // 0x10
+                    u8  dummy2[12];
                 } Input;
 
                 virtual void    onEvent(gui::GUIComponent& comp, u32 event, void* data);                    // 0x0C
@@ -76,6 +78,8 @@ namespace textinput {
                     PE_3,
                     PE_4,
                     PE_5,
+                    PE_6,
+                    PE_7,
                     PE_Last,
                 } AnmPaneEvent;
 

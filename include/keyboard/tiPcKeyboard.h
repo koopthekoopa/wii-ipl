@@ -14,6 +14,18 @@ namespace textinput {
             // TODO
             class Base : public CommandSender {
             public:
+                enum TranslateMode {
+                    TM_00,
+                };
+
+                enum InputType {
+                    IT_00,
+                    IT_01,
+                    IT_02,
+                    IT_03,
+                    IT_04,
+                };
+
                 virtual ~Base();
                 virtual void create(MEMAllocator* allocator);
                 virtual void init();
@@ -33,10 +45,10 @@ namespace textinput {
                 virtual void setABC();
                 virtual void getABCInputMode();
                 virtual void getAIUInputMode();
-                virtual void getTranslateMode();
-                virtual void setTranslateMode();
+                virtual TranslateMode getTranslateMode();
+                virtual void setTranslateMode(TranslateMode);
                 virtual void onlyQwerty();
-                virtual void setLangKeyActive();
+                virtual void setLangKeyActive(bool);
                 virtual void setInputModeJP();
                 virtual void setInputModeCK();
                 virtual void refreshState();
