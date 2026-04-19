@@ -63,14 +63,13 @@ namespace ipl {
 
         OSEnableInterrupts();
 
-        while (inputCur < sizeof(sKeyInputs)) {
+        while (inputCur < (int)ARRAY_LENGTH(sKeyInputs)) {
             for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
                 KPADRead(i, &cons[i], 1);
             }
 
             wait(50);
 
-            // todo
             for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
                 u32 pressed = cons[i].trig;
                 if (pressed) {
@@ -79,11 +78,13 @@ namespace ipl {
                     } else {
                         inputCur = 0;
                     }
+                    break;
                 }
             }
         }
     }
 
+    
     void Exception::exception_callback(nw4r::db::ConsoleHandle console) {
         nw4r::db::Console_SetVisible(console, true);
 
@@ -111,8 +112,8 @@ namespace ipl {
         memset(cons, 0, sizeof(cons));
 
         while (true) {
-            int yPrevCur = yCur;
             int xCur = nw4r::db::Console_GetPositionX(mConsole);
+            int yPrevCur = yCur;
             int xPrevCur = xCur;
 
             // Read controllers
