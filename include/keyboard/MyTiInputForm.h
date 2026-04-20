@@ -100,7 +100,7 @@ namespace textinput {
 
                     EditMode                        getEditMode()                           { return meEditMode; }
 
-                    tistring::Delocated*            getSendString()                         { return mpSendString; }
+                    tistring::Decolated*            getSendString()                         { return mpSendString; }
 
                 private:
                     undefined4*             unk_0x30C;
@@ -120,7 +120,7 @@ namespace textinput {
                     u8 /*todo*/             mExScrollAnm[32];   // 0x3C0
                     NigaoeEventObserver*    mpNigaoeObserver;   // 0x3E0
                     GXTexObj*               mpDefaultNigaoe;    // 0x3E4
-                    tistring::Delocated*    mpSendString;       // 0x3E8
+                    tistring::Decolated*    mpSendString;       // 0x3E8
                     bool                    mbEdited;           // 0x3EC
                     bool                    mbGoodBye;          // 0x3ED
                     bool                    mbEditScrollUp;     // 0x3EE

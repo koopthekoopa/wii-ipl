@@ -52,8 +52,58 @@ namespace textinput {
 
                 MEMAllocator*   mpAllocator;    // 0x14
         };
-        
-        class Delocated : public StringBase {};
+
+        class KanaStream {
+        private:
+            u8 field_0x00[0x24];
+        };
+
+        class Decolated : public StringBase {
+        public:
+            Decolated(u16 maxLen) : StringBase(maxLen), field_0x18(0), field_0x1C(0), field_0x20(0), field_0x24(0) { initKanaConverter(); }
+
+            virtual void inputChar();
+            virtual void inputString();
+            virtual void deleteChar();
+            virtual void backSpace();
+            virtual void confirm();
+            virtual void moveCursorRight();
+            virtual void moveCursorLeft();
+            virtual void setCursorPos();
+            virtual void onSustain();
+            virtual void offSustain();
+            virtual void isOnSustain();
+            virtual void getCursorPos();
+            virtual void getCursorPos(u32*, u32*);
+            virtual void canBackSpace();
+            virtual void deleteForward();
+            virtual void getSelected();
+            virtual void getWCharAtCursor();
+            virtual void replaceAtCursor();
+            virtual void isDakuten();
+            virtual void converDakuten();
+            virtual void isHandaku();
+            virtual void converHandaku();
+            virtual void convertAll();
+            virtual void isSmall();
+            virtual void converSmall();
+            virtual bool atTheBeginningOfASentence();
+            virtual void initKanaConverter();
+            virtual void getKanaBuffer();
+            virtual void isKanaFix();
+            virtual void confirmKana();
+            virtual void clearKana();
+            virtual void EnableKSXFilter();
+
+        private:
+            u32 field_0x18;          // 0x18
+            u32 field_0x1C;          // 0x1C
+            u8 field_0x20;           // 0x20
+            u32 field_0x24;          // 0x24
+            KanaStream mKanaStream;  // 0x28
+        };
+
+        class WithAtok : public StringBase {};
     }
 }
 

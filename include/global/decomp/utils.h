@@ -20,6 +20,12 @@
 #define ADDRESS(addr)
 #endif
 
+#ifdef __cplusplus
+#ifdef __MWERKS__ 
+#define override
+#endif
+#endif
+
 /* Macros for Matching */
 
 #ifndef NON_MATCHING

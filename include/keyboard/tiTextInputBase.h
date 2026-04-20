@@ -65,9 +65,11 @@ namespace textinput {
 
     class CommandSender : public Base {
         public:
+            CommandSender() : mpCommandReceiver(NULL) {}
+
             virtual void    setCommandReceiver(CommandReceiver* cmdRecv);
             virtual void    sendCommand(u32, void*);
-            virtual void    updateFromReceiver(u32, void*);
+            virtual void    updateFromReceiver(u32, void*) {}
 
             nw4r::ut::Link      mLink;              // 0x00
 

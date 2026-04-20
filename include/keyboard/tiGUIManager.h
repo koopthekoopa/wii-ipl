@@ -74,17 +74,17 @@ namespace textinput {
                 };
 
                 EventHandler() :
-                mLatestCtrlNum(0) {}
+                muLatestEventCtrlNo(0) {}
 
-                virtual ~EventHandler() {}                                                              // 0x08
+                virtual ~EventHandler() {}                                                                   // 0x08
 
-                virtual void        onEvent(GUIComponent& comp, u32 event, void* data) {}               // 0x0C
+                virtual void        onEvent(GUIComponent& comp, u32 event, void* data) {}                    // 0x0C
 
-                virtual void        setLatestEventCtrlNo(int ctrlNo)    { mLatestCtrlNum = ctrlNo; }    // 0x10
-                virtual int         getLatestEventCtrlNo()              { return mLatestCtrlNum; }      // 0x14
+                virtual void        setLatestEventCtrlNo(int ctrlNo)    { muLatestEventCtrlNo = ctrlNo; }    // 0x10
+                virtual int         getLatestEventCtrlNo()              { return muLatestEventCtrlNo; }      // 0x14
             
             protected:
-                int         mLatestCtrlNum; // 0x04
+                int         muLatestEventCtrlNo; // 0x04
         };
 
         class GUIComponent : public GUIInterface {
@@ -322,7 +322,11 @@ namespace textinput {
 
                 virtual void                setPane(nw4r::lyt::Pane* pane)  { mpPane = pane; }  // 0x60
                 nw4r::lyt::Pane*            getPane()                       { return mpPane; }
-            
+
+                nw4r::lyt::TextBox*         getTextPane() { return static_cast<nw4r::lyt::TextBox*>(mpPane); }
+                nw4r::lyt::Picture*         getPictPane() { return static_cast<nw4r::lyt::Picture*>(mpPane); }
+                nw4r::lyt::Bounding*        getBoundPane() { return static_cast<nw4r::lyt::Bounding*>(mpPane); }
+
             private:
                 nw4r::lyt::Pane*    mpPane; // 0x9C
         };
