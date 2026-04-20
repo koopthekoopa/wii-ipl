@@ -66,9 +66,52 @@ int Rvl_decode(u8* out, u8* in) {
 #endif  // TARGET_RVL
 }
 
-/* TODO !!! */
 int Rvl_decode_szs(u8* out, u8* in) {
-    return 0;
+    u32 size = Rvl_decode_szs_size(in);
+    u32 groupByte = 0;
+    u8* src = in + 0x10;
+    u8* dst = out;
+    u8 codeByte;
+    u32 flags;
+    u8 b0;
+    u8 b1;
+    u32 dist;
+    u32 copyLen;
+    u8* ref;
+
+    while (1) {
+        flags = groupByte >> 1;
+        if (flags == 0) {
+            codeByte = *src++;
+            flags = 0x80;
+        }
+        groupByte = flags;
+
+        if (groupByte & codeByte) {
+            *dst++ = *src++;
+            size--;
+            if (size == 0)
+                break;
+        } else {
+            b0 = *src++;
+            b1 = *src++;
+            copyLen = b0 >> 4;
+            if (copyLen == 0) {
+                copyLen = *src++ + 0x10;
+            }
+            dist = ((b0 & 0xF) << 8) | b1;
+            copyLen += 2;
+            size -= copyLen;
+            ref = dst - dist - 1;
+            while (copyLen--) {
+                *dst++ = *ref++;
+            }
+            if (size <= 0)
+                break;
+        }
+    }
+
+    return (int)size;
 }
 int Rvl_decode_ash(u8* out, u8* in) {
     return 0;

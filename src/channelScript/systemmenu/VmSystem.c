@@ -67,7 +67,7 @@ VmMethodDefine(System, SCGetLanguage) {
     return CHANSVmSetInteger(VmInst, VmReturnObj, SCGetLanguage()) == CHANS_VM_OK;
 }
 
-CHANSVmErr VmGetProductArea(CHANSVm* vm, CHANSVmObjHdr* VmParentObj, CHANSVmObjHdr* VmReturnObj, vmS32 product) {
+CHANSVmErr VmGetProductArea(CHANSVm* vm, CHANSVmObjHdr* VmParentObj, CHANSVmObjHdr* VmReturnObj, vmS64 product) {
     if (*(u8*)(*VmParentObj->value.ptr_v)) {
         return CHANSVmSetInteger(vm, VmReturnObj, product) == CHANS_VM_OK;
     }
@@ -75,7 +75,7 @@ CHANSVmErr VmGetProductArea(CHANSVm* vm, CHANSVmObjHdr* VmParentObj, CHANSVmObjH
 }
 
 VmMethodDefine(System, SCGetProductArea) {
-    int product = SCGetProductArea();
+    vmS32 product = SCGetProductArea();
     if (product == SC_PRODUCT_AREA_TWN) {
         product = SC_PRODUCT_AREA_JPN;
     }
