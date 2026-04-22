@@ -1896,14 +1896,14 @@ config.libs = [
     # EGG library (for Nintendo EAD software)
     EGGLib(
         [
-            Object(NonMatching, "core/eggAllocator.cpp"),
+            Object(Matching, "core/eggAllocator.cpp"),
             Object(NonMatching, "core/eggAudioArcPlayerMgr.cpp"),
             Object(NonMatching, "core/eggAudioExpMgr.cpp"),
             Object(NonMatching, "core/eggAudioFxMgr.cpp"),
             Object(NonMatching, "core/eggAudioMgr.cpp"),
             Object(NonMatching, "core/eggAudioHeapMgr.cpp"),
             Object(NonMatching, "core/eggColorFader.cpp"),
-            Object(NonMatching, "core/eggDisposer.cpp"),
+            Object(Matching, "core/eggDisposer.cpp"),
             Object(NonMatching, "core/eggExpHeap.cpp"),
             Object(NonMatching, "core/eggFrmHeap.cpp"),
             Object(NonMatching, "core/eggGraphicsFifo.cpp"),
