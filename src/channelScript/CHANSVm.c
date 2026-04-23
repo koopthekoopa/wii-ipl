@@ -1201,66 +1201,6 @@ CHANSVmErr VmCmpEq(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* lef
     CHANSVmErr CVar5;
     vmPtr num;
 
-    u8 tempr3;
-    s32 varr28, tempr6, tempr4, tempr5;
-    /*
-    switch (type) {
-        case 0:
-            tempr3 = left->type;
-            if (tempr3 == right->type) {
-                switch (tempr3) {
-                    case 9:
-                        varr28 = right->value.ptr_v == left->value.ptr_v;
-                        break;
-                    default:
-                        if (tempr3 == 0) {
-                            varr28 = 1;
-                        } else {
-                            goto block15;
-                        }
-                        break;
-                    case 4:
-                    case 7:
-                    case 8:
-                        varr28 = 0;
-                        if (left->parentCls == right->parentCls) {
-                            tempr3 = left->unk_0x0A;
-                            if ((tempr3 == right->unk_0x0A) && ((tempr3 == 0) || left->value.ptr_v == right->value.ptr_v)) {
-                                varr28 = 1;
-                            }
-                        }
-                        break;
-                }
-            } else {
-            block15:
-                varr28 = 0;
-            }
-        block30:
-            tempr6 = varr28 - (varr28 - 1);
-            return CHANSVmSetInteger(vm, ret, tempr6 >> 0x1f);
-        case 1:
-            varr28 = (left->value.int_v ^ right->value.int_v | left->value.int32_v->unk_0x00 ^ right->value.int32_v->unk_0x00) == 0;
-            goto block30;
-        case 2:
-            varr28 = left->value.float_v == right->value.float_v;
-            goto block30;
-        case 3:
-            uVar3 = 0;
-            num = (left->value).ptr_v[1];
-            if (num == (right->value).ptr_v[1]) {
-                bVar2 = false;
-                if ((num == NULL) || (memcmp(*(left->value).ptr_v, *(right->value).ptr_v, (size_t)num) == 0)) {
-                    bVar2 = true;
-                }
-                if (bVar2) {
-                    uVar3 = 1;
-                }
-            }
-            goto block30;
-        default:
-            return CHANS_VM_ERR_CMP;
-    } */
-
     if (type == CHANS_VM_OBJ_TYPE_FLOAT) {
         uVar3 = ((unsigned int)(((left->value).float_v == (right->value).float_v) << 1) << 0x1c) >> 0x1d;
         goto endcmp;
