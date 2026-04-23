@@ -10,10 +10,10 @@ namespace ipl {
         class NCDSetting {
         public:
             static NCDConfig mConfig;
-            static NCDConfig mSaveConfig;
-            static u8 mMac[];
             static u16 mID;
+            static u8 mMac[];
             static u32 mMacNum;
+            static NCDConfig mSaveConfig;
 
             static int init();
             static void initSetID(unsigned short);
@@ -65,7 +65,7 @@ namespace ipl {
             static unk getPrivacyMode();
             static unk getNCDPrivacyMode();
             static unk getPrivacy();
-            static unk getPrivacyLen();
+            static u16 getPrivacyLen();
             static int getIP();
             static u32 getMacNum();
             static u8* getMacAddr();
