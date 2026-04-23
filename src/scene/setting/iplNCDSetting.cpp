@@ -1,8 +1,13 @@
 #include "scene/setting/iplNCDSetting.h"
+#include "revolution/ncd.h"
+#include "revolution/net.h"
 #include "revolution/os/OSError.h"
 #include "revolution/sc.h"
 #include "scene/setting/iplParental.h"
+#include "utility/iplCharacterCode.h"
+#include <cstdio>
 #include <string.h>
+// todo: check <> vs "" imports
 
 #define IPL_NCD_SETTING_CONNECT_TEST_FLAG 5
 #define IPL_NCD_SETTING_DHCP_FLAG 1
@@ -298,6 +303,66 @@ namespace ipl {
                     mConfig.nwc24Permission |= 3;
                 }
             }
+        }
+
+        u16 NCDSetting::getPrivacyLen() {
+            u16 mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode;
+            switch (mode) {
+                case 1: {
+                    if (mConfig.profiles[mID].netif.wireless.config.manual.privacy.aes.reserved[0] == 0) {
+                        return 5;
+                    }
+                    return 10;
+                }
+                case 2: {
+                    if (mConfig.profiles[mID].netif.wireless.config.manual.privacy.aes.reserved[0] == 0) {
+                        return 13;
+                    }
+                    return 26;
+                }
+                case 4: {
+                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.tkip.keyLen;
+                }
+                case 5:
+                case 6: {
+                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.tkip.keyLen;
+                }
+                default: {
+                    return 0;
+                }
+            }
+        }
+
+        int NCDSetting::makeMacAddr() {
+            u8 macAddress[6];
+            long long uVar2;
+            char* mac;
+            u32 local_2d;
+
+            NCDErr err = NETGetWirelessMacAddress(macAddress);
+            if (err != -4) {
+                if (err < -4) {
+                    if (err == -8) {
+                        goto fail;
+                    }
+                } else if (err == 0) {
+                    sprintf(mac, "%02x-%02x-%02x-%02x-%02x-%02x", macAddress[0], macAddress[1], macAddress[2], macAddress[3], macAddress[4],
+                            macAddress[5]);
+                    OSReport("MAC: %s\n", &mac);
+
+                    ipl::utility::CharacterCode::ANSIToUTF8((char*)mMac, (u8*)&mac);
+
+                    memset(&mac, 0, 18);
+                    memcpy(&mac, &macAddress, 6);
+                    uVar2 = *mac % 100000000;
+                    // uVar2 = __mod2u(local_31, local_2d, 0, 100000000);
+                    mMacNum = (int)uVar2;
+                    OSReport("%lld %d\n", mMacNum, mac, local_2d, mMacNum);
+                }
+                OSPanic("iplNCDSetting.cpp", 0x43b, "Unrecoverable Error!!");
+            }
+        fail:
+            OSPanic("iplNCDSetting.cpp", 0x436, "try again!!");
         }
     }  // namespace ncd
 }  // namespace ipl
