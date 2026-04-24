@@ -30,7 +30,7 @@ namespace ipl {
             return checkFlag(mID);
         }
 
-        bool NCDSetting::checkFlag(int id) {
+        int NCDSetting::checkFlag(int id) {
             int ret = 0;
             int flags = mConfig.profiles[id].flags;
             if (flags & IPL_NCD_SETTING_DHCP_FLAG) {

@@ -17,7 +17,7 @@ namespace ipl {
 
             static int init();
             static void initSetID(unsigned short);
-            static bool checkFlag(int);
+            static int checkFlag(int);
             static bool checkThisFlag();
             static bool checkAllFlag();
             static u8 checkConnectTestFlag();
