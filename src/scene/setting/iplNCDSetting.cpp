@@ -31,6 +31,7 @@ namespace ipl {
         }
 
         bool NCDSetting::checkFlag(int id) {
+            int ret = 0;
             int flags = mConfig.profiles[id].flags;
             if (flags & IPL_NCD_SETTING_DHCP_FLAG) {
                 return 1;
@@ -43,18 +44,23 @@ namespace ipl {
 
             switch (bVar1) {
                 case 0: {
-                    return 2;
+                    ret = 2;
+                    break;
                 }
                 case 1: {
-                    return 3;
+                    ret = 3;
+                    break;
                 }
                 case 2: {
-                    return 4;
+                    ret = 4;
+                    break;
                 }
                 case 3: {
-                    return 5;
+                    ret = 5;
+                    break;
                 }
             }
+            return ret;
         }
 
         bool NCDSetting::checkAllFlag() {
