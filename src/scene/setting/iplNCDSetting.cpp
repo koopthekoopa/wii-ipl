@@ -26,8 +26,79 @@ namespace ipl {
             mID = setID;
         }
 
-        bool NCDSetting::checkThisFlag() {
+        int NCDSetting::checkThisFlag() {
             return checkFlag(mID);
+        }
+
+        void NCDSetting::setWired() {
+            memset(&mConfig.profiles[mID], 0, sizeof(NCDProfile));
+            mConfig.version = 0;
+            mConfig.linkTimeout = 0;
+            mConfig.profiles[mID].flags = 7;
+        }
+
+        void NCDSetting::setWireless(u8 configMethod) {
+            memset(&mConfig.profiles[mID], 0, 0x91c);
+
+            mConfig.version = 0;
+            mConfig.linkTimeout = 0;
+            mConfig.profiles[mID].netif.wireless.configMethod = configMethod;
+            mConfig.profiles[mID].flags = 6;
+            if (configMethod == 0) {
+                memcpy(&mSaveConfig, &mConfig, sizeof(NCDConfig));
+            }
+        }
+
+        void NCDSetting::changeConnectType(u8 connectType) {
+            if (connectType == 1) {
+                mConfig.profiles[mID].flags |= 1;
+                return;
+            }
+            mConfig.profiles[mID].flags &= 0xfe;
+        }
+
+        void NCDSetting::setSSID(const char* newSSID) {
+            memcpy(mConfig.profiles[mID].netif.wireless.config.manual.ssid, newSSID, 32);
+            mConfig.profiles[mID].netif.wireless.config.manual.ssidLength = strlen(newSSID);
+        }
+
+        void NCDSetting::setPrivacyMode(u16 param_1) {
+            short sVar2;
+
+            if (param_1 == 2) {
+                sVar2 = 4;
+                goto check;
+            }
+            if (param_1 >= 2) {
+                if (param_1 == 0) {
+                    sVar2 = 0;
+                    goto check;
+                }
+                if (-1 < param_1) {
+                    if (mConfig.profiles[mID].flags == 2 ||
+                        (0x14 < strlen((const char*)mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.wep104.key))) {
+                        sVar2 = 2;
+                    } else {
+                        sVar2 = 1;
+                    }
+                    goto check;
+                }
+            } else {
+                if (param_1 == 4) {
+                    sVar2 = 5;
+                    goto check;
+                }
+                if (param_1 < 4) {
+                    sVar2 = 6;
+                    goto check;
+                }
+            }
+            sVar2 = 0;
+        check:
+            if (mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode != sVar2) {
+                mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode = sVar2;
+            }
+            return;
         }
 
         int NCDSetting::checkFlag(int id) {
