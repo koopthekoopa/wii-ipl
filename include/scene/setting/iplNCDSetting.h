@@ -62,9 +62,9 @@ namespace ipl {
             static u16 getID();
             static u8* getSSID();
             static u16 getUseProfileID();
-            static unk getPrivacyMode();
-            static unk getNCDPrivacyMode();
-            static unk getPrivacy();
+            static int getPrivacyMode();
+            static u16 getNCDPrivacyMode();
+            static u8* getPrivacy();
             static u16 getPrivacyLen();
             static int getIP();
             static u32 getMacNum();

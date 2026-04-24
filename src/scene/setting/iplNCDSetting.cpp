@@ -238,7 +238,9 @@ namespace ipl {
         }
 
         u16 NCDSetting::getUseProfileID() {
-            if ((checkAllFlag() & 0xff)) {
+            if (!(checkAllFlag() & 0xff)) {
+                return 3;
+            } else {
                 for (int i = 0; i < 3; i++) {
                     if (mConfig.profiles[i].flags & 0x80 && mConfig.profiles[i].flags & 0x20) {
                         return i & 0xff;
@@ -309,13 +311,13 @@ namespace ipl {
             u16 mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode;
             switch (mode) {
                 case 1: {
-                    if (mConfig.profiles[mID].netif.wireless.config.manual.privacy.aes.reserved[0] == 0) {
+                    if (mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.reserved[0] == 0) {
                         return 5;
                     }
                     return 10;
                 }
                 case 2: {
-                    if (mConfig.profiles[mID].netif.wireless.config.manual.privacy.aes.reserved[0] == 0) {
+                    if (mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104.reserved[0] == 0) {
                         return 13;
                     }
                     return 26;
@@ -325,7 +327,68 @@ namespace ipl {
                 }
                 case 5:
                 case 6: {
-                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.tkip.keyLen;
+                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.aes.keyLen;
+                }
+                default: {
+                    return 0;
+                }
+            }
+        }
+
+        u16 NCDSetting::getNCDPrivacyMode() {
+            if (mConfig.profiles[mID].netif.wireless.configMethod == 0 || mConfig.profiles[mID].netif.wireless.configMethod == 3) {
+                return mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode;
+            }
+            return 0;
+        }
+
+        int NCDSetting::getPrivacyMode() {
+            int ret = 0;
+            if (mConfig.profiles[mID].netif.wireless.configMethod == 0 || mConfig.profiles[mID].netif.wireless.configMethod == 3) {
+                u16 mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode;
+                switch (mode) {
+                    case 0:
+                        ret = 0;
+                        break;
+                    case 1:
+                        ret = 1;
+                        break;
+                    case 2:
+                        ret = 1;
+                        break;
+                    case 4:
+                        ret = 2;
+                        break;
+                    case 5:
+                        ret = 4;
+                        break;
+                    case 6:
+                        ret = 3;
+                        break;
+                    case 3:
+                    default:
+                        ret = 0;
+                        break;
+                }
+            }
+            return ret;
+        }
+
+        u8* NCDSetting::getPrivacy() {
+            u16 mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode;
+            switch (mode) {
+                case 1: {
+                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.key[0];
+                }
+                case 2: {
+                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104.key[0];
+                }
+                case 4: {
+                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.tkip.key;
+                }
+                case 5:
+                case 6: {
+                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.aes.key;
                 }
                 default: {
                     return 0;
