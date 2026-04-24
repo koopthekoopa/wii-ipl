@@ -18,7 +18,7 @@ namespace ipl {
             static int init();
             static void initSetID(unsigned short);
             static int checkFlag(int);
-            static bool checkThisFlag();
+            static int checkThisFlag();
             static bool checkAllFlag();
             static u8 checkConnectTestFlag();
             static u8 checkDHCPFlag();
@@ -39,11 +39,11 @@ namespace ipl {
             static unk setDNSFlag(unsigned char);
             static unk setProxyFlag(unsigned char);
             static unk setBasicFlag(unsigned char);
-            static unk setWired();
-            static unk setWireless(unsigned char);
-            static unk changeConnectType(unsigned char);
-            static unk setSSID(unsigned char);
-            static unk setPrivacyMode(unsigned short);
+            static void setWired();
+            static void setWireless(unsigned char);
+            static void changeConnectType(unsigned char);
+            static void setSSID(const char*);
+            static void setPrivacyMode(unsigned short);
             static unk setWDPrivacyMode(unsigned short);
             static unk setPrivacy(unsigned char*, int);
             static unk setIP(NCDIpProfile*);
