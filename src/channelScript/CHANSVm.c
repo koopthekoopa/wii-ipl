@@ -8,6 +8,7 @@
 #include <math.h>
 #include <stdlib.h>
 
+#include <private/sc.h>
 #include <revolution.h>
 #include <revolution/net/NETMisc.h>
 
@@ -1404,7 +1405,7 @@ CHANSVmErr CHANSVmGetBoolean(CHANSVmObjHdr* ret, CHANSVmObjHdr* val) {
     return CHANS_VM_OK;
 }
 
-bool CHANS_8144E21(CHANSVm* vm, OSCalendarTime* out) {
+int CHANS_8144E21(CHANSVm* vm, OSCalendarTime* out) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
     u32 argc;
     s64 time;
@@ -1503,6 +1504,30 @@ VmCtorDefine(Date) {
     return CHANS_8144E21(VmInst, caltime);
 }
 
+#define RANGE(val, min, max) ((val) >= (min) && (val) <= (max))
+
+const char* weekday_table[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+const char* month_table[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+
+VmDtorDefine(Date) {
+    bool b;
+    OSCalendarTime date;
+    CHANSVmPrivate* pVm = (CHANSVmPrivate*)VmInst;
+    CHANSVmErr err;
+    char buffer[32];
+    unsigned int uv;
+
+    memset(&date, 0, 0x28);
+    b = CHANS_8144E21(VmInst, &date);
+    uv = snprintf(buffer, 0x20, "s_%s_%s_%02d_%02d:%02d:%02d_%04d_81669bf0", weekday_table[date.wday], month_table[date.mon]);
+    if (b && RANGE(date.sec, 0, 61) && RANGE(date.min, 0, 59) && RANGE(date.hour, 0, 32) && RANGE(date.mday, 1, 31) && RANGE(date.mon, 0, 11) &&
+        RANGE(date.year, 1900, 9999) && RANGE(date.wday, 0, 6) && uv <= 0x20) {
+        err = CHANSVmSetU16StringFromU8(VmInst, VmReturnObj, buffer, uv);
+        return err == 0;
+    }
+    return (CHANSVmNewObject(VmInst, 0, VmReturnObj, 3, 0) != 0);
+}
+
 vmPtr CHANSVmConstStringDataEmpty = "";
 
 CHANSVmObjHdr* CHANSVmNewObject(CHANSVm* vm, vmS32 unk, CHANSVmObjHdr* object, CHANSVmObjType type, vmSize len) {
@@ -1548,8 +1573,75 @@ double CHANSVm_8144B1D8(double param_1)
     return 1.0;
 }
 
-bool VmDateGetDate(CHANSVm* param_1, CHANSVmObjHdr* param_2, CHANSVmObjHdr* param_3) {
-    OSCalendarTime* cal = *(OSCalendarTime**)param_2->value.ptr_v;
-    s32 temp = cal->mday;
-    return CHANSVmSetInteger(param_1, param_3, temp >> 31) == 0;
+VmMethodDefine(Date, GetDate) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, cal->mday) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetDay) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, cal->wday) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetFullYear) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, cal->year) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetHours) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, cal->hour) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetMilliseconds) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, cal->msec) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetMinutes) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, cal->min) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetMonth) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, cal->mon) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetSeconds) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, cal->sec) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetTime) {
+    s64 time = OSCalendarTimeToTicks(*(OSCalendarTime**)VmParentObj->value.ptr_v);
+    s64 t = time / ((__OSBusClock >> 2) / 1000);
+    return CHANSVmSetInteger(VmInst, VmReturnObj, t) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetRTC) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    int bias = SCGetCounterBias();
+    s64 ticks = OSCalendarTimeToTicks(cal);
+    u64 t = ticks / ((__OSBusClock >> 2) / 1000);
+    t = t / 1000;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, t - bias) == CHANS_VM_OK;
+}
+
+VmCtorDefine(String) {
+    CHANSVmPrivate* pVm = (CHANSVmPrivate*)VmInst;
+    vmBoolInt ok;
+    CHANSVmObjHdr* obj;
+
+    if (pVm->unk_0x60->argc != 0) {
+        obj = CHANSVmConvertObjectType(VmInst, CHANS_VM_OBJ_TYPE_STRING, CHANSVmGetArg(VmInst, 0));
+        ok = false;
+        if (obj && CHANSVmCopyObject(VmInst, VmReturnObj, obj)) {
+            ok = true;
+        }
+        return ok;
+    }
+    obj = CHANSVmNewObject(VmInst, 0, VmReturnObj, CHANS_VM_OBJ_TYPE_STRING, 0);
+    ok = !!obj;
+    return ok;
 }
