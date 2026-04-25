@@ -62,43 +62,51 @@ namespace ipl {
             mConfig.profiles[mID].netif.wireless.config.manual.ssidLength = strlen(newSSID);
         }
 
-        void NCDSetting::setPrivacyMode(u16 param_1) {
-            short sVar2;
+        void NCDSetting::setPrivacyMode(u16 newMode) {
+            u16 sVar2;
 
-            if (param_1 == 2) {
-                sVar2 = 4;
-                goto check;
-            }
-            if (param_1 >= 2) {
-                if (param_1 == 0) {
+            switch (newMode) {
+                case 0:
                     sVar2 = 0;
-                    goto check;
-                }
-                if (-1 < param_1) {
-                    if (mConfig.profiles[mID].flags == 2 ||
-                        (0x14 < strlen((const char*)mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.wep104.key))) {
+                    break;
+                case 1:
+                    if (mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode == 2 ||
+                        (strlen((const char*)mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.wep104.key) > 20)) {
                         sVar2 = 2;
                     } else {
                         sVar2 = 1;
                     }
-                    goto check;
-                }
-            } else {
-                if (param_1 == 4) {
-                    sVar2 = 5;
-                    goto check;
-                }
-                if (param_1 < 4) {
+                    break;
+                case 2:
+                    sVar2 = 4;
+                    break;
+                case 3:
                     sVar2 = 6;
-                    goto check;
-                }
+                    break;
+                case 4:
+                    sVar2 = 5;
+                    break;
+                default:
+                    sVar2 = 0;
+                    break;
             }
-            sVar2 = 0;
-        check:
             if (mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode != sVar2) {
                 mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode = sVar2;
             }
-            return;
+        }
+
+        void NCDSetting::setIP(NCDIpProfile* ip) {
+            memcpy(&mConfig.profiles[mID].ip.addr, ip->addr, 4);
+            memcpy(&mConfig.profiles[mID].ip.netmask, ip->netmask, 4);
+            memcpy(&mConfig.profiles[mID].ip.gateway, ip->gateway, 4);
+        }
+
+        void NCDSetting::setDNS(NCDIpProfile* ip) {
+            memcpy(&mConfig.profiles[mID].ip.dns1, ip->dns1, 4);
+            memcpy(&mConfig.profiles[mID].ip.dns2, ip->dns2, 4);
+        }
+
+        unk NCDSetting::setPrivacy(unsigned char* privacy, int len) {
         }
 
         int NCDSetting::checkFlag(int id) {

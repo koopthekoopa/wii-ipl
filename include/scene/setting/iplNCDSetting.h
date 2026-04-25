@@ -46,8 +46,8 @@ namespace ipl {
             static void setPrivacyMode(unsigned short);
             static unk setWDPrivacyMode(unsigned short);
             static unk setPrivacy(unsigned char*, int);
-            static unk setIP(NCDIpProfile*);
-            static unk setDNS(NCDIpProfile*);
+            static void setIP(NCDIpProfile*);
+            static void setDNS(NCDIpProfile*);
             static void setMTU(long);
             static void setProxy(NCDProxyServerProfile*);
             static void setBasic(NCDProxyServerProfile*);
