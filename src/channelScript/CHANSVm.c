@@ -346,16 +346,19 @@ CHANSVmErr CHANSVmPopObject(CHANSVm* vm, CHANSVmObjHdr* object) {
 
 void CHANSVmStrCpyToU16FromU8(vmWString output, vmString input, vmSize length) {
     vmS32 i;
-    vmS32 outLength = length << 1;
+    vmS32 outLength = length;
+    vmChar* outChar;
 
-    for (i = length; i != 0; i--) {
-        vmChar* outChar = (vmChar*)(output + outLength);
-        outLength -= 2;
+    i = length;
+    while (i != 0) {
+        outLength -= 1;
+        outChar = (vmChar*)(output + outLength);
         outChar--;
         *outChar = *--input;
         outChar--;
         *outChar = 0;
-    }
+        i--;
+    };
 }
 
 static inline int VmToStrFromInt(vmWString output, vmSize length, vmInteger integer) {
@@ -1515,13 +1518,13 @@ VmDtorDefine(Date) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)VmInst;
     CHANSVmErr err;
     char buffer[32];
-    unsigned int uv;
+    unsigned int uv = 0;
 
     memset(&date, 0, 0x28);
     b = CHANS_8144E21(VmInst, &date);
-    uv = snprintf(buffer, 0x20, "s_%s_%s_%02d_%02d:%02d:%02d_%04d_81669bf0", weekday_table[date.wday], month_table[date.mon]);
     if (b && RANGE(date.sec, 0, 61) && RANGE(date.min, 0, 59) && RANGE(date.hour, 0, 32) && RANGE(date.mday, 1, 31) && RANGE(date.mon, 0, 11) &&
         RANGE(date.year, 1900, 9999) && RANGE(date.wday, 0, 6) && uv <= 0x20) {
+        uv = snprintf(buffer, 0x20, "s_%s_%s_%02d_%02d:%02d:%02d_%04d_81669bf0", weekday_table[date.wday], month_table[date.mon]);
         err = CHANSVmSetU16StringFromU8(VmInst, VmReturnObj, buffer, uv);
         return err == 0;
     }
@@ -1716,4 +1719,19 @@ CHANSVmObjHdr CHANSVmConstStringObjectUndefined = {
 
 CHANSVmObjHdr* CHANSVmConvertToStrFromUndefined(CHANSVm* vm, int type, CHANSVmObjHdr* object) {
     return &CHANSVmConstStringObjectUndefined;
+}
+
+u8* CHANSVmStrCpyToU8FromU16(u8* dest, const u8* src, u32 len) {
+    u32 i;
+    u8* out = dest;
+
+    for (i = 0; i < len; i++) {
+        if (src[i * 2] != 0)
+            return NULL;
+
+        *out = src[i * 2 + 1];
+        out++;
+    }
+
+    return dest;
 }
