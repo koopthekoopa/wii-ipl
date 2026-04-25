@@ -1114,7 +1114,7 @@ CHANSVmErr VmULShift(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* l
     switch (type) {
         case CHANS_VM_OBJ_TYPE_INTEGER: {
             temp = right->value.int_v;
-            if (right->type < (temp < 0x40)) {
+            if (temp < 0x40) {
                 temp = left->value.int_v << right->value.int_v;
             } else {
                 temp = 0;
@@ -1135,12 +1135,12 @@ CHANSVmErr VmARShift(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* l
     u64 temp2;
     switch (type) {
         case CHANS_VM_OBJ_TYPE_INTEGER: {
-            temp = right->value.int_v >> 32;
-            if (right->type < (temp < 0x40)) {
+            temp = right->value.int_v;
+            if (temp < 0x40) {
                 temp = left->value.int_v >> right->value.int_v;
             } else {
-                temp2 = left->value.int_v >> 32 >> 0x1f;
-                temp = temp2 >> 32 | temp2;
+                s32 sign = (s32)(left->value.int_v >> 32);
+                temp = (s64)sign;
             }
             err = CHANSVmSetInteger(vm, ret, temp);
             break;
@@ -1269,7 +1269,7 @@ CHANSVmErr VmCmpNeq(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* le
 }
 
 CHANSVmErr VmCmpLt(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* left, CHANSVmObjHdr* right) {
-    bool result;
+    int result;
     CHANSVmErr err;
     u32 leftlen, rightlen, maxlen, match;
     switch (type) {
@@ -1292,12 +1292,12 @@ CHANSVmErr VmCmpLt(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* lef
             leftlen = left->value.string_v->len;
             maxlen = rightlen;
             if (leftlen < rightlen)
-                maxlen = rightlen;
+                maxlen = leftlen;
             if (maxlen == 0) {
                 match = 0;
             } else {
-                match = memcmp(left->value.ptr_v, right->value.ptr_v, maxlen);
-                result = false;
+                match = memcmp(left->value.string_v->str, right->value.string_v->str, maxlen);
+                result = 0;
                 if (match < 0 || (match == 0 && leftlen < rightlen))
                     result = true;
             }
@@ -1528,32 +1528,36 @@ VmDtorDefine(Date) {
     return (CHANSVmNewObject(VmInst, 0, VmReturnObj, 3, 0) != 0);
 }
 
-vmPtr CHANSVmConstStringDataEmpty = "";
+static const char CHANSVmConstStringDataEmpty[] = "";
 
 CHANSVmObjHdr* CHANSVmNewObject(CHANSVm* vm, vmS32 unk, CHANSVmObjHdr* object, CHANSVmObjType type, vmSize len) {
-    vmPtr pvVar1;
+    CHANSVmObjHdr* var_r29;
+    CHANSVmObjHdr* temp_r3;
 
-    if (object == NULL) {
-        object = CHANSVmNewObjHdr(vm, unk);
-        if (object != NULL)
-            goto LAB_8144ae24;
-    } else {
-        memset(object, 0, 0x10);
-    LAB_8144ae24:
-        if (len == 0) {
-            if (type == 3) {
-                (object->value).ptr_v = CHANSVmConstStringDataEmpty;
-            }
-        } else {
-            pvVar1 = CHANSVmNewObjData(vm, object, len);
-            if (pvVar1 == (vmPtr)0x0) {
-                object = NULL;
-                return object;
-            }
-        }
-        object->type = (u8)type;
+    var_r29 = object;
+    if (object != NULL) {
+        memset(var_r29, 0, 0x10);
+        goto block_3;
     }
-    return object;
+    temp_r3 = CHANSVmNewObjHdr(vm, unk);
+    var_r29 = temp_r3;
+    if (temp_r3 != NULL) {
+    block_3:
+        if (len != 0) {
+            if (CHANSVmNewObjData(vm, var_r29, len) != 0) {
+                goto block_8;
+            }
+            goto block_9;
+        }
+        if (type == 3) {
+            var_r29->value.ptr_v = (vmPtr)CHANSVmConstStringDataEmpty;
+        }
+    block_8:
+        var_r29->type = type;
+        return var_r29;
+    }
+block_9:
+    return NULL;
 }
 
 void CHANSVmNewStringObject(CHANSVm* vm, CHANSVmObjHdr* obj, vmSize len) {
@@ -1644,4 +1648,72 @@ VmCtorDefine(String) {
     obj = CHANSVmNewObject(VmInst, 0, VmReturnObj, CHANS_VM_OBJ_TYPE_STRING, 0);
     ok = !!obj;
     return ok;
+}
+
+VmMethodDefine(String, GetLength) {
+    return CHANSVmSetInteger(VmInst, VmReturnObj, VmParentObj->value.string_v->len >> 1) == 0;
+}
+
+vmU16 CHANSVmGetSourceLine(CHANSVm* vm) {
+    CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
+    CHANSVmUnk1* ctx;
+    SrcDbg* dbg;
+    u8 *base, *entry, *bits, *ptr;
+    u32 pc, lineOffset, i, count;
+
+    ctx = pVm->unk_0x60;
+    if (!ctx)
+        goto exit;
+
+    dbg = ctx->unk_0x04;
+    if (!dbg)
+        goto exit;
+
+    base = (u8*)dbg->entries;  // unk_44
+    if (!base)
+        goto exit;
+
+    pc = ctx->unk_0x10;
+    if (pc >= dbg->codesize)
+        goto exit;
+
+    // Locate block
+    entry = base + ((pc >> 8) * 0x24);
+
+    // First 4 bytes = base line
+    lineOffset = *(u32*)entry;
+
+    // Bitfield starts at +4
+    bits = entry + 4;
+
+    i = 0;
+    count = (u8)pc + 1;
+
+    while (count--) {
+        if (bits[i >> 3] & (0x80 >> (i & 7))) {
+            lineOffset += 2;
+        }
+        i++;
+    }
+
+    // Compute final pointer
+    ptr = base + lineOffset;
+
+    // Bounds check
+    if (ptr + 1 < ((u8*)dbg + dbg->codesize)) {
+        return (ptr[1]) | (ptr[0] << 8);
+    }
+
+exit:
+    return 0;
+}
+
+CHANSVmObjHdr CHANSVmConstStringObjectUndefined = {
+    {0},  // value union
+    0,    // typeAndFlag
+    0     // parentCls
+};
+
+CHANSVmObjHdr* CHANSVmConvertToStrFromUndefined(CHANSVm* vm, int type, CHANSVmObjHdr* object) {
+    return &CHANSVmConstStringObjectUndefined;
 }
