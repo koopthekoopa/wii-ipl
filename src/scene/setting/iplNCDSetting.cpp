@@ -106,7 +106,73 @@ namespace ipl {
             memcpy(&mConfig.profiles[mID].ip.dns2, ip->dns2, 4);
         }
 
-        unk NCDSetting::setPrivacy(unsigned char* privacy, int len) {
+        void NCDSetting::setWDPrivacyMode(u16 mode) {
+            u16 uVar1;
+
+            switch (mode) {
+                case 0:
+                    uVar1 = 0;
+                    break;
+                case 1:
+                    uVar1 = 1;
+                    break;
+                case 2:
+                    uVar1 = 2;
+                    break;
+                case 4:
+                    uVar1 = 4;
+                    break;
+                case 5:
+                    uVar1 = 5;
+                    break;
+                case 6:
+                    uVar1 = 6;
+                    break;
+                case 7:
+                    uVar1 = 4;
+                    break;
+                case 8:
+                    uVar1 = 1;
+                    break;
+                default:
+                    uVar1 = 0;
+                    break;
+            }
+            memset(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104, 0, 0x44);
+            mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode = uVar1;
+        }
+
+        void NCDSetting::setPrivacy(unsigned char* newKey, int len) {
+            u16 mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.option;
+            memset(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104, 0, 0x44);
+            mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.option = mode;
+            if (len == 0) {
+                mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode = 0;
+            } else {
+                switch (mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode) {
+                    case 1:
+                    case 2:
+                        for (int i = 0; i < 4; i++) {
+                            if (len == 5) {
+                                mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode = 1;
+                                memcpy(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.key[i], newKey, 5);
+                            } else if (len == 0xd) {
+                                mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode = 2;
+                                memcpy(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104.key[i], newKey, 13);
+                            }
+                        }
+                        break;
+                    case 4:
+                        memcpy(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.aes.key, newKey, len);
+                        mConfig.profiles[mID].netif.wireless.config.manual.privacy.aes.keyLen = len;
+                        break;
+                    case 5:
+                    case 6:
+                        memcpy(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.tkip.key, newKey, len);
+                        mConfig.profiles[mID].netif.wireless.config.manual.privacy.tkip.keyLen = len;
+                        break;
+                }
+            }
         }
 
         int NCDSetting::checkFlag(int id) {
