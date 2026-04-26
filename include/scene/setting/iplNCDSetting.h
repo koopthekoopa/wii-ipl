@@ -44,8 +44,8 @@ namespace ipl {
             static void changeConnectType(unsigned char);
             static void setSSID(const char*);
             static void setPrivacyMode(unsigned short);
-            static unk setWDPrivacyMode(unsigned short);
-            static unk setPrivacy(unsigned char*, int);
+            static void setWDPrivacyMode(unsigned short);
+            static void setPrivacy(unsigned char*, int);
             static void setIP(NCDIpProfile*);
             static void setDNS(NCDIpProfile*);
             static void setMTU(long);
