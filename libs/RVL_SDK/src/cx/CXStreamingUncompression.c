@@ -2,7 +2,7 @@
 #include <revolution/cx.h>
 
 static inline int CXiReadHeader(u8*, int*, const u8*, int, int);
-static inline u8* GetNextNode(u8*, int);
+static inline CXHuffmanDecodeTableEntry* GetNextNode(CXHuffmanDecodeTableEntry*, int);
 
 void CXInitUncompContextRL(CXUncompContextRL* context, u8* param_2) {
     context->unk_0x00 = param_2;
@@ -25,17 +25,17 @@ void CXInitUncompContextLZ(CXUncompContextLZ* context, u8* param_2) {
     context->unk_0x08 = 0;
 }
 
-void CXInitUncompContextHuffman(CXUncompContextHuffman* context, int* param_2) {
-    context->unk_0x00 = param_2;
-    context->unk_0x04 = 0;
-    context->unk_0x1c = 0;
-    context->unk_0x18 = -1;
-    context->unk_0x0c = context->unk_0x20;
+void CXInitUncompContextHuffman(CXUncompContextHuffman* context, u8* data) {
+    context->outData = (u32*)data;
+    context->outDataLen = 0;
+    context->depth = 0;
+    context->decodeTableSize = -1;
+    context->decodeTable = context->decodeTableData;
     context->unk_0x14 = 0;
     context->unk_0x1b = 0;
-    context->unk_0x10 = 0;
-    context->unk_0x1a = 0;
-    context->unk_0x1d = 8;
+    context->bits = 0;
+    context->bitsLeft = 0;
+    context->hdrLen = 8;
     context->unk_0x08 = 0;
 }
 
@@ -125,36 +125,36 @@ CXStreamingResult CXReadUncompRL(CXUncompContextRL* context, const void* src, u3
     return CX_STREAMING_ERR_OK;
 }
 
-static int CXiReadHeader(u8* param_1, int* param_2, const u8* param_3, int param_4, int param_5) {
-    int a = 0;
+static int CXiReadHeader(u8* pHdrLen, int* pOutLen, const u8* pSrc, int srcSize, int param_5) {
+    int bytesParsed = 0;
 
-    while (*param_1) {
-        (*param_1)--;
+    while (*pHdrLen) {
+        (*pHdrLen)--;
 
-        if (*param_1 <= 3) {
-            *param_2 |= *param_3 << ((3 - *param_1) << 3);
-        } else if (*param_1 <= 6) {
-            *param_2 |= *param_3 << ((6 - *param_1) << 3);
+        if (*pHdrLen <= 3) {
+            *pOutLen |= *pSrc << ((3 - *pHdrLen) << 3);
+        } else if (*pHdrLen <= 6) {
+            *pOutLen |= *pSrc << ((6 - *pHdrLen) << 3);
         }
 
-        param_3++;
-        a++;
+        pSrc++;
+        bytesParsed++;
 
-        if (*param_1 == 4 && *param_2 > 0) {
-            *param_1 = 0;
+        if (*pHdrLen == 4 && *pOutLen > 0) {
+            *pHdrLen = 0;
         }
 
-        param_4--;
-        if (param_4 == 0 && *param_1 != 0) {
-            return a;
+        srcSize--;
+        if (srcSize == 0 && *pHdrLen != 0) {
+            return bytesParsed;
         }
     }
 
-    if (param_5 > 0 && param_5 < *param_2) {
-        *param_2 = param_5;
+    if (param_5 > 0 && param_5 < *pOutLen) {
+        *pOutLen = param_5;
     }
 
-    return a;
+    return bytesParsed;
 }
 
 CXStreamingResult CXReadUncompLZ(CXUncompContextLZ* context, const void* src, u32 size) {
@@ -294,97 +294,98 @@ out:
 CXStreamingResult CXReadUncompHuffman(CXUncompContextHuffman* context, const void* src, u32 size) {
     const u8* pSrc = src;
 
-    if (context->unk_0x1d) {
+    if (context->hdrLen) {
         int a;
-        if (context->unk_0x1d == 8) {
-            context->unk_0x1c = *pSrc & 0x0F;
+        if (context->hdrLen == 8) {
+            context->depth = *pSrc & 0x0F;
 
             if ((*pSrc & CX_COMPRESSION_TYPE_MASK) != CX_COMPRESSION_TYPE_HUFFMAN) {
                 return CX_STREAMING_ERR_BAD_FILE_TYPE;
             }
 
-            if (context->unk_0x1c != 4 && context->unk_0x1c != 8) {
+            if (context->depth != 4 && context->depth != 8) {
                 return CX_STREAMING_ERR_BAD_FILE_TYPE;
             }
         }
 
-        a = CXiReadHeader(&context->unk_0x1d, &context->unk_0x04, pSrc, size, context->unk_0x08);
+        a = CXiReadHeader(&context->hdrLen, &context->outDataLen, pSrc, size, context->unk_0x08);
 
         pSrc += a;
         size -= a;
 
         if (!size) {
-            return !context->unk_0x1d ? context->unk_0x04 : CX_STREAMING_ERR_BAD_FILE_TYPE;
+            return !context->hdrLen ? context->outDataLen : CX_STREAMING_ERR_BAD_FILE_TYPE;
         }
     }
 
-    if (context->unk_0x18 < 0) {
-        context->unk_0x18 = ((*pSrc + 1) << 1) - 1;
-        *context->unk_0x0c++ = *pSrc++;
+    if (context->decodeTableSize < 0) {
+        context->decodeTableSize = ((*pSrc + 1) << 1) - 1;
+        (context->decodeTable++)->raw = *pSrc++;
         size--;
     }
 
-    while (context->unk_0x18 > 0) {
+    while (context->decodeTableSize > 0) {
         if (!size) {
-            return context->unk_0x04;
+            return context->outDataLen;
         }
 
-        *context->unk_0x0c++ = *pSrc++;
-        context->unk_0x18--;
+        (context->decodeTable++)->raw = *pSrc++;
+        context->decodeTableSize--;
         size--;
 
-        if (context->unk_0x18) {
+        if (context->decodeTableSize) {
             continue;
         }
 
-        context->unk_0x0c = context->unk_0x20 + 1;
+        // Done copying decodeTable
+        context->decodeTable = context->decodeTableData + 1;
 
-        if (!CXiVerifyHuffmanTable_(context->unk_0x20, context->unk_0x1c)) {
+        if (!CXiVerifyHuffmanTable_(context->decodeTableData, context->depth)) {
             return CX_STREAMING_ERR_BAD_FILE_TABLE;
         }
     }
 
-    while (context->unk_0x04 > 0) {
-        while (context->unk_0x1a < 32) {
+    while (context->outDataLen > 0) {
+        while (context->bitsLeft < 32) {
             if (!size) {
-                return context->unk_0x04;
+                return context->outDataLen;
             }
 
-            context->unk_0x10 |= *pSrc++ << context->unk_0x1a;
+            context->bits |= *pSrc++ << context->bitsLeft;
 
             size--;
-            context->unk_0x1a += 8;
+            context->bitsLeft += 8;
         }
 
-        while (context->unk_0x1a) {
-            int b = context->unk_0x10 >> 31;
-            int c = (*(vu8*)context->unk_0x0c << b) & 0x80;  // ?
+        while (context->bitsLeft) {
+            BOOL currBit = context->bits >> 31;
+            int c = (*(vu8*)context->decodeTable << currBit) & 0x80;  // ?
 
-            context->unk_0x0c = GetNextNode(context->unk_0x0c, b);
-            context->unk_0x10 <<= 1;
-            context->unk_0x1a--;
+            context->decodeTable = GetNextNode((CXHuffmanDecodeTableEntry*)context->decodeTable, currBit);
+            context->bits <<= 1;
+            context->bitsLeft--;
 
             if (!c) {
                 continue;
             }
 
-            context->unk_0x14 >>= context->unk_0x1c;
-            context->unk_0x14 |= *context->unk_0x0c << (32 - context->unk_0x1c);
-            context->unk_0x0c = context->unk_0x20 + 1;
-            context->unk_0x1b += context->unk_0x1c;
+            context->unk_0x14 >>= context->depth;
+            context->unk_0x14 |= context->decodeTable->raw << (32 - context->depth);
+            context->decodeTable = context->decodeTableData + 1;
+            context->unk_0x1b += context->depth;
 
             if (context->unk_0x1b == 32) {
-                *context->unk_0x00 = CXiConvertEndian32_(context->unk_0x14);
-                context->unk_0x00++;
-                context->unk_0x04 -= 4;
+                *context->outData = CXiConvertEndian32_(context->unk_0x14);
+                context->outData++;
+                context->outDataLen -= 4;
                 context->unk_0x1b = 0;
 
-                if (context->unk_0x04 <= 0) {
+                if (context->outDataLen <= 0) {
                     goto out;
                 }
             }
 
-            (void)b;
+            (void)currBit;
         }
     }
 
@@ -396,6 +397,6 @@ out:
     return CX_STREAMING_ERR_OK;
 }
 
-static u8* GetNextNode(u8* param_1, int param_2) {
-    return (u8*)ROUNDDOWN((u32)param_1, 2) + (((*param_1 & 0x3f) + 1) << 1) + param_2;
+static CXHuffmanDecodeTableEntry* GetNextNode(CXHuffmanDecodeTableEntry* pDecodeTable, BOOL currBit) {
+    return (CXHuffmanDecodeTableEntry*)ROUNDDOWN((u32)pDecodeTable, 2) + (((*pDecodeTable).idxOffset + 1) << 1) + currBit;
 }
