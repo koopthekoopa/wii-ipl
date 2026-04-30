@@ -145,11 +145,7 @@ namespace nw4r {
                 u8* workCurr;
                 u8* dst;
 
-                u32 availableData, availableCached;
-
-                availableData = pDataEnd - pDataCurr;
-                availableCached = pCachedEnd - pCachedStart;
-                available = FORCE_REACCESS_4(availableData, u32) + FORCE_REACCESS_4(availableCached, u32);
+                available = amtAvailableData() + amtAvailableCached();
                 if (available == 0) {
                     pCachedBase = NULL;
                     pCachedStart = NULL;
@@ -173,7 +169,7 @@ namespace nw4r {
                         memmove(dst, cachedStart, cachedLen);
                         memmove(dst + cachedLen, pDataCurr, dataLen);
                         pCachedStart = pCachedEnd;
-                        pDataCurr = FORCE_REACCESS_4(pDataCurr, u8*) + dataLen;
+                        pDataCurr += dataLen;
                     }
                     pCachedBase = dst;
                     pCachedStart = dst;
