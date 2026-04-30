@@ -211,9 +211,15 @@ namespace nw4r {
             ArchiveFont();
             virtual ~ArchiveFont();
 
-            static u32 GetRequireBufferSize(const void* param_1, const char* param_2 = LOAD_GLYPH_ALL);
+            static u32 GetRequireBufferSize(const void* fontData, const char* includedGroups = LOAD_GLYPH_ALL);
 
-            bool Construct(void* param_1, u32 param_2, const void* param_3, const char* param_4 = LOAD_GLYPH_ALL);
+            virtual void GetGlyph(Glyph* glyph, u16 c) const;
+            void GetGlyphFromRealIndex(FontTextureGlyph& tg, Glyph* glyph, u16 index, u16 realIndex) const;
+            void GetGlyphFromIndex(Glyph* glyph, u16 index) const;
+
+            detail::ArchiveFontBase::ConstructState StreamingConstruct(ArchiveFontBase::ConstructContext* ctx, const void* fontData,
+                                                                       u32 fontDataSize);
+            bool Construct(void* work, u32 workSize, const void* fontData, const char* includedGroups = LOAD_GLYPH_ALL);
         };
     }  // namespace ut
 }  // namespace nw4r
