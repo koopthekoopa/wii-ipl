@@ -37,25 +37,34 @@ typedef struct CXUncompContextLZ {
     u8 padding[3];
 } CXUncompContextLZ;
 
+typedef union CXHuffmanDecodeTableEntry {
+    u8 raw;
+    struct {
+        u8 leafR : 1;      // 10000000
+        u8 leafL : 1;      // 01000000
+        u8 idxOffset : 6;  // 00111111
+    };
+} CXHuffmanDecodeTableEntry;
+
 typedef struct CXUncompContextHuffman {
-    int* unk_0x00;  // 0x00
-    int unk_0x04;   // 0x04
-    int unk_0x08;   // 0x08
-    u8* unk_0x0c;   // 0x0C
-    u32 unk_0x10;   // 0x10
-    u32 unk_0x14;   // 0x14
-    s16 unk_0x18;   // 0x18
-    u8 unk_0x1a;    // 0x1A
-    u8 unk_0x1b;    // 0x1B
-    u8 unk_0x1c;    // 0x1C
-    u8 unk_0x1d;    // 0x1D
-    u8 padding[2];
-    u8 unk_0x20[2];  // 0x20
+    u32* outData;                                      // 0x00
+    int outDataLen;                                    // 0x04
+    int unk_0x08;                                      // 0x08
+    CXHuffmanDecodeTableEntry* decodeTable;            // 0x0C
+    u32 bits;                                          // 0x10
+    u32 unk_0x14;                                      // 0x14
+    s16 decodeTableSize;                               // 0x18
+    u8 bitsLeft;                                       // 0x1A
+    u8 unk_0x1b;                                       // 0x1B
+    u8 depth;                                          // 0x1C
+    u8 hdrLen;                                         // 0x1D
+    u8 padding[2];                                     // 0x1E
+    CXHuffmanDecodeTableEntry decodeTableData[0x200];  // 0x20
 } CXUncompContextHuffman;
 
 void CXInitUncompContextRL(CXUncompContextRL* context, u8* param_2);
 void CXInitUncompContextLZ(CXUncompContextLZ* context, u8* param_2);
-void CXInitUncompContextHuffman(CXUncompContextHuffman* context, int* param_2);
+void CXInitUncompContextHuffman(CXUncompContextHuffman* context, u8* param_2);
 
 CXStreamingResult CXReadUncompRL(CXUncompContextRL* context, const void* src, u32 size);
 CXStreamingResult CXReadUncompLZ(CXUncompContextLZ* context, const void* src, u32 size);
