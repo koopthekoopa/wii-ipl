@@ -142,14 +142,140 @@ namespace ipl {
             mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode = uVar1;
         }
 
-        void NCDSetting::setProxyFlag(unsigned char newProxyFlag) {
-            mConfig.profiles[mID].proxy.http.mode = newProxyFlag;
-            mConfig.profiles[mID].proxy.ssl.mode = newProxyFlag;
-            if (newProxyFlag != 0) {
+        void NCDSetting::setProxyFlag(unsigned char newFlag) {
+            mConfig.profiles[mID].proxy.http.mode = newFlag;
+            mConfig.profiles[mID].proxy.ssl.mode = newFlag;
+            if (newFlag != 0) {
                 mConfig.profiles[mID].flags = mConfig.profiles[mID].flags | 0x10;
                 return;
             }
             mConfig.profiles[mID].flags = mConfig.profiles[mID].flags & ~0x10;
+        }
+
+        void NCDSetting::setBasicFlag(unsigned char newFlag) {
+            mConfig.profiles[mID].proxy.http.authType = newFlag;
+            mConfig.profiles[mID].proxy.ssl.authType = newFlag;
+        }
+
+        void NCDSetting::setDNSFlag(unsigned char newFlag) {
+            if (newFlag != 0) {
+                mConfig.profiles[mID].flags = mConfig.profiles[mID].flags | 4;
+                return;
+            }
+            mConfig.profiles[mID].flags = mConfig.profiles[mID].flags & ~4;
+        }
+
+        void NCDSetting::setDHCPFlag(unsigned char newFlag) {
+            if (newFlag != 0) {
+                mConfig.profiles[mID].flags = mConfig.profiles[mID].flags | 2;
+                return;
+            }
+            mConfig.profiles[mID].flags = mConfig.profiles[mID].flags & ~2;
+        }
+
+        void NCDSetting::setConnectTestFlag(bool newFlag) {
+            if (newFlag) {
+                mConfig.profiles[mID].flags |= 0x20;
+                for (int i = 0; i < 3; i++) {
+                    if (mID == i) {
+                        mConfig.profiles[mID].flags |= 0x80;
+                    } else {
+                        mConfig.profiles[i].flags &= 0x7f;
+                    }
+                }
+            }
+            adjustNCDData_();
+            adjustNWC24FlagEx_();
+            NCDWriteConfig(&mConfig);
+        }
+
+        void NCDSetting::adjustEnableFlag_(int exclude) {
+            for (int i = 0; i < 3; i++) {
+                if (exclude != i) {
+                    mConfig.profiles[i].flags &= 0x7f;
+                }
+            }
+        }
+
+        void NCDSetting::adjustSelectMedia_(int exclude) {
+            u8 flag = checkFlag(exclude);
+            switch (flag) {
+                case 1:
+                    mConfig.selectedMedia = 2;
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    mConfig.selectedMedia = 1;
+                    break;
+            }
+        }
+
+        int NCDSetting::checkProxy(char* param_1) {
+            int ret;
+
+            int len = strlen(param_1);
+            if (len >= 256) {
+                ret = 0;
+            } else {
+                if (param_1[0] == '.') {
+                    ret = 0;
+                } else {
+                    for (int i = 0; i < len; i++) {
+                        char c = param_1[i];
+                        if (((c < '0' || '9' < c) && (c < 'a' || 'z' < c)) && ((((c < 'A' || 'Z' < c) && c != '-') && (c != '.' && c != '_')))) {
+                            return 0;
+                        }
+                        if (c == '.' && param_1[i + 1] == '.') {
+                            return 0;
+                        }
+                    }
+                    ret = 1;
+                }
+            }
+            return ret;
+        }
+
+        int NCDSetting::checkProxyBasic(char* param_1) {
+            int ret;
+
+            int len = strlen(param_1);
+            if (len >= 33) {
+                ret = 0;
+            } else {
+                for (int i = 0; i < len; i++) {
+                    if ((param_1[i] < ' ') || (param_1[i] > '~')) {
+                        return 0;
+                    }
+                }
+                ret = 1;
+            }
+            return ret;
+        }
+
+        void NCDSetting::adjustNCDData_() {
+            int i = 0;
+            int theOne = -1;
+            for (; i < 3; i++) {
+                if ((mConfig.profiles[i].flags & 0x80) != 0) {
+                    adjustSelectMedia_(i);
+                    adjustEnableFlag_(i);
+                    theOne = i;
+                    break;
+                }
+                if (theOne == -1 && mConfig.profiles[i].flags & 0x20) {
+                    theOne = i;
+                }
+                if (i == 2 && theOne != -1) {
+                    mConfig.profiles[theOne].flags |= 0x80;
+                    adjustSelectMedia_(theOne);
+                    adjustEnableFlag_(theOne);
+                }
+            }
+            if (theOne == -1) {
+                mConfig.selectedMedia = 0;
+            }
         }
 
         void NCDSetting::setPrivacy(unsigned char* newKey, int len) {
