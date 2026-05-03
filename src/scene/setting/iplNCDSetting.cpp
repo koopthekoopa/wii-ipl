@@ -142,6 +142,16 @@ namespace ipl {
             mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode = uVar1;
         }
 
+        void NCDSetting::setProxyFlag(unsigned char newProxyFlag) {
+            mConfig.profiles[mID].proxy.http.mode = newProxyFlag;
+            mConfig.profiles[mID].proxy.ssl.mode = newProxyFlag;
+            if (newProxyFlag != 0) {
+                mConfig.profiles[mID].flags = mConfig.profiles[mID].flags | 0x10;
+                return;
+            }
+            mConfig.profiles[mID].flags = mConfig.profiles[mID].flags & ~0x10;
+        }
+
         void NCDSetting::setPrivacy(unsigned char* newKey, int len) {
             u16 mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.option;
             memset(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104, 0, 0x44);

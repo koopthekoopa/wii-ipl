@@ -37,7 +37,7 @@ namespace ipl {
             static unk setConnectTestFlag(bool);
             static unk setDHCPFlag(unsigned char);
             static unk setDNSFlag(unsigned char);
-            static unk setProxyFlag(unsigned char);
+            static void setProxyFlag(unsigned char);
             static unk setBasicFlag(unsigned char);
             static void setWired();
             static void setWireless(unsigned char);
