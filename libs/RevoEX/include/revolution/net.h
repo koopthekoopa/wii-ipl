@@ -4,4 +4,6 @@
 #include <revolution/net/NETDigest.h>
 #include <revolution/net/NETMisc.h>
 
+int NETGetWirelessMacAddress(void* data);
+
 #endif  // REVOLUTION_SO_EX_H
