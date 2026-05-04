@@ -28,7 +28,7 @@ namespace ipl {
             static u8 checkBasic();
             static unsigned int checkChangeEnable();
             static undefined4 convert16toASCII(char, char, unsigned char*);
-            static unk checkWEPKey(char*);
+            static int checkWEPKey(char*);
             static int checkProxy(char*);
             static int checkProxyBasic(char*);
             static void adjustNCDData_();
