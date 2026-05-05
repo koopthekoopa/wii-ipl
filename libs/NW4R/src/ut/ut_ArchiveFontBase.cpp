@@ -11,6 +11,10 @@
 namespace nw4r {
     namespace ut {
         namespace detail {
+#define ENSURE_HAS_SIZE(_ctx, _reader, _size)                                                                                                        \
+    if (((_reader)->pDataEnd - (_reader)->pDataCurr) + ((_reader)->pCachedEnd - (_reader)->pCachedStart) < _size)                                    \
+        return (_ctx)->requestNewData((_reader), _size);
+
 #define GLYPH_INDEX_NOT_FOUND 0xFFFF
             typedef union {
                 u16 formatRaw;
@@ -25,10 +29,14 @@ namespace nw4r {
                 return (pDataCurr - pDataStart) + (pCachedStart - pCachedBase);
             }
 
-            size_t ArchiveFontBase::CachedStreamReader::amtAvailableRevLoadOrder() {
-                u32 availableData = amtAvailableData();
-                u32 availableCached = amtAvailableCached();
-                return availableData + FORCE_REACCESS_4(availableCached, u32);
+            // size_t ArchiveFontBase::CachedStreamReader::amtAvailableRevLoadOrder() {
+            //     u32 availableData = amtAvailableData();
+            //     u32 availableCached = amtAvailableCached();
+            //     return availableData + FORCE_REACCESS_4(availableCached, u32);
+            // }
+
+            inline size_t getAdvanceSize(ArchiveFontBase::ConstructContext* ctx, ArchiveFontBase::CachedStreamReader* reader) {
+                return ut::Min(ctx->mNextCmdParam, reader->amtAvailable());
             }
 
             void ArchiveFontBase::CachedStreamReader::memcpyToBufRev(void* _dst, u32 copyLen) {
@@ -54,29 +62,6 @@ namespace nw4r {
                     pDataCurr = pDataCurr + dataLen;
                 }
             }
-            void ArchiveFontBase::CachedStreamReader::memcpyToBufReaccess(void* _dst, u32 copyLen) {
-                u32 cachedLen;
-                u8* dst;
-                u32 dataLen;
-
-                u8* cachedStart;
-                u8* cachedEnd;
-
-                dst = (u8*)_dst;
-                cachedStart = FORCE_REACCESS_4(pCachedStart, u8*);
-                cachedEnd = FORCE_REACCESS_4(pCachedEnd, u8*);
-                cachedLen = cachedEnd - cachedStart;
-                if (cachedLen >= copyLen) {
-                    memcpy(dst, cachedStart, copyLen);
-                    pCachedStart += copyLen;
-                } else {
-                    dataLen = copyLen - cachedLen;
-                    memcpy(dst, cachedStart, cachedLen);
-                    memcpy((u8*)dst + cachedLen, pDataCurr, dataLen);
-                    pCachedStart = pCachedEnd;
-                    pDataCurr += dataLen;
-                }
-            }
             void ArchiveFontBase::CachedStreamReader::memcpyToBuf(void* _dst, u32 copyLen) {
                 u32 cachedLen;
                 u8* dst;
@@ -86,15 +71,13 @@ namespace nw4r {
                 u8* cachedEnd;
 
                 dst = (u8*)_dst;
-                cachedStart = pCachedStart;
-                cachedEnd = pCachedEnd;
-                cachedLen = cachedEnd - cachedStart;
+                cachedLen = amtAvailableCached();
                 if (cachedLen >= copyLen) {
-                    memcpy(dst, cachedStart, copyLen);
+                    memcpy(dst, pCachedStart, copyLen);
                     pCachedStart += copyLen;
                 } else {
                     dataLen = copyLen - cachedLen;
-                    memcpy(dst, cachedStart, cachedLen);
+                    memcpy(dst, pCachedStart, cachedLen);
                     memcpy((u8*)dst + cachedLen, pDataCurr, dataLen);
                     pCachedStart = pCachedEnd;
                     pDataCurr += dataLen;
@@ -140,9 +123,6 @@ namespace nw4r {
                 size_t cachedLen;
                 size_t available;
 
-                u8* cachedEnd;
-                u8* cachedStart;
-                u8* workCurr;
                 u8* dst;
 
                 available = amtAvailableData() + amtAvailableCached();
@@ -154,19 +134,16 @@ namespace nw4r {
                 } else {
                     if (ctx->remWorkSpace() < (offset << 1))
                         return false;
-                    cachedStart = FORCE_REACCESS_4(pCachedStart, u8*);
-                    cachedEnd = FORCE_REACCESS_4(pCachedEnd, u8*);
-                    workCurr = FORCE_REACCESS_4(ctx->pWorkCurr, u8*);
-                    // return ;
-                    cachedLen = cachedEnd - cachedStart;
 
-                    dst = workCurr + offset;
+                    dst = ctx->pWorkCurr + offset;
+                    cachedLen = pCachedEnd - pCachedStart;
+
                     if (cachedLen >= available) {
-                        memmove(dst, cachedStart, available);
+                        memmove(dst, pCachedStart, available);
                         pCachedStart += available;
                     } else {
                         dataLen = available - cachedLen;
-                        memmove(dst, cachedStart, cachedLen);
+                        memmove(dst, pCachedStart, cachedLen);
                         memmove(dst + cachedLen, pDataCurr, dataLen);
                         pCachedStart = pCachedEnd;
                         pDataCurr += dataLen;
@@ -184,7 +161,7 @@ namespace nw4r {
                 return pWorkEnd - pWorkCurr;
             }
             void ArchiveFontBase::ConstructContext::updateDataOffset(CachedStreamReader* reader) {
-                mDataOffset += (u32)(reader->pDataCurr - reader->pDataStart) + (reader->pCachedStart - reader->pCachedBase);
+                mDataOffset += (reader->pDataCurr - reader->pDataStart) + (reader->pCachedStart - reader->pCachedBase);
             }
             ArchiveFontBase::ConstructState ArchiveFontBase::ConstructContext::requestNewData(CachedStreamReader* reader, u32 amt) {
                 updateDataOffset(reader);
@@ -330,10 +307,9 @@ namespace nw4r {
 
                 if (ctx->mBlocksParsed >= ctx->mTotalBlocks)
                     return CONSTRUCT_STATE_DONE;
-                if (reader->amtAvailable() < sizeof(BinaryBlockHeader))
-                    return ctx->requestNewData(reader, sizeof(BinaryBlockHeader));
 
-                reader->memcpyToBufReaccess(&ctx->mNextBlockHdr, sizeof(BinaryBlockHeader));
+                ENSURE_HAS_SIZE(ctx, reader, sizeof(BinaryBlockHeader));
+                reader->memcpyToBuf(&ctx->mNextBlockHdr, sizeof(BinaryBlockHeader));
                 switch (ctx->mNextBlockHdr.kind) {
                     case SIGNATURE_GLYPH_GROUPS:
                         ctx->mNextCmd = CONSTRUCT_CMD_ANALYZE_GLGR;
@@ -359,12 +335,12 @@ namespace nw4r {
                 return CONSTRUCT_STATE_WORKING;
             }
             ArchiveFontBase::ConstructState ArchiveFontBase::ConstructOpAnalyzeFileHeader(ConstructContext* ctx, CachedStreamReader* reader) {
-                if (reader->amtAvailable() < sizeof(BinaryFileHeader))
+                if ((reader->pDataEnd - reader->pDataCurr) + (reader->pCachedEnd - reader->pCachedStart) < sizeof(BinaryFileHeader))
                     return ctx->requestNewData(reader, sizeof(BinaryFileHeader));
                 if (ctx->remWorkSpace() < sizeof(BinaryFileHeader))
                     return CONSTRUCT_STATE_FATAL_ERR;
 
-                reader->memcpyToBufReaccess(ctx->pWorkCurr, sizeof(BinaryFileHeader));
+                reader->memcpyToBuf(ctx->pWorkCurr, sizeof(BinaryFileHeader));
                 ctx->mNextCmd = CONSTRUCT_CMD_DISPATCH;
                 return CONSTRUCT_STATE_WORKING;
             }
@@ -384,12 +360,12 @@ namespace nw4r {
                 glgr = (GlyphGroups*)((u8*)glgrHdr + sizeof(BinaryBlockHeader));
                 reader->memcpyToBuf(glgr, glgrInnerLen);
             }
-            inline void updateSheetFlags(const void* glgrHdr, u32 groupIdx, u16* sheetOffsets, u32 sheetFlagsSize, const u32* bitBlocksPtr) {
+            inline void updateSheetFlags(const void* glgrHdr, u32 groupIdx, u16* sheetOffsets, u32 flagsStep, const u32* sheetFlags) {
                 const GlyphGroups* glgr = (GlyphGroups*)((u8*)glgrHdr + sizeof(BinaryBlockHeader));
                 for (int sheetI = 0; sheetI < glgr->sheetCount; sheetI++) {
-                    u32 groupBitIdx = sheetI + groupIdx * sheetFlagsSize * 8;
+                    u32 groupBitIdx = sheetI + groupIdx * flagsStep * 8;
 
-                    const u32* bitBlockPtr = bitBlocksPtr + (groupBitIdx & ~0x1f) / 32;
+                    const u32* bitBlockPtr = sheetFlags + (groupBitIdx & ~0x1f) / 32;
                     u32 bitBlock = *(u32*)bitBlockPtr;
                     if (((bitBlock << (groupBitIdx & 0x1f)) & 0x80000000) != 0)
                         sheetOffsets[sheetI] = 1;
@@ -431,18 +407,101 @@ namespace nw4r {
                 memmove(sheetOffsets, sheetOffsetsScratch, scratchSize);
                 ctx->pSheetOffsets = (u16*)sheetOffsets;
             }
+            inline ArchiveFontBase::ConstructState ConstructOpAnalyzeGLGRInner(ArchiveFontBase::ConstructContext* ctx, ArchiveFontBinaryLayout* font,
+                                                                               HeaderedGlyphGroups* pGlgr, void* glgrEnd) {
+                u32 fontSizeToEndOfGlgr;
+                u32 remWorkSpace;
+
+                u16 dataBlockCount;
+                u16 sheetGlyphCount;
+                u16 countSheet;
+
+                u32 stepSheetFlags;
+                u32 flagsSheetsOff;
+                const u32* flagsSheets;
+
+                u32 sheetOffsetsSize;
+                u16* sheetOffsetsScratch;
+
+                u32 sheetOffsetsScratchSize;
+                u8* workCurr;
+                u8* workEnd;
+                // u8* calculatedWorkEnd;
+                u32 requiredSpace;
+
+                // workCurr = ctx->pWorkCurr;
+                // workEnd = ctx->pWorkEnd;
+
+                fontSizeToEndOfGlgr = (u8*)glgrEnd - (u8*)font;
+                remWorkSpace = ctx->remWorkSpace();
+
+                countSheet = font->glgr.inner.sheetCount;            // 0x20
+                sheetGlyphCount = font->glgr.inner.sheetGlyphCount;  // 0x1C
+                dataBlockCount = font->hdr.dataBlocks;               // 0x0E
+
+                sheetOffsetsSize = detail::CalcSizeSheetOffsets(countSheet);
+                sheetOffsetsScratch = (u16*)ROUNDDOWN((u32)((u32)font + remWorkSpace - sheetOffsetsSize), 2);
+                requiredSpace = fontSizeToEndOfGlgr + sheetOffsetsSize;
+
+                stepSheetFlags = detail::CalcSizeFlagSet(countSheet);
+
+                flagsSheetsOff = detail::CalcOffsetSheetFlags(font->glgr.inner.nameCount, countSheet, font->glgr.inner.smthCount_0x0a,
+                                                              font->glgr.inner.smthCount_0x0c);
+                flagsSheets = (const u32*)font + (flagsSheetsOff >> 2);
+
+                if (remWorkSpace < requiredSpace)
+                    return ArchiveFontBase::CONSTRUCT_STATE_FATAL_ERR;
+
+                // Clear sheet offsets scratch
+                // for (s32 i = 0; i < pGlgr->inner.sheetCount; i++)
+                //     sheetOffsetsScratch[i] = 0;
+
+                // for (s32 i = 0; i < pGlgr->inner.nameCount; i++) {
+                //     // const char* includedGroups = ctx->pIncludedGroups;
+                //     u16 offset = pGlgr->inner.nameOffsets[i];
+                //     const char* name = (char*)((u8*)font + offset);
+                //     if (*ctx->pIncludedGroups != 0)
+                //         if (!ArchiveFontBase::IncludeName(ctx->pIncludedGroups, name))
+                //             continue;
+
+                //     updateSheetFlags(pGlgr, i, sheetOffsetsScratch, stepSheetFlags, flagsSheets);
+                // }
+                setSheetOffsetBooleans(ctx, pGlgr, font, sheetOffsetsScratch, flagsSheets, stepSheetFlags);
+
+                // u16 glyphIdxOffset = 0;
+                // for (s32 i = 0; i < pGlgr->inner.sheetCount; i++) {
+                //     if (sheetOffsetsScratch[i] == 1) {
+                //         sheetOffsetsScratch[i] = glyphIdxOffset;
+                //     } else {
+                //         sheetOffsetsScratch[i] = -1;
+                //         glyphIdxOffset += pGlgr->inner.sheetGlyphCount;
+                //     }
+                // }
+                convertSheetOffsetBooleansToOffsets(pGlgr, sheetOffsetsScratch);
+
+                sheetOffsetsScratchSize = (u32)countSheet << 1;
+                sheetOffsetsScratchSize += (sheetOffsetsScratchSize >> 31);
+                sheetOffsetsScratchSize &= ~1;
+                copyFlagOffsets(ctx, sheetOffsetsScratch, sheetOffsetsSize, sheetOffsetsScratchSize);
+
+                ctx->mSheetCount = countSheet;
+                ctx->mGlyphsPerSheet = sheetGlyphCount;
+                ctx->mTotalBlocks = dataBlockCount;
+                ctx->mNextCmd = ArchiveFontBase::CONSTRUCT_CMD_DISPATCH;
+
+                return ArchiveFontBase::CONSTRUCT_STATE_WORKING;
+            }
             ArchiveFontBase::ConstructState ArchiveFontBase::ConstructOpAnalyzeGLGR(ConstructContext* ctx, CachedStreamReader* reader) {
+                u32 glgrInnerLen;
+                HeaderedGlyphGroups* pGlgr;
                 ArchiveFontBinaryLayout* font;
-                HeaderedGlyphGroups* glgrHdr;
                 u8* glgrEnd;
 
                 u32 expectedMaxSize;
-                u32 glgrFullLen, glgrInnerLen;
 
                 font = (ArchiveFontBinaryLayout*)ctx->pWorkCurr;
 
-                glgrFullLen = ctx->mNextBlockHdr.size;
-                glgrInnerLen = glgrFullLen - sizeof(BinaryBlockHeader);
+                glgrInnerLen = ctx->mNextBlockHdr.size - sizeof(BinaryBlockHeader);
 
                 // Check for RFNA
                 if (font->hdr.signature != SIGNATURE_FONT_ARCHIVE)
@@ -450,76 +509,113 @@ namespace nw4r {
 
                 // Check that there's enough data available, and the space to
                 // put that data
-                if (reader->amtAvailable() < glgrInnerLen)
-                    return ctx->requestNewData(reader, glgrInnerLen);
+                ENSURE_HAS_SIZE(ctx, reader, glgrInnerLen);
                 if (ctx->remWorkSpace() < glgrInnerLen)
                     return CONSTRUCT_STATE_FATAL_ERR;
 
-                expectedMaxSize = glgrFullLen + sizeof(BinaryFileHeader);
+                expectedMaxSize = ctx->mNextBlockHdr.size + sizeof(BinaryFileHeader);
 
                 // Copy the glgr to work
                 {
-                    glgrHdr = &font->glgr;
-                    glgrEnd = (u8*)glgrHdr + (u32)ctx->mNextBlockHdr.size;
+                    pGlgr = &font->glgr;
+                    glgrEnd = (u8*)pGlgr + (u32)ctx->mNextBlockHdr.size;
 
-                    memcpy(glgrHdr, &ctx->mNextBlockHdr, sizeof(BinaryBlockHeader));
-                    reader->memcpyToBuf(&glgrHdr->inner, glgrInnerLen);
+                    memcpy(pGlgr, &ctx->mNextBlockHdr, sizeof(BinaryBlockHeader));
+                    reader->memcpyToBuf(&pGlgr->inner, glgrInnerLen);
                 }
 
                 if (!ArchiveFontBase::IsValidResource(font, expectedMaxSize))
                     return CONSTRUCT_STATE_FATAL_ERR;
 
                 // Before here is fine (other than regswaps)
+                pGlgr = &font->glgr;
+                // u16 sheetGlyphCount = FORCE_REACCESS_2(font->glgr.inner.sheetGlyphCount, u16);  // 0x1C
+                // u16 dataBlockCount = FORCE_REACCESS_2(font->hdr.dataBlocks, u16);               // 0x0E
+                // FORCE_REACCESS_2(font->glgr.inner.sheetCount, u16);
+                // return ConstructOpAnalyzeGLGRInner(ctx, font, pGlgr, glgrEnd);
 
-                // return analyzeGlgrInner(ctx, font, glgrEnd);
-                u8* workCurr;
                 u32 fontSizeToEndOfGlgr;
-                u16 sheetGlyphCount, dataBlockCount;
-                u16 countNames, countSheets;
-                u32 sheetFlagsSize, sheetOffsetsSize;
-                u32* sheetFlagsPtr;
                 u32 remWorkSpace;
+
+                u16 countSheet;
+                u16 sheetGlyphCount, dataBlockCount;
+
+                u32 stepSheetFlags;
+                u32 flagsSheetsOff;
+                const u32* flagsSheets;
+
+                u32 sheetOffsetsSize;
                 u16* sheetOffsetsScratch;
-                u32 workSizeNeeded;
+
                 u32 sheetOffsetsScratchSize;
 
-                workCurr = ctx->pWorkCurr;
-                glgrHdr = &font->glgr;
+                remWorkSpace = ctx->remWorkSpace();
 
                 fontSizeToEndOfGlgr = glgrEnd - (u8*)font;
 
-                sheetGlyphCount = font->glgr.inner.sheetGlyphCount;  // 0x1C
                 dataBlockCount = font->hdr.dataBlocks;               // 0x0E
+                sheetGlyphCount = font->glgr.inner.sheetGlyphCount;  // 0x1C
+                // countName = font->glgr.inner.nameCount;
+                countSheet = font->glgr.inner.sheetCount;
+                // count0A = font->glgr.inner.smthCount_0x0a;
+                // count0C = font->glgr.inner.smthCount_0x0c;
 
-                countNames = font->glgr.inner.nameCount;    // 0x1E
-                countSheets = font->glgr.inner.sheetCount;  // 0x20
-
-                // sheetFlagsSize, sheetOffsetsSize, sheetFlagsPtr
-                {
-                    sheetFlagsSize = CalcSizeSheetFlagSet(countSheets);
-                    sheetOffsetsSize = CalcSizeSheetOffsets(countSheets);
-                    sheetFlagsPtr =
-                        (u32*)(CalcOffsetSheetFlags(countNames, countSheets, font->glgr.inner.smthCount_0x0a, font->glgr.inner.smthCount_0x0c) +
-                               (u8*)font);
-                }
-                remWorkSpace = ctx->pWorkEnd - workCurr;
-
+                sheetOffsetsSize = ROUNDUP(countSheet * sizeof(u16), 4);
                 sheetOffsetsScratch = (u16*)ROUNDDOWN((u32)((u8*)font + remWorkSpace) - sheetOffsetsSize, 2);
 
-                workSizeNeeded = fontSizeToEndOfGlgr + sheetOffsetsSize;
-                if (remWorkSpace < workSizeNeeded)
+                stepSheetFlags = detail::CalcSizeFlagSet(countSheet);
+
+                // u32 nameOffSize = font->glgr.inner.nameCount * sizeof(u16);
+                // u32 dataSheetSize = countSheet * sizeof(u32);
+                // u32 data0ASize = font->glgr.inner.smthCount_0x0a * sizeof(u32);
+                // u32 data0CSize = font->glgr.inner.smthCount_0x0c * sizeof(u32);
+
+                // dataSheetsOff = ROUNDUP(offsetof(ArchiveFontBinaryLayout, glgr.inner.nameOffsets) + nameOffSize, 4);
+                // data0AOff = ROUNDUP(dataSheetsOff + dataSheetSize, 4);
+                // data0COff = ROUNDUP(data0AOff + data0ASize, 4);
+
+                // flagsSheetsOff = ROUNDUP(data0COff + data0CSize, 4);
+                // flagsSheets = (const u32*)font + (flagsSheetsOff >> 2);
+                flagsSheetsOff = detail::CalcOffsetSheetFlags(font->glgr.inner.nameCount, countSheet, font->glgr.inner.smthCount_0x0a,
+                                                              font->glgr.inner.smthCount_0x0c);
+                flagsSheets = (const u32*)font + (flagsSheetsOff >> 2);
+
+                if (remWorkSpace < fontSizeToEndOfGlgr + sheetOffsetsSize)
                     return CONSTRUCT_STATE_FATAL_ERR;
 
-                setSheetOffsetBooleans(ctx, glgrHdr, font, sheetOffsetsScratch, sheetFlagsPtr, sheetFlagsSize);
+                // Clear sheet offsets scratch
+                // for (s32 i = 0; i < pGlgr->inner.sheetCount; i++)
+                //     sheetOffsetsScratch[i] = 0;
 
-                convertSheetOffsetBooleansToOffsets(glgrHdr, sheetOffsetsScratch);
+                // for (s32 i = 0; i < pGlgr->inner.nameCount; i++) {
+                //     // const char* includedGroups = ctx->pIncludedGroups;
+                //     u16 offset = pGlgr->inner.nameOffsets[i];
+                //     const char* name = (char*)((u8*)font + offset);
+                //     if (*ctx->pIncludedGroups != 0)
+                //         if (!ArchiveFontBase::IncludeName(ctx->pIncludedGroups, name))
+                //             continue;
 
-                sheetOffsetsScratchSize = (u32)countSheets << 1;
+                //     updateSheetFlags(pGlgr, i, sheetOffsetsScratch, stepSheetFlags, flagsSheets);
+                // }
+                setSheetOffsetBooleans(ctx, pGlgr, font, sheetOffsetsScratch, flagsSheets, stepSheetFlags);
+
+                // u16 glyphIdxOffset = 0;
+                // for (s32 i = 0; i < pGlgr->inner.sheetCount; i++) {
+                //     if (sheetOffsetsScratch[i] == 1) {
+                //         sheetOffsetsScratch[i] = glyphIdxOffset;
+                //     } else {
+                //         sheetOffsetsScratch[i] = -1;
+                //         glyphIdxOffset += pGlgr->inner.sheetGlyphCount;
+                //     }
+                // }
+                convertSheetOffsetBooleansToOffsets(pGlgr, sheetOffsetsScratch);
+
+                sheetOffsetsScratchSize = (u32)countSheet << 1;
                 sheetOffsetsScratchSize += (sheetOffsetsScratchSize >> 31);
                 sheetOffsetsScratchSize &= ~1;
                 copyFlagOffsets(ctx, sheetOffsetsScratch, sheetOffsetsSize, sheetOffsetsScratchSize);
 
-                ctx->mSheetCount = countSheets;
+                ctx->mSheetCount = countSheet;
                 ctx->mGlyphsPerSheet = sheetGlyphCount;
                 ctx->mTotalBlocks = dataBlockCount;
                 ctx->mNextCmd = CONSTRUCT_CMD_DISPATCH;
@@ -571,13 +667,14 @@ namespace nw4r {
                 FlaggedImageFormat origSheetFormat;
                 u16 sheetsToLoad;
 
-                if (reader->amtAvailable() < sizeof(FontTextureGlyph))
-                    return ctx->requestNewData(reader, sizeof(FontTextureGlyph));
+                ENSURE_HAS_SIZE(ctx, reader, sizeof(FontTextureGlyph));
+                // if (reader->amtAvailable() < sizeof(FontTextureGlyph))
+                //     return ctx->requestNewData(reader, sizeof(FontTextureGlyph));
                 if (ctx->remWorkSpace() < sizeof(FontTextureGlyph))
                     return CONSTRUCT_STATE_FATAL_ERR;
 
                 ctx->pFontInfo->pGlyph = (FontTextureGlyph*)ctx->pWorkCurr;
-                reader->memcpyToBufRev(ctx->pWorkCurr, sizeof(FontTextureGlyph));
+                reader->memcpyToBuf(ctx->pWorkCurr, sizeof(FontTextureGlyph));
                 ctx->pWorkCurr += sizeof(FontTextureGlyph);
 
                 origSheetFormat.formatRaw = ctx->pFontInfo->pGlyph->sheetFormat;
@@ -622,15 +719,8 @@ namespace nw4r {
                     ctx->mNextCmd = CONSTRUCT_CMD_DISPATCH;
                     return CONSTRUCT_STATE_WORKING;
                 }
-                if (reader->amtAvailable() < 8) {
-                    ctx->updateDataOffset(reader);
-                    bool requestSucceeded = reader->RequestData(ctx, 8);
-                    if (requestSucceeded)
-                        return CONSTRUCT_STATE_DATA_REQUESTED;
-                    else
-                        return CONSTRUCT_STATE_FATAL_ERR;
-                }
-                reader->memcpyToBufReaccess(compressedSizeBuf, 4);
+                ENSURE_HAS_SIZE(ctx, reader, sizeof(BinaryBlockHeader));
+                reader->memcpyToBuf(compressedSizeBuf, 4);
                 memcpy(compressedDataHdr, reader->pDataCurr, 4);
                 compressedSize = *(u32*)(u8*)compressedSizeBuf;
 
@@ -663,7 +753,7 @@ namespace nw4r {
             }
             ArchiveFontBase::ConstructState ArchiveFontBase::ConstructOpCopy(ConstructContext* ctx, CachedStreamReader* reader) {
                 u32 copySize;
-                copySize = ut::Min(reader->amtAvailableData(), ctx->mNextCmdParam);
+                copySize = ut::Min((u32)(reader->pDataEnd - reader->pDataCurr), ctx->mNextCmdParam);
 
                 memcpy(ctx->pWorkCurr, reader->pDataCurr, copySize);
                 reader->pDataCurr += copySize;
@@ -678,10 +768,10 @@ namespace nw4r {
 
                 u32 skipSize;
 
-                skipSize = ut::Min(ctx->mNextCmdParam, reader->amtAvailable());
+                skipSize = getAdvanceSize(ctx, reader);
 
-                end = FORCE_REACCESS_4(reader->pCachedEnd, u8*);
-                start = FORCE_REACCESS_4(reader->pCachedStart, u8*);
+                end = reader->pCachedEnd;
+                start = reader->pCachedStart;
                 cachedLen = end - start;
                 if (cachedLen > skipSize) {
                     reader->pCachedStart = start + skipSize;
@@ -697,10 +787,10 @@ namespace nw4r {
                 u32 cmprSize;
                 u8* src;
 
-                cmprSize = ut::Min(ctx->mNextCmdParam, reader->amtAvailableRevLoadOrder());
+                cmprSize = getAdvanceSize(ctx, reader);
 
                 src = reader->pDataCurr;
-                reader->pDataCurr += cmprSize;
+                reader->pDataCurr = reader->pDataCurr + cmprSize;
                 CXReadUncompHuffman(ctx->pHuffmanCtx, src, cmprSize);
 
                 return handleAdvanceDry(ctx, reader, cmprSize);

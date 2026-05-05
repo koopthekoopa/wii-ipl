@@ -23,25 +23,22 @@ namespace nw4r {
                 return ROUNDUP(CalcOffset0AData(countNames, countSheets) + count0A * sizeof(u32), 4);
             }
 
+            inline u32 CalcSizeFlagSet(u32 entries) {
+                return ((s32)entries + 0x1f) / 32 * 4;
+            }
+
             inline u32 CalcOffsetSheetFlags(u16 countNames, u16 countSheets, u16 count0A, u16 count0C) {
                 return ROUNDUP(CalcOffset0CData(countNames, countSheets, count0A) + count0C * sizeof(u32), 4);
             }
-            inline u32 CalcSizeSheetFlagSet(u32 countSheets) {
-                return ((s32)countSheets + 0x1f) / 32 * 4;
-            }
-
             inline u32 CalcOffset0AFlags(u16 countNames, u16 countSheets, u16 count0A, u16 count0C) {
-                return ROUNDUP(CalcOffsetSheetFlags(countNames, countSheets, count0A, count0C) + countNames * CalcSizeSheetFlagSet(countSheets), 4);
+                u32 offsetSheetFlags = CalcOffsetSheetFlags(countNames, countSheets, count0A, count0C);
+                u32 stepSheet = CalcSizeFlagSet(countSheets);
+                return ROUNDUP(offsetSheetFlags + stepSheet * countNames, 4);
             }
-            inline u32 CalcSize0AFlagSet(u32 count0A) {
-                return ((s32)count0A + 0x1f) / 32 * 4;
-            }
-
             inline u32 CalcOffset0CFlags(u16 countNames, u16 countSheets, u16 count0A, u16 count0C) {
-                return ROUNDUP(CalcOffsetSheetFlags(countNames, countSheets, count0A, count0C) + countNames * CalcSize0AFlagSet(count0A), 4);
-            }
-            inline u32 CalcSize0CFlagSet(u32 count0C) {
-                return ((s32)count0C + 0x1f) / 32 * 4;
+                u32 offset0AFlags = CalcOffset0AFlags(countNames, countSheets, count0A, count0C);
+                u32 step0A = CalcSizeFlagSet(count0A);
+                return ROUNDUP(offset0AFlags + step0A * countNames, 4);
             }
 
             inline u32 CalcSizeSheetOffsets(u32 countSheets) {
@@ -87,15 +84,15 @@ namespace nw4r {
                     void Attach(const void* data, u32 dataLen);
                     bool RequestData(ConstructContext* ctx, u32 len);
 
-                    inline u32 amtAvailableData() { return pDataEnd - pDataCurr; }
-                    inline u32 amtAvailableCached() { return pCachedEnd - pCachedStart; }
-                    inline u32 amtAvailable() { return amtAvailableData() + amtAvailableCached(); }
-                    inline u32 amtAvailableRevLoadOrder();  // Fakematch enabler :(
+                    inline u8* advanceData(u32 amt) { return (pDataCurr += amt) - amt; }
+
+                    inline u32 amtAvailableData() const { return pDataEnd - pDataCurr; }
+                    inline u32 amtAvailableCached() const { return pCachedEnd - pCachedStart; }
+                    inline u32 amtAvailable() const { return amtAvailableData() + amtAvailableCached(); }
 
                     inline void memcpyToBuf(void* buf, u32 len);
-                    inline void memcpyToBufRev(void* buf, u32 len);       // Probably a fakematch enabler :(
-                    inline void memcpyToBufReaccess(void* buf, u32 len);  // Fakematch enabler :(
-                    inline void skipReaccess(u32 len);                    // Fakematch enabler :(
+                    inline void memcpyToBufRev(void* buf, u32 len);  // Probably a fakematch enabler :(
+                    inline void skipReaccess(u32 len);               // Fakematch enabler :(
 
                     inline u32 getCurrentOffset();
 
