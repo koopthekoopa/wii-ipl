@@ -84,17 +84,14 @@ namespace nw4r {
                     void Attach(const void* data, u32 dataLen);
                     bool RequestData(ConstructContext* ctx, u32 len);
 
-                    inline u8* advanceData(u32 amt) { return (pDataCurr += amt) - amt; }
-
                     inline u32 amtAvailableData() const { return pDataEnd - pDataCurr; }
                     inline u32 amtAvailableCached() const { return pCachedEnd - pCachedStart; }
                     inline u32 amtAvailable() const { return amtAvailableData() + amtAvailableCached(); }
 
-                    inline void memcpyToBuf(void* buf, u32 len);
-                    inline void memcpyToBufRev(void* buf, u32 len);  // Probably a fakematch enabler :(
-                    inline void skipReaccess(u32 len);               // Fakematch enabler :(
+                    inline u32 getReaderOffset() const { return (pDataCurr - pDataStart) + (pCachedStart - pCachedBase); }
 
-                    inline u32 getCurrentOffset();
+                    inline void memcpyToBuf(void* buf, u32 len);
+                    inline void skip(u32 len);
 
                     u8* pDataStart;    // 0x00
                     u8* pDataCurr;     // 0x04
@@ -106,12 +103,13 @@ namespace nw4r {
                 };
                 class ConstructContext {
                 public:
-                    inline void getNumSheetsToLoad(u16* sheetsToLoad) const;
-                    inline u32 remWorkSpace() const;
+                    inline u32 getAdvanceSize(const CachedStreamReader* reader) const { return ut::Min(mNextCmdParam, reader->amtAvailable()); }
+                    inline u32 remWorkSpace() const { return pWorkEnd - pWorkCurr; }
 
-                    inline void updateDataOffset(CachedStreamReader* reader);
+                    inline u32 getFullOffset(CachedStreamReader* reader) const { return mDataOffset + reader->getReaderOffset(); }
                     inline ConstructState requestNewData(CachedStreamReader* reader, u32 amt);
-                    inline u16 updateTextureBlockFormat();
+
+                    inline void getNumSheetsToLoad(u16* sheetsToLoad) const;
                     inline u32 updateTextureBlockPtr();
 
                     inline void enqueueCmds(ConstructCmd first, u32 firstParam, ConstructCmd after) {
