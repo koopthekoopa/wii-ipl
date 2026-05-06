@@ -8,6 +8,7 @@
 #include <math.h>
 #include <stdlib.h>
 
+#include <private/sc.h>
 #include <revolution.h>
 #include <revolution/net/NETMisc.h>
 
@@ -345,16 +346,19 @@ CHANSVmErr CHANSVmPopObject(CHANSVm* vm, CHANSVmObjHdr* object) {
 
 void CHANSVmStrCpyToU16FromU8(vmWString output, vmString input, vmSize length) {
     vmS32 i;
-    vmS32 outLength = length << 1;
+    vmS32 outLength = length;
+    vmChar* outChar;
 
-    for (i = length; i != 0; i--) {
-        vmChar* outChar = (vmChar*)(output + outLength);
-        outLength -= 2;
+    i = length;
+    while (i != 0) {
+        outLength -= 1;
+        outChar = (vmChar*)(output + outLength);
         outChar--;
         *outChar = *--input;
         outChar--;
         *outChar = 0;
-    }
+        i--;
+    };
 }
 
 static inline int VmToStrFromInt(vmWString output, vmSize length, vmInteger integer) {
@@ -1112,8 +1116,8 @@ CHANSVmErr VmULShift(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* l
     u64 temp;
     switch (type) {
         case CHANS_VM_OBJ_TYPE_INTEGER: {
-            temp = right->value.int_v >> 32;
-            if (right->type < (temp < 0x40)) {
+            temp = right->value.int_v;
+            if (temp < 0x40) {
                 temp = left->value.int_v << right->value.int_v;
             } else {
                 temp = 0;
@@ -1134,12 +1138,12 @@ CHANSVmErr VmARShift(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* l
     u64 temp2;
     switch (type) {
         case CHANS_VM_OBJ_TYPE_INTEGER: {
-            temp = right->value.int_v >> 32;
-            if (right->type < (temp < 0x40)) {
+            temp = right->value.int_v;
+            if (temp < 0x40) {
                 temp = left->value.int_v >> right->value.int_v;
             } else {
-                temp2 = left->value.int_v >> 32 >> 0x1f;
-                temp = temp2 >> 32 | temp2;
+                s32 sign = (s32)(left->value.int_v >> 32);
+                temp = (s64)sign;
             }
             err = CHANSVmSetInteger(vm, ret, temp);
             break;
@@ -1201,20 +1205,24 @@ CHANSVmErr VmCmpEq(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* lef
     CHANSVmErr CVar5;
     vmPtr num;
 
-    if (type == CHANS_VM_OBJ_TYPE_INTEGER) {
+    if (type == CHANS_VM_OBJ_TYPE_FLOAT) {
         uVar3 = ((unsigned int)(((left->value).float_v == (right->value).float_v) << 1) << 0x1c) >> 0x1d;
         goto endcmp;
     }
-    if (type <= CHANS_VM_OBJ_TYPE_BLANK) {
-        if (type < 0) {
-            return CHANS_VM_ERR_CMP;
+    if (type < CHANS_VM_OBJ_TYPE_FLOAT) {
+        if (type != CHANS_VM_OBJ_TYPE_BLANK) {
+            if (type < CHANS_VM_OBJ_TYPE_BLANK) {
+                return CHANS_VM_ERR_CMP;
+            }
+            uVar3 = (left->value.int_v ^ right->value.int_v | left->value.int32_v->unk_0x00 ^ right->value.int32_v->unk_0x00) == 0;
+            goto endcmp;
         }
         uVar1 = left->type;
         if (uVar1 == right->type) {
             if ((uVar1 == 7) || (uVar1 == 8))
                 goto LAB_8144c27c;
             if (uVar1 == 9) {
-                uVar3 = right->type - ((left->value).int_v >> 32);
+                uVar3 = (right->value.ptr_v - (left->value.int_v >> 32)) == 0;
                 goto endcmp;
             }
             if (uVar1 == 0) {
@@ -1225,7 +1233,7 @@ CHANSVmErr VmCmpEq(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* lef
         uVar3 = 0;
     } else {
         if (type != CHANS_VM_TYPE_OBJECT) {
-            if (type >= 3) {
+            if (type > CHANS_VM_OBJ_TYPE_STRING) {
                 return CHANS_VM_ERR_CMP;
             }
             uVar3 = 0;
@@ -1264,7 +1272,7 @@ CHANSVmErr VmCmpNeq(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* le
 }
 
 CHANSVmErr VmCmpLt(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* left, CHANSVmObjHdr* right) {
-    bool result;
+    int result;
     CHANSVmErr err;
     u32 leftlen, rightlen, maxlen, match;
     switch (type) {
@@ -1287,12 +1295,12 @@ CHANSVmErr VmCmpLt(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* lef
             leftlen = left->value.string_v->len;
             maxlen = rightlen;
             if (leftlen < rightlen)
-                maxlen = rightlen;
+                maxlen = leftlen;
             if (maxlen == 0) {
                 match = 0;
             } else {
-                match = memcmp(left->value.ptr_v, right->value.ptr_v, maxlen);
-                result = false;
+                match = memcmp(left->value.string_v->str, right->value.string_v->str, maxlen);
+                result = 0;
                 if (match < 0 || (match == 0 && leftlen < rightlen))
                     result = true;
             }
@@ -1400,70 +1408,96 @@ CHANSVmErr CHANSVmGetBoolean(CHANSVmObjHdr* ret, CHANSVmObjHdr* val) {
     return CHANS_VM_OK;
 }
 
-bool CHANS_8144E21(CHANSVm* vm, OSCalendarTime* param_2) {
+int CHANS_8144E21(CHANSVm* vm, OSCalendarTime* out) {
     CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
     u32 argc;
     s64 time;
-    OSCalendarTime* nettime;
-    CHANSVmObjHdr* arg;
-    u64 uv4;
-    if (param_2 == NULL)
+    OSCalendarTime nettime;
+    u32 i;
+    s32 v;
+    CHANSVmObjHdr* tmp;
+
+    if (out == NULL)
         return false;
+
     argc = pVm->unk_0x60->argc;
+
     if (argc == 0) {
         time = OSGetTime();
-        time = time / (__OSBusClock / 4000);
-        goto ctortimefinalize;
+        goto finalize_time;
     }
+
     if (argc == 1) {
-        arg = CHANSVmGetArg(vm, 0);
-        if (arg != NULL && arg->type == CHANS_VM_OBJ_TYPE_STRING && (u32)arg->value.ptr_v[1] == 6 && memcmp(arg->value.ptr_v, L"UTC", 6) == 0) {
-            NETGetUniversalCalendar(nettime);
-            time = OSCalendarTimeToTicks(nettime);
-            time = time / (__OSBusClock / 4000);
-            goto ctortimefinalize;
+        CHANSVmObjHdr* arg = CHANSVmGetArg(vm, 0);
+
+        if (arg && arg->type == CHANS_VM_OBJ_TYPE_STRING) {
+            if (arg->value.wstring_v->len == 6 && memcmp(arg->value.wstring_v->str, L"UTC", 6) == 0) {
+                NETGetUniversalCalendar(&nettime);
+                time = OSCalendarTimeToTicks(&nettime);
+                goto finalize_time;
+            }
         }
-        arg = CHANSVmGetArg(vm, 0);
-        arg = CHANSVmConvertObjectType(vm, CHANS_VM_OBJ_TYPE_INTEGER, arg);
-        if (arg != NULL) {
+
+        tmp = arg;
+        arg = CHANSVmConvertObjectType(vm, CHANS_VM_OBJ_TYPE_INTEGER, tmp);
+        if (arg) {
             time = arg->value.int_v;
-            goto ctortimefinalize;
+            goto finalize_time;
         }
     }
+
+    memset(&nettime, 0, sizeof(nettime));
+
     if (argc > 7)
         argc = 7;
-    if (argc != 0) {
-        arg = CHANSVmGetArg(vm, 0);
+
+    for (i = 0; i < argc; i++) {
+        CHANSVmObjHdr* arg = CHANSVmGetArg(vm, i);
         arg = CHANSVmConvertObjectType(vm, CHANS_VM_OBJ_TYPE_INTEGER, arg);
-        if (arg != NULL) {
-            switch (argc) {
-                case 7:
-                    nettime->msec = CHANSVmGetArg(vm, 6)->value.int_v;
-                case 6:
-                    nettime->sec = CHANSVmGetArg(vm, 5)->value.int_v;
-                case 5:
-                    nettime->min = CHANSVmGetArg(vm, 4)->value.int_v;
-                case 4:
-                    nettime->hour = CHANSVmGetArg(vm, 3)->value.int_v;
-                case 3:
-                    nettime->mday = CHANSVmGetArg(vm, 2)->value.int_v;
-                case 2:
-                    nettime->mon = CHANSVmGetArg(vm, 1)->value.int_v;
-                case 1:
-                    nettime->year = CHANSVmGetArg(vm, 0)->value.int_v;
-            }
-            return true;
+        if (!arg) {
+            return false;
+        }
+
+        v = arg->value.int_v;
+
+        switch (i) {
+            case 0:
+                nettime.year = v;
+                break;
+            case 1:
+                nettime.mon = v;
+                break;
+            case 2:
+                nettime.mday = v;
+                break;
+            case 3:
+                nettime.hour = v;
+                break;
+            case 4:
+                nettime.min = v;
+                break;
+            case 5:
+                nettime.sec = v;
+                break;
+            case 6:
+                nettime.msec = v;
+                break;
         }
     }
-    if (nettime->year < 2000)
-        nettime->year = 2000;
-    if (nettime->mday < 1)
-        nettime->mday = 1;
-    time = OSCalendarTimeToTicks(nettime);
-    time = time / (__OSBusClock / 4000);
-ctortimefinalize:
-    uv4 = __OSBusClock / 4000;
-    OSTicksToCalendarTime(uv4, param_2);
+
+    if (nettime.year < 2000)
+        nettime.year = 2000;
+    if (nettime.mday < 1)
+        nettime.mday = 1;
+
+    time = OSCalendarTimeToTicks(&nettime);
+
+finalize_time: {
+    u32 divisor = (__OSBusClock >> 2) / 1000;
+    time = time / divisor;
+    OSTicksToCalendarTime(time, out);
+}
+
     return true;
 }
 
@@ -1471,4 +1505,233 @@ VmCtorDefine(Date) {
     OSCalendarTime* caltime;
     caltime = CHANSVmNewObjData(VmInst, VmReturnObj, 0x28);
     return CHANS_8144E21(VmInst, caltime);
+}
+
+#define RANGE(val, min, max) ((val) >= (min) && (val) <= (max))
+
+const char* weekday_table[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+const char* month_table[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+
+VmDtorDefine(Date) {
+    bool b;
+    OSCalendarTime date;
+    CHANSVmPrivate* pVm = (CHANSVmPrivate*)VmInst;
+    CHANSVmErr err;
+    char buffer[32];
+    unsigned int uv = 0;
+
+    memset(&date, 0, 0x28);
+    b = CHANS_8144E21(VmInst, &date);
+    if (b && RANGE(date.sec, 0, 61) && RANGE(date.min, 0, 59) && RANGE(date.hour, 0, 32) && RANGE(date.mday, 1, 31) && RANGE(date.mon, 0, 11) &&
+        RANGE(date.year, 1900, 9999) && RANGE(date.wday, 0, 6) && uv <= 0x20) {
+        uv = snprintf(buffer, 0x20, "s_%s_%s_%02d_%02d:%02d:%02d_%04d_81669bf0", weekday_table[date.wday], month_table[date.mon]);
+        err = CHANSVmSetU16StringFromU8(VmInst, VmReturnObj, buffer, uv);
+        return err == 0;
+    }
+    return (CHANSVmNewObject(VmInst, 0, VmReturnObj, 3, 0) != 0);
+}
+
+static const char CHANSVmConstStringDataEmpty[] = "";
+
+CHANSVmObjHdr* CHANSVmNewObject(CHANSVm* vm, vmS32 unk, CHANSVmObjHdr* object, CHANSVmObjType type, vmSize len) {
+    CHANSVmObjHdr* var_r29;
+    CHANSVmObjHdr* temp_r3;
+
+    var_r29 = object;
+    if (object != NULL) {
+        memset(var_r29, 0, 0x10);
+        goto block_3;
+    }
+    temp_r3 = CHANSVmNewObjHdr(vm, unk);
+    var_r29 = temp_r3;
+    if (temp_r3 != NULL) {
+    block_3:
+        if (len != 0) {
+            if (CHANSVmNewObjData(vm, var_r29, len) != 0) {
+                goto block_8;
+            }
+            goto block_9;
+        }
+        if (type == 3) {
+            var_r29->value.ptr_v = (vmPtr)CHANSVmConstStringDataEmpty;
+        }
+    block_8:
+        var_r29->type = type;
+        return var_r29;
+    }
+block_9:
+    return NULL;
+}
+
+void CHANSVmNewStringObject(CHANSVm* vm, CHANSVmObjHdr* obj, vmSize len) {
+    CHANSVmNewObject(vm, 0, obj, CHANS_VM_OBJ_TYPE_STRING, len);
+    return;
+}
+
+double CHANSVm_8144B1D8(double param_1)
+
+{
+    if (param_1 < 0.0) {
+        return -1.0;
+    }
+    if (param_1 <= 0.0) {
+        return param_1;
+    }
+    return 1.0;
+}
+
+VmMethodDefine(Date, GetDate) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, cal->mday) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetDay) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, cal->wday) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetFullYear) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, cal->year) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetHours) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, cal->hour) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetMilliseconds) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, cal->msec) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetMinutes) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, cal->min) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetMonth) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, cal->mon) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetSeconds) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, cal->sec) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetTime) {
+    s64 time = OSCalendarTimeToTicks(*(OSCalendarTime**)VmParentObj->value.ptr_v);
+    s64 t = time / ((__OSBusClock >> 2) / 1000);
+    return CHANSVmSetInteger(VmInst, VmReturnObj, t) == CHANS_VM_OK;
+}
+
+VmMethodDefine(Date, GetRTC) {
+    OSCalendarTime* cal = *(OSCalendarTime**)VmParentObj->value.ptr_v;
+    int bias = SCGetCounterBias();
+    s64 ticks = OSCalendarTimeToTicks(cal);
+    u64 t = ticks / ((__OSBusClock >> 2) / 1000);
+    t = t / 1000;
+    return CHANSVmSetInteger(VmInst, VmReturnObj, t - bias) == CHANS_VM_OK;
+}
+
+VmCtorDefine(String) {
+    CHANSVmPrivate* pVm = (CHANSVmPrivate*)VmInst;
+    vmBoolInt ok;
+    CHANSVmObjHdr* obj;
+
+    if (pVm->unk_0x60->argc != 0) {
+        obj = CHANSVmConvertObjectType(VmInst, CHANS_VM_OBJ_TYPE_STRING, CHANSVmGetArg(VmInst, 0));
+        ok = false;
+        if (obj && CHANSVmCopyObject(VmInst, VmReturnObj, obj)) {
+            ok = true;
+        }
+        return ok;
+    }
+    obj = CHANSVmNewObject(VmInst, 0, VmReturnObj, CHANS_VM_OBJ_TYPE_STRING, 0);
+    ok = !!obj;
+    return ok;
+}
+
+VmMethodDefine(String, GetLength) {
+    return CHANSVmSetInteger(VmInst, VmReturnObj, VmParentObj->value.string_v->len >> 1) == 0;
+}
+
+vmU16 CHANSVmGetSourceLine(CHANSVm* vm) {
+    CHANSVmPrivate* pVm = (CHANSVmPrivate*)vm;
+    CHANSVmUnk1* ctx;
+    SrcDbg* dbg;
+    u8 *base, *entry, *bits, *ptr;
+    u32 pc, lineOffset, i, count;
+
+    ctx = pVm->unk_0x60;
+    if (!ctx)
+        goto exit;
+
+    dbg = ctx->unk_0x04;
+    if (!dbg)
+        goto exit;
+
+    base = (u8*)dbg->entries;  // unk_44
+    if (!base)
+        goto exit;
+
+    pc = ctx->unk_0x10;
+    if (pc >= dbg->codesize)
+        goto exit;
+
+    // Locate block
+    entry = base + ((pc >> 8) * 0x24);
+
+    // First 4 bytes = base line
+    lineOffset = *(u32*)entry;
+
+    // Bitfield starts at +4
+    bits = entry + 4;
+
+    i = 0;
+    count = (u8)pc + 1;
+
+    while (count--) {
+        if (bits[i >> 3] & (0x80 >> (i & 7))) {
+            lineOffset += 2;
+        }
+        i++;
+    }
+
+    // Compute final pointer
+    ptr = base + lineOffset;
+
+    // Bounds check
+    if (ptr + 1 < ((u8*)dbg + dbg->codesize)) {
+        return (ptr[1]) | (ptr[0] << 8);
+    }
+
+exit:
+    return 0;
+}
+
+CHANSVmObjHdr CHANSVmConstStringObjectUndefined = {
+    {0},  // value union
+    0,    // typeAndFlag
+    0     // parentCls
+};
+
+CHANSVmObjHdr* CHANSVmConvertToStrFromUndefined(CHANSVm* vm, int type, CHANSVmObjHdr* object) {
+    return &CHANSVmConstStringObjectUndefined;
+}
+
+u8* CHANSVmStrCpyToU8FromU16(u8* dest, const u8* src, u32 len) {
+    u32 i;
+    u8* out = dest;
+
+    for (i = 0; i < len; i++) {
+        if (src[i * 2] != 0)
+            return NULL;
+
+        *out = src[i * 2 + 1];
+        out++;
+    }
+
+    return dest;
 }

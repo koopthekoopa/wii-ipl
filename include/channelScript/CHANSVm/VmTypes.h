@@ -51,11 +51,11 @@ typedef enum CHANSVmObjType {
     CHANS_VM_OBJ_TYPE_INTEGER,
     CHANS_VM_OBJ_TYPE_FLOAT,
     CHANS_VM_OBJ_TYPE_STRING,
-    CHANS_VM_TYPE_OBJECT,  // Class Instance
+    CHANS_VM_TYPE_OBJECT,  // Class Instance, C++ Apis
     CHANS_VM_TYPE_UNK5,
     CHANS_VM_TYPE_UNK6,
-    CHANS_VM_TYPE_UNK7,
-    CHANS_VM_TYPE_POINTER,
+    CHANS_VM_TYPE_UNK7,     // Array of some kind?
+    CHANS_VM_TYPE_POINTER,  // Builtins
     CHANS_VM_TYPE_MAX,
 } CHANSVmObjType;
 

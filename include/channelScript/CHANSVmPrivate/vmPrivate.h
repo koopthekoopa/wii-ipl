@@ -8,8 +8,25 @@ extern "C" {
 #include "channelScript/CHANSVm.h"
 #include "channelScript/CHANSVm/VmTypes.h"
 
+typedef struct SrcLineEntry {
+    s32 baseLine;       // 0x00
+    u8 bitfield[0x20];  // 0x04 (32 bytes = 0x20)
+} SrcLineEntry;
+
+typedef struct SrcDbg {
+    vmU32 unk_00;
+    void* table;
+    vmU32 unk_08;
+    vmU32 codesize;
+    vmU32 unk_10;
+    vmU16 unk_14[24];
+    SrcLineEntry* entries;
+
+} SrcDbg;
+
 typedef struct CHANSVmUnk1 {
-    vmU8 unk_0x00[0x08 - 0x00];
+    vmU32 unk_0x00;
+    SrcDbg* unk_0x04;
     vmWString* argv;
     vmS32 unk_0x0C;
     vmU32 unk_0x10;
