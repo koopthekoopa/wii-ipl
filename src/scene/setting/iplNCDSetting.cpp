@@ -57,9 +57,17 @@ namespace ipl {
             mConfig.profiles[mID].flags &= 0xfe;
         }
 
-        void NCDSetting::setSSID(const char* newSSID) {
+        void NCDSetting::setSSID(unsigned char* newSSID) {
             memcpy(mConfig.profiles[mID].netif.wireless.config.manual.ssid, newSSID, 32);
-            mConfig.profiles[mID].netif.wireless.config.manual.ssidLength = strlen(newSSID);
+            mConfig.profiles[mID].netif.wireless.config.manual.ssidLength = strlen((char*)newSSID);
+        }
+
+        void NCDSetting::setAOSSParams(const NCDAossConfig& aossConfig) {
+            mConfig.profiles[mID].netif.wireless.config.aoss = aossConfig;
+        }
+
+        void NCDSetting::setRakuParams(const NCDApConfig& rakuConfig) {
+            mConfig.profiles[mID].netif.wireless.config.rakuraku = rakuConfig;
         }
 
         void NCDSetting::setPrivacyMode(u16 newMode) {

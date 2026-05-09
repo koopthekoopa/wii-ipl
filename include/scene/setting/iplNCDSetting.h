@@ -42,7 +42,7 @@ namespace ipl {
             static void setWired();
             static void setWireless(unsigned char);
             static void changeConnectType(unsigned char);
-            static void setSSID(const char*);
+            static void setSSID(unsigned char*);
             static void setPrivacyMode(unsigned short);
             static void setWDPrivacyMode(unsigned short);
             static void setPrivacy(unsigned char*, int);
