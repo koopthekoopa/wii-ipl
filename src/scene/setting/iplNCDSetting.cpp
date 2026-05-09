@@ -459,7 +459,7 @@ namespace ipl {
 
         unsigned int NCDSetting::checkChangeEnable() {
             u8 configMethod = mConfig.profiles[mID].netif.wireless.configMethod;
-            return (1 - ((u8)configMethod + 0xff & 0xff)) >> (u8)0x1f;
+            return (u32)(1 - ((u8)configMethod + 0xff & 0xff)) >> (u8)0x1f;
         }
 
         undefined4 NCDSetting::convert16toASCII(char param_1, char param_2, unsigned char* param_3) {
