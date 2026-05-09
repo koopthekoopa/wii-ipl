@@ -1053,10 +1053,10 @@ CHANSVmErr VmMul(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* left,
     return err;
 }
 
-vmFloat VmIntToFloat(vmU64 integer) {  // should be vmInteger (s64)????
+static vmFloat VmIntToFloat(vmU64 integer) {
     vmFloat result;
 
-    if ((integer & 0x80000000) != 0) {
+    if ((integer & 0x8000000000000000ULL) != 0) {
         result = -(vmFloat)(~integer + 1);
     } else {
         result = (vmFloat)integer;
@@ -1365,7 +1365,7 @@ CHANSVmErr VmCmpGeq(CHANSVm* vm, int type, CHANSVmObjHdr* ret, CHANSVmObjHdr* le
     return VmCmpLeq(vm, type, ret, right, left);
 }
 
-vmBoolInt VmIsNan(vmFloat param_1) {
+static vmBoolInt VmIsNan(vmFloat param_1) {
     return isnan(param_1) || param_1 == (0.0f / 0.0f);
 }
 
