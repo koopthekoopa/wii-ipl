@@ -1011,7 +1011,7 @@ namespace ipl {
 
                 size = mpBalloonLayout->FindPaneByName(scBasePane)->GetSize();
 
-                f32 val = -2.0f + (mThumbHeight + (size.height / 2));
+                f32 val = -2.0f + ((size.height / 2) + mThumbHeight);
                 val *= -1.0f;
 
                 nw4r::ut::Rect projRect;
