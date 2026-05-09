@@ -1090,7 +1090,8 @@ namespace ipl {
                 for (int index = 0; index < MAX_CHANNEL_INDEX; index++) {
                     if (mChannels[page][index].loadedBnr) {
                         if (mChannels[page][index].info.primaryType == PRIMARY_TYPE_CHANNEL) {
-                            if (ES_TITLE_ID(mChannels[page][index].info.titleType, mChannels[page][index].info.titleCode) == titleId) {
+                            ESTitleId currentId = ES_TITLE_ID(mChannels[page][index].info.titleType, mChannels[page][index].info.titleCode);
+                            if (currentId == titleId) {
                                 *outPage = page;
                                 *outIndex = index;
                                 return;
