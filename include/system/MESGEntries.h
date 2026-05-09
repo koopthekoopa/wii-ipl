@@ -76,8 +76,8 @@
 #define MESG_BOARD_CHJUMP_CONFIRM       88
 #define MESG_BOARD_CHJUMP_NO_OPERA      89
 #define MESG_BOARD_CHJUMP_LAUNCH_ERROR  90
-#define MESG_BOARD_OPT_OUT              92
 #ifndef VERSION_43E
+#define MESG_BOARD_OPT_OUT              101
 #define MESG_BOARD_OPT_OUT_SELECT       102
 #define MESG_BOARD_OPT_OUT_ONE          103
 #define MESG_BOARD_OPT_OUT_ALL          104
@@ -87,6 +87,7 @@
 #define MESG_BOARD_OPT_OUT_DONE_ALL     108
 #define MESG_BOARD_NWC24_DELETE_FAIL    109
 #else
+#define MESG_BOARD_OPT_OUT              92
 #define MESG_BOARD_OPT_OUT_SELECT       93
 #define MESG_BOARD_OPT_OUT_ONE          94
 #define MESG_BOARD_OPT_OUT_ALL          95
