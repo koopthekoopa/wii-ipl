@@ -1901,7 +1901,7 @@ config.libs = [
             Object(NonMatching, "core/eggAudioExpMgr.cpp"),
             Object(NonMatching, "core/eggAudioFxMgr.cpp"),
             Object(NonMatching, "core/eggAudioMgr.cpp"),
-            Object(NonMatching, "core/eggAudioHeapMgr.cpp"),
+            Object(Matching,    "core/eggAudioHeapMgr.cpp"),
             Object(NonMatching, "core/eggColorFader.cpp"),
             Object(NonMatching, "core/eggDisposer.cpp"),
             Object(NonMatching, "core/eggExpHeap.cpp"),
