@@ -321,9 +321,9 @@ namespace ipl {
         }
 
         void NCDSetting::setPrivacy(unsigned char* newKey, int len) {
-            u16 mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.option;
+            u8 mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.reserved[0];
             memset(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104, 0, 0x44);
-            mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.option = mode;
+            mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.reserved[0] = mode;
             if (len == 0) {
                 mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode = 0;
             } else {
