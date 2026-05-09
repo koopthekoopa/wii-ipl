@@ -726,35 +726,32 @@ namespace ipl {
         }
 
         int NCDSetting::makeMacAddr() {
-            u8 macAddress[6];
-            long long uVar2;
-            char* mac;
-            u32 local_2d;
+            u8 macAddress[7];
+            char mac[32];
 
             NCDErr err = NETGetWirelessMacAddress(macAddress);
-            if (err != -4) {
-                if (err < -4) {
-                    if (err == -8) {
-                        goto fail;
-                    }
-                } else if (err == 0) {
+            switch (err) {
+                case 0:
                     sprintf(mac, "%02x-%02x-%02x-%02x-%02x-%02x", macAddress[0], macAddress[1], macAddress[2], macAddress[3], macAddress[4],
                             macAddress[5]);
-                    OSReport("MAC: %s\n", &mac);
-
-                    ipl::utility::CharacterCode::ANSIToUTF8((char*)mMac, (u8*)&mac);
-
-                    memset(&mac, 0, 18);
-                    memcpy(&mac, &macAddress, 6);
-                    uVar2 = *mac % 100000000;
-                    // uVar2 = __mod2u(local_31, local_2d, 0, 100000000);
-                    mMacNum = (int)uVar2;
-                    OSReport("%lld %d\n", mMacNum, mac, local_2d, mMacNum);
-                }
-                OSPanic("iplNCDSetting.cpp", 0x43b, "Unrecoverable Error!!");
+                    OSReport("MAC: %s\n", mac);
+                    ipl::utility::CharacterCode::ANSIToUTF8((char*)mMac, (u8*)mac);
+                    memset(mac, 0, 18);
+                    memcpy(&mac[2], macAddress, 6);
+                    {
+                        u64 num = *(u64*)mac;
+                        mMacNum = (int)(num % 100000000);
+                        OSReport("%lld %d\n", num, mMacNum);
+                    }
+                    break;
+                case -4:
+                case -8:
+                    OSPanic("iplNCDSetting.cpp", 0x436, "try again!!");
+                    break;
+                default:
+                    OSPanic("iplNCDSetting.cpp", 0x43b, "Unrecoverable Error!!");
+                    break;
             }
-        fail:
-            OSPanic("iplNCDSetting.cpp", 0x436, "try again!!");
         }
     }  // namespace ncd
 }  // namespace ipl
