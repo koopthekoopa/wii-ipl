@@ -476,11 +476,11 @@ namespace ipl {
             }
 
             if (param_2 >= '0' && param_2 <= '9') {
-                *param_3 = *param_3 + ((param_2 - '0') << 24);
+                *param_3 = *param_3 + (u8)(param_2 - '0');
             } else if (param_2 >= 'A' && param_2 <= 'F') {
-                *param_3 = *param_3 + ((param_2 - 'A' + 10) << 24);
+                *param_3 = *param_3 + (u8)(param_2 - 'A' + 10);
             } else if (param_2 >= 'a' && param_2 <= 'f') {
-                *param_3 = *param_3 + ((param_2 - 'a' + 10) << 24);
+                *param_3 = *param_3 + (u8)(param_2 - 'a' + 10);
             } else {
                 ret = false;
             }
