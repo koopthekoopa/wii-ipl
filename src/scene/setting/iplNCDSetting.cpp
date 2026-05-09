@@ -256,8 +256,10 @@ namespace ipl {
         }
 
         void NCDSetting::adjustNCDData_() {
-            int i = 0;
-            int theOne = -1;
+            int i;
+            int theOne;
+            theOne = -1;
+            i = 0;
             for (; i < 3; i++) {
                 if ((mConfig.profiles[i].flags & 0x80) != 0) {
                     adjustSelectMedia_(i);
