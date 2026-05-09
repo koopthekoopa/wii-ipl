@@ -151,8 +151,10 @@ namespace ipl {
         BOOL ChannelScriptManager::isValidAddr(void* addr) {
             EGG::Heap* heap1 = mpHeap;
             EGG::Heap* heap2 = mCSData.heap;
+            void* end1 = heap1->getEndAddress();
+            void* end2 = heap2->getEndAddress();
 
-            return heap1->isHeapPointer(addr) || heap2->isHeapPointer(addr);
+            return ((u8*)heap1 <= addr && addr < end1) || ((u8*)heap2 <= addr && addr < end2);
         }
 
         void ChannelScriptManager::calcCSThread() {
