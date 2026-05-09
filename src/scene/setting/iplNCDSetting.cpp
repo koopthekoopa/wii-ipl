@@ -222,8 +222,9 @@ namespace ipl {
                 if (param_1[0] == '.') {
                     ret = 0;
                 } else {
+                    char c;
                     for (int i = 0; i < len; i++) {
-                        char c = param_1[i];
+                        c = param_1[i];
                         if (((c < '0' || '9' < c) && (c < 'a' || 'z' < c)) && ((((c < 'A' || 'Z' < c) && c != '-') && (c != '.' && c != '_')))) {
                             return 0;
                         }
