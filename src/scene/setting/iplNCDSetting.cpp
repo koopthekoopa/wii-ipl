@@ -579,8 +579,8 @@ namespace ipl {
             return 3;
         }
 
-        int NCDSetting::getIP() {
-            return *(int*)mConfig.profiles[mID].ip.addr;
+        u8* NCDSetting::getIP() {
+            return mConfig.profiles[mID].ip.addr;
         }
 
         u32 NCDSetting::getMacNum() {

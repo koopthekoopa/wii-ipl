@@ -66,7 +66,7 @@ namespace ipl {
             static u16 getNCDPrivacyMode();
             static u8* getPrivacy();
             static u16 getPrivacyLen();
-            static int getIP();
+            static u8* getIP();
             static u32 getMacNum();
             static u8* getMacAddr();
             static int makeMacAddr();
