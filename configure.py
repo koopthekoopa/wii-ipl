@@ -1908,7 +1908,7 @@ config.libs = [
             Object(NonMatching, "core/eggFrmHeap.cpp"),
             Object(NonMatching, "core/eggGraphicsFifo.cpp"),
             Object(NonMatching, "core/eggHeap.cpp"),
-            Object(NonMatching, "core/eggTaskThread.cpp"),
+            Object(Matching,    "core/eggTaskThread.cpp", extra_cflags=["-O4,s"]),
             Object(Matching,    "core/eggThread.cpp", extra_cflags=["-O4,s"]),
             Object(NonMatching, "core/eggUnitHeap.cpp"),
 

@@ -32,7 +32,7 @@ namespace EGG {
         static void switchThreadCallback(OSThread* pCurrOSThread, OSThread* pNewOSThread);
         static void* start(void* pArg);
 
-    private:
+    protected:
         nw4r::ut::Link mLink;  // 0x04
 
         Heap* mpHeap;        // 0x0C
@@ -44,6 +44,8 @@ namespace EGG {
 
         void* mpStack;   // 0x3C
         u32 mStackSize;  // 0x40
+
+    private:
 
         struct ThreadList : public nw4r::ut::List {
             u32 _pad;

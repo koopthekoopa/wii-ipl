@@ -19,18 +19,23 @@ namespace EGG {
             TFunction mExitFunction;   // 0x10
             TFunction unk_0x14;
 
-            TJob() : mEnterFunction(NULL), mExitFunction(NULL), unk_0x14(NULL) {}
+            TJob();
 
             void clear_functions();
         } TJob;
 
-        TaskThread();
+        TaskThread(int capacity, int priority, u32 stackSize);
         virtual ~TaskThread();
 
-        static TaskThread* create(int msgCount, int, u32 size, Heap* heap);
+        virtual void* run();
 
-        void request(TFunction func, void* work, void*);
-        void requestJam(TFunction func, void* work, void*);
+        virtual void onEnter();
+        virtual void onExit();
+
+        static TaskThread* create(int capacity, int priority, u32 stackSize, Heap* heap);
+
+        bool request(TFunction func, void* work, OSMessage msg);
+        bool requestJam(TFunction func, void* work, OSMessage msg);
 
         OSMessageQueue* getThreadMsgQueue() { return mpMsgQueue; }
 
