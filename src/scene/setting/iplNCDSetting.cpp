@@ -284,17 +284,12 @@ namespace ipl {
             u8 asciiKey[14];
             memset(asciiKey, 0, sizeof(asciiKey));
 
-            if (keyLen == 0)
-                return 0;
-
-            int privacyMode = getPrivacyMode();
-
-            if ((privacyMode & 0xFFFF) > 1) {
-                if (keyLen < 8 || keyLen >= 64) {
-                    return keyLen;
-                }
-
-                if (keyLen == 64) {
+            if (keyLen == 0) {
+                ret = 0;
+            } else if ((u16)getPrivacyMode() > 1) {
+                if (keyLen >= 8 && keyLen < 64) {
+                    ret = keyLen;
+                } else if (keyLen == 64) {
                     for (int i = 0; i < 64; i++) {
                         char c = key[i];
                         if ((((c < '0') || ('9' < c)) && ((c < 'A' || ('F' < c)))) && ((c < 'a' || ('f' < c)))) {
@@ -303,29 +298,26 @@ namespace ipl {
                     }
                     ret = keyLen;
                 }
-
-                return ret;
-            }
-
-            if (keyLen == 10 || keyLen == 26) {
+            } else if (keyLen == 10 || keyLen == 26) {
+                int i = 0;
                 int outLen = 0;
-                for (int i = 0; i < keyLen; i += 2) {
+                while (i < keyLen) {
                     if (convert16toASCII(key[i], key[i + 1], &asciiKey[outLen]) == 0)
                         return -1;
+                    i += 2;
                     outLen++;
                 }
-
-                memcpy(key, asciiKey, keyLen);
-                mConfig.profiles[mID].netif.wireless.config.aoss.wep40.key[1][1] = 1;
-                return keyLen / 2;
-            }
-
-            if (keyLen == 5 || keyLen == 13) {
+                if (i == 10 || i == 26) {
+                    memcpy(key, asciiKey, i);
+                    mConfig.profiles[mID].netif.wireless.config.aoss.wep40.key[1][1] = 1;
+                    return i / 2;
+                }
+                return -1;
+            } else if (keyLen == 5 || keyLen == 13) {
                 mConfig.profiles[mID].netif.wireless.config.aoss.wep40.key[1][1] = 0;
-                return keyLen;
+                ret = keyLen;
             }
-
-            return -1;
+            return ret;
         }
 
         void NCDSetting::setPrivacy(unsigned char* newKey, int len) {
