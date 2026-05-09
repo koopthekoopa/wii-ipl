@@ -374,11 +374,13 @@ void __DVDShowFatalMessage() {
 int DVDSetAutoFatalMessaging(BOOL enable) {
     BOOL enabled;
     BOOL prev;
+    void (*oldFunc)();
 
     enabled = OSDisableInterrupts();
 
-    prev = FatalFunc ? TRUE : FALSE;
-    FatalFunc = enable ? __DVDShowFatalMessage : NULL;
+    oldFunc = FatalFunc;
+    prev = oldFunc ? TRUE : FALSE;
+    FatalFunc = (void (*)())((u32)__DVDShowFatalMessage & -(enable != 0));
 
     OSRestoreInterrupts(enabled);
     return prev;
