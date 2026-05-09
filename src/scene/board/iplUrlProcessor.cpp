@@ -195,7 +195,7 @@ namespace ipl {
             url_collision* got = NULL;
             url_collision* url_col = NULL;
 
-            while (got = (url_collision*)nw4r::ut::List_GetNext(&mUrlCollisions, url_col), got != NULL) {
+            while (got = (url_collision*)nw4r::ut::List_GetNext(&mUrlCollisions, got), got != NULL) {
                 if (got->unk_0x00 == unk_0x4C) {
                     url_col = got;
                     break;
