@@ -11,27 +11,44 @@
 namespace EGG {
     class Thread {
     public:
-        Thread(OSThread* currThread, int);
+        static void initialize();
+        static Thread* findThread(OSThread* pOSThread);
+
+        Thread(u32 stackSize, int capacity, int priority, Heap* pHeap = NULL);
+        Thread(OSThread* currThread, int capacity);
         virtual ~Thread();
 
-        static void initialize();
+        virtual void* run();
+
+        virtual void onEnter();
+        virtual void onExit();
 
         OSMessageQueue* getMessageQueue() { return &mMsgQueue; }
+        OSThread* getOSThread() const { return mpThread; }
 
     private:
-        static nw4r::ut::List smThreadList;
+        void setCommonMesgQueue(int capacity, Heap* pHeap);
 
-        Heap* mpHeap;        // 0x04
-        OSThread* mpThread;  // 0x08
+        static void switchThreadCallback(OSThread* pCurrOSThread, OSThread* pNewOSThread);
+        static void* start(void* pArg);
 
-        OSMessageQueue mMsgQueue;  // 0x0C
-        void* mpMsgArray;          // 0x2C
-        s32 mMsgCount;             // 0x30
+    private:
+        nw4r::ut::Link mLink;  // 0x04
 
-        void* mpStack;   // 0x34
-        u32 mStackSize;  // 0x38
+        Heap* mpHeap;        // 0x0C
+        OSThread* mpThread;  // 0x10
 
-        nw4r::ut::Link mLink;  // 0x3C
+        OSMessageQueue mMsgQueue;  // 0x14
+        void* mpMsgArray;          // 0x34
+        s32 mMsgCount;             // 0x38
+
+        void* mpStack;   // 0x3C
+        u32 mStackSize;  // 0x40
+
+        struct ThreadList : public nw4r::ut::List {
+            u32 _pad;
+        };
+        static ThreadList sThreadList;
     };
 }  // namespace EGG
 

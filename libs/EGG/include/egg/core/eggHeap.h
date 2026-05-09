@@ -53,6 +53,11 @@ namespace EGG {
         }
         static Heap* unkInline2(int id = 0) { return (Heap*)OSGetThreadSpecific(id); }
 
+        static void* alloc(u32 size, int align, Heap* heap);
+        static void free(void* buffer, Heap* heap);
+
+        static Heap* sCurrentHeap;
+
         void* getStartAddress() { return this; }
         void* getEndAddress() { return MEMGetHeapEndAddress(mHeapHandle); }
 

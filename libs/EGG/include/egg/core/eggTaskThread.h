@@ -19,14 +19,9 @@ namespace EGG {
             TFunction mExitFunction;   // 0x10
             TFunction unk_0x14;
 
-            inline TJob() : mEnterFunction(NULL), mExitFunction(NULL), unk_0x14(NULL) {}
+            TJob() : mEnterFunction(NULL), mExitFunction(NULL), unk_0x14(NULL) {}
 
-            inline void clearFunctions() {
-                mFunction = NULL;
-                mEnterFunction = NULL;
-                mExitFunction = NULL;
-                unk_0x14 = NULL;
-            }
+            void clear_functions();
         } TJob;
 
         TaskThread();
@@ -42,6 +37,9 @@ namespace EGG {
         void setMessageQueue(OSMessageQueue* queue) { mpMsgQueue = queue; }
 
         static OSMessage waitQueueMessage(OSMessageQueue* queue, BOOL* result);
+
+    private:
+        TJob* findBlank();
 
     private:
         TJob* mCurrentJob;  // 0x44

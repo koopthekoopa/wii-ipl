@@ -53,7 +53,7 @@ namespace ipl {
         }
 
         curThread = OSGetCurrentThread();
-        if (curThread == System::getMainThread()->getMessageQueue()->queueSend.tail) {
+        if (curThread == System::getMainThread()->getOSThread()) {
             check();
         } else {
             OSCancelThread(curThread);
