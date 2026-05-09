@@ -801,7 +801,7 @@ s32 VFSysCreateDir(s32 i_handle_idx, const char* i_dir_name_p) {
 }
 
 s32 VFSysGetFileSizeByFd(s32* o_size_p, PF_FILE* i_file_p) {
-    *o_size_p = -1;
+    *o_size_p = 0;
     if (i_file_p != NULL) {
         PF_INFO info;
         if (VFipf2_finfo(i_file_p, &info) == 0) {
