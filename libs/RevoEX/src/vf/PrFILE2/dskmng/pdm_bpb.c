@@ -1,6 +1,6 @@
 #include <private/vf/PrFILE2/dskmng/pdm_bpb.h>
 
-static void VFipdm_bpb_calculate_common_bpb_fields(PDM_BPB* p_bpb /* r3 */) {
+void VFipdm_bpb_calculate_common_bpb_fields(PDM_BPB* p_bpb /* r3 */) {
     pf_u32 num_data_sectors;
     pf_u16 val;
 
@@ -22,15 +22,23 @@ static void VFipdm_bpb_calculate_common_bpb_fields(PDM_BPB* p_bpb /* r3 */) {
     num_data_sectors = p_bpb->total_sectors - p_bpb->first_data_sector;
     p_bpb->num_clusters = num_data_sectors >> p_bpb->log2_sectors_per_cluster;
 
-    if (p_bpb->num_clusters < 0xFF5) {
-        p_bpb->fat_type = PDM_FAT_12;
-        return;
+    {
+        pf_u32 max_clusters;
+
+        if (p_bpb->num_clusters < 0xFF5) {
+            p_bpb->fat_type = PDM_FAT_12;
+            max_clusters = (((p_bpb->sectors_per_FAT << p_bpb->log2_bytes_per_sector) << 1) / 3) - 2;
+        } else if (p_bpb->num_clusters < 0xFFF5) {
+            p_bpb->fat_type = PDM_FAT_16;
+            max_clusters = ((p_bpb->sectors_per_FAT << p_bpb->log2_bytes_per_sector) >> 1) - 2;
+        } else {
+            p_bpb->fat_type = PDM_FAT_32;
+            max_clusters = ((p_bpb->sectors_per_FAT << p_bpb->log2_bytes_per_sector) >> 2) - 2;
+        }
+        if (p_bpb->num_clusters > max_clusters) {
+            p_bpb->num_clusters = max_clusters;
+        }
     }
-    if (p_bpb->num_clusters < 0xFFF5) {
-        p_bpb->fat_type = PDM_FAT_16;
-        return;
-    }
-    p_bpb->fat_type = PDM_FAT_32;
 }
 
 static void VFipdm_bpb_calculate_specific_bpb_fields(PDM_BPB* p_bpb) {
