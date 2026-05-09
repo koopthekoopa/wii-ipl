@@ -15,6 +15,12 @@
 
 namespace ipl {
     namespace ncd {
+        NCDConfig NCDSetting::mConfig;
+        u16 NCDSetting::mID;
+        u8 NCDSetting::mMac[32];
+        u32 NCDSetting::mMacNum;
+        NCDConfig NCDSetting::mSaveConfig;
+
         int NCDSetting::init() {
             memset(&mConfig, 0, sizeof(mConfig));
             int status = NCDReadConfig(&mConfig);
