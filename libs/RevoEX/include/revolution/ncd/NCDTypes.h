@@ -5,8 +5,6 @@
 
 typedef s32 NCDErr;
 
-#define PACKED __attribute__((packed))
-
 enum {
     NCD_LINKSTATUS_WIRED = 3,  // ?
 };

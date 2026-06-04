@@ -51,4 +51,6 @@ typedef volatile uBOOL vuBOOL;
 #define ALIGN32 ATTRIBUTE_ALIGN(DEFAULT_ALIGN)
 #define ALIGN64 ATTRIBUTE_ALIGN(64)
 
+#define PACKED __attribute__((packed))
+
 #endif  // REVOLUTION_TYPES_H

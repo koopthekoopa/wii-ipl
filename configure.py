@@ -1158,9 +1158,9 @@ config.libs = [
         ]
     ),
     RevoEXLib("wd", [
-            Object(NonMatching, "wd/wd_misc.c"),
-            Object(NonMatching, "wd/wd_request.c"),
-            Object(NonMatching, "wd/wd_init.c"),
+            Object(Matching,    "wd/wd_misc.c"),
+            Object(Matching,    "wd/wd_request.c"),
+            Object(Matching,    "wd/wd_init.c"),
             Object(NonMatching, "wd/WDScan.c"),
         ]
     ),
