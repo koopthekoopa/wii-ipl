@@ -1000,7 +1000,7 @@ src/keyboard/tiInputForm.cpp:
 src/keyboard/tiCandidateBox.cpp:
 	.text       start:0x81426E2C end:0x8142CBF8
 	.ctors      start:0x815E5DD8 end:0x815E5DDC
-	.rodata     start:0x815EDEA0 end:0x815EE218
+	.rodata     start:0x815EDEA0 end:0x815EE2B8
 	.data       start:0x81632268 end:0x81633008
 	.sdata2     start:0x81669410 end:0x81669460
 	.sdata      start:0x8166B9E0 end:0x8166BA00
@@ -1008,7 +1008,7 @@ src/keyboard/tiCandidateBox.cpp:
 src/keyboard/tiToolBar.cpp:
 	.text       start:0x8142CBF8 end:0x8142E150
 	.ctors      start:0x815E5DDC end:0x815E5DE0
-	.rodata     start:0x815EE218 end:0x815EE498
+	.rodata     start:0x815EE2B8 end:0x815EE498
 	.data       start:0x81633008 end:0x816333B8
 	.sdata      start:0x8166BA00 end:0x8166BA18
 
