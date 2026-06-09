@@ -7,7 +7,7 @@ namespace ipl {
         public:
             Tree();
 
-            virtual ~Tree(){};  // 0x08
+            virtual ~Tree() {};  // 0x08
 
             virtual Tree* getParent() { return mpParent; }  // 0x0C
             virtual Tree* getChild() { return mpChild; }    // 0x10
@@ -35,7 +35,8 @@ namespace ipl {
 
                 iterator& operator++() {
                     next();
-                    return *this;
+                    // @bug This should return a value, but doesn't :(
+                    // return *this;
                 }
 
                 inline void next() {
@@ -45,13 +46,13 @@ namespace ipl {
                         if (mPtr->getNext()) {
                             mPtr = mPtr->getNext();
                         } else {
-                            while (1) {
-                                if (!mPtr->getNext()) {
-                                    break;
-                                }
+                            while ((mPtr = mPtr->getParent())) {
+                                if (!mPtr->getNext())
+                                    continue;
+
                                 mPtr = mPtr->getNext();
+                                break;
                             }
-                            mPtr = mPtr->getParent();
                         }
                     }
                 }

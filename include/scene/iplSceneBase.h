@@ -32,7 +32,7 @@ namespace ipl {
             COMMAND_RESERVE_ALL_DESTRUCT,
         };
 
-        typedef struct Command {
+        typedef struct {
             int type;  // 0x00
 
             int newSceneID;   // 0x04
@@ -43,6 +43,9 @@ namespace ipl {
             Base* child;   // 0x14
 
             void* args;  // 0x18
+        } CommandData;
+        typedef struct Command {
+            CommandData data;  // 0x00
 
             void clear();
 

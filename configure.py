@@ -881,7 +881,7 @@ config.libs = [
     IPLSection("sceneSystem", [
             Object(Matching,    "scene/sceneSystem/iplSceneBase.cpp"),
             Object(Matching,    "scene/sceneSystem/iplSceneCreator.cpp"),
-            Object(NonMatching, "scene/sceneSystem/iplSceneManager.cpp"),
+            Object(Matching, "scene/sceneSystem/iplSceneManager.cpp"),
             Object(Matching,    "scene/sceneSystem/iplFaderSceneBase.cpp"),
         ]
     ),
