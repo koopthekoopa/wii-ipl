@@ -348,7 +348,7 @@ src/iplwww/www_window.cpp:
 	.data       start:0x81643DC8 end:0x816442B0
 	.sdata      start:0x81698198 end:0x816981A0
 
-src/iplwww/www_transition.cpp:
+src/iplwww/www_trasition.cpp:
 	.bss        start:0x8108A498 end:0x8108A4B8
 	.text       start:0x8136F6E8 end:0x8136FA78
 	.data       start:0x816442B0 end:0x81644398

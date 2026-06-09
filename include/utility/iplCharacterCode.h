@@ -17,7 +17,7 @@ namespace ipl {
 
             static void ANSIToUTF8(char* dest, const u8* src);
             static void ANSIToUTF8(char* dest, const u8* src, int);
-            static void UTF8ToANSI(char* dest, const u8* src);
+            static void UTF8ToANSI(u8* dest, const char* src);
 
             static void UTF16ToU32(u32* dest, const wchar_t* src);
             static void WiiIdToUTF16(wchar_t* dest, u64 wiiId);

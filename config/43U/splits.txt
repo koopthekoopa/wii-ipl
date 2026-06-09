@@ -334,7 +334,7 @@ src/iplwww/www_surface.cpp:
 	.text       start:0x8136DF38 end:0x8136E6B4
 	.data       start:0x81642D10 end:0x81643AB8
 	.sdata      start:0x816962F0 end:0x816962F8
-	.sbss       start:0x81698960 end:0x81698978
+	.sbss       start:0x81698960 end:0x81698980
 
 src/iplwww/www_thread.cpp:
 	.text       start:0x8136E6B4 end:0x8136E894
@@ -348,12 +348,12 @@ src/iplwww/www_window.cpp:
 	.data       start:0x81643B08 end:0x81643FF0
 	.sdata      start:0x816962F8 end:0x81696300
 
-src/iplwww/www_transition.cpp:
+src/iplwww/www_trasition.cpp:
 	.bss        start:0x8108A498 end:0x8108A4B8
 	.text       start:0x8136F640 end:0x8136F9D0
 	.data       start:0x81643FF0 end:0x816440A0
 	.sdata      start:0x81696300 end:0x81696310
-	.sbss       start:0x81698978 end:0x81698980
+	.sbss       start:0x81698980 end:0x81698988
 
 src/iplwww/www_wiisetting.cpp:
 	.bss        start:0x8108A4B8 end:0x8108A520
@@ -362,7 +362,7 @@ src/iplwww/www_wiisetting.cpp:
 	.data       start:0x816440A0 end:0x81644AB0
 	.sdata2     start:0x816946B8 end:0x816946D8
 	.sdata      start:0x81696310 end:0x81696450
-	.sbss       start:0x81698980 end:0x816989A8
+	.sbss       start:0x81698988 end:0x816989A8
 
 src/iplwww/www_arcreader.cpp:
 	.text       start:0x813711F0 end:0x813715A8

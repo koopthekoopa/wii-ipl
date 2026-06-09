@@ -22,8 +22,10 @@ namespace ext_ead {
             private:
                 static  void* ThreadMain_(void* param);
 
+            protected:
                 OSThread        mThread;        // 0x08
                 
+            private:
                 void*           mpStack;        // 0x320
                 u32             mStackSize;     // 0x324
                 
@@ -33,5 +35,3 @@ namespace ext_ead {
 }
 
 #endif // IPL_WWW_THREAD
-
-
