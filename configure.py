@@ -826,7 +826,7 @@ config.libs = [
             Object(Matching,    "scene/nakamuraTest/gamespy/common/gsSHA1.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/natneg/natneg.c"),
             Object(NonMatching, "scene/nakamuraTest/iplNakamuraTest.cpp"),
-            Object(NonMatching, "scene/nakamuraTest/iplNetSetup.cpp"),
+            Object(Matching, "scene/nakamuraTest/iplNetSetup.cpp"),
         ]
     ),
     IPLSection("parentalDialog", [

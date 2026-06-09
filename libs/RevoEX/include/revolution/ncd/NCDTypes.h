@@ -35,7 +35,7 @@ typedef struct NCDProxyServerProfile {
 
     char username[33];  // 0x106
     char password[33];  // 0x127
-} NCDProxyServerProfile;
+} PACKED NCDProxyServerProfile;
 
 typedef struct NCDProxyProfile {
     NCDProxyServerProfile http;  // 0x00
@@ -51,7 +51,7 @@ typedef struct NCDProxyProfile {
         u32 isAutomaticEnabled;  // 0x04
         char automatic[256];     // 0x08
     } browser;                   // 0x694
-} NCDProxyProfile;
+} PACKED NCDProxyProfile;
 
 typedef struct NCDIpAdjustProfile {
     s32 maxTransferUnit;    // 0x00
@@ -121,12 +121,12 @@ typedef struct NCDApConfig {
     u8 reserved[2];  // 0x22
 
     NCDPrivacy privacy;  // 0x24
-} NCDApConfig;
+} PACKED NCDApConfig;
 
 typedef struct NCDUsbapConfig {
     u16 nickname[11];  // 0x00
     u8 reserved[2];    // 0x16
-} NCDUsbapConfig;
+} PACKED NCDUsbapConfig;
 
 typedef struct NCDAossConfig {
     struct {
@@ -153,7 +153,7 @@ typedef struct NCDAossConfig {
         u16 keyLen;      // 0x22
         u8 key[64];      // 0x24
     } aes;               // 0xF4
-} NCDAossConfig;
+} PACKED NCDAossConfig;
 
 typedef struct NCDWirelessProfile {
     u16 rateset;      // 0x00
@@ -165,7 +165,7 @@ typedef struct NCDWirelessProfile {
         NCDAossConfig aoss;
         NCDApConfig rakuraku;
     } config;  // 0x04
-} NCDWirelessProfile;
+} PACKED NCDWirelessProfile;
 
 typedef struct NCDIfConfig {
     u8 selectedMedia;  // 0x00
