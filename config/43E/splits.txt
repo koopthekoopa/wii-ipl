@@ -720,7 +720,7 @@ src/scene/cardSequence/iplCardSequence.cpp:
 	.sdata      start:0x81698B98 end:0x81698BA0
 	.sbss       start:0x8169AA08 end:0x8169AA10
 
-src/scene/nakamuraTest/iplContest.cpp:
+src/scene/nakamuraTest/iplContest.c:
 	.bss        start:0x810B7508 end:0x810B7DD8
 	.text       start:0x813D4790 end:0x813D5660
 	.rodata     start:0x81610798 end:0x816107E0

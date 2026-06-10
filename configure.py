@@ -818,7 +818,7 @@ config.libs = [
         ]
     ),
     IPLSection("nakamuraTest", [
-            Object(NonMatching, "scene/nakamuraTest/iplContest.cpp"),
+            Object(Matching, "scene/nakamuraTest/iplContest.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/natneg/NATify.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/darray.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/common/gsAvailable.c"),

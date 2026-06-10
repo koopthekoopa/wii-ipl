@@ -1,6 +1,7 @@
 #ifndef _AVAILABLE_H_
 #define _AVAILABLE_H_
 
+#include "../common/gsCommon.h"
 #include "gsStringUtil.h"
 
 #ifdef __cplusplus
