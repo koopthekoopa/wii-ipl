@@ -825,7 +825,7 @@ config.libs = [
             Object(Matching,    "scene/nakamuraTest/gamespy/nonport.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/common/gsSHA1.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/natneg/natneg.c"),
-            Object(NonMatching, "scene/nakamuraTest/iplNakamuraTest.cpp"),
+            Object(Matching, "scene/nakamuraTest/iplNakamuraTest.cpp"),
             Object(Matching, "scene/nakamuraTest/iplNetSetup.cpp"),
         ]
     ),

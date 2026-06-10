@@ -454,6 +454,8 @@ namespace ipl {
         static void resetNWC24Regist();
         /** Run NWC24 register process. */
         static BOOL processNWC24Regist();
+        /** Get the current NWC24 register error */
+        static inline int getNWC24RegistErr() { return smArg.mRegistErrCode; }
         /** @return The WiiConnect24 Manager object. */
         static nwc24::Manager* getNwc24Manager() { return smArg.mbSafeMode ? NULL : smArg.mpNwc24Manager; }
         /** @return The WiiConnect24 Manager object. */
