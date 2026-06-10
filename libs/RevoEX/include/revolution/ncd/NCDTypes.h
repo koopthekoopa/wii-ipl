@@ -6,6 +6,15 @@
 typedef s32 NCDErr;
 
 enum {
+    NCD_MODE_NONE = 0,           // 0
+    NCD_MODE_WEP40 = 1,          // 1
+    NCD_MODE_WEP104 = 2,         // 2
+    NCD_MODE_INVALID3 = 3,       // 3
+    NCD_MODE_WPA_PSK_TKIP = 4,   // 4
+    NCD_MODE_WPA2_PSK_TKIP = 5,  // 5
+    NCD_MODE_WPA_PSK_AES = 6,    // 6
+};
+enum {
     NCD_LINKSTATUS_WIRED = 3,  // ?
 };
 
@@ -112,7 +121,7 @@ typedef struct NCDPrivacy {
             u8 key[64];      // 0x04
         } aes;
     };
-} NCDPrivacy;
+} PACKED NCDPrivacy;
 
 typedef struct NCDApConfig {
     u8 ssid[32];     // 0x00
@@ -122,6 +131,11 @@ typedef struct NCDApConfig {
 
     NCDPrivacy privacy;  // 0x24
 } NCDApConfig;
+
+typedef struct NCDRakuApConfig {
+    NCDApConfig cfg;
+    u32 unk_0x6c;
+} NCDRakuApConfig;
 
 typedef struct NCDUsbapConfig {
     u16 nickname[11];  // 0x00
