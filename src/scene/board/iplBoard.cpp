@@ -1329,9 +1329,9 @@ namespace ipl {
             wchar_t fullText[TEXT_LENGTH] = {0};
             memset(&fullText, 0, sizeof(fullText));
 
-#if defined(VERSION_43J)
+#if defined(SYSMENU_REGION_JPN)
             get_text_jpn(date, fullText, TEXT_LENGTH);
-#elif defined(VERSION_43U)
+#elif defined(SYSMENU_REGION_USA)
             switch (System::getLanguage()) {
                 case SC_LANG_FRENCH: {
                     get_text_usafre(date, fullText, TEXT_LENGTH);
@@ -1346,7 +1346,7 @@ namespace ipl {
                     break;
                 }
             }
-#elif defined(VERSION_43E)
+#elif defined(SYSMENU_REGION_EUR)
             switch (System::getLanguage()) {
                 case SC_LANG_GERMAN: {
                     get_text_ger(date, fullText, TEXT_LENGTH);
@@ -1367,7 +1367,7 @@ namespace ipl {
                     break;
                 }
             }
-#elif defined(VERSION_43K)
+#elif defined(SYSMENU_REGION_KOR)
             get_text_kor(date, fullText, TEXT_LENGTH);
 #endif
 

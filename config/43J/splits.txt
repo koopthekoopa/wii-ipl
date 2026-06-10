@@ -243,12 +243,15 @@ src/system/TVRC.cpp:
 	.sbss       start:0x816C7E00 end:0x816C7E78
 
 src/system/iplTVRCManager.cpp:
-	.text       start:0x81360E04 end:0x81361BC0
+	.text       start:0x81360E04 end:0x81361BA0
 	.data       start:0x8166A170 end:0x8166A1E0
 	.sbss       start:0x816C7E78 end:0x816C7E80
 
 src/system/_DATA_.c:
 	.data       start:0x8166A1E0 end:0x81671AC8
+
+src/utility/iplTVRCUtils.cpp:
+	.text       start:0x81361BA0 end:0x81361BC0
 
 src/utility/iplTree.cpp:
 	.text       start:0x81361BC0 end:0x81361D04

@@ -63,7 +63,7 @@
 #define TITLE_NEWS_KOR              ((ESTitleId)(TITLE_NEWS | TITLE_REGION_KOR))
 
 /* TV Remote Control (Unreleased) */
-#define TITLE_TVRC                  ES_TITLE_ID(TITLE_TYPE_SYSTEM_CHANNEL,    'HAO\0')
+#define TITLE_TVRC                  ES_TITLE_ID(TITLE_TYPE_CHANNEL,    'HAO\0')
 #define TITLE_TVRC_ALL              ((ESTitleId)(TITLE_TVRC | TITLE_REGION_ALL))
 #define TITLE_TVRC_JPN              ((ESTitleId)(TITLE_TVRC | TITLE_REGION_JPN))
 #define TITLE_TVRC_USA              ((ESTitleId)(TITLE_TVRC | TITLE_REGION_USA))

@@ -69,7 +69,7 @@ namespace ipl {
                                 WPADGetStatus();
 
                                 if (System::getResetFader()->fadeOut() || System::getResetFader()->getStatus() == EGG::Fader::PREPARE_IN) {
-#ifdef VERSION_43E
+#ifdef SYSMENU_REGION_EUR
                                     if (System::getMasterController()->down(controller::REVO_BTN_DOWN)) {
                                         SCSetEuRgb60Mode(FALSE);
                                         SCSetProgressiveMode(FALSE);

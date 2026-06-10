@@ -654,11 +654,12 @@ config.libs = [
             Object(Matching,    "system/main.cpp"),
             Object(Matching,    "system/iplBS2Manager.cpp"),
             Object(NonMatching, "system/TVRC.cpp"),
-            Object(NonMatching, "system/iplTVRCManager.cpp"),
+            Object(Matching,    "system/iplTVRCManager.cpp"),
             Object(Matching,    "system/_DATA_.c"),
         ]
     ),
     IPLSection("utility", [
+            Object(Matching,    "utility/iplTVRCUtils.cpp"),
             Object(Matching,    "utility/iplTree.cpp"),
             Object(Matching,    "utility/iplFrameController.cpp"),
             Object(Equivalent,  "utility/iplGraphics.cpp"),
@@ -712,7 +713,7 @@ config.libs = [
             Object(Matching,    "BS2/BS2ParentalControl.c"),
             Object(Matching,    "BS2/BS2BringUp.c"),
             Object(Matching,    "BS2/BS2Reset.c"),
-            Object(Equivalent,  "BS2/BS2Fatal.c"),
+            Object(Matching,    "BS2/BS2Fatal.c"),
         ]
     ),
     IPLSection("address", [
@@ -849,7 +850,7 @@ config.libs = [
     IPLSection("sdButton", [
             Object(Matching,    "scene/sdButton/iplSDButton.cpp"),
             Object(Matching,    "scene/sdButton/iplSDArrow.cpp"),
-            Object(NonMatching, "scene/sdButton/iplSDMenuButton.cpp"),
+            Object(Matching,    "scene/sdButton/iplSDMenuButton.cpp"),
         ]
     ),
     IPLSection("sdChannelMemory", [

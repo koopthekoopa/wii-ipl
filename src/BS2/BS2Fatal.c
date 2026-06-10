@@ -20,13 +20,14 @@
 #define BS2_REPORT_X_POS 480
 #define BS2_REPORT_Y_POS 420
 
-typedef struct OSFatalParam {
+typedef struct BS2FatalParam {
     GXColor fg;       // 0x00
     GXColor bg;       // 0x04
     const char* msg;  // 0x08
-} OSFatalParam;
+    u8 unk_0x0C[0x0C];
+} BS2FatalParam;
 
-static OSFatalParam FatalParam;
+static BS2FatalParam FatalParam;
 static OSContext FatalContext;
 
 static void Halt();
@@ -238,7 +239,7 @@ static void Halt() {
     OSFontHeader* fontData;
     void* xfb;
     u32 len;
-    OSFatalParam* fp;
+    BS2FatalParam* fp;
 
     OSEnableInterrupts();
 
@@ -273,7 +274,7 @@ static void Halt() {
 }
 
 // clang-format off
-const char* __DVDErrorMessage[] = {
+const char* const __DVDErrorMessage[] = {
     "\n\n\n"
     "           エラーが発生しました。\n\n"
     "イジェクトボタンを押してディスクを取り出してか\n"
@@ -378,7 +379,7 @@ int DVDSetAutoFatalMessaging(BOOL enable) {
     enabled = OSDisableInterrupts();
 
     prev = FatalFunc ? TRUE : FALSE;
-    FatalFunc = enable ? __DVDShowFatalMessage : NULL;
+    FatalFunc = enable ? __DVDShowFatalMessage : 0;
 
     OSRestoreInterrupts(enabled);
     return prev;
@@ -395,7 +396,7 @@ void BS2ScreenReport(GXColor fg, GXColor bg, const char* msg) {
     OSFontHeader* fontData;
     void* xfb;
     u32 len;
-    OSFatalParam* fp;
+    BS2FatalParam* fp;
 
     FatalParam.fg = fg;
     FatalParam.bg = bg;

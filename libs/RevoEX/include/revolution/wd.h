@@ -5,7 +5,7 @@
 
 #include <private/ios/types.h>
 
-/* thanks https://wiibrew.org/wiki//dev/net/wd/command */
+/* thanks to Dolphin emulator and WiiBrew */
 
 #define WD_VENDOR_LENGTH 3
 
@@ -21,10 +21,10 @@ enum {
 };
 
 enum {
-    WD_PRIVACY_MODE_0 = 0,
-    WD_PRIVACY_MODE_1,
+    WD_PRIVACY_MODE_NONE = 0,
+    WD_PRIVACY_MODE_DS_COMMUNICATION,
     WD_PRIVACY_MODE_2,
-    WD_PRIVACY_MODE_3,
+    WD_PRIVACY_MODE_AOSS_ACCESS,
     WD_PRIVACY_MODE_4,
     WD_PRIVACY_MODE_5,
     WD_PRIVACY_MODE_6,
@@ -32,12 +32,12 @@ enum {
     WD_PRIVACY_MODE_8,
 };
 
-typedef struct _WDInformationElement {
+typedef struct WDInformationElement_ {
     u8 id;      // 0x00
     u8 length;  // 0x01
 } WDInfoElement;
 
-typedef struct _WDVendorInfoElement {
+typedef struct WDVendorInfoElement_ {
     u8 id;                      // 0x00
     u8 length;                  // 0x01
     u8 data[WD_VENDOR_LENGTH];  // 0x02
@@ -48,43 +48,43 @@ typedef struct _WDVendorInfoElement {
 #define WD_SSID_LENGTH 32
 
 typedef struct WDScanParam_ {
-    u16 ChannelBitmap;                 // 0x00
-    u16 MaxChannelTime;                // 0x02
-    u8 BSSID[WD_BSSID_LENGTH];         // 0x04
-    u16 ScanType;                      // 0x0A
-    u16 SSIDLength;                    // 0x0C
-    u8 SSID[WD_SSID_LENGTH];           // 0x0E
-    u8 SSIDMatchMask[WD_SSID_LENGTH];  // 0x2E
+    u16 channelBit;               // 0x00
+    u16 maxChannelTime;           // 0x02
+    u8 bssid[WD_BSSID_LENGTH];    // 0x04
+    u16 type;                     // 0x0A
+    u16 ssidLength;               // 0x0C
+    u8 ssid[WD_SSID_LENGTH];      // 0x0E
+    u8 ssidMask[WD_SSID_LENGTH];  // 0x2E
 } PACKED WDScanParam;
 
 typedef struct WDBssDesc_ {
     u16 length;                 // 0x00
-    u16 RSSI;                   // 0x02
-    u8 BSSID[WD_BSSID_LENGTH];  // 0x04
-    u16 SSIDLength;             // 0x0A
-    u8 SSID[WD_SSID_LENGTH];    // 0x0C
-    u16 Capabilities;           // 0x2C
+    u16 rssi;                   // 0x02
+    u8 bssid[WD_BSSID_LENGTH];  // 0x04
+    u16 ssidLength;             // 0x0A
+    u8 ssid[WD_SSID_LENGTH];    // 0x0C
+    u16 capabilities;           // 0x2C
     struct {
-        u16 basic;        // 0x00
-        u16 support;      // 0x02
-    } rateSet;            // 0x2E
-    u16 beacon_period;    // 0x32
-    u16 DTIM_period;      // 0x34
-    u16 channel;          // 0x36
-    u16 CF_period;        // 0x38
-    u16 CF_max_duration;  // 0x3A
-    u16 IEs_length;       // 0x3C
+        u16 basic;      // 0x00
+        u16 support;    // 0x02
+    } rateSet;          // 0x2E
+    u16 beaconPeriod;   // 0x32
+    u16 dtimPeriod;     // 0x34
+    u16 channel;        // 0x36
+    u16 cfPeriod;       // 0x38
+    u16 cfMaxDuration;  // 0x3A
+    u16 ieLength;       // 0x3C
 } WDBssDesc;
 
 typedef struct WD_Info_ {
-    u8 MAC[6];                   // 0x00
-    u16 EnableChannelsMask;      // 0x06
-    u16 NTRallowedChannelsMask;  // 0x08
-    u8 CountryCode[4];           // 0x0A
-    u8 channel;                  // 0x0E
-    u8 initialized;              // 0x0F
-    u8 version[80];              // 0x10
-    u8 unk_0x60[0x30];           // 0x60 (is it padding???)
+    u8 MAC[6];              // 0x00
+    u16 enableChannel;      // 0x06
+    u16 NTRallowedChannel;  // 0x08
+    u8 countryCode[4];      // 0x0A
+    u8 channel;             // 0x0E
+    u8 initialized;         // 0x0F
+    u8 version[80];         // 0x10
+    u8 unk_0x60[0x30];      // 0x60 (is it padding???)
 } PACKED WD_Info;
 
 s32 WDCheckEnableChannel(u16* enableChannel);

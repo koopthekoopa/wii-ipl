@@ -3,23 +3,25 @@
 
 /* Small configuration macros */
 
-
 /*** IPL CONFIGURATION ***/
 
+#define SYSMENU_TITLE_ID 0x0000000100000002
+#define SYSMENU_CONTENT_ID 0x00000001 /*.app*/
 
-#define SYSMENU_TITLE_ID    0x0000000100000002
-#define SYSMENU_CONTENT_ID  0x00000001/*.app*/
-
-#define SYSMENU_BUILD_TYPE      "FINAL"
+#define SYSMENU_BUILD_TYPE "FINAL"
 
 #if defined(VERSION_43U)
-#define SYSMENU_BUILD_VERSION   "US2"
+#define SYSMENU_BUILD_VERSION "US2"
+#define SYSMENU_REGION_USA
 #elif defined(VERSION_43E)
-#define SYSMENU_BUILD_VERSION   "EU2"
+#define SYSMENU_BUILD_VERSION "EU2"
+#define SYSMENU_REGION_EUR
 #elif defined(VERSION_43J)
-#define SYSMENU_BUILD_VERSION   "JP2"
+#define SYSMENU_BUILD_VERSION "JP2"
+#define SYSMENU_REGION_JPN
 #elif defined(VERSION_43K)
-#define SYSMENU_BUILD_VERSION   "KR2"
+#define SYSMENU_BUILD_VERSION "KR2"
+#define SYSMENU_REGION_KOR
 #endif
 
 /**
@@ -49,9 +51,7 @@
 /** @brief NCDDebugPrint in PostmanManager will print NCDConfig (assuming its what it originally did) */
 // #define USE_POSTMAN_NCD_DEBUG_PRINT
 
-
 /*** SDK CONFIGURATION ***/
-
 
 /** @brief Enables OSReport for DSP */
 // #define ENABLE_DSP_REPORT
@@ -59,36 +59,32 @@
 /** @brief Enables OSReport for debug logs from SDK */
 // #define ENABLE_DB_REPORT
 
-
 /* Build options (set by the version being used) */
 
-
-#if defined(VERSION_43U) || defined(VERSION_43E) || defined(VERSION_43J)
-    #define USE_DICTIONARY
+#if defined(SYSMENU_REGION_USA) || defined(SYSMENU_REGION_EUR) || defined(SYSMENU_REGION_JPN)
+#define USE_DICTIONARY
 #endif
 
-#if defined(VERSION_43U) || defined(VERSION_43E)
-    #define USE_ZI8
+#if defined(SYSMENU_REGION_USA) || defined(SYSMENU_REGION_EUR)
+#define USE_ZI8
 #endif
 
-#if defined(VERSION_43J)
-    #define USE_ATOK
+#if defined(SYSMENU_REGION_JPN)
+#define USE_ATOK
 #endif
-
 
 /* Build types */
 
-
-#if defined(VERSION_43U) || defined(VERSION_43E)
-    #define ENGLISH_BUILD
+#if defined(SYSMENU_REGION_USA) || defined(SYSMENU_REGION_EUR)
+#define ENGLISH_BUILD
 #endif
 
-#if defined(VERSION_43J)
-    #define JAPANESE_BUILD
+#if defined(SYSMENU_REGION_JPN)
+#define JAPANESE_BUILD
 #endif
 
-#if defined(VERSION_43K)
-    #define KOREAN_BUILD
+#if defined(SYSMENU_REGION_KOR)
+#define KOREAN_BUILD
 #endif
 
-#endif // GLOBAL_HEADERS_CONFIG_H
+#endif  // GLOBAL_HEADERS_CONFIG_H

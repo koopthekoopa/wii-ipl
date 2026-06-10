@@ -279,7 +279,7 @@ namespace ipl {
     }
 
     void Framework::init_xfb(EGG::Heap* heap) {
-#ifdef VERSION_43E
+#ifdef SYSMENU_REGION_EUR
         GXRenderModeObj* rMode = &sRMO_Pal50_640x456IntDf;
 #else
         GXRenderModeObj* rMode = mpRMode;

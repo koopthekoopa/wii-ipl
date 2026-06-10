@@ -81,7 +81,7 @@ s32 WDCheckEnableChannel(u16* enableChannel) {
             WD_Info info;
             result2 = WD_GetInfo(&info);
             if (result2 == WD_INTERNAL_ERR_OK && enableChannel != NULL) {
-                *enableChannel = info.EnableChannelsMask;
+                *enableChannel = info.enableChannel;
             }
             WAIT_FOR_OPERATION(WD_Cleanup());
         }
@@ -144,7 +144,7 @@ s32 WDGetPrivacyMode(WDBssDesc* bssDesc) {
         if (memcmp(readIE.data, data, WD_VENDOR_LENGTH) == 0) {
             switch (readIE.mode) {
                 case 1: {
-                    return WD_PRIVACY_MODE_1;
+                    return WD_PRIVACY_MODE_DS_COMMUNICATION;
                 }
                 case 5: {
                     return WD_PRIVACY_MODE_2;
@@ -167,7 +167,7 @@ s32 WDGetPrivacyMode(WDBssDesc* bssDesc) {
             if (memcmp(readIE.data, data, WD_VENDOR_LENGTH) == 0) {
                 switch (readIE.mode) {
                     case 1: {
-                        return WD_PRIVACY_MODE_1;
+                        return WD_PRIVACY_MODE_DS_COMMUNICATION;
                     }
                     case 5: {
                         return WD_PRIVACY_MODE_2;
@@ -184,10 +184,10 @@ s32 WDGetPrivacyMode(WDBssDesc* bssDesc) {
         }
     }
 
-    if (bssDesc != NULL && (bssDesc->Capabilities & 0x10) == 0x10) {
+    if (bssDesc != NULL && (bssDesc->capabilities & 0x10) == 0x10) {
         result = WD_PRIVACY_MODE_8;
     } else {
-        result = WD_PRIVACY_MODE_0;
+        result = WD_PRIVACY_MODE_NONE;
     }
     return result;
 }
@@ -200,13 +200,13 @@ BOOL WDFindInformationElement(WDInfoElement** outIE, u32* outIELength, WDBssDesc
         u8* ptr = (u8*)(bssDesc + 1);
         int offset;
 
-        for (offset = 0; offset < bssDesc->IEs_length; offset = (infoElement->length + offset) + sizeof(WDInfoElement)) {
+        for (offset = 0; offset < bssDesc->ieLength; offset = (infoElement->length + offset) + sizeof(WDInfoElement)) {
             infoElement = (WDInfoElement*)((u8*)ptr + offset);
             if (infoElement->id == id) {
                 break;
             }
         }
-        if (offset < bssDesc->IEs_length) {
+        if (offset < bssDesc->ieLength) {
             if (outIE != NULL) {
                 *outIE = infoElement + 1;
             }
@@ -235,7 +235,7 @@ BOOL WDiFindVendorSpecificIE(WDVendorInfoElement** outIE, u32* outIELength, WDBs
         WDVendorInfoElement* infoElement = (WDVendorInfoElement*)ptr;
         int offset;
 
-        for (offset = 0; offset < bssDesc->IEs_length; offset = (infoElement->length + offset) + sizeof(WDInfoElement)) {
+        for (offset = 0; offset < bssDesc->ieLength; offset = (infoElement->length + offset) + sizeof(WDInfoElement)) {
             u8 gotMode;
             infoElement = (WDVendorInfoElement*)((u8*)ptr + offset);
             if (infoElement->id != (u32)id || (gotMode = infoElement->mode, memcmp(infoElement->data, data, WD_VENDOR_LENGTH)) || gotMode != mode) {
@@ -243,7 +243,7 @@ BOOL WDiFindVendorSpecificIE(WDVendorInfoElement** outIE, u32* outIELength, WDBs
             }
             break;
         }
-        if (offset < bssDesc->IEs_length) {
+        if (offset < bssDesc->ieLength) {
             if (outIE != NULL) {
                 *outIE = infoElement + 1;
             }

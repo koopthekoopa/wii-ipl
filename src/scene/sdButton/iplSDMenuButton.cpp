@@ -23,6 +23,8 @@ namespace ipl {
         SDMenuButton::~SDMenuButton() {
         }
 
+        DECOMP_FORCE_LITERAL(iplSDMenuButton_cpp, -152.0f);
+
         void SDMenuButton::create(nand::LayoutFile* layoutFile, nand::LayoutFile* balloonFile, EGG::Heap* heap) {
             mpLayout = new layout::Object(heap, layoutFile, "arc", "mn_Sdcard_Btn.brlyt");
             mpLayout->bindToGroup("mn_Sdcard_Btn_On_Roop.brlan", "On_Roop", false);
@@ -238,7 +240,7 @@ namespace ipl {
                     mbHovered[i] = FALSE;
 
                     switch (i) {
-                        case BTN_SD_CARD: { // Play hover out animation
+                        case BTN_SD_CARD: {  // Play hover out animation
                             layout::Animator* anim = mpLayout->getAnim(ANIM_BTN_ROLL_OUT);
                             anim->play();
                             break;

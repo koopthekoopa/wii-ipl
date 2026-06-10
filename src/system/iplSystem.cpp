@@ -132,7 +132,7 @@ namespace ipl {
         smArg.mpFontArena = getMem2App()->alloc(0x400000, -DEFAULT_ALIGN);
         smArg.mpFontHeap = EGG::ExpHeap::create(smArg.mpFontArena, 0x400000, 0);
 
-#ifndef VERSION_43K
+#ifndef KOREAN_BUILD
         smArg.mResources.file[Arg::FONT] = getNandManager()->readAsync(getMem2Sys(), "/font/font.ash");
 #else
         smArg.mResources.file[Arg::FONT] = getNandManager()->readAsync(getMem2Sys(), "/font/font_kr.ash");
@@ -174,7 +174,7 @@ namespace ipl {
     }
 
     void System::constructZiDIC_(void* work) {
-#if defined(VERSION_43U)
+#if defined(SYSMENU_REGION_USA)
         smArg.mZiDicData.sys[EZTX_LANG_ENAM] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemENAM.zsd");
         smArg.mZiDicData.sys[EZTX_LANG_FRCA] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemFRCA.zsd");
         smArg.mZiDicData.sys[EZTX_LANG_ESSA] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemESSA.zsd");
@@ -182,7 +182,7 @@ namespace ipl {
         smArg.mZiDicData.oem[EZTX_LANG_ENAM] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoENAM.znd");
         smArg.mZiDicData.oem[EZTX_LANG_FRCA] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoFRCA.znd");
         smArg.mZiDicData.oem[EZTX_LANG_ESSA] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::NINTENDO_DICT]->getBuffer(), "eZTNintendoESSA.znd");
-#elif defined(VERSION_43E)
+#elif defined(SYSMENU_REGION_EUR)
         smArg.mZiDicData.sys[EZTX_LANG_ENUK] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemENUK.zsd");
         smArg.mZiDicData.sys[EZTX_LANG_DE] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemDE.zsd");
         smArg.mZiDicData.sys[EZTX_LANG_FREU] = (u8*)loadZiDIC_(smArg.mResources.file[Arg::ZI_DICT]->getBuffer(), "eZTSystemFREU.zsd");
@@ -297,11 +297,11 @@ namespace ipl {
         smArg.mResources.file[Arg::INVALID_JPEG] = getNandManager()->readAsync(getMem2Sys(), "/my_question.jpg");
 
         // Load ZI dictionary
-#if defined(VERSION_43U)
+#if defined(SYSMENU_REGION_USA)
         smArg.mResources.sharedFile[Arg::ZI_DICT] = getNandManager()->readSharedAsync(getMem2Sys(), "eZTSystemNA.arc", 6);
         smArg.mResources.sharedFile[Arg::NINTENDO_DICT] = getNandManager()->readSharedAsync(getMem2Sys(), "eZTNintendoNA.arc", 7);
         getNandManager()->getTask()->request(requestCreateInstance, (void*)constructZiDIC_, NULL);
-#elif defined(VERSION_43E)
+#elif defined(SYSMENU_REGION_EUR)
         smArg.mResources.sharedFile[Arg::ZI_DICT] = getNandManager()->readSharedAsync(getMem2Sys(), "eZTSystemEU.arc", 6);
         smArg.mResources.sharedFile[Arg::NINTENDO_DICT] = getNandManager()->readSharedAsync(getMem2Sys(), "eZTNintendoEU.arc", 7);
         getNandManager()->getTask()->request(requestCreateInstance, (void*)constructZiDIC_, NULL);
@@ -490,9 +490,9 @@ namespace ipl {
             SCSetAspectRatio(SC_ASPECT_RATIO_4x3);
 
             SCSetWpadSensorBarPosition(0);
-#ifdef VERSION_43U
+#ifdef SYSMENU_REGION_USA
             SCSetBtDpdSensibility(3);
-#endif  // VERSION_43U
+#endif
 
             SCSetScreenSaverMode(FALSE);
             VIEnableDimming(SCGetScreenSaverMode());
@@ -671,7 +671,7 @@ namespace ipl {
         RSOListInit(smArg.mResources.file[Arg::RSO_SYM_LIST]->getBuffer());
 
         // Load messages
-#ifndef VERSION_43E
+#ifndef SYSMENU_REGION_EUR
         smArg.mResources.file[Arg::MESG_ENG] = getNandManager()->read(getMem2Sys(), "/message/eng/ipl_common.bmg");
         smArg.mResources.file[Arg::MESG_FRA] = getNandManager()->read(getMem2Sys(), "/message/fra/ipl_common.bmg");
         smArg.mResources.file[Arg::MESG_GER] = getNandManager()->read(getMem2Sys(), "/message/ger/ipl_common.bmg");
@@ -692,7 +692,7 @@ namespace ipl {
         smArg.mResources.file[Arg::MESG_SPA] = getNandManager()->read(getMem2Sys(), "/message/spa/ipl_common_noe.bmg");
         smArg.mResources.file[Arg::MESG_KOR] = getNandManager()->read(getMem2Sys(), "/message/kor/ipl_common.bmg");
         smArg.mResources.file[Arg::MESG_CHN] = getNandManager()->read(getMem2Sys(), "/message/chn/ipl_common.bmg");
-#endif  // VERSION_43E
+#endif
 
         // Setup more stuff
         smArg.mpException = new (getMem1Sys(), 4) Exception(getMem2Sys(), *System::getRenderModeObj());
@@ -730,7 +730,7 @@ namespace ipl {
             smArg.mpFramework->endFrame();
         }
 
-#if defined(VERSION_43K) || !defined(TURN_OFF_CK2_VERIFY)
+#if defined(KOREAN_BUILD) || !defined(TURN_OFF_CK2_VERIFY)
         // And finally... homebrew's fear.
         BOOL hasKoreanKey = ES_VerifyCK2() == ES_ERR_OK;
         if (hasKoreanKey) {
