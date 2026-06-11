@@ -795,9 +795,9 @@ config.libs = [
         ]
     ),
     IPLSection("saveDataEdit", [
-            Object(NonMatching, "scene/saveDataEdit/iplSaveDataBase.cpp"),
-            Object(NonMatching, "scene/saveDataEdit/iplSaveDataBox.cpp"),
-            Object(NonMatching, "scene/saveDataEdit/iplSaveDataEdit.cpp"),
+            Object(Equivalent, "scene/saveDataEdit/iplSaveDataBase.cpp"),
+            Object(Equivalent, "scene/saveDataEdit/iplSaveDataBox.cpp"),
+            Object(Equivalent, "scene/saveDataEdit/iplSaveDataEdit.cpp"),
             Object(Matching,    "scene/saveDataEdit/iplWiiBannerFileInfo.cpp"),
         ]
     ),

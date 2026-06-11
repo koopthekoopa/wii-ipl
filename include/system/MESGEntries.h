@@ -10,6 +10,7 @@
 #define MESG_CMN_QUIT                   37
 #define MESG_CMN_OK                     46
 #define MESG_CMN_BACK_ALT_2             79
+#define MESG_CMN_BACK_ALT_3             252
 #define MESG_CMN_BACK_ALT               315
 #define MESG_CMN_YES                    321
 #define MESG_CMN_NO                     322
@@ -163,6 +164,14 @@
 #define MESG_PARENTAL_DLG_SUCCESS_TEMP  330
 #define MESG_PARENTAL_DLG_BAD_PIN       331
 #define MESG_PARENTAL_DLG_NO_PIN        345
+
+/* Save Data Edit */
+
+#define MESG_SAVEDATA_EDIT_MOVE         167
+#define MESG_SAVEDATA_EDIT_COPY         178
+#define MESG_SAVEDATA_EDIT_DEL          189
+#define MESG_SAVEDATA_EDIT_WII          317
+#define MESG_SAVEDATA_EDIT_SD_CARD      318
 
 /* SD Button */
 
