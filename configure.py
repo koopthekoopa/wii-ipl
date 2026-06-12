@@ -752,7 +752,7 @@ config.libs = [
             Object(NonMatching, "scene/channelEdit/iplChanAppEdit.cpp"),
             Object(Matching, "scene/channelEdit/iplAnmController.cpp"),
             Object(NonMatching, "scene/channelEdit/iplNandSDCardManager.cpp"),
-            Object(NonMatching, "scene/channelEdit/iplThumbnail.cpp"),
+            Object(Matching, "scene/channelEdit/iplThumbnail.cpp"),
         ]
     ),
     IPLSection("channelSelect", [
