@@ -16,6 +16,10 @@ namespace ipl {
 
             virtual void onEvent(u32 compId, u32 event, void* data);
 
+            bool isWaitingChild() const {
+                return mState == STATE_WAIT_CHILD;
+            }
+
         private:
             enum {
                 // Base

@@ -791,7 +791,7 @@ config.libs = [
         ]
     ),
     IPLSection("memory", [
-            Object(NonMatching, "scene/memory/iplMemory.cpp"),
+            Object(Matching, "scene/memory/iplMemory.cpp"),
         ]
     ),
     IPLSection("saveDataEdit", [
