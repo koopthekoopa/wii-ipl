@@ -750,7 +750,7 @@ config.libs = [
             Object(NonMatching, "scene/channelEdit/iplChanAppBase.cpp"),
             Object(NonMatching, "scene/channelEdit/iplChanAppBox.cpp"),
             Object(NonMatching, "scene/channelEdit/iplChanAppEdit.cpp"),
-            Object(NonMatching, "scene/channelEdit/iplAnmController.cpp"),
+            Object(Matching, "scene/channelEdit/iplAnmController.cpp"),
             Object(NonMatching, "scene/channelEdit/iplNandSDCardManager.cpp"),
             Object(NonMatching, "scene/channelEdit/iplThumbnail.cpp"),
         ]
