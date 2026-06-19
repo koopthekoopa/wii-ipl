@@ -617,7 +617,7 @@ config.libs = [
             Object(Equivalent,  "system/iplSystem.cpp"),
             Object(NonMatching, "system/iplController.cpp"),
             Object(Equivalent,  "system/iplChannelManager.cpp"),
-            Object(Equivalent,  "system/iplChannelScriptManager.cpp"),
+            Object(Matching,    "system/iplChannelScriptManager.cpp"),
             Object(Matching,    "system/iplNand.cpp"),
             Object(NonMatching, "system/iplNandShared.cpp"),
             Object(Matching,    "system/iplNandMeta.cpp"),
@@ -756,7 +756,7 @@ config.libs = [
         ]
     ),
     IPLSection("channelSelect", [
-            Object(NonMatching, "scene/channelSelect/iplChannelSelect.cpp"),
+            Object(Equivalent,  "scene/channelSelect/iplChannelSelect.cpp"),
             Object(Matching,    "scene/channelSelect/iplClock.cpp"),
             Object(Equivalent,  "scene/channelSelect/iplChannelObj.cpp"),
         ]

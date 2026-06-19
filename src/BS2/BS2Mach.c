@@ -124,7 +124,7 @@ void BS2DVDCallback(s32 result, DVDCommandBlock* block) {
         State = BS2_STT_NO_DISK;
     }
 
-    if ((State == BS2_STT_START_GAME || State == BS2_STT_START_GC_GAME || State == BS2_STT_RUN_UPDATE || State == BS2_STT_DATA_DISK) && result == 1) {
+    if ((State == BS2_STT_RVL_GAME || State == BS2_STT_GC_GAME || State == BS2_STT_UPDATE_DISK || State == BS2_STT_DATA_DISK) && result == 1) {
         BS2CancelUpdate();
         State = BS2_STT_NO_DISK;
     }
@@ -147,7 +147,7 @@ void BS2DVDCallback(s32 result, DVDCommandBlock* block) {
         DVDLowMaskCoverInterrupt();
         State = BS2_STT_COVER_CLOSED;
     }
-    if (State == BS2_STT_RUN_UPDATE && BS2UpdateState() == 2) {
+    if (State == BS2_STT_UPDATE_DISK && BS2UpdateState() == 2) {
         State = BS2_STT_RUNNING_UPDATE;
     }
 }

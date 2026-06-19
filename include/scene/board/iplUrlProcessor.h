@@ -8,13 +8,14 @@
 #include <nw4r/ut/List.h>
 #include <nw4r/ut/WideTagProcessor.h>
 
-
 #include <revolution/wpad.h>
 
 namespace ipl {
     namespace scene {
         class UrlProcessor : public nw4r::ut::WideTagProcessor {
         public:
+            static const wchar_t SEPERATOR = 0x1A;
+
             class line_collision {
             public:
                 line_collision() : unk_0x00(0.0f), unk_0x04(0.0f), unk_0x08(0.0f) {}

@@ -3,7 +3,6 @@
 #include "scene/board/iplBoard.h"
 #include "scene/board/iplBoardObject.h"
 
-
 #include "scene/button/iplButton.h"
 
 #include "iplSystem.h"
@@ -703,7 +702,8 @@ namespace ipl {
                     }
                     break;
                 }
-                case ON_HOLD: {
+                // Drag and trig events are swapped, but still act as intended?
+                case ON_DRAG: {
                     if (con != NULL && con->decide()) {
                         if (static_cast<Board*>(System::getScene(SCENE_BOARD))->getHoveredObj(num) == this) {
                             if (static_cast<Button*>(System::getScene(SCENE_BUTTON))->isActive() &&

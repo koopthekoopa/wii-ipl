@@ -14,9 +14,11 @@
 #include "system/iplNandMeta.h"
 #include "system/iplNandShared.h"
 
-#define CHANNEL_INFO(primary, second, flags, titleId) {primary, second, 0, 0, flags, ES_TITLE_TYPE(titleId), ES_TITLE_CODE(titleId)}
+#define CHANNEL_INFO(primary, second, flags, titleId)                                                                                                \
+    { primary, second, 0, 0, flags, ES_TITLE_TYPE(titleId), ES_TITLE_CODE(titleId) }
 
-#define CHANNEL_INFO_NULL {0, 0, 0, 0, 0, 0, 0}
+#define CHANNEL_INFO_NULL                                                                                                                            \
+    { 0, 0, 0, 0, 0, 0, 0 }
 
 #define MAX_CHANNEL_COLUMN 3
 #define MAX_CHANNEL_ROW 4
@@ -150,6 +152,8 @@ namespace ipl {
             CHAN_STATE_LOADED,
         };
 
+        static const int RSO_EXTRA_BUFFER_LENGTH = 32;
+
         typedef struct SChannelEntry {
             u8* arcData;                  // 0x00
             SChanMgrMetaHeader* metaHdr;  // 0x04
@@ -170,7 +174,7 @@ namespace ipl {
 
             int state;  // 0x4C
 
-            u8 rsoExBuf[32];  // 0x50
+            u8 rsoExBuf[RSO_EXTRA_BUFFER_LENGTH];  // 0x50
         } SEntry;
 
         typedef struct SChanMgrDiskInMessages {
@@ -273,6 +277,9 @@ namespace ipl {
             u32 getMetaHdr_BannerCSIdx(int page, int index) const {
                 return mChannels[page][index].loadedBnr ? mChannels[page][index].metaHdr->blockHdr.bannerCSIdx : 0;
             }
+            bool isNormalChannel(int page, int index) const {
+                return mChannels[page][index].loadedBnr && mChannels[page][index].info.sceneID != SCENE_ID_DISK_CHANNEL;
+            }
 
             int updateInitState();
             int updateWaitSCFlush();
@@ -307,6 +314,22 @@ namespace ipl {
             void fn_8133AA50(ESTitleId titleId);
 
             BOOL isReady() { return mState == FINISH; }
+
+            static void setCurrentChannel(int page, int index) NO_INLINE {
+                msCurPage = page;
+                msCurIndex = index;
+            }
+
+            static void getCurrentChannel(int* page, int* index) NO_INLINE {
+                *page = msCurPage;
+                *index = msCurIndex;
+            }
+
+            int getChJumpChanPage() { return mChJumpPage; }
+            int getChJumpChanIndex() { return mChJumpIndex; }
+
+            void setUnk_0x1B81(bool flag) { unk_0x1B81 = flag; }
+            bool isUnk_0x1B81() { return unk_0x1B81; }
 
         private:
             typedef struct MD5Head {

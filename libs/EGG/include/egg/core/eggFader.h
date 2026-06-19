@@ -4,7 +4,12 @@
 namespace EGG {
     class Fader {
     public:
-        typedef enum EStatus { PREPARE_IN = 0, PREPARE_OUT, FADE_IN, FADE_OUT } EStatus;
+        typedef enum EStatus {
+            PREPARE_IN = 0,
+            PREPARE_OUT,
+            FADE_IN,
+            FADE_OUT
+        } EStatus;
 
         virtual void setStatus(EStatus newStatus) = 0;
         virtual EStatus getStatus() const = 0;

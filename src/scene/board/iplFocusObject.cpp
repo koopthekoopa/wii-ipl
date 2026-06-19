@@ -11,7 +11,6 @@
 #include <revolution/cx.h>
 #include <revolution/enc.h>
 
-
 namespace ipl {
     namespace scene {
         // clang-format off
@@ -1149,35 +1148,50 @@ namespace ipl {
             mpParsedText = new (System::getMem2App(), 4) wchar_t[PARSED_TEXT_LENGTH];
             memset(mpParsedText, 0, PARSED_TEXT_LENGTH * sizeof(wchar_t));
 
-            const wchar_t *pURLStr, *pStr = inText;
-            const wchar_t URLSep[2] = {0x1A, 0x00};
+            const wchar_t* pURLStr;
+            const wchar_t* pStr = inText;
+
+            const wchar_t URLSep[2] = {UrlProcessor::SEPERATOR, 0x00};
 
             u32 i = 0;
             u32 strLen = wcslen(inText);
 
+            /**
+             * @BUG: BUFFER OVERFLOW
+             * It is possible for the text length to be over 6000 characters.
+             * But the Wii Menu does check if that is the case.
+             */
+
             while (i != strLen) {
+                // If we found a URL
                 if (inText[i] == L'h' && (pURLStr = &inText[i], is_url_protocol(pURLStr))) {
+                    // Parse the URL
+
                     unk_0x114[5] = 0;
 
                     if (pURLStr != pStr) {
                         check_paren(pURLStr[-1]);
                     }
 
+                    // Append previous characters
                     wcsncat(mpParsedText, inText, i);
 
-                    i = get_url_end(pURLStr);
-                    wcsncat(mpParsedText, URLSep, 1);
-                    wcsncat(mpParsedText, pURLStr, i);
-                    wcsncat(mpParsedText, URLSep, 1);
+                    i = get_url_end(pURLStr);           // Get URL length
+                    wcsncat(mpParsedText, URLSep, 1);   // Begin seperator
+                    wcsncat(mpParsedText, pURLStr, i);  // Add in URL contents
+                    wcsncat(mpParsedText, URLSep, 1);   // End seperator
+
                     inText = &pURLStr[i];
 
                     strLen = wcslen(inText);
                     i = 0;
                 } else {
+                    // Otherwise, move on to the next character
                     i++;
                 }
             }
 
+            // Concat
             wcsncat(mpParsedText, inText, i);
         }
 

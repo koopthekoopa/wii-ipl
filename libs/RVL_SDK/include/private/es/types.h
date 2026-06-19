@@ -14,6 +14,7 @@ extern "C" {
  * https://wiibrew.org/wiki//dev/es
  * https://wiibrew.org/wiki/Ticket
  * https://wiibrew.org/wiki/Title_metadata
+ * https://github.com/iversonjimmy/acer_cloud_wifi_copy/blob/master/sw_x/es_core/esc/core/base/include
  * https://github.com/devkitPro/libogc/blob/master/gc/ogc/es.h
  */
 
@@ -47,7 +48,13 @@ typedef u8 ESHash[20];
 
 #define ES_LIMIT_MAX 8
 
-enum { ES_REGION_JPN = 0, ES_REGION_USA, ES_REGION_PAL, ES_REGION_ALL, ES_REGION_KOR };
+enum {
+    ES_REGION_JPN = 0,
+    ES_REGION_USA,
+    ES_REGION_PAL,
+    ES_REGION_ALL,
+    ES_REGION_KOR
+};
 
 enum {
     ES_CK_NORMAL = 0,  // Normal common key
@@ -58,10 +65,14 @@ enum {
 enum {
     ES_DEV_RETAIL = 0,  // Normal unit
     ES_DEV_1,           // Korean/Dev unit??
-    ES_DEV_CAFE         // Wii U'
+    ES_DEV_CAFE         // Wii U
 };
 
-enum { ES_SEEK_BEG = 0, ES_SEEK_CUR, ES_SEEK_END };
+enum {
+    ES_SEEK_BEG = 0,
+    ES_SEEK_CUR,
+    ES_SEEK_END
+};
 
 // No alignment!!
 #pragma pack(push, 1)

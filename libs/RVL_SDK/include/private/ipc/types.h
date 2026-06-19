@@ -9,6 +9,11 @@ enum {
     IPC_HEAP_CHUNK_FORALIGN = 0xBABE0002
 };
 
+/**
+ * References:
+ * https://github.com/iversonjimmy/acer_cloud_wifi_copy/blob/master/sw_x/es_core/esc/core/ioscrypto/iostypes.h
+ */
+ 
 enum {
     IPC_RESULT_OK                   =  0,
     IPC_RESULT_ACCESS               = -1,

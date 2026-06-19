@@ -80,6 +80,11 @@ namespace ipl {
                 IDANIM_BTN_SELECT,
             };
 
+            enum {
+                BTN_SD_CARD = 0,
+                BTN_MAX,
+            };
+
             SDMenuButton();
             ~SDMenuButton();
 
@@ -107,12 +112,9 @@ namespace ipl {
             void toggle_insert(BOOL bInserted);
             void show_balloon(int balloonId, const char* targetPaneName);
 
-        protected:
-            enum {
-                BTN_SD_CARD = 0,
-                BTN_MAX,
-            };
+            static const char* getButtonName(int id) { return mscButtonName[id]; }
 
+        protected:
             enum {
                 ANIM_ON_LOOP = 0,
                 ANIM_BTN_IN,
@@ -132,6 +134,8 @@ namespace ipl {
 
             BOOL mbHovered[BTN_MAX];  // 0x0C
             bool mbEnabled;           // 0x10
+
+            static const char* mscButtonName[BTN_MAX];
 
             friend class Button;
         };
@@ -211,11 +215,26 @@ namespace ipl {
                 BTN_MAX
             };
 
-            enum { ARROW_BTN_RIGHT = 0, ARROW_BTN_LEFT, ARROW_BTN_MAX };
+            enum {
+                ARROW_BTN_RIGHT = 0,
+                ARROW_BTN_LEFT,
+                ARROW_BTN_MAX
+            };
 
-            enum { BALLOON_BBS_BOARD = 0, BALLOON_CH_SEL, BALLOON_SETTING, BALLOON_CALENDAR, BALLOON_CREATE, BALLOON_MAX };
+            enum {
+                BALLOON_BBS_BOARD = 0,
+                BALLOON_CH_SEL,
+                BALLOON_SETTING,
+                BALLOON_CALENDAR,
+                BALLOON_CREATE,
+                BALLOON_MAX
+            };
 
-            enum { TEXT_LEFT_BUTTON = 0, TEXT_RIGHT_BUTTON, TEXT_MAX };
+            enum {
+                TEXT_LEFT_BUTTON = 0,
+                TEXT_RIGHT_BUTTON,
+                TEXT_MAX
+            };
 
             Button(EGG::Heap * heap);
             virtual ~Button();
@@ -292,7 +311,10 @@ namespace ipl {
 
         protected:
             typedef struct Command {
-                enum { TYPE_ANIM = 0, TYPE_TEXT };
+                enum {
+                    TYPE_ANIM = 0,
+                    TYPE_TEXT
+                };
                 int type;  // 0x00
 
                 /* First argument (SIGNED) */

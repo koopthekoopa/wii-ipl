@@ -78,6 +78,28 @@ namespace ipl {
                 z = fz;
             }
 
+            VEC3& operator+=(const VEC3& rhs) {
+                VEC3Add(this, this, &rhs);
+                return *this;
+            }
+            VEC3& operator+=(f32 v) {
+                x + v;
+                y + v;
+                z + v;
+                return *this;
+            }
+            VEC3& operator-=(const VEC3& rhs) {
+                VEC3Sub(this, this, &rhs);
+                return *this;
+            }
+            VEC3& operator*=(f32 val) {
+                VEC3Scale(this, this, val);
+                return *this;
+            }
+            VEC3& operator/=(f32 val) { return operator*=(1.f / val); }
+            VEC3 operator+(const VEC3& rhs) const { return VEC3(x + rhs.x, y + rhs.y, z + rhs.z); }
+            VEC3 operator+(f32 v) const { return VEC3(x + v, y + v, z + v); }
+            VEC3 operator-(const VEC3& rhs) const { return VEC3(x - rhs.x, y - rhs.y, z - rhs.z); }
             VEC3 operator*(f32 val) const { return VEC3(x * val, y * val, z * val); }
 
             void set(f32 fx, f32 fy, f32 fz) {

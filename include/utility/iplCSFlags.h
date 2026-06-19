@@ -16,6 +16,7 @@ namespace ipl {
         } CSFlagsData;
 
         class CSFlags {
+        public:
             static s32 CreateFlagsFile();
             static s32 UpdateFlagsFile();
 

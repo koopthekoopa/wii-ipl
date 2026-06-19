@@ -171,7 +171,7 @@ namespace textinput {
                 }
 
                 if (component->isDragging(point)) {
-                    onEvent(*component, EventHandler::ON_HOLD, point, data);
+                    onEvent(*component, EventHandler::ON_DRAG, point, data);
                 }
             }
 

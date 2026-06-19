@@ -757,7 +757,7 @@ static void BS2TickIRD() {
     int i;
 
     switch (state) {
-        case BS2_STT_START_GAME: {
+        case BS2_STT_RVL_GAME: {
             // Print information about Disc
             OSBootInfo* bi = (OSBootInfo*)OSPhysicalToCached(OS_ADDR_BOOT_INFO);
             OSReport("\n");
@@ -790,7 +790,7 @@ static void BS2TickIRD() {
 
             break;
         }
-        case BS2_STT_START_GC_GAME: {
+        case BS2_STT_GC_GAME: {
             // Print information about Disc
             OSBootInfo* bi = (OSBootInfo*)OSPhysicalToCached(OS_ADDR_BOOT_INFO);
             OSReport("\n");
@@ -849,7 +849,7 @@ static void BS2TickIRD() {
             OSReport("\nUpdate failed  ");
             break;
         }
-        case BS2_STT_RUN_UPDATE: {
+        case BS2_STT_UPDATE_DISK: {
             BS2UpdateEntry* updateEntry;
 
             // Print list of entries

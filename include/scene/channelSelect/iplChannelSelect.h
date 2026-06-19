@@ -1,7 +1,7 @@
 #ifndef IPL_SCENE_CHANNEL_SELECT_H
 #define IPL_SCENE_CHANNEL_SELECT_H
 
-#include "iplSceneHeader.h"
+#include "iplSceneUIHeader.h"
 
 #include "scene/button/iplButton.h"
 #include "scene/channelSelect/iplChannelObj.h"
@@ -13,28 +13,14 @@
 
 namespace ipl {
     namespace scene {
-        class ChannelSelect;
-
-        class ChannelSelectEventHandler : public ::gui::EventHandler {
-        private:
-            ChannelSelect* mpInstance;  // 0x10
-        };
-
-        class CsChanSelButtonEventHandler : public ButtonEventHandlerBase {
-        private:
-            ChannelSelect* mpInstance;  // 0x10
-        };
-
-        class CsChanSelUnk : public SDMenuEventHandlerBase {
-        private:
-            ChannelSelect* mpInstance;  // 0x10
-        };
+        class ChannelSelectEventHandler;
+        class CsChanSelButtonEventHandler;
+        class CsChanSelSDMenuEventHandler;
 
         FADER_SCENE_CLASS(ChannelSelect) {
         public:
-            ChannelSelect(EGG::Heap * heap, int page);
-            virtual ~ChannelSelect() {
-            }
+            ChannelSelect(EGG::Heap * heap, int startup);
+            virtual ~ChannelSelect();
 
             static void setInitFlag(BOOL value) {
                 msInitFlag = value;
@@ -57,18 +43,18 @@ namespace ipl {
             void getRsoExBufData(void* rsoExBuf) const;
             void setRsoExBufData(const void* rsoExBuf);
             void getRsoTitleDataPath(char* dataPath) const;
-            layout::Animator* getRsoAnimator(int idx);
+            layout::Animator* getRsoAnimator(int idx) const;
             BOOL isStartAnimFinished() const;
             void* allocFromRsoExHeap(u32 size, int align);
             void freeToRsoExHeap(void* buffer);
             u32 getAllocatableSizeForRsoExHeap() const;
-            void setDebugRsoIntrval(u32 val);
+            void setDebugRsoInterval(u32 val);
 
             void createChannelModulesHeap();
             void createBaseLayout();
             void createDiskLayout();
             void createChannelThumbnails();
-            void createChannelThumbnails(ChannelObj * channelObj);
+            void createChannelThumbnail(ChannelObj * channelObj);
 
             void calcChannelModules();
             void calcChannelThumbnails();
@@ -79,18 +65,19 @@ namespace ipl {
 
             void calcNormalNormal();  // yes
             void calcNormalWaitScrl();
+            void calcNormalScrl();
             void calcNormalWaitLoading();
             void calcNormalFadeOutZoom();
             void calcNormalRestart();
             void calcNormalSafeModeDialog();
 
-            void refreshChannelList(int unk);
-            void makeChannelList(int unk, bool unk2);
-            void appendToChannelList(int unk0, int unk1);
+            void refreshChannelList(int page);
+            void makeChannelList(int page, bool force);
+            void appendToChannelList(int page, int index);
             void destroyChannelObj(ChannelObj * channelObj);
-            void sortChannelList(int unk);
+            void sortChannelList(int page);
             void sortChannelListByPage(int page, int unk);
-            ChannelObj* searchList(int page, int unk) const;
+            ChannelObj* searchList(int page, int index) const;
 
             void setupDiskChanObj();
             void updateDiskState();
@@ -99,39 +86,43 @@ namespace ipl {
 
             void setChanFrameVisibility();
 
-            BOOL isChannelInView(int unk0, int unk1) const;
-            BOOL isChannelInCalc(int unk0, int unk1, int unk2) const;
+            BOOL isChannelInView(int page, int index) const;
+            BOOL isChannelInCalc(int page, int index, int unk2) const;
 
             BOOL isPageCreated(int page) const;
             BOOL isPageCreatedAllDone(int page) const;
 
-            void preparePageScrolling(int page);
-            void startPageScroll(int page);
+            void preparePageScrolling(int nextState);
+            void startPageScroll(int nextState);
 
             void tryToStartBoardScene();
+            void startChanTtlScene(int page, int index);
+            void startChanTtlScene(ChannelObj * chanObj) {
+                startChanTtlScene(chanObj->mChanPage, chanObj->mChanIndex);
+            }
 
-            void reserveSceneChangeDerived(int unk0, int unk1);
+            void reserveSceneChangeDerived(int page, int index);
 
-            void tellStartingZoomAnm();
+            BOOL tellStartingZoomAnm();
 
-            void prepareResarting(int page);
-            void restart(int page, int unk);
+            BOOL prepareRestarting(int page);
+            void restart(int page, int index);
 
-            nw4r::lyt::Pane* getChannelBasePane(int unk1, int unk2, int unk3) const;
-            nw4r::lyt::Pane* getChannelBasePane(int unk) const;
-            nw4r::lyt::Pane* getChannelBasePane(int unk);
+            nw4r::lyt::Pane* getChannelBasePane(int page, int index, int unk3) const;
+            const nw4r::lyt::Pane* getChannelBasePane(int index) const;
+            nw4r::lyt::Pane* getChannelBasePane(int index);
 
-            nw4r::math::VEC3 getDispChanTrans(int unk) const;
+            nw4r::math::VEC3 getDispChanTrans(int index) const;
 
             void setChannelScissor(const ChannelObj* channelObj) const;
-            void initChanZoomParam(const math::VEC3& pos, int unk);
+            void initChanZoomParam(const math::VEC3& pos, BOOL unk);
 
             void calcChanZoomParam();
             void setChanZoomOrtho();
 
-            BOOL isInChannelPaneNames(const char* name) const;
+            int isInChannelPaneNames(const char* name) const;
 
-            void getFreeModuleExHeap();
+            EGG::ExpHeap* getFreeModuleExHeap();
             void updateModuleExHeap(EGG::ExpHeap * heap1, EGG::ExpHeap * heap2);
 
             void restartChannelModules();
@@ -146,103 +137,224 @@ namespace ipl {
             void calcNormalMoveChanOut();
             void calcNormalDragScrl();
 
-            void onEventDrag(const char* paneName, u32 event, controller::Interface* con);
-            void onEventDerivedDrag(const char* paneName, u32 event, controller::Interface* con);
+            BOOL onEventDrag(const char* paneName, u32 event, controller::Interface* con);
+            void onEventDerivedDrag(const char* paneName, u32 event, const controller::Interface* con);
 
             void startDrag(const controller::Interface* con, int page, int index);
             void finishDrag();
             bool isReleasableArea(int page, int index);
             void moveDrag();
 
-            const char* iplChannelSelect_813B08AC(int index);
-
             void startResetting();
 
+            bool unkBool() {
+                return !unk_0x185 || unk_0x180 == 3;
+            }
+            void setSomething() {
+                unk_0x184 = true;
+                unk_0x185 = 1;
+            }
+
+            enum {
+                START_NORMAL = 0,
+                START_FROM_BOARD,
+                START_FROM_CHJUMP
+            };
+
         private:
-            nw4r::ut::List unk_0x58;
+            enum {
+                CHAN_SCROLL_0,
+                CHAN_SCROLL_1,
+                CHAN_SCROLL_2,
+                CHAN_SCROLL_3,
+                CHAN_SCROLL_4,
+                CHAN_SCROLL_MAX
+            };
+
+            enum {
+                CLOCK_MINUTE,
+                CLOCK_SECOND_1,
+                CLOCK_SECOND_2,
+                CLOCK_MAX
+            };
+
+            enum {
+                STATE_NONE = 0,
+                STATE_NORMAL,
+                STATE_CREATE,
+                STATE_FADING_IN,
+                STATE_START_BOARD_SCENE,
+                STATE_BOARD_SCENE,
+                STATE_START_SETTING_SCENE,
+                STATE_START_SD_MENU_SCENE = STATE_START_SETTING_SCENE, /* for readability */
+                STATE_NORMAL_WAIT_LOADING,
+                STATE_CHANNEL_TITLE,
+                STATE_NORMAL_FADE_ZOOM,
+                STATE_PREP_LEFT_PAGE_SCROLL,
+                STATE_PREP_RIGHT_PAGE_SCROLL,
+                STATE_LEFT_PAGE_SCROLL,
+                STATE_RIGHT_PAGE_SCROLL,
+                STATE_NORMAL_DONE_FADE_ZOOM,
+                STATE_INACTIVE,
+                STATE_NORMAL_RESTART,
+                STATE_NORMAL_SAFE_MODE_DIALOG,
+                STATE_NORMAL_GRAB,
+                STATE_NORMAL_DRAG,
+                STATE_NORMAL_RELEASE_WAIT,
+                STATE_NORMAL_RELEASE,
+                STATE_NORMAL_MOVE_CHAN_IN,
+                STATE_NORMAL_MOVE_CHAN_SAVE,
+                STATE_NORMAL_MOVE_CHAN_OUT,
+                STATE_DRAG_SCROLL_LEFT,
+                STATE_DRAG_SCROLL_RIGHT
+            };
+
+            enum {
+                DISK_STATE_READ = 0,
+                DISK_STATE_PLAY_THUMB,
+                DISK_STATE_RVL_GAME,
+                DISK_STATE_DISK_UPDATE,
+                DISK_STATE_GC_GAME_WAIT,
+                DISK_STATE_GC_GAME,
+                DISK_STATE_DESTROY,
+            };
+
+            nw4r::ut::List mChanList;
+
             nand::LayoutFile* mpLayoutFile;  // 0x64
             layout::Object* mpLayout;        // 0x68
-            math::HermiteIntp<math::VEC3>* unk_0x6C[4];
-            gui::PaneManager* mpGui;            // 0x7C
+
+            math::HermiteIntp<math::VEC3>* mpChanZoomParams[4];
+
+            gui::PaneManager* mpGui;  // 0x7C
+
             nand::LayoutFile* mpDiskThumbFile;  // 0x80
-            layout::Object* unk_0x84;
-            layout::Animator* unk_0x88;
-            math::HermiteIntp<float>* unk_0x8C;
-            int* unk_0x90;
-            layout::Object* unk_0x94;
-            layout::Animator* unk_0x98;
-            layout::Object* unk_0x9C;
-            layout::Animator* unk_0xA0;
-            layout::Animator* unk_0xA4;
-            u8 unk_0xA8;
-            u8 unk_0xA9;
-            u8 unk_0xAA;
-            u8 unk_0xAB;
-            layout::Object* unk_0xAC;
-            layout::Object* unk_0xB0;
-            layout::Object* unk_0xB4;
-            CsChanSelButtonEventHandler* unk_0xB8;
-            CsChanSelUnk* unk_0xBC;
-            u32 mState;  // 0xC0
-            int unk_0xC4;
-            int unk_0xC8;
-            int unk_0xCC;
-            f32 unk_0xD0;
-            f32 unk_0xD4;
+
+            layout::Object* mpNoDiskLayout;  // 0x84
+            layout::Animator* mpNoDiskAnim;  // 0x88
+
+            math::HermiteIntp<float>* mpDiskFadeAnim;  // 0x8C
+            ChannelObj* mpDiskChanObj;                 // 0x90
+
+            layout::Object* mpDiskLayout;  // 0x94
+            layout::Animator* mpDiskAnim;  // 0x98
+
+            layout::Object* mpDiskInOutLyt;   // 0x9C
+            layout::Animator* mpDiskInAnim;   // 0xA0
+            layout::Animator* mpDiskOutAnim;  // 0xA4
+
+            u32 unused_0xA8;
+
+            layout::Object* mpMoveLytMask;    // 0xAC
+            layout::Object* mpMoveLytObject;  // 0xB0
+            layout::Object* mpMoveLytDrop;    // 0xB4
+
+            CsChanSelButtonEventHandler* mpButtonEvent;  // 0xB8
+            CsChanSelSDMenuEventHandler* mpSDMenuEvent;  // 0xBC
+
+            int mState;        // 0xC0
+            int mStartType;    // 0xC4
+            int mCurrentPage;  // 0xC8
+            int mMaxPages;     // 0xCC
+
+            f32 mChanThumbOff_X;  // 0xD0
+            f32 mChanThumbOff_Y;  // 0xD4
             math::VEC3 unk_0xD8;
             math::VEC2 unk_0xE4;
-            f32 unk_0xEC;
-            u32 unk_0xF0;
-            u8 unk_0xF4;
-            u8 unk_0xF5;
-            u8 unk_0xF6;
-            u8 unk_0xF7;
-            u8 unk_0xF8;
-            u8 unk_0xFC;
-            u8 unk_0x100;
-            u8 unk_0x101;
-            u8 unk_0x102;
-            u8 unk_0x103;
-            u8 unk_0x104;
-            u8 unk_0x105;
-            u8 unk_0x106;
-            u8 unk_0x107;
-            clock mClock;  // 0x108
-            u32 unk_0x168;
+            f32 mScaleAdjust;  // 0xEC
+
+            int mDiskState;       // 0xF0
+            bool mbDiskInserted;  // 0xF4
+            char* mpDiskID;       // 0xF8
+            char* mpDiskMaker;    // 0xFC
+
+            bool mbLeftArrowVisible;   // 0x100
+            bool mbRightArrowVisible;  // 0x101
+
+            clock mClock;      // 0x108
+            s32 mPrevSDState;  // 0x168
+
             EGG::Heap* unk_0x16C;
-            EGG::Heap* unk_0x170;
-            EGG::Heap* unk_0x174;
-            EGG::Heap* unk_0x178;
+
+            EGG::Heap* mpDiskHeap;     // 0x170
+            EGG::Heap* mpCursorHeap;   // 0x174
+            EGG::Heap* mpBalloonHeap;  // 0x178
+
             EGG::Heap* unk_0x17C;
-            u32 unk_0x180;
-            u8 unk_0x184;
-            u8 unk_0x185;
-            ChannelObj* unk_0x188;
+
+            int unk_0x180;
+
+            bool unk_0x184;
+            bool unk_0x185;
+            ChannelObj* mpCurrentRsoChanObj;  // 0x188
             ChannelObj* unk_0x18C;
-            EGG::Heap* unk_0x190;
-            channel::RsoThread* unk_0x194;
-            EGG::ExpHeap* unk_0x198[49];
-            u8 unk_0x25C[49];
-            nw4r::math::VEC2 unk_0x290;
-            int unk_0x298;
-            int unk_0x29C;
-            int unk_0x2A0;
-            int unk_0x2A4;
-            int unk_0x2A8;
+
+            EGG::Heap* mpModuleWorkHeap;         // 0x190
+            channel::RsoThread* mpModuleThread;  // 0x194
+            EGG::ExpHeap* mpModuleHeaps[49];     // 0x198
+            bool unk_0x25C[49];
+
+            nw4r::math::VEC2 mDragPos;  // 0x290
+            int mConChan;               // 0x298
+            int mMoveOldPage;           // 0x2A0
+            int mMoveOldIndex;          // 0x2A0
+            int mMoveNewPage;           // 0x2A4
+            int mMoveNewIndex;          // 0x2A8
             int unk_0x2AC;
             int unk_0x2B0;
             int unk_0x2B4;
-            u8 unk_0x2B8;
-            nand::File* unk_0x2BC;
+            bool unk_0x2B8;
+            nand::File* mpSaveDataFile;  // 0x2BC
             ChannelObj* unk_0x2C0;
             layout::Object* unk_0x2C4;
             layout::Animator* unk_0x2C8;
-            u8 unk_0x2CC;
-            u8 unk_0x2CD;
-            u8 unk_0x2CE;
-            u8 unk_0x2CF;
+            u32 unused_0x2CC;
 
             static BOOL msInitFlag;
+            static const char* mscChanPaneNames[CHAN_SCROLL_MAX][MAX_CHANNEL_INDEX];
+            static const char* mscBasePaneNames[CHAN_SCROLL_MAX];
+            static const char* mscUnk0PaneNames[CHAN_SCROLL_MAX];
+            static const char* mscUnk1PaneNames[CHAN_SCROLL_MAX];
+            static const char* mscClockPaneNames[3];
+            static const char* mscMaskPaneName;
+
+            friend class ChannelTitle;
+
+            friend class ChannelSelectEventHandler;
+            friend class CsChanSelButtonEventHandler;
+            friend class CsChanSelSDMenuEventHandler;
+        };
+
+        class ChannelSelectEventHandler : public ::gui::EventHandler {
+        public:
+            ChannelSelectEventHandler(ChannelSelect* instance) : ::gui::EventHandler() { mpInstance = instance; }
+
+            void onEvent(u32 compId, u32 event, void* data);
+
+        private:
+            ChannelSelect* mpInstance;  // 0x10
+        };
+
+        class CsChanSelButtonEventHandler : public ButtonEventHandlerBase {
+        public:
+            CsChanSelButtonEventHandler(ChannelSelect* instance) : ButtonEventHandlerBase() { mpInstance = instance; }
+
+            void onEventDerived(u32 compId, u32 event, const controller::Interface* con);
+
+        private:
+            ChannelSelect* mpInstance;  // 0x10
+        };
+
+        class CsChanSelSDMenuEventHandler : public SDMenuEventHandlerBase {
+        public:
+            CsChanSelSDMenuEventHandler(ChannelSelect* instance) : SDMenuEventHandlerBase() { mpInstance = instance; }
+
+            void onEventDerived(u32 compId, u32 event, const controller::Interface* con);
+
+            static const char* getPaneName(int index) NO_INLINE;
+
+        private:
+            ChannelSelect* mpInstance;  // 0x10
         };
     }  // namespace scene
 }  // namespace ipl

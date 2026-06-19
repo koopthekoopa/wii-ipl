@@ -157,22 +157,22 @@ namespace ipl {
                     mIPLState = IPL_STATE_NO_DISK;
                     break;
                 }
-                case BS2_STT_START_GAME: {
+                case BS2_STT_RVL_GAME: {
                     mbHasBanner = BS2IsBannerAvailable();
-                    mIPLState = IPL_STATE_RUN_RVL_GAME;
+                    mIPLState = IPL_STATE_RVL_GAME;
                     if (BS2IsDiagDisc()) {
                         mbIsDiagDisc = true;
                     }
                     break;
                 }
-                case BS2_STT_START_GC_GAME: {
-                    mIPLState = IPL_STATE_RUN_GC_GAME;
+                case BS2_STT_GC_GAME: {
+                    mIPLState = IPL_STATE_GC_GAME;
                     break;
                 }
                 case BS2_STT_DATA_DISK: {
                     mbHasBanner = BS2IsBannerAvailable();
                     mUnlockedState = BS2_STT_DATA_DISK;
-                    mIPLState = IPL_STATE_RUN_RVL_GAME;
+                    mIPLState = IPL_STATE_RVL_GAME;
                     break;
                 }
                 case BS2_STT_START_LOCKED_DISK: {
@@ -186,8 +186,8 @@ namespace ipl {
                     mIPLState = IPL_STATE_BAD_DISK;
                     break;
                 }
-                case BS2_STT_RUN_UPDATE: {
-                    mIPLState = IPL_STATE_START_UPDATE;
+                case BS2_STT_UPDATE_DISK: {
+                    mIPLState = IPL_STATE_DISK_UPDATE;
                     break;
                 }
                 case BS2_STT_RESET_SYSTEM: {
@@ -217,7 +217,7 @@ namespace ipl {
 
         void Manager::execTick(BS2State state) {
             if (unk_0x0D) {
-                if (state == BS2_STT_RUN_UPDATE) {
+                if (state == BS2_STT_UPDATE_DISK) {
                     BS2StartUpdate();
                 } else {
                     mbStartUpdate = false;
@@ -304,9 +304,9 @@ namespace ipl {
             }
 
             // Run app!
-            if (mState == BS2_STT_START_GAME) {
+            if (mState == BS2_STT_RVL_GAME) {
                 BS2StartGame();
-            } else if (mState == BS2_STT_START_GC_GAME) {
+            } else if (mState == BS2_STT_GC_GAME) {
                 BS2StartGCGame();
             } else if (mState == BS2_STT_RESET_SYSTEM) {
                 OSReturnToMenu();

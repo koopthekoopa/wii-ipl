@@ -152,6 +152,10 @@ namespace ipl {
             EGG::Heap* heap1 = mpHeap;
             EGG::Heap* heap2 = mCSData.heap;
 
+            /* ??? (not even a `(void)heap->getEndAddress()`)*/
+            void* unused1 = heap1->getEndAddress();
+            void* unused2 = heap2->getEndAddress();
+
             return heap1->isHeapPointer(addr) || heap2->isHeapPointer(addr);
         }
 

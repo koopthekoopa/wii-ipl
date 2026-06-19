@@ -888,10 +888,10 @@ namespace ipl {
 
         void Manager::updateDiskState() {
             int state = System::getBS2Manager()->getIPLState();
-            if (state == bs2::IPL_STATE_RUN_RVL_GAME && mBS2State != bs2::IPL_STATE_RUN_RVL_GAME) {
+            if (state == bs2::IPL_STATE_RVL_GAME && mBS2State != bs2::IPL_STATE_RVL_GAME) {
                 mbSetDiskBannerInfo = setDiskBannerInfo(false);
                 unk_0x1B81 = true;
-            } else if (state != bs2::IPL_STATE_RUN_RVL_GAME && state != mBS2State) {
+            } else if (state != bs2::IPL_STATE_RVL_GAME && state != mBS2State) {
                 setDiskBannerInfo(true);
             }
 
@@ -1090,7 +1090,8 @@ namespace ipl {
                 for (int index = 0; index < MAX_CHANNEL_INDEX; index++) {
                     if (mChannels[page][index].loadedBnr) {
                         if (mChannels[page][index].info.primaryType == PRIMARY_TYPE_CHANNEL) {
-                            if (ES_TITLE_ID(mChannels[page][index].info.titleType, mChannels[page][index].info.titleCode) == titleId) {
+                            ESTitleId chanTitleId = ES_TITLE_ID(mChannels[page][index].info.titleType, mChannels[page][index].info.titleCode);
+                            if (chanTitleId == titleId) {
                                 *outPage = page;
                                 *outIndex = index;
                                 return;

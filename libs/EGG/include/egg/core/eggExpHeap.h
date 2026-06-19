@@ -8,6 +8,8 @@ namespace EGG {
     public:
         static ExpHeap* create(void* arena, u32 allocSize, u16 opt);
         static ExpHeap* create(u32 allocSize, Heap* parent, u16 opt);
+
+        void freeAll();
     };
 }  // namespace EGG
 

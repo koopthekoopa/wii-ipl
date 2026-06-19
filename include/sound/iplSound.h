@@ -39,6 +39,7 @@ namespace ipl {
             int startBGM(const char* bgmName);
             int pauseOnBGM();
             int pauseOffBGM();
+            int stopBGM(int);
 
             int muteOffBGM(int);
             int muteOnBGM(int);
