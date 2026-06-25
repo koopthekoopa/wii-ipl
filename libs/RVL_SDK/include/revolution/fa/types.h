@@ -194,8 +194,8 @@ typedef struct FADrvTbl {
     FAPartition* pPart;      // 0x00
     FACacheSetting* pCache;  // 0x04
 
-    s8 drive;  // 0x08
-    u8 stat;   // 0x09
+    char drive;  // 0x08
+    u8 stat;     // 0x09
 } FADrvTbl;
 
 typedef struct FAFileInfo {
@@ -227,19 +227,18 @@ typedef struct FADta {
     s8 pad[2];           // 0x442
 } FADta;
 
-/* Unsure; This were copied from VF */
 typedef struct FAFileStat {
     u32 size;  // 0x00
 
-    u32 accessDate;  // 0x04
+    u16 accessDate;  // 0x04
 
-    u32 updateTime;  // 0x06
-    u32 updateDate;  // 0x08
+    u16 updateTime;  // 0x06
+    u16 updateDate;  // 0x08
 
-    u32 createTime;  // 0x0A
-    u32 createDate;  // 0x0C
+    u16 createTime;  // 0x0A
+    u16 createDate;  // 0x0C
 
-    u32 compSec;  // 0x0E
+    u16 compSec;  // 0x0E
 
     u8 stat;  // 0x10
 } FAFileStat;

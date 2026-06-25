@@ -32,7 +32,7 @@ namespace ipl {
 
         Memory::Memory(EGG::Heap* heap)
             : scene::Base(heap), mState(MEMORY_STATE_ON_NORMAL), pSavedataBase(NULL), pSavedataEdit(NULL), pNandSDCardManager(NULL),
-              mPage(MEMORY_PAGE_WII), pCurrBox(NULL), mPageOffset(0), mSdState(NandSDWorker::SD_STATE_FORMATTED), mArwRVisible(false),
+              mPage(MEMORY_PAGE_WII), pCurrBox(NULL), mPageOffset(0), mSdState(NandSDWorker::SD_STATE_INITIAL), mArwRVisible(false),
               mArwLVisible(false), mProcessType(MEMORY_PROC_NUL) {
             System::stopReceiveSchedule();
             nw4r::ut::List_Init(&mSavedataBoxList, offsetof(SavedataBox, mLink));
@@ -74,7 +74,7 @@ namespace ipl {
             u32 bs2AbortEnd = OSGetTick();
             OSReport("*** BS2 abort costs: %dms\n", OSTicksToMilliseconds(bs2AbortEnd - bs2AbortStart));
 
-            ES_SetUid(0x0000000100000002ULL);
+            ES_SetUid(SYSMENU_TITLE_ID);
 
             pSavedataBase = new SavedataBase(System::getMem2App(), pWiiMemLytFile, "arc", "it_ObjCubeEdit_a.brlyt");
             pSavedataBase->anmFadein();
@@ -271,7 +271,7 @@ namespace ipl {
                 return;
 
             mSdState = pNandSDCardManager->getWorker()->get_sd_state();
-            if (mSdState == NandSDWorker::SD_STATE_MOUNTED)
+            if (mSdState == NandSDWorker::SD_STATE_READY)
                 return;
 
             pNandSDCardManager->cmdCleanQueue();
@@ -380,7 +380,7 @@ namespace ipl {
             pSavedataBase->set_textbox("T_Capa_00", blocksFreeMsg);
         }
         void Memory::update_sd_free() {
-            if (pNandSDCardManager->getWorker()->get_sd_state() != NandSDWorker::SD_STATE_MOUNTED) {
+            if (pNandSDCardManager->getWorker()->get_sd_state() != NandSDWorker::SD_STATE_READY) {
                 pSavedataBase->set_visible("N_Capa_00", false);
                 pSavedataBase->set_visible("T_Capa_00", false);
                 return;
@@ -484,7 +484,7 @@ namespace ipl {
             if (mPage == MEMORY_PAGE_WII) {
                 return pNandSDCardManager->getWorker()->get_nand_save_num() - mPageOffset > 15;
             } else {
-                if (pNandSDCardManager->getWorker()->get_sd_state() == NandSDWorker::SD_STATE_MOUNTED)
+                if (pNandSDCardManager->getWorker()->get_sd_state() == NandSDWorker::SD_STATE_READY)
                     return pNandSDCardManager->getWorker()->get_sd_save_num() - mPageOffset > 15;
                 else
                     return false;
@@ -641,7 +641,7 @@ namespace ipl {
             if (mPage == MEMORY_PAGE_SD) {
                 mSdState = pNandSDCardManager->getWorker()->get_sd_state();
                 switch (mSdState) {
-                    case NandSDWorker::SD_STATE_MOUNTED:
+                    case NandSDWorker::SD_STATE_READY:
                         if (pNandSDCardManager->isSDWriteProtected()) {
                             pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_CARD_LOCKED);
                             mState = MEMORY_STATE_ON_VERIFY1ST;
@@ -737,7 +737,7 @@ namespace ipl {
             if (!pSavedataBase->isIdle())
                 return;
 
-            if (pNandSDCardManager->getUnk0x00000() != 31)
+            if (!pNandSDCardManager->isTerminated())
                 return;
 
             mState = MEMORY_STATE_ON_FADEOUT2ND;
@@ -796,14 +796,14 @@ namespace ipl {
                         pNandSDCardManager->cmdSDMount();
                         mState = MEMORY_STATE_ON_SD_MOUNT;
                         break;
-                    case NandSDWorker::SD_STATE_DECIVE_INCOMPAT_3:
-                    case NandSDWorker::SD_STATE_DECIVE_INCOMPAT_4:
+                    case NandSDWorker::SD_STATE_BROKEN_MEDIA:
+                    case NandSDWorker::SD_STATE_ILLEGAL_MEDIA:
                         if (!pSavedataBase->isIdle())
                             return;
                         pSavedataBase->anmTextFadein(MESG_MEMORY_SD_DEVICE_BAD);
                         mState = MEMORY_STATE_ON_SD_MESSAGE1ST;
                         break;
-                    case NandSDWorker::SD_STATE_MOUNTED:
+                    case NandSDWorker::SD_STATE_READY:
                         if (!pSavedataBase->isIdle())
                             return;
                         send_getbanner_cmd(false);
@@ -853,12 +853,12 @@ namespace ipl {
                         pNandSDCardManager->cmdSDMount();
                         mState = MEMORY_STATE_ON_SD_MOUNT_ONLY;
                         break;
-                    case NandSDWorker::SD_STATE_DECIVE_INCOMPAT_3:
-                    case NandSDWorker::SD_STATE_DECIVE_INCOMPAT_4:
+                    case NandSDWorker::SD_STATE_BROKEN_MEDIA:
+                    case NandSDWorker::SD_STATE_ILLEGAL_MEDIA:
                         pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_DEVICE_BAD);
                         mState = MEMORY_STATE_ON_VERIFY1ST;
                         break;
-                    case NandSDWorker::SD_STATE_MOUNTED:
+                    case NandSDWorker::SD_STATE_READY:
                         if (pNandSDCardManager->isSDWriteProtected()) {
                             pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_CARD_LOCKED);
                             mState = MEMORY_STATE_ON_VERIFY1ST;
@@ -934,7 +934,7 @@ namespace ipl {
             switch (System::getDialog()->getLastResult()) {
                 case DialogWindow::RESULT_LEFT_BUTTON:
                     if (mPage == MEMORY_PAGE_WII) {
-                        if (pNandSDCardManager->getWorker()->get_sd_state() == NandSDWorker::SD_STATE_MOUNTED) {
+                        if (pNandSDCardManager->getWorker()->get_sd_state() == NandSDWorker::SD_STATE_READY) {
                             start_process(MEMORY_PROC_CPY);
                             pNandSDCardManager->cmdCopySaveNandToSD(pCurrBox->getBanner()->getWiiTitleId());
                             pSavedataEdit->anmTextFadein(MESG_MEMORY_COPYING_TO_SD);
@@ -1006,7 +1006,7 @@ namespace ipl {
                 return;
             if (mPage == MEMORY_PAGE_WII) {
                 mState = MEMORY_STATE_ON_EDIT;
-            } else if (pNandSDCardManager->getWorker()->get_sd_state() != NandSDWorker::SD_STATE_FORMATTED) {
+            } else if (pNandSDCardManager->getWorker()->get_sd_state() != NandSDWorker::SD_STATE_INITIAL) {
                 pSavedataBase->anmTextFadein(MESG_MEMORY_SD_DEVICE_BAD);
                 mState = MEMORY_STATE_ON_SD_MESSAGE1ST;
             }
@@ -1156,7 +1156,7 @@ namespace ipl {
                 return;
 
             if (mProcessType == MEMORY_PROC_FMT) {
-                if (pNandSDCardManager->getWorker()->get_sd_state() == NandSDWorker::SD_STATE_MOUNTED) {
+                if (pNandSDCardManager->getWorker()->get_sd_state() == NandSDWorker::SD_STATE_READY) {
                     pSavedataEdit->anmShowBtn0Dialog(MESG_MEMORY_SD_FORMATTED, false, false);
                     mState = MEMORY_STATE_ON_END_FORMAT;
                 } else {
@@ -1241,12 +1241,12 @@ namespace ipl {
                         pNandSDCardManager->cmdSDMount();
                         mState = MEMORY_STATE_ON_SD_MOUNT_ONLY;
                         break;
-                    case NandSDWorker::SD_STATE_DECIVE_INCOMPAT_3:
-                    case NandSDWorker::SD_STATE_DECIVE_INCOMPAT_4:
+                    case NandSDWorker::SD_STATE_BROKEN_MEDIA:
+                    case NandSDWorker::SD_STATE_ILLEGAL_MEDIA:
                         pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_DEVICE_BAD);
                         mState = MEMORY_STATE_ON_VERIFY1ST;
                         break;
-                    case NandSDWorker::SD_STATE_MOUNTED:
+                    case NandSDWorker::SD_STATE_READY:
                         if (pNandSDCardManager->isSDWriteProtected()) {
                             pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_CARD_LOCKED);
                             mState = MEMORY_STATE_ON_VERIFY1ST;
@@ -1266,7 +1266,7 @@ namespace ipl {
             } else {
                 mSdState = pNandSDCardManager->getWorker()->get_sd_state();
                 switch (mSdState) {
-                    case NandSDWorker::SD_STATE_MOUNTED:
+                    case NandSDWorker::SD_STATE_READY:
                         if (pNandSDCardManager->isSDWriteProtected()) {
                             pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_CARD_LOCKED);
                             mState = MEMORY_STATE_ON_VERIFY1ST;
@@ -1291,7 +1291,7 @@ namespace ipl {
             switch (System::getDialog()->getLastResult()) {
                 case DialogWindow::RESULT_LEFT_BUTTON:
                     if (mPage == MEMORY_PAGE_WII) {
-                        if (pNandSDCardManager->getWorker()->get_sd_state() == NandSDWorker::SD_STATE_MOUNTED) {
+                        if (pNandSDCardManager->getWorker()->get_sd_state() == NandSDWorker::SD_STATE_READY) {
                             start_process(MEMORY_PROC_MOV);
                             pNandSDCardManager->cmdMoveSaveNandToSD(pCurrBox);
                             pSavedataEdit->anmTextFadein(MESG_MEMORY_MOVING_TO_SD);

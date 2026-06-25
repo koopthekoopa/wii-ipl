@@ -24,17 +24,26 @@
 #define SAVE_ANIM_FRAME_TICK 4
 
 typedef struct WIISaveBannerFile {
-    u32 magic;  // 0x00
-    u32 flags;  // 0x04
-    u16 speed;  // 0x08
+    u32 magic;  // 0x0000
+    u32 flags;  // 0x0004
+    u16 speed;  // 0x0008
     u8 padding[22];
 
-    wchar_t name[SAVE_NAME_LENGTH];     // 0x20
-    wchar_t subName[SAVE_NAME_LENGTH];  // 0x60
+    wchar_t name[SAVE_NAME_LENGTH];     // 0x0020
+    wchar_t subName[SAVE_NAME_LENGTH];  // 0x0060
 
-    u8 bannerData[SAVE_BANNER_TEX_SIZE];               // 0xA0
-    u8 iconData[SAVE_ICON_COUNT][SAVE_ICON_TEX_SIZE];  // 0x60A0
+    u8 bannerData[SAVE_BANNER_TEX_SIZE];  // 0x00a0
+
+    u8 iconData0[SAVE_ICON_TEX_SIZE];  // 0x60a0
+    u8 iconData1[SAVE_ICON_TEX_SIZE];  // 0x72a0
+    u8 iconData2[SAVE_ICON_TEX_SIZE];  // 0x84a0
+    u8 iconData3[SAVE_ICON_TEX_SIZE];  // 0x96a0
+    u8 iconData4[SAVE_ICON_TEX_SIZE];  // 0xa8a0
+    u8 iconData5[SAVE_ICON_TEX_SIZE];  // 0xbaa0
+    u8 iconData6[SAVE_ICON_TEX_SIZE];  // 0xcca0
+    u8 iconData7[SAVE_ICON_TEX_SIZE];  // 0xdea0
 } SData;
+
 namespace ipl {
     namespace scene {
         class WiiBannerFileInfo {
@@ -90,11 +99,12 @@ namespace ipl {
 
             inline SData* getDataRef() { return &mData; }
 
-        private:
             enum {
                 FLAG_LOCAL_SAVE = 0x00000001,
                 FLAG_ALTERNATE_ANIMATION = 0x00000010,
             };
+
+        private:
             void resolve_icon();
             int get_iconspeed(int frame) const;
 

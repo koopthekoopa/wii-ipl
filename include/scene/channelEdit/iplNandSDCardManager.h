@@ -58,8 +58,8 @@ namespace ipl {
             void cmdExistSDApp(ESTitleId32);
             void cmdExistSDSave(ESTitleId32);
 
-            void cmdUnk813A9F04(ChanAppBox*);
-            void cmdUnk813A9F5C(ChanAppBox*);
+            void cmdMoveAppNandToSD(ChanAppBox*);
+            void cmdMoveAppSDToNand(ChanAppBox*);
 
             void cmdMoveSaveNandToSD(SavedataBox*);
             void cmdMoveSaveSDToNand(SavedataBox*);
@@ -75,43 +75,43 @@ namespace ipl {
 
             inline bool isSDWriteProtected() { return pWorker->is_sd_write_protected() == TRUE; }
 
-            inline int getUnk0x00000() { return mState; }
+            inline bool isTerminated() { return mState == MANAGER_STATE_STOPPED; }
 
             inline int sdWorkerReadyMaybe() { return mThumbCmdQueue.current == 0 && mCmdQueue.current == 0; }
 
         private:
             enum State {
-                MANAGER_STATE_INIT = 0x00,                 // 0x00
-                MANAGER_STATE_STARTUP = 0x01,              // 0x01
-                MANAGER_STATE_UNK_x02 = 0x02,              // 0x02
-                MANAGER_STATE_MOUNT_SD = 0x03,             // 0x03
-                MANAGER_STATE_LIST_NANDAPP = 0x04,         // 0x04
-                MANAGER_STATE_LIST_SDAPP = 0x05,           // 0x05
-                MANAGER_STATE_GET_NAND_FREE = 0x06,        // 0x06
-                MANAGER_STATE_GET_SD_FREE = 0x07,          // 0x07
-                MANAGER_STATE_NORMAL = 0x08,               // 0x08
-                MANAGER_STATE_TERMINATE = 0x09,            // 0x09
-                MANAGER_STATE_COPY_NANDSAVE_TO_SD = 0x0a,  // 0x0a
-                MANAGER_STATE_COPY_SDSAVE_TO_NAND = 0x0b,  // 0x0b
-                MANAGER_STATE_COPY_NANDAPP_TO_SD = 0x0d,   // 0x0d
-                MANAGER_STATE_COPY_SDAPP_TO_NAND = 0x0e,   // 0x0e
-                MANAGER_STATE_DEL_NANDAPP = 0x0f,          // 0x0f
-                MANAGER_STATE_DEL_NANDSAVE = 0x10,         // 0x10
-                MANAGER_STATE_DEL_SDAPP = 0x11,            // 0x11
-                MANAGER_STATE_DEL_SDSAVE = 0x12,           // 0x12
-                MANAGER_STATE_GET_THUMBNAIL = 0x13,        // 0x13
-                MANAGER_STATE_GET_THUMBNAIL_SIZE = 0x14,   // 0x14
-                MANAGER_STATE_GET_WIIBANNER = 0x15,        // 0x15
-                MANAGER_STATE_GET_WIIBANNER_SIZE = 0x16,   // 0x16
-                MANAGER_STATE_GET_WIIBANNER_PERMS = 0x17,  // 0x17
-                MANAGER_STATE_UNK_x18 = 0x18,              // 0x18
-                MANAGER_STATE_UNK_x19 = 0x19,              // 0x19
-                MANAGER_STATE_MOVE_NANDSAVE_TO_SD = 0x1a,  // 0x1a
-                MANAGER_STATE_MOVE_SDSAVE_TO_NAND = 0x1b,  // 0x1b
-                MANAGER_STATE_UNK_x1c = 0x1c,              // 0x1c
-                MANAGER_STATE_UNK_x1d = 0x1d,              // 0x1d
-                MANAGER_STATE_UNK_x1e = 0x1e,              // 0x1e
-                MANAGER_STATE_STOPPED = 0x1f,              // 0x1f
+                MANAGER_STATE_INIT = 0x00,                       // 0x00
+                MANAGER_STATE_STARTUP = 0x01,                    // 0x01
+                MANAGER_STATE_CHECK_EXIST = 0x02,                // 0x02
+                MANAGER_STATE_MOUNT_SD = 0x03,                   // 0x03
+                MANAGER_STATE_LIST_NANDAPP = 0x04,               // 0x04
+                MANAGER_STATE_LIST_SDAPP = 0x05,                 // 0x05
+                MANAGER_STATE_GET_NAND_FREE = 0x06,              // 0x06
+                MANAGER_STATE_GET_SD_FREE = 0x07,                // 0x07
+                MANAGER_STATE_NORMAL = 0x08,                     // 0x08
+                MANAGER_STATE_TERMINATE = 0x09,                  // 0x09
+                MANAGER_STATE_COPY_NANDSAVE_TO_SD = 0x0a,        // 0x0a
+                MANAGER_STATE_COPY_SDSAVE_TO_NAND = 0x0b,        // 0x0b
+                MANAGER_STATE_COPY_NANDAPP_TO_SD = 0x0d,         // 0x0d
+                MANAGER_STATE_COPY_SDAPP_TO_NAND = 0x0e,         // 0x0e
+                MANAGER_STATE_DEL_NANDAPP = 0x0f,                // 0x0f
+                MANAGER_STATE_DEL_NANDSAVE = 0x10,               // 0x10
+                MANAGER_STATE_DEL_SDAPP = 0x11,                  // 0x11
+                MANAGER_STATE_DEL_SDSAVE = 0x12,                 // 0x12
+                MANAGER_STATE_GET_THUMBNAIL = 0x13,              // 0x13
+                MANAGER_STATE_GET_THUMBNAIL_SIZE = 0x14,         // 0x14
+                MANAGER_STATE_GET_WIIBANNER = 0x15,              // 0x15
+                MANAGER_STATE_GET_WIIBANNER_SIZE = 0x16,         // 0x16
+                MANAGER_STATE_GET_WIIBANNER_PERMS = 0x17,        // 0x17
+                MANAGER_STATE_SC_FLUSH = 0x18,                   // 0x18
+                MANAGER_STATE_CHANGE_NAND_APP_COUNT = 0x19,      // 0x19
+                MANAGER_STATE_MOVE_NANDSAVE_TO_SD = 0x1a,        // 0x1a
+                MANAGER_STATE_MOVE_SDSAVE_TO_NAND = 0x1b,        // 0x1b
+                MANAGER_STATE_MOVE_NANDAPP_TO_SD = 0x1c,         // 0x1c
+                MANAGER_STATE_MOVE_SDAPP_TO_NAND = 0x1d,         // 0x1d
+                MANAGER_STATE_CHECK_SD_TITLE_RESTORABLE = 0x1e,  // 0x1e
+                MANAGER_STATE_STOPPED = 0x1f,                    // 0x1f
             };
 
             enum CommandTag {
@@ -138,8 +138,8 @@ namespace ipl {
                 CMD_SD_SAVE_EXIST = 0x15,        // 0x15
                 CMD_MOVE_NANDSAVE_TO_SD = 0x16,  // 0x16
                 CMD_MOVE_SDSAVE_TO_NAND = 0x17,  // 0x17
-                CMD_UNK_x18 = 0x18,              // 0x18
-                CMD_UNK_x19 = 0x19,              // 0x19
+                CMD_MOVE_NANDAPP_TO_SD = 0x18,   // 0x18
+                CMD_MOVE_SDAPP_TO_NAND = 0x19,   // 0x19
             };
             struct Command {
             public:
@@ -167,7 +167,7 @@ namespace ipl {
 
             void on_init();
             void on_startup();
-            void on_unk_x02();
+            void on_check_exist();
             void on_mount_sd();
             void on_list_nandapp();
             void on_list_sdapp();
@@ -188,13 +188,13 @@ namespace ipl {
             void on_get_wiibanner();
             void on_get_wiibanner_size();
             void on_get_wiibanner_perms();
-            void on_unk_x18();
-            void on_unk_x19();
+            void on_sc_flush();
+            void on_change_nand_app_count();
             void on_move_nandsave_to_sd();
             void on_move_sdsave_to_nand();
-            void on_unk_x1c();
-            void on_unk_x1d();
-            void on_unk_x1e();
+            void on_move_nandapp_to_sd();
+            void on_move_sdapp_to_nand();
+            void on_check_sd_title_restorable();
 
             void clean_command_queue();
             void get_thumbnail(GetThumbnailCmd);
@@ -203,7 +203,7 @@ namespace ipl {
             Thumbnail* get_free_thumbnail();
             WiiBannerFileInfo* get_free_banner();
 
-            u32 mState;                                          // 0x00000
+            State mState;                                        // 0x00000
             Mode mMode;                                          // 0x00004
             NandSDWorker* pWorker;                               // 0x00008
             void* pWorkerWorkBuf;                                // 0x0000c

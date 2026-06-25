@@ -75,8 +75,8 @@ namespace ipl {
                 case MANAGER_STATE_INIT:
                     on_init();
                     break;
-                case MANAGER_STATE_UNK_x02:
-                    on_unk_x02();
+                case MANAGER_STATE_CHECK_EXIST:
+                    on_check_exist();
                     break;
                 case MANAGER_STATE_STARTUP:
                     on_startup();
@@ -141,17 +141,17 @@ namespace ipl {
                 case MANAGER_STATE_GET_WIIBANNER_PERMS:
                     on_get_wiibanner_perms();
                     break;
-                case MANAGER_STATE_UNK_x18:
-                    on_unk_x18();
+                case MANAGER_STATE_SC_FLUSH:
+                    on_sc_flush();
                     break;
-                case MANAGER_STATE_UNK_x19:
-                    on_unk_x19();
+                case MANAGER_STATE_CHANGE_NAND_APP_COUNT:
+                    on_change_nand_app_count();
                     break;
-                case MANAGER_STATE_UNK_x1c:
-                    on_unk_x1c();
+                case MANAGER_STATE_MOVE_NANDAPP_TO_SD:
+                    on_move_nandapp_to_sd();
                     break;
-                case MANAGER_STATE_UNK_x1d:
-                    on_unk_x1d();
+                case MANAGER_STATE_MOVE_SDAPP_TO_NAND:
+                    on_move_sdapp_to_nand();
                     break;
                 case MANAGER_STATE_MOVE_NANDSAVE_TO_SD:
                     on_move_nandsave_to_sd();
@@ -159,8 +159,11 @@ namespace ipl {
                 case MANAGER_STATE_MOVE_SDSAVE_TO_NAND:
                     on_move_sdsave_to_nand();
                     break;
-                case MANAGER_STATE_UNK_x1e:
-                    on_unk_x1e();
+                case MANAGER_STATE_CHECK_SD_TITLE_RESTORABLE:
+                    on_check_sd_title_restorable();
+                    break;
+
+                default:
                     break;
             }
         }
@@ -191,10 +194,10 @@ namespace ipl {
                 pWorker->create(pWorkerWorkBuf, pWorkerDataBuf, NULL, 18);
             }
             pWorker->startup_async();
-            mState = 1;
+            mState = MANAGER_STATE_STARTUP;
         })
         GATED_STATE(NandSDCardManager::on_startup, !pWorker->is_working(), {
-            if (mMode == 1) {
+            if (mMode == NAND_MANAGER_MODE_APPS) {
                 pNandTitleIds = new (System::getMem2App(), 4) ESTitleId[pWorker->get_nand_app_num()];
                 pWorker->list_nand_app_async(pNandTitleIds);
             } else {
@@ -203,7 +206,7 @@ namespace ipl {
             }
             mState = MANAGER_STATE_LIST_NANDAPP;
         })
-        GATED_STATE(NandSDCardManager::on_unk_x02, !pWorker->is_working(), mState = MANAGER_STATE_NORMAL)
+        GATED_STATE(NandSDCardManager::on_check_exist, !pWorker->is_working(), mState = MANAGER_STATE_NORMAL)
         GATED_STATE(NandSDCardManager::on_mount_sd, !pWorker->is_working(), mState = MANAGER_STATE_NORMAL)
         GATED_STATE(NandSDCardManager::on_list_nandapp, !pWorker->is_working(), {
             TitleListing* listing = NULL;
@@ -214,7 +217,7 @@ namespace ipl {
             }
 
             mTmpTitleId = SCGetTmpTitleID();
-            if (mMode == 1) {
+            if (mMode == NAND_MANAGER_MODE_APPS) {
                 for (int i = 0; i < pWorker->get_nand_app_num(); i++) {
                     if (mTmpTitleId != 0 && pNandTitleIds[i] == mTmpTitleId) {
                         nw4r::ut::List_Prepend(&mNandListingList, new (System::getMem2App(), 4) TitleListing(pNandTitleIds[i]));
@@ -247,7 +250,7 @@ namespace ipl {
                 buf = NULL;
             }
 
-            if (mMode == 1) {
+            if (mMode == NAND_MANAGER_MODE_APPS) {
                 for (int i = 0; i < pWorker->get_sd_app_num(); i++) {
                     nw4r::ut::List_Append(&mSDListingList, new (System::getMem2App(), 4) TitleListing(pSDTitleIds[i]));
                 }
@@ -283,7 +286,7 @@ namespace ipl {
                         break;
                     case CMD_FORMAT_SD:
                         pWorker->format_sd_async();
-                        mState = MANAGER_STATE_UNK_x02;
+                        mState = MANAGER_STATE_CHECK_EXIST;
                         break;
                     case CMD_GET_NAND_FREE:
                         pWorker->get_nand_user_free_area_async();
@@ -308,8 +311,8 @@ namespace ipl {
                     case CMD_COPY_SDAPP_TO_NAND:
                         if (cmd.mSDTitleId == (ESTitleId32)mTmpTitleId) {
                             unk_0xe87a0 = false;
-                            pWorker->iplNandSD_81349230(cmd.mSDTitleId);
-                            mState = MANAGER_STATE_UNK_x1e;
+                            pWorker->check_sd_title_restorable_async(cmd.mSDTitleId);
+                            mState = MANAGER_STATE_CHECK_SD_TITLE_RESTORABLE;
                         } else {
                             pWorker->copy_sd_app_to_nand_async(cmd.mSDTitleId, 0);
                             mState = MANAGER_STATE_COPY_SDAPP_TO_NAND;
@@ -357,7 +360,7 @@ namespace ipl {
                         }
                         break;
                     case CMD_LIST_SD:
-                        if (pWorker->get_sd_state() == 6) {
+                        if (pWorker->get_sd_state() == NandSDWorker::SD_STATE_READY) {
                             if (mMode == NAND_MANAGER_MODE_APPS) {
                                 pSDTitleIds = new (System::getMem2App(), -32) ESTitleId32[pWorker->get_sd_app_num()];
                                 pWorker->list_sd_app_async(pSDTitleIds);
@@ -372,46 +375,46 @@ namespace ipl {
                         }
                         break;
                     case CMD_NAND_APP_EXIST:
-                        pWorker->sd_save_exist_async(cmd.mSDTitleId);
-                        mState = MANAGER_STATE_UNK_x02;
+                        pWorker->both_app_exist_async(cmd.mSDTitleId);
+                        mState = MANAGER_STATE_CHECK_EXIST;
                         break;
                     case CMD_NAND_SAVE_EXIST:
                         pWorker->nand_save_exist_lo_async(cmd.mSDTitleId);
-                        mState = MANAGER_STATE_UNK_x02;
+                        mState = MANAGER_STATE_CHECK_EXIST;
                         break;
                     case CMD_SD_APP_EXIST:
-                        pWorker->iplNandSD_81349164(cmd.mSDTitleId);
-                        mState = MANAGER_STATE_UNK_x02;
+                        pWorker->sd_app_exist_async(cmd.mSDTitleId);
+                        mState = MANAGER_STATE_CHECK_EXIST;
                         break;
                     case CMD_SD_SAVE_EXIST:
-                        pWorker->sd_app_exist_async(cmd.mSDTitleId);
-                        mState = MANAGER_STATE_UNK_x02;
+                        pWorker->sd_save_exist_async(cmd.mSDTitleId);
+                        mState = MANAGER_STATE_CHECK_EXIST;
                         break;
-                    case CMD_UNK_x18:
+                    case CMD_MOVE_NANDAPP_TO_SD:
                         pActiveChanAppBox = cmd.pChanAppBox;
-                        pWorker->iplNandSD_813491B4(cmd.mWiiTitleId);
-                        mState = MANAGER_STATE_UNK_x1c;
+                        pWorker->move_nand_app_to_sd_async(cmd.mWiiTitleId);
+                        mState = MANAGER_STATE_MOVE_NANDAPP_TO_SD;
                         break;
-                    case CMD_UNK_x19:
+                    case CMD_MOVE_SDAPP_TO_NAND:
                         if (cmd.mSDTitleId == (ESTitleId32)mTmpTitleId) {
                             pActiveChanAppBox = cmd.pChanAppBox;
                             unk_0xe87a0 = true;
-                            pWorker->iplNandSD_81349230(cmd.mSDTitleId);
-                            mState = MANAGER_STATE_UNK_x1e;
+                            pWorker->check_sd_title_restorable_async(cmd.mSDTitleId);
+                            mState = MANAGER_STATE_CHECK_SD_TITLE_RESTORABLE;
                         } else {
                             pActiveChanAppBox = cmd.pChanAppBox;
-                            pWorker->iplNandSD_813491CC(cmd.mSDTitleId);
-                            mState = MANAGER_STATE_UNK_x1d;
+                            pWorker->move_sd_app_to_nand_async(cmd.mSDTitleId);
+                            mState = MANAGER_STATE_MOVE_SDAPP_TO_NAND;
                         }
                         break;
                     case CMD_MOVE_NANDSAVE_TO_SD:
                         pActiveSavedataBox = cmd.pSavedataBox;
-                        pWorker->iplNandSD_813491E8(cmd.mWiiTitleId);
+                        pWorker->move_nand_save_to_sd_async(cmd.mWiiTitleId);
                         mState = MANAGER_STATE_MOVE_NANDSAVE_TO_SD;
                         break;
                     case CMD_MOVE_SDSAVE_TO_NAND:
                         pActiveSavedataBox = cmd.pSavedataBox;
-                        pWorker->iplNandSD_81349200(cmd.mSDTitleId);
+                        pWorker->move_sd_save_to_nand_async(cmd.mSDTitleId);
                         mState = MANAGER_STATE_MOVE_SDSAVE_TO_NAND;
                         break;
                 }
@@ -451,7 +454,7 @@ namespace ipl {
             if (pActiveChanAppBox->getThumbnail()->getMatchesTmpTitle()) {
                 SCSetTmpTitleID(0);
                 SCFlushAsync(NULL);
-                mState = MANAGER_STATE_UNK_x18;
+                mState = MANAGER_STATE_SC_FLUSH;
             } else {
                 mState = MANAGER_STATE_NORMAL;
             }
@@ -493,8 +496,8 @@ namespace ipl {
             mState = MANAGER_STATE_NORMAL;
         })
         GATED_STATE(NandSDCardManager::on_get_thumbnail, !pWorker->is_working(), {
-            if (getAsyncResult() > 0 || getAsyncResult() == -3) {
-                if (getAsyncResult() == -3) {
+            if (getAsyncResult() > NandSDWorker::WORKER_RESULT_OK || getAsyncResult() == NandSDWorker::WORKER_RESULT_BAD_FILE) {
+                if (getAsyncResult() == NandSDWorker::WORKER_RESULT_BAD_FILE) {
                     pActiveThumbnail->setIsCorrupt(true);
                     ChannelEdit* channelEdit = pActiveChanAppBox->get_channel_edit();
                     void* something = *(void**)((int)channelEdit + 0x60);
@@ -534,7 +537,7 @@ namespace ipl {
             mState = MANAGER_STATE_NORMAL;
         })
         GATED_STATE(NandSDCardManager::on_get_wiibanner, !pWorker->is_working(), {
-            if (getAsyncResult() == 0) {
+            if (getAsyncResult() == NandSDWorker::WORKER_RESULT_OK) {
                 if (pActiveBanner->getWiiTitleId() != 0) {
                     pWorker->get_nand_save_size_async(pActiveBanner->getWiiTitleId());
                 } else {
@@ -542,7 +545,7 @@ namespace ipl {
                 }
                 pActiveBanner->setCorrupt(false);
                 mState = MANAGER_STATE_GET_WIIBANNER_SIZE;
-            } else if (getAsyncResult() == -3) {
+            } else if (getAsyncResult() == NandSDWorker::WORKER_RESULT_BAD_FILE) {
                 if (pActiveBanner->getWiiTitleId() != 0) {
                     pWorker->get_nand_save_size_async(pActiveBanner->getWiiTitleId());
                 } else {
@@ -559,9 +562,9 @@ namespace ipl {
             pActiveBanner->setBlockCount((f32)ceil((f32)getAsyncResult() / 128 / 1024));
 
             if (pActiveBanner->getWiiTitleId() != 0) {
-                pWorker->iplNandSD_81349180(pActiveBanner->getWiiTitleId());
+                pWorker->get_nand_save_perms_async(pActiveBanner->getWiiTitleId());
             } else {
-                pWorker->iplNandSD_81349198(pActiveBanner->getSDTitleId());
+                pWorker->get_sd_save_perms_async(pActiveBanner->getSDTitleId());
             }
             mState = MANAGER_STATE_GET_WIIBANNER_PERMS;
         })
@@ -570,7 +573,7 @@ namespace ipl {
             pActiveSavedataBox->setBannerFileInfo(pActiveBanner);
             mState = MANAGER_STATE_NORMAL;
         })
-        GATED_STATE(NandSDCardManager::on_unk_x18, SCCheckStatus() != 1, {
+        GATED_STATE(NandSDCardManager::on_sc_flush, SCCheckStatus() != SC_STATUS_BUSY, {
             mTmpTitleId = 0;
             System::getChannelManager()->reserveRefresh();
             if (unk_0xe87a0) {
@@ -580,21 +583,21 @@ namespace ipl {
                 mState = MANAGER_STATE_NORMAL;
             }
         })
-        GATED_STATE(NandSDCardManager::on_unk_x19, !pWorker->is_working(), {
+        GATED_STATE(NandSDCardManager::on_change_nand_app_count, !pWorker->is_working(), {
             SCSetTmpTitleID(0);
             SCFlushAsync(NULL);
-            mState = MANAGER_STATE_UNK_x18;
+            mState = MANAGER_STATE_SC_FLUSH;
         })
-        GATED_STATE(NandSDCardManager::on_unk_x1e, !pWorker->is_working(), {
-            if (getAsyncResult() == 0) {
-                pWorker->iplNandSD_8134921C(true);
-                mState = MANAGER_STATE_UNK_x19;
+        GATED_STATE(NandSDCardManager::on_check_sd_title_restorable, !pWorker->is_working(), {
+            if (getAsyncResult() == NandSDWorker::WORKER_RESULT_OK) {
+                pWorker->change_nand_app_count_async(1);
+                mState = MANAGER_STATE_CHANGE_NAND_APP_COUNT;
             } else {
                 mState = MANAGER_STATE_NORMAL;
             }
         })
-        GATED_STATE(NandSDCardManager::on_unk_x1c, !pWorker->is_working(), {
-            if (getAsyncResult() == 0) {
+        GATED_STATE(NandSDCardManager::on_move_nandapp_to_sd, !pWorker->is_working(), {
+            if (getAsyncResult() == NandSDWorker::WORKER_RESULT_OK) {
                 TitleListing* listing = NULL;
                 while (listing = (TitleListing*)nw4r::ut::List_GetNext(&mNandListingList, listing), listing != NULL) {
                     ESTitleId titleId = pActiveChanAppBox->getThumbnail()->getWiiTitleId();
@@ -607,8 +610,8 @@ namespace ipl {
             }
             mState = MANAGER_STATE_NORMAL;
         })
-        GATED_STATE(NandSDCardManager::on_unk_x1d, !pWorker->is_working(), {
-            if (getAsyncResult() == 0) {
+        GATED_STATE(NandSDCardManager::on_move_sdapp_to_nand, !pWorker->is_working(), {
+            if (getAsyncResult() == NandSDWorker::WORKER_RESULT_OK) {
                 TitleListing* listing = NULL;
                 while (listing = (TitleListing*)nw4r::ut::List_GetNext(&mSDListingList, listing), listing != NULL) {
                     u32 titleId = pActiveChanAppBox->getThumbnail()->getSDTitleId();
@@ -622,7 +625,7 @@ namespace ipl {
             mState = MANAGER_STATE_NORMAL;
         })
         GATED_STATE(NandSDCardManager::on_move_nandsave_to_sd, !pWorker->is_working(), {
-            if (getAsyncResult() == 0) {
+            if (getAsyncResult() == NandSDWorker::WORKER_RESULT_OK) {
                 TitleListing* listing = NULL;
                 while (listing = (TitleListing*)nw4r::ut::List_GetNext(&mNandListingList, listing), listing != NULL) {
                     ESTitleId titleId = pActiveSavedataBox->getBanner()->getWiiTitleId();
@@ -636,7 +639,7 @@ namespace ipl {
             mState = MANAGER_STATE_NORMAL;
         })
         GATED_STATE(NandSDCardManager::on_move_sdsave_to_nand, !pWorker->is_working(), {
-            if (getAsyncResult() == 0) {
+            if (getAsyncResult() == NandSDWorker::WORKER_RESULT_OK) {
                 TitleListing* listing = NULL;
                 while (listing = (TitleListing*)nw4r::ut::List_GetNext(&mSDListingList, listing), listing != NULL) {
                     u32 titleId = pActiveSavedataBox->getBanner()->getSDTitleId();
@@ -667,10 +670,10 @@ namespace ipl {
 
         int NandSDCardManager::getAsyncResult() {
             int result = pWorker->get_async_result();
-            if (result == -8) {
-                System::getErrorHandler()->log("NandSDWorker", -8, "iplNandSDCardManager.cpp", 0x4b9);
+            if (result == NandSDWorker::WORKER_RESULT_SYSFILES_CORRUPT) {
+                System::getErrorHandler()->log("NandSDWorker", NandSDWorker::WORKER_RESULT_SYSFILES_CORRUPT, "iplNandSDCardManager.cpp", 0x4b9);
                 System::getErrorHandler()->set(ErrorHandler::DEFAULT, MESG_ERR_FILE);
-            } else if (result == -5) {
+            } else if (result == NandSDWorker::WORKER_RESULT_NAND_CORRUPT) {
                 System::getErrorHandler()->set(ErrorHandler::DEFAULT, MESG_ERR_NAND);
             }
             return result;
@@ -679,13 +682,13 @@ namespace ipl {
         void NandSDCardManager::get_thumbnail(GetThumbnailCmd cmd) {
             if (cmd.mIsWiiNotSD) {
                 if (cmd.mIdx >= pWorker->get_nand_app_num()) {
-                    *(void**)((int)cmd.pChannelBox + 0x40) = NULL;  // TODO: implement ChannelAppBox
+                    cmd.pChannelBox->setThumbnail(NULL);
                     return;
                 }
                 Thumbnail* freeThumbnail = get_free_thumbnail();
                 TitleListing* listing = (TitleListing*)nw4r::ut::List_GetNth(&mNandListingList, cmd.mIdx);
                 if (listing == NULL) {
-                    *(void**)((int)cmd.pChannelBox + 0x40) = NULL;  // TODO: implement ChannelAppBox
+                    cmd.pChannelBox->setThumbnail(NULL);
                     return;
                 }
 
@@ -698,13 +701,13 @@ namespace ipl {
                 mState = MANAGER_STATE_GET_THUMBNAIL;
             } else {
                 if (cmd.mIdx >= pWorker->get_sd_app_num()) {
-                    *(void**)((int)cmd.pChannelBox + 0x40) = NULL;  // TODO: implement ChannelAppBox
+                    cmd.pChannelBox->setThumbnail(NULL);
                     return;
                 }
                 Thumbnail* freeThumbnail = get_free_thumbnail();
                 TitleListing* listing = (TitleListing*)nw4r::ut::List_GetNth(&mSDListingList, cmd.mIdx);
                 if (listing == NULL) {
-                    *(void**)((int)cmd.pChannelBox + 0x40) = NULL;  // TODO: implement ChannelAppBox
+                    cmd.pChannelBox->setThumbnail(NULL);
                     return;
                 }
 
@@ -779,8 +782,8 @@ namespace ipl {
         COMMAND_FN(cmdExistSDApp(ESTitleId32 titleId),       CMD_SD_APP_EXIST,        NULL, NULL, 0, titleId);
         COMMAND_FN(cmdExistNandSave(ESTitleId32 titleId),    CMD_NAND_SAVE_EXIST,     NULL, NULL, 0, titleId);
         COMMAND_FN(cmdExistSDSave(ESTitleId32 titleId),      CMD_SD_SAVE_EXIST,       NULL, NULL, 0, titleId);
-        COMMAND_FN(cmdUnk813A9F04(ChanAppBox* box),          CMD_UNK_x18,              box, NULL, box->getThumbnail()->getWiiTitleId(), 0);
-        COMMAND_FN(cmdUnk813A9F5C(ChanAppBox* box),          CMD_UNK_x19,              box, NULL, 0, box->getThumbnail()->getSDTitleId());
+        COMMAND_FN(cmdMoveAppNandToSD(ChanAppBox* box),          CMD_MOVE_NANDAPP_TO_SD,              box, NULL, box->getThumbnail()->getWiiTitleId(), 0);
+        COMMAND_FN(cmdMoveAppSDToNand(ChanAppBox* box),          CMD_MOVE_SDAPP_TO_NAND,              box, NULL, 0, box->getThumbnail()->getSDTitleId());
         COMMAND_FN(cmdMoveSaveNandToSD(SavedataBox* box),    CMD_MOVE_NANDSAVE_TO_SD, NULL,  box, box->getBanner()->getWiiTitleId(), 0);
         COMMAND_FN(cmdMoveSaveSDToNand(SavedataBox* box),    CMD_MOVE_SDSAVE_TO_NAND, NULL,  box, 0, box->getBanner()->getSDTitleId());
         // clang-format on

@@ -81,3 +81,13 @@ extract:
     - symbol: ms_ppki
       binary: certs\ms_ppki.cert
       header: ms_ppki_cert.inc
+
+    - symbol: c_es_encrypt_iv__Q23ipl12NandSDWorker
+      rename: ipl::NandSDWorker::c_es_encrypt_iv
+      binary: system/nandsdworker/es_encrypt.bin
+      header: system/nandsdworker/es_encrypt.inc
+
+    - symbol: c_md5_secret_key__Q23ipl12NandSDWorker
+      rename: ipl::NandSDWorker::c_md5_secret_key
+      binary: system/nandsdworker/md5_secret_key.bin
+      header: system/nandsdworker/md5_secret_key.inc

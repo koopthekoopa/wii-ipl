@@ -54,7 +54,7 @@ namespace ipl {
 
             // Setup icons
             for (int i = 0; i < SAVE_ICON_COUNT; i++) {
-                memcpy(mpIconData[i], mData.iconData[i], SAVE_ICON_TEX_SIZE);
+                memcpy(mpIconData[i], (&mData.iconData0)[i], SAVE_ICON_TEX_SIZE);
                 DCStoreRange(mpIconData[i], SAVE_ICON_TEX_SIZE);
             }
         }

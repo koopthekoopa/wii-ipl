@@ -22,6 +22,8 @@ FAError FADetach(s8 drive);
 FAError FAMount(s8 drive);
 FAError FAUnmount(s8 drive, u32 force);
 
+FAError FAGetdev(s8 drive, u32* data);
+
 FAError FAFormat(s8 drive, u32 unk);
 
 FAError FAErrnum();
