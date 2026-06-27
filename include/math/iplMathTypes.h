@@ -101,6 +101,11 @@ namespace ipl {
             VEC3 operator+(f32 v) const { return VEC3(x + v, y + v, z + v); }
             VEC3 operator-(const VEC3& rhs) const { return VEC3(x - rhs.x, y - rhs.y, z - rhs.z); }
             VEC3 operator*(f32 val) const { return VEC3(x * val, y * val, z * val); }
+            VEC3 operator*(f64 val) const {
+                nw4r::math::VEC3 vecOut;
+                VEC3Scale(&vecOut, this, (f32)val);
+                return vecOut;
+            }
 
             void set(f32 fx, f32 fy, f32 fz) {
                 x = fx;

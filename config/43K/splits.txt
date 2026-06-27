@@ -655,7 +655,6 @@ src/scene/mailAddSel/iplMailAddressSelect.cpp:
 	.sdata      start:0x8166B1E8 end:0x8166B1F8
 
 src/scene/memory/iplMemory.cpp:
-	.bss        start:0x810B74F8 end:0x810B7508
 	.text       start:0x813C2F84 end:0x813C623C
 	.rodata     start:0x815E8EE8 end:0x815E8F10
 	.data       start:0x81625B70 end:0x81626130
@@ -717,6 +716,7 @@ src/scene/textBalloon/iplBalloon.cpp:
 	.sdata      start:0x8166B300 end:0x8166B318
 
 src/scene/cardSequence/iplCardSequence.cpp:
+	.bss        start:0x810B74F8 end:0x810B7508
 	.text       start:0x813D13D0 end:0x813D3A4C
 	.data       start:0x81627E48 end:0x81628400
 	.sdata      start:0x8166B318 end:0x8166B320

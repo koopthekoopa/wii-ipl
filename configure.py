@@ -637,7 +637,7 @@ config.libs = [
             Object(Matching,    "system/iplPointerCore.cpp"),
             Object(Matching,    "system/iplDialogWindow.cpp"),
             Object(Matching,    "system/iplHomeButtonMenu.cpp"),
-            Object(NonMatching, "system/iplNandSDWorker.cpp"),
+            Object(Matching, "system/iplNandSDWorker.cpp"),
             Object(Equivalent,  "system/iplKeyboard.cpp"),
             Object(Matching,    "system/iplErrorHandler.cpp"),
             Object(Matching,    "system/iplResetHandler.cpp"),
@@ -746,13 +746,13 @@ config.libs = [
         ]
     ),
     IPLSection("channelEdit", [
-            Object(NonMatching, "scene/channelEdit/iplChannelEdit.cpp"),
-            Object(NonMatching, "scene/channelEdit/iplChanAppBase.cpp"),
-            Object(NonMatching, "scene/channelEdit/iplChanAppBox.cpp"),
-            Object(NonMatching, "scene/channelEdit/iplChanAppEdit.cpp"),
-            Object(NonMatching, "scene/channelEdit/iplAnmController.cpp"),
-            Object(NonMatching, "scene/channelEdit/iplNandSDCardManager.cpp"),
-            Object(NonMatching, "scene/channelEdit/iplThumbnail.cpp"),
+            Object(Matching, "scene/channelEdit/iplChannelEdit.cpp"),
+            Object(Equivalent, "scene/channelEdit/iplChanAppBase.cpp"),
+            Object(Equivalent, "scene/channelEdit/iplChanAppBox.cpp"),
+            Object(Equivalent, "scene/channelEdit/iplChanAppEdit.cpp"),
+            Object(Matching, "scene/channelEdit/iplAnmController.cpp"),
+            Object(Matching, "scene/channelEdit/iplNandSDCardManager.cpp"),
+            Object(Matching, "scene/channelEdit/iplThumbnail.cpp"),
         ]
     ),
     IPLSection("channelSelect", [
@@ -791,13 +791,13 @@ config.libs = [
         ]
     ),
     IPLSection("memory", [
-            Object(NonMatching, "scene/memory/iplMemory.cpp"),
+            Object(Matching, "scene/memory/iplMemory.cpp"),
         ]
     ),
     IPLSection("saveDataEdit", [
-            Object(NonMatching, "scene/saveDataEdit/iplSaveDataBase.cpp"),
-            Object(NonMatching, "scene/saveDataEdit/iplSaveDataBox.cpp"),
-            Object(NonMatching, "scene/saveDataEdit/iplSaveDataEdit.cpp"),
+            Object(Equivalent, "scene/saveDataEdit/iplSaveDataBase.cpp"),
+            Object(Equivalent, "scene/saveDataEdit/iplSaveDataBox.cpp"),
+            Object(Equivalent, "scene/saveDataEdit/iplSaveDataEdit.cpp"),
             Object(Matching,    "scene/saveDataEdit/iplWiiBannerFileInfo.cpp"),
         ]
     ),

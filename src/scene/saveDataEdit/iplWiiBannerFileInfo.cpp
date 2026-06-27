@@ -30,12 +30,11 @@ namespace ipl {
             // Init data
             memset(&mData, 0, sizeof(mData));
 
-            unk_0xFC = 0;
-            unk_0xF8 = 0;
-            unk_0x100 = 0;
-            unk_0x104 = 0;
-            unk_0xF1A8 = 0;
-            unk_0xF1AC = 0;
+            mWiiTitleId = 0;
+            mSDTitleId = 0;
+            mBlockCount = 0;
+            mPerms = 0;
+            mIsCorrupt = 0;
         }
 
         void WiiBannerFileInfo::create() {
@@ -55,7 +54,7 @@ namespace ipl {
 
             // Setup icons
             for (int i = 0; i < SAVE_ICON_COUNT; i++) {
-                memcpy(mpIconData[i], mData.iconData[i], SAVE_ICON_TEX_SIZE);
+                memcpy(mpIconData[i], (&mData.iconData0)[i], SAVE_ICON_TEX_SIZE);
                 DCStoreRange(mpIconData[i], SAVE_ICON_TEX_SIZE);
             }
         }

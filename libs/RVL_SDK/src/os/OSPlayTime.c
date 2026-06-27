@@ -285,20 +285,20 @@ s32 __OSGetPlayTime(ESTicketView* ticket, OSPlayTimeType* type, u32* playTime) {
     }
 
     for (i = 0; i < ES_LIMIT_MAX; i++) {
-        if (ticket->limits[i].code == OS_PLAYTIME_TIME_LIMIT) {
+        if (ticket->limits.data[i].code == OS_PLAYTIME_TIME_LIMIT) {
             *type = OS_PLAYTIME_TIME_LIMIT;
 
             if (numEntries == 0) {
-                *playTime = ticket->limits[i].limit;
+                *playTime = ticket->limits.data[i].limit;
                 goto getout;
             }
-            if (lpEntry[i].limit >= ticket->limits[i].limit) {
+            if (lpEntry[i].limit >= ticket->limits.data[i].limit) {
                 *playTime = 0;
                 goto getout;
             }
-            *playTime = ticket->limits[i].limit - lpEntry[i].limit;
+            *playTime = ticket->limits.data[i].limit - lpEntry[i].limit;
             goto getout;
-        } else if (ticket->limits[i].code != OS_PLAYTIME_PERMANENT) {
+        } else if (ticket->limits.data[i].code != OS_PLAYTIME_PERMANENT) {
             seenOther = i + 1;
         }
     }
@@ -309,9 +309,9 @@ s32 __OSGetPlayTime(ESTicketView* ticket, OSPlayTimeType* type, u32* playTime) {
     } else {
         seenOther--;
 
-        if (ticket->limits[seenOther].code == OS_PLAYTIME_LAUNCH_LIMIT) {
+        if (ticket->limits.data[seenOther].code == OS_PLAYTIME_LAUNCH_LIMIT) {
             *type = OS_PLAYTIME_LAUNCH_LIMIT;
-            *playTime = ticket->limits[seenOther].limit;
+            *playTime = ticket->limits.data[seenOther].limit;
 
             if (numEntries > 0) {
                 *playTime -= lpEntry[seenOther].limit;

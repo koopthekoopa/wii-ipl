@@ -31,7 +31,10 @@ typedef u64 ESTicketId;
 
 typedef u8 ESVersion;
 
-typedef u8 ESContentMask[64];
+typedef struct {
+    u8 data[0x40];
+} ESContentMask;
+
 typedef u8 ESSignature[60];
 
 typedef u8 ESHash[20];
@@ -118,6 +121,9 @@ typedef struct ESLpEntry {
     u32 code;   // 0x00
     u32 limit;  // 0x04
 } ESLpEntry;
+typedef struct {
+    ESLpEntry data[ES_LIMIT_MAX];
+} ESLpEntryLimits;
 
 typedef struct ESTicketView {
     ESVersion version;  // 0x00
@@ -137,8 +143,8 @@ typedef struct ESTicketView {
     ESTicketReserved reserved;  // 0x25
 
     u8 unk_0x55;
-    ESContentMask cidxMask;          // 0x56
-    ESLpEntry limits[ES_LIMIT_MAX];  // 0x98
+    ESContentMask cidxMask;  // 0x56
+    ESLpEntryLimits limits;  // 0x98
 } ESTicketView;
 
 typedef struct ESTicket {
