@@ -58,7 +58,7 @@ namespace nw4r {
 
                 bool IsManaging(const void* ptr) const { return mResource == ptr; }
 
-            private:
+            protected:
                 void* mResource;             // 0x10
                 FontInformation* mFontInfo;  // 0x14
             };

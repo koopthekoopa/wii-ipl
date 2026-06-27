@@ -5,6 +5,8 @@
 
 #include <revolution/gx/GXEnum.h>
 
+#include <nw4r/ut/binaryFileFormat.h>
+
 namespace nw4r {
     namespace ut {
         typedef struct CharWidths {
@@ -84,6 +86,24 @@ namespace nw4r {
             u8 ascent;       // 0x16
             u8 padding_[1];  // 0x17
         } FontInformation;
+        typedef struct GlyphGroups {
+            u32 uncompSheetSize;  // 0x00
+            u16 sheetGlyphCount;  // 0x04
+            u16 nameCount;        // 0x06
+            u16 sheetCount;       // 0x08
+            u16 smthCount_0x0a;   // 0x0A
+            u16 smthCount_0x0c;   // 0x0C
+            u16 nameOffsets[0];
+        } GlyphGroups;
+
+        typedef struct HeaderedGlyphGroups {
+            BinaryBlockHeader hdr;  // 0x00
+            GlyphGroups inner;      // 0x08
+        } HeaderedGlyphGroups;
+        typedef struct ArchiveFontBinaryLayout {
+            BinaryFileHeader hdr;      // 0x00
+            HeaderedGlyphGroups glgr;  // 0x10
+        } ArchiveFontBinaryLayout;
     }  // namespace ut
 }  // namespace nw4r
 
