@@ -437,7 +437,7 @@ namespace ipl {
 
             snd::getSystem()->startSE("WIPL_SE_COPYING");
             if (processType == MEMORY_PROC_FMT) {
-                pSavedataEdit->anmShowBtn0Dialog(MESG_MEMORY_FORMATTING, true, true);
+                pSavedataEdit->anmShowBtn0Dialog(MESG_DATA_FORMATTING, true, true);
             } else {
                 pSavedataEdit->anmStartWaitAnm();
             }
@@ -643,20 +643,20 @@ namespace ipl {
                 switch (mSdState) {
                     case NandSDWorker::SD_STATE_READY:
                         if (pNandSDCardManager->isSDWriteProtected()) {
-                            pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_CARD_LOCKED);
+                            pSavedataEdit->anmSelectFadeout(MESG_DATA_SD_CARD_LOCKED);
                             mState = MEMORY_STATE_ON_VERIFY1ST;
                         } else {
-                            pSavedataEdit->anmShowS2Btn2Dialog(MESG_MEMORY_ERASE_Q);
+                            pSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_ERASE_Q);
                             mState = MEMORY_STATE_ON_VERIFY_DEL;
                         }
                         break;
                     default:
-                        pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_PROCESS_FAILED);
+                        pSavedataEdit->anmSelectFadeout(MESG_DATA_SD_PROCESS_FAILED);
                         mState = MEMORY_STATE_ON_VERIFY1ST;
                         break;
                 }
             } else {
-                pSavedataEdit->anmShowS2Btn2Dialog(MESG_MEMORY_ERASE_Q);
+                pSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_ERASE_Q);
                 mState = MEMORY_STATE_ON_VERIFY_DEL;
             }
         }
@@ -789,7 +789,7 @@ namespace ipl {
                     case NandSDWorker::SD_STATE_SLOT_EMPTY:
                         if (!pSavedataBase->isIdle())
                             return;
-                        pSavedataBase->anmTextFadein(MESG_MEMORY_NO_SD_CARD);
+                        pSavedataBase->anmTextFadein(MESG_DATA_NO_SD_CARD);
                         mState = MEMORY_STATE_ON_SD_MESSAGE1ST;
                         break;
                     case NandSDWorker::SD_STATE_NOT_MOUNTED:
@@ -800,7 +800,7 @@ namespace ipl {
                     case NandSDWorker::SD_STATE_ILLEGAL_MEDIA:
                         if (!pSavedataBase->isIdle())
                             return;
-                        pSavedataBase->anmTextFadein(MESG_MEMORY_SD_DEVICE_BAD);
+                        pSavedataBase->anmTextFadein(MESG_DATA_SD_DEVICE_BAD);
                         mState = MEMORY_STATE_ON_SD_MESSAGE1ST;
                         break;
                     case NandSDWorker::SD_STATE_READY:
@@ -814,7 +814,7 @@ namespace ipl {
                     default:
                         if (!pSavedataBase->isIdle())
                             return;
-                        pSavedataBase->anmTextFadein(MESG_MEMORY_SD_PROCESS_FAILED);
+                        pSavedataBase->anmTextFadein(MESG_DATA_SD_PROCESS_FAILED);
                         mState = MEMORY_STATE_ON_SD_MESSAGE1ST;
                         break;
                 }
@@ -834,7 +834,7 @@ namespace ipl {
         }
         void Memory::on_trig_copy() {
             if (pCurrBox->getBanner()->getFilePerms() == 1) {
-                pSavedataEdit->anmSelectFadeout(MESG_MEMORY_FILE_CANT_BE_COPIED);
+                pSavedataEdit->anmSelectFadeout(MESG_DATA_FILE_CANT_BE_COPIED);
                 mState = MEMORY_STATE_ON_VERIFY1ST;
                 return;
             }
@@ -845,7 +845,7 @@ namespace ipl {
                 mSdState = pNandSDCardManager->getWorker()->get_sd_state();
                 switch (mSdState) {
                     case NandSDWorker::SD_STATE_SLOT_EMPTY:
-                        pSavedataEdit->anmSelectFadeout(MESG_MEMORY_NO_SD_CARD);
+                        pSavedataEdit->anmSelectFadeout(MESG_DATA_NO_SD_CARD);
                         mState = MEMORY_STATE_ON_VERIFY1ST;
                         break;
                     case NandSDWorker::SD_STATE_NOT_MOUNTED:
@@ -855,12 +855,12 @@ namespace ipl {
                         break;
                     case NandSDWorker::SD_STATE_BROKEN_MEDIA:
                     case NandSDWorker::SD_STATE_ILLEGAL_MEDIA:
-                        pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_DEVICE_BAD);
+                        pSavedataEdit->anmSelectFadeout(MESG_DATA_SD_DEVICE_BAD);
                         mState = MEMORY_STATE_ON_VERIFY1ST;
                         break;
                     case NandSDWorker::SD_STATE_READY:
                         if (pNandSDCardManager->isSDWriteProtected()) {
-                            pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_CARD_LOCKED);
+                            pSavedataEdit->anmSelectFadeout(MESG_DATA_SD_CARD_LOCKED);
                             mState = MEMORY_STATE_ON_VERIFY1ST;
                             return;
                         }
@@ -869,16 +869,16 @@ namespace ipl {
                         break;
                     case NandSDWorker::SD_STATE_ERRORED:
                     default:
-                        pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_PROCESS_FAILED);
+                        pSavedataEdit->anmSelectFadeout(MESG_DATA_SD_PROCESS_FAILED);
                         mState = MEMORY_STATE_ON_VERIFY1ST;
                         break;
                 }
             } else {
                 if (pNandSDCardManager->getAsyncResult()) {
-                    pSavedataEdit->anmSelectFadeout(MESG_MEMORY_ALREADY_EXISTS_WII);
+                    pSavedataEdit->anmSelectFadeout(MESG_DATA_ALREADY_EXISTS_WII);
                     mState = MEMORY_STATE_ON_VERIFY1ST;
                 } else {
-                    pSavedataEdit->anmShowS2Btn2Dialog(MESG_MEMORY_COPY_TO_WII_Q);
+                    pSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_COPY_TO_WII_Q);
                     mState = MEMORY_STATE_ON_VERIFY_COPY;
                 }
             }
@@ -937,20 +937,20 @@ namespace ipl {
                         if (pNandSDCardManager->getWorker()->get_sd_state() == NandSDWorker::SD_STATE_READY) {
                             start_process(MEMORY_PROC_CPY);
                             pNandSDCardManager->cmdCopySaveNandToSD(pCurrBox->getBanner()->getWiiTitleId());
-                            pSavedataEdit->anmTextFadein(MESG_MEMORY_COPYING_TO_SD);
+                            pSavedataEdit->anmTextFadein(MESG_DATA_COPYING_TO_SD);
                         } else if (pNandSDCardManager->getWorker()->get_sd_state() == NandSDWorker::SD_STATE_SLOT_EMPTY) {
-                            pSavedataEdit->anmTextFadein(MESG_MEMORY_NO_SD_CARD);
+                            pSavedataEdit->anmTextFadein(MESG_DATA_NO_SD_CARD);
                             mState = MEMORY_STATE_ON_END_PROCESS;
                             return;
                         } else {
-                            pSavedataEdit->anmTextFadein(MESG_MEMORY_SD_PROCESS_FAILED);
+                            pSavedataEdit->anmTextFadein(MESG_DATA_SD_PROCESS_FAILED);
                             mState = MEMORY_STATE_ON_END_PROCESS;
                             return;
                         }
                     } else {
                         start_process(MEMORY_PROC_CPY);
                         pNandSDCardManager->cmdCopySaveSDToNand(pCurrBox->getBanner()->getSDTitleId());
-                        pSavedataEdit->anmTextFadein(MESG_MEMORY_COPYING_TO_WII);
+                        pSavedataEdit->anmTextFadein(MESG_DATA_COPYING_TO_WII);
                     }
                     break;
                 case DialogWindow::RESULT_RIGHT_BUTTON:
@@ -969,10 +969,10 @@ namespace ipl {
                     start_process(MEMORY_PROC_DEL);
                     if (mPage == MEMORY_PAGE_WII) {
                         pNandSDCardManager->cmdDelNandSave(pCurrBox);
-                        pSavedataEdit->anmTextFadein(MESG_MEMORY_ERASING);
+                        pSavedataEdit->anmTextFadein(MESG_DATA_ERASING);
                     } else {
                         pNandSDCardManager->cmdDelSDSave(pCurrBox);
-                        pSavedataEdit->anmTextFadein(MESG_MEMORY_ERASING_SD);
+                        pSavedataEdit->anmTextFadein(MESG_DATA_ERASING_SD);
                     }
                     break;
                 case DialogWindow::RESULT_RIGHT_BUTTON:
@@ -995,7 +995,7 @@ namespace ipl {
                     if (mPage == MEMORY_PAGE_WII) {
                         mState = MEMORY_STATE_ON_EDIT;
                     } else {
-                        pSavedataBase->anmTextFadein(MESG_MEMORY_SD_DEVICE_BAD);
+                        pSavedataBase->anmTextFadein(MESG_DATA_SD_DEVICE_BAD);
                         mState = MEMORY_STATE_ON_SD_MESSAGE1ST;
                     }
                     break;
@@ -1007,7 +1007,7 @@ namespace ipl {
             if (mPage == MEMORY_PAGE_WII) {
                 mState = MEMORY_STATE_ON_EDIT;
             } else if (pNandSDCardManager->getWorker()->get_sd_state() != NandSDWorker::SD_STATE_INITIAL) {
-                pSavedataBase->anmTextFadein(MESG_MEMORY_SD_DEVICE_BAD);
+                pSavedataBase->anmTextFadein(MESG_DATA_SD_DEVICE_BAD);
                 mState = MEMORY_STATE_ON_SD_MESSAGE1ST;
             }
         }
@@ -1062,20 +1062,20 @@ namespace ipl {
                 if (mProcessType == MEMORY_PROC_FMT) {
                     pSavedataEdit->anmHideBtn0Dialog();
                 } else if (mProcessType == MEMORY_PROC_CPY) {
-                    pSavedataEdit->anmTextFadein(MESG_MEMORY_COPIED);
+                    pSavedataEdit->anmTextFadein(MESG_DATA_COPIED);
                 } else if (mProcessType == MEMORY_PROC_DEL) {
-                    pSavedataEdit->anmTextFadein(MESG_MEMORY_ERASED);
+                    pSavedataEdit->anmTextFadein(MESG_DATA_ERASED);
                 } else if (mProcessType == MEMORY_PROC_MOV) {
                     switch (pCurrBox->getBanner()->getFilePerms()) {
                         case 0:
-                            pSavedataEdit->anmTextFadein(MESG_MEMORY_MOVED);
+                            pSavedataEdit->anmTextFadein(MESG_DATA_MOVED);
                             break;
                         case 4:
-                            pSavedataEdit->anmTextFadein(MESG_MEMORY_MOVED_PARTIAL_LOCK);
+                            pSavedataEdit->anmTextFadein(MESG_DATA_MOVED_PARTIAL_LOCK);
                             break;
                         case 3:
                         case 5:
-                            pSavedataEdit->anmTextFadein(MESG_MEMORY_MOVED_CONSOLE_LOCK);
+                            pSavedataEdit->anmTextFadein(MESG_DATA_MOVED_CONSOLE_LOCK);
                             break;
                     }
                 }
@@ -1098,50 +1098,50 @@ namespace ipl {
                 }
             } else {
                 if (0 < result && (result & 0b001) && mProcessType == MEMORY_PROC_CPY && mPage == MEMORY_PAGE_WII) {
-                    pSavedataEdit->anmTextFadein(MESG_MEMORY_COPIED_SOME_NON_SD);
+                    pSavedataEdit->anmTextFadein(MESG_DATA_COPIED_SOME_NON_SD);
                 } else if (0 < result && (result & 0b010) && mProcessType == MEMORY_PROC_CPY && mPage == MEMORY_PAGE_WII) {
                     // int iVar2 = ;
                     switch (pCurrBox->getBanner()->getFilePerms()) {
                         case 3:
-                            pSavedataEdit->anmTextFadein(MESG_MEMORY_COPIED_CONSOLE_LOCK);
+                            pSavedataEdit->anmTextFadein(MESG_DATA_COPIED_CONSOLE_LOCK);
                             break;
                         case 4:
                         default:
-                            pSavedataEdit->anmTextFadein(MESG_MEMORY_COPIED_PARTIAL_LOCK);
+                            pSavedataEdit->anmTextFadein(MESG_DATA_COPIED_PARTIAL_LOCK);
                             break;
                     }
                 } else if (0 < result && (result & 0b100) && mProcessType == MEMORY_PROC_CPY && mPage == MEMORY_PAGE_WII) {
-                    pSavedataEdit->anmTextFadein(MESG_MEMORY_COPIED_CONSOLE_LOCK);
+                    pSavedataEdit->anmTextFadein(MESG_DATA_COPIED_CONSOLE_LOCK);
                 } else if (0 < result && result == 1 && mPage == MEMORY_PAGE_SD) {
-                    pSavedataEdit->anmTextFadein(mProcessType == MEMORY_PROC_CPY ? MESG_MEMORY_NOT_FULLY_COPIED : MESG_MEMORY_NOT_FULLY_MOVED);
+                    pSavedataEdit->anmTextFadein(mProcessType == MEMORY_PROC_CPY ? MESG_DATA_NOT_FULLY_COPIED : MESG_DATA_NOT_FULLY_MOVED);
                 } else {
                     if (result == -6) {
-                        pSavedataEdit->anmTextFadein(mPage == MEMORY_PAGE_WII ? MESG_MEMORY_ALREADY_EXISTS_SD : MESG_MEMORY_ALREADY_EXISTS_WII);
+                        pSavedataEdit->anmTextFadein(mPage == MEMORY_PAGE_WII ? MESG_DATA_ALREADY_EXISTS_SD : MESG_DATA_ALREADY_EXISTS_WII);
                     } else if (result == -7) {
-                        pSavedataEdit->anmTextFadein(mPage == MEMORY_PAGE_WII ? MESG_MEMORY_NOT_ENOUGH_FREE_SD : MESG_MEMORY_NOT_ENOUGH_FREE_WII);
+                        pSavedataEdit->anmTextFadein(mPage == MEMORY_PAGE_WII ? MESG_DATA_NOT_ENOUGH_FREE_SD : MESG_DATA_NOT_ENOUGH_FREE_WII);
                     } else if (result == -12) {
-                        pSavedataEdit->anmTextFadein(MESG_MEMORY_FILENAME_CONFLICT);
+                        pSavedataEdit->anmTextFadein(MESG_DATA_FILENAME_CONFLICT);
                     } else if (result == -14) {
-                        pSavedataEdit->anmTextFadein(mProcessType == MEMORY_PROC_CPY ? MESG_MEMORY_MUST_PLAY_TO_COPY : MESG_MEMORY_MUST_PLAY_TO_MOVE);
+                        pSavedataEdit->anmTextFadein(mProcessType == MEMORY_PROC_CPY ? MESG_DATA_MUST_PLAY_TO_COPY : MESG_DATA_MUST_PLAY_TO_MOVE);
                     } else if (result == -13) {
-                        pSavedataEdit->anmTextFadein(MESG_MEMORY_FILE_CANT_BE_COPIED);
+                        pSavedataEdit->anmTextFadein(MESG_DATA_FILE_CANT_BE_COPIED);
                     } else if (result == -15) {
-                        pSavedataEdit->anmTextFadein(mProcessType == MEMORY_PROC_CPY ? MESG_MEMORY_CANT_COPY_TO_WII : MESG_MEMORY_CANT_MOVE_TO_WII);
+                        pSavedataEdit->anmTextFadein(mProcessType == MEMORY_PROC_CPY ? MESG_DATA_CANT_COPY_TO_WII : MESG_DATA_CANT_MOVE_TO_WII);
 
                     } else {
                         OSReport("fail:  async result = %d\n", result);
                         switch (mProcessType) {
                             case MEMORY_PROC_CPY:
-                                pSavedataEdit->anmTextFadein(MESG_MEMORY_COPY_UNK_ERROR);
+                                pSavedataEdit->anmTextFadein(MESG_DATA_COPY_UNK_ERROR);
                                 break;
                             case MEMORY_PROC_DEL:
-                                pSavedataEdit->anmTextFadein(MESG_MEMORY_DEL_UNK_ERROR);
+                                pSavedataEdit->anmTextFadein(MESG_DATA_DEL_UNK_ERROR);
                                 break;
                             case MEMORY_PROC_FMT:
                                 pSavedataEdit->anmHideBtn0Dialog();
                                 break;
                             case MEMORY_PROC_MOV:
-                                pSavedataEdit->anmTextFadein(MESG_MEMORY_MOVE_UNK_ERROR);
+                                pSavedataEdit->anmTextFadein(MESG_DATA_MOVE_UNK_ERROR);
                                 break;
                         }
                     }
@@ -1157,10 +1157,10 @@ namespace ipl {
 
             if (mProcessType == MEMORY_PROC_FMT) {
                 if (pNandSDCardManager->getWorker()->get_sd_state() == NandSDWorker::SD_STATE_READY) {
-                    pSavedataEdit->anmShowBtn0Dialog(MESG_MEMORY_SD_FORMATTED, false, false);
+                    pSavedataEdit->anmShowBtn0Dialog(MESG_DATA_SD_FORMATTED, false, false);
                     mState = MEMORY_STATE_ON_END_FORMAT;
                 } else {
-                    pSavedataEdit->anmShowBtn0Dialog(MESG_MEMORY_SD_NOT_FORMATTED, false, false);
+                    pSavedataEdit->anmShowBtn0Dialog(MESG_DATA_SD_NOT_FORMATTED, false, false);
                     mState = MEMORY_STATE_ON_END_FORMAT;
                 }
             } else {
@@ -1176,12 +1176,12 @@ namespace ipl {
             if (pNandSDCardManager->getAsyncResult() == 0) {
                 switch (mActionIntent) {
                     case MEMORY_INTENT_COPY:
-                        pSavedataEdit->anmShowS2Btn2Dialog(MESG_MEMORY_COPY_Q);
+                        pSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_COPY_Q);
                         mState = MEMORY_STATE_ON_VERIFY_COPY;
                         break;
 
                     case MEMORY_INTENT_MOVE:
-                        pSavedataEdit->anmShowS2Btn2Dialog(MESG_MEMORY_MOVE_Q);
+                        pSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_MOVE_Q);
                         mState = MEMORY_STATE_ON_VERIFY_MOVE;
                         break;
 
@@ -1190,10 +1190,10 @@ namespace ipl {
                 }
                 mActionIntent = MEMORY_INTENT_NONE;
             } else if (pNandSDCardManager->getAsyncResult() == 1) {
-                pSavedataEdit->anmSelectFadeout(MESG_MEMORY_ALREADY_EXISTS_SD);
+                pSavedataEdit->anmSelectFadeout(MESG_DATA_ALREADY_EXISTS_SD);
                 mState = MEMORY_STATE_ON_VERIFY1ST;
             } else {
-                pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_PROCESS_FAILED);
+                pSavedataEdit->anmSelectFadeout(MESG_DATA_SD_PROCESS_FAILED);
                 mState = MEMORY_STATE_ON_VERIFY1ST;
             }
         }
@@ -1215,7 +1215,7 @@ namespace ipl {
         }
         void Memory::on_trig_move() {
             if (pCurrBox->getBanner()->getFilePerms() == 1) {
-                pSavedataEdit->anmSelectFadeout(MESG_MEMORY_FILE_CANT_BE_MOVED);
+                pSavedataEdit->anmSelectFadeout(MESG_DATA_FILE_CANT_BE_MOVED);
                 mState = MEMORY_STATE_ON_VERIFY1ST;
                 return;
             }
@@ -1225,7 +1225,7 @@ namespace ipl {
 
             if (mPage == MEMORY_PAGE_WII) {
                 if (pCurrBox->getBanner()->getFilePerms() == 2) {
-                    pSavedataEdit->anmSelectFadeout(MESG_MEMORY_NO_MOVE_BC_COPY_BAN);
+                    pSavedataEdit->anmSelectFadeout(MESG_DATA_NO_MOVE_BC_COPY_BAN);
                     mState = MEMORY_STATE_ON_VERIFY1ST;
                     return;
                 }
@@ -1233,7 +1233,7 @@ namespace ipl {
                 mSdState = pNandSDCardManager->getWorker()->get_sd_state();
                 switch (mSdState) {
                     case NandSDWorker::SD_STATE_SLOT_EMPTY:
-                        pSavedataEdit->anmSelectFadeout(MESG_MEMORY_NO_SD_CARD);
+                        pSavedataEdit->anmSelectFadeout(MESG_DATA_NO_SD_CARD);
                         mState = MEMORY_STATE_ON_VERIFY1ST;
                         break;
                     case NandSDWorker::SD_STATE_NOT_MOUNTED:
@@ -1243,12 +1243,12 @@ namespace ipl {
                         break;
                     case NandSDWorker::SD_STATE_BROKEN_MEDIA:
                     case NandSDWorker::SD_STATE_ILLEGAL_MEDIA:
-                        pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_DEVICE_BAD);
+                        pSavedataEdit->anmSelectFadeout(MESG_DATA_SD_DEVICE_BAD);
                         mState = MEMORY_STATE_ON_VERIFY1ST;
                         break;
                     case NandSDWorker::SD_STATE_READY:
                         if (pNandSDCardManager->isSDWriteProtected()) {
-                            pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_CARD_LOCKED);
+                            pSavedataEdit->anmSelectFadeout(MESG_DATA_SD_CARD_LOCKED);
                             mState = MEMORY_STATE_ON_VERIFY1ST;
                             return;
                         }
@@ -1259,7 +1259,7 @@ namespace ipl {
 
                     case NandSDWorker::SD_STATE_ERRORED:
                     default:
-                        pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_PROCESS_FAILED);
+                        pSavedataEdit->anmSelectFadeout(MESG_DATA_SD_PROCESS_FAILED);
                         mState = MEMORY_STATE_ON_VERIFY1ST;
                         break;
                 }
@@ -1268,18 +1268,18 @@ namespace ipl {
                 switch (mSdState) {
                     case NandSDWorker::SD_STATE_READY:
                         if (pNandSDCardManager->isSDWriteProtected()) {
-                            pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_CARD_LOCKED);
+                            pSavedataEdit->anmSelectFadeout(MESG_DATA_SD_CARD_LOCKED);
                             mState = MEMORY_STATE_ON_VERIFY1ST;
                         } else if (pNandSDCardManager->getAsyncResult()) {
-                            pSavedataEdit->anmSelectFadeout(MESG_MEMORY_ALREADY_EXISTS_WII);
+                            pSavedataEdit->anmSelectFadeout(MESG_DATA_ALREADY_EXISTS_WII);
                             mState = MEMORY_STATE_ON_VERIFY1ST;
                         } else {
-                            pSavedataEdit->anmShowS2Btn2Dialog(MESG_MEMORY_MOVE_TO_WII_Q);
+                            pSavedataEdit->anmShowS2Btn2Dialog(MESG_DATA_MOVE_TO_WII_Q);
                             mState = MEMORY_STATE_ON_VERIFY_MOVE;
                         }
                         break;
                     default:
-                        pSavedataEdit->anmSelectFadeout(MESG_MEMORY_SD_PROCESS_FAILED);
+                        pSavedataEdit->anmSelectFadeout(MESG_DATA_SD_PROCESS_FAILED);
                         mState = MEMORY_STATE_ON_VERIFY1ST;
                 }
             }
@@ -1294,20 +1294,20 @@ namespace ipl {
                         if (pNandSDCardManager->getWorker()->get_sd_state() == NandSDWorker::SD_STATE_READY) {
                             start_process(MEMORY_PROC_MOV);
                             pNandSDCardManager->cmdMoveSaveNandToSD(pCurrBox);
-                            pSavedataEdit->anmTextFadein(MESG_MEMORY_MOVING_TO_SD);
+                            pSavedataEdit->anmTextFadein(MESG_DATA_MOVING_TO_SD);
                         } else if (pNandSDCardManager->getWorker()->get_sd_state() == NandSDWorker::SD_STATE_SLOT_EMPTY) {
-                            pSavedataEdit->anmTextFadein(MESG_MEMORY_NO_SD_CARD);
+                            pSavedataEdit->anmTextFadein(MESG_DATA_NO_SD_CARD);
                             mState = MEMORY_STATE_ON_END_PROCESS;
                             return;
                         } else {
-                            pSavedataEdit->anmTextFadein(MESG_MEMORY_SD_PROCESS_FAILED);
+                            pSavedataEdit->anmTextFadein(MESG_DATA_SD_PROCESS_FAILED);
                             mState = MEMORY_STATE_ON_END_PROCESS;
                             return;
                         }
                     } else {
                         start_process(MEMORY_PROC_MOV);
                         pNandSDCardManager->cmdMoveSaveSDToNand(pCurrBox);
-                        pSavedataEdit->anmTextFadein(MESG_MEMORY_MOVING_TO_WII);
+                        pSavedataEdit->anmTextFadein(MESG_DATA_MOVING_TO_WII);
                     }
                     break;
                 case DialogWindow::RESULT_RIGHT_BUTTON:

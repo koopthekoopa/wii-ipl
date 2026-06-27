@@ -30,6 +30,8 @@ namespace ipl {
 
         BOOL isTVRCChannel(u32 titleCode);
 
+        bool isTVRCChannel(ESTitleId32 titleCode);
+
         static TVRCManager* getHandle() { return m_handle; }
 
     private:

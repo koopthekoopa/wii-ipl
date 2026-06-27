@@ -17,7 +17,8 @@ namespace ipl {
                 init();
             }
             inline ~Thumbnail() {
-                delete pLytObj;
+                if (pLytObj != NULL)
+                    pLytObj->destroyHeap();
                 delete pLytHeapBuf;
             }
 
@@ -46,6 +47,8 @@ namespace ipl {
 
             inline bool getMatchesTmpTitle() const { return mMatchesTmpTitle; }
             inline void setMatchesTmpTitle(bool newValue) { mMatchesTmpTitle = newValue; }
+
+            inline layout::Object* getLytObj() { return pLytObj; }
 
         private:
             layout::Object* pLytObj;                // 0x000

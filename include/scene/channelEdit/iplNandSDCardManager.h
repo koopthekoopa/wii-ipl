@@ -64,7 +64,7 @@ namespace ipl {
             void cmdMoveSaveNandToSD(SavedataBox*);
             void cmdMoveSaveSDToNand(SavedataBox*);
 
-            bool isWorking();
+            bool isWorking() { return mState != MANAGER_STATE_NORMAL || mCmdQueue.get_current_index() > 0; }
 
             int getAsyncResult();
 
@@ -77,7 +77,12 @@ namespace ipl {
 
             inline bool isTerminated() { return mState == MANAGER_STATE_STOPPED; }
 
-            inline int sdWorkerReadyMaybe() { return mThumbCmdQueue.current == 0 && mCmdQueue.current == 0; }
+            inline BOOL sdWorkerReadyMaybe() { return mThumbCmdQueue.current == 0 && mCmdQueue.current == 0; }
+
+            inline ESTitleId getTmpTitle() { return mTmpTitleId; }
+
+            void disableThumbnailFetching() { mDisableThumbnailFetching = true; }
+            void enableThumbnailFetching() { mDisableThumbnailFetching = false; }
 
         private:
             enum State {
@@ -224,8 +229,7 @@ namespace ipl {
             int mNandBlocksFree;                                 // 0xe8780
             int mSDBlocksFree;                                   // 0xe8784
             u64 mSDBytesFree;                                    // 0xe8788
-            bool unk_0xe8790;                                    // 0xe8790
-            u32 unk_0xe8794;                                     // 0xe8794
+            bool mDisableThumbnailFetching;                      // 0xe8790
             ESTitleId mTmpTitleId;                               // 0xe8798
             bool unk_0xe87a0;                                    // 0xe87a0
         };

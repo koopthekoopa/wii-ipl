@@ -23,7 +23,7 @@ namespace ipl {
         NandSDCardManager::NandSDCardManager(Mode mode)
             : mState(MANAGER_STATE_INIT), mMode(mode), pWorker(NULL), pWorkerWorkBuf(NULL), pWorkerDataBuf(NULL), pNandTitleIds(NULL),
               pSDTitleIds(NULL), mThumbnailArr(), mBannerArr(), pActiveChanAppBox(NULL), pActiveThumbnail(NULL), pActiveSavedataBox(NULL),
-              pActiveBanner(NULL), mNandBlocksFree(-1), mSDBlocksFree(-1), unk_0xe8790(false), mTmpTitleId(0), unk_0xe87a0(false) {
+              pActiveBanner(NULL), mNandBlocksFree(-1), mSDBlocksFree(-1), mDisableThumbnailFetching(false), mTmpTitleId(0), unk_0xe87a0(false) {
             pWorker = new (System::getMem2App()) NandSDWorker();
             pWorkerWorkBuf = System::getMem2App()->alloc(0x3ea60, 0x40);
 
@@ -424,7 +424,7 @@ namespace ipl {
                 if (pWorker->is_working())
                     return;
 
-                if (unk_0xe8790)
+                if (mDisableThumbnailFetching)
                     return;
 
                 GetThumbnailCmd thumbnailCmd = mThumbCmdQueue.get_popped_item();

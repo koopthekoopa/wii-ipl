@@ -68,7 +68,24 @@ namespace ipl {
                 nw4r::ut::List_Init(&mAnmList, 4);
                 nw4r::ut::List_Init(&mPaneList, 0);
             }
-            virtual ~AnmController();
+            virtual ~AnmController() {
+                Anm* currAnm = (Anm*)nw4r::ut::List_GetFirst(&mAnmList);
+                while (currAnm != NULL) {
+                    nw4r::ut::List_Remove(&mAnmList, currAnm);
+
+                    if (currAnm != NULL)
+                        delete currAnm;
+
+                    currAnm = (Anm*)nw4r::ut::List_GetFirst(&mAnmList);
+                }
+
+                AnmPane* currPane = (AnmPane*)nw4r::ut::List_GetFirst(&mPaneList);
+                while (currPane != NULL) {
+                    nw4r::ut::List_Remove(&mPaneList, currPane);
+                    delete currPane;
+                    currPane = (AnmPane*)nw4r::ut::List_GetFirst(&mPaneList);
+                }
+            }
 
             void add_animation(const char* brlan, const char* group);
 
