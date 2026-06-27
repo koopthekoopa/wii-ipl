@@ -315,7 +315,7 @@ namespace ipl {
                 reset_gui(BTN_PICTURE, ANIM_LETTER_PIC_FOCUS_OUT);
             }
 
-            mpLayout->GetRootPane()->SetTranslate(math::VEC3((nw4r::math::VEC3)mFadeAnim.get()));
+            mpLayout->GetRootPane()->SetTranslate(mFadeAnim.get());
             mpLayout->FindPaneByName("N_Memo")->SetTranslate(nw4r::math::VEC3(0.0f, mScroller.get(), 0.0f));
 
             mpLayout->calc();

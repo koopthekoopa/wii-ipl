@@ -35,10 +35,10 @@ namespace ipl {
         class LinearIntp : public Interporation<T> {
         public:
             T get() const {
-                T r = (mEnd * mFrame);
-                r += (mStart * (mMaxFrame - mFrame));
-                r *= 1.0f / getMaxFrame();
-                return r;
+                T r = mEnd * getCurrentFrame();
+                T b = mStart * (mMaxFrame - mFrame);
+                b += r;
+                return b * (f64)(1.0f / getMaxFrame());
             }
 
             T get2() const { return (((mStart * (mMaxFrame - mFrame)) + (mEnd * mFrame)) / mMaxFrame); }
