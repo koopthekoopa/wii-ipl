@@ -1,25 +1,39 @@
 #include "scene/setting/iplNCDSetting.h"
-#include "revolution/ncd.h"
-#include "revolution/net.h"
-#include "revolution/os/OSError.h"
-#include "revolution/sc.h"
+
+#include <revolution/ncd.h>
+#include <revolution/net.h>
+#include <revolution/os/OSError.h>
+#include <revolution/sc.h>
+
 #include "scene/setting/iplParental.h"
+
 #include "utility/iplCharacterCode.h"
+
 #include <cstdio>
 #include <string.h>
-// todo: check <> vs "" imports
 
 #define IPL_NCD_SETTING_CONNECT_TEST_FLAG 5
 #define IPL_NCD_SETTING_DHCP_FLAG 1
 #define IPL_NCD_SETTING_DNS_FLAG 2
 
 namespace ipl {
+    namespace scene {
+        NCDAossConfig m_AOSSConfig;
+        NCDRakuApConfig m_RakuConfig;
+    }  // namespace scene
     namespace ncd {
-        int NCDSetting::init() {
+        NCDConfig NCDSetting::mConfig;
+        NCDConfig NCDSetting::mSaveConfig;
+        u8 NCDSetting::mMac[0x20];
+
+        u16 NCDSetting::mID;
+        u32 NCDSetting::mMacNum;
+
+        void NCDSetting::init() {
             memset(&mConfig, 0, sizeof(mConfig));
             int status = NCDReadConfig(&mConfig);
             OSReport("NCDReadConfig: %d\n", status);
-            return makeMacAddr();
+            makeMacAddr();
         }
 
         void NCDSetting::initSetID(unsigned short setID) {
@@ -57,9 +71,9 @@ namespace ipl {
             mConfig.profiles[mID].flags &= 0xfe;
         }
 
-        void NCDSetting::setSSID(const char* newSSID) {
+        void NCDSetting::setSSID(u8* newSSID) {
             memcpy(mConfig.profiles[mID].netif.wireless.config.manual.ssid, newSSID, 32);
-            mConfig.profiles[mID].netif.wireless.config.manual.ssidLength = strlen(newSSID);
+            mConfig.profiles[mID].netif.wireless.config.manual.ssidLength = strlen((char*)newSSID);
         }
 
         void NCDSetting::setPrivacyMode(u16 newMode) {
@@ -212,52 +226,59 @@ namespace ipl {
             }
         }
 
-        int NCDSetting::checkProxy(char* param_1) {
-            int ret;
+        // Proxy rules:
+        // - At most 255 chars
+        // - Cannot start with a dot
+        // - All chars must be alphanumeric, hypen, dot, or underscore
+        // - Cannot have consecutive dots
+        bool NCDSetting::checkProxy(char* proxy) {
+            int len;
+            char c;
+            int i;
 
-            int len = strlen(param_1);
-            if (len >= 256) {
-                ret = 0;
-            } else {
-                if (param_1[0] == '.') {
-                    ret = 0;
-                } else {
-                    for (int i = 0; i < len; i++) {
-                        char c = param_1[i];
-                        if (((c < '0' || '9' < c) && (c < 'a' || 'z' < c)) && ((((c < 'A' || 'Z' < c) && c != '-') && (c != '.' && c != '_')))) {
-                            return 0;
-                        }
-                        if (c == '.' && param_1[i + 1] == '.') {
-                            return 0;
-                        }
-                    }
-                    ret = 1;
+            len = strlen(proxy);
+            if (len >= 256)
+                return false;
+            if (proxy[0] == '.')
+                return false;
+
+            for (i = 0; i < len; i++) {
+                c = proxy[i];
+                // Allowed characters are alphanumeric, hyphen, dot, and underscore
+                // [0-9a-zA-Z_\-\.]
+                if ((c < '0' || '9' < c) && (c < 'a' || 'z' < c) && (c < 'A' || 'Z' < c) && c != '-' && c != '.' && c != '_') {
+                    return false;
+                }
+                // No consecutive dots
+                if (c == '.' && proxy[i + 1] == '.') {
+                    return false;
                 }
             }
-            return ret;
+            return true;
         }
 
-        int NCDSetting::checkProxyBasic(char* param_1) {
-            int ret;
-
-            int len = strlen(param_1);
+        // Checks that proxy is at most 32 chars and that all chars are
+        // printable ascii
+        bool NCDSetting::checkProxyBasic(char* proxy) {
+            int len = strlen(proxy);
             if (len >= 33) {
-                ret = 0;
+                return false;
             } else {
                 for (int i = 0; i < len; i++) {
-                    if ((param_1[i] < ' ') || (param_1[i] > '~')) {
-                        return 0;
+                    if ((proxy[i] < ' ') || (proxy[i] > '~')) {
+                        return false;
                     }
                 }
-                ret = 1;
+                return true;
             }
-            return ret;
         }
 
         void NCDSetting::adjustNCDData_() {
-            int i = 0;
-            int theOne = -1;
-            for (; i < 3; i++) {
+            int i;
+            int theOne;
+            theOne = -1;
+
+            for (i = 0; i < 3; i++) {
                 if ((mConfig.profiles[i].flags & 0x80) != 0) {
                     adjustSelectMedia_(i);
                     adjustEnableFlag_(i);
@@ -279,66 +300,69 @@ namespace ipl {
         }
 
         int NCDSetting::checkWEPKey(char* key) {
-            int keyLen = strlen(key);
-            int ret = -1;
+            int keyLen;
+            int ret;
             u8 asciiKey[14];
+
+            keyLen = strlen(key);
+            ret = -1;
             memset(asciiKey, 0, sizeof(asciiKey));
 
-            if (keyLen == 0)
-                return 0;
+            if (keyLen == 0) {
+                ret = 0;
+            } else {
+                if ((u16)getPrivacyMode() > 1) {
+                    if (8 <= keyLen && keyLen < 64) {
+                        ret = keyLen;
+                    } else if (keyLen == 64) {
+                        for (int i = 0; i < 64; i++) {
+                            char c = key[i];
+                            if ((((c < '0') || ('9' < c)) && ((c < 'A' || ('F' < c)))) && ((c < 'a' || ('f' < c)))) {
+                                return -1;
+                            }
+                        }
+                        ret = keyLen;
+                    }
+                } else {
+                    if (keyLen == 10 || keyLen == 26) {
+                        int i = 0, outLen = 0;
+                        while (i < keyLen) {
+                            if (!convert16toASCII(key[i], key[i + 1], &asciiKey[outLen]))
+                                return -1;
+                            i += 2;
+                            outLen++;
+                        }
 
-            int privacyMode = getPrivacyMode();
-
-            if ((privacyMode & 0xFFFF) > 1) {
-                if (keyLen < 8 || keyLen >= 64) {
-                    return keyLen;
-                }
-
-                if (keyLen == 64) {
-                    for (int i = 0; i < 64; i++) {
-                        char c = key[i];
-                        if ((((c < '0') || ('9' < c)) && ((c < 'A' || ('F' < c)))) && ((c < 'a' || ('f' < c)))) {
+                        if (i == 10 || i == 26) {
+                            memcpy(key, asciiKey, i);
+                            mConfig.profiles[mID].netif.wireless.config.aoss.wep40.key[1][1] = 1;
+                            return i / 2;
+                        } else {
+                            // I think this is unreachable?
                             return -1;
                         }
+                    } else if (keyLen == 5 || keyLen == 13) {
+                        mConfig.profiles[mID].netif.wireless.config.aoss.wep40.key[1][1] = 0;
+                        ret = keyLen;
                     }
-                    ret = keyLen;
                 }
-
-                return ret;
             }
-
-            if (keyLen == 10 || keyLen == 26) {
-                int outLen = 0;
-                for (int i = 0; i < keyLen; i += 2) {
-                    if (convert16toASCII(key[i], key[i + 1], &asciiKey[outLen]) == 0)
-                        return -1;
-                    outLen++;
-                }
-
-                memcpy(key, asciiKey, keyLen);
-                mConfig.profiles[mID].netif.wireless.config.aoss.wep40.key[1][1] = 1;
-                return keyLen / 2;
-            }
-
-            if (keyLen == 5 || keyLen == 13) {
-                mConfig.profiles[mID].netif.wireless.config.aoss.wep40.key[1][1] = 0;
-                return keyLen;
-            }
-
-            return -1;
+            return ret;
         }
 
         void NCDSetting::setPrivacy(unsigned char* newKey, int len) {
-            u16 mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.option;
+            int i;
+            u8 mode;
+            mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.reserved[0];
             memset(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104, 0, 0x44);
-            mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.option = mode;
+            mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.reserved[0] = mode;
             if (len == 0) {
                 mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode = 0;
             } else {
                 switch (mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode) {
                     case 1:
                     case 2:
-                        for (int i = 0; i < 4; i++) {
+                        for (i = 0; i < 4; i++) {
                             if (len == 5) {
                                 mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode = 1;
                                 memcpy(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.key[i], newKey, 5);
@@ -465,35 +489,35 @@ namespace ipl {
             return mConfig.profiles[mID].proxy.http.authType;
         }
 
-        unsigned int NCDSetting::checkChangeEnable() {
+        bool NCDSetting::checkChangeEnable() {
             u8 configMethod = mConfig.profiles[mID].netif.wireless.configMethod;
-            return (1 - ((u8)configMethod + 0xff & 0xff)) >> (u8)0x1f;
+            return (u8)(configMethod + (u8)-1) > 1;
         }
 
-        undefined4 NCDSetting::convert16toASCII(char param_1, char param_2, unsigned char* param_3) {
-            int ret = true;
+        bool NCDSetting::convert16toASCII(char hexHi, char hexLo, unsigned char* byte) {
+            bool inRange = true;
 
-            if (param_1 >= '0' && param_1 <= '9') {
-                *param_3 = (param_1 - '0') << 4;
-            } else if (param_1 >= 'A' && param_1 <= 'F') {
-                *param_3 = (param_1 - 'A' + 10) << 4;
-            } else if (param_1 >= 'a' && param_1 <= 'f') {
-                *param_3 = (param_1 - 'a' + 10) << 4;
+            if (hexHi >= '0' && hexHi <= '9') {
+                *byte = (hexHi - '0') << 4;
+            } else if (hexHi >= 'A' && hexHi <= 'F') {
+                *byte = (hexHi - 'A' + 10) << 4;
+            } else if (hexHi >= 'a' && hexHi <= 'f') {
+                *byte = (hexHi - 'a' + 10) << 4;
             } else {
-                ret = false;
+                inRange = false;
             }
 
-            if (param_2 >= '0' && param_2 <= '9') {
-                *param_3 = *param_3 + ((param_2 - '0') << 24);
-            } else if (param_2 >= 'A' && param_2 <= 'F') {
-                *param_3 = *param_3 + ((param_2 - 'A' + 10) << 24);
-            } else if (param_2 >= 'a' && param_2 <= 'f') {
-                *param_3 = *param_3 + ((param_2 - 'a' + 10) << 24);
+            if (hexLo >= '0' && hexLo <= '9') {
+                *byte = *byte + (u8)(hexLo - '0');
+            } else if (hexLo >= 'A' && hexLo <= 'F') {
+                *byte = *byte + (u8)(hexLo - 'A' + 10);
+            } else if (hexLo >= 'a' && hexLo <= 'f') {
+                *byte = *byte + (u8)(hexLo - 'a' + 10);
             } else {
-                ret = false;
+                inRange = false;
             }
 
-            return ret;
+            return inRange;
         }
 
         void NCDSetting::setMTU(long mtu) {
@@ -566,12 +590,19 @@ namespace ipl {
             NCDWriteConfig(&mConfig);
         }
 
+        void NCDSetting::setRakuParams(const NCDApConfig& src) {
+            mConfig.profiles[mID].netif.wireless.config.rakuraku = src;
+        }
+        void NCDSetting::setAOSSParams(const NCDAossConfig& src) {
+            mConfig.profiles[mID].netif.wireless.config.aoss = src;
+        }
+
         u16 NCDSetting::getID() {
             return mID & 0xff;
         }
 
-        u8* NCDSetting::getSSID() {
-            return mConfig.profiles[mID].netif.wireless.config.manual.ssid;
+        NCDApConfig* NCDSetting::getSSID() {
+            return &mConfig.profiles[mID].netif.wireless.config.manual;
         }
 
         u16 NCDSetting::getUseProfileID() {
@@ -587,8 +618,8 @@ namespace ipl {
             return 3;
         }
 
-        int NCDSetting::getIP() {
-            return *(int*)mConfig.profiles[mID].ip.addr;
+        NCDIpProfile* NCDSetting::getIP() {
+            return &mConfig.profiles[mID].ip;
         }
 
         u32 NCDSetting::getMacNum() {
@@ -733,36 +764,40 @@ namespace ipl {
             }
         }
 
-        int NCDSetting::makeMacAddr() {
-            u8 macAddress[6];
-            long long uVar2;
-            char* mac;
-            u32 local_2d;
+        void NCDSetting::makeMacAddr() {
+            u8 macAddress[7];
+            u64 macRemainder;
+            union {
+                char str[sizeof("XX-XX-XX-XX-XX-XX")];
+                u64 num;
+                u8 bytes[8];
+            } PACKED mac;
 
             NCDErr err = NETGetWirelessMacAddress(macAddress);
-            if (err != -4) {
-                if (err < -4) {
-                    if (err == -8) {
-                        goto fail;
-                    }
-                } else if (err == 0) {
-                    sprintf(mac, "%02x-%02x-%02x-%02x-%02x-%02x", macAddress[0], macAddress[1], macAddress[2], macAddress[3], macAddress[4],
+            switch (err) {
+                case 0:
+                    sprintf(mac.str, "%02x-%02x-%02x-%02x-%02x-%02x", macAddress[0], macAddress[1], macAddress[2], macAddress[3], macAddress[4],
                             macAddress[5]);
                     OSReport("MAC: %s\n", &mac);
 
                     ipl::utility::CharacterCode::ANSIToUTF8((char*)mMac, (u8*)&mac);
 
-                    memset(&mac, 0, 18);
-                    memcpy(&mac, &macAddress, 6);
-                    uVar2 = *mac % 100000000;
-                    // uVar2 = __mod2u(local_31, local_2d, 0, 100000000);
-                    mMacNum = (int)uVar2;
-                    OSReport("%lld %d\n", mMacNum, mac, local_2d, mMacNum);
-                }
-                OSPanic("iplNCDSetting.cpp", 0x43b, "Unrecoverable Error!!");
+                    memset(&mac, 0, sizeof(mac.str));
+                    memcpy(mac.bytes + 2, &macAddress, 6);
+
+                    mMacNum = mac.num % 100000000;
+                    OSReport("%lld %d\n", mMacNum, mac.num, mMacNum);
+                    return;
+
+                case -8:
+                case -4:
+                    OSPanic(__FILE__, 0x436, "try again!!");
+                    return;
+
+                default:
+                    OSPanic(__FILE__, 0x43b, "Unrecoverable Error!!");
+                    return;
             }
-        fail:
-            OSPanic("iplNCDSetting.cpp", 0x436, "try again!!");
         }
     }  // namespace ncd
 }  // namespace ipl

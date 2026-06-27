@@ -78,9 +78,12 @@ namespace ipl {
         }
 
         u32 Parental::checkRestrictions() {
-            // what even
-            return (m_sc.wwwRestrict == 0) & 4 | -(m_sc.netContentRestrict & 1) & 8 | -((m_sc.netContentRestrict >> 1) & 1) & 2 |
-                   (m_sc.netContentRestrict >> 2) & 1;
+            int restrictions = 0;
+            restrictions |= -(m_sc.netContentRestrict & 1) & 0b1000;
+            restrictions |= -((m_sc.netContentRestrict >> 1) & 1) & 0b0010;
+            restrictions |= (m_sc.netContentRestrict >> 2) & 0b0001;
+            restrictions |= -(m_sc.wwwRestrict != 0) & 0b0100;
+            return restrictions;
         }
 
         BOOL Parental::checkPass(const char* pass) {
@@ -193,8 +196,13 @@ namespace ipl {
         }
 
         void Parental::setRestrictions(u32 restrictions) {
+            m_sc.netContentRestrict = 0;
             m_sc.wwwRestrict = (restrictions >> 2) & 1;
-            m_sc.netContentRestrict = ((((((restrictions >> 1) & 1) * -1) & 2 & ~1) | ((restrictions >> 3) & 1)) & ~4) | (-(restrictions & 1) & 4);
+            m_sc.netContentRestrict |= -((restrictions >> 1) & 1) & 0b010;
+            m_sc.netContentRestrict |= (restrictions >> 3) & 0b001;
+            m_sc.netContentRestrict |= -((restrictions >> 0) & 1) & 0b100;
+            // m_sc.netContentRestrict = newNetContentRestrict;
+            // m_sc.netContentRestrict = ((((((restrictions >> 1) & 1) * -1) & 2 & ~1) | ((restrictions >> 3) & 1)) & ~4) | (-(restrictions & 1) & 4);
         }
 
         void Parental::adjustOgn(u8 country) {

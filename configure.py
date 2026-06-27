@@ -860,7 +860,7 @@ config.libs = [
     IPLSection("setting", [
             Object(NonMatching, "scene/setting/iplSetting.cpp"),
             Object(NonMatching, "scene/setting/iplSensitivity.cpp"),
-            Object(NonMatching, "scene/setting/iplNCDSetting.cpp"),
+            Object(Matching, "scene/setting/iplNCDSetting.cpp"),
             Object(NonMatching, "scene/setting/iplParental.cpp"),
             Object(NonMatching, "scene/setting/iplAPScanThread.cpp"),
             Object(NonMatching, "scene/setting/iplUSBAP.cpp"),
@@ -881,7 +881,7 @@ config.libs = [
     IPLSection("sceneSystem", [
             Object(Matching,    "scene/sceneSystem/iplSceneBase.cpp"),
             Object(Matching,    "scene/sceneSystem/iplSceneCreator.cpp"),
-            Object(NonMatching, "scene/sceneSystem/iplSceneManager.cpp"),
+            Object(Matching, "scene/sceneSystem/iplSceneManager.cpp"),
             Object(Matching,    "scene/sceneSystem/iplFaderSceneBase.cpp"),
         ]
     ),

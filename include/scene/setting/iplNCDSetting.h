@@ -6,16 +6,21 @@
 #define unk undefined
 
 namespace ipl {
+    namespace scene {
+        extern NCDAossConfig m_AOSSConfig;
+        extern NCDRakuApConfig m_RakuConfig;
+    }  // namespace scene
     namespace ncd {
         class NCDSetting {
         public:
             static NCDConfig mConfig;
-            static u16 mID;
-            static u8 mMac[];
-            static u32 mMacNum;
             static NCDConfig mSaveConfig;
+            static u8 mMac[];
 
-            static int init();
+            static u16 mID;
+            static u32 mMacNum;
+
+            static void init();
             static void initSetID(unsigned short);
             static int checkFlag(int);
             static int checkThisFlag();
@@ -26,11 +31,11 @@ namespace ipl {
             static void checkDHCP_();
             static u8 checkProxyFlag();
             static u8 checkBasic();
-            static unsigned int checkChangeEnable();
-            static undefined4 convert16toASCII(char, char, unsigned char*);
+            static bool checkChangeEnable();
+            static bool convert16toASCII(char, char, unsigned char*);
             static int checkWEPKey(char*);
-            static int checkProxy(char*);
-            static int checkProxyBasic(char*);
+            static bool checkProxy(char*);
+            static bool checkProxyBasic(char*);
             static void adjustNCDData_();
             static void adjustSelectMedia_(int);
             static void adjustEnableFlag_(int);
@@ -42,7 +47,7 @@ namespace ipl {
             static void setWired();
             static void setWireless(unsigned char);
             static void changeConnectType(unsigned char);
-            static void setSSID(const char*);
+            static void setSSID(u8*);
             static void setPrivacyMode(unsigned short);
             static void setWDPrivacyMode(unsigned short);
             static void setPrivacy(unsigned char*, int);
@@ -60,16 +65,16 @@ namespace ipl {
             static void setAOSSParams(const NCDAossConfig&);
             static void setRakuParams(const NCDApConfig&);
             static u16 getID();
-            static u8* getSSID();
+            static NCDApConfig* getSSID();
             static u16 getUseProfileID();
             static int getPrivacyMode();
             static u16 getNCDPrivacyMode();
             static u8* getPrivacy();
             static u16 getPrivacyLen();
-            static int getIP();
+            static NCDIpProfile* getIP();
             static u32 getMacNum();
             static u8* getMacAddr();
-            static int makeMacAddr();
+            static void makeMacAddr();
             static NCDProxyProfile* getProxy();
             static s32 getMTU();
             static NCDConfig* getData();

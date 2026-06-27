@@ -10,10 +10,10 @@ namespace ipl {
     namespace scene {
         void Command::clear() {
             memset(this, 0, sizeof(Command));
-            type = 0;
-            newRootID = 0;
-            prevSceneID = 0;
-            newSceneID = 0;
+            data.type = 0;
+            data.newRootID = 0;
+            data.prevSceneID = 0;
+            data.newSceneID = 0;
         }
 
         Manager::Manager(EGG::Heap* heap)
@@ -57,7 +57,7 @@ namespace ipl {
             } else {
                 if (mCommands.get_current_index() != 0) {
                     const Command& popped = mCommands.get_popped_item();
-                    switch (popped.type) {
+                    switch (popped.data.type) {
                         case COMMAND_CREATE_CHILD: {
                             createScene(popped);
                             mbCreatedReserved = true;
@@ -72,13 +72,13 @@ namespace ipl {
                         case COMMAND_RESERVE_ALL_DESTRUCT: {
                             if (mbDestroySyncTask) {
                                 mPrevRootSceneID = mRootSceneID;
-                                mRootSceneID = popped.newRootID;
+                                mRootSceneID = popped.data.newRootID;
 
                                 destroyScene(mpRootScene);
 
                                 System::reinit();
 
-                                createRootScene(popped.newRootID, popped.args);
+                                createRootScene(popped.data.newRootID, popped.data.args);
                                 mCommands.pop();
 
                                 mbDestroySyncTask = false;
@@ -156,7 +156,7 @@ namespace ipl {
                     stack18.setPtr(stack18->getParent());
                 }
                 if ((stack10->mScnState & SceneObj::SCN_STATE_DESTROY_REQ) != 0) {
-                    if (mReservedCommand.prevSceneID == stack10->mSceneID) {
+                    if (mReservedCommand.data.prevSceneID == stack10->mSceneID) {
                         mbCreatedReserved = true;
                     }
                     destroyScene(&*stack10);
@@ -166,7 +166,7 @@ namespace ipl {
         }
 
         void Manager::createScene(const Command& command) {
-            mpReservedScene = createScene(command.newSceneID, command.prevSceneID, command.args);
+            mpReservedScene = createScene(command.data.newSceneID, command.data.prevSceneID, command.data.args);
             mReservedCommand = command;
             mbCreatedReserved = false;
             mpReservedScene->do_prepare();
@@ -225,14 +225,14 @@ namespace ipl {
         }
 
         void Manager::attachReservedScene() {
-            if (isReady(mReservedCommand.newSceneID) || mpReservedScene && mpReservedScene->isReady()) {
-                SceneObj* scene = mReservedCommand.parent;
+            if (isReady(mReservedCommand.data.newSceneID) || mpReservedScene && mpReservedScene->isReady()) {
+                SceneObj* scene = mReservedCommand.data.parent;
                 if (!scene) {
                     scene = mpRootScene;
                 }
 
-                if (mReservedCommand.child) {
-                    scene->insert(mpReservedScene, mReservedCommand.child);
+                if (mReservedCommand.data.child) {
+                    scene->insert(mpReservedScene, mReservedCommand.data.child);
                 } else {
                     scene->attach(mpReservedScene);
                 }
