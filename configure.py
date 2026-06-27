@@ -685,13 +685,13 @@ config.libs = [
     IPLSection("iplwww", [
             Object(NonMatching, "iplwww/www_browser.cpp"),
             Object(Matching,    "iplwww/www_message.cpp"),
-            Object(NonMatching, "iplwww/www_surface.cpp"),
+            Object(Matching,    "iplwww/www_surface.cpp"),
             Object(Matching,    "iplwww/www_thread.cpp"),
             Object(Matching,    "iplwww/www_print.cpp"),
             Object(NonMatching, "iplwww/www_window.cpp"),
-            Object(NonMatching, "iplwww/www_transition.cpp"),
-            Object(NonMatching, "iplwww/www_wiisetting.cpp"),
-            Object(NonMatching, "iplwww/www_arcreader.cpp"),
+            Object(Matching,    "iplwww/www_trasition.cpp"),
+            Object(Equivalent,  "iplwww/www_wiisetting.cpp"),
+            Object(Matching,    "iplwww/www_arcreader.cpp"),
         ]
     ),
     IPLSection("homebutton", [

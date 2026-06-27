@@ -537,6 +537,8 @@ namespace ipl {
         /** @return The aspect ratio. */
         static BOOL getAspectRatio() { return smArg.mpFramework->getAspectRatio(); }
 
+        static inline void resetFrameworkRenderMode() { smArg.mpFramework->resetRenderMode(); }
+
         /*==============================*/
         /*         SYSTEM FADING        */
         /*==============================*/

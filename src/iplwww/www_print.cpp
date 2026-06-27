@@ -29,7 +29,7 @@ namespace ext_ead {
 
                 str[WWW_REPORT_LENGTH + 1] = str[WWW_REPORT_LENGTH] = 0;
 
-                OSReport("%s %s", Message[type], str);
+                OSReport("%s %s", reportInfo.MessageArr[type], str);
 #endif  // ENABLE_IPL_WWW_REPORT
             }
         }  // namespace print
