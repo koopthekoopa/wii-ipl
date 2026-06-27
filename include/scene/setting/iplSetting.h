@@ -10,6 +10,10 @@ namespace ipl {
             Setting(EGG::Heap * heap, int arg);
             void setInitializeResult(bool, int);
 
+            u16 getProfileID();
+            void setConnectTestResult(int, int, bool, int);
+            int getUpdateTiming();
+
             enum {
                 ARG_NORMAL_PAGE = 0,
                 ARG_INTERNET_SETTING,

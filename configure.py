@@ -818,15 +818,15 @@ config.libs = [
         ]
     ),
     IPLSection("nakamuraTest", [
-            Object(NonMatching, "scene/nakamuraTest/iplContest.cpp"),
+            Object(Matching, "scene/nakamuraTest/iplContest.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/natneg/NATify.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/darray.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/common/gsAvailable.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/nonport.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/common/gsSHA1.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/natneg/natneg.c"),
-            Object(NonMatching, "scene/nakamuraTest/iplNakamuraTest.cpp"),
-            Object(NonMatching, "scene/nakamuraTest/iplNetSetup.cpp"),
+            Object(Matching, "scene/nakamuraTest/iplNakamuraTest.cpp"),
+            Object(Matching, "scene/nakamuraTest/iplNetSetup.cpp"),
         ]
     ),
     IPLSection("parentalDialog", [
