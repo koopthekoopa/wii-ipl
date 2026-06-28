@@ -87,7 +87,8 @@ namespace nw4r {
         }
 
         void FontRefLink::Set(const char* name, ut::Font* pFont) {
-            strcpy(mFontName, name);
+            strncpy(mFontName, name, RESOURCE_NAME_MAX - 1);
+            mFontName[RESOURCE_NAME_MAX - 1] = '\0';
             mpFont = pFont;
         }
 
