@@ -32,6 +32,10 @@ namespace ext_ead {
 
             unk_0x2bc = 0;
             unk_0x2c0 = 0;
+
+            struct {
+                int v0, v1;
+            } unused = {0, 0};
         }
         BrowserWindow::~BrowserWindow() {
             CloseWindow();

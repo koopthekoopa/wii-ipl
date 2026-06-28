@@ -79,6 +79,11 @@ typedef struct RSOExportTable {
     u32 hash;       // 0x0C
 } RSOExportTable;
 
+typedef struct RSOExportFuncTable {
+    const char* symbol_name;  // 0x00
+    u32* symbol_ptr;          // 0x04
+} RSOExportFuncTable;
+
 typedef enum {
     RSO_FL_NON,
     RSO_FL_INTERNAL,

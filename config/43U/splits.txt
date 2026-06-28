@@ -831,6 +831,7 @@ src/scene/sdChannelMemory/iplSDMemory.cpp:
 	.sdata      start:0x81696F50 end:0x81696FE8
 
 src/scene/setting/iplSetting.cpp:
+	.bss        start:0x810B83F0 end:0x810B85B8
 	.text       start:0x813F0774 end:0x813F9B70
 	.rodata     start:0x81610948 end:0x81610BC8
 	.data       start:0x816568E8 end:0x81657898
@@ -843,7 +844,7 @@ src/scene/setting/iplSensitivity.cpp:
 	.sdata2     start:0x81694C40 end:0x81694C78
 
 src/scene/setting/iplNCDSetting.cpp:
-	.bss        start:0x810B83F0 end:0x810BBC90
+	.bss        start:0x810B85B8 end:0x810BBC90
 	.text       start:0x813F9FC8 end:0x813FBA54
 	.data       start:0x81657898 end:0x81657950
 	.sbss       start:0x81698BF0 end:0x81698BF8

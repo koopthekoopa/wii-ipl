@@ -334,7 +334,7 @@ src/iplwww/www_surface.cpp:
 	.text       start:0x8136D2CC end:0x8136DA48
 	.data       start:0x81617BC8 end:0x81618970
 	.sdata      start:0x8166A910 end:0x8166A918
-	.sbss       start:0x8166CF78 end:0x8166CF90
+	.sbss       start:0x8166CF78 end:0x8166CF98
 
 src/iplwww/www_thread.cpp:
 	.text       start:0x8136DA48 end:0x8136DC28
@@ -353,7 +353,7 @@ src/iplwww/www_trasition.cpp:
 	.text       start:0x8136E9D4 end:0x8136ED64
 	.data       start:0x81618EA8 end:0x81618F58
 	.sdata      start:0x8166A920 end:0x8166A930
-	.sbss       start:0x8166CF90 end:0x8166CF98
+	.sbss       start:0x8166CF98 end:0x8166CFA0
 
 src/iplwww/www_wiisetting.cpp:
 	.bss        start:0x8108A4B8 end:0x8108A520
@@ -362,7 +362,7 @@ src/iplwww/www_wiisetting.cpp:
 	.data       start:0x81618F58 end:0x81619968
 	.sdata2     start:0x81668D18 end:0x81668D38
 	.sdata      start:0x8166A930 end:0x8166AA70
-	.sbss       start:0x8166CF98 end:0x8166CFC0
+	.sbss       start:0x8166CFA0 end:0x8166CFC0
 
 src/iplwww/www_arcreader.cpp:
 	.text       start:0x81370584 end:0x8137093C
@@ -833,6 +833,7 @@ src/scene/sdChannelMemory/iplSDMemory.cpp:
 	.sdata      start:0x8166B570 end:0x8166B608
 
 src/scene/setting/iplSetting.cpp:
+	.bss        start:0x810B83F0 end:0x810B85B8
 	.text       start:0x813EFC6C end:0x813F9004
 	.rodata     start:0x815E9508 end:0x815E9788
 	.data       start:0x8162B7D0 end:0x8162C780
@@ -845,7 +846,7 @@ src/scene/setting/iplSensitivity.cpp:
 	.sdata2     start:0x816692C0 end:0x816692F8
 
 src/scene/setting/iplNCDSetting.cpp:
-	.bss        start:0x810B83F0 end:0x810BBC90
+	.bss        start:0x810B85B8 end:0x810BBC90
 	.text       start:0x813F945C end:0x813FAEE8
 	.data       start:0x8162C780 end:0x8162C838
 	.sbss       start:0x8166D208 end:0x8166D210

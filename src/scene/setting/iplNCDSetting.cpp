@@ -2,7 +2,7 @@
 
 #include <revolution/ncd.h>
 #include <revolution/net.h>
-#include <revolution/os/OSError.h>
+#include <revolution/os.h>
 #include <revolution/sc.h>
 
 #include "scene/setting/iplParental.h"
@@ -10,17 +10,9 @@
 #include "utility/iplCharacterCode.h"
 
 #include <cstdio>
-#include <string.h>
-
-#define IPL_NCD_SETTING_CONNECT_TEST_FLAG 5
-#define IPL_NCD_SETTING_DHCP_FLAG 1
-#define IPL_NCD_SETTING_DNS_FLAG 2
+#include <cstring>
 
 namespace ipl {
-    namespace scene {
-        NCDAossConfig m_AOSSConfig;
-        NCDRakuApConfig m_RakuConfig;
-    }  // namespace scene
     namespace ncd {
         NCDConfig NCDSetting::mConfig;
         NCDConfig NCDSetting::mSaveConfig;
@@ -36,194 +28,215 @@ namespace ipl {
             makeMacAddr();
         }
 
-        void NCDSetting::initSetID(unsigned short setID) {
+        void NCDSetting::initSetID(u16 setID) {
             mID = setID;
+        }
+
+        // If you change one thing in this function, checkFlag will not match.
+        // Probably some stripped out function, but... I don't get MWCC
+#ifndef NON_MATCHING
+        void NCDSetting::matchHack() {
+            u16 sVar2;
+
+            if (mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode == 2 ||
+                (strlen((const char*)mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.wep104.key) > 20)) {
+                sVar2 = 2;
+            }
+
+            if (mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode != sVar2) {
+                mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode = sVar2;
+            }
+        }
+#endif
+
+        int NCDSetting::checkFlag(int id) {
+            int ret = 0;
+            int flags = mConfig.profiles[id].flags;
+            if (flags & NCD_DHCP_FLAG) {
+                return 1;
+            }
+            if (mConfig.profiles[id].netif.wireless.config.manual.ssidLength == 0 && mConfig.profiles[id].netif.wireless.configMethod == 0 &&
+                mConfig.profiles[id].netif.wireless.config.manual.privacy.mode == 0) {
+                return 0;
+            }
+            int bVar1 = mConfig.profiles[id].netif.wireless.configMethod;
+
+            switch (bVar1) {
+                case 0: {
+                    ret = 2;
+                    break;
+                }
+                case 1: {
+                    ret = 3;
+                    break;
+                }
+                case 2: {
+                    ret = 4;
+                    break;
+                }
+                case 3: {
+                    ret = 5;
+                    break;
+                }
+            }
+            return ret;
         }
 
         int NCDSetting::checkThisFlag() {
             return checkFlag(mID);
         }
 
-        void NCDSetting::setWired() {
-            memset(&mConfig.profiles[mID], 0, sizeof(NCDProfile));
-            mConfig.version = 0;
-            mConfig.linkTimeout = 0;
-            mConfig.profiles[mID].flags = 7;
-        }
-
-        void NCDSetting::setWireless(u8 configMethod) {
-            memset(&mConfig.profiles[mID], 0, 0x91c);
-
-            mConfig.version = 0;
-            mConfig.linkTimeout = 0;
-            mConfig.profiles[mID].netif.wireless.configMethod = configMethod;
-            mConfig.profiles[mID].flags = 6;
-            if (configMethod == 0) {
-                memcpy(&mSaveConfig, &mConfig, sizeof(NCDConfig));
-            }
-        }
-
-        void NCDSetting::changeConnectType(u8 connectType) {
-            if (connectType == 1) {
-                mConfig.profiles[mID].flags |= 1;
-                return;
-            }
-            mConfig.profiles[mID].flags &= 0xfe;
-        }
-
-        void NCDSetting::setSSID(u8* newSSID) {
-            memcpy(mConfig.profiles[mID].netif.wireless.config.manual.ssid, newSSID, 32);
-            mConfig.profiles[mID].netif.wireless.config.manual.ssidLength = strlen((char*)newSSID);
-        }
-
-        void NCDSetting::setPrivacyMode(u16 newMode) {
-            u16 sVar2;
-
-            switch (newMode) {
-                case 0:
-                    sVar2 = 0;
-                    break;
-                case 1:
-                    if (mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode == 2 ||
-                        (strlen((const char*)mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.wep104.key) > 20)) {
-                        sVar2 = 2;
-                    } else {
-                        sVar2 = 1;
-                    }
-                    break;
-                case 2:
-                    sVar2 = 4;
-                    break;
-                case 3:
-                    sVar2 = 6;
-                    break;
-                case 4:
-                    sVar2 = 5;
-                    break;
-                default:
-                    sVar2 = 0;
-                    break;
-            }
-            if (mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode != sVar2) {
-                mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode = sVar2;
-            }
-        }
-
-        void NCDSetting::setIP(NCDIpProfile* ip) {
-            memcpy(&mConfig.profiles[mID].ip.addr, ip->addr, 4);
-            memcpy(&mConfig.profiles[mID].ip.netmask, ip->netmask, 4);
-            memcpy(&mConfig.profiles[mID].ip.gateway, ip->gateway, 4);
-        }
-
-        void NCDSetting::setDNS(NCDIpProfile* ip) {
-            memcpy(&mConfig.profiles[mID].ip.dns1, ip->dns1, 4);
-            memcpy(&mConfig.profiles[mID].ip.dns2, ip->dns2, 4);
-        }
-
-        void NCDSetting::setWDPrivacyMode(u16 mode) {
-            u16 uVar1;
-
-            switch (mode) {
-                case 0:
-                    uVar1 = 0;
-                    break;
-                case 1:
-                    uVar1 = 1;
-                    break;
-                case 2:
-                    uVar1 = 2;
-                    break;
-                case 4:
-                    uVar1 = 4;
-                    break;
-                case 5:
-                    uVar1 = 5;
-                    break;
-                case 6:
-                    uVar1 = 6;
-                    break;
-                case 7:
-                    uVar1 = 4;
-                    break;
-                case 8:
-                    uVar1 = 1;
-                    break;
-                default:
-                    uVar1 = 0;
-                    break;
-            }
-            memset(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104, 0, 0x44);
-            mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode = uVar1;
-        }
-
-        void NCDSetting::setProxyFlag(unsigned char newFlag) {
-            mConfig.profiles[mID].proxy.http.mode = newFlag;
-            mConfig.profiles[mID].proxy.ssl.mode = newFlag;
-            if (newFlag != 0) {
-                mConfig.profiles[mID].flags = mConfig.profiles[mID].flags | 0x10;
-                return;
-            }
-            mConfig.profiles[mID].flags = mConfig.profiles[mID].flags & ~0x10;
-        }
-
-        void NCDSetting::setBasicFlag(unsigned char newFlag) {
-            mConfig.profiles[mID].proxy.http.authType = newFlag;
-            mConfig.profiles[mID].proxy.ssl.authType = newFlag;
-        }
-
-        void NCDSetting::setDNSFlag(unsigned char newFlag) {
-            if (newFlag != 0) {
-                mConfig.profiles[mID].flags = mConfig.profiles[mID].flags | 4;
-                return;
-            }
-            mConfig.profiles[mID].flags = mConfig.profiles[mID].flags & ~4;
-        }
-
-        void NCDSetting::setDHCPFlag(unsigned char newFlag) {
-            if (newFlag != 0) {
-                mConfig.profiles[mID].flags = mConfig.profiles[mID].flags | 2;
-                return;
-            }
-            mConfig.profiles[mID].flags = mConfig.profiles[mID].flags & ~2;
-        }
-
-        void NCDSetting::setConnectTestFlag(bool newFlag) {
-            if (newFlag) {
-                mConfig.profiles[mID].flags |= 0x20;
-                for (int i = 0; i < 3; i++) {
-                    if (mID == i) {
-                        mConfig.profiles[mID].flags |= 0x80;
-                    } else {
-                        mConfig.profiles[i].flags &= 0x7f;
-                    }
-                }
-            }
-            adjustNCDData_();
-            adjustNWC24FlagEx_();
-            NCDWriteConfig(&mConfig);
-        }
-
-        void NCDSetting::adjustEnableFlag_(int exclude) {
+        bool NCDSetting::checkAllFlag() {
             for (int i = 0; i < 3; i++) {
-                if (exclude != i) {
-                    mConfig.profiles[i].flags &= 0x7f;
+                if (checkFlag(i) & 0xff) {
+                    return true;
                 }
+            }
+            return false;
+        }
+
+        u8 NCDSetting::checkConnectTestFlag() {
+            return (mConfig.profiles[mID].flags) >> NCD_CONNECT_TEST_FLAG & 1;
+        }
+
+        u8 NCDSetting::checkDHCPFlag() {
+            return (mConfig.profiles[mID].flags) >> NCD_DHCP_FLAG & 1;
+        }
+
+        u8 NCDSetting::checkDNSFlag() {
+            if ((mConfig.profiles[mID].flags & NCD_DNS_FLAG) != 0) {
+                return (u8)mConfig.profiles[mID].flags >> NCD_DNS_FLAG & 1;
+            } else {
+                setDNSFlag(0);
+                return 0;
             }
         }
 
-        void NCDSetting::adjustSelectMedia_(int exclude) {
-            u8 flag = checkFlag(exclude);
-            switch (flag) {
-                case 1:
-                    mConfig.selectedMedia = 2;
-                    break;
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                    mConfig.selectedMedia = 1;
-                    break;
+        void NCDSetting::checkDHCP_() {
+            if (checkDNSFlag()) {
+                memset(&mConfig.profiles[mID].ip.dns1, 0, 4);
+                memset(&mConfig.profiles[mID].ip.dns2, 0, 4);
+            } else {
+                // im sorry for this
+                int i = 0;
+                int remaining = 4;
+
+                for (; i < 4; i++) {
+                    if (mConfig.profiles[mID].ip.dns1[i] != 0) {
+                        break;
+                    }
+                    remaining--;
+                }
+                if (i == 4) {
+                    i = 0;
+                    remaining = 4;
+                    for (; i < 4; i++) {
+                        if (mConfig.profiles[mID].ip.dns2[i] != 0) {
+                            break;
+                        }
+                        remaining--;
+                    }
+                    if (i == 4) {
+                        mConfig.profiles[mID].flags |= 4;
+                    }
+                }
             }
+            if (checkDHCPFlag()) {
+                memset(&mConfig.profiles[mID].ip.addr, 0, 4);
+                memset(&mConfig.profiles[mID].ip.netmask, 0, 4);
+                memset(&mConfig.profiles[mID].ip.gateway, 0, 4);
+            }
+            return;
+        }
+
+        u8 NCDSetting::checkProxyFlag() {
+            return mConfig.profiles[mID].proxy.http.mode;
+        }
+
+        u8 NCDSetting::checkBasic() {
+            return mConfig.profiles[mID].proxy.http.authType;
+        }
+
+        bool NCDSetting::checkChangeEnable() {
+            u8 configMethod = mConfig.profiles[mID].netif.wireless.configMethod;
+            return (u8)(configMethod + (u8)-1) > 1;
+        }
+
+        bool NCDSetting::convert16toASCII(char hexHi, char hexLo, unsigned char* byte) {
+            bool inRange = true;
+
+            if (hexHi >= '0' && hexHi <= '9') {
+                *byte = (hexHi - '0') << 4;
+            } else if (hexHi >= 'A' && hexHi <= 'F') {
+                *byte = (hexHi - 'A' + 10) << 4;
+            } else if (hexHi >= 'a' && hexHi <= 'f') {
+                *byte = (hexHi - 'a' + 10) << 4;
+            } else {
+                inRange = false;
+            }
+
+            if (hexLo >= '0' && hexLo <= '9') {
+                *byte = *byte + (u8)(hexLo - '0');
+            } else if (hexLo >= 'A' && hexLo <= 'F') {
+                *byte = *byte + (u8)(hexLo - 'A' + 10);
+            } else if (hexLo >= 'a' && hexLo <= 'f') {
+                *byte = *byte + (u8)(hexLo - 'a' + 10);
+            } else {
+                inRange = false;
+            }
+
+            return inRange;
+        }
+
+        int NCDSetting::checkWEPKey(char* key) {
+            int keyLen;
+            int ret;
+            u8 asciiKey[14];
+
+            keyLen = strlen(key);
+            ret = -1;
+            memset(asciiKey, 0, sizeof(asciiKey));
+
+            if (keyLen == 0) {
+                ret = 0;
+            } else {
+                if ((u16)getPrivacyMode() > 1) {
+                    if (8 <= keyLen && keyLen < 64) {
+                        ret = keyLen;
+                    } else if (keyLen == 64) {
+                        for (int i = 0; i < 64; i++) {
+                            char c = key[i];
+                            if ((((c < '0') || ('9' < c)) && ((c < 'A' || ('F' < c)))) && ((c < 'a' || ('f' < c)))) {
+                                return -1;
+                            }
+                        }
+                        ret = keyLen;
+                    }
+                } else {
+                    if (keyLen == 10 || keyLen == 26) {
+                        int i = 0, outLen = 0;
+                        while (i < keyLen) {
+                            if (!convert16toASCII(key[i], key[i + 1], &asciiKey[outLen]))
+                                return -1;
+                            i += 2;
+                            outLen++;
+                        }
+
+                        if (i == 10 || i == 26) {
+                            memcpy(key, asciiKey, i);
+                            mConfig.profiles[mID].netif.wireless.config.aoss.wep40.key[1][1] = 1;
+                            return i / 2;
+                        } else {
+                            // I think this is unreachable?
+                            return -1;
+                        }
+                    } else if (keyLen == 5 || keyLen == 13) {
+                        mConfig.profiles[mID].netif.wireless.config.aoss.wep40.key[1][1] = 0;
+                        ret = keyLen;
+                    }
+                }
+            }
+            return ret;
         }
 
         // Proxy rules:
@@ -299,55 +312,175 @@ namespace ipl {
             }
         }
 
-        int NCDSetting::checkWEPKey(char* key) {
-            int keyLen;
-            int ret;
-            u8 asciiKey[14];
+        void NCDSetting::adjustSelectMedia_(int exclude) {
+            u8 flag = checkFlag(exclude);
+            switch (flag) {
+                case 1:
+                    mConfig.selectedMedia = 2;
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    mConfig.selectedMedia = 1;
+                    break;
+            }
+        }
 
-            keyLen = strlen(key);
-            ret = -1;
-            memset(asciiKey, 0, sizeof(asciiKey));
+        void NCDSetting::adjustEnableFlag_(int exclude) {
+            for (int i = 0; i < 3; i++) {
+                if (exclude != i) {
+                    mConfig.profiles[i].flags &= 0x7f;
+                }
+            }
+        }
 
-            if (keyLen == 0) {
-                ret = 0;
-            } else {
-                if ((u16)getPrivacyMode() > 1) {
-                    if (8 <= keyLen && keyLen < 64) {
-                        ret = keyLen;
-                    } else if (keyLen == 64) {
-                        for (int i = 0; i < 64; i++) {
-                            char c = key[i];
-                            if ((((c < '0') || ('9' < c)) && ((c < 'A' || ('F' < c)))) && ((c < 'a' || ('f' < c)))) {
-                                return -1;
-                            }
-                        }
-                        ret = keyLen;
-                    }
-                } else {
-                    if (keyLen == 10 || keyLen == 26) {
-                        int i = 0, outLen = 0;
-                        while (i < keyLen) {
-                            if (!convert16toASCII(key[i], key[i + 1], &asciiKey[outLen]))
-                                return -1;
-                            i += 2;
-                            outLen++;
-                        }
-
-                        if (i == 10 || i == 26) {
-                            memcpy(key, asciiKey, i);
-                            mConfig.profiles[mID].netif.wireless.config.aoss.wep40.key[1][1] = 1;
-                            return i / 2;
-                        } else {
-                            // I think this is unreachable?
-                            return -1;
-                        }
-                    } else if (keyLen == 5 || keyLen == 13) {
-                        mConfig.profiles[mID].netif.wireless.config.aoss.wep40.key[1][1] = 0;
-                        ret = keyLen;
+        void NCDSetting::setConnectTestFlag(bool newFlag) {
+            if (newFlag) {
+                mConfig.profiles[mID].flags |= 0x20;
+                for (int i = 0; i < 3; i++) {
+                    if (mID == i) {
+                        mConfig.profiles[mID].flags |= 0x80;
+                    } else {
+                        mConfig.profiles[i].flags &= 0x7f;
                     }
                 }
             }
-            return ret;
+            adjustNCDData_();
+            adjustNWC24FlagEx_();
+            NCDWriteConfig(&mConfig);
+        }
+
+        void NCDSetting::setDHCPFlag(unsigned char newFlag) {
+            if (newFlag != 0) {
+                mConfig.profiles[mID].flags = mConfig.profiles[mID].flags | 2;
+                return;
+            }
+            mConfig.profiles[mID].flags = mConfig.profiles[mID].flags & ~2;
+        }
+
+        void NCDSetting::setDNSFlag(unsigned char newFlag) {
+            if (newFlag != 0) {
+                mConfig.profiles[mID].flags = mConfig.profiles[mID].flags | 4;
+                return;
+            }
+            mConfig.profiles[mID].flags = mConfig.profiles[mID].flags & ~4;
+        }
+
+        void NCDSetting::setProxyFlag(unsigned char newFlag) {
+            mConfig.profiles[mID].proxy.http.mode = newFlag;
+            mConfig.profiles[mID].proxy.ssl.mode = newFlag;
+            if (newFlag != 0) {
+                mConfig.profiles[mID].flags = mConfig.profiles[mID].flags | 0x10;
+                return;
+            }
+            mConfig.profiles[mID].flags = mConfig.profiles[mID].flags & ~0x10;
+        }
+
+        void NCDSetting::setBasicFlag(unsigned char newFlag) {
+            mConfig.profiles[mID].proxy.http.authType = newFlag;
+            mConfig.profiles[mID].proxy.ssl.authType = newFlag;
+        }
+
+        void NCDSetting::setWired() {
+            memset(&mConfig.profiles[mID], 0, sizeof(NCDProfile));
+            mConfig.version = 0;
+            mConfig.linkTimeout = 0;
+            mConfig.profiles[mID].flags = 7;
+        }
+
+        void NCDSetting::setWireless(u8 configMethod) {
+            memset(&mConfig.profiles[mID], 0, 0x91c);
+
+            mConfig.version = 0;
+            mConfig.linkTimeout = 0;
+            mConfig.profiles[mID].netif.wireless.configMethod = configMethod;
+            mConfig.profiles[mID].flags = 6;
+            if (configMethod == 0) {
+                memcpy(&mSaveConfig, &mConfig, sizeof(NCDConfig));
+            }
+        }
+
+        void NCDSetting::changeConnectType(u8 connectType) {
+            if (connectType == 1) {
+                mConfig.profiles[mID].flags |= 1;
+                return;
+            }
+            mConfig.profiles[mID].flags &= 0xfe;
+        }
+
+        void NCDSetting::setSSID(u8* newSSID) {
+            memcpy(mConfig.profiles[mID].netif.wireless.config.manual.ssid, newSSID, 32);
+            mConfig.profiles[mID].netif.wireless.config.manual.ssidLength = strlen((char*)newSSID);
+        }
+
+        void NCDSetting::setPrivacyMode(u16 newMode) {
+            u16 sVar2;
+
+            switch (newMode) {
+                case 0:
+                    sVar2 = 0;
+                    break;
+                case 1:
+                    if (mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode == 2 ||
+                        (strlen((const char*)mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.wep104.key) > 20)) {
+                        sVar2 = 2;
+                    } else {
+                        sVar2 = 1;
+                    }
+                    break;
+                case 2:
+                    sVar2 = 4;
+                    break;
+                case 3:
+                    sVar2 = 6;
+                    break;
+                case 4:
+                    sVar2 = 5;
+                    break;
+                default:
+                    sVar2 = 0;
+                    break;
+            }
+            if (mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode != sVar2) {
+                mConfig.profiles[mID].netif.wireless.config.rakuraku.privacy.mode = sVar2;
+            }
+        }
+
+        void NCDSetting::setWDPrivacyMode(u16 mode) {
+            u16 uVar1;
+
+            switch (mode) {
+                case 0:
+                    uVar1 = 0;
+                    break;
+                case 1:
+                    uVar1 = 1;
+                    break;
+                case 2:
+                    uVar1 = 2;
+                    break;
+                case 4:
+                    uVar1 = 4;
+                    break;
+                case 5:
+                    uVar1 = 5;
+                    break;
+                case 6:
+                    uVar1 = 6;
+                    break;
+                case 7:
+                    uVar1 = 4;
+                    break;
+                case 8:
+                    uVar1 = 1;
+                    break;
+                default:
+                    uVar1 = 0;
+                    break;
+            }
+            memset(&mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104, 0, 0x44);
+            mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode = uVar1;
         }
 
         void NCDSetting::setPrivacy(unsigned char* newKey, int len) {
@@ -385,139 +518,15 @@ namespace ipl {
             }
         }
 
-        int NCDSetting::checkFlag(int id) {
-            int ret = 0;
-            int flags = mConfig.profiles[id].flags;
-            if (flags & IPL_NCD_SETTING_DHCP_FLAG) {
-                return 1;
-            }
-            if (mConfig.profiles[id].netif.wireless.config.manual.ssidLength == 0 && mConfig.profiles[id].netif.wireless.configMethod == 0 &&
-                mConfig.profiles[id].netif.wireless.config.manual.privacy.mode == 0) {
-                return 0;
-            }
-            int bVar1 = mConfig.profiles[id].netif.wireless.configMethod;
-
-            switch (bVar1) {
-                case 0: {
-                    ret = 2;
-                    break;
-                }
-                case 1: {
-                    ret = 3;
-                    break;
-                }
-                case 2: {
-                    ret = 4;
-                    break;
-                }
-                case 3: {
-                    ret = 5;
-                    break;
-                }
-            }
-            return ret;
+        void NCDSetting::setIP(NCDIpProfile* ip) {
+            memcpy(&mConfig.profiles[mID].ip.addr, ip->addr, 4);
+            memcpy(&mConfig.profiles[mID].ip.netmask, ip->netmask, 4);
+            memcpy(&mConfig.profiles[mID].ip.gateway, ip->gateway, 4);
         }
 
-        bool NCDSetting::checkAllFlag() {
-            for (int i = 0; i < 3; i++) {
-                if (checkFlag(i) & 0xff) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        u8 NCDSetting::checkConnectTestFlag() {
-            return (mConfig.profiles[mID].flags) >> IPL_NCD_SETTING_CONNECT_TEST_FLAG & 1;
-        }
-
-        u8 NCDSetting::checkDHCPFlag() {
-            return (mConfig.profiles[mID].flags) >> IPL_NCD_SETTING_DHCP_FLAG & 1;
-        }
-
-        void NCDSetting::checkDHCP_() {
-            if (checkDNSFlag()) {
-                memset(&mConfig.profiles[mID].ip.dns1, 0, 4);
-                memset(&mConfig.profiles[mID].ip.dns2, 0, 4);
-            } else {
-                // im sorry for this
-                int i = 0;
-                int remaining = 4;
-
-                for (; i < 4; i++) {
-                    if (mConfig.profiles[mID].ip.dns1[i] != 0) {
-                        break;
-                    }
-                    remaining--;
-                }
-                if (i == 4) {
-                    i = 0;
-                    remaining = 4;
-                    for (; i < 4; i++) {
-                        if (mConfig.profiles[mID].ip.dns2[i] != 0) {
-                            break;
-                        }
-                        remaining--;
-                    }
-                    if (i == 4) {
-                        mConfig.profiles[mID].flags |= 4;
-                    }
-                }
-            }
-            if (checkDHCPFlag()) {
-                memset(&mConfig.profiles[mID].ip.addr, 0, 4);
-                memset(&mConfig.profiles[mID].ip.netmask, 0, 4);
-                memset(&mConfig.profiles[mID].ip.gateway, 0, 4);
-            }
-            return;
-        }
-
-        u8 NCDSetting::checkDNSFlag() {
-            if ((mConfig.profiles[mID].flags & IPL_NCD_SETTING_DNS_FLAG) != 0) {
-                return (u8)mConfig.profiles[mID].flags >> IPL_NCD_SETTING_DNS_FLAG & 1;
-            } else {
-                setDNSFlag(0);
-                return 0;
-            }
-        }
-
-        u8 NCDSetting::checkProxyFlag() {
-            return mConfig.profiles[mID].proxy.http.mode;
-        }
-
-        u8 NCDSetting::checkBasic(void) {
-            return mConfig.profiles[mID].proxy.http.authType;
-        }
-
-        bool NCDSetting::checkChangeEnable() {
-            u8 configMethod = mConfig.profiles[mID].netif.wireless.configMethod;
-            return (u8)(configMethod + (u8)-1) > 1;
-        }
-
-        bool NCDSetting::convert16toASCII(char hexHi, char hexLo, unsigned char* byte) {
-            bool inRange = true;
-
-            if (hexHi >= '0' && hexHi <= '9') {
-                *byte = (hexHi - '0') << 4;
-            } else if (hexHi >= 'A' && hexHi <= 'F') {
-                *byte = (hexHi - 'A' + 10) << 4;
-            } else if (hexHi >= 'a' && hexHi <= 'f') {
-                *byte = (hexHi - 'a' + 10) << 4;
-            } else {
-                inRange = false;
-            }
-
-            if (hexLo >= '0' && hexLo <= '9') {
-                *byte = *byte + (u8)(hexLo - '0');
-            } else if (hexLo >= 'A' && hexLo <= 'F') {
-                *byte = *byte + (u8)(hexLo - 'A' + 10);
-            } else if (hexLo >= 'a' && hexLo <= 'f') {
-                *byte = *byte + (u8)(hexLo - 'a' + 10);
-            } else {
-                inRange = false;
-            }
-
-            return inRange;
+        void NCDSetting::setDNS(NCDIpProfile* ip) {
+            memcpy(&mConfig.profiles[mID].ip.dns1, ip->dns1, 4);
+            memcpy(&mConfig.profiles[mID].ip.dns2, ip->dns2, 4);
         }
 
         void NCDSetting::setMTU(long mtu) {
@@ -554,7 +563,7 @@ namespace ipl {
 
         void NCDSetting::write() {
             checkDHCP_();
-            if (mConfig.profiles[mID].flags & IPL_NCD_SETTING_DHCP_FLAG) {
+            if (mConfig.profiles[mID].flags & NCD_DHCP_FLAG) {
                 memset(&mConfig.profiles[mID].netif.wireless, 0, sizeof(NCDWirelessProfile));
             }
 
@@ -578,7 +587,7 @@ namespace ipl {
             for (int i = 0; i < 3; i++) {
                 if (mID == i) {
                     mConfig.profiles[i].flags |= 0x80;
-                    if (mConfig.profiles[i].flags & IPL_NCD_SETTING_DHCP_FLAG) {
+                    if (mConfig.profiles[i].flags & NCD_DHCP_FLAG) {
                         mConfig.selectedMedia = 2;
                     } else {
                         mConfig.selectedMedia = 1;
@@ -590,11 +599,12 @@ namespace ipl {
             NCDWriteConfig(&mConfig);
         }
 
-        void NCDSetting::setRakuParams(const NCDApConfig& src) {
-            mConfig.profiles[mID].netif.wireless.config.rakuraku = src;
-        }
         void NCDSetting::setAOSSParams(const NCDAossConfig& src) {
             mConfig.profiles[mID].netif.wireless.config.aoss = src;
+        }
+
+        void NCDSetting::setRakuParams(const NCDApConfig& src) {
+            mConfig.profiles[mID].netif.wireless.config.rakuraku = src;
         }
 
         u16 NCDSetting::getID() {
@@ -618,6 +628,95 @@ namespace ipl {
             return 3;
         }
 
+        int NCDSetting::getPrivacyMode() {
+            int ret = 0;
+            if (mConfig.profiles[mID].netif.wireless.configMethod == 0 || mConfig.profiles[mID].netif.wireless.configMethod == 3) {
+                u16 mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode;
+                switch (mode) {
+                    case 0:
+                        ret = 0;
+                        break;
+                    case 1:
+                        ret = 1;
+                        break;
+                    case 2:
+                        ret = 1;
+                        break;
+                    case 4:
+                        ret = 2;
+                        break;
+                    case 5:
+                        ret = 4;
+                        break;
+                    case 6:
+                        ret = 3;
+                        break;
+                    case 3:
+                    default:
+                        ret = 0;
+                        break;
+                }
+            }
+            return ret;
+        }
+
+        u16 NCDSetting::getNCDPrivacyMode() {
+            if (mConfig.profiles[mID].netif.wireless.configMethod == 0 || mConfig.profiles[mID].netif.wireless.configMethod == 3) {
+                return mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode;
+            }
+            return 0;
+        }
+
+        u8* NCDSetting::getPrivacy() {
+            u16 mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode;
+            switch (mode) {
+                case 1: {
+                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.key[0];
+                }
+                case 2: {
+                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104.key[0];
+                }
+                case 4: {
+                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.tkip.key;
+                }
+                case 5:
+                case 6: {
+                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.aes.key;
+                }
+                default: {
+                    return 0;
+                }
+            }
+        }
+
+        u16 NCDSetting::getPrivacyLen() {
+            u16 mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode;
+            switch (mode) {
+                case 1: {
+                    if (mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.reserved[0] == 0) {
+                        return 5;
+                    }
+                    return 10;
+                }
+                case 2: {
+                    if (mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104.reserved[0] == 0) {
+                        return 13;
+                    }
+                    return 26;
+                }
+                case 4: {
+                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.tkip.keyLen;
+                }
+                case 5:
+                case 6: {
+                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.aes.keyLen;
+                }
+                default: {
+                    return 0;
+                }
+            }
+        }
+
         NCDIpProfile* NCDSetting::getIP() {
             return &mConfig.profiles[mID].ip;
         }
@@ -628,6 +727,42 @@ namespace ipl {
 
         u8* NCDSetting::getMacAddr() {
             return mMac;
+        }
+
+        void NCDSetting::makeMacAddr() {
+            u8 macAddress[7];
+            u64 macRemainder;
+            union {
+                char str[sizeof("XX-XX-XX-XX-XX-XX")];
+                u64 num;
+                u8 bytes[8];
+            } PACKED mac;
+
+            NCDErr err = NETGetWirelessMacAddress(macAddress);
+            switch (err) {
+                case 0:
+                    sprintf(mac.str, "%02x-%02x-%02x-%02x-%02x-%02x", macAddress[0], macAddress[1], macAddress[2], macAddress[3], macAddress[4],
+                            macAddress[5]);
+                    OSReport("MAC: %s\n", &mac);
+
+                    utility::CharacterCode::ANSIToUTF8((char*)mMac, (u8*)&mac);
+
+                    memset(&mac, 0, sizeof(mac.str));
+                    memcpy(mac.bytes + 2, &macAddress, 6);
+
+                    mMacNum = mac.num % 100000000;
+                    OSReport("%lld %d\n", mMacNum, mac.num, mMacNum);
+                    return;
+
+                case -8:
+                case -4:
+                    OSPanic(__FILE__, 0x436, "try again!!");
+                    return;
+
+                default:
+                    OSPanic(__FILE__, 0x43b, "Unrecoverable Error!!");
+                    return;
+            }
         }
 
         NCDProxyProfile* NCDSetting::getProxy() {
@@ -669,134 +804,9 @@ namespace ipl {
             mConfig.nwc24Permission = 0;
             if (wcFlags && SCGetEULA()) {
                 mConfig.nwc24Permission |= 4;
-                if (!(ipl::parental::Parental::checkFlags() & 0xFF) || ((ipl::parental::Parental::checkFlags() & 0xFF) && !(contentRestrictions))) {
+                if (!(parental::Parental::checkFlags() & 0xFF) || ((parental::Parental::checkFlags() & 0xFF) && !(contentRestrictions))) {
                     mConfig.nwc24Permission |= 3;
                 }
-            }
-        }
-
-        u16 NCDSetting::getPrivacyLen() {
-            u16 mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode;
-            switch (mode) {
-                case 1: {
-                    if (mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.reserved[0] == 0) {
-                        return 5;
-                    }
-                    return 10;
-                }
-                case 2: {
-                    if (mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104.reserved[0] == 0) {
-                        return 13;
-                    }
-                    return 26;
-                }
-                case 4: {
-                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.tkip.keyLen;
-                }
-                case 5:
-                case 6: {
-                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.aes.keyLen;
-                }
-                default: {
-                    return 0;
-                }
-            }
-        }
-
-        u16 NCDSetting::getNCDPrivacyMode() {
-            if (mConfig.profiles[mID].netif.wireless.configMethod == 0 || mConfig.profiles[mID].netif.wireless.configMethod == 3) {
-                return mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode;
-            }
-            return 0;
-        }
-
-        int NCDSetting::getPrivacyMode() {
-            int ret = 0;
-            if (mConfig.profiles[mID].netif.wireless.configMethod == 0 || mConfig.profiles[mID].netif.wireless.configMethod == 3) {
-                u16 mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode;
-                switch (mode) {
-                    case 0:
-                        ret = 0;
-                        break;
-                    case 1:
-                        ret = 1;
-                        break;
-                    case 2:
-                        ret = 1;
-                        break;
-                    case 4:
-                        ret = 2;
-                        break;
-                    case 5:
-                        ret = 4;
-                        break;
-                    case 6:
-                        ret = 3;
-                        break;
-                    case 3:
-                    default:
-                        ret = 0;
-                        break;
-                }
-            }
-            return ret;
-        }
-
-        u8* NCDSetting::getPrivacy() {
-            u16 mode = mConfig.profiles[mID].netif.wireless.config.manual.privacy.mode;
-            switch (mode) {
-                case 1: {
-                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep40.key[0];
-                }
-                case 2: {
-                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.wep104.key[0];
-                }
-                case 4: {
-                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.tkip.key;
-                }
-                case 5:
-                case 6: {
-                    return mConfig.profiles[mID].netif.wireless.config.manual.privacy.aes.key;
-                }
-                default: {
-                    return 0;
-                }
-            }
-        }
-
-        void NCDSetting::makeMacAddr() {
-            u8 macAddress[7];
-            u64 macRemainder;
-            union {
-                char str[sizeof("XX-XX-XX-XX-XX-XX")];
-                u64 num;
-                u8 bytes[8];
-            } PACKED mac;
-
-            NCDErr err = NETGetWirelessMacAddress(macAddress);
-            switch (err) {
-                case 0:
-                    sprintf(mac.str, "%02x-%02x-%02x-%02x-%02x-%02x", macAddress[0], macAddress[1], macAddress[2], macAddress[3], macAddress[4],
-                            macAddress[5]);
-                    OSReport("MAC: %s\n", &mac);
-
-                    ipl::utility::CharacterCode::ANSIToUTF8((char*)mMac, (u8*)&mac);
-
-                    memset(&mac, 0, sizeof(mac.str));
-                    memcpy(mac.bytes + 2, &macAddress, 6);
-
-                    mMacNum = mac.num % 100000000;
-                    OSReport("%lld %d\n", mMacNum, mac.num, mMacNum);
-                    return;
-
-                case -8:
-                case -4:
-                    OSPanic(__FILE__, 0x436, "try again!!");
-                    return;
-
-                default:
-                    OSPanic(__FILE__, 0x43b, "Unrecoverable Error!!");
-                    return;
             }
         }
     }  // namespace ncd

@@ -34,6 +34,10 @@ enum {
 
 #define NCD_MAC_ADDRESS_LENGTH 6
 
+#define NCD_CONNECT_TEST_FLAG 5
+#define NCD_DHCP_FLAG 1
+#define NCD_DNS_FLAG 2
+
 typedef struct NCDProxyServerProfile {
     u8 mode;         // 0x00
     u8 authType;     // 0x01

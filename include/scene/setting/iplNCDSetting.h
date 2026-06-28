@@ -21,7 +21,7 @@ namespace ipl {
             static u32 mMacNum;
 
             static void init();
-            static void initSetID(unsigned short);
+            static void initSetID(u16);
             static int checkFlag(int);
             static int checkThisFlag();
             static bool checkAllFlag();
@@ -48,8 +48,8 @@ namespace ipl {
             static void setWireless(unsigned char);
             static void changeConnectType(unsigned char);
             static void setSSID(u8*);
-            static void setPrivacyMode(unsigned short);
-            static void setWDPrivacyMode(unsigned short);
+            static void setPrivacyMode(u16);
+            static void setWDPrivacyMode(u16);
             static void setPrivacy(unsigned char*, int);
             static void setIP(NCDIpProfile*);
             static void setDNS(NCDIpProfile*);
@@ -82,6 +82,10 @@ namespace ipl {
             static bool getEnableFlag();
             static NCDErr adjustNWC24Flag();
             static void adjustNWC24FlagEx_();
+
+#ifndef NON_MATCHING
+            static void matchHack();
+#endif
         };
     }  // namespace ncd
 }  // namespace ipl

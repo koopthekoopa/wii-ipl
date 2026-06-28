@@ -5,8 +5,8 @@
 
 namespace ipl {
     namespace scene {
-        MEMHeapHandle NetSetup::sHeap;
         void* NetSetup::sHeapBuf;
+        MEMHeapHandle NetSetup::sHeap;
 
         OSMutex NetSetup::sAllocLock;
         NetSetup::StaticSOStartupInfo NetSetup::sSOStartupInfo;

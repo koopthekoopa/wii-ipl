@@ -1,5 +1,8 @@
 #include "scene/channelEdit/iplNandSDCardManager.h"
 
+// actually needed to match.
+#pragma sym on
+
 namespace ipl {
     namespace scene {
 #define COMMAND_FN(FUNCTION_HEADER, TAG, APP_BOX, SAVE_BOX, WII_TITLE_ID, SD_TITLE_ID)                                                               \
@@ -779,8 +782,8 @@ namespace ipl {
         COMMAND_FN(cmdListNand(),                            CMD_LIST_NAND,           NULL, NULL, 0, 0);
         COMMAND_FN(cmdListSD(),                              CMD_LIST_SD,             NULL, NULL, 0, 0);
         COMMAND_FN(cmdExistNandApp(ESTitleId32 titleId),     CMD_NAND_APP_EXIST,      NULL, NULL, 0, titleId);
-        COMMAND_FN(cmdExistSDApp(ESTitleId32 titleId),       CMD_SD_APP_EXIST,        NULL, NULL, 0, titleId);
         COMMAND_FN(cmdExistNandSave(ESTitleId32 titleId),    CMD_NAND_SAVE_EXIST,     NULL, NULL, 0, titleId);
+        COMMAND_FN(cmdExistSDApp(ESTitleId32 titleId),       CMD_SD_APP_EXIST,        NULL, NULL, 0, titleId);
         COMMAND_FN(cmdExistSDSave(ESTitleId32 titleId),      CMD_SD_SAVE_EXIST,       NULL, NULL, 0, titleId);
         COMMAND_FN(cmdMoveAppNandToSD(ChanAppBox* box),          CMD_MOVE_NANDAPP_TO_SD,              box, NULL, box->getThumbnail()->getWiiTitleId(), 0);
         COMMAND_FN(cmdMoveAppSDToNand(ChanAppBox* box),          CMD_MOVE_SDAPP_TO_NAND,              box, NULL, 0, box->getThumbnail()->getSDTitleId());

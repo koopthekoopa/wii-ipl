@@ -3,7 +3,7 @@
 
 #include <revolution.h>
 
-#include <stdarg.h>
+#include <cstdarg>
 
 namespace ext_ead {
     namespace www {
@@ -43,8 +43,8 @@ namespace ext_ead {
     char MSG_WARNING_TAG[10] = "[Warning]";                                                                                                          \
     char MSG_EVENT_TAG[10] = "[[Event]]";                                                                                                            \
     const char* Message[] = {                                                                                                                        \
-        MSG_TICK_TIMER_TAG, MSG_WARNING_TAG,           RESPECT_STRIP ? NULL : "[Info]", RESPECT_STRIP ? NULL : "[Debug]",                            \
-        MSG_EVENT_TAG,      RESPECT_STRIP ? NULL : "",                                                                                               \
+        RESPECT_STRIP ? NULL : MSG_TICK_TIMER_TAG, RESPECT_STRIP ? NULL : MSG_WARNING_TAG, RESPECT_STRIP ? NULL : "[Info]",                          \
+        RESPECT_STRIP ? NULL : "[Debug]",          RESPECT_STRIP ? "" : MSG_EVENT_TAG,     RESPECT_STRIP ? NULL : "",                                \
     };
         }  // namespace print
     }  // namespace www

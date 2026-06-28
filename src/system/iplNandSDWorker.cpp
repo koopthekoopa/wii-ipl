@@ -2,6 +2,16 @@
 
 #include "system/iplNandSDWorker.h"
 
+#pragma sym on
+
+// (for now :P)
+// stub ATTRIBUTE_ALIGN
+#undef ATTRIBUTE_ALIGN
+#define ATTRIBUTE_ALIGN(num)
+// redefine ALIGN32 to make it not use the stubbed out ATTRIBUTE_ALIGN
+#undef ALIGN32
+#define ALIGN32 __attribute__((aligned(32)))
+
 #include "system/nandsdworker/es_encrypt.inc"
 #include "system/nandsdworker/md5_secret_key.inc"
 

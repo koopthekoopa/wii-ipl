@@ -345,6 +345,7 @@ elif args.warn == "error":
 # Main IPL flags
 cflags_ipl = [
     *cflags_base,
+    "-W nomissingreturn",
     "-ipa file",
     "-gccinc",
     "-fp_contract off",
@@ -637,7 +638,7 @@ config.libs = [
             Object(Matching,    "system/iplPointerCore.cpp"),
             Object(Matching,    "system/iplDialogWindow.cpp"),
             Object(Matching,    "system/iplHomeButtonMenu.cpp"),
-            Object(Matching, "system/iplNandSDWorker.cpp"),
+            Object(Equivalent,  "system/iplNandSDWorker.cpp"),
             Object(Equivalent,  "system/iplKeyboard.cpp"),
             Object(Matching,    "system/iplErrorHandler.cpp"),
             Object(Matching,    "system/iplResetHandler.cpp"),
@@ -683,12 +684,12 @@ config.libs = [
         ]
     ),
     IPLSection("iplwww", [
-            Object(NonMatching, "iplwww/www_browser.cpp"),
+            Object(Equivalent,  "iplwww/www_browser.cpp"),
             Object(Matching,    "iplwww/www_message.cpp"),
-            Object(Matching,    "iplwww/www_surface.cpp"),
+            Object(Equivalent,  "iplwww/www_surface.cpp"),
             Object(Matching,    "iplwww/www_thread.cpp"),
             Object(Matching,    "iplwww/www_print.cpp"),
-            Object(NonMatching, "iplwww/www_window.cpp"),
+            Object(Equivalent,  "iplwww/www_window.cpp"),
             Object(Matching,    "iplwww/www_trasition.cpp"),
             Object(Equivalent,  "iplwww/www_wiisetting.cpp"),
             Object(Matching,    "iplwww/www_arcreader.cpp"),
@@ -746,13 +747,13 @@ config.libs = [
         ]
     ),
     IPLSection("channelEdit", [
-            Object(Matching, "scene/channelEdit/iplChannelEdit.cpp"),
-            Object(Equivalent, "scene/channelEdit/iplChanAppBase.cpp"),
-            Object(Equivalent, "scene/channelEdit/iplChanAppBox.cpp"),
-            Object(Equivalent, "scene/channelEdit/iplChanAppEdit.cpp"),
-            Object(Matching, "scene/channelEdit/iplAnmController.cpp"),
-            Object(Matching, "scene/channelEdit/iplNandSDCardManager.cpp"),
-            Object(Matching, "scene/channelEdit/iplThumbnail.cpp"),
+            Object(Matching,    "scene/channelEdit/iplChannelEdit.cpp"),
+            Object(Equivalent,  "scene/channelEdit/iplChanAppBase.cpp"),
+            Object(Equivalent,  "scene/channelEdit/iplChanAppBox.cpp"),
+            Object(Equivalent,  "scene/channelEdit/iplChanAppEdit.cpp"),
+            Object(Matching,    "scene/channelEdit/iplAnmController.cpp"),
+            Object(Matching,    "scene/channelEdit/iplNandSDCardManager.cpp"),
+            Object(Matching,    "scene/channelEdit/iplThumbnail.cpp"),
         ]
     ),
     IPLSection("channelSelect", [
@@ -791,13 +792,13 @@ config.libs = [
         ]
     ),
     IPLSection("memory", [
-            Object(Matching, "scene/memory/iplMemory.cpp"),
+            Object(Matching,    "scene/memory/iplMemory.cpp"),
         ]
     ),
     IPLSection("saveDataEdit", [
-            Object(Equivalent, "scene/saveDataEdit/iplSaveDataBase.cpp"),
-            Object(Equivalent, "scene/saveDataEdit/iplSaveDataBox.cpp"),
-            Object(Equivalent, "scene/saveDataEdit/iplSaveDataEdit.cpp"),
+            Object(Matching,    "scene/saveDataEdit/iplSaveDataBase.cpp"),
+            Object(Matching,    "scene/saveDataEdit/iplSaveDataBox.cpp"),
+            Object(Matching,    "scene/saveDataEdit/iplSaveDataEdit.cpp"),
             Object(Matching,    "scene/saveDataEdit/iplWiiBannerFileInfo.cpp"),
         ]
     ),
@@ -810,7 +811,7 @@ config.libs = [
         ]
     ),
     IPLSection("textBalloon", [
-            Object(Equivalent,  "scene/textBalloon/iplBalloon.cpp"),
+            Object(Matching,    "scene/textBalloon/iplBalloon.cpp"),
         ]
     ),
     IPLSection("cardSequence", [
@@ -818,15 +819,15 @@ config.libs = [
         ]
     ),
     IPLSection("nakamuraTest", [
-            Object(Matching, "scene/nakamuraTest/iplContest.c"),
+            Object(Matching,    "scene/nakamuraTest/iplContest.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/natneg/NATify.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/darray.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/common/gsAvailable.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/nonport.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/common/gsSHA1.c"),
             Object(Matching,    "scene/nakamuraTest/gamespy/natneg/natneg.c"),
-            Object(Matching, "scene/nakamuraTest/iplNakamuraTest.cpp"),
-            Object(Matching, "scene/nakamuraTest/iplNetSetup.cpp"),
+            Object(Matching,    "scene/nakamuraTest/iplNakamuraTest.cpp"),
+            Object(Matching,    "scene/nakamuraTest/iplNetSetup.cpp"),
         ]
     ),
     IPLSection("parentalDialog", [
@@ -860,7 +861,7 @@ config.libs = [
     IPLSection("setting", [
             Object(NonMatching, "scene/setting/iplSetting.cpp"),
             Object(NonMatching, "scene/setting/iplSensitivity.cpp"),
-            Object(Matching, "scene/setting/iplNCDSetting.cpp"),
+            Object(Matching,    "scene/setting/iplNCDSetting.cpp"),
             Object(NonMatching, "scene/setting/iplParental.cpp"),
             Object(NonMatching, "scene/setting/iplAPScanThread.cpp"),
             Object(NonMatching, "scene/setting/iplUSBAP.cpp"),
@@ -881,7 +882,7 @@ config.libs = [
     IPLSection("sceneSystem", [
             Object(Matching,    "scene/sceneSystem/iplSceneBase.cpp"),
             Object(Matching,    "scene/sceneSystem/iplSceneCreator.cpp"),
-            Object(Matching, "scene/sceneSystem/iplSceneManager.cpp"),
+            Object(Equivalent,  "scene/sceneSystem/iplSceneManager.cpp"),
             Object(Matching,    "scene/sceneSystem/iplFaderSceneBase.cpp"),
         ]
     ),
