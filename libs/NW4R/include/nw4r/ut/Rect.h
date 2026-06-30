@@ -9,10 +9,8 @@ namespace nw4r {
     namespace ut {
         class Rect {
         public:
-            Rect() : left(), top(), right(), bottom() {}
+            Rect();
             Rect(f32 l, f32 t, f32 r, f32 b) : left(l), top(t), right(r), bottom(b) {}
-
-            ~Rect() {}
 
             void SetWidth(f32 width) { right = left + width; }
             void SetHeight(f32 height) { bottom = top + height; }

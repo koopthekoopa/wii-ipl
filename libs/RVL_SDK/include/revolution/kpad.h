@@ -34,34 +34,34 @@ typedef union KPADEXStatus {
 } KPADEXStatus;
 
 typedef struct KPADStatus {
-    u32 hold;
-    u32 trig;
-    u32 release;
+    u32 hold;       // 0x0
+    u32 trig;       // 0x4
+    u32 release;    // 0x8
 
-    Vec acc;
-    f32 acc_value;
-    f32 acc_speed;
+    Vec acc;        // 0xC
+    f32 acc_value;  // 0x18
+    f32 acc_speed;  // 0x1C
 
-    Vec2 pos;
-    Vec2 vec;
-    f32 speed;
+    Vec2 pos;       // 0x20
+    Vec2 vec;       // 0x28
+    f32 speed;      // 0x30
 
-    Vec2 horizon;
-    Vec2 hori_vec;
-    f32 hori_speed;
+    Vec2 horizon;   // 0x34
+    Vec2 hori_vec;  // 0x3C
+    f32 hori_speed; // 0x44
 
-    f32 dist;
-    f32 dist_vec;
-    f32 dist_speed;
+    f32 dist;       // 0x48
+    f32 dist_vec;   // 0x4C
+    f32 dist_speed; // 0x50
 
-    Vec2 acc_vertical;
+    Vec2 acc_vertical;  // 0x54
 
-    u8 dev_type;
-    s8 wpad_err;
-    s8 dpd_valid_fg;
-    u8 data_format;
+    u8 dev_type;    // 0x5C
+    s8 wpad_err;    // 0x5D
+    s8 dpd_valid_fg;// 0x5E
+    u8 data_format; // 0x5F
 
-    KPADEXStatus ex_status;
+    KPADEXStatus ex_status; //0x60
 } KPADStatus;
 
 void KPADInit();
