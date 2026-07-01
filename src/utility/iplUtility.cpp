@@ -385,54 +385,54 @@ namespace ipl {
 
         BOOL tpl_validity::is_valid_cmn() {
             u32 pal = (u32)mpPalette;
-            BOOL valid = TRUE;
+            BOOL r = TRUE;
 
             if(mpPalette == NULL || mpPalette->versionNumber != 0x0020AF30) {
-                valid = FALSE; goto done;
+                r = FALSE; goto done;
             }
 
             u32 end = (u32)mpPalette + 0x100000;
 
             if (mpTexDesc == NULL || mpTexHeader == NULL)
-                valid = FALSE;
+                r = FALSE;
             else if ((u32)mpTexData & 0x1F)
-                valid = FALSE;
+                r = FALSE;
             else if ((u32)mpClutData & 0x1F)
-                valid = FALSE;
+                r = FALSE;
             else if ((u32)mpTexData < pal || (u32)mpTexData > end)
-                valid = FALSE;
+                r = FALSE;
             else if (mpClutHeader != NULL && ((u32)mpClutData < pal || (u32)mpClutData > end))
-                valid = FALSE;
+                r = FALSE;
             else if (mpTexHeader->height == 0 || mpTexHeader->width == 0)
-                valid = FALSE;
+                r = FALSE;
             else if (mpClutHeader == NULL &&
                     mpTexHeader->format != 0 && mpTexHeader->format != 1 && mpTexHeader->format != 2 && mpTexHeader->format != 3 &&
                     mpTexHeader->format != 4 && mpTexHeader->format != 5 && mpTexHeader->format != 0xE && mpTexHeader->format != 6)
-                valid = FALSE;
+                r = FALSE;
             else if (mpClutHeader != NULL && mpTexHeader->format != 8 && mpTexHeader->format != 9)
-                valid = FALSE;
+                r = FALSE;
             else if (mpClutHeader != NULL && mpClutHeader->format != 0 && mpClutHeader->format != 1 && mpClutHeader->format != 2)
-                valid = FALSE;
+                r = FALSE;
             else if (mpClutHeader != NULL && mpClutHeader->numEntries > 0x4000)
-                valid = FALSE;
+                r = FALSE;
             else if (mpTexHeader->wrapS != 0 && mpTexHeader->wrapS != 1 && mpTexHeader->wrapS != 2)
-                valid = FALSE;
+                r = FALSE;
             else if (mpTexHeader->wrapT != 0 && mpTexHeader->wrapT != 1 && mpTexHeader->wrapT != 2)
-                valid = FALSE;
+                r = FALSE;
             else if (mpTexHeader->minLOD != 0 || mpTexHeader->maxLOD != 0)
-                valid = FALSE;
+                r = FALSE;
             else if (mpTexHeader->minFilter != 0 && mpTexHeader->minFilter != 1 && mpTexHeader->minFilter != 2 &&
                     mpTexHeader->minFilter != 3 && mpTexHeader->minFilter != 4 && mpTexHeader->minFilter != 5)
-                valid = FALSE;
+                r = FALSE;
             else if (mpTexHeader->magFilter != 0 && mpTexHeader->magFilter != 1)
-                valid = FALSE;
+                r = FALSE;
             else if (mpTexHeader->LODBias < lbl_81694650 || mpTexHeader->LODBias > lbl_81694654)
-                valid = FALSE;
+                r = FALSE;
             else if (mpTexHeader->edgeLODEnable != 0 && mpTexHeader->edgeLODEnable != 1)
-                valid = FALSE;
+                r = FALSE;
 
             done:
-            return valid;
+            return r;
         }
         BOOL tpl_validity::is_valid() { return is_valid_cmn(); }
 
@@ -440,11 +440,9 @@ namespace ipl {
             BOOL r = is_valid_cmn();
             if (r) {
                 if (mpPalette->numDescriptors != 1) r = FALSE;
-                else {
-                    if (mpTexHeader->height > 0x100) r = FALSE;
-                    else if (mpTexHeader->width > 0x200) r = FALSE;
-                    else if (mpClutHeader == 0 && mpTexHeader->format == 6) r = FALSE;
-                }
+                else if (mpTexHeader->height > 0x100) r = FALSE;
+                else if (mpTexHeader->width > 0x200) r = FALSE;
+                else if (mpClutHeader == 0 && mpTexHeader->format == 6) r = FALSE;
             }
             return r;
         }
