@@ -245,6 +245,7 @@ namespace ipl {
             ESTitleId mBS2LaunchTitle;  // 0x2B0
 
             friend class System;
+            friend class utility::BScroller;
         };
 
         /*==============================*/
@@ -694,6 +695,8 @@ namespace ipl {
         }
 
         static Arg smArg;
+
+        friend class utility::BScroller;
     };
 }  // namespace ipl
 

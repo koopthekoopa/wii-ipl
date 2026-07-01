@@ -15,6 +15,7 @@ namespace ipl {
 
             void init();
             BOOL calc();
+            void reset();
 
             bool isActive() const;
             bool isDown() const;

@@ -226,6 +226,30 @@ namespace ipl {
         }
 
         namespace layout {
+            struct TextBoxExt : nw4r::lyt::TextBox {
+                virtual u16 SetStringLength(u16 len);
+                // Already declared: SetString(const wchar_t*, u16 dstIdx = 0)
+            };
+
+            void set_string(nw4r::lyt::Pane* pane, const wchar_t* str) {
+                const nw4r::ut::detail::RuntimeTypeInfo* info = pane->GetRuntimeTypeInfo();
+                TextBoxExt* box;
+                while (info != NULL) {
+                    if (info == &nw4r::lyt::TextBox::typeInfo) {
+                        box = (TextBoxExt*)pane;
+                        break;
+                    }
+                    info = info->mParentTypeInfo;
+                }
+                if (info == NULL) {
+                    box = NULL;
+                }
+                if (box != NULL) {
+                    box->SetStringLength(wcslen(str));
+                    box->SetString(str, 0);
+                }
+            }
+
             void set_texture(nw4r::lyt::Material* dest, const GXTexObj& texObj) {
                 dest->SetTexture(GX_TEXMAP0, texObj);
             }
@@ -261,6 +285,14 @@ namespace ipl {
 
             f32 ratio = (rect4_3.right - rect4_3.left) / (rect16_9.right - rect16_9.left);
             return math::VEC2(basePos.x * ratio, -basePos.y);
+        }
+
+        void BScroller::reset() {
+            if (mState >= 0) {
+                System::smArg.mpPointer->setState(mState, 0);
+                System::smArg.mpPointer->mIsScrolling = -1;
+            }
+            init();
         }
 
         Scroller::Scroller() {
@@ -309,7 +341,6 @@ namespace ipl {
                 }
             }
 
-            (void)descOfs;
             s32 clutVal = mpTexDesc;
             if (clutVal) {
                 clutVal = (s32)((TPLDescriptor*)clutVal)->CLUTHeader;
