@@ -295,41 +295,37 @@ namespace ipl {
             if (descOfs >= 0x80000000) goto absolute;
 
             if (descOfs >= palSize) return;
-            {
-                s32 d = (s32)(descOfs + (s32)pal);
-                mpTexDesc = d;
-                if (d) {
-                    s32 h = (s32)((TPLDescriptor*)d)->textureHeader;
-                    if (h) {
-                        if ((u32)h < palSize) {
-                            s32 hAbs = h + (s32)pal;
-                            mpTexHeader = hAbs;
-                            if (hAbs) {
-                                u32 dataOfs = (u32)((TPLHeader*)hAbs)->data;
-                                if (dataOfs < palSize) {
-                                    mpTexData = dataOfs + (s32)pal;
-                                }
+            s32 d = (s32)(descOfs + (s32)pal);
+            mpTexDesc = d;
+            if (d) {
+                s32 h = (s32)((TPLDescriptor*)d)->textureHeader;
+                if (h) {
+                    if ((u32)h < palSize) {
+                        s32 hAbs = h + (s32)pal;
+                        mpTexHeader = hAbs;
+                        if (hAbs) {
+                            u32 dataOfs = (u32)((TPLHeader*)hAbs)->data;
+                            if (dataOfs < palSize) {
+                                mpTexData = dataOfs + (s32)pal;
                             }
                         }
                     }
                 }
             }
 
-            {
-                s32 clutVal = mpTexDesc;
+            (void)descOfs;
+            s32 clutVal = mpTexDesc;
+            if (clutVal) {
+                clutVal = (s32)((TPLDescriptor*)clutVal)->CLUTHeader;
                 if (clutVal) {
-                    clutVal = (s32)((TPLDescriptor*)clutVal)->CLUTHeader;
-                    if (clutVal) {
-                        if ((u32)clutVal < palSize) {
-                            s32 baseVal = mpPalette;
-                            clutVal = clutVal + baseVal;
-                            mpClutHeader = clutVal;
-                            if (clutVal) {
-                                clutVal = (s32)((TPLClutHeader*)clutVal)->data;
-                                if ((u32)clutVal < palSize) {
-                                    clutVal = clutVal + baseVal;
-                                    mpClutData = clutVal;
-                                }
+                    if ((u32)clutVal < palSize) {
+                        s32 baseVal = mpPalette;
+                        clutVal = clutVal + baseVal;
+                        mpClutHeader = clutVal;
+                        if (clutVal) {
+                            clutVal = (s32)((TPLClutHeader*)clutVal)->data;
+                            if ((u32)clutVal < palSize) {
+                                mpClutData = clutVal + baseVal;
                             }
                         }
                     }
@@ -339,18 +335,14 @@ namespace ipl {
 
             absolute:
             mpTexDesc = descOfs;
-            if (descOfs) {
-                s32 hdrRaw = (s32)((TPLDescriptor*)descOfs)->textureHeader;
-                mpTexHeader = hdrRaw;
-                s32 clutRaw = (s32)((TPLDescriptor*)descOfs)->CLUTHeader;
-                mpClutHeader = clutRaw;
-                if (hdrRaw) {
-                    mpTexData = (s32)((TPLHeader*)hdrRaw)->data;
-                }
+            if (descOfs == 0) return;
+            mpTexHeader = (s32)((TPLDescriptor*)descOfs)->textureHeader;
+            mpClutHeader = (s32)((TPLDescriptor*)descOfs)->CLUTHeader;
+            if (mpTexHeader != 0) {
+                mpTexData = (s32)((TPLHeader*)mpTexHeader)->data;
             }
-            if (mpClutHeader) {
-                mpClutData = (s32)((TPLClutHeader*)mpClutHeader)->data;
-            }
+            if (mpClutHeader == 0) return;
+            mpClutData = (s32)((TPLClutHeader*)mpClutHeader)->data;
         }
 
         BOOL tpl_validity::is_valid_cmn() {
