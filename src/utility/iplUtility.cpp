@@ -226,28 +226,26 @@ namespace ipl {
         }
 
         namespace layout {
-            struct TextBoxExt : nw4r::lyt::TextBox {
-                virtual u16 SetStringLength(u16 len);
-                // Already declared: SetString(const wchar_t*, u16 dstIdx = 0)
-            };
-
             void set_string(nw4r::lyt::Pane* pane, const wchar_t* str) {
-                const nw4r::ut::detail::RuntimeTypeInfo* info = pane->GetRuntimeTypeInfo();
-                TextBoxExt* box;
+                nw4r::lyt::Pane* pPane = pane;
+                const wchar_t* pStr = str;
+                const nw4r::ut::detail::RuntimeTypeInfo* textBoxType = &nw4r::lyt::TextBox::typeInfo;
+
+                const nw4r::ut::detail::RuntimeTypeInfo* info = pPane->GetRuntimeTypeInfo();
+                bool found;
                 while (info != NULL) {
-                    if (info == &nw4r::lyt::TextBox::typeInfo) {
-                        box = (TextBoxExt*)pane;
+                    if (info == textBoxType) {
+                        found = true;
                         break;
                     }
                     info = info->mParentTypeInfo;
                 }
                 if (info == NULL) {
-                    box = NULL;
+                    found = false;
                 }
-                if (box != NULL) {
-                    box->SetStringLength(wcslen(str));
-                    box->SetString(str, 0);
-                }
+                pPane = found ? pPane : NULL;
+                ((nw4r::lyt::TextBox*)pPane)->AllocStringBuffer(wcslen(pStr));
+                ((nw4r::lyt::TextBox*)pPane)->SetString(pStr, 0);
             }
 
             void set_texture(nw4r::lyt::Material* dest, const GXTexObj& texObj) {
