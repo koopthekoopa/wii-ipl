@@ -388,50 +388,48 @@ namespace ipl {
             BOOL r = TRUE;
 
             if(mpPalette == NULL || mpPalette->versionNumber != 0x0020AF30) {
-                r = FALSE; goto done;
+                r = FALSE;
             }
-
-            u32 end = (u32)mpPalette + 0x100000;
-
-            if (mpTexDesc == NULL || mpTexHeader == NULL)
-                r = FALSE;
-            else if ((u32)mpTexData & 0x1F)
-                r = FALSE;
-            else if ((u32)mpClutData & 0x1F)
-                r = FALSE;
-            else if ((u32)mpTexData < pal || (u32)mpTexData > end)
-                r = FALSE;
-            else if (mpClutHeader != NULL && ((u32)mpClutData < pal || (u32)mpClutData > end))
-                r = FALSE;
-            else if (mpTexHeader->height == 0 || mpTexHeader->width == 0)
-                r = FALSE;
-            else if (mpClutHeader == NULL &&
-                    mpTexHeader->format != 0 && mpTexHeader->format != 1 && mpTexHeader->format != 2 && mpTexHeader->format != 3 &&
-                    mpTexHeader->format != 4 && mpTexHeader->format != 5 && mpTexHeader->format != 0xE && mpTexHeader->format != 6)
-                r = FALSE;
-            else if (mpClutHeader != NULL && mpTexHeader->format != 8 && mpTexHeader->format != 9)
-                r = FALSE;
-            else if (mpClutHeader != NULL && mpClutHeader->format != 0 && mpClutHeader->format != 1 && mpClutHeader->format != 2)
-                r = FALSE;
-            else if (mpClutHeader != NULL && mpClutHeader->numEntries > 0x4000)
-                r = FALSE;
-            else if (mpTexHeader->wrapS != 0 && mpTexHeader->wrapS != 1 && mpTexHeader->wrapS != 2)
-                r = FALSE;
-            else if (mpTexHeader->wrapT != 0 && mpTexHeader->wrapT != 1 && mpTexHeader->wrapT != 2)
-                r = FALSE;
-            else if (mpTexHeader->minLOD != 0 || mpTexHeader->maxLOD != 0)
-                r = FALSE;
-            else if (mpTexHeader->minFilter != 0 && mpTexHeader->minFilter != 1 && mpTexHeader->minFilter != 2 &&
-                    mpTexHeader->minFilter != 3 && mpTexHeader->minFilter != 4 && mpTexHeader->minFilter != 5)
-                r = FALSE;
-            else if (mpTexHeader->magFilter != 0 && mpTexHeader->magFilter != 1)
-                r = FALSE;
-            else if (mpTexHeader->LODBias < lbl_81694650 || mpTexHeader->LODBias > lbl_81694654)
-                r = FALSE;
-            else if (mpTexHeader->edgeLODEnable != 0 && mpTexHeader->edgeLODEnable != 1)
-                r = FALSE;
-
-            done:
+            else {
+                u32 end = (u32)mpPalette + 0x100000;
+                if (mpTexDesc == NULL || mpTexHeader == NULL)
+                    r = FALSE;
+                else if ((u32)mpTexData & 0x1F)
+                    r = FALSE;
+                else if ((u32)mpClutData & 0x1F)
+                    r = FALSE;
+                else if ((u32)mpTexData < pal || (u32)mpTexData > end)
+                    r = FALSE;
+                else if (mpClutHeader != NULL && ((u32)mpClutData < pal || (u32)mpClutData > end))
+                    r = FALSE;
+                else if (mpTexHeader->height == 0 || mpTexHeader->width == 0)
+                    r = FALSE;
+                else if (mpClutHeader == NULL &&
+                        mpTexHeader->format != 0 && mpTexHeader->format != 1 && mpTexHeader->format != 2 && mpTexHeader->format != 3 &&
+                        mpTexHeader->format != 4 && mpTexHeader->format != 5 && mpTexHeader->format != 0xE && mpTexHeader->format != 6)
+                    r = FALSE;
+                else if (mpClutHeader != NULL && mpTexHeader->format != 8 && mpTexHeader->format != 9)
+                    r = FALSE;
+                else if (mpClutHeader != NULL && mpClutHeader->format != 0 && mpClutHeader->format != 1 && mpClutHeader->format != 2)
+                    r = FALSE;
+                else if (mpClutHeader != NULL && mpClutHeader->numEntries > 0x4000)
+                    r = FALSE;
+                else if (mpTexHeader->wrapS != 0 && mpTexHeader->wrapS != 1 && mpTexHeader->wrapS != 2)
+                    r = FALSE;
+                else if (mpTexHeader->wrapT != 0 && mpTexHeader->wrapT != 1 && mpTexHeader->wrapT != 2)
+                    r = FALSE;
+                else if (mpTexHeader->minLOD != 0 || mpTexHeader->maxLOD != 0)
+                    r = FALSE;
+                else if (mpTexHeader->minFilter != 0 && mpTexHeader->minFilter != 1 && mpTexHeader->minFilter != 2 &&
+                        mpTexHeader->minFilter != 3 && mpTexHeader->minFilter != 4 && mpTexHeader->minFilter != 5)
+                    r = FALSE;
+                else if (mpTexHeader->magFilter != 0 && mpTexHeader->magFilter != 1)
+                    r = FALSE;
+                else if (mpTexHeader->LODBias < lbl_81694650 || mpTexHeader->LODBias > lbl_81694654)
+                    r = FALSE;
+                else if (mpTexHeader->edgeLODEnable != 0 && mpTexHeader->edgeLODEnable != 1)
+                    r = FALSE;
+            }
             return r;
         }
         BOOL tpl_validity::is_valid() { return is_valid_cmn(); }
