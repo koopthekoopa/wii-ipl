@@ -325,50 +325,42 @@ namespace ipl {
         }
 
         tpl_validity::tpl_validity(TPLPalette* pal, u32 palSize) {
-            mpPalette = (s32)pal;
-            mpTexDesc = 0;
-            mpTexHeader = 0;
-            mpClutHeader = 0;
-            mpTexData = 0;
-            mpClutData = 0;
+            mpPalette = pal;
+            mpTexDesc = NULL;
+            mpTexHeader = NULL;
+            mpClutHeader = NULL;
+            mpTexData = NULL;
+            mpClutData = NULL;
 
             if (pal == NULL) return;
-            if ((u32)pal->versionNumber != 0x0020AF30) return;
+            if (pal->versionNumber != 0x0020AF30) return;
+            if ((u32)pal->descriptorArray >= 0x80000000) goto absolute;
+            if ((u32)pal->descriptorArray >= palSize) return;
 
-            u32 descOfs = (u32)pal->descriptorArray;
-            if (descOfs >= 0x80000000) goto absolute;
-
-            if (descOfs >= palSize) return;
-            s32 d = (s32)(descOfs + (s32)pal);
-            mpTexDesc = d;
-            if (d) {
-                s32 h = (s32)((TPLDescriptor*)d)->textureHeader;
-                if (h) {
-                    if ((u32)h < palSize) {
-                        s32 hAbs = h + (s32)pal;
-                        mpTexHeader = hAbs;
-                        if (hAbs) {
-                            u32 dataOfs = (u32)((TPLHeader*)hAbs)->data;
+            mpTexDesc = (TPLDescriptor*)((char*)pal + (u32)pal->descriptorArray);
+            if (mpTexDesc) {
+                if (mpTexDesc->textureHeader) {
+                    if ((u32)mpTexDesc->textureHeader < palSize) {
+                        mpTexHeader = (TPLHeader*)((u32)pal + (u32)mpTexDesc->textureHeader);
+                        if (mpTexHeader) {
+                            u32 dataOfs = (u32)mpTexHeader->data;
                             if (dataOfs < palSize) {
-                                mpTexData = dataOfs + (s32)pal;
+                                mpTexData = (char*)((u32)pal + dataOfs);
                             }
                         }
                     }
                 }
             }
 
-            s32 clutVal = mpTexDesc;
-            if (clutVal) {
-                clutVal = (s32)((TPLDescriptor*)clutVal)->CLUTHeader;
-                if (clutVal) {
-                    if ((u32)clutVal < palSize) {
-                        s32 baseVal = mpPalette;
-                        clutVal = clutVal + baseVal;
-                        mpClutHeader = clutVal;
-                        if (clutVal) {
-                            clutVal = (s32)((TPLClutHeader*)clutVal)->data;
-                            if ((u32)clutVal < palSize) {
-                                mpClutData = clutVal + baseVal;
+            if (mpTexDesc) {
+                if (mpTexDesc->CLUTHeader) {
+                    if ((u32)mpTexDesc->CLUTHeader < palSize) {
+                        u32 base = (u32)mpPalette;
+                        mpClutHeader = (TPLClutHeader*)(base + (u32)mpTexDesc->CLUTHeader);
+                        if (mpClutHeader) {
+                            u32 dataOfs = (u32)mpClutHeader->data;
+                            if (dataOfs < palSize) {
+                                mpClutData = (char*)(base + dataOfs);
                             }
                         }
                     }
@@ -377,80 +369,78 @@ namespace ipl {
             return;
 
             absolute:
-            mpTexDesc = descOfs;
-            if (descOfs == 0) return;
-            mpTexHeader = (s32)((TPLDescriptor*)descOfs)->textureHeader;
-            mpClutHeader = (s32)((TPLDescriptor*)descOfs)->CLUTHeader;
-            if (mpTexHeader != 0) {
-                mpTexData = (s32)((TPLHeader*)mpTexHeader)->data;
+            mpTexDesc = pal->descriptorArray;
+            if (mpTexDesc == NULL) return;
+            mpTexHeader = mpTexDesc->textureHeader;
+            mpClutHeader = mpTexDesc->CLUTHeader;
+            if (mpTexHeader != NULL) {
+                mpTexData = mpTexHeader->data;
             }
-            if (mpClutHeader == 0) return;
-            mpClutData = (s32)((TPLClutHeader*)mpClutHeader)->data;
+            if (mpClutHeader == NULL) return;
+            mpClutData = mpClutHeader->data;
         }
 
         BOOL tpl_validity::is_valid_cmn() {
-            int pal = mpPalette;
+            u32 pal = (u32)mpPalette;
             BOOL valid = TRUE;
 
             if (pal == 0) goto _f1;
-            if (*(u32*)pal == 0x20AF30) goto _p1;
+            if (*(u32*)pal != 0x20AF30) goto _f1;
+            goto _p1;
             _f1: valid = FALSE; goto done;
             _p1:
 
-            int end = pal + 0x100000;
+            u32 end = pal + 0x100000;
 
-            if (mpTexDesc == 0) goto _f2;
-            if (mpTexHeader != 0) goto _p2;
+            if (mpTexDesc == NULL) goto _f2;
+            if (mpTexHeader != NULL) goto _p2;
             _f2: valid = FALSE; goto done;
             _p2:
 
-            if (!(mpTexData & 0x1f)) goto _3;
-            valid = FALSE; goto done;
-            _3:
+            if ((u32)mpTexData & 0x1f) goto _f3;
+            goto _p3;
+            _f3: valid = FALSE; goto done;
+            _p3:
 
-            if (!(mpClutData & 0x1f)) goto _4;
-            valid = FALSE; goto done;
-            _4:
+            if ((u32)mpClutData & 0x1f) goto _f4;
+            goto _p4;
+            _f4: valid = FALSE; goto done;
+            _p4:
 
-            if ((u32)mpTexData < (u32)pal || (u32)mpTexData > (u32)end) goto _f5;
+            if ((u32)mpTexData < pal || (u32)mpTexData > end) goto _f5;
             goto _p5;
             _f5: valid = FALSE; goto done;
             _p5:
 
-            if (mpClutHeader == 0) goto _p6a;
-            if ((u32)mpClutData >= (u32)pal && (u32)mpClutData <= (u32)end) goto _p6b;
+            if (mpClutHeader == NULL) goto _p6a;
+            if ((u32)mpClutData >= pal && (u32)mpClutData <= end) goto _p6b;
             valid = FALSE; goto done;
             _p6b:
             _p6a:
-
             {
-                TPLHeader* hdr = (TPLHeader*)mpTexHeader;
+                TPLHeader* hdr = mpTexHeader;
                 if (hdr->height == 0) goto _f7;
                 if (hdr->width != 0) goto _p7;
                 _f7: valid = FALSE; goto done;
                 _p7:
 
-                if (mpClutHeader != 0) goto _clut_fmt;
+                if (mpClutHeader != NULL) goto _clut_fmt;
                 if (hdr->format == 0 || hdr->format == 1 || hdr->format == 2 || hdr->format == 3 ||
                     hdr->format == 4 || hdr->format == 5 || hdr->format == 0xE || hdr->format == 6)
                     goto _clut_fmt;
                 valid = FALSE; goto done;
 
                 _clut_fmt:
-                if (mpClutHeader == 0) goto _clut_entry;
+                if (mpClutHeader == NULL) goto _clut_entry;
                 if (hdr->format == 8 || hdr->format == 9) goto _clut_entry;
                 valid = FALSE; goto done;
 
                 _clut_entry:
-                {
-                    int mch = mpClutHeader;
-                    if (mch == 0) goto _10;
-                }
+                if (mpClutHeader == NULL) goto _10;
 
                 _clut_chk:
-
                 {
-                    TPLClutHeader* clut = (TPLClutHeader*)mpClutHeader;
+                    TPLClutHeader* clut = mpClutHeader;
                     if (clut->format == 0 || clut->format == 1 || clut->format == 2) goto _11;
                     valid = FALSE; goto done;
                     _11:
@@ -458,7 +448,6 @@ namespace ipl {
                     valid = FALSE; goto done;
                     _12:;
                 }
-
                 _10:
 
                 if (hdr->wrapS == 0 || hdr->wrapS == 1 || hdr->wrapS == 2) goto _13;
@@ -476,13 +465,13 @@ namespace ipl {
 
                 if (hdr->minFilter == 0 || hdr->minFilter == 1 || hdr->minFilter == 2 ||
                     hdr->minFilter == 3 || hdr->minFilter == 4 || hdr->minFilter == 5)
-                    goto _16;
+                    goto _p16;
                 valid = FALSE; goto done;
-                _16:
+                _p16:
 
-                if (hdr->magFilter == 0 || hdr->magFilter == 1) goto _17;
+                if (hdr->magFilter == 0 || hdr->magFilter == 1) goto _p17;
                 valid = FALSE; goto done;
-                _17:
+                _p17:
 
                 if (hdr->LODBias < lbl_81694650) goto _f18;
                 if (hdr->LODBias > lbl_81694654) goto _f18;
@@ -499,19 +488,16 @@ namespace ipl {
             done:
             return valid;
         }
-
         BOOL tpl_validity::is_valid() { return is_valid_cmn(); }
 
         BOOL tpl_validity::is_valid_for_ltx() {
             BOOL r = is_valid_cmn();
             if (r) {
-                TPLPalette* pal = (TPLPalette*)mpPalette;
-                if (pal->numDescriptors != 1) r = FALSE;
+                if (mpPalette->numDescriptors != 1) r = FALSE;
                 else {
-                    TPLHeader* hdr = (TPLHeader*)mpTexHeader;
-                    if (hdr->height > 0x100) r = FALSE;
-                    else if (hdr->width > 0x200) r = FALSE;
-                    else if (mpClutHeader == 0 && hdr->format == 6) r = FALSE;
+                    if (mpTexHeader->height > 0x100) r = FALSE;
+                    else if (mpTexHeader->width > 0x200) r = FALSE;
+                    else if (mpClutHeader == 0 && mpTexHeader->format == 6) r = FALSE;
                 }
             }
             return r;
