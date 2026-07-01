@@ -164,14 +164,22 @@ namespace ipl {
 
         void CharacterCode::UTF16ToU32(u32* dest, const wchar_t* src) {
             int len = 0;
-            while (src[len] != 0) len++;
-
             u32 result = 0;
+            {
+                const wchar_t* p = src;
+                while (*p != 0) {
+                    len++;
+                    p++;
+                }
+            }
+
+            int off = 0;
             for (int i = 0; i < len; i++) {
-                double exp = pow(10.0, len - 1 - i);
-                double dig = (double)(src[i] - L'0');
+                double exp = pow(10.0, len - i - 1);
+                double dig = (double)(int)(src[i] - L'0');
                 double acc = (double)result + dig * exp;
                 result = (u32)acc;
+                off += 2;
             }
             *dest = result;
         }
