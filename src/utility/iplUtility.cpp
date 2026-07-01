@@ -422,7 +422,7 @@ namespace ipl {
                     valid = FALSE; goto done;
                 }
 
-                if (mpClutHeader != NULL && (hdr->format == 8 || hdr->format == 9)) {}
+                if (mpClutHeader == NULL || (hdr->format == 8 || hdr->format == 9)) {}
                 else {
                     valid = FALSE; goto done;
                 }
