@@ -64,12 +64,14 @@ namespace ipl {
         f32 Scroller::get() const { return mScroll; }
 
         f32 Scroller::movable_pos(f32 speed) const {
-            f32 newPos = mScroll + speed;
+            f32 newPos;
+            f32 curScroll = mScroll;
+            newPos = curScroll + speed;
             if (newPos > mDownLimit) {
-                return mDownLimit - mScroll;
+                return mDownLimit - curScroll;
             }
             if (newPos < mUpLimit) {
-                return mUpLimit - mScroll;
+                return mUpLimit - curScroll;
             }
             return speed;
         }
