@@ -202,7 +202,7 @@ namespace ipl {
         namespace wpad {
             u32 getWpadConnectedMask() {
                 u32 mask = 0;
-                u32 info[6];
+                u32 info[1];
                 for (int i = 0; i < 4; i++) {
                     if (WPADProbe(i, info) == 0 && info[0] != 0xFD) {
                         mask |= 1 << i;
@@ -212,9 +212,11 @@ namespace ipl {
             }
 
             BOOL isIncreaseConnectedWpad(u32 prevMask, u32 nextMask) {
-                for (int i = 0; i < 4; i++) {
-                    if (!(prevMask & 1) && (nextMask & 1)) {
-                        return TRUE;
+                for (u32 i = 4; i > 0; i--) {
+                    if (!(prevMask & 1)) {
+                        if ((nextMask & 1) == 1) {
+                            return TRUE;
+                        }
                     }
                     prevMask >>= 1;
                     nextMask >>= 1;
