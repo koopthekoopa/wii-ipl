@@ -233,16 +233,20 @@ namespace ipl {
 
                 const nw4r::ut::detail::RuntimeTypeInfo* info = pPane->GetRuntimeTypeInfo();
                 bool found;
-                while (info != NULL) {
-                    if (info == textBoxType) {
-                        found = true;
-                        break;
-                    }
-                    info = info->mParentTypeInfo;
+                goto entry;
+
+                body:
+                if (info == textBoxType) {
+                    found = true;
+                    goto check;
                 }
-                if (info == NULL) {
-                    found = false;
-                }
+                info = info->mParentTypeInfo;
+
+                entry:
+                if (info != NULL) goto body;
+                found = false;
+
+                check:
                 pPane = found ? pPane : NULL;
                 ((nw4r::lyt::TextBox*)pPane)->AllocStringBuffer(wcslen(pStr));
                 ((nw4r::lyt::TextBox*)pPane)->SetString(pStr, 0);
