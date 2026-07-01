@@ -7,9 +7,11 @@
 #include <private/os.h>
 #include <revolution/enc.h>
 
+// Texture LOD bias range
+const float lbl_81694650 = -100.f;
+const float lbl_81694654 = 100.f;
+
 // Wii ID format string
-extern const float lbl_81694650;
-extern const float lbl_81694654;
 wchar_t lbl_81641258[] = L"%016llu";
 
 char lbl_81696250[4] = "jpn";
