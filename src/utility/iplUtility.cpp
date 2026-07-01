@@ -1,11 +1,14 @@
 #include "iplUtility.h"
 #include "iplSystem.h"
-#include "system/iplPointer.h"
 #include "system/iplController.h"
+#include "system/iplPointer.h"
 #include "utility/iplTPLValidity.h"
+#include <private/nwc24/NWC24Time.h>
+#include <private/os.h>
 #include <revolution/enc.h>
 
-extern "C" wchar_t lbl_81641258[];
+// Wii ID format string
+wchar_t lbl_81641258[] = L"%016llu";
 
 namespace ipl {
     namespace utility {
@@ -209,8 +212,9 @@ namespace ipl {
         bool timer::operator()() { return OSGetTime() > tick; }
 
         int memcpy_s(void* dest, u32 destSize, const void* src, u32 srcSize) {
-            if (srcSize > destSize) {
-                srcSize = destSize;
+            u32 size = destSize;
+            if (size < srcSize) {
+                srcSize = size;
             }
             return (int)memcpy(dest, src, srcSize);
         }
@@ -370,6 +374,37 @@ namespace ipl {
                 }
             }
             return r;
+        }
+
+        void Calendar::setCalendarTime(OSCalendarTime* newCalendar) {
+            u32 rtc;
+            s32 bias = SCGetCounterBias();
+            __OSGetRTC(&rtc);
+
+            u32 timerClk = *(u32*)0x800000F8 / 4;
+            u64 ticks = (u64)(rtc + bias) * timerClk;
+            __OSSetTime(ticks);
+
+            OSSram* sram = __OSLockSram();
+            sram->counterBias = bias;
+            sram->flags |= 0x20;
+            __OSUnlockSram(TRUE);
+
+            while (!__OSSyncSram()) {}
+
+            rtc = 0;
+            __OSGetRTC(&rtc);
+            if (rtc != 0 && !(rtc & 1)) {
+                __OSSetRTC(rtc);
+            }
+
+            ticks = OSCalendarTimeToTicks(newCalendar);
+            s32 newBias = (s32)(ticks / timerClk - rtc);
+            SCSetCounterBias(newBias);
+
+            ticks = OSCalendarTimeToTicks(newCalendar);
+            __OSSetTime(ticks);
+            NWC24iSynchronizeRtcCounter(0);
         }
     }
 }  // namespace ipl
