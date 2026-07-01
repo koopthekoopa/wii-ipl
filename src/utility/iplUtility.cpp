@@ -380,37 +380,32 @@ namespace ipl {
             mpClutData = mpClutHeader->data;
         }
 
+
         BOOL tpl_validity::is_valid_cmn() {
+
+#define FAIL_IF_NOT(cond) \
+    if (!(cond)) goto CONCAT(pass_, __LINE__); \
+        valid = FALSE; goto done; \
+    CONCAT(pass_, __LINE__):
+#define FAIL_IF(cond) FAIL_IF_NOT(!(cond))
+
+
             u32 pal = (u32)mpPalette;
             BOOL valid = TRUE;
 
-            if (pal == 0) goto _f1;
-            if (*(u32*)pal != 0x20AF30) goto _f1;
-            goto _p1;
-            _f1: valid = FALSE; goto done;
-            _p1:
+            FAIL_IF_NOT(mpPalette == NULL || mpPalette->versionNumber != 0x0020AF30);
 
-            u32 end = pal + 0x100000;
+            u32 end = (u32)mpPalette + 0x100000;
 
-            if (mpTexDesc == NULL) goto _f2;
-            if (mpTexHeader != NULL) goto _p2;
-            _f2: valid = FALSE; goto done;
+
+            if (mpTexDesc == NULL || mpTexHeader == NULL) {
+                valid = FALSE; goto done;
+            }
             _p2:
 
-            if ((u32)mpTexData & 0x1f) goto _f3;
-            goto _p3;
-            _f3: valid = FALSE; goto done;
-            _p3:
-
-            if ((u32)mpClutData & 0x1f) goto _f4;
-            goto _p4;
-            _f4: valid = FALSE; goto done;
-            _p4:
-
-            if ((u32)mpTexData < pal || (u32)mpTexData > end) goto _f5;
-            goto _p5;
-            _f5: valid = FALSE; goto done;
-            _p5:
+            FAIL_IF_NOT((u32)mpTexData & 0x1f)
+            FAIL_IF_NOT((u32)mpClutData & 0x1f)
+            FAIL_IF_NOT((u32)mpTexData < pal || (u32)mpTexData > end)
 
             if (mpClutHeader == NULL) goto _p6a;
             if ((u32)mpClutData >= pal && (u32)mpClutData <= end) goto _p6b;
@@ -440,11 +435,10 @@ namespace ipl {
 
                 _clut_chk:
                 {
-                    TPLClutHeader* clut = mpClutHeader;
-                    if (clut->format == 0 || clut->format == 1 || clut->format == 2) goto _11;
+                    if (mpClutHeader->format == 0 || mpClutHeader->format == 1 || mpClutHeader->format == 2) goto _11;
                     valid = FALSE; goto done;
                     _11:
-                    if (clut->numEntries <= 0x4000) goto _12;
+                    if (mpClutHeader->numEntries <= 0x4000) goto _12;
                     valid = FALSE; goto done;
                     _12:;
                 }
@@ -473,14 +467,12 @@ namespace ipl {
                 valid = FALSE; goto done;
                 _p17:
 
-                if (hdr->LODBias < lbl_81694650) goto _f18;
-                if (hdr->LODBias > lbl_81694654) goto _f18;
+                if (hdr->LODBias < lbl_81694650 || hdr->LODBias > lbl_81694654) goto _f18;
                 goto _p18;
                 _f18: valid = FALSE; goto done;
                 _p18:
 
-                if (hdr->edgeLODEnable == 0) goto _p19;
-                if (hdr->edgeLODEnable == 1) goto _p19;
+                if (hdr->edgeLODEnable == 0 || hdr->edgeLODEnable == 1) goto _p19;
                 valid = FALSE; goto done;
                 _p19:;
             }
