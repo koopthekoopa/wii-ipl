@@ -222,11 +222,7 @@ namespace ipl {
         bool timer::operator()() { return OSGetTime() > tick; }
 
         int memcpy_s(void* dest, u32 destSize, const void* src, u32 srcSize) {
-            u32 size = destSize;
-            if (size < srcSize) {
-                srcSize = size;
-            }
-            return (int)memcpy(dest, src, srcSize);
+            return (int)memcpy(dest, src, destSize < srcSize ? destSize : srcSize);
         }
 
         namespace layout {
