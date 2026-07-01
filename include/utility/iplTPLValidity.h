@@ -20,12 +20,12 @@ namespace ipl {
             BOOL is_valid_cmn();
             BOOL is_valid();
 
-            s32 mpPalette;      // 0x00
-            s32 mpTexDesc;      // 0x04
-            s32 mpTexHeader;    // 0x08
-            s32 mpClutHeader;   // 0x0C
-            s32 mpTexData;      // 0x10
-            s32 mpClutData;     // 0x14
+            TPLPalette* mpPalette;         // 0x00
+            TPLDescriptor* mpTexDesc;      // 0x04
+            TPLHeader* mpTexHeader;        // 0x08
+            TPLClutHeader* mpClutHeader;   // 0x0C
+            char* mpTexData;               // 0x10
+            char* mpClutData;              // 0x14
         };
     }  // namespace utility
 }  // namespace ipl
