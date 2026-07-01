@@ -381,8 +381,10 @@ namespace ipl {
             s32 bias = SCGetCounterBias();
             __OSGetRTC(&rtc);
 
-            u32 timerClk = *(u32*)0x800000F8 / 4;
-            u64 ticks = (u64)(rtc + bias) * timerClk;
+            u32 busClk = *(u32*)0x800000F8;
+            u32 timerClk = busClk / 4;
+            u64 ticks = (u64)(rtc + bias);
+            ticks *= timerClk;
             __OSSetTime(ticks);
 
             OSSram* sram = __OSLockSram();
@@ -399,7 +401,8 @@ namespace ipl {
             }
 
             ticks = OSCalendarTimeToTicks(newCalendar);
-            s32 newBias = (s32)(ticks / timerClk - rtc);
+            u64 quotient = ticks / timerClk;
+            s32 newBias = (s32)(quotient - rtc);
             SCSetCounterBias(newBias);
 
             ticks = OSCalendarTimeToTicks(newCalendar);
