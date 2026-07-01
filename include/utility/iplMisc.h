@@ -20,6 +20,7 @@ namespace ipl {
         class Language {
         public:
             static char* getPath();
+            static char* mLangPath[10];
         };
 
         template <typename T>
