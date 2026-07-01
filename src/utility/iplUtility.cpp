@@ -10,6 +10,16 @@
 // Wii ID format string
 wchar_t lbl_81641258[] = L"%016llu";
 
+char lbl_81696250[4] = "jpn";
+char lbl_81696254[4] = "eng";
+char lbl_81696258[4] = "ger";
+char lbl_8169625C[4] = "fra";
+char lbl_81696260[4] = "spa";
+char lbl_81696264[4] = "ita";
+char lbl_81696268[4] = "ned";
+char lbl_8169626C[4] = "chn";
+char lbl_81696270[4] = "kor";
+
 namespace ipl {
     namespace utility {
         BScroller::BScroller() { init(); }
@@ -408,6 +418,16 @@ namespace ipl {
             ticks = OSCalendarTimeToTicks(newCalendar);
             __OSSetTime(ticks);
             NWC24iSynchronizeRtcCounter(0);
+        }
+
+        char* Language::mLangPath[10] = {
+            lbl_81696250, lbl_81696254, lbl_81696258, lbl_8169625C,
+            lbl_81696260, lbl_81696264, lbl_81696268, lbl_8169626C,
+            lbl_81696254, lbl_81696270,
+        };
+
+        char* Language::getPath() {
+            return (char*)*(volatile char**)&mLangPath[System::getLanguage()];
         }
     }
 }  // namespace ipl
