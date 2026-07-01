@@ -391,71 +391,43 @@ namespace ipl {
 
             u32 end = (u32)mpPalette + 0x100000;
 
-            if (mpTexDesc == NULL || mpTexHeader == NULL) {
-                valid = FALSE; goto done;
-            }
-            if ((u32)mpTexData & 0x1f) {
-                valid = FALSE; goto done;
-            }
-            if ((u32)mpClutData & 0x1f) {
-                valid = FALSE; goto done;
-            }
-            if ((u32)mpTexData < pal || (u32)mpTexData > end) {
-                valid = FALSE; goto done;
-            }
-
-            if (mpClutHeader == NULL || (u32)mpClutData >= pal && (u32)mpClutData <= end) {}
-            else {
-                valid = FALSE; goto done;
-            }
-
-            {
-                TPLHeader* hdr = mpTexHeader;
-                if (hdr->height == 0 || hdr->width == 0) {
-                    valid = FALSE; goto done;
-                }
-
-                if (mpClutHeader != NULL ||
-                    hdr->format == 0 || hdr->format == 1 || hdr->format == 2 || hdr->format == 3 ||
-                    hdr->format == 4 || hdr->format == 5 || hdr->format == 0xE || hdr->format == 6) {}
-                else {
-                    valid = FALSE; goto done;
-                }
-
-                if (mpClutHeader == NULL || (hdr->format == 8 || hdr->format == 9)) {}
-                else {
-                    valid = FALSE; goto done;
-                }
-
-                if (mpClutHeader != NULL && mpClutHeader->format != 0 && mpClutHeader->format != 1 && mpClutHeader->format != 2) {
-                    valid = FALSE; goto done;
-                }
-                if (mpClutHeader != NULL && mpClutHeader->numEntries > 0x4000) {
-                    valid = FALSE; goto done;
-                }
-                if (hdr->wrapS != 0 && hdr->wrapS != 1 && hdr->wrapS != 2) {
-                    valid = FALSE; goto done;
-                }
-                else if (hdr->wrapT != 0 && hdr->wrapT != 1 && hdr->wrapT != 2) {
-                    valid = FALSE; goto done;
-                }
-                else if (hdr->minLOD != 0 || hdr->maxLOD != 0) {
-                    valid = FALSE; goto done;
-                }
-
-                if (hdr->minFilter == 0 || hdr->minFilter == 1 || hdr->minFilter == 2 ||
-                    hdr->minFilter == 3 || hdr->minFilter == 4 || hdr->minFilter == 5) {
-                }
-                else {
-                    valid = FALSE; goto done;
-                }
-                if (hdr->magFilter != 0 && hdr->magFilter != 1)
-                    valid = FALSE;
-                else if (hdr->LODBias < lbl_81694650 || hdr->LODBias > lbl_81694654)
-                    valid = FALSE;
-                else if (hdr->edgeLODEnable != 0 && hdr->edgeLODEnable != 1)
-                    valid = FALSE;
-                }
+            if (mpTexDesc == NULL || mpTexHeader == NULL)
+                valid = FALSE;
+            else if ((u32)mpTexData & 0x1F)
+                valid = FALSE;
+            else if ((u32)mpClutData & 0x1F)
+                valid = FALSE;
+            else if ((u32)mpTexData < pal || (u32)mpTexData > end)
+                valid = FALSE;
+            else if (mpClutHeader != NULL && ((u32)mpClutData < pal || (u32)mpClutData > end))
+                valid = FALSE;
+            else if (mpTexHeader->height == 0 || mpTexHeader->width == 0)
+                valid = FALSE;
+            else if (mpClutHeader == NULL &&
+                    mpTexHeader->format != 0 && mpTexHeader->format != 1 && mpTexHeader->format != 2 && mpTexHeader->format != 3 &&
+                    mpTexHeader->format != 4 && mpTexHeader->format != 5 && mpTexHeader->format != 0xE && mpTexHeader->format != 6)
+                valid = FALSE;
+            else if (mpClutHeader != NULL && mpTexHeader->format != 8 && mpTexHeader->format != 9)
+                valid = FALSE;
+            else if (mpClutHeader != NULL && mpClutHeader->format != 0 && mpClutHeader->format != 1 && mpClutHeader->format != 2)
+                valid = FALSE;
+            else if (mpClutHeader != NULL && mpClutHeader->numEntries > 0x4000)
+                valid = FALSE;
+            else if (mpTexHeader->wrapS != 0 && mpTexHeader->wrapS != 1 && mpTexHeader->wrapS != 2)
+                valid = FALSE;
+            else if (mpTexHeader->wrapT != 0 && mpTexHeader->wrapT != 1 && mpTexHeader->wrapT != 2)
+                valid = FALSE;
+            else if (mpTexHeader->minLOD != 0 || mpTexHeader->maxLOD != 0)
+                valid = FALSE;
+            else if (mpTexHeader->minFilter != 0 && mpTexHeader->minFilter != 1 && mpTexHeader->minFilter != 2 &&
+                    mpTexHeader->minFilter != 3 && mpTexHeader->minFilter != 4 && mpTexHeader->minFilter != 5)
+                valid = FALSE;
+            else if (mpTexHeader->magFilter != 0 && mpTexHeader->magFilter != 1)
+                valid = FALSE;
+            else if (mpTexHeader->LODBias < lbl_81694650 || mpTexHeader->LODBias > lbl_81694654)
+                valid = FALSE;
+            else if (mpTexHeader->edgeLODEnable != 0 && mpTexHeader->edgeLODEnable != 1)
+                valid = FALSE;
 
             done:
             return valid;
