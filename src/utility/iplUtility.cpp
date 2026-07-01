@@ -289,36 +289,68 @@ namespace ipl {
             mpClutData = 0;
 
             if (pal == NULL) return;
-            if (*(u32*)pal != 0x20AF30) return;
+            if ((u32)pal->versionNumber != 0x0020AF30) return;
 
-            s32 texOfs = *(s32*)((u8*)pal + 8);
-            if (texOfs > 0x7FFFFFFF) {
-                mpTexDesc = texOfs;
-                if (texOfs == 0) return;
-                mpTexHeader = *(s32*)texOfs;
-                mpClutHeader = *(s32*)(texOfs + 4);
-                if (mpTexHeader != 0) mpTexData = *(s32*)(mpTexHeader + 8);
-                if (mpClutHeader == 0) return;
-                mpClutData = *(s32*)(mpClutHeader + 8);
-                return;
-            }
-            if (palSize <= (u32)texOfs) return;
-            s32 ptr = texOfs + (s32)pal;
-            mpTexDesc = ptr;
-            if (ptr != 0 && *(s32*)ptr != 0) {
-                if ((s32)palSize > *(s32*)ptr) {
-                    mpTexHeader = *(s32*)ptr + (s32)pal;
-                    if (mpTexHeader != 0 && palSize > *(u32*)(mpTexHeader + 8)) {
-                        mpTexData = *(s32*)(mpTexHeader + 8) + (s32)pal;
+            u32 descOfs = (u32)pal->descriptorArray;
+            if (descOfs >= 0x80000000) goto absolute;
+
+            if (descOfs >= palSize) return;
+            {
+                s32 d = (s32)(descOfs + (s32)pal);
+                mpTexDesc = d;
+                if (d) {
+                    s32 h = (s32)((TPLDescriptor*)d)->textureHeader;
+                    if (h) {
+                        if ((u32)h < palSize) {
+                            s32 hAbs = h + (s32)pal;
+                            mpTexHeader = hAbs;
+                            if (hAbs) {
+                                u32 dataOfs = (u32)((TPLHeader*)hAbs)->data;
+                                if (dataOfs < palSize) {
+                                    mpTexData = dataOfs + (s32)pal;
+                                }
+                            }
+                        }
                     }
                 }
             }
-            if (mpTexDesc == 0) return;
-            s32 palOfs = *(s32*)(mpTexDesc + 4);
-            if (palOfs == 0 || (s32)palSize <= palOfs) return;
-            mpClutHeader = palOfs + (s32)pal;
-            if (mpClutHeader == 0 || (s32)palSize <= *(s32*)(mpClutHeader + 8)) return;
-            mpClutData = *(s32*)(mpClutHeader + 8) + (s32)pal;
+
+            {
+                s32 clutVal = mpTexDesc;
+                if (clutVal) {
+                    clutVal = (s32)((TPLDescriptor*)clutVal)->CLUTHeader;
+                    if (clutVal) {
+                        if ((u32)clutVal < palSize) {
+                            s32 baseVal = mpPalette;
+                            clutVal = clutVal + baseVal;
+                            mpClutHeader = clutVal;
+                            if (clutVal) {
+                                clutVal = (s32)((TPLClutHeader*)clutVal)->data;
+                                if ((u32)clutVal < palSize) {
+                                    clutVal = clutVal + baseVal;
+                                    mpClutData = clutVal;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return;
+
+            absolute:
+            mpTexDesc = descOfs;
+            if (descOfs) {
+                s32 hdrRaw = (s32)((TPLDescriptor*)descOfs)->textureHeader;
+                mpTexHeader = hdrRaw;
+                s32 clutRaw = (s32)((TPLDescriptor*)descOfs)->CLUTHeader;
+                mpClutHeader = clutRaw;
+                if (hdrRaw) {
+                    mpTexData = (s32)((TPLHeader*)hdrRaw)->data;
+                }
+            }
+            if (mpClutHeader) {
+                mpClutData = (s32)((TPLClutHeader*)mpClutHeader)->data;
+            }
         }
 
         BOOL tpl_validity::is_valid_cmn() {
