@@ -8,6 +8,8 @@
 #include <revolution/enc.h>
 
 // Wii ID format string
+extern const float lbl_81694650;
+extern const float lbl_81694654;
 wchar_t lbl_81641258[] = L"%016llu";
 
 char lbl_81696250[4] = "jpn";
@@ -388,50 +390,114 @@ namespace ipl {
 
         BOOL tpl_validity::is_valid_cmn() {
             int pal = mpPalette;
+            BOOL valid = TRUE;
 
-            if (pal == 0 || *(u32*)pal != 0x20AF30) return FALSE;
-            if (mpTexDesc == 0 || mpTexHeader == 0) return FALSE;
+            if (pal == 0) goto _f1;
+            if (*(u32*)pal == 0x20AF30) goto _p1;
+            _f1: valid = FALSE; goto done;
+            _p1:
 
-            if (mpTexData & 0x1f) return FALSE;
-            if (mpClutData & 0x1f) return FALSE;
+            int end = pal + 0x100000;
+
+            if (mpTexDesc == 0) goto _f2;
+            if (mpTexHeader != 0) goto _p2;
+            _f2: valid = FALSE; goto done;
+            _p2:
+
+            if (!(mpTexData & 0x1f)) goto _3;
+            valid = FALSE; goto done;
+            _3:
+
+            if (!(mpClutData & 0x1f)) goto _4;
+            valid = FALSE; goto done;
+            _4:
+
+            if ((u32)mpTexData < (u32)pal || (u32)mpTexData > (u32)end) goto _f5;
+            goto _p5;
+            _f5: valid = FALSE; goto done;
+            _p5:
+
+            if (mpClutHeader == 0) goto _p6a;
+            if ((u32)mpClutData >= (u32)pal && (u32)mpClutData <= (u32)end) goto _p6b;
+            valid = FALSE; goto done;
+            _p6b:
+            _p6a:
 
             {
-                int end = pal + 0x100000;
-                if (mpTexData < pal || mpTexData > end) return FALSE;
+                TPLHeader* hdr = (TPLHeader*)mpTexHeader;
+                if (hdr->height == 0) goto _f7;
+                if (hdr->width != 0) goto _p7;
+                _f7: valid = FALSE; goto done;
+                _p7:
+
+                if (mpClutHeader != 0) goto _clut_fmt;
+                if (hdr->format == 0 || hdr->format == 1 || hdr->format == 2 || hdr->format == 3 ||
+                    hdr->format == 4 || hdr->format == 5 || hdr->format == 0xE || hdr->format == 6)
+                    goto _clut_fmt;
+                valid = FALSE; goto done;
+
+                _clut_fmt:
+                if (mpClutHeader == 0) goto _clut_entry;
+                if (hdr->format == 8 || hdr->format == 9) goto _clut_entry;
+                valid = FALSE; goto done;
+
+                _clut_entry:
+                {
+                    int mch = mpClutHeader;
+                    if (mch == 0) goto _10;
+                }
+
+                _clut_chk:
+
+                {
+                    TPLClutHeader* clut = (TPLClutHeader*)mpClutHeader;
+                    if (clut->format == 0 || clut->format == 1 || clut->format == 2) goto _11;
+                    valid = FALSE; goto done;
+                    _11:
+                    if (clut->numEntries <= 0x4000) goto _12;
+                    valid = FALSE; goto done;
+                    _12:;
+                }
+
+                _10:
+
+                if (hdr->wrapS == 0 || hdr->wrapS == 1 || hdr->wrapS == 2) goto _13;
+                valid = FALSE; goto done;
+                _13:
+
+                if (hdr->wrapT == 0 || hdr->wrapT == 1 || hdr->wrapT == 2) goto _14;
+                valid = FALSE; goto done;
+                _14:
+
+                if (hdr->minLOD != 0 || hdr->maxLOD != 0) goto _f15;
+                goto _p15;
+                _f15: valid = FALSE; goto done;
+                _p15:
+
+                if (hdr->minFilter == 0 || hdr->minFilter == 1 || hdr->minFilter == 2 ||
+                    hdr->minFilter == 3 || hdr->minFilter == 4 || hdr->minFilter == 5)
+                    goto _16;
+                valid = FALSE; goto done;
+                _16:
+
+                if (hdr->magFilter == 0 || hdr->magFilter == 1) goto _17;
+                valid = FALSE; goto done;
+                _17:
+
+                if (hdr->LODBias < lbl_81694650) goto _f18;
+                if (hdr->LODBias > lbl_81694654) goto _f18;
+                goto _p18;
+                _f18: valid = FALSE; goto done;
+                _p18:
+
+                if (hdr->edgeLODEnable == 0) goto _p19;
+                if (hdr->edgeLODEnable == 1) goto _p19;
+                valid = FALSE; goto done;
+                _p19:;
             }
-            if (mpClutHeader != 0) {
-                int end = pal + 0x100000;
-                if (mpClutData < pal || mpClutData > end) return FALSE;
-            }
 
-            TPLHeader* hdr = (TPLHeader*)mpTexHeader;
-            if (hdr->height == 0 || hdr->width == 0) return FALSE;
-
-            if (mpClutHeader == 0) {
-                if (hdr->format != 0 && hdr->format != 1 && hdr->format != 2 && hdr->format != 3 &&
-                    hdr->format != 4 && hdr->format != 5 && hdr->format != 0xE && hdr->format != 6)
-                    return FALSE;
-            } else {
-                if (hdr->format != 8 && hdr->format != 9) return FALSE;
-            }
-
-            if (mpClutHeader != 0) {
-                TPLClutHeader* clut = (TPLClutHeader*)mpClutHeader;
-                if (clut->format != 0 && clut->format != 1 && clut->format != 2) return FALSE;
-                if (clut->numEntries > 0x4000) return FALSE;
-            }
-
-            if (hdr->wrapS != 0 && hdr->wrapS != 1 && hdr->wrapS != 2) return FALSE;
-            if (hdr->wrapT != 0 && hdr->wrapT != 1 && hdr->wrapT != 2) return FALSE;
-            if (hdr->minLOD != 0 || hdr->maxLOD != 0) return FALSE;
-            if (hdr->minFilter != 0 && hdr->minFilter != 1 && hdr->minFilter != 2 &&
-                hdr->minFilter != 3 && hdr->minFilter != 4 && hdr->minFilter != 5)
-                return FALSE;
-            if (hdr->magFilter != 0 && hdr->magFilter != 1) return FALSE;
-            if (hdr->LODBias < -0.01f || hdr->LODBias > 0.01f) return FALSE;
-            if (hdr->edgeLODEnable != 0 && hdr->edgeLODEnable != 1) return FALSE;
-
-            return TRUE;
+            done:
+            return valid;
         }
 
         BOOL tpl_validity::is_valid() { return is_valid_cmn(); }
