@@ -112,12 +112,12 @@ namespace ipl {
         }
 
         void CharacterCode::ANSIToUTF8(char* dest, const u8* src) {
-            const u8* s = src;
             char* d = dest;
-            wchar_t utf16[3];
-            s32 sz[3];
+            const u8* s = src;
 
             while (*s != 0) {
+                wchar_t utf16[1];
+                s32 sz[3];
                 sz[2] = 1;
                 sz[1] = 1;
                 sz[0] = 3;
@@ -129,12 +129,12 @@ namespace ipl {
         }
 
         void CharacterCode::ANSIToUTF8(char* dest, const u8* src, int count) {
-            const u8* s = src;
             char* d = dest;
-            wchar_t utf16[3];
-            s32 sz[3];
+            const u8* s = src;
 
             for (int i = 0; i < count; i++) {
+                wchar_t utf16[1];
+                s32 sz[3];
                 sz[2] = 1;
                 sz[1] = 1;
                 sz[0] = 3;
@@ -146,18 +146,17 @@ namespace ipl {
         }
 
         void CharacterCode::UTF8ToANSI(u8* dest, const char* src) {
-            const char* s = src;
             u8* d = dest;
-            wchar_t utf16[3];
-            s32 sz[3];
+            const char* s = src;
 
-            while (*s != 0) {
-                sz[2] = 3;
+            while ((u8)*s != 0) {
+                wchar_t utf16[1];
+                s32 sz[3];
+                sz[2] = 1;
                 sz[1] = 1;
-                sz[0] = 1;
+                sz[0] = 3;
                 ENCConvertStringUtf8ToUtf16((u16*)utf16, &sz[2], (u8*)s, &sz[0]);
-                sz[1] = 1;
-                ENCConvertStringUnicodeToLatin1((u8*)d, &sz[1], (u16*)utf16, &sz[2]);
+                ENCConvertStringUnicodeToLatin1(d, &sz[1], (u16*)utf16, &sz[2]);
                 s += sz[0];
                 d += sz[1];
             }
