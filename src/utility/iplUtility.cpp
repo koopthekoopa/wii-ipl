@@ -295,8 +295,10 @@ namespace ipl {
             nw4r::ut::Rect rect4_3;
             System::getProjectionRect4x3(&rect4_3);
 
-            f32 ratio = (rect4_3.right - rect4_3.left) / (rect16_9.right - rect16_9.left);
-            return math::VEC2(basePos.x * ratio, -basePos.y);
+            f32 width16_9 = rect16_9.right - rect16_9.left;
+            f32 width4_3 = rect4_3.right - rect4_3.left;
+            // TODO: Non-matching VEC2 ctor call. When moving the math::VEC2(f32,f32) implementation into this TU, it matches 100% for some reason
+            return math::VEC2(basePos.x * (width4_3 / width16_9), -basePos.y);
         }
 
         void BScroller::reset() {
@@ -454,6 +456,7 @@ namespace ipl {
             s32 bias = SCGetCounterBias();
             __OSGetRTC(&rtc);
 
+            // TODO: resolve address?
             u32 busClk = *(u32*)0x800000F8;
             u32 timerClk = busClk / 4;
             u64 ticks = (u64)(rtc + bias);
