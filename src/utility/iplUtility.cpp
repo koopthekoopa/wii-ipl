@@ -382,100 +382,80 @@ namespace ipl {
 
 
         BOOL tpl_validity::is_valid_cmn() {
-
-#define FAIL_IF_NOT(cond) \
-    if (!(cond)) goto CONCAT(pass_, __LINE__); \
-        valid = FALSE; goto done; \
-    CONCAT(pass_, __LINE__):
-#define FAIL_IF(cond) FAIL_IF_NOT(!(cond))
-
-
             u32 pal = (u32)mpPalette;
             BOOL valid = TRUE;
 
-            FAIL_IF_NOT(mpPalette == NULL || mpPalette->versionNumber != 0x0020AF30);
+            if(mpPalette == NULL || mpPalette->versionNumber != 0x0020AF30) {
+                valid = FALSE; goto done;
+            }
 
             u32 end = (u32)mpPalette + 0x100000;
-
 
             if (mpTexDesc == NULL || mpTexHeader == NULL) {
                 valid = FALSE; goto done;
             }
-            _p2:
+            if ((u32)mpTexData & 0x1f) {
+                valid = FALSE; goto done;
+            }
+            if ((u32)mpClutData & 0x1f) {
+                valid = FALSE; goto done;
+            }
+            if ((u32)mpTexData < pal || (u32)mpTexData > end) {
+                valid = FALSE; goto done;
+            }
 
-            FAIL_IF_NOT((u32)mpTexData & 0x1f)
-            FAIL_IF_NOT((u32)mpClutData & 0x1f)
-            FAIL_IF_NOT((u32)mpTexData < pal || (u32)mpTexData > end)
+            if (mpClutHeader == NULL || (u32)mpClutData >= pal && (u32)mpClutData <= end) {}
+            else {
+                valid = FALSE; goto done;
+            }
 
-            if (mpClutHeader == NULL) goto _p6a;
-            if ((u32)mpClutData >= pal && (u32)mpClutData <= end) goto _p6b;
-            valid = FALSE; goto done;
-            _p6b:
-            _p6a:
             {
                 TPLHeader* hdr = mpTexHeader;
-                if (hdr->height == 0) goto _f7;
-                if (hdr->width != 0) goto _p7;
-                _f7: valid = FALSE; goto done;
-                _p7:
-
-                if (mpClutHeader != NULL) goto _clut_fmt;
-                if (hdr->format == 0 || hdr->format == 1 || hdr->format == 2 || hdr->format == 3 ||
-                    hdr->format == 4 || hdr->format == 5 || hdr->format == 0xE || hdr->format == 6)
-                    goto _clut_fmt;
-                valid = FALSE; goto done;
-
-                _clut_fmt:
-                if (mpClutHeader == NULL) goto _clut_entry;
-                if (hdr->format == 8 || hdr->format == 9) goto _clut_entry;
-                valid = FALSE; goto done;
-
-                _clut_entry:
-                if (mpClutHeader == NULL) goto _10;
-
-                _clut_chk:
-                {
-                    if (mpClutHeader->format == 0 || mpClutHeader->format == 1 || mpClutHeader->format == 2) goto _11;
+                if (hdr->height == 0 || hdr->width == 0) {
                     valid = FALSE; goto done;
-                    _11:
-                    if (mpClutHeader->numEntries <= 0x4000) goto _12;
-                    valid = FALSE; goto done;
-                    _12:;
                 }
-                _10:
 
-                if (hdr->wrapS == 0 || hdr->wrapS == 1 || hdr->wrapS == 2) goto _13;
-                valid = FALSE; goto done;
-                _13:
+                if (mpClutHeader != NULL ||
+                    hdr->format == 0 || hdr->format == 1 || hdr->format == 2 || hdr->format == 3 ||
+                    hdr->format == 4 || hdr->format == 5 || hdr->format == 0xE || hdr->format == 6) {}
+                else {
+                    valid = FALSE; goto done;
+                }
 
-                if (hdr->wrapT == 0 || hdr->wrapT == 1 || hdr->wrapT == 2) goto _14;
-                valid = FALSE; goto done;
-                _14:
+                if (mpClutHeader != NULL && (hdr->format == 8 || hdr->format == 9)) {}
+                else {
+                    valid = FALSE; goto done;
+                }
 
-                if (hdr->minLOD != 0 || hdr->maxLOD != 0) goto _f15;
-                goto _p15;
-                _f15: valid = FALSE; goto done;
-                _p15:
+                if (mpClutHeader != NULL && mpClutHeader->format != 0 && mpClutHeader->format != 1 && mpClutHeader->format != 2) {
+                    valid = FALSE; goto done;
+                }
+                if (mpClutHeader != NULL && mpClutHeader->numEntries > 0x4000) {
+                    valid = FALSE; goto done;
+                }
+                if (hdr->wrapS != 0 && hdr->wrapS != 1 && hdr->wrapS != 2) {
+                    valid = FALSE; goto done;
+                }
+                else if (hdr->wrapT != 0 && hdr->wrapT != 1 && hdr->wrapT != 2) {
+                    valid = FALSE; goto done;
+                }
+                else if (hdr->minLOD != 0 || hdr->maxLOD != 0) {
+                    valid = FALSE; goto done;
+                }
 
                 if (hdr->minFilter == 0 || hdr->minFilter == 1 || hdr->minFilter == 2 ||
-                    hdr->minFilter == 3 || hdr->minFilter == 4 || hdr->minFilter == 5)
-                    goto _p16;
-                valid = FALSE; goto done;
-                _p16:
-
-                if (hdr->magFilter == 0 || hdr->magFilter == 1) goto _p17;
-                valid = FALSE; goto done;
-                _p17:
-
-                if (hdr->LODBias < lbl_81694650 || hdr->LODBias > lbl_81694654) goto _f18;
-                goto _p18;
-                _f18: valid = FALSE; goto done;
-                _p18:
-
-                if (hdr->edgeLODEnable == 0 || hdr->edgeLODEnable == 1) goto _p19;
-                valid = FALSE; goto done;
-                _p19:;
-            }
+                    hdr->minFilter == 3 || hdr->minFilter == 4 || hdr->minFilter == 5) {
+                }
+                else {
+                    valid = FALSE; goto done;
+                }
+                if (hdr->magFilter != 0 && hdr->magFilter != 1)
+                    valid = FALSE;
+                else if (hdr->LODBias < lbl_81694650 || hdr->LODBias > lbl_81694654)
+                    valid = FALSE;
+                else if (hdr->edgeLODEnable != 0 && hdr->edgeLODEnable != 1)
+                    valid = FALSE;
+                }
 
             done:
             return valid;
