@@ -15,10 +15,10 @@ namespace ext_ead {
 }  // namespace ext_ead
 
 typedef struct FontFileData {
-    const char* name;
-    u32 unk_0x04;
-    void* start;
-    void* end;
+    const char* name;  // 0x00
+    u32 unk_0x04;      // 0x04
+    void* start;       // 0x08
+    void* end;         // 0x0C
 } FontFileData;
 FontFileData WWW_FONT_FILE_DATA_TABLE__[2] = {{"DirectUniversal"}};
 
@@ -122,7 +122,7 @@ namespace ext_ead {
         }
         void SurfaceManager::ResolveRsoModule() {
             int i;
-            RSOSymbolRef* symRef;
+            RSOExportFuncTable* symRef;
             print::TickTimer tt;
             RSOObjectHeader* rso;
 
@@ -147,7 +147,7 @@ namespace ext_ead {
             tt.reset();
             for (i = 0; i < ARRAY_LENGTH(rsoSymbolList); i++) {
                 symRef = &rsoSymbolList[i];
-                *symRef->symPtr = RSOFindExportSymbolAddr(rso, symRef->symName);
+                *symRef->symbol_ptr = (u32)RSOFindExportSymbolAddr(rso, symRef->symbol_name);
             }
             tt.report("ResolveModule_www");
         }
@@ -158,7 +158,7 @@ namespace ext_ead {
                     ((void (*)())rso->epilog)();
                 }
                 for (u32 i = 0; i < ARRAY_LENGTH(rsoSymbolList); i++) {
-                    *rsoSymbolList[i].symPtr = (void*)&::unresolved_www;
+                    *rsoSymbolList[i].symbol_ptr = (u32)::unresolved_www;
                 }
                 RSOUnLinkList(rso);
                 Heap::freeMem1(pBss);

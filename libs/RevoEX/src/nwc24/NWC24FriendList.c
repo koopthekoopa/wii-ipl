@@ -748,9 +748,6 @@ static NWC24Err GetCachedFLHeader(NWC24FLHeader** header) {
     return NWC24_OK;
 }
 
-// Supposed to be a static declaration in NWC24CheckPublicMailAddr but VF's LTO just had to make it global.
-const char g_SpecialsChars[11] = {'(', ')', '<', '>', '[', ']', ':', ';', '\\', ',', '"'};
-
 NWC24Err NWC24CheckFriendInfo(const NWC24FriendInfo* friendInfo) {
     NWC24Err result;
 
@@ -776,7 +773,7 @@ NWC24Err NWC24CheckPublicMailAddr(const char* addr) {
     int len;
     BOOL readingDomain;
 
-    // static const char specials[] = { '(', ')', '<', '>', '[', ']', ':', ';', '\\', ',', '"' };
+    static const char specials[] = { '(', ')', '<', '>', '[', ']', ':', ';', '\\', ',', '"' };
 
     // Check parameters
     if (addr == NULL) {
@@ -813,8 +810,8 @@ NWC24Err NWC24CheckPublicMailAddr(const char* addr) {
         }
 
         // If the character is special, invalid!
-        for (j = 0; j < sizeof(g_SpecialsChars); j++) {
-            if (ch == g_SpecialsChars[j]) {
+        for (j = 0; j < sizeof(specials); j++) {
+            if (ch == specials[j]) {
                 return NWC24_ERR_FORMAT;
             }
         }
