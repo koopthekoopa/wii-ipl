@@ -19,6 +19,7 @@
 
 namespace ipl {
     class Pointer;
+    namespace utility { class BScroller; }
 
     class PointerType {
     public:
@@ -132,6 +133,7 @@ namespace ipl {
 
         friend class PointerCoreObject;
         friend class PointerCore;
+        friend class utility::BScroller;
     };
 }  // namespace ipl
 

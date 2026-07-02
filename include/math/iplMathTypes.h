@@ -5,6 +5,12 @@
 
 #include <nw4r/math.h>
 
+/*
+ * MWerks math.h defines a macro that replaces all occurences of abs with __abs,
+ * breaking code matching in some places that explicitly require ipl::math::abs.
+ */
+#undef abs
+
 #define IPL_MATH_CLAMP(x, min, max) x < min ? min : (x > max ? max : x)
 
 #define IPL_MATH_INF ((1.0f / 0.0f))
@@ -18,6 +24,9 @@ namespace ipl {
         inline T abs(const T& x) {
             return nw4r::math::FAbs(x);
         }
+
+        template <typename T>
+        T abs_clamp(const T& val, const T& clamp);
 
         typedef struct MTX33 : public nw4r::math::MTX33 {
         } MTX33;
