@@ -51,6 +51,10 @@ char lbl_8169626C[4] = "chn";
 char lbl_81696270[4] = "kor";
 
 namespace ipl {
+    namespace math {
+        template class HermiteIntp<f32>;
+    }
+
     namespace utility {
         BScroller::BScroller() { init(); }
 
@@ -663,9 +667,3 @@ namespace ipl {
         }
     }
 }  // namespace ipl
-
-namespace ipl {
-    namespace math {
-        template class HermiteIntp<f32>;
-    }
-}
