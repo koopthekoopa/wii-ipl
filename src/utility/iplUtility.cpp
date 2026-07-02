@@ -659,7 +659,7 @@ namespace ipl {
         };
 
         char* Language::getPath() {
-            return (char*)*(volatile char**)&mLangPath[System::getLanguage()];
+            return mLangPath[System::getLanguage()];
         }
     }
 }  // namespace ipl
