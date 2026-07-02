@@ -40,15 +40,15 @@ char lbl_81641230[] = "WIPL_SE_B_SCROLL";
 char lbl_81641241[] = "WIPL_SE_MESSAGE_SCROLL";
 wchar_t lbl_81641258[] = L"%016llu";
 
-char lbl_81696250[4] = "jpn";
-char lbl_81696254[4] = "eng";
-char lbl_81696258[4] = "ger";
-char lbl_8169625C[4] = "fra";
-char lbl_81696260[4] = "spa";
-char lbl_81696264[4] = "ita";
-char lbl_81696268[4] = "ned";
-char lbl_8169626C[4] = "chn";
-char lbl_81696270[4] = "kor";
+char lbl_81696250[] = "jpn";
+char lbl_81696254[] = "eng";
+char lbl_81696258[] = "ger";
+char lbl_8169625C[] = "fra";
+char lbl_81696260[] = "spa";
+char lbl_81696264[] = "ita";
+char lbl_81696268[] = "ned";
+char lbl_8169626C[] = "chn";
+char lbl_81696270[] = "kor";
 
 namespace ipl {
     namespace utility {
@@ -197,19 +197,18 @@ namespace ipl {
         void CharacterCode::UTF16ToU32(u32* dest, const wchar_t* src) {
             int len = 0;
             u32 result = 0;
-            {
-                const wchar_t* p = src;
-                while (*p != 0) {
-                    len++;
-                    p++;
-                }
+
+            const wchar_t* p = src;
+            while (*p != 0) {
+                len++;
+                p++;
             }
 
             int off = 0;
             for (int i = 0; i < len; i++) {
                 double exp = pow(10.0, len - i - 1);
-                double dig = (double)(int)(src[i] - L'0');
-                double acc = (double)result + dig * exp;
+                double dig = src[i] - L'0';
+                double acc = result + dig * exp;
                 result = (u32)acc;
                 off += 2;
             }
@@ -301,7 +300,7 @@ namespace ipl {
                 src->GetTexture(&texObj, texMap);
                 dest->SetTexture(GX_TEXMAP0, texObj);
             }
-        }
+        } // namespace layout
 
         void BScroller::set_arw_param() {
             int direction = mSpeed >= 0.0f ? 1 : 0;
