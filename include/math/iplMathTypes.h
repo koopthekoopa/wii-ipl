@@ -5,6 +5,12 @@
 
 #include <nw4r/math.h>
 
+/*
+ * MWerks math.h defines a macro that replaces all occurences of abs with __abs,
+ * breaking code matching in some places that explicitly require ipl::math::abs.
+ */
+#undef abs
+
 #define IPL_MATH_CLAMP(x, min, max) x < min ? min : (x > max ? max : x)
 
 #define IPL_MATH_INF ((1.0f / 0.0f))
