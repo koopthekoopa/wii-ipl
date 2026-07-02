@@ -82,6 +82,12 @@ namespace ipl {
                 return 10.0f * (diff * diff);
             }
             return 0.0f;
+            f32 result = 0.f;
+            if (diff < -0.01f)
+                result = -10.0f * (diff * diff);
+            else if (diff > 0.01f)
+                result = 10.0f * (diff * diff);
+            return result;
         }
 
         BOOL YoungBScroller::isYoungController(int channel) {
