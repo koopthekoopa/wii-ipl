@@ -5,15 +5,12 @@
 #include <private/vf/PrFILE2/pf_types.h>
 
 typedef struct PF_FILE_NAME_ITER {
-    const pf_s8* buf;     // 0x00
-    pf_u32 dot_inserted;  // 0x04
-    pf_u32 is_long_name;  // 0x08
-    pf_u16 index;         // 0x0C
+    const pf_s8* buf;  // 0x00
+    pf_u16 kind;       // 0x04
+    pf_u16 index;      // 0x06
 } PF_FILE_NAME_ITER;
 
 #define PF_IS_PATH_SEPERATOR(s, t, i) ((VFiPFSTR_StrNCmp(s, (pf_s8*)"\\", t, i, 1) == 0 || VFiPFSTR_StrNCmp(s, (pf_s8*)"/", t, i, 1) == 0))
-
-#define PF_IS_PATH_WILDCARD(s, t, i) ((VFiPFSTR_StrNCmp(s, (pf_s8*)"*", t, i, 1) == 0) || (VFiPFSTR_StrNCmp(p_str, (pf_s8*)"?", t, i, 1) == 0))
 
 #define PF_IS_PATH_NULL(s, t, i) (VFiPFSTR_StrNCmp(s, (pf_s8*)"\0", t, i, 1) == 0)
 #define PF_IS_PATH_NOT_NULL(s, t, i) (VFiPFSTR_StrNCmp(s, (pf_s8*)"\0", t, i, 1) != 0)
@@ -24,8 +21,9 @@ pf_s32 VFiPFPATH_cmpTailSFN(const pf_s8* sfn_name, const pf_s8* pattern);
 void VFiPFPATH_InitTokenOfPath(PF_STR* p_str, pf_s8* path, pf_u32 code_mode);
 pf_s32 VFiPFPATH_GetNextTokenOfPath(PF_STR* p_str, pf_bool wildcard);
 pf_s32 VFiPFPATH_SplitPath(PF_STR* p_path, PF_STR* p_dir_path, PF_STR* p_filename);
+pf_s32 VFiPFPATH_SplitPathPattern(PF_STR* p_path, PF_STR* p_dir_path, PF_STR* p_pattern);
 PF_VOLUME* VFiPFPATH_GetVolumeFromPath(PF_STR* p_path);
-pf_u32 VFiPFPATH_MatchFileNameWithPattern(const pf_s8* file_name, PF_STR* p_pattern, pf_bool is_long_name);
+pf_bool VFiPFPATH_MatchFileNameWithPattern(const pf_s8* file_name, PF_STR* p_pattern, pf_bool is_short_search, pf_bool is_long_name);
 pf_s32 VFiPFPATH_putShortName(pf_u8* pDirEntry, const pf_s8* short_name, pf_u8 attr);
 pf_s32 VFiPFPATH_getShortName(pf_s8* short_name, const pf_u8* pDirEntry, pf_u8 attr);
 void VFiPFPATH_getLongNameformShortName(pf_s8* short_name, pf_s8* long_name, pf_u8 flag);

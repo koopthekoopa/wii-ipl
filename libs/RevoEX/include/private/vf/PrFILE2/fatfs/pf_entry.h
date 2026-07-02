@@ -35,18 +35,27 @@ pf_u8 VFiPFENT_CalcCheckSum(PF_DIR_ENT* p_ent);
 void VFiPFENT_LoadShortNameFromBuf(PF_DIR_ENT* p_ent, const pf_u8* buf);
 void VFiPFENT_loadEntryNumericFieldsFromBuf(PF_DIR_ENT* p_ent, const pf_u8* buf);
 void VFiPFENT_StoreEntryNumericFieldsToBuf(pf_u8* buf, const PF_DIR_ENT* p_ent);
-pf_s32 VFiPFENT_LoadLFNEntryFieldsFromBuf(PF_DIR_ENT* p_ent, const pf_u8* buf);
+pf_s32 VFiPFENT_LoadLFNEntryFieldsFromBuf(PF_DIR_ENT* p_ent, const pf_u8* buf, pf_bool is_reverse);
 void VFiPFENT_storeLFNEntryFieldsToBuf(pf_u8* buf, PF_DIR_ENT* p_ent, pf_u8 ord, pf_u8 sum, pf_bool is_last);
-pf_s32 VFiPFENT_findEntryPos(PF_FFD* p_ffd, PF_DIR_ENT* p_ent, pf_u32 index_search_from, PF_STR* p_pattern, pf_u8 attr_required, pf_u8 attr_unwanted,
-                             pf_u32* p_lpos, pf_u32* p_ppos);
-pf_s32 VFiPFENT_findEntry(PF_FFD* p_ffd, PF_DIR_ENT* p_ent, pf_u32 index_search_from, PF_STR* p_pattern, pf_u8 attr_required, pf_u8 attr_unwanted);
-pf_s32 VFiPFENT_allocateEntryPos(PF_DIR_ENT* p_ent, pf_u8 num_entries, PF_FFD* p_ffd, pf_u32* p_next_chain, PF_STR* p_filename, pf_u32* p_pos);
-pf_s32 VFiPFENT_allocateEntry(PF_DIR_ENT* p_ent, pf_u8 num_entries, PF_FFD* p_ffd, pf_u32* p_next_chain, PF_STR* p_filename);
+pf_s32 VFiPFENT_GetEntryOfPath(PF_DIR_ENT* p_ent, PF_VOLUME* p_vol, PF_STR* p_path);
+pf_s32 VFiPFENT_GetParentEntryOfPath(PF_DIR_ENT* p_ent, PF_VOLUME* p_vol, PF_STR* p_path);
+pf_s32 VFiPFENT_findEntry(PF_FFD* p_ffd, PF_DIR_ENT* p_ent, pf_u32 index_search_from, PF_STR* p_pattern, pf_u8 attr_required, pf_u32* p_lpos,
+                          pf_u32* p_ppos);
+pf_s32 VFiPFENT_allocateEntry(PF_DIR_ENT* p_ent, pf_u8 num_entries, PF_FFD* p_ffd, pf_u32* p_prev_chain, PF_STR* p_filename, pf_u8 attr_required,
+                              pf_u32* p_pos);
 pf_s32 VFiPFENT_GetRootDir(PF_VOLUME* p_vol, PF_DIR_ENT* p_ent);
 pf_s32 VFiPFENT_MakeRootDir(PF_VOLUME* p_vol);
-pf_s32 VFiPFENT_updateEntry(PF_DIR_ENT* p_ent, pf_u32 flag);
+pf_u32 VFiPFENT_CompareAttr(pf_u8 attr, pf_u32 attr_required);
+pf_s32 VFiPFENT_compareEntryName(PF_DIR_ENT* p_ent, PF_STR* p_pattern, pf_u8 attr);
 pf_s32 VFiPFENT_AdjustSFN(PF_DIR_ENT* p_ent, pf_s8* p_short_name);
 pf_s32 VFiPFENT_RemoveEntry(PF_DIR_ENT* p_ent, PF_ENT_ITER* p_iter);
 pf_u8 VFiPFENT_getcurrentDateTimeForEnt(pf_u16* p_date, pf_u16* p_time);
+pf_s32 VFiPFENT_UpdateSFNEntry(PF_DIR_ENT* p_ent, pf_bool flag);
+
+pf_s32 VFiPFENT_UpdateEntry(PF_DIR_ENT* p_ent, pf_u32* p_prev_chain, pf_bool is_set_ARCH);
+
+pf_s32 VFiPFENT_InitENT(PF_DIR_ENT* p_ent, PF_STR* p_filename, pf_u8 attr, pf_u32 is_set_time, PF_DIR_ENT* p_dir_ent, PF_VOLUME* p_vol);
+pf_s32 VFiPFENT_FillVoidEntryToSectors(PF_VOLUME* p_vol, pf_u32 start_sector, pf_u32 num_sectors, pf_u32 is_make_new_directory, PF_DIR_ENT* p_ent,
+                                       PF_DIR_ENT* p_parent_ent);
 
 #endif  // PRFILE2_VFMOD_PF_ENTRY_H

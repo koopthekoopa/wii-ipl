@@ -7,9 +7,9 @@
 
 char* CDBFindDataGetNameVF(CDBFindDataVF* findData) {
     if (findData->dta.longName[0] == 0) {
-        return findData->dta.fileName;
+        return (char*)findData->dta.fileName;
     } else {
-        return findData->dta.longName;
+        return (char*)findData->dta.longName;
     }
 }
 
@@ -25,7 +25,7 @@ BOOL CDBFSIsExistFileVF(const char* fileName) {
     char findName[256];
     VFDta vfDta;
 
-    VFError vfErr;
+    VFErr vfErr;
 
     strcpy(findName, fileName);
 
@@ -46,7 +46,7 @@ BOOL CDBFSIsExistFileVF(const char* fileName) {
 void CDBFSFindFirstVF(CDBFindDataVF* findData, const char* fileName) {
     char findName[256];
 
-    VFError vfErr;
+    VFErr vfErr;
 
     strcpy(findName, fileName);
     CDBFSConcatenatePath(findName, "*");
@@ -71,7 +71,7 @@ void CDBFSFindFirstVF(CDBFindDataVF* findData, const char* fileName) {
 }
 
 void CDBFSFindNextVF(CDBFindDataVF* findData) {
-    VFError vfErr;
+    VFErr vfErr;
 
     vfErr = VFFileSearchNext(&findData->dta);
     if (vfErr == VF_ERR_SUCCESS) {
@@ -114,7 +114,7 @@ CDBErr CDBFSCreateDirForceVF(const char* dirName) {
             realDirPath[i] = '\0';
 
             if (CDBFSIsDirNameVF(realDirPath)) {
-                VFError vfErr = VFCreateDir(realDirPath);
+                VFErr vfErr = VFCreateDir(realDirPath);
                 if (vfErr != VF_ERR_SUCCESS && vfErr != VF_ERR_EEXIST) {
                     if (vfErr == VF_ERR_ENOSPC) {
                         return CDB_ERROR_OUT_OF_SPACE;
@@ -132,7 +132,7 @@ CDBErr CDBFSCreateDirForceVF(const char* dirName) {
 }
 
 CDBErr CDBFSDeleteDirVF(const char* dirName) {
-    VFError vfErr = VFDeleteDir(dirName);
+    VFErr vfErr = VFDeleteDir(dirName);
 
     if (vfErr != VF_ERR_SUCCESS) {
         CDBReportError("CDBFSDeleteDirVF %s %s\n", dirName, VFGetApiErrorString(vfErr));

@@ -46,7 +46,7 @@ void VFiPFCACHE_SetCache(PF_VOLUME* p_vol, PF_CACHE_PAGE* p_cache_page, PF_CACHE
 void VFiPFCACHE_SetFATBufferSize(PF_VOLUME* p_vol, pf_u32 size);
 void VFiPFCACHE_SetDataBufferSize(PF_VOLUME* p_vol, pf_u32 size);
 pf_s32 VFiPFCACHE_InitCaches(PF_VOLUME* p_vol);
-pf_s32 VFiPFCACHE_UpdateModifiedSector(PF_CACHE_PAGE* p_page);
+pf_s32 VFiPFCACHE_UpdateModifiedSector(PF_VOLUME* p_vol, PF_CACHE_PAGE* p_page, pf_u32 num_sector);
 pf_s32 VFiPFCACHE_AllocateFATPage(PF_VOLUME* p_vol, pf_u32 sector, PF_CACHE_PAGE** pp_page);
 pf_s32 VFiPFCACHE_AllocateDataPage(PF_VOLUME* p_vol, pf_u32 sector, PF_CACHE_PAGE** pp_page);
 void VFiPFCACHE_FreeFATPage(PF_VOLUME* p_vol, PF_CACHE_PAGE* p_page);
@@ -61,6 +61,7 @@ pf_s32 VFiPFCACHE_WriteFATSectorAndFreeIfNeeded(PF_VOLUME* p_vol, const pf_u8* p
 pf_s32 VFiPFCACHE_WriteDataNumSectorAndFreeIfNeeded(PF_VOLUME* p_vol, const pf_u8* p_buf, pf_u32 sector, pf_u32 num_sector, pf_u32* p_num_success);
 PF_CACHE_PAGE* VFiPFCACHE_SearchDataCache(PF_VOLUME* p_vol, pf_u32 sector);
 pf_s32 VFiPFCACHE_FlushFATCache(PF_VOLUME* p_vol);
+pf_s32 VFiPFCACHE_FlushDataCache(PF_VOLUME* p_vol);
 pf_s32 VFiPFCACHE_FlushDataCacheSpecific(PF_VOLUME* p_vol, void* signature);
 pf_s32 VFiPFCACHE_FlushAllCaches(PF_VOLUME* p_vol);
 void VFiPFCACHE_FreeAllCaches(PF_VOLUME* p_vol);

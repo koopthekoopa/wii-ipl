@@ -5,7 +5,6 @@
 #include <private/cdb/CDBBridge.h>
 #include <revolution/types.h>
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif  // __cplusplus
@@ -20,7 +19,11 @@ typedef struct _CDBRecordFile {
     u8 unk_0x468[0x480 - 0x468];
 } CDBRecordFile;
 
-enum { CDB_RECORD_ALLOC_READ = (1 << 0), CDB_RECORD_ALLOC_WRITE = (1 << 1), CDB_RECORD_ALLOC_RW = CDB_RECORD_ALLOC_READ | CDB_RECORD_ALLOC_WRITE };
+enum {
+    CDB_RECORD_ALLOC_READ = (1 << 0),
+    CDB_RECORD_ALLOC_WRITE = (1 << 1),
+    CDB_RECORD_ALLOC_RW = CDB_RECORD_ALLOC_READ | CDB_RECORD_ALLOC_WRITE
+};
 
 /* RECORD POOL */
 

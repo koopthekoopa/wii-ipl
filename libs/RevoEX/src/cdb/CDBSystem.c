@@ -17,7 +17,7 @@ static BOOL s_fatalVFFlag = FALSE;
 // This was likely a local originally, but oh well!
 s32 CDBPrintDebugLevel = CDB_VERBOSE_LEVEL_NONE;
 
-static VFError s_lastVFError;
+static VFErr s_lastVFError;
 static s32 s_lastNANDError;
 
 static u8 s_cdbWiiId[OSRoundUp32B(CDB_WIIID_DAT_SIZE)] ALIGN32;
@@ -34,8 +34,8 @@ void CDBUnlock() {
     OSUnlockMutex(&s_mutex);
 }
 
-CDBErr _CDBOnVFErrorOccured(VFError vfError, const char* unused0, u32 unused1) {
-    s_lastVFError = vfError;
+CDBErr _CDBOnVFErrorOccured(VFErr VFErr, const char* unused0, u32 unused1) {
+    s_lastVFError = VFErr;
     return CDB_ERROR_VF_ERROR;
 }
 
@@ -44,7 +44,7 @@ CDBErr _CDBOnNANDErrorOccured(s32 nandError, const char* unused0, u32 unused1) {
     return CDB_ERROR_NAND_ERROR;
 }
 
-VFError CDBGetLastVFError() {
+VFErr CDBGetLastVFError() {
     return s_lastVFError;
 }
 
@@ -305,12 +305,12 @@ void CDBCheckMakerCodeStr(char* makerCodeStr) {
 static int s_vfSync = 1;
 
 CDBErr CDBSetVFSyncMode(int sync) {
-    VFError vfErr;
+    VFErr vfErr;
 
     if (sync != 0) {
-        vfErr = VFSync(CDB_CFG_VF_DRIVE_LETTER, 0);
+        vfErr = VFSetSyncMode(CDB_CFG_VF_DRIVE_LETTER, 0);
     } else {
-        vfErr = VFSync(CDB_CFG_VF_DRIVE_LETTER, 1);
+        vfErr = VFSetSyncMode(CDB_CFG_VF_DRIVE_LETTER, 1);
     }
 
     if (vfErr != VF_ERR_SUCCESS) {
@@ -323,9 +323,9 @@ CDBErr CDBSetVFSyncMode(int sync) {
 }
 
 CDBErr CDBVFSync() {
-    VFError vfErr;
+    VFErr vfErr;
     if (s_vfSync == 0) {
-        vfErr = VFBuffering(CDB_CFG_VF_DRIVE_LETTER, 1);
+        vfErr = VFSync(CDB_CFG_VF_DRIVE_LETTER, 1);
         if (vfErr != VF_ERR_SUCCESS) {
             return CDBOnVFErrorOccured(vfErr);
         }

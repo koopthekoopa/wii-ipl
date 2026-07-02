@@ -3,61 +3,61 @@
 
 #include <revolution/vf/types.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif  // __cplusplus
-
-#define VF_WORK_SIZE 0x14000
-
+void VFInit();
 void VFInitEx(void* heap_start_address, u32 size);
-s32 VFIsAvailable();
 
-VFError VFCreateSystemFileNANDFlashEx(const char* sys_file_name, u32 file_size);
+VFErr VFIsAvailable();
 
-VFError VFMountDriveNANDFlash(const char* drive, const char* sys_file_name);
-VFError VFMountDriveNANDFlashEx(const char* drive, const char* sys_file_name);
-VFError VFMountDriveNANDFlashCacheEx(const char* drive, const char* sys_file_name, void* cache_address, u32 cache_size);
+VFErr VFCreateSystemFileNANDFlashEx(const char* sys_file_name, u32 file_size);
 
-VFError VFMountDriveSDDirectEx(const char* drive, u32 slot_no, VFEventCallback eventCallback);
+VFErr VFAttachDriveNANDFlash(const char* drive);
+VFErr VFAttachDriveNANDFlashCache(const char* drive, void* cache_address, u32 cache_size);
+VFErr VFAttachDriveSDDirectCacheEx(const char* drive, u32 slot_no, void* cache_address, u32 cache_size, VFSDEventCallback eventCallback);
 
-VFError VFUnmountDrive(const char* drive);
-VFError VFUnmountDriveForce(const char* drive);
+VFErr VFActivateDriveNANDFlash(const char* drive, const char* sys_file_name);
+VFErr VFActivateDriveNANDFlashEx(const char* drive, const char* sys_file_name);
+VFErr VFActivateDriveSDDirect(const char* drive);
 
-VFFILE* VFCreateFile(const char* path, u32 attr);
-VFFILE* VFOpenFile(const char* path, const char* mode, u32 attr);
-VFError VFCloseFile(VFFILE* file);
+VFErr VFInactivateDrive(const char* drive);
+VFErr VFInactivateDriveForce(const char* drive);
 
-VFError VFSeekFile(VFFILE* file, s32 offset, s32 origin);
-VFError VFReadFile(VFFILE* file, void* buf, u32 size, u32* read_size);
-VFError VFWriteFile(VFFILE* file, void* buf, u32 size);
-VFError VFDeleteFile(const char* path);
+VFErr VFMountDriveNANDFlash(const char* drive, const char* sys_file_name);
+VFErr VFMountDriveNANDFlashEx(const char* drive, const char* sys_file_name);
+VFErr VFMountDriveNANDFlashCacheEx(const char* drive, const char* sys_file_name, void* cache_address, u32 cache_size);
+VFErr VFMountDriveSDDirectEx(const char* drive, u32 slot_no, VFSDEventCallback eventCallback);
 
-VFError VFCreateDir(const char* dir_name);
-VFError VFChangeDir(const char* dir_name);
-VFError VFDeleteDir(const char* dir_name);
+VFErr VFUnmountDrive(const char* drive);
+VFErr VFUnmountDriveForce(const char* drive);
 
-s32 VFGetFileSizeByFd(VFFILE* file);
-s32 VFGetOffsetByFd(VFFILE* file);
+VFFile* VFCreateFile(const char* path, u32 attr);
+VFFile* VFOpenFile(const char* path, const char* mode, u32 attr);
+VFErr VFCloseFile(VFFile* file);
+VFErr VFSeekFile(VFFile* file, s32 offset, s32 origin);
+VFErr VFReadFile(VFFile* file, void* buf, u32 size, u32* read_size);
+VFErr VFWriteFile(VFFile* file, void* buf, u32 size);
+VFErr VFDeleteFile(const char* path);
 
-VFError VFGetDriveFreeSize(const char* drive);
+VFErr VFCreateDir(const char* dir_name);
+VFErr VFChangeDir(const char* dir_name);
+VFErr VFDeleteDir(const char* dir_name);
 
-VFError VFFormatDrive(const char* drive);
+VFErr VFFormatDrive(const char* drive);
 
-VFError VFGetSDDirectStatus(const char* drive, u32* status);
+s32 VFGetFileSizeByFd(VFFile* file);
+s32 VFGetOffsetByFd(VFFile* file);
+s32 VFGetDriveFreeSize(const char* drive);
 
-VFError VFFileSearchFirst(VFDta* dta, const char* path, u8 attr);
-VFError VFFileSearchNext(VFDta* dta);
+VFErr VFGetSDDirectStatus(const char* drive, u32* status);
 
-VFError VFBuffering(const char* drive, s32 mode);
+VFErr VFFileSearchFirst(VFDta* dta, const char* path, u8 attr);
+VFErr VFFileSearchNext(VFDta* dta);
 
-VFError VFSync(const char* drive, s32 mode);
+VFErr VFSync(const char* drive, s32 mode);
+VFErr VFSetSyncMode(const char* drive, u32 mode);
 
-VFError VFGetLastError();
-VFError VFGetLastDeviceError(const char* drive);
-char* VFGetApiErrorString(VFError error);
+VFErr VFGetLastError();
+VFErr VFGetLastDeviceError(const char* drive);
 
-#ifdef __cplusplus
-}
-#endif  // __cplusplus
+const char* VFGetApiErrorString(VFErr error);
 
 #endif  // REVOLUTION_VF_H

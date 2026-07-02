@@ -14,19 +14,14 @@ typedef struct PDM_DISK PDM_DISK;
 typedef struct PDM_DISK_INFO PDM_DISK_INFO;
 
 typedef struct PDM_FUNCTBL {
-    pf_s32 (*init)(PDM_DISK*);                  // 0x00
-    pf_s32 (*finalize)(PDM_DISK*);              // 0x04
-    pf_s32 (*mount)(PDM_DISK*);                 // 0x08
-    pf_s32 (*unmount)(PDM_DISK*);               // 0x0C
-    pf_s32 (*format)(PDM_DISK*, const pf_u8*);  // 0x10
-#ifndef PF_IPL_BUILD
+    pf_s32 (*init)(PDM_DISK*);                                                   // 0x00
+    pf_s32 (*finalize)(PDM_DISK*);                                               // 0x04
+    pf_s32 (*mount)(PDM_DISK*);                                                  // 0x08
+    pf_s32 (*unmount)(PDM_DISK*);                                                // 0x0C
+    pf_s32 (*format)(PDM_DISK*, const pf_u8*);                                   // 0x10
     pf_s32 (*physical_read)(PDM_DISK*, pf_u8*, pf_u32, pf_u32, pf_u32*);         // 0x14
     pf_s32 (*physical_write)(PDM_DISK*, const pf_u8*, pf_u32, pf_u32, pf_u32*);  // 0x18
-#else
-    pf_s32 (*physical_read)(PDM_DISK*, pf_u8*, pf_u32, pf_u32);         // 0x14
-    pf_s32 (*physical_write)(PDM_DISK*, const pf_u8*, pf_u32, pf_u32);  // 0x18
-#endif
-    pf_s32 (*get_disk_info)(PDM_DISK*, PDM_DISK_INFO*);  // 0x1C
+    pf_s32 (*get_disk_info)(PDM_DISK*, PDM_DISK_INFO*);                          // 0x1C
 } PDM_FUNCTBL;
 
 typedef struct PDM_DISK_TBL {

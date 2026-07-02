@@ -1159,7 +1159,7 @@ namespace ipl {
             /**
              * @BUG: BUFFER OVERFLOW
              * It is possible for the text length to be over 6000 characters.
-             * But the Wii Menu does check if that is the case.
+             * But the Wii Menu doesn't check if that is the case.
              */
 
             while (i != strLen) {
@@ -1191,7 +1191,6 @@ namespace ipl {
                 }
             }
 
-            // Concat
             wcsncat(mpParsedText, inText, i);
         }
 

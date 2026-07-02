@@ -15,7 +15,7 @@ void VFiPFFILE_FinalizeAllFiles(PF_VOLUME* p_vol);
 pf_s32 VFiPFFILE_DoRemoveFile(PF_DIR_ENT* p_ent, PF_ENT_ITER* p_iter);
 pf_s32 VFiPFFILE_RemoveFile(PF_VOLUME* p_vol, PF_DIR_ENT* p_ent, PF_ENT_ITER* p_iter);
 pf_s32 VFiPFFILE_remove(PF_STR* p_path_str);
-pf_s32 VFiPFFILE_fopen(PF_STR* p_path_str, pf_s32 mode, PF_FILE** pp_file);
+pf_s32 VFiPFFILE_fopen(PF_STR* p_path_str, pf_u32 mode, PF_FILE** pp_file);
 pf_s32 VFiPFFILE_fclose(PF_FILE* p_file);
 pf_s32 VFiPFFILE_fread(pf_u8* p_buf, pf_u32 size, pf_u32 count, PF_FILE* p_file, pf_u32* p_count_read);
 pf_s32 VFiPFFILE_fwrite(pf_u8* p_buf, pf_u32 size, pf_u32 count, PF_FILE* p_file, pf_u32* p_count_written);

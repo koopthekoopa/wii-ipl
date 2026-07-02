@@ -3,8 +3,6 @@
 
 #include <stddef.h>
 
-#define PF_IPL_BUILD
-
 typedef signed char pf_s8;
 typedef signed short pf_s16;
 typedef signed long pf_s32;

@@ -5,7 +5,6 @@
 #include <revolution/types.h>
 #include <revolution/vf.h>
 
-
 #include <revolution/nwc24/NWC24Err.h>
 
 #ifdef __cplusplus
@@ -56,7 +55,7 @@ typedef struct NWC24File {
     u32 align;  // at 0x8
 
     NANDFileInfo nand;  // at 0xC
-    VFFILE* vf;         // at 0x98
+    VFFile* vf;         // at 0x98
 } NWC24File;
 
 typedef struct NWC24FileStream {

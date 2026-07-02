@@ -22,5 +22,7 @@ List of libraries that are linked (in alphabetical order):
 
 Thanks to
 ---------
+[koopthekoopa/TFP2](https://github.com/koopthekoopa/TFP2)  
+[SMGCommunity/Petari](https://github.com/SMGCommunity/Petari)  
 [kiwi515/ogws](https://github.com/kiwi515/ogws)  
 [riidef/mkw](https://github.com/riidefi/mkw)  

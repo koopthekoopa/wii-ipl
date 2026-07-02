@@ -831,7 +831,7 @@ namespace ipl {
 
             status[VF_SD_SLOT_0] = 0;
 
-            VFError vfErr = VFGetSDDirectStatus("SD", status);
+            VFErr vfErr = VFGetSDDirectStatus("SD", status);
             if (mCDBRecordKey.location == CDB_FS_LOCATION_SD) {
                 if (vfErr == VF_ERR_SUCCESS && (status[VF_SD_SLOT_0] & VF_STATUS_PROTECTED)) {
                     result = TRUE;

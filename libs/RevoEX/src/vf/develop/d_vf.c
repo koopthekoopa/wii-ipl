@@ -18,84 +18,116 @@ static pf_bool /* ? */ l_vf_init = PF_FALSE;
 static BOOL l_InitedMutex = FALSE;
 static OSMutex l_Mutex;
 
-static void _VFInitMutex() {
-    if (!l_InitedMutex) {
-        OSInitMutex(&l_Mutex);
-        l_InitedMutex = TRUE;
-    }
-}
-
-static void _VFLockMutex() {
-    if (l_InitedMutex) {
-        OSLockMutex(&l_Mutex);
-    }
-}
-
-static void _VFUnlockMutex() {
-    if (l_InitedMutex) {
-        OSUnlockMutex(&l_Mutex);
-    }
-}
-
-s32 VFIsAvailable() {
-    return l_vf_init == PF_FALSE ? PF_FALSE : PF_TRUE;
-}
-
-void VFInitEx(void* i_heap_start_address_p, u32 i_size) {
-    _VFInitMutex();
-
-    _VFLockMutex();
-    {
-        if (!l_vf_init) {
-            l_vf_init = PF_TRUE;
-            VFSysInit(i_heap_start_address_p, i_size);
-            VFipdm_init_diskmanager(0, NULL);
-            VFipf2_init_prfile2(0, NULL);
-            dHash_InitHashTable();
-            VFSysSetTimeStampCallback(NULL);
-        }
-    }
-    _VFUnlockMutex();
-}
-
 static char l_vf_drive_work[0x68000] ALIGN32;
+
+static void VFiInitMutex();
+static void VFiLockMutex();
+static void VFiUnlockMutex();
+
+static char* VFiPath2HandleIndex(s32* o_handle_idx_p, const char* i_path_p);
 
 void VFInit() {
     VFInitEx(l_vf_drive_work, sizeof(l_vf_drive_work));
 }
 
-void VFFinalize() {
-    _VFLockMutex();
+void VFInitEx(void* i_heap_start_address_p, u32 i_size) {
+    VFiInitMutex();
+
+    VFiLockMutex();
     {
-        if (l_vf_init) {
-            VFSysFinalize();
-            l_vf_init = PF_FALSE;
+        if (!l_vf_init) {
+            VFSysInit(i_heap_start_address_p, i_size);
+            VFipdm_init_diskmanager(0, NULL);
+            VFipf2_init_prfile2(0, NULL);
+            dHash_InitHashTable();
+            VFSysSetTimeStampCallback(NULL);
+            l_vf_init = PF_TRUE;
         }
     }
-    _VFUnlockMutex();
+    VFiUnlockMutex();
 }
 
-s32 VFAttachDriveNANDFlash(const char* i_drive) {
-    s32 err = VF_ERR_ALREADY_ATTACHED_DRV_NAME;
-    s32 idx = -1;
+VFErr VFIsAvailable() {
+    return l_vf_init == PF_FALSE ? PF_FALSE : PF_TRUE;
+}
 
-    _VFLockMutex();
+VFErr VFCreateSystemFileNANDFlashEx(const char* i_sys_file_name_p, u32 i_file_size) {
+    VFErr DevErr;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 294);
+
+    VFiLockMutex();
+    DevErr = VFSysCreatePrfFileNANDFlashEx(i_sys_file_name_p, i_file_size);
+    VFiUnlockMutex();
+
+    return DevErr;
+}
+
+static VFErr VFiAttachDriveNANDFlashCommon(const char* i_drive, void* i_cache_address_p, u32 i_cache_size);
+
+VFErr VFAttachDriveNANDFlash(const char* i_drive) {
+    return VFiAttachDriveNANDFlashCommon(i_drive, NULL, 0);
+}
+
+VFErr VFAttachDriveNANDFlashCache(const char* i_drive, void* i_cache_address_p, u32 i_cache_size) {
+    return VFiAttachDriveNANDFlashCommon(i_drive, i_cache_address_p, i_cache_size);
+}
+
+static VFErr VFiAttachDriveNANDFlashCommon(const char* i_drive, void* i_cache_address_p, u32 i_cache_size) {
+    VFErr err = VF_ERR_ALREADY_ATTACHED_DRV_NAME;
+    s32 idx;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 497);
+
+    VFiLockMutex();
     {
         if (dHash_GetArg(i_drive) == -1) {
-            err = VFSysSetDeviceNANDFlash(&idx, NULL, 0);
-            if (err == VF_ERR_SUCCESS) {
+            err = VFSysSetDeviceNANDFlash(&idx, i_cache_address_p, i_cache_size);
+            if (err == VF_ERR_SUCCESS && idx != -1) {
                 dHash_SetArg(i_drive, idx);
             }
         }
         VFSysSetLastError(err);
     }
-    _VFUnlockMutex();
+    VFiUnlockMutex();
     return err;
 }
 
-static s32 VFDetachDrive_common(const char* i_drive, u8 i_set_err) {
-    s32 err;
-    _VFLockMutex();
+static VFErr VFiAttachDriveSDDirectCommon(const char* i_drive, u32 i_slot_no, void* i_cache_address_p, u32 i_cache_size,
+                                          VFSDEventCallback i_eventCallback);
+
+VFErr VFAttachDriveSDDirectCacheEx(const char* i_drive, u32 i_slot_no, void* i_cache_address_p, u32 i_cache_size, VFSDEventCallback i_eventCallback) {
+    return VFiAttachDriveSDDirectCommon(i_drive, i_slot_no, i_cache_address_p, i_cache_size, i_eventCallback);
+}
+
+static VFErr VFiAttachDriveSDDirectCommon(const char* i_drive, u32 i_slot_no, void* i_cache_address_p, u32 i_cache_size,
+                                          VFSDEventCallback i_eventCallback) {
+    VFErr err = VF_ERR_ALREADY_ATTACHED_DRV_NAME;
+    s32 idx;
+    s32 slot_no;  // unused, might be left over from VFiMountDriveSDDirectCommon
+
+    ASSERTLINE((VFIsAvailable() == (1)), 1184);
+
+    VFiLockMutex();
+    {
+        if (dHash_GetArg(i_drive) == -1) {
+            err = VFSysSetDeviceSDDirect(&idx, i_slot_no, i_cache_address_p, i_cache_size, i_eventCallback);
+            if (err == VF_ERR_SUCCESS && idx != -1) {
+                dHash_SetArg(i_drive, idx);
+            }
+        }
+        VFSysSetLastError(err);
+    }
+    VFiUnlockMutex();
+    return err;
+}
+
+static VFErr VFiDetachDriveCommon(const char* i_drive, u8 i_set_err) {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 1312);
+
+    VFiLockMutex();
     {
         s32 idx = dHash_GetArg(i_drive);
 
@@ -107,29 +139,65 @@ static s32 VFDetachDrive_common(const char* i_drive, u8 i_set_err) {
             VFSysSetLastError(err);
         }
     }
-    _VFUnlockMutex();
+    VFiUnlockMutex();
     return err;
 }
 
-s32 VFCreateSystemFileNANDFlashEx(const char* i_sys_file_name_p, u32 i_file_size) {
-    s32 DevErr;
+static VFErr VFiActivateDrive(const char* i_drive, const char* i_sys_file_name_p, void* i_memory_p);
+static VFErr VFiActivateDriveEx(const char* i_drive, const char* i_sys_file_name_p, void* i_memory_p);
 
-    _VFLockMutex();
-    DevErr = VFSysCreatePrfFileNANDFlashEx(i_sys_file_name_p, i_file_size);
-    _VFUnlockMutex();
-
-    return DevErr;
+VFErr VFActivateDriveNANDFlash(const char* i_drive, const char* i_sys_file_name_p) {
+    return VFiActivateDrive(i_drive, i_sys_file_name_p, NULL);
 }
 
-static s32 VF_activate_drive_common(s32 i_handle_idx, const char* i_sys_file_name_p, void* i_memory_p) {
-    {
-        s32 err = VF_ERR_SUCCESS;
-        s32 errChk = VF_ERR_SUCCESS;
+VFErr VFActivateDriveNANDFlashEx(const char* i_drive, const char* i_sys_file_name_p) {
+    return VFiActivateDriveEx(i_drive, i_sys_file_name_p, NULL);
+}
 
-        errChk = VFSysCheckExistPrfFile(i_handle_idx, i_sys_file_name_p, i_memory_p);
-        if (errChk != VF_ERR_SUCCESS) {
-            VFSysSetLastError(errChk);
-            return errChk;
+VFErr VFActivateDriveSDDirect(const char* i_drive) {
+    return VFiActivateDrive(i_drive, NULL, NULL);
+}
+
+static VFErr VFiActivateDriveCommon(s32 i_handle_idx, const char* i_sys_file_name_p, void* i_memory_p);
+
+static VFErr VFiActivateDrive(const char* i_drive, const char* i_sys_file_name_p, void* i_memory_p) {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 1584);
+
+    VFiLockMutex();
+    {
+        s32 handle_idx = dHash_GetArg(i_drive);
+        VFSysSetNandFuncNormal(handle_idx);
+        err = VFiActivateDriveCommon(handle_idx, i_sys_file_name_p, i_memory_p);
+    }
+    VFiUnlockMutex();
+    return err;
+}
+
+static VFErr VFiActivateDriveEx(const char* i_drive, const char* i_sys_file_name_p, void* i_memory_p) {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 1614);
+
+    VFiLockMutex();
+    {
+        s32 handle_idx = dHash_GetArg(i_drive);
+        VFSysSetNandFuncEx(handle_idx);
+        err = VFiActivateDriveCommon(handle_idx, i_sys_file_name_p, i_memory_p);
+    }
+    VFiUnlockMutex();
+    return err;
+}
+
+static VFErr VFiActivateDriveCommon(s32 i_handle_idx, const char* i_sys_file_name_p, void* i_memory_p) {
+    VFErr err;
+    {
+        err = VFSysCheckExistPrfFile(i_handle_idx, i_sys_file_name_p, i_memory_p);
+
+        if (err != VF_ERR_SUCCESS) {
+            VFSysSetLastError(err);
+            return err;
         }
         err = VFSysMountDrv(i_handle_idx, i_sys_file_name_p, i_memory_p);
         if (err != VF_ERR_SUCCESS) {
@@ -141,7 +209,6 @@ static s32 VF_activate_drive_common(s32 i_handle_idx, const char* i_sys_file_nam
     {
         VFSys_drive* drive_p = VFSysGetDriveP(i_handle_idx);
         PF_DRV_TBL* drv_tbl[2];
-        s32 err;
 
         if (drive_p == NULL) {
             VFSysSetLastError(VF_ERR_CANNOT_ALLOC_DRV);
@@ -160,96 +227,617 @@ static s32 VF_activate_drive_common(s32 i_handle_idx, const char* i_sys_file_nam
     return VF_ERR_SUCCESS;
 }
 
-static s32 VF_activate_drive(const char* i_drive, const char* i_sys_file_name_p, void* i_memory_p) {
-    s32 handle_idx = dHash_GetArg(i_drive);
+static VFErr VFiInactivateDriveCommon(const char* i_drive, u32 i_mode);
 
-    VFSysSetNandFuncNormal(handle_idx);
-    return VF_activate_drive_common(handle_idx, i_sys_file_name_p, i_memory_p);
+VFErr VFInactivateDrive(const char* i_drive) {
+    return VFiInactivateDriveCommon(i_drive, 0);
 }
 
-static s32 VF_activate_driveEx(const char* i_drive, const char* i_sys_file_name_p, void* i_memory_p) {
-    s32 handle_idx = dHash_GetArg(i_drive);
-
-    VFSysSetNandFuncEx(handle_idx);
-    return VF_activate_drive_common(handle_idx, i_sys_file_name_p, i_memory_p);
+VFErr VFInactivateDriveForce(const char* i_drive) {
+    return VFiInactivateDriveCommon(i_drive, 1);
 }
 
-s32 VFActivateDriveNANDFlash(const char* i_drive, const char* i_sys_file_name_p) {
-    s32 Err;
+static VFErr VFiInactivateDriveCommon(const char* i_drive, u32 i_mode) {
+    VFErr err;
 
-    _VFLockMutex();
-    Err = VF_activate_drive(i_drive, i_sys_file_name_p, NULL);
-    _VFUnlockMutex();
-    return Err;
-}
+    ASSERTLINE((VFIsAvailable() == (1)), 1817);
 
-s32 VFActivateDriveNANDFlashEx(const char* i_drive, const char* i_sys_file_name_p) {
-    s32 Err;
-
-    _VFLockMutex();
-    Err = VF_activate_driveEx(i_drive, i_sys_file_name_p, NULL);
-    _VFUnlockMutex();
-    return Err;
-}
-
-static s32 VFInactivateDrive_common(s32 i_handle_idx, u32 i_mode) {
-    s32 Err;
-
-    Err = VFSysUnmountDrv(i_handle_idx, i_mode);
-    VFSysSetLastError(Err);
-    return Err;
-}
-
-s32 VFInactivateDrive(const char* i_drive) {
-    s32 err;
-
-    _VFLockMutex();
+    VFiLockMutex();
     {
-        s32 handle_idx;
-        handle_idx = dHash_GetArg(i_drive);
-        err = VFInactivateDrive_common(handle_idx, 0);
+        s32 handle_idx = dHash_GetArg(i_drive);
+        err = VFSysUnmountDrv(handle_idx, i_mode);
+        VFSysSetLastError(err);
     }
-    _VFUnlockMutex();
+    VFiUnlockMutex();
     return err;
 }
 
-s32 VFMountDriveNANDFlash(const char* i_drive, const char* i_sys_file_name_p) {
-    s32 err;
+VFErr VFMountDriveNANDFlash(const char* i_drive, const char* i_sys_file_name_p) {
+    VFErr err;
 
     err = VFAttachDriveNANDFlash(i_drive);
     if (err == VF_ERR_SUCCESS || err == VF_ERR_ALREADY_ATTACHED_DRV_NAME) {
         err = VFActivateDriveNANDFlash(i_drive, i_sys_file_name_p);
         if (err != VF_ERR_SUCCESS && err != VF_ERR_ALREADY_MOUNTED_DRV_NAME) {
-            VFDetachDrive_common(i_drive, 0);
+            VFiDetachDriveCommon(i_drive, VF_ERR_SUCCESS);
         }
     }
     return err;
 }
 
-s32 VFMountDriveNANDFlashEx(const char* i_drive, const char* i_sys_file_name_p) {
-    s32 err;
+VFErr VFMountDriveNANDFlashEx(const char* i_drive, const char* i_sys_file_name_p) {
+    VFErr err;
 
     err = VFAttachDriveNANDFlash(i_drive);
     if (err == VF_ERR_SUCCESS || err == VF_ERR_ALREADY_ATTACHED_DRV_NAME) {
         err = VFActivateDriveNANDFlashEx(i_drive, i_sys_file_name_p);
         if (err != VF_ERR_SUCCESS && err != VF_ERR_ALREADY_MOUNTED_DRV_NAME) {
-            VFDetachDrive_common(i_drive, 0);
+            VFiDetachDriveCommon(i_drive, VF_ERR_SUCCESS);
         }
     }
     return err;
 }
 
-s32 VFUnmountDrive(const char* i_drive) {
-    s32 err;
+VFErr VFMountDriveNANDFlashCacheEx(const char* i_drive, const char* i_sys_file_name_p, void* i_cache_address_p, u32 i_cache_size) {
+    VFErr err;
 
-    err = VFInactivateDrive(i_drive);
-    if (err == VF_ERR_SUCCESS) {
-        err = VFDetachDrive_common(i_drive, 1);
+    err = VFAttachDriveNANDFlashCache(i_drive, i_cache_address_p, i_cache_size);
+    if (err == VF_ERR_SUCCESS || err == VF_ERR_ALREADY_ATTACHED_DRV_NAME) {
+        err = VFActivateDriveNANDFlashEx(i_drive, i_sys_file_name_p);
+        if (err != VF_ERR_SUCCESS && err != VF_ERR_ALREADY_MOUNTED_DRV_NAME) {
+            VFiDetachDriveCommon(i_drive, VF_ERR_SUCCESS);
+        }
     }
     return err;
 }
 
-static char* VF_path2handleidx(s32* o_handle_idx_p, const char* i_path_p) {
+static VFErr VFiMountDriveSDDirectCommon(const char* i_drive, u32 i_slot_no, void* i_cache_address_p, u32 i_cache_size,
+                                         VFSDEventCallback i_eventCallback);
+
+VFErr VFMountDriveSDDirectEx(const char* i_drive, u32 i_slot_no, VFSDEventCallback i_eventCallback) {
+    return VFiMountDriveSDDirectCommon(i_drive, i_slot_no, NULL, 0, i_eventCallback);
+}
+
+static VFErr VFiMountDriveSDDirectCommon(const char* i_drive, u32 i_slot_no, void* i_cache_address_p, u32 i_cache_size,
+                                         VFSDEventCallback i_eventCallback) {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 2584);
+
+    err = VFAttachDriveSDDirectCacheEx(i_drive, i_slot_no, i_cache_address_p, i_cache_size, i_eventCallback);
+    if (err == VF_ERR_ALREADY_ATTACHED_DRV_NAME) {
+        VFErr slot_err = VF_ERR_SUCCESS;
+        VFiLockMutex();
+        {
+            s32 idx = dHash_GetArg(i_drive);
+            s32 slot_no = VFSysGetSlotNoSDDirect(idx);
+
+            if (slot_no == -1) {
+                slot_err = VF_ERR_SYSTEM;
+                VFSysSetLastError(VF_ERR_SYSTEM);
+            } else if (slot_no != i_slot_no) {
+                slot_err = VF_ERR_ALREADY_ATTACHED_DRV_NAME;
+                VFSysSetLastError(VF_ERR_ALREADY_ATTACHED_DRV_NAME);
+            }
+        }
+        VFiUnlockMutex();
+        if (slot_err != VF_ERR_SUCCESS) {
+            return slot_err;
+        }
+    }
+    if (err == VF_ERR_SUCCESS || err == VF_ERR_ALREADY_ATTACHED_DRV_NAME) {
+        err = VFActivateDriveSDDirect(i_drive);
+        if (err != VF_ERR_SUCCESS && err != VF_ERR_ALREADY_MOUNTED_DRV_NAME) {
+            VFiDetachDriveCommon(i_drive, VF_ERR_SUCCESS);
+        }
+    }
+    return err;
+}
+
+VFErr VFUnmountDrive(const char* i_drive) {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 2705);
+
+    err = VFInactivateDrive(i_drive);
+    if (err == VF_ERR_SUCCESS) {
+        err = VFiDetachDriveCommon(i_drive, 1);
+    }
+    return err;
+}
+
+VFErr VFUnmountDriveForce(const char* i_drive) {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 2753);
+
+    err = VFInactivateDriveForce(i_drive);
+    if (err == VF_ERR_SUCCESS) {
+        err = VFiDetachDriveCommon(i_drive, 1);
+    }
+    return err;
+}
+
+VFFile* VFCreateFile(const char* i_path_p, u32 i_attr) {
+    s32 handle_idx;
+    const char* path_p;
+    VFFile* pFile = NULL;
+
+    (void)i_attr;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 2892);
+
+    VFiLockMutex();
+    {
+        path_p = VFiPath2HandleIndex(&handle_idx, i_path_p);
+        if (path_p == NULL) {
+            VFSysSetLastError(VF_ERR_NOT_ALLOCATED_DRV);
+            goto exit;
+        }
+        if (handle_idx != -1) {
+            pFile = VFSysCreateFile(handle_idx, path_p);
+        } else {
+            pFile = VFSysCreateFile_current(path_p);
+        }
+    }
+exit:
+    VFiUnlockMutex();
+
+    return pFile;
+}
+
+VFFile* VFOpenFile(const char* i_path_p, const char* i_mode, u32 i_attr) {
+    s32 handle_idx;
+    const char* path_p;
+    VFFile* pFile = NULL;
+
+    (void)i_attr;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 2978);
+
+    VFiLockMutex();
+    {
+        path_p = VFiPath2HandleIndex(&handle_idx, i_path_p);
+        if (path_p == NULL) {
+            VFSysSetLastError(VF_ERR_NOT_ALLOCATED_DRV);
+            goto exit;
+        }
+        if (handle_idx != -1) {
+            pFile = VFSysOpenFile(handle_idx, path_p, i_mode);
+        } else {
+            pFile = VFSysOpenFile_current(path_p, i_mode);
+        }
+    }
+exit:
+    VFiUnlockMutex();
+
+    return pFile;
+}
+
+VFErr VFCloseFile(VFFile* i_file_p) {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 3059);
+
+    VFiLockMutex();
+    {
+        err = VFSysCloseFile(i_file_p);
+        VFSysSetLastError(err);
+    }
+    VFiUnlockMutex();
+    return err;
+}
+
+VFErr VFSeekFile(VFFile* i_file_p, s32 i_offset, s32 i_origin) {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 3088);
+
+    VFiLockMutex();
+    {
+        err = VFSysSeekFile((PF_FILE*)i_file_p, i_offset, i_origin);
+        VFSysSetLastError(err);
+    }
+    VFiUnlockMutex();
+    return err;
+}
+
+VFErr VFReadFile(VFFile* i_file_p, void* o_buf_p, u32 i_size, u32* o_read_size_p) {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 3119);
+
+    VFiLockMutex();
+    {
+        err = VFSysReadFile(o_read_size_p, o_buf_p, i_size, i_file_p);
+        VFSysSetLastError(err);
+    }
+    VFiUnlockMutex();
+    return err;
+}
+
+VFErr VFWriteFile(VFFile* i_file_p, void* i_buf_p, u32 i_size) {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 3148);
+
+    VFiLockMutex();
+    {
+        err = VFSysWriteFile(i_buf_p, i_size, i_file_p);
+        VFSysSetLastError(err);
+    }
+    VFiUnlockMutex();
+    return err;
+}
+
+VFErr VFDeleteFile(const char* i_path_p) {
+    s32 handle_idx;
+    const char* path_p;
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 3175);
+
+    VFiLockMutex();
+    {
+        path_p = VFiPath2HandleIndex(&handle_idx, i_path_p);
+        if (path_p == NULL) {
+            err = VF_ERR_NOT_ALLOCATED_DRV;
+            goto exit;
+        }
+        if (handle_idx != -1) {
+            err = VFSysDeleteFile(handle_idx, path_p);
+        } else {
+            err = VFSysDeleteFile_current(path_p);
+        }
+    exit:
+        VFSysSetLastError(err);
+    }
+    VFiUnlockMutex();
+    return err;
+}
+
+VFErr VFCreateDir(const char* i_dir_name_p) {
+    s32 handle_idx;
+    const char* path_p;
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 3615);
+
+    VFiLockMutex();
+    {
+        path_p = VFiPath2HandleIndex(&handle_idx, i_dir_name_p);
+        if (path_p == NULL) {
+            err = VF_ERR_NOT_ALLOCATED_DRV;
+            goto exit;
+        }
+        if (handle_idx != -1) {
+            err = VFSysCreateDir(handle_idx, path_p);
+        } else {
+            err = VFSysCreateDir_current(path_p);
+        }
+    exit:
+        VFSysSetLastError(err);
+    }
+    VFiUnlockMutex();
+    return err;
+}
+
+VFErr VFChangeDir(const char* i_dir_name_p) {
+    s32 handle_idx;
+    const char* path_p;
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 3695);
+
+    VFiLockMutex();
+    {
+        path_p = VFiPath2HandleIndex(&handle_idx, i_dir_name_p);
+        if (path_p == NULL) {
+            err = VF_ERR_NOT_ALLOCATED_DRV;
+            goto exit;
+        }
+        if (handle_idx != -1) {
+            err = VFSysChangeDir(handle_idx, path_p);
+        } else {
+            err = VFSysChangeDir_current(path_p);
+        }
+    exit:
+        VFSysSetLastError(err);
+    }
+    VFiUnlockMutex();
+    return err;
+}
+
+VFErr VFDeleteDir(const char* i_dir_name_p) {
+    s32 handle_idx;
+    const char* path_p;
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 3775);
+
+    VFiLockMutex();
+    {
+        path_p = VFiPath2HandleIndex(&handle_idx, i_dir_name_p);
+        if (path_p == NULL) {
+            err = VF_ERR_NOT_ALLOCATED_DRV;
+            goto exit;
+        }
+        if (handle_idx != -1) {
+            err = VFSysDeleteDir(handle_idx, path_p);
+        } else {
+            err = VFSysDeleteDir_current(path_p);
+        }
+    exit:
+        VFSysSetLastError(err);
+    }
+    VFiUnlockMutex();
+    return err;
+}
+
+VFErr VFFormatDrive(const char* i_drive) {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 3919);
+
+    VFiLockMutex();
+    {
+        s32 handle_idx = dHash_GetArg(i_drive);
+        err = VFSysFormatDrive(handle_idx);
+        VFSysSetLastError(err);
+    }
+    VFiUnlockMutex();
+    return err;
+}
+
+s32 VFGetFileSizeByFd(VFFile* i_file_p) {
+    u32 size;
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 3982);
+
+    VFiLockMutex();
+    {
+        err = VFSysGetFileSizeByFd(&size, (PF_FILE*)i_file_p);
+        if (err != VF_ERR_SUCCESS) {
+            VFSysSetLastError(err);
+        }
+    }
+    VFiUnlockMutex();
+
+    if (err != VF_ERR_SUCCESS) {
+        return VF_ERR_SYSTEM;
+    }
+
+    return size > 0x7FFFFFFF ? 0x7FFFFFFF : size;
+}
+
+s32 VFGetOffsetByFd(VFFile* i_file_p) {
+    u32 offset;
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 4159);
+
+    VFiLockMutex();
+    {
+        err = VFSysGetOffsetByFd(&offset, (PF_FILE*)i_file_p);
+        if (err != VF_ERR_SUCCESS) {
+            VFSysSetLastError(VF_ERR_SYSTEM);
+        }
+    }
+    VFiUnlockMutex();
+
+    if (err != VF_ERR_SUCCESS) {
+        return VF_ERR_SYSTEM;
+    }
+
+    return offset > 0x7FFFFFFF ? 0x7FFFFFFF : offset;
+}
+
+s32 VFGetDriveFreeSize(const char* i_drive) {
+    u32 cluster;
+    u32 sector;
+    u32 byte;
+    u64 size;
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 4217);
+
+    VFiLockMutex();
+    {
+        if (i_drive != NULL) {
+            s32 handle_idx;
+            handle_idx = dHash_GetArg(i_drive);
+            err = VFSysGetDriveFreeSize(handle_idx, &cluster, &sector, &byte);
+        } else {
+            err = VF_ERR_SYSTEM;
+        }
+    }
+    VFiUnlockMutex();
+
+    if (err != VF_ERR_SUCCESS) {
+        VFSysSetLastError(err);
+        return VF_ERR_SYSTEM;
+    }
+
+    size = ((u64)cluster * (u64)sector * (u64)byte);
+
+    return size > 0x7FFFFFFF ? 0x7FFFFFFF : size;
+}
+
+VFErr VFGetSDDirectStatus(const char* i_drive, u32* o_status_p) {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 4390);
+
+    VFiLockMutex();
+    {
+        s32 handle_idx = dHash_GetArg(i_drive);
+        err = VFSysGetSDDirectStatus(handle_idx, o_status_p);
+        VFSysSetLastError(err);
+    }
+    VFiUnlockMutex();
+
+    return err;
+}
+
+VFErr VFFileSearchFirst(VFDta* o_dta_p, const char* i_path_p, u8 i_attr) {
+    s32 handle_idx;
+    const char* path_p;
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 4538);
+
+    VFiLockMutex();
+    {
+        path_p = VFiPath2HandleIndex(&handle_idx, i_path_p);
+        if (path_p == NULL) {
+            err = VF_ERR_NOT_ALLOCATED_DRV;
+            goto exit;
+        }
+        if (handle_idx != -1) {
+            err = VFSysFileSearchFirst((PF_DTA*)o_dta_p, handle_idx, path_p, i_attr);
+        } else {
+            err = VFSysFileSearchFirst_current((PF_DTA*)o_dta_p, path_p, i_attr);
+        }
+    exit:
+        VFSysSetLastError(err);
+    }
+    VFiUnlockMutex();
+    return err;
+}
+
+VFErr VFFileSearchNext(VFDta* o_dta_p) {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 4621);
+
+    VFiLockMutex();
+    {
+        err = VFSysFileSearchNext((PF_DTA*)o_dta_p);
+        VFSysSetLastError(err);
+    }
+    VFiUnlockMutex();
+    return err;
+}
+
+VFErr VFSync(const char* i_drive, s32 i_mode) {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 4762);
+
+    VFiLockMutex();
+    {
+        if (i_drive != NULL) {
+            s32 handle_idx = dHash_GetArg(i_drive);
+            err = VFSysSync(handle_idx, i_mode);
+        } else {
+            err = VF_ERR_SYSTEM;
+        }
+    }
+    VFSysSetLastError(err);
+    VFiUnlockMutex();
+
+    return err;
+}
+
+VFErr VFSetSyncMode(const char* i_drive, u32 i_mode) {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 4861);
+
+    VFiLockMutex();
+    {
+        if (i_drive != NULL) {
+            s32 handle_idx = dHash_GetArg(i_drive);
+            err = VFSysSetSyncMode(handle_idx, i_mode);
+        } else {
+            err = VF_ERR_SYSTEM;
+        }
+    }
+    VFSysSetLastError(err);
+    VFiUnlockMutex();
+
+    return err;
+}
+
+VFErr VFGetLastError() {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 4935);
+
+    VFiLockMutex();
+    { err = VFSysGetLastError(); }
+    VFiUnlockMutex();
+
+    return err;
+}
+
+VFErr VFGetLastDeviceError(const char* i_drive) {
+    VFErr err;
+
+    ASSERTLINE((VFIsAvailable() == (1)), 4957);
+
+    VFiLockMutex();
+    {
+        if (i_drive != NULL) {
+            s32 handle_idx = dHash_GetArg(i_drive);
+            err = VFSysGetLastDeviceError(handle_idx);
+        } else {
+            err = VFSysGetLastDeviceError_current();
+        }
+    }
+    VFiUnlockMutex();
+    return err;
+}
+
+typedef struct {
+    const char* string;  //  0x00
+    VFErr error;         //  0x04
+} VF_ErrInfo;
+
+const char* VFGetApiErrorString(VFErr error) {
+    VF_ErrInfo* pErrInfo;
+
+    static const VF_ErrInfo ErrInfoTbl[26] = {
+        {"VF_ERR_SUCCESS", VF_ERR_SUCCESS},
+        {"VF_ERR_EPERM (Operation is not possible)", VF_ERR_EPERM},
+        {"VF_ERR_ENOENT (No such file or directory)", VF_ERR_ENOENT},
+        {"VF_ERR_EIO (I/O Error(Driver Error))", VF_ERR_EIO},
+        {"VF_ERR_ENOEXEC (Not Executable by internal)", VF_ERR_ENOEXEC},
+        {"VF_ERR_EBADF (Bad file descriptor)", VF_ERR_EBADF},
+        {"VF_ERR_ENOMEM (Not enough system memory)", VF_ERR_ENOMEM},
+        {"VF_ERR_EACCES (Permission denied)", VF_ERR_EACCES},
+        {"VF_ERR_EBUSY (Can not use system resouces)", VF_ERR_EBUSY},
+        {"VF_ERR_EEXIST (File already exists)", VF_ERR_EEXIST},
+        {"VF_ERR_EISDIR (find directory when file req)", VF_ERR_EISDIR},
+        {"VF_ERR_EINVAL (Invalid argument)", VF_ERR_EINVAL},
+        {"VF_ERR_ENFILE (Too many open files(system))", VF_ERR_ENFILE},
+        {"VF_ERR_EMFILE (Too many open files(user))", VF_ERR_EMFILE},
+        {"VF_ERR_EFBIG (Over file size limit(4GB-1))", VF_ERR_EFBIG},
+        {"VF_ERR_ENOSPC (Device out of space)", VF_ERR_ENOSPC},
+        {"VF_ERR_ENOLCK (Can not lock the file)", VF_ERR_ENOLCK},
+        {"VF_ERR_ENOSYS (Not implement function)", VF_ERR_ENOSYS},
+        {"VF_ERR_ENOTEMPTY (Directory is not empty)", VF_ERR_ENOTEMPTY},
+        {"VF_ERR_SYSTEM (system error(general error))", VF_ERR_SYSTEM},
+        {"VF_ERR_NOT_EXIST_FILE", VF_ERR_NOT_EXIST_FILE},
+        {"VF_ERR_CANNOT_ALLOC_DRV", VF_ERR_CANNOT_ALLOC_DRV},
+        {"VF_ERR_NOT_ALLOCATED_DRV", VF_ERR_NOT_ALLOCATED_DRV},
+        {"VF_ERR_ALREADY_ATTACHED_DRV_NAME", VF_ERR_ALREADY_ATTACHED_DRV_NAME},
+        {"VF_ERR_ALREADY_MOUNTED_DRV_NAME", VF_ERR_ALREADY_MOUNTED_DRV_NAME},
+        {"VF_ERR_VFF_FILE_FORMAT", VF_ERR_VFF_FILE_FORMAT},
+    };
+    static const char* qErr = "? error";
+
+    for (pErrInfo = (VF_ErrInfo*)ErrInfoTbl; (u32)pErrInfo < (u32)((u8*)ErrInfoTbl + sizeof(ErrInfoTbl)); pErrInfo++) {
+        if (pErrInfo->error == error) {
+            return pErrInfo->string;
+        }
+    }
+
+    return qErr;
+}
+
+static char* VFiPath2HandleIndex(s32* o_handle_idx_p, const char* i_path_p) {
     char drive[8];
     const char* str_p = i_path_p;
     s32 idx = 0;
@@ -277,202 +865,21 @@ static char* VF_path2handleidx(s32* o_handle_idx_p, const char* i_path_p) {
     return (char*)ret_p;
 }
 
-void* VFOpenFile(const char* i_path_p, const char* i_mode, u32 i_attr) {
-    s32 handle_idx = -1;
-    const char* path_p = NULL;
-    void* pFile;
-
-    (void)i_attr;
-
-    _VFLockMutex();
-    {
-        path_p = VF_path2handleidx(&handle_idx, i_path_p);
-        if (path_p == NULL) {
-            VFSysSetLastError(VF_ERR_NOT_ALLOCATED_DRV);
-            _VFUnlockMutex();
-            return NULL;
-        }
-        if (handle_idx != -1) {
-            pFile = VFSysOpenFile(handle_idx, path_p, i_mode);
-        } else {
-            pFile = VFSysOpenFile_current(path_p, i_mode);
-        }
+static void VFiInitMutex() {
+    if (!l_InitedMutex) {
+        OSInitMutex(&l_Mutex);
+        l_InitedMutex = TRUE;
     }
-    _VFUnlockMutex();
-    return pFile;
 }
 
-s32 VFCloseFile(void* i_file_p) {
-    s32 Err;
-
-    _VFLockMutex();
-    {
-        Err = VFSysCloseFile(i_file_p);
-        VFSysSetLastError(Err);
+static void VFiLockMutex() {
+    if (l_InitedMutex) {
+        OSLockMutex(&l_Mutex);
     }
-    _VFUnlockMutex();
-    return Err;
 }
 
-s32 VFSeekFile(void* i_file_p, s32 i_offset, s32 i_origin) {
-    s32 Err;
-
-    _VFLockMutex();
-    {
-        Err = VFSysSeekFile((PF_FILE*)i_file_p, i_offset, i_origin);
-        VFSysSetLastError(Err);
+static void VFiUnlockMutex() {
+    if (l_InitedMutex) {
+        OSUnlockMutex(&l_Mutex);
     }
-    _VFUnlockMutex();
-    return Err;
-}
-
-s32 VFReadFile(void* i_file_p, void* o_buf_p, u32 i_size, u32* o_read_size_p) {
-    s32 Err;
-
-    _VFLockMutex();
-    {
-        Err = VFSysReadFile(o_read_size_p, o_buf_p, i_size, i_file_p);
-        VFSysSetLastError(Err);
-    }
-    _VFUnlockMutex();
-    return Err;
-}
-
-s32 VFWriteFile(void* i_file_p, void* i_buf_p, u32 i_size) {
-    s32 Err;
-
-    _VFLockMutex();
-    {
-        Err = VFSysWriteFile(i_buf_p, i_size, i_file_p);
-        VFSysSetLastError(Err);
-    }
-    _VFUnlockMutex();
-    return Err;
-}
-
-s32 VFDeleteFile(const char* i_path_p) {
-    s32 handle_idx = -1;
-    const char* path_p = NULL;
-    s32 Err;
-
-    _VFLockMutex();
-    {
-        path_p = VF_path2handleidx(&handle_idx, i_path_p);
-        if (path_p == NULL) {
-            VFSysSetLastError(VF_ERR_NOT_ALLOCATED_DRV);
-            _VFUnlockMutex();
-            return VF_ERR_NOT_ALLOCATED_DRV;
-        }
-        if (handle_idx != -1) {
-            Err = VFSysDeleteFile(handle_idx, path_p);
-        } else {
-            Err = VFSysDeleteFile_current(path_p);
-        }
-        VFSysSetLastError(Err);
-    }
-    _VFUnlockMutex();
-    return Err;
-}
-
-s32 VFCreateDir(const char* i_dir_name_p) {
-    s32 handle_idx = -1;
-    const char* path_p = NULL;
-    s32 Err;
-
-    _VFLockMutex();
-    {
-        path_p = VF_path2handleidx(&handle_idx, i_dir_name_p);
-        if (path_p == NULL) {
-            VFSysSetLastError(VF_ERR_NOT_ALLOCATED_DRV);
-            _VFUnlockMutex();
-            return VF_ERR_NOT_ALLOCATED_DRV;
-        }
-        if (handle_idx != -1) {
-            Err = VFSysCreateDir(handle_idx, path_p);
-        } else {
-            Err = VFSysCreateDir_current(path_p);
-        }
-        VFSysSetLastError(Err);
-    }
-    _VFUnlockMutex();
-    return Err;
-}
-
-s32 VFGetFileSizeByFd(void* i_file_p) {
-    s32 size = -1;
-    s32 Err;
-
-    Err = VFSysGetFileSizeByFd(&size, i_file_p);
-    if (Err != VF_ERR_SUCCESS) {
-        VFSysSetLastError(Err);
-    }
-    return size;
-}
-
-s32 VFGetLastError() {
-    return VFSysGetLastError();
-}
-
-s32 VFGetLastDeviceError(const char* i_drive) {
-    s32 err;
-
-    _VFLockMutex();
-    {
-        if (i_drive != NULL) {
-            s32 handle_idx = dHash_GetArg(i_drive);
-            err = VFSysGetLastDeviceError(handle_idx);
-        } else {
-            err = VFSysGetLastDeviceError_current();
-        }
-        VFSysSetLastError(err);
-    }
-    _VFUnlockMutex();
-    return err;
-}
-
-s32 VFGetDriveFreeSize(const char* i_drive) {
-    s32 size;
-
-    _VFLockMutex();
-    {
-        if (i_drive != NULL) {
-            s32 handle_idx = dHash_GetArg(i_drive);
-            size = VFSysGetDriveFreeSize(handle_idx);
-        } else {
-            VFSysSetLastError(-1);
-            size = -1;
-        }
-    }
-    _VFUnlockMutex();
-    return size;
-}
-
-s32 VFFormatDrive(const char* i_drive) {
-    s32 err;
-
-    _VFLockMutex();
-    {
-        s32 handle_idx = dHash_GetArg(i_drive);
-        err = VFSysFormatDrive(handle_idx);
-        VFSysSetLastError(err);
-    }
-    _VFUnlockMutex();
-    return err;
-}
-
-s32 VFSetSyncMode(const char* i_drive, u32 i_mode) {
-    s32 Err;
-
-    _VFLockMutex();
-    {
-        if (i_drive != NULL) {
-            s32 handle_idx = dHash_GetArg(i_drive);
-            Err = VFSysSetSyncMode(handle_idx, i_mode);
-        } else {
-            Err = -1;
-        }
-        VFSysSetLastError(Err);
-    }
-    _VFUnlockMutex();
-    return Err;
 }

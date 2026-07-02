@@ -7,10 +7,10 @@
 
 CDBErr GenCDBIdNumber(u32* cdbIdNum) {
     char confPath[256];
-    VFFILE* confFile;
+    VFFile* confFile;
 
     CDBErr err;
-    VFError vfErr;
+    VFErr vfErr;
 
     sprintf(confPath, "%s%s%s", CDB_CFG_VF_DRIVE_ROOT, "/", CDB_CFG_CDBID_FILE);
     confFile = VFOpenFile(confPath, "r+", 0);

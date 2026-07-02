@@ -37,11 +37,11 @@ OSMutex __reqMutex;
 typedef struct __sdCbArg {
     SDCallbackFunc cb;  // 0x00
     void* cbArg;        // 0x04
-    ISD_Device* dev;    // 0x08
+    SDDev* dev;         // 0x08
     u32 unk_0x0C;
-    u32 unk_0x10;
+    u32 SDDevRca;
     u32* resp;  // 0x14
-    u8* unk_0x18;
+    u8* SDSectorSize;
 } __sdCbArg;
 
 enum {
@@ -55,9 +55,9 @@ static IOSError sduCommandv(s32 fd, u32 cmd, u32 cmdType, u32 respType, u32 arg,
 static ISD_Error sduCommand(s32 fd, u32 cmd, u32 cmdType, u32 respType, u32 arg, u32 buffer, u32 blockCount, u32 sectorSize, u32 param_9, u32* resp,
                             void* cb, void* cbArg);
 
-static ISD_Error sduDatabuswidth(ISD_Device* dev, u32 buswidth);
-static ISD_Error sduGetSCR(ISD_Device* dev, u32* data) NO_INLINE;
-static ISD_Error sduGetOCR(ISD_Device* dev, u32* data);
+static ISD_Error sduDatabuswidth(SDDev* dev, u32 buswidth);
+static ISD_Error sduGetSCR(SDDev* dev, u32* data) NO_INLINE;
+static ISD_Error sduGetOCR(SDDev* dev, u32* data);
 
 IOSError __sdCb(s32 result, void* arg) {
     __sdCbArg* data = (__sdCbArg*)arg;
@@ -66,12 +66,12 @@ IOSError __sdCb(s32 result, void* arg) {
         case 4: {
             if (result != 0) {
                 OSReport("   +++ SD RESET Failed: %d +++\n", result);
-                data->dev->unk_0x10 = 0;
+                data->dev->SDDevRca = 0;
             } else {
                 if (data->dev != NULL) {
-                    data->dev->unk_0x10 = *data->resp;
+                    data->dev->SDDevRca = *data->resp;
                     __sdCardStatus = 0x10000;
-                    data->dev->unk_0x24 = 2;
+                    data->dev->SDState = 2;
                 }
             }
 
@@ -90,15 +90,15 @@ IOSError __sdCb(s32 result, void* arg) {
         data->cb(result, data->cbArg);
     }
 
-    if (data->unk_0x18 != NULL) {
-        iosFree(__sdHeapId, data->unk_0x18);
+    if (data->SDSectorSize != NULL) {
+        iosFree(__sdHeapId, data->SDSectorSize);
     }
     iosFree(__sdHeapId, data);
 
     return result;
 }
 
-ISD_Error ISD_GetHCRegister(ISD_Device* dev, u32 param_2, u32* param_3, u32 param_4) {
+ISD_Error ISD_GetHCRegister(SDDev* dev, u32 param_2, u32* param_3, u32 param_4) {
     IOSError ret;
 
     if (__sdHeapId < 0) {
@@ -110,7 +110,7 @@ ISD_Error ISD_GetHCRegister(ISD_Device* dev, u32 param_2, u32* param_3, u32 para
     __sdReg[4] = 0;
 
     if (param_3 != NULL) {
-        ret = IOS_Ioctl(dev->fd, SD_IOCTL_2, __sdReg, 0x18, __sdCmdBuffer, 4);
+        ret = IOS_Ioctl(dev->SDDevFd, SD_IOCTL_2, __sdReg, 0x18, __sdCmdBuffer, 4);
         if (ret != IPC_RESULT_OK) {
             return SD_ERROR_FATAL;
         }
@@ -121,7 +121,7 @@ ISD_Error ISD_GetHCRegister(ISD_Device* dev, u32 param_2, u32* param_3, u32 para
     return SD_ERROR_FATAL;
 }
 
-ISD_Error ISD_GetDeviceStatus(ISD_Device* dev, u32* param_2) {
+ISD_Error ISD_GetDeviceStatus(SDDev* dev, u32* param_2) {
     IOSError ret = SD_ERROR_FATAL;
 
     if (__sdHeapId >= 0 && param_2 != NULL) {
@@ -133,7 +133,7 @@ ISD_Error ISD_GetDeviceStatus(ISD_Device* dev, u32* param_2) {
             __sdReq = 1;
             OSUnlockMutex(&__reqMutex);
 
-            ret = IOS_Ioctl(dev->fd, 11, NULL, 0, __sdCmdBuffer, 4);
+            ret = IOS_Ioctl(dev->SDDevFd, 11, NULL, 0, __sdCmdBuffer, 4);
             if (ret != IPC_RESULT_OK) {
                 __sdReq = 0;
             } else {
@@ -189,7 +189,7 @@ static IOSError sduCommandv(s32 fd, u32 cmd, u32 cmdType, u32 respType, u32 arg,
                 data->cbArg = cbArg;
                 data->resp = resp;
                 data->unk_0x0C = cmd;
-                data->unk_0x18 = (u8*)sdCmd;
+                data->SDSectorSize = (u8*)sdCmd;
 
                 ret = IOS_IoctlvAsync(fd, 7, readCount, writeCount, __sdVect, __sdCb, data);
             }
@@ -236,8 +236,8 @@ static ISD_Error sduCommand(s32 fd, u32 cmd, u32 cmdType, u32 respType, u32 arg,
                     data->cbArg = cbArg;
                     data->resp = resp;
                     data->unk_0x0C = cmd;
-                    data->unk_0x10 = 1;
-                    data->unk_0x18 = (u8*)sdCmd;
+                    data->SDDevRca = 1;
+                    data->SDSectorSize = (u8*)sdCmd;
 
                     ret = IOS_IoctlAsync(fd, 7, sdCmd, SD_CMD_SIZE /*typo?*/, __sdResp, 0x10, __sdCb, data);
                     if (ret != IPC_RESULT_OK) {
@@ -269,7 +269,7 @@ static ISD_Error sduCommand(s32 fd, u32 cmd, u32 cmdType, u32 respType, u32 arg,
     return ret;
 }
 
-ISD_Error ISD_ResetDevice(ISD_Device* dev) {
+ISD_Error ISD_ResetDevice(SDDev* dev) {
     IOSError ret;
 
     if (__sdHeapId < 0) {
@@ -286,16 +286,16 @@ ISD_Error ISD_ResetDevice(ISD_Device* dev) {
 
     OSUnlockMutex(&__reqMutex);
 
-    ret = IOS_Ioctl(dev->fd, 4, NULL, 0, __sdCmdBuffer, 4);
+    ret = IOS_Ioctl(dev->SDDevFd, 4, NULL, 0, __sdCmdBuffer, 4);
     if (ret != IPC_RESULT_OK) {
-        dev->unk_0x10 = 0;
+        dev->SDDevRca = 0;
         __sdReq = 0;
         return ret;
     }
 
-    dev->unk_0x10 = *__sdCmdBuffer;
+    dev->SDDevRca = *__sdCmdBuffer;
     __sdCardStatus = 0x10000;
-    dev->unk_0x24 = 2;
+    dev->SDState = 2;
     __sdReq = 0;
 
     return ret;
@@ -313,8 +313,8 @@ static IOSFd sduOpenFD(u32 slot) {
 }
 
 ISD_Error ISD_ProbeCard(u32 slot) {
-    ISD_Device dev;
-    ISD_Device* pDev = &dev;
+    SDDev dev;
+    SDDev* pDev = &dev;
     ISD_Error ret;
     u32 status;
 
@@ -341,7 +341,7 @@ ISD_Error ISD_ProbeCard(u32 slot) {
     return ret;
 }
 
-ISD_Error ISD_MountCard(u32 slot, ISD_Device** dev) {
+ISD_Error ISD_MountCard(u32 slot, SDDev** dev) {
     IOSError ret = IPC_RESULT_OK;
 
     if (__sdHeapId < 0) {
@@ -357,37 +357,37 @@ ISD_Error ISD_MountCard(u32 slot, ISD_Device** dev) {
         return IPC_RESULT_INVALID;
     }
 
-    (*dev)->fd = sduOpenFD(slot);
-    if ((*dev)->fd < 0) {
-        ret = (*dev)->fd;
+    (*dev)->SDDevFd = sduOpenFD(slot);
+    if ((*dev)->SDDevFd < 0) {
+        ret = (*dev)->SDDevFd;
     }
 
-    (*dev)->unk_0x24 = 0;
-    (*dev)->unk_0x18 = 0x4000;
-    (*dev)->unk_0x20 = 0;
+    (*dev)->SDState = 0;
+    (*dev)->SDSectorSize = 0x4000;
+    (*dev)->SDDevSize = 0;
 
 out:
     return ret;
 }
 
-void ISD_UnmountCard(ISD_Device* dev) {
-    dev->unk_0x24 = 0;
-    IOS_Close(dev->fd);
-    dev->fd = -1;
+ISD_Error ISD_UnmountCard(SDDev* dev) {
+    dev->SDState = 0;
+    IOS_Close(dev->SDDevFd);
+    dev->SDDevFd = -1;
 }
 
-ISD_Error sduDatabuswidth(ISD_Device* dev, u32 buswidth) {
+ISD_Error sduDatabuswidth(SDDev* dev, u32 buswidth) {
     u32 resp[4];
     u32 cmdArg = buswidth == 4 ? 2 : 0;
     u32 hcReg;
     ISD_Error ret;
 
-    ret = sduCommand(dev->fd, 0x37, 3, 1, dev->unk_0x10, 0, 0, 0, 0, resp, NULL, NULL);
+    ret = sduCommand(dev->SDDevFd, 0x37, 3, 1, dev->SDDevRca, 0, 0, 0, 0, resp, NULL, NULL);
     if (ret != SD_ERROR_SUCCESS) {
         return ret;
     }
 
-    ret = sduCommand(dev->fd, 6, 3, 1, cmdArg, 0, 0, 0, 0, resp, NULL, NULL);
+    ret = sduCommand(dev->SDDevFd, 6, 3, 1, cmdArg, 0, 0, 0, 0, resp, NULL, NULL);
     if (ret != SD_ERROR_SUCCESS) {
         return ret;
     }
@@ -411,7 +411,7 @@ ISD_Error sduDatabuswidth(ISD_Device* dev, u32 buswidth) {
     __sdReg[3] = 1;
     __sdReg[4] = hcReg;
 
-    ret = IOS_Ioctl(dev->fd, 1, __sdReg, 0x18, NULL, 0);
+    ret = IOS_Ioctl(dev->SDDevFd, 1, __sdReg, 0x18, NULL, 0);
     if (ret != IPC_RESULT_OK) {
         ret = SD_ERROR_FATAL;
     }
@@ -419,16 +419,16 @@ ISD_Error sduDatabuswidth(ISD_Device* dev, u32 buswidth) {
     return ret;
 }
 
-ISD_Error ISD_ReadCardRegister(ISD_Device* dev, u32 cmd, u32* cmdResp, u32 cmdRespSize) {
+ISD_Error ISD_ReadCardRegister(SDDev* dev, u32 cmd, u32* cmdResp, u32 cmdRespSize) {
     ISD_Error ret;
-    u32 cmdArg = dev->unk_0x10;
+    u32 cmdArg = dev->SDDevRca;
 
     if (__sdHeapId < 0) {
         ret = SD_ERROR_FATAL;
         goto out;
     }
 
-    if (dev->unk_0x24 == 0) {
+    if (dev->SDState == 0) {
         ret = SD_ERROR_FATAL;
         goto out;
     }
@@ -444,12 +444,12 @@ ISD_Error ISD_ReadCardRegister(ISD_Device* dev, u32 cmd, u32* cmdResp, u32 cmdRe
 
     OSUnlockMutex(&__reqMutex);
 
-    if (dev->unk_0x24 == 1) {
+    if (dev->SDState == 1) {
         u32 resp[4];
 
-        ret = sduCommand(dev->fd, 7, 3, 2, 0, 0, 0, 0, 0, resp, NULL, NULL);
+        ret = sduCommand(dev->SDDevFd, 7, 3, 2, 0, 0, 0, 0, 0, resp, NULL, NULL);
 
-        dev->unk_0x24 = 2;
+        dev->SDState = 2;
 
         if (ret == SD_ERROR_01000003) {
             ret = IPC_RESULT_OK;
@@ -484,7 +484,7 @@ ISD_Error ISD_ReadCardRegister(ISD_Device* dev, u32 cmd, u32* cmdResp, u32 cmdRe
             goto out;
         }
         case 3: {
-            cmdResp[0] = dev->unk_0x10;
+            cmdResp[0] = dev->SDDevRca;
             ret = IPC_RESULT_OK;
             __sdReq = 0;
             goto out;
@@ -494,7 +494,7 @@ ISD_Error ISD_ReadCardRegister(ISD_Device* dev, u32 cmd, u32* cmdResp, u32 cmdRe
         }
     }
 
-    ret = sduCommand(dev->fd, cmd, 3, 3, cmdArg, 0, 0, 0, 0, cmdResp, NULL, NULL);
+    ret = sduCommand(dev->SDDevFd, cmd, 3, 3, cmdArg, 0, 0, 0, 0, cmdResp, NULL, NULL);
 
     __sdReq = 0;
 
@@ -502,28 +502,28 @@ out:
     return ret;
 }
 
-static ISD_Error sduGetSCR(ISD_Device* dev, u32* data) {
+static ISD_Error sduGetSCR(SDDev* dev, u32* data) {
     ISD_Error ret = SD_ERROR_FATAL;
     u32 resp[4];
 
     if (data != NULL) {
-        sduCommand(dev->fd, 0x10, 3, 1, 4, 0, 0, 0, 0, resp, NULL, NULL);
-        ret = sduCommand(dev->fd, 55, 3, 1, dev->unk_0x10, 0, 0, 0, 0, resp, NULL, NULL);
+        sduCommand(dev->SDDevFd, 0x10, 3, 1, 4, 0, 0, 0, 0, resp, NULL, NULL);
+        ret = sduCommand(dev->SDDevFd, 55, 3, 1, dev->SDDevRca, 0, 0, 0, 0, resp, NULL, NULL);
         if (ret != 0) {
             return ret;
         }
-        sduCommand(dev->fd, 51, 3, 1, 0, (u32)data, 1, 4, 0, resp, NULL, NULL);
-        ret = sduCommand(dev->fd, 0x10, 3, 1, 0x200, 0, 0, 0, 0, resp, NULL, NULL);
+        sduCommand(dev->SDDevFd, 51, 3, 1, 0, (u32)data, 1, 4, 0, resp, NULL, NULL);
+        ret = sduCommand(dev->SDDevFd, 0x10, 3, 1, 0x200, 0, 0, 0, 0, resp, NULL, NULL);
     }
 
     return ret;
 }
 
-static ISD_Error sduGetOCR(ISD_Device* dev, u32* data) {
+static ISD_Error sduGetOCR(SDDev* dev, u32* data) {
     ISD_Error ret = SD_ERROR_SUCCESS;
 
     if (data != NULL) {
-        ret = IOS_Ioctl(dev->fd, 12, 0, 0, __sdCmdBuffer, 4);
+        ret = IOS_Ioctl(dev->SDDevFd, 12, 0, 0, __sdCmdBuffer, 4);
         if (ret == IPC_RESULT_OK) {
             *data = *__sdCmdBuffer;
         }
@@ -532,7 +532,7 @@ static ISD_Error sduGetOCR(ISD_Device* dev, u32* data) {
     return ret;
 }
 
-ISD_Error ISD_GetCardSize(ISD_Device* dev, u32* param_2, u32* param_3, u32* param_4) {
+ISD_Error ISD_GetCardSize(SDDev* dev, u32* param_2, u32* param_3, u32* param_4) {
     ISD_Error ret;
     u32 out0;
     u32 out1;
@@ -559,9 +559,9 @@ ISD_Error ISD_GetCardSize(ISD_Device* dev, u32* param_2, u32* param_3, u32* para
         out1 = ((out2 << 9) / out0) >> (tmp - 9);
     }
 
-    dev->unk_0x18 = out0;
-    dev->unk_0x1C = out1;
-    dev->unk_0x20 = out2;
+    dev->SDSectorSize = out0;
+    dev->SDSectorNum = out1;
+    dev->SDDevSize = out2;
 
     if (param_2 != NULL) {
         *param_2 = out2;

@@ -411,7 +411,7 @@ NWC24Err NWC24MountVF(const char* drive, const char* filename) {
         return ConvertVfError(result, NWC24_ERR_INTERNAL_VF);
     }
 
-    result = VFSync(drive, 1);
+    result = VFSetSyncMode(drive, 1);
     if (result != VF_ERR_SUCCESS) {
         return ConvertVfError(result, NWC24_ERR_INTERNAL_VF);
     }
@@ -445,7 +445,7 @@ NWC24Err NWC24CheckSizeVF(const char* drive, u32* sizeOut) {
 
 NWC24Err NWC24CreateVF(const char* path, u32 fileSize) {
     s32 result;
-    VFError vfResult;
+    VFErr vfResult;
     NANDStatus status;
 
     vfResult = VFCreateSystemFileNANDFlashEx(path, fileSize);

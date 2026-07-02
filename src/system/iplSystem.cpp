@@ -215,8 +215,8 @@ namespace ipl {
 
     void System::createFolders_(void* work) {
         // Init VF
-        u8* workData = new (getMem1Sys(), DEFAULT_ALIGN) u8[VF_WORK_SIZE];
-        VFInitEx(workData, VF_WORK_SIZE);
+        u8* workData = new (getMem1Sys(), DEFAULT_ALIGN) u8[0x14000];
+        VFInitEx(workData, 0x14000);
 
         // Init CDB
         workData = new (getMem1Sys(), 64) u8[CDB_SYSTEM_WORK_SIZE];
