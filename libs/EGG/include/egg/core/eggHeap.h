@@ -55,7 +55,9 @@ namespace EGG {
             OSRestoreInterrupts(enabled);
         }
         static Heap* unkInline2(int id = 0) { return (Heap*)OSGetThreadSpecific(id); }
-
+        static Heap* findContainHeap(const void*);
+        void appendDisposer(Disposer* disposer) { nw4r::ut::List_Append(&mChildren, disposer); }
+        void removeDisposer(Disposer* disposer) { nw4r::ut::List_Remove(&mChildren, disposer); }
         void* getStartAddress() { return this; }
         void* getEndAddress() { return MEMGetHeapEndAddress(mHeapHandle); }
 
@@ -63,6 +65,12 @@ namespace EGG {
 
     protected:
         MEMHeapHandle mHeapHandle;  // 0x10
+        void* mBlock;
+        Heap* mParentHeap;
+        u16 mFlags;
+        u8 _1e[0x28 - 0x1e];
+        nw4r::ut::List mChildren;
+        const char* mName;
     };
 }  // namespace EGG
 
