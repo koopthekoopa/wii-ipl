@@ -51,10 +51,6 @@ char lbl_8169626C[4] = "chn";
 char lbl_81696270[4] = "kor";
 
 namespace ipl {
-    namespace math {
-        template class HermiteIntp<f32>;
-    }
-
     namespace utility {
         BScroller::BScroller() { init(); }
 
@@ -623,14 +619,14 @@ namespace ipl {
 
         void Calendar::setCalendarTime(OSCalendarTime* newCalendar) {
             u32 rtc;
+
+            // TODO: resolve address?
+            u32* busClk = (u32*)0x800000F8;
             s32 bias = SCGetCounterBias();
             __OSGetRTC(&rtc);
 
-            // TODO: resolve address?
-            u32 busClk = *(u32*)0x800000F8;
-            u32 timerClk = busClk / 4;
-            u64 ticks = (u64)(rtc + bias);
-            ticks *= timerClk;
+            u64 ticks = rtc + bias;
+            ticks *= *busClk / 4;
             __OSSetTime(ticks);
 
             OSSram* sram = __OSLockSram();
@@ -641,18 +637,14 @@ namespace ipl {
             while (!__OSSyncSram()) {}
 
             rtc = 0;
-            __OSGetRTC(&rtc);
-            if (rtc != 0 && !(rtc & 1)) {
+            if (__OSGetRTC(&rtc) == 0 || rtc & 0x80000000) {
                 __OSSetRTC(rtc);
             }
 
-            ticks = OSCalendarTimeToTicks(newCalendar);
-            u64 quotient = ticks / timerClk;
-            s32 newBias = (s32)(quotient - rtc);
+            s32 newBias = (s32)(OSCalendarTimeToTicks(newCalendar) / (s64)(*busClk / 4)) - (s32)rtc;
             SCSetCounterBias(newBias);
 
-            ticks = OSCalendarTimeToTicks(newCalendar);
-            __OSSetTime(ticks);
+            __OSSetTime(OSCalendarTimeToTicks(newCalendar));
             NWC24iSynchronizeRtcCounter(0);
         }
 
@@ -665,5 +657,9 @@ namespace ipl {
         char* Language::getPath() {
             return mLangPath[System::getLanguage()];
         }
+    }
+
+    namespace math {
+        template class HermiteIntp<f32>;
     }
 }  // namespace ipl
