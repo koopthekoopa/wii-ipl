@@ -75,13 +75,6 @@ namespace ipl {
 
         f32 BScroller::_get() {
             f32 diff = unk_0x0C - unk_0x14;
-            if (diff < -0.01f) {
-                return -10.0f * (diff * diff);
-            }
-            if (diff > 0.01f) {
-                return 10.0f * (diff * diff);
-            }
-            return 0.0f;
             f32 result = 0.f;
             if (diff < -0.01f)
                 result = -10.0f * (diff * diff);
