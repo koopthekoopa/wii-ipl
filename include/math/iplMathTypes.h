@@ -19,6 +19,9 @@ namespace ipl {
             return nw4r::math::FAbs(x);
         }
 
+        template <typename T>
+        T abs_clamp(const T& val, const T& clamp);
+
         typedef struct MTX33 : public nw4r::math::MTX33 {
         } MTX33;
 

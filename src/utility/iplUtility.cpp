@@ -1,5 +1,6 @@
 #include "iplUtility.h"
 #include "iplSystem.h"
+#include "sound/iplSound.h"
 #include "system/iplController.h"
 #include "system/iplPointer.h"
 #include "utility/iplTPLValidity.h"
@@ -11,7 +12,32 @@
 const float lbl_81694650 = -100.f;
 const float lbl_81694654 = 100.f;
 
-// Wii ID format string
+// .sdata2 constants
+const float lbl_81694600 = 0.0f;
+const float lbl_81694604 = -1.0f;
+const float lbl_81694608 = 1.0f;
+const float lbl_8169460C = 128.0f;
+const float lbl_81694620 = 0.6f;
+const float lbl_81694624 = 1.5f;
+const float lbl_81694628 = 20.0f;
+const float lbl_8169462C = 2.0f;
+const float lbl_81694630 = 3.0f;
+
+// .sdata variables
+float lbl_81696274 = 1.0f;
+float lbl_81696278 = 1.0f;
+float lbl_8169627C = 1.0f;
+float lbl_81696280 = 1.0f;
+float lbl_81696284 = 0.0f;
+float lbl_81696288 = 1.0f;
+float lbl_8169628C = 0.0f;
+float lbl_81696290 = -300.0f;
+float lbl_81696294 = 0.0f;
+float lbl_81696298 = 300.0f;
+
+// .data
+char lbl_81641230[] = "WIPL_SE_B_SCROLL";
+char lbl_81641241[] = "WIPL_SE_MESSAGE_SCROLL";
 wchar_t lbl_81641258[] = L"%016llu";
 
 char lbl_81696250[4] = "jpn";
@@ -313,6 +339,89 @@ namespace ipl {
             init();
         }
 
+        BOOL BScroller::calc() {
+            BOOL result = FALSE;
+
+            if (mState < 0) {
+                for (int channel = 0; channel < 4; channel++) {
+                    controller::Interface* ctrl = System::getController(channel);
+                    if (ctrl == NULL)
+                        continue;
+                    if (!ctrl->down(controller::REVO_BTN_B))
+                        continue;
+                    if (!ctrl->isValidDpd())
+                        continue;
+                    if (!isYoungController(channel))
+                        continue;
+
+                    mState = channel;
+
+                    unk_0x08 = math::abs_clamp<float>(ctrl->getDpdPos().x, lbl_81696274);
+                    unk_0x0C = math::abs_clamp<float>(ctrl->getDpdPos().y, lbl_81696278);
+
+                    *(math::VEC2*)&unk_0x10 = *(math::VEC2*)&unk_0x08;
+
+                    System::smArg.mpPointer->setState(mState, 1);
+                    System::smArg.mpPointer->mIsScrolling = mState;
+                    System::smArg.mpPointer->mOriginPos = get_cursor_pos(ctrl->getDpdProjectionPos());
+
+                    mSpeed = _get();
+                    set_arw_param();
+                    result = TRUE;
+                    goto after_loop;
+                }
+            } else {
+                controller::Interface* ctrl = System::getController(mState);
+                if (ctrl == NULL)
+                    goto reset_state;
+                if (!ctrl->down(controller::REVO_BTN_B))
+                    goto reset_state;
+                if (isYoungController(mState))
+                    goto young_controller;
+
+            reset_state:
+                System::smArg.mpPointer->setState(mState, 0);
+                System::smArg.mpPointer->mIsScrolling = -1;
+                init();
+                goto after_loop;
+
+            young_controller:
+                if (ctrl->isValidDpd()) {
+                    unk_0x08 = math::abs_clamp<float>(ctrl->getDpdPos().x, lbl_8169627C);
+                    unk_0x0C = math::abs_clamp<float>(ctrl->getDpdPos().y, lbl_81696280);
+
+                    mSpeed = _get();
+                    set_arw_param();
+                } else {
+                    if (math::abs<float>(unk_0x08) < math::abs<float>(unk_0x0C)) {
+                        f32 newVal;
+                        if (unk_0x0C >= 0.0f) {
+                            newVal = lbl_81694608;
+                        } else {
+                            newVal = lbl_81694604;
+                        }
+                        unk_0x0C = newVal;
+                    }
+                    mSpeed = _get();
+                    set_arw_param();
+                }
+            }
+
+        after_loop:
+            if (math::abs<float>(mSoundFreq) > lbl_8169460C) {
+                snd::sSystem.startSE(lbl_81641230);
+                f32 newFreq;
+                if (mSoundFreq > lbl_81694600) {
+                    newFreq = mSoundFreq - lbl_8169460C;
+                } else {
+                    newFreq = lbl_8169460C + mSoundFreq;
+                }
+                mSoundFreq = newFreq;
+            }
+
+            return result;
+        }
+
         Scroller::Scroller() {
             mState = 0;
             mDownLimit = 0.0f;
@@ -320,10 +429,73 @@ namespace ipl {
             unk_0x3C = 0.0f;
             mScroll = 0.0f;
             unk_0x44 = 0.0f;
-            unk_0x48 = 0.6f;
-            unk_0x4C = 1.5f;
+            unk_0x48 = lbl_81694620;
+            unk_0x4C = lbl_81694624;
 
-            anim.init(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0, 1.0f);
+            anim.init(lbl_81696284, lbl_81696288, lbl_81694608, lbl_81694600, lbl_81694600, 0, lbl_81694608);
+        }
+
+        void Scroller::calc() {
+            f32 oldScroll = mScroll;
+
+            switch (mState) {
+            case STATE_SCROLL_CON_UP:
+                unk_0x3C = unk_0x3C * unk_0x48 - unk_0x4C;
+                if (unk_0x3C > 0.0f) unk_0x3C = 0.0f;
+                mScroll += unk_0x3C;
+                mState = STATE_NORMAL;
+                break;
+            case STATE_SCROLL_CON_DOWN:
+                unk_0x3C = unk_0x3C * unk_0x48 + unk_0x4C;
+                if (unk_0x3C < 0.0f) unk_0x3C = 0.0f;
+                mScroll += unk_0x3C;
+                mState = STATE_NORMAL;
+                break;
+            case STATE_SCROLL_BTN_UP:
+                unk_0x44 = oldScroll;
+                anim.init(lbl_8169628C, lbl_81696290, lbl_81694628, lbl_81694600, lbl_81694600, 0, lbl_81694608);
+                anim.initFrame();
+                anim.restart();
+                mState = 5;
+                break;
+            case STATE_SCROLL_BTN_DOWN:
+                unk_0x44 = oldScroll;
+                anim.init(lbl_81696294, lbl_81696298, lbl_81694628, lbl_81694600, lbl_81694600, 0, lbl_81694608);
+                anim.initFrame();
+                anim.restart();
+                mState = 5;
+                break;
+            case 5: {
+                anim.calc();
+
+                mScroll = unk_0x44 + anim.get();
+
+                if (!anim.isPlaying()) {
+                    unk_0x3C = lbl_81694600;
+                    anim.initFrame();
+                    anim.calc();
+                    mState = STATE_NORMAL;
+                }
+                break;
+            }
+            }
+
+            f32 scroll = mScroll;
+
+            if (!(scroll > mDownLimit)) goto checkUpL;
+            mScroll = mDownLimit;
+            goto soundCheckL;
+            checkUpL:
+            if (!(scroll < mUpLimit)) goto soundCheckL;
+            mScroll = mUpLimit;
+            soundCheckL:
+
+            {
+                f32 diff = oldScroll - mScroll;
+                if (ipl::math::abs<float>(diff) > lbl_81694608) {
+                    ipl::snd::sSystem.holdSE(lbl_81641241);
+                }
+            }
         }
 
         tpl_validity::tpl_validity(TPLPalette* pal, u32 palSize) {
@@ -491,3 +663,9 @@ namespace ipl {
         }
     }
 }  // namespace ipl
+
+namespace ipl {
+    namespace math {
+        template class HermiteIntp<f32>;
+    }
+}
