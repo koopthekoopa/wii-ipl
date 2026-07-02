@@ -8,11 +8,14 @@
 #include <private/os.h>
 #include <revolution/enc.h>
 
-// Texture LOD bias range
-const float lbl_81694650 = -100.f;
-const float lbl_81694654 = 100.f;
+// Scroll sound effect names
+char lbl_81641230[] = "WIPL_SE_B_SCROLL";
+char lbl_81641241[] = "WIPL_SE_MESSAGE_SCROLL";
 
-// .sdata2 constants
+// Wii id format string
+wchar_t lbl_81641258[] = L"%016llu";
+
+// Scroller
 const float lbl_81694600 = 0.0f;
 const float lbl_81694604 = -1.0f;
 const float lbl_81694608 = 1.0f;
@@ -20,10 +23,23 @@ const float lbl_8169460C = 128.0f;
 const float lbl_81694620 = 0.6f;
 const float lbl_81694624 = 1.5f;
 const float lbl_81694628 = 20.0f;
-const float lbl_8169462C = 2.0f;
-const float lbl_81694630 = 3.0f;
 
-// .sdata variables
+// Texture LOD bias range
+const float lbl_81694650 = -100.f;
+const float lbl_81694654 = 100.f;
+
+// mLangPath
+char lbl_81696250[] = "jpn";
+char lbl_81696254[] = "eng";
+char lbl_81696258[] = "ger";
+char lbl_8169625C[] = "fra";
+char lbl_81696260[] = "spa";
+char lbl_81696264[] = "ita";
+char lbl_81696268[] = "ned";
+char lbl_8169626C[] = "chn";
+char lbl_81696270[] = "kor";
+
+// Scroller
 float lbl_81696274 = 1.0f;
 float lbl_81696278 = 1.0f;
 float lbl_8169627C = 1.0f;
@@ -34,21 +50,6 @@ float lbl_8169628C = 0.0f;
 float lbl_81696290 = -300.0f;
 float lbl_81696294 = 0.0f;
 float lbl_81696298 = 300.0f;
-
-// .data
-char lbl_81641230[] = "WIPL_SE_B_SCROLL";
-char lbl_81641241[] = "WIPL_SE_MESSAGE_SCROLL";
-wchar_t lbl_81641258[] = L"%016llu";
-
-char lbl_81696250[] = "jpn";
-char lbl_81696254[] = "eng";
-char lbl_81696258[] = "ger";
-char lbl_8169625C[] = "fra";
-char lbl_81696260[] = "spa";
-char lbl_81696264[] = "ita";
-char lbl_81696268[] = "ned";
-char lbl_8169626C[] = "chn";
-char lbl_81696270[] = "kor";
 
 namespace ipl {
     namespace utility {
@@ -195,8 +196,8 @@ namespace ipl {
         }
 
         void CharacterCode::UTF16ToU32(u32* dest, const wchar_t* src) {
-            int len = 0;
             u32 result = 0;
+            int len = 0;
 
             const wchar_t* p = src;
             while (*p != 0) {
@@ -413,7 +414,7 @@ namespace ipl {
                 if (mSoundFreq > lbl_81694600) {
                     newFreq = mSoundFreq - lbl_8169460C;
                 } else {
-                    newFreq = lbl_8169460C + mSoundFreq;
+                    newFreq = mSoundFreq + lbl_8169460C;
                 }
                 mSoundFreq = newFreq;
             }
@@ -509,16 +510,15 @@ namespace ipl {
             if (pal->versionNumber != 0x0020AF30) return;
             if ((u32)pal->descriptorArray >= 0x80000000) goto absolute;
             if ((u32)pal->descriptorArray >= palSize) return;
-
-            mpTexDesc = (TPLDescriptor*)((char*)pal + (u32)pal->descriptorArray);
+            mpTexDesc = (TPLDescriptor*)((u32)pal->descriptorArray + (u32)pal);
             if (mpTexDesc) {
                 if (mpTexDesc->textureHeader) {
                     if ((u32)mpTexDesc->textureHeader < palSize) {
-                        mpTexHeader = (TPLHeader*)((u32)pal + (u32)mpTexDesc->textureHeader);
+                        mpTexHeader = (TPLHeader*)((u32)mpTexDesc->textureHeader + (u32)pal);
                         if (mpTexHeader) {
                             u32 dataOfs = (u32)mpTexHeader->data;
                             if (dataOfs < palSize) {
-                                mpTexData = (char*)((u32)pal + dataOfs);
+                                mpTexData = (char*)(dataOfs + (u32)pal);
                             }
                         }
                     }
@@ -528,12 +528,11 @@ namespace ipl {
             if (mpTexDesc) {
                 if (mpTexDesc->CLUTHeader) {
                     if ((u32)mpTexDesc->CLUTHeader < palSize) {
-                        u32 base = (u32)mpPalette;
-                        mpClutHeader = (TPLClutHeader*)(base + (u32)mpTexDesc->CLUTHeader);
+                        mpClutHeader = (TPLClutHeader*)((u32)mpTexDesc->CLUTHeader + (u32)mpPalette);
                         if (mpClutHeader) {
                             u32 dataOfs = (u32)mpClutHeader->data;
                             if (dataOfs < palSize) {
-                                mpClutData = (char*)(base + dataOfs);
+                                mpClutData = (char*)(dataOfs + (u32)mpPalette);
                             }
                         }
                     }
