@@ -258,38 +258,31 @@ int JpegDecoder::get_orientation() {
     u32 exifOffset;
     u32 exifSize;
 
-    if (TMCCJPEGDecGetOffsetEXIF(&exifOffset, &exifSize, &param) != 0) goto end;
+    if (TMCCJPEGDecGetOffsetEXIF(&exifOffset, &exifSize, &param) == 0) {
+        param.mFlag1 = 0;
+        param.mFlag2 = 0;
+        param.mpBuf1 = mpBuf1;
+        param.mpBuf2 = mpData + exifOffset;
+        param.mBuf2Size = exifSize;
+        param.mDataSize = mLength;
+        param.mpCallback = NULL;
+        param.mpContext = NULL;
 
-    param.mFlag1 = 0;
-    param.mFlag2 = 0;
-    param.mpBuf1 = mpBuf1;
-    param.mpBuf2 = mpData + exifOffset;
-    param.mBuf2Size = exifSize;
-    param.mDataSize = mLength;
-    param.mpCallback = NULL;
-    param.mpContext = NULL;
+        TMCCJPEGDecExifInfo exifInfo;
+        if (TMCCJPEGDecGetInfoEXIF(&exifInfo, &param) == 0) {
+            switch (exifInfo.mOrientation) {
+            case 7:
+                break;
+            case 6:
+                result = 1;
+                break;
+            case 8:
+                result = 2;
+                break;
+            }
+        }
+    }
 
-    TMCCJPEGDecExifInfo exifInfo;
-    if (TMCCJPEGDecGetInfoEXIF(&exifInfo, &param) != 0) goto end;
-
-    int orientVal = exifInfo.mOrientation;
-    if (orientVal == 7) goto end;
-    if (orientVal >= 7) goto check_9;
-    if (orientVal >= 6) goto result1;
-    goto end;
-
-check_9:
-    if (orientVal >= 9) goto end;
-    goto result2;
-
-result1:
-    result = 1;
-    goto end;
-
-result2:
-    result = 2;
-
-end:
     return result;
 }
 
