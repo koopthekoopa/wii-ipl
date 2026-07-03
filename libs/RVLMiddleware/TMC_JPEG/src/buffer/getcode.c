@@ -22,9 +22,9 @@ s32 TMCJPEGDEC_init_buff_thumbnail(TMCJpegDecWork* work, u8* dst, u8* src) {
     dst32[10] = src32[4];
     dst32[2] = tmp;
 
-    val = *(u32*)(work->unk_0x59 + 0x61B) + *(u32*)(work->unk_0x59 + 0x613);
+    val = work->mThumbHuffSize[2] + work->mThumbHuffSize[0];
     dst32[3] = val;
-    val += *(u32*)(work->unk_0x59 + 0x617);
+    val += work->mThumbHuffSize[1];
     dst32[8] = 0;
     dst32[4] = val;
     dst32[5] = val - 0x22;

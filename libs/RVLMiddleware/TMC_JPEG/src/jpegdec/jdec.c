@@ -26,33 +26,33 @@ s32 TMCJPEGDEC_Setsize(TMCJpegDecWork* work) {
     case 1:
         work->mBlockSize = 0x40;
         work->mBlockSizeMul = 0x40;
-        work->mIdctPtr = (u32)TMCJPEGDEC_IdctBlock_Lumi;
-        work->mIdctLumiPtr = (u32)TMCJPEGDEC_IdctBlock_Col;
-        work->mDecodePtr = (u32)TMCJPEGDEC_decode_iquant;
+        work->mIdctPtr = TMCJPEGDEC_IdctBlock_Lumi;
+        work->mIdctLumiPtr = TMCJPEGDEC_IdctBlock_Col;
+        work->mDecodePtr = TMCJPEGDEC_decode_iquant;
         work->mIdctMode = 8;
         break;
     case 2:
         work->mBlockSize = 0x19;
         work->mBlockSizeMul = 0x6C;
-        work->mIdctPtr = (u32)TMCJPEGDEC_IdctBlock4x4;
-        work->mIdctLumiPtr = (u32)TMCJPEGDEC_IdctBlock4x4_Col;
-        work->mDecodePtr = (u32)TMCJPEGDEC_decode_iquant_rc;
+        work->mIdctPtr = TMCJPEGDEC_IdctBlock4x4;
+        work->mIdctLumiPtr = TMCJPEGDEC_IdctBlock4x4_Col;
+        work->mDecodePtr = TMCJPEGDEC_decode_iquant_rc;
         work->mIdctMode = 4;
         break;
     case 4:
         work->mBlockSize = 0x05;
         work->mBlockSizeMul = 0x24;
-        work->mIdctPtr = (u32)TMCJPEGDEC_IdctBlock2x2;
-        work->mIdctLumiPtr = (u32)TMCJPEGDEC_IdctBlock2x2_Col;
-        work->mDecodePtr = (u32)TMCJPEGDEC_decode_iquant_rc;
+        work->mIdctPtr = TMCJPEGDEC_IdctBlock2x2;
+        work->mIdctLumiPtr = TMCJPEGDEC_IdctBlock2x2_Col;
+        work->mDecodePtr = TMCJPEGDEC_decode_iquant_rc;
         work->mIdctMode = 2;
         break;
     case 8:
         work->mBlockSize = 0x01;
         work->mBlockSizeMul = 0x00;
-        work->mIdctPtr = (u32)TMCJPEGDEC_IdctBlock1x1;
-        work->mIdctLumiPtr = (u32)TMCJPEGDEC_IdctBlock1x1_Col;
-        work->mDecodePtr = (u32)TMCJPEGDEC_decode_iquant_rc;
+        work->mIdctPtr = TMCJPEGDEC_IdctBlock1x1;
+        work->mIdctLumiPtr = TMCJPEGDEC_IdctBlock1x1_Col;
+        work->mDecodePtr = TMCJPEGDEC_decode_iquant_rc;
         work->mIdctMode = 1;
         break;
     default:

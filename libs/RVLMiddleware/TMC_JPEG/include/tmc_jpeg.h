@@ -86,7 +86,9 @@ typedef struct {
     u16   mJpegHeight;     // 0x26
     u16   mOutputWidth;    // 0x28
     u16   mOutputHeight;   // 0x2A
-    u8    unk_0x2C[0x1C];
+    u32   mConvWidth;      // 0x2C
+    u32   mConvHeight;     // 0x30
+    u8    unk_0x34[0x14];  // 0x34
     void* mpTexBuffer;     // 0x48
     u8    unk_0x4C[0x67C];
     void* mpWorkBuf;       // 0x6C8
