@@ -24,16 +24,19 @@ typedef struct {
     u8 mScaleFlag;      // 0x58
     u8 unk_0x59[0x1797];
     u16 mFrameWidth;    // 0x17F0
-    u8 unk_0x17F2[0x02];
+    u16 mFrameHeight;   // 0x17F2
     u32 mMCUCount;      // 0x17F4
     u32 mMCURemCount;   // 0x17F8
-    u8 unk_0x17FC;
+    u8 mComponentCount; // 0x17FC
     u8 mMCUXCount;      // 0x17FD
     u8 mMCUXRem;        // 0x17FE
     u8 mMCUYRem;        // 0x17FF
     u16 mMCUYCount;     // 0x1800
     u16 mMCUXCount2;    // 0x1802
-    u8 unk_0x1804[0x16];
+    u32 unk_0x1804;     // 0x1804
+    u8 unk_0x1808;      // 0x1808
+    u8 unk_0x1809;      // 0x1809
+    u8 unk_0x180A[0x10];
     u16 mRestartInterval; // 0x181A
     u8 mScanCount;      // 0x181C
     u8 unk_0x181D[0x03];
@@ -43,7 +46,9 @@ typedef struct {
     u8 unk_0x182C[0x08];
     u32 mBlockSize;     // 0x1834
     u32 mBlockSizeMul;  // 0x1838
-    u8 unk_0x183C[0x1A8];
+    u8 unk_0x183C[0x1A0];
+    u8 mIdctMode;       // 0x19DC
+    u8 unk_0x19DD[0x07];
     void* mpState;      // 0x19E4
 } TMCJpegDecWork;
 
@@ -60,8 +65,23 @@ s32 TMCJPEGDEC_init_buff_thumbnail(TMCJpegDecWork* work, u8* dst, u8* src);
 void TMCJPEGDEC_init_buff(TMCJpegDecWork* work, s32 mode);
 s32 TMCJPEGDEC_rewind_ptr(TMCJpegDecWork* work);
 
-void TMCJPEGDEC_make_huffdec(TMCJpegDecWork* work);
-void TMCJPEGDEC_set_HuffmanTable(void* tbl, void* data);
+// Huffman table set (three pointers stored by set_HuffmanTable)
+typedef struct {
+    u32 hufftable;  // 0x00
+    u32 valptr;     // 0x04
+    u32 maxcode;    // 0x08
+} TMCHuffTblSet;
+
+// Parameter block for make_huffdec
+typedef struct {
+    u32* huffTable;  // 0x00
+    u32* valptr;     // 0x04
+    u32* destTable;  // 0x08
+    u8 count;        // 0x0C
+} TMCHuffParam;
+
+s32 TMCJPEGDEC_make_huffdec(const u8* dht_spec, const u8* tbl, TMCHuffParam* hp);
+void TMCJPEGDEC_set_HuffmanTable(TMCHuffTblSet* tbl, s32 tblType, s32 tblID, TMCJpegDecWork* work);
 
 s32 TMCJPEGDEC_decompmcu(u32 maxMCU, u32 mcuCount, TMCJpegDecWork* work, void* buf);
 s32 TMCJPEGDEC_imagestart(TMCJpegDecWork* work);
@@ -76,8 +96,8 @@ s32 TMCJPEGDEC_Decompscan(TMCJpegDecWork* work);
 s32 TMCJPEGDEC_Setsize(TMCJpegDecWork* work);
 s32 TMCJPEGDEC_HeaderAnalyze(TMCJpegDecWork* work);
 
-void TMCJPEGDEC_IdctBlock_Lumi(s16* block, s16* buf, s32 pitch);
-void TMCJPEGDEC_IdctBlock_Col(s16* block, s16* buf, s32 pitch);
+void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* buf, s32 pitch, s32 count);
+void TMCJPEGDEC_IdctBlock_Col(s32* block, u8* buf, s32 pitch, s32 count);
 
 s32 TMCJPEGDEC_decode_iquant(TMCCJPEGDecState* state,
                               void* block, u8* data,

@@ -74,13 +74,19 @@ typedef struct {
     u16   mMaxY;           // 0x12
     u8    mStepX;          // 0x14
     u8    mStepY;          // 0x15
-    u8    unk_0x16[0x0A];
+    u8    mStepXExt;       // 0x16
+    u8    mStepYExt;       // 0x17
+    u32   mDataSizeX;      // 0x18
+    u32   mDataSizeY;      // 0x1C
     u8    mFlag20;         // 0x20
     u8    mFlag21;         // 0x21
-    u8    unk_0x22[0x02];
+    u8    mComponentState; // 0x22
+    u8    unk_0x23;        // 0x23
     u16   mJpegWidth;      // 0x24
     u16   mJpegHeight;     // 0x26
-    u8    unk_0x28[0x20];
+    u16   mOutputWidth;    // 0x28
+    u16   mOutputHeight;   // 0x2A
+    u8    unk_0x2C[0x1C];
     void* mpTexBuffer;     // 0x48
     u8    unk_0x4C[0x67C];
     void* mpWorkBuf;       // 0x6C8
