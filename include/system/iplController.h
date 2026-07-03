@@ -114,19 +114,19 @@ namespace ipl {
                 virtual KPADStatus* getKPADStatus() const;  // 0x64
                 virtual PADStatus* getPADStatus() const;    // 0x68
                 virtual bool isValidBtn() const;            // 0x6C
-                bool isValidDpd() const;
+                virtual bool isValidDpd() const;            // 0x70
 
-                virtual bool setForceInvalid(bool flag);  // 0x70
+                virtual bool setForceInvalid(bool flag);  // 0x74
 
-                virtual f32 getMainStickX() const;  // 0x74
-                virtual f32 getMainStickY() const;  // 0x78
+                virtual f32 getMainStickX() const;  // 0x78
+                virtual f32 getMainStickY() const;  // 0x7C
 
-                virtual f32 getSubStickX() const;  // 0x7C
-                virtual f32 getSubStickY() const;  // 0x80
+                virtual f32 getSubStickX() const;  // 0x80
+                virtual f32 getSubStickY() const;  // 0x84
 
-                virtual void read();  // 0x84
+                virtual void read();  // 0x88
 
-            protected:
+            // protected:
                 u8 button; // 0x4
                 u32 off8; // 0x8
                 OSTick last_rumble_time; // 0xC
@@ -143,6 +143,8 @@ namespace ipl {
         public:
             Interface(int chan, KPADStatus &arg1) : Base(chan, arg1) {}
 
+            ~Interface() {}
+
             virtual int down(u32 button) const override;        // 0x10
             virtual int downTrg(u32 button) const override;     // 0x18
             virtual int pinch() const override;                 // 0x1C
@@ -154,22 +156,23 @@ namespace ipl {
         public:
             virtual ~Revolution();
 
-            virtual int down(u32 button) const override;                // 0x10
-            virtual math::VEC2 getDpdProjectionPos() const override;    // 0x58
-            virtual bool isValidBtn() const override;                   // 0x6C
+            virtual int down(u32 button) const override;        // 0x10
 
-            bool isValidDpd() const;
+            virtual math::VEC2 getDpdProjectionPos() const override;     // 0x58
 
-            virtual void read() override;                               // 0x84
+            virtual bool isValidBtn() const override;           // 0x6C
+            virtual bool isValidDpd() const override;           // 0x70
+
+            virtual void read() override;  // 0x88
         };
 
         class Classic : public Interface {
         public:
             Classic(int arg0, KPADStatus &arg1);
 
-            virtual void read() override;           // 0x84
+            virtual void read() override;
 
-            virtual BOOL isValidDpdClassic() const;  // 0x88
+            virtual BOOL isValidDpdClassic() const;  // 0x8C
 
         private:
             f32 unk24;
@@ -188,7 +191,7 @@ namespace ipl {
             Interface* getYoungController();
 
         private:
-            u8 dummy[0x2F8];
+            // u8 dummy[0x2F8];
         };
     }  // namespace controller
 }  // namespace ipl

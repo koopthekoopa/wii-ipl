@@ -204,29 +204,6 @@ namespace ipl {
             return ret;
         }
 
-    }
-}
-
-namespace nw4r {
-    namespace ut {
-        Rect::Rect() {
-            this->left = 0.0f;
-            this->top = 0.0f;
-            this->right = 0.0f;
-            this->bottom = 0.0f;
-        }
-    }
-}
-
-namespace ipl {
-    namespace math {
-        void VEC2::set(f32 x, f32 y) {
-            this->x = x;
-            this->y = y;
-        }
-    }
-
-    namespace controller {
         Classic::Classic(int arg0, KPADStatus &arg1) : Interface(arg0, arg1) {
             this->unk24 = 0.01f;
             this->unk28 = 0.01f;
@@ -236,12 +213,9 @@ namespace ipl {
         Base::~Base() {}
 
         Revolution::~Revolution() {}
-    }
 
-    namespace math {
-        VEC2::VEC2(f32 fx, f32 fy) {
-            this->x = fx;
-            this->y = fy;
+        void Classic::read() {
+
         }
     }
 }

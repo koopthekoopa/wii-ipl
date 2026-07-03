@@ -38,14 +38,17 @@ namespace ipl {
                 x = r.x;
                 y = r.y;
             }
-            VEC2(f32 fx, f32 fy);
+            VEC2(f32 fx, f32 fy) {
+                x = fx;
+                y = fy;
+            }
 
             VEC2 operator*(f32 val) const { return VEC2(x * val, y * val); }
 
-            void set(f32 fx, f32 fy); //{
-                // x = fx;
-                // y = fx;
-            // }
+            void set(f32 fx, f32 fy) {
+                x = fx;
+                y = fx;
+            }
 
             void clear() {
                 y = 0;
