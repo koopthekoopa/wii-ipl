@@ -1335,15 +1335,17 @@ s32 TMCJPEGDEC_set_converterRGBA8(TMCJpegDecWork* work) {
     }
     case 1: {
         u8 mode;
+        u8* ptr;
 
         mode = work->mIdctMode;
+        ptr = ob + 4;
 
-        work->mpConverterFunc = TMCJPEGDEC_converterYUV422toRGBA8;
-        work->mpConverterFuncEdge = TMCJPEGDEC_converterYUV422toRGBA8edge;
-        work->mpConvRowPtrs[0] = (void*)(ob + 4);
-        work->mpConvRowPtrs[1] = (void*)(ob + 4 + mode);
+        work->mpConvRowPtrs[0] = (void*)ptr;
+        work->mpConvRowPtrs[1] = (void*)(ptr + mode);
         work->mpConvRowPtrs[5] = (void*)(ob + 0x84);
         work->mpConvRowPtrs[6] = (void*)(ob + 0xC4);
+        work->mpConverterFunc = TMCJPEGDEC_converterYUV422toRGBA8;
+        work->mpConverterFuncEdge = TMCJPEGDEC_converterYUV422toRGBA8edge;
         work->mPitch = 0x10;
         work->mConverterFlags = 0;
         break;
@@ -1369,15 +1371,17 @@ s32 TMCJPEGDEC_set_converterRGBA8(TMCJpegDecWork* work) {
     }
     case 3: {
         u8 mode;
+        u8* ptr;
 
         mode = work->mIdctMode;
+        ptr = ob + 4;
 
-        work->mpConverterFunc = TMCJPEGDEC_converterYUV211toRGBA8;
-        work->mpConverterFuncEdge = TMCJPEGDEC_converterYUV211toRGBA8edge;
-        work->mpConvRowPtrs[0] = (void*)(ob + 4);
-        work->mpConvRowPtrs[1] = (void*)(ob + 4 + mode * 8);
+        work->mpConvRowPtrs[0] = (void*)ptr;
+        work->mpConvRowPtrs[1] = (void*)(ptr + mode * 8);
         work->mpConvRowPtrs[5] = (void*)(ob + 0x84);
         work->mpConvRowPtrs[6] = (void*)(ob + 0xC4);
+        work->mpConverterFunc = TMCJPEGDEC_converterYUV211toRGBA8;
+        work->mpConverterFuncEdge = TMCJPEGDEC_converterYUV211toRGBA8edge;
         work->mPitch = 0x08;
         work->mConverterFlags = 0;
         break;
@@ -1405,23 +1409,21 @@ s32 TMCJPEGDEC_set_converterRGBA8(TMCJpegDecWork* work) {
     }
 
     {
-        u16 fw;
-        u16 fh;
+        u32 fw;
+        u32 fh;
         s32 bw;
         s32 bh;
 
         fw = st->mJpegWidth;
         fh = st->mJpegHeight;
 
-        bw = (s32)(((s32)((fw << 30) - (fw >> 31)) << 2) + (fw >> 31));
-        bh = (s32)(((s32)((fh << 30) - (fh >> 31)) << 2) + (fh >> 31));
+        bw = (s32)((u32)((fw << 30) - (fw >> 31)) * 4 + (fw >> 31));
+        bh = (s32)((u32)((fh << 30) - (fh >> 31)) * 4 + (fh >> 31));
         {
             s32 nb = -bw;
+            s32 nb2 = -bh;
             bw = ((nb | bw) >> 31) + (fw >> 2);
-        }
-        {
-            s32 nb = -bh;
-            bh = ((nb | bh) >> 31) + (fh >> 2);
+            bh = ((nb2 | bh) >> 31) + (fh >> 2);
         }
 
         st->mConvWidth = bw << 2;
