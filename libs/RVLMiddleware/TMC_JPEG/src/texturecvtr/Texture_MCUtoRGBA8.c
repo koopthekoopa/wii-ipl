@@ -12,7 +12,6 @@ static void TMCJPEGDEC_converterYUV411toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     u8* cb_row;
     u8* y_row;
     u8* cr_row;
-    s32 i;
 
     st = (TMCCJPEGDecState*)work->mpState;
     cb_row = work->mConvBuf + 4;
@@ -27,162 +26,125 @@ static void TMCJPEGDEC_converterYUV411toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     y_end = y + step_v;
 
     {
-        s32 cb_step = (0x20 - step) >> 2;
-        s32 stride = (bw >> 1) & ~1;
+        s32 cb_skip = 0x20 - step;
+        s32 cb_step = cb_skip >> 2;
+        s32 stride = (bw >> 1) & 0x7FFFFFFE;
         s32 count = (x_end - x + 3) >> 2;
+        s32 yv;
+        s32 crv;
+        s32 s;
+        s32 ra;
+        s32 ga;
+        s32 ba;
+        s32 rr;
+        s32 gg;
+        s32 bb;
+        s32 n;
+        s32 x_pos;
+        s32 row_base;
+        u8* ob;
+        s32 xo;
+        s32 xg;
+        s32 off;
+        s32 ba0;
 
-        for (i = y; i < y_end; i++) {
-            u8* y_ptr;
-            u8* cr_ptr;
-            s32 n;
-            s32 x_pos;
-            s32 row_base;
-            u8* ob;
-            s32 y_d4 = i >> 2;
-            s32 y_ofs = (i & 3) << 3;
+        for (; y < y_end; y++) {
+            row_base = (y >> 2) * stride;
+            ob = out + ((y & 3) << 3);
 
-            row_base = y_d4 * stride;
-            ob = out + row_base + y_ofs;
-            y_ptr = y_row;
-            cr_ptr = cr_row;
             n = count;
             x_pos = x;
 
-            while (x_pos < x_end) {
-                s32 yv, crv, cbv;
-                s32 ra, ga, ba;
-                s32 rr, gg, bb;
+            if (x < x_end) {
+                do {
+                    yv = *y_row;
+                    y_row = y_row + 1;
+                    crv = *cr_row;
+                    cr_row = cr_row + 1;
 
-                yv = (s8)(y_ptr[0]); y_ptr++;
-                crv = (s8)(cr_ptr[0]); cr_ptr++;
-                cbv = cb_row[0];
-
-                ga = -((yv * 0x58) + (crv * 0xB7)) >> 8;
-                gg = cbv + ga;
-                ra = (crv * 0x167) >> 8;
-                rr = cbv + ra;
-                ba = (yv * 0x1C6) >> 8;
-                bb = cbv + ba;
-
-                if ((rr | gg | bb) >> 8) {
-                    if (rr > 0xFF) rr = 0xFF;
-                    else { s32 s = rr >> 31; rr &= ~s; }
-                    if (gg > 0xFF) gg = 0xFF;
-                    else { s32 s = gg >> 31; gg &= ~s; }
-                    if (bb > 0xFF) bb = 0xFF;
-                    else { s32 s = bb >> 31; bb &= ~s; }
-                }
-
-                {
-                    s32 xo = x_pos & 3;
-                    s32 xg = (x_pos >> 2) << 1;
-                    s32 off = (xg + row_base) << 4;
-                    s32 ba0 = off + xo;
-                    ((u16*)(ob + (ba0 << 1)))[0] = (u16)(0xFF00 | (bb & 0xFF));
-                    ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((((gg & 0xFF) << 8) | (rr & 0xFF)));
-                }
-                x_pos++;
-
-                if (x_pos < x_end) {
-                    yv = (s8)(y_ptr[0]); y_ptr++;
-                    crv = (s8)(cr_ptr[0]); cr_ptr++;
-                    cbv = cb_row[1];
-
-                    ga = -((yv * 0x58) + (crv * 0xB7)) >> 8;
-                    gg = cbv + ga;
                     ra = (crv * 0x167) >> 8;
-                    rr = cbv + ra;
+                    s = (yv * 0x58) + (crv * 0xB7);
+                    ga = -s >> 8;
                     ba = (yv * 0x1C6) >> 8;
-                    bb = cbv + ba;
 
-                    if ((rr | gg | bb) >> 8) {
-                        if (rr > 0xFF) rr = 0xFF;
-                        else { s32 s = rr >> 31; rr &= ~s; }
-                        if (gg > 0xFF) gg = 0xFF;
-                        else { s32 s = gg >> 31; gg &= ~s; }
-                        if (bb > 0xFF) bb = 0xFF;
-                        else { s32 s = bb >> 31; bb &= ~s; }
+                    {
+                        rr = cb_row[0] + ra;
+                        gg = cb_row[0] + ga;
+                        bb = cb_row[0] + ba;
+                        if ((rr | gg | bb) >> 8) {
+                            if (rr > 0xFF) rr = 0xFF; else { s32 t = rr >> 31; rr &= ~t; }
+                            if (gg > 0xFF) gg = 0xFF; else { s32 t = gg >> 31; gg &= ~t; }
+                            if (bb > 0xFF) bb = 0xFF; else { s32 t = bb >> 31; bb &= ~t; }
+                        }
+                        xo = x_pos & 3;
+                        xg = (x_pos >> 2) << 1;
+                        off = (xg + row_base) << 4;
+                        ba0 = off + xo;
+                        ((u16*)(ob + (ba0 << 1)))[0] = (u16)((u8)bb - 0x100);
+                        ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((gg & 0xFF) * 256 + (rr & 0xFF));
+                        x_pos++;
                     }
 
                     {
-                        s32 xo = x_pos & 3;
-                        s32 xg = (x_pos >> 2) << 1;
-                        s32 off = (xg + row_base) << 4;
-                        s32 ba0 = off + xo;
-                        ((u16*)(ob + (ba0 << 1)))[0] = (u16)(0xFF00 | (bb & 0xFF));
-                        ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((((gg & 0xFF) << 8) | (rr & 0xFF)));
-                    }
-                    x_pos++;
-                }
-
-                if (x_pos < x_end) {
-                    yv = (s8)(y_ptr[0]); y_ptr++;
-                    crv = (s8)(cr_ptr[0]); cr_ptr++;
-                    cbv = cb_row[2];
-
-                    ga = -((yv * 0x58) + (crv * 0xB7)) >> 8;
-                    gg = cbv + ga;
-                    ra = (crv * 0x167) >> 8;
-                    rr = cbv + ra;
-                    ba = (yv * 0x1C6) >> 8;
-                    bb = cbv + ba;
-
-                    if ((rr | gg | bb) >> 8) {
-                        if (rr > 0xFF) rr = 0xFF;
-                        else { s32 s = rr >> 31; rr &= ~s; }
-                        if (gg > 0xFF) gg = 0xFF;
-                        else { s32 s = gg >> 31; gg &= ~s; }
-                        if (bb > 0xFF) bb = 0xFF;
-                        else { s32 s = bb >> 31; bb &= ~s; }
+                        rr = cb_row[1] + ra;
+                        gg = cb_row[1] + ga;
+                        bb = cb_row[1] + ba;
+                        if ((rr | gg | bb) >> 8) {
+                            if (rr > 0xFF) rr = 0xFF; else { s32 t = rr >> 31; rr &= ~t; }
+                            if (gg > 0xFF) gg = 0xFF; else { s32 t = gg >> 31; gg &= ~t; }
+                            if (bb > 0xFF) bb = 0xFF; else { s32 t = bb >> 31; bb &= ~t; }
+                        }
+                        xo = x_pos & 3;
+                        xg = (x_pos >> 2) << 1;
+                        off = (xg + row_base) << 4;
+                        ba0 = off + xo;
+                        ((u16*)(ob + (ba0 << 1)))[0] = (u16)((u8)bb - 0x100);
+                        ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((gg & 0xFF) * 256 + (rr & 0xFF));
+                        x_pos++;
                     }
 
                     {
-                        s32 xo = x_pos & 3;
-                        s32 xg = (x_pos >> 2) << 1;
-                        s32 off = (xg + row_base) << 4;
-                        s32 ba0 = off + xo;
-                        ((u16*)(ob + (ba0 << 1)))[0] = (u16)(0xFF00 | (bb & 0xFF));
-                        ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((((gg & 0xFF) << 8) | (rr & 0xFF)));
-                    }
-                    x_pos++;
-                }
-
-                if (x_pos < x_end) {
-                    yv = (s8)(y_ptr[0]); y_ptr++;
-                    crv = (s8)(cr_ptr[0]); cr_ptr++;
-                    cbv = cb_row[3];
-
-                    ga = -((yv * 0x58) + (crv * 0xB7)) >> 8;
-                    gg = cbv + ga;
-                    ra = (crv * 0x167) >> 8;
-                    rr = cbv + ra;
-                    ba = (yv * 0x1C6) >> 8;
-                    bb = cbv + ba;
-
-                    if ((rr | gg | bb) >> 8) {
-                        if (rr > 0xFF) rr = 0xFF;
-                        else { s32 s = rr >> 31; rr &= ~s; }
-                        if (gg > 0xFF) gg = 0xFF;
-                        else { s32 s = gg >> 31; gg &= ~s; }
-                        if (bb > 0xFF) bb = 0xFF;
-                        else { s32 s = bb >> 31; bb &= ~s; }
+                        rr = cb_row[2] + ra;
+                        gg = cb_row[2] + ga;
+                        bb = cb_row[2] + ba;
+                        if ((rr | gg | bb) >> 8) {
+                            if (rr > 0xFF) rr = 0xFF; else { s32 t = rr >> 31; rr &= ~t; }
+                            if (gg > 0xFF) gg = 0xFF; else { s32 t = gg >> 31; gg &= ~t; }
+                            if (bb > 0xFF) bb = 0xFF; else { s32 t = bb >> 31; bb &= ~t; }
+                        }
+                        xo = x_pos & 3;
+                        xg = (x_pos >> 2) << 1;
+                        off = (xg + row_base) << 4;
+                        ba0 = off + xo;
+                        ((u16*)(ob + (ba0 << 1)))[0] = (u16)((u8)bb - 0x100);
+                        ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((gg & 0xFF) * 256 + (rr & 0xFF));
+                        x_pos++;
                     }
 
                     {
-                        s32 xo = x_pos & 3;
-                        s32 xg = (x_pos >> 2) << 1;
-                        s32 off = (xg + row_base) << 4;
-                        s32 ba0 = off + xo;
-                        ((u16*)(ob + (ba0 << 1)))[0] = (u16)(0xFF00 | (bb & 0xFF));
-                        ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((((gg & 0xFF) << 8) | (rr & 0xFF)));
+                        rr = cb_row[3] + ra;
+                        gg = cb_row[3] + ga;
+                        bb = cb_row[3] + ba;
+                        if ((rr | gg | bb) >> 8) {
+                            if (rr > 0xFF) rr = 0xFF; else { s32 t = rr >> 31; rr &= ~t; }
+                            if (gg > 0xFF) gg = 0xFF; else { s32 t = gg >> 31; gg &= ~t; }
+                            if (bb > 0xFF) bb = 0xFF; else { s32 t = bb >> 31; bb &= ~t; }
+                        }
+                        xo = x_pos & 3;
+                        xg = (x_pos >> 2) << 1;
+                        off = (xg + row_base) << 4;
+                        ba0 = off + xo;
+                        ((u16*)(ob + (ba0 << 1)))[0] = (u16)((u8)bb - 0x100);
+                        ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((gg & 0xFF) * 256 + (rr & 0xFF));
+                        x_pos++;
                     }
-                    x_pos++;
-                }
 
-                cb_row += 4;
+                    cb_row += 4;
+                    n--;
+                } while (n);
             }
 
-            cb_row += (0x20 - step);
+            cb_row += cb_skip;
             y_row += cb_step;
             cr_row += cb_step;
         }
@@ -225,7 +187,7 @@ static void TMCJPEGDEC_converterYUV411toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     y_end = y + step_v;
     {
         s32 cb_step = (0x20 - step) >> 2;
-        s32 stride = (bw >> 1) & ~1;
+        s32 stride = (bw >> 1) & 0x7FFFFFFE;
 
         for (i = y; i < y_end; i++) {
             u8* cb_ptr;
@@ -303,7 +265,6 @@ static void TMCJPEGDEC_converterYUV422toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     u8* cb_row;
     u8* y_row;
     u8* cr_row;
-    s32 i;
 
     st = (TMCCJPEGDecState*)work->mpState;
     cb_row = work->mConvBuf + 4;
@@ -319,94 +280,82 @@ static void TMCJPEGDEC_converterYUV422toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
 
     {
         s32 cb_step = (0x10 - step) >> 1;
-        s32 stride = (bw >> 1) & ~1;
+        s32 stride = (bw >> 1) & 0x7FFFFFFE;
         s32 count = step >> 1;
+        s32 ra;
+        s32 ga;
+        s32 ba;
+        s32 rr;
+        s32 gg;
+        s32 bb;
+        s32 n;
+        s32 x_pos;
+        s32 row_base;
+        u8* ob;
+        s32 s;
+        s32 xo;
+        s32 xg;
+        s32 off;
+        s32 ba0;
 
-        for (i = y; i < y_end; i++) {
-            u8* y_ptr;
-            u8* cr_ptr;
-            s32 n;
-            s32 x_pos;
-            s32 row_base;
-            u8* ob;
-            s32 y_d4 = i >> 2;
-            s32 y_ofs = (i & 3) << 3;
+        for (; y < y_end; y++) {
+            row_base = (y >> 2) * stride;
+            ob = out + ((y & 3) << 3);
 
-            row_base = y_d4 * stride;
-            ob = out + row_base + y_ofs;
-            y_ptr = y_row;
-            cr_ptr = cr_row;
             n = count;
             x_pos = x;
 
-            while (x_pos < x_end) {
-                s32 yv, crv, cbv;
-                s32 ra, ga, ba;
-                s32 rr, gg, bb;
+            if (x < x_end) {
+                do {
+                    s32 yv = *y_row;
+                    s32 crv = *cr_row;
+                    y_row = y_row + 1;
+                    cr_row = cr_row + 1;
 
-                yv = (s8)(y_ptr[0]); y_ptr++;
-                crv = (s8)(cr_ptr[0]); cr_ptr++;
-                cbv = cb_row[0];
-
-                ga = -((yv * 0x58) + (crv * 0xB7)) >> 8;
-                gg = cbv + ga;
-                ra = (crv * 0x167) >> 8;
-                rr = cbv + ra;
-                ba = (yv * 0x1C6) >> 8;
-                bb = cbv + ba;
-
-                if ((rr | gg | bb) >> 8) {
-                    if (rr > 0xFF) rr = 0xFF;
-                    else { s32 s = rr >> 31; rr &= ~s; }
-                    if (gg > 0xFF) gg = 0xFF;
-                    else { s32 s = gg >> 31; gg &= ~s; }
-                    if (bb > 0xFF) bb = 0xFF;
-                    else { s32 s = bb >> 31; bb &= ~s; }
-                }
-
-                {
-                    s32 xo = x_pos & 3;
-                    s32 xg = (x_pos >> 2) << 1;
-                    s32 off = (xg + row_base) << 4;
-                    s32 ba0 = off + xo;
-                    ((u16*)(ob + (ba0 << 1)))[0] = (u16)(0xFF00 | (bb & 0xFF));
-                    ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((((gg & 0xFF) << 8) | (rr & 0xFF)));
-                }
-                x_pos++;
-
-                if (x_pos < x_end) {
-                    yv = (s8)(y_ptr[0]); y_ptr++;
-                    crv = (s8)(cr_ptr[0]); cr_ptr++;
-                    cbv = cb_row[1];
-
-                    ga = -((yv * 0x58) + (crv * 0xB7)) >> 8;
-                    gg = cbv + ga;
                     ra = (crv * 0x167) >> 8;
-                    rr = cbv + ra;
+                    s = (yv * 0x58) + (crv * 0xB7);
+                    ga = -s >> 8;
                     ba = (yv * 0x1C6) >> 8;
-                    bb = cbv + ba;
 
-                    if ((rr | gg | bb) >> 8) {
-                        if (rr > 0xFF) rr = 0xFF;
-                        else { s32 s = rr >> 31; rr &= ~s; }
-                        if (gg > 0xFF) gg = 0xFF;
-                        else { s32 s = gg >> 31; gg &= ~s; }
-                        if (bb > 0xFF) bb = 0xFF;
-                        else { s32 s = bb >> 31; bb &= ~s; }
+                    {
+                        rr = cb_row[0] + ra;
+                        gg = cb_row[0] + ga;
+                        bb = cb_row[0] + ba;
+                        if ((rr | gg | bb) >> 8) {
+                            if (rr > 0xFF) rr = 0xFF; else { s32 t = rr >> 31; rr &= ~t; }
+                            if (gg > 0xFF) gg = 0xFF; else { s32 t = gg >> 31; gg &= ~t; }
+                            if (bb > 0xFF) bb = 0xFF; else { s32 t = bb >> 31; bb &= ~t; }
+                        }
+                        xo = x_pos & 3;
+                        xg = (x_pos >> 2) << 1;
+                        off = (xg + row_base) << 4;
+                        ba0 = off + xo;
+                        ((u16*)(ob + (ba0 << 1)))[0] = (u16)((u8)bb - 0x100);
+                        ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((gg & 0xFF) * 256 + (rr & 0xFF));
+                        x_pos++;
                     }
 
                     {
-                        s32 xo = x_pos & 3;
-                        s32 xg = (x_pos >> 2) << 1;
-                        s32 off = (xg + row_base) << 4;
-                        s32 ba0 = off + xo;
-                        ((u16*)(ob + (ba0 << 1)))[0] = (u16)(0xFF00 | (bb & 0xFF));
-                        ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((((gg & 0xFF) << 8) | (rr & 0xFF)));
+                        rr = cb_row[1] + ra;
+                        gg = cb_row[1] + ga;
+                        bb = cb_row[1] + ba;
+                        if ((rr | gg | bb) >> 8) {
+                            if (rr > 0xFF) rr = 0xFF; else { s32 t = rr >> 31; rr &= ~t; }
+                            if (gg > 0xFF) gg = 0xFF; else { s32 t = gg >> 31; gg &= ~t; }
+                            if (bb > 0xFF) bb = 0xFF; else { s32 t = bb >> 31; bb &= ~t; }
+                        }
+                        xo = x_pos & 3;
+                        xg = (x_pos >> 2) << 1;
+                        off = (xg + row_base) << 4;
+                        ba0 = off + xo;
+                        ((u16*)(ob + (ba0 << 1)))[0] = (u16)((u8)bb - 0x100);
+                        ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((gg & 0xFF) * 256 + (rr & 0xFF));
+                        x_pos++;
                     }
-                    x_pos++;
-                }
 
-                cb_row += 2;
+                    cb_row += 2;
+                    n--;
+                } while (n);
             }
 
             cb_row += (0x10 - step);
@@ -452,7 +401,7 @@ static void TMCJPEGDEC_converterYUV422toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     y_end = y + step_v;
     {
         s32 cb_step = (0x10 - step) >> 1;
-        s32 stride = (bw >> 1) & ~1;
+        s32 stride = (bw >> 1) & 0x7FFFFFFE;
 
         for (i = y; i < y_end; i++) {
             u8* cb_ptr;
@@ -467,7 +416,7 @@ static void TMCJPEGDEC_converterYUV422toRGBA8edge(TMCJpegDecWork* work, s32 x, s
             s32 y_ofs = (i & 3) << 3;
 
             row_base = y_d4 * stride;
-            ob = out + row_base + y_ofs;
+            ob = out + y_ofs;
             cb_ptr = cb_row;
             y_ptr = y_row;
             cr_ptr = cr_row;
@@ -530,7 +479,6 @@ static void TMCJPEGDEC_converterYUV420toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     u8* cb_row;
     u8* y_row;
     u8* cr_row;
-    s32 i;
 
     st = (TMCCJPEGDecState*)work->mpState;
     cb_row = work->mConvBuf + 4;
@@ -546,98 +494,86 @@ static void TMCJPEGDEC_converterYUV420toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
 
     {
         s32 cb_step = (0x10 - step) >> 1;
-        s32 stride = (bw >> 1) & ~1;
+        s32 stride = (bw >> 1) & 0x7FFFFFFE;
         s32 count = step >> 1;
+        s32 ra;
+        s32 ga;
+        s32 ba;
+        s32 rr;
+        s32 gg;
+        s32 bb;
+        s32 n;
+        s32 x_pos;
+        s32 row_base;
+        u8* ob;
+        s32 s;
+        s32 xo;
+        s32 xg;
+        s32 off;
+        s32 ba0;
 
-        for (i = y; i < y_end; i++) {
-            u8* y_ptr;
-            u8* cr_ptr;
-            s32 n;
-            s32 x_pos;
-            s32 row_base;
-            u8* ob;
-            s32 y_d4 = i >> 2;
-            s32 y_ofs = (i & 3) << 3;
+        for (; y < y_end; y++) {
+            row_base = (y >> 2) * stride;
+            ob = out + ((y & 3) << 3);
 
-            row_base = y_d4 * stride;
-            ob = out + row_base + y_ofs;
-            y_ptr = y_row;
-            cr_ptr = cr_row;
             n = count;
             x_pos = x;
 
-            while (x_pos < x_end) {
-                s32 yv, crv, cbv;
-                s32 ra, ga, ba;
-                s32 rr, gg, bb;
+            if (x < x_end) {
+                do {
+                    s32 yv = *y_row;
+                    s32 crv = *cr_row;
+                    y_row = y_row + 1;
+                    cr_row = cr_row + 1;
 
-                yv = (s8)(y_ptr[0]); y_ptr++;
-                crv = (s8)(cr_ptr[0]); cr_ptr++;
-                cbv = cb_row[0];
-
-                ga = -((yv * 0x58) + (crv * 0xB7)) >> 8;
-                gg = cbv + ga;
-                ra = (crv * 0x167) >> 8;
-                rr = cbv + ra;
-                ba = (yv * 0x1C6) >> 8;
-                bb = cbv + ba;
-
-                if ((rr | gg | bb) >> 8) {
-                    if (rr > 0xFF) rr = 0xFF;
-                    else { s32 s = rr >> 31; rr &= ~s; }
-                    if (gg > 0xFF) gg = 0xFF;
-                    else { s32 s = gg >> 31; gg &= ~s; }
-                    if (bb > 0xFF) bb = 0xFF;
-                    else { s32 s = bb >> 31; bb &= ~s; }
-                }
-
-                {
-                    s32 xo = x_pos & 3;
-                    s32 xg = (x_pos >> 2) << 1;
-                    s32 off = (xg + row_base) << 4;
-                    s32 ba0 = off + xo;
-                    ((u16*)(ob + (ba0 << 1)))[0] = (u16)(0xFF00 | (bb & 0xFF));
-                    ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((((gg & 0xFF) << 8) | (rr & 0xFF)));
-                }
-                x_pos++;
-
-                if (x_pos < x_end) {
-                    yv = (s8)(y_ptr[0]); y_ptr++;
-                    crv = (s8)(cr_ptr[0]); cr_ptr++;
-                    cbv = cb_row[1];
-
-                    ga = -((yv * 0x58) + (crv * 0xB7)) >> 8;
-                    gg = cbv + ga;
                     ra = (crv * 0x167) >> 8;
-                    rr = cbv + ra;
+                    s = (yv * 0x58) + (crv * 0xB7);
+                    ga = -s >> 8;
                     ba = (yv * 0x1C6) >> 8;
-                    bb = cbv + ba;
 
-                    if ((rr | gg | bb) >> 8) {
-                        if (rr > 0xFF) rr = 0xFF;
-                        else { s32 s = rr >> 31; rr &= ~s; }
-                        if (gg > 0xFF) gg = 0xFF;
-                        else { s32 s = gg >> 31; gg &= ~s; }
-                        if (bb > 0xFF) bb = 0xFF;
-                        else { s32 s = bb >> 31; bb &= ~s; }
+                    {
+                        rr = cb_row[0] + ra;
+                        gg = cb_row[0] + ga;
+                        bb = cb_row[0] + ba;
+                        if ((rr | gg | bb) >> 8) {
+                            if (rr > 0xFF) rr = 0xFF; else { s32 t = rr >> 31; rr &= ~t; }
+                            if (gg > 0xFF) gg = 0xFF; else { s32 t = gg >> 31; gg &= ~t; }
+                            if (bb > 0xFF) bb = 0xFF; else { s32 t = bb >> 31; bb &= ~t; }
+                        }
+                        xo = x_pos & 3;
+                        xg = (x_pos >> 2) << 1;
+                        off = (xg + row_base) << 4;
+                        ba0 = off + xo;
+                        ((u16*)(ob + (ba0 << 1)))[0] = (u16)((u8)bb - 0x100);
+                        ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((gg & 0xFF) * 256 + (rr & 0xFF));
+                        x_pos++;
                     }
 
                     {
-                        s32 xo = x_pos & 3;
-                        s32 xg = (x_pos >> 2) << 1;
-                        s32 off = (xg + row_base) << 4;
-                        s32 ba0 = off + xo;
-                        ((u16*)(ob + (ba0 << 1)))[0] = (u16)(0xFF00 | (bb & 0xFF));
-                        ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((((gg & 0xFF) << 8) | (rr & 0xFF)));
+                        rr = cb_row[1] + ra;
+                        gg = cb_row[1] + ga;
+                        bb = cb_row[1] + ba;
+                        if ((rr | gg | bb) >> 8) {
+                            if (rr > 0xFF) rr = 0xFF; else { s32 t = rr >> 31; rr &= ~t; }
+                            if (gg > 0xFF) gg = 0xFF; else { s32 t = gg >> 31; gg &= ~t; }
+                            if (bb > 0xFF) bb = 0xFF; else { s32 t = bb >> 31; bb &= ~t; }
+                        }
+                        xo = x_pos & 3;
+                        xg = (x_pos >> 2) << 1;
+                        off = (xg + row_base) << 4;
+                        ba0 = off + xo;
+                        ((u16*)(ob + (ba0 << 1)))[0] = (u16)((u8)bb - 0x100);
+                        ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((gg & 0xFF) * 256 + (rr & 0xFF));
+                        x_pos++;
                     }
-                    x_pos++;
-                }
 
-                cb_row += 2;
+                    cb_row += 2;
+                    n--;
+                } while (n);
             }
 
             cb_row += (0x10 - step);
-            if (i & 1) {
+            if (y & 1) {
                 y_row += cb_step;
                 cr_row += cb_step;
             } else {
@@ -684,7 +620,7 @@ static void TMCJPEGDEC_converterYUV420toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     y_end = y + step_v;
     {
         s32 cb_step = (0x10 - step) >> 1;
-        s32 stride = (bw >> 1) & ~1;
+        s32 stride = (bw >> 1) & 0x7FFFFFFE;
 
         for (i = y; i < y_end; i++) {
             u8* cb_ptr;
@@ -699,7 +635,7 @@ static void TMCJPEGDEC_converterYUV420toRGBA8edge(TMCJpegDecWork* work, s32 x, s
             s32 y_ofs = (i & 3) << 3;
 
             row_base = y_d4 * stride;
-            ob = out + row_base + y_ofs;
+            ob = out + y_ofs;
             cb_ptr = cb_row;
             y_ptr = y_row;
             cr_ptr = cr_row;
@@ -782,7 +718,7 @@ static void TMCJPEGDEC_converterYUV211toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     y_end = y + step_v;
 
     {
-        s32 stride = (bw >> 1) & ~1;
+        s32 stride = (bw >> 1) & 0x7FFFFFFE;
         s32 count = step;
         s32 step_half = step >> 1;
 
@@ -890,7 +826,7 @@ static void TMCJPEGDEC_converterYUV211toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     y_end = y + step_v;
 
     {
-        s32 stride = (bw >> 1) & ~1;
+        s32 stride = (bw >> 1) & 0x7FFFFFFE;
         s32 count = step;
 
         for (i = y; i < y_end; i++) {
@@ -987,7 +923,7 @@ static void TMCJPEGDEC_converterYUV444toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     y_end = y + step;
 
     {
-        s32 stride = (bw >> 1) & ~1;
+        s32 stride = (bw >> 1) & 0x7FFFFFFE;
         s32 count = step;
 
         for (i = y; i < y_end; i++) {
@@ -1087,7 +1023,7 @@ static void TMCJPEGDEC_converterYUV444toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     y_end = y + step_v;
 
     {
-        s32 stride = (bw >> 1) & ~1;
+        s32 stride = (bw >> 1) & 0x7FFFFFFE;
         s32 count = step;
 
         for (i = y; i < y_end; i++) {
@@ -1175,7 +1111,7 @@ static void TMCJPEGDEC_converterYUV400toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     y_end = y + step;
 
     {
-        s32 stride = (bw >> 1) & ~1;
+        s32 stride = (bw >> 1) & 0x7FFFFFFE;
         s32 count = step;
 
         for (i = y; i < y_end; i++) {
@@ -1188,29 +1124,43 @@ static void TMCJPEGDEC_converterYUV400toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
             s32 y_ofs = (i & 3) << 3;
 
             row_base = y_d4 * stride;
-            ob = out + row_base + y_ofs;
+            ob = out + y_ofs;
             n = count;
             x_pos = x;
 
             while (x_pos < x_end) {
                 s32 val;
+                s32 rr;
+                s32 gg;
+                s32 bb;
 
                 val = cb_row[0]; cb_row++;
-                if (val > 0xFF) val = 0xFF;
-                else { s32 s = val >> 31; val &= ~s; }
+                if (val >> 8) {
+                    if (val > 0xFF) rr = 0xFF;
+                    else { s32 s = val >> 31; rr = val & ~s; }
+                    if (val > 0xFF) gg = 0xFF;
+                    else { s32 s = val >> 31; gg = val & ~s; }
+                    if (val > 0xFF) bb = 0xFF;
+                    else { s32 s = val >> 31; bb = val & ~s; }
+                } else {
+                    rr = val;
+                    gg = val;
+                    bb = val;
+                }
 
                 {
-                    s32 xo = x_pos & 3;
-                    s32 xg = (x_pos >> 2) << 1;
-                    s32 off = (xg + row_base) << 4;
-                    s32 ba0 = off + xo;
-                    s32 bb = val;
-                    s32 gg = val;
-                    s32 rr = val;
-                    ((u16*)(ob + (ba0 << 1)))[0] = (u16)(0xFF00 | (bb & 0xFF));
-                    ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((((gg & 0xFF) << 8) | (rr & 0xFF)));
+                    s32 off;
+                    s32 ba0;
+                    u32 bb_store;
+
+                    off = ((x_pos >> 2) << 1) + row_base;
+                    ba0 = (off << 4) + (x_pos & 3);
+                    x_pos++;
+                    bb_store = (u32)(bb & 0xFF) + 0x10000;
+                    bb_store -= 0x100;
+                    ((u16*)(ob + (ba0 << 1)))[0] = (u16)bb_store;
+                    ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)(((gg & 0xFF) << 8) + (rr & 0xFF));
                 }
-                x_pos++;
                 n--;
             }
 
@@ -1251,7 +1201,7 @@ static void TMCJPEGDEC_converterYUV400toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     y_end = y + step_v;
 
     {
-        s32 stride = (bw >> 1) & ~1;
+        s32 stride = (bw >> 1) & 0x7FFFFFFE;
         s32 count = step;
 
         for (i = y; i < y_end; i++) {
@@ -1264,32 +1214,46 @@ static void TMCJPEGDEC_converterYUV400toRGBA8edge(TMCJpegDecWork* work, s32 x, s
             s32 y_ofs = (i & 3) << 3;
 
             row_base = y_d4 * stride;
-            ob = out + row_base + y_ofs;
+            ob = out + y_ofs;
             cb_ptr = cb_row;
             n = count;
             x_pos = x;
 
             while (x_pos < x_end) {
                 s32 val;
+                s32 rr;
+                s32 gg;
+                s32 bb;
 
                 val = cb_ptr[0];
-                if (val > 0xFF) val = 0xFF;
-                else { s32 s = val >> 31; val &= ~s; }
+                cb_ptr += 1;
+                if (val >> 8) {
+                    if (val > 0xFF) rr = 0xFF;
+                    else { s32 s = val >> 31; rr = val & ~s; }
+                    if (val > 0xFF) gg = 0xFF;
+                    else { s32 s = val >> 31; gg = val & ~s; }
+                    if (val > 0xFF) bb = 0xFF;
+                    else { s32 s = val >> 31; bb = val & ~s; }
+                } else {
+                    rr = val;
+                    gg = val;
+                    bb = val;
+                }
 
                 {
-                    s32 xo = x_pos & 3;
-                    s32 xg = (x_pos >> 2) << 1;
-                    s32 off = (xg + row_base) << 4;
-                    s32 ba0 = off + xo;
-                    s32 bb = val;
-                    s32 gg = val;
-                    s32 rr = val;
-                    ((u16*)(ob + (ba0 << 1)))[0] = (u16)(0xFF00 | (bb & 0xFF));
-                    ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((((gg & 0xFF) << 8) | (rr & 0xFF)));
+                    s32 off;
+                    s32 ba0;
+                    u32 bb_store;
+
+                    off = ((x_pos >> 2) << 1) + row_base;
+                    ba0 = (off << 4) + (x_pos & 3);
+                    x_pos++;
+                    bb_store = (u32)(bb & 0xFF) + 0x10000;
+                    bb_store -= 0x100;
+                    ((u16*)(ob + (ba0 << 1)))[0] = (u16)bb_store;
+                    ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)(((gg & 0xFF) << 8) + (rr & 0xFF));
                 }
-                x_pos++;
                 n--;
-                cb_ptr += 1;
             }
 
             cb_row += step;
