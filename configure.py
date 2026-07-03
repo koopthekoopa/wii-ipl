@@ -406,6 +406,12 @@ cflags_eztx = [
     "-Cpp_exceptions off",
 ]
 
+# TMC JPEG Library
+cflags_sdk_jpeg = [
+    *cflags_sdk,
+    "-use_lmw_stmw on",
+]
+
 # Metroworks library flags
 cflags_runtime = [
     *cflags_base,
@@ -496,7 +502,7 @@ def TMCJpegLib(objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": "TMC_JPEG",
         "mw_version": config.linker_version,
-        "cflags": cflags_sdk,
+        "cflags": cflags_sdk_jpeg,
         "progress_category": "rvlmwm",
         "objects": objects,
         "src_dir": "libs/RVLMiddleware/TMC_JPEG/src",

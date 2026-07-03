@@ -895,96 +895,80 @@ s32 TMCJPEGDEC_err_restart(TMCJpegDecWork* work)
 
     {
         s32 r;
+        u8 byte;
 
         r = TMCJPEGDEC_rewind_ptr(work);
         if (r < 0)
             return r;
 
+        byte = *(u8*)work->mpBufCur;
+        goto rst_cond;
+
+    rst_read:
+        r = TMCJPEGDEC_get_byte(&byte, work);
+        if (r < 0)
+            return r;
+
+    rst_cond:
+        if (byte != 0xFF)
+            goto rst_read;
+
+        r = TMCJPEGDEC_get_byte(&byte, work);
+
+        if (byte == 0xD9) {
+            if (r >= 0) goto rst_ret0;
+            if (r == -0x90) goto rst_ret0;
+            return r;
+
+        rst_ret0:
+            return 0;
+        }
+
+        if (r < 0)
+            return r;
+
+        if (byte < 0xD0)
+            goto rst_cond;
+        if (byte > 0xD7)
+            goto rst_cond;
+
         {
-            u8 byte;
+            u16 scanCount2 = work->mRstMarkerIdx;
+            u16 interval = work->mRestartInterval;
+            u8 rstIdx = (byte + 0x08) - (scanCount2 + 0xCF);
+            u8 rstDiff;
 
-            byte = *(u8*)work->mpBufCur;
+            if (byte > scanCount2 + 0xCF)
+                rstDiff = byte - (scanCount2 + 0xCF);
+            else
+                rstDiff = rstIdx;
 
-            while (byte == 0xFF) {
-                r = TMCJPEGDEC_get_byte(&byte, work);
-                if (r < 0)
-                    return r;
-            }
+            work->mRstMarkerIdx = (byte + 1) & 7;
+            work->mDCPredict[0] = 0;
+            work->mDCPredict[1] = 0;
+            work->mDCPredict[2] = 0;
+            work->mDCPredict[3] = 0;
+            work->mRestartCnt = 0;
 
             {
-                r = TMCJPEGDEC_get_byte(&byte, work);
+                u32 val = work->mMcuPos;
+                u16 pitch = state->mMaxX;
+                u32 next = (val & 0xFF) * pitch + (val >> 16) + rstDiff * interval;
+                u32 div = next / pitch;
 
-                if (byte == 0xD9) {
-                    if (r >= 0 || r == -0x90)
-                        return 0;
-                    return r;
-                }
+                work->mMcuPos = ((next - div * pitch) << 16) | (u16)div;
 
+                r = ((s32 (*)(TMCJpegDecWork*))TMCJPEGDEC_init_buff)(work);
                 if (r < 0)
                     return r;
 
-                while (byte < 0xD0 || byte > 0xD7) {
-                    while (byte == 0xFF) {
-                        r = TMCJPEGDEC_get_byte(&byte, work);
-                        if (r < 0)
-                            return r;
-                    }
-
-                    r = TMCJPEGDEC_get_byte(&byte, work);
-                    if (byte == 0xD9) {
-                        if (r >= 0 || r == -0x90)
-                            return 0;
-                        return r;
-                    }
-                    if (r < 0)
-                        return r;
-                }
-
+                state->mPosX = next - div * pitch;
+                state->mPosY = div;
+                state->mPosition = TMCJPEGDEC_get_position(work);
                 {
-                    u16 scanCount2 = work->mRstMarkerIdx;
-                    u16 interval = work->mRestartInterval;
-                    u8 rstIdx = (byte + 0x08) - (scanCount2 + 0xCF);
-                    u8 rstDiff;
-
-                    if (byte > scanCount2 + 0xCF)
-                        rstDiff = byte - (scanCount2 + 0xCF);
-                    else
-                        rstDiff = rstIdx;
-
-                    {
-                        u32 val;
-                        u16 pitch;
-                        u32 next;
-                        u32 mul;
-                        u32 div;
-
-                        work->mRstMarkerIdx = (byte + 1) & 7;
-                        work->mDCPredict[0] = 0;
-                        work->mDCPredict[1] = 0;
-                        work->mDCPredict[2] = 0;
-                        work->mDCPredict[3] = 0;
-                        work->mRestartCnt = 0;
-
-                        val = work->mMcuPos;
-                        pitch = state->mMaxX;
-                        next = (val & 0xFF) * pitch + (val >> 16) + rstDiff * interval;
-
-                        div = next / pitch;
-                        work->mMcuPos = ((next - div * pitch) << 16) | div;
-
-                        r = ((s32 (*)(TMCJpegDecWork*))TMCJPEGDEC_init_buff)(work);
-                        if (r < 0)
-                            return r;
-
-                        state->mPosX = next - div * pitch;
-                        state->mPosY = div;
-                        state->mPosition = TMCJPEGDEC_get_position(work);
-                        {
-                            u32 d = state->mPosY * state->mMaxX;
-                            s32 pos = state->mDataSizeX - d - state->mPosX;
-                            return pos;
-                        }
-                    }
+                    u32 d = state->mPosY * state->mMaxX;
+                    s32 pos = state->mResult - d - state->mPosX;
+                    return pos;
                 }
             }
         }

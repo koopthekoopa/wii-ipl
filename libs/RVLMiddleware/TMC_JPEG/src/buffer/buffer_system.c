@@ -1,12 +1,12 @@
 #include <tmc_jpeg_internal.h>
 
 static s32 TMCJPEG_814EAF50(TMCJpegDecWork* work) {
-    u8* end;
-    u8* endMinus1;
-    u32 i;
     u32 marker;
     u32 readSize;
     u8* dest;
+    u8* end;
+    u8* endMinus1;
+    u32 i;
 
     end = work->mpBufEnd;
     endMinus1 = end - 1;
@@ -24,10 +24,9 @@ static s32 TMCJPEG_814EAF50(TMCJpegDecWork* work) {
         work->mpBufStart[i + 7] = *(endMinus1 - (0x1f - (i + 7)));
     }
 
+    dest = work->mpBufOrg + 0x20;
     readSize = work->mRemaining;
     if (work->mBufLen - 0x20 < readSize) readSize = work->mBufLen - 0x20;
-
-    dest = work->mpBufOrg + 0x20;
 
     if (((s32 (*)(void*, u8*, u32))work->mpCallback)(work->mpCbCtx, dest, readSize) != 0)
         return -0xF0;

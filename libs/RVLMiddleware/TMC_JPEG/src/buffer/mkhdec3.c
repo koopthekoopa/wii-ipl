@@ -7,45 +7,50 @@ void TMCJPEGDEC_set_HuffmanTable(TMCHuffTblSet* tbl, s32 tblType, s32 tblID,
     register void* maxcode;
     void* valptr;
 
-    if (tblType == 0)
-    {
-        if (tblID == 1) goto dc1;
-        hufftable = &work->mZigzagData[8];
-        tbl->hufftable = hufftable;
-        tbl->maxcode = work->mMaxCode_DC0;
-        tbl->valptr = work->mValPtr_DC0;
-        work->mHuffTblInitFlag[0] = 1;
-        memset(hufftable, 0, 0x400);
-        memset(work->mMaxCode_DC0, 0, 0x10);
-        memset(work->mValPtr_DC0, 0, 0x44);
-        return;
+    if (tblType != 0) goto ac_dispatch;
 
-    dc1:
-        hufftable = work->mHuffDecTbl_DC1;
-        {
-            void* maxcode = work->mMaxCode_DC1;
-            tbl->maxcode = maxcode;
-        }
-        valptr = work->mValPtr_DC1;
+    if (tblID == 1) goto dc1;
+    if (tblID >= 1) return;
+    if (tblID >= 0) goto dc0;
+    return;
 
-        tbl->hufftable = hufftable;
-        tbl->valptr = valptr;
-        work->mHuffTblInitFlag[1] = 1;
-        memset(hufftable, 0, 0x400);
-        memset(work->mMaxCode_DC1, 0, 0x10);
-        memset(work->mValPtr_DC1, 0, 0x44);
-        return;
-    }
-
-    if (tblID == 1) goto ac1;
-    hufftable = work->mHuffDecTbl_AC0;
-    {
-        void* maxcode = work->mMaxCode_AC0;
-        tbl->maxcode = maxcode;
-    }
-    valptr = work->mValPtr_AC0;
-
+dc0:
+    hufftable = &work->mZigzagData[8];
+    maxcode = work->mMaxCode_DC0;
     tbl->hufftable = hufftable;
+    tbl->maxcode = maxcode;
+    tbl->valptr = work->mValPtr_DC0;
+    work->mHuffTblInitFlag[0] = 1;
+    memset(hufftable, 0, 0x400);
+    memset(work->mMaxCode_DC0, 0, 0x10);
+    memset(work->mValPtr_DC0, 0, 0x44);
+    return;
+
+dc1:
+    hufftable = work->mHuffDecTbl_DC1;
+    maxcode = work->mMaxCode_DC1;
+    valptr = work->mValPtr_DC1;
+    tbl->hufftable = hufftable;
+    tbl->maxcode = maxcode;
+    tbl->valptr = valptr;
+    work->mHuffTblInitFlag[1] = 1;
+    memset(hufftable, 0, 0x400);
+    memset(work->mMaxCode_DC1, 0, 0x10);
+    memset(work->mValPtr_DC1, 0, 0x44);
+    return;
+
+ac_dispatch:
+    if (tblID == 1) goto ac1;
+    if (tblID >= 1) return;
+    if (tblID >= 0) goto ac0;
+    return;
+
+ac0:
+    hufftable = work->mHuffDecTbl_AC0;
+    maxcode = work->mMaxCode_AC0;
+    valptr = work->mValPtr_AC0;
+    tbl->hufftable = hufftable;
+    tbl->maxcode = maxcode;
     tbl->valptr = valptr;
     work->mHuffTblInitFlag[2] = 1;
     memset(hufftable, 0, 0x400);
@@ -55,18 +60,16 @@ void TMCJPEGDEC_set_HuffmanTable(TMCHuffTblSet* tbl, s32 tblType, s32 tblID,
 
 ac1:
     hufftable = work->mHuffDecTbl_AC1;
-    {
-        void* maxcode = work->mMaxCode_AC1;
-        tbl->maxcode = maxcode;
-    }
+    maxcode = work->mMaxCode_AC1;
     valptr = work->mValPtr_AC1;
-
     tbl->hufftable = hufftable;
+    tbl->maxcode = maxcode;
     tbl->valptr = valptr;
     work->mHuffTblInitFlag[3] = 1;
     memset(hufftable, 0, 0x400);
     memset(work->mMaxCode_AC1, 0, 0x100);
     memset(work->mValPtr_AC1, 0, 0x44);
+    return;
 }
 
 s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
@@ -78,7 +81,6 @@ s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
     u32* destTable;
     s32 count;
 
-    // Phase 1a: Build huffCount (BEFORE hp field loads)
     {
         u32* hc;
         s32 sym_idx;
@@ -120,12 +122,10 @@ s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
         }
     }
 
-    // Now load remaining hp fields
     huffTable = (u32*)hp->huffTable;
     valptr = (u32*)hp->valptr;
     destTable = (u32*)hp->destTable;
 
-    // Phase 1b: Build huffVal
     {
         s32 i;
         u32 sv_idx;
@@ -156,10 +156,8 @@ s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
         }
     }
 
-    // Phase 2: Clear valptr
     memset(valptr, 0, 0x44);
 
-    // Phase 3: Populate valptr entries
     {
         s32 i;
         u32 bl;
@@ -176,7 +174,6 @@ s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
         }
     }
 
-    // Phase 4: Build decoding table
     {
         const u8* bits_ptr;
         u32* hv_ptr;
@@ -217,7 +214,6 @@ s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
         }
     }
 
-    // Final: memcpy
     memcpy(destTable, tb, count);
 
     return 0;
