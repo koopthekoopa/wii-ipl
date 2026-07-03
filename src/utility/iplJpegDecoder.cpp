@@ -337,15 +337,12 @@ void JpegDecoder::calc_capture_size(int w, int h) {
     }
 
     if (w > 0x200) {
-        int scaledH = h * 0x200;
-        scaledH /= w;
+        mCaptureSizeH = h * 0x200 / w;
         mCaptureSizeW = 0x200;
-        mCaptureSizeH = scaledH;
         if (mCaptureSizeH > 0x1C8) {
             int oldH = mCaptureSizeH;
+            mCaptureSizeW = mCaptureSizeW * 0x1C8 / oldH;
             mCaptureSizeH = 0x1C8;
-            int w = (mCaptureSizeW * 0x1C8);
-            mCaptureSizeW = w / oldH;
         }
     } else if (h > 0x1C8) {
         int scaledW = w * 0x1C8;
@@ -354,9 +351,8 @@ void JpegDecoder::calc_capture_size(int w, int h) {
         mCaptureSizeW = scaledW;
         if (mCaptureSizeW > 0x200) {
             int oldW = mCaptureSizeW;
+            mCaptureSizeH = mCaptureSizeH * 0x200 / oldW;
             mCaptureSizeW = 0x200;
-            int h = (mCaptureSizeH * 0x200);
-            mCaptureSizeH = h / oldW;
         }
     } else {
         mCaptureSizeW = w;
