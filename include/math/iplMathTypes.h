@@ -1,8 +1,6 @@
 #ifndef IPL_MATH_TYPES_H
 #define IPL_MATH_TYPES_H
 
-#include "decomp/ide.h"
-#include "decomp/utils.h"
 #ifdef __cplusplus
 
 #include <nw4r/math.h>
