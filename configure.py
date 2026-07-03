@@ -1193,15 +1193,14 @@ config.libs = [
         [
             Object(NonMatching, "buffer/mkhdec3.c"),
             Object(NonMatching, "buffer/buffer_system.c"),
-            Object(NonMatching, "buffer/getcode.c"),
+            Object(Equivalent,  "buffer/getcode.c"),
             Object(NonMatching, "buffer/idct_block_var.c"),
-            Object(NonMatching, "buffer/decapi.c"),
 
             Object(NonMatching, "api/decapi.c"),
 
             Object(NonMatching, "jpegdec/jdec.c"),
             Object(NonMatching, "jpegdec/jdec_main.c"),
-            Object(NonMatching, "jpegdec/jpformat.c"),
+            Object(Matching,    "jpegdec/jpformat.c"),
 
             Object(NonMatching, "exif/exif_parse.c"),
 
