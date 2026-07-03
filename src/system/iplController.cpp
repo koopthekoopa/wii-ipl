@@ -167,11 +167,12 @@ namespace ipl {
             return ret;
         }
 
+        // non-matching
         math::VEC2 Revolution::getDpdProjectionPos() const {
             math::VEC2 ret;
             Vec2 dest;
             Vec2 src = { this->unk20->pos.x, this->unk20->pos.y };
-            nw4r::ut::Rect nw4r_rect;
+            nw4r::ut::Rect nw4r_rect; // constructor shouldn't be inlined
             Rect kpad_rect;
 
             System::getProjectionRect(&nw4r_rect);
@@ -199,14 +200,14 @@ namespace ipl {
             }
             // //
 
-            ret.set(dest.x, dest.y);
+            ret.set(dest.x, dest.y); // shouldn't be inlined
 
             return ret;
         }
 
-        Classic::Classic(int arg0, KPADStatus &arg1) : Interface(arg0, arg1) {
-            this->unk24 = 0.01f;
-            this->unk28 = 0.01f;
+        Classic::Classic(int arg0, KPADStatus &arg1) : Revolution(arg0, arg1) {
+            this->unk24.y = 0.01f;
+            this->unk24.x = 0.01f;
             this->unk2C = 0;
         }
 
@@ -215,7 +216,57 @@ namespace ipl {
         Revolution::~Revolution() {}
 
         void Classic::read() {
+            if (!Revolution::isValidDpd()) {
+                math::VEC2 lstick(this->unk20->ex_status.cl.lstick.x, this->unk20->ex_status.cl.lstick.y);
 
+                if (lstick.x * lstick.x + lstick.y * lstick.y > 0.0036f) {
+                    this->unk24.x = math::abs_clamp(this->unk24.x + this->unk20->ex_status.cl.lstick.x * 0.05f, 1.8f);
+                    this->unk24.y = math::abs_clamp(this->unk24.y - this->unk20->ex_status.cl.lstick.y * 0.05f, 1.2f);
+                }
+
+                math::VEC2 rstick = math::VEC2(this->unk20->ex_status.cl.rstick.x, this->unk20->ex_status.cl.rstick.y);
+                if (this->getClassicHoldFlag() != 0 || lstick.x * lstick.x + lstick.y * lstick.y > 0.0036f || rstick.x * rstick.x + rstick.y * rstick.y > 0.0036f) {
+                    this->unk2C = 180;
+                }
+
+                if (--this->unk2C < 0) {
+                    this->unk2C = 0;
+                }
+            } else {
+                this->unk24.y = 0.01f;
+                this->unk24.x = 0.01f;
+                this->unk2C = 0;
+            }
+
+            Revolution::read();
+        }
+
+        int Classic::getClassicHoldFlag() const {
+            return this->unk20->ex_status.cl.hold;
+        }
+
+        math::VEC2 Classic::getHorizon() const {
+            math::VEC2 ret;
+            if (Revolution::isValidDpd()) {
+                ret.set(this->unk20->horizon.x, this->unk20->horizon.y);
+                return ret;
+            } else {
+                return math::VEC2(1.0f, -0.2679492f);
+            }
+        }
+
+        math::VEC2 Classic::getDpdPos() const {
+            math::VEC2 ret;
+            if (Revolution::isValidDpd()) {
+                ret.set(this->unk20->pos.x, this->unk20->pos.y);
+                return ret;
+            }
+
+            if (this->unk2C != 0) {
+                ret = this->unk24;
+                return ret;
+            }
+            return math::VEC2(1.0f / 0.0f, 1.0f / 0.0f);
         }
     }
 }

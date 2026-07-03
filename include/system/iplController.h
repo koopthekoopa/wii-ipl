@@ -154,29 +154,36 @@ namespace ipl {
 
         class Revolution : public Interface {
         public:
+            Revolution(int chan, KPADStatus &arg1) : Interface(chan, arg1) {}
+
             virtual ~Revolution();
 
-            virtual int down(u32 button) const override;        // 0x10
+            virtual int down(u32 button) const override;                // 0x10
 
-            virtual math::VEC2 getDpdProjectionPos() const override;     // 0x58
+            virtual math::VEC2 getDpdProjectionPos() const override;    // 0x58
 
-            virtual bool isValidBtn() const override;           // 0x6C
-            virtual bool isValidDpd() const override;           // 0x70
+            virtual bool isValidBtn() const override;                   // 0x6C
+            virtual bool isValidDpd() const override;                   // 0x70
 
-            virtual void read() override;  // 0x88
+            virtual void read() override;                               // 0x88
         };
 
-        class Classic : public Interface {
+        class Classic : public Revolution {
         public:
             Classic(int arg0, KPADStatus &arg1);
 
-            virtual void read() override;
+            virtual int getClassicHoldFlag() const override;        // 0x48
 
-            virtual BOOL isValidDpdClassic() const;  // 0x8C
+            virtual math::VEC2 getDpdPos() const override;          // 0x54
+            virtual math::VEC2 getDpdProjectionPos() const override;// 0x58
+            virtual math::VEC2 getHorizon() const override;         // 0x5C
+
+            virtual void read() override;                           // 0x88
+
+            virtual BOOL isValidDpdClassic() const;                 // 0x8C
 
         private:
-            f32 unk24;
-            f32 unk28;
+            math::VEC2 unk24;
             int unk2C;
         };
 

@@ -1,6 +1,8 @@
 #ifndef IPL_MATH_TYPES_H
 #define IPL_MATH_TYPES_H
 
+#include "decomp/ide.h"
+#include "decomp/utils.h"
 #ifdef __cplusplus
 
 #include <nw4r/math.h>
@@ -17,6 +19,17 @@ namespace ipl {
         template <typename T>
         inline T abs(const T& x) {
             return nw4r::math::FAbs(x);
+        }
+
+        template <typename T>
+        T abs_clamp(const T& x, const T& y) {
+            if (x > y) {
+                return y;
+            } else if (x < -y) {
+                return -y;
+            } else {
+                return x;
+            }
         }
 
         typedef struct MTX33 : public nw4r::math::MTX33 {
