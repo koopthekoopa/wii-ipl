@@ -112,11 +112,6 @@ BOOL JpegDecoder::encodeOdh(EGG::Heap* heap, u8* buffer, u32 length) {
     return ret;
 }
 
-BOOL JpegDecoder::waitCaptured() {
-    OSWaitSemaphore(&mSemaphore);
-    return mStatus - 2 == 0;
-}
-
 void JpegDecoder::makeRawData() {
     if (mStatus != 1) {
         return;
@@ -141,14 +136,12 @@ void JpegDecoder::makeRawData() {
     ipl::System::getProjectionRect4x3((nw4r::ut::Rect*)projRect);
 
     Mtx44 projMtx;
-
-    f32 zero = lbl_8169465C;
     f32 w = mCaptureSizeW;
     f32 h = mCaptureSizeH;
 
     C_MTXOrtho(projMtx,
-               zero, w,
-               zero, h,
+               0.f, h,
+               lbl_8169465C, w,
                lbl_81694664, lbl_81694668);
     GXSetProjection(projMtx, GX_ORTHOGRAPHIC);
 
@@ -211,6 +204,11 @@ void JpegDecoder::makeRawData() {
                   savedViewport[3], savedViewport[4], savedViewport[5]);
 
     OSSignalSemaphore(&mSemaphore);
+}
+
+BOOL JpegDecoder::waitCaptured() {
+    OSWaitSemaphore(&mSemaphore);
+    return mStatus - 2 == 0;
 }
 
 void JpegDecoder::clear() {
