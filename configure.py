@@ -284,6 +284,7 @@ cflags_includes = [
     "-i libs/NW4R/include",
     "-i libs/RVLMiddleware/eZiText/include",
     # "-i libs/RVLMiddleware/ATOKDict/include",
+    "-i libs/RVLMiddleware/TMC_JPEG/include",
     "-i libs/RVLFaceLib/include",
     "-i libs/EGG/include",
     "-i libs/OperaWWW/include",
