@@ -107,34 +107,46 @@ void TMCJPEGDEC_IdctBlock4x4(s16* block, s16* buf, s32 pitch) {
 }
 
 void TMCJPEGDEC_IdctBlock2x2(s16* block, s16* buf, s32 pitch) {
-    s32 a0, a1;
+    s32 a0b;
+    s32 a0, ok, a1;
     s32 b0, b1;
     s32 even_sum, even_diff, odd_sum, rot;
+    u8* bp;
     s32 v;
-    s32 a0b;
-    s32* bp = (s32*)block;
 
-    a0 = bp[0];
-    a1 = bp[1];
+    bp = (u8*)buf;
+    a0 = ((s32*)block)[0];
+    ok = 0;
     a0b = a0 + 0x40000;
-    b0 = bp[8];
-    b1 = bp[9];
+    a1 = ((s32*)block)[1];
+    b0 = ((s32*)block)[8];
+    b1 = ((s32*)block)[9];
     even_sum = a0b + a1;
     even_diff = a0b - a1;
     odd_sum = b0 + b1;
     rot = b0 - b1;
+    v = (even_sum + odd_sum) >> 11;
+    if ((s32)v < 256 && (s32)v > -1) { ok = 1; }
+    v = (ok) ? v : ((v < 0) ? 0 : 255);
+    bp[0] = (u8)v;
 
-    v = Clamp_U8((even_sum + odd_sum) >> 11);
-    ((u8*)buf)[0] = (u8)v;
+    ok = 0;
+    v = (even_sum - odd_sum) >> 11;
+    if ((s32)v < 256 && (s32)v > -1) { ok = 1; }
+    v = (ok) ? v : ((v < 0) ? 0 : 255);
+    bp[pitch] = (u8)v;
 
-    v = Clamp_U8((even_sum - odd_sum) >> 11);
-    *((u8*)buf + pitch) = (u8)v;
+    ok = 0;
+    v = (even_diff + rot) >> 11;
+    if ((s32)v < 256 && (s32)v > -1) { ok = 1; }
+    v = (ok) ? v : ((v < 0) ? 0 : 255);
+    bp[1] = (u8)v;
 
-    v = Clamp_U8((even_diff + rot) >> 11);
-    *((u8*)buf + 1) = (u8)v;
-
-    v = Clamp_U8((even_diff - rot) >> 11);
-    *((u8*)buf + pitch + 1) = (u8)v;
+    ok = 0;
+    v = (even_diff - rot) >> 11;
+    if ((s32)v < 256 && (s32)v > -1) { ok = 1; }
+    v = (ok) ? v : ((v < 0) ? 0 : 255);
+    bp[pitch + 1] = (u8)v;
 }
 
 void TMCJPEGDEC_IdctBlock1x1(s16* block, s16* buf, s32 pitch) {
@@ -165,8 +177,6 @@ void TMCJPEGDEC_IdctBlock4x4_Col(s16* block, s16* buf, s32 pitch) {
     s32 b0, b1, b2, b3;
     s32 b_sum, b_diff, b_odd, b_rot;
     s32 r0, r1, r2, r3;
-    s32 v0, v1, v2, v3;
-
     bp = (s32*)block;
     out = (u8*)buf;
 
@@ -174,27 +184,27 @@ void TMCJPEGDEC_IdctBlock4x4_Col(s16* block, s16* buf, s32 pitch) {
     dst = tmp + 24;
 
     for (i = 0; i < 2; i++) {
-        a0 = src[0];
         a1 = src[1];
-        a2 = src[2];
         a3 = src[3];
+        a0 = src[0];
 
-        a_rot = ((a1 - a3) * 181) >> 8;
-        a_sum = a0 + a2;
-        a_diff = a0 - a2;
         a_odd = a1 + a3;
+        a_rot = ((a1 - a3) * 181) >> 8;
+
+        a2 = src[2];
+        b1 = src[-7];
+        a_sum = a0 + a2;
+        b3 = src[-5];
+        a_diff = a0 - a2;
 
         dst[0] = a_sum + a_odd + a_rot;
         dst[1] = a_diff + a_rot;
         dst[2] = a_diff - a_rot;
         dst[3] = a_sum - a_odd - a_rot;
 
-        b0 = src[-8];
-        b1 = src[-7];
-        b2 = src[-6];
-        b3 = src[-5];
-
         b_rot = ((b1 - b3) * 181) >> 8;
+        b0 = src[-8];
+        b2 = src[-6];
         b_sum = b0 + b2;
         b_diff = b0 - b2;
         b_odd = b1 + b3;
