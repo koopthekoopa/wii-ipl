@@ -13,7 +13,6 @@ void TMCJPEGDEC_IdctBlock4x4(s16* block, s16* buf, s32 pitch) {
     s32 b0, b1, b2, b3;
     s32 b_sum, b_diff, b_odd, b_rot;
     s32 r0, r1, r2, r3;
-    s32 v0, v1, v2, v3;
     bp = (s32*)block;
     out = (u8*)buf;
 

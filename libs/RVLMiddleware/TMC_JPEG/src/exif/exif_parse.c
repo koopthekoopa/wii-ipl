@@ -29,7 +29,6 @@ static u32 read_u32(const u8* p, u16 byteOrder)
 
 s32 TMCCJPEGDecGetOffsetEXIF(u32* pOffset, u32* pSize, TMCCJPEGDecInitParam* pParam)
 {
-    u8* buf1;
     TMCJpegDecWork* work;
     u16 marker;
     u32 dataSize;
@@ -37,11 +36,10 @@ s32 TMCCJPEGDecGetOffsetEXIF(u32* pOffset, u32* pSize, TMCCJPEGDecInitParam* pPa
     s32 result;
     u8 sig[4];
 
-    buf1 = pParam->mpBuf1;
-    if (buf1 == NULL)
+    work = pParam->mpBuf1;
+    if (work == NULL)
         return -1;
 
-    work = (TMCJpegDecWork*)buf1;
     memset(work, 0, 0x19E8);
 
     TMCJPEGDEC_init_ptr_buff(work, &pParam->mpBuf2);
@@ -130,20 +128,18 @@ s32 TMCCJPEGDecGetOffsetEXIF(u32* pOffset, u32* pSize, TMCCJPEGDecInitParam* pPa
 
 s32 TMCCJPEGDecGetInfoEXIF(TMCCJPEGDecExifInfo* pInfo, TMCCJPEGDecInitParam* pParam)
 {
-    u8* buf1;
     TMCJpegDecWork* work;
     u16 segSize;
     u8* src;
     s32 result;
 
-    buf1 = pParam->mpBuf1;
-    if (buf1 == NULL)
+    work = pParam->mpBuf1;
+    if (work == NULL)
         return -1;
 
     memset(pInfo, 0, 0x6D4);
-    memset(buf1, 0, 0x19E8);
+    memset(work, 0, 0x19E8);
 
-    work = (TMCJpegDecWork*)buf1;
     work->mpState = pInfo;
     pInfo->mpWorkBuf = work;
 
@@ -239,15 +235,8 @@ static s32 TMCJPEGDEC_exif_parse(const u8* data, u32 size, TMCCJPEGDecExifData* 
         return -161;
     byteOrder = raw;
 
-    {
-        u16 raw = data[3] << 8 | data[2];
-        u16 ver = (raw & 0xFF) << 8 | raw >> 8 & 0xFF;
-        if (byteOrder == 0x4949) {
-            ver = raw;
-        }
-        if (ver != 0x002A)
-            return -161;
-    }
+    if (read_u16(data + 2, byteOrder) != 0x002A)
+        return -161;
 
     ifd0Offset = read_u32(data + 4, byteOrder);
     if (ifd0Offset > size)

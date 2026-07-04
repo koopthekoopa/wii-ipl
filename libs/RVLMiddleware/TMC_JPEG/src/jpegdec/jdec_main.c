@@ -380,12 +380,17 @@ static s32 TMCJPEGDEC_parse_para(u16* marker, TMCJpegDecWork* work)
 {
     u8 byte;
     u16 local;
-    u16 size;
+    u16 appSize;
+    u16 driSize;
+    u16 dnlSize;
+    u16 comSize;
     s32 result;
     u32 keepGoing;
+    u16 firstMarker;
 
     result = 0;
     keepGoing = 0;
+    firstMarker = *marker;
 
     do {
         result = TMCJPEGDEC_get_wbyte(&local, work);
@@ -405,16 +410,31 @@ static s32 TMCJPEGDEC_parse_para(u16* marker, TMCJpegDecWork* work)
         }
 
         if (local >= 0xFFE0 && local <= 0xFFEF) {
-            result = TMCJPEGDEC_get_wbyte(&size, work);
-            if (result >= 0) {
-                if (size < 2) {
-                    result = -0x45;
-                } else {
-                    size -= 2;
-                    result = TMCJPEGDEC_move_ptr(size, work);
-                    result = result & (result >> 31);
-                    result = result & (result >> 31);
-                }
+            result = TMCJPEGDEC_get_wbyte(&appSize, work);
+            if (result < 0)
+                ;
+            else if (appSize < 2)
+                result = -0x45;
+            else {
+                appSize -= 2;
+                result = TMCJPEGDEC_move_ptr(appSize, work);
+                result = result & (result >> 31);
+                result = result & (result >> 31);
+            }
+        } else if (local < 0xFFD9) {
+            switch ((s32)local) {
+            case 0xFFC0:
+                keepGoing = 1;
+                break;
+            case 0xFFC2:
+                keepGoing = 1;
+                break;
+            case 0xFFC4:
+                result = TMCJPEGDEC_parse_dht(firstMarker, work);
+                break;
+            default:
+                result = -0x2F;
+                break;
             }
         } else {
             switch ((s32)local) {
@@ -429,54 +449,45 @@ static s32 TMCJPEGDEC_parse_para(u16* marker, TMCJpegDecWork* work)
                 result = TMCJPEGDEC_parse_dqt(work);
                 break;
             case 0xFFDC:
-                result = TMCJPEGDEC_get_wbyte(&size, work);
-                if (result >= 0) {
-                    if (size != 4)
-                        result = -0x43;
-                    else {
-                        result = TMCJPEGDEC_get_wbyte(&size, work);
-                        if (result >= 0) {
-                            work->mFrameHeight = size;
-                            result = 0;
-                        }
-                    }
+                result = TMCJPEGDEC_get_wbyte(&dnlSize, work);
+                if (result < 0)
+                    break;
+                if (dnlSize != 4) {
+                    result = -0x43;
+                    break;
                 }
+                result = TMCJPEGDEC_get_wbyte(&dnlSize, work);
+                if (result < 0)
+                    break;
+                work->mFrameHeight = dnlSize;
+                result = 0;
                 break;
             case 0xFFDD:
-                result = TMCJPEGDEC_get_wbyte(&size, work);
-                if (result >= 0) {
-                    if (size != 4)
-                        result = -0x42;
-                    else {
-                        result = TMCJPEGDEC_get_wbyte(&size, work);
-                        if (result >= 0) {
-                            work->mRestartInterval = size;
-                            result = 0;
-                        }
-                    }
+                result = TMCJPEGDEC_get_wbyte(&driSize, work);
+                if (result < 0)
+                    break;
+                if (driSize != 4) {
+                    result = -0x42;
+                    break;
                 }
+                result = TMCJPEGDEC_get_wbyte(&driSize, work);
+                if (result < 0)
+                    break;
+                work->mRestartInterval = driSize;
+                result = 0;
                 break;
             case 0xFFFE:
-                result = TMCJPEGDEC_get_wbyte(&size, work);
-                if (result >= 0) {
-                    if (size < 2)
-                        result = -0x44;
-                    else {
-                        size -= 2;
-                        result = TMCJPEGDEC_move_ptr(size, work);
-                        result = result & (result >> 31);
-                        result = result & (result >> 31);
-                    }
+                result = TMCJPEGDEC_get_wbyte(&comSize, work);
+                if (result < 0)
+                    break;
+                if (comSize < 2) {
+                    result = -0x44;
+                    break;
                 }
-                break;
-            case 0xFFC0:
-                keepGoing = 1;
-                break;
-            case 0xFFC2:
-                keepGoing = 1;
-                break;
-            case 0xFFC4:
-                result = TMCJPEGDEC_parse_dht(*marker, work);
+                comSize -= 2;
+                result = TMCJPEGDEC_move_ptr(comSize, work);
+                result = result & (result >> 31);
+                result = result & (result >> 31);
                 break;
             default:
                 result = -0x2F;
