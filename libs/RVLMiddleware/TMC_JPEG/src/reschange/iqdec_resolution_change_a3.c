@@ -46,9 +46,8 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
         wk->mBitCount = bit_pos;
         val = tmp;
     } else {
-        r = TMCJPEGDEC_vl_decode_rc(wk->mpDCHuffTbl, wk->mpDCHuffSym, wk);
-        if (r < 0) return r;
-        val = r;
+        val = TMCJPEGDEC_vl_decode_rc(wk->mpDCHuffTbl, wk->mpDCHuffSym, wk);
+        if (val < 0) return val;
     }
 
     if (val != 0) {
@@ -60,6 +59,7 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
             bit_data = wk->mBitBuf;
         }
         bit_pos = wk->mBitCount;
+        bit_data = wk->mBitBuf;
         tmp = 1 << val;
         extra = tmp - 1;
         bit_pos -= val;
@@ -84,8 +84,7 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
     memset((u8*)st + 4, 0, blk_mul);
 
     idx = 1;
-
-    while (idx < 64) {
+    if (idx < 64) do {
         bit_pos = wk->mBitCount;
         if (bit_pos <= 8) {
             r = TMCJPEGDEC_load_buff(wk);
@@ -97,15 +96,17 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
         t = bit_pos - 8;
         tmp = bit_data >> t;
         tmp = (tmp & 0xFF) << 2;
-        val = ac_fast[tmp >> 1];
-        if (val != 0) {
-            bit_pos -= val;
-            val = *(u16*)((u8*)ac_fast + tmp + 2);
-            wk->mBitCount = bit_pos;
-        } else {
-            r = TMCJPEGDEC_vl_decode_rc(ac_vl, ac_sym, wk);
-            if (r < 0) return r;
-            val = r;
+        {
+            u16* ac_entry = (u16*)((u8*)ac_fast + tmp);
+            val = *ac_entry;
+            if (val != 0) {
+                bit_pos -= val;
+                val = *(ac_entry + 1);
+                wk->mBitCount = bit_pos;
+            } else {
+                val = TMCJPEGDEC_vl_decode_rc(ac_vl, ac_sym, wk);
+                if (val < 0) return val;
+            }
         }
 
         t = val & 0x0F;
@@ -151,7 +152,7 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
             if (val == 0) return 0;
             idx += 16;
         }
-    }
+    } while (idx < 64);
 
     return 0;
 }

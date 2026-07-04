@@ -13,10 +13,11 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* buf, s32 pitch, s32 count) {
     s32 r;
 
     r = (count >> 4) * 8;
+    iter = (u32)(r + 7) >> 3;
     dst = tmp;
     done = 0;
     if (r > 0) {
-        for (iter = (r + 7) >> 3; iter > 0; iter--) {
+        for (; iter > 0; iter--) {
             u32 ac;
             b4 = block[4];
             b6 = block[6];
