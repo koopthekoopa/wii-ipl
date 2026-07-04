@@ -165,7 +165,7 @@ epilogue:
     ;
 }
 
-s32 TMCCJPEGDecSetResolution(TMCCJPEGDecState* state, u32 scale) {
+s32 TMCCJPEGDecSetResolution(TMCCJPEGDecState* state, u8 scale) {
     TMCJpegDecWork* work;
     s32 result;
     u32 s;

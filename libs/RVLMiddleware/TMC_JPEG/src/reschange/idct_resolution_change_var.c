@@ -31,6 +31,7 @@ void TMCJPEGDEC_IdctBlock4x4(s16* block, s16* buf, s32 pitch) {
     s32 b0, b1, b2, b3;
     s32 b_sum, b_diff, b_odd, b_rot;
     s32 r0, r1, r2, r3;
+    s32 up2, up3, up4;
     bp = (s32*)block;
     out = (u8*)buf;
 
@@ -74,9 +75,9 @@ void TMCJPEGDEC_IdctBlock4x4(s16* block, s16* buf, s32 pitch) {
 
     col = tmp + 3;
     {
-        s32 up4 = (u16)pitch * 4;
-        s32 up2 = (u16)pitch * 2;
-        s32 up3 = up4 - pitch;
+        up4 = (u16)pitch * 4;
+        up3 = up4 - pitch;
+        up2 = (u16)pitch * 2;
         for (i = 3; i >= 0; i--) {
             u8* base = out + i;
             r0 = col[0];

@@ -321,10 +321,6 @@ static void TMCJPEGDEC_IFD0_tag_parse(TMCCJPEGDecExifData* pInfo, u16 byteOrder,
     switch (tag) {
     case 0x0103:
     case 0x0111:
-    case 0x0201:
-    case 0x0202:
-    case 0x8825:
-    case 0xA004:
         return;
 
     case 0x0112:
@@ -473,9 +469,11 @@ static void TMCJPEGDEC_IFD1_tag_parse(TMCCJPEGDecExifData* pInfo, u16 byteOrder,
     tag = read_u16(entry, byteOrder);
 
     switch (tag) {
+    case 0x0132:
+        return;
+
     case 0x0111:
     case 0x012D:
-    case 0x0132:
     case 0x0213:
     case 0x8769:
     case 0x9000:
