@@ -268,7 +268,7 @@ int JpegDecoder::get_orientation() {
 
         TMCCJPEGDecExifInfo exifInfo;
         if (TMCCJPEGDecGetInfoEXIF(&exifInfo, &param) == 0) {
-            switch (exifInfo.mOrientation) {
+            switch (exifInfo.mExifData.mOrientation) {
             case 7:
                 break;
             case 6:

@@ -2,9 +2,9 @@
 #include <tmc_jpeg_internal.h>
 #include <string.h>
 
-static void TMCJPEGDEC_exif_parse(const u8* data, u32 size, TMCCJPEGDecExifInfo* pInfo);
-static void TMCJPEGDEC_IFD0_tag_parse(TMCCJPEGDecExifInfo* pInfo, u16 byteOrder, const u8* entry);
-static void TMCJPEGDEC_IFD1_tag_parse(TMCCJPEGDecExifInfo* pInfo, u16 byteOrder, const u8* entry);
+static void TMCJPEGDEC_exif_parse(const u8* data, u32 size, TMCCJPEGDecExifData* pInfo);
+static void TMCJPEGDEC_IFD0_tag_parse(TMCCJPEGDecExifData* pInfo, u16 byteOrder, const u8* entry);
+static void TMCJPEGDEC_IFD1_tag_parse(TMCCJPEGDecExifData* pInfo, u16 byteOrder, const u8* entry);
 static s32 TMCJPEGDEC_ThumbnailCheck(TMCCJPEGDecInitParam* param, TMCCJPEGDecExifInfo* info, u32 totalSize);
 
 static u16 read_u16(const u8* p, u16 byteOrder)
@@ -168,7 +168,7 @@ s32 TMCCJPEGDecGetInfoEXIF(TMCCJPEGDecExifInfo* pInfo, TMCCJPEGDecInitParam* pPa
     if (segSize < 2)
         return -0x45;
 
-    TMCJPEGDEC_exif_parse(src + 10, segSize - 8, pInfo);
+    TMCJPEGDEC_exif_parse(src + 10, segSize - 8, &pInfo->mExifData);
 
     if (pParam->mFlag1 == 0)
         return 0;
@@ -180,7 +180,7 @@ s32 TMCCJPEGDecGetInfoEXIF(TMCCJPEGDecExifInfo* pInfo, TMCCJPEGDecInitParam* pPa
     if (result < 0)
         return result;
 
-    TMCJPEGDEC_init_buff_thumbnail((TMCJpegDecWork*)pInfo->mExifParsedData, (u8*)work, (u8*)pParam->mpBuf2);
+    TMCJPEGDEC_init_buff_thumbnail((TMCJpegDecWork*)&pInfo->mExifData, (u8*)work, (u8*)pParam->mpBuf2);
 
     result = TMCJPEGDEC_HeaderAnalyze(work);
     if (result < 0)
@@ -212,7 +212,7 @@ s32 TMCCJPEGDecGetInfoEXIF(TMCCJPEGDecExifInfo* pInfo, TMCCJPEGDecInitParam* pPa
     return pInfo->mState;
 }
 
-static void TMCJPEGDEC_exif_parse(const u8* data, u32 size, TMCCJPEGDecExifInfo* pInfo)
+static void TMCJPEGDEC_exif_parse(const u8* data, u32 size, TMCCJPEGDecExifData* pInfo)
 {
     u16 byteOrder;
     u32 ifd0Offset;
@@ -309,7 +309,7 @@ static void TMCJPEGDEC_exif_parse(const u8* data, u32 size, TMCCJPEGDecExifInfo*
     }
 }
 
-static void TMCJPEGDEC_IFD0_tag_parse(TMCCJPEGDecExifInfo* pInfo, u16 byteOrder, const u8* entry)
+static void TMCJPEGDEC_IFD0_tag_parse(TMCCJPEGDecExifData* pInfo, u16 byteOrder, const u8* entry)
 {
     u16 tag;
     u16 type;
@@ -360,7 +360,7 @@ static void TMCJPEGDEC_IFD0_tag_parse(TMCCJPEGDecExifInfo* pInfo, u16 byteOrder,
                 return;
             if ((u32)(p + 4) > pInfo->mDataEnd)
                 return;
-            *(u32*)pInfo->mPixelDim = read_u32(p, byteOrder);
+            *(u32*)pInfo->mFlashVer = read_u32(p, byteOrder);
             return;
         }
         if (tag < 0xA000)
@@ -371,7 +371,7 @@ static void TMCJPEGDEC_IFD0_tag_parse(TMCCJPEGDecExifInfo* pInfo, u16 byteOrder,
                 return;
             if ((u32)(p + 4) > pInfo->mDataEnd)
                 return;
-            *(u32*)pInfo->mFlashVer = read_u32(p, byteOrder);
+            *(u32*)pInfo->mFlashPixVer = read_u32(p, byteOrder);
             return;
         }
         if (tag == 0xA002) {
@@ -440,7 +440,7 @@ static void TMCJPEGDEC_IFD0_tag_parse(TMCCJPEGDecExifInfo* pInfo, u16 byteOrder,
                         return;
                     if ((u32)(p + 2) > pInfo->mDataEnd)
                         return;
-                    pInfo->mTransferFunc[j * 256 + i] = read_u16(p, byteOrder);
+                    pInfo->mTransferFunc[j][i] = read_u16(p, byteOrder);
                     p += 2;
                 }
             }
@@ -487,7 +487,7 @@ static void TMCJPEGDEC_IFD0_tag_parse(TMCCJPEGDecExifInfo* pInfo, u16 byteOrder,
     }
 }
 
-static void TMCJPEGDEC_IFD1_tag_parse(TMCCJPEGDecExifInfo* pInfo, u16 byteOrder, const u8* entry)
+static void TMCJPEGDEC_IFD1_tag_parse(TMCCJPEGDecExifData* pInfo, u16 byteOrder, const u8* entry)
 {
     u16 tag;
     u32 offset;
@@ -594,19 +594,19 @@ static s32 TMCJPEGDEC_ThumbnailCheck(TMCCJPEGDecInitParam* param, TMCCJPEGDecExi
     s32 length;
     s32 tmp;
 
-    total = (s32)info->mThumbnailOffset;
+    total = (s32)info->mExifData.mThumbnailOffset;
     if (total == 0)
         return -0xA0;
 
-    length = (s32)info->mThumbnailLength;
+    length = (s32)info->mExifData.mThumbnailLength;
     if (length == 0)
         return -0xA0;
 
-    if (info->mCompressionIFD1 != 6)
+    if (info->mExifData.mCompressionIFD1 != 6)
         return -0xA0;
 
     total += length;
-    tmp = (s32)info->mThumbData - (s32)param->mpBuf2;
+    tmp = (s32)info->mExifData.mThumbData - (s32)param->mpBuf2;
     total += tmp;
 
     if ((u32)total > param->mBuf2Size)

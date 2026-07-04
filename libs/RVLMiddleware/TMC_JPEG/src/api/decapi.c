@@ -167,15 +167,13 @@ epilogue:
 
 s32 TMCCJPEGDecSetResolution(TMCCJPEGDecState* state, u8 scale) {
     TMCJpegDecWork* work;
-    u32 sc;
     s32 result;
 
     work = (TMCJpegDecWork*)state->mpWorkBuf;
-    sc = (u32)scale & 0xFFU;
 
     state->mFlag20 = scale;
 
-    if (sc != 1 && sc != 2 && sc != 4 && sc != 8) {
+    if (scale != 1 && scale != 2 && scale != 4 && scale != 8) {
         return -1;
     }
 

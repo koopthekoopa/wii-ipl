@@ -22,6 +22,41 @@ typedef struct {
 } TMCCJPEGDecInitParam;
 
 typedef struct {
+    char* mImageName;       // 0x00
+    char* mMake;            // 0x04
+    char* mModel;           // 0x08
+    u16   mOrientation;     // 0x0C
+    u32   mXResNum;         // 0x10
+    u32   mXResDen;         // 0x14
+    u32   mYResNum;         // 0x18
+    u32   mYResDen;         // 0x1C
+    u16   mResUnit;         // 0x20
+    u16   mTransferFunc[3][256]; // 0x22
+    s8    mDateTime[20];    // 0x622
+    u16   mYCbCrPos;        // 0x636
+    u32   mNextIfdOffset;   // 0x638
+    s8    mExifVer[4];      // 0x63C
+    u8    mFlashVer[4];     // 0x640
+    s8    mFlashPixVer[4];  // 0x644
+    u16   mColorSpace;      // 0x648
+    u8    unk_0x64A[0x02];
+    u32   mPixelXDim;       // 0x64C
+    u32   mPixelYDim;       // 0x650
+    u16   mCompressionIFD1;  // 0x654
+    u8    unk_0x656[0x02];
+    u32   mXResNumIFD1;     // 0x658
+    u32   mXResDenIFD1;     // 0x65C
+    u32   mPlanarConfigIFD1; // 0x660
+    u32   mYResDenIFD1;     // 0x664
+    u16   mResUnitIFD1;     // 0x668
+    u8    unk_0x66A[0x02];
+    u32   mThumbnailOffset; // 0x66C
+    u32   mThumbnailLength; // 0x670
+    u32   mThumbData;       // 0x674
+    u32   mDataEnd;         // 0x678
+} TMCCJPEGDecExifData;
+
+typedef struct {
     u8    unk_0x00[0x04];
     s32   mPosition;       // 0x04
     u8    unk_0x08[0x04];
@@ -30,34 +65,7 @@ typedef struct {
     u8    mExifFlags;      // 0x20
     u8    mThumbFlag;      // 0x21
     u8    unk_0x22[0x2A];
-    u8    mExifParsedData[0x0C]; // 0x4C
-    u16   mOrientation;    // 0x58
-    u8    unk_0x5A[0x02];
-    u32   mXResNum;        // 0x5C
-    u32   mXResDen;        // 0x60
-    u32   mYResNum;        // 0x64
-    u32   mYResDen;        // 0x68
-    u16   mResUnit;        // 0x6C
-    u16   mTransferFunc[0x300]; // 0x6E (3*256 entries)
-    u8    mDateTime[20];   // 0x66E
-    u16   mYCbCrPos;       // 0x682
-    u32   mNextIfdOffset;  // 0x684
-    u8    mExifVer[4];     // 0x688
-    u8    mFlashVer[4];    // 0x68C
-    u8    mPixelDim[4];    // 0x690
-    u16   mColorSpace;     // 0x694
-    u32   mPixelXDim;      // 0x698
-    u32   mPixelYDim;      // 0x69C
-    u16   mCompressionIFD1; // 0x6A0
-    u32   mXResNumIFD1;    // 0x6A4
-    u32   mXResDenIFD1;    // 0x6A8
-    u32   mPlanarConfigIFD1; // 0x6AC
-    u32   mYResDenIFD1;    // 0x6B0
-    u16   mResUnitIFD1;    // 0x6B4
-    u32   mThumbnailOffset; // 0x6B8
-    u32   mThumbnailLength; // 0x6BC
-    u32   mThumbData;      // 0x6C0
-    u32   mDataEnd;        // 0x6C4
+    TMCCJPEGDecExifData mExifData; // 0x4C
     void* mpWorkBuf;       // 0x6C8
     u8    unk_0x6CC[0x04];
     u8    mConverterType;  // 0x6D0
