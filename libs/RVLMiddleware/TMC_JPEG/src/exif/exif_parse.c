@@ -10,10 +10,9 @@ static s32 TMCJPEGDEC_ThumbnailCheck(TMCCJPEGDecInitParam* param, TMCCJPEGDecExi
 static u16 read_u16(const u8* p, u16 byteOrder)
 {
     u32 raw = p[1] << 8 | p[0];
-    u32 tmp = (raw & 0xFF) << 8 | raw >> 8 & 0xFF;
     if (byteOrder == 0x4949)
-        tmp = raw;
-    return tmp;
+        return (u16)raw;
+    return (u16)(((raw >> 8) & 0xFF) | ((raw & 0xFF) << 8));
 }
 
 static u32 read_u32(const u8* p, u16 byteOrder)
@@ -21,8 +20,8 @@ static u32 read_u32(const u8* p, u16 byteOrder)
     u32 raw = p[1] << 8 | p[0];
     u32 tmp;
     raw = raw | p[2] << 16 | p[3] << 24;
-    tmp = (raw & 0xFF) << 24 | (raw & 0xFF00) << 8 |
-          raw >> 8 & 0xFF00 | raw >> 24 & 0xFF;
+    tmp = (raw >> 24) | ((raw >> 8) & 0xFF00) |
+          ((raw & 0xFF00) << 8) | ((raw & 0xFF) << 24);
     if (byteOrder == 0x4949)
         tmp = raw;
     return tmp;
