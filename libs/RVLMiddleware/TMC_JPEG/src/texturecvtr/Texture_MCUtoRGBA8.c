@@ -1279,9 +1279,7 @@ s32 TMCJPEGDEC_set_converterRGBA8(TMCJpegDecWork* work) {
         ptr = ob + 4;
         {
             u8* p1 = ptr + mode;
-            u8* ob104 = ob + 0x104;
             u8* p2 = p1 + mode;
-            u8* ob144 = ob + 0x144;
             u8* p3 = p2 + mode;
 
             work->mpConverterFunc = TMCJPEGDEC_converterYUV411toRGBA8;
@@ -1290,8 +1288,8 @@ s32 TMCJPEGDEC_set_converterRGBA8(TMCJpegDecWork* work) {
             work->mpConvRowPtrs[1] = (void*)p1;
             work->mpConvRowPtrs[2] = (void*)p2;
             work->mpConvRowPtrs[3] = (void*)p3;
-            work->mpConvRowPtrs[5] = (void*)ob104;
-            work->mpConvRowPtrs[6] = (void*)ob144;
+            work->mpConvRowPtrs[5] = (void*)(ob + 0x104);
+            work->mpConvRowPtrs[6] = (void*)(ob + 0x144);
             work->mPitch = 0x20;
             work->mConverterFlags = 0;
         }

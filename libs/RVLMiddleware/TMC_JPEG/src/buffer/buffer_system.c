@@ -4,24 +4,23 @@ static s32 TMCJPEG_814EAF50(TMCJpegDecWork* work) {
     u32 marker;
     u32 readSize;
     u8* dest;
-    u8* end;
     u8* endMinus1;
     u32 i;
+    u32 j;
 
-    end = work->mpBufEnd;
-    endMinus1 = end - 1;
-    marker = 0;
-    if (end[-1] == 0xFF) marker = 1;
+    {
+        u8* endPtr = work->mpBufEnd;
+        u8* beforeEnd = endPtr - 1;
+
+        marker = 0;
+        if (*beforeEnd == 0xFF) marker = 1;
+        endMinus1 = beforeEnd;
+    }
 
     for (i = 0; i < 32; i += 8) {
-        work->mpBufStart[i] = *(endMinus1 - (0x1f - i));
-        work->mpBufStart[i + 1] = *(endMinus1 - (0x1f - (i + 1)));
-        work->mpBufStart[i + 2] = *(endMinus1 - (0x1f - (i + 2)));
-        work->mpBufStart[i + 3] = *(endMinus1 - (0x1f - (i + 3)));
-        work->mpBufStart[i + 4] = *(endMinus1 - (0x1f - (i + 4)));
-        work->mpBufStart[i + 5] = *(endMinus1 - (0x1f - (i + 5)));
-        work->mpBufStart[i + 6] = *(endMinus1 - (0x1f - (i + 6)));
-        work->mpBufStart[i + 7] = *(endMinus1 - (0x1f - (i + 7)));
+        for (j = 0; j < 8; j++) {
+            work->mpBufStart[i + j] = *(endMinus1 - (0x1f - (i + j)));
+        }
     }
 
     dest = work->mpBufOrg + 0x20;

@@ -2,29 +2,27 @@
 
 s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
 {
-    u32 huffVal[256];
     u32 huffCount[256];
+    u32 huffVal[256];
     u32* huffTable;
     u32* valptr;
     u32* destTable;
     u32 count;
     u32 one;
-    u32* hc;
     s32 sym_idx;
     u32 remaining;
     u32 bit_len;
     const u8* bits;
 
+    remaining = 1;
+    bit_len = 1;
+    bits = dht + 1;
+    sym_idx = 0;
+
     count = hp->count;
     huffTable = (u32*)hp->huffTable;
     valptr = (u32*)hp->valptr;
     destTable = (u32*)hp->destTable;
-
-    hc = huffCount;
-    sym_idx = 0;
-    remaining = 1;
-    bit_len = 1;
-    bits = dht + 1;
 
     for (;;)
     {
@@ -44,8 +42,7 @@ s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
         }
         else
         {
-            hc[0] = bit_len;
-            hc++;
+            huffCount[sym_idx] = bit_len;
             sym_idx++;
             if (sym_idx > (s32)count)
                 return -0x40;
@@ -67,16 +64,11 @@ s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
 
         while (cur != 0)
         {
-            u32* hcp;
-
-            hcp = &huffCount[i];
-            while (i < (s32)count && (*hcp & 0xFF) == cur)
-            {
+            while (i < (s32)count && (huffCount[i] & 0xFF) == cur) {
                 hv[0] = sv_idx & 0xFFFF;
                 hv++;
                 sv_idx++;
                 i++;
-                hcp++;
             }
             if (sv_idx > (one << cur))
                 return -0x40;
@@ -107,9 +99,6 @@ s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
         u32* hv_ptr;
         s32 sym;
         u32 bl;
-        u32 n;
-        u32 step;
-        u32 cnt;
 
         bits_ptr = dht + 1;
         hv_ptr = huffVal;
@@ -117,6 +106,10 @@ s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
 
         for (bl = 1; bl <= 8; bl++)
         {
+            u32 cnt;
+            u32 step;
+            u32 n;
+
             cnt = *bits_ptr;
             step = 1 << (8 - bl);
 
