@@ -1,7 +1,25 @@
 #include <tmc_jpeg_internal.h>
 
+static s32 Clamp_U8(s32 v) {
+    s32 ok;
+    ok = 0;
+    if (v < 256 && v > -1) {
+        ok = 1;
+    }
+    return (ok) ? v : ((v < 0) ? 0 : 255);
+}
+
+static s32 Clamp_S8(s32 v) {
+    s32 ok;
+    ok = 0;
+    if (v < 128 && v > -129) {
+        ok = 1;
+    }
+    return (ok) ? v : ((v > 0) ? 127 : -128);
+}
+
 void TMCJPEGDEC_IdctBlock4x4(s16* block, s16* buf, s32 pitch) {
-    s32 tmp[36];
+    s32 tmp[66];
     s32* bp;
     u8* out;
     s32 i;
@@ -17,7 +35,7 @@ void TMCJPEGDEC_IdctBlock4x4(s16* block, s16* buf, s32 pitch) {
     out = (u8*)buf;
 
     src = bp + 24;
-    dst = tmp + 26;
+    dst = tmp + 24;
 
     for (i = 0; i < 2; i++) {
         a0 = src[0];
@@ -54,7 +72,7 @@ void TMCJPEGDEC_IdctBlock4x4(s16* block, s16* buf, s32 pitch) {
         dst -= 16;
     }
 
-    col = tmp + 5;
+    col = tmp + 3;
     {
         s32 up4 = (u16)pitch * 4;
         s32 up2 = (u16)pitch * 2;
@@ -71,36 +89,16 @@ void TMCJPEGDEC_IdctBlock4x4(s16* block, s16* buf, s32 pitch) {
             a_sum = r0 + 0x40000 + r2;
             a_diff = r0 + 0x40000 - r2;
 
-            r0 = (a_sum + a_rot + a_odd) >> 11;
-            b0 = 0;
-            if ((s32)r0 < 256 && (s32)r0 > -1) {
-                b0 = 1;
-            }
-            r0 = (b0) ? r0 : ((r0 < 0) ? 0 : 255);
+            r0 = Clamp_U8((a_sum + a_rot + a_odd) >> 11);
             *base = (u8)r0;
 
-            r0 = (a_diff + a_rot) >> 11;
-            b0 = 0;
-            if ((s32)r0 < 256 && (s32)r0 > -1) {
-                b0 = 1;
-            }
-            r0 = (b0) ? r0 : ((r0 < 0) ? 0 : 255);
+            r0 = Clamp_U8((a_diff + a_rot) >> 11);
             base[pitch] = (u8)r0;
 
-            r0 = (a_diff - a_rot) >> 11;
-            b0 = 0;
-            if ((s32)r0 < 256 && (s32)r0 > -1) {
-                b0 = 1;
-            }
-            r0 = (b0) ? r0 : ((r0 < 0) ? 0 : 255);
+            r0 = Clamp_U8((a_diff - a_rot) >> 11);
             base[up2] = (u8)r0;
 
-            r0 = (a_sum - a_rot - a_odd) >> 11;
-            b0 = 0;
-            if ((s32)r0 < 256 && (s32)r0 > -1) {
-                b0 = 1;
-            }
-            r0 = (b0) ? r0 : ((r0 < 0) ? 0 : 255);
+            r0 = Clamp_U8((a_sum - a_rot - a_odd) >> 11);
             base[up3] = (u8)r0;
 
             col--;
@@ -109,62 +107,33 @@ void TMCJPEGDEC_IdctBlock4x4(s16* block, s16* buf, s32 pitch) {
 }
 
 void TMCJPEGDEC_IdctBlock2x2(s16* block, s16* buf, s32 pitch) {
-    s32 ok;
     s32 a0, a1;
     s32 b0, b1;
     s32 even_sum, even_diff, odd_sum, rot;
     s32 v;
     s32 a0b;
+    s32* bp = (s32*)block;
 
-    a0 = ((s32*)block)[0];
-    ok = 0;
-    a1 = ((s32*)block)[1];
+    a0 = bp[0];
+    a1 = bp[1];
     a0b = a0 + 0x40000;
-    b0 = ((s32*)block)[8];
-    b1 = ((s32*)block)[9];
+    b0 = bp[8];
+    b1 = bp[9];
     even_sum = a0b + a1;
     even_diff = a0b - a1;
     odd_sum = b0 + b1;
     rot = b0 - b1;
 
-    v = (even_sum + odd_sum) >> 11;
-    if ((s32)v < 256 && (s32)v > -1) {
-        ok = 1;
-    }
-    v = (ok) ? v : ((v < 0) ? 0 : 255);
+    v = Clamp_U8((even_sum + odd_sum) >> 11);
     ((u8*)buf)[0] = (u8)v;
 
-    v = (even_sum - odd_sum) >> 11;
-    {
-        s32 ok2;
-        ok2 = 0;
-        if ((s32)v < 256 && (s32)v > -1) {
-            ok2 = 1;
-        }
-        v = (ok2) ? v : ((v < 0) ? 0 : 255);
-    }
+    v = Clamp_U8((even_sum - odd_sum) >> 11);
     *((u8*)buf + pitch) = (u8)v;
 
-    v = (even_diff + rot) >> 11;
-    {
-        s32 ok2;
-        ok2 = 0;
-        if ((s32)v < 256 && (s32)v > -1) {
-            ok2 = 1;
-        }
-        v = (ok2) ? v : ((v < 0) ? 0 : 255);
-    }
+    v = Clamp_U8((even_diff + rot) >> 11);
     *((u8*)buf + 1) = (u8)v;
 
-    v = (even_diff - rot) >> 11;
-    {
-        s32 ok2;
-        ok2 = 0;
-        if ((s32)v < 256 && (s32)v > -1) {
-            ok2 = 1;
-        }
-        v = (ok2) ? v : ((v < 0) ? 0 : 255);
-    }
+    v = Clamp_U8((even_diff - rot) >> 11);
     *((u8*)buf + pitch + 1) = (u8)v;
 }
 
@@ -184,7 +153,7 @@ void TMCJPEGDEC_IdctBlock1x1(s16* block, s16* buf, s32 pitch) {
 }
 
 void TMCJPEGDEC_IdctBlock4x4_Col(s16* block, s16* buf, s32 pitch) {
-    s32 tmp[36];
+    s32 tmp[66];
     s32* bp;
     u8* out;
     s32 i;
@@ -202,7 +171,7 @@ void TMCJPEGDEC_IdctBlock4x4_Col(s16* block, s16* buf, s32 pitch) {
     out = (u8*)buf;
 
     src = bp + 24;
-    dst = tmp + 26;
+    dst = tmp + 24;
 
     for (i = 0; i < 2; i++) {
         a0 = src[0];
@@ -239,7 +208,7 @@ void TMCJPEGDEC_IdctBlock4x4_Col(s16* block, s16* buf, s32 pitch) {
         dst -= 16;
     }
 
-    col = tmp + 5;
+    col = tmp + 3;
 
     for (i = 3; i >= 0; i--) {
         u8* p = out + i;
@@ -253,36 +222,16 @@ void TMCJPEGDEC_IdctBlock4x4_Col(s16* block, s16* buf, s32 pitch) {
         a_sum = r0 + r2;
         a_diff = r0 - r2;
 
-        r0 = (a_sum + a_rot + a_odd) >> 11;
-        b0 = 0;
-        if ((s32)r0 < 128 && (s32)r0 > -129) {
-            b0 = 1;
-        }
-        r0 = (b0) ? r0 : ((r0 > 0) ? 127 : -128);
+        r0 = Clamp_S8((a_sum + a_rot + a_odd) >> 11);
         p[0] = (u8)r0;
 
-        r0 = (a_diff + a_rot) >> 11;
-        b0 = 0;
-        if ((s32)r0 < 128 && (s32)r0 > -129) {
-            b0 = 1;
-        }
-        r0 = (b0) ? r0 : ((r0 > 0) ? 127 : -128);
+        r0 = Clamp_S8((a_diff + a_rot) >> 11);
         p[8] = (u8)r0;
 
-        r0 = (a_diff - a_rot) >> 11;
-        b0 = 0;
-        if ((s32)r0 < 128 && (s32)r0 > -129) {
-            b0 = 1;
-        }
-        r0 = (b0) ? r0 : ((r0 > 0) ? 127 : -128);
+        r0 = Clamp_S8((a_diff - a_rot) >> 11);
         p[16] = (u8)r0;
 
-        r0 = (a_sum - a_rot - a_odd) >> 11;
-        b0 = 0;
-        if ((s32)r0 < 128 && (s32)r0 > -129) {
-            b0 = 1;
-        }
-        r0 = (b0) ? r0 : ((r0 > 0) ? 127 : -128);
+        r0 = Clamp_S8((a_sum - a_rot - a_odd) >> 11);
         p[24] = (u8)r0;
 
         col--;
