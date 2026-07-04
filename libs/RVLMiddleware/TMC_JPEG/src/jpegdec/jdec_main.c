@@ -1008,21 +1008,18 @@ _process: {
 
 void TMCJPEGDEC_set_entropytbl(TMCJpegDecWork* work, s32 idx, u8 data)
 {
-    if (idx == 1) goto idx1;
-    if (idx >= 1) goto after;
-    if (idx >= 0) goto idx0;
-    goto after;
-
-idx0:
-    work->mDCACPtrs[0] = &work->mZigzagData[8];
-    work->mDCACPtrs[2] = work->mMaxCode_DC0;
-    work->mDCACPtrs[1] = work->mValPtr_DC0;
-    goto after;
-
-idx1:
-    work->mDCACPtrs[0] = work->mHuffDecTbl_DC1;
-    work->mDCACPtrs[2] = work->mMaxCode_DC1;
-    work->mDCACPtrs[1] = work->mValPtr_DC1;
+    switch (idx) {
+    case 0:
+        work->mDCACPtrs[0] = &work->mZigzagData[8];
+        work->mDCACPtrs[2] = work->mMaxCode_DC0;
+        work->mDCACPtrs[1] = work->mValPtr_DC0;
+        break;
+    case 1:
+        work->mDCACPtrs[0] = work->mHuffDecTbl_DC1;
+        work->mDCACPtrs[2] = work->mMaxCode_DC1;
+        work->mDCACPtrs[1] = work->mValPtr_DC1;
+        break;
+    }
 
 after:
     if ((s32)data == 1) goto data1;
