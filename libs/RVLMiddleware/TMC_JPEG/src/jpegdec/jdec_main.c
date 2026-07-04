@@ -378,128 +378,118 @@ s32 TMCJPEGDEC_restart_interval(TMCJpegDecWork* work, u32 maxMCU, u32 mcuCount)
 
 static s32 TMCJPEGDEC_parse_para(u16* marker, TMCJpegDecWork* work)
 {
-    BOOL done;
-    s32 first;
-    s32 r;
-    u16 m;
+    u8 byte;
+    u16 local;
+    u16 size;
+    s32 result;
+    u32 keepGoing;
 
-    done = FALSE;
-    first = *marker;
+    result = 0;
+    keepGoing = 0;
 
     do {
-        r = TMCJPEGDEC_get_wbyte(&m, work);
-        if (r < 0) {
-            if (r != -0x90)
-                return r;
-            if (m != 0xFFD9)
-                return r;
-            r = 0;
+        result = TMCJPEGDEC_get_wbyte(&local, work);
+        if (result < 0) {
+            if (result != -0x90)
+                return result;
+            if (local != 0xFFD9)
+                return result;
+            result = 0;
         }
 
-        while (m == 0xFFFF) {
-            u8 byte;
-
-            r = TMCJPEGDEC_get_byte(&byte, work);
-            if (r < 0)
-                return r;
-            m = 0xFF00 | byte;
+        while (local == 0xFFFF) {
+            result = TMCJPEGDEC_get_byte(&byte, work);
+            if (result < 0)
+                return result;
+            local = 0xFF00 | byte;
         }
 
-        if (m >= 0xFFE0 && m <= 0xFFEF) {
-            u16 appLen;
-
-            r = TMCJPEGDEC_get_wbyte(&appLen, work);
-            if (r >= 0) {
-                if (appLen < 2) {
-                    r = -0x45;
+        if (local >= 0xFFE0 && local <= 0xFFEF) {
+            result = TMCJPEGDEC_get_wbyte(&size, work);
+            if (result >= 0) {
+                if (size < 2) {
+                    result = -0x45;
                 } else {
-                    appLen -= 2;
-                    r = TMCJPEGDEC_move_ptr(appLen, work);
-                    r = r & (r >> 31);
-                    r = r & (r >> 31);
-                }
-            }
-        } else if (m == 0xFFD9) {
-            work->mScanCount = 1;
-            done = TRUE;
-        } else if (m < 0xFFD9) {
-            if (m == 0xFFC2) {
-                done = TRUE;
-            } else if (m < 0xFFC2) {
-                if (m == 0xFFC0) {
-                    done = TRUE;
-                } else {
-                    r = -0x2F;
-                }
-            } else {
-                if (m == 0xFFC4) {
-                    r = TMCJPEGDEC_parse_dht(first, work);
-                } else {
-                    r = -0x2F;
-                }
-            }
-        } else if (m == 0xFFDD) {
-            u16 driLen;
-
-            r = TMCJPEGDEC_get_wbyte(&driLen, work);
-            if (r >= 0) {
-                if (driLen != 4)
-                    r = -0x42;
-                else {
-                    r = TMCJPEGDEC_get_wbyte(&driLen, work);
-                    if (r >= 0) {
-                        work->mRestartInterval = driLen;
-                        r = 0;
-                    }
-                }
-            }
-        } else if (m < 0xFFDD) {
-            if (m == 0xFFDB) {
-                r = TMCJPEGDEC_parse_dqt(work);
-            } else if (m < 0xFFDB) {
-                done = TRUE;
-            } else {
-                u16 dnlLen;
-
-                r = TMCJPEGDEC_get_wbyte(&dnlLen, work);
-                if (r >= 0) {
-                    if (dnlLen != 4)
-                        r = -0x43;
-                    else {
-                        r = TMCJPEGDEC_get_wbyte(&dnlLen, work);
-                        if (r >= 0) {
-                            work->mFrameHeight = dnlLen;
-                            r = 0;
-                        }
-                    }
+                    size -= 2;
+                    result = TMCJPEGDEC_move_ptr(size, work);
+                    result = result & (result >> 31);
+                    result = result & (result >> 31);
                 }
             }
         } else {
-            if (m == 0xFFFE) {
-                u16 comLen;
-
-                r = TMCJPEGDEC_get_wbyte(&comLen, work);
-                if (r >= 0) {
-                    if (comLen < 2)
-                        r = -0x44;
+            switch ((s32)local) {
+            case 0xFFD9:
+                work->mScanCount = 1;
+                keepGoing = 1;
+                break;
+            case 0xFFDA:
+                keepGoing = 1;
+                break;
+            case 0xFFDB:
+                result = TMCJPEGDEC_parse_dqt(work);
+                break;
+            case 0xFFDC:
+                result = TMCJPEGDEC_get_wbyte(&size, work);
+                if (result >= 0) {
+                    if (size != 4)
+                        result = -0x43;
                     else {
-                        comLen -= 2;
-                        r = TMCJPEGDEC_move_ptr(comLen, work);
-                        r = r & (r >> 31);
-                        r = r & (r >> 31);
+                        result = TMCJPEGDEC_get_wbyte(&size, work);
+                        if (result >= 0) {
+                            work->mFrameHeight = size;
+                            result = 0;
+                        }
                     }
                 }
-            } else {
-                r = -0x2F;
+                break;
+            case 0xFFDD:
+                result = TMCJPEGDEC_get_wbyte(&size, work);
+                if (result >= 0) {
+                    if (size != 4)
+                        result = -0x42;
+                    else {
+                        result = TMCJPEGDEC_get_wbyte(&size, work);
+                        if (result >= 0) {
+                            work->mRestartInterval = size;
+                            result = 0;
+                        }
+                    }
+                }
+                break;
+            case 0xFFFE:
+                result = TMCJPEGDEC_get_wbyte(&size, work);
+                if (result >= 0) {
+                    if (size < 2)
+                        result = -0x44;
+                    else {
+                        size -= 2;
+                        result = TMCJPEGDEC_move_ptr(size, work);
+                        result = result & (result >> 31);
+                        result = result & (result >> 31);
+                    }
+                }
+                break;
+            case 0xFFC0:
+                keepGoing = 1;
+                break;
+            case 0xFFC2:
+                keepGoing = 1;
+                break;
+            case 0xFFC4:
+                result = TMCJPEGDEC_parse_dht(*marker, work);
+                break;
+            default:
+                result = -0x2F;
+                break;
             }
         }
 
-        if (r < 0)
-            done = TRUE;
-    } while (!done);
+        if (result < 0)
+            keepGoing = 1;
+    } while (keepGoing == 0);
 
-    *marker = m;
-    return r;
+    *marker = local;
+    return result;
 }
 
 static s32 TMCJPEGDEC_parse_dht(s32 first, TMCJpegDecWork* work)
