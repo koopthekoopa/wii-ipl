@@ -2,7 +2,7 @@
 #include <tmc_jpeg_internal.h>
 #include <string.h>
 
-static void TMCJPEGDEC_exif_parse(const u8* data, u32 size, TMCCJPEGDecExifData* pInfo);
+static s32 TMCJPEGDEC_exif_parse(const u8* data, u32 size, TMCCJPEGDecExifData* pInfo);
 static void TMCJPEGDEC_IFD0_tag_parse(TMCCJPEGDecExifData* pInfo, u16 byteOrder, const u8* entry);
 static void TMCJPEGDEC_IFD1_tag_parse(TMCCJPEGDecExifData* pInfo, u16 byteOrder, const u8* entry);
 static s32 TMCJPEGDEC_ThumbnailCheck(TMCCJPEGDecInitParam* param, TMCCJPEGDecExifInfo* info, u32 totalSize);
@@ -168,7 +168,9 @@ s32 TMCCJPEGDecGetInfoEXIF(TMCCJPEGDecExifInfo* pInfo, TMCCJPEGDecInitParam* pPa
     if (segSize < 2)
         return -0x45;
 
-    TMCJPEGDEC_exif_parse(src + 10, segSize - 8, &pInfo->mExifData);
+    result = TMCJPEGDEC_exif_parse(src + 10, segSize - 8, &pInfo->mExifData);
+    if (result < 0)
+        return result;
 
     if (pParam->mFlag1 == 0)
         return 0;
@@ -212,7 +214,7 @@ s32 TMCCJPEGDecGetInfoEXIF(TMCCJPEGDecExifInfo* pInfo, TMCCJPEGDecInitParam* pPa
     return pInfo->mState;
 }
 
-static void TMCJPEGDEC_exif_parse(const u8* data, u32 size, TMCCJPEGDecExifData* pInfo)
+static s32 TMCJPEGDEC_exif_parse(const u8* data, u32 size, TMCCJPEGDecExifData* pInfo)
 {
     u16 byteOrder;
     u32 ifd0Offset;
@@ -224,35 +226,43 @@ static void TMCJPEGDEC_exif_parse(const u8* data, u32 size, TMCCJPEGDecExifData*
     u32 i;
     const u8* p;
     s32 sval;
-
-    if (size < 8)
-        return;
+    u32 raw;
 
     pInfo->mThumbData = (u32)data;
     pInfo->mDataEnd = (u32)(data + size);
     pInfo->mNextIfdOffset = 0;
 
-    byteOrder = read_u16(data, 0);
-    if (byteOrder != 0x4D4D && byteOrder != 0x4949)
-        return;
+    if (size < 8)
+        return -161;
 
-    if (read_u16(data + 2, byteOrder) != 0x002A)
-        return;
+    raw = (data[1] << 8) | data[0];
+    if (raw != 0x4D4D && raw != 0x4949)
+        return -161;
+    byteOrder = raw;
+
+    {
+        s16 s = *(s16*)(data + 2);
+        if (byteOrder == 0x4949) {
+            s = ((u16)data[3] << 8) | data[2];
+        }
+        if (s != 0x002A)
+            return -161;
+    }
 
     ifd0Offset = read_u32(data + 4, byteOrder);
-    if (ifd0Offset >= size)
-        return;
+    if (ifd0Offset > size)
+        return -161;
 
     sval = size - (u16)ifd0Offset;
     if (sval < 2)
-        return;
+        return -161;
 
-    p = data + ifd0Offset;
+    p = data + (u16)ifd0Offset;
     count = read_u16(p, byteOrder);
     entriesSize = count * 12;
-    sval -= 2;
-    if ((s32)sval < (s32)entriesSize)
-        return;
+    sval = (u32)(sval - 2);
+    if (sval < entriesSize)
+        return -161;
 
     p += 2;
     for (i = 0; i < count; i++) {
@@ -262,23 +272,23 @@ static void TMCJPEGDEC_exif_parse(const u8* data, u32 size, TMCCJPEGDecExifData*
 
     sval -= entriesSize;
     if (sval < 4)
-        return;
+        return -161;
 
     ifd1Offset = read_u32(p, byteOrder);
     if (ifd1Offset != 0) {
-        if (ifd1Offset >= size)
-            return;
+        if (ifd1Offset > size)
+            return -161;
 
         sval = size - (u16)ifd1Offset;
         if (sval < 2)
-            return;
+            return -161;
 
-        p = data + ifd1Offset;
+        p = data + (u16)ifd1Offset;
         count = read_u16(p, byteOrder);
         entriesSize = count * 12;
-        sval -= 2;
-        if ((s32)sval < (s32)entriesSize)
-            return;
+        sval = (u32)(sval - 2);
+        if (sval < entriesSize)
+            return -161;
 
         p += 2;
         for (i = 0; i < count; i++) {
@@ -288,25 +298,27 @@ static void TMCJPEGDEC_exif_parse(const u8* data, u32 size, TMCCJPEGDecExifData*
     }
 
     exifIfdOffset = pInfo->mNextIfdOffset;
-    if (exifIfdOffset >= size || exifIfdOffset == 0)
-        return;
+    if (exifIfdOffset == 0 || exifIfdOffset > size)
+        return -161;
 
     sval = size - (u16)exifIfdOffset;
     if (sval < 2)
-        return;
+        return -161;
 
-    p = data + exifIfdOffset;
+    p = data + (u16)exifIfdOffset;
     count = read_u16(p, byteOrder);
     entriesSize = count * 12;
-    sval -= 2;
-    if ((s32)sval < (s32)entriesSize)
-        return;
+    sval = (u32)(sval - 2);
+    if (sval < entriesSize)
+        return -161;
 
     p += 2;
     for (i = 0; i < count; i++) {
-            TMCJPEGDEC_IFD0_tag_parse(pInfo, byteOrder, p);
+        TMCJPEGDEC_IFD0_tag_parse(pInfo, byteOrder, p);
         p += 12;
     }
+
+    return 0;
 }
 
 static void TMCJPEGDEC_IFD0_tag_parse(TMCCJPEGDecExifData* pInfo, u16 byteOrder, const u8* entry)
