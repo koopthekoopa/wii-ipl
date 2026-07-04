@@ -30,10 +30,18 @@ static s32 TMCJPEG_814EAF50(TMCJpegDecWork* work) {
     if (((s32 (*)(void*, u8*, u32))work->mpCallback)(work->mpCbCtx, dest, readSize) != 0)
         return -0xF0;
 
-    work->mpBufEnd = dest + readSize;
-    work->mRemaining -= readSize;
-    work->mpBufCur = dest + marker;
-    work->mpBufMark = dest + readSize - 0x22;
+    {
+        u32 oldRemaining = work->mRemaining;
+        u8* newEnd = dest + readSize;
+        u8* newCur = dest + marker;
+        u32 newRemaining = oldRemaining - readSize;
+        u8* newMark = newEnd - 0x22;
+
+        work->mpBufEnd = newEnd;
+        work->mRemaining = newRemaining;
+        work->mpBufCur = newCur;
+        work->mpBufMark = newMark;
+    }
 
     return 0;
 }
@@ -59,18 +67,24 @@ static s32 TMCJPEG_814EB108(TMCJpegDecWork* work) {
         work->mpBufStart[i + 7] = *(endMinus1 - (0x1f - (i + 7)));
     }
 
+    dest = work->mpBufOrg + 0x20;
     readSize = work->mRemaining;
     if (work->mBufLen - 0x20 < readSize) readSize = work->mBufLen - 0x20;
-
-    dest = work->mpBufOrg + 0x20;
 
     if (((s32 (*)(void*, u8*, u32))work->mpCallback)(work->mpCbCtx, dest, readSize) != 0)
         return -0xF0;
 
-    work->mpBufEnd = dest + readSize;
-    work->mRemaining -= readSize;
-    work->mpBufCur = dest;
-    work->mpBufMark = dest + readSize - 0x22;
+    {
+        u32 oldRemaining = work->mRemaining;
+        u8* newEnd = dest + readSize;
+        u8* newMark = newEnd - 0x22;
+        u32 newRemaining = oldRemaining - readSize;
+
+        work->mpBufCur = dest;
+        work->mRemaining = newRemaining;
+        work->mpBufEnd = newEnd;
+        work->mpBufMark = newMark;
+    }
 
     return 0;
 }
@@ -148,11 +162,13 @@ e1:
     r = -0x90;
     goto br;
 
-r1:
+    r1:
     {
+        s32 _r = r;
         u8* cur = work->mpBufCur;
         u8* end = work->mpBufEnd;
         u8* tmp = cur + 1;
+        (void)_r;
         work->mpBufCur = tmp;
         byte_val = *cur;
         if (tmp < end) goto o1;
@@ -184,9 +200,11 @@ e3:
 
 r2:
     {
+        s32 _r = r;
         u8* cur = work->mpBufCur;
         u8* end = work->mpBufEnd;
         u8* tmp = cur + 1;
+        (void)_r;
         work->mpBufCur = tmp;
         byte_val = *cur;
         if (tmp < end) goto o2;
@@ -208,9 +226,9 @@ ez:
 
 s32 TMCJPEGDEC_get_sbyte(u8* dst, u32 count, TMCJpegDecWork* work) {
     u8* d = dst;
-    u32 i = 0;
     u8 byte;
     int r;
+    u32 i = 0;
     goto lc;
 
 lb:

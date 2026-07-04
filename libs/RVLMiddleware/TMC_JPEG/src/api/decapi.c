@@ -165,15 +165,17 @@ epilogue:
     ;
 }
 
-s32 TMCCJPEGDecSetResolution(TMCCJPEGDecState* state, u8 scale) {
+s32 TMCCJPEGDecSetResolution(TMCCJPEGDecState* state, u32 scale) {
     TMCJpegDecWork* work;
     s32 result;
+    u32 s;
 
+    s = scale & 0xFF;
     work = (TMCJpegDecWork*)state->mpWorkBuf;
-
     state->mFlag20 = scale;
-
-    if (scale != 1 && scale != 2 && scale != 4 && scale != 8) {
+    if (s == 1 || s == 2 || s == 4 || s == 8) {
+        /* valid */
+    } else {
         return -1;
     }
 
