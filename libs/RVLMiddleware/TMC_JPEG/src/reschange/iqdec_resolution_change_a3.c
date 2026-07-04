@@ -26,15 +26,16 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
     dt = data;
     wk = work;
 
-    bit_pos = work->mBitCount;
-    dc_fast = work->mpDCFast;
-
-    if (bit_pos <= 8) {
-        r = TMCJPEGDEC_load_buff(wk);
-        if (r < 0) return r;
-        bit_pos = wk->mBitCount;
+    {
+        s32 bit_pos_check = work->mBitCount;
+        dc_fast = work->mpDCFast;
+        if (bit_pos_check <= 8) {
+            r = TMCJPEGDEC_load_buff(wk);
+            if (r < 0) return r;
+        }
     }
 
+    bit_pos = wk->mBitCount;
     bit_data = wk->mBitBuf;
     t = bit_pos - 8;
     tmp = bit_data >> t;
@@ -160,9 +161,9 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
 static s32 TMCJPEGDEC_vl_decode_rc(u32* huff_tbl, u8* huff_sym, TMCJpegDecWork* work) {
     s32 bit_pos;
     u32 bit_data;
+    u16* entry;
     u32 code;
     unsigned int i;
-    u16* entry;
     s32 r;
 
     bit_pos = work->mBitCount;
@@ -170,16 +171,15 @@ static s32 TMCJPEGDEC_vl_decode_rc(u32* huff_tbl, u8* huff_sym, TMCJpegDecWork* 
     if (bit_pos <= 17) {
         r = TMCJPEGDEC_load_buff(work);
         if (r < 0) return r;
-        bit_pos = work->mBitCount;
     }
 
+    bit_pos = work->mBitCount;
+    entry = (u16*)((u8*)huff_tbl + 0x24);
     bit_data = work->mBitBuf;
+    i = 9;
     bit_pos -= 9;
     code = (bit_data >> bit_pos) & 0x1FF;
     work->mBitCount = bit_pos;
-
-    entry = (u16*)((u8*)huff_tbl + 0x24);
-    i = 9;
 
     goto entry_check;
 
@@ -198,15 +198,14 @@ static s32 TMCJPEGDEC_vl_decode_rc(u32* huff_tbl, u8* huff_sym, TMCJpegDecWork* 
 entry_check:
         {
             typedef struct { u16 t; u16 o; } HuffEnt;
-            volatile HuffEnt local = *(HuffEnt*)entry;
-            union {
-                u32 w;
-                u16 h[2];
-            } combined;
-            combined.w = *(u32*)&local;
-            if ((u32)code > (u32)combined.h[0]) continue;
+            HuffEnt local = *(HuffEnt*)entry;
+            u32 combined = *(u32*)&local;
+            u32 combined2 = combined;
+            u16 th = *(u16*)&combined2;
 
-            code = code - (u32)combined.h[0] + (u32)combined.h[1];
+            if ((u32)code > (u32)th) continue;
+
+            code = code - (u32)local.t + (u32)local.o;
         }
         return huff_sym[code & 0xFF];
     } while (1);

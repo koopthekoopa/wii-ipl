@@ -1198,19 +1198,19 @@ config.libs = [
     TMCJpegLib(
         [
             Object(NonMatching, "buffer/mkhdec3.c"),
-            Object(NonMatching, "buffer/buffer_system.c"),
+            Object(Equivalent,  "buffer/buffer_system.c"),
             Object(Equivalent,  "buffer/getcode.c"),
             Object(NonMatching, "buffer/idct_block_var.c"),
 
-            Object(NonMatching, "api/decapi.c"),
+            Object(Equivalent,  "api/decapi.c"),
 
-            Object(Equivalent,   "jpegdec/jdec.c"),
+            Object(Equivalent,  "jpegdec/jdec.c"),
             Object(NonMatching, "jpegdec/jdec_main.c"),
             Object(Matching,    "jpegdec/jpformat.c"),
 
             Object(NonMatching, "exif/exif_parse.c"),
 
-            Object(NonMatching, "reschange/iqdec_resolution_change_a3.c"),
+            Object(Equivalent,  "reschange/iqdec_resolution_change_a3.c"),
             Object(NonMatching, "reschange/idct_resolution_change_var.c"),
 
             Object(NonMatching, "texturecvtr/Texture_MCUtoY8U8V8.c"),
