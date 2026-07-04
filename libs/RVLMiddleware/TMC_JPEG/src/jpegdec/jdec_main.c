@@ -328,7 +328,6 @@ s32 TMCJPEGDEC_restart_interval(TMCJpegDecWork* work, u32 maxMCU, u32 mcuCount)
 {
     u16 restartCount;
     u16 interval;
-    s32 result;
     TMCCJPEGDecState* state;
 
     restartCount = work->mRestartCnt;
@@ -336,60 +335,69 @@ s32 TMCJPEGDEC_restart_interval(TMCJpegDecWork* work, u32 maxMCU, u32 mcuCount)
     restartCount++;
     state = (TMCCJPEGDecState*)work->mpState;
     work->mRestartCnt = restartCount;
-    result = 0;
-    if (restartCount != interval)
-        return result;
 
-    result = TMCJPEGDEC_rewind_ptr(work);
-    if (result < 0)
-        return result;
-
-    {
+    if (restartCount == interval) {
+        s32 result;
         u16 marker;
 
-        result = TMCJPEGDEC_get_wbyte(&marker, work);
-        if (marker == 0xFFD9) {
-            work->mScanCount = 1;
-        }
-        if (result < 0)
-            return result;
-
-        if (marker >= 0xFFC0) {
-            if (marker < 0xFFD0 || marker > 0xFFD7) {
-                result = TMCJPEGDEC_move_ptr(-2, work);
-                if (result < 0)
-                    return result;
-            } else {
-                u32 expected = work->mRstMarkerIdx + 0xFFD0;
-                if (marker != expected)
-                    return -0x23;
+        result = TMCJPEGDEC_rewind_ptr(work);
+        if (result >= 0) {
+            result = TMCJPEGDEC_get_wbyte(&marker, work);
+            if (marker == 0xFFD9) {
+                work->mScanCount = 1;
             }
-        } else {
-            u32 expected = work->mRstMarkerIdx + 0xFFD0;
-            if (marker != expected)
-                return -0x23;
+            if (result >= 0) {
+                if (marker >= 0xFFC0 && (marker < 0xFFD0 || marker > 0xFFD7)) {
+                    result = TMCJPEGDEC_move_ptr(-2, work);
+                    if (result < 0)
+                        return result;
+                } else {
+                    s32 expected = work->mRstMarkerIdx + 0xFFD0;
+                    if (marker != expected)
+                        return -0x23;
+                }
+
+                {
+                    u16 idx;
+                    u8 stepY;
+                    u8 stepX;
+                    u16 pitch;
+
+                    idx = work->mRstMarkerIdx;
+                    idx++;
+                    idx &= 7;
+                    work->mRstMarkerIdx = idx;
+                    stepY = state->mStepY;
+                    stepX = state->mStepX;
+                    pitch = state->mMaxX;
+                    work->mDCPredict[0] = 0;
+                    work->mDCPredict[1] = 0;
+                    work->mDCPredict[2] = 0;
+                    work->mDCPredict[3] = 0;
+                    work->mRestartCnt = 0;
+
+                    {
+                        u16 blockCount;
+                        u16 mcux;
+                        u16 temp;
+                        u16 div;
+                        u16 rem;
+
+                        blockCount = (u16)(mcuCount / stepY);
+                        mcux = (u16)(blockCount * pitch);
+                        temp = (u16)(mcux + maxMCU / stepX + 1);
+                        div = (u16)(temp / pitch);
+                        rem = (u16)(temp - div * pitch);
+                        work->mMcuPos = ((u32)rem << 16) + div;
+                    }
+                }
+
+                result = ((s32 (*)(TMCJpegDecWork*))TMCJPEGDEC_init_buff)(work);
+            }
         }
+        return result;
     }
-
-    work->mRstMarkerIdx = (work->mRstMarkerIdx + 1) & 7;
-    work->mDCPredict[0] = 0;
-    work->mDCPredict[1] = 0;
-    work->mDCPredict[2] = 0;
-    work->mDCPredict[3] = 0;
-    work->mRestartCnt = 0;
-
-    {
-        u32 blockCount = mcuCount / state->mStepY;
-        u16 pitch = state->mMaxX;
-        u32 mcux = blockCount * pitch;
-        u32 temp = mcux + maxMCU / state->mStepX + 1;
-        u32 div = temp / pitch;
-        u32 rem = temp - div * pitch;
-
-        work->mMcuPos = (rem << 16) | div;
-    }
-
-    return ((s32 (*)(TMCJpegDecWork*))TMCJPEGDEC_init_buff)(work);
+    return 0;
 }
 
 static s32 TMCJPEGDEC_parse_para(u16* marker, TMCJpegDecWork* work)

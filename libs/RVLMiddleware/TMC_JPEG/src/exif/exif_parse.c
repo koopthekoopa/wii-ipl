@@ -36,38 +36,45 @@ s32 TMCCJPEGDecGetOffsetEXIF(u32* pOffset, u32* pSize, TMCCJPEGDecInitParam* pPa
     s32 result;
     u8 sig[4];
 
+    dataSize = pParam->mDataSize;
     work = pParam->mpBuf1;
+
     if (work == NULL)
         return -1;
 
     memset(work, 0, 0x19E8);
 
-    TMCJPEGDEC_init_ptr_buff(work, &pParam->mpBuf2);
-    dataSize = pParam->mDataSize;
-
-    result = TMCJPEGDEC_get_wbyte(&marker, work);
+    result = TMCJPEGDEC_init_ptr_buff(work, &pParam->mpBuf2);
     if (result < 0)
-        return -1;
+        return result;
 
-    if (marker != 0xFFD8)
-        return -0x20;
+    {
+        u16 soi;
+
+        result = TMCJPEGDEC_get_wbyte(&soi, work);
+        if (result < 0)
+            return result;
+
+        if (soi != 0xFFD8)
+            return -0x20;
+    }
 
     for (;;) {
         result = TMCJPEGDEC_get_wbyte(&marker, work);
         if (result < 0)
-            return -1;
+            return result;
 
         if (marker == 0xFFE1) {
             result = TMCJPEGDEC_get_wbyte(&segSize, work);
             if (result < 0)
-                return -1;
+                return result;
 
             if (segSize < 2)
                 return -0x45;
 
             result = TMCJPEGDEC_get_sbyte(sig, 4, work);
             if (result < 0)
-                return -1;
+                return result;
 
             if (sig[0] == 0x45 && sig[1] == 0x78 &&
                 sig[2] == 0x69 && sig[3] == 0x66) {
@@ -81,7 +88,7 @@ s32 TMCCJPEGDecGetOffsetEXIF(u32* pOffset, u32* pSize, TMCCJPEGDecInitParam* pPa
 
         result = TMCJPEGDEC_get_wbyte(&segSize, work);
         if (result < 0)
-            return -1;
+            return result;
 
         if (segSize < 2)
             return -0x45;
@@ -89,36 +96,59 @@ s32 TMCCJPEGDecGetOffsetEXIF(u32* pOffset, u32* pSize, TMCCJPEGDecInitParam* pPa
         segSize -= 2;
 
         if (marker >= 0xFFE0 && marker <= 0xFFEF) {
-            TMCJPEGDEC_move_ptr(segSize, work);
+            result = TMCJPEGDEC_move_ptr(segSize, work);
+            if (result < 0)
+                return result;
             continue;
         }
 
         if (marker >= 0xFFD9) {
-            if (marker == 0xFFD9)
+            if (marker == 0xFFD9) {
                 return -2;
+            }
+
             if (marker == 0xFFFE) {
-                TMCJPEGDEC_move_ptr(segSize, work);
+                result = TMCJPEGDEC_move_ptr(segSize, work);
+                if (result < 0)
+                    return result;
                 continue;
             }
+
             if (marker >= 0xFFDE)
                 return -0x2F;
+
             if (marker >= 0xFFDB) {
-                TMCJPEGDEC_move_ptr(segSize, work);
+                result = TMCJPEGDEC_move_ptr(segSize, work);
+                if (result < 0)
+                    return result;
                 continue;
             }
+
             return -2;
         }
 
         if (marker >= 0xFFC2) {
-            if (marker == 0xFFC2 || marker == 0xFFC4) {
-                TMCJPEGDEC_move_ptr(segSize, work);
+            if (marker == 0xFFC2) {
+                result = TMCJPEGDEC_move_ptr(segSize, work);
+                if (result < 0)
+                    return result;
                 continue;
             }
+
+            if (marker == 0xFFC4) {
+                result = TMCJPEGDEC_move_ptr(segSize, work);
+                if (result < 0)
+                    return result;
+                continue;
+            }
+
             return -0x2F;
         }
 
         if (marker == 0xFFC0) {
-            TMCJPEGDEC_move_ptr(segSize, work);
+            result = TMCJPEGDEC_move_ptr(segSize, work);
+            if (result < 0)
+                return result;
             continue;
         }
 
@@ -130,7 +160,7 @@ s32 TMCCJPEGDecGetInfoEXIF(TMCCJPEGDecExifInfo* pInfo, TMCCJPEGDecInitParam* pPa
 {
     TMCJpegDecWork* work;
     u16 segSize;
-    u8* src;
+    u32 segSizeP2;
     s32 result;
 
     work = pParam->mpBuf1;
@@ -143,70 +173,74 @@ s32 TMCCJPEGDecGetInfoEXIF(TMCCJPEGDecExifInfo* pInfo, TMCCJPEGDecInitParam* pPa
     work->mpState = pInfo;
     pInfo->mpWorkBuf = work;
 
-    src = pParam->mpBuf2;
-    {
-        u32 hi = src[1];
-        u32 lo = src[0];
-        u32 raw = hi << 8 | lo;
-        raw = (raw & 0xFF) << 8 | raw >> 8 & 0xFF;
-        if (raw != 0xFFE1)
-            return -0x45;
-    }
+    if (read_u16((const u8*)pParam->mpBuf2, 0x4D4D) != 0xFFE1)
+        return -0x45;
 
-    {
-        u32 hi = src[3];
-        u32 lo = src[2];
-        u32 raw = hi << 8 | lo;
-        raw = (raw & 0xFF) << 8 | raw >> 8 & 0xFF;
-        segSize = raw;
-    }
+    segSize = read_u16((const u8*)pParam->mpBuf2 + 2, 0x4D4D);
     if (segSize < 2)
         return -0x45;
 
-    result = TMCJPEGDEC_exif_parse(src + 10, segSize - 8, &pInfo->mExifData);
+    segSizeP2 = segSize + 2;
+    result = TMCJPEGDEC_exif_parse((const u8*)pParam->mpBuf2 + 10, segSize - 8, &pInfo->mExifData);
     if (result < 0)
         return result;
 
-    if (pParam->mFlag1 == 0)
+    if (pParam->mFlag1 == 0) {
         return 0;
+    } else {
+        if (pParam->mFlag1 == 1) {
+            result = TMCJPEGDEC_ThumbnailCheck(pParam, pInfo, segSizeP2);
+            if (result < 0)
+                return result;
+        } else {
+            return -1;
+        }
+    }
 
-    if (pParam->mFlag1 != 1)
-        return -1;
-
-    result = TMCJPEGDEC_ThumbnailCheck(pParam, pInfo, segSize - 2);
+    result = TMCJPEGDEC_init_buff_thumbnail((TMCJpegDecWork*)&pInfo->mExifData, (u8*)work, (u8*)pParam + 0x10);
     if (result < 0)
         return result;
-
-    TMCJPEGDEC_init_buff_thumbnail((TMCJpegDecWork*)&pInfo->mExifData, (u8*)work, (u8*)pParam->mpBuf2);
 
     result = TMCJPEGDEC_HeaderAnalyze(work);
     if (result < 0)
-        return -2;
+        goto _error;
 
     result = TMCJPEGDEC_Decompscan(work);
     if (result < 0)
-        return -2;
+        goto _error;
 
     if (work->mScanCount != 0)
-        return -2;
+        goto _error;
 
     result = TMCJPEGDEC_Setsize(work);
     if (result < 0)
-        return -2;
+        goto _error;
 
-    if (pInfo->mConverterType == 0) {
+    switch (pInfo->mConverterType) {
+    case 0:
         result = TMCJPEGDEC_set_converterRGB565(work);
-    } else if (pInfo->mConverterType == 1) {
+        if (result < 0)
+            goto _error;
+        break;
+    case 1:
         result = TMCJPEGDEC_set_converterRGBA8(work);
-    } else if (pInfo->mConverterType == 2) {
+        if (result < 0)
+            goto _error;
+        break;
+    case 2:
         result = TMCJPEGDEC_set_converterY8U8V8(work);
+        if (result < 0)
+            goto _error;
+        break;
     }
-
-    if (result < 0)
-        return -2;
 
     pInfo->mPosition = TMCJPEGDEC_get_position(work);
     return pInfo->mState;
+
+_error:
+    if (result < 0)
+        return result;
+    return -2;
 }
 
 static s32 TMCJPEGDEC_exif_parse(const u8* data, u32 size, TMCCJPEGDecExifData* pInfo)
