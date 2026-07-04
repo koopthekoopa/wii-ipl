@@ -52,8 +52,8 @@ typedef struct {
     u8    unk_0x66A[0x02];
     u32   mThumbnailOffset; // 0x66C
     u32   mThumbnailLength; // 0x670
-    u32   mThumbData;       // 0x674
-    u32   mDataEnd;         // 0x678
+    u8*   mThumbData;       // 0x674
+    u8*   mDataEnd;         // 0x678
 } TMCCJPEGDecExifData;
 
 typedef struct {

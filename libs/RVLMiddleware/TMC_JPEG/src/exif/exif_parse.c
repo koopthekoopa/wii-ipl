@@ -9,8 +9,8 @@ static s32 TMCJPEGDEC_ThumbnailCheck(TMCCJPEGDecInitParam* param, TMCCJPEGDecExi
 
 static u16 read_u16(const u8* p, u16 byteOrder)
 {
-    u32 raw = (p[1] << 8) | p[0];
-    u32 tmp = ((raw & 0xFF) << 8) | ((raw >> 8) & 0xFF);
+    u32 raw = p[1] << 8 | p[0];
+    u32 tmp = (raw & 0xFF) << 8 | raw >> 8 & 0xFF;
     if (byteOrder == 0x4949)
         tmp = raw;
     return tmp;
@@ -18,11 +18,11 @@ static u16 read_u16(const u8* p, u16 byteOrder)
 
 static u32 read_u32(const u8* p, u16 byteOrder)
 {
-    u32 raw = (p[1] << 8) | p[0];
+    u32 raw = p[1] << 8 | p[0];
     u32 tmp;
-    raw = raw | (p[2] << 16) | (p[3] << 24);
-    tmp = ((raw & 0xFF) << 24) | ((raw & 0xFF00) << 8) |
-          ((raw >> 8) & 0xFF00) | ((raw >> 24) & 0xFF);
+    raw = raw | p[2] << 16 | p[3] << 24;
+    tmp = (raw & 0xFF) << 24 | (raw & 0xFF00) << 8 |
+          raw >> 8 & 0xFF00 | raw >> 24 & 0xFF;
     if (byteOrder == 0x4949)
         tmp = raw;
     return tmp;
@@ -152,8 +152,8 @@ s32 TMCCJPEGDecGetInfoEXIF(TMCCJPEGDecExifInfo* pInfo, TMCCJPEGDecInitParam* pPa
     {
         u32 hi = src[1];
         u32 lo = src[0];
-        u32 raw = (hi << 8) | lo;
-        raw = ((raw & 0xFF) << 8) | ((raw >> 8) & 0xFF);
+        u32 raw = hi << 8 | lo;
+        raw = (raw & 0xFF) << 8 | raw >> 8 & 0xFF;
         if (raw != 0xFFE1)
             return -0x45;
     }
@@ -161,8 +161,8 @@ s32 TMCCJPEGDecGetInfoEXIF(TMCCJPEGDecExifInfo* pInfo, TMCCJPEGDecInitParam* pPa
     {
         u32 hi = src[3];
         u32 lo = src[2];
-        u32 raw = (hi << 8) | lo;
-        raw = ((raw & 0xFF) << 8) | ((raw >> 8) & 0xFF);
+        u32 raw = hi << 8 | lo;
+        raw = (raw & 0xFF) << 8 | raw >> 8 & 0xFF;
         segSize = raw;
     }
     if (segSize < 2)
@@ -216,7 +216,6 @@ s32 TMCCJPEGDecGetInfoEXIF(TMCCJPEGDecExifInfo* pInfo, TMCCJPEGDecInitParam* pPa
 
 static s32 TMCJPEGDEC_exif_parse(const u8* data, u32 size, TMCCJPEGDecExifData* pInfo)
 {
-    u16 byteOrder;
     u32 ifd0Offset;
     u32 ifd1Offset;
     u32 exifIfdOffset;
@@ -226,26 +225,28 @@ static s32 TMCJPEGDEC_exif_parse(const u8* data, u32 size, TMCCJPEGDecExifData* 
     u32 i;
     const u8* p;
     s32 sval;
+    u16 byteOrder;
     u32 raw;
 
-    pInfo->mThumbData = (u32)data;
-    pInfo->mDataEnd = (u32)(data + size);
+    pInfo->mThumbData = (u8*)data;
+    pInfo->mDataEnd = (u8*)data + size;
     pInfo->mNextIfdOffset = 0;
 
     if (size < 8)
         return -161;
 
-    raw = (data[1] << 8) | data[0];
+    raw = data[1] << 8 | data[0];
     if (raw != 0x4D4D && raw != 0x4949)
         return -161;
     byteOrder = raw;
 
     {
-        s16 s = *(s16*)(data + 2);
+        u16 raw = data[3] << 8 | data[2];
+        u16 ver = (raw & 0xFF) << 8 | raw >> 8 & 0xFF;
         if (byteOrder == 0x4949) {
-            s = ((u16)data[3] << 8) | data[2];
+            ver = raw;
         }
-        if (s != 0x002A)
+        if (ver != 0x002A)
             return -161;
     }
 
@@ -328,274 +329,224 @@ static void TMCJPEGDEC_IFD0_tag_parse(TMCCJPEGDecExifData* pInfo, u16 byteOrder,
 
     tag = read_u16(entry, byteOrder);
     type = read_u16(entry + 2, byteOrder);
-    {
-    u32 offset;
-    u32 raw32;
-    u16 raw16;
-    const u8* p;
-    u32 i;
-    u32 j;
 
-    if (tag >= 0x201) {
-        if (tag == 0x201)
-            return;
-        if (tag == 0x202)
-            return;
-        if (tag < 0x213) {
-            if (tag == 0x213) {
-                raw16 = read_u16(entry + 8, byteOrder);
-                pInfo->mYCbCrPos = raw16;
+    switch (tag) {
+    case 0x0103:
+    case 0x0111:
+    case 0x0201:
+    case 0x0202:
+    case 0x8825:
+    case 0xA004:
+        return;
+
+    case 0x0112:
+        pInfo->mOrientation = read_u16(entry + 8, byteOrder);
+        return;
+
+    case 0x011A:
+        {
+            u32 offset = read_u32(entry + 8, byteOrder);
+            const u8* p = (const u8*)(pInfo->mThumbData + offset);
+            if (p < pInfo->mThumbData)
                 return;
-            }
-            return;
-        }
-        if (tag == 0x8769) {
-            pInfo->mNextIfdOffset = offset;
-            return;
-        }
-        if (tag == 0x8825)
-            return;
-        if (tag < 0x9000)
-            return;
-        if (tag == 0x9000) {
-            p = (const u8*)(pInfo->mThumbData + offset);
-            if ((u32)p < pInfo->mThumbData)
+            if (p + 4 > pInfo->mDataEnd)
                 return;
-            if ((u32)(p + 4) > pInfo->mDataEnd)
+            pInfo->mXResNum = read_u32(p, byteOrder);
+            p = (const u8*)(pInfo->mThumbData + offset + 4);
+            if (p < pInfo->mThumbData)
                 return;
-            *(u32*)pInfo->mExifVer = read_u32(p, byteOrder);
-            return;
-        }
-        if (tag == 0x9101) {
-            p = (const u8*)(pInfo->mThumbData + offset);
-            if ((u32)p < pInfo->mThumbData)
+            if (p + 4 > pInfo->mDataEnd)
                 return;
-            if ((u32)(p + 4) > pInfo->mDataEnd)
-                return;
-            *(u32*)pInfo->mFlashVer = read_u32(p, byteOrder);
-            return;
-        }
-        if (tag < 0xA000)
-            return;
-        if (tag == 0xA000) {
-            p = (const u8*)(pInfo->mThumbData + offset);
-            if ((u32)p < pInfo->mThumbData)
-                return;
-            if ((u32)(p + 4) > pInfo->mDataEnd)
-                return;
-            *(u32*)pInfo->mFlashPixVer = read_u32(p, byteOrder);
-            return;
-        }
-        if (tag == 0xA002) {
-            raw32 = offset;
-            if (type == 4) {
-                p = (const u8*)(pInfo->mThumbData + offset);
-                if ((u32)p < pInfo->mThumbData)
-                    return;
-                if ((u32)(p + 4) > pInfo->mDataEnd)
-                    return;
-                raw32 = read_u32(p, byteOrder);
-            } else if (type == 3) {
-                raw16 = read_u16(entry + 8, byteOrder);
-                raw32 = raw16;
-            }
-            pInfo->mPixelXDim = raw32;
-            return;
-        }
-        if (tag == 0xA003) {
-            raw32 = offset;
-            if (type == 4) {
-                p = (const u8*)(pInfo->mThumbData + offset);
-                if ((u32)p < pInfo->mThumbData)
-                    return;
-                if ((u32)(p + 4) > pInfo->mDataEnd)
-                    return;
-                raw32 = read_u32(p, byteOrder);
-            } else if (type == 3) {
-                raw16 = read_u16(entry + 8, byteOrder);
-                raw32 = raw16;
-            }
-            pInfo->mPixelYDim = raw32;
-            return;
-        }
-        if (tag == 0xA004) {
-            pInfo->mColorSpace = offset;
-            return;
+            pInfo->mXResDen = read_u32(p, byteOrder);
         }
         return;
-    }
 
-    if (tag == 0x11B) {
-        p = (const u8*)(pInfo->mThumbData + offset);
-        if ((u32)p < pInfo->mThumbData)
-            return;
-        if ((u32)(p + 4) > pInfo->mDataEnd)
-            return;
-        raw32 = read_u32(p, byteOrder);
-        pInfo->mYResNum = raw32;
-        p = (const u8*)(pInfo->mThumbData + offset + 4);
-        if ((u32)p < pInfo->mThumbData)
-            return;
-        if ((u32)(p + 4) > pInfo->mDataEnd)
-            return;
-        raw32 = read_u32(p, byteOrder);
-        pInfo->mYResDen = raw32;
+    case 0x011B:
+        {
+            u32 offset = read_u32(entry + 8, byteOrder);
+            const u8* p = (const u8*)(pInfo->mThumbData + offset);
+            if (p < pInfo->mThumbData)
+                return;
+            if (p + 4 > pInfo->mDataEnd)
+                return;
+            pInfo->mYResNum = read_u32(p, byteOrder);
+            p = (const u8*)(pInfo->mThumbData + offset + 4);
+            if (p < pInfo->mThumbData)
+                return;
+            if (p + 4 > pInfo->mDataEnd)
+                return;
+            pInfo->mYResDen = read_u32(p, byteOrder);
+        }
         return;
-    }
 
-    if (tag > 0x11B) {
-        if (tag == 0x12D) {
-            p = (const u8*)(pInfo->mThumbData + offset);
+    case 0x0128:
+        pInfo->mResUnit = read_u16(entry + 8, byteOrder);
+        return;
+
+    case 0x012D:
+        {
+            u32 offset = read_u32(entry + 8, byteOrder);
+            const u8* p = (const u8*)(pInfo->mThumbData + offset);
+            u32 j;
+            u32 i;
             for (j = 0; j < 3; j++) {
                 for (i = 0; i < 256; i++) {
-                    if ((u32)p < pInfo->mThumbData)
+                    if (p < pInfo->mThumbData)
                         return;
-                    if ((u32)(p + 2) > pInfo->mDataEnd)
+                    if (p + 2 > pInfo->mDataEnd)
                         return;
                     pInfo->mTransferFunc[j][i] = read_u16(p, byteOrder);
                     p += 2;
                 }
             }
-            return;
-        }
-        if (tag > 0x12D)
-            return;
-        if (tag == 0x128) {
-            raw16 = read_u16(entry + 8, byteOrder);
-            pInfo->mResUnit = raw16;
-            return;
         }
         return;
-    }
 
-    if (tag == 0x111)
+    case 0x0132:
+        {
+            u32 offset = read_u32(entry + 8, byteOrder);
+            const u8* p = (const u8*)(pInfo->mThumbData + offset);
+            if (p < pInfo->mThumbData)
+                return;
+            if (p + 20 > pInfo->mDataEnd)
+                return;
+            *(u32*)(pInfo->mDateTime + 0) = *(u32*)(p + 0);
+            *(u32*)(pInfo->mDateTime + 4) = *(u32*)(p + 4);
+            *(u32*)(pInfo->mDateTime + 8) = *(u32*)(p + 8);
+            *(u32*)(pInfo->mDateTime + 12) = *(u32*)(p + 12);
+            *(u32*)(pInfo->mDateTime + 16) = *(u32*)(p + 16);
+        }
         return;
-    if (tag < 0x111) {
-        if (tag == 0x103)
-            return;
+
+    case 0x0213:
+        pInfo->mYCbCrPos = read_u16(entry + 8, byteOrder);
         return;
-    }
-    if (tag >= 0x11A) {
-        p = (const u8*)(pInfo->mThumbData + offset);
-        if ((u32)p < pInfo->mThumbData)
-            return;
-        if ((u32)(p + 4) > pInfo->mDataEnd)
-            return;
-        raw32 = read_u32(p, byteOrder);
-        pInfo->mXResNum = raw32;
-        p = (const u8*)(pInfo->mThumbData + offset + 4);
-        if ((u32)p < pInfo->mThumbData)
-            return;
-        if ((u32)(p + 4) > pInfo->mDataEnd)
-            return;
-        raw32 = read_u32(p, byteOrder);
-        pInfo->mXResDen = raw32;
+
+    case 0x8769:
+        pInfo->mNextIfdOffset = read_u32(entry + 8, byteOrder);
         return;
-    }
-    if (tag >= 0x113)
+
+    case 0x9000:
+        pInfo->mExifVer[0] = entry[8];
+        pInfo->mExifVer[1] = entry[9];
+        pInfo->mExifVer[2] = entry[10];
+        pInfo->mExifVer[3] = entry[11];
         return;
-    raw16 = read_u16(entry + 8, byteOrder);
-    pInfo->mOrientation = raw16;
+
+    case 0x9101:
+        pInfo->mFlashVer[0] = entry[8];
+        pInfo->mFlashVer[1] = entry[9];
+        pInfo->mFlashVer[2] = entry[10];
+        pInfo->mFlashVer[3] = entry[11];
+        return;
+
+    case 0xA000:
+        pInfo->mFlashPixVer[0] = entry[8];
+        pInfo->mFlashPixVer[1] = entry[9];
+        pInfo->mFlashPixVer[2] = entry[10];
+        pInfo->mFlashPixVer[3] = entry[11];
+        return;
+
+    case 0xA001:
+        pInfo->mColorSpace = read_u16(entry + 8, byteOrder);
+        return;
+
+    case 0xA002:
+        {
+            u32 offset = read_u32(entry + 8, byteOrder);
+            if (type == 4) {
+                pInfo->mPixelXDim = offset;
+            } else if (type == 3) {
+                pInfo->mPixelXDim = read_u16(entry + 8, byteOrder);
+            }
+        }
+        return;
+
+    case 0xA003:
+        {
+            u32 offset = read_u32(entry + 8, byteOrder);
+            if (type == 4) {
+                pInfo->mPixelYDim = offset;
+            } else if (type == 3) {
+                pInfo->mPixelYDim = read_u16(entry + 8, byteOrder);
+            }
+        }
+        return;
+
+    default:
+        return;
     }
 }
 
 static void TMCJPEGDEC_IFD1_tag_parse(TMCCJPEGDecExifData* pInfo, u16 byteOrder, const u8* entry)
 {
     u16 tag;
-    u32 offset;
-    u32 raw32;
-    u16 raw16;
-    const u8* p;
 
     tag = read_u16(entry, byteOrder);
 
-    if (tag == 0x132)
+    switch (tag) {
+    case 0x0111:
+    case 0x012D:
+    case 0x0132:
+    case 0x0213:
+    case 0x8769:
+    case 0x9000:
+    case 0x9101:
         return;
 
-    if (tag > 0x132) {
-        if (tag == 0x8769)
-            return;
-        if (tag >= 0x8769) {
-            if (tag > 0x9101) {
-                if (tag >= 0xA004)
-                    return;
-                return;
-            }
-            if (tag == 0x9101 || tag == 0x9000)
-                return;
-            return;
-        }
-        offset = read_u32(entry + 8, byteOrder);
-        if (tag == 0x202) {
-            pInfo->mThumbnailLength = offset;
-            return;
-        }
-        if (tag > 0x202)
-            return;
-        if (tag == 0x201) {
-            pInfo->mThumbnailOffset = offset;
-            return;
-        }
+    case 0x0103:
+        pInfo->mCompressionIFD1 = read_u16(entry + 8, byteOrder);
         return;
-    }
 
-    if (tag >= 0x11A) {
-        offset = read_u32(entry + 8, byteOrder);
-        if (tag == 0x11A) {
-            p = (const u8*)(pInfo->mThumbData + offset);
-        if ((u32)p < pInfo->mThumbData)
-            return;
-        if ((u32)(p + 4) > pInfo->mDataEnd)
-            return;
-        raw32 = read_u32(p, byteOrder);
-        pInfo->mXResNumIFD1 = raw32;
-        p = (const u8*)(pInfo->mThumbData + offset + 4);
-        if ((u32)p < pInfo->mThumbData)
-            return;
-        if ((u32)(p + 4) > pInfo->mDataEnd)
-            return;
-        raw32 = read_u32(p, byteOrder);
-        pInfo->mXResDenIFD1 = raw32;
-        return;
-        }
-        if (tag > 0x11A) {
-            if (tag >= 0x128) {
-                if (tag == 0x128) {
-                    raw16 = read_u16(entry + 8, byteOrder);
-                    pInfo->mResUnitIFD1 = raw16;
-                    return;
-                }
+    case 0x011A:
+        {
+            u32 offset = read_u32(entry + 8, byteOrder);
+            const u8* p = pInfo->mThumbData + offset;
+            if (p < pInfo->mThumbData)
                 return;
-            }
-            p = (const u8*)(pInfo->mThumbData + offset);
-        if ((u32)p < pInfo->mThumbData)
-            return;
-        if ((u32)(p + 4) > pInfo->mDataEnd)
-            return;
-        raw32 = read_u32(p, byteOrder);
-        pInfo->mPlanarConfigIFD1 = raw32;
-        p = (const u8*)(pInfo->mThumbData + offset + 4);
-        if ((u32)p < pInfo->mThumbData)
-            return;
-        if ((u32)(p + 4) > pInfo->mDataEnd)
-            return;
-        raw32 = read_u32(p, byteOrder);
-        pInfo->mYResDenIFD1 = raw32;
-        return;
+            if (p + 4 > pInfo->mDataEnd)
+                return;
+            pInfo->mXResNumIFD1 = read_u32(p, byteOrder);
+            p = (const u8*)(pInfo->mThumbData + offset + 4);
+            if (p < pInfo->mThumbData)
+                return;
+            if (p + 4 > pInfo->mDataEnd)
+                return;
+            pInfo->mXResDenIFD1 = read_u32(p, byteOrder);
         }
-    }
+        return;
 
-    if (tag < 0x11A) {
-        if (tag >= 0x111) {
-            if (tag == 0x111)
+    case 0x011B:
+        {
+            u32 offset = read_u32(entry + 8, byteOrder);
+            const u8* p = (const u8*)(pInfo->mThumbData + offset);
+            if (p < pInfo->mThumbData)
                 return;
-            return;
+            if (p + 4 > pInfo->mDataEnd)
+                return;
+            pInfo->mPlanarConfigIFD1 = read_u32(p, byteOrder);
+            p = (const u8*)(pInfo->mThumbData + offset + 4);
+            if (p < pInfo->mThumbData)
+                return;
+            if (p + 4 > pInfo->mDataEnd)
+                return;
+            pInfo->mYResDenIFD1 = read_u32(p, byteOrder);
         }
-        if (tag == 0x103) {
-            raw16 = read_u16(entry + 8, byteOrder);
-            pInfo->mCompressionIFD1 = raw16;
-            return;
-        }
+        return;
+
+    case 0x0128:
+        pInfo->mResUnitIFD1 = read_u16(entry + 8, byteOrder);
+        return;
+
+    case 0x0201:
+        pInfo->mThumbnailOffset = read_u32(entry + 8, byteOrder);
+        return;
+
+    case 0x0202:
+        pInfo->mThumbnailLength = read_u32(entry + 8, byteOrder);
+        return;
+
+    default:
         return;
     }
 }
