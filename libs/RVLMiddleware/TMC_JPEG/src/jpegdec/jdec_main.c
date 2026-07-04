@@ -980,8 +980,10 @@ void TMCJPEGDEC_set_entropytbl(TMCJpegDecWork* work, s32 idx, u8 data)
 {
     if (idx == 1) goto idx1;
     if (idx >= 1) goto after;
-    if (idx >= 0) goto idx0;
-    goto after;
+    if (idx >= 0) {
+    } else {
+        goto after;
+    }
 
 idx0:
     work->mDCACPtrs[0] = &work->mZigzagData[8];
