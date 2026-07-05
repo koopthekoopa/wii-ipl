@@ -9,6 +9,32 @@ extern "C" {
 #endif
 
 typedef struct {
+    u16 mFrameWidth;      // 0x00
+    u16 mFrameHeight;     // 0x02
+    u32 mMCUCount;        // 0x04
+    u32 mMCURemCount;     // 0x08
+    u8 mComponentCount;   // 0x0C
+    u8 mMCUXCount;        // 0x0D
+    u8 mMCUXRem;          // 0x0E
+    u8 mMCUYRem;          // 0x0F
+    u16 mMCUYCount;       // 0x10
+    u16 mMCUXCount2;      // 0x12
+    u32 unk_0x14;         // 0x14
+    u8 unk_0x18;          // 0x18
+    u8 unk_0x19;          // 0x19
+    u8 mCompCount;        // 0x1A
+    u8 mScanCompCount;    // 0x1B
+    u8 mBlockCount[4];    // 0x1C
+    u8 mHSampFactor[4];   // 0x20
+    u8 mVSampFactor[4];   // 0x24
+    u8 mMaxHSamp;         // 0x28
+    u8 mMaxVSamp;         // 0x29
+    u16 mRestartInterval; // 0x2A
+    u8 mScanCount;        // 0x2C
+    u8 unk_0x2D[0x03];    // 0x2D
+} TMCJpegFrameInfo;
+
+typedef struct TMCJpegDecWork {
     u32 mBitBuf;        // 0x00
     s32 mBitCount;      // 0x04
     u8* mpBufStart;     // 0x08
@@ -106,7 +132,7 @@ s32 TMCJPEGDEC_get_wbyte(u16* dst, TMCJpegDecWork* work);
 s32 TMCJPEGDEC_get_sbyte(u8* dst, u32 count, TMCJpegDecWork* work);
 s32 TMCJPEGDEC_move_ptr(s32 offset, TMCJpegDecWork* work);
 s32 TMCJPEGDEC_load_buff(TMCJpegDecWork* work);
-u32 TMCJPEGDEC_get_position(TMCJpegDecWork* work);
+s32 TMCJPEGDEC_get_position(TMCJpegDecWork* work);
 s32 TMCJPEGDEC_chk_possible_size(TMCJpegDecWork* work);
 
 s32 TMCJPEGDEC_init_buff_thumbnail(TMCJpegDecWork* work, u8* dst, u8* src);

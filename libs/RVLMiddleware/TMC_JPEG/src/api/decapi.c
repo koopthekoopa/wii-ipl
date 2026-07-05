@@ -145,7 +145,7 @@ s32 TMCCJPEGDecodeRGB565(TMCCJPEGDecState* state, s32 initResult, void* texBuffe
     return state->mResult - (curY * maxX) - curX;
 
 error:
-    if (work->mRestartInterval != 0 && dec_result != -0xF0) {
+    if (work->mRestartInterval != 0 && dec_result != TMCC_ERROR_USER_CALLBACK) {
         state->mDecodeResult = dec_result;
         TMCJPEGDEC_err_restart(work);
     }

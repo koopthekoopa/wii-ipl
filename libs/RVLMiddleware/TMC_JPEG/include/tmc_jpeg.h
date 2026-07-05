@@ -4,11 +4,14 @@
 #include <revolution/types.h>
 
 #define TMCC_ERROR_OVERFLOW (-100)
+#define TMCC_ERROR_UNDERFLOW (-144)
 #define TMCC_ERROR_USER_CALLBACK (-240)
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+typedef struct TMCJpegDecWork TMCJpegDecWork;
 
 typedef struct {
     u8    unk_0x00[0x10];
@@ -19,7 +22,7 @@ typedef struct {
     void* mpContext;       // 0x20
     u8    mFlag1;          // 0x24
     u8    unk_0x25[0x03];
-    void* mpBuf1;          // 0x28
+    TMCJpegDecWork* mpBuf1;          // 0x28
     u8    mFlag2;          // 0x2C
     u8    unk_0x2D[0x03];
 } TMCCJPEGDecInitParam;
