@@ -1,18 +1,19 @@
+#include "string.h"
+
 #include <tmc_jpeg_internal.h>
 
 static s32 TMCJPEGDEC_vl_decode_rc(u32* huff_tbl, u8* huff_sym, TMCJpegDecWork* work);
 
 
 s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, TMCJpegDecWork* work) {
-    s32 one;
     const u8* zztbl;
+
     u16* ac_fast;
     s32 t;
     s32 idx;
     s32 blk_size;
     u32* ac_vl;
     u8* ac_sym;
-    u16* dcf_val_zz;
 
     s32 bit_pos;
     u32 bit_data;
@@ -21,28 +22,21 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
     s32 val;
     s32 extra;
     s32 r;
-    s32 zz;
 
-    u32 tmp2;
 
     {
         u16* dcf = work->mpDCFast;
-        bit_pos = work->mBitCount;
-        if (bit_pos <= 8) {
-            r = TMCJPEGDEC_load_buff(work);
-            if (r < 0) return r;
+        if (work->mBitCount <= 8) {
+            if (r = TMCJPEGDEC_load_buff(work), r < 0)
+                return r;
         }
 
         bit_pos = work->mBitCount;
-        bit_data = work->mBitBuf;
-        t = bit_pos - 8;
-        tmp = bit_data >> t;
-        tmp = (tmp & 0xFF) << 2;
+        tmp = (work->mBitBuf >> (bit_pos - 8) & 0xFF) << 2;
         val = dcf[tmp >> 1];
         if (val != 0) {
             tmp = *(u16*)((u8*)dcf + tmp + 2);
-            bit_pos -= val;
-            work->mBitCount = bit_pos;
+            work->mBitCount -= val;
             val = tmp;
         } else {
             val = TMCJPEGDEC_vl_decode_rc(work->mpDCHuffTbl, work->mpDCHuffSym, work);
@@ -51,23 +45,19 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
     }
 
     if (val != 0) {
-        bit_pos = work->mBitCount;
-        if (bit_pos <= val) {
-            r = TMCJPEGDEC_load_buff(work);
-            if (r < 0) return r;
+        if (work->mBitCount <= val) {
+            if (r = TMCJPEGDEC_load_buff(work), r < 0)
+                return r;
         }
-        tmp = 1;
         bit_pos = work->mBitCount;
-        tmp = tmp << val;
+        tmp = 1 << val;
         bit_data = work->mBitBuf;
         extra = tmp - 1;
         bit_pos -= val;
         work->mBitCount = bit_pos;
         extra = extra & (bit_data >> bit_pos);
-        if ((tmp >> 1) <= (u32)extra) {
-            extra = extra;
-        } else {
-            extra = extra - (tmp - 1);
+        if (tmp >> 1 > (u32)extra) {
+            extra -= (tmp - 1);
         }
         data[0] += extra;
     }
@@ -84,68 +74,51 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
 
     zztbl = TMCJPEGDEC_Zigzag_data;
     idx = 1;
-    one = 1;
-    if (idx < 64) do {
-        bit_pos = work->mBitCount;
-        if (bit_pos <= 8) {
-            r = TMCJPEGDEC_load_buff(work);
-            if (r < 0) return r;
+    do {
+        if (work->mBitCount <= 8) {
+            if (r = TMCJPEGDEC_load_buff(work), r < 0)
+                return r;
         }
 
-        bit_pos = work->mBitCount;
-        bit_data = work->mBitBuf;
-        t = bit_pos - 8;
-        tmp = bit_data >> t;
-        tmp = (tmp & 0xFF) << 2;
         {
-            u16* ac_entry = (u16*)((u8*)ac_fast + tmp);
+            u16* ac_entry = (u16*)((u8*)ac_fast + ((work->mBitBuf >> (work->mBitCount - 8) & 0xFF) << 2));
             val = *ac_entry;
             if (val != 0) {
-                bit_pos -= val;
+                tmp = val;
                 val = *(ac_entry + 1);
-                work->mBitCount = bit_pos;
+                work->mBitCount -= tmp;
             } else {
-                val = TMCJPEGDEC_vl_decode_rc(ac_vl, ac_sym, work);
-                if (val < 0) return val;
+                if (val = TMCJPEGDEC_vl_decode_rc(ac_vl, ac_sym, work), val < 0) return val;
             }
         }
 
         t = val & 0x0F;
         if (t != 0) {
             val = val >> 4;
-            idx = idx + val;
+            idx += val;
 
-            bit_pos = work->mBitCount;
-            if (bit_pos <= t) {
-                r = TMCJPEGDEC_load_buff(work);
-                if (r < 0) return r;
+            if (work->mBitCount <= t) {
+                if (r = TMCJPEGDEC_load_buff(work), r < 0) return r;
             }
 
             if (idx > blk_size) {
-                bit_pos = work->mBitCount;
-                bit_pos -= t;
-                work->mBitCount = bit_pos;
-                if (idx >= 64) return -100;
+                work->mBitCount -= t;
+                if (idx >= 64) return TMCC_ERROR_OVERFLOW;
                 idx++;
             } else {
                 bit_pos = work->mBitCount;
-                tmp = one << t;
+                tmp = 1 << t;
                 extra = tmp - 1;
                 bit_pos -= t;
                 work->mBitCount = bit_pos;
                 bit_data = work->mBitBuf;
                 extra = extra & (bit_data >> bit_pos);
-                if ((tmp >> 1) <= (u32)extra) {
-                    extra = extra;
-                } else {
-                    extra = extra - (tmp - 1);
+                if (tmp >> 1 > extra) {
+                    extra -= tmp - 1;
                 }
 
-                if (idx >= 64) return -100;
-
-                zz = zztbl[idx];
-                t = block[zz];
-                *(s32*)((u8*)state + zz * 4) = extra * t;
+                if (idx >= 64) return TMCC_ERROR_OVERFLOW;
+                *(s32*)((u8*)state + zztbl[idx] * 4) = extra *  block[zztbl[idx]];
                 idx++;
             }
         } else {
@@ -185,7 +158,7 @@ static s32 TMCJPEGDEC_vl_decode_rc(u32* huff_tbl, u8* huff_sym, TMCJpegDecWork* 
     do {
         i++;
         entry += 2;
-        if (i > 16) return -100;
+        if (i > 16) return TMCC_ERROR_OVERFLOW;
 
         bit_pos = work->mBitCount;
         code <<= 1;
@@ -203,7 +176,7 @@ entry_check:
             u16 th = *(u16*)&combined2;
             s32 tmp;
 
-            if ((u32)code > (u32)th) continue;
+            if (code > (u32)th) continue;
 
             tmp = code - local.t;
             code = tmp + (u32)local.o;
