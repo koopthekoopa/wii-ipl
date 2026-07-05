@@ -106,7 +106,7 @@ typedef struct {
 } TMCCJPEGDecState;
 
 s32 TMCCJPEGDecInit(TMCCJPEGDecState* state, TMCCJPEGDecInitParam* param);
-s32 TMCCJPEGDecSetResolution(TMCCJPEGDecState* state, u8 scale);
+s32 TMCCJPEGDecSetResolution(TMCCJPEGDecState* state, u32 scale);
 s32 TMCCJPEGDecodeRGB565(TMCCJPEGDecState* state, s32 initResult, void* texBuffer);
 s32 TMCCJPEGDecGetOffsetEXIF(u32* pOffset, u32* pSize, TMCCJPEGDecInitParam* pParam);
 s32 TMCCJPEGDecGetInfoEXIF(TMCCJPEGDecExifInfo* pInfo, TMCCJPEGDecInitParam* pParam);

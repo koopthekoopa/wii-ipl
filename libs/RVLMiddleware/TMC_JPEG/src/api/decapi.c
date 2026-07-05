@@ -90,7 +90,7 @@ error_exit:
 }
 
 s32 TMCCJPEGDecodeRGB565(TMCCJPEGDecState* state, s32 initResult, void* texBuffer) {
-    s32 offsetY;
+    u32 offsetY;
     TMCJpegDecWork* work;
     u16 curX;
     u16 maxX;
@@ -137,13 +137,10 @@ s32 TMCCJPEGDecodeRGB565(TMCCJPEGDecState* state, s32 initResult, void* texBuffe
         }
     }
 
-    if (maxY == curY) {
-        if (curX == 0) {
-            s32 result;
-            result = TMCJPEGDEC_imageend(work);
-            if (result < 0) {
-                return result;
-            }
+    if (maxY == curY && curX == 0) {
+        s32 result = TMCJPEGDEC_imageend(work);
+        if (result < 0) {
+            return result;
         }
     }
 
@@ -153,29 +150,21 @@ s32 TMCCJPEGDecodeRGB565(TMCCJPEGDecState* state, s32 initResult, void* texBuffe
     return state->mResult - (curY * maxX) - curX;
 
 error:
-    if (work->mRestartInterval == 0) {
-        goto epilogue;
+    if (work->mRestartInterval != 0 && dec_result != -0xF0) {
+        state->mDecodeResult = dec_result;
+        TMCJPEGDEC_err_restart(work);
     }
-    if (dec_result == -0xF0) {
-        goto epilogue;
-    }
-    state->mDecodeResult = dec_result;
-    TMCJPEGDEC_err_restart(work);
-epilogue:
-    ;
 }
 
-s32 TMCCJPEGDecSetResolution(TMCCJPEGDecState* state, u8 scale) {
+s32 TMCCJPEGDecSetResolution(TMCCJPEGDecState* state, u32 scale) {
     TMCJpegDecWork* work;
     s32 result;
-    u32 s;
+    u8 s;
 
-    s = scale & 0xFF;
+    s = (u8)scale;
     work = (TMCJpegDecWork*)state->mpWorkBuf;
     state->mFlag20 = scale;
-    if (s == 1 || s == 2 || s == 4 || s == 8) {
-        /* valid */
-    } else {
+    if (s != 1 && s != 2 && s != 4 && s != 8) {
         return -1;
     }
 
