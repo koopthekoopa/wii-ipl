@@ -15,6 +15,8 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
     s32 r;
     s32 t;
     s32 zz;
+
+    u32 tmp2;
     const u8* zztbl;
 
     {
@@ -47,11 +49,10 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
         if (bit_pos <= val) {
             r = TMCJPEGDEC_load_buff(work);
             if (r < 0) return r;
-            bit_pos = work->mBitCount;
-            bit_data = work->mBitBuf;
         }
+        tmp = 1;
         bit_pos = work->mBitCount;
-        tmp = 1 << val;
+        tmp = tmp << val;
         bit_data = work->mBitBuf;
         extra = tmp - 1;
         bit_pos -= val;
@@ -65,7 +66,7 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
         data[0] += extra;
     }
 
-    *(s32*)((u8*)state + 0) = data[0] * block[0];
+    *(s32*)state = data[0] * block[0];
 
     ac_fast = work->mpACFast;
     ac_vl = work->mpACHuffTbl;
@@ -193,10 +194,12 @@ entry_check:
             u32 combined = *(u32*)&local;
             u32 combined2 = combined;
             u16 th = *(u16*)&combined2;
+            s32 tmp;
 
             if ((u32)code > (u32)th) continue;
 
-            code = code - (u32)local.t + (u32)local.o;
+            tmp = code - local.t;
+            code = tmp + (u32)local.o;
         }
         return huff_sym[code & 0xFF];
     } while (1);

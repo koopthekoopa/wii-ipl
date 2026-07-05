@@ -1,7 +1,6 @@
 #include <tmc_jpeg_internal.h>
 
 s32 TMCJPEGDEC_init_buff_thumbnail(TMCJpegDecWork* work, u8* dst, u8* src) {
-    u32 val;
     u32* src32;
     u32* dst32;
     u32 tmp;
@@ -15,20 +14,17 @@ s32 TMCJPEGDEC_init_buff_thumbnail(TMCJpegDecWork* work, u8* dst, u8* src) {
         return -1;
 
     tmp = src32[0];
-    dst32[6] = tmp;
+    dst32[6] = src32[0];
     dst32[7] = src32[1];
     dst32[8] = src32[2];
     dst32[9] = src32[3];
     dst32[10] = src32[4];
+
     dst32[2] = tmp;
-
-    val = work->mThumbHuffSize[2] + work->mThumbHuffSize[0];
-    dst32[3] = val;
-    val += work->mThumbHuffSize[1];
+    dst32[3] = work->mThumbHuffSize[2] + work->mThumbHuffSize[0];
+    dst32[4] = work->mThumbHuffSize[1] + dst32[3];
+    dst32[5] = dst32[4] - 0x22;
     dst32[8] = 0;
-    dst32[4] = val;
-    dst32[5] = val - 0x22;
-
     return 0;
 }
 

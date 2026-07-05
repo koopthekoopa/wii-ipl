@@ -474,8 +474,9 @@ static void TMCJPEGDEC_converterYUV420toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     s32 bw;
     u8* out;
     s32 ss;
-    s32 step, step_v;
-    s32 x_end, y_end;
+    s32 step;
+    s32 x_end;
+    s32 y_end;
     u8* cb_row;
     u8* y_row;
     u8* cr_row;
@@ -484,24 +485,20 @@ static void TMCJPEGDEC_converterYUV420toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     cb_row = work->mConvBuf + 4;
     y_row = work->mConvBuf + 0x104;
     cr_row = work->mConvBuf + 0x144;
-    bw = st->mConvWidth;
-    out = (u8*)st->mpTexBuffer;
     ss = st->mScaleFactor;
+    bw = st->mConvWidth;
     step = 0x10 / ss;
-    step_v = (step + 1) >> 1;
+    out = (u8*)st->mpTexBuffer;
     x_end = x + step;
     y_end = y + step;
 
     {
         s32 cb_step = (0x10 - step) >> 1;
         s32 stride = (bw >> 1) & 0x7FFFFFFE;
-        s32 count = step >> 1;
-        s32 ra;
-        s32 ga;
-        s32 ba;
-        s32 rr;
-        s32 gg;
-        s32 bb;
+        s32 count = (x_end - x + 1) >> 1;
+        s32 tmp = (step + 1) >> 1;
+        s32 ra, ga, ba;
+        s32 rr, gg, bb;
         s32 n;
         s32 x_pos;
         s32 row_base;
@@ -510,8 +507,6 @@ static void TMCJPEGDEC_converterYUV420toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
         s32 xo;
         s32 xg;
         s32 off;
-        s32 ba0;
-
         for (; y < y_end; y++) {
             row_base = (y >> 2) * stride;
             ob = out + ((y & 3) << 3);
@@ -535,17 +530,16 @@ static void TMCJPEGDEC_converterYUV420toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
                         rr = cb_row[0] + ra;
                         gg = cb_row[0] + ga;
                         bb = cb_row[0] + ba;
-                        if ((rr | gg | bb) >> 8) {
-                            if (rr > 0xFF) rr = 0xFF; else { s32 t = rr >> 31; rr &= ~t; }
-                            if (gg > 0xFF) gg = 0xFF; else { s32 t = gg >> 31; gg &= ~t; }
+                        if ((bb | gg | rr) >> 8) {
                             if (bb > 0xFF) bb = 0xFF; else { s32 t = bb >> 31; bb &= ~t; }
+                            if (gg > 0xFF) gg = 0xFF; else { s32 t = gg >> 31; gg &= ~t; }
+                            if (rr > 0xFF) rr = 0xFF; else { s32 t = rr >> 31; rr &= ~t; }
                         }
                         xo = x_pos & 3;
                         xg = (x_pos >> 2) << 1;
                         off = (xg + row_base) << 4;
-                        ba0 = off + xo;
-                        ((u16*)(ob + (ba0 << 1)))[0] = (u16)((u8)bb - 0x100);
-                        ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((gg & 0xFF) * 256 + (rr & 0xFF));
+                        ((u16*)(ob + ((xo + off) << 1)))[0] = (u16)((u8)rr - 0x100);
+                        ((u16*)(ob + ((xo + off + 16) << 1)))[0] = (u16)((gg & 0xFF) * 256 + (bb & 0xFF));
                         x_pos++;
                     }
 
@@ -553,18 +547,17 @@ static void TMCJPEGDEC_converterYUV420toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
                         rr = cb_row[1] + ra;
                         gg = cb_row[1] + ga;
                         bb = cb_row[1] + ba;
-                        if ((rr | gg | bb) >> 8) {
-                            if (rr > 0xFF) rr = 0xFF; else { s32 t = rr >> 31; rr &= ~t; }
-                            if (gg > 0xFF) gg = 0xFF; else { s32 t = gg >> 31; gg &= ~t; }
+                        if ((bb | gg | rr) >> 8) {
                             if (bb > 0xFF) bb = 0xFF; else { s32 t = bb >> 31; bb &= ~t; }
+                            if (gg > 0xFF) gg = 0xFF; else { s32 t = gg >> 31; gg &= ~t; }
+                            if (rr > 0xFF) rr = 0xFF; else { s32 t = rr >> 31; rr &= ~t; }
                         }
-                        xo = x_pos & 3;
-                        xg = (x_pos >> 2) << 1;
+                        xo = (x_pos + 1) & 3;
+                        xg = ((x_pos + 1) >> 2) << 1;
                         off = (xg + row_base) << 4;
-                        ba0 = off + xo;
-                        ((u16*)(ob + (ba0 << 1)))[0] = (u16)((u8)bb - 0x100);
-                        ((u16*)(ob + ((ba0 + 1) << 1)))[0] = (u16)((gg & 0xFF) * 256 + (rr & 0xFF));
-                        x_pos++;
+                        ((u16*)(ob + ((xo + off) << 1)))[0] = (u16)((u8)rr - 0x100);
+                        ((u16*)(ob + ((xo + off + 16) << 1)))[0] = (u16)((gg & 0xFF) * 256 + (bb & 0xFF));
+                        x_pos += 2;
                     }
 
                     cb_row += 2;
@@ -577,8 +570,8 @@ static void TMCJPEGDEC_converterYUV420toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
                 y_row += cb_step;
                 cr_row += cb_step;
             } else {
-                y_row -= ((step + 1) >> 1);
-                cr_row -= ((step + 1) >> 1);
+                y_row -= tmp;
+                cr_row -= tmp;
             }
         }
     }
