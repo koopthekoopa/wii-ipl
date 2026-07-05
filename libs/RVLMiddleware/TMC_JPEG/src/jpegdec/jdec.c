@@ -66,7 +66,7 @@ s32 TMCJPEGDEC_Setsize(TMCJpegDecWork* work) {
 
     state->mStepX = (state->mScaleFactor + work->mMCUXCount - 1) / state->mScaleFactor;
     state->mStepY = (state->mScaleFactor + work->mMCUXRem - 1) / state->mScaleFactor;
-    state->mJpegWidth = (state->mScaleFactor + work->mFrameWidth - 1) / state->mScaleFactor;
+    state->mJpegWidth = ((s32)(work->mFrameWidth + state->mScaleFactor) - 1) / state->mScaleFactor;
     state->mJpegHeight = (state->mScaleFactor + work->mFrameHeight - 1) / state->mScaleFactor;
     state->mStepXExt = (state->mScaleFactor + work->unk_0x1808 - 1) / state->mScaleFactor;
     state->mStepYExt = (state->mScaleFactor + work->unk_0x1809 - 1) / state->mScaleFactor;

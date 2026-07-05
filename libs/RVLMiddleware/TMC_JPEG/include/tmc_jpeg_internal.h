@@ -97,7 +97,7 @@ typedef struct {
     u16 mPitch;         // 0x19DE
     u8 mConverterFlags; // 0x19E0
     u8 unk_0x19E1[0x03];
-    void* mpState;      // 0x19E4
+    TMCCJPEGDecState* mpState;      // 0x19E4
 } TMCJpegDecWork;
 
 s32 TMCJPEGDEC_init_ptr_buff(TMCJpegDecWork* work, void* param);

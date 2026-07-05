@@ -1204,7 +1204,7 @@ config.libs = [
 
             Object(Matching,   "api/decapi.c"),
 
-            Object(Equivalent,  "jpegdec/jdec.c"),
+            Object(Matching,    "jpegdec/jdec.c"),
             Object(NonMatching, "jpegdec/jdec_main.c"),
             Object(Matching,    "jpegdec/jpformat.c"),
 
