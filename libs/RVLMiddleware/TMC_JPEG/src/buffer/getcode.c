@@ -28,10 +28,10 @@ s32 TMCJPEGDEC_init_buff_thumbnail(TMCJpegDecWork* work, u8* dst, u8* src) {
     return 0;
 }
 
-void TMCJPEGDEC_init_buff(TMCJpegDecWork* work, s32 mode) {
+s32 TMCJPEGDEC_init_buff(TMCJpegDecWork* work) {
     work->mBitBuf = 0;
     work->mBitCount = 0;
-    TMCJPEGDEC_load_buff(work);
+    return TMCJPEGDEC_load_buff(work);
 }
 
 s32 TMCJPEGDEC_rewind_ptr(TMCJpegDecWork* work) {

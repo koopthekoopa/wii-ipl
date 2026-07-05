@@ -110,7 +110,7 @@ u32 TMCJPEGDEC_get_position(TMCJpegDecWork* work);
 s32 TMCJPEGDEC_chk_possible_size(TMCJpegDecWork* work);
 
 s32 TMCJPEGDEC_init_buff_thumbnail(TMCJpegDecWork* work, u8* dst, u8* src);
-void TMCJPEGDEC_init_buff(TMCJpegDecWork* work, s32 mode);
+s32 TMCJPEGDEC_init_buff(TMCJpegDecWork* work);
 s32 TMCJPEGDEC_rewind_ptr(TMCJpegDecWork* work);
 
 // Huffman table set (three pointers stored by set_HuffmanTable)
@@ -136,7 +136,7 @@ s32 TMCJPEGDEC_imagestart(TMCJpegDecWork* work);
 s32 TMCJPEGDEC_imageend(TMCJpegDecWork* work);
 s32 TMCJPEGDEC_scanstart(TMCJpegDecWork* work);
 s32 TMCJPEGDEC_scan_varinit(TMCJpegDecWork* work);
-void TMCJPEGDEC_restart_interval(TMCJpegDecWork* work);
+s32 TMCJPEGDEC_restart_interval(TMCJpegDecWork* work, u32 maxMCU, u32 mcuCount);
 s32 TMCJPEGDEC_err_restart(TMCJpegDecWork* work);
 void TMCJPEGDEC_set_entropytbl(TMCJpegDecWork* work, s32 idx, u8 data);
 

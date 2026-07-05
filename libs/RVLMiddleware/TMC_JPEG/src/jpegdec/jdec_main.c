@@ -1,8 +1,4 @@
-#define TMCJPEGDEC_restart_interval __hidden_restart_interval
-#define TMCJPEGDEC_init_buff __hidden_init_buff
 #include <tmc_jpeg_internal.h>
-#undef TMCJPEGDEC_restart_interval
-#undef TMCJPEGDEC_init_buff
 
 extern void* memset(void* dest, s32 val, u32 count);
 
@@ -30,8 +26,6 @@ static s32 TMCJPEGDEC_parse_dht(s32 first, TMCJpegDecWork* work);
 static s32 TMCJPEGDEC_parse_dqt(TMCJpegDecWork* work);
 static s32 TMCJPEGDEC_parse_sof(TMCJpegDecWork* work);
 static s32 TMCJPEGDEC_parse_sos(TMCJpegDecWork* work);
-void TMCJPEGDEC_init_buff(TMCJpegDecWork* work, s32 mode);
-s32 TMCJPEGDEC_restart_interval(TMCJpegDecWork* work, u32 maxMCU, u32 mcuCount);
 
 s32 TMCJPEGDEC_decompmcu(u32 maxMCU, u32 mcuCount, TMCJpegDecWork* work, void* buf)
 {
@@ -229,7 +223,7 @@ s32 TMCJPEGDEC_scanstart(TMCJpegDecWork* work)
     work->mDCPredict[2] = 0;
     work->mDCPredict[3] = 0;
     work->mRestartCnt = 0;
-    r = ((s32 (*)(TMCJpegDecWork*))TMCJPEGDEC_init_buff)(work);
+    r = TMCJPEGDEC_init_buff(work);
     if (r < 0)
         return r;
 
@@ -391,7 +385,7 @@ s32 TMCJPEGDEC_restart_interval(TMCJpegDecWork* work, u32 maxMCU, u32 mcuCount)
                     }
                 }
 
-                result = ((s32 (*)(TMCJpegDecWork*))TMCJPEGDEC_init_buff)(work);
+                result = TMCJPEGDEC_init_buff(work);
             }
         }
         return result;
@@ -987,7 +981,7 @@ _process: {
                 work->mMcuPos = (rem << 16) | (u16)div;
             }
 
-            r = ((s32 (*)(TMCJpegDecWork*))TMCJPEGDEC_init_buff)(work);
+            r = TMCJPEGDEC_init_buff(work);
             if (r < 0)
                 return r;
 
