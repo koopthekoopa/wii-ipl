@@ -1,22 +1,8 @@
 #include <tmc_jpeg_internal.h>
 
-extern s32 TMCJPEGDEC_scanstart(TMCJpegDecWork* work);
-extern s32 TMCJPEGDEC_imagestart(TMCJpegDecWork* work);
-
-extern void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* buf, s32 pitch, s32 count);
-extern void TMCJPEGDEC_IdctBlock_Col(s32* block, u8* buf, s32 pitch, s32 count);
-extern void TMCJPEGDEC_IdctBlock4x4(s16* block, s16* buf, s32 pitch);
-extern void TMCJPEGDEC_IdctBlock2x2(s16* block, s16* buf, s32 pitch);
-extern void TMCJPEGDEC_IdctBlock1x1(s16* block, s16* buf, s32 pitch);
-extern void TMCJPEGDEC_IdctBlock4x4_Col(s16* block, s16* buf, s32 pitch);
-extern void TMCJPEGDEC_IdctBlock2x2_Col(s16* block, s16* buf, s32 pitch);
-extern void TMCJPEGDEC_IdctBlock1x1_Col(s16* block, s16* buf, s32 pitch);
-extern s32 TMCJPEGDEC_decode_iquant(TMCCJPEGDecState* state, void* block, u8* data, s32 offset, s32 val);
-extern s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, TMCJpegDecWork* work);
-
 s32 TMCJPEGDEC_Decompscan(TMCJpegDecWork* work) {
     s32 r = TMCJPEGDEC_scanstart(work);
-    return (r < 0) ? r : ((work->mScanCount == 1) ? 0 : r);
+    return r < 0 ? r : (work->mScanCount == 1) ? 0 : r;
 }
 
 s32 TMCJPEGDEC_Setsize(TMCJpegDecWork* work) {
@@ -56,7 +42,7 @@ s32 TMCJPEGDEC_Setsize(TMCJpegDecWork* work) {
         work->mIdctMode = 1;
         break;
     default:
-        return -0x70;
+        return TMCC_ERROR_FORMAT;
     }
 
     state->mComponentState = work->mComponentCount;
@@ -98,7 +84,7 @@ s32 TMCJPEGDEC_Setsize(TMCJpegDecWork* work) {
     case 5:
         break;
     default:
-        return -0x70;
+        return TMCC_ERROR_FORMAT;
     }
 
     return 0;
@@ -106,5 +92,12 @@ s32 TMCJPEGDEC_Setsize(TMCJpegDecWork* work) {
 
 s32 TMCJPEGDEC_HeaderAnalyze(TMCJpegDecWork* work) {
     s32 r = TMCJPEGDEC_imagestart(work);
-    return (r < 0) ? r : ((work->mFrameWidth == 0) ? -0x50 : (work->mMCUCount = work->mMCUXCount * work->mMCUYCount, work->mMCURemCount = work->mMCUXRem * work->mMCUXCount2, r));
+    if (r < 0)
+        return r;
+    if (work->mFrameWidth == 0)
+        return TMCC_ERROR_HEADER;
+
+    work->mMCUCount = work->mMCUXCount * work->mMCUYCount;
+    work->mMCURemCount = work->mMCUXRem * work->mMCUXCount2;
+    return r;
 }

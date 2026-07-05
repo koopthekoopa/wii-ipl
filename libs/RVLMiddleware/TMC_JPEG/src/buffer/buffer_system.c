@@ -24,7 +24,7 @@ s32 TMCJPEGDEC_init_ptr_buff(TMCJpegDecWork* work, void* param) {
     work->mpCbCtx = (void*)((u32*)param)[4];
     if (work->mBufLen - 0x20 < readSize) readSize = work->mBufLen - 0x20;
 
-    if (((s32 (*)(void*, u8*, u32))work->mpCallback)(work->mpCbCtx, dest, readSize) < 0)
+    if (work->mpCallback(work->mpCbCtx, dest, readSize) < 0)
         return TMCC_ERROR_USER_CALLBACK;
 
     newEnd = dest + readSize;
@@ -304,7 +304,7 @@ static s32 TMCJPEG_814EAF50(TMCJpegDecWork* work) {
     readSize = work->mRemaining;
     if (work->mBufLen - 0x20 < readSize) readSize = work->mBufLen - 0x20;
 
-    if (((s32 (*)(void*, u8*, u32))work->mpCallback)(work->mpCbCtx, dest, readSize) != 0)
+    if (work->mpCallback(work->mpCbCtx, dest, readSize) != 0)
         return TMCC_ERROR_USER_CALLBACK;
 
     {
@@ -339,7 +339,7 @@ static s32 TMCJPEG_814EB108(TMCJpegDecWork* work) {
     if (work->mBufLen - 0x20 < readSize)
         readSize = work->mBufLen - 0x20;
 
-    if (((s32 (*)(void*, u8*, u32))work->mpCallback)(work->mpCbCtx, dest, readSize) != 0)
+    if (work->mpCallback(work->mpCbCtx, dest, readSize) != 0)
         return TMCC_ERROR_USER_CALLBACK;
 
     {

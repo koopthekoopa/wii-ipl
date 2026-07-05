@@ -38,7 +38,9 @@ s32 TMCCJPEGDecInit(TMCCJPEGDecState* state, TMCCJPEGDecInitParam* param) {
     }
 
     result = TMCJPEGDEC_imagestart(work);
-    result = (result < 0) ? result : ((work->mFrameWidth == 0) ? -0x50 : ((work->mMCUCount = work->mMCUXCount * work->mMCUYCount, work->mMCURemCount = work->mMCUXRem * work->mMCUXCount2), result));
+    result = (result < 0) ? result : ((work->mFrameWidth == 0) ? TMCC_ERROR_HEADER :
+        ((work->mMCUCount = work->mMCUXCount * work->mMCUYCount,
+            work->mMCURemCount = work->mMCUXRem * work->mMCUXCount2), result));
     if (result < 0) {
         goto error;
     }
@@ -157,7 +159,7 @@ s32 TMCCJPEGDecSetResolution(TMCCJPEGDecState* state, u32 scale) {
     u8 s;
 
     s = (u8)scale;
-    work = (TMCJpegDecWork*)state->mpWorkBuf;
+    work = state->mpWorkBuf;
     state->mScaleFactor = scale;
     if (s != 1 && s != 2 && s != 4 && s != 8) {
         return -1;

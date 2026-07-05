@@ -3,7 +3,9 @@
 
 #include <revolution/types.h>
 
+#define TMCC_ERROR_HEADER (-80)
 #define TMCC_ERROR_OVERFLOW (-100)
+#define TMCC_ERROR_FORMAT (-112)
 #define TMCC_ERROR_UNDERFLOW (-144)
 #define TMCC_ERROR_USER_CALLBACK (-240)
 
@@ -13,68 +15,70 @@ extern "C" {
 
 typedef struct TMCJpegDecWork TMCJpegDecWork;
 
+typedef s32 (TMCReadCallback)(void*, u8*, u32);
+
 typedef struct {
     u8    unk_0x00[0x10];
-    void* mpBuf2;          // 0x10
-    u32   mBuf2Size;       // 0x14
-    u32   mDataSize;       // 0x18
-    void* mpCallback;      // 0x1C
-    void* mpContext;       // 0x20
-    u8    mFlag1;          // 0x24
+    void* mpBuf2;                // 0x10
+    u32   mBuf2Size;             // 0x14
+    u32   mDataSize;             // 0x18
+    TMCReadCallback* mpCallback; // 0x1C
+    void* mpContext;             // 0x20
+    u8    mFlag1;                // 0x24
     u8    unk_0x25[0x03];
-    TMCJpegDecWork* mpBuf1;          // 0x28
-    u8    mFlag2;          // 0x2C
+    TMCJpegDecWork* mpBuf1;      // 0x28
+    u8    mFlag2;                // 0x2C
     u8    unk_0x2D[0x03];
 } TMCCJPEGDecInitParam;
 
 typedef struct {
-    char* mImageName;       // 0x00
-    char* mMake;            // 0x04
-    char* mModel;           // 0x08
-    u16   mOrientation;     // 0x0C
-    u32   mXResNum;         // 0x10
-    u32   mXResDen;         // 0x14
-    u32   mYResNum;         // 0x18
-    u32   mYResDen;         // 0x1C
-    u16   mResUnit;         // 0x20
+    char* mImageName;            // 0x00
+    char* mMake;                 // 0x04
+    char* mModel;                // 0x08
+    u16   mOrientation;          // 0x0C
+    u32   mXResNum;              // 0x10
+    u32   mXResDen;              // 0x14
+    u32   mYResNum;              // 0x18
+    u32   mYResDen;              // 0x1C
+    u16   mResUnit;              // 0x20
     u16   mTransferFunc[3][256]; // 0x22
-    s8    mDateTime[20];    // 0x622
-    u16   mYCbCrPos;        // 0x636
-    u32   mNextIfdOffset;   // 0x638
-    s8    mExifVer[4];      // 0x63C
-    u8    mFlashVer[4];     // 0x640
-    s8    mFlashPixVer[4];  // 0x644
-    u16   mColorSpace;      // 0x648
+    s8    mDateTime[20];         // 0x622
+    u16   mYCbCrPos;             // 0x636
+    u32   mNextIfdOffset;        // 0x638
+    s8    mExifVer[4];           // 0x63C
+    u8    mFlashVer[4];          // 0x640
+    s8    mFlashPixVer[4];       // 0x644
+    u16   mColorSpace;           // 0x648
     u8    unk_0x64A[0x02];
-    u32   mPixelXDim;       // 0x64C
-    u32   mPixelYDim;       // 0x650
-    u16   mCompressionIFD1;  // 0x654
+    u32   mPixelXDim;            // 0x64C
+    u32   mPixelYDim;            // 0x650
+    u16   mCompressionIFD1;      // 0x654
     u8    unk_0x656[0x02];
-    u32   mXResNumIFD1;     // 0x658
-    u32   mXResDenIFD1;     // 0x65C
-    u32   mPlanarConfigIFD1; // 0x660
-    u32   mYResDenIFD1;     // 0x664
-    u16   mResUnitIFD1;     // 0x668
+    u32   mXResNumIFD1;          // 0x658
+    u32   mXResDenIFD1;          // 0x65C
+    u32   mPlanarConfigIFD1;     // 0x660
+    u32   mYResDenIFD1;          // 0x664
+    u16   mResUnitIFD1;          // 0x668
     u8    unk_0x66A[0x02];
-    u32   mThumbnailOffset; // 0x66C
-    u32   mThumbnailLength; // 0x670
-    u8*   mThumbData;       // 0x674
-    u8*   mDataEnd;         // 0x678
+    u32   mThumbnailOffset;      // 0x66C
+    u32   mThumbnailLength;      // 0x670
+    u8*   mThumbData;            // 0x674
+    u8*   mDataEnd;              // 0x678
 } TMCCJPEGDecExifData;
 
 typedef struct {
     u8    unk_0x00[0x04];
-    s32   mPosition;       // 0x04
+    s32   mPosition;               // 0x04
     u8    unk_0x08[0x04];
-    u32   mState;          // 0x0C
+    u32   mState;                  // 0x0C
     u8    unk_0x10[0x10];
-    u8    mExifFlags;      // 0x20
-    u8    mThumbFlag;      // 0x21
+    u8    mExifFlags;              // 0x20
+    u8    mThumbFlag;              // 0x21
     u8    unk_0x22[0x2A];
     TMCCJPEGDecExifData mExifData; // 0x4C
-    void* mpWorkBuf;       // 0x6C8
+    TMCJpegDecWork* mpWorkBuf;     // 0x6C8
     u8    unk_0x6CC[0x04];
-    u8    mConverterType;  // 0x6D0
+    u8    mConverterType;          // 0x6D0
     u8    unk_0x6D1[0x03];
 } TMCCJPEGDecExifInfo;
 
@@ -105,7 +109,7 @@ typedef struct {
     u8    unk_0x34[0x14];  // 0x34
     void* mpTexBuffer;     // 0x48
     u8    unk_0x4C[0x67C];
-    void* mpWorkBuf;       // 0x6C8
+    TMCJpegDecWork* mpWorkBuf; // 0x6C8
     s32   mDecodeResult;   // 0x6CC
     u8    mConverterType;  // 0x6D0
     u8    unk_0x6D1[0x03];

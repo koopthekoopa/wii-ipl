@@ -44,7 +44,7 @@ typedef struct TMCJpegDecWork {
     u8* mpBufOrg;       // 0x18
     u32 mBufLen;        // 0x1C
     s32 mRemaining;     // 0x20
-    void* mpCallback;   // 0x24
+    TMCReadCallback* mpCallback; // 0x24
     void* mpCbCtx;      // 0x28
     u8 mCompMap[4];     // 0x2C
     u32 mDCPredict[4];  // 0x30

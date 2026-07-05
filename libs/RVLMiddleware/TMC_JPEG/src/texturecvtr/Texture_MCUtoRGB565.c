@@ -102,7 +102,7 @@ s32 TMCJPEGDEC_set_converterRGB565(TMCJpegDecWork* work) {
         break;
     }
     default:
-        return -0x70;
+        return TMCC_ERROR_FORMAT;
     }
 
     {
