@@ -130,70 +130,68 @@ void TMCJPEGDEC_set_HuffmanTable(TMCHuffTblSet* tbl, s32 tblType, s32 tblID,
                                  TMCJpegDecWork* work)
 {
     void* hufftable;
-    register void* maxcode;
+    void* maxcode;
     void* valptr;
 
-    if (tblType != 0) goto ac_dispatch;
+    if (tblType == 0)
+    {
+        switch (tblID)
+        {
+        case 0:
+            hufftable = &work->mZigzagData[8];
+            maxcode = work->mMaxCode_DC0;
+            tbl->hufftable = hufftable;
+            tbl->maxcode = maxcode;
+            tbl->valptr = work->mValPtr_DC0;
+            work->mHuffTblInitFlag[0] = 1;
+            memset(hufftable, 0, 0x400);
+            memset(work->mMaxCode_DC0, 0, 0x10);
+            memset(work->mValPtr_DC0, 0, 0x44);
+            break;
 
-    if (tblID == 1) goto dc1;
-    if (tblID >= 1) return;
-    if (tblID >= 0) goto dc0;
-    return;
+        case 1:
+            hufftable = work->mHuffDecTbl_DC1;
+            maxcode = work->mMaxCode_DC1;
+            valptr = work->mValPtr_DC1;
+            tbl->hufftable = hufftable;
+            tbl->maxcode = maxcode;
+            tbl->valptr = valptr;
+            work->mHuffTblInitFlag[1] = 1;
+            memset(hufftable, 0, 0x400);
+            memset(work->mMaxCode_DC1, 0, 0x10);
+            memset(work->mValPtr_DC1, 0, 0x44);
+            break;
+        }
+    }
+    else
+    {
+        switch (tblID)
+        {
+        case 0:
+            hufftable = work->mHuffDecTbl_AC0;
+            maxcode = work->mMaxCode_AC0;
+            valptr = work->mValPtr_AC0;
+            tbl->hufftable = hufftable;
+            tbl->maxcode = maxcode;
+            tbl->valptr = valptr;
+            work->mHuffTblInitFlag[2] = 1;
+            memset(hufftable, 0, 0x400);
+            memset(work->mMaxCode_AC0, 0, 0x100);
+            memset(work->mValPtr_AC0, 0, 0x44);
+            break;
 
-dc0:
-    hufftable = &work->mZigzagData[8];
-    maxcode = work->mMaxCode_DC0;
-    tbl->hufftable = hufftable;
-    tbl->maxcode = maxcode;
-    tbl->valptr = work->mValPtr_DC0;
-    work->mHuffTblInitFlag[0] = 1;
-    memset(hufftable, 0, 0x400);
-    memset(work->mMaxCode_DC0, 0, 0x10);
-    memset(work->mValPtr_DC0, 0, 0x44);
-    return;
-
-dc1:
-    hufftable = work->mHuffDecTbl_DC1;
-    maxcode = work->mMaxCode_DC1;
-    valptr = work->mValPtr_DC1;
-    tbl->hufftable = hufftable;
-    tbl->maxcode = maxcode;
-    tbl->valptr = valptr;
-    work->mHuffTblInitFlag[1] = 1;
-    memset(hufftable, 0, 0x400);
-    memset(work->mMaxCode_DC1, 0, 0x10);
-    memset(work->mValPtr_DC1, 0, 0x44);
-    return;
-
-ac_dispatch:
-    if (tblID == 1) goto ac1;
-    if (tblID >= 1) return;
-    if (tblID >= 0) goto ac0;
-    return;
-
-ac0:
-    hufftable = work->mHuffDecTbl_AC0;
-    maxcode = work->mMaxCode_AC0;
-    valptr = work->mValPtr_AC0;
-    tbl->hufftable = hufftable;
-    tbl->maxcode = maxcode;
-    tbl->valptr = valptr;
-    work->mHuffTblInitFlag[2] = 1;
-    memset(hufftable, 0, 0x400);
-    memset(work->mMaxCode_AC0, 0, 0x100);
-    memset(work->mValPtr_AC0, 0, 0x44);
-    return;
-
-ac1:
-    hufftable = work->mHuffDecTbl_AC1;
-    maxcode = work->mMaxCode_AC1;
-    valptr = work->mValPtr_AC1;
-    tbl->hufftable = hufftable;
-    tbl->maxcode = maxcode;
-    tbl->valptr = valptr;
-    work->mHuffTblInitFlag[3] = 1;
-    memset(hufftable, 0, 0x400);
-    memset(work->mMaxCode_AC1, 0, 0x100);
-    memset(work->mValPtr_AC1, 0, 0x44);
-    return;
+        case 1:
+            hufftable = work->mHuffDecTbl_AC1;
+            maxcode = work->mMaxCode_AC1;
+            valptr = work->mValPtr_AC1;
+            tbl->hufftable = hufftable;
+            tbl->maxcode = maxcode;
+            tbl->valptr = valptr;
+            work->mHuffTblInitFlag[3] = 1;
+            memset(hufftable, 0, 0x400);
+            memset(work->mMaxCode_AC1, 0, 0x100);
+            memset(work->mValPtr_AC1, 0, 0x44);
+            break;
+        }
+    }
 }
