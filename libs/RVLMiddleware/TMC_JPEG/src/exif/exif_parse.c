@@ -517,7 +517,7 @@ static void TMCJPEGDEC_IFD0_tag_parse(TMCCJPEGDecExifData* pInfo, u16 byteOrder,
 
 static void TMCJPEGDEC_IFD1_tag_parse(TMCCJPEGDecExifData* pInfo, u16 byteOrder, const u8* entry)
 {
-    u16 tag;
+    s32 tag;
 
     tag = IFD0_read_u16_inl(entry, byteOrder);
 

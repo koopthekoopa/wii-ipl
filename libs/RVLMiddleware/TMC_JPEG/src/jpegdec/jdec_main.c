@@ -525,7 +525,10 @@ static s32 TMCJPEGDEC_parse_dht(s32 first, TMCJpegDecWork* work)
     u16 len;
     s32 r;
     u8 countBuf[17];
+    u8* scaleInfo;
     u8 symBuf[256];
+
+    scaleInfo = (u8*)work + 0x58;
 
     memset(countBuf, 0, 17);
 
@@ -536,11 +539,11 @@ static s32 TMCJPEGDEC_parse_dht(s32 first, TMCJpegDecWork* work)
 
     while (len != 0) {
         u8 htByte;
-        u8 tblClass;
-        u8 tblID;
+        s32 tblClass;
+        s32 tblID;
         u8* pCount;
-        u32 idx;
-        u32 totalCodes;
+        s32 idx;
+        s32 totalCodes;
         TMCHuffTblSet tblSet;
 
         len -= 0x11;
@@ -577,13 +580,13 @@ static s32 TMCJPEGDEC_parse_dht(s32 first, TMCJpegDecWork* work)
         if (totalCodes > 0xB0)
             return -0x40;
 
-        r = TMCJPEGDEC_get_sbyte(symBuf, totalCodes, work);
+        r = TMCJPEGDEC_get_sbyte(symBuf, (u8)totalCodes, work);
         if (r < 0)
             return r;
 
         countBuf[0] = totalCodes;
 
-        TMCJPEGDEC_set_HuffmanTable(&tblSet, tblClass, tblID, (TMCJpegDecWork*)&work->mScaleFlag);
+        TMCJPEGDEC_set_HuffmanTable(&tblSet, tblClass, tblID, (TMCJpegDecWork*)scaleInfo);
         r = TMCJPEGDEC_make_huffdec(countBuf, symBuf, (TMCHuffParam*)&tblSet);
         if (r < 0)
             return r;
