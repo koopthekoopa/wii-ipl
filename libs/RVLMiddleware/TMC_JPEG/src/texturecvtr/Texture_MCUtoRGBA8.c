@@ -19,7 +19,7 @@ static void TMCJPEGDEC_converterYUV411toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     cr_row = work->mConvBuf + 0x144;
     bw = st->mConvWidth;
     out = (u8*)st->mpTexBuffer;
-    ss = st->mFlag20;
+    ss = st->mScaleFactor;
     step = 0x20 / ss;
     step_v = 0x08 / ss;
     x_end = x + step;
@@ -169,7 +169,7 @@ static void TMCJPEGDEC_converterYUV411toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     bw = st->mConvWidth;
     out = (u8*)st->mpTexBuffer;
     {
-        s32 ss = st->mFlag20;
+        s32 ss = st->mScaleFactor;
 
         if (st->mDataSizeX == (u32)x) {
             step = st->mStepXExt;
@@ -272,7 +272,7 @@ static void TMCJPEGDEC_converterYUV422toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     cr_row = work->mConvBuf + 0xC4;
     bw = st->mConvWidth;
     out = (u8*)st->mpTexBuffer;
-    ss = st->mFlag20;
+    ss = st->mScaleFactor;
     step = 0x10 / ss;
     step_v = 0x08 / ss;
     x_end = x + step;
@@ -383,7 +383,7 @@ static void TMCJPEGDEC_converterYUV422toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     bw = st->mConvWidth;
     out = (u8*)st->mpTexBuffer;
     {
-        s32 ss = st->mFlag20;
+        s32 ss = st->mScaleFactor;
 
         if (st->mDataSizeX == (u32)x) {
             step = st->mStepXExt;
@@ -486,7 +486,7 @@ static void TMCJPEGDEC_converterYUV420toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     cr_row = work->mConvBuf + 0x144;
     bw = st->mConvWidth;
     out = (u8*)st->mpTexBuffer;
-    ss = st->mFlag20;
+    ss = st->mScaleFactor;
     step = 0x10 / ss;
     step_v = (step + 1) >> 1;
     x_end = x + step;
@@ -602,7 +602,7 @@ static void TMCJPEGDEC_converterYUV420toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     bw = st->mConvWidth;
     out = (u8*)st->mpTexBuffer;
     {
-        s32 ss = st->mFlag20;
+        s32 ss = st->mScaleFactor;
 
         if (st->mDataSizeX == (u32)x) {
             step = st->mStepXExt;
@@ -711,7 +711,7 @@ static void TMCJPEGDEC_converterYUV211toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     cr_row = work->mConvBuf + 0xC4;
     bw = st->mConvWidth;
     out = (u8*)st->mpTexBuffer;
-    ss = st->mFlag20;
+    ss = st->mScaleFactor;
     step = 0x08 / ss;
     step_v = 0x10 / ss;
     x_end = x + step;
@@ -808,7 +808,7 @@ static void TMCJPEGDEC_converterYUV211toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     bw = st->mConvWidth;
     out = (u8*)st->mpTexBuffer;
     {
-        s32 ss = st->mFlag20;
+        s32 ss = st->mScaleFactor;
 
         if (st->mDataSizeX == (u32)x) {
             step = st->mStepXExt;
@@ -917,7 +917,7 @@ static void TMCJPEGDEC_converterYUV444toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     cr_row = work->mConvBuf + 0x84;
     bw = st->mConvWidth;
     out = (u8*)st->mpTexBuffer;
-    ss = st->mFlag20;
+    ss = st->mScaleFactor;
     step = 0x08 / ss;
     x_end = x + step;
     y_end = y + step;
@@ -1005,7 +1005,7 @@ static void TMCJPEGDEC_converterYUV444toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     bw = st->mConvWidth;
     out = (u8*)st->mpTexBuffer;
     {
-        s32 ss = st->mFlag20;
+        s32 ss = st->mScaleFactor;
 
         if (st->mDataSizeX == (u32)x) {
             step = st->mStepXExt;
@@ -1105,7 +1105,7 @@ static void TMCJPEGDEC_converterYUV400toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     cb_row = work->mConvBuf + 4;
     bw = st->mConvWidth;
     out = (u8*)st->mpTexBuffer;
-    ss = st->mFlag20;
+    ss = st->mScaleFactor;
     step = 0x08 / ss;
     x_end = x + step;
     y_end = y + step;
@@ -1183,7 +1183,7 @@ static void TMCJPEGDEC_converterYUV400toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     bw = st->mConvWidth;
     out = (u8*)st->mpTexBuffer;
     {
-        s32 ss = st->mFlag20;
+        s32 ss = st->mScaleFactor;
 
         if (st->mDataSizeX == (u32)x) {
             step = st->mStepXExt;

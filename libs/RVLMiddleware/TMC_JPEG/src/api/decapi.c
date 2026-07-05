@@ -22,9 +22,9 @@ s32 TMCCJPEGDecInit(TMCCJPEGDecState* state, TMCCJPEGDecInitParam* param) {
         result = -1;
     }
     else {
-        state->mFlag21 = param->mFlag1;
+        state->unk_0x21 = param->mFlag1;
         result = 0;
-        state->mFlag20 = 1;
+        state->mScaleFactor = 1;
         state->mConverterType = param->mFlag2;
     }
 
@@ -158,7 +158,7 @@ s32 TMCCJPEGDecSetResolution(TMCCJPEGDecState* state, u32 scale) {
 
     s = (u8)scale;
     work = (TMCJpegDecWork*)state->mpWorkBuf;
-    state->mFlag20 = scale;
+    state->mScaleFactor = scale;
     if (s != 1 && s != 2 && s != 4 && s != 8) {
         return -1;
     }

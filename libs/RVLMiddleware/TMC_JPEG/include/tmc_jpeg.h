@@ -86,8 +86,8 @@ typedef struct {
     u8    mStepYExt;       // 0x17
     u32   mDataSizeX;      // 0x18
     u32   mDataSizeY;      // 0x1C
-    u8    mFlag20;         // 0x20
-    u8    mFlag21;         // 0x21
+    u8    mScaleFactor;    // 0x20
+    u8    unk_0x21;        // 0x21
     u8    mComponentState; // 0x22
     u8    unk_0x23;        // 0x23
     u16   mJpegWidth;      // 0x24

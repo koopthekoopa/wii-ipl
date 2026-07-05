@@ -22,7 +22,7 @@ s32 TMCJPEGDEC_Decompscan(TMCJpegDecWork* work) {
 s32 TMCJPEGDEC_Setsize(TMCJpegDecWork* work) {
     TMCCJPEGDecState* state = work->mpState;
 
-    switch (state->mFlag20) {
+    switch (state->mScaleFactor) {
     case 1:
         work->mBlockSize = 0x40;
         work->mBlockSizeMul = 0x40;
@@ -64,12 +64,12 @@ s32 TMCJPEGDEC_Setsize(TMCJpegDecWork* work) {
     state->mMaxX = work->mMCUYCount;
     state->mMaxY = work->mMCUXCount2;
 
-    state->mStepX = (state->mFlag20 + work->mMCUXCount - 1) / state->mFlag20;
-    state->mStepY = (state->mFlag20 + work->mMCUXRem - 1) / state->mFlag20;
-    state->mJpegWidth = (state->mFlag20 + work->mFrameWidth - 1) / state->mFlag20;
-    state->mJpegHeight = (state->mFlag20 + work->mFrameHeight - 1) / state->mFlag20;
-    state->mStepXExt = (state->mFlag20 + work->unk_0x1808 - 1) / state->mFlag20;
-    state->mStepYExt = (state->mFlag20 + work->unk_0x1809 - 1) / state->mFlag20;
+    state->mStepX = (state->mScaleFactor + work->mMCUXCount - 1) / state->mScaleFactor;
+    state->mStepY = (state->mScaleFactor + work->mMCUXRem - 1) / state->mScaleFactor;
+    state->mJpegWidth = (state->mScaleFactor + work->mFrameWidth - 1) / state->mScaleFactor;
+    state->mJpegHeight = (state->mScaleFactor + work->mFrameHeight - 1) / state->mScaleFactor;
+    state->mStepXExt = (state->mScaleFactor + work->unk_0x1808 - 1) / state->mScaleFactor;
+    state->mStepYExt = (state->mScaleFactor + work->unk_0x1809 - 1) / state->mScaleFactor;
 
     state->mDataSizeX = (state->mStepXExt != 0) ? (state->mMaxX - 1) * state->mStepX : (state->mMaxX + 1) * state->mStepX;
     state->mDataSizeY = (state->mStepYExt != 0) ? (state->mMaxY - 1) * state->mStepY : (state->mMaxY + 1) * state->mStepY;

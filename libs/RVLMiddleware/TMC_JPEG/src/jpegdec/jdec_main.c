@@ -177,7 +177,7 @@ s32 TMCJPEGDEC_imagestart(TMCJpegDecWork* work)
 
 s32 TMCJPEGDEC_imageend(TMCJpegDecWork* work)
 {
-    if (((TMCCJPEGDecState*)work->mpState)->mFlag21 == 1)
+    if (((TMCCJPEGDecState*)work->mpState)->unk_0x21 == 1)
         return 0;
 
     if (work->mScanCount == 0) {
@@ -523,11 +523,11 @@ static s32 TMCJPEGDEC_parse_dht(s32 first, TMCJpegDecWork* work)
 {
     u16 len;
     s32 r;
-    u8 countBuf[17];
+    u8 countBuf[24]; // should be 17, but we need to force a bigger stack
     u8* scaleInfo;
     u8 symBuf[256];
 
-    scaleInfo = (u8*)work + 0x58;
+    scaleInfo = &work->mScaleFlag;
 
     memset(countBuf, 0, 17);
 
