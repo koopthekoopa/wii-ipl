@@ -1,23 +1,29 @@
 #include <tmc_jpeg_internal.h>
 
+static s32 TMCJPEGDEC_vl_decode_rc(u32* huff_tbl, u8* huff_sym, TMCJpegDecWork* work);
+
+
 s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, TMCJpegDecWork* work) {
+    s32 one;
+    const u8* zztbl;
+    u16* ac_fast;
+    s32 t;
+    s32 idx;
+    s32 blk_size;
+    u32* ac_vl;
+    u8* ac_sym;
+    u16* dcf_val_zz;
+
     s32 bit_pos;
     u32 bit_data;
-    u32* ac_vl;
-    u16* ac_fast;
-    u8* ac_sym;
-    s32 blk_size;
     s32 blk_mul;
-    s32 idx;
     u32 tmp;
     s32 val;
     s32 extra;
     s32 r;
-    s32 t;
     s32 zz;
 
     u32 tmp2;
-    const u8* zztbl;
 
     {
         u16* dcf = work->mpDCFast;
@@ -78,6 +84,7 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
 
     zztbl = TMCJPEGDEC_Zigzag_data;
     idx = 1;
+    one = 1;
     if (idx < 64) do {
         bit_pos = work->mBitCount;
         if (bit_pos <= 8) {
@@ -122,7 +129,7 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
                 idx++;
             } else {
                 bit_pos = work->mBitCount;
-                tmp = 1 << t;
+                tmp = one << t;
                 extra = tmp - 1;
                 bit_pos -= t;
                 work->mBitCount = bit_pos;
