@@ -172,10 +172,11 @@ s32 TMCCJPEGDecGetInfoEXIF(TMCCJPEGDecExifInfo* pInfo, TMCCJPEGDecInitParam* pPa
     memset(pInfo, 0, 0x6D4);
     memset(work, 0, 0x19E8);
 
-    work->mpState = pInfo;
+    // TODO: this seems wrong. wrong parameter type?
+    work->mpState = (TMCCJPEGDecState*)pInfo;
     pInfo->mpWorkBuf = work;
 
-    if (read_u16((const u8*)pParam->mpBuf2, 0x4D4D) != 0xFFE1)
+    if (read_u16(pParam->mpBuf2, 0x4D4D) != 0xFFE1)
         return -0x45;
 
     segSize = read_u16((const u8*)pParam->mpBuf2 + 2, 0x4D4D);

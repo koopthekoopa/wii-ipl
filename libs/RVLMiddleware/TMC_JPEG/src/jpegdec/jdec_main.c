@@ -52,12 +52,12 @@ s32 TMCJPEGDEC_decompmcu(u32 maxMCU, u32 mcuCount, TMCJpegDecWork* work, void* b
     u8* blockCountPtr;
     s32 blockIdx;
     s32 mcuIdx = 0;
-    TMCCJPEGDecState* state = (TMCCJPEGDecState*)work->mpState;
+    TMCCJPEGDecState* state = work->mpState;
 
     while (mcuIdx < (s32)*(frameInfo + 0x1b)) {
         compIdx = *compMapPtr;
-        entTblBase = scaleInfo + ((u32)*(u8*)(compMapBase + compIdx + 0x18) << 8);
-        TMCJPEGDEC_set_entropytbl((TMCJpegDecWork*)scaleInfo, (s32)*(u8*)(compMapBase + compIdx + 0x1c), *(u8*)(compMapBase + compIdx + 0x20));
+        entTblBase = scaleInfo + ((u32)* (compMapBase + compIdx + 0x18) << 8);
+        TMCJPEGDEC_set_entropytbl((TMCJpegDecWork*)scaleInfo, *(compMapBase + compIdx + 0x1c), *(compMapBase + compIdx + 0x20));
 
         curBlockInfo = convRowPtrs;
         specificConvRowPtr = convRowPtrs + (compIdx << 2);
@@ -177,7 +177,7 @@ s32 TMCJPEGDEC_imagestart(TMCJpegDecWork* work)
 
 s32 TMCJPEGDEC_imageend(TMCJpegDecWork* work)
 {
-    if (((TMCCJPEGDecState*)work->mpState)->unk_0x21 == 1)
+    if (work->mpState->unk_0x21 == 1)
         return 0;
 
     if (work->mScanCount == 0) {
@@ -193,7 +193,7 @@ s32 TMCJPEGDEC_imageend(TMCJpegDecWork* work)
             return r;
 
         if (marker != 0xFFD9) {
-            ((TMCCJPEGDecState*)work->mpState)->mDecodeResult = -0x21;
+            work->mpState->mDecodeResult = -0x21;
             return 0;
         }
     }
@@ -332,7 +332,7 @@ s32 TMCJPEGDEC_restart_interval(TMCJpegDecWork* work, u32 maxMCU, u32 mcuCount)
     restartCount = work->mRestartCnt;
     interval = work->mRestartInterval;
     restartCount++;
-    state = (TMCCJPEGDecState*)work->mpState;
+    state = work->mpState;
     work->mRestartCnt = restartCount;
 
     if (restartCount == interval) {
@@ -907,7 +907,7 @@ static s32 TMCJPEGDEC_parse_sos(TMCJpegDecWork* work)
 
 s32 TMCJPEGDEC_err_restart(TMCJpegDecWork* work)
 {
-    TMCCJPEGDecState* state = (TMCCJPEGDecState*)work->mpState;
+    TMCCJPEGDecState* state = work->mpState;
     u8 scanCount = work->mScanCount;
 
     if (scanCount == 1) {
@@ -923,7 +923,7 @@ s32 TMCJPEGDEC_err_restart(TMCJpegDecWork* work)
         if (r < 0)
             return r;
 
-        byte = *(u8*)work->mpBufCur;
+        byte = *work->mpBufCur;
         goto rst_cond;
 
     rst_read:

@@ -20,7 +20,7 @@ s32 TMCJPEGDEC_set_converterRGB565(TMCJpegDecWork* work) {
 
     ob = work->mConvBuf;
     cc = work->mComponentCount;
-    st = (TMCCJPEGDecState*)work->mpState;
+    st = work->mpState;
 
     switch (cc) {
     case 0: {

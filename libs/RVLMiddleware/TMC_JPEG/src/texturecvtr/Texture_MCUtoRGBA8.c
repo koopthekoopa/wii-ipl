@@ -13,7 +13,7 @@ static void TMCJPEGDEC_converterYUV411toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     u8* y_row;
     u8* cr_row;
 
-    st = (TMCCJPEGDecState*)work->mpState;
+    st = work->mpState;
     cb_row = work->mConvBuf + 4;
     y_row = work->mConvBuf + 0x104;
     cr_row = work->mConvBuf + 0x144;
@@ -162,7 +162,7 @@ static void TMCJPEGDEC_converterYUV411toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     u8* cr_row;
     s32 i;
 
-    st = (TMCCJPEGDecState*)work->mpState;
+    st = work->mpState;
     cb_row = work->mConvBuf + 4;
     y_row = work->mConvBuf + 0x104;
     cr_row = work->mConvBuf + 0x144;
@@ -266,7 +266,7 @@ static void TMCJPEGDEC_converterYUV422toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     u8* y_row;
     u8* cr_row;
 
-    st = (TMCCJPEGDecState*)work->mpState;
+    st = work->mpState;
     cb_row = work->mConvBuf + 4;
     y_row = work->mConvBuf + 0x84;
     cr_row = work->mConvBuf + 0xC4;
@@ -376,7 +376,7 @@ static void TMCJPEGDEC_converterYUV422toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     u8* cr_row;
     s32 i;
 
-    st = (TMCCJPEGDecState*)work->mpState;
+    st = work->mpState;
     cb_row = work->mConvBuf + 4;
     y_row = work->mConvBuf + 0x84;
     cr_row = work->mConvBuf + 0xC4;
@@ -480,7 +480,7 @@ static void TMCJPEGDEC_converterYUV420toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     u8* y_row;
     u8* cr_row;
 
-    st = (TMCCJPEGDecState*)work->mpState;
+    st = work->mpState;
     cb_row = work->mConvBuf + 4;
     y_row = work->mConvBuf + 0x104;
     cr_row = work->mConvBuf + 0x144;
@@ -595,7 +595,7 @@ static void TMCJPEGDEC_converterYUV420toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     u8* cr_row;
     s32 i;
 
-    st = (TMCCJPEGDecState*)work->mpState;
+    st = work->mpState;
     cb_row = work->mConvBuf + 4;
     y_row = work->mConvBuf + 0x104;
     cr_row = work->mConvBuf + 0x144;
@@ -705,7 +705,7 @@ static void TMCJPEGDEC_converterYUV211toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     u8* cr_row;
     s32 i;
 
-    st = (TMCCJPEGDecState*)work->mpState;
+    st = work->mpState;
     cb_row = work->mConvBuf + 4;
     y_row = work->mConvBuf + 0x84;
     cr_row = work->mConvBuf + 0xC4;
@@ -801,7 +801,7 @@ static void TMCJPEGDEC_converterYUV211toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     u8* cr_row;
     s32 i;
 
-    st = (TMCCJPEGDecState*)work->mpState;
+    st = work->mpState;
     cb_row = work->mConvBuf + 4;
     y_row = work->mConvBuf + 0x84;
     cr_row = work->mConvBuf + 0xC4;
@@ -911,7 +911,7 @@ static void TMCJPEGDEC_converterYUV444toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     u8* cr_row;
     s32 i;
 
-    st = (TMCCJPEGDecState*)work->mpState;
+    st = work->mpState;
     cb_row = work->mConvBuf + 4;
     y_row = work->mConvBuf + 0x44;
     cr_row = work->mConvBuf + 0x84;
@@ -998,7 +998,7 @@ static void TMCJPEGDEC_converterYUV444toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     u8* cr_row;
     s32 i;
 
-    st = (TMCCJPEGDecState*)work->mpState;
+    st = work->mpState;
     cb_row = work->mConvBuf + 4;
     y_row = work->mConvBuf + 0x44;
     cr_row = work->mConvBuf + 0x84;
@@ -1101,7 +1101,7 @@ static void TMCJPEGDEC_converterYUV400toRGBA8(TMCJpegDecWork* work, s32 x, s32 y
     u8* cb_row;
     s32 i;
 
-    st = (TMCCJPEGDecState*)work->mpState;
+    st = work->mpState;
     cb_row = work->mConvBuf + 4;
     bw = st->mConvWidth;
     out = (u8*)st->mpTexBuffer;
@@ -1178,7 +1178,7 @@ static void TMCJPEGDEC_converterYUV400toRGBA8edge(TMCJpegDecWork* work, s32 x, s
     u8* cb_row;
     s32 i;
 
-    st = (TMCCJPEGDecState*)work->mpState;
+    st = work->mpState;
     cb_row = work->mConvBuf + 4;
     bw = st->mConvWidth;
     out = (u8*)st->mpTexBuffer;
@@ -1268,7 +1268,7 @@ s32 TMCJPEGDEC_set_converterRGBA8(TMCJpegDecWork* work) {
 
     ob = work->mConvBuf;
     cc = work->mComponentCount;
-    st = (TMCCJPEGDecState*)work->mpState;
+    st = work->mpState;
 
     switch (cc) {
     case 0: {
@@ -1379,8 +1379,8 @@ s32 TMCJPEGDEC_set_converterRGBA8(TMCJpegDecWork* work) {
         fw = st->mJpegWidth;
         fh = st->mJpegHeight;
 
-        bw = (s32)((u32)((fw << 30) - (fw >> 31)) * 4 + (fw >> 31));
-        bh = (s32)((u32)((fh << 30) - (fh >> 31)) * 4 + (fh >> 31));
+        bw = (s32)(((fw << 30) - (fw >> 31)) * 4 + (fw >> 31));
+        bh = (s32)(((fh << 30) - (fh >> 31)) * 4 + (fh >> 31));
         {
             s32 nb = -bw;
             s32 nb2 = -bh;
