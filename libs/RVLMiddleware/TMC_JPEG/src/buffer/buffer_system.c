@@ -218,13 +218,18 @@ ret0:
 }
 
 s32 TMCJPEGDEC_load_buff(TMCJpegDecWork* work) {
+
+    u8 byte;
+    s32 bitCount;
+    u32 bitBuf;
     u8* cur = work->mpBufCur;
     u8* end = work->mpBufMark;
+
     if (cur < end) {
-        u32 bitBuf = work->mBitBuf;
-        s32 bitCount = work->mBitCount;
+        bitBuf = work->mBitBuf;
+        bitCount = work->mBitCount;
         do {
-            u8 byte = *cur;
+            byte = *cur;
             cur++;
             bitBuf = (bitBuf << 8) + byte;
             bitCount += 8;
@@ -233,35 +238,36 @@ s32 TMCJPEGDEC_load_buff(TMCJpegDecWork* work) {
         work->mBitBuf = bitBuf;
         work->mBitCount = bitCount;
         work->mpBufCur = cur;
-        goto ret0;
+        goto ret;
     }
 
-se:
-    if (work->mpBufEnd > work->mpBufCur) goto pp;
-    if (work->mRemaining == 0) goto ret0;
-    { s32 r = TMCJPEG_814EAF50(work); if (r >= 0) goto pp; return r; }
+    do {
+        if (work->mpBufEnd <= work->mpBufCur) {
+            if (work->mRemaining == 0)
+                break;
+            { s32 r = TMCJPEG_814EAF50(work); if (r < 0) return r; }
+        }
 
-pp:
-    {
-        u8* c = work->mpBufCur;
-        u32 bb = work->mBitBuf;
-        u8 byte = *c;
-        u8* tmp = c + 1;
-        u32 nb = (bb << 8) + byte;
-        s32 bc = work->mBitCount + 8;
-        work->mpBufCur = tmp;
-        work->mBitBuf = nb;
-        work->mBitCount = bc;
-        if (byte == 0xFF) work->mpBufCur = tmp + 1;
-    }
-    if (work->mpBufEnd > work->mpBufCur) goto ch;
-    if (work->mRemaining == 0) goto ret0;
-    { s32 r = TMCJPEG_814EAF50(work); if (r >= 0) goto ch; return r; }
+        {
+            u8* c = work->mpBufCur;
+            u32 bb = work->mBitBuf;
+            u8 byte = *c;
+            u8* tmp = c + 1;
+            u32 nb = (bb << 8) + byte;
+            work->mpBufCur = tmp;
+            work->mBitBuf = nb;
+            work->mBitCount += 8;
+            if (byte == 0xFF) work->mpBufCur = tmp + 1;
+        }
 
-ch:
-    if (work->mBitCount <= 24) goto se;
+        if (work->mpBufEnd <= work->mpBufCur) {
+            if (work->mRemaining == 0)
+                break;
+            { s32 r = TMCJPEG_814EAF50(work); if (r < 0) return r; }
+        }
+    } while (work->mBitCount <= 24);
 
-ret0:
+ret:
     return 0;
 }
 
