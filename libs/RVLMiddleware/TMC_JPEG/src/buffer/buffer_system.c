@@ -9,7 +9,6 @@ s32 TMCJPEGDEC_init_ptr_buff(TMCJpegDecWork* work, void* param) {
     u8* newEnd;
     u8* bufOrg;
     u32 newRemaining;
-    u8* newMark;
 
     if (((u32*)param)[0] & 0x1F) return -1;
     if (((u32*)param)[1] & 0x1F) return -1;
@@ -26,18 +25,17 @@ s32 TMCJPEGDEC_init_ptr_buff(TMCJpegDecWork* work, void* param) {
     if (work->mBufLen - 0x20 < readSize) readSize = work->mBufLen - 0x20;
 
     if (((s32 (*)(void*, u8*, u32))work->mpCallback)(work->mpCbCtx, dest, readSize) < 0)
-        return -0xF0;
+        return TMCC_ERROR_USER_CALLBACK;
 
     newEnd = dest + readSize;
     bufOrg = work->mpBufOrg;
     newRemaining = work->mRemaining - readSize;
-    newMark = newEnd - 0x22;
 
     work->mpBufCur = dest;
     work->mRemaining = newRemaining;
     work->mpBufStart = bufOrg;
     work->mpBufEnd = newEnd;
-    work->mpBufMark = newMark;
+    work->mpBufMark = newEnd - 0x22;
     return 0;
 }
 
@@ -46,7 +44,7 @@ s32 TMCJPEGDEC_get_byte(u8* dst, TMCJpegDecWork* work) {
     if (work->mRemaining == 0) goto err1;
     { s32 r = TMCJPEG_814EB108(work); if (r >= 0) goto read; return r; }
 err1:
-    return -0x90;
+    return TMCC_ERROR_UNDERFLOW;
 read: {
     u8* cur = work->mpBufCur;
     u8 byte = *cur; cur++;
@@ -223,7 +221,7 @@ s32 TMCJPEGDEC_load_buff(TMCJpegDecWork* work) {
     u8* cur = work->mpBufCur;
     u8* end = work->mpBufMark;
     if (cur < end) {
-        s32 bitBuf = work->mBitBuf;
+        u32 bitBuf = work->mBitBuf;
         s32 bitCount = work->mBitCount;
         do {
             u8 byte = *cur;
@@ -267,7 +265,7 @@ ret0:
     return 0;
 }
 
-u32 TMCJPEGDEC_get_position(TMCJpegDecWork* work) {
+s32 TMCJPEGDEC_get_position(TMCJpegDecWork* work) {
     return work->mpBufCur - work->mpBufStart;
 }
 
@@ -276,25 +274,23 @@ s32 TMCJPEGDEC_chk_possible_size(TMCJpegDecWork* work) {
 }
 
 static s32 TMCJPEG_814EAF50(TMCJpegDecWork* work) {
-    u32 marker;
+    u8 marker;
     u32 readSize;
     u8* dest;
-    u8* endMinus1;
-    u32 i;
-    u32 j;
+    u8* beforeEnd;
+    u32 i, j;
 
     {
-        u8* endPtr = work->mpBufEnd;
-        u8* beforeEnd = endPtr - 1;
+        u8* tmpEndPtr = work->mpBufEnd - 1;
 
         marker = 0;
-        if (*beforeEnd == 0xFF) marker = 1;
-        endMinus1 = beforeEnd;
+        if (*tmpEndPtr == 0xFF) marker = 1;
+        beforeEnd = tmpEndPtr;
     }
 
     for (i = 0; i < 32; i += 8) {
         for (j = 0; j < 8; j++) {
-            work->mpBufStart[i + j] = *(endMinus1 - (0x1f - (i + j)));
+            work->mpBufStart[i + j] = *(beforeEnd - (0x1f - (i + j)));
         }
     }
 
@@ -303,19 +299,16 @@ static s32 TMCJPEG_814EAF50(TMCJpegDecWork* work) {
     if (work->mBufLen - 0x20 < readSize) readSize = work->mBufLen - 0x20;
 
     if (((s32 (*)(void*, u8*, u32))work->mpCallback)(work->mpCbCtx, dest, readSize) != 0)
-        return -0xF0;
+        return TMCC_ERROR_USER_CALLBACK;
 
     {
-        u32 oldRemaining = work->mRemaining;
-        u8* newEnd = dest + readSize;
-        u8* newCur = dest + marker;
-        u32 newRemaining = oldRemaining - readSize;
-        u8* newMark = newEnd - 0x22;
+        s32 oldRemaining = work->mRemaining;
+        s32 newRemaining = oldRemaining - readSize;
 
-        work->mpBufEnd = newEnd;
+        work->mpBufEnd = dest + readSize;
         work->mRemaining = newRemaining;
-        work->mpBufCur = newCur;
-        work->mpBufMark = newMark;
+        work->mpBufCur = dest + marker;
+        work->mpBufMark = dest + readSize - 0x22;
     }
 
     return 0;
@@ -323,42 +316,34 @@ static s32 TMCJPEG_814EAF50(TMCJpegDecWork* work) {
 
 static s32 TMCJPEG_814EB108(TMCJpegDecWork* work) {
     u8* end;
-    u8* endMinus1;
-    u32 i;
-    u32 readSize;
+    u32 i, j;
+    s32 readSize;
     u8* dest;
 
     end = work->mpBufEnd;
-    endMinus1 = end - 1;
 
     for (i = 0; i < 32; i += 8) {
-        work->mpBufStart[i] = *(endMinus1 - (0x1f - i));
-        work->mpBufStart[i + 1] = *(endMinus1 - (0x1f - (i + 1)));
-        work->mpBufStart[i + 2] = *(endMinus1 - (0x1f - (i + 2)));
-        work->mpBufStart[i + 3] = *(endMinus1 - (0x1f - (i + 3)));
-        work->mpBufStart[i + 4] = *(endMinus1 - (0x1f - (i + 4)));
-        work->mpBufStart[i + 5] = *(endMinus1 - (0x1f - (i + 5)));
-        work->mpBufStart[i + 6] = *(endMinus1 - (0x1f - (i + 6)));
-        work->mpBufStart[i + 7] = *(endMinus1 - (0x1f - (i + 7)));
+        for (j = 0; j < 8; j++) {
+            work->mpBufStart[i + j] = *(end - 1 - (0x1f - (i + j)));
+        }
     }
 
     dest = work->mpBufOrg + 0x20;
     readSize = work->mRemaining;
-    if (work->mBufLen - 0x20 < readSize) readSize = work->mBufLen - 0x20;
+    if (work->mBufLen - 0x20 < readSize)
+        readSize = work->mBufLen - 0x20;
 
     if (((s32 (*)(void*, u8*, u32))work->mpCallback)(work->mpCbCtx, dest, readSize) != 0)
-        return -0xF0;
+        return TMCC_ERROR_USER_CALLBACK;
 
     {
-        u32 oldRemaining = work->mRemaining;
-        u8* newEnd = dest + readSize;
-        u8* newMark = newEnd - 0x22;
-        u32 newRemaining = oldRemaining - readSize;
+        s32 oldRemaining = work->mRemaining;
+        s32 newRemaining = oldRemaining - readSize;
 
         work->mpBufCur = dest;
         work->mRemaining = newRemaining;
-        work->mpBufEnd = newEnd;
-        work->mpBufMark = newMark;
+        work->mpBufEnd = dest + readSize;
+        work->mpBufMark = dest + readSize - 0x22;
     }
 
     return 0;
