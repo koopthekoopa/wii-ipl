@@ -223,7 +223,7 @@ s32 TMCJPEGDEC_load_buff(TMCJpegDecWork* work) {
     u8* cur = work->mpBufCur;
     u8* end = work->mpBufMark;
     if (cur < end) {
-        u32 bitBuf = work->mBitBuf;
+        s32 bitBuf = work->mBitBuf;
         s32 bitCount = work->mBitCount;
         do {
             u8 byte = *cur;
@@ -261,7 +261,7 @@ pp:
     { s32 r = TMCJPEG_814EAF50(work); if (r >= 0) goto ch; return r; }
 
 ch:
-    if ((s32)work->mBitCount <= 24) goto se;
+    if (work->mBitCount <= 24) goto se;
 
 ret0:
     return 0;

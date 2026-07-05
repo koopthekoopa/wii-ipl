@@ -10,7 +10,7 @@ extern "C" {
 
 typedef struct {
     u32 mBitBuf;        // 0x00
-    u32 mBitCount;      // 0x04
+    s32 mBitCount;      // 0x04
     u8* mpBufStart;     // 0x08
     u8* mpBufCur;       // 0x0C
     u8* mpBufEnd;       // 0x10

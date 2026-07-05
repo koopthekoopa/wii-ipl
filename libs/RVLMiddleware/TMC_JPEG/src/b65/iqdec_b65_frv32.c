@@ -74,7 +74,7 @@ s32 TMCJPEGDEC_decode_iquant(TMCCJPEGDecState* state,
         while (1) {
             i++;
             entry += 2;
-            if (i > 16) { r = -100; goto dc_end; }
+            if (i > 16) { r = TMCC_ERROR_OVERFLOW; goto dc_end; }
 
             bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
             code <<= 1;
@@ -191,7 +191,7 @@ dc_end:
             while (1) {
                 i++;
                 entry += 2;
-                if (i > 16) { r = -100; goto ac_end; }
+                if (i > 16) { r = TMCC_ERROR_OVERFLOW; goto ac_end; }
 
                 bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
                 code <<= 1;
@@ -233,7 +233,7 @@ ac_end:
             r >>= 4;
             idx += r;
 
-            if (idx >= 64) return -100;
+            if (idx >= 64) return TMCC_ERROR_OVERFLOW;
 
             zz = zztbl[idx];
 
@@ -301,7 +301,7 @@ ac_end:
         }
     }
 
-    if (idx > 64) return -100;
+    if (idx > 64) return TMCC_ERROR_OVERFLOW;
 
     idx--;
     return TMCJPEGDEC_Zigzag_loop[idx];

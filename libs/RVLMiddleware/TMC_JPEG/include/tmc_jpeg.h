@@ -3,6 +3,9 @@
 
 #include <revolution/types.h>
 
+#define TMCC_ERROR_OVERFLOW (-100)
+#define TMCC_ERROR_USER_CALLBACK (-240)
+
 #ifdef __cplusplus
 extern "C" {
 #endif
