@@ -1202,7 +1202,7 @@ config.libs = [
             Object(Equivalent,  "buffer/getcode.c"),
             Object(NonMatching, "buffer/idct_block_var.c"),
 
-            Object(Equivalent,  "api/decapi.c"),
+            Object(Matching,   "api/decapi.c"),
 
             Object(Equivalent,  "jpegdec/jdec.c"),
             Object(NonMatching, "jpegdec/jdec_main.c"),

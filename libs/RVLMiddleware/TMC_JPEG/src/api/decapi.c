@@ -15,26 +15,21 @@ s32 TMCCJPEGDecInit(TMCCJPEGDecState* state, TMCCJPEGDecInitParam* param) {
     work->mpState = state;
     state->mpWorkBuf = work;
 
-    if (param->mFlag1 == 0) goto mFlag2_check;
-    result = -1;
-    goto check_result;
+    if (param->mFlag1 != 0) {
+        result = -1;
+    }
+    else if (param->mFlag2 != 0 && param->mFlag2 != 1 && param->mFlag2 != 2) {
+        result = -1;
+    }
+    else {
+        state->mFlag21 = param->mFlag1;
+        result = 0;
+        state->mFlag20 = 1;
+        state->mConverterType = param->mFlag2;
+    }
 
-mFlag2_check:
-    if (param->mFlag2 == 0) goto flag_ok;
-    if (param->mFlag2 == 1) goto flag_ok;
-    if (param->mFlag2 == 2) goto flag_ok;
-    result = -1;
-    goto check_result;
-
-flag_ok:
-    state->mFlag21 = param->mFlag1;
-    result = 0;
-    state->mFlag20 = 1;
-    state->mConverterType = param->mFlag2;
-
-check_result:
     if (result < 0) {
-        goto error_exit;
+        goto error;
     }
 
     result = TMCJPEGDEC_init_ptr_buff(work, &param->mpBuf2);
@@ -45,17 +40,17 @@ check_result:
     result = TMCJPEGDEC_imagestart(work);
     result = (result < 0) ? result : ((work->mFrameWidth == 0) ? -0x50 : ((work->mMCUCount = work->mMCUXCount * work->mMCUYCount, work->mMCURemCount = work->mMCUXRem * work->mMCUXCount2), result));
     if (result < 0) {
-        goto error_exit;
+        goto error;
     }
 
     result = TMCJPEGDEC_scanstart(work);
     result = (result < 0) ? result : ((work->mScanCount == 1) ? 0 : result);
     if (result < 0) {
-        goto error_exit;
+        goto error;
     }
 
     if (work->mScanCount != 0) {
-        goto error_exit;
+        goto error;
     }
 
     result = TMCJPEGDEC_Setsize(work);
@@ -64,19 +59,19 @@ check_result:
         case 0:
             result = TMCJPEGDEC_set_converterRGB565(work);
             if (result < 0) {
-                goto error_exit;
+                goto error;
             }
             break;
         case 1:
             result = TMCJPEGDEC_set_converterRGBA8(work);
             if (result < 0) {
-                goto error_exit;
+                goto error;
             }
             break;
         case 2:
             result = TMCJPEGDEC_set_converterY8U8V8(work);
             if (result < 0) {
-                goto error_exit;
+                goto error;
             }
             break;
         }
@@ -85,11 +80,12 @@ check_result:
         return state->mResult;
     }
 
-error_exit:
+error:
     return (result < 0) ? result : -2;
 }
 
 s32 TMCCJPEGDecodeRGB565(TMCCJPEGDecState* state, s32 initResult, void* texBuffer) {
+    u8 buf[0x17C];
     u32 offsetY;
     TMCJpegDecWork* work;
     u16 curX;
@@ -99,7 +95,6 @@ s32 TMCCJPEGDecodeRGB565(TMCCJPEGDecState* state, s32 initResult, void* texBuffe
     u8 stepX;
     u8 stepY;
     s32 count;
-    u8 buf[0x18C];
     s32 dec_result;
 
     work = state->mpWorkBuf;
