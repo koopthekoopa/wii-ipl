@@ -45,17 +45,16 @@ s32 TMCJPEGDEC_decompmcu(u32 maxMCU, u32 mcuCount, TMCJpegDecWork* work, void* b
     void* idctFunc = work->mIdctPtr;
     void* idctLumiFunc = work->mIdctLumiPtr;
     u16 pitch = work->mPitch;
+    s32 compIdx;
+    u8* entTblBase;
+    u8* curBlockInfo;
+    u8* specificConvRowPtr;
+    u8* blockCountPtr;
+    s32 blockIdx;
     s32 mcuIdx = 0;
     TMCCJPEGDecState* state = (TMCCJPEGDecState*)work->mpState;
 
     while (mcuIdx < (s32)*(frameInfo + 0x1b)) {
-        s32 compIdx;
-        u8* entTblBase;
-        u8* curBlockInfo;
-        u8* specificConvRowPtr;
-        u8* blockCountPtr;
-        s32 blockIdx;
-
         compIdx = *compMapPtr;
         entTblBase = scaleInfo + ((u32)*(u8*)(compMapBase + compIdx + 0x18) << 8);
         TMCJPEGDEC_set_entropytbl((TMCJpegDecWork*)scaleInfo, (s32)*(u8*)(compMapBase + compIdx + 0x1c), *(u8*)(compMapBase + compIdx + 0x20));
@@ -838,7 +837,7 @@ static s32 TMCJPEGDEC_parse_sos(TMCJpegDecWork* work)
     u8* scalePtr;
     u8* compPtr;
     u8* mapPtr;
-    u32 idx;
+    s32 idx;
     s32 ci;
     u8 scanByte;
 
@@ -855,12 +854,12 @@ static s32 TMCJPEGDEC_parse_sos(TMCJpegDecWork* work)
     if (r < 0)
         return r;
 
-    work->mScanCompCount = scanByte;
-
     if (scanByte > 4 || scanByte != work->mCompCount)
         return -0x51;
 
-    for (idx = 0; (s32)idx < (s32)work->mScanCompCount; idx++) {
+    work->mScanCompCount = scanByte;
+
+    for (idx = 0; idx < (s32)work->mScanCompCount; idx++) {
         r = TMCJPEGDEC_get_byte(&scanByte, work);
         if (r < 0)
             return r;
@@ -880,27 +879,23 @@ static s32 TMCJPEGDEC_parse_sos(TMCJpegDecWork* work)
             return r;
 
         {
-            u8 dcTbl = scanByte >> 4;
-            u8 acTbl = scanByte & 0xF;
+            s32 dcTbl = scanByte >> 4;
+            s32 acTbl = scanByte & 0xF;
 
-            if ((s32)dcTbl > 1 || (s32)acTbl > 1)
+            if (dcTbl > 1 || acTbl > 1)
                 return -0x51;
 
-            {
-                u8 frameCompIdx = *mapPtr;
+            compPtr[*mapPtr + 0x1c] = dcTbl;
+            compPtr[*mapPtr + 0x20] = acTbl;
 
-                compPtr[frameCompIdx + 0x1c] = dcTbl;
-                compPtr[frameCompIdx + 0x20] = acTbl;
+            if (scalePtr[dcTbl + 0x1794] != 1)
+                return -0x40;
 
-                if (scalePtr[dcTbl + 0x1794] != 1)
-                    return -0x40;
+            if (scalePtr[acTbl + 0x1796] != 1)
+                return -0x40;
 
-                if (scalePtr[acTbl + 0x1796] != 1)
-                    return -0x40;
-
-                if (scalePtr[mapPtr[0x18] + 0x1790] != 1)
-                    return -0x41;
-            }
+            if (scalePtr[mapPtr[0x18] + 0x1790] != 1)
+                return -0x41;
         }
     }
 

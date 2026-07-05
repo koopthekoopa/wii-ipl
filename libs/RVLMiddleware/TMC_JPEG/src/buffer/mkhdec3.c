@@ -5,72 +5,64 @@ s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
     u32 huffCount[256];
     u32 huffVal[256];
     u32* huffTable;
-    u32* valptr;
     u32* destTable;
+    u32* valptr;
     u32 count;
-    u32 one;
-    s32 sym_idx;
-    u32 remaining;
-    u32 bit_len;
-    const u8* bits;
 
-    remaining = 1;
-    bit_len = 1;
-    bits = dht + 1;
-    sym_idx = 0;
-
-    count = hp->count;
-    huffTable = (u32*)hp->huffTable;
-    valptr = (u32*)hp->valptr;
-    destTable = (u32*)hp->destTable;
-
-    for (;;)
     {
-        u32 cnt;
+        u32* dest = huffCount;
+        s32 bit_len = 1;
+        s32 remaining = 1;
+        const u8* bits = dht + 1;
+        s32 sym_idx;
 
-        cnt = *bits;
-        if (remaining > cnt)
+        huffTable = hp->huffTable;
+        valptr = hp->valptr;
+        destTable = hp->destTable;
+        count = hp->count;
+
+        sym_idx = 0;
+
+        for (;;)
         {
-            bit_len++;
-            remaining = 1;
-            bits++;
-            if (bit_len > 16)
+            s32 cnt = *bits;
+
+            if (remaining > cnt)
             {
-                huffCount[sym_idx] = 0;
-                break;
+                bit_len++;
+                remaining = 1;
+                bits++;
+                if (bit_len > 16)
+                {
+                    huffCount[sym_idx] = 0;
+                    break;
+                }
             }
-        }
-        else
-        {
-            huffCount[sym_idx] = bit_len;
-            sym_idx++;
-            if (sym_idx > (s32)count)
-                return -0x40;
-            remaining++;
+            else
+            {
+                *dest = bit_len;
+                dest++;
+                sym_idx++;
+                if (sym_idx > (s32)count)
+                    return -0x40;
+                remaining++;
+            }
         }
     }
 
     {
-        u32* hv;
-        s32 i;
-        u32 sv_idx;
-        u32 cur;
-
-        hv = huffVal;
-        i = 0;
-        sv_idx = 0;
-        one = 1;
-        cur = huffCount[0] & 0xFF;
+        s32 sv_idx = 0;
+        s32 i = 0;
+        u32 cur = huffCount[0] & 0xFF;
 
         while (cur != 0)
         {
             while (i < (s32)count && (huffCount[i] & 0xFF) == cur) {
-                hv[0] = sv_idx & 0xFFFF;
-                hv++;
+                huffVal[i] = sv_idx & 0xFFFF;
                 sv_idx++;
                 i++;
             }
-            if (sv_idx > (one << cur))
+            if (sv_idx > (1 << cur))
                 return -0x40;
             sv_idx <<= 1;
             cur = huffCount[i] & 0xFF;
@@ -84,9 +76,8 @@ s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
 
         for (i = 0; i < (s32)count; i++)
         {
-            u32 bl;
+            u32 bl = huffCount[i];
 
-            bl = huffCount[i];
             if (bl <= 16)
             {
                 valptr[bl] = (i << 16) | (huffVal[i] & 0xFFFF);
@@ -95,30 +86,24 @@ s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
     }
 
     {
-        const u8* bits_ptr;
-        u32* hv_ptr;
-        s32 sym;
+        const u8* bits_ptr = dht + 1;
+        u32* hv_ptr = huffVal;
+        s32 sym = 0;
         u32 bl;
-
-        bits_ptr = dht + 1;
-        hv_ptr = huffVal;
-        sym = 0;
+        u32 cnt;
+        u32 step;
+        u32 n;
+        u32 code;
+        u32 base;
+        s32 kk;
 
         for (bl = 1; bl <= 8; bl++)
         {
-            u32 cnt;
-            u32 step;
-            u32 n;
-
             cnt = *bits_ptr;
             step = 1 << (8 - bl);
 
             for (n = 0; n < cnt; n++)
             {
-                u32 code;
-                u32 base;
-                s32 kk;
-
                 code = *hv_ptr;
                 hv_ptr++;
                 base = code << (8 - bl);
