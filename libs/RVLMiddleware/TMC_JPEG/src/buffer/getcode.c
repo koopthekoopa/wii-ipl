@@ -35,33 +35,20 @@ s32 TMCJPEGDEC_init_buff(TMCJpegDecWork* work) {
 }
 
 s32 TMCJPEGDEC_rewind_ptr(TMCJpegDecWork* work) {
-    u32 bitBuf;
-    s32 bitCount;
-    bitBuf = work->mBitBuf;
-    bitCount = work->mBitCount;
+    u32 bitBuf = work->mBitBuf;
+    s32 bitCount = work->mBitCount;
+
     bitCount -= 8;
-    goto loop_test;
-
-loop_body: {
-    s32 r = TMCJPEGDEC_move_ptr(-1, work);
-    if (r >= 0) goto check_ff;
-    return r;
-}
-
-check_ff:
-    if ((u8)bitBuf != 0xFF) goto shift;
-    {
+    for (; bitCount >= 0; bitCount -= 8) {
         s32 r = TMCJPEGDEC_move_ptr(-1, work);
-        if (r >= 0) goto shift;
-        return r;
+        if (r < 0)
+            return r;
+
+        if ((u8)bitBuf == 0xFF && (r = TMCJPEGDEC_move_ptr(-1, work), r < 0))
+            return r;
+
+        bitBuf >>= 8;
     }
-
-shift:
-    bitBuf >>= 8;
-    bitCount -= 8;
-
-loop_test:
-    if (bitCount >= 0) goto loop_body;
 
     work->mBitCount = 0;
     work->mBitBuf = 0;

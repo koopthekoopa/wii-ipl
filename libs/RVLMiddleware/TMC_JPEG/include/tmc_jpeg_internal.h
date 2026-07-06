@@ -174,8 +174,8 @@ s32 TMCJPEGDEC_Decompscan(TMCJpegDecWork* work);
 s32 TMCJPEGDEC_Setsize(TMCJpegDecWork* work);
 s32 TMCJPEGDEC_HeaderAnalyze(TMCJpegDecWork* work);
 
-void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* conv_row_ptr, s32 pitch, s32 zigzag);
-void TMCJPEGDEC_IdctBlock_Col(s32* block, u8* conv_row_ptr, s32 pitch, s32 zigzag);
+void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag);
+void TMCJPEGDEC_IdctBlock_Col(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag);
 
 s32 TMCJPEGDEC_decode_iquant(s32* block, u8* conv_row_ptr, u32* dc_predict_row_ptr, TMCJpegDecWork* work);
 s32 TMCJPEGDEC_decode_iquant_rc(s32* block, u8* conv_row_ptr, u32* dc_predict_row_ptr, TMCJpegDecWork* work);
