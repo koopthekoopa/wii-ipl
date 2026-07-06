@@ -5,7 +5,7 @@
 static s32 TMCJPEGDEC_vl_decode_rc(u32* huff_tbl, u8* huff_sym, TMCJpegDecWork* work);
 
 
-s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, TMCJpegDecWork* work) {
+s32 TMCJPEGDEC_decode_iquant_rc(s32* block, u8* conv_row_ptr, u32* dc_predict_row_ptr, TMCJpegDecWork* work) {
     const u8* zztbl;
 
     u16* ac_fast;
@@ -59,10 +59,10 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
         if (tmp >> 1 > (u32)extra) {
             extra -= (tmp - 1);
         }
-        data[0] += extra;
+        dc_predict_row_ptr[0] += extra;
     }
 
-    *(s32*)state = data[0] * block[0];
+    *block = dc_predict_row_ptr[0] * conv_row_ptr[0];
 
     ac_fast = work->mpACFast;
     ac_vl = work->mpACHuffTbl;
@@ -70,7 +70,7 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
     blk_size = work->mBlockSize;
     blk_mul = work->mBlockSizeMul;
 
-    memset((u8*)state + 4, 0, blk_mul);
+    memset((u8*)block + 4, 0, blk_mul);
 
     zztbl = TMCJPEGDEC_Zigzag_data;
     idx = 1;
@@ -118,7 +118,7 @@ s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state, s32* block, u32* data, 
                 }
 
                 if (idx >= 64) return TMCC_ERROR_OVERFLOW;
-                *(s32*)((u8*)state + zztbl[idx] * 4) = extra *  block[zztbl[idx]];
+                *(s32*)((u8*)block + zztbl[idx] * 4) = extra *  conv_row_ptr[zztbl[idx]];
                 idx++;
             }
         } else {

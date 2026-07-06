@@ -13,7 +13,7 @@
 extern "C" {
 #endif
 
-typedef struct TMCJpegDecWork TMCJpegDecWork;
+typedef struct TMCJpegDecWork_t TMCJpegDecWork;
 
 typedef s32 (TMCReadCallback)(void*, u8*, u32);
 

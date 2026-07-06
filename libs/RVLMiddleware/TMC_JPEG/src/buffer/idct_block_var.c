@@ -1,7 +1,7 @@
 #include <tmc_jpeg_internal.h>
 #include <string.h>
 
-void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* buf, s32 pitch, s32 count) {
+void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag) {
     s32 tmp[64];
     s32* dst;
     s32 done;
@@ -12,7 +12,7 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* buf, s32 pitch, s32 count) {
     s32 x_factor, z_factor, m_part, p_part;
     s32 r;
 
-    r = (count >> 4) * 8;
+    r = (zigzag >> 4) * 8;
     iter = (u32)(r + 7) >> 3;
     dst = tmp;
     done = 0;
@@ -114,14 +114,14 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* buf, s32 pitch, s32 count) {
                 ok = 1;
             }
             val = (ok) ? val : (0xFF & ~(val >> 31));
-            buf[i + r] = (u8)val;
-            buf[i + pitch * 6] = (u8)val;
-            buf[i + z + pitch] = (u8)val;
-            buf[i + z] = (u8)val;
-            buf[i + z - pitch] = (u8)val;
-            buf[i + m] = (u8)val;
-            buf[i + pitch] = (u8)val;
-            buf[i] = (u8)val;
+            conv_row_ptr[i + r] = (u8)val;
+            conv_row_ptr[i + pitch * 6] = (u8)val;
+            conv_row_ptr[i + z + pitch] = (u8)val;
+            conv_row_ptr[i + z] = (u8)val;
+            conv_row_ptr[i + z - pitch] = (u8)val;
+            conv_row_ptr[i + m] = (u8)val;
+            conv_row_ptr[i + pitch] = (u8)val;
+            conv_row_ptr[i] = (u8)val;
         } else {
             t = (b2 - b6) * 0xB5 >> 8;
             a = *dst - b4;
@@ -147,7 +147,7 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* buf, s32 pitch, s32 count) {
                 } else {
                     result = val >> 11;
                 }
-                buf[i] = (u8)result;
+                conv_row_ptr[i] = (u8)result;
 
                 val = w - n;
                 if (val >> 19 != 0) {
@@ -155,7 +155,7 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* buf, s32 pitch, s32 count) {
                 } else {
                     result = val >> 11;
                 }
-                buf[i + r] = (u8)result;
+                conv_row_ptr[i + r] = (u8)result;
 
                 val = v + o;
                 if (val >> 19 != 0) {
@@ -163,7 +163,7 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* buf, s32 pitch, s32 count) {
                 } else {
                     result = val >> 11;
                 }
-                buf[i + pitch] = (u8)result;
+                conv_row_ptr[i + pitch] = (u8)result;
 
                 val = v - o;
                 if (val >> 19 != 0) {
@@ -171,7 +171,7 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* buf, s32 pitch, s32 count) {
                 } else {
                     result = val >> 11;
                 }
-                buf[i + pitch * 6] = (u8)result;
+                conv_row_ptr[i + pitch * 6] = (u8)result;
 
                 p = z + ((b5 - b3) * 0x8B >> 8);
                 q = p + x;
@@ -182,7 +182,7 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* buf, s32 pitch, s32 count) {
                 } else {
                     result = val >> 11;
                 }
-                buf[i + m] = (u8)result;
+                conv_row_ptr[i + m] = (u8)result;
 
                 val = e - q;
                 if (val >> 19 != 0) {
@@ -190,7 +190,7 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* buf, s32 pitch, s32 count) {
                 } else {
                     result = val >> 11;
                 }
-                buf[i + z + pitch] = (u8)result;
+                conv_row_ptr[i + z + pitch] = (u8)result;
 
                 val = y + p;
                 if (val >> 19 != 0) {
@@ -198,7 +198,7 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* buf, s32 pitch, s32 count) {
                 } else {
                     result = val >> 11;
                 }
-                buf[i + z - pitch] = (u8)result;
+                conv_row_ptr[i + z - pitch] = (u8)result;
 
                 val = y - p;
                 if (val >> 19 != 0) {
@@ -206,14 +206,14 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* buf, s32 pitch, s32 count) {
                 } else {
                     result = val >> 11;
                 }
-                buf[i + z] = (u8)result;
+                conv_row_ptr[i + z] = (u8)result;
             }
         }
         dst--;
     }
 }
 
-void TMCJPEGDEC_IdctBlock_Col(s32* block, u8* buf, s32 pitch, s32 mode) {
+void TMCJPEGDEC_IdctBlock_Col(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag) {
     s32 tmp[64];
     s32* dst;
     s32 done;
@@ -224,7 +224,7 @@ void TMCJPEGDEC_IdctBlock_Col(s32* block, u8* buf, s32 pitch, s32 mode) {
     s32 x_factor, z_factor, m_part, p_part;
     s32 r;
 
-    if (mode == 0x11) {
+    if (zigzag == 0x11) {
         s32 val;
         s32 ok;
 
@@ -234,12 +234,12 @@ void TMCJPEGDEC_IdctBlock_Col(s32* block, u8* buf, s32 pitch, s32 mode) {
             ok = 1;
         }
         val = (ok) ? val : ((val < 0) ? -0x80 : 0x7f);
-        memset(buf, (s8)val, 0x40);
+        memset(conv_row_ptr, (s8)val, 0x40);
         return;
     }
 
-    r = (mode >> 4) * 8;
-    if ((mode & 0xF) > 2) goto mode_gt_2;
+    r = (zigzag >> 4) * 8;
+    if ((zigzag & 0xF) > 2) goto mode_gt_2;
     {
         s32 inner;
 
@@ -419,14 +419,14 @@ epilogue:
                 ok = 1;
             }
             val = (ok) ? val : ((val < 0) ? -0x80 : 0x7f);
-            buf[i + 56] = (u8)val;
-            buf[i + 48] = (u8)val;
-            buf[i + 40] = (u8)val;
-            buf[i + 32] = (u8)val;
-            buf[i + 24] = (u8)val;
-            buf[i + 16] = (u8)val;
-            buf[i + 8] = (u8)val;
-            buf[i] = (u8)val;
+            conv_row_ptr[i + 56] = (u8)val;
+            conv_row_ptr[i + 48] = (u8)val;
+            conv_row_ptr[i + 40] = (u8)val;
+            conv_row_ptr[i + 32] = (u8)val;
+            conv_row_ptr[i + 24] = (u8)val;
+            conv_row_ptr[i + 16] = (u8)val;
+            conv_row_ptr[i + 8] = (u8)val;
+            conv_row_ptr[i] = (u8)val;
         } else {
             s32 ok;
             s32 val;
@@ -453,7 +453,7 @@ epilogue:
                 ok = 1;
             }
             result = (ok) ? result : ((result < 0) ? -0x80 : 0x7f);
-            buf[i] = (u8)result;
+            conv_row_ptr[i] = (u8)result;
 
             val = w - n;
             result = val >> 11;
@@ -462,7 +462,7 @@ epilogue:
                 ok = 1;
             }
             result = (ok) ? result : ((result < 0) ? -0x80 : 0x7f);
-            buf[i + 56] = (u8)result;
+            conv_row_ptr[i + 56] = (u8)result;
 
             p = z + ((b5 - b3) * 0x8B >> 8);
             q = p + x;
@@ -474,7 +474,7 @@ epilogue:
                 ok = 1;
             }
             result = (ok) ? result : ((result < 0) ? -0x80 : 0x7f);
-            buf[i + 8] = (u8)result;
+            conv_row_ptr[i + 8] = (u8)result;
 
             val = v - o;
             result = val >> 11;
@@ -483,7 +483,7 @@ epilogue:
                 ok = 1;
             }
             result = (ok) ? result : ((result < 0) ? -0x80 : 0x7f);
-            buf[i + 48] = (u8)result;
+            conv_row_ptr[i + 48] = (u8)result;
 
             val = e + q;
             result = val >> 11;
@@ -492,7 +492,7 @@ epilogue:
                 ok = 1;
             }
             result = (ok) ? result : ((result < 0) ? -0x80 : 0x7f);
-            buf[i + 16] = (u8)result;
+            conv_row_ptr[i + 16] = (u8)result;
 
             val = e - q;
             result = val >> 11;
@@ -501,7 +501,7 @@ epilogue:
                 ok = 1;
             }
             result = (ok) ? result : ((result < 0) ? -0x80 : 0x7f);
-            buf[i + 40] = (u8)result;
+            conv_row_ptr[i + 40] = (u8)result;
 
             val = y + p;
             result = val >> 11;
@@ -510,7 +510,7 @@ epilogue:
                 ok = 1;
             }
             result = (ok) ? result : ((result < 0) ? -0x80 : 0x7f);
-            buf[i + 24] = (u8)result;
+            conv_row_ptr[i + 24] = (u8)result;
 
             val = y - p;
             result = val >> 11;
@@ -519,7 +519,7 @@ epilogue:
                 ok = 1;
             }
             result = (ok) ? result : ((result < 0) ? -0x80 : 0x7f);
-            buf[i + 32] = (u8)result;
+            conv_row_ptr[i + 32] = (u8)result;
         }
         dst--;
     }

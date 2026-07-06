@@ -18,7 +18,7 @@ static s32 Clamp_S8(s32 v) {
     return (ok) ? v : ((v > 0) ? 127 : -128);
 }
 
-void TMCJPEGDEC_IdctBlock4x4(s16* block, s16* buf, s32 pitch) {
+void TMCJPEGDEC_IdctBlock4x4(s32* block, s16* conv_row_ptr, u16 pitch, s32 zigzag) {
     s32 tmp[66];
     s32* bp;
     u8* out;
@@ -33,7 +33,7 @@ void TMCJPEGDEC_IdctBlock4x4(s16* block, s16* buf, s32 pitch) {
     s32 r0, r1, r2, r3;
     s32 up2, up3, up4;
     bp = (s32*)block;
-    out = (u8*)buf;
+    out = (u8*)conv_row_ptr;
 
     src = bp + 24;
     dst = tmp + 24;
@@ -107,7 +107,7 @@ void TMCJPEGDEC_IdctBlock4x4(s16* block, s16* buf, s32 pitch) {
     }
 }
 
-void TMCJPEGDEC_IdctBlock2x2(s16* block, s16* buf, s32 pitch) {
+void TMCJPEGDEC_IdctBlock2x2(s32* block, s16* conv_row_ptr, u16 pitch, s32 zigzag) {
     s32 a0b;
     s32 a0, ok, a1;
     s32 b0, b1;
@@ -115,7 +115,7 @@ void TMCJPEGDEC_IdctBlock2x2(s16* block, s16* buf, s32 pitch) {
     u8* bp;
     s32 v;
 
-    bp = (u8*)buf;
+    bp = (u8*)conv_row_ptr;
     a0 = ((s32*)block)[0];
     ok = 0;
     a0b = a0 + 0x40000;
@@ -150,7 +150,7 @@ void TMCJPEGDEC_IdctBlock2x2(s16* block, s16* buf, s32 pitch) {
     bp[pitch + 1] = (u8)v;
 }
 
-void TMCJPEGDEC_IdctBlock1x1(s16* block, s16* buf, s32 pitch) {
+void TMCJPEGDEC_IdctBlock1x1(s32* block, s16* buf, u16 pitch) {
     s32 ok;
     s32 v;
 
@@ -165,7 +165,7 @@ void TMCJPEGDEC_IdctBlock1x1(s16* block, s16* buf, s32 pitch) {
     ((u8*)buf)[0] = (u8)v;
 }
 
-void TMCJPEGDEC_IdctBlock4x4_Col(s16* block, s16* buf, s32 pitch) {
+void TMCJPEGDEC_IdctBlock4x4_Col(s32* block, s16* conv_row_ptr, u16 pitch, s32 zigzag) {
     s32 tmp[66];
     s32* bp;
     u8* out;
@@ -179,7 +179,7 @@ void TMCJPEGDEC_IdctBlock4x4_Col(s16* block, s16* buf, s32 pitch) {
     s32 b_sum, b_diff, b_odd, b_rot;
     s32 r0, r1, r2, r3;
     bp = (s32*)block;
-    out = (u8*)buf;
+    out = (u8*)conv_row_ptr;
 
     src = bp + 24;
     dst = tmp + 24;
@@ -249,7 +249,7 @@ void TMCJPEGDEC_IdctBlock4x4_Col(s16* block, s16* buf, s32 pitch) {
     }
 }
 
-void TMCJPEGDEC_IdctBlock2x2_Col(s16* block, s16* buf, s32 pitch) {
+void TMCJPEGDEC_IdctBlock2x2_Col(s32* block, s16* conv_row_ptr, u16 pitch, s32 zigzag) {
     s32 ok;
     s32 a0, a1;
     s32 b0, b1;
@@ -272,7 +272,7 @@ void TMCJPEGDEC_IdctBlock2x2_Col(s16* block, s16* buf, s32 pitch) {
         ok = 1;
     }
     v = (ok) ? v : ((v > 0) ? 127 : -128);
-    ((u8*)buf)[0] = (u8)v;
+    ((u8*)conv_row_ptr)[0] = (u8)v;
 
     v = (even_sum - odd_sum) >> 11;
     {
@@ -283,7 +283,7 @@ void TMCJPEGDEC_IdctBlock2x2_Col(s16* block, s16* buf, s32 pitch) {
         }
         v = (ok) ? v : ((v > 0) ? 127 : -128);
     }
-    ((u8*)buf)[8] = (u8)v;
+    ((u8*)conv_row_ptr)[8] = (u8)v;
 
     v = (even_diff + rot) >> 11;
     {
@@ -294,7 +294,7 @@ void TMCJPEGDEC_IdctBlock2x2_Col(s16* block, s16* buf, s32 pitch) {
         }
         v = (ok) ? v : ((v > 0) ? 127 : -128);
     }
-    ((u8*)buf)[1] = (u8)v;
+    ((u8*)conv_row_ptr)[1] = (u8)v;
 
     v = (even_diff - rot) >> 11;
     {
@@ -305,10 +305,10 @@ void TMCJPEGDEC_IdctBlock2x2_Col(s16* block, s16* buf, s32 pitch) {
         }
         v = (ok) ? v : ((v > 0) ? 127 : -128);
     }
-    ((u8*)buf)[9] = (u8)v;
+    ((u8*)conv_row_ptr)[9] = (u8)v;
 }
 
-void TMCJPEGDEC_IdctBlock1x1_Col(s16* block, s16* buf, s32 pitch) {
+void TMCJPEGDEC_IdctBlock1x1_Col(s32* block, s16* conv_row_ptr, u16 pitch, s32 zigzag) {
     s32 ok;
     s32 v;
 
@@ -320,5 +320,5 @@ void TMCJPEGDEC_IdctBlock1x1_Col(s16* block, s16* buf, s32 pitch) {
     }
     v = (ok) ? v : ((v > 0) ? 127 : -128);
 
-    ((u8*)buf)[0] = (u8)v;
+    ((u8*)conv_row_ptr)[0] = (u8)v;
 }

@@ -30,14 +30,15 @@ static s32 TMCJPEGDEC_parse_sos(TMCJpegDecWork* work);
 s32 TMCJPEGDEC_decompmcu(u32 maxMCU, u32 mcuCount, TMCJpegDecWork* work, void* buf)
 {
     u8* compMapBase = work->mCompMap;
-    u8* compMapPtr = compMapBase;
     u8* frameInfo = (u8*)work + 0x17f0;
+    u8* compMapPtr = compMapBase;
     u8* scaleInfo = (u8*)work + 0x58;
     u8* convRowPtrs = (u8*)work + 0x183c;
-    u32* mcuDataInfo = work->mDCPredict;
-    void* decodeFunc = work->mDecodePtr;
-    void* idctFunc = work->mIdctPtr;
+    u32* mcuDataInfo = (u32*)(compMapBase + 4);
+    s32 mcuIdx = 0;
+    TMCDecodeFunc* decodeFunc = work->mDecodePtr;
     void* idctLumiFunc = work->mIdctLumiPtr;
+    void* idctFunc = work->mIdctPtr;
     u16 pitch = work->mPitch;
     s32 compIdx;
     u8* entTblBase;
@@ -45,7 +46,6 @@ s32 TMCJPEGDEC_decompmcu(u32 maxMCU, u32 mcuCount, TMCJpegDecWork* work, void* b
     u8* specificConvRowPtr;
     u8* blockCountPtr;
     s32 blockIdx;
-    s32 mcuIdx = 0;
     TMCCJPEGDecState* state = work->mpState;
 
     while (mcuIdx < (s32)*(frameInfo + 0x1b)) {
@@ -62,8 +62,8 @@ s32 TMCJPEGDEC_decompmcu(u32 maxMCU, u32 mcuCount, TMCJpegDecWork* work, void* b
             s32 stackBlock[64];
             s32 ret;
 
-            ret = ((s32 (*)(s32*, u8*, u32*, void*))decodeFunc)(
-                stackBlock, entTblBase, mcuDataInfo, work);
+
+            ret = decodeFunc(stackBlock, entTblBase, mcuDataInfo, work);
             if (ret < 0)
                 return ret;
 
@@ -79,15 +79,15 @@ s32 TMCJPEGDEC_decompmcu(u32 maxMCU, u32 mcuCount, TMCJpegDecWork* work, void* b
             blockIdx++;
         }
 
-        mcuDataInfo += 4;
+        mcuDataInfo = (u32*)((u8*)mcuDataInfo + 4);
         mcuIdx++;
         compMapPtr++;
     }
 
     if (maxMCU != state->mDataSizeX && mcuCount != state->mDataSizeY)
-        ((void (*)(TMCJpegDecWork*, u32, u32))work->mpConverterFunc)(work, maxMCU, mcuCount);
+        work->mpConverterFunc(work, maxMCU, mcuCount);
     else {
-        ((void (*)(TMCJpegDecWork*, u32, u32))work->mpConverterFuncEdge)(work, maxMCU, mcuCount);
+        work->mpConverterFuncEdge(work, maxMCU, mcuCount);
     }
 
     if (*(u16*)(frameInfo + 0x2a) != 0) {
@@ -208,7 +208,7 @@ s32 TMCJPEGDEC_scanstart(TMCJpegDecWork* work)
         return r;
 
     if (work->mFrameHeight == 0)
-        return -0x50;
+        return TMCC_ERROR_HEADER;
 
     r = TMCJPEGDEC_scan_varinit(work);
     if (r < 0)
@@ -234,27 +234,27 @@ s32 TMCJPEGDEC_scan_varinit(TMCJpegDecWork* work)
     TMCJpegFrameInfo* p;
     u16 remX;
     u16 remY;
-    u8 compId;
 
     p = (TMCJpegFrameInfo*)((u8*)work + 0x17f0);
     work->mComponentCount = work->mComponentCount | 0x100;
 
     if (work->mScanCompCount == 1) {
-        int hMul8;
-        int vMul8;
         u8 hSamp;
         u8 vSamp;
+        int hMul8;
+        int vMul8;
         u8 qTblH;
         u8 qTblV;
+        TMCJpegFrameInfo* compPtr;
 
-        compId = work->mCompMap[0];
         hSamp = p->mMaxHSamp;
+        compPtr = (TMCJpegFrameInfo*)((u8*)p + work->mCompMap[0]);
         vSamp = p->mMaxVSamp;
-        qTblH = p->mHSampFactor[compId];
+        qTblH = compPtr->mHSampFactor[0];
         hMul8 = hSamp * 8;
         vMul8 = vSamp * 8;
         p->mMCUXCount = (u8)(hMul8 / qTblH);
-        qTblV = p->mVSampFactor[compId];
+        qTblV = compPtr->mVSampFactor[0];
         p->mMCUYCount = p->mFrameWidth / p->mMCUXCount;
         p->mMCUXRem = (u8)(vMul8 / qTblV);
         p->mMCUXCount2 = p->mFrameHeight / p->mMCUXRem;
@@ -282,6 +282,7 @@ s32 TMCJPEGDEC_scan_varinit(TMCJpegDecWork* work)
 
 
     for (idx = 0; idx < (s32)p->mScanCompCount; idx++) {
+        u8 compId;
         u32 blocks;
 
         compId = work->mCompMap[idx];
@@ -500,8 +501,8 @@ static s32 TMCJPEGDEC_parse_dht(s32 first, TMCJpegDecWork* work)
 {
     u16 len;
     s32 r;
-    u8 countBuf[24]; // should be 17, but we need to force a bigger stack
     u8* scaleInfo;
+    u8 countBuf[17];
     u8 symBuf[256];
 
     scaleInfo = &work->mScaleFlag;
@@ -560,7 +561,7 @@ static s32 TMCJPEGDEC_parse_dht(s32 first, TMCJpegDecWork* work)
         if (r < 0)
             return r;
 
-        countBuf[0] = totalCodes;
+        ((TMCHuffParam*)&tblSet)->count = (u8)totalCodes;
 
         TMCJPEGDEC_set_HuffmanTable(&tblSet, tblClass, tblID, (TMCJpegDecWork*)scaleInfo);
         r = TMCJPEGDEC_make_huffdec(countBuf, symBuf, (TMCHuffParam*)&tblSet);
@@ -573,21 +574,17 @@ static s32 TMCJPEGDEC_parse_dht(s32 first, TMCJpegDecWork* work)
 
 static s32 TMCJPEGDEC_parse_dqt(TMCJpegDecWork* work)
 {
+    typedef struct { u32 data[64]; } CopyBlock64;
+
+    u8* scaleInfo;
+    u32 tblCopy[65];
+    u32* tblPtr;
+    u32* d;
     u16 len;
     s32 r;
-    u32 tblCopy[65];
-    u8* scaleInfo;
-    const u32* tblPtr;
-    const u32* s = (const u32*)lbl_8161E080 - 1;
-    u32* d = tblCopy;
-    u32 i = 32;
 
-    do {
-        d[1] = s[1];
-        d[2] = s[2];
-        s += 2;
-        d += 2;
-    } while (--i != 0);
+    d = tblCopy;
+    *(CopyBlock64*)(d + 1) = *(CopyBlock64*)lbl_8161E080;
 
     scaleInfo = (u8*)work + 0x58;
 
@@ -614,10 +611,12 @@ static s32 TMCJPEGDEC_parse_dqt(TMCJpegDecWork* work)
         if (qtInfo > 4)
             return -0x41;
 
-        scaleInfo[qtInfo + 0x1790] = 1;
+        scaleInfo[qtInfo + 0x1790] = 1; // mQuantTblFlag[0..3]
 
         zigPtr = TMCJPEGDEC_Zigzag_data;
         for (zzIdx = 0; zzIdx < 64; zzIdx++) {
+            u32 tmp;
+
             zz = *zigPtr;
             if (zz > 0x3F)
                 return -0x41;
@@ -626,8 +625,9 @@ static s32 TMCJPEGDEC_parse_dqt(TMCJpegDecWork* work)
             if (r < 0)
                 return r;
 
+            tmp = (zz << 2) + ((u32)qtInfo << 8);
             val = (u32)byte * tblPtr[zz];
-            *(u32*)((zz << 2) + scaleInfo + ((u32)qtInfo << 8)) = val;
+            *(u32*)(tmp + scaleInfo) = val;
             if (val == 0)
                 return -0x41;
 
@@ -657,13 +657,13 @@ static s32 TMCJPEGDEC_parse_sof(TMCJpegDecWork* work)
     if (r < 0)
         return r;
     if (len < 2)
-        return -0x50;
+        return TMCC_ERROR_HEADER;
 
     r = TMCJPEGDEC_get_byte(&precision, work);
     if (r < 0)
         return r;
     if (precision != 8)
-        return -0x50;
+        return TMCC_ERROR_HEADER;
 
     r = TMCJPEGDEC_get_wbyte(&height, work);
     if (r < 0)
@@ -679,7 +679,7 @@ static s32 TMCJPEGDEC_parse_sof(TMCJpegDecWork* work)
     if (r < 0)
         return r;
     if (compCount <= 0 || compCount > 4)
-        return -0x50;
+        return TMCC_ERROR_HEADER;
 
     work->mCompCount = compCount;
 
@@ -720,7 +720,7 @@ static s32 TMCJPEGDEC_parse_sof(TMCJpegDecWork* work)
     }
 
     if (maxHSamp == 0 || maxVSamp == 0)
-        return -0x50;
+        return TMCC_ERROR_HEADER;
 
     work->mMaxHSamp = maxHSamp;
     work->mMaxVSamp = maxVSamp;
@@ -796,15 +796,15 @@ static s32 TMCJPEGDEC_parse_sof(TMCJpegDecWork* work)
 
             hSamp2 = work->mHSampFactor[ idx];
             if (hSamp2 < 1 || hSamp2 > 4)
-                return -0x50;
+                return TMCC_ERROR_HEADER;
 
             vSamp2 = work->mVSampFactor[ idx];
             if (vSamp2 < 1 || vSamp2 > 4)
-                return -0x50;
+                return TMCC_ERROR_HEADER;
 
             qTbl2 = work->mCompQTbl[idx];
             if (qTbl2 > 4)
-                return -0x50;
+                return TMCC_ERROR_HEADER;
         }
     }
 
@@ -962,10 +962,10 @@ _process: {
             work->mRestartCnt = 0;
 
             {
-                u32 next = (val & 0xFF) * pitch + (val >> 16) + (u8)(rstDiff * interval);
-                div = next / pitch;
-                rem = next - div * pitch;
-                work->mMcuPos = (rem << 16) | (u16)div;
+                s32 next = (val & 0xFF) * (s32)pitch + (val >> 16) + (s32)(u8)(rstDiff * interval);
+                div = next / (s32)pitch;
+                rem = next - div * (s32)pitch;
+                work->mMcuPos = (rem << 16) + (u16)div;
             }
 
             r = TMCJPEGDEC_init_buff(work);

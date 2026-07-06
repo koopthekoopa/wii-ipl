@@ -1,8 +1,6 @@
 #include <tmc_jpeg_internal.h>
 
-s32 TMCJPEGDEC_decode_iquant(TMCCJPEGDecState* state,
-                              void* block, u8* data,
-                              s32 offset, s32 val) {
+s32 TMCJPEGDEC_decode_iquant(s32* block, u8* conv_row_ptr, u32* dc_predict_row_ptr, TMCJpegDecWork* work) {
     u16* ac_fast;
     u8* huff_sym;
     u8* ac_sym;
@@ -25,16 +23,16 @@ s32 TMCJPEGDEC_decode_iquant(TMCCJPEGDecState* state,
     s32 offs;
     const u8* zztbl;
 
-    bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
-    dc_fast = ((TMCJpegDecWork*)offset)->mpDCFast;
+    bit_pos = work->mBitCount;
+    dc_fast = work->mpDCFast;
 
     if (bit_pos <= 8) {
-        r = TMCJPEGDEC_load_buff((TMCJpegDecWork*)offset);
+        r = TMCJPEGDEC_load_buff(work);
         if (r < 0) return r;
-        bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
+        bit_pos = work->mBitCount;
     }
 
-    bit_data = ((TMCJpegDecWork*)offset)->mBitBuf;
+    bit_data = work->mBitBuf;
     tmp = bit_pos - 8;
     tmp = ((bit_data >> tmp) & 0xFF) << 2;
     {
@@ -51,20 +49,20 @@ s32 TMCJPEGDEC_decode_iquant(TMCCJPEGDecState* state,
 
     if (r != 0) {
         bit_pos -= r;
-        ((TMCJpegDecWork*)offset)->mBitCount = bit_pos;
+        work->mBitCount = bit_pos;
         r = extra;
     } else {
-        huff_sym = ((TMCJpegDecWork*)offset)->mpDCHuffSym;
-        huff_tbl = ((TMCJpegDecWork*)offset)->mpDCHuffTbl;
+        huff_sym = work->mpDCHuffSym;
+        huff_tbl = work->mpDCHuffTbl;
         if (bit_pos <= 17) {
-            r = TMCJPEGDEC_load_buff((TMCJpegDecWork*)offset);
+            r = TMCJPEGDEC_load_buff(work);
             if (r < 0) return r;
         }
-        bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
-        bit_data = ((TMCJpegDecWork*)offset)->mBitBuf;
+        bit_pos = work->mBitCount;
+        bit_data = work->mBitBuf;
         bit_pos -= 9;
         code = (bit_data >> bit_pos) & 0x1FF;
-        ((TMCJpegDecWork*)offset)->mBitCount = bit_pos;
+        work->mBitCount = bit_pos;
 
         i = 9;
         entry = (u16*)((u8*)huff_tbl + 0x24);
@@ -76,11 +74,11 @@ s32 TMCJPEGDEC_decode_iquant(TMCCJPEGDecState* state,
             entry += 2;
             if (i > 16) { r = TMCC_ERROR_OVERFLOW; goto dc_end; }
 
-            bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
+            bit_pos = work->mBitCount;
             code <<= 1;
-            bit_data = ((TMCJpegDecWork*)offset)->mBitBuf;
+            bit_data = work->mBitBuf;
             bit_pos--;
-            ((TMCJpegDecWork*)offset)->mBitCount = bit_pos;
+            work->mBitCount = bit_pos;
             code |= (bit_data >> bit_pos) & 1;
 
         dc_entry:
@@ -100,7 +98,7 @@ s32 TMCJPEGDEC_decode_iquant(TMCCJPEGDecState* state,
                 thresh = *(u16*)&cw;
             }
 
-            if ((u32)code > (u32)thresh) continue;
+            if (code > (u32)thresh) continue;
 
             code = code - entry[0] + offs;
             r = huff_sym[code & 0xFF];
@@ -111,46 +109,46 @@ dc_end:
         if (r < 0) return r;
     }
 
-    blk0 = ((s32*)block)[0];
+    blk0 = ((s32*)conv_row_ptr)[0];
     if (r != 0) {
-        bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
+        bit_pos = work->mBitCount;
         if (bit_pos <= r) {
-            s32 load_ret = TMCJPEGDEC_load_buff((TMCJpegDecWork*)offset);
+            s32 load_ret = TMCJPEGDEC_load_buff(work);
             if (load_ret < 0) return load_ret;
-            bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
+            bit_pos = work->mBitCount;
         }
-        bit_data = ((TMCJpegDecWork*)offset)->mBitBuf;
+        bit_data = work->mBitBuf;
         tmp = 1 << r;
         extra = tmp - 1;
         bit_pos -= r;
-        ((TMCJpegDecWork*)offset)->mBitCount = bit_pos;
+        work->mBitCount = bit_pos;
         extra = extra & (bit_data >> bit_pos);
         if ((s32)tmp >> 1 <= extra) {
             extra = extra;
         } else {
             extra = extra - (tmp - 1);
         }
-        ((u32*)data)[0] += extra;
+        dc_predict_row_ptr[0] += extra;
     }
 
-    *(s32*)state = ((u32*)data)[0] * blk0;
+    *block = dc_predict_row_ptr[0] * blk0;
 
-    ac_fast = ((TMCJpegDecWork*)offset)->mpACFast;
-    huff_tbl = ((TMCJpegDecWork*)offset)->mpACHuffTbl;
-    ac_sym = ((TMCJpegDecWork*)offset)->mpACHuffSym;
+    ac_fast = work->mpACFast;
+    huff_tbl = work->mpACHuffTbl;
+    ac_sym = work->mpACHuffSym;
 
-    memset((u8*)state + 4, 0, 0xFC);
+    memset((u8*)block + 4, 0, 0xFC);
 
-    bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
+    bit_pos = work->mBitCount;
     idx = 1;
     if (bit_pos <= 8) {
-        r = TMCJPEGDEC_load_buff((TMCJpegDecWork*)offset);
+        r = TMCJPEGDEC_load_buff(work);
         if (r < 0) return r;
     }
 
-    bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
+    bit_pos = work->mBitCount;
     zztbl = TMCJPEGDEC_Zigzag_data;
-    bit_data = ((TMCJpegDecWork*)offset)->mBitBuf;
+    bit_data = work->mBitBuf;
     t = bit_pos - 8;
     {
         u32 tbl_idx = ((bit_data >> t) & 0xFF) << 2;
@@ -167,21 +165,21 @@ dc_end:
 
     while (idx < 64) {
         if (thresh != 0) {
-            bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
+            bit_pos = work->mBitCount;
             bit_pos -= thresh;
-            ((TMCJpegDecWork*)offset)->mBitCount = bit_pos;
+            work->mBitCount = bit_pos;
             r = offs;
         } else {
-            bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
+            bit_pos = work->mBitCount;
             if (bit_pos <= 17) {
-                r = TMCJPEGDEC_load_buff((TMCJpegDecWork*)offset);
+                r = TMCJPEGDEC_load_buff(work);
                 if (r < 0) return r;
-                bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
+                bit_pos = work->mBitCount;
             }
-            bit_data = ((TMCJpegDecWork*)offset)->mBitBuf;
+            bit_data = work->mBitBuf;
             bit_pos -= 9;
             code = (bit_data >> bit_pos) & 0x1FF;
-            ((TMCJpegDecWork*)offset)->mBitCount = bit_pos;
+            work->mBitCount = bit_pos;
 
             i = 9;
             entry = (u16*)((u8*)huff_tbl + 0x24);
@@ -193,11 +191,11 @@ dc_end:
                 entry += 2;
                 if (i > 16) { r = TMCC_ERROR_OVERFLOW; goto ac_end; }
 
-                bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
+                bit_pos = work->mBitCount;
                 code <<= 1;
-                bit_data = ((TMCJpegDecWork*)offset)->mBitBuf;
+                bit_data = work->mBitBuf;
                 bit_pos--;
-                ((TMCJpegDecWork*)offset)->mBitCount = bit_pos;
+                work->mBitCount = bit_pos;
                 code |= (bit_data >> bit_pos) & 1;
 
             ac_entry:
@@ -217,7 +215,7 @@ dc_end:
                     thresh = *(u16*)&cw;
                 }
 
-                if ((u32)code > (u32)thresh) continue;
+                if (code > (u32)thresh) continue;
 
                 code = code - entry[0] + offs;
                 r = ac_sym[code & 0xFF];
@@ -237,18 +235,18 @@ ac_end:
 
             zz = zztbl[idx];
 
-            bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
+            bit_pos = work->mBitCount;
             if (bit_pos <= t + 8) {
-                r = TMCJPEGDEC_load_buff((TMCJpegDecWork*)offset);
+                r = TMCJPEGDEC_load_buff(work);
                 if (r < 0) return r;
-                bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
+                bit_pos = work->mBitCount;
             }
-            bit_data = ((TMCJpegDecWork*)offset)->mBitBuf;
+            bit_data = work->mBitBuf;
 
             tmp = 1 << t;
             extra = tmp - 1;
             bit_pos -= t;
-            ((TMCJpegDecWork*)offset)->mBitCount = bit_pos;
+            work->mBitCount = bit_pos;
             extra = extra & (bit_data >> bit_pos);
             if ((s32)tmp >> 1 <= extra) {
                 extra = extra;
@@ -256,11 +254,11 @@ ac_end:
                 extra = extra - (tmp - 1);
             }
 
-            q = ((s32*)block)[zz];
-            ((s32*)state)[zz] = extra * q;
+            q = ((s32*)conv_row_ptr)[zz];
+            block[zz] = extra * q;
 
-            bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
-            bit_data = ((TMCJpegDecWork*)offset)->mBitBuf;
+            bit_pos = work->mBitCount;
+            bit_data = work->mBitBuf;
             t = bit_pos - 8;
             tmp = ((bit_data >> t) & 0xFF) << 2;
             thresh = ac_fast[tmp >> 1];
@@ -280,13 +278,13 @@ ac_end:
             }
             idx += 16;
 
-            bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
+            bit_pos = work->mBitCount;
             if (bit_pos <= 8) {
-                r = TMCJPEGDEC_load_buff((TMCJpegDecWork*)offset);
+                r = TMCJPEGDEC_load_buff(work);
                 if (r < 0) return r;
             }
-            bit_data = ((TMCJpegDecWork*)offset)->mBitBuf;
-            bit_pos = ((TMCJpegDecWork*)offset)->mBitCount;
+            bit_data = work->mBitBuf;
+            bit_pos = work->mBitCount;
             t = bit_pos - 8;
             tmp = ((bit_data >> t) & 0xFF) << 2;
             thresh = ac_fast[tmp >> 1];

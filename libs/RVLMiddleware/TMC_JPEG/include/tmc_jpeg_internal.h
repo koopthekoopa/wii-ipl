@@ -4,6 +4,10 @@
 #include <tmc_jpeg.h>
 #include <revolution/types.h>
 
+typedef s32 (TMCDecodeFunc)(s32* block, u8* conv_row_ptr, u32* dcPredictRowPtr, TMCJpegDecWork* work);
+typedef void (TMCIdctFunc)(s32* block, u8* conv_row_ptr, s32 pitch, s32 zigzag);
+typedef void (TMCConverterFunc)(TMCJpegDecWork*, s32 x, s32 y);
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -34,7 +38,7 @@ typedef struct {
     u8 unk_0x2D[0x03];    // 0x2D
 } TMCJpegFrameInfo;
 
-typedef struct TMCJpegDecWork {
+typedef struct TMCJpegDecWork_t {
     u32 mBitBuf;        // 0x00
     s32 mBitCount;      // 0x04
     u8* mpBufStart;     // 0x08
@@ -57,7 +61,7 @@ typedef struct TMCJpegDecWork {
     u32 mMcuPos;        // 0x54
     u8 mScaleFlag;           // 0x58
     u8 unk_0x59[0x3E7];
-    void* mDCACPtrs[6];      // 0x440
+    u8* mDCACPtrs[6];      // 0x440
     u8 mZigzagData[64];      // 0x458
     u16* mpDCFast;           // 0x498
     u32* mpDCHuffTbl;        // 0x49C
@@ -109,14 +113,14 @@ typedef struct TMCJpegDecWork {
     u16 mRestartInterval; // 0x181A
     u8 mScanCount;      // 0x181C
     u8 unk_0x181D[0x03];
-    void* mIdctPtr;     // 0x1820
-    void* mIdctLumiPtr; // 0x1824
-    void* mDecodePtr;   // 0x1828
-    void* mpConverterFunc;    // 0x182C
-    void* mpConverterFuncEdge; // 0x1830
+    TMCIdctFunc* mIdctPtr;     // 0x1820
+    TMCIdctFunc* mIdctLumiPtr; // 0x1824
+    TMCDecodeFunc* mDecodePtr; // 0x1828
+    TMCConverterFunc* mpConverterFunc;    // 0x182C
+    TMCConverterFunc* mpConverterFuncEdge; // 0x1830
     u32 mBlockSize;     // 0x1834
     u32 mBlockSizeMul;  // 0x1838
-    void* mpConvRowPtrs[7]; // 0x183C
+    u8* mpConvRowPtrs[7]; // 0x183C
     u8 mConvBuf[0x184];
     u8 mIdctMode;       // 0x19DC
     u8 unk_0x19DD;      // 0x19DD
@@ -170,24 +174,19 @@ s32 TMCJPEGDEC_Decompscan(TMCJpegDecWork* work);
 s32 TMCJPEGDEC_Setsize(TMCJpegDecWork* work);
 s32 TMCJPEGDEC_HeaderAnalyze(TMCJpegDecWork* work);
 
-void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* buf, s32 pitch, s32 count);
-void TMCJPEGDEC_IdctBlock_Col(s32* block, u8* buf, s32 pitch, s32 count);
+void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* conv_row_ptr, s32 pitch, s32 zigzag);
+void TMCJPEGDEC_IdctBlock_Col(s32* block, u8* conv_row_ptr, s32 pitch, s32 zigzag);
 
-s32 TMCJPEGDEC_decode_iquant(TMCCJPEGDecState* state,
-                              void* block, u8* data,
-                              s32 offset, s32 val);
-s32 TMCJPEGDEC_decode_iquant_rc(TMCCJPEGDecState* state,
-                                 s32* block, u32* data,
-                                 TMCJpegDecWork* work);
-s32 TMCJPEGDEC_vl_decode_rc(u32* huff_tbl, u8* huff_sym,
-                              TMCJpegDecWork* work);
+s32 TMCJPEGDEC_decode_iquant(s32* block, u8* conv_row_ptr, u32* dc_predict_row_ptr, TMCJpegDecWork* work);
+s32 TMCJPEGDEC_decode_iquant_rc(s32* block, u8* conv_row_ptr, u32* dc_predict_row_ptr, TMCJpegDecWork* work);
+s32 TMCJPEGDEC_vl_decode_rc(u32* huff_tbl, u8* huff_sym, TMCJpegDecWork* work);
 
-void TMCJPEGDEC_IdctBlock4x4(s16* block, s16* buf, s32 pitch);
-void TMCJPEGDEC_IdctBlock2x2(s16* block, s16* buf, s32 pitch);
-void TMCJPEGDEC_IdctBlock1x1(s16* block, s16* buf, s32 pitch);
-void TMCJPEGDEC_IdctBlock4x4_Col(s16* block, s16* buf, s32 pitch);
-void TMCJPEGDEC_IdctBlock2x2_Col(s16* block, s16* buf, s32 pitch);
-void TMCJPEGDEC_IdctBlock1x1_Col(s16* block, s16* buf, s32 pitch);
+void TMCJPEGDEC_IdctBlock4x4(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag);
+void TMCJPEGDEC_IdctBlock2x2(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag);
+void TMCJPEGDEC_IdctBlock1x1(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag);
+void TMCJPEGDEC_IdctBlock4x4_Col(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag);
+void TMCJPEGDEC_IdctBlock2x2_Col(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag);
+void TMCJPEGDEC_IdctBlock1x1_Col(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag);
 
 s32 TMCJPEGDEC_set_converterY8U8V8(TMCJpegDecWork* work);
 s32 TMCJPEGDEC_set_converterRGB565(TMCJpegDecWork* work);
