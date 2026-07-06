@@ -40,23 +40,34 @@ s32 TMCJPEGDEC_init_ptr_buff(TMCJpegDecWork* work, void* param) {
 }
 
 s32 TMCJPEGDEC_get_byte(u8* dst, TMCJpegDecWork* work) {
-    if (work->mpBufCur < work->mpBufEnd) goto read;
-    if (work->mRemaining == 0) goto err1;
-    { s32 r = TMCJPEG_814EB108(work); if (r >= 0) goto read; return r; }
-err1:
-    return TMCC_ERROR_UNDERFLOW;
-read: {
-    u8* cur = work->mpBufCur;
-    u8 byte = *cur; cur++;
+    u8* cur;
+    u8 byte;
+
+    if (work->mpBufCur >= work->mpBufEnd) {
+        if (work->mRemaining != 0) {
+            s32 r = TMCJPEG_814EB108(work);
+            if (r < 0)
+                return r;
+        } else {
+            return TMCC_ERROR_UNDERFLOW;
+        }
+    }
+
+    cur = work->mpBufCur;
+    byte = *cur; cur++;
     *dst = byte;
     work->mpBufCur = cur;
-    if (cur < work->mpBufEnd) goto ret0;
-    if (work->mRemaining == 0) goto err2;
-    { s32 r = TMCJPEG_814EB108(work); if (r >= 0) goto ret0; return r; }
-}
-err2:
-    return -0x90;
-ret0:
+
+    if (cur >= work->mpBufEnd) {
+        if (work->mRemaining != 0) {
+            s32 r = TMCJPEG_814EB108(work);
+            if (r < 0)
+                return r;
+        } else {
+            return TMCC_ERROR_UNDERFLOW;
+        }
+    }
+
     return 0;
 }
 
@@ -65,36 +76,51 @@ s32 TMCJPEGDEC_get_wbyte(u16* dst, TMCJpegDecWork* work) {
     u32 byte_shifted;
     s32 r;
 
-    if (work->mpBufCur < work->mpBufEnd) goto r1;
-    if (work->mRemaining == 0) goto e1;
-    r = TMCJPEG_814EB108(work);
-    if (r >= 0) goto r1;
-    goto br;
-e1:
-    r = -0x90;
-    goto br;
+    u8* cur;
+    u8* end;
+    u8* next;
 
-    r1:
-    {
-        s32 _r = r;
-        u8* cur = work->mpBufCur;
-        u8* end = work->mpBufEnd;
-        u8* tmp = cur + 1;
-        (void)_r;
-        work->mpBufCur = tmp;
-        byte_val = *cur;
-        if (tmp < end) goto o1;
+    if (work->mpBufCur >= work->mpBufEnd) {
+        if (work->mRemaining != 0) {
+            r = TMCJPEG_814EB108(work);
+            if (r < 0)
+                goto br;
+            else {
+                // This else-branch is load-bearing...
+                // Forces bge instead of blt.
+            }
+        } else {
+            r = TMCC_ERROR_UNDERFLOW;
+            goto br;
+        }
     }
-    if (work->mRemaining == 0) goto e2a;
-    r = TMCJPEG_814EB108(work);
-    if (r >= 0) goto o1;
-    goto br;
-e2a:
-    r = -0x90;
-    goto br;
+
+    {
+        u8* tmp = work->mpBufCur;
+        end = work->mpBufEnd;
+        cur = tmp;
+        next = tmp + 1;
+    }
+
+    work->mpBufCur = next;
+    byte_val = *cur;
+    if (next < end) goto o1;
+
+    if (work->mRemaining != 0) {
+        r = TMCJPEG_814EB108(work);
+        if (r >= 0) {
+            goto o1;
+        }
+        goto br;
+    }
+    else {
+        r = TMCC_ERROR_UNDERFLOW;
+        goto br;
+    }
 
 o1:
     r = 0;
+
 br:
     byte_shifted = (u32)byte_val << 8;
     if (r >= 0) goto p2;
@@ -102,92 +128,101 @@ br:
 
 p2:
     if (work->mpBufCur < work->mpBufEnd) goto r2;
-    if (work->mRemaining == 0) goto e3;
-    r = TMCJPEG_814EB108(work);
-    if (r >= 0) goto r2;
-    goto ez;
-e3:
-    r = -0x90;
-    goto ez;
+    if (work->mRemaining != 0) {
+        r = TMCJPEG_814EB108(work);
+        if (r < 0)
+            goto ez;
+        else {
+            // ...
+        }
+    }
+    else {
+        r = TMCC_ERROR_UNDERFLOW;
+        goto ez;
+    }
 
 r2:
-    {
-        s32 _r = r;
-        u8* cur = work->mpBufCur;
-        u8* end = work->mpBufEnd;
-        u8* tmp = cur + 1;
-        (void)_r;
-        work->mpBufCur = tmp;
-        byte_val = *cur;
-        if (tmp < end) goto o2;
+    cur = work->mpBufCur;
+    end = work->mpBufEnd;
+    next = cur + 1;
+    work->mpBufCur = next;
+    byte_val = *cur;
+    if (next < end) goto o2;
+
+    if (work->mRemaining != 0) {
+        r = TMCJPEG_814EB108(work);
+        if (r < 0)
+            goto ez;
+        else {
+            // ...
+        }
     }
-    if (work->mRemaining == 0) goto e4;
-    r = TMCJPEG_814EB108(work);
-    if (r >= 0) goto o2;
-    goto ez;
-e4:
-    r = -0x90;
-    goto ez;
+    else {
+        r = TMCC_ERROR_UNDERFLOW;
+        goto ez;
+    }
 
 o2:
     r = 0;
 ez:
     *dst = byte_shifted + byte_val;
-    return (r < 0) ? r : 0;
+    return r < 0 ? r : 0;
 }
 
 s32 TMCJPEGDEC_get_sbyte(u8* dst, u32 count, TMCJpegDecWork* work) {
-    u8* d = dst;
+    int r = 0;
+    u32 i;
     u8 byte;
-    int r;
-    u32 i = 0;
-    goto lc;
+    u8* cur;
 
-lb:
-    if (work->mpBufCur < work->mpBufEnd) goto rd;
-    if (work->mRemaining == 0) goto e1;
-    r = TMCJPEG_814EB108(work);
-    if (r >= 0) goto rd;
-    goto po;
+    for (i = 0; i < count; i++) {
+        if (work->mpBufCur >= work->mpBufEnd) {
+            if (work->mRemaining != 0) {
+                r = TMCJPEG_814EB108(work);
+                if (r < 0)
+                    goto copy_byte;
+                else {
+                    // This else-branch is load-bearing...
+                    // Forces bge instead of blt.
+                }
+            } else {
+                r = TMCC_ERROR_UNDERFLOW;
+                goto copy_byte;
+            }
+        }
 
-e1:
-    r = -0x90;
-    goto po;
-
-rd:
-    {
-        u8* cur = work->mpBufCur;
-        work->mpBufCur = cur + 1;
+        cur = work->mpBufCur;
+        work->mpBufCur += 1;
         byte = *cur;
+
+        if (work->mpBufCur < work->mpBufEnd) goto r0;
+        if (work->mRemaining != 0) {
+            r = TMCJPEG_814EB108(work);
+            if (r >= 0) {
+                goto r0;
+            }
+            goto copy_byte;
+        }
+        else {
+            r = TMCC_ERROR_UNDERFLOW;
+            goto copy_byte;
+        }
+
+        r0:
+        r = 0;
+
+        copy_byte:
+        *dst = byte;
+        dst++;
+
+        if (r < 0)
+            return r;
     }
-    if (work->mpBufCur < work->mpBufEnd) goto r0;
-    if (work->mRemaining == 0) goto e2;
-    r = TMCJPEG_814EB108(work);
-    if (r >= 0) goto r0;
-    goto po;
-
-e2:
-    r = -0x90;
-    goto po;
-
-r0:
-    r = 0;
-po:
-    *d = byte;
-    d++;
-    if (r >= 0) goto inc;
-    return r;
-
-inc:
-    i++;
-lc:
-    if (i < count) goto lb;
     return 0;
 }
 
 s32 TMCJPEGDEC_move_ptr(s32 offset, TMCJpegDecWork* work) {
     s32 avail;
-    s32 back;
 
     if (offset < 0) goto ng;
     goto lc;
@@ -197,7 +232,7 @@ lp:
     if (work->mRemaining == 0) goto er1;
     { s32 r = TMCJPEG_814EB108(work); if (r >= 0) goto lc; return r; }
 er1:
-    return -0x90;
+    return TMCC_ERROR_UNDERFLOW;
 
 lc:
     avail = work->mpBufEnd - work->mpBufCur;
@@ -207,21 +242,20 @@ lc:
     if (work->mRemaining == 0) goto er2;
     { s32 r = TMCJPEG_814EB108(work); if (r >= 0) goto ret0; return r; }
 er2:
-    return -0x90;
+    return TMCC_ERROR_UNDERFLOW;
 
 ng:
     offset = -offset;
-    if (work->mpBufCur - work->mpBufStart < offset) return -0x90;
+    if (work->mpBufCur - work->mpBufStart < offset) return TMCC_ERROR_UNDERFLOW;
     work->mpBufCur -= offset;
 ret0:
     return 0;
 }
 
 s32 TMCJPEGDEC_load_buff(TMCJpegDecWork* work) {
-
-    u8 byte;
-    s32 bitCount;
     u32 bitBuf;
+    s32 bitCount;
+    u8 byte;
     u8* cur = work->mpBufCur;
     u8* end = work->mpBufMark;
 
@@ -249,15 +283,16 @@ s32 TMCJPEGDEC_load_buff(TMCJpegDecWork* work) {
         }
 
         {
-            u8* c = work->mpBufCur;
             u32 bb = work->mBitBuf;
+            u8* c = work->mpBufCur;
+            u8* next;
             u8 byte = *c;
-            u8* tmp = c + 1;
-            u32 nb = (bb << 8) + byte;
-            work->mpBufCur = tmp;
-            work->mBitBuf = nb;
+
+            next = c + 1;
+            work->mpBufCur = next;
+            work->mBitBuf = (bb << 8) + byte;
             work->mBitCount += 8;
-            if (byte == 0xFF) work->mpBufCur = tmp + 1;
+            if (byte == 0xFF) work->mpBufCur = next + 1;
         }
 
         if (work->mpBufEnd <= work->mpBufCur) {

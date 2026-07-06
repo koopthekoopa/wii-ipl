@@ -1198,7 +1198,7 @@ config.libs = [
     TMCJpegLib(
         [
             Object(NonMatching, "buffer/mkhdec3.c"),
-            Object(Equivalent,  "buffer/buffer_system.c"),
+            Object(Matching,    "buffer/buffer_system.c"),
             Object(Equivalent,  "buffer/getcode.c"),
             Object(NonMatching, "buffer/idct_block_var.c"),
 
