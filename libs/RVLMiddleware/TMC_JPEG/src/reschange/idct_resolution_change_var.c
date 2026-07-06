@@ -1,6 +1,6 @@
 #include <tmc_jpeg_internal.h>
 
-static s32 Clamp_U8(s32 v) {
+static u8 Clamp_U8(s32 v) {
     s32 ok;
     ok = 0;
     if (v < 256 && v > -1) {
@@ -9,316 +9,241 @@ static s32 Clamp_U8(s32 v) {
     return (ok) ? v : ((v < 0) ? 0 : 255);
 }
 
-static s32 Clamp_S8(s32 v) {
+static s8 Clamp_S8(s32 v) {
     s32 ok;
     ok = 0;
     if (v < 128 && v > -129) {
         ok = 1;
     }
-    return (ok) ? v : ((v > 0) ? 127 : -128);
+    return (ok) ? (s8)v : ((v > 0) ? 127 : -128);
 }
 
-void TMCJPEGDEC_IdctBlock4x4(s32* block, s16* conv_row_ptr, u16 pitch, s32 zigzag) {
-    s32 tmp[66];
-    s32* bp;
-    u8* out;
+void TMCJPEGDEC_IdctBlock4x4(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag) {
+    s32 tmp[64];
+    s32 a, b, c, d, bd;
+    s32 evsum, rot, oddrot, cd, t;
     s32 i;
-    s32* src;
-    s32* dst;
-    s32* col;
-    s32 a0, a1, a2, a3;
-    s32 a_sum, a_diff, a_odd, a_rot;
-    s32 b0, b1, b2, b3;
-    s32 b_sum, b_diff, b_odd, b_rot;
-    s32 r0, r1, r2, r3;
-    s32 up2, up3, up4;
-    bp = (s32*)block;
-    out = (u8*)conv_row_ptr;
+    s32* sp;
+    s32* dp;
 
-    src = bp + 24;
-    dst = tmp + 24;
+    sp = block + 24;
+    dp = tmp + 24;
 
     for (i = 0; i < 2; i++) {
-        a0 = src[0];
-        a1 = src[1];
-        a2 = src[2];
-        a3 = src[3];
+        b = sp[1];
+        d = sp[3];
+        a = sp[0];
+        t = b - d;
+        bd = b + d;
+        t = t * 0xB5;
+        c = sp[2];
 
-        a_rot = ((a1 - a3) * 181) >> 8;
-        a_sum = a0 + a2;
-        a_diff = a0 - a2;
-        a_odd = a1 + a3;
+        b = sp[-7];
+        evsum = a + c;
+        d = sp[-5];
+        rot = t >> 8;
+        oddrot = rot + bd;
+        cd = a - c;
 
-        dst[0] = a_sum + a_odd + a_rot;
-        dst[1] = a_diff + a_rot;
-        dst[2] = a_diff - a_rot;
-        dst[3] = a_sum - a_odd - a_rot;
+        dp[0] = evsum + oddrot;
 
-        b0 = src[-8];
-        b1 = src[-7];
-        b2 = src[-6];
-        b3 = src[-5];
+        t = b - d;
+        dp[1] = cd + rot;
+        t = t * 0xB5;
+        dp[2] = cd - rot;
+        dp[3] = evsum - oddrot;
 
-        b_rot = ((b1 - b3) * 181) >> 8;
-        b_sum = b0 + b2;
-        b_diff = b0 - b2;
-        b_odd = b1 + b3;
+        a = sp[-8];
+        c = sp[-6];
+        evsum = a + c;
+        rot = t >> 8;
+        cd = a - c;
+        bd = b + d;
+        oddrot = rot + bd;
+        dp[-8] = evsum + oddrot;
+        dp[-7] = cd + rot;
+        dp[-6] = cd - rot;
+        dp[-5] = evsum - oddrot;
 
-        dst[-8] = b_sum + b_odd + b_rot;
-        dst[-7] = b_diff + b_rot;
-        dst[-6] = b_diff - b_rot;
-        dst[-5] = b_sum - b_odd - b_rot;
-
-        src -= 16;
-        dst -= 16;
+        sp -= 16;
+        dp -= 16;
     }
 
-    col = tmp + 3;
     {
-        up4 = (u16)pitch * 4;
-        up3 = up4 - pitch;
-        up2 = (u16)pitch * 2;
-        for (i = 3; i >= 0; i--) {
-            u8* base = out + i;
-            r0 = col[0];
-            r1 = col[8];
-            r2 = col[16];
-            r3 = col[24];
+        u32 p4, p3, p2;
+        u32 idx;
+        u32 max;
+        s32 ok;
 
-            a_rot = ((r1 - r3) * 181) >> 8;
-            a_odd = r1 + r3;
-            a_sum = r0 + 0x40000 + r2;
-            a_diff = r0 + 0x40000 - r2;
+        p4 = (u16)pitch * 4;
+        p3 = p4 - pitch;
+        p2 = (u16)pitch * 2;
+        idx = 3;
+        max = 255;
+        sp = tmp + 3;
 
-            r0 = Clamp_U8((a_sum + a_rot + a_odd) >> 11);
-            *base = (u8)r0;
+        for (i = 0; i < 4; i++) {
+            u8* bp;
+            s32 v;
+            a = sp[0] + 0x40000;
+            bp = conv_row_ptr + idx;
+            b = sp[8];
+            d = sp[24];
+            c = sp[16];
 
-            r0 = Clamp_U8((a_diff + a_rot) >> 11);
-            base[pitch] = (u8)r0;
+            evsum = a + c;
+            t = b - d;
+            cd = a - c;
+            t = t * 0xB5;
+            rot = t >> 8;
+            bd = b + d;
+            oddrot = rot + bd;
 
-            r0 = Clamp_U8((a_diff - a_rot) >> 11);
-            base[up2] = (u8)r0;
+            v = (evsum + oddrot) >> 11;
+            ok = 0;
+            if (v < 256 && v > -1) ok = 1;
+            bp[0] = (u8)((ok) ? v : ((v < 0) ? 0 : max));
 
-            r0 = Clamp_U8((a_sum - a_rot - a_odd) >> 11);
-            base[up3] = (u8)r0;
+            v = (cd + rot) >> 11;
+            ok = 0;
+            if (v < 256 && v > -1) ok = 1;
+            bp[pitch] = (u8)((ok) ? v : ((v < 0) ? 0 : max));
 
-            col--;
+            v = (cd - rot) >> 11;
+            ok = 0;
+            if (v < 256 && v > -1) ok = 1;
+            bp[p2] = (u8)((ok) ? v : ((v < 0) ? 0 : max));
+
+            v = (evsum - oddrot) >> 11;
+            ok = 0;
+            if (v < 256 && v > -1) ok = 1;
+            bp[p3] = (u8)((ok) ? v : ((v < 0) ? 0 : max));
+
+            idx--;
+            sp--;
         }
     }
 }
 
-void TMCJPEGDEC_IdctBlock2x2(s32* block, s16* conv_row_ptr, u16 pitch, s32 zigzag) {
+void TMCJPEGDEC_IdctBlock2x2(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag) {
+    u8* bp;
     s32 a0b;
-    s32 a0, ok, a1;
+    s32 a0, a1;
     s32 b0, b1;
     s32 even_sum, even_diff, odd_sum, rot;
-    u8* bp;
-    s32 v;
-
-    bp = (u8*)conv_row_ptr;
-    a0 = ((s32*)block)[0];
-    ok = 0;
+    bp = conv_row_ptr;
+    a0 = block[0];
     a0b = a0 + 0x40000;
-    a1 = ((s32*)block)[1];
-    b0 = ((s32*)block)[8];
-    b1 = ((s32*)block)[9];
+    a1 = block[1];
+    b0 = block[8];
+    b1 = block[9];
     even_sum = a0b + a1;
     even_diff = a0b - a1;
     odd_sum = b0 + b1;
     rot = b0 - b1;
-    v = (even_sum + odd_sum) >> 11;
-    if ((s32)v < 256 && (s32)v > -1) { ok = 1; }
-    v = (ok) ? v : ((v < 0) ? 0 : 255);
-    bp[0] = (u8)v;
-
-    ok = 0;
-    v = (even_sum - odd_sum) >> 11;
-    if ((s32)v < 256 && (s32)v > -1) { ok = 1; }
-    v = (ok) ? v : ((v < 0) ? 0 : 255);
-    bp[pitch] = (u8)v;
-
-    ok = 0;
-    v = (even_diff + rot) >> 11;
-    if ((s32)v < 256 && (s32)v > -1) { ok = 1; }
-    v = (ok) ? v : ((v < 0) ? 0 : 255);
-    bp[1] = (u8)v;
-
-    ok = 0;
-    v = (even_diff - rot) >> 11;
-    if ((s32)v < 256 && (s32)v > -1) { ok = 1; }
-    v = (ok) ? v : ((v < 0) ? 0 : 255);
-    bp[pitch + 1] = (u8)v;
+    bp[0] = (u8)Clamp_U8((even_sum + odd_sum) >> 11);
+    bp[pitch] = (u8)Clamp_U8((even_sum - odd_sum) >> 11);
+    bp[1] = (u8)Clamp_U8((even_diff + rot) >> 11);
+    (bp + pitch)[1] = (u8)Clamp_U8((even_diff - rot) >> 11);
 }
 
-void TMCJPEGDEC_IdctBlock1x1(s32* block, s16* buf, u16 pitch) {
-    s32 ok;
-    s32 v;
-
-    ok = 0;
-    v = (((s32*)block)[0] >> 11) + 0x80;
-
-    if ((s32)v < 256 && (s32)v > -1) {
-        ok = 1;
-    }
-    v = (ok) ? v : ((v < 0) ? 0 : 255);
-
-    ((u8*)buf)[0] = (u8)v;
+void TMCJPEGDEC_IdctBlock1x1(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag) {
+    s32 in = block[0];
+    conv_row_ptr[0] = Clamp_U8((in >> 11) + 0x80);
 }
 
-void TMCJPEGDEC_IdctBlock4x4_Col(s32* block, s16* conv_row_ptr, u16 pitch, s32 zigzag) {
-    s32 tmp[66];
-    s32* bp;
-    u8* out;
+void TMCJPEGDEC_IdctBlock4x4_Col(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag) {
+    s32 tmp[64];
+    s32* sp;
+    s32* dp;
     s32 i;
-    s32* src;
-    s32* dst;
-    s32* col;
-    s32 a0, a1, a2, a3;
-    s32 a_sum, a_diff, a_odd, a_rot;
-    s32 b0, b1, b2, b3;
-    s32 b_sum, b_diff, b_odd, b_rot;
-    s32 r0, r1, r2, r3;
-    bp = (s32*)block;
-    out = (u8*)conv_row_ptr;
+    s32 a, b, c, d;
+    s32 evsum, evdiff, rot, oddrot;
 
-    src = bp + 24;
-    dst = tmp + 24;
+    sp = block + 24;
+    dp = tmp + 24;
 
     for (i = 0; i < 2; i++) {
-        a1 = src[1];
-        a3 = src[3];
-        a0 = src[0];
+        a = sp[0];
+        b = sp[1];
+        c = sp[2];
+        d = sp[3];
+        evsum = a + c;
+        evdiff = a - c;
+        rot = (b - d) * 0xB5 >> 8;
+        oddrot = rot + b + d;
+        dp[0] = evsum + oddrot;
+        dp[1] = evdiff + rot;
+        dp[2] = evdiff - rot;
+        dp[3] = evsum - oddrot;
 
-        a_odd = a1 + a3;
-        a_rot = ((a1 - a3) * 181) >> 8;
+        a = sp[-8];
+        b = sp[-7];
+        c = sp[-6];
+        d = sp[-5];
+        evsum = a + c;
+        evdiff = a - c;
+        rot = (b - d) * 0xB5 >> 8;
+        oddrot = rot + b + d;
+        dp[-8] = evsum + oddrot;
+        dp[-7] = evdiff + rot;
+        dp[-6] = evdiff - rot;
+        dp[-5] = evsum - oddrot;
 
-        a2 = src[2];
-        b1 = src[-7];
-        a_sum = a0 + a2;
-        b3 = src[-5];
-        a_diff = a0 - a2;
-
-        dst[0] = a_sum + a_odd + a_rot;
-        dst[1] = a_diff + a_rot;
-        dst[2] = a_diff - a_rot;
-        dst[3] = a_sum - a_odd - a_rot;
-
-        b_rot = ((b1 - b3) * 181) >> 8;
-        b0 = src[-8];
-        b2 = src[-6];
-        b_sum = b0 + b2;
-        b_diff = b0 - b2;
-        b_odd = b1 + b3;
-
-        dst[-8] = b_sum + b_odd + b_rot;
-        dst[-7] = b_diff + b_rot;
-        dst[-6] = b_diff - b_rot;
-        dst[-5] = b_sum - b_odd - b_rot;
-
-        src -= 16;
-        dst -= 16;
+        sp -= 16;
+        dp -= 16;
     }
 
-    col = tmp + 3;
+    sp = tmp + 5;
+    for (i = 0; i < 4; i++) {
+        s32 v;
+        a = sp[0];
+        b = sp[8];
+        c = sp[16];
+        d = sp[24];
+        evsum = a + c;
+        evdiff = a - c;
+        rot = (b - d) * 0xB5 >> 8;
+        oddrot = rot + b + d;
 
-    for (i = 3; i >= 0; i--) {
-        u8* p = out + i;
-        r0 = col[0];
-        r1 = col[8];
-        r2 = col[16];
-        r3 = col[24];
+        v = (evsum + oddrot) >> 11;
+        conv_row_ptr[i] = (u8)Clamp_S8(v);
 
-        a_rot = ((r1 - r3) * 181) >> 8;
-        a_odd = r1 + r3;
-        a_sum = r0 + r2;
-        a_diff = r0 - r2;
+        v = (evdiff + rot) >> 11;
+        conv_row_ptr[i + 8] = (u8)Clamp_S8(v);
 
-        r0 = Clamp_S8((a_sum + a_rot + a_odd) >> 11);
-        p[0] = (u8)r0;
+        v = (evdiff - rot) >> 11;
+        conv_row_ptr[i + 16] = (u8)Clamp_S8(v);
 
-        r0 = Clamp_S8((a_diff + a_rot) >> 11);
-        p[8] = (u8)r0;
+        v = (evsum - oddrot) >> 11;
+        conv_row_ptr[i + 24] = (u8)Clamp_S8(v);
 
-        r0 = Clamp_S8((a_diff - a_rot) >> 11);
-        p[16] = (u8)r0;
-
-        r0 = Clamp_S8((a_sum - a_rot - a_odd) >> 11);
-        p[24] = (u8)r0;
-
-        col--;
+        sp--;
     }
 }
 
-void TMCJPEGDEC_IdctBlock2x2_Col(s32* block, s16* conv_row_ptr, u16 pitch, s32 zigzag) {
-    s32 ok;
+void TMCJPEGDEC_IdctBlock2x2_Col(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag) {
     s32 a0, a1;
     s32 b0, b1;
     s32 even_sum, even_diff, odd_sum, rot;
-    s32 v;
 
-    a0 = ((s32*)block)[0];
-    ok = 0;
-    a1 = ((s32*)block)[1];
-    b0 = ((s32*)block)[8];
-    b1 = ((s32*)block)[9];
+    a0 = block[0];
+    a1 = block[1];
+    b0 = block[8];
+    b1 = block[9];
 
     even_sum = a0 + a1;
     even_diff = a0 - a1;
     odd_sum = b0 + b1;
     rot = b0 - b1;
 
-    v = (even_sum + odd_sum) >> 11;
-    if ((s32)v < 128 && (s32)v > -129) {
-        ok = 1;
-    }
-    v = (ok) ? v : ((v > 0) ? 127 : -128);
-    ((u8*)conv_row_ptr)[0] = (u8)v;
-
-    v = (even_sum - odd_sum) >> 11;
-    {
-        s32 ok;
-        ok = 0;
-        if ((s32)v < 128 && (s32)v > -129) {
-            ok = 1;
-        }
-        v = (ok) ? v : ((v > 0) ? 127 : -128);
-    }
-    ((u8*)conv_row_ptr)[8] = (u8)v;
-
-    v = (even_diff + rot) >> 11;
-    {
-        s32 ok;
-        ok = 0;
-        if ((s32)v < 128 && (s32)v > -129) {
-            ok = 1;
-        }
-        v = (ok) ? v : ((v > 0) ? 127 : -128);
-    }
-    ((u8*)conv_row_ptr)[1] = (u8)v;
-
-    v = (even_diff - rot) >> 11;
-    {
-        s32 ok;
-        ok = 0;
-        if ((s32)v < 128 && (s32)v > -129) {
-            ok = 1;
-        }
-        v = (ok) ? v : ((v > 0) ? 127 : -128);
-    }
-    ((u8*)conv_row_ptr)[9] = (u8)v;
+    conv_row_ptr[0] = (u8)Clamp_S8((even_sum + odd_sum) >> 11);
+    conv_row_ptr[8] = (u8)Clamp_S8((even_sum - odd_sum) >> 11);
+    conv_row_ptr[1] = (u8)Clamp_S8((even_diff + rot) >> 11);
+    conv_row_ptr[9] = (u8)Clamp_S8((even_diff - rot) >> 11);
 }
 
-void TMCJPEGDEC_IdctBlock1x1_Col(s32* block, s16* conv_row_ptr, u16 pitch, s32 zigzag) {
-    s32 ok;
-    s32 v;
-
-    ok = 0;
-    v = (((s32*)block)[0] >> 11);
-
-    if ((s32)v < 128 && (s32)v > -129) {
-        ok = 1;
-    }
-    v = (ok) ? v : ((v > 0) ? 127 : -128);
-
-    ((u8*)conv_row_ptr)[0] = (u8)v;
+void TMCJPEGDEC_IdctBlock1x1_Col(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag) {
+    s32 in = block[0];
+    conv_row_ptr[0] = Clamp_S8(in >> 11);
 }
