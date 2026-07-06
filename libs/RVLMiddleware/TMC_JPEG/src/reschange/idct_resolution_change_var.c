@@ -10,117 +10,90 @@ static u8 Clamp_U8(s32 v) {
 }
 
 static s8 Clamp_S8(s32 v) {
-    s32 ok;
-    ok = 0;
-    if (v < 128 && v > -129) {
-        ok = 1;
-    }
-    return (ok) ? (s8)v : ((v > 0) ? 127 : -128);
+    return (v < 128 && v > -129) ? (s8)v : (v > 0) ? 127 : -128;
 }
 
 void TMCJPEGDEC_IdctBlock4x4(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag) {
-    s32 tmp[64];
-    s32 a, b, c, d, bd;
-    s32 evsum, rot, oddrot, cd, t;
-    s32 i;
+
+    s32 bd;
+    s32 d;
+    s32 c;
+    s32 a;
+    s32 b;
+
     s32* sp;
     s32* dp;
+
+    s32 tmp[64];
+    s32 i;
+
+    s32 evsum, rot, oddrot, cd;
 
     sp = block + 24;
     dp = tmp + 24;
 
     for (i = 0; i < 2; i++) {
-        b = sp[1];
-        d = sp[3];
-        a = sp[0];
-        t = b - d;
+        a = sp[0]; // 0x0
+        b = sp[1]; // 0x4
+        c = sp[2]; // 0x8
+        d = sp[3]; // 0xc
         bd = b + d;
-        t = t * 0xB5;
-        c = sp[2];
-
-        b = sp[-7];
         evsum = a + c;
-        d = sp[-5];
-        rot = t >> 8;
-        oddrot = rot + bd;
-        cd = a - c;
 
+        oddrot = ( 0xB5 * (sp[1] - sp[3]) >> 8) + bd;
+        rot = (0xB5 * (sp[1] - sp[3])) >> 8;
+
+        dp[1] = (a - c) + rot;
+        dp[2] = (a - c) - rot;
+        dp[3] = evsum - oddrot;
         dp[0] = evsum + oddrot;
 
-        t = b - d;
-        dp[1] = cd + rot;
-        t = t * 0xB5;
-        dp[2] = cd - rot;
-        dp[3] = evsum - oddrot;
 
-        a = sp[-8];
-        c = sp[-6];
-        evsum = a + c;
-        rot = t >> 8;
-        cd = a - c;
+        b = sp[-7]; // -0x1c
+        d = sp[-5]; // -0x14
+
         bd = b + d;
+        rot = ((b - d) * 0xB5) >> 8;
         oddrot = rot + bd;
-        dp[-8] = evsum + oddrot;
-        dp[-7] = cd + rot;
-        dp[-6] = cd - rot;
-        dp[-5] = evsum - oddrot;
+
+        a = sp[-8]; // -0x20
+        c = sp[-6]; // -0x18
+
+        dp[-8] = (a + c) + oddrot;
+        dp[-7] = (a - c) + rot;
+        dp[-6] = (a - c) - rot;
+        dp[-5] = (a + c) - oddrot;
 
         sp -= 16;
         dp -= 16;
     }
 
     {
-        u32 p4, p3, p2;
-        u32 idx;
-        u32 max;
-        s32 ok;
-
-        p4 = (u16)pitch * 4;
-        p3 = p4 - pitch;
-        p2 = (u16)pitch * 2;
-        idx = 3;
-        max = 255;
+        u32 idx = 3;
         sp = tmp + 3;
 
         for (i = 0; i < 4; i++) {
-            u8* bp;
-            s32 v;
+            u8* bp = conv_row_ptr + idx;
+
             a = sp[0] + 0x40000;
-            bp = conv_row_ptr + idx;
             b = sp[8];
             d = sp[24];
             c = sp[16];
 
             evsum = a + c;
-            t = b - d;
             cd = a - c;
-            t = t * 0xB5;
-            rot = t >> 8;
+
+            rot = ((b - d) * 0xB5) >> 8;
             bd = b + d;
             oddrot = rot + bd;
 
-            v = (evsum + oddrot) >> 11;
-            ok = 0;
-            if (v < 256 && v > -1) ok = 1;
-            bp[0] = (u8)((ok) ? v : ((v < 0) ? 0 : max));
+            bp[0] = Clamp_U8((evsum + oddrot) >> 11);
+            bp[pitch] = Clamp_U8((cd + rot) >> 11);
+            bp[pitch * 2] = Clamp_U8((cd - rot) >> 11);
+            bp[pitch * 4 - pitch] = Clamp_U8((evsum - oddrot) >> 11);
 
-            v = (cd + rot) >> 11;
-            ok = 0;
-            if (v < 256 && v > -1) ok = 1;
-            bp[pitch] = (u8)((ok) ? v : ((v < 0) ? 0 : max));
-
-            v = (cd - rot) >> 11;
-            ok = 0;
-            if (v < 256 && v > -1) ok = 1;
-            bp[p2] = (u8)((ok) ? v : ((v < 0) ? 0 : max));
-
-            v = (evsum - oddrot) >> 11;
-            ok = 0;
-            if (v < 256 && v > -1) ok = 1;
-            bp[p3] = (u8)((ok) ? v : ((v < 0) ? 0 : max));
-
-            idx--;
             sp--;
+            idx -= 1;
         }
     }
 }
@@ -203,6 +176,7 @@ void TMCJPEGDEC_IdctBlock4x4_Col(s32* block, u8* conv_row_ptr, u16 pitch, s32 zi
         d = sp[24];
         evsum = a + c;
         evdiff = a - c;
+
         rot = (b - d) * 0xB5 >> 8;
         oddrot = rot + b + d;
 
@@ -210,15 +184,15 @@ void TMCJPEGDEC_IdctBlock4x4_Col(s32* block, u8* conv_row_ptr, u16 pitch, s32 zi
         conv_row_ptr[i] = (u8)Clamp_S8(v);
 
         v = (evdiff + rot) >> 11;
-        conv_row_ptr[i + 8] = (u8)Clamp_S8(v);
+        conv_row_ptr[i + sizeof(u8)] = (u8)Clamp_S8(v);
 
         v = (evdiff - rot) >> 11;
-        conv_row_ptr[i + 16] = (u8)Clamp_S8(v);
+        conv_row_ptr[i + sizeof(u8) * 2] = (u8)Clamp_S8(v);
 
         v = (evsum - oddrot) >> 11;
-        conv_row_ptr[i + 24] = (u8)Clamp_S8(v);
+        conv_row_ptr[i + sizeof(u8) * 3] = (u8)Clamp_S8(v);
 
-        sp--;
+        sp = sp + -1;
     }
 }
 

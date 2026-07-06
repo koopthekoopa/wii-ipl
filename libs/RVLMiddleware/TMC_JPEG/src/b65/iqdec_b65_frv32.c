@@ -1,9 +1,9 @@
 #include <tmc_jpeg_internal.h>
 
 s32 TMCJPEGDEC_decode_iquant(s32* block, u8* conv_row_ptr, u32* dc_predict_row_ptr, TMCJpegDecWork* work) {
+    volatile u32 ac_comb;
     u16* ac_fast;
     u8* huff_sym;
-    u8* ac_sym;
     u32* huff_tbl;
     s32 bit_pos;
     u32 bit_data;
@@ -16,11 +16,6 @@ s32 TMCJPEGDEC_decode_iquant(s32* block, u8* conv_row_ptr, u32* dc_predict_row_p
     s32 zz;
     s32 q;
     u32 tmp;
-    u32 code;
-    unsigned int i;
-    u16* entry;
-    s32 thresh;
-    s32 offs;
     const u8* zztbl;
 
     bit_pos = work->mBitCount;
@@ -52,8 +47,15 @@ s32 TMCJPEGDEC_decode_iquant(s32* block, u8* conv_row_ptr, u32* dc_predict_row_p
         work->mBitCount = bit_pos;
         r = extra;
     } else {
+        u32 code;
+        unsigned int i;
+        u16* entry;
+        s32 thresh;
+        s32 offs;
+
         huff_sym = work->mpDCHuffSym;
         huff_tbl = work->mpDCHuffTbl;
+
         if (bit_pos <= 17) {
             r = TMCJPEGDEC_load_buff(work);
             if (r < 0) return r;
@@ -135,7 +137,7 @@ dc_end:
 
     ac_fast = work->mpACFast;
     huff_tbl = work->mpACHuffTbl;
-    ac_sym = work->mpACHuffSym;
+    huff_sym = work->mpACHuffSym;
 
     memset((u8*)block + 4, 0, 0xFC);
 
@@ -152,24 +154,26 @@ dc_end:
     t = bit_pos - 8;
     {
         u32 tbl_idx = ((bit_data >> t) & 0xFF) << 2;
-        thresh = ac_fast[tbl_idx >> 1];
-        offs = *(u16*)((u8*)ac_fast + tbl_idx + 2);
-    }
-
-    {
-        volatile u16 pre[2];
-        pre[0] = thresh;
-        pre[1] = offs;
-        thresh = pre[0];
+        s32 thresh_val = ac_fast[tbl_idx >> 1];
+        s32 offs_val = *(u16*)((u8*)ac_fast + tbl_idx + 2);
+        *(u16*)&ac_comb = thresh_val;
+        *((u16*)&ac_comb + 1) = offs_val;
     }
 
     while (idx < 64) {
-        if (thresh != 0) {
+        s32 ac_thresh = *(u16*)&ac_comb;
+        if (ac_thresh != 0) {
             bit_pos = work->mBitCount;
-            bit_pos -= thresh;
+            bit_pos -= ac_thresh;
             work->mBitCount = bit_pos;
-            r = offs;
+            r = *((u16*)&ac_comb + 1);
         } else {
+            u32 code;
+            unsigned int i;
+            u16* entry;
+            s32 thresh;
+            s32 offs;
+
             bit_pos = work->mBitCount;
             if (bit_pos <= 17) {
                 r = TMCJPEGDEC_load_buff(work);
@@ -182,9 +186,9 @@ dc_end:
             work->mBitCount = bit_pos;
 
             i = 9;
-            entry = (u16*)((u8*)huff_tbl + 0x24);
+            entry = (u16*)((u8*)work->mpACHuffTbl + 0x24);
 
-            goto ac_entry;
+            goto ac_entry_huff;
 
             while (1) {
                 i++;
@@ -198,7 +202,7 @@ dc_end:
                 work->mBitCount = bit_pos;
                 code |= (bit_data >> bit_pos) & 1;
 
-            ac_entry:
+            ac_entry_huff:
                 thresh = entry[0];
                 offs = entry[1];
 
@@ -218,7 +222,7 @@ dc_end:
                 if (code > (u32)thresh) continue;
 
                 code = code - entry[0] + offs;
-                r = ac_sym[code & 0xFF];
+                r = huff_sym[code & 0xFF];
                 break;
             }
 
@@ -241,13 +245,21 @@ ac_end:
                 if (r < 0) return r;
                 bit_pos = work->mBitCount;
             }
-            bit_data = work->mBitBuf;
-
             tmp = 1 << t;
+            bit_data = work->mBitBuf;
             extra = tmp - 1;
             bit_pos -= t;
             work->mBitCount = bit_pos;
-            extra = extra & (bit_data >> bit_pos);
+            t = bit_pos - 8;
+            {
+                u32 next_tbl = ((bit_data >> t) & 0xFF) << 2;
+                s32 next_th = ac_fast[next_tbl >> 1];
+                s32 next_of = *(u16*)((u8*)ac_fast + next_tbl + 2);
+                extra = extra & (bit_data >> bit_pos);
+                *(u16*)&ac_comb = next_th;
+                *((u16*)&ac_comb + 1) = next_of;
+            }
+
             if ((s32)tmp >> 1 <= extra) {
                 extra = extra;
             } else {
@@ -257,27 +269,11 @@ ac_end:
             q = ((s32*)conv_row_ptr)[zz];
             block[zz] = extra * q;
 
-            bit_pos = work->mBitCount;
-            bit_data = work->mBitBuf;
-            t = bit_pos - 8;
-            tmp = ((bit_data >> t) & 0xFF) << 2;
-            thresh = ac_fast[tmp >> 1];
-            offs = *(u16*)((u8*)ac_fast + tmp + 2);
-
-            {
-                volatile u16 pre[2];
-                pre[0] = thresh;
-                pre[1] = offs;
-                thresh = pre[0];
-            }
-
             idx++;
         } else {
             if (r == 0) {
                 break;
             }
-            idx += 16;
-
             bit_pos = work->mBitCount;
             if (bit_pos <= 8) {
                 r = TMCJPEGDEC_load_buff(work);
@@ -287,15 +283,14 @@ ac_end:
             bit_pos = work->mBitCount;
             t = bit_pos - 8;
             tmp = ((bit_data >> t) & 0xFF) << 2;
-            thresh = ac_fast[tmp >> 1];
-            offs = *(u16*)((u8*)ac_fast + tmp + 2);
-
             {
-                volatile u16 pre[2];
-                pre[0] = thresh;
-                pre[1] = offs;
-                thresh = pre[0];
+                s32 next_thresh = ac_fast[tmp >> 1];
+                s32 next_offs = *(u16*)((u8*)ac_fast + tmp + 2);
+                *(u16*)&ac_comb = next_thresh;
+                *((u16*)&ac_comb + 1) = next_offs;
             }
+
+            idx += 16;
         }
     }
 

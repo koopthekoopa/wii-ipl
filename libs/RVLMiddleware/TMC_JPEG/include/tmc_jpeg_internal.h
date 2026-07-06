@@ -5,7 +5,7 @@
 #include <revolution/types.h>
 
 typedef s32 (TMCDecodeFunc)(s32* block, u8* conv_row_ptr, u32* dcPredictRowPtr, TMCJpegDecWork* work);
-typedef void (TMCIdctFunc)(s32* block, u8* conv_row_ptr, s32 pitch, s32 zigzag);
+typedef void (TMCIdctFunc)(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag);
 typedef void (TMCConverterFunc)(TMCJpegDecWork*, s32 x, s32 y);
 
 #ifdef __cplusplus
