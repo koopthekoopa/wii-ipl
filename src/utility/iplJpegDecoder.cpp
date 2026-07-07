@@ -25,7 +25,7 @@ namespace ipl {
 JpegDecoder::JpegDecoder(EGG::Heap* heap)
     : mpData(NULL), mLength(0), mReadPos(0), mpCapture(NULL),
       mInitResult(0), mStatus(0) {
-    mpBuf1 = new (heap, DEFAULT_ALIGN) u8[0x1C00];
+    mpBuf1 = reinterpret_cast<TMCJpegDecWork*>(new (heap, DEFAULT_ALIGN) u8[0x1C00]);
     mpBuf2 = new (heap, DEFAULT_ALIGN) u8[0x10040];
 
     clear();
@@ -46,7 +46,7 @@ BOOL JpegDecoder::decodeJpg(EGG::Heap* heap, u8* buffer, u32 length) {
         param.mpBuf2 = mpBuf2;
         param.mBuf2Size = 0x10040;
         param.mDataSize = length;
-        param.mpCallback = (void*)readStreamCallback;
+        param.mpCallback = readStreamCallback;
         param.mpContext = this;
 
         mInitResult = TMCCJPEGDecInit(&mTMCState, &param);
@@ -231,7 +231,7 @@ void JpegDecoder::clear() {
     mOrientation = 0;
 }
 
-int JpegDecoder::readStreamCallback(void* ctx, u8* buf, unsigned int size) {
+s32 JpegDecoder::readStreamCallback(void* ctx, u8* buf, unsigned int size) {
     JpegDecoder* self = (JpegDecoder*)ctx;
     memcpy(buf, self->mpData + self->mReadPos, size);
     self->mReadPos += size;
@@ -248,7 +248,7 @@ int JpegDecoder::get_orientation() {
     param.mpBuf2 = mpBuf2;
     param.mBuf2Size = 0x10040;
     param.mDataSize = mLength;
-    param.mpCallback = (void*)readStreamCallback;
+    param.mpCallback = readStreamCallback;
     param.mpContext = this;
 
     mReadPos = 0;

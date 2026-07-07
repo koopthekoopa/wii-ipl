@@ -15,7 +15,7 @@ extern "C" {
 
 typedef struct TMCJpegDecWork_t TMCJpegDecWork;
 
-typedef s32 (TMCReadCallback)(void*, u8*, u32);
+typedef s32 (TMCReadCallback)(void*, u8*, unsigned int);
 
 typedef struct {
     u8    unk_0x00[0x10];

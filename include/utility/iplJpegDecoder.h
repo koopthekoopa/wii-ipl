@@ -25,13 +25,13 @@ namespace ipl {
             void clear();
 
         private:
-            static int readStreamCallback(void* ctx, u8* buf, unsigned int size);
+            static s32 readStreamCallback(void* ctx, u8* buf, unsigned int size);
 
             int get_orientation();
             int get_resolution(int w, int h);
             void calc_capture_size(int w, int h);
 
-            void*    mpBuf1;            // 0x000 - JPEG work buffer (0x1C00 bytes)
+            TMCJpegDecWork* mpBuf1;     // 0x000 (0x1C00 bytes)
             void*    mpBuf2;            // 0x004 - stream buffer (0x10040 bytes)
             u8*      mpData;            // 0x008
             u32      mLength;           // 0x00C
