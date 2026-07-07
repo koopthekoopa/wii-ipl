@@ -24,6 +24,7 @@ namespace nw4r {
             } WaveBufferInfo;
 
             class WavePacket {
+            public:
                 WavePacket();
                 virtual ~WavePacket() {}
 
@@ -73,6 +74,8 @@ namespace nw4r {
             bool IsNextWavePacket() const;
             void SetNextWavePacket();
             void UpdateWavePacket();
+
+            inline void setVolume(f32 newVolume) { mVolume = newVolume; }
 
         private:
             void detail_Update();
