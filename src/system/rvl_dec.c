@@ -4,6 +4,8 @@
 #define ASH_SIGNATURE 0x00415348 /* 'ASH' */
 #define ASR_SIGNATURE 0x00415352 /* 'ASR' */
 
+static u8 work[0x9008];
+
 int Rvl_decode(u8* out, u8* in) {
 #ifdef TARGET_RVL
     // Original ASM Implementation

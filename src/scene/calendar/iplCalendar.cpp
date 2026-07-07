@@ -28,21 +28,21 @@ namespace ipl {
             { "TextBox_02", MESG_CALENDAR_TUESDAY },
             { "TextBox_03", MESG_CALENDAR_WEDNESDAY },
             { "TextBox_04", MESG_CALENDAR_THURSDAY },
-            { "TextBox_05", MESG_CALENDAR_THURSDAY },
+            { "TextBox_05", MESG_CALENDAR_FRIDAY },
             { "TextBox_06", MESG_CALENDAR_SATURDAY },
             { "TextBox_08", MESG_CALENDAR_SUNDAY },
             { "TextBox_09", MESG_CALENDAR_MONDAY },
             { "TextBox_10", MESG_CALENDAR_TUESDAY },
             { "TextBox_11", MESG_CALENDAR_WEDNESDAY },
             { "TextBox_12", MESG_CALENDAR_THURSDAY },
-            { "TextBox_13", MESG_CALENDAR_THURSDAY },
+            { "TextBox_13", MESG_CALENDAR_FRIDAY },
             { "TextBox_07", MESG_CALENDAR_SATURDAY },
             { "TextBox_16", MESG_CALENDAR_SUNDAY },
             { "TextBox_17", MESG_CALENDAR_MONDAY },
             { "TextBox_18", MESG_CALENDAR_TUESDAY },
             { "TextBox_19", MESG_CALENDAR_WEDNESDAY },
             { "TextBox_20", MESG_CALENDAR_THURSDAY },
-            { "TextBox_14", MESG_CALENDAR_THURSDAY },
+            { "TextBox_14", MESG_CALENDAR_FRIDAY },
             { "TextBox_15", MESG_CALENDAR_SATURDAY },
         };
 
@@ -51,21 +51,21 @@ namespace ipl {
             { "TextBox_01", MESG_CALENDAR_TUESDAY },
             { "TextBox_02", MESG_CALENDAR_WEDNESDAY },
             { "TextBox_03", MESG_CALENDAR_THURSDAY },
-            { "TextBox_04", MESG_CALENDAR_THURSDAY },
+            { "TextBox_04", MESG_CALENDAR_FRIDAY },
             { "TextBox_05", MESG_CALENDAR_SATURDAY },
             { "TextBox_06", MESG_CALENDAR_SUNDAY },
             { "TextBox_08", MESG_CALENDAR_MONDAY },
             { "TextBox_09", MESG_CALENDAR_TUESDAY },
             { "TextBox_10", MESG_CALENDAR_WEDNESDAY },
             { "TextBox_11", MESG_CALENDAR_THURSDAY },
-            { "TextBox_12", MESG_CALENDAR_THURSDAY },
+            { "TextBox_12", MESG_CALENDAR_FRIDAY },
             { "TextBox_13", MESG_CALENDAR_SATURDAY },
             { "TextBox_07", MESG_CALENDAR_SUNDAY },
             { "TextBox_16", MESG_CALENDAR_MONDAY },
             { "TextBox_17", MESG_CALENDAR_TUESDAY },
             { "TextBox_18", MESG_CALENDAR_WEDNESDAY },
             { "TextBox_19", MESG_CALENDAR_THURSDAY },
-            { "TextBox_20", MESG_CALENDAR_THURSDAY },
+            { "TextBox_20", MESG_CALENDAR_FRIDAY },
             { "TextBox_14", MESG_CALENDAR_SATURDAY },
             { "TextBox_15", MESG_CALENDAR_SUNDAY },
         };
@@ -152,7 +152,7 @@ namespace ipl {
             set_textbox_date(1, *mpBoardDate);
             exec_search_task();
 
-            mpInitAnim->initAnmFrame(!mbAsian && !mbUSA ? 1.0f : 0.0f);
+            mpInitAnim->initAnmFrame(!mbAsian && !mbUSA ? 1 : 0);
         }
 
         void Calendar::calcCommon() {

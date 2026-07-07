@@ -19,21 +19,14 @@
 static s32 nanddrv_init(PDM_DISK* p_disk);
 static s32 nanddrv_mount(PDM_DISK* p_disk);
 static s32 nanddrv_format(PDM_DISK* p_disk, const u8* param);
+static s32 nanddrv_pread(PDM_DISK* p_disk, u8* p_buf, u32 block, u32 num_blocks, u32* p_num_success);
+static s32 nanddrv_pwrite(PDM_DISK* p_disk, const u8* p_buf, u32 block, u32 num_blocks, u32* p_num_success);
 static s32 nanddrv_unmount(PDM_DISK* p_disk);
 static s32 nanddrv_finalize(PDM_DISK* p_disk);
 static s32 nanddrv_get_disk_info(PDM_DISK* p_disk, PDM_DISK_INFO* p_disk_info);
 
-#ifndef PF_IPL_BUILD
-static s32 nanddrv_pread(PDM_DISK* p_disk, u8* p_buf, u32 block, u32 num_blocks);
-static s32 nanddrv_pwrite(PDM_DISK* p_disk, const u8* p_buf, u32 block, u32 num_blocks);
-static s32 nanddrv_physical_read(u32 num_blocks, u8* buf, u32 block, u32 bps, PDM_DISK* p_disk);
-static s32 nanddrv_physical_write(u32 num_blocks, const u8* buf, u32 block, u32 bps, PDM_DISK* p_disk);
-#else
-static s32 nanddrv_pread(PDM_DISK* p_disk, u8* p_buf, u32 block, u32 num_blocks);
-static s32 nanddrv_pwrite(PDM_DISK* p_disk, const u8* p_buf, u32 block, u32 num_blocks);
-static s32 nanddrv_physical_read(u32 num_blocks, u8* buf, u32 block, u32 bps, PDM_DISK* p_disk);
-static s32 nanddrv_physical_write(u32 num_blocks, const u8* buf, u32 block, u32 bps, PDM_DISK* p_disk);
-#endif
+static s32 nanddrv_physical_read(u32 num_blocks, u8* buf, u32 block, u32 bps, u32* p_num_success, PDM_DISK* p_disk);
+static s32 nanddrv_physical_write(u32 num_blocks, const u8* buf, u32 block, u32 bps, u32* p_num_success, PDM_DISK* p_disk);
 
 // clang-format off
 static const PDM_FUNCTBL l_nand_func = {
@@ -536,14 +529,20 @@ static s32 nanddrv_mount(PDM_DISK* p_disk) {
 }
 
 static s32 nanddrv_format(PDM_DISK* p_disk, const u8* param) {
+#ifdef DEBUG
     if (p_disk == NULL) {
         return -20;
     }
     return 0;
+#else
+    if (p_disk != NULL) {
+        return 0;
+    }
+    return -20;
+#endif
 }
 
-#ifndef PF_IPL_BUILD
-static s32 nanddrv_pread(PDM_DISK* p_disk, u8* p_buf, u32 block, u32 num_blocks) {
+static s32 nanddrv_pread(PDM_DISK* p_disk, u8* p_buf, u32 block, u32 num_blocks, u32* p_num_success) {
     *p_num_success = 0;
     if (p_disk == NULL || p_buf == NULL || num_blocks == 0 || p_num_success == NULL) {
         return -20;
@@ -551,28 +550,13 @@ static s32 nanddrv_pread(PDM_DISK* p_disk, u8* p_buf, u32 block, u32 num_blocks)
     return nanddrv_physical_read(num_blocks, p_buf, block, 0x200, p_num_success, p_disk);
 }
 
-static s32 nanddrv_pwrite(PDM_DISK* p_disk, const u8* p_buf, u32 block, u32 num_blocks) {
+static s32 nanddrv_pwrite(PDM_DISK* p_disk, const u8* p_buf, u32 block, u32 num_blocks, u32* p_num_success) {
     *p_num_success = 0;
     if (p_disk == NULL || p_buf == NULL || num_blocks == 0 || p_num_success == NULL) {
         return -20;
     }
     return nanddrv_physical_write(num_blocks, p_buf, block, 0x200, p_num_success, p_disk);
 }
-#else
-static s32 nanddrv_pread(PDM_DISK* p_disk, u8* p_buf, u32 block, u32 num_blocks) {
-    if (p_disk == NULL || p_buf == NULL || num_blocks == 0) {
-        return -20;
-    }
-    return nanddrv_physical_read(num_blocks, p_buf, block, 0x200, p_disk);
-}
-
-static s32 nanddrv_pwrite(PDM_DISK* p_disk, const u8* p_buf, u32 block, u32 num_blocks) {
-    if (p_disk == NULL || p_buf == NULL || num_blocks == 0) {
-        return -20;
-    }
-    return nanddrv_physical_write(num_blocks, p_buf, block, 0x200, p_disk);
-}
-#endif
 
 static s32 nanddrv_unmount(PDM_DISK* p_disk) {
     u16 nandError = NAND_RESULT_OK;
@@ -619,7 +603,7 @@ s32 VFi_nanddrv_init_drv_tbl(PDM_DISK_TBL* p_disk_tbl, u32 ui_ext) {
     return 0;
 }
 
-static s32 nanddrv_physical_read(u32 num_blocks, u8* buf, u32 block, u32 bps, PDM_DISK* p_disk) {
+static s32 nanddrv_physical_read(u32 num_blocks, u8* buf, u32 block, u32 bps, u32* p_num_success, PDM_DISK* p_disk) {
     u32 fileSize = dCommon_getFileSizeFromDisk(p_disk);
     u32 size;
     s32 err;
@@ -632,11 +616,7 @@ static s32 nanddrv_physical_read(u32 num_blocks, u8* buf, u32 block, u32 bps, PD
         return -20;
     }
     fileInfo_p = drive_p->file_p;
-#ifndef PF_IPL_BUILD
     if (dCommon_ReadDummyBPB(num_blocks, (u8*)buf, block, p_num_success, p_disk, &err, nanddrv_BuildUpBootSector, nanddrv_BuildUpFSInfoSector) == 0) {
-#else
-    if (dCommon_ReadDummyBPB(num_blocks, (u8*)buf, block, NULL, p_disk, &err, nanddrv_BuildUpBootSector, nanddrv_BuildUpFSInfoSector) == 0) {
-#endif
         return err;
     }
     size = num_blocks * bps;
@@ -648,9 +628,7 @@ static s32 nanddrv_physical_read(u32 num_blocks, u8* buf, u32 block, u32 bps, PD
         }
         nandError = A32_NANDRead(fileInfo_p, (u8*)buf, size);
         if (nandError == size) {
-#ifndef PF_IPL_BUILD
             *p_num_success = num_blocks;
-#endif
             return 0;
         }
     } else {
@@ -660,7 +638,7 @@ static s32 nanddrv_physical_read(u32 num_blocks, u8* buf, u32 block, u32 bps, PD
     return nandError;
 }
 
-static s32 nanddrv_physical_write(u32 num_blocks, const u8* buf, u32 block, u32 bps, PDM_DISK* p_disk) {
+static s32 nanddrv_physical_write(u32 num_blocks, const u8* buf, u32 block, u32 bps, u32* p_num_success, PDM_DISK* p_disk) {
     u32 fileSize = dCommon_getFileSizeFromDisk(p_disk);
     u32 size;
     u32 offset;
@@ -673,12 +651,7 @@ static s32 nanddrv_physical_write(u32 num_blocks, const u8* buf, u32 block, u32 
         return -20;
     }
     fileInfo_p = drive_p->file_p;
-#ifndef PF_IPL_BUILD
-    if (dCommon_WriteDummyBPB(num_blocks, block, p_num_success, p_disk, &err) == 0)
-#else
-    if (dCommon_WriteDummyBPB(num_blocks, block, NULL, p_disk, &err) == 0)
-#endif
-    {
+    if (dCommon_WriteDummyBPB(num_blocks, block, p_num_success, p_disk, &err) == 0) {
         return err;
     }
     size = num_blocks * bps;
@@ -690,9 +663,7 @@ static s32 nanddrv_physical_write(u32 num_blocks, const u8* buf, u32 block, u32 
         }
         nandError = A32_NANDWrite(fileInfo_p, (u8*)buf, size, p_disk);
         if (nandError == size) {
-#ifndef PF_IPL_BUILD
             *p_num_success = num_blocks;
-#endif
             return 0;
         }
     } else {

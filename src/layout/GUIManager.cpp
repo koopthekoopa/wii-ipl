@@ -72,7 +72,7 @@ namespace gui {
                 onDrag(x - mDraggingPos[point].x, y - mDraggingPos[point].y);
                 mDraggingPos[point].x = x;
                 mDraggingPos[point].y = y;
-                mpManager->onEvent(getID(), EventHandler::ON_HOLD, point, data);
+                mpManager->onEvent(getID(), EventHandler::ON_DRAG, point, data);
             }
         }
 

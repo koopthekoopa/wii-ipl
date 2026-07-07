@@ -5,8 +5,15 @@
 
 typedef s32 NCDErr;
 
-#define PACKED __attribute__((packed))
-
+enum {
+    NCD_MODE_NONE = 0,           // 0
+    NCD_MODE_WEP40 = 1,          // 1
+    NCD_MODE_WEP104 = 2,         // 2
+    NCD_MODE_INVALID3 = 3,       // 3
+    NCD_MODE_WPA_PSK_TKIP = 4,   // 4
+    NCD_MODE_WPA2_PSK_TKIP = 5,  // 5
+    NCD_MODE_WPA_PSK_AES = 6,    // 6
+};
 enum {
     NCD_LINKSTATUS_WIRED = 3,  // ?
 };
@@ -27,6 +34,10 @@ enum {
 
 #define NCD_MAC_ADDRESS_LENGTH 6
 
+#define NCD_CONNECT_TEST_FLAG 5
+#define NCD_DHCP_FLAG 1
+#define NCD_DNS_FLAG 2
+
 typedef struct NCDProxyServerProfile {
     u8 mode;         // 0x00
     u8 authType;     // 0x01
@@ -37,7 +48,7 @@ typedef struct NCDProxyServerProfile {
 
     char username[33];  // 0x106
     char password[33];  // 0x127
-} NCDProxyServerProfile;
+} PACKED NCDProxyServerProfile;
 
 typedef struct NCDProxyProfile {
     NCDProxyServerProfile http;  // 0x00
@@ -53,7 +64,7 @@ typedef struct NCDProxyProfile {
         u32 isAutomaticEnabled;  // 0x04
         char automatic[256];     // 0x08
     } browser;                   // 0x694
-} NCDProxyProfile;
+} PACKED NCDProxyProfile;
 
 typedef struct NCDIpAdjustProfile {
     s32 maxTransferUnit;    // 0x00
@@ -114,7 +125,7 @@ typedef struct NCDPrivacy {
             u8 key[64];      // 0x04
         } aes;
     };
-} NCDPrivacy;
+} PACKED NCDPrivacy;
 
 typedef struct NCDApConfig {
     u8 ssid[32];     // 0x00
@@ -123,12 +134,17 @@ typedef struct NCDApConfig {
     u8 reserved[2];  // 0x22
 
     NCDPrivacy privacy;  // 0x24
-} NCDApConfig;
+} PACKED NCDApConfig;
+
+typedef struct NCDRakuApConfig {
+    NCDApConfig cfg;
+    u32 unk_0x6c;
+} NCDRakuApConfig;
 
 typedef struct NCDUsbapConfig {
     u16 nickname[11];  // 0x00
     u8 reserved[2];    // 0x16
-} NCDUsbapConfig;
+} PACKED NCDUsbapConfig;
 
 typedef struct NCDAossConfig {
     struct {
@@ -155,7 +171,7 @@ typedef struct NCDAossConfig {
         u16 keyLen;      // 0x22
         u8 key[64];      // 0x24
     } aes;               // 0xF4
-} NCDAossConfig;
+} PACKED NCDAossConfig;
 
 typedef struct NCDWirelessProfile {
     u16 rateset;      // 0x00
@@ -167,7 +183,7 @@ typedef struct NCDWirelessProfile {
         NCDAossConfig aoss;
         NCDApConfig rakuraku;
     } config;  // 0x04
-} NCDWirelessProfile;
+} PACKED NCDWirelessProfile;
 
 typedef struct NCDIfConfig {
     u8 selectedMedia;  // 0x00

@@ -1,0 +1,127 @@
+#ifndef SOUNDID_IPLSOUND
+#define SOUNDID_IPLSOUND
+
+/* Generated with https://gist.github.com/conhlee/c82d9acaa396e4cb896de2ffad0ab230 */
+
+/* So the Wii Menu never gets BRSAR stuff by it's ID, but instead by it's name as a string
+... except for iplTVRCManager */
+
+static const unsigned int HOMESE_HOME_BUTTON = 0;
+static const unsigned int HOMESE_RETURN_APP = 1;
+static const unsigned int HOMESE_GOTO_MENU = 2;
+static const unsigned int HOMESE_RESET_APP = 3;
+static const unsigned int HOMESE_FOCUS = 4;
+static const unsigned int HOMESE_SELECT = 5;
+static const unsigned int HOMESE_CANCEL = 6;
+static const unsigned int HOMESE_OPEN_CONTROLLER = 7;
+static const unsigned int HOMESE_CLOSE_CONTROLLER = 8;
+static const unsigned int HOMESE_VOLUME_PLUS = 9;
+static const unsigned int HOMESE_VOLUME_MINUS = 10;
+static const unsigned int HOMESE_VOLUME_PLUS_LIMIT = 11;
+static const unsigned int HOMESE_VOLUME_MINUS_LIMIT = 12;
+static const unsigned int HOMESE_NOTHING_DONE = 13;
+static const unsigned int HOMESE_VIBE_ON = 14;
+static const unsigned int HOMESE_VIBE_OFF = 15;
+static const unsigned int HOMESE_START_CONNECT_WINDOW = 16;
+static const unsigned int HOMESE_CONNECTED = 17;
+static const unsigned int HOMESE_CONNECTED2 = 18;
+static const unsigned int HOMESE_CONNECTED3 = 19;
+static const unsigned int HOMESE_CONNECTED4 = 20;
+static const unsigned int HOMESE_END_CONNECT_WINDOW = 21;
+static const unsigned int WSD_SELECT = 22;
+static const unsigned int WIPL_SE_CALENDAR_SCROLL = 23;
+static const unsigned int WIPL_SE_BOARD_SELECT = 24;
+static const unsigned int WIPL_ME_VIRTUAL_CONSOLE = 25;
+static const unsigned int WIPL_SE_WII_START = 26;
+static const unsigned int WIPL_ME_NO_DISC_BANNER = 27;
+static const unsigned int WIPL_SE_COPY_FINISH = 28;
+static const unsigned int WIPL_ME_GC_BANNER = 29;
+static const unsigned int WIPL_ME_INVALID_DISC_BANNER = 30;
+static const unsigned int WIPL_ME_SD_BANNER = 31;
+static const unsigned int WIPL_SE_CH_SELECT = 32;
+static const unsigned int WIPL_SE_CH_UNSELECT = 33;
+static const unsigned int WIPL_SE_BT_TARGETTING = 34;
+static const unsigned int WIPL_SE_CH_TARGETTING = 35;
+static const unsigned int WIPL_SE_DECIDE = 36;
+static const unsigned int WIPL_SE_DATE_FOCUS = 37;
+static const unsigned int WIPL_SE_BOARD_FOCUS = 38;
+static const unsigned int WIPL_SE_MESSAGE_SCROLL = 39;
+static const unsigned int WIPL_SE_BOARD_DRAG = 40;
+static const unsigned int WIPL_SE_DATE_SELECT = 41;
+static const unsigned int WIPL_SE_BALLOON = 42;
+static const unsigned int WIPL_SE_BOARD_UNSELECT = 43;
+static const unsigned int WIPL_SE_PIC_ZOOM_OUT = 44;
+static const unsigned int WIPL_SE_PIC_ZOOM_IN = 45;
+static const unsigned int WIPL_SE_BT_PUSH = 46;
+static const unsigned int WIPL_SE_CANCEL = 47;
+static const unsigned int WIPL_SE_CHOICE_CHG = 48;
+static const unsigned int WIPL_SE_MSG_DISP = 49;
+static const unsigned int WIPL_SE_MSG_HOUSE = 50;
+static const unsigned int WIPL_SE_FL_PAGE_INC = 51;
+static const unsigned int WIPL_SE_FL_PAGE_DEC = 52;
+static const unsigned int WIPL_SE_ERROR = 53;
+static const unsigned int WIPL_SE_BOARD_DUMP = 54;
+static const unsigned int WIPL_SE_BOARD_HOLD = 55;
+static const unsigned int WIPL_SE_BOARD_RELEASE = 56;
+static const unsigned int WIPL_SE_GRAY_BUTTON = 57;
+static const unsigned int WIPL_BGM_MENU = 58;
+static const unsigned int WIPL_SE_OUTPUT_MODE_SELECT = 59;
+static const unsigned int WIPL_SE_COPYING = 60;
+static const unsigned int WIPL_SE_INFO_WINDOW = 61;
+static const unsigned int WIPL_SE_CH_HOLD = 62;
+static const unsigned int WIPL_SE_CH_DRAG = 63;
+static const unsigned int WIPL_SE_CH_SET = 64;
+static const unsigned int WIPL_SE_CH_NOT_MOVE = 65;
+static const unsigned int WIPL_SE_NEW_ARRIVAL = 66;
+static const unsigned int WIPL_SE_B_SCROLL = 67;
+static const unsigned int WIPL_SE_SDCARD_IN = 68;
+static const unsigned int WIPL_SE_SDCARD_OUT = 69;
+static const unsigned int WIPL_SE_SK_PAGE_CHG = 70;
+static const unsigned int WIPL_SE_SK_OPEN = 71;
+static const unsigned int WIPL_SE_SK_CANCEL_CLOSE = 72;
+static const unsigned int WIPL_SE_SK_DECIDE_CLOSE = 73;
+static const unsigned int WIPL_SE_SK_SWITCHING_01 = 74;
+static const unsigned int WIPL_SE_CHAR_FOCUS = 75;
+static const unsigned int WIPL_SE_CHAR_CURSOR = 76;
+static const unsigned int WIPL_SE_CHAR_CURSOR_FIX = 77;
+static const unsigned int WIPL_SE_CHAR_DELETE = 78;
+static const unsigned int WIPL_SE_CHAR_DELETE_ERROR = 79;
+static const unsigned int WIPL_SE_CHAR_INPUT = 80;
+static const unsigned int WIPL_SE_CHAR_DECIDE = 81;
+static const unsigned int WIPL_SE_LINE_SCROLL = 82;
+static const unsigned int WIPL_SE_SK_PREDICT_ON = 83;
+static const unsigned int WIPL_SE_SK_PREDICT_OFF = 84;
+static const unsigned int WIPL_SE_SK_SWITCHING_02 = 85;
+static const unsigned int WIPL_SE_SK_SWITCH_TO_KETAI = 86;
+static const unsigned int WIPL_SE_SYMBOL_PAGE_OPEN = 87;
+static const unsigned int WIPL_SE_CHAR_LARGER = 88;
+static const unsigned int WIPL_SE_CHAR_LOWER = 89;
+
+static const unsigned int BANK_HOMEBUTTON = 0;
+static const unsigned int BANK_SYSTEM_SE = 1;
+static const unsigned int BANK_BGM = 2;
+static const unsigned int BANK_SOFTWARE_KEYBOARD_SE = 3;
+
+static const unsigned int PLAYER_FOCUS = 0;
+static const unsigned int PLAYER_DEFAULT = 1;
+static const unsigned int PLAYER_FADE_SE = 2;
+static const unsigned int PLAYER_NORMAL = 3;
+static const unsigned int PLAYER_SYSTEM = 4;
+static const unsigned int PLAYER_SYSTEM_2 = 5;
+static const unsigned int PLAYER_SYSTEM_DECIDE = 6;
+static const unsigned int PLAYER_SYSTEM_FOCUS = 7;
+static const unsigned int PLAYER_BGM = 8;
+static const unsigned int PLAYER_WII_START = 9;
+static const unsigned int PLAYER_MSG_DISP = 10;
+static const unsigned int PLAYER_SCROLL = 11;
+static const unsigned int PLAYER_SWITCH = 12;
+static const unsigned int PLAYER_SELECT = 13;
+static const unsigned int PLAYER_WINDOW = 14;
+static const unsigned int PLAYER_MAIL_CLOSE = 15;
+static const unsigned int PLAYER_SDCARD = 16;
+
+static const unsigned int SND_GROUP_HOMEBUTTON = 0;
+
+static const unsigned int GROUP_STATIC = 1;
+
+#endif  // SOUNDID_IPLSOUND

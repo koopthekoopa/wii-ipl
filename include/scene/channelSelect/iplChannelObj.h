@@ -16,7 +16,7 @@ namespace ipl {
     namespace scene {
         class ChannelObj {
         public:
-            static const int MAX_MODULE_FILL_COUNT = 36000;
+            static const int MAX_MODULE_COUNT = 36000;
 
             enum {
                 EXT_MODULE_RESULT_UNAVAILABLE = 0,
@@ -53,7 +53,7 @@ namespace ipl {
 
             nw4r::math::VEC3& getTranslate() const;
 
-            BOOL isLayoutCreated() const;
+            BOOL isLayoutCreated() const NO_INLINE { return mState == STATE_NORMAL; }
             BOOL isDiskChannel() const;
             BOOL isValid() const;
 
@@ -100,6 +100,11 @@ namespace ipl {
 
             BOOL setupNew();
             void updateNew();
+
+            void setPageIndex(int page, int index) {
+                mChanPage = page;
+                mChanIndex = index;
+            }
 
         private:
             u8 unk_0x00[8];
@@ -167,7 +172,7 @@ namespace ipl {
 
             enum {
                 EXT_MODULE_STATE_UNAVAILABLE = 0,
-                EXT_MODULE_STATE_LOAD,
+                EXT_MODULE_STATE_BEGIN,
                 EXT_MODULE_STATE_PREPARE_RSO,
                 EXT_MODULE_STATE_RSO_CALC,
                 EXT_MODULE_STATE_PREPARE_CS,
@@ -184,13 +189,13 @@ namespace ipl {
             int mExtModuleState;                                  // 0xEC
             nand::SharedFile* mpModuleFile;                       // 0xF0
             bool unk_0xF4;
-            u32 mModuleFillCount;  // 0xF8
-            u32 unk_0xFC;
+            u32 mModuleCount;     // 0xF8
+            u32 mMaxModuleCount;  // 0xFC
 
             RSOObjectHeader* mpRSOHeader;  // 0x100
             u8* mpRSOBss;                  // 0x104
             channel::CalcFunc mpRSOCalc;   // 0x108
-            bool mpRSOAfterCalc;           // 0x10C
+            bool mbRSODoneCalc;            // 0x10C
             bool mbRSOThreadExit;          // 0x10D
 
             EGG::ExpHeap* mpCSHeap;  // 0x110

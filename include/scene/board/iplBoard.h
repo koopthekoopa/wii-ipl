@@ -193,9 +193,16 @@ namespace ipl {
             void sendNewMessageAnimCount() {
                 mbNewMsgAnimCount = true;
             }
+            void requestExit() {
+                mbExitRequest = true;
+            }
 
             SearchRecord& getSearchRecord() {
                 return mSearchRecord;
+            }
+
+            s32 getSDState() {
+                return mBoardSD.getSDState();
             }
 
         private:
@@ -301,7 +308,7 @@ namespace ipl {
 
             BoardSD mBoardSD;  // 0xFAC
 
-            bool unk_0xFB4;
+            bool mbExitRequest;  // 0xFB4
             int unk_0xFB8;
             u8 unk_0xFBC[4];
         };

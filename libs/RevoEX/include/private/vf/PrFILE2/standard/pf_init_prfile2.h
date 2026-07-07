@@ -3,6 +3,6 @@
 
 #include <private/vf/PrFILE2/pf_types.h>
 
-int VFipf2_init_prfile2(pf_s32 config, void* param);
+pf_int32 VFipf2_init_prfile2(pf_s32 config, void* param);
 
 #endif  // VF_PF2_INIT_PRFILE2_H

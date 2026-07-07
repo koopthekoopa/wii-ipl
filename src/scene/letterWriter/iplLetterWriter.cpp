@@ -6,7 +6,6 @@
 #include "scene/letterWriter/iplLetterWriter.h"
 #include "scene/mailAddSel/iplMailAddressSelect.h"
 
-
 #include <RVLFaceLib.h>
 #include <RVLFaceLibInternal.h>
 

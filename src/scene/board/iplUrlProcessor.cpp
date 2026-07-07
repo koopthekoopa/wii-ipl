@@ -66,10 +66,10 @@ namespace ipl {
         }
 
         nw4r::ut::Operation UrlProcessor::Process(u16 code, nw4r::ut::PrintContext<wchar_t>* context) {
-            if (code == (u16)0x1A || code == (u16)'\n') {
+            if (code == SEPERATOR || code == (u16)'\n') {
                 if (unk_0x50 == 0) {
                     make_collision(context, code);
-                } else if (code == 0x1A) {
+                } else if (code == SEPERATOR) {
                     parse(context);
                 }
             }
@@ -77,7 +77,7 @@ namespace ipl {
         }
 
         void UrlProcessor::make_collision(nw4r::ut::PrintContext<wchar_t>* context, u16 code) {
-            if (code == 0x1A) {
+            if (code == SEPERATOR) {
                 if (unk_0x51 == 0) {
                     url_collision* url_col = new (System::getMem2App(), 4) url_collision();
                     line_collision* line_col = new (System::getMem2App(), 4) line_collision();
@@ -195,7 +195,7 @@ namespace ipl {
             url_collision* got = NULL;
             url_collision* url_col = NULL;
 
-            while (got = (url_collision*)nw4r::ut::List_GetNext(&mUrlCollisions, url_col), got != NULL) {
+            while (got = (url_collision*)nw4r::ut::List_GetNext(&mUrlCollisions, got), got != NULL) {
                 if (got->unk_0x00 == unk_0x4C) {
                     url_col = got;
                     break;
@@ -214,7 +214,7 @@ namespace ipl {
                 int chIdx = 0;
                 for (int i = ((int)url_col->unk_0x08 - (int)url_col->unk_0x04) / sizeof(wchar_t); i > 0; i--) {
                     wchar_t wch = url_col->unk_0x04[chIdx];
-                    if (wch != 0x1A && chIdx2 < 0x200) {
+                    if (wch != SEPERATOR && chIdx2 < 0x200) {
                         url[chIdx2++] = wch;
                     }
                     chIdx++;

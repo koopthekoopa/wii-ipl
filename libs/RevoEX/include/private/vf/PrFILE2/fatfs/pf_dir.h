@@ -49,6 +49,11 @@ typedef struct PF_DTAW {
 } PF_DTAW;
 
 void VFiPFDIR_FinalizeAllDirs(PF_VOLUME* p_vol);
+
+pf_s32 VFiPFDIR_fsfirst(PF_STR* p_path_str, pf_u8 attr, PF_DTA* p_dta);
+pf_s32 VFiPFDIR_fsnext(PF_DTA* p_dta);
+pf_s32 VFiPFDIR_rmdir(PF_STR* p_path_str);
 pf_s32 VFiPFDIR_mkdir(PF_STR* p_path_str);
+pf_s32 VFiPFDIR_chdir(PF_STR* p_path_str);
 
 #endif  // PRFILE2_VFMOD_PF_DIR_H

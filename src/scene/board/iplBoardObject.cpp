@@ -3,7 +3,6 @@
 #include "scene/board/iplBoard.h"
 #include "scene/board/iplBoardObject.h"
 
-
 #include "scene/button/iplButton.h"
 
 #include "iplSystem.h"
@@ -183,8 +182,9 @@ namespace ipl {
                     nw4r::ut::Rect rect;
                     System::getProjectionRect4x3(&rect);
 
-                    mMoveAnim.init(ANIM_TYPE_FORWARD, mpLayout->getAnim(ANIM_NEXT_PAGE)->getMaxFrame(), 0.0f, math::VEC2(0.0f, 0.0f),
-                                   math::VEC2((rect.left - mBoardPos.x) - mMoveSpeed.x, (-mBoardPos.y - mMoveSpeed.y) + 53.0f));
+                    math::VEC2 end(rect.left - mBoardPos.x - mMoveSpeed.x, 53.0f + (-mBoardPos.y - mMoveSpeed.y));
+                    f32 maxFrame = mpLayout->getAnim(ANIM_NEXT_PAGE)->getMaxFrame();
+                    mMoveAnim.init(ANIM_TYPE_FORWARD, maxFrame, 0.0f, math::VEC2(0.0f, 0.0f), end);
 
                     mMoveAnim.setAnmType(ANIM_TYPE_FORWARD);
                     mMoveAnim.play();
@@ -199,8 +199,9 @@ namespace ipl {
                     nw4r::ut::Rect rect;
                     System::getProjectionRect4x3(&rect);
 
-                    mMoveAnim.init(0, mpLayout->getAnim(ANIM_NEXT_PAGE)->getMaxFrame(), 0.0f, math::VEC2(0.0f, 0.0f),
-                                   math::VEC2((rect.right - mBoardPos.x) - mMoveSpeed.x, (-mBoardPos.y - mMoveSpeed.y) + 53.0f));
+                    math::VEC2 end(rect.right - mBoardPos.x - mMoveSpeed.x, 53.0f + (-mBoardPos.y - mMoveSpeed.y));
+                    f32 maxFrame = mpLayout->getAnim(ANIM_NEXT_PAGE)->getMaxFrame();
+                    mMoveAnim.init(ANIM_TYPE_FORWARD, maxFrame, 0.0f, math::VEC2(0.0f, 0.0f), end);
 
                     mMoveAnim.setAnmType(ANIM_TYPE_FORWARD);
                     mMoveAnim.play();
@@ -218,9 +219,9 @@ namespace ipl {
 
                 mMoveAnim.calc();
 
-                nw4r::math::VEC2 finalPos = mMoveAnim.get2();
-                finalPos = ((offsetPos + mBoardPos) + mMoveSpeed) + finalPos;
-                mpLayout->GetRootPane()->SetTranslate(nw4r::math::VEC2(finalPos.x * locationAdjust, finalPos.y));
+                ipl::math::VEC2 finalPos = offsetPos + mBoardPos + mMoveSpeed + mMoveAnim.get2();
+                finalPos.x *= locationAdjust;
+                mpLayout->GetRootPane()->SetTranslate(finalPos);
                 mpLayout->calc();
             }
         }
@@ -703,7 +704,8 @@ namespace ipl {
                     }
                     break;
                 }
-                case ON_HOLD: {
+                // Drag and trig events are swapped, but still act as intended?
+                case ON_DRAG: {
                     if (con != NULL && con->decide()) {
                         if (static_cast<Board*>(System::getScene(SCENE_BOARD))->getHoveredObj(num) == this) {
                             if (static_cast<Button*>(System::getScene(SCENE_BUTTON))->isActive() &&
@@ -829,7 +831,7 @@ namespace ipl {
 
             status[VF_SD_SLOT_0] = 0;
 
-            VFError vfErr = VFGetSDDirectStatus("SD", status);
+            VFErr vfErr = VFGetSDDirectStatus("SD", status);
             if (mCDBRecordKey.location == CDB_FS_LOCATION_SD) {
                 if (vfErr == VF_ERR_SUCCESS && (status[VF_SD_SLOT_0] & VF_STATUS_PROTECTED)) {
                     result = TRUE;

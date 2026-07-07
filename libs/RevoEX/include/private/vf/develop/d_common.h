@@ -14,7 +14,7 @@ void dCommon_CopyPrfFileHeader(void* buff, u32 fileSize, unsigned short version,
 void dCommon_PrintSignature(PR_BINHEADER* header);
 s32 dCommon_MakeFsInfoSec(u8* buf, u32 fsInfoSize);
 u32 dCommon_GetPhysicalOffset(u32 startBlock, u32 BPS, u32 reservedSecNum);
-PDM_FAT_TYPE dCommon_GetNiceFatType(u32* spf, u32 SPU, u32 SPC, u32 BPS) NO_INLINE;
+PDM_FAT_TYPE dCommon_GetNiceFatType(u32* spf, u32 SPU, u32 SPC, u32 BPS);
 u32 dCommon_GetReservedSecFromFatType(PDM_FAT_TYPE fatType);
 u32 dCommon_GetRootEntNumFromFatType(PDM_FAT_TYPE fatType);
 void dCommon_MakeBootSector(u8* buf, PDM_FAT_TYPE* type, u32 SPU, u32 SPC, u32 BPS, u8 jump0_1, u8 jump2, u32 secPerTrack, u32 reservedSecNum,

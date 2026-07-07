@@ -2,7 +2,7 @@
 #include <revolution/cdb.h>
 
 CDBErr CDBFCreateFileVF(CDBBridgeFile* file, const char* fileName) {
-    VFError vfErr;
+    VFErr vfErr;
 
     file->vf = VFCreateFile(fileName, 0);
     if (file->vf == NULL) {
@@ -22,7 +22,7 @@ CDBErr CDBFCreateFileVF(CDBBridgeFile* file, const char* fileName) {
 }
 
 CDBErr CDBFDeleteFileVF(const char* fileName) {
-    VFError vfErr = VFDeleteFile(fileName);
+    VFErr vfErr = VFDeleteFile(fileName);
 
     if (vfErr != VF_ERR_SUCCESS && vfErr != VF_ERR_ENOENT) {
         CDBSetFatalVFErrorFlag();
@@ -46,7 +46,7 @@ CDBErr CDBFCreateDirVF(const char* dirName) {
 }
 
 CDBErr CDBFOpenVF(CDBBridgeFile* file, const char* fileName) {
-    VFError vfErr;
+    VFErr vfErr;
 
     file->vf = VFOpenFile(fileName, "r+", 0);
     if (file->vf == NULL) {
@@ -65,7 +65,7 @@ CDBErr CDBFOpenVF(CDBBridgeFile* file, const char* fileName) {
 }
 
 CDBErr CDBFCloseVF(CDBBridgeFile* file) {
-    VFError vfErr;
+    VFErr vfErr;
 
     if (file->vf != NULL) {
         vfErr = VFCloseFile(file->vf);
@@ -78,8 +78,8 @@ CDBErr CDBFCloseVF(CDBBridgeFile* file) {
     return CDB_ERROR_OK;
 }
 
-CDBErr CDBFSeekVF_(VFFILE* file, u32 offset, CDBSeek seek) {
-    VFError vfErr;
+CDBErr CDBFSeekVF_(VFFile* file, u32 offset, CDBSeek seek) {
+    VFErr vfErr;
 
     s32 fileOffset;
     s32 realOffset;
@@ -126,7 +126,7 @@ CDBErr CDBFSeekVF_(VFFILE* file, u32 offset, CDBSeek seek) {
 
 CDBErr CDBFReadAttrVF(CDBBridgeFile* file, CDBAttr* attr) {
     CDBErr err;
-    VFError vfErr;
+    VFErr vfErr;
 
     s32 fileOffset;
     u32 readSize;
@@ -164,7 +164,7 @@ CDBErr CDBFReadAttrVF(CDBBridgeFile* file, CDBAttr* attr) {
 
 CDBErr CDBFWriteAttrVF(CDBBridgeFile* file, CDBAttr* attr) {
     CDBErr err;
-    VFError vfErr;
+    VFErr vfErr;
 
     s32 fileOffset;
 
@@ -201,7 +201,7 @@ CDBErr CDBFWriteAttrVF(CDBBridgeFile* file, CDBAttr* attr) {
 
 CDBErr CDBFWriteAttrOnlyLeadChunkVF(CDBBridgeFile* file, CDBAttr* chunk) {
     CDBErr err;
-    VFError vfErr;
+    VFErr vfErr;
 
     s32 fileOffset;
 
@@ -233,7 +233,7 @@ CDBErr CDBFWriteAttrOnlyLeadChunkVF(CDBBridgeFile* file, CDBAttr* chunk) {
 }
 
 CDBErr CDBFReadDataVF(CDBBridgeFile* file, void* buffer, u32 size, u32* readSize) {
-    VFError vfErr;
+    VFErr vfErr;
 
     vfErr = VFReadFile(file->vf, buffer, size, readSize);
     if (vfErr != VF_ERR_SUCCESS) {
@@ -245,7 +245,7 @@ CDBErr CDBFReadDataVF(CDBBridgeFile* file, void* buffer, u32 size, u32* readSize
 }
 
 CDBErr CDBFWriteDataVF(CDBBridgeFile* file, void* buffer, u32 size) {
-    VFError vfErr;
+    VFErr vfErr;
 
     vfErr = VFWriteFile(file->vf, buffer, size);
     if (vfErr != VF_ERR_SUCCESS) {

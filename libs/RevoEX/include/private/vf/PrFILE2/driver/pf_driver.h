@@ -24,5 +24,6 @@ pf_s32 VFiPFDRV_unmount(PF_VOLUME* p_vol, pf_u32 mode);
 pf_s32 VFiPFDRV_format(PF_VOLUME* p_vol, const pf_u8* param);
 pf_s32 VFiPFDRV_lread(PF_VOLUME* p_vol, pf_u8* buf, pf_u32 sector, pf_u32 num_sectors, pf_u32* p_num_success);
 pf_s32 VFiPFDRV_lwrite(PF_VOLUME* p_vol, const pf_u8* buf, pf_u32 sector, pf_u32 num_sectors, pf_u32* p_num_success);
+pf_s32 VFiPFDRV_lerase(PF_VOLUME* p_vol, pf_u32 sector, pf_u32 num_sectors);
 
 #endif  // PRFILE2_VFMOD_PF_DRIVER_H

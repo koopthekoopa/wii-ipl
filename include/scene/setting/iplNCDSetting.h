@@ -3,15 +3,89 @@
 
 #include <revolution/ncd.h>
 
+#define unk undefined
+
 namespace ipl {
+    namespace scene {
+        extern NCDAossConfig m_AOSSConfig;
+        extern NCDRakuApConfig m_RakuConfig;
+    }  // namespace scene
     namespace ncd {
         class NCDSetting {
         public:
-            static bool getConnectEnableFlag();
+            static NCDConfig mConfig;
+            static NCDConfig mSaveConfig;
+            static u8 mMac[];
 
-            static void makeMacAddr();
-            static u8* getMacAddr();
+            static u16 mID;
+            static u32 mMacNum;
+
+            static void init();
+            static void initSetID(u16);
+            static int checkFlag(int);
+            static int checkThisFlag();
+            static bool checkAllFlag();
+            static u8 checkConnectTestFlag();
+            static u8 checkDHCPFlag();
+            static u8 checkDNSFlag();
+            static void checkDHCP_();
+            static u8 checkProxyFlag();
+            static u8 checkBasic();
+            static bool checkChangeEnable();
+            static bool convert16toASCII(char, char, unsigned char*);
+            static int checkWEPKey(char*);
+            static bool checkProxy(char*);
+            static bool checkProxyBasic(char*);
+            static void adjustNCDData_();
+            static void adjustSelectMedia_(int);
+            static void adjustEnableFlag_(int);
+            static void setConnectTestFlag(bool);
+            static void setDHCPFlag(unsigned char);
+            static void setDNSFlag(unsigned char);
+            static void setProxyFlag(unsigned char);
+            static void setBasicFlag(unsigned char);
+            static void setWired();
+            static void setWireless(unsigned char);
+            static void changeConnectType(unsigned char);
+            static void setSSID(u8*);
+            static void setPrivacyMode(u16);
+            static void setWDPrivacyMode(u16);
+            static void setPrivacy(unsigned char*, int);
+            static void setIP(NCDIpProfile*);
+            static void setDNS(NCDIpProfile*);
+            static void setMTU(long);
+            static void setProxy(NCDProxyServerProfile*);
+            static void setBasic(NCDProxyServerProfile*);
+            static void clearData();
+            static void clearLocal();
+            static void write();
+            static void backupData();
+            static void resetData();
+            static void setUseProfileID();
+            static void setAOSSParams(const NCDAossConfig&);
+            static void setRakuParams(const NCDApConfig&);
+            static u16 getID();
+            static NCDApConfig* getSSID();
+            static u16 getUseProfileID();
+            static int getPrivacyMode();
+            static u16 getNCDPrivacyMode();
+            static u8* getPrivacy();
+            static u16 getPrivacyLen();
+            static NCDIpProfile* getIP();
             static u32 getMacNum();
+            static u8* getMacAddr();
+            static void makeMacAddr();
+            static NCDProxyProfile* getProxy();
+            static s32 getMTU();
+            static NCDConfig* getData();
+            static bool getConnectEnableFlag();
+            static bool getEnableFlag();
+            static NCDErr adjustNWC24Flag();
+            static void adjustNWC24FlagEx_();
+
+#ifndef NON_MATCHING
+            static void matchHack();
+#endif
         };
     }  // namespace ncd
 }  // namespace ipl

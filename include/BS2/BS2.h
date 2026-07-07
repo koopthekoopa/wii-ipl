@@ -5,9 +5,9 @@
 
 #include <private/es.h>
 
-#include <revolution/nand.h>
-#include <revolution/mem/allocator.h>
 #include <revolution/gx/GXStruct.h>
+#include <revolution/mem/allocator.h>
+#include <revolution/nand.h>
 
 #include <private/os/OSBootInfo2.h>
 #include <private/os/OSBootInfo3.h>
@@ -58,7 +58,7 @@ typedef enum {
     BS2_STT_30,
     BS2_STT_31,
     BS2_STT_32,
-    BS2_STT_RUN_UPDATE,
+    BS2_STT_UPDATE_DISK,
     BS2_STT_RUNNING_UPDATE,
     BS2_STT_35,
     BS2_STT_36,
@@ -75,8 +75,8 @@ typedef enum {
     BS2_STT_46,
     BS2_STT_47,
     BS2_STT_48,
-    BS2_STT_START_GAME,
-    BS2_STT_START_GC_GAME,
+    BS2_STT_RVL_GAME,
+    BS2_STT_GC_GAME,
 
     BS2_STT_COVER_CLOSED,
     BS2_STT_NO_DISK,
@@ -123,80 +123,81 @@ enum {
 };
 
 // Version "1.13"
-#define     BS2_MAJOR_VERSION       0x01
-#define     BS2_MINOR_VERSION       0x13
-#define     BS2_VERSION             0x0113
+#define BS2_MAJOR_VERSION 0x01
+#define BS2_MINOR_VERSION 0x13
+#define BS2_VERSION 0x0113
 
-#define     BS2_DEFAULT_BANNER_SIZE 0x80000
+#define BS2_DEFAULT_BANNER_SIZE 0x80000
 
-#define     BS2_CACHE_BOOT_SIZE     0xB00000
+#define BS2_CACHE_BOOT_SIZE 0xB00000
 
-extern OSBootInfo2  bi2;
-extern OSBootInfo3  bi3;
+extern OSBootInfo2 bi2;
+extern OSBootInfo3 bi3;
 
-extern vu32         BS2LastMode;
+extern vu32 BS2LastMode;
 
-extern vBOOL        BS2BootFromCache;
-extern vBOOL        BS2BootCaching;
+extern vBOOL BS2BootFromCache;
+extern vBOOL BS2BootCaching;
 
-extern vBOOL        BS2DriveReset;
-extern vBOOL        BS2WaitSpinup;
-extern vBOOL        BS2NoDisk;
+extern vBOOL BS2DriveReset;
+extern vBOOL BS2WaitSpinup;
+extern vBOOL BS2NoDisk;
 
-extern BOOL         BS2ReturnToMenu;
-extern BOOL         BS2ReturnToIdle;
-extern BOOL         BS2ReturnToDataManager;
-extern BOOL         BS2ReturnArgs;
-extern BOOL         BS2LaunchTitle;;
+extern BOOL BS2ReturnToMenu;
+extern BOOL BS2ReturnToIdle;
+extern BOOL BS2ReturnToDataManager;
+extern BOOL BS2ReturnArgs;
+extern BOOL BS2LaunchTitle;
+;
 
-extern u32          BS2BootType;
+extern u32 BS2BootType;
 
-BS2State    BS2Tick();
+BS2State BS2Tick();
 
-void        BS2Init();
+void BS2Init();
 
-void        BS2Report(const char* msg, ...);
-void        BS2ScreenReport(GXColor fg, GXColor bg, const char* msg);
+void BS2Report(const char* msg, ...);
+void BS2ScreenReport(GXColor fg, GXColor bg, const char* msg);
 
 static inline void BS2ScreenReportNoColor(const char* msg) {
-    static GXColor BS2ScreenReportFG = (GXColor){255,255,255,255};
-    static GXColor BS2ScreenReportBG = (GXColor){0,0,0,0};
+    static GXColor BS2ScreenReportFG = (GXColor){255, 255, 255, 255};
+    static GXColor BS2ScreenReportBG = (GXColor){0, 0, 0, 0};
     BS2ScreenReport(BS2ScreenReportFG, BS2ScreenReportBG, msg);
 }
 
-u32         BS2GetBootType();
+u32 BS2GetBootType();
 
-u32         BS2GetLaunchCode();
-ESTitleId   BS2GetLaunchTitle();
+u32 BS2GetLaunchCode();
+ESTitleId BS2GetLaunchTitle();
 
-u32         BS2GetArgc();
-char**      BS2GetArgv();
+u32 BS2GetArgc();
+char** BS2GetArgv();
 
-void        BS2SetMemAllocator(MEMAllocator* allocator);
+void BS2SetMemAllocator(MEMAllocator* allocator);
 
-void        BS2SetStateFlags();
+void BS2SetStateFlags();
 
-void        BS2StartGame();
-void        BS2StartGCGame();
+void BS2StartGame();
+void BS2StartGCGame();
 
-void        BS2SetBannerBuffer(void* pBanner, u32 bannerSize);
-void*       BS2GetBannerBufferAddr();
-u32         BS2GetBannerBufferLength();
+void BS2SetBannerBuffer(void* pBanner, u32 bannerSize);
+void* BS2GetBannerBufferAddr();
+u32 BS2GetBannerBufferLength();
 
-void        BS2RestartStateMachine();
-void        BS2AbortStateMachine();
+void BS2RestartStateMachine();
+void BS2AbortStateMachine();
 
-BOOL        BS2CheckParentalControl();
-BOOL        BS2IsBannerAvailable();
-BOOL        BS2IsDiagDisc();
+BOOL BS2CheckParentalControl();
+BOOL BS2IsBannerAvailable();
+BOOL BS2IsDiagDisc();
 
-BOOL        BS2IsTitleAvailable(ESTitleId titleId);
-BOOL        BS2GetLockedTitles(ESTitleId* pTitleIds, u32* count);
-s32         BS2GetTicketFromNand(ESTitleId titleId, ESTicketView* pTicketView);
-BOOL        BS2StartLoadingTitle(ESTitleId titleId, ESTicketView* pTicketView);
+BOOL BS2IsTitleAvailable(ESTitleId titleId);
+BOOL BS2GetLockedTitles(ESTitleId* pTitleIds, u32* count);
+s32 BS2GetTicketFromNand(ESTitleId titleId, ESTicketView* pTicketView);
+BOOL BS2StartLoadingTitle(ESTitleId titleId, ESTicketView* pTicketView);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // BS2_H
+#endif  // BS2_H

@@ -7,7 +7,7 @@
 namespace ipl {
     namespace scene {
         // clang-format off
-        const char* scSDBtnName[] = {
+        const char* SDMenuButton::mscButtonName[] = {
             "Ac",
         };
 
@@ -22,6 +22,8 @@ namespace ipl {
 
         SDMenuButton::~SDMenuButton() {
         }
+
+        DECOMP_FORCE_LITERAL(iplSDMenuButton_cpp, -152.0f);
 
         void SDMenuButton::create(nand::LayoutFile* layoutFile, nand::LayoutFile* balloonFile, EGG::Heap* heap) {
             mpLayout = new layout::Object(heap, layoutFile, "arc", "mn_Sdcard_Btn.brlyt");
@@ -40,7 +42,7 @@ namespace ipl {
             mpGui = new gui::PaneManager(NULL, mpLayout->getDrawInfo(), NULL, NULL);
             mpGui->setupScene(mpLayout);
             mpGui->setAllComponentTriggerTarget(false);
-            mpGui->setTriggerTarget(mpLayout->FindPaneByName(scSDBtnName[0]), true);
+            mpGui->setTriggerTarget(mpLayout->FindPaneByName(mscButtonName[0]), true);
 
             mpLayout->hide("N_Btn_On");
             mpLayout->show("N_Btn_Off");
@@ -222,7 +224,7 @@ namespace ipl {
         int SDMenuButton::getButtonNo(const char* paneName) {
             int num = -1;
             for (int i = 0; i < BTN_MAX; i++) {
-                if (strcmp(paneName, scSDBtnName[i]) == 0) {
+                if (strcmp(paneName, mscButtonName[i]) == 0) {
                     num = i;
                     break;
                 }
@@ -238,7 +240,7 @@ namespace ipl {
                     mbHovered[i] = FALSE;
 
                     switch (i) {
-                        case BTN_SD_CARD: { // Play hover out animation
+                        case BTN_SD_CARD: {  // Play hover out animation
                             layout::Animator* anim = mpLayout->getAnim(ANIM_BTN_ROLL_OUT);
                             anim->play();
                             break;
@@ -247,7 +249,7 @@ namespace ipl {
                 }
 
                 // Init button pane
-                mpGui->initPane(mpLayout->FindPaneByName(scSDBtnName[i]));
+                mpGui->initPane(mpLayout->FindPaneByName(mscButtonName[i]));
             }
         }
 

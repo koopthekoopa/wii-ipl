@@ -4,11 +4,13 @@
 #include <private/vf/PrFILE2/pf_types.h>
 
 #include <private/vf/PrFILE2/fatfs/pf_cache.h>
+#include <private/vf/PrFILE2/fatfs/pf_dir.h>
 #include <private/vf/PrFILE2/fatfs/pf_volume.h>
 
 #include <private/vf/PrFILE2/dskmng/pdm_disk.h>
 
 #include <revolution/mem.h>
+#include <revolution/vf/types.h>
 
 #include <revolution/dvd.h>
 #include <revolution/nand.h>
@@ -58,10 +60,10 @@ typedef struct {
 } VFSys_deviceNand;
 
 typedef struct {
-    VFSys_device base;                 // 0x00
-    SDDev drive;                       // 0x20
-    SDDevEventCallback eventCallback;  // 0x48
-    u32 slotNo;                        // 0x4C
+    VFSys_device base;                // 0x00
+    SDDev drive ALIGN32 /*?*/;        // 0x20
+    VFSDEventCallback eventCallback;  // 0x48
+    u32 slotNo;                       // 0x4C
 } VFSys_deviceSD;
 
 typedef struct VFSysTime {
@@ -75,63 +77,87 @@ typedef struct VFSysTime {
 
 typedef void (*VFSysTimeStampCallback)(VFSysTime* time);
 
-void VFSysSetLastError(s32 err);
+void VFSysSetLastError(VFErr err);
 
 VFSys_handle* VFSysGetHandleP(s32 idx);
 s32 VFSysHandleP2Idx(VFSys_handle* handle);
 VFSys_handle* VFSysVol2HandleP(PF_VOLUME* vol);
 VFSys_handle* VFSys_file_2_handle(PF_FILE* file);
 int VFSysPDMDisk2HandleIdx(const PDM_DISK* disk);
+VFSys_device* VFSysPDMDisk2DeviceP(PDM_DISK* disk_p);
 VFSys_drive* VFSysGetDriveP(s32 idx);
 VFSys_drive* VFSysPDMDisk2DriveP(PDM_DISK* disk);
 
 void VFSysInit(void* heap_start_address, u32 size);
 void VFSysFinalize();
 
-void VFSysSetDevErrInfo(s32 handle_idx, s32 err);
+void VFSysSetDevErrInfo(s32 handle_idx, VFErr err);
 
-s32 VFSysSetDeviceNANDFlash(s32* idx, void* cache_heap, u32 cache_size);
-s32 VFSysUnsetDevice(s32 handle_idx);
+VFErr VFSysSetDeviceNANDFlash(s32* idx, void* cache_heap, u32 cache_size);
 
-s32 VFSysCheckExistPrfFile(s32 handle_idx, const char* prf_file_name, void* memory);
-s32 VFSysCreatePrfFileNANDFlashEx(const char* prf_file_name, u32 file_size);
+VFErr VFSysSetDeviceSDDirect(s32* idx, u32 slot_no, void* cache_heap, u32 cache_size, VFSDEventCallback eventCallback);
+VFErr VFSysGetSlotNoSDDirect(s32 handle_idx);
 
-s32 VFSysMountDrv(s32 handle_idx, const char* prf_file_name, void* memory);
+VFErr VFSysUnsetDevice(s32 handle_idx);
 
-s32 VFSysUnmountDrv(s32 handle_idx, u32 mode);
+VFErr VFSysCheckExistPrfFile(s32 handle_idx, const char* prf_file_name, void* memory);
+VFErr VFSysCreatePrfFileNANDFlashEx(const char* prf_file_name, u32 file_size);
+
+VFErr VFSysMountDrv(s32 handle_idx, const char* prf_file_name, void* memory);
+
+VFErr VFSysUnmountDrv(s32 handle_idx, u32 mode);
+
+PF_FILE* VFSysCreateFile_current(const char* path_p);
+PF_FILE* VFSysCreateFile(s32 handle_idx, const char* path_p);
 
 PF_FILE* VFSysOpenFile_current(const char* path, const char* mode);
 PF_FILE* VFSysOpenFile(s32 handle_idx, const char* path, const char* mode);
 
-s32 VFSysCloseFile(PF_FILE* file);
+VFErr VFSysCloseFile(PF_FILE* file);
 
-s32 VFSysSeekFile(PF_FILE* file, s32 offset, s32 origin);
+VFErr VFSysSeekFile(PF_FILE* file, s32 offset, s32 origin);
 
-s32 VFSysReadFile(u32* read_size, void* buf, u32 size, PF_FILE* file);
-s32 VFSysWriteFile(void* buf, u32 size, PF_FILE* file);
+VFErr VFSysReadFile(u32* read_size, void* buf, u32 size, PF_FILE* file);
+VFErr VFSysWriteFile(void* buf, u32 size, PF_FILE* file);
 
-s32 VFSysDeleteFile_current(const char* path);
-s32 VFSysDeleteFile(s32 handle_idx, const char* path);
+VFErr VFSysDeleteFile_current(const char* path);
+VFErr VFSysDeleteFile(s32 handle_idx, const char* path);
 
-s32 VFSysCreateDir_current(const char* dir_name);
-s32 VFSysCreateDir(s32 handle_idx, const char* dir_name);
+VFErr VFSysCreateDir_current(const char* dir_name);
+VFErr VFSysCreateDir(s32 handle_idx, const char* dir_name);
 
-s32 VFSysGetFileSizeByFd(s32* size, PF_FILE* file);
+VFErr VFSysChangeDir_current(const char* dir_name_p);
+VFErr VFSysChangeDir(s32 handle_idx, const char* dir_name_p);
 
-s32 VFSysGetDriveFreeSize(s32 handle_idx);
+VFErr VFSysDeleteDir_current(const char* dir_name_p);
+VFErr VFSysDeleteDir(s32 handle_idx, const char* dir_name_p);
 
-s32 VFSysGetLastError();
+VFErr VFSysFileSearchFirst_current(PF_DTA* o_dta, const char* path, u8 attr);
+VFErr VFSysFileSearchFirst(PF_DTA* o_dta, s32 handle_idx, const char* path, u8 attr);
 
-s32 VFSysGetLastDeviceError_current();
-s32 VFSysGetLastDeviceError(s32 handle_idx);
+VFErr VFSysFileSearchNext(PF_DTA* dta_p);
+
+VFErr VFSysGetFileSizeByFd(u32* size, PF_FILE* file);
+VFErr VFSysGetOffsetByFd(u32* o_offset, PF_FILE* file_p);
+
+s32 VFSysGetDriveFreeSize(s32 handle_idx, u32* o_empty_cluster, u32* o_sector_per_cluster, u32* o_byte_per_sector);
+
+VFErr VFSysGetLastError();
+
+VFErr VFSysGetLastDeviceError_current();
+VFErr VFSysGetLastDeviceError(s32 handle_idx);
 
 void VFSysSetNandFuncNormal(u32 handle_idx);
 void VFSysSetNandFuncEx(u32 handle_idx);
 
-s32 VFSysFormatDrive(s32 handle_idx);
+VFErr VFSysFormatDrive(s32 handle_idx);
 
-s32 VFSysSetSyncMode(s32 handle_idx, u32 mode);
+VFErr VFSysSync(s32 handle_idx, s32 mode);
+
+VFErr VFSysSetSyncMode(s32 handle_idx, u32 mode);
 u32 VFSysGetSyncMode(s32 handle_idx);
+
+VFErr VFSysGetSDDirectStatus(s32 handle_idx, u32* o_status_p);
 
 VFSysTimeStampCallback VFSysSetTimeStampCallback(VFSysTimeStampCallback timestamp_callback);
 VFSysTimeStampCallback VFSysGetTimeStampCallback();

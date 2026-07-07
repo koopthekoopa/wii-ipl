@@ -28,7 +28,7 @@ DECOMP_FORCE_ACTIVE(CDBFileSystem_c, "VFMountDriveNANDFlashEx %s->%s succeeded\n
 DECOMP_FORCE_ACTIVE(CDBFileSystem_c, "VFChangeDir %s %s\n");
 
 static inline CDBErr CDBFSInitVFFile(void* cacheBuffer, u32 cacheSize) {
-    VFError vfErr;
+    VFErr vfErr;
     s32 nandErr;
 
     vfErr = VFMountDriveNANDFlashCacheEx(CDB_CFG_VF_DRIVE_LETTER, CDB_VFF_FILE_NAME, cacheBuffer, cacheSize);
@@ -104,7 +104,7 @@ DECOMP_FORCE_ACTIVE(CDBFileSystem_c, "NANDPrivateDelete=%d\n");
 DECOMP_FORCE_ACTIVE(CDBFileSystem_c, "<--NANDPrivateDelete\n");
 
 CDBErr CDBFSInit(void* cacheBuffer, u32 cacheSize) {
-    VFError vfErr;
+    VFErr vfErr;
     s32 nandErr;
 
     strcpy(CDB_VFF_FILE_NAME, "/title/00000001/00000002/data/cdb.vff");
@@ -116,7 +116,7 @@ CDBErr CDBFSInit(void* cacheBuffer, u32 cacheSize) {
 }
 
 CDBErr CDBFSUninit() {
-    VFError vfErr;
+    VFErr vfErr;
 
     vfErr = VFUnmountDriveForce(CDB_CFG_VF_DRIVE_LETTER);
     if (vfErr != VF_ERR_SUCCESS) {

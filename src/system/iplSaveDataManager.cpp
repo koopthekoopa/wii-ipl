@@ -532,7 +532,7 @@ namespace ipl {
         int Manager::getAvailableNumInList(const ESTitleId* titleIds, u32 titleCount) {
             int count = 0;
             for (int i = 0; i < titleCount; i++) {
-                if (titleIds[i] != 0) {
+                if (titleIds[i] == 0) {
                     count++;
                 }
             }

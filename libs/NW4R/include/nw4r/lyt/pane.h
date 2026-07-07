@@ -35,7 +35,11 @@ namespace nw4r {
 
         class Pane : detail::PaneBase {
         private:
-            enum { BIT_VISIBLE = 0, BIT_INFLUENCED_ALPHA, BIT_LOCATION_ADJUST };
+            enum {
+                BIT_VISIBLE = 0,
+                BIT_INFLUENCED_ALPHA,
+                BIT_LOCATION_ADJUST
+            };
 
         public:
             Pane();

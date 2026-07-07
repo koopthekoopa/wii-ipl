@@ -1,5 +1,6 @@
 #if !defined(AFX_NATIFY_H__B8FF4369_8789_4674_8569_3D52CE8CA890__INCLUDED_)
 #define AFX_NATIFY_H__B8FF4369_8789_4674_8569_3D52CE8CA890__INCLUDED_
+#include "../common/gsCommon.h"
 
 #if _MSC_VER > 1000
 #pragma once

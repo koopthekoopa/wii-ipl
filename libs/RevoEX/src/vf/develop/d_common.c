@@ -99,6 +99,13 @@ u32 dCommon_GetPhysicalOffset(u32 startBlock, u32 BPS, u32 reservedSecNum) {
 PDM_FAT_TYPE dCommon_GetNiceFatType(u32* spf, u32 SPU, u32 SPC, u32 BPS) {
     u32 SPU_div_SPC;
 
+// This is the only way of prevent it from inlining...
+#ifndef DEBUG
+    int i;
+    for (i = 0; i < 1; i++) {
+    }
+#endif
+
     SPU_div_SPC = SPU / SPC;
     if (SPU_div_SPC < 0xFF5) {
         if (spf != NULL) {

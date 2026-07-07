@@ -54,13 +54,14 @@ typedef struct PF_CURSOR {
 
 typedef struct PF_SFD PF_SFD;
 typedef struct PF_FILE {
-    pf_u32 stat;        // 0x00
-    pf_s32 open_mode;   // 0x04
-    PF_SFD* p_sfd;      // 0x08
-    PF_FAT_HINT hint;   // 0x0C
-    pf_s32 last_error;  // 0x18
-    PF_CURSOR cursor;   // 0x1C
-    pf_u16 lock_count;  // 0x2C
+    pf_u32 stat;              // 0x00
+    pf_u32 open_mode;         // 0x04
+    PF_SFD* p_sfd;            // 0x08
+    PF_FAT_HINT hint;         // 0x0C
+    PF_FAT_HINT last_access;  // 0x14
+    pf_s32 last_error;        // 0x1C
+    PF_CURSOR cursor;         // 0x20
+    pf_u16 lock_count;        // 0x30
 } PF_FILE;
 
 typedef struct PF_INFO {
@@ -106,7 +107,7 @@ typedef struct PF_SDD {
     pf_u32 stat;           // 0x00
     pf_u16 num_handlers;   // 0x04
     PF_FFD ffd;            // 0x08
-    PF_DIR_ENT dir_entry;  // 0x40
+    PF_DIR_ENT dir_entry;  // 0x3C
 } PF_SDD;
 
 typedef struct PF_DIR_TAIL {
@@ -125,7 +126,7 @@ typedef struct PF_DIR {
     pf_u32 stat;           // 0x00
     PF_SDD* p_sdd;         // 0x04
     PF_FAT_HINT hint;      // 0x08
-    PF_DIR_CURSOR cursor;  // 0x14
+    PF_DIR_CURSOR cursor;  // 0x10
 } PF_DIR;
 
 typedef pf_s32 (*PF_VOLUME_CB)(pf_s32);
@@ -135,25 +136,25 @@ typedef pf_s32 (*PF_VOLUME_CB)(pf_s32);
     pf_u32 num_free_clusters;          // 0x38
     pf_u32 last_free_cluster;          // 0x3C
     PF_SFD sfds[5];                    // 0x40
-    PF_FILE ufds[5];                   // 0xD10
+    PF_FILE ufds[5];                   // 0xCFC
     PF_SDD sdds[3];                    // 0xE00
-    PF_DIR udds[3];                    // 0x1580
-    pf_s32 num_opened_files;           // 0x15E0
-    pf_s32 num_opened_directories;     // 0x15E4
-    PF_SECTOR_CACHE cache;             // 0x15E8
-    pf_s8 label[12];                   // 0x160C
-    PF_CUR_DIR current_dir[1];         // 0x1618
-    PF_DIR_TAIL tail_entry;            // 0x1860
-    pf_s32 last_error;                 // 0x186C
-    pf_s32 last_driver_error;          // 0x1870
-    pf_u32 file_config;                // 0x1874
-    pf_u16 flags;                      // 0x1878
-    pf_s8 drv_char;                    // 0x187A
-    pf_u16 fsi_flag;                   // 0x187C
-    PF_CLUSTER_LINK_VOL cluster_link;  // 0x1880
-    void* p_part;                      // 0x188C
-    void (*p_callback)();              // 0x1890
-    const pf_u8* format_param;         // 0x1894
+    PF_DIR udds[3];                    // 0x1574
+    pf_s32 num_opened_files;           // 0x15C8
+    pf_s32 num_opened_directories;     // 0x15CC
+    PF_SECTOR_CACHE cache;             // 0x15D0
+    pf_s8 label[12];                   // 0x15F4
+    PF_CUR_DIR current_dir[1];         // 0x1600
+    PF_DIR_TAIL tail_entry;            // 0x1848
+    pf_s32 last_error;                 // 0x1854
+    pf_s32 last_driver_error;          // 0x1858
+    pf_u32 file_config;                // 0x185C
+    pf_u16 flags;                      // 0x1860
+    pf_s8 drv_char;                    // 0x1862
+    pf_u16 fsi_flag;                   // 0x1864
+    PF_CLUSTER_LINK_VOL cluster_link;  // 0x1868
+    void* p_part;                      // 0x1874
+    void (*p_callback)();              // 0x1878
+    const pf_u8* format_param;         // 0x187C
 } /*PF_VOLUME*/;
 
 #define PF_DRIVE_COUNT 26
@@ -177,9 +178,11 @@ extern PF_VOLUME_SET VFipf_vol_set;
 pf_s32 VFiPFVOL_InitModule(pf_u32 config, void* param);
 pf_s32 VFiPFVOL_CheckForRead(PF_VOLUME* p_vol);
 pf_s32 VFiPFVOL_CheckForWrite(PF_VOLUME* p_vol);
+pf_s32 VFiPFVOL_CheckCurrentDir(PF_VOLUME* p_vol, pf_u32 start_cluster);
 pf_s32 VFiPFVOL_GetCurrentDir(PF_VOLUME* p_vol, PF_DIR_ENT* p_current_dir);
 void VFiPFVOL_SetCurrentVolume(PF_VOLUME* p_vol);
 PF_VOLUME* VFiPFVOL_GetCurrentVolume();
+pf_s32 VFiPFVOL_SetCurrentDir(PF_VOLUME* p_vol, PF_DIR_ENT* p_current_dir);
 PF_VOLUME* VFiPFVOL_GetVolumeFromDrvChar(pf_s8 drv_char);
 void VFiPFVOL_LoadVolumeLabelFromBuf(const pf_u8* buf, PF_VOLUME* p_vol);
 pf_s32 VFiPFVOL_errnum();
@@ -188,5 +191,6 @@ pf_s32 VFiPFVOL_attach(PF_DRV_TBL* p_drv);
 pf_s32 VFiPFVOL_detach(pf_s8 drv_char);
 pf_s32 VFiPFVOL_format(pf_s8 drv_char, const pf_u8* param);
 pf_s32 VFiPFVOL_unmount(pf_s8 drv_char, pf_u32 mode);
+pf_s32 VFiPFVOL_sync(pf_s8 drv_char, pf_u32 mode);
 
 #endif  // PRFILE2_VFMOD_PF_VOLUME_H

@@ -23,6 +23,9 @@ namespace EGG {
 
         static void initialize();
 
+        static void* alloc(u32 size, int align, Heap* pHeap);
+        static void free(void* pBlock, Heap* pHeap);
+
         virtual ~Heap();  // 0x08
 
         virtual HeapKind getHeapKind() const = 0;  // 0x0C

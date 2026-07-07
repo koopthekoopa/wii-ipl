@@ -7,6 +7,11 @@ namespace ipl {
     namespace scene {
         class BoardSD {
         public:
+            enum {
+                SD_STATE_NONE = 0,
+                SD_STATE_INSERTED,
+                SD_STATE_EJECTED,
+            };
             BoardSD();
             void update();
 

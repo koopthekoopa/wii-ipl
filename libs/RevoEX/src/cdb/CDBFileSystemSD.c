@@ -13,7 +13,7 @@ typedef struct CDB_FS_SD_WORK {
     BOOL isEjected;   // 0x08
     BOOL isInserted;  // 0x0C
 
-    VFEventCallback sdCallback;  // 0x10
+    VFSDEventCallback sdCallback;  // 0x10
 } CDB_FS_SD_WORK;
 
 enum {
@@ -35,7 +35,7 @@ BOOL CDBFSIsExistFileSD(const char* fileName) {
     char findName[256];
     VFDta vfDta;
 
-    VFError vfErr;
+    VFErr vfErr;
 
     strcpy(findName, fileName);
 
@@ -56,7 +56,7 @@ BOOL CDBFSIsExistFileSD(const char* fileName) {
 void CDBFSFindFirstSD(CDBFindDataSD* findData, const char* fileName) {
     char findName[256];
 
-    VFError vfErr;
+    VFErr vfErr;
 
     strcpy(findName, fileName);
     CDBFSConcatenatePath(findName, "*");
@@ -86,7 +86,7 @@ void CDBFSFindFirstSD(CDBFindDataSD* findData, const char* fileName) {
 }
 
 void CDBFSFindNextSD(CDBFindDataSD* findData) {
-    VFError vfErr;
+    VFErr vfErr;
 
     vfErr = VFFileSearchNext(&findData->dta);
     if (vfErr == VF_ERR_SUCCESS) {
@@ -103,9 +103,9 @@ void CDBFSFindCloseSD(CDBFindDataSD* findData) {
 
 char* CDBFindDataGetNameSD(CDBFindDataSD* findData) {
     if (findData->dta.longName[0] == 0) {
-        return findData->dta.fileName;
+        return (char*)findData->dta.fileName;
     } else {
-        return findData->dta.longName;
+        return (char*)findData->dta.longName;
     }
 }
 
@@ -145,7 +145,7 @@ CDBErr CDBFSCreateDirForceSD(const char* dirName) {
             realDirPath[i] = '\0';
 
             if (CDBFSIsDirNameSD(realDirPath)) {
-                VFError vfErr = VFCreateDir(realDirPath);
+                VFErr vfErr = VFCreateDir(realDirPath);
                 if (vfErr != VF_ERR_SUCCESS && vfErr != VF_ERR_EEXIST) {
                     if (vfErr == VF_ERR_ENOSPC) {
                         return CDB_ERROR_OUT_OF_SPACE;
@@ -168,7 +168,7 @@ CDBErr CDBFSCreateDirForceSD(const char* dirName) {
 }
 
 CDBErr CDBFSDeleteDirSD(const char* dirName) {
-    VFError vfErr = VFDeleteDir(dirName);
+    VFErr vfErr = VFDeleteDir(dirName);
 
     if (vfErr != VF_ERR_SUCCESS) {
         if (vfErr == VF_ERR_EACCES) {
@@ -217,7 +217,7 @@ void CDBFSSDEjectedCallback(u32 vfEvent) {
 }
 
 CDBErr CDBFSSDMount() {
-    VFError vfErr;
+    VFErr vfErr;
 
     if (s_fssdWork.sdStatus == SD_STATUS_UNAVAILABLE) {
         return CDB_ERROR_2;
@@ -246,7 +246,7 @@ CDBErr CDBFSSDMount() {
 }
 
 CDBErr CDBFSSDUnmount() {
-    VFError vfErr;
+    VFErr vfErr;
 
     if (s_fssdWork.sdStatus == SD_STATUS_UNAVAILABLE) {
         return CDB_ERROR_2;

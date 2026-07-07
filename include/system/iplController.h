@@ -11,6 +11,8 @@
 #include <egg/core.h>
 
 #include "iplMath.h"
+#include "math/iplMathTypes.h"
+#include "revolution/os/OSTime.h"
 
 namespace ipl {
     namespace controller {
@@ -60,63 +62,129 @@ namespace ipl {
         };
         // clang-format on
 
-        class Interface {
-        public:
-            Interface();
+        class Base {
+            public:
+                Base(int chan, KPADStatus &arg1) {
+                    this->mButton = 0;
+                    this->mUnk8 = 0;
+                    this->mLastRumbleTime = 0;
+                    this->mRumbleType = -1;
+                    this->mChan = chan;
+                    this->mUnk18 = 2;
+                    this->mUnk1C = 0;
 
-            virtual ~Interface();                       // 0x08
-            virtual int getType() const;                // 0x0C
-            virtual int getChannel() const;             // 0x10
-            virtual int down(u32 button) const;         // 0x14
-            virtual int downTrg(u32 button) const;      // 0x18
-            virtual int upTrg(u32 button) const;        // 0x1C
-            virtual int pinch() const;                  // 0x20
-            virtual int pinchTrg() const;               // 0x24
-            virtual int pinchOffTrg() const;            // 0x28
-            virtual int decide() const;                 // 0x2C
-            virtual int repeat(u32 button) const;       // 0x30
-            virtual int rumble(int timer = 0) const;    // 0x34
-            virtual void cancelRumbling();              // 0x38
-            virtual int getHoldFlag() const;            // 0x3C
-            virtual int getTrigFlag() const;            // 0x40
-            virtual int getReleaseFlag() const;         // 0x44
-            virtual int getClassicHoldFlag() const;     // 0x48
-            virtual int getClassicTrigFlag() const;     // 0x4C
-            virtual int getClassicReleaseFlag() const;  // 0x50
-            virtual math::VEC2 getDpdPos() const;       // 0x54
-            /**
-             * @brief Gets the IR sensor position of the Wii Remote.
-             * @return The IR sensor X and Y as `ipl::math::VEC2`.
-             */
-            virtual math::VEC2 getDpdProjectionPos() const;  // 0x58
-            /**
-             * @brief Gets the Horizon of the Wii Remote.
-             * @return The Horizon X and Y as `ipl::math::VEC2`.
-             */
-            virtual math::VEC2 getHorizon() const;      // 0x5C
-            virtual int getDpdDistance() const;         // 0x60
-            virtual KPADStatus* getKPADStatus() const;  // 0x64
-            virtual PADStatus* getPADStatus() const;    // 0x68
-            virtual bool isValidBtn() const;            // 0x6C
-            virtual bool isValidDpd() const;            // 0x70
+                    KPADEnableDPD(chan);
 
-            virtual bool setForceInvalid(bool flag);  // 0x74
+                    this->mUnk1D = 0;
+                    this->mUnk1E = 0;
+                    this->mUnk20 = &arg1;
+                }
 
-            virtual f32 getMainStickX() const;  // 0x78
-            virtual f32 getMainStickY() const;  // 0x7C
+                virtual ~Base();                       // 0x08
+                virtual int getType() const;                // 0x0C
+                virtual int getChannel() const;             // 0x10
+                virtual int down(u32 button) const;         // 0x14
+                virtual int downTrg(u32 button) const;      // 0x18
+                virtual int upTrg(u32 button) const;        // 0x1C
+                virtual int pinch() const;                  // 0x20
+                virtual int pinchTrg() const;               // 0x24
+                virtual int pinchOffTrg() const;            // 0x28
+                virtual int decide() const;                 // 0x2C
+                virtual int repeat(u32 button) const;       // 0x30
+                virtual int rumble(int timer = 0);    // 0x34
+                virtual void cancelRumbling();              // 0x38
+                virtual int getHoldFlag() const;            // 0x3C
+                virtual int getTrigFlag() const;            // 0x40
+                virtual int getReleaseFlag() const;         // 0x44
+                virtual int getClassicHoldFlag() const;     // 0x48
+                virtual int getClassicTrigFlag() const;     // 0x4C
+                virtual int getClassicReleaseFlag() const;  // 0x50
+                virtual math::VEC2 getDpdPos() const;       // 0x54
+                /**
+                 * @brief Gets the IR sensor position of the Wii Remote.
+                 * @return The IR sensor X and Y as `ipl::math::VEC2`.
+                 */
+                virtual math::VEC2 getDpdProjectionPos() const;  // 0x58
+                /**
+                 * @brief Gets the Horizon of the Wii Remote.
+                 * @return The Horizon X and Y as `ipl::math::VEC2`.
+                 */
+                virtual math::VEC2 getHorizon() const;      // 0x5C
+                virtual int getDpdDistance() const;         // 0x60
+                virtual KPADStatus* getKPADStatus() const;  // 0x64
+                virtual PADStatus* getPADStatus() const;    // 0x68
+                virtual bool isValidBtn() const;            // 0x6C
+                virtual bool isValidDpd() const;            // 0x70
 
-            virtual f32 getSubStickX() const;  // 0x80
-            virtual f32 getSubStickY() const;  // 0x84
+                virtual bool setForceInvalid(bool flag);  // 0x74
 
-            virtual void read() const;  // 0x88
+                virtual f32 getMainStickX() const;  // 0x78
+                virtual f32 getMainStickY() const;  // 0x7C
 
-        private:
-            u8 dummyData[32];
+                virtual f32 getSubStickX() const;  // 0x80
+                virtual f32 getSubStickY() const;  // 0x84
+
+                virtual void read();  // 0x88
+
+            // protected:
+                u8 mButton; // 0x4
+                u32 mUnk8; // 0x8
+                OSTick mLastRumbleTime; // 0xC
+                s32 mRumbleType; // 0x10
+                u32 mChan; // 0x14
+                u32 mUnk18; // 0x18
+                u8 mUnk1C;
+                u8 mUnk1D; // 0x1D
+                u8 mUnk1E; // 0x1E
+                KPADStatus *mUnk20; // 0x20
         };
 
-        class Classic : public Interface {
+        class Interface : public Base {
         public:
-            virtual BOOL isValidDpdClassic() const;  // 0x8C
+            Interface(int chan, KPADStatus &arg1) : Base(chan, arg1) {}
+
+            ~Interface() {}
+
+            virtual int down(u32 button) const override;        // 0x10
+            virtual int downTrg(u32 button) const override;     // 0x18
+            virtual int pinch() const override;                 // 0x1C
+            virtual KPADStatus* getKPADStatus() const override; // 0x64
+            virtual bool isValidBtn() const override;           // 0x6C
+        };
+
+        class Revolution : public Interface {
+        public:
+            Revolution(int chan, KPADStatus &arg1) : Interface(chan, arg1) {}
+
+            virtual ~Revolution();
+
+            virtual int down(u32 button) const override;                // 0x10
+
+            virtual math::VEC2 getDpdProjectionPos() const override;    // 0x58
+
+            virtual bool isValidBtn() const override;                   // 0x6C
+            virtual bool isValidDpd() const override;                   // 0x70
+
+            virtual void read() override;                               // 0x88
+        };
+
+        class Classic : public Revolution {
+        public:
+            Classic(int arg0, KPADStatus &arg1);
+
+            virtual int getClassicHoldFlag() const override;        // 0x48
+
+            virtual math::VEC2 getDpdPos() const override;          // 0x54
+            virtual math::VEC2 getDpdProjectionPos() const override;// 0x58
+            virtual math::VEC2 getHorizon() const override;         // 0x5C
+
+            virtual void read() override;                           // 0x88
+
+            virtual BOOL isValidDpdClassic() const;                 // 0x8C
+
+        private:
+            math::VEC2 unk24;
+            int unk2C;
         };
 
         class Manager {
@@ -130,7 +198,7 @@ namespace ipl {
             Interface* getYoungController();
 
         private:
-            u8 dummy[0x2F8];
+            // u8 dummy[0x2F8];
         };
     }  // namespace controller
 }  // namespace ipl

@@ -8,6 +8,8 @@
 #include <cstdio>
 #include <cstring>
 
+#pragma sym on
+
 namespace LibTVRC {
     const char* TVRC_FILE_HEADER = "TVR0";
     u32 __tienHoseiNsec = 1100;
@@ -20,7 +22,19 @@ namespace LibTVRC {
     BOOL _isUseRepeatCode;
 
     u32 _lastError;
-    void* _tvrcFile;
+    typedef struct {
+        u8 magic[4];  // 0x00
+        u32 fileSize;
+        char unk_0x08[4];
+        f32 unk_0x0C;
+        f32 unk_0x10;
+        u32 unk_0x14;
+        struct {
+            u32 offset;
+            u32 unk_0x04;
+        } unk_0x18[TVRC_COMMAND_MAP_MAX - 1 /*?*/];
+    } _FileData;
+    _FileData* _tvrcFile;
     undefined4 _Hz;
     undefined4 _onTimeRatio;
 
@@ -91,7 +105,7 @@ BOOL TVRCSetModelType(int makerID, int typeNo, void* pFileData, int length) {
     if (_isInitialized == FALSE || _database.archiveStartAddr == NULL) {
         return FALSE;
     }
-    if (*(u32*)_database.archiveStartAddr != ARC_MAGIC) {
+    if (((ARCHeader*)_database.archiveStartAddr)->magic != ARC_MAGIC) {
         return FALSE;
     }
     if (makerID == _makerID && typeNo == _typeNo) {
@@ -103,10 +117,7 @@ BOOL TVRCSetModelType(int makerID, int typeNo, void* pFileData, int length) {
         _lastError = 6;
         return FALSE;
     }
-    for (; typeNo != 0; typeNo--) {
-        if (!ARCReadDir(&dir, &dirEntry)) {
-            break;
-        }
+    while (ARCReadDir(&dir, &dirEntry) && typeNo >= 0) {
     }
     ARCCloseDir(&dir);
 
@@ -121,7 +132,7 @@ BOOL TVRCSetModelType(int makerID, int typeNo, void* pFileData, int length) {
     }
     memcpy(pFileData, ARCGetStartAddrInMem(&file), fileLen);
 
-    _tvrcFile = pFileData;
+    _tvrcFile = (_FileData*)pFileData;
     _makerID = makerID;
     _typeNo = typeNo;
     _database.archiveStartAddr = NULL;
@@ -136,7 +147,6 @@ void TVRCSetRepeatTimeout(u32 value) {
 BOOL TVRCSendStopAsync() {
     if (!_isInitialized || !_isActive) {
         return FALSE;
-
     } else {
         _isReserveDeactive = TRUE;
         return TRUE;
@@ -145,4 +155,12 @@ BOOL TVRCSendStopAsync() {
 
 BOOL TVRCIsActive() {
     return _isActive;
+}
+
+BOOL TVRCIsValidCommand(int cmd) {
+    BOOL result = FALSE;
+    if (cmd >= 0 && _isInitialized && _tvrcFile != NULL && _tvrcFile->unk_0x18[cmd].offset != 0) {
+        result = TRUE;
+    }
+    return result;
 }

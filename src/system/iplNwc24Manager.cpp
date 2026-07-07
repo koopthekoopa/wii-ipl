@@ -16,13 +16,13 @@ namespace ipl {
     namespace nwc24 {
         Manager::Arg Manager::smArg;
 
-#if defined(VERSION_43U)
+#if defined(SYSMENU_REGION_USA)
         static const NWC24EncodingRegion ENCODING_REGION = NWC24_ENCODING_REGION_USA;
-#elif defined(VERSION_43E)
+#elif defined(SYSMENU_REGION_EUR)
         static const NWC24EncodingRegion ENCODING_REGION = NWC24_ENCODING_REGION_EUR;
-#elif defined(VERSION_43J)
+#elif defined(SYSMENU_REGION_JPN)
         static const NWC24EncodingRegion ENCODING_REGION = NWC24_ENCODING_REGION_JPN;
-#elif defined(VERSION_43K)
+#elif defined(SYSMENU_REGION_KOR)
         static const NWC24EncodingRegion ENCODING_REGION = NWC24_ENCODING_REGION_KOR;
 #else
         static const NWC24EncodingRegion ENCODING_REGION = NWC24_ENCODING_REGION_NON;

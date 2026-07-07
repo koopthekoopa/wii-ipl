@@ -9,10 +9,8 @@
 #include <private/cdb/CDBDatabase.h>
 #include <private/cdb/CDBReport.h>
 
-
 #include <private/cdb/CDBBridge.h>
 #include <private/cdb/CDBFileSystem.h>
-
 
 #include <private/cdb/CDBConv.h>
 

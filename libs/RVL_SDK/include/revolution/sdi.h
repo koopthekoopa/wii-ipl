@@ -18,19 +18,6 @@ enum {
     SD_ERROR_21000000 = (SD_ERROR_BASE | 0x02100000),
 };
 
-typedef struct _ISD_Device {
-    s32 fd;  // 0x00
-    u32 unk_0x04;
-    u32 unk_0x08;
-    u32 unk_0x0C;
-    u32 unk_0x10;
-    u32 unk_0x14;
-    u32 unk_0x18;
-    u32 unk_0x1C;
-    u32 unk_0x20;
-    u32 unk_0x24;
-} ISD_Device;
-
 typedef struct _SDDev {
     int SDDevFd;       // 0x00
     u32 SDDevFunc;     // 0x04
@@ -44,11 +31,26 @@ typedef struct _SDDev {
     u32 SDState;       // 0x24
 } SDDev;
 
-typedef void (*SDDevEventCallback)(u32);
+typedef s32 (*SDDevIntrCallback)(u32, void*);
 
-ISD_Error ISD_MountCard(u32 slot, ISD_Device** dev);
-void ISD_UnmountCard(ISD_Device* dev);
+ISD_Error ISD_InitCard();
 
-ISD_Error ISD_GetHCRegister(ISD_Device* dev, u32 param_2, u32* param_3, u32 param_4) NO_INLINE;
+ISD_Error ISD_ProbeCard(u32 slot);
+
+ISD_Error ISD_MountCard(u32 slot, SDDev** dev);
+ISD_Error ISD_UnmountCard(SDDev* dev);
+
+ISD_Error ISD_GetHCRegister(SDDev* dev, u32 param_2, u32* param_3, u32 param_4) NO_INLINE;
+
+ISD_Error ISD_ReadBlock(SDDev* dev, u32 offset, u8* cmdResp, u32 cmdRespSize);
+ISD_Error ISD_WriteBlock(SDDev* dev, u32 offset, u8* cmdResp, u32 cmdRespSize);
+
+ISD_Error ISD_ReadCardRegister(SDDev* dev, u32 cmd, u32* cmdResp, u32 cmdRespSize);
+ISD_Error ISD_RegisterDeviceIntrHandler(SDDev* dev, SDDevIntrCallback intCB, void* arg);
+
+ISD_Error ISD_ResetDevice(SDDev* dev);
+ISD_Error ISD_UnregisterDeviceIntrHandler(SDDev* dev);
+
+ISD_Error ISD_GetDeviceStatus(SDDev* dev, u32* status);
 
 #endif  // REVOLUTION_SDI_H

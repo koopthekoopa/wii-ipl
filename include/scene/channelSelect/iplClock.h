@@ -13,7 +13,7 @@ namespace ipl {
         class clock {
         public:
             clock();
-            ~clock() {}
+            ~clock() NO_INLINE {}
 
             void init(EGG::Heap* heap, nand::LayoutFile* layoutFile);
             void calc();

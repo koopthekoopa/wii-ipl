@@ -49,22 +49,7 @@ namespace ipl {
 
         void delete_task_(void* work);
 
-#define OBJ_LIST_LOOP(...)                                                                                                                           \
-    {                                                                                                                                                \
-        BoardObject* object = NULL;                                                                                                                  \
-        goto CONCAT(l, __LINE__);                                                                                                                    \
-        do {                                                                                                                                         \
-            {__VA_ARGS__} CONCAT(l, __LINE__) : object = mObjList.getNext(object);                                                                   \
-        } while (object != NULL);                                                                                                                    \
-    }
-
-#define OBJ_LIST_LOOP_ALT(object, ...)                                                                                                               \
-    {                                                                                                                                                \
-        goto CONCAT(l, __LINE__);                                                                                                                    \
-        do {                                                                                                                                         \
-            {__VA_ARGS__} CONCAT(l, __LINE__) : object = mObjList.getNext(object);                                                                   \
-        } while (object != NULL);                                                                                                                    \
-    }
+#define FOREACH_OBJ_IN_LIST(object) while (object = mObjList.getNext(object), object != NULL)
 
         enum {
             FOCUS_ANIM_IN = 0,
@@ -76,7 +61,7 @@ namespace ipl {
               mbDoTaskDelete(false), mbDoCountTask(false), mbNewMsgAnimCount(false), mCurrentDate(System::getCurrentTime()),
               mPreviousDate(System::getCurrentTime()), mpLayoutFile(NULL), mpLayoutBg(NULL), mpLayoutFocusBg(NULL), mbRIconEnable(false),
               mbLIconEnable(false), mbFocusMode(false), mbPlayDispSound(false), mpCurrentFocus(NULL), mMsgCount(-1), mPrevMsgCount(-1), mBoardSD(),
-              unk_0xFB4(false), unk_0xFB8(unk) {
+              mbExitRequest(false), unk_0xFB8(unk) {
             setSceneParentFlags(SCN_PARENTFLAG_CALC | SCN_PARENTFLAG_DRAW);
 
             for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
@@ -268,7 +253,10 @@ namespace ipl {
         void Board::draw() {
             if (mState != STATE_WAIT_CDB_INIT) {
                 if (System::onDrawLayer(scene::DRAW_LAYER_1)) {
-                    OBJ_LIST_LOOP({ object->capture(); });
+                    BoardObject* object = NULL;
+                    FOREACH_OBJ_IN_LIST(object) {
+                        object->capture();
+                    }
                 } else if (System::onDrawLayer(scene::DRAW_LAYER_2)) {
                     // Background
                     utility::Graphics::setOrtho();
@@ -277,14 +265,14 @@ namespace ipl {
                     // Objects
 
                     BoardObject* chosen = NULL;
-
-                    OBJ_LIST_LOOP({
+                    BoardObject* object = NULL;
+                    FOREACH_OBJ_IN_LIST(object) {
                         if (object->mState != BoardObject::STATE_PINCH) {
                             object->draw();
                         } else {
                             chosen = object;
                         }
-                    });
+                    }
 
                     // Pinched object
                     if (chosen != NULL) {
@@ -591,7 +579,7 @@ namespace ipl {
 
                 // Scene order = Button > Channel Select > Arrow
                 createChildScene(SCENE_BUTTON, this, NULL);
-                createChildScene(SCENE_CHANNEL_SELECT, this, NULL);
+                createChildScene(SCENE_CHANNEL_SELECT, this, NULL, (void*)ChannelSelect::START_NORMAL);
                 createChildScene(SCENE_ARROW, this, NULL);
 
                 // Read the records
@@ -686,7 +674,7 @@ namespace ipl {
 
             if (scnMgr->getScene(SCENE_CHANNEL_SELECT) == NULL && scnMgr->getScene(SCENE_CALENDAR) == NULL &&
                 scnMgr->getScene(SCENE_MAIL_ADDRESS_SELECT) == NULL && scnMgr->getReservedScene() == NULL) {
-                if (!unk_0xFB4) {
+                if (!mbExitRequest) {
                     if (mbFocusMode) {
                         mpLayoutFocusBg->getAnim(FOCUS_ANIM_OUT)->play();
                         mbFocusMode = false;
@@ -912,11 +900,11 @@ namespace ipl {
                 if (mState == STATE_NORMAL) {
                     for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
                         BoardObject* object = NULL;
-                        OBJ_LIST_LOOP_ALT(object, {
+                        FOREACH_OBJ_IN_LIST(object) {
                             if ((mHoveredObjs[i] == NULL || mHoveredObjs[i] == object) && mState == STATE_NORMAL) {
                                 object->update(i);
                             }
-                        });
+                        }
 
                         if (System::getController(i) == NULL && mHoveredObjs[i] != NULL) {
                             object->start_left_event(i);
@@ -1026,7 +1014,7 @@ namespace ipl {
 
                     get_button()->setEventHandler(this);
 
-                    createChildScene(SCENE_CHANNEL_SELECT, this, System::getScene(SCENE_ARROW), (void*)2);
+                    createChildScene(SCENE_CHANNEL_SELECT, this, System::getScene(SCENE_ARROW), (void*)ChannelSelect::START_FROM_CHJUMP);
 
                     cmn_create_child(Button::IDANIM_FROM_BOARD_TO_CH_SEL);
                     updateDate(utility::Date(System::getCurrentTime()));
@@ -1099,7 +1087,10 @@ namespace ipl {
 
                 mSearchDirection = CDB_SEARCH_DIRECTION_LEFT;
 
-                OBJ_LIST_LOOP({ object->right_away(); });
+                BoardObject* object = NULL;
+                FOREACH_OBJ_IN_LIST(object) {
+                    object->right_away();
+                }
 
                 snd::getSystem()->startSEwithPos("WIPL_SE_MSG_HOUSE", 300.0f);
 
@@ -1117,7 +1108,10 @@ namespace ipl {
 
                 mSearchDirection = CDB_SEARCH_DIRECTION_RIGHT;
 
-                OBJ_LIST_LOOP({ object->left_away(); });
+                BoardObject* object = NULL;
+                FOREACH_OBJ_IN_LIST(object) {
+                    object->left_away();
+                }
 
                 snd::getSystem()->startSEwithPos("WIPL_SE_MSG_HOUSE", -300.0f);
 
@@ -1127,11 +1121,12 @@ namespace ipl {
 
         void Board::stt_wait_fadeaway() {
             bool result = mbDoReadTask == false;
-            OBJ_LIST_LOOP({
+            BoardObject* object = NULL;
+            FOREACH_OBJ_IN_LIST(object) {
                 result = (result & (!object->mbRightWay && !object->mbLeftWay && !object->mMoveAnim.isPlaying() && object->mpLayout != NULL &&
                                     !object->mpLayout->getAnim(BoardObject::ANIM_NEXT_PAGE)->isPlaying())) != false &&
                          object->mbModifiedPos == false;
-            });
+            }
 
             if (result) {
                 if (mSearchDirection == CDB_SEARCH_DIRECTION_LEFT) {
@@ -1161,7 +1156,10 @@ namespace ipl {
         void Board::stt_wait_stand() {
             bool result = TRUE;
 
-            OBJ_LIST_LOOP({ result &= (object->mState == STATE_WAIT_CHILD_CST); });
+            BoardObject* object = NULL;
+            FOREACH_OBJ_IN_LIST(object) {
+                result &= (object->mState == STATE_WAIT_CHILD_CST);
+            }
 
             if (result) {
                 mState = STATE_NORMAL;
@@ -1329,9 +1327,9 @@ namespace ipl {
             wchar_t fullText[TEXT_LENGTH] = {0};
             memset(&fullText, 0, sizeof(fullText));
 
-#if defined(VERSION_43J)
+#if defined(SYSMENU_REGION_JPN)
             get_text_jpn(date, fullText, TEXT_LENGTH);
-#elif defined(VERSION_43U)
+#elif defined(SYSMENU_REGION_USA)
             switch (System::getLanguage()) {
                 case SC_LANG_FRENCH: {
                     get_text_usafre(date, fullText, TEXT_LENGTH);
@@ -1346,7 +1344,7 @@ namespace ipl {
                     break;
                 }
             }
-#elif defined(VERSION_43E)
+#elif defined(SYSMENU_REGION_EUR)
             switch (System::getLanguage()) {
                 case SC_LANG_GERMAN: {
                     get_text_ger(date, fullText, TEXT_LENGTH);
@@ -1367,7 +1365,7 @@ namespace ipl {
                     break;
                 }
             }
-#elif defined(VERSION_43K)
+#elif defined(SYSMENU_REGION_KOR)
             get_text_kor(date, fullText, TEXT_LENGTH);
 #endif
 
@@ -1643,13 +1641,19 @@ namespace ipl {
         void Board::set_key_table() {
             int i = 0;
 
-            OBJ_LIST_LOOP({ strncpy((char*)mKeyTable[i++], object->mCDBRecordKey.keyString, sizeof(object->mCDBRecordKey.keyString)); });
+            BoardObject* object = NULL;
+            FOREACH_OBJ_IN_LIST(object) {
+                strncpy((char*)mKeyTable[i++], object->mCDBRecordKey.keyString, sizeof(object->mCDBRecordKey.keyString));
+            }
         }
 
         BOOL Board::is_exist_diff_date() const {
             bool result = false;
 
-            OBJ_LIST_LOOP({ result |= (object->mBoardDate != mCurrentDate); });
+            BoardObject* object = NULL;
+            FOREACH_OBJ_IN_LIST(object) {
+                result |= (object->mBoardDate != mCurrentDate);
+            }
 
             return result;
         }
@@ -1657,14 +1661,15 @@ namespace ipl {
         void Board::calc_board_object() {
             nw4r::lyt::Pane* pane = mpLayoutBg->FindPaneByName("N_TopBack");
 
-            OBJ_LIST_LOOP({
+            BoardObject* object = NULL;
+            FOREACH_OBJ_IN_LIST(object) {
                 nw4r::lyt::Pane* posPane = mpLayoutBg->FindPaneByName(scScrollPane[get_date_label(object->mBoardDate)]);
 
                 math::VEC3 pos;
                 nw4r::math::VEC3Add(&pos, &pane->GetTranslate(), &posPane->GetTranslate());
 
                 object->calc(math::VEC2(pos.x, pos.y));
-            });
+            }
         }
 
         void Board::cmn_create_child(int buttonAnim) {
@@ -1746,7 +1751,10 @@ namespace ipl {
         BOOL Board::is_wait_to_clean_task() const {
             bool result = false;
 
-            OBJ_LIST_LOOP({ result |= object->mbCleaned; });
+            BoardObject* object = NULL;
+            FOREACH_OBJ_IN_LIST(object) {
+                result |= object->mbCleaned;
+            }
 
             return result;
         }
@@ -1754,12 +1762,13 @@ namespace ipl {
         BOOL Board::is_already_read(const char* recordKey) const {
             bool result = false;
 
-            OBJ_LIST_LOOP({
+            BoardObject* object = NULL;
+            FOREACH_OBJ_IN_LIST(object) {
                 if (strncmp(object->mCDBRecordKey.keyString, recordKey, CDB_RECORD_KEY_STRING_LEN) == 0) {
                     result = true;
                     break;
                 }
-            });
+            }
 
             return result;
         }
@@ -1869,7 +1878,7 @@ namespace ipl {
                         Arrow* arrow = get_arrow();
 
                         if (mState == STATE_NORMAL && Button::cmpButtonName(paneName, Button::BTN_CH_SEL) == 0) {
-                            createChildScene(SCENE_CHANNEL_SELECT, this, arrow, (void*)1);
+                            createChildScene(SCENE_CHANNEL_SELECT, this, arrow, (void*)ChannelSelect::START_FROM_BOARD);
                             cmn_create_child(Button::IDANIM_FROM_BOARD_TO_CH_SEL);
 
                             updateDate(utility::Date(System::getCurrentTime()));
@@ -1975,12 +1984,13 @@ namespace ipl {
         BoardObject* Board::get_log_obj() {
             BoardObject* logObj = NULL;
 
-            OBJ_LIST_LOOP({
+            BoardObject* object = NULL;
+            FOREACH_OBJ_IN_LIST(object) {
                 if (object->mRecordType == RBRRecordType_PlayTimeLog) {
                     logObj = object;
                     break;
                 }
-            });
+            }
 
             return logObj;
         }

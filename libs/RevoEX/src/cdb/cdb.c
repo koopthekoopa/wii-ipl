@@ -11,7 +11,7 @@ CDBErr CDBInitEx(void* work, void* fsCacheBuffer, u32 fsCacheSize) {
     CDBErr ret;
 
     // Check is VF is initialized
-    if (VFIsAvailable() != VF_IS_AVAILABLE) {
+    if (VFIsAvailable() != TRUE) {
         CDBReportFatal("VF is not initialized\n");
         return CDB_ERROR_VF_INIT_FAIL;
     }

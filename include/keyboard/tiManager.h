@@ -115,6 +115,8 @@ namespace textinput {
 
             void                                        enableCompatibleFilter(bool compatibleFilter);
 
+            bool                                        isVacancy() const;
+
         private:
             MEMAllocator*                           mpAllocator;                // 0x04
             nw4r::lyt::MultiArcResourceAccessor*    mpMultiArcResourceAccessor; // 0x08

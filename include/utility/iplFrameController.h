@@ -4,7 +4,12 @@
 #include <revolution/types.h>
 
 namespace ipl {
-    enum { ANIM_TYPE_FORWARD = 0, ANIM_TYPE_BACKWARD, ANIM_TYPE_LOOP, ANIM_TYPE_ALTERNATE };
+    enum {
+        ANIM_TYPE_FORWARD = 0,
+        ANIM_TYPE_BACKWARD,
+        ANIM_TYPE_LOOP,
+        ANIM_TYPE_ALTERNATE
+    };
 
     namespace utility {
         class FrameController {
@@ -17,12 +22,12 @@ namespace ipl {
 
         public:
             FrameController() {}
-            virtual ~FrameController() {}
+            virtual ~FrameController() {}  // 0x08
 
             void init(int type, f32 maxFrame, f32 minFrame, f32 speed = 1.0f);
             void initFrame();
 
-            virtual void calc();
+            virtual void calc();  // 0x0C
 
             void setMaxFrame(f32 value) { mMaxFrame = value; }
             f32 getMaxFrame() const { return mMaxFrame; }

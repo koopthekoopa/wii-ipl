@@ -10,7 +10,7 @@ List of libraries that are linked (in alphabetical order):
 
 |   Name    |                    Description                          |    |
 |-----------|---------------------------------------------------------|----|
-| **CDB**   | Message Board File System Library; for cdb.vff          | ❌ |
+| **CDB**   | CDB Library (**C**alendar **D**ata**b**ase?); for cdb.vff             | ❌ |
 | **NCD**   | Network Settings Library                                | ❌ |
 | **NET**   | Network Utilities Library                               | ❌ |
 | **NHTTP** | HTTP Library                                            | ❌ |
@@ -18,9 +18,11 @@ List of libraries that are linked (in alphabetical order):
 | **SO**    | Socket Library                                          | ❌ |
 | **SSL**   | SSL Library                                             | ✔️ |
 | **VF**    | Virtual File System Library; for .vff files and SD Card | ❌ |
-| **WD**    | Wireless Driver Library; Wifi?                          | ❌ |
+| **WD**    | Wireless Driver Library; for Wireless Connections       | ❌ |
 
 Thanks to
 ---------
+[koopthekoopa/TFP2](https://github.com/koopthekoopa/TFP2)  
+[SMGCommunity/Petari](https://github.com/SMGCommunity/Petari)  
 [kiwi515/ogws](https://github.com/kiwi515/ogws)  
 [riidef/mkw](https://github.com/riidefi/mkw)  

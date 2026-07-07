@@ -6,7 +6,6 @@
 #include <revolution/nand.h>
 #include <revolution/vf/types.h>
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif  // __cplusplus

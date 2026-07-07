@@ -6,7 +6,6 @@
 #include "system/RIPL_BoardRecord.h"
 #include "system/iplNigaoe.h"
 
-
 #include "utility/iplCalendar.h"
 #include "utility/iplCapture.h"
 
@@ -14,7 +13,6 @@
 
 #include <revolution/arc.h>
 #include <revolution/cdb.h>
-
 
 namespace ipl {
     namespace scene {

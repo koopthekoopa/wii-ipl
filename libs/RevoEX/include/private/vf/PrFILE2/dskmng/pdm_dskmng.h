@@ -21,18 +21,16 @@ struct PDM_PARTITION {
 };
 
 /*typedef*/ struct PDM_DISK {
-    pf_u32 status;                   // 0x00
-    PDM_DISK_TBL disk_tbl;           // 0x04
-    pf_u32 signature;                // 0x0C
-    pf_u16 open_disk_cnt;            // 0x10
-    pf_u16 disk_lock_cnt;            // 0x12
-    PDM_DISK* disk_lock_handle;      // 0x14
-    PDM_DISK_INFO disk_info;         // 0x18
-    PDM_INIT_DISK* p_init_disk_tbl;  // 0x2C
-    PDM_PARTITION* p_cur_part;       // 0x30
-#ifdef PF_IPL_BUILD
-    pf_u32 unk_0x34;
-#endif
+    pf_u32 status;                                           // 0x00
+    PDM_DISK_TBL disk_tbl;                                   // 0x04
+    pf_u32 signature;                                        // 0x0C
+    pf_u16 open_disk_cnt;                                    // 0x10
+    pf_u16 disk_lock_cnt;                                    // 0x12
+    PDM_DISK* disk_lock_handle;                              // 0x14
+    PDM_DISK_INFO disk_info;                                 // 0x18
+    PDM_INIT_DISK* p_init_disk_tbl;                          // 0x2C
+    PDM_PARTITION* p_cur_part;                               // 0x30
+    pf_s32 (*p_erase_func)(pf_u32 block, pf_u32 num_block);  //  0x34
 } /*PDM_DISK*/;
 
 typedef struct PDM_DISK_HANDLE {

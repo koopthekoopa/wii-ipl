@@ -4,6 +4,11 @@
 #include <revolution/os/OSThread.h>
 #include <revolution/types.h>
 
+/**
+ * References:
+ * https://github.com/iversonjimmy/acer_cloud_wifi_copy/blob/master/sw_x/es_core/esc/core/ioscrypto/iostypes.h
+ */
+
 typedef s32 IOSError;
 typedef s32 IOSFd;
 typedef s32 IOSHeapId;

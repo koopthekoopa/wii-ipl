@@ -6,7 +6,7 @@
 
 namespace ipl {
     namespace scene {
-        BoardSD::BoardSD() : mState(STATE_PREPARE), mSDState(0) {
+        BoardSD::BoardSD() : mState(STATE_PREPARE), mSDState(SD_STATE_NONE) {
         }
 
         void BoardSD::update() {
@@ -17,23 +17,23 @@ namespace ipl {
                     if (!sdWorker->is_working()) {
                         switch (sdWorker->get_sd_state()) {
                             case SDVFWorker::SD_STATE_INSERTED: {
-                                mSDState = 1;
+                                mSDState = SD_STATE_INSERTED;
                                 sdWorker->mount_sd_async();
                                 break;
                             }
                             case SDVFWorker::SD_STATE_AVAILABLE: {
-                                mSDState = 1;
+                                mSDState = SD_STATE_INSERTED;
                                 sdWorker->prepare_cdb_backup_to_sd_async();
                                 mState = STATE_PREPARE_RESULT;
                                 break;
                             }
                             case SDVFWorker::SD_STATE_BROKEN:
                             case SDVFWorker::SD_STATE_ERROR: {
-                                mSDState = 1;
+                                mSDState = SD_STATE_INSERTED;
                                 break;
                             }
                             case SDVFWorker::SD_STATE_EJECTED: {
-                                mSDState = 2;
+                                mSDState = SD_STATE_EJECTED;
                                 break;
                             }
                             default: {
@@ -44,7 +44,7 @@ namespace ipl {
                     break;
                 }
                 case STATE_PREPARE_RESULT: {
-                    mSDState = 1;
+                    mSDState = SD_STATE_INSERTED;
                     if (!sdWorker->is_working()) {
                         error_handling(sdWorker->get_async_result());
                         if (sdWorker->get_async_result() == SDVFWorker::RESULT_SUCCESS) {
@@ -57,7 +57,7 @@ namespace ipl {
                     break;
                 }
                 case STATE_CLEANUP: {
-                    mSDState = 1;
+                    mSDState = SD_STATE_INSERTED;
                     if (CDBIsSDAvailable() != TRUE) {
                         sdWorker->cleanup_cdb_backup_to_sd_async();
                         mState = STATE_CLEANUP_RESULT;

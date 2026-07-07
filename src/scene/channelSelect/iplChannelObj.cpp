@@ -165,8 +165,8 @@ namespace ipl {
               mpNwc24NewGroup(NULL), mpNwc24NewAnim(NULL), mpNwc24NewPlayAnim(false), unk_0x84(0), unk_0x88(0),
               mThumbWidth(cfChanThumbOfss[SCGetAspectRatio()][0]), mThumbHeight(cfChanThumbOfss[SCGetAspectRatio()][1]), mpExtModuleWorkHeap(NULL),
               mpModuleHeap(NULL), mpPrevModuleHeap(NULL), mbModuleTerminated(false), mpModuleThread(NULL),
-              mExtModuleState(EXT_MODULE_STATE_UNAVAILABLE), unk_0xF4(false), mModuleFillCount(MAX_MODULE_FILL_COUNT),
-              unk_0xFC(MAX_MODULE_FILL_COUNT), mpRSOHeader(NULL), mpRSOBss(NULL), mpCSHeap(NULL) {
+              mExtModuleState(EXT_MODULE_STATE_UNAVAILABLE), unk_0xF4(false), mModuleCount(MAX_MODULE_COUNT), mMaxModuleCount(MAX_MODULE_COUNT),
+              mpRSOHeader(NULL), mpRSOBss(NULL), mpCSHeap(NULL) {
             if (SCGetAspectRatio() == SC_ASPECT_RATIO_16x9) {
                 nw4r::ut::Rect projRect4x3;
                 System::getProjectionRect4x3(&projRect4x3);
@@ -278,13 +278,14 @@ namespace ipl {
             }
 
             switch (mExtModuleState) {
-                case EXT_MODULE_STATE_LOAD: {
+                case EXT_MODULE_STATE_BEGIN: {
                     if (System::getFader()->getStatus() == EGG::Fader::PREPARE_OUT) {
-                        mModuleFillCount += 1;
-                        if (unk0 && mModuleFillCount > unk_0xFC) {
+                        mModuleCount += 1;
+                        if (unk0 && mModuleCount > mMaxModuleCount) {
                             mpPrevModuleHeap = mpModuleHeap;
                             mpModuleHeap = expHeap;
 
+                            // Load icon module (RSO or CS)
                             mpModuleFile = System::getChannelManager()->loadThumbnailRsoAsync(mpExtModuleWorkHeap, mChanPage, mChanIndex);
                             if (mpModuleFile == NULL) {
                                 mpModuleFile = System::getChannelManager()->loadThumbnailCSAsync(mpExtModuleWorkHeap, mChanPage, mChanIndex);
@@ -302,12 +303,14 @@ namespace ipl {
                 }
                 case EXT_MODULE_STATE_PREPARE_RSO: {
                     if (mpModuleFile->isFinished()) {
+                        // Check if we properly read the module file
                         if (mpModuleFile->checkData() != nand::RESULT_SUCCESS && mpModuleFile->checkData() != nand::RESULT_NONE) {
                             clearModuleParam();
                             result = EXT_MODULE_RESULT_DESTROY;
                             break;
                         }
 
+                        // Setup RSO module
                         mpRSOHeader = (RSOObjectHeader*)mpModuleFile->getBuffer();
                         mpRSOBss = NULL;
 
@@ -324,17 +327,17 @@ namespace ipl {
                             OSReport("%d module's ImportSymbols are not resolved.\n", RSOGetNumImportSymbolsUnresolved(mpRSOHeader));
                         }
 
-                        // Calc(int)
+                        // Import `int Calc(int)`
                         // This is during ChannelObj's loop.
                         mpRSOCalc = (channel::CalcFunc)RSOFindExportSymbolAddr(mpRSOHeader, "Calc");
 
-                        // ThreadCalc()
+                        // Import `void ThreadCalc()`
                         // This is executed on a seperate thread.
                         mpModuleThread->setCalcFunc((channel::ThreadCalcFunc)RSOFindExportSymbolAddr(mpRSOHeader, "ThreadCalc"));
 
                         ((void (*)())mpRSOHeader->prolog)();
 
-                        // Create(nw4r::lyt::Layout*)
+                        // Import `void Create(nw4r::lyt::Layout*)`
                         // This is the initialization of the module.
                         channel::CreateFunc createFunc = (channel::CreateFunc)RSOFindExportSymbolAddr(mpRSOHeader, "Create");
                         if (createFunc != NULL) {
@@ -343,7 +346,7 @@ namespace ipl {
 
                         mpModuleThread->start();
 
-                        mpRSOAfterCalc = false;
+                        mbRSODoneCalc = false;
                         mbRSOThreadExit = false;
 
                         mExtModuleState = EXT_MODULE_STATE_RSO_CALC;
@@ -353,16 +356,18 @@ namespace ipl {
                     break;
                 }
                 case EXT_MODULE_STATE_RSO_CALC: {
+                    // Don't do anything until the thread is destroyed.
                     if (!mbRSOThreadExit && mpModuleThread->IsThreadTerminated()) {
                         mpModuleThread->WaitForThreadExit();
                         mbRSOThreadExit = true;
                     }
 
-                    if (!mpRSOAfterCalc && mpRSOCalc(!(unk1 - 1))) {
-                        mpRSOAfterCalc = true;
+                    // If the calc function requested to exit (by returning a non-zero value)
+                    if (!mbRSODoneCalc && mpRSOCalc(!(unk1 - 1))) {
+                        mbRSODoneCalc = true;
                     }
 
-                    if (mbRSOThreadExit && mpRSOAfterCalc) {
+                    if (mbRSOThreadExit && mbRSODoneCalc) {
                         mbModuleTerminated = true;
 
                         ((void (*)())mpRSOHeader->epilog)();
@@ -382,8 +387,9 @@ namespace ipl {
 
                     break;
                 }
-                case 4: {
+                case EXT_MODULE_STATE_PREPARE_CS: {
                     if (mpModuleFile->isFinished()) {
+                        // Check if we properly read the module file
                         if (mpModuleFile->checkData() != nand::RESULT_SUCCESS && mpModuleFile->checkData() != nand::RESULT_NONE) {
                             clearModuleParam();
                             result = EXT_MODULE_RESULT_DESTROY;
@@ -394,10 +400,11 @@ namespace ipl {
                             mpCSHeap = EGG::ExpHeap::create(-1, mpExtModuleWorkHeap, 0);
                         }
 
+                        // Start up CHANSVm system
                         System::getCSManager()->create(mpCSHeap);
 
+                        // Module settings (for iplCS)
                         channel::ChannelScriptManager::CSData data;
-
                         data.heap = mpModuleHeap;
                         data.layout = mpThumbLayout;
                         data.anims = mpModuleAnims;
@@ -411,6 +418,8 @@ namespace ipl {
                         }
 
                         System::getCSManager()->setData(data);
+
+                        // Start up module
                         if (!System::getCSManager()->init(mpModuleFile, mpModuleThread)) {
                             mExtModuleState = EXT_MODULE_STATE_DESTROY_CS;
                         } else {
@@ -597,7 +606,7 @@ namespace ipl {
         }
 
         void ChannelObj::FillModuleCount() {
-            mModuleFillCount = MAX_MODULE_FILL_COUNT;
+            mModuleCount = MAX_MODULE_COUNT;
         }
 
         void ChannelObj::setLangPane(const layout::Object* layout) {
@@ -779,7 +788,7 @@ namespace ipl {
             }
 
             if (rsoIdx != 0 || csIdx != 0) {
-                mExtModuleState = EXT_MODULE_STATE_LOAD;
+                mExtModuleState = EXT_MODULE_STATE_BEGIN;
                 bindRsoAnm(mpThumbLayout, mpModuleAnims, "icon");
             }
 
@@ -1011,7 +1020,7 @@ namespace ipl {
 
                 size = mpBalloonLayout->FindPaneByName(scBasePane)->GetSize();
 
-                f32 val = -2.0f + (mThumbHeight + (size.height / 2));
+                f32 val = -2.0f + ((size.height / 2) + mThumbHeight);
                 val *= -1.0f;
 
                 nw4r::ut::Rect projRect;
@@ -1143,13 +1152,13 @@ namespace ipl {
                 mpCSHeap = NULL;
             }
 
-            mModuleFillCount = 0;
+            mModuleCount = 0;
             if (mpModuleFile != NULL) {
                 delete mpModuleFile;
                 mpModuleFile = NULL;
             }
 
-            mExtModuleState = EXT_MODULE_STATE_LOAD;
+            mExtModuleState = EXT_MODULE_STATE_BEGIN;
         }
 
         void ChannelObj::bindNewAnm(layout::Object* layout) {

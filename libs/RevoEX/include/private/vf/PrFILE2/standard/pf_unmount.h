@@ -3,6 +3,6 @@
 
 #include <private/vf/PrFILE2/pf_types.h>
 
-int VFipf2_unmount(pf_ch8 drive, pf_u32 mode);
+pf_int32 VFipf2_unmount(pf_ch8 drive, pf_u32 mode);
 
 #endif  // VF_PF2_UNMOUNT_H

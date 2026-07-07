@@ -16,10 +16,10 @@ namespace ipl {
         enum {
             IPL_STATE_NO_DISK = 1,
             IPL_STATE_BUSY,
-            IPL_STATE_START_UPDATE,
+            IPL_STATE_DISK_UPDATE,
             IPL_STATE_RESTART_IPL,
-            IPL_STATE_RUN_RVL_GAME,
-            IPL_STATE_RUN_GC_GAME,
+            IPL_STATE_RVL_GAME,
+            IPL_STATE_GC_GAME,
             IPL_STATE_BAD_DISK,
             IPL_STATE_8,
             IPL_STATE_UPDATE_FAIL,

@@ -7,6 +7,8 @@
 
 #include <egg/core.h>
 
+#include "IplSound.rsid"
+
 namespace ipl {
     namespace snd {
         class System {
@@ -32,10 +34,12 @@ namespace ipl {
             int startSEwithPos(const char* sndName, f32 pos);
 
             BOOL isSEActive(const char* sndName);
+            BOOL isSEActive(u32 id);
 
             int startBGM(const char* bgmName);
             int pauseOnBGM();
             int pauseOffBGM();
+            int stopBGM(int);
 
             int muteOffBGM(int);
             int muteOnBGM(int);

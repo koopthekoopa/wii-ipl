@@ -20,11 +20,15 @@ namespace ipl {
                 nw4r::math::MTX44 mProjMtx;  // 0x00
                 nw4r::math::MTX34 mViewMtx;  // 0x40
 
-                ipl::math::VEC3 mOrthoTrans;  // 0x70
-                ipl::math::VEC2 mOrthoScale;  // 0x7C
+                math::VEC3 mOrthoTrans;  // 0x70
+                math::VEC2 mOrthoScale;  // 0x7C
                 friend class Graphics;
             };
-            typedef enum Orientation { ORI_NONE = 0, ORI_90_CLOCKWISE, ORI_90_ANTICLOCKWISE } Orientation;
+            typedef enum Orientation {
+                ORI_NONE = 0,
+                ORI_90_CLOCKWISE,
+                ORI_90_ANTICLOCKWISE
+            } Orientation;
 
             static nw4r::math::MTX34& getViewMtx() { return mArg.mViewMtx; }
 
@@ -39,6 +43,11 @@ namespace ipl {
 
             static void drawPolygon(const nw4r::ut::Rect& rect, GXColor color);
             static void drawTexture(const nw4r::ut::Rect& rect, const GXTexObj& texObj, GXColor color, u8 texScale, Orientation ori = ORI_NONE);
+
+            static void setOrthoTransAndScale(const math::VEC3& translate, const math::VEC2& scale) {
+                mArg.mOrthoTrans = translate;
+                mArg.mOrthoScale = scale;
+            }
 
         private:
             static Arg mArg;

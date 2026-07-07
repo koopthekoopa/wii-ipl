@@ -11,8 +11,8 @@ extern "C" {
 #endif  // __cplusplus
 
 typedef struct _CDBBridgeFile {
-    VFFILE* vf;  // 0x00
-    VFFILE* sd;  // 0x04
+    VFFile* vf;  // 0x00
+    VFFile* sd;  // 0x04
 } CDBBridgeFile;
 
 /* ===  VF API  === */
