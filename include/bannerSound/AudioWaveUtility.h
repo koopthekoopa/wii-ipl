@@ -8,8 +8,8 @@ public:
     virtual ~WaveFile() {}
 
     virtual u32 getBit() const;
-    virtual u32 getChannels() const;
-    virtual f32 getSamplingRate() const;
+    virtual int getChannels() const;
+    virtual f64 getSamplingRate() const;
     virtual u32 getFrames() const;
 
     virtual void* getDataBase() const;
@@ -28,11 +28,12 @@ private:
 
 class WaveFileAiff : public WaveFile {
 public:
+    WaveFileAiff();
     virtual ~WaveFileAiff() {}
 
     virtual u32 getBit() const override;
-    virtual u32 getChannels() const override;
-    virtual f32 getSamplingRate() const override;
+    virtual int getChannels() const override { return mNumChans; }
+    virtual f64 getSamplingRate() const override { return mSamplingRate; }
     virtual u32 getFrames() const override;
 
     virtual void* getDataBase() const override;
@@ -46,10 +47,11 @@ public:
     virtual void setDataCur(u32 sampleOffset) override;
 
     bool checkFile(const void* data, u32 length, bool unk);
+    bool init(const void* data, u32 length);
 
 private:
     u32 mBits;          // 0x08
-    u32 mNumChans;      // 0x0c
+    int mNumChans;      // 0x0c
     f64 mSamplingRate;  // 0x10
     u32 mNumSamples;    // 0x18
     bool mIsLoop;       // 0x1c
@@ -61,11 +63,12 @@ private:
 
 class WaveFileWav : public WaveFile {
 public:
+    WaveFileWav();
     virtual ~WaveFileWav() {}
 
     virtual u32 getBit() const override;
-    virtual u32 getChannels() const override;
-    virtual f32 getSamplingRate() const override;
+    virtual int getChannels() const override { return mNumChans; }
+    virtual f64 getSamplingRate() const override { return mSamplingRate; }
     virtual u32 getFrames() const override;
 
     virtual void* getDataBase() const override;
@@ -79,10 +82,11 @@ public:
     virtual void setDataCur(u32 sampleOffset) override;
 
     bool checkFile(const void* data, u32 length, bool unk);
+    bool init(const void* data, u32 length);
 
 private:
     u32 mBits;          // 0x08
-    u32 mNumChans;      // 0x0c
+    int mNumChans;      // 0x0c
     u32 mSamplingRate;  // 0x10
     u32 mNumSamples;    // 0x14
     bool mIsLoop;       // 0x18

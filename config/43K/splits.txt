@@ -949,14 +949,14 @@ src/scene/textWriter/iplTextWriter.cpp:
 src/bannerSound/AudioWavePlayer.cpp:
 	.text       start:0x8140C1C8 end:0x8140CEA0
 	.data       start:0x8162DA78 end:0x8162DAB8
-	.sdata2     start:0x81669320 end:0x81669328
+	.sdata2     start:0x81669320 end:0x81669330
 
 src/bannerSound/AxAdpcmPlayer.cpp:
 	.bss        start:0x810C0C80 end:0x810C2580
 	.text       start:0x8140CEA0 end:0x8140DAB0
 	.ctors      start:0x815E5DC8 end:0x815E5DCC
 	.data       start:0x8162DAB8 end:0x8162DAD8
-	.sdata2     start:0x81669328 end:0x81669340
+	.sdata2     start:0x81669330 end:0x81669340
 	.sdata      start:0x8166B8B0 end:0x8166B8B8
 	.sbss       start:0x8166D2F8 end:0x8166D308
 

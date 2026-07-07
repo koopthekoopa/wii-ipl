@@ -28,6 +28,11 @@ namespace nw4r {
                 WavePacket();
                 virtual ~WavePacket() {}
 
+                void SetWaveBuffer(const WaveBufferInfo& newWaveBuffer) { mWaveBuffer = newWaveBuffer; }
+                WaveBufferInfo& GetWaveBuffer() { return mWaveBuffer; }
+
+                bool getAppendFlag() const { return mAppendFlag; }
+
             private:
                 WaveBufferInfo mWaveBuffer;  // 0x04
                 bool mAppendFlag;            // 0x14
@@ -47,6 +52,8 @@ namespace nw4r {
             typedef void (*WavePacketCallback)(WavePacketCallbackStatus, WavePlayer*, WavePacket*, void*);
 
             typedef struct SetupParam {
+            public:
+                SetupParam() : channelCount(1), sampleFormat(SAMPLE_FORMAT_PCM_S16), sampleRate(32000), pitchMax(1.0f), voices(1) {}
                 int channelCount;           // 0x00
                 SampleFormat sampleFormat;  // 0x04
                 int sampleRate;             // 0x08
