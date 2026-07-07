@@ -65,19 +65,19 @@ namespace ipl {
         class Base {
             public:
                 Base(int chan, KPADStatus &arg1) {
-                    this->button = 0;
-                    this->off8 = 0;
-                    this->last_rumble_time = 0;
-                    this->rumble_type = -1;
-                    this->chan = chan;
-                    this->unk18 = 2;
-                    this->unk1C = 0;
+                    this->mButton = 0;
+                    this->mUnk8 = 0;
+                    this->mLastRumbleTime = 0;
+                    this->mRumbleType = -1;
+                    this->mChan = chan;
+                    this->mUnk18 = 2;
+                    this->mUnk1C = 0;
 
                     KPADEnableDPD(chan);
 
-                    this->unk1D = 0;
-                    this->unk1E = 0;
-                    this->unk20 = &arg1;
+                    this->mUnk1D = 0;
+                    this->mUnk1E = 0;
+                    this->mUnk20 = &arg1;
                 }
 
                 virtual ~Base();                       // 0x08
@@ -127,16 +127,16 @@ namespace ipl {
                 virtual void read();  // 0x88
 
             // protected:
-                u8 button; // 0x4
-                u32 off8; // 0x8
-                OSTick last_rumble_time; // 0xC
-                s32 rumble_type; // 0x10
-                u32 chan; // 0x14
-                u32 unk18; // 0x18
-                u8 unk1C;
-                u8 unk1D; // 0x1D
-                u8 unk1E; // 0x1E
-                KPADStatus *unk20; // 0x20
+                u8 mButton; // 0x4
+                u32 mUnk8; // 0x8
+                OSTick mLastRumbleTime; // 0xC
+                s32 mRumbleType; // 0x10
+                u32 mChan; // 0x14
+                u32 mUnk18; // 0x18
+                u8 mUnk1C;
+                u8 mUnk1D; // 0x1D
+                u8 mUnk1E; // 0x1E
+                KPADStatus *mUnk20; // 0x20
         };
 
         class Interface : public Base {
