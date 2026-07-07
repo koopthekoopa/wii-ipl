@@ -19,6 +19,17 @@ namespace ipl {
             return nw4r::math::FAbs(x);
         }
 
+        template <typename T>
+        T abs_clamp(const T& x, const T& y) {
+            if (x > y) {
+                return y;
+            } else if (x < -y) {
+                return -y;
+            } else {
+                return x;
+            }
+        }
+
         typedef struct MTX33 : public nw4r::math::MTX33 {
         } MTX33;
 
