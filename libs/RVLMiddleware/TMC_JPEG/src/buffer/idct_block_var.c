@@ -1,6 +1,28 @@
 #include <tmc_jpeg_internal.h>
 #include <string.h>
 
+static u8 Clamp_U8(s32 v) {
+    s32 ok;
+    ok = 0;
+    if (v < 256 && v > -1) {
+        ok = 1;
+    }
+    return (ok) ? v : ((v < 0) ? 0 : 255);
+}
+
+static s8 Clamp_S8(s32 v) {
+    return (v < 128 && v > -129) ? (s8)v : (v > 0) ? 127 : -128;
+}
+
+static s32 ScalingClamp_U8(s32 val) {
+    s32 result = 0;
+    if (val >> 19 != 0)
+        result &= ~(val >> 31) & 0xFF;
+    else
+        result = (val >> 11);
+    return result;
+}
+
 void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigzag) {
     s32 tmp[64];
     s32* dst;
@@ -8,9 +30,9 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigz
     s32 iter;
     s32 i;
     s32 b1, b2, b3, b4, b5, b6, b7;
-    s32 v, e, a, d, m, n, o, p, q, t, u, w, x, y, z;
+    s32 v, e, a, d, n, o, p, q, t, u, w, x, y;
     s32 x_factor, z_factor, m_part, p_part;
-    s32 r;
+    s32 r, z, m;
 
     r = (zigzag >> 4) * 8;
     iter = (u32)(r + 7) >> 3;
@@ -27,16 +49,9 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigz
             b5 = block[5];
             b3 = block[3];
 
-            ac = (u32)b4;
-            ac |= (u32)b6;
-            ac |= (u32)b2;
-            ac |= (u32)b1;
-            ac |= (u32)b7;
-            ac |= (u32)b5;
-            ac |= (u32)b3;
+            ac = (u32)b4 | (u32)b6 | (u32)b2 | (u32)b1 | (u32)b7 | (u32)b5 | (u32)b3;
             if (ac == 0) {
-                s32 val;
-                val = block[0];
+                s32 val = block[0];
                 dst[7] = val;
                 dst[6] = val;
                 dst[5] = val;
@@ -78,17 +93,19 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigz
     }
 
     dst = tmp + done;
-    for (; done < 0x39; done += 8) {
+    for (; done < 0x38; done += 8) {
         memset(dst, 0, 0x20);
         dst += 8;
     }
 
-    r = (pitch & 0xFFFF) * 8 - pitch;
+    r = pitch * 8 - pitch;
+    z = pitch * 4;
+    m = pitch * 2;
     dst = tmp + 7;
-    z = (pitch & 0xFFFF) * 4;
-    m = (pitch & 0xFFFF) * 2;
     for (iter = 8, i = 7; iter > 0; iter--, i--) {
         u32 ac;
+        u8* out;
+
         b4 = dst[0x20];
         b6 = dst[0x30];
         b2 = dst[0x10];
@@ -97,31 +114,18 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigz
         b5 = dst[0x28];
         b3 = dst[0x18];
 
-        ac = (u32)b4;
-        ac |= (u32)b6;
-        ac |= (u32)b2;
-        ac |= (u32)b1;
-        ac |= (u32)b7;
-        ac |= (u32)b5;
-        ac |= (u32)b3;
+        ac = (u32)b4 | (u32)b6 | (u32)b2 | (u32)b1 | (u32)b7 | (u32)b5 | (u32)b3;
+        out = conv_row_ptr + i;
         if (ac == 0) {
-            s32 val;
-            s32 ok;
-
-            val = (*dst >> 11) + 0x80;
-            ok = 0;
-            if (val < 0x100 && val > -1) {
-                ok = 1;
-            }
-            val = (ok) ? val : (0xFF & ~(val >> 31));
-            conv_row_ptr[i + r] = (u8)val;
-            conv_row_ptr[i + pitch * 6] = (u8)val;
-            conv_row_ptr[i + z + pitch] = (u8)val;
-            conv_row_ptr[i + z] = (u8)val;
-            conv_row_ptr[i + z - pitch] = (u8)val;
-            conv_row_ptr[i + m] = (u8)val;
-            conv_row_ptr[i + pitch] = (u8)val;
-            conv_row_ptr[i] = (u8)val;
+            u8 val = Clamp_U8((*dst >> 11) + 0x80);
+            out[r] = val;
+            out[pitch * 6] = val;
+            out[z + pitch] = val;
+            out[z] = val;
+            out[z - pitch] = val;
+            out[m] = val;
+            out[pitch] = val;
+            out[0] = val;
         } else {
             t = (b2 - b6) * 0xB5 >> 8;
             a = *dst - b4;
@@ -132,82 +136,23 @@ void TMCJPEGDEC_IdctBlock_Lumi(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigz
             w = d + u;
             x = ((b1 + b7) - (b5 + b3)) * 0xB5 >> 8;
             y = d - u;
-            z = ((b5 - b3) + (b1 - b7)) * 0x62 >> 8;
-            m = ((b1 - b7) * 0x14E >> 8) - z;
-            n = b1 + b7 + b5 + b3 + m;
-            o = x + m;
 
-            {
-                s32 val;
-                s32 result;
+            z_factor = ((b5 - b3) + (b1 - b7)) * 0x62 >> 8;
+            m_part = ((b1 - b7) * 0x14E >> 8) - z_factor;
 
-                val = w + n;
-                if (val >> 19 != 0) {
-                    result = 0xFF & ~(val >> 31);
-                } else {
-                    result = val >> 11;
-                }
-                conv_row_ptr[i] = (u8)result;
+            n = b1 + b7 + b5 + b3 + m_part;
+            o = x + m_part;
+            p = z_factor + ((b5 - b3) * 0x8B >> 8);
+            q = p + x;
 
-                val = w - n;
-                if (val >> 19 != 0) {
-                    result = 0xFF & ~(val >> 31);
-                } else {
-                    result = val >> 11;
-                }
-                conv_row_ptr[i + r] = (u8)result;
-
-                val = v + o;
-                if (val >> 19 != 0) {
-                    result = 0xFF & ~(val >> 31);
-                } else {
-                    result = val >> 11;
-                }
-                conv_row_ptr[i + pitch] = (u8)result;
-
-                val = v - o;
-                if (val >> 19 != 0) {
-                    result = 0xFF & ~(val >> 31);
-                } else {
-                    result = val >> 11;
-                }
-                conv_row_ptr[i + pitch * 6] = (u8)result;
-
-                p = z + ((b5 - b3) * 0x8B >> 8);
-                q = p + x;
-
-                val = e + q;
-                if (val >> 19 != 0) {
-                    result = 0xFF & ~(val >> 31);
-                } else {
-                    result = val >> 11;
-                }
-                conv_row_ptr[i + m] = (u8)result;
-
-                val = e - q;
-                if (val >> 19 != 0) {
-                    result = 0xFF & ~(val >> 31);
-                } else {
-                    result = val >> 11;
-                }
-                conv_row_ptr[i + z + pitch] = (u8)result;
-
-                val = y + p;
-                if (val >> 19 != 0) {
-                    result = 0xFF & ~(val >> 31);
-                } else {
-                    result = val >> 11;
-                }
-                conv_row_ptr[i + z - pitch] = (u8)result;
-
-                val = y - p;
-                if (val >> 19 != 0) {
-                    result = 0xFF & ~(val >> 31);
-                } else {
-                    result = val >> 11;
-                }
-                conv_row_ptr[i + z] = (u8)result;
-            }
+            out[0] = ScalingClamp_U8(w + n);
+            out[r] = ScalingClamp_U8(w - n);
+            out[pitch] = ScalingClamp_U8(v + o);
+            out[pitch * 6] = ScalingClamp_U8(v - o);
+            out[m] = ScalingClamp_U8(e + q);
+            out[z + pitch] = ScalingClamp_U8(e - q);
+            out[z - pitch] = ScalingClamp_U8(y + p);
+            out[z] = ScalingClamp_U8(y - p);
         }
         dst--;
     }
@@ -226,14 +171,7 @@ void TMCJPEGDEC_IdctBlock_Col(s32* block, u8* conv_row_ptr, u16 pitch, s32 zigza
 
     if (zigzag == 0x11) {
         s32 val;
-        s32 ok;
-
-        val = block[0] >> 11;
-        ok = 0;
-        if (val < 0x80 && val > -0x81) {
-            ok = 1;
-        }
-        val = (ok) ? val : ((val < 0) ? -0x80 : 0x7f);
+        val = Clamp_S8(block[0] >> 11);
         memset(conv_row_ptr, (s8)val, 0x40);
         return;
     }
@@ -411,14 +349,7 @@ epilogue:
         ac |= (u32)b3;
         if (ac == 0) {
             s32 val;
-            s32 ok;
-
-            val = *dst >> 11;
-            ok = 0;
-            if (val < 0x80 && val > -0x81) {
-                ok = 1;
-            }
-            val = (ok) ? val : ((val < 0) ? -0x80 : 0x7f);
+            val = Clamp_S8(*dst >> 11);
             conv_row_ptr[i + 56] = (u8)val;
             conv_row_ptr[i + 48] = (u8)val;
             conv_row_ptr[i + 40] = (u8)val;
@@ -428,10 +359,6 @@ epilogue:
             conv_row_ptr[i + 8] = (u8)val;
             conv_row_ptr[i] = (u8)val;
         } else {
-            s32 ok;
-            s32 val;
-            s32 result;
-
             t = (b2 - b6) * 0xB5 >> 8;
             a = *dst - b4;
             d = *dst + b4;
@@ -446,80 +373,17 @@ epilogue:
             n = b1 + b7 + b5 + b3 + m;
             o = x + m;
 
-            val = w + n;
-            result = val >> 11;
-            ok = 0;
-            if (result < 0x80 && result > -0x81) {
-                ok = 1;
-            }
-            result = (ok) ? result : ((result < 0) ? -0x80 : 0x7f);
-            conv_row_ptr[i] = (u8)result;
-
-            val = w - n;
-            result = val >> 11;
-            ok = 0;
-            if (result < 0x80 && result > -0x81) {
-                ok = 1;
-            }
-            result = (ok) ? result : ((result < 0) ? -0x80 : 0x7f);
-            conv_row_ptr[i + 56] = (u8)result;
-
             p = z + ((b5 - b3) * 0x8B >> 8);
             q = p + x;
 
-            val = v + o;
-            result = val >> 11;
-            ok = 0;
-            if (result < 0x80 && result > -0x81) {
-                ok = 1;
-            }
-            result = (ok) ? result : ((result < 0) ? -0x80 : 0x7f);
-            conv_row_ptr[i + 8] = (u8)result;
-
-            val = v - o;
-            result = val >> 11;
-            ok = 0;
-            if (result < 0x80 && result > -0x81) {
-                ok = 1;
-            }
-            result = (ok) ? result : ((result < 0) ? -0x80 : 0x7f);
-            conv_row_ptr[i + 48] = (u8)result;
-
-            val = e + q;
-            result = val >> 11;
-            ok = 0;
-            if (result < 0x80 && result > -0x81) {
-                ok = 1;
-            }
-            result = (ok) ? result : ((result < 0) ? -0x80 : 0x7f);
-            conv_row_ptr[i + 16] = (u8)result;
-
-            val = e - q;
-            result = val >> 11;
-            ok = 0;
-            if (result < 0x80 && result > -0x81) {
-                ok = 1;
-            }
-            result = (ok) ? result : ((result < 0) ? -0x80 : 0x7f);
-            conv_row_ptr[i + 40] = (u8)result;
-
-            val = y + p;
-            result = val >> 11;
-            ok = 0;
-            if (result < 0x80 && result > -0x81) {
-                ok = 1;
-            }
-            result = (ok) ? result : ((result < 0) ? -0x80 : 0x7f);
-            conv_row_ptr[i + 24] = (u8)result;
-
-            val = y - p;
-            result = val >> 11;
-            ok = 0;
-            if (result < 0x80 && result > -0x81) {
-                ok = 1;
-            }
-            result = (ok) ? result : ((result < 0) ? -0x80 : 0x7f);
-            conv_row_ptr[i + 32] = (u8)result;
+            conv_row_ptr[i] = (u8)Clamp_S8((w + n) >> 11);
+            conv_row_ptr[i + 56] = (u8)Clamp_S8((w - n) >> 11);
+            conv_row_ptr[i + 8] = (u8)Clamp_S8((v + o) >> 11);
+            conv_row_ptr[i + 48] = (u8)Clamp_S8((v - o) >> 11);
+            conv_row_ptr[i + 16] = (u8)Clamp_S8((e + q) >> 11);
+            conv_row_ptr[i + 40] = (u8)Clamp_S8((e - q) >> 11);
+            conv_row_ptr[i + 24] = (u8)Clamp_S8((y + p) >> 11);
+            conv_row_ptr[i + 32] = (u8)Clamp_S8((y - p) >> 11);
         }
         dst--;
     }
