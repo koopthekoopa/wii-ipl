@@ -8,13 +8,13 @@
 #include <private/os.h>
 #include <revolution/enc.h>
 
-char* ipl::utility::Language::mLangPath[10] = {
-    "jpn", "eng", "ger", "fra", "spa",
-    "ita", "ned", "chn", "eng", "kor"
-};
-
 namespace ipl {
     namespace utility {
+        char* Language::mLangPath[10] = {
+            "jpn", "eng", "ger", "fra", "spa",
+            "ita", "ned", "chn", "eng", "kor"
+        };
+        
         char* Language::getPath() {
             return mLangPath[System::getLanguage()];
         }
