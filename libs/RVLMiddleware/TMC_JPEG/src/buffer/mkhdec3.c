@@ -6,7 +6,7 @@ s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
     u32 huffVal[256];
     u32* huffTable;
     u32* destTable;
-    u32* valptr;
+    u8* valptr;
     u32 count;
 
     {
@@ -18,7 +18,7 @@ s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
 
         huffTable = hp->huffTable;
         valptr = hp->valptr;
-        destTable = hp->destTable;
+        destTable = hp->maxCode;
         count = hp->count;
 
         sym_idx = 0;
@@ -126,8 +126,8 @@ s32 TMCJPEGDEC_make_huffdec(const u8* dht, const u8* tb, TMCHuffParam* hp)
     return 0;
 }
 
-void TMCJPEGDEC_set_HuffmanTable(TMCHuffTblSet* tbl, s32 tblType, s32 tblID,
-                                 TMCJpegDecWork* work)
+void TMCJPEGDEC_set_HuffmanTable(TMCHuffParam* tbl, s32 tblType, s32 tblID,
+                                 TMCUnknownInfo* work)
 {
     void* hufftable;
     void* maxcode;
@@ -140,8 +140,8 @@ void TMCJPEGDEC_set_HuffmanTable(TMCHuffTblSet* tbl, s32 tblType, s32 tblID,
         case 0:
             hufftable = &work->mZigzagData[8];
             maxcode = work->mMaxCode_DC0;
-            tbl->hufftable = hufftable;
-            tbl->maxcode = maxcode;
+            tbl->huffTable = hufftable;
+            tbl->maxCode = maxcode;
             tbl->valptr = work->mValPtr_DC0;
             work->mHuffTblInitFlag[0] = 1;
             memset(hufftable, 0, 0x400);
@@ -153,8 +153,8 @@ void TMCJPEGDEC_set_HuffmanTable(TMCHuffTblSet* tbl, s32 tblType, s32 tblID,
             hufftable = work->mHuffDecTbl_DC1;
             maxcode = work->mMaxCode_DC1;
             valptr = work->mValPtr_DC1;
-            tbl->hufftable = hufftable;
-            tbl->maxcode = maxcode;
+            tbl->huffTable = hufftable;
+            tbl->maxCode = maxcode;
             tbl->valptr = valptr;
             work->mHuffTblInitFlag[1] = 1;
             memset(hufftable, 0, 0x400);
@@ -171,8 +171,8 @@ void TMCJPEGDEC_set_HuffmanTable(TMCHuffTblSet* tbl, s32 tblType, s32 tblID,
             hufftable = work->mHuffDecTbl_AC0;
             maxcode = work->mMaxCode_AC0;
             valptr = work->mValPtr_AC0;
-            tbl->hufftable = hufftable;
-            tbl->maxcode = maxcode;
+            tbl->huffTable = hufftable;
+            tbl->maxCode = maxcode;
             tbl->valptr = valptr;
             work->mHuffTblInitFlag[2] = 1;
             memset(hufftable, 0, 0x400);
@@ -184,8 +184,8 @@ void TMCJPEGDEC_set_HuffmanTable(TMCHuffTblSet* tbl, s32 tblType, s32 tblID,
             hufftable = work->mHuffDecTbl_AC1;
             maxcode = work->mMaxCode_AC1;
             valptr = work->mValPtr_AC1;
-            tbl->hufftable = hufftable;
-            tbl->maxcode = maxcode;
+            tbl->huffTable = hufftable;
+            tbl->maxCode = maxcode;
             tbl->valptr = valptr;
             work->mHuffTblInitFlag[3] = 1;
             memset(hufftable, 0, 0x400);

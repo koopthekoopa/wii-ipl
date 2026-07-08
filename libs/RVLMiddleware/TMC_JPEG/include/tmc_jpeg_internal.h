@@ -13,6 +13,41 @@ extern "C" {
 #endif
 
 typedef struct {
+    u8 mScaleFlag;           // 0x58
+    u8 unk_0x59[0x3E7];
+    u8* mDCACPtrs[6];      // 0x440
+    u8 mZigzagData[64];      // 0x458
+    u16* mpDCFast;           // 0x498
+    u32* mpDCHuffTbl;        // 0x49C
+    u8* mpDCHuffSym;         // 0x4A0
+    u32 unk_0x4A4;           // 0x4A4
+    u16* mpACFast;           // 0x4A8
+    u32* mpACHuffTbl;        // 0x4AC
+    u8* mpACHuffSym;         // 0x4B0
+    u32 unk_0x4B4;
+    u8 unk_0x4B8[0x1B4];
+    u32 mThumbHuffSize[3];       // 0x66C
+    u8 unk_0x678[0x1E8];
+    u8 mHuffDecTbl_DC1[0x400];       // 0x860-0xC5F
+    u8 mHuffDecTbl_AC0[0x400];       // 0xC60-0x105F
+    u8 mHuffDecTbl_AC1[0x400];       // 0x1060-0x145F
+    u8 mValPtr_DC0[0x44];            // 0x1460-0x14A3
+    u8 mValPtr_DC1[0x44];            // 0x14A4-0x14E7
+    u8 mValPtr_AC0[0x44];            // 0x14E8-0x152B
+    u8 mValPtr_AC1[0x44];            // 0x152C-0x156F
+    u8 mMaxCode_DC0[0x10];           // 0x1570-0x157F
+    u8 mMaxCode_DC1[0x10];           // 0x1580-0x158F
+    u8 mMaxCode_AC0[0x100];          // 0x1590-0x168F
+    u8 mMaxCode_AC1[0x100];          // 0x1690-0x178F
+    u8 unk_0x1790[0x04];
+    u8 mHuffTblInitFlag[4];      // 0x1794
+    u8 unk_0x1798[0x50];
+    u8 mQuantTblFlag[4];         // 0x17E8
+    u8 mDCTblFlag[2];            // 0x17EC
+    u8 mACTblFlag[2];            // 0x17EE
+} TMCUnknownInfo;
+
+typedef struct {
     u16 mFrameWidth;      // 0x00
     u16 mFrameHeight;     // 0x02
     u32 mMCUCount;        // 0x04
@@ -143,23 +178,15 @@ s32 TMCJPEGDEC_init_buff_thumbnail(TMCJpegDecWork* work, u8* dst, u8* src);
 s32 TMCJPEGDEC_init_buff(TMCJpegDecWork* work);
 s32 TMCJPEGDEC_rewind_ptr(TMCJpegDecWork* work);
 
-// Huffman table set (three pointers stored by set_HuffmanTable)
-typedef struct {
-    void* hufftable; // 0x00
-    void* valptr;    // 0x04
-    void* maxcode;   // 0x08
-} TMCHuffTblSet;
-
-// Parameter block for make_huffdec
 typedef struct {
     u32* huffTable;  // 0x00
-    u32* valptr;     // 0x04
-    u32* destTable;  // 0x08
+    u8* valptr;     // 0x04
+    u32* maxCode;  // 0x08
     u8 count;        // 0x0C
 } TMCHuffParam;
 
 s32 TMCJPEGDEC_make_huffdec(const u8* dht_spec, const u8* tbl, TMCHuffParam* hp);
-void TMCJPEGDEC_set_HuffmanTable(TMCHuffTblSet* tbl, s32 tblType, s32 tblID, TMCJpegDecWork* work);
+void TMCJPEGDEC_set_HuffmanTable(TMCHuffParam* tbl, s32 tblType, s32 tblID, TMCUnknownInfo* work);
 
 s32 TMCJPEGDEC_decompmcu(u32 maxMCU, u32 mcuCount, TMCJpegDecWork* work, void* buf);
 s32 TMCJPEGDEC_imagestart(TMCJpegDecWork* work);

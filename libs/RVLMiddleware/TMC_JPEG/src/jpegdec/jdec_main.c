@@ -29,24 +29,45 @@ static s32 TMCJPEGDEC_parse_sos(TMCJpegDecWork* work);
 
 s32 TMCJPEGDEC_decompmcu(u32 maxMCU, u32 mcuCount, TMCJpegDecWork* work, void* buf)
 {
-    u8* compMapBase = work->mCompMap;
-    u8* frameInfo = (u8*)work + 0x17f0;
-    u8* compMapPtr = compMapBase;
-    u8* scaleInfo = (u8*)work + 0x58;
-    u8* convRowPtrs = (u8*)work + 0x183c;
-    u32* mcuDataInfo = (u32*)(compMapBase + 4);
-    s32 mcuIdx = 0;
-    TMCDecodeFunc* decodeFunc = work->mDecodePtr;
-    void* idctLumiFunc = work->mIdctLumiPtr;
-    void* idctFunc = work->mIdctPtr;
-    u16 pitch = work->mPitch;
-    s32 compIdx;
-    u8* entTblBase;
+    u8* compMapBase;
+    u8* compMapPtr;
+    u32* mcuDataInfo;
+
     u8* curBlockInfo;
     u8* specificConvRowPtr;
+
     u8* blockCountPtr;
+    u8* entTblBase;
+
+    s32 mcuIdx;
+    s32 compIdx;
     s32 blockIdx;
-    TMCCJPEGDecState* state = work->mpState;
+    u16 pitch;
+
+    u8* frameInfo;
+    u8* scaleInfo;
+
+    u8* convRowPtrs;
+    TMCCJPEGDecState* state;
+
+    void* idctFunc;
+    void* idctLumiFunc;
+    TMCDecodeFunc* decodeFunc;
+
+    state = work->mpState;
+    compMapBase = work->mCompMap;
+    frameInfo = (u8*)work + 0x17f0;
+    compMapPtr = compMapBase;
+    scaleInfo = (u8*)work + 0x58;
+    convRowPtrs = (u8*)work + 0x183c;
+    mcuDataInfo = (u32*)(compMapBase + 4);
+    mcuIdx = 0;
+
+    decodeFunc = work->mDecodePtr;
+    idctFunc = work->mIdctPtr;
+    idctLumiFunc = work->mIdctLumiPtr;
+
+    pitch = work->mPitch;
 
     while (mcuIdx < (s32)*(frameInfo + 0x1b)) {
         compIdx = *compMapPtr;
@@ -386,11 +407,9 @@ static s32 TMCJPEGDEC_parse_para(u16* marker, TMCJpegDecWork* work)
     u16 dnlSize;
     u16 comSize;
     s32 result;
-    u32 keepGoing;
-    u16 firstMarker;
 
-    keepGoing = 0;
-    firstMarker = *marker;
+    u32 keepGoing = 0;
+    u16 firstMarker = *marker;
 
     do {
         result = TMCJPEGDEC_get_wbyte(&local, work);
@@ -424,7 +443,6 @@ _process:
             result = TMCJPEGDEC_move_ptr(appSize, work);
             result = result & (result >> 31);
             result = result & (result >> 31);
-            goto _check;
         } else {
             switch ((s32)local) {
             case 0xFFC4:
@@ -435,40 +453,45 @@ _process:
                 break;
             case 0xFFDD:
                 result = TMCJPEGDEC_get_wbyte(&driSize, work);
-                if (result < 0) goto _check;
-                if (driSize != 4) {
-                    result = -0x42;
-                    goto _check;
+                if (result >= 0) {
+                    if (driSize != 4) {
+                        result = -0x42;
+                    } else {
+                        result = TMCJPEGDEC_get_wbyte(&driSize, work);
+                        if (result < 0)
+                            goto _check;
+                        work->mRestartInterval = driSize;
+                        result = 0;
+                    }
                 }
-                result = TMCJPEGDEC_get_wbyte(&driSize, work);
-                if (result < 0) goto _check;
-                work->mRestartInterval = driSize;
-                result = 0;
-                goto _check;
+                break;
             case 0xFFDC:
                 result = TMCJPEGDEC_get_wbyte(&dnlSize, work);
-                if (result < 0) goto _check;
-                if (dnlSize != 4) {
-                    result = -0x43;
-                    goto _check;
+                if (result >= 0) {
+                    if (dnlSize != 4) {
+                        result = -0x43;
+                    } else {
+                        result = TMCJPEGDEC_get_wbyte(&dnlSize, work);
+                        if (result >= 0) {
+                            work->mFrameHeight = dnlSize;
+                            result = 0;
+                        }
+                    }
                 }
-                result = TMCJPEGDEC_get_wbyte(&dnlSize, work);
-                if (result < 0) goto _check;
-                work->mFrameHeight = dnlSize;
-                result = 0;
-                goto _check;
+                break;
             case 0xFFFE:
                 result = TMCJPEGDEC_get_wbyte(&comSize, work);
-                if (result < 0) goto _check;
-                if (comSize < 2) {
-                    result = -0x44;
-                    goto _check;
+                if (result >= 0) {
+                    if (comSize < 2) {
+                        result = -0x44;
+                    } else {
+                        comSize -= 2;
+                        result = TMCJPEGDEC_move_ptr(comSize, work);
+                        result = result & result >> 31;
+                        result = result & result >> 31;
+                    }
                 }
-                comSize -= 2;
-                result = TMCJPEGDEC_move_ptr(comSize, work);
-                result = result & (result >> 31);
-                result = result & (result >> 31);
-                goto _check;
+                break;
             case 0xFFC0:
                 keepGoing = 1;
                 break;
@@ -499,13 +522,14 @@ _check:
 
 static s32 TMCJPEGDEC_parse_dht(s32 first, TMCJpegDecWork* work)
 {
+    TMCUnknownInfo* scaleInfo;
     u16 len;
-    s32 r;
-    u8* scaleInfo;
     u8 countBuf[17];
     u8 symBuf[256];
+    s32 r;
+        TMCHuffParam tblSet;
 
-    scaleInfo = &work->mScaleFlag;
+    scaleInfo = (TMCUnknownInfo*)&work->mScaleFlag;
 
     memset(countBuf, 0, 17);
 
@@ -514,14 +538,14 @@ static s32 TMCJPEGDEC_parse_dht(s32 first, TMCJpegDecWork* work)
         return r;
     len -= 2;
 
-    while (len != 0) {
+    do {
         u8 htByte;
-        s32 tblClass;
-        s32 tblID;
         u8* pCount;
         s32 idx;
         s32 totalCodes;
-        TMCHuffTblSet tblSet;
+
+        s32 tblID;
+        s32 tblClass;
 
         len -= 0x11;
         r = TMCJPEGDEC_get_byte(&htByte, work);
@@ -539,20 +563,30 @@ static s32 TMCJPEGDEC_parse_dht(s32 first, TMCJpegDecWork* work)
 
         countBuf[0] = 0;
         while (idx <= 16) {
-            u8 c;
-
-            r = TMCJPEGDEC_get_byte(&c, work);
+            r = TMCJPEGDEC_get_byte(&htByte, work);
             if (r < 0)
                 return r;
-            len -= c;
-            *pCount++ = c;
+            len -= htByte;
+            *pCount++ = htByte;
             idx++;
         }
 
-        totalCodes = countBuf[1] + countBuf[2] + countBuf[3] + countBuf[4]
-            + countBuf[5] + countBuf[6] + countBuf[7] + countBuf[8]
-            + countBuf[9] + countBuf[10] + countBuf[11] + countBuf[12]
-            + countBuf[13] + countBuf[14] + countBuf[15] + countBuf[16];
+        totalCodes = countBuf[1];
+        totalCodes += countBuf[2];
+        totalCodes += countBuf[3];
+        totalCodes += countBuf[4];
+        totalCodes += countBuf[5];
+        totalCodes += countBuf[6];
+        totalCodes += countBuf[7];
+        totalCodes += countBuf[8];
+        totalCodes += countBuf[9];
+        totalCodes += countBuf[10];
+        totalCodes += countBuf[11];
+        totalCodes += countBuf[12];
+        totalCodes += countBuf[13];
+        totalCodes += countBuf[14];
+        totalCodes += countBuf[15];
+        totalCodes += countBuf[16];
 
         if (totalCodes > 0xB0)
             return -0x40;
@@ -561,13 +595,13 @@ static s32 TMCJPEGDEC_parse_dht(s32 first, TMCJpegDecWork* work)
         if (r < 0)
             return r;
 
-        ((TMCHuffParam*)&tblSet)->count = (u8)totalCodes;
+        tblSet.count = totalCodes;
 
-        TMCJPEGDEC_set_HuffmanTable(&tblSet, tblClass, tblID, (TMCJpegDecWork*)scaleInfo);
-        r = TMCJPEGDEC_make_huffdec(countBuf, symBuf, (TMCHuffParam*)&tblSet);
+        TMCJPEGDEC_set_HuffmanTable(&tblSet, tblClass, tblID, scaleInfo);
+        r = TMCJPEGDEC_make_huffdec(countBuf, symBuf, &tblSet);
         if (r < 0)
             return r;
-    }
+    } while (len != 0);
 
     return 0;
 }
@@ -813,17 +847,22 @@ static s32 TMCJPEGDEC_parse_sof(TMCJpegDecWork* work)
 
 static s32 TMCJPEGDEC_parse_sos(TMCJpegDecWork* work)
 {
+    s32 idx;
+    u8* compPtr;
+    TMCUnknownInfo* scalePtr;
+    u8* mapPtr;
+
+    s32 dcTbl;
+    s32 acTbl;
+
     u16 len;
     s32 r;
-    u8* scalePtr;
-    u8* compPtr;
-    u8* mapPtr;
-    s32 idx;
+    s32 moveResult;
     s32 ci;
     u8 scanByte;
 
     compPtr = (u8*)work->mCompMap;
-    scalePtr = &work->mScaleFlag; // caused by compiler optimization
+    scalePtr = (TMCUnknownInfo*)&work->mScaleFlag;
 
     r = TMCJPEGDEC_get_wbyte(&len, work);
     if (r < 0)
@@ -852,136 +891,118 @@ static s32 TMCJPEGDEC_parse_sos(TMCJpegDecWork* work)
                 break;
             }
         }
+
+        // This isn't right...
         if (ci >= (s32)work->mCompCount)
-            return -0x51;
+          return -0x51;
 
         r = TMCJPEGDEC_get_byte(&scanByte, work);
         if (r < 0)
             return r;
 
-        {
-            s32 dcTbl = scanByte >> 4;
-            s32 acTbl = scanByte & 0xF;
+        dcTbl = scanByte >> 4;
+        acTbl = scanByte & 0xF;
 
-            if (dcTbl > 1 || acTbl > 1)
-                return -0x51;
+        if (dcTbl > 1 || acTbl > 1)
+            return -0x51;
 
-            compPtr[*mapPtr + 0x1c] = dcTbl;
-            compPtr[*mapPtr + 0x20] = acTbl;
+        compPtr[*mapPtr + 0x1c] = dcTbl;
+        compPtr[*mapPtr + 0x20] = acTbl;
 
-            if (scalePtr[dcTbl + 0x1794] != 1)
-                return -0x40;
+        if (scalePtr->mDCTblFlag[dcTbl] != 1)
+            return -0x40;
 
-            if (scalePtr[acTbl + 0x1796] != 1)
-                return -0x40;
+        if (scalePtr->mACTblFlag[acTbl] != 1)
+            return -0x40;
 
-            if (scalePtr[mapPtr[0x18] + 0x1790] != 1)
-                return -0x41;
-        }
+        if (scalePtr->mQuantTblFlag[mapPtr[0x18]] != 1)
+            return -0x41;
     }
 
-    {
-        s32 moveResult = TMCJPEGDEC_move_ptr(3, work);
-        return moveResult & (moveResult >> 31);
-    }
+
+    moveResult = TMCJPEGDEC_move_ptr(3, work);
+    return moveResult & (moveResult >> 31);
 }
 
 s32 TMCJPEGDEC_err_restart(TMCJpegDecWork* work)
 {
-    TMCCJPEGDecState* state = work->mpState;
-    u8 scanCount = work->mScanCount;
+    TMCCJPEGDecState* state;
 
-    if (scanCount == 1) {
+    u16 interval;
+    u16 pitch;
+    u32 val;
+    s32 rem;
+    s32 div;
+    s32 next;
+
+    u8 rstDiff;
+    u8 byte;
+    s32 r;
+
+    state = work->mpState;
+
+    if (work->mScanCount == 1) {
         state->mDecodeResult = 0;
         return 0;
     }
 
-    {
-        s32 r;
-        u8 byte;
+    r = TMCJPEGDEC_rewind_ptr(work);
+    if (r < 0)
+        return r;
 
-        r = TMCJPEGDEC_rewind_ptr(work);
-        if (r < 0)
-            return r;
+    byte = *work->mpBufCur;
 
-        byte = *work->mpBufCur;
-        goto rst_cond;
-
-    rst_read:
-        r = TMCJPEGDEC_get_byte(&byte, work);
-        if (r < 0)
-            return r;
-
-    rst_cond:
-        if (byte != 0xFF)
-            goto rst_read;
+    while (TRUE) {
+        while (byte != 0xFF) {
+            r = TMCJPEGDEC_get_byte(&byte, work);
+            if (r < 0)
+                return r;
+        }
 
         r = TMCJPEGDEC_get_byte(&byte, work);
 
         if (byte == 0xD9) {
-            if (r >= 0) goto rst_ret0;
-            if (r == TMCC_ERROR_UNDERFLOW) goto rst_ret0;
-            return r;
-
-        rst_ret0:
+            if (r < 0 && r != TMCC_ERROR_UNDERFLOW)
+                return r;
             return 0;
         }
 
         if (r < 0)
             return r;
 
-        if (byte < 0xD0) goto rst_cond;
-        if (byte <= 0xD7) { goto _process; }
-        { goto rst_cond; }
-_process: {
-            u16 scanCount2;
-            u8 rstIdx;
-            u8 rstDiff;
-            u16 interval;
-            u16 pitch;
-            u32 val;
-            u32 rem;
-            u32 div;
+        if (byte < 0xD0 || byte > 0xD7)
+            continue;
 
-            scanCount2 = work->mRstMarkerIdx;
-            rstIdx = (byte + 0x08) - (scanCount2 + 0xCF);
-            if (byte > scanCount2 + 0xCF)
-                rstDiff = byte - (scanCount2 + 0xCF);
-            else
-                rstDiff = rstIdx;
+        if (byte > work->mRstMarkerIdx + 0xCF)
+            rstDiff = byte - (work->mRstMarkerIdx + 0xCF);
+        else
+            rstDiff = (byte + 0x08) - (work->mRstMarkerIdx + 0xCF);
 
-            work->mRstMarkerIdx = (byte + 1) & 7;
-            interval = work->mRestartInterval;
-            pitch = state->mMaxX;
-            val = work->mMcuPos;
+        work->mRstMarkerIdx = (byte + 1) & 7;
+        interval = work->mRestartInterval;
+        pitch = state->mMaxX;
+        val = work->mMcuPos;
 
-            work->mDCPredict[0] = 0;
-            work->mDCPredict[1] = 0;
-            work->mDCPredict[2] = 0;
-            work->mDCPredict[3] = 0;
-            work->mRestartCnt = 0;
+        work->mDCPredict[0] = 0;
+        work->mDCPredict[1] = 0;
+        work->mDCPredict[2] = 0;
+        work->mDCPredict[3] = 0;
+        work->mRestartCnt = 0;
 
-            {
-                s32 next = (val & 0xFF) * (s32)pitch + (val >> 16) + (s32)(u8)(rstDiff * interval);
-                div = next / (s32)pitch;
-                rem = next - div * (s32)pitch;
-                work->mMcuPos = (rem << 16) + (u16)div;
-            }
+        next = (u8)(val & 0xFF) * (s32)pitch + (val >> 16) + (s32)(u8)(rstDiff * interval);
+        div = next / (s32)pitch;
+        rem = next - div * (s32)pitch;
+        work->mMcuPos = (rem << 16) + (u16)div;
 
-            r = TMCJPEGDEC_init_buff(work);
-            if (r < 0)
-                return r;
+        r = TMCJPEGDEC_init_buff(work);
+        if (r < 0)
+            return r;
 
-            state->mPosX = rem;
-            state->mPosY = div;
-            state->mPosition = TMCJPEGDEC_get_position(work);
+        state->mPosX = rem;
+        state->mPosY = div;
+        state->mPosition = TMCJPEGDEC_get_position(work);
 
-            {
-                u32 d = state->mPosY * state->mMaxX;
-                s32 pos = state->mResult - d - state->mPosX;
-                return pos;
-            }
-        }
+        return state->mResult - (state->mPosY * state->mMaxX) - state->mPosX;
     }
 }
 
@@ -1000,14 +1021,13 @@ void TMCJPEGDEC_set_entropytbl(TMCJpegDecWork* work, s32 idx, u8 data)
         break;
     }
 
-after:
     if ((s32)data == 1) goto data1;
-    if ((s32)data >= 1) return;
-    if ((s32)data < 0) return;
-
-    work->mDCACPtrs[4] = work->mHuffDecTbl_AC0;
-    *(void**)work->mZigzagData = work->mMaxCode_AC0;
-    work->mDCACPtrs[5] = work->mValPtr_AC0;
+    if ((s32)data < 1 && (s32)data >= 0)
+    {
+        work->mDCACPtrs[4] = work->mHuffDecTbl_AC0;
+        *(void**)work->mZigzagData = work->mMaxCode_AC0;
+        work->mDCACPtrs[5] = work->mValPtr_AC0;
+    }
     return;
 
 data1:
