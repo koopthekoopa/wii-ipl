@@ -8,6 +8,7 @@ extern "C" {
 #endif
 
 void system_halt(const char* file, u32 line, const char* msg, ...);
+void system_print(bool visible, const char* file, const char* msg, ...);
 
 #define EGG_ASSERT(COND, LINE)                                                                                                                       \
     if (!(COND)) {                                                                                                                                   \
