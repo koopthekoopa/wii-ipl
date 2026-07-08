@@ -676,7 +676,7 @@ config.libs = [
             Object(NonMatching, "utility/iplUtility.cpp"),
             Object(Matching,    "utility/iplThread.cpp"),
             Object(Matching,    "utility/iplMessageBase.cpp"),
-            Object(Equivalent,  "utility/iplJpegDecoder.cpp"),
+            Object(Matching,    "utility/iplJpegDecoder.cpp"),
             Object(NonMatching, "utility/iplESMisc.cpp"),
             Object(Matching,    "utility/iplCSFlags.cpp"),
         ]

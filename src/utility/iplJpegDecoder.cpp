@@ -7,17 +7,12 @@
 #include <revolution/gx.h>
 #include <revolution/gx/GXEnum.h>
 #include <revolution/os/OSSemaphore.h>
-#include <string.h>
 #include <tmc_jpeg.h>
 
-extern volatile const u8 lbl_81694658 = 0xFF;
-extern volatile const u8 lbl_81694659 = 0xFF;
-extern volatile const u8 lbl_8169465A = 0xFF;
-extern volatile const u8 lbl_8169465B = 0xFF;
-extern const f32 lbl_8169465C = 0.0f;
-extern volatile const f32 lbl_81694660 = 1.0f;
-extern volatile const f32 lbl_81694664 = -100.0f;
-extern volatile const f32 lbl_81694668 = 100.0f;
+extern const u8 lbl_81694658 = 0xFF;
+extern const u8 lbl_81694659 = 0xFF;
+extern const u8 lbl_8169465A = 0xFF;
+extern const u8 lbl_8169465B = 0xFF;
 
 namespace ipl {
     namespace utility {
@@ -120,19 +115,19 @@ void JpegDecoder::makeRawData() {
     f32 savedViewport[6];
     GXGetViewportv(savedViewport);
 
-    f32 vpX = lbl_8169465C;
-    f32 vpY = lbl_8169465C;
+    f32 vpX = 0.0f;
+    f32 vpY = 0.0f;
     f32 vpW = mCaptureSizeW;
-    f32 vpFar = lbl_81694660;
+    f32 vpFar = 1.0f;
     f32 vpH = mCaptureSizeH;
-    f32 vpNear = lbl_8169465C;
+    f32 vpNear = 0.0f;
     GXSetViewport(vpX, vpY, vpW, vpH, vpNear, vpFar);
 
     f32 projRect[4];
-    projRect[0] = lbl_8169465C;
-    projRect[1] = lbl_8169465C;
-    projRect[2] = lbl_8169465C;
-    projRect[3] = lbl_8169465C;
+    projRect[0] = 0.0f;
+    projRect[1] = 0.0f;
+    projRect[2] = 0.0f;
+    projRect[3] = 0.0f;
     ipl::System::getProjectionRect4x3((nw4r::ut::Rect*)projRect);
 
     Mtx44 projMtx;
@@ -141,8 +136,8 @@ void JpegDecoder::makeRawData() {
 
     C_MTXOrtho(projMtx,
                0.f, h,
-               lbl_8169465C, w,
-               lbl_81694664, lbl_81694668);
+               0.0f, w,
+               -100.0f, 100.0f);
     GXSetProjection(projMtx, GX_ORTHOGRAPHIC);
 
     Graphics::calcOrthoCamera();
@@ -162,9 +157,9 @@ void JpegDecoder::makeRawData() {
     f32 destRect[4];
 
     col.r = *(volatile u8*)&lbl_81694658;
-    destRect[0] = lbl_8169465C;
+    destRect[0] = 0.0f;
     col.g = *(volatile u8*)&lbl_81694659;
-    destRect[1] = lbl_8169465C;
+    destRect[1] = 0.0f;
     col.b = *(volatile u8*)&lbl_8169465A;
     col.a = *(volatile u8*)&lbl_8169465B;
     destRect[2] = destW;
