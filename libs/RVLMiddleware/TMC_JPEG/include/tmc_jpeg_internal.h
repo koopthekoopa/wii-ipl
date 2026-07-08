@@ -12,6 +12,10 @@ typedef void (TMCConverterFunc)(TMCJpegDecWork*, s32 x, s32 y);
 extern "C" {
 #endif
 
+// TODO: The following two structs are subsets of TMCJpegDecWork.
+//       Their members in TMCJpegDecWork should eventually be removed and replaced with these structs as a member.
+//       Some code accesses mScaleFlag, mFrameWidth and mConvBuf as a pointer and uses them as a base to do further pointer arithmetic on,
+//       so they likely were nested structs.
 typedef struct {
     u8 mScaleFlag;           // 0x58
     u8 unk_0x59[0x3E7];
@@ -156,13 +160,13 @@ typedef struct TMCJpegDecWork_t {
     u32 mBlockSize;     // 0x1834
     u32 mBlockSizeMul;  // 0x1838
     u8* mpConvRowPtrs[7]; // 0x183C
-    u8 mConvBuf[0x184];
+    u8 mConvBuf[0x184]; // 0x1858
     u8 mIdctMode;       // 0x19DC
     u8 unk_0x19DD;      // 0x19DD
     u16 mPitch;         // 0x19DE
     u8 mConverterFlags; // 0x19E0
     u8 unk_0x19E1[0x03];
-    TMCCJPEGDecState* mpState;      // 0x19E4
+    TMCCJPEGDecState* mpState; // 0x19E4
 } TMCJpegDecWork;
 
 s32 TMCJPEGDEC_init_ptr_buff(TMCJpegDecWork* work, void* param);

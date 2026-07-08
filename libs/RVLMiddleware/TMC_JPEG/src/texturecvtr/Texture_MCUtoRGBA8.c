@@ -14,88 +14,75 @@ static void TMCJPEGDEC_converterYUV400toRGBA8(TMCJpegDecWork*, s32, s32);
 static void TMCJPEGDEC_converterYUV400toRGBA8edge(TMCJpegDecWork*, s32, s32);
 
 s32 TMCJPEGDEC_set_converterRGBA8(TMCJpegDecWork* work) {
-    u8* ob;
-    s32 cc;
-    TMCCJPEGDecState* st;
-
-    ob = work->mConvBuf;
-    cc = work->mComponentCount;
-    st = work->mpState;
+    u8* ob = work->mConvBuf;
+    u8 cc = work->mComponentCount;
+    TMCCJPEGDecState* st = work->mpState;
 
     switch (cc) {
     case 0: {
-        u8 mode;
-        u8* ptr;
+        u8 mode = work->mIdctMode;
+        u8* p0 = ob + 4;
+        u8* p1 = p0 + mode;
+        u8* p2 = p1 + mode;
+        u8* p3 = p2 + mode;
 
-        mode = work->mIdctMode;
-        ptr = ob + 4;
-        {
-            u8* p1 = ptr + mode;
-            u8* p2 = p1 + mode;
-            u8* p3 = p2 + mode;
-
-            work->mpConverterFunc = TMCJPEGDEC_converterYUV411toRGBA8;
-            work->mpConverterFuncEdge = TMCJPEGDEC_converterYUV411toRGBA8edge;
-            work->mpConvRowPtrs[0] = (void*)ptr;
-            work->mpConvRowPtrs[1] = (void*)p1;
-            work->mpConvRowPtrs[2] = (void*)p2;
-            work->mpConvRowPtrs[3] = (void*)p3;
-            work->mpConvRowPtrs[5] = (void*)(ob + 0x104);
-            work->mpConvRowPtrs[6] = (void*)(ob + 0x144);
-            work->mPitch = 0x20;
-            work->mConverterFlags = 0;
-        }
+        work->mpConverterFunc = TMCJPEGDEC_converterYUV411toRGBA8;
+        work->mpConverterFuncEdge = TMCJPEGDEC_converterYUV411toRGBA8edge;
+        work->mpConvRowPtrs[0] = p0;
+        work->mpConvRowPtrs[1] = p1;
+        work->mpConvRowPtrs[2] = p2;
+        work->mpConvRowPtrs[3] = p3;
+        work->mpConvRowPtrs[5] = ob + 0x104;
+        work->mpConvRowPtrs[6] = ob + 0x144;
+        work->mPitch = 0x20;
+        work->mConverterFlags = 0;
         break;
     }
     case 1: {
-        u8 mode;
-        u8* ptr;
+        u8 mode = work->mIdctMode;
+        u8* p0 = ob + 4;
+        u8* p1 = p0 + mode;
 
-        mode = work->mIdctMode;
-        ptr = ob + 4;
-
-        work->mpConvRowPtrs[0] = (void*)ptr;
-        work->mpConvRowPtrs[1] = (void*)(ptr + mode);
-        work->mpConvRowPtrs[5] = (void*)(ob + 0x84);
-        work->mpConvRowPtrs[6] = (void*)(ob + 0xC4);
         work->mpConverterFunc = TMCJPEGDEC_converterYUV422toRGBA8;
         work->mpConverterFuncEdge = TMCJPEGDEC_converterYUV422toRGBA8edge;
+        work->mpConvRowPtrs[0] = p0;
+        work->mpConvRowPtrs[1] = p1;
+        work->mpConvRowPtrs[5] = ob + 0x84;
+        work->mpConvRowPtrs[6] = ob + 0xC4;
         work->mPitch = 0x10;
         work->mConverterFlags = 0;
         break;
     }
     case 2: {
-        u8 mode;
-        u8* ptr;
-
-        mode = work->mIdctMode;
-        ptr = ob + 4;
+        u8 mode = work->mIdctMode;
+        u8* p0 = ob + 4;
+        u8* p1 = p0 + mode;
+        u8* p2 = p0 + mode * 16;
+        u8* p3 = p2 + mode;
 
         work->mpConverterFunc = TMCJPEGDEC_converterYUV420toRGBA8;
         work->mpConverterFuncEdge = TMCJPEGDEC_converterYUV420toRGBA8edge;
-        work->mpConvRowPtrs[0] = (void*)ptr;
-        work->mpConvRowPtrs[1] = (void*)(ptr + mode);
-        work->mpConvRowPtrs[2] = (void*)(ptr + mode * 16);
-        work->mpConvRowPtrs[3] = (void*)(ptr + mode * 16 + mode);
-        work->mpConvRowPtrs[5] = (void*)(ob + 0x104);
-        work->mpConvRowPtrs[6] = (void*)(ob + 0x144);
+        work->mpConvRowPtrs[0] = p0;
+        work->mpConvRowPtrs[1] = p1;
+        work->mpConvRowPtrs[2] = p2;
+        work->mpConvRowPtrs[3] = p3;
+        work->mpConvRowPtrs[5] = ob + 0x104;
+        work->mpConvRowPtrs[6] = ob + 0x144;
         work->mPitch = 0x10;
         work->mConverterFlags = 0;
         break;
     }
     case 3: {
-        u8 mode;
-        u8* ptr;
+        u8 mode = work->mIdctMode;
+        u8* p0 = ob + 4;
+        u8* p1 = p0 + mode * 8;
 
-        mode = work->mIdctMode;
-        ptr = ob + 4;
-
-        work->mpConvRowPtrs[0] = (void*)ptr;
-        work->mpConvRowPtrs[1] = (void*)(ptr + mode * 8);
-        work->mpConvRowPtrs[5] = (void*)(ob + 0x84);
-        work->mpConvRowPtrs[6] = (void*)(ob + 0xC4);
         work->mpConverterFunc = TMCJPEGDEC_converterYUV211toRGBA8;
         work->mpConverterFuncEdge = TMCJPEGDEC_converterYUV211toRGBA8edge;
+        work->mpConvRowPtrs[0] = p0;
+        work->mpConvRowPtrs[1] = p1;
+        work->mpConvRowPtrs[5] = ob + 0x84;
+        work->mpConvRowPtrs[6] = ob + 0xC4;
         work->mPitch = 0x08;
         work->mConverterFlags = 0;
         break;
@@ -103,9 +90,9 @@ s32 TMCJPEGDEC_set_converterRGBA8(TMCJpegDecWork* work) {
     case 4: {
         work->mpConverterFunc = TMCJPEGDEC_converterYUV444toRGBA8;
         work->mpConverterFuncEdge = TMCJPEGDEC_converterYUV444toRGBA8edge;
-        work->mpConvRowPtrs[0] = (void*)(ob + 4);
-        work->mpConvRowPtrs[5] = (void*)(ob + 0x44);
-        work->mpConvRowPtrs[6] = (void*)(ob + 0x84);
+        work->mpConvRowPtrs[0] = ob + 4;
+        work->mpConvRowPtrs[5] = ob + 0x44;
+        work->mpConvRowPtrs[6] = ob + 0x84;
         work->mPitch = 0x08;
         work->mConverterFlags = 0;
         break;
@@ -113,7 +100,7 @@ s32 TMCJPEGDEC_set_converterRGBA8(TMCJpegDecWork* work) {
     case 5: {
         work->mpConverterFunc = TMCJPEGDEC_converterYUV400toRGBA8;
         work->mpConverterFuncEdge = TMCJPEGDEC_converterYUV400toRGBA8edge;
-        work->mpConvRowPtrs[0] = (void*)(ob + 4);
+        work->mpConvRowPtrs[0] = ob + 4;
         work->mPitch = 0x08;
         work->mConverterFlags = 0;
         break;
@@ -123,25 +110,11 @@ s32 TMCJPEGDEC_set_converterRGBA8(TMCJpegDecWork* work) {
     }
 
     {
-        u32 fw;
-        u32 fh;
-        s32 bw;
-        s32 bh;
+        int fw = st->mJpegWidth;
+        int fh = st->mJpegHeight;
 
-        fw = st->mJpegWidth;
-        fh = st->mJpegHeight;
-
-        bw = (s32)(((fw << 30) - (fw >> 31)) * 4 + (fw >> 31));
-        bh = (s32)(((fh << 30) - (fh >> 31)) * 4 + (fh >> 31));
-        {
-            s32 nb = -bw;
-            s32 nb2 = -bh;
-            bw = ((nb | bw) >> 31) + (fw >> 2);
-            bh = ((nb2 | bh) >> 31) + (fh >> 2);
-        }
-
-        st->mConvWidth = bw << 2;
-        st->mConvHeight = bh << 2;
+        st->mConvWidth = (fw / 4 + (fw % 4 != 0)) * 4;
+        st->mConvHeight = (fh / 4 + (fh % 4 != 0)) * 4;
     }
 
     return 0;
